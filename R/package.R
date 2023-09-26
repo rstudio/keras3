@@ -93,7 +93,6 @@ use_backend <- function(backend = c("tensorflow", "cntk", "theano", "plaidml")) 
 #' @export
 keras <- NULL
 
-
 .onLoad <- function(libname, pkgname) {
 
   # resolve the implementation module (might be keras proper or might be tensorflow)
@@ -126,6 +125,11 @@ keras <- NULL
         tools$progbar$apply_patch()
       }
 
+      # if(implementation_module != "keras_core") {
+      if(!py_has_attr(keras, "ops"))
+        py_set_attr(keras, "ops",  keras$backend)
+
+
     },
 
     on_error = function(e) {
@@ -140,6 +144,16 @@ keras <- NULL
       }
     }
   ))
+
+  # pkg_ns <- environment(sys.function())
+  # delayedAssign("keras_ops", {
+  #   cat("forcing keras_ops")
+  #   if (keras$`__name__` == "keras_core")
+  #     keras$ops
+  #   else
+  #     keras$backend
+  # }, pkg_ns, pkg_ns)
+
 
   # register class filter to alias classes to 'keras'
   reticulate::register_class_filter(function(classes) {

@@ -15,9 +15,9 @@
 #' @export
 backend <- function(convert = TRUE) {
   if (convert)
-    keras$backend
+    keras$ops
   else
-    r_to_py(keras$backend)
+    r_to_py(keras$ops)
 }
 
 
@@ -31,7 +31,7 @@ backend <- function(convert = TRUE) {
 #'
 #' @export
 k_abs <- function(x) {
-  keras$backend$abs(
+  keras$ops$abs(
     x = x
   )
 }
@@ -50,7 +50,7 @@ k_abs <- function(x) {
 #'
 #' @export
 k_all <- function(x, axis = NULL, keepdims = FALSE) {
-  keras$backend$all(
+  keras$ops$all(
     x = x,
     axis = as_axis(axis),
     keepdims = keepdims
@@ -71,7 +71,7 @@ k_all <- function(x, axis = NULL, keepdims = FALSE) {
 #'
 #' @export
 k_any <- function(x, axis = NULL, keepdims = FALSE) {
-  keras$backend$any(
+  keras$ops$any(
     x = x,
     axis = as_axis(axis),
     keepdims = keepdims
@@ -96,7 +96,7 @@ k_any <- function(x, axis = NULL, keepdims = FALSE) {
 #'
 #' @export
 k_arange <- function(start, stop = NULL, step = 1, dtype = "int32") {
-  keras$backend$arange(
+  keras$ops$arange(
     start = as.integer(start),
     stop = as_nullable_integer(stop),
     step = as.integer(step),
@@ -117,7 +117,7 @@ k_arange <- function(start, stop = NULL, step = 1, dtype = "int32") {
 #'
 #' @export
 k_argmax <- function(x, axis = -1) {
-  keras$backend$argmax(
+  keras$ops$argmax(
     x = x,
     axis = as_axis(axis)
   )
@@ -136,7 +136,7 @@ k_argmax <- function(x, axis = -1) {
 #'
 #' @export
 k_argmin <- function(x, axis = -1) {
-  keras$backend$argmin(
+  keras$ops$argmin(
     x = x,
     axis = as_axis(axis)
   )
@@ -151,7 +151,7 @@ k_argmin <- function(x, axis = -1) {
 #'
 #' @export
 k_backend <- function() {
-  keras$backend$backend(
+  keras$ops$backend(
   )
 }
 
@@ -179,7 +179,7 @@ k_backend <- function() {
 #'
 #' @export
 k_batch_dot <- function(x, y, axes) {
-  keras$backend$batch_dot(
+  keras$ops$batch_dot(
     x = x,
     y = y,
     axes = as_axis(axes)
@@ -199,7 +199,7 @@ k_batch_dot <- function(x, y, axes) {
 #'
 #' @export
 k_batch_flatten <- function(x) {
-  keras$backend$batch_flatten(
+  keras$ops$batch_flatten(
     x = x
   )
 }
@@ -217,7 +217,7 @@ k_batch_flatten <- function(x) {
 #'
 #' @export
 k_batch_get_value <- function(ops) {
-  keras$backend$batch_get_value(ops)
+  keras$ops$batch_get_value(ops)
 }
 
 
@@ -254,7 +254,7 @@ k_batch_normalization <- function(x, mean, var, beta, gamma, axis = -1, epsilon 
   if (keras_version() >= "2.2.0")
     args$axis <- as_axis(axis)
 
-  do.call(keras$backend$batch_normalization, args)
+  do.call(keras$ops$batch_normalization, args)
 }
 
 
@@ -268,7 +268,7 @@ k_batch_normalization <- function(x, mean, var, beta, gamma, axis = -1, epsilon 
 #'
 #' @export
 k_batch_set_value <- function(lists) {
-  keras$backend$batch_set_value(
+  keras$ops$batch_set_value(
     tuples = lists
   )
 }
@@ -286,7 +286,7 @@ k_batch_set_value <- function(lists) {
 #'
 #' @export
 k_bias_add <- function(x, bias, data_format = NULL) {
-  keras$backend$bias_add(
+  keras$ops$bias_add(
     x = x,
     bias = bias,
     data_format = data_format
@@ -307,7 +307,7 @@ k_bias_add <- function(x, bias, data_format = NULL) {
 #'
 #' @export
 k_binary_crossentropy <- function(target, output, from_logits = FALSE) {
-  keras$backend$binary_crossentropy(
+  keras$ops$binary_crossentropy(
     target = target,
     output = output,
     from_logits = from_logits
@@ -328,7 +328,7 @@ k_binary_crossentropy <- function(target, output, from_logits = FALSE) {
 #'
 #' @export
 k_cast <- function(x, dtype) {
-  keras$backend$cast(
+  keras$ops$cast(
     x = x,
     dtype = dtype
   )
@@ -345,7 +345,7 @@ k_cast <- function(x, dtype) {
 #'
 #' @export
 k_cast_to_floatx <- function(x) {
-  r_to_py(keras$backend)$cast_to_floatx(
+  r_to_py(keras$ops)$cast_to_floatx(
     x = x
   )
 }
@@ -377,7 +377,7 @@ k_categorical_crossentropy <- function(target, output, from_logits = FALSE, axis
   if (keras_version() >= "2.2.0")
     args$axis <- as_axis(axis)
 
-  do.call(keras$backend$categorical_crossentropy, args)
+  do.call(keras$ops$categorical_crossentropy, args)
 }
 
 
@@ -389,7 +389,7 @@ k_categorical_crossentropy <- function(target, output, from_logits = FALSE, axis
 #'
 #' @export
 k_clear_session <- function() {
-  keras$backend$clear_session()
+  keras$ops$clear_session()
 }
 
 
@@ -405,7 +405,7 @@ k_clear_session <- function() {
 #'
 #' @export
 k_clip <- function(x, min_value = NULL, max_value = NULL) {
-  keras$backend$clip(
+  keras$ops$clip(
     x = x,
     min_value = min_value,
     max_value = max_value
@@ -425,7 +425,7 @@ k_clip <- function(x, min_value = NULL, max_value = NULL) {
 #'
 #' @export
 k_concatenate <- function(tensors, axis = -1) {
-  keras$backend$concatenate(
+  keras$ops$concatenate(
     tensors = tensors,
     axis = as_axis(axis)
   )
@@ -445,6 +445,18 @@ k_concatenate <- function(tensors, axis = -1) {
 #'
 #' @export
 k_constant <- function(value, dtype = NULL, shape = NULL, name = NULL) {
+  # candidate for deprecation - no direct equivalent in keras_core.ops
+  # closest is keras_core.ops.convert_to_tensor()
+  if(keras$`__name__` == "keras_core") {
+    out <- keras$ops$convert_to_tensor(value, dtype = dtype)
+    if(!is.null(shape))
+      out <- keras$ops$reshape(out, backend_normalize_shape(shape))
+    if(!is.null(name))
+      warning("Eager tensors have no names")
+    return(out)
+  }
+
+  # tensorflow.keras implementation
   keras$backend$constant(
     value = value,
     dtype = dtype,
@@ -470,7 +482,7 @@ k_constant <- function(value, dtype = NULL, shape = NULL, name = NULL) {
 #'
 #' @export
 k_conv1d <- function(x, kernel, strides = 1, padding = "valid", data_format = NULL, dilation_rate = 1) {
-  keras$backend$conv1d(
+  keras$ops$conv1d(
     x = x,
     kernel = kernel,
     strides = as.integer(strides),
@@ -499,7 +511,7 @@ k_conv1d <- function(x, kernel, strides = 1, padding = "valid", data_format = NU
 k_conv2d <- function(x, kernel, strides = c(1, 1), padding = "valid",
                      data_format = NULL,
                      dilation_rate = c(1, 1)) {
-  keras$backend$conv2d(
+  keras$ops$conv2d(
     x = x,
     kernel = kernel,
     strides = as.integer(strides),
@@ -527,7 +539,7 @@ k_conv2d <- function(x, kernel, strides = c(1, 1), padding = "valid",
 #' @export
 k_conv2d_transpose <- function(x, kernel, output_shape, strides = c(1, 1),
                                padding = "valid", data_format = NULL) {
-  keras$backend$conv2d_transpose(
+  keras$ops$conv2d_transpose(
     x = x,
     kernel = kernel,
     output_shape = output_shape,
@@ -555,7 +567,7 @@ k_conv2d_transpose <- function(x, kernel, output_shape, strides = c(1, 1),
 #' @export
 k_conv3d <- function(x, kernel, strides = c(1, 1, 1), padding = "valid",
                      data_format = NULL, dilation_rate = c(1, 1, 1)) {
-  keras$backend$conv3d(
+  keras$ops$conv3d(
     x = x,
     kernel = kernel,
     strides = as.integer(strides),
@@ -583,7 +595,7 @@ k_conv3d <- function(x, kernel, strides = c(1, 1, 1), padding = "valid",
 #' @export
 k_conv3d_transpose <- function(x, kernel, output_shape, strides = c(1, 1, 1),
                                padding = "valid", data_format = NULL) {
-  keras$backend$conv3d_transpose(
+  keras$ops$conv3d_transpose(
     x = x,
     kernel = kernel,
     output_shape = output_shape,
@@ -604,7 +616,7 @@ k_conv3d_transpose <- function(x, kernel, output_shape, strides = c(1, 1, 1),
 #'
 #' @export
 k_cos <- function(x) {
-  keras$backend$cos(
+  keras$ops$cos(
     x = x
   )
 }
@@ -620,7 +632,7 @@ k_cos <- function(x) {
 #'
 #' @export
 k_count_params <- function(x) {
-  keras$backend$count_params(
+  keras$ops$count_params(
     x = x
   )
 }
@@ -644,7 +656,7 @@ k_count_params <- function(x) {
 #'
 #' @export
 k_ctc_batch_cost <- function(y_true, y_pred, input_length, label_length) {
-  keras$backend$ctc_batch_cost(
+  keras$ops$ctc_batch_cost(
     y_true = y_true,
     y_pred = y_pred,
     input_length = input_length,
@@ -679,7 +691,7 @@ k_ctc_batch_cost <- function(y_true, y_pred, input_length, label_length) {
 #'
 #' @export
 k_ctc_decode <- function(y_pred, input_length, greedy = TRUE, beam_width = 100L, top_paths = 1) {
-  keras$backend$ctc_decode(
+  keras$ops$ctc_decode(
     y_pred = y_pred,
     input_length = input_length,
     greedy = greedy,
@@ -700,7 +712,7 @@ k_ctc_decode <- function(y_pred, input_length, greedy = TRUE, beam_width = 100L,
 #'
 #' @export
 k_ctc_label_dense_to_sparse <- function(labels, label_lengths) {
-  keras$backend$ctc_label_dense_to_sparse(
+  keras$ops$ctc_label_dense_to_sparse(
     labels = labels,
     label_lengths = label_lengths
   )
@@ -719,7 +731,7 @@ k_ctc_label_dense_to_sparse <- function(labels, label_lengths) {
 #'
 #' @export
 k_cumprod <- function(x, axis = 1) {
-  keras$backend$cumprod(
+  keras$ops$cumprod(
     x = x,
     axis = as_axis(axis)
   )
@@ -738,7 +750,7 @@ k_cumprod <- function(x, axis = 1) {
 #'
 #' @export
 k_cumsum <- function(x, axis = 1) {
-  keras$backend$cumsum(
+  keras$ops$cumsum(
     x = x,
     axis = as_axis(axis)
   )
@@ -762,7 +774,7 @@ k_cumsum <- function(x, axis = 1) {
 #' @export
 k_depthwise_conv2d <- function(x, depthwise_kernel, strides = c(1, 1), padding = "valid",
                                data_format = NULL, dilation_rate = c(1, 1)) {
-  keras$backend$depthwise_conv2d(
+  keras$ops$depthwise_conv2d(
     x = x,
     depthwise_kernel = depthwise_kernel,
     strides = as.integer(strides),
@@ -788,7 +800,7 @@ k_depthwise_conv2d <- function(x, depthwise_kernel, strides = c(1, 1), padding =
 #'
 #' @export
 k_dot <- function(x, y) {
-  keras$backend$dot(
+  keras$ops$dot(
     x = x,
     y = y
   )
@@ -809,7 +821,7 @@ k_dot <- function(x, y) {
 #'
 #' @export
 k_dropout <- function(x, level, noise_shape = NULL, seed = NULL) {
-  keras$backend$dropout(
+  keras$ops$dropout(
     x = x,
     level = level,
     noise_shape = noise_shape,
@@ -828,7 +840,7 @@ k_dropout <- function(x, level, noise_shape = NULL, seed = NULL) {
 #'
 #' @export
 k_dtype <- function(x) {
-  keras$backend$dtype(
+  keras$ops$dtype(
     x = x
   )
 }
@@ -845,7 +857,7 @@ k_dtype <- function(x) {
 #'
 #' @export
 k_elu <- function(x, alpha = 1.0) {
-  keras$backend$elu(
+  keras$ops$elu(
     x = x,
     alpha = alpha
   )
@@ -860,14 +872,14 @@ k_elu <- function(x, alpha = 1.0) {
 #'
 #' @export
 k_epsilon <- function() {
-  keras$backend$epsilon(
+  keras$ops$epsilon(
   )
 }
 
 #' @rdname k_epsilon
 #' @export
 k_set_epsilon <- function(e) {
-  keras$backend$set_epsilon(e)
+  keras$ops$set_epsilon(e)
 }
 
 
@@ -883,7 +895,7 @@ k_set_epsilon <- function(e) {
 #'
 #' @export
 k_equal <- function(x, y) {
-  keras$backend$equal(
+  keras$ops$equal(
     x = x,
     y = y
   )
@@ -900,7 +912,7 @@ k_equal <- function(x, y) {
 #'
 #' @export
 k_eval <- function(x) {
-  keras$backend$eval(
+  keras$ops$eval(
     x = x
   )
 }
@@ -916,7 +928,7 @@ k_eval <- function(x) {
 #'
 #' @export
 k_exp <- function(x) {
-  keras$backend$exp(
+  keras$ops$exp(
     x = x
   )
 }
@@ -934,7 +946,7 @@ k_exp <- function(x) {
 #'
 #' @export
 k_expand_dims <- function(x, axis = -1) {
-  keras$backend$expand_dims(
+  keras$ops$expand_dims(
     x = x,
     axis = as_axis(axis)
   )
@@ -953,7 +965,7 @@ k_expand_dims <- function(x, axis = -1) {
 #'
 #' @export
 k_eye <- function(size, dtype = NULL, name = NULL) {
-  keras$backend$eye(
+  keras$ops$eye(
     size = as.integer(size),
     dtype = dtype,
     name = name
@@ -971,7 +983,7 @@ k_eye <- function(size, dtype = NULL, name = NULL) {
 #'
 #' @export
 k_flatten <- function(x) {
-  keras$backend$flatten(
+  keras$ops$flatten(
     x = x
   )
 }
@@ -985,14 +997,14 @@ k_flatten <- function(x) {
 #'
 #' @export
 k_floatx <- function() {
-  keras$backend$floatx(
+  keras$ops$floatx(
   )
 }
 
 #' @rdname k_floatx
 #' @export
 k_set_floatx <- function(floatx) {
-  keras$backend$set_floatx(floatx)
+  keras$ops$set_floatx(floatx)
 }
 
 
@@ -1011,7 +1023,7 @@ k_set_floatx <- function(floatx) {
 #'
 #' @export
 k_foldl <- function(fn, elems, initializer = NULL, name = NULL) {
-  keras$backend$foldl(
+  keras$ops$foldl(
     fn = fn,
     elems = elems,
     initializer = initializer,
@@ -1035,7 +1047,7 @@ k_foldl <- function(fn, elems, initializer = NULL, name = NULL) {
 #'
 #' @export
 k_foldr <- function(fn, elems, initializer = NULL, name = NULL) {
-  keras$backend$foldr(
+  keras$ops$foldr(
     fn = fn,
     elems = elems,
     initializer = initializer,
@@ -1056,7 +1068,7 @@ k_foldr <- function(fn, elems, initializer = NULL, name = NULL) {
 #'
 #' @export
 k_function <- function(inputs, outputs, updates = NULL, ...) {
-  keras$backend$`function`(
+  keras$ops$`function`(
     inputs = inputs,
     outputs = outputs,
     updates = updates,
@@ -1083,7 +1095,7 @@ k_gather <- function(reference, indices) {
   if (!inherits(indices, "python.builtin.object"))
     indices <- as_axis(indices)
 
-  keras$backend$gather(
+  keras$ops$gather(
     reference = reference,
     indices = indices
   )
@@ -1107,11 +1119,11 @@ k_gather <- function(reference, indices) {
 k_get_session <- function() {
 
   if(tensorflow::tf_version() >= '2.0'){
-    warning("Tensorflow 2.0 does not expose the 'k_get_session()' directly any more. Instead use 'tf$compat$v1$keras$backend$get_session()'", call. = FALSE)
-    tensorflow::tf$compat$v1$keras$backend$get_session()
+    warning("Tensorflow 2.0 does not expose the 'k_get_session()' directly any more. Instead use 'tf$compat$v1$keras$ops$get_session()'", call. = FALSE)
+    tensorflow::tf$compat$v1$keras$ops$get_session()
   }
   else
-    keras$backend$get_session()
+    keras$ops$get_session()
 }
 
 #' @rdname k_get_session
@@ -1119,11 +1131,11 @@ k_get_session <- function() {
 k_set_session <- function(session) {
 
   if(tensorflow::tf_version() >= '2.0'){
-    warning("Tensorflow 2.0 does not expose the 'k_set_session()' directly any more. Instead use 'tf$compat$v1$keras$backend$set_session()'", call. = FALSE)
-    tensorflow::tf$compat$v1$keras$backend$set_session(session = session)
+    warning("Tensorflow 2.0 does not expose the 'k_set_session()' directly any more. Instead use 'tf$compat$v1$keras$ops$set_session()'", call. = FALSE)
+    tensorflow::tf$compat$v1$keras$ops$set_session(session = session)
   }
   else
-    keras$backend$set_session(
+    keras$ops$set_session(
       session = session
     )
 }
@@ -1139,7 +1151,7 @@ k_set_session <- function(session) {
 #'
 #' @export
 k_get_uid <- function(prefix = "") {
-  keras$backend$get_uid(
+  keras$ops$get_uid(
     prefix = prefix
   )
 }
@@ -1155,7 +1167,7 @@ k_get_uid <- function(prefix = "") {
 #'
 #' @export
 k_get_value <- function(x) {
-  keras$backend$get_value(
+  keras$ops$get_value(
     x = x
   )
 }
@@ -1171,7 +1183,7 @@ k_get_value <- function(x) {
 #'
 #' @export
 k_get_variable_shape <- function(x) {
-  keras$backend$get_variable_shape(
+  keras$ops$get_variable_shape(
     x = x
   )
 }
@@ -1188,7 +1200,7 @@ k_get_variable_shape <- function(x) {
 #'
 #' @export
 k_gradients <- function(loss, variables) {
-  keras$backend$gradients(
+  keras$ops$gradients(
     loss = loss,
     variables = variables
   )
@@ -1206,7 +1218,7 @@ k_gradients <- function(loss, variables) {
 #'
 #' @export
 k_greater <- function(x, y) {
-  keras$backend$greater(
+  keras$ops$greater(
     x = x,
     y = y
   )
@@ -1224,7 +1236,7 @@ k_greater <- function(x, y) {
 #'
 #' @export
 k_greater_equal <- function(x, y) {
-  keras$backend$greater_equal(
+  keras$ops$greater_equal(
     x = x,
     y = y
   )
@@ -1245,7 +1257,7 @@ k_greater_equal <- function(x, y) {
 #'
 #' @export
 k_hard_sigmoid <- function(x) {
-  keras$backend$hard_sigmoid(
+  keras$ops$hard_sigmoid(
     x = x
   )
 }
@@ -1262,7 +1274,7 @@ k_hard_sigmoid <- function(x) {
 #'
 #' @export
 k_identity <- function(x, name = NULL) {
-  keras$backend$identity(
+  keras$ops$identity(
     x = x,
     name = name
   )
@@ -1277,14 +1289,14 @@ k_identity <- function(x, name = NULL) {
 #'
 #' @export
 k_image_data_format <- function() {
-  keras$backend$image_data_format(
+  keras$ops$image_data_format(
   )
 }
 
 #' @rdname k_image_data_format
 #' @export
 k_set_image_data_format <- function(data_format) {
-  keras$backend$set_image_data_format(
+  keras$ops$set_image_data_format(
     data_format = data_format
   )
 }
@@ -1307,7 +1319,7 @@ k_set_image_data_format <- function(data_format) {
 #'
 #' @export
 k_in_test_phase <- function(x, alt, training = NULL) {
-  keras$backend$in_test_phase(
+  keras$ops$in_test_phase(
     x = x,
     alt = alt,
     training = training
@@ -1331,7 +1343,7 @@ k_in_test_phase <- function(x, alt, training = NULL) {
 #'
 #' @export
 k_in_top_k <- function(predictions, targets, k) {
-  keras$backend$in_top_k(
+  keras$ops$in_top_k(
     predictions = predictions,
     targets = targets,
     k = as.integer(k)
@@ -1357,7 +1369,7 @@ k_in_top_k <- function(predictions, targets, k) {
 #'
 #' @export
 k_in_train_phase <- function(x, alt, training = NULL) {
-  keras$backend$in_train_phase(
+  keras$ops$in_train_phase(
     x = x,
     alt = alt,
     training = training
@@ -1375,7 +1387,7 @@ k_in_train_phase <- function(x, alt, training = NULL) {
 #'
 #' @export
 k_int_shape <- function(x) {
-  keras$backend$int_shape(
+  keras$ops$int_shape(
     x = x
   )
 }
@@ -1390,7 +1402,7 @@ k_int_shape <- function(x) {
 #'
 #' @export
 k_is_tensor <- function(x) {
-  keras$backend$is_tensor(
+  keras$ops$is_tensor(
     x = x
   )
 }
@@ -1409,7 +1421,7 @@ k_is_tensor <- function(x) {
 #'
 #' @export
 k_is_keras_tensor <- function(x) {
-  keras$backend$is_keras_tensor(
+  keras$ops$is_keras_tensor(
     x = x
   )
 }
@@ -1425,7 +1437,7 @@ k_is_keras_tensor <- function(x) {
 #'
 #' @export
 k_is_placeholder <- function(x) {
-  keras$backend$is_placeholder(
+  keras$ops$is_placeholder(
     x = x
   )
 }
@@ -1441,7 +1453,7 @@ k_is_placeholder <- function(x) {
 #'
 #' @export
 k_is_sparse <- function(tensor) {
-  keras$backend$is_sparse(
+  keras$ops$is_sparse(
     tensor = tensor
   )
 }
@@ -1459,7 +1471,7 @@ k_is_sparse <- function(tensor) {
 #'
 #' @export
 k_l2_normalize <- function(x, axis = NULL) {
-  keras$backend$l2_normalize(
+  keras$ops$l2_normalize(
     x = x,
     axis = as_axis(axis)
   )
@@ -1478,7 +1490,7 @@ k_l2_normalize <- function(x, axis = NULL) {
 #'
 #' @export
 k_learning_phase <- function() {
-  keras$backend$learning_phase()
+  keras$ops$learning_phase()
 }
 
 
@@ -1493,7 +1505,7 @@ k_learning_phase <- function() {
 #'
 #' @export
 k_less <- function(x, y) {
-  keras$backend$less(
+  keras$ops$less(
     x = x,
     y = y
   )
@@ -1511,7 +1523,7 @@ k_less <- function(x, y) {
 #'
 #' @export
 k_less_equal <- function(x, y) {
-  keras$backend$less_equal(
+  keras$ops$less_equal(
     x = x,
     y = y
   )
@@ -1536,7 +1548,7 @@ k_less_equal <- function(x, y) {
 #'
 #' @export
 k_local_conv1d <- function(inputs, kernel, kernel_size, strides, data_format = NULL) {
-  keras$backend$local_conv1d(
+  keras$ops$local_conv1d(
     inputs = inputs,
     kernel = kernel,
     kernel_size = list(as.integer(kernel_size)),
@@ -1568,7 +1580,7 @@ k_local_conv1d <- function(inputs, kernel, kernel_size, strides, data_format = N
 #'
 #' @export
 k_local_conv2d <- function(inputs, kernel, kernel_size, strides, output_shape, data_format = NULL) {
-  keras$backend$local_conv2d(
+  keras$ops$local_conv2d(
     inputs = inputs,
     kernel = kernel,
     kernel_size = as.integer(kernel_size),
@@ -1589,7 +1601,7 @@ k_local_conv2d <- function(inputs, kernel, kernel_size, strides, output_shape, d
 #'
 #' @export
 k_log <- function(x) {
-  keras$backend$log(
+  keras$ops$log(
     x = x
   )
 }
@@ -1620,7 +1632,7 @@ k_logsumexp <- function(x, axis = NULL, keepdims = FALSE) {
   if (tensorflow::tf_version() >= "2.2")
     stop("k_logsumexp is deprecated. use tensorflow::tf$reduce_logsumexp ")
 
-  keras$backend$logsumexp(
+  keras$ops$logsumexp(
     x = x,
     axis = as_axis(axis),
     keepdims = keepdims
@@ -1640,7 +1652,7 @@ k_logsumexp <- function(x, axis = NULL, keepdims = FALSE) {
 #'
 #' @export
 k_manual_variable_initialization <- function(value) {
-  keras$backend$manual_variable_initialization(
+  keras$ops$manual_variable_initialization(
     value = value
   )
 }
@@ -1659,7 +1671,7 @@ k_manual_variable_initialization <- function(value) {
 #'
 #' @export
 k_map_fn <- function(fn, elems, name = NULL, dtype = NULL) {
-  keras$backend$map_fn(
+  keras$ops$map_fn(
     fn = fn,
     elems = elems,
     name = name,
@@ -1683,7 +1695,7 @@ k_map_fn <- function(fn, elems, name = NULL, dtype = NULL) {
 #'
 #' @export
 k_max <- function(x, axis = NULL, keepdims = FALSE) {
-  keras$backend$max(
+  keras$ops$max(
     x = x,
     axis = as_axis(axis),
     keepdims = keepdims
@@ -1702,7 +1714,7 @@ k_max <- function(x, axis = NULL, keepdims = FALSE) {
 #'
 #' @export
 k_maximum <- function(x, y) {
-  keras$backend$maximum(
+  keras$ops$maximum(
     x = x,
     y = y
   )
@@ -1725,7 +1737,7 @@ k_maximum <- function(x, y) {
 #'
 #' @export
 k_mean <- function(x, axis = NULL, keepdims = FALSE) {
-  keras$backend$mean(
+  keras$ops$mean(
     x = x,
     axis = as_axis(axis),
     keepdims = keepdims
@@ -1748,7 +1760,7 @@ k_mean <- function(x, axis = NULL, keepdims = FALSE) {
 #'
 #' @export
 k_min <- function(x, axis = NULL, keepdims = FALSE) {
-  keras$backend$min(
+  keras$ops$min(
     x = x,
     axis = as_axis(axis),
     keepdims = keepdims
@@ -1767,7 +1779,7 @@ k_min <- function(x, axis = NULL, keepdims = FALSE) {
 #'
 #' @export
 k_minimum <- function(x, y) {
-  keras$backend$minimum(
+  keras$ops$minimum(
     x = x,
     y = y
   )
@@ -1786,7 +1798,7 @@ k_minimum <- function(x, y) {
 #'
 #' @export
 k_moving_average_update <- function(x, value, momentum) {
-  keras$backend$moving_average_update(
+  keras$ops$moving_average_update(
     x = x,
     value = value,
     momentum = momentum
@@ -1805,7 +1817,7 @@ k_moving_average_update <- function(x, value, momentum) {
 #'
 #' @export
 k_ndim <- function(x) {
-  keras$backend$ndim(
+  keras$ops$ndim(
     x = x
   )
 }
@@ -1825,7 +1837,7 @@ k_ndim <- function(x) {
 #'
 #' @export
 k_normalize_batch_in_training <- function(x, gamma, beta, reduction_axes, epsilon = 0.001) {
-  keras$backend$normalize_batch_in_training(
+  keras$ops$normalize_batch_in_training(
     x = x,
     gamma = gamma,
     beta = beta,
@@ -1846,7 +1858,7 @@ k_normalize_batch_in_training <- function(x, gamma, beta, reduction_axes, epsilo
 #'
 #' @export
 k_not_equal <- function(x, y) {
-  keras$backend$not_equal(
+  keras$ops$not_equal(
     x = x,
     y = y
   )
@@ -1866,7 +1878,7 @@ k_not_equal <- function(x, y) {
 #'
 #' @export
 k_one_hot <- function(indices, num_classes) {
-  keras$backend$one_hot(
+  keras$ops$one_hot(
     indices = indices,
     num_classes = as.integer(num_classes)
   )
@@ -1885,7 +1897,7 @@ k_one_hot <- function(indices, num_classes) {
 #'
 #' @export
 k_ones <- function(shape, dtype = NULL, name = NULL) {
-  keras$backend$ones(
+  keras$ops$ones(
     shape = as_integer_tuple(shape),
     dtype = dtype,
     name = name
@@ -1906,7 +1918,7 @@ k_ones <- function(shape, dtype = NULL, name = NULL) {
 #'
 #' @export
 k_ones_like <- function(x, dtype = NULL, name = NULL) {
-  keras$backend$ones_like(
+  keras$ops$ones_like(
     x = x,
     dtype = dtype,
     name = name
@@ -1926,7 +1938,7 @@ k_ones_like <- function(x, dtype = NULL, name = NULL) {
 #'
 #' @export
 k_permute_dimensions <- function(x, pattern) {
-  keras$backend$permute_dimensions(
+  keras$ops$permute_dimensions(
     x = x,
     pattern = as_axis(pattern)
   )
@@ -1949,7 +1961,7 @@ k_permute_dimensions <- function(x, pattern) {
 #'
 #' @export
 k_placeholder <- function(shape = NULL, ndim = NULL, dtype = NULL, sparse = FALSE, name = NULL) {
-  keras$backend$placeholder(
+  keras$ops$placeholder(
     shape = backend_normalize_shape(shape),
     ndim = as.integer(ndim),
     dtype = dtype,
@@ -1974,7 +1986,7 @@ k_placeholder <- function(shape = NULL, ndim = NULL, dtype = NULL, sparse = FALS
 #'
 #' @export
 k_pool2d <- function(x, pool_size, strides = c(1, 1), padding = "valid", data_format = NULL, pool_mode = "max") {
-  keras$backend$pool2d(
+  keras$ops$pool2d(
     x = x,
     pool_size = as.integer(pool_size),
     strides = as.integer(strides),
@@ -2001,7 +2013,7 @@ k_pool2d <- function(x, pool_size, strides = c(1, 1), padding = "valid", data_fo
 #' @export
 k_pool3d <- function(x, pool_size, strides = c(1, 1, 1), padding = "valid",
                      data_format = NULL, pool_mode = "max") {
-  keras$backend$pool3d(
+  keras$ops$pool3d(
     x = x,
     pool_size = as.integer(pool_size),
     strides = as.integer(strides),
@@ -2023,7 +2035,7 @@ k_pool3d <- function(x, pool_size, strides = c(1, 1, 1), padding = "valid",
 #'
 #' @export
 k_pow <- function(x, a) {
-  keras$backend$pow(
+  keras$ops$pow(
     x = x,
     a = as_integer(a)
   )
@@ -2046,7 +2058,7 @@ k_pow <- function(x, a) {
 #'
 #' @export
 k_print_tensor <- function(x, message = "") {
-  keras$backend$print_tensor(
+  keras$ops$print_tensor(
     x = x,
     message = message
   )
@@ -2068,7 +2080,7 @@ k_print_tensor <- function(x, message = "") {
 #'
 #' @export
 k_prod <- function(x, axis = NULL, keepdims = FALSE) {
-  keras$backend$prod(
+  keras$ops$prod(
     x = x,
     axis = as_axis(axis),
     keepdims = keepdims
@@ -2103,9 +2115,9 @@ k_random_binomial <-
                               seed = as_nullable_integer))
 
     fn <- if (tf_version() >= "2.3")
-      keras$backend$random_bernoulli
+      keras$ops$random_bernoulli
     else
-      keras$backend$random_binomial
+      keras$ops$random_binomial
 
 
     {
@@ -2146,7 +2158,7 @@ k_random_bernoulli <- k_random_binomial
 #'
 #' @export
 k_random_normal <- function(shape, mean = 0.0, stddev = 1.0, dtype = NULL, seed = NULL) {
-  keras$backend$random_normal(
+  keras$ops$random_normal(
     shape = backend_normalize_shape(shape),
     mean = mean,
     stddev = stddev,
@@ -2171,7 +2183,7 @@ k_random_normal <- function(shape, mean = 0.0, stddev = 1.0, dtype = NULL, seed 
 #'
 #' @export
 k_random_normal_variable <- function(shape, mean, scale, dtype = NULL, name = NULL, seed = NULL) {
-  keras$backend$random_normal_variable(
+  keras$ops$random_normal_variable(
     shape = backend_normalize_shape(shape),
     mean = mean,
     scale = scale,
@@ -2200,7 +2212,7 @@ k_random_uniform <- function(shape, minval = 0.0, maxval = 1.0, dtype = NULL, se
     minval <- as_tensor(minval, dtype = dtype)
     maxval <- as_tensor(maxval, dtype = dtype)
   }
-  keras$backend$random_uniform(
+  keras$ops$random_uniform(
     shape = backend_normalize_shape(shape),
     minval = minval,
     maxval = maxval,
@@ -2225,7 +2237,7 @@ k_random_uniform <- function(shape, minval = 0.0, maxval = 1.0, dtype = NULL, se
 #'
 #' @export
 k_random_uniform_variable <- function(shape, low, high, dtype = NULL, name = NULL, seed = NULL) {
-  keras$backend$random_uniform_variable(
+  keras$ops$random_uniform_variable(
     shape = backend_normalize_shape(shape),
     low = low,
     high = high,
@@ -2250,7 +2262,7 @@ k_random_uniform_variable <- function(shape, low, high, dtype = NULL, name = NUL
 #'
 #' @export
 k_relu <- function(x, alpha = 0.0, max_value = NULL) {
-  keras$backend$relu(
+  keras$ops$relu(
     x = x,
     alpha = alpha,
     max_value = max_value
@@ -2272,7 +2284,7 @@ k_relu <- function(x, alpha = 0.0, max_value = NULL) {
 #'
 #' @export
 k_repeat <- function(x, n) {
-  keras$backend$`repeat`(
+  keras$ops$`repeat`(
     x = x,
     n = as.integer(n)
   )
@@ -2294,7 +2306,7 @@ k_repeat <- function(x, n) {
 #'
 #' @export
 k_repeat_elements <- function(x, rep, axis) {
-  keras$backend$repeat_elements(
+  keras$ops$repeat_elements(
     x = x,
     rep = as.integer(rep),
     axis = as_axis(axis)
@@ -2308,7 +2320,7 @@ k_repeat_elements <- function(x, rep, axis) {
 #'
 #' @export
 k_reset_uids <- function() {
-  keras$backend$reset_uids(
+  keras$ops$reset_uids(
   )
 }
 
@@ -2324,7 +2336,7 @@ k_reset_uids <- function() {
 #'
 #' @export
 k_reshape <- function(x, shape) {
-  keras$backend$reshape(
+  keras$ops$reshape(
     x = x,
     shape = backend_normalize_shape(shape)
   )
@@ -2344,7 +2356,7 @@ k_reshape <- function(x, shape) {
 #'
 #' @export
 k_resize_images <- function(x, height_factor, width_factor, data_format) {
-  keras$backend$resize_images(
+  keras$ops$resize_images(
     x = x,
     height_factor = as.integer(height_factor),
     width_factor = as.integer(width_factor),
@@ -2367,7 +2379,7 @@ k_resize_images <- function(x, height_factor, width_factor, data_format) {
 #'
 #' @export
 k_resize_volumes <- function(x, depth_factor, height_factor, width_factor, data_format) {
-  keras$backend$resize_volumes(
+  keras$ops$resize_volumes(
     x = x,
     depth_factor = as.integer(depth_factor),
     height_factor = as.integer(height_factor),
@@ -2389,7 +2401,7 @@ k_resize_volumes <- function(x, depth_factor, height_factor, width_factor, data_
 #'
 #' @export
 k_reverse <- function(x, axes) {
-  keras$backend$reverse(
+  keras$ops$reverse(
     x = x,
     axes = as_axis(axes)
   )
@@ -2427,7 +2439,7 @@ k_reverse <- function(x, axes) {
 k_rnn <- function(step_function, inputs, initial_states, go_backwards = FALSE,
                   mask = NULL, constants = NULL, unroll = FALSE,
                   input_length = NULL) {
-  keras$backend$rnn(
+  keras$ops$rnn(
     step_function = step_function,
     inputs = inputs,
     initial_states = initial_states,
@@ -2452,7 +2464,7 @@ k_rnn <- function(step_function, inputs, initial_states, go_backwards = FALSE,
 #'
 #' @export
 k_round <- function(x) {
-  keras$backend$round(
+  keras$ops$round(
     x = x
   )
 }
@@ -2475,7 +2487,7 @@ k_round <- function(x) {
 #' @export
 k_separable_conv2d <- function(x, depthwise_kernel, pointwise_kernel, strides = c(1, 1),
                                padding = "valid", data_format = NULL, dilation_rate = c(1, 1)) {
-  keras$backend$separable_conv2d(
+  keras$ops$separable_conv2d(
     x = x,
     depthwise_kernel = depthwise_kernel,
     pointwise_kernel = pointwise_kernel,
@@ -2495,7 +2507,7 @@ k_separable_conv2d <- function(x, depthwise_kernel, pointwise_kernel, strides = 
 #'
 #' @export
 k_set_learning_phase <- function(value) {
-  keras$backend$set_learning_phase(
+  keras$ops$set_learning_phase(
     value = as.integer(value)
   )
 }
@@ -2510,7 +2522,7 @@ k_set_learning_phase <- function(value) {
 #'
 #' @export
 k_set_value <- function(x, value) {
-  keras$backend$set_value(
+  keras$ops$set_value(
     x = x,
     value = value
   )
@@ -2527,7 +2539,7 @@ k_set_value <- function(x, value) {
 #'
 #' @export
 k_shape <- function(x) {
-  keras$backend$shape(
+  keras$ops$shape(
     x = x
   )
 }
@@ -2543,7 +2555,7 @@ k_shape <- function(x) {
 #'
 #' @export
 k_sigmoid <- function(x) {
-  keras$backend$sigmoid(
+  keras$ops$sigmoid(
     x = x
   )
 }
@@ -2559,7 +2571,7 @@ k_sigmoid <- function(x) {
 #'
 #' @export
 k_sign <- function(x) {
-  keras$backend$sign(
+  keras$ops$sign(
     x = x
   )
 }
@@ -2575,7 +2587,7 @@ k_sign <- function(x) {
 #'
 #' @export
 k_sin <- function(x) {
-  keras$backend$sin(
+  keras$ops$sin(
     x = x
   )
 }
@@ -2601,7 +2613,7 @@ k_softmax <- function(x, axis = -1) {
   if (keras_version() >= "2.1.6")
     args$axis <- as_axis(axis)
 
-  do.call(keras$backend$softmax, args)
+  do.call(keras$ops$softmax, args)
 }
 
 
@@ -2615,7 +2627,7 @@ k_softmax <- function(x, axis = -1) {
 #'
 #' @export
 k_softplus <- function(x) {
-  keras$backend$softplus(
+  keras$ops$softplus(
     x = x
   )
 }
@@ -2631,7 +2643,7 @@ k_softplus <- function(x) {
 #'
 #' @export
 k_softsign <- function(x) {
-  keras$backend$softsign(
+  keras$ops$softsign(
     x = x
   )
 }
@@ -2661,7 +2673,7 @@ k_sparse_categorical_crossentropy <- function(target, output, from_logits = FALS
   if (keras_version() >= "2.2.0")
     args$axis <- as_axis(axis)
 
-  do.call(keras$backend$sparse_categorical_crossentropy, args)
+  do.call(keras$ops$sparse_categorical_crossentropy, args)
 }
 
 
@@ -2677,7 +2689,7 @@ k_sparse_categorical_crossentropy <- function(target, output, from_logits = FALS
 #'
 #' @export
 k_spatial_2d_padding <- function(x, padding = list(list(1, 1), list(1, 1)), data_format = NULL) {
-  keras$backend$spatial_2d_padding(
+  keras$ops$spatial_2d_padding(
     x = x,
     padding = padding,
     data_format = data_format
@@ -2704,7 +2716,7 @@ k_spatial_2d_padding <- function(x, padding = list(list(1, 1), list(1, 1)), data
 k_spatial_3d_padding <- function(x,
                                  padding = list(list(1, 1), list(1, 1), list(1, 1)),
                                  data_format = NULL) {
-  keras$backend$spatial_3d_padding(
+  keras$ops$spatial_3d_padding(
     x = x,
     padding = padding,
     data_format = data_format
@@ -2722,7 +2734,7 @@ k_spatial_3d_padding <- function(x,
 #'
 #' @export
 k_sqrt <- function(x) {
-  keras$backend$sqrt(
+  keras$ops$sqrt(
     x = x
   )
 }
@@ -2738,7 +2750,7 @@ k_sqrt <- function(x) {
 #'
 #' @export
 k_square <- function(x) {
-  keras$backend$square(
+  keras$ops$square(
     x = x
   )
 }
@@ -2757,7 +2769,7 @@ k_square <- function(x) {
 k_squeeze <- function(x, axis = NULL) {
   if(is.null(axis))
     return(tensorflow::tf$squeeze(x))
-  keras$backend$squeeze(
+  keras$ops$squeeze(
     x = x,
     axis = as_axis(axis)
   )
@@ -2775,7 +2787,7 @@ k_squeeze <- function(x, axis = NULL) {
 #'
 #' @export
 k_stack <- function(x, axis = 1) {
-  keras$backend$stack(
+  keras$ops$stack(
     x = x,
     axis = as_axis(axis)
   )
@@ -2819,7 +2831,7 @@ k_unstack <- function(x, axis = 1L, num = NULL, name = NULL) {
 #'
 #' @export
 k_std <- function(x, axis = NULL, keepdims = FALSE) {
-  keras$backend$std(
+  keras$ops$std(
     x = x,
     axis = as_axis(axis),
     keepdims = keepdims
@@ -2839,7 +2851,7 @@ k_std <- function(x, axis = NULL, keepdims = FALSE) {
 #'
 #' @export
 k_stop_gradient <- function(variables) {
-  keras$backend$stop_gradient(
+  keras$ops$stop_gradient(
     variables = variables
   )
 }
@@ -2859,7 +2871,7 @@ k_stop_gradient <- function(variables) {
 #'
 #' @export
 k_sum <- function(x, axis = NULL, keepdims = FALSE) {
-  keras$backend$sum(
+  keras$ops$sum(
     x = x,
     axis = as_axis(axis),
     keepdims = keepdims
@@ -2882,7 +2894,7 @@ k_sum <- function(x, axis = NULL, keepdims = FALSE) {
 #'
 #' @export
 k_switch <- function(condition, then_expression, else_expression) {
-  keras$backend$switch(
+  keras$ops$switch(
     condition = condition,
     then_expression = then_expression,
     else_expression = else_expression
@@ -2901,7 +2913,7 @@ k_switch <- function(condition, then_expression, else_expression) {
 #'
 #' @export
 k_tanh <- function(x) {
-  keras$backend$tanh(
+  keras$ops$tanh(
     x = x
   )
 }
@@ -2918,7 +2930,7 @@ k_tanh <- function(x) {
 #'
 #' @export
 k_temporal_padding <- function(x, padding = c(1, 1)) {
-  keras$backend$temporal_padding(
+  keras$ops$temporal_padding(
     x = x,
     padding = as_integer_tuple(padding, force_tuple = TRUE)
   )
@@ -2937,7 +2949,7 @@ k_temporal_padding <- function(x, padding = c(1, 1)) {
 k_tile <- function(x, n) {
   if(!k_is_tensor(n))
     n <- as.integer(n)
-  keras$backend$tile(
+  keras$ops$tile(
     x = x,
     n = n
   )
@@ -2954,7 +2966,7 @@ k_tile <- function(x, n) {
 #'
 #' @export
 k_to_dense <- function(tensor) {
-  keras$backend$to_dense(
+  keras$ops$to_dense(
     tensor = tensor
   )
 }
@@ -2970,7 +2982,7 @@ k_to_dense <- function(tensor) {
 #'
 #' @export
 k_transpose <- function(x) {
-  keras$backend$transpose(
+  keras$ops$transpose(
     x = x
   )
 }
@@ -2995,7 +3007,7 @@ k_transpose <- function(x) {
 #'
 #' @export
 k_truncated_normal <- function(shape, mean = 0.0, stddev = 1.0, dtype = NULL, seed = NULL) {
-  keras$backend$truncated_normal(
+  keras$ops$truncated_normal(
     shape = backend_normalize_shape(shape),
     mean = mean,
     stddev = stddev,
@@ -3016,7 +3028,7 @@ k_truncated_normal <- function(shape, mean = 0.0, stddev = 1.0, dtype = NULL, se
 #'
 #' @export
 k_update <- function(x, new_x) {
-  keras$backend$update(
+  keras$ops$update(
     x = x,
     new_x = new_x
   )
@@ -3034,7 +3046,7 @@ k_update <- function(x, new_x) {
 #'
 #' @export
 k_update_add <- function(x, increment) {
-  keras$backend$update_add(
+  keras$ops$update_add(
     x = x,
     increment = increment
   )
@@ -3052,7 +3064,7 @@ k_update_add <- function(x, increment) {
 #'
 #' @export
 k_update_sub <- function(x, decrement) {
-  keras$backend$update_sub(
+  keras$ops$update_sub(
     x = x,
     decrement = decrement
   )
@@ -3074,7 +3086,7 @@ k_update_sub <- function(x, decrement) {
 #'
 #' @export
 k_var <- function(x, axis = NULL, keepdims = FALSE) {
-  keras$backend$var(
+  keras$ops$var(
     x = x,
     axis = as_axis(axis),
     keepdims = keepdims
@@ -3095,7 +3107,7 @@ k_var <- function(x, axis = NULL, keepdims = FALSE) {
 #'
 #' @export
 k_variable <- function(value, dtype = NULL, name = NULL, constraint = NULL) {
-  keras$backend$variable(
+  keras$ops$variable(
     value = value,
     dtype = dtype,
     name = name,
@@ -3116,7 +3128,7 @@ k_variable <- function(value, dtype = NULL, name = NULL, constraint = NULL) {
 #'
 #' @export
 k_zeros <- function(shape, dtype = NULL, name = NULL) {
-  keras$backend$zeros(
+  keras$ops$zeros(
     shape = backend_normalize_shape(shape),
     dtype = dtype,
     name = name
@@ -3137,7 +3149,7 @@ k_zeros <- function(shape, dtype = NULL, name = NULL) {
 #'
 #' @export
 k_zeros_like <- function(x, dtype = NULL, name = NULL) {
-  keras$backend$zeros_like(
+  keras$ops$zeros_like(
     x = x,
     dtype = dtype,
     name = name
