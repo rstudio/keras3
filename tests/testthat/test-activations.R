@@ -8,8 +8,8 @@ test_activation <- function(name, required_version = NULL, required_tf_version=t
     skip_if_not_tensorflow_version(required_tf_version)
     activation_fn <- eval(parse(text = name))
     test_call_succeeds(name, {
-      keras_model_sequential() %>%
-        layer_dense(32, input_shape = 784) %>%
+      keras_model_sequential(input_shape = 784) %>%
+        layer_dense(32) %>%
         layer_activation(activation = activation_fn)
     })
     tensor <- k_constant(matrix(runif(100), nrow = 10, ncol = 10), shape = c(10, 10))
