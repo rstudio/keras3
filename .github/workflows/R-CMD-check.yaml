@@ -21,51 +21,56 @@ jobs:
       fail-fast: false
       matrix:
         include:
+
+          ## the happy path - default everything
           - {os: 'ubuntu-latest' , tf: 'default', r: 'release'}
           - {os: 'windows-latest', tf: 'default', r: 'release'}
           - {os: 'macOS-latest'  , tf: 'default', r: 'release'}
 
-          - {os: 'ubuntu-latest' , tf: 'default', r: 'oldrel'}
+          ## old R versions
           - {os: 'windows-latest', tf: 'default', r: 'oldrel'}
           - {os: 'macOS-latest'  , tf: 'default', r: 'oldrel'}
+          - {os: 'ubuntu-latest' , tf: 'default', r: 'oldrel'}
+          - {os: 'ubuntu-latest' , tf: 'default', r: 'oldrel-1'}
+          - {os: 'ubuntu-20.04'  , tf: 'default', r: '3.6'} # default R in ubuntu-20.04
 
-          - {os: 'ubuntu-latest', tf: 'default', r: 'oldrel-1'}
-          - {os: 'ubuntu-latest', tf: 'default', r: '3.6'} # default R in ubuntu-20.04
+          ## release keras/tf version (if different from 'default')
+          # - {os: 'ubuntu-latest' , tf: 'release', r: 'release'}
+          # - {os: 'windows-latest', tf: 'release', r: 'release'}
+          # - {os: 'macOS-latest'  , tf: 'release', r: 'release'}
 
-          - {os: 'ubuntu-20.04'  , tf: 'release', r: 'release'}
-          - {os: 'windows-latest', tf: 'release', r: 'release'}
-          - {os: 'macOS-latest'  , tf: 'release', r: 'release'}
-
+          ## old keras/tf versions
           - {os: 'ubuntu-latest', tf: '2.13', r: 'release'}
           - {os: 'ubuntu-latest', tf: '2.12', r: 'release'}
           - {os: 'ubuntu-latest', tf: '2.11', r: 'release'}
           - {os: 'ubuntu-latest', tf: '2.10', r: 'release'}
-          - {os: 'ubuntu-latest', tf: '2.8', r: 'release'}
+          - {os: 'ubuntu-latest', tf: '2.8' , r: 'release'}
 
           # these are allowed to fail
+          - {os: 'ubuntu-latest', tf: '2.14.0rc1', r: 'release'}
           # - {os: 'ubuntu-20.04', tf: 'default', r: 'devel'}
-          # - {os: 'ubuntu-20.04', tf: '2.7.0rc1', r: 'release'}
           # - {os: 'ubuntu-20.04', tf: 'nightly' , r: 'release'}
 
     runs-on: ${{ matrix.os }}
     continue-on-error: ${{ matrix.tf == 'nightly' || contains(matrix.tf, 'rc') || matrix.r == 'devel' }}
     env:
-      R_REMOTES_NO_ERRORS_FROM_WARNINGS: 'true'
+      R_KEEP_PKG_SOURCE: yes
+      # R_REMOTES_NO_ERRORS_FROM_WARNINGS: 'true'
       # R_COMPILE_AND_INSTALL_PACKAGES: 'never' # commented out until CRAN builds TF 2.8
       GITHUB_PAT: ${{ secrets.GITHUB_TOKEN }}
 
     steps:
 
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
+
+      - uses: r-lib/actions/setup-pandoc@v2
 
       - uses: r-lib/actions/setup-r@v2
         id: setup-r
         with:
           r-version: ${{ matrix.r }}
-          Ncpus: '2L'
           use-public-rspm: true
-
-      - uses: r-lib/actions/setup-pandoc@v2
+          Ncpus: '2L'
 
       - name: Get Date
         id: get-date
@@ -74,16 +79,15 @@ jobs:
           echo "year-week=$(date -u "+%Y-%U")" >> $GITHUB_OUTPUT
           echo "date=$(date -u "+%F")"         >> $GITHUB_OUTPUT
 
-
         # echo "::set-output name=year-week::$(date -u "+%Y-%U")"
         # echo "::set-output name=date::$(date -u "+%F")"
 
       - name: Restore R package cache
-        uses: actions/cache@v2
+        uses: actions/cache@v3
         id: r-package-cache
         with:
           path: ${{ env.R_LIBS_USER }}
-          key: ${{ matrix.os }}-${{ steps.setup-r.outputs.installed-r-version }}-${{ steps.get-date.outputs.year-week }}-4
+          key: ${{ matrix.os }}-${{ steps.setup-r.outputs.installed-r-version }}-${{ steps.get-date.outputs.year-week }}-1
 
       # - name: Install remotes
       #   if: steps.r-package-cache.outputs.cache-hit != 'true'
@@ -91,20 +95,20 @@ jobs:
 
       - uses: r-lib/actions/setup-r-dependencies@v2
         with:
-          extra-packages: rcmdcheck remotes local::.
-          cache-version: 4
+          extra-packages: any::rcmdcheck local::.
+          cache-version: 1
           upgrade: 'TRUE'
 
-      - name: Install system dependencies
-        if: runner.os == 'Linux'
-        shell: bash
-        run: |
-          . /etc/os-release
-          while read -r cmd
-          do
-            echo "$cmd"
-            sudo $cmd
-          done < <(Rscript -e "writeLines(remotes::system_requirements('$ID-$VERSION_ID'))")
+      # - name: Install system dependencies
+      #   if: runner.os == 'Linux'
+      #   shell: bash
+      #   run: |
+      #     . /etc/os-release
+      #     while read -r cmd
+      #     do
+      #       echo "$cmd"
+      #       sudo $cmd
+      #     done < <(Rscript -e "writeLines(remotes::system_requirements('$ID-$VERSION_ID'))")
 
 
       # - name: Install Package + deps
@@ -119,15 +123,19 @@ jobs:
       # - name: Install rcmdcheck
       #   run: remotes::install_cran("rcmdcheck")
 
-      - name: Check
-        run: rcmdcheck::rcmdcheck(args = '--no-manual', error_on = 'warning', check_dir = 'check')
+      - uses: r-lib/actions/check-r-package@v2
+        with:
+          upload-snapshots: true
 
-      - name: Show testthat output
-        if: always()
-        shell: bash
-        run: find check -name 'testthat.Rout*' -exec cat '{}' \; || true
-
-      - name: Don't use tar from old Rtools to store the cache
-        if: ${{ runner.os == 'Windows' && startsWith(steps.install-r.outputs.installed-r-version, '3') }}
-        shell: bash
-        run: echo "C:/Program Files/Git/usr/bin" >> $GITHUB_PATH
+      # - name: Check
+      #   run: rcmdcheck::rcmdcheck(args = '--no-manual', error_on = 'warning', check_dir = 'check')
+      #
+      # - name: Show testthat output
+      #   if: always()
+      #   shell: bash
+      #   run: find check -name 'testthat.Rout*' -exec cat '{}' \; || true
+      #
+      # - name: Don't use tar from old Rtools to store the cache
+      #   if: ${{ runner.os == 'Windows' && startsWith(steps.install-r.outputs.installed-r-version, '3') }}
+      #   shell: bash
+      #   run: echo "C:/Program Files/Git/usr/bin" >> $GITHUB_PATH
