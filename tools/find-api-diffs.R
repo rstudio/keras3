@@ -4,7 +4,7 @@ library(dplyr, warn.conflicts = FALSE)
 library(reticulate)
 library(envir)
 
-use_virtualenv("r-keras")
+use_virtualenv("r-tensorflow")
 # tools/setup-test-envs.R
 
 
@@ -80,6 +80,9 @@ DF %>%
   select(r_func_nm, missing_in_r_func_args) %>%
   print(n = Inf)
 
+# tf 2.14
+# A tibble: 0 × 2
+# ℹ 2 variables: r_func_nm <chr>, missing_in_r_func_args <chr>
 
 # tf 2.13
 # # A tibble: 4 × 2
