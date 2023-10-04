@@ -8,7 +8,7 @@ metric_mean_squared_error(
   y_true,
   y_pred,
   ...,
-  name = "mean_absolute_percentage_error",
+  name = "mean_squared_error",
   dtype = NULL
 )
 }
