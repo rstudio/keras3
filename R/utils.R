@@ -493,6 +493,48 @@ capture_args <- function(cl, modifiers = NULL, ignore = NULL,
 }
 
 
+#' @importFrom rlang quos eval_tidy
+capture_args2 <- function(modifiers = NULL, ignore = NULL) {
+  cl0 <- cl <- sys.call(-1L)
+  envir <- parent.frame(2L)
+  fn <- sys.function(-1L)
+
+  # first defuse rlang !!! and := in calls
+  # cl[[1L]] <- quote(rlang::quos)
+  cl[[1L]] <- quos
+  cl_exprs <- eval(cl, envir)
+
+  # build up a call to base::list() using the exprs
+  cl <- as.call(c(list, cl_exprs))
+
+  # match.call()
+  cl <- match.call(fn, cl,
+                   expand.dots = !"..." %in% ignore,
+                   envir = envir)
+
+  # filter out args to ignore
+  for(ig in intersect(names(cl), ignore))
+    cl[[ig]] <- NULL
+
+  # eval and capture args
+  args <- eval_tidy(cl, env = envir)
+
+  # apply modifier functions. e.g., as_nullable_integer
+  nms_to_modify <- intersect(names(args), names(modifiers))
+  for (nm in nms_to_modify) {
+
+    # escape hatch: user supplied python objects pass through untransformed
+    if (inherits(args[[nm]] -> val, "python.builtin.object"))
+      next
+
+    # list() so if modifier returns NULL, don't remove the arg
+    args[nm] <- list(modifiers[[nm]](val))
+  }
+
+  args
+}
+
+
 is_scalar <- function(x) identical(length(x), 1L)
 
 is_mac_arm64 <- function() {
@@ -704,4 +746,3 @@ standard_layer_arg_modifiers <- list(
     batch_size = as_nullable_integer,
     seed = as_nullable_integer
   )
-
