@@ -89,7 +89,7 @@ if(!virtualenv_exists("r-tensorflow")) {
     "r-tensorflow", "3.10", packages = unique(c(
       "tensorflow",
       "keras-core",
-      "git+https://github.com/rr-/docstring_parser.git",
+      # "git+https://github.com/rr-/docstring_parser.git",
       # "docstring_parser",
       # "docstring-parser",
       "ipython",

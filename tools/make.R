@@ -94,7 +94,8 @@ endpoints <-
   unlist() %>%
   setdiff(c("keras.layers.Layer",
             "keras.layers.InputLayer",
-            "keras.layers.InputSpec"))
+            "keras.layers.InputSpec",
+            "keras.optimizers.Optimizer"))
 
 df <-
   endpoints |>
@@ -111,15 +112,29 @@ df <-
   }) |>
   list_rbind()
 
-
+# TODO: bidirectional, time_distributed -- need special caseing
 
 df |>
   mutate(endpoint_sans_name = str_extract(endpoint, "keras\\.(.*)\\.[^.]+$", 1)) |>
   filter(endpoint_sans_name == "layers") |>
   # select(endpoint, r_name, module, type) |>
-  # select(endpoint_sans_name, endpoint)
   arrange(endpoint_sans_name, module, name) |>
-  group_by(endpoint_sans_name) |>
+  mutate(file = if_else(endpoint_sans_name == "layers",
+                        {
+                          # browser()
+                        module |>
+                          str_replace("^keras(_core)?\\.(src\\.)?", "") |>
+                          str_replace(paste0(endpoint_sans_name, "\\."), "") |>
+                          str_replace("^([^.]+).*", paste0(endpoint_sans_name, "-\\1.R")) #|> unique()
+                          # str_sub("\\.?src\\.?", "") |>
+                          # str_sub(fixed("."), "-") |>
+                          # str_c(".R")
+                        },
+                        str_c(endpoint_sans_name, ".R")
+                        )
+                        ) |>
+  # select(endpoint, endpoint_sans_name, module, file)  |> print(n=Inf)
+  group_by(file) |>
   dplyr::group_walk(\(df, grp) {
 
     # o <- df$py_obj
@@ -145,21 +160,14 @@ df |>
         .
       }
 
-    if (grp$endpoint_sans_name == "layers") {
-      file <- "R/layers.R"
-      unlink(file)
-    }
-    else
-      file <- glue("R/autogen-{grp$endpoint_sans_name}.R")
 
-    # tmp hack for diffing
-    txt <- txt %>%
-      gsub("#' # Input Shape", "#' # Input shape", ., fixed = TRUE) %>%
-      gsub("#' # Output Shape", "#' # Output shape", ., fixed = TRUE) %>%
-      gsub("#' # Output Shape", "#' # Output shape", ., fixed = TRUE) %>%
-      gsub("#' # Call Arguments", "#' # Call arguments", ., fixed = TRUE) %>%
-      gsub("function (", "function(", ., fixed = TRUE) %>%
-      identity()
+    file <- grp$file
+    # if (grp$endpoint_sans_name == "layers") {
+    #   file <- "R/layers.R"
+    #   unlink(file)
+    # }
+    # else
+    #   file <- glue("R/autogen-{grp$endpoint_sans_name}.R")
 
     writeLines(txt, file)
   })

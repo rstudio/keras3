@@ -43,7 +43,7 @@ tidy_section_headings <- known_section_headings |>
 
 split_docstring_into_sections <- function(docstring) {
 
-  assert_that(docstring |> is_string())
+  assert_that(docstring |> is_string()) %error% browser()
 
   docstring <- docstring |>
     str_split_lines() |> str_trim("right") |> str_flatten_lines()
