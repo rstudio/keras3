@@ -2,46 +2,37 @@
 % Please edit documentation in R/layers-normalization.R
 \name{layer_unit_normalization}
 \alias{layer_unit_normalization}
-\title{Unit normalization layer}
+\title{Unit normalization layer.}
 \usage{
 layer_unit_normalization(object, axis = -1L, ...)
 }
 \arguments{
-\item{object}{What to compose the new \code{Layer} instance with. Typically a
-Sequential model or a Tensor (e.g., as returned by \code{layer_input()}).
-The return value depends on \code{object}. If \code{object} is:
-\itemize{
-\item missing or \code{NULL}, the \code{Layer} instance is returned.
-\item a \code{Sequential} model, the model with an additional layer is returned.
-\item a Tensor, the output tensor from \code{layer_instance(object)} is returned.
-}}
-
-\item{axis}{Integer or list. The axis or axes to normalize across. Typically
-this is the features axis or axes. The left-out axes are typically the
-batch axis or axes. Defaults to \code{-1}, the last dimension in
-the input.}
-
-\item{...}{standard layer arguments.
-
-\if{html}{\out{<div class="sourceCode r">}}\preformatted{data <- as_tensor(1:6, shape = c(2, 3), dtype = "float32")
-normalized_data <- data \%>\% layer_unit_normalization()
-for(row in 1:2)
-  normalized_data[row, ] \%>\%
-  \{ sum(.^2) \} \%>\%
-  print()
-# tf.Tensor(0.9999999, shape=(), dtype=float32)
-# tf.Tensor(1.0, shape=(), dtype=float32)
-}\if{html}{\out{</div>}}}
+\item{axis}{Integer or list/tuple. The axis or axes to normalize across.
+Typically, this is the features axis or axes. The left-out axes are
+typically the batch axis or axes. \code{-1} is the last dimension
+in the input. Defaults to \code{-1}.}
 }
 \description{
-Unit normalization layer
-}
-\details{
 Normalize a batch of inputs so that each input in the batch has a L2 norm
 equal to 1 (across the axes specified in \code{axis}).
 }
+\section{Examples}{
+\if{html}{\out{<div class="sourceCode python">}}\preformatted{data = np.arange(6).reshape(2, 3)
+normalized_data = keras_core.layers.UnitNormalization()(data)
+print(np.sum(normalized_data[0, :] ** 2)
+# 1.0
+}\if{html}{\out{</div>}}
+}
+
 \seealso{
 \itemize{
 \item \url{https://www.tensorflow.org/api_docs/python/tf/keras/layers/UnitNormalization}
 }
+
+Other normalization layers: 
+\code{\link{layer_batch_normalization}()},
+\code{\link{layer_group_normalization}()},
+\code{\link{layer_layer_normalization}()},
+\code{\link{layer_spectral_normalization}()}
 }
+\concept{normalization layers}

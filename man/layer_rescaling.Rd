@@ -2,60 +2,47 @@
 % Please edit documentation in R/layers-preprocessing.R
 \name{layer_rescaling}
 \alias{layer_rescaling}
-\title{Multiply inputs by \code{scale} and adds \code{offset}}
+\title{A preprocessing layer which rescales input values to a new range.}
 \usage{
 layer_rescaling(object, scale, offset = 0, ...)
 }
 \arguments{
-\item{object}{What to compose the new \code{Layer} instance with. Typically a
-Sequential model or a Tensor (e.g., as returned by \code{layer_input()}).
-The return value depends on \code{object}. If \code{object} is:
-\itemize{
-\item missing or \code{NULL}, the \code{Layer} instance is returned.
-\item a \code{Sequential} model, the model with an additional layer is returned.
-\item a Tensor, the output tensor from \code{layer_instance(object)} is returned.
-}}
-
 \item{scale}{Float, the scale to apply to the inputs.}
 
 \item{offset}{Float, the offset to apply to the inputs.}
 
-\item{...}{standard layer arguments.}
+\item{...}{Base layer keyword arguments, such as \code{name} and \code{dtype}.}
 }
 \description{
-Multiply inputs by \code{scale} and adds \code{offset}
-}
-\details{
+This layer rescales every value of an input (often an image) by multiplying
+by \code{scale} and adding \code{offset}.
+
 For instance:
 \enumerate{
 \item To rescale an input in the \verb{[0, 255]} range
 to be in the \verb{[0, 1]} range, you would pass \code{scale=1./255}.
 \item To rescale an input in the \verb{[0, 255]} range to be in the \verb{[-1, 1]} range,
-you would pass \verb{scale = 1/127.5, offset = -1}.
+you would pass \verb{scale=1./127.5, offset=-1}.
 }
 
-The rescaling is applied both during training and inference.
+The rescaling is applied both during training and inference. Inputs can be
+of integer or floating point dtype, and by default the layer will output
+floats.
 
-Input shape:
-Arbitrary.
-
-Output shape:
-Same as input.
+\strong{Note:} This layer is safe to use inside a \code{tf.data} pipeline
+(independently of which backend you're using).
 }
 \seealso{
 \itemize{
 \item \url{https://www.tensorflow.org/api_docs/python/tf/keras/layers/Rescaling}
-\item \url{https://keras.io/api/layers/preprocessing_layers/image_preprocessing/rescaling}
 }
 
-Other image preprocessing layers: 
-\code{\link{layer_center_crop}()},
-\code{\link{layer_resizing}()}
-
 Other preprocessing layers: 
+\code{\link{get_vocabulary}()},
 \code{\link{layer_category_encoding}()},
 \code{\link{layer_center_crop}()},
 \code{\link{layer_discretization}()},
+\code{\link{layer_hashed_crossing}()},
 \code{\link{layer_hashing}()},
 \code{\link{layer_integer_lookup}()},
 \code{\link{layer_normalization}()},
@@ -63,14 +50,10 @@ Other preprocessing layers:
 \code{\link{layer_random_contrast}()},
 \code{\link{layer_random_crop}()},
 \code{\link{layer_random_flip}()},
-\code{\link{layer_random_height}()},
 \code{\link{layer_random_rotation}()},
 \code{\link{layer_random_translation}()},
-\code{\link{layer_random_width}()},
 \code{\link{layer_random_zoom}()},
 \code{\link{layer_resizing}()},
-\code{\link{layer_string_lookup}()},
-\code{\link{layer_text_vectorization}()}
+\code{\link{layer_string_lookup}()}
 }
-\concept{image preprocessing layers}
 \concept{preprocessing layers}

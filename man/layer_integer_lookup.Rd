@@ -2,7 +2,7 @@
 % Please edit documentation in R/layers-preprocessing.R
 \name{layer_integer_lookup}
 \alias{layer_integer_lookup}
-\title{A preprocessing layer which maps integer features to contiguous ranges.}
+\title{A preprocessing layer that maps integers to (possibly encoded) indices.}
 \usage{
 layer_integer_lookup(
   object,
@@ -17,99 +17,94 @@ layer_integer_lookup(
   output_mode = "int",
   sparse = FALSE,
   pad_to_max_tokens = FALSE,
+  name = NULL,
   ...
 )
 }
 \arguments{
-\item{object}{What to compose the new \code{Layer} instance with. Typically a
-Sequential model or a Tensor (e.g., as returned by \code{layer_input()}).
-The return value depends on \code{object}. If \code{object} is:
-\itemize{
-\item missing or \code{NULL}, the \code{Layer} instance is returned.
-\item a \code{Sequential} model, the model with an additional layer is returned.
-\item a Tensor, the output tensor from \code{layer_instance(object)} is returned.
-}}
-
 \item{max_tokens}{Maximum size of the vocabulary for this layer. This should
 only be specified when adapting the vocabulary or when setting
-\code{pad_to_max_tokens = TRUE}. If \code{NULL}, there is no cap on the size of the
-vocabulary. Note that this size includes the OOV and mask tokens.
-Defaults to \code{NULL.}}
+\code{pad_to_max_tokens=True}. If None, there is no cap on the size of
+the vocabulary. Note that this size includes the OOV
+and mask tokens. Defaults to \code{None}.}
 
-\item{num_oov_indices}{The number of out-of-vocabulary tokens to use. If this
-value is more than 1, OOV inputs are modulated to determine their OOV
-value. If this value is 0, OOV inputs will cause an error when calling
-the layer. Defaults to 1.}
+\item{num_oov_indices}{The number of out-of-vocabulary tokens to use.
+If this value is more than 1, OOV inputs are modulated to
+determine their OOV value.
+If this value is 0, OOV inputs will cause an error when calling
+the layer. Defaults to \code{1}.}
 
 \item{mask_token}{An integer token that represents masked inputs. When
-\code{output_mode} is \code{"int"}, the token is included in vocabulary and mapped
-to index 0. In other output modes, the token will not appear in the
-vocabulary and instances of the mask token in the input will be dropped.
-If set to \code{NULL}, no mask term will be added. Defaults to \code{NULL}.}
+\code{output_mode} is \code{"int"}, the token is included in vocabulary
+and mapped to index 0. In other output modes,
+the token will not appear in the vocabulary and instances
+of the mask token in the input will be dropped.
+If set to None, no mask term will be added. Defaults to \code{None}.}
 
-\item{oov_token}{Only used when \code{invert} is \code{TRUE}. The token to return for OOV
-indices. Defaults to -1.}
+\item{oov_token}{Only used when \code{invert} is \code{True}. The token to return
+for OOV indices. Defaults to \code{-1}.}
 
 \item{vocabulary}{Optional. Either an array of integers or a string path to a
-text file. If passing an array, can pass a list, list, 1D numpy array,
-or 1D tensor containing the integer vocabulary terms. If passing a file
-path, the file should contain one line per term in the vocabulary. If
-this argument is set, there is no need to \code{adapt()} the layer.}
+text file. If passing an array, can pass a tuple, list,
+1D NumPy array, or 1D tensor containing the integer vocbulary terms.
+If passing a file path, the file should contain one line per term
+in the vocabulary. If this argument is set,
+there is no need to \code{adapt()} the layer.}
 
 \item{vocabulary_dtype}{The dtype of the vocabulary terms, for example
 \code{"int64"} or \code{"int32"}. Defaults to \code{"int64"}.}
 
-\item{idf_weights}{Only valid when \code{output_mode} is \code{"tf_idf"}. A list, list,
-1D numpy array, or 1D tensor or the same length as the vocabulary,
-containing the floating point inverse document frequency weights, which
-will be multiplied by per sample term counts for the final \code{tf_idf}
-weight. If the \code{vocabulary} argument is set, and \code{output_mode} is
+\item{idf_weights}{Only valid when \code{output_mode} is \code{"tf_idf"}.
+A tuple, list, 1D NumPy array, or 1D tensor or the same length
+as the vocabulary, containing the floating point inverse document
+frequency weights, which will be multiplied by per sample term
+counts for the final TF-IDF weight.
+If the \code{vocabulary} argument is set, and \code{output_mode} is
 \code{"tf_idf"}, this argument must be supplied.}
 
-\item{invert}{Only valid when \code{output_mode} is \code{"int"}. If TRUE, this layer will
-map indices to vocabulary items instead of mapping vocabulary items to
-indices. Default to FALSE.}
+\item{invert}{Only valid when \code{output_mode} is \code{"int"}.
+If \code{True}, this layer will map indices to vocabulary items
+instead of mapping vocabulary items to indices.
+Defaults to \code{False}.}
 
-\item{output_mode}{Specification for the output of the layer. Defaults to
-\code{"int"}.  Values can be \code{"int"}, \code{"one_hot"}, \code{"multi_hot"}, \code{"count"},
-or \code{"tf_idf"} configuring the layer as follows:
-\itemize{
-\item \code{"int"}: Return the vocabulary indices of the input tokens.
-\item \code{"one_hot"}: Encodes each individual element in the input into an
-array the same size as the vocabulary, containing a 1 at the element
-index. If the last dimension is size 1, will encode on that
-dimension.  If the last dimension is not size 1, will append a new
+\item{output_mode}{Specification for the output of the layer. Values can be
+\code{"int"}, \code{"one_hot"}, \code{"multi_hot"}, \code{"count"}, or \code{"tf_idf"}
+configuring the layer as follows:
+- \code{"int"}: Return the vocabulary indices of the input tokens.
+- \code{"one_hot"}: Encodes each individual element in the input into an
+array the same size as the vocabulary,
+containing a 1 at the element index. If the last dimension
+is size 1, will encode on that dimension.
+If the last dimension is not size 1, will append a new
 dimension for the encoded output.
-\item \code{"multi_hot"}: Encodes each sample in the input into a single array
-the same size as the vocabulary, containing a 1 for each vocabulary
-term present in the sample. Treats the last dimension as the sample
-dimension, if input shape is (..., sample_length), output shape will
-be (..., num_tokens).
-\item \code{"count"}: As \code{"multi_hot"}, but the int array contains a count of
-the number of times the token at that index appeared in the sample.
-\item \code{"tf_idf"}: As \code{"multi_hot"}, but the TF-IDF algorithm is applied to
-find the value in each token slot.
-For \code{"int"} output, any shape of input and output is supported. For all
-other output modes, currently only output up to rank 2 is supported.
-}}
+- \code{"multi_hot"}: Encodes each sample in the input into a single
+array the same size as the vocabulary,
+containing a 1 for each vocabulary term present in the sample.
+Treats the last dimension as the sample dimension,
+if input shape is \verb{(..., sample_length)},
+output shape will be \verb{(..., num_tokens)}.
+- \code{"count"}: As \code{"multi_hot"}, but the int array contains
+a count of the number of times the token at that index
+appeared in the sample.
+- \code{"tf_idf"}: As \code{"multi_hot"}, but the TF-IDF algorithm is
+applied to find the value in each token slot.
+For \code{"int"} output, any shape of input and output is supported.
+For all other output modes, currently only output up to rank 2
+is supported. Defaults to \code{"int"}.}
 
-\item{sparse}{Boolean. Only applicable when \code{output_mode} is \code{"multi_hot"},
-\code{"count"}, or \code{"tf_idf"}. If \code{TRUE}, returns a \code{SparseTensor} instead of a
-dense \code{Tensor}. Defaults to FALSE.}
+\item{sparse}{Boolean. Only applicable to \code{"multi_hot"}, \code{"count"}, and
+\code{"tf_idf"} output modes. Only supported with TensorFlow
+backend. If \code{True}, returns a \code{SparseTensor}
+instead of a dense \code{Tensor}. Defaults to \code{False}.}
 
 \item{pad_to_max_tokens}{Only applicable when \code{output_mode} is \code{"multi_hot"},
-\code{"count"}, or \code{"tf_idf"}. If \code{TRUE}, the output will have its feature axis
-padded to \code{max_tokens} even if the number of unique tokens in the
-vocabulary is less than max_tokens, resulting in a tensor of shape
-\verb{[batch_size, max_tokens]} regardless of vocabulary size. Defaults to
-FALSE.}
-
-\item{...}{standard layer arguments.}
+\code{"count"}, or \code{"tf_idf"}. If \code{True}, the output will have
+its feature axis padded to \code{max_tokens} even if the number
+of unique tokens in the vocabulary is less than \code{max_tokens},
+resulting in a tensor of shape \verb{(batch_size, max_tokens)}
+regardless of vocabulary size. Defaults to \code{False}.}
 }
 \description{
-A preprocessing layer which maps integer features to contiguous ranges.
-}
-\details{
 This layer maps a set of arbitrary integer input tokens into indexed integer
 output via a table-based vocabulary lookup. The layer's output indices will
 be contiguously arranged up to the maximum vocab size, even if the input
@@ -134,45 +129,224 @@ The vocabulary can optionally contain a mask token as well as an OOV token
 (which can optionally occupy multiple indices in the vocabulary, as set
 by \code{num_oov_indices}).
 The position of these tokens in the vocabulary is fixed. When \code{output_mode}
-is \code{"int"}, the vocabulary will begin with the mask token at index \code{0},
+is \code{"int"}, the vocabulary will begin with the mask token at index 0,
 followed by OOV indices, followed by the rest of the vocabulary. When
 \code{output_mode} is \code{"multi_hot"}, \code{"count"}, or \code{"tf_idf"} the vocabulary will
 begin with OOV indices and instances of the mask token will be dropped.
 
-For an overview and full list of preprocessing layers, see the preprocessing
-\href{https://www.tensorflow.org/guide/keras/preprocessing_layers}{guide}.
+\strong{Note:} This layer uses TensorFlow internally. It cannot
+be used as part of the compiled computation graph of a model with
+any backend other than TensorFlow.
+It can however be used with any backend when running eagerly.
+It can also always be used as part of an input preprocessing pipeline
+with any backend (outside the model itself), which is how we recommend
+to use this layer.
+
+\strong{Note:} This layer is safe to use inside a \code{tf.data} pipeline
+(independently of which backend you're using).
 }
+\section{Examples}{
+\strong{Creating a lookup layer with a known vocabulary}
+
+This example creates a lookup layer with a pre-existing vocabulary.
+
+\if{html}{\out{<div class="sourceCode python">}}\preformatted{vocab = [12, 36, 1138, 42]
+data = np.array([[12, 1138, 42], [42, 1000, 36]])  # Note OOV tokens
+layer = IntegerLookup(vocabulary=vocab)
+layer(data)
+# array([[1, 3, 4],
+#        [4, 0, 2]])
+}\if{html}{\out{</div>}}
+
+\strong{Creating a lookup layer with an adapted vocabulary}
+
+This example creates a lookup layer and generates the vocabulary by
+analyzing the dataset.
+
+\if{html}{\out{<div class="sourceCode python">}}\preformatted{data = np.array([[12, 1138, 42], [42, 1000, 36]])
+layer = IntegerLookup()
+layer.adapt(data)
+layer.get_vocabulary()
+# [-1, 42, 1138, 1000, 36, 12]
+}\if{html}{\out{</div>}}
+
+Note that the OOV token -1 have been added to the vocabulary. The remaining
+tokens are sorted by frequency (42, which has 2 occurrences, is first) then
+by inverse sort order.
+
+\if{html}{\out{<div class="sourceCode python">}}\preformatted{data = np.array([[12, 1138, 42], [42, 1000, 36]])
+layer = IntegerLookup()
+layer.adapt(data)
+layer(data)
+# array([[5, 2, 1],
+#        [1, 3, 4]])
+}\if{html}{\out{</div>}}
+
+\strong{Lookups with multiple OOV indices}
+
+This example demonstrates how to use a lookup layer with multiple OOV
+indices.  When a layer is created with more than one OOV index, any OOV
+tokens are hashed into the number of OOV buckets, distributing OOV tokens in
+a deterministic fashion across the set.
+
+\if{html}{\out{<div class="sourceCode python">}}\preformatted{vocab = [12, 36, 1138, 42]
+data = np.array([[12, 1138, 42], [37, 1000, 36]])
+layer = IntegerLookup(vocabulary=vocab, num_oov_indices=2)
+layer(data)
+# array([[2, 4, 5],
+#        [1, 0, 3]])
+}\if{html}{\out{</div>}}
+
+Note that the output for OOV token 37 is 1, while the output for OOV token
+1000 is 0. The in-vocab terms have their output index increased by 1 from
+earlier examples (12 maps to 2, etc) in order to make space for the extra
+OOV token.
+
+\strong{One-hot output}
+
+Configure the layer with \code{output_mode='one_hot'}. Note that the first
+\code{num_oov_indices} dimensions in the ont_hot encoding represent OOV values.
+
+\if{html}{\out{<div class="sourceCode python">}}\preformatted{vocab = [12, 36, 1138, 42]
+data = np.array([12, 36, 1138, 42, 7])  # Note OOV tokens
+layer = IntegerLookup(vocabulary=vocab, output_mode='one_hot')
+layer(data)
+# array([[0., 1., 0., 0., 0.],
+#         [0., 0., 1., 0., 0.],
+#         [0., 0., 0., 1., 0.],
+#         [0., 0., 0., 0., 1.],
+#         [1., 0., 0., 0., 0.]], dtype=float32)
+}\if{html}{\out{</div>}}
+
+\strong{Multi-hot output}
+
+Configure the layer with \code{output_mode='multi_hot'}. Note that the first
+\code{num_oov_indices} dimensions in the multi_hot encoding represent OOV tokens
+
+\if{html}{\out{<div class="sourceCode python">}}\preformatted{vocab = [12, 36, 1138, 42]
+data = np.array([[12, 1138, 42, 42],
+                 [42,    7, 36,  7]])  # Note OOV tokens
+layer = IntegerLookup(vocabulary=vocab, output_mode='multi_hot')
+layer(data)
+# array([[0., 1., 0., 1., 1.],
+#        [1., 0., 1., 0., 1.]], dtype=float32)
+}\if{html}{\out{</div>}}
+
+\strong{Token count output}
+
+Configure the layer with \code{output_mode='count'}. As with multi_hot output,
+the first \code{num_oov_indices} dimensions in the output represent OOV tokens.
+
+\if{html}{\out{<div class="sourceCode python">}}\preformatted{vocab = [12, 36, 1138, 42]
+data = np.array([[12, 1138, 42, 42],
+                 [42,    7, 36,  7]])  # Note OOV tokens
+layer = IntegerLookup(vocabulary=vocab, output_mode='count')
+layer(data)
+# array([[0., 1., 0., 1., 2.],
+#        [2., 0., 1., 0., 1.]], dtype=float32)
+}\if{html}{\out{</div>}}
+
+\strong{TF-IDF output}
+
+Configure the layer with \code{output_mode='tf_idf'}. As with multi_hot output,
+the first \code{num_oov_indices} dimensions in the output represent OOV tokens.
+
+Each token bin will output \code{token_count * idf_weight}, where the idf weights
+are the inverse document frequency weights per token. These should be
+provided along with the vocabulary. Note that the \code{idf_weight} for OOV
+tokens will default to the average of all idf weights passed in.
+
+\if{html}{\out{<div class="sourceCode python">}}\preformatted{vocab = [12, 36, 1138, 42]
+idf_weights = [0.25, 0.75, 0.6, 0.4]
+data = np.array([[12, 1138, 42, 42],
+                 [42,    7, 36,  7]])  # Note OOV tokens
+layer = IntegerLookup(
+    output_mode='tf_idf', vocabulary=vocab, idf_weights=idf_weights)
+layer(data)
+# array([[0.  , 0.25, 0.  , 0.6 , 0.8 ],
+#         [1.0 , 0.  , 0.75, 0.  , 0.4 ]], dtype=float32)
+}\if{html}{\out{</div>}}
+
+To specify the idf weights for oov tokens, you will need to pass the entire
+vocabularly including the leading oov token.
+
+\if{html}{\out{<div class="sourceCode python">}}\preformatted{vocab = [-1, 12, 36, 1138, 42]
+idf_weights = [0.9, 0.25, 0.75, 0.6, 0.4]
+data = np.array([[12, 1138, 42, 42],
+                 [42,    7, 36,  7]])  # Note OOV tokens
+layer = IntegerLookup(
+    output_mode='tf_idf', vocabulary=vocab, idf_weights=idf_weights)
+layer(data)
+# array([[0.  , 0.25, 0.  , 0.6 , 0.8 ],
+#         [1.8 , 0.  , 0.75, 0.  , 0.4 ]], dtype=float32)
+}\if{html}{\out{</div>}}
+
+When adapting the layer in \code{"tf_idf"} mode, each input sample will
+be considered a document, and IDF weight per token will be
+calculated as:
+\code{log(1 + num_documents / (1 + token_document_count))}.
+
+\strong{Inverse lookup}
+
+This example demonstrates how to map indices to tokens using this layer.
+(You can also use \code{adapt()} with \code{inverse=True}, but for simplicity we'll
+pass the vocab in this example.)
+
+\if{html}{\out{<div class="sourceCode python">}}\preformatted{vocab = [12, 36, 1138, 42]
+data = np.array([[1, 3, 4], [4, 0, 2]])
+layer = IntegerLookup(vocabulary=vocab, invert=True)
+layer(data)
+# array([[  12, 1138,   42],
+#        [  42,   -1,   36]])
+}\if{html}{\out{</div>}}
+
+Note that the first index correspond to the oov token by default.
+
+\strong{Forward and inverse lookup pairs}
+
+This example demonstrates how to use the vocabulary of a standard lookup
+layer to create an inverse lookup layer.
+
+\if{html}{\out{<div class="sourceCode python">}}\preformatted{vocab = [12, 36, 1138, 42]
+data = np.array([[12, 1138, 42], [42, 1000, 36]])
+layer = IntegerLookup(vocabulary=vocab)
+i_layer = IntegerLookup(
+    vocabulary=layer.get_vocabulary(), invert=True)
+int_data = layer(data)
+i_layer(int_data)
+# array([[  12, 1138,   42],
+#        [  42,   -1,   36]])
+}\if{html}{\out{</div>}}
+
+In this example, the input token 1000 resulted in an output of -1, since
+1000 was not in the vocabulary - it got represented as an OOV, and all OOV
+tokens are returned as -1 in the inverse layer. Also, note that for the
+inverse to work, you must have already set the forward layer vocabulary
+either directly or via \code{adapt()} before calling \code{get_vocabulary()}.
+}
+
 \seealso{
 \itemize{
-\item \code{\link[=adapt]{adapt()}}
 \item \url{https://www.tensorflow.org/api_docs/python/tf/keras/layers/IntegerLookup}
-\item \url{https://keras.io/api/layers/preprocessing_layers/categorical/integer_lookup}
 }
 
-Other categorical features preprocessing layers: 
-\code{\link{layer_category_encoding}()},
-\code{\link{layer_hashing}()},
-\code{\link{layer_string_lookup}()}
-
 Other preprocessing layers: 
+\code{\link{get_vocabulary}()},
 \code{\link{layer_category_encoding}()},
 \code{\link{layer_center_crop}()},
 \code{\link{layer_discretization}()},
+\code{\link{layer_hashed_crossing}()},
 \code{\link{layer_hashing}()},
 \code{\link{layer_normalization}()},
 \code{\link{layer_random_brightness}()},
 \code{\link{layer_random_contrast}()},
 \code{\link{layer_random_crop}()},
 \code{\link{layer_random_flip}()},
-\code{\link{layer_random_height}()},
 \code{\link{layer_random_rotation}()},
 \code{\link{layer_random_translation}()},
-\code{\link{layer_random_width}()},
 \code{\link{layer_random_zoom}()},
 \code{\link{layer_rescaling}()},
 \code{\link{layer_resizing}()},
-\code{\link{layer_string_lookup}()},
-\code{\link{layer_text_vectorization}()}
+\code{\link{layer_string_lookup}()}
 }
-\concept{categorical features preprocessing layers}
 \concept{preprocessing layers}

@@ -2,7 +2,7 @@
 % Please edit documentation in R/layers-preprocessing.R
 \name{layer_resizing}
 \alias{layer_resizing}
-\title{Image resizing layer}
+\title{A preprocessing layer which resizes images.}
 \usage{
 layer_resizing(
   object,
@@ -10,57 +10,71 @@ layer_resizing(
   width,
   interpolation = "bilinear",
   crop_to_aspect_ratio = FALSE,
+  data_format = NULL,
   ...
 )
 }
 \arguments{
-\item{object}{What to compose the new \code{Layer} instance with. Typically a
-Sequential model or a Tensor (e.g., as returned by \code{layer_input()}).
-The return value depends on \code{object}. If \code{object} is:
-\itemize{
-\item missing or \code{NULL}, the \code{Layer} instance is returned.
-\item a \code{Sequential} model, the model with an additional layer is returned.
-\item a Tensor, the output tensor from \code{layer_instance(object)} is returned.
-}}
-
 \item{height}{Integer, the height of the output shape.}
 
 \item{width}{Integer, the width of the output shape.}
 
-\item{interpolation}{String, the interpolation method. Defaults to \code{"bilinear"}.
-Supports \code{"bilinear"}, \code{"nearest"}, \code{"bicubic"}, \code{"area"}, \code{"lanczos3"},
-\code{"lanczos5"}, \code{"gaussian"}, and \code{"mitchellcubic"}.}
+\item{interpolation}{String, the interpolation method.
+Supports \code{"bilinear"}, \code{"nearest"}, \code{"bicubic"},
+\code{"lanczos3"}, \code{"lanczos5"}. Defaults to \code{"bilinear"}.}
 
-\item{crop_to_aspect_ratio}{If TRUE, resize the images without aspect
-ratio distortion. When the original aspect ratio differs from the target
-aspect ratio, the output image will be cropped so as to return the largest
-possible window in the image (of size \verb{(height, width)}) that matches
-the target aspect ratio. By default (\code{crop_to_aspect_ratio = FALSE}),
-aspect ratio may not be preserved.}
+\item{crop_to_aspect_ratio}{If \code{True}, resize the images without aspect
+ratio distortion. When the original aspect ratio differs
+from the target aspect ratio, the output image will be
+cropped so as to return the
+largest possible window in the image (of size \verb{(height, width)})
+that matches the target aspect ratio. By default
+(\code{crop_to_aspect_ratio=False}), aspect ratio may not be preserved.}
 
-\item{...}{standard layer arguments.}
+\item{data_format}{string, either \code{"channels_last"} or \code{"channels_first"}.
+The ordering of the dimensions in the inputs. \code{"channels_last"}
+corresponds to inputs with shape \verb{(batch, height, width, channels)}
+while \code{"channels_first"} corresponds to inputs with shape
+\verb{(batch, channels, height, width)}. It defaults to the
+\code{image_data_format} value found in your Keras config file at
+\verb{~/.keras/keras.json}. If you never set it, then it will be
+\code{"channels_last"}.}
+
+\item{...}{Base layer keyword arguments, such as \code{name} and \code{dtype}.}
 }
 \description{
-Image resizing layer
+This layer resizes an image input to a target height and width. The input
+should be a 4D (batched) or 3D (unbatched) tensor in \code{"channels_last"}
+format. Input pixel values can be of any range
+(e.g. \verb{[0., 1.)} or \verb{[0, 255]}).
 }
-\details{
-Resize the batched image input to target height and width. The input should
-be a 4D (batched) or 3D (unbatched) tensor in \code{"channels_last"} format.
+\section{Input Shape}{
+3D (unbatched) or 4D (batched) tensor with shape:
+\verb{(..., height, width, channels)}, in \code{"channels_last"} format,
+or \verb{(..., channels, height, width)}, in \code{"channels_first"} format.
 }
+
+\section{Output Shape}{
+3D (unbatched) or 4D (batched) tensor with shape:
+\verb{(..., target_height, target_width, channels)},
+or \verb{(..., channels, target_height, target_width)},
+in \code{"channels_first"} format.
+
+\strong{Note:} This layer is safe to use inside a \code{tf.data} pipeline
+(independently of which backend you're using).
+}
+
 \seealso{
 \itemize{
 \item \url{https://www.tensorflow.org/api_docs/python/tf/keras/layers/Resizing}
-\item \url{https://keras.io/api/layers/preprocessing_layers/image_preprocessing/resizing}
 }
 
-Other image preprocessing layers: 
-\code{\link{layer_center_crop}()},
-\code{\link{layer_rescaling}()}
-
 Other preprocessing layers: 
+\code{\link{get_vocabulary}()},
 \code{\link{layer_category_encoding}()},
 \code{\link{layer_center_crop}()},
 \code{\link{layer_discretization}()},
+\code{\link{layer_hashed_crossing}()},
 \code{\link{layer_hashing}()},
 \code{\link{layer_integer_lookup}()},
 \code{\link{layer_normalization}()},
@@ -68,14 +82,10 @@ Other preprocessing layers:
 \code{\link{layer_random_contrast}()},
 \code{\link{layer_random_crop}()},
 \code{\link{layer_random_flip}()},
-\code{\link{layer_random_height}()},
 \code{\link{layer_random_rotation}()},
 \code{\link{layer_random_translation}()},
-\code{\link{layer_random_width}()},
 \code{\link{layer_random_zoom}()},
 \code{\link{layer_rescaling}()},
-\code{\link{layer_string_lookup}()},
-\code{\link{layer_text_vectorization}()}
+\code{\link{layer_string_lookup}()}
 }
-\concept{image preprocessing layers}
 \concept{preprocessing layers}

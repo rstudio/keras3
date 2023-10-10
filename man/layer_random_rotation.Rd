@@ -2,7 +2,7 @@
 % Please edit documentation in R/layers-preprocessing.R
 \name{layer_random_rotation}
 \alias{layer_random_rotation}
-\title{Randomly rotate each image}
+\title{A preprocessing layer which randomly rotates images during training.}
 \usage{
 layer_random_rotation(
   object,
@@ -11,87 +11,85 @@ layer_random_rotation(
   interpolation = "bilinear",
   seed = NULL,
   fill_value = 0,
+  value_range = list(0L, 255L),
+  data_format = NULL,
   ...
 )
 }
 \arguments{
-\item{object}{What to compose the new \code{Layer} instance with. Typically a
-Sequential model or a Tensor (e.g., as returned by \code{layer_input()}).
-The return value depends on \code{object}. If \code{object} is:
-\itemize{
-\item missing or \code{NULL}, the \code{Layer} instance is returned.
-\item a \code{Sequential} model, the model with an additional layer is returned.
-\item a Tensor, the output tensor from \code{layer_instance(object)} is returned.
-}}
-
-\item{factor}{a float represented as fraction of 2 Pi, or a list of size 2
+\item{factor}{a float represented as fraction of 2 Pi, or a tuple of size 2
 representing lower and upper bound for rotating clockwise and
-counter-clockwise. A positive values means rotating counter clock-wise,
-while a negative value means clock-wise. When represented as a single
-float, this value is used for both the upper and lower bound. For
-instance, \code{factor = c(-0.2, 0.3)} results in an output rotation by a random
-amount in the range \verb{[-20\% * 2pi, 30\% * 2pi]}. \code{factor = 0.2} results in an
-output rotating by a random amount in the range \verb{[-20\% * 2pi, 20\% * 2pi]}.}
+counter-clockwise. A positive values means rotating
+counter clock-wise,
+while a negative value means clock-wise.
+When represented as a single
+float, this value is used for both the upper and lower bound.
+For instance, \verb{factor=(-0.2, 0.3)}
+results in an output rotation by a random
+amount in the range \verb{[-20\% * 2pi, 30\% * 2pi]}.
+\code{factor=0.2} results in an
+output rotating by a random amount
+in the range \verb{[-20\% * 2pi, 20\% * 2pi]}.}
 
-\item{fill_mode}{Points outside the boundaries of the input are filled according
-to the given mode (one of \verb{\{"constant", "reflect", "wrap", "nearest"\}}).
-\itemize{
-\item \emph{reflect}: \verb{(d c b a | a b c d | d c b a)} The input is extended by
-reflecting about the edge of the last pixel.
-\item \emph{constant}: \verb{(k k k k | a b c d | k k k k)} The input is extended by
-filling all values beyond the edge with the same constant value k = 0.
-\item \emph{wrap}: \verb{(a b c d | a b c d | a b c d)} The input is extended by
+\item{fill_mode}{Points outside the boundaries of the input are filled
+according to the given mode
+(one of \verb{\{"constant", "reflect", "wrap", "nearest"\}}).
+- \emph{reflect}: \verb{(d c b a | a b c d | d c b a)}
+The input is extended by reflecting about
+the edge of the last pixel.
+- \emph{constant}: \verb{(k k k k | a b c d | k k k k)}
+The input is extended by
+filling all values beyond the edge with
+the same constant value k = 0.
+- \emph{wrap}: \verb{(a b c d | a b c d | a b c d)} The input is extended by
 wrapping around to the opposite edge.
-\item \emph{nearest}: \verb{(a a a a | a b c d | d d d d)} The input is extended by the
-nearest pixel.
-}}
+- \emph{nearest}: \verb{(a a a a | a b c d | d d d d)}
+The input is extended by the nearest pixel.}
 
 \item{interpolation}{Interpolation mode. Supported values: \code{"nearest"},
 \code{"bilinear"}.}
 
 \item{seed}{Integer. Used to create a random seed.}
 
-\item{fill_value}{a float represents the value to be filled outside the boundaries
-when \code{fill_mode="constant"}.}
-
-\item{...}{standard layer arguments.}
+\item{fill_value}{a float represents the value to be filled outside
+the boundaries when \code{fill_mode="constant"}.}
 }
 \description{
-Randomly rotate each image
-}
-\details{
+This layer will apply random rotations to each image, filling empty space
+according to \code{fill_mode}.
+
 By default, random rotations are only applied during training.
 At inference time, the layer does nothing. If you need to apply random
-rotations at inference time, set \code{training} to TRUE when calling the layer.
+rotations at inference time, set \code{training} to True when calling the layer.
 
-Input shape:
-3D (unbatched) or 4D (batched) tensor with shape:
-\verb{(..., height, width, channels)}, in \code{"channels_last"} format
+Input pixel values can be of any range (e.g. \verb{[0., 1.)} or \verb{[0, 255]}) and
+of integer or floating point dtype.
+By default, the layer will output floats.
 
-Output shape:
+\strong{Note:} This layer is safe to use inside a \code{tf.data} pipeline
+(independently of which backend you're using).
+}
+\section{Input Shape}{
 3D (unbatched) or 4D (batched) tensor with shape:
 \verb{(..., height, width, channels)}, in \code{"channels_last"} format
 }
+
+\section{Output Shape}{
+3D (unbatched) or 4D (batched) tensor with shape:
+\verb{(..., height, width, channels)}, in \code{"channels_last"} format
+}
+
 \seealso{
 \itemize{
 \item \url{https://www.tensorflow.org/api_docs/python/tf/keras/layers/RandomRotation}
-\item \url{https://keras.io/api/layers/preprocessing_layers/}
 }
 
-Other image augmentation layers: 
-\code{\link{layer_random_brightness}()},
-\code{\link{layer_random_contrast}()},
-\code{\link{layer_random_crop}()},
-\code{\link{layer_random_flip}()},
-\code{\link{layer_random_height}()},
-\code{\link{layer_random_translation}()},
-\code{\link{layer_random_width}()},
-\code{\link{layer_random_zoom}()}
-
 Other preprocessing layers: 
+\code{\link{get_vocabulary}()},
 \code{\link{layer_category_encoding}()},
 \code{\link{layer_center_crop}()},
 \code{\link{layer_discretization}()},
+\code{\link{layer_hashed_crossing}()},
 \code{\link{layer_hashing}()},
 \code{\link{layer_integer_lookup}()},
 \code{\link{layer_normalization}()},
@@ -99,14 +97,10 @@ Other preprocessing layers:
 \code{\link{layer_random_contrast}()},
 \code{\link{layer_random_crop}()},
 \code{\link{layer_random_flip}()},
-\code{\link{layer_random_height}()},
 \code{\link{layer_random_translation}()},
-\code{\link{layer_random_width}()},
 \code{\link{layer_random_zoom}()},
 \code{\link{layer_rescaling}()},
 \code{\link{layer_resizing}()},
-\code{\link{layer_string_lookup}()},
-\code{\link{layer_text_vectorization}()}
+\code{\link{layer_string_lookup}()}
 }
-\concept{image augmentation layers}
 \concept{preprocessing layers}

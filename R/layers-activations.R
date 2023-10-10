@@ -89,7 +89,7 @@ r"-(Applies an Exponential Linear Unit function to an output.
 #' @family activations layers
 #' @seealso
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/layers/ELU>
-layer_elu <-
+layer_activation_elu <-
 function (object, alpha = 1, ...)
 {
     args <- capture_args2(list(input_shape = normalize_shape,
@@ -160,7 +160,7 @@ r"-(Leaky version of a Rectified Linear Unit activation layer.
 #' @family activations layers
 #' @seealso
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/layers/LeakyReLU>
-layer_leaky_relu <-
+layer_activation_leaky_relu <-
 function (object, negative_slope = 0.3, ...)
 {
     args <- capture_args2(list(input_shape = normalize_shape,
@@ -221,7 +221,7 @@ r"-(Parametric Rectified Linear Unit activation layer.
 #' @family activations layers
 #' @seealso
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/layers/PReLU>
-layer_p_relu <-
+layer_activation_parametric_relu <-
 function (object, alpha_initializer = "Zeros", alpha_regularizer = NULL,
     alpha_constraint = NULL, shared_axes = NULL, ...)
 {
@@ -304,7 +304,7 @@ r"-(Rectified Linear Unit activation function layer.
 #' @family activations layers
 #' @seealso
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/layers/ReLU>
-layer_relu <-
+layer_activation_relu <-
 function (object, max_value = NULL, negative_slope = 0, threshold = 0,
     ...)
 {
@@ -467,7 +467,7 @@ r"-(Softmax activation layer.
 #' @family activations layers
 #' @seealso
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/layers/Softmax>
-layer_softmax <-
+layer_activation_softmax <-
 function (object, axis = -1L, ...)
 {
     args <- capture_args2(list(axis = as_integer, input_shape = normalize_shape,

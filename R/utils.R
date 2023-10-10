@@ -178,7 +178,7 @@ with_custom_object_scope <- function(objects, expr) {
   with(resolve_utils()$custom_object_scope(objects), expr)
 }
 
-
+#' @importFrom rlang names2
 objects_with_py_function_names <- function(objects) {
   if(is.null(objects))
     return(NULL)

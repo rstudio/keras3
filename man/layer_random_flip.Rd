@@ -2,80 +2,64 @@
 % Please edit documentation in R/layers-preprocessing.R
 \name{layer_random_flip}
 \alias{layer_random_flip}
-\title{Randomly flip each image horizontally and vertically}
+\title{A preprocessing layer which randomly flips images during training.}
 \usage{
 layer_random_flip(object, mode = "horizontal_and_vertical", seed = NULL, ...)
 }
 \arguments{
-\item{object}{What to compose the new \code{Layer} instance with. Typically a
-Sequential model or a Tensor (e.g., as returned by \code{layer_input()}).
-The return value depends on \code{object}. If \code{object} is:
-\itemize{
-\item missing or \code{NULL}, the \code{Layer} instance is returned.
-\item a \code{Sequential} model, the model with an additional layer is returned.
-\item a Tensor, the output tensor from \code{layer_instance(object)} is returned.
-}}
-
 \item{mode}{String indicating which flip mode to use. Can be \code{"horizontal"},
-\code{"vertical"}, or \code{"horizontal_and_vertical"}. Defaults to
-\code{"horizontal_and_vertical"}. \code{"horizontal"} is a left-right flip and
-\code{"vertical"} is a top-bottom flip.}
+\code{"vertical"}, or \code{"horizontal_and_vertical"}. \code{"horizontal"} is a
+left-right flip and \code{"vertical"} is a top-bottom flip. Defaults to
+\code{"horizontal_and_vertical"}}
 
 \item{seed}{Integer. Used to create a random seed.}
 
-\item{...}{standard layer arguments.}
+\item{...}{Base layer keyword arguments, such as
+\code{name} and \code{dtype}.}
 }
 \description{
-Randomly flip each image horizontally and vertically
-}
-\details{
-This layer will flip the images based on the \code{mode} attribute.
-During inference time, the output will be identical to input. Call the layer
-with \code{training = TRUE} to flip the input.
+This layer will flip the images horizontally and or vertically based on the
+\code{mode} attribute. During inference time, the output will be identical to
+input. Call the layer with \code{training=True} to flip the input.
+Input pixel values can be of any range (e.g. \verb{[0., 1.)} or \verb{[0, 255]}) and
+of integer or floating point dtype.
+By default, the layer will output floats.
 
-Input shape:
+\strong{Note:} This layer is safe to use inside a \code{tf.data} pipeline
+(independently of which backend you're using).
+}
+\section{Input Shape}{
 3D (unbatched) or 4D (batched) tensor with shape:
 \verb{(..., height, width, channels)}, in \code{"channels_last"} format.
+}
 
-Output shape:
+\section{Output Shape}{
 3D (unbatched) or 4D (batched) tensor with shape:
 \verb{(..., height, width, channels)}, in \code{"channels_last"} format.
 }
+
 \seealso{
 \itemize{
 \item \url{https://www.tensorflow.org/api_docs/python/tf/keras/layers/RandomFlip}
-\item \url{https://keras.io/api/layers/preprocessing_layers/image_augmentation/random_flip}
 }
 
-Other image augmentation layers: 
-\code{\link{layer_random_brightness}()},
-\code{\link{layer_random_contrast}()},
-\code{\link{layer_random_crop}()},
-\code{\link{layer_random_height}()},
-\code{\link{layer_random_rotation}()},
-\code{\link{layer_random_translation}()},
-\code{\link{layer_random_width}()},
-\code{\link{layer_random_zoom}()}
-
 Other preprocessing layers: 
+\code{\link{get_vocabulary}()},
 \code{\link{layer_category_encoding}()},
 \code{\link{layer_center_crop}()},
 \code{\link{layer_discretization}()},
+\code{\link{layer_hashed_crossing}()},
 \code{\link{layer_hashing}()},
 \code{\link{layer_integer_lookup}()},
 \code{\link{layer_normalization}()},
 \code{\link{layer_random_brightness}()},
 \code{\link{layer_random_contrast}()},
 \code{\link{layer_random_crop}()},
-\code{\link{layer_random_height}()},
 \code{\link{layer_random_rotation}()},
 \code{\link{layer_random_translation}()},
-\code{\link{layer_random_width}()},
 \code{\link{layer_random_zoom}()},
 \code{\link{layer_rescaling}()},
 \code{\link{layer_resizing}()},
-\code{\link{layer_string_lookup}()},
-\code{\link{layer_text_vectorization}()}
+\code{\link{layer_string_lookup}()}
 }
-\concept{image augmentation layers}
 \concept{preprocessing layers}

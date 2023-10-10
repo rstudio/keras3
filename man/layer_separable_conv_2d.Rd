@@ -2,17 +2,17 @@
 % Please edit documentation in R/layers-convolutional.R
 \name{layer_separable_conv_2d}
 \alias{layer_separable_conv_2d}
-\title{Separable 2D convolution.}
+\title{2D separable convolution layer.}
 \usage{
 layer_separable_conv_2d(
   object,
   filters,
   kernel_size,
-  strides = c(1, 1),
+  strides = list(1L, 1L),
   padding = "valid",
   data_format = NULL,
-  dilation_rate = 1,
-  depth_multiplier = 1,
+  dilation_rate = list(1L, 1L),
+  depth_multiplier = 1L,
   activation = NULL,
   use_bias = TRUE,
   depthwise_initializer = "glorot_uniform",
@@ -25,128 +25,122 @@ layer_separable_conv_2d(
   depthwise_constraint = NULL,
   pointwise_constraint = NULL,
   bias_constraint = NULL,
-  input_shape = NULL,
-  batch_input_shape = NULL,
-  batch_size = NULL,
-  dtype = NULL,
-  name = NULL,
-  trainable = NULL,
-  weights = NULL
+  ...
 )
 }
 \arguments{
-\item{object}{What to compose the new \code{Layer} instance with. Typically a
-Sequential model or a Tensor (e.g., as returned by \code{layer_input()}).
-The return value depends on \code{object}. If \code{object} is:
-\itemize{
-\item missing or \code{NULL}, the \code{Layer} instance is returned.
-\item a \code{Sequential} model, the model with an additional layer is returned.
-\item a Tensor, the output tensor from \code{layer_instance(object)} is returned.
-}}
+\item{filters}{int, the dimensionality of the output space (i.e. the number
+of filters in the pointwise convolution).}
 
-\item{filters}{Integer, the dimensionality of the output space (i.e. the
-number of output filters in the convolution).}
+\item{kernel_size}{int or tuple/list of 2 integers, specifying the size of the
+depthwise convolution window.}
 
-\item{kernel_size}{An integer or list of 2 integers, specifying the width and
-height of the 2D convolution window. Can be a single integer to specify the
-same value for all spatial dimensions.}
+\item{strides}{int or tuple/list of 2 integers, specifying the stride length
+of the depthwise convolution. If only one int is specified, the same
+stride size will be used for all dimensions. \code{strides > 1} is
+incompatible with \code{dilation_rate > 1}.}
 
-\item{strides}{An integer or list of 2 integers, specifying the strides of
-the convolution along the width and height. Can be a single integer to
-specify the same value for all spatial dimensions. Specifying any stride
-value != 1 is incompatible with specifying any \code{dilation_rate} value != 1.}
+\item{padding}{string, either \code{"valid"} or \code{"same"} (case-insensitive).
+\code{"valid"} means no padding. \code{"same"} results in padding evenly to
+the left/right or up/down of the input such that output has the same
+height/width dimension as the input.}
 
-\item{padding}{one of \code{"valid"} or \code{"same"} (case-insensitive).}
+\item{data_format}{string, either \code{"channels_last"} or \code{"channels_first"}.
+The ordering of the dimensions in the inputs. \code{"channels_last"}
+corresponds to inputs with shape \verb{(batch, steps, features)}
+while \code{"channels_first"} corresponds to inputs with shape
+\verb{(batch, features, steps)}. It defaults to the \code{image_data_format}
+value found in your Keras config file at \verb{~/.keras/keras.json}.
+If you never set it, then it will be \code{"channels_last"}.}
 
-\item{data_format}{A string, one of \code{channels_last} (default) or
-\code{channels_first}. The ordering of the dimensions in the inputs.
-\code{channels_last} corresponds to inputs with shape \verb{(batch, height, width, channels)} while \code{channels_first} corresponds to inputs with shape \verb{(batch, channels, height, width)}. It defaults to the \code{image_data_format} value
-found in your Keras config file at \verb{~/.keras/keras.json}. If you never set
-it, then it will be "channels_last".}
-
-\item{dilation_rate}{an integer or list of 2 integers, specifying the
-dilation rate to use for dilated convolution. Can be a single integer to
-specify the same value for all spatial dimensions. Currently, specifying
-any \code{dilation_rate} value != 1 is incompatible with specifying any stride
-value != 1.}
+\item{dilation_rate}{int or tuple/list of 2 integers, specifying the dilation
+rate to use for dilated convolution. If only one int is specified,
+the same dilation rate will be used for all dimensions.}
 
 \item{depth_multiplier}{The number of depthwise convolution output channels
-for each input channel. The total number of depthwise convolution output
-channels will be equal to \code{filters_in * depth_multiplier}.}
+for each input channel. The total number of depthwise convolution
+output channels will be equal to \code{input_channel * depth_multiplier}.}
 
-\item{activation}{Activation function to use. If you don't specify anything,
-no activation is applied (ie. "linear" activation: \code{a(x) = x}).}
+\item{activation}{Activation function. If \code{None}, no activation is applied.}
 
-\item{use_bias}{Boolean, whether the layer uses a bias vector.}
+\item{use_bias}{bool, if \code{True}, bias will be added to the output.}
 
-\item{depthwise_initializer}{Initializer for the depthwise kernel matrix.}
+\item{depthwise_initializer}{An initializer for the depthwise convolution
+kernel. If None, then the default initializer (\code{"glorot_uniform"})
+will be used.}
 
-\item{pointwise_initializer}{Initializer for the pointwise kernel matrix.}
+\item{pointwise_initializer}{An initializer for the pointwise convolution
+kernel. If None, then the default initializer (\code{"glorot_uniform"})
+will be used.}
 
-\item{bias_initializer}{Initializer for the bias vector.}
+\item{bias_initializer}{An initializer for the bias vector. If None, the
+default initializer ('"zeros"') will be used.}
 
-\item{depthwise_regularizer}{Regularizer function applied to the depthwise
-kernel matrix.}
+\item{depthwise_regularizer}{Optional regularizer for the depthwise
+convolution kernel.}
 
-\item{pointwise_regularizer}{Regularizer function applied to the pointwise
-kernel matrix.}
+\item{pointwise_regularizer}{Optional regularizer for the pointwise
+convolution kernel.}
 
-\item{bias_regularizer}{Regularizer function applied to the bias vector.}
+\item{bias_regularizer}{Optional regularizer for the bias vector.}
 
-\item{activity_regularizer}{Regularizer function applied to the output of the
-layer (its "activation")..}
+\item{activity_regularizer}{Optional regularizer function for the output.}
 
-\item{depthwise_constraint}{Constraint function applied to the depthwise
-kernel matrix.}
+\item{depthwise_constraint}{Optional projection function to be applied to the
+depthwise kernel after being updated by an \code{Optimizer} (e.g. used
+for norm constraints or value constraints for layer weights). The
+function must take as input the unprojected variable and must return
+the projected variable (which must have the same shape).}
 
-\item{pointwise_constraint}{Constraint function applied to the pointwise
-kernel matrix.}
+\item{pointwise_constraint}{Optional projection function to be applied to the
+pointwise kernel after being updated by an \code{Optimizer}.}
 
-\item{bias_constraint}{Constraint function applied to the bias vector.}
-
-\item{input_shape}{Dimensionality of the input (integer) not including the
-samples axis. This argument is required when using this layer as the first
-layer in a model.}
-
-\item{batch_input_shape}{Shapes, including the batch size. For instance,
-\code{batch_input_shape=c(10, 32)} indicates that the expected input will be
-batches of 10 32-dimensional vectors. \code{batch_input_shape=list(NULL, 32)}
-indicates batches of an arbitrary number of 32-dimensional vectors.}
-
-\item{batch_size}{Fixed batch size for layer}
-
-\item{dtype}{The data type expected by the input, as a string (\code{float32},
-\code{float64}, \code{int32}...)}
-
-\item{name}{An optional name string for the layer. Should be unique in a
-model (do not reuse the same name twice). It will be autogenerated if it
-isn't provided.}
-
-\item{trainable}{Whether the layer weights will be updated during training.}
-
-\item{weights}{Initial weights for layer.}
+\item{bias_constraint}{Optional projection function to be applied to the
+bias after being updated by an \code{Optimizer}.}
 }
 \description{
-Separable convolutions consist in first performing a depthwise spatial
-convolution (which acts on each input channel separately) followed by a
-pointwise convolution which mixes together the resulting output channels. The
-\code{depth_multiplier} argument controls how many output channels are generated
-per input channel in the depthwise step. Intuitively, separable convolutions
-can be understood as a way to factorize a convolution kernel into two smaller
-kernels, or as an extreme version of an Inception block.
+This layer performs a depthwise convolution that acts separately on
+channels, followed by a pointwise convolution that mixes channels.
+If \code{use_bias} is True and a bias initializer is provided,
+it adds a bias vector to the output. It then optionally applies an
+activation function to produce the final output.
 }
-\section{Input shape}{
- 4D tensor with shape: \verb{(batch, channels, rows, cols)}
-if data_format='channels_first' or 4D tensor with shape: \verb{(batch, rows, cols, channels)} if data_format='channels_last'.
+\section{Input Shape}{
+\itemize{
+\item If \code{data_format="channels_last"}:
+A 4D tensor with shape: \verb{(batch_size, height, width, channels)}
+\item If \code{data_format="channels_first"}:
+A 4D tensor with shape: \verb{(batch_size, channels, height, width)}
+}
 }
 
-\section{Output shape}{
- 4D tensor with shape: \verb{(batch, filters, new_rows, new_cols)} if data_format='channels_first' or 4D tensor with shape:
-\verb{(batch, new_rows, new_cols, filters)} if data_format='channels_last'.
-\code{rows} and \code{cols} values might have changed due to padding.
+\section{Output Shape}{
+\itemize{
+\item If \code{data_format="channels_last"}:
+A 4D tensor with shape: \verb{(batch_size, new_height, new_width, filters)}
+\item If \code{data_format="channels_first"}:
+A 4D tensor with shape: \verb{(batch_size, filters, new_height, new_width)}
+}
+}
+
+\section{Returns}{
+A 4D tensor representing
+\code{activation(separable_conv2d(inputs, kernel) + bias)}.
+}
+
+\section{Examples}{
+\if{html}{\out{<div class="sourceCode python">}}\preformatted{x = np.random.rand(4, 10, 10, 12)
+y = keras_core.layers.SeparableConv2D(3, 4, 3, 2, activation='relu')(x)
+print(y.shape)
+# (4, 4, 4, 4)
+}\if{html}{\out{</div>}}
 }
 
 \seealso{
+\itemize{
+\item \url{https://www.tensorflow.org/api_docs/python/tf/keras/layers/SeparableConv2D}
+}
+
 Other convolutional layers: 
 \code{\link{layer_conv_1d_transpose}()},
 \code{\link{layer_conv_1d}()},
@@ -154,18 +148,8 @@ Other convolutional layers:
 \code{\link{layer_conv_2d}()},
 \code{\link{layer_conv_3d_transpose}()},
 \code{\link{layer_conv_3d}()},
-\code{\link{layer_conv_lstm_2d}()},
-\code{\link{layer_cropping_1d}()},
-\code{\link{layer_cropping_2d}()},
-\code{\link{layer_cropping_3d}()},
 \code{\link{layer_depthwise_conv_1d}()},
 \code{\link{layer_depthwise_conv_2d}()},
-\code{\link{layer_separable_conv_1d}()},
-\code{\link{layer_upsampling_1d}()},
-\code{\link{layer_upsampling_2d}()},
-\code{\link{layer_upsampling_3d}()},
-\code{\link{layer_zero_padding_1d}()},
-\code{\link{layer_zero_padding_2d}()},
-\code{\link{layer_zero_padding_3d}()}
+\code{\link{layer_separable_conv_1d}()}
 }
 \concept{convolutional layers}

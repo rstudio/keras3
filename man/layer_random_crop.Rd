@@ -2,82 +2,78 @@
 % Please edit documentation in R/layers-preprocessing.R
 \name{layer_random_crop}
 \alias{layer_random_crop}
-\title{Randomly crop the images to target height and width}
+\title{A preprocessing layer which randomly crops images during training.}
 \usage{
-layer_random_crop(object, height, width, seed = NULL, ...)
+layer_random_crop(
+  object,
+  height,
+  width,
+  seed = NULL,
+  data_format = NULL,
+  name = NULL,
+  ...
+)
 }
 \arguments{
-\item{object}{What to compose the new \code{Layer} instance with. Typically a
-Sequential model or a Tensor (e.g., as returned by \code{layer_input()}).
-The return value depends on \code{object}. If \code{object} is:
-\itemize{
-\item missing or \code{NULL}, the \code{Layer} instance is returned.
-\item a \code{Sequential} model, the model with an additional layer is returned.
-\item a Tensor, the output tensor from \code{layer_instance(object)} is returned.
-}}
-
 \item{height}{Integer, the height of the output shape.}
 
 \item{width}{Integer, the width of the output shape.}
 
 \item{seed}{Integer. Used to create a random seed.}
 
-\item{...}{standard layer arguments.}
+\item{...}{Base layer keyword arguments, such as
+\code{name} and \code{dtype}.}
 }
 \description{
-Randomly crop the images to target height and width
-}
-\details{
-This layer will crop all the images in the same batch to the same cropping
-location.
-By default, random cropping is only applied during training. At inference
-time, the images will be first rescaled to preserve the shorter side, and
-center cropped. If you need to apply random cropping at inference time,
-set \code{training} to \code{TRUE} when calling the layer.
+During training, this layer will randomly choose a location to crop images
+down to a target size. The layer will crop all the images in the same batch
+to the same cropping location.
 
-Input shape:
+At inference time, and during training if an input image is smaller than the
+target size, the input will be resized and cropped so as to return the
+largest possible window in the image that matches the target aspect ratio.
+If you need to apply random cropping at inference time, set \code{training} to
+True when calling the layer.
+
+Input pixel values can be of any range (e.g. \verb{[0., 1.)} or \verb{[0, 255]}) and
+of integer or floating point dtype. By default, the layer will output
+floats.
+
+\strong{Note:} This layer is safe to use inside a \code{tf.data} pipeline
+(independently of which backend you're using).
+}
+\section{Input Shape}{
 3D (unbatched) or 4D (batched) tensor with shape:
 \verb{(..., height, width, channels)}, in \code{"channels_last"} format.
+}
 
-Output shape:
+\section{Output Shape}{
 3D (unbatched) or 4D (batched) tensor with shape:
 \verb{(..., target_height, target_width, channels)}.
 }
+
 \seealso{
 \itemize{
 \item \url{https://www.tensorflow.org/api_docs/python/tf/keras/layers/RandomCrop}
-\item \url{https://keras.io/api/layers/preprocessing_layers/image_augmentation/random_crop}
 }
 
-Other image augmentation layers: 
-\code{\link{layer_random_brightness}()},
-\code{\link{layer_random_contrast}()},
-\code{\link{layer_random_flip}()},
-\code{\link{layer_random_height}()},
-\code{\link{layer_random_rotation}()},
-\code{\link{layer_random_translation}()},
-\code{\link{layer_random_width}()},
-\code{\link{layer_random_zoom}()}
-
 Other preprocessing layers: 
+\code{\link{get_vocabulary}()},
 \code{\link{layer_category_encoding}()},
 \code{\link{layer_center_crop}()},
 \code{\link{layer_discretization}()},
+\code{\link{layer_hashed_crossing}()},
 \code{\link{layer_hashing}()},
 \code{\link{layer_integer_lookup}()},
 \code{\link{layer_normalization}()},
 \code{\link{layer_random_brightness}()},
 \code{\link{layer_random_contrast}()},
 \code{\link{layer_random_flip}()},
-\code{\link{layer_random_height}()},
 \code{\link{layer_random_rotation}()},
 \code{\link{layer_random_translation}()},
-\code{\link{layer_random_width}()},
 \code{\link{layer_random_zoom}()},
 \code{\link{layer_rescaling}()},
 \code{\link{layer_resizing}()},
-\code{\link{layer_string_lookup}()},
-\code{\link{layer_text_vectorization}()}
+\code{\link{layer_string_lookup}()}
 }
-\concept{image augmentation layers}
 \concept{preprocessing layers}

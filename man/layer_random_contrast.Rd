@@ -2,83 +2,69 @@
 % Please edit documentation in R/layers-preprocessing.R
 \name{layer_random_contrast}
 \alias{layer_random_contrast}
-\title{Adjust the contrast of an image or images by a random factor}
+\title{A preprocessing layer which randomly adjusts contrast during training.}
 \usage{
 layer_random_contrast(object, factor, seed = NULL, ...)
 }
 \arguments{
-\item{object}{What to compose the new \code{Layer} instance with. Typically a
-Sequential model or a Tensor (e.g., as returned by \code{layer_input()}).
-The return value depends on \code{object}. If \code{object} is:
-\itemize{
-\item missing or \code{NULL}, the \code{Layer} instance is returned.
-\item a \code{Sequential} model, the model with an additional layer is returned.
-\item a Tensor, the output tensor from \code{layer_instance(object)} is returned.
-}}
-
-\item{factor}{a positive float represented as fraction of value, or a list of
-size 2 representing lower and upper bound. When represented as a single
-float, lower = upper. The contrast factor will be randomly picked between
-\verb{[1.0 - lower, 1.0 + upper]}.}
+\item{factor}{a positive float represented as fraction of value, or a tuple of
+size 2 representing lower and upper bound.
+When represented as a single float, lower = upper.
+The contrast factor will be randomly picked between
+\verb{[1.0 - lower, 1.0 + upper]}. For any pixel x in the channel,
+the output will be \code{(x - mean) * factor + mean}
+where \code{mean} is the mean value of the channel.}
 
 \item{seed}{Integer. Used to create a random seed.}
-
-\item{...}{standard layer arguments.}
 }
 \description{
-Adjust the contrast of an image or images by a random factor
-}
-\details{
-Contrast is adjusted independently for each channel of each image during
-training.
+This layer will randomly adjust the contrast of an image or images
+by a random factor. Contrast is adjusted independently
+for each channel of each image during training.
 
 For each channel, this layer computes the mean of the image pixels in the
 channel and then adjusts each component \code{x} of each pixel to
 \code{(x - mean) * contrast_factor + mean}.
 
-Input shape:
-3D (unbatched) or 4D (batched) tensor with shape:
-\verb{(..., height, width, channels)}, in \code{"channels_last"} format.
+Input pixel values can be of any range (e.g. \verb{[0., 1.)} or \verb{[0, 255]}) and
+in integer or floating point dtype.
+By default, the layer will output floats.
 
-Output shape:
+\strong{Note:} This layer is safe to use inside a \code{tf.data} pipeline
+(independently of which backend you're using).
+}
+\section{Input Shape}{
 3D (unbatched) or 4D (batched) tensor with shape:
 \verb{(..., height, width, channels)}, in \code{"channels_last"} format.
 }
+
+\section{Output Shape}{
+3D (unbatched) or 4D (batched) tensor with shape:
+\verb{(..., height, width, channels)}, in \code{"channels_last"} format.
+}
+
 \seealso{
 \itemize{
 \item \url{https://www.tensorflow.org/api_docs/python/tf/keras/layers/RandomContrast}
-\item \url{https://keras.io/api/layers/preprocessing_layers/}
 }
 
-Other image augmentation layers: 
-\code{\link{layer_random_brightness}()},
-\code{\link{layer_random_crop}()},
-\code{\link{layer_random_flip}()},
-\code{\link{layer_random_height}()},
-\code{\link{layer_random_rotation}()},
-\code{\link{layer_random_translation}()},
-\code{\link{layer_random_width}()},
-\code{\link{layer_random_zoom}()}
-
 Other preprocessing layers: 
+\code{\link{get_vocabulary}()},
 \code{\link{layer_category_encoding}()},
 \code{\link{layer_center_crop}()},
 \code{\link{layer_discretization}()},
+\code{\link{layer_hashed_crossing}()},
 \code{\link{layer_hashing}()},
 \code{\link{layer_integer_lookup}()},
 \code{\link{layer_normalization}()},
 \code{\link{layer_random_brightness}()},
 \code{\link{layer_random_crop}()},
 \code{\link{layer_random_flip}()},
-\code{\link{layer_random_height}()},
 \code{\link{layer_random_rotation}()},
 \code{\link{layer_random_translation}()},
-\code{\link{layer_random_width}()},
 \code{\link{layer_random_zoom}()},
 \code{\link{layer_rescaling}()},
 \code{\link{layer_resizing}()},
-\code{\link{layer_string_lookup}()},
-\code{\link{layer_text_vectorization}()}
+\code{\link{layer_string_lookup}()}
 }
-\concept{image augmentation layers}
 \concept{preprocessing layers}

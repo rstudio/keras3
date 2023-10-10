@@ -2,7 +2,7 @@
 % Please edit documentation in R/layers-pooling.R
 \name{layer_global_average_pooling_3d}
 \alias{layer_global_average_pooling_3d}
-\title{Global Average pooling operation for 3D data.}
+\title{Global average pooling operation for 3D data.}
 \usage{
 layer_global_average_pooling_3d(
   object,
@@ -12,46 +12,63 @@ layer_global_average_pooling_3d(
 )
 }
 \arguments{
-\item{object}{What to compose the new \code{Layer} instance with. Typically a
-Sequential model or a Tensor (e.g., as returned by \code{layer_input()}).
-The return value depends on \code{object}. If \code{object} is:
-\itemize{
-\item missing or \code{NULL}, the \code{Layer} instance is returned.
-\item a \code{Sequential} model, the model with an additional layer is returned.
-\item a Tensor, the output tensor from \code{layer_instance(object)} is returned.
-}}
+\item{data_format}{string, either \code{"channels_last"} or \code{"channels_first"}.
+The ordering of the dimensions in the inputs. \code{"channels_last"}
+corresponds to inputs with shape
+\verb{(batch, spatial_dim1, spatial_dim2, spatial_dim3, channels)}
+while \code{"channels_first"} corresponds to inputs with shape
+\verb{(batch, channels, spatial_dim1, spatial_dim2, spatial_dim3)}.
+It defaults to the \code{image_data_format} value found in your Keras
+config file at \verb{~/.keras/keras.json}. If you never set it, then it
+will be \code{"channels_last"}.}
 
-\item{data_format}{A string, one of \code{channels_last} (default) or
-\code{channels_first}. The ordering of the dimensions in the inputs.
-\code{channels_last} corresponds to inputs with shape \verb{(batch, spatial_dim1, spatial_dim2, spatial_dim3, channels)} while \code{channels_first} corresponds
-to inputs with shape \verb{(batch, channels, spatial_dim1, spatial_dim2, spatial_dim3)}. It defaults to the \code{image_data_format} value found in your
-Keras config file at \verb{~/.keras/keras.json}. If you never set it, then it
-will be "channels_last".}
-
-\item{keepdims}{A boolean, whether to keep the spatial dimensions or not. If
-\code{keepdims} is \code{FALSE} (default), the rank of the tensor is reduced for
-spatial dimensions. If \code{keepdims} is \code{TRUE}, the spatial dimensions are
-retained with length 1. The behavior is the same as for \code{tf.reduce_mean} or
-\code{np.mean}.}
-
-\item{...}{standard layer arguments.}
+\item{keepdims}{A boolean, whether to keep the temporal dimension or not.
+If \code{keepdims} is \code{False} (default), the rank of the tensor is
+reduced for spatial dimensions. If \code{keepdims} is \code{True}, the
+spatial dimension are retained with length 1.
+The behavior is the same as for \code{tf.reduce_mean} or \code{np.mean}.}
 }
 \description{
-Global Average pooling operation for 3D data.
+Global average pooling operation for 3D data.
 }
-\section{Input shape}{
-
+\section{Input Shape}{
 \itemize{
-\item If \code{data_format='channels_last'}: 5D tensor with shape: \verb{(batch_size, spatial_dim1, spatial_dim2, spatial_dim3, channels)}
-\item If \code{data_format='channels_first'}: 5D tensor with shape: \verb{(batch_size, channels, spatial_dim1, spatial_dim2, spatial_dim3)}
+\item If \code{data_format='channels_last'}:
+5D tensor with shape:
+\verb{(batch_size, spatial_dim1, spatial_dim2, spatial_dim3, channels)}
+\item If \code{data_format='channels_first'}:
+5D tensor with shape:
+\verb{(batch_size, channels, spatial_dim1, spatial_dim2, spatial_dim3)}
 }
 }
 
-\section{Output shape}{
- 2D tensor with shape: \verb{(batch_size, channels)}
+\section{Output Shape}{
+\itemize{
+\item If \code{keepdims=False}:
+2D tensor with shape \verb{(batch_size, channels)}.
+\item If \code{keepdims=True}:
+\itemize{
+\item If \code{data_format="channels_last"}:
+5D tensor with shape \verb{(batch_size, 1, 1, 1, channels)}
+\item If \code{data_format="channels_first"}:
+5D tensor with shape \verb{(batch_size, channels, 1, 1, 1)}
+}
+}
+}
+
+\section{Examples}{
+\if{html}{\out{<div class="sourceCode python">}}\preformatted{x = np.random.rand(2, 4, 5, 4, 3)
+y = keras_core.layers.GlobalAveragePooling3D()(x)
+y.shape
+# (2, 3)
+}\if{html}{\out{</div>}}
 }
 
 \seealso{
+\itemize{
+\item \url{https://www.tensorflow.org/api_docs/python/tf/keras/layers/GlobalAveragePooling3D}
+}
+
 Other pooling layers: 
 \code{\link{layer_average_pooling_1d}()},
 \code{\link{layer_average_pooling_2d}()},

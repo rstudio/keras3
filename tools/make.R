@@ -203,7 +203,16 @@ x
 # layer_torch_module_wrapper?
 # layer_time_distributed?
 # layer_tfsm_layer?
+# layer_bidirectional
 
+# Seemingly removed:
+# layer_random_height
+# layer_random_width
+# layer_locally_connected_{12}d
+# layer_cudnn_*
+# layer_dense_features
+# layer_alpha_dropout
+# layer_activation_thresholded_relu
 
 make_r_fn("keras.layers.PReLU")
 

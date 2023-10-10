@@ -15,61 +15,54 @@ layer_hashing(
 )
 }
 \arguments{
-\item{object}{What to compose the new \code{Layer} instance with. Typically a
-Sequential model or a Tensor (e.g., as returned by \code{layer_input()}).
-The return value depends on \code{object}. If \code{object} is:
-\itemize{
-\item missing or \code{NULL}, the \code{Layer} instance is returned.
-\item a \code{Sequential} model, the model with an additional layer is returned.
-\item a Tensor, the output tensor from \code{layer_instance(object)} is returned.
-}}
-
-\item{num_bins}{Number of hash bins. Note that this includes the \code{mask_value} bin,
-so the effective number of bins is \code{(num_bins - 1)} if \code{mask_value} is
-set.}
+\item{num_bins}{Number of hash bins. Note that this includes the \code{mask_value}
+bin, so the effective number of bins is \code{(num_bins - 1)}
+if \code{mask_value} is set.}
 
 \item{mask_value}{A value that represents masked inputs, which are mapped to
-index 0. Defaults to NULL, meaning no mask term will be added and the
-hashing will start at index 0.}
+index 0. \code{None} means no mask term will be added and the
+hashing will start at index 0. Defaults to \code{None}.}
 
-\item{salt}{A single unsigned integer or NULL.
-If passed, the hash function used will be SipHash64, with these values
-used as an additional input (known as a "salt" in cryptography).
-These should be non-zero. Defaults to \code{NULL} (in that
-case, the FarmHash64 hash function is used). It also supports
-list of 2 unsigned integer numbers, see reference paper for details.}
+\item{salt}{A single unsigned integer or None.
+If passed, the hash function used will be SipHash64,
+with these values used as an additional input
+(known as a "salt" in cryptography).
+These should be non-zero. If \code{None}, uses the FarmHash64 hash
+function. It also supports tuple/list of 2 unsigned
+integer numbers, see reference paper for details.
+Defaults to \code{None}.}
 
-\item{output_mode}{Specification for the output of the layer. Defaults to
-\code{"int"}.  Values can be \code{"int"}, \code{"one_hot"}, \code{"multi_hot"}, or
+\item{output_mode}{Specification for the output of the layer. Values can be
+\code{"int"}, \code{"one_hot"}, \code{"multi_hot"}, or
 \code{"count"} configuring the layer as follows:
-\itemize{
-\item \code{"int"}: Return the integer bin indices directly.
-\item \code{"one_hot"}: Encodes each individual element in the input into an
-array the same size as \code{num_bins}, containing a 1 at the input's bin
-index. If the last dimension is size 1, will encode on that
-dimension.  If the last dimension is not size 1, will append a new
+- \code{"int"}: Return the integer bin indices directly.
+- \code{"one_hot"}: Encodes each individual element in the input into an
+array the same size as \code{num_bins}, containing a 1
+at the input's bin index. If the last dimension is size 1,
+will encode on that dimension.
+If the last dimension is not size 1, will append a new
 dimension for the encoded output.
-\item \code{"multi_hot"}: Encodes each sample in the input into a single array
-the same size as \code{num_bins}, containing a 1 for each bin index
-index present in the sample. Treats the last dimension as the sample
-dimension, if input shape is \verb{(..., sample_length)}, output shape
-will be \verb{(..., num_tokens)}.
-\item \code{"count"}: As \code{"multi_hot"}, but the int array contains a count of
+- \code{"multi_hot"}: Encodes each sample in the input into a
+single array the same size as \code{num_bins},
+containing a 1 for each bin index
+index present in the sample. Treats the last dimension
+as the sample dimension, if input shape is
+\verb{(..., sample_length)}, output shape will be
+\verb{(..., num_tokens)}.
+- \code{"count"}: As \code{"multi_hot"}, but the int array contains a count of
 the number of times the bin index appeared in the sample.
-}}
+Defaults to \code{"int"}.}
 
 \item{sparse}{Boolean. Only applicable to \code{"one_hot"}, \code{"multi_hot"},
-and \code{"count"} output modes. If \code{TRUE}, returns a \code{SparseTensor} instead of
-a dense \code{Tensor}. Defaults to \code{FALSE}.}
+and \code{"count"} output modes. Only supported with TensorFlow
+backend. If \code{True}, returns a \code{SparseTensor} instead of
+a dense \code{Tensor}. Defaults to \code{False}.}
 
-\item{...}{standard layer arguments.}
+\item{...}{Keyword arguments to construct a layer.}
 }
 \description{
-A preprocessing layer which hashes and bins categorical features.
-}
-\details{
-This layer transforms single or multiple categorical inputs to hashed output.
-It converts a sequence of int or string to a sequence of int. The stable hash
+This layer transforms categorical inputs to hashed output. It element-wise
+converts a ints or strings to ints in a fixed range. The stable hash
 function uses \verb{tensorflow::ops::Fingerprint} to produce the same output
 consistently across all platforms.
 
@@ -78,93 +71,107 @@ which provides a consistent hashed output across different platforms and is
 stable across invocations, regardless of device and context, by mixing the
 input bits thoroughly.
 
-If you want to obfuscate the hashed output, you can also pass a random \code{salt}
-argument in the constructor. In that case, the layer will use the
+If you want to obfuscate the hashed output, you can also pass a random
+\code{salt} argument in the constructor. In that case, the layer will use the
 \href{https://github.com/google/highwayhash}{SipHash64} hash function, with
 the \code{salt} value serving as additional input to the hash function.
 
+\strong{Note:} This layer internally uses TensorFlow. It cannot
+be used as part of the compiled computation graph of a model with
+any backend other than TensorFlow.
+It can however be used with any backend when running eagerly.
+It can also always be used as part of an input preprocessing pipeline
+with any backend (outside the model itself), which is how we recommend
+to use this layer.
+
+\strong{Note:} This layer is safe to use inside a \code{tf.data} pipeline
+(independently of which backend you're using).
+
 \strong{Example (FarmHash64)}
 
-\if{html}{\out{<div class="sourceCode r">}}\preformatted{layer <- layer_hashing(num_bins=3)
-inp <- matrix(c('A', 'B', 'C', 'D', 'E'))
+\if{html}{\out{<div class="sourceCode python">}}\preformatted{layer = keras_core.layers.Hashing(num_bins=3)
+inp = [['A'], ['B'], ['C'], ['D'], ['E']]
 layer(inp)
-# <tf.Tensor: shape=(5, 1), dtype=int64, numpy=
-#   array([[1],
-#          [0],
-#          [1],
-#          [1],
-#          [2]])>
+# array([[1],
+#         [0],
+#         [1],
+#         [1],
+#         [2]])>
 }\if{html}{\out{</div>}}
 
 \strong{Example (FarmHash64) with a mask value}
 
-\if{html}{\out{<div class="sourceCode r">}}\preformatted{layer <- layer_hashing(num_bins=3, mask_value='')
-inp <- matrix(c('A', 'B', 'C', 'D', 'E'))
+\if{html}{\out{<div class="sourceCode python">}}\preformatted{layer = keras_core.layers.Hashing(num_bins=3, mask_value='')
+inp = [['A'], ['B'], [''], ['C'], ['D']]
 layer(inp)
-# <tf.Tensor: shape=(5, 1), dtype=int64, numpy=
-#   array([[1],
-#          [1],
-#          [0],
-#          [2],
-#          [2]])>
+# array([[1],
+#         [1],
+#         [0],
+#         [2],
+#         [2]])
 }\if{html}{\out{</div>}}
 
 \strong{Example (SipHash64)}
 
-\if{html}{\out{<div class="sourceCode r">}}\preformatted{layer <- layer_hashing(num_bins=3, salt=c(133, 137))
-inp <- matrix(c('A', 'B', 'C', 'D', 'E'))
+\if{html}{\out{<div class="sourceCode python">}}\preformatted{layer = keras_core.layers.Hashing(num_bins=3, salt=[133, 137])
+inp = [['A'], ['B'], ['C'], ['D'], ['E']]
 layer(inp)
-# <tf.Tensor: shape=(5, 1), dtype=int64, numpy=
-#   array([[1],
-#          [2],
-#          [1],
-#          [0],
-#          [2]])>
+# array([[1],
+#         [2],
+#         [1],
+#         [0],
+#         [2]])
 }\if{html}{\out{</div>}}
 
 \strong{Example (Siphash64 with a single integer, same as \verb{salt=[133, 133]})}
 
-\if{html}{\out{<div class="sourceCode r">}}\preformatted{layer <- layer_hashing(num_bins=3, salt=133)
-inp <- matrix(c('A', 'B', 'C', 'D', 'E'))
+\if{html}{\out{<div class="sourceCode python">}}\preformatted{layer = keras_core.layers.Hashing(num_bins=3, salt=133)
+inp = [['A'], ['B'], ['C'], ['D'], ['E']]
 layer(inp)
-# <tf.Tensor: shape=(5, 1), dtype=int64, numpy=
-#   array([[0],
-#          [0],
-#          [2],
-#          [1],
-#          [0]])>
+# array([[0],
+#         [0],
+#         [2],
+#         [1],
+#         [0]])
 }\if{html}{\out{</div>}}
 }
+\section{Input Shape}{
+A single string, a list of strings, or an \code{int32} or \code{int64} tensor
+of shape \verb{(batch_size, ...,)}.
+}
+
+\section{Output Shape}{
+An \code{int32} tensor of shape \verb{(batch_size, ...)}.
+}
+
+\section{Reference}{
+\itemize{
+\item \href{https://www.131002.net/siphash/siphash.pdf}{SipHash with salt}
+}
+}
+
 \seealso{
 \itemize{
 \item \url{https://www.tensorflow.org/api_docs/python/tf/keras/layers/Hashing}
-\item \url{https://keras.io/api/layers/preprocessing_layers/categorical/hashing/}
 }
 
-Other categorical features preprocessing layers: 
-\code{\link{layer_category_encoding}()},
-\code{\link{layer_integer_lookup}()},
-\code{\link{layer_string_lookup}()}
-
 Other preprocessing layers: 
+\code{\link{get_vocabulary}()},
 \code{\link{layer_category_encoding}()},
 \code{\link{layer_center_crop}()},
 \code{\link{layer_discretization}()},
+\code{\link{layer_hashed_crossing}()},
 \code{\link{layer_integer_lookup}()},
 \code{\link{layer_normalization}()},
 \code{\link{layer_random_brightness}()},
 \code{\link{layer_random_contrast}()},
 \code{\link{layer_random_crop}()},
 \code{\link{layer_random_flip}()},
-\code{\link{layer_random_height}()},
 \code{\link{layer_random_rotation}()},
 \code{\link{layer_random_translation}()},
-\code{\link{layer_random_width}()},
 \code{\link{layer_random_zoom}()},
 \code{\link{layer_rescaling}()},
 \code{\link{layer_resizing}()},
-\code{\link{layer_string_lookup}()},
-\code{\link{layer_text_vectorization}()}
+\code{\link{layer_string_lookup}()}
 }
-\concept{categorical features preprocessing layers}
 \concept{preprocessing layers}

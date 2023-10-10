@@ -8,68 +8,97 @@ layer_category_encoding(
   object,
   num_tokens = NULL,
   output_mode = "multi_hot",
-  sparse = FALSE,
   ...
 )
 }
 \arguments{
-\item{object}{What to compose the new \code{Layer} instance with. Typically a
-Sequential model or a Tensor (e.g., as returned by \code{layer_input()}).
-The return value depends on \code{object}. If \code{object} is:
-\itemize{
-\item missing or \code{NULL}, the \code{Layer} instance is returned.
-\item a \code{Sequential} model, the model with an additional layer is returned.
-\item a Tensor, the output tensor from \code{layer_instance(object)} is returned.
-}}
-
 \item{num_tokens}{The total number of tokens the layer should support. All
-inputs to the layer must integers in the range \verb{0 <= value < num_tokens},
-or an error will be thrown.}
+inputs to the layer must integers in the range \verb{0 <= value < num_tokens}, or an error will be thrown.}
 
-\item{output_mode}{Specification for the output of the layer. Defaults to
-\code{"multi_hot"}. Values can be \code{"one_hot"}, \code{"multi_hot"} or \code{"count"},
+\item{output_mode}{Specification for the output of the layer.
+Values can be \code{"one_hot"}, \code{"multi_hot"} or \code{"count"},
 configuring the layer as follows:
-\itemize{
-\item \code{"one_hot"}: Encodes each individual element in the input into an array
-of \code{num_tokens} size, containing a 1 at the element index. If the last
-dimension is size 1, will encode on that dimension. If the last dimension
-is not size 1, will append a new dimension for the encoded output.
-\item \code{"multi_hot"}: Encodes each sample in the input into a single array of
-\code{num_tokens} size, containing a 1 for each vocabulary term present in the
-sample. Treats the last dimension as the sample dimension, if input shape
-is \verb{(..., sample_length)}, output shape will be \verb{(..., num_tokens)}.
-\item \code{"count"}: Like \code{"multi_hot"}, but the int array contains a count of the
-number of times the token at that index appeared in the sample.
-}
-
-For all output modes, currently only output up to rank 2 is supported.}
-
-\item{sparse}{Boolean. If \code{TRUE}, returns a \code{SparseTensor} instead of a dense
-\code{Tensor}. Defaults to \code{FALSE}.}
-
-\item{...}{standard layer arguments.}
+- \code{"one_hot"}: Encodes each individual element in the input
+into an array of \code{num_tokens} size, containing a 1 at the
+element index. If the last dimension is size 1, will encode
+on that dimension. If the last dimension is not size 1,
+will append a new dimension for the encoded output.
+- \code{"multi_hot"}: Encodes each sample in the input into a single
+array of \code{num_tokens} size, containing a 1 for each
+vocabulary term present in the sample. Treats the last
+dimension as the sample dimension, if input shape is
+\verb{(..., sample_length)}, output shape will be
+\verb{(..., num_tokens)}.
+- \code{"count"}: Like \code{"multi_hot"}, but the int array contains a
+count of the number of times the token at that index
+appeared in the sample.
+For all output modes, currently only output up to rank 2 is
+supported.
+Defaults to \code{"multi_hot"}.}
 }
 \description{
 This layer provides options for condensing data into a categorical encoding
 when the total number of tokens are known in advance. It accepts integer
 values as inputs, and it outputs a dense or sparse representation of those
-inputs. For integer inputs where the total number of tokens is not known, use
-\code{\link[=layer_integer_lookup]{layer_integer_lookup()}} instead.
+inputs. For integer inputs where the total number of tokens is not known,
+use \code{keras_core.layers.IntegerLookup} instead.
+
+\strong{Note:} This layer is safe to use inside a \code{tf.data} pipeline
+(independently of which backend you're using).
 }
+\section{Examples}{
+\strong{One-hot encoding data}
+
+\if{html}{\out{<div class="sourceCode python">}}\preformatted{layer = keras_core.layers.CategoryEncoding(
+          num_tokens=4, output_mode="one_hot")
+layer([3, 2, 0, 1])
+# array([[0., 0., 0., 1.],
+#         [0., 0., 1., 0.],
+#         [1., 0., 0., 0.],
+#         [0., 1., 0., 0.]]>
+}\if{html}{\out{</div>}}
+
+\strong{Multi-hot encoding data}
+
+\if{html}{\out{<div class="sourceCode python">}}\preformatted{layer = keras_core.layers.CategoryEncoding(
+          num_tokens=4, output_mode="multi_hot")
+layer([[0, 1], [0, 0], [1, 2], [3, 1]])
+# array([[1., 1., 0., 0.],
+#         [1., 0., 0., 0.],
+#         [0., 1., 1., 0.],
+#         [0., 1., 0., 1.]]>
+}\if{html}{\out{</div>}}
+
+\strong{Using weighted inputs in \code{"count"} mode}
+
+\if{html}{\out{<div class="sourceCode python">}}\preformatted{layer = keras_core.layers.CategoryEncoding(
+          num_tokens=4, output_mode="count")
+count_weights = np.array([[.1, .2], [.1, .1], [.2, .3], [.4, .2]])
+layer([[0, 1], [0, 0], [1, 2], [3, 1]], count_weights=count_weights)
+#   array([[0.1, 0.2, 0. , 0. ],
+#          [0.2, 0. , 0. , 0. ],
+#          [0. , 0.2, 0.3, 0. ],
+#          [0. , 0.2, 0. , 0.4]]>
+}\if{html}{\out{</div>}}
+}
+
+\section{Call Arguments}{
+inputs: A 1D or 2D tensor of integer inputs.
+count_weights: A tensor in the same shape as \code{inputs} indicating the
+weight for each sample value when summing up in \code{count} mode.
+Not used in \code{"multi_hot"} or \code{"one_hot"} modes.
+}
+
 \seealso{
 \itemize{
 \item \url{https://www.tensorflow.org/api_docs/python/tf/keras/layers/CategoryEncoding}
-\item \url{https://keras.io/api/layers/preprocessing_layers/categorical/category_encoding/}
 }
 
-Other categorical features preprocessing layers: 
-\code{\link{layer_hashing}()},
-\code{\link{layer_integer_lookup}()},
-\code{\link{layer_string_lookup}()}
-
 Other preprocessing layers: 
+\code{\link{get_vocabulary}()},
 \code{\link{layer_center_crop}()},
 \code{\link{layer_discretization}()},
+\code{\link{layer_hashed_crossing}()},
 \code{\link{layer_hashing}()},
 \code{\link{layer_integer_lookup}()},
 \code{\link{layer_normalization}()},
@@ -77,15 +106,11 @@ Other preprocessing layers:
 \code{\link{layer_random_contrast}()},
 \code{\link{layer_random_crop}()},
 \code{\link{layer_random_flip}()},
-\code{\link{layer_random_height}()},
 \code{\link{layer_random_rotation}()},
 \code{\link{layer_random_translation}()},
-\code{\link{layer_random_width}()},
 \code{\link{layer_random_zoom}()},
 \code{\link{layer_rescaling}()},
 \code{\link{layer_resizing}()},
-\code{\link{layer_string_lookup}()},
-\code{\link{layer_text_vectorization}()}
+\code{\link{layer_string_lookup}()}
 }
-\concept{categorical features preprocessing layers}
 \concept{preprocessing layers}

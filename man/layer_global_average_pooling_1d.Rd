@@ -6,46 +6,73 @@
 \usage{
 layer_global_average_pooling_1d(
   object,
-  data_format = "channels_last",
+  data_format = NULL,
   keepdims = FALSE,
   ...
 )
 }
 \arguments{
-\item{object}{What to compose the new \code{Layer} instance with. Typically a
-Sequential model or a Tensor (e.g., as returned by \code{layer_input()}).
-The return value depends on \code{object}. If \code{object} is:
-\itemize{
-\item missing or \code{NULL}, the \code{Layer} instance is returned.
-\item a \code{Sequential} model, the model with an additional layer is returned.
-\item a Tensor, the output tensor from \code{layer_instance(object)} is returned.
-}}
+\item{data_format}{string, either \code{"channels_last"} or \code{"channels_first"}.
+The ordering of the dimensions in the inputs. \code{"channels_last"}
+corresponds to inputs with shape \verb{(batch, steps, features)}
+while \code{"channels_first"} corresponds to inputs with shape
+\verb{(batch, features, steps)}. It defaults to the \code{image_data_format}
+value found in your Keras config file at \verb{~/.keras/keras.json}.
+If you never set it, then it will be \code{"channels_last"}.}
 
-\item{data_format}{One of \code{channels_last} (default) or \code{channels_first}.
-The ordering of the dimensions in the inputs.}
-
-\item{keepdims}{A boolean, whether to keep the spatial dimensions or not. If
-\code{keepdims} is \code{FALSE} (default), the rank of the tensor is reduced for
-spatial dimensions. If \code{keepdims} is \code{TRUE}, the spatial dimensions are
-retained with length 1. The behavior is the same as for \code{tf.reduce_mean} or
-\code{np.mean}.}
-
-\item{...}{standard layer arguments.}
+\item{keepdims}{A boolean, whether to keep the temporal dimension or not.
+If \code{keepdims} is \code{False} (default), the rank of the tensor is
+reduced for spatial dimensions. If \code{keepdims} is \code{True}, the
+temporal dimension are retained with length 1.
+The behavior is the same as for \code{tf.reduce_mean} or \code{np.mean}.}
 }
 \description{
 Global average pooling operation for temporal data.
 }
-\section{Input shape}{
-
-3D tensor with shape: \verb{(batch_size, steps, features)}.
+\section{Call Arguments}{
+inputs: A 3D tensor.
+mask: Binary tensor of shape \verb{(batch_size, steps)} indicating whether
+a given step should be masked (excluded from the average).
 }
 
-\section{Output shape}{
+\section{Input Shape}{
+\itemize{
+\item If \code{data_format='channels_last'}:
+3D tensor with shape:
+\verb{(batch_size, steps, features)}
+\item If \code{data_format='channels_first'}:
+3D tensor with shape:
+\verb{(batch_size, features, steps)}
+}
+}
 
-2D tensor with shape: \verb{(batch_size, channels)}
+\section{Output Shape}{
+\itemize{
+\item If \code{keepdims=False}:
+2D tensor with shape \verb{(batch_size, features)}.
+\item If \code{keepdims=True}:
+\itemize{
+\item If \code{data_format="channels_last"}:
+3D tensor with shape \verb{(batch_size, 1, features)}
+\item If \code{data_format="channels_first"}:
+3D tensor with shape \verb{(batch_size, features, 1)}
+}
+}
+}
+
+\section{Examples}{
+\if{html}{\out{<div class="sourceCode python">}}\preformatted{x = np.random.rand(2, 3, 4)
+y = keras_core.layers.GlobalAveragePooling1D()(x)
+y.shape
+# (2, 4)
+}\if{html}{\out{</div>}}
 }
 
 \seealso{
+\itemize{
+\item \url{https://www.tensorflow.org/api_docs/python/tf/keras/layers/GlobalAveragePooling1D}
+}
+
 Other pooling layers: 
 \code{\link{layer_average_pooling_1d}()},
 \code{\link{layer_average_pooling_2d}()},

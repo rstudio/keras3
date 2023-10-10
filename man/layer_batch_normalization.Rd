@@ -2,7 +2,7 @@
 % Please edit documentation in R/layers-normalization.R
 \name{layer_batch_normalization}
 \alias{layer_batch_normalization}
-\title{Layer that normalizes its inputs}
+\title{Layer that normalizes its inputs.}
 \usage{
 layer_batch_normalization(
   object,
@@ -19,26 +19,23 @@ layer_batch_normalization(
   gamma_regularizer = NULL,
   beta_constraint = NULL,
   gamma_constraint = NULL,
-  synchronized = FALSE,
   ...
 )
 }
 \arguments{
-\item{object}{Layer or model object}
-
-\item{axis}{Integer, the axis that should be normalized (typically the features
-axis). For instance, after a \code{Conv2D} layer with
-\code{data_format="channels_first"}, set \code{axis=1} in \code{BatchNormalization}.}
+\item{axis}{Integer, the axis that should be normalized
+(typically the features axis). For instance, after a \code{Conv2D} layer
+with \code{data_format="channels_first"}, use \code{axis=1}.}
 
 \item{momentum}{Momentum for the moving average.}
 
 \item{epsilon}{Small float added to variance to avoid dividing by zero.}
 
-\item{center}{If \code{TRUE}, add offset of \code{beta} to normalized tensor. If \code{FALSE},
-\code{beta} is ignored.}
+\item{center}{If \code{True}, add offset of \code{beta} to normalized tensor.
+If \code{False}, \code{beta} is ignored.}
 
-\item{scale}{If \code{TRUE}, multiply by \code{gamma}. If \code{FALSE}, \code{gamma} is not used. When
-the next layer is linear (also e.g. \code{nn.relu}), this can be disabled
+\item{scale}{If \code{True}, multiply by \code{gamma}. If \code{False}, \code{gamma} is not used.
+When the next layer is linear this can be disabled
 since the scaling will be done by the next layer.}
 
 \item{beta_initializer}{Initializer for the beta weight.}
@@ -57,18 +54,9 @@ since the scaling will be done by the next layer.}
 
 \item{gamma_constraint}{Optional constraint for the gamma weight.}
 
-\item{synchronized}{If \code{TRUE}, synchronizes the global batch statistics (mean and
-variance) for the layer across all devices at each training step in a
-distributed training strategy. If \code{FALSE}, each replica uses its own
-local batch statistics. Only relevant when used inside a
-\code{tf$distribute} strategy.}
-
-\item{...}{standard layer arguments.}
+\item{...}{Base layer keyword arguments (e.g. \code{name} and \code{dtype}).}
 }
 \description{
-Layer that normalizes its inputs
-}
-\details{
 Batch normalization applies a transformation that maintains the mean output
 close to 0 and the output standard deviation close to 1.
 
@@ -76,7 +64,7 @@ Importantly, batch normalization works differently during training and
 during inference.
 
 \strong{During training} (i.e. when using \code{fit()} or when calling the layer/model
-with the argument \code{training=TRUE}), the layer normalizes its output using
+with the argument \code{training=True}), the layer normalizes its output using
 the mean and standard deviation of the current batch of inputs. That is to
 say, for each channel being normalized, the layer returns
 \code{gamma * (batch - mean(batch)) / sqrt(var(batch) + epsilon) + beta}, where:
@@ -84,19 +72,19 @@ say, for each channel being normalized, the layer returns
 \item \code{epsilon} is small constant (configurable as part of the constructor
 arguments)
 \item \code{gamma} is a learned scaling factor (initialized as 1), which
-can be disabled by passing \code{scale=FALSE} to the constructor.
+can be disabled by passing \code{scale=False} to the constructor.
 \item \code{beta} is a learned offset factor (initialized as 0), which
-can be disabled by passing \code{center=FALSE} to the constructor.
+can be disabled by passing \code{center=False} to the constructor.
 }
 
 \strong{During inference} (i.e. when using \code{evaluate()} or \code{predict()} or when
-calling the layer/model with the argument \code{training=FALSE} (which is the
+calling the layer/model with the argument \code{training=False} (which is the
 default), the layer normalizes its output using a moving average of the
 mean and standard deviation of the batches it has seen during training. That
 is to say, it returns
 \code{gamma * (batch - self.moving_mean) / sqrt(self.moving_var+epsilon) + beta}.
 
-\code{self$moving_mean} and \code{self$moving_var} are non-trainable variables that
+\code{self.moving_mean} and \code{self.moving_var} are non-trainable variables that
 are updated each time the layer in called in training mode, as such:
 \itemize{
 \item \code{moving_mean = moving_mean * momentum + mean(batch) * (1 - momentum)}
@@ -107,27 +95,59 @@ As such, the layer will only normalize its inputs during inference
 \emph{after having been trained on data that has similar statistics as the
 inference data}.
 
-When \code{synchronized=TRUE} is set and if this layer is used within a
-\code{tf$distribute} strategy, there will be an \code{allreduce} call
-to aggregate batch statistics across all replicas at every
-training step. Setting \code{synchronized} has no impact when the model is
-trained without specifying any distribution strategy.
+\strong{About setting \code{layer.trainable = False} on a \code{BatchNormalization} layer:}
 
-Example usage:
+The meaning of setting \code{layer.trainable = False} is to freeze the layer,
+i.e. its internal state will not change during training:
+its trainable weights will not be updated
+during \code{fit()} or \code{train_on_batch()}, and its state updates will not be run.
 
-\if{html}{\out{<div class="sourceCode R">}}\preformatted{strategy <- tf$distribute$MirroredStrategy()
+Usually, this does not necessarily mean that the layer is run in inference
+mode (which is normally controlled by the \code{training} argument that can
+be passed when calling a layer). "Frozen state" and "inference mode"
+are two separate concepts.
 
-with(strategy$scope(), \{
-  model <- keras_model_sequential()
-  model \%>\%
-    layer_dense(16) \%>\%
-    layer_batch_normalization(synchronized=TRUE)
-\})
-}\if{html}{\out{</div>}}
+However, in the case of the \code{BatchNormalization} layer, \strong{setting
+\code{trainable = False} on the layer means that the layer will be
+subsequently run in inference mode} (meaning that it will use
+the moving mean and the moving variance to normalize the current batch,
+rather than using the mean and variance of the current batch).
+
+Note that:
+\itemize{
+\item Setting \code{trainable} on an model containing other layers will recursively
+set the \code{trainable} value of all inner layers.
+\item If the value of the \code{trainable} attribute is changed after calling
+\code{compile()} on a model, the new value doesn't take effect for this model
+until \code{compile()} is called again.
 }
+}
+\section{Call Arguments}{
+inputs: Input tensor (of any rank).
+training: Python boolean indicating whether the layer should behave in
+training mode or in inference mode.
+- \code{training=True}: The layer will normalize its inputs using
+the mean and variance of the current batch of inputs.
+- \code{training=False}: The layer will normalize its inputs using
+the mean and variance of its moving statistics, learned during
+training.
+}
+
+\section{Reference}{
+\itemize{
+\item \href{https://arxiv.org/abs/1502.03167}{Ioffe and Szegedy, 2015}.
+}
+}
+
 \seealso{
 \itemize{
 \item \url{https://www.tensorflow.org/api_docs/python/tf/keras/layers/BatchNormalization}
-\item \url{https://keras.io/api/layers}
 }
+
+Other normalization layers: 
+\code{\link{layer_group_normalization}()},
+\code{\link{layer_layer_normalization}()},
+\code{\link{layer_spectral_normalization}()},
+\code{\link{layer_unit_normalization}()}
 }
+\concept{normalization layers}

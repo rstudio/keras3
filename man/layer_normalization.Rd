@@ -2,7 +2,7 @@
 % Please edit documentation in R/layers-preprocessing.R
 \name{layer_normalization}
 \alias{layer_normalization}
-\title{A preprocessing layer which normalizes continuous features.}
+\title{A preprocessing layer that normalizes continuous features.}
 \usage{
 layer_normalization(
   object,
@@ -14,84 +14,114 @@ layer_normalization(
 )
 }
 \arguments{
-\item{object}{What to compose the new \code{Layer} instance with. Typically a
-Sequential model or a Tensor (e.g., as returned by \code{layer_input()}).
-The return value depends on \code{object}. If \code{object} is:
-\itemize{
-\item missing or \code{NULL}, the \code{Layer} instance is returned.
-\item a \code{Sequential} model, the model with an additional layer is returned.
-\item a Tensor, the output tensor from \code{layer_instance(object)} is returned.
-}}
-
-\item{axis}{Integer, list of integers, or NULL. The axis or axes that should
-have a separate mean and variance for each index in the shape. For
-example, if shape is \verb{(NULL, 5)} and \code{axis=1}, the layer will track 5
-separate mean and variance values for the last axis. If \code{axis} is set to
-\code{NULL}, the layer will normalize all elements in the input by a scalar
-mean and variance. Defaults to -1, where the last axis of the input is
-assumed to be a feature dimension and is normalized per index. Note that
-in the specific case of batched scalar inputs where the only axis is the
-batch axis, the default will normalize each index in the batch
-separately. In this case, consider passing \code{axis = NULL}.}
+\item{axis}{Integer, tuple of integers, or None. The axis or axes that should
+have a separate mean and variance for each index in the shape.
+For example, if shape is \verb{(None, 5)} and \code{axis=1}, the layer will
+track 5 separate mean and variance values for the last axis.
+If \code{axis} is set to \code{None}, the layer will normalize
+all elements in the input by a scalar mean and variance.
+When \code{-1}, the last axis of the input is assumed to be a
+feature dimension and is normalized per index.
+Note that in the specific case of batched scalar inputs where
+the only axis is the batch axis, the default will normalize
+each index in the batch separately.
+In this case, consider passing \code{axis=None}. Defaults to \code{-1}.}
 
 \item{mean}{The mean value(s) to use during normalization. The passed value(s)
-will be broadcast to the shape of the kept axes above; if the value(s)
-cannot be broadcast, an error will be raised when this layer's \code{build()}
-method is called.}
+will be broadcast to the shape of the kept axes above;
+if the value(s) cannot be broadcast, an error will be raised when
+this layer's \code{build()} method is called.}
 
 \item{variance}{The variance value(s) to use during normalization. The passed
-value(s) will be broadcast to the shape of the kept axes above; if the
-value(s) cannot be broadcast, an error will be raised when this layer's
-\code{build()} method is called.}
+value(s) will be broadcast to the shape of the kept axes above;
+if the value(s) cannot be broadcast, an error will be raised when
+this layer's \code{build()} method is called.}
 
-\item{invert}{If \code{TRUE}, this layer will apply the inverse transformation
+\item{invert}{If \code{True}, this layer will apply the inverse transformation
 to its inputs: it would turn a normalized input back into its
 original form.}
-
-\item{...}{standard layer arguments.}
 }
 \description{
-A preprocessing layer which normalizes continuous features.
-}
-\details{
-This layer will shift and scale inputs into a distribution centered around 0
-with standard deviation 1. It accomplishes this by precomputing the mean and
-variance of the data, and calling \code{(input - mean) / sqrt(var)} at runtime.
+This layer will shift and scale inputs into a distribution centered around
+0 with standard deviation 1. It accomplishes this by precomputing the mean
+and variance of the data, and calling \code{(input - mean) / sqrt(var)} at
+runtime.
 
 The mean and variance values for the layer must be either supplied on
 construction or learned via \code{adapt()}. \code{adapt()} will compute the mean and
 variance of the data and store them as the layer's weights. \code{adapt()} should
 be called before \code{fit()}, \code{evaluate()}, or \code{predict()}.
 }
-\seealso{
-\itemize{
-\item \code{\link[=adapt]{adapt()}}
-\item \url{https://www.tensorflow.org/api_docs/python/tf/keras/layers/Normalization}
-\item \url{https://keras.io/api/layers/preprocessing_layers/numerical/normalization}
+\section{Examples}{
+Calculate a global mean and variance by analyzing the dataset in \code{adapt()}.
+
+\if{html}{\out{<div class="sourceCode python">}}\preformatted{adapt_data = np.array([1., 2., 3., 4., 5.], dtype='float32')
+input_data = np.array([1., 2., 3.], dtype='float32')
+layer = keras_core.layers.Normalization(axis=None)
+layer.adapt(adapt_data)
+layer(input_data)
+# array([-1.4142135, -0.70710677, 0.], dtype=float32)
+}\if{html}{\out{</div>}}
+
+Calculate a mean and variance for each index on the last axis.
+
+\if{html}{\out{<div class="sourceCode python">}}\preformatted{adapt_data = np.array([[0., 7., 4.],
+                       [2., 9., 6.],
+                       [0., 7., 4.],
+                       [2., 9., 6.]], dtype='float32')
+input_data = np.array([[0., 7., 4.]], dtype='float32')
+layer = keras_core.layers.Normalization(axis=-1)
+layer.adapt(adapt_data)
+layer(input_data)
+# array([-1., -1., -1.], dtype=float32)
+}\if{html}{\out{</div>}}
+
+Pass the mean and variance directly.
+
+\if{html}{\out{<div class="sourceCode python">}}\preformatted{input_data = np.array([[1.], [2.], [3.]], dtype='float32')
+layer = keras_core.layers.Normalization(mean=3., variance=2.)
+layer(input_data)
+# array([[-1.4142135 ],
+#        [-0.70710677],
+#        [ 0.        ]], dtype=float32)
+}\if{html}{\out{</div>}}
+
+Use the layer to de-normalize inputs (after adapting the layer).
+
+\if{html}{\out{<div class="sourceCode python">}}\preformatted{adapt_data = np.array([[0., 7., 4.],
+                       [2., 9., 6.],
+                       [0., 7., 4.],
+                       [2., 9., 6.]], dtype='float32')
+input_data = np.array([[1., 2., 3.]], dtype='float32')
+layer = keras_core.layers.Normalization(axis=-1, invert=True)
+layer.adapt(adapt_data)
+layer(input_data)
+# array([2., 10., 8.], dtype=float32)
+}\if{html}{\out{</div>}}
 }
 
-Other numerical features preprocessing layers: 
-\code{\link{layer_discretization}()}
+\seealso{
+\itemize{
+\item \url{https://www.tensorflow.org/api_docs/python/tf/keras/layers/Normalization}
+}
 
 Other preprocessing layers: 
+\code{\link{get_vocabulary}()},
 \code{\link{layer_category_encoding}()},
 \code{\link{layer_center_crop}()},
 \code{\link{layer_discretization}()},
+\code{\link{layer_hashed_crossing}()},
 \code{\link{layer_hashing}()},
 \code{\link{layer_integer_lookup}()},
 \code{\link{layer_random_brightness}()},
 \code{\link{layer_random_contrast}()},
 \code{\link{layer_random_crop}()},
 \code{\link{layer_random_flip}()},
-\code{\link{layer_random_height}()},
 \code{\link{layer_random_rotation}()},
 \code{\link{layer_random_translation}()},
-\code{\link{layer_random_width}()},
 \code{\link{layer_random_zoom}()},
 \code{\link{layer_rescaling}()},
 \code{\link{layer_resizing}()},
-\code{\link{layer_string_lookup}()},
-\code{\link{layer_text_vectorization}()}
+\code{\link{layer_string_lookup}()}
 }
-\concept{numerical features preprocessing layers}
 \concept{preprocessing layers}
