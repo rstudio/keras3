@@ -221,7 +221,7 @@ get_layer_family <- function(layer) {
 
 # ---- r wrapper --------
 
-make_r_name <- function(endpoint, module) {
+make_r_name <- function(endpoint, module = py_eval(endpoint)$`__module__`) {
 
   x <- str_split_1(endpoint, fixed("."))
 
@@ -246,8 +246,9 @@ make_r_name <- function(endpoint, module) {
 
   # activation layers get a prefix (except for layer_activation())
   if(startsWith(name, "layer_") &&
-     str_detect(module, fixed(".activation.")))
-    name %<>% str_replace("^layer_(activation_)?", "layer_activation_")
+     str_detect(module, "\\.activations?\\.") &&
+     name != "layer_activation")
+    name %<>% str_replace("^layer_", "layer_activation_")
 
   name <- name |>
     replace_val("layer_activation_p_relu", "layer_activation_parametric_relu")

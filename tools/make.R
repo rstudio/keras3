@@ -198,6 +198,12 @@ x <- mk_export("keras.layers.PReLU")
 x
 
 
+# TODO:
+# layer_wrapper?
+# layer_torch_module_wrapper?
+# layer_time_distributed?
+# layer_tfsm_layer?
+
 
 make_r_fn("keras.layers.PReLU")
 
