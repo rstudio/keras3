@@ -1,0 +1,82 @@
+
+
+
+
+## If the key is a glob, then arg transformers are only added if the arg name
+## is present in the py_obj formals, UNLESS, the arg name starts with prefix "+",
+## in which case they are added even if not in formals ## (assumed to be valid in ...)
+##
+## If the key is not a glob, then args are added regardless of formals
+
+"*":
+  axis: as_axis
+  axes: as_axis
+  # output_mode: ~
+
+"keras.layers.*":
+  +input_shape: normalize_shape
+  +batch_size: as_integer
+  +batch_input_shape: normalize_shape
+
+"keras.layers.Conv*":
+  filters: as_integer
+  kernel_size:   as_integer_or_integer_tuple
+  dilation_rate: as_integer_or_integer_tuple
+  strides:       as_integer_or_integer_tuple
+
+"keras.layers.*Pooling?D":
+  pool_size: as_integer
+  strides: as_integer
+
+keras.layers.Hashing:
+  num_bins: as_integer
+  salt: as_integer
+
+keras.layers.Input:
+  shape: normalize_shape
+
+keras.layers.Permute:
+  dims: tuple(as.list(as_integer(x)))
+
+keras.layers.CategoryEncoding:
+  num_tokens: as_integer
+
+keras.layers.Embedding:
+  input_length: as_integer
+
+keras.layers.MultiHeadAttention:
+  num_heads: as_integer
+  key_dim: as_integer
+  value_dim: as_integer
+  attention_axes: as_integer # Keras 3: as_nullable_axis
+
+keras.layers.AlphaDropout:
+  seed: as_integer
+
+keras.layers.Reshape:
+  target_shape: as_integer
+
+keras.layers.TextVectorization:
+   max_tokens:             as_integer
+   output_sequence_length: as_integer
+   ngrams: if(length(x) > 1) as_integer_or_integer_tuple(x) else as_integer(x)
+
+
+# in keras 3 we'll make these 1 based
+# in keras 2, keep them 0 based
+keras.layers.Concatenate:
+  axis: as_integer
+
+keras.layers.Dot:
+  axes: as_integer
+
+keras.layers.LayerNormalization:
+  axis: as_integer
+
+keras.layers.Softmax:
+  axis: as_integer
+
+keras.layers.PReLU:
+  shared_axes: as.list(as_integer(x))
+
+
