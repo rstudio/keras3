@@ -161,7 +161,7 @@ df |>
       }
 
 
-    file <- grp$file
+    file <- paste0("R/", grp$file)
     # if (grp$endpoint_sans_name == "layers") {
     #   file <- "R/layers.R"
     #   unlink(file)
