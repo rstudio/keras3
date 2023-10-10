@@ -43,6 +43,8 @@ tidy_section_headings <- known_section_headings |>
 
 split_docstring_into_sections <- function(docstring) {
 
+  if(is.null(docstring))
+    return(NULL)
   assert_that(docstring |> is_string()) %error% browser()
 
   docstring <- docstring |>
@@ -223,6 +225,8 @@ get_layer_family <- function(layer) {
 
 make_r_name <- function(endpoint, module = py_eval(endpoint)$`__module__`) {
 
+  if(endpoint |> startsWith("keras.ops."))
+    endpoint %<>% str_replace(fixed("keras.ops."), "keras.k.")
   x <- str_split_1(endpoint, fixed("."))
 
   name <- x[length(x)]
@@ -327,7 +331,9 @@ make_r_fn <- function(endpoint,
 make_r_fn.default <- function(endpoint, py_obj, transformers) {
   # transformers <- get_arg_transformers(py_obj)
   # if(py_is(py_obj, keras$losses$BinaryCrossentropy)) browser()
-  py_obj_expr <- str2lang(gsub(".", "$", endpoint, fixed = TRUE))
+  py_obj_expr <- endpoint %>% str_split_1(fixed(".")) %>%
+    glue::backtick() %>% str_flatten("$") %>% str2lang()
+    # str2lang(gsub(".", "$", endpoint, fixed = TRUE))
 
   if (!length(transformers))
     transformers <- NULL
@@ -425,7 +431,8 @@ mk_export <- function(endpoint) {
   py_obj <- py_eval(endpoint)
   name <- py_obj$`__name__`
   module <- py_obj$`__module__`
-  docstring <- py_obj$`__doc__` |> trim()
+  # browser()
+  docstring <- trim(py_obj$`__doc__` %||% "")
   type <- keras_class_type(py_obj)
 
   doc <- split_docstring_into_sections(docstring)
@@ -438,7 +445,7 @@ mk_export <- function(endpoint) {
   # r wrapper parts
   arg_transformers <- get_arg_transformers(endpoint, py_obj, params)
   r_fn <- make_r_fn(endpoint, py_obj, type, arg_transformers)
-
+#
   # fixes for special cases
   if (endpoint == "keras.layers.Lambda") {
     names(formals(r_fn)) %<>% replace_val("function", "f")

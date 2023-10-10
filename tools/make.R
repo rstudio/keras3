@@ -13,6 +13,7 @@ endpoints <- str_c("keras.", c(
   "initializers",
   "datasets",
   "layers",
+  "ops",
   # "losses",
   # "metrics",
   "optimizers"
@@ -116,7 +117,7 @@ df <-
 
 df |>
   mutate(endpoint_sans_name = str_extract(endpoint, "keras\\.(.*)\\.[^.]+$", 1)) |>
-  filter(endpoint_sans_name == "layers") |>
+  filter(endpoint_sans_name %in% c("layers", "ops")) |> # , "activations"
   # select(endpoint, r_name, module, type) |>
   arrange(endpoint_sans_name, module, name) |>
   mutate(file = if_else(endpoint_sans_name == "layers",
@@ -189,7 +190,7 @@ map(xx, format)
   filter(!endpoint %in% "keras.Sequential.build") #|>
 
 
-
+# k_fft_2 vs k_fft2
 # start w/ the export endpoint, and augment it.
 
 
