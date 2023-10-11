@@ -183,6 +183,8 @@ fence_in_examples_w_prompt_prefix <- function(docstring) {
 make_roxygen_tags <- function(endpoint, py_obj, type) {
   if(type == "layer")
     family <- get_layer_family(py_obj)
+  else if (endpoint |> startsWith("keras.ops."))
+    family <- "ops"
   else
     family <- type
 
@@ -323,17 +325,26 @@ make_r_fn <- function(endpoint,
                       py_obj = py_eval(endpoint),
                       type = keras_class_type(py_obj),
                       transformers = get_arg_transformers(endpoint, py_obj, params = NULL)) {
+
+  # TODO: rename keras_class_type to keras_endpoint
+  if(endpoint |> startsWith("keras.ops.")) {
+    return(make_r_fn.op(endpoint, py_obj, transformers))
+  }
   switch(keras_class_type(py_obj),
          layer = make_r_fn.layer(endpoint, py_obj, transformers),
          make_r_fn.default(endpoint, py_obj, transformers))
 }
 
+endpoint_to_expr <- function(endpoint) {
+  py_obj_expr <- endpoint |> str_split_1(fixed(".")) |>
+    glue::backtick() |> str_flatten("$") |> str2lang()
+  py_obj_expr
+}
+
 make_r_fn.default <- function(endpoint, py_obj, transformers) {
   # transformers <- get_arg_transformers(py_obj)
   # if(py_is(py_obj, keras$losses$BinaryCrossentropy)) browser()
-  py_obj_expr <- endpoint %>% str_split_1(fixed(".")) %>%
-    glue::backtick() %>% str_flatten("$") %>% str2lang()
-    # str2lang(gsub(".", "$", endpoint, fixed = TRUE))
+  py_obj_expr <- endpoint_to_expr(endpoint)
 
   if (!length(transformers))
     transformers <- NULL
@@ -342,6 +353,20 @@ make_r_fn.default <- function(endpoint, py_obj, transformers) {
     args <- capture_args2(.(transformers))
     do.call(.(py_obj_expr), args)
   })))
+}
+
+make_r_fn.op <- function(endpoint, py_obj, transformers) {
+  frmls <- formals(py_obj)
+  py_obj_expr <- endpoint_to_expr(endpoint)
+  syms <- lapply(names(frmls), as.symbol)
+  cl <- as.call(c(py_obj_expr, syms))
+  if(!length(transformers)) {
+    fn <- as.function.default(c(frmls, cl))
+  } else
+    fn <- make_r_fn.default(endpoint, py_obj, transformers)
+
+  fn
+
 }
 
 make_r_fn.layer <- function(endpoint, py_obj, transformers) {

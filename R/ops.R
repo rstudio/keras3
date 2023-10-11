@@ -37,14 +37,12 @@ r"-(Cast a tensor to the desired dtype.
 #' @param dtype The target type.
 #'
 #' @export
+#' @family ops
 #' @seealso
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/cast>
 k_cast <-
 function (x, dtype)
-{
-    args <- capture_args2(NULL)
-    do.call(keras$ops$cast, args)
-}
+keras$ops$cast(x, dtype)
 
 
 # keras$layers$cond
@@ -74,14 +72,12 @@ r"-(Conditionally applies `true_fn` or `false_fn`.
 #' @param false_fn Callable returning the output for the `pred == False` case.
 #'
 #' @export
+#' @family ops
 #' @seealso
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/cond>
 k_cond <-
 function (pred, true_fn, false_fn)
-{
-    args <- capture_args2(NULL)
-    do.call(keras$ops$cond, args)
-}
+keras$ops$cond(pred, true_fn, false_fn)
 
 
 # keras$layers$convert_to_numpy
@@ -107,14 +103,12 @@ r"-(Convert a tensor to a NumPy array.
 #' @param x A tensor.
 #'
 #' @export
+#' @family ops
 #' @seealso
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/convert_to_numpy>
 k_convert_to_numpy <-
 function (x)
-{
-    args <- capture_args2(NULL)
-    do.call(keras$ops$convert_to_numpy, args)
-}
+keras$ops$convert_to_numpy(x)
 
 
 # keras$layers$convert_to_tensor
@@ -153,14 +147,12 @@ r"-(Convert a NumPy array to a tensor.
 #' @param dtype The target type.
 #'
 #' @export
+#' @family ops
 #' @seealso
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/convert_to_tensor>
 k_convert_to_tensor <-
 function (x, dtype = NULL)
-{
-    args <- capture_args2(NULL)
-    do.call(keras$ops$convert_to_tensor, args)
-}
+keras$ops$convert_to_tensor(x, dtype)
 
 
 # keras$layers$fori_loop
@@ -215,14 +207,12 @@ r"-(For loop implementation.
 #' @param init_val The initial value of the loop state.
 #'
 #' @export
+#' @family ops
 #' @seealso
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/fori_loop>
 k_fori_loop <-
 function (lower, upper, body_fun, init_val)
-{
-    args <- capture_args2(NULL)
-    do.call(keras$ops$fori_loop, args)
-}
+keras$ops$fori_loop(lower, upper, body_fun, init_val)
 
 
 # keras$layers$scatter
@@ -280,14 +270,12 @@ r"-(Returns a tensor of shape `shape` where `indices` are set to `values`.
 #' @param shape Shape of the output tensor.
 #'
 #' @export
+#' @family ops
 #' @seealso
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/scatter>
 k_scatter <-
 function (indices, values, shape)
-{
-    args <- capture_args2(NULL)
-    do.call(keras$ops$scatter, args)
-}
+keras$ops$scatter(indices, values, shape)
 
 
 # keras$layers$scatter_update
@@ -386,14 +374,12 @@ r"-(Update inputs via updates at scattered (sparse) indices.
 #' @param updates A tensor, the new values to be put to `inputs` at `indices`.
 #'
 #' @export
+#' @family ops
 #' @seealso
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/scatter_update>
 k_scatter_update <-
 function (inputs, indices, updates)
-{
-    args <- capture_args2(NULL)
-    do.call(keras$ops$scatter_update, args)
-}
+keras$ops$scatter_update(inputs, indices, updates)
 
 
 # keras$layers$shape
@@ -443,14 +429,12 @@ r"-(Gets the shape of the tensor input.
 #' the input tensor.
 #'
 #' @export
+#' @family ops
 #' @seealso
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/shape>
 k_shape <-
 function (x)
-{
-    args <- capture_args2(NULL)
-    do.call(keras$ops$shape, args)
-}
+keras$ops$shape(x)
 
 
 # keras$layers$slice
@@ -507,14 +491,12 @@ r"-(Return a slice of an input tensor.
 #' @param shape The full shape of the returned slice.
 #'
 #' @export
+#' @family ops
 #' @seealso
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/slice>
 k_slice <-
 function (inputs, start_indices, shape)
-{
-    args <- capture_args2(NULL)
-    do.call(keras$ops$slice, args)
-}
+keras$ops$slice(inputs, start_indices, shape)
 
 
 # keras$layers$slice_update
@@ -581,14 +563,12 @@ r"-(Update an input by slicing in a tensor of updated values.
 #'     `updates` must have the same rank as `inputs`.
 #'
 #' @export
+#' @family ops
 #' @seealso
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/slice_update>
 k_slice_update <-
 function (inputs, start_indices, updates)
-{
-    args <- capture_args2(NULL)
-    do.call(keras$ops$slice_update, args)
-}
+keras$ops$slice_update(inputs, start_indices, updates)
 
 
 # keras$layers$stop_gradient
@@ -633,14 +613,12 @@ r"-(Stops gradient computation.
 #' computation is to be disabled.
 #'
 #' @export
+#' @family ops
 #' @seealso
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/stop_gradient>
 k_stop_gradient <-
 function (variable)
-{
-    args <- capture_args2(NULL)
-    do.call(keras$ops$stop_gradient, args)
-}
+keras$ops$stop_gradient(variable)
 
 
 # keras$layers$unstack
@@ -685,6 +663,7 @@ r"-(Unpacks the given dimension of a rank-R tensor into rank-(R-1) tensors.
 #' @param axis The axis along which to unpack.
 #'
 #' @export
+#' @family ops
 #' @seealso
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/unstack>
 k_unstack <-
@@ -753,14 +732,12 @@ r"-(While loop implementation.
 #'     no greater than `maximum_iterations`.
 #'
 #' @export
+#' @family ops
 #' @seealso
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/while_loop>
 k_while_loop <-
 function (cond, body, loop_vars, maximum_iterations = NULL)
-{
-    args <- capture_args2(NULL)
-    do.call(keras$ops$while_loop, args)
-}
+keras$ops$while_loop(cond, body, loop_vars, maximum_iterations)
 
 
 # keras$layers$extract_sequences
@@ -822,6 +799,7 @@ r"-(Expands the dimension of last axis into sequences of `sequence_length`.
 #' @param sequence_stride An integer representing the sequences hop size.
 #'
 #' @export
+#' @family ops
 #' @seealso
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/extract_sequences>
 k_extract_sequences <-
@@ -879,14 +857,12 @@ r"-(Computes the Fast Fourier Transform along last axis of input.
 #' tensors in the tuple should be of floating type.
 #'
 #' @export
+#' @family ops
 #' @seealso
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/fft>
 k_fft <-
 function (x)
-{
-    args <- capture_args2(NULL)
-    do.call(keras$ops$fft, args)
-}
+keras$ops$fft(x)
 
 
 # keras$layers$fft2
@@ -939,14 +915,12 @@ r"-(Computes the 2D Fast Fourier Transform along the last two axes of input.
 #' tensors in the tuple should be of floating type.
 #'
 #' @export
+#' @family ops
 #' @seealso
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/fft2>
 k_fft_2 <-
 function (x)
-{
-    args <- capture_args2(NULL)
-    do.call(keras$ops$fft2, args)
-}
+keras$ops$fft2(x)
 
 
 # keras$layers$in_top_k
@@ -999,6 +973,7 @@ r"-(Checks if the targets are in the top-k predictions.
 #' @param k An integer representing the number of predictions to consider.
 #'
 #' @export
+#' @family ops
 #' @seealso
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/in_top_k>
 k_in_top_k <-
@@ -1092,6 +1067,7 @@ r"-(Inverse real-valued Fast Fourier transform along the last axis.
 #'     Defaults to `None`.
 #'
 #' @export
+#' @family ops
 #' @seealso
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/irfft>
 k_irfft <-
@@ -1175,6 +1151,7 @@ r"-(Inverse Short-Time Fourier Transform along the last axis of the input.
 #'     is centered at time `t * sequence_stride`. Defaults to `True`.
 #'
 #' @export
+#' @family ops
 #' @seealso
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/istft>
 k_istft <-
@@ -1236,6 +1213,7 @@ r"-(Computes the logarithm of sum of exponentials of elements in a tensor.
 #'     the input tensor when computing the sum. Defaults to`False`.
 #'
 #' @export
+#' @family ops
 #' @seealso
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/logsumexp>
 k_logsumexp <-
@@ -1298,14 +1276,12 @@ r"-(Computes the QR decomposition of a tensor.
 #'     - 'complete': Returns the complete QR decomposition.
 #'
 #' @export
+#' @family ops
 #' @seealso
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/qr>
 k_qr <-
 function (x, mode = "reduced")
-{
-    args <- capture_args2(NULL)
-    do.call(keras$ops$qr, args)
-}
+keras$ops$qr(x, mode)
 
 
 # keras$layers$rfft
@@ -1383,6 +1359,7 @@ r"-(Real-valued Fast Fourier Transform along the last axis of the input.
 #'     Defaults to `None`.
 #'
 #' @export
+#' @family ops
 #' @seealso
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/rfft>
 k_rfft <-
@@ -1400,17 +1377,13 @@ r"-()-"
 
 # keras_core.src.ops.math.rsqrt
 #'
-#' @description
-#'
 #' @export
+#' @family ops
 #' @seealso
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/rsqrt>
 k_rsqrt <-
 function (x)
-{
-    args <- capture_args2(NULL)
-    do.call(keras$ops$rsqrt, args)
-}
+keras$ops$rsqrt(x)
 
 
 # keras$layers$segment_max
@@ -1469,6 +1442,7 @@ r"-(Computes the max of segments in a tensor.
 #'     Defaults to`False`.
 #'
 #' @export
+#' @family ops
 #' @seealso
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/segment_max>
 k_segment_max <-
@@ -1535,6 +1509,7 @@ r"-(Computes the sum of segments in a tensor.
 #'     Defaults to`False`.
 #'
 #' @export
+#' @family ops
 #' @seealso
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/segment_sum>
 k_segment_sum <-
@@ -1622,6 +1597,7 @@ r"-(Short-Time Fourier Transform along the last axis of the input.
 #'     begins at time `t * sequence_stride`. Defaults to `True`.
 #'
 #' @export
+#' @family ops
 #' @seealso
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/stft>
 k_stft <-
@@ -1687,6 +1663,7 @@ r"-(Finds the top-k values and their indices in a tensor.
 #' descending order. Defaults to`True`.
 #'
 #' @export
+#' @family ops
 #' @seealso
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/top_k>
 k_top_k <-
@@ -1768,6 +1745,7 @@ r"-(Average pooling operation.
 #'     `(batch_size, channels, ...)`.
 #'
 #' @export
+#' @family ops
 #' @seealso
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/average_pool>
 k_average_pool <-
@@ -1848,14 +1826,12 @@ r"-(Computes binary cross-entropy loss between target and output tensor.
 #'     Defaults to`False`.
 #'
 #' @export
+#' @family ops
 #' @seealso
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/binary_crossentropy>
 k_binary_crossentropy <-
 function (target, output, from_logits = FALSE)
-{
-    args <- capture_args2(NULL)
-    do.call(keras$ops$binary_crossentropy, args)
-}
+keras$ops$binary_crossentropy(target, output, from_logits)
 
 
 # keras$layers$categorical_crossentropy
@@ -1947,6 +1923,7 @@ r"-(Computes categorical cross-entropy loss between target and output tensor.
 #'     the tensors.
 #'
 #' @export
+#' @family ops
 #' @seealso
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/categorical_crossentropy>
 k_categorical_crossentropy <-
@@ -2035,6 +2012,7 @@ r"-(General N-D convolution.
 #'     the same `dilation_rate`.
 #'
 #' @export
+#' @family ops
 #' @seealso
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/conv>
 k_conv <-
@@ -2138,6 +2116,7 @@ r"-(General N-D convolution transpose.
 #'     the same `dilation_rate`.
 #'
 #' @export
+#' @family ops
 #' @seealso
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/conv_transpose>
 k_conv_transpose <-
@@ -2228,6 +2207,7 @@ r"-(General N-D depthwise convolution.
 #'     the same `dilation_rate`.
 #'
 #' @export
+#' @family ops
 #' @seealso
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/depthwise_conv>
 k_depthwise_conv <-
@@ -2287,14 +2267,12 @@ r"-(Exponential Linear Unit activation function.
 #' @param alpha A scalar, slope of positive section. Defaults to `1.0`.
 #'
 #' @export
+#' @family ops
 #' @seealso
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/elu>
 k_elu <-
 function (x, alpha = 1)
-{
-    args <- capture_args2(NULL)
-    do.call(keras$ops$elu, args)
-}
+keras$ops$elu(x, alpha)
 
 
 # keras$layers$gelu
@@ -2351,14 +2329,12 @@ r"-(Gaussian Error Linear Unit (GELU) activation function.
 #' @param approximate Approximate version of GELU activation. Defaults to `True`.
 #'
 #' @export
+#' @family ops
 #' @seealso
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/gelu>
 k_gelu <-
 function (x, approximate = TRUE)
-{
-    args <- capture_args2(NULL)
-    do.call(keras$ops$gelu, args)
-}
+keras$ops$gelu(x, approximate)
 
 
 # keras$layers$hard_sigmoid
@@ -2407,14 +2383,12 @@ r"-(Hard sigmoid activation function.
 #' @param x Input tensor.
 #'
 #' @export
+#' @family ops
 #' @seealso
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/hard_sigmoid>
 k_hard_sigmoid <-
 function (x)
-{
-    args <- capture_args2(NULL)
-    do.call(keras$ops$hard_sigmoid, args)
-}
+keras$ops$hard_sigmoid(x)
 
 
 # keras$layers$leaky_relu
@@ -2467,14 +2441,12 @@ r"-(Leaky version of a Rectified Linear Unit activation function.
 #'     Defaults to `0.2`.
 #'
 #' @export
+#' @family ops
 #' @seealso
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/leaky_relu>
 k_leaky_relu <-
 function (x, negative_slope = 0.2)
-{
-    args <- capture_args2(NULL)
-    do.call(keras$ops$leaky_relu, args)
-}
+keras$ops$leaky_relu(x, negative_slope)
 
 
 # keras$layers$log_sigmoid
@@ -2517,14 +2489,12 @@ r"-(Logarithm of the sigmoid activation function.
 #' @param x Input tensor.
 #'
 #' @export
+#' @family ops
 #' @seealso
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/log_sigmoid>
 k_log_sigmoid <-
 function (x)
-{
-    args <- capture_args2(NULL)
-    do.call(keras$ops$log_sigmoid, args)
-}
+keras$ops$log_sigmoid(x)
 
 
 # keras$layers$log_softmax
@@ -2575,6 +2545,7 @@ r"-(Log-softmax activation function.
 #'     Defaults to `-1`.
 #'
 #' @export
+#' @family ops
 #' @seealso
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/log_softmax>
 k_log_softmax <-
@@ -2656,6 +2627,7 @@ r"-(Max pooling operation.
 #'     `(batch_size, channels, ...)`.
 #'
 #' @export
+#' @family ops
 #' @seealso
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/max_pool>
 k_max_pool <-
@@ -2717,6 +2689,7 @@ r"-(Calculates the mean and variance of `x`.
 #'     in the result as dimensions with size one.
 #'
 #' @export
+#' @family ops
 #' @seealso
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/moments>
 k_moments <-
@@ -2779,6 +2752,7 @@ r"-(Encodes integer labels as multi-hot vectors.
 #'     is backend's float type.
 #'
 #' @export
+#' @family ops
 #' @seealso
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/multi_hot>
 k_multi_hot <-
@@ -2859,6 +2833,7 @@ r"-(Converts integer tensor `x` into a one-hot tensor.
 #'     provided, it defaults to the default data type of the backend.
 #'
 #' @export
+#' @family ops
 #' @seealso
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/one_hot>
 k_one_hot <-
@@ -2908,14 +2883,12 @@ r"-(Rectified linear unit activation function.
 #' @param x Input tensor.
 #'
 #' @export
+#' @family ops
 #' @seealso
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/relu>
 k_relu <-
 function (x)
-{
-    args <- capture_args2(NULL)
-    do.call(keras$ops$relu, args)
-}
+keras$ops$relu(x)
 
 
 # keras$layers$relu6
@@ -2957,14 +2930,12 @@ r"-(Rectified linear unit activation function with upper bound of 6.
 #' @param x Input tensor.
 #'
 #' @export
+#' @family ops
 #' @seealso
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/relu6>
 k_relu_6 <-
 function (x)
-{
-    args <- capture_args2(NULL)
-    do.call(keras$ops$relu6, args)
-}
+keras$ops$relu6(x)
 
 
 # keras$layers$selu
@@ -3015,14 +2986,12 @@ r"-(Scaled Exponential Linear Unit (SELU) activation function.
 #' @param x Input tensor.
 #'
 #' @export
+#' @family ops
 #' @seealso
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/selu>
 k_selu <-
 function (x)
-{
-    args <- capture_args2(NULL)
-    do.call(keras$ops$selu, args)
-}
+keras$ops$selu(x)
 
 
 # keras$layers$separable_conv
@@ -3111,6 +3080,7 @@ r"-(General N-D separable convolution.
 #'     the same `dilation_rate`.
 #'
 #' @export
+#' @family ops
 #' @seealso
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/separable_conv>
 k_separable_conv <-
@@ -3162,14 +3132,12 @@ r"-(Sigmoid activation function.
 #' @param x Input tensor.
 #'
 #' @export
+#' @family ops
 #' @seealso
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/sigmoid>
 k_sigmoid <-
 function (x)
-{
-    args <- capture_args2(NULL)
-    do.call(keras$ops$sigmoid, args)
-}
+keras$ops$sigmoid(x)
 
 
 # keras$layers$silu
@@ -3218,14 +3186,12 @@ r"-(Sigmoid Linear Unit (SiLU) activation function, also known as Swish.
 #' @param x Input tensor.
 #'
 #' @export
+#' @family ops
 #' @seealso
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/silu>
 k_silu <-
 function (x)
-{
-    args <- capture_args2(NULL)
-    do.call(keras$ops$silu, args)
-}
+keras$ops$silu(x)
 
 
 # keras$layers$softmax
@@ -3286,6 +3252,7 @@ r"-(Softmax activation function.
 #' @param axis Integer, axis along which the softmax is applied.
 #'
 #' @export
+#' @family ops
 #' @seealso
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/softmax>
 k_softmax <-
@@ -3338,14 +3305,12 @@ r"-(Softplus activation function.
 #' @param x Input tensor.
 #'
 #' @export
+#' @family ops
 #' @seealso
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/softplus>
 k_softplus <-
 function (x)
-{
-    args <- capture_args2(NULL)
-    do.call(keras$ops$softplus, args)
-}
+keras$ops$softplus(x)
 
 
 # keras$layers$softsign
@@ -3388,14 +3353,12 @@ r"-(Softsign activation function.
 #' @param x Input tensor.
 #'
 #' @export
+#' @family ops
 #' @seealso
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/softsign>
 k_softsign <-
 function (x)
-{
-    args <- capture_args2(NULL)
-    do.call(keras$ops$softsign, args)
-}
+keras$ops$softsign(x)
 
 
 # keras$layers$sparse_categorical_crossentropy
@@ -3483,6 +3446,7 @@ r"-(Computes sparse categorical cross-entropy loss.
 #'     of the tensors.
 #'
 #' @export
+#' @family ops
 #' @seealso
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/sparse_categorical_crossentropy>
 k_sparse_categorical_crossentropy <-
@@ -3501,17 +3465,13 @@ r"-(Shorthand for `keras_core.ops.absolute`.)-"
 # keras_core.src.ops.numpy.abs
 #' Shorthand for `keras_core.ops.absolute`.
 #'
-#' @description
-#'
 #' @export
+#' @family ops
 #' @seealso
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/abs>
 k_abs <-
 function (x)
-{
-    args <- capture_args2(NULL)
-    do.call(keras$ops$abs, args)
-}
+keras$ops$abs(x)
 
 
 # keras$layers$absolute
@@ -3553,14 +3513,12 @@ r"-(Compute the absolute value element-wise.
 #' @param x Input tensor.
 #'
 #' @export
+#' @family ops
 #' @seealso
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/absolute>
 k_absolute <-
 function (x)
-{
-    args <- capture_args2(NULL)
-    do.call(keras$ops$absolute, args)
-}
+keras$ops$absolute(x)
 
 
 # keras$layers$add
@@ -3624,14 +3582,12 @@ r"-(Add arguments element-wise.
 #' @param x2 Second input tensor.
 #'
 #' @export
+#' @family ops
 #' @seealso
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/add>
 k_add <-
 function (x1, x2)
-{
-    args <- capture_args2(NULL)
-    do.call(keras$ops$add, args)
-}
+keras$ops$add(x1, x2)
 
 
 # keras$layers$all
@@ -3707,6 +3663,7 @@ r"-(Test whether all array elements along a given axis evaluate to `True`.
 #'     broadcast correctly against the input array. Defaults to`False`.
 #'
 #' @export
+#' @family ops
 #' @seealso
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/all>
 k_all <-
@@ -3790,6 +3747,7 @@ r"-(Returns the maximum of an array or maximum value along an axis.
 #'     input tensor. Defaults to `False`.
 #'
 #' @export
+#' @family ops
 #' @seealso
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/amax>
 k_amax <-
@@ -3873,6 +3831,7 @@ r"-(Returns the minimum of an array or minimum value along an axis.
 #'     input tensor. Defaults to `False`.
 #'
 #' @export
+#' @family ops
 #' @seealso
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/amin>
 k_amin <-
@@ -3956,6 +3915,7 @@ r"-(Test whether any array element along a given axis evaluates to `True`.
 #'     broadcast correctly against the input array. Defaults to`False`.
 #'
 #' @export
+#' @family ops
 #' @seealso
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/any>
 k_any <-
@@ -4039,6 +3999,7 @@ r"-(Append tensor `x2` to the end of tensor `x1`.
 #'     If `None`, both tensors are flattened before use.
 #'
 #' @export
+#' @family ops
 #' @seealso
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/append>
 k_append <-
@@ -4151,6 +4112,7 @@ r"-(Return evenly spaced values within a given interval.
 #'     data type from the other input arguments.
 #'
 #' @export
+#' @family ops
 #' @seealso
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/arange>
 k_arange <-
@@ -4202,14 +4164,12 @@ r"-(Trigonometric inverse cosine, element-wise.
 #' @param x Input tensor.
 #'
 #' @export
+#' @family ops
 #' @seealso
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/arccos>
 k_arccos <-
 function (x)
-{
-    args <- capture_args2(NULL)
-    do.call(keras$ops$arccos, args)
-}
+keras$ops$arccos(x)
 
 
 # keras$layers$arccosh
@@ -4247,14 +4207,12 @@ r"-(Inverse hyperbolic cosine, element-wise.
 #' @param x Input tensor.
 #'
 #' @export
+#' @family ops
 #' @seealso
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/arccosh>
 k_arccosh <-
 function (x)
-{
-    args <- capture_args2(NULL)
-    do.call(keras$ops$arccosh, args)
-}
+keras$ops$arccosh(x)
 
 
 # keras$layers$arcsin
@@ -4294,14 +4252,12 @@ r"-(Inverse sine, element-wise.
 #' @param x Input tensor.
 #'
 #' @export
+#' @family ops
 #' @seealso
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/arcsin>
 k_arcsin <-
 function (x)
-{
-    args <- capture_args2(NULL)
-    do.call(keras$ops$arcsin, args)
-}
+keras$ops$arcsin(x)
 
 
 # keras$layers$arcsinh
@@ -4339,14 +4295,12 @@ r"-(Inverse hyperbolic sine, element-wise.
 #' @param x Input tensor.
 #'
 #' @export
+#' @family ops
 #' @seealso
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/arcsinh>
 k_arcsinh <-
 function (x)
-{
-    args <- capture_args2(NULL)
-    do.call(keras$ops$arcsinh, args)
-}
+keras$ops$arcsinh(x)
 
 
 # keras$layers$arctan
@@ -4386,14 +4340,12 @@ r"-(Trigonometric inverse tangent, element-wise.
 #' @param x Input tensor.
 #'
 #' @export
+#' @family ops
 #' @seealso
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/arctan>
 k_arctan <-
 function (x)
-{
-    args <- capture_args2(NULL)
-    do.call(keras$ops$arctan, args)
-}
+keras$ops$arctan(x)
 
 
 # keras$layers$arctan2
@@ -4480,14 +4432,12 @@ r"-(Element-wise arc tangent of `x1/x2` choosing the quadrant correctly.
 #' @param x2 Second input tensor.
 #'
 #' @export
+#' @family ops
 #' @seealso
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/arctan2>
 k_arctan_2 <-
 function (x1, x2)
-{
-    args <- capture_args2(NULL)
-    do.call(keras$ops$arctan2, args)
-}
+keras$ops$arctan2(x1, x2)
 
 
 # keras$layers$arctanh
@@ -4513,14 +4463,12 @@ r"-(Inverse hyperbolic tangent, element-wise.
 #' @param x Input tensor.
 #'
 #' @export
+#' @family ops
 #' @seealso
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/arctanh>
 k_arctanh <-
 function (x)
-{
-    args <- capture_args2(NULL)
-    do.call(keras$ops$arctanh, args)
-}
+keras$ops$arctanh(x)
 
 
 # keras$layers$argmax
@@ -4578,6 +4526,7 @@ r"-(Returns the indices of the maximum values along an axis.
 #'     along the specified axis.
 #'
 #' @export
+#' @family ops
 #' @seealso
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/argmax>
 k_argmax <-
@@ -4643,6 +4592,7 @@ r"-(Returns the indices of the minium values along an axis.
 #'     along the specified axis.
 #'
 #' @export
+#' @family ops
 #' @seealso
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/argmin>
 k_argmin <-
@@ -4726,6 +4676,7 @@ r"-(Returns the indices that would sort a tensor.
 #'     `None`, the flattened tensor is used.
 #'
 #' @export
+#' @family ops
 #' @seealso
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/argsort>
 k_argsort <-
@@ -4779,14 +4730,12 @@ r"-(Create a tensor.
 #' @param dtype The desired data-type for the tensor.
 #'
 #' @export
+#' @family ops
 #' @seealso
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/array>
 k_array <-
 function (x, dtype = NULL)
-{
-    args <- capture_args2(NULL)
-    do.call(keras$ops$array, args)
-}
+keras$ops$array(x, dtype)
 
 
 # keras$layers$average
@@ -4902,6 +4851,7 @@ r"-(Compute the weighted average along the specified axis.
 #'     The only constraint on weights is that `sum(weights)` must not be 0.
 #'
 #' @export
+#' @family ops
 #' @seealso
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/average>
 k_average <-
@@ -4989,6 +4939,7 @@ r"-(Count the number of occurrences of each value in a tensor of integers.
 #'     `max(x)` is set to 0.
 #'
 #' @export
+#' @family ops
 #' @seealso
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/bincount>
 k_bincount <-
@@ -5042,6 +4993,7 @@ r"-(Broadcast a tensor to a new shape.
 #'     interpreted as `(i,)`.
 #'
 #' @export
+#' @family ops
 #' @seealso
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/broadcast_to>
 k_broadcast_to <-
@@ -5080,14 +5032,12 @@ r"-(Return the ceiling of the input, element-wise.
 #' @param x Input tensor.
 #'
 #' @export
+#' @family ops
 #' @seealso
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/ceil>
 k_ceil <-
 function (x)
-{
-    args <- capture_args2(NULL)
-    do.call(keras$ops$ceil, args)
-}
+keras$ops$ceil(x)
 
 
 # keras$layers$clip
@@ -5123,14 +5073,12 @@ r"-(Clip (limit) the values in a tensor.
 #' @param x_max Maximum value.
 #'
 #' @export
+#' @family ops
 #' @seealso
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/clip>
 k_clip <-
 function (x, x_min, x_max)
-{
-    args <- capture_args2(NULL)
-    do.call(keras$ops$clip, args)
-}
+keras$ops$clip(x, x_min, x_max)
 
 
 # keras$layers$concatenate
@@ -5158,6 +5106,7 @@ r"-(Join a sequence of tensors along an existing axis.
 #' @param axis The axis along which the tensors will be joined. Defaults to `0`.
 #'
 #' @export
+#' @family ops
 #' @seealso
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/concatenate>
 k_concatenate <-
@@ -5176,17 +5125,13 @@ r"-(Shorthand for `keras_core.ops.conjugate`.)-"
 # keras_core.src.ops.numpy.conj
 #' Shorthand for `keras_core.ops.conjugate`.
 #'
-#' @description
-#'
 #' @export
+#' @family ops
 #' @seealso
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/conj>
 k_conj <-
 function (x)
-{
-    args <- capture_args2(NULL)
-    do.call(keras$ops$conj, args)
-}
+keras$ops$conj(x)
 
 
 # keras$layers$conjugate
@@ -5221,14 +5166,12 @@ r"-(Returns the complex conjugate, element-wise.
 #' @param x Input tensor.
 #'
 #' @export
+#' @family ops
 #' @seealso
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/conjugate>
 k_conjugate <-
 function (x)
-{
-    args <- capture_args2(NULL)
-    do.call(keras$ops$conjugate, args)
-}
+keras$ops$conjugate(x)
 
 
 # keras$layers$copy
@@ -5254,14 +5197,12 @@ r"-(Returns a copy of `x`.
 #' @param x Input tensor.
 #'
 #' @export
+#' @family ops
 #' @seealso
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/copy>
 k_copy <-
 function (x)
-{
-    args <- capture_args2(NULL)
-    do.call(keras$ops$copy, args)
-}
+keras$ops$copy(x)
 
 
 # keras$layers$cos
@@ -5287,14 +5228,12 @@ r"-(Cosine, element-wise.
 #' @param x Input tensor.
 #'
 #' @export
+#' @family ops
 #' @seealso
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/cos>
 k_cos <-
 function (x)
-{
-    args <- capture_args2(NULL)
-    do.call(keras$ops$cos, args)
-}
+keras$ops$cos(x)
 
 
 # keras$layers$cosh
@@ -5320,14 +5259,12 @@ r"-(Hyperbolic cosine, element-wise.
 #' @param x Input tensor.
 #'
 #' @export
+#' @family ops
 #' @seealso
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/cosh>
 k_cosh <-
 function (x)
-{
-    args <- capture_args2(NULL)
-    do.call(keras$ops$cosh, args)
-}
+keras$ops$cosh(x)
 
 
 # keras$layers$count_nonzero
@@ -5380,6 +5317,7 @@ r"-(Counts the number of non-zero values in `x` along the given `axis`.
 #'     non-zeros. Defaults to `None`.
 #'
 #' @export
+#' @family ops
 #' @seealso
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/count_nonzero>
 k_count_nonzero <-
@@ -5462,6 +5400,7 @@ r"-(Returns the cross product of two (arrays of) vectors.
 #'     arguments `axisa`, `axisb` and `axisc`. Use `axis` instead.
 #'
 #' @export
+#' @family ops
 #' @seealso
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/cross>
 k_cross <-
@@ -5500,6 +5439,7 @@ r"-(Return the cumulative product of elements along a given axis.
 #'     By default the input is flattened.
 #'
 #' @export
+#' @family ops
 #' @seealso
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/cumprod>
 k_cumprod <-
@@ -5537,6 +5477,7 @@ r"-(Returns the cumulative sum of elements along a given axis.
 #'     By default the input is flattened.
 #'
 #' @export
+#' @family ops
 #' @seealso
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/cumsum>
 k_cumsum <-
@@ -5624,6 +5565,7 @@ r"-(Extract a diagonal or construct a diagonal array.
 #'     the main diagonal.
 #'
 #' @export
+#' @family ops
 #' @seealso
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/diag>
 k_diag <-
@@ -5736,6 +5678,7 @@ r"-(Return specified diagonals.
 #'     Defaults to `1` (second axis).
 #'
 #' @export
+#' @family ops
 #' @seealso
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/diagonal>
 k_diagonal <-
@@ -5788,14 +5731,12 @@ r"-(Returns the indices of the bins to which each value in `x` belongs.
 #'     increasing.
 #'
 #' @export
+#' @family ops
 #' @seealso
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/digitize>
 k_digitize <-
 function (x, bins)
-{
-    args <- capture_args2(NULL)
-    do.call(keras$ops$digitize, args)
-}
+keras$ops$digitize(x, bins)
 
 
 # keras$layers$divide
@@ -5826,14 +5767,12 @@ r"-(Divide arguments element-wise.
 #' @param x2 Second input tensor.
 #'
 #' @export
+#' @family ops
 #' @seealso
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/divide>
 k_divide <-
 function (x1, x2)
-{
-    args <- capture_args2(NULL)
-    do.call(keras$ops$divide, args)
-}
+keras$ops$divide(x1, x2)
 
 
 # keras$layers$dot
@@ -5886,14 +5825,12 @@ r"-(Dot product of two tensors.
 #'     Torch backend does not accept 0-D tensors as arguments.
 #'
 #' @export
+#' @family ops
 #' @seealso
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/dot>
 k_dot <-
 function (x1, x2)
-{
-    args <- capture_args2(NULL)
-    do.call(keras$ops$dot, args)
-}
+keras$ops$dot(x1, x2)
 
 
 # keras$layers$einsum
@@ -6081,14 +6018,12 @@ r"-(Evaluates the Einstein summation convention on the operands.
 #' @param operands The operands to compute the Einstein sum of.
 #'
 #' @export
+#' @family ops
 #' @seealso
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/einsum>
 k_einsum <-
 function (subscripts, ...)
-{
-    args <- capture_args2(NULL)
-    do.call(keras$ops$einsum, args)
-}
+keras$ops$einsum(subscripts, ...)
 
 
 # keras$layers$empty
@@ -6116,14 +6051,12 @@ r"-(Return a tensor of given shape and type filled with uninitialized data.
 #' @param dtype Desired data type of the empty tensor.
 #'
 #' @export
+#' @family ops
 #' @seealso
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/empty>
 k_empty <-
 function (shape, dtype = "float32")
-{
-    args <- capture_args2(NULL)
-    do.call(keras$ops$empty, args)
-}
+keras$ops$empty(shape, dtype)
 
 
 # keras$layers$equal
@@ -6151,14 +6084,12 @@ r"-(Returns `(x1 == x2)` element-wise.
 #' @param x2 Tensor to compare.
 #'
 #' @export
+#' @family ops
 #' @seealso
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/equal>
 k_equal <-
 function (x1, x2)
-{
-    args <- capture_args2(NULL)
-    do.call(keras$ops$equal, args)
-}
+keras$ops$equal(x1, x2)
 
 
 # keras$layers$exp
@@ -6184,14 +6115,12 @@ r"-(Calculate the exponential of all elements in the input tensor.
 #' @param x Input tensor.
 #'
 #' @export
+#' @family ops
 #' @seealso
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/exp>
 k_exp <-
 function (x)
-{
-    args <- capture_args2(NULL)
-    do.call(keras$ops$exp, args)
-}
+keras$ops$exp(x)
 
 
 # keras$layers$expand_dims
@@ -6224,6 +6153,7 @@ r"-(Expand the shape of a tensor.
 #'     (or axes) is placed.
 #'
 #' @export
+#' @family ops
 #' @seealso
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/expand_dims>
 k_expand_dims <-
@@ -6257,14 +6187,12 @@ r"-(Calculate `exp(x) - 1` for all elements in the tensor.
 #' @param x Input values.
 #'
 #' @export
+#' @family ops
 #' @seealso
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/expm1>
 k_expm_1 <-
 function (x)
-{
-    args <- capture_args2(NULL)
-    do.call(keras$ops$expm1, args)
-}
+keras$ops$expm1(x)
 
 
 # keras$layers$eye
@@ -6300,6 +6228,7 @@ r"-(Return a 2-D tensor with ones on the diagonal and zeros elsewhere.
 #' @param dtype Data type of the returned tensor.
 #'
 #' @export
+#' @family ops
 #' @seealso
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/eye>
 k_eye <-
@@ -6340,6 +6269,7 @@ r"-(Reverse the order of elements in the tensor along the given axis.
 #'     `axis=None`, will flip over all of the axes of the input tensor.
 #'
 #' @export
+#' @family ops
 #' @seealso
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/flip>
 k_flip <-
@@ -6376,14 +6306,12 @@ r"-(Return the floor of the input, element-wise.
 #' @param x Input tensor.
 #'
 #' @export
+#' @family ops
 #' @seealso
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/floor>
 k_floor <-
 function (x)
-{
-    args <- capture_args2(NULL)
-    do.call(keras$ops$floor, args)
-}
+keras$ops$floor(x)
 
 
 # keras$layers$floor_divide
@@ -6411,14 +6339,12 @@ r"-(Returns the largest integer smaller or equal to the division of inputs.
 #' @param x2 Denominator.
 #'
 #' @export
+#' @family ops
 #' @seealso
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/floor_divide>
 k_floor_divide <-
 function (x1, x2)
-{
-    args <- capture_args2(NULL)
-    do.call(keras$ops$floor_divide, args)
-}
+keras$ops$floor_divide(x1, x2)
 
 
 # keras$layers$full
@@ -6448,14 +6374,12 @@ r"-(Return a new tensor of given shape and type, filled with `fill_value`.
 #' @param dtype Desired data type of the tensor.
 #'
 #' @export
+#' @family ops
 #' @seealso
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/full>
 k_full <-
 function (shape, fill_value, dtype = NULL)
-{
-    args <- capture_args2(NULL)
-    do.call(keras$ops$full, args)
-}
+keras$ops$full(shape, fill_value, dtype)
 
 
 # keras$layers$full_like
@@ -6485,14 +6409,12 @@ r"-(Return a full tensor with the same shape and type as the given tensor.
 #' @param dtype Overrides data type of the result.
 #'
 #' @export
+#' @family ops
 #' @seealso
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/full_like>
 k_full_like <-
 function (x, fill_value, dtype = NULL)
-{
-    args <- capture_args2(NULL)
-    do.call(keras$ops$full_like, args)
-}
+keras$ops$full_like(x, fill_value, dtype)
 
 
 # keras$layers$get_item
@@ -6503,17 +6425,13 @@ r"-(Return `x[key]`.)-"
 # keras_core.src.ops.numpy.get_item
 #' Return `x[key]`.
 #'
-#' @description
-#'
 #' @export
+#' @family ops
 #' @seealso
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/get_item>
 k_get_item <-
 function (x, key)
-{
-    args <- capture_args2(NULL)
-    do.call(keras$ops$get_item, args)
-}
+keras$ops$get_item(x, key)
 
 
 # keras$layers$greater
@@ -6541,14 +6459,12 @@ r"-(Return the truth value of `x1 > x2` element-wise.
 #' @param x2 Second input tensor.
 #'
 #' @export
+#' @family ops
 #' @seealso
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/greater>
 k_greater <-
 function (x1, x2)
-{
-    args <- capture_args2(NULL)
-    do.call(keras$ops$greater, args)
-}
+keras$ops$greater(x1, x2)
 
 
 # keras$layers$greater_equal
@@ -6576,14 +6492,12 @@ r"-(Return the truth value of `x1 >= x2` element-wise.
 #' @param x2 Second input tensor.
 #'
 #' @export
+#' @family ops
 #' @seealso
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/greater_equal>
 k_greater_equal <-
 function (x1, x2)
-{
-    args <- capture_args2(NULL)
-    do.call(keras$ops$greater_equal, args)
-}
+keras$ops$greater_equal(x1, x2)
 
 
 # keras$layers$hstack
@@ -6614,14 +6528,12 @@ r"-(Stack tensors in sequence horizontally (column wise).
 #' @param xs Sequence of tensors.
 #'
 #' @export
+#' @family ops
 #' @seealso
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/hstack>
 k_hstack <-
 function (xs)
-{
-    args <- capture_args2(NULL)
-    do.call(keras$ops$hstack, args)
-}
+keras$ops$hstack(xs)
 
 
 # keras$layers$identity
@@ -6654,14 +6566,12 @@ r"-(Return the identity tensor.
 #' @param dtype Data type of the output tensor.
 #'
 #' @export
+#' @family ops
 #' @seealso
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/identity>
 k_identity <-
 function (n, dtype = "float32")
-{
-    args <- capture_args2(NULL)
-    do.call(keras$ops$identity, args)
-}
+keras$ops$identity(n, dtype)
 
 
 # keras$layers$imag
@@ -6687,14 +6597,12 @@ r"-(Return the imaginary part of the complex argument.
 #' @param x Input tensor.
 #'
 #' @export
+#' @family ops
 #' @seealso
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/imag>
 k_imag <-
 function (x)
-{
-    args <- capture_args2(NULL)
-    do.call(keras$ops$imag, args)
-}
+keras$ops$imag(x)
 
 
 # keras$layers$isclose
@@ -6722,14 +6630,12 @@ r"-(Return whether two tensors are element-wise almost equal.
 #' @param x2 Second input tensor.
 #'
 #' @export
+#' @family ops
 #' @seealso
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/isclose>
 k_isclose <-
 function (x1, x2)
-{
-    args <- capture_args2(NULL)
-    do.call(keras$ops$isclose, args)
-}
+keras$ops$isclose(x1, x2)
 
 
 # keras$layers$isfinite
@@ -6762,14 +6668,12 @@ r"-(Return whether a tensor is finite, element-wise.
 #' @param x Input tensor.
 #'
 #' @export
+#' @family ops
 #' @seealso
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/isfinite>
 k_isfinite <-
 function (x)
-{
-    args <- capture_args2(NULL)
-    do.call(keras$ops$isfinite, args)
-}
+keras$ops$isfinite(x)
 
 
 # keras$layers$isinf
@@ -6795,14 +6699,12 @@ r"-(Test element-wise for positive or negative infinity.
 #' @param x Input tensor.
 #'
 #' @export
+#' @family ops
 #' @seealso
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/isinf>
 k_isinf <-
 function (x)
-{
-    args <- capture_args2(NULL)
-    do.call(keras$ops$isinf, args)
-}
+keras$ops$isinf(x)
 
 
 # keras$layers$isnan
@@ -6828,14 +6730,12 @@ r"-(Test element-wise for NaN and return result as a boolean tensor.
 #' @param x Input tensor.
 #'
 #' @export
+#' @family ops
 #' @seealso
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/isnan>
 k_isnan <-
 function (x)
-{
-    args <- capture_args2(NULL)
-    do.call(keras$ops$isnan, args)
-}
+keras$ops$isnan(x)
 
 
 # keras$layers$less
@@ -6863,14 +6763,12 @@ r"-(Return the truth value of `x1 < x2` element-wise.
 #' @param x2 Second input tensor.
 #'
 #' @export
+#' @family ops
 #' @seealso
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/less>
 k_less <-
 function (x1, x2)
-{
-    args <- capture_args2(NULL)
-    do.call(keras$ops$less, args)
-}
+keras$ops$less(x1, x2)
 
 
 # keras$layers$less_equal
@@ -6898,14 +6796,12 @@ r"-(Return the truth value of `x1 <= x2` element-wise.
 #' @param x2 Second input tensor.
 #'
 #' @export
+#' @family ops
 #' @seealso
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/less_equal>
 k_less_equal <-
 function (x1, x2)
-{
-    args <- capture_args2(NULL)
-    do.call(keras$ops$less_equal, args)
-}
+keras$ops$less_equal(x1, x2)
 
 
 # keras$layers$linspace
@@ -6974,6 +6870,7 @@ r"-(Return evenly spaced numbers over a specified interval.
 #'     Torch backend does not support `axis` argument.
 #'
 #' @export
+#' @family ops
 #' @seealso
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/linspace>
 k_linspace <-
@@ -7008,14 +6905,12 @@ r"-(Natural logarithm, element-wise.
 #' @param x Input tensor.
 #'
 #' @export
+#' @family ops
 #' @seealso
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/log>
 k_log <-
 function (x)
-{
-    args <- capture_args2(NULL)
-    do.call(keras$ops$log, args)
-}
+keras$ops$log(x)
 
 
 # keras$layers$log10
@@ -7041,14 +6936,12 @@ r"-(Return the base 10 logarithm of the input tensor, element-wise.
 #' @param x Input tensor.
 #'
 #' @export
+#' @family ops
 #' @seealso
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/log10>
 k_log_10 <-
 function (x)
-{
-    args <- capture_args2(NULL)
-    do.call(keras$ops$log10, args)
-}
+keras$ops$log10(x)
 
 
 # keras$layers$log1p
@@ -7077,14 +6970,12 @@ r"-(Returns the natural logarithm of one plus the `x`, element-wise.
 #' @param x Input tensor.
 #'
 #' @export
+#' @family ops
 #' @seealso
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/log1p>
 k_log_1_p <-
 function (x)
-{
-    args <- capture_args2(NULL)
-    do.call(keras$ops$log1p, args)
-}
+keras$ops$log1p(x)
 
 
 # keras$layers$log2
@@ -7110,14 +7001,12 @@ r"-(Base-2 logarithm of `x`, element-wise.
 #' @param x Input tensor.
 #'
 #' @export
+#' @family ops
 #' @seealso
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/log2>
 k_log_2 <-
 function (x)
-{
-    args <- capture_args2(NULL)
-    do.call(keras$ops$log2, args)
-}
+keras$ops$log2(x)
 
 
 # keras$layers$logaddexp
@@ -7150,14 +7039,12 @@ r"-(Logarithm of the sum of exponentiations of the inputs.
 #' @param x2 Input tensor.
 #'
 #' @export
+#' @family ops
 #' @seealso
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/logaddexp>
 k_logaddexp <-
 function (x1, x2)
-{
-    args <- capture_args2(NULL)
-    do.call(keras$ops$logaddexp, args)
-}
+keras$ops$logaddexp(x1, x2)
 
 
 # keras$layers$logical_and
@@ -7188,14 +7075,12 @@ r"-(Computes the element-wise logical AND of the given input tensors.
 #' @param x2 Input tensor.
 #'
 #' @export
+#' @family ops
 #' @seealso
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/logical_and>
 k_logical_and <-
 function (x1, x2)
-{
-    args <- capture_args2(NULL)
-    do.call(keras$ops$logical_and, args)
-}
+keras$ops$logical_and(x1, x2)
 
 
 # keras$layers$logical_not
@@ -7224,14 +7109,12 @@ r"-(Computes the element-wise NOT of the given input tensor.
 #' @param x Input tensor.
 #'
 #' @export
+#' @family ops
 #' @seealso
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/logical_not>
 k_logical_not <-
 function (x)
-{
-    args <- capture_args2(NULL)
-    do.call(keras$ops$logical_not, args)
-}
+keras$ops$logical_not(x)
 
 
 # keras$layers$logical_or
@@ -7262,14 +7145,12 @@ r"-(Computes the element-wise logical OR of the given input tensors.
 #' @param x2 Input tensor.
 #'
 #' @export
+#' @family ops
 #' @seealso
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/logical_or>
 k_logical_or <-
 function (x1, x2)
-{
-    args <- capture_args2(NULL)
-    do.call(keras$ops$logical_or, args)
-}
+keras$ops$logical_or(x1, x2)
 
 
 # keras$layers$logical_xor
@@ -7297,14 +7178,12 @@ r"-(Compute the truth value of `x1 XOR x2`, element-wise.
 #' @param x2 Second input tensor.
 #'
 #' @export
+#' @family ops
 #' @seealso
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/logical_xor>
 k_logical_xor <-
 function (x1, x2)
-{
-    args <- capture_args2(NULL)
-    do.call(keras$ops$logical_xor, args)
-}
+keras$ops$logical_xor(x1, x2)
 
 
 # keras$layers$logspace
@@ -7363,6 +7242,7 @@ r"-(Returns numbers spaced evenly on a log scale.
 #'     Torch backend does not support `axis` argument.
 #'
 #' @export
+#' @family ops
 #' @seealso
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/logspace>
 k_logspace <-
@@ -7417,14 +7297,12 @@ r"-(Matrix product of two tensors.
 #' @param x2 Second tensor.
 #'
 #' @export
+#' @family ops
 #' @seealso
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/matmul>
 k_matmul <-
 function (x1, x2)
-{
-    args <- capture_args2(NULL)
-    do.call(keras$ops$matmul, args)
-}
+keras$ops$matmul(x1, x2)
 
 
 # keras$layers$max
@@ -7460,6 +7338,7 @@ r"-(Return the maximum of a tensor or maximum along an axis.
 #' @param initial The minimum value of an output element. Defaults to`None`.
 #'
 #' @export
+#' @family ops
 #' @seealso
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/max>
 k_max <-
@@ -7495,14 +7374,12 @@ r"-(Element-wise maximum of `x1` and `x2`.
 #' @param x2 Second tensor.
 #'
 #' @export
+#' @family ops
 #' @seealso
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/maximum>
 k_maximum <-
 function (x1, x2)
-{
-    args <- capture_args2(NULL)
-    do.call(keras$ops$maximum, args)
-}
+keras$ops$maximum(x1, x2)
 
 
 # keras$layers$mean
@@ -7536,6 +7413,7 @@ r"-(Compute the arithmetic mean along the specified axes.
 #'     in the result as dimensions with size one.
 #'
 #' @export
+#' @family ops
 #' @seealso
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/mean>
 k_mean <-
@@ -7616,14 +7494,12 @@ r"-(Creates grids of coordinates from coordinate vectors.
 #'     of output.
 #'
 #' @export
+#' @family ops
 #' @seealso
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/meshgrid>
 k_meshgrid <-
 function (..., indexing = "xy")
-{
-    args <- capture_args2(NULL)
-    do.call(keras$ops$meshgrid, args)
-}
+keras$ops$meshgrid(..., indexing)
 
 
 # keras$layers$min
@@ -7659,6 +7535,7 @@ r"-(Return the minimum of a tensor or minimum along an axis.
 #' @param initial The maximum value of an output element. Defaults to`None`.
 #'
 #' @export
+#' @family ops
 #' @seealso
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/min>
 k_min <-
@@ -7694,14 +7571,12 @@ r"-(Element-wise minimum of `x1` and `x2`.
 #' @param x2 Second tensor.
 #'
 #' @export
+#' @family ops
 #' @seealso
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/minimum>
 k_minimum <-
 function (x1, x2)
-{
-    args <- capture_args2(NULL)
-    do.call(keras$ops$minimum, args)
-}
+keras$ops$minimum(x1, x2)
 
 
 # keras$layers$mod
@@ -7729,14 +7604,12 @@ r"-(Returns the element-wise remainder of division.
 #' @param x2 Second tensor.
 #'
 #' @export
+#' @family ops
 #' @seealso
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/mod>
 k_mod <-
 function (x1, x2)
-{
-    args <- capture_args2(NULL)
-    do.call(keras$ops$mod, args)
-}
+keras$ops$mod(x1, x2)
 
 
 # keras$layers$moveaxis
@@ -7771,14 +7644,12 @@ r"-(Move axes of a tensor to new positions.
 #'     These must also be unique.
 #'
 #' @export
+#' @family ops
 #' @seealso
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/moveaxis>
 k_moveaxis <-
 function (x, source, destination)
-{
-    args <- capture_args2(NULL)
-    do.call(keras$ops$moveaxis, args)
-}
+keras$ops$moveaxis(x, source, destination)
 
 
 # keras$layers$multiply
@@ -7806,14 +7677,12 @@ r"-(Multiply arguments element-wise.
 #' @param x2 Second input tensor.
 #'
 #' @export
+#' @family ops
 #' @seealso
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/multiply>
 k_multiply <-
 function (x1, x2)
-{
-    args <- capture_args2(NULL)
-    do.call(keras$ops$multiply, args)
-}
+keras$ops$multiply(x1, x2)
 
 
 # keras$layers$nan_to_num
@@ -7839,14 +7708,12 @@ r"-(Replace NaN with zero and infinity with large finite numbers.
 #' @param x Input data.
 #'
 #' @export
+#' @family ops
 #' @seealso
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/nan_to_num>
 k_nan_to_num <-
 function (x)
-{
-    args <- capture_args2(NULL)
-    do.call(keras$ops$nan_to_num, args)
-}
+keras$ops$nan_to_num(x)
 
 
 # keras$layers$ndim
@@ -7872,14 +7739,12 @@ r"-(Return the number of dimensions of a tensor.
 #' @param x Input tensor.
 #'
 #' @export
+#' @family ops
 #' @seealso
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/ndim>
 k_ndim <-
 function (x)
-{
-    args <- capture_args2(NULL)
-    do.call(keras$ops$ndim, args)
-}
+keras$ops$ndim(x)
 
 
 # keras$layers$negative
@@ -7905,14 +7770,12 @@ r"-(Numerical negative, element-wise.
 #' @param x Input tensor.
 #'
 #' @export
+#' @family ops
 #' @seealso
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/negative>
 k_negative <-
 function (x)
-{
-    args <- capture_args2(NULL)
-    do.call(keras$ops$negative, args)
-}
+keras$ops$negative(x)
 
 
 # keras$layers$nonzero
@@ -7938,14 +7801,12 @@ r"-(Return the indices of the elements that are non-zero.
 #' @param x Input tensor.
 #'
 #' @export
+#' @family ops
 #' @seealso
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/nonzero>
 k_nonzero <-
 function (x)
-{
-    args <- capture_args2(NULL)
-    do.call(keras$ops$nonzero, args)
-}
+keras$ops$nonzero(x)
 
 
 # keras$layers$not_equal
@@ -7973,14 +7834,12 @@ r"-(Return `(x1 != x2)` element-wise.
 #' @param x2 Second input tensor.
 #'
 #' @export
+#' @family ops
 #' @seealso
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/not_equal>
 k_not_equal <-
 function (x1, x2)
-{
-    args <- capture_args2(NULL)
-    do.call(keras$ops$not_equal, args)
-}
+keras$ops$not_equal(x1, x2)
 
 
 # keras$layers$ones
@@ -8008,14 +7867,12 @@ r"-(Return a new tensor of given shape and type, filled with ones.
 #' @param dtype Desired data type of the tensor.
 #'
 #' @export
+#' @family ops
 #' @seealso
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/ones>
 k_ones <-
 function (shape, dtype = "float32")
-{
-    args <- capture_args2(NULL)
-    do.call(keras$ops$ones, args)
-}
+keras$ops$ones(shape, dtype)
 
 
 # keras$layers$ones_like
@@ -8043,14 +7900,12 @@ r"-(Return a tensor of ones with the same shape and type of `x`.
 #' @param dtype Overrides the data type of the result.
 #'
 #' @export
+#' @family ops
 #' @seealso
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/ones_like>
 k_ones_like <-
 function (x, dtype = NULL)
-{
-    args <- capture_args2(NULL)
-    do.call(keras$ops$ones_like, args)
-}
+keras$ops$ones_like(x, dtype)
 
 
 # keras$layers$outer
@@ -8089,14 +7944,12 @@ r"-(Compute the outer product of two vectors.
 #' @param x2 Second input tensor.
 #'
 #' @export
+#' @family ops
 #' @seealso
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/outer>
 k_outer <-
 function (x1, x2)
-{
-    args <- capture_args2(NULL)
-    do.call(keras$ops$outer, args)
-}
+keras$ops$outer(x1, x2)
 
 
 # keras$layers$pad
@@ -8162,6 +8015,7 @@ r"-(Pad a tensor.
 #'     and `"symmetric"`.
 #'
 #' @export
+#' @family ops
 #' @seealso
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/pad>
 k_pad <-
@@ -8197,14 +8051,12 @@ r"-(First tensor elements raised to powers from second tensor, element-wise.
 #' @param x2 The exponents.
 #'
 #' @export
+#' @family ops
 #' @seealso
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/power>
 k_power <-
 function (x1, x2)
-{
-    args <- capture_args2(NULL)
-    do.call(keras$ops$power, args)
-}
+keras$ops$power(x1, x2)
 
 
 # keras$layers$prod
@@ -8242,6 +8094,7 @@ r"-(Return the product of tensor elements over a given axis.
 #' @param dtype Data type of the returned tensor.
 #'
 #' @export
+#' @family ops
 #' @seealso
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/prod>
 k_prod <-
@@ -8278,14 +8131,12 @@ r"-(Return a contiguous flattened tensor.
 #' @param x Input tensor.
 #'
 #' @export
+#' @family ops
 #' @seealso
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/ravel>
 k_ravel <-
 function (x)
-{
-    args <- capture_args2(NULL)
-    do.call(keras$ops$ravel, args)
-}
+keras$ops$ravel(x)
 
 
 # keras$layers$real
@@ -8311,14 +8162,12 @@ r"-(Return the real part of the complex argument.
 #' @param x Input tensor.
 #'
 #' @export
+#' @family ops
 #' @seealso
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/real>
 k_real <-
 function (x)
-{
-    args <- capture_args2(NULL)
-    do.call(keras$ops$real, args)
-}
+keras$ops$real(x)
 
 
 # keras$layers$reciprocal
@@ -8347,14 +8196,12 @@ r"-(Return the reciprocal of the argument, element-wise.
 #' @param x Input tensor.
 #'
 #' @export
+#' @family ops
 #' @seealso
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/reciprocal>
 k_reciprocal <-
 function (x)
-{
-    args <- capture_args2(NULL)
-    do.call(keras$ops$reciprocal, args)
-}
+keras$ops$reciprocal(x)
 
 
 # keras$layers$repeat
@@ -8386,6 +8233,7 @@ r"-(Repeat each element of a tensor after themselves.
 #'     the flattened input array, and return a flat output array.
 #'
 #' @export
+#' @family ops
 #' @seealso
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/repeat>
 k_repeat <-
@@ -8425,14 +8273,12 @@ r"-(Gives a new shape to a tensor without changing its data.
 #'     inferred from the length of the array and remaining dimensions.
 #'
 #' @export
+#' @family ops
 #' @seealso
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/reshape>
 k_reshape <-
 function (x, new_shape)
-{
-    args <- capture_args2(NULL)
-    do.call(keras$ops$reshape, args)
-}
+keras$ops$reshape(x, new_shape)
 
 
 # keras$layers$roll
@@ -8469,6 +8315,7 @@ r"-(Roll tensor elements along a given axis.
 #'     shape is restored.
 #'
 #' @export
+#' @family ops
 #' @seealso
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/roll>
 k_roll <-
@@ -8504,6 +8351,7 @@ r"-(Evenly round to the given number of decimals.
 #' @param decimals Number of decimal places to round to. Defaults to `0`.
 #'
 #' @export
+#' @family ops
 #' @seealso
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/round>
 k_round <-
@@ -8537,14 +8385,12 @@ r"-(Returns a tensor with the signs of the elements of `x`.
 #' @param x Input tensor.
 #'
 #' @export
+#' @family ops
 #' @seealso
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/sign>
 k_sign <-
 function (x)
-{
-    args <- capture_args2(NULL)
-    do.call(keras$ops$sign, args)
-}
+keras$ops$sign(x)
 
 
 # keras$layers$sin
@@ -8570,14 +8416,12 @@ r"-(Trigonomeric sine, element-wise.
 #' @param x Input tensor.
 #'
 #' @export
+#' @family ops
 #' @seealso
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/sin>
 k_sin <-
 function (x)
-{
-    args <- capture_args2(NULL)
-    do.call(keras$ops$sin, args)
-}
+keras$ops$sin(x)
 
 
 # keras$layers$sinh
@@ -8603,14 +8447,12 @@ r"-(Hyperbolic sine, element-wise.
 #' @param x Input tensor.
 #'
 #' @export
+#' @family ops
 #' @seealso
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/sinh>
 k_sinh <-
 function (x)
-{
-    args <- capture_args2(NULL)
-    do.call(keras$ops$sinh, args)
-}
+keras$ops$sinh(x)
 
 
 # keras$layers$size
@@ -8636,14 +8478,12 @@ r"-(Return the number of elements in a tensor.
 #' @param x Input tensor.
 #'
 #' @export
+#' @family ops
 #' @seealso
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/size>
 k_size <-
 function (x)
-{
-    args <- capture_args2(NULL)
-    do.call(keras$ops$size, args)
-}
+keras$ops$size(x)
 
 
 # keras$layers$sort
@@ -8673,6 +8513,7 @@ r"-(Sorts the elements of `x` along a given axis in ascending order.
 #'     before sorting. Defaults to `-1`; the last axis.
 #'
 #' @export
+#' @family ops
 #' @seealso
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/sort>
 k_sort <-
@@ -8730,6 +8571,7 @@ r"-(Split a tensor into chunks.
 #'     Torch backend.
 #'
 #' @export
+#' @family ops
 #' @seealso
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/split>
 k_split <-
@@ -8763,14 +8605,12 @@ r"-(Return the non-negative square root of a tensor, element-wise.
 #' @param x Input tensor.
 #'
 #' @export
+#' @family ops
 #' @seealso
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/sqrt>
 k_sqrt <-
 function (x)
-{
-    args <- capture_args2(NULL)
-    do.call(keras$ops$sqrt, args)
-}
+keras$ops$sqrt(x)
 
 
 # keras$layers$square
@@ -8796,14 +8636,12 @@ r"-(Return the element-wise square of the input.
 #' @param x Input tensor.
 #'
 #' @export
+#' @family ops
 #' @seealso
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/square>
 k_square <-
 function (x)
-{
-    args <- capture_args2(NULL)
-    do.call(keras$ops$square, args)
-}
+keras$ops$square(x)
 
 
 # keras$layers$squeeze
@@ -8833,6 +8671,7 @@ r"-(Remove axes of length one from `x`.
 #' @param axis Select a subset of the entries of length one in the shape.
 #'
 #' @export
+#' @family ops
 #' @seealso
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/squeeze>
 k_squeeze <-
@@ -8873,6 +8712,7 @@ r"-(Join a sequence of tensors along a new axis.
 #' @param axis Axis along which to stack. Defaults to `0`.
 #'
 #' @export
+#' @family ops
 #' @seealso
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/stack>
 k_stack <-
@@ -8916,6 +8756,7 @@ r"-(Compute the standard deviation along the specified axis.
 #'     in the result as dimensions with size one.
 #'
 #' @export
+#' @family ops
 #' @seealso
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/std>
 k_std <-
@@ -8951,14 +8792,12 @@ r"-(Subtract arguments element-wise.
 #' @param x2 Second input tensor.
 #'
 #' @export
+#' @family ops
 #' @seealso
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/subtract>
 k_subtract <-
 function (x1, x2)
-{
-    args <- capture_args2(NULL)
-    do.call(keras$ops$subtract, args)
-}
+keras$ops$subtract(x1, x2)
 
 
 # keras$layers$sum
@@ -8992,6 +8831,7 @@ r"-(Sum of a tensor over the given axes.
 #'     in the result as dimensions with size one.
 #'
 #' @export
+#' @family ops
 #' @seealso
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/sum>
 k_sum <-
@@ -9029,14 +8869,12 @@ r"-(Interchange two axes of a tensor.
 #' @param axis2 Second axis.
 #'
 #' @export
+#' @family ops
 #' @seealso
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/swapaxes>
 k_swapaxes <-
 function (x, axis1, axis2)
-{
-    args <- capture_args2(NULL)
-    do.call(keras$ops$swapaxes, args)
-}
+keras$ops$swapaxes(x, axis1, axis2)
 
 
 # keras$layers$take
@@ -9068,6 +8906,7 @@ r"-(Take elements from a tensor along an axis.
 #'     flattened input tensor is used.
 #'
 #' @export
+#' @family ops
 #' @seealso
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/take>
 k_take <-
@@ -9107,6 +8946,7 @@ r"-(Select values from `x` at the 1-D `indices` along the given axis.
 #'     input tensor is used.
 #'
 #' @export
+#' @family ops
 #' @seealso
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/take_along_axis>
 k_take_along_axis <-
@@ -9140,14 +8980,12 @@ r"-(Compute tangent, element-wise.
 #' @param x Input tensor.
 #'
 #' @export
+#' @family ops
 #' @seealso
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/tan>
 k_tan <-
 function (x)
-{
-    args <- capture_args2(NULL)
-    do.call(keras$ops$tan, args)
-}
+keras$ops$tan(x)
 
 
 # keras$layers$tanh
@@ -9173,14 +9011,12 @@ r"-(Hyperbolic tangent, element-wise.
 #' @param x Input tensor.
 #'
 #' @export
+#' @family ops
 #' @seealso
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/tanh>
 k_tanh <-
 function (x)
-{
-    args <- capture_args2(NULL)
-    do.call(keras$ops$tanh, args)
-}
+keras$ops$tanh(x)
 
 
 # keras$layers$tensordot
@@ -9221,6 +9057,7 @@ r"-(Compute the tensor dot product along specified axes.
 #'         same length.
 #'
 #' @export
+#' @family ops
 #' @seealso
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/tensordot>
 k_tensordot <-
@@ -9271,14 +9108,12 @@ r"-(Repeat `x` the number of times given by `repeats`.
 #' @param repeats The number of repetitions of `x` along each axis.
 #'
 #' @export
+#' @family ops
 #' @seealso
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/tile>
 k_tile <-
 function (x, repeats)
-{
-    args <- capture_args2(NULL)
-    do.call(keras$ops$tile, args)
-}
+keras$ops$tile(x, repeats)
 
 
 # keras$layers$trace
@@ -9339,6 +9174,7 @@ r"-(Return the sum along diagonals of the tensor.
 #'     Defaults to `1` (second axis).
 #'
 #' @export
+#' @family ops
 #' @seealso
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/trace>
 k_trace <-
@@ -9377,6 +9213,7 @@ r"-(Returns a tensor with `axes` transposed.
 #'     By default, the order of the axes are reversed.
 #'
 #' @export
+#' @family ops
 #' @seealso
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/transpose>
 k_transpose <-
@@ -9422,6 +9259,7 @@ r"-(Return a tensor with ones at and below a diagonal and zeros elsewhere.
 #' @param dtype Data type of the returned tensor. The default is "float32".
 #'
 #' @export
+#' @family ops
 #' @seealso
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/tri>
 k_tri <-
@@ -9464,6 +9302,7 @@ r"-(Return lower triangle of a tensor.
 #'     main diagonal. `k < 0` is below it, and `k > 0` is above it.
 #'
 #' @export
+#' @family ops
 #' @seealso
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/tril>
 k_tril <-
@@ -9506,6 +9345,7 @@ r"-(Return upper triangle of a tensor.
 #'     main diagonal. `k < 0` is below it, and `k > 0` is above it.
 #'
 #' @export
+#' @family ops
 #' @seealso
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/triu>
 k_triu <-
@@ -9524,17 +9364,13 @@ r"-(Alias for `keras_core.ops.divide`.)-"
 # keras_core.src.ops.numpy.true_divide
 #' Alias for `keras_core.ops.divide`.
 #'
-#' @description
-#'
 #' @export
+#' @family ops
 #' @seealso
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/true_divide>
 k_true_divide <-
 function (x1, x2)
-{
-    args <- capture_args2(NULL)
-    do.call(keras$ops$true_divide, args)
-}
+keras$ops$true_divide(x1, x2)
 
 
 # keras$layers$var
@@ -9568,6 +9404,7 @@ r"-(Compute the variance along the specified axes.
 #'     in the result as dimensions with size one.
 #'
 #' @export
+#' @family ops
 #' @seealso
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/var>
 k_var <-
@@ -9614,14 +9451,12 @@ r"-(Return the dot product of two vectors.
 #' @param x2 Second input tensor.
 #'
 #' @export
+#' @family ops
 #' @seealso
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/vdot>
 k_vdot <-
 function (x1, x2)
-{
-    args <- capture_args2(NULL)
-    do.call(keras$ops$vdot, args)
-}
+keras$ops$vdot(x1, x2)
 
 
 # keras$layers$vstack
@@ -9647,14 +9482,12 @@ r"-(Stack tensors in sequence vertically (row wise).
 #' @param xs Sequence of tensors.
 #'
 #' @export
+#' @family ops
 #' @seealso
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/vstack>
 k_vstack <-
 function (xs)
-{
-    args <- capture_args2(NULL)
-    do.call(keras$ops$vstack, args)
-}
+keras$ops$vstack(xs)
 
 
 # keras$layers$where
@@ -9686,14 +9519,12 @@ r"-(Return elements chosen from `x1` or `x2` depending on `condition`.
 #' @param x2 Values from which to choose when `condition` is `False`.
 #'
 #' @export
+#' @family ops
 #' @seealso
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/where>
 k_where <-
 function (condition, x1 = NULL, x2 = NULL)
-{
-    args <- capture_args2(NULL)
-    do.call(keras$ops$where, args)
-}
+keras$ops$where(condition, x1, x2)
 
 
 # keras$layers$zeros
@@ -9721,14 +9552,12 @@ r"-(Return a new tensor of given shape and type, filled with zeros.
 #' @param dtype Desired data type of the tensor.
 #'
 #' @export
+#' @family ops
 #' @seealso
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/zeros>
 k_zeros <-
 function (shape, dtype = "float32")
-{
-    args <- capture_args2(NULL)
-    do.call(keras$ops$zeros, args)
-}
+keras$ops$zeros(shape, dtype)
 
 
 # keras$layers$zeros_like
@@ -9756,11 +9585,9 @@ r"-(Return a tensor of zeros with the same shape and type as `x`.
 #' @param dtype Overrides the data type of the result.
 #'
 #' @export
+#' @family ops
 #' @seealso
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/zeros_like>
 k_zeros_like <-
 function (x, dtype = NULL)
-{
-    args <- capture_args2(NULL)
-    do.call(keras$ops$zeros_like, args)
-}
+keras$ops$zeros_like(x, dtype)
