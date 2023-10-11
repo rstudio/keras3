@@ -2,81 +2,18 @@
 % Please edit documentation in R/applications.R
 \name{application_resnet}
 \alias{application_resnet}
-\alias{application_resnet50}
-\alias{application_resnet101}
-\alias{application_resnet152}
-\alias{application_resnet50_v2}
-\alias{application_resnet101_v2}
-\alias{application_resnet152_v2}
 \alias{resnet_preprocess_input}
 \alias{resnet_v2_preprocess_input}
 \title{Instantiates the ResNet architecture}
 \usage{
-application_resnet50(
-  include_top = TRUE,
-  weights = "imagenet",
-  input_tensor = NULL,
-  input_shape = NULL,
-  pooling = NULL,
-  classes = 1000L,
-  classifier_activation = "softmax"
-)
-
-application_resnet101(
-  include_top = TRUE,
-  weights = "imagenet",
-  input_tensor = NULL,
-  input_shape = NULL,
-  pooling = NULL,
-  classes = 1000L,
-  classifier_activation = "softmax"
-)
-
-application_resnet152(
-  include_top = TRUE,
-  weights = "imagenet",
-  input_tensor = NULL,
-  input_shape = NULL,
-  pooling = NULL,
-  classes = 1000L,
-  classifier_activation = "softmax"
-)
-
-application_resnet50_v2(
-  include_top = TRUE,
-  weights = "imagenet",
-  input_tensor = NULL,
-  input_shape = NULL,
-  pooling = NULL,
-  classes = 1000L,
-  classifier_activation = "softmax"
-)
-
-application_resnet101_v2(
-  include_top = TRUE,
-  weights = "imagenet",
-  input_tensor = NULL,
-  input_shape = NULL,
-  pooling = NULL,
-  classes = 1000L,
-  classifier_activation = "softmax"
-)
-
-application_resnet152_v2(
-  include_top = TRUE,
-  weights = "imagenet",
-  input_tensor = NULL,
-  input_shape = NULL,
-  pooling = NULL,
-  classes = 1000L,
-  classifier_activation = "softmax"
-)
-
 resnet_preprocess_input(x)
 
 resnet_v2_preprocess_input(x)
 }
 \arguments{
+\item{x}{\code{preprocess_input()} takes an array or floating point tensor, 3D or
+4D with 3 color channels, with values in the range \verb{[0, 255]}.}
+
 \item{input_shape}{optional shape list, only to be specified
 if \code{include_top} is FALSE (otherwise the input shape
 has to be \code{c(224, 224, 3)} (with \code{'channels_last'} data format)
@@ -84,9 +21,6 @@ or \code{c(3, 224, 224)} (with \code{'channels_first'} data format).
 It should have exactly 3 inputs channels,
 and width and height should be no smaller than 32.
 E.g. \code{c(200, 200, 3)} would be one valid value.}
-
-\item{x}{\code{preprocess_input()} takes an array or floating point tensor, 3D or
-4D with 3 color channels, with values in the range \verb{[0, 255]}.}
 
 \item{...}{For backwards and forwards compatibility}
 }

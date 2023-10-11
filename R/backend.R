@@ -47,15 +47,14 @@ backend_normalize_shape <- function(shape) {
   normalize_shape(shape)
 }
 
-
+#' Backcompat backend ops
+#'
+#' @export
+#' @rdname k_random_bernoulli
 k_random_binomial <-
-  function(shape,
-           p = 0.0,
-           dtype = NULL,
-           seed = NULL) {
+  function(shape, p = 0.0, dtype = NULL, seed = NULL) {
 
     tf <- import("tensorflow")
-
     x <- tf$random$uniform(shape = backend_normalize_shape(shape),
                            dtype = dtype %||% keras$config$floatx(),
                            seed = as_integer(seed))

@@ -5,7 +5,7 @@ xception_preprocess_input <- function(x) {
   preprocess_input(x, keras$applications$xception$preprocess_input)
 }
 
-
+#  @inheritParams application_efficientnet
 #' Instantiates the ResNet architecture
 #'
 #' @details
@@ -28,7 +28,6 @@ xception_preprocess_input <- function(x) {
 #' then will zero-center each color channel with respect to the ImageNet dataset,
 #' without scaling.
 #'
-#' @inheritParams application_efficientnet
 #'
 #' @param input_shape optional shape list, only to be specified
 #' if `include_top` is FALSE (otherwise the input shape
@@ -96,31 +95,6 @@ new_application_resnet_wrapper <- function(name) {
 
   as.function(c(args, body), envir = parent.frame())
 }
-
-#' @export
-#' @rdname application_resnet
-application_resnet50  <- new_application_resnet_wrapper("ResNet50")
-
-#' @export
-#' @rdname application_resnet
-application_resnet101 <- new_application_resnet_wrapper("ResNet101")
-
-#' @export
-#' @rdname application_resnet
-application_resnet152 <- new_application_resnet_wrapper("ResNet152")
-
-#' @export
-#' @rdname application_resnet
-application_resnet50_v2  <- new_application_resnet_wrapper("ResNet50V2")
-
-#' @export
-#' @rdname application_resnet
-application_resnet101_v2 <- new_application_resnet_wrapper("ResNet101V2")
-
-#' @export
-#' @rdname application_resnet
-application_resnet152_v2 <- new_application_resnet_wrapper("ResNet152V2")
-
 
 #' @export
 #' @rdname application_resnet
@@ -270,13 +244,16 @@ mobilenet_v2_load_model_hdf5 <- function(filepath) {
 }
 
 
+#' Application helpers
+#'
 #' @rdname application_densenet
 #' @export
 densenet_preprocess_input <- function(x, data_format = NULL) {
   preprocess_input(x, keras$applications$densenet$preprocess_input)
 }
 
-
+#' Application helpers
+#'
 #' @rdname application_nasnet
 #' @export
 nasnet_preprocess_input <- function(x) {
