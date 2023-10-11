@@ -95,16 +95,20 @@ endpoints <-
   #   # "keras.applications.convnext" is a module, filtered out, has good stuff
   # }) |>
   unlist() %>%
-  setdiff(c("keras.layers.Layer",
-            "keras.layers.InputLayer",
-            "keras.layers.InputSpec",
-            "keras.optimizers.Optimizer",
-            "keras.regularizers.Regularizer",
-            "keras.constraints.Constraint",
-            "keras.initializers.Initializer",
-            "keras.callbacks.CallbackList",
-            "keras.callbacks.History",
-            "keras.callbacks.Callback"))
+  setdiff(c %(% {
+    "keras.layers.Layer"             # only for subclassing
+    "keras.optimizers.Optimizer"     # only for subclassing
+    "keras.regularizers.Regularizer" # only for subclassing
+    "keras.constraints.Constraint"   # only for subclassing
+    "keras.initializers.Initializer" # only for subclassing
+    "keras.callbacks.Callback"       # only for subclassing
+
+    "keras.layers.Wrapper"           # needs thinking
+    "keras.layers.InputLayer"        # use Input instead
+    "keras.layers.InputSpec"         # ??
+    "keras.callbacks.CallbackList"   # just an abstract list
+    "keras.callbacks.History"        # always added to by default
+  })
 
 df <-
   endpoints |>

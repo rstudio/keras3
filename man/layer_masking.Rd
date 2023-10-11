@@ -51,7 +51,6 @@ Other core layers:
 \code{\link{layer_einsum_dense}()},
 \code{\link{layer_embedding}()},
 \code{\link{layer_identity}()},
-\code{\link{layer_lambda}()},
-\code{\link{layer_wrapper}()}
+\code{\link{layer_lambda}()}
 }
 \concept{core layers}
