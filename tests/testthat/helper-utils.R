@@ -41,19 +41,33 @@ expect_warning_if <- function(cond, expr) {
 
 py_capture_output <- reticulate::py_capture_output #import("IPython")$utils$capture$capture_output
 
+defer_parent <- withr::defer_parent
+
+local_py_capture_output <- function(type = c("stdout", "stderr")) {
+  stopifnot(reticulate::py_available(TRUE))
+  type <- match.arg(type, several.ok = TRUE)
+  output_tools <- import("rpytools.output")
+  capture_stdout <- "stdout" %in% type
+  capture_stderr <- "stderr" %in% type
+  output_tools$start_capture(capture_stdout, capture_stderr)
+  defer_parent({
+    output_tools$end_capture(capture_stdout, capture_stderr)
+    output_tools$collect_output()
+  })
+}
+
 
 test_succeeds <- function(desc, expr, required_version = NULL) {
-  if (interactive()) {
-    test_that(desc, expect_error(force(expr), NA))
-  } else
-    invisible(capture.output({
-      test_that(desc, {
-        skip_if_no_keras(required_version)
-        py_capture_output({
-          expect_error(force(expr), NA)
-        })
-      })
-    }))
+  expr <- rlang::enquo(expr)
+  if(!is.null(required_version))
+    skip_if_no_keras(required_version)
+
+
+  if(!interactive())
+    local_py_capture_output()
+
+  eval.parent(rlang::expr(test_that(!!desc, expect_no_error(!!expr))))
+
 }
 
 test_call_succeeds <- function(call_name, expr, required_version = NULL) {

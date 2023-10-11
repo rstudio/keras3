@@ -6,6 +6,7 @@ xception_preprocess_input <- function(x) {
 }
 
 #  @inheritParams application_efficientnet
+
 #' Instantiates the ResNet architecture
 #'
 #' @details
