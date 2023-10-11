@@ -13,10 +13,11 @@ Reference to the Python module used for the implementation of Keras.
 Obtain a reference to the Python module used for the implementation of Keras.
 }
 \details{
-There are currently two Python modules which implement Keras:
+These are the available Python modules which implement Keras:
 \itemize{
-\item keras ("keras")
+\item keras
 \item tensorflow.keras ("tensorflow")
+\item keras_core ("core")
 }
 
 This function returns a reference to the implementation being currently

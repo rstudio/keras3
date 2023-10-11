@@ -322,6 +322,7 @@ make_r_name <- function(endpoint, module = py_eval(endpoint)$`__module__`) {
 #TODO: param parsing in AdamW borked
 #TODO: revisit application helpers like xception_preprocess_input()
 #TODO: KerasCallback and other R6 classes for subclassing...
+#TODO: implementation() - fix up docs / actual
 
 transformers_registry <-
   yaml::read_yaml("tools/arg-transformers.yml") %>%
