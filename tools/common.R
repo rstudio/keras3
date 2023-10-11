@@ -256,18 +256,42 @@ make_r_name <- function(endpoint, module = py_eval(endpoint)$`__module__`) {
     str_replace("NaN", "Nan") |>
     str_replace("RMSprop$", "Rmsprop") |>
     str_replace("ReLU$", "Relu") |>
+    str_replace("ResNet", "Resnet") |>
+    str_replace("ConvNeXt", "Convnext") |>
+    str_replace("XLarge", "Xlarge") |>
+    # str_replace("EfficientNet", "Efficientnet") |>
 
     snakecase::to_snake_case() |>
 
     str_replace("_([0-9])_d(_|$)", "_\\1d\\2") |>  # conv_1_d  ->  conv_1d
+    # str_replace("efficient_net_(.+)$", "efficientnet_\\1") |>
+
     # str_replace("re_lu", "relu") |>
     str_replace_all("(^|_)l_([12])", "\\1l\\2") |> # l_1_l_2 -> l1_l2
+
+    # applications
+    str_replace_all("_v_([1234])($|_)", "_v\\1\\2") |>
+    str_replace_all("^resnet_([0-9]+)", "resnet\\1") |>
+    str_replace_all("^vgg_([0-9]+)", "vgg\\1") |>
+    str_replace_all("^dense_net_", "densenet") |>
+    str_replace_all("^mobile_net?", "mobilenet") |>
+
+
+
     str_replace_all("max_norm", "maxnorm") |>
     str_replace_all("non_neg", "nonneg") |>
     str_replace_all("min_max", "minmax") |>
     str_replace_all("unit_norm$", "unitnorm") |>
     str_replace("tensor_board", "tensorboard") |>
     identity()
+
+  if (str_detect(name, "efficient_net_"))
+    name <- name |>
+    str_split_1("efficient_net_") |> str_replace_all("_", "") |>
+    str_flatten("efficientnet_")
+
+  if(str_detect(name, "nas_net_"))
+    name %<>% str_replace_all("_", "")
 
 
   if(prefix != "k")

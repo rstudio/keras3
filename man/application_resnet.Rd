@@ -18,8 +18,8 @@ application_resnet50(
   input_tensor = NULL,
   input_shape = NULL,
   pooling = NULL,
-  classes = 1000,
-  ...
+  classes = 1000L,
+  classifier_activation = "softmax"
 )
 
 application_resnet101(
@@ -28,8 +28,8 @@ application_resnet101(
   input_tensor = NULL,
   input_shape = NULL,
   pooling = NULL,
-  classes = 1000,
-  ...
+  classes = 1000L,
+  classifier_activation = "softmax"
 )
 
 application_resnet152(
@@ -38,8 +38,8 @@ application_resnet152(
   input_tensor = NULL,
   input_shape = NULL,
   pooling = NULL,
-  classes = 1000,
-  ...
+  classes = 1000L,
+  classifier_activation = "softmax"
 )
 
 application_resnet50_v2(
@@ -48,9 +48,8 @@ application_resnet50_v2(
   input_tensor = NULL,
   input_shape = NULL,
   pooling = NULL,
-  classes = 1000,
-  classifier_activation = "softmax",
-  ...
+  classes = 1000L,
+  classifier_activation = "softmax"
 )
 
 application_resnet101_v2(
@@ -59,9 +58,8 @@ application_resnet101_v2(
   input_tensor = NULL,
   input_shape = NULL,
   pooling = NULL,
-  classes = 1000,
-  classifier_activation = "softmax",
-  ...
+  classes = 1000L,
+  classifier_activation = "softmax"
 )
 
 application_resnet152_v2(
@@ -70,9 +68,8 @@ application_resnet152_v2(
   input_tensor = NULL,
   input_shape = NULL,
   pooling = NULL,
-  classes = 1000,
-  classifier_activation = "softmax",
-  ...
+  classes = 1000L,
+  classifier_activation = "softmax"
 )
 
 resnet_preprocess_input(x)
@@ -80,17 +77,6 @@ resnet_preprocess_input(x)
 resnet_v2_preprocess_input(x)
 }
 \arguments{
-\item{include_top}{Whether to include the fully-connected
-layer at the top of the network. Defaults to \code{TRUE}.}
-
-\item{weights}{One of \code{NULL} (random initialization),
-\code{'imagenet'} (pre-training on ImageNet),
-or the path to the weights file to be loaded. Defaults to \code{'imagenet'}.}
-
-\item{input_tensor}{Optional Keras tensor
-(i.e. output of \code{layer_input()})
-to use as image input for the model.}
-
 \item{input_shape}{optional shape list, only to be specified
 if \code{include_top} is FALSE (otherwise the input shape
 has to be \code{c(224, 224, 3)} (with \code{'channels_last'} data format)
@@ -99,34 +85,10 @@ It should have exactly 3 inputs channels,
 and width and height should be no smaller than 32.
 E.g. \code{c(200, 200, 3)} would be one valid value.}
 
-\item{pooling}{Optional pooling mode for feature extraction
-when \code{include_top} is \code{FALSE}. Defaults to \code{NULL}.
-\itemize{
-\item \code{NULL} means that the output of the model will be
-the 4D tensor output of the
-last convolutional layer.
-\item \code{'avg'} means that global average pooling
-will be applied to the output of the
-last convolutional layer, and thus
-the output of the model will be a 2D tensor.
-\item \code{'max'} means that global max pooling will
-be applied.
-}}
-
-\item{classes}{Optional number of classes to classify images into, only to be
-specified if \code{include_top} is TRUE, and if no \code{weights} argument is
-specified. Defaults to 1000 (number of ImageNet classes).}
-
-\item{...}{For backwards and forwards compatibility}
-
-\item{classifier_activation}{A string or callable. The activation function to
-use on the "top" layer. Ignored unless \code{include_top = TRUE}. Set
-\code{classifier_activation = NULL} to return the logits of the "top" layer.
-Defaults to \code{'softmax'}. When loading pretrained weights,
-\code{classifier_activation} can only be \code{NULL} or \code{"softmax"}.}
-
 \item{x}{\code{preprocess_input()} takes an array or floating point tensor, 3D or
 4D with 3 color channels, with values in the range \verb{[0, 255]}.}
+
+\item{...}{For backwards and forwards compatibility}
 }
 \description{
 Instantiates the ResNet architecture

@@ -4,17 +4,17 @@ attach_source("tools/common.R")
 
 # TODO: add PR for purrr::rate_throttle("3 per minute")
 
-endpoints <- str_c("keras.", c(
-  "activations", #
-  "regularizers", #
-  "callbacks",   #
-  "constraints", #
-  "initializers", #
-  "layers",       #
-  "ops",          #
-  "optimizers"    ,
-  "applications",
-  "datasets"
+endpoints <- str_c("keras.", c %(% {
+
+  "activations"  #
+  "regularizers" #
+  "callbacks"    #
+  "constraints"  #
+  "initializers" #
+  "layers"       #
+  "ops"          #
+  "optimizers"   #
+  "applications"
   # "losses",
   # "metrics",
 
@@ -30,7 +30,9 @@ endpoints <- str_c("keras.", c(
   # "saving",
   # "Sequential",
   # "utils"
-  )
+  # "datasets"  # datasets unchanged, no need to autogen
+}
+
   ) |> lapply(\(module) {
     nms <- names(py_eval(module)) |>
       setdiff(c("experimental", "deserialize", "serialize", "get"))
@@ -124,8 +126,8 @@ df <-
 df |>
   mutate(endpoint_sans_name = str_extract(endpoint, "keras\\.(.*)\\.[^.]+$", 1)) |>
   filter(endpoint_sans_name %in% c("layers", "ops", "constraints", "initializers",
-                                   "callbacks",
-                                   "optimizers",
+                                   "callbacks", "optimizers",
+                                   "applications",
                                    "activations", "regularizers")) |> #
   # select(endpoint, r_name, module, type) |>
   arrange(endpoint_sans_name, module, name) |>
