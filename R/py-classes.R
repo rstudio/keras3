@@ -125,7 +125,8 @@ resolve_py_type_inherits <- function(inherit, convert=FALSE) {
   # (both potentially of length 0)
 
   if(is.null(inherit) || identical(inherit, list()))
-    return(list(bases = tuple(), keywords = list()))
+    return(list(bases = py_eval("(,)", convert = FALSE),
+                keywords = list()))
 
   bases <-
     if (inherits(inherit, "python.builtin.tuple")) as.list(inherit)
@@ -169,10 +170,10 @@ resolve_py_type_inherits <- function(inherit, convert=FALSE) {
 as_py_methods <- function(x, env, convert, class_name) {
   out <- list()
 
-  if ("initialize" %in% names(x) && "__init__" %in% names(x))
+  if (all(c("initialize", "__init__") %in% names(x)))
     stop("You should not specify both `__init__` and `initialize` methods.")
 
-  if ("finalize" %in% names(x) && "__del__" %in% names(x))
+  if (all(c("finalize", "__del__") %in% names(x)))
     stop("You should not specify both `__del__` and `finalize` methods.")
 
   for (name in names(x)) {
@@ -242,18 +243,18 @@ as_py_method <- function(fn, name, env, convert, label) {
 
     # Can't use py_func here because it doesn't accept a `convert` argument
 
-    py_sig <- tryCatch(r_formals_to_py__signature__(fn),
-                       error = function(e) NULL)
+   # Can't use __signature__ to communicate w/ the python side anymore
+   # because binding of 'self' for instance methods doesn't update __signature__,
+   # resulting in errors for checks in keras_core for 'build()' method arg names.
 
     attr(fn, "py_function_name") <- name
     attr(fn, "pillar") <- list(label = label) # for print method of rlang::trace_back()
 
+    fn <- py_func2(fn, convert, name = name)
     # https://github.com/rstudio/reticulate/issues/1024
     fn <- py_to_r(r_to_py(fn, convert))
     assign("convert", convert, as.environment(fn))
 
-    if(!is.null(py_sig))
-      fn$`__signature__` <- py_sig
 
     if(!is.null(doc))
       fn$`__doc__` <- doc
@@ -298,6 +299,32 @@ r_formals_to_py__signature__ <- function(fn) {
   inspect$Signature(params)
 }
 
+
+py_func2 <- function(fn, convert, name = deparse(substitute(fn))) {
+  # TODO: wrap this all in a tryCatch() that gives a nice error message
+  # about unsupported signatures
+  sig <- r_formals_to_py__signature__(fn) |> py_to_r()
+  inspect <- import("inspect")
+  pass_sig <- iterate(sig$parameters$values(), function(p) {
+    if(p$kind == inspect$Parameter$POSITIONAL_ONLY)
+      p$name
+    else if (p$kind == inspect$Parameter$VAR_POSITIONAL)
+     paste0("*", p$name)
+    else if (p$kind == inspect$Parameter$VAR_KEYWORD)
+     paste0("**", p$name)
+    else
+     paste0(p$name, "=", p$name)
+  })
+  pass_sig <- paste0(pass_sig, collapse = ", ")
+  code <- glue::glue(r"---(
+def wrap_fn(_fn):
+  def {name}{py_str(sig)}:
+    return _fn({pass_sig})
+  return {name}
+  )---")
+  util <- reticulate::py_run_string(code, local = TRUE)
+  util$wrap_fn(fn)
+}
 
 
 # TODO: (maybe?) factor out a py_class() function,
@@ -669,3 +696,4 @@ mark_active <- function(x) {
 is_marked_active <- function(x)
   identical(attr(x, "marked_active", TRUE), TRUE)
 
+KerasWrapper <- NULL
