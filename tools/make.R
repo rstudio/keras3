@@ -4,6 +4,8 @@ attach_source("tools/common.R")
 
 # TODO: add PR for purrr::rate_throttle("3 per minute")
 
+# TODO: fix py_func(), for r_to_py.R6ClassGenerator
+#   can't use __signature__ anymore in keras_core...
 endpoints <- str_c("keras.", c %(% {
 
   "activations"  #
