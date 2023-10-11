@@ -46,3 +46,70 @@ backend_normalize_shape <- function(shape) {
 
   normalize_shape(shape)
 }
+
+
+k_random_binomial <-
+  function(shape,
+           p = 0.0,
+           dtype = NULL,
+           seed = NULL) {
+
+    tf <- import("tensorflow")
+
+    x <- tf$random$uniform(backend_normalize_shape(shape),
+                           dtype = dtype,
+                           seed = as_integer(seed))
+
+    x > (1 - p)
+  }
+
+#' @export
+#' @rdname k_random_bernoulli
+k_random_bernoulli <- k_random_binomial
+
+
+#' Returns a tensor with normal distribution of values.
+#'
+#' @param shape A list of integers, the shape of tensor to create.
+#' @param mean A float, mean of the normal distribution to draw samples.
+#' @param stddev A float, standard deviation of the normal distribution to draw
+#'   samples.
+#' @param dtype String, dtype of returned tensor.
+#' @param seed Integer, random seed.
+#'
+#' @return A tensor.
+#'
+#' @template roxlate-keras-backend
+#'
+#' @export
+k_random_normal <- function(shape, mean = 0.0, stddev = 1.0, dtype = NULL, seed = NULL) {
+  args <- capture_args2(list(shape = backend_normalize_shape, seed = as_integer))
+  tf <- import("tensorflow")
+  tf$random$normal(!!!args)
+}
+
+
+
+
+#' Returns a tensor with uniform distribution of values.
+#'
+#' @param shape A list of integers, the shape of tensor to create.
+#' @param minval A float, lower boundary of the uniform distribution to draw samples.
+#' @param maxval A float, upper boundary of the uniform distribution to draw samples.
+#' @param dtype String, dtype of returned tensor.
+#' @param seed Integer, random seed.
+#'
+#' @return A tensor.
+#'
+#' @template roxlate-keras-backend
+#'
+#' @export
+k_random_uniform <- function(shape, minval = 0.0, maxval = 1.0, dtype = NULL, seed = NULL) {
+  if(!is.null(dtype)) {
+    minval <- as_tensor(minval, dtype = dtype)
+    maxval <- as_tensor(maxval, dtype = dtype)
+  }
+  args <- capture_args2(list(shape = backend_normalize_shape, seed = as_integer))
+  tf <- import("tensorflow")
+  tf$random$uniform(!!!args)
+}

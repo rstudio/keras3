@@ -155,3 +155,10 @@ local_tf_device <- function(device_name = "CPU") {
   invisible(device)
 }
 
+k_constant <- function(value, dtype = NULL, shape = NULL, name = NULL) {
+  if(!is.null(name)) stop("no name")
+  x <- reticulate::np_array(value, dtype)
+  if(!is.null(shape))
+    x <- x$reshape(as.integer(shape))
+  x
+}
