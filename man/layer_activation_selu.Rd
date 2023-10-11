@@ -58,3 +58,4 @@ and the number of input units is "large enough"
 \item \url{https://www.tensorflow.org/api_docs/python/tf/keras/activations/selu}
 }
 }
+\concept{activation layers}

@@ -185,6 +185,8 @@ make_roxygen_tags <- function(endpoint, py_obj, type) {
     family <- get_layer_family(py_obj)
   else if (endpoint |> startsWith("keras.ops."))
     family <- "ops"
+  else if (endpoint |> startsWith("keras.activation"))
+    family <- "activation functions"
   else
     family <- type
 
@@ -211,7 +213,7 @@ get_tf_doc_link <- function(endpoint) {
 get_layer_family <- function(layer) {
 
   family <- layer$`__module__` |>
-    str_extract(".*\\.layers\\.(.*)\\.", group = 1) |>
+    str_extract(".*\\.layers\\.(.*)s?\\.", group = 1) |>
     replace_val("rnn", "recurrent") |>
     str_replace_all("_", " ")
 
@@ -330,6 +332,9 @@ make_r_fn <- function(endpoint,
   if(endpoint |> startsWith("keras.ops.")) {
     return(make_r_fn.op(endpoint, py_obj, transformers))
   }
+  if(endpoint |> startsWith("keras.activation")) {
+    return(make_r_fn.activation(endpoint, py_obj, transformers))
+  }
   switch(keras_class_type(py_obj),
          layer = make_r_fn.layer(endpoint, py_obj, transformers),
          make_r_fn.default(endpoint, py_obj, transformers))
@@ -367,6 +372,12 @@ make_r_fn.op <- function(endpoint, py_obj, transformers) {
 
   fn
 
+}
+
+make_r_fn.activation <- function(endpoint,py_obj, transformers) {
+  fn <- make_r_fn.default(endpoint, py_obj, transformers)
+  attr(fn, "py_function_name") <- py_obj$`__name__`
+  fn
 }
 
 make_r_fn.layer <- function(endpoint, py_obj, transformers) {
@@ -536,6 +547,7 @@ mk_layer_activation_selu <- function() {
     layer_activation(object, activation = "selu", ...)
   })
   selu$tags$inheritDotParams <- "layer_activation"
+  selu$tags$family <- "activation layers"
   selu$params$object <- "tensor or model"
 
   selu$dump <- with(selu, dump_keras_export(doc, params,

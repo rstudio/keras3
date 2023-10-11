@@ -185,6 +185,8 @@ keras <- NULL
   registerS3method("[[", "python_class_super", active_extract2)
   registerS3method("$", "python_class_super", active_extract2)
 
+  requireNamespace("tensorflow")
+
 }
 
 keras_not_found_message <- function(error_message) {

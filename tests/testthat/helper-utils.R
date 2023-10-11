@@ -61,7 +61,11 @@ test_call_succeeds <- function(call_name, expr, required_version = NULL) {
 }
 
 is_backend <- function(name) {
-  is_keras_available() && identical(backend()$backend(), name)
+  if(keras$`__name__` == "keras_core")
+    backend <- keras$config$backend()
+  else
+    backend <- backend()$backend()
+  is_keras_available() && identical(backend, name)
 }
 
 skip_if_cntk <- function() {
