@@ -244,7 +244,7 @@ make_r_name <- function(endpoint, module = py_eval(endpoint)$`__module__`) {
     snakecase::to_snake_case() |>
     str_replace("_([0-9])_d(_|$)", "_\\1d\\2") |>  # conv_1_d  ->  conv_1d
     str_replace("re_lu", "relu") |>
-    str_replace_all("l_[12]", "l_[12]")
+    str_replace_all("(^|_)l_([12])", "\\1l\\2") # l_1_l_2 -> l1_l2
 
   name <- str_c(prefix, "_", name)
 
@@ -259,7 +259,10 @@ make_r_name <- function(endpoint, module = py_eval(endpoint)$`__module__`) {
     name %<>% str_replace("^layer_", "layer_activation_")
 
   name <- name |>
-    replace_val("layer_activation_p_relu", "layer_activation_parametric_relu")
+    replace_val("layer_activation_p_relu", "layer_activation_parametric_relu") |>
+    replace_val("regularizer_orthogonal_regularizer", "regularizer_orthogonal") |>
+    identity()
+
 
   name
 }
