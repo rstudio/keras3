@@ -124,6 +124,7 @@ parse_params_section <- function(docstring_args_section) {
   description <- m[,"desc"] %|% x
   param_name <- m[,"name"] |> zoo::na.locf0()
   param_name[startsWith(param_name, "**")] <- "..."
+  param_name[param_name == "kwargs"] <- "..."
 
   if(any(startsWith(param_name, "*"))) browser()
   # if both *args and **kwargs are documented, collapse them into the "..." param (todo)
@@ -135,6 +136,7 @@ parse_params_section <- function(docstring_args_section) {
   out
 }
 
+# TODO: bring back callback_backup_and_restore()?
 
 fence_in_examples_w_prompt_prefix <- function(docstring) {
 
@@ -241,6 +243,7 @@ make_r_name <- function(endpoint, module = py_eval(endpoint)$`__module__`) {
   prefix <- str_replace(x, "s$", "") |> str_flatten("_")
 
   name <- name |>
+    str_replace("NaN", "Nan") |>
     snakecase::to_snake_case() |>
     str_replace("_([0-9])_d(_|$)", "_\\1d\\2") |>  # conv_1_d  ->  conv_1d
     str_replace("re_lu", "relu") |>
@@ -257,6 +260,7 @@ make_r_name <- function(endpoint, module = py_eval(endpoint)$`__module__`) {
   # no _ in up_sampling
   name %<>% str_replace("^layer_up_sampling_", "layer_upsampling_")
 
+  name %<>% str_replace("tensor_board", "tensorboard")
   # activation layers get a prefix (except for layer_activation())
   if(startsWith(name, "layer_") &&
      str_detect(module, "\\.activations?\\.") &&
@@ -266,6 +270,8 @@ make_r_name <- function(endpoint, module = py_eval(endpoint)$`__module__`) {
   name <- name |>
     replace_val("layer_activation_p_relu", "layer_activation_parametric_relu") |>
     replace_val("regularizer_orthogonal_regularizer", "regularizer_orthogonal") |>
+    replace_val("callback_lambda_callback", "callback_lambda") |>
+    # replace_val("callback_callback_list", "callback_list") |>
     identity()
 
 
