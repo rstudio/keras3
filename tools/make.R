@@ -125,7 +125,7 @@ df |>
   mutate(endpoint_sans_name = str_extract(endpoint, "keras\\.(.*)\\.[^.]+$", 1)) |>
   filter(endpoint_sans_name %in% c("layers", "ops", "constraints", "initializers",
                                    "callbacks",
-                                   # "optimizers",
+                                   "optimizers",
                                    "activations", "regularizers")) |> #
   # select(endpoint, r_name, module, type) |>
   arrange(endpoint_sans_name, module, name) |>
@@ -183,6 +183,8 @@ df |>
 
     writeLines(txt, file)
   })
+
+devtools::document()
 
 stop("DONE", call. = FALSE)
 

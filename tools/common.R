@@ -254,12 +254,13 @@ make_r_name <- function(endpoint, module = py_eval(endpoint)$`__module__`) {
 
   name <- name |>
     str_replace("NaN", "Nan") |>
-    str_replace("RMSprop$", "Rms_prop") |>
+    str_replace("RMSprop$", "Rmsprop") |>
+    str_replace("ReLU$", "Relu") |>
 
     snakecase::to_snake_case() |>
 
     str_replace("_([0-9])_d(_|$)", "_\\1d\\2") |>  # conv_1_d  ->  conv_1d
-    str_replace("re_lu", "relu") |>
+    # str_replace("re_lu", "relu") |>
     str_replace_all("(^|_)l_([12])", "\\1l\\2") |> # l_1_l_2 -> l1_l2
     str_replace_all("max_norm", "maxnorm") |>
     str_replace_all("non_neg", "nonneg") |>
