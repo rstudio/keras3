@@ -185,6 +185,10 @@ keras <- NULL
   registerS3method("[[", "python_class_super", active_extract2)
   registerS3method("$", "python_class_super", active_extract2)
 
+  # TODO: remove this requireNamespace()
+  # temporarily here to enable passing of tests -
+  # tensorflow:::.onLoad() registers some reticulate class filter hooks
+  # we need to identify tensors reliably.
   requireNamespace("tensorflow")
 
 }
