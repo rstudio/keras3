@@ -275,7 +275,7 @@ multi_gpu_model <- function(model, gpus = NULL, cpu_merge = TRUE, cpu_relocation
 
 #' @importFrom reticulate py_to_r_wrapper
 #' @export
-py_to_r_wrapper.keras.engine.training.Model <- function(x) {
+py_to_r_wrapper.keras.models.model.Model <- function(x) {
   force(x)
   function(object, ...) {
     compose_layer(object, x, ...)
@@ -424,7 +424,7 @@ clone_model <- function(model, input_tensors = NULL, clone_function = NULL) {
 #' @family model functions
 #'
 #' @export
-compile.keras.engine.training.Model <-
+compile.keras.models.model.Model <-
   function(object,
            optimizer = NULL,
            loss = NULL,
@@ -672,7 +672,7 @@ resolve_main_thread_generators <- function(x, callback_type = "on_train_batch_be
 #' @family model functions
 #'
 #' @export
-fit.keras.engine.training.Model <-
+fit.keras.models.model.Model <-
   function(object, x = NULL, y = NULL, batch_size=NULL, epochs=10,
            verbose = getOption("keras.fit_verbose", default = "auto"), callbacks=NULL,
            view_metrics = getOption("keras.view_metrics", default = "auto"),
@@ -743,7 +743,7 @@ fit.keras.engine.training.Model <-
 
 #' Evaluate a Keras model
 
-#' @inheritParams fit.keras.engine.training.Model
+#' @inheritParams fit.keras.models.model.Model
 #'
 #' @param object Model object to evaluate
 #' @param x Vector, matrix, or array of test data (or list if the model has
@@ -768,7 +768,7 @@ fit.keras.engine.training.Model <-
 #' @family model functions
 #'
 #' @export
-evaluate.keras.engine.training.Model <- function(object, x = NULL, y = NULL, batch_size = NULL,
+evaluate.keras.models.model.Model <- function(object, x = NULL, y = NULL, batch_size = NULL,
                                                  verbose="auto", sample_weight = NULL, steps = NULL,
                                                  callbacks = NULL, ...) {
 
@@ -829,7 +829,7 @@ resolve_callbacks <- function(args, callbacks) {
 #' Generates output predictions for the input samples, processing the samples in
 #' a batched way.
 #'
-#' @inheritParams evaluate.keras.engine.training.Model
+#' @inheritParams evaluate.keras.models.model.Model
 #'
 #' @param object Keras model
 #' @param x Input data (vector, matrix, or array). You can also
@@ -849,7 +849,7 @@ resolve_callbacks <- function(args, callbacks) {
 #'
 #' @importFrom stats predict
 #' @export
-predict.keras.engine.training.Model <-
+predict.keras.models.model.Model <-
 function(object,
          x,
          batch_size = NULL,
@@ -924,7 +924,7 @@ as_model_verbose_arg <- function(x, old_default = 1L) {
 #'       model %>% predict(x) %>% `>`(0.5) %>% k_cast("int32")
 #'  ```
 #'
-#' @inheritParams predict.keras.engine.training.Model
+#' @inheritParams predict.keras.models.model.Model
 #'
 #' @param object Keras model object
 #' @param steps Total number of steps (batches of samples) before declaring the
@@ -998,7 +998,7 @@ Please update your code:
 
 #' Returns predictions for a single batch of samples.
 #'
-#' @inheritParams predict.keras.engine.training.Model
+#' @inheritParams predict.keras.models.model.Model
 #'
 #' @param object Keras model object
 #'
@@ -1058,7 +1058,7 @@ test_on_batch <- function(object, x, y, sample_weight = NULL) {
 #' this allows you to do real-time data augmentation on images on CPU in
 #' parallel to training your model on GPU.
 #'
-#' @inheritParams fit.keras.engine.training.Model
+#' @inheritParams fit.keras.models.model.Model
 #'
 #' @param object Keras model object
 #' @param generator A generator (e.g. like the one provided by
@@ -1165,7 +1165,7 @@ fit_generator <- function(object, generator, steps_per_epoch, epochs = 1,
 #' The generator should return the same kind of data as accepted by
 #' `test_on_batch()`.
 #'
-#' @inheritParams evaluate.keras.engine.training.Model
+#' @inheritParams evaluate.keras.models.model.Model
 #' @inheritParams fit_generator
 #'
 #' @param generator Generator yielding lists (inputs, targets) or (inputs,
@@ -1208,7 +1208,7 @@ evaluate_generator <- function(object, generator, steps, max_queue_size = 10, wo
 #' The generator should return the same kind of data as accepted by
 #' `predict_on_batch()`.
 #'
-#' @inheritParams predict.keras.engine.training.Model
+#' @inheritParams predict.keras.models.model.Model
 #' @inheritParams fit_generator
 #'
 #' @param object Keras model object
@@ -1439,14 +1439,14 @@ pop_layer <- function(object) {
 #'   invisibly after printing it.
 #'
 #' @export
-summary.keras.engine.training.Model <- function(object, ...) {
-  writeLines(f <- format.keras.engine.training.Model(object, ...))
+summary.keras.models.model.Model <- function(object, ...) {
+  writeLines(f <- format.keras.models.model.Model(object, ...))
   invisible(f)
 }
 
-#' @rdname summary.keras.engine.training.Model
+#' @rdname summary.keras.models.model.Model
 #' @export
-format.keras.engine.training.Model <-
+format.keras.models.model.Model <-
 function(x,
          line_length = width - (11L * show_trainable),
          positions = NULL,
@@ -1482,19 +1482,19 @@ function(x,
 }
 
 #
-#' @rdname summary.keras.engine.training.Model
+#' @rdname summary.keras.models.model.Model
 #' @export
-print.keras.engine.training.Model <- function(x, ...) {
-  writeLines(format.keras.engine.training.Model(x, ...))
+print.keras.models.model.Model <- function(x, ...) {
+  writeLines(format.keras.models.model.Model(x, ...))
   invisible(x)
 }
 
 #' @importFrom reticulate py_str
 #' @export
-py_str.keras.engine.training.Model <- function(object, line_length = getOption("width"), positions = NULL, ...) {
+py_str.keras.models.model.Model <- function(object, line_length = getOption("width"), positions = NULL, ...) {
   # still invoked by utils::str()
   # warning("`py_str()` generic is deprecated")
-  format.keras.engine.training.Model(object, line_length = line_length, positions = positions, ...)
+  format.keras.models.model.Model(object, line_length = line_length, positions = positions, ...)
 }
 
 

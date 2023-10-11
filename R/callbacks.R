@@ -25,7 +25,7 @@
 #' @details  The `logs` named list that callback methods take as argument will
 #' contain keys for quantities relevant to the current batch or epoch.
 #'
-#' Currently, the `fit.keras.engine.training.Model()` method for sequential
+#' Currently, the `fit.keras.models.model.Model()` method for sequential
 #' models will include the following quantities in the `logs` that
 #' it passes to its callbacks:
 #'

@@ -41,9 +41,9 @@ The generator should return the same kind of data as accepted by
 }
 \seealso{
 Other model functions: 
-\code{\link{compile.keras.engine.training.Model}()},
-\code{\link{evaluate.keras.engine.training.Model}()},
-\code{\link{fit.keras.engine.training.Model}()},
+\code{\link{compile.keras.models.model.Model}()},
+\code{\link{evaluate.keras.models.model.Model}()},
+\code{\link{fit.keras.models.model.Model}()},
 \code{\link{fit_generator}()},
 \code{\link{get_config}()},
 \code{\link{get_layer}()},
@@ -51,11 +51,11 @@ Other model functions:
 \code{\link{keras_model}()},
 \code{\link{multi_gpu_model}()},
 \code{\link{pop_layer}()},
-\code{\link{predict.keras.engine.training.Model}()},
+\code{\link{predict.keras.models.model.Model}()},
 \code{\link{predict_generator}()},
 \code{\link{predict_on_batch}()},
 \code{\link{predict_proba}()},
-\code{\link{summary.keras.engine.training.Model}()},
+\code{\link{summary.keras.models.model.Model}()},
 \code{\link{train_on_batch}()}
 }
 \concept{model functions}

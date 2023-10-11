@@ -28,7 +28,7 @@
 #'   name for the Loss instance.
 #'
 #' @details Loss functions for model training. These are typically supplied in
-#'   the `loss` parameter of the [compile.keras.engine.training.Model()]
+#'   the `loss` parameter of the [compile.keras.models.model.Model()]
 #'   function.
 #'
 #' @returns If called with `y_true` and `y_pred`, then the corresponding loss is
@@ -38,7 +38,7 @@
 #'   `reduction` parameter for details. (The callable is a typically a class
 #'   instance that inherits from `keras$losses$Loss`).
 #'
-#' @seealso [compile.keras.engine.training.Model()],
+#' @seealso [compile.keras.models.model.Model()],
 #'   [loss_binary_crossentropy()]
 #'
 NULL

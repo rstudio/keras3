@@ -12,7 +12,7 @@ test_succeeds("keras pre-built models can be instantiated", {
   if (skip_applications)
     testthat::skip("Skipping testing applications")
 
-  expect_model <-   function(x) expect_s3_class(x, "keras.engine.training.Model")
+  expect_model <-   function(x) expect_s3_class(x, "keras.models.model.Model")
 
   expect_model(application_xception() )
   expect_model(application_mobilenet())

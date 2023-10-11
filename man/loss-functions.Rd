@@ -189,7 +189,7 @@ Loss functions
 }
 \details{
 Loss functions for model training. These are typically supplied in
-the \code{loss} parameter of the \code{\link[=compile.keras.engine.training.Model]{compile.keras.engine.training.Model()}}
+the \code{loss} parameter of the \code{\link[=compile.keras.models.model.Model]{compile.keras.models.model.Model()}}
 function.
 }
 \section{binary_crossentropy}{
@@ -244,6 +244,6 @@ in the chosen precision.
 }
 
 \seealso{
-\code{\link[=compile.keras.engine.training.Model]{compile.keras.engine.training.Model()}},
+\code{\link[=compile.keras.models.model.Model]{compile.keras.models.model.Model()}},
 \code{\link[=loss_binary_crossentropy]{loss_binary_crossentropy()}}
 }
