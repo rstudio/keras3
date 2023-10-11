@@ -56,8 +56,8 @@ k_random_binomial <-
 
     tf <- import("tensorflow")
 
-    x <- tf$random$uniform(backend_normalize_shape(shape),
-                           dtype = dtype,
+    x <- tf$random$uniform(shape = backend_normalize_shape(shape),
+                           dtype = dtype %||% keras$config$floatx(),
                            seed = as_integer(seed))
 
     x > (1 - p)
@@ -113,3 +113,13 @@ k_random_uniform <- function(shape, minval = 0.0, maxval = 1.0, dtype = NULL, se
   tf <- import("tensorflow")
   tf$random$uniform(!!!args)
 }
+
+k_is_tensor <- function(x) keras$utils$is_keras_tensor(x)
+
+k_clear_session <- function() keras$backend$clear_session()
+
+k_variable <- function(...) keras$Variable(...)
+
+k_backend <- function() keras$config$backend()
+
+

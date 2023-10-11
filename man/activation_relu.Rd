@@ -2,107 +2,69 @@
 % Please edit documentation in R/activations.R
 \name{activation_relu}
 \alias{activation_relu}
-\alias{activation_elu}
-\alias{activation_selu}
-\alias{activation_hard_sigmoid}
-\alias{activation_linear}
-\alias{activation_sigmoid}
-\alias{activation_softmax}
-\alias{activation_softplus}
-\alias{activation_softsign}
-\alias{activation_tanh}
-\alias{activation_exponential}
-\alias{activation_gelu}
-\alias{activation_swish}
-\title{Activation functions}
+\title{Applies the rectified linear unit activation function.}
 \usage{
-activation_relu(x, alpha = 0, max_value = NULL, threshold = 0)
-
-activation_elu(x, alpha = 1)
-
-activation_selu(x)
-
-activation_hard_sigmoid(x)
-
-activation_linear(x)
-
-activation_sigmoid(x)
-
-activation_softmax(x, axis = -1)
-
-activation_softplus(x)
-
-activation_softsign(x)
-
-activation_tanh(x)
-
-activation_exponential(x)
-
-activation_gelu(x, approximate = FALSE)
-
-activation_swish(x)
+activation_relu(x, negative_slope = 0, max_value = NULL, threshold = 0)
 }
 \arguments{
-\item{x}{Tensor}
+\item{x}{Input tensor.}
 
-\item{alpha}{Alpha value}
+\item{negative_slope}{A \code{float} that controls the slope
+for values lower than the threshold.}
 
-\item{max_value}{Max value}
+\item{max_value}{A \code{float} that sets the saturation threshold (the largest
+value the function will return).}
 
-\item{threshold}{Threshold value for thresholded activation.}
-
-\item{axis}{Integer, axis along which the softmax normalization is applied}
-
-\item{approximate}{A bool, whether to enable approximation.}
-}
-\value{
-Tensor with the same shape and dtype as \code{x}.
+\item{threshold}{A \code{float} giving the threshold value of the activation
+function below which values will be damped or set to zero.}
 }
 \description{
-\code{relu(...)}: Applies the rectified linear unit activation function.
+With default values, this returns the standard ReLU activation:
+\code{max(x, 0)}, the element-wise maximum of 0 and the input tensor.
 
-\code{elu(...)}: Exponential Linear Unit.
-
-\code{selu(...)}: Scaled Exponential Linear Unit (SELU).
-
-\code{hard_sigmoid(...)}: Hard sigmoid activation function.
-
-\code{linear(...)}: Linear activation function (pass-through).
-
-\code{sigmoid(...)}: Sigmoid activation function, \code{sigmoid(x) = 1 / (1 + exp(-x))}.
-
-\code{softmax(...)}: Softmax converts a vector of values to a probability distribution.
-
-\code{softplus(...)}: Softplus activation function, \code{softplus(x) = log(exp(x) + 1)}.
-
-\code{softsign(...)}: Softsign activation function, \code{softsign(x) = x / (abs(x) + 1)}.
-
-\code{tanh(...)}: Hyperbolic tangent activation function.
-
-\code{exponential(...)}: Exponential activation function.
-
-\code{gelu(...)}: Applies the Gaussian error linear unit (GELU) activation function.
-
-\code{swish(...)}: Swish activation function, \code{swish(x) = x * sigmoid(x)}.
+Modifying default parameters allows you to use non-zero thresholds,
+change the max value of the activation,
+and to use a non-zero multiple of the input for values below the threshold.
 }
-\details{
-Activations functions can either be used through \code{\link[=layer_activation]{layer_activation()}}, or
-through the activation argument supported by all forward layers.
-\itemize{
-\item \code{activation_selu()} to be used together with the initialization "lecun_normal".
-\item \code{activation_selu()} to be used together with the dropout variant "AlphaDropout".
+\section{Examples}{
+\if{html}{\out{<div class="sourceCode python">}}\preformatted{x = [-10, -5, 0.0, 5, 10]
+keras_core.activations.relu(x)
+# [ 0.,  0.,  0.,  5., 10.]
+keras_core.activations.relu(x, negative_slope=0.5)
+# [-5. , -2.5,  0. ,  5. , 10. ]
+keras_core.activations.relu(x, max_value=5.)
+# [0., 0., 0., 5., 5.]
+keras_core.activations.relu(x, threshold=5.)
+# [-0., -0.,  0.,  0., 10.]
+}\if{html}{\out{</div>}}
 }
-}
-\section{References}{
 
-\itemize{
-\item \code{activation_swish()}: \href{https://arxiv.org/abs/1710.05941}{Searching for Activation Functions}
-\item \code{activation_gelu()}: \href{https://arxiv.org/abs/1606.08415}{Gaussian Error Linear Units (GELUs)}
-\item \code{activation_selu()}: \href{https://arxiv.org/abs/1706.02515}{Self-Normalizing Neural Networks}
-\item \code{activation_elu()}: \href{https://arxiv.org/abs/1511.07289}{Fast and Accurate Deep Network Learning by Exponential Linear Units (ELUs)}
-}
+\section{Returns}{
+\if{html}{\out{<div class="sourceCode">}}\preformatted{A tensor with the same shape and dtype as input `x`.
+}\if{html}{\out{</div>}}
 }
 
 \seealso{
-\url{https://www.tensorflow.org/api_docs/python/tf/keras/activations}
+\itemize{
+\item \url{https://www.tensorflow.org/api_docs/python/tf/keras/activations/relu}
 }
+
+Other activation functions: 
+\code{\link{activation_elu}()},
+\code{\link{activation_exponential}()},
+\code{\link{activation_gelu}()},
+\code{\link{activation_hard_sigmoid}()},
+\code{\link{activation_leaky_relu}()},
+\code{\link{activation_linear}()},
+\code{\link{activation_log_softmax}()},
+\code{\link{activation_mish}()},
+\code{\link{activation_relu_6}()},
+\code{\link{activation_selu}()},
+\code{\link{activation_sigmoid}()},
+\code{\link{activation_silu}()},
+\code{\link{activation_softmax}()},
+\code{\link{activation_softplus}()},
+\code{\link{activation_softsign}()},
+\code{\link{activation_tanh}()}
+}
+\concept{activation functions}

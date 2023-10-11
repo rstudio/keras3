@@ -391,6 +391,7 @@ r"-(Scaled Exponential Linear Unit (SELU).
 #' @param object tensor or model
 #'
 #' @export
+#' @family activation layers
 #' @seealso
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/activations/selu>
 #' @inheritDotParams layer_activation

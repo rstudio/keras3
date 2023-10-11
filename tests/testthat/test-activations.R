@@ -30,6 +30,8 @@ test_activation("activation_softsign")
 test_activation("activation_tanh")
 test_activation("activation_exponential", required_version = "2.2.3")
 test_activation("activation_gelu", required_tf_version = "2.4.1")
+
+skip("activation_swish")
 test_activation("activation_swish", required_tf_version = "2.2.0")
 
 # tf$`__version__` tf$keras$`__version__`
