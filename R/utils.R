@@ -17,12 +17,14 @@ resolve_utils <- function() {
 #' @export
 to_categorical <- function(y, num_classes = NULL, dtype = "float32") {
 
+  # TODO: handle factor/character https://github.com/rstudio/keras/issues/1055
+  # TODO: make it 1 based?
   args <- list(
-    y = y,
-    num_classes = as_nullable_integer(num_classes)
+    y,
+    num_classes = as_integer(num_classes)
   )
 
-  if (keras_version() >= "2.2.3")
+  if (keras_version() < "3.0")
     args$dtype <- dtype
 
   do.call(resolve_utils()$to_categorical, args)
