@@ -97,7 +97,8 @@ endpoints <-
             "keras.layers.InputLayer",
             "keras.layers.InputSpec",
             "keras.optimizers.Optimizer",
-            "keras.regularizers.Regularizer"))
+            "keras.regularizers.Regularizer",
+            "keras.constraints.Constraint"))
 
 df <-
   endpoints |>
@@ -118,7 +119,8 @@ df <-
 
 df |>
   mutate(endpoint_sans_name = str_extract(endpoint, "keras\\.(.*)\\.[^.]+$", 1)) |>
-  filter(endpoint_sans_name %in% c("layers", "ops", "activations", "regularizers")) |> #
+  filter(endpoint_sans_name %in% c("layers", "ops", "constraints",
+                                   "activations", "regularizers")) |> #
   # select(endpoint, r_name, module, type) |>
   arrange(endpoint_sans_name, module, name) |>
   mutate(file = if_else(endpoint_sans_name == "layers",
