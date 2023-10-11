@@ -55,8 +55,9 @@ If you never set it, then it will be \code{"channels_last"}.}
 
 \item{dilation_rate}{int or tuple/list of 1 integers, specifying the dilation
 rate to use for dilated convolution. If only one int is specified,
-the same dilation rate will be used for all dimensions.
-depth_multiplier: The number of depthwise convolution output channels
+the same dilation rate will be used for all dimensions.}
+
+\item{depth_multiplier}{The number of depthwise convolution output channels
 for each input channel. The total number of depthwise convolution
 output channels will be equal to \code{input_channel * depth_multiplier}.}
 

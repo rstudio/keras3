@@ -83,7 +83,7 @@ r"-(Reload a Keras model/layer that was saved via SavedModel / ExportArchive.
 #' @export
 #' @seealso
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/layers/TFSMLayer>
-layer_tfsm_layer <-
+layer_tfsm <-
 function (object, filepath, call_endpoint = "serve", call_training_endpoint = NULL,
     trainable = TRUE, name = NULL, dtype = NULL)
 {

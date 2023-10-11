@@ -5,18 +5,18 @@ attach_source("tools/common.R")
 # TODO: add PR for purrr::rate_throttle("3 per minute")
 
 endpoints <- str_c("keras.", c(
-  "activations",
+  "activations", #
+  "regularizers", #
+  "callbacks",   #
+  "constraints", #
+  "initializers", #
+  "layers",       #
+  "ops",          #
+  "optimizers"    ,
   "applications",
-  "regularizers",
-  "callbacks",
-  "constraints",
-  "initializers",
-  "datasets",
-  "layers",
-  "ops",
+  "datasets"
   # "losses",
   # "metrics",
-  "optimizers"
 
   # "backend",
   # "dtensor",
@@ -125,6 +125,7 @@ df |>
   mutate(endpoint_sans_name = str_extract(endpoint, "keras\\.(.*)\\.[^.]+$", 1)) |>
   filter(endpoint_sans_name %in% c("layers", "ops", "constraints", "initializers",
                                    "callbacks",
+                                   # "optimizers",
                                    "activations", "regularizers")) |> #
   # select(endpoint, r_name, module, type) |>
   arrange(endpoint_sans_name, module, name) |>

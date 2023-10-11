@@ -8,32 +8,10 @@ layer_additive_attention(object, use_scale = TRUE, dropout = 0, ...)
 }
 \arguments{
 \item{use_scale}{If \code{True}, will create a scalar variable to scale the
-attention scores.
-dropout: Float between 0 and 1. Fraction of the units to drop for the
-attention scores. Defaults to \code{0.0}.
+attention scores.}
 
-Call Args:
-inputs: List of the following tensors:
-- \code{query}: Query tensor of shape \verb{(batch_size, Tq, dim)}.
-- \code{value}: Value tensor of shape \verb{(batch_size, Tv, dim)}.
-- \code{key}: Optional key tensor of shape \verb{(batch_size, Tv, dim)}. If
-not given, will use \code{value} for both \code{key} and \code{value}, which is
-the most common case.
-mask: List of the following tensors:
-- \code{query_mask}: A boolean mask tensor of shape \verb{(batch_size, Tq)}.
-If given, the output will be zero at the positions where
-\code{mask==False}.
-- \code{value_mask}: A boolean mask tensor of shape \verb{(batch_size, Tv)}.
-If given, will apply the mask such that values at positions
-where \code{mask==False} do not contribute to the result.
-return_attention_scores: bool, it \code{True}, returns the attention scores
-(after masking and softmax) as an additional output argument.
-training: Python boolean indicating whether the layer should behave in
-training mode (adding dropout) or in inference mode (no dropout).
-use_causal_mask: Boolean. Set to \code{True} for decoder self-attention. Adds
-a mask such that position \code{i} cannot attend to positions \code{j > i}.
-This prevents the flow of information from the future towards the
-past. Defaults to \code{False}.}
+\item{dropout}{Float between 0 and 1. Fraction of the units to drop for the
+attention scores. Defaults to \code{0.0}.}
 }
 \description{
 Inputs are a list with 2 or 3 elements:
@@ -55,6 +33,30 @@ The calculation follows the steps:
 with shape \verb{(batch_size, Tq, dim)}.
 }
 }
+\section{Call Args}{
+inputs: List of the following tensors:
+- \code{query}: Query tensor of shape \verb{(batch_size, Tq, dim)}.
+- \code{value}: Value tensor of shape \verb{(batch_size, Tv, dim)}.
+- \code{key}: Optional key tensor of shape \verb{(batch_size, Tv, dim)}. If
+not given, will use \code{value} for both \code{key} and \code{value}, which is
+the most common case.
+mask: List of the following tensors:
+- \code{query_mask}: A boolean mask tensor of shape \verb{(batch_size, Tq)}.
+If given, the output will be zero at the positions where
+\code{mask==False}.
+- \code{value_mask}: A boolean mask tensor of shape \verb{(batch_size, Tv)}.
+If given, will apply the mask such that values at positions
+where \code{mask==False} do not contribute to the result.
+return_attention_scores: bool, it \code{True}, returns the attention scores
+(after masking and softmax) as an additional output argument.
+training: Python boolean indicating whether the layer should behave in
+training mode (adding dropout) or in inference mode (no dropout).
+use_causal_mask: Boolean. Set to \code{True} for decoder self-attention. Adds
+a mask such that position \code{i} cannot attend to positions \code{j > i}.
+This prevents the flow of information from the future towards the
+past. Defaults to \code{False}.
+}
+
 \section{Output}{
 Attention outputs of shape \verb{(batch_size, Tq, dim)}.
 (Optional) Attention scores after masking and softmax with shape

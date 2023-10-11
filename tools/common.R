@@ -15,6 +15,7 @@ known_section_headings <- c(
   # "Outputs:",
   "Output:",
   "Call arguments:",
+  "Call Args:",
   "Returns:",
   "Example:",
   "References:",
@@ -118,15 +119,23 @@ parse_params_section <- function(docstring_args_section) {
     c("") |> # append final new line to ensure glue::trim() still works when length(x) == 1
     str_flatten("\n") |> glue::trim() |> str_split_1("\n")
 
-  m <- str_match(x, "^(?<name>[*]{0,2}[[:alnum:]_]+) ?: (?<desc>.+)$")
-
+  m <- str_match(x, "^\\s{0,3}(?<name>[*]{0,2}[A-Za-z0-9_]+) ?: (?<desc>.+)$")
 
   description <- m[,"desc"] %|% x
-  param_name <- m[,"name"] |> zoo::na.locf0()
+  param_name <- m[,"name"]
+
+  not_param <- which(param_name == "Default")
+  if(length(not_param)) {
+    description[not_param] <- x[not_param]
+    param_name[not_param] <- NA
+  }
+
   param_name[startsWith(param_name, "**")] <- "..."
   param_name[param_name == "kwargs"] <- "..."
 
-  if(any(startsWith(param_name, "*"))) browser()
+  param_name %<>% zoo::na.locf0()
+
+  {if(any(startsWith(param_name, "*"))) browser()} %error% browser()
   # if both *args and **kwargs are documented, collapse them into the "..." param (todo)
 
   out <- split(description, param_name) |>
@@ -235,16 +244,20 @@ make_r_name <- function(endpoint, module = py_eval(endpoint)$`__module__`) {
     endpoint %<>% str_replace(fixed("keras.ops."), "keras.k.")
   x <- str_split_1(endpoint, fixed("."))
 
-  name <- x[length(x)]
-  x <- x[-length(x)]
+  name <- x[length(x)] # __name__
+  x <- x[-length(x)] # submodules
 
   if(length(x) >= 2)
     x <- x[-1] # drop "keras" from "keras.layers.Dense
-  prefix <- str_replace(x, "s$", "") |> str_flatten("_")
+  stopifnot(is_scalar(x))
+  prefix <- x |> str_replace("s$", "") |> str_flatten("_")
 
   name <- name |>
     str_replace("NaN", "Nan") |>
+    str_replace("RMSprop$", "Rms_prop") |>
+
     snakecase::to_snake_case() |>
+
     str_replace("_([0-9])_d(_|$)", "_\\1d\\2") |>  # conv_1_d  ->  conv_1d
     str_replace("re_lu", "relu") |>
     str_replace_all("(^|_)l_([12])", "\\1l\\2") |> # l_1_l_2 -> l1_l2
@@ -252,15 +265,18 @@ make_r_name <- function(endpoint, module = py_eval(endpoint)$`__module__`) {
     str_replace_all("non_neg", "nonneg") |>
     str_replace_all("min_max", "minmax") |>
     str_replace_all("unit_norm$", "unitnorm") |>
+    str_replace("tensor_board", "tensorboard") |>
     identity()
 
+
+  if(prefix != "k")
+    name %<>% str_replace(glue("_{prefix}$"), "")
   name <- str_c(prefix, "_", name)
 
   ## fixes for specific wrappers
   # no _ in up_sampling
   name %<>% str_replace("^layer_up_sampling_", "layer_upsampling_")
 
-  name %<>% str_replace("tensor_board", "tensorboard")
   # activation layers get a prefix (except for layer_activation())
   if(startsWith(name, "layer_") &&
      str_detect(module, "\\.activations?\\.") &&
@@ -270,7 +286,7 @@ make_r_name <- function(endpoint, module = py_eval(endpoint)$`__module__`) {
   name <- name |>
     replace_val("layer_activation_p_relu", "layer_activation_parametric_relu") |>
     replace_val("regularizer_orthogonal_regularizer", "regularizer_orthogonal") |>
-    replace_val("callback_lambda_callback", "callback_lambda") |>
+    # replace_val("callback_lambda_callback", "callback_lambda") |>
     # replace_val("callback_callback_list", "callback_list") |>
     identity()
 
@@ -278,6 +294,7 @@ make_r_name <- function(endpoint, module = py_eval(endpoint)$`__module__`) {
   name
 }
 
+#TODO: param parsing in AdamW borked
 
 transformers_registry <-
   yaml::read_yaml("tools/arg-transformers.yml") %>%
