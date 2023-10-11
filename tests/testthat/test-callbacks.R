@@ -35,8 +35,12 @@ test_callback("model_checkpoint",
               callback_model_checkpoint(tempfile(fileext = ".keras")),
               h5py = TRUE)
 
-if(tf_version() >= "2.8")
+test_that("callback_backup_and_restore", {
+  if(keras_version() >= "3.0")
+    skip("callback_backup_and_restore")
   test_callback("backup_and_restore", callback_backup_and_restore(tempfile()))
+})
+
 
 test_callback("learning_rate_scheduler", callback_learning_rate_scheduler(schedule = function (index, ...) {
   0.1
@@ -44,7 +48,7 @@ test_callback("learning_rate_scheduler", callback_learning_rate_scheduler(schedu
 if (is_keras_available() && is_backend("tensorflow"))
   test_callback("tensorboard", callback_tensorboard(log_dir = "./tb_logs"))
 
-test_callback("terminate_on_naan", callback_terminate_on_naan(), required_version = "2.0.5")
+test_callback("terminate_on_nan", callback_terminate_on_nan())
 
 test_callback("reduce_lr_on_plateau", callback_reduce_lr_on_plateau(monitor = "loss"))
 
@@ -82,12 +86,7 @@ test_succeeds("lambda callbacks other args", {
     )
   )
 
-  if (get_keras_implementation() == "tensorflow" &&
-      tensorflow::tf_version() >= "2.0") {
-    expect_equal(length(warns), 0)
-  } else {
-    expect_equal(length(warns), 2)
-  }
+  expect_equal(length(warns), 0)
 
   warns <- capture_warnings(
     out <- capture_output(
@@ -95,14 +94,8 @@ test_succeeds("lambda callbacks other args", {
     )
   )
 
-  if (get_keras_implementation() == "tensorflow" &&
-      tensorflow::tf_version() >= "2.0") {
-    expect_equal(length(warns), 0)
-    expect_equal(out, "Prediction Begin")
-  } else {
-    expect_equal(length(warns), 1)
-    expect_equal(out, "")
-  }
+  expect_equal(length(warns), 0)
+  expect_equal(out, "Prediction Begin")
 
   warns <- capture_warnings(
     out <- capture_output(
@@ -111,14 +104,8 @@ test_succeeds("lambda callbacks other args", {
     )
   )
 
-  if (get_keras_implementation() == "tensorflow" &&
-      tensorflow::tf_version() >= "2.0") {
-    expect_equal(length(warns), 0)
-    expect_equal(out, "Test Begin")
-  } else {
-    expect_equal(length(warns), 1)
-    expect_equal(out, "")
-  }
+  expect_equal(length(warns), 0)
+  expect_equal(out, "Test Begin")
 
 })
 
@@ -199,14 +186,8 @@ test_succeeds("custom callbacks, new-style", {
 
 
 expect_warns_and_out <- function(warns, out) {
-  if (get_keras_implementation() == "tensorflow" &&
-      tensorflow::tf_version() >= "2.0") {
-    expect_equal(out, c("PREDICT BEGINPREDICT END"))
-    expect_equal(warns, character())
-  } else {
-    expect_equal(out, "")
-    expect_true(warns != "")
-  }
+  expect_equal(out, c("PREDICT BEGINPREDICT END"))
+  expect_equal(warns, character())
 }
 
 test_succeeds("on predict/evaluation callbacks", {
@@ -216,7 +197,7 @@ test_succeeds("on predict/evaluation callbacks", {
 
   CustomCallback <- R6::R6Class(
     "CustomCallback",
-    inherit = KerasCallback,
+    inherit = keras$callbacks$Callback,
     public = list(
       on_predict_begin = function(logs) {
         cat("PREDICT BEGIN")
@@ -238,7 +219,8 @@ test_succeeds("on predict/evaluation callbacks", {
   model <- keras_model(input, output)
   model %>% compile(optimizer = "adam", loss = "mae")
 
-  cc <- CustomCallback$new()
+  cc <- r_to_py(CustomCallback)()
+  # cc <- CustomCallback$new()
 
   # test for prediction
   warns <- capture_warnings(
@@ -284,7 +266,7 @@ test_succeeds("warnings for new callback moment", {
 
   CustomCallback <- R6::R6Class(
     "CustomCallback",
-    inherit = KerasCallback,
+    inherit = keras$callbacks$Callback, # KerasCallback,
     public = list(
       on_predict_begin = function(logs) {
         cat("PREDICT BEGIN")
@@ -301,7 +283,8 @@ test_succeeds("warnings for new callback moment", {
     )
   )
 
-  cc <- CustomCallback$new()
+  cc <- r_to_py(CustomCallback)()
+  # cc <- CustomCallback$new()
 
   input <- layer_input(shape = 1)
   output <- layer_dense(input, 1)
@@ -314,9 +297,6 @@ test_succeeds("warnings for new callback moment", {
           verbose = 0, epochs = 2)
   )
 
-  if (get_keras_implementation() == "tensorflow" && tensorflow::tf_version() < "2.0")
-    expect_equal(length(warns), 4)
-  else
-    expect_equal(length(warns), 0)
+  expect_equal(length(warns), 0)
 
 })

@@ -291,6 +291,8 @@ check_implementation_version <- function() {
 
 # Current version of Keras
 keras_version <- function() {
+  if(keras$`__name__` == "keras_core")
+    return(package_version("3.0"))
   ver <-
     as_r_value(py_get_attr(keras, "__version__", TRUE)) %||%
     tensorflow::tf_config()$version_str

@@ -56,6 +56,7 @@ local_py_capture_output <- function(type = c("stdout", "stderr")) {
   })
 }
 
+local_output_sink <- withr::local_output_sink
 
 test_succeeds <- function(desc, expr, required_version = NULL) {
   expr <- rlang::enquo(expr)
@@ -63,8 +64,10 @@ test_succeeds <- function(desc, expr, required_version = NULL) {
     skip_if_no_keras(required_version)
 
 
-  if(!interactive())
+  if(!interactive()) {
     local_py_capture_output()
+    local_output_sink(nullfile())
+  }
 
   eval.parent(rlang::expr(test_that(!!desc, expect_no_error(!!expr))))
 
@@ -98,9 +101,9 @@ skip_if_tensorflow_implementation <- function() {
 }
 
 define_model <- function() {
-  model <- keras_model_sequential()
+  model <- keras_model_sequential(input_shape = 784)
   model %>%
-    layer_dense(32, input_shape = 784, kernel_initializer = initializer_ones()) %>%
+    layer_dense(32, kernel_initializer = initializer_ones()) %>%
     layer_activation('relu') %>%
     layer_dense(10) %>%
     layer_activation('softmax')

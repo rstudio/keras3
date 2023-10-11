@@ -140,6 +140,10 @@ sequential_model_input_layer <- function(input_shape = NULL,
     args[["input_layer_name"]] <- NULL
   }
 
+  # renamed in v3
+  args$shape <- args$input_shape
+  args$input_shape <- NULL
+
   do.call(keras$layers$InputLayer, args)
 }
 
@@ -802,6 +806,8 @@ evaluate.keras.models.model.Model <- function(object, x = NULL, y = NULL, batch_
     args$steps <- as_nullable_integer(steps)
 
   # perform evaluation
+  # str(args)
+  # browser()
   result <- do.call(object$evaluate, args)
 
   # apply names
@@ -815,12 +821,7 @@ evaluate.keras.models.model.Model <- function(object, x = NULL, y = NULL, batch_
 }
 
 resolve_callbacks <- function(args, callbacks) {
-  if (get_keras_implementation() == "tensorflow" && tensorflow::tf_version() >= "2.0") {
-    args <- append(args, list(callbacks = normalize_callbacks(callbacks)))
-  } else if (!is.null(callbacks)) {
-    warning("Prediction callbacks are only supported for TensorFlow ",
-            "implementation of Keras. And tf_version() >= 2.0")
-  }
+  args <- append(args, list(callbacks = normalize_callbacks(callbacks)))
   args
 }
 
@@ -862,7 +863,6 @@ function(object,
   if (is.null(batch_size) && is.null(steps) &&!is_tensorflow_dataset(x))
     batch_size <- 32L
 
-
   # args
   args <- list(
     batch_size = as_nullable_integer(batch_size),
@@ -885,8 +885,7 @@ function(object,
 
   args <- resolve_callbacks(args, callbacks)
 
-  if (keras_version() >= "2.0.7")
-    args$steps <- as_nullable_integer(steps)
+  args$steps <- as_nullable_integer(steps)
 
   # call predict
   do.call(object$predict, args)
@@ -1257,34 +1256,31 @@ as_generator.default <- function(x) {
 }
 
 as_generator.tensorflow.python.data.ops.dataset_ops.Dataset <- function(x) {
-  python_path <- system.file("python", package = "keras")
-  tools <- reticulate::import_from_path("kerastools", path = python_path)
-  tools$generator$dataset_generator(x , k_get_session())
+  # this is a TF v1 iterator
+  stop("TF v1 only")
 }
 
 as_generator.tensorflow.python.data.ops.dataset_ops.DatasetV2 <- function(x) {
-
-  if (tensorflow::tf_version() >= "2.0")
     x
-  else
-    as_generator.tensorflow.python.data.ops.dataset_ops.Dataset(x)
-
 }
 
 as_generator.function <- function(x) {
   python_path <- system.file("python", package = "keras")
   tools <- reticulate::import_from_path("kerastools", path = python_path)
-  reticulate::py_iterator(function() {
+  iterator <- reticulate::py_iterator(function() {
     elem <- keras_array(x())
 
+    if(!is.list(elem))
+      elem <- list(elem)
     # deals with the case where the generator is used for prediction and only
     # yields x's values.
-    if (length(elem) == 1)
-      elem[[2]] <- list()
+    # if (length(elem) == 1)
+    #   elem[[2]] <- list()
 
-    do.call(reticulate::tuple, elem)
+    reticulate::tuple(elem)
   }, prefetch = 1L)
 
+  tools$generator$iterator_to_generator(iterator)
 }
 
 as_generator.keras_preprocessing.sequence.TimeseriesGenerator <- function(x) {

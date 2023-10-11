@@ -293,7 +293,7 @@ keras_array <- function(x, dtype = NULL) {
     # establish the target datatype - if we are converting a double from R
     # into numpy then use the default floatx for the current backend
     if (is.null(dtype) && is.double(x))
-      dtype <- backend()$floatx()
+      dtype <- k_floatx()
 
     # convert non-array to array
     if (!is.array(x))
@@ -310,6 +310,15 @@ keras_array <- function(x, dtype = NULL) {
   # ensure we use C column ordering (won't create a new array if the array
   # is already using C ordering)
   x$astype(dtype = dtype, order = "C", copy = FALSE)
+}
+
+#' @export
+k_floatx <- function(x) {
+  # k_config_floatx?
+  if(missing(x))
+    keras$config$floatx()
+  else
+    keras$config$set_floatx(x)
 }
 
 
@@ -357,10 +366,11 @@ is_keras_available <- function(version = NULL) {
 #'
 #' Obtain a reference to the Python module used for the implementation of Keras.
 #'
-#' There are currently two Python modules which implement Keras:
+#' These are the available Python modules which implement Keras:
 #'
-#' - keras ("keras")
+#' - keras
 #' - tensorflow.keras ("tensorflow")
+#' - keras_core ("core")
 #'
 #' This function returns a reference to the implementation being currently
 #' used by the keras package. The default implementation is "keras".
