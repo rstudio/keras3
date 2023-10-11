@@ -12,8 +12,8 @@ Many installation issues are resolved by running the following in a **fresh R se
 # issue is already fixed but not on CRAN yet.
 install.packages("remotes")
 remotes::install_github(sprintf("rstudio/%s", c("reticulate", "tensorflow", "keras")))
-reticulate::miniconda_uninstall() # start with a blank slate
-reticulate::install_miniconda()
+if (is.null(reticulate::virtualenv_starter()))
+  reticulate::install_python()
 keras::install_keras()
 ```
 

@@ -32,6 +32,7 @@ jobs:
           - {os: 'macOS-latest'  , tf: 'default', r: 'oldrel'}
           - {os: 'ubuntu-latest' , tf: 'default', r: 'oldrel'}
           - {os: 'ubuntu-latest' , tf: 'default', r: 'oldrel-1'}
+          - {os: 'ubuntu-latest' , tf: 'default', r: 'oldrel-2'}
           - {os: 'ubuntu-20.04'  , tf: 'default', r: '3.6'} # default R in ubuntu-20.04
 
           ## release keras/tf version (if different from 'default')
@@ -40,14 +41,14 @@ jobs:
           # - {os: 'macOS-latest'  , tf: 'release', r: 'release'}
 
           ## old keras/tf versions
+          - {os: 'ubuntu-latest', tf: '2.14', r: 'release'}
           - {os: 'ubuntu-latest', tf: '2.13', r: 'release'}
           - {os: 'ubuntu-latest', tf: '2.12', r: 'release'}
           - {os: 'ubuntu-latest', tf: '2.11', r: 'release'}
-          - {os: 'ubuntu-latest', tf: '2.10', r: 'release'}
-          - {os: 'ubuntu-latest', tf: '2.8' , r: 'release'}
+          - {os: 'ubuntu-latest', tf: '2.9' , r: 'release'}
 
           # these are allowed to fail
-          - {os: 'ubuntu-latest', tf: '2.14.0rc1', r: 'release'}
+          # - {os: 'ubuntu-latest', tf: '2.14.0rc1', r: 'release'}
           # - {os: 'ubuntu-20.04', tf: 'default', r: 'devel'}
           # - {os: 'ubuntu-20.04', tf: 'nightly' , r: 'release'}
 
@@ -89,53 +90,15 @@ jobs:
           path: ${{ env.R_LIBS_USER }}
           key: ${{ matrix.os }}-${{ steps.setup-r.outputs.installed-r-version }}-${{ steps.get-date.outputs.year-week }}-1
 
-      # - name: Install remotes
-      #   if: steps.r-package-cache.outputs.cache-hit != 'true'
-      #   run: install.packages("remotes")
-
       - uses: r-lib/actions/setup-r-dependencies@v2
         with:
           extra-packages: any::rcmdcheck local::.
           cache-version: 1
           upgrade: 'TRUE'
 
-      # - name: Install system dependencies
-      #   if: runner.os == 'Linux'
-      #   shell: bash
-      #   run: |
-      #     . /etc/os-release
-      #     while read -r cmd
-      #     do
-      #       echo "$cmd"
-      #       sudo $cmd
-      #     done < <(Rscript -e "writeLines(remotes::system_requirements('$ID-$VERSION_ID'))")
-
-
-      # - name: Install Package + deps
-      #   run: remotes::install_local(dependencies = TRUE, force = TRUE)
-      #
-      # - name: Install Miniconda
-      #   run: reticulate::install_miniconda()
-
       - name: Install Tensorflow + Keras deps
         run: keras::install_keras(tensorflow = '${{ matrix.tf }}-cpu')
-
-      # - name: Install rcmdcheck
-      #   run: remotes::install_cran("rcmdcheck")
 
       - uses: r-lib/actions/check-r-package@v2
         with:
           upload-snapshots: true
-
-      # - name: Check
-      #   run: rcmdcheck::rcmdcheck(args = '--no-manual', error_on = 'warning', check_dir = 'check')
-      #
-      # - name: Show testthat output
-      #   if: always()
-      #   shell: bash
-      #   run: find check -name 'testthat.Rout*' -exec cat '{}' \; || true
-      #
-      # - name: Don't use tar from old Rtools to store the cache
-      #   if: ${{ runner.os == 'Windows' && startsWith(steps.install-r.outputs.installed-r-version, '3') }}
-      #   shell: bash
-      #   run: echo "C:/Program Files/Git/usr/bin" >> $GITHUB_PATH
