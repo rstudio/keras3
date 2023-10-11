@@ -164,7 +164,7 @@ df |>
      gsub("#' @description\n#'\n#' @", "#' @", ., fixed = TRUE)
 
 
-    file <- paste0("R/", grp$file)
+    file <- paste0("R/autogen-", grp$file)
     # if (grp$endpoint_sans_name == "layers") {
     #   file <- "R/layers.R"
     #   unlink(file)
