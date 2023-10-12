@@ -108,7 +108,7 @@ keras <- NULL
 
     # priority = 10, # tensorflow priority == 5
 
-    environment = "r-tensorflow",
+    environment = "r-keras",
 
     get_module = function() {
       resolve_implementation_module()
