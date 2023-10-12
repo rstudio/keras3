@@ -19,36 +19,23 @@
 #'
 #' @seealso [`tensorflow::install_tensorflow()`]
 #' @export
-install_keras <- function(method = c("auto", "virtualenv", "conda"),
-                          conda = "auto",
-                          version = "default",
-                          tensorflow = version,
+install_keras <- function(...,
+                          envname = "r-keras",
                           extra_packages = NULL,
-                          ...
+                          backend = c("tensorflow", "jax", "pytorch")
                           # # envname = "r-keras",
                           # # new_env = identical(envname, "r-keras")
                           ) {
-  method <- match.arg(method)
 
-  pkgs <- default_extra_packages(tensorflow)
-  if(!is.null(extra_packages)) # user supplied package version constraints take precedence
-    pkgs[gsub("[=<>~]{1,2}[0-9.]+$", "", extra_packages)] <- extra_packages
+  if(reticulate::virtualenv_exists(envname))
+    reticulate::virtualenv_remove(envname, confirm = FALSE)
 
-  if(tensorflow %in% c("cpu", "gpu"))
-    tensorflow <- paste0("default-", tensorflow)
-
-  if(grepl("^default", tensorflow))
-    tensorflow <- sub("^default", as.character(default_version), tensorflow)
-
-  tensorflow::install_tensorflow(
-    method = method,
-    conda = conda,
-    version = tensorflow,
-    extra_packages = pkgs,
-    # envname = envname,
-    # new_env = new_env,
-    ...
+  reticulate::py_install(
+    c("keras-core", extra_packages, backend[1]),
+    envname = envname,
+    force = TRUE
   )
+
 }
 
 default_version <- numeric_version("2.13")
