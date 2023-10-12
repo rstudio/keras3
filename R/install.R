@@ -27,13 +27,14 @@ install_keras <- function(...,
                           # # new_env = identical(envname, "r-keras")
                           ) {
 
-  if(reticulate::virtualenv_exists(envname))
+  if(identical(envname, "r-keras") &&
+     reticulate::virtualenv_exists(envname))
     reticulate::virtualenv_remove(envname, confirm = FALSE)
 
   reticulate::py_install(
     c("keras-core", extra_packages, backend[1]),
     envname = envname,
-    force = TRUE
+    ...
   )
 
 }
