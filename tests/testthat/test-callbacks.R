@@ -35,11 +35,11 @@ test_callback("model_checkpoint",
               callback_model_checkpoint(tempfile(fileext = ".keras")),
               h5py = TRUE)
 
-test_that("callback_backup_and_restore", {
-  if(keras_version() >= "3.0")
-    skip("callback_backup_and_restore")
+# test_that("callback_backup_and_restore", {
+  # if(keras_version() >= "3.0")
+  #   skip("callback_backup_and_restore")
   test_callback("backup_and_restore", callback_backup_and_restore(tempfile()))
-})
+# })
 
 
 test_callback("learning_rate_scheduler", callback_learning_rate_scheduler(schedule = function (index, ...) {
