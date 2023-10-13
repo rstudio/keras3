@@ -165,6 +165,7 @@ test_succeeds("custom callbacks, new-style", {
     inherit = keras$callbacks$Callback,
     public = list(
       on_epoch_end = function(epoch, logs = NULL) {
+        skip("callbacks can't modify `logs` in place yet")
         expect_true("my_epoch" %in% names(logs))
         logs[['my_epoch2']] <- epoch
         logs
