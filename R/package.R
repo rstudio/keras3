@@ -106,7 +106,7 @@ keras <- NULL
   # delay load keras
   keras <<- import(implementation_module, delay_load = list(
 
-    # priority = 10, # tensorflow priority == 5
+    priority = 10, # tensorflow priority == 5
 
     environment = "r-keras",
 
