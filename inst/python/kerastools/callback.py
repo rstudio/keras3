@@ -1,19 +1,7 @@
 
 
-import os
 
-if (os.getenv('KERAS_IMPLEMENTATION', 'tensorflow') == 'keras'):
-  from keras.callbacks import Callback
-else:
-  import tensorflow as tf
-  from distutils.version import LooseVersion
-  tf_version = LooseVersion(tf.version.VERSION)
-
-  if tf_version >= "2.6":
-    from tensorflow.keras.callbacks import Callback
-  else:
-    from tensorflow.python.keras.callbacks import Callback
-
+from keras.callbacks import Callback
 
 class RCallback(Callback):
 
