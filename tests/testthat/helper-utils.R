@@ -7,9 +7,13 @@
 
 print_keras_config <- function() {
   print(reticulate::py_config())
-  print(keras$`__version__`)
-  print(keras$`__path__`)
-  print(keras)
+  # print(keras$`__version__`)
+  # print(keras$`__path__`)
+  # print(keras)
+
+  py_main <- reticulate::import("__main__")
+  keras$layers # force load
+  py_main$keras <- keras
 }
 
 if(reticulate::py_available()) {
