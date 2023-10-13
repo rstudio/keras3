@@ -5,20 +5,7 @@ import threading
 import queue
 import concurrent.futures
 
-if (os.getenv('KERAS_IMPLEMENTATION', 'tensorflow') == 'keras'):
-  from keras.engine import Model
-else:
-  import tensorflow as tf
-  from distutils.version import LooseVersion
-  tf_version = LooseVersion(tf.version.VERSION)
-
-  if tf_version >= "2.6":
-    from tensorflow.keras import Model
-  else:
-    try:
-      from tensorflow.python.keras.engine import Model
-    except:
-      from tensorflow.python.keras.engine.training import Model
+from keras import Model 
 
 
 class RModel(Model):

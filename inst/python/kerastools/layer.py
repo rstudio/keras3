@@ -1,20 +1,15 @@
 
 import os
 
-if (os.getenv('KERAS_IMPLEMENTATION', 'tensorflow') == 'keras'):
-  from keras.engine.topology import Layer
-  def shape_filter(shape):
-    return shape
-else:
-  from tensorflow.keras.layers import Layer
-  def shape_filter(shape):
-    if isinstance(shape, tuple):
-      return list(shape)
-    elif not isinstance(shape, list):
-      return shape.as_list()
-    else:
-      return shape
+from keras import Layer
 
+def shape_filter(shape):
+  if isinstance(shape, tuple):
+    return list(shape)
+  elif not isinstance(shape, list):
+    return list(shape)
+  else:
+    return shape
 
 class RLayer(Layer):
 

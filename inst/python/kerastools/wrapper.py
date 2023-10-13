@@ -1,25 +1,14 @@
 import os
 
-if (os.getenv('KERAS_IMPLEMENTATION', 'tensorflow') == 'keras'):
-  from keras.layers import Wrapper
-  def shape_filter(shape):
-    return shape
-else:
-  import tensorflow as tf
-  from distutils.version import LooseVersion
-  tf_version = LooseVersion(tf.version.VERSION)
+from keras.layers import Wrapper
 
-  if tf_version >= "2.6":
-    from tensorflow.keras.layers import Wrapper
+def shape_filter(shape):
+  if isinstance(shape, tuple):
+    return list(shape)
+  elif not isinstance(shape, list):
+    return shape.as_list()
   else:
-    from tensorflow.python.keras.layers import Wrapper
-  def shape_filter(shape):
-    if isinstance(shape, tuple):
-      return list(shape)
-    elif not isinstance(shape, list):
-      return shape.as_list()
-    else:
-      return shape
+    return shape
 
 class RWrapper(Wrapper):
 
