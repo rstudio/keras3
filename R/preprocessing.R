@@ -706,6 +706,11 @@ image_data_generator <- function(featurewise_center = FALSE, samplewise_center =
     args$preprocessing_function <-
       reticulate::py_main_thread_func(preprocessing_function)
 
+  # deprecated / removed
+  # use keras.utils.image_dataset_from_directory
+  # also found:
+  # [15] "keras.preprocessing.image_dataset_from_directory"
+  # [16] "keras.utils.image_dataset_from_directory"
   do.call(keras$preprocessing$image$ImageDataGenerator, args)
 
 }
