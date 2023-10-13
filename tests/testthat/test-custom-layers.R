@@ -5,7 +5,7 @@ context("custom-layers")
 # Custom layer class
 CustomLayer <- R6::R6Class("CustomLayer",
 
-  inherit = KerasLayer,
+  inherit = keras$layers$Layer, #KerasLayer,
 
   public = list(
 
@@ -13,8 +13,10 @@ CustomLayer <- R6::R6Class("CustomLayer",
 
     kernel = NULL,
 
-    initialize = function(output_dim) {
+    initialize = function(output_dim, trainable = TRUE, ...) {
+      super$initialize(...)
       self$output_dim <- output_dim
+      self$trainable <- TRUE
     },
 
     build = function(input_shape) {
@@ -22,7 +24,7 @@ CustomLayer <- R6::R6Class("CustomLayer",
         name = 'kernel',
         shape = list(input_shape[[2]], self$output_dim),
         initializer = initializer_random_normal(),
-        trainable = TRUE
+        trainable = self$trainable
       )
     },
 
@@ -60,7 +62,8 @@ test_succeeds("Custom layer with time distributed layer", {
   CustomLayer <- R6::R6Class(
     "CustomLayer",
 
-    inherit = KerasLayer,
+    inherit = keras$layers$Layer,
+    # inherit = KerasLayer,
 
     public = list(
 
@@ -68,7 +71,8 @@ test_succeeds("Custom layer with time distributed layer", {
 
       kernel = NULL,
 
-      initialize = function(output_dim) {
+      initialize = function(output_dim, ...) {
+        super$initialize(...)
         self$output_dim <- as.integer(output_dim)
       },
 
@@ -154,16 +158,16 @@ test_succeeds("R6 Custom layers can inherit from a python type", {
   }
 
 
-  model <- keras_model_sequential()
+  model <- keras_model_sequential(input_shape = c(32,32))
   model %>%
-    layer_dense(units = 32, input_shape = c(32,32)) %>%
+    layer_dense(units = 32) %>%
     layer_custom(output_dim = 32)
 
   expect_tensor(model(random_array(c(3, 32, 32))))
 
   # can instantiate and use like a conventional layer too
   input <- layer_input(shape(1))
-  expect_tensor(keras$layers$Dense(units = 32)(input),
+  expect_tensor(keras$layers$Dense(units = 32L)(input),
                 shape = list(NULL, 32L))
 
   expect_tensor(r_to_py(CustomLayer, convert = TRUE)(output_dim = 32L)(input),
