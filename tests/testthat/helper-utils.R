@@ -78,7 +78,8 @@ test_call_succeeds <- function(call_name, expr, required_version = NULL) {
 }
 
 is_backend <- function(name) {
-  if(keras$`__name__` == "keras_core")
+  if (keras$`__name__` == "keras_core" ||
+     package_version(keras$`__version__`) >= "3.0.0")
     backend <- keras$config$backend()
   else
     backend <- backend()$backend()
@@ -189,4 +190,5 @@ k_constant <- function(value, dtype = NULL, shape = NULL, name = NULL) {
   if(!is.null(shape))
     x <- x$reshape(as.integer(shape))
   x
+  keras$ops$convert_to_tensor(x)
 }
