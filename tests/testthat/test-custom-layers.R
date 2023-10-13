@@ -198,7 +198,9 @@ test_succeeds("Custom layers can pass along masks", {
 
       build = function(input_shape) {
         self$kernel <- self$add_weight(
-          name = 'kernel', shape = list(input_shape[[2]], self$num_outputs))
+          name = 'kernel',
+          initializer = "random_normal",
+          shape = list(input_shape[[2]], self$num_outputs))
       },
 
       call = function(x, mask = NULL) { mask },
@@ -226,6 +228,8 @@ test_succeeds("Custom layers can pass along masks", {
   custom_layer_output = custom_layer(masked_input)
 
   expect_true(custom_layer$supports_masking)
-  expect_tensor(custom_layer$input_mask)
-  expect_tensor(custom_layer$output_mask, shaped_as = custom_layer$input_mask)
+
+  mask <- custom_layer$compute_mask(NULL, as_tensor(c(TRUE, FALSE, TRUE)))
+  expect_tensor(mask, shape = list(3L))
+  expect_equal(as.logical(mask), c(TRUE, FALSE, TRUE))
 })

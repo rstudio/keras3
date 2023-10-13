@@ -132,13 +132,15 @@ random_array <- function(..., dim = unlist(c(...))) {
 expect_tensor <- function(x, shape=NULL, shaped_as=NULL) {
   x_lbl <- quasi_label(rlang::enquo(x), arg = 'x')$lab
 
-  expect(is_keras_tensor(x),
+  expect(is_keras_tensor(x) || inherits(x, "tensorflow.tensor"),
          paste(x_lbl, "was wrong S3 class, expected 'tensorflow.tensor', actual", class(x)))
 
   x_shape <- x$shape
 
   if(!is.list(x_shape)) # tensorflow TensorShape()
     x_shape <- x_shape$as_list()
+
+  x_shape <- as.list(x_shape)
 
   chk_expr <- quote(expect(
     identical(x_shape, shape),
