@@ -36,16 +36,24 @@ endpoints <- str_c("keras.", c %(% {
 }
 
   ) |> lapply(\(module) {
-    nms <- names(py_eval(module)) |>
-      setdiff(c("experimental", "deserialize", "serialize", "get"))
-    str_c(module, nms, sep = ".")
+    message(module)
+    # browser()
+    module <- py_eval(modules <- module)
+    nms <- names(module) |>
+      setdiff(c("experimental", "deserialize", "serialize", "get",
+                "keras_export",
+                "ALL_OBJECTS", "ALL_OBJECTS_DICT"))
+    nms <- gsub("`", "", nms)
+    str_c(modules, nms, sep = ".")
     }) |>
   unlist() |> unique()
 
 endpoints <-
   endpoints %>%
   tibble(endpoint = .) %>%
-  mutate(py_obj = map(endpoint, py_eval),
+  mutate(py_obj = map(endpoint, py_eval)) %>%
+  filter(map_lgl(py_obj, inherits, "python.builtin.object")) %>%
+    mutate(
          id = map_chr(py_obj, py_id),
          py_type = map_chr(py_obj, \(o) class(o) %>%
                              grep("^python\\.builtin\\.", ., value = TRUE) %>%
@@ -110,12 +118,22 @@ endpoints <-
     "keras.layers.InputSpec"         # ??
     "keras.callbacks.CallbackList"   # just an abstract list
     "keras.callbacks.History"        # always added to by default
+
+    "keras.constraints.to_snake_case" # ??
+    "keras.optimizers.LegacyOptimizerWarning"
   })
+
+# TODO: initializer families:
+# <class 'keras.initializers.constant_initializers.Zeros'>
+# <class 'keras.initializers.random_initializers.RandomUniform'>
 
 df <-
   endpoints |>
   # c( "keras.layers.InputSpec", "keras.layers.Input" ) |>
-  map(mk_export) |>
+  lapply(\(e) {
+    # message(e)
+    mk_export(e)
+  }) |>
   c(list(mk_layer_activation_selu())) |>
   map(\(e) {
     # if(e$endpoint == "keras.activations.selu")
@@ -161,10 +179,11 @@ df |>
     # str_flatten(c('r"-(', l$`__doc__`, ')-"'), ""),
     # "\n",
 
+    df$module %<>% str_replace_all(fixed("keras."), "keras_core.")
     docstring <- map_chr(df$py_obj, \(p) {
       str_flatten_lines(
         str_c("# ", "keras$layers$", p$`__name__`),
-        str_c("# ", p$`__module__`, ".", p$`__name__`),
+        str_c("# ", p$`__module__`, ".", p$`__name__`) |> str_replace_all(fixed("keras."), "keras_core."),
         str_flatten(c('r"-(', p$`__doc__`, ')-"'), "")
       )
     })
@@ -192,7 +211,7 @@ df |>
     writeLines(txt, file)
   })
 
-devtools::document()
+# devtools::document()
 
 stop("DONE", call. = FALSE)
 

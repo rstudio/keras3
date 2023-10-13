@@ -83,40 +83,19 @@ unwhich <- function(x, len) {
 }
 
 # ---- venv ----
-# reticulate::virtualenv_remove("r-tensorflow")
-if(!virtualenv_exists("r-tensorflow")) {
-  reticulate::virtualenv_create(
-    "r-tensorflow", "3.10", packages = unique(c(
-      "tensorflow",
-      "keras-core",
-      # "git+https://github.com/rr-/docstring_parser.git",
-      # "docstring_parser",
-      # "docstring-parser",
-      "ipython",
-
-      # keras:::default_extra_packages() %>% as.vector() %>% dput()
-      c(
-        "tensorflow-hub",
-        "tensorflow-datasets",
-        "scipy",
-        "requests",
-        "Pillow",
-        "h5py",
-        "pandas",
-        "pydot"
-      )
-    )
-    ))
-    # py_install("git+https://github.com/rr-/docstring_parser.git", "r-tensorflow")
+# reticulate::virtualenv_remove("r-keras")
+if(!virtualenv_exists("r-keras")) {
+   install_keras()
 }
 
 
-use_virtualenv("r-tensorflow")
+use_virtualenv("r-keras")
 
 inspect <- import("inspect")
 
-keras <- import("keras_core")
+# keras <- import("keras_core")
 # keras <- import("tensorflow.keras")
+keras <- import("keras")
 local({
   `__main__` <- reticulate::import_main()
   `__main__`$keras <- keras
