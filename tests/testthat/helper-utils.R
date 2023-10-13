@@ -130,14 +130,19 @@ random_array <- function(..., dim = unlist(c(...))) {
 
 expect_tensor <- function(x, shape=NULL, shaped_as=NULL) {
   x_lbl <- quasi_label(rlang::enquo(x), arg = 'x')$lab
+
   expect(is_keras_tensor(x),
          paste(x_lbl, "was wrong S3 class, expected 'tensorflow.tensor', actual", class(x)))
 
-  x_shape <- x$shape$as_list()
+  x_shape <- x$shape
+
+  if(!is.list(x_shape)) # tensorflow TensorShape()
+    x_shape <- x_shape$as_list()
 
   chk_expr <- quote(expect(
     identical(x_shape, shape),
-    sprintf("%s was wrong shape, expected: %s, actual: %s", x_lbl, x_shape, shape)
+    sprintf("%s was wrong shape, expected: %s, actual: %s",
+            x_lbl, x_shape, shape)
   ))
 
   if(!is.null(shape)) {
@@ -145,7 +150,9 @@ expect_tensor <- function(x, shape=NULL, shaped_as=NULL) {
   }
 
   if(!is.null(shaped_as)) {
-    shape <- shaped_as$shape$as_list()
+    shape <- shaped_as$shape
+    if(!is.list(shape))
+      shape <- shape$as_list()
     eval(chk_expr)
   }
   invisible(x)
