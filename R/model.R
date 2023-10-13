@@ -1156,6 +1156,8 @@ fit_generator <- function(object, generator, steps_per_epoch, epochs = 1,
     initial_epoch = initial_epoch
   )
 
+  args$shuffle <- FALSE
+
   do.call(fit, args)
 }
 
