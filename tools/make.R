@@ -48,6 +48,37 @@ endpoints <- str_c("keras.", c %(% {
     }) |>
   unlist() |> unique()
 
+list_endpoints <- function(module = "keras", max_depth = 4,
+                           skip = "keras.src", skip_regex = c(
+                             "experimental", "deserialize", "serialize", "get"
+                           )) {
+  depth <- length(strsplit(module, ".", fixed = TRUE)[[1L]])
+  if(depth > max_depth)
+    return()
+  module_py_obj <- py_eval(module)
+  unlist(lapply(names(module_py_obj), \(nm) {
+    endpoint <- paste0(module, ".", nm)
+    if(endpoint %in% skip)
+      return()
+    # message(endpoint)
+    endpoint_py_obj <- module_py_obj[[nm]]
+    if(inherits(endpoint_py_obj, "python.builtin.module"))
+      return(list_endpoints(endpoint))
+    if(inherits(endpoint_py_obj, c("python.builtin.type",
+                           "python.builtin.function")))
+      return(endpoint)
+    NULL
+  }))
+}
+
+all_endpoints <- list_endpoints()
+
+all_endpoints %>%
+  grep("ImageDataGenerator", ., value = T)
+
+all_endpoints %>%
+  grep("Image", ., value = T, ignore.case = TRUE)
+
 endpoints <-
   endpoints %>%
   tibble(endpoint = .) %>%
