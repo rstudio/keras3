@@ -101,7 +101,7 @@ at the end of every epoch, or after a fixed number of training batches.
 
 EPOCHS = 10
 checkpoint_filepath = '/tmp/ckpt/checkpoint.model.keras'
-model_checkpoint_callback = keras_core.callbacks.ModelCheckpoint(
+model_checkpoint_callback = keras.callbacks.ModelCheckpoint(
     filepath=checkpoint_filepath,
     monitor='val_accuracy',
     mode='max',
@@ -111,11 +111,11 @@ model_checkpoint_callback = keras_core.callbacks.ModelCheckpoint(
 model.fit(epochs=EPOCHS, callbacks=[model_checkpoint_callback])
 
 # The model (that are considered the best) can be loaded as -
-keras_core.models.load_model(checkpoint_filepath)
+keras.models.load_model(checkpoint_filepath)
 
 # Alternatively, one could checkpoint just the model weights as -
 checkpoint_filepath = '/tmp/ckpt/checkpoint.weights.h5'
-model_checkpoint_callback = keras_core.callbacks.ModelCheckpoint(
+model_checkpoint_callback = keras.callbacks.ModelCheckpoint(
     filepath=checkpoint_filepath,
     save_weights_only=True,
     monitor='val_accuracy',
@@ -137,6 +137,7 @@ model.load_weights(checkpoint_filepath)
 }
 
 Other callback: 
+\code{\link{callback_backup_and_restore}()},
 \code{\link{callback_csv_logger}()},
 \code{\link{callback_early_stopping}()},
 \code{\link{callback_lambda}()},

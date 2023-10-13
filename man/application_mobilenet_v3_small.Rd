@@ -110,7 +110,7 @@ For transfer learning use cases, make sure to read the
 Note: each Keras Application expects a specific kind of input preprocessing.
 For MobileNetV3, by default input preprocessing is included as a part of the
 model (as a \code{Rescaling} layer), and thus
-\code{keras_core.applications.mobilenet_v3.preprocess_input} is actually a
+\code{keras.applications.mobilenet_v3.preprocess_input} is actually a
 pass-through function. In this use case, MobileNetV3 models expect their
 inputs to be float tensors of pixels with values in the \verb{[0-255]} range.
 At the same time, preprocessing as a part of the model (i.e. \code{Rescaling}

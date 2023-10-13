@@ -71,7 +71,7 @@ For transfer learning use cases, make sure to read the
 
 Note: each Keras Application expects a specific kind of
 input preprocessing. For InceptionResNetV2, call
-\code{keras_core.applications.inception_resnet_v2.preprocess_input}
+\code{keras.applications.inception_resnet_v2.preprocess_input}
 on your inputs before passing them to the model.
 \code{inception_resnet_v2.preprocess_input}
 will scale input pixels between -1 and 1.

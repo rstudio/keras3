@@ -8,13 +8,13 @@ initializer_he_uniform(seed = NULL)
 }
 \arguments{
 \item{seed}{A Python integer or instance of
-\code{keras_core.backend.SeedGenerator}.
+\code{keras.backend.SeedGenerator}.
 Used to make the behavior of the initializer
 deterministic. Note that an initializer seeded with an integer
 or \code{None} (unseeded) will produce the same random values
 across multiple calls. To get different random values
 across multiple calls, use as seed an instance
-of \code{keras_core.backend.SeedGenerator}.}
+of \code{keras.backend.SeedGenerator}.}
 }
 \description{
 Draws samples from a uniform distribution within \verb{[-limit, limit]}, where

@@ -32,7 +32,7 @@ A list/tuple of tensors, has the same shape and dtype as \code{inputs}.
 \if{html}{\out{<div class="sourceCode python">}}\preformatted{i = 0
 cond = lambda i: i < 10
 body = lambda i: i + 1
-keras_core.ops.while_loop(cond, body, [i])[0]
+keras.ops.while_loop(cond, body, [i])[0]
 # 10
 }\if{html}{\out{</div>}}
 }
@@ -97,6 +97,7 @@ Other ops:
 \code{\link{k_elu}()},
 \code{\link{k_empty}()},
 \code{\link{k_equal}()},
+\code{\link{k_erf}()},
 \code{\link{k_expand_dims}()},
 \code{\link{k_expm_1}()},
 \code{\link{k_exp}()},
@@ -178,6 +179,7 @@ Other ops:
 \code{\link{k_rfft}()},
 \code{\link{k_roll}()},
 \code{\link{k_round}()},
+\code{\link{k_rsqrt}()},
 \code{\link{k_scatter_update}()},
 \code{\link{k_scatter}()},
 \code{\link{k_segment_max}()},

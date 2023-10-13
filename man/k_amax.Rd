@@ -28,18 +28,18 @@ the specified axis.
 }
 
 \section{Examples}{
-\if{html}{\out{<div class="sourceCode python">}}\preformatted{x = keras_core.ops.convert_to_tensor([[1, 3, 5], [2, 3, 6]])
-keras_core.ops.amax(x)
+\if{html}{\out{<div class="sourceCode python">}}\preformatted{x = keras.ops.convert_to_tensor([[1, 3, 5], [2, 3, 6]])
+keras.ops.amax(x)
 # array(6, dtype=int32)
 }\if{html}{\out{</div>}}
 
-\if{html}{\out{<div class="sourceCode python">}}\preformatted{x = keras_core.ops.convert_to_tensor([[1, 6, 8], [1, 5, 2]])
-keras_core.ops.amax(x, axis=0)
+\if{html}{\out{<div class="sourceCode python">}}\preformatted{x = keras.ops.convert_to_tensor([[1, 6, 8], [1, 5, 2]])
+keras.ops.amax(x, axis=0)
 # array([1, 6, 8], dtype=int32)
 }\if{html}{\out{</div>}}
 
-\if{html}{\out{<div class="sourceCode python">}}\preformatted{x = keras_core.ops.convert_to_tensor([[1, 6, 8], [1, 5, 2]])
-keras_core.ops.amax(x, axis=1, keepdims=True)
+\if{html}{\out{<div class="sourceCode python">}}\preformatted{x = keras.ops.convert_to_tensor([[1, 6, 8], [1, 5, 2]])
+keras.ops.amax(x, axis=1, keepdims=True)
 # array([[8], [5]], dtype=int32)
 }\if{html}{\out{</div>}}
 }
@@ -103,6 +103,7 @@ Other ops:
 \code{\link{k_elu}()},
 \code{\link{k_empty}()},
 \code{\link{k_equal}()},
+\code{\link{k_erf}()},
 \code{\link{k_expand_dims}()},
 \code{\link{k_expm_1}()},
 \code{\link{k_exp}()},
@@ -184,6 +185,7 @@ Other ops:
 \code{\link{k_rfft}()},
 \code{\link{k_roll}()},
 \code{\link{k_round}()},
+\code{\link{k_rsqrt}()},
 \code{\link{k_scatter_update}()},
 \code{\link{k_scatter}()},
 \code{\link{k_segment_max}()},

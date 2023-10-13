@@ -29,7 +29,7 @@ The final state after the loop.
 upper = 10
 body_fun = lambda i, s: (i + 1, s + i)
 init_val = 0
-keras_core.ops.fori_loop(lower, upper, body_fun, init_val)
+keras.ops.fori_loop(lower, upper, body_fun, init_val)
 # 45
 }\if{html}{\out{</div>}}
 }
@@ -94,6 +94,7 @@ Other ops:
 \code{\link{k_elu}()},
 \code{\link{k_empty}()},
 \code{\link{k_equal}()},
+\code{\link{k_erf}()},
 \code{\link{k_expand_dims}()},
 \code{\link{k_expm_1}()},
 \code{\link{k_exp}()},
@@ -174,6 +175,7 @@ Other ops:
 \code{\link{k_rfft}()},
 \code{\link{k_roll}()},
 \code{\link{k_round}()},
+\code{\link{k_rsqrt}()},
 \code{\link{k_scatter_update}()},
 \code{\link{k_scatter}()},
 \code{\link{k_segment_max}()},

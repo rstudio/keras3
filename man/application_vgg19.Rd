@@ -69,7 +69,7 @@ For transfer learning use cases, make sure to read the
 The default input size for this model is 224x224.
 
 Note: each Keras Application expects a specific kind of input preprocessing.
-For VGG19, call \code{keras_core.applications.vgg19.preprocess_input} on your
+For VGG19, call \code{keras.applications.vgg19.preprocess_input} on your
 inputs before passing them to the model.
 \code{vgg19.preprocess_input} will convert the input images from RGB to BGR,
 then will zero-center each color channel with respect to the ImageNet

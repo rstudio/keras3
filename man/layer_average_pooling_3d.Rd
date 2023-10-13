@@ -72,8 +72,8 @@ height = 30
 width = 30
 channels = 3
 
-inputs = keras_core.layers.Input(shape=(depth, height, width, channels))
-layer = keras_core.layers.AveragePooling3D(pool_size=3)
+inputs = keras.layers.Input(shape=(depth, height, width, channels))
+layer = keras.layers.AveragePooling3D(pool_size=3)
 outputs = layer(inputs)  # Shape: (batch_size, 10, 10, 10, 3)
 }\if{html}{\out{</div>}}
 }

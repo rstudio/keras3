@@ -29,7 +29,7 @@ x
 #  [[ 6  7]
 #   [ 8  9]
 #   [10 11]]]
-y = keras_core.layers.Cropping1D(cropping=1)(x)
+y = keras.layers.Cropping1D(cropping=1)(x)
 y
 # [[[2 3]]
 #  [[8 9]]]

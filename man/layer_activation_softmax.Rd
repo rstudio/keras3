@@ -20,7 +20,7 @@ f(x) = exp_x / sum(exp_x)
 }\if{html}{\out{</div>}}
 }
 \section{Examples}{
-\if{html}{\out{<div class="sourceCode python">}}\preformatted{>>>softmax_layer = keras_core.layers.activations.Softmax()
+\if{html}{\out{<div class="sourceCode python">}}\preformatted{>>>softmax_layer = keras.layers.activations.Softmax()
 # >>>input = np.array([1.0, 2.0, 1.0])
 # >>>result = softmax_layer(input)
 # [0.21194157, 0.5761169, 0.21194157]

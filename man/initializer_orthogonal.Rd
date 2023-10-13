@@ -26,13 +26,13 @@ The matrix is subsequently reshaped to give a tensor of the desired shape.
 }
 \section{Examples}{
 \if{html}{\out{<div class="sourceCode python">}}\preformatted{# Standalone usage:
-initializer = keras_core.initializers.Orthogonal()
+initializer = keras.initializers.Orthogonal()
 values = initializer(shape=(2, 2))
 }\if{html}{\out{</div>}}
 
 \if{html}{\out{<div class="sourceCode python">}}\preformatted{# Usage in a Keras layer:
-initializer = keras_core.initializers.Orthogonal()
-layer = keras_core.layers.Dense(3, kernel_initializer=initializer)
+initializer = keras.initializers.Orthogonal()
+layer = keras.layers.Dense(3, kernel_initializer=initializer)
 }\if{html}{\out{</div>}}
 }
 

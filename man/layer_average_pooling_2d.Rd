@@ -78,7 +78,7 @@ The resulting output shape when using the \code{"same"} padding option is:
               [4., 5., 6.],
               [7., 8., 9.]])
 x = np.reshape(x, [1, 3, 3, 1])
-avg_pool_2d = keras_core.layers.AveragePooling2D(pool_size=(2, 2),
+avg_pool_2d = keras.layers.AveragePooling2D(pool_size=(2, 2),
    strides=(1, 1), padding="valid")
 avg_pool_2d(x)
 }\if{html}{\out{</div>}}
@@ -89,7 +89,7 @@ avg_pool_2d(x)
              [5., 6., 7., 8.],
              [9., 10., 11., 12.]])
 x = np.reshape(x, [1, 3, 4, 1])
-avg_pool_2d = keras_core.layers.AveragePooling2D(pool_size=(2, 2),
+avg_pool_2d = keras.layers.AveragePooling2D(pool_size=(2, 2),
    strides=(2, 2), padding="valid")
 avg_pool_2d(x)
 }\if{html}{\out{</div>}}
@@ -100,7 +100,7 @@ avg_pool_2d(x)
                  [4., 5., 6.],
                  [7., 8., 9.]])
 x = np.reshape(x, [1, 3, 3, 1])
-avg_pool_2d = keras_core.layers.AveragePooling2D(pool_size=(2, 2),
+avg_pool_2d = keras.layers.AveragePooling2D(pool_size=(2, 2),
    strides=(1, 1), padding="same")
 avg_pool_2d(x)
 }\if{html}{\out{</div>}}

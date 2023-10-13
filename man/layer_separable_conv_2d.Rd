@@ -130,7 +130,7 @@ A 4D tensor representing
 
 \section{Examples}{
 \if{html}{\out{<div class="sourceCode python">}}\preformatted{x = np.random.rand(4, 10, 10, 12)
-y = keras_core.layers.SeparableConv2D(3, 4, 3, 2, activation='relu')(x)
+y = keras.layers.SeparableConv2D(3, 4, 3, 2, activation='relu')(x)
 print(y.shape)
 # (4, 4, 4, 4)
 }\if{html}{\out{</div>}}

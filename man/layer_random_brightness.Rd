@@ -54,7 +54,7 @@ rescaled based on the \code{value_range} if needed.
 
 Sample usage:
 
-\if{html}{\out{<div class="sourceCode python">}}\preformatted{random_bright = keras_core.layers.RandomBrightness(factor=0.2)
+\if{html}{\out{<div class="sourceCode python">}}\preformatted{random_bright = keras.layers.RandomBrightness(factor=0.2)
 
 # An image with shape [2, 2, 3]
 image = [[[1, 2, 3], [4 ,5 ,6]], [[7, 8, 9], [10, 11, 12]]]

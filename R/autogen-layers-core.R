@@ -152,12 +152,12 @@ r"-(A layer that uses `einsum` as the backing computation.
 
     This example shows how to instantiate a standard Keras dense layer using
     einsum operations. This example is equivalent to
-    `keras_core.layers.Dense(64, use_bias=True)`.
+    `keras.layers.Dense(64, use_bias=True)`.
 
-    >>> layer = keras_core.layers.EinsumDense("ab,bc->ac",
+    >>> layer = keras.layers.EinsumDense("ab,bc->ac",
     ...                                       output_shape=64,
     ...                                       bias_axes="c")
-    >>> input_tensor = keras_core.Input(shape=[32])
+    >>> input_tensor = keras.Input(shape=[32])
     >>> output_tensor = layer(input_tensor)
     >>> output_tensor.shape
     (None, 64)
@@ -170,10 +170,10 @@ r"-(A layer that uses `einsum` as the backing computation.
     dimension in the `output_shape` is `None`, because the sequence dimension
     `b` has an unknown shape.
 
-    >>> layer = keras_core.layers.EinsumDense("abc,cd->abd",
+    >>> layer = keras.layers.EinsumDense("abc,cd->abd",
     ...                                       output_shape=(None, 64),
     ...                                       bias_axes="d")
-    >>> input_tensor = keras_core.Input(shape=[32, 128])
+    >>> input_tensor = keras.Input(shape=[32, 128])
     >>> output_tensor = layer(input_tensor)
     >>> output_tensor.shape
     (None, 32, 64)
@@ -189,10 +189,10 @@ r"-(A layer that uses `einsum` as the backing computation.
     layer can handle any number of sequence dimensions - including the case
     where no sequence dimension exists.
 
-    >>> layer = keras_core.layers.EinsumDense("...x,xy->...y",
+    >>> layer = keras.layers.EinsumDense("...x,xy->...y",
     ...                                       output_shape=64,
     ...                                       bias_axes="y")
-    >>> input_tensor = keras_core.Input(shape=[32, 128])
+    >>> input_tensor = keras.Input(shape=[32, 128])
     >>> output_tensor = layer(input_tensor)
     >>> output_tensor.shape
     (None, 32, 64)
@@ -210,13 +210,13 @@ r"-(A layer that uses `einsum` as the backing computation.
 #'
 #' This example shows how to instantiate a standard Keras dense layer using
 #' einsum operations. This example is equivalent to
-#' `keras_core.layers.Dense(64, use_bias=True)`.
+#' `keras.layers.Dense(64, use_bias=True)`.
 #'
 #' ```python
-#' layer = keras_core.layers.EinsumDense("ab,bc->ac",
+#' layer = keras.layers.EinsumDense("ab,bc->ac",
 #'                                       output_shape=64,
 #'                                       bias_axes="c")
-#' input_tensor = keras_core.Input(shape=[32])
+#' input_tensor = keras.Input(shape=[32])
 #' output_tensor = layer(input_tensor)
 #' output_tensor.shape
 #' # (None, 64)
@@ -231,10 +231,10 @@ r"-(A layer that uses `einsum` as the backing computation.
 #' `b` has an unknown shape.
 #'
 #' ```python
-#' layer = keras_core.layers.EinsumDense("abc,cd->abd",
+#' layer = keras.layers.EinsumDense("abc,cd->abd",
 #'                                       output_shape=(None, 64),
 #'                                       bias_axes="d")
-#' input_tensor = keras_core.Input(shape=[32, 128])
+#' input_tensor = keras.Input(shape=[32, 128])
 #' output_tensor = layer(input_tensor)
 #' output_tensor.shape
 #' # (None, 32, 64)
@@ -252,10 +252,10 @@ r"-(A layer that uses `einsum` as the backing computation.
 #' where no sequence dimension exists.
 #'
 #' ```python
-#' layer = keras_core.layers.EinsumDense("...x,xy->...y",
+#' layer = keras.layers.EinsumDense("...x,xy->...y",
 #'                                       output_shape=64,
 #'                                       bias_axes="y")
-#' input_tensor = keras_core.Input(shape=[32, 128])
+#' input_tensor = keras.Input(shape=[32, 128])
 #' output_tensor = layer(input_tensor)
 #' output_tensor.shape
 #' # (None, 32, 64)
@@ -314,8 +314,8 @@ r"-(Turns positive integers (indexes) into dense vectors of fixed size.
 
     Example:
 
-    >>> model = keras_core.Sequential()
-    >>> model.add(keras_core.layers.Embedding(1000, 64, input_length=10))
+    >>> model = keras.Sequential()
+    >>> model.add(keras.layers.Embedding(1000, 64, input_length=10))
     >>> # The model will take as input an integer matrix of size (batch,
     >>> # input_length), and the largest integer (i.e. word index) in the input
     >>> # should be no larger than 999 (vocabulary size).
@@ -365,8 +365,8 @@ r"-(Turns positive integers (indexes) into dense vectors of fixed size.
 #'
 #' # Examples
 #' ```python
-#' model = keras_core.Sequential()
-#' model.add(keras_core.layers.Embedding(1000, 64, input_length=10))
+#' model = keras.Sequential()
+#' model.add(keras.layers.Embedding(1000, 64, input_length=10))
 #' # The model will take as input an integer matrix of size (batch,
 #' # input_length), and the largest integer (i.e. word index) in the input
 #' # should be no larger than 999 (vocabulary size).
@@ -696,9 +696,9 @@ r"-(Masks a sequence by using a mask value to skip timesteps.
     inputs[:, 3, :] = 0.
     inputs[:, 5, :] = 0.
 
-    model = keras_core.models.Sequential()
-    model.add(keras_core.layers.Masking(mask_value=0.)
-    model.add(keras_core.layers.LSTM(32))
+    model = keras.models.Sequential()
+    model.add(keras.layers.Masking(mask_value=0.)
+    model.add(keras.layers.LSTM(32))
     output = model(inputs)
     # The time step 3 and 5 will be skipped from LSTM calculation.
     ```
@@ -735,9 +735,9 @@ r"-(Masks a sequence by using a mask value to skip timesteps.
 #' inputs[:, 3, :] = 0.
 #' inputs[:, 5, :] = 0.
 #'
-#' model = keras_core.models.Sequential()
-#' model.add(keras_core.layers.Masking(mask_value=0.)
-#' model.add(keras_core.layers.LSTM(32))
+#' model = keras.models.Sequential()
+#' model.add(keras.layers.Masking(mask_value=0.)
+#' model.add(keras.layers.LSTM(32))
 #' output = model(inputs)
 #' # The time step 3 and 5 will be skipped from LSTM calculation.
 #' ```

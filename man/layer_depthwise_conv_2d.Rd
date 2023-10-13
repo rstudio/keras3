@@ -131,7 +131,7 @@ ValueError: when both \code{strides > 1} and \code{dilation_rate > 1}.
 
 \section{Examples}{
 \if{html}{\out{<div class="sourceCode python">}}\preformatted{x = np.random.rand(4, 10, 10, 12)
-y = keras_core.layers.DepthwiseConv2D(3, 3, activation='relu')(x)
+y = keras.layers.DepthwiseConv2D(3, 3, activation='relu')(x)
 print(y.shape)
 # (4, 8, 8, 36)
 }\if{html}{\out{</div>}}

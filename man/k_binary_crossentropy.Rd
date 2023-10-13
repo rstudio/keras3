@@ -32,8 +32,8 @@ Integer tensor: The computed binary cross-entropy loss between
 }
 
 \section{Examples}{
-\if{html}{\out{<div class="sourceCode python">}}\preformatted{target = keras_core.ops.convert_to_tensor([0, 1, 1, 0])
-output = keras_core.ops.convert_to_tensor([0.1, 0.9, 0.8, 0.2])
+\if{html}{\out{<div class="sourceCode python">}}\preformatted{target = keras.ops.convert_to_tensor([0, 1, 1, 0])
+output = keras.ops.convert_to_tensor([0.1, 0.9, 0.8, 0.2])
 binary_crossentropy(target, output)
 # array([0.10536054 0.10536054 0.22314355 0.22314355],
 #       shape=(4,), dtype=float32)
@@ -99,6 +99,7 @@ Other ops:
 \code{\link{k_elu}()},
 \code{\link{k_empty}()},
 \code{\link{k_equal}()},
+\code{\link{k_erf}()},
 \code{\link{k_expand_dims}()},
 \code{\link{k_expm_1}()},
 \code{\link{k_exp}()},
@@ -180,6 +181,7 @@ Other ops:
 \code{\link{k_rfft}()},
 \code{\link{k_roll}()},
 \code{\link{k_round}()},
+\code{\link{k_rsqrt}()},
 \code{\link{k_scatter_update}()},
 \code{\link{k_scatter}()},
 \code{\link{k_segment_max}()},

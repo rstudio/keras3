@@ -101,7 +101,7 @@ this part of the inputs' shape must be fully defined.
 
 For example:
 
-\if{html}{\out{<div class="sourceCode python">}}\preformatted{layer = keras_core.layers.LayerNormalization(axis=[1, 2, 3])
+\if{html}{\out{<div class="sourceCode python">}}\preformatted{layer = keras.layers.LayerNormalization(axis=[1, 2, 3])
 layer.build([5, 20, 30, 40])
 print(layer.beta.shape)
 # (20, 30, 40)

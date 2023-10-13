@@ -20,7 +20,7 @@ r"-(Optimizer that implements the Adadelta algorithm.
 
     Args:
         learning_rate: A float, a
-            `keras_core.optimizers.schedules.LearningRateSchedule` instance, or
+            `keras.optimizers.schedules.LearningRateSchedule` instance, or
             a callable that takes no arguments and returns the actual value to
             use. The learning rate. Defaults to `0.001`. Note that `Adadelta`
             tends to benefit from higher initial learning rate values compared
@@ -63,7 +63,7 @@ r"-(Optimizer that implements the Adadelta algorithm.
           be multiplied the loss before computing gradients, and the inverse of
           the scale factor will be multiplied by the gradients before updating
           variables. Useful for preventing underflow during mixed precision
-          training. Alternately, `keras_core.optimizers.LossScaleOptimizer` will
+          training. Alternately, `keras.optimizers.LossScaleOptimizer` will
           automatically set a loss scale factor.
 
 
@@ -94,7 +94,7 @@ r"-(Optimizer that implements the Adadelta algorithm.
 #' - [Zeiler, 2012](http://arxiv.org/abs/1212.5701)
 #'
 #' @param learning_rate A float, a
-#'       `keras_core.optimizers.schedules.LearningRateSchedule` instance, or
+#'       `keras.optimizers.schedules.LearningRateSchedule` instance, or
 #'       a callable that takes no arguments and returns the actual value to
 #'       use. The learning rate. Defaults to `0.001`. Note that `Adadelta`
 #'       tends to benefit from higher initial learning rate values compared
@@ -137,7 +137,7 @@ r"-(Optimizer that implements the Adadelta algorithm.
 #'     be multiplied the loss before computing gradients, and the inverse of
 #'     the scale factor will be multiplied by the gradients before updating
 #'     variables. Useful for preventing underflow during mixed precision
-#'     training. Alternately, `keras_core.optimizers.LossScaleOptimizer` will
+#'     training. Alternately, `keras.optimizers.LossScaleOptimizer` will
 #'     automatically set a loss scale factor.
 #'
 #' @export
@@ -169,7 +169,7 @@ r"-(Optimizer that implements the Adafactor algorithm.
 
     Args:
         learning_rate: A float, a
-            `keras_core.optimizers.schedules.LearningRateSchedule` instance, or
+            `keras.optimizers.schedules.LearningRateSchedule` instance, or
             a callable that takes no arguments and returns the actual value to
             use. The learning rate. Defaults to `0.001`.
         beta_2_decay: float, defaults to -0.8. The decay rate of `beta_2`.
@@ -219,7 +219,7 @@ r"-(Optimizer that implements the Adafactor algorithm.
           be multiplied the loss before computing gradients, and the inverse of
           the scale factor will be multiplied by the gradients before updating
           variables. Useful for preventing underflow during mixed precision
-          training. Alternately, `keras_core.optimizers.LossScaleOptimizer` will
+          training. Alternately, `keras.optimizers.LossScaleOptimizer` will
           automatically set a loss scale factor.
 
 
@@ -246,7 +246,7 @@ r"-(Optimizer that implements the Adafactor algorithm.
 #' - [Shazeer, Noam et al., 2018](https://arxiv.org/abs/1804.04235).
 #'
 #' @param learning_rate A float, a
-#'       `keras_core.optimizers.schedules.LearningRateSchedule` instance, or
+#'       `keras.optimizers.schedules.LearningRateSchedule` instance, or
 #'       a callable that takes no arguments and returns the actual value to
 #'       use. The learning rate. Defaults to `0.001`.
 #' @param beta_2_decay float, defaults to -0.8. The decay rate of `beta_2`.
@@ -296,7 +296,7 @@ r"-(Optimizer that implements the Adafactor algorithm.
 #'     be multiplied the loss before computing gradients, and the inverse of
 #'     the scale factor will be multiplied by the gradients before updating
 #'     variables. Useful for preventing underflow during mixed precision
-#'     training. Alternately, `keras_core.optimizers.LossScaleOptimizer` will
+#'     training. Alternately, `keras.optimizers.LossScaleOptimizer` will
 #'     automatically set a loss scale factor.
 #'
 #' @export
@@ -326,7 +326,7 @@ r"-(Optimizer that implements the Adagrad algorithm.
 
     Args:
         learning_rate: A float, a
-            `keras_core.optimizers.schedules.LearningRateSchedule` instance, or
+            `keras.optimizers.schedules.LearningRateSchedule` instance, or
             a callable that takes no arguments and returns the actual value to
             use. The learning rate. Defaults to `0.001`. Note that `Adagrad`
             tends to benefit from higher initial learning rate values compared
@@ -370,7 +370,7 @@ r"-(Optimizer that implements the Adagrad algorithm.
           be multiplied the loss before computing gradients, and the inverse of
           the scale factor will be multiplied by the gradients before updating
           variables. Useful for preventing underflow during mixed precision
-          training. Alternately, `keras_core.optimizers.LossScaleOptimizer` will
+          training. Alternately, `keras.optimizers.LossScaleOptimizer` will
           automatically set a loss scale factor.
 
 
@@ -395,7 +395,7 @@ r"-(Optimizer that implements the Adagrad algorithm.
 #'     http://www.jmlr.org/papers/volume12/duchi11a/duchi11a.pdf).
 #'
 #' @param learning_rate A float, a
-#'       `keras_core.optimizers.schedules.LearningRateSchedule` instance, or
+#'       `keras.optimizers.schedules.LearningRateSchedule` instance, or
 #'       a callable that takes no arguments and returns the actual value to
 #'       use. The learning rate. Defaults to `0.001`. Note that `Adagrad`
 #'       tends to benefit from higher initial learning rate values compared
@@ -439,7 +439,7 @@ r"-(Optimizer that implements the Adagrad algorithm.
 #'     be multiplied the loss before computing gradients, and the inverse of
 #'     the scale factor will be multiplied by the gradients before updating
 #'     variables. Useful for preventing underflow during mixed precision
-#'     training. Alternately, `keras_core.optimizers.LossScaleOptimizer` will
+#'     training. Alternately, `keras.optimizers.LossScaleOptimizer` will
 #'     automatically set a loss scale factor.
 #'
 #' @export
@@ -473,7 +473,7 @@ r"-(Optimizer that implements the Adam algorithm.
 
     Args:
         learning_rate: A float, a
-            `keras_core.optimizers.schedules.LearningRateSchedule` instance, or
+            `keras.optimizers.schedules.LearningRateSchedule` instance, or
             a callable that takes no arguments and returns the actual value to
             use. The learning rate. Defaults to `0.001`.
         beta_1: A float value or a constant float tensor, or a callable
@@ -526,7 +526,7 @@ r"-(Optimizer that implements the Adam algorithm.
           be multiplied the loss before computing gradients, and the inverse of
           the scale factor will be multiplied by the gradients before updating
           variables. Useful for preventing underflow during mixed precision
-          training. Alternately, `keras_core.optimizers.LossScaleOptimizer` will
+          training. Alternately, `keras.optimizers.LossScaleOptimizer` will
           automatically set a loss scale factor.
 
     )-"
@@ -547,7 +547,7 @@ r"-(Optimizer that implements the Adam algorithm.
 #' data/parameters*".
 #'
 #' @param learning_rate A float, a
-#'       `keras_core.optimizers.schedules.LearningRateSchedule` instance, or
+#'       `keras.optimizers.schedules.LearningRateSchedule` instance, or
 #'       a callable that takes no arguments and returns the actual value to
 #'       use. The learning rate. Defaults to `0.001`.
 #' @param beta_1 A float value or a constant float tensor, or a callable
@@ -600,7 +600,7 @@ r"-(Optimizer that implements the Adam algorithm.
 #'     be multiplied the loss before computing gradients, and the inverse of
 #'     the scale factor will be multiplied by the gradients before updating
 #'     variables. Useful for preventing underflow during mixed precision
-#'     training. Alternately, `keras_core.optimizers.LossScaleOptimizer` will
+#'     training. Alternately, `keras.optimizers.LossScaleOptimizer` will
 #'     automatically set a loss scale factor.
 #'
 #' @export
@@ -651,7 +651,7 @@ r"-(Optimizer that implements the Adamax algorithm.
 
     Args:
         learning_rate: A float, a
-            `keras_core.optimizers.schedules.LearningRateSchedule` instance, or
+            `keras.optimizers.schedules.LearningRateSchedule` instance, or
             a callable that takes no arguments and returns the actual value to
             use. The learning rate. Defaults to `0.001`.
         beta_1: A float value or a constant float tensor. The exponential decay
@@ -694,7 +694,7 @@ r"-(Optimizer that implements the Adamax algorithm.
           be multiplied the loss before computing gradients, and the inverse of
           the scale factor will be multiplied by the gradients before updating
           variables. Useful for preventing underflow during mixed precision
-          training. Alternately, `keras_core.optimizers.LossScaleOptimizer` will
+          training. Alternately, `keras.optimizers.LossScaleOptimizer` will
           automatically set a loss scale factor.
 
 
@@ -738,7 +738,7 @@ r"-(Optimizer that implements the Adamax algorithm.
 #' - [Kingma et al., 2014](http://arxiv.org/abs/1412.6980)
 #'
 #' @param learning_rate A float, a
-#'       `keras_core.optimizers.schedules.LearningRateSchedule` instance, or
+#'       `keras.optimizers.schedules.LearningRateSchedule` instance, or
 #'       a callable that takes no arguments and returns the actual value to
 #'       use. The learning rate. Defaults to `0.001`.
 #' @param beta_1 A float value or a constant float tensor. The exponential decay
@@ -781,7 +781,7 @@ r"-(Optimizer that implements the Adamax algorithm.
 #'     be multiplied the loss before computing gradients, and the inverse of
 #'     the scale factor will be multiplied by the gradients before updating
 #'     variables. Useful for preventing underflow during mixed precision
-#'     training. Alternately, `keras_core.optimizers.LossScaleOptimizer` will
+#'     training. Alternately, `keras.optimizers.LossScaleOptimizer` will
 #'     automatically set a loss scale factor.
 #'
 #' @export
@@ -818,7 +818,7 @@ r"-(Optimizer that implements the AdamW algorithm.
 
     Args:
         learning_rate: A float, a
-            `keras_core.optimizers.schedules.LearningRateSchedule` instance, or
+            `keras.optimizers.schedules.LearningRateSchedule` instance, or
             a callable that takes no arguments and returns the actual value to
             use. The learning rate. Defaults to `0.001`.
         beta_1: A float value or a constant float tensor, or a callable
@@ -871,7 +871,7 @@ r"-(Optimizer that implements the AdamW algorithm.
           be multiplied the loss before computing gradients, and the inverse of
           the scale factor will be multiplied by the gradients before updating
           variables. Useful for preventing underflow during mixed precision
-          training. Alternately, `keras_core.optimizers.LossScaleOptimizer` will
+          training. Alternately, `keras.optimizers.LossScaleOptimizer` will
           automatically set a loss scale factor.
 
 
@@ -908,7 +908,7 @@ r"-(Optimizer that implements the AdamW algorithm.
 #'     https://openreview.net/pdf?id=ryQu7f-RZ) for `amsgrad`.
 #'
 #' @param learning_rate A float, a
-#'       `keras_core.optimizers.schedules.LearningRateSchedule` instance, or
+#'       `keras.optimizers.schedules.LearningRateSchedule` instance, or
 #'       a callable that takes no arguments and returns the actual value to
 #'       use. The learning rate. Defaults to `0.001`.
 #' @param beta_1 A float value or a constant float tensor, or a callable
@@ -961,7 +961,7 @@ r"-(Optimizer that implements the AdamW algorithm.
 #'     be multiplied the loss before computing gradients, and the inverse of
 #'     the scale factor will be multiplied by the gradients before updating
 #'     variables. Useful for preventing underflow during mixed precision
-#'     training. Alternately, `keras_core.optimizers.LossScaleOptimizer` will
+#'     training. Alternately, `keras.optimizers.LossScaleOptimizer` will
 #'     automatically set a loss scale factor.
 #'
 #' @export
@@ -1029,7 +1029,7 @@ r"-(Optimizer that implements the FTRL algorithm.
 
     Args:
         learning_rate: A float, a
-            `keras_core.optimizers.schedules.LearningRateSchedule` instance, or
+            `keras.optimizers.schedules.LearningRateSchedule` instance, or
             a callable that takes no arguments and returns the actual value to
             use. The learning rate. Defaults to `0.001`.
         learning_rate_power: A float value, must be less or equal to zero.
@@ -1083,7 +1083,7 @@ r"-(Optimizer that implements the FTRL algorithm.
           be multiplied the loss before computing gradients, and the inverse of
           the scale factor will be multiplied by the gradients before updating
           variables. Useful for preventing underflow during mixed precision
-          training. Alternately, `keras_core.optimizers.LossScaleOptimizer` will
+          training. Alternately, `keras.optimizers.LossScaleOptimizer` will
           automatically set a loss scale factor.
 
     )-"
@@ -1137,7 +1137,7 @@ r"-(Optimizer that implements the FTRL algorithm.
 #' is replaced with a gradient with shrinkage.
 #'
 #' @param learning_rate A float, a
-#'       `keras_core.optimizers.schedules.LearningRateSchedule` instance, or
+#'       `keras.optimizers.schedules.LearningRateSchedule` instance, or
 #'       a callable that takes no arguments and returns the actual value to
 #'       use. The learning rate. Defaults to `0.001`.
 #' @param learning_rate_power A float value, must be less or equal to zero.
@@ -1191,7 +1191,7 @@ r"-(Optimizer that implements the FTRL algorithm.
 #'     be multiplied the loss before computing gradients, and the inverse of
 #'     the scale factor will be multiplied by the gradients before updating
 #'     variables. Useful for preventing underflow during mixed precision
-#'     training. Alternately, `keras_core.optimizers.LossScaleOptimizer` will
+#'     training. Alternately, `keras.optimizers.LossScaleOptimizer` will
 #'     automatically set a loss scale factor.
 #'
 #' @export
@@ -1228,7 +1228,7 @@ r"-(Optimizer that implements the Lion algorithm.
 
     Args:
         learning_rate: A float, a
-            `keras_core.optimizers.schedules.LearningRateSchedule` instance, or
+            `keras.optimizers.schedules.LearningRateSchedule` instance, or
             a callable that takes no arguments and returns the actual value to
             use. The learning rate. Defaults to `0.001`.
         beta_1: A float value or a constant float tensor, or a callable
@@ -1274,7 +1274,7 @@ r"-(Optimizer that implements the Lion algorithm.
           be multiplied the loss before computing gradients, and the inverse of
           the scale factor will be multiplied by the gradients before updating
           variables. Useful for preventing underflow during mixed precision
-          training. Alternately, `keras_core.optimizers.LossScaleOptimizer` will
+          training. Alternately, `keras.optimizers.LossScaleOptimizer` will
           automatically set a loss scale factor.
 
 
@@ -1308,7 +1308,7 @@ r"-(Optimizer that implements the Lion algorithm.
 #'     http://github.com/google/automl/tree/master/lion)
 #'
 #' @param learning_rate A float, a
-#'       `keras_core.optimizers.schedules.LearningRateSchedule` instance, or
+#'       `keras.optimizers.schedules.LearningRateSchedule` instance, or
 #'       a callable that takes no arguments and returns the actual value to
 #'       use. The learning rate. Defaults to `0.001`.
 #' @param beta_1 A float value or a constant float tensor, or a callable
@@ -1354,7 +1354,7 @@ r"-(Optimizer that implements the Lion algorithm.
 #'     be multiplied the loss before computing gradients, and the inverse of
 #'     the scale factor will be multiplied by the gradients before updating
 #'     variables. Useful for preventing underflow during mixed precision
-#'     training. Alternately, `keras_core.optimizers.LossScaleOptimizer` will
+#'     training. Alternately, `keras.optimizers.LossScaleOptimizer` will
 #'     automatically set a loss scale factor.
 #'
 #' @export
@@ -1392,7 +1392,7 @@ r"-(An optimizer that dynamically scales the loss to prevent underflow.
       is doubled.
 
     Args:
-        inner_optimizer: The `keras_core.optimizers.Optimizer` instance to wrap.
+        inner_optimizer: The `keras.optimizers.Optimizer` instance to wrap.
         initial_scale: Float. The initial loss scale. This scale will be updated
             during training. It is recommended for this to be a very high
             number, because a loss scale that is too high gets lowered far more
@@ -1435,7 +1435,7 @@ r"-(An optimizer that dynamically scales the loss to prevent underflow.
           be multiplied the loss before computing gradients, and the inverse of
           the scale factor will be multiplied by the gradients before updating
           variables. Useful for preventing underflow during mixed precision
-          training. Alternately, `keras_core.optimizers.LossScaleOptimizer` will
+          training. Alternately, `keras.optimizers.LossScaleOptimizer` will
           automatically set a loss scale factor.
 
     )-"
@@ -1460,7 +1460,7 @@ r"-(An optimizer that dynamically scales the loss to prevent underflow.
 #'   was updated, and no nonfinite gradients have occurred, the loss scale
 #'   is doubled.
 #'
-#' @param inner_optimizer The `keras_core.optimizers.Optimizer` instance to wrap.
+#' @param inner_optimizer The `keras.optimizers.Optimizer` instance to wrap.
 #' @param initial_scale Float. The initial loss scale. This scale will be updated
 #'       during training. It is recommended for this to be a very high
 #'       number, because a loss scale that is too high gets lowered far more
@@ -1503,7 +1503,7 @@ r"-(An optimizer that dynamically scales the loss to prevent underflow.
 #'     be multiplied the loss before computing gradients, and the inverse of
 #'     the scale factor will be multiplied by the gradients before updating
 #'     variables. Useful for preventing underflow during mixed precision
-#'     training. Alternately, `keras_core.optimizers.LossScaleOptimizer` will
+#'     training. Alternately, `keras.optimizers.LossScaleOptimizer` will
 #'     automatically set a loss scale factor.
 #'
 #' @export
@@ -1529,7 +1529,7 @@ r"-(Optimizer that implements the Nadam algorithm.
 
     Args:
         learning_rate: A float, a
-            `keras_core.optimizers.schedules.LearningRateSchedule` instance, or
+            `keras.optimizers.schedules.LearningRateSchedule` instance, or
             a callable that takes no arguments and returns the actual value to
             use. The learning rate. Defaults to `0.001`.
         beta_1: A float value or a constant float tensor, or a callable
@@ -1579,7 +1579,7 @@ r"-(Optimizer that implements the Nadam algorithm.
           be multiplied the loss before computing gradients, and the inverse of
           the scale factor will be multiplied by the gradients before updating
           variables. Useful for preventing underflow during mixed precision
-          training. Alternately, `keras_core.optimizers.LossScaleOptimizer` will
+          training. Alternately, `keras.optimizers.LossScaleOptimizer` will
           automatically set a loss scale factor.
 
 
@@ -1601,7 +1601,7 @@ r"-(Optimizer that implements the Nadam algorithm.
 #' - [Dozat, 2015](http://cs229.stanford.edu/proj2015/054_report.pdf).
 #'
 #' @param learning_rate A float, a
-#'       `keras_core.optimizers.schedules.LearningRateSchedule` instance, or
+#'       `keras.optimizers.schedules.LearningRateSchedule` instance, or
 #'       a callable that takes no arguments and returns the actual value to
 #'       use. The learning rate. Defaults to `0.001`.
 #' @param beta_1 A float value or a constant float tensor, or a callable
@@ -1651,7 +1651,7 @@ r"-(Optimizer that implements the Nadam algorithm.
 #'     be multiplied the loss before computing gradients, and the inverse of
 #'     the scale factor will be multiplied by the gradients before updating
 #'     variables. Useful for preventing underflow during mixed precision
-#'     training. Alternately, `keras_core.optimizers.LossScaleOptimizer` will
+#'     training. Alternately, `keras.optimizers.LossScaleOptimizer` will
 #'     automatically set a loss scale factor.
 #'
 #' @export
@@ -1685,7 +1685,7 @@ r"-(Optimizer that implements the RMSprop algorithm.
 
     Args:
         learning_rate: A float, a
-            `keras_core.optimizers.schedules.LearningRateSchedule` instance, or
+            `keras.optimizers.schedules.LearningRateSchedule` instance, or
             a callable that takes no arguments and returns the actual value to
             use. The learning rate. Defaults to `0.001`.
         rho: float, defaults to 0.9. Discounting factor for the old gradients.
@@ -1734,14 +1734,14 @@ r"-(Optimizer that implements the RMSprop algorithm.
           be multiplied the loss before computing gradients, and the inverse of
           the scale factor will be multiplied by the gradients before updating
           variables. Useful for preventing underflow during mixed precision
-          training. Alternately, `keras_core.optimizers.LossScaleOptimizer` will
+          training. Alternately, `keras.optimizers.LossScaleOptimizer` will
           automatically set a loss scale factor.
 
 
     Usage:
 
-    >>> opt = keras_core.optimizers.RMSprop(learning_rate=0.1)
-    >>> var1 = keras_core.backend.Variable(10.0)
+    >>> opt = keras.optimizers.RMSprop(learning_rate=0.1)
+    >>> var1 = keras.backend.Variable(10.0)
     >>> loss = lambda: (var1 ** 2) / 2.0  # d(loss) / d(var1) = var1
     >>> opt.minimize(loss, [var1])
     >>> var1
@@ -1773,7 +1773,7 @@ r"-(Optimizer that implements the RMSprop algorithm.
 #'     http://www.cs.toronto.edu/~tijmen/csc321/slides/lecture_slides_lec6.pdf)
 #'
 #' @param learning_rate A float, a
-#'         `keras_core.optimizers.schedules.LearningRateSchedule` instance, or
+#'         `keras.optimizers.schedules.LearningRateSchedule` instance, or
 #'         a callable that takes no arguments and returns the actual value to
 #'         use. The learning rate. Defaults to `0.001`.
 #'     rho: float, defaults to 0.9. Discounting factor for the old gradients.
@@ -1822,14 +1822,14 @@ r"-(Optimizer that implements the RMSprop algorithm.
 #'       be multiplied the loss before computing gradients, and the inverse of
 #'       the scale factor will be multiplied by the gradients before updating
 #'       variables. Useful for preventing underflow during mixed precision
-#'       training. Alternately, `keras_core.optimizers.LossScaleOptimizer` will
+#'       training. Alternately, `keras.optimizers.LossScaleOptimizer` will
 #'       automatically set a loss scale factor.
 #'
 #' Usage:
 #'
 #' ```python
-#' opt = keras_core.optimizers.RMSprop(learning_rate=0.1)
-#' var1 = keras_core.backend.Variable(10.0)
+#' opt = keras.optimizers.RMSprop(learning_rate=0.1)
+#' var1 = keras.backend.Variable(10.0)
 #' loss = lambda: (var1 ** 2) / 2.0  # d(loss) / d(var1) = var1
 #' opt.minimize(loss, [var1])
 #' var1
@@ -1877,7 +1877,7 @@ r"-(Gradient descent (with momentum) optimizer.
 
     Args:
         learning_rate: A float, a
-            `keras_core.optimizers.schedules.LearningRateSchedule` instance, or
+            `keras.optimizers.schedules.LearningRateSchedule` instance, or
             a callable that takes no arguments and returns the actual value to
             use. The learning rate. Defaults to `0.01`.
         momentum: float hyperparameter >= 0 that accelerates gradient descent in
@@ -1920,7 +1920,7 @@ r"-(Gradient descent (with momentum) optimizer.
           be multiplied the loss before computing gradients, and the inverse of
           the scale factor will be multiplied by the gradients before updating
           variables. Useful for preventing underflow during mixed precision
-          training. Alternately, `keras_core.optimizers.LossScaleOptimizer` will
+          training. Alternately, `keras.optimizers.LossScaleOptimizer` will
           automatically set a loss scale factor.
 
     )-"
@@ -1951,7 +1951,7 @@ r"-(Gradient descent (with momentum) optimizer.
 #' ```
 #'
 #' @param learning_rate A float, a
-#'       `keras_core.optimizers.schedules.LearningRateSchedule` instance, or
+#'       `keras.optimizers.schedules.LearningRateSchedule` instance, or
 #'       a callable that takes no arguments and returns the actual value to
 #'       use. The learning rate. Defaults to `0.01`.
 #' @param momentum float hyperparameter >= 0 that accelerates gradient descent in
@@ -1994,7 +1994,7 @@ r"-(Gradient descent (with momentum) optimizer.
 #'     be multiplied the loss before computing gradients, and the inverse of
 #'     the scale factor will be multiplied by the gradients before updating
 #'     variables. Useful for preventing underflow during mixed precision
-#'     training. Alternately, `keras_core.optimizers.LossScaleOptimizer` will
+#'     training. Alternately, `keras.optimizers.LossScaleOptimizer` will
 #'     automatically set a loss scale factor.
 #'
 #' @export

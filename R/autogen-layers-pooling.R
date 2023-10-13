@@ -47,7 +47,7 @@ r"-(Average pooling for temporal data.
 
     >>> x = np.array([1., 2., 3., 4., 5.])
     >>> x = np.reshape(x, [1, 5, 1])
-    >>> avg_pool_1d = keras_core.layers.AveragePooling1D(pool_size=2,
+    >>> avg_pool_1d = keras.layers.AveragePooling1D(pool_size=2,
     ...    strides=1, padding="valid")
     >>> avg_pool_1d(x)
 
@@ -55,7 +55,7 @@ r"-(Average pooling for temporal data.
 
     >>> x = np.array([1., 2., 3., 4., 5.])
     >>> x = np.reshape(x, [1, 5, 1])
-    >>> avg_pool_1d = keras_core.layers.AveragePooling1D(pool_size=2,
+    >>> avg_pool_1d = keras.layers.AveragePooling1D(pool_size=2,
     ...    strides=2, padding="valid")
     >>> avg_pool_1d(x)
 
@@ -63,7 +63,7 @@ r"-(Average pooling for temporal data.
 
     >>> x = np.array([1., 2., 3., 4., 5.])
     >>> x = np.reshape(x, [1, 5, 1])
-    >>> avg_pool_1d = keras_core.layers.AveragePooling1D(pool_size=2,
+    >>> avg_pool_1d = keras.layers.AveragePooling1D(pool_size=2,
     ...    strides=1, padding="same")
     >>> avg_pool_1d(x)
     )-"
@@ -99,7 +99,7 @@ r"-(Average pooling for temporal data.
 #' ```python
 #' x = np.array([1., 2., 3., 4., 5.])
 #' x = np.reshape(x, [1, 5, 1])
-#' avg_pool_1d = keras_core.layers.AveragePooling1D(pool_size=2,
+#' avg_pool_1d = keras.layers.AveragePooling1D(pool_size=2,
 #'    strides=1, padding="valid")
 #' avg_pool_1d(x)
 #' ```
@@ -109,7 +109,7 @@ r"-(Average pooling for temporal data.
 #' ```python
 #' x = np.array([1., 2., 3., 4., 5.])
 #' x = np.reshape(x, [1, 5, 1])
-#' avg_pool_1d = keras_core.layers.AveragePooling1D(pool_size=2,
+#' avg_pool_1d = keras.layers.AveragePooling1D(pool_size=2,
 #'    strides=2, padding="valid")
 #' avg_pool_1d(x)
 #' ```
@@ -119,7 +119,7 @@ r"-(Average pooling for temporal data.
 #' ```python
 #' x = np.array([1., 2., 3., 4., 5.])
 #' x = np.reshape(x, [1, 5, 1])
-#' avg_pool_1d = keras_core.layers.AveragePooling1D(pool_size=2,
+#' avg_pool_1d = keras.layers.AveragePooling1D(pool_size=2,
 #'    strides=1, padding="same")
 #' avg_pool_1d(x)
 #' ```
@@ -213,7 +213,7 @@ r"-(Average pooling operation for 2D spatial data.
     ...               [4., 5., 6.],
     ...               [7., 8., 9.]])
     >>> x = np.reshape(x, [1, 3, 3, 1])
-    >>> avg_pool_2d = keras_core.layers.AveragePooling2D(pool_size=(2, 2),
+    >>> avg_pool_2d = keras.layers.AveragePooling2D(pool_size=(2, 2),
     ...    strides=(1, 1), padding="valid")
     >>> avg_pool_2d(x)
 
@@ -223,7 +223,7 @@ r"-(Average pooling operation for 2D spatial data.
     ...              [5., 6., 7., 8.],
     ...              [9., 10., 11., 12.]])
     >>> x = np.reshape(x, [1, 3, 4, 1])
-    >>> avg_pool_2d = keras_core.layers.AveragePooling2D(pool_size=(2, 2),
+    >>> avg_pool_2d = keras.layers.AveragePooling2D(pool_size=(2, 2),
     ...    strides=(2, 2), padding="valid")
     >>> avg_pool_2d(x)
 
@@ -233,7 +233,7 @@ r"-(Average pooling operation for 2D spatial data.
     ...                  [4., 5., 6.],
     ...                  [7., 8., 9.]])
     >>> x = np.reshape(x, [1, 3, 3, 1])
-    >>> avg_pool_2d = keras_core.layers.AveragePooling2D(pool_size=(2, 2),
+    >>> avg_pool_2d = keras.layers.AveragePooling2D(pool_size=(2, 2),
     ...    strides=(1, 1), padding="same")
     >>> avg_pool_2d(x)
     )-"
@@ -278,7 +278,7 @@ r"-(Average pooling operation for 2D spatial data.
 #'               [4., 5., 6.],
 #'               [7., 8., 9.]])
 #' x = np.reshape(x, [1, 3, 3, 1])
-#' avg_pool_2d = keras_core.layers.AveragePooling2D(pool_size=(2, 2),
+#' avg_pool_2d = keras.layers.AveragePooling2D(pool_size=(2, 2),
 #'    strides=(1, 1), padding="valid")
 #' avg_pool_2d(x)
 #' ```
@@ -290,7 +290,7 @@ r"-(Average pooling operation for 2D spatial data.
 #'              [5., 6., 7., 8.],
 #'              [9., 10., 11., 12.]])
 #' x = np.reshape(x, [1, 3, 4, 1])
-#' avg_pool_2d = keras_core.layers.AveragePooling2D(pool_size=(2, 2),
+#' avg_pool_2d = keras.layers.AveragePooling2D(pool_size=(2, 2),
 #'    strides=(2, 2), padding="valid")
 #' avg_pool_2d(x)
 #' ```
@@ -302,7 +302,7 @@ r"-(Average pooling operation for 2D spatial data.
 #'                  [4., 5., 6.],
 #'                  [7., 8., 9.]])
 #' x = np.reshape(x, [1, 3, 3, 1])
-#' avg_pool_2d = keras_core.layers.AveragePooling2D(pool_size=(2, 2),
+#' avg_pool_2d = keras.layers.AveragePooling2D(pool_size=(2, 2),
 #'    strides=(1, 1), padding="same")
 #' avg_pool_2d(x)
 #' ```
@@ -395,8 +395,8 @@ r"-(Average pooling operation for 3D data (spatial or spatio-temporal).
     width = 30
     channels = 3
 
-    inputs = keras_core.layers.Input(shape=(depth, height, width, channels))
-    layer = keras_core.layers.AveragePooling3D(pool_size=3)
+    inputs = keras.layers.Input(shape=(depth, height, width, channels))
+    layer = keras.layers.AveragePooling3D(pool_size=3)
     outputs = layer(inputs)  # Shape: (batch_size, 10, 10, 10, 3)
     ```
     )-"
@@ -434,8 +434,8 @@ r"-(Average pooling operation for 3D data (spatial or spatio-temporal).
 #' width = 30
 #' channels = 3
 #'
-#' inputs = keras_core.layers.Input(shape=(depth, height, width, channels))
-#' layer = keras_core.layers.AveragePooling3D(pool_size=3)
+#' inputs = keras.layers.Input(shape=(depth, height, width, channels))
+#' layer = keras.layers.AveragePooling3D(pool_size=3)
 #' outputs = layer(inputs)  # Shape: (batch_size, 10, 10, 10, 3)
 #' ```
 #'
@@ -519,7 +519,7 @@ r"-(Global average pooling operation for temporal data.
     Example:
 
     >>> x = np.random.rand(2, 3, 4)
-    >>> y = keras_core.layers.GlobalAveragePooling1D()(x)
+    >>> y = keras.layers.GlobalAveragePooling1D()(x)
     >>> y.shape
     (2, 4)
     )-"
@@ -555,7 +555,7 @@ r"-(Global average pooling operation for temporal data.
 #' # Examples
 #' ```python
 #' x = np.random.rand(2, 3, 4)
-#' y = keras_core.layers.GlobalAveragePooling1D()(x)
+#' y = keras.layers.GlobalAveragePooling1D()(x)
 #' y.shape
 #' # (2, 4)
 #' ```
@@ -629,7 +629,7 @@ r"-(Global average pooling operation for 2D data.
     Example:
 
     >>> x = np.random.rand(2, 4, 5, 3)
-    >>> y = keras_core.layers.GlobalAveragePooling2D()(x)
+    >>> y = keras.layers.GlobalAveragePooling2D()(x)
     >>> y.shape
     (2, 3)
     )-"
@@ -660,7 +660,7 @@ r"-(Global average pooling operation for 2D data.
 #' # Examples
 #' ```python
 #' x = np.random.rand(2, 4, 5, 3)
-#' y = keras_core.layers.GlobalAveragePooling2D()(x)
+#' y = keras.layers.GlobalAveragePooling2D()(x)
 #' y.shape
 #' # (2, 3)
 #' ```
@@ -736,7 +736,7 @@ r"-(Global average pooling operation for 3D data.
     Example:
 
     >>> x = np.random.rand(2, 4, 5, 4, 3)
-    >>> y = keras_core.layers.GlobalAveragePooling3D()(x)
+    >>> y = keras.layers.GlobalAveragePooling3D()(x)
     >>> y.shape
     (2, 3)
     )-"
@@ -767,7 +767,7 @@ r"-(Global average pooling operation for 3D data.
 #' # Examples
 #' ```python
 #' x = np.random.rand(2, 4, 5, 4, 3)
-#' y = keras_core.layers.GlobalAveragePooling3D()(x)
+#' y = keras.layers.GlobalAveragePooling3D()(x)
 #' y.shape
 #' # (2, 3)
 #' ```
@@ -842,7 +842,7 @@ r"-(Global max pooling operation for temporal data.
     Example:
 
     >>> x = np.random.rand(2, 3, 4)
-    >>> y = keras_core.layers.GlobalMaxPooling1D()(x)
+    >>> y = keras.layers.GlobalMaxPooling1D()(x)
     >>> y.shape
     (2, 4)
     )-"
@@ -873,7 +873,7 @@ r"-(Global max pooling operation for temporal data.
 #' # Examples
 #' ```python
 #' x = np.random.rand(2, 3, 4)
-#' y = keras_core.layers.GlobalMaxPooling1D()(x)
+#' y = keras.layers.GlobalMaxPooling1D()(x)
 #' y.shape
 #' # (2, 4)
 #' ```
@@ -946,7 +946,7 @@ r"-(Global max pooling operation for 2D data.
     Example:
 
     >>> x = np.random.rand(2, 4, 5, 3)
-    >>> y = keras_core.layers.GlobalMaxPooling2D()(x)
+    >>> y = keras.layers.GlobalMaxPooling2D()(x)
     >>> y.shape
     (2, 3)
     )-"
@@ -977,7 +977,7 @@ r"-(Global max pooling operation for 2D data.
 #' # Examples
 #' ```python
 #' x = np.random.rand(2, 4, 5, 3)
-#' y = keras_core.layers.GlobalMaxPooling2D()(x)
+#' y = keras.layers.GlobalMaxPooling2D()(x)
 #' y.shape
 #' # (2, 3)
 #' ```
@@ -1052,7 +1052,7 @@ r"-(Global max pooling operation for 3D data.
     Example:
 
     >>> x = np.random.rand(2, 4, 5, 4, 3)
-    >>> y = keras_core.layers.GlobalMaxPooling3D()(x)
+    >>> y = keras.layers.GlobalMaxPooling3D()(x)
     >>> y.shape
     (2, 3)
     )-"
@@ -1083,7 +1083,7 @@ r"-(Global max pooling operation for 3D data.
 #' # Examples
 #' ```python
 #' x = np.random.rand(2, 4, 5, 4, 3)
-#' y = keras_core.layers.GlobalMaxPooling3D()(x)
+#' y = keras.layers.GlobalMaxPooling3D()(x)
 #' y.shape
 #' # (2, 3)
 #' ```
@@ -1164,7 +1164,7 @@ r"-(Max pooling operation for 1D temporal data.
 
     >>> x = np.array([1., 2., 3., 4., 5.])
     >>> x = np.reshape(x, [1, 5, 1])
-    >>> max_pool_1d = keras_core.layers.MaxPooling1D(pool_size=2,
+    >>> max_pool_1d = keras.layers.MaxPooling1D(pool_size=2,
     ...    strides=1, padding="valid")
     >>> max_pool_1d(x)
 
@@ -1172,7 +1172,7 @@ r"-(Max pooling operation for 1D temporal data.
 
     >>> x = np.array([1., 2., 3., 4., 5.])
     >>> x = np.reshape(x, [1, 5, 1])
-    >>> max_pool_1d = keras_core.layers.MaxPooling1D(pool_size=2,
+    >>> max_pool_1d = keras.layers.MaxPooling1D(pool_size=2,
     ...    strides=2, padding="valid")
     >>> max_pool_1d(x)
 
@@ -1180,7 +1180,7 @@ r"-(Max pooling operation for 1D temporal data.
 
     >>> x = np.array([1., 2., 3., 4., 5.])
     >>> x = np.reshape(x, [1, 5, 1])
-    >>> max_pool_1d = keras_core.layers.MaxPooling1D(pool_size=2,
+    >>> max_pool_1d = keras.layers.MaxPooling1D(pool_size=2,
     ...    strides=1, padding="same")
     >>> max_pool_1d(x)
     )-"
@@ -1217,7 +1217,7 @@ r"-(Max pooling operation for 1D temporal data.
 #' ```python
 #' x = np.array([1., 2., 3., 4., 5.])
 #' x = np.reshape(x, [1, 5, 1])
-#' max_pool_1d = keras_core.layers.MaxPooling1D(pool_size=2,
+#' max_pool_1d = keras.layers.MaxPooling1D(pool_size=2,
 #'    strides=1, padding="valid")
 #' max_pool_1d(x)
 #' ```
@@ -1227,7 +1227,7 @@ r"-(Max pooling operation for 1D temporal data.
 #' ```python
 #' x = np.array([1., 2., 3., 4., 5.])
 #' x = np.reshape(x, [1, 5, 1])
-#' max_pool_1d = keras_core.layers.MaxPooling1D(pool_size=2,
+#' max_pool_1d = keras.layers.MaxPooling1D(pool_size=2,
 #'    strides=2, padding="valid")
 #' max_pool_1d(x)
 #' ```
@@ -1237,7 +1237,7 @@ r"-(Max pooling operation for 1D temporal data.
 #' ```python
 #' x = np.array([1., 2., 3., 4., 5.])
 #' x = np.reshape(x, [1, 5, 1])
-#' max_pool_1d = keras_core.layers.MaxPooling1D(pool_size=2,
+#' max_pool_1d = keras.layers.MaxPooling1D(pool_size=2,
 #'    strides=1, padding="same")
 #' max_pool_1d(x)
 #' ```
@@ -1331,7 +1331,7 @@ r"-(Max pooling operation for 2D spatial data.
     ...               [4., 5., 6.],
     ...               [7., 8., 9.]])
     >>> x = np.reshape(x, [1, 3, 3, 1])
-    >>> max_pool_2d = keras_core.layers.MaxPooling2D(pool_size=(2, 2),
+    >>> max_pool_2d = keras.layers.MaxPooling2D(pool_size=(2, 2),
     ...    strides=(1, 1), padding="valid")
     >>> max_pool_2d(x)
 
@@ -1341,7 +1341,7 @@ r"-(Max pooling operation for 2D spatial data.
     ...               [5., 6., 7., 8.],
     ...               [9., 10., 11., 12.]])
     >>> x = np.reshape(x, [1, 3, 4, 1])
-    >>> max_pool_2d = keras_core.layers.MaxPooling2D(pool_size=(2, 2),
+    >>> max_pool_2d = keras.layers.MaxPooling2D(pool_size=(2, 2),
     ...    strides=(2, 2), padding="valid")
     >>> max_pool_2d(x)
 
@@ -1351,7 +1351,7 @@ r"-(Max pooling operation for 2D spatial data.
     ...               [4., 5., 6.],
     ...               [7., 8., 9.]])
     >>> x = np.reshape(x, [1, 3, 3, 1])
-    >>> max_pool_2d = keras_core.layers.MaxPooling2D(pool_size=(2, 2),
+    >>> max_pool_2d = keras.layers.MaxPooling2D(pool_size=(2, 2),
     ...    strides=(1, 1), padding="same")
     >>> max_pool_2d(x)
     )-"
@@ -1396,7 +1396,7 @@ r"-(Max pooling operation for 2D spatial data.
 #'               [4., 5., 6.],
 #'               [7., 8., 9.]])
 #' x = np.reshape(x, [1, 3, 3, 1])
-#' max_pool_2d = keras_core.layers.MaxPooling2D(pool_size=(2, 2),
+#' max_pool_2d = keras.layers.MaxPooling2D(pool_size=(2, 2),
 #'    strides=(1, 1), padding="valid")
 #' max_pool_2d(x)
 #' ```
@@ -1408,7 +1408,7 @@ r"-(Max pooling operation for 2D spatial data.
 #'               [5., 6., 7., 8.],
 #'               [9., 10., 11., 12.]])
 #' x = np.reshape(x, [1, 3, 4, 1])
-#' max_pool_2d = keras_core.layers.MaxPooling2D(pool_size=(2, 2),
+#' max_pool_2d = keras.layers.MaxPooling2D(pool_size=(2, 2),
 #'    strides=(2, 2), padding="valid")
 #' max_pool_2d(x)
 #' ```
@@ -1420,7 +1420,7 @@ r"-(Max pooling operation for 2D spatial data.
 #'               [4., 5., 6.],
 #'               [7., 8., 9.]])
 #' x = np.reshape(x, [1, 3, 3, 1])
-#' max_pool_2d = keras_core.layers.MaxPooling2D(pool_size=(2, 2),
+#' max_pool_2d = keras.layers.MaxPooling2D(pool_size=(2, 2),
 #'    strides=(1, 1), padding="same")
 #' max_pool_2d(x)
 #' ```
@@ -1513,8 +1513,8 @@ r"-(Max pooling operation for 3D data (spatial or spatio-temporal).
     width = 30
     channels = 3
 
-    inputs = keras_core.layers.Input(shape=(depth, height, width, channels))
-    layer = keras_core.layers.MaxPooling3D(pool_size=3)
+    inputs = keras.layers.Input(shape=(depth, height, width, channels))
+    layer = keras.layers.MaxPooling3D(pool_size=3)
     outputs = layer(inputs)  # Shape: (batch_size, 10, 10, 10, 3)
     ```
     )-"
@@ -1552,8 +1552,8 @@ r"-(Max pooling operation for 3D data (spatial or spatio-temporal).
 #' width = 30
 #' channels = 3
 #'
-#' inputs = keras_core.layers.Input(shape=(depth, height, width, channels))
-#' layer = keras_core.layers.MaxPooling3D(pool_size=3)
+#' inputs = keras.layers.Input(shape=(depth, height, width, channels))
+#' layer = keras.layers.MaxPooling3D(pool_size=3)
 #' outputs = layer(inputs)  # Shape: (batch_size, 10, 10, 10, 3)
 #' ```
 #'

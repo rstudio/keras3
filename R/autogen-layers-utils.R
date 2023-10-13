@@ -25,12 +25,12 @@ r"-(Torch module wrapper layer.
     import torch.nn as nn
     import torch.nn.functional as F
 
-    import keras_core
-    from keras_core.layers import TorchModuleWrapper
+    import keras
+    from keras.layers import TorchModuleWrapper
 
-    class Classifier(keras_core.Model):
-        def __init__(self, *args, **kwargs):
-            super().__init__(*args, **kwargs)
+    class Classifier(keras.Model):
+        def __init__(self, **kwargs):
+            super().__init__(**kwargs)
             # Wrap `torch.nn.Module`s with `TorchModuleWrapper`
             # if they contain parameters
             self.conv1 = TorchModuleWrapper(
@@ -85,12 +85,12 @@ r"-(Torch module wrapper layer.
 #' import torch.nn as nn
 #' import torch.nn.functional as F
 #'
-#' import keras_core
-#' from keras_core.layers import TorchModuleWrapper
+#' import keras
+#' from keras.layers import TorchModuleWrapper
 #'
-#' class Classifier(keras_core.Model):
-#'     def __init__(self, *args, **kwargs):
-#'         super().__init__(*args, **kwargs)
+#' class Classifier(keras.Model):
+#'     def __init__(self, **kwargs):
+#'         super().__init__(**kwargs)
 #'         # Wrap `torch.nn.Module`s with `TorchModuleWrapper`
 #'         # if they contain parameters
 #'         self.conv1 = TorchModuleWrapper(
@@ -136,7 +136,7 @@ r"-(Torch module wrapper layer.
 #' @seealso
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/layers/TorchModuleWrapper>
 layer_torch_module_wrapper <-
-function (object, module, name = NULL)
+function (object, module, name = NULL, ...)
 {
     args <- capture_args2(list(input_shape = normalize_shape,
         batch_size = as_integer, batch_input_shape = normalize_shape),

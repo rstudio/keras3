@@ -22,23 +22,23 @@ Tensor of indices that sort \code{x} along the specified \code{axis}.
 \section{Examples}{
 One dimensional array:
 
-\if{html}{\out{<div class="sourceCode python">}}\preformatted{x = keras_core.ops.array([3, 1, 2])
-keras_core.ops.argsort(x)
+\if{html}{\out{<div class="sourceCode python">}}\preformatted{x = keras.ops.array([3, 1, 2])
+keras.ops.argsort(x)
 # array([1, 2, 0], dtype=int32)
 }\if{html}{\out{</div>}}
 
 Two-dimensional array:
 
-\if{html}{\out{<div class="sourceCode python">}}\preformatted{x = keras_core.ops.array([[0, 3], [3, 2], [4, 5]])
+\if{html}{\out{<div class="sourceCode python">}}\preformatted{x = keras.ops.array([[0, 3], [3, 2], [4, 5]])
 x
 # array([[0, 3],
 #        [3, 2],
 #        [4, 5]], dtype=int32)
-keras_core.ops.argsort(x, axis=0)
+keras.ops.argsort(x, axis=0)
 # array([[0, 1],
 #        [1, 0],
 #        [2, 2]], dtype=int32)
-keras_core.ops.argsort(x, axis=1)
+keras.ops.argsort(x, axis=1)
 # array([[0, 1],
 #        [1, 0],
 #        [0, 1]], dtype=int32)
@@ -104,6 +104,7 @@ Other ops:
 \code{\link{k_elu}()},
 \code{\link{k_empty}()},
 \code{\link{k_equal}()},
+\code{\link{k_erf}()},
 \code{\link{k_expand_dims}()},
 \code{\link{k_expm_1}()},
 \code{\link{k_exp}()},
@@ -185,6 +186,7 @@ Other ops:
 \code{\link{k_rfft}()},
 \code{\link{k_roll}()},
 \code{\link{k_round}()},
+\code{\link{k_rsqrt}()},
 \code{\link{k_scatter_update}()},
 \code{\link{k_scatter}()},
 \code{\link{k_segment_max}()},

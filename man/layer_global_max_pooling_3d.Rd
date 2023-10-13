@@ -53,7 +53,7 @@ Global max pooling operation for 3D data.
 
 \section{Examples}{
 \if{html}{\out{<div class="sourceCode python">}}\preformatted{x = np.random.rand(2, 4, 5, 4, 3)
-y = keras_core.layers.GlobalMaxPooling3D()(x)
+y = keras.layers.GlobalMaxPooling3D()(x)
 y.shape
 # (2, 3)
 }\if{html}{\out{</div>}}

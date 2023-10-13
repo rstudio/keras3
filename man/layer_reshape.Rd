@@ -25,14 +25,14 @@ the first layer in a model.
 }
 
 \section{Examples}{
-\if{html}{\out{<div class="sourceCode python">}}\preformatted{x = keras_core.Input(shape=(12,))
-y = keras_core.layers.Reshape((3, 4))(x)
+\if{html}{\out{<div class="sourceCode python">}}\preformatted{x = keras.Input(shape=(12,))
+y = keras.layers.Reshape((3, 4))(x)
 y.shape
 # (None, 3, 4)
 }\if{html}{\out{</div>}}
 
 \if{html}{\out{<div class="sourceCode python">}}\preformatted{# also supports shape inference using `-1` as dimension
-y = keras_core.layers.Reshape((-1, 2, 2))(x)
+y = keras.layers.Reshape((-1, 2, 2))(x)
 y.shape
 # (None, 3, 2, 2)
 }\if{html}{\out{</div>}}

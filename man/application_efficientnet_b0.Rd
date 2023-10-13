@@ -69,7 +69,7 @@ For transfer learning use cases, make sure to read the
 Note: each Keras Application expects a specific kind of input preprocessing.
 For EfficientNet, input preprocessing is included as part of the model
 (as a \code{Rescaling} layer), and thus
-\code{keras_core.applications.efficientnet.preprocess_input} is actually a
+\code{keras.applications.efficientnet.preprocess_input} is actually a
 pass-through function. EfficientNet models expect their inputs to be float
 tensors of pixels with values in the \verb{[0-255]} range.
 }

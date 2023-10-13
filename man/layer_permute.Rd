@@ -25,8 +25,8 @@ to the specified pattern.
 }
 
 \section{Examples}{
-\if{html}{\out{<div class="sourceCode python">}}\preformatted{x = keras_core.Input(shape=(10, 64))
-y = keras_core.layers.Permute((2, 1))(x)
+\if{html}{\out{<div class="sourceCode python">}}\preformatted{x = keras.Input(shape=(10, 64))
+y = keras.layers.Permute((2, 1))(x)
 y.shape
 # (None, 64, 10)
 }\if{html}{\out{</div>}}

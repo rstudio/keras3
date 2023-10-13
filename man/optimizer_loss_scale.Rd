@@ -12,7 +12,7 @@ optimizer_loss_scale(
 )
 }
 \arguments{
-\item{inner_optimizer}{The \code{keras_core.optimizers.Optimizer} instance to wrap.}
+\item{inner_optimizer}{The \code{keras.optimizers.Optimizer} instance to wrap.}
 
 \item{initial_scale}{Float. The initial loss scale. This scale will be updated
 during training. It is recommended for this to be a very high
@@ -65,7 +65,7 @@ and you don't need to do anything.}
 be multiplied the loss before computing gradients, and the inverse of
 the scale factor will be multiplied by the gradients before updating
 variables. Useful for preventing underflow during mixed precision
-training. Alternately, \code{keras_core.optimizers.LossScaleOptimizer} will
+training. Alternately, \code{keras.optimizers.LossScaleOptimizer} will
 automatically set a loss scale factor.}
 }
 \description{

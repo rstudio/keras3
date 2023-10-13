@@ -18,7 +18,7 @@ r"-(Cropping layer for 1D input (e.g. temporal sequence).
      [[ 6  7]
       [ 8  9]
       [10 11]]]
-    >>> y = keras_core.layers.Cropping1D(cropping=1)(x)
+    >>> y = keras.layers.Cropping1D(cropping=1)(x)
     >>> y
     [[[2 3]]
      [[8 9]]]
@@ -56,7 +56,7 @@ r"-(Cropping layer for 1D input (e.g. temporal sequence).
 #' #  [[ 6  7]
 #' #   [ 8  9]
 #' #   [10 11]]]
-#' y = keras_core.layers.Cropping1D(cropping=1)(x)
+#' y = keras.layers.Cropping1D(cropping=1)(x)
 #' y
 #' # [[[2 3]]
 #' #  [[8 9]]]
@@ -99,7 +99,7 @@ r"-(Cropping layer for 2D input (e.g. picture).
 
     >>> input_shape = (2, 28, 28, 3)
     >>> x = np.arange(np.prod(input_shape)).reshape(input_shape)
-    >>> y = keras_core.layers.Cropping2D(cropping=((2, 2), (4, 4)))(x)
+    >>> y = keras.layers.Cropping2D(cropping=((2, 2), (4, 4)))(x)
     >>> y.shape
     (2, 24, 20, 3)
 
@@ -148,7 +148,7 @@ r"-(Cropping layer for 2D input (e.g. picture).
 #' ```python
 #' input_shape = (2, 28, 28, 3)
 #' x = np.arange(np.prod(input_shape)).reshape(input_shape)
-#' y = keras_core.layers.Cropping2D(cropping=((2, 2), (4, 4)))(x)
+#' y = keras.layers.Cropping2D(cropping=((2, 2), (4, 4)))(x)
 #' y.shape
 #' # (2, 24, 20, 3)
 #' ```
@@ -209,7 +209,7 @@ r"-(Cropping layer for 3D data (e.g. spatial or spatio-temporal).
 
     >>> input_shape = (2, 28, 28, 10, 3)
     >>> x = np.arange(np.prod(input_shape)).reshape(input_shape)
-    >>> y = keras_core.layers.Cropping3D(cropping=(2, 4, 2))(x)
+    >>> y = keras.layers.Cropping3D(cropping=(2, 4, 2))(x)
     >>> y.shape
     (2, 24, 20, 6, 3)
 
@@ -262,7 +262,7 @@ r"-(Cropping layer for 3D data (e.g. spatial or spatio-temporal).
 #' ```python
 #' input_shape = (2, 28, 28, 10, 3)
 #' x = np.arange(np.prod(input_shape)).reshape(input_shape)
-#' y = keras_core.layers.Cropping3D(cropping=(2, 4, 2))(x)
+#' y = keras.layers.Cropping3D(cropping=(2, 4, 2))(x)
 #' y.shape
 #' # (2, 24, 20, 6, 3)
 #' ```
@@ -339,8 +339,8 @@ r"-(Flattens the input. Does not affect the batch size.
 
     Example:
 
-    >>> x = keras_core.Input(shape=(10, 64))
-    >>> y = keras_core.layers.Flatten()(x)
+    >>> x = keras.Input(shape=(10, 64))
+    >>> y = keras.layers.Flatten()(x)
     >>> y.shape
     (None, 640)
     )-"
@@ -355,8 +355,8 @@ r"-(Flattens the input. Does not affect the batch size.
 #'
 #' # Examples
 #' ```python
-#' x = keras_core.Input(shape=(10, 64))
-#' y = keras_core.layers.Flatten()(x)
+#' x = keras.Input(shape=(10, 64))
+#' y = keras.layers.Flatten()(x)
 #' y.shape
 #' # (None, 640)
 #' ```
@@ -405,8 +405,8 @@ r"-(Permutes the dimensions of the input according to a given pattern.
 
     Example:
 
-    >>> x = keras_core.Input(shape=(10, 64))
-    >>> y = keras_core.layers.Permute((2, 1))(x)
+    >>> x = keras.Input(shape=(10, 64))
+    >>> y = keras.layers.Permute((2, 1))(x)
     >>> y.shape
     (None, 64, 10)
     )-"
@@ -427,8 +427,8 @@ r"-(Permutes the dimensions of the input according to a given pattern.
 #'
 #' # Examples
 #' ```python
-#' x = keras_core.Input(shape=(10, 64))
-#' y = keras_core.layers.Permute((2, 1))(x)
+#' x = keras.Input(shape=(10, 64))
+#' y = keras.layers.Permute((2, 1))(x)
 #' y.shape
 #' # (None, 64, 10)
 #' ```
@@ -459,8 +459,8 @@ r"-(Repeats the input n times.
 
     Example:
 
-    >>> x = keras_core.Input(shape=(32,))
-    >>> y = keras_core.layers.RepeatVector(3)(x)
+    >>> x = keras.Input(shape=(32,))
+    >>> y = keras.layers.RepeatVector(3)(x)
     >>> y.shape
     (None, 3, 32)
 
@@ -482,8 +482,8 @@ r"-(Repeats the input n times.
 #'
 #' # Examples
 #' ```python
-#' x = keras_core.Input(shape=(32,))
-#' y = keras_core.layers.RepeatVector(3)(x)
+#' x = keras.Input(shape=(32,))
+#' y = keras.layers.RepeatVector(3)(x)
 #' y.shape
 #' # (None, 3, 32)
 #' ```
@@ -529,13 +529,13 @@ r"-(Layer that reshapes inputs into the given shape.
 
     Example:
 
-    >>> x = keras_core.Input(shape=(12,))
-    >>> y = keras_core.layers.Reshape((3, 4))(x)
+    >>> x = keras.Input(shape=(12,))
+    >>> y = keras.layers.Reshape((3, 4))(x)
     >>> y.shape
     (None, 3, 4)
 
     >>> # also supports shape inference using `-1` as dimension
-    >>> y = keras_core.layers.Reshape((-1, 2, 2))(x)
+    >>> y = keras.layers.Reshape((-1, 2, 2))(x)
     >>> y.shape
     (None, 3, 2, 2)
     )-"
@@ -557,15 +557,15 @@ r"-(Layer that reshapes inputs into the given shape.
 #'
 #' # Examples
 #' ```python
-#' x = keras_core.Input(shape=(12,))
-#' y = keras_core.layers.Reshape((3, 4))(x)
+#' x = keras.Input(shape=(12,))
+#' y = keras.layers.Reshape((3, 4))(x)
 #' y.shape
 #' # (None, 3, 4)
 #' ```
 #'
 #' ```python
 #' # also supports shape inference using `-1` as dimension
-#' y = keras_core.layers.Reshape((-1, 2, 2))(x)
+#' y = keras.layers.Reshape((-1, 2, 2))(x)
 #' y.shape
 #' # (None, 3, 2, 2)
 #' ```
@@ -602,7 +602,7 @@ r"-(Upsampling layer for 1D inputs.
       [ 3  4  5]]
      [[ 6  7  8]
       [ 9 10 11]]]
-    >>> y = keras_core.layers.UpSampling1D(size=2)(x)
+    >>> y = keras.layers.UpSampling1D(size=2)(x)
     >>> y
     [[[ 0.  1.  2.]
       [ 0.  1.  2.]
@@ -640,7 +640,7 @@ r"-(Upsampling layer for 1D inputs.
 #' #   [ 3  4  5]]
 #' #  [[ 6  7  8]
 #' #   [ 9 10 11]]]
-#' y = keras_core.layers.UpSampling1D(size=2)(x)
+#' y = keras.layers.UpSampling1D(size=2)(x)
 #' y
 #' # [[[ 0.  1.  2.]
 #' #   [ 0.  1.  2.]
@@ -692,7 +692,7 @@ r"-(Upsampling layer for 2D inputs.
       [[ 3  4  5]]]
      [[[ 6  7  8]]
       [[ 9 10 11]]]]
-    >>> y = keras_core.layers.UpSampling2D(size=(1, 2))(x)
+    >>> y = keras.layers.UpSampling2D(size=(1, 2))(x)
     >>> print(y)
     [[[[ 0  1  2]
        [ 0  1  2]]
@@ -753,7 +753,7 @@ r"-(Upsampling layer for 2D inputs.
 #' #   [[ 3  4  5]]]
 #' #  [[[ 6  7  8]]
 #' #   [[ 9 10 11]]]]
-#' y = keras_core.layers.UpSampling2D(size=(1, 2))(x)
+#' y = keras.layers.UpSampling2D(size=(1, 2))(x)
 #' print(y)
 #' # [[[[ 0  1  2]
 #' #    [ 0  1  2]]
@@ -821,7 +821,7 @@ r"-(Upsampling layer for 3D inputs.
 
     >>> input_shape = (2, 1, 2, 1, 3)
     >>> x = np.ones(input_shape)
-    >>> y = keras_core.layers.UpSampling3D(size=(2, 2, 2))(x)
+    >>> y = keras.layers.UpSampling3D(size=(2, 2, 2))(x)
     >>> y.shape
     (2, 2, 4, 2, 3)
 
@@ -869,7 +869,7 @@ r"-(Upsampling layer for 3D inputs.
 #' ```python
 #' input_shape = (2, 1, 2, 1, 3)
 #' x = np.ones(input_shape)
-#' y = keras_core.layers.UpSampling3D(size=(2, 2, 2))(x)
+#' y = keras.layers.UpSampling3D(size=(2, 2, 2))(x)
 #' y.shape
 #' # (2, 2, 4, 2, 3)
 #' ```
@@ -932,7 +932,7 @@ r"-(Zero-padding layer for 1D input (e.g. temporal sequence).
       [ 3  4  5]]
      [[ 6  7  8]
       [ 9 10 11]]]
-    >>> y = keras_core.layers.ZeroPadding1D(padding=2)(x)
+    >>> y = keras.layers.ZeroPadding1D(padding=2)(x)
     >>> y
     [[[ 0  0  0]
       [ 0  0  0]
@@ -976,7 +976,7 @@ r"-(Zero-padding layer for 1D input (e.g. temporal sequence).
 #' #   [ 3  4  5]]
 #' #  [[ 6  7  8]
 #' #   [ 9 10 11]]]
-#' y = keras_core.layers.ZeroPadding1D(padding=2)(x)
+#' y = keras.layers.ZeroPadding1D(padding=2)(x)
 #' y
 #' # [[[ 0  0  0]
 #' #   [ 0  0  0]
@@ -1032,7 +1032,7 @@ r"-(Zero-padding layer for 2D input (e.g. picture).
     >>> x
     [[[[0 1]
        [2 3]]]]
-    >>> y = keras_core.layers.ZeroPadding2D(padding=1)(x)
+    >>> y = keras.layers.ZeroPadding2D(padding=1)(x)
     >>> y
     [[[[0 0]
        [0 0]
@@ -1095,7 +1095,7 @@ r"-(Zero-padding layer for 2D input (e.g. picture).
 #' x
 #' # [[[[0 1]
 #' #    [2 3]]]]
-#' y = keras_core.layers.ZeroPadding2D(padding=1)(x)
+#' y = keras.layers.ZeroPadding2D(padding=1)(x)
 #' y
 #' # [[[[0 0]
 #' #    [0 0]
@@ -1166,7 +1166,7 @@ r"-(Zero-padding layer for 3D data (spatial or spatio-temporal).
 
     >>> input_shape = (1, 1, 2, 2, 3)
     >>> x = np.arange(np.prod(input_shape)).reshape(input_shape)
-    >>> y = keras_core.layers.ZeroPadding3D(padding=2)(x)
+    >>> y = keras.layers.ZeroPadding3D(padding=2)(x)
     >>> y.shape
     (1, 5, 6, 6, 3)
 
@@ -1219,7 +1219,7 @@ r"-(Zero-padding layer for 3D data (spatial or spatio-temporal).
 #' ```python
 #' input_shape = (1, 1, 2, 2, 3)
 #' x = np.arange(np.prod(input_shape)).reshape(input_shape)
-#' y = keras_core.layers.ZeroPadding3D(padding=2)(x)
+#' y = keras.layers.ZeroPadding3D(padding=2)(x)
 #' y.shape
 #' # (1, 5, 6, 6, 3)
 #' ```

@@ -72,7 +72,7 @@ for the linear transformation of the recurrent state. Default: 0.}
 }
 \description{
 This class processes one step within the whole time sequence input, whereas
-\code{keras_core.layer.SimpleRNN} processes the whole sequence.
+\code{keras.layer.SimpleRNN} processes the whole sequence.
 }
 \section{Call Arguments}{
 sequence: A 2D tensor, with shape \verb{(batch, features)}.
@@ -85,10 +85,10 @@ training mode or in inference mode. Only relevant when \code{dropout} or
 
 \section{Examples}{
 \if{html}{\out{<div class="sourceCode python">}}\preformatted{inputs = np.random.random([32, 10, 8]).astype(np.float32)
-rnn = keras_core.layers.RNN(keras_core.layers.SimpleRNNCell(4))
+rnn = keras.layers.RNN(keras.layers.SimpleRNNCell(4))
 output = rnn(inputs)  # The output has shape `(32, 4)`.
-rnn = keras_core.layers.RNN(
-    keras_core.layers.SimpleRNNCell(4),
+rnn = keras.layers.RNN(
+    keras.layers.SimpleRNNCell(4),
     return_sequences=True,
     return_state=True
 )

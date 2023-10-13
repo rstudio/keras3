@@ -14,8 +14,8 @@ r"-(Cast a tensor to the desired dtype.
 
     Example:
 
-    >>> x = keras_core.ops.arange(4)
-    >>> x = keras_core.ops.cast(x, dtype="float16")
+    >>> x = keras.ops.arange(4)
+    >>> x = keras.ops.cast(x, dtype="float16")
     )-"
 
 
@@ -29,8 +29,8 @@ r"-(Cast a tensor to the desired dtype.
 #'
 #' # Examples
 #' ```python
-#' x = keras_core.ops.arange(4)
-#' x = keras_core.ops.cast(x, dtype="float16")
+#' x = keras.ops.arange(4)
+#' x = keras.ops.cast(x, dtype="float16")
 #' ```
 #'
 #' @param x A tensor or variable.
@@ -125,7 +125,7 @@ r"-(Convert a NumPy array to a tensor.
     Example:
 
     >>> x = np.array([1, 2, 3])
-    >>> y = keras_core.ops.convert_to_tensor(x)
+    >>> y = keras.ops.convert_to_tensor(x)
     )-"
 
 
@@ -140,7 +140,7 @@ r"-(Convert a NumPy array to a tensor.
 #' # Examples
 #' ```python
 #' x = np.array([1, 2, 3])
-#' y = keras_core.ops.convert_to_tensor(x)
+#' y = keras.ops.convert_to_tensor(x)
 #' ```
 #'
 #' @param x A NumPy array.
@@ -176,7 +176,7 @@ r"-(For loop implementation.
     >>> upper = 10
     >>> body_fun = lambda i, s: (i + 1, s + i)
     >>> init_val = 0
-    >>> keras_core.ops.fori_loop(lower, upper, body_fun, init_val)
+    >>> keras.ops.fori_loop(lower, upper, body_fun, init_val)
     45
     )-"
 
@@ -195,7 +195,7 @@ r"-(For loop implementation.
 #' upper = 10
 #' body_fun = lambda i, s: (i + 1, s + i)
 #' init_val = 0
-#' keras_core.ops.fori_loop(lower, upper, body_fun, init_val)
+#' keras.ops.fori_loop(lower, upper, body_fun, init_val)
 #' # 45
 #' ```
 #'
@@ -223,8 +223,8 @@ r"-(Returns a tensor of shape `shape` where `indices` are set to `values`.
     returns the output. It is equivalent to:
 
     ```python
-    zeros = keras_core.ops.zeros(shape)
-    output = keras_core.ops.scatter_update(zeros, indices, values)
+    zeros = keras.ops.zeros(shape)
+    output = keras.ops.scatter_update(zeros, indices, values)
     ```
 
     Args:
@@ -237,7 +237,7 @@ r"-(Returns a tensor of shape `shape` where `indices` are set to `values`.
 
     >>> indices = [[0, 1], [1, 1]]
     >>> values = np.array([1., 1.])
-    >>> keras_core.ops.scatter(indices, values, shape=(2, 2))
+    >>> keras.ops.scatter(indices, values, shape=(2, 2))
     array([[0., 1.],
            [0., 1.]])
     )-"
@@ -251,15 +251,15 @@ r"-(Returns a tensor of shape `shape` where `indices` are set to `values`.
 #' returns the output. It is equivalent to:
 #'
 #' ```python
-#' zeros = keras_core.ops.zeros(shape)
-#' output = keras_core.ops.scatter_update(zeros, indices, values)
+#' zeros = keras.ops.zeros(shape)
+#' output = keras.ops.scatter_update(zeros, indices, values)
 #' ```
 #'
 #' # Examples
 #' ```python
 #' indices = [[0, 1], [1, 1]]
 #' values = np.array([1., 1.])
-#' keras_core.ops.scatter(indices, values, shape=(2, 2))
+#' keras.ops.scatter(indices, values, shape=(2, 2))
 #' # array([[0., 1.],
 #' #        [0., 1.]])
 #' ```
@@ -296,7 +296,7 @@ r"-(Update inputs via updates at scattered (sparse) indices.
     inputs = np.zeros((4, 4, 4))
     indices = [[1, 2, 3], [0, 1, 3]]
     updates = np.array([1., 1.])
-    inputs = keras_core.ops.scatter_update(inputs, indices, updates)
+    inputs = keras.ops.scatter_update(inputs, indices, updates)
     ```
 
     2 `indices` is a 2D tensor of shape `(num_updates, k)`, where `num_updates`
@@ -312,7 +312,7 @@ r"-(Update inputs via updates at scattered (sparse) indices.
     inputs = np.zeros((4, 4, 4))
     indices = [[1, 2], [2, 3]]
     updates = np.array([[1., 1., 1, 1,], [1., 1., 1, 1,])
-    inputs = keras_core.ops.scatter_update(inputs, indices, updates)
+    inputs = keras.ops.scatter_update(inputs, indices, updates)
     ```
 
     Args:
@@ -345,7 +345,7 @@ r"-(Update inputs via updates at scattered (sparse) indices.
 #' inputs = np.zeros((4, 4, 4))
 #' indices = [[1, 2, 3], [0, 1, 3]]
 #' updates = np.array([1., 1.])
-#' inputs = keras_core.ops.scatter_update(inputs, indices, updates)
+#' inputs = keras.ops.scatter_update(inputs, indices, updates)
 #' ```
 #'
 #' 2 `indices` is a 2D tensor of shape `(num_updates, k)`, where `num_updates`
@@ -361,7 +361,7 @@ r"-(Update inputs via updates at scattered (sparse) indices.
 #' inputs = np.zeros((4, 4, 4))
 #' indices = [[1, 2], [2, 3]]
 #' updates = np.array([[1., 1., 1, 1,], [1., 1., 1, 1,])
-#' inputs = keras_core.ops.scatter_update(inputs, indices, updates)
+#' inputs = keras.ops.scatter_update(inputs, indices, updates)
 #' ```
 #'
 #' # Returns
@@ -400,8 +400,8 @@ r"-(Gets the shape of the tensor input.
 
     Example:
 
-    >>> x = keras_core.zeros((8, 12))
-    >>> keras_core.ops.shape(x)
+    >>> x = keras.zeros((8, 12))
+    >>> keras.ops.shape(x)
     (8, 12)
     )-"
 
@@ -420,8 +420,8 @@ r"-(Gets the shape of the tensor input.
 #'
 #' # Examples
 #' ```python
-#' x = keras_core.zeros((8, 12))
-#' keras_core.ops.shape(x)
+#' x = keras.zeros((8, 12))
+#' keras.ops.shape(x)
 #' # (8, 12)
 #' ```
 #'
@@ -451,7 +451,7 @@ r"-(Return a slice of an input tensor.
     inputs = np.zeros((5, 5))
     start_indices = np.array([3, 3])
     shape = np.array([2, 2])
-    inputs = keras_core.ops.slice(inputs, start_indices, updates)
+    inputs = keras.ops.slice(inputs, start_indices, updates)
     ```
 
     Args:
@@ -479,7 +479,7 @@ r"-(Return a slice of an input tensor.
 #' inputs = np.zeros((5, 5))
 #' start_indices = np.array([3, 3])
 #' shape = np.array([2, 2])
-#' inputs = keras_core.ops.slice(inputs, start_indices, updates)
+#' inputs = keras.ops.slice(inputs, start_indices, updates)
 #' ```
 #'
 #' # Returns
@@ -517,7 +517,7 @@ r"-(Update an input by slicing in a tensor of updated values.
     inputs = np.zeros((5, 5))
     start_indices = [3, 3]
     updates = np.ones((2, 2))
-    inputs = keras_core.ops.slice_update(inputs, start_indices, updates)
+    inputs = keras.ops.slice_update(inputs, start_indices, updates)
     ```
 
     Args:
@@ -550,7 +550,7 @@ r"-(Update an input by slicing in a tensor of updated values.
 #' inputs = np.zeros((5, 5))
 #' start_indices = [3, 3]
 #' updates = np.ones((2, 2))
-#' inputs = keras_core.ops.slice_update(inputs, start_indices, updates)
+#' inputs = keras.ops.slice_update(inputs, start_indices, updates)
 #' ```
 #'
 #' # Returns
@@ -584,11 +584,11 @@ r"-(Stops gradient computation.
 
     Examples:
 
-    >>> var = keras_core.backend.convert_to_tensor(
+    >>> var = keras.backend.convert_to_tensor(
     ...     [1., 2., 3.],
     ...     dtype="float32"
     ... )
-    >>> var = keras_core.ops.stop_gradient(var)
+    >>> var = keras.ops.stop_gradient(var)
     )-"
 
 
@@ -602,11 +602,11 @@ r"-(Stops gradient computation.
 #'
 #' # Examples
 #' ```python
-#' var = keras_core.backend.convert_to_tensor(
+#' var = keras.backend.convert_to_tensor(
 #'     [1., 2., 3.],
 #'     dtype="float32"
 #' )
-#' var = keras_core.ops.stop_gradient(var)
+#' var = keras.ops.stop_gradient(var)
 #' ```
 #'
 #' @param variable A tensor variable for which the gradient
@@ -636,8 +636,8 @@ r"-(Unpacks the given dimension of a rank-R tensor into rank-(R-1) tensors.
 
     Example:
 
-    >>> x = keras_core.ops.array([[1, 2], [3, 4]])
-    >>> keras_core.ops.unstack(x, axis=0)
+    >>> x = keras.ops.array([[1, 2], [3, 4]])
+    >>> keras.ops.unstack(x, axis=0)
     [array([1, 2]), array([3, 4])]
     )-"
 
@@ -652,8 +652,8 @@ r"-(Unpacks the given dimension of a rank-R tensor into rank-(R-1) tensors.
 #'
 #' # Examples
 #' ```python
-#' x = keras_core.ops.array([[1, 2], [3, 4]])
-#' keras_core.ops.unstack(x, axis=0)
+#' x = keras.ops.array([[1, 2], [3, 4]])
+#' keras.ops.unstack(x, axis=0)
 #' # [array([1, 2]), array([3, 4])]
 #' ```
 #'
@@ -698,7 +698,7 @@ r"-(While loop implementation.
     >>> i = 0
     >>> cond = lambda i: i < 10
     >>> body = lambda i: i + 1
-    >>> keras_core.ops.while_loop(cond, body, [i])[0]
+    >>> keras.ops.while_loop(cond, body, [i])[0]
     10
     )-"
 
@@ -716,7 +716,7 @@ r"-(While loop implementation.
 #' i = 0
 #' cond = lambda i: i < 10
 #' body = lambda i: i + 1
-#' keras_core.ops.while_loop(cond, body, [i])[0]
+#' keras.ops.while_loop(cond, body, [i])[0]
 #' # 10
 #' ```
 #'
@@ -738,6 +738,50 @@ r"-(While loop implementation.
 k_while_loop <-
 function (cond, body, loop_vars, maximum_iterations = NULL)
 keras$ops$while_loop(cond, body, loop_vars, maximum_iterations)
+
+
+# keras$layers$erf
+# keras_core.src.ops.math.erf
+r"-(Computes the error function of `x`, element-wise.
+
+    Args:
+        x: Input tensor.
+
+    Returns:
+        A tensor with the same dtype as `x`.
+
+    Example:
+
+    >>> x = np.array([-3.0, -2.0, -1.0, 0.0, 1.0])
+    >>> keras.ops.erf(x)
+    array([-0.99998 , -0.99532, -0.842701,  0.,  0.842701], dtype=float32)
+    )-"
+
+
+# keras_core.src.ops.math.erf
+#' Computes the error function of `x`, element-wise.
+#'
+#' @description
+#'
+#' # Returns
+#' A tensor with the same dtype as `x`.
+#'
+#' # Examples
+#' ```python
+#' x = np.array([-3.0, -2.0, -1.0, 0.0, 1.0])
+#' keras.ops.erf(x)
+#' # array([-0.99998 , -0.99532, -0.842701,  0.,  0.842701], dtype=float32)
+#' ```
+#'
+#' @param x Input tensor.
+#'
+#' @export
+#' @family ops
+#' @seealso
+#' + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/erf>
+k_erf <-
+function (x)
+keras$ops$erf(x)
 
 
 # keras$layers$extract_sequences
@@ -763,7 +807,7 @@ r"-(Expands the dimension of last axis into sequences of `sequence_length`.
 
     Example:
 
-    >>> x = keras_core.ops.convert_to_tensor([1, 2, 3, 4, 5, 6])
+    >>> x = keras.ops.convert_to_tensor([1, 2, 3, 4, 5, 6])
     >>> extract_sequences(x, 3, 2)
     array([[1, 2, 3],
        [3, 4, 5]])
@@ -788,7 +832,7 @@ r"-(Expands the dimension of last axis into sequences of `sequence_length`.
 #'
 #' # Examples
 #' ```python
-#' x = keras_core.ops.convert_to_tensor([1, 2, 3, 4, 5, 6])
+#' x = keras.ops.convert_to_tensor([1, 2, 3, 4, 5, 6])
 #' extract_sequences(x, 3, 2)
 #' # array([[1, 2, 3],
 #' #    [3, 4, 5]])
@@ -826,8 +870,8 @@ r"-(Computes the Fast Fourier Transform along last axis of input.
     Example:
 
     >>> x = (
-    ...     keras_core.ops.convert_to_tensor([1., 2.]),
-    ...     keras_core.ops.convert_to_tensor([0., 1.]),
+    ...     keras.ops.convert_to_tensor([1., 2.]),
+    ...     keras.ops.convert_to_tensor([0., 1.]),
     ... )
     >>> fft(x)
     (array([ 3., -1.], dtype=float32), array([ 1., -1.], dtype=float32))
@@ -846,8 +890,8 @@ r"-(Computes the Fast Fourier Transform along last axis of input.
 #' # Examples
 #' ```python
 #' x = (
-#'     keras_core.ops.convert_to_tensor([1., 2.]),
-#'     keras_core.ops.convert_to_tensor([0., 1.]),
+#'     keras.ops.convert_to_tensor([1., 2.]),
+#'     keras.ops.convert_to_tensor([0., 1.]),
 #' )
 #' fft(x)
 #' # (array([ 3., -1.], dtype=float32), array([ 1., -1.], dtype=float32))
@@ -880,8 +924,8 @@ r"-(Computes the 2D Fast Fourier Transform along the last two axes of input.
     Example:
 
     >>> x = (
-    ...     keras_core.ops.convert_to_tensor([[1., 2.], [2., 1.]]),
-    ...     keras_core.ops.convert_to_tensor([[0., 1.], [1., 0.]]),
+    ...     keras.ops.convert_to_tensor([[1., 2.], [2., 1.]]),
+    ...     keras.ops.convert_to_tensor([[0., 1.], [1., 0.]]),
     ... )
     >>> fft2(x)
     (array([[ 6.,  0.],
@@ -902,8 +946,8 @@ r"-(Computes the 2D Fast Fourier Transform along the last two axes of input.
 #' # Examples
 #' ```python
 #' x = (
-#'     keras_core.ops.convert_to_tensor([[1., 2.], [2., 1.]]),
-#'     keras_core.ops.convert_to_tensor([[0., 1.], [1., 0.]]),
+#'     keras.ops.convert_to_tensor([[1., 2.], [2., 1.]]),
+#'     keras.ops.convert_to_tensor([[0., 1.], [1., 0.]]),
 #' )
 #' fft2(x)
 #' # (array([[ 6.,  0.],
@@ -938,8 +982,8 @@ r"-(Checks if the targets are in the top-k predictions.
 
     Example:
 
-    >>> targets = keras_core.ops.convert_to_tensor([2, 5, 3])
-    >>> predictions = keras_core.ops.convert_to_tensor(
+    >>> targets = keras.ops.convert_to_tensor([2, 5, 3])
+    >>> predictions = keras.ops.convert_to_tensor(
     ... [[0.1, 0.4, 0.6, 0.9, 0.5],
     ...  [0.1, 0.7, 0.9, 0.8, 0.3],
     ...  [0.1, 0.6, 0.9, 0.9, 0.5]])
@@ -959,8 +1003,8 @@ r"-(Checks if the targets are in the top-k predictions.
 #'
 #' # Examples
 #' ```python
-#' targets = keras_core.ops.convert_to_tensor([2, 5, 3])
-#' predictions = keras_core.ops.convert_to_tensor(
+#' targets = keras.ops.convert_to_tensor([2, 5, 3])
+#' predictions = keras.ops.convert_to_tensor(
 #' [[0.1, 0.4, 0.6, 0.9, 0.5],
 #'  [0.1, 0.7, 0.9, 0.8, 0.3],
 #'  [0.1, 0.6, 0.9, 0.9, 0.5]])
@@ -1015,8 +1059,8 @@ r"-(Inverse real-valued Fast Fourier transform along the last axis.
 
     Examples:
 
-    >>> real = keras_core.ops.convert_to_tensor([0.0, 1.0, 2.0, 3.0, 4.0])
-    >>> imag = keras_core.ops.convert_to_tensor([0.0, 1.0, 2.0, 3.0, 4.0])
+    >>> real = keras.ops.convert_to_tensor([0.0, 1.0, 2.0, 3.0, 4.0])
+    >>> imag = keras.ops.convert_to_tensor([0.0, 1.0, 2.0, 3.0, 4.0])
     >>> irfft((real, imag))
     array([0.66666667, -0.9106836, 0.24401694])
 
@@ -1049,8 +1093,8 @@ r"-(Inverse real-valued Fast Fourier transform along the last axis.
 #'
 #' # Examples
 #' ```python
-#' real = keras_core.ops.convert_to_tensor([0.0, 1.0, 2.0, 3.0, 4.0])
-#' imag = keras_core.ops.convert_to_tensor([0.0, 1.0, 2.0, 3.0, 4.0])
+#' real = keras.ops.convert_to_tensor([0.0, 1.0, 2.0, 3.0, 4.0])
+#' imag = keras.ops.convert_to_tensor([0.0, 1.0, 2.0, 3.0, 4.0])
 #' irfft((real, imag))
 #' # array([0.66666667, -0.9106836, 0.24401694])
 #' ```
@@ -1109,7 +1153,7 @@ r"-(Inverse Short-Time Fourier Transform along the last axis of the input.
 
     Example:
 
-    >>> x = keras_core.ops.convert_to_tensor([0.0, 1.0, 2.0, 3.0, 4.0])
+    >>> x = keras.ops.convert_to_tensor([0.0, 1.0, 2.0, 3.0, 4.0])
     >>> istft(stft(x, 1, 1, 1), 1, 1, 1)
     array([0.0, 1.0, 2.0, 3.0, 4.0])
     )-"
@@ -1128,7 +1172,7 @@ r"-(Inverse Short-Time Fourier Transform along the last axis of the input.
 #'
 #' # Examples
 #' ```python
-#' x = keras_core.ops.convert_to_tensor([0.0, 1.0, 2.0, 3.0, 4.0])
+#' x = keras.ops.convert_to_tensor([0.0, 1.0, 2.0, 3.0, 4.0])
 #' istft(stft(x, 1, 1, 1), 1, 1, 1)
 #' # array([0.0, 1.0, 2.0, 3.0, 4.0])
 #' ```
@@ -1183,7 +1227,7 @@ r"-(Computes the logarithm of sum of exponentials of elements in a tensor.
 
     Example:
 
-    >>> x = keras_core.ops.convert_to_tensor([1., 2., 3.])
+    >>> x = keras.ops.convert_to_tensor([1., 2., 3.])
     >>> logsumexp(x)
     3.407606
     )-"
@@ -1200,7 +1244,7 @@ r"-(Computes the logarithm of sum of exponentials of elements in a tensor.
 #'
 #' # Examples
 #' ```python
-#' x = keras_core.ops.convert_to_tensor([1., 2., 3.])
+#' x = keras.ops.convert_to_tensor([1., 2., 3.])
 #' logsumexp(x)
 #' # 3.407606
 #' ```
@@ -1241,7 +1285,7 @@ r"-(Computes the QR decomposition of a tensor.
 
     Example:
 
-    >>> x = keras_core.ops.convert_to_tensor([[1., 2.], [3., 4.], [5., 6.]])
+    >>> x = keras.ops.convert_to_tensor([[1., 2.], [3., 4.], [5., 6.]])
     >>> q, r = qr(x)
     >>> print(q)
     array([[-0.16903079  0.897085]
@@ -1262,7 +1306,7 @@ r"-(Computes the QR decomposition of a tensor.
 #'
 #' # Examples
 #' ```python
-#' x = keras_core.ops.convert_to_tensor([[1., 2.], [3., 4.], [5., 6.]])
+#' x = keras.ops.convert_to_tensor([[1., 2.], [3., 4.], [5., 6.]])
 #' q, r = qr(x)
 #' print(q)
 #' # array([[-0.16903079  0.897085]
@@ -1312,7 +1356,7 @@ r"-(Real-valued Fast Fourier Transform along the last axis of the input.
 
     Examples:
 
-    >>> x = keras_core.ops.convert_to_tensor([0.0, 1.0, 2.0, 3.0, 4.0])
+    >>> x = keras.ops.convert_to_tensor([0.0, 1.0, 2.0, 3.0, 4.0])
     >>> rfft(x)
     (array([10.0, -2.5, -2.5]), array([0.0, 3.4409548, 0.81229924]))
 
@@ -1343,7 +1387,7 @@ r"-(Real-valued Fast Fourier Transform along the last axis of the input.
 #'
 #' # Examples
 #' ```python
-#' x = keras_core.ops.convert_to_tensor([0.0, 1.0, 2.0, 3.0, 4.0])
+#' x = keras.ops.convert_to_tensor([0.0, 1.0, 2.0, 3.0, 4.0])
 #' rfft(x)
 #' # (array([10.0, -2.5, -2.5]), array([0.0, 3.4409548, 0.81229924]))
 #' ```
@@ -1372,10 +1416,38 @@ function (x, fft_length = NULL)
 
 # keras$layers$rsqrt
 # keras_core.src.ops.math.rsqrt
-r"-()-"
+r"-(Computes reciprocal of square root of x element-wise.
+
+    Args:
+        x: input tensor
+
+    Returns:
+        A tensor with the same dtype as `x`.
+
+    Example:
+
+    >>> x = keras.ops.convert_to_tensor([1.0, 10.0, 100.0])
+    >>> keras.ops.rsqrt(x)
+    array([1.0, 0.31622776, 0.1], dtype=float32)
+    )-"
 
 
 # keras_core.src.ops.math.rsqrt
+#' Computes reciprocal of square root of x element-wise.
+#'
+#' @description
+#'
+#' # Returns
+#' A tensor with the same dtype as `x`.
+#'
+#' # Examples
+#' ```python
+#' x = keras.ops.convert_to_tensor([1.0, 10.0, 100.0])
+#' keras.ops.rsqrt(x)
+#' # array([1.0, 0.31622776, 0.1], dtype=float32)
+#' ```
+#'
+#' @param x input tensor
 #'
 #' @export
 #' @family ops
@@ -1406,10 +1478,10 @@ r"-(Computes the max of segments in a tensor.
 
     Example:
 
-    >>> data = keras_core.ops.convert_to_tensor([1, 2, 10, 20, 100, 200])
-    >>> segment_ids = keras_core.ops.convert_to_tensor([0, 0, 1, 1, 2, 2])
+    >>> data = keras.ops.convert_to_tensor([1, 2, 10, 20, 100, 200])
+    >>> segment_ids = keras.ops.convert_to_tensor([0, 0, 1, 1, 2, 2])
     >>> num_segments = 3
-    >>> keras_core.ops.segment_max(data, segment_ids, num_segments)
+    >>> keras.ops.segment_max(data, segment_ids, num_segments)
     array([2, 20, 200], dtype=int32)
     )-"
 
@@ -1425,10 +1497,10 @@ r"-(Computes the max of segments in a tensor.
 #'
 #' # Examples
 #' ```python
-#' data = keras_core.ops.convert_to_tensor([1, 2, 10, 20, 100, 200])
-#' segment_ids = keras_core.ops.convert_to_tensor([0, 0, 1, 1, 2, 2])
+#' data = keras.ops.convert_to_tensor([1, 2, 10, 20, 100, 200])
+#' segment_ids = keras.ops.convert_to_tensor([0, 0, 1, 1, 2, 2])
 #' num_segments = 3
-#' keras_core.ops.segment_max(data, segment_ids, num_segments)
+#' keras.ops.segment_max(data, segment_ids, num_segments)
 #' # array([2, 20, 200], dtype=int32)
 #' ```
 #'
@@ -1473,10 +1545,10 @@ r"-(Computes the sum of segments in a tensor.
 
     Example:
 
-    >>> data = keras_core.ops.convert_to_tensor([1, 2, 10, 20, 100, 200])
-    >>> segment_ids = keras_core.ops.convert_to_tensor([0, 0, 1, 1, 2, 2])
+    >>> data = keras.ops.convert_to_tensor([1, 2, 10, 20, 100, 200])
+    >>> segment_ids = keras.ops.convert_to_tensor([0, 0, 1, 1, 2, 2])
     >>> num_segments = 3
-    >>> keras_core.ops.segment_sum(data, segment_ids,num_segments)
+    >>> keras.ops.segment_sum(data, segment_ids,num_segments)
     array([3, 30, 300], dtype=int32)
     )-"
 
@@ -1492,10 +1564,10 @@ r"-(Computes the sum of segments in a tensor.
 #'
 #' # Examples
 #' ```python
-#' data = keras_core.ops.convert_to_tensor([1, 2, 10, 20, 100, 200])
-#' segment_ids = keras_core.ops.convert_to_tensor([0, 0, 1, 1, 2, 2])
+#' data = keras.ops.convert_to_tensor([1, 2, 10, 20, 100, 200])
+#' segment_ids = keras.ops.convert_to_tensor([0, 0, 1, 1, 2, 2])
 #' num_segments = 3
-#' keras_core.ops.segment_sum(data, segment_ids,num_segments)
+#' keras.ops.segment_sum(data, segment_ids,num_segments)
 #' # array([3, 30, 300], dtype=int32)
 #' ```
 #'
@@ -1549,7 +1621,7 @@ r"-(Short-Time Fourier Transform along the last axis of the input.
 
     Example:
 
-    >>> x = keras_core.ops.convert_to_tensor([0.0, 1.0, 2.0, 3.0, 4.0])
+    >>> x = keras.ops.convert_to_tensor([0.0, 1.0, 2.0, 3.0, 4.0])
     >>> stft(x, 3, 2, 3)
     (array([[0.75, -0.375],
        [3.75, -1.875],
@@ -1573,7 +1645,7 @@ r"-(Short-Time Fourier Transform along the last axis of the input.
 #'
 #' # Examples
 #' ```python
-#' x = keras_core.ops.convert_to_tensor([0.0, 1.0, 2.0, 3.0, 4.0])
+#' x = keras.ops.convert_to_tensor([0.0, 1.0, 2.0, 3.0, 4.0])
 #' stft(x, 3, 2, 3)
 #' # (array([[0.75, -0.375],
 #' #    [3.75, -1.875],
@@ -1627,7 +1699,7 @@ r"-(Finds the top-k values and their indices in a tensor.
 
     Example:
 
-    >>> x = keras_core.ops.convert_to_tensor([5, 2, 7, 1, 9, 3])
+    >>> x = keras.ops.convert_to_tensor([5, 2, 7, 1, 9, 3])
     >>> values, indices = top_k(x, k=3)
     >>> print(values)
     array([9 7 5], shape=(3,), dtype=int32)
@@ -1649,7 +1721,7 @@ r"-(Finds the top-k values and their indices in a tensor.
 #'
 #' # Examples
 #' ```python
-#' x = keras_core.ops.convert_to_tensor([5, 2, 7, 1, 9, 3])
+#' x = keras.ops.convert_to_tensor([5, 2, 7, 1, 9, 3])
 #' values, indices = top_k(x, k=3)
 #' print(values)
 #' # array([9 7 5], shape=(3,), dtype=int32)
@@ -1784,8 +1856,8 @@ r"-(Computes binary cross-entropy loss between target and output tensor.
 
     Example:
 
-    >>> target = keras_core.ops.convert_to_tensor([0, 1, 1, 0])
-    >>> output = keras_core.ops.convert_to_tensor([0.1, 0.9, 0.8, 0.2])
+    >>> target = keras.ops.convert_to_tensor([0, 1, 1, 0])
+    >>> output = keras.ops.convert_to_tensor([0.1, 0.9, 0.8, 0.2])
     >>> binary_crossentropy(target, output)
     array([0.10536054 0.10536054 0.22314355 0.22314355],
           shape=(4,), dtype=float32)
@@ -1807,8 +1879,8 @@ r"-(Computes binary cross-entropy loss between target and output tensor.
 #'
 #' # Examples
 #' ```python
-#' target = keras_core.ops.convert_to_tensor([0, 1, 1, 0])
-#' output = keras_core.ops.convert_to_tensor([0.1, 0.9, 0.8, 0.2])
+#' target = keras.ops.convert_to_tensor([0, 1, 1, 0])
+#' output = keras.ops.convert_to_tensor([0.1, 0.9, 0.8, 0.2])
 #' binary_crossentropy(target, output)
 #' # array([0.10536054 0.10536054 0.22314355 0.22314355],
 #' #       shape=(4,), dtype=float32)
@@ -1866,11 +1938,11 @@ r"-(Computes categorical cross-entropy loss between target and output tensor.
 
     Example:
 
-    >>> target = keras_core.ops.convert_to_tensor(
+    >>> target = keras.ops.convert_to_tensor(
     ... [[1, 0, 0],
     ...  [0, 1, 0],
     ...  [0, 0, 1]])
-    >>> output = keras_core.ops.convert_to_tensor(
+    >>> output = keras.ops.convert_to_tensor(
     ... [[0.9, 0.05, 0.05],
     ...  [0.1, 0.8, 0.1],
     ...  [0.2, 0.3, 0.5]])
@@ -1894,11 +1966,11 @@ r"-(Computes categorical cross-entropy loss between target and output tensor.
 #'
 #' # Examples
 #' ```python
-#' target = keras_core.ops.convert_to_tensor(
+#' target = keras.ops.convert_to_tensor(
 #' [[1, 0, 0],
 #'  [0, 1, 0],
 #'  [0, 0, 1]])
-#' output = keras_core.ops.convert_to_tensor(
+#' output = keras.ops.convert_to_tensor(
 #' [[0.9, 0.05, 0.05],
 #'  [0.1, 0.8, 0.1],
 #'  [0.2, 0.3, 0.5]])
@@ -2237,7 +2309,7 @@ r"-(Exponential Linear Unit activation function.
     Example:
 
     >>> x = np.array([-1., 0., 1.])
-    >>> x_elu = keras_core.ops.elu(x)
+    >>> x_elu = keras.ops.elu(x)
     >>> print(x_elu)
     array([-0.63212055, 0., 1.], shape=(3,), dtype=float64)
 
@@ -2258,7 +2330,7 @@ r"-(Exponential Linear Unit activation function.
 #' # Examples
 #' ```python
 #' x = np.array([-1., 0., 1.])
-#' x_elu = keras_core.ops.elu(x)
+#' x_elu = keras.ops.elu(x)
 #' print(x_elu)
 #' # array([-0.63212055, 0., 1.], shape=(3,), dtype=float64)
 #' ```
@@ -2296,7 +2368,7 @@ r"-(Gaussian Error Linear Unit (GELU) activation function.
     Example:
 
     >>> x = np.array([-1., 0., 1.])
-    >>> x_gelu = keras_core.ops.gelu(x)
+    >>> x_gelu = keras.ops.gelu(x)
     >>> print(x_gelu)
     array([-0.15865525, 0., 0.84134475], shape=(3,), dtype=float64)
 
@@ -2320,7 +2392,7 @@ r"-(Gaussian Error Linear Unit (GELU) activation function.
 #' # Examples
 #' ```python
 #' x = np.array([-1., 0., 1.])
-#' x_gelu = keras_core.ops.gelu(x)
+#' x_gelu = keras.ops.gelu(x)
 #' print(x_gelu)
 #' # array([-0.15865525, 0., 0.84134475], shape=(3,), dtype=float64)
 #' ```
@@ -2354,7 +2426,7 @@ r"-(Hard sigmoid activation function.
     Example:
 
     >>> x = np.array([-1., 0., 1.])
-    >>> x_hard_sigmoid = keras_core.ops.hard_sigmoid(x)
+    >>> x_hard_sigmoid = keras.ops.hard_sigmoid(x)
     >>> print(x_hard_sigmoid)
     array([0.3, 0.5, 0.7], shape=(3,), dtype=float64)
 
@@ -2375,7 +2447,7 @@ r"-(Hard sigmoid activation function.
 #' # Examples
 #' ```python
 #' x = np.array([-1., 0., 1.])
-#' x_hard_sigmoid = keras_core.ops.hard_sigmoid(x)
+#' x_hard_sigmoid = keras.ops.hard_sigmoid(x)
 #' print(x_hard_sigmoid)
 #' # array([0.3, 0.5, 0.7], shape=(3,), dtype=float64)
 #' ```
@@ -2410,7 +2482,7 @@ r"-(Leaky version of a Rectified Linear Unit activation function.
     Example:
 
     >>> x = np.array([-1., 0., 1.])
-    >>> x_leaky_relu = keras_core.ops.leaky_relu(x)
+    >>> x_leaky_relu = keras.ops.leaky_relu(x)
     >>> print(x_leaky_relu)
     array([-0.2,  0. ,  1. ], shape=(3,), dtype=float64)
 
@@ -2431,7 +2503,7 @@ r"-(Leaky version of a Rectified Linear Unit activation function.
 #' # Examples
 #' ```python
 #' x = np.array([-1., 0., 1.])
-#' x_leaky_relu = keras_core.ops.leaky_relu(x)
+#' x_leaky_relu = keras.ops.leaky_relu(x)
 #' print(x_leaky_relu)
 #' # array([-0.2,  0. ,  1. ], shape=(3,), dtype=float64)
 #' ```
@@ -2463,8 +2535,8 @@ r"-(Logarithm of the sigmoid activation function.
 
     Example:
 
-    >>> x = keras_core.ops.convert_to_tensor([-0.541391, 0.0, 0.50, 5.0])
-    >>> keras_core.ops.log_sigmoid(x)
+    >>> x = keras.ops.convert_to_tensor([-0.541391, 0.0, 0.50, 5.0])
+    >>> keras.ops.log_sigmoid(x)
     array([-1.0000418, -0.6931472, -0.474077, -0.00671535], dtype=float32)
 
     )-"
@@ -2481,8 +2553,8 @@ r"-(Logarithm of the sigmoid activation function.
 #'
 #' # Examples
 #' ```python
-#' x = keras_core.ops.convert_to_tensor([-0.541391, 0.0, 0.50, 5.0])
-#' keras_core.ops.log_sigmoid(x)
+#' x = keras.ops.convert_to_tensor([-0.541391, 0.0, 0.50, 5.0])
+#' keras.ops.log_sigmoid(x)
 #' # array([-1.0000418, -0.6931472, -0.474077, -0.00671535], dtype=float32)
 #' ```
 #'
@@ -2515,7 +2587,7 @@ r"-(Log-softmax activation function.
     Example:
 
     >>> x = np.array([-1., 0., 1.])
-    >>> x_log_softmax = keras_core.ops.log_softmax(x)
+    >>> x_log_softmax = keras.ops.log_softmax(x)
     >>> print(x_log_softmax)
     array([-2.40760596, -1.40760596, -0.40760596], shape=(3,), dtype=float64)
 
@@ -2535,7 +2607,7 @@ r"-(Log-softmax activation function.
 #' # Examples
 #' ```python
 #' x = np.array([-1., 0., 1.])
-#' x_log_softmax = keras_core.ops.log_softmax(x)
+#' x_log_softmax = keras.ops.log_softmax(x)
 #' print(x_log_softmax)
 #' # array([-2.40760596, -1.40760596, -0.40760596], shape=(3,), dtype=float64)
 #' ```
@@ -2658,8 +2730,8 @@ r"-(Calculates the mean and variance of `x`.
 
     Example:
 
-    >>> x = keras_core.ops.convert_to_tensor([0, 1, 2, 3, 100], dtype="float32")
-    >>> keras_core.ops.moments(x, axes=[0])
+    >>> x = keras.ops.convert_to_tensor([0, 1, 2, 3, 100], dtype="float32")
+    >>> keras.ops.moments(x, axes=[0])
     (array(21.2, dtype=float32), array(1553.3601, dtype=float32))
 
     )-"
@@ -2678,8 +2750,8 @@ r"-(Calculates the mean and variance of `x`.
 #'
 #' # Examples
 #' ```python
-#' x = keras_core.ops.convert_to_tensor([0, 1, 2, 3, 100], dtype="float32")
-#' keras_core.ops.moments(x, axes=[0])
+#' x = keras.ops.convert_to_tensor([0, 1, 2, 3, 100], dtype="float32")
+#' keras.ops.moments(x, axes=[0])
 #' # (array(21.2, dtype=float32), array(1553.3601, dtype=float32))
 #' ```
 #'
@@ -2720,8 +2792,8 @@ r"-(Encodes integer labels as multi-hot vectors.
 
     Example:
 
-    >>> data = keras_core.ops.convert_to_tensor([0, 4])
-    >>> keras_core.ops.multi_hot(data, num_tokens=5)
+    >>> data = keras.ops.convert_to_tensor([0, 4])
+    >>> keras.ops.multi_hot(data, num_tokens=5)
     array([1.0, 0.0, 0.0, 0.0, 1.0], dtype=float32)
 
     )-"
@@ -2739,8 +2811,8 @@ r"-(Encodes integer labels as multi-hot vectors.
 #'
 #' # Examples
 #' ```python
-#' data = keras_core.ops.convert_to_tensor([0, 4])
-#' keras_core.ops.multi_hot(data, num_tokens=5)
+#' data = keras.ops.convert_to_tensor([0, 4])
+#' keras.ops.multi_hot(data, num_tokens=5)
 #' # array([1.0, 0.0, 0.0, 0.0, 1.0], dtype=float32)
 #' ```
 #'
@@ -2790,7 +2862,7 @@ r"-(Converts integer tensor `x` into a one-hot tensor.
 
     Example:
 
-    >>> x = keras_core.ops.convert_to_tensor([1, 3, 2, 0])
+    >>> x = keras.ops.convert_to_tensor([1, 3, 2, 0])
     >>> one_hot(x, num_classes=4)
     array([[0. 1. 0. 0.]
            [0. 0. 0. 1.]
@@ -2816,7 +2888,7 @@ r"-(Converts integer tensor `x` into a one-hot tensor.
 #'
 #' # Examples
 #' ```python
-#' x = keras_core.ops.convert_to_tensor([1, 3, 2, 0])
+#' x = keras.ops.convert_to_tensor([1, 3, 2, 0])
 #' one_hot(x, num_classes=4)
 #' # array([[0. 1. 0. 0.]
 #' #        [0. 0. 0. 1.]
@@ -2858,8 +2930,8 @@ r"-(Rectified linear unit activation function.
 
     Example:
 
-    >>> x1 = keras_core.ops.convert_to_tensor([-1.0, 0.0, 1.0, 0.2])
-    >>> keras_core.ops.relu(x1)
+    >>> x1 = keras.ops.convert_to_tensor([-1.0, 0.0, 1.0, 0.2])
+    >>> keras.ops.relu(x1)
     array([0.0, 0.0, 1.0, 0.2], dtype=float32)
     )-"
 
@@ -2875,8 +2947,8 @@ r"-(Rectified linear unit activation function.
 #'
 #' # Examples
 #' ```python
-#' x1 = keras_core.ops.convert_to_tensor([-1.0, 0.0, 1.0, 0.2])
-#' keras_core.ops.relu(x1)
+#' x1 = keras.ops.convert_to_tensor([-1.0, 0.0, 1.0, 0.2])
+#' keras.ops.relu(x1)
 #' # array([0.0, 0.0, 1.0, 0.2], dtype=float32)
 #' ```
 #'
@@ -2905,8 +2977,8 @@ r"-(Rectified linear unit activation function with upper bound of 6.
 
     Example:
 
-    >>> x = keras_core.ops.convert_to_tensor([-3.0, -2.0, 0.1, 0.2, 6.0, 8.0])
-    >>> keras_core.ops.relu6(x)
+    >>> x = keras.ops.convert_to_tensor([-3.0, -2.0, 0.1, 0.2, 6.0, 8.0])
+    >>> keras.ops.relu6(x)
     array([0.0, 0.0, 0.1, 0.2, 6.0, 6.0], dtype=float32)
     )-"
 
@@ -2922,8 +2994,8 @@ r"-(Rectified linear unit activation function with upper bound of 6.
 #'
 #' # Examples
 #' ```python
-#' x = keras_core.ops.convert_to_tensor([-3.0, -2.0, 0.1, 0.2, 6.0, 8.0])
-#' keras_core.ops.relu6(x)
+#' x = keras.ops.convert_to_tensor([-3.0, -2.0, 0.1, 0.2, 6.0, 8.0])
+#' keras.ops.relu6(x)
 #' # array([0.0, 0.0, 0.1, 0.2, 6.0, 6.0], dtype=float32)
 #' ```
 #'
@@ -2956,7 +3028,7 @@ r"-(Scaled Exponential Linear Unit (SELU) activation function.
     Example:
 
     >>> x = np.array([-1., 0., 1.])
-    >>> x_selu = keras_core.ops.selu(x)
+    >>> x_selu = keras.ops.selu(x)
     >>> print(x_selu)
     array([-1.11133055, 0., 1.05070098], shape=(3,), dtype=float64)
 
@@ -2978,7 +3050,7 @@ r"-(Scaled Exponential Linear Unit (SELU) activation function.
 #' # Examples
 #' ```python
 #' x = np.array([-1., 0., 1.])
-#' x_selu = keras_core.ops.selu(x)
+#' x_selu = keras.ops.selu(x)
 #' print(x_selu)
 #' # array([-1.11133055, 0., 1.05070098], shape=(3,), dtype=float64)
 #' ```
@@ -3106,8 +3178,8 @@ r"-(Sigmoid activation function.
 
     Example:
 
-    >>> x = keras_core.ops.convert_to_tensor([-6.0, 1.0, 0.0, 1.0, 6.0])
-    >>> keras_core.ops.sigmoid(x)
+    >>> x = keras.ops.convert_to_tensor([-6.0, 1.0, 0.0, 1.0, 6.0])
+    >>> keras.ops.sigmoid(x)
     array([0.00247262, 0.7310586, 0.5, 0.7310586, 0.9975274], dtype=float32)
 
     )-"
@@ -3124,8 +3196,8 @@ r"-(Sigmoid activation function.
 #'
 #' # Examples
 #' ```python
-#' x = keras_core.ops.convert_to_tensor([-6.0, 1.0, 0.0, 1.0, 6.0])
-#' keras_core.ops.sigmoid(x)
+#' x = keras.ops.convert_to_tensor([-6.0, 1.0, 0.0, 1.0, 6.0])
+#' keras.ops.sigmoid(x)
 #' # array([0.00247262, 0.7310586, 0.5, 0.7310586, 0.9975274], dtype=float32)
 #' ```
 #'
@@ -3155,10 +3227,10 @@ r"-(Sigmoid Linear Unit (SiLU) activation function, also known as Swish.
 
     Example:
 
-    >>> x = keras_core.ops.convert_to_tensor([-6.0, 1.0, 0.0, 1.0, 6.0])
-    >>> keras_core.ops.sigmoid(x)
+    >>> x = keras.ops.convert_to_tensor([-6.0, 1.0, 0.0, 1.0, 6.0])
+    >>> keras.ops.sigmoid(x)
     array([0.00247262, 0.7310586, 0.5, 0.7310586, 0.9975274], dtype=float32)
-    >>> keras_core.ops.silu(x)
+    >>> keras.ops.silu(x)
     array([-0.0148357, 0.7310586, 0.0, 0.7310586, 5.9851646], dtype=float32)
 
     )-"
@@ -3176,10 +3248,10 @@ r"-(Sigmoid Linear Unit (SiLU) activation function, also known as Swish.
 #'
 #' # Examples
 #' ```python
-#' x = keras_core.ops.convert_to_tensor([-6.0, 1.0, 0.0, 1.0, 6.0])
-#' keras_core.ops.sigmoid(x)
+#' x = keras.ops.convert_to_tensor([-6.0, 1.0, 0.0, 1.0, 6.0])
+#' keras.ops.sigmoid(x)
 #' # array([0.00247262, 0.7310586, 0.5, 0.7310586, 0.9975274], dtype=float32)
-#' keras_core.ops.silu(x)
+#' keras.ops.silu(x)
 #' # array([-0.0148357, 0.7310586, 0.0, 0.7310586, 5.9851646], dtype=float32)
 #' ```
 #'
@@ -3217,7 +3289,7 @@ r"-(Softmax activation function.
     Example:
 
     >>> x = np.array([-1., 0., 1.])
-    >>> x_softmax = keras_core.ops.softmax(x)
+    >>> x_softmax = keras.ops.softmax(x)
     >>> print(x_softmax)
     array([0.09003057, 0.24472847, 0.66524096], shape=(3,), dtype=float64)
 
@@ -3243,7 +3315,7 @@ r"-(Softmax activation function.
 #' # Examples
 #' ```python
 #' x = np.array([-1., 0., 1.])
-#' x_softmax = keras_core.ops.softmax(x)
+#' x_softmax = keras.ops.softmax(x)
 #' print(x_softmax)
 #' # array([0.09003057, 0.24472847, 0.66524096], shape=(3,), dtype=float64)
 #' ```
@@ -3278,8 +3350,8 @@ r"-(Softplus activation function.
 
     Example:
 
-    >>> x = keras_core.ops.convert_to_tensor([-0.555, 0.0, 0.555])
-    >>> keras_core.ops.softplus(x)
+    >>> x = keras.ops.convert_to_tensor([-0.555, 0.0, 0.555])
+    >>> keras.ops.softplus(x)
     array([0.45366603, 0.6931472, 1.008666], dtype=float32)
 
     )-"
@@ -3297,8 +3369,8 @@ r"-(Softplus activation function.
 #'
 #' # Examples
 #' ```python
-#' x = keras_core.ops.convert_to_tensor([-0.555, 0.0, 0.555])
-#' keras_core.ops.softplus(x)
+#' x = keras.ops.convert_to_tensor([-0.555, 0.0, 0.555])
+#' keras.ops.softplus(x)
 #' # array([0.45366603, 0.6931472, 1.008666], dtype=float32)
 #' ```
 #'
@@ -3327,8 +3399,8 @@ r"-(Softsign activation function.
 
     Example:
 
-    >>> x = keras_core.ops.convert_to_tensor([-0.100, -10.0, 1.0, 0.0, 100.0])
-    >>> keras_core.ops.softsign(x)
+    >>> x = keras.ops.convert_to_tensor([-0.100, -10.0, 1.0, 0.0, 100.0])
+    >>> keras.ops.softsign(x)
     Array([-0.09090909, -0.90909094, 0.5, 0.0, 0.990099], dtype=float32)
 
     )-"
@@ -3345,8 +3417,8 @@ r"-(Softsign activation function.
 #'
 #' # Examples
 #' ```python
-#' x = keras_core.ops.convert_to_tensor([-0.100, -10.0, 1.0, 0.0, 100.0])
-#' keras_core.ops.softsign(x)
+#' x = keras.ops.convert_to_tensor([-0.100, -10.0, 1.0, 0.0, 100.0])
+#' keras.ops.softsign(x)
 #' # Array([-0.09090909, -0.90909094, 0.5, 0.0, 0.990099], dtype=float32)
 #' ```
 #'
@@ -3394,8 +3466,8 @@ r"-(Computes sparse categorical cross-entropy loss.
 
     Example:
 
-    >>> target = keras_core.ops.convert_to_tensor([0, 1, 2], dtype=int32)
-    >>> output = keras_core.ops.convert_to_tensor(
+    >>> target = keras.ops.convert_to_tensor([0, 1, 2], dtype=int32)
+    >>> output = keras.ops.convert_to_tensor(
     ... [[0.9, 0.05, 0.05],
     ...  [0.1, 0.8, 0.1],
     ...  [0.2, 0.3, 0.5]])
@@ -3419,8 +3491,8 @@ r"-(Computes sparse categorical cross-entropy loss.
 #'
 #' # Examples
 #' ```python
-#' target = keras_core.ops.convert_to_tensor([0, 1, 2], dtype=int32)
-#' output = keras_core.ops.convert_to_tensor(
+#' target = keras.ops.convert_to_tensor([0, 1, 2], dtype=int32)
+#' output = keras.ops.convert_to_tensor(
 #' [[0.9, 0.05, 0.05],
 #'  [0.1, 0.8, 0.1],
 #'  [0.2, 0.3, 0.5]])
@@ -3459,11 +3531,11 @@ function (target, output, from_logits = FALSE, axis = -1L)
 
 # keras$layers$abs
 # keras_core.src.ops.numpy.abs
-r"-(Shorthand for `keras_core.ops.absolute`.)-"
+r"-(Shorthand for `keras.ops.absolute`.)-"
 
 
 # keras_core.src.ops.numpy.abs
-#' Shorthand for `keras_core.ops.absolute`.
+#' Shorthand for `keras.ops.absolute`.
 #'
 #' @export
 #' @family ops
@@ -3478,7 +3550,7 @@ keras$ops$abs(x)
 # keras_core.src.ops.numpy.absolute
 r"-(Compute the absolute value element-wise.
 
-    `keras_core.ops.abs` is a shorthand for this function.
+    `keras.ops.abs` is a shorthand for this function.
 
     Args:
         x: Input tensor.
@@ -3488,8 +3560,8 @@ r"-(Compute the absolute value element-wise.
 
     Example:
 
-    >>> x = keras_core.ops.convert_to_tensor([-1.2, 1.2])
-    >>> keras_core.ops.absolute(x)
+    >>> x = keras.ops.convert_to_tensor([-1.2, 1.2])
+    >>> keras.ops.absolute(x)
     array([1.2, 1.2], dtype=float32)
     )-"
 
@@ -3498,15 +3570,15 @@ r"-(Compute the absolute value element-wise.
 #' Compute the absolute value element-wise.
 #'
 #' @description
-#' `keras_core.ops.abs` is a shorthand for this function.
+#' `keras.ops.abs` is a shorthand for this function.
 #'
 #' # Returns
 #' An array containing the absolute value of each element in `x`.
 #'
 #' # Examples
 #' ```python
-#' x = keras_core.ops.convert_to_tensor([-1.2, 1.2])
-#' keras_core.ops.absolute(x)
+#' x = keras.ops.convert_to_tensor([-1.2, 1.2])
+#' keras.ops.absolute(x)
 #' # array([1.2, 1.2], dtype=float32)
 #' ```
 #'
@@ -3533,18 +3605,18 @@ r"-(Add arguments element-wise.
         The tensor containing the element-wise sum of `x1` and `x2`.
 
     Examples:
-    >>> x1 = keras_core.ops.convert_to_tensor([1, 4])
-    >>> x2 = keras_core.ops.convert_to_tensor([5, 6])
-    >>> keras_core.ops.add(x1, x2)
+    >>> x1 = keras.ops.convert_to_tensor([1, 4])
+    >>> x2 = keras.ops.convert_to_tensor([5, 6])
+    >>> keras.ops.add(x1, x2)
     array([6, 10], dtype=int32)
 
-    `keras_core.ops.add` also broadcasts shapes:
-    >>> x1 = keras_core.ops.convert_to_tensor(
+    `keras.ops.add` also broadcasts shapes:
+    >>> x1 = keras.ops.convert_to_tensor(
     ...     [[5, 4],
     ...      [5, 6]]
     ... )
-    >>> x2 = keras_core.ops.convert_to_tensor([5, 6])
-    >>> keras_core.ops.add(x1, x2)
+    >>> x2 = keras.ops.convert_to_tensor([5, 6])
+    >>> keras.ops.add(x1, x2)
     array([[10 10]
            [10 12]], shape=(2, 2), dtype=int32)
     )-"
@@ -3560,20 +3632,20 @@ r"-(Add arguments element-wise.
 #'
 #' # Examples
 #' ```python
-#' x1 = keras_core.ops.convert_to_tensor([1, 4])
-#' x2 = keras_core.ops.convert_to_tensor([5, 6])
-#' keras_core.ops.add(x1, x2)
+#' x1 = keras.ops.convert_to_tensor([1, 4])
+#' x2 = keras.ops.convert_to_tensor([5, 6])
+#' keras.ops.add(x1, x2)
 #' # array([6, 10], dtype=int32)
 #' ```
 #'
-#' `keras_core.ops.add` also broadcasts shapes:
+#' `keras.ops.add` also broadcasts shapes:
 #' ```python
-#' x1 = keras_core.ops.convert_to_tensor(
+#' x1 = keras.ops.convert_to_tensor(
 #'     [[5, 4],
 #'      [5, 6]]
 #' )
-#' x2 = keras_core.ops.convert_to_tensor([5, 6])
-#' keras_core.ops.add(x1, x2)
+#' x2 = keras.ops.convert_to_tensor([5, 6])
+#' keras.ops.add(x1, x2)
 #' # array([[10 10]
 #' #        [10 12]], shape=(2, 2), dtype=int32)
 #' ```
@@ -3609,17 +3681,17 @@ r"-(Test whether all array elements along a given axis evaluate to `True`.
         The tensor containing the logical AND reduction over the `axis`.
 
     Examples:
-    >>> x = keras_core.ops.convert_to_tensor([True, False])
-    >>> keras_core.ops.all(x)
+    >>> x = keras.ops.convert_to_tensor([True, False])
+    >>> keras.ops.all(x)
     array(False, shape=(), dtype=bool)
 
-    >>> x = keras_core.ops.convert_to_tensor([[True, False], [True, True]])
-    >>> keras_core.ops.all(x, axis=0)
+    >>> x = keras.ops.convert_to_tensor([[True, False], [True, True]])
+    >>> keras.ops.all(x, axis=0)
     array([ True False], shape=(2,), dtype=bool)
 
     `keepdims=True` outputs a tensor with dimensions reduced to one.
-    >>> x = keras_core.ops.convert_to_tensor([[True, False], [True, True]])
-    >>> keras_core.ops.all(x, keepdims=True)
+    >>> x = keras.ops.convert_to_tensor([[True, False], [True, True]])
+    >>> keras.ops.all(x, keepdims=True)
     array([[False]], shape=(1, 1), dtype=bool)
     )-"
 
@@ -3634,21 +3706,21 @@ r"-(Test whether all array elements along a given axis evaluate to `True`.
 #'
 #' # Examples
 #' ```python
-#' x = keras_core.ops.convert_to_tensor([True, False])
-#' keras_core.ops.all(x)
+#' x = keras.ops.convert_to_tensor([True, False])
+#' keras.ops.all(x)
 #' # array(False, shape=(), dtype=bool)
 #' ```
 #'
 #' ```python
-#' x = keras_core.ops.convert_to_tensor([[True, False], [True, True]])
-#' keras_core.ops.all(x, axis=0)
+#' x = keras.ops.convert_to_tensor([[True, False], [True, True]])
+#' keras.ops.all(x, axis=0)
 #' # array([ True False], shape=(2,), dtype=bool)
 #' ```
 #'
 #' `keepdims=True` outputs a tensor with dimensions reduced to one.
 #' ```python
-#' x = keras_core.ops.convert_to_tensor([[True, False], [True, True]])
-#' keras_core.ops.all(x, keepdims=True)
+#' x = keras.ops.convert_to_tensor([[True, False], [True, True]])
+#' keras.ops.all(x, keepdims=True)
 #' # array([[False]], shape=(1, 1), dtype=bool)
 #' ```
 #'
@@ -3694,16 +3766,16 @@ r"-(Returns the maximum of an array or maximum value along an axis.
         the specified axis.
 
     Examples:
-    >>> x = keras_core.ops.convert_to_tensor([[1, 3, 5], [2, 3, 6]])
-    >>> keras_core.ops.amax(x)
+    >>> x = keras.ops.convert_to_tensor([[1, 3, 5], [2, 3, 6]])
+    >>> keras.ops.amax(x)
     array(6, dtype=int32)
 
-    >>> x = keras_core.ops.convert_to_tensor([[1, 6, 8], [1, 5, 2]])
-    >>> keras_core.ops.amax(x, axis=0)
+    >>> x = keras.ops.convert_to_tensor([[1, 6, 8], [1, 5, 2]])
+    >>> keras.ops.amax(x, axis=0)
     array([1, 6, 8], dtype=int32)
 
-    >>> x = keras_core.ops.convert_to_tensor([[1, 6, 8], [1, 5, 2]])
-    >>> keras_core.ops.amax(x, axis=1, keepdims=True)
+    >>> x = keras.ops.convert_to_tensor([[1, 6, 8], [1, 5, 2]])
+    >>> keras.ops.amax(x, axis=1, keepdims=True)
     array([[8], [5]], dtype=int32)
     )-"
 
@@ -3721,20 +3793,20 @@ r"-(Returns the maximum of an array or maximum value along an axis.
 #'
 #' # Examples
 #' ```python
-#' x = keras_core.ops.convert_to_tensor([[1, 3, 5], [2, 3, 6]])
-#' keras_core.ops.amax(x)
+#' x = keras.ops.convert_to_tensor([[1, 3, 5], [2, 3, 6]])
+#' keras.ops.amax(x)
 #' # array(6, dtype=int32)
 #' ```
 #'
 #' ```python
-#' x = keras_core.ops.convert_to_tensor([[1, 6, 8], [1, 5, 2]])
-#' keras_core.ops.amax(x, axis=0)
+#' x = keras.ops.convert_to_tensor([[1, 6, 8], [1, 5, 2]])
+#' keras.ops.amax(x, axis=0)
 #' # array([1, 6, 8], dtype=int32)
 #' ```
 #'
 #' ```python
-#' x = keras_core.ops.convert_to_tensor([[1, 6, 8], [1, 5, 2]])
-#' keras_core.ops.amax(x, axis=1, keepdims=True)
+#' x = keras.ops.convert_to_tensor([[1, 6, 8], [1, 5, 2]])
+#' keras.ops.amax(x, axis=1, keepdims=True)
 #' # array([[8], [5]], dtype=int32)
 #' ```
 #'
@@ -3778,16 +3850,16 @@ r"-(Returns the minimum of an array or minimum value along an axis.
         the specified axis.
 
     Examples:
-    >>> x = keras_core.ops.convert_to_tensor([1, 3, 5, 2, 3, 6])
-    >>> keras_core.ops.amin(x)
+    >>> x = keras.ops.convert_to_tensor([1, 3, 5, 2, 3, 6])
+    >>> keras.ops.amin(x)
     array(1, dtype=int32)
 
-    >>> x = keras_core.ops.convert_to_tensor([[1, 6, 8], [7, 5, 3]])
-    >>> keras_core.ops.amin(x, axis=0)
+    >>> x = keras.ops.convert_to_tensor([[1, 6, 8], [7, 5, 3]])
+    >>> keras.ops.amin(x, axis=0)
     array([1,5,3], dtype=int32)
 
-    >>> x = keras_core.ops.convert_to_tensor([[1, 6, 8], [7, 5, 3]])
-    >>> keras_core.ops.amin(x, axis=1, keepdims=True)
+    >>> x = keras.ops.convert_to_tensor([[1, 6, 8], [7, 5, 3]])
+    >>> keras.ops.amin(x, axis=1, keepdims=True)
     array([[1],[3]], dtype=int32)
     )-"
 
@@ -3805,20 +3877,20 @@ r"-(Returns the minimum of an array or minimum value along an axis.
 #'
 #' # Examples
 #' ```python
-#' x = keras_core.ops.convert_to_tensor([1, 3, 5, 2, 3, 6])
-#' keras_core.ops.amin(x)
+#' x = keras.ops.convert_to_tensor([1, 3, 5, 2, 3, 6])
+#' keras.ops.amin(x)
 #' # array(1, dtype=int32)
 #' ```
 #'
 #' ```python
-#' x = keras_core.ops.convert_to_tensor([[1, 6, 8], [7, 5, 3]])
-#' keras_core.ops.amin(x, axis=0)
+#' x = keras.ops.convert_to_tensor([[1, 6, 8], [7, 5, 3]])
+#' keras.ops.amin(x, axis=0)
 #' # array([1,5,3], dtype=int32)
 #' ```
 #'
 #' ```python
-#' x = keras_core.ops.convert_to_tensor([[1, 6, 8], [7, 5, 3]])
-#' keras_core.ops.amin(x, axis=1, keepdims=True)
+#' x = keras.ops.convert_to_tensor([[1, 6, 8], [7, 5, 3]])
+#' keras.ops.amin(x, axis=1, keepdims=True)
 #' # array([[1],[3]], dtype=int32)
 #' ```
 #'
@@ -3861,17 +3933,17 @@ r"-(Test whether any array element along a given axis evaluates to `True`.
         The tensor containing the logical OR reduction over the `axis`.
 
     Examples:
-    >>> x = keras_core.ops.convert_to_tensor([True, False])
-    >>> keras_core.ops.any(x)
+    >>> x = keras.ops.convert_to_tensor([True, False])
+    >>> keras.ops.any(x)
     array(True, shape=(), dtype=bool)
 
-    >>> x = keras_core.ops.convert_to_tensor([[True, False], [True, True]])
-    >>> keras_core.ops.any(x, axis=0)
+    >>> x = keras.ops.convert_to_tensor([[True, False], [True, True]])
+    >>> keras.ops.any(x, axis=0)
     array([ True  True], shape=(2,), dtype=bool)
 
     `keepdims=True` outputs a tensor with dimensions reduced to one.
-    >>> x = keras_core.ops.convert_to_tensor([[True, False], [True, True]])
-    >>> keras_core.ops.all(x, keepdims=True)
+    >>> x = keras.ops.convert_to_tensor([[True, False], [True, True]])
+    >>> keras.ops.all(x, keepdims=True)
     array([[False]], shape=(1, 1), dtype=bool)
     )-"
 
@@ -3886,21 +3958,21 @@ r"-(Test whether any array element along a given axis evaluates to `True`.
 #'
 #' # Examples
 #' ```python
-#' x = keras_core.ops.convert_to_tensor([True, False])
-#' keras_core.ops.any(x)
+#' x = keras.ops.convert_to_tensor([True, False])
+#' keras.ops.any(x)
 #' # array(True, shape=(), dtype=bool)
 #' ```
 #'
 #' ```python
-#' x = keras_core.ops.convert_to_tensor([[True, False], [True, True]])
-#' keras_core.ops.any(x, axis=0)
+#' x = keras.ops.convert_to_tensor([[True, False], [True, True]])
+#' keras.ops.any(x, axis=0)
 #' # array([ True  True], shape=(2,), dtype=bool)
 #' ```
 #'
 #' `keepdims=True` outputs a tensor with dimensions reduced to one.
 #' ```python
-#' x = keras_core.ops.convert_to_tensor([[True, False], [True, True]])
-#' keras_core.ops.all(x, keepdims=True)
+#' x = keras.ops.convert_to_tensor([[True, False], [True, True]])
+#' keras.ops.all(x, keepdims=True)
 #' # array([[False]], shape=(1, 1), dtype=bool)
 #' ```
 #'
@@ -3940,20 +4012,20 @@ r"-(Append tensor `x2` to the end of tensor `x1`.
         A tensor with the values of `x2` appended to `x1`.
 
     Examples:
-    >>> x1 = keras_core.ops.convert_to_tensor([1, 2, 3])
-    >>> x2 = keras_core.ops.convert_to_tensor([[4, 5, 6], [7, 8, 9]])
-    >>> keras_core.ops.append(x1, x2)
+    >>> x1 = keras.ops.convert_to_tensor([1, 2, 3])
+    >>> x2 = keras.ops.convert_to_tensor([[4, 5, 6], [7, 8, 9]])
+    >>> keras.ops.append(x1, x2)
     array([1, 2, 3, 4, 5, 6, 7, 8, 9], dtype=int32)
 
     When `axis` is specified, `x1` and `x2` must have compatible shapes.
-    >>> x1 = keras_core.ops.convert_to_tensor([[1, 2, 3], [4, 5, 6]])
-    >>> x2 = keras_core.ops.convert_to_tensor([[7, 8, 9]])
-    >>> keras_core.ops.append(x1, x2, axis=0)
+    >>> x1 = keras.ops.convert_to_tensor([[1, 2, 3], [4, 5, 6]])
+    >>> x2 = keras.ops.convert_to_tensor([[7, 8, 9]])
+    >>> keras.ops.append(x1, x2, axis=0)
     array([[1, 2, 3],
             [4, 5, 6],
             [7, 8, 9]], dtype=int32)
-    >>> x3 = keras_core.ops.convert_to_tensor([7, 8, 9])
-    >>> keras_core.ops.append(x1, x3, axis=0)
+    >>> x3 = keras.ops.convert_to_tensor([7, 8, 9])
+    >>> keras.ops.append(x1, x3, axis=0)
     Traceback (most recent call last):
         ...
     TypeError: Cannot concatenate arrays with different numbers of
@@ -3971,22 +4043,22 @@ r"-(Append tensor `x2` to the end of tensor `x1`.
 #'
 #' # Examples
 #' ```python
-#' x1 = keras_core.ops.convert_to_tensor([1, 2, 3])
-#' x2 = keras_core.ops.convert_to_tensor([[4, 5, 6], [7, 8, 9]])
-#' keras_core.ops.append(x1, x2)
+#' x1 = keras.ops.convert_to_tensor([1, 2, 3])
+#' x2 = keras.ops.convert_to_tensor([[4, 5, 6], [7, 8, 9]])
+#' keras.ops.append(x1, x2)
 #' # array([1, 2, 3, 4, 5, 6, 7, 8, 9], dtype=int32)
 #' ```
 #'
 #' When `axis` is specified, `x1` and `x2` must have compatible shapes.
 #' ```python
-#' x1 = keras_core.ops.convert_to_tensor([[1, 2, 3], [4, 5, 6]])
-#' x2 = keras_core.ops.convert_to_tensor([[7, 8, 9]])
-#' keras_core.ops.append(x1, x2, axis=0)
+#' x1 = keras.ops.convert_to_tensor([[1, 2, 3], [4, 5, 6]])
+#' x2 = keras.ops.convert_to_tensor([[7, 8, 9]])
+#' keras.ops.append(x1, x2, axis=0)
 #' # array([[1, 2, 3],
 #' #         [4, 5, 6],
 #' #         [7, 8, 9]], dtype=int32)
-#' x3 = keras_core.ops.convert_to_tensor([7, 8, 9])
-#' keras_core.ops.append(x1, x3, axis=0)
+#' x3 = keras.ops.convert_to_tensor([7, 8, 9])
+#' keras.ops.append(x1, x3, axis=0)
 #' # Traceback (most recent call last):
 #' #     ...
 #' # TypeError: Cannot concatenate arrays with different numbers of
@@ -4044,16 +4116,16 @@ r"-(Return evenly spaced values within a given interval.
         rule may result in the last element of out being greater than stop.
 
     Examples:
-    >>> keras_core.ops.arange(3)
+    >>> keras.ops.arange(3)
     array([0, 1, 2], dtype=int32)
 
-    >>> keras_core.ops.arange(3.0)
+    >>> keras.ops.arange(3.0)
     array([0., 1., 2.], dtype=float32)
 
-    >>> keras_core.ops.arange(3, 7)
+    >>> keras.ops.arange(3, 7)
     array([3, 4, 5, 6], dtype=int32)
 
-    >>> keras_core.ops.arange(3, 7, 2)
+    >>> keras.ops.arange(3, 7, 2)
     array([3, 5], dtype=int32)
     )-"
 
@@ -4079,22 +4151,22 @@ r"-(Return evenly spaced values within a given interval.
 #'
 #' # Examples
 #' ```python
-#' keras_core.ops.arange(3)
+#' keras.ops.arange(3)
 #' # array([0, 1, 2], dtype=int32)
 #' ```
 #'
 #' ```python
-#' keras_core.ops.arange(3.0)
+#' keras.ops.arange(3.0)
 #' # array([0., 1., 2.], dtype=float32)
 #' ```
 #'
 #' ```python
-#' keras_core.ops.arange(3, 7)
+#' keras.ops.arange(3, 7)
 #' # array([3, 4, 5, 6], dtype=int32)
 #' ```
 #'
 #' ```python
-#' keras_core.ops.arange(3, 7, 2)
+#' keras.ops.arange(3, 7, 2)
 #' # array([3, 5], dtype=int32)
 #' ```
 #'
@@ -4138,8 +4210,8 @@ r"-(Trigonometric inverse cosine, element-wise.
         x-coordinate in radians `[0, pi]`.
 
     Example:
-    >>> x = keras_core.ops.convert_to_tensor([1, -1])
-    >>> keras_core.ops.arccos(x)
+    >>> x = keras.ops.convert_to_tensor([1, -1])
+    >>> keras.ops.arccos(x)
     array([0.0, 3.1415927], dtype=float32)
     )-"
 
@@ -4156,8 +4228,8 @@ r"-(Trigonometric inverse cosine, element-wise.
 #'
 #' # Examples
 #' ```python
-#' x = keras_core.ops.convert_to_tensor([1, -1])
-#' keras_core.ops.arccos(x)
+#' x = keras.ops.convert_to_tensor([1, -1])
+#' keras.ops.arccos(x)
 #' # array([0.0, 3.1415927], dtype=float32)
 #' ```
 #'
@@ -4183,8 +4255,8 @@ r"-(Inverse hyperbolic cosine, element-wise.
         Output tensor of same shape as x.
 
     Example:
-    >>> x = keras_core.ops.convert_to_tensor([10, 100])
-    >>> keras_core.ops.arccosh(x)
+    >>> x = keras.ops.convert_to_tensor([10, 100])
+    >>> keras.ops.arccosh(x)
     array([2.993223, 5.298292], dtype=float32)
     )-"
 
@@ -4199,8 +4271,8 @@ r"-(Inverse hyperbolic cosine, element-wise.
 #'
 #' # Examples
 #' ```python
-#' x = keras_core.ops.convert_to_tensor([10, 100])
-#' keras_core.ops.arccosh(x)
+#' x = keras.ops.convert_to_tensor([10, 100])
+#' keras.ops.arccosh(x)
 #' # array([2.993223, 5.298292], dtype=float32)
 #' ```
 #'
@@ -4227,8 +4299,8 @@ r"-(Inverse sine, element-wise.
         the closed interval `[-pi/2, pi/2]`.
 
     Example:
-    >>> x = keras_core.ops.convert_to_tensor([1, -1, 0])
-    >>> keras_core.ops.arcsin(x)
+    >>> x = keras.ops.convert_to_tensor([1, -1, 0])
+    >>> keras.ops.arcsin(x)
     array([ 1.5707964, -1.5707964,  0.], dtype=float32)
     )-"
 
@@ -4244,8 +4316,8 @@ r"-(Inverse sine, element-wise.
 #'
 #' # Examples
 #' ```python
-#' x = keras_core.ops.convert_to_tensor([1, -1, 0])
-#' keras_core.ops.arcsin(x)
+#' x = keras.ops.convert_to_tensor([1, -1, 0])
+#' keras.ops.arcsin(x)
 #' # array([ 1.5707964, -1.5707964,  0.], dtype=float32)
 #' ```
 #'
@@ -4271,8 +4343,8 @@ r"-(Inverse hyperbolic sine, element-wise.
         Output tensor of same shape as `x`.
 
     Example:
-    >>> x = keras_core.ops.convert_to_tensor([1, -1, 0])
-    >>> keras_core.ops.arcsinh(x)
+    >>> x = keras.ops.convert_to_tensor([1, -1, 0])
+    >>> keras.ops.arcsinh(x)
     array([0.88137364, -0.88137364, 0.0], dtype=float32)
     )-"
 
@@ -4287,8 +4359,8 @@ r"-(Inverse hyperbolic sine, element-wise.
 #'
 #' # Examples
 #' ```python
-#' x = keras_core.ops.convert_to_tensor([1, -1, 0])
-#' keras_core.ops.arcsinh(x)
+#' x = keras.ops.convert_to_tensor([1, -1, 0])
+#' keras.ops.arcsinh(x)
 #' # array([0.88137364, -0.88137364, 0.0], dtype=float32)
 #' ```
 #'
@@ -4315,8 +4387,8 @@ r"-(Trigonometric inverse tangent, element-wise.
         `[-pi/2, pi/2]`.
 
     Example:
-    >>> x = keras_core.ops.convert_to_tensor([0, 1])
-    >>> keras_core.ops.arctan(x)
+    >>> x = keras.ops.convert_to_tensor([0, 1])
+    >>> keras.ops.arctan(x)
     array([0., 0.7853982], dtype=float32)
     )-"
 
@@ -4332,8 +4404,8 @@ r"-(Trigonometric inverse tangent, element-wise.
 #'
 #' # Examples
 #' ```python
-#' x = keras_core.ops.convert_to_tensor([0, 1])
-#' keras_core.ops.arctan(x)
+#' x = keras.ops.convert_to_tensor([0, 1])
+#' keras.ops.arctan(x)
 #' # array([0., 0.7853982], dtype=float32)
 #' ```
 #'
@@ -4369,21 +4441,21 @@ r"-(Element-wise arc tangent of `x1/x2` choosing the quadrant correctly.
 
     Examples:
     Consider four points in different quadrants:
-    >>> x = keras_core.ops.convert_to_tensor([-1, +1, +1, -1])
-    >>> y = keras_core.ops.convert_to_tensor([-1, -1, +1, +1])
-    >>> keras_core.ops.arctan2(y, x) * 180 / numpy.pi
+    >>> x = keras.ops.convert_to_tensor([-1, +1, +1, -1])
+    >>> y = keras.ops.convert_to_tensor([-1, -1, +1, +1])
+    >>> keras.ops.arctan2(y, x) * 180 / numpy.pi
     array([-135., -45., 45., 135.], dtype=float32)
 
     Note the order of the parameters. `arctan2` is defined also when x2=0 and
     at several other points, obtaining values in the range `[-pi, pi]`:
-    >>> keras_core.ops.arctan2(
-    ...     keras_core.ops.array([1., -1.]),
-    ...     keras_core.ops.array([0., 0.]),
+    >>> keras.ops.arctan2(
+    ...     keras.ops.array([1., -1.]),
+    ...     keras.ops.array([0., 0.]),
     ... )
     array([ 1.5707964, -1.5707964], dtype=float32)
-    >>> keras_core.ops.arctan2(
-    ...     keras_core.ops.array([0., 0., numpy.inf]),
-    ...     keras_core.ops.array([+0., -0., numpy.inf]),
+    >>> keras.ops.arctan2(
+    ...     keras.ops.array([0., 0., numpy.inf]),
+    ...     keras.ops.array([+0., -0., numpy.inf]),
     ... )
     array([0., 3.1415925, 0.7853982], dtype=float32)
     )-"
@@ -4407,23 +4479,23 @@ r"-(Element-wise arc tangent of `x1/x2` choosing the quadrant correctly.
 #' # Examples
 #' Consider four points in different quadrants:
 #' ```python
-#' x = keras_core.ops.convert_to_tensor([-1, +1, +1, -1])
-#' y = keras_core.ops.convert_to_tensor([-1, -1, +1, +1])
-#' keras_core.ops.arctan2(y, x) * 180 / numpy.pi
+#' x = keras.ops.convert_to_tensor([-1, +1, +1, -1])
+#' y = keras.ops.convert_to_tensor([-1, -1, +1, +1])
+#' keras.ops.arctan2(y, x) * 180 / numpy.pi
 #' # array([-135., -45., 45., 135.], dtype=float32)
 #' ```
 #'
 #' Note the order of the parameters. `arctan2` is defined also when x2=0 and
 #' at several other points, obtaining values in the range `[-pi, pi]`:
 #' ```python
-#' keras_core.ops.arctan2(
-#'     keras_core.ops.array([1., -1.]),
-#'     keras_core.ops.array([0., 0.]),
+#' keras.ops.arctan2(
+#'     keras.ops.array([1., -1.]),
+#'     keras.ops.array([0., 0.]),
 #' )
 #' # array([ 1.5707964, -1.5707964], dtype=float32)
-#' keras_core.ops.arctan2(
-#'     keras_core.ops.array([0., 0., numpy.inf]),
-#'     keras_core.ops.array([+0., -0., numpy.inf]),
+#' keras.ops.arctan2(
+#'     keras.ops.array([0., 0., numpy.inf]),
+#'     keras.ops.array([+0., -0., numpy.inf]),
 #' )
 #' # array([0., 3.1415925, 0.7853982], dtype=float32)
 #' ```
@@ -4485,15 +4557,15 @@ r"-(Returns the indices of the maximum values along an axis.
         along `axis` removed.
 
     Example:
-    >>> x = keras_core.ops.arange(6).reshape(2, 3) + 10
+    >>> x = keras.ops.arange(6).reshape(2, 3) + 10
     >>> x
     array([[10, 11, 12],
            [13, 14, 15]], dtype=int32)
-    >>> keras_core.ops.argmax(x)
+    >>> keras.ops.argmax(x)
     array(5, dtype=int32)
-    >>> keras_core.ops.argmax(x, axis=0)
+    >>> keras.ops.argmax(x, axis=0)
     array([1, 1, 1], dtype=int32)
-    >>> keras_core.ops.argmax(x, axis=1)
+    >>> keras.ops.argmax(x, axis=1)
     array([2, 2], dtype=int32)
     )-"
 
@@ -4509,15 +4581,15 @@ r"-(Returns the indices of the maximum values along an axis.
 #'
 #' # Examples
 #' ```python
-#' x = keras_core.ops.arange(6).reshape(2, 3) + 10
+#' x = keras.ops.arange(6).reshape(2, 3) + 10
 #' x
 #' # array([[10, 11, 12],
 #' #        [13, 14, 15]], dtype=int32)
-#' keras_core.ops.argmax(x)
+#' keras.ops.argmax(x)
 #' # array(5, dtype=int32)
-#' keras_core.ops.argmax(x, axis=0)
+#' keras.ops.argmax(x, axis=0)
 #' # array([1, 1, 1], dtype=int32)
-#' keras_core.ops.argmax(x, axis=1)
+#' keras.ops.argmax(x, axis=1)
 #' # array([2, 2], dtype=int32)
 #' ```
 #'
@@ -4551,15 +4623,15 @@ r"-(Returns the indices of the minium values along an axis.
         along `axis` removed.
 
     Example:
-    >>> x = keras_core.ops.arange(6).reshape(2, 3) + 10
+    >>> x = keras.ops.arange(6).reshape(2, 3) + 10
     >>> x
     array([[10, 11, 12],
            [13, 14, 15]], dtype=int32)
-    >>> keras_core.ops.argmin(x)
+    >>> keras.ops.argmin(x)
     array(0, dtype=int32)
-    >>> keras_core.ops.argmin(x, axis=0)
+    >>> keras.ops.argmin(x, axis=0)
     array([0, 0, 0], dtype=int32)
-    >>> keras_core.ops.argmin(x, axis=1)
+    >>> keras.ops.argmin(x, axis=1)
     array([0, 0], dtype=int32)
     )-"
 
@@ -4575,15 +4647,15 @@ r"-(Returns the indices of the minium values along an axis.
 #'
 #' # Examples
 #' ```python
-#' x = keras_core.ops.arange(6).reshape(2, 3) + 10
+#' x = keras.ops.arange(6).reshape(2, 3) + 10
 #' x
 #' # array([[10, 11, 12],
 #' #        [13, 14, 15]], dtype=int32)
-#' keras_core.ops.argmin(x)
+#' keras.ops.argmin(x)
 #' # array(0, dtype=int32)
-#' keras_core.ops.argmin(x, axis=0)
+#' keras.ops.argmin(x, axis=0)
 #' # array([0, 0, 0], dtype=int32)
-#' keras_core.ops.argmin(x, axis=1)
+#' keras.ops.argmin(x, axis=1)
 #' # array([0, 0], dtype=int32)
 #' ```
 #'
@@ -4617,21 +4689,21 @@ r"-(Returns the indices that would sort a tensor.
 
     Examples:
     One dimensional array:
-    >>> x = keras_core.ops.array([3, 1, 2])
-    >>> keras_core.ops.argsort(x)
+    >>> x = keras.ops.array([3, 1, 2])
+    >>> keras.ops.argsort(x)
     array([1, 2, 0], dtype=int32)
 
     Two-dimensional array:
-    >>> x = keras_core.ops.array([[0, 3], [3, 2], [4, 5]])
+    >>> x = keras.ops.array([[0, 3], [3, 2], [4, 5]])
     >>> x
     array([[0, 3],
            [3, 2],
            [4, 5]], dtype=int32)
-    >>> keras_core.ops.argsort(x, axis=0)
+    >>> keras.ops.argsort(x, axis=0)
     array([[0, 1],
            [1, 0],
            [2, 2]], dtype=int32)
-    >>> keras_core.ops.argsort(x, axis=1)
+    >>> keras.ops.argsort(x, axis=1)
     array([[0, 1],
            [1, 0],
            [0, 1]], dtype=int32)
@@ -4649,23 +4721,23 @@ r"-(Returns the indices that would sort a tensor.
 #' # Examples
 #' One dimensional array:
 #' ```python
-#' x = keras_core.ops.array([3, 1, 2])
-#' keras_core.ops.argsort(x)
+#' x = keras.ops.array([3, 1, 2])
+#' keras.ops.argsort(x)
 #' # array([1, 2, 0], dtype=int32)
 #' ```
 #'
 #' Two-dimensional array:
 #' ```python
-#' x = keras_core.ops.array([[0, 3], [3, 2], [4, 5]])
+#' x = keras.ops.array([[0, 3], [3, 2], [4, 5]])
 #' x
 #' # array([[0, 3],
 #' #        [3, 2],
 #' #        [4, 5]], dtype=int32)
-#' keras_core.ops.argsort(x, axis=0)
+#' keras.ops.argsort(x, axis=0)
 #' # array([[0, 1],
 #' #        [1, 0],
 #' #        [2, 2]], dtype=int32)
-#' keras_core.ops.argsort(x, axis=1)
+#' keras.ops.argsort(x, axis=1)
 #' # array([[0, 1],
 #' #        [1, 0],
 #' #        [0, 1]], dtype=int32)
@@ -4699,10 +4771,10 @@ r"-(Create a tensor.
         A tensor.
 
     Examples:
-    >>> keras_core.ops.array([1, 2, 3])
+    >>> keras.ops.array([1, 2, 3])
     array([1, 2, 3], dtype=int32)
 
-    >>> keras_core.ops.array([1, 2, 3], dtype="float32")
+    >>> keras.ops.array([1, 2, 3], dtype="float32")
     array([1., 2., 3.], dtype=float32)
     )-"
 
@@ -4717,12 +4789,12 @@ r"-(Create a tensor.
 #'
 #' # Examples
 #' ```python
-#' keras_core.ops.array([1, 2, 3])
+#' keras.ops.array([1, 2, 3])
 #' # array([1, 2, 3], dtype=int32)
 #' ```
 #'
 #' ```python
-#' keras_core.ops.array([1, 2, 3], dtype="float32")
+#' keras.ops.array([1, 2, 3], dtype="float32")
 #' # array([1., 2., 3.], dtype=float32)
 #' ```
 #'
@@ -4761,31 +4833,31 @@ r"-(Compute the weighted average along the specified axis.
         Return the average along the specified axis.
 
     Examples:
-    >>> data = keras_core.ops.arange(1, 5)
+    >>> data = keras.ops.arange(1, 5)
     >>> data
     array([1, 2, 3, 4], dtype=int32)
-    >>> keras_core.ops.average(data)
+    >>> keras.ops.average(data)
     array(2.5, dtype=float32)
-    >>> keras_core.ops.average(
-    ...     keras_core.ops.arange(1, 11),
-    ...     weights=keras_core.ops.arange(10, 0, -1)
+    >>> keras.ops.average(
+    ...     keras.ops.arange(1, 11),
+    ...     weights=keras.ops.arange(10, 0, -1)
     ... )
     array(4., dtype=float32)
 
-    >>> data = keras_core.ops.arange(6).reshape((3, 2))
+    >>> data = keras.ops.arange(6).reshape((3, 2))
     >>> data
     array([[0, 1],
            [2, 3],
            [4, 5]], dtype=int32)
-    >>> keras_core.ops.average(
+    >>> keras.ops.average(
     ...     data,
     ...     axis=1,
-    ...     weights=keras_core.ops.array([1./4, 3./4])
+    ...     weights=keras.ops.array([1./4, 3./4])
     ... )
     array([0.75, 2.75, 4.75], dtype=float32)
-    >>> keras_core.ops.average(
+    >>> keras.ops.average(
     ...     data,
-    ...     weights=keras_core.ops.array([1./4, 3./4])
+    ...     weights=keras.ops.array([1./4, 3./4])
     ... )
     Traceback (most recent call last):
         ...
@@ -4803,33 +4875,33 @@ r"-(Compute the weighted average along the specified axis.
 #'
 #' # Examples
 #' ```python
-#' data = keras_core.ops.arange(1, 5)
+#' data = keras.ops.arange(1, 5)
 #' data
 #' # array([1, 2, 3, 4], dtype=int32)
-#' keras_core.ops.average(data)
+#' keras.ops.average(data)
 #' # array(2.5, dtype=float32)
-#' keras_core.ops.average(
-#'     keras_core.ops.arange(1, 11),
-#'     weights=keras_core.ops.arange(10, 0, -1)
+#' keras.ops.average(
+#'     keras.ops.arange(1, 11),
+#'     weights=keras.ops.arange(10, 0, -1)
 #' )
 #' # array(4., dtype=float32)
 #' ```
 #'
 #' ```python
-#' data = keras_core.ops.arange(6).reshape((3, 2))
+#' data = keras.ops.arange(6).reshape((3, 2))
 #' data
 #' # array([[0, 1],
 #' #        [2, 3],
 #' #        [4, 5]], dtype=int32)
-#' keras_core.ops.average(
+#' keras.ops.average(
 #'     data,
 #'     axis=1,
-#'     weights=keras_core.ops.array([1./4, 3./4])
+#'     weights=keras.ops.array([1./4, 3./4])
 #' )
 #' # array([0.75, 2.75, 4.75], dtype=float32)
-#' keras_core.ops.average(
+#' keras.ops.average(
 #'     data,
-#'     weights=keras_core.ops.array([1./4, 3./4])
+#'     weights=keras.ops.array([1./4, 3./4])
 #' )
 #' # Traceback (most recent call last):
 #' #     ...
@@ -4886,16 +4958,16 @@ r"-(Count the number of occurrences of each value in a tensor of integers.
         minlength.
 
     Examples:
-    >>> x = keras_core.ops.array([1, 2, 2, 3], dtype="uint8")
-    >>> keras_core.ops.bincount(x)
+    >>> x = keras.ops.array([1, 2, 2, 3], dtype="uint8")
+    >>> keras.ops.bincount(x)
     array([0, 1, 2, 1], dtype=int32)
     >>> weights = x / 2
     >>> weights
     array([0.5, 1., 1., 1.5], dtype=float64)
-    >>> keras_core.ops.bincount(x, weights=weights)
+    >>> keras.ops.bincount(x, weights=weights)
     array([0., 0.5, 2., 1.5], dtype=float64)
-    >>> minlength = (keras_core.ops.max(x).numpy() + 1) + 2 # 6
-    >>> keras_core.ops.bincount(x, minlength=minlength)
+    >>> minlength = (keras.ops.max(x).numpy() + 1) + 2 # 6
+    >>> keras.ops.bincount(x, minlength=minlength)
     array([0, 1, 2, 1, 0, 0], dtype=int32)
     )-"
 
@@ -4912,16 +4984,16 @@ r"-(Count the number of occurrences of each value in a tensor of integers.
 #'
 #' # Examples
 #' ```python
-#' x = keras_core.ops.array([1, 2, 2, 3], dtype="uint8")
-#' keras_core.ops.bincount(x)
+#' x = keras.ops.array([1, 2, 2, 3], dtype="uint8")
+#' keras.ops.bincount(x)
 #' # array([0, 1, 2, 1], dtype=int32)
 #' weights = x / 2
 #' weights
 #' # array([0.5, 1., 1., 1.5], dtype=float64)
-#' keras_core.ops.bincount(x, weights=weights)
+#' keras.ops.bincount(x, weights=weights)
 #' # array([0., 0.5, 2., 1.5], dtype=float64)
-#' minlength = (keras_core.ops.max(x).numpy() + 1) + 2 # 6
-#' keras_core.ops.bincount(x, minlength=minlength)
+#' minlength = (keras.ops.max(x).numpy() + 1) + 2 # 6
+#' keras.ops.bincount(x, minlength=minlength)
 #' # array([0, 1, 2, 1, 0, 0], dtype=int32)
 #' ```
 #'
@@ -4963,8 +5035,8 @@ r"-(Broadcast a tensor to a new shape.
         A tensor with the desired shape.
 
     Examples:
-    >>> x = keras_core.ops.array([1, 2, 3])
-    >>> keras_core.ops.broadcast_to(x, (3, 3))
+    >>> x = keras.ops.array([1, 2, 3])
+    >>> keras.ops.broadcast_to(x, (3, 3))
     array([[1, 2, 3],
            [1, 2, 3],
            [1, 2, 3]])
@@ -4981,8 +5053,8 @@ r"-(Broadcast a tensor to a new shape.
 #'
 #' # Examples
 #' ```python
-#' x = keras_core.ops.array([1, 2, 3])
-#' keras_core.ops.broadcast_to(x, (3, 3))
+#' x = keras.ops.array([1, 2, 3])
+#' keras.ops.broadcast_to(x, (3, 3))
 #' # array([[1, 2, 3],
 #' #        [1, 2, 3],
 #' #        [1, 2, 3]])
@@ -5015,7 +5087,7 @@ r"-(Return the ceiling of the input, element-wise.
         x: Input tensor.
 
     Returns:
-        The ceiling of each element in `x`.
+        The ceiling of each element in `x`, with float dtype.
     )-"
 
 
@@ -5027,7 +5099,7 @@ r"-(Return the ceiling of the input, element-wise.
 #' `i >= x`.
 #'
 #' # Returns
-#'     The ceiling of each element in `x`.
+#'     The ceiling of each element in `x`, with float dtype.
 #'
 #' @param x Input tensor.
 #'
@@ -5119,11 +5191,11 @@ function (xs, axis = 0L)
 
 # keras$layers$conj
 # keras_core.src.ops.numpy.conj
-r"-(Shorthand for `keras_core.ops.conjugate`.)-"
+r"-(Shorthand for `keras.ops.conjugate`.)-"
 
 
 # keras_core.src.ops.numpy.conj
-#' Shorthand for `keras_core.ops.conjugate`.
+#' Shorthand for `keras.ops.conjugate`.
 #'
 #' @export
 #' @family ops
@@ -5141,7 +5213,7 @@ r"-(Returns the complex conjugate, element-wise.
     The complex conjugate of a complex number is obtained by changing the sign
     of its imaginary part.
 
-    `keras_core.ops.conj` is a shorthand for this function.
+    `keras.ops.conj` is a shorthand for this function.
 
     Args:
         x: Input tensor.
@@ -5158,7 +5230,7 @@ r"-(Returns the complex conjugate, element-wise.
 #' The complex conjugate of a complex number is obtained by changing the sign
 #' of its imaginary part.
 #'
-#' `keras_core.ops.conj` is a shorthand for this function.
+#' `keras.ops.conj` is a shorthand for this function.
 #'
 #' # Returns
 #'     The complex conjugate of each element in `x`.
@@ -5282,12 +5354,12 @@ r"-(Counts the number of non-zero values in `x` along the given `axis`.
         int or tensor of ints.
 
     Examples:
-    >>> x = keras_core.ops.array([[0, 1, 7, 0], [3, 0, 2, 19]])
-    >>> keras_core.ops.count_nonzero(x)
+    >>> x = keras.ops.array([[0, 1, 7, 0], [3, 0, 2, 19]])
+    >>> keras.ops.count_nonzero(x)
     5
-    >>> keras_core.ops.count_nonzero(x, axis=0)
+    >>> keras.ops.count_nonzero(x, axis=0)
     array([1, 1, 2, 1], dtype=int64)
-    >>> keras_core.ops.count_nonzero(x, axis=1)
+    >>> keras.ops.count_nonzero(x, axis=1)
     array([2, 3], dtype=int64)
     )-"
 
@@ -5303,12 +5375,12 @@ r"-(Counts the number of non-zero values in `x` along the given `axis`.
 #'
 #' # Examples
 #' ```python
-#' x = keras_core.ops.array([[0, 1, 7, 0], [3, 0, 2, 19]])
-#' keras_core.ops.count_nonzero(x)
+#' x = keras.ops.array([[0, 1, 7, 0], [3, 0, 2, 19]])
+#' keras.ops.count_nonzero(x)
 #' # 5
-#' keras_core.ops.count_nonzero(x, axis=0)
+#' keras.ops.count_nonzero(x, axis=0)
 #' # array([1, 1, 2, 1], dtype=int64)
-#' keras_core.ops.count_nonzero(x, axis=1)
+#' keras.ops.count_nonzero(x, axis=1)
 #' # array([2, 3], dtype=int64)
 #' ```
 #'
@@ -5503,7 +5575,7 @@ r"-(Extract a diagonal or construct a diagonal array.
         The extracted diagonal or constructed diagonal tensor.
 
     Examples:
-    >>> from keras_core import ops
+    >>> from keras import ops
     >>> x = ops.arange(9).reshape((3, 3))
     >>> x
     array([[0, 1, 2],
@@ -5534,7 +5606,7 @@ r"-(Extract a diagonal or construct a diagonal array.
 #'
 #' # Examples
 #' ```python
-#' from keras_core import ops
+#' from keras import ops
 #' x = ops.arange(9).reshape((3, 3))
 #' x
 #' # array([[0, 1, 2],
@@ -5604,7 +5676,7 @@ r"-(Return specified diagonals.
         Tensor of diagonals.
 
     Examples:
-    >>> from keras_core import ops
+    >>> from keras import ops
     >>> x = ops.arange(4).reshape((2, 2))
     >>> x
     array([[0, 1],
@@ -5646,7 +5718,7 @@ r"-(Return specified diagonals.
 #'
 #' # Examples
 #' ```python
-#' from keras_core import ops
+#' from keras import ops
 #' x = ops.arange(4).reshape((2, 2))
 #' x
 #' # array([[0, 1],
@@ -5705,7 +5777,7 @@ r"-(Returns the indices of the bins to which each value in `x` belongs.
     Example:
     >>> x = np.array([0.0, 1.0, 3.0, 1.6])
     >>> bins = np.array([0.0, 3.0, 4.5, 7.0])
-    >>> keras_core.ops.digitize(x, bins)
+    >>> keras.ops.digitize(x, bins)
     array([1, 1, 2, 1])
     )-"
 
@@ -5722,7 +5794,7 @@ r"-(Returns the indices of the bins to which each value in `x` belongs.
 #' ```python
 #' x = np.array([0.0, 1.0, 3.0, 1.6])
 #' bins = np.array([0.0, 3.0, 4.5, 7.0])
-#' keras_core.ops.digitize(x, bins)
+#' keras.ops.digitize(x, bins)
 #' # array([1, 1, 2, 1])
 #' ```
 #'
@@ -5743,7 +5815,7 @@ keras$ops$digitize(x, bins)
 # keras_core.src.ops.numpy.divide
 r"-(Divide arguments element-wise.
 
-    `keras_core.ops.true_divide` is an alias for this function.
+    `keras.ops.true_divide` is an alias for this function.
 
     Args:
         x1: First input tensor.
@@ -5758,7 +5830,7 @@ r"-(Divide arguments element-wise.
 #' Divide arguments element-wise.
 #'
 #' @description
-#' `keras_core.ops.true_divide` is an alias for this function.
+#' `keras.ops.true_divide` is an alias for this function.
 #'
 #' # Returns
 #'     Output tensor, the quotient `x1/x2`, element-wise.
@@ -5849,7 +5921,7 @@ r"-(Evaluates the Einstein summation convention on the operands.
         The calculation based on the Einstein summation convention.
 
     Example:
-    >>> from keras_core import ops
+    >>> from keras import ops
     >>> a = ops.arange(25).reshape(5, 5)
     >>> b = ops.arange(5)
     >>> c = ops.arange(6).reshape(2, 3)
@@ -5929,7 +6001,7 @@ r"-(Evaluates the Einstein summation convention on the operands.
 #'
 #' # Examples
 #' ```python
-#' from keras_core import ops
+#' from keras import ops
 #' a = ops.arange(25).reshape(5, 5)
 #' b = ops.arange(5)
 #' c = ops.arange(6).reshape(2, 3)
@@ -6055,7 +6127,7 @@ r"-(Return a tensor of given shape and type filled with uninitialized data.
 #' @seealso
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/empty>
 k_empty <-
-function (shape, dtype = "float32")
+function (shape, dtype = NULL)
 keras$ops$empty(shape, dtype)
 
 
@@ -6232,7 +6304,7 @@ r"-(Return a 2-D tensor with ones on the diagonal and zeros elsewhere.
 #' @seealso
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/eye>
 k_eye <-
-function (N, M = NULL, k = 0L, dtype = "float32")
+function (N, M = NULL, k = 0L, dtype = NULL)
 {
     args <- capture_args2(list(k = as_integer))
     do.call(keras$ops$eye, args)
@@ -6570,7 +6642,7 @@ r"-(Return the identity tensor.
 #' @seealso
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/identity>
 k_identity <-
-function (n, dtype = "float32")
+function (n, dtype = NULL)
 keras$ops$identity(n, dtype)
 
 
@@ -7442,7 +7514,7 @@ r"-(Creates grids of coordinates from coordinate vectors.
         Sequence of N tensors.
 
     Example:
-    >>> from keras_core import ops
+    >>> from keras import ops
     >>> x = ops.array([1, 2, 3])
     >>> y = ops.array([4, 5, 6])
 
@@ -7472,7 +7544,7 @@ r"-(Creates grids of coordinates from coordinate vectors.
 #'
 #' # Examples
 #' ```python
-#' from keras_core import ops
+#' from keras import ops
 #' x = ops.array([1, 2, 3])
 #' y = ops.array([4, 5, 6])
 #' ```
@@ -7871,7 +7943,7 @@ r"-(Return a new tensor of given shape and type, filled with ones.
 #' @seealso
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/ones>
 k_ones <-
-function (shape, dtype = "float32")
+function (shape, dtype = NULL)
 keras$ops$ones(shape, dtype)
 
 
@@ -9263,7 +9335,7 @@ r"-(Return a tensor with ones at and below a diagonal and zeros elsewhere.
 #' @seealso
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/tri>
 k_tri <-
-function (N, M = NULL, k = 0L, dtype = "float32")
+function (N, M = NULL, k = 0L, dtype = NULL)
 {
     args <- capture_args2(list(k = as_integer))
     do.call(keras$ops$tri, args)
@@ -9358,11 +9430,11 @@ function (x, k = 0L)
 
 # keras$layers$true_divide
 # keras_core.src.ops.numpy.true_divide
-r"-(Alias for `keras_core.ops.divide`.)-"
+r"-(Alias for `keras.ops.divide`.)-"
 
 
 # keras_core.src.ops.numpy.true_divide
-#' Alias for `keras_core.ops.divide`.
+#' Alias for `keras.ops.divide`.
 #'
 #' @export
 #' @family ops
@@ -9556,7 +9628,7 @@ r"-(Return a new tensor of given shape and type, filled with zeros.
 #' @seealso
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/zeros>
 k_zeros <-
-function (shape, dtype = "float32")
+function (shape, dtype = NULL)
 keras$ops$zeros(shape, dtype)
 
 

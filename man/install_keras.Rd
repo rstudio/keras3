@@ -5,45 +5,25 @@
 \title{Install TensorFlow and Keras, including all Python dependencies}
 \usage{
 install_keras(
-  method = c("auto", "virtualenv", "conda"),
-  conda = "auto",
-  version = "default",
-  tensorflow = version,
+  ...,
+  envname = "r-keras",
   extra_packages = NULL,
-  ...
+  backend = c("tensorflow", "jax", "pytorch")
 )
 }
 \arguments{
-\item{method}{Installation method. By default, "auto" automatically finds a
-method that will work in the local environment. Change the default to force
-a specific installation method. Note that the "virtualenv" method is not
-available on Windows.}
+\item{...}{other arguments passed to \code{\link[reticulate:conda-tools]{reticulate::conda_install()}} or
+\code{\link[reticulate:virtualenv-tools]{reticulate::virtualenv_install()}}, depending on the \code{method} used.}
 
-\item{conda}{The path to a \code{conda} executable. Use \code{"auto"} to allow
-\code{reticulate} to automatically find an appropriate \code{conda} binary.
-See \strong{Finding Conda} and \code{\link[reticulate:conda_binary]{conda_binary()}} for more details.}
-
-\item{version}{TensorFlow version to install. Valid values include:
-\itemize{
-\item \code{"default"} installs  2.14
-\item \code{"release"} installs the latest release version of tensorflow (which may
-be incompatible with the current version of the R package)
-\item A version specification like \code{"2.4"} or \code{"2.4.0"}. Note that if the patch
-version is not supplied, the latest patch release is installed (e.g.,
-\code{"2.4"} today installs version "2.4.2")
-\item \code{nightly} for the latest available nightly build.
-\item To any specification, you can append "-cpu" to install the cpu version
-only of the package (e.g., \code{"2.4-cpu"})
-\item The full URL or path to a installer binary or python *.whl file.
-}}
-
-\item{tensorflow}{Synonym for \code{version}. Maintained for backwards.}
+\item{envname}{The name, or full path, of the environment in which Python
+packages are to be installed. When \code{NULL} (the default), the active
+environment as set by the \code{RETICULATE_PYTHON_ENV} variable will be used;
+if that is unset, then the \code{r-reticulate} environment will be used.}
 
 \item{extra_packages}{Additional Python packages to install along with
 TensorFlow.}
 
-\item{...}{other arguments passed to \code{\link[reticulate:conda-tools]{reticulate::conda_install()}} or
-\code{\link[reticulate:virtualenv-tools]{reticulate::virtualenv_install()}}, depending on the \code{method} used.}
+\item{tensorflow}{Synonym for \code{version}. Maintained for backwards.}
 }
 \description{
 This function will install Tensorflow and all Keras dependencies. This is a

@@ -63,12 +63,12 @@ The quantity to be monitored needs to be available in \code{logs} dict.
 To make it so, pass the loss or metrics at \code{model.compile()}.
 }
 \section{Examples}{
-\if{html}{\out{<div class="sourceCode python">}}\preformatted{callback = keras_core.callbacks.EarlyStopping(monitor='loss',
+\if{html}{\out{<div class="sourceCode python">}}\preformatted{callback = keras.callbacks.EarlyStopping(monitor='loss',
                                               patience=3)
 # This callback will stop the training when there is no improvement in
 # the loss for three consecutive epochs.
-model = keras_core.models.Sequential([keras_core.layers.Dense(10)])
-model.compile(keras_core.optimizers.SGD(), loss='mse')
+model = keras.models.Sequential([keras.layers.Dense(10)])
+model.compile(keras.optimizers.SGD(), loss='mse')
 history = model.fit(np.arange(100).reshape(5, 20), np.zeros(5),
                     epochs=10, batch_size=1, callbacks=[callback],
                     verbose=0)
@@ -83,6 +83,7 @@ len(history.history['loss'])  # Only 4 epochs are run.
 }
 
 Other callback: 
+\code{\link{callback_backup_and_restore}()},
 \code{\link{callback_csv_logger}()},
 \code{\link{callback_lambda}()},
 \code{\link{callback_learning_rate_scheduler}()},

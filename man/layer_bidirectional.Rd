@@ -14,9 +14,9 @@ layer_bidirectional(
 )
 }
 \arguments{
-\item{layer}{\code{keras_core.layers.RNN} instance, such as
-\code{keras_core.layers.LSTM} or \code{keras_core.layers.GRU}.
-It could also be a \code{keras_core.layers.Layer} instance
+\item{layer}{\code{keras.layers.RNN} instance, such as
+\code{keras.layers.LSTM} or \code{keras.layers.GRU}.
+It could also be a \code{keras.layers.Layer} instance
 that meets the following criteria:
 1. Be a sequence-processing layer (accepts 3D+ inputs).
 2. Have a \code{go_backwards}, \code{return_sequences} and \code{return_state}
@@ -24,8 +24,8 @@ attribute (with the same semantics as for the \code{RNN} class).
 3. Have an \code{input_spec} attribute.
 4. Implement serialization via \code{get_config()} and \code{from_config()}.
 Note that the recommended way to create new RNN layers is to write a
-custom RNN cell and use it with \code{keras_core.layers.RNN}, instead of
-subclassing \code{keras_core.layers.Layer} directly.
+custom RNN cell and use it with \code{keras.layers.RNN}, instead of
+subclassing \code{keras.layers.Layer} directly.
 When \code{return_sequences} is \code{True}, the output of the masked
 timestep will be zero regardless of the layer's original
 \code{zero_output_for_mask} value.}
@@ -35,8 +35,8 @@ will be combined. One of \verb{\{"sum", "mul", "concat", "ave", None\}}.
 If \code{None}, the outputs will not be combined,
 they will be returned as a list. Defaults to \code{"concat"}.}
 
-\item{backward_layer}{Optional \code{keras_core.layers.RNN},
-or \code{keras_core.layers.Layer} instance to be used to handle
+\item{backward_layer}{Optional \code{keras.layers.RNN},
+or \code{keras.layers.Layer} instance to be used to handle
 backwards input processing.
 If \code{backward_layer} is not provided, the layer instance passed
 as the \code{layer} argument will be used to generate the backward layer

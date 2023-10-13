@@ -58,7 +58,7 @@ For transfer learning use cases, make sure to read the
 \href{https://keras.io/guides/transfer_learning/}{guide to transfer learning & fine-tuning}.
 
 Note: each Keras Application expects a specific kind of input preprocessing.
-For ResNet, call \code{keras_core.applications.resnet_v2.preprocess_input} on your
+For ResNet, call \code{keras.applications.resnet_v2.preprocess_input} on your
 inputs before passing them to the model. \code{resnet_v2.preprocess_input} will
 scale input pixels between -1 and 1.
 }

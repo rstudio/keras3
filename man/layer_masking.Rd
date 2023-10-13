@@ -29,9 +29,9 @@ inputs = np.random.random([samples, timesteps, features]).astype(np.float32)
 inputs[:, 3, :] = 0.
 inputs[:, 5, :] = 0.
 
-model = keras_core.models.Sequential()
-model.add(keras_core.layers.Masking(mask_value=0.)
-model.add(keras_core.layers.LSTM(32))
+model = keras.models.Sequential()
+model.add(keras.layers.Masking(mask_value=0.)
+model.add(keras.layers.LSTM(32))
 output = model(inputs)
 # The time step 3 and 5 will be skipped from LSTM calculation.
 }\if{html}{\out{</div>}}

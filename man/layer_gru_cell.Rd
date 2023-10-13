@@ -81,7 +81,7 @@ True = "after" (default and cuDNN compatible).}
 }
 \description{
 This class processes one step within the whole time sequence input, whereas
-\code{keras_core.layer.GRU} processes the whole sequence.
+\code{keras.layer.GRU} processes the whole sequence.
 }
 \section{Call Arguments}{
 inputs: A 2D tensor, with shape \verb{(batch, features)}.
@@ -94,12 +94,12 @@ training mode or in inference mode. Only relevant when \code{dropout} or
 
 \section{Examples}{
 \if{html}{\out{<div class="sourceCode python">}}\preformatted{inputs = np.random.random((32, 10, 8))
-rnn = keras_core.layers.RNN(keras_core.layers.GRUCell(4))
+rnn = keras.layers.RNN(keras.layers.GRUCell(4))
 output = rnn(inputs)
 output.shape
 # (32, 4)
-rnn = keras_core.layers.RNN(
-   keras_core.layers.GRUCell(4),
+rnn = keras.layers.RNN(
+   keras.layers.GRUCell(4),
    return_sequences=True,
    return_state=True)
 whole_sequence_output, final_state = rnn(inputs)

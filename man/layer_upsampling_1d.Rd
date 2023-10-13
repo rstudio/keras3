@@ -20,7 +20,7 @@ x
 #   [ 3  4  5]]
 #  [[ 6  7  8]
 #   [ 9 10 11]]]
-y = keras_core.layers.UpSampling1D(size=2)(x)
+y = keras.layers.UpSampling1D(size=2)(x)
 y
 # [[[ 0.  1.  2.]
 #   [ 0.  1.  2.]

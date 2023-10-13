@@ -18,7 +18,7 @@ equal to 1 (across the axes specified in \code{axis}).
 }
 \section{Examples}{
 \if{html}{\out{<div class="sourceCode python">}}\preformatted{data = np.arange(6).reshape(2, 3)
-normalized_data = keras_core.layers.UnitNormalization()(data)
+normalized_data = keras.layers.UnitNormalization()(data)
 print(np.sum(normalized_data[0, :] ** 2)
 # 1.0
 }\if{html}{\out{</div>}}

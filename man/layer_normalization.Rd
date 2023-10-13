@@ -57,7 +57,7 @@ Calculate a global mean and variance by analyzing the dataset in \code{adapt()}.
 
 \if{html}{\out{<div class="sourceCode python">}}\preformatted{adapt_data = np.array([1., 2., 3., 4., 5.], dtype='float32')
 input_data = np.array([1., 2., 3.], dtype='float32')
-layer = keras_core.layers.Normalization(axis=None)
+layer = keras.layers.Normalization(axis=None)
 layer.adapt(adapt_data)
 layer(input_data)
 # array([-1.4142135, -0.70710677, 0.], dtype=float32)
@@ -70,7 +70,7 @@ Calculate a mean and variance for each index on the last axis.
                        [0., 7., 4.],
                        [2., 9., 6.]], dtype='float32')
 input_data = np.array([[0., 7., 4.]], dtype='float32')
-layer = keras_core.layers.Normalization(axis=-1)
+layer = keras.layers.Normalization(axis=-1)
 layer.adapt(adapt_data)
 layer(input_data)
 # array([-1., -1., -1.], dtype=float32)
@@ -79,7 +79,7 @@ layer(input_data)
 Pass the mean and variance directly.
 
 \if{html}{\out{<div class="sourceCode python">}}\preformatted{input_data = np.array([[1.], [2.], [3.]], dtype='float32')
-layer = keras_core.layers.Normalization(mean=3., variance=2.)
+layer = keras.layers.Normalization(mean=3., variance=2.)
 layer(input_data)
 # array([[-1.4142135 ],
 #        [-0.70710677],
@@ -93,7 +93,7 @@ Use the layer to de-normalize inputs (after adapting the layer).
                        [0., 7., 4.],
                        [2., 9., 6.]], dtype='float32')
 input_data = np.array([[1., 2., 3.]], dtype='float32')
-layer = keras_core.layers.Normalization(axis=-1, invert=True)
+layer = keras.layers.Normalization(axis=-1, invert=True)
 layer.adapt(adapt_data)
 layer(input_data)
 # array([2., 10., 8.], dtype=float32)

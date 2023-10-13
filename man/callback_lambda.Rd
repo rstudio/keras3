@@ -86,6 +86,7 @@ model.fit(...,
 }
 
 Other callback: 
+\code{\link{callback_backup_and_restore}()},
 \code{\link{callback_csv_logger}()},
 \code{\link{callback_early_stopping}()},
 \code{\link{callback_learning_rate_scheduler}()},

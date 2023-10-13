@@ -20,12 +20,12 @@ int or tensor of ints.
 }
 
 \section{Examples}{
-\if{html}{\out{<div class="sourceCode python">}}\preformatted{x = keras_core.ops.array([[0, 1, 7, 0], [3, 0, 2, 19]])
-keras_core.ops.count_nonzero(x)
+\if{html}{\out{<div class="sourceCode python">}}\preformatted{x = keras.ops.array([[0, 1, 7, 0], [3, 0, 2, 19]])
+keras.ops.count_nonzero(x)
 # 5
-keras_core.ops.count_nonzero(x, axis=0)
+keras.ops.count_nonzero(x, axis=0)
 # array([1, 1, 2, 1], dtype=int64)
-keras_core.ops.count_nonzero(x, axis=1)
+keras.ops.count_nonzero(x, axis=1)
 # array([2, 3], dtype=int64)
 }\if{html}{\out{</div>}}
 }
@@ -89,6 +89,7 @@ Other ops:
 \code{\link{k_elu}()},
 \code{\link{k_empty}()},
 \code{\link{k_equal}()},
+\code{\link{k_erf}()},
 \code{\link{k_expand_dims}()},
 \code{\link{k_expm_1}()},
 \code{\link{k_exp}()},
@@ -170,6 +171,7 @@ Other ops:
 \code{\link{k_rfft}()},
 \code{\link{k_roll}()},
 \code{\link{k_round}()},
+\code{\link{k_rsqrt}()},
 \code{\link{k_scatter_update}()},
 \code{\link{k_scatter}()},
 \code{\link{k_segment_max}()},

@@ -13,8 +13,8 @@ layer_repeat_vector(object, n, ...)
 Repeats the input n times.
 }
 \section{Examples}{
-\if{html}{\out{<div class="sourceCode python">}}\preformatted{x = keras_core.Input(shape=(32,))
-y = keras_core.layers.RepeatVector(3)(x)
+\if{html}{\out{<div class="sourceCode python">}}\preformatted{x = keras.Input(shape=(32,))
+y = keras.layers.RepeatVector(3)(x)
 y.shape
 # (None, 3, 32)
 }\if{html}{\out{</div>}}

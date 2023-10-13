@@ -2,12 +2,12 @@
 % Please edit documentation in R/autogen-ops.R
 \name{k_abs}
 \alias{k_abs}
-\title{Shorthand for \code{keras_core.ops.absolute}.}
+\title{Shorthand for \code{keras.ops.absolute}.}
 \usage{
 k_abs(x)
 }
 \description{
-Shorthand for \code{keras_core.ops.absolute}.
+Shorthand for \code{keras.ops.absolute}.
 }
 \seealso{
 \itemize{
@@ -68,6 +68,7 @@ Other ops:
 \code{\link{k_elu}()},
 \code{\link{k_empty}()},
 \code{\link{k_equal}()},
+\code{\link{k_erf}()},
 \code{\link{k_expand_dims}()},
 \code{\link{k_expm_1}()},
 \code{\link{k_exp}()},
@@ -149,6 +150,7 @@ Other ops:
 \code{\link{k_rfft}()},
 \code{\link{k_roll}()},
 \code{\link{k_round}()},
+\code{\link{k_rsqrt}()},
 \code{\link{k_scatter_update}()},
 \code{\link{k_scatter}()},
 \code{\link{k_segment_max}()},

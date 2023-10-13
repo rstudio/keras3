@@ -97,17 +97,17 @@ You can find more information about TensorBoard
 \section{Examples}{
 Basic usage:
 
-\if{html}{\out{<div class="sourceCode python">}}\preformatted{tensorboard_callback = keras_core.callbacks.TensorBoard(log_dir="./logs")
+\if{html}{\out{<div class="sourceCode python">}}\preformatted{tensorboard_callback = keras.callbacks.TensorBoard(log_dir="./logs")
 model.fit(x_train, y_train, epochs=2, callbacks=[tensorboard_callback])
 # Then run the tensorboard command to view the visualizations.
 }\if{html}{\out{</div>}}
 
 Custom batch-level summaries in a subclassed Model:
 
-\if{html}{\out{<div class="sourceCode python">}}\preformatted{class MyModel(keras_core.Model):
+\if{html}{\out{<div class="sourceCode python">}}\preformatted{class MyModel(keras.Model):
 
     def build(self, _):
-        self.dense = keras_core.layers.Dense(10)
+        self.dense = keras.layers.Dense(10)
 
     def call(self, x):
         outputs = self.dense(x)
@@ -120,7 +120,7 @@ model.compile('sgd', 'mse')
 # Make sure to set `update_freq=N` to log a batch-level summary every N
 # batches.  In addition to any `tf.summary` contained in `model.call()`,
 # metrics added in `Model.compile` will be logged every N batches.
-tb_callback = keras_core.callbacks.TensorBoard('./logs', update_freq=1)
+tb_callback = keras.callbacks.TensorBoard('./logs', update_freq=1)
 model.fit(x_train, y_train, callbacks=[tb_callback])
 }\if{html}{\out{</div>}}
 
@@ -130,28 +130,28 @@ Custom batch-level summaries in a Functional API Model:
     tf.summary.histogram('x', x)
     return x
 
-inputs = keras_core.Input(10)
-x = keras_core.layers.Dense(10)(inputs)
-outputs = keras_core.layers.Lambda(my_summary)(x)
-model = keras_core.Model(inputs, outputs)
+inputs = keras.Input(10)
+x = keras.layers.Dense(10)(inputs)
+outputs = keras.layers.Lambda(my_summary)(x)
+model = keras.Model(inputs, outputs)
 model.compile('sgd', 'mse')
 
 # Make sure to set `update_freq=N` to log a batch-level summary every N
 # batches. In addition to any `tf.summary` contained in `Model.call`,
 # metrics added in `Model.compile` will be logged every N batches.
-tb_callback = keras_core.callbacks.TensorBoard('./logs', update_freq=1)
+tb_callback = keras.callbacks.TensorBoard('./logs', update_freq=1)
 model.fit(x_train, y_train, callbacks=[tb_callback])
 }\if{html}{\out{</div>}}
 
 Profiling:
 
 \if{html}{\out{<div class="sourceCode python">}}\preformatted{# Profile a single batch, e.g. the 5th batch.
-tensorboard_callback = keras_core.callbacks.TensorBoard(
+tensorboard_callback = keras.callbacks.TensorBoard(
     log_dir='./logs', profile_batch=5)
 model.fit(x_train, y_train, epochs=2, callbacks=[tensorboard_callback])
 
 # Profile a range of batches, e.g. from 10 to 20.
-tensorboard_callback = keras_core.callbacks.TensorBoard(
+tensorboard_callback = keras.callbacks.TensorBoard(
     log_dir='./logs', profile_batch=(10,20))
 model.fit(x_train, y_train, epochs=2, callbacks=[tensorboard_callback])
 }\if{html}{\out{</div>}}
@@ -163,6 +163,7 @@ model.fit(x_train, y_train, epochs=2, callbacks=[tensorboard_callback])
 }
 
 Other callback: 
+\code{\link{callback_backup_and_restore}()},
 \code{\link{callback_csv_logger}()},
 \code{\link{callback_early_stopping}()},
 \code{\link{callback_lambda}()},

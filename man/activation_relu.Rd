@@ -28,13 +28,13 @@ and to use a non-zero multiple of the input for values below the threshold.
 }
 \section{Examples}{
 \if{html}{\out{<div class="sourceCode python">}}\preformatted{x = [-10, -5, 0.0, 5, 10]
-keras_core.activations.relu(x)
+keras.activations.relu(x)
 # [ 0.,  0.,  0.,  5., 10.]
-keras_core.activations.relu(x, negative_slope=0.5)
+keras.activations.relu(x, negative_slope=0.5)
 # [-5. , -2.5,  0. ,  5. , 10. ]
-keras_core.activations.relu(x, max_value=5.)
+keras.activations.relu(x, max_value=5.)
 # [0., 0., 0., 5., 5.]
-keras_core.activations.relu(x, threshold=5.)
+keras.activations.relu(x, threshold=5.)
 # [-0., -0.,  0.,  0., 10.]
 }\if{html}{\out{</div>}}
 }

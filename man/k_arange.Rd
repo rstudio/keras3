@@ -43,19 +43,19 @@ rule may result in the last element of out being greater than stop.
 }
 
 \section{Examples}{
-\if{html}{\out{<div class="sourceCode python">}}\preformatted{keras_core.ops.arange(3)
+\if{html}{\out{<div class="sourceCode python">}}\preformatted{keras.ops.arange(3)
 # array([0, 1, 2], dtype=int32)
 }\if{html}{\out{</div>}}
 
-\if{html}{\out{<div class="sourceCode python">}}\preformatted{keras_core.ops.arange(3.0)
+\if{html}{\out{<div class="sourceCode python">}}\preformatted{keras.ops.arange(3.0)
 # array([0., 1., 2.], dtype=float32)
 }\if{html}{\out{</div>}}
 
-\if{html}{\out{<div class="sourceCode python">}}\preformatted{keras_core.ops.arange(3, 7)
+\if{html}{\out{<div class="sourceCode python">}}\preformatted{keras.ops.arange(3, 7)
 # array([3, 4, 5, 6], dtype=int32)
 }\if{html}{\out{</div>}}
 
-\if{html}{\out{<div class="sourceCode python">}}\preformatted{keras_core.ops.arange(3, 7, 2)
+\if{html}{\out{<div class="sourceCode python">}}\preformatted{keras.ops.arange(3, 7, 2)
 # array([3, 5], dtype=int32)
 }\if{html}{\out{</div>}}
 }
@@ -119,6 +119,7 @@ Other ops:
 \code{\link{k_elu}()},
 \code{\link{k_empty}()},
 \code{\link{k_equal}()},
+\code{\link{k_erf}()},
 \code{\link{k_expand_dims}()},
 \code{\link{k_expm_1}()},
 \code{\link{k_exp}()},
@@ -200,6 +201,7 @@ Other ops:
 \code{\link{k_rfft}()},
 \code{\link{k_roll}()},
 \code{\link{k_round}()},
+\code{\link{k_rsqrt}()},
 \code{\link{k_scatter_update}()},
 \code{\link{k_scatter}()},
 \code{\link{k_segment_max}()},

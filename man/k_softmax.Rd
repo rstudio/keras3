@@ -27,7 +27,7 @@ A tensor with the same shape as \code{x}.
 
 \section{Examples}{
 \if{html}{\out{<div class="sourceCode python">}}\preformatted{x = np.array([-1., 0., 1.])
-x_softmax = keras_core.ops.softmax(x)
+x_softmax = keras.ops.softmax(x)
 print(x_softmax)
 # array([0.09003057, 0.24472847, 0.66524096], shape=(3,), dtype=float64)
 }\if{html}{\out{</div>}}
@@ -93,6 +93,7 @@ Other ops:
 \code{\link{k_elu}()},
 \code{\link{k_empty}()},
 \code{\link{k_equal}()},
+\code{\link{k_erf}()},
 \code{\link{k_expand_dims}()},
 \code{\link{k_expm_1}()},
 \code{\link{k_exp}()},
@@ -174,6 +175,7 @@ Other ops:
 \code{\link{k_rfft}()},
 \code{\link{k_roll}()},
 \code{\link{k_round}()},
+\code{\link{k_rsqrt}()},
 \code{\link{k_scatter_update}()},
 \code{\link{k_scatter}()},
 \code{\link{k_segment_max}()},

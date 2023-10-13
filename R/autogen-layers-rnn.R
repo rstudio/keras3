@@ -6,9 +6,9 @@
 r"-(Bidirectional wrapper for RNNs.
 
     Args:
-        layer: `keras_core.layers.RNN` instance, such as
-            `keras_core.layers.LSTM` or `keras_core.layers.GRU`.
-            It could also be a `keras_core.layers.Layer` instance
+        layer: `keras.layers.RNN` instance, such as
+            `keras.layers.LSTM` or `keras.layers.GRU`.
+            It could also be a `keras.layers.Layer` instance
             that meets the following criteria:
             1. Be a sequence-processing layer (accepts 3D+ inputs).
             2. Have a `go_backwards`, `return_sequences` and `return_state`
@@ -16,8 +16,8 @@ r"-(Bidirectional wrapper for RNNs.
             3. Have an `input_spec` attribute.
             4. Implement serialization via `get_config()` and `from_config()`.
             Note that the recommended way to create new RNN layers is to write a
-            custom RNN cell and use it with `keras_core.layers.RNN`, instead of
-            subclassing `keras_core.layers.Layer` directly.
+            custom RNN cell and use it with `keras.layers.RNN`, instead of
+            subclassing `keras.layers.Layer` directly.
             When `return_sequences` is `True`, the output of the masked
             timestep will be zero regardless of the layer's original
             `zero_output_for_mask` value.
@@ -25,8 +25,8 @@ r"-(Bidirectional wrapper for RNNs.
             will be combined. One of `{"sum", "mul", "concat", "ave", None}`.
             If `None`, the outputs will not be combined,
             they will be returned as a list. Defaults to `"concat"`.
-        backward_layer: Optional `keras_core.layers.RNN`,
-            or `keras_core.layers.Layer` instance to be used to handle
+        backward_layer: Optional `keras.layers.RNN`,
+            or `keras.layers.Layer` instance to be used to handle
             backwards input processing.
             If `backward_layer` is not provided, the layer instance passed
             as the `layer` argument will be used to generate the backward layer
@@ -114,9 +114,9 @@ r"-(Bidirectional wrapper for RNNs.
 #' model.compile(loss='categorical_crossentropy', optimizer='rmsprop')
 #' ```
 #'
-#' @param layer `keras_core.layers.RNN` instance, such as
-#'     `keras_core.layers.LSTM` or `keras_core.layers.GRU`.
-#'     It could also be a `keras_core.layers.Layer` instance
+#' @param layer `keras.layers.RNN` instance, such as
+#'     `keras.layers.LSTM` or `keras.layers.GRU`.
+#'     It could also be a `keras.layers.Layer` instance
 #'     that meets the following criteria:
 #'     1. Be a sequence-processing layer (accepts 3D+ inputs).
 #'     2. Have a `go_backwards`, `return_sequences` and `return_state`
@@ -124,8 +124,8 @@ r"-(Bidirectional wrapper for RNNs.
 #'     3. Have an `input_spec` attribute.
 #'     4. Implement serialization via `get_config()` and `from_config()`.
 #'     Note that the recommended way to create new RNN layers is to write a
-#'     custom RNN cell and use it with `keras_core.layers.RNN`, instead of
-#'     subclassing `keras_core.layers.Layer` directly.
+#'     custom RNN cell and use it with `keras.layers.RNN`, instead of
+#'     subclassing `keras.layers.Layer` directly.
 #'     When `return_sequences` is `True`, the output of the masked
 #'     timestep will be zero regardless of the layer's original
 #'     `zero_output_for_mask` value.
@@ -133,8 +133,8 @@ r"-(Bidirectional wrapper for RNNs.
 #'     will be combined. One of `{"sum", "mul", "concat", "ave", None}`.
 #'     If `None`, the outputs will not be combined,
 #'     they will be returned as a list. Defaults to `"concat"`.
-#' @param backward_layer Optional `keras_core.layers.RNN`,
-#'     or `keras_core.layers.Layer` instance to be used to handle
+#' @param backward_layer Optional `keras.layers.RNN`,
+#'     or `keras.layers.Layer` instance to be used to handle
 #'     backwards input processing.
 #'     If `backward_layer` is not provided, the layer instance passed
 #'     as the `layer` argument will be used to generate the backward layer
@@ -959,11 +959,11 @@ r"-(Gated Recurrent Unit - Cho et al. 2014.
     For example:
 
     >>> inputs = np.random.random((32, 10, 8))
-    >>> gru = keras_core.layers.GRU(4)
+    >>> gru = keras.layers.GRU(4)
     >>> output = gru(inputs)
     >>> output.shape
     (32, 4)
-    >>> gru = keras_core.layers.GRU(4, return_sequences=True, return_state=True)
+    >>> gru = keras.layers.GRU(4, return_sequences=True, return_state=True)
     >>> whole_sequence_output, final_state = gru(inputs)
     >>> whole_sequence_output.shape
     (32, 10, 4)
@@ -1082,11 +1082,11 @@ r"-(Gated Recurrent Unit - Cho et al. 2014.
 #'
 #' ```python
 #' inputs = np.random.random((32, 10, 8))
-#' gru = keras_core.layers.GRU(4)
+#' gru = keras.layers.GRU(4)
 #' output = gru(inputs)
 #' output.shape
 #' # (32, 4)
-#' gru = keras_core.layers.GRU(4, return_sequences=True, return_state=True)
+#' gru = keras.layers.GRU(4, return_sequences=True, return_state=True)
 #' whole_sequence_output, final_state = gru(inputs)
 #' whole_sequence_output.shape
 #' # (32, 10, 4)
@@ -1193,7 +1193,7 @@ function (object, units, activation = "tanh", recurrent_activation = "sigmoid",
 r"-(Cell class for the GRU layer.
 
     This class processes one step within the whole time sequence input, whereas
-    `keras_core.layer.GRU` processes the whole sequence.
+    `keras.layer.GRU` processes the whole sequence.
 
     Args:
         units: Positive integer, dimensionality of the output space.
@@ -1244,12 +1244,12 @@ r"-(Cell class for the GRU layer.
     Example:
 
     >>> inputs = np.random.random((32, 10, 8))
-    >>> rnn = keras_core.layers.RNN(keras_core.layers.GRUCell(4))
+    >>> rnn = keras.layers.RNN(keras.layers.GRUCell(4))
     >>> output = rnn(inputs)
     >>> output.shape
     (32, 4)
-    >>> rnn = keras_core.layers.RNN(
-    ...    keras_core.layers.GRUCell(4),
+    >>> rnn = keras.layers.RNN(
+    ...    keras.layers.GRUCell(4),
     ...    return_sequences=True,
     ...    return_state=True)
     >>> whole_sequence_output, final_state = rnn(inputs)
@@ -1265,7 +1265,7 @@ r"-(Cell class for the GRU layer.
 #'
 #' @description
 #' This class processes one step within the whole time sequence input, whereas
-#' `keras_core.layer.GRU` processes the whole sequence.
+#' `keras.layer.GRU` processes the whole sequence.
 #'
 #' # Call Arguments
 #' inputs: A 2D tensor, with shape `(batch, features)`.
@@ -1278,12 +1278,12 @@ r"-(Cell class for the GRU layer.
 #' # Examples
 #' ```python
 #' inputs = np.random.random((32, 10, 8))
-#' rnn = keras_core.layers.RNN(keras_core.layers.GRUCell(4))
+#' rnn = keras.layers.RNN(keras.layers.GRUCell(4))
 #' output = rnn(inputs)
 #' output.shape
 #' # (32, 4)
-#' rnn = keras_core.layers.RNN(
-#'    keras_core.layers.GRUCell(4),
+#' rnn = keras.layers.RNN(
+#'    keras.layers.GRUCell(4),
 #'    return_sequences=True,
 #'    return_state=True)
 #' whole_sequence_output, final_state = rnn(inputs)
@@ -1371,11 +1371,11 @@ r"-(Long Short-Term Memory layer - Hochreiter 1997.
     For example:
 
     >>> inputs = np.random.random((32, 10, 8))
-    >>> lstm = keras_core.layers.LSTM(4)
+    >>> lstm = keras.layers.LSTM(4)
     >>> output = lstm(inputs)
     >>> output.shape
     (32, 4)
-    >>> lstm = keras_core.layers.LSTM(
+    >>> lstm = keras.layers.LSTM(
     ...     4, return_sequences=True, return_state=True)
     >>> whole_seq_output, final_memory_state, final_carry_state = lstm(inputs)
     >>> whole_seq_output.shape
@@ -1487,11 +1487,11 @@ r"-(Long Short-Term Memory layer - Hochreiter 1997.
 #'
 #' ```python
 #' inputs = np.random.random((32, 10, 8))
-#' lstm = keras_core.layers.LSTM(4)
+#' lstm = keras.layers.LSTM(4)
 #' output = lstm(inputs)
 #' output.shape
 #' # (32, 4)
-#' lstm = keras_core.layers.LSTM(
+#' lstm = keras.layers.LSTM(
 #'     4, return_sequences=True, return_state=True)
 #' whole_seq_output, final_memory_state, final_carry_state = lstm(inputs)
 #' whole_seq_output.shape
@@ -1603,7 +1603,7 @@ function (object, units, activation = "tanh", recurrent_activation = "sigmoid",
 r"-(Cell class for the LSTM layer.
 
     This class processes one step within the whole time sequence input, whereas
-    `keras_core.layer.LSTM` processes the whole sequence.
+    `keras.layer.LSTM` processes the whole sequence.
 
     Args:
         units: Positive integer, dimensionality of the output space.
@@ -1656,12 +1656,12 @@ r"-(Cell class for the LSTM layer.
     Example:
 
     >>> inputs = np.random.random((32, 10, 8))
-    >>> rnn = keras_core.layers.RNN(keras_core.layers.LSTMCell(4))
+    >>> rnn = keras.layers.RNN(keras.layers.LSTMCell(4))
     >>> output = rnn(inputs)
     >>> output.shape
     (32, 4)
-    >>> rnn = keras_core.layers.RNN(
-    ...    keras_core.layers.LSTMCell(4),
+    >>> rnn = keras.layers.RNN(
+    ...    keras.layers.LSTMCell(4),
     ...    return_sequences=True,
     ...    return_state=True)
     >>> whole_sequence_output, final_state = rnn(inputs)
@@ -1677,7 +1677,7 @@ r"-(Cell class for the LSTM layer.
 #'
 #' @description
 #' This class processes one step within the whole time sequence input, whereas
-#' `keras_core.layer.LSTM` processes the whole sequence.
+#' `keras.layer.LSTM` processes the whole sequence.
 #'
 #' # Call Arguments
 #' inputs: A 2D tensor, with shape `(batch, features)`.
@@ -1690,12 +1690,12 @@ r"-(Cell class for the LSTM layer.
 #' # Examples
 #' ```python
 #' inputs = np.random.random((32, 10, 8))
-#' rnn = keras_core.layers.RNN(keras_core.layers.LSTMCell(4))
+#' rnn = keras.layers.RNN(keras.layers.LSTMCell(4))
 #' output = rnn(inputs)
 #' output.shape
 #' # (32, 4)
-#' rnn = keras_core.layers.RNN(
-#'    keras_core.layers.LSTMCell(4),
+#' rnn = keras.layers.RNN(
+#'    keras.layers.LSTMCell(4),
 #'    return_sequences=True,
 #'    return_state=True)
 #' whole_sequence_output, final_state = rnn(inputs)
@@ -1845,7 +1845,7 @@ r"-(Base class for recurrent layers.
 
     This layer supports masking for input data with a variable number
     of timesteps. To introduce masks to your data,
-    use a `keras_core.layers.Embedding` layer with the `mask_zero` parameter
+    use a `keras.layers.Embedding` layer with the `mask_zero` parameter
     set to `True`.
 
     Note on using statefulness in RNNs:
@@ -1886,11 +1886,11 @@ r"-(Base class for recurrent layers.
     Examples:
 
     ```python
-    from keras_core.layers import RNN
-    from keras_core import ops
+    from keras.layers import RNN
+    from keras import ops
 
     # First, let's define a RNN Cell, as a layer subclass.
-    class MinimalRNNCell(keras_core.layers.Layer):
+    class MinimalRNNCell(keras.layers.Layer):
 
         def __init__(self, units, **kwargs):
             super().__init__(**kwargs)
@@ -1916,14 +1916,14 @@ r"-(Base class for recurrent layers.
     # Let's use this cell in a RNN layer:
 
     cell = MinimalRNNCell(32)
-    x = keras_core.Input((None, 5))
+    x = keras.Input((None, 5))
     layer = RNN(cell)
     y = layer(x)
 
     # Here's how to use the cell to build a stacked RNN:
 
     cells = [MinimalRNNCell(32), MinimalRNNCell(64)]
-    x = keras_core.Input((None, 5))
+    x = keras.Input((None, 5))
     layer = RNN(cells)
     y = layer(x)
     ```
@@ -1964,7 +1964,7 @@ r"-(Base class for recurrent layers.
 #'
 #' This layer supports masking for input data with a variable number
 #' of timesteps. To introduce masks to your data,
-#' use a `keras_core.layers.Embedding` layer with the `mask_zero` parameter
+#' use a `keras.layers.Embedding` layer with the `mask_zero` parameter
 #' set to `True`.
 #'
 #' Note on using statefulness in RNNs:
@@ -2004,11 +2004,11 @@ r"-(Base class for recurrent layers.
 #'
 #' # Examples
 #' ```python
-#' from keras_core.layers import RNN
-#' from keras_core import ops
+#' from keras.layers import RNN
+#' from keras import ops
 #'
 #' # First, let's define a RNN Cell, as a layer subclass.
-#' class MinimalRNNCell(keras_core.layers.Layer):
+#' class MinimalRNNCell(keras.layers.Layer):
 #'
 #'     def __init__(self, units, **kwargs):
 #'         super().__init__(**kwargs)
@@ -2034,14 +2034,14 @@ r"-(Base class for recurrent layers.
 #' # Let's use this cell in a RNN layer:
 #'
 #' cell = MinimalRNNCell(32)
-#' x = keras_core.Input((None, 5))
+#' x = keras.Input((None, 5))
 #' layer = RNN(cell)
 #' y = layer(x)
 #'
 #' # Here's how to use the cell to build a stacked RNN:
 #'
 #' cells = [MinimalRNNCell(32), MinimalRNNCell(64)]
-#' x = keras_core.Input((None, 5))
+#' x = keras.Input((None, 5))
 #' layer = RNN(cells)
 #' y = layer(x)
 #' ```
@@ -2184,9 +2184,9 @@ r"-(Fully-connected RNN where the output is to be fed back as the new input.
 
     ```python
     inputs = np.random.random((32, 10, 8))
-    simple_rnn = keras_core.layers.SimpleRNN(4)
+    simple_rnn = keras.layers.SimpleRNN(4)
     output = simple_rnn(inputs)  # The output has shape `(32, 4)`.
-    simple_rnn = keras_core.layers.SimpleRNN(
+    simple_rnn = keras.layers.SimpleRNN(
         4, return_sequences=True, return_state=True
     )
     # whole_sequence_output has shape `(32, 10, 4)`.
@@ -2218,9 +2218,9 @@ r"-(Fully-connected RNN where the output is to be fed back as the new input.
 #' # Examples
 #' ```python
 #' inputs = np.random.random((32, 10, 8))
-#' simple_rnn = keras_core.layers.SimpleRNN(4)
+#' simple_rnn = keras.layers.SimpleRNN(4)
 #' output = simple_rnn(inputs)  # The output has shape `(32, 4)`.
-#' simple_rnn = keras_core.layers.SimpleRNN(
+#' simple_rnn = keras.layers.SimpleRNN(
 #'     4, return_sequences=True, return_state=True
 #' )
 #' # whole_sequence_output has shape `(32, 10, 4)`.
@@ -2305,7 +2305,7 @@ function (object, units, activation = "tanh", use_bias = TRUE,
 r"-(Cell class for SimpleRNN.
 
     This class processes one step within the whole time sequence input, whereas
-    `keras_core.layer.SimpleRNN` processes the whole sequence.
+    `keras.layer.SimpleRNN` processes the whole sequence.
 
     Args:
         units: Positive integer, dimensionality of the output space.
@@ -2352,10 +2352,10 @@ r"-(Cell class for SimpleRNN.
 
     ```python
     inputs = np.random.random([32, 10, 8]).astype(np.float32)
-    rnn = keras_core.layers.RNN(keras_core.layers.SimpleRNNCell(4))
+    rnn = keras.layers.RNN(keras.layers.SimpleRNNCell(4))
     output = rnn(inputs)  # The output has shape `(32, 4)`.
-    rnn = keras_core.layers.RNN(
-        keras_core.layers.SimpleRNNCell(4),
+    rnn = keras.layers.RNN(
+        keras.layers.SimpleRNNCell(4),
         return_sequences=True,
         return_state=True
     )
@@ -2371,7 +2371,7 @@ r"-(Cell class for SimpleRNN.
 #'
 #' @description
 #' This class processes one step within the whole time sequence input, whereas
-#' `keras_core.layer.SimpleRNN` processes the whole sequence.
+#' `keras.layer.SimpleRNN` processes the whole sequence.
 #'
 #' # Call Arguments
 #' sequence: A 2D tensor, with shape `(batch, features)`.
@@ -2384,10 +2384,10 @@ r"-(Cell class for SimpleRNN.
 #' # Examples
 #' ```python
 #' inputs = np.random.random([32, 10, 8]).astype(np.float32)
-#' rnn = keras_core.layers.RNN(keras_core.layers.SimpleRNNCell(4))
+#' rnn = keras.layers.RNN(keras.layers.SimpleRNNCell(4))
 #' output = rnn(inputs)  # The output has shape `(32, 4)`.
-#' rnn = keras_core.layers.RNN(
-#'     keras_core.layers.SimpleRNNCell(4),
+#' rnn = keras.layers.RNN(
+#'     keras.layers.SimpleRNNCell(4),
 #'     return_sequences=True,
 #'     return_state=True
 #' )
@@ -2464,9 +2464,9 @@ r"-(Wrapper allowing a stack of RNN cells to behave as a single cell.
     new_shape = (batch_size, sentence_length, num_features)
     x = np.reshape(np.arange(30), new_shape)
 
-    rnn_cells = [keras_core.layers.LSTMCell(128) for _ in range(2)]
-    stacked_lstm = keras_core.layers.StackedRNNCells(rnn_cells)
-    lstm_layer = keras_core.layers.RNN(stacked_lstm)
+    rnn_cells = [keras.layers.LSTMCell(128) for _ in range(2)]
+    stacked_lstm = keras.layers.StackedRNNCells(rnn_cells)
+    lstm_layer = keras.layers.RNN(stacked_lstm)
 
     result = lstm_layer(x)
     ```
@@ -2487,9 +2487,9 @@ r"-(Wrapper allowing a stack of RNN cells to behave as a single cell.
 #' new_shape = (batch_size, sentence_length, num_features)
 #' x = np.reshape(np.arange(30), new_shape)
 #'
-#' rnn_cells = [keras_core.layers.LSTMCell(128) for _ in range(2)]
-#' stacked_lstm = keras_core.layers.StackedRNNCells(rnn_cells)
-#' lstm_layer = keras_core.layers.RNN(stacked_lstm)
+#' rnn_cells = [keras.layers.LSTMCell(128) for _ in range(2)]
+#' stacked_lstm = keras.layers.StackedRNNCells(rnn_cells)
+#' lstm_layer = keras.layers.RNN(stacked_lstm)
 #'
 #' result = lstm_layer(x)
 #' ```
@@ -2533,7 +2533,7 @@ r"-(This wrapper allows to apply a layer to every temporal slice of an input.
     the timestamps, the same set of weights are used at each timestamp.
 
     Args:
-        layer: a `keras_core.layers.Layer` instance.
+        layer: a `keras.layers.Layer` instance.
 
     Call arguments:
         inputs: Input tensor of shape (batch, time, ...) or nested tensors,
@@ -2582,7 +2582,7 @@ r"-(This wrapper allows to apply a layer to every temporal slice of an input.
 #'     a given timestep should be masked. This argument is passed to the
 #'     wrapped layer (only if the layer supports this argument).
 #'
-#' @param layer a `keras_core.layers.Layer` instance.
+#' @param layer a `keras.layers.Layer` instance.
 #'
 #' @export
 #' @family recurrent layers

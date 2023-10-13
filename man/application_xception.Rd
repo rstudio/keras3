@@ -68,7 +68,7 @@ For transfer learning use cases, make sure to read the
 The default input image size for this model is 299x299.
 
 Note: each Keras Application expects a specific kind of input preprocessing.
-For Xception, call \code{keras_core.applications.xception.preprocess_input}
+For Xception, call \code{keras.applications.xception.preprocess_input}
 on your inputs before passing them to the model.
 \code{xception.preprocess_input} will scale input pixels between -1 and 1.
 }

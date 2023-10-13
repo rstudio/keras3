@@ -44,7 +44,7 @@ print(x)
 #   [[ 3  4  5]]]
 #  [[[ 6  7  8]]
 #   [[ 9 10 11]]]]
-y = keras_core.layers.UpSampling2D(size=(1, 2))(x)
+y = keras.layers.UpSampling2D(size=(1, 2))(x)
 print(y)
 # [[[[ 0  1  2]
 #    [ 0  1  2]]

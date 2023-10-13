@@ -135,11 +135,11 @@ The requirements to use the cuDNN implementation are:
 For example:
 
 \if{html}{\out{<div class="sourceCode python">}}\preformatted{inputs = np.random.random((32, 10, 8))
-lstm = keras_core.layers.LSTM(4)
+lstm = keras.layers.LSTM(4)
 output = lstm(inputs)
 output.shape
 # (32, 4)
-lstm = keras_core.layers.LSTM(
+lstm = keras.layers.LSTM(
     4, return_sequences=True, return_state=True)
 whole_seq_output, final_memory_state, final_carry_state = lstm(inputs)
 whole_seq_output.shape

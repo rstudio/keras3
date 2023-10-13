@@ -18,8 +18,8 @@ Tensor of the inverse tangent of each element in \code{x}, in the interval
 }
 
 \section{Examples}{
-\if{html}{\out{<div class="sourceCode python">}}\preformatted{x = keras_core.ops.convert_to_tensor([0, 1])
-keras_core.ops.arctan(x)
+\if{html}{\out{<div class="sourceCode python">}}\preformatted{x = keras.ops.convert_to_tensor([0, 1])
+keras.ops.arctan(x)
 # array([0., 0.7853982], dtype=float32)
 }\if{html}{\out{</div>}}
 }
@@ -83,6 +83,7 @@ Other ops:
 \code{\link{k_elu}()},
 \code{\link{k_empty}()},
 \code{\link{k_equal}()},
+\code{\link{k_erf}()},
 \code{\link{k_expand_dims}()},
 \code{\link{k_expm_1}()},
 \code{\link{k_exp}()},
@@ -164,6 +165,7 @@ Other ops:
 \code{\link{k_rfft}()},
 \code{\link{k_roll}()},
 \code{\link{k_round}()},
+\code{\link{k_rsqrt}()},
 \code{\link{k_scatter_update}()},
 \code{\link{k_scatter}()},
 \code{\link{k_segment_max}()},

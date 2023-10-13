@@ -4,7 +4,7 @@
 \alias{layer_torch_module_wrapper}
 \title{Torch module wrapper layer.}
 \usage{
-layer_torch_module_wrapper(object, module, name = NULL)
+layer_torch_module_wrapper(object, module, name = NULL, ...)
 }
 \arguments{
 \item{module}{\code{torch.nn.Module} instance. If it's a \code{LazyModule}
@@ -26,12 +26,12 @@ PyTorch modules.
 \if{html}{\out{<div class="sourceCode python">}}\preformatted{import torch.nn as nn
 import torch.nn.functional as F
 
-import keras_core
-from keras_core.layers import TorchModuleWrapper
+import keras
+from keras.layers import TorchModuleWrapper
 
-class Classifier(keras_core.Model):
-    def __init__(self, *args, **kwargs):
-        super().__init__(*args, **kwargs)
+class Classifier(keras.Model):
+    def __init__(self, **kwargs):
+        super().__init__(**kwargs)
         # Wrap `torch.nn.Module`s with `TorchModuleWrapper`
         # if they contain parameters
         self.conv1 = TorchModuleWrapper(

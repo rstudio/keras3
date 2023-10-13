@@ -8,7 +8,7 @@ r"-(MaxNorm weight constraint.
     Constrains the weights incident to each hidden unit
     to have a norm less than or equal to a desired value.
 
-    Also available via the shortcut function `keras_core.constraints.max_norm`.
+    Also available via the shortcut function `keras.constraints.max_norm`.
 
     Args:
         max_value: the maximum norm value for the incoming weights.
@@ -34,7 +34,7 @@ r"-(MaxNorm weight constraint.
 #' Constrains the weights incident to each hidden unit
 #' to have a norm less than or equal to a desired value.
 #'
-#' Also available via the shortcut function `keras_core.constraints.max_norm`.
+#' Also available via the shortcut function `keras.constraints.max_norm`.
 #'
 #' @param max_value the maximum norm value for the incoming weights.
 #' @param axis integer, axis along which to calculate weight norms.

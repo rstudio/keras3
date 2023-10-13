@@ -8,7 +8,7 @@ layer_activation(object, activation, ...)
 }
 \arguments{
 \item{activation}{Activation function. It could be a callable, or the name of
-an activation from the \code{keras_core.activations} namespace.}
+an activation from the \code{keras.activations} namespace.}
 
 \item{...}{Base layer keyword arguments, such as \code{name} and \code{dtype}.}
 }
@@ -16,10 +16,10 @@ an activation from the \code{keras_core.activations} namespace.}
 Applies an activation function to an output.
 }
 \section{Examples}{
-\if{html}{\out{<div class="sourceCode python">}}\preformatted{layer = keras_core.layers.Activation('relu')
+\if{html}{\out{<div class="sourceCode python">}}\preformatted{layer = keras.layers.Activation('relu')
 layer([-3.0, -1.0, 0.0, 2.0])
 # [0.0, 0.0, 0.0, 2.0]
-layer = keras_core.layers.Activation(keras_core.activations.relu)
+layer = keras.layers.Activation(keras.activations.relu)
 layer([-3.0, -1.0, 0.0, 2.0])
 # [0.0, 0.0, 0.0, 2.0]
 }\if{html}{\out{</div>}}

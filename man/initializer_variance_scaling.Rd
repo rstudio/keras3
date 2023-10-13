@@ -20,13 +20,13 @@ initializer_variance_scaling(
 One of \code{"truncated_normal"}, \code{"untruncated_normal"}, or \code{"uniform"}.}
 
 \item{seed}{A Python integer or instance of
-\code{keras_core.backend.SeedGenerator}.
+\code{keras.backend.SeedGenerator}.
 Used to make the behavior of the initializer
 deterministic. Note that an initializer seeded with an integer
 or \code{None} (unseeded) will produce the same random values
 across multiple calls. To get different random values
 across multiple calls, use as seed an instance
-of \code{keras_core.backend.SeedGenerator}.}
+of \code{keras.backend.SeedGenerator}.}
 }
 \description{
 With \verb{distribution="truncated_normal" or "untruncated_normal"}, samples are

@@ -30,6 +30,7 @@ model.fit(X_train, Y_train, callbacks=[csv_logger])
 }
 
 Other callback: 
+\code{\link{callback_backup_and_restore}()},
 \code{\link{callback_early_stopping}()},
 \code{\link{callback_lambda}()},
 \code{\link{callback_learning_rate_scheduler}()},

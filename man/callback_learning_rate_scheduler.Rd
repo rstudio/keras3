@@ -28,13 +28,13 @@ def scheduler(epoch, lr):
     else:
         return lr * ops.exp(-0.1)
 # >>>
-model = keras_core.models.Sequential([keras_core.layers.Dense(10)])
-model.compile(keras_core.optimizers.SGD(), loss='mse')
+model = keras.models.Sequential([keras.layers.Dense(10)])
+model.compile(keras.optimizers.SGD(), loss='mse')
 round(model.optimizer.learning_rate, 5)
 # 0.01
 }\if{html}{\out{</div>}}
 
-\if{html}{\out{<div class="sourceCode python">}}\preformatted{callback = keras_core.callbacks.LearningRateScheduler(scheduler)
+\if{html}{\out{<div class="sourceCode python">}}\preformatted{callback = keras.callbacks.LearningRateScheduler(scheduler)
 history = model.fit(np.arange(100).reshape(5, 20), np.zeros(5),
                     epochs=15, callbacks=[callback], verbose=0)
 round(model.optimizer.learning_rate, 5)
@@ -48,6 +48,7 @@ round(model.optimizer.learning_rate, 5)
 }
 
 Other callback: 
+\code{\link{callback_backup_and_restore}()},
 \code{\link{callback_csv_logger}()},
 \code{\link{callback_early_stopping}()},
 \code{\link{callback_lambda}()},

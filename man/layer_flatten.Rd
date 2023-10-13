@@ -21,8 +21,8 @@ Note: If inputs are shaped \verb{(batch,)} without a feature axis, then
 flattening adds an extra channel dimension and output shape is \verb{(batch, 1)}.
 }
 \section{Examples}{
-\if{html}{\out{<div class="sourceCode python">}}\preformatted{x = keras_core.Input(shape=(10, 64))
-y = keras_core.layers.Flatten()(x)
+\if{html}{\out{<div class="sourceCode python">}}\preformatted{x = keras.Input(shape=(10, 64))
+y = keras.layers.Flatten()(x)
 y.shape
 # (None, 640)
 }\if{html}{\out{</div>}}

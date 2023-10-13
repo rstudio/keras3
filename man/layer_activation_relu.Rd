@@ -34,7 +34,7 @@ f(x) = negative_slope * (x - threshold) otherwise
 }\if{html}{\out{</div>}}
 }
 \section{Examples}{
-\if{html}{\out{<div class="sourceCode python">}}\preformatted{relu_layer = keras_core.layers.activations.ReLU(
+\if{html}{\out{<div class="sourceCode python">}}\preformatted{relu_layer = keras.layers.activations.ReLU(
     max_value=10,
     negative_slope=0.5,
     threshold=0,

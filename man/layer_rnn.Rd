@@ -107,7 +107,7 @@ Masking:
 
 This layer supports masking for input data with a variable number
 of timesteps. To introduce masks to your data,
-use a \code{keras_core.layers.Embedding} layer with the \code{mask_zero} parameter
+use a \code{keras.layers.Embedding} layer with the \code{mask_zero} parameter
 set to \code{True}.
 
 Note on using statefulness in RNNs:
@@ -148,11 +148,11 @@ the initial state of the RNN layer.
 }
 
 \section{Examples}{
-\if{html}{\out{<div class="sourceCode python">}}\preformatted{from keras_core.layers import RNN
-from keras_core import ops
+\if{html}{\out{<div class="sourceCode python">}}\preformatted{from keras.layers import RNN
+from keras import ops
 
 # First, let's define a RNN Cell, as a layer subclass.
-class MinimalRNNCell(keras_core.layers.Layer):
+class MinimalRNNCell(keras.layers.Layer):
 
     def __init__(self, units, **kwargs):
         super().__init__(**kwargs)
@@ -178,14 +178,14 @@ class MinimalRNNCell(keras_core.layers.Layer):
 # Let's use this cell in a RNN layer:
 
 cell = MinimalRNNCell(32)
-x = keras_core.Input((None, 5))
+x = keras.Input((None, 5))
 layer = RNN(cell)
 y = layer(x)
 
 # Here's how to use the cell to build a stacked RNN:
 
 cells = [MinimalRNNCell(32), MinimalRNNCell(64)]
-x = keras_core.Input((None, 5))
+x = keras.Input((None, 5))
 layer = RNN(cells)
 y = layer(x)
 }\if{html}{\out{</div>}}

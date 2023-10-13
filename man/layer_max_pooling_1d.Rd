@@ -66,7 +66,7 @@ The resulting output shape when using the \code{"same"} padding option is:
 
 \if{html}{\out{<div class="sourceCode python">}}\preformatted{x = np.array([1., 2., 3., 4., 5.])
 x = np.reshape(x, [1, 5, 1])
-max_pool_1d = keras_core.layers.MaxPooling1D(pool_size=2,
+max_pool_1d = keras.layers.MaxPooling1D(pool_size=2,
    strides=1, padding="valid")
 max_pool_1d(x)
 }\if{html}{\out{</div>}}
@@ -75,7 +75,7 @@ max_pool_1d(x)
 
 \if{html}{\out{<div class="sourceCode python">}}\preformatted{x = np.array([1., 2., 3., 4., 5.])
 x = np.reshape(x, [1, 5, 1])
-max_pool_1d = keras_core.layers.MaxPooling1D(pool_size=2,
+max_pool_1d = keras.layers.MaxPooling1D(pool_size=2,
    strides=2, padding="valid")
 max_pool_1d(x)
 }\if{html}{\out{</div>}}
@@ -84,7 +84,7 @@ max_pool_1d(x)
 
 \if{html}{\out{<div class="sourceCode python">}}\preformatted{x = np.array([1., 2., 3., 4., 5.])
 x = np.reshape(x, [1, 5, 1])
-max_pool_1d = keras_core.layers.MaxPooling1D(pool_size=2,
+max_pool_1d = keras.layers.MaxPooling1D(pool_size=2,
    strides=1, padding="same")
 max_pool_1d(x)
 }\if{html}{\out{</div>}}

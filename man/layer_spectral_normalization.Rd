@@ -7,7 +7,7 @@
 layer_spectral_normalization(object, layer, power_iterations = 1L, ...)
 }
 \arguments{
-\item{layer}{A \code{keras_core.layers.Layer} instance that
+\item{layer}{A \code{keras.layers.Layer} instance that
 has either a \code{kernel} (e.g. \code{Conv2D}, \code{Dense}...)
 or an \code{embeddings} attribute (\code{Embedding} layer).}
 
@@ -20,19 +20,19 @@ This wrapper controls the Lipschitz constant of the weights of a layer by
 constraining their spectral norm, which can stabilize the training of GANs.
 }
 \section{Examples}{
-Wrap \code{keras_core.layers.Conv2D}:
+Wrap \code{keras.layers.Conv2D}:
 
 \if{html}{\out{<div class="sourceCode python">}}\preformatted{x = np.random.rand(1, 10, 10, 1)
-conv2d = SpectralNormalization(keras_core.layers.Conv2D(2, 2))
+conv2d = SpectralNormalization(keras.layers.Conv2D(2, 2))
 y = conv2d(x)
 y.shape
 # (1, 9, 9, 2)
 }\if{html}{\out{</div>}}
 
-Wrap \code{keras_core.layers.Dense}:
+Wrap \code{keras.layers.Dense}:
 
 \if{html}{\out{<div class="sourceCode python">}}\preformatted{x = np.random.rand(1, 10, 10, 1)
-dense = SpectralNormalization(keras_core.layers.Dense(10))
+dense = SpectralNormalization(keras.layers.Dense(10))
 y = dense(x)
 y.shape
 # (1, 10, 10, 10)

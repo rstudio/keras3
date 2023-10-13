@@ -35,7 +35,7 @@ x = np.arange(np.prod(input_shape)).reshape(input_shape)
 x
 # [[[[0 1]
 #    [2 3]]]]
-y = keras_core.layers.ZeroPadding2D(padding=1)(x)
+y = keras.layers.ZeroPadding2D(padding=1)(x)
 y
 # [[[[0 0]
 #    [0 0]

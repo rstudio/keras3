@@ -83,7 +83,7 @@ r"-(1D convolution layer (e.g. temporal convolution).
     >>> # The inputs are 128-length vectors with 10 timesteps, and the
     >>> # batch size is 4.
     >>> x = np.random.rand(4, 10, 128)
-    >>> y = keras_core.layers.Conv1D(32, 3, activation='relu')(x)
+    >>> y = keras.layers.Conv1D(32, 3, activation='relu')(x)
     >>> print(y.shape)
     (4, 8, 32)
     )-"
@@ -122,7 +122,7 @@ r"-(1D convolution layer (e.g. temporal convolution).
 #' # The inputs are 128-length vectors with 10 timesteps, and the
 #' # batch size is 4.
 #' x = np.random.rand(4, 10, 128)
-#' y = keras_core.layers.Conv1D(32, 3, activation='relu')(x)
+#' y = keras.layers.Conv1D(32, 3, activation='relu')(x)
 #' print(y.shape)
 #' # (4, 8, 32)
 #' ```
@@ -271,7 +271,7 @@ r"-(1D transposed convolution layer.
     Examples:
 
     >>> x = np.random.rand(4, 10, 128)
-    >>> y = keras_core.layers.Conv1DTranspose(32, 3, 2, activation='relu')(x)
+    >>> y = keras.layers.Conv1DTranspose(32, 3, 2, activation='relu')(x)
     >>> print(y.shape)
     (4, 21, 32)
     )-"
@@ -315,7 +315,7 @@ r"-(1D transposed convolution layer.
 #' # Examples
 #' ```python
 #' x = np.random.rand(4, 10, 128)
-#' y = keras_core.layers.Conv1DTranspose(32, 3, 2, activation='relu')(x)
+#' y = keras.layers.Conv1DTranspose(32, 3, 2, activation='relu')(x)
 #' print(y.shape)
 #' # (4, 21, 32)
 #' ```
@@ -454,7 +454,7 @@ r"-(2D convolution layer.
     Examples:
 
     >>> x = np.random.rand(4, 10, 10, 128)
-    >>> y = keras_core.layers.Conv2D(32, 3, activation='relu')(x)
+    >>> y = keras.layers.Conv2D(32, 3, activation='relu')(x)
     >>> print(y.shape)
     (4, 8, 8, 32)
     )-"
@@ -491,7 +491,7 @@ r"-(2D convolution layer.
 #' # Examples
 #' ```python
 #' x = np.random.rand(4, 10, 10, 128)
-#' y = keras_core.layers.Conv2D(32, 3, activation='relu')(x)
+#' y = keras.layers.Conv2D(32, 3, activation='relu')(x)
 #' print(y.shape)
 #' # (4, 8, 8, 32)
 #' ```
@@ -640,7 +640,7 @@ r"-(2D transposed convolution layer.
     Examples:
 
     >>> x = np.random.rand(4, 10, 8, 128)
-    >>> y = keras_core.layers.Conv2DTranspose(32, 2, 2, activation='relu')(x)
+    >>> y = keras.layers.Conv2DTranspose(32, 2, 2, activation='relu')(x)
     >>> print(y.shape)
     (4, 20, 16, 32)
     )-"
@@ -684,7 +684,7 @@ r"-(2D transposed convolution layer.
 #' # Examples
 #' ```python
 #' x = np.random.rand(4, 10, 8, 128)
-#' y = keras_core.layers.Conv2DTranspose(32, 2, 2, activation='relu')(x)
+#' y = keras.layers.Conv2DTranspose(32, 2, 2, activation='relu')(x)
 #' print(y.shape)
 #' # (4, 20, 16, 32)
 #' ```
@@ -832,7 +832,7 @@ r"-(3D convolution layer.
     Examples:
 
     >>> x = np.random.rand(4, 10, 10, 10, 128)
-    >>> y = keras_core.layers.Conv3D(32, 3, activation='relu')(x)
+    >>> y = keras.layers.Conv3D(32, 3, activation='relu')(x)
     >>> print(y.shape)
     (4, 8, 8, 8, 32)
     )-"
@@ -875,7 +875,7 @@ r"-(3D convolution layer.
 #' # Examples
 #' ```python
 #' x = np.random.rand(4, 10, 10, 10, 128)
-#' y = keras_core.layers.Conv3D(32, 3, activation='relu')(x)
+#' y = keras.layers.Conv3D(32, 3, activation='relu')(x)
 #' print(y.shape)
 #' # (4, 8, 8, 8, 32)
 #' ```
@@ -1029,7 +1029,7 @@ r"-(3D transposed convolution layer.
     Examples:
 
     >>> x = np.random.rand(4, 10, 8, 12, 128)
-    >>> y = keras_core.layers.Conv3DTranspose(32, 2, 2, activation='relu')(x)
+    >>> y = keras.layers.Conv3DTranspose(32, 2, 2, activation='relu')(x)
     >>> print(y.shape)
     (4, 20, 16, 24, 32)
     )-"
@@ -1078,7 +1078,7 @@ r"-(3D transposed convolution layer.
 #' # Examples
 #' ```python
 #' x = np.random.rand(4, 10, 8, 12, 128)
-#' y = keras_core.layers.Conv3DTranspose(32, 2, 2, activation='relu')(x)
+#' y = keras.layers.Conv3DTranspose(32, 2, 2, activation='relu')(x)
 #' print(y.shape)
 #' # (4, 20, 16, 24, 32)
 #' ```
@@ -1231,7 +1231,7 @@ r"-(1D depthwise convolution layer.
     Examples:
 
     >>> x = np.random.rand(4, 10, 12)
-    >>> y = keras_core.layers.DepthwiseConv1D(3, 3, 2, activation='relu')(x)
+    >>> y = keras.layers.DepthwiseConv1D(3, 3, 2, activation='relu')(x)
     >>> print(y.shape)
     (4, 4, 36)
     )-"
@@ -1284,7 +1284,7 @@ r"-(1D depthwise convolution layer.
 #' # Examples
 #' ```python
 #' x = np.random.rand(4, 10, 12)
-#' y = keras_core.layers.DepthwiseConv1D(3, 3, 2, activation='relu')(x)
+#' y = keras.layers.DepthwiseConv1D(3, 3, 2, activation='relu')(x)
 #' print(y.shape)
 #' # (4, 4, 36)
 #' ```
@@ -1437,7 +1437,7 @@ r"-(2D depthwise convolution layer.
     Examples:
 
     >>> x = np.random.rand(4, 10, 10, 12)
-    >>> y = keras_core.layers.DepthwiseConv2D(3, 3, activation='relu')(x)
+    >>> y = keras.layers.DepthwiseConv2D(3, 3, activation='relu')(x)
     >>> print(y.shape)
     (4, 8, 8, 36)
     )-"
@@ -1490,7 +1490,7 @@ r"-(2D depthwise convolution layer.
 #' # Examples
 #' ```python
 #' x = np.random.rand(4, 10, 10, 12)
-#' y = keras_core.layers.DepthwiseConv2D(3, 3, activation='relu')(x)
+#' y = keras.layers.DepthwiseConv2D(3, 3, activation='relu')(x)
 #' print(y.shape)
 #' # (4, 8, 8, 36)
 #' ```
@@ -1636,7 +1636,7 @@ r"-(1D separable convolution layer.
     Examples:
 
     >>> x = np.random.rand(4, 10, 12)
-    >>> y = keras_core.layers.SeparableConv1D(3, 4, 3, 2, activation='relu')(x)
+    >>> y = keras.layers.SeparableConv1D(3, 4, 3, 2, activation='relu')(x)
     >>> print(y.shape)
     (4, 4, 4)
     )-"
@@ -1671,7 +1671,7 @@ r"-(1D separable convolution layer.
 #' # Examples
 #' ```python
 #' x = np.random.rand(4, 10, 12)
-#' y = keras_core.layers.SeparableConv1D(3, 4, 3, 2, activation='relu')(x)
+#' y = keras.layers.SeparableConv1D(3, 4, 3, 2, activation='relu')(x)
 #' print(y.shape)
 #' # (4, 4, 4)
 #' ```
@@ -1829,7 +1829,7 @@ r"-(2D separable convolution layer.
     Examples:
 
     >>> x = np.random.rand(4, 10, 10, 12)
-    >>> y = keras_core.layers.SeparableConv2D(3, 4, 3, 2, activation='relu')(x)
+    >>> y = keras.layers.SeparableConv2D(3, 4, 3, 2, activation='relu')(x)
     >>> print(y.shape)
     (4, 4, 4, 4)
     )-"
@@ -1864,7 +1864,7 @@ r"-(2D separable convolution layer.
 #' # Examples
 #' ```python
 #' x = np.random.rand(4, 10, 10, 12)
-#' y = keras_core.layers.SeparableConv2D(3, 4, 3, 2, activation='relu')(x)
+#' y = keras.layers.SeparableConv2D(3, 4, 3, 2, activation='relu')(x)
 #' print(y.shape)
 #' # (4, 4, 4, 4)
 #' ```

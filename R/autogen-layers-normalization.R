@@ -401,7 +401,7 @@ r"-(Layer normalization layer (Ba et al., 2016).
 
     For example:
 
-    >>> layer = keras_core.layers.LayerNormalization(axis=[1, 2, 3])
+    >>> layer = keras.layers.LayerNormalization(axis=[1, 2, 3])
     >>> layer.build([5, 20, 30, 40])
     >>> print(layer.beta.shape)
     (20, 30, 40)
@@ -501,7 +501,7 @@ r"-(Layer normalization layer (Ba et al., 2016).
 #' For example:
 #'
 #' ```python
-#' layer = keras_core.layers.LayerNormalization(axis=[1, 2, 3])
+#' layer = keras.layers.LayerNormalization(axis=[1, 2, 3])
 #' layer.build([5, 20, 30, 40])
 #' print(layer.beta.shape)
 #' # (20, 30, 40)
@@ -574,7 +574,7 @@ r"-(Performs spectral normalization on the weights of a target layer.
     constraining their spectral norm, which can stabilize the training of GANs.
 
     Args:
-        layer: A `keras_core.layers.Layer` instance that
+        layer: A `keras.layers.Layer` instance that
             has either a `kernel` (e.g. `Conv2D`, `Dense`...)
             or an `embeddings` attribute (`Embedding` layer).
         power_iterations: int, the number of iterations during normalization.
@@ -582,16 +582,16 @@ r"-(Performs spectral normalization on the weights of a target layer.
 
     Examples:
 
-    Wrap `keras_core.layers.Conv2D`:
+    Wrap `keras.layers.Conv2D`:
     >>> x = np.random.rand(1, 10, 10, 1)
-    >>> conv2d = SpectralNormalization(keras_core.layers.Conv2D(2, 2))
+    >>> conv2d = SpectralNormalization(keras.layers.Conv2D(2, 2))
     >>> y = conv2d(x)
     >>> y.shape
     (1, 9, 9, 2)
 
-    Wrap `keras_core.layers.Dense`:
+    Wrap `keras.layers.Dense`:
     >>> x = np.random.rand(1, 10, 10, 1)
-    >>> dense = SpectralNormalization(keras_core.layers.Dense(10))
+    >>> dense = SpectralNormalization(keras.layers.Dense(10))
     >>> y = dense(x)
     >>> y.shape
     (1, 10, 10, 10)
@@ -610,19 +610,19 @@ r"-(Performs spectral normalization on the weights of a target layer.
 #' constraining their spectral norm, which can stabilize the training of GANs.
 #'
 #' # Examples
-#' Wrap `keras_core.layers.Conv2D`:
+#' Wrap `keras.layers.Conv2D`:
 #' ```python
 #' x = np.random.rand(1, 10, 10, 1)
-#' conv2d = SpectralNormalization(keras_core.layers.Conv2D(2, 2))
+#' conv2d = SpectralNormalization(keras.layers.Conv2D(2, 2))
 #' y = conv2d(x)
 #' y.shape
 #' # (1, 9, 9, 2)
 #' ```
 #'
-#' Wrap `keras_core.layers.Dense`:
+#' Wrap `keras.layers.Dense`:
 #' ```python
 #' x = np.random.rand(1, 10, 10, 1)
-#' dense = SpectralNormalization(keras_core.layers.Dense(10))
+#' dense = SpectralNormalization(keras.layers.Dense(10))
 #' y = dense(x)
 #' y.shape
 #' # (1, 10, 10, 10)
@@ -631,7 +631,7 @@ r"-(Performs spectral normalization on the weights of a target layer.
 #' # Reference
 #' - [Spectral Normalization for GAN](https://arxiv.org/abs/1802.05957).
 #'
-#' @param layer A `keras_core.layers.Layer` instance that
+#' @param layer A `keras.layers.Layer` instance that
 #'     has either a `kernel` (e.g. `Conv2D`, `Dense`...)
 #'     or an `embeddings` attribute (`Embedding` layer).
 #' @param power_iterations int, the number of iterations during normalization.
@@ -662,7 +662,7 @@ r"-(Unit normalization layer.
     Example:
 
     >>> data = np.arange(6).reshape(2, 3)
-    >>> normalized_data = keras_core.layers.UnitNormalization()(data)
+    >>> normalized_data = keras.layers.UnitNormalization()(data)
     >>> print(np.sum(normalized_data[0, :] ** 2)
     1.0
 
@@ -684,7 +684,7 @@ r"-(Unit normalization layer.
 #' # Examples
 #' ```python
 #' data = np.arange(6).reshape(2, 3)
-#' normalized_data = keras_core.layers.UnitNormalization()(data)
+#' normalized_data = keras.layers.UnitNormalization()(data)
 #' print(np.sum(normalized_data[0, :] ** 2)
 #' # 1.0
 #' ```

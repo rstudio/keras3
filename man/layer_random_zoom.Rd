@@ -100,7 +100,7 @@ in \code{"channels_first"} format.
 
 \section{Examples}{
 \if{html}{\out{<div class="sourceCode python">}}\preformatted{input_img = np.random.random((32, 224, 224, 3))
-layer = keras_core.layers.RandomZoom(.5, .2)
+layer = keras.layers.RandomZoom(.5, .2)
 out_img = layer(input_img)
 }\if{html}{\out{</div>}}
 }

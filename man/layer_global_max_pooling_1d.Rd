@@ -51,7 +51,7 @@ Global max pooling operation for temporal data.
 
 \section{Examples}{
 \if{html}{\out{<div class="sourceCode python">}}\preformatted{x = np.random.rand(2, 3, 4)
-y = keras_core.layers.GlobalMaxPooling1D()(x)
+y = keras.layers.GlobalMaxPooling1D()(x)
 y.shape
 # (2, 4)
 }\if{html}{\out{</div>}}

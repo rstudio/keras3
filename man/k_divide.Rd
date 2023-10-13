@@ -12,7 +12,7 @@ k_divide(x1, x2)
 \item{x2}{Second input tensor.}
 }
 \description{
-\code{keras_core.ops.true_divide} is an alias for this function.
+\code{keras.ops.true_divide} is an alias for this function.
 }
 \section{Returns}{
 \if{html}{\out{<div class="sourceCode">}}\preformatted{Output tensor, the quotient `x1/x2`, element-wise.
@@ -78,6 +78,7 @@ Other ops:
 \code{\link{k_elu}()},
 \code{\link{k_empty}()},
 \code{\link{k_equal}()},
+\code{\link{k_erf}()},
 \code{\link{k_expand_dims}()},
 \code{\link{k_expm_1}()},
 \code{\link{k_exp}()},
@@ -159,6 +160,7 @@ Other ops:
 \code{\link{k_rfft}()},
 \code{\link{k_roll}()},
 \code{\link{k_round}()},
+\code{\link{k_rsqrt}()},
 \code{\link{k_scatter_update}()},
 \code{\link{k_scatter}()},
 \code{\link{k_segment_max}()},

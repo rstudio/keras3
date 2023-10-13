@@ -32,16 +32,16 @@ minlength.
 }
 
 \section{Examples}{
-\if{html}{\out{<div class="sourceCode python">}}\preformatted{x = keras_core.ops.array([1, 2, 2, 3], dtype="uint8")
-keras_core.ops.bincount(x)
+\if{html}{\out{<div class="sourceCode python">}}\preformatted{x = keras.ops.array([1, 2, 2, 3], dtype="uint8")
+keras.ops.bincount(x)
 # array([0, 1, 2, 1], dtype=int32)
 weights = x / 2
 weights
 # array([0.5, 1., 1., 1.5], dtype=float64)
-keras_core.ops.bincount(x, weights=weights)
+keras.ops.bincount(x, weights=weights)
 # array([0., 0.5, 2., 1.5], dtype=float64)
-minlength = (keras_core.ops.max(x).numpy() + 1) + 2 # 6
-keras_core.ops.bincount(x, minlength=minlength)
+minlength = (keras.ops.max(x).numpy() + 1) + 2 # 6
+keras.ops.bincount(x, minlength=minlength)
 # array([0, 1, 2, 1, 0, 0], dtype=int32)
 }\if{html}{\out{</div>}}
 }
@@ -105,6 +105,7 @@ Other ops:
 \code{\link{k_elu}()},
 \code{\link{k_empty}()},
 \code{\link{k_equal}()},
+\code{\link{k_erf}()},
 \code{\link{k_expand_dims}()},
 \code{\link{k_expm_1}()},
 \code{\link{k_exp}()},
@@ -186,6 +187,7 @@ Other ops:
 \code{\link{k_rfft}()},
 \code{\link{k_roll}()},
 \code{\link{k_round}()},
+\code{\link{k_rsqrt}()},
 \code{\link{k_scatter_update}()},
 \code{\link{k_scatter}()},
 \code{\link{k_segment_max}()},

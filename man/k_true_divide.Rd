@@ -2,12 +2,12 @@
 % Please edit documentation in R/autogen-ops.R
 \name{k_true_divide}
 \alias{k_true_divide}
-\title{Alias for \code{keras_core.ops.divide}.}
+\title{Alias for \code{keras.ops.divide}.}
 \usage{
 k_true_divide(x1, x2)
 }
 \description{
-Alias for \code{keras_core.ops.divide}.
+Alias for \code{keras.ops.divide}.
 }
 \seealso{
 \itemize{
@@ -69,6 +69,7 @@ Other ops:
 \code{\link{k_elu}()},
 \code{\link{k_empty}()},
 \code{\link{k_equal}()},
+\code{\link{k_erf}()},
 \code{\link{k_expand_dims}()},
 \code{\link{k_expm_1}()},
 \code{\link{k_exp}()},
@@ -150,6 +151,7 @@ Other ops:
 \code{\link{k_rfft}()},
 \code{\link{k_roll}()},
 \code{\link{k_round}()},
+\code{\link{k_rsqrt}()},
 \code{\link{k_scatter_update}()},
 \code{\link{k_scatter}()},
 \code{\link{k_segment_max}()},

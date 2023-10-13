@@ -25,7 +25,7 @@ to constrain the weights of each filter tensor of size
 Constrains the weights incident to each hidden unit
 to have a norm less than or equal to a desired value.
 
-Also available via the shortcut function \code{keras_core.constraints.max_norm}.
+Also available via the shortcut function \code{keras.constraints.max_norm}.
 }
 \seealso{
 \itemize{

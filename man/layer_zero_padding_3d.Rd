@@ -37,7 +37,7 @@ Zero-padding layer for 3D data (spatial or spatio-temporal).
 \section{Examples}{
 \if{html}{\out{<div class="sourceCode python">}}\preformatted{input_shape = (1, 1, 2, 2, 3)
 x = np.arange(np.prod(input_shape)).reshape(input_shape)
-y = keras_core.layers.ZeroPadding3D(padding=2)(x)
+y = keras.layers.ZeroPadding3D(padding=2)(x)
 y.shape
 # (1, 5, 6, 6, 3)
 }\if{html}{\out{</div>}}

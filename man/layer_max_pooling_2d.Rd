@@ -78,7 +78,7 @@ The resulting output shape when using the \code{"same"} padding option is:
               [4., 5., 6.],
               [7., 8., 9.]])
 x = np.reshape(x, [1, 3, 3, 1])
-max_pool_2d = keras_core.layers.MaxPooling2D(pool_size=(2, 2),
+max_pool_2d = keras.layers.MaxPooling2D(pool_size=(2, 2),
    strides=(1, 1), padding="valid")
 max_pool_2d(x)
 }\if{html}{\out{</div>}}
@@ -89,7 +89,7 @@ max_pool_2d(x)
               [5., 6., 7., 8.],
               [9., 10., 11., 12.]])
 x = np.reshape(x, [1, 3, 4, 1])
-max_pool_2d = keras_core.layers.MaxPooling2D(pool_size=(2, 2),
+max_pool_2d = keras.layers.MaxPooling2D(pool_size=(2, 2),
    strides=(2, 2), padding="valid")
 max_pool_2d(x)
 }\if{html}{\out{</div>}}
@@ -100,7 +100,7 @@ max_pool_2d(x)
               [4., 5., 6.],
               [7., 8., 9.]])
 x = np.reshape(x, [1, 3, 3, 1])
-max_pool_2d = keras_core.layers.MaxPooling2D(pool_size=(2, 2),
+max_pool_2d = keras.layers.MaxPooling2D(pool_size=(2, 2),
    strides=(1, 1), padding="same")
 max_pool_2d(x)
 }\if{html}{\out{</div>}}

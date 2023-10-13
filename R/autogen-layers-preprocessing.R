@@ -9,7 +9,7 @@ r"-(A preprocessing layer which encodes integer features.
     when the total number of tokens are known in advance. It accepts integer
     values as inputs, and it outputs a dense or sparse representation of those
     inputs. For integer inputs where the total number of tokens is not known,
-    use `keras_core.layers.IntegerLookup` instead.
+    use `keras.layers.IntegerLookup` instead.
 
     **Note:** This layer is safe to use inside a `tf.data` pipeline
     (independently of which backend you're using).
@@ -18,7 +18,7 @@ r"-(A preprocessing layer which encodes integer features.
 
     **One-hot encoding data**
 
-    >>> layer = keras_core.layers.CategoryEncoding(
+    >>> layer = keras.layers.CategoryEncoding(
     ...           num_tokens=4, output_mode="one_hot")
     >>> layer([3, 2, 0, 1])
     array([[0., 0., 0., 1.],
@@ -28,7 +28,7 @@ r"-(A preprocessing layer which encodes integer features.
 
     **Multi-hot encoding data**
 
-    >>> layer = keras_core.layers.CategoryEncoding(
+    >>> layer = keras.layers.CategoryEncoding(
     ...           num_tokens=4, output_mode="multi_hot")
     >>> layer([[0, 1], [0, 0], [1, 2], [3, 1]])
     array([[1., 1., 0., 0.],
@@ -38,7 +38,7 @@ r"-(A preprocessing layer which encodes integer features.
 
     **Using weighted inputs in `"count"` mode**
 
-    >>> layer = keras_core.layers.CategoryEncoding(
+    >>> layer = keras.layers.CategoryEncoding(
     ...           num_tokens=4, output_mode="count")
     >>> count_weights = np.array([[.1, .2], [.1, .1], [.2, .3], [.4, .2]])
     >>> layer([[0, 1], [0, 0], [1, 2], [3, 1]], count_weights=count_weights)
@@ -88,7 +88,7 @@ r"-(A preprocessing layer which encodes integer features.
 #' when the total number of tokens are known in advance. It accepts integer
 #' values as inputs, and it outputs a dense or sparse representation of those
 #' inputs. For integer inputs where the total number of tokens is not known,
-#' use `keras_core.layers.IntegerLookup` instead.
+#' use `keras.layers.IntegerLookup` instead.
 #'
 #' **Note:** This layer is safe to use inside a `tf.data` pipeline
 #' (independently of which backend you're using).
@@ -97,7 +97,7 @@ r"-(A preprocessing layer which encodes integer features.
 #' **One-hot encoding data**
 #'
 #' ```python
-#' layer = keras_core.layers.CategoryEncoding(
+#' layer = keras.layers.CategoryEncoding(
 #'           num_tokens=4, output_mode="one_hot")
 #' layer([3, 2, 0, 1])
 #' # array([[0., 0., 0., 1.],
@@ -109,7 +109,7 @@ r"-(A preprocessing layer which encodes integer features.
 #' **Multi-hot encoding data**
 #'
 #' ```python
-#' layer = keras_core.layers.CategoryEncoding(
+#' layer = keras.layers.CategoryEncoding(
 #'           num_tokens=4, output_mode="multi_hot")
 #' layer([[0, 1], [0, 0], [1, 2], [3, 1]])
 #' # array([[1., 1., 0., 0.],
@@ -121,7 +121,7 @@ r"-(A preprocessing layer which encodes integer features.
 #' **Using weighted inputs in `"count"` mode**
 #'
 #' ```python
-#' layer = keras_core.layers.CategoryEncoding(
+#' layer = keras.layers.CategoryEncoding(
 #'           num_tokens=4, output_mode="count")
 #' count_weights = np.array([[.1, .2], [.1, .1], [.2, .3], [.4, .2]])
 #' layer([[0, 1], [0, 0], [1, 2], [3, 1]], count_weights=count_weights)
@@ -482,7 +482,7 @@ r"-(A preprocessing layer which crosses features using the "hashing trick".
 
     **Crossing two scalar features.**
 
-    >>> layer = keras_core.layers.HashedCrossing(
+    >>> layer = keras.layers.HashedCrossing(
     ...     num_bins=5)
     >>> feat1 = np.array(['A', 'B', 'A', 'B', 'A'])
     >>> feat2 = np.array([101, 101, 101, 102, 102])
@@ -491,7 +491,7 @@ r"-(A preprocessing layer which crosses features using the "hashing trick".
 
     **Crossing and one-hotting two scalar features.**
 
-    >>> layer = keras_core.layers.HashedCrossing(
+    >>> layer = keras.layers.HashedCrossing(
     ...     num_bins=5, output_mode='one_hot')
     >>> feat1 = np.array(['A', 'B', 'A', 'B', 'A'])
     >>> feat2 = np.array([101, 101, 101, 102, 102])
@@ -531,7 +531,7 @@ r"-(A preprocessing layer which crosses features using the "hashing trick".
 #' **Crossing two scalar features.**
 #'
 #' ```python
-#' layer = keras_core.layers.HashedCrossing(
+#' layer = keras.layers.HashedCrossing(
 #'     num_bins=5)
 #' feat1 = np.array(['A', 'B', 'A', 'B', 'A'])
 #' feat2 = np.array([101, 101, 101, 102, 102])
@@ -542,7 +542,7 @@ r"-(A preprocessing layer which crosses features using the "hashing trick".
 #' **Crossing and one-hotting two scalar features.**
 #'
 #' ```python
-#' layer = keras_core.layers.HashedCrossing(
+#' layer = keras.layers.HashedCrossing(
 #'     num_bins=5, output_mode='one_hot')
 #' feat1 = np.array(['A', 'B', 'A', 'B', 'A'])
 #' feat2 = np.array([101, 101, 101, 102, 102])
@@ -613,7 +613,7 @@ r"-(A preprocessing layer which hashes and bins categorical features.
 
     **Example (FarmHash64)**
 
-    >>> layer = keras_core.layers.Hashing(num_bins=3)
+    >>> layer = keras.layers.Hashing(num_bins=3)
     >>> inp = [['A'], ['B'], ['C'], ['D'], ['E']]
     >>> layer(inp)
     array([[1],
@@ -624,7 +624,7 @@ r"-(A preprocessing layer which hashes and bins categorical features.
 
     **Example (FarmHash64) with a mask value**
 
-    >>> layer = keras_core.layers.Hashing(num_bins=3, mask_value='')
+    >>> layer = keras.layers.Hashing(num_bins=3, mask_value='')
     >>> inp = [['A'], ['B'], [''], ['C'], ['D']]
     >>> layer(inp)
     array([[1],
@@ -635,7 +635,7 @@ r"-(A preprocessing layer which hashes and bins categorical features.
 
     **Example (SipHash64)**
 
-    >>> layer = keras_core.layers.Hashing(num_bins=3, salt=[133, 137])
+    >>> layer = keras.layers.Hashing(num_bins=3, salt=[133, 137])
     >>> inp = [['A'], ['B'], ['C'], ['D'], ['E']]
     >>> layer(inp)
     array([[1],
@@ -646,7 +646,7 @@ r"-(A preprocessing layer which hashes and bins categorical features.
 
     **Example (Siphash64 with a single integer, same as `salt=[133, 133]`)**
 
-    >>> layer = keras_core.layers.Hashing(num_bins=3, salt=133)
+    >>> layer = keras.layers.Hashing(num_bins=3, salt=133)
     >>> inp = [['A'], ['B'], ['C'], ['D'], ['E']]
     >>> layer(inp)
     array([[0],
@@ -742,7 +742,7 @@ r"-(A preprocessing layer which hashes and bins categorical features.
 #' **Example (FarmHash64)**
 #'
 #' ```python
-#' layer = keras_core.layers.Hashing(num_bins=3)
+#' layer = keras.layers.Hashing(num_bins=3)
 #' inp = [['A'], ['B'], ['C'], ['D'], ['E']]
 #' layer(inp)
 #' # array([[1],
@@ -755,7 +755,7 @@ r"-(A preprocessing layer which hashes and bins categorical features.
 #' **Example (FarmHash64) with a mask value**
 #'
 #' ```python
-#' layer = keras_core.layers.Hashing(num_bins=3, mask_value='')
+#' layer = keras.layers.Hashing(num_bins=3, mask_value='')
 #' inp = [['A'], ['B'], [''], ['C'], ['D']]
 #' layer(inp)
 #' # array([[1],
@@ -768,7 +768,7 @@ r"-(A preprocessing layer which hashes and bins categorical features.
 #' **Example (SipHash64)**
 #'
 #' ```python
-#' layer = keras_core.layers.Hashing(num_bins=3, salt=[133, 137])
+#' layer = keras.layers.Hashing(num_bins=3, salt=[133, 137])
 #' inp = [['A'], ['B'], ['C'], ['D'], ['E']]
 #' layer(inp)
 #' # array([[1],
@@ -781,7 +781,7 @@ r"-(A preprocessing layer which hashes and bins categorical features.
 #' **Example (Siphash64 with a single integer, same as `salt=[133, 133]`)**
 #'
 #' ```python
-#' layer = keras_core.layers.Hashing(num_bins=3, salt=133)
+#' layer = keras.layers.Hashing(num_bins=3, salt=133)
 #' inp = [['A'], ['B'], ['C'], ['D'], ['E']]
 #' layer(inp)
 #' # array([[0],
@@ -1515,7 +1515,7 @@ r"-(A preprocessing layer that normalizes continuous features.
 
     >>> adapt_data = np.array([1., 2., 3., 4., 5.], dtype='float32')
     >>> input_data = np.array([1., 2., 3.], dtype='float32')
-    >>> layer = keras_core.layers.Normalization(axis=None)
+    >>> layer = keras.layers.Normalization(axis=None)
     >>> layer.adapt(adapt_data)
     >>> layer(input_data)
     array([-1.4142135, -0.70710677, 0.], dtype=float32)
@@ -1527,7 +1527,7 @@ r"-(A preprocessing layer that normalizes continuous features.
     ...                        [0., 7., 4.],
     ...                        [2., 9., 6.]], dtype='float32')
     >>> input_data = np.array([[0., 7., 4.]], dtype='float32')
-    >>> layer = keras_core.layers.Normalization(axis=-1)
+    >>> layer = keras.layers.Normalization(axis=-1)
     >>> layer.adapt(adapt_data)
     >>> layer(input_data)
     array([-1., -1., -1.], dtype=float32)
@@ -1535,7 +1535,7 @@ r"-(A preprocessing layer that normalizes continuous features.
     Pass the mean and variance directly.
 
     >>> input_data = np.array([[1.], [2.], [3.]], dtype='float32')
-    >>> layer = keras_core.layers.Normalization(mean=3., variance=2.)
+    >>> layer = keras.layers.Normalization(mean=3., variance=2.)
     >>> layer(input_data)
     array([[-1.4142135 ],
            [-0.70710677],
@@ -1548,7 +1548,7 @@ r"-(A preprocessing layer that normalizes continuous features.
     ...                        [0., 7., 4.],
     ...                        [2., 9., 6.]], dtype='float32')
     >>> input_data = np.array([[1., 2., 3.]], dtype='float32')
-    >>> layer = keras_core.layers.Normalization(axis=-1, invert=True)
+    >>> layer = keras.layers.Normalization(axis=-1, invert=True)
     >>> layer.adapt(adapt_data)
     >>> layer(input_data)
     array([2., 10., 8.], dtype=float32)
@@ -1575,7 +1575,7 @@ r"-(A preprocessing layer that normalizes continuous features.
 #' ```python
 #' adapt_data = np.array([1., 2., 3., 4., 5.], dtype='float32')
 #' input_data = np.array([1., 2., 3.], dtype='float32')
-#' layer = keras_core.layers.Normalization(axis=None)
+#' layer = keras.layers.Normalization(axis=None)
 #' layer.adapt(adapt_data)
 #' layer(input_data)
 #' # array([-1.4142135, -0.70710677, 0.], dtype=float32)
@@ -1589,7 +1589,7 @@ r"-(A preprocessing layer that normalizes continuous features.
 #'                        [0., 7., 4.],
 #'                        [2., 9., 6.]], dtype='float32')
 #' input_data = np.array([[0., 7., 4.]], dtype='float32')
-#' layer = keras_core.layers.Normalization(axis=-1)
+#' layer = keras.layers.Normalization(axis=-1)
 #' layer.adapt(adapt_data)
 #' layer(input_data)
 #' # array([-1., -1., -1.], dtype=float32)
@@ -1599,7 +1599,7 @@ r"-(A preprocessing layer that normalizes continuous features.
 #'
 #' ```python
 #' input_data = np.array([[1.], [2.], [3.]], dtype='float32')
-#' layer = keras_core.layers.Normalization(mean=3., variance=2.)
+#' layer = keras.layers.Normalization(mean=3., variance=2.)
 #' layer(input_data)
 #' # array([[-1.4142135 ],
 #' #        [-0.70710677],
@@ -1614,7 +1614,7 @@ r"-(A preprocessing layer that normalizes continuous features.
 #'                        [0., 7., 4.],
 #'                        [2., 9., 6.]], dtype='float32')
 #' input_data = np.array([[1., 2., 3.]], dtype='float32')
-#' layer = keras_core.layers.Normalization(axis=-1, invert=True)
+#' layer = keras.layers.Normalization(axis=-1, invert=True)
 #' layer.adapt(adapt_data)
 #' layer(input_data)
 #' # array([2., 10., 8.], dtype=float32)
@@ -1700,7 +1700,7 @@ r"-(A preprocessing layer which randomly adjusts brightness during training.
     Sample usage:
 
     ```python
-    random_bright = keras_core.layers.RandomBrightness(factor=0.2)
+    random_bright = keras.layers.RandomBrightness(factor=0.2)
 
     # An image with shape [2, 2, 3]
     image = [[[1, 2, 3], [4 ,5 ,6]], [[7, 8, 9], [10, 11, 12]]]
@@ -1744,7 +1744,7 @@ r"-(A preprocessing layer which randomly adjusts brightness during training.
 #' Sample usage:
 #'
 #' ```python
-#' random_bright = keras_core.layers.RandomBrightness(factor=0.2)
+#' random_bright = keras.layers.RandomBrightness(factor=0.2)
 #'
 #' # An image with shape [2, 2, 3]
 #' image = [[[1, 2, 3], [4 ,5 ,6]], [[7, 8, 9], [10, 11, 12]]]
@@ -2435,7 +2435,7 @@ r"-(A preprocessing layer which randomly zooms images during training.
     Example:
 
     >>> input_img = np.random.random((32, 224, 224, 3))
-    >>> layer = keras_core.layers.RandomZoom(.5, .2)
+    >>> layer = keras.layers.RandomZoom(.5, .2)
     >>> out_img = layer(input_img)
     )-"
 
@@ -2468,7 +2468,7 @@ r"-(A preprocessing layer which randomly zooms images during training.
 #' # Examples
 #' ```python
 #' input_img = np.random.random((32, 224, 224, 3))
-#' layer = keras_core.layers.RandomZoom(.5, .2)
+#' layer = keras.layers.RandomZoom(.5, .2)
 #' out_img = layer(input_img)
 #' ```
 #'
@@ -2722,7 +2722,7 @@ r"-(A preprocessing layer that maps strings to (possibly encoded) indices.
     This layer translates a set of arbitrary strings into integer output via a
     table-based vocabulary lookup. This layer will perform no splitting or
     transformation of input strings. For a layer than can split and tokenize
-    natural language, see the `keras_core.layers.TextVectorization` layer.
+    natural language, see the `keras.layers.TextVectorization` layer.
 
     The vocabulary for the layer must be either supplied on construction or
     learned via `adapt()`. During `adapt()`, the layer will analyze a data set,
@@ -3007,7 +3007,7 @@ r"-(A preprocessing layer that maps strings to (possibly encoded) indices.
 #' This layer translates a set of arbitrary strings into integer output via a
 #' table-based vocabulary lookup. This layer will perform no splitting or
 #' transformation of input strings. For a layer than can split and tokenize
-#' natural language, see the `keras_core.layers.TextVectorization` layer.
+#' natural language, see the `keras.layers.TextVectorization` layer.
 #'
 #' The vocabulary for the layer must be either supplied on construction or
 #' learned via `adapt()`. During `adapt()`, the layer will analyze a data set,
@@ -3355,7 +3355,7 @@ r"-(A preprocessing layer which maps text features to integer sequences.
 
     1. Any callable can be passed to this Layer, but if you want to serialize
        this object you should only pass functions that are registered Keras
-       serializables (see `keras_core.saving.register_keras_serializable`
+       serializables (see `keras.saving.register_keras_serializable`
        for more details).
     2. When using a custom callable for `standardize`, the data received
        by the callable will be exactly as passed to this layer. The callable
@@ -3495,7 +3495,7 @@ r"-(A preprocessing layer which maps text features to integer sequences.
     >>> # Create the layer, passing the vocab directly. You can also pass the
     >>> # vocabulary arg a path to a file containing one vocabulary word per
     >>> # line.
-    >>> vectorize_layer = keras_core.layers.TextVectorization(
+    >>> vectorize_layer = keras.layers.TextVectorization(
     ...     max_tokens=max_tokens,
     ...     output_mode='int',
     ...     output_sequence_length=max_len,
@@ -3544,7 +3544,7 @@ r"-(A preprocessing layer which maps text features to integer sequences.
 #'
 #' 1. Any callable can be passed to this Layer, but if you want to serialize
 #'    this object you should only pass functions that are registered Keras
-#'    serializables (see `keras_core.saving.register_keras_serializable`
+#'    serializables (see `keras.saving.register_keras_serializable`
 #'    for more details).
 #' 2. When using a custom callable for `standardize`, the data received
 #'    by the callable will be exactly as passed to this layer. The callable
@@ -3607,7 +3607,7 @@ r"-(A preprocessing layer which maps text features to integer sequences.
 #' # Create the layer, passing the vocab directly. You can also pass the
 #' # vocabulary arg a path to a file containing one vocabulary word per
 #' # line.
-#' vectorize_layer = keras_core.layers.TextVectorization(
+#' vectorize_layer = keras.layers.TextVectorization(
 #'     max_tokens=max_tokens,
 #'     output_mode='int',
 #'     output_sequence_length=max_len,

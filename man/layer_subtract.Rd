@@ -15,19 +15,19 @@ of same shape.
 \if{html}{\out{<div class="sourceCode python">}}\preformatted{input_shape = (2, 3, 4)
 x1 = np.random.rand(*input_shape)
 x2 = np.random.rand(*input_shape)
-y = keras_core.layers.Subtract()([x1, x2])
+y = keras.layers.Subtract()([x1, x2])
 }\if{html}{\out{</div>}}
 
 Usage in a Keras model:
 
-\if{html}{\out{<div class="sourceCode python">}}\preformatted{input1 = keras_core.layers.Input(shape=(16,))
-x1 = keras_core.layers.Dense(8, activation='relu')(input1)
-input2 = keras_core.layers.Input(shape=(32,))
-x2 = keras_core.layers.Dense(8, activation='relu')(input2)
-# equivalent to `subtracted = keras_core.layers.subtract([x1, x2])`
-subtracted = keras_core.layers.Subtract()([x1, x2])
-out = keras_core.layers.Dense(4)(subtracted)
-model = keras_core.models.Model(inputs=[input1, input2], outputs=out)
+\if{html}{\out{<div class="sourceCode python">}}\preformatted{input1 = keras.layers.Input(shape=(16,))
+x1 = keras.layers.Dense(8, activation='relu')(input1)
+input2 = keras.layers.Input(shape=(32,))
+x2 = keras.layers.Dense(8, activation='relu')(input2)
+# equivalent to `subtracted = keras.layers.subtract([x1, x2])`
+subtracted = keras.layers.Subtract()([x1, x2])
+out = keras.layers.Dense(4)(subtracted)
+model = keras.models.Model(inputs=[input1, input2], outputs=out)
 }\if{html}{\out{</div>}}
 }
 

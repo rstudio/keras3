@@ -57,7 +57,7 @@ Global average pooling operation for 2D data.
 
 \section{Examples}{
 \if{html}{\out{<div class="sourceCode python">}}\preformatted{x = np.random.rand(2, 4, 5, 3)
-y = keras_core.layers.GlobalAveragePooling2D()(x)
+y = keras.layers.GlobalAveragePooling2D()(x)
 y.shape
 # (2, 3)
 }\if{html}{\out{</div>}}

@@ -53,7 +53,7 @@ to use this layer.
 \section{Examples}{
 \strong{Crossing two scalar features.}
 
-\if{html}{\out{<div class="sourceCode python">}}\preformatted{layer = keras_core.layers.HashedCrossing(
+\if{html}{\out{<div class="sourceCode python">}}\preformatted{layer = keras.layers.HashedCrossing(
     num_bins=5)
 feat1 = np.array(['A', 'B', 'A', 'B', 'A'])
 feat2 = np.array([101, 101, 101, 102, 102])
@@ -63,7 +63,7 @@ layer((feat1, feat2))
 
 \strong{Crossing and one-hotting two scalar features.}
 
-\if{html}{\out{<div class="sourceCode python">}}\preformatted{layer = keras_core.layers.HashedCrossing(
+\if{html}{\out{<div class="sourceCode python">}}\preformatted{layer = keras.layers.HashedCrossing(
     num_bins=5, output_mode='one_hot')
 feat1 = np.array(['A', 'B', 'A', 'B', 'A'])
 feat2 = np.array([101, 101, 101, 102, 102])

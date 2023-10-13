@@ -121,9 +121,9 @@ call of the cell.
 
 \section{Examples}{
 \if{html}{\out{<div class="sourceCode python">}}\preformatted{inputs = np.random.random((32, 10, 8))
-simple_rnn = keras_core.layers.SimpleRNN(4)
+simple_rnn = keras.layers.SimpleRNN(4)
 output = simple_rnn(inputs)  # The output has shape `(32, 4)`.
-simple_rnn = keras_core.layers.SimpleRNN(
+simple_rnn = keras.layers.SimpleRNN(
     4, return_sequences=True, return_state=True
 )
 # whole_sequence_output has shape `(32, 10, 4)`.

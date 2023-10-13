@@ -357,13 +357,13 @@ r"-(Applies the rectified linear unit activation function.
     Examples:
 
     >>> x = [-10, -5, 0.0, 5, 10]
-    >>> keras_core.activations.relu(x)
+    >>> keras.activations.relu(x)
     [ 0.,  0.,  0.,  5., 10.]
-    >>> keras_core.activations.relu(x, negative_slope=0.5)
+    >>> keras.activations.relu(x, negative_slope=0.5)
     [-5. , -2.5,  0. ,  5. , 10. ]
-    >>> keras_core.activations.relu(x, max_value=5.)
+    >>> keras.activations.relu(x, max_value=5.)
     [0., 0., 0., 5., 5.]
-    >>> keras_core.activations.relu(x, threshold=5.)
+    >>> keras.activations.relu(x, threshold=5.)
     [-0., -0.,  0.,  0., 10.]
 
     Args:
@@ -394,13 +394,13 @@ r"-(Applies the rectified linear unit activation function.
 #' # Examples
 #' ```python
 #' x = [-10, -5, 0.0, 5, 10]
-#' keras_core.activations.relu(x)
+#' keras.activations.relu(x)
 #' # [ 0.,  0.,  0.,  5., 10.]
-#' keras_core.activations.relu(x, negative_slope=0.5)
+#' keras.activations.relu(x, negative_slope=0.5)
 #' # [-5. , -2.5,  0. ,  5. , 10. ]
-#' keras_core.activations.relu(x, max_value=5.)
+#' keras.activations.relu(x, max_value=5.)
 #' # [0., 0., 0., 5., 5.]
-#' keras_core.activations.relu(x, threshold=5.)
+#' keras.activations.relu(x, threshold=5.)
 #' # [-0., -0.,  0.,  0., 10.]
 #' ```
 #'
@@ -472,13 +472,13 @@ r"-(Scaled Exponential Linear Unit (SELU).
     (`alpha=1.67326324` and `scale=1.05070098`).
 
     Basically, the SELU activation function multiplies `scale` (> 1) with the
-    output of the `keras_core.activations.elu` function to ensure a slope larger
+    output of the `keras.activations.elu` function to ensure a slope larger
     than one for positive inputs.
 
     The values of `alpha` and `scale` are
     chosen so that the mean and variance of the inputs are preserved
     between two consecutive layers as long as the weights are initialized
-    correctly (see `keras_core.initializers.LecunNormal` initializer)
+    correctly (see `keras.initializers.LecunNormal` initializer)
     and the number of input units is "large enough"
     (see reference paper for more information).
 
@@ -488,9 +488,9 @@ r"-(Scaled Exponential Linear Unit (SELU).
     Notes:
 
     - To be used together with the
-        `keras_core.initializers.LecunNormal` initializer.
+        `keras.initializers.LecunNormal` initializer.
     - To be used together with the dropout variant
-        `keras_core.layers.AlphaDropout` (rather than regular dropout).
+        `keras.layers.AlphaDropout` (rather than regular dropout).
 
     Reference:
 
@@ -511,13 +511,13 @@ r"-(Scaled Exponential Linear Unit (SELU).
 #' (`alpha=1.67326324` and `scale=1.05070098`).
 #'
 #' Basically, the SELU activation function multiplies `scale` (> 1) with the
-#' output of the `keras_core.activations.elu` function to ensure a slope larger
+#' output of the `keras.activations.elu` function to ensure a slope larger
 #' than one for positive inputs.
 #'
 #' The values of `alpha` and `scale` are
 #' chosen so that the mean and variance of the inputs are preserved
 #' between two consecutive layers as long as the weights are initialized
-#' correctly (see `keras_core.initializers.LecunNormal` initializer)
+#' correctly (see `keras.initializers.LecunNormal` initializer)
 #' and the number of input units is "large enough"
 #' (see reference paper for more information).
 #'
@@ -529,9 +529,9 @@ r"-(Scaled Exponential Linear Unit (SELU).
 #' Notes:
 #'
 #' - To be used together with the
-#'     `keras_core.initializers.LecunNormal` initializer.
+#'     `keras.initializers.LecunNormal` initializer.
 #' - To be used together with the dropout variant
-#'     `keras_core.layers.AlphaDropout` (rather than regular dropout).
+#'     `keras.layers.AlphaDropout` (rather than regular dropout).
 #'
 #' @export
 #' @family activation functions

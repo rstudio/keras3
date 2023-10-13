@@ -64,12 +64,12 @@ This layer can perform einsum calculations of arbitrary dimensionality.
 
 This example shows how to instantiate a standard Keras dense layer using
 einsum operations. This example is equivalent to
-\code{keras_core.layers.Dense(64, use_bias=True)}.
+\code{keras.layers.Dense(64, use_bias=True)}.
 
-\if{html}{\out{<div class="sourceCode python">}}\preformatted{layer = keras_core.layers.EinsumDense("ab,bc->ac",
+\if{html}{\out{<div class="sourceCode python">}}\preformatted{layer = keras.layers.EinsumDense("ab,bc->ac",
                                       output_shape=64,
                                       bias_axes="c")
-input_tensor = keras_core.Input(shape=[32])
+input_tensor = keras.Input(shape=[32])
 output_tensor = layer(input_tensor)
 output_tensor.shape
 # (None, 64)
@@ -83,10 +83,10 @@ values (since there are two non-batch dimensions in the output); the first
 dimension in the \code{output_shape} is \code{None}, because the sequence dimension
 \code{b} has an unknown shape.
 
-\if{html}{\out{<div class="sourceCode python">}}\preformatted{layer = keras_core.layers.EinsumDense("abc,cd->abd",
+\if{html}{\out{<div class="sourceCode python">}}\preformatted{layer = keras.layers.EinsumDense("abc,cd->abd",
                                       output_shape=(None, 64),
                                       bias_axes="d")
-input_tensor = keras_core.Input(shape=[32, 128])
+input_tensor = keras.Input(shape=[32, 128])
 output_tensor = layer(input_tensor)
 output_tensor.shape
 # (None, 32, 64)
@@ -103,10 +103,10 @@ Because we are using ellipsis notation and have specified only one axis, the
 layer can handle any number of sequence dimensions - including the case
 where no sequence dimension exists.
 
-\if{html}{\out{<div class="sourceCode python">}}\preformatted{layer = keras_core.layers.EinsumDense("...x,xy->...y",
+\if{html}{\out{<div class="sourceCode python">}}\preformatted{layer = keras.layers.EinsumDense("...x,xy->...y",
                                       output_shape=64,
                                       bias_axes="y")
-input_tensor = keras_core.Input(shape=[32, 128])
+input_tensor = keras.Input(shape=[32, 128])
 output_tensor = layer(input_tensor)
 output_tensor.shape
 # (None, 32, 64)

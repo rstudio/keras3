@@ -46,8 +46,8 @@ e.g. \verb{[[4], [20]] -> [[0.25, 0.1], [0.6, -0.2]]}
 This layer can only be used on positive integer inputs of a fixed range.
 }
 \section{Examples}{
-\if{html}{\out{<div class="sourceCode python">}}\preformatted{model = keras_core.Sequential()
-model.add(keras_core.layers.Embedding(1000, 64, input_length=10))
+\if{html}{\out{<div class="sourceCode python">}}\preformatted{model = keras.Sequential()
+model.add(keras.layers.Embedding(1000, 64, input_length=10))
 # The model will take as input an integer matrix of size (batch,
 # input_length), and the largest integer (i.e. word index) in the input
 # should be no larger than 999 (vocabulary size).

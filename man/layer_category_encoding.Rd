@@ -41,7 +41,7 @@ This layer provides options for condensing data into a categorical encoding
 when the total number of tokens are known in advance. It accepts integer
 values as inputs, and it outputs a dense or sparse representation of those
 inputs. For integer inputs where the total number of tokens is not known,
-use \code{keras_core.layers.IntegerLookup} instead.
+use \code{keras.layers.IntegerLookup} instead.
 
 \strong{Note:} This layer is safe to use inside a \code{tf.data} pipeline
 (independently of which backend you're using).
@@ -49,7 +49,7 @@ use \code{keras_core.layers.IntegerLookup} instead.
 \section{Examples}{
 \strong{One-hot encoding data}
 
-\if{html}{\out{<div class="sourceCode python">}}\preformatted{layer = keras_core.layers.CategoryEncoding(
+\if{html}{\out{<div class="sourceCode python">}}\preformatted{layer = keras.layers.CategoryEncoding(
           num_tokens=4, output_mode="one_hot")
 layer([3, 2, 0, 1])
 # array([[0., 0., 0., 1.],
@@ -60,7 +60,7 @@ layer([3, 2, 0, 1])
 
 \strong{Multi-hot encoding data}
 
-\if{html}{\out{<div class="sourceCode python">}}\preformatted{layer = keras_core.layers.CategoryEncoding(
+\if{html}{\out{<div class="sourceCode python">}}\preformatted{layer = keras.layers.CategoryEncoding(
           num_tokens=4, output_mode="multi_hot")
 layer([[0, 1], [0, 0], [1, 2], [3, 1]])
 # array([[1., 1., 0., 0.],
@@ -71,7 +71,7 @@ layer([[0, 1], [0, 0], [1, 2], [3, 1]])
 
 \strong{Using weighted inputs in \code{"count"} mode}
 
-\if{html}{\out{<div class="sourceCode python">}}\preformatted{layer = keras_core.layers.CategoryEncoding(
+\if{html}{\out{<div class="sourceCode python">}}\preformatted{layer = keras.layers.CategoryEncoding(
           num_tokens=4, output_mode="count")
 count_weights = np.array([[.1, .2], [.1, .1], [.2, .3], [.4, .2]])
 layer([[0, 1], [0, 0], [1, 2], [3, 1]], count_weights=count_weights)

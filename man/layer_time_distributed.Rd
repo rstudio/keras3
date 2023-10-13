@@ -7,7 +7,7 @@
 layer_time_distributed(object, layer, ...)
 }
 \arguments{
-\item{layer}{a \code{keras_core.layers.Layer} instance.}
+\item{layer}{a \code{keras.layers.Layer} instance.}
 }
 \description{
 Every input should be at least 3D, and the dimension of index one of the

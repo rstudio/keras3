@@ -125,7 +125,7 @@ ValueError: when both \code{strides > 1} and \code{dilation_rate > 1}.
 \if{html}{\out{<div class="sourceCode python">}}\preformatted{# The inputs are 128-length vectors with 10 timesteps, and the
 # batch size is 4.
 x = np.random.rand(4, 10, 128)
-y = keras_core.layers.Conv1D(32, 3, activation='relu')(x)
+y = keras.layers.Conv1D(32, 3, activation='relu')(x)
 print(y.shape)
 # (4, 8, 32)
 }\if{html}{\out{</div>}}

@@ -157,7 +157,7 @@ this layer:
 \enumerate{
 \item Any callable can be passed to this Layer, but if you want to serialize
 this object you should only pass functions that are registered Keras
-serializables (see \code{keras_core.saving.register_keras_serializable}
+serializables (see \code{keras.saving.register_keras_serializable}
 for more details).
 \item When using a custom callable for \code{standardize}, the data received
 by the callable will be exactly as passed to this layer. The callable
@@ -216,7 +216,7 @@ max_len = 4  # Sequence length to pad the outputs to.
 # Create the layer, passing the vocab directly. You can also pass the
 # vocabulary arg a path to a file containing one vocabulary word per
 # line.
-vectorize_layer = keras_core.layers.TextVectorization(
+vectorize_layer = keras.layers.TextVectorization(
     max_tokens=max_tokens,
     output_mode='int',
     output_sequence_length=max_len,

@@ -146,11 +146,11 @@ inference on CPU. Thus it has separate biases for \code{kernel} and
 For example:
 
 \if{html}{\out{<div class="sourceCode python">}}\preformatted{inputs = np.random.random((32, 10, 8))
-gru = keras_core.layers.GRU(4)
+gru = keras.layers.GRU(4)
 output = gru(inputs)
 output.shape
 # (32, 4)
-gru = keras_core.layers.GRU(4, return_sequences=True, return_state=True)
+gru = keras.layers.GRU(4, return_sequences=True, return_state=True)
 whole_sequence_output, final_state = gru(inputs)
 whole_sequence_output.shape
 # (32, 10, 4)

@@ -22,22 +22,22 @@ A tensor with the values of \code{x2} appended to \code{x1}.
 }
 
 \section{Examples}{
-\if{html}{\out{<div class="sourceCode python">}}\preformatted{x1 = keras_core.ops.convert_to_tensor([1, 2, 3])
-x2 = keras_core.ops.convert_to_tensor([[4, 5, 6], [7, 8, 9]])
-keras_core.ops.append(x1, x2)
+\if{html}{\out{<div class="sourceCode python">}}\preformatted{x1 = keras.ops.convert_to_tensor([1, 2, 3])
+x2 = keras.ops.convert_to_tensor([[4, 5, 6], [7, 8, 9]])
+keras.ops.append(x1, x2)
 # array([1, 2, 3, 4, 5, 6, 7, 8, 9], dtype=int32)
 }\if{html}{\out{</div>}}
 
 When \code{axis} is specified, \code{x1} and \code{x2} must have compatible shapes.
 
-\if{html}{\out{<div class="sourceCode python">}}\preformatted{x1 = keras_core.ops.convert_to_tensor([[1, 2, 3], [4, 5, 6]])
-x2 = keras_core.ops.convert_to_tensor([[7, 8, 9]])
-keras_core.ops.append(x1, x2, axis=0)
+\if{html}{\out{<div class="sourceCode python">}}\preformatted{x1 = keras.ops.convert_to_tensor([[1, 2, 3], [4, 5, 6]])
+x2 = keras.ops.convert_to_tensor([[7, 8, 9]])
+keras.ops.append(x1, x2, axis=0)
 # array([[1, 2, 3],
 #         [4, 5, 6],
 #         [7, 8, 9]], dtype=int32)
-x3 = keras_core.ops.convert_to_tensor([7, 8, 9])
-keras_core.ops.append(x1, x3, axis=0)
+x3 = keras.ops.convert_to_tensor([7, 8, 9])
+keras.ops.append(x1, x3, axis=0)
 # Traceback (most recent call last):
 #     ...
 # TypeError: Cannot concatenate arrays with different numbers of
@@ -104,6 +104,7 @@ Other ops:
 \code{\link{k_elu}()},
 \code{\link{k_empty}()},
 \code{\link{k_equal}()},
+\code{\link{k_erf}()},
 \code{\link{k_expand_dims}()},
 \code{\link{k_expm_1}()},
 \code{\link{k_exp}()},
@@ -185,6 +186,7 @@ Other ops:
 \code{\link{k_rfft}()},
 \code{\link{k_roll}()},
 \code{\link{k_round}()},
+\code{\link{k_rsqrt}()},
 \code{\link{k_scatter_update}()},
 \code{\link{k_scatter}()},
 \code{\link{k_segment_max}()},

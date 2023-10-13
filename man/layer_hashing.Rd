@@ -89,7 +89,7 @@ to use this layer.
 
 \strong{Example (FarmHash64)}
 
-\if{html}{\out{<div class="sourceCode python">}}\preformatted{layer = keras_core.layers.Hashing(num_bins=3)
+\if{html}{\out{<div class="sourceCode python">}}\preformatted{layer = keras.layers.Hashing(num_bins=3)
 inp = [['A'], ['B'], ['C'], ['D'], ['E']]
 layer(inp)
 # array([[1],
@@ -101,7 +101,7 @@ layer(inp)
 
 \strong{Example (FarmHash64) with a mask value}
 
-\if{html}{\out{<div class="sourceCode python">}}\preformatted{layer = keras_core.layers.Hashing(num_bins=3, mask_value='')
+\if{html}{\out{<div class="sourceCode python">}}\preformatted{layer = keras.layers.Hashing(num_bins=3, mask_value='')
 inp = [['A'], ['B'], [''], ['C'], ['D']]
 layer(inp)
 # array([[1],
@@ -113,7 +113,7 @@ layer(inp)
 
 \strong{Example (SipHash64)}
 
-\if{html}{\out{<div class="sourceCode python">}}\preformatted{layer = keras_core.layers.Hashing(num_bins=3, salt=[133, 137])
+\if{html}{\out{<div class="sourceCode python">}}\preformatted{layer = keras.layers.Hashing(num_bins=3, salt=[133, 137])
 inp = [['A'], ['B'], ['C'], ['D'], ['E']]
 layer(inp)
 # array([[1],
@@ -125,7 +125,7 @@ layer(inp)
 
 \strong{Example (Siphash64 with a single integer, same as \verb{salt=[133, 133]})}
 
-\if{html}{\out{<div class="sourceCode python">}}\preformatted{layer = keras_core.layers.Hashing(num_bins=3, salt=133)
+\if{html}{\out{<div class="sourceCode python">}}\preformatted{layer = keras.layers.Hashing(num_bins=3, salt=133)
 inp = [['A'], ['B'], ['C'], ['D'], ['E']]
 layer(inp)
 # array([[0],

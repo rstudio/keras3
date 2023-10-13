@@ -37,7 +37,7 @@ Cropping layer for 3D data (e.g. spatial or spatio-temporal).
 \section{Examples}{
 \if{html}{\out{<div class="sourceCode python">}}\preformatted{input_shape = (2, 28, 28, 10, 3)
 x = np.arange(np.prod(input_shape)).reshape(input_shape)
-y = keras_core.layers.Cropping3D(cropping=(2, 4, 2))(x)
+y = keras.layers.Cropping3D(cropping=(2, 4, 2))(x)
 y.shape
 # (2, 24, 20, 6, 3)
 }\if{html}{\out{</div>}}

@@ -13,18 +13,18 @@ r"-(Performs elementwise addition operation.
     >>> input_shape = (2, 3, 4)
     >>> x1 = np.random.rand(*input_shape)
     >>> x2 = np.random.rand(*input_shape)
-    >>> y = keras_core.layers.Add()([x1, x2])
+    >>> y = keras.layers.Add()([x1, x2])
 
     Usage in a Keras model:
 
-    >>> input1 = keras_core.layers.Input(shape=(16,))
-    >>> x1 = keras_core.layers.Dense(8, activation='relu')(input1)
-    >>> input2 = keras_core.layers.Input(shape=(32,))
-    >>> x2 = keras_core.layers.Dense(8, activation='relu')(input2)
-    >>> # equivalent to `added = keras_core.layers.add([x1, x2])`
-    >>> added = keras_core.layers.Add()([x1, x2])
-    >>> out = keras_core.layers.Dense(4)(added)
-    >>> model = keras_core.models.Model(inputs=[input1, input2], outputs=out)
+    >>> input1 = keras.layers.Input(shape=(16,))
+    >>> x1 = keras.layers.Dense(8, activation='relu')(input1)
+    >>> input2 = keras.layers.Input(shape=(32,))
+    >>> x2 = keras.layers.Dense(8, activation='relu')(input2)
+    >>> # equivalent to `added = keras.layers.add([x1, x2])`
+    >>> added = keras.layers.Add()([x1, x2])
+    >>> out = keras.layers.Dense(4)(added)
+    >>> model = keras.models.Model(inputs=[input1, input2], outputs=out)
 
     )-"
 
@@ -41,20 +41,20 @@ r"-(Performs elementwise addition operation.
 #' input_shape = (2, 3, 4)
 #' x1 = np.random.rand(*input_shape)
 #' x2 = np.random.rand(*input_shape)
-#' y = keras_core.layers.Add()([x1, x2])
+#' y = keras.layers.Add()([x1, x2])
 #' ```
 #'
 #' Usage in a Keras model:
 #'
 #' ```python
-#' input1 = keras_core.layers.Input(shape=(16,))
-#' x1 = keras_core.layers.Dense(8, activation='relu')(input1)
-#' input2 = keras_core.layers.Input(shape=(32,))
-#' x2 = keras_core.layers.Dense(8, activation='relu')(input2)
-#' # equivalent to `added = keras_core.layers.add([x1, x2])`
-#' added = keras_core.layers.Add()([x1, x2])
-#' out = keras_core.layers.Dense(4)(added)
-#' model = keras_core.models.Model(inputs=[input1, input2], outputs=out)
+#' input1 = keras.layers.Input(shape=(16,))
+#' x1 = keras.layers.Dense(8, activation='relu')(input1)
+#' input2 = keras.layers.Input(shape=(32,))
+#' x2 = keras.layers.Dense(8, activation='relu')(input2)
+#' # equivalent to `added = keras.layers.add([x1, x2])`
+#' added = keras.layers.Add()([x1, x2])
+#' out = keras.layers.Dense(4)(added)
+#' model = keras.models.Model(inputs=[input1, input2], outputs=out)
 #' ```
 #'
 #' @export
@@ -93,18 +93,18 @@ r"-(Averages a list of inputs element-wise..
     >>> input_shape = (2, 3, 4)
     >>> x1 = np.random.rand(*input_shape)
     >>> x2 = np.random.rand(*input_shape)
-    >>> y = keras_core.layers.Average()([x1, x2])
+    >>> y = keras.layers.Average()([x1, x2])
 
     Usage in a Keras model:
 
-    >>> input1 = keras_core.layers.Input(shape=(16,))
-    >>> x1 = keras_core.layers.Dense(8, activation='relu')(input1)
-    >>> input2 = keras_core.layers.Input(shape=(32,))
-    >>> x2 = keras_core.layers.Dense(8, activation='relu')(input2)
-    >>> # equivalent to `y = keras_core.layers.average([x1, x2])`
-    >>> y = keras_core.layers.Average()([x1, x2])
-    >>> out = keras_core.layers.Dense(4)(y)
-    >>> model = keras_core.models.Model(inputs=[input1, input2], outputs=out)
+    >>> input1 = keras.layers.Input(shape=(16,))
+    >>> x1 = keras.layers.Dense(8, activation='relu')(input1)
+    >>> input2 = keras.layers.Input(shape=(32,))
+    >>> x2 = keras.layers.Dense(8, activation='relu')(input2)
+    >>> # equivalent to `y = keras.layers.average([x1, x2])`
+    >>> y = keras.layers.Average()([x1, x2])
+    >>> out = keras.layers.Dense(4)(y)
+    >>> model = keras.models.Model(inputs=[input1, input2], outputs=out)
 
     )-"
 
@@ -121,20 +121,20 @@ r"-(Averages a list of inputs element-wise..
 #' input_shape = (2, 3, 4)
 #' x1 = np.random.rand(*input_shape)
 #' x2 = np.random.rand(*input_shape)
-#' y = keras_core.layers.Average()([x1, x2])
+#' y = keras.layers.Average()([x1, x2])
 #' ```
 #'
 #' Usage in a Keras model:
 #'
 #' ```python
-#' input1 = keras_core.layers.Input(shape=(16,))
-#' x1 = keras_core.layers.Dense(8, activation='relu')(input1)
-#' input2 = keras_core.layers.Input(shape=(32,))
-#' x2 = keras_core.layers.Dense(8, activation='relu')(input2)
-#' # equivalent to `y = keras_core.layers.average([x1, x2])`
-#' y = keras_core.layers.Average()([x1, x2])
-#' out = keras_core.layers.Dense(4)(y)
-#' model = keras_core.models.Model(inputs=[input1, input2], outputs=out)
+#' input1 = keras.layers.Input(shape=(16,))
+#' x1 = keras.layers.Dense(8, activation='relu')(input1)
+#' input2 = keras.layers.Input(shape=(32,))
+#' x2 = keras.layers.Dense(8, activation='relu')(input2)
+#' # equivalent to `y = keras.layers.average([x1, x2])`
+#' y = keras.layers.Average()([x1, x2])
+#' out = keras.layers.Dense(4)(y)
+#' model = keras.models.Model(inputs=[input1, input2], outputs=out)
 #' ```
 #'
 #' @export
@@ -173,13 +173,13 @@ r"-(Concatenates a list of inputs.
 
     >>> x = np.arange(20).reshape(2, 2, 5)
     >>> y = np.arange(20, 30).reshape(2, 1, 5)
-    >>> keras_core.layers.Concatenate(axis=1)([x, y])
+    >>> keras.layers.Concatenate(axis=1)([x, y])
 
     Usage in a Keras model:
 
-    >>> x1 = keras_core.layers.Dense(8)(np.arange(10).reshape(5, 2))
-    >>> x2 = keras_core.layers.Dense(8)(np.arange(10, 20).reshape(5, 2))
-    >>> y = keras_core.layers.Concatenate()([x1, x2])
+    >>> x1 = keras.layers.Dense(8)(np.arange(10).reshape(5, 2))
+    >>> x2 = keras.layers.Dense(8)(np.arange(10, 20).reshape(5, 2))
+    >>> y = keras.layers.Concatenate()([x1, x2])
 
     Args:
         axis: Axis along which to concatenate.
@@ -202,15 +202,15 @@ r"-(Concatenates a list of inputs.
 #' ```python
 #' x = np.arange(20).reshape(2, 2, 5)
 #' y = np.arange(20, 30).reshape(2, 1, 5)
-#' keras_core.layers.Concatenate(axis=1)([x, y])
+#' keras.layers.Concatenate(axis=1)([x, y])
 #' ```
 #'
 #' Usage in a Keras model:
 #'
 #' ```python
-#' x1 = keras_core.layers.Dense(8)(np.arange(10).reshape(5, 2))
-#' x2 = keras_core.layers.Dense(8)(np.arange(10, 20).reshape(5, 2))
-#' y = keras_core.layers.Concatenate()([x1, x2])
+#' x1 = keras.layers.Dense(8)(np.arange(10).reshape(5, 2))
+#' x2 = keras.layers.Dense(8)(np.arange(10, 20).reshape(5, 2))
+#' y = keras.layers.Concatenate()([x1, x2])
 #' ```
 #'
 #' # Returns
@@ -262,13 +262,13 @@ r"-(Computes element-wise dot product of two tensors.
 
     >>> x = np.arange(10).reshape(1, 5, 2)
     >>> y = np.arange(10, 20).reshape(1, 2, 5)
-    >>> keras_core.layers.Dot(axes=(1, 2))([x, y])
+    >>> keras.layers.Dot(axes=(1, 2))([x, y])
 
     Usage in a Keras model:
 
-    >>> x1 = keras_core.layers.Dense(8)(np.arange(10).reshape(5, 2))
-    >>> x2 = keras_core.layers.Dense(8)(np.arange(10, 20).reshape(5, 2))
-    >>> y = keras_core.layers.Dot(axes=1)([x1, x2])
+    >>> x1 = keras.layers.Dense(8)(np.arange(10).reshape(5, 2))
+    >>> x2 = keras.layers.Dense(8)(np.arange(10, 20).reshape(5, 2))
+    >>> y = keras.layers.Dot(axes=1)([x1, x2])
 
     Args:
         axes: Integer or tuple of integers, axis or axes along which to
@@ -306,15 +306,15 @@ r"-(Computes element-wise dot product of two tensors.
 #' ```python
 #' x = np.arange(10).reshape(1, 5, 2)
 #' y = np.arange(10, 20).reshape(1, 2, 5)
-#' keras_core.layers.Dot(axes=(1, 2))([x, y])
+#' keras.layers.Dot(axes=(1, 2))([x, y])
 #' ```
 #'
 #' Usage in a Keras model:
 #'
 #' ```python
-#' x1 = keras_core.layers.Dense(8)(np.arange(10).reshape(5, 2))
-#' x2 = keras_core.layers.Dense(8)(np.arange(10, 20).reshape(5, 2))
-#' y = keras_core.layers.Dot(axes=1)([x1, x2])
+#' x1 = keras.layers.Dense(8)(np.arange(10).reshape(5, 2))
+#' x2 = keras.layers.Dense(8)(np.arange(10, 20).reshape(5, 2))
+#' y = keras.layers.Dot(axes=1)([x1, x2])
 #' ```
 #'
 #' # Returns
@@ -367,18 +367,18 @@ r"-(Computes element-wise maximum on a list of inputs.
     >>> input_shape = (2, 3, 4)
     >>> x1 = np.random.rand(*input_shape)
     >>> x2 = np.random.rand(*input_shape)
-    >>> y = keras_core.layers.Maximum()([x1, x2])
+    >>> y = keras.layers.Maximum()([x1, x2])
 
     Usage in a Keras model:
 
-    >>> input1 = keras_core.layers.Input(shape=(16,))
-    >>> x1 = keras_core.layers.Dense(8, activation='relu')(input1)
-    >>> input2 = keras_core.layers.Input(shape=(32,))
-    >>> x2 = keras_core.layers.Dense(8, activation='relu')(input2)
-    >>> # equivalent to `y = keras_core.layers.maximum([x1, x2])`
-    >>> y = keras_core.layers.Maximum()([x1, x2])
-    >>> out = keras_core.layers.Dense(4)(y)
-    >>> model = keras_core.models.Model(inputs=[input1, input2], outputs=out)
+    >>> input1 = keras.layers.Input(shape=(16,))
+    >>> x1 = keras.layers.Dense(8, activation='relu')(input1)
+    >>> input2 = keras.layers.Input(shape=(32,))
+    >>> x2 = keras.layers.Dense(8, activation='relu')(input2)
+    >>> # equivalent to `y = keras.layers.maximum([x1, x2])`
+    >>> y = keras.layers.Maximum()([x1, x2])
+    >>> out = keras.layers.Dense(4)(y)
+    >>> model = keras.models.Model(inputs=[input1, input2], outputs=out)
 
     )-"
 
@@ -395,20 +395,20 @@ r"-(Computes element-wise maximum on a list of inputs.
 #' input_shape = (2, 3, 4)
 #' x1 = np.random.rand(*input_shape)
 #' x2 = np.random.rand(*input_shape)
-#' y = keras_core.layers.Maximum()([x1, x2])
+#' y = keras.layers.Maximum()([x1, x2])
 #' ```
 #'
 #' Usage in a Keras model:
 #'
 #' ```python
-#' input1 = keras_core.layers.Input(shape=(16,))
-#' x1 = keras_core.layers.Dense(8, activation='relu')(input1)
-#' input2 = keras_core.layers.Input(shape=(32,))
-#' x2 = keras_core.layers.Dense(8, activation='relu')(input2)
-#' # equivalent to `y = keras_core.layers.maximum([x1, x2])`
-#' y = keras_core.layers.Maximum()([x1, x2])
-#' out = keras_core.layers.Dense(4)(y)
-#' model = keras_core.models.Model(inputs=[input1, input2], outputs=out)
+#' input1 = keras.layers.Input(shape=(16,))
+#' x1 = keras.layers.Dense(8, activation='relu')(input1)
+#' input2 = keras.layers.Input(shape=(32,))
+#' x2 = keras.layers.Dense(8, activation='relu')(input2)
+#' # equivalent to `y = keras.layers.maximum([x1, x2])`
+#' y = keras.layers.Maximum()([x1, x2])
+#' out = keras.layers.Dense(4)(y)
+#' model = keras.models.Model(inputs=[input1, input2], outputs=out)
 #' ```
 #'
 #' @export
@@ -447,18 +447,18 @@ r"-(Computes elementwise minimum on a list of inputs.
     >>> input_shape = (2, 3, 4)
     >>> x1 = np.random.rand(*input_shape)
     >>> x2 = np.random.rand(*input_shape)
-    >>> y = keras_core.layers.Minimum()([x1, x2])
+    >>> y = keras.layers.Minimum()([x1, x2])
 
     Usage in a Keras model:
 
-    >>> input1 = keras_core.layers.Input(shape=(16,))
-    >>> x1 = keras_core.layers.Dense(8, activation='relu')(input1)
-    >>> input2 = keras_core.layers.Input(shape=(32,))
-    >>> x2 = keras_core.layers.Dense(8, activation='relu')(input2)
-    >>> # equivalent to `y = keras_core.layers.minimum([x1, x2])`
-    >>> y = keras_core.layers.Minimum()([x1, x2])
-    >>> out = keras_core.layers.Dense(4)(y)
-    >>> model = keras_core.models.Model(inputs=[input1, input2], outputs=out)
+    >>> input1 = keras.layers.Input(shape=(16,))
+    >>> x1 = keras.layers.Dense(8, activation='relu')(input1)
+    >>> input2 = keras.layers.Input(shape=(32,))
+    >>> x2 = keras.layers.Dense(8, activation='relu')(input2)
+    >>> # equivalent to `y = keras.layers.minimum([x1, x2])`
+    >>> y = keras.layers.Minimum()([x1, x2])
+    >>> out = keras.layers.Dense(4)(y)
+    >>> model = keras.models.Model(inputs=[input1, input2], outputs=out)
 
     )-"
 
@@ -475,20 +475,20 @@ r"-(Computes elementwise minimum on a list of inputs.
 #' input_shape = (2, 3, 4)
 #' x1 = np.random.rand(*input_shape)
 #' x2 = np.random.rand(*input_shape)
-#' y = keras_core.layers.Minimum()([x1, x2])
+#' y = keras.layers.Minimum()([x1, x2])
 #' ```
 #'
 #' Usage in a Keras model:
 #'
 #' ```python
-#' input1 = keras_core.layers.Input(shape=(16,))
-#' x1 = keras_core.layers.Dense(8, activation='relu')(input1)
-#' input2 = keras_core.layers.Input(shape=(32,))
-#' x2 = keras_core.layers.Dense(8, activation='relu')(input2)
-#' # equivalent to `y = keras_core.layers.minimum([x1, x2])`
-#' y = keras_core.layers.Minimum()([x1, x2])
-#' out = keras_core.layers.Dense(4)(y)
-#' model = keras_core.models.Model(inputs=[input1, input2], outputs=out)
+#' input1 = keras.layers.Input(shape=(16,))
+#' x1 = keras.layers.Dense(8, activation='relu')(input1)
+#' input2 = keras.layers.Input(shape=(32,))
+#' x2 = keras.layers.Dense(8, activation='relu')(input2)
+#' # equivalent to `y = keras.layers.minimum([x1, x2])`
+#' y = keras.layers.Minimum()([x1, x2])
+#' out = keras.layers.Dense(4)(y)
+#' model = keras.models.Model(inputs=[input1, input2], outputs=out)
 #' ```
 #'
 #' @export
@@ -527,18 +527,18 @@ r"-(Performs elementwise multiplication.
     >>> input_shape = (2, 3, 4)
     >>> x1 = np.random.rand(*input_shape)
     >>> x2 = np.random.rand(*input_shape)
-    >>> y = keras_core.layers.Multiply()([x1, x2])
+    >>> y = keras.layers.Multiply()([x1, x2])
 
     Usage in a Keras model:
 
-    >>> input1 = keras_core.layers.Input(shape=(16,))
-    >>> x1 = keras_core.layers.Dense(8, activation='relu')(input1)
-    >>> input2 = keras_core.layers.Input(shape=(32,))
-    >>> x2 = keras_core.layers.Dense(8, activation='relu')(input2)
-    >>> # equivalent to `y = keras_core.layers.multiply([x1, x2])`
-    >>> y = keras_core.layers.Multiply()([x1, x2])
-    >>> out = keras_core.layers.Dense(4)(y)
-    >>> model = keras_core.models.Model(inputs=[input1, input2], outputs=out)
+    >>> input1 = keras.layers.Input(shape=(16,))
+    >>> x1 = keras.layers.Dense(8, activation='relu')(input1)
+    >>> input2 = keras.layers.Input(shape=(32,))
+    >>> x2 = keras.layers.Dense(8, activation='relu')(input2)
+    >>> # equivalent to `y = keras.layers.multiply([x1, x2])`
+    >>> y = keras.layers.Multiply()([x1, x2])
+    >>> out = keras.layers.Dense(4)(y)
+    >>> model = keras.models.Model(inputs=[input1, input2], outputs=out)
 
     )-"
 
@@ -555,20 +555,20 @@ r"-(Performs elementwise multiplication.
 #' input_shape = (2, 3, 4)
 #' x1 = np.random.rand(*input_shape)
 #' x2 = np.random.rand(*input_shape)
-#' y = keras_core.layers.Multiply()([x1, x2])
+#' y = keras.layers.Multiply()([x1, x2])
 #' ```
 #'
 #' Usage in a Keras model:
 #'
 #' ```python
-#' input1 = keras_core.layers.Input(shape=(16,))
-#' x1 = keras_core.layers.Dense(8, activation='relu')(input1)
-#' input2 = keras_core.layers.Input(shape=(32,))
-#' x2 = keras_core.layers.Dense(8, activation='relu')(input2)
-#' # equivalent to `y = keras_core.layers.multiply([x1, x2])`
-#' y = keras_core.layers.Multiply()([x1, x2])
-#' out = keras_core.layers.Dense(4)(y)
-#' model = keras_core.models.Model(inputs=[input1, input2], outputs=out)
+#' input1 = keras.layers.Input(shape=(16,))
+#' x1 = keras.layers.Dense(8, activation='relu')(input1)
+#' input2 = keras.layers.Input(shape=(32,))
+#' x2 = keras.layers.Dense(8, activation='relu')(input2)
+#' # equivalent to `y = keras.layers.multiply([x1, x2])`
+#' y = keras.layers.Multiply()([x1, x2])
+#' out = keras.layers.Dense(4)(y)
+#' model = keras.models.Model(inputs=[input1, input2], outputs=out)
 #' ```
 #'
 #' @export
@@ -608,18 +608,18 @@ r"-(Performs elementwise subtraction.
     >>> input_shape = (2, 3, 4)
     >>> x1 = np.random.rand(*input_shape)
     >>> x2 = np.random.rand(*input_shape)
-    >>> y = keras_core.layers.Subtract()([x1, x2])
+    >>> y = keras.layers.Subtract()([x1, x2])
 
     Usage in a Keras model:
 
-    >>> input1 = keras_core.layers.Input(shape=(16,))
-    >>> x1 = keras_core.layers.Dense(8, activation='relu')(input1)
-    >>> input2 = keras_core.layers.Input(shape=(32,))
-    >>> x2 = keras_core.layers.Dense(8, activation='relu')(input2)
-    >>> # equivalent to `subtracted = keras_core.layers.subtract([x1, x2])`
-    >>> subtracted = keras_core.layers.Subtract()([x1, x2])
-    >>> out = keras_core.layers.Dense(4)(subtracted)
-    >>> model = keras_core.models.Model(inputs=[input1, input2], outputs=out)
+    >>> input1 = keras.layers.Input(shape=(16,))
+    >>> x1 = keras.layers.Dense(8, activation='relu')(input1)
+    >>> input2 = keras.layers.Input(shape=(32,))
+    >>> x2 = keras.layers.Dense(8, activation='relu')(input2)
+    >>> # equivalent to `subtracted = keras.layers.subtract([x1, x2])`
+    >>> subtracted = keras.layers.Subtract()([x1, x2])
+    >>> out = keras.layers.Dense(4)(subtracted)
+    >>> model = keras.models.Model(inputs=[input1, input2], outputs=out)
 
     )-"
 
@@ -637,20 +637,20 @@ r"-(Performs elementwise subtraction.
 #' input_shape = (2, 3, 4)
 #' x1 = np.random.rand(*input_shape)
 #' x2 = np.random.rand(*input_shape)
-#' y = keras_core.layers.Subtract()([x1, x2])
+#' y = keras.layers.Subtract()([x1, x2])
 #' ```
 #'
 #' Usage in a Keras model:
 #'
 #' ```python
-#' input1 = keras_core.layers.Input(shape=(16,))
-#' x1 = keras_core.layers.Dense(8, activation='relu')(input1)
-#' input2 = keras_core.layers.Input(shape=(32,))
-#' x2 = keras_core.layers.Dense(8, activation='relu')(input2)
-#' # equivalent to `subtracted = keras_core.layers.subtract([x1, x2])`
-#' subtracted = keras_core.layers.Subtract()([x1, x2])
-#' out = keras_core.layers.Dense(4)(subtracted)
-#' model = keras_core.models.Model(inputs=[input1, input2], outputs=out)
+#' input1 = keras.layers.Input(shape=(16,))
+#' x1 = keras.layers.Dense(8, activation='relu')(input1)
+#' input2 = keras.layers.Input(shape=(32,))
+#' x2 = keras.layers.Dense(8, activation='relu')(input2)
+#' # equivalent to `subtracted = keras.layers.subtract([x1, x2])`
+#' subtracted = keras.layers.Subtract()([x1, x2])
+#' out = keras.layers.Dense(4)(subtracted)
+#' model = keras.models.Model(inputs=[input1, input2], outputs=out)
 #' ```
 #'
 #' @export

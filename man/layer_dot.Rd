@@ -35,14 +35,14 @@ will result in a tensor with shape \verb{(2, 5, 10)}
 \section{Examples}{
 \if{html}{\out{<div class="sourceCode python">}}\preformatted{x = np.arange(10).reshape(1, 5, 2)
 y = np.arange(10, 20).reshape(1, 2, 5)
-keras_core.layers.Dot(axes=(1, 2))([x, y])
+keras.layers.Dot(axes=(1, 2))([x, y])
 }\if{html}{\out{</div>}}
 
 Usage in a Keras model:
 
-\if{html}{\out{<div class="sourceCode python">}}\preformatted{x1 = keras_core.layers.Dense(8)(np.arange(10).reshape(5, 2))
-x2 = keras_core.layers.Dense(8)(np.arange(10, 20).reshape(5, 2))
-y = keras_core.layers.Dot(axes=1)([x1, x2])
+\if{html}{\out{<div class="sourceCode python">}}\preformatted{x1 = keras.layers.Dense(8)(np.arange(10).reshape(5, 2))
+x2 = keras.layers.Dense(8)(np.arange(10, 20).reshape(5, 2))
+y = keras.layers.Dot(axes=1)([x1, x2])
 }\if{html}{\out{</div>}}
 }
 
