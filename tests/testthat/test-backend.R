@@ -13,7 +13,8 @@ test_backend <- function(name, expr, required_version = NULL) {
                 paste0(name, " backend function"), expr)
 }
 
-test_backend("k_abs", k_abs(42))
+# TODO: should ops coerce inputs with `ops$convert_to_tensor()`?
+test_backend("k_abs", k_abs(array(42)))
 
 test_backend("k_all", {
   skip_if_cntk()
