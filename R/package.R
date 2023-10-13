@@ -222,7 +222,7 @@ resolve_implementation_module <- function() {
   module
 }
 
-get_keras_implementation <- function(default = "keras_core") {
+get_keras_implementation <- function(default = "keras") {
   get_keras_option("KERAS_IMPLEMENTATION", default = default)
 }
 

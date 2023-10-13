@@ -31,9 +31,21 @@ install_keras <- function(...,
      reticulate::virtualenv_exists(envname))
     reticulate::virtualenv_remove(envname, confirm = FALSE)
 
+  pgs <- c("keras-core", extra_packages, backend[1])
   reticulate::py_install(
-    c("keras-core", extra_packages, backend[1]),
+    c("tensorflow"),
     envname = envname,
+    python_version = "3.10",
+    ...
+  )
+
+  # Error presented, but install succeeds:
+  # ERROR: pip's dependency resolver does not currently take into account all the packages that are installed. This behaviour is the source of the following dependency conflicts.
+  # tensorflow-macos 2.14.0 requires keras<2.15,>=2.14.0, but you have keras 3.0.0 which is incompatible.
+  reticulate::py_install(
+    "git+https://github.com/keras-team/keras#egg=keras",
+    envname = envname,
+    python_version = "3.10",
     ...
   )
 
