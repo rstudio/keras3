@@ -27,9 +27,23 @@ install_keras <- function(...,
                           # # new_env = identical(envname, "r-keras")
                           ) {
 
-  if(identical(envname, "r-keras") &&
-     reticulate::virtualenv_exists(envname))
-    reticulate::virtualenv_remove(envname, confirm = FALSE)
+  # if(identical(envname, "r-keras") &&
+  #    reticulate::virtualenv_exists(envname))
+  #   reticulate::virtualenv_remove(envname, confirm = FALSE)
+
+  python <- envname |>
+    virtualenv_create("3.10", force = identical(envname, "r-keras"), packages = NULL) |>
+    virtualenv_python()
+
+  # withr::local_dir(withr::local_tempdir())
+  withr::local_dir("~/github/keras-team/keras")
+  system("git pull")
+  system2(python, c("-m pip install -r requirements.txt"))
+  system2(python, c("pip_build.py --install"))
+  message("Done!")
+
+  return(invisible())
+
 
   pgs <- c("keras-core", extra_packages, backend[1])
   reticulate::py_install(
