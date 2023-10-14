@@ -23,17 +23,19 @@ install_keras <- function(...,
                           envname = "r-keras",
                           extra_packages = NULL,
                           backend = c("tensorflow", "jax", "pytorch")
-                          # # envname = "r-keras",
-                          # # new_env = identical(envname, "r-keras")
                           ) {
+  # # envname = "r-keras",
+  # # new_env = identical(envname, "r-keras")
 
   # if(identical(envname, "r-keras") &&
   #    reticulate::virtualenv_exists(envname))
   #   reticulate::virtualenv_remove(envname, confirm = FALSE)
 
   python <- envname |>
-    virtualenv_create("3.10", force = identical(envname, "r-keras"), packages = NULL) |>
-    virtualenv_python()
+    reticulate::virtualenv_create("3.10",
+                                  force = identical(envname, "r-keras"),
+                                  packages = NULL) |>
+    reticulate::virtualenv_python()
 
   # withr::local_dir(withr::local_tempdir())
   withr::local_dir("~/github/keras-team/keras")
