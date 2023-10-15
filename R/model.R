@@ -87,6 +87,9 @@ keras_model_sequential <- function(layers = NULL, name = NULL, ...) {
   if (length(list(...)))
     layers <- c(sequential_model_input_layer(...), layers)
 
+  if(!is.null(layers) && !is.list(layers))
+    layers <- list(layers)
+
   keras$models$Sequential(layers = layers, name = name)
 }
 
