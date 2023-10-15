@@ -6,7 +6,7 @@
 \usage{
 layer_lambda(
   object,
-  f,
+  `function`,
   output_shape = NULL,
   mask = NULL,
   arguments = NULL,
@@ -14,7 +14,7 @@ layer_lambda(
 )
 }
 \arguments{
-\item{f}{The function to be evaluated. Takes input tensor as first
+\item{function}{The function to be evaluated. Takes input tensor as first
 argument.}
 
 \item{output_shape}{Expected output shape from function. This argument

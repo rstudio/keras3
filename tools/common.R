@@ -560,10 +560,10 @@ mk_export <- function(endpoint) {
   r_fn <- make_r_fn(endpoint, py_obj, type, arg_transformers)
 #
   # fixes for special cases
-  if (endpoint == "keras.layers.Lambda") {
-    names(formals(r_fn)) %<>% replace_val("function", "f")
-    names(params)        %<>% replace_val("function", "f")
-  }
+  # if (endpoint == "keras.layers.Lambda") {
+  #   names(formals(r_fn)) %<>% replace_val("function", "f")
+  #   names(params)        %<>% replace_val("function", "f")
+  # }
 
   # finish
   dump <- dump_keras_export(doc, params, tags, r_name, r_fn)

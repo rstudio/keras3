@@ -634,7 +634,7 @@ r"-(Wraps arbitrary expressions as a `Layer` object.
 #' model.add(Lambda(lambda x: x ** 2))
 #' ```
 #'
-#' @param f The function to be evaluated. Takes input tensor as first
+#' @param function The function to be evaluated. Takes input tensor as first
 #'     argument.
 #' @param output_shape Expected output shape from function. This argument
 #'     can usually be inferred if not explicitly provided.
@@ -659,12 +659,12 @@ r"-(Wraps arbitrary expressions as a `Layer` object.
 #' @seealso
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/layers/Lambda>
 layer_lambda <-
-function (object, f, output_shape = NULL, mask = NULL, arguments = NULL,
-    ...)
+function (object, `function`, output_shape = NULL, mask = NULL,
+    arguments = NULL, ...)
 {
     args <- capture_args2(list(input_shape = normalize_shape,
-        batch_size = as_integer, batch_input_shape = normalize_shape),
-        ignore = "object")
+        batch_size = as_integer, batch_input_shape = normalize_shape,
+        output_shape = normalize_shape), ignore = "object")
     create_layer(keras$layers$Lambda, object, args)
 }
 

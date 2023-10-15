@@ -47,6 +47,11 @@ keras.layers.Hashing:
 keras.layers.Input:
   shape: normalize_shape
 
+# TODO: globbing on args?
+# e.g.: *_shape: normalize_shape
+keras.layers.Lambda:
+  output_shape: normalize_shape
+
 keras.layers.Permute:
   dims: tuple(lapply(x, as_integer))
 
