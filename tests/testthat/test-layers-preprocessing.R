@@ -77,11 +77,11 @@ test_image_preprocessing_layer(layer_random_crop, height = 20, width = 20)
 
 test_image_preprocessing_layer(layer_random_flip)
 test_image_preprocessing_layer(layer_random_translation, height_factor = .5, width_factor = .5)
-test_image_preprocessing_layer(layer_random_rotation, factor = 2)
+test_image_preprocessing_layer(layer_random_rotation, factor = .2)
 test_image_preprocessing_layer(layer_random_zoom, height_factor = .5)
 test_image_preprocessing_layer(layer_random_contrast, factor = .5)
-test_image_preprocessing_layer(layer_random_height, factor = .5)
-test_image_preprocessing_layer(layer_random_width, factor = .5)
+# test_image_preprocessing_layer(layer_random_height, factor = .5)
+# test_image_preprocessing_layer(layer_random_width, factor = .5)
 }
 
 

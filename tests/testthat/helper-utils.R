@@ -154,6 +154,7 @@ expect_tensor <- function(x, shape=NULL, shaped_as=NULL) {
   ))
 
   if(!is.null(shape)) {
+    shape <- as.list(shape)
     eval(chk_expr)
   }
 
