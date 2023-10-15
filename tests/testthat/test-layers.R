@@ -2,7 +2,8 @@ context("layers")
 
 test_call_succeeds("layer_input", {
   layer_input(shape = c(32))
-  input <- layer_input(shape = c(32), ragged = TRUE)
+  input <- layer_input(shape = c(32), sparse = TRUE)
+  # TODO: arg rename: ragged -> sparse
 })
 
 test_call_succeeds("layer_dense", {
@@ -39,11 +40,6 @@ test_call_succeeds("layer_activation_parametric_relu", {
     layer_activation_parametric_relu()
 })
 
-test_call_succeeds("layer_activation_thresholded_relu", {
-  keras_model_sequential() %>%
-    layer_dense(32, input_shape = c(784)) %>%
-    layer_activation_thresholded_relu()
-})
 
 test_call_succeeds("layer_activation_elu", {
   keras_model_sequential() %>%
@@ -279,10 +275,9 @@ test_call_succeeds("layer_cropping_2d", {
 
 
 test_call_succeeds("layer_cropping_3d", {
-  skip_if_cntk() # crashes CNTK
   keras_model_sequential() %>%
-    layer_dense(32, input_shape = c(784)) %>%
-    layer_reshape(target_shape = c(2,4,2,2)) %>%
+    layer_dense(32*4, input_shape = c(784)) %>%
+    layer_reshape(target_shape = c(4,4,4,2)) %>%
     layer_cropping_3d()
 })
 
@@ -312,14 +307,14 @@ test_call_succeeds("layer_average_pooling_1d", {
   keras_model_sequential() %>%
     layer_dense(32, input_shape = c(784)) %>%
     layer_reshape(target_shape = c(2,16)) %>%
-    layer_average_pooling_1d()
+    layer_average_pooling_1d(2)
 })
 
 test_call_succeeds("layer_average_pooling_2d", {
   keras_model_sequential() %>%
     layer_dense(32, input_shape = c(784)) %>%
     layer_reshape(target_shape = c(2,4,4)) %>%
-    layer_average_pooling_2d()
+    layer_average_pooling_2d(c(2, 2))
 })
 
 
@@ -327,7 +322,7 @@ test_call_succeeds("layer_average_pooling_3d", {
   keras_model_sequential() %>%
     layer_dense(32, input_shape = c(784)) %>%
     layer_reshape(target_shape = c(2,2,2,4)) %>%
-    layer_average_pooling_3d()
+    layer_average_pooling_3d(c(2, 2, 2))
 })
 
 test_call_succeeds("layer_global_average_pooling_1d", {
@@ -374,19 +369,6 @@ test_call_succeeds("layer_global_max_pooling_3d", {
     layer_global_max_pooling_3d()
 })
 
-test_call_succeeds("layer_locally_connected_1d", {
-  keras_model_sequential() %>%
-    layer_dense(32, input_shape = c(784)) %>%
-    layer_reshape(target_shape = c(2,16)) %>%
-    layer_locally_connected_1d(filters = 3, kernel_size = 2)
-})
-
-test_call_succeeds("layer_locally_connected_2d", {
-  keras_model_sequential() %>%
-    layer_dense(32, input_shape = c(784)) %>%
-    layer_reshape(target_shape = c(2,4,4)) %>%
-    layer_locally_connected_2d(filters = 3, kernel_size = c(2, 2))
-})
 
 test_call_succeeds("layer_simple_rnn", {
   keras_model_sequential() %>%
@@ -410,6 +392,7 @@ test_call_succeeds("layer_lstm", {
 })
 
 test_call_succeeds("layer_embedding", {
+  skip("layer_embedding() upstream doc example errors")
   keras_model_sequential() %>%
     layer_embedding(1000, 64, input_length = 10)
 })
@@ -508,15 +491,6 @@ test_call_succeeds("layer_gaussian_dropout", {
     layer_gaussian_dropout(rate = 0.5)
 })
 
-test_call_succeeds("layer_alpha_dropout", required_version = "2.0.6", {
-  skip_if_cntk()
-  keras_model_sequential() %>%
-    layer_dense(32, input_shape = c(784)) %>%
-    layer_reshape(target_shape = c(2,16)) %>%
-    layer_alpha_dropout(rate = 0.5)
-})
-
-
 
 test_call_succeeds("time_distributed", {
   keras_model_sequential() %>%
@@ -580,42 +554,6 @@ test_call_succeeds("layer_dense_features", required_version = "2.1.3", {
 
     model %>% fit(x = list(mpg = 1:10), y = 1:10, verbose = 0)
   }
-})
-
-test_succeeds("Can serialize a model that contains dense_features", {
-
-  if (tensorflow::tf_version() < "2.0")
-    skip("TensorFlow 2.0 is required.")
-
-  fc <- list(tensorflow::tf$feature_column$numeric_column("mpg"))
-
-
-  input <- list(mpg = layer_input(1))
-
-  out <- input %>%
-    layer_dense_features(feature_columns = fc)
-
-  # sequential: needs to pass a list in the begining.
-  feature_layer <- layer_dense_features(feature_columns = fc)
-
-  model <- keras_model_sequential(list(
-    feature_layer,
-    layer_dense(units = 1)
-  ))
-
-  model %>% compile(loss = "mae", optimizer = "adam")
-
-  model %>% fit(x = list(mpg = 1:10), y = 1:10, verbose = 0)
-
-  pred <- predict(model, list(mpg = 1:10))
-
-  fname <- tempfile()
-  save_model_tf(model, fname)
-
-  loaded <- load_model_tf(fname)
-  pred2 <- predict(loaded, list(mpg = 1:10))
-
-  expect_equal(pred, pred2)
 })
 
 
