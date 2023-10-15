@@ -171,8 +171,8 @@ r"-(Layer that normalizes its inputs.
 #'     until `compile()` is called again.
 #'
 #' # Call Arguments
-#' inputs: Input tensor (of any rank).
-#' training: Python boolean indicating whether the layer should behave in
+#' - `inputs`: Input tensor (of any rank).
+#' - `training`: Python boolean indicating whether the layer should behave in
 #'     training mode or in inference mode.
 #'     - `training=True`: The layer will normalize its inputs using
 #'     the mean and variance of the current batch of inputs.

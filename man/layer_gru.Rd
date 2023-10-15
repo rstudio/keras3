@@ -159,19 +159,21 @@ final_state.shape
 }\if{html}{\out{</div>}}
 }
 \section{Call Arguments}{
-inputs: A 3D tensor, with shape \verb{(batch, timesteps, feature)}.
-mask: Binary tensor of shape \verb{(samples, timesteps)} indicating whether
+\itemize{
+\item \code{inputs}: A 3D tensor, with shape \verb{(batch, timesteps, feature)}.
+\item \code{mask}: Binary tensor of shape \verb{(samples, timesteps)} indicating whether
 a given timestep should be masked  (optional).
 An individual \code{True} entry indicates that the corresponding timestep
 should be utilized, while a \code{False} entry indicates that the
 corresponding timestep should be ignored. Defaults to \code{None}.
-training: Python boolean indicating whether the layer should behave in
+\item \code{training}: Python boolean indicating whether the layer should behave in
 training mode or in inference mode. This argument is passed to the
 cell when calling it. This is only relevant if \code{dropout} or
 \code{recurrent_dropout} is used  (optional). Defaults to \code{None}.
-initial_state: List of initial state tensors to be passed to the first
+\item \code{initial_state}: List of initial state tensors to be passed to the first
 call of the cell (optional, \code{None} causes creation
 of zero-filled initial state tensors). Defaults to \code{None}.
+}
 }
 
 \seealso{

@@ -78,28 +78,30 @@ Finally, the result tensor with the last dimension as \code{value_dim} can take
 a linear projection and return.
 }
 \section{Call Arguments}{
-query: Query tensor of shape \verb{(B, T, dim)}, where \code{B} is the batch size,
+\itemize{
+\item \code{query}: Query tensor of shape \verb{(B, T, dim)}, where \code{B} is the batch size,
 \code{T} is the target sequence length, and dim is the feature dimension.
-value: Value tensor of shape \verb{(B, S, dim)}, where \code{B} is the batch size,
+\item \code{value}: Value tensor of shape \verb{(B, S, dim)}, where \code{B} is the batch size,
 \code{S} is the source sequence length, and dim is the feature dimension.
-key: Optional key tensor of shape \verb{(B, S, dim)}. If not given, will
+\item \code{key}: Optional key tensor of shape \verb{(B, S, dim)}. If not given, will
 use \code{value} for both \code{key} and \code{value}, which is the most common
 case.
-attention_mask: a boolean mask of shape \verb{(B, T, S)}, that prevents
+\item \code{attention_mask}: a boolean mask of shape \verb{(B, T, S)}, that prevents
 attention to certain positions. The boolean mask specifies which
 query elements can attend to which key elements, 1 indicates
 attention and 0 indicates no attention. Broadcasting can happen for
 the missing batch dimensions and the head dimension.
-return_attention_scores: A boolean to indicate whether the output should
+\item \code{return_attention_scores}: A boolean to indicate whether the output should
 be \verb{(attention_output, attention_scores)} if \code{True}, or
 \code{attention_output} if \code{False}. Defaults to \code{False}.
-training: Python boolean indicating whether the layer should behave in
+\item \code{training}: Python boolean indicating whether the layer should behave in
 training mode (adding dropout) or in inference mode (no dropout).
 Will go with either using the training mode of the parent
 layer/model, or \code{False} (inference) if there is no parent layer.
-use_causal_mask: A boolean to indicate whether to apply a causal mask to
+\item \code{use_causal_mask}: A boolean to indicate whether to apply a causal mask to
 prevent tokens from attending to future tokens (e.g., used in a
 decoder Transformer).
+}
 }
 
 \section{Returns}{

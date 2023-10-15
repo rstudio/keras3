@@ -30,9 +30,11 @@ The behavior is the same as for \code{tf.reduce_mean} or \code{np.mean}.}
 Global average pooling operation for temporal data.
 }
 \section{Call Arguments}{
-inputs: A 3D tensor.
-mask: Binary tensor of shape \verb{(batch_size, steps)} indicating whether
+\itemize{
+\item \code{inputs}: A 3D tensor.
+\item \code{mask}: Binary tensor of shape \verb{(batch_size, steps)} indicating whether
 a given step should be masked (excluded from the average).
+}
 }
 
 \section{Input Shape}{

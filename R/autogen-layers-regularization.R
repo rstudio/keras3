@@ -106,8 +106,8 @@ r"-(Applies dropout to the input.
 #' not have any variables/weights that can be frozen during training.)
 #'
 #' # Call Arguments
-#' inputs: Input tensor (of any rank).
-#' training: Python boolean indicating whether the layer should behave in
+#' - `inputs`: Input tensor (of any rank).
+#' - `training`: Python boolean indicating whether the layer should behave in
 #'     training mode (adding dropout) or in inference mode (doing nothing).
 #'
 #' @param rate Float between 0 and 1. Fraction of the input units to drop.
@@ -159,8 +159,8 @@ r"-(Apply multiplicative 1-centered Gaussian noise.
 #' As it is a regularization layer, it is only active at training time.
 #'
 #' # Call Arguments
-#' inputs: Input tensor (of any rank).
-#' training: Python boolean indicating whether the layer should behave in
+#' - `inputs`: Input tensor (of any rank).
+#' - `training`: Python boolean indicating whether the layer should behave in
 #'     training mode (adding dropout) or in inference mode (doing nothing).
 #'
 #' @param rate Float, drop probability (as with `Dropout`).
@@ -216,8 +216,8 @@ r"-(Apply additive zero-centered Gaussian noise.
 #' As it is a regularization layer, it is only active at training time.
 #'
 #' # Call Arguments
-#' inputs: Input tensor (of any rank).
-#' training: Python boolean indicating whether the layer should behave in
+#' - `inputs`: Input tensor (of any rank).
+#' - `training`: Python boolean indicating whether the layer should behave in
 #'     training mode (adding noise) or in inference mode (doing nothing).
 #'
 #' @param stddev Float, standard deviation of the noise distribution.
@@ -282,8 +282,8 @@ r"-(Spatial 1D version of Dropout.
 #' between feature maps and should be used instead.
 #'
 #' # Call Arguments
-#' inputs: A 3D tensor.
-#' training: Python boolean indicating whether the layer
+#' - `inputs`: A 3D tensor.
+#' - `training`: Python boolean indicating whether the layer
 #'     should behave in training mode (applying dropout)
 #'     or in inference mode (pass-through).
 #'
@@ -366,8 +366,8 @@ r"-(Spatial 2D version of Dropout.
 #' between feature maps and should be used instead.
 #'
 #' # Call Arguments
-#' inputs: A 4D tensor.
-#' training: Python boolean indicating whether the layer
+#' - `inputs`: A 4D tensor.
+#' - `training`: Python boolean indicating whether the layer
 #'     should behave in training mode (applying dropout)
 #'     or in inference mode (pass-through).
 #'
@@ -460,8 +460,8 @@ r"-(Spatial 3D version of Dropout.
 #' between feature maps and should be used instead.
 #'
 #' # Call Arguments
-#' inputs: A 5D tensor.
-#' training: Python boolean indicating whether the layer
+#' - `inputs`: A 5D tensor.
+#' - `training`: Python boolean indicating whether the layer
 #'         should behave in training mode (applying dropout)
 #'         or in inference mode (pass-through).
 #'

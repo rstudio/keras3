@@ -4085,7 +4085,7 @@ Returns:
 #' https://arxiv.org/pdf/1905.02244.pdf) (ICCV 2019)
 #'
 #' # Call Arguments
-#' inputs: A floating point `numpy.array` or backend-native tensor,
+#' - `inputs`: A floating point `numpy.array` or backend-native tensor,
 #' 4D with 3 color channels, with values in the range `[0, 255]`
 #' if `include_preprocessing` is `True` and in the range `[-1, 1]`
 #' otherwise.
@@ -4316,7 +4316,7 @@ Returns:
 #' https://arxiv.org/pdf/1905.02244.pdf) (ICCV 2019)
 #'
 #' # Call Arguments
-#' inputs: A floating point `numpy.array` or backend-native tensor,
+#' - `inputs`: A floating point `numpy.array` or backend-native tensor,
 #' 4D with 3 color channels, with values in the range `[0, 255]`
 #' if `include_preprocessing` is `True` and in the range `[-1, 1]`
 #' otherwise.

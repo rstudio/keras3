@@ -132,8 +132,8 @@ r"-(A preprocessing layer which encodes integer features.
 #' ```
 #'
 #' # Call Arguments
-#' inputs: A 1D or 2D tensor of integer inputs.
-#' count_weights: A tensor in the same shape as `inputs` indicating the
+#' - `inputs`: A 1D or 2D tensor of integer inputs.
+#' - `count_weights`: A tensor in the same shape as `inputs` indicating the
 #'     weight for each sample value when summing up in `count` mode.
 #'     Not used in `"multi_hot"` or `"one_hot"` modes.
 #'

@@ -453,8 +453,8 @@ r"-(Softmax activation layer.
 #' ```
 #'
 #' # Call Arguments
-#' inputs: The inputs (logits) to the softmax layer.
-#' mask: A boolean mask of the same shape as `inputs`. The mask
+#' - `inputs`: The inputs (logits) to the softmax layer.
+#' - `mask`: A boolean mask of the same shape as `inputs`. The mask
 #'     specifies 1 to keep and 0 to mask. Defaults to `None`.
 #'
 #' # Returns

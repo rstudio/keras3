@@ -33,10 +33,12 @@ decrease. In this case, \code{SpatialDropout2D} will help promote independence
 between feature maps and should be used instead.
 }
 \section{Call Arguments}{
-inputs: A 4D tensor.
-training: Python boolean indicating whether the layer
+\itemize{
+\item \code{inputs}: A 4D tensor.
+\item \code{training}: Python boolean indicating whether the layer
 should behave in training mode (applying dropout)
 or in inference mode (pass-through).
+}
 }
 
 \section{Input Shape}{

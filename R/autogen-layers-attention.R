@@ -75,25 +75,25 @@ r"-(Additive attention layer, a.k.a. Bahdanau-style attention.
 #' 3. Use the softmax distribution to create a linear combination of `value`
 #'     with shape `(batch_size, Tq, dim)`.
 #'
-#' # Call Args
-#' inputs: List of the following tensors:
+#' # Call Arguments
+#' - `inputs`: List of the following tensors:
 #'     - `query`: Query tensor of shape `(batch_size, Tq, dim)`.
 #'     - `value`: Value tensor of shape `(batch_size, Tv, dim)`.
 #'     - `key`: Optional key tensor of shape `(batch_size, Tv, dim)`. If
 #'         not given, will use `value` for both `key` and `value`, which is
 #'         the most common case.
-#' mask: List of the following tensors:
+#' - `mask`: List of the following tensors:
 #'     - `query_mask`: A boolean mask tensor of shape `(batch_size, Tq)`.
 #'         If given, the output will be zero at the positions where
 #'         `mask==False`.
 #'     - `value_mask`: A boolean mask tensor of shape `(batch_size, Tv)`.
 #'         If given, will apply the mask such that values at positions
 #'          where `mask==False` do not contribute to the result.
-#' return_attention_scores: bool, it `True`, returns the attention scores
+#' - `return_attention_scores`: bool, it `True`, returns the attention scores
 #'     (after masking and softmax) as an additional output argument.
-#' training: Python boolean indicating whether the layer should behave in
+#' - `training`: Python boolean indicating whether the layer should behave in
 #'     training mode (adding dropout) or in inference mode (no dropout).
-#' use_causal_mask: Boolean. Set to `True` for decoder self-attention. Adds
+#' - `use_causal_mask`: Boolean. Set to `True` for decoder self-attention. Adds
 #'     a mask such that position `i` cannot attend to positions `j > i`.
 #'     This prevents the flow of information from the future towards the
 #'     past. Defaults to `False`.
@@ -198,25 +198,25 @@ r"-(Dot-product attention layer, a.k.a. Luong-style attention.
 #' 3. Use the softmax distribution to create a linear combination of `value`
 #'     with shape `(batch_size, Tq, dim)`.
 #'
-#' # Call Args
-#' inputs: List of the following tensors:
+#' # Call Arguments
+#' - `inputs`: List of the following tensors:
 #'     - `query`: Query tensor of shape `(batch_size, Tq, dim)`.
 #'     - `value`: Value tensor of shape `(batch_size, Tv, dim)`.
 #'     - `key`: Optional key tensor of shape `(batch_size, Tv, dim)`. If
 #'         not given, will use `value` for both `key` and `value`, which is
 #'         the most common case.
-#' mask: List of the following tensors:
+#' - `mask`: List of the following tensors:
 #'     - `query_mask`: A boolean mask tensor of shape `(batch_size, Tq)`.
 #'         If given, the output will be zero at the positions where
 #'         `mask==False`.
 #'     - `value_mask`: A boolean mask tensor of shape `(batch_size, Tv)`.
 #'         If given, will apply the mask such that values at positions
 #'          where `mask==False` do not contribute to the result.
-#' return_attention_scores: bool, it `True`, returns the attention scores
+#' - `return_attention_scores`: bool, it `True`, returns the attention scores
 #'     (after masking and softmax) as an additional output argument.
-#' training: Python boolean indicating whether the layer should behave in
+#' - `training`: Python boolean indicating whether the layer should behave in
 #'     training mode (adding dropout) or in inference mode (no dropout).
-#' use_causal_mask: Boolean. Set to `True` for decoder self-attention. Adds
+#' - `use_causal_mask`: Boolean. Set to `True` for decoder self-attention. Adds
 #'     a mask such that position `i` cannot attend to positions `j > i`.
 #'     This prevents the flow of information from the future towards the
 #'     past. Defaults to `False`.
@@ -355,26 +355,26 @@ r"-(MultiHeadAttention layer.
 #' a linear projection and return.
 #'
 #' # Call Arguments
-#' query: Query tensor of shape `(B, T, dim)`, where `B` is the batch size,
+#' - `query`: Query tensor of shape `(B, T, dim)`, where `B` is the batch size,
 #'     `T` is the target sequence length, and dim is the feature dimension.
-#' value: Value tensor of shape `(B, S, dim)`, where `B` is the batch size,
+#' - `value`: Value tensor of shape `(B, S, dim)`, where `B` is the batch size,
 #'     `S` is the source sequence length, and dim is the feature dimension.
-#' key: Optional key tensor of shape `(B, S, dim)`. If not given, will
+#' - `key`: Optional key tensor of shape `(B, S, dim)`. If not given, will
 #'     use `value` for both `key` and `value`, which is the most common
 #'     case.
-#' attention_mask: a boolean mask of shape `(B, T, S)`, that prevents
+#' - `attention_mask`: a boolean mask of shape `(B, T, S)`, that prevents
 #'     attention to certain positions. The boolean mask specifies which
 #'     query elements can attend to which key elements, 1 indicates
 #'     attention and 0 indicates no attention. Broadcasting can happen for
 #'     the missing batch dimensions and the head dimension.
-#' return_attention_scores: A boolean to indicate whether the output should
+#' - `return_attention_scores`: A boolean to indicate whether the output should
 #'     be `(attention_output, attention_scores)` if `True`, or
 #'     `attention_output` if `False`. Defaults to `False`.
-#' training: Python boolean indicating whether the layer should behave in
+#' - `training`: Python boolean indicating whether the layer should behave in
 #'     training mode (adding dropout) or in inference mode (no dropout).
 #'     Will go with either using the training mode of the parent
 #'     layer/model, or `False` (inference) if there is no parent layer.
-#' use_causal_mask: A boolean to indicate whether to apply a causal mask to
+#' - `use_causal_mask`: A boolean to indicate whether to apply a causal mask to
 #'     prevent tokens from attending to future tokens (e.g., used in a
 #'     decoder Transformer).
 #'

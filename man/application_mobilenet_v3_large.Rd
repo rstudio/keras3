@@ -126,10 +126,12 @@ tensors of pixels with values in the \verb{[-1, 1]} range.
 }
 
 \section{Call Arguments}{
-inputs: A floating point \code{numpy.array} or backend-native tensor,
+\itemize{
+\item \code{inputs}: A floating point \code{numpy.array} or backend-native tensor,
 4D with 3 color channels, with values in the range \verb{[0, 255]}
 if \code{include_preprocessing} is \code{True} and in the range \verb{[-1, 1]}
 otherwise.
+}
 }
 
 \section{Returns}{

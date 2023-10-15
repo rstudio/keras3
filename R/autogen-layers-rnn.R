@@ -288,12 +288,12 @@ r"-(1D Convolutional LSTM.
 #' and recurrent transformations are both convolutional.
 #'
 #' # Call Arguments
-#' inputs: A 4D tensor.
-#' initial_state: List of initial state tensors to be passed to the first
+#' - `inputs`: A 4D tensor.
+#' - `initial_state`: List of initial state tensors to be passed to the first
 #'     call of the cell.
-#' mask: Binary tensor of shape `(samples, timesteps)` indicating whether a
+#' - `mask`: Binary tensor of shape `(samples, timesteps)` indicating whether a
 #'     given timestep should be masked.
-#' training: Python boolean indicating whether the layer should behave in
+#' - `training`: Python boolean indicating whether the layer should behave in
 #'     training mode or in inference mode.
 #'     This is only relevant if `dropout` or `recurrent_dropout` are set.
 #'
@@ -543,13 +543,13 @@ r"-(2D Convolutional LSTM.
 #' and recurrent transformations are both convolutional.
 #'
 #' # Call Arguments
-#' inputs: A 5D tensor.
-#' mask: Binary tensor of shape `(samples, timesteps)` indicating whether a
+#' - `inputs`: A 5D tensor.
+#' - `mask`: Binary tensor of shape `(samples, timesteps)` indicating whether a
 #'     given timestep should be masked.
-#' training: Python boolean indicating whether the layer should behave in
+#' - `training`: Python boolean indicating whether the layer should behave in
 #'     training mode or in inference mode.
 #'     This is only relevant if `dropout` or `recurrent_dropout` are set.
-#' initial_state: List of initial state tensors to be passed to the first
+#' - `initial_state`: List of initial state tensors to be passed to the first
 #'     call of the cell.
 #'
 #' # Input Shape
@@ -797,13 +797,13 @@ r"-(3D Convolutional LSTM.
 #' and recurrent transformations are both convolutional.
 #'
 #' # Call Arguments
-#' inputs: A 6D tensor.
-#' mask: Binary tensor of shape `(samples, timesteps)` indicating whether a
+#' - `inputs`: A 6D tensor.
+#' - `mask`: Binary tensor of shape `(samples, timesteps)` indicating whether a
 #'     given timestep should be masked.
-#' training: Python boolean indicating whether the layer should behave in
+#' - `training`: Python boolean indicating whether the layer should behave in
 #'     training mode or in inference mode.
 #'     This is only relevant if `dropout` or `recurrent_dropout` are set.
-#' initial_state: List of initial state tensors to be passed to the first
+#' - `initial_state`: List of initial state tensors to be passed to the first
 #'     call of the cell.
 #'
 #' # Input Shape
@@ -1095,17 +1095,17 @@ r"-(Gated Recurrent Unit - Cho et al. 2014.
 #' ```
 #'
 #' # Call Arguments
-#' inputs: A 3D tensor, with shape `(batch, timesteps, feature)`.
-#' mask: Binary tensor of shape `(samples, timesteps)` indicating whether
+#' - `inputs`: A 3D tensor, with shape `(batch, timesteps, feature)`.
+#' - `mask`: Binary tensor of shape `(samples, timesteps)` indicating whether
 #'     a given timestep should be masked  (optional).
 #'     An individual `True` entry indicates that the corresponding timestep
 #'     should be utilized, while a `False` entry indicates that the
 #'     corresponding timestep should be ignored. Defaults to `None`.
-#' training: Python boolean indicating whether the layer should behave in
+#' - `training`: Python boolean indicating whether the layer should behave in
 #'     training mode or in inference mode. This argument is passed to the
 #'     cell when calling it. This is only relevant if `dropout` or
 #'     `recurrent_dropout` is used  (optional). Defaults to `None`.
-#' initial_state: List of initial state tensors to be passed to the first
+#' - `initial_state`: List of initial state tensors to be passed to the first
 #'     call of the cell (optional, `None` causes creation
 #'     of zero-filled initial state tensors). Defaults to `None`.
 #'
@@ -1268,10 +1268,10 @@ r"-(Cell class for the GRU layer.
 #' `keras.layer.GRU` processes the whole sequence.
 #'
 #' # Call Arguments
-#' inputs: A 2D tensor, with shape `(batch, features)`.
-#' states: A 2D tensor with shape `(batch, units)`, which is the state
+#' - `inputs`: A 2D tensor, with shape `(batch, features)`.
+#' - `states`: A 2D tensor with shape `(batch, units)`, which is the state
 #'     from the previous time step.
-#' training: Python boolean indicating whether the layer should behave in
+#' - `training`: Python boolean indicating whether the layer should behave in
 #'     training mode or in inference mode. Only relevant when `dropout` or
 #'     `recurrent_dropout` is used.
 #'
@@ -1503,17 +1503,17 @@ r"-(Long Short-Term Memory layer - Hochreiter 1997.
 #' ```
 #'
 #' # Call Arguments
-#' inputs: A 3D tensor, with shape `(batch, timesteps, feature)`.
-#' mask: Binary tensor of shape `(samples, timesteps)` indicating whether
+#' - `inputs`: A 3D tensor, with shape `(batch, timesteps, feature)`.
+#' - `mask`: Binary tensor of shape `(samples, timesteps)` indicating whether
 #'     a given timestep should be masked  (optional).
 #'     An individual `True` entry indicates that the corresponding timestep
 #'     should be utilized, while a `False` entry indicates that the
 #'     corresponding timestep should be ignored. Defaults to `None`.
-#' training: Python boolean indicating whether the layer should behave in
+#' - `training`: Python boolean indicating whether the layer should behave in
 #'     training mode or in inference mode. This argument is passed to the
 #'     cell when calling it. This is only relevant if `dropout` or
 #'     `recurrent_dropout` is used  (optional). Defaults to `None`.
-#' initial_state: List of initial state tensors to be passed to the first
+#' - `initial_state`: List of initial state tensors to be passed to the first
 #'     call of the cell (optional, `None` causes creation
 #'     of zero-filled initial state tensors). Defaults to `None`.
 #'
@@ -1680,10 +1680,10 @@ r"-(Cell class for the LSTM layer.
 #' `keras.layer.LSTM` processes the whole sequence.
 #'
 #' # Call Arguments
-#' inputs: A 2D tensor, with shape `(batch, features)`.
-#' states: A 2D tensor with shape `(batch, units)`, which is the state
+#' - `inputs`: A 2D tensor, with shape `(batch, features)`.
+#' - `states`: A 2D tensor with shape `(batch, units)`, which is the state
 #'     from the previous time step.
-#' training: Python boolean indicating whether the layer should behave in
+#' - `training`: Python boolean indicating whether the layer should behave in
 #'     training mode or in inference mode. Only relevant when `dropout` or
 #'     `recurrent_dropout` is used.
 #'
@@ -1936,15 +1936,15 @@ r"-(Base class for recurrent layers.
 #' @description
 #'
 #' # Call Arguments
-#' inputs: Input tensor.
-#' initial_state: List of initial state tensors to be passed to the first
+#' - `inputs`: Input tensor.
+#' - `initial_state`: List of initial state tensors to be passed to the first
 #'     call of the cell.
-#' mask: Binary tensor of shape `[batch_size, timesteps]`
+#' - `mask`: Binary tensor of shape `[batch_size, timesteps]`
 #'     indicating whether a given timestep should be masked.
 #'     An individual `True` entry indicates that the corresponding
 #'     timestep should be utilized, while a `False` entry indicates
 #'     that the corresponding timestep should be ignored.
-#' training: Python boolean indicating whether the layer should behave in
+#' - `training`: Python boolean indicating whether the layer should behave in
 #'     training mode or in inference mode. This argument is passed
 #'     to the cell when calling it.
 #'     This is for use with cells that use dropout.
@@ -2202,17 +2202,17 @@ r"-(Fully-connected RNN where the output is to be fed back as the new input.
 #' @description
 #'
 #' # Call Arguments
-#' sequence: A 3D tensor, with shape `[batch, timesteps, feature]`.
-#' mask: Binary tensor of shape `[batch, timesteps]` indicating whether
+#' - `sequence`: A 3D tensor, with shape `[batch, timesteps, feature]`.
+#' - `mask`: Binary tensor of shape `[batch, timesteps]` indicating whether
 #'     a given timestep should be masked. An individual `True` entry
 #'     indicates that the corresponding timestep should be utilized,
 #'     while a `False` entry indicates that the corresponding timestep
 #'     should be ignored.
-#' training: Python boolean indicating whether the layer should behave in
+#' - `training`: Python boolean indicating whether the layer should behave in
 #'     training mode or in inference mode.
 #'     This argument is passed to the cell when calling it.
 #'     This is only relevant if `dropout` or `recurrent_dropout` is used.
-#' initial_state: List of initial state tensors to be passed to the first
+#' - `initial_state`: List of initial state tensors to be passed to the first
 #'     call of the cell.
 #'
 #' # Examples
@@ -2374,10 +2374,10 @@ r"-(Cell class for SimpleRNN.
 #' `keras.layer.SimpleRNN` processes the whole sequence.
 #'
 #' # Call Arguments
-#' sequence: A 2D tensor, with shape `(batch, features)`.
-#' states: A 2D tensor with shape `(batch, units)`, which is the state
+#' - `sequence`: A 2D tensor, with shape `(batch, features)`.
+#' - `states`: A 2D tensor with shape `(batch, units)`, which is the state
 #'     from the previous time step.
-#' training: Python boolean indicating whether the layer should behave in
+#' - `training`: Python boolean indicating whether the layer should behave in
 #'     training mode or in inference mode. Only relevant when `dropout` or
 #'     `recurrent_dropout` is used.
 #'
@@ -2573,12 +2573,12 @@ r"-(This wrapper allows to apply a layer to every temporal slice of an input.
 #' the timestamps, the same set of weights are used at each timestamp.
 #'
 #' # Call Arguments
-#' inputs: Input tensor of shape (batch, time, ...) or nested tensors,
+#' - `inputs`: Input tensor of shape (batch, time, ...) or nested tensors,
 #'     and each of which has shape (batch, time, ...).
-#' training: Python boolean indicating whether the layer should behave in
+#' - `training`: Python boolean indicating whether the layer should behave in
 #'     training mode or in inference mode. This argument is passed to the
 #'     wrapped layer (only if the layer supports this argument).
-#' mask: Binary tensor of shape `(samples, timesteps)` indicating whether
+#' - `mask`: Binary tensor of shape `(samples, timesteps)` indicating whether
 #'     a given timestep should be masked. This argument is passed to the
 #'     wrapped layer (only if the layer supports this argument).
 #'

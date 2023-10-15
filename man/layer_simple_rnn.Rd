@@ -105,18 +105,20 @@ Unrolling is only suitable for short sequences.}
 Fully-connected RNN where the output is to be fed back as the new input.
 }
 \section{Call Arguments}{
-sequence: A 3D tensor, with shape \verb{[batch, timesteps, feature]}.
-mask: Binary tensor of shape \verb{[batch, timesteps]} indicating whether
+\itemize{
+\item \code{sequence}: A 3D tensor, with shape \verb{[batch, timesteps, feature]}.
+\item \code{mask}: Binary tensor of shape \verb{[batch, timesteps]} indicating whether
 a given timestep should be masked. An individual \code{True} entry
 indicates that the corresponding timestep should be utilized,
 while a \code{False} entry indicates that the corresponding timestep
 should be ignored.
-training: Python boolean indicating whether the layer should behave in
+\item \code{training}: Python boolean indicating whether the layer should behave in
 training mode or in inference mode.
 This argument is passed to the cell when calling it.
 This is only relevant if \code{dropout} or \code{recurrent_dropout} is used.
-initial_state: List of initial state tensors to be passed to the first
+\item \code{initial_state}: List of initial state tensors to be passed to the first
 call of the cell.
+}
 }
 
 \section{Examples}{

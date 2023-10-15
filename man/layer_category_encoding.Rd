@@ -83,10 +83,12 @@ layer([[0, 1], [0, 0], [1, 2], [3, 1]], count_weights=count_weights)
 }
 
 \section{Call Arguments}{
-inputs: A 1D or 2D tensor of integer inputs.
-count_weights: A tensor in the same shape as \code{inputs} indicating the
+\itemize{
+\item \code{inputs}: A 1D or 2D tensor of integer inputs.
+\item \code{count_weights}: A tensor in the same shape as \code{inputs} indicating the
 weight for each sample value when summing up in \code{count} mode.
 Not used in \code{"multi_hot"} or \code{"one_hot"} modes.
+}
 }
 
 \seealso{

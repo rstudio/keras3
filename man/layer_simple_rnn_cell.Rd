@@ -75,12 +75,14 @@ This class processes one step within the whole time sequence input, whereas
 \code{keras.layer.SimpleRNN} processes the whole sequence.
 }
 \section{Call Arguments}{
-sequence: A 2D tensor, with shape \verb{(batch, features)}.
-states: A 2D tensor with shape \verb{(batch, units)}, which is the state
+\itemize{
+\item \code{sequence}: A 2D tensor, with shape \verb{(batch, features)}.
+\item \code{states}: A 2D tensor with shape \verb{(batch, units)}, which is the state
 from the previous time step.
-training: Python boolean indicating whether the layer should behave in
+\item \code{training}: Python boolean indicating whether the layer should behave in
 training mode or in inference mode. Only relevant when \code{dropout} or
 \code{recurrent_dropout} is used.
+}
 }
 
 \section{Examples}{

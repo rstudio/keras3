@@ -43,28 +43,34 @@ The calculation follows the steps:
 with shape \verb{(batch_size, Tq, dim)}.
 }
 }
-\section{Call Args}{
-inputs: List of the following tensors:
-- \code{query}: Query tensor of shape \verb{(batch_size, Tq, dim)}.
-- \code{value}: Value tensor of shape \verb{(batch_size, Tv, dim)}.
-- \code{key}: Optional key tensor of shape \verb{(batch_size, Tv, dim)}. If
+\section{Call Arguments}{
+\itemize{
+\item \code{inputs}: List of the following tensors:
+\itemize{
+\item \code{query}: Query tensor of shape \verb{(batch_size, Tq, dim)}.
+\item \code{value}: Value tensor of shape \verb{(batch_size, Tv, dim)}.
+\item \code{key}: Optional key tensor of shape \verb{(batch_size, Tv, dim)}. If
 not given, will use \code{value} for both \code{key} and \code{value}, which is
 the most common case.
-mask: List of the following tensors:
-- \code{query_mask}: A boolean mask tensor of shape \verb{(batch_size, Tq)}.
+}
+\item \code{mask}: List of the following tensors:
+\itemize{
+\item \code{query_mask}: A boolean mask tensor of shape \verb{(batch_size, Tq)}.
 If given, the output will be zero at the positions where
 \code{mask==False}.
-- \code{value_mask}: A boolean mask tensor of shape \verb{(batch_size, Tv)}.
+\item \code{value_mask}: A boolean mask tensor of shape \verb{(batch_size, Tv)}.
 If given, will apply the mask such that values at positions
 where \code{mask==False} do not contribute to the result.
-return_attention_scores: bool, it \code{True}, returns the attention scores
+}
+\item \code{return_attention_scores}: bool, it \code{True}, returns the attention scores
 (after masking and softmax) as an additional output argument.
-training: Python boolean indicating whether the layer should behave in
+\item \code{training}: Python boolean indicating whether the layer should behave in
 training mode (adding dropout) or in inference mode (no dropout).
-use_causal_mask: Boolean. Set to \code{True} for decoder self-attention. Adds
+\item \code{use_causal_mask}: Boolean. Set to \code{True} for decoder self-attention. Adds
 a mask such that position \code{i} cannot attend to positions \code{j > i}.
 This prevents the flow of information from the future towards the
 past. Defaults to \code{False}.
+}
 }
 
 \section{Output}{

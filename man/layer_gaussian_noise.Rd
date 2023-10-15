@@ -20,9 +20,11 @@ for real valued inputs.
 As it is a regularization layer, it is only active at training time.
 }
 \section{Call Arguments}{
-inputs: Input tensor (of any rank).
-training: Python boolean indicating whether the layer should behave in
+\itemize{
+\item \code{inputs}: Input tensor (of any rank).
+\item \code{training}: Python boolean indicating whether the layer should behave in
 training mode (adding noise) or in inference mode (doing nothing).
+}
 }
 
 \seealso{

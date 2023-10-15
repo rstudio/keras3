@@ -123,14 +123,18 @@ until \code{compile()} is called again.
 }
 }
 \section{Call Arguments}{
-inputs: Input tensor (of any rank).
-training: Python boolean indicating whether the layer should behave in
+\itemize{
+\item \code{inputs}: Input tensor (of any rank).
+\item \code{training}: Python boolean indicating whether the layer should behave in
 training mode or in inference mode.
-- \code{training=True}: The layer will normalize its inputs using
+\itemize{
+\item \code{training=True}: The layer will normalize its inputs using
 the mean and variance of the current batch of inputs.
-- \code{training=False}: The layer will normalize its inputs using
+\item \code{training=False}: The layer will normalize its inputs using
 the mean and variance of its moving statistics, learned during
 training.
+}
+}
 }
 
 \section{Reference}{

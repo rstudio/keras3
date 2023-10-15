@@ -75,18 +75,20 @@ merging bidirectional RNNs.}
 Base class for recurrent layers.
 }
 \section{Call Arguments}{
-inputs: Input tensor.
-initial_state: List of initial state tensors to be passed to the first
+\itemize{
+\item \code{inputs}: Input tensor.
+\item \code{initial_state}: List of initial state tensors to be passed to the first
 call of the cell.
-mask: Binary tensor of shape \verb{[batch_size, timesteps]}
+\item \code{mask}: Binary tensor of shape \verb{[batch_size, timesteps]}
 indicating whether a given timestep should be masked.
 An individual \code{True} entry indicates that the corresponding
 timestep should be utilized, while a \code{False} entry indicates
 that the corresponding timestep should be ignored.
-training: Python boolean indicating whether the layer should behave in
+\item \code{training}: Python boolean indicating whether the layer should behave in
 training mode or in inference mode. This argument is passed
 to the cell when calling it.
 This is for use with cells that use dropout.
+}
 }
 
 \section{Input Shape}{

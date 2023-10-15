@@ -33,10 +33,12 @@ decrease. In this case, SpatialDropout3D will help promote independence
 between feature maps and should be used instead.
 }
 \section{Call Arguments}{
-inputs: A 5D tensor.
-training: Python boolean indicating whether the layer
+\itemize{
+\item \code{inputs}: A 5D tensor.
+\item \code{training}: Python boolean indicating whether the layer
 should behave in training mode (applying dropout)
 or in inference mode (pass-through).
+}
 }
 
 \section{Input Shape}{

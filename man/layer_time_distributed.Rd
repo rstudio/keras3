@@ -31,14 +31,16 @@ Because \code{TimeDistributed} applies the same instance of \code{Conv2D} to eac
 the timestamps, the same set of weights are used at each timestamp.
 }
 \section{Call Arguments}{
-inputs: Input tensor of shape (batch, time, ...) or nested tensors,
+\itemize{
+\item \code{inputs}: Input tensor of shape (batch, time, ...) or nested tensors,
 and each of which has shape (batch, time, ...).
-training: Python boolean indicating whether the layer should behave in
+\item \code{training}: Python boolean indicating whether the layer should behave in
 training mode or in inference mode. This argument is passed to the
 wrapped layer (only if the layer supports this argument).
-mask: Binary tensor of shape \verb{(samples, timesteps)} indicating whether
+\item \code{mask}: Binary tensor of shape \verb{(samples, timesteps)} indicating whether
 a given timestep should be masked. This argument is passed to the
 wrapped layer (only if the layer supports this argument).
+}
 }
 
 \seealso{

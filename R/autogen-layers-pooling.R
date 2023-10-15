@@ -531,8 +531,8 @@ r"-(Global average pooling operation for temporal data.
 #' @description
 #'
 #' # Call Arguments
-#' inputs: A 3D tensor.
-#' mask: Binary tensor of shape `(batch_size, steps)` indicating whether
+#' - `inputs`: A 3D tensor.
+#' - `mask`: Binary tensor of shape `(batch_size, steps)` indicating whether
 #'     a given step should be masked (excluded from the average).
 #'
 #' # Input Shape

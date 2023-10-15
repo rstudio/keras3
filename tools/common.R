@@ -36,6 +36,7 @@ tidy_section_headings <- known_section_headings |>
   str_sub(end = -2) |>
   replace_val("Args", "Arguments") |>
   replace_val("Example", "Examples") |>
+  replace_val("Call Args", "Call arguments") |>
   # replace_val("Inputs", "Input shape") |>
   # replace_val("Outputs", "Output shape") |>
   snakecase::to_snake_case()
@@ -536,6 +537,23 @@ mk_export <- function(endpoint) {
   r_name <- make_r_name(endpoint, module)
   params <- parse_params_section(doc$arguments)
   tags <- make_roxygen_tags(endpoint, py_obj, type)
+
+  if(!is.null(doc$call_arguments) &&
+     endpoint != "keras.layers.Bidirectional") {
+    doc$call_arguments %<>%
+      parse_params_section() %>%
+      {glue("- `{names(.)}`: {unname(.)}") }
+      str_flatten_lines()
+    ## This kidna works, but fails if there is a nested list within,
+    ## like w/ layer_additive_attention
+    # doc$call_arguments %<>%
+    #   parse_params_section() %>%
+    #   {glue("  \\item{<names(.)>}{<unname(.)>}",
+    #         .open = "<", .close = ">")} %>%
+    #   str_flatten_lines() %>%
+    #   sprintf("\\describe{\n%s\n}", .)
+    # browser()
+  }
 
   # r wrapper parts
   arg_transformers <- get_arg_transformers(endpoint, py_obj, params)

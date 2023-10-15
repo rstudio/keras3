@@ -28,9 +28,11 @@ f(x) = exp_x / sum(exp_x)
 }
 
 \section{Call Arguments}{
-inputs: The inputs (logits) to the softmax layer.
-mask: A boolean mask of the same shape as \code{inputs}. The mask
+\itemize{
+\item \code{inputs}: The inputs (logits) to the softmax layer.
+\item \code{mask}: A boolean mask of the same shape as \code{inputs}. The mask
 specifies 1 to keep and 0 to mask. Defaults to \code{None}.
+}
 }
 
 \section{Returns}{

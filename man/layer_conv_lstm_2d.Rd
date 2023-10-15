@@ -135,14 +135,16 @@ Similar to an LSTM layer, but the input transformations
 and recurrent transformations are both convolutional.
 }
 \section{Call Arguments}{
-inputs: A 5D tensor.
-mask: Binary tensor of shape \verb{(samples, timesteps)} indicating whether a
+\itemize{
+\item \code{inputs}: A 5D tensor.
+\item \code{mask}: Binary tensor of shape \verb{(samples, timesteps)} indicating whether a
 given timestep should be masked.
-training: Python boolean indicating whether the layer should behave in
+\item \code{training}: Python boolean indicating whether the layer should behave in
 training mode or in inference mode.
 This is only relevant if \code{dropout} or \code{recurrent_dropout} are set.
-initial_state: List of initial state tensors to be passed to the first
+\item \code{initial_state}: List of initial state tensors to be passed to the first
 call of the cell.
+}
 }
 
 \section{Input Shape}{
