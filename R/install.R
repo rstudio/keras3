@@ -38,7 +38,16 @@ install_keras <- function(...,
     reticulate::virtualenv_python()
 
   # withr::local_dir(withr::local_tempdir())
-  withr::local_dir("~/github/keras-team/keras")
+  keras_team_keras_dir <- "~/github/keras-team/keras"
+  # if(TRUE) {
+  if(!dir.exists(keras_team_keras_dir)) {
+    keras_team_keras_dir <- tempfile(pattern = "keras-team-keras-")
+    dir.create(keras_team_keras_dir)
+    system2("git",  c("clone --depth 1 --branch master https://github.com/keras-team/keras",
+                      keras_team_keras_dir))
+    withr::defer(unlink(keras_team_keras_dir, recursive = TRUE))
+  }
+  withr::local_dir(keras_team_keras_dir)
   system("git pull")
   system2(python, c("-m pip install -r requirements.txt"))
   system2(python, c("pip_build.py --install"))
