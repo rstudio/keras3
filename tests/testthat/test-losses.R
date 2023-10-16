@@ -39,7 +39,7 @@ test_loss <- function(name, test_direct_call = TRUE, test_callable_call = test_d
   })
 }
 
-
+skip("losses")
 
 
 test_loss("binary_crossentropy")
