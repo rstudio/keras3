@@ -547,6 +547,50 @@ capture_args2 <- function(modifiers = NULL, ignore = NULL) {
 }
 
 
+#' @importFrom rlang quos eval_tidy
+capture_args2 <- function(modifiers = NULL, ignore = NULL) {
+  cl0 <- cl <- sys.call(-1L)
+  envir <- parent.frame(1L)
+  fn <- sys.function(-1L)
+
+  # match.call()
+  cl <- match.call(fn, cl0, expand.dots = TRUE, envir = parent.frame(2))
+
+  fn_arg_nms <- names(formals(fn))
+  known_args <- intersect(names(cl), fn_arg_nms)
+  known_args <- setdiff(known_args, ignore)
+  names(known_args) <- known_args
+  cl2 <- c(quote(list), lapply(known_args, as.symbol))
+
+  if("..." %in% fn_arg_nms && !"..." %in% ignore) {
+    assert_all_dots_named(envir, cl)
+    # this might reorder args by assuming ... are last, but it doesn't matter
+    # since everything is supplied as a keyword arg to the Python side anyway
+    cl2 <- c(cl2, quote(...))
+  }
+
+  args <- eval(as.call(cl2), envir)
+
+  # filter out args to ignore
+  for(ig in intersect(names(cl), ignore))
+    cl[[ig]] <- NULL
+
+  # apply modifier functions. e.g., as_nullable_integer
+  nms_to_modify <- intersect(names(args), names(modifiers))
+  for (nm in nms_to_modify) {
+
+    # escape hatch: user supplied python objects pass through untransformed
+    if (inherits(args[[nm]] -> val, "python.builtin.object"))
+      next
+
+    # list() so if modifier returns NULL, don't remove the arg
+    args[nm] <- list(modifiers[[nm]](val))
+  }
+
+  args
+}
+
+
 is_scalar <- function(x) identical(length(x), 1L)
 
 is_mac_arm64 <- function() {
