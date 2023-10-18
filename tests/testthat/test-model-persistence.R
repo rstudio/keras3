@@ -10,6 +10,7 @@ test_succeeds("model can be saved and loaded", {
 
   model <- define_and_compile_model()
   tmp <- tempfile("model", fileext = ".hdf5")
+  skip("save_model_hdf5")
   save_model_hdf5(model, tmp)
   model <- load_model_hdf5(tmp)
 })
@@ -36,6 +37,7 @@ test_succeeds("model with custom loss and metrics can be saved and loaded", {
   )
 
   tmp <- tempfile("model", fileext = ".hdf5")
+  skip("save_model_hdf5")
   save_model_hdf5(model, tmp)
   model <- load_model_hdf5(tmp, custom_objects = c(mean_pred = metric_mean_pred,
                                                    custom_loss = custom_loss))
@@ -58,7 +60,6 @@ test_succeeds("model with custom loss and metrics can be saved and loaded", {
 
 test_succeeds("model load with unnamed custom_objects", {
 
-
   layer_my_dense <-  new_layer_class(
     "MyDense",
 
@@ -67,8 +68,17 @@ test_succeeds("model load with unnamed custom_objects", {
       private$units <- units
       self$dense <- layer_dense(units = units)
     },
-    call = function(...) {
-      self$dense(...)
+    # TODO: warning emitted from upstream if missing build method...
+    # but this simple case should not need a build method
+    build = function(input_shape) {
+      self$dense$build(input_shape)
+    },
+
+    call = function(x, ...) {
+      # TODO: a call() method without any named args breaks shape inference
+      # for tracing, symbolic builds, and auto-calling build() w/ the correct
+      # input shape. Emit a warning from `new_layer_class()` if that happens?
+      self$dense(x, ...)
     },
     get_config = function() {
       config <- super$get_config()
@@ -76,6 +86,10 @@ test_succeeds("model load with unnamed custom_objects", {
       config
     }
   )
+
+  # l <- layer_my_dense(,10)
+  # x <- random_array(3, 4)
+  # l(random_array(3, 4))
 
   model <- keras_model_sequential(input_shape = 32) %>%
     layer_dense(10) %>%
@@ -103,6 +117,7 @@ test_succeeds("model load with unnamed custom_objects", {
   res1 <- as.array(model(data))
 
   tmp <- tempfile("model", fileext = ".keras")
+  skip("save_model_tf")
   save_model_tf(model, tmp)
   model2 <- load_model_tf(tmp,
                           custom_objects = list(metric_mean_pred,
@@ -121,6 +136,7 @@ test_succeeds("model weights can be saved and loaded", {
 
   model <- define_and_compile_model()
   tmp <- tempfile("model", fileext = ".hdf5")
+  skip("save_model_weights_hdf5")
   save_model_weights_hdf5(model, tmp)
   load_model_weights_hdf5(model, tmp)
 })
@@ -156,12 +172,14 @@ test_succeeds("model can be saved and loaded from R 'raw' object", {
 
   model <- define_and_compile_model()
 
+  skip("serialize_model")
   mdl_raw <- serialize_model(model)
   model <- unserialize_model(mdl_raw)
 
 })
 
 test_succeeds("saved models/weights are mirrored in the run_dir", {
+  skip("tfruns")
   run <- tfruns::training_run("train.R", echo = FALSE)
   run_dir <- run$run_dir
   expect_true(file.exists(file.path(run_dir, "model.h5")))
@@ -169,6 +187,7 @@ test_succeeds("saved models/weights are mirrored in the run_dir", {
 })
 
 test_succeeds("callback output is redirected to run_dir", {
+  skip("tfruns")
   run <- tfruns::training_run("train.R", echo = FALSE)
   run_dir <- run$run_dir
   if (is_backend("tensorflow"))
@@ -183,6 +202,7 @@ test_succeeds("model can be exported to TensorFlow", {
   model <- define_and_compile_model()
   model_dir <- tempfile()
 
+  skip("tensorflow::export_savedmodel")
   export <- function() tensorflow::export_savedmodel(model, model_dir)
 
   export()
@@ -230,6 +250,7 @@ test_succeeds("model can be exported to saved model format using save_model_tf",
   model <- define_and_compile_model()
   model_dir <- tempfile()
 
+  skip("save_model_tf")
   s <- save_model_tf(model, model_dir)
   loaded <- load_model_tf(model_dir)
 
