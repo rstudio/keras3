@@ -122,7 +122,7 @@ test_that("R6 privates", {
       get_private_o = function(...) {
         unclass(private$o)
       },
-      increment_private_o = function(o) {
+      increment_private_o = function() {
         private$o <- private$o + 1
         NULL
       }
