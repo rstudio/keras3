@@ -1,3 +1,7 @@
+
+# options("testthat.progress.max_fails" = 15000L)
+
+
 library(testthat)
 
 if (Sys.getenv("TENSORFLOW_EAGER") == "TRUE")
