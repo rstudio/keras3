@@ -5,22 +5,28 @@ test_call_succeeds("pad_sequences", {
   b <- pad_sequences(a, maxlen=3, padding='pre')
   expect_equal(b, matrix(c(0L, 0L, 1L, 0L, 1L, 2L, 1L, 2L, 3L), nrow = 3, ncol = 3))
 })
-
+# https://github.com/keras-team/keras/blob/master/keras/legacy/preprocessing/sequence.py
 test_call_succeeds("make_sampling_table", {
+  skip("make_sampling_table")
   make_sampling_table(size = 40)
 })
 
 test_call_succeeds("skipgrams", {
+  skip("skipgrams")
   skipgrams(1:3, vocabulary_size = 3)
 })
 
 test_call_succeeds("text_one_hot", {
+  # TODO: also deprecated:
+  # https://github.com/keras-team/keras/blob/master/keras/legacy/preprocessing/text.py
   text <- 'The cat sat on the mat.'
   encoded <- text_one_hot(text, 5)
   expect_equal(length(encoded), 6)
 })
 
 test_call_succeeds("text_hashing_trick", required_version = "2.0.5", {
+  # TODO: also deprecated:
+  # https://github.com/keras-team/keras/blob/master/keras/legacy/preprocessing/text.py
   text <- 'The cat sat on the mat.'
   encoded <- text_hashing_trick(text, 5)
   expect_equal(length(encoded), 6)
