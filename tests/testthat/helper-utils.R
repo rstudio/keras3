@@ -11,6 +11,11 @@ print_keras_config <- function() {
   # print(keras$`__path__`)
   # print(keras)
 
+  reticulate::py_run_string(glue::trim(r"(
+    import keras
+    keras.config.disable_traceback_filtering()
+    )"))
+
   # py_main <- reticulate::import("__main__")
   # keras$layers # force load
   # py_main$keras <- keras

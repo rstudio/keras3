@@ -129,7 +129,6 @@ keras <- NULL
       if(!py_has_attr(keras, "ops"))
         py_set_attr(keras, "ops",  keras$backend)
 
-
     },
 
     on_error = function(e) {
