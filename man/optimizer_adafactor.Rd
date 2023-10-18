@@ -30,7 +30,7 @@ use. The learning rate. Defaults to \code{0.001}.}
 
 \item{beta_2_decay}{float, defaults to -0.8. The decay rate of \code{beta_2}.}
 
-\item{epsilon_1}{float, defaults to 1e-30. A small offset to keep demoninator
+\item{epsilon_1}{float, defaults to 1e-30. A small offset to keep denominator
 away from 0.}
 
 \item{epsilon_2}{float, defaults to 1e-3. A small offset to avoid learning
