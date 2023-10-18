@@ -1216,7 +1216,7 @@ r"-(Enable visualizations for TensorBoard.
 #'     weight histograms for the layers of the model. If set to 0,
 #'     histograms won't be computed. Validation data (or split) must be
 #'     specified for histogram visualizations.
-#' @param write_graph  (Not supported at this time)
+#' @param write_graph (Not supported at this time)
 #'     Whether to visualize the graph in TensorBoard.
 #'     Note that the log file can become quite large
 #'     when `write_graph` is set to `True`.

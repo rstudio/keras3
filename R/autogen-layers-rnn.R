@@ -82,13 +82,14 @@ r"-(Bidirectional wrapper for RNNs.
 #'
 #' # Call Arguments
 #' The call arguments for this layer are the same as those of the
-#'     wrapped RNN layer. Beware that when passing the `initial_state`
-#'     argument during the call of this layer, the first half in the
-#'     list of elements in the `initial_state` list will be passed to
-#'     the forward RNN call and the last half in the list of elements
-#'     will be passed to the backward RNN call.
+#' wrapped RNN layer. Beware that when passing the `initial_state`
+#' argument during the call of this layer, the first half in the
+#' list of elements in the `initial_state` list will be passed to
+#' the forward RNN call and the last half in the list of elements
+#' will be passed to the backward RNN call.
 #'
-#' Note: instantiating a `Bidirectional` layer from an existing RNN layer
+#' # Note
+#' instantiating a `Bidirectional` layer from an existing RNN layer
 #' instance will not reuse the weights state of the RNN layer instance -- the
 #' `Bidirectional` layer will have freshly initialized weights.
 #'

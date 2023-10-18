@@ -95,7 +95,8 @@ Returns:
 #' please refer to
 #' [this repository](https://github.com/sayakpaul/keras-convnext-conversion).
 #'
-#' Note: Each Keras Application expects a specific kind of input preprocessing.
+#' # Note
+#' Each Keras Application expects a specific kind of input preprocessing.
 #' For ConvNeXt, preprocessing is included in the model using a `Normalization`
 #' layer.  ConvNeXt models expect their inputs to be float or uint8 tensors of
 #' pixels with values in the [0-255] range.
@@ -246,7 +247,8 @@ Returns:
 #' please refer to
 #' [this repository](https://github.com/sayakpaul/keras-convnext-conversion).
 #'
-#' Note: Each Keras Application expects a specific kind of input preprocessing.
+#' # Note
+#' Each Keras Application expects a specific kind of input preprocessing.
 #' For ConvNeXt, preprocessing is included in the model using a `Normalization`
 #' layer.  ConvNeXt models expect their inputs to be float or uint8 tensors of
 #' pixels with values in the [0-255] range.
@@ -397,7 +399,8 @@ Returns:
 #' please refer to
 #' [this repository](https://github.com/sayakpaul/keras-convnext-conversion).
 #'
-#' Note: Each Keras Application expects a specific kind of input preprocessing.
+#' # Note
+#' Each Keras Application expects a specific kind of input preprocessing.
 #' For ConvNeXt, preprocessing is included in the model using a `Normalization`
 #' layer.  ConvNeXt models expect their inputs to be float or uint8 tensors of
 #' pixels with values in the [0-255] range.
@@ -548,7 +551,8 @@ Returns:
 #' please refer to
 #' [this repository](https://github.com/sayakpaul/keras-convnext-conversion).
 #'
-#' Note: Each Keras Application expects a specific kind of input preprocessing.
+#' # Note
+#' Each Keras Application expects a specific kind of input preprocessing.
 #' For ConvNeXt, preprocessing is included in the model using a `Normalization`
 #' layer.  ConvNeXt models expect their inputs to be float or uint8 tensors of
 #' pixels with values in the [0-255] range.
@@ -699,7 +703,8 @@ Returns:
 #' please refer to
 #' [this repository](https://github.com/sayakpaul/keras-convnext-conversion).
 #'
-#' Note: Each Keras Application expects a specific kind of input preprocessing.
+#' # Note
+#' Each Keras Application expects a specific kind of input preprocessing.
 #' For ConvNeXt, preprocessing is included in the model using a `Normalization`
 #' layer.  ConvNeXt models expect their inputs to be float or uint8 tensors of
 #' pixels with values in the [0-255] range.
@@ -822,13 +827,14 @@ Returns:
 #' Note that the data format convention used by the model is
 #' the one specified in your Keras config at `~/.keras/keras.json`.
 #'
-#' Note: each Keras Application expects a specific kind of input preprocessing.
-#' For DenseNet, call `keras.applications.densenet.preprocess_input`
-#' on your inputs before passing them to the model.
-#'
 #' # Reference
 #' - [Densely Connected Convolutional Networks](
 #' https://arxiv.org/abs/1608.06993) (CVPR 2017)
+#'
+#' # Note
+#' each Keras Application expects a specific kind of input preprocessing.
+#' For DenseNet, call `keras.applications.densenet.preprocess_input`
+#' on your inputs before passing them to the model.
 #'
 #' # Returns
 #'     A Keras model instance.
@@ -947,13 +953,14 @@ Returns:
 #' Note that the data format convention used by the model is
 #' the one specified in your Keras config at `~/.keras/keras.json`.
 #'
-#' Note: each Keras Application expects a specific kind of input preprocessing.
-#' For DenseNet, call `keras.applications.densenet.preprocess_input`
-#' on your inputs before passing them to the model.
-#'
 #' # Reference
 #' - [Densely Connected Convolutional Networks](
 #' https://arxiv.org/abs/1608.06993) (CVPR 2017)
+#'
+#' # Note
+#' each Keras Application expects a specific kind of input preprocessing.
+#' For DenseNet, call `keras.applications.densenet.preprocess_input`
+#' on your inputs before passing them to the model.
 #'
 #' # Returns
 #'     A Keras model instance.
@@ -1072,13 +1079,14 @@ Returns:
 #' Note that the data format convention used by the model is
 #' the one specified in your Keras config at `~/.keras/keras.json`.
 #'
-#' Note: each Keras Application expects a specific kind of input preprocessing.
-#' For DenseNet, call `keras.applications.densenet.preprocess_input`
-#' on your inputs before passing them to the model.
-#'
 #' # Reference
 #' - [Densely Connected Convolutional Networks](
 #' https://arxiv.org/abs/1608.06993) (CVPR 2017)
+#'
+#' # Note
+#' each Keras Application expects a specific kind of input preprocessing.
+#' For DenseNet, call `keras.applications.densenet.preprocess_input`
+#' on your inputs before passing them to the model.
 #'
 #' # Returns
 #'     A Keras model instance.
@@ -1212,16 +1220,17 @@ Returns:
 #' [guide to transfer learning & fine-tuning](
 #' https://keras.io/guides/transfer_learning/).
 #'
-#' Note: each Keras Application expects a specific kind of input preprocessing.
+#' # Reference
+#' - [EfficientNet: Rethinking Model Scaling for Convolutional Neural Networks](
+#' https://arxiv.org/abs/1905.11946) (ICML 2019)
+#'
+#' # Note
+#' each Keras Application expects a specific kind of input preprocessing.
 #' For EfficientNet, input preprocessing is included as part of the model
 #' (as a `Rescaling` layer), and thus
 #' `keras.applications.efficientnet.preprocess_input` is actually a
 #' pass-through function. EfficientNet models expect their inputs to be float
 #' tensors of pixels with values in the `[0-255]` range.
-#'
-#' # Reference
-#' - [EfficientNet: Rethinking Model Scaling for Convolutional Neural Networks](
-#' https://arxiv.org/abs/1905.11946) (ICML 2019)
 #'
 #' # Returns
 #'     A model instance.
@@ -1354,16 +1363,17 @@ Returns:
 #' [guide to transfer learning & fine-tuning](
 #' https://keras.io/guides/transfer_learning/).
 #'
-#' Note: each Keras Application expects a specific kind of input preprocessing.
+#' # Reference
+#' - [EfficientNet: Rethinking Model Scaling for Convolutional Neural Networks](
+#' https://arxiv.org/abs/1905.11946) (ICML 2019)
+#'
+#' # Note
+#' each Keras Application expects a specific kind of input preprocessing.
 #' For EfficientNet, input preprocessing is included as part of the model
 #' (as a `Rescaling` layer), and thus
 #' `keras.applications.efficientnet.preprocess_input` is actually a
 #' pass-through function. EfficientNet models expect their inputs to be float
 #' tensors of pixels with values in the `[0-255]` range.
-#'
-#' # Reference
-#' - [EfficientNet: Rethinking Model Scaling for Convolutional Neural Networks](
-#' https://arxiv.org/abs/1905.11946) (ICML 2019)
 #'
 #' # Returns
 #'     A model instance.
@@ -1496,16 +1506,17 @@ Returns:
 #' [guide to transfer learning & fine-tuning](
 #' https://keras.io/guides/transfer_learning/).
 #'
-#' Note: each Keras Application expects a specific kind of input preprocessing.
+#' # Reference
+#' - [EfficientNet: Rethinking Model Scaling for Convolutional Neural Networks](
+#' https://arxiv.org/abs/1905.11946) (ICML 2019)
+#'
+#' # Note
+#' each Keras Application expects a specific kind of input preprocessing.
 #' For EfficientNet, input preprocessing is included as part of the model
 #' (as a `Rescaling` layer), and thus
 #' `keras.applications.efficientnet.preprocess_input` is actually a
 #' pass-through function. EfficientNet models expect their inputs to be float
 #' tensors of pixels with values in the `[0-255]` range.
-#'
-#' # Reference
-#' - [EfficientNet: Rethinking Model Scaling for Convolutional Neural Networks](
-#' https://arxiv.org/abs/1905.11946) (ICML 2019)
 #'
 #' # Returns
 #'     A model instance.
@@ -1638,16 +1649,17 @@ Returns:
 #' [guide to transfer learning & fine-tuning](
 #' https://keras.io/guides/transfer_learning/).
 #'
-#' Note: each Keras Application expects a specific kind of input preprocessing.
+#' # Reference
+#' - [EfficientNet: Rethinking Model Scaling for Convolutional Neural Networks](
+#' https://arxiv.org/abs/1905.11946) (ICML 2019)
+#'
+#' # Note
+#' each Keras Application expects a specific kind of input preprocessing.
 #' For EfficientNet, input preprocessing is included as part of the model
 #' (as a `Rescaling` layer), and thus
 #' `keras.applications.efficientnet.preprocess_input` is actually a
 #' pass-through function. EfficientNet models expect their inputs to be float
 #' tensors of pixels with values in the `[0-255]` range.
-#'
-#' # Reference
-#' - [EfficientNet: Rethinking Model Scaling for Convolutional Neural Networks](
-#' https://arxiv.org/abs/1905.11946) (ICML 2019)
 #'
 #' # Returns
 #'     A model instance.
@@ -1780,16 +1792,17 @@ Returns:
 #' [guide to transfer learning & fine-tuning](
 #' https://keras.io/guides/transfer_learning/).
 #'
-#' Note: each Keras Application expects a specific kind of input preprocessing.
+#' # Reference
+#' - [EfficientNet: Rethinking Model Scaling for Convolutional Neural Networks](
+#' https://arxiv.org/abs/1905.11946) (ICML 2019)
+#'
+#' # Note
+#' each Keras Application expects a specific kind of input preprocessing.
 #' For EfficientNet, input preprocessing is included as part of the model
 #' (as a `Rescaling` layer), and thus
 #' `keras.applications.efficientnet.preprocess_input` is actually a
 #' pass-through function. EfficientNet models expect their inputs to be float
 #' tensors of pixels with values in the `[0-255]` range.
-#'
-#' # Reference
-#' - [EfficientNet: Rethinking Model Scaling for Convolutional Neural Networks](
-#' https://arxiv.org/abs/1905.11946) (ICML 2019)
 #'
 #' # Returns
 #'     A model instance.
@@ -1922,16 +1935,17 @@ Returns:
 #' [guide to transfer learning & fine-tuning](
 #' https://keras.io/guides/transfer_learning/).
 #'
-#' Note: each Keras Application expects a specific kind of input preprocessing.
+#' # Reference
+#' - [EfficientNet: Rethinking Model Scaling for Convolutional Neural Networks](
+#' https://arxiv.org/abs/1905.11946) (ICML 2019)
+#'
+#' # Note
+#' each Keras Application expects a specific kind of input preprocessing.
 #' For EfficientNet, input preprocessing is included as part of the model
 #' (as a `Rescaling` layer), and thus
 #' `keras.applications.efficientnet.preprocess_input` is actually a
 #' pass-through function. EfficientNet models expect their inputs to be float
 #' tensors of pixels with values in the `[0-255]` range.
-#'
-#' # Reference
-#' - [EfficientNet: Rethinking Model Scaling for Convolutional Neural Networks](
-#' https://arxiv.org/abs/1905.11946) (ICML 2019)
 #'
 #' # Returns
 #'     A model instance.
@@ -2064,16 +2078,17 @@ Returns:
 #' [guide to transfer learning & fine-tuning](
 #' https://keras.io/guides/transfer_learning/).
 #'
-#' Note: each Keras Application expects a specific kind of input preprocessing.
+#' # Reference
+#' - [EfficientNet: Rethinking Model Scaling for Convolutional Neural Networks](
+#' https://arxiv.org/abs/1905.11946) (ICML 2019)
+#'
+#' # Note
+#' each Keras Application expects a specific kind of input preprocessing.
 #' For EfficientNet, input preprocessing is included as part of the model
 #' (as a `Rescaling` layer), and thus
 #' `keras.applications.efficientnet.preprocess_input` is actually a
 #' pass-through function. EfficientNet models expect their inputs to be float
 #' tensors of pixels with values in the `[0-255]` range.
-#'
-#' # Reference
-#' - [EfficientNet: Rethinking Model Scaling for Convolutional Neural Networks](
-#' https://arxiv.org/abs/1905.11946) (ICML 2019)
 #'
 #' # Returns
 #'     A model instance.
@@ -2206,16 +2221,17 @@ Returns:
 #' [guide to transfer learning & fine-tuning](
 #' https://keras.io/guides/transfer_learning/).
 #'
-#' Note: each Keras Application expects a specific kind of input preprocessing.
+#' # Reference
+#' - [EfficientNet: Rethinking Model Scaling for Convolutional Neural Networks](
+#' https://arxiv.org/abs/1905.11946) (ICML 2019)
+#'
+#' # Note
+#' each Keras Application expects a specific kind of input preprocessing.
 #' For EfficientNet, input preprocessing is included as part of the model
 #' (as a `Rescaling` layer), and thus
 #' `keras.applications.efficientnet.preprocess_input` is actually a
 #' pass-through function. EfficientNet models expect their inputs to be float
 #' tensors of pixels with values in the `[0-255]` range.
-#'
-#' # Reference
-#' - [EfficientNet: Rethinking Model Scaling for Convolutional Neural Networks](
-#' https://arxiv.org/abs/1905.11946) (ICML 2019)
 #'
 #' # Returns
 #'     A model instance.
@@ -2351,7 +2367,12 @@ Returns:
 #' [guide to transfer learning & fine-tuning](
 #' https://keras.io/guides/transfer_learning/).
 #'
-#' Note: each Keras Application expects a specific kind of input preprocessing.
+#' # Reference
+#' - [EfficientNetV2: Smaller Models and Faster Training](
+#' https://arxiv.org/abs/2104.00298) (ICML 2021)
+#'
+#' # Note
+#' each Keras Application expects a specific kind of input preprocessing.
 #' For EfficientNetV2, by default input preprocessing is included as a part of
 #' the model (as a `Rescaling` layer), and thus
 #' `keras.applications.efficientnet_v2.preprocess_input` is actually a
@@ -2361,10 +2382,6 @@ Returns:
 #' layer) can be disabled by setting `include_preprocessing` argument to `False`.
 #' With preprocessing disabled EfficientNetV2 models expect their inputs to be
 #' float tensors of pixels with values in the `[-1, 1]` range.
-#'
-#' # Reference
-#' - [EfficientNetV2: Smaller Models and Faster Training](
-#' https://arxiv.org/abs/2104.00298) (ICML 2021)
 #'
 #' # Returns
 #'     A model instance.
@@ -2499,7 +2516,12 @@ Returns:
 #' [guide to transfer learning & fine-tuning](
 #' https://keras.io/guides/transfer_learning/).
 #'
-#' Note: each Keras Application expects a specific kind of input preprocessing.
+#' # Reference
+#' - [EfficientNetV2: Smaller Models and Faster Training](
+#' https://arxiv.org/abs/2104.00298) (ICML 2021)
+#'
+#' # Note
+#' each Keras Application expects a specific kind of input preprocessing.
 #' For EfficientNetV2, by default input preprocessing is included as a part of
 #' the model (as a `Rescaling` layer), and thus
 #' `keras.applications.efficientnet_v2.preprocess_input` is actually a
@@ -2509,10 +2531,6 @@ Returns:
 #' layer) can be disabled by setting `include_preprocessing` argument to `False`.
 #' With preprocessing disabled EfficientNetV2 models expect their inputs to be
 #' float tensors of pixels with values in the `[-1, 1]` range.
-#'
-#' # Reference
-#' - [EfficientNetV2: Smaller Models and Faster Training](
-#' https://arxiv.org/abs/2104.00298) (ICML 2021)
 #'
 #' # Returns
 #'     A model instance.
@@ -2647,7 +2665,12 @@ Returns:
 #' [guide to transfer learning & fine-tuning](
 #' https://keras.io/guides/transfer_learning/).
 #'
-#' Note: each Keras Application expects a specific kind of input preprocessing.
+#' # Reference
+#' - [EfficientNetV2: Smaller Models and Faster Training](
+#' https://arxiv.org/abs/2104.00298) (ICML 2021)
+#'
+#' # Note
+#' each Keras Application expects a specific kind of input preprocessing.
 #' For EfficientNetV2, by default input preprocessing is included as a part of
 #' the model (as a `Rescaling` layer), and thus
 #' `keras.applications.efficientnet_v2.preprocess_input` is actually a
@@ -2657,10 +2680,6 @@ Returns:
 #' layer) can be disabled by setting `include_preprocessing` argument to `False`.
 #' With preprocessing disabled EfficientNetV2 models expect their inputs to be
 #' float tensors of pixels with values in the `[-1, 1]` range.
-#'
-#' # Reference
-#' - [EfficientNetV2: Smaller Models and Faster Training](
-#' https://arxiv.org/abs/2104.00298) (ICML 2021)
 #'
 #' # Returns
 #'     A model instance.
@@ -2795,7 +2814,12 @@ Returns:
 #' [guide to transfer learning & fine-tuning](
 #' https://keras.io/guides/transfer_learning/).
 #'
-#' Note: each Keras Application expects a specific kind of input preprocessing.
+#' # Reference
+#' - [EfficientNetV2: Smaller Models and Faster Training](
+#' https://arxiv.org/abs/2104.00298) (ICML 2021)
+#'
+#' # Note
+#' each Keras Application expects a specific kind of input preprocessing.
 #' For EfficientNetV2, by default input preprocessing is included as a part of
 #' the model (as a `Rescaling` layer), and thus
 #' `keras.applications.efficientnet_v2.preprocess_input` is actually a
@@ -2805,10 +2829,6 @@ Returns:
 #' layer) can be disabled by setting `include_preprocessing` argument to `False`.
 #' With preprocessing disabled EfficientNetV2 models expect their inputs to be
 #' float tensors of pixels with values in the `[-1, 1]` range.
-#'
-#' # Reference
-#' - [EfficientNetV2: Smaller Models and Faster Training](
-#' https://arxiv.org/abs/2104.00298) (ICML 2021)
 #'
 #' # Returns
 #'     A model instance.
@@ -2943,7 +2963,12 @@ Returns:
 #' [guide to transfer learning & fine-tuning](
 #' https://keras.io/guides/transfer_learning/).
 #'
-#' Note: each Keras Application expects a specific kind of input preprocessing.
+#' # Reference
+#' - [EfficientNetV2: Smaller Models and Faster Training](
+#' https://arxiv.org/abs/2104.00298) (ICML 2021)
+#'
+#' # Note
+#' each Keras Application expects a specific kind of input preprocessing.
 #' For EfficientNetV2, by default input preprocessing is included as a part of
 #' the model (as a `Rescaling` layer), and thus
 #' `keras.applications.efficientnet_v2.preprocess_input` is actually a
@@ -2953,10 +2978,6 @@ Returns:
 #' layer) can be disabled by setting `include_preprocessing` argument to `False`.
 #' With preprocessing disabled EfficientNetV2 models expect their inputs to be
 #' float tensors of pixels with values in the `[-1, 1]` range.
-#'
-#' # Reference
-#' - [EfficientNetV2: Smaller Models and Faster Training](
-#' https://arxiv.org/abs/2104.00298) (ICML 2021)
 #'
 #' # Returns
 #'     A model instance.
@@ -3091,7 +3112,12 @@ Returns:
 #' [guide to transfer learning & fine-tuning](
 #' https://keras.io/guides/transfer_learning/).
 #'
-#' Note: each Keras Application expects a specific kind of input preprocessing.
+#' # Reference
+#' - [EfficientNetV2: Smaller Models and Faster Training](
+#' https://arxiv.org/abs/2104.00298) (ICML 2021)
+#'
+#' # Note
+#' each Keras Application expects a specific kind of input preprocessing.
 #' For EfficientNetV2, by default input preprocessing is included as a part of
 #' the model (as a `Rescaling` layer), and thus
 #' `keras.applications.efficientnet_v2.preprocess_input` is actually a
@@ -3101,10 +3127,6 @@ Returns:
 #' layer) can be disabled by setting `include_preprocessing` argument to `False`.
 #' With preprocessing disabled EfficientNetV2 models expect their inputs to be
 #' float tensors of pixels with values in the `[-1, 1]` range.
-#'
-#' # Reference
-#' - [EfficientNetV2: Smaller Models and Faster Training](
-#' https://arxiv.org/abs/2104.00298) (ICML 2021)
 #'
 #' # Returns
 #'     A model instance.
@@ -3239,7 +3261,12 @@ Returns:
 #' [guide to transfer learning & fine-tuning](
 #' https://keras.io/guides/transfer_learning/).
 #'
-#' Note: each Keras Application expects a specific kind of input preprocessing.
+#' # Reference
+#' - [EfficientNetV2: Smaller Models and Faster Training](
+#' https://arxiv.org/abs/2104.00298) (ICML 2021)
+#'
+#' # Note
+#' each Keras Application expects a specific kind of input preprocessing.
 #' For EfficientNetV2, by default input preprocessing is included as a part of
 #' the model (as a `Rescaling` layer), and thus
 #' `keras.applications.efficientnet_v2.preprocess_input` is actually a
@@ -3249,10 +3276,6 @@ Returns:
 #' layer) can be disabled by setting `include_preprocessing` argument to `False`.
 #' With preprocessing disabled EfficientNetV2 models expect their inputs to be
 #' float tensors of pixels with values in the `[-1, 1]` range.
-#'
-#' # Reference
-#' - [EfficientNetV2: Smaller Models and Faster Training](
-#' https://arxiv.org/abs/2104.00298) (ICML 2021)
 #'
 #' # Returns
 #'     A model instance.
@@ -3386,17 +3409,18 @@ r"-(Instantiates the Inception-ResNet v2 architecture.
 #' [guide to transfer learning & fine-tuning](
 #'   https://keras.io/guides/transfer_learning/).
 #'
-#' Note: each Keras Application expects a specific kind of
+#' # Reference
+#' - [Inception-v4, Inception-ResNet and the Impact of
+#'  Residual Connections on Learning](https://arxiv.org/abs/1602.07261)
+#' (AAAI 2017)
+#'
+#' # Note
+#' each Keras Application expects a specific kind of
 #' input preprocessing. For InceptionResNetV2, call
 #' `keras.applications.inception_resnet_v2.preprocess_input`
 #' on your inputs before passing them to the model.
 #' `inception_resnet_v2.preprocess_input`
 #' will scale input pixels between -1 and 1.
-#'
-#' # Reference
-#' - [Inception-v4, Inception-ResNet and the Impact of
-#'  Residual Connections on Learning](https://arxiv.org/abs/1602.07261)
-#' (AAAI 2017)
 #'
 #' # Returns
 #'     A model instance.
@@ -3531,15 +3555,16 @@ r"-(Instantiates the Inception v3 architecture.
 #' [guide to transfer learning & fine-tuning](
 #'   https://keras.io/guides/transfer_learning/).
 #'
-#' Note: each Keras Application expects a specific kind of input preprocessing.
+#' # Reference
+#' - [Rethinking the Inception Architecture for Computer Vision](
+#' http://arxiv.org/abs/1512.00567) (CVPR 2016)
+#'
+#' # Note
+#' each Keras Application expects a specific kind of input preprocessing.
 #' For `InceptionV3`, call
 #' `keras.applications.inception_v3.preprocess_input` on your inputs
 #' before passing them to the model.
 #' `inception_v3.preprocess_input` will scale input pixels between -1 and 1.
-#'
-#' # Reference
-#' - [Rethinking the Inception Architecture for Computer Vision](
-#' http://arxiv.org/abs/1512.00567) (CVPR 2016)
 #'
 #' # Returns
 #'     A model instance.
@@ -3686,15 +3711,16 @@ r"-(Instantiates the MobileNet architecture.
 #' [guide to transfer learning & fine-tuning](
 #' https://keras.io/guides/transfer_learning/).
 #'
-#' Note: each Keras Application expects a specific kind of input preprocessing.
-#' For MobileNet, call `keras.applications.mobilenet.preprocess_input`
-#' on your inputs before passing them to the model.
-#' `mobilenet.preprocess_input` will scale input pixels between -1 and 1.
-#'
 #' # Reference
 #' - [MobileNets: Efficient Convolutional Neural Networks
 #' for Mobile Vision Applications](
 #'  https://arxiv.org/abs/1704.04861)
+#'
+#' # Note
+#' each Keras Application expects a specific kind of input preprocessing.
+#' For MobileNet, call `keras.applications.mobilenet.preprocess_input`
+#' on your inputs before passing them to the model.
+#' `mobilenet.preprocess_input` will scale input pixels between -1 and 1.
 #'
 #' # Returns
 #'     A model instance.
@@ -3865,15 +3891,16 @@ r"-(Instantiates the MobileNetV2 architecture.
 #' [guide to transfer learning & fine-tuning](
 #'   https://keras.io/guides/transfer_learning/).
 #'
-#' Note: each Keras Application expects a specific kind of input preprocessing.
+#' # Reference
+#' - [MobileNetV2: Inverted Residuals and Linear Bottlenecks](
+#' https://arxiv.org/abs/1801.04381) (CVPR 2018)
+#'
+#' # Note
+#' each Keras Application expects a specific kind of input preprocessing.
 #' For MobileNetV2, call
 #' `keras.applications.mobilenet_v2.preprocess_input`
 #' on your inputs before passing them to the model.
 #' `mobilenet_v2.preprocess_input` will scale input pixels between -1 and 1.
-#'
-#' # Reference
-#' - [MobileNetV2: Inverted Residuals and Linear Bottlenecks](
-#' https://arxiv.org/abs/1801.04381) (CVPR 2018)
 #'
 #' # Returns
 #'     A model instance.
@@ -4069,7 +4096,12 @@ Returns:
 #' [guide to transfer learning & fine-tuning](
 #' https://keras.io/guides/transfer_learning/).
 #'
-#' Note: each Keras Application expects a specific kind of input preprocessing.
+#' # Reference
+#' - [Searching for MobileNetV3](
+#' https://arxiv.org/pdf/1905.02244.pdf) (ICCV 2019)
+#'
+#' # Note
+#' each Keras Application expects a specific kind of input preprocessing.
 #' For MobileNetV3, by default input preprocessing is included as a part of the
 #' model (as a `Rescaling` layer), and thus
 #' `keras.applications.mobilenet_v3.preprocess_input` is actually a
@@ -4079,10 +4111,6 @@ Returns:
 #' layer) can be disabled by setting `include_preprocessing` argument to `False`.
 #' With preprocessing disabled MobileNetV3 models expect their inputs to be float
 #' tensors of pixels with values in the `[-1, 1]` range.
-#'
-#' # Reference
-#' - [Searching for MobileNetV3](
-#' https://arxiv.org/pdf/1905.02244.pdf) (ICCV 2019)
 #'
 #' # Call Arguments
 #' - `inputs`: A floating point `numpy.array` or backend-native tensor,
@@ -4300,7 +4328,12 @@ Returns:
 #' [guide to transfer learning & fine-tuning](
 #' https://keras.io/guides/transfer_learning/).
 #'
-#' Note: each Keras Application expects a specific kind of input preprocessing.
+#' # Reference
+#' - [Searching for MobileNetV3](
+#' https://arxiv.org/pdf/1905.02244.pdf) (ICCV 2019)
+#'
+#' # Note
+#' each Keras Application expects a specific kind of input preprocessing.
 #' For MobileNetV3, by default input preprocessing is included as a part of the
 #' model (as a `Rescaling` layer), and thus
 #' `keras.applications.mobilenet_v3.preprocess_input` is actually a
@@ -4310,10 +4343,6 @@ Returns:
 #' layer) can be disabled by setting `include_preprocessing` argument to `False`.
 #' With preprocessing disabled MobileNetV3 models expect their inputs to be float
 #' tensors of pixels with values in the `[-1, 1]` range.
-#'
-#' # Reference
-#' - [Searching for MobileNetV3](
-#' https://arxiv.org/pdf/1905.02244.pdf) (ICCV 2019)
 #'
 #' # Call Arguments
 #' - `inputs`: A floating point `numpy.array` or backend-native tensor,
@@ -4461,13 +4490,14 @@ r"-(Instantiates a NASNet model in ImageNet mode.
 #' Note that the data format convention used by the model is
 #' the one specified in your Keras config at `~/.keras/keras.json`.
 #'
-#' Note: each Keras Application expects a specific kind of input preprocessing.
-#' For NASNet, call `keras.applications.nasnet.preprocess_input` on your
-#' inputs before passing them to the model.
-#'
 #' # Reference
 #' - [Learning Transferable Architectures for Scalable Image Recognition](
 #' https://arxiv.org/abs/1707.07012) (CVPR 2018)
+#'
+#' # Note
+#' each Keras Application expects a specific kind of input preprocessing.
+#' For NASNet, call `keras.applications.nasnet.preprocess_input` on your
+#' inputs before passing them to the model.
 #'
 #' # Returns
 #'     A Keras model instance.
@@ -4584,13 +4614,14 @@ r"-(Instantiates a Mobile NASNet model in ImageNet mode.
 #' Note that the data format convention used by the model is
 #' the one specified in your Keras config at `~/.keras/keras.json`.
 #'
-#' Note: each Keras Application expects a specific kind of input preprocessing.
-#' For NASNet, call `keras.applications.nasnet.preprocess_input` on your
-#' inputs before passing them to the model.
-#'
 #' # Reference
 #' - [Learning Transferable Architectures for Scalable Image Recognition](
 #' https://arxiv.org/abs/1707.07012) (CVPR 2018)
+#'
+#' # Note
+#' each Keras Application expects a specific kind of input preprocessing.
+#' For NASNet, call `keras.applications.nasnet.preprocess_input` on your
+#' inputs before passing them to the model.
 #'
 #' # Returns
 #'     A Keras model instance.
@@ -4710,15 +4741,16 @@ Returns:
 #' [guide to transfer learning & fine-tuning](
 #'     https://keras.io/guides/transfer_learning/).
 #'
-#' Note: each Keras Application expects a specific kind of input preprocessing.
+#' # Reference
+#' - [Deep Residual Learning for Image Recognition](
+#' https://arxiv.org/abs/1512.03385) (CVPR 2015)
+#'
+#' # Note
+#' each Keras Application expects a specific kind of input preprocessing.
 #' For ResNet, call `keras.applications.resnet.preprocess_input` on your
 #' inputs before passing them to the model. `resnet.preprocess_input` will convert
 #' the input images from RGB to BGR, then will zero-center each color channel with
 #' respect to the ImageNet dataset, without scaling.
-#'
-#' # Reference
-#' - [Deep Residual Learning for Image Recognition](
-#' https://arxiv.org/abs/1512.03385) (CVPR 2015)
 #'
 #' # Returns
 #'     A Model instance.
@@ -4833,15 +4865,16 @@ Returns:
 #' [guide to transfer learning & fine-tuning](
 #'     https://keras.io/guides/transfer_learning/).
 #'
-#' Note: each Keras Application expects a specific kind of input preprocessing.
+#' # Reference
+#' - [Deep Residual Learning for Image Recognition](
+#' https://arxiv.org/abs/1512.03385) (CVPR 2015)
+#'
+#' # Note
+#' each Keras Application expects a specific kind of input preprocessing.
 #' For ResNet, call `keras.applications.resnet.preprocess_input` on your
 #' inputs before passing them to the model. `resnet.preprocess_input` will convert
 #' the input images from RGB to BGR, then will zero-center each color channel with
 #' respect to the ImageNet dataset, without scaling.
-#'
-#' # Reference
-#' - [Deep Residual Learning for Image Recognition](
-#' https://arxiv.org/abs/1512.03385) (CVPR 2015)
 #'
 #' # Returns
 #'     A Model instance.
@@ -4956,15 +4989,16 @@ Returns:
 #' [guide to transfer learning & fine-tuning](
 #'     https://keras.io/guides/transfer_learning/).
 #'
-#' Note: each Keras Application expects a specific kind of input preprocessing.
+#' # Reference
+#' - [Deep Residual Learning for Image Recognition](
+#' https://arxiv.org/abs/1512.03385) (CVPR 2015)
+#'
+#' # Note
+#' each Keras Application expects a specific kind of input preprocessing.
 #' For ResNet, call `keras.applications.resnet.preprocess_input` on your
 #' inputs before passing them to the model. `resnet.preprocess_input` will convert
 #' the input images from RGB to BGR, then will zero-center each color channel with
 #' respect to the ImageNet dataset, without scaling.
-#'
-#' # Reference
-#' - [Deep Residual Learning for Image Recognition](
-#' https://arxiv.org/abs/1512.03385) (CVPR 2015)
 #'
 #' # Returns
 #'     A Model instance.
@@ -5078,14 +5112,15 @@ Returns:
 #' [guide to transfer learning & fine-tuning](
 #'     https://keras.io/guides/transfer_learning/).
 #'
-#' Note: each Keras Application expects a specific kind of input preprocessing.
-#' For ResNet, call `keras.applications.resnet_v2.preprocess_input` on your
-#' inputs before passing them to the model. `resnet_v2.preprocess_input` will
-#' scale input pixels between -1 and 1.
-#'
 #' # Reference
 #' - [Identity Mappings in Deep Residual Networks](
 #' https://arxiv.org/abs/1603.05027) (CVPR 2016)
+#'
+#' # Note
+#' each Keras Application expects a specific kind of input preprocessing.
+#' For ResNet, call `keras.applications.resnet_v2.preprocess_input` on your
+#' inputs before passing them to the model. `resnet_v2.preprocess_input` will
+#' scale input pixels between -1 and 1.
 #'
 #' # Returns
 #'     A Model instance.
@@ -5199,14 +5234,15 @@ Returns:
 #' [guide to transfer learning & fine-tuning](
 #'     https://keras.io/guides/transfer_learning/).
 #'
-#' Note: each Keras Application expects a specific kind of input preprocessing.
-#' For ResNet, call `keras.applications.resnet_v2.preprocess_input` on your
-#' inputs before passing them to the model. `resnet_v2.preprocess_input` will
-#' scale input pixels between -1 and 1.
-#'
 #' # Reference
 #' - [Identity Mappings in Deep Residual Networks](
 #' https://arxiv.org/abs/1603.05027) (CVPR 2016)
+#'
+#' # Note
+#' each Keras Application expects a specific kind of input preprocessing.
+#' For ResNet, call `keras.applications.resnet_v2.preprocess_input` on your
+#' inputs before passing them to the model. `resnet_v2.preprocess_input` will
+#' scale input pixels between -1 and 1.
 #'
 #' # Returns
 #'     A Model instance.
@@ -5320,14 +5356,15 @@ Returns:
 #' [guide to transfer learning & fine-tuning](
 #'     https://keras.io/guides/transfer_learning/).
 #'
-#' Note: each Keras Application expects a specific kind of input preprocessing.
-#' For ResNet, call `keras.applications.resnet_v2.preprocess_input` on your
-#' inputs before passing them to the model. `resnet_v2.preprocess_input` will
-#' scale input pixels between -1 and 1.
-#'
 #' # Reference
 #' - [Identity Mappings in Deep Residual Networks](
 #' https://arxiv.org/abs/1603.05027) (CVPR 2016)
+#'
+#' # Note
+#' each Keras Application expects a specific kind of input preprocessing.
+#' For ResNet, call `keras.applications.resnet_v2.preprocess_input` on your
+#' inputs before passing them to the model. `resnet_v2.preprocess_input` will
+#' scale input pixels between -1 and 1.
 #'
 #' # Returns
 #'     A Model instance.
@@ -5457,15 +5494,16 @@ r"-(Instantiates the VGG16 model.
 #'
 #' The default input size for this model is 224x224.
 #'
-#' Note: each Keras Application expects a specific kind of input preprocessing.
+#' # Reference
+#' - [Very Deep Convolutional Networks for Large-Scale Image Recognition](
+#'
+#' # Note
+#' each Keras Application expects a specific kind of input preprocessing.
 #' For VGG16, call `keras.applications.vgg16.preprocess_input` on your
 #' inputs before passing them to the model.
 #' `vgg16.preprocess_input` will convert the input images from RGB to BGR,
 #' then will zero-center each color channel with respect to the ImageNet
 #' dataset, without scaling.
-#'
-#' # Reference
-#' - [Very Deep Convolutional Networks for Large-Scale Image Recognition](
 #'
 #' # Returns
 #'     A model instance.
@@ -5601,15 +5639,16 @@ r"-(Instantiates the VGG19 model.
 #'
 #' The default input size for this model is 224x224.
 #'
-#' Note: each Keras Application expects a specific kind of input preprocessing.
+#' # Reference
+#' - [Very Deep Convolutional Networks for Large-Scale Image Recognition](
+#'
+#' # Note
+#' each Keras Application expects a specific kind of input preprocessing.
 #' For VGG19, call `keras.applications.vgg19.preprocess_input` on your
 #' inputs before passing them to the model.
 #' `vgg19.preprocess_input` will convert the input images from RGB to BGR,
 #' then will zero-center each color channel with respect to the ImageNet
 #' dataset, without scaling.
-#'
-#' # Reference
-#' - [Very Deep Convolutional Networks for Large-Scale Image Recognition](
 #'
 #' # Returns
 #'     A model instance.
@@ -5739,14 +5778,15 @@ r"-(Instantiates the Xception architecture.
 #'
 #' The default input image size for this model is 299x299.
 #'
-#' Note: each Keras Application expects a specific kind of input preprocessing.
-#' For Xception, call `keras.applications.xception.preprocess_input`
-#' on your inputs before passing them to the model.
-#' `xception.preprocess_input` will scale input pixels between -1 and 1.
-#'
 #' # Reference
 #' - [Xception: Deep Learning with Depthwise Separable Convolutions](
 #' https://arxiv.org/abs/1610.02357) (CVPR 2017)
+#'
+#' # Note
+#' each Keras Application expects a specific kind of input preprocessing.
+#' For Xception, call `keras.applications.xception.preprocess_input`
+#' on your inputs before passing them to the model.
+#' `xception.preprocess_input` will scale input pixels between -1 and 1.
 #'
 #' # Returns
 #'     A model instance.

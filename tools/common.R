@@ -2,26 +2,29 @@
 
 # ---- docstrings ----
 
-known_section_headings <- c(
-  "Args:",
-  "Arguments:",
-  "Attributes:",
-  "Returns:",
-  "Raises:",
-  "Input shape:",
-  "Inputs:",
+known_section_headings <- c %(% {
+  "Args:"
+  "Arguments:"
+  "Attributes:"
+  "Returns:"
+  "Raises:"
+  "Input shape:"
+  "Inputs:"
   # "Input:",
-  "Output shape:",
+  "Output shape:"
   # "Outputs:",
-  "Output:",
-  "Call arguments:",
-  "Call Args:",
-  "Returns:",
-  "Example:",
-  "References:",
-  "Reference:",
+  "Output:"
+  "Call arguments:"
+  "Call Args:"
+  "Returns:"
+  "Example:"
+  "References:"
+  "Reference:"
   "Examples:"
-)
+  "Notes:"
+  "Note:"
+  "Usage:"
+}
 
 
 # PROMPT: keyword arguments -> named list
@@ -97,7 +100,7 @@ split_docstring_into_sections <- function(docstring) {
 
   sections <- split(x, m) |>
     imap(\(s, nm) {
-      if (!nm %in% c("description", "title", "details", "note"))
+      if (!nm %in% c("description", "title", "details")) # "note"
         s <- s[-1] # drop heading
       s |> str_trim("right") |> str_flatten("\n") |> trim()
     })
@@ -120,7 +123,7 @@ parse_params_section <- function(docstring_args_section) {
     c("") |> # append final new line to ensure glue::trim() still works when length(x) == 1
     str_flatten("\n") |> glue::trim() |> str_split_1("\n")
 
-  m <- str_match(x, "^\\s{0,3}(?<name>[*]{0,2}[A-Za-z0-9_]+) ?: (?<desc>.+)$")
+  m <- str_match(x, "^\\s{0,3}(?<name>[*]{0,2}[A-Za-z0-9_]+) ?: *(?<desc>.*)$")
 
   description <- m[,"desc"] %|% x
   param_name <- m[,"name"]
@@ -588,7 +591,7 @@ dump_keras_export <- function(doc, params, tags, r_name, r_fn) {
   }
 
   main <- lapply(names(doc), \(nm) {
-    md_heading <- if (nm %in% c("description", "title", "details", "note"))
+    md_heading <- if (nm %in% c("description", "title", "details")) # "note"
       character() else
         snakecase::to_title_case(nm, prefix = "# ")
     str_flatten(c(md_heading, doc[[nm]]), "\n")

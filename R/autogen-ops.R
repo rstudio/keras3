@@ -410,7 +410,9 @@ r"-(Gets the shape of the tensor input.
 #' Gets the shape of the tensor input.
 #'
 #' @description
-#' Note: On the tensorflow backend, when `x` is a `tf.Tensor` with dynamic
+#'
+#' # Note
+#' On the tensorflow backend, when `x` is a `tf.Tensor` with dynamic
 #' shape, dimensions which are dynamic in the context of a compiled function
 #' will have a `tf.Tensor` value instead of a static integer value.
 #'
@@ -5453,23 +5455,23 @@ r"-(Returns the cross product of two (arrays of) vectors.
 #' In cases where both input vectors have dimension 2, the z-component of
 #' the cross product is returned.
 #'
+#' # Note
+#' Torch backend does not support two dimensional vectors, or the
+#' arguments `axisa`, `axisb` and `axisc`. Use `axis` instead.
+#'
 #' # Returns
 #'     Vector cross product(s).
 #'
 #' @param x1 Components of the first vector(s).
-#'     x2: Components of the second vector(s).
-#'     axisa: Axis of `x1` that defines the vector(s). Defaults to `-1`.
-#'     axisb: Axis of `x2` that defines the vector(s). Defaults to `-1`.
-#'     axisc: Axis of the result containing the cross product vector(s).
-#'         Ignored if both input vectors have dimension 2, as the return is
-#'         scalar. By default, the last axis.
-#'     axis: If defined, the axis of `x1`, `x2` and the result that
-#'         defines the vector(s) and cross product(s). Overrides `axisa`,
-#'         `axisb` and `axisc`.
-#'
-#' Note:
-#'     Torch backend does not support two dimensional vectors, or the
-#'     arguments `axisa`, `axisb` and `axisc`. Use `axis` instead.
+#' @param x2 Components of the second vector(s).
+#' @param axisa Axis of `x1` that defines the vector(s). Defaults to `-1`.
+#' @param axisb Axis of `x2` that defines the vector(s). Defaults to `-1`.
+#' @param axisc Axis of the result containing the cross product vector(s).
+#'     Ignored if both input vectors have dimension 2, as the return is
+#'     scalar. By default, the last axis.
+#' @param axis If defined, the axis of `x1`, `x2` and the result that
+#'     defines the vector(s) and cross product(s). Overrides `axisa`,
+#'     `axisb` and `axisc`.
 #'
 #' @export
 #' @family ops
@@ -5887,14 +5889,14 @@ r"-(Dot product of two tensors.
 #'   it is a sum product over the last axis of `x1` and the second-to-last
 #'   axis of `x2`: `dot(x1, x2)[i,j,k,m] = sum(a[i,j,:] * b[k,:,m])`.
 #'
+#' # Note
+#' Torch backend does not accept 0-D tensors as arguments.
+#'
 #' # Returns
 #'     Dot product of `x1` and `x2`.
 #'
 #' @param x1 First argument.
-#'     x2: Second argument.
-#'
-#' Note:
-#'     Torch backend does not accept 0-D tensors as arguments.
+#' @param x2 Second argument.
 #'
 #' @export
 #' @family ops
@@ -6919,27 +6921,27 @@ r"-(Return evenly spaced numbers over a specified interval.
 #'
 #' The endpoint of the interval can optionally be excluded.
 #'
+#' # Note
+#' Torch backend does not support `axis` argument.
+#'
 #' # Returns
 #' A tensor of evenly spaced numbers.
 #' If `retstep` is `True`, returns `(samples, step)`
 #'
 #' @param start The starting value of the sequence.
-#'     stop: The end value of the sequence, unless `endpoint` is set to
-#'         `False`. In that case, the sequence consists of all but the last
-#'         of `num + 1` evenly spaced samples, so that `stop` is excluded.
-#'         Note that the step size changes when `endpoint` is `False`.
-#'     num: Number of samples to generate. Defaults to `50`. Must be
-#'         non-negative.
-#'     endpoint: If `True`, `stop` is the last sample. Otherwise, it is
-#'         not included. Defaults to`True`.
-#'     retstep: If `True`, return `(samples, step)`, where `step` is the
-#'         spacing between samples.
-#'     dtype: The type of the output tensor.
-#'     axis: The axis in the result to store the samples. Relevant only if
-#'         start or stop are array-like. Defaults to `0`.
-#'
-#' Note:
-#'     Torch backend does not support `axis` argument.
+#' @param stop The end value of the sequence, unless `endpoint` is set to
+#'     `False`. In that case, the sequence consists of all but the last
+#'     of `num + 1` evenly spaced samples, so that `stop` is excluded.
+#'     Note that the step size changes when `endpoint` is `False`.
+#' @param num Number of samples to generate. Defaults to `50`. Must be
+#'     non-negative.
+#' @param endpoint If `True`, `stop` is the last sample. Otherwise, it is
+#'     not included. Defaults to`True`.
+#' @param retstep If `True`, return `(samples, step)`, where `step` is the
+#'     spacing between samples.
+#' @param dtype The type of the output tensor.
+#' @param axis The axis in the result to store the samples. Relevant only if
+#'     start or stop are array-like. Defaults to `0`.
 #'
 #' @export
 #' @family ops
@@ -7294,24 +7296,24 @@ r"-(Returns numbers spaced evenly on a log scale.
 #' In linear space, the sequence starts at `base ** start` and ends with
 #' `base ** stop` (see `endpoint` below).
 #'
+#' # Note
+#' Torch backend does not support `axis` argument.
+#'
 #' # Returns
 #'     A tensor of evenly spaced samples on a log scale.
 #'
 #' @param start The starting value of the sequence.
-#'     stop: The final value of the sequence, unless `endpoint` is `False`.
-#'         In that case, `num + 1` values are spaced over the interval in
-#'         log-space, of which all but the last (a sequence of length `num`)
-#'         are returned.
-#'     num: Number of samples to generate. Defaults to `50`.
-#'     endpoint: If `True`, `stop` is the last sample. Otherwise, it is not
-#'         included. Defaults to`True`.
-#'     base: The base of the log space. Defaults to `10`.
-#'     dtype: The type of the output tensor.
-#'     axis: The axis in the result to store the samples. Relevant only
-#'         if start or stop are array-like.
-#'
-#' Note:
-#'     Torch backend does not support `axis` argument.
+#' @param stop The final value of the sequence, unless `endpoint` is `False`.
+#'     In that case, `num + 1` values are spaced over the interval in
+#'     log-space, of which all but the last (a sequence of length `num`)
+#'     are returned.
+#' @param num Number of samples to generate. Defaults to `50`.
+#' @param endpoint If `True`, `stop` is the last sample. Otherwise, it is not
+#'     included. Defaults to`True`.
+#' @param base The base of the log space. Defaults to `10`.
+#' @param dtype The type of the output tensor.
+#' @param axis The axis in the result to store the samples. Relevant only
+#'     if start or stop are array-like.
 #'
 #' @export
 #' @family ops
@@ -8061,30 +8063,30 @@ r"-(Pad a tensor.
 #'
 #' @description
 #'
-#' # Returns
-#'     Padded tensor.
-#'
-#' @param x Tensor to pad.
-#'     pad_width: Number of values padded to the edges of each axis.
-#'         `((before_1, after_1), ...(before_N, after_N))` unique pad
-#'         widths for each axis.
-#'         `((before, after),)` yields same before and after pad for
-#'         each axis.
-#'         `(pad,)` or `int` is a shortcut for `before = after = pad`
-#'         width for all axes.
-#'     mode: One of `"constant"`, `"edge"`, `"linear_ramp"`,
-#'         `"maximum"`, `"mean"`, `"median"`, `"minimum"`,
-#'         `"reflect"`, `"symmetric"`, `"wrap"`, `"empty"`,
-#'         `"circular"`. Defaults to`"constant"`.
-#'
-#' Note:
-#'     Torch backend only supports modes `"constant"`, `"reflect"`,
+#' # Note
+#' Torch backend only supports modes `"constant"`, `"reflect"`,
 #'     `"symmetric"` and `"circular"`.
 #'     Only Torch backend supports `"circular"` mode.
 #'
 #' Note:
 #'     Tensorflow backend only supports modes `"constant"`, `"reflect"`
 #'     and `"symmetric"`.
+#'
+#' # Returns
+#'     Padded tensor.
+#'
+#' @param x Tensor to pad.
+#' @param pad_width Number of values padded to the edges of each axis.
+#'     `((before_1, after_1), ...(before_N, after_N))` unique pad
+#'     widths for each axis.
+#'     `((before, after),)` yields same before and after pad for
+#'     each axis.
+#'     `(pad,)` or `int` is a shortcut for `before = after = pad`
+#'     width for all axes.
+#' @param mode One of `"constant"`, `"edge"`, `"linear_ramp"`,
+#'     `"maximum"`, `"mean"`, `"median"`, `"minimum"`,
+#'     `"reflect"`, `"symmetric"`, `"wrap"`, `"empty"`,
+#'     `"circular"`. Defaults to`"constant"`.
 #'
 #' @export
 #' @family ops
@@ -8093,7 +8095,7 @@ r"-(Pad a tensor.
 k_pad <-
 function (x, pad_width, mode = "constant")
 {
-    args <- capture_args2(list(x = as_integer))
+    args <- capture_args2(list(pad_width = as_integer))
     do.call(keras$ops$pad, args)
 }
 
@@ -8625,22 +8627,22 @@ r"-(Split a tensor into chunks.
 #'
 #' @description
 #'
+#' # Note
+#' A split does not have to result in equal division when using
+#' Torch backend.
+#'
 #' # Returns
 #'     A list of tensors.
 #'
 #' @param x Input tensor.
-#'     indices_or_sections: Either an integer indicating the number of
-#'         sections along `axis` or a list of integers indicating the indices
-#'         along `axis` at which the tensor is split.
-#'     indices_or_sections: If an integer, N, the tensor will be split into N
-#'         equal sections along `axis`. If a 1-D array of sorted integers,
-#'         the entries indicate indices at which the tensor will be split
-#'         along `axis`.
-#'     axis: Axis along which to split. Defaults to `0`.
-#'
-#' Note:
-#'     A split does not have to result in equal division when using
-#'     Torch backend.
+#' @param indices_or_sections Either an integer indicating the number of
+#'     sections along `axis` or a list of integers indicating the indices
+#'     along `axis` at which the tensor is split.
+#' If an integer, N, the tensor will be split into N
+#'     equal sections along `axis`. If a 1-D array of sorted integers,
+#'     the entries indicate indices at which the tensor will be split
+#'     along `axis`.
+#' @param axis Axis along which to split. Defaults to `0`.
 #'
 #' @export
 #' @family ops
@@ -8649,7 +8651,8 @@ r"-(Split a tensor into chunks.
 k_split <-
 function (x, indices_or_sections, axis = 0L)
 {
-    args <- capture_args2(list(x = as_integer, axis = as_axis))
+    args <- capture_args2(list(indices_or_sections = as_integer,
+        axis = as_axis))
     do.call(keras$ops$split, args)
 }
 
@@ -9120,7 +9123,7 @@ r"-(Compute the tensor dot product along specified axes.
 #'
 #' @param x1 First tensor.
 #' @param x2 Second tensor.
-#' axes:
+#' @param axes
 #' - If an integer, N, sum over the last N axes of `x1` and the
 #'         first N axes of `x2` in order. The sizes of the corresponding
 #'         axes must match.
@@ -9135,7 +9138,7 @@ r"-(Compute the tensor dot product along specified axes.
 k_tensordot <-
 function (x1, x2, axes = 2L)
 {
-    args <- capture_args2(list(x2 = as_integer, axes = as_axis))
+    args <- capture_args2(list(axes = as_axis))
     do.call(keras$ops$tensordot, args)
 }
 

@@ -521,17 +521,16 @@ r"-(Scaled Exponential Linear Unit (SELU).
 #' and the number of input units is "large enough"
 #' (see reference paper for more information).
 #'
-#' # Reference
-#' - [Klambauer et al., 2017](https://arxiv.org/abs/1706.02515)
-#'
-#' @param x Input tensor.
-#'
-#' Notes:
-#'
+#' # Notes
 #' - To be used together with the
 #'     `keras.initializers.LecunNormal` initializer.
 #' - To be used together with the dropout variant
 #'     `keras.layers.AlphaDropout` (rather than regular dropout).
+#'
+#' # Reference
+#' - [Klambauer et al., 2017](https://arxiv.org/abs/1706.02515)
+#'
+#' @param x Input tensor.
 #'
 #' @export
 #' @family activation functions

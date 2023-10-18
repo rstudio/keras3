@@ -350,7 +350,9 @@ r"-(Flattens the input. Does not affect the batch size.
 #' Flattens the input. Does not affect the batch size.
 #'
 #' @description
-#' Note: If inputs are shaped `(batch,)` without a feature axis, then
+#'
+#' # Note
+#' If inputs are shaped `(batch,)` without a feature axis, then
 #' flattening adds an extra channel dimension and output shape is `(batch, 1)`.
 #'
 #' # Examples

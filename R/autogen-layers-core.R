@@ -61,7 +61,8 @@ r"-(Just your regular densely-connected NN layer.
 #' created by the layer, and `bias` is a bias vector created by the layer
 #' (only applicable if `use_bias` is `True`).
 #'
-#' Note: If the input to the layer has a rank greater than 2, `Dense`
+#' # Note
+#' If the input to the layer has a rank greater than 2, `Dense`
 #' computes the dot product between the `inputs` and the `kernel` along the
 #' last axis of the `inputs` and axis 0 of the `kernel` (using `tf.tensordot`).
 #' For example, if input has dimensions `(batch_size, d0, d1)`, then we create
@@ -742,7 +743,8 @@ r"-(Masks a sequence by using a mask value to skip timesteps.
 #' # The time step 3 and 5 will be skipped from LSTM calculation.
 #' ```
 #'
-#' Note: in the Keras masking convention, a masked timestep is denoted by
+#' # Note
+#' in the Keras masking convention, a masked timestep is denoted by
 #' a mask value of `False`, while a non-masked (i.e. usable) timestep
 #' is denoted by a mask value of `True`.
 #'
