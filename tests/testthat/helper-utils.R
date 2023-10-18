@@ -11,10 +11,10 @@ print_keras_config <- function() {
   # print(keras$`__path__`)
   # print(keras)
 
-  py_main <- reticulate::import("__main__")
-  keras$layers # force load
-  py_main$keras <- keras
-  py_eval("keras.config.disable_traceback_filtering()")
+  # py_main <- reticulate::import("__main__")
+  # keras$layers # force load
+  # py_main$keras <- keras
+  # py_eval("keras.config.disable_traceback_filtering()")
 }
 
 if(reticulate::py_available()) {
