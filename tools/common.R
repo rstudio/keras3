@@ -244,16 +244,45 @@ get_layer_family <- function(layer) {
 
 make_r_name <- function(endpoint, module = py_eval(endpoint)$`__module__`) {
 
+
+  # manual renames
+  if(!is.null(r_name <- switch %(% { endpoint
+    "keras.preprocessing.image.array_to_img" = "image_from_array"
+    "keras.preprocessing.image.img_to_array" = "image_to_array"
+    "keras.preprocessing.image.load_img" =  "image_load"
+    "keras.preprocessing.image.save_img" = "image_array_save"
+    NULL
+  })) return(r_name)
+
+  # if(endpoint == "keras.preprocessing.image_dataset_from_directory")
+  #   browser()
   if(endpoint |> startsWith("keras.ops."))
     endpoint %<>% str_replace(fixed("keras.ops."), "keras.k.")
-  x <- str_split_1(endpoint, fixed("."))
+  if(endpoint |> startsWith("keras.preprocessing."))
+    endpoint %<>% str_replace(fixed(".preprocessing."), ".")
+
+
+  if(endpoint == "keras.utils.FeatureSpace") return("layer_feature_space")
+  # TODO: why is FeatureSpace not exported to keras.layers.FeatureSpace?
+  # Does instantiation and composition in one call make sense, or
+  # does the need for adapt() throw a wrench in the works (and mean that
+  # using compose_layer() doesn't make sense)...
+  # maybe this should have a name like "preprocess_feature_space()" or
+  # layer_preprocess_feature_space()? or
+  x <- endpoint |>
+    reticulate:::str_drop_prefix("keras.") |>
+    str_split_1(fixed("."))
 
   name <- x[length(x)] # __name__
   x <- x[-length(x)] # submodules
+  x <- x[nzchar(x)]
 
-  if(length(x) >= 2)
-    x <- x[-1] # drop "keras" from "keras.layers.Dense
-  stopifnot(is_scalar(x))
+  # if(length(x) >= 2)
+  #   x <- x[-1] # drop "keras" from "keras.layers.Dense
+  # if(!length(x))
+  #   prefix <- x()
+  if(length(x) && !is_scalar(x))
+    browser()
   prefix <- x |> str_replace("s$", "") |> str_flatten("_")
 
   name <- name |>
@@ -300,7 +329,8 @@ make_r_name <- function(endpoint, module = py_eval(endpoint)$`__module__`) {
 
   if(prefix != "k")
     name %<>% str_replace(glue("_{prefix}$"), "")
-  name <- str_c(prefix, "_", name)
+  if(length(prefix) && prefix != "")
+    name <- str_flatten(c(prefix, name), collapse = "_")
 
   ## fixes for specific wrappers
   # no _ in up_sampling

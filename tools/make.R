@@ -17,6 +17,8 @@ endpoints <- str_c("keras.", c %(% {
   "ops"          #
   "optimizers"   #
   "applications"
+  "preprocessing.image"
+  # "utils"
   # "losses",
   # "metrics",
 
@@ -31,7 +33,6 @@ endpoints <- str_c("keras.", c %(% {
   # "preprocessing",
   # "saving",
   # "Sequential",
-  # "utils"
   # "datasets"  # datasets unchanged, no need to autogen
 }
 
@@ -71,13 +72,17 @@ list_endpoints <- function(module = "keras", max_depth = 4,
   }))
 }
 
-all_endpoints <- list_endpoints()
+if(FALSE) {
 
-all_endpoints %>%
-  grep("ImageDataGenerator", ., value = T)
+  all_endpoints <- list_endpoints()
 
-all_endpoints %>%
-  grep("Image", ., value = T, ignore.case = TRUE)
+  all_endpoints %>%
+    grep("ImageDataGenerator", ., value = T)
+
+  all_endpoints %>%
+    grep("Image", ., value = T, ignore.case = TRUE)
+
+}
 
 endpoints <-
   endpoints %>%
@@ -92,6 +97,8 @@ endpoints <-
                              .[1])) %>%
   split(., .$id) %>%
   map(\(df) {
+    # if(any(df$endpoint %>% grepl("FeatureSpace", .)))
+    #   browser()
     if(nrow(df) == 1) return(df)
     # message(str_flatten_comma(df$endpoint))
     # if(any(grepl("AvgPool1D", df$endpoint))) browser()
@@ -178,10 +185,15 @@ df <-
 
 # TODO: bidirectional, time_distributed -- need special caseing
 
+df <- df |>
+  mutate(endpoint_sans_name = str_extract(endpoint, "keras\\.(.*)\\.[^.]+$", 1))
+
 df |>
-  mutate(endpoint_sans_name = str_extract(endpoint, "keras\\.(.*)\\.[^.]+$", 1)) |>
   filter(endpoint_sans_name %in% c("layers", "ops", "constraints", "initializers",
                                    "callbacks", "optimizers",
+                                   "preprocessing",
+                                   "preprocessing.image",
+                                   # "utils",
                                    "applications",
                                    "activations", "regularizers")) |> #
   # select(endpoint, r_name, module, type) |>
