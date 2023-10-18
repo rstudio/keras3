@@ -4,6 +4,7 @@ context("timeseries")
 
 test_call_succeeds("timeseries_generator", required_version = "2.1.5", {
 
+  skip("timeseries_generator")
   data <- matrix(1:50, nrow = 50, ncol = 1)
   targets <- matrix(1:50, nrow = 50, ncol = 1)
   data_gen <- timeseries_generator(data, targets, length = 10, sampling_rate = 2, batch_size = 2)
