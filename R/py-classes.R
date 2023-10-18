@@ -321,7 +321,7 @@ def wrap_fn(_fn):
     return _fn({pass_sig})
   return {name}
   )---")
-  util <- reticulate::py_run_string(code, local = TRUE)
+  util <- reticulate::py_run_string(code, local = TRUE, convert = convert)
   util$wrap_fn(fn)
 }
 
