@@ -388,7 +388,7 @@ implementation <- function() {
 
 
 is_backend <- function(name) {
-  identical(backend()$backend(), name)
+  identical(keras$config$backend(), name)
 }
 
 is_windows <- function() {
