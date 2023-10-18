@@ -125,8 +125,7 @@ resolve_py_type_inherits <- function(inherit, convert=FALSE) {
   # (both potentially of length 0)
 
   if(is.null(inherit) || identical(inherit, list()))
-    return(list(bases = py_eval("(,)", convert = FALSE),
-                keywords = list()))
+    return(list(bases = tuple(), keywords = dict()))
 
   bases <-
     if (inherits(inherit, "python.builtin.tuple")) as.list(inherit)
