@@ -802,3 +802,13 @@ standard_layer_arg_modifiers <- list(
     batch_size = as_nullable_integer,
     seed = as_nullable_integer
   )
+
+#' @importFrom rlang dots_list
+named_list <- function(...)
+  dots_list(...,
+            .named = TRUE,
+            .ignore_empty = "trailing",
+            .preserve_empty = FALSE,
+            .homonyms = "error",
+            .check_assign = FALSE)
+
