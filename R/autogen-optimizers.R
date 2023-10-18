@@ -173,7 +173,7 @@ r"-(Optimizer that implements the Adafactor algorithm.
             a callable that takes no arguments and returns the actual value to
             use. The learning rate. Defaults to `0.001`.
         beta_2_decay: float, defaults to -0.8. The decay rate of `beta_2`.
-        epsilon_1: float, defaults to 1e-30. A small offset to keep demoninator
+        epsilon_1: float, defaults to 1e-30. A small offset to keep denominator
             away from 0.
         epsilon_2: float, defaults to 1e-3. A small offset to avoid learning
             rate becoming too small by time.
@@ -250,7 +250,7 @@ r"-(Optimizer that implements the Adafactor algorithm.
 #'       a callable that takes no arguments and returns the actual value to
 #'       use. The learning rate. Defaults to `0.001`.
 #' @param beta_2_decay float, defaults to -0.8. The decay rate of `beta_2`.
-#' @param epsilon_1 float, defaults to 1e-30. A small offset to keep demoninator
+#' @param epsilon_1 float, defaults to 1e-30. A small offset to keep denominator
 #'       away from 0.
 #' @param epsilon_2 float, defaults to 1e-3. A small offset to avoid learning
 #'       rate becoming too small by time.
