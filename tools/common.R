@@ -448,10 +448,17 @@ make_r_fn.default <- function(endpoint, py_obj, transformers) {
   if (!length(transformers))
     transformers <- NULL
 
-  as.function.default(c(formals(py_obj), bquote({
+  frmls <- formals(py_obj)
+  body <- bquote({
     args <- capture_args2(.(transformers))
     do.call(.(py_obj_expr), args)
-  })))
+  })
+
+  if(endpoint == "keras.preprocessing.image.save_img")
+    frmls <- frmls[unique(c("x", "path", names(frmls)))] # swap so img is first arg, better for pipe
+    # frmls <- frmls[c(2, 1, 3:length(frmls))] # swap so img is first arg, better for pipe
+
+  as.function.default(c(frmls, body))
 }
 
 make_r_fn.op <- function(endpoint, py_obj, transformers) {

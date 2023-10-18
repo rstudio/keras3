@@ -284,7 +284,7 @@ r"-(Saves an image stored as a NumPy array to a path or file object.
 #' @seealso
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/preprocessing/image/save_img>
 image_array_save <-
-function (path, x, data_format = NULL, file_format = NULL, scale = TRUE,
+function (x, path, data_format = NULL, file_format = NULL, scale = TRUE,
     ...)
 {
     args <- capture_args2(NULL)
