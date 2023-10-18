@@ -22,6 +22,7 @@
 install_keras <- function(...,
                           envname = "r-keras",
                           extra_packages = NULL,
+                          python_version = "3.11",
                           backend = c("tensorflow", "jax", "pytorch")
                           ) {
   # # envname = "r-keras",
@@ -32,7 +33,7 @@ install_keras <- function(...,
   #   reticulate::virtualenv_remove(envname, confirm = FALSE)
 
   python <- envname |>
-    reticulate::virtualenv_create("3.10",
+    reticulate::virtualenv_create(version = python_version,
                                   force = identical(envname, "r-keras"),
                                   packages = NULL) |>
     reticulate::virtualenv_python()
@@ -49,7 +50,13 @@ install_keras <- function(...,
   }
   withr::local_dir(keras_team_keras_dir)
   system("git pull")
-  system2(python, c("-m pip install -r requirements.txt"))
+  # system2(python, c("-m pip install -r requirements.txt")) # unpin tf-nightly for Python 3.12
+
+  system2 <- reticulate:::system2t
+  system2(python, c("-m pip install ipython")) # for interactive debugging
+  system2(python, c("-m pip install -r requirements-common.txt"))
+  system2(python, c("-m pip install torch torchvision")) # needed for pip_build.py?? (but why?)
+  system2(python, c("-m pip install tf-nightly jax[cpu]")) # unpin tf-nightly for Python 3.12
   system2(python, c("pip_build.py --install"))
   message("Done!")
 
