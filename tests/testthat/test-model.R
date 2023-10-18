@@ -145,8 +145,8 @@ test_succeeds("can call a model with additional arguments", {
 
   model <- keras_model_sequential() %>%
     layer_dropout(rate = 0.99999999)
-  expect_equivalent(as.numeric(model(1, training = TRUE)), 0)
-  expect_equivalent(as.numeric(model(1, training = FALSE)), 1)
+  expect_equivalent(as.numeric(model(array(1), training = TRUE)), 0)
+  expect_equivalent(as.numeric(model(array(1), training = FALSE)), 1)
 
 })
 
