@@ -250,6 +250,396 @@ function (directory, labels = "inferred", label_mode = "int",
 }
 
 
+# keras$layers$save_img
+# keras_core.src.utils.image_utils.save_img
+r"-(Saves an image stored as a NumPy array to a path or file object.
+
+    Args:
+        path: Path or file object.
+        x: NumPy array.
+        data_format: Image data format, either `"channels_first"` or
+            `"channels_last"`.
+        file_format: Optional file format override. If omitted, the format to
+            use is determined from the filename extension. If a file object was
+            used instead of a filename, this parameter should always be used.
+        scale: Whether to rescale image values to be within `[0, 255]`.
+        **kwargs: Additional keyword arguments passed to `PIL.Image.save()`.
+    )-"
+
+
+# keras_core.src.utils.image_utils.save_img
+#' Saves an image stored as a NumPy array to a path or file object.
+#'
+#' @param path Path or file object.
+#' @param x NumPy array.
+#' @param data_format Image data format, either `"channels_first"` or
+#'     `"channels_last"`.
+#' @param file_format Optional file format override. If omitted, the format to
+#'     use is determined from the filename extension. If a file object was
+#'     used instead of a filename, this parameter should always be used.
+#' @param scale Whether to rescale image values to be within `[0, 255]`.
+#' @param ... Additional keyword arguments passed to `PIL.Image.save()`.
+#'
+#' @export
+#' @seealso
+#' + <https://www.tensorflow.org/api_docs/python/tf/keras/preprocessing/image/save_img>
+image_array_save <-
+function (path, x, data_format = NULL, file_format = NULL, scale = TRUE,
+    ...)
+{
+    args <- capture_args2(NULL)
+    do.call(keras$preprocessing$image$save_img, args)
+}
+
+
+# keras$layers$array_to_img
+# keras_core.src.utils.image_utils.array_to_img
+r"-(Converts a 3D NumPy array to a PIL Image instance.
+
+    Usage:
+
+    ```python
+    from PIL import Image
+    img = np.random.random(size=(100, 100, 3))
+    pil_img = keras.utils.array_to_img(img)
+    ```
+
+    Args:
+        x: Input data, in any form that can be converted to a NumPy array.
+        data_format: Image data format, can be either `"channels_first"` or
+            `"channels_last"`. Defaults to `None`, in which case the global
+            setting `keras.backend.image_data_format()` is used (unless you
+            changed it, it defaults to `"channels_last"`).
+        scale: Whether to rescale the image such that minimum and maximum values
+            are 0 and 255 respectively. Defaults to `True`.
+        dtype: Dtype to use. `None` means the global setting
+            `keras.backend.floatx()` is used (unless you changed it, it
+            defaults to `"float32"`). Defaults to `None`.
+
+    Returns:
+        A PIL Image instance.
+    )-"
+
+
+# keras_core.src.utils.image_utils.array_to_img
+#' Converts a 3D NumPy array to a PIL Image instance.
+#'
+#' @description
+#'
+#' # Usage
+#' ```python
+#' from PIL import Image
+#' img = np.random.random(size=(100, 100, 3))
+#' pil_img = keras.utils.array_to_img(img)
+#' ```
+#'
+#' # Returns
+#'     A PIL Image instance.
+#'
+#' @param x Input data, in any form that can be converted to a NumPy array.
+#' @param data_format Image data format, can be either `"channels_first"` or
+#'     `"channels_last"`. Defaults to `None`, in which case the global
+#'     setting `keras.backend.image_data_format()` is used (unless you
+#'     changed it, it defaults to `"channels_last"`).
+#' @param scale Whether to rescale the image such that minimum and maximum values
+#'     are 0 and 255 respectively. Defaults to `True`.
+#' @param dtype Dtype to use. `None` means the global setting
+#'     `keras.backend.floatx()` is used (unless you changed it, it
+#'     defaults to `"float32"`). Defaults to `None`.
+#'
+#' @export
+#' @seealso
+#' + <https://www.tensorflow.org/api_docs/python/tf/keras/preprocessing/image/array_to_img>
+image_from_array <-
+function (x, data_format = NULL, scale = TRUE, dtype = NULL)
+{
+    args <- capture_args2(NULL)
+    do.call(keras$preprocessing$image$array_to_img, args)
+}
+
+
+# keras$layers$load_img
+# keras_core.src.utils.image_utils.load_img
+r"-(Loads an image into PIL format.
+
+    Usage:
+
+    ```python
+    image = keras.utils.load_img(image_path)
+    input_arr = keras.utils.img_to_array(image)
+    input_arr = np.array([input_arr])  # Convert single image to a batch.
+    predictions = model.predict(input_arr)
+    ```
+
+    Args:
+        path: Path to image file.
+        color_mode: One of `"grayscale"`, `"rgb"`, `"rgba"`. Default: `"rgb"`.
+            The desired image format.
+        target_size: Either `None` (default to original size) or tuple of ints
+            `(img_height, img_width)`.
+        interpolation: Interpolation method used to resample the image if the
+            target size is different from that of the loaded image. Supported
+            methods are `"nearest"`, `"bilinear"`, and `"bicubic"`.
+            If PIL version 1.1.3 or newer is installed, `"lanczos"`
+            is also supported. If PIL version 3.4.0 or newer is installed,
+            `"box"` and `"hamming"` are also
+            supported. By default, `"nearest"` is used.
+        keep_aspect_ratio: Boolean, whether to resize images to a target
+            size without aspect ratio distortion. The image is cropped in
+            the center with target aspect ratio before resizing.
+
+    Returns:
+        A PIL Image instance.
+    )-"
+
+
+# keras_core.src.utils.image_utils.load_img
+#' Loads an image into PIL format.
+#'
+#' @description
+#'
+#' # Usage
+#' ```python
+#' image = keras.utils.load_img(image_path)
+#' input_arr = keras.utils.img_to_array(image)
+#' input_arr = np.array([input_arr])  # Convert single image to a batch.
+#' predictions = model.predict(input_arr)
+#' ```
+#'
+#' # Returns
+#'     A PIL Image instance.
+#'
+#' @param path Path to image file.
+#' @param color_mode One of `"grayscale"`, `"rgb"`, `"rgba"`. Default: `"rgb"`.
+#'     The desired image format.
+#' @param target_size Either `None` (default to original size) or tuple of ints
+#'     `(img_height, img_width)`.
+#' @param interpolation Interpolation method used to resample the image if the
+#'     target size is different from that of the loaded image. Supported
+#'     methods are `"nearest"`, `"bilinear"`, and `"bicubic"`.
+#'     If PIL version 1.1.3 or newer is installed, `"lanczos"`
+#'     is also supported. If PIL version 3.4.0 or newer is installed,
+#'     `"box"` and `"hamming"` are also
+#'     supported. By default, `"nearest"` is used.
+#' @param keep_aspect_ratio Boolean, whether to resize images to a target
+#'     size without aspect ratio distortion. The image is cropped in
+#'     the center with target aspect ratio before resizing.
+#'
+#' @export
+#' @seealso
+#' + <https://www.tensorflow.org/api_docs/python/tf/keras/preprocessing/image/load_img>
+image_load <-
+function (path, color_mode = "rgb", target_size = NULL, interpolation = "nearest",
+    keep_aspect_ratio = FALSE)
+{
+    args <- capture_args2(NULL)
+    do.call(keras$preprocessing$image$load_img, args)
+}
+
+
+# keras$layers$img_to_array
+# keras_core.src.utils.image_utils.img_to_array
+r"-(Converts a PIL Image instance to a NumPy array.
+
+    Usage:
+
+    ```python
+    from PIL import Image
+    img_data = np.random.random(size=(100, 100, 3))
+    img = keras.utils.array_to_img(img_data)
+    array = keras.utils.image.img_to_array(img)
+    ```
+
+    Args:
+        img: Input PIL Image instance.
+        data_format: Image data format, can be either `"channels_first"` or
+            `"channels_last"`. Defaults to `None`, in which case the global
+            setting `keras.backend.image_data_format()` is used (unless you
+            changed it, it defaults to `"channels_last"`).
+        dtype: Dtype to use. `None` means the global setting
+            `keras.backend.floatx()` is used (unless you changed it, it
+            defaults to `"float32"`).
+
+    Returns:
+        A 3D NumPy array.
+    )-"
+
+
+# keras_core.src.utils.image_utils.img_to_array
+#' Converts a PIL Image instance to a NumPy array.
+#'
+#' @description
+#'
+#' # Usage
+#' ```python
+#' from PIL import Image
+#' img_data = np.random.random(size=(100, 100, 3))
+#' img = keras.utils.array_to_img(img_data)
+#' array = keras.utils.image.img_to_array(img)
+#' ```
+#'
+#' # Returns
+#'     A 3D NumPy array.
+#'
+#' @param img Input PIL Image instance.
+#' @param data_format Image data format, can be either `"channels_first"` or
+#'     `"channels_last"`. Defaults to `None`, in which case the global
+#'     setting `keras.backend.image_data_format()` is used (unless you
+#'     changed it, it defaults to `"channels_last"`).
+#' @param dtype Dtype to use. `None` means the global setting
+#'     `keras.backend.floatx()` is used (unless you changed it, it
+#'     defaults to `"float32"`).
+#'
+#' @export
+#' @seealso
+#' + <https://www.tensorflow.org/api_docs/python/tf/keras/preprocessing/image/img_to_array>
+image_to_array <-
+function (img, data_format = NULL, dtype = NULL)
+{
+    args <- capture_args2(NULL)
+    do.call(keras$preprocessing$image$img_to_array, args)
+}
+
+
+# keras$layers$pad_sequences
+# keras_core.src.utils.sequence_utils.pad_sequences
+r"-(Pads sequences to the same length.
+
+    This function transforms a list (of length `num_samples`)
+    of sequences (lists of integers)
+    into a 2D NumPy array of shape `(num_samples, num_timesteps)`.
+    `num_timesteps` is either the `maxlen` argument if provided,
+    or the length of the longest sequence in the list.
+
+    Sequences that are shorter than `num_timesteps`
+    are padded with `value` until they are `num_timesteps` long.
+
+    Sequences longer than `num_timesteps` are truncated
+    so that they fit the desired length.
+
+    The position where padding or truncation happens is determined by
+    the arguments `padding` and `truncating`, respectively.
+    Pre-padding or removing values from the beginning of the sequence is the
+    default.
+
+    >>> sequence = [[1], [2, 3], [4, 5, 6]]
+    >>> keras.utils.pad_sequences(sequence)
+    array([[0, 0, 1],
+           [0, 2, 3],
+           [4, 5, 6]], dtype=int32)
+
+    >>> keras.utils.pad_sequences(sequence, value=-1)
+    array([[-1, -1,  1],
+           [-1,  2,  3],
+           [ 4,  5,  6]], dtype=int32)
+
+    >>> keras.utils.pad_sequences(sequence, padding='post')
+    array([[1, 0, 0],
+           [2, 3, 0],
+           [4, 5, 6]], dtype=int32)
+
+    >>> keras.utils.pad_sequences(sequence, maxlen=2)
+    array([[0, 1],
+           [2, 3],
+           [5, 6]], dtype=int32)
+
+    Args:
+        sequences: List of sequences (each sequence is a list of integers).
+        maxlen: Optional Int, maximum length of all sequences. If not provided,
+            sequences will be padded to the length of the longest individual
+            sequence.
+        dtype: (Optional, defaults to `"int32"`). Type of the output sequences.
+            To pad sequences with variable length strings, you can use `object`.
+        padding: String, "pre" or "post" (optional, defaults to `"pre"`):
+            pad either before or after each sequence.
+        truncating: String, "pre" or "post" (optional, defaults to `"pre"`):
+            remove values from sequences larger than
+            `maxlen`, either at the beginning or at the end of the sequences.
+        value: Float or String, padding value. (Optional, defaults to 0.)
+
+    Returns:
+        NumPy array with shape `(len(sequences), maxlen)`
+    )-"
+
+
+# keras_core.src.utils.sequence_utils.pad_sequences
+#' Pads sequences to the same length.
+#'
+#' @description
+#' This function transforms a list (of length `num_samples`)
+#' of sequences (lists of integers)
+#' into a 2D NumPy array of shape `(num_samples, num_timesteps)`.
+#' `num_timesteps` is either the `maxlen` argument if provided,
+#' or the length of the longest sequence in the list.
+#'
+#' Sequences that are shorter than `num_timesteps`
+#' are padded with `value` until they are `num_timesteps` long.
+#'
+#' Sequences longer than `num_timesteps` are truncated
+#' so that they fit the desired length.
+#'
+#' The position where padding or truncation happens is determined by
+#' the arguments `padding` and `truncating`, respectively.
+#' Pre-padding or removing values from the beginning of the sequence is the
+#' default.
+#'
+#' ```python
+#' sequence = [[1], [2, 3], [4, 5, 6]]
+#' keras.utils.pad_sequences(sequence)
+#' # array([[0, 0, 1],
+#' #        [0, 2, 3],
+#' #        [4, 5, 6]], dtype=int32)
+#' ```
+#'
+#' ```python
+#' keras.utils.pad_sequences(sequence, value=-1)
+#' # array([[-1, -1,  1],
+#' #        [-1,  2,  3],
+#' #        [ 4,  5,  6]], dtype=int32)
+#' ```
+#'
+#' ```python
+#' keras.utils.pad_sequences(sequence, padding='post')
+#' # array([[1, 0, 0],
+#' #        [2, 3, 0],
+#' #        [4, 5, 6]], dtype=int32)
+#' ```
+#'
+#' ```python
+#' keras.utils.pad_sequences(sequence, maxlen=2)
+#' # array([[0, 1],
+#' #        [2, 3],
+#' #        [5, 6]], dtype=int32)
+#' ```
+#'
+#' # Returns
+#'     NumPy array with shape `(len(sequences), maxlen)`
+#'
+#' @param sequences List of sequences (each sequence is a list of integers).
+#' @param maxlen Optional Int, maximum length of all sequences. If not provided,
+#'     sequences will be padded to the length of the longest individual
+#'     sequence.
+#' @param dtype (Optional, defaults to `"int32"`). Type of the output sequences.
+#'     To pad sequences with variable length strings, you can use `object`.
+#' @param padding String, "pre" or "post" (optional, defaults to `"pre"`):
+#'     pad either before or after each sequence.
+#' @param truncating String, "pre" or "post" (optional, defaults to `"pre"`):
+#'     remove values from sequences larger than
+#'     `maxlen`, either at the beginning or at the end of the sequences.
+#' @param value Float or String, padding value. (Optional, defaults to 0.)
+#'
+#' @export
+#' @seealso
+#' + <https://www.tensorflow.org/api_docs/python/tf/keras/preprocessing/sequence/pad_sequences>
+pad_sequences <-
+function (sequences, maxlen = NULL, dtype = "int32", padding = "pre",
+    truncating = "pre", value = 0)
+{
+    args <- capture_args2(list(maxlen = as_integer))
+    do.call(keras$preprocessing$sequence$pad_sequences, args)
+}
+
+
 # keras$layers$text_dataset_from_directory
 # keras_core.src.utils.text_dataset_utils.text_dataset_from_directory
 r"-(Generates a `tf.data.Dataset` from text files in a directory.

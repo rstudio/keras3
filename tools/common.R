@@ -251,6 +251,7 @@ make_r_name <- function(endpoint, module = py_eval(endpoint)$`__module__`) {
     "keras.preprocessing.image.img_to_array" = "image_to_array"
     "keras.preprocessing.image.load_img" =  "image_load"
     "keras.preprocessing.image.save_img" = "image_array_save"
+    "keras.preprocessing.sequence.pad_sequences" = "pad_sequences"
     NULL
   })) return(r_name)
 

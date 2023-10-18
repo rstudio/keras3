@@ -17,7 +17,10 @@ endpoints <- str_c("keras.", c %(% {
   "ops"          #
   "optimizers"   #
   "applications"
+  "preprocessing"
   "preprocessing.image"
+  "preprocessing.sequence"
+  # "preprocessing.text"
   # "utils"
   # "losses",
   # "metrics",
@@ -193,11 +196,15 @@ df |>
                                    "callbacks", "optimizers",
                                    "preprocessing",
                                    "preprocessing.image",
+                                   "preprocessing.sequence",
                                    # "utils",
                                    "applications",
                                    "activations", "regularizers")) |> #
   # select(endpoint, r_name, module, type) |>
-  arrange(endpoint_sans_name, module, name) |>
+  mutate(endpoint_sans_name = endpoint_sans_name %>%
+           replace_val(c("preprocessing.image", "preprocessing.sequence"),
+                       "preprocessing")) %>%
+  arrange(endpoint_sans_name, module, r_name) |>
   mutate(file = if_else(endpoint_sans_name == "layers",
                         {
                           # browser()

@@ -49,10 +49,11 @@ install_keras <- function(...,
     withr::defer(unlink(keras_team_keras_dir, recursive = TRUE))
   }
   withr::local_dir(keras_team_keras_dir)
-  system("git pull")
+  # browser()
+  system2 <- reticulate:::system2t
+  system2("git", "pull")
   # system2(python, c("-m pip install -r requirements.txt")) # unpin tf-nightly for Python 3.12
 
-  system2 <- reticulate:::system2t
   system2(python, c("-m pip install ipython")) # for interactive debugging
   system2(python, c("-m pip install -r requirements-common.txt"))
   system2(python, c("-m pip install torch torchvision")) # needed for pip_build.py?? (but why?)
