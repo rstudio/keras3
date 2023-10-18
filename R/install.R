@@ -22,7 +22,7 @@
 install_keras <- function(...,
                           envname = "r-keras",
                           extra_packages = NULL,
-                          python_version = "3.11",
+                          python_version = "3.9",
                           backend = c("tensorflow", "jax", "pytorch")
                           ) {
   # # envname = "r-keras",
