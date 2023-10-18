@@ -5,8 +5,8 @@
 \title{Saves an image stored as a NumPy array to a path or file object.}
 \usage{
 image_array_save(
-  path,
   x,
+  path,
   data_format = NULL,
   file_format = NULL,
   scale = TRUE,
@@ -14,9 +14,9 @@ image_array_save(
 )
 }
 \arguments{
-\item{path}{Path or file object.}
-
 \item{x}{NumPy array.}
+
+\item{path}{Path or file object.}
 
 \item{data_format}{Image data format, either \code{"channels_first"} or
 \code{"channels_last"}.}

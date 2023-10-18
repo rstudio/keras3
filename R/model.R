@@ -299,7 +299,7 @@ py_to_r_wrapper.kerastools.model.RModel <- function(x) {
 
 
 #' @export
-py_to_r_wrapper.keras.engine.base_layer.Layer <- function(x) {
+py_to_r_wrapper.keras.layers.layer.Layer <- function(x) {
   force(x)
   function(object, ...) {
     if(missing(object))
