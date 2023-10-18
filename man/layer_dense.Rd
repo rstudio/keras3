@@ -52,8 +52,9 @@ where \code{activation} is the element-wise activation function
 passed as the \code{activation} argument, \code{kernel} is a weights matrix
 created by the layer, and \code{bias} is a bias vector created by the layer
 (only applicable if \code{use_bias} is \code{True}).
-
-Note: If the input to the layer has a rank greater than 2, \code{Dense}
+}
+\section{Note}{
+If the input to the layer has a rank greater than 2, \code{Dense}
 computes the dot product between the \code{inputs} and the \code{kernel} along the
 last axis of the \code{inputs} and axis 0 of the \code{kernel} (using \code{tf.tensordot}).
 For example, if input has dimensions \verb{(batch_size, d0, d1)}, then we create
@@ -62,6 +63,7 @@ of the \code{input}, on every sub-tensor of shape \verb{(1, 1, d1)} (there are
 \code{batch_size * d0} such sub-tensors). The output in this case will have
 shape \verb{(batch_size, d0, units)}.
 }
+
 \section{Input Shape}{
 N-D tensor with shape: \verb{(batch_size, ..., input_dim)}.
 The most common situation would be

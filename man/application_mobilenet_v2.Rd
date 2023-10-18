@@ -92,17 +92,19 @@ For image classification use cases, see
 
 For transfer learning use cases, make sure to read the
 \href{https://keras.io/guides/transfer_learning/}{guide to transfer learning & fine-tuning}.
-
-Note: each Keras Application expects a specific kind of input preprocessing.
-For MobileNetV2, call
-\code{keras.applications.mobilenet_v2.preprocess_input}
-on your inputs before passing them to the model.
-\code{mobilenet_v2.preprocess_input} will scale input pixels between -1 and 1.
 }
 \section{Reference}{
 \itemize{
 \item \href{https://arxiv.org/abs/1801.04381}{MobileNetV2: Inverted Residuals and Linear Bottlenecks} (CVPR 2018)
 }
+}
+
+\section{Note}{
+each Keras Application expects a specific kind of input preprocessing.
+For MobileNetV2, call
+\code{keras.applications.mobilenet_v2.preprocess_input}
+on your inputs before passing them to the model.
+\code{mobilenet_v2.preprocess_input} will scale input pixels between -1 and 1.
 }
 
 \section{Returns}{

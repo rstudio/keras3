@@ -58,8 +58,10 @@ argument during the call of this layer, the first half in the
 list of elements in the \code{initial_state} list will be passed to
 the forward RNN call and the last half in the list of elements
 will be passed to the backward RNN call.
+}
 
-Note: instantiating a \code{Bidirectional} layer from an existing RNN layer
+\section{Note}{
+instantiating a \code{Bidirectional} layer from an existing RNN layer
 instance will not reuse the weights state of the RNN layer instance -- the
 \code{Bidirectional} layer will have freshly initialized weights.
 }

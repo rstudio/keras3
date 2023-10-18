@@ -17,9 +17,13 @@ config file at \verb{~/.keras/keras.json} (if exists). Defaults to
 \code{"channels_last"}.}
 }
 \description{
-Note: If inputs are shaped \verb{(batch,)} without a feature axis, then
+Flattens the input. Does not affect the batch size.
+}
+\section{Note}{
+If inputs are shaped \verb{(batch,)} without a feature axis, then
 flattening adds an extra channel dimension and output shape is \verb{(batch, 1)}.
 }
+
 \section{Examples}{
 \if{html}{\out{<div class="sourceCode python">}}\preformatted{x = keras.Input(shape=(10, 64))
 y = keras.layers.Flatten()(x)

@@ -65,18 +65,20 @@ For image classification use cases, see
 
 For transfer learning use cases, make sure to read the
 \href{https://keras.io/guides/transfer_learning/}{guide to transfer learning & fine-tuning}.
-
-Note: each Keras Application expects a specific kind of input preprocessing.
-For EfficientNet, input preprocessing is included as part of the model
-(as a \code{Rescaling} layer), and thus
-\code{keras.applications.efficientnet.preprocess_input} is actually a
-pass-through function. EfficientNet models expect their inputs to be float
-tensors of pixels with values in the \verb{[0-255]} range.
 }
 \section{Reference}{
 \itemize{
 \item \href{https://arxiv.org/abs/1905.11946}{EfficientNet: Rethinking Model Scaling for Convolutional Neural Networks} (ICML 2019)
 }
+}
+
+\section{Note}{
+each Keras Application expects a specific kind of input preprocessing.
+For EfficientNet, input preprocessing is included as part of the model
+(as a \code{Rescaling} layer), and thus
+\code{keras.applications.efficientnet.preprocess_input} is actually a
+pass-through function. EfficientNet models expect their inputs to be float
+tensors of pixels with values in the \verb{[0-255]} range.
 }
 
 \section{Returns}{

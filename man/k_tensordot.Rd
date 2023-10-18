@@ -9,9 +9,9 @@ k_tensordot(x1, x2, axes = 2L)
 \arguments{
 \item{x1}{First tensor.}
 
-\item{x2}{Second tensor.
-axes:
-\itemize{
+\item{x2}{Second tensor.}
+
+\item{axes}{\itemize{
 \item If an integer, N, sum over the last N axes of \code{x1} and the
 first N axes of \code{x2} in order. The sizes of the corresponding
 axes must match.

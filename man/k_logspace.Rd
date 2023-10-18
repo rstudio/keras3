@@ -15,26 +15,33 @@ k_logspace(
 )
 }
 \arguments{
-\item{start}{The starting value of the sequence.
-stop: The final value of the sequence, unless \code{endpoint} is \code{False}.
+\item{start}{The starting value of the sequence.}
+
+\item{stop}{The final value of the sequence, unless \code{endpoint} is \code{False}.
 In that case, \code{num + 1} values are spaced over the interval in
 log-space, of which all but the last (a sequence of length \code{num})
-are returned.
-num: Number of samples to generate. Defaults to \code{50}.
-endpoint: If \code{True}, \code{stop} is the last sample. Otherwise, it is not
-included. Defaults to\code{True}.
-base: The base of the log space. Defaults to \code{10}.
-dtype: The type of the output tensor.
-axis: The axis in the result to store the samples. Relevant only
-if start or stop are array-like.
+are returned.}
 
-Note:
-Torch backend does not support \code{axis} argument.}
+\item{num}{Number of samples to generate. Defaults to \code{50}.}
+
+\item{endpoint}{If \code{True}, \code{stop} is the last sample. Otherwise, it is not
+included. Defaults to\code{True}.}
+
+\item{base}{The base of the log space. Defaults to \code{10}.}
+
+\item{dtype}{The type of the output tensor.}
+
+\item{axis}{The axis in the result to store the samples. Relevant only
+if start or stop are array-like.}
 }
 \description{
 In linear space, the sequence starts at \code{base ** start} and ends with
 \code{base ** stop} (see \code{endpoint} below).
 }
+\section{Note}{
+Torch backend does not support \code{axis} argument.
+}
+
 \section{Returns}{
 \if{html}{\out{<div class="sourceCode">}}\preformatted{A tensor of evenly spaced samples on a log scale.
 }\if{html}{\out{</div>}}

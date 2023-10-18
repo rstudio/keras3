@@ -25,21 +25,22 @@ optimizer_rmsprop(
 \item{learning_rate}{A float, a
 \code{keras.optimizers.schedules.LearningRateSchedule} instance, or
 a callable that takes no arguments and returns the actual value to
-use. The learning rate. Defaults to \code{0.001}.
-rho: float, defaults to 0.9. Discounting factor for the old gradients.
-momentum: float, defaults to 0.0. If not 0.0., the optimizer tracks the
-momentum value, with a decay rate equals to \code{1 - momentum}.
-epsilon: A small constant for numerical stability. This epsilon is
+use. The learning rate. Defaults to \code{0.001}.}
+
+\item{rho}{float, defaults to 0.9. Discounting factor for the old gradients.}
+
+\item{momentum}{float, defaults to 0.0. If not 0.0., the optimizer tracks the
+momentum value, with a decay rate equals to \code{1 - momentum}.}
+
+\item{epsilon}{A small constant for numerical stability. This epsilon is
 "epsilon hat" in the Kingma and Ba paper (in the formula just before
 Section 2.1), not the epsilon in Algorithm 1 of the paper. Defaults
-to 1e-7.
-centered: Boolean. If \code{True}, gradients are normalized by the estimated
+to 1e-7.}
+
+\item{centered}{Boolean. If \code{True}, gradients are normalized by the estimated
 variance of the gradient; if False, by the uncentered second moment.
 Setting this to \code{True} may help with training, but is slightly more
-expensive in terms of computation and memory. Defaults to \code{False}.
-name: String. The name to use
-for momentum accumulator weights created by
-the optimizer.}
+expensive in terms of computation and memory. Defaults to \code{False}.}
 
 \item{weight_decay}{Float, defaults to None. If set, weight decay is applied.}
 
@@ -75,22 +76,16 @@ variables in-place). When using the built-in \code{fit()} training loop,
 this happens automatically after the last epoch,
 and you don't need to do anything.}
 
+\item{name}{String. The name to use
+for momentum accumulator weights created by
+the optimizer.}
+
 \item{loss_scale_factor}{Float or \code{None}. If a float, the scale factor will
 be multiplied the loss before computing gradients, and the inverse of
 the scale factor will be multiplied by the gradients before updating
 variables. Useful for preventing underflow during mixed precision
 training. Alternately, \code{keras.optimizers.LossScaleOptimizer} will
-automatically set a loss scale factor.
-
-Usage:
-
-\if{html}{\out{<div class="sourceCode python">}}\preformatted{opt = keras.optimizers.RMSprop(learning_rate=0.1)
-var1 = keras.backend.Variable(10.0)
-loss = lambda: (var1 ** 2) / 2.0  # d(loss) / d(var1) = var1
-opt.minimize(loss, [var1])
-var1
-# 9.683772
-}\if{html}{\out{</div>}}}
+automatically set a loss scale factor.}
 }
 \description{
 The gist of RMSprop is to:
@@ -104,6 +99,16 @@ This implementation of RMSprop uses plain momentum, not Nesterov momentum.
 The centered version additionally maintains a moving average of the
 gradients, and uses that average to estimate the variance.
 }
+\section{Usage}{
+\if{html}{\out{<div class="sourceCode python">}}\preformatted{opt = keras.optimizers.RMSprop(learning_rate=0.1)
+var1 = keras.backend.Variable(10.0)
+loss = lambda: (var1 ** 2) / 2.0  # d(loss) / d(var1) = var1
+opt.minimize(loss, [var1])
+var1
+# 9.683772
+}\if{html}{\out{</div>}}
+}
+
 \section{Reference}{
 \itemize{
 \item \href{http://www.cs.toronto.edu/~tijmen/csc321/slides/lecture_slides_lec6.pdf}{Hinton, 2012}

@@ -64,8 +64,15 @@ For image classification use cases, see
 
 For transfer learning use cases, make sure to read the
 \href{https://keras.io/guides/transfer_learning/}{guide to transfer learning & fine-tuning}.
+}
+\section{Reference}{
+\itemize{
+\item \href{https://arxiv.org/abs/2104.00298}{EfficientNetV2: Smaller Models and Faster Training} (ICML 2021)
+}
+}
 
-Note: each Keras Application expects a specific kind of input preprocessing.
+\section{Note}{
+each Keras Application expects a specific kind of input preprocessing.
 For EfficientNetV2, by default input preprocessing is included as a part of
 the model (as a \code{Rescaling} layer), and thus
 \code{keras.applications.efficientnet_v2.preprocess_input} is actually a
@@ -75,11 +82,6 @@ At the same time, preprocessing as a part of the model (i.e. \code{Rescaling}
 layer) can be disabled by setting \code{include_preprocessing} argument to \code{False}.
 With preprocessing disabled EfficientNetV2 models expect their inputs to be
 float tensors of pixels with values in the \verb{[-1, 1]} range.
-}
-\section{Reference}{
-\itemize{
-\item \href{https://arxiv.org/abs/2104.00298}{EfficientNetV2: Smaller Models and Faster Training} (ICML 2021)
-}
 }
 
 \section{Returns}{

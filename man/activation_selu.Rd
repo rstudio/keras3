@@ -7,15 +7,7 @@
 activation_selu(x)
 }
 \arguments{
-\item{x}{Input tensor.
-
-Notes:
-\itemize{
-\item To be used together with the
-\code{keras.initializers.LecunNormal} initializer.
-\item To be used together with the dropout variant
-\code{keras.layers.AlphaDropout} (rather than regular dropout).
-}}
+\item{x}{Input tensor.}
 }
 \description{
 The Scaled Exponential Linear Unit (SELU) activation function is defined as:
@@ -38,6 +30,15 @@ correctly (see \code{keras.initializers.LecunNormal} initializer)
 and the number of input units is "large enough"
 (see reference paper for more information).
 }
+\section{Notes}{
+\itemize{
+\item To be used together with the
+\code{keras.initializers.LecunNormal} initializer.
+\item To be used together with the dropout variant
+\code{keras.layers.AlphaDropout} (rather than regular dropout).
+}
+}
+
 \section{Reference}{
 \itemize{
 \item \href{https://arxiv.org/abs/1706.02515}{Klambauer et al., 2017}

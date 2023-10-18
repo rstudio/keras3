@@ -60,15 +60,17 @@ can only be \code{None} or \code{"softmax"}.}
 Optionally loads weights pre-trained on ImageNet.
 Note that the data format convention used by the model is
 the one specified in your Keras config at \verb{~/.keras/keras.json}.
-
-Note: each Keras Application expects a specific kind of input preprocessing.
-For NASNet, call \code{keras.applications.nasnet.preprocess_input} on your
-inputs before passing them to the model.
 }
 \section{Reference}{
 \itemize{
 \item \href{https://arxiv.org/abs/1707.07012}{Learning Transferable Architectures for Scalable Image Recognition} (CVPR 2018)
 }
+}
+
+\section{Note}{
+each Keras Application expects a specific kind of input preprocessing.
+For NASNet, call \code{keras.applications.nasnet.preprocess_input} on your
+inputs before passing them to the model.
 }
 
 \section{Returns}{

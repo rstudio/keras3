@@ -7,31 +7,34 @@
 k_pad(x, pad_width, mode = "constant")
 }
 \arguments{
-\item{x}{Tensor to pad.
-pad_width: Number of values padded to the edges of each axis.
+\item{x}{Tensor to pad.}
+
+\item{pad_width}{Number of values padded to the edges of each axis.
 \verb{((before_1, after_1), ...(before_N, after_N))} unique pad
 widths for each axis.
 \verb{((before, after),)} yields same before and after pad for
 each axis.
 \verb{(pad,)} or \code{int} is a shortcut for \code{before = after = pad}
-width for all axes.
-mode: One of \code{"constant"}, \code{"edge"}, \code{"linear_ramp"},
+width for all axes.}
+
+\item{mode}{One of \code{"constant"}, \code{"edge"}, \code{"linear_ramp"},
 \code{"maximum"}, \code{"mean"}, \code{"median"}, \code{"minimum"},
 \code{"reflect"}, \code{"symmetric"}, \code{"wrap"}, \code{"empty"},
-\code{"circular"}. Defaults to\code{"constant"}.
-
-Note:
+\code{"circular"}. Defaults to\code{"constant"}.}
+}
+\description{
+Pad a tensor.
+}
+\section{Note}{
 Torch backend only supports modes \code{"constant"}, \code{"reflect"},
 \code{"symmetric"} and \code{"circular"}.
 Only Torch backend supports \code{"circular"} mode.
 
 Note:
 Tensorflow backend only supports modes \code{"constant"}, \code{"reflect"}
-and \code{"symmetric"}.}
+and \code{"symmetric"}.
 }
-\description{
-Pad a tensor.
-}
+
 \section{Returns}{
 \if{html}{\out{<div class="sourceCode">}}\preformatted{Padded tensor.
 }\if{html}{\out{</div>}}

@@ -56,17 +56,19 @@ For image classification use cases, see \href{https://keras.io/api/applications/
 
 For transfer learning use cases, make sure to read the
 \href{https://keras.io/guides/transfer_learning/}{guide to transfer learning & fine-tuning}.
-
-Note: each Keras Application expects a specific kind of input preprocessing.
-For ResNet, call \code{keras.applications.resnet.preprocess_input} on your
-inputs before passing them to the model. \code{resnet.preprocess_input} will convert
-the input images from RGB to BGR, then will zero-center each color channel with
-respect to the ImageNet dataset, without scaling.
 }
 \section{Reference}{
 \itemize{
 \item \href{https://arxiv.org/abs/1512.03385}{Deep Residual Learning for Image Recognition} (CVPR 2015)
 }
+}
+
+\section{Note}{
+each Keras Application expects a specific kind of input preprocessing.
+For ResNet, call \code{keras.applications.resnet.preprocess_input} on your
+inputs before passing them to the model. \code{resnet.preprocess_input} will convert
+the input images from RGB to BGR, then will zero-center each color channel with
+respect to the ImageNet dataset, without scaling.
 }
 
 \section{Returns}{

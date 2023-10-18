@@ -68,19 +68,21 @@ For image classification use cases, see
 
 For transfer learning use cases, make sure to read the
 \href{https://keras.io/guides/transfer_learning/}{guide to transfer learning & fine-tuning}.
-
-Note: each Keras Application expects a specific kind of
-input preprocessing. For InceptionResNetV2, call
-\code{keras.applications.inception_resnet_v2.preprocess_input}
-on your inputs before passing them to the model.
-\code{inception_resnet_v2.preprocess_input}
-will scale input pixels between -1 and 1.
 }
 \section{Reference}{
 \itemize{
 \item \href{https://arxiv.org/abs/1602.07261}{Inception-v4, Inception-ResNet and the Impact of Residual Connections on Learning}
 (AAAI 2017)
 }
+}
+
+\section{Note}{
+each Keras Application expects a specific kind of
+input preprocessing. For InceptionResNetV2, call
+\code{keras.applications.inception_resnet_v2.preprocess_input}
+on your inputs before passing them to the model.
+\code{inception_resnet_v2.preprocess_input}
+will scale input pixels between -1 and 1.
 }
 
 \section{Returns}{

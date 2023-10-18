@@ -67,18 +67,20 @@ For transfer learning use cases, make sure to read the
 \href{https://keras.io/guides/transfer_learning/}{guide to transfer learning & fine-tuning}.
 
 The default input size for this model is 224x224.
-
-Note: each Keras Application expects a specific kind of input preprocessing.
-For VGG16, call \code{keras.applications.vgg16.preprocess_input} on your
-inputs before passing them to the model.
-\code{vgg16.preprocess_input} will convert the input images from RGB to BGR,
-then will zero-center each color channel with respect to the ImageNet
-dataset, without scaling.
 }
 \section{Reference}{
 \itemize{
 \item \link{Very Deep Convolutional Networks for Large-Scale Image Recognition}(
 }
+}
+
+\section{Note}{
+each Keras Application expects a specific kind of input preprocessing.
+For VGG16, call \code{keras.applications.vgg16.preprocess_input} on your
+inputs before passing them to the model.
+\code{vgg16.preprocess_input} will convert the input images from RGB to BGR,
+then will zero-center each color channel with respect to the ImageNet
+dataset, without scaling.
 }
 
 \section{Returns}{

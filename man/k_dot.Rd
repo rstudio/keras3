@@ -7,11 +7,9 @@
 k_dot(x1, x2)
 }
 \arguments{
-\item{x1}{First argument.
-x2: Second argument.
+\item{x1}{First argument.}
 
-Note:
-Torch backend does not accept 0-D tensors as arguments.}
+\item{x2}{Second argument.}
 }
 \description{
 \itemize{
@@ -26,6 +24,10 @@ it is a sum product over the last axis of \code{x1} and the second-to-last
 axis of \code{x2}: \verb{dot(x1, x2)[i,j,k,m] = sum(a[i,j,:] * b[k,:,m])}.
 }
 }
+\section{Note}{
+Torch backend does not accept 0-D tensors as arguments.
+}
+
 \section{Returns}{
 \if{html}{\out{<div class="sourceCode">}}\preformatted{Dot product of `x1` and `x2`.
 }\if{html}{\out{</div>}}

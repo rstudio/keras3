@@ -92,16 +92,18 @@ For image classification use cases, see
 
 For transfer learning use cases, make sure to read the
 \href{https://keras.io/guides/transfer_learning/}{guide to transfer learning & fine-tuning}.
-
-Note: each Keras Application expects a specific kind of input preprocessing.
-For MobileNet, call \code{keras.applications.mobilenet.preprocess_input}
-on your inputs before passing them to the model.
-\code{mobilenet.preprocess_input} will scale input pixels between -1 and 1.
 }
 \section{Reference}{
 \itemize{
 \item \href{https://arxiv.org/abs/1704.04861}{MobileNets: Efficient Convolutional Neural Networks for Mobile Vision Applications}
 }
+}
+
+\section{Note}{
+each Keras Application expects a specific kind of input preprocessing.
+For MobileNet, call \code{keras.applications.mobilenet.preprocess_input}
+on your inputs before passing them to the model.
+\code{mobilenet.preprocess_input} will scale input pixels between -1 and 1.
 }
 
 \section{Returns}{

@@ -7,20 +7,21 @@
 k_cross(x1, x2, axisa = -1L, axisb = -1L, axisc = -1L, axis = NULL)
 }
 \arguments{
-\item{x1}{Components of the first vector(s).
-x2: Components of the second vector(s).
-axisa: Axis of \code{x1} that defines the vector(s). Defaults to \code{-1}.
-axisb: Axis of \code{x2} that defines the vector(s). Defaults to \code{-1}.
-axisc: Axis of the result containing the cross product vector(s).
-Ignored if both input vectors have dimension 2, as the return is
-scalar. By default, the last axis.
-axis: If defined, the axis of \code{x1}, \code{x2} and the result that
-defines the vector(s) and cross product(s). Overrides \code{axisa},
-\code{axisb} and \code{axisc}.
+\item{x1}{Components of the first vector(s).}
 
-Note:
-Torch backend does not support two dimensional vectors, or the
-arguments \code{axisa}, \code{axisb} and \code{axisc}. Use \code{axis} instead.}
+\item{x2}{Components of the second vector(s).}
+
+\item{axisa}{Axis of \code{x1} that defines the vector(s). Defaults to \code{-1}.}
+
+\item{axisb}{Axis of \code{x2} that defines the vector(s). Defaults to \code{-1}.}
+
+\item{axisc}{Axis of the result containing the cross product vector(s).
+Ignored if both input vectors have dimension 2, as the return is
+scalar. By default, the last axis.}
+
+\item{axis}{If defined, the axis of \code{x1}, \code{x2} and the result that
+defines the vector(s) and cross product(s). Overrides \code{axisa},
+\code{axisb} and \code{axisc}.}
 }
 \description{
 The cross product of \code{x1} and \code{x2} in R^3 is a vector
@@ -35,6 +36,11 @@ accordingly.
 In cases where both input vectors have dimension 2, the z-component of
 the cross product is returned.
 }
+\section{Note}{
+Torch backend does not support two dimensional vectors, or the
+arguments \code{axisa}, \code{axisb} and \code{axisc}. Use \code{axis} instead.
+}
+
 \section{Returns}{
 \if{html}{\out{<div class="sourceCode">}}\preformatted{Vector cross product(s).
 }\if{html}{\out{</div>}}

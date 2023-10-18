@@ -7,23 +7,26 @@
 k_split(x, indices_or_sections, axis = 0L)
 }
 \arguments{
-\item{x}{Input tensor.
-indices_or_sections: Either an integer indicating the number of
+\item{x}{Input tensor.}
+
+\item{indices_or_sections}{Either an integer indicating the number of
 sections along \code{axis} or a list of integers indicating the indices
 along \code{axis} at which the tensor is split.
-indices_or_sections: If an integer, N, the tensor will be split into N
+If an integer, N, the tensor will be split into N
 equal sections along \code{axis}. If a 1-D array of sorted integers,
 the entries indicate indices at which the tensor will be split
-along \code{axis}.
-axis: Axis along which to split. Defaults to \code{0}.
+along \code{axis}.}
 
-Note:
-A split does not have to result in equal division when using
-Torch backend.}
+\item{axis}{Axis along which to split. Defaults to \code{0}.}
 }
 \description{
 Split a tensor into chunks.
 }
+\section{Note}{
+A split does not have to result in equal division when using
+Torch backend.
+}
+
 \section{Returns}{
 \if{html}{\out{<div class="sourceCode">}}\preformatted{A list of tensors.
 }\if{html}{\out{</div>}}

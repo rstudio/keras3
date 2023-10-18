@@ -106,8 +106,16 @@ For image classification use cases, see
 
 For transfer learning use cases, make sure to read the
 \href{https://keras.io/guides/transfer_learning/}{guide to transfer learning & fine-tuning}.
+}
+}
+\section{Reference}{
+\itemize{
+\item \href{https://arxiv.org/pdf/1905.02244.pdf}{Searching for MobileNetV3} (ICCV 2019)
+}
+}
 
-Note: each Keras Application expects a specific kind of input preprocessing.
+\section{Note}{
+each Keras Application expects a specific kind of input preprocessing.
 For MobileNetV3, by default input preprocessing is included as a part of the
 model (as a \code{Rescaling} layer), and thus
 \code{keras.applications.mobilenet_v3.preprocess_input} is actually a
@@ -117,12 +125,6 @@ At the same time, preprocessing as a part of the model (i.e. \code{Rescaling}
 layer) can be disabled by setting \code{include_preprocessing} argument to \code{False}.
 With preprocessing disabled MobileNetV3 models expect their inputs to be float
 tensors of pixels with values in the \verb{[-1, 1]} range.
-}
-}
-\section{Reference}{
-\itemize{
-\item \href{https://arxiv.org/pdf/1905.02244.pdf}{Searching for MobileNetV3} (ICCV 2019)
-}
 }
 
 \section{Call Arguments}{

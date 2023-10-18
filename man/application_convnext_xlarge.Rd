@@ -76,8 +76,10 @@ pre-trained parameters of the models were assembled from the
 sense of how these parameters were converted to Keras compatible parameters,
 please refer to
 \href{https://github.com/sayakpaul/keras-convnext-conversion}{this repository}.
+}
 
-Note: Each Keras Application expects a specific kind of input preprocessing.
+\section{Note}{
+Each Keras Application expects a specific kind of input preprocessing.
 For ConvNeXt, preprocessing is included in the model using a \code{Normalization}
 layer.  ConvNeXt models expect their inputs to be float or uint8 tensors of
 pixels with values in the \link{0-255} range.

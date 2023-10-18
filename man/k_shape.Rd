@@ -11,10 +11,14 @@ k_shape(x)
 the input tensor.}
 }
 \description{
-Note: On the tensorflow backend, when \code{x} is a \code{tf.Tensor} with dynamic
+Gets the shape of the tensor input.
+}
+\section{Note}{
+On the tensorflow backend, when \code{x} is a \code{tf.Tensor} with dynamic
 shape, dimensions which are dynamic in the context of a compiled function
 will have a \code{tf.Tensor} value instead of a static integer value.
 }
+
 \section{Returns}{
 A tuple of integers or None values, indicating the shape of the input
 tensor.

@@ -66,16 +66,18 @@ For transfer learning use cases, make sure to read the
 \href{https://keras.io/guides/transfer_learning/}{guide to transfer learning & fine-tuning}.
 
 The default input image size for this model is 299x299.
-
-Note: each Keras Application expects a specific kind of input preprocessing.
-For Xception, call \code{keras.applications.xception.preprocess_input}
-on your inputs before passing them to the model.
-\code{xception.preprocess_input} will scale input pixels between -1 and 1.
 }
 \section{Reference}{
 \itemize{
 \item \href{https://arxiv.org/abs/1610.02357}{Xception: Deep Learning with Depthwise Separable Convolutions} (CVPR 2017)
 }
+}
+
+\section{Note}{
+each Keras Application expects a specific kind of input preprocessing.
+For Xception, call \code{keras.applications.xception.preprocess_input}
+on your inputs before passing them to the model.
+\code{xception.preprocess_input} will scale input pixels between -1 and 1.
 }
 
 \section{Returns}{

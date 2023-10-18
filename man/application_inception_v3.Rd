@@ -70,17 +70,19 @@ For image classification use cases, see
 
 For transfer learning use cases, make sure to read the
 \href{https://keras.io/guides/transfer_learning/}{guide to transfer learning & fine-tuning}.
-
-Note: each Keras Application expects a specific kind of input preprocessing.
-For \code{InceptionV3}, call
-\code{keras.applications.inception_v3.preprocess_input} on your inputs
-before passing them to the model.
-\code{inception_v3.preprocess_input} will scale input pixels between -1 and 1.
 }
 \section{Reference}{
 \itemize{
 \item \href{http://arxiv.org/abs/1512.00567}{Rethinking the Inception Architecture for Computer Vision} (CVPR 2016)
 }
+}
+
+\section{Note}{
+each Keras Application expects a specific kind of input preprocessing.
+For \code{InceptionV3}, call
+\code{keras.applications.inception_v3.preprocess_input} on your inputs
+before passing them to the model.
+\code{inception_v3.preprocess_input} will scale input pixels between -1 and 1.
 }
 
 \section{Returns}{

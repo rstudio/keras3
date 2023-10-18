@@ -35,8 +35,10 @@ model.add(keras.layers.LSTM(32))
 output = model(inputs)
 # The time step 3 and 5 will be skipped from LSTM calculation.
 }\if{html}{\out{</div>}}
+}
 
-Note: in the Keras masking convention, a masked timestep is denoted by
+\section{Note}{
+in the Keras masking convention, a masked timestep is denoted by
 a mask value of \code{False}, while a non-masked (i.e. usable) timestep
 is denoted by a mask value of \code{True}.
 }
