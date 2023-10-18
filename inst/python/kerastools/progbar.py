@@ -3,12 +3,12 @@
 # sys.stdout.isatty() and 'ipykernel' in sys.modules, neither one
 # of which returns True within R.
 
-import os
+# import os
 
-if os.getenv("KERAS_IMPLEMENTATION", "tensorflow") == "keras":
-    from keras.utils import Progbar
-else:
-    from tensorflow.keras.utils import Progbar
+# if os.getenv("KERAS_IMPLEMENTATION", "tensorflow") == "keras":
+from keras.utils import Progbar
+# else:
+#     from tensorflow.keras.utils import Progbar
 
 
 def apply_patch():
