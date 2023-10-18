@@ -514,13 +514,8 @@ compile.keras.models.model.Model <-
       target_tensors = target_tensors
     )
 
-    # drop NULLs
-    for (nm in names(args))
-      args[[nm]] <- args[[nm]]
+    args <- drop_nulls(args)
 
-    args <- c(list(), args, ...)
-
-    # compile model
     do.call(object$compile, args)
 
     # return model invisible (convenience for chaining)
