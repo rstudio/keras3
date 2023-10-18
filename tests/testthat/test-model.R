@@ -299,7 +299,7 @@ test_succeeds("can use functional api with dicts", {
     .chk <- vector("list", 4L)
     names(.chk) <- c("call", "fit", "evaluate", "predict")
     for (nm in names(.chk))
-      .chk[[nm]] <- function(expr) (expect_no_error( {{expr}} ))
+      .chk[[nm]] <- expect_no_error
 
     if (isTRUE(error)) {
       for (nm in names(.chk))

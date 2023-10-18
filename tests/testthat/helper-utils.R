@@ -69,7 +69,6 @@ local_py_capture_output <- function(type = c("stdout", "stderr")) {
 local_output_sink <- withr::local_output_sink
 
 test_succeeds <- function(desc, expr, required_version = NULL) {
-  expr <- rlang::enquo(expr)
   if(!is.null(required_version))
     skip_if_no_keras(required_version)
 
@@ -79,7 +78,8 @@ test_succeeds <- function(desc, expr, required_version = NULL) {
     local_output_sink(nullfile())
   }
 
-  eval.parent(rlang::expr(test_that(!!desc, expect_no_error(!!expr))))
+  eval_tidy(rlang::expr(test_that({{desc}}, expect_no_error( {{expr}} ))),
+            env = parent.frame())
 
 }
 
