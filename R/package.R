@@ -104,7 +104,7 @@ keras <- NULL
     Sys.setenv(RETICULATE_PYTHON = keras_python)
 
   # delay load keras
-  keras <<- import(implementation_module, delay_load = list(
+  try(keras <<- import(implementation_module, delay_load = list(
 
     priority = 10, # tensorflow priority == 5
 
@@ -143,7 +143,7 @@ keras <- NULL
         }
       }
     }
-  ))
+  )))
 
   # pkg_ns <- environment(sys.function())
   # delayedAssign("keras_ops", {
