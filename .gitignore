@@ -22,3 +22,4 @@ inst/doc
 .Rprofile
 .Renviron
 revdep
+debug.py
