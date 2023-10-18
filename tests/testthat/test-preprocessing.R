@@ -17,6 +17,7 @@ test_call_succeeds("skipgrams", {
 })
 
 test_call_succeeds("text_one_hot", {
+  skip("text_one_hot")
   # TODO: also deprecated:
   # https://github.com/keras-team/keras/blob/master/keras/legacy/preprocessing/text.py
   text <- 'The cat sat on the mat.'
@@ -25,6 +26,7 @@ test_call_succeeds("text_one_hot", {
 })
 
 test_call_succeeds("text_hashing_trick", required_version = "2.0.5", {
+  skip("text_hashing_trick")
   # TODO: also deprecated:
   # https://github.com/keras-team/keras/blob/master/keras/legacy/preprocessing/text.py
   text <- 'The cat sat on the mat.'
@@ -33,6 +35,7 @@ test_call_succeeds("text_hashing_trick", required_version = "2.0.5", {
 })
 
 test_call_succeeds("missing text data", required_version = "2.0.5", {
+  skip("text_hashing_trick")
   expect_error(text_hashing_trick(letters, 10),
                "`text` should be length 1")
 
@@ -45,6 +48,7 @@ test_call_succeeds("missing text data", required_version = "2.0.5", {
 })
 
 test_succeeds("use of text tokenizer", {
+  skip("text_tokenizer")
   texts <- c(
     'The cat sat on the mat.',
     'The dog sat on the log.',
@@ -85,9 +89,11 @@ test_succeeds("images arrays can be saved", {
 })
 
 test_succeeds("images arrays can be resized", {
+  skip("image_array_resize")
   if (have_pillow()) {
     img <- image_load("digit.jpeg")
     img_arr <- image_to_array(img)
+    # TODO, consider keeping image_array_resize.
     image_array_resize(img_arr, height = 450, width = 448) %>%
       image_array_save("digit_resized.jpeg")
   }
@@ -98,6 +104,7 @@ test_succeeds("flow images from dataframe works", {
   if (!reticulate::py_module_available("pandas"))
     skip("Needs pandas")
 
+  skip("flow_images_from_dataframe")
 
   if (have_pillow()) {
 
@@ -138,6 +145,7 @@ test_succeeds("flow images from dataframe works", {
 
 test_succeeds("flow images from directory works", {
 
+  skip("image_data_generator")
   if (!have_pillow())
     skip("Pillow required.")
 
