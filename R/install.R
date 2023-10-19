@@ -39,17 +39,18 @@ install_keras <- function(...,
     withr::defer(unlink(keras_team_keras_dir, recursive = TRUE))
   }
   withr::local_dir(keras_team_keras_dir)
+  withr::local_path(dirname(python))
   # browser()
   system2 <- reticulate:::system2t
   system2("git", "pull")
-  system2(python, c("-m pip install -r requirements.txt")) # unpin tf-nightly for Python 3.12
+  system2("python", c("-m pip install -r requirements.txt")) # unpin tf-nightly for Python 3.12
 
-  # system2(python, c("-m pip install ipython")) # for interactive debugging
-  # system2(python, c("-m pip install -r requirements-common.txt"))
-  # system2(python, c("-m pip install torch torchvision")) # needed for pip_build.py?? (but why?)
-  # system2(python, c("-m pip install tf-nightly jax[cpu]")) # unpin tf-nightly for Python 3.12
+  # system2("python", c("-m pip install ipython")) # for interactive debugging
+  # system2("python", c("-m pip install -r requirements-common.txt"))
+  # system2("python", c("-m pip install torch torchvision")) # needed for pip_build.py?? (but why?)
+  # system2("python", c("-m pip install tf-nightly jax[cpu]")) # unpin tf-nightly for Python 3.12
 
-  system2(python, c("pip_build.py --install"))
+  system2("python", c("pip_build.py --install"))
   message("Done!")
 
   return(invisible())
