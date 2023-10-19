@@ -127,7 +127,7 @@ keras <- NULL
 
       # if(implementation_module != "keras_core") {
       if(!py_has_attr(keras, "ops"))
-        py_set_attr(keras, "ops",  keras$backend)
+        reticulate::py_set_attr(keras, "ops",  keras$backend)
 
     },
 
