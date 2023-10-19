@@ -668,6 +668,7 @@ mk_export <- function(endpoint) {
             str_detect(paste0(module, ".", name), glob2rx(names(.)))] %>%
         unname() %>% unlist(recursive = FALSE)
 
+      # TODO:, handle 'inputs,...'
       for(new_param_name in intersect(names(maybe_add_params), undocumented_params))
         params[[new_param_name]] <<- maybe_add_params[[new_param_name]]
 
@@ -679,9 +680,10 @@ mk_export <- function(endpoint) {
                setdiff(names(formals(r_fn)),
                        unlist(strsplit(names(params) %||% character(), ","))))) {
 
-      message(endpoint)
-      writeLines(paste(" -", undocumented_params))
-
+      x <- list2("{endpoint}" := map(set_names(undocumented_params), ~"see description"))
+      writeLines(yaml::as.yaml(x))
+      # message(endpoint, ":")
+      # writeLines(paste("  ", undocumented_params, ":", "see description"))
     }
   })
 

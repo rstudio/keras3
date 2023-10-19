@@ -82,6 +82,8 @@ r"-(Reload a Keras model/layer that was saved via SavedModel / ExportArchive.
 #' @param object Object to compose the layer with. A tensor, array, or sequential model.
 #' @param name String, name for the object
 #' @param dtype datatype (e.g., `"float32"`).
+#' @param call_training_endpoint see description
+#' @param trainable see description
 #'
 #' @export
 #' @seealso

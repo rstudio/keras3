@@ -148,6 +148,7 @@ r"-(Bidirectional wrapper for RNNs.
 #'     A `ValueError` will be raised if these requirements are not met.
 #' @param object Object to compose the layer with. A tensor, array, or sequential model.
 #' @param ... Passed on to the Python callable
+#' @param weights see description
 #'
 #' @export
 #' @family recurrent layers

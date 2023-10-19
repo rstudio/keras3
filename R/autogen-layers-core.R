@@ -761,6 +761,7 @@ r"-(Masks a sequence by using a mask value to skip timesteps.
 #'
 #' @param object Object to compose the layer with. A tensor, array, or sequential model.
 #' @param ... Passed on to the Python callable
+#' @param mask_value see description
 #'
 #' @export
 #' @family core layers

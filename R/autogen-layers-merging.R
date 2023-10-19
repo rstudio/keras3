@@ -58,6 +58,7 @@ r"-(Performs elementwise addition operation.
 #' ```
 #'
 #' @param ...
+#' @param inputs see description
 #'
 #' @export
 #' @family merging layers
@@ -140,6 +141,7 @@ r"-(Averages a list of inputs element-wise..
 #' ```
 #'
 #' @param ...
+#' @param inputs see description
 #'
 #' @export
 #' @family merging layers
@@ -222,6 +224,7 @@ r"-(Concatenates a list of inputs.
 #'
 #' @param axis Axis along which to concatenate.
 #' @param ... Standard layer keyword arguments.
+#' @param inputs see description
 #'
 #' @export
 #' @family merging layers
@@ -334,6 +337,7 @@ r"-(Computes element-wise dot product of two tensors.
 #'     the output of the dot product is the cosine proximity
 #'     between the two samples.
 #' @param ... Standard layer keyword arguments.
+#' @param inputs see description
 #'
 #' @export
 #' @family merging layers
@@ -416,6 +420,7 @@ r"-(Computes element-wise maximum on a list of inputs.
 #' ```
 #'
 #' @param ...
+#' @param inputs see description
 #'
 #' @export
 #' @family merging layers
@@ -498,6 +503,7 @@ r"-(Computes elementwise minimum on a list of inputs.
 #' ```
 #'
 #' @param ...
+#' @param inputs see description
 #'
 #' @export
 #' @family merging layers
@@ -580,6 +586,7 @@ r"-(Performs elementwise multiplication.
 #' ```
 #'
 #' @param ...
+#' @param inputs see description
 #'
 #' @export
 #' @family merging layers
@@ -664,6 +671,7 @@ r"-(Performs elementwise subtraction.
 #' ```
 #'
 #' @param ...
+#' @param inputs see description
 #'
 #' @export
 #' @family merging layers

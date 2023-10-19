@@ -409,6 +409,7 @@ r"-(MultiHeadAttention layer.
 #' @param kernel_constraint Constraint for dense layer kernels.
 #' @param bias_constraint Constraint for dense layer kernels.
 #' @param ... Passed on to the Python callable
+#' @param inputs see description
 #'
 #' @export
 #' @family attention layers

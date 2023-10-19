@@ -268,6 +268,7 @@ r"-(Returns a tensor of shape `shape` where `indices` are set to `values`.
 #'     indices for the values in `values`.
 #' @param updates A tensor, the values to be set at `indices`.
 #' @param shape Shape of the output tensor.
+#' @param values see description
 #'
 #' @export
 #' @family ops
@@ -3539,6 +3540,8 @@ r"-(Shorthand for `keras.ops.absolute`.)-"
 # keras_core.src.ops.numpy.abs
 #' Shorthand for `keras.ops.absolute`.
 #'
+#' @param x see description
+#'
 #' @export
 #' @family ops
 #' @seealso
@@ -5199,6 +5202,8 @@ r"-(Shorthand for `keras.ops.conjugate`.)-"
 # keras_core.src.ops.numpy.conj
 #' Shorthand for `keras.ops.conjugate`.
 #'
+#' @param x see description
+#'
 #' @export
 #' @family ops
 #' @seealso
@@ -6499,6 +6504,9 @@ r"-(Return `x[key]`.)-"
 
 # keras_core.src.ops.numpy.get_item
 #' Return `x[key]`.
+#'
+#' @param x see description
+#' @param key see description
 #'
 #' @export
 #' @family ops
@@ -9440,6 +9448,9 @@ r"-(Alias for `keras.ops.divide`.)-"
 
 # keras_core.src.ops.numpy.true_divide
 #' Alias for `keras.ops.divide`.
+#'
+#' @param x1 see description
+#' @param x2 see description
 #'
 #' @export
 #' @family ops

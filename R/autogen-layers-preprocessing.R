@@ -1979,6 +1979,7 @@ r"-(A preprocessing layer which randomly crops images during training.
 #'     `name` and `dtype`.
 #' @param object Object to compose the layer with. A tensor, array, or sequential model.
 #' @param name String, name for the object
+#' @param data_format see description
 #'
 #' @export
 #' @family preprocessing layers
@@ -2196,6 +2197,8 @@ r"-(A preprocessing layer which randomly rotates images during training.
 #'     the boundaries when `fill_mode="constant"`.
 #' @param object Object to compose the layer with. A tensor, array, or sequential model.
 #' @param ... Passed on to the Python callable
+#' @param value_range see description
+#' @param data_format see description
 #'
 #' @export
 #' @family preprocessing layers
