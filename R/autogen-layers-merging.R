@@ -57,7 +57,7 @@ r"-(Performs elementwise addition operation.
 #' model = keras.models.Model(inputs=[input1, input2], outputs=out)
 #' ```
 #'
-#' @param inputs,... Inputs to merge.
+#' @param ...
 #'
 #' @export
 #' @family merging layers
@@ -139,7 +139,7 @@ r"-(Averages a list of inputs element-wise..
 #' model = keras.models.Model(inputs=[input1, input2], outputs=out)
 #' ```
 #'
-#' @param inputs,... Inputs to merge.
+#' @param ...
 #'
 #' @export
 #' @family merging layers
@@ -221,7 +221,7 @@ r"-(Concatenates a list of inputs.
 #'     A tensor, the concatenation of the inputs alongside axis `axis`.
 #'
 #' @param axis Axis along which to concatenate.
-#' @param inputs,... Inputs to merge.
+#' @param ... Standard layer keyword arguments.
 #'
 #' @export
 #' @family merging layers
@@ -333,7 +333,7 @@ r"-(Computes element-wise dot product of two tensors.
 #'     before taking the dot product. If set to `True`, then
 #'     the output of the dot product is the cosine proximity
 #'     between the two samples.
-#' @param inputs,... Inputs to merge.
+#' @param ... Standard layer keyword arguments.
 #'
 #' @export
 #' @family merging layers
@@ -415,7 +415,7 @@ r"-(Computes element-wise maximum on a list of inputs.
 #' model = keras.models.Model(inputs=[input1, input2], outputs=out)
 #' ```
 #'
-#' @param inputs,... Inputs to merge.
+#' @param ...
 #'
 #' @export
 #' @family merging layers
@@ -497,7 +497,7 @@ r"-(Computes elementwise minimum on a list of inputs.
 #' model = keras.models.Model(inputs=[input1, input2], outputs=out)
 #' ```
 #'
-#' @param inputs,... Inputs to merge.
+#' @param ...
 #'
 #' @export
 #' @family merging layers
@@ -579,7 +579,7 @@ r"-(Performs elementwise multiplication.
 #' model = keras.models.Model(inputs=[input1, input2], outputs=out)
 #' ```
 #'
-#' @param inputs,... Inputs to merge.
+#' @param ...
 #'
 #' @export
 #' @family merging layers
@@ -663,7 +663,7 @@ r"-(Performs elementwise subtraction.
 #' model = keras.models.Model(inputs=[input1, input2], outputs=out)
 #' ```
 #'
-#' @param inputs,... Inputs to merge.
+#' @param ...
 #'
 #' @export
 #' @family merging layers

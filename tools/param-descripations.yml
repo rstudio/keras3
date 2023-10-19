@@ -1,5 +1,5 @@
 "keras.applications.*":
-  include_preprocessing: |
+  include_preprocessing: >
       Boolean, whether to include the preprocessing layer at the bottom of the network.
 
   model_name: String, name for the model.
@@ -11,14 +11,26 @@
   batch_shape: Shape, including the batch dim.
 
 # merging layers
-"keras.layers.(Add|Average|Concatenate|Dot|Maximum|Minimum|Multiply|Subtract)":
+"keras.src.layers.merging.*":
+   ... : null
+   "inputs,...": "Inputs to merge"
+
+#
+#   :# "keras.layers.(Add|Average|Concatenate|Dot|Maximum|Minimum|Multiply|Subtract)":
+#
+#
+#
+# keras.src.*merging*
+# Add|Average|Concatenate|Dot|Maximum|Minimum|Multiply|Subtract:
+
+
+
+"keras.layers.*":
   object: Object to compose the layer with. A tensor, array, or sequential model.
-  "...": null
-  "inputs,...": "Inputs to merge"
 
 
 "keras.*":
   name: String, name for the object
   seed: Initial seed for the random number generator
   dtype: datatype (e.g., `"float32"`).
-  "...": Passed on arguments.
+  "...": Passed on to the Python callable

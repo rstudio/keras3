@@ -431,8 +431,8 @@ r"-(A preprocessing layer which buckets continuous features by ranges.
 #'     backend. If `True`, returns a `SparseTensor` instead of
 #'     a dense `Tensor`. Defaults to `False`.
 #' @param object Object to compose the layer with. A tensor, array, or sequential model.
-#' @param name name for the layer
-#' @param dtype datatype (e.g., `"float32"`)
+#' @param name String, name for the object
+#' @param dtype datatype (e.g., `"float32"`).
 #'
 #' @export
 #' @family preprocessing layers
@@ -573,8 +573,8 @@ r"-(A preprocessing layer which crosses features using the "hashing trick".
 #'     a `SparseTensor` instead of a dense `Tensor`. Defaults to `False`.
 #' @param ... Keyword arguments to construct a layer.
 #' @param object Object to compose the layer with. A tensor, array, or sequential model.
-#' @param name name for the layer
-#' @param dtype datatype (e.g., `"float32"`)
+#' @param name String, name for the object
+#' @param dtype datatype (e.g., `"float32"`).
 #'
 #' @export
 #' @family preprocessing layers
@@ -1462,8 +1462,8 @@ r"-(A preprocessing layer that maps integers to (possibly encoded) indices.
 #'     backend. If `True`, returns a `SparseTensor`
 #'     instead of a dense `Tensor`. Defaults to `False`.
 #' @param object Object to compose the layer with. A tensor, array, or sequential model.
+#' @param name String, name for the object
 #' @param ... Passed on to the Python callable
-#' @param name name for the layer
 #'
 #' @export
 #' @family preprocessing layers
@@ -1978,7 +1978,7 @@ r"-(A preprocessing layer which randomly crops images during training.
 #' @param ... Base layer keyword arguments, such as
 #'     `name` and `dtype`.
 #' @param object Object to compose the layer with. A tensor, array, or sequential model.
-#' @param name name for the layer
+#' @param name String, name for the object
 #'
 #' @export
 #' @family preprocessing layers
@@ -3332,8 +3332,8 @@ r"-(A preprocessing layer that maps strings to (possibly encoded) indices.
 #' @param encoding Optional. The text encoding to use to interpret the input
 #'     strings. Defaults to `"utf-8"`.
 #' @param object Object to compose the layer with. A tensor, array, or sequential model.
+#' @param name String, name for the object
 #' @param ... Passed on to the Python callable
-#' @param name name for the layer
 #'
 #' @export
 #' @family preprocessing layers
@@ -3738,8 +3738,8 @@ r"-(A preprocessing layer which maps text features to integer sequences.
 #' @param encoding Optional. The text encoding to use to interpret the input
 #'     strings. Defaults to `"utf-8"`.
 #' @param object Object to compose the layer with. A tensor, array, or sequential model.
+#' @param name String, name for the object
 #' @param ... Passed on to the Python callable
-#' @param name name for the layer
 #'
 #' @export
 #' @family preprocessing layers

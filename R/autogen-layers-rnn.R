@@ -2299,8 +2299,8 @@ r"-(Fully-connected RNN where the output is to be fed back as the new input.
 #'     although it tends to be more memory-intensive.
 #'     Unrolling is only suitable for short sequences.
 #' @param object Object to compose the layer with. A tensor, array, or sequential model.
+#' @param seed Initial seed for the random number generator
 #' @param ... Passed on to the Python callable
-#' @param seed initial seed for the random number generator
 #'
 #' @export
 #' @family recurrent layers

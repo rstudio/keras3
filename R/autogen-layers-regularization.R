@@ -306,9 +306,9 @@ r"-(Spatial 1D version of Dropout.
 #'
 #' @param rate Float between 0 and 1. Fraction of the input units to drop.
 #' @param object Object to compose the layer with. A tensor, array, or sequential model.
-#' @param name name for the layer
-#' @param seed initial seed for the random number generator
-#' @param dtype datatype (e.g., `"float32"`)
+#' @param name String, name for the object
+#' @param seed Initial seed for the random number generator
+#' @param dtype datatype (e.g., `"float32"`).
 #'
 #' @export
 #' @family regularization layers
@@ -403,9 +403,9 @@ r"-(Spatial 2D version of Dropout.
 #'     Keras config file at `~/.keras/keras.json`.
 #'     If you never set it, then it will be `"channels_last"`.
 #' @param object Object to compose the layer with. A tensor, array, or sequential model.
-#' @param name name for the layer
-#' @param seed initial seed for the random number generator
-#' @param dtype datatype (e.g., `"float32"`)
+#' @param name String, name for the object
+#' @param seed Initial seed for the random number generator
+#' @param dtype datatype (e.g., `"float32"`).
 #'
 #' @export
 #' @family regularization layers
@@ -501,9 +501,9 @@ r"-(Spatial 3D version of Dropout.
 #'     Keras config file at `~/.keras/keras.json`.
 #'     If you never set it, then it will be `"channels_last"`.
 #' @param object Object to compose the layer with. A tensor, array, or sequential model.
-#' @param name name for the layer
-#' @param seed initial seed for the random number generator
-#' @param dtype datatype (e.g., `"float32"`)
+#' @param name String, name for the object
+#' @param seed Initial seed for the random number generator
+#' @param dtype datatype (e.g., `"float32"`).
 #'
 #' @export
 #' @family regularization layers

@@ -791,8 +791,8 @@ r"-(Optimizer that implements the Adamax algorithm.
 #'     training. Alternately, `keras.optimizers.LossScaleOptimizer` will
 #'     automatically set a loss scale factor.
 #'
+#' @param name String, name for the object
 #' @param ... Passed on to the Python callable
-#' @param name name for the optimizer
 #'
 #' @export
 #' @family optimizer

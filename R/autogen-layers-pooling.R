@@ -139,8 +139,8 @@ r"-(Average pooling for temporal data.
 #'     value found in your Keras config file at `~/.keras/keras.json`.
 #'     If you never set it, then it will be `"channels_last"`.
 #' @param object Object to compose the layer with. A tensor, array, or sequential model.
+#' @param name String, name for the object
 #' @param ... Passed on to the Python callable
-#' @param name name for the layer
 #'
 #' @export
 #' @family pooling layers
@@ -329,8 +329,8 @@ r"-(Average pooling operation for 2D spatial data.
 #'     `~/.keras/keras.json`. If you never set it, then it will be
 #'     `"channels_last"`.
 #' @param object Object to compose the layer with. A tensor, array, or sequential model.
+#' @param name String, name for the object
 #' @param ... Passed on to the Python callable
-#' @param name name for the layer
 #'
 #' @export
 #' @family pooling layers
@@ -465,8 +465,8 @@ r"-(Average pooling operation for 3D data (spatial or spatio-temporal).
 #'     config file at `~/.keras/keras.json`. If you never set it, then it
 #'     will be `"channels_last"`.
 #' @param object Object to compose the layer with. A tensor, array, or sequential model.
+#' @param name String, name for the object
 #' @param ... Passed on to the Python callable
-#' @param name name for the layer
 #'
 #' @export
 #' @family pooling layers
@@ -1278,8 +1278,8 @@ r"-(Max pooling operation for 1D temporal data.
 #'     value found in your Keras config file at `~/.keras/keras.json`.
 #'     If you never set it, then it will be `"channels_last"`.
 #' @param object Object to compose the layer with. A tensor, array, or sequential model.
+#' @param name String, name for the object
 #' @param ... Passed on to the Python callable
-#' @param name name for the layer
 #'
 #' @export
 #' @family pooling layers
@@ -1468,8 +1468,8 @@ r"-(Max pooling operation for 2D spatial data.
 #'     `~/.keras/keras.json`. If you never set it, then it will be
 #'     `"channels_last"`.
 #' @param object Object to compose the layer with. A tensor, array, or sequential model.
+#' @param name String, name for the object
 #' @param ... Passed on to the Python callable
-#' @param name name for the layer
 #'
 #' @export
 #' @family pooling layers
@@ -1604,8 +1604,8 @@ r"-(Max pooling operation for 3D data (spatial or spatio-temporal).
 #'     config file at `~/.keras/keras.json`. If you never set it, then it
 #'     will be `"channels_last"`.
 #' @param object Object to compose the layer with. A tensor, array, or sequential model.
+#' @param name String, name for the object
 #' @param ... Passed on to the Python callable
-#' @param name name for the layer
 #'
 #' @export
 #' @family pooling layers
