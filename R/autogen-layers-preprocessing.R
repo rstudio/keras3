@@ -160,6 +160,8 @@ r"-(A preprocessing layer which encodes integer features.
 #'     For all output modes, currently only output up to rank 2 is
 #'     supported.
 #'     Defaults to `"multi_hot"`.
+#' @param object Object to compose the layer with. A tensor, array, or sequential model.
+#' @param ... Passed on to the Python callable
 #'
 #' @export
 #' @family preprocessing layers
@@ -256,6 +258,8 @@ r"-(A preprocessing layer which crops images.
 #'     `image_data_format` value found in your Keras config file at
 #'     `~/.keras/keras.json`. If you never set it, then it will be
 #'     `"channels_last"`.
+#' @param object Object to compose the layer with. A tensor, array, or sequential model.
+#' @param ... Passed on to the Python callable
 #'
 #' @export
 #' @family preprocessing layers
@@ -426,6 +430,9 @@ r"-(A preprocessing layer which buckets continuous features by ranges.
 #'     and `"count"` output modes. Only supported with TensorFlow
 #'     backend. If `True`, returns a `SparseTensor` instead of
 #'     a dense `Tensor`. Defaults to `False`.
+#' @param object Object to compose the layer with. A tensor, array, or sequential model.
+#' @param name name for the layer
+#' @param dtype datatype (e.g., `"float32"`)
 #'
 #' @export
 #' @family preprocessing layers
@@ -565,6 +572,9 @@ r"-(A preprocessing layer which crosses features using the "hashing trick".
 #'     when using the TensorFlow backend. If `True`, returns
 #'     a `SparseTensor` instead of a dense `Tensor`. Defaults to `False`.
 #' @param ... Keyword arguments to construct a layer.
+#' @param object Object to compose the layer with. A tensor, array, or sequential model.
+#' @param name name for the layer
+#' @param dtype datatype (e.g., `"float32"`)
 #'
 #' @export
 #' @family preprocessing layers
@@ -840,6 +850,7 @@ r"-(A preprocessing layer which hashes and bins categorical features.
 #'     backend. If `True`, returns a `SparseTensor` instead of
 #'     a dense `Tensor`. Defaults to `False`.
 #' @param ... Keyword arguments to construct a layer.
+#' @param object Object to compose the layer with. A tensor, array, or sequential model.
 #'
 #' @export
 #' @family preprocessing layers
@@ -1450,6 +1461,9 @@ r"-(A preprocessing layer that maps integers to (possibly encoded) indices.
 #'     `"tf_idf"` output modes. Only supported with TensorFlow
 #'     backend. If `True`, returns a `SparseTensor`
 #'     instead of a dense `Tensor`. Defaults to `False`.
+#' @param object Object to compose the layer with. A tensor, array, or sequential model.
+#' @param ... Passed on to the Python callable
+#' @param name name for the layer
 #'
 #' @export
 #' @family preprocessing layers
@@ -1643,6 +1657,8 @@ r"-(A preprocessing layer that normalizes continuous features.
 #' @param invert If `True`, this layer will apply the inverse transformation
 #'     to its inputs: it would turn a normalized input back into its
 #'     original form.
+#' @param object Object to compose the layer with. A tensor, array, or sequential model.
+#' @param ... Passed on to the Python callable
 #'
 #' @export
 #' @family preprocessing layers
@@ -1780,6 +1796,9 @@ r"-(A preprocessing layer which randomly adjusts brightness during training.
 #'     output values will be clipped to this range.
 #' @param seed optional integer, for fixed RNG behavior.
 #'
+#' @param object Object to compose the layer with. A tensor, array, or sequential model.
+#' @param ... Passed on to the Python callable
+#'
 #' @export
 #' @family preprocessing layers
 #' @seealso
@@ -1869,6 +1888,8 @@ r"-(A preprocessing layer which randomly adjusts contrast during training.
 #'     the output will be `(x - mean) * factor + mean`
 #'     where `mean` is the mean value of the channel.
 #' @param seed Integer. Used to create a random seed.
+#' @param object Object to compose the layer with. A tensor, array, or sequential model.
+#' @param ... Passed on to the Python callable
 #'
 #' @export
 #' @family preprocessing layers
@@ -1956,6 +1977,8 @@ r"-(A preprocessing layer which randomly crops images during training.
 #' @param seed Integer. Used to create a random seed.
 #' @param ... Base layer keyword arguments, such as
 #'     `name` and `dtype`.
+#' @param object Object to compose the layer with. A tensor, array, or sequential model.
+#' @param name name for the layer
 #'
 #' @export
 #' @family preprocessing layers
@@ -2034,6 +2057,7 @@ r"-(A preprocessing layer which randomly flips images during training.
 #' @param seed Integer. Used to create a random seed.
 #' @param ... Base layer keyword arguments, such as
 #'     `name` and `dtype`.
+#' @param object Object to compose the layer with. A tensor, array, or sequential model.
 #'
 #' @export
 #' @family preprocessing layers
@@ -2170,6 +2194,8 @@ r"-(A preprocessing layer which randomly rotates images during training.
 #' @param seed Integer. Used to create a random seed.
 #' @param fill_value a float represents the value to be filled outside
 #'     the boundaries when `fill_mode="constant"`.
+#' @param object Object to compose the layer with. A tensor, array, or sequential model.
+#' @param ... Passed on to the Python callable
 #'
 #' @export
 #' @family preprocessing layers
@@ -2339,6 +2365,7 @@ r"-(A preprocessing layer which randomly translates images during training.
 #'     `~/.keras/keras.json`. If you never set it, then it will be
 #'     `"channels_last"`.
 #' @param ... Base layer keyword arguments, such as `name` and `dtype`.
+#' @param object Object to compose the layer with. A tensor, array, or sequential model.
 #'
 #' @export
 #' @family preprocessing layers
@@ -2521,6 +2548,7 @@ r"-(A preprocessing layer which randomly zooms images during training.
 #'     `~/.keras/keras.json`. If you never set it, then it will be
 #'     `"channels_last"`.
 #' @param ... Base layer keyword arguments, such as `name` and `dtype`.
+#' @param object Object to compose the layer with. A tensor, array, or sequential model.
 #'
 #' @export
 #' @family preprocessing layers
@@ -2592,6 +2620,7 @@ r"-(A preprocessing layer which rescales input values to a new range.
 #' @param scale Float, the scale to apply to the inputs.
 #' @param offset Float, the offset to apply to the inputs.
 #' @param ... Base layer keyword arguments, such as `name` and `dtype`.
+#' @param object Object to compose the layer with. A tensor, array, or sequential model.
 #'
 #' @export
 #' @family preprocessing layers
@@ -2699,6 +2728,7 @@ r"-(A preprocessing layer which resizes images.
 #'     `~/.keras/keras.json`. If you never set it, then it will be
 #'     `"channels_last"`.
 #' @param ... Base layer keyword arguments, such as `name` and `dtype`.
+#' @param object Object to compose the layer with. A tensor, array, or sequential model.
 #'
 #' @export
 #' @family preprocessing layers
@@ -3301,6 +3331,9 @@ r"-(A preprocessing layer that maps strings to (possibly encoded) indices.
 #'     instead of a dense `Tensor`. Defaults to `False`.
 #' @param encoding Optional. The text encoding to use to interpret the input
 #'     strings. Defaults to `"utf-8"`.
+#' @param object Object to compose the layer with. A tensor, array, or sequential model.
+#' @param ... Passed on to the Python callable
+#' @param name name for the layer
 #'
 #' @export
 #' @family preprocessing layers
@@ -3704,6 +3737,9 @@ r"-(A preprocessing layer which maps text features to integer sequences.
 #'     instead of a dense `Tensor`. Defaults to `False`.
 #' @param encoding Optional. The text encoding to use to interpret the input
 #'     strings. Defaults to `"utf-8"`.
+#' @param object Object to compose the layer with. A tensor, array, or sequential model.
+#' @param ... Passed on to the Python callable
+#' @param name name for the layer
 #'
 #' @export
 #' @family preprocessing layers

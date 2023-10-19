@@ -107,6 +107,8 @@ r"-(Additive attention layer, a.k.a. Bahdanau-style attention.
 #'     attention scores.
 #' @param dropout Float between 0 and 1. Fraction of the units to drop for the
 #'     attention scores. Defaults to `0.0`.
+#' @param object Object to compose the layer with. A tensor, array, or sequential model.
+#' @param ... Passed on to the Python callable
 #'
 #' @export
 #' @family attention layers
@@ -234,6 +236,8 @@ r"-(Dot-product attention layer, a.k.a. Luong-style attention.
 #'     `{"dot", "concat"}`. `"dot"` refers to the dot product between the
 #'     query and key vectors. `"concat"` refers to the hyperbolic tangent
 #'     of the concatenation of the `query` and `key` vectors.
+#' @param object Object to compose the layer with. A tensor, array, or sequential model.
+#' @param ... Passed on to the Python callable
 #'
 #' @export
 #' @family attention layers
@@ -404,6 +408,7 @@ r"-(MultiHeadAttention layer.
 #' @param activity_regularizer Regularizer for dense layer activity.
 #' @param kernel_constraint Constraint for dense layer kernels.
 #' @param bias_constraint Constraint for dense layer kernels.
+#' @param ... Passed on to the Python callable
 #'
 #' @export
 #' @family attention layers

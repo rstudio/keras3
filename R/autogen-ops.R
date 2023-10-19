@@ -6090,6 +6090,7 @@ r"-(Evaluates the Einstein summation convention on the operands.
 #'     `->` is included as well as subscript labels of the precise
 #'     output form.
 #' @param operands The operands to compute the Einstein sum of.
+#' @param ... Passed on to the Python callable
 #'
 #' @export
 #' @family ops
@@ -7566,6 +7567,7 @@ r"-(Creates grids of coordinates from coordinate vectors.
 #' @param x 1-D tensors representing the coordinates of a grid.
 #' @param indexing Cartesian (`"xy"`, default) or matrix (`"ij"`) indexing
 #'     of output.
+#' @param ... Passed on to the Python callable
 #'
 #' @export
 #' @family ops

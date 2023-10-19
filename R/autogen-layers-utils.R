@@ -131,6 +131,8 @@ r"-(Torch module wrapper layer.
 #'     passing the instance to `TorchModuleWrapper` (e.g. by calling
 #'     it once).
 #' @param name The name of the layer (string).
+#' @param object Object to compose the layer with. A tensor, array, or sequential model.
+#' @param ... Passed on to the Python callable
 #'
 #' @export
 #' @seealso

@@ -138,6 +138,9 @@ r"-(Average pooling for temporal data.
 #'     `(batch, features, steps)`. It defaults to the `image_data_format`
 #'     value found in your Keras config file at `~/.keras/keras.json`.
 #'     If you never set it, then it will be `"channels_last"`.
+#' @param object Object to compose the layer with. A tensor, array, or sequential model.
+#' @param ... Passed on to the Python callable
+#' @param name name for the layer
 #'
 #' @export
 #' @family pooling layers
@@ -325,6 +328,9 @@ r"-(Average pooling operation for 2D spatial data.
 #'     `image_data_format` value found in your Keras config file at
 #'     `~/.keras/keras.json`. If you never set it, then it will be
 #'     `"channels_last"`.
+#' @param object Object to compose the layer with. A tensor, array, or sequential model.
+#' @param ... Passed on to the Python callable
+#' @param name name for the layer
 #'
 #' @export
 #' @family pooling layers
@@ -458,6 +464,9 @@ r"-(Average pooling operation for 3D data (spatial or spatio-temporal).
 #'     It defaults to the `image_data_format` value found in your Keras
 #'     config file at `~/.keras/keras.json`. If you never set it, then it
 #'     will be `"channels_last"`.
+#' @param object Object to compose the layer with. A tensor, array, or sequential model.
+#' @param ... Passed on to the Python callable
+#' @param name name for the layer
 #'
 #' @export
 #' @family pooling layers
@@ -572,6 +581,8 @@ r"-(Global average pooling operation for temporal data.
 #'     reduced for spatial dimensions. If `keepdims` is `True`, the
 #'     temporal dimension are retained with length 1.
 #'     The behavior is the same as for `tf.reduce_mean` or `np.mean`.
+#' @param object Object to compose the layer with. A tensor, array, or sequential model.
+#' @param ... Passed on to the Python callable
 #'
 #' @export
 #' @family pooling layers
@@ -678,6 +689,8 @@ r"-(Global average pooling operation for 2D data.
 #'     reduced for spatial dimensions. If `keepdims` is `True`, the
 #'     spatial dimension are retained with length 1.
 #'     The behavior is the same as for `tf.reduce_mean` or `np.mean`.
+#' @param object Object to compose the layer with. A tensor, array, or sequential model.
+#' @param ... Passed on to the Python callable
 #'
 #' @export
 #' @family pooling layers
@@ -786,6 +799,8 @@ r"-(Global average pooling operation for 3D data.
 #'     reduced for spatial dimensions. If `keepdims` is `True`, the
 #'     spatial dimension are retained with length 1.
 #'     The behavior is the same as for `tf.reduce_mean` or `np.mean`.
+#' @param object Object to compose the layer with. A tensor, array, or sequential model.
+#' @param ... Passed on to the Python callable
 #'
 #' @export
 #' @family pooling layers
@@ -890,6 +905,8 @@ r"-(Global max pooling operation for temporal data.
 #'     reduced for spatial dimensions. If `keepdims` is `True`, the
 #'     temporal dimension are retained with length 1.
 #'     The behavior is the same as for `tf.reduce_mean` or `np.mean`.
+#' @param object Object to compose the layer with. A tensor, array, or sequential model.
+#' @param ... Passed on to the Python callable
 #'
 #' @export
 #' @family pooling layers
@@ -995,6 +1012,8 @@ r"-(Global max pooling operation for 2D data.
 #'     reduced for spatial dimensions. If `keepdims` is `True`, the
 #'     spatial dimension are retained with length 1.
 #'     The behavior is the same as for `tf.reduce_mean` or `np.mean`.
+#' @param object Object to compose the layer with. A tensor, array, or sequential model.
+#' @param ... Passed on to the Python callable
 #'
 #' @export
 #' @family pooling layers
@@ -1102,6 +1121,8 @@ r"-(Global max pooling operation for 3D data.
 #'     reduced for spatial dimensions. If `keepdims` is `True`, the
 #'     spatial dimension are retained with length 1.
 #'     The behavior is the same as for `tf.reduce_mean` or `np.mean`.
+#' @param object Object to compose the layer with. A tensor, array, or sequential model.
+#' @param ... Passed on to the Python callable
 #'
 #' @export
 #' @family pooling layers
@@ -1256,6 +1277,9 @@ r"-(Max pooling operation for 1D temporal data.
 #'     `(batch, features, steps)`. It defaults to the `image_data_format`
 #'     value found in your Keras config file at `~/.keras/keras.json`.
 #'     If you never set it, then it will be `"channels_last"`.
+#' @param object Object to compose the layer with. A tensor, array, or sequential model.
+#' @param ... Passed on to the Python callable
+#' @param name name for the layer
 #'
 #' @export
 #' @family pooling layers
@@ -1443,6 +1467,9 @@ r"-(Max pooling operation for 2D spatial data.
 #'     `image_data_format` value found in your Keras config file at
 #'     `~/.keras/keras.json`. If you never set it, then it will be
 #'     `"channels_last"`.
+#' @param object Object to compose the layer with. A tensor, array, or sequential model.
+#' @param ... Passed on to the Python callable
+#' @param name name for the layer
 #'
 #' @export
 #' @family pooling layers
@@ -1576,6 +1603,9 @@ r"-(Max pooling operation for 3D data (spatial or spatio-temporal).
 #'     It defaults to the `image_data_format` value found in your Keras
 #'     config file at `~/.keras/keras.json`. If you never set it, then it
 #'     will be `"channels_last"`.
+#' @param object Object to compose the layer with. A tensor, array, or sequential model.
+#' @param ... Passed on to the Python callable
+#' @param name name for the layer
 #'
 #' @export
 #' @family pooling layers

@@ -139,6 +139,8 @@ Returns:
 #'     Defaults to `"softmax"`.
 #'     When loading pretrained weights, `classifier_activation` can only
 #'     be `None` or `"softmax"`.
+#' @param include_preprocessing Boolean, whether to include the preprocessing layer at the bottom of the network.
+#' @param model_name String, name for the model.
 #'
 #' @export
 #' @seealso
@@ -291,6 +293,8 @@ Returns:
 #'     Defaults to `"softmax"`.
 #'     When loading pretrained weights, `classifier_activation` can only
 #'     be `None` or `"softmax"`.
+#' @param include_preprocessing Boolean, whether to include the preprocessing layer at the bottom of the network.
+#' @param model_name String, name for the model.
 #'
 #' @export
 #' @seealso
@@ -443,6 +447,8 @@ Returns:
 #'     Defaults to `"softmax"`.
 #'     When loading pretrained weights, `classifier_activation` can only
 #'     be `None` or `"softmax"`.
+#' @param include_preprocessing Boolean, whether to include the preprocessing layer at the bottom of the network.
+#' @param model_name String, name for the model.
 #'
 #' @export
 #' @seealso
@@ -595,6 +601,8 @@ Returns:
 #'     Defaults to `"softmax"`.
 #'     When loading pretrained weights, `classifier_activation` can only
 #'     be `None` or `"softmax"`.
+#' @param include_preprocessing Boolean, whether to include the preprocessing layer at the bottom of the network.
+#' @param model_name String, name for the model.
 #'
 #' @export
 #' @seealso
@@ -747,6 +755,8 @@ Returns:
 #'     Defaults to `"softmax"`.
 #'     When loading pretrained weights, `classifier_activation` can only
 #'     be `None` or `"softmax"`.
+#' @param include_preprocessing Boolean, whether to include the preprocessing layer at the bottom of the network.
+#' @param model_name String, name for the model.
 #'
 #' @export
 #' @seealso
@@ -1268,6 +1278,7 @@ Returns:
 #'     Defaults to `'softmax'`.
 #'     When loading pretrained weights, `classifier_activation` can only
 #'     be `None` or `"softmax"`.
+#' @param ... Passed on to the Python callable
 #'
 #' @export
 #' @seealso
@@ -1411,6 +1422,7 @@ Returns:
 #'     Defaults to `'softmax'`.
 #'     When loading pretrained weights, `classifier_activation` can only
 #'     be `None` or `"softmax"`.
+#' @param ... Passed on to the Python callable
 #'
 #' @export
 #' @seealso
@@ -1554,6 +1566,7 @@ Returns:
 #'     Defaults to `'softmax'`.
 #'     When loading pretrained weights, `classifier_activation` can only
 #'     be `None` or `"softmax"`.
+#' @param ... Passed on to the Python callable
 #'
 #' @export
 #' @seealso
@@ -1697,6 +1710,7 @@ Returns:
 #'     Defaults to `'softmax'`.
 #'     When loading pretrained weights, `classifier_activation` can only
 #'     be `None` or `"softmax"`.
+#' @param ... Passed on to the Python callable
 #'
 #' @export
 #' @seealso
@@ -1840,6 +1854,7 @@ Returns:
 #'     Defaults to `'softmax'`.
 #'     When loading pretrained weights, `classifier_activation` can only
 #'     be `None` or `"softmax"`.
+#' @param ... Passed on to the Python callable
 #'
 #' @export
 #' @seealso
@@ -1983,6 +1998,7 @@ Returns:
 #'     Defaults to `'softmax'`.
 #'     When loading pretrained weights, `classifier_activation` can only
 #'     be `None` or `"softmax"`.
+#' @param ... Passed on to the Python callable
 #'
 #' @export
 #' @seealso
@@ -2126,6 +2142,7 @@ Returns:
 #'     Defaults to `'softmax'`.
 #'     When loading pretrained weights, `classifier_activation` can only
 #'     be `None` or `"softmax"`.
+#' @param ... Passed on to the Python callable
 #'
 #' @export
 #' @seealso
@@ -2269,6 +2286,7 @@ Returns:
 #'     Defaults to `'softmax'`.
 #'     When loading pretrained weights, `classifier_activation` can only
 #'     be `None` or `"softmax"`.
+#' @param ... Passed on to the Python callable
 #'
 #' @export
 #' @seealso
@@ -2418,6 +2436,7 @@ Returns:
 #'     Defaults to `"softmax"`.
 #'     When loading pretrained weights, `classifier_activation` can only
 #'     be `None` or `"softmax"`.
+#' @param include_preprocessing Boolean, whether to include the preprocessing layer at the bottom of the network.
 #'
 #' @export
 #' @seealso
@@ -2567,6 +2586,7 @@ Returns:
 #'     Defaults to `"softmax"`.
 #'     When loading pretrained weights, `classifier_activation` can only
 #'     be `None` or `"softmax"`.
+#' @param include_preprocessing Boolean, whether to include the preprocessing layer at the bottom of the network.
 #'
 #' @export
 #' @seealso
@@ -2716,6 +2736,7 @@ Returns:
 #'     Defaults to `"softmax"`.
 #'     When loading pretrained weights, `classifier_activation` can only
 #'     be `None` or `"softmax"`.
+#' @param include_preprocessing Boolean, whether to include the preprocessing layer at the bottom of the network.
 #'
 #' @export
 #' @seealso
@@ -2865,6 +2886,7 @@ Returns:
 #'     Defaults to `"softmax"`.
 #'     When loading pretrained weights, `classifier_activation` can only
 #'     be `None` or `"softmax"`.
+#' @param include_preprocessing Boolean, whether to include the preprocessing layer at the bottom of the network.
 #'
 #' @export
 #' @seealso
@@ -3014,6 +3036,7 @@ Returns:
 #'     Defaults to `"softmax"`.
 #'     When loading pretrained weights, `classifier_activation` can only
 #'     be `None` or `"softmax"`.
+#' @param include_preprocessing Boolean, whether to include the preprocessing layer at the bottom of the network.
 #'
 #' @export
 #' @seealso
@@ -3163,6 +3186,7 @@ Returns:
 #'     Defaults to `"softmax"`.
 #'     When loading pretrained weights, `classifier_activation` can only
 #'     be `None` or `"softmax"`.
+#' @param include_preprocessing Boolean, whether to include the preprocessing layer at the bottom of the network.
 #'
 #' @export
 #' @seealso
@@ -3312,6 +3336,7 @@ Returns:
 #'     Defaults to `"softmax"`.
 #'     When loading pretrained weights, `classifier_activation` can only
 #'     be `None` or `"softmax"`.
+#' @param include_preprocessing Boolean, whether to include the preprocessing layer at the bottom of the network.
 #'
 #' @export
 #' @seealso

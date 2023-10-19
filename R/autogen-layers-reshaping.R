@@ -74,6 +74,8 @@ r"-(Cropping layer for 1D input (e.g. temporal sequence).
 #' - If tuple of 2 ints: how many units should be trimmed off at the
 #'   beginning and end of the cropping dimension
 #'   (`(left_crop, right_crop)`).
+#' @param object Object to compose the layer with. A tensor, array, or sequential model.
+#' @param ... Passed on to the Python callable
 #'
 #' @export
 #' @family reshaping layers
@@ -184,6 +186,8 @@ r"-(Cropping layer for 2D input (e.g. picture).
 #'     When unspecified, uses `image_data_format` value found in your Keras
 #'     config file at `~/.keras/keras.json` (if exists). Defaults to
 #'     `"channels_last"`.
+#' @param object Object to compose the layer with. A tensor, array, or sequential model.
+#' @param ... Passed on to the Python callable
 #'
 #' @export
 #' @family reshaping layers
@@ -303,6 +307,8 @@ r"-(Cropping layer for 3D data (e.g. spatial or spatio-temporal).
 #'     When unspecified, uses `image_data_format` value found in your Keras
 #'     config file at `~/.keras/keras.json` (if exists). Defaults to
 #'     `"channels_last"`.
+#' @param object Object to compose the layer with. A tensor, array, or sequential model.
+#' @param ... Passed on to the Python callable
 #'
 #' @export
 #' @family reshaping layers
@@ -371,6 +377,8 @@ r"-(Flattens the input. Does not affect the batch size.
 #' When unspecified, uses `image_data_format` value found in your Keras
 #' config file at `~/.keras/keras.json` (if exists). Defaults to
 #' `"channels_last"`.
+#' @param object Object to compose the layer with. A tensor, array, or sequential model.
+#' @param ... Passed on to the Python callable
 #'
 #' @export
 #' @family reshaping layers
@@ -439,6 +447,8 @@ r"-(Permutes the dimensions of the input according to a given pattern.
 #' batch dimension. Indexing starts at 1.
 #' For instance, `(2, 1)` permutes the first and second dimensions
 #' of the input.
+#' @param object Object to compose the layer with. A tensor, array, or sequential model.
+#' @param ... Passed on to the Python callable
 #'
 #' @export
 #' @family reshaping layers
@@ -497,6 +507,8 @@ r"-(Repeats the input n times.
 #'     3D tensor with shape `(batch_size, n, features)`.
 #'
 #' @param n Integer, repetition factor.
+#' @param object Object to compose the layer with. A tensor, array, or sequential model.
+#' @param ... Passed on to the Python callable
 #'
 #' @export
 #' @family reshaping layers
@@ -574,6 +586,8 @@ r"-(Layer that reshapes inputs into the given shape.
 #'
 #' @param target_shape Target shape. Tuple of integers, does not include the
 #' samples dimension (batch size).
+#' @param object Object to compose the layer with. A tensor, array, or sequential model.
+#' @param ... Passed on to the Python callable
 #'
 #' @export
 #' @family reshaping layers
@@ -662,6 +676,8 @@ r"-(Upsampling layer for 1D inputs.
 #'     3D tensor with shape: `(batch_size, upsampled_steps, features)`.
 #'
 #' @param size Integer. Upsampling factor.
+#' @param object Object to compose the layer with. A tensor, array, or sequential model.
+#' @param ... Passed on to the Python callable
 #'
 #' @export
 #' @family reshaping layers
@@ -796,6 +812,8 @@ r"-(Upsampling layer for 2D inputs.
 #'     Defaults to `"channels_last"`.
 #' @param interpolation A string, one of `"bicubic"`, `"bilinear"`, `"lanczos3"`,
 #'     `"lanczos5"`, `"nearest"`.
+#' @param object Object to compose the layer with. A tensor, array, or sequential model.
+#' @param ... Passed on to the Python callable
 #'
 #' @export
 #' @family reshaping layers
@@ -905,6 +923,8 @@ r"-(Upsampling layer for 3D inputs.
 #'     `image_data_format` value found in your Keras config file at
 #'      `~/.keras/keras.json` (if exists) else `"channels_last"`.
 #'     Defaults to `"channels_last"`.
+#' @param object Object to compose the layer with. A tensor, array, or sequential model.
+#' @param ... Passed on to the Python callable
 #'
 #' @export
 #' @family reshaping layers
@@ -1005,6 +1025,8 @@ r"-(Zero-padding layer for 1D input (e.g. temporal sequence).
 #'   the padding dimension (axis 1).
 #' - If tuple of 2 ints: how many zeros to add at the beginning and the
 #'   end of the padding dimension (`(left_pad, right_pad)`).
+#' @param object Object to compose the layer with. A tensor, array, or sequential model.
+#' @param ... Passed on to the Python callable
 #'
 #' @export
 #' @family reshaping layers
@@ -1143,6 +1165,8 @@ r"-(Zero-padding layer for 2D input (e.g. picture).
 #'     When unspecified, uses `image_data_format` value found in your Keras
 #'     config file at `~/.keras/keras.json` (if exists). Defaults to
 #'     `"channels_last"`.
+#' @param object Object to compose the layer with. A tensor, array, or sequential model.
+#' @param ... Passed on to the Python callable
 #'
 #' @export
 #' @family reshaping layers
@@ -1262,6 +1286,8 @@ r"-(Zero-padding layer for 3D data (spatial or spatio-temporal).
 #'     When unspecified, uses `image_data_format` value found in your Keras
 #'     config file at `~/.keras/keras.json` (if exists). Defaults to
 #'     `"channels_last"`.
+#' @param object Object to compose the layer with. A tensor, array, or sequential model.
+#' @param ... Passed on to the Python callable
 #'
 #' @export
 #' @family reshaping layers

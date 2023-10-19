@@ -39,6 +39,7 @@ r"-(Applies an activation function to an output.
 #' @param activation Activation function. It could be a callable, or the name of
 #'     an activation from the `keras.activations` namespace.
 #' @param ... Base layer keyword arguments, such as `name` and `dtype`.
+#' @param object Object to compose the layer with. A tensor, array, or sequential model.
 #'
 #' @export
 #' @family activations layers
@@ -84,6 +85,7 @@ r"-(Applies an Exponential Linear Unit function to an output.
 #'
 #' @param alpha float, slope of negative section. Defaults to `1.0`.
 #' @param ... Base layer keyword arguments, such as `name` and `dtype`.
+#' @param object Object to compose the layer with. A tensor, array, or sequential model.
 #'
 #' @export
 #' @family activations layers
@@ -155,6 +157,7 @@ r"-(Leaky version of a Rectified Linear Unit activation layer.
 #'   Defaults to `0.3`.
 #' @param ... Base layer keyword arguments, such as
 #'     `name` and `dtype`.
+#' @param object Object to compose the layer with. A tensor, array, or sequential model.
 #'
 #' @export
 #' @family activations layers
@@ -216,6 +219,7 @@ r"-(Parametric Rectified Linear Unit activation layer.
 #'     across space so that each filter only has one set of parameters,
 #'     set `shared_axes=[1, 2]`.
 #' @param ... Base layer keyword arguments, such as `name` and `dtype`.
+#' @param object Object to compose the layer with. A tensor, array, or sequential model.
 #'
 #' @export
 #' @family activations layers
@@ -299,6 +303,7 @@ r"-(Rectified Linear Unit activation function layer.
 #' @param threshold Float >= 0. Threshold value for thresholded activation.
 #'     Defaults to `0.0`.
 #' @param ... Base layer keyword arguments, such as `name` and `dtype`.
+#' @param object Object to compose the layer with. A tensor, array, or sequential model.
 #'
 #' @export
 #' @family activations layers
@@ -462,6 +467,7 @@ r"-(Softmax activation layer.
 #' @param axis Integer, or list of Integers, axis along which the softmax
 #'     normalization is applied.
 #' @param ... Base layer keyword arguments, such as `name` and `dtype`.
+#' @param object Object to compose the layer with. A tensor, array, or sequential model.
 #'
 #' @export
 #' @family activations layers

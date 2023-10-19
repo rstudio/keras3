@@ -895,6 +895,7 @@ r"-(Reduce learning rate when a metric has stopped improving.
 #' @param cooldown Integer. Number of epochs to wait before resuming normal
 #'     operation after the learning rate has been reduced.
 #' @param min_lr Float. Lower bound on the learning rate.
+#' @param ... Passed on to the Python callable
 #'
 #' @export
 #' @family callback

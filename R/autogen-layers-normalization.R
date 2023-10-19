@@ -202,6 +202,7 @@ r"-(Layer that normalizes its inputs.
 #' @param beta_constraint Optional constraint for the beta weight.
 #' @param gamma_constraint Optional constraint for the gamma weight.
 #' @param ... Base layer keyword arguments (e.g. `name` and `dtype`).
+#' @param object Object to compose the layer with. A tensor, array, or sequential model.
 #'
 #' @export
 #' @family normalization layers
@@ -336,6 +337,8 @@ r"-(Group normalization layer.
 #'     None by default.
 #' @param gamma_constraint Optional constraint for the gamma weight. None by
 #'     default.
+#' @param object Object to compose the layer with. A tensor, array, or sequential model.
+#' @param ... Passed on to the Python callable
 #'
 #' @export
 #' @family normalization layers
@@ -549,6 +552,8 @@ r"-(Layer normalization layer (Ba et al., 2016).
 #'     None by default.
 #' @param ... Base layer keyword arguments (e.g. `name` and `dtype`).
 #'
+#' @param object Object to compose the layer with. A tensor, array, or sequential model.
+#'
 #' @export
 #' @family normalization layers
 #' @seealso
@@ -636,6 +641,7 @@ r"-(Performs spectral normalization on the weights of a target layer.
 #'     or an `embeddings` attribute (`Embedding` layer).
 #' @param power_iterations int, the number of iterations during normalization.
 #' @param ... Base wrapper keyword arguments.
+#' @param object Object to compose the layer with. A tensor, array, or sequential model.
 #'
 #' @export
 #' @family normalization layers
@@ -693,6 +699,8 @@ r"-(Unit normalization layer.
 #' Typically, this is the features axis or axes. The left-out axes are
 #' typically the batch axis or axes. `-1` is the last dimension
 #' in the input. Defaults to `-1`.
+#' @param object Object to compose the layer with. A tensor, array, or sequential model.
+#' @param ... Passed on to the Python callable
 #'
 #' @export
 #' @family normalization layers

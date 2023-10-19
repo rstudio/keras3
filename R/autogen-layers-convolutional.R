@@ -174,6 +174,8 @@ r"-(1D convolution layer (e.g. temporal convolution).
 #'     are not safe to use when doing asynchronous distributed training.
 #' @param bias_constraint Optional projection function to be applied to the
 #'     bias after being updated by an `Optimizer`.
+#' @param object Object to compose the layer with. A tensor, array, or sequential model.
+#' @param ... Passed on to the Python callable
 #'
 #' @export
 #' @family convolutional layers
@@ -357,6 +359,8 @@ r"-(1D transposed convolution layer.
 #'     are not safe to use when doing asynchronous distributed training.
 #' @param bias_constraint Optional projection function to be applied to the
 #'     bias after being updated by an `Optimizer`.
+#' @param object Object to compose the layer with. A tensor, array, or sequential model.
+#' @param ... Passed on to the Python callable
 #'
 #' @export
 #' @family convolutional layers
@@ -540,6 +544,8 @@ r"-(2D convolution layer.
 #'     are not safe to use when doing asynchronous distributed training.
 #' @param bias_constraint Optional projection function to be applied to the
 #'     bias after being updated by an `Optimizer`.
+#' @param object Object to compose the layer with. A tensor, array, or sequential model.
+#' @param ... Passed on to the Python callable
 #'
 #' @export
 #' @family convolutional layers
@@ -728,6 +734,8 @@ r"-(2D transposed convolution layer.
 #'     are not safe to use when doing asynchronous distributed training.
 #' @param bias_constraint Optional projection function to be applied to the
 #'     bias after being updated by an `Optimizer`.
+#' @param object Object to compose the layer with. A tensor, array, or sequential model.
+#' @param ... Passed on to the Python callable
 #'
 #' @export
 #' @family convolutional layers
@@ -924,6 +932,8 @@ r"-(3D convolution layer.
 #'     are not safe to use when doing asynchronous distributed training.
 #' @param bias_constraint Optional projection function to be applied to the
 #'     bias after being updated by an `Optimizer`.
+#' @param object Object to compose the layer with. A tensor, array, or sequential model.
+#' @param ... Passed on to the Python callable
 #'
 #' @export
 #' @family convolutional layers
@@ -1122,6 +1132,8 @@ r"-(3D transposed convolution layer.
 #'     are not safe to use when doing asynchronous distributed training.
 #' @param bias_constraint Optional projection function to be applied to the
 #'     bias after being updated by an `Optimizer`.
+#' @param object Object to compose the layer with. A tensor, array, or sequential model.
+#' @param ... Passed on to the Python callable
 #'
 #' @export
 #' @family convolutional layers
@@ -1328,6 +1340,8 @@ r"-(1D depthwise convolution layer.
 #'     are not safe to use when doing asynchronous distributed training.
 #' @param bias_constraint Optional projection function to be applied to the
 #'     bias after being updated by an `Optimizer`.
+#' @param object Object to compose the layer with. A tensor, array, or sequential model.
+#' @param ... Passed on to the Python callable
 #'
 #' @export
 #' @family convolutional layers
@@ -1534,6 +1548,8 @@ r"-(2D depthwise convolution layer.
 #'     are not safe to use when doing asynchronous distributed training.
 #' @param bias_constraint Optional projection function to be applied to the
 #'     bias after being updated by an `Optimizer`.
+#' @param object Object to compose the layer with. A tensor, array, or sequential model.
+#' @param ... Passed on to the Python callable
 #'
 #' @export
 #' @family convolutional layers
@@ -1726,6 +1742,8 @@ r"-(1D separable convolution layer.
 #'     pointwise kernel after being updated by an `Optimizer`.
 #' @param bias_constraint Optional projection function to be applied to the
 #'     bias after being updated by an `Optimizer`.
+#' @param object Object to compose the layer with. A tensor, array, or sequential model.
+#' @param ... Passed on to the Python callable
 #'
 #' @export
 #' @family convolutional layers
@@ -1919,6 +1937,8 @@ r"-(2D separable convolution layer.
 #'     pointwise kernel after being updated by an `Optimizer`.
 #' @param bias_constraint Optional projection function to be applied to the
 #'     bias after being updated by an `Optimizer`.
+#' @param object Object to compose the layer with. A tensor, array, or sequential model.
+#' @param ... Passed on to the Python callable
 #'
 #' @export
 #' @family convolutional layers

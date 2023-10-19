@@ -34,6 +34,8 @@ r"-(Layer that applies an update to the cost function based input activity.
 #'
 #' @param l1 L1 regularization factor (positive float).
 #' @param l2 L2 regularization factor (positive float).
+#' @param object Object to compose the layer with. A tensor, array, or sequential model.
+#' @param ... Passed on to the Python callable
 #'
 #' @export
 #' @family regularization layers
@@ -118,6 +120,8 @@ r"-(Applies dropout to the input.
 #'     you want the dropout mask to be the same for all timesteps,
 #'     you can use `noise_shape=(batch_size, 1, features)`.
 #' @param seed A Python integer to use as random seed.
+#' @param object Object to compose the layer with. A tensor, array, or sequential model.
+#' @param ... Passed on to the Python callable
 #'
 #' @export
 #' @family regularization layers
@@ -167,6 +171,8 @@ r"-(Apply multiplicative 1-centered Gaussian noise.
 #'     The multiplicative noise will have
 #'     standard deviation `sqrt(rate / (1 - rate))`.
 #' @param seed Integer, optional random seed to enable deterministic behavior.
+#' @param object Object to compose the layer with. A tensor, array, or sequential model.
+#' @param ... Passed on to the Python callable
 #'
 #' @export
 #' @family regularization layers
@@ -222,6 +228,8 @@ r"-(Apply additive zero-centered Gaussian noise.
 #'
 #' @param stddev Float, standard deviation of the noise distribution.
 #' @param seed Integer, optional random seed to enable deterministic behavior.
+#' @param object Object to compose the layer with. A tensor, array, or sequential model.
+#' @param ... Passed on to the Python callable
 #'
 #' @export
 #' @family regularization layers
@@ -297,6 +305,10 @@ r"-(Spatial 1D version of Dropout.
 #' - [Tompson et al., 2014](https://arxiv.org/abs/1411.4280)
 #'
 #' @param rate Float between 0 and 1. Fraction of the input units to drop.
+#' @param object Object to compose the layer with. A tensor, array, or sequential model.
+#' @param name name for the layer
+#' @param seed initial seed for the random number generator
+#' @param dtype datatype (e.g., `"float32"`)
 #'
 #' @export
 #' @family regularization layers
@@ -390,6 +402,10 @@ r"-(Spatial 2D version of Dropout.
 #'     It defaults to the `image_data_format` value found in your
 #'     Keras config file at `~/.keras/keras.json`.
 #'     If you never set it, then it will be `"channels_last"`.
+#' @param object Object to compose the layer with. A tensor, array, or sequential model.
+#' @param name name for the layer
+#' @param seed initial seed for the random number generator
+#' @param dtype datatype (e.g., `"float32"`)
 #'
 #' @export
 #' @family regularization layers
@@ -484,6 +500,10 @@ r"-(Spatial 3D version of Dropout.
 #'     It defaults to the `image_data_format` value found in your
 #'     Keras config file at `~/.keras/keras.json`.
 #'     If you never set it, then it will be `"channels_last"`.
+#' @param object Object to compose the layer with. A tensor, array, or sequential model.
+#' @param name name for the layer
+#' @param seed initial seed for the random number generator
+#' @param dtype datatype (e.g., `"float32"`)
 #'
 #' @export
 #' @family regularization layers

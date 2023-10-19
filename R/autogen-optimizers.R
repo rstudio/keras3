@@ -140,6 +140,8 @@ r"-(Optimizer that implements the Adadelta algorithm.
 #'     training. Alternately, `keras.optimizers.LossScaleOptimizer` will
 #'     automatically set a loss scale factor.
 #'
+#' @param ... Passed on to the Python callable
+#'
 #' @export
 #' @family optimizer
 #' @seealso
@@ -299,6 +301,8 @@ r"-(Optimizer that implements the Adafactor algorithm.
 #'     training. Alternately, `keras.optimizers.LossScaleOptimizer` will
 #'     automatically set a loss scale factor.
 #'
+#' @param ... Passed on to the Python callable
+#'
 #' @export
 #' @family optimizer
 #' @seealso
@@ -441,6 +445,8 @@ r"-(Optimizer that implements the Adagrad algorithm.
 #'     variables. Useful for preventing underflow during mixed precision
 #'     training. Alternately, `keras.optimizers.LossScaleOptimizer` will
 #'     automatically set a loss scale factor.
+#'
+#' @param ... Passed on to the Python callable
 #'
 #' @export
 #' @family optimizer
@@ -602,6 +608,7 @@ r"-(Optimizer that implements the Adam algorithm.
 #'     variables. Useful for preventing underflow during mixed precision
 #'     training. Alternately, `keras.optimizers.LossScaleOptimizer` will
 #'     automatically set a loss scale factor.
+#' @param ... Passed on to the Python callable
 #'
 #' @export
 #' @family optimizer
@@ -784,6 +791,9 @@ r"-(Optimizer that implements the Adamax algorithm.
 #'     training. Alternately, `keras.optimizers.LossScaleOptimizer` will
 #'     automatically set a loss scale factor.
 #'
+#' @param ... Passed on to the Python callable
+#' @param name name for the optimizer
+#'
 #' @export
 #' @family optimizer
 #' @seealso
@@ -963,6 +973,8 @@ r"-(Optimizer that implements the AdamW algorithm.
 #'     variables. Useful for preventing underflow during mixed precision
 #'     training. Alternately, `keras.optimizers.LossScaleOptimizer` will
 #'     automatically set a loss scale factor.
+#'
+#' @param ... Passed on to the Python callable
 #'
 #' @export
 #' @family optimizer
@@ -1193,6 +1205,7 @@ r"-(Optimizer that implements the FTRL algorithm.
 #'     variables. Useful for preventing underflow during mixed precision
 #'     training. Alternately, `keras.optimizers.LossScaleOptimizer` will
 #'     automatically set a loss scale factor.
+#' @param ... Passed on to the Python callable
 #'
 #' @export
 #' @family optimizer
@@ -1357,6 +1370,8 @@ r"-(Optimizer that implements the Lion algorithm.
 #'     training. Alternately, `keras.optimizers.LossScaleOptimizer` will
 #'     automatically set a loss scale factor.
 #'
+#' @param ... Passed on to the Python callable
+#'
 #' @export
 #' @family optimizer
 #' @seealso
@@ -1505,6 +1520,7 @@ r"-(An optimizer that dynamically scales the loss to prevent underflow.
 #'     variables. Useful for preventing underflow during mixed precision
 #'     training. Alternately, `keras.optimizers.LossScaleOptimizer` will
 #'     automatically set a loss scale factor.
+#' @param ... Passed on to the Python callable
 #'
 #' @export
 #' @family optimizer
@@ -1653,6 +1669,8 @@ r"-(Optimizer that implements the Nadam algorithm.
 #'     variables. Useful for preventing underflow during mixed precision
 #'     training. Alternately, `keras.optimizers.LossScaleOptimizer` will
 #'     automatically set a loss scale factor.
+#'
+#' @param ... Passed on to the Python callable
 #'
 #' @export
 #' @family optimizer
@@ -1835,6 +1853,8 @@ r"-(Optimizer that implements the RMSprop algorithm.
 #'     training. Alternately, `keras.optimizers.LossScaleOptimizer` will
 #'     automatically set a loss scale factor.
 #'
+#' @param ... Passed on to the Python callable
+#'
 #' @export
 #' @family optimizer
 #' @seealso
@@ -1995,6 +2015,7 @@ r"-(Gradient descent (with momentum) optimizer.
 #'     variables. Useful for preventing underflow during mixed precision
 #'     training. Alternately, `keras.optimizers.LossScaleOptimizer` will
 #'     automatically set a loss scale factor.
+#' @param ... Passed on to the Python callable
 #'
 #' @export
 #' @family optimizer

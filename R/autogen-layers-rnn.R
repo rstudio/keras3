@@ -146,6 +146,8 @@ r"-(Bidirectional wrapper for RNNs.
 #'     `return_sequences`, etc. In addition, `backward_layer`
 #'     and `layer` should have different `go_backwards` argument values.
 #'     A `ValueError` will be raised if these requirements are not met.
+#' @param object Object to compose the layer with. A tensor, array, or sequential model.
+#' @param ... Passed on to the Python callable
 #'
 #' @export
 #' @family recurrent layers
@@ -392,6 +394,9 @@ r"-(1D Convolutional LSTM.
 #'     Unrolling can speed-up a RNN,
 #'     although it tends to be more memory-intensive.
 #'     Unrolling is only suitable for short sequences.
+#'
+#' @param object Object to compose the layer with. A tensor, array, or sequential model.
+#' @param ... Passed on to the Python callable
 #'
 #' @export
 #' @family recurrent layers
@@ -648,6 +653,9 @@ r"-(2D Convolutional LSTM.
 #'     although it tends to be more memory-intensive.
 #'     Unrolling is only suitable for short sequences.
 #'
+#' @param object Object to compose the layer with. A tensor, array, or sequential model.
+#' @param ... Passed on to the Python callable
+#'
 #' @export
 #' @family recurrent layers
 #' @seealso
@@ -900,6 +908,9 @@ r"-(3D Convolutional LSTM.
 #'     Unrolling can speed-up a RNN,
 #'     although it tends to be more memory-intensive.
 #'     Unrolling is only suitable for short sequences.
+#'
+#' @param object Object to compose the layer with. A tensor, array, or sequential model.
+#' @param ... Passed on to the Python callable
 #'
 #' @export
 #' @family recurrent layers
@@ -1167,6 +1178,8 @@ r"-(Gated Recurrent Unit - Cho et al. 2014.
 #' @param reset_after GRU convention (whether to apply reset gate after or
 #'     before matrix multiplication). `False` is `"before"`,
 #'     `True` is `"after"` (default and cuDNN compatible).
+#' @param object Object to compose the layer with. A tensor, array, or sequential model.
+#' @param ... Passed on to the Python callable
 #'
 #' @export
 #' @family recurrent layers
@@ -1330,6 +1343,7 @@ r"-(Cell class for the GRU layer.
 #'     before matrix multiplication). False = "before",
 #'     True = "after" (default and cuDNN compatible).
 #' @param seed Random seed for dropout.
+#' @param ... Passed on to the Python callable
 #'
 #' @export
 #' @family recurrent layers
@@ -1577,6 +1591,8 @@ r"-(Long Short-Term Memory layer - Hochreiter 1997.
 #'     Unrolling can speed-up a RNN,
 #'     although it tends to be more memory-intensive.
 #'     Unrolling is only suitable for short sequences.
+#' @param object Object to compose the layer with. A tensor, array, or sequential model.
+#' @param ... Passed on to the Python callable
 #'
 #' @export
 #' @family recurrent layers
@@ -1744,6 +1760,7 @@ r"-(Cell class for the LSTM layer.
 #' @param recurrent_dropout Float between 0 and 1. Fraction of the units to drop
 #'     for the linear transformation of the recurrent state. Default: 0.
 #' @param seed Random seed for dropout.
+#' @param ... Passed on to the Python callable
 #'
 #' @export
 #' @family recurrent layers
@@ -2094,6 +2111,8 @@ r"-(Base class for recurrent layers.
 #'     It can useful if you want to reuse the raw output sequence of
 #'     the RNN without interference from the masked timesteps, e.g.,
 #'     merging bidirectional RNNs.
+#' @param object Object to compose the layer with. A tensor, array, or sequential model.
+#' @param ... Passed on to the Python callable
 #'
 #' @export
 #' @family recurrent layers
@@ -2279,6 +2298,9 @@ r"-(Fully-connected RNN where the output is to be fed back as the new input.
 #'     Unrolling can speed-up a RNN,
 #'     although it tends to be more memory-intensive.
 #'     Unrolling is only suitable for short sequences.
+#' @param object Object to compose the layer with. A tensor, array, or sequential model.
+#' @param ... Passed on to the Python callable
+#' @param seed initial seed for the random number generator
 #'
 #' @export
 #' @family recurrent layers
@@ -2428,6 +2450,7 @@ r"-(Cell class for SimpleRNN.
 #' @param recurrent_dropout Float between 0 and 1. Fraction of the units to drop
 #'     for the linear transformation of the recurrent state. Default: 0.
 #' @param seed Random seed for dropout.
+#' @param ... Passed on to the Python callable
 #'
 #' @export
 #' @family recurrent layers
@@ -2496,6 +2519,7 @@ r"-(Wrapper allowing a stack of RNN cells to behave as a single cell.
 #' ```
 #'
 #' @param cells List of RNN cell instances.
+#' @param ... Passed on to the Python callable
 #'
 #' @export
 #' @family recurrent layers
@@ -2584,6 +2608,8 @@ r"-(This wrapper allows to apply a layer to every temporal slice of an input.
 #'     wrapped layer (only if the layer supports this argument).
 #'
 #' @param layer a `keras.layers.Layer` instance.
+#' @param object Object to compose the layer with. A tensor, array, or sequential model.
+#' @param ... Passed on to the Python callable
 #'
 #' @export
 #' @family recurrent layers

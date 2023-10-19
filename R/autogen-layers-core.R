@@ -96,6 +96,8 @@ r"-(Just your regular densely-connected NN layer.
 #' @param kernel_constraint Constraint function applied to
 #'     the `kernel` weights matrix.
 #' @param bias_constraint Constraint function applied to the bias vector.
+#' @param object Object to compose the layer with. A tensor, array, or sequential model.
+#' @param ... Passed on to the Python callable
 #'
 #' @export
 #' @family core layers
@@ -287,6 +289,7 @@ r"-(A layer that uses `einsum` as the backing computation.
 #'     matrix.
 #' @param bias_constraint Constraint function applied to the bias vector.
 #' @param ... Base layer keyword arguments, such as `name` and `dtype`.
+#' @param object Object to compose the layer with. A tensor, array, or sequential model.
 #'
 #' @export
 #' @family core layers
@@ -404,6 +407,8 @@ r"-(Turns positive integers (indexes) into dense vectors of fixed size.
 #'     If mask_zero is set to True, as a consequence,
 #'     index 0 cannot be used in the vocabulary (input_dim should
 #'     equal size of vocabulary + 1).
+#' @param object Object to compose the layer with. A tensor, array, or sequential model.
+#' @param ... Passed on to the Python callable
 #'
 #' @export
 #' @family core layers
@@ -437,6 +442,9 @@ r"-(Identity layer.
 #' @description
 #' This layer should be used as a placeholder when no operation is to be
 #' performed. The layer just returns its `inputs` argument as output.
+#'
+#' @param object Object to compose the layer with. A tensor, array, or sequential model.
+#' @param ... Passed on to the Python callable
 #'
 #' @export
 #' @family core layers
@@ -543,6 +551,7 @@ r"-(Used to instantiate a Keras tensor.
 #' @param tensor Optional existing tensor to wrap into the `Input` layer.
 #'     If set, the layer will use this tensor rather
 #'     than creating a new placeholder tensor.
+#' @param batch_shape Shape, including the batch dim.
 #'
 #' @export
 #' @seealso
@@ -654,6 +663,8 @@ r"-(Wraps arbitrary expressions as a `Layer` object.
 #'     of what the input is.
 #' @param arguments Optional dictionary of keyword arguments to be passed to the
 #'     function.
+#' @param object Object to compose the layer with. A tensor, array, or sequential model.
+#' @param ... Passed on to the Python callable
 #'
 #' @export
 #' @family core layers
@@ -747,6 +758,9 @@ r"-(Masks a sequence by using a mask value to skip timesteps.
 #' in the Keras masking convention, a masked timestep is denoted by
 #' a mask value of `False`, while a non-masked (i.e. usable) timestep
 #' is denoted by a mask value of `True`.
+#'
+#' @param object Object to compose the layer with. A tensor, array, or sequential model.
+#' @param ... Passed on to the Python callable
 #'
 #' @export
 #' @family core layers

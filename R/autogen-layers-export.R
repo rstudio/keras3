@@ -79,6 +79,9 @@ r"-(Reload a Keras model/layer that was saved via SavedModel / ExportArchive.
 #'     via `model.export()`,
 #'     then the default endpoint name is `'serve'`. In other cases
 #'     it may be named `'serving_default'`.
+#' @param object Object to compose the layer with. A tensor, array, or sequential model.
+#' @param name name for the layer
+#' @param dtype datatype (e.g., `"float32"`)
 #'
 #' @export
 #' @seealso

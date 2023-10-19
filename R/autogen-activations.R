@@ -50,6 +50,7 @@ r"-(Exponential Linear Unit.
 #' - [Clevert et al., 2016](https://arxiv.org/abs/1511.07289)
 #'
 #' @param x Input tensor.
+#' @param alpha Numeric. See description for details.
 #'
 #' @export
 #' @family activation functions
