@@ -22,30 +22,34 @@ jobs:
       matrix:
         include:
 
+          - {os: 'ubuntu-latest' , python: '3.9' , r: 'release'}
+          - {os: 'ubuntu-latest' , python: '3.10', r: 'release'}
+          - {os: 'ubuntu-latest' , python: '3.11', r: 'release'}
+
           ## the happy path - default everything
-          - {os: 'ubuntu-latest' , tf: 'default', r: 'release'}
-          - {os: 'windows-latest', tf: 'default', r: 'release'}
-          - {os: 'macOS-latest'  , tf: 'default', r: 'release'}
-
-          ## old R versions
-          - {os: 'windows-latest', tf: 'default', r: 'oldrel'}
-          - {os: 'macOS-latest'  , tf: 'default', r: 'oldrel'}
-          - {os: 'ubuntu-latest' , tf: 'default', r: 'oldrel'}
-          - {os: 'ubuntu-latest' , tf: 'default', r: 'oldrel-1'}
-          - {os: 'ubuntu-latest' , tf: 'default', r: 'oldrel-2'}
-          - {os: 'ubuntu-20.04'  , tf: 'default', r: '3.6'} # default R in ubuntu-20.04
-
-          ## release keras/tf version (if different from 'default')
-          # - {os: 'ubuntu-latest' , tf: 'release', r: 'release'}
-          # - {os: 'windows-latest', tf: 'release', r: 'release'}
-          # - {os: 'macOS-latest'  , tf: 'release', r: 'release'}
-
-          ## old keras/tf versions
-          - {os: 'ubuntu-latest', tf: '2.14', r: 'release'}
-          - {os: 'ubuntu-latest', tf: '2.13', r: 'release'}
-          - {os: 'ubuntu-latest', tf: '2.12', r: 'release'}
-          - {os: 'ubuntu-latest', tf: '2.11', r: 'release'}
-          - {os: 'ubuntu-latest', tf: '2.9' , r: 'release'}
+          # - {os: 'ubuntu-latest' , tf: 'default', r: 'release'}
+          # - {os: 'windows-latest', tf: 'default', r: 'release'}
+          # - {os: 'macOS-latest'  , tf: 'default', r: 'release'}
+          #
+          # ## old R versions
+          # - {os: 'windows-latest', tf: 'default', r: 'oldrel'}
+          # - {os: 'macOS-latest'  , tf: 'default', r: 'oldrel'}
+          # - {os: 'ubuntu-latest' , tf: 'default', r: 'oldrel'}
+          # - {os: 'ubuntu-latest' , tf: 'default', r: 'oldrel-1'}
+          # - {os: 'ubuntu-latest' , tf: 'default', r: 'oldrel-2'}
+          # - {os: 'ubuntu-20.04'  , tf: 'default', r: '3.6'} # default R in ubuntu-20.04
+          #
+          # ## release keras/tf version (if different from 'default')
+          # # - {os: 'ubuntu-latest' , tf: 'release', r: 'release'}
+          # # - {os: 'windows-latest', tf: 'release', r: 'release'}
+          # # - {os: 'macOS-latest'  , tf: 'release', r: 'release'}
+          #
+          # ## old keras/tf versions
+          # - {os: 'ubuntu-latest', tf: '2.14', r: 'release'}
+          # - {os: 'ubuntu-latest', tf: '2.13', r: 'release'}
+          # - {os: 'ubuntu-latest', tf: '2.12', r: 'release'}
+          # - {os: 'ubuntu-latest', tf: '2.11', r: 'release'}
+          # - {os: 'ubuntu-latest', tf: '2.9' , r: 'release'}
 
           # these are allowed to fail
           # - {os: 'ubuntu-latest', tf: '2.14.0rc1', r: 'release'}
@@ -97,7 +101,8 @@ jobs:
           upgrade: 'TRUE'
 
       - name: Install Tensorflow + Keras deps
-        run: keras::install_keras(tensorflow = '${{ matrix.tf }}-cpu')
+        run: keras::install_keras(python_version = '${{ matrix.python }}')
+        # run: keras::install_keras(tensorflow = '${{ matrix.tf }}-cpu')
 
       - uses: r-lib/actions/check-r-package@v2
         with:
