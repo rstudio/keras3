@@ -8,8 +8,7 @@ install_keras(
   ...,
   envname = "r-keras",
   extra_packages = NULL,
-  python_version = "3.9",
-  backend = c("tensorflow", "jax", "pytorch")
+  python_version = "3.9"
 )
 }
 \arguments{

@@ -22,8 +22,8 @@
 install_keras <- function(...,
                           envname = "r-keras",
                           extra_packages = NULL,
-                          python_version = "3.9",
-                          backend = c("tensorflow", "jax", "pytorch")
+                          python_version = "3.9"
+                          # backend = c("tensorflow", "jax", "pytorch")
                           ) {
   # # envname = "r-keras",
   # # new_env = identical(envname, "r-keras")
@@ -52,12 +52,13 @@ install_keras <- function(...,
   # browser()
   system2 <- reticulate:::system2t
   system2("git", "pull")
-  # system2(python, c("-m pip install -r requirements.txt")) # unpin tf-nightly for Python 3.12
+  system2(python, c("-m pip install -r requirements.txt")) # unpin tf-nightly for Python 3.12
 
-  system2(python, c("-m pip install ipython")) # for interactive debugging
-  system2(python, c("-m pip install -r requirements-common.txt"))
-  system2(python, c("-m pip install torch torchvision")) # needed for pip_build.py?? (but why?)
-  system2(python, c("-m pip install tf-nightly jax[cpu]")) # unpin tf-nightly for Python 3.12
+  # system2(python, c("-m pip install ipython")) # for interactive debugging
+  # system2(python, c("-m pip install -r requirements-common.txt"))
+  # system2(python, c("-m pip install torch torchvision")) # needed for pip_build.py?? (but why?)
+  # system2(python, c("-m pip install tf-nightly jax[cpu]")) # unpin tf-nightly for Python 3.12
+
   system2(python, c("pip_build.py --install"))
   message("Done!")
 

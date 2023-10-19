@@ -5,7 +5,8 @@
 # 3 = INFO, WARNING, and ERROR messages are not printed
 
 
-print_keras_config <- function() {
+
+reticulate:::py_register_load_hook("keras", function() {
   print(reticulate::py_config())
   # print(keras$`__version__`)
   # print(keras$`__path__`)
@@ -20,13 +21,8 @@ print_keras_config <- function() {
   # keras$layers # force load
   # py_main$keras <- keras
   # py_eval("keras.config.disable_traceback_filtering()")
-}
+})
 
-if(reticulate::py_available()) {
-  print_keras_config()
-} else {
-  setHook("reticulate.onPyInit", print_keras_config)
-}
 
 if (reticulate::py_module_available("tensorflow")) {
   # force verbose tf init messages early
