@@ -2,7 +2,7 @@
 % Please edit documentation in R/install.R
 \name{install_keras}
 \alias{install_keras}
-\title{Install TensorFlow and Keras, including all Python dependencies}
+\title{Install Keras}
 \usage{
 install_keras(
   ...,
@@ -12,33 +12,16 @@ install_keras(
 )
 }
 \arguments{
-\item{...}{other arguments passed to \code{\link[reticulate:conda-tools]{reticulate::conda_install()}} or
-\code{\link[reticulate:virtualenv-tools]{reticulate::virtualenv_install()}}, depending on the \code{method} used.}
+\item{...}{reserved for future compatability.}
 
-\item{envname}{The name, or full path, of the environment in which Python
-packages are to be installed. When \code{NULL} (the default), the active
-environment as set by the \code{RETICULATE_PYTHON_ENV} variable will be used;
-if that is unset, then the \code{r-reticulate} environment will be used.}
+\item{envname}{name of or path to a python virtual environment}
 
-\item{extra_packages}{Additional Python packages to install along with
-TensorFlow.}
+\item{extra_packages}{additional python packages to install alongside keras}
 
-\item{tensorflow}{Synonym for \code{version}. Maintained for backwards.}
+\item{python_version}{passed on to \code{reticulate::virtualenv_starter()}}
 }
 \description{
-This function will install Tensorflow and all Keras dependencies. This is a
-thin wrapper around \code{\link[tensorflow:install_tensorflow]{tensorflow::install_tensorflow()}}, with the only
-difference being that this includes by default additional extra packages that
-keras expects, and the default version of tensorflow installed by
-\code{install_keras()} may at times be different from the default installed
-\code{install_tensorflow()}. The default version of tensorflow installed by
-\code{install_keras()} is "2.13".
-}
-\details{
-The default additional packages are:
-tensorflow-hub, tensorflow-datasets, scipy, requests, pyyaml, Pillow, h5py, pandas, pydot, with their
-versions potentially constrained for compatibility with the
-requested tensorflow version.
+This function will install Keras, including all Python dependencies.
 }
 \seealso{
 \code{\link[tensorflow:install_tensorflow]{tensorflow::install_tensorflow()}}

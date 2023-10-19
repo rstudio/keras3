@@ -1,21 +1,11 @@
-#' Install TensorFlow and Keras, including all Python dependencies
+#' Install Keras
 #'
-#' This function will install Tensorflow and all Keras dependencies. This is a
-#' thin wrapper around [`tensorflow::install_tensorflow()`], with the only
-#' difference being that this includes by default additional extra packages that
-#' keras expects, and the default version of tensorflow installed by
-#' `install_keras()` may at times be different from the default installed
-#' `install_tensorflow()`. The default version of tensorflow installed by
-#' `install_keras()` is "`r default_version`".
+#' This function will install Keras, including all Python dependencies.
 #'
-#' @details The default additional packages are:
-#' `r paste(default_extra_packages("nightly"), collapse = ", ")`, with their
-#'   versions potentially constrained for compatibility with the
-#'   requested tensorflow version.
-#'
-#' @inheritParams tensorflow::install_tensorflow
-#'
-#' @param tensorflow Synonym for `version`. Maintained for backwards.
+#' @param envname name of or path to a python virtual environment
+#' @param extra_packages additional python packages to install alongside keras
+#' @param python_version passed on to `reticulate::virtualenv_starter()`
+#' @param ... reserved for future compatability.
 #'
 #' @seealso [`tensorflow::install_tensorflow()`]
 #' @export
