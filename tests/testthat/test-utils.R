@@ -38,6 +38,7 @@ test_call_succeeds("normalize", {
 
 test_call_succeeds("with_custom_object_scope", {
 
+  skip("save_model_hdf5()")
   if (!keras:::have_h5py())
     skip("h5py not available for testing")
 
