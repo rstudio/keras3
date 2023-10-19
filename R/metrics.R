@@ -1104,7 +1104,7 @@ metric_mean_relative_error <- py_metric_wrapper(
 #' @family metrics
 #' @export
 metric_mean_squared_error <- py_metric_wrapper(
-  mean_absolute_percentage_error, MeanAbsolutePercentageError
+  mean_squared_error, MeanSquaredError
 )
 
 
