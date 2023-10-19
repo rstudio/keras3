@@ -7,6 +7,8 @@
 layer_dropout(object, rate, noise_shape = NULL, seed = NULL, ...)
 }
 \arguments{
+\item{object}{Object to compose the layer with. A tensor, array, or sequential model.}
+
 \item{rate}{Float between 0 and 1. Fraction of the input units to drop.}
 
 \item{noise_shape}{1D integer tensor representing the shape of the
@@ -17,6 +19,8 @@ you want the dropout mask to be the same for all timesteps,
 you can use \verb{noise_shape=(batch_size, 1, features)}.}
 
 \item{seed}{A Python integer to use as random seed.}
+
+\item{...}{Passed on to the Python callable}
 }
 \description{
 The \code{Dropout} layer randomly sets input units to 0 with a frequency of

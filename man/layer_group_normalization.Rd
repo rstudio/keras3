@@ -21,6 +21,8 @@ layer_group_normalization(
 )
 }
 \arguments{
+\item{object}{Object to compose the layer with. A tensor, array, or sequential model.}
+
 \item{groups}{Integer, the number of groups for Group Normalization. Can be in
 the range \verb{[1, N]} where N is the input dimension. The input
 dimension must be divisible by the number of groups.
@@ -57,6 +59,8 @@ None by default.}
 
 \item{gamma_constraint}{Optional constraint for the gamma weight. None by
 default.}
+
+\item{...}{Passed on to the Python callable}
 }
 \description{
 Group Normalization divides the channels into groups and computes

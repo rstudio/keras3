@@ -7,9 +7,13 @@
 layer_activity_regularization(object, l1 = 0, l2 = 0, ...)
 }
 \arguments{
+\item{object}{Object to compose the layer with. A tensor, array, or sequential model.}
+
 \item{l1}{L1 regularization factor (positive float).}
 
 \item{l2}{L2 regularization factor (positive float).}
+
+\item{...}{Passed on to the Python callable}
 }
 \description{
 Layer that applies an update to the cost function based input activity.

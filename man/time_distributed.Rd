@@ -7,6 +7,8 @@
 time_distributed(object, layer, ...)
 }
 \arguments{
+\item{object}{Object to compose the layer with. A tensor, array, or sequential model.}
+
 \item{layer}{a \code{tf.keras.layers.Layer} instance.}
 
 \item{...}{standard layer arguments.}

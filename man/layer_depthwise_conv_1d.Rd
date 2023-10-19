@@ -25,6 +25,8 @@ layer_depthwise_conv_1d(
 )
 }
 \arguments{
+\item{object}{Object to compose the layer with. A tensor, array, or sequential model.}
+
 \item{kernel_size}{int or tuple/list of 1 integer, specifying the size of the
 depthwise convolution window.}
 
@@ -78,6 +80,8 @@ are not safe to use when doing asynchronous distributed training.}
 
 \item{bias_constraint}{Optional projection function to be applied to the
 bias after being updated by an \code{Optimizer}.}
+
+\item{...}{Passed on to the Python callable}
 }
 \description{
 Depthwise convolution is a type of convolution in which each input channel

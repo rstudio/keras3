@@ -13,6 +13,8 @@ layer_upsampling_2d(
 )
 }
 \arguments{
+\item{object}{Object to compose the layer with. A tensor, array, or sequential model.}
+
 \item{size}{Int, or tuple of 2 integers.
 The upsampling factors for rows and columns.}
 
@@ -30,6 +32,8 @@ Defaults to \code{"channels_last"}.}
 
 \item{interpolation}{A string, one of \code{"bicubic"}, \code{"bilinear"}, \code{"lanczos3"},
 \code{"lanczos5"}, \code{"nearest"}.}
+
+\item{...}{Passed on to the Python callable}
 }
 \description{
 The implementation uses interpolative resizing, given the resize method

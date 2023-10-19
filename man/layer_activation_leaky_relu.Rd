@@ -7,6 +7,8 @@
 layer_activation_leaky_relu(object, negative_slope = 0.3, ...)
 }
 \arguments{
+\item{object}{Object to compose the layer with. A tensor, array, or sequential model.}
+
 \item{negative_slope}{Float >= 0.0. Negative slope coefficient.
 Defaults to \code{0.3}.}
 

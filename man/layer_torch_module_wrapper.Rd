@@ -7,12 +7,16 @@
 layer_torch_module_wrapper(object, module, name = NULL, ...)
 }
 \arguments{
+\item{object}{Object to compose the layer with. A tensor, array, or sequential model.}
+
 \item{module}{\code{torch.nn.Module} instance. If it's a \code{LazyModule}
 instance, then its parameters must be initialized before
 passing the instance to \code{TorchModuleWrapper} (e.g. by calling
 it once).}
 
 \item{name}{The name of the layer (string).}
+
+\item{...}{Passed on to the Python callable}
 }
 \description{
 \code{TorchModuleWrapper} is a wrapper class that can turn any

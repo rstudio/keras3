@@ -41,6 +41,8 @@ on significant changes.}
 operation after the learning rate has been reduced.}
 
 \item{min_lr}{Float. Lower bound on the learning rate.}
+
+\item{...}{Passed on to the Python callable}
 }
 \description{
 Models often benefit from reducing the learning rate by a factor

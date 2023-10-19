@@ -7,6 +7,8 @@
 layer_spectral_normalization(object, layer, power_iterations = 1L, ...)
 }
 \arguments{
+\item{object}{Object to compose the layer with. A tensor, array, or sequential model.}
+
 \item{layer}{A \code{keras.layers.Layer} instance that
 has either a \code{kernel} (e.g. \code{Conv2D}, \code{Dense}...)
 or an \code{embeddings} attribute (\code{Embedding} layer).}

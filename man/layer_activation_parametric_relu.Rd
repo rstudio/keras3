@@ -14,6 +14,8 @@ layer_activation_parametric_relu(
 )
 }
 \arguments{
+\item{object}{Object to compose the layer with. A tensor, array, or sequential model.}
+
 \item{alpha_initializer}{Initializer function for the weights.}
 
 \item{alpha_regularizer}{Regularizer for the weights.}

@@ -7,6 +7,8 @@
 layer_random_contrast(object, factor, seed = NULL, ...)
 }
 \arguments{
+\item{object}{Object to compose the layer with. A tensor, array, or sequential model.}
+
 \item{factor}{a positive float represented as fraction of value, or a tuple of
 size 2 representing lower and upper bound.
 When represented as a single float, lower = upper.
@@ -16,6 +18,8 @@ the output will be \code{(x - mean) * factor + mean}
 where \code{mean} is the mean value of the channel.}
 
 \item{seed}{Integer. Used to create a random seed.}
+
+\item{...}{Passed on to the Python callable}
 }
 \description{
 This layer will randomly adjust the contrast of an image or images

@@ -7,6 +7,8 @@
 layer_cropping_1d(object, cropping = list(1L, 1L), ...)
 }
 \arguments{
+\item{object}{Object to compose the layer with. A tensor, array, or sequential model.}
+
 \item{cropping}{Int, or tuple of int (length 2), or dictionary.
 \itemize{
 \item If int: how many units should be trimmed off at the beginning and
@@ -15,6 +17,8 @@ end of the cropping dimension (axis 1).
 beginning and end of the cropping dimension
 (\verb{(left_crop, right_crop)}).
 }}
+
+\item{...}{Passed on to the Python callable}
 }
 \description{
 It crops along the time dimension (axis 1).

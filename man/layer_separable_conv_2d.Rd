@@ -29,6 +29,8 @@ layer_separable_conv_2d(
 )
 }
 \arguments{
+\item{object}{Object to compose the layer with. A tensor, array, or sequential model.}
+
 \item{filters}{int, the dimensionality of the output space (i.e. the number
 of filters in the pointwise convolution).}
 
@@ -97,6 +99,8 @@ pointwise kernel after being updated by an \code{Optimizer}.}
 
 \item{bias_constraint}{Optional projection function to be applied to the
 bias after being updated by an \code{Optimizer}.}
+
+\item{...}{Passed on to the Python callable}
 }
 \description{
 This layer performs a depthwise convolution that acts separately on

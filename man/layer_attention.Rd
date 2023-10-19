@@ -13,6 +13,8 @@ layer_attention(
 )
 }
 \arguments{
+\item{object}{Object to compose the layer with. A tensor, array, or sequential model.}
+
 \item{use_scale}{If \code{True}, will create a scalar variable to scale the
 attention scores.}
 
@@ -23,6 +25,8 @@ of the concatenation of the \code{query} and \code{key} vectors.}
 
 \item{dropout}{Float between 0 and 1. Fraction of the units to drop for the
 attention scores. Defaults to \code{0.0}.}
+
+\item{...}{Passed on to the Python callable}
 }
 \description{
 Inputs are a list with 2 or 3 elements:

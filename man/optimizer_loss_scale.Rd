@@ -23,6 +23,8 @@ quickly than a loss scale that is too low gets raised.}
 every \code{dynamic_growth_steps} steps with finite gradients, the
 loss scale is doubled.}
 
+\item{...}{Passed on to the Python callable}
+
 \item{name}{String. The name to use
 for momentum accumulator weights created by
 the optimizer.}

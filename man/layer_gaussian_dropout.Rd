@@ -7,11 +7,15 @@
 layer_gaussian_dropout(object, rate, seed = NULL, ...)
 }
 \arguments{
+\item{object}{Object to compose the layer with. A tensor, array, or sequential model.}
+
 \item{rate}{Float, drop probability (as with \code{Dropout}).
 The multiplicative noise will have
 standard deviation \code{sqrt(rate / (1 - rate))}.}
 
 \item{seed}{Integer, optional random seed to enable deterministic behavior.}
+
+\item{...}{Passed on to the Python callable}
 }
 \description{
 As it is a regularization layer, it is only active at training time.

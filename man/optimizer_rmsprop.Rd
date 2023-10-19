@@ -80,6 +80,8 @@ and you don't need to do anything.}
 for momentum accumulator weights created by
 the optimizer.}
 
+\item{...}{Passed on to the Python callable}
+
 \item{loss_scale_factor}{Float or \code{None}. If a float, the scale factor will
 be multiplied the loss before computing gradients, and the inverse of
 the scale factor will be multiplied by the gradients before updating

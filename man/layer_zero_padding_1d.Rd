@@ -7,6 +7,8 @@
 layer_zero_padding_1d(object, padding = 1L, ...)
 }
 \arguments{
+\item{object}{Object to compose the layer with. A tensor, array, or sequential model.}
+
 \item{padding}{Int, or tuple of int (length 2), or dictionary.
 \itemize{
 \item If int: how many zeros to add at the beginning and end of
@@ -14,6 +16,8 @@ the padding dimension (axis 1).
 \item If tuple of 2 ints: how many zeros to add at the beginning and the
 end of the padding dimension (\verb{(left_pad, right_pad)}).
 }}
+
+\item{...}{Passed on to the Python callable}
 }
 \description{
 Zero-padding layer for 1D input (e.g. temporal sequence).

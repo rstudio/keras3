@@ -7,6 +7,8 @@
 layer_activation_elu(object, alpha = 1, ...)
 }
 \arguments{
+\item{object}{Object to compose the layer with. A tensor, array, or sequential model.}
+
 \item{alpha}{float, slope of negative section. Defaults to \code{1.0}.}
 
 \item{...}{Base layer keyword arguments, such as \code{name} and \code{dtype}.}

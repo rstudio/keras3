@@ -7,6 +7,8 @@
 layer_random_flip(object, mode = "horizontal_and_vertical", seed = NULL, ...)
 }
 \arguments{
+\item{object}{Object to compose the layer with. A tensor, array, or sequential model.}
+
 \item{mode}{String indicating which flip mode to use. Can be \code{"horizontal"},
 \code{"vertical"}, or \code{"horizontal_and_vertical"}. \code{"horizontal"} is a
 left-right flip and \code{"vertical"} is a top-bottom flip. Defaults to

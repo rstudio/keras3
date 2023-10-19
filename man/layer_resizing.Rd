@@ -15,6 +15,8 @@ layer_resizing(
 )
 }
 \arguments{
+\item{object}{Object to compose the layer with. A tensor, array, or sequential model.}
+
 \item{height}{Integer, the height of the output shape.}
 
 \item{width}{Integer, the width of the output shape.}

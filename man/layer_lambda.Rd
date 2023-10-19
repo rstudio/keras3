@@ -14,6 +14,8 @@ layer_lambda(
 )
 }
 \arguments{
+\item{object}{Object to compose the layer with. A tensor, array, or sequential model.}
+
 \item{function}{The function to be evaluated. Takes input tensor as first
 argument.}
 
@@ -36,6 +38,8 @@ of what the input is.}
 
 \item{arguments}{Optional dictionary of keyword arguments to be passed to the
 function.}
+
+\item{...}{Passed on to the Python callable}
 }
 \description{
 The \code{Lambda} layer exists so that arbitrary expressions can be used

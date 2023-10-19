@@ -15,11 +15,15 @@ layer_random_crop(
 )
 }
 \arguments{
+\item{object}{Object to compose the layer with. A tensor, array, or sequential model.}
+
 \item{height}{Integer, the height of the output shape.}
 
 \item{width}{Integer, the width of the output shape.}
 
 \item{seed}{Integer. Used to create a random seed.}
+
+\item{name}{name for the layer}
 
 \item{...}{Base layer keyword arguments, such as
 \code{name} and \code{dtype}.}

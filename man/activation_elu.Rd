@@ -8,6 +8,8 @@ activation_elu(x, alpha = 1)
 }
 \arguments{
 \item{x}{Input tensor.}
+
+\item{alpha}{Numeric. See description for details.}
 }
 \description{
 The exponential linear unit (ELU) with \code{alpha > 0} is define as:

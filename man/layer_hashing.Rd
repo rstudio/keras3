@@ -15,6 +15,8 @@ layer_hashing(
 )
 }
 \arguments{
+\item{object}{Object to compose the layer with. A tensor, array, or sequential model.}
+
 \item{num_bins}{Number of hash bins. Note that this includes the \code{mask_value}
 bin, so the effective number of bins is \code{(num_bins - 1)}
 if \code{mask_value} is set.}

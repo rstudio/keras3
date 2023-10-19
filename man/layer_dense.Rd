@@ -20,6 +20,8 @@ layer_dense(
 )
 }
 \arguments{
+\item{object}{Object to compose the layer with. A tensor, array, or sequential model.}
+
 \item{units}{Positive integer, dimensionality of the output space.}
 
 \item{activation}{Activation function to use.
@@ -44,6 +46,8 @@ the output of the layer (its "activation").}
 the \code{kernel} weights matrix.}
 
 \item{bias_constraint}{Constraint function applied to the bias vector.}
+
+\item{...}{Passed on to the Python callable}
 }
 \description{
 \code{Dense} implements the operation:

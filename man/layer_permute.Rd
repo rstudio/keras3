@@ -7,10 +7,14 @@
 layer_permute(object, dims, ...)
 }
 \arguments{
+\item{object}{Object to compose the layer with. A tensor, array, or sequential model.}
+
 \item{dims}{Tuple of integers. Permutation pattern does not include the
 batch dimension. Indexing starts at 1.
 For instance, \verb{(2, 1)} permutes the first and second dimensions
 of the input.}
+
+\item{...}{Passed on to the Python callable}
 }
 \description{
 Useful e.g. connecting RNNs and convnets.

@@ -7,6 +7,8 @@
 layer_center_crop(object, height, width, data_format = NULL, ...)
 }
 \arguments{
+\item{object}{Object to compose the layer with. A tensor, array, or sequential model.}
+
 \item{height}{Integer, the height of the output shape.}
 
 \item{width}{Integer, the width of the output shape.}
@@ -19,6 +21,8 @@ while \code{"channels_first"} corresponds to inputs with shape
 \code{image_data_format} value found in your Keras config file at
 \verb{~/.keras/keras.json}. If you never set it, then it will be
 \code{"channels_last"}.}
+
+\item{...}{Passed on to the Python callable}
 }
 \description{
 This layers crops the central portion of the images to a target size. If an

@@ -7,10 +7,14 @@
 layer_unit_normalization(object, axis = -1L, ...)
 }
 \arguments{
+\item{object}{Object to compose the layer with. A tensor, array, or sequential model.}
+
 \item{axis}{Integer or list/tuple. The axis or axes to normalize across.
 Typically, this is the features axis or axes. The left-out axes are
 typically the batch axis or axes. \code{-1} is the last dimension
 in the input. Defaults to \code{-1}.}
+
+\item{...}{Passed on to the Python callable}
 }
 \description{
 Normalize a batch of inputs so that each input in the batch has a L2 norm

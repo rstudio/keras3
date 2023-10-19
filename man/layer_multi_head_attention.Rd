@@ -54,6 +54,8 @@ attention over all axes, but batch, heads, and features.}
 \item{kernel_constraint}{Constraint for dense layer kernels.}
 
 \item{bias_constraint}{Constraint for dense layer kernels.}
+
+\item{...}{Passed on to the Python callable}
 }
 \description{
 This is an implementation of multi-headed attention as described in the

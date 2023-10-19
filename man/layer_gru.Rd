@@ -33,6 +33,8 @@ layer_gru(
 )
 }
 \arguments{
+\item{object}{Object to compose the layer with. A tensor, array, or sequential model.}
+
 \item{units}{Positive integer, dimensionality of the output space.}
 
 \item{activation}{Activation function to use.
@@ -112,6 +114,8 @@ Unrolling is only suitable for short sequences.}
 \item{reset_after}{GRU convention (whether to apply reset gate after or
 before matrix multiplication). \code{False} is \code{"before"},
 \code{True} is \code{"after"} (default and cuDNN compatible).}
+
+\item{...}{Passed on to the Python callable}
 }
 \description{
 Based on available runtime hardware and constraints, this layer

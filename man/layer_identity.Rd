@@ -6,6 +6,11 @@
 \usage{
 layer_identity(object, ...)
 }
+\arguments{
+\item{object}{Object to compose the layer with. A tensor, array, or sequential model.}
+
+\item{...}{Passed on to the Python callable}
+}
 \description{
 This layer should be used as a placeholder when no operation is to be
 performed. The layer just returns its \code{inputs} argument as output.

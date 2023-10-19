@@ -23,6 +23,8 @@ layer_batch_normalization(
 )
 }
 \arguments{
+\item{object}{Object to compose the layer with. A tensor, array, or sequential model.}
+
 \item{axis}{Integer, the axis that should be normalized
 (typically the features axis). For instance, after a \code{Conv2D} layer
 with \code{data_format="channels_first"}, use \code{axis=1}.}

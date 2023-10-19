@@ -7,9 +7,13 @@
 layer_gaussian_noise(object, stddev, seed = NULL, ...)
 }
 \arguments{
+\item{object}{Object to compose the layer with. A tensor, array, or sequential model.}
+
 \item{stddev}{Float, standard deviation of the noise distribution.}
 
 \item{seed}{Integer, optional random seed to enable deterministic behavior.}
+
+\item{...}{Passed on to the Python callable}
 }
 \description{
 This is useful to mitigate overfitting

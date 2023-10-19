@@ -17,6 +17,8 @@ layer_random_translation(
 )
 }
 \arguments{
+\item{object}{Object to compose the layer with. A tensor, array, or sequential model.}
+
 \item{height_factor}{a float represented as fraction of value, or a tuple of
 size 2 representing lower and upper bound for shifting vertically. A
 negative value means shifting image up, while a positive value means

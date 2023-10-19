@@ -16,6 +16,8 @@ layer_discretization(
 )
 }
 \arguments{
+\item{object}{Object to compose the layer with. A tensor, array, or sequential model.}
+
 \item{bin_boundaries}{A list of bin boundaries.
 The leftmost and rightmost bins
 will always extend to \code{-inf} and \code{inf},
@@ -60,6 +62,10 @@ Defaults to \code{"int"}.}
 and \code{"count"} output modes. Only supported with TensorFlow
 backend. If \code{True}, returns a \code{SparseTensor} instead of
 a dense \code{Tensor}. Defaults to \code{False}.}
+
+\item{dtype}{datatype (e.g., \code{"float32"})}
+
+\item{name}{name for the layer}
 }
 \description{
 This layer will place each element of its input data into one of several

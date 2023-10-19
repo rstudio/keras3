@@ -7,6 +7,8 @@
 layer_activation_softmax(object, axis = -1L, ...)
 }
 \arguments{
+\item{object}{Object to compose the layer with. A tensor, array, or sequential model.}
+
 \item{axis}{Integer, or list of Integers, axis along which the softmax
 normalization is applied.}
 

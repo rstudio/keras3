@@ -17,6 +17,8 @@ layer_random_rotation(
 )
 }
 \arguments{
+\item{object}{Object to compose the layer with. A tensor, array, or sequential model.}
+
 \item{factor}{a float represented as fraction of 2 Pi, or a tuple of size 2
 representing lower and upper bound for rotating clockwise and
 counter-clockwise. A positive values means rotating
@@ -53,6 +55,8 @@ The input is extended by the nearest pixel.}
 
 \item{fill_value}{a float represents the value to be filled outside
 the boundaries when \code{fill_mode="constant"}.}
+
+\item{...}{Passed on to the Python callable}
 }
 \description{
 This layer will apply random rotations to each image, filling empty space

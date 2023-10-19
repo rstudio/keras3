@@ -21,6 +21,8 @@ layer_layer_normalization(
 )
 }
 \arguments{
+\item{object}{Object to compose the layer with. A tensor, array, or sequential model.}
+
 \item{axis}{Integer or List/Tuple. The axis or axes to normalize across.
 Typically, this is the features axis/axes. The left-out axes are
 typically the batch axis/axes. \code{-1} is the last dimension in the

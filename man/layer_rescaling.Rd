@@ -7,6 +7,8 @@
 layer_rescaling(object, scale, offset = 0, ...)
 }
 \arguments{
+\item{object}{Object to compose the layer with. A tensor, array, or sequential model.}
+
 \item{scale}{Float, the scale to apply to the inputs.}
 
 \item{offset}{Float, the offset to apply to the inputs.}

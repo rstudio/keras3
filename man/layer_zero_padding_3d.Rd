@@ -12,6 +12,8 @@ layer_zero_padding_3d(
 )
 }
 \arguments{
+\item{object}{Object to compose the layer with. A tensor, array, or sequential model.}
+
 \item{padding}{Int, or tuple of 3 ints, or tuple of 3 tuples of 2 ints.
 - If int: the same symmetric padding is applied to depth, height,
 and width.
@@ -30,6 +32,8 @@ while \code{"channels_first"} corresponds to inputs with shape
 When unspecified, uses \code{image_data_format} value found in your Keras
 config file at \verb{~/.keras/keras.json} (if exists). Defaults to
 \code{"channels_last"}.}
+
+\item{...}{Passed on to the Python callable}
 }
 \description{
 Zero-padding layer for 3D data (spatial or spatio-temporal).

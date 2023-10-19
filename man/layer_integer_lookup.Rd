@@ -22,6 +22,8 @@ layer_integer_lookup(
 )
 }
 \arguments{
+\item{object}{Object to compose the layer with. A tensor, array, or sequential model.}
+
 \item{max_tokens}{Maximum size of the vocabulary for this layer. This should
 only be specified when adapting the vocabulary or when setting
 \code{pad_to_max_tokens=True}. If None, there is no cap on the size of
@@ -103,6 +105,10 @@ its feature axis padded to \code{max_tokens} even if the number
 of unique tokens in the vocabulary is less than \code{max_tokens},
 resulting in a tensor of shape \verb{(batch_size, max_tokens)}
 regardless of vocabulary size. Defaults to \code{False}.}
+
+\item{name}{name for the layer}
+
+\item{...}{Passed on to the Python callable}
 }
 \description{
 This layer maps a set of arbitrary integer input tokens into indexed integer

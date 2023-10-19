@@ -12,6 +12,8 @@ layer_global_average_pooling_2d(
 )
 }
 \arguments{
+\item{object}{Object to compose the layer with. A tensor, array, or sequential model.}
+
 \item{data_format}{string, either \code{"channels_last"} or \code{"channels_first"}.
 The ordering of the dimensions in the inputs. \code{"channels_last"}
 corresponds to inputs with shape \verb{(batch, height, width, channels)}
@@ -26,6 +28,8 @@ If \code{keepdims} is \code{False} (default), the rank of the tensor is
 reduced for spatial dimensions. If \code{keepdims} is \code{True}, the
 spatial dimension are retained with length 1.
 The behavior is the same as for \code{tf.reduce_mean} or \code{np.mean}.}
+
+\item{...}{Passed on to the Python callable}
 }
 \description{
 Global average pooling operation for 2D data.

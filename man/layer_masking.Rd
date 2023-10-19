@@ -6,6 +6,11 @@
 \usage{
 layer_masking(object, mask_value = 0, ...)
 }
+\arguments{
+\item{object}{Object to compose the layer with. A tensor, array, or sequential model.}
+
+\item{...}{Passed on to the Python callable}
+}
 \description{
 For each timestep in the input tensor (dimension #1 in the tensor),
 if all values in the input tensor at that timestep

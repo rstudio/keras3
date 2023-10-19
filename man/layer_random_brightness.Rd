@@ -13,6 +13,8 @@ layer_random_brightness(
 )
 }
 \arguments{
+\item{object}{Object to compose the layer with. A tensor, array, or sequential model.}
+
 \item{factor}{Float or a list/tuple of 2 floats between -1.0 and 1.0. The
 factor is used to determine the lower bound and upper bound of the
 brightness adjustment. A float value will be chosen randomly between
@@ -31,6 +33,8 @@ The brightness adjustment will be scaled to this range, and the
 output values will be clipped to this range.}
 
 \item{seed}{optional integer, for fixed RNG behavior.}
+
+\item{...}{Passed on to the Python callable}
 }
 \description{
 This layer will randomly increase/reduce the brightness for the input RGB

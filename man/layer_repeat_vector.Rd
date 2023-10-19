@@ -7,7 +7,11 @@
 layer_repeat_vector(object, n, ...)
 }
 \arguments{
+\item{object}{Object to compose the layer with. A tensor, array, or sequential model.}
+
 \item{n}{Integer, repetition factor.}
+
+\item{...}{Passed on to the Python callable}
 }
 \description{
 Repeats the input n times.

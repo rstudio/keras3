@@ -15,6 +15,8 @@ layer_tfsm(
 )
 }
 \arguments{
+\item{object}{Object to compose the layer with. A tensor, array, or sequential model.}
+
 \item{filepath}{\code{str} or \code{pathlib.Path} object. The path to the SavedModel.}
 
 \item{call_endpoint}{Name of the endpoint to use as the \code{call()} method
@@ -22,6 +24,10 @@ of the reloaded layer. If the SavedModel was created
 via \code{model.export()},
 then the default endpoint name is \code{'serve'}. In other cases
 it may be named \code{'serving_default'}.}
+
+\item{name}{name for the layer}
+
+\item{dtype}{datatype (e.g., \code{"float32"})}
 }
 \description{
 Reload a Keras model/layer that was saved via SavedModel / ExportArchive.

@@ -14,6 +14,8 @@ layer_bidirectional(
 )
 }
 \arguments{
+\item{object}{Object to compose the layer with. A tensor, array, or sequential model.}
+
 \item{layer}{\code{keras.layers.RNN} instance, such as
 \code{keras.layers.LSTM} or \code{keras.layers.GRU}.
 It could also be a \code{keras.layers.Layer} instance
@@ -47,6 +49,8 @@ it should have the same values for \code{stateful}, \code{return_states},
 \code{return_sequences}, etc. In addition, \code{backward_layer}
 and \code{layer} should have different \code{go_backwards} argument values.
 A \code{ValueError} will be raised if these requirements are not met.}
+
+\item{...}{Passed on to the Python callable}
 }
 \description{
 Bidirectional wrapper for RNNs.

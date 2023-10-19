@@ -7,6 +7,8 @@
 layer_flatten(object, data_format = NULL, ...)
 }
 \arguments{
+\item{object}{Object to compose the layer with. A tensor, array, or sequential model.}
+
 \item{data_format}{A string, one of \code{"channels_last"} (default) or
 \code{"channels_first"}. The ordering of the dimensions in the inputs.
 \code{"channels_last"} corresponds to inputs with shape
@@ -15,6 +17,8 @@ inputs with shape \verb{(batch, channels, ...)}.
 When unspecified, uses \code{image_data_format} value found in your Keras
 config file at \verb{~/.keras/keras.json} (if exists). Defaults to
 \code{"channels_last"}.}
+
+\item{...}{Passed on to the Python callable}
 }
 \description{
 Flattens the input. Does not affect the batch size.

@@ -7,6 +7,8 @@
 k_meshgrid(..., indexing = "xy")
 }
 \arguments{
+\item{...}{Passed on to the Python callable}
+
 \item{indexing}{Cartesian (\code{"xy"}, default) or matrix (\code{"ij"}) indexing
 of output.}
 

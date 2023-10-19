@@ -6,6 +6,9 @@
 \usage{
 layer_subtract(inputs, ...)
 }
+\arguments{
+\item{inputs, ...}{Inputs to merge.}
+}
 \description{
 It takes as input a list of tensors of size 2 both of the
 same shape, and returns a single tensor (inputs\link{0} - inputs\link{1})

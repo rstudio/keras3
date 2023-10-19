@@ -15,6 +15,8 @@ layer_max_pooling_3d(
 )
 }
 \arguments{
+\item{object}{Object to compose the layer with. A tensor, array, or sequential model.}
+
 \item{pool_size}{int or tuple of 3 integers, factors by which to downscale
 (dim1, dim2, dim3). If only one integer is specified, the same
 window length will be used for all dimensions.}
@@ -37,6 +39,10 @@ corresponds to inputs with shape
 It defaults to the \code{image_data_format} value found in your Keras
 config file at \verb{~/.keras/keras.json}. If you never set it, then it
 will be \code{"channels_last"}.}
+
+\item{name}{name for the layer}
+
+\item{...}{Passed on to the Python callable}
 }
 \description{
 Downsamples the input along its spatial dimensions (depth, height, and

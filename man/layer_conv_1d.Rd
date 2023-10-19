@@ -26,6 +26,8 @@ layer_conv_1d(
 )
 }
 \arguments{
+\item{object}{Object to compose the layer with. A tensor, array, or sequential model.}
+
 \item{filters}{int, the dimension of the output space (the number of filters
 in the convolution).}
 
@@ -87,6 +89,8 @@ are not safe to use when doing asynchronous distributed training.}
 
 \item{bias_constraint}{Optional projection function to be applied to the
 bias after being updated by an \code{Optimizer}.}
+
+\item{...}{Passed on to the Python callable}
 }
 \description{
 This layer creates a convolution kernel that is convolved with the layer

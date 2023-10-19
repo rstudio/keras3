@@ -1,0 +1,24 @@
+"keras.applications.*":
+  include_preprocessing: |
+      Boolean, whether to include the preprocessing layer at the bottom of the network.
+
+  model_name: String, name for the model.
+
+"keras.activations.elu":
+  alpha: Numeric. See description for details.
+
+"keras.layers.Input":
+  batch_shape: Shape, including the batch dim.
+
+# merging layers
+"keras.layers.(Add|Average|Concatenate|Dot|Maximum|Minimum|Multiply|Subtract)":
+  object: Object to compose the layer with. A tensor, array, or sequential model.
+  "...": null
+  "inputs,...": "Inputs to merge"
+
+
+"keras.*":
+  name: String, name for the object
+  seed: Initial seed for the random number generator
+  dtype: datatype (e.g., `"float32"`).
+  "...": Passed on arguments.

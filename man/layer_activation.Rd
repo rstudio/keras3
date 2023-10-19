@@ -7,6 +7,8 @@
 layer_activation(object, activation, ...)
 }
 \arguments{
+\item{object}{Object to compose the layer with. A tensor, array, or sequential model.}
+
 \item{activation}{Activation function. It could be a callable, or the name of
 an activation from the \code{keras.activations} namespace.}
 

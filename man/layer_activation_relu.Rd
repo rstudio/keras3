@@ -13,6 +13,8 @@ layer_activation_relu(
 )
 }
 \arguments{
+\item{object}{Object to compose the layer with. A tensor, array, or sequential model.}
+
 \item{max_value}{Float >= 0. Maximum activation value. None means unlimited.
 Defaults to \code{None}.}
 

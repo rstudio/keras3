@@ -7,8 +7,12 @@
 layer_reshape(object, target_shape, ...)
 }
 \arguments{
+\item{object}{Object to compose the layer with. A tensor, array, or sequential model.}
+
 \item{target_shape}{Target shape. Tuple of integers, does not include the
 samples dimension (batch size).}
+
+\item{...}{Passed on to the Python callable}
 }
 \description{
 Layer that reshapes inputs into the given shape.

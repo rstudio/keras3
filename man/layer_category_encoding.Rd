@@ -12,6 +12,8 @@ layer_category_encoding(
 )
 }
 \arguments{
+\item{object}{Object to compose the layer with. A tensor, array, or sequential model.}
+
 \item{num_tokens}{The total number of tokens the layer should support. All
 inputs to the layer must integers in the range \verb{0 <= value < num_tokens}, or an error will be thrown.}
 
@@ -35,6 +37,8 @@ appeared in the sample.
 For all output modes, currently only output up to rank 2 is
 supported.
 Defaults to \code{"multi_hot"}.}
+
+\item{...}{Passed on to the Python callable}
 }
 \description{
 This layer provides options for condensing data into a categorical encoding

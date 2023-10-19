@@ -14,6 +14,8 @@ layer_normalization(
 )
 }
 \arguments{
+\item{object}{Object to compose the layer with. A tensor, array, or sequential model.}
+
 \item{axis}{Integer, tuple of integers, or None. The axis or axes that should
 have a separate mean and variance for each index in the shape.
 For example, if shape is \verb{(None, 5)} and \code{axis=1}, the layer will
@@ -40,6 +42,8 @@ this layer's \code{build()} method is called.}
 \item{invert}{If \code{True}, this layer will apply the inverse transformation
 to its inputs: it would turn a normalized input back into its
 original form.}
+
+\item{...}{Passed on to the Python callable}
 }
 \description{
 This layer will shift and scale inputs into a distribution centered around

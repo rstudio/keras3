@@ -25,6 +25,8 @@ layer_conv_3d_transpose(
 )
 }
 \arguments{
+\item{object}{Object to compose the layer with. A tensor, array, or sequential model.}
+
 \item{filters}{int, the dimension of the output space (the number of filters
 in the transposed convolution).}
 
@@ -78,6 +80,8 @@ are not safe to use when doing asynchronous distributed training.}
 
 \item{bias_constraint}{Optional projection function to be applied to the
 bias after being updated by an \code{Optimizer}.}
+
+\item{...}{Passed on to the Python callable}
 }
 \description{
 The need for transposed convolutions generally arise from the desire to use

@@ -7,6 +7,8 @@
 layer_upsampling_3d(object, size = list(2L, 2L, 2L), data_format = NULL, ...)
 }
 \arguments{
+\item{object}{Object to compose the layer with. A tensor, array, or sequential model.}
+
 \item{size}{Int, or tuple of 3 integers.
 The upsampling factors for dim1, dim2 and dim3.}
 
@@ -21,6 +23,8 @@ When unspecified, uses
 \code{image_data_format} value found in your Keras config file at
 \verb{~/.keras/keras.json} (if exists) else \code{"channels_last"}.
 Defaults to \code{"channels_last"}.}
+
+\item{...}{Passed on to the Python callable}
 }
 \description{
 Repeats the 1st, 2nd and 3rd dimensions

@@ -55,6 +55,8 @@ on the "top" layer. Ignored unless \code{include_top=True}. Set
 Defaults to \code{'softmax'}.
 When loading pretrained weights, \code{classifier_activation} can only
 be \code{None} or \code{"softmax"}.}
+
+\item{...}{Passed on to the Python callable}
 }
 \description{
 This function returns a Keras image classification model,

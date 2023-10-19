@@ -33,6 +33,8 @@ layer_lstm(
 )
 }
 \arguments{
+\item{object}{Object to compose the layer with. A tensor, array, or sequential model.}
+
 \item{units}{Positive integer, dimensionality of the output space.}
 
 \item{activation}{Activation function to use.
@@ -113,6 +115,8 @@ else a symbolic loop will be used.
 Unrolling can speed-up a RNN,
 although it tends to be more memory-intensive.
 Unrolling is only suitable for short sequences.}
+
+\item{...}{Passed on to the Python callable}
 }
 \description{
 Based on available runtime hardware and constraints, this layer

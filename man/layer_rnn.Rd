@@ -17,6 +17,8 @@ layer_rnn(
 )
 }
 \arguments{
+\item{object}{Object to compose the layer with. A tensor, array, or sequential model.}
+
 \item{cell}{A RNN cell instance or a list of RNN cell instances.
 A RNN cell is a class that has:
 - A \code{call(input_at_t, states_at_t)} method, returning
@@ -70,6 +72,8 @@ is \code{True} and \code{mask} is provided.
 It can useful if you want to reuse the raw output sequence of
 the RNN without interference from the masked timesteps, e.g.,
 merging bidirectional RNNs.}
+
+\item{...}{Passed on to the Python callable}
 }
 \description{
 Base class for recurrent layers.

@@ -7,7 +7,7 @@
 layer_dot(inputs, ..., axes, normalize = FALSE)
 }
 \arguments{
-\item{...}{Standard layer keyword arguments.}
+\item{inputs, ...}{Inputs to merge.}
 
 \item{axes}{Integer or tuple of integers, axis or axes along which to
 take the dot product. If a tuple, should be two integers

@@ -8,6 +8,8 @@ layer_stacked_rnn_cells(cells, ...)
 }
 \arguments{
 \item{cells}{List of RNN cell instances.}
+
+\item{...}{Passed on to the Python callable}
 }
 \description{
 Used to implement efficient stacked RNNs.

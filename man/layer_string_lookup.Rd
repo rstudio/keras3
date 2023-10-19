@@ -22,6 +22,8 @@ layer_string_lookup(
 )
 }
 \arguments{
+\item{object}{Object to compose the layer with. A tensor, array, or sequential model.}
+
 \item{max_tokens}{Maximum size of the vocabulary for this layer. This should
 only be specified when adapting the vocabulary or when setting
 \code{pad_to_max_tokens=True}. If None, there is no cap on the size of
@@ -103,6 +105,10 @@ instead of a dense \code{Tensor}. Defaults to \code{False}.}
 
 \item{encoding}{Optional. The text encoding to use to interpret the input
 strings. Defaults to \code{"utf-8"}.}
+
+\item{name}{name for the layer}
+
+\item{...}{Passed on to the Python callable}
 
 \item{vocabulary_dtype}{The dtype of the vocabulary terms, for example
 \code{"int64"} or \code{"int32"}. Defaults to \code{"int64"}.}

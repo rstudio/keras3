@@ -17,8 +17,12 @@ application_convnext_tiny(
 )
 }
 \arguments{
+\item{model_name}{String, name for the model.}
+
 \item{include_top}{Whether to include the fully-connected
 layer at the top of the network. Defaults to \code{True}.}
+
+\item{include_preprocessing}{Boolean, whether to include the preprocessing layer at the bottom of the network.}
 
 \item{weights}{One of \code{None} (random initialization),
 \code{"imagenet"} (pre-training on ImageNet-1k), or the path to the weights

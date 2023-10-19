@@ -14,6 +14,8 @@ layer_spatial_dropout_3d(
 )
 }
 \arguments{
+\item{object}{Object to compose the layer with. A tensor, array, or sequential model.}
+
 \item{rate}{Float between 0 and 1. Fraction of the input units to drop.}
 
 \item{data_format}{\code{"channels_first"} or \code{"channels_last"}.
@@ -22,6 +24,12 @@ is at index 1, in \code{"channels_last"} mode is it at index 4.
 It defaults to the \code{image_data_format} value found in your
 Keras config file at \verb{~/.keras/keras.json}.
 If you never set it, then it will be \code{"channels_last"}.}
+
+\item{seed}{initial seed for the random number generator}
+
+\item{name}{name for the layer}
+
+\item{dtype}{datatype (e.g., \code{"float32"})}
 }
 \description{
 This version performs the same function as Dropout, however, it drops

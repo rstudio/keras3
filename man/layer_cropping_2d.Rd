@@ -12,6 +12,8 @@ layer_cropping_2d(
 )
 }
 \arguments{
+\item{object}{Object to compose the layer with. A tensor, array, or sequential model.}
+
 \item{cropping}{Int, or tuple of 2 ints, or tuple of 2 tuples of 2 ints.
 - If int: the same symmetric cropping is applied to height and
 width.
@@ -30,6 +32,8 @@ corresponds to inputs with shape
 When unspecified, uses \code{image_data_format} value found in your Keras
 config file at \verb{~/.keras/keras.json} (if exists). Defaults to
 \code{"channels_last"}.}
+
+\item{...}{Passed on to the Python callable}
 }
 \description{
 It crops along spatial dimensions, i.e. height and width.

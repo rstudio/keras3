@@ -37,6 +37,8 @@ layer_conv_lstm_3d(
 )
 }
 \arguments{
+\item{object}{Object to compose the layer with. A tensor, array, or sequential model.}
+
 \item{filters}{int, the dimension of the output space (the number of filters
 in the convolution).}
 
@@ -122,6 +124,8 @@ reversed sequence.}
 \item{stateful}{Boolean (default False). If \code{True}, the last state
 for each sample at index i in a batch will be used as initial
 state for the sample of index i in the following batch.}
+
+\item{...}{Passed on to the Python callable}
 
 \item{unroll}{Boolean (default: \code{False}).
 If \code{True}, the network will be unrolled,

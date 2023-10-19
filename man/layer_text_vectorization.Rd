@@ -30,6 +30,8 @@ get_vocabulary(object, include_special_tokens = TRUE)
 set_vocabulary(object, vocabulary, idf_weights = NULL, ...)
 }
 \arguments{
+\item{object}{Object to compose the layer with. A tensor, array, or sequential model.}
+
 \item{max_tokens}{Maximum size of the vocabulary for this layer. This should
 only be specified when adapting a vocabulary or when setting
 \code{pad_to_max_tokens=True}. Note that this vocabulary
@@ -119,6 +121,10 @@ after string splitting. Defaults to \code{False}.}
 
 \item{encoding}{Optional. The text encoding to use to interpret the input
 strings. Defaults to \code{"utf-8"}.}
+
+\item{name}{name for the layer}
+
+\item{...}{Passed on to the Python callable}
 
 \item{include_special_tokens}{If True, the returned vocabulary will include
 the padding and OOV tokens, and a term's index in the vocabulary will equal

@@ -16,6 +16,8 @@ layer_embedding(
 )
 }
 \arguments{
+\item{object}{Object to compose the layer with. A tensor, array, or sequential model.}
+
 \item{input_dim}{Integer. Size of the vocabulary,
 i.e. maximum integer index + 1.}
 
@@ -39,6 +41,8 @@ to support masking or an exception will be raised.
 If mask_zero is set to True, as a consequence,
 index 0 cannot be used in the vocabulary (input_dim should
 equal size of vocabulary + 1).}
+
+\item{...}{Passed on to the Python callable}
 }
 \description{
 e.g. \verb{[[4], [20]] -> [[0.25, 0.1], [0.6, -0.2]]}

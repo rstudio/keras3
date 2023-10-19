@@ -14,6 +14,8 @@ bidirectional(
 )
 }
 \arguments{
+\item{object}{Object to compose the layer with. A tensor, array, or sequential model.}
+
 \item{layer}{A \code{RNN} layer instance, such as \code{layer_lstm()} or
 \code{layer_gru()}. It could also be a \code{keras$layers$Layer} instance that
 meets the following criteria:

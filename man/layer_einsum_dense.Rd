@@ -20,6 +20,8 @@ layer_einsum_dense(
 )
 }
 \arguments{
+\item{object}{Object to compose the layer with. A tensor, array, or sequential model.}
+
 \item{equation}{An equation describing the einsum to perform.
 This equation must be a valid einsum string of the form
 \verb{ab,bc->ac}, \verb{...ab,bc->...ac}, or

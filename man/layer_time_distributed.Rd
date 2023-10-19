@@ -7,7 +7,11 @@
 layer_time_distributed(object, layer, ...)
 }
 \arguments{
+\item{object}{Object to compose the layer with. A tensor, array, or sequential model.}
+
 \item{layer}{a \code{keras.layers.Layer} instance.}
+
+\item{...}{Passed on to the Python callable}
 }
 \description{
 Every input should be at least 3D, and the dimension of index one of the
