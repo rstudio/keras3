@@ -15,7 +15,7 @@ defaults:
 
 jobs:
   R-CMD-check:
-    name: ${{ matrix.os }}, tf-${{ matrix.tf }}, R-${{ matrix.r }}
+    name: ${{ matrix.os }}, py-${{ matrix.python }}, R-${{ matrix.r }}
     timeout-minutes: 30
     strategy:
       fail-fast: false
