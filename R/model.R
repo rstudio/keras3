@@ -1059,7 +1059,7 @@ test_on_batch <- function(object, x, y, sample_weight = NULL) {
 #'
 #' @param object Keras model object
 #' @param generator A generator (e.g. like the one provided by
-#'   [flow_images_from_directory()] or a custom R
+#'   flow_images_from_directory() or a custom R
 #'   [generator function](https://rstudio.github.io/reticulate/articles/calling_python.html#generators-1)).
 #'
 #'   The output of the generator must be a list of one of these forms:
