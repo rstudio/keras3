@@ -86,7 +86,7 @@ please refer to
 Each Keras Application expects a specific kind of input preprocessing.
 For ConvNeXt, preprocessing is included in the model using a \code{Normalization}
 layer.  ConvNeXt models expect their inputs to be float or uint8 tensors of
-pixels with values in the \link{0-255} range.
+pixels with values in the \verb{[0-255]} range.
 
 When calling the \code{summary()} method after instantiating a ConvNeXt model,
 prefer setting the \code{expand_nested} argument \code{summary()} to \code{True} to better

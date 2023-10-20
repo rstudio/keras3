@@ -68,13 +68,11 @@ image = [[[1, 2, 3], [4 ,5 ,6]], [[7, 8, 9], [10, 11, 12]]]
 output = random_bright(image, training=True)
 
 # output will be int64 with 25.5 added to each channel and round down.
-```python
-array([[[26.5, 27.5, 28.5]
-#             [29.5, 30.5, 31.5]]
-#            [[32.5, 33.5, 34.5]
-#             [35.5, 36.5, 37.5]]],
-#           shape=(2, 2, 3), dtype=int64)
-# ```
+>>> array([[[26.5, 27.5, 28.5]
+            [29.5, 30.5, 31.5]]
+           [[32.5, 33.5, 34.5]
+            [35.5, 36.5, 37.5]]],
+          shape=(2, 2, 3), dtype=int64)
 }\if{html}{\out{</div>}}
 }
 
