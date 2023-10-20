@@ -16,10 +16,13 @@ k_separable_conv(
 }
 \arguments{
 \item{inputs}{Tensor of rank N+2. \code{inputs} has shape
-\verb{(batch_size,)} + inputs_spatial_shape + (num_channels,)\code{if}data_format="channels_last"\verb{, or }(batch_size, num_channels) + inputs_spatial_shape\code{if}data_format="channels_first"`.}
+\verb{(batch_size,) + inputs_spatial_shape + (num_channels,)} if
+\code{data_format="channels_last"}, or
+\verb{(batch_size, num_channels) + inputs_spatial_shape} if
+\code{data_format="channels_first"}.}
 
 \item{depthwise_kernel}{Tensor of rank N+2. \code{depthwise_kernel} has shape
-\link{kernel_spatial_shape, num_input_channels, num_channels_multiplier},
+\verb{[kernel_spatial_shape, num_input_channels, num_channels_multiplier],}
 \code{num_input_channels} should match the number of channels in
 \code{inputs}.}
 

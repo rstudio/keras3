@@ -14,7 +14,10 @@ k_average_pool(
 }
 \arguments{
 \item{inputs}{Tensor of rank N+2. \code{inputs} has shape
-\verb{(batch_size,)} + inputs_spatial_shape + (num_channels,)\code{if}data_format="channels_last"\verb{, or }(batch_size, num_channels) + inputs_spatial_shape\code{if}data_format="channels_first"`. Pooling happens over the spatial
+\verb{(batch_size,) + inputs_spatial_shape + (num_channels,)} if
+\code{data_format="channels_last"}, or
+\verb{(batch_size, num_channels) + inputs_spatial_shape} if
+\code{data_format="channels_first"}. Pooling happens over the spatial
 dimensions only.}
 
 \item{pool_size}{int or tuple/list of integers of size
