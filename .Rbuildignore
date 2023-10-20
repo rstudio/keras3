@@ -44,3 +44,4 @@
 ^scratch$
 ^CRAN-SUBMISSION$
 ^revdep$
+^debug.py$

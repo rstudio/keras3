@@ -414,7 +414,7 @@ export_savedmodel.keras.models.model.Model <- function(
   }
 
   if (identical(remove_learning_phase, TRUE)) {
-    k_set_learning_phase(0)
+    # k_set_learning_phase(0) # TODO: fate of this symbol in keras 3?
     message("Keras learning phase set to 0 for export (restart R session before doing additional training)")
     object <- reload_model(object)
   }
