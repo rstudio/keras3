@@ -655,6 +655,17 @@ make_r_fn.layer <- function(endpoint, py_obj, transformers) {
       do.call(layer, inputs)
     })
 
+  } else if (endpoint == "keras.layers.Lambda") {
+    # rename `function` -> `func`. because roxygen gets very confused
+    # if you have an R parser reserved word as an arg name
+    names(frmls) %<>% replace_val("function", "f")
+    frmls <- c(alist(object = ), frmls)
+    fn_body <- bquote({
+      args <- capture_args2(.(transformers), ignore = "object")
+      names(args)[match("f", names(args))] <- "function"
+      create_layer(.(py_obj_expr), object, args)
+    })
+
   } else {
     # default path for all other layers
 
@@ -694,6 +705,12 @@ mk_export <- function(endpoint) {
   # roxygen parts
   r_name <- make_r_name(endpoint, module)
   params <- parse_params_section(doc$arguments, treat_as_dots = vararg_paramater_names(py_obj))
+
+  if(endpoint == "keras.layers.Lambda") {
+    # browser()
+    names(params)[match("function", names(params))] <- "f"
+  }
+
   tags <- make_roxygen_tags(endpoint, py_obj, type)
 
   if(!is.null(doc$call_arguments) &&
@@ -752,10 +769,12 @@ mk_export <- function(endpoint) {
     frmls <- formals(r_fn)
     params_documented_but_missing <- names(params) |> setdiff(names(frmls))
     if(length(params_documented_but_missing)) {
-      frmls <- c(frmls, lapply(set_names(params_documented_but_missing), \(n) NULL))
+      frmls <- c(frmls, lapply(purrr::set_names(params_documented_but_missing), \(n) NULL))
       formals(r_fn) <<- frmls
     }
   })
+
+
 
   #
   # fixes for special cases
@@ -873,6 +892,9 @@ get_fixed_docstring <- function(endpoint) {
   }
   trim(d %||% "")
 }
+
+# rename2(list(a = "b", a = z))
+
 
 # rx <- regex(comments = TRUE, pattern = r"--(
 #       `?                # Optional backtick at the start

@@ -6,7 +6,7 @@
 \usage{
 layer_lambda(
   object,
-  `function`,
+  f,
   output_shape = NULL,
   mask = NULL,
   arguments = NULL,
@@ -16,7 +16,7 @@ layer_lambda(
 \arguments{
 \item{object}{Object to compose the layer with. A tensor, array, or sequential model.}
 
-\item{function}{The function to be evaluated. Takes input tensor as first
+\item{f}{The function to be evaluated. Takes input tensor as first
 argument.}
 
 \item{output_shape}{Expected output shape from function. This argument
