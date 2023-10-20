@@ -24,7 +24,7 @@ computed by:
 \verb{num_sequences = 1 + (N - sequence_length) // sequence_stride}
 }
 \section{Returns}{
-A tensor of sequences with shape \link{..., num_sequences, sequence_length}.
+A tensor of sequences with shape \verb{[..., num_sequences, sequence_length].}
 }
 
 \section{Examples}{

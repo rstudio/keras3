@@ -16,10 +16,13 @@ k_conv_transpose(
 }
 \arguments{
 \item{inputs}{Tensor of rank N+2. \code{inputs} has shape
-\verb{(batch_size,)} + inputs_spatial_shape + (num_channels,)\code{if}data_format="channels_last"\verb{, or }(batch_size, num_channels) + inputs_spatial_shape\code{if}data_format="channels_first"`.}
+\verb{(batch_size,) + inputs_spatial_shape + (num_channels,)} if
+\code{data_format="channels_last"}, or
+\verb{(batch_size, num_channels) + inputs_spatial_shape} if
+\code{data_format="channels_first"}.}
 
 \item{kernel}{Tensor of rank N+2. \code{kernel} has shape
-\link{kernel_spatial_shape, num_output_channels, num_input_channels},
+\verb{[kernel_spatial_shape, num_output_channels, num_input_channels],}
 \code{num_input_channels} should match the number of channels in
 \code{inputs}.}
 
