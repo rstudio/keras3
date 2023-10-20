@@ -17,7 +17,8 @@ optimizer_adamax(
   ema_momentum = 0.99,
   ema_overwrite_frequency = NULL,
   name = "adamax",
-  ...
+  ...,
+  loss_scale_factor = NULL
 )
 }
 \arguments{

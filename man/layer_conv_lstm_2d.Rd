@@ -33,7 +33,8 @@ layer_conv_lstm_2d(
   return_state = FALSE,
   go_backwards = FALSE,
   stateful = FALSE,
-  ...
+  ...,
+  unroll = NULL
 )
 }
 \arguments{

@@ -18,7 +18,8 @@ layer_string_lookup(
   sparse = FALSE,
   encoding = "utf-8",
   name = NULL,
-  ...
+  ...,
+  vocabulary_dtype = NULL
 )
 }
 \arguments{

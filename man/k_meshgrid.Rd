@@ -7,12 +7,10 @@
 k_meshgrid(..., indexing = "xy")
 }
 \arguments{
-\item{...}{Passed on to the Python callable}
+\item{...}{1-D tensors representing the coordinates of a grid.}
 
 \item{indexing}{Cartesian (\code{"xy"}, default) or matrix (\code{"ij"}) indexing
 of output.}
-
-\item{x}{1-D tensors representing the coordinates of a grid.}
 }
 \description{
 Given \code{N} 1-D tensors \verb{T0, T1, ..., TN-1} as inputs with corresponding

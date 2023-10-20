@@ -8,7 +8,16 @@ optimizer_loss_scale(
   inner_optimizer,
   initial_scale = 32768,
   dynamic_growth_steps = 2000L,
-  ...
+  ...,
+  name = NULL,
+  weight_decay = NULL,
+  clipnorm = NULL,
+  clipvalue = NULL,
+  global_clipnorm = NULL,
+  use_ema = NULL,
+  ema_momentum = NULL,
+  ema_overwrite_frequency = NULL,
+  loss_scale_factor = NULL
 )
 }
 \arguments{

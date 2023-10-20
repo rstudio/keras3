@@ -16,7 +16,8 @@ optimizer_adadelta(
   ema_momentum = 0.99,
   ema_overwrite_frequency = NULL,
   name = "adadelta",
-  ...
+  ...,
+  loss_scale_factor = NULL
 )
 }
 \arguments{

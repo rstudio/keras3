@@ -18,7 +18,8 @@ optimizer_adam_w(
   ema_momentum = 0.99,
   ema_overwrite_frequency = NULL,
   name = "adamw",
-  ...
+  ...,
+  loss_scale_factor = NULL
 )
 }
 \arguments{

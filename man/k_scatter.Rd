@@ -10,11 +10,9 @@ k_scatter(indices, values, shape)
 \item{indices}{A tensor or list/tuple specifying
 indices for the values in \code{values}.}
 
-\item{values}{see description}
+\item{values}{A tensor, the values to be set at \code{indices}.}
 
 \item{shape}{Shape of the output tensor.}
-
-\item{updates}{A tensor, the values to be set at \code{indices}.}
 }
 \description{
 At a high level, this operation does \code{zeros[indices] = updates} and

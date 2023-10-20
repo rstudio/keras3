@@ -19,7 +19,8 @@ optimizer_adafactor(
   ema_momentum = 0.99,
   ema_overwrite_frequency = NULL,
   name = "adafactor",
-  ...
+  ...,
+  loss_scale_factor = NULL
 )
 }
 \arguments{

@@ -18,7 +18,8 @@ optimizer_rmsprop(
   ema_momentum = 0.99,
   ema_overwrite_frequency = 100L,
   name = "rmsprop",
-  ...
+  ...,
+  loss_scale_factor = NULL
 )
 }
 \arguments{

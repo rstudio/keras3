@@ -16,7 +16,8 @@ optimizer_lion(
   ema_momentum = 0.99,
   ema_overwrite_frequency = NULL,
   name = "lion",
-  ...
+  ...,
+  loss_scale_factor = NULL
 )
 }
 \arguments{

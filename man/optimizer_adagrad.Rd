@@ -16,7 +16,8 @@ optimizer_adagrad(
   ema_momentum = 0.99,
   ema_overwrite_frequency = NULL,
   name = "adagrad",
-  ...
+  ...,
+  loss_scale_factor = NULL
 )
 }
 \arguments{

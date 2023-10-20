@@ -13,9 +13,7 @@ summation) calculation is performed unless the explicit indicator
 \verb{->} is included as well as subscript labels of the precise
 output form.}
 
-\item{...}{Passed on to the Python callable}
-
-\item{operands}{The operands to compute the Einstein sum of.}
+\item{...}{The operands to compute the Einstein sum of.}
 }
 \description{
 Evaluates the Einstein summation convention on the operands.

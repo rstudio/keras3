@@ -4,7 +4,7 @@
 \alias{callback_progbar_logger}
 \title{Callback that prints metrics to stdout.}
 \usage{
-callback_progbar_logger()
+callback_progbar_logger(count_mode = NULL)
 }
 \arguments{
 \item{count_mode}{One of \code{"steps"} or \code{"samples"}.
