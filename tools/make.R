@@ -168,6 +168,8 @@ endpoints <-
 # <class 'keras.initializers.constant_initializers.Zeros'>
 # <class 'keras.initializers.random_initializers.RandomUniform'>
 
+# TODO: next: losses, metrics, saving, guides/vignettes
+
 df <-
   endpoints |>
   # c( "keras.layers.InputSpec", "keras.layers.Input" ) |>
