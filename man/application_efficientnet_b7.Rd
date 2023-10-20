@@ -59,6 +59,13 @@ be \code{None} or \code{"softmax"}.}
 \item{...}{Passed on to the Python callable}
 }
 \description{
+Instantiates the EfficientNetB7 architecture.
+}
+\section{Reference}{
+\itemize{
+\item \href{https://arxiv.org/abs/1905.11946}{EfficientNet: Rethinking Model Scaling for Convolutional Neural Networks} (ICML 2019)
+}
+
 This function returns a Keras image classification model,
 optionally loaded with weights pre-trained on ImageNet.
 
@@ -67,11 +74,6 @@ For image classification use cases, see
 
 For transfer learning use cases, make sure to read the
 \href{https://keras.io/guides/transfer_learning/}{guide to transfer learning & fine-tuning}.
-}
-\section{Reference}{
-\itemize{
-\item \href{https://arxiv.org/abs/1905.11946}{EfficientNet: Rethinking Model Scaling for Convolutional Neural Networks} (ICML 2019)
-}
 }
 
 \section{Note}{

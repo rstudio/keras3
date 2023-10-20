@@ -79,6 +79,8 @@ split_docstring_into_sections <- function(docstring) {
   m <- zoo::na.locf0(m)
   m <- tidy_section_headings[m]
 
+  # browser()
+
   m[1:2] <- m[1:2] %|% c("title", "description")
   m <- zoo::na.locf0(m)
 
@@ -91,6 +93,7 @@ split_docstring_into_sections <- function(docstring) {
                        ind_lvl == 0 &
                        str_width(str_trim(x)) > 0 &
                        !startsWith(str_trim(x), "- "))[-1]
+  maybe_new_sec %<>% .[. > which.max(m == "arguments")]
   if(length(maybe_new_sec)) {
     m[maybe_new_sec[1]:length(m)] %<>% replace_val("reference", "description")
     append(m, after = maybe_new_sec[1]) <- "description"

@@ -57,14 +57,16 @@ layer.  When loading pretrained weights, \code{classifier_activation} can
 only be \code{None} or \code{"softmax"}.}
 }
 \description{
-Optionally loads weights pre-trained on ImageNet.
-Note that the data format convention used by the model is
-the one specified in your Keras config at \verb{~/.keras/keras.json}.
+Instantiates a Mobile NASNet model in ImageNet mode.
 }
 \section{Reference}{
 \itemize{
 \item \href{https://arxiv.org/abs/1707.07012}{Learning Transferable Architectures for Scalable Image Recognition} (CVPR 2018)
 }
+
+Optionally loads weights pre-trained on ImageNet.
+Note that the data format convention used by the model is
+the one specified in your Keras config at \verb{~/.keras/keras.json}.
 }
 
 \section{Note}{

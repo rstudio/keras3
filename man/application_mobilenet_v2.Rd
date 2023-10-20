@@ -83,6 +83,11 @@ parameter count than the original MobileNet.
 MobileNets support any input size greater
 than 32 x 32, with larger image sizes
 offering better performance.
+}
+\section{Reference}{
+\itemize{
+\item \href{https://arxiv.org/abs/1801.04381}{MobileNetV2: Inverted Residuals and Linear Bottlenecks} (CVPR 2018)
+}
 
 This function returns a Keras image classification model,
 optionally loaded with weights pre-trained on ImageNet.
@@ -92,11 +97,6 @@ For image classification use cases, see
 
 For transfer learning use cases, make sure to read the
 \href{https://keras.io/guides/transfer_learning/}{guide to transfer learning & fine-tuning}.
-}
-\section{Reference}{
-\itemize{
-\item \href{https://arxiv.org/abs/1801.04381}{MobileNetV2: Inverted Residuals and Linear Bottlenecks} (CVPR 2018)
-}
 }
 
 \section{Note}{

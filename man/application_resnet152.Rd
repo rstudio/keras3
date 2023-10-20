@@ -52,15 +52,17 @@ When loading pretrained weights, \code{classifier_activation} can only
 be \code{None} or \code{"softmax"}.}
 }
 \description{
-For image classification use cases, see \href{https://keras.io/api/applications/#usage-examples-for-image-classification-models}{this page for detailed examples}.
-
-For transfer learning use cases, make sure to read the
-\href{https://keras.io/guides/transfer_learning/}{guide to transfer learning & fine-tuning}.
+Instantiates the ResNet152 architecture.
 }
 \section{Reference}{
 \itemize{
 \item \href{https://arxiv.org/abs/1512.03385}{Deep Residual Learning for Image Recognition} (CVPR 2015)
 }
+
+For image classification use cases, see \href{https://keras.io/api/applications/#usage-examples-for-image-classification-models}{this page for detailed examples}.
+
+For transfer learning use cases, make sure to read the
+\href{https://keras.io/guides/transfer_learning/}{guide to transfer learning & fine-tuning}.
 }
 
 \section{Note}{

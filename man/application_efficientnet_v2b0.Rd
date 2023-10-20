@@ -58,6 +58,13 @@ be \code{None} or \code{"softmax"}.}
 \item{include_preprocessing}{Boolean, whether to include the preprocessing layer at the bottom of the network.}
 }
 \description{
+Instantiates the EfficientNetV2B0 architecture.
+}
+\section{Reference}{
+\itemize{
+\item \href{https://arxiv.org/abs/2104.00298}{EfficientNetV2: Smaller Models and Faster Training} (ICML 2021)
+}
+
 This function returns a Keras image classification model,
 optionally loaded with weights pre-trained on ImageNet.
 
@@ -66,11 +73,6 @@ For image classification use cases, see
 
 For transfer learning use cases, make sure to read the
 \href{https://keras.io/guides/transfer_learning/}{guide to transfer learning & fine-tuning}.
-}
-\section{Reference}{
-\itemize{
-\item \href{https://arxiv.org/abs/2104.00298}{EfficientNetV2: Smaller Models and Faster Training} (ICML 2021)
-}
 }
 
 \section{Note}{

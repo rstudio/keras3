@@ -88,6 +88,12 @@ be \code{None} or \code{"softmax"}.}
 layer (\code{Rescaling}) at the bottom of the network. Defaults to \code{True}.}
 }
 \description{
+Instantiates the MobileNetV3Small architecture.
+}
+\section{Reference}{
+\itemize{
+\item \href{https://arxiv.org/pdf/1905.02244.pdf}{Searching for MobileNetV3} (ICCV 2019)
+}
 \subsection{The following table describes the performance of MobileNets v3:}{
 
 MACs stands for Multiply Adds\tabular{lllll}{
@@ -106,11 +112,6 @@ For image classification use cases, see
 
 For transfer learning use cases, make sure to read the
 \href{https://keras.io/guides/transfer_learning/}{guide to transfer learning & fine-tuning}.
-}
-}
-\section{Reference}{
-\itemize{
-\item \href{https://arxiv.org/pdf/1905.02244.pdf}{Searching for MobileNetV3} (ICCV 2019)
 }
 }
 

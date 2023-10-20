@@ -60,6 +60,14 @@ of the "top" layer. When loading pretrained weights,
 \code{classifier_activation} can only be \code{None} or \code{"softmax"}.}
 }
 \description{
+Instantiates the Inception-ResNet v2 architecture.
+}
+\section{Reference}{
+\itemize{
+\item \href{https://arxiv.org/abs/1602.07261}{Inception-v4, Inception-ResNet and the Impact of Residual Connections on Learning}
+(AAAI 2017)
+}
+
 This function returns a Keras image classification model,
 optionally loaded with weights pre-trained on ImageNet.
 
@@ -68,12 +76,6 @@ For image classification use cases, see
 
 For transfer learning use cases, make sure to read the
 \href{https://keras.io/guides/transfer_learning/}{guide to transfer learning & fine-tuning}.
-}
-\section{Reference}{
-\itemize{
-\item \href{https://arxiv.org/abs/1602.07261}{Inception-v4, Inception-ResNet and the Impact of Residual Connections on Learning}
-(AAAI 2017)
-}
 }
 
 \section{Note}{

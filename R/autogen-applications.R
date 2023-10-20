@@ -833,13 +833,14 @@ Returns:
 #' Instantiates the Densenet121 architecture.
 #'
 #' @description
-#' Optionally loads weights pre-trained on ImageNet.
-#' Note that the data format convention used by the model is
-#' the one specified in your Keras config at `~/.keras/keras.json`.
 #'
 #' # Reference
 #' - [Densely Connected Convolutional Networks](
-#' https://arxiv.org/abs/1608.06993) (CVPR 2017)
+#'     https://arxiv.org/abs/1608.06993) (CVPR 2017)
+#'
+#' Optionally loads weights pre-trained on ImageNet.
+#' Note that the data format convention used by the model is
+#' the one specified in your Keras config at `~/.keras/keras.json`.
 #'
 #' # Note
 #' each Keras Application expects a specific kind of input preprocessing.
@@ -959,13 +960,14 @@ Returns:
 #' Instantiates the Densenet169 architecture.
 #'
 #' @description
-#' Optionally loads weights pre-trained on ImageNet.
-#' Note that the data format convention used by the model is
-#' the one specified in your Keras config at `~/.keras/keras.json`.
 #'
 #' # Reference
 #' - [Densely Connected Convolutional Networks](
-#' https://arxiv.org/abs/1608.06993) (CVPR 2017)
+#'     https://arxiv.org/abs/1608.06993) (CVPR 2017)
+#'
+#' Optionally loads weights pre-trained on ImageNet.
+#' Note that the data format convention used by the model is
+#' the one specified in your Keras config at `~/.keras/keras.json`.
 #'
 #' # Note
 #' each Keras Application expects a specific kind of input preprocessing.
@@ -1085,13 +1087,14 @@ Returns:
 #' Instantiates the Densenet201 architecture.
 #'
 #' @description
-#' Optionally loads weights pre-trained on ImageNet.
-#' Note that the data format convention used by the model is
-#' the one specified in your Keras config at `~/.keras/keras.json`.
 #'
 #' # Reference
 #' - [Densely Connected Convolutional Networks](
-#' https://arxiv.org/abs/1608.06993) (CVPR 2017)
+#'     https://arxiv.org/abs/1608.06993) (CVPR 2017)
+#'
+#' Optionally loads weights pre-trained on ImageNet.
+#' Note that the data format convention used by the model is
+#' the one specified in your Keras config at `~/.keras/keras.json`.
 #'
 #' # Note
 #' each Keras Application expects a specific kind of input preprocessing.
@@ -1219,6 +1222,11 @@ Returns:
 #' Instantiates the EfficientNetB0 architecture.
 #'
 #' @description
+#'
+#' # Reference
+#' - [EfficientNet: Rethinking Model Scaling for Convolutional Neural Networks](
+#'     https://arxiv.org/abs/1905.11946) (ICML 2019)
+#'
 #' This function returns a Keras image classification model,
 #' optionally loaded with weights pre-trained on ImageNet.
 #'
@@ -1229,10 +1237,6 @@ Returns:
 #' For transfer learning use cases, make sure to read the
 #' [guide to transfer learning & fine-tuning](
 #' https://keras.io/guides/transfer_learning/).
-#'
-#' # Reference
-#' - [EfficientNet: Rethinking Model Scaling for Convolutional Neural Networks](
-#' https://arxiv.org/abs/1905.11946) (ICML 2019)
 #'
 #' # Note
 #' each Keras Application expects a specific kind of input preprocessing.
@@ -1363,6 +1367,11 @@ Returns:
 #' Instantiates the EfficientNetB1 architecture.
 #'
 #' @description
+#'
+#' # Reference
+#' - [EfficientNet: Rethinking Model Scaling for Convolutional Neural Networks](
+#'     https://arxiv.org/abs/1905.11946) (ICML 2019)
+#'
 #' This function returns a Keras image classification model,
 #' optionally loaded with weights pre-trained on ImageNet.
 #'
@@ -1373,10 +1382,6 @@ Returns:
 #' For transfer learning use cases, make sure to read the
 #' [guide to transfer learning & fine-tuning](
 #' https://keras.io/guides/transfer_learning/).
-#'
-#' # Reference
-#' - [EfficientNet: Rethinking Model Scaling for Convolutional Neural Networks](
-#' https://arxiv.org/abs/1905.11946) (ICML 2019)
 #'
 #' # Note
 #' each Keras Application expects a specific kind of input preprocessing.
@@ -1507,6 +1512,11 @@ Returns:
 #' Instantiates the EfficientNetB2 architecture.
 #'
 #' @description
+#'
+#' # Reference
+#' - [EfficientNet: Rethinking Model Scaling for Convolutional Neural Networks](
+#'     https://arxiv.org/abs/1905.11946) (ICML 2019)
+#'
 #' This function returns a Keras image classification model,
 #' optionally loaded with weights pre-trained on ImageNet.
 #'
@@ -1517,10 +1527,6 @@ Returns:
 #' For transfer learning use cases, make sure to read the
 #' [guide to transfer learning & fine-tuning](
 #' https://keras.io/guides/transfer_learning/).
-#'
-#' # Reference
-#' - [EfficientNet: Rethinking Model Scaling for Convolutional Neural Networks](
-#' https://arxiv.org/abs/1905.11946) (ICML 2019)
 #'
 #' # Note
 #' each Keras Application expects a specific kind of input preprocessing.
@@ -1651,6 +1657,11 @@ Returns:
 #' Instantiates the EfficientNetB3 architecture.
 #'
 #' @description
+#'
+#' # Reference
+#' - [EfficientNet: Rethinking Model Scaling for Convolutional Neural Networks](
+#'     https://arxiv.org/abs/1905.11946) (ICML 2019)
+#'
 #' This function returns a Keras image classification model,
 #' optionally loaded with weights pre-trained on ImageNet.
 #'
@@ -1661,10 +1672,6 @@ Returns:
 #' For transfer learning use cases, make sure to read the
 #' [guide to transfer learning & fine-tuning](
 #' https://keras.io/guides/transfer_learning/).
-#'
-#' # Reference
-#' - [EfficientNet: Rethinking Model Scaling for Convolutional Neural Networks](
-#' https://arxiv.org/abs/1905.11946) (ICML 2019)
 #'
 #' # Note
 #' each Keras Application expects a specific kind of input preprocessing.
@@ -1795,6 +1802,11 @@ Returns:
 #' Instantiates the EfficientNetB4 architecture.
 #'
 #' @description
+#'
+#' # Reference
+#' - [EfficientNet: Rethinking Model Scaling for Convolutional Neural Networks](
+#'     https://arxiv.org/abs/1905.11946) (ICML 2019)
+#'
 #' This function returns a Keras image classification model,
 #' optionally loaded with weights pre-trained on ImageNet.
 #'
@@ -1805,10 +1817,6 @@ Returns:
 #' For transfer learning use cases, make sure to read the
 #' [guide to transfer learning & fine-tuning](
 #' https://keras.io/guides/transfer_learning/).
-#'
-#' # Reference
-#' - [EfficientNet: Rethinking Model Scaling for Convolutional Neural Networks](
-#' https://arxiv.org/abs/1905.11946) (ICML 2019)
 #'
 #' # Note
 #' each Keras Application expects a specific kind of input preprocessing.
@@ -1939,6 +1947,11 @@ Returns:
 #' Instantiates the EfficientNetB5 architecture.
 #'
 #' @description
+#'
+#' # Reference
+#' - [EfficientNet: Rethinking Model Scaling for Convolutional Neural Networks](
+#'     https://arxiv.org/abs/1905.11946) (ICML 2019)
+#'
 #' This function returns a Keras image classification model,
 #' optionally loaded with weights pre-trained on ImageNet.
 #'
@@ -1949,10 +1962,6 @@ Returns:
 #' For transfer learning use cases, make sure to read the
 #' [guide to transfer learning & fine-tuning](
 #' https://keras.io/guides/transfer_learning/).
-#'
-#' # Reference
-#' - [EfficientNet: Rethinking Model Scaling for Convolutional Neural Networks](
-#' https://arxiv.org/abs/1905.11946) (ICML 2019)
 #'
 #' # Note
 #' each Keras Application expects a specific kind of input preprocessing.
@@ -2083,6 +2092,11 @@ Returns:
 #' Instantiates the EfficientNetB6 architecture.
 #'
 #' @description
+#'
+#' # Reference
+#' - [EfficientNet: Rethinking Model Scaling for Convolutional Neural Networks](
+#'     https://arxiv.org/abs/1905.11946) (ICML 2019)
+#'
 #' This function returns a Keras image classification model,
 #' optionally loaded with weights pre-trained on ImageNet.
 #'
@@ -2093,10 +2107,6 @@ Returns:
 #' For transfer learning use cases, make sure to read the
 #' [guide to transfer learning & fine-tuning](
 #' https://keras.io/guides/transfer_learning/).
-#'
-#' # Reference
-#' - [EfficientNet: Rethinking Model Scaling for Convolutional Neural Networks](
-#' https://arxiv.org/abs/1905.11946) (ICML 2019)
 #'
 #' # Note
 #' each Keras Application expects a specific kind of input preprocessing.
@@ -2227,6 +2237,11 @@ Returns:
 #' Instantiates the EfficientNetB7 architecture.
 #'
 #' @description
+#'
+#' # Reference
+#' - [EfficientNet: Rethinking Model Scaling for Convolutional Neural Networks](
+#'     https://arxiv.org/abs/1905.11946) (ICML 2019)
+#'
 #' This function returns a Keras image classification model,
 #' optionally loaded with weights pre-trained on ImageNet.
 #'
@@ -2237,10 +2252,6 @@ Returns:
 #' For transfer learning use cases, make sure to read the
 #' [guide to transfer learning & fine-tuning](
 #' https://keras.io/guides/transfer_learning/).
-#'
-#' # Reference
-#' - [EfficientNet: Rethinking Model Scaling for Convolutional Neural Networks](
-#' https://arxiv.org/abs/1905.11946) (ICML 2019)
 #'
 #' # Note
 #' each Keras Application expects a specific kind of input preprocessing.
@@ -2374,6 +2385,11 @@ Returns:
 #' Instantiates the EfficientNetV2B0 architecture.
 #'
 #' @description
+#'
+#' # Reference
+#' - [EfficientNetV2: Smaller Models and Faster Training](
+#'     https://arxiv.org/abs/2104.00298) (ICML 2021)
+#'
 #' This function returns a Keras image classification model,
 #' optionally loaded with weights pre-trained on ImageNet.
 #'
@@ -2384,10 +2400,6 @@ Returns:
 #' For transfer learning use cases, make sure to read the
 #' [guide to transfer learning & fine-tuning](
 #' https://keras.io/guides/transfer_learning/).
-#'
-#' # Reference
-#' - [EfficientNetV2: Smaller Models and Faster Training](
-#' https://arxiv.org/abs/2104.00298) (ICML 2021)
 #'
 #' # Note
 #' each Keras Application expects a specific kind of input preprocessing.
@@ -2524,6 +2536,11 @@ Returns:
 #' Instantiates the EfficientNetV2B1 architecture.
 #'
 #' @description
+#'
+#' # Reference
+#' - [EfficientNetV2: Smaller Models and Faster Training](
+#'     https://arxiv.org/abs/2104.00298) (ICML 2021)
+#'
 #' This function returns a Keras image classification model,
 #' optionally loaded with weights pre-trained on ImageNet.
 #'
@@ -2534,10 +2551,6 @@ Returns:
 #' For transfer learning use cases, make sure to read the
 #' [guide to transfer learning & fine-tuning](
 #' https://keras.io/guides/transfer_learning/).
-#'
-#' # Reference
-#' - [EfficientNetV2: Smaller Models and Faster Training](
-#' https://arxiv.org/abs/2104.00298) (ICML 2021)
 #'
 #' # Note
 #' each Keras Application expects a specific kind of input preprocessing.
@@ -2674,6 +2687,11 @@ Returns:
 #' Instantiates the EfficientNetV2B2 architecture.
 #'
 #' @description
+#'
+#' # Reference
+#' - [EfficientNetV2: Smaller Models and Faster Training](
+#'     https://arxiv.org/abs/2104.00298) (ICML 2021)
+#'
 #' This function returns a Keras image classification model,
 #' optionally loaded with weights pre-trained on ImageNet.
 #'
@@ -2684,10 +2702,6 @@ Returns:
 #' For transfer learning use cases, make sure to read the
 #' [guide to transfer learning & fine-tuning](
 #' https://keras.io/guides/transfer_learning/).
-#'
-#' # Reference
-#' - [EfficientNetV2: Smaller Models and Faster Training](
-#' https://arxiv.org/abs/2104.00298) (ICML 2021)
 #'
 #' # Note
 #' each Keras Application expects a specific kind of input preprocessing.
@@ -2824,6 +2838,11 @@ Returns:
 #' Instantiates the EfficientNetV2B3 architecture.
 #'
 #' @description
+#'
+#' # Reference
+#' - [EfficientNetV2: Smaller Models and Faster Training](
+#'     https://arxiv.org/abs/2104.00298) (ICML 2021)
+#'
 #' This function returns a Keras image classification model,
 #' optionally loaded with weights pre-trained on ImageNet.
 #'
@@ -2834,10 +2853,6 @@ Returns:
 #' For transfer learning use cases, make sure to read the
 #' [guide to transfer learning & fine-tuning](
 #' https://keras.io/guides/transfer_learning/).
-#'
-#' # Reference
-#' - [EfficientNetV2: Smaller Models and Faster Training](
-#' https://arxiv.org/abs/2104.00298) (ICML 2021)
 #'
 #' # Note
 #' each Keras Application expects a specific kind of input preprocessing.
@@ -2974,6 +2989,11 @@ Returns:
 #' Instantiates the EfficientNetV2L architecture.
 #'
 #' @description
+#'
+#' # Reference
+#' - [EfficientNetV2: Smaller Models and Faster Training](
+#'     https://arxiv.org/abs/2104.00298) (ICML 2021)
+#'
 #' This function returns a Keras image classification model,
 #' optionally loaded with weights pre-trained on ImageNet.
 #'
@@ -2984,10 +3004,6 @@ Returns:
 #' For transfer learning use cases, make sure to read the
 #' [guide to transfer learning & fine-tuning](
 #' https://keras.io/guides/transfer_learning/).
-#'
-#' # Reference
-#' - [EfficientNetV2: Smaller Models and Faster Training](
-#' https://arxiv.org/abs/2104.00298) (ICML 2021)
 #'
 #' # Note
 #' each Keras Application expects a specific kind of input preprocessing.
@@ -3124,6 +3140,11 @@ Returns:
 #' Instantiates the EfficientNetV2M architecture.
 #'
 #' @description
+#'
+#' # Reference
+#' - [EfficientNetV2: Smaller Models and Faster Training](
+#'     https://arxiv.org/abs/2104.00298) (ICML 2021)
+#'
 #' This function returns a Keras image classification model,
 #' optionally loaded with weights pre-trained on ImageNet.
 #'
@@ -3134,10 +3155,6 @@ Returns:
 #' For transfer learning use cases, make sure to read the
 #' [guide to transfer learning & fine-tuning](
 #' https://keras.io/guides/transfer_learning/).
-#'
-#' # Reference
-#' - [EfficientNetV2: Smaller Models and Faster Training](
-#' https://arxiv.org/abs/2104.00298) (ICML 2021)
 #'
 #' # Note
 #' each Keras Application expects a specific kind of input preprocessing.
@@ -3274,6 +3291,11 @@ Returns:
 #' Instantiates the EfficientNetV2S architecture.
 #'
 #' @description
+#'
+#' # Reference
+#' - [EfficientNetV2: Smaller Models and Faster Training](
+#'     https://arxiv.org/abs/2104.00298) (ICML 2021)
+#'
 #' This function returns a Keras image classification model,
 #' optionally loaded with weights pre-trained on ImageNet.
 #'
@@ -3284,10 +3306,6 @@ Returns:
 #' For transfer learning use cases, make sure to read the
 #' [guide to transfer learning & fine-tuning](
 #' https://keras.io/guides/transfer_learning/).
-#'
-#' # Reference
-#' - [EfficientNetV2: Smaller Models and Faster Training](
-#' https://arxiv.org/abs/2104.00298) (ICML 2021)
 #'
 #' # Note
 #' each Keras Application expects a specific kind of input preprocessing.
@@ -3423,6 +3441,12 @@ r"-(Instantiates the Inception-ResNet v2 architecture.
 #' Instantiates the Inception-ResNet v2 architecture.
 #'
 #' @description
+#'
+#' # Reference
+#' - [Inception-v4, Inception-ResNet and the Impact of
+#'    Residual Connections on Learning](https://arxiv.org/abs/1602.07261)
+#'   (AAAI 2017)
+#'
 #' This function returns a Keras image classification model,
 #' optionally loaded with weights pre-trained on ImageNet.
 #'
@@ -3433,11 +3457,6 @@ r"-(Instantiates the Inception-ResNet v2 architecture.
 #' For transfer learning use cases, make sure to read the
 #' [guide to transfer learning & fine-tuning](
 #'   https://keras.io/guides/transfer_learning/).
-#'
-#' # Reference
-#' - [Inception-v4, Inception-ResNet and the Impact of
-#'  Residual Connections on Learning](https://arxiv.org/abs/1602.07261)
-#' (AAAI 2017)
 #'
 #' # Note
 #' each Keras Application expects a specific kind of
@@ -3569,6 +3588,11 @@ r"-(Instantiates the Inception v3 architecture.
 #' Instantiates the Inception v3 architecture.
 #'
 #' @description
+#'
+#' # Reference
+#' - [Rethinking the Inception Architecture for Computer Vision](
+#'     http://arxiv.org/abs/1512.00567) (CVPR 2016)
+#'
 #' This function returns a Keras image classification model,
 #' optionally loaded with weights pre-trained on ImageNet.
 #'
@@ -3579,10 +3603,6 @@ r"-(Instantiates the Inception v3 architecture.
 #' For transfer learning use cases, make sure to read the
 #' [guide to transfer learning & fine-tuning](
 #'   https://keras.io/guides/transfer_learning/).
-#'
-#' # Reference
-#' - [Rethinking the Inception Architecture for Computer Vision](
-#' http://arxiv.org/abs/1512.00567) (CVPR 2016)
 #'
 #' # Note
 #' each Keras Application expects a specific kind of input preprocessing.
@@ -3725,6 +3745,12 @@ r"-(Instantiates the MobileNet architecture.
 #' Instantiates the MobileNet architecture.
 #'
 #' @description
+#'
+#' # Reference
+#' - [MobileNets: Efficient Convolutional Neural Networks
+#'    for Mobile Vision Applications](
+#'     https://arxiv.org/abs/1704.04861)
+#'
 #' This function returns a Keras image classification model,
 #' optionally loaded with weights pre-trained on ImageNet.
 #'
@@ -3735,11 +3761,6 @@ r"-(Instantiates the MobileNet architecture.
 #' For transfer learning use cases, make sure to read the
 #' [guide to transfer learning & fine-tuning](
 #' https://keras.io/guides/transfer_learning/).
-#'
-#' # Reference
-#' - [MobileNets: Efficient Convolutional Neural Networks
-#' for Mobile Vision Applications](
-#'  https://arxiv.org/abs/1704.04861)
 #'
 #' # Note
 #' each Keras Application expects a specific kind of input preprocessing.
@@ -3905,6 +3926,10 @@ r"-(Instantiates the MobileNetV2 architecture.
 #' than 32 x 32, with larger image sizes
 #' offering better performance.
 #'
+#' # Reference
+#' - [MobileNetV2: Inverted Residuals and Linear Bottlenecks](
+#'     https://arxiv.org/abs/1801.04381) (CVPR 2018)
+#'
 #' This function returns a Keras image classification model,
 #' optionally loaded with weights pre-trained on ImageNet.
 #'
@@ -3915,10 +3940,6 @@ r"-(Instantiates the MobileNetV2 architecture.
 #' For transfer learning use cases, make sure to read the
 #' [guide to transfer learning & fine-tuning](
 #'   https://keras.io/guides/transfer_learning/).
-#'
-#' # Reference
-#' - [MobileNetV2: Inverted Residuals and Linear Bottlenecks](
-#' https://arxiv.org/abs/1801.04381) (CVPR 2018)
 #'
 #' # Note
 #' each Keras Application expects a specific kind of input preprocessing.
@@ -4100,6 +4121,11 @@ Returns:
 #' Instantiates the MobileNetV3Large architecture.
 #'
 #' @description
+#'
+#' # Reference
+#' - [Searching for MobileNetV3](
+#'     https://arxiv.org/pdf/1905.02244.pdf) (ICCV 2019)
+#'
 #' The following table describes the performance of MobileNets v3:
 #' ------------------------------------------------------------------------
 #' MACs stands for Multiply Adds
@@ -4120,10 +4146,6 @@ Returns:
 #' For transfer learning use cases, make sure to read the
 #' [guide to transfer learning & fine-tuning](
 #' https://keras.io/guides/transfer_learning/).
-#'
-#' # Reference
-#' - [Searching for MobileNetV3](
-#' https://arxiv.org/pdf/1905.02244.pdf) (ICCV 2019)
 #'
 #' # Note
 #' each Keras Application expects a specific kind of input preprocessing.
@@ -4332,6 +4354,11 @@ Returns:
 #' Instantiates the MobileNetV3Small architecture.
 #'
 #' @description
+#'
+#' # Reference
+#' - [Searching for MobileNetV3](
+#'     https://arxiv.org/pdf/1905.02244.pdf) (ICCV 2019)
+#'
 #' The following table describes the performance of MobileNets v3:
 #' ------------------------------------------------------------------------
 #' MACs stands for Multiply Adds
@@ -4352,10 +4379,6 @@ Returns:
 #' For transfer learning use cases, make sure to read the
 #' [guide to transfer learning & fine-tuning](
 #' https://keras.io/guides/transfer_learning/).
-#'
-#' # Reference
-#' - [Searching for MobileNetV3](
-#' https://arxiv.org/pdf/1905.02244.pdf) (ICCV 2019)
 #'
 #' # Note
 #' each Keras Application expects a specific kind of input preprocessing.
@@ -4511,13 +4534,14 @@ r"-(Instantiates a NASNet model in ImageNet mode.
 #' Instantiates a NASNet model in ImageNet mode.
 #'
 #' @description
-#' Optionally loads weights pre-trained on ImageNet.
-#' Note that the data format convention used by the model is
-#' the one specified in your Keras config at `~/.keras/keras.json`.
 #'
 #' # Reference
 #' - [Learning Transferable Architectures for Scalable Image Recognition](
-#' https://arxiv.org/abs/1707.07012) (CVPR 2018)
+#'     https://arxiv.org/abs/1707.07012) (CVPR 2018)
+#'
+#' Optionally loads weights pre-trained on ImageNet.
+#' Note that the data format convention used by the model is
+#' the one specified in your Keras config at `~/.keras/keras.json`.
 #'
 #' # Note
 #' each Keras Application expects a specific kind of input preprocessing.
@@ -4635,13 +4659,14 @@ r"-(Instantiates a Mobile NASNet model in ImageNet mode.
 #' Instantiates a Mobile NASNet model in ImageNet mode.
 #'
 #' @description
-#' Optionally loads weights pre-trained on ImageNet.
-#' Note that the data format convention used by the model is
-#' the one specified in your Keras config at `~/.keras/keras.json`.
 #'
 #' # Reference
 #' - [Learning Transferable Architectures for Scalable Image Recognition](
-#' https://arxiv.org/abs/1707.07012) (CVPR 2018)
+#'     https://arxiv.org/abs/1707.07012) (CVPR 2018)
+#'
+#' Optionally loads weights pre-trained on ImageNet.
+#' Note that the data format convention used by the model is
+#' the one specified in your Keras config at `~/.keras/keras.json`.
 #'
 #' # Note
 #' each Keras Application expects a specific kind of input preprocessing.
@@ -4759,16 +4784,17 @@ Returns:
 #' Instantiates the ResNet101 architecture.
 #'
 #' @description
+#'
+#' # Reference
+#' - [Deep Residual Learning for Image Recognition](
+#'     https://arxiv.org/abs/1512.03385) (CVPR 2015)
+#'
 #' For image classification use cases, see [this page for detailed examples](
 #'     https://keras.io/api/applications/#usage-examples-for-image-classification-models).
 #'
 #' For transfer learning use cases, make sure to read the
 #' [guide to transfer learning & fine-tuning](
 #'     https://keras.io/guides/transfer_learning/).
-#'
-#' # Reference
-#' - [Deep Residual Learning for Image Recognition](
-#' https://arxiv.org/abs/1512.03385) (CVPR 2015)
 #'
 #' # Note
 #' each Keras Application expects a specific kind of input preprocessing.
@@ -4883,16 +4909,17 @@ Returns:
 #' Instantiates the ResNet152 architecture.
 #'
 #' @description
+#'
+#' # Reference
+#' - [Deep Residual Learning for Image Recognition](
+#'     https://arxiv.org/abs/1512.03385) (CVPR 2015)
+#'
 #' For image classification use cases, see [this page for detailed examples](
 #'     https://keras.io/api/applications/#usage-examples-for-image-classification-models).
 #'
 #' For transfer learning use cases, make sure to read the
 #' [guide to transfer learning & fine-tuning](
 #'     https://keras.io/guides/transfer_learning/).
-#'
-#' # Reference
-#' - [Deep Residual Learning for Image Recognition](
-#' https://arxiv.org/abs/1512.03385) (CVPR 2015)
 #'
 #' # Note
 #' each Keras Application expects a specific kind of input preprocessing.
@@ -5007,16 +5034,17 @@ Returns:
 #' Instantiates the ResNet50 architecture.
 #'
 #' @description
+#'
+#' # Reference
+#' - [Deep Residual Learning for Image Recognition](
+#'     https://arxiv.org/abs/1512.03385) (CVPR 2015)
+#'
 #' For image classification use cases, see [this page for detailed examples](
 #'     https://keras.io/api/applications/#usage-examples-for-image-classification-models).
 #'
 #' For transfer learning use cases, make sure to read the
 #' [guide to transfer learning & fine-tuning](
 #'     https://keras.io/guides/transfer_learning/).
-#'
-#' # Reference
-#' - [Deep Residual Learning for Image Recognition](
-#' https://arxiv.org/abs/1512.03385) (CVPR 2015)
 #'
 #' # Note
 #' each Keras Application expects a specific kind of input preprocessing.
@@ -5130,16 +5158,17 @@ Returns:
 #' Instantiates the ResNet101V2 architecture.
 #'
 #' @description
+#'
+#' # Reference
+#' - [Identity Mappings in Deep Residual Networks](
+#'     https://arxiv.org/abs/1603.05027) (CVPR 2016)
+#'
 #' For image classification use cases, see [this page for detailed examples](
 #'     https://keras.io/api/applications/#usage-examples-for-image-classification-models).
 #'
 #' For transfer learning use cases, make sure to read the
 #' [guide to transfer learning & fine-tuning](
 #'     https://keras.io/guides/transfer_learning/).
-#'
-#' # Reference
-#' - [Identity Mappings in Deep Residual Networks](
-#' https://arxiv.org/abs/1603.05027) (CVPR 2016)
 #'
 #' # Note
 #' each Keras Application expects a specific kind of input preprocessing.
@@ -5252,16 +5281,17 @@ Returns:
 #' Instantiates the ResNet152V2 architecture.
 #'
 #' @description
+#'
+#' # Reference
+#' - [Identity Mappings in Deep Residual Networks](
+#'     https://arxiv.org/abs/1603.05027) (CVPR 2016)
+#'
 #' For image classification use cases, see [this page for detailed examples](
 #'     https://keras.io/api/applications/#usage-examples-for-image-classification-models).
 #'
 #' For transfer learning use cases, make sure to read the
 #' [guide to transfer learning & fine-tuning](
 #'     https://keras.io/guides/transfer_learning/).
-#'
-#' # Reference
-#' - [Identity Mappings in Deep Residual Networks](
-#' https://arxiv.org/abs/1603.05027) (CVPR 2016)
 #'
 #' # Note
 #' each Keras Application expects a specific kind of input preprocessing.
@@ -5374,16 +5404,17 @@ Returns:
 #' Instantiates the ResNet50V2 architecture.
 #'
 #' @description
+#'
+#' # Reference
+#' - [Identity Mappings in Deep Residual Networks](
+#'     https://arxiv.org/abs/1603.05027) (CVPR 2016)
+#'
 #' For image classification use cases, see [this page for detailed examples](
 #'     https://keras.io/api/applications/#usage-examples-for-image-classification-models).
 #'
 #' For transfer learning use cases, make sure to read the
 #' [guide to transfer learning & fine-tuning](
 #'     https://keras.io/guides/transfer_learning/).
-#'
-#' # Reference
-#' - [Identity Mappings in Deep Residual Networks](
-#' https://arxiv.org/abs/1603.05027) (CVPR 2016)
 #'
 #' # Note
 #' each Keras Application expects a specific kind of input preprocessing.
@@ -5507,6 +5538,9 @@ r"-(Instantiates the VGG16 model.
 #' Instantiates the VGG16 model.
 #'
 #' @description
+#'
+#' # Reference
+#' - [Very Deep Convolutional Networks for Large-Scale Image Recognition](
 #' https://arxiv.org/abs/1409.1556) (ICLR 2015)
 #'
 #' For image classification use cases, see
@@ -5518,9 +5552,6 @@ r"-(Instantiates the VGG16 model.
 #'   https://keras.io/guides/transfer_learning/).
 #'
 #' The default input size for this model is 224x224.
-#'
-#' # Reference
-#' - [Very Deep Convolutional Networks for Large-Scale Image Recognition](
 #'
 #' # Note
 #' each Keras Application expects a specific kind of input preprocessing.
@@ -5652,6 +5683,9 @@ r"-(Instantiates the VGG19 model.
 #' Instantiates the VGG19 model.
 #'
 #' @description
+#'
+#' # Reference
+#' - [Very Deep Convolutional Networks for Large-Scale Image Recognition](
 #' https://arxiv.org/abs/1409.1556) (ICLR 2015)
 #'
 #' For image classification use cases, see
@@ -5663,9 +5697,6 @@ r"-(Instantiates the VGG19 model.
 #'   https://keras.io/guides/transfer_learning/).
 #'
 #' The default input size for this model is 224x224.
-#'
-#' # Reference
-#' - [Very Deep Convolutional Networks for Large-Scale Image Recognition](
 #'
 #' # Note
 #' each Keras Application expects a specific kind of input preprocessing.
@@ -5793,6 +5824,11 @@ r"-(Instantiates the Xception architecture.
 #' Instantiates the Xception architecture.
 #'
 #' @description
+#'
+#' # Reference
+#' - [Xception: Deep Learning with Depthwise Separable Convolutions](
+#'     https://arxiv.org/abs/1610.02357) (CVPR 2017)
+#'
 #' For image classification use cases, see
 #' [this page for detailed examples](
 #'   https://keras.io/api/applications/#usage-examples-for-image-classification-models).
@@ -5802,10 +5838,6 @@ r"-(Instantiates the Xception architecture.
 #'   https://keras.io/guides/transfer_learning/).
 #'
 #' The default input image size for this model is 299x299.
-#'
-#' # Reference
-#' - [Xception: Deep Learning with Depthwise Separable Convolutions](
-#' https://arxiv.org/abs/1610.02357) (CVPR 2017)
 #'
 #' # Note
 #' each Keras Application expects a specific kind of input preprocessing.

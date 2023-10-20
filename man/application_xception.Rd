@@ -59,6 +59,13 @@ layer.  When loading pretrained weights, \code{classifier_activation} can
 only be \code{None} or \code{"softmax"}.}
 }
 \description{
+Instantiates the Xception architecture.
+}
+\section{Reference}{
+\itemize{
+\item \href{https://arxiv.org/abs/1610.02357}{Xception: Deep Learning with Depthwise Separable Convolutions} (CVPR 2017)
+}
+
 For image classification use cases, see
 \href{https://keras.io/api/applications/#usage-examples-for-image-classification-models}{this page for detailed examples}.
 
@@ -66,11 +73,6 @@ For transfer learning use cases, make sure to read the
 \href{https://keras.io/guides/transfer_learning/}{guide to transfer learning & fine-tuning}.
 
 The default input image size for this model is 299x299.
-}
-\section{Reference}{
-\itemize{
-\item \href{https://arxiv.org/abs/1610.02357}{Xception: Deep Learning with Depthwise Separable Convolutions} (CVPR 2017)
-}
 }
 
 \section{Note}{

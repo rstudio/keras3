@@ -315,7 +315,7 @@ x
 make_r_fn("keras.layers.PReLU")
 
 mk_export("keras.layers.PReLU")
-
+mk_export("keras.applications.VGG16")
 
 
 roxygen2::parse_file("/Users/tomasz/github/rstudio/keras/R/autogen-layers-core.R") -> r

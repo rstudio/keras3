@@ -58,7 +58,12 @@ layer.  When loading pretrained weights, \code{classifier_activation}
 can only be \code{None} or \code{"softmax"}.}
 }
 \description{
-https://arxiv.org/abs/1409.1556) (ICLR 2015)
+Instantiates the VGG16 model.
+}
+\section{Reference}{
+\itemize{
+\item \href{https://arxiv.org/abs/1409.1556}{Very Deep Convolutional Networks for Large-Scale Image Recognition} (ICLR 2015)
+}
 
 For image classification use cases, see
 \href{https://keras.io/api/applications/#usage-examples-for-image-classification-models}{this page for detailed examples}.
@@ -67,11 +72,6 @@ For transfer learning use cases, make sure to read the
 \href{https://keras.io/guides/transfer_learning/}{guide to transfer learning & fine-tuning}.
 
 The default input size for this model is 224x224.
-}
-\section{Reference}{
-\itemize{
-\item \link{Very Deep Convolutional Networks for Large-Scale Image Recognition}(
-}
 }
 
 \section{Note}{
