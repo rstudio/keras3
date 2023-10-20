@@ -25,11 +25,11 @@ It defaults to the \code{image_data_format} value found in your
 Keras config file at \verb{~/.keras/keras.json}.
 If you never set it, then it will be \code{"channels_last"}.}
 
-\item{seed}{initial seed for the random number generator}
+\item{seed}{Initial seed for the random number generator}
 
-\item{name}{name for the layer}
+\item{name}{String, name for the object}
 
-\item{dtype}{datatype (e.g., \code{"float32"})}
+\item{dtype}{datatype (e.g., \code{"float32"}).}
 }
 \description{
 This version performs the same function as Dropout, however, it drops

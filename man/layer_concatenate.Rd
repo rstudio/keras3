@@ -7,7 +7,9 @@
 layer_concatenate(inputs, ..., axis = -1L)
 }
 \arguments{
-\item{inputs, ...}{Inputs to merge.}
+\item{inputs}{layers to combine}
+
+\item{...}{Standard layer keyword arguments.}
 
 \item{axis}{Axis along which to concatenate.}
 }

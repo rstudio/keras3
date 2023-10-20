@@ -30,9 +30,9 @@ bin index. Defaults to \code{"int"}.}
 when using the TensorFlow backend. If \code{True}, returns
 a \code{SparseTensor} instead of a dense \code{Tensor}. Defaults to \code{False}.}
 
-\item{name}{name for the layer}
+\item{name}{String, name for the object}
 
-\item{dtype}{datatype (e.g., \code{"float32"})}
+\item{dtype}{datatype (e.g., \code{"float32"}).}
 
 \item{...}{Keyword arguments to construct a layer.}
 }

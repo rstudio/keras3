@@ -6,6 +6,9 @@
 \usage{
 k_conj(x)
 }
+\arguments{
+\item{x}{see description}
+}
 \description{
 Shorthand for \code{keras.ops.conjugate}.
 }

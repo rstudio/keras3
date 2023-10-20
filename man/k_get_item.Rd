@@ -6,6 +6,11 @@
 \usage{
 k_get_item(x, key)
 }
+\arguments{
+\item{x}{see description}
+
+\item{key}{see description}
+}
 \description{
 Return \code{x[key]}.
 }

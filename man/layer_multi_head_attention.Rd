@@ -24,6 +24,8 @@ layer_multi_head_attention(
 )
 }
 \arguments{
+\item{inputs}{see description}
+
 \item{num_heads}{Number of attention heads.}
 
 \item{key_dim}{Size of each attention head for query and key.}

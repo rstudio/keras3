@@ -6,6 +6,9 @@
 \usage{
 k_abs(x)
 }
+\arguments{
+\item{x}{see description}
+}
 \description{
 Shorthand for \code{keras.ops.absolute}.
 }

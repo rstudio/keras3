@@ -37,6 +37,8 @@ will be combined. One of \verb{\{"sum", "mul", "concat", "ave", None\}}.
 If \code{None}, the outputs will not be combined,
 they will be returned as a list. Defaults to \code{"concat"}.}
 
+\item{weights}{see description}
+
 \item{backward_layer}{Optional \code{keras.layers.RNN},
 or \code{keras.layers.Layer} instance to be used to handle
 backwards input processing.

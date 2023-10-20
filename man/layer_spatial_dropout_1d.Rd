@@ -11,11 +11,11 @@ layer_spatial_dropout_1d(object, rate, seed = NULL, name = NULL, dtype = NULL)
 
 \item{rate}{Float between 0 and 1. Fraction of the input units to drop.}
 
-\item{seed}{initial seed for the random number generator}
+\item{seed}{Initial seed for the random number generator}
 
-\item{name}{name for the layer}
+\item{name}{String, name for the object}
 
-\item{dtype}{datatype (e.g., \code{"float32"})}
+\item{dtype}{datatype (e.g., \code{"float32"}).}
 }
 \description{
 This layer performs the same function as Dropout, however, it drops

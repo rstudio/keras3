@@ -106,7 +106,7 @@ of unique tokens in the vocabulary is less than \code{max_tokens},
 resulting in a tensor of shape \verb{(batch_size, max_tokens)}
 regardless of vocabulary size. Defaults to \code{False}.}
 
-\item{name}{name for the layer}
+\item{name}{String, name for the object}
 
 \item{...}{Passed on to the Python callable}
 }

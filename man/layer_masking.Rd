@@ -9,6 +9,8 @@ layer_masking(object, mask_value = 0, ...)
 \arguments{
 \item{object}{Object to compose the layer with. A tensor, array, or sequential model.}
 
+\item{mask_value}{see description}
+
 \item{...}{Passed on to the Python callable}
 }
 \description{

@@ -25,9 +25,13 @@ via \code{model.export()},
 then the default endpoint name is \code{'serve'}. In other cases
 it may be named \code{'serving_default'}.}
 
-\item{name}{name for the layer}
+\item{call_training_endpoint}{see description}
 
-\item{dtype}{datatype (e.g., \code{"float32"})}
+\item{trainable}{see description}
+
+\item{name}{String, name for the object}
+
+\item{dtype}{datatype (e.g., \code{"float32"}).}
 }
 \description{
 Reload a Keras model/layer that was saved via SavedModel / ExportArchive.

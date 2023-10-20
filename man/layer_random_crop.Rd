@@ -23,7 +23,9 @@ layer_random_crop(
 
 \item{seed}{Integer. Used to create a random seed.}
 
-\item{name}{name for the layer}
+\item{data_format}{see description}
+
+\item{name}{String, name for the object}
 
 \item{...}{Base layer keyword arguments, such as
 \code{name} and \code{dtype}.}

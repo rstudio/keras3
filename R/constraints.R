@@ -38,7 +38,7 @@
 #'             kernel_constraint = CustomNonNegConstraint$new())
 #' }
 #'
-#' @seealso [constraints]
+#' @seealso [constraint_unitnorm] and related constraints
 #'
 #' @keywords internal
 #' @export
@@ -73,3 +73,6 @@ as_constraint <- function(constraint) {
     constraint
   }
 }
+
+
+# TODO: generate @family constraints, not @family constraint

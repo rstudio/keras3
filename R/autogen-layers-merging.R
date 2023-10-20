@@ -57,8 +57,8 @@ r"-(Performs elementwise addition operation.
 #' model = keras.models.Model(inputs=[input1, input2], outputs=out)
 #' ```
 #'
-#' @param ...
-#' @param inputs see description
+#' @param ... Passed on to the Python callable
+#' @param inputs layers to combine
 #'
 #' @export
 #' @family merging layers
@@ -140,8 +140,8 @@ r"-(Averages a list of inputs element-wise..
 #' model = keras.models.Model(inputs=[input1, input2], outputs=out)
 #' ```
 #'
-#' @param ...
-#' @param inputs see description
+#' @param ... Passed on to the Python callable
+#' @param inputs layers to combine
 #'
 #' @export
 #' @family merging layers
@@ -224,7 +224,7 @@ r"-(Concatenates a list of inputs.
 #'
 #' @param axis Axis along which to concatenate.
 #' @param ... Standard layer keyword arguments.
-#' @param inputs see description
+#' @param inputs layers to combine
 #'
 #' @export
 #' @family merging layers
@@ -337,7 +337,7 @@ r"-(Computes element-wise dot product of two tensors.
 #'     the output of the dot product is the cosine proximity
 #'     between the two samples.
 #' @param ... Standard layer keyword arguments.
-#' @param inputs see description
+#' @param inputs layers to combine
 #'
 #' @export
 #' @family merging layers
@@ -419,8 +419,8 @@ r"-(Computes element-wise maximum on a list of inputs.
 #' model = keras.models.Model(inputs=[input1, input2], outputs=out)
 #' ```
 #'
-#' @param ...
-#' @param inputs see description
+#' @param ... Passed on to the Python callable
+#' @param inputs layers to combine
 #'
 #' @export
 #' @family merging layers
@@ -502,8 +502,8 @@ r"-(Computes elementwise minimum on a list of inputs.
 #' model = keras.models.Model(inputs=[input1, input2], outputs=out)
 #' ```
 #'
-#' @param ...
-#' @param inputs see description
+#' @param ... Passed on to the Python callable
+#' @param inputs layers to combine
 #'
 #' @export
 #' @family merging layers
@@ -585,8 +585,8 @@ r"-(Performs elementwise multiplication.
 #' model = keras.models.Model(inputs=[input1, input2], outputs=out)
 #' ```
 #'
-#' @param ...
-#' @param inputs see description
+#' @param ... Passed on to the Python callable
+#' @param inputs layers to combine
 #'
 #' @export
 #' @family merging layers
@@ -670,8 +670,8 @@ r"-(Performs elementwise subtraction.
 #' model = keras.models.Model(inputs=[input1, input2], outputs=out)
 #' ```
 #'
-#' @param ...
-#' @param inputs see description
+#' @param ... Passed on to the Python callable
+#' @param inputs layers to combine
 #'
 #' @export
 #' @family merging layers

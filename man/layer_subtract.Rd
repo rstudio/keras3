@@ -7,7 +7,9 @@
 layer_subtract(inputs, ...)
 }
 \arguments{
-\item{inputs, ...}{Inputs to merge.}
+\item{inputs}{layers to combine}
+
+\item{...}{Passed on to the Python callable}
 }
 \description{
 It takes as input a list of tensors of size 2 both of the

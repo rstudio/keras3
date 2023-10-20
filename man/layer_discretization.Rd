@@ -63,9 +63,9 @@ and \code{"count"} output modes. Only supported with TensorFlow
 backend. If \code{True}, returns a \code{SparseTensor} instead of
 a dense \code{Tensor}. Defaults to \code{False}.}
 
-\item{dtype}{datatype (e.g., \code{"float32"})}
+\item{dtype}{datatype (e.g., \code{"float32"}).}
 
-\item{name}{name for the layer}
+\item{name}{String, name for the object}
 }
 \description{
 This layer will place each element of its input data into one of several

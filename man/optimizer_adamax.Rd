@@ -71,7 +71,7 @@ variables in-place). When using the built-in \code{fit()} training loop,
 this happens automatically after the last epoch,
 and you don't need to do anything.}
 
-\item{name}{name for the optimizer}
+\item{name}{String, name for the object}
 
 \item{...}{Passed on to the Python callable}
 

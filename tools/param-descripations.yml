@@ -11,9 +11,9 @@
   batch_shape: Shape, including the batch dim.
 
 # merging layers
-"keras.src.layers.merging.*":
-   ... : null
-   "inputs,...": "Inputs to merge"
+# "keras.src.layers.merging.*":
+#    ... : null
+#    "inputs,...": "Inputs to merge"
 
 "keras.layers.*":
   object: Object to compose the layer with. A tensor, array, or sequential model.
@@ -25,36 +25,50 @@
   dtype: datatype (e.g., `"float32"`).
   "...": Passed on to the Python callable
 
+# TODO: resolve presedence when multiple globs match
 
 keras.layers.Add:
-  inputs: see description
+  inputs: layers to combine
+  "...": unnamed arguments are combined with `inputs`. Named arguments are passed on as standard layer args.
 
 keras.layers.Average:
-  inputs: see description
+  inputs: layers to combine
+  "...": unnamed arguments are combined with `inputs`. Named arguments are passed on as standard layer args.
+
+keras.layers.Concatenate:
+  inputs: layers to combine
+  "...": unnamed arguments are combined with `inputs`. Named arguments are passed on as standard layer args.
+
+
+keras.layers.Subtract:
+  inputs: layers to combine
+  "...": unnamed arguments are combined with `inputs`. Named arguments are passed on as standard layer args.
+
+keras.layers.Minimum:
+  inputs: layers to combine
+  "...": unnamed arguments are combined with `inputs`. Named arguments are passed on as standard layer args.
+
+keras.layers.Multiply:
+  inputs: layers to combine
+  "...": unnamed arguments are combined with `inputs`. Named arguments are passed on as standard layer args.
+
+keras.layers.Maximum:
+  inputs: layers to combine
+  "...": unnamed arguments are combined with `inputs`. Named arguments are passed on as standard layer args.
+
+
+keras.layers.Dot:
+  inputs: layers to combine
+  "...": unnamed arguments are combined with `inputs`. Named arguments are passed on as standard layer args.
+
 
 keras.layers.Bidirectional:
   weights: see description
 
-keras.layers.Concatenate:
-  inputs: see description
-
-keras.layers.Dot:
-  inputs: see description
-
-keras.layers.Masking:
-  mask_value: see description
-
-keras.layers.Maximum:
-  inputs: see description
-
-keras.layers.Minimum:
-  inputs: see description
 
 keras.layers.MultiHeadAttention:
   inputs: see description
 
-keras.layers.Multiply:
-  inputs: see description
 
 keras.layers.RandomCrop:
   data_format: see description
@@ -63,8 +77,6 @@ keras.layers.RandomRotation:
   value_range: see description
   data_format: see description
 
-keras.layers.Subtract:
-  inputs: see description
 
 keras.layers.TFSMLayer:
   call_training_endpoint: see description
@@ -87,3 +99,5 @@ keras.ops.true_divide:
   x1: see description
   x2: see description
 
+keras.layers.Masking:
+  mask_value: see description

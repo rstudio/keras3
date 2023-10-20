@@ -103,7 +103,7 @@ Unrolling can speed-up a RNN,
 although it tends to be more memory-intensive.
 Unrolling is only suitable for short sequences.}
 
-\item{seed}{initial seed for the random number generator}
+\item{seed}{Initial seed for the random number generator}
 
 \item{...}{Passed on to the Python callable}
 }

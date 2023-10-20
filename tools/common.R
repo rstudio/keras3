@@ -105,7 +105,9 @@ split_docstring_into_sections <- function(docstring) {
       s |> str_trim("right") |> str_flatten("\n") |> trim()
     })
 
-  sections[unique(c(m))] # split() reorders
+  sections <- sections[unique(c(m))] # split() reorders
+
+  sections
 }
 
 
@@ -653,16 +655,13 @@ mk_export <- function(endpoint) {
   # crosscheck params with r_fn formals
 
 
-  local({
-
-  })
-  #
 
   local({
     if (length(undocumented_params <-
                setdiff(names(formals(r_fn)),
                        unlist(strsplit(names(params) %||% character(), ","))))) {
 
+      # if(endpoint == "keras.layers.Add") browser()
       maybe_add_params <- param_augment_registry %>%
         .[str_detect(endpoint, glob2rx(names(.))) |
             str_detect(paste0(module, ".", name), glob2rx(names(.)))] %>%
@@ -715,6 +714,10 @@ dump_keras_export <- function(doc, params, tags, r_name, r_fn) {
       sec <- str_flatten(c(glue("@{rd_sec}"), str_trim(sec)), "\n")
     doc[[rd_sec]] <- sec
   }
+
+  # r"---((?<!`)\[([0-9,\-\[\]]+)\](?!\())---"
+  r <- "(?<!`)\\[([0-9,\\-\\[\\]]+)\\](?!\\()"
+  # doc$description %<>% gsub(r, ., perl = TRUE)
 
   main <- lapply(names(doc), \(nm) {
     md_heading <- if (nm %in% c("description", "title", "details")) # "note"

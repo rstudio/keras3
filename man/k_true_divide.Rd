@@ -6,6 +6,11 @@
 \usage{
 k_true_divide(x1, x2)
 }
+\arguments{
+\item{x1}{see description}
+
+\item{x2}{see description}
+}
 \description{
 Alias for \code{keras.ops.divide}.
 }

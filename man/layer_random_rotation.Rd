@@ -56,6 +56,10 @@ The input is extended by the nearest pixel.}
 \item{fill_value}{a float represents the value to be filled outside
 the boundaries when \code{fill_mode="constant"}.}
 
+\item{value_range}{see description}
+
+\item{data_format}{see description}
+
 \item{...}{Passed on to the Python callable}
 }
 \description{

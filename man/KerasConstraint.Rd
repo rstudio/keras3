@@ -46,6 +46,6 @@ layer_dense(units = 32, input_shape = c(784),
 
 }
 \seealso{
-\link{constraints}
+\link{constraint_unitnorm} and related constraints
 }
 \keyword{internal}

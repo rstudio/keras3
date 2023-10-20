@@ -35,7 +35,7 @@ while \code{"channels_first"} corresponds to inputs with shape
 value found in your Keras config file at \verb{~/.keras/keras.json}.
 If you never set it, then it will be \code{"channels_last"}.}
 
-\item{name}{name for the layer}
+\item{name}{String, name for the object}
 
 \item{...}{Passed on to the Python callable}
 }

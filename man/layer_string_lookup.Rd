@@ -106,7 +106,7 @@ instead of a dense \code{Tensor}. Defaults to \code{False}.}
 \item{encoding}{Optional. The text encoding to use to interpret the input
 strings. Defaults to \code{"utf-8"}.}
 
-\item{name}{name for the layer}
+\item{name}{String, name for the object}
 
 \item{...}{Passed on to the Python callable}
 
