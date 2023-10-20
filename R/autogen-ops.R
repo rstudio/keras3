@@ -1793,7 +1793,7 @@ r"-(Average pooling operation.
 #'     A tensor of rank N+2, the result of the average pooling operation.
 #'
 #' @param inputs Tensor of rank N+2. `inputs` has shape
-#'     `(batch_size,)` + inputs_spatial_shape + (num_channels,)` if
+#'     `(batch_size,) + inputs_spatial_shape + (num_channels,)` if
 #'     `data_format="channels_last"`, or
 #'     `(batch_size, num_channels) + inputs_spatial_shape` if
 #'     `data_format="channels_first"`. Pooling happens over the spatial
@@ -2253,12 +2253,12 @@ r"-(General N-D depthwise convolution.
 #'     A tensor of rank N+2, the result of the depthwise conv operation.
 #'
 #' @param inputs Tensor of rank N+2. `inputs` has shape
-#'     `(batch_size,)` + inputs_spatial_shape + (num_channels,)` if
+#'     `(batch_size,) + inputs_spatial_shape + (num_channels,)` if
 #'     `data_format="channels_last"`, or
 #'     `(batch_size, num_channels) + inputs_spatial_shape` if
 #'     `data_format="channels_first"`.
 #' @param kernel Tensor of rank N+2. `kernel` has shape
-#'     [kernel_spatial_shape, num_input_channels, num_channels_multiplier],
+#'     `[kernel_spatial_shape, num_input_channels, num_channels_multiplier],`
 #'     `num_input_channels` should match the number of channels in
 #'     `inputs`.
 #' @param strides int or int tuple/list of `len(inputs_spatial_shape)`,
@@ -3123,12 +3123,12 @@ r"-(General N-D separable convolution.
 #'     A tensor of rank N+2, the result of the depthwise conv operation.
 #'
 #' @param inputs Tensor of rank N+2. `inputs` has shape
-#'     `(batch_size,)` + inputs_spatial_shape + (num_channels,)` if
+#'     `(batch_size,) + inputs_spatial_shape + (num_channels,)` if
 #'     `data_format="channels_last"`, or
 #'     `(batch_size, num_channels) + inputs_spatial_shape` if
 #'     `data_format="channels_first"`.
 #' @param depthwise_kernel Tensor of rank N+2. `depthwise_kernel` has shape
-#'     [kernel_spatial_shape, num_input_channels, num_channels_multiplier],
+#'     `[kernel_spatial_shape, num_input_channels, num_channels_multiplier],`
 #'     `num_input_channels` should match the number of channels in
 #'     `inputs`.
 #' @param pointwise_kernel Tensor of rank N+2. `pointwise_kernel` has shape

@@ -852,6 +852,9 @@ get_fixed_docstring <- function(endpoint) {
 
   switch %(% { endpoint
 
+    keras.ops.average_pool = `,`
+    keras.ops.depthwise_conv = `,`
+    keras.ops.separable_conv = `,`
     keras.ops.conv_transpose = replace(
       "`(batch_size,)` + inputs_spatial_shape ",
       "`(batch_size,) + inputs_spatial_shape ")
