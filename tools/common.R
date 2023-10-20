@@ -56,6 +56,7 @@ split_docstring_into_sections <- function(docstring) {
     str_split_lines() |> str_trim("right") |> str_flatten_lines()
 
   docstring <- docstring |> fence_in_examples_w_prompt_prefix()
+  docstring <- docstring |> backtick_not_links()
 
   for(h in known_section_headings) {
     # "Input shape:" not always on own line :*-(
@@ -160,7 +161,20 @@ fence_in_examples_w_prompt_prefix <- function(docstring) {
   docstring <- str_split_1(docstring, "\n") |> str_trim("right")
   docstring0 <- str_trim(docstring)
   in_code_block <- FALSE
-  for (i in seq_along(docstring)) {
+  i <- 0L
+  while(i < length(docstring)) {
+    i <- i + 1L
+
+    if(startsWith(docstring0[[i]], "```")) {
+      in_code_block <- TRUE
+      while(i < length(docstring0)) {
+        if (startsWith(docstring0[[i <- i + 1L]], "```")) {
+          in_code_block <- FALSE
+          break
+        }
+      }
+      next
+    }
 
     if (!in_code_block) {
       # not currently in a code block, look for the start of a code block
@@ -182,6 +196,9 @@ fence_in_examples_w_prompt_prefix <- function(docstring) {
         # tidy up example commands
       } else if(any(startsWith(docstring0[[i]], c(">>> ", "... ")))) {
         docstring[[i]] <- str_sub(docstring[[i]], 5L)
+      # } else if(docstring0[[i]] == "```") {
+      #   # code block closed in docstring
+      #   in_code_block <- FALSE
       } else
         # tidy up example output
         docstring[[i]] <- str_c("# ", docstring[[i]])
@@ -193,6 +210,78 @@ fence_in_examples_w_prompt_prefix <- function(docstring) {
   docstring <- str_flatten(docstring, collapse = "\n")
 
 }
+
+
+str_split_1_inclusive <- function(string, pattern) {
+  unlist(stringi::stri_split_regex(
+    string, pattern =
+      paste0("(?<=(", pattern, "))",  # match before pattern
+             "|",                     # or
+             "(?=(", pattern, "))")))  # match after pattern
+}
+
+
+backtick_not_links <- function(d) {
+
+  d %>%
+    str_split_1_inclusive("\n```") %>%
+    as.list() %>%
+    {
+      # mark prose and code sections.
+      type <- "prose"
+      for(i in seq_along(.)) {
+        if(.[[i]] == "\n```") {
+          names(.)[i] <- "delim"
+          type <- switch(type, prose = "code", code = "prose")
+          next
+        }
+
+        if(type == "prose") {
+          s <- str_split_1_inclusive(.[[i]], "`")
+          stype <- "prose"
+          for(si in seq_along(s)) {
+            if(s[[si]] == "`") {
+              names(s)[si] <- "delim"
+              stype <- switch(stype, prose = "code", code = "prose")
+              next
+            }
+            names(s)[si] <- stype
+          }
+          .[i] <- list(s)
+          next
+        }
+        if(type == "code")
+          names(.)[i] <- "code"
+      }
+      . <- unlist(.)
+      names(.) <- gsub("NA.", "", names(.), fixed = TRUE)
+      .
+    } %>% {
+      i <- which(names(.) == "prose")
+      names(.) <- NULL
+      .[i] <- .backtick_not_links(.[i])
+      .
+    } %>%
+    str_flatten()
+
+}
+
+
+.backtick_not_links <- function(x) {
+  # if(any(str_detect(x, fixed("["))))
+  #   browser()
+  re <- regex(comments = TRUE, pattern = r"--(
+      (                 # Open capture group for main pattern
+        \[              # Match an opening square bracket
+        [0-9,\[\]\ -><.]+  # Capture numbers, brackets, and specific symbols
+        \]              # Match a closing square bracket
+      )                 # Close capture group
+      (?!\()            # Lookahead to ensure no opening parenthesis follows
+    )--")
+  rep <- r"--(`\1`)--"
+  str_replace_all(x, re, rep)
+}
+
 
 
 # ---- roxygen -----
@@ -715,9 +804,13 @@ dump_keras_export <- function(doc, params, tags, r_name, r_fn) {
     doc[[rd_sec]] <- sec
   }
 
+      # [^(]             # is not followed by an opening parens (indicating a md link)
   # r"---((?<!`)\[([0-9,\-\[\]]+)\](?!\())---"
-  r <- "(?<!`)\\[([0-9,\\-\\[\\]]+)\\](?!\\()"
-  # doc$description %<>% gsub(r, ., perl = TRUE)
+  # m <- "(?<!`)\\[([0-9,\\- >.\\[\\]]+)\\](?!\\()"
+  # r <- "`\\[\\1\\]`"
+  # doc$description %<>% gsub(m, r, ., perl = TRUE)
+
+
 
   main <- lapply(names(doc), \(nm) {
     md_heading <- if (nm %in% c("description", "title", "details")) # "note"
@@ -765,3 +858,32 @@ mk_layer_activation_selu <- function() {
 
   selu
 }
+
+
+# rx <- regex(comments = TRUE, pattern = r"--(
+#       `?                # Optional backtick at the start
+#       (                 # Open capture group for main pattern
+#         \[              # Match an opening square bracket
+#         [0-9,\[\]\ -><.]+  # Capture numbers, brackets, and specific symbols
+#         \]              # Match a closing square bracket
+#       )                 # Close capture group
+#       `?                # Optional backtick at the end
+#       (?!\()            # Lookahead to ensure no opening parenthesis follows
+#     )--")
+# rep <- r"--(`\1`)--"
+# doc$description %<>% str_replace_all(rx, rep)
+
+#
+# x <- "e.g. `[[4], [20]] -> [[0.25, 0.1], [0.6, -0.2]]`"
+# rx <- regex(comments = TRUE, r"--(
+#       `?(            # open capture group, without backtick
+#       \[             # opening bracket, maybe starts with a backtick
+#       [0-9,\[\]\ -><.]+  # anything that looks like a number range
+#       \]
+#       )             # close capture group
+#       `?             # closing bracket maybe w backtick
+#       (?!\()           # is not followed by an opening parens indicating a md link
+#   )--")
+# rep <- "`\\1`"
+# str_replace_all(x, rx, rep)
+

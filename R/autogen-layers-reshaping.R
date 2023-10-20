@@ -664,10 +664,10 @@ r"-(Upsampling layer for 1D inputs.
 #' #   [ 3.  4.  5.]]
 #' ```
 #'
-#'  [[ 6.  7.  8.]
-#'   [ 6.  7.  8.]
-#'   [ 9. 10. 11.]
-#'   [ 9. 10. 11.]]]
+#'  `[[ 6.  7.  8.]`
+#'   `[ 6.  7.  8.]`
+#'   `[ 9. 10. 11.]`
+#'   `[ 9. 10. 11.]]]`
 #'
 #' # Input Shape
 #' 3D tensor with shape: `(batch_size, steps, features)`.

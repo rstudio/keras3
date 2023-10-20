@@ -317,6 +317,41 @@ make_r_fn("keras.layers.PReLU")
 mk_export("keras.layers.PReLU")
 
 
+
+roxygen2::parse_file("/Users/tomasz/github/rstudio/keras/R/autogen-layers-core.R") -> r
+
+# TODO: UpSampling1D needs fixup
+
+r[[3]] -> r
+
+r
+r$tags[[2]]
+
+
+
+
+mk_export("keras.layers.LayerNormalization")$doc$description -> d
+
+
+str()
+
+  str_sppulit_1(fixed("\n```")) %>%
+  {
+    length(.) <- ceiling(length(.)/2)*2 # maybe resize to multiple of 2
+    dim(.) <- c(2, length(.) / 2)
+    rownames(.) <- c("prose", "code")
+    .
+  } %>% {
+    p <- .["prose",]
+
+  }
+  print()
+  str()
+
+
+
+
+
 #
 #
 # l <- keras$layers$PReLU

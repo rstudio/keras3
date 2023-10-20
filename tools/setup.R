@@ -60,8 +60,8 @@ str_split1_on_first <- function(x, pattern, ...) {
   regmatches(x, regexpr(pattern, x, ...), invert = TRUE)[[1L]]
 }
 
-str_flatten_lines <- function(...) {
-  stringr::str_flatten(c(...), collapse = "\n")
+str_flatten_lines <- function(..., na.rm = FALSE) {
+  stringr::str_flatten(c(...), na.rm = na.rm, collapse = "\n")
 }
 
 str_split_lines <- function(...) {

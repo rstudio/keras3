@@ -99,7 +99,7 @@ Returns:
 #' Each Keras Application expects a specific kind of input preprocessing.
 #' For ConvNeXt, preprocessing is included in the model using a `Normalization`
 #' layer.  ConvNeXt models expect their inputs to be float or uint8 tensors of
-#' pixels with values in the [0-255] range.
+#' pixels with values in the `[0-255]` range.
 #'
 #' When calling the `summary()` method after instantiating a ConvNeXt model,
 #' prefer setting the `expand_nested` argument `summary()` to `True` to better
@@ -253,7 +253,7 @@ Returns:
 #' Each Keras Application expects a specific kind of input preprocessing.
 #' For ConvNeXt, preprocessing is included in the model using a `Normalization`
 #' layer.  ConvNeXt models expect their inputs to be float or uint8 tensors of
-#' pixels with values in the [0-255] range.
+#' pixels with values in the `[0-255]` range.
 #'
 #' When calling the `summary()` method after instantiating a ConvNeXt model,
 #' prefer setting the `expand_nested` argument `summary()` to `True` to better
@@ -407,7 +407,7 @@ Returns:
 #' Each Keras Application expects a specific kind of input preprocessing.
 #' For ConvNeXt, preprocessing is included in the model using a `Normalization`
 #' layer.  ConvNeXt models expect their inputs to be float or uint8 tensors of
-#' pixels with values in the [0-255] range.
+#' pixels with values in the `[0-255]` range.
 #'
 #' When calling the `summary()` method after instantiating a ConvNeXt model,
 #' prefer setting the `expand_nested` argument `summary()` to `True` to better
@@ -561,7 +561,7 @@ Returns:
 #' Each Keras Application expects a specific kind of input preprocessing.
 #' For ConvNeXt, preprocessing is included in the model using a `Normalization`
 #' layer.  ConvNeXt models expect their inputs to be float or uint8 tensors of
-#' pixels with values in the [0-255] range.
+#' pixels with values in the `[0-255]` range.
 #'
 #' When calling the `summary()` method after instantiating a ConvNeXt model,
 #' prefer setting the `expand_nested` argument `summary()` to `True` to better
@@ -715,7 +715,7 @@ Returns:
 #' Each Keras Application expects a specific kind of input preprocessing.
 #' For ConvNeXt, preprocessing is included in the model using a `Normalization`
 #' layer.  ConvNeXt models expect their inputs to be float or uint8 tensors of
-#' pixels with values in the [0-255] range.
+#' pixels with values in the `[0-255]` range.
 #'
 #' When calling the `summary()` method after instantiating a ConvNeXt model,
 #' prefer setting the `expand_nested` argument `summary()` to `True` to better

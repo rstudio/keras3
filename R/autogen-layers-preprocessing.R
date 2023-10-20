@@ -1770,13 +1770,11 @@ r"-(A preprocessing layer which randomly adjusts brightness during training.
 #' output = random_bright(image, training=True)
 #'
 #' # output will be int64 with 25.5 added to each channel and round down.
-#' ```python
-#' array([[[26.5, 27.5, 28.5]
-#' #             [29.5, 30.5, 31.5]]
-#' #            [[32.5, 33.5, 34.5]
-#' #             [35.5, 36.5, 37.5]]],
-#' #           shape=(2, 2, 3), dtype=int64)
-#' # ```
+#' >>> array([[[26.5, 27.5, 28.5]
+#'             [29.5, 30.5, 31.5]]
+#'            [[32.5, 33.5, 34.5]
+#'             [35.5, 36.5, 37.5]]],
+#'           shape=(2, 2, 3), dtype=int64)
 #' ```
 #'
 #' @param factor Float or a list/tuple of 2 floats between -1.0 and 1.0. The
