@@ -49,6 +49,11 @@ backend_normalize_shape <- function(shape) {
 
 #' Backcompat backend ops
 #'
+#' @param shape shape
+#' @param p p
+#' @param dtype dtype
+#' @param seed seed
+#'
 #' @export
 #' @rdname k_random_bernoulli
 k_random_binomial <-
@@ -131,5 +136,3 @@ k_backend <- function() keras$config$backend()
   if(missing(e2)) return(e1)
   NextMethod()
 }
-
-

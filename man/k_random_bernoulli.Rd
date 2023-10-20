@@ -9,6 +9,15 @@ k_random_binomial(shape, p = 0, dtype = NULL, seed = NULL)
 
 k_random_bernoulli(shape, p = 0, dtype = NULL, seed = NULL)
 }
+\arguments{
+\item{shape}{shape}
+
+\item{p}{p}
+
+\item{dtype}{dtype}
+
+\item{seed}{seed}
+}
 \description{
 Backcompat backend ops
 }
