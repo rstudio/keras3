@@ -28,6 +28,14 @@ install_keras <- function(...,
                                   packages = NULL) |>
     reticulate::virtualenv_python()
 
+  withr::local_path(dirname(python))
+  system2 <- reticulate:::system2t
+
+  # system2("python", "-m pip install keras-nightly tf-nightly")
+  # message("DONE!")
+  # return()
+
+
   # withr::local_dir(withr::local_tempdir())
   keras_team_keras_dir <- "~/github/keras-team/keras"
   # if(TRUE) {
@@ -39,9 +47,7 @@ install_keras <- function(...,
     withr::defer(unlink(keras_team_keras_dir, recursive = TRUE))
   }
   withr::local_dir(keras_team_keras_dir)
-  withr::local_path(dirname(python))
   # browser()
-  system2 <- reticulate:::system2t
   system2("git", "pull")
   system2("python", c("-m pip install -r requirements.txt")) # unpin tf-nightly for Python 3.12
   system2("python", c("-m pip uninstall -y keras keras-nightly"))
