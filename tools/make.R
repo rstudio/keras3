@@ -175,7 +175,7 @@ df <-
     # message(e)
     mk_export(e)
   }) |>
-  c(list(mk_layer_activation_selu())) |>
+  # c(list(mk_layer_activation_selu())) |>
   map(\(e) {
     # if(e$endpoint == "keras.activations.selu")
     #   browser()
