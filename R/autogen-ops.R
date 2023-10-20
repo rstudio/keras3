@@ -831,7 +831,7 @@ r"-(Expands the dimension of last axis into sequences of `sequence_length`.
 #' `num_sequences = 1 + (N - sequence_length) // sequence_stride`
 #'
 #' # Returns
-#' A tensor of sequences with shape [..., num_sequences, sequence_length].
+#' A tensor of sequences with shape `[..., num_sequences, sequence_length].`
 #'
 #' # Examples
 #' ```python
@@ -2156,12 +2156,12 @@ r"-(General N-D convolution transpose.
 #'     A tensor of rank N+2, the result of the conv operation.
 #'
 #' @param inputs Tensor of rank N+2. `inputs` has shape
-#'     `(batch_size,)` + inputs_spatial_shape + (num_channels,)` if
+#'     `(batch_size,) + inputs_spatial_shape + (num_channels,)` if
 #'     `data_format="channels_last"`, or
 #'     `(batch_size, num_channels) + inputs_spatial_shape` if
 #'     `data_format="channels_first"`.
 #' @param kernel Tensor of rank N+2. `kernel` has shape
-#'     [kernel_spatial_shape, num_output_channels, num_input_channels],
+#'     `[kernel_spatial_shape, num_output_channels, num_input_channels],`
 #'     `num_input_channels` should match the number of channels in
 #'     `inputs`.
 #' @param strides int or int tuple/list of `len(inputs_spatial_shape)`,

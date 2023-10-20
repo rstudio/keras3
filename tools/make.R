@@ -318,6 +318,8 @@ mk_export("keras.layers.PReLU")
 mk_export("keras.applications.VGG16")
 
 
+mk_export("keras.ops.conv_transpose")$dump |> cat()
+
 roxygen2::parse_file("/Users/tomasz/github/rstudio/keras/R/autogen-layers-core.R") -> r
 
 # TODO: UpSampling1D needs fixup

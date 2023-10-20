@@ -260,6 +260,7 @@ backtick_not_links <- function(d) {
       names(.) <- gsub("NA.", "", names(.), fixed = TRUE)
       .
     } %>% {
+      # browser()
       i <- which(names(.) == "prose")
       names(.) <- NULL
       .[i] <- .backtick_not_links(.[i])
@@ -272,12 +273,15 @@ backtick_not_links <- function(d) {
 
 .backtick_not_links <- function(x) {
   # if(any(str_detect(x, fixed("["))))
-  #   browser()
+    # browser()
+  #     [0-9a-zA-Z,\[\]\ -><.]+  # Capture numbers, brackets, and specific symbols
   re <- regex(comments = TRUE, pattern = r"--(
       (                 # Open capture group for main pattern
-        \[              # Match an opening square bracket
-        [0-9,\[\]\ -><.]+  # Capture numbers, brackets, and specific symbols
+      [^\ \n]*      # anything not a space or newline
+      \[              # Match an opening square bracket
+          .+            # capture anything greedily
         \]              # Match a closing square bracket
+      [^\ \n\(]*       #  # anything not a space or bounary or open parens
       )                 # Close capture group
       (?!\()            # Lookahead to ensure no opening parenthesis follows
     )--")
@@ -470,7 +474,7 @@ transformers_registry <-
 get_arg_transformers <- function(endpoint, py_obj = py_eval(endpoint), params = NULL) {
 
   if(is.null(params)) {
-    params <-  py_obj$`__doc__` |> trim() |>
+    params <-  get_fixed_docstring(endpoint) |> trim() |>
       split_docstring_into_sections() |>
       _$arguments |> parse_params_section()
   }
@@ -667,7 +671,7 @@ mk_export <- function(endpoint) {
   name <- py_obj$`__name__`
   module <- py_obj$`__module__`
   # browser()
-  docstring <- trim(py_obj$`__doc__` %||% "")
+  docstring <- get_fixed_docstring(endpoint)
   type <- keras_class_type(py_obj)
 
   doc <- split_docstring_into_sections(docstring)
@@ -862,6 +866,21 @@ mk_layer_activation_selu <- function() {
   selu
 }
 
+
+
+get_fixed_docstring <- function(endpoint) {
+
+  d <- inspect$getdoc(py_eval(endpoint))
+  replace <- function(old_txt, new_txt) {
+    d <<- stringi::stri_replace_first_fixed(d, old_txt, new_txt)
+  }
+
+  switch(endpoint,
+    "keras.ops.conv_transpose" = replace("`(batch_size,)` + inputs_spatial_shape ",
+                                         "`(batch_size,) + inputs_spatial_shape "),
+    NULL)
+  trim(d %||% "")
+}
 
 # rx <- regex(comments = TRUE, pattern = r"--(
 #       `?                # Optional backtick at the start
