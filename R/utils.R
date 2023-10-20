@@ -314,8 +314,30 @@ keras_array <- function(x, dtype = NULL) {
   x$astype(dtype = dtype, order = "C", copy = FALSE)
 }
 
+
+#' Return the default float type, as a string.
+#'
+#' @description
+#' E.g. `'float16'`, `'float32'`, `'float64'`.
+#'
+#' # Returns
+#' String, the current default float type.
+#'
+#' # Examples
+#' ```python
+#' keras.config.floatx()
+#' # 'float32'
+#' ```
+#'
 #' @export
-k_floatx <- function(x) {
+#' @seealso
+#' + <https://www.tensorflow.org/api_docs/python/tf/keras/config/floatx>
+k_floatx <- function() {
+  keras$config$floatx()
+}
+
+
+function(x) {
   # k_config_floatx?
   if(missing(x))
     keras$config$floatx()
