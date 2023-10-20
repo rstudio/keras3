@@ -817,7 +817,7 @@ r"-(Callback that prints metrics to stdout.
 #' @seealso
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/callbacks/ProgbarLogger>
 callback_progbar_logger <-
-function ()
+function (count_mode = NULL)
 {
     args <- capture_args2(NULL)
     do.call(keras$callbacks$ProgbarLogger, args)

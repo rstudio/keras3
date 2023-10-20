@@ -150,7 +150,7 @@ optimizer_adadelta <-
 function (learning_rate = 0.001, rho = 0.95, epsilon = 1e-07,
     weight_decay = NULL, clipnorm = NULL, clipvalue = NULL, global_clipnorm = NULL,
     use_ema = FALSE, ema_momentum = 0.99, ema_overwrite_frequency = NULL,
-    name = "adadelta", ...)
+    name = "adadelta", ..., loss_scale_factor = NULL)
 {
     args <- capture_args2(list(ema_overwrite_frequency = as_integer))
     do.call(keras$optimizers$Adadelta, args)
@@ -312,7 +312,7 @@ function (learning_rate = 0.001, beta_2_decay = -0.8, epsilon_1 = 1e-30,
     epsilon_2 = 0.001, clip_threshold = 1, relative_step = TRUE,
     weight_decay = NULL, clipnorm = NULL, clipvalue = NULL, global_clipnorm = NULL,
     use_ema = FALSE, ema_momentum = 0.99, ema_overwrite_frequency = NULL,
-    name = "adafactor", ...)
+    name = "adafactor", ..., loss_scale_factor = NULL)
 {
     args <- capture_args2(list(ema_overwrite_frequency = as_integer))
     do.call(keras$optimizers$Adafactor, args)
@@ -456,7 +456,7 @@ optimizer_adagrad <-
 function (learning_rate = 0.001, initial_accumulator_value = 0.1,
     epsilon = 1e-07, weight_decay = NULL, clipnorm = NULL, clipvalue = NULL,
     global_clipnorm = NULL, use_ema = FALSE, ema_momentum = 0.99,
-    ema_overwrite_frequency = NULL, name = "adagrad", ...)
+    ema_overwrite_frequency = NULL, name = "adagrad", ..., loss_scale_factor = NULL)
 {
     args <- capture_args2(list(ema_overwrite_frequency = as_integer))
     do.call(keras$optimizers$Adagrad, args)
@@ -619,7 +619,7 @@ function (learning_rate = 0.001, beta_1 = 0.9, beta_2 = 0.999,
     epsilon = 1e-07, amsgrad = FALSE, weight_decay = NULL, clipnorm = NULL,
     clipvalue = NULL, global_clipnorm = NULL, use_ema = FALSE,
     ema_momentum = 0.99, ema_overwrite_frequency = NULL, name = "adam",
-    ...)
+    ..., loss_scale_factor = NULL)
 {
     args <- capture_args2(list(ema_overwrite_frequency = as_integer))
     do.call(keras$optimizers$Adam, args)
@@ -802,7 +802,7 @@ optimizer_adamax <-
 function (learning_rate = 0.001, beta_1 = 0.9, beta_2 = 0.999,
     epsilon = 1e-07, weight_decay = NULL, clipnorm = NULL, clipvalue = NULL,
     global_clipnorm = NULL, use_ema = FALSE, ema_momentum = 0.99,
-    ema_overwrite_frequency = NULL, name = "adamax", ...)
+    ema_overwrite_frequency = NULL, name = "adamax", ..., loss_scale_factor = NULL)
 {
     args <- capture_args2(list(ema_overwrite_frequency = as_integer))
     do.call(keras$optimizers$Adamax, args)
@@ -985,7 +985,7 @@ function (learning_rate = 0.001, weight_decay = 0.004, beta_1 = 0.9,
     beta_2 = 0.999, epsilon = 1e-07, amsgrad = FALSE, clipnorm = NULL,
     clipvalue = NULL, global_clipnorm = NULL, use_ema = FALSE,
     ema_momentum = 0.99, ema_overwrite_frequency = NULL, name = "adamw",
-    ...)
+    ..., loss_scale_factor = NULL)
 {
     args <- capture_args2(list(ema_overwrite_frequency = as_integer))
     do.call(keras$optimizers$AdamW, args)
@@ -1217,7 +1217,7 @@ function (learning_rate = 0.001, learning_rate_power = -0.5,
     l2_regularization_strength = 0, l2_shrinkage_regularization_strength = 0,
     beta = 0, weight_decay = NULL, clipnorm = NULL, clipvalue = NULL,
     global_clipnorm = NULL, use_ema = FALSE, ema_momentum = 0.99,
-    ema_overwrite_frequency = NULL, name = "ftrl", ...)
+    ema_overwrite_frequency = NULL, name = "ftrl", ..., loss_scale_factor = NULL)
 {
     args <- capture_args2(list(ema_overwrite_frequency = as_integer))
     do.call(keras$optimizers$Ftrl, args)
@@ -1380,7 +1380,7 @@ optimizer_lion <-
 function (learning_rate = 0.001, beta_1 = 0.9, beta_2 = 0.99,
     weight_decay = NULL, clipnorm = NULL, clipvalue = NULL, global_clipnorm = NULL,
     use_ema = FALSE, ema_momentum = 0.99, ema_overwrite_frequency = NULL,
-    name = "lion", ...)
+    name = "lion", ..., loss_scale_factor = NULL)
 {
     args <- capture_args2(list(ema_overwrite_frequency = as_integer))
     do.call(keras$optimizers$Lion, args)
@@ -1528,7 +1528,9 @@ r"-(An optimizer that dynamically scales the loss to prevent underflow.
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/optimizers/LossScaleOptimizer>
 optimizer_loss_scale <-
 function (inner_optimizer, initial_scale = 32768, dynamic_growth_steps = 2000L,
-    ...)
+    ..., name = NULL, weight_decay = NULL, clipnorm = NULL, clipvalue = NULL,
+    global_clipnorm = NULL, use_ema = NULL, ema_momentum = NULL,
+    ema_overwrite_frequency = NULL, loss_scale_factor = NULL)
 {
     args <- capture_args2(list(dynamic_growth_steps = as_integer,
         ema_overwrite_frequency = as_integer))
@@ -1680,7 +1682,7 @@ optimizer_nadam <-
 function (learning_rate = 0.001, beta_1 = 0.9, beta_2 = 0.999,
     epsilon = 1e-07, weight_decay = NULL, clipnorm = NULL, clipvalue = NULL,
     global_clipnorm = NULL, use_ema = FALSE, ema_momentum = 0.99,
-    ema_overwrite_frequency = NULL, name = "nadam", ...)
+    ema_overwrite_frequency = NULL, name = "nadam", ..., loss_scale_factor = NULL)
 {
     args <- capture_args2(list(ema_overwrite_frequency = as_integer))
     do.call(keras$optimizers$Nadam, args)
@@ -1863,7 +1865,7 @@ optimizer_rmsprop <-
 function (learning_rate = 0.001, rho = 0.9, momentum = 0, epsilon = 1e-07,
     centered = FALSE, weight_decay = NULL, clipnorm = NULL, clipvalue = NULL,
     global_clipnorm = NULL, use_ema = FALSE, ema_momentum = 0.99,
-    ema_overwrite_frequency = 100L, name = "rmsprop", ...)
+    ema_overwrite_frequency = 100L, name = "rmsprop", ..., loss_scale_factor = NULL)
 {
     args <- capture_args2(list(ema_overwrite_frequency = as_integer))
     do.call(keras$optimizers$RMSprop, args)
@@ -2025,7 +2027,7 @@ optimizer_sgd <-
 function (learning_rate = 0.01, momentum = 0, nesterov = FALSE,
     weight_decay = NULL, clipnorm = NULL, clipvalue = NULL, global_clipnorm = NULL,
     use_ema = FALSE, ema_momentum = 0.99, ema_overwrite_frequency = NULL,
-    name = "SGD", ...)
+    name = "SGD", ..., loss_scale_factor = NULL)
 {
     args <- capture_args2(list(ema_overwrite_frequency = as_integer))
     do.call(keras$optimizers$SGD, args)

@@ -266,9 +266,8 @@ r"-(Returns a tensor of shape `shape` where `indices` are set to `values`.
 #'
 #' @param indices A tensor or list/tuple specifying
 #'     indices for the values in `values`.
-#' @param updates A tensor, the values to be set at `indices`.
+#' @param values A tensor, the values to be set at `indices`.
 #' @param shape Shape of the output tensor.
-#' @param values see description
 #'
 #' @export
 #' @family ops
@@ -6094,8 +6093,7 @@ r"-(Evaluates the Einstein summation convention on the operands.
 #'     summation) calculation is performed unless the explicit indicator
 #'     `->` is included as well as subscript labels of the precise
 #'     output form.
-#' @param operands The operands to compute the Einstein sum of.
-#' @param ... Passed on to the Python callable
+#' @param ... The operands to compute the Einstein sum of.
 #'
 #' @export
 #' @family ops
@@ -7572,10 +7570,9 @@ r"-(Creates grids of coordinates from coordinate vectors.
 #' #        [4, 5, 6]])
 #' ```
 #'
-#' @param x 1-D tensors representing the coordinates of a grid.
+#' @param ... 1-D tensors representing the coordinates of a grid.
 #' @param indexing Cartesian (`"xy"`, default) or matrix (`"ij"`) indexing
 #'     of output.
-#' @param ... Passed on to the Python callable
 #'
 #' @export
 #' @family ops

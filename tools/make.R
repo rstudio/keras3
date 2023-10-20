@@ -351,6 +351,9 @@ str()
   str()
 
 
+# TODO: callback_progbar logger ... the documented arg doesn't seem to actually be accepted,
+# also, does it make sense to export it?
+#
 
 
 

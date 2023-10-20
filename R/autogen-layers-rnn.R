@@ -413,7 +413,7 @@ function (object, filters, kernel_size, strides = 1L, padding = "valid",
     recurrent_constraint = NULL, bias_constraint = NULL, dropout = 0,
     recurrent_dropout = 0, seed = NULL, return_sequences = FALSE,
     return_state = FALSE, go_backwards = FALSE, stateful = FALSE,
-    ...)
+    ..., unroll = NULL)
 {
     args <- capture_args2(list(filters = as_integer, kernel_size = as_integer_tuple,
         strides = as_integer_tuple, dilation_rate = as_integer_tuple,
@@ -671,7 +671,7 @@ function (object, filters, kernel_size, strides = 1L, padding = "valid",
     recurrent_constraint = NULL, bias_constraint = NULL, dropout = 0,
     recurrent_dropout = 0, seed = NULL, return_sequences = FALSE,
     return_state = FALSE, go_backwards = FALSE, stateful = FALSE,
-    ...)
+    ..., unroll = NULL)
 {
     args <- capture_args2(list(filters = as_integer, kernel_size = as_integer_tuple,
         strides = as_integer_tuple, dilation_rate = as_integer_tuple,
@@ -927,7 +927,7 @@ function (object, filters, kernel_size, strides = 1L, padding = "valid",
     recurrent_constraint = NULL, bias_constraint = NULL, dropout = 0,
     recurrent_dropout = 0, seed = NULL, return_sequences = FALSE,
     return_state = FALSE, go_backwards = FALSE, stateful = FALSE,
-    ...)
+    ..., unroll = NULL)
 {
     args <- capture_args2(list(filters = as_integer, kernel_size = as_integer_tuple,
         strides = as_integer_tuple, dilation_rate = as_integer_tuple,

@@ -115,7 +115,21 @@ split_docstring_into_sections <- function(docstring) {
 }
 
 
-parse_params_section <- function(docstring_args_section) {
+vararg_paramater_names <- function(py_obj) {
+  params <- inspect$signature(py_obj)$parameters$values()
+  params %>%
+    as_iterator() %>% iterate(\(p) {
+      if (p$kind %in% c(inspect$Parameter$VAR_POSITIONAL,
+                        inspect$Parameter$VAR_KEYWORD))
+        p$name
+      else
+        NULL
+    }) %>% unlist()
+}
+
+
+parse_params_section <- function(docstring_args_section, treat_as_dots = NULL) {
+
 
   for (chk_empty_fn in c(is.null, is.na, partial(`==`, "")))
     if(chk_empty_fn(docstring_args_section))
@@ -140,8 +154,9 @@ parse_params_section <- function(docstring_args_section) {
     param_name[not_param] <- NA
   }
 
-  param_name[startsWith(param_name, "**")] <- "..."
-  param_name[param_name == "kwargs"] <- "..."
+  param_name[startsWith(param_name, "*")] <- "..."
+  # param_name[param_name == "kwargs"] <- "..."
+  param_name[param_name %in% treat_as_dots] <- "..."
 
   param_name %<>% zoo::na.locf0()
 
@@ -678,7 +693,7 @@ mk_export <- function(endpoint) {
 
   # roxygen parts
   r_name <- make_r_name(endpoint, module)
-  params <- parse_params_section(doc$arguments)
+  params <- parse_params_section(doc$arguments, treat_as_dots = vararg_paramater_names(py_obj))
   tags <- make_roxygen_tags(endpoint, py_obj, type)
 
   if(!is.null(doc$call_arguments) &&
@@ -702,55 +717,6 @@ mk_export <- function(endpoint) {
   # r wrapper parts
   arg_transformers <- get_arg_transformers(endpoint, py_obj, params)
   r_fn <- make_r_fn(endpoint, py_obj, type, arg_transformers)
-
-#   maybe_add_param <- function(name, desc) {
-#     if(name %in% names(formals(r_fn)) &&
-#        !name %in% unlist(strsplit(names(params) %||% "", ",")))
-#       params[[name]] <<- desc
-#   }
-#
-#   # if(endpoint == "keras.layers.Concatenate") browser()
-#
-#   if(grepl(glob2rx("keras.applications.*"), endpoint)) {
-#     maybe_add_param("include_preprocessing", str_squish(r"(
-#       Boolean, whether to include the preprocessing layer at the bottom of the network.
-#     )"))
-#     maybe_add_param("model_name", str_squish(r"(
-#       String, name for the model.
-#     )"))
-#   }
-#
-#   if(endpoint == "keras.activations.elu")
-#     maybe_add_param("alpha", str_squish(r"(
-#       Numeric. See description for details.
-#     )"))
-#
-#   if(endpoint == "keras.layers.Input")
-#     maybe_add_param("batch_shape", str_squish(r"(
-#       Shape, including the batch dim.
-#     )"))
-#
-#   if(type == "layer") {
-#     maybe_add_param("object",
-#       "Object to compose the layer with. A tensor, array, or sequential model.")
-#     if(grepl(".merging.", module, fixed = TRUE)) {
-#       params$"..." <- NULL
-#       # params$"inputs" <- NULL
-#       params[["inputs,..."]] <- "Inputs to merge."
-#     }
-#   }
-#
-#   maybe_add_param("...", "Passed on to the Python callable")
-#   maybe_add_param("name", glue("name for the {type}"))
-#   maybe_add_param("seed", "initial seed for the random number generator")
-#   maybe_add_param("dtype", 'datatype (e.g., `"float32"`)')
-
-  # rm(maybe_add_param)
-
-  # if(type == "application")
-  # crosscheck params with r_fn formals
-
-
 
   local({
     if (length(undocumented_params <-
@@ -779,6 +745,15 @@ mk_export <- function(endpoint) {
       writeLines(yaml::as.yaml(x))
       # message(endpoint, ":")
       # writeLines(paste("  ", undocumented_params, ":", "see description"))
+    }
+  })
+
+  local({
+    frmls <- formals(r_fn)
+    params_documented_but_missing <- names(params) |> setdiff(names(frmls))
+    if(length(params_documented_but_missing)) {
+      frmls <- c(frmls, lapply(set_names(params_documented_but_missing), \(n) NULL))
+      formals(r_fn) <<- frmls
     }
   })
 
@@ -875,10 +850,24 @@ get_fixed_docstring <- function(endpoint) {
     d <<- stringi::stri_replace_first_fixed(d, old_txt, new_txt)
   }
 
-  switch(endpoint,
-    "keras.ops.conv_transpose" = replace("`(batch_size,)` + inputs_spatial_shape ",
-                                         "`(batch_size,) + inputs_spatial_shape "),
-    NULL)
+  switch %(% { endpoint
+
+    keras.ops.conv_transpose = replace(
+      "`(batch_size,)` + inputs_spatial_shape ",
+      "`(batch_size,) + inputs_spatial_shape ")
+
+    keras.ops.scatter = replace(
+      "    updates: A tensor, the values to be set at `indices`.",
+      "    values: A tensor, the values to be set at `indices`."
+    )
+
+    # keras.ops.einsum = replace(
+    #   "operands: The operands to compute the Einstein sum of.",
+    #   "*args: The operands to compute the Einstein sum of.")
+
+
+    NULL
+  }
   trim(d %||% "")
 }
 
