@@ -24,21 +24,19 @@ endpoints <- str_c("keras.", c %(% {
   "preprocessing.sequence"
   "losses"
   "metrics"
-  # "preprocessing.text"
-  # "utils"
 
-  # "backend",
-  # "dtensor",
-  # "estimator",
-  # "experimental", "export",
-  # "Input",
-  # "mixed_precision",
-  # "Model",
-  # "models",
-  # "preprocessing",
-  # "saving",
-  # "Sequential",
-  # "datasets"  # datasets unchanged, no need to autogen
+  # "saving"
+  # "utils"
+  # "backend"
+  # "dtensor"
+  # "mixed_precision"
+  # "models"
+  # "export"
+  # "experimental"
+
+  # "datasets"            #NO datasets unchanged, no need to autogen
+  # "preprocessing.text"  #NO deprecated
+  # "estimator"           #NO deprecated
 }
 
   ) |> lapply(\(module) {
@@ -113,8 +111,6 @@ endpoints <-
       return(df %>% slice_max(nchar(endpoint)))
     } else if (any(str_detect(df$endpoint, "metrics|losses"))) {
       nms_in <- names(df)
-      if(any(str_detect(df$endpoint, "auc")))
-        browser()
       df <- df |>
         mutate(
           name = map_chr(py_obj, \(o) o$`__name__`),
@@ -123,13 +119,13 @@ endpoints <-
         mutate(
           dist_from_true_home = adist(str_replace(endpoint, name, ""),
                                       module)
-        )
-      # browser()
-      df <- df |>
+        ) |>
+        ungroup() |>
         arrange(dist_from_true_home, desc(nchar(name)))
-
-      # message(str_flatten_comma(df$endpoint, ", or "))
-      df %>% slice(1) %>% select(!!nms_in)
+        message(str_flatten_comma(df$endpoint, ", "))
+      df %>%
+        # slice(1) %>%
+        select(!!nms_in)
     } else {
       return(df %>% slice_min(nchar(endpoint), with_ties = FALSE))
     }
@@ -138,12 +134,10 @@ endpoints <-
   split(., tolower(.$endpoint)) %>%
   map(\(df) {
     if(nrow(df) == 1) return(df)
-    # message(str_flatten_comma(df$endpoint))
     # prefer names w/ more capital letters
     df[which.max(nchar(gsub("[^A-Z0-9]*", "", df$endpoint))), ]
   }) %>%
   list_rbind() %>%
-    # invisible()
 
   # aliases e.g., Conv2D, Convolution2D
   # summarize(endpoint = endpoint %>% .[which.min(nchar(.))]) %>%
@@ -153,20 +147,7 @@ endpoints <-
                                             "python.builtin.function")))) %>%
   .$endpoint %>%
   unlist() %>%
-  # summarize()
-  # grep("^keras\\.layers\\.GlobalAvgPool.D", ., value = TRUE, invert = TRUE) %>%  # alias for GlobalAveragePooling
-  # grep("^keras\\.layers\\.GlobalMaxPool.D", ., value = TRUE, invert = TRUE) %>%  # alias for GlobalMaxPooling1D
-  # grep("^keras\\.layers\\.[^.]*Convolution.D", ., value = TRUE, invert = TRUE) %>%  # alias for Conv1D
-  # lapply(\(endpoint) {
-  #   py_obj <- py_eval(endpoint)
-  #   if(inherits(py_obj, c("python.builtin.type",
-  #                         "python.builtin.function")))
-  #     endpoint
-  #   else NULL # filter out submodules, etc.
-  #   ## rewrite this to be an rapply
   #   # "keras.applications.convnext" is a module, filtered out, has good stuff
-  # }) |>
-  unlist() %>%
   setdiff(c %(% {
     "keras.layers.Layer"             # only for subclassing
     "keras.optimizers.Optimizer"     # only for subclassing
