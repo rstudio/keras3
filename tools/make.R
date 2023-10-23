@@ -110,27 +110,26 @@ endpoints <-
                  df$endpoint))) {
       return(df %>% slice_max(nchar(endpoint)))
 
-    } else
-    #   if (any(str_detect(df$endpoint, "metrics|losses"))) {
-    #
-    #   nms_in <- names(df)
-    #   df <- df |>
-    #     mutate(
-    #       name = map_chr(py_obj, \(o) o$`__name__`),
-    #       module = map_chr(py_obj, \(o) o$`__module__`)) |>
-    #     rowwise() %>%
-    #     mutate(
-    #       dist_from_true_home = adist(str_replace(endpoint, name, ""),
-    #                                   module)
-    #     ) |>
-    #     ungroup() |>
-    #     arrange(dist_from_true_home, desc(nchar(name)))
-    #     # message(str_flatten_comma(df$endpoint, ", "))
-    #   df %>%
-    #     # slice(1) %>%
-    #     select(!!nms_in)
-    # } else
-      {
+    } else if (any(str_detect(df$endpoint, "metrics|losses"))) {
+
+      nms_in <- names(df)
+      df <- df |>
+        mutate(
+          name = map_chr(py_obj, \(o) o$`__name__`),
+          module = map_chr(py_obj, \(o) o$`__module__`)) |>
+        rowwise() %>%
+        mutate(
+          dist_from_true_home = adist(str_replace(endpoint, name, ""),
+                                      module)
+        ) |>
+        ungroup() |>
+        arrange(dist_from_true_home, desc(nchar(name)))
+        # message(str_flatten_comma(df$endpoint, ", "))
+      df %>%
+        # slice(1) %>%
+        select(!!nms_in)
+
+    } else {
 
       return(df %>% slice_min(nchar(endpoint), with_ties = FALSE))
     }
