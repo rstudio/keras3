@@ -184,7 +184,7 @@ r"-(Computes the cross-entropy loss between true labels and predicted labels.
 #' @family loss
 #' @seealso
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/losses/BinaryCrossentropy>
-losse_binary_crossentropy <-
+loss_binary_crossentropy <-
 function (y_true, y_pred, from_logits = FALSE, label_smoothing = 0,
     axis = -1L, ..., reduction = "sum_over_batch_size", name = "binary_crossentropy")
 {
@@ -507,7 +507,7 @@ r"-(Computes focal cross-entropy loss between true labels and predictions.
 #' @family loss
 #' @seealso
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/losses/BinaryFocalCrossentropy>
-losse_binary_focal_crossentropy <-
+loss_binary_focal_crossentropy <-
 function (y_true, y_pred, apply_class_balancing = FALSE, alpha = 0.25,
     gamma = 2, from_logits = FALSE, label_smoothing = 0, axis = -1L,
     ..., reduction = "sum_over_batch_size", name = "binary_focal_crossentropy")
@@ -663,7 +663,7 @@ r"-(Computes the crossentropy loss between the labels and predictions.
 #' @family loss
 #' @seealso
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/losses/CategoricalCrossentropy>
-losse_categorical_crossentropy <-
+loss_categorical_crossentropy <-
 function (y_true, y_pred, from_logits = FALSE, label_smoothing = 0,
     axis = -1L, ..., reduction = "sum_over_batch_size", name = "categorical_crossentropy")
 {
@@ -901,7 +901,7 @@ r"-(Computes the alpha balanced focal crossentropy loss.
 #' @family loss
 #' @seealso
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/losses/CategoricalFocalCrossentropy>
-losse_categorical_focal_crossentropy <-
+loss_categorical_focal_crossentropy <-
 function (y_true, y_pred, alpha = 0.25, gamma = 2, from_logits = FALSE,
     label_smoothing = 0, axis = -1L, ..., reduction = "sum_over_batch_size",
     name = "categorical_focal_crossentropy")
@@ -978,7 +978,7 @@ r"-(Computes the categorical hinge loss between `y_true` & `y_pred`.
 #' @family loss
 #' @seealso
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/losses/CategoricalHinge>
-losse_categorical_hinge <-
+loss_categorical_hinge <-
 function (y_true, y_pred, ..., reduction = "sum_over_batch_size",
     name = "categorical_hinge")
 {
@@ -1070,7 +1070,7 @@ r"-(Computes the cosine similarity between `y_true` & `y_pred`.
 #' @family loss
 #' @seealso
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/losses/CosineSimilarity>
-losse_cosine_similarity <-
+loss_cosine_similarity <-
 function (y_true, y_pred, axis = -1L, ..., reduction = "sum_over_batch_size",
     name = "cosine_similarity")
 {
@@ -1145,7 +1145,7 @@ r"-(Computes the hinge loss between `y_true` & `y_pred`.
 #' @family loss
 #' @seealso
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/losses/Hinge>
-losse_hinge <-
+loss_hinge <-
 function (y_true, y_pred, ..., reduction = "sum_over_batch_size",
     name = "hinge")
 {
@@ -1237,7 +1237,7 @@ r"-(Computes the Huber loss between `y_true` & `y_pred`.
 #' @family loss
 #' @seealso
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/losses/Huber>
-losse_huber <-
+loss_huber <-
 function (y_true, y_pred, delta = 1, ..., reduction = "sum_over_batch_size",
     name = "huber_loss")
 {
@@ -1309,7 +1309,7 @@ r"-(Computes Kullback-Leibler divergence loss between `y_true` & `y_pred`.
 #' @family loss
 #' @seealso
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/losses/KLDivergence>
-losse_kl_divergence <-
+loss_kl_divergence <-
 function (y_true, y_pred, ..., reduction = "sum_over_batch_size",
     name = "kl_divergence")
 {
@@ -1385,7 +1385,7 @@ r"-(Computes the logarithm of the hyperbolic cosine of the prediction error.
 #' @family loss
 #' @seealso
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/losses/LogCosh>
-losse_log_cosh <-
+loss_logcosh <-
 function (y_true, y_pred, ..., reduction = "sum_over_batch_size",
     name = "log_cosh")
 {
@@ -1450,7 +1450,7 @@ r"-(Computes the mean of absolute difference between labels and predictions.
 #' @family loss
 #' @seealso
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/losses/MeanAbsoluteError>
-losse_mean_absolute_error <-
+loss_mean_absolute_error <-
 function (y_true, y_pred, ..., reduction = "sum_over_batch_size",
     name = "mean_absolute_error")
 {
@@ -1522,7 +1522,7 @@ r"-(Computes the mean absolute percentage error between `y_true` & `y_pred`.
 #' @family loss
 #' @seealso
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/losses/MeanAbsolutePercentageError>
-losse_mean_absolute_percentage_error <-
+loss_mean_absolute_percentage_error <-
 function (y_true, y_pred, ..., reduction = "sum_over_batch_size",
     name = "mean_absolute_percentage_error")
 {
@@ -1589,7 +1589,7 @@ r"-(Computes the mean of squares of errors between labels and predictions.
 #' @family loss
 #' @seealso
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/losses/MeanSquaredError>
-losse_mean_squared_error <-
+loss_mean_squared_error <-
 function (y_true, y_pred, ..., reduction = "sum_over_batch_size",
     name = "mean_squared_error")
 {
@@ -1661,7 +1661,7 @@ r"-(Computes the mean squared logarithmic error between `y_true` & `y_pred`.
 #' @family loss
 #' @seealso
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/losses/MeanSquaredLogarithmicError>
-losse_mean_squared_logarithmic_error <-
+loss_mean_squared_logarithmic_error <-
 function (y_true, y_pred, ..., reduction = "sum_over_batch_size",
     name = "mean_squared_logarithmic_error")
 {
@@ -1733,7 +1733,7 @@ r"-(Computes the Poisson loss between `y_true` & `y_pred`.
 #' @family loss
 #' @seealso
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/losses/Poisson>
-losse_poisson <-
+loss_poisson <-
 function (y_true, y_pred, ..., reduction = "sum_over_batch_size",
     name = "poisson")
 {
@@ -1890,7 +1890,7 @@ r"-(Computes the crossentropy loss between the labels and predictions.
 #' @family loss
 #' @seealso
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/losses/SparseCategoricalCrossentropy>
-losse_sparse_categorical_crossentropy <-
+loss_sparse_categorical_crossentropy <-
 function (y_true, y_pred, from_logits = FALSE, ignore_class = NULL,
     axis = -1L, ..., reduction = "sum_over_batch_size", name = "sparse_categorical_crossentropy")
 {
@@ -1965,7 +1965,7 @@ r"-(Computes the squared hinge loss between `y_true` & `y_pred`.
 #' @family loss
 #' @seealso
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/losses/SquaredHinge>
-losse_squared_hinge <-
+loss_squared_hinge <-
 function (y_true, y_pred, ..., reduction = "sum_over_batch_size",
     name = "squared_hinge")
 {

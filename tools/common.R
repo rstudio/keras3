@@ -365,6 +365,7 @@ make_r_name <- function(endpoint, module = py_eval(endpoint)$`__module__`) {
     "keras.preprocessing.image.load_img" =  "image_load"
     "keras.preprocessing.image.save_img" = "image_array_save"
     "keras.preprocessing.sequence.pad_sequences" = "pad_sequences"
+    "keras.losses.LogCosh" = "loss_logcosh"
     NULL
   })) return(r_name)
 
@@ -397,7 +398,7 @@ make_r_name <- function(endpoint, module = py_eval(endpoint)$`__module__`) {
   #   prefix <- x()
   if(length(x) && !is_scalar(x))
     browser()
-  prefix <- x |> str_replace("s$", "") |> str_flatten("_")
+  prefix <- x |> str_replace("e?s$", "") |> str_flatten("_")
 
   name <- name |>
     str_replace("NaN", "Nan") |>
