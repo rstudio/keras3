@@ -2726,6 +2726,11 @@ r"-(Calculates the mean and variance of `x`.
         axes: A list of axes which to compute mean and variance.
         keepdims: If this is set to `True`, the axes which are reduced are left
             in the result as dimensions with size one.
+        synchronized: Only applicable with the TensorFlow backend.
+            If `True`, synchronizes the global batch statistics (mean and
+            variance) across all devices at each training step in a
+            distributed training strategy. If `False`, each replica uses its own
+            local batch statistics.
 
     Returns:
         A tuple containing two tensors - mean and variance.
@@ -2761,13 +2766,18 @@ r"-(Calculates the mean and variance of `x`.
 #' @param axes A list of axes which to compute mean and variance.
 #' @param keepdims If this is set to `True`, the axes which are reduced are left
 #'     in the result as dimensions with size one.
+#' @param synchronized Only applicable with the TensorFlow backend.
+#'     If `True`, synchronizes the global batch statistics (mean and
+#'     variance) across all devices at each training step in a
+#'     distributed training strategy. If `False`, each replica uses its own
+#'     local batch statistics.
 #'
 #' @export
 #' @family ops
 #' @seealso
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/moments>
 k_moments <-
-function (x, axes, keepdims = FALSE)
+function (x, axes, keepdims = FALSE, synchronized = FALSE)
 {
     args <- capture_args2(list(axes = as_axis))
     do.call(keras$ops$moments, args)

@@ -4,7 +4,7 @@
 \alias{k_moments}
 \title{Calculates the mean and variance of \code{x}.}
 \usage{
-k_moments(x, axes, keepdims = FALSE)
+k_moments(x, axes, keepdims = FALSE, synchronized = FALSE)
 }
 \arguments{
 \item{x}{Input tensor.}
@@ -13,6 +13,12 @@ k_moments(x, axes, keepdims = FALSE)
 
 \item{keepdims}{If this is set to \code{True}, the axes which are reduced are left
 in the result as dimensions with size one.}
+
+\item{synchronized}{Only applicable with the TensorFlow backend.
+If \code{True}, synchronizes the global batch statistics (mean and
+variance) across all devices at each training step in a
+distributed training strategy. If \code{False}, each replica uses its own
+local batch statistics.}
 }
 \description{
 The mean and variance are calculated by aggregating the contents of \code{x}

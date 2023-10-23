@@ -80,6 +80,7 @@ Attention outputs of shape \verb{(batch_size, Tq, dim)}.
 
 Other attention layers: 
 \code{\link{layer_attention}()},
+\code{\link{layer_group_query_attention}()},
 \code{\link{layer_multi_head_attention}()}
 }
 \concept{attention layers}

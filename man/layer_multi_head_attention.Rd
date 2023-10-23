@@ -125,6 +125,7 @@ attention axes.
 
 Other attention layers: 
 \code{\link{layer_additive_attention}()},
-\code{\link{layer_attention}()}
+\code{\link{layer_attention}()},
+\code{\link{layer_group_query_attention}()}
 }
 \concept{attention layers}

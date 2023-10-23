@@ -60,6 +60,11 @@ r"-(Layer that normalizes its inputs.
         gamma_regularizer: Optional regularizer for the gamma weight.
         beta_constraint: Optional constraint for the beta weight.
         gamma_constraint: Optional constraint for the gamma weight.
+        synchronized: Only applicable with the TensorFlow backend.
+            If `True`, synchronizes the global batch statistics (mean and
+            variance) for the layer across all devices at each training step
+            in a distributed training strategy.
+            If `False`, each replica uses its own local batch statistics.
         **kwargs: Base layer keyword arguments (e.g. `name` and `dtype`).
 
     Call arguments:
@@ -201,6 +206,11 @@ r"-(Layer that normalizes its inputs.
 #' @param gamma_regularizer Optional regularizer for the gamma weight.
 #' @param beta_constraint Optional constraint for the beta weight.
 #' @param gamma_constraint Optional constraint for the gamma weight.
+#' @param synchronized Only applicable with the TensorFlow backend.
+#'     If `True`, synchronizes the global batch statistics (mean and
+#'     variance) for the layer across all devices at each training step
+#'     in a distributed training strategy.
+#'     If `False`, each replica uses its own local batch statistics.
 #' @param ... Base layer keyword arguments (e.g. `name` and `dtype`).
 #' @param object Object to compose the layer with. A tensor, array, or sequential model.
 #'
@@ -214,7 +224,7 @@ function (object, axis = -1L, momentum = 0.99, epsilon = 0.001,
     gamma_initializer = "ones", moving_mean_initializer = "zeros",
     moving_variance_initializer = "ones", beta_regularizer = NULL,
     gamma_regularizer = NULL, beta_constraint = NULL, gamma_constraint = NULL,
-    ...)
+    synchronized = FALSE, ...)
 {
     args <- capture_args2(list(axis = as_axis, input_shape = normalize_shape,
         batch_size = as_integer, batch_input_shape = normalize_shape),

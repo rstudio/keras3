@@ -19,6 +19,7 @@ layer_batch_normalization(
   gamma_regularizer = NULL,
   beta_constraint = NULL,
   gamma_constraint = NULL,
+  synchronized = FALSE,
   ...
 )
 }
@@ -55,6 +56,12 @@ since the scaling will be done by the next layer.}
 \item{beta_constraint}{Optional constraint for the beta weight.}
 
 \item{gamma_constraint}{Optional constraint for the gamma weight.}
+
+\item{synchronized}{Only applicable with the TensorFlow backend.
+If \code{True}, synchronizes the global batch statistics (mean and
+variance) for the layer across all devices at each training step
+in a distributed training strategy.
+If \code{False}, each replica uses its own local batch statistics.}
 
 \item{...}{Base layer keyword arguments (e.g. \code{name} and \code{dtype}).}
 }
