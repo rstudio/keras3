@@ -15,12 +15,6 @@ install_keras <- function(...,
                           python_version = "3.9"
                           # backend = c("tensorflow", "jax", "pytorch")
                           ) {
-  # # envname = "r-keras",
-  # # new_env = identical(envname, "r-keras")
-
-  # if(identical(envname, "r-keras") &&
-  #    reticulate::virtualenv_exists(envname))
-  #   reticulate::virtualenv_remove(envname, confirm = FALSE)
 
   python <- envname |>
     reticulate::virtualenv_create(version = python_version,

@@ -24,6 +24,7 @@ endpoints <- str_c("keras.", c %(% {
   "preprocessing.sequence"
   "losses"
   "metrics"
+  "optimizers.schedules"
 
   # "saving"
   # "utils"
@@ -41,7 +42,6 @@ endpoints <- str_c("keras.", c %(% {
 
   ) |> lapply(\(module) {
     message(module)
-    # browser()
     module <- py_eval(modules <- module)
     nms <- names(module) |>
       setdiff(c("experimental", "deserialize", "serialize", "get",
@@ -109,24 +109,29 @@ endpoints <-
     if(all(grepl(r"(keras\.layers\.(Global)?(Avg|Average|Max)Pool(ing)?[1234]D)",
                  df$endpoint))) {
       return(df %>% slice_max(nchar(endpoint)))
-    } else if (any(str_detect(df$endpoint, "metrics|losses"))) {
-      nms_in <- names(df)
-      df <- df |>
-        mutate(
-          name = map_chr(py_obj, \(o) o$`__name__`),
-          module = map_chr(py_obj, \(o) o$`__module__`)) |>
-        rowwise() %>%
-        mutate(
-          dist_from_true_home = adist(str_replace(endpoint, name, ""),
-                                      module)
-        ) |>
-        ungroup() |>
-        arrange(dist_from_true_home, desc(nchar(name)))
-        message(str_flatten_comma(df$endpoint, ", "))
-      df %>%
-        # slice(1) %>%
-        select(!!nms_in)
-    } else {
+
+    } else
+    #   if (any(str_detect(df$endpoint, "metrics|losses"))) {
+    #
+    #   nms_in <- names(df)
+    #   df <- df |>
+    #     mutate(
+    #       name = map_chr(py_obj, \(o) o$`__name__`),
+    #       module = map_chr(py_obj, \(o) o$`__module__`)) |>
+    #     rowwise() %>%
+    #     mutate(
+    #       dist_from_true_home = adist(str_replace(endpoint, name, ""),
+    #                                   module)
+    #     ) |>
+    #     ungroup() |>
+    #     arrange(dist_from_true_home, desc(nchar(name)))
+    #     # message(str_flatten_comma(df$endpoint, ", "))
+    #   df %>%
+    #     # slice(1) %>%
+    #     select(!!nms_in)
+    # } else
+      {
+
       return(df %>% slice_min(nchar(endpoint), with_ties = FALSE))
     }
   }) %>%
@@ -157,6 +162,7 @@ endpoints <-
     "keras.callbacks.Callback"       # only for subclassing
     "keras.losses.Loss"              # only for subclassing
     "keras.metrics.Metric"           # only for subclassing
+    "keras.optimizers.schedules.LearningRateSchedule"  # only for subclassing
 
     "keras.metrics.Accuracy"         # weird, only class handle, no fn handle - weird alias
                                      # for binary_accuracy, but without any threshold casting.
@@ -257,6 +263,7 @@ df |>
                                    "preprocessing.image",
                                    "preprocessing.sequence",
                                    "losses", "metrics",
+                                   "optimizers.schedules",
                                    # "utils",
                                    "applications",
                                    "activations", "regularizers")) |> #
@@ -388,8 +395,8 @@ r[[3]] -> r
 
 r
 r$tags[[2]]
-
-
+trace(system2, quote(message(paste("+", paste0(env, collapse = " "),
+                                   shQuote(command), paste0(shQuote(args), collapse = " "))))); tools:::..Rd2pdf(".")
 
 
 mk_export("keras.layers.LayerNormalization")$doc$description -> d

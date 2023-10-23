@@ -360,6 +360,7 @@ get_layer_family <- function(layer) {
 
 make_r_name <- function(endpoint, module = py_eval(endpoint)$`__module__`) {
 
+  type <- keras_class_type(py_eval(endpoint))
 
   # manual renames
   if(!is.null(r_name <- switch %(% { endpoint
@@ -397,13 +398,22 @@ make_r_name <- function(endpoint, module = py_eval(endpoint)$`__module__`) {
   x <- x[-length(x)] # submodules
   x <- x[nzchar(x)]
 
+  # "keras.optimizers.schedules.CosineDecay"
+  # "optimizer_schedule_cosine_decay"
+  # "learning_rate_schedule_cosine_decay"
+
   # if(length(x) >= 2)
   #   x <- x[-1] # drop "keras" from "keras.layers.Dense
   # if(!length(x))
   #   prefix <- x()
-  if(length(x) && !is_scalar(x))
-    browser()
-  prefix <- x |> str_replace("e?s$", "") |> str_flatten("_")
+
+  if(type == "learning_rate_schedule")
+    prefix <- "learning_rate_schedule"
+  else {
+    if(length(x) && !is_scalar(x))
+      browser()
+    prefix <- x |> str_replace("e?s$", "") |> str_flatten("_")
+  }
 
   name <- name |>
     str_replace("NaN", "Nan") |>
