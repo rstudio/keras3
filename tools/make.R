@@ -3,6 +3,8 @@ attach_source("tools/setup.R")
 attach_source("tools/common.R")
 
 # TODO: add PR for purrr::rate_throttle("3 per minute")
+#
+# TODO: in reticulate: virtualenv_starter(): check for --enable-shared
 
 # TODO: fix py_func(), for r_to_py.R6ClassGenerator
 #   can't use __signature__ anymore in keras_core...
@@ -20,9 +22,9 @@ endpoints <- str_c("keras.", c %(% {
   "preprocessing"
   "preprocessing.image"
   "preprocessing.sequence"
+  "losses"
   # "preprocessing.text"
   # "utils"
-  # "losses",
   # "metrics",
 
   # "backend",
@@ -109,6 +111,9 @@ endpoints <-
     if(all(grepl(r"(keras\.layers\.(Global)?(Avg|Average|Max)Pool(ing)?[1234]D)",
                  df$endpoint))) {
       return(df %>% slice_max(nchar(endpoint)))
+    } else if(any(str_detect(df$endpoint, "metrics|losses"))) {
+      browser()
+      # print(df)
     } else {
       return(df %>% slice_min(nchar(endpoint), with_ties = FALSE))
     }
@@ -153,6 +158,8 @@ endpoints <-
     "keras.constraints.Constraint"   # only for subclassing
     "keras.initializers.Initializer" # only for subclassing
     "keras.callbacks.Callback"       # only for subclassing
+    "keras.losses.Loss"              # only for subclassing
+    "keras.metrics.Metric"           # only for subclassing
 
     "keras.layers.Wrapper"           # needs thinking
     "keras.layers.InputLayer"        # use Input instead
@@ -164,6 +171,47 @@ endpoints <-
     "keras.optimizers.LegacyOptimizerWarning"
   })
 
+# filter out functional losses that are also type based losses
+endpoints <- endpoints %>%
+  lapply(\(ep) {
+    if(!any(startsWith(ep, c("keras.losses.", "keras.metrics."))))
+      return(ep)
+    py_obj <- py_eval(ep)
+    if (!inherits(py_obj, "python.builtin.function"))
+      return(ep)
+
+
+      # if we have both functional and type api interfaces, we
+      # just want the type right now (we dynamically fetch the matching
+      # functional counterpart later)
+      ep2 <- switch(ep,
+             "keras.losses.kl_divergence" = "keras.losses.KLDivergence",
+             str_replace(ep, py_obj$`__name__`,
+                         snakecase::to_upper_camel_case(py_obj$`__name__`)))
+      tryCatch({
+        py_eval(ep2)
+        return(NULL)
+      },
+      python.builtin.AttributeError = function(e) {
+        print(e)
+        ep
+      })
+
+
+  }) %>%
+  unlist() %>%
+  invisible()
+
+get_metric_counterpart_endpoint <- function(..., fn, type) {
+  if(missing(fn)) {
+    endpoint <- type
+    py_obj <- py_eval(endpoint)
+    name <- py_obj$`__name__`
+    endpoint_fn <- str_replace(endpoint, name, snakecase::to_snake_case(name))
+    py_obj_fn <- py_eval(endpoint_fn) %error% browser()
+  }
+}
+
 # TODO: initializer families:
 # <class 'keras.initializers.constant_initializers.Zeros'>
 # <class 'keras.initializers.random_initializers.RandomUniform'>
@@ -172,7 +220,6 @@ endpoints <-
 
 df <-
   endpoints |>
-  # c( "keras.layers.InputSpec", "keras.layers.Input" ) |>
   lapply(\(e) {
     # message(e)
     mk_export(e)
@@ -199,6 +246,7 @@ df |>
                                    "preprocessing",
                                    "preprocessing.image",
                                    "preprocessing.sequence",
+                                   "losses",
                                    # "utils",
                                    "applications",
                                    "activations", "regularizers")) |> #

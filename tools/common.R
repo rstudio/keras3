@@ -544,6 +544,7 @@ make_r_fn <- function(endpoint,
   }
   switch(keras_class_type(py_obj),
          layer = make_r_fn.layer(endpoint, py_obj, transformers),
+         loss = make_r_fn.loss(endpoint, py_obj, transformers),
          make_r_fn.default(endpoint, py_obj, transformers))
 }
 
@@ -593,6 +594,80 @@ make_r_fn.activation <- function(endpoint,py_obj, transformers) {
   attr(fn, "py_function_name") <- py_obj$`__name__`
   fn
 }
+
+
+make_r_fn.loss <- function(endpoint, py_obj, transformers) {
+
+  # see if there is a functional counterpart to the class object
+  py_obj_expr <- endpoint_to_expr(endpoint)
+  frmls <- formals(py_obj)
+  frmls <- c(alist(... = ), formals(py_obj))
+  frmls <- frmls[unique(names(frmls))]
+
+  name <- py_obj$`__name__`
+  endpoint_fn <- str_replace(endpoint, name, snakecase::to_snake_case(name))
+  py_obj_fn <- py_eval(endpoint_fn) %error% browser()
+  py_obj_expr_fn <- endpoint_to_expr(endpoint_fn)
+  transformers <- modifyList(transformers %||% list(),
+                             get_arg_transformers(endpoint_fn) %||% list()) %error% browser()
+  if(!length(transformers))
+    transformers <- NULL
+  frmls <- c(formals(py_obj_fn), frmls)
+  frmls <- frmls[unique(names(frmls))]
+  stopifnot(names(frmls)[1:2] == c("y_true", "y_pred"))
+
+  # if (is.null(py_fn)) {
+  #   body <- substitute({
+  #     args <- capture_args(match.call(), modifiers)
+  #     do.call(py_cls, args)
+  #   })
+  #
+  #   formals <- c(alist(... =), formals)
+  #   if (!is.character(py_fn_name))
+  #     py_fn_name <- NULL
+  #
+  # } else {
+
+    body <- bquote({
+      args <- capture_args2(.(transformers))
+      callable <- if (missing(y_true) && missing(y_pred))
+        .(py_obj_expr) else .(py_obj_expr_fn)
+      do.call(callable, args)
+    })
+
+    # formals <- c(alist(y_true = , y_pred =), frmls)
+    # if (!isFALSE(py_fn_name)) {
+    #   py_fn_name <- if (isTRUE(py_fn_name)) {
+    #     last <- function(x) x[[length(x)]]
+    #     last(strsplit(deparse(py_fn), "$", fixed = TRUE)[[1]])
+    #   }
+    #   else
+    #     NULL
+    # }
+  # }
+
+  # formals[["..."]] <- quote(expr = )
+
+  # if (!is.null(py_cls)) {
+  #   if (!"name" %in% names(formals))
+  #     formals['name'] <- list(py_fn_name)
+  #   if (!"dtype" %in% names(formals))
+  #     formals['dtype'] <- list(NULL)
+  # }
+
+  fn <- as.function.default(c(frmls, body))
+
+  # if(is.character(py_fn_name))
+    # attr(fn, "py_function_name") <- py_fn_name
+
+  fn
+}
+# endpoint <- "keras.losses.BinaryCrossentropy"
+# py_obj <- py_eval(endpoint)
+# transformers <- list()
+# make_r_fn.loss(endpoint, py_obj, transformers)
+# mk_export("keras.losses.BinaryCrossentropy")
+
 
 make_r_fn.layer <- function(endpoint, py_obj, transformers) {
 
@@ -696,20 +771,32 @@ mk_export <- function(endpoint) {
   py_obj <- py_eval(endpoint)
   name <- py_obj$`__name__`
   module <- py_obj$`__module__`
-  # browser()
   docstring <- get_fixed_docstring(endpoint)
   type <- keras_class_type(py_obj)
 
   doc <- split_docstring_into_sections(docstring)
+
+
 
   # roxygen parts
   r_name <- make_r_name(endpoint, module)
   params <- parse_params_section(doc$arguments, treat_as_dots = vararg_paramater_names(py_obj))
 
   if(endpoint == "keras.layers.Lambda") {
-    # browser()
     names(params)[match("function", names(params))] <- "f"
   }
+
+  if ((endpoint |> startsWith("keras.losses.") ||
+       endpoint |> startsWith("keras.metrics.")) &&
+      inherits(py_obj, "python.builtin.type"))
+  local({
+    ep2 <- mk_export(str_replace(endpoint, name, snakecase::to_snake_case(name)))
+    # browser()
+    params <<- modifyList(params, ep2$params)
+    for(section in setdiff(names(ep2$doc), "title"))
+      doc[[section]] %<>% str_flatten_lines(ep2$doc[[section]], .)
+    doc <<- doc
+  })
 
   tags <- make_roxygen_tags(endpoint, py_obj, type)
 
@@ -922,4 +1009,3 @@ get_fixed_docstring <- function(endpoint) {
 #   )--")
 # rep <- "`\\1`"
 # str_replace_all(x, rx, rep)
-
