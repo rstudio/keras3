@@ -4,7 +4,13 @@
 \alias{loss_poisson}
 \title{Computes the Poisson loss between \code{y_true} & \code{y_pred}.}
 \usage{
-loss_poisson(y_true, y_pred, ..., reduction = "auto", name = "poisson")
+loss_poisson(
+  y_true,
+  y_pred,
+  ...,
+  reduction = "sum_over_batch_size",
+  name = "poisson"
+)
 }
 \arguments{
 \item{y_true}{Ground truth values. shape = \verb{[batch_size, d0, .. dN]}.}

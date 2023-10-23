@@ -9,7 +9,7 @@ loss_cosine_similarity(
   y_pred,
   axis = -1L,
   ...,
-  reduction = "auto",
+  reduction = "sum_over_batch_size",
   name = "cosine_similarity"
 )
 }

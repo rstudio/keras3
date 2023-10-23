@@ -8,7 +8,7 @@ loss_categorical_hinge(
   y_true,
   y_pred,
   ...,
-  reduction = "auto",
+  reduction = "sum_over_batch_size",
   name = "categorical_hinge"
 )
 }

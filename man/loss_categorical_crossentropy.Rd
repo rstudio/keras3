@@ -8,10 +8,10 @@ loss_categorical_crossentropy(
   y_true,
   y_pred,
   from_logits = FALSE,
-  label_smoothing = 0L,
+  label_smoothing = 0,
   axis = -1L,
   ...,
-  reduction = "auto",
+  reduction = "sum_over_batch_size",
   name = "categorical_crossentropy"
 )
 }

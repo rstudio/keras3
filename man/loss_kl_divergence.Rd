@@ -8,7 +8,7 @@ loss_kl_divergence(
   y_true,
   y_pred,
   ...,
-  reduction = "auto",
+  reduction = "sum_over_batch_size",
   name = "kl_divergence"
 )
 }

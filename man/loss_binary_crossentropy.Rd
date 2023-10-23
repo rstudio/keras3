@@ -11,7 +11,7 @@ loss_binary_crossentropy(
   label_smoothing = 0,
   axis = -1L,
   ...,
-  reduction = "auto",
+  reduction = "sum_over_batch_size",
   name = "binary_crossentropy"
 )
 }

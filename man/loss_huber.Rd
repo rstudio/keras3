@@ -9,7 +9,7 @@ loss_huber(
   y_pred,
   delta = 1,
   ...,
-  reduction = "auto",
+  reduction = "sum_over_batch_size",
   name = "huber_loss"
 )
 }

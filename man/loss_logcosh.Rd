@@ -4,7 +4,13 @@
 \alias{loss_logcosh}
 \title{Computes the logarithm of the hyperbolic cosine of the prediction error.}
 \usage{
-loss_logcosh(y_true, y_pred, ..., reduction = "auto", name = "log_cosh")
+loss_logcosh(
+  y_true,
+  y_pred,
+  ...,
+  reduction = "sum_over_batch_size",
+  name = "log_cosh"
+)
 }
 \arguments{
 \item{y_true}{Ground truth values with shape = \verb{[batch_size, d0, .. dN]}.}

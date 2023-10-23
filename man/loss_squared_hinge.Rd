@@ -8,7 +8,7 @@ loss_squared_hinge(
   y_true,
   y_pred,
   ...,
-  reduction = "auto",
+  reduction = "sum_over_batch_size",
   name = "squared_hinge"
 )
 }

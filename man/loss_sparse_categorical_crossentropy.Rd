@@ -8,9 +8,10 @@ loss_sparse_categorical_crossentropy(
   y_true,
   y_pred,
   from_logits = FALSE,
+  ignore_class = NULL,
   axis = -1L,
   ...,
-  reduction = "auto",
+  reduction = "sum_over_batch_size",
   name = "sparse_categorical_crossentropy"
 )
 }
@@ -22,6 +23,12 @@ loss_sparse_categorical_crossentropy(
 \item{from_logits}{Whether \code{y_pred} is expected to be a logits tensor. By
 default, we assume that \code{y_pred} encodes a probability distribution.}
 
+\item{ignore_class}{Optional integer. The ID of a class to be ignored during
+loss computation. This is useful, for example, in segmentation
+problems featuring a "void" class (commonly -1 or 255) in
+segmentation maps. By default (\code{ignore_class=None}), all classes are
+considered.}
+
 \item{axis}{Defaults to \code{-1}. The dimension along which the entropy is
 computed.}
 
@@ -32,12 +39,6 @@ this should be \code{"sum_over_batch_size"}.
 Supported options are \code{"sum"}, \code{"sum_over_batch_size"} or \code{None}.}
 
 \item{name}{Optional name for the loss instance.}
-
-\item{ignore_class}{Optional integer. The ID of a class to be ignored during
-loss computation. This is useful, for example, in segmentation
-problems featuring a "void" class (commonly -1 or 255) in
-segmentation maps. By default (\code{ignore_class=None}), all classes are
-considered.}
 }
 \description{
 Use this crossentropy loss function when there are two or more label

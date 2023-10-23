@@ -8,7 +8,7 @@ loss_mean_absolute_error(
   y_true,
   y_pred,
   ...,
-  reduction = "auto",
+  reduction = "sum_over_batch_size",
   name = "mean_absolute_error"
 )
 }

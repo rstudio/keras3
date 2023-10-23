@@ -4,7 +4,13 @@
 \alias{loss_hinge}
 \title{Computes the hinge loss between \code{y_true} & \code{y_pred}.}
 \usage{
-loss_hinge(y_true, y_pred, ..., reduction = "auto", name = "hinge")
+loss_hinge(
+  y_true,
+  y_pred,
+  ...,
+  reduction = "sum_over_batch_size",
+  name = "hinge"
+)
 }
 \arguments{
 \item{y_true}{The ground truth values. \code{y_true} values are expected to be -1
