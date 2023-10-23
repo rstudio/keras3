@@ -368,6 +368,7 @@ make_r_name <- function(endpoint, module = py_eval(endpoint)$`__module__`) {
     "keras.preprocessing.image.load_img" =  "image_load"
     "keras.preprocessing.image.save_img" = "image_array_save"
     "keras.preprocessing.sequence.pad_sequences" = "pad_sequences"
+    # "keras.metrics.MeanMetricWrapper" =
 
 
     # "keras.losses.LogCosh" = "loss_logcosh"
@@ -453,7 +454,11 @@ make_r_name <- function(endpoint, module = py_eval(endpoint)$`__module__`) {
 
 
   if(prefix != "k")
-    name %<>% str_replace(glue("_{prefix}$"), "")
+    name %<>%
+    str_replace(glue("_?{prefix}_?"), "_") %>%
+    str_replace("^_", "") %>%
+    str_replace_all("_+", "_") %>%
+    str_replace("_$", "")
   if(length(prefix) && prefix != "")
     name <- str_flatten(c(prefix, name), collapse = "_")
 

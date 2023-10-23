@@ -102,7 +102,7 @@ Same shape as input.
 
 Other normalization layers: 
 \code{\link{layer_batch_normalization}()},
-\code{\link{layer_layer_normalization}()},
+\code{\link{layer_normalization}()},
 \code{\link{layer_spectral_normalization}()},
 \code{\link{layer_unit_normalization}()}
 }

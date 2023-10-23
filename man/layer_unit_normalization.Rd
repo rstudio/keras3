@@ -36,7 +36,7 @@ print(np.sum(normalized_data[0, :] ** 2)
 Other normalization layers: 
 \code{\link{layer_batch_normalization}()},
 \code{\link{layer_group_normalization}()},
-\code{\link{layer_layer_normalization}()},
+\code{\link{layer_normalization}()},
 \code{\link{layer_spectral_normalization}()}
 }
 \concept{normalization layers}

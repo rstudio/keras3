@@ -4542,7 +4542,7 @@ r"-(Wrap a stateless metric function with the Mean metric.
 #' @family metric
 #' @seealso
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/metrics/MeanMetricWrapper>
-metric_mean_metric_wrapper <-
+metric_mean_wrapper <-
 function (..., fn, name = NULL, dtype = NULL)
 {
     args <- capture_args2(NULL)
