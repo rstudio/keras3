@@ -185,7 +185,7 @@ r"-(Computes the cross-entropy loss between true labels and predicted labels.
 #' @seealso
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/losses/BinaryCrossentropy>
 loss_binary_crossentropy <-
-function (y_true, y_pred, from_logits = FALSE, label_smoothing = 0,
+structure(function (y_true, y_pred, from_logits = FALSE, label_smoothing = 0,
     axis = -1L, ..., reduction = "sum_over_batch_size", name = "binary_crossentropy")
 {
     args <- capture_args2(list(axis = as_axis))
@@ -193,7 +193,7 @@ function (y_true, y_pred, from_logits = FALSE, label_smoothing = 0,
         keras$losses$BinaryCrossentropy
     else keras$losses$binary_crossentropy
     do.call(callable, args)
-}
+}, py_function_name = "binary_crossentropy")
 
 
 # keras$layers$BinaryFocalCrossentropy
@@ -508,16 +508,16 @@ r"-(Computes focal cross-entropy loss between true labels and predictions.
 #' @seealso
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/losses/BinaryFocalCrossentropy>
 loss_binary_focal_crossentropy <-
-function (y_true, y_pred, apply_class_balancing = FALSE, alpha = 0.25,
-    gamma = 2, from_logits = FALSE, label_smoothing = 0, axis = -1L,
-    ..., reduction = "sum_over_batch_size", name = "binary_focal_crossentropy")
+structure(function (y_true, y_pred, apply_class_balancing = FALSE,
+    alpha = 0.25, gamma = 2, from_logits = FALSE, label_smoothing = 0,
+    axis = -1L, ..., reduction = "sum_over_batch_size", name = "binary_focal_crossentropy")
 {
     args <- capture_args2(list(axis = as_axis))
     callable <- if (missing(y_true) && missing(y_pred))
         keras$losses$BinaryFocalCrossentropy
     else keras$losses$binary_focal_crossentropy
     do.call(callable, args)
-}
+}, py_function_name = "binary_focal_crossentropy")
 
 
 # keras$layers$CategoricalCrossentropy
@@ -664,7 +664,7 @@ r"-(Computes the crossentropy loss between the labels and predictions.
 #' @seealso
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/losses/CategoricalCrossentropy>
 loss_categorical_crossentropy <-
-function (y_true, y_pred, from_logits = FALSE, label_smoothing = 0,
+structure(function (y_true, y_pred, from_logits = FALSE, label_smoothing = 0,
     axis = -1L, ..., reduction = "sum_over_batch_size", name = "categorical_crossentropy")
 {
     args <- capture_args2(list(axis = as_axis))
@@ -672,7 +672,7 @@ function (y_true, y_pred, from_logits = FALSE, label_smoothing = 0,
         keras$losses$CategoricalCrossentropy
     else keras$losses$categorical_crossentropy
     do.call(callable, args)
-}
+}, py_function_name = "categorical_crossentropy")
 
 
 # keras$layers$CategoricalFocalCrossentropy
@@ -902,16 +902,16 @@ r"-(Computes the alpha balanced focal crossentropy loss.
 #' @seealso
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/losses/CategoricalFocalCrossentropy>
 loss_categorical_focal_crossentropy <-
-function (y_true, y_pred, alpha = 0.25, gamma = 2, from_logits = FALSE,
-    label_smoothing = 0, axis = -1L, ..., reduction = "sum_over_batch_size",
-    name = "categorical_focal_crossentropy")
+structure(function (y_true, y_pred, alpha = 0.25, gamma = 2,
+    from_logits = FALSE, label_smoothing = 0, axis = -1L, ...,
+    reduction = "sum_over_batch_size", name = "categorical_focal_crossentropy")
 {
     args <- capture_args2(list(axis = as_axis))
     callable <- if (missing(y_true) && missing(y_pred))
         keras$losses$CategoricalFocalCrossentropy
     else keras$losses$categorical_focal_crossentropy
     do.call(callable, args)
-}
+}, py_function_name = "categorical_focal_crossentropy")
 
 
 # keras$layers$CategoricalHinge
@@ -979,7 +979,7 @@ r"-(Computes the categorical hinge loss between `y_true` & `y_pred`.
 #' @seealso
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/losses/CategoricalHinge>
 loss_categorical_hinge <-
-function (y_true, y_pred, ..., reduction = "sum_over_batch_size",
+structure(function (y_true, y_pred, ..., reduction = "sum_over_batch_size",
     name = "categorical_hinge")
 {
     args <- capture_args2(NULL)
@@ -987,7 +987,7 @@ function (y_true, y_pred, ..., reduction = "sum_over_batch_size",
         keras$losses$CategoricalHinge
     else keras$losses$categorical_hinge
     do.call(callable, args)
-}
+}, py_function_name = "categorical_hinge")
 
 
 # keras$layers$CosineSimilarity
@@ -1071,7 +1071,7 @@ r"-(Computes the cosine similarity between `y_true` & `y_pred`.
 #' @seealso
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/losses/CosineSimilarity>
 loss_cosine_similarity <-
-function (y_true, y_pred, axis = -1L, ..., reduction = "sum_over_batch_size",
+structure(function (y_true, y_pred, axis = -1L, ..., reduction = "sum_over_batch_size",
     name = "cosine_similarity")
 {
     args <- capture_args2(list(axis = as_axis))
@@ -1079,7 +1079,7 @@ function (y_true, y_pred, axis = -1L, ..., reduction = "sum_over_batch_size",
         keras$losses$CosineSimilarity
     else keras$losses$cosine_similarity
     do.call(callable, args)
-}
+}, py_function_name = "cosine_similarity")
 
 
 # keras$layers$Hinge
@@ -1146,7 +1146,7 @@ r"-(Computes the hinge loss between `y_true` & `y_pred`.
 #' @seealso
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/losses/Hinge>
 loss_hinge <-
-function (y_true, y_pred, ..., reduction = "sum_over_batch_size",
+structure(function (y_true, y_pred, ..., reduction = "sum_over_batch_size",
     name = "hinge")
 {
     args <- capture_args2(NULL)
@@ -1154,7 +1154,7 @@ function (y_true, y_pred, ..., reduction = "sum_over_batch_size",
         keras$losses$Hinge
     else keras$losses$hinge
     do.call(callable, args)
-}
+}, py_function_name = "hinge")
 
 
 # keras$layers$Huber
@@ -1238,7 +1238,7 @@ r"-(Computes the Huber loss between `y_true` & `y_pred`.
 #' @seealso
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/losses/Huber>
 loss_huber <-
-function (y_true, y_pred, delta = 1, ..., reduction = "sum_over_batch_size",
+structure(function (y_true, y_pred, delta = 1, ..., reduction = "sum_over_batch_size",
     name = "huber_loss")
 {
     args <- capture_args2(NULL)
@@ -1246,7 +1246,7 @@ function (y_true, y_pred, delta = 1, ..., reduction = "sum_over_batch_size",
         keras$losses$Huber
     else keras$losses$huber
     do.call(callable, args)
-}
+}, py_function_name = "huber")
 
 
 # keras$layers$KLDivergence
@@ -1310,7 +1310,7 @@ r"-(Computes Kullback-Leibler divergence loss between `y_true` & `y_pred`.
 #' @seealso
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/losses/KLDivergence>
 loss_kl_divergence <-
-function (y_true, y_pred, ..., reduction = "sum_over_batch_size",
+structure(function (y_true, y_pred, ..., reduction = "sum_over_batch_size",
     name = "kl_divergence")
 {
     args <- capture_args2(NULL)
@@ -1318,7 +1318,7 @@ function (y_true, y_pred, ..., reduction = "sum_over_batch_size",
         keras$losses$KLDivergence
     else keras$losses$kl_divergence
     do.call(callable, args)
-}
+}, py_function_name = "kl_divergence")
 
 
 # keras$layers$LogCosh
@@ -1386,7 +1386,7 @@ r"-(Computes the logarithm of the hyperbolic cosine of the prediction error.
 #' @seealso
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/losses/LogCosh>
 loss_logcosh <-
-function (y_true, y_pred, ..., reduction = "sum_over_batch_size",
+structure(function (y_true, y_pred, ..., reduction = "sum_over_batch_size",
     name = "log_cosh")
 {
     args <- capture_args2(NULL)
@@ -1394,7 +1394,7 @@ function (y_true, y_pred, ..., reduction = "sum_over_batch_size",
         keras$losses$LogCosh
     else keras$losses$log_cosh
     do.call(callable, args)
-}
+}, py_function_name = "log_cosh")
 
 
 # keras$layers$MeanAbsoluteError
@@ -1451,7 +1451,7 @@ r"-(Computes the mean of absolute difference between labels and predictions.
 #' @seealso
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/losses/MeanAbsoluteError>
 loss_mean_absolute_error <-
-function (y_true, y_pred, ..., reduction = "sum_over_batch_size",
+structure(function (y_true, y_pred, ..., reduction = "sum_over_batch_size",
     name = "mean_absolute_error")
 {
     args <- capture_args2(NULL)
@@ -1459,7 +1459,7 @@ function (y_true, y_pred, ..., reduction = "sum_over_batch_size",
         keras$losses$MeanAbsoluteError
     else keras$losses$mean_absolute_error
     do.call(callable, args)
-}
+}, py_function_name = "mean_absolute_error")
 
 
 # keras$layers$MeanAbsolutePercentageError
@@ -1523,7 +1523,7 @@ r"-(Computes the mean absolute percentage error between `y_true` & `y_pred`.
 #' @seealso
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/losses/MeanAbsolutePercentageError>
 loss_mean_absolute_percentage_error <-
-function (y_true, y_pred, ..., reduction = "sum_over_batch_size",
+structure(function (y_true, y_pred, ..., reduction = "sum_over_batch_size",
     name = "mean_absolute_percentage_error")
 {
     args <- capture_args2(NULL)
@@ -1531,7 +1531,7 @@ function (y_true, y_pred, ..., reduction = "sum_over_batch_size",
         keras$losses$MeanAbsolutePercentageError
     else keras$losses$mean_absolute_percentage_error
     do.call(callable, args)
-}
+}, py_function_name = "mean_absolute_percentage_error")
 
 
 # keras$layers$MeanSquaredError
@@ -1590,7 +1590,7 @@ r"-(Computes the mean of squares of errors between labels and predictions.
 #' @seealso
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/losses/MeanSquaredError>
 loss_mean_squared_error <-
-function (y_true, y_pred, ..., reduction = "sum_over_batch_size",
+structure(function (y_true, y_pred, ..., reduction = "sum_over_batch_size",
     name = "mean_squared_error")
 {
     args <- capture_args2(NULL)
@@ -1598,7 +1598,7 @@ function (y_true, y_pred, ..., reduction = "sum_over_batch_size",
         keras$losses$MeanSquaredError
     else keras$losses$mean_squared_error
     do.call(callable, args)
-}
+}, py_function_name = "mean_squared_error")
 
 
 # keras$layers$MeanSquaredLogarithmicError
@@ -1662,7 +1662,7 @@ r"-(Computes the mean squared logarithmic error between `y_true` & `y_pred`.
 #' @seealso
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/losses/MeanSquaredLogarithmicError>
 loss_mean_squared_logarithmic_error <-
-function (y_true, y_pred, ..., reduction = "sum_over_batch_size",
+structure(function (y_true, y_pred, ..., reduction = "sum_over_batch_size",
     name = "mean_squared_logarithmic_error")
 {
     args <- capture_args2(NULL)
@@ -1670,7 +1670,7 @@ function (y_true, y_pred, ..., reduction = "sum_over_batch_size",
         keras$losses$MeanSquaredLogarithmicError
     else keras$losses$mean_squared_logarithmic_error
     do.call(callable, args)
-}
+}, py_function_name = "mean_squared_logarithmic_error")
 
 
 # keras$layers$Poisson
@@ -1734,7 +1734,7 @@ r"-(Computes the Poisson loss between `y_true` & `y_pred`.
 #' @seealso
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/losses/Poisson>
 loss_poisson <-
-function (y_true, y_pred, ..., reduction = "sum_over_batch_size",
+structure(function (y_true, y_pred, ..., reduction = "sum_over_batch_size",
     name = "poisson")
 {
     args <- capture_args2(NULL)
@@ -1742,7 +1742,7 @@ function (y_true, y_pred, ..., reduction = "sum_over_batch_size",
         keras$losses$Poisson
     else keras$losses$poisson
     do.call(callable, args)
-}
+}, py_function_name = "poisson")
 
 
 # keras$layers$SparseCategoricalCrossentropy
@@ -1891,7 +1891,7 @@ r"-(Computes the crossentropy loss between the labels and predictions.
 #' @seealso
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/losses/SparseCategoricalCrossentropy>
 loss_sparse_categorical_crossentropy <-
-function (y_true, y_pred, from_logits = FALSE, ignore_class = NULL,
+structure(function (y_true, y_pred, from_logits = FALSE, ignore_class = NULL,
     axis = -1L, ..., reduction = "sum_over_batch_size", name = "sparse_categorical_crossentropy")
 {
     args <- capture_args2(list(ignore_class = as_integer, axis = as_axis))
@@ -1899,7 +1899,7 @@ function (y_true, y_pred, from_logits = FALSE, ignore_class = NULL,
         keras$losses$SparseCategoricalCrossentropy
     else keras$losses$sparse_categorical_crossentropy
     do.call(callable, args)
-}
+}, py_function_name = "sparse_categorical_crossentropy")
 
 
 # keras$layers$SquaredHinge
@@ -1966,7 +1966,7 @@ r"-(Computes the squared hinge loss between `y_true` & `y_pred`.
 #' @seealso
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/losses/SquaredHinge>
 loss_squared_hinge <-
-function (y_true, y_pred, ..., reduction = "sum_over_batch_size",
+structure(function (y_true, y_pred, ..., reduction = "sum_over_batch_size",
     name = "squared_hinge")
 {
     args <- capture_args2(NULL)
@@ -1974,4 +1974,4 @@ function (y_true, y_pred, ..., reduction = "sum_over_batch_size",
         keras$losses$SquaredHinge
     else keras$losses$squared_hinge
     do.call(callable, args)
-}
+}, py_function_name = "squared_hinge")

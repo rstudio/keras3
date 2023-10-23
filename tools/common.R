@@ -607,7 +607,10 @@ make_r_fn.loss <- function(endpoint, py_obj, transformers) {
 
   name <- py_obj$`__name__`
   endpoint_fn <- str_replace(endpoint, name, snakecase::to_snake_case(name))
+
   py_obj_fn <- py_eval(endpoint_fn) %error% browser()
+  ### browser() if we need a simple fallback in case there is a loss with only a
+  ### class handle and not a matching function handle
   py_obj_expr_fn <- endpoint_to_expr(endpoint_fn)
   transformers <- modifyList(transformers %||% list(),
                              get_arg_transformers(endpoint_fn) %||% list()) %error% browser()
@@ -617,18 +620,6 @@ make_r_fn.loss <- function(endpoint, py_obj, transformers) {
   frmls <- frmls[unique(names(frmls))]
   stopifnot(names(frmls)[1:2] == c("y_true", "y_pred"))
 
-  # if (is.null(py_fn)) {
-  #   body <- substitute({
-  #     args <- capture_args(match.call(), modifiers)
-  #     do.call(py_cls, args)
-  #   })
-  #
-  #   formals <- c(alist(... =), formals)
-  #   if (!is.character(py_fn_name))
-  #     py_fn_name <- NULL
-  #
-  # } else {
-
     body <- bquote({
       args <- capture_args2(.(transformers))
       callable <- if (missing(y_true) && missing(y_pred))
@@ -636,39 +627,16 @@ make_r_fn.loss <- function(endpoint, py_obj, transformers) {
       do.call(callable, args)
     })
 
-    # formals <- c(alist(y_true = , y_pred =), frmls)
-    # if (!isFALSE(py_fn_name)) {
-    #   py_fn_name <- if (isTRUE(py_fn_name)) {
-    #     last <- function(x) x[[length(x)]]
-    #     last(strsplit(deparse(py_fn), "$", fixed = TRUE)[[1]])
-    #   }
-    #   else
-    #     NULL
-    # }
-  # }
-
-  # formals[["..."]] <- quote(expr = )
-
-  # if (!is.null(py_cls)) {
-  #   if (!"name" %in% names(formals))
-  #     formals['name'] <- list(py_fn_name)
-  #   if (!"dtype" %in% names(formals))
-  #     formals['dtype'] <- list(NULL)
-  # }
 
   fn <- as.function.default(c(frmls, body))
+  attr(fn, "py_function_name") <- py_obj_fn$`__name__`
 
-  # if(is.character(py_fn_name))
-    # attr(fn, "py_function_name") <- py_fn_name
+  # TODO: compile should check for the bare metric/loss R wrapper being passed,
+  # and maybe unwrap it to avoid the R overhead.
 
+  # TODO: dump r docstring for the r function wrapper too
   fn
 }
-# endpoint <- "keras.losses.BinaryCrossentropy"
-# py_obj <- py_eval(endpoint)
-# transformers <- list()
-# make_r_fn.loss(endpoint, py_obj, transformers)
-# mk_export("keras.losses.BinaryCrossentropy")
-
 
 make_r_fn.layer <- function(endpoint, py_obj, transformers) {
 
