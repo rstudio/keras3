@@ -23,9 +23,9 @@ endpoints <- str_c("keras.", c %(% {
   "preprocessing.image"
   "preprocessing.sequence"
   "losses"
+  "metrics"
   # "preprocessing.text"
   # "utils"
-  # "metrics",
 
   # "backend",
   # "dtensor",
@@ -111,9 +111,25 @@ endpoints <-
     if(all(grepl(r"(keras\.layers\.(Global)?(Avg|Average|Max)Pool(ing)?[1234]D)",
                  df$endpoint))) {
       return(df %>% slice_max(nchar(endpoint)))
-    } else if(any(str_detect(df$endpoint, "metrics|losses"))) {
-      browser()
-      # print(df)
+    } else if (any(str_detect(df$endpoint, "metrics|losses"))) {
+      nms_in <- names(df)
+      if(any(str_detect(df$endpoint, "auc")))
+        browser()
+      df <- df |>
+        mutate(
+          name = map_chr(py_obj, \(o) o$`__name__`),
+          module = map_chr(py_obj, \(o) o$`__module__`)) |>
+        rowwise() %>%
+        mutate(
+          dist_from_true_home = adist(str_replace(endpoint, name, ""),
+                                      module)
+        )
+      # browser()
+      df <- df |>
+        arrange(dist_from_true_home, desc(nchar(name)))
+
+      # message(str_flatten_comma(df$endpoint, ", or "))
+      df %>% slice(1) %>% select(!!nms_in)
     } else {
       return(df %>% slice_min(nchar(endpoint), with_ties = FALSE))
     }
@@ -161,6 +177,11 @@ endpoints <-
     "keras.losses.Loss"              # only for subclassing
     "keras.metrics.Metric"           # only for subclassing
 
+    "keras.metrics.Accuracy"         # weird, only class handle, no fn handle - weird alias
+                                     # for binary_accuracy, but without any threshold casting.
+                                     # kind of confusing - the keras.metrices.<type>*_accuracy
+                                     # endpoints are much preferable.
+
     "keras.layers.Wrapper"           # needs thinking
     "keras.layers.InputLayer"        # use Input instead
     "keras.layers.InputSpec"         # ??
@@ -171,33 +192,41 @@ endpoints <-
     "keras.optimizers.LegacyOptimizerWarning"
   })
 
-# filter out functional losses that are also type based losses
+# filter out function handles that also have class handles
 endpoints <- endpoints %>%
-  lapply(\(ep) {
-    if(!any(startsWith(ep, c("keras.losses.", "keras.metrics."))))
-      return(ep)
-    py_obj <- py_eval(ep)
-    if (!inherits(py_obj, "python.builtin.function"))
-      return(ep)
+  lapply(\(endpoint) {
+    if(!any(startsWith(endpoint, c("keras.losses.", "keras.metrics."))))
+      return(endpoint)
 
+    py_obj <- py_eval(endpoint)
+    if (!inherits(py_obj, "python.builtin.function"))
+      return(endpoint)
 
       # if we have both functional and type api interfaces, we
       # just want the type right now (we dynamically fetch the matching
       # functional counterpart later)
-      ep2 <- switch(ep,
+      class_endpoint <- switch(endpoint,
              "keras.losses.kl_divergence" = "keras.losses.KLDivergence",
-             str_replace(ep, py_obj$`__name__`,
+             str_replace(endpoint, py_obj$`__name__`,
                          snakecase::to_upper_camel_case(py_obj$`__name__`)))
       tryCatch({
-        py_eval(ep2)
+        py_eval(class_endpoint)
         return(NULL)
       },
       python.builtin.AttributeError = function(e) {
-        print(e)
-        ep
+        # don't emit warning about known function handles without class handle
+        # counterparts
+        if (!endpoint %in% sprintf(
+          "keras.metrics.%s", c(
+            "binary_focal_crossentropy",
+            'categorical_focal_crossentropy',
+            'huber',
+            'kl_divergence',
+            'log_cosh')))
+          # browser()
+          print(e)
+        endpoint
       })
-
-
   }) %>%
   unlist() %>%
   invisible()
@@ -246,7 +275,7 @@ df |>
                                    "preprocessing",
                                    "preprocessing.image",
                                    "preprocessing.sequence",
-                                   "losses",
+                                   "losses", "metrics",
                                    # "utils",
                                    "applications",
                                    "activations", "regularizers")) |> #

@@ -66,7 +66,7 @@ Other loss:
 \code{\link{loss_cosine_similarity}()},
 \code{\link{loss_huber}()},
 \code{\link{loss_kl_divergence}()},
-\code{\link{loss_logcosh}()},
+\code{\link{loss_log_cosh}()},
 \code{\link{loss_mean_absolute_error}()},
 \code{\link{loss_mean_absolute_percentage_error}()},
 \code{\link{loss_mean_squared_error}()},

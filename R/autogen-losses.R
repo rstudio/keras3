@@ -601,6 +601,8 @@ r"-(Computes the crossentropy loss between the labels and predictions.
 #' loss
 #' # array([0.0513, 2.303], dtype=float32)
 #' ```
+#'
+#' # Usage
 #' Standalone usage:
 #'
 #' ```python
@@ -830,6 +832,8 @@ r"-(Computes the alpha balanced focal crossentropy loss.
 #' loss
 #' # array([2.63401289e-04, 6.75912094e-01], dtype=float32)
 #' ```
+#'
+#' # Usage
 #' Standalone usage:
 #'
 #' ```python
@@ -1385,7 +1389,7 @@ r"-(Computes the logarithm of the hyperbolic cosine of the prediction error.
 #' @family loss
 #' @seealso
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/losses/LogCosh>
-loss_logcosh <-
+loss_log_cosh <-
 structure(function (y_true, y_pred, ..., reduction = "sum_over_batch_size",
     name = "log_cosh")
 {

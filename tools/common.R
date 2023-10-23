@@ -24,6 +24,7 @@ known_section_headings <- c %(% {
   "Notes:"
   "Note:"
   "Usage:"
+  # "Standalone usage:"
 }
 
 
@@ -130,7 +131,6 @@ vararg_paramater_names <- function(py_obj) {
 
 parse_params_section <- function(docstring_args_section, treat_as_dots = NULL) {
 
-
   for (chk_empty_fn in c(is.null, is.na, partial(`==`, "")))
     if(chk_empty_fn(docstring_args_section))
       return(list())
@@ -138,6 +138,9 @@ parse_params_section <- function(docstring_args_section, treat_as_dots = NULL) {
   if(!is_scalar(docstring_args_section))
     docstring_args_section %<>% str_flatten("\n")
 
+
+  # if(str_detect(docstring_args_section, fixed("recall: A scalar value in range `[0,")))
+  #   browser()
 
   x <- docstring_args_section |>
     c("") |> # append final new line to ensure glue::trim() still works when length(x) == 1
@@ -365,7 +368,9 @@ make_r_name <- function(endpoint, module = py_eval(endpoint)$`__module__`) {
     "keras.preprocessing.image.load_img" =  "image_load"
     "keras.preprocessing.image.save_img" = "image_array_save"
     "keras.preprocessing.sequence.pad_sequences" = "pad_sequences"
-    "keras.losses.LogCosh" = "loss_logcosh"
+
+
+    # "keras.losses.LogCosh" = "loss_logcosh"
     NULL
   })) return(r_name)
 
@@ -407,6 +412,10 @@ make_r_name <- function(endpoint, module = py_eval(endpoint)$`__module__`) {
     str_replace("ResNet", "Resnet") |>
     str_replace("ConvNeXt", "Convnext") |>
     str_replace("XLarge", "Xlarge") |>
+
+    str_replace("IoU", "Iou") |>
+    str_replace("FBeta", "Fbeta") |>
+    # str_replace("FBeta", "Fbeta") |>
     # str_replace("EfficientNet", "Efficientnet") |>
 
     snakecase::to_snake_case() |>
@@ -424,7 +433,8 @@ make_r_name <- function(endpoint, module = py_eval(endpoint)$`__module__`) {
     str_replace_all("^dense_net_", "densenet") |>
     str_replace_all("^mobile_net?", "mobilenet") |>
 
-
+    str_replace("f_1", "f1") |>
+    str_replace("r_2", "r2") |>
 
     str_replace_all("max_norm", "maxnorm") |>
     str_replace_all("non_neg", "nonneg") |>
@@ -545,6 +555,7 @@ make_r_fn <- function(endpoint,
   }
   switch(keras_class_type(py_obj),
          layer = make_r_fn.layer(endpoint, py_obj, transformers),
+         metric = ,
          loss = make_r_fn.loss(endpoint, py_obj, transformers),
          make_r_fn.default(endpoint, py_obj, transformers))
 }
@@ -599,16 +610,27 @@ make_r_fn.activation <- function(endpoint,py_obj, transformers) {
 
 make_r_fn.loss <- function(endpoint, py_obj, transformers) {
 
-  # see if there is a functional counterpart to the class object
+  # see if there is a function counterpart handle to the class handle
+
+  name <- py_obj$`__name__`
+  endpoint_fn <- str_replace(endpoint, name, snakecase::to_snake_case(name))
+
+  py_obj_fn <- tryCatch(py_eval(endpoint_fn),
+                        python.builtin.AttributeError = function(e) NULL)
+
+  if(is.null(py_obj_fn)) {
+    fn <- make_r_fn.default(endpoint, py_obj, transformers)
+    formals(fn) <- formals(py_obj) %>%
+      c(alist(... =), .) %>% .[unique(names(.))]
+    return(fn)
+  }
+
   py_obj_expr <- endpoint_to_expr(endpoint)
   frmls <- formals(py_obj)
   frmls <- c(alist(... = ), formals(py_obj))
   frmls <- frmls[unique(names(frmls))]
 
-  name <- py_obj$`__name__`
-  endpoint_fn <- str_replace(endpoint, name, snakecase::to_snake_case(name))
-
-  py_obj_fn <- py_eval(endpoint_fn) %error% browser()
+  #%error% browser()
   ### browser() if we need a simple fallback in case there is a loss with only a
   ### class handle and not a matching function handle
   py_obj_expr_fn <- endpoint_to_expr(endpoint_fn)
@@ -734,6 +756,35 @@ param_augment_registry <- yaml::read_yaml("tools/param-descripations.yml") %>%
 
 # ---- make, format, dump ----
 
+known_metrics_without_function_handles <- c %(% {
+  "keras.metrics.AUC"
+  "keras.metrics.BinaryIoU"
+  "keras.metrics.CosineSimilarity"
+  "keras.metrics.F1Score"
+  "keras.metrics.FalseNegatives"
+  "keras.metrics.FalsePositives"
+  "keras.metrics.FBetaScore"
+  "keras.metrics.IoU"
+  "keras.metrics.LogCoshError"
+  "keras.metrics.Mean"
+  "keras.metrics.MeanIoU"
+  "keras.metrics.MeanMetricWrapper"
+  "keras.metrics.OneHotIoU"
+  "keras.metrics.OneHotMeanIoU"
+  "keras.metrics.Precision"
+  "keras.metrics.PrecisionAtRecall"
+  "keras.metrics.R2Score"
+  "keras.metrics.Recall"
+  "keras.metrics.RecallAtPrecision"
+  "keras.metrics.RootMeanSquaredError"
+  "keras.metrics.SensitivityAtSpecificity"
+  "keras.metrics.SpecificityAtSensitivity"
+  "keras.metrics.Sum"
+  "keras.metrics.TrueNegatives"
+  "keras.metrics.TruePositives"
+}
+
+
 mk_export <- function(endpoint) {
 
   # py parts
@@ -759,8 +810,20 @@ mk_export <- function(endpoint) {
        endpoint |> startsWith("keras.metrics.")) &&
       inherits(py_obj, "python.builtin.type"))
   local({
-    ep2 <- mk_export(str_replace(endpoint, name, snakecase::to_snake_case(name)))
-    # browser()
+    endpoint2 <- str_replace(endpoint, name, snakecase::to_snake_case(name))
+    py_obj2 <- NULL
+    tryCatch(
+      py_obj2 <- py_eval(endpoint2),
+      python.builtin.AttributeError = function(e) {
+
+        if(!endpoint %in% known_metrics_without_function_handles)
+          message(endpoint2, " not found")
+          # message('"', endpoint, '"')
+      }
+      )
+    if(is.null(py_obj2)) return()
+
+    ep2 <- mk_export(endpoint2)
     params <<- modifyList(params, ep2$params)
     for(section in setdiff(names(ep2$doc), "title"))
       doc[[section]] %<>% str_flatten_lines(ep2$doc[[section]], .)
@@ -809,11 +872,12 @@ mk_export <- function(endpoint) {
     }
   })
 
+  if(!in_recursive_call())
   local({
     if (length(undocumented_params <-
                setdiff(names(formals(r_fn)),
                        unlist(strsplit(names(params) %||% character(), ","))))) {
-
+      browser()
       x <- list2("{endpoint}" := map(set_names(undocumented_params), ~"see description"))
       writeLines(yaml::as.yaml(x))
       # message(endpoint, ":")
@@ -920,7 +984,7 @@ mk_layer_activation_selu <- function() {
 
 get_fixed_docstring <- function(endpoint) {
 
-  d <- inspect$getdoc(py_eval(endpoint))
+  d <- inspect$getdoc(py_eval(endpoint)) %||% ""
   replace <- function(old_txt, new_txt) {
     d <<- stringi::stri_replace_first_fixed(d, old_txt, new_txt)
   }
@@ -939,6 +1003,11 @@ get_fixed_docstring <- function(endpoint) {
       "    values: A tensor, the values to be set at `indices`."
     )
 
+    keras.metrics.RecallAtPrecision = replace(
+      "        num_thresholds: (Optional) Defaults to 200. The number of thresholds",
+      "    num_thresholds: (Optional) Defaults to 200. The number of thresholds"
+    )
+
     # keras.ops.einsum = replace(
     #   "operands: The operands to compute the Einstein sum of.",
     #   "*args: The operands to compute the Einstein sum of.")
@@ -946,8 +1015,31 @@ get_fixed_docstring <- function(endpoint) {
 
     NULL
   }
-  trim(d %||% "")
+
+
+  d <- trim(d)
+  d %<>% str_split_lines()
+  if("Standalone usage:" %in% d &&
+     !"Usage:" %in% d) {
+    d %<>% replace_val("Standalone usage:", "Usage:\n\nStandalone usage:")
+  }
+  d %<>% str_flatten_lines()
+  # d %>% str_split_lines() %>%
+  # d %>% str_split_lines() %>%
+  # d <- str_replace("^(\\s*)Standalone usage:$", "\\1Examples:\n\\1Standalone usage:")
+  # replace("Standalone usage:\n", "Examples:\n\nStandalone usage:\n")
+  d
 }
+
+in_recursive_call <- function() {
+  fn <- sys.call(-1)[[1]]
+  for(cl in head(sys.calls(), -2))
+    if(identical(cl[[1]], fn))
+      return(TRUE)
+  return(FALSE)
+}
+
+
 
 # rename2(list(a = "b", a = z))
 

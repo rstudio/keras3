@@ -25,6 +25,10 @@
   dtype: datatype (e.g., `"float32"`).
   "...": Passed on to the Python callable
 
+"keras.metrics.*":
+  y_true: Tensor of true targets.
+  y_pred: Tensor of predicted targets.
+
 # TODO: resolve presedence when multiple globs match
 
 keras.layers.Add:

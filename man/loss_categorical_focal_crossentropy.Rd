@@ -100,7 +100,9 @@ assert loss.shape == (2,)
 loss
 # array([2.63401289e-04, 6.75912094e-01], dtype=float32)
 }\if{html}{\out{</div>}}
+}
 
+\section{Usage}{
 Standalone usage:
 
 \if{html}{\out{<div class="sourceCode python">}}\preformatted{y_true = [[0., 1., 0.], [0., 0., 1.]]
@@ -155,7 +157,7 @@ Other loss:
 \code{\link{loss_hinge}()},
 \code{\link{loss_huber}()},
 \code{\link{loss_kl_divergence}()},
-\code{\link{loss_logcosh}()},
+\code{\link{loss_log_cosh}()},
 \code{\link{loss_mean_absolute_error}()},
 \code{\link{loss_mean_absolute_percentage_error}()},
 \code{\link{loss_mean_squared_error}()},
