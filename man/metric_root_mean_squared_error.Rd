@@ -24,10 +24,6 @@ Formula:
 }\if{html}{\out{</div>}}
 }
 \section{Examples}{
-
-}
-
-\section{Usage}{
 Standalone usage:
 
 \if{html}{\out{<div class="sourceCode python">}}\preformatted{m = keras.metrics.RootMeanSquaredError()

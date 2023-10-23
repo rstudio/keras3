@@ -42,9 +42,7 @@ Formula:
 y_pred = np.random.random(size=(2, 3))
 loss = keras.losses.mean_absolute_percentage_error(y_true, y_pred)
 }\if{html}{\out{</div>}}
-}
 
-\section{Usage}{
 Standalone usage:
 
 \if{html}{\out{<div class="sourceCode python">}}\preformatted{m = keras.metrics.MeanAbsolutePercentageError()

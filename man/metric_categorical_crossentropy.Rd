@@ -50,9 +50,7 @@ assert loss.shape == (2,)
 loss
 # array([0.0513, 2.303], dtype=float32)
 }\if{html}{\out{</div>}}
-}
 
-\section{Usage}{
 Standalone usage:
 
 \if{html}{\out{<div class="sourceCode python">}}\preformatted{# EPSILON = 1e-7, y = y_true, y` = y_pred

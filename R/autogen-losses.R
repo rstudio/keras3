@@ -601,8 +601,6 @@ r"-(Computes the crossentropy loss between the labels and predictions.
 #' loss
 #' # array([0.0513, 2.303], dtype=float32)
 #' ```
-#'
-#' # Usage
 #' Standalone usage:
 #'
 #' ```python
@@ -832,8 +830,6 @@ r"-(Computes the alpha balanced focal crossentropy loss.
 #' loss
 #' # array([2.63401289e-04, 6.75912094e-01], dtype=float32)
 #' ```
-#'
-#' # Usage
 #' Standalone usage:
 #'
 #' ```python

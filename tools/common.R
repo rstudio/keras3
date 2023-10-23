@@ -368,8 +368,7 @@ make_r_name <- function(endpoint, module = py_eval(endpoint)$`__module__`) {
     "keras.preprocessing.image.load_img" =  "image_load"
     "keras.preprocessing.image.save_img" = "image_array_save"
     "keras.preprocessing.sequence.pad_sequences" = "pad_sequences"
-    # "keras.metrics.MeanMetricWrapper" =
-
+    "keras.layers.LayerNormalization" = "layer_layer_normalization"
 
     # "keras.losses.LogCosh" = "loss_logcosh"
     NULL
@@ -1025,7 +1024,7 @@ get_fixed_docstring <- function(endpoint) {
   d <- trim(d)
   d %<>% str_split_lines()
   if("Standalone usage:" %in% d &&
-     !"Usage:" %in% d) {
+     !any(c("Usage:", "Examples:") %in% d)) {
     d %<>% replace_val("Standalone usage:", "Usage:\n\nStandalone usage:")
   }
   d %<>% str_flatten_lines()

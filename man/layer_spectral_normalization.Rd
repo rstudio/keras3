@@ -55,7 +55,7 @@ y.shape
 Other normalization layers: 
 \code{\link{layer_batch_normalization}()},
 \code{\link{layer_group_normalization}()},
-\code{\link{layer_normalization}()},
+\code{\link{layer_layer_normalization}()},
 \code{\link{layer_unit_normalization}()}
 }
 \concept{normalization layers}

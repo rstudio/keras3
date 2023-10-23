@@ -32,10 +32,6 @@ This metric keeps the average cosine similarity between \code{predictions} and
 \code{labels} over a stream of data.
 }
 \section{Examples}{
-
-}
-
-\section{Usage}{
 Standalone usage:
 
 \if{html}{\out{<div class="sourceCode python">}}\preformatted{# l2_norm(y_true) = [[0., 1.], [1./1.414, 1./1.414]]

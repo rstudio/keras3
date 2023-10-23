@@ -48,9 +48,7 @@ assert loss.shape == (2,)
 loss
 # array([0.916 , 0.714], dtype=float32)
 }\if{html}{\out{</div>}}
-}
 
-\section{Usage}{
 Standalone usage:
 
 \if{html}{\out{<div class="sourceCode python">}}\preformatted{m = keras.metrics.BinaryCrossentropy()

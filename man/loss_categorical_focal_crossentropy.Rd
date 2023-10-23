@@ -100,9 +100,7 @@ assert loss.shape == (2,)
 loss
 # array([2.63401289e-04, 6.75912094e-01], dtype=float32)
 }\if{html}{\out{</div>}}
-}
 
-\section{Usage}{
 Standalone usage:
 
 \if{html}{\out{<div class="sourceCode python">}}\preformatted{y_true = [[0., 1., 0.], [0., 0., 1.]]

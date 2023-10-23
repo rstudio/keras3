@@ -558,7 +558,7 @@ r"-(Layer normalization layer (Ba et al., 2016).
 #' @family normalization layers
 #' @seealso
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/layers/LayerNormalization>
-layer_normalization <-
+layer_layer_normalization <-
 function (object, axis = -1L, epsilon = 0.001, center = TRUE,
     scale = TRUE, rms_scaling = FALSE, beta_initializer = "zeros",
     gamma_initializer = "ones", beta_regularizer = NULL, gamma_regularizer = NULL,

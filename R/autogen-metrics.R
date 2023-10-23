@@ -3004,8 +3004,6 @@ r"-(Computes the Intersection-Over-Union metric for class 0 and/or 1.
 #' with `threshold=0`, this metric has the same behavior as `IoU`.
 #'
 #' # Examples
-#'
-#' # Usage
 #' Standalone usage:
 #'
 #' ```python
@@ -3170,8 +3168,6 @@ r"-(Computes the Intersection-Over-Union metric for specific target classes.
 #' that specific class is returned.
 #'
 #' # Examples
-#'
-#' # Usage
 #' Standalone usage:
 #'
 #' ```python
@@ -3336,8 +3332,6 @@ r"-(Computes the mean Intersection-Over-Union metric.
 #' returns the mean of these values.
 #'
 #' # Examples
-#'
-#' # Usage
 #' Standalone usage:
 #'
 #' ```python
@@ -3519,8 +3513,6 @@ r"-(Computes the Intersection-Over-Union metric for one-hot encoded labels.
 #' computed.
 #'
 #' # Examples
-#'
-#' # Usage
 #' Standalone usage:
 #'
 #' ```python
@@ -3699,8 +3691,6 @@ r"-(Computes mean Intersection-Over-Union metric for one-hot encoded labels.
 #' computed.
 #'
 #' # Examples
-#'
-#' # Usage
 #' Standalone usage:
 #'
 #' ```python
@@ -3820,8 +3810,6 @@ r"-(Computes the crossentropy metric between the labels and predictions.
 #' loss
 #' # array([0.916 , 0.714], dtype=float32)
 #' ```
-#'
-#' # Usage
 #' Standalone usage:
 #'
 #' ```python
@@ -3957,8 +3945,6 @@ r"-(Computes the crossentropy metric between the labels and predictions.
 #' loss
 #' # array([0.0513, 2.303], dtype=float32)
 #' ```
-#'
-#' # Usage
 #' Standalone usage:
 #'
 #' ```python
@@ -4210,8 +4196,6 @@ r"-(Computes the Poisson metric between `y_true` and `y_pred`.
 #'     loss, np.mean(y_pred - y_true * np.log(y_pred), axis=-1),
 #'     atol=1e-5)
 #' ```
-#'
-#' # Usage
 #' Standalone usage:
 #'
 #' ```python
@@ -4341,8 +4325,6 @@ r"-(Computes the crossentropy metric between the labels and predictions.
 #' loss
 #' # array([0.0513, 2.303], dtype=float32)
 #' ```
-#'
-#' # Usage
 #' Standalone usage:
 #'
 #' ```python
@@ -4682,8 +4664,6 @@ r"-(Computes the cosine similarity between the labels and predictions.
 #' `labels` over a stream of data.
 #'
 #' # Examples
-#'
-#' # Usage
 #' Standalone usage:
 #'
 #' ```python
@@ -4781,8 +4761,6 @@ r"-(Computes the logarithm of the hyperbolic cosine of the prediction error.
 #' ```
 #'
 #' # Examples
-#'
-#' # Usage
 #' Standalone usage:
 #'
 #' ```python
@@ -4879,8 +4857,6 @@ r"-(Computes the mean absolute error between the labels and predictions.
 #' y_pred = np.random.random(size=(2, 3))
 #' loss = keras.losses.mean_absolute_error(y_true, y_pred)
 #' ```
-#'
-#' # Usage
 #' Standalone usage:
 #'
 #' ```python
@@ -4993,8 +4969,6 @@ r"-(Computes mean absolute percentage error between `y_true` and `y_pred`.
 #' y_pred = np.random.random(size=(2, 3))
 #' loss = keras.losses.mean_absolute_percentage_error(y_true, y_pred)
 #' ```
-#'
-#' # Usage
 #' Standalone usage:
 #'
 #' ```python
@@ -5184,8 +5158,6 @@ r"-(Computes mean squared logarithmic error between `y_true` and `y_pred`.
 #' y_pred = np.random.random(size=(2, 3))
 #' loss = keras.losses.mean_squared_logarithmic_error(y_true, y_pred)
 #' ```
-#'
-#' # Usage
 #' Standalone usage:
 #'
 #' ```python
@@ -5404,8 +5376,6 @@ r"-(Computes root mean squared error metric between `y_true` and `y_pred`.
 #' ```
 #'
 #' # Examples
-#'
-#' # Usage
 #' Standalone usage:
 #'
 #' ```python

@@ -61,10 +61,6 @@ Note that this class first computes IoUs for all individual classes, then
 returns the mean of these values.
 }
 \section{Examples}{
-
-}
-
-\section{Usage}{
 Standalone usage:
 
 \if{html}{\out{<div class="sourceCode python">}}\preformatted{# cm = [[1, 1],

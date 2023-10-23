@@ -38,9 +38,7 @@ assert np.allclose(
     loss, np.mean(y_pred - y_true * np.log(y_pred), axis=-1),
     atol=1e-5)
 }\if{html}{\out{</div>}}
-}
 
-\section{Usage}{
 Standalone usage:
 
 \if{html}{\out{<div class="sourceCode python">}}\preformatted{m = keras.metrics.Poisson()

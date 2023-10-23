@@ -55,9 +55,7 @@ assert loss.shape == (2,)
 loss
 # array([0.0513, 2.303], dtype=float32)
 }\if{html}{\out{</div>}}
-}
 
-\section{Usage}{
 Standalone usage:
 
 \if{html}{\out{<div class="sourceCode python">}}\preformatted{# y_true = one_hot(y_true) = [[0, 1, 0], [0, 0, 1]]

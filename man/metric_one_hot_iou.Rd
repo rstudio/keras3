@@ -70,10 +70,6 @@ data, to avoid a "labels out of bound" error when the confusion matrix is
 computed.
 }
 \section{Examples}{
-
-}
-
-\section{Usage}{
 Standalone usage:
 
 \if{html}{\out{<div class="sourceCode python">}}\preformatted{y_true = np.array([[0, 0, 1], [1, 0, 0], [0, 1, 0], [1, 0, 0]])

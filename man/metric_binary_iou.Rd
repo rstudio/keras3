@@ -58,10 +58,6 @@ with \code{threshold=0}, this metric has the same behavior as \code{IoU}.
 }
 
 \section{Examples}{
-
-}
-
-\section{Usage}{
 Standalone usage:
 
 \if{html}{\out{<div class="sourceCode python">}}\preformatted{m = keras.metrics.BinaryIoU(target_class_ids=[0, 1], threshold=0.3)

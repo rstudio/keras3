@@ -21,10 +21,6 @@ logcosh = mean(log((exp(error) + exp(-error))/2), axis=-1)
 }\if{html}{\out{</div>}}
 }
 \section{Examples}{
-
-}
-
-\section{Usage}{
 Standalone usage:
 
 \if{html}{\out{<div class="sourceCode python">}}\preformatted{m = keras.metrics.LogCoshError()

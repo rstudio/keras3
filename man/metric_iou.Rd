@@ -67,10 +67,6 @@ returns the mean of IoUs for the classes that are specified by
 that specific class is returned.
 }
 \section{Examples}{
-
-}
-
-\section{Usage}{
 Standalone usage:
 
 \if{html}{\out{<div class="sourceCode python">}}\preformatted{# cm = [[1, 1],
