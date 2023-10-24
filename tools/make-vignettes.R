@@ -2,15 +2,6 @@ library(envir)
 attach_source("tools/setup.R")
 attach_source("tools/common.R")
 
-guides <- c %(% {
-  "~/github/keras-team/keras/guides"
-  # "~/github/keras-team/keras/examples"
-  "~/github/keras-team/keras-io/guides/keras_core"
-  # "~/github/keras-team/keras-io/guides"
-} %>% lapply(list.files, full.names = TRUE, recursive = TRUE) %>%
-  unlist() %>%
-  .[!duplicated(basename(.))]
-
 
 munge_tutobook <- function(tutobook) {
 
@@ -35,7 +26,18 @@ munge_tutobook <- function(tutobook) {
         x <- str_split_fixed(.x$line, ": ", 2)
         x[,1] %<>% snakecase::to_snake_case() %<>% str_replace_all("_", "-")
         x <- rlang::set_names(nm = x[,1], as.list(x[,2]))
+        x$output <- "rmarkdown::html_vignette"
+        vignette <- glue_data(list(title = x$title), r"---(
+        vignette: >
+          %\VignetteIndexEntry{<<title>>}
+          %\VignetteEngine{knitr::rmarkdown}
+          %\VignetteEncoding{UTF-8}
+        )---", .open = "<<", .close = ">>")
+        # x$repo <- https://github.com/rstudio/keras
+
         frontmatter <- yaml::as.yaml(x) %>% str_trim("right")
+        frontmatter %<>% str_flatten_lines(vignette)
+
         # frontmatter <- str_c(x[,1], ": ", x[,2])
         out <- str_flatten_lines("---", frontmatter, "---")
         return(out)
@@ -78,9 +80,75 @@ munge_tutobook <- function(tutobook) {
 }
 
 
+fetch_tutobook_filepaths <- function(...) {
+  # Sys.glob(c(...)) %>%
+  c(...) %>%
+    lapply(list.files, full.names = TRUE,
+           recursive = TRUE, pattern = "\\.py$") %>%
+    unlist() %>%
+    .[!str_detect(., "/keras_(cv|nlp|tuner)/")] %>%
+    .[!duplicated(basename(.))]
+
+}
+
+
+tutobook_to_rmd <- function(path_to_tutobook, outdir = "vignettes") {
+  tutobook <-
+  # tutobook <- readr::read_file(path_to_tutobook)
+  # name <- path_to_tutobook %>%
+  #   basename() %>% fs::path_ext_remove() %>%
+  #   stringr::str_to_title()
+
+  # vignette_header <- glue::glue(title = name)
+    tutobook <- try({
+      path_to_tutobook |>
+        readLines(warn = FALSE) |>
+        munge_tutobook()
+    }, silent = TRUE)
+  if(inherits(tutobook, "try-error")) {
+    message("converting failed: ", path_to_tutobook)
+    return()
+  }
+
+  new_filename <- basename(path_to_tutobook) %>% fs::path_ext_set(".Rmd")
+  fs::dir_create(outdir)
+  writeLines(tutobook, file.path(outdir, new_filename))
+}
+
+
+guides <-
+  fetch_tutobook_filepaths %(% {
+    "~/github/keras-team/keras/guides"
+    "~/github/keras-team/keras-io/guides/keras_core"
+    "~/github/keras-team/keras-io/guides"
+  }
+
+examples <-
+  fetch_tutobook_filepaths %(% {
+    "~/github/keras-team/keras/examples/"
+    # "~/github/keras-team/keras-io/examples/"
+  }
+
+
+
+# lapply(guides[9], tutobook_to_rmd)
+lapply(guides, tutobook_to_rmd, outdir = "vignettes/guides")
+lapply(examples, tutobook_to_rmd, outdir = "vignettes/examples")
+
+
+
+
+
+
+
+
+
+
+
+
 vignette_header_template <- vignette_header <- function(title) {
 
-template <- r'----(
+  template <- r'----(
 ---
 title: "<<title>>"
 output: rmarkdown::html_vignette
@@ -90,30 +158,6 @@ vignette: >
   %\VignetteEncoding{UTF-8}
 ---
 )----'
-glue::glue(template, .open = "<<", .close = ">>")
+  glue::glue(template, .open = "<<", .close = ">>")
 }
 
-tutobook_to_rmd <- function(path_to_tutobook) {
-  tutobook <- readLines(path_to_tutobook)
-  name <- path_to_tutobook %>%
-    basename() %>% fs::path_ext_remove() %>%
-    stringr::str_to_title()
-
-  vignette_header <- glue::glue(title = name)
-  tutobook <- munge_tutobook(tutobook)
-
-  # tutobook <<- tutobook
-#
-#   tutobook <- tutobook[-1] # drop opening '"""'
-#   tutobook %<>% .[-(which.max(. == '"""'))]
-#   tutobook %<>% .[-(which.max(. == '"""'))]
-#
-#   tutobook <- stringr::str_replace_all(tutobook, '^"""', "\n```")
-  fs::dir_create("autogen-vignettes")
-  new_path <- path_to_tutobook %>% basename() %>%
-    fs::path_ext_set(".Rmd")
-  writeLines(tutobook, file.path("autogen-vignettes", new_path))
-}
-
-# lapply(guides[9], tutobook_to_rmd)
-lapply(guides, tutobook_to_rmd)
