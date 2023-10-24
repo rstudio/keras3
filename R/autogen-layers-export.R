@@ -2,6 +2,7 @@
 
 
 # keras$layers$TFSMLayer
+# keras.layers.TFSMLayer
 # keras_core.src.export.export_lib.TFSMLayer
 r"-(Reload a Keras model/layer that was saved via SavedModel / ExportArchive.
 

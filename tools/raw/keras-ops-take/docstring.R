@@ -1,0 +1,10 @@
+Take elements from a tensor along an axis.
+
+Args:
+    x: Source tensor.
+    indices: The indices of the values to extract.
+    axis: The axis over which to select values. By default, the
+        flattened input tensor is used.
+
+Returns:
+    The corresponding tensor of values.

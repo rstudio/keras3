@@ -1,0 +1,75 @@
+Computes the Intersection-Over-Union metric for specific target classes.
+
+Formula:
+
+```python
+iou = true_positives / (true_positives + false_positives + false_negatives)
+```
+Intersection-Over-Union is a common evaluation metric for semantic image
+segmentation.
+
+To compute IoUs, the predictions are accumulated in a confusion matrix,
+weighted by `sample_weight` and the metric is then calculated from it.
+
+If `sample_weight` is `None`, weights default to 1.
+Use `sample_weight` of 0 to mask values.
+
+Note, this class first computes IoUs for all individual classes, then
+returns the mean of IoUs for the classes that are specified by
+`target_class_ids`. If `target_class_ids` has only one id value, the IoU of
+that specific class is returned.
+
+Args:
+    num_classes: The possible number of labels the prediction task can have.
+    target_class_ids: A tuple or list of target class ids for which the
+        metric is returned. To compute IoU for a specific class, a list
+        (or tuple) of a single id value should be provided.
+    name: (Optional) string name of the metric instance.
+    dtype: (Optional) data type of the metric result.
+    ignore_class: Optional integer. The ID of a class to be ignored during
+        metric computation. This is useful, for example, in segmentation
+        problems featuring a "void" class (commonly -1 or 255) in
+        segmentation maps. By default (`ignore_class=None`), all classes are
+          considered.
+    sparse_y_true: Whether labels are encoded using integers or
+        dense floating point vectors. If `False`, the `argmax` function
+        is used to determine each sample's most likely associated label.
+    sparse_y_pred: Whether predictions are encoded using integers or
+        dense floating point vectors. If `False`, the `argmax` function
+        is used to determine each sample's most likely associated label.
+    axis: (Optional) -1 is the dimension containing the logits.
+        Defaults to `-1`.
+
+Examples:
+
+Standalone usage:
+
+>>> # cm = [[1, 1],
+>>> #        [1, 1]]
+>>> # sum_row = [2, 2], sum_col = [2, 2], true_positives = [1, 1]
+>>> # iou = true_positives / (sum_row + sum_col - true_positives))
+>>> # iou = [0.33, 0.33]
+>>> m = keras.metrics.IoU(num_classes=2, target_class_ids=[0])
+>>> m.update_state([0, 0, 1, 1], [0, 1, 0, 1])
+>>> m.result()
+0.33333334
+
+>>> m.reset_state()
+>>> m.update_state([0, 0, 1, 1], [0, 1, 0, 1],
+...                sample_weight=[0.3, 0.3, 0.3, 0.1])
+>>> # cm = [[0.3, 0.3],
+>>> #        [0.3, 0.1]]
+>>> # sum_row = [0.6, 0.4], sum_col = [0.6, 0.4],
+>>> # true_positives = [0.3, 0.1]
+>>> # iou = [0.33, 0.14]
+>>> m.result()
+0.33333334
+
+Usage with `compile()` API:
+
+```python
+model.compile(
+    optimizer='sgd',
+    loss='mse',
+    metrics=[keras.metrics.IoU(num_classes=2, target_class_ids=[0])])
+```

@@ -1,0 +1,12 @@
+Return the minimum of a tensor or minimum along an axis.
+
+Args:
+    x: Input tensor.
+    axis: Axis or axes along which to operate. By default, flattened input
+        is used.
+    keepdims: If this is set to `True`, the axes which are reduced are left
+        in the result as dimensions with size one. Defaults to`False`.
+    initial: The maximum value of an output element. Defaults to`None`.
+
+Returns:
+    Minimum of `x`.

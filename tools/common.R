@@ -961,7 +961,17 @@ dump_keras_export <- function(doc, params, tags, r_name, r_fn) {
   roxygen <- c(main, params, tags) %>%
     str_flatten("\n\n") %>% str_split_lines() %>%
     str_c("#' ", .) %>%
+    str_flatten_lines() %>%
+    str_split_lines() %>%
+    str_trim("right") %>%
     str_flatten_lines()
+
+  # compact roxygen
+  roxygen %<>% {
+    while (nchar(.) != nchar(. <- gsub(strrep("#'\n", 2), "#'\n", ., fixed = TRUE))) {} # TODO: do this in dump
+    while (nchar(.) != nchar(. <- gsub(strrep("\n", 3), "\n\n", ., fixed = TRUE))) {}
+    .
+  }
 
   fn_def <- str_flatten_lines(str_c(r_name, " <-"),
                               deparse(r_fn))

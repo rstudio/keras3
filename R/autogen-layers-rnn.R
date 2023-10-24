@@ -2,6 +2,7 @@
 
 
 # keras$layers$Bidirectional
+# keras.layers.Bidirectional
 # keras_core.src.layers.rnn.bidirectional.Bidirectional
 r"-(Bidirectional wrapper for RNNs.
 
@@ -166,6 +167,7 @@ function (object, layer, merge_mode = "concat", weights = NULL,
 
 
 # keras$layers$ConvLSTM1D
+# keras.layers.ConvLSTM1D
 # keras_core.src.layers.rnn.conv_lstm1d.ConvLSTM1D
 r"-(1D Convolutional LSTM.
 
@@ -424,6 +426,7 @@ function (object, filters, kernel_size, strides = 1L, padding = "valid",
 
 
 # keras$layers$ConvLSTM2D
+# keras.layers.ConvLSTM2D
 # keras_core.src.layers.rnn.conv_lstm2d.ConvLSTM2D
 r"-(2D Convolutional LSTM.
 
@@ -682,6 +685,7 @@ function (object, filters, kernel_size, strides = 1L, padding = "valid",
 
 
 # keras$layers$ConvLSTM3D
+# keras.layers.ConvLSTM3D
 # keras_core.src.layers.rnn.conv_lstm3d.ConvLSTM3D
 r"-(3D Convolutional LSTM.
 
@@ -938,6 +942,7 @@ function (object, filters, kernel_size, strides = 1L, padding = "valid",
 
 
 # keras$layers$GRU
+# keras.layers.GRU
 # keras_core.src.layers.rnn.gru.GRU
 r"-(Gated Recurrent Unit - Cho et al. 2014.
 
@@ -1204,6 +1209,7 @@ function (object, units, activation = "tanh", recurrent_activation = "sigmoid",
 
 
 # keras$layers$GRUCell
+# keras.layers.GRUCell
 # keras_core.src.layers.rnn.gru.GRUCell
 r"-(Cell class for the GRU layer.
 
@@ -1365,6 +1371,7 @@ function (units, activation = "tanh", recurrent_activation = "sigmoid",
 
 
 # keras$layers$LSTM
+# keras.layers.LSTM
 # keras_core.src.layers.rnn.lstm.LSTM
 r"-(Long Short-Term Memory layer - Hochreiter 1997.
 
@@ -1617,6 +1624,7 @@ function (object, units, activation = "tanh", recurrent_activation = "sigmoid",
 
 
 # keras$layers$LSTMCell
+# keras.layers.LSTMCell
 # keras_core.src.layers.rnn.lstm.LSTMCell
 r"-(Cell class for the LSTM layer.
 
@@ -1782,6 +1790,7 @@ function (units, activation = "tanh", recurrent_activation = "sigmoid",
 
 
 # keras$layers$RNN
+# keras.layers.RNN
 # keras_core.src.layers.rnn.rnn.RNN
 r"-(Base class for recurrent layers.
 
@@ -2132,6 +2141,7 @@ function (object, cell, return_sequences = FALSE, return_state = FALSE,
 
 
 # keras$layers$SimpleRNN
+# keras.layers.SimpleRNN
 # keras_core.src.layers.rnn.simple_rnn.SimpleRNN
 r"-(Fully-connected RNN where the output is to be fed back as the new input.
 
@@ -2325,6 +2335,7 @@ function (object, units, activation = "tanh", use_bias = TRUE,
 
 
 # keras$layers$SimpleRNNCell
+# keras.layers.SimpleRNNCell
 # keras_core.src.layers.rnn.simple_rnn.SimpleRNNCell
 r"-(Cell class for SimpleRNN.
 
@@ -2472,6 +2483,7 @@ function (units, activation = "tanh", use_bias = TRUE, kernel_initializer = "glo
 
 
 # keras$layers$StackedRNNCells
+# keras.layers.StackedRNNCells
 # keras_core.src.layers.rnn.stacked_rnn_cells.StackedRNNCells
 r"-(Wrapper allowing a stack of RNN cells to behave as a single cell.
 
@@ -2536,6 +2548,7 @@ function (cells, ...)
 
 
 # keras$layers$TimeDistributed
+# keras.layers.TimeDistributed
 # keras_core.src.layers.rnn.time_distributed.TimeDistributed
 r"-(This wrapper allows to apply a layer to every temporal slice of an input.
 

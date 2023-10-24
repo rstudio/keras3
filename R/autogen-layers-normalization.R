@@ -2,6 +2,7 @@
 
 
 # keras$layers$BatchNormalization
+# keras.layers.BatchNormalization
 # keras_core.src.layers.normalization.batch_normalization.BatchNormalization
 r"-(Layer that normalizes its inputs.
 
@@ -234,6 +235,7 @@ function (object, axis = -1L, momentum = 0.99, epsilon = 0.001,
 
 
 # keras$layers$GroupNormalization
+# keras.layers.GroupNormalization
 # keras_core.src.layers.normalization.group_normalization.GroupNormalization
 r"-(Group normalization layer.
 
@@ -368,6 +370,7 @@ function (object, groups = 32L, axis = -1L, epsilon = 0.001,
 
 
 # keras$layers$LayerNormalization
+# keras.layers.LayerNormalization
 # keras_core.src.layers.normalization.layer_normalization.LayerNormalization
 r"-(Layer normalization layer (Ba et al., 2016).
 
@@ -582,6 +585,7 @@ function (object, axis = -1L, epsilon = 0.001, center = TRUE,
 
 
 # keras$layers$SpectralNormalization
+# keras.layers.SpectralNormalization
 # keras_core.src.layers.normalization.spectral_normalization.SpectralNormalization
 r"-(Performs spectral normalization on the weights of a target layer.
 
@@ -669,6 +673,7 @@ function (object, layer, power_iterations = 1L, ...)
 
 
 # keras$layers$UnitNormalization
+# keras.layers.UnitNormalization
 # keras_core.src.layers.normalization.unit_normalization.UnitNormalization
 r"-(Unit normalization layer.
 

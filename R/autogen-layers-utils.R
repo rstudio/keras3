@@ -2,6 +2,7 @@
 
 
 # keras$layers$TorchModuleWrapper
+# keras.layers.TorchModuleWrapper
 # keras_core.src.utils.torch_utils.TorchModuleWrapper
 r"-(Torch module wrapper layer.
 

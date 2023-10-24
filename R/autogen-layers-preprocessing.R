@@ -2,6 +2,7 @@
 
 
 # keras$layers$CategoryEncoding
+# keras.layers.CategoryEncoding
 # keras_core.src.layers.preprocessing.category_encoding.CategoryEncoding
 r"-(A preprocessing layer which encodes integer features.
 
@@ -179,6 +180,7 @@ function (object, num_tokens = NULL, output_mode = "multi_hot",
 
 
 # keras$layers$CenterCrop
+# keras.layers.CenterCrop
 # keras_core.src.layers.preprocessing.center_crop.CenterCrop
 r"-(A preprocessing layer which crops images.
 
@@ -276,6 +278,7 @@ function (object, height, width, data_format = NULL, ...)
 
 
 # keras$layers$Discretization
+# keras.layers.Discretization
 # keras_core.src.layers.preprocessing.discretization.Discretization
 r"-(A preprocessing layer which buckets continuous features by ranges.
 
@@ -450,6 +453,7 @@ function (object, bin_boundaries = NULL, num_bins = NULL, epsilon = 0.01,
 
 
 # keras$layers$HashedCrossing
+# keras.layers.HashedCrossing
 # keras_core.src.layers.preprocessing.hashed_crossing.HashedCrossing
 r"-(A preprocessing layer which crosses features using the "hashing trick".
 
@@ -592,6 +596,7 @@ function (object, num_bins, output_mode = "int", sparse = FALSE,
 
 
 # keras$layers$Hashing
+# keras.layers.Hashing
 # keras_core.src.layers.preprocessing.hashing.Hashing
 r"-(A preprocessing layer which hashes and bins categorical features.
 
@@ -869,6 +874,7 @@ function (object, num_bins, mask_value = NULL, salt = NULL, output_mode = "int",
 
 
 # keras$layers$IntegerLookup
+# keras.layers.IntegerLookup
 # keras_core.src.layers.preprocessing.integer_lookup.IntegerLookup
 r"-(A preprocessing layer that maps integers to (possibly encoded) indices.
 
@@ -1485,6 +1491,7 @@ function (object, max_tokens = NULL, num_oov_indices = 1L, mask_token = NULL,
 
 
 # keras$layers$Normalization
+# keras.layers.Normalization
 # keras_core.src.layers.preprocessing.normalization.Normalization
 r"-(A preprocessing layer that normalizes continuous features.
 
@@ -1676,6 +1683,7 @@ function (object, axis = -1L, mean = NULL, variance = NULL, invert = FALSE,
 
 
 # keras$layers$RandomBrightness
+# keras.layers.RandomBrightness
 # keras_core.src.layers.preprocessing.random_brightness.RandomBrightness
 r"-(A preprocessing layer which randomly adjusts brightness during training.
 
@@ -1813,6 +1821,7 @@ function (object, factor, value_range = list(0L, 255L), seed = NULL,
 
 
 # keras$layers$RandomContrast
+# keras.layers.RandomContrast
 # keras_core.src.layers.preprocessing.random_contrast.RandomContrast
 r"-(A preprocessing layer which randomly adjusts contrast during training.
 
@@ -1904,6 +1913,7 @@ function (object, factor, seed = NULL, ...)
 
 
 # keras$layers$RandomCrop
+# keras.layers.RandomCrop
 # keras_core.src.layers.preprocessing.random_crop.RandomCrop
 r"-(A preprocessing layer which randomly crops images during training.
 
@@ -1995,6 +2005,7 @@ function (object, height, width, seed = NULL, data_format = NULL,
 
 
 # keras$layers$RandomFlip
+# keras.layers.RandomFlip
 # keras_core.src.layers.preprocessing.random_flip.RandomFlip
 r"-(A preprocessing layer which randomly flips images during training.
 
@@ -2074,6 +2085,7 @@ function (object, mode = "horizontal_and_vertical", seed = NULL,
 
 
 # keras$layers$RandomRotation
+# keras.layers.RandomRotation
 # keras_core.src.layers.preprocessing.random_rotation.RandomRotation
 r"-(A preprocessing layer which randomly rotates images during training.
 
@@ -2215,6 +2227,7 @@ function (object, factor, fill_mode = "reflect", interpolation = "bilinear",
 
 
 # keras$layers$RandomTranslation
+# keras.layers.RandomTranslation
 # keras_core.src.layers.preprocessing.random_translation.RandomTranslation
 r"-(A preprocessing layer which randomly translates images during training.
 
@@ -2385,6 +2398,7 @@ function (object, height_factor, width_factor, fill_mode = "reflect",
 
 
 # keras$layers$RandomZoom
+# keras.layers.RandomZoom
 # keras_core.src.layers.preprocessing.random_zoom.RandomZoom
 r"-(A preprocessing layer which randomly zooms images during training.
 
@@ -2568,6 +2582,7 @@ function (object, height_factor, width_factor = NULL, fill_mode = "reflect",
 
 
 # keras$layers$Rescaling
+# keras.layers.Rescaling
 # keras_core.src.layers.preprocessing.rescaling.Rescaling
 r"-(A preprocessing layer which rescales input values to a new range.
 
@@ -2638,6 +2653,7 @@ function (object, scale, offset = 0, ...)
 
 
 # keras$layers$Resizing
+# keras.layers.Resizing
 # keras_core.src.layers.preprocessing.resizing.Resizing
 r"-(A preprocessing layer which resizes images.
 
@@ -2747,6 +2763,7 @@ function (object, height, width, interpolation = "bilinear",
 
 
 # keras$layers$StringLookup
+# keras.layers.StringLookup
 # keras_core.src.layers.preprocessing.string_lookup.StringLookup
 r"-(A preprocessing layer that maps strings to (possibly encoded) indices.
 
@@ -3356,6 +3373,7 @@ function (object, max_tokens = NULL, num_oov_indices = 1L, mask_token = NULL,
 
 
 # keras$layers$TextVectorization
+# keras.layers.TextVectorization
 # keras_core.src.layers.preprocessing.text_vectorization.TextVectorization
 r"-(A preprocessing layer which maps text features to integer sequences.
 

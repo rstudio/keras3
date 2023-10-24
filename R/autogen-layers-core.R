@@ -2,6 +2,7 @@
 
 
 # keras$layers$Dense
+# keras.layers.Dense
 # keras_core.src.layers.core.dense.Dense
 r"-(Just your regular densely-connected NN layer.
 
@@ -117,6 +118,7 @@ function (object, units, activation = NULL, use_bias = TRUE,
 
 
 # keras$layers$EinsumDense
+# keras.layers.EinsumDense
 # keras_core.src.layers.core.einsum_dense.EinsumDense
 r"-(A layer that uses `einsum` as the backing computation.
 
@@ -309,6 +311,7 @@ function (object, equation, output_shape, activation = NULL,
 
 
 # keras$layers$Embedding
+# keras.layers.Embedding
 # keras_core.src.layers.core.embedding.Embedding
 r"-(Turns positive integers (indexes) into dense vectors of fixed size.
 
@@ -428,6 +431,7 @@ function (object, input_dim, output_dim, embeddings_initializer = "uniform",
 
 
 # keras$layers$Identity
+# keras.layers.Identity
 # keras_core.src.layers.core.identity.Identity
 r"-(Identity layer.
 
@@ -461,6 +465,7 @@ function (object, ...)
 
 
 # keras$layers$Input
+# keras.layers.Input
 # keras_core.src.layers.core.input_layer.Input
 r"-(Used to instantiate a Keras tensor.
 
@@ -567,6 +572,7 @@ function (shape = NULL, batch_size = NULL, dtype = NULL, sparse = NULL,
 
 
 # keras$layers$Lambda
+# keras.layers.Lambda
 # keras_core.src.layers.core.lambda_layer.Lambda
 r"-(Wraps arbitrary expressions as a `Layer` object.
 
@@ -683,6 +689,7 @@ function (object, f, output_shape = NULL, mask = NULL, arguments = NULL,
 
 
 # keras$layers$Masking
+# keras.layers.Masking
 # keras_core.src.layers.core.masking.Masking
 r"-(Masks a sequence by using a mask value to skip timesteps.
 

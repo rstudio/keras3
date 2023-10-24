@@ -2,6 +2,7 @@
 
 
 # keras$layers$Cropping1D
+# keras.layers.Cropping1D
 # keras_core.src.layers.reshaping.cropping1d.Cropping1D
 r"-(Cropping layer for 1D input (e.g. temporal sequence).
 
@@ -92,6 +93,7 @@ function (object, cropping = list(1L, 1L), ...)
 
 
 # keras$layers$Cropping2D
+# keras.layers.Cropping2D
 # keras_core.src.layers.reshaping.cropping2d.Cropping2D
 r"-(Cropping layer for 2D input (e.g. picture).
 
@@ -206,6 +208,7 @@ function (object, cropping = list(list(0L, 0L), list(0L, 0L)),
 
 
 # keras$layers$Cropping3D
+# keras.layers.Cropping3D
 # keras_core.src.layers.reshaping.cropping3d.Cropping3D
 r"-(Cropping layer for 3D data (e.g. spatial or spatio-temporal).
 
@@ -327,6 +330,7 @@ function (object, cropping = list(list(1L, 1L), list(1L, 1L),
 
 
 # keras$layers$Flatten
+# keras.layers.Flatten
 # keras_core.src.layers.reshaping.flatten.Flatten
 r"-(Flattens the input. Does not affect the batch size.
 
@@ -395,6 +399,7 @@ function (object, data_format = NULL, ...)
 
 
 # keras$layers$Permute
+# keras.layers.Permute
 # keras_core.src.layers.reshaping.permute.Permute
 r"-(Permutes the dimensions of the input according to a given pattern.
 
@@ -466,6 +471,7 @@ function (object, dims, ...)
 
 
 # keras$layers$RepeatVector
+# keras.layers.RepeatVector
 # keras_core.src.layers.reshaping.repeat_vector.RepeatVector
 r"-(Repeats the input n times.
 
@@ -525,6 +531,7 @@ function (object, n, ...)
 
 
 # keras$layers$Reshape
+# keras.layers.Reshape
 # keras_core.src.layers.reshaping.reshape.Reshape
 r"-(Layer that reshapes inputs into the given shape.
 
@@ -604,6 +611,7 @@ function (object, target_shape, ...)
 
 
 # keras$layers$UpSampling1D
+# keras.layers.UpSampling1D
 # keras_core.src.layers.reshaping.up_sampling1d.UpSampling1D
 r"-(Upsampling layer for 1D inputs.
 
@@ -694,6 +702,7 @@ function (object, size = 2L, ...)
 
 
 # keras$layers$UpSampling2D
+# keras.layers.UpSampling2D
 # keras_core.src.layers.reshaping.up_sampling2d.UpSampling2D
 r"-(Upsampling layer for 2D inputs.
 
@@ -831,6 +840,7 @@ function (object, size = list(2L, 2L), data_format = NULL, interpolation = "near
 
 
 # keras$layers$UpSampling3D
+# keras.layers.UpSampling3D
 # keras_core.src.layers.reshaping.up_sampling3d.UpSampling3D
 r"-(Upsampling layer for 3D inputs.
 
@@ -942,6 +952,7 @@ function (object, size = list(2L, 2L, 2L), data_format = NULL,
 
 
 # keras$layers$ZeroPadding1D
+# keras.layers.ZeroPadding1D
 # keras_core.src.layers.reshaping.zero_padding1d.ZeroPadding1D
 r"-(Zero-padding layer for 1D input (e.g. temporal sequence).
 
@@ -1043,6 +1054,7 @@ function (object, padding = 1L, ...)
 
 
 # keras$layers$ZeroPadding2D
+# keras.layers.ZeroPadding2D
 # keras_core.src.layers.reshaping.zero_padding2d.ZeroPadding2D
 r"-(Zero-padding layer for 2D input (e.g. picture).
 
@@ -1185,6 +1197,7 @@ function (object, padding = list(1L, 1L), data_format = NULL,
 
 
 # keras$layers$ZeroPadding3D
+# keras.layers.ZeroPadding3D
 # keras_core.src.layers.reshaping.zero_padding3d.ZeroPadding3D
 r"-(Zero-padding layer for 3D data (spatial or spatio-temporal).
 

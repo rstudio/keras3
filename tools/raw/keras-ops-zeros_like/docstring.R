@@ -1,0 +1,8 @@
+Return a tensor of zeros with the same shape and type as `x`.
+
+Args:
+    x: Input tensor.
+    dtype: Overrides the data type of the result.
+
+Returns:
+    A tensor of zeros with the same shape and type as `x`.

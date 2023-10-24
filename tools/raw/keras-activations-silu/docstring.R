@@ -1,0 +1,14 @@
+Swish (or Silu) activation function.
+
+It is defined as: `swish(x) = x * sigmoid(x)`.
+
+The Swish (or Silu) activation function is a smooth,
+non-monotonic function that is unbounded above and
+bounded below.
+
+Args:
+    x: Input tensor.
+
+Reference:
+
+- [Ramachandran et al., 2017](https://arxiv.org/abs/1710.05941)

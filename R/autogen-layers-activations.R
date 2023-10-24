@@ -2,6 +2,7 @@
 
 
 # keras$layers$Activation
+# keras.layers.Activation
 # keras_core.src.layers.activations.activation.Activation
 r"-(Applies an activation function to an output.
 
@@ -56,6 +57,7 @@ function (object, activation, ...)
 
 
 # keras$layers$ELU
+# keras.layers.ELU
 # keras_core.src.layers.activations.elu.ELU
 r"-(Applies an Exponential Linear Unit function to an output.
 
@@ -102,6 +104,7 @@ function (object, alpha = 1, ...)
 
 
 # keras$layers$LeakyReLU
+# keras.layers.LeakyReLU
 # keras_core.src.layers.activations.leaky_relu.LeakyReLU
 r"-(Leaky version of a Rectified Linear Unit activation layer.
 
@@ -174,6 +177,7 @@ function (object, negative_slope = 0.3, ...)
 
 
 # keras$layers$PReLU
+# keras.layers.PReLU
 # keras_core.src.layers.activations.prelu.PReLU
 r"-(Parametric Rectified Linear Unit activation layer.
 
@@ -238,6 +242,7 @@ function (object, alpha_initializer = "Zeros", alpha_regularizer = NULL,
 
 
 # keras$layers$ReLU
+# keras.layers.ReLU
 # keras_core.src.layers.activations.relu.ReLU
 r"-(Rectified Linear Unit activation function layer.
 
@@ -321,6 +326,7 @@ function (object, max_value = NULL, negative_slope = 0, threshold = 0,
 
 
 # keras$layers$Softmax
+# keras.layers.Softmax
 # keras_core.src.layers.activations.softmax.Softmax
 r"-(Softmax activation layer.
 

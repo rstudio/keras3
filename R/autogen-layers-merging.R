@@ -2,6 +2,7 @@
 
 
 # keras$layers$Add
+# keras.layers.Add
 # keras_core.src.layers.merging.add.Add
 r"-(Performs elementwise addition operation.
 
@@ -85,6 +86,7 @@ function (inputs, ...)
 
 
 # keras$layers$Average
+# keras.layers.Average
 # keras_core.src.layers.merging.average.Average
 r"-(Averages a list of inputs element-wise..
 
@@ -168,6 +170,7 @@ function (inputs, ...)
 
 
 # keras$layers$Concatenate
+# keras.layers.Concatenate
 # keras_core.src.layers.merging.concatenate.Concatenate
 r"-(Concatenates a list of inputs.
 
@@ -251,6 +254,7 @@ function (inputs, ..., axis = -1L)
 
 
 # keras$layers$Dot
+# keras.layers.Dot
 # keras_core.src.layers.merging.dot.Dot
 r"-(Computes element-wise dot product of two tensors.
 
@@ -364,6 +368,7 @@ function (inputs, ..., axes, normalize = FALSE)
 
 
 # keras$layers$Maximum
+# keras.layers.Maximum
 # keras_core.src.layers.merging.maximum.Maximum
 r"-(Computes element-wise maximum on a list of inputs.
 
@@ -447,6 +452,7 @@ function (inputs, ...)
 
 
 # keras$layers$Minimum
+# keras.layers.Minimum
 # keras_core.src.layers.merging.minimum.Minimum
 r"-(Computes elementwise minimum on a list of inputs.
 
@@ -530,6 +536,7 @@ function (inputs, ...)
 
 
 # keras$layers$Multiply
+# keras.layers.Multiply
 # keras_core.src.layers.merging.multiply.Multiply
 r"-(Performs elementwise multiplication.
 
@@ -613,6 +620,7 @@ function (inputs, ...)
 
 
 # keras$layers$Subtract
+# keras.layers.Subtract
 # keras_core.src.layers.merging.subtract.Subtract
 r"-(Performs elementwise subtraction.
 

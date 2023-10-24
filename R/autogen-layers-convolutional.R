@@ -2,6 +2,7 @@
 
 
 # keras$layers$Conv1D
+# keras.layers.Conv1D
 # keras_core.src.layers.convolutional.conv1d.Conv1D
 r"-(1D convolution layer (e.g. temporal convolution).
 
@@ -197,6 +198,7 @@ function (object, filters, kernel_size, strides = 1L, padding = "valid",
 
 
 # keras$layers$Conv1DTranspose
+# keras.layers.Conv1DTranspose
 # keras_core.src.layers.convolutional.conv1d_transpose.Conv1DTranspose
 r"-(1D transposed convolution layer.
 
@@ -382,6 +384,7 @@ function (object, filters, kernel_size, strides = 1L, padding = "valid",
 
 
 # keras$layers$Conv2D
+# keras.layers.Conv2D
 # keras_core.src.layers.convolutional.conv2d.Conv2D
 r"-(2D convolution layer.
 
@@ -568,6 +571,7 @@ function (object, filters, kernel_size, strides = list(1L, 1L),
 
 
 # keras$layers$Conv2DTranspose
+# keras.layers.Conv2DTranspose
 # keras_core.src.layers.convolutional.conv2d_transpose.Conv2DTranspose
 r"-(2D transposed convolution layer.
 
@@ -758,6 +762,7 @@ function (object, filters, kernel_size, strides = list(1L, 1L),
 
 
 # keras$layers$Conv3D
+# keras.layers.Conv3D
 # keras_core.src.layers.convolutional.conv3d.Conv3D
 r"-(3D convolution layer.
 
@@ -956,6 +961,7 @@ function (object, filters, kernel_size, strides = list(1L, 1L,
 
 
 # keras$layers$Conv3DTranspose
+# keras.layers.Conv3DTranspose
 # keras_core.src.layers.convolutional.conv3d_transpose.Conv3DTranspose
 r"-(3D transposed convolution layer.
 
@@ -1156,6 +1162,7 @@ function (object, filters, kernel_size, strides = list(1L, 1L,
 
 
 # keras$layers$DepthwiseConv1D
+# keras.layers.DepthwiseConv1D
 # keras_core.src.layers.convolutional.depthwise_conv1d.DepthwiseConv1D
 r"-(1D depthwise convolution layer.
 
@@ -1364,6 +1371,7 @@ function (object, kernel_size, strides = 1L, padding = "valid",
 
 
 # keras$layers$DepthwiseConv2D
+# keras.layers.DepthwiseConv2D
 # keras_core.src.layers.convolutional.depthwise_conv2d.DepthwiseConv2D
 r"-(2D depthwise convolution layer.
 
@@ -1572,6 +1580,7 @@ function (object, kernel_size, strides = list(1L, 1L), padding = "valid",
 
 
 # keras$layers$SeparableConv1D
+# keras.layers.SeparableConv1D
 # keras_core.src.layers.convolutional.separable_conv1d.SeparableConv1D
 r"-(1D separable convolution layer.
 
@@ -1767,6 +1776,7 @@ function (object, filters, kernel_size, strides = 1L, padding = "valid",
 
 
 # keras$layers$SeparableConv2D
+# keras.layers.SeparableConv2D
 # keras_core.src.layers.convolutional.separable_conv2d.SeparableConv2D
 r"-(2D separable convolution layer.
 

@@ -2,6 +2,7 @@
 
 
 # keras$layers$AdditiveAttention
+# keras.layers.AdditiveAttention
 # keras_core.src.layers.attention.additive_attention.AdditiveAttention
 r"-(Additive attention layer, a.k.a. Bahdanau-style attention.
 
@@ -125,6 +126,7 @@ function (object, use_scale = TRUE, dropout = 0, ...)
 
 
 # keras$layers$Attention
+# keras.layers.Attention
 # keras_core.src.layers.attention.attention.Attention
 r"-(Dot-product attention layer, a.k.a. Luong-style attention.
 
@@ -254,7 +256,8 @@ function (object, use_scale = FALSE, score_mode = "dot", dropout = 0,
 }
 
 
-# keras$layers$GroupedQueryAttention
+# keras$layers$GroupQueryAttention
+# keras.layers.GroupQueryAttention
 # keras_core.src.layers.attention.grouped_query_attention.GroupedQueryAttention
 r"-(Grouped Query Attention layer.
 
@@ -412,6 +415,7 @@ function (object, head_dim, num_query_heads, num_key_value_heads,
 
 
 # keras$layers$MultiHeadAttention
+# keras.layers.MultiHeadAttention
 # keras_core.src.layers.attention.multi_head_attention.MultiHeadAttention
 r"-(MultiHeadAttention layer.
 

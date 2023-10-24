@@ -2,6 +2,7 @@
 
 
 # keras$layers$ActivityRegularization
+# keras.layers.ActivityRegularization
 # keras_core.src.layers.regularization.activity_regularization.ActivityRegularization
 r"-(Layer that applies an update to the cost function based input activity.
 
@@ -53,6 +54,7 @@ function (object, l1 = 0, l2 = 0, ...)
 
 
 # keras$layers$Dropout
+# keras.layers.Dropout
 # keras_core.src.layers.regularization.dropout.Dropout
 r"-(Applies dropout to the input.
 
@@ -138,6 +140,7 @@ function (object, rate, noise_shape = NULL, seed = NULL, ...)
 
 
 # keras$layers$GaussianDropout
+# keras.layers.GaussianDropout
 # keras_core.src.layers.regularization.gaussian_dropout.GaussianDropout
 r"-(Apply multiplicative 1-centered Gaussian noise.
 
@@ -189,6 +192,7 @@ function (object, rate, seed = NULL, ...)
 
 
 # keras$layers$GaussianNoise
+# keras.layers.GaussianNoise
 # keras_core.src.layers.regularization.gaussian_noise.GaussianNoise
 r"-(Apply additive zero-centered Gaussian noise.
 
@@ -246,6 +250,7 @@ function (object, stddev, seed = NULL, ...)
 
 
 # keras$layers$SpatialDropout1D
+# keras.layers.SpatialDropout1D
 # keras_core.src.layers.regularization.spatial_dropout.SpatialDropout1D
 r"-(Spatial 1D version of Dropout.
 
@@ -325,6 +330,7 @@ function (object, rate, seed = NULL, name = NULL, dtype = NULL)
 
 
 # keras$layers$SpatialDropout2D
+# keras.layers.SpatialDropout2D
 # keras_core.src.layers.regularization.spatial_dropout.SpatialDropout2D
 r"-(Spatial 2D version of Dropout.
 
@@ -423,6 +429,7 @@ function (object, rate, data_format = NULL, seed = NULL, name = NULL,
 
 
 # keras$layers$SpatialDropout3D
+# keras.layers.SpatialDropout3D
 # keras_core.src.layers.regularization.spatial_dropout.SpatialDropout3D
 r"-(Spatial 3D version of Dropout.
 
