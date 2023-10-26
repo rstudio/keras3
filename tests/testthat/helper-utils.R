@@ -128,12 +128,6 @@ define_and_compile_model <- function() {
   model
 }
 
-random_array <- function(..., dim = unlist(c(...))) {
-  array(runif(prod(dim)), dim = dim)
-}
-
-
-
 
 expect_tensor <- function(x, shape=NULL, shaped_as=NULL) {
   x_lbl <- quasi_label(rlang::enquo(x), arg = 'x')$lab
