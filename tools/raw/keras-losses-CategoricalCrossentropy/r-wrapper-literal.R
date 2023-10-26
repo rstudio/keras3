@@ -1,0 +1,91 @@
+#' Computes the crossentropy loss between the labels and predictions.
+#'
+#' @description
+#' Use this crossentropy loss function when there are two or more label
+#' classes. We expect labels to be provided in a `one_hot` representation. If
+#' you want to provide labels as integers, please use
+#' `SparseCategoricalCrossentropy` loss. There should be `num_classes` floating
+#' point values per feature, i.e., the shape of both `y_pred` and `y_true` are
+#' `[batch_size, num_classes]`.
+#'
+#' # Examples
+#' ```python
+#' y_true = [[0, 1, 0], [0, 0, 1]]
+#' y_pred = [[0.05, 0.95, 0], [0.1, 0.8, 0.1]]
+#' loss = keras.losses.categorical_crossentropy(y_true, y_pred)
+#' assert loss.shape == (2,)
+#' loss
+#' # array([0.0513, 2.303], dtype=float32)
+#' ```
+#' Standalone usage:
+#'
+#' ```python
+#' y_true = [[0, 1, 0], [0, 0, 1]]
+#' y_pred = [[0.05, 0.95, 0], [0.1, 0.8, 0.1]]
+#' # Using 'auto'/'sum_over_batch_size' reduction type.
+#' cce = keras.losses.CategoricalCrossentropy()
+#' cce(y_true, y_pred)
+#' # 1.177
+#' ```
+#'
+#' ```python
+#' # Calling with 'sample_weight'.
+#' cce(y_true, y_pred, sample_weight=np.array([0.3, 0.7]))
+#' # 0.814
+#' ```
+#'
+#' ```python
+#' # Using 'sum' reduction type.
+#' cce = keras.losses.CategoricalCrossentropy(
+#'     reduction="sum")
+#' cce(y_true, y_pred)
+#' # 2.354
+#' ```
+#'
+#' ```python
+#' # Using 'none' reduction type.
+#' cce = keras.losses.CategoricalCrossentropy(
+#'     reduction=None)
+#' cce(y_true, y_pred)
+#' # array([0.0513, 2.303], dtype=float32)
+#' ```
+#'
+#' Usage with the `compile()` API:
+#'
+#' ```python
+#' model.compile(optimizer='sgd',
+#'               loss=keras.losses.CategoricalCrossentropy())
+#' ```
+#'
+#' # Returns
+#' Categorical crossentropy loss value.
+#'
+#' @param from_logits Whether `y_pred` is expected to be a logits tensor. By
+#'     default, we assume that `y_pred` encodes a probability distribution.
+#' @param label_smoothing Float in `[0, 1].` If > `0` then smooth the labels. For
+#'     example, if `0.1`, use `0.1 / num_classes` for non-target labels
+#'     and `0.9 + 0.1 / num_classes` for target labels.
+#' @param axis Defaults to `-1`. The dimension along which the entropy is
+#'     computed.
+#' @param reduction Type of reduction to apply to the loss. In almost all cases
+#'     this should be `"sum_over_batch_size"`.
+#'     Supported options are `"sum"`, `"sum_over_batch_size"` or `None`.
+#' @param name Optional name for the loss instance.
+#' @param y_true Tensor of one-hot true targets.
+#' @param y_pred Tensor of predicted targets.
+#' @param ... Passed on to the Python callable
+#'
+#' @export
+#' @family loss
+#' @seealso
+#' + <https://www.tensorflow.org/api_docs/python/tf/keras/losses/CategoricalCrossentropy>
+loss_categorical_crossentropy <-
+structure(function (y_true, y_pred, from_logits = FALSE, label_smoothing = 0,
+    axis = -1L, ..., reduction = "sum_over_batch_size", name = "categorical_crossentropy")
+{
+    args <- capture_args2(list(axis = as_axis))
+    callable <- if (missing(y_true) && missing(y_pred))
+        keras$losses$CategoricalCrossentropy
+    else keras$losses$categorical_crossentropy
+    do.call(callable, args)
+}, py_function_name = "categorical_crossentropy")

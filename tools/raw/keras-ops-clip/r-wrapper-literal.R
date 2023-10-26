@@ -1,0 +1,21 @@
+#' Clip (limit) the values in a tensor.
+#'
+#' @description
+#' Given an interval, values outside the interval are clipped to the
+#' interval edges. For example, if an interval of `[0, 1]` is specified,
+#' values smaller than 0 become 0, and values larger than 1 become 1.
+#'
+#' # Returns
+#'     The clipped tensor.
+#'
+#' @param x Input tensor.
+#' @param x_min Minimum value.
+#' @param x_max Maximum value.
+#'
+#' @export
+#' @family ops
+#' @seealso
+#' + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/clip>
+k_clip <-
+function (x, x_min, x_max)
+keras$ops$clip(x, x_min, x_max)

@@ -1,0 +1,22 @@
+#' Initializer that generates tensors with constant values.
+#'
+#' @description
+#' Only scalar values are allowed.
+#' The constant value provided must be convertible to the dtype requested
+#' when calling the initializer.
+#'
+#' @param value A scalar.
+#'
+#' @export
+#' @family initializer
+#' @seealso
+#' + <https://www.tensorflow.org/api_docs/python/tf/keras/initializers/constant>
+#'
+#' @examples
+#' # Standalone usage:
+#' initializer <- initializer_constant(10)
+#' values <- initializer(shape = c(2, 2))
+#'
+#' # Usage in a Keras layer:
+#' initializer <- initializer_constant(10)
+#' layer <- layer_dense(units = 3, kernel_initializer = initializer)

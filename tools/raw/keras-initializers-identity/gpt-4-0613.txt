@@ -1,0 +1,20 @@
+#' Initializer that generates the identity matrix.
+#'
+#' @description
+#' Only usable for generating 2D matrices.
+#'
+#' @param gain Multiplicative factor to apply to the identity matrix.
+#'
+#' @export
+#' @family initializer
+#' @seealso
+#' + <https://www.tensorflow.org/api_docs/python/tf/keras/initializers/identity>
+#'
+#' @examples
+#' # Standalone usage:
+#' initializer <- initializer_identity()
+#' values <- initializer(shape = c(2, 2))
+#'
+#' # Usage in a Keras layer:
+#' initializer <- initializer_identity()
+#' layer <- layer_dense(units = 3, kernel_initializer = initializer)
