@@ -302,9 +302,9 @@ df |>
         str_replace_all(fixed("."), "-") |>
         str_replace_all(fixed("^keras-"), "")
       fs::dir_create(endpoint_dir)
-      mapply(writeLines, df$dump, file.path(endpoint_dir, "r_wrapper.R"))
-      mapply(writeLines, trim(df$docstring),
-             file.path(endpoint_dir, "docstring.R"))
+      mapply(writeLines, df$dump, file.path(endpoint_dir, "r-wrapper-literal.R"))
+      mapply(writeLines, df$dump, file.path(endpoint_dir, "r-wrapper-llm.R"))
+      mapply(writeLines, trim(df$docstring), file.path(endpoint_dir, "docstring.R"))
     })
 
     df$module %<>% str_replace_all(fixed("keras."), "keras_core.")

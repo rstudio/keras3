@@ -8,7 +8,7 @@ install_keras(
   ...,
   envname = "r-keras",
   extra_packages = NULL,
-  python_version = "3.9"
+  python_version = "3.10"
 )
 }
 \arguments{
