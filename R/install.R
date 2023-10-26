@@ -12,7 +12,7 @@
 install_keras <- function(...,
                           envname = "r-keras",
                           extra_packages = NULL,
-                          python_version = "3.9"
+                          python_version = "3.10"
                           # backend = c("tensorflow", "jax", "pytorch")
                           ) {
 
@@ -26,6 +26,9 @@ install_keras <- function(...,
   system2 <- reticulate:::system2t
 
   # system2("python", "-m pip install keras-nightly tf-nightly")
+  # system2("python", "-m pip install tf-nightly")
+  # system2("python", "-m pip uninstall keras")
+  # system2("python", "-m pip install keras-nightly")
   # message("DONE!")
   # return()
 
@@ -36,19 +39,21 @@ install_keras <- function(...,
   if(!dir.exists(keras_team_keras_dir)) {
     keras_team_keras_dir <- tempfile(pattern = "keras-team-keras-")
     dir.create(keras_team_keras_dir)
-    system2("git",  c("clone --depth 1 --branch master https://github.com/keras-team/keras",
-                      keras_team_keras_dir))
+    system2("git", c(
+      "clone --depth 1 --branch master https://github.com/keras-team/keras",
+      keras_team_keras_dir))
     withr::defer(unlink(keras_team_keras_dir, recursive = TRUE))
   }
   withr::local_dir(keras_team_keras_dir)
+  unlink("tmp_build_dir", recursive = TRUE)
   # browser()
   system2("git", "pull")
-  system2("python", c("-m pip install -r requirements.txt")) # unpin tf-nightly for Python 3.12
+  # system2("python", c("-m pip install -r requirements.txt")) # unpin tf-nightly for Python 3.12
+  system2("python", c("-m pip install -r requirements-common.txt"))
+  system2("python", c("-m pip install ipython")) # for interactive debugging
+  system2("python", c("-m pip install tf-nightly jax[cpu]")) # unpin tf-nightly for Python 3.12
   system2("python", c("-m pip uninstall -y keras keras-nightly"))
-  # system2("python", c("-m pip install ipython")) # for interactive debugging
-  # system2("python", c("-m pip install -r requirements-common.txt"))
-  # system2("python", c("-m pip install torch torchvision")) # needed for pip_build.py?? (but why?)
-  # system2("python", c("-m pip install tf-nightly jax[cpu]")) # unpin tf-nightly for Python 3.12
+  system2("python", c("-m pip install torch torchvision")) # needed for pip_build.py?? (but why?)
 
   system2("python", c("pip_build.py --install"))
   system2("python", c("-m pip uninstall -y torch torchvision"))
