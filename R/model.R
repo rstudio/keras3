@@ -309,6 +309,15 @@ py_to_r_wrapper.keras.layers.layer.Layer <- function(x) {
   }
 }
 
+#' @export
+py_to_r_wrapper.keras.initializers.initializer.Initializer <- function(x) {
+  force(x)
+  as.function.default(c(formals(x), quote({
+    args <- capture_args2(list(shape = normalize_shape))
+    do.call(x, args)
+  })))
+}
+
 
 #  py_to_r_wrapper.keras.engine.base_layer.Layer <- function(x) {
 #    force(x)
@@ -1557,3 +1566,6 @@ confirm_overwrite <- function(filepath, overwrite) {
     }
   }
 }
+
+
+
