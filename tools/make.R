@@ -1,6 +1,6 @@
-library(envir)
-attach_source("tools/setup.R")
-attach_source("tools/common.R")
+
+if(!"source:tools/utils.R" %in% search())
+  envir::attach_source("tools/utils.R")
 
 # TODO: add PR for purrr::rate_throttle("3 per minute")
 #
@@ -41,7 +41,7 @@ endpoints <- str_c("keras.", c %(% {
 }
 
   ) |> lapply(\(module) {
-    message(module)
+    # message(module)
     module <- py_eval(modules <- module)
     nms <- names(module) |>
       setdiff(c("experimental", "deserialize", "serialize", "get",
