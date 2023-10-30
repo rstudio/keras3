@@ -2,10 +2,8 @@
 % Please edit documentation in R/autogen-metrics.R
 \name{metric_kl_divergence}
 \alias{metric_kl_divergence}
-\title{Computes Kullback-Leibler divergence loss between \code{y_true} & \code{y_pred}.}
+\title{Computes Kullback-Leibler divergence metric between \code{y_true} and}
 \usage{
-metric_kl_divergence(y_true, y_pred, ..., name = "kl_divergence", dtype = NULL)
-
 metric_kl_divergence(y_true, y_pred, ..., name = "kl_divergence", dtype = NULL)
 }
 \arguments{
@@ -25,11 +23,6 @@ Formula:
 \if{html}{\out{<div class="sourceCode python">}}\preformatted{loss = y_true * log(y_true / y_pred)
 }\if{html}{\out{</div>}}
 
-Formula:
-
-\if{html}{\out{<div class="sourceCode python">}}\preformatted{loss = y_true * log(y_true / y_pred)
-}\if{html}{\out{</div>}}
-
 \code{y_pred}.
 
 Formula:
@@ -37,34 +30,6 @@ Formula:
 \if{html}{\out{<div class="sourceCode python">}}\preformatted{metric = y_true * log(y_true / y_pred)
 }\if{html}{\out{</div>}}
 }
-\section{Returns}{
-KL Divergence loss values with shape = \verb{[batch_size, d0, .. dN-1]}.
-
-KL Divergence loss values with shape = \verb{[batch_size, d0, .. dN-1]}.
-}
-
-\section{Examples}{
-\if{html}{\out{<div class="sourceCode python">}}\preformatted{y_true = np.random.randint(0, 2, size=(2, 3)).astype(np.float32)
-y_pred = np.random.random(size=(2, 3))
-loss = keras.losses.kl_divergence(y_true, y_pred)
-assert loss.shape == (2,)
-y_true = ops.clip(y_true, 1e-7, 1)
-y_pred = ops.clip(y_pred, 1e-7, 1)
-assert np.array_equal(
-    loss, np.sum(y_true * np.log(y_true / y_pred), axis=-1))
-}\if{html}{\out{</div>}}
-
-\if{html}{\out{<div class="sourceCode python">}}\preformatted{y_true = np.random.randint(0, 2, size=(2, 3)).astype(np.float32)
-y_pred = np.random.random(size=(2, 3))
-loss = keras.losses.kl_divergence(y_true, y_pred)
-assert loss.shape == (2,)
-y_true = ops.clip(y_true, 1e-7, 1)
-y_pred = ops.clip(y_pred, 1e-7, 1)
-assert np.array_equal(
-    loss, np.sum(y_true * np.log(y_true / y_pred), axis=-1))
-}\if{html}{\out{</div>}}
-}
-
 \section{Usage}{
 Standalone usage:
 
@@ -89,11 +54,23 @@ Usage with \code{compile()} API:
 }\if{html}{\out{</div>}}
 }
 
-\seealso{
-\itemize{
-\item \url{https://www.tensorflow.org/api_docs/python/tf/keras/metrics/kl_divergence}
+\section{Returns}{
+KL Divergence loss values with shape = \verb{[batch_size, d0, .. dN-1]}.
 }
 
+\section{Examples}{
+\if{html}{\out{<div class="sourceCode python">}}\preformatted{y_true = np.random.randint(0, 2, size=(2, 3)).astype(np.float32)
+y_pred = np.random.random(size=(2, 3))
+loss = keras.losses.kl_divergence(y_true, y_pred)
+assert loss.shape == (2,)
+y_true = ops.clip(y_true, 1e-7, 1)
+y_pred = ops.clip(y_pred, 1e-7, 1)
+assert np.array_equal(
+    loss, np.sum(y_true * np.log(y_true / y_pred), axis=-1))
+}\if{html}{\out{</div>}}
+}
+
+\seealso{
 \itemize{
 \item \url{https://www.tensorflow.org/api_docs/python/tf/keras/metrics/KLDivergence}
 }

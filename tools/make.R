@@ -74,10 +74,9 @@ endpoints <-
                  df$endpoint)))
       return(df |> slice_max(nchar(endpoint)))
 
-    # if(any(grepl("losses", df$endpoint))) browser()
-    # keep aliases for losses under metrics, for nice autocomplete
+    # keep aliases of losses under metrics, for complete autocomplete with 'metric_'
     if(all(df$endpoint |> str_detect("^keras\\.(metrics|losses)\\."))) {
-      message("keeping:", str_flatten_comma(df$endpoint))
+      # message("keeping aliases: ", str_flatten_comma(df$endpoint))
       return(df)
     }
 
@@ -99,8 +98,9 @@ endpoints <-
     if(nrow(df) == 1) return(df)
     # prefer names w/ more capital letters (i.e., the class handles)
     i <- which.max(nchar(gsub("[^A-Z]*", "", df$endpoint)))
-    message("keep: ", df$endpoint[i],
-            "\t\t drop: ", str_flatten_comma(df$endpoint[-i]))
+    # message(sprintf("keep: %s drop: %s",
+    #                 str_pad(df$endpoint[i], 50, "right"),
+    #                 str_flatten_comma(df$endpoint[-i])))
     df[i,]
   }) %>%
   list_rbind() %>%
@@ -148,17 +148,6 @@ df <- df |>
   mutate(endpoint_sans_name = str_extract(endpoint, "keras\\.(.*)\\.[^.]+$", 1))
 
 df |>
-  # filter(endpoint_sans_name %in% c("layers", "ops", "constraints", "initializers",
-  #                                  "callbacks", "optimizers",
-  #                                  "preprocessing",
-  #                                  "preprocessing.image",
-  #                                  "preprocessing.sequence",
-  #                                  "losses", "metrics",
-  #                                  "optimizers.schedules",
-  #                                  # "utils",
-  #                                  "applications",
-  #                                  "activations", "regularizers")) |> #
-  # select(endpoint, r_name, module, type) |>
   mutate(endpoint_sans_name = endpoint_sans_name %>%
            replace_val(c("preprocessing.image", "preprocessing.sequence"),
                        "preprocessing")) %>%
@@ -237,7 +226,17 @@ df |>
 # devtools::document()
 
 stop("DONE", call. = FALSE)
-
+# filter(endpoint_sans_name %in% c("layers", "ops", "constraints", "initializers",
+#                                  "callbacks", "optimizers",
+#                                  "preprocessing",
+#                                  "preprocessing.image",
+#                                  "preprocessing.sequence",
+#                                  "losses", "metrics",
+#                                  "optimizers.schedules",
+#                                  # "utils",
+#                                  "applications",
+#                                  "activations", "regularizers")) |> #
+# select(endpoint, r_name, module, type) |>
 # |>
   dplyr::bind_rows()
 
