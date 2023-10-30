@@ -204,18 +204,27 @@ test_succeeds("images_dataset_from_directory", {
   if(!requireNamespace("jpeg", quietly = TRUE))
     skip("'jpeg' package required")
 
+  # if(!requireNamespace("xfun", quietly = TRUE))
+  #   skip("'xfun' package required")
+  # num2word <- xfun::numbers_to_words
+  n2w <- function(x) switch(x+1L, "zero", "one", "two", "three", "four", "five",
+                            "six", "seven", "eight", "nine", stop("not implemented"))
+
   dir <- tempfile()
   dir.create(dir)
-  dir.create(file.path(dir, "0"))
-  dir.create(file.path(dir, "1"))
+  on.exit(unlink(dir, recursive = TRUE))
+
+  for(i in 0:3)
+    dir.create(file.path(dir, n2w(i,))
 
   mnist <- dataset_mnist()
-  ind <- which(mnist$train$y %in% c(0, 1))
+  ind <- which(mnist$train$y %in% 0:3)
 
   for (i in ind) {
     img <- mnist$train$x[i,,]/255
-    rname <- paste(sample(letters, size = 10, replace = TRUE), collapse = "")
-    jpeg::writeJPEG(img, target = paste0(dir, "/", mnist$train$y[i], "/", rname, ".jpeg"))
+    fname <- paste0(c(i, "-", sample(letters, size = 5, replace = TRUE), ".jpeg"),
+                    collapse = "")
+    jpeg::writeJPEG(img, target = file.path(dir, n2w(mnist$train$y[i]), fname))
   }
 
   data <- image_dataset_from_directory(dir)
