@@ -1,6 +1,7 @@
 
-envir::attach_source("tools/setup.R")
-envir::attach_source("tools/common.R")
+if(!"source:tools/utils.R" %in% search())
+  envir::attach_source("tools/utils.R")
+# envir::attach_source("tools/common.R")
 
 
 # game plan:
@@ -104,14 +105,6 @@ if (use_codellama) {
   openai <- import("openai")
 }
 
-# use like msg(user = ...), assistant =
-chat_messages <- function(...) {
-  x <- rlang::dots_list(..., .named = TRUE, .ignore_empty = "all")
-  stopifnot(all(names(x) %in% c("system", "user", "assistant")))
-  unname(imap(x, \(content, role)
-              list(role = role,
-                   content = trim(str_flatten_lines(content)))))
-}
 
 
 # TODO: bulleted list in image_dataset_from_directory in arg `label_mode` not formatting correctly

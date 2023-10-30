@@ -1,4 +1,121 @@
+# ---- setup attach  ----
 
+library_stable <-
+  function(package,
+           lifecycle_exclude = c(
+             "superseded",
+             "deprecated",
+             "questioning",
+             "defunct",
+             "experimental",
+             "soft-deprecated",
+             "retired"
+           ), ...,
+           exclude = NULL) {
+
+    package <- deparse1(substitute(package))
+    exclude <- lifecycle::pkg_lifecycle_statuses(
+      package, lifecycle_exclude)$fun |> c(exclude)
+
+    # message(package, ", excludeing: ", paste0(exclude, collapse = ", "))
+    library(package, character.only = TRUE, ...,
+            exclude = exclude)
+  }
+
+library_stable(readr)
+library_stable(stringr)
+library_stable(tibble)
+library_stable(tidyr)
+library_stable(dplyr, warn.conflicts = FALSE)
+library_stable(rlang)
+library_stable(purrr)
+library_stable(stringr)
+library_stable(glue)
+
+library(envir)
+library(commafree)
+library(magrittr, include.only = c("%>%", "%<>%"))
+library(reticulate)
+library(assertthat, include.only = c("assert_that"))
+
+attach_eval({
+  import_from(TKutils, `%error%`)
+
+  is_scalar <- function(x) identical(length(x), 1L)
+
+  replace_val <- function (x, old, new) {
+    if (!is_scalar(new))
+      stop("Unexpected length of replacement value in replace_val().\n",
+           "`new` must be length 1, not ", length(new))
+    x[x %in% old] <- new
+    x
+  }
+
+  py_is <- function(x, y) identical(py_id(x), py_id(y))
+
+  str_split1_on_first <- function(x, pattern, ...) {
+    stopifnot(length(x) == 1, is.character(x))
+    regmatches(x, regexpr(pattern, x, ...), invert = TRUE)[[1L]]
+  }
+
+  str_flatten_lines <- function(..., na.rm = FALSE) {
+    stringr::str_flatten(c(...), na.rm = na.rm, collapse = "\n")
+  }
+
+  str_split_lines <- function(...) {
+    x <- c(...)
+    if(length(x) > 1)
+      x <- str_flatten_lines(x)
+    stringr::str_split_1(x, "\n")
+  }
+
+  `append<-` <- function(x, after = length(x), value) {
+    append(x, value, after)
+  }
+
+  unwhich <- function(x, len) {
+    lgl <- logical(len)
+    lgl[x] <- TRUE
+    lgl
+  }
+
+  in_recursive_call <- function() {
+    fn <- sys.call(-1)[[1]]
+    for(cl in head(sys.calls(), -2))
+      if(identical(cl[[1]], fn))
+        return(TRUE)
+    return(FALSE)
+  }
+
+  # use like msg(user = ...), assistant =
+  chat_messages <- function(...) {
+    x <- rlang::dots_list(..., .named = TRUE, .ignore_empty = "all")
+    stopifnot(all(names(x) %in% c("system", "user", "assistant")))
+    unname(imap(x, \(content, role)
+                list(role = role,
+                     content = trim(str_flatten_lines(content)))))
+  }
+
+})
+
+# ---- venv ----
+# reticulate::virtualenv_remove("r-keras")
+# if(!virtualenv_exists("r-keras")) install_keras()
+
+use_virtualenv("r-keras", required = TRUE)
+
+inspect <- import("inspect")
+
+# keras <- import("keras_core")
+# keras <- import("tensorflow.keras")
+keras <- import("keras")
+local({
+  `__main__` <- reticulate::import_main()
+  `__main__`$keras <- keras
+})
+
+source_python("tools/common.py") # keras_class_type()
+rm(r) # TODO: fix in reticulate, don't export r
 
 # ---- docstrings ----
 
@@ -91,9 +208,9 @@ split_docstring_into_sections <- function(docstring) {
   # TODO: in BatchNormalization, there is more prose after "Reference:" section
   ind_lvl <- str_width(str_extract(x, "^[ ]*"))
   maybe_new_sec <- which(m == "reference" &
-                       ind_lvl == 0 &
-                       str_width(str_trim(x)) > 0 &
-                       !startsWith(str_trim(x), "- "))[-1]
+                           ind_lvl == 0 &
+                           str_width(str_trim(x)) > 0 &
+                           !startsWith(str_trim(x), "- "))[-1]
   maybe_new_sec %<>% .[. > which.max(m == "arguments")]
   if(length(maybe_new_sec)) {
     m[maybe_new_sec[1]:length(m)] %<>% replace_val("reference", "description")
@@ -217,9 +334,9 @@ fence_in_examples_w_prompt_prefix <- function(docstring) {
         # tidy up example commands
       } else if(any(startsWith(docstring0[[i]], c(">>> ", "... ")))) {
         docstring[[i]] <- str_sub(docstring[[i]], 5L)
-      # } else if(docstring0[[i]] == "```") {
-      #   # code block closed in docstring
-      #   in_code_block <- FALSE
+        # } else if(docstring0[[i]] == "```") {
+        #   # code block closed in docstring
+        #   in_code_block <- FALSE
       } else
         # tidy up example output
         docstring[[i]] <- str_c("# ", docstring[[i]])
@@ -291,7 +408,7 @@ backtick_not_links <- function(d) {
 
 .backtick_not_links <- function(x) {
   # if(any(str_detect(x, fixed("["))))
-    # browser()
+  # browser()
   #     [0-9a-zA-Z,\[\]\ -><.]+  # Capture numbers, brackets, and specific symbols
   re <- regex(comments = TRUE, pattern = r"--(
       (                 # Open capture group for main pattern
@@ -596,7 +713,7 @@ make_r_fn.default <- function(endpoint, py_obj, transformers) {
 
   if(endpoint == "keras.preprocessing.image.save_img")
     frmls <- frmls[unique(c("x", "path", names(frmls)))] # swap so img is first arg, better for pipe
-    # frmls <- frmls[c(2, 1, 3:length(frmls))] # swap so img is first arg, better for pipe
+  # frmls <- frmls[c(2, 1, 3:length(frmls))] # swap so img is first arg, better for pipe
 
   as.function.default(c(frmls, body))
 }
@@ -656,12 +773,12 @@ make_r_fn.loss <- function(endpoint, py_obj, transformers) {
   frmls <- frmls[unique(names(frmls))]
   stopifnot(names(frmls)[1:2] == c("y_true", "y_pred"))
 
-    body <- bquote({
-      args <- capture_args2(.(transformers))
-      callable <- if (missing(y_true) && missing(y_pred))
-        .(py_obj_expr) else .(py_obj_expr_fn)
-      do.call(callable, args)
-    })
+  body <- bquote({
+    args <- capture_args2(.(transformers))
+    callable <- if (missing(y_true) && missing(y_pred))
+      .(py_obj_expr) else .(py_obj_expr_fn)
+    do.call(callable, args)
+  })
 
 
   fn <- as.function.default(c(frmls, body))
@@ -823,26 +940,26 @@ mk_export <- function(endpoint) {
   if ((endpoint |> startsWith("keras.losses.") ||
        endpoint |> startsWith("keras.metrics.")) &&
       inherits(py_obj, "python.builtin.type"))
-  local({
-    endpoint2 <- str_replace(endpoint, name, snakecase::to_snake_case(name))
-    py_obj2 <- NULL
-    tryCatch(
-      py_obj2 <- py_eval(endpoint2),
-      python.builtin.AttributeError = function(e) {
+    local({
+      endpoint2 <- str_replace(endpoint, name, snakecase::to_snake_case(name))
+      py_obj2 <- NULL
+      tryCatch(
+        py_obj2 <- py_eval(endpoint2),
+        python.builtin.AttributeError = function(e) {
 
-        if(!endpoint %in% known_metrics_without_function_handles)
-          message(endpoint2, " not found")
+          if(!endpoint %in% known_metrics_without_function_handles)
+            message(endpoint2, " not found")
           # message('"', endpoint, '"')
-      }
+        }
       )
-    if(is.null(py_obj2)) return()
+      if(is.null(py_obj2)) return()
 
-    ep2 <- mk_export(endpoint2)
-    params <<- modifyList(params, ep2$params)
-    for(section in setdiff(names(ep2$doc), "title"))
-      doc[[section]] %<>% str_flatten_lines(ep2$doc[[section]], .)
-    doc <<- doc
-  })
+      ep2 <- mk_export(endpoint2)
+      params <<- modifyList(params, ep2$params)
+      for(section in setdiff(names(ep2$doc), "title"))
+        doc[[section]] %<>% str_flatten_lines(ep2$doc[[section]], .)
+      doc <<- doc
+    })
 
   tags <- make_roxygen_tags(endpoint, py_obj, type)
 
@@ -852,7 +969,7 @@ mk_export <- function(endpoint) {
     doc$call_arguments %<>%
       parse_params_section() %>%
       {glue("- `{names(.)}`: {unname(.)}") }
-      str_flatten_lines()
+    str_flatten_lines()
     ## This kidna works, but fails if there is a nested list within,
     ## like w/ layer_additive_attention
     # doc$call_arguments %<>%
@@ -887,17 +1004,17 @@ mk_export <- function(endpoint) {
   })
 
   if(!in_recursive_call())
-  local({
-    if (length(undocumented_params <-
-               setdiff(names(formals(r_fn)),
-                       unlist(strsplit(names(params) %||% character(), ","))))) {
-      browser()
-      x <- list2("{endpoint}" := map(set_names(undocumented_params), ~"see description"))
-      writeLines(yaml::as.yaml(x))
-      # message(endpoint, ":")
-      # writeLines(paste("  ", undocumented_params, ":", "see description"))
-    }
-  })
+    local({
+      if (length(undocumented_params <-
+                 setdiff(names(formals(r_fn)),
+                         unlist(strsplit(names(params) %||% character(), ","))))) {
+        browser()
+        x <- list2("{endpoint}" := map(set_names(undocumented_params), ~"see description"))
+        writeLines(yaml::as.yaml(x))
+        # message(endpoint, ":")
+        # writeLines(paste("  ", undocumented_params, ":", "see description"))
+      }
+    })
 
   local({
     frmls <- formals(r_fn)
@@ -939,7 +1056,7 @@ dump_keras_export <- function(doc, params, tags, r_name, r_fn) {
     doc[[rd_sec]] <- sec
   }
 
-      # [^(]             # is not followed by an opening parens (indicating a md link)
+  # [^(]             # is not followed by an opening parens (indicating a md link)
   # r"---((?<!`)\[([0-9,\-\[\]]+)\](?!\())---"
   # m <- "(?<!`)\\[([0-9,\\- >.\\[\\]]+)\\](?!\\()"
   # r <- "`\\[\\1\\]`"
@@ -1055,13 +1172,7 @@ get_fixed_docstring <- function(endpoint) {
   d
 }
 
-in_recursive_call <- function() {
-  fn <- sys.call(-1)[[1]]
-  for(cl in head(sys.calls(), -2))
-    if(identical(cl[[1]], fn))
-      return(TRUE)
-  return(FALSE)
-}
+# ---- misc utils ----
 
 
 
