@@ -1,7 +1,6 @@
 
 if(!"source:tools/utils.R" %in% search())
   envir::attach_source("tools/utils.R")
-# envir::attach_source("tools/common.R")
 
 
 # game plan:

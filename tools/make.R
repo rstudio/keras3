@@ -8,150 +8,106 @@ if(!"source:tools/utils.R" %in% search())
 
 # TODO: fix py_func(), for r_to_py.R6ClassGenerator
 #   can't use __signature__ anymore in keras_core...
-endpoints <- str_c("keras.", c %(% {
 
-  "activations"  #
-  "regularizers" #
-  "callbacks"    #
-  "constraints"  #
-  "initializers" #
-  "layers"       #
-  "ops"          #
-  "optimizers"   #
-  "applications"
-  "preprocessing"
-  "preprocessing.image"
-  "preprocessing.sequence"
-  "losses"
-  "metrics"
-  "optimizers.schedules"
+## TODO: "keras.applications.convnext" is a module, filtered out, has good stuff
 
-  # "saving"
-  # "utils"
-  # "backend"
-  # "dtensor"
-  # "mixed_precision"
-  # "models"
-  # "export"
-  # "experimental"
+# TODO: initializer families:
+# <class 'keras.initializers.constant_initializers.Zeros'>
+# <class 'keras.initializers.random_initializers.RandomUniform'>
 
-  # "datasets"            #NO datasets unchanged, no need to autogen
-  # "preprocessing.text"  #NO deprecated
-  # "estimator"           #NO deprecated
-}
+# TODO: next: losses, metrics, saving, guides/vignettes
 
-  ) |> lapply(\(module) {
-    # message(module)
-    module <- py_eval(modules <- module)
-    nms <- names(module) |>
-      setdiff(c("experimental", "deserialize", "serialize", "get",
-                "keras_export",
-                "ALL_OBJECTS", "ALL_OBJECTS_DICT"))
-    nms <- gsub("`", "", nms)
-    str_c(modules, nms, sep = ".")
-    }) |>
-  unlist() |> unique()
+# TODO: bidirectional, time_distributed -- need special caseing
 
-list_endpoints <- function(module = "keras", max_depth = 4,
-                           skip = "keras.src", skip_regex = c(
-                             "experimental", "deserialize", "serialize", "get"
-                           )) {
-  depth <- length(strsplit(module, ".", fixed = TRUE)[[1L]])
-  if(depth > max_depth)
-    return()
-  module_py_obj <- py_eval(module)
-  unlist(lapply(names(module_py_obj), \(nm) {
-    endpoint <- paste0(module, ".", nm)
-    if(endpoint %in% skip)
-      return()
-    # message(endpoint)
-    endpoint_py_obj <- module_py_obj[[nm]]
-    if(inherits(endpoint_py_obj, "python.builtin.module"))
-      return(list_endpoints(endpoint))
-    if(inherits(endpoint_py_obj, c("python.builtin.type",
-                           "python.builtin.function")))
-      return(endpoint)
-    NULL
-  }))
-}
 
-if(FALSE) {
+endpoints <- list_endpoints(skip = c(
+  # to be processed / done
+  "keras.saving",
+  "keras.utils",
+  "keras.backend",
+  "keras.dtensor",
+  "keras.mixed_precision",
+  "keras.models",
+  "keras.export",
+  "keras.experimental",
+  "keras.applications",
+  "keras.legacy",
+  "keras.config",
+  "keras.distribution",
+  "keras.random",
 
-  all_endpoints <- list_endpoints()
+  "keras.datasets",            # datasets unchanged, no need to autogen
+  "keras.preprocessing.text",  # deprecated
+  "keras.estimator",           # deprecated
+  "keras.optimizers.legacy",
 
-  all_endpoints %>%
-    grep("ImageDataGenerator", ., value = T)
+  "keras.src"                  # internal
+)) %>%  c(
+  list_endpoints("keras.applications", max_depth = 0)) %>%
+  # filter out top level non module symbols for now
+  grep("keras.([^.]+)$", ., value = TRUE, invert = TRUE) %>%
+  unique()
 
-  all_endpoints %>%
-    grep("Image", ., value = T, ignore.case = TRUE)
 
-}
-
+# some endpoints are aliases. resolve unique endoints.
 endpoints <-
   endpoints %>%
   tibble(endpoint = .) %>%
   mutate(py_obj = map(endpoint, py_eval)) %>%
+
+  # filter non py objects, e.g., version strings
   filter(map_lgl(py_obj, inherits, "python.builtin.object")) %>%
-    mutate(
-         id = map_chr(py_obj, py_id),
-         py_type = map_chr(py_obj, \(o) class(o) %>%
-                             grep("^python\\.builtin\\.", ., value = TRUE) %>%
-                             sub("python.builtin.", "", ., fixed = TRUE) %>%
-                             .[1])) %>%
-  split(., .$id) %>%
-  map(\(df) {
-    # if(any(df$endpoint %>% grepl("FeatureSpace", .)))
-    #   browser()
-    if(nrow(df) == 1) return(df)
-    # message(str_flatten_comma(df$endpoint))
-    # if(any(grepl("AvgPool1D", df$endpoint))) browser()
 
+  mutate(
+    id = map_chr(py_obj, py_id),
+    py_type = map_chr(py_obj, \(o) class(o) %>%
+                        grep("^python\\.builtin\\.", ., value = TRUE) %>%
+                        sub("python.builtin.", "", ., fixed = TRUE) %>%
+                        .[1])) %>%
+
+  # filter out literal aliases, i.e., identical py ids.
+  dplyr::group_split(id) %>%
+  map(\(df) {
+    if(nrow(df) == 1) return(df)
+    # for the pooling layer aliases, pick the longer/clearer name
     if(all(grepl(r"(keras\.layers\.(Global)?(Avg|Average|Max)Pool(ing)?[1234]D)",
-                 df$endpoint))) {
-      return(df %>% slice_max(nchar(endpoint)))
+                 df$endpoint)))
+      return(df |> slice_max(nchar(endpoint)))
 
-    } else if (any(str_detect(df$endpoint, "metrics|losses"))) {
-
-      nms_in <- names(df)
-      df <- df |>
-        mutate(
-          name = map_chr(py_obj, \(o) o$`__name__`),
-          module = map_chr(py_obj, \(o) o$`__module__`)) |>
-        rowwise() %>%
-        mutate(
-          dist_from_true_home = adist(str_replace(endpoint, name, ""),
-                                      module)
-        ) |>
-        ungroup() |>
-        arrange(dist_from_true_home, desc(nchar(name)))
-        # message(str_flatten_comma(df$endpoint, ", "))
-      df %>%
-        # slice(1) %>%
-        select(!!nms_in)
-
-    } else {
-
-      return(df %>% slice_min(nchar(endpoint), with_ties = FALSE))
+    # if(any(grepl("losses", df$endpoint))) browser()
+    # keep aliases for losses under metrics, for nice autocomplete
+    if(all(df$endpoint |> str_detect("^keras\\.(metrics|losses)\\."))) {
+      message("keeping:", str_flatten_comma(df$endpoint))
+      return(df)
     }
+
+    # otherwise, default to picking the shortest name, but most precise
+    # submodule.
+    df |>
+      slice_min(nchar(endpoint), n = 1, with_ties = FALSE)
   }) %>%
   list_rbind() %>%
-  split(., tolower(.$endpoint)) %>%
+
+  # filter duplicate endpoint names, where all that differs is capitalization.
+  # this mostly affects endpoints offered as both function and class handles:
+  # metrics, losses, and merging layers.
+  # if we have both functional and type api interfaces, we
+  # just want the type right now (we dynamically fetch the matching
+  # functional counterpart later as needed, e.g., metrics)
+  split(., snakecase::to_upper_camel_case(.$endpoint)) %>%
   map(\(df) {
     if(nrow(df) == 1) return(df)
-    # prefer names w/ more capital letters
-    df[which.max(nchar(gsub("[^A-Z0-9]*", "", df$endpoint))), ]
+    # prefer names w/ more capital letters (i.e., the class handles)
+    i <- which.max(nchar(gsub("[^A-Z]*", "", df$endpoint)))
+    message("keep: ", df$endpoint[i],
+            "\t\t drop: ", str_flatten_comma(df$endpoint[-i]))
+    df[i,]
   }) %>%
   list_rbind() %>%
 
-  # aliases e.g., Conv2D, Convolution2D
-  # summarize(endpoint = endpoint %>% .[which.min(nchar(.))]) %>%
-  ungroup() %>%
-  filter(map_lgl(endpoint, \(ep) inherits(py_eval(ep),
-                                          c("python.builtin.type",
-                                            "python.builtin.function")))) %>%
-  .$endpoint %>%
-  unlist() %>%
-  #   # "keras.applications.convnext" is a module, filtered out, has good stuff
+  .$endpoint %>% unlist() %>%
+
+  ## filter out some endpoints that need special handling
   setdiff(c %(% {
     "keras.layers.Layer"             # only for subclassing
     "keras.optimizers.Optimizer"     # only for subclassing
@@ -172,100 +128,36 @@ endpoints <-
     "keras.layers.InputLayer"        # use Input instead
     "keras.layers.InputSpec"         # ??
     "keras.callbacks.CallbackList"   # just an abstract list
-    "keras.callbacks.History"        # always added to by default
+    "keras.callbacks.History"        # always added to fit() by default
 
-    "keras.constraints.to_snake_case" # ??
     "keras.optimizers.LegacyOptimizerWarning"
   })
 
-# filter out function handles that also have class handles
-endpoints <- endpoints %>%
-  lapply(\(endpoint) {
-    if(!any(startsWith(endpoint, c("keras.losses.", "keras.metrics."))))
-      return(endpoint)
 
-    py_obj <- py_eval(endpoint)
-    if (!inherits(py_obj, "python.builtin.function"))
-      return(endpoint)
-
-      # if we have both functional and type api interfaces, we
-      # just want the type right now (we dynamically fetch the matching
-      # functional counterpart later)
-      class_endpoint <- switch(endpoint,
-             "keras.losses.kl_divergence" = "keras.losses.KLDivergence",
-             str_replace(endpoint, py_obj$`__name__`,
-                         snakecase::to_upper_camel_case(py_obj$`__name__`)))
-      tryCatch({
-        py_eval(class_endpoint)
-        return(NULL)
-      },
-      python.builtin.AttributeError = function(e) {
-        # don't emit warning about known function handles without class handle
-        # counterparts
-        if (!endpoint %in% sprintf(
-          "keras.metrics.%s", c(
-            "binary_focal_crossentropy",
-            'categorical_focal_crossentropy',
-            'huber',
-            'kl_divergence',
-            'log_cosh')))
-          # browser()
-          print(e)
-        endpoint
-      })
-  }) %>%
-  unlist() %>%
-  invisible()
-
-get_metric_counterpart_endpoint <- function(..., fn, type) {
-  if(missing(fn)) {
-    endpoint <- type
-    py_obj <- py_eval(endpoint)
-    name <- py_obj$`__name__`
-    endpoint_fn <- str_replace(endpoint, name, snakecase::to_snake_case(name))
-    py_obj_fn <- py_eval(endpoint_fn) %error% browser()
-  }
-}
-
-# TODO: initializer families:
-# <class 'keras.initializers.constant_initializers.Zeros'>
-# <class 'keras.initializers.random_initializers.RandomUniform'>
-
-# TODO: next: losses, metrics, saving, guides/vignettes
-
-df <-
-  endpoints |>
+df <- endpoints |> purrr::set_names() |>
+  lapply(mk_export) |>
   lapply(\(e) {
-    # message(e)
-    mk_export(e)
-  }) |>
-  # c(list(mk_layer_activation_selu())) |>
-  map(\(e) {
-    # if(e$endpoint == "keras.activations.selu")
-    #   browser()
     e |>
       unclass() |>
-      map_if(\(attr) ! is_scalar_atomic(attr), list) |> #str()
+      map_if(\(attr) ! is_scalar_atomic(attr), list) |>
       as_tibble_row()
   }) |>
   list_rbind()
-
-# TODO: bidirectional, time_distributed -- need special caseing
 
 df <- df |>
   mutate(endpoint_sans_name = str_extract(endpoint, "keras\\.(.*)\\.[^.]+$", 1))
 
 df |>
-  filter(endpoint_sans_name %in% c("layers", "ops", "constraints", "initializers",
-                                   "callbacks", "optimizers",
-                                   "preprocessing",
-                                   "preprocessing.image",
-                                   "preprocessing.sequence",
-                                   "losses", "metrics",
-                                   "optimizers.schedules",
-                                   # "utils",
-                                   "applications",
-                                   "activations", "regularizers")) |> #
+  # filter(endpoint_sans_name %in% c("layers", "ops", "constraints", "initializers",
+  #                                  "callbacks", "optimizers",
+  #                                  "preprocessing",
+  #                                  "preprocessing.image",
+  #                                  "preprocessing.sequence",
+  #                                  "losses", "metrics",
+  #                                  "optimizers.schedules",
+  #                                  # "utils",
+  #                                  "applications",
+  #                                  "activations", "regularizers")) |> #
   # select(endpoint, r_name, module, type) |>
   mutate(endpoint_sans_name = endpoint_sans_name %>%
            replace_val(c("preprocessing.image", "preprocessing.sequence"),
@@ -282,7 +174,7 @@ df |>
                           # str_sub(fixed("."), "-") |>
                           # str_c(".R")
                         },
-                        str_c(endpoint_sans_name, ".R")
+                        str_c(endpoint_sans_name %>% str_replace_all(fixed("."), "-"), ".R")
                         )
                         ) |>
   # select(endpoint, endpoint_sans_name, module, file)  |> print(n=Inf)
@@ -295,17 +187,17 @@ df |>
     # str_flatten(c('r"-(', l$`__doc__`, ')-"'), ""),
     # "\n",
 
-
-    fs::dir_create("tools/raw")
-    withr::with_dir("tools/raw", {
-      endpoint_dir <-df$endpoint |>
-        str_replace_all(fixed("."), "-") |>
-        str_replace_all(fixed("^keras-"), "")
-      fs::dir_create(endpoint_dir)
-      mapply(writeLines, df$dump, file.path(endpoint_dir, "r-wrapper-literal.R"))
-      mapply(writeLines, df$dump, file.path(endpoint_dir, "r-wrapper-llm.R"))
-      mapply(writeLines, trim(df$docstring), file.path(endpoint_dir, "docstring.R"))
-    })
+#
+#     fs::dir_create("tools/raw")
+#     withr::with_dir("tools/raw", {
+#       endpoint_dir <-df$endpoint |>
+#         str_replace_all(fixed("."), "-") |>
+#         str_replace_all(fixed("^keras-"), "")
+#       fs::dir_create(endpoint_dir)
+#       mapply(writeLines, df$dump, file.path(endpoint_dir, "r-wrapper-literal.R"))
+#       mapply(writeLines, df$dump, file.path(endpoint_dir, "r-wrapper-llm.R"))
+#       mapply(writeLines, trim(df$docstring), file.path(endpoint_dir, "docstring.R"))
+#     })
 
     df$module %<>% str_replace_all(fixed("keras."), "keras_core.")
     docstring <- map2_chr(df$py_obj, df$endpoint, \(p, ep) {
@@ -435,8 +327,28 @@ str()
 # TODO: callback_progbar logger ... the documented arg doesn't seem to actually be accepted,
 # also, does it make sense to export it?
 #
+  "keras.constraints.to_snake_case" # ??
 
+  # if (any(str_detect(df$endpoint, "metrics|losses"))) {
+  #
+  #   nms_in <- names(df)
+  #   df <- df |>
+  #     mutate(
+  #       name = map_chr(py_obj, \(o) o$`__name__`),
+  #       module = map_chr(py_obj, \(o) o$`__module__`)) |>
+  #     rowwise() %>%
+  #     mutate(
+  #       dist_from_true_home = adist(str_replace(endpoint, name, ""),
+  #                                   module)
+  #     ) |>
+  #     ungroup() |>
+  #     arrange(dist_from_true_home, desc(nchar(name)))
+  #     # message(str_flatten_comma(df$endpoint, ", "))
+  #   df %>%
+  #     # slice(1) %>%
+  #     select(!!nms_in)
 
+  # } else {
 
 #
 #

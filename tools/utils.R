@@ -96,7 +96,11 @@ attach_eval({
                      content = trim(str_flatten_lines(content)))))
   }
 
-})
+  # ignore empty trailing arg
+  c <- function(...)
+    base::do.call(base::c, rlang::list2(...), quote = TRUE)
+
+}, mask.ok = "c")
 
 # ---- venv ----
 # reticulate::virtualenv_remove("r-keras")
@@ -116,6 +120,55 @@ local({
 
 source_python("tools/common.py") # keras_class_type()
 rm(r) # TODO: fix in reticulate, don't export r
+
+
+# ---- find ----
+
+
+list_endpoints <- function(
+    module = "keras", max_depth = 4,
+    skip = "keras.src",
+    skip_regex = sprintf("\\.%s$", c("experimental", "deserialize", "serialize", "get"))) {
+
+  .list_endpoints <- function(.module, depth) {
+    if (depth > max_depth) return()
+
+    module_py_obj <- py_eval(.module)
+    lapply(names(module_py_obj), \(nm) {
+      endpoint <- paste0(.module, ".", nm)
+      if(length(endpoint) > 1) browser()
+      if (endpoint %in% skip) return()
+      if (any(str_detect(endpoint, skip_regex))) return()
+      # message(endpoint)
+      endpoint_py_obj <- module_py_obj[[nm]]
+      if (inherits(endpoint_py_obj, "python.builtin.module"))
+        return(.list_endpoints(endpoint, depth = depth + 1L))
+      if (inherits(endpoint_py_obj, c("python.builtin.type",
+                                      "python.builtin.function")))
+        return(endpoint)
+      NULL
+    })
+  }
+
+  unlist(lapply(module, .list_endpoints, depth = 1L))
+}
+
+if(FALSE) {
+  list_endpoints(c("keras.activations", "keras.regularizers"))
+
+  list_endpoints(c("keras.activations", "keras.regularizers"))
+
+  all_endpoints <- list_endpoints()
+
+  all_endpoints %>%
+    grep("ImageDataGenerator", ., value = T)
+
+  all_endpoints %>%
+    grep("Image", ., value = T, ignore.case = TRUE)
+
+}
+
+
 
 # ---- docstrings ----
 
@@ -527,8 +580,10 @@ make_r_name <- function(endpoint, module = py_eval(endpoint)$`__module__`) {
   if(type == "learning_rate_schedule")
     prefix <- "learning_rate_schedule"
   else {
-    if(length(x) && !is_scalar(x))
-      browser()
+    # x <-
+    # if(length(x) && !is_scalar(x))
+
+      # browser()
     prefix <- x |> str_replace("e?s$", "") |> str_flatten("_")
   }
 
@@ -620,6 +675,7 @@ transformers_registry <-
     if(!str_detect(endpoint, "[*?]")) # not a glob
       names(args) <- str_c("+", names(args))
     lapply(args, function(fn) {
+      # if(grepl("normalize_padding", fn)) browser()
       fn <- str2lang(fn)
       if (is.call(fn) && !identical(fn[[1]], quote(`function`)))
         fn <- as.function.default(c(alist(x =), fn))
@@ -1008,7 +1064,7 @@ mk_export <- function(endpoint) {
       if (length(undocumented_params <-
                  setdiff(names(formals(r_fn)),
                          unlist(strsplit(names(params) %||% character(), ","))))) {
-        browser()
+        # browser()
         x <- list2("{endpoint}" := map(set_names(undocumented_params), ~"see description"))
         writeLines(yaml::as.yaml(x))
         # message(endpoint, ":")
@@ -1123,6 +1179,7 @@ mk_layer_activation_selu <- function() {
 
 
 
+get_docstring <-
 get_fixed_docstring <- function(endpoint) {
 
   d <- inspect$getdoc(py_eval(endpoint)) %||% ""
