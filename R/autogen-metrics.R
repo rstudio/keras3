@@ -55,7 +55,7 @@ r"-(Computes the binary focal crossentropy loss.
     )-"
 
 
-# keras_core.src.losses.losses.binary_focal_crossentropy
+# keras.src.losses.losses.binary_focal_crossentropy
 #' Computes the binary focal crossentropy loss.
 #'
 #' @description
@@ -157,7 +157,7 @@ r"-(Computes the categorical focal crossentropy loss.
     )-"
 
 
-# keras_core.src.losses.losses.categorical_focal_crossentropy
+# keras.src.losses.losses.categorical_focal_crossentropy
 #' Computes the categorical focal crossentropy loss.
 #'
 #' @description
@@ -242,7 +242,7 @@ r"-(Computes Huber loss value.
     )-"
 
 
-# keras_core.src.losses.losses.huber
+# keras.src.losses.losses.huber
 #' Computes Huber loss value.
 #'
 #' @description
@@ -316,7 +316,7 @@ r"-(Logarithm of the hyperbolic cosine of the prediction error.
     )-"
 
 
-# keras_core.src.losses.losses.log_cosh
+# keras.src.losses.losses.log_cosh
 #' Logarithm of the hyperbolic cosine of the prediction error.
 #'
 #' @description
@@ -397,7 +397,7 @@ r"-(Calculates how often predictions match binary labels.
     )-"
 
 
-# keras_core.src.metrics.accuracy_metrics.BinaryAccuracy
+# keras.src.metrics.accuracy_metrics.BinaryAccuracy
 #' Calculates how often predictions match binary labels.
 #'
 #' @description
@@ -508,7 +508,7 @@ r"-(Calculates how often predictions match one-hot labels.
     )-"
 
 
-# keras_core.src.metrics.accuracy_metrics.CategoricalAccuracy
+# keras.src.metrics.accuracy_metrics.CategoricalAccuracy
 #' Calculates how often predictions match one-hot labels.
 #'
 #' @description
@@ -624,7 +624,7 @@ r"-(Calculates how often predictions match integer labels.
     )-"
 
 
-# keras_core.src.metrics.accuracy_metrics.SparseCategoricalAccuracy
+# keras.src.metrics.accuracy_metrics.SparseCategoricalAccuracy
 #' Calculates how often predictions match integer labels.
 #'
 #' @description
@@ -725,7 +725,7 @@ r"-(Computes how often integer targets are in the top `K` predictions.
     )-"
 
 
-# keras_core.src.metrics.accuracy_metrics.SparseTopKCategoricalAccuracy
+# keras.src.metrics.accuracy_metrics.SparseTopKCategoricalAccuracy
 #' Computes how often integer targets are in the top `K` predictions.
 #'
 #' @description
@@ -816,7 +816,7 @@ r"-(Computes how often targets are in the top `K` predictions.
     )-"
 
 
-# keras_core.src.metrics.accuracy_metrics.TopKCategoricalAccuracy
+# keras.src.metrics.accuracy_metrics.TopKCategoricalAccuracy
 #' Computes how often targets are in the top `K` predictions.
 #'
 #' @description
@@ -996,7 +996,7 @@ r"-(Approximates the AUC (Area under the curve) of the ROC or PR curves.
     )-"
 
 
-# keras_core.src.metrics.confusion_metrics.AUC
+# keras.src.metrics.confusion_metrics.AUC
 #' Approximates the AUC (Area under the curve) of the ROC or PR curves.
 #'
 #' @description
@@ -1172,7 +1172,7 @@ r"-(Calculates the number of false negatives.
     )-"
 
 
-# keras_core.src.metrics.confusion_metrics.FalseNegatives
+# keras.src.metrics.confusion_metrics.FalseNegatives
 #' Calculates the number of false negatives.
 #'
 #' @description
@@ -1260,7 +1260,7 @@ r"-(Calculates the number of false positives.
     )-"
 
 
-# keras_core.src.metrics.confusion_metrics.FalsePositives
+# keras.src.metrics.confusion_metrics.FalsePositives
 #' Calculates the number of false positives.
 #'
 #' @description
@@ -1396,7 +1396,7 @@ r"-(Computes the precision of the predictions with respect to the labels.
     )-"
 
 
-# keras_core.src.metrics.confusion_metrics.Precision
+# keras.src.metrics.confusion_metrics.Precision
 #' Computes the precision of the predictions with respect to the labels.
 #'
 #' @description
@@ -1552,7 +1552,7 @@ r"-(Computes best precision where recall is >= specified value.
     )-"
 
 
-# keras_core.src.metrics.confusion_metrics.PrecisionAtRecall
+# keras.src.metrics.confusion_metrics.PrecisionAtRecall
 #' Computes best precision where recall is >= specified value.
 #'
 #' @description
@@ -1688,7 +1688,7 @@ r"-(Computes the recall of the predictions with respect to the labels.
     )-"
 
 
-# keras_core.src.metrics.confusion_metrics.Recall
+# keras.src.metrics.confusion_metrics.Recall
 #' Computes the recall of the predictions with respect to the labels.
 #'
 #' @description
@@ -1827,7 +1827,7 @@ r"-(Computes best recall where precision is >= specified value.
     )-"
 
 
-# keras_core.src.metrics.confusion_metrics.RecallAtPrecision
+# keras.src.metrics.confusion_metrics.RecallAtPrecision
 #' Computes best recall where precision is >= specified value.
 #'
 #' @description
@@ -1958,7 +1958,7 @@ r"-(Computes best sensitivity where specificity is >= specified value.
     )-"
 
 
-# keras_core.src.metrics.confusion_metrics.SensitivityAtSpecificity
+# keras.src.metrics.confusion_metrics.SensitivityAtSpecificity
 #' Computes best sensitivity where specificity is >= specified value.
 #'
 #' @description
@@ -2095,7 +2095,7 @@ r"-(Computes best specificity where sensitivity is >= specified value.
     )-"
 
 
-# keras_core.src.metrics.confusion_metrics.SpecificityAtSensitivity
+# keras.src.metrics.confusion_metrics.SpecificityAtSensitivity
 #' Computes best specificity where sensitivity is >= specified value.
 #'
 #' @description
@@ -2208,7 +2208,7 @@ r"-(Calculates the number of true negatives.
     )-"
 
 
-# keras_core.src.metrics.confusion_metrics.TrueNegatives
+# keras.src.metrics.confusion_metrics.TrueNegatives
 #' Calculates the number of true negatives.
 #'
 #' @description
@@ -2296,7 +2296,7 @@ r"-(Calculates the number of true positives.
     )-"
 
 
-# keras_core.src.metrics.confusion_metrics.TruePositives
+# keras.src.metrics.confusion_metrics.TruePositives
 #' Calculates the number of true positives.
 #'
 #' @description
@@ -2401,7 +2401,7 @@ r"-(Computes F-1 Score.
     )-"
 
 
-# keras_core.src.metrics.f_score_metrics.F1Score
+# keras.src.metrics.f_score_metrics.F1Score
 #' Computes F-1 Score.
 #'
 #' @description
@@ -2526,7 +2526,7 @@ r"-(Computes F-Beta score.
     )-"
 
 
-# keras_core.src.metrics.f_score_metrics.FBetaScore
+# keras.src.metrics.f_score_metrics.FBetaScore
 #' Computes F-Beta score.
 #'
 #' @description
@@ -2619,7 +2619,7 @@ r"-(Computes the categorical hinge metric between `y_true` and `y_pred`.
     )-"
 
 
-# keras_core.src.metrics.hinge_metrics.CategoricalHinge
+# keras.src.metrics.hinge_metrics.CategoricalHinge
 #' Computes the categorical hinge metric between `y_true` and `y_pred`.
 #'
 #' @description
@@ -2706,7 +2706,7 @@ r"-(Computes the hinge metric between `y_true` and `y_pred`.
     )-"
 
 
-# keras_core.src.metrics.hinge_metrics.Hinge
+# keras.src.metrics.hinge_metrics.Hinge
 #' Computes the hinge metric between `y_true` and `y_pred`.
 #'
 #' @description
@@ -2792,7 +2792,7 @@ r"-(Computes the hinge metric between `y_true` and `y_pred`.
     )-"
 
 
-# keras_core.src.metrics.hinge_metrics.SquaredHinge
+# keras.src.metrics.hinge_metrics.SquaredHinge
 #' Computes the hinge metric between `y_true` and `y_pred`.
 #'
 #' @description
@@ -2930,7 +2930,7 @@ r"-(Computes the Intersection-Over-Union metric for class 0 and/or 1.
     )-"
 
 
-# keras_core.src.metrics.iou_metrics.BinaryIoU
+# keras.src.metrics.iou_metrics.BinaryIoU
 #' Computes the Intersection-Over-Union metric for class 0 and/or 1.
 #'
 #' @description
@@ -3102,7 +3102,7 @@ r"-(Computes the Intersection-Over-Union metric for specific target classes.
     )-"
 
 
-# keras_core.src.metrics.iou_metrics.IoU
+# keras.src.metrics.iou_metrics.IoU
 #' Computes the Intersection-Over-Union metric for specific target classes.
 #'
 #' @description
@@ -3269,7 +3269,7 @@ r"-(Computes the mean Intersection-Over-Union metric.
     )-"
 
 
-# keras_core.src.metrics.iou_metrics.MeanIoU
+# keras.src.metrics.iou_metrics.MeanIoU
 #' Computes the mean Intersection-Over-Union metric.
 #'
 #' @description
@@ -3440,7 +3440,7 @@ r"-(Computes the Intersection-Over-Union metric for one-hot encoded labels.
     )-"
 
 
-# keras_core.src.metrics.iou_metrics.OneHotIoU
+# keras.src.metrics.iou_metrics.OneHotIoU
 #' Computes the Intersection-Over-Union metric for one-hot encoded labels.
 #'
 #' @description
@@ -3618,7 +3618,7 @@ r"-(Computes mean Intersection-Over-Union metric for one-hot encoded labels.
     )-"
 
 
-# keras_core.src.metrics.iou_metrics.OneHotMeanIoU
+# keras.src.metrics.iou_metrics.OneHotMeanIoU
 #' Computes mean Intersection-Over-Union metric for one-hot encoded labels.
 #'
 #' @description
@@ -3756,7 +3756,7 @@ r"-(Computes the crossentropy metric between the labels and predictions.
     )-"
 
 
-# keras_core.src.metrics.probabilistic_metrics.BinaryCrossentropy
+# keras.src.metrics.probabilistic_metrics.BinaryCrossentropy
 #' Computes the crossentropy metric between the labels and predictions.
 #'
 #' @description
@@ -3890,7 +3890,7 @@ r"-(Computes the crossentropy metric between the labels and predictions.
     )-"
 
 
-# keras_core.src.metrics.probabilistic_metrics.CategoricalCrossentropy
+# keras.src.metrics.probabilistic_metrics.CategoricalCrossentropy
 #' Computes the crossentropy metric between the labels and predictions.
 #'
 #' @description
@@ -4015,7 +4015,7 @@ r"-(Computes Kullback-Leibler divergence metric between `y_true` and
     )-"
 
 
-# keras_core.src.metrics.probabilistic_metrics.KLDivergence
+# keras.src.metrics.probabilistic_metrics.KLDivergence
 #' Computes Kullback-Leibler divergence metric between `y_true` and
 #'
 #' @description
@@ -4135,7 +4135,7 @@ r"-(Computes the Poisson metric between `y_true` and `y_pred`.
     )-"
 
 
-# keras_core.src.metrics.probabilistic_metrics.Poisson
+# keras.src.metrics.probabilistic_metrics.Poisson
 #' Computes the Poisson metric between `y_true` and `y_pred`.
 #'
 #' @description
@@ -4270,7 +4270,7 @@ r"-(Computes the crossentropy metric between the labels and predictions.
     )-"
 
 
-# keras_core.src.metrics.probabilistic_metrics.SparseCategoricalCrossentropy
+# keras.src.metrics.probabilistic_metrics.SparseCategoricalCrossentropy
 #' Computes the crossentropy metric between the labels and predictions.
 #'
 #' @description
@@ -4394,7 +4394,7 @@ r"-(Compute the (weighted) mean of the given values.
     )-"
 
 
-# keras_core.src.metrics.reduction_metrics.Mean
+# keras.src.metrics.reduction_metrics.Mean
 #' Compute the (weighted) mean of the given values.
 #'
 #' @description
@@ -4464,7 +4464,7 @@ r"-(Wrap a stateless metric function with the Mean metric.
     )-"
 
 
-# keras_core.src.metrics.reduction_metrics.MeanMetricWrapper
+# keras.src.metrics.reduction_metrics.MeanMetricWrapper
 #' Wrap a stateless metric function with the Mean metric.
 #'
 #' @description
@@ -4529,7 +4529,7 @@ r"-(Compute the (weighted) sum of the given values.
     )-"
 
 
-# keras_core.src.metrics.reduction_metrics.Sum
+# keras.src.metrics.reduction_metrics.Sum
 #' Compute the (weighted) sum of the given values.
 #'
 #' @description
@@ -4620,7 +4620,7 @@ r"-(Computes the cosine similarity between the labels and predictions.
     )-"
 
 
-# keras_core.src.metrics.regression_metrics.CosineSimilarity
+# keras.src.metrics.regression_metrics.CosineSimilarity
 #' Computes the cosine similarity between the labels and predictions.
 #'
 #' @description
@@ -4720,7 +4720,7 @@ r"-(Computes the logarithm of the hyperbolic cosine of the prediction error.
     )-"
 
 
-# keras_core.src.metrics.regression_metrics.LogCoshError
+# keras.src.metrics.regression_metrics.LogCoshError
 #' Computes the logarithm of the hyperbolic cosine of the prediction error.
 #'
 #' @description
@@ -4810,7 +4810,7 @@ r"-(Computes the mean absolute error between the labels and predictions.
     )-"
 
 
-# keras_core.src.metrics.regression_metrics.MeanAbsoluteError
+# keras.src.metrics.regression_metrics.MeanAbsoluteError
 #' Computes the mean absolute error between the labels and predictions.
 #'
 #' @description
@@ -4917,7 +4917,7 @@ r"-(Computes mean absolute percentage error between `y_true` and `y_pred`.
     )-"
 
 
-# keras_core.src.metrics.regression_metrics.MeanAbsolutePercentageError
+# keras.src.metrics.regression_metrics.MeanAbsolutePercentageError
 #' Computes mean absolute percentage error between `y_true` and `y_pred`.
 #'
 #' @description
@@ -5015,7 +5015,7 @@ r"-(Computes the mean squared error between `y_true` and `y_pred`.
     )-"
 
 
-# keras_core.src.metrics.regression_metrics.MeanSquaredError
+# keras.src.metrics.regression_metrics.MeanSquaredError
 #' Computes the mean squared error between `y_true` and `y_pred`.
 #'
 #' @description
@@ -5108,7 +5108,7 @@ r"-(Computes mean squared logarithmic error between `y_true` and `y_pred`.
     )-"
 
 
-# keras_core.src.metrics.regression_metrics.MeanSquaredLogarithmicError
+# keras.src.metrics.regression_metrics.MeanSquaredLogarithmicError
 #' Computes mean squared logarithmic error between `y_true` and `y_pred`.
 #'
 #' @description
@@ -5236,7 +5236,7 @@ r"-(Computes R2 score.
     )-"
 
 
-# keras_core.src.metrics.regression_metrics.R2Score
+# keras.src.metrics.regression_metrics.R2Score
 #' Computes R2 score.
 #'
 #' @description
@@ -5342,7 +5342,7 @@ r"-(Computes root mean squared error metric between `y_true` and `y_pred`.
     )-"
 
 
-# keras_core.src.metrics.regression_metrics.RootMeanSquaredError
+# keras.src.metrics.regression_metrics.RootMeanSquaredError
 #' Computes root mean squared error metric between `y_true` and `y_pred`.
 #'
 #' @description

@@ -120,7 +120,7 @@ r"-(Generates a `tf.data.Dataset` from image files in a directory.
     )-"
 
 
-# keras_core.src.utils.image_dataset_utils.image_dataset_from_directory
+# keras.src.utils.image_dataset_utils.image_dataset_from_directory
 #' Generates a `tf.data.Dataset` from image files in a directory.
 #'
 #' @description
@@ -269,7 +269,7 @@ r"-(Saves an image stored as a NumPy array to a path or file object.
     )-"
 
 
-# keras_core.src.utils.image_utils.save_img
+# keras.src.utils.image_utils.save_img
 #' Saves an image stored as a NumPy array to a path or file object.
 #'
 #' @param path Path or file object.
@@ -324,7 +324,7 @@ r"-(Converts a 3D NumPy array to a PIL Image instance.
     )-"
 
 
-# keras_core.src.utils.image_utils.array_to_img
+# keras.src.utils.image_utils.array_to_img
 #' Converts a 3D NumPy array to a PIL Image instance.
 #'
 #' @description
@@ -397,7 +397,7 @@ r"-(Loads an image into PIL format.
     )-"
 
 
-# keras_core.src.utils.image_utils.load_img
+# keras.src.utils.image_utils.load_img
 #' Loads an image into PIL format.
 #'
 #' @description
@@ -470,7 +470,7 @@ r"-(Converts a PIL Image instance to a NumPy array.
     )-"
 
 
-# keras_core.src.utils.image_utils.img_to_array
+# keras.src.utils.image_utils.img_to_array
 #' Converts a PIL Image instance to a NumPy array.
 #'
 #' @description
@@ -568,7 +568,7 @@ r"-(Pads sequences to the same length.
     )-"
 
 
-# keras_core.src.utils.sequence_utils.pad_sequences
+# keras.src.utils.sequence_utils.pad_sequences
 #' Pads sequences to the same length.
 #'
 #' @description
@@ -736,7 +736,7 @@ r"-(Generates a `tf.data.Dataset` from text files in a directory.
     )-"
 
 
-# keras_core.src.utils.text_dataset_utils.text_dataset_from_directory
+# keras.src.utils.text_dataset_utils.text_dataset_from_directory
 #' Generates a `tf.data.Dataset` from text files in a directory.
 #'
 #' @description
@@ -953,7 +953,7 @@ r"-(Creates a dataset of sliding windows over a timeseries provided as array.
     )-"
 
 
-# keras_core.src.utils.timeseries_dataset_utils.timeseries_dataset_from_array
+# keras.src.utils.timeseries_dataset_utils.timeseries_dataset_from_array
 #' Creates a dataset of sliding windows over a timeseries provided as array.
 #'
 #' @description

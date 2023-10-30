@@ -85,7 +85,7 @@ r"-(Computes the cross-entropy loss between true labels and predicted labels.
     )-"
 
 
-# keras_core.src.losses.losses.BinaryCrossentropy
+# keras.src.losses.losses.BinaryCrossentropy
 #' Computes the cross-entropy loss between true labels and predicted labels.
 #'
 #' @description
@@ -331,7 +331,7 @@ r"-(Computes focal cross-entropy loss between true labels and predictions.
     )-"
 
 
-# keras_core.src.losses.losses.BinaryFocalCrossentropy
+# keras.src.losses.losses.BinaryFocalCrossentropy
 #' Computes focal cross-entropy loss between true labels and predictions.
 #'
 #' @description
@@ -584,7 +584,7 @@ r"-(Computes the crossentropy loss between the labels and predictions.
     )-"
 
 
-# keras_core.src.losses.losses.CategoricalCrossentropy
+# keras.src.losses.losses.CategoricalCrossentropy
 #' Computes the crossentropy loss between the labels and predictions.
 #'
 #' @description
@@ -781,7 +781,7 @@ r"-(Computes the alpha balanced focal crossentropy loss.
     )-"
 
 
-# keras_core.src.losses.losses.CategoricalFocalCrossentropy
+# keras.src.losses.losses.CategoricalFocalCrossentropy
 #' Computes the alpha balanced focal crossentropy loss.
 #'
 #' @description
@@ -939,7 +939,7 @@ r"-(Computes the categorical hinge loss between `y_true` & `y_pred`.
     )-"
 
 
-# keras_core.src.losses.losses.CategoricalHinge
+# keras.src.losses.losses.CategoricalHinge
 #' Computes the categorical hinge loss between `y_true` & `y_pred`.
 #'
 #' @description
@@ -1023,7 +1023,7 @@ r"-(Computes the cosine similarity between `y_true` & `y_pred`.
     )-"
 
 
-# keras_core.src.losses.losses.CosineSimilarity
+# keras.src.losses.losses.CosineSimilarity
 #' Computes the cosine similarity between `y_true` & `y_pred`.
 #'
 #' @description
@@ -1110,7 +1110,7 @@ r"-(Computes the hinge loss between `y_true` & `y_pred`.
     )-"
 
 
-# keras_core.src.losses.losses.Hinge
+# keras.src.losses.losses.Hinge
 #' Computes the hinge loss between `y_true` & `y_pred`.
 #'
 #' @description
@@ -1192,7 +1192,7 @@ r"-(Computes the Huber loss between `y_true` & `y_pred`.
     )-"
 
 
-# keras_core.src.losses.losses.Huber
+# keras.src.losses.losses.Huber
 #' Computes the Huber loss between `y_true` & `y_pred`.
 #'
 #' @description
@@ -1276,7 +1276,7 @@ r"-(Computes Kullback-Leibler divergence loss between `y_true` & `y_pred`.
     )-"
 
 
-# keras_core.src.losses.losses.KLDivergence
+# keras.src.losses.losses.KLDivergence
 #' Computes Kullback-Leibler divergence loss between `y_true` & `y_pred`.
 #'
 #' @description
@@ -1351,7 +1351,7 @@ r"-(Computes the logarithm of the hyperbolic cosine of the prediction error.
     )-"
 
 
-# keras_core.src.losses.losses.LogCosh
+# keras.src.losses.losses.LogCosh
 #' Computes the logarithm of the hyperbolic cosine of the prediction error.
 #'
 #' @description
@@ -1426,7 +1426,7 @@ r"-(Computes the mean of absolute difference between labels and predictions.
     )-"
 
 
-# keras_core.src.losses.losses.MeanAbsoluteError
+# keras.src.losses.losses.MeanAbsoluteError
 #' Computes the mean of absolute difference between labels and predictions.
 #'
 #' @description
@@ -1492,7 +1492,7 @@ r"-(Computes the mean absolute percentage error between `y_true` & `y_pred`.
     )-"
 
 
-# keras_core.src.losses.losses.MeanAbsolutePercentageError
+# keras.src.losses.losses.MeanAbsolutePercentageError
 #' Computes the mean absolute percentage error between `y_true` & `y_pred`.
 #'
 #' @description
@@ -1565,7 +1565,7 @@ r"-(Computes the mean of squares of errors between labels and predictions.
     )-"
 
 
-# keras_core.src.losses.losses.MeanSquaredError
+# keras.src.losses.losses.MeanSquaredError
 #' Computes the mean of squares of errors between labels and predictions.
 #'
 #' @description
@@ -1633,7 +1633,7 @@ r"-(Computes the mean squared logarithmic error between `y_true` & `y_pred`.
     )-"
 
 
-# keras_core.src.losses.losses.MeanSquaredLogarithmicError
+# keras.src.losses.losses.MeanSquaredLogarithmicError
 #' Computes the mean squared logarithmic error between `y_true` & `y_pred`.
 #'
 #' @description
@@ -1706,7 +1706,7 @@ r"-(Computes the Poisson loss between `y_true` & `y_pred`.
     )-"
 
 
-# keras_core.src.losses.losses.Poisson
+# keras.src.losses.losses.Poisson
 #' Computes the Poisson loss between `y_true` & `y_pred`.
 #'
 #' @description
@@ -1819,7 +1819,7 @@ r"-(Computes the crossentropy loss between the labels and predictions.
     )-"
 
 
-# keras_core.src.losses.losses.SparseCategoricalCrossentropy
+# keras.src.losses.losses.SparseCategoricalCrossentropy
 #' Computes the crossentropy loss between the labels and predictions.
 #'
 #' @description
@@ -1940,7 +1940,7 @@ r"-(Computes the squared hinge loss between `y_true` & `y_pred`.
     )-"
 
 
-# keras_core.src.losses.losses.SquaredHinge
+# keras.src.losses.losses.SquaredHinge
 #' Computes the squared hinge loss between `y_true` & `y_pred`.
 #'
 #' @description

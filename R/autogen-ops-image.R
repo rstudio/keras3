@@ -81,7 +81,7 @@ r"-(Applies the given transform(s) to the image(s).
     )-"
 
 
-# keras_core.src.ops.image.affine_transform
+# keras.src.ops.image.affine_transform
 #' Applies the given transform(s) to the image(s).
 #'
 #' @description
@@ -218,7 +218,7 @@ r"-(Extracts patches from the image(s).
     )-"
 
 
-# keras_core.src.ops.image.extract_patches
+# keras.src.ops.image.extract_patches
 #' Extracts patches from the image(s).
 #'
 #' @description
@@ -312,7 +312,7 @@ r"-(Map the input array to new coordinates by interpolation..
     )-"
 
 
-# keras_core.src.ops.image.map_coordinates
+# keras.src.ops.image.map_coordinates
 #' Map the input array to new coordinates by interpolation..
 #'
 #' @description
@@ -399,7 +399,7 @@ r"-(Pad `images` with zeros to the specified `height` and `width`.
     (2, 20, 30, 3))-"
 
 
-# keras_core.src.ops.image.pad_images
+# keras.src.ops.image.pad_images
 #' Pad `images` with zeros to the specified `height` and `width`.
 #'
 #' @description
@@ -493,7 +493,7 @@ r"-(Resize images to size using the specified interpolation method.
     )-"
 
 
-# keras_core.src.ops.image.resize
+# keras.src.ops.image.resize
 #' Resize images to size using the specified interpolation method.
 #'
 #' @description

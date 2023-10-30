@@ -110,7 +110,7 @@ r"-(Layer that normalizes its inputs.
     )-"
 
 
-# keras_core.src.layers.normalization.batch_normalization.BatchNormalization
+# keras.src.layers.normalization.batch_normalization.BatchNormalization
 #' Layer that normalizes its inputs.
 #'
 #' @description
@@ -292,7 +292,7 @@ r"-(Group normalization layer.
     )-"
 
 
-# keras_core.src.layers.normalization.group_normalization.GroupNormalization
+# keras.src.layers.normalization.group_normalization.GroupNormalization
 #' Group normalization layer.
 #'
 #' @description
@@ -469,7 +469,7 @@ r"-(Layer normalization layer (Ba et al., 2016).
     )-"
 
 
-# keras_core.src.layers.normalization.layer_normalization.LayerNormalization
+# keras.src.layers.normalization.layer_normalization.LayerNormalization
 #' Layer normalization layer (Ba et al., 2016).
 #'
 #' @description
@@ -621,7 +621,7 @@ r"-(Performs spectral normalization on the weights of a target layer.
     )-"
 
 
-# keras_core.src.layers.normalization.spectral_normalization.SpectralNormalization
+# keras.src.layers.normalization.spectral_normalization.SpectralNormalization
 #' Performs spectral normalization on the weights of a target layer.
 #'
 #' @description
@@ -695,7 +695,7 @@ r"-(Unit normalization layer.
     )-"
 
 
-# keras_core.src.layers.normalization.unit_normalization.UnitNormalization
+# keras.src.layers.normalization.unit_normalization.UnitNormalization
 #' Unit normalization layer.
 #'
 #' @description

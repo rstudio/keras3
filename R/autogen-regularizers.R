@@ -20,7 +20,7 @@ r"-(A regularizer that applies a L1 regularization penalty.
     )-"
 
 
-# keras_core.src.regularizers.regularizers.L1
+# keras.src.regularizers.regularizers.L1
 #' A regularizer that applies a L1 regularization penalty.
 #'
 #' @description
@@ -71,7 +71,7 @@ r"-(A regularizer that applies both L1 and L2 regularization penalties.
     )-"
 
 
-# keras_core.src.regularizers.regularizers.L1L2
+# keras.src.regularizers.regularizers.L1L2
 #' A regularizer that applies both L1 and L2 regularization penalties.
 #'
 #' @description
@@ -122,7 +122,7 @@ r"-(A regularizer that applies a L2 regularization penalty.
     )-"
 
 
-# keras_core.src.regularizers.regularizers.L2
+# keras.src.regularizers.regularizers.L2
 #' A regularizer that applies a L2 regularization penalty.
 #'
 #' @description
@@ -178,7 +178,7 @@ r"-(Regularizer that encourages input vectors to be orthogonal to each other.
     )-"
 
 
-# keras_core.src.regularizers.regularizers.OrthogonalRegularizer
+# keras.src.regularizers.regularizers.OrthogonalRegularizer
 #' Regularizer that encourages input vectors to be orthogonal to each other.
 #'
 #' @description

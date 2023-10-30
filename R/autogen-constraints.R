@@ -28,7 +28,7 @@ r"-(MaxNorm weight constraint.
     )-"
 
 
-# keras_core.src.constraints.constraints.MaxNorm
+# keras.src.constraints.constraints.MaxNorm
 #' MaxNorm weight constraint.
 #'
 #' @description
@@ -94,7 +94,7 @@ r"-(MinMaxNorm weight constraint.
     )-"
 
 
-# keras_core.src.constraints.constraints.MinMaxNorm
+# keras.src.constraints.constraints.MinMaxNorm
 #' MinMaxNorm weight constraint.
 #'
 #' @description
@@ -140,7 +140,7 @@ function (min_value = 0, max_value = 1, rate = 1, axis = 0L)
 r"-(Constrains the weights to be non-negative.)-"
 
 
-# keras_core.src.constraints.constraints.NonNeg
+# keras.src.constraints.constraints.NonNeg
 #' Constrains the weights to be non-negative.
 #'
 #' @export
@@ -175,7 +175,7 @@ r"-(Constrains the weights incident to each hidden unit to have unit norm.
     )-"
 
 
-# keras_core.src.constraints.constraints.UnitNorm
+# keras.src.constraints.constraints.UnitNorm
 #' Constrains the weights incident to each hidden unit to have unit norm.
 #'
 #' @param axis integer, axis along which to calculate weight norms.

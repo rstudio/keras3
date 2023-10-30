@@ -81,7 +81,7 @@ r"-(A preprocessing layer which encodes integer features.
     )-"
 
 
-# keras_core.src.layers.preprocessing.category_encoding.CategoryEncoding
+# keras.src.layers.preprocessing.category_encoding.CategoryEncoding
 #' A preprocessing layer which encodes integer features.
 #'
 #' @description
@@ -222,7 +222,7 @@ r"-(A preprocessing layer which crops images.
     )-"
 
 
-# keras_core.src.layers.preprocessing.center_crop.CenterCrop
+# keras.src.layers.preprocessing.center_crop.CenterCrop
 #' A preprocessing layer which crops images.
 #'
 #' @description
@@ -356,7 +356,7 @@ r"-(A preprocessing layer which buckets continuous features by ranges.
     )-"
 
 
-# keras_core.src.layers.preprocessing.discretization.Discretization
+# keras.src.layers.preprocessing.discretization.Discretization
 #' A preprocessing layer which buckets continuous features by ranges.
 #'
 #' @description
@@ -515,7 +515,7 @@ r"-(A preprocessing layer which crosses features using the "hashing trick".
     )-"
 
 
-# keras_core.src.layers.preprocessing.hashed_crossing.HashedCrossing
+# keras.src.layers.preprocessing.hashed_crossing.HashedCrossing
 #' A preprocessing layer which crosses features using the "hashing trick".
 #'
 #' @description
@@ -724,7 +724,7 @@ r"-(A preprocessing layer which hashes and bins categorical features.
     )-"
 
 
-# keras_core.src.layers.preprocessing.hashing.Hashing
+# keras.src.layers.preprocessing.hashing.Hashing
 #' A preprocessing layer which hashes and bins categorical features.
 #'
 #' @description
@@ -1162,7 +1162,7 @@ r"-(A preprocessing layer that maps integers to (possibly encoded) indices.
     )-"
 
 
-# keras_core.src.layers.preprocessing.integer_lookup.IntegerLookup
+# keras.src.layers.preprocessing.integer_lookup.IntegerLookup
 #' A preprocessing layer that maps integers to (possibly encoded) indices.
 #'
 #' @description
@@ -1576,7 +1576,7 @@ r"-(A preprocessing layer that normalizes continuous features.
     )-"
 
 
-# keras_core.src.layers.preprocessing.normalization.Normalization
+# keras.src.layers.preprocessing.normalization.Normalization
 #' A preprocessing layer that normalizes continuous features.
 #'
 #' @description
@@ -1743,7 +1743,7 @@ r"-(A preprocessing layer which randomly adjusts brightness during training.
     )-"
 
 
-# keras_core.src.layers.preprocessing.random_brightness.RandomBrightness
+# keras.src.layers.preprocessing.random_brightness.RandomBrightness
 #' A preprocessing layer which randomly adjusts brightness during training.
 #'
 #' @description
@@ -1860,7 +1860,7 @@ r"-(A preprocessing layer which randomly adjusts contrast during training.
     )-"
 
 
-# keras_core.src.layers.preprocessing.random_contrast.RandomContrast
+# keras.src.layers.preprocessing.random_contrast.RandomContrast
 #' A preprocessing layer which randomly adjusts contrast during training.
 #'
 #' @description
@@ -1951,7 +1951,7 @@ r"-(A preprocessing layer which randomly crops images during training.
     )-"
 
 
-# keras_core.src.layers.preprocessing.random_crop.RandomCrop
+# keras.src.layers.preprocessing.random_crop.RandomCrop
 #' A preprocessing layer which randomly crops images during training.
 #'
 #' @description
@@ -2038,7 +2038,7 @@ r"-(A preprocessing layer which randomly flips images during training.
     )-"
 
 
-# keras_core.src.layers.preprocessing.random_flip.RandomFlip
+# keras.src.layers.preprocessing.random_flip.RandomFlip
 #' A preprocessing layer which randomly flips images during training.
 #'
 #' @description
@@ -2147,7 +2147,7 @@ r"-(A preprocessing layer which randomly rotates images during training.
     )-"
 
 
-# keras_core.src.layers.preprocessing.random_rotation.RandomRotation
+# keras.src.layers.preprocessing.random_rotation.RandomRotation
 #' A preprocessing layer which randomly rotates images during training.
 #'
 #' @description
@@ -2305,7 +2305,7 @@ r"-(A preprocessing layer which randomly translates images during training.
     )-"
 
 
-# keras_core.src.layers.preprocessing.random_translation.RandomTranslation
+# keras.src.layers.preprocessing.random_translation.RandomTranslation
 #' A preprocessing layer which randomly translates images during training.
 #'
 #' @description
@@ -2482,7 +2482,7 @@ r"-(A preprocessing layer which randomly zooms images during training.
     )-"
 
 
-# keras_core.src.layers.preprocessing.random_zoom.RandomZoom
+# keras.src.layers.preprocessing.random_zoom.RandomZoom
 #' A preprocessing layer which randomly zooms images during training.
 #'
 #' @description
@@ -2611,7 +2611,7 @@ r"-(A preprocessing layer which rescales input values to a new range.
     )-"
 
 
-# keras_core.src.layers.preprocessing.rescaling.Rescaling
+# keras.src.layers.preprocessing.rescaling.Rescaling
 #' A preprocessing layer which rescales input values to a new range.
 #'
 #' @description
@@ -2701,7 +2701,7 @@ r"-(A preprocessing layer which resizes images.
     )-"
 
 
-# keras_core.src.layers.preprocessing.resizing.Resizing
+# keras.src.layers.preprocessing.resizing.Resizing
 #' A preprocessing layer which resizes images.
 #'
 #' @description
@@ -3048,7 +3048,7 @@ r"-(A preprocessing layer that maps strings to (possibly encoded) indices.
     )-"
 
 
-# keras_core.src.layers.preprocessing.string_lookup.StringLookup
+# keras.src.layers.preprocessing.string_lookup.StringLookup
 #' A preprocessing layer that maps strings to (possibly encoded) indices.
 #'
 #' @description
@@ -3562,7 +3562,7 @@ r"-(A preprocessing layer which maps text features to integer sequences.
     )-"
 
 
-# keras_core.src.layers.preprocessing.text_vectorization.TextVectorization
+# keras.src.layers.preprocessing.text_vectorization.TextVectorization
 #' A preprocessing layer which maps text features to integer sequences.
 #'
 #' @description

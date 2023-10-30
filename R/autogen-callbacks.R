@@ -68,7 +68,7 @@ r"-(Callback to back up and restore the training state.
     )-"
 
 
-# keras_core.src.callbacks.backup_and_restore_callback.BackupAndRestore
+# keras.src.callbacks.backup_and_restore_callback.BackupAndRestore
 #' Callback to back up and restore the training state.
 #'
 #' @description
@@ -167,7 +167,7 @@ r"-(Callback that streams epoch results to a CSV file.
     )-"
 
 
-# keras_core.src.callbacks.csv_logger.CSVLogger
+# keras.src.callbacks.csv_logger.CSVLogger
 #' Callback that streams epoch results to a CSV file.
 #'
 #' @description
@@ -258,7 +258,7 @@ r"-(Stop training when a monitored metric has stopped improving.
     )-"
 
 
-# keras_core.src.callbacks.early_stopping.EarlyStopping
+# keras.src.callbacks.early_stopping.EarlyStopping
 #' Stop training when a monitored metric has stopped improving.
 #'
 #' @description
@@ -392,7 +392,7 @@ r"-(Callback for creating simple, custom callbacks on-the-fly.
     )-"
 
 
-# keras_core.src.callbacks.lambda_callback.LambdaCallback
+# keras.src.callbacks.lambda_callback.LambdaCallback
 #' Callback for creating simple, custom callbacks on-the-fly.
 #'
 #' @description
@@ -503,7 +503,7 @@ r"-(Learning rate scheduler.
     )-"
 
 
-# keras_core.src.callbacks.learning_rate_scheduler.LearningRateScheduler
+# keras.src.callbacks.learning_rate_scheduler.LearningRateScheduler
 #' Learning rate scheduler.
 #'
 #' @description
@@ -668,7 +668,7 @@ r"-(Callback to save the Keras model or model weights at some frequency.
     )-"
 
 
-# keras_core.src.callbacks.model_checkpoint.ModelCheckpoint
+# keras.src.callbacks.model_checkpoint.ModelCheckpoint
 #' Callback to save the Keras model or model weights at some frequency.
 #'
 #' @description
@@ -807,7 +807,7 @@ r"-(Callback that prints metrics to stdout.
     )-"
 
 
-# keras_core.src.callbacks.progbar_logger.ProgbarLogger
+# keras.src.callbacks.progbar_logger.ProgbarLogger
 #' Callback that prints metrics to stdout.
 #'
 #' @description
@@ -870,7 +870,7 @@ r"-(Reduce learning rate when a metric has stopped improving.
     )-"
 
 
-# keras_core.src.callbacks.reduce_lr_on_plateau.ReduceLROnPlateau
+# keras.src.callbacks.reduce_lr_on_plateau.ReduceLROnPlateau
 #' Reduce learning rate when a metric has stopped improving.
 #'
 #' @description
@@ -945,7 +945,7 @@ r"-(Callback used to stream events to a server.
     )-"
 
 
-# keras_core.src.callbacks.remote_monitor.RemoteMonitor
+# keras.src.callbacks.remote_monitor.RemoteMonitor
 #' Callback used to stream events to a server.
 #'
 #' @description
@@ -1123,7 +1123,7 @@ r"-(Enable visualizations for TensorBoard.
     )-"
 
 
-# keras_core.src.callbacks.tensorboard.TensorBoard
+# keras.src.callbacks.tensorboard.TensorBoard
 #' Enable visualizations for TensorBoard.
 #'
 #' @description
@@ -1283,7 +1283,7 @@ function (log_dir = "logs", histogram_freq = 0L, write_graph = TRUE,
 r"-(Callback that terminates training when a NaN loss is encountered.)-"
 
 
-# keras_core.src.callbacks.terminate_on_nan.TerminateOnNaN
+# keras.src.callbacks.terminate_on_nan.TerminateOnNaN
 #' Callback that terminates training when a NaN loss is encountered.
 #'
 #' @export

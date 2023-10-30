@@ -188,7 +188,6 @@ df |>
 #       mapply(writeLines, trim(df$docstring), file.path(endpoint_dir, "docstring.R"))
 #     })
 
-    df$module %<>% str_replace_all(fixed("keras."), "keras_core.")
     docstring <- map2_chr(df$py_obj, df$endpoint, \(p, ep) {
       str_flatten_lines(
         str_c("# ", deparse1(endpoint_to_expr(ep))),

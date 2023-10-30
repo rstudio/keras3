@@ -51,7 +51,7 @@ r"-(Just your regular densely-connected NN layer.
     )-"
 
 
-# keras_core.src.layers.core.dense.Dense
+# keras.src.layers.core.dense.Dense
 #' Just your regular densely-connected NN layer.
 #'
 #' @description
@@ -204,7 +204,7 @@ r"-(A layer that uses `einsum` as the backing computation.
     )-"
 
 
-# keras_core.src.layers.core.einsum_dense.EinsumDense
+# keras.src.layers.core.einsum_dense.EinsumDense
 #' A layer that uses `einsum` as the backing computation.
 #'
 #' @description
@@ -362,7 +362,7 @@ r"-(Turns positive integers (indexes) into dense vectors of fixed size.
     )-"
 
 
-# keras_core.src.layers.core.embedding.Embedding
+# keras.src.layers.core.embedding.Embedding
 #' Turns positive integers (indexes) into dense vectors of fixed size.
 #'
 #' @description
@@ -440,7 +440,7 @@ r"-(Identity layer.
     )-"
 
 
-# keras_core.src.layers.core.identity.Identity
+# keras.src.layers.core.identity.Identity
 #' Identity layer.
 #'
 #' @description
@@ -513,7 +513,7 @@ r"-(Used to instantiate a Keras tensor.
     )-"
 
 
-# keras_core.src.layers.core.input_layer.Input
+# keras.src.layers.core.input_layer.Input
 #' Used to instantiate a Keras tensor.
 #'
 #' @description
@@ -623,7 +623,7 @@ r"-(Wraps arbitrary expressions as a `Layer` object.
     )-"
 
 
-# keras_core.src.layers.core.lambda_layer.Lambda
+# keras.src.layers.core.lambda_layer.Lambda
 #' Wraps arbitrary expressions as a `Layer` object.
 #'
 #' @description
@@ -729,7 +729,7 @@ r"-(Masks a sequence by using a mask value to skip timesteps.
     )-"
 
 
-# keras_core.src.layers.core.masking.Masking
+# keras.src.layers.core.masking.Masking
 #' Masks a sequence by using a mask value to skip timesteps.
 #'
 #' @description

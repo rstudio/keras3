@@ -76,7 +76,7 @@ r"-(Bidirectional wrapper for RNNs.
     )-"
 
 
-# keras_core.src.layers.rnn.bidirectional.Bidirectional
+# keras.src.layers.rnn.bidirectional.Bidirectional
 #' Bidirectional wrapper for RNNs.
 #'
 #' @description
@@ -286,7 +286,7 @@ r"-(1D Convolutional LSTM.
     )-"
 
 
-# keras_core.src.layers.rnn.conv_lstm1d.ConvLSTM1D
+# keras.src.layers.rnn.conv_lstm1d.ConvLSTM1D
 #' 1D Convolutional LSTM.
 #'
 #' @description
@@ -545,7 +545,7 @@ r"-(2D Convolutional LSTM.
     )-"
 
 
-# keras_core.src.layers.rnn.conv_lstm2d.ConvLSTM2D
+# keras.src.layers.rnn.conv_lstm2d.ConvLSTM2D
 #' 2D Convolutional LSTM.
 #'
 #' @description
@@ -803,7 +803,7 @@ r"-(3D Convolutional LSTM.
     )-"
 
 
-# keras_core.src.layers.rnn.conv_lstm3d.ConvLSTM3D
+# keras.src.layers.rnn.conv_lstm3d.ConvLSTM3D
 #' 3D Convolutional LSTM.
 #'
 #' @description
@@ -1064,7 +1064,7 @@ r"-(Gated Recurrent Unit - Cho et al. 2014.
     )-"
 
 
-# keras_core.src.layers.rnn.gru.GRU
+# keras.src.layers.rnn.gru.GRU
 #' Gated Recurrent Unit - Cho et al. 2014.
 #'
 #' @description
@@ -1281,7 +1281,7 @@ r"-(Cell class for the GRU layer.
     )-"
 
 
-# keras_core.src.layers.rnn.gru.GRUCell
+# keras.src.layers.rnn.gru.GRUCell
 #' Cell class for the GRU layer.
 #'
 #' @description
@@ -1486,7 +1486,7 @@ r"-(Long Short-Term Memory layer - Hochreiter 1997.
     )-"
 
 
-# keras_core.src.layers.rnn.lstm.LSTM
+# keras.src.layers.rnn.lstm.LSTM
 #' Long Short-Term Memory layer - Hochreiter 1997.
 #'
 #' @description
@@ -1698,7 +1698,7 @@ r"-(Cell class for the LSTM layer.
     )-"
 
 
-# keras_core.src.layers.rnn.lstm.LSTMCell
+# keras.src.layers.rnn.lstm.LSTMCell
 #' Cell class for the LSTM layer.
 #'
 #' @description
@@ -1958,7 +1958,7 @@ r"-(Base class for recurrent layers.
     )-"
 
 
-# keras_core.src.layers.rnn.rnn.RNN
+# keras.src.layers.rnn.rnn.RNN
 #' Base class for recurrent layers.
 #'
 #' @description
@@ -2227,7 +2227,7 @@ r"-(Fully-connected RNN where the output is to be fed back as the new input.
     )-"
 
 
-# keras_core.src.layers.rnn.simple_rnn.SimpleRNN
+# keras.src.layers.rnn.simple_rnn.SimpleRNN
 #' Fully-connected RNN where the output is to be fed back as the new input.
 #'
 #' @description
@@ -2401,7 +2401,7 @@ r"-(Cell class for SimpleRNN.
     )-"
 
 
-# keras_core.src.layers.rnn.simple_rnn.SimpleRNNCell
+# keras.src.layers.rnn.simple_rnn.SimpleRNNCell
 #' Cell class for SimpleRNN.
 #'
 #' @description
@@ -2510,7 +2510,7 @@ r"-(Wrapper allowing a stack of RNN cells to behave as a single cell.
     )-"
 
 
-# keras_core.src.layers.rnn.stacked_rnn_cells.StackedRNNCells
+# keras.src.layers.rnn.stacked_rnn_cells.StackedRNNCells
 #' Wrapper allowing a stack of RNN cells to behave as a single cell.
 #'
 #' @description
@@ -2586,7 +2586,7 @@ r"-(This wrapper allows to apply a layer to every temporal slice of an input.
     )-"
 
 
-# keras_core.src.layers.rnn.time_distributed.TimeDistributed
+# keras.src.layers.rnn.time_distributed.TimeDistributed
 #' This wrapper allows to apply a layer to every temporal slice of an input.
 #'
 #' @description

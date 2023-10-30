@@ -90,7 +90,7 @@ r"-(1D convolution layer (e.g. temporal convolution).
     )-"
 
 
-# keras_core.src.layers.convolutional.conv1d.Conv1D
+# keras.src.layers.convolutional.conv1d.Conv1D
 #' 1D convolution layer (e.g. temporal convolution).
 #'
 #' @description
@@ -281,7 +281,7 @@ r"-(1D transposed convolution layer.
     )-"
 
 
-# keras_core.src.layers.convolutional.conv1d_transpose.Conv1DTranspose
+# keras.src.layers.convolutional.conv1d_transpose.Conv1DTranspose
 #' 1D transposed convolution layer.
 #'
 #' @description
@@ -467,7 +467,7 @@ r"-(2D convolution layer.
     )-"
 
 
-# keras_core.src.layers.convolutional.conv2d.Conv2D
+# keras.src.layers.convolutional.conv2d.Conv2D
 #' 2D convolution layer.
 #'
 #' @description
@@ -656,7 +656,7 @@ r"-(2D transposed convolution layer.
     )-"
 
 
-# keras_core.src.layers.convolutional.conv2d_transpose.Conv2DTranspose
+# keras.src.layers.convolutional.conv2d_transpose.Conv2DTranspose
 #' 2D transposed convolution layer.
 #'
 #' @description
@@ -851,7 +851,7 @@ r"-(3D convolution layer.
     )-"
 
 
-# keras_core.src.layers.convolutional.conv3d.Conv3D
+# keras.src.layers.convolutional.conv3d.Conv3D
 #' 3D convolution layer.
 #'
 #' @description
@@ -1051,7 +1051,7 @@ r"-(3D transposed convolution layer.
     )-"
 
 
-# keras_core.src.layers.convolutional.conv3d_transpose.Conv3DTranspose
+# keras.src.layers.convolutional.conv3d_transpose.Conv3DTranspose
 #' 3D transposed convolution layer.
 #'
 #' @description
@@ -1256,7 +1256,7 @@ r"-(1D depthwise convolution layer.
     )-"
 
 
-# keras_core.src.layers.convolutional.depthwise_conv1d.DepthwiseConv1D
+# keras.src.layers.convolutional.depthwise_conv1d.DepthwiseConv1D
 #' 1D depthwise convolution layer.
 #'
 #' @description
@@ -1465,7 +1465,7 @@ r"-(2D depthwise convolution layer.
     )-"
 
 
-# keras_core.src.layers.convolutional.depthwise_conv2d.DepthwiseConv2D
+# keras.src.layers.convolutional.depthwise_conv2d.DepthwiseConv2D
 #' 2D depthwise convolution layer.
 #'
 #' @description
@@ -1667,7 +1667,7 @@ r"-(1D separable convolution layer.
     )-"
 
 
-# keras_core.src.layers.convolutional.separable_conv1d.SeparableConv1D
+# keras.src.layers.convolutional.separable_conv1d.SeparableConv1D
 #' 1D separable convolution layer.
 #'
 #' @description
@@ -1863,7 +1863,7 @@ r"-(2D separable convolution layer.
     )-"
 
 
-# keras_core.src.layers.convolutional.separable_conv2d.SeparableConv2D
+# keras.src.layers.convolutional.separable_conv2d.SeparableConv2D
 #' 2D separable convolution layer.
 #'
 #' @description

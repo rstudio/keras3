@@ -100,7 +100,7 @@ r"-(A `LearningRateSchedule` that uses a cosine decay with optional warmup.
     )-"
 
 
-# keras_core.src.optimizers.schedules.learning_rate_schedule.CosineDecay
+# keras.src.optimizers.schedules.learning_rate_schedule.CosineDecay
 #' A `LearningRateSchedule` that uses a cosine decay with optional warmup.
 #'
 #' @description
@@ -264,7 +264,7 @@ r"-(A `LearningRateSchedule` that uses a cosine decay schedule with restarts.
     )-"
 
 
-# keras_core.src.optimizers.schedules.learning_rate_schedule.CosineDecayRestarts
+# keras.src.optimizers.schedules.learning_rate_schedule.CosineDecayRestarts
 #' A `LearningRateSchedule` that uses a cosine decay schedule with restarts.
 #'
 #' @description
@@ -393,7 +393,7 @@ r"-(A `LearningRateSchedule` that uses an exponential decay schedule.
     )-"
 
 
-# keras_core.src.optimizers.schedules.learning_rate_schedule.ExponentialDecay
+# keras.src.optimizers.schedules.learning_rate_schedule.ExponentialDecay
 #' A `LearningRateSchedule` that uses an exponential decay schedule.
 #'
 #' @description
@@ -533,7 +533,7 @@ r"-(A `LearningRateSchedule` that uses an inverse time decay schedule.
     )-"
 
 
-# keras_core.src.optimizers.schedules.learning_rate_schedule.InverseTimeDecay
+# keras.src.optimizers.schedules.learning_rate_schedule.InverseTimeDecay
 #' A `LearningRateSchedule` that uses an inverse time decay schedule.
 #'
 #' @description
@@ -665,7 +665,7 @@ r"-(A `LearningRateSchedule` that uses a piecewise constant decay schedule.
     )-"
 
 
-# keras_core.src.optimizers.schedules.learning_rate_schedule.PiecewiseConstantDecay
+# keras.src.optimizers.schedules.learning_rate_schedule.PiecewiseConstantDecay
 #' A `LearningRateSchedule` that uses a piecewise constant decay schedule.
 #'
 #' @description
@@ -815,7 +815,7 @@ r"-(A `LearningRateSchedule` that uses a polynomial decay schedule.
     )-"
 
 
-# keras_core.src.optimizers.schedules.learning_rate_schedule.PolynomialDecay
+# keras.src.optimizers.schedules.learning_rate_schedule.PolynomialDecay
 #' A `LearningRateSchedule` that uses a polynomial decay schedule.
 #'
 #' @description

@@ -43,7 +43,7 @@ r"-(Reload a Keras model/layer that was saved via SavedModel / ExportArchive.
     )-"
 
 
-# keras_core.src.export.export_lib.TFSMLayer
+# keras.src.export.export_lib.TFSMLayer
 #' Reload a Keras model/layer that was saved via SavedModel / ExportArchive.
 #'
 #' @description

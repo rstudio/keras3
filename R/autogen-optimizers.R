@@ -74,7 +74,7 @@ r"-(Optimizer that implements the Adadelta algorithm.
     )-"
 
 
-# keras_core.src.optimizers.adadelta.Adadelta
+# keras.src.optimizers.adadelta.Adadelta
 #' Optimizer that implements the Adadelta algorithm.
 #'
 #' @description
@@ -234,7 +234,7 @@ r"-(Optimizer that implements the Adafactor algorithm.
     )-"
 
 
-# keras_core.src.optimizers.adafactor.Adafactor
+# keras.src.optimizers.adafactor.Adafactor
 #' Optimizer that implements the Adafactor algorithm.
 #'
 #' @description
@@ -388,7 +388,7 @@ r"-(Optimizer that implements the Adagrad algorithm.
     )-"
 
 
-# keras_core.src.optimizers.adagrad.Adagrad
+# keras.src.optimizers.adagrad.Adagrad
 #' Optimizer that implements the Adagrad algorithm.
 #'
 #' @description
@@ -542,7 +542,7 @@ r"-(Optimizer that implements the Adam algorithm.
     )-"
 
 
-# keras_core.src.optimizers.adam.Adam
+# keras.src.optimizers.adam.Adam
 #' Optimizer that implements the Adam algorithm.
 #'
 #' @description
@@ -716,7 +716,7 @@ r"-(Optimizer that implements the Adamax algorithm.
     )-"
 
 
-# keras_core.src.optimizers.adamax.Adamax
+# keras.src.optimizers.adamax.Adamax
 #' Optimizer that implements the Adamax algorithm.
 #'
 #' @description
@@ -900,7 +900,7 @@ r"-(Optimizer that implements the AdamW algorithm.
     )-"
 
 
-# keras_core.src.optimizers.adamw.AdamW
+# keras.src.optimizers.adamw.AdamW
 #' Optimizer that implements the AdamW algorithm.
 #'
 #' @description
@@ -1108,7 +1108,7 @@ r"-(Optimizer that implements the FTRL algorithm.
     )-"
 
 
-# keras_core.src.optimizers.ftrl.Ftrl
+# keras.src.optimizers.ftrl.Ftrl
 #' Optimizer that implements the FTRL algorithm.
 #'
 #' @description
@@ -1308,7 +1308,7 @@ r"-(Optimizer that implements the Lion algorithm.
     )-"
 
 
-# keras_core.src.optimizers.lion.Lion
+# keras.src.optimizers.lion.Lion
 #' Optimizer that implements the Lion algorithm.
 #'
 #' @description
@@ -1465,7 +1465,7 @@ r"-(An optimizer that dynamically scales the loss to prevent underflow.
     )-"
 
 
-# keras_core.src.optimizers.loss_scale_optimizer.LossScaleOptimizer
+# keras.src.optimizers.loss_scale_optimizer.LossScaleOptimizer
 #' An optimizer that dynamically scales the loss to prevent underflow.
 #'
 #' @description
@@ -1618,7 +1618,7 @@ r"-(Optimizer that implements the Nadam algorithm.
     )-"
 
 
-# keras_core.src.optimizers.nadam.Nadam
+# keras.src.optimizers.nadam.Nadam
 #' Optimizer that implements the Nadam algorithm.
 #'
 #' @description
@@ -1785,7 +1785,7 @@ r"-(Optimizer that implements the RMSprop algorithm.
     )-"
 
 
-# keras_core.src.optimizers.rmsprop.RMSprop
+# keras.src.optimizers.rmsprop.RMSprop
 #' Optimizer that implements the RMSprop algorithm.
 #'
 #' @description
@@ -1959,7 +1959,7 @@ r"-(Gradient descent (with momentum) optimizer.
     )-"
 
 
-# keras_core.src.optimizers.sgd.SGD
+# keras.src.optimizers.sgd.SGD
 #' Gradient descent (with momentum) optimizer.
 #'
 #' @description

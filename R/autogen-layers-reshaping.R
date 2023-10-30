@@ -40,7 +40,7 @@ r"-(Cropping layer for 1D input (e.g. temporal sequence).
     )-"
 
 
-# keras_core.src.layers.reshaping.cropping1d.Cropping1D
+# keras.src.layers.reshaping.cropping1d.Cropping1D
 #' Cropping layer for 1D input (e.g. temporal sequence).
 #'
 #' @description
@@ -142,7 +142,7 @@ r"-(Cropping layer for 2D input (e.g. picture).
     )-"
 
 
-# keras_core.src.layers.reshaping.cropping2d.Cropping2D
+# keras.src.layers.reshaping.cropping2d.Cropping2D
 #' Cropping layer for 2D input (e.g. picture).
 #'
 #' @description
@@ -260,7 +260,7 @@ r"-(Cropping layer for 3D data (e.g. spatial or spatio-temporal).
     )-"
 
 
-# keras_core.src.layers.reshaping.cropping3d.Cropping3D
+# keras.src.layers.reshaping.cropping3d.Cropping3D
 #' Cropping layer for 3D data (e.g. spatial or spatio-temporal).
 #'
 #' @description
@@ -356,7 +356,7 @@ r"-(Flattens the input. Does not affect the batch size.
     )-"
 
 
-# keras_core.src.layers.reshaping.flatten.Flatten
+# keras.src.layers.reshaping.flatten.Flatten
 #' Flattens the input. Does not affect the batch size.
 #'
 #' @description
@@ -427,7 +427,7 @@ r"-(Permutes the dimensions of the input according to a given pattern.
     )-"
 
 
-# keras_core.src.layers.reshaping.permute.Permute
+# keras.src.layers.reshaping.permute.Permute
 #' Permutes the dimensions of the input according to a given pattern.
 #'
 #' @description
@@ -493,7 +493,7 @@ r"-(Repeats the input n times.
     )-"
 
 
-# keras_core.src.layers.reshaping.repeat_vector.RepeatVector
+# keras.src.layers.reshaping.repeat_vector.RepeatVector
 #' Repeats the input n times.
 #'
 #' @description
@@ -562,7 +562,7 @@ r"-(Layer that reshapes inputs into the given shape.
     )-"
 
 
-# keras_core.src.layers.reshaping.reshape.Reshape
+# keras.src.layers.reshaping.reshape.Reshape
 #' Layer that reshapes inputs into the given shape.
 #'
 #' @description
@@ -649,7 +649,7 @@ r"-(Upsampling layer for 1D inputs.
     )-"
 
 
-# keras_core.src.layers.reshaping.up_sampling1d.UpSampling1D
+# keras.src.layers.reshaping.up_sampling1d.UpSampling1D
 #' Upsampling layer for 1D inputs.
 #'
 #' @description
@@ -763,7 +763,7 @@ r"-(Upsampling layer for 2D inputs.
     )-"
 
 
-# keras_core.src.layers.reshaping.up_sampling2d.UpSampling2D
+# keras.src.layers.reshaping.up_sampling2d.UpSampling2D
 #' Upsampling layer for 2D inputs.
 #'
 #' @description
@@ -888,7 +888,7 @@ r"-(Upsampling layer for 3D inputs.
     )-"
 
 
-# keras_core.src.layers.reshaping.up_sampling3d.UpSampling3D
+# keras.src.layers.reshaping.up_sampling3d.UpSampling3D
 #' Upsampling layer for 3D inputs.
 #'
 #' @description
@@ -995,7 +995,7 @@ r"-(Zero-padding layer for 1D input (e.g. temporal sequence).
     )-"
 
 
-# keras_core.src.layers.reshaping.zero_padding1d.ZeroPadding1D
+# keras.src.layers.reshaping.zero_padding1d.ZeroPadding1D
 #' Zero-padding layer for 1D input (e.g. temporal sequence).
 #'
 #' @description
@@ -1117,7 +1117,7 @@ r"-(Zero-padding layer for 2D input (e.g. picture).
     )-"
 
 
-# keras_core.src.layers.reshaping.zero_padding2d.ZeroPadding2D
+# keras.src.layers.reshaping.zero_padding2d.ZeroPadding2D
 #' Zero-padding layer for 2D input (e.g. picture).
 #'
 #' @description
@@ -1249,7 +1249,7 @@ r"-(Zero-padding layer for 3D data (spatial or spatio-temporal).
     )-"
 
 
-# keras_core.src.layers.reshaping.zero_padding3d.ZeroPadding3D
+# keras.src.layers.reshaping.zero_padding3d.ZeroPadding3D
 #' Zero-padding layer for 3D data (spatial or spatio-temporal).
 #'
 #' @description

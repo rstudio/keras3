@@ -25,7 +25,7 @@ r"-(Initializer that generates tensors with constant values.
     )-"
 
 
-# keras_core.src.initializers.constant_initializers.Constant
+# keras.src.initializers.constant_initializers.Constant
 #' Initializer that generates tensors with constant values.
 #'
 #' @description
@@ -82,7 +82,7 @@ r"-(Initializer that generates the identity matrix.
     )-"
 
 
-# keras_core.src.initializers.constant_initializers.Identity
+# keras.src.initializers.constant_initializers.Identity
 #' Initializer that generates the identity matrix.
 #'
 #' @description
@@ -134,7 +134,7 @@ r"-(Initializer that generates tensors initialized to 1.
     )-"
 
 
-# keras_core.src.initializers.constant_initializers.Ones
+# keras.src.initializers.constant_initializers.Ones
 #' Initializer that generates tensors initialized to 1.
 #'
 #' @description
@@ -182,7 +182,7 @@ r"-(Initializer that generates tensors initialized to 0.
     )-"
 
 
-# keras_core.src.initializers.constant_initializers.Zeros
+# keras.src.initializers.constant_initializers.Zeros
 #' Initializer that generates tensors initialized to 0.
 #'
 #' @description
@@ -248,7 +248,7 @@ r"-(The Glorot normal initializer, also called Xavier normal initializer.
     )-"
 
 
-# keras_core.src.initializers.random_initializers.GlorotNormal
+# keras.src.initializers.random_initializers.GlorotNormal
 #' The Glorot normal initializer, also called Xavier normal initializer.
 #'
 #' @description
@@ -329,7 +329,7 @@ r"-(The Glorot uniform initializer, also called Xavier uniform initializer.
     )-"
 
 
-# keras_core.src.initializers.random_initializers.GlorotUniform
+# keras.src.initializers.random_initializers.GlorotUniform
 #' The Glorot uniform initializer, also called Xavier uniform initializer.
 #'
 #' @description
@@ -409,7 +409,7 @@ r"-(He normal initializer.
     )-"
 
 
-# keras_core.src.initializers.random_initializers.HeNormal
+# keras.src.initializers.random_initializers.HeNormal
 #' He normal initializer.
 #'
 #' @description
@@ -489,7 +489,7 @@ r"-(He uniform variance scaling initializer.
     )-"
 
 
-# keras_core.src.initializers.random_initializers.HeUniform
+# keras.src.initializers.random_initializers.HeUniform
 #' He uniform variance scaling initializer.
 #'
 #' @description
@@ -573,7 +573,7 @@ r"-(Lecun normal initializer.
     )-"
 
 
-# keras_core.src.initializers.random_initializers.LecunNormal
+# keras.src.initializers.random_initializers.LecunNormal
 #' Lecun normal initializer.
 #'
 #' @description
@@ -657,7 +657,7 @@ r"-(Lecun uniform initializer.
     )-"
 
 
-# keras_core.src.initializers.random_initializers.LecunUniform
+# keras.src.initializers.random_initializers.LecunUniform
 #' Lecun uniform initializer.
 #'
 #' @description
@@ -739,7 +739,7 @@ r"-(Initializer that generates an orthogonal matrix.
     )-"
 
 
-# keras_core.src.initializers.random_initializers.OrthogonalInitializer
+# keras.src.initializers.random_initializers.OrthogonalInitializer
 #' Initializer that generates an orthogonal matrix.
 #'
 #' @description
@@ -819,7 +819,7 @@ r"-(Random normal initializer.
     )-"
 
 
-# keras_core.src.initializers.random_initializers.RandomNormal
+# keras.src.initializers.random_initializers.RandomNormal
 #' Random normal initializer.
 #'
 #' @description
@@ -896,7 +896,7 @@ r"-(Random uniform initializer.
     )-"
 
 
-# keras_core.src.initializers.random_initializers.RandomUniform
+# keras.src.initializers.random_initializers.RandomUniform
 #' Random uniform initializer.
 #'
 #' @description
@@ -976,7 +976,7 @@ r"-(Initializer that generates a truncated normal distribution.
     )-"
 
 
-# keras_core.src.initializers.random_initializers.TruncatedNormal
+# keras.src.initializers.random_initializers.TruncatedNormal
 #' Initializer that generates a truncated normal distribution.
 #'
 #' @description
@@ -1068,7 +1068,7 @@ r"-(Initializer that adapts its scale to the shape of its input tensors.
     )-"
 
 
-# keras_core.src.initializers.random_initializers.VarianceScaling
+# keras.src.initializers.random_initializers.VarianceScaling
 #' Initializer that adapts its scale to the shape of its input tensors.
 #'
 #' @description

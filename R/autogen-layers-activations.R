@@ -22,7 +22,7 @@ r"-(Applies an activation function to an output.
     )-"
 
 
-# keras_core.src.layers.activations.activation.Activation
+# keras.src.layers.activations.activation.Activation
 #' Applies an activation function to an output.
 #'
 #' @description
@@ -74,7 +74,7 @@ r"-(Applies an Exponential Linear Unit function to an output.
     )-"
 
 
-# keras_core.src.layers.activations.elu.ELU
+# keras.src.layers.activations.elu.ELU
 #' Applies an Exponential Linear Unit function to an output.
 #'
 #' @description
@@ -135,7 +135,7 @@ r"-(Leaky version of a Rectified Linear Unit activation layer.
     )-"
 
 
-# keras_core.src.layers.activations.leaky_relu.LeakyReLU
+# keras.src.layers.activations.leaky_relu.LeakyReLU
 #' Leaky version of a Rectified Linear Unit activation layer.
 #'
 #' @description
@@ -202,7 +202,7 @@ r"-(Parametric Rectified Linear Unit activation layer.
     )-"
 
 
-# keras_core.src.layers.activations.prelu.PReLU
+# keras.src.layers.activations.prelu.PReLU
 #' Parametric Rectified Linear Unit activation layer.
 #'
 #' @description
@@ -277,7 +277,7 @@ r"-(Rectified Linear Unit activation function layer.
     )-"
 
 
-# keras_core.src.layers.activations.relu.ReLU
+# keras.src.layers.activations.relu.ReLU
 #' Rectified Linear Unit activation function layer.
 #'
 #' @description
@@ -358,7 +358,7 @@ r"-(Softmax activation layer.
     )-"
 
 
-# keras_core.src.layers.activations.softmax.Softmax
+# keras.src.layers.activations.softmax.Softmax
 #' Softmax activation layer.
 #'
 #' @description

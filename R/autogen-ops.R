@@ -20,7 +20,7 @@ r"-(Cast a tensor to the desired dtype.
     )-"
 
 
-# keras_core.src.ops.core.cast
+# keras.src.ops.core.cast
 #' Cast a tensor to the desired dtype.
 #'
 #' @description
@@ -61,7 +61,7 @@ r"-(Conditionally applies `true_fn` or `false_fn`.
     )-"
 
 
-# keras_core.src.ops.core.cond
+# keras.src.ops.core.cond
 #' Conditionally applies `true_fn` or `false_fn`.
 #'
 #' @description
@@ -95,7 +95,7 @@ r"-(Convert a tensor to a NumPy array.
     )-"
 
 
-# keras_core.src.ops.core.convert_to_numpy
+# keras.src.ops.core.convert_to_numpy
 #' Convert a tensor to a NumPy array.
 #'
 #' @description
@@ -133,7 +133,7 @@ r"-(Convert a NumPy array to a tensor.
     )-"
 
 
-# keras_core.src.ops.core.convert_to_tensor
+# keras.src.ops.core.convert_to_tensor
 #' Convert a NumPy array to a tensor.
 #'
 #' @description
@@ -186,7 +186,7 @@ r"-(For loop implementation.
     )-"
 
 
-# keras_core.src.ops.core.fori_loop
+# keras.src.ops.core.fori_loop
 #' For loop implementation.
 #'
 #' @description
@@ -249,7 +249,7 @@ r"-(Returns a tensor of shape `shape` where `indices` are set to `values`.
     )-"
 
 
-# keras_core.src.ops.core.scatter
+# keras.src.ops.core.scatter
 #' Returns a tensor of shape `shape` where `indices` are set to `values`.
 #'
 #' @description
@@ -334,7 +334,7 @@ r"-(Update inputs via updates at scattered (sparse) indices.
     )-"
 
 
-# keras_core.src.ops.core.scatter_update
+# keras.src.ops.core.scatter_update
 #' Update inputs via updates at scattered (sparse) indices.
 #'
 #' @description
@@ -414,7 +414,7 @@ r"-(Gets the shape of the tensor input.
     )-"
 
 
-# keras_core.src.ops.core.shape
+# keras.src.ops.core.shape
 #' Gets the shape of the tensor input.
 #'
 #' @description
@@ -476,7 +476,7 @@ r"-(Return a slice of an input tensor.
     )-"
 
 
-# keras_core.src.ops.core.slice
+# keras.src.ops.core.slice
 #' Return a slice of an input tensor.
 #'
 #' @description
@@ -544,7 +544,7 @@ r"-(Update an input by slicing in a tensor of updated values.
     )-"
 
 
-# keras_core.src.ops.core.slice_update
+# keras.src.ops.core.slice_update
 #' Update an input by slicing in a tensor of updated values.
 #'
 #' @description
@@ -605,7 +605,7 @@ r"-(Stops gradient computation.
     )-"
 
 
-# keras_core.src.ops.core.stop_gradient
+# keras.src.ops.core.stop_gradient
 #' Stops gradient computation.
 #'
 #' @description
@@ -656,7 +656,7 @@ r"-(Unpacks the given dimension of a rank-R tensor into rank-(R-1) tensors.
     )-"
 
 
-# keras_core.src.ops.core.unstack
+# keras.src.ops.core.unstack
 #' Unpacks the given dimension of a rank-R tensor into rank-(R-1) tensors.
 #'
 #' @description
@@ -718,7 +718,7 @@ r"-(While loop implementation.
     )-"
 
 
-# keras_core.src.ops.core.while_loop
+# keras.src.ops.core.while_loop
 #' While loop implementation.
 #'
 #' @description
@@ -774,7 +774,7 @@ r"-(Computes the error function of `x`, element-wise.
     )-"
 
 
-# keras_core.src.ops.math.erf
+# keras.src.ops.math.erf
 #' Computes the error function of `x`, element-wise.
 #'
 #' @description
@@ -831,7 +831,7 @@ r"-(Expands the dimension of last axis into sequences of `sequence_length`.
     )-"
 
 
-# keras_core.src.ops.math.extract_sequences
+# keras.src.ops.math.extract_sequences
 #' Expands the dimension of last axis into sequences of `sequence_length`.
 #'
 #' @description
@@ -896,7 +896,7 @@ r"-(Computes the Fast Fourier Transform along last axis of input.
     )-"
 
 
-# keras_core.src.ops.math.fft
+# keras.src.ops.math.fft
 #' Computes the Fast Fourier Transform along last axis of input.
 #'
 #' @description
@@ -953,7 +953,7 @@ r"-(Computes the 2D Fast Fourier Transform along the last two axes of input.
     )-"
 
 
-# keras_core.src.ops.math.fft2
+# keras.src.ops.math.fft2
 #' Computes the 2D Fast Fourier Transform along the last two axes of input.
 #'
 #' @description
@@ -1012,7 +1012,7 @@ r"-(Checks if the targets are in the top-k predictions.
     )-"
 
 
-# keras_core.src.ops.math.in_top_k
+# keras.src.ops.math.in_top_k
 #' Checks if the targets are in the top-k predictions.
 #'
 #' @description
@@ -1090,7 +1090,7 @@ r"-(Inverse real-valued Fast Fourier transform along the last axis.
     )-"
 
 
-# keras_core.src.ops.math.irfft
+# keras.src.ops.math.irfft
 #' Inverse real-valued Fast Fourier transform along the last axis.
 #'
 #' @description
@@ -1181,7 +1181,7 @@ r"-(Inverse Short-Time Fourier Transform along the last axis of the input.
     )-"
 
 
-# keras_core.src.ops.math.istft
+# keras.src.ops.math.istft
 #' Inverse Short-Time Fourier Transform along the last axis of the input.
 #'
 #' @description
@@ -1256,7 +1256,7 @@ r"-(Computes the logarithm of sum of exponentials of elements in a tensor.
     )-"
 
 
-# keras_core.src.ops.math.logsumexp
+# keras.src.ops.math.logsumexp
 #' Computes the logarithm of sum of exponentials of elements in a tensor.
 #'
 #' @description
@@ -1318,7 +1318,7 @@ r"-(Computes the QR decomposition of a tensor.
     )-"
 
 
-# keras_core.src.ops.math.qr
+# keras.src.ops.math.qr
 #' Computes the QR decomposition of a tensor.
 #'
 #' @description
@@ -1390,7 +1390,7 @@ r"-(Real-valued Fast Fourier Transform along the last axis of the input.
     )-"
 
 
-# keras_core.src.ops.math.rfft
+# keras.src.ops.math.rfft
 #' Real-valued Fast Fourier Transform along the last axis of the input.
 #'
 #' @description
@@ -1458,7 +1458,7 @@ r"-(Computes reciprocal of square root of x element-wise.
     )-"
 
 
-# keras_core.src.ops.math.rsqrt
+# keras.src.ops.math.rsqrt
 #' Computes reciprocal of square root of x element-wise.
 #'
 #' @description
@@ -1513,7 +1513,7 @@ r"-(Computes the max of segments in a tensor.
     )-"
 
 
-# keras_core.src.ops.math.segment_max
+# keras.src.ops.math.segment_max
 #' Computes the max of segments in a tensor.
 #'
 #' @description
@@ -1581,7 +1581,7 @@ r"-(Computes the sum of segments in a tensor.
     )-"
 
 
-# keras_core.src.ops.math.segment_sum
+# keras.src.ops.math.segment_sum
 #' Computes the sum of segments in a tensor.
 #'
 #' @description
@@ -1660,7 +1660,7 @@ r"-(Short-Time Fourier Transform along the last axis of the input.
     )-"
 
 
-# keras_core.src.ops.math.stft
+# keras.src.ops.math.stft
 #' Short-Time Fourier Transform along the last axis of the input.
 #'
 #' @description
@@ -1739,7 +1739,7 @@ r"-(Finds the top-k values and their indices in a tensor.
     )-"
 
 
-# keras_core.src.ops.math.top_k
+# keras.src.ops.math.top_k
 #' Finds the top-k values and their indices in a tensor.
 #'
 #' @description
@@ -1813,7 +1813,7 @@ r"-(Average pooling operation.
     )-"
 
 
-# keras_core.src.ops.nn.average_pool
+# keras.src.ops.nn.average_pool
 #' Average pooling operation.
 #'
 #' @description
@@ -1896,7 +1896,7 @@ r"-(Computes binary cross-entropy loss between target and output tensor.
     )-"
 
 
-# keras_core.src.ops.nn.binary_crossentropy
+# keras.src.ops.nn.binary_crossentropy
 #' Computes binary cross-entropy loss between target and output tensor.
 #'
 #' @description
@@ -1984,7 +1984,7 @@ r"-(Computes categorical cross-entropy loss between target and output tensor.
     )-"
 
 
-# keras_core.src.ops.nn.categorical_crossentropy
+# keras.src.ops.nn.categorical_crossentropy
 #' Computes categorical cross-entropy loss between target and output tensor.
 #'
 #' @description
@@ -2080,7 +2080,7 @@ r"-(General N-D convolution.
     )-"
 
 
-# keras_core.src.ops.nn.conv
+# keras.src.ops.nn.conv
 #' General N-D convolution.
 #'
 #' @description
@@ -2178,7 +2178,7 @@ r"-(General N-D convolution transpose.
     )-"
 
 
-# keras_core.src.ops.nn.conv_transpose
+# keras.src.ops.nn.conv_transpose
 #' General N-D convolution transpose.
 #'
 #' @description
@@ -2277,7 +2277,7 @@ r"-(General N-D depthwise convolution.
     )-"
 
 
-# keras_core.src.ops.nn.depthwise_conv
+# keras.src.ops.nn.depthwise_conv
 #' General N-D depthwise convolution.
 #'
 #' @description
@@ -2353,7 +2353,7 @@ r"-(Exponential Linear Unit activation function.
     )-"
 
 
-# keras_core.src.ops.nn.elu
+# keras.src.ops.nn.elu
 #' Exponential Linear Unit activation function.
 #'
 #' @description
@@ -2413,7 +2413,7 @@ r"-(Gaussian Error Linear Unit (GELU) activation function.
     )-"
 
 
-# keras_core.src.ops.nn.gelu
+# keras.src.ops.nn.gelu
 #' Gaussian Error Linear Unit (GELU) activation function.
 #'
 #' @description
@@ -2472,7 +2472,7 @@ r"-(Hard sigmoid activation function.
     )-"
 
 
-# keras_core.src.ops.nn.hard_sigmoid
+# keras.src.ops.nn.hard_sigmoid
 #' Hard sigmoid activation function.
 #'
 #' @description
@@ -2529,7 +2529,7 @@ r"-(Leaky version of a Rectified Linear Unit activation function.
     )-"
 
 
-# keras_core.src.ops.nn.leaky_relu
+# keras.src.ops.nn.leaky_relu
 #' Leaky version of a Rectified Linear Unit activation function.
 #'
 #' @description
@@ -2583,7 +2583,7 @@ r"-(Logarithm of the sigmoid activation function.
     )-"
 
 
-# keras_core.src.ops.nn.log_sigmoid
+# keras.src.ops.nn.log_sigmoid
 #' Logarithm of the sigmoid activation function.
 #'
 #' @description
@@ -2636,7 +2636,7 @@ r"-(Log-softmax activation function.
     )-"
 
 
-# keras_core.src.ops.nn.log_softmax
+# keras.src.ops.nn.log_softmax
 #' Log-softmax activation function.
 #'
 #' @description
@@ -2707,7 +2707,7 @@ r"-(Max pooling operation.
     )-"
 
 
-# keras_core.src.ops.nn.max_pool
+# keras.src.ops.nn.max_pool
 #' Max pooling operation.
 #'
 #' @description
@@ -2786,7 +2786,7 @@ r"-(Calculates the mean and variance of `x`.
     )-"
 
 
-# keras_core.src.ops.nn.moments
+# keras.src.ops.nn.moments
 #' Calculates the mean and variance of `x`.
 #'
 #' @description
@@ -2854,7 +2854,7 @@ r"-(Encodes integer labels as multi-hot vectors.
     )-"
 
 
-# keras_core.src.ops.nn.multi_hot
+# keras.src.ops.nn.multi_hot
 #' Encodes integer labels as multi-hot vectors.
 #'
 #' @description
@@ -2927,7 +2927,7 @@ r"-(Converts integer tensor `x` into a one-hot tensor.
     )-"
 
 
-# keras_core.src.ops.nn.one_hot
+# keras.src.ops.nn.one_hot
 #' Converts integer tensor `x` into a one-hot tensor.
 #'
 #' @description
@@ -2993,7 +2993,7 @@ r"-(Rectified linear unit activation function.
     )-"
 
 
-# keras_core.src.ops.nn.relu
+# keras.src.ops.nn.relu
 #' Rectified linear unit activation function.
 #'
 #' @description
@@ -3041,7 +3041,7 @@ r"-(Rectified linear unit activation function with upper bound of 6.
     )-"
 
 
-# keras_core.src.ops.nn.relu6
+# keras.src.ops.nn.relu6
 #' Rectified linear unit activation function with upper bound of 6.
 #'
 #' @description
@@ -3094,7 +3094,7 @@ r"-(Scaled Exponential Linear Unit (SELU) activation function.
     )-"
 
 
-# keras_core.src.ops.nn.selu
+# keras.src.ops.nn.selu
 #' Scaled Exponential Linear Unit (SELU) activation function.
 #'
 #' @description
@@ -3170,7 +3170,7 @@ r"-(General N-D separable convolution.
     )-"
 
 
-# keras_core.src.ops.nn.separable_conv
+# keras.src.ops.nn.separable_conv
 #' General N-D separable convolution.
 #'
 #' @description
@@ -3246,7 +3246,7 @@ r"-(Sigmoid activation function.
     )-"
 
 
-# keras_core.src.ops.nn.sigmoid
+# keras.src.ops.nn.sigmoid
 #' Sigmoid activation function.
 #'
 #' @description
@@ -3298,7 +3298,7 @@ r"-(Sigmoid Linear Unit (SiLU) activation function, also known as Swish.
     )-"
 
 
-# keras_core.src.ops.nn.silu
+# keras.src.ops.nn.silu
 #' Sigmoid Linear Unit (SiLU) activation function, also known as Swish.
 #'
 #' @description
@@ -3359,7 +3359,7 @@ r"-(Softmax activation function.
     )-"
 
 
-# keras_core.src.ops.nn.softmax
+# keras.src.ops.nn.softmax
 #' Softmax activation function.
 #'
 #' @description
@@ -3421,7 +3421,7 @@ r"-(Softplus activation function.
     )-"
 
 
-# keras_core.src.ops.nn.softplus
+# keras.src.ops.nn.softplus
 #' Softplus activation function.
 #'
 #' @description
@@ -3471,7 +3471,7 @@ r"-(Softsign activation function.
     )-"
 
 
-# keras_core.src.ops.nn.softsign
+# keras.src.ops.nn.softsign
 #' Softsign activation function.
 #'
 #' @description
@@ -3542,7 +3542,7 @@ r"-(Computes sparse categorical cross-entropy loss.
     )-"
 
 
-# keras_core.src.ops.nn.sparse_categorical_crossentropy
+# keras.src.ops.nn.sparse_categorical_crossentropy
 #' Computes sparse categorical cross-entropy loss.
 #'
 #' @description
@@ -3601,7 +3601,7 @@ function (target, output, from_logits = FALSE, axis = -1L)
 r"-(Shorthand for `keras.ops.absolute`.)-"
 
 
-# keras_core.src.ops.numpy.abs
+# keras.src.ops.numpy.abs
 #' Shorthand for `keras.ops.absolute`.
 #'
 #' @param x see description
@@ -3636,7 +3636,7 @@ r"-(Compute the absolute value element-wise.
     )-"
 
 
-# keras_core.src.ops.numpy.absolute
+# keras.src.ops.numpy.absolute
 #' Compute the absolute value element-wise.
 #'
 #' @description
@@ -3693,7 +3693,7 @@ r"-(Add arguments element-wise.
     )-"
 
 
-# keras_core.src.ops.numpy.add
+# keras.src.ops.numpy.add
 #' Add arguments element-wise.
 #'
 #' @description
@@ -3768,7 +3768,7 @@ r"-(Test whether all array elements along a given axis evaluate to `True`.
     )-"
 
 
-# keras_core.src.ops.numpy.all
+# keras.src.ops.numpy.all
 #' Test whether all array elements along a given axis evaluate to `True`.
 #'
 #' @description
@@ -3853,7 +3853,7 @@ r"-(Returns the maximum of an array or maximum value along an axis.
     )-"
 
 
-# keras_core.src.ops.numpy.amax
+# keras.src.ops.numpy.amax
 #' Returns the maximum of an array or maximum value along an axis.
 #'
 #' @description
@@ -3938,7 +3938,7 @@ r"-(Returns the minimum of an array or minimum value along an axis.
     )-"
 
 
-# keras_core.src.ops.numpy.amin
+# keras.src.ops.numpy.amin
 #' Returns the minimum of an array or minimum value along an axis.
 #'
 #' @description
@@ -4023,7 +4023,7 @@ r"-(Test whether any array element along a given axis evaluates to `True`.
     )-"
 
 
-# keras_core.src.ops.numpy.any
+# keras.src.ops.numpy.any
 #' Test whether any array element along a given axis evaluates to `True`.
 #'
 #' @description
@@ -4109,7 +4109,7 @@ r"-(Append tensor `x2` to the end of tensor `x1`.
     )-"
 
 
-# keras_core.src.ops.numpy.append
+# keras.src.ops.numpy.append
 #' Append tensor `x2` to the end of tensor `x1`.
 #'
 #' @description
@@ -4207,7 +4207,7 @@ r"-(Return evenly spaced values within a given interval.
     )-"
 
 
-# keras_core.src.ops.numpy.arange
+# keras.src.ops.numpy.arange
 #' Return evenly spaced values within a given interval.
 #'
 #' @description
@@ -4294,7 +4294,7 @@ r"-(Trigonometric inverse cosine, element-wise.
     )-"
 
 
-# keras_core.src.ops.numpy.arccos
+# keras.src.ops.numpy.arccos
 #' Trigonometric inverse cosine, element-wise.
 #'
 #' @description
@@ -4340,7 +4340,7 @@ r"-(Inverse hyperbolic cosine, element-wise.
     )-"
 
 
-# keras_core.src.ops.numpy.arccosh
+# keras.src.ops.numpy.arccosh
 #' Inverse hyperbolic cosine, element-wise.
 #'
 #' @description
@@ -4385,7 +4385,7 @@ r"-(Inverse sine, element-wise.
     )-"
 
 
-# keras_core.src.ops.numpy.arcsin
+# keras.src.ops.numpy.arcsin
 #' Inverse sine, element-wise.
 #'
 #' @description
@@ -4430,7 +4430,7 @@ r"-(Inverse hyperbolic sine, element-wise.
     )-"
 
 
-# keras_core.src.ops.numpy.arcsinh
+# keras.src.ops.numpy.arcsinh
 #' Inverse hyperbolic sine, element-wise.
 #'
 #' @description
@@ -4475,7 +4475,7 @@ r"-(Trigonometric inverse tangent, element-wise.
     )-"
 
 
-# keras_core.src.ops.numpy.arctan
+# keras.src.ops.numpy.arctan
 #' Trigonometric inverse tangent, element-wise.
 #'
 #' @description
@@ -4544,7 +4544,7 @@ r"-(Element-wise arc tangent of `x1/x2` choosing the quadrant correctly.
     )-"
 
 
-# keras_core.src.ops.numpy.arctan2
+# keras.src.ops.numpy.arctan2
 #' Element-wise arc tangent of `x1/x2` choosing the quadrant correctly.
 #'
 #' @description
@@ -4608,7 +4608,7 @@ r"-(Inverse hyperbolic tangent, element-wise.
     )-"
 
 
-# keras_core.src.ops.numpy.arctanh
+# keras.src.ops.numpy.arctanh
 #' Inverse hyperbolic tangent, element-wise.
 #'
 #' @description
@@ -4655,7 +4655,7 @@ r"-(Returns the indices of the maximum values along an axis.
     )-"
 
 
-# keras_core.src.ops.numpy.argmax
+# keras.src.ops.numpy.argmax
 #' Returns the indices of the maximum values along an axis.
 #'
 #' @description
@@ -4722,7 +4722,7 @@ r"-(Returns the indices of the minium values along an axis.
     )-"
 
 
-# keras_core.src.ops.numpy.argmin
+# keras.src.ops.numpy.argmin
 #' Returns the indices of the minium values along an axis.
 #'
 #' @description
@@ -4797,7 +4797,7 @@ r"-(Returns the indices that would sort a tensor.
     )-"
 
 
-# keras_core.src.ops.numpy.argsort
+# keras.src.ops.numpy.argsort
 #' Returns the indices that would sort a tensor.
 #'
 #' @description
@@ -4867,7 +4867,7 @@ r"-(Create a tensor.
     )-"
 
 
-# keras_core.src.ops.numpy.array
+# keras.src.ops.numpy.array
 #' Create a tensor.
 #'
 #' @description
@@ -4954,7 +4954,7 @@ r"-(Compute the weighted average along the specified axis.
     )-"
 
 
-# keras_core.src.ops.numpy.average
+# keras.src.ops.numpy.average
 #' Compute the weighted average along the specified axis.
 #'
 #' @description
@@ -5062,7 +5062,7 @@ r"-(Count the number of occurrences of each value in a tensor of integers.
     )-"
 
 
-# keras_core.src.ops.numpy.bincount
+# keras.src.ops.numpy.bincount
 #' Count the number of occurrences of each value in a tensor of integers.
 #'
 #' @description
@@ -5134,7 +5134,7 @@ r"-(Broadcast a tensor to a new shape.
     )-"
 
 
-# keras_core.src.ops.numpy.broadcast_to
+# keras.src.ops.numpy.broadcast_to
 #' Broadcast a tensor to a new shape.
 #'
 #' @description
@@ -5183,7 +5183,7 @@ r"-(Return the ceiling of the input, element-wise.
     )-"
 
 
-# keras_core.src.ops.numpy.ceil
+# keras.src.ops.numpy.ceil
 #' Return the ceiling of the input, element-wise.
 #'
 #' @description
@@ -5222,7 +5222,7 @@ r"-(Clip (limit) the values in a tensor.
     )-"
 
 
-# keras_core.src.ops.numpy.clip
+# keras.src.ops.numpy.clip
 #' Clip (limit) the values in a tensor.
 #'
 #' @description
@@ -5260,7 +5260,7 @@ r"-(Join a sequence of tensors along an existing axis.
     )-"
 
 
-# keras_core.src.ops.numpy.concatenate
+# keras.src.ops.numpy.concatenate
 #' Join a sequence of tensors along an existing axis.
 #'
 #' @description
@@ -5289,7 +5289,7 @@ function (xs, axis = 0L)
 r"-(Shorthand for `keras.ops.conjugate`.)-"
 
 
-# keras_core.src.ops.numpy.conj
+# keras.src.ops.numpy.conj
 #' Shorthand for `keras.ops.conjugate`.
 #'
 #' @param x see description
@@ -5321,7 +5321,7 @@ r"-(Returns the complex conjugate, element-wise.
     )-"
 
 
-# keras_core.src.ops.numpy.conjugate
+# keras.src.ops.numpy.conjugate
 #' Returns the complex conjugate, element-wise.
 #'
 #' @description
@@ -5357,7 +5357,7 @@ r"-(Returns a copy of `x`.
     )-"
 
 
-# keras_core.src.ops.numpy.copy
+# keras.src.ops.numpy.copy
 #' Returns a copy of `x`.
 #'
 #' @description
@@ -5389,7 +5389,7 @@ r"-(Cosine, element-wise.
     )-"
 
 
-# keras_core.src.ops.numpy.cos
+# keras.src.ops.numpy.cos
 #' Cosine, element-wise.
 #'
 #' @description
@@ -5421,7 +5421,7 @@ r"-(Hyperbolic cosine, element-wise.
     )-"
 
 
-# keras_core.src.ops.numpy.cosh
+# keras.src.ops.numpy.cosh
 #' Hyperbolic cosine, element-wise.
 #'
 #' @description
@@ -5466,7 +5466,7 @@ r"-(Counts the number of non-zero values in `x` along the given `axis`.
     )-"
 
 
-# keras_core.src.ops.numpy.count_nonzero
+# keras.src.ops.numpy.count_nonzero
 #' Counts the number of non-zero values in `x` along the given `axis`.
 #'
 #' @description
@@ -5540,7 +5540,7 @@ r"-(Returns the cross product of two (arrays of) vectors.
     )-"
 
 
-# keras_core.src.ops.numpy.cross
+# keras.src.ops.numpy.cross
 #' Returns the cross product of two (arrays of) vectors.
 #'
 #' @description
@@ -5602,7 +5602,7 @@ r"-(Return the cumulative product of elements along a given axis.
     )-"
 
 
-# keras_core.src.ops.numpy.cumprod
+# keras.src.ops.numpy.cumprod
 #' Return the cumulative product of elements along a given axis.
 #'
 #' @description
@@ -5641,7 +5641,7 @@ r"-(Returns the cumulative sum of elements along a given axis.
     )-"
 
 
-# keras_core.src.ops.numpy.cumsum
+# keras.src.ops.numpy.cumsum
 #' Returns the cumulative sum of elements along a given axis.
 #'
 #' @description
@@ -5702,7 +5702,7 @@ r"-(Extract a diagonal or construct a diagonal array.
     )-"
 
 
-# keras_core.src.ops.numpy.diag
+# keras.src.ops.numpy.diag
 #' Extract a diagonal or construct a diagonal array.
 #'
 #' @description
@@ -5805,7 +5805,7 @@ r"-(Return specified diagonals.
     )-"
 
 
-# keras_core.src.ops.numpy.diagonal
+# keras.src.ops.numpy.diagonal
 #' Return specified diagonals.
 #'
 #' @description
@@ -5890,7 +5890,7 @@ r"-(Returns the indices of the bins to which each value in `x` belongs.
     )-"
 
 
-# keras_core.src.ops.numpy.digitize
+# keras.src.ops.numpy.digitize
 #' Returns the indices of the bins to which each value in `x` belongs.
 #'
 #' @description
@@ -5935,7 +5935,7 @@ r"-(Divide arguments element-wise.
     )-"
 
 
-# keras_core.src.ops.numpy.divide
+# keras.src.ops.numpy.divide
 #' Divide arguments element-wise.
 #'
 #' @description
@@ -5983,7 +5983,7 @@ r"-(Dot product of two tensors.
     )-"
 
 
-# keras_core.src.ops.numpy.dot
+# keras.src.ops.numpy.dot
 #' Dot product of two tensors.
 #'
 #' @description
@@ -6102,7 +6102,7 @@ r"-(Evaluates the Einstein summation convention on the operands.
     )-"
 
 
-# keras_core.src.ops.numpy.einsum
+# keras.src.ops.numpy.einsum
 #' Evaluates the Einstein summation convention on the operands.
 #'
 #' @description
@@ -6223,7 +6223,7 @@ r"-(Return a tensor of given shape and type filled with uninitialized data.
     )-"
 
 
-# keras_core.src.ops.numpy.empty
+# keras.src.ops.numpy.empty
 #' Return a tensor of given shape and type filled with uninitialized data.
 #'
 #' @description
@@ -6257,7 +6257,7 @@ r"-(Returns `(x1 == x2)` element-wise.
     )-"
 
 
-# keras_core.src.ops.numpy.equal
+# keras.src.ops.numpy.equal
 #' Returns `(x1 == x2)` element-wise.
 #'
 #' @description
@@ -6290,7 +6290,7 @@ r"-(Calculate the exponential of all elements in the input tensor.
     )-"
 
 
-# keras_core.src.ops.numpy.exp
+# keras.src.ops.numpy.exp
 #' Calculate the exponential of all elements in the input tensor.
 #'
 #' @description
@@ -6326,7 +6326,7 @@ r"-(Expand the shape of a tensor.
     )-"
 
 
-# keras_core.src.ops.numpy.expand_dims
+# keras.src.ops.numpy.expand_dims
 #' Expand the shape of a tensor.
 #'
 #' @description
@@ -6364,7 +6364,7 @@ r"-(Calculate `exp(x) - 1` for all elements in the tensor.
     )-"
 
 
-# keras_core.src.ops.numpy.expm1
+# keras.src.ops.numpy.expm1
 #' Calculate `exp(x) - 1` for all elements in the tensor.
 #'
 #' @description
@@ -6401,7 +6401,7 @@ r"-(Return a 2-D tensor with ones on the diagonal and zeros elsewhere.
     )-"
 
 
-# keras_core.src.ops.numpy.eye
+# keras.src.ops.numpy.eye
 #' Return a 2-D tensor with ones on the diagonal and zeros elsewhere.
 #'
 #' @description
@@ -6445,7 +6445,7 @@ r"-(Reverse the order of elements in the tensor along the given axis.
     )-"
 
 
-# keras_core.src.ops.numpy.flip
+# keras.src.ops.numpy.flip
 #' Reverse the order of elements in the tensor along the given axis.
 #'
 #' @description
@@ -6485,7 +6485,7 @@ r"-(Return the floor of the input, element-wise.
     )-"
 
 
-# keras_core.src.ops.numpy.floor
+# keras.src.ops.numpy.floor
 #' Return the floor of the input, element-wise.
 #'
 #' @description
@@ -6519,7 +6519,7 @@ r"-(Returns the largest integer smaller or equal to the division of inputs.
     )-"
 
 
-# keras_core.src.ops.numpy.floor_divide
+# keras.src.ops.numpy.floor_divide
 #' Returns the largest integer smaller or equal to the division of inputs.
 #'
 #' @description
@@ -6554,7 +6554,7 @@ r"-(Return a new tensor of given shape and type, filled with `fill_value`.
     )-"
 
 
-# keras_core.src.ops.numpy.full
+# keras.src.ops.numpy.full
 #' Return a new tensor of given shape and type, filled with `fill_value`.
 #'
 #' @description
@@ -6590,7 +6590,7 @@ r"-(Return a full tensor with the same shape and type as the given tensor.
     )-"
 
 
-# keras_core.src.ops.numpy.full_like
+# keras.src.ops.numpy.full_like
 #' Return a full tensor with the same shape and type as the given tensor.
 #'
 #' @description
@@ -6617,7 +6617,7 @@ keras$ops$full_like(x, fill_value, dtype)
 r"-(Return `x[key]`.)-"
 
 
-# keras_core.src.ops.numpy.get_item
+# keras.src.ops.numpy.get_item
 #' Return `x[key]`.
 #'
 #' @param x see description
@@ -6646,7 +6646,7 @@ r"-(Return the truth value of `x1 > x2` element-wise.
     )-"
 
 
-# keras_core.src.ops.numpy.greater
+# keras.src.ops.numpy.greater
 #' Return the truth value of `x1 > x2` element-wise.
 #'
 #' @description
@@ -6680,7 +6680,7 @@ r"-(Return the truth value of `x1 >= x2` element-wise.
     )-"
 
 
-# keras_core.src.ops.numpy.greater_equal
+# keras.src.ops.numpy.greater_equal
 #' Return the truth value of `x1 >= x2` element-wise.
 #'
 #' @description
@@ -6716,7 +6716,7 @@ r"-(Stack tensors in sequence horizontally (column wise).
     )-"
 
 
-# keras_core.src.ops.numpy.hstack
+# keras.src.ops.numpy.hstack
 #' Stack tensors in sequence horizontally (column wise).
 #'
 #' @description
@@ -6754,7 +6754,7 @@ r"-(Return the identity tensor.
     )-"
 
 
-# keras_core.src.ops.numpy.identity
+# keras.src.ops.numpy.identity
 #' Return the identity tensor.
 #'
 #' @description
@@ -6789,7 +6789,7 @@ r"-(Return the imaginary part of the complex argument.
     )-"
 
 
-# keras_core.src.ops.numpy.imag
+# keras.src.ops.numpy.imag
 #' Return the imaginary part of the complex argument.
 #'
 #' @description
@@ -6822,7 +6822,7 @@ r"-(Return whether two tensors are element-wise almost equal.
     )-"
 
 
-# keras_core.src.ops.numpy.isclose
+# keras.src.ops.numpy.isclose
 #' Return whether two tensors are element-wise almost equal.
 #'
 #' @description
@@ -6859,7 +6859,7 @@ r"-(Return whether a tensor is finite, element-wise.
     )-"
 
 
-# keras_core.src.ops.numpy.isfinite
+# keras.src.ops.numpy.isfinite
 #' Return whether a tensor is finite, element-wise.
 #'
 #' @description
@@ -6894,7 +6894,7 @@ r"-(Test element-wise for positive or negative infinity.
     )-"
 
 
-# keras_core.src.ops.numpy.isinf
+# keras.src.ops.numpy.isinf
 #' Test element-wise for positive or negative infinity.
 #'
 #' @description
@@ -6926,7 +6926,7 @@ r"-(Test element-wise for NaN and return result as a boolean tensor.
     )-"
 
 
-# keras_core.src.ops.numpy.isnan
+# keras.src.ops.numpy.isnan
 #' Test element-wise for NaN and return result as a boolean tensor.
 #'
 #' @description
@@ -6959,7 +6959,7 @@ r"-(Return the truth value of `x1 < x2` element-wise.
     )-"
 
 
-# keras_core.src.ops.numpy.less
+# keras.src.ops.numpy.less
 #' Return the truth value of `x1 < x2` element-wise.
 #'
 #' @description
@@ -6993,7 +6993,7 @@ r"-(Return the truth value of `x1 <= x2` element-wise.
     )-"
 
 
-# keras_core.src.ops.numpy.less_equal
+# keras.src.ops.numpy.less_equal
 #' Return the truth value of `x1 <= x2` element-wise.
 #'
 #' @description
@@ -7048,7 +7048,7 @@ r"-(Return evenly spaced numbers over a specified interval.
     )-"
 
 
-# keras_core.src.ops.numpy.linspace
+# keras.src.ops.numpy.linspace
 #' Return evenly spaced numbers over a specified interval.
 #'
 #' @description
@@ -7105,7 +7105,7 @@ r"-(Natural logarithm, element-wise.
     )-"
 
 
-# keras_core.src.ops.numpy.log
+# keras.src.ops.numpy.log
 #' Natural logarithm, element-wise.
 #'
 #' @description
@@ -7137,7 +7137,7 @@ r"-(Return the base 10 logarithm of the input tensor, element-wise.
     )-"
 
 
-# keras_core.src.ops.numpy.log10
+# keras.src.ops.numpy.log10
 #' Return the base 10 logarithm of the input tensor, element-wise.
 #'
 #' @description
@@ -7171,7 +7171,7 @@ r"-(Returns the natural logarithm of one plus the `x`, element-wise.
     )-"
 
 
-# keras_core.src.ops.numpy.log1p
+# keras.src.ops.numpy.log1p
 #' Returns the natural logarithm of one plus the `x`, element-wise.
 #'
 #' @description
@@ -7204,7 +7204,7 @@ r"-(Base-2 logarithm of `x`, element-wise.
     )-"
 
 
-# keras_core.src.ops.numpy.log2
+# keras.src.ops.numpy.log2
 #' Base-2 logarithm of `x`, element-wise.
 #'
 #' @description
@@ -7240,7 +7240,7 @@ r"-(Logarithm of the sum of exponentiations of the inputs.
     )-"
 
 
-# keras_core.src.ops.numpy.logaddexp
+# keras.src.ops.numpy.logaddexp
 #' Logarithm of the sum of exponentiations of the inputs.
 #'
 #' @description
@@ -7278,7 +7278,7 @@ r"-(Computes the element-wise logical AND of the given input tensors.
     )-"
 
 
-# keras_core.src.ops.numpy.logical_and
+# keras.src.ops.numpy.logical_and
 #' Computes the element-wise logical AND of the given input tensors.
 #'
 #' @description
@@ -7314,7 +7314,7 @@ r"-(Computes the element-wise NOT of the given input tensor.
     )-"
 
 
-# keras_core.src.ops.numpy.logical_not
+# keras.src.ops.numpy.logical_not
 #' Computes the element-wise NOT of the given input tensor.
 #'
 #' @description
@@ -7350,7 +7350,7 @@ r"-(Computes the element-wise logical OR of the given input tensors.
     )-"
 
 
-# keras_core.src.ops.numpy.logical_or
+# keras.src.ops.numpy.logical_or
 #' Computes the element-wise logical OR of the given input tensors.
 #'
 #' @description
@@ -7385,7 +7385,7 @@ r"-(Compute the truth value of `x1 XOR x2`, element-wise.
     )-"
 
 
-# keras_core.src.ops.numpy.logical_xor
+# keras.src.ops.numpy.logical_xor
 #' Compute the truth value of `x1 XOR x2`, element-wise.
 #'
 #' @description
@@ -7435,7 +7435,7 @@ r"-(Returns numbers spaced evenly on a log scale.
     )-"
 
 
-# keras_core.src.ops.numpy.logspace
+# keras.src.ops.numpy.logspace
 #' Returns numbers spaced evenly on a log scale.
 #'
 #' @description
@@ -7498,7 +7498,7 @@ r"-(Matrix product of two tensors.
     )-"
 
 
-# keras_core.src.ops.numpy.matmul
+# keras.src.ops.numpy.matmul
 #' Matrix product of two tensors.
 #'
 #' @description
@@ -7544,7 +7544,7 @@ r"-(Return the maximum of a tensor or maximum along an axis.
     )-"
 
 
-# keras_core.src.ops.numpy.max
+# keras.src.ops.numpy.max
 #' Return the maximum of a tensor or maximum along an axis.
 #'
 #' @description
@@ -7585,7 +7585,7 @@ r"-(Element-wise maximum of `x1` and `x2`.
     )-"
 
 
-# keras_core.src.ops.numpy.maximum
+# keras.src.ops.numpy.maximum
 #' Element-wise maximum of `x1` and `x2`.
 #'
 #' @description
@@ -7622,7 +7622,7 @@ r"-(Compute the arithmetic mean along the specified axes.
     )-"
 
 
-# keras_core.src.ops.numpy.mean
+# keras.src.ops.numpy.mean
 #' Compute the arithmetic mean along the specified axes.
 #'
 #' @description
@@ -7666,7 +7666,7 @@ r"-(Compute the median along the specified axis.
     )-"
 
 
-# keras_core.src.ops.numpy.median
+# keras.src.ops.numpy.median
 #' Compute the median along the specified axis.
 #'
 #' @description
@@ -7728,7 +7728,7 @@ r"-(Creates grids of coordinates from coordinate vectors.
     )-"
 
 
-# keras_core.src.ops.numpy.meshgrid
+# keras.src.ops.numpy.meshgrid
 #' Creates grids of coordinates from coordinate vectors.
 #'
 #' @description
@@ -7790,7 +7790,7 @@ r"-(Return the minimum of a tensor or minimum along an axis.
     )-"
 
 
-# keras_core.src.ops.numpy.min
+# keras.src.ops.numpy.min
 #' Return the minimum of a tensor or minimum along an axis.
 #'
 #' @description
@@ -7831,7 +7831,7 @@ r"-(Element-wise minimum of `x1` and `x2`.
     )-"
 
 
-# keras_core.src.ops.numpy.minimum
+# keras.src.ops.numpy.minimum
 #' Element-wise minimum of `x1` and `x2`.
 #'
 #' @description
@@ -7865,7 +7865,7 @@ r"-(Returns the element-wise remainder of division.
     )-"
 
 
-# keras_core.src.ops.numpy.mod
+# keras.src.ops.numpy.mod
 #' Returns the element-wise remainder of division.
 #'
 #' @description
@@ -7903,7 +7903,7 @@ r"-(Move axes of a tensor to new positions.
     )-"
 
 
-# keras_core.src.ops.numpy.moveaxis
+# keras.src.ops.numpy.moveaxis
 #' Move axes of a tensor to new positions.
 #'
 #' @description
@@ -7940,7 +7940,7 @@ r"-(Multiply arguments element-wise.
     )-"
 
 
-# keras_core.src.ops.numpy.multiply
+# keras.src.ops.numpy.multiply
 #' Multiply arguments element-wise.
 #'
 #' @description
@@ -7973,7 +7973,7 @@ r"-(Replace NaN with zero and infinity with large finite numbers.
     )-"
 
 
-# keras_core.src.ops.numpy.nan_to_num
+# keras.src.ops.numpy.nan_to_num
 #' Replace NaN with zero and infinity with large finite numbers.
 #'
 #' @description
@@ -8005,7 +8005,7 @@ r"-(Return the number of dimensions of a tensor.
     )-"
 
 
-# keras_core.src.ops.numpy.ndim
+# keras.src.ops.numpy.ndim
 #' Return the number of dimensions of a tensor.
 #'
 #' @description
@@ -8037,7 +8037,7 @@ r"-(Numerical negative, element-wise.
     )-"
 
 
-# keras_core.src.ops.numpy.negative
+# keras.src.ops.numpy.negative
 #' Numerical negative, element-wise.
 #'
 #' @description
@@ -8069,7 +8069,7 @@ r"-(Return the indices of the elements that are non-zero.
     )-"
 
 
-# keras_core.src.ops.numpy.nonzero
+# keras.src.ops.numpy.nonzero
 #' Return the indices of the elements that are non-zero.
 #'
 #' @description
@@ -8102,7 +8102,7 @@ r"-(Return `(x1 != x2)` element-wise.
     )-"
 
 
-# keras_core.src.ops.numpy.not_equal
+# keras.src.ops.numpy.not_equal
 #' Return `(x1 != x2)` element-wise.
 #'
 #' @description
@@ -8136,7 +8136,7 @@ r"-(Return a new tensor of given shape and type, filled with ones.
     )-"
 
 
-# keras_core.src.ops.numpy.ones
+# keras.src.ops.numpy.ones
 #' Return a new tensor of given shape and type, filled with ones.
 #'
 #' @description
@@ -8170,7 +8170,7 @@ r"-(Return a tensor of ones with the same shape and type of `x`.
     )-"
 
 
-# keras_core.src.ops.numpy.ones_like
+# keras.src.ops.numpy.ones_like
 #' Return a tensor of ones with the same shape and type of `x`.
 #'
 #' @description
@@ -8210,7 +8210,7 @@ r"-(Compute the outer product of two vectors.
     )-"
 
 
-# keras_core.src.ops.numpy.outer
+# keras.src.ops.numpy.outer
 #' Compute the outer product of two vectors.
 #'
 #' @description
@@ -8268,7 +8268,7 @@ r"-(Pad a tensor.
     )-"
 
 
-# keras_core.src.ops.numpy.pad
+# keras.src.ops.numpy.pad
 #' Pad a tensor.
 #'
 #' @description
@@ -8324,7 +8324,7 @@ r"-(First tensor elements raised to powers from second tensor, element-wise.
     )-"
 
 
-# keras_core.src.ops.numpy.power
+# keras.src.ops.numpy.power
 #' First tensor elements raised to powers from second tensor, element-wise.
 #'
 #' @description
@@ -8363,7 +8363,7 @@ r"-(Return the product of tensor elements over a given axis.
     )-"
 
 
-# keras_core.src.ops.numpy.prod
+# keras.src.ops.numpy.prod
 #' Return the product of tensor elements over a given axis.
 #'
 #' @description
@@ -8424,7 +8424,7 @@ r"-(Compute the q-th quantile(s) of the data along the specified axis.
     )-"
 
 
-# keras_core.src.ops.numpy.quantile
+# keras.src.ops.numpy.quantile
 #' Compute the q-th quantile(s) of the data along the specified axis.
 #'
 #' @description
@@ -8481,7 +8481,7 @@ r"-(Return a contiguous flattened tensor.
     )-"
 
 
-# keras_core.src.ops.numpy.ravel
+# keras.src.ops.numpy.ravel
 #' Return a contiguous flattened tensor.
 #'
 #' @description
@@ -8514,7 +8514,7 @@ r"-(Return the real part of the complex argument.
     )-"
 
 
-# keras_core.src.ops.numpy.real
+# keras.src.ops.numpy.real
 #' Return the real part of the complex argument.
 #'
 #' @description
@@ -8548,7 +8548,7 @@ r"-(Return the reciprocal of the argument, element-wise.
     )-"
 
 
-# keras_core.src.ops.numpy.reciprocal
+# keras.src.ops.numpy.reciprocal
 #' Return the reciprocal of the argument, element-wise.
 #'
 #' @description
@@ -8584,7 +8584,7 @@ r"-(Repeat each element of a tensor after themselves.
     )-"
 
 
-# keras_core.src.ops.numpy.repeat
+# keras.src.ops.numpy.repeat
 #' Repeat each element of a tensor after themselves.
 #'
 #' @description
@@ -8625,7 +8625,7 @@ r"-(Gives a new shape to a tensor without changing its data.
     )-"
 
 
-# keras_core.src.ops.numpy.reshape
+# keras.src.ops.numpy.reshape
 #' Gives a new shape to a tensor without changing its data.
 #'
 #' @description
@@ -8666,7 +8666,7 @@ r"-(Roll tensor elements along a given axis.
     )-"
 
 
-# keras_core.src.ops.numpy.roll
+# keras.src.ops.numpy.roll
 #' Roll tensor elements along a given axis.
 #'
 #' @description
@@ -8707,7 +8707,7 @@ r"-(Evenly round to the given number of decimals.
     )-"
 
 
-# keras_core.src.ops.numpy.round
+# keras.src.ops.numpy.round
 #' Evenly round to the given number of decimals.
 #'
 #' @description
@@ -8743,7 +8743,7 @@ r"-(Returns a tensor with the signs of the elements of `x`.
     )-"
 
 
-# keras_core.src.ops.numpy.sign
+# keras.src.ops.numpy.sign
 #' Returns a tensor with the signs of the elements of `x`.
 #'
 #' @description
@@ -8775,7 +8775,7 @@ r"-(Trigonomeric sine, element-wise.
     )-"
 
 
-# keras_core.src.ops.numpy.sin
+# keras.src.ops.numpy.sin
 #' Trigonomeric sine, element-wise.
 #'
 #' @description
@@ -8807,7 +8807,7 @@ r"-(Hyperbolic sine, element-wise.
     )-"
 
 
-# keras_core.src.ops.numpy.sinh
+# keras.src.ops.numpy.sinh
 #' Hyperbolic sine, element-wise.
 #'
 #' @description
@@ -8839,7 +8839,7 @@ r"-(Return the number of elements in a tensor.
     )-"
 
 
-# keras_core.src.ops.numpy.size
+# keras.src.ops.numpy.size
 #' Return the number of elements in a tensor.
 #'
 #' @description
@@ -8873,7 +8873,7 @@ r"-(Sorts the elements of `x` along a given axis in ascending order.
     )-"
 
 
-# keras_core.src.ops.numpy.sort
+# keras.src.ops.numpy.sort
 #' Sorts the elements of `x` along a given axis in ascending order.
 #'
 #' @description
@@ -8922,7 +8922,7 @@ r"-(Split a tensor into chunks.
     )-"
 
 
-# keras_core.src.ops.numpy.split
+# keras.src.ops.numpy.split
 #' Split a tensor into chunks.
 #'
 #' @description
@@ -8970,7 +8970,7 @@ r"-(Return the non-negative square root of a tensor, element-wise.
     )-"
 
 
-# keras_core.src.ops.numpy.sqrt
+# keras.src.ops.numpy.sqrt
 #' Return the non-negative square root of a tensor, element-wise.
 #'
 #' @description
@@ -9002,7 +9002,7 @@ r"-(Return the element-wise square of the input.
     )-"
 
 
-# keras_core.src.ops.numpy.square
+# keras.src.ops.numpy.square
 #' Return the element-wise square of the input.
 #'
 #' @description
@@ -9036,7 +9036,7 @@ r"-(Remove axes of length one from `x`.
     )-"
 
 
-# keras_core.src.ops.numpy.squeeze
+# keras.src.ops.numpy.squeeze
 #' Remove axes of length one from `x`.
 #'
 #' @description
@@ -9077,7 +9077,7 @@ r"-(Join a sequence of tensors along a new axis.
     )-"
 
 
-# keras_core.src.ops.numpy.stack
+# keras.src.ops.numpy.stack
 #' Join a sequence of tensors along a new axis.
 #'
 #' @description
@@ -9120,7 +9120,7 @@ r"-(Compute the standard deviation along the specified axis.
     )-"
 
 
-# keras_core.src.ops.numpy.std
+# keras.src.ops.numpy.std
 #' Compute the standard deviation along the specified axis.
 #'
 #' @description
@@ -9161,7 +9161,7 @@ r"-(Subtract arguments element-wise.
     )-"
 
 
-# keras_core.src.ops.numpy.subtract
+# keras.src.ops.numpy.subtract
 #' Subtract arguments element-wise.
 #'
 #' @description
@@ -9198,7 +9198,7 @@ r"-(Sum of a tensor over the given axes.
     )-"
 
 
-# keras_core.src.ops.numpy.sum
+# keras.src.ops.numpy.sum
 #' Sum of a tensor over the given axes.
 #'
 #' @description
@@ -9239,7 +9239,7 @@ r"-(Interchange two axes of a tensor.
     )-"
 
 
-# keras_core.src.ops.numpy.swapaxes
+# keras.src.ops.numpy.swapaxes
 #' Interchange two axes of a tensor.
 #'
 #' @description
@@ -9276,7 +9276,7 @@ r"-(Take elements from a tensor along an axis.
     )-"
 
 
-# keras_core.src.ops.numpy.take
+# keras.src.ops.numpy.take
 #' Take elements from a tensor along an axis.
 #'
 #' @description
@@ -9317,7 +9317,7 @@ r"-(Select values from `x` at the 1-D `indices` along the given axis.
     )-"
 
 
-# keras_core.src.ops.numpy.take_along_axis
+# keras.src.ops.numpy.take_along_axis
 #' Select values from `x` at the 1-D `indices` along the given axis.
 #'
 #' @description
@@ -9355,7 +9355,7 @@ r"-(Compute tangent, element-wise.
     )-"
 
 
-# keras_core.src.ops.numpy.tan
+# keras.src.ops.numpy.tan
 #' Compute tangent, element-wise.
 #'
 #' @description
@@ -9387,7 +9387,7 @@ r"-(Hyperbolic tangent, element-wise.
     )-"
 
 
-# keras_core.src.ops.numpy.tanh
+# keras.src.ops.numpy.tanh
 #' Hyperbolic tangent, element-wise.
 #'
 #' @description
@@ -9426,7 +9426,7 @@ r"-(Compute the tensor dot product along specified axes.
     )-"
 
 
-# keras_core.src.ops.numpy.tensordot
+# keras.src.ops.numpy.tensordot
 #' Compute the tensor dot product along specified axes.
 #'
 #' @description
@@ -9478,7 +9478,7 @@ r"-(Repeat `x` the number of times given by `repeats`.
     )-"
 
 
-# keras_core.src.ops.numpy.tile
+# keras.src.ops.numpy.tile
 #' Repeat `x` the number of times given by `repeats`.
 #'
 #' @description
@@ -9536,7 +9536,7 @@ r"-(Return the sum along diagonals of the tensor.
     )-"
 
 
-# keras_core.src.ops.numpy.trace
+# keras.src.ops.numpy.trace
 #' Return the sum along diagonals of the tensor.
 #'
 #' @description
@@ -9591,7 +9591,7 @@ r"-(Returns a tensor with `axes` transposed.
     )-"
 
 
-# keras_core.src.ops.numpy.transpose
+# keras.src.ops.numpy.transpose
 #' Returns a tensor with `axes` transposed.
 #'
 #' @description
@@ -9634,7 +9634,7 @@ r"-(Return a tensor with ones at and below a diagonal and zeros elsewhere.
     )-"
 
 
-# keras_core.src.ops.numpy.tri
+# keras.src.ops.numpy.tri
 #' Return a tensor with ones at and below a diagonal and zeros elsewhere.
 #'
 #' @description
@@ -9680,7 +9680,7 @@ r"-(Return lower triangle of a tensor.
     )-"
 
 
-# keras_core.src.ops.numpy.tril
+# keras.src.ops.numpy.tril
 #' Return lower triangle of a tensor.
 #'
 #' @description
@@ -9724,7 +9724,7 @@ r"-(Return upper triangle of a tensor.
     )-"
 
 
-# keras_core.src.ops.numpy.triu
+# keras.src.ops.numpy.triu
 #' Return upper triangle of a tensor.
 #'
 #' @description
@@ -9756,7 +9756,7 @@ function (x, k = 0L)
 r"-(Alias for `keras.ops.divide`.)-"
 
 
-# keras_core.src.ops.numpy.true_divide
+# keras.src.ops.numpy.true_divide
 #' Alias for `keras.ops.divide`.
 #'
 #' @param x1 see description
@@ -9788,7 +9788,7 @@ r"-(Compute the variance along the specified axes.
     )-"
 
 
-# keras_core.src.ops.numpy.var
+# keras.src.ops.numpy.var
 #' Compute the variance along the specified axes.
 #'
 #' @description
@@ -9834,7 +9834,7 @@ r"-(Return the dot product of two vectors.
     )-"
 
 
-# keras_core.src.ops.numpy.vdot
+# keras.src.ops.numpy.vdot
 #' Return the dot product of two vectors.
 #'
 #' @description
@@ -9872,7 +9872,7 @@ r"-(Stack tensors in sequence vertically (row wise).
     )-"
 
 
-# keras_core.src.ops.numpy.vstack
+# keras.src.ops.numpy.vstack
 #' Stack tensors in sequence vertically (row wise).
 #'
 #' @description
@@ -9907,7 +9907,7 @@ r"-(Return elements chosen from `x1` or `x2` depending on `condition`.
     )-"
 
 
-# keras_core.src.ops.numpy.where
+# keras.src.ops.numpy.where
 #' Return elements chosen from `x1` or `x2` depending on `condition`.
 #'
 #' @description
@@ -9943,7 +9943,7 @@ r"-(Return a new tensor of given shape and type, filled with zeros.
     )-"
 
 
-# keras_core.src.ops.numpy.zeros
+# keras.src.ops.numpy.zeros
 #' Return a new tensor of given shape and type, filled with zeros.
 #'
 #' @description
@@ -9977,7 +9977,7 @@ r"-(Return a tensor of zeros with the same shape and type as `x`.
     )-"
 
 
-# keras_core.src.ops.numpy.zeros_like
+# keras.src.ops.numpy.zeros_like
 #' Return a tensor of zeros with the same shape and type as `x`.
 #'
 #' @description

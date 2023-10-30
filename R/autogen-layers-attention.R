@@ -57,7 +57,7 @@ r"-(Additive attention layer, a.k.a. Bahdanau-style attention.
     )-"
 
 
-# keras_core.src.layers.attention.additive_attention.AdditiveAttention
+# keras.src.layers.attention.additive_attention.AdditiveAttention
 #' Additive attention layer, a.k.a. Bahdanau-style attention.
 #'
 #' @description
@@ -184,7 +184,7 @@ r"-(Dot-product attention layer, a.k.a. Luong-style attention.
     )-"
 
 
-# keras_core.src.layers.attention.attention.Attention
+# keras.src.layers.attention.attention.Attention
 #' Dot-product attention layer, a.k.a. Luong-style attention.
 #'
 #' @description
@@ -327,7 +327,7 @@ r"-(Grouped Query Attention layer.
     )-"
 
 
-# keras_core.src.layers.attention.grouped_query_attention.GroupedQueryAttention
+# keras.src.layers.attention.grouped_query_attention.GroupedQueryAttention
 #' Grouped Query Attention layer.
 #'
 #' @description
@@ -494,7 +494,7 @@ r"-(MultiHeadAttention layer.
     )-"
 
 
-# keras_core.src.layers.attention.multi_head_attention.MultiHeadAttention
+# keras.src.layers.attention.multi_head_attention.MultiHeadAttention
 #' MultiHeadAttention layer.
 #'
 #' @description

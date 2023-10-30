@@ -70,7 +70,7 @@ r"-(Torch module wrapper layer.
     )-"
 
 
-# keras_core.src.utils.torch_utils.TorchModuleWrapper
+# keras.src.utils.torch_utils.TorchModuleWrapper
 #' Torch module wrapper layer.
 #'
 #' @description
