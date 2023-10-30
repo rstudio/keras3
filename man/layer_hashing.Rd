@@ -30,7 +30,7 @@ If passed, the hash function used will be SipHash64,
 with these values used as an additional input
 (known as a "salt" in cryptography).
 These should be non-zero. If \code{None}, uses the FarmHash64 hash
-function. It also supports tuple/list of 2 unsigned
+function. It also supports \code{\link[=tuple]{tuple()}} or \code{\link[=list]{list()}} of 2 unsigned
 integer numbers, see reference paper for details.
 Defaults to \code{None}.}
 

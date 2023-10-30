@@ -1,23 +1,18 @@
 #' Cast a tensor to the desired dtype.
 #'
 #' @description
-#'
-#' # Returns
-#' A tensor of the specified `dtype`.
-#'
-#' # Examples
-#' ```python
-#' x = keras.ops.arange(4)
-#' x = keras.ops.cast(x, dtype="float16")
-#' ```
+#' Returns a tensor of the specified `dtype`.
 #'
 #' @param x A tensor or variable.
 #' @param dtype The target type.
-#'
 #' @export
 #' @family ops
 #' @seealso
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/cast>
+#'
+#' @examples
+#' x <- tf$range(4)
+#' x <- tf$cast(x, dtype = "float16")
 k_cast <-
 function (x, dtype)
 keras$ops$cast(x, dtype)

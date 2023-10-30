@@ -827,7 +827,7 @@ r"-(A preprocessing layer which hashes and bins categorical features.
 #'     with these values used as an additional input
 #'     (known as a "salt" in cryptography).
 #'     These should be non-zero. If `None`, uses the FarmHash64 hash
-#'     function. It also supports tuple/list of 2 unsigned
+#'     function. It also supports [tuple()] or [list()] of 2 unsigned
 #'     integer numbers, see reference paper for details.
 #'     Defaults to `None`.
 #' @param output_mode Specification for the output of the layer. Values can be

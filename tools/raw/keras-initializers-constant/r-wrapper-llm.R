@@ -5,25 +5,21 @@
 #' The constant value provided must be convertible to the dtype requested
 #' when calling the initializer.
 #'
-#' # Examples
-#' ```python
-#' # Standalone usage:
-#' initializer = Constant(10.)
-#' values = initializer(shape=(2, 2))
-#' ```
-#'
-#' ```python
-#' # Usage in a Keras layer:
-#' initializer = Constant(10.)
-#' layer = Dense(3, kernel_initializer=initializer)
-#' ```
-#'
-#' @param value A Python scalar.
+#' @param value A scalar.
 #'
 #' @export
 #' @family initializer
 #' @seealso
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/initializers/constant>
+#'
+#' @examples
+#' # Standalone usage:
+#' initializer <- initializer_constant(10)
+#' values <- initializer(shape = c(2, 2))
+#'
+#' # Usage in a Keras layer:
+#' initializer <- initializer_constant(10)
+#' layer <- layer_dense(units = 3, kernel_initializer = initializer)
 initializer_constant <-
 function (value = 0)
 {

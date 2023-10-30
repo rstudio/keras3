@@ -7,19 +7,16 @@
 #' Tensor of the angle of the ray intersecting the unit circle at the given
 #' x-coordinate in radians `[0, pi]`.
 #'
-#' # Examples
-#' ```python
-#' x = keras.ops.convert_to_tensor([1, -1])
-#' keras.ops.arccos(x)
-#' # array([0.0, 3.1415927], dtype=float32)
-#' ```
-#'
 #' @param x Input tensor.
-#'
 #' @export
 #' @family ops
 #' @seealso
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/arccos>
+#'
+#' @examples
+#' x <- tf$convert_to_tensor(c(1, -1))
+#' tf$keras$ops$arccos(x)
+#' # array([0.0, 3.1415927], dtype=float32)
 k_arccos <-
 function (x)
 keras$ops$arccos(x)

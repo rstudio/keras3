@@ -6,17 +6,16 @@
 #'
 #' L1 may be passed to a layer as a string identifier:
 #'
-#' ```python
-#' dense = Dense(3, kernel_regularizer='l1')
-#' ```
-#'
-#' In this case, the default value used is `l1=0.01`.
-#'
 #' @param l1 float, L1 regularization factor.
 #'
 #' @export
 #' @seealso
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/regularizers/l1>
+#'
+#' @examples
+#' dense <- layer_dense(units = 3, kernel_regularizer = regularizer_l1())
+#'
+#' # In this case, the default value used is `l1=0.01`.
 regularizer_l1 <-
 function (l1 = 0.01)
 {

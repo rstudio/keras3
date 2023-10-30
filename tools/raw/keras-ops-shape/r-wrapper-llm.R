@@ -11,13 +11,6 @@
 #' A tuple of integers or None values, indicating the shape of the input
 #' tensor.
 #'
-#' # Examples
-#' ```python
-#' x = keras.zeros((8, 12))
-#' keras.ops.shape(x)
-#' # (8, 12)
-#' ```
-#'
 #' @param x A tensor. This function will try to access the `shape` attribute of
 #' the input tensor.
 #'
@@ -25,6 +18,11 @@
 #' @family ops
 #' @seealso
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/shape>
+#'
+#' @examples
+#' x <- keras::k_zeros(c(8, 12))
+#' keras::k_shape(x)
+#' # (8, 12)
 k_shape <-
 function (x)
 keras$ops$shape(x)

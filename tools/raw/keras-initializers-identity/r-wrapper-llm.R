@@ -3,25 +3,21 @@
 #' @description
 #' Only usable for generating 2D matrices.
 #'
-#' # Examples
-#' ```python
-#' # Standalone usage:
-#' initializer = Identity()
-#' values = initializer(shape=(2, 2))
-#' ```
-#'
-#' ```python
-#' # Usage in a Keras layer:
-#' initializer = Identity()
-#' layer = Dense(3, kernel_initializer=initializer)
-#' ```
-#'
 #' @param gain Multiplicative factor to apply to the identity matrix.
 #'
 #' @export
 #' @family initializer
 #' @seealso
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/initializers/identity>
+#'
+#' @examples
+#' # Standalone usage:
+#' initializer <- initializer_identity()
+#' values <- initializer(shape = c(2, 2))
+#'
+#' # Usage in a Keras layer:
+#' initializer <- initializer_identity()
+#' layer <- layer_dense(units = 3, kernel_initializer = initializer)
 initializer_identity <-
 function (gain = 1)
 {

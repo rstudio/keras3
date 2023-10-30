@@ -8,20 +8,18 @@
 #' # Returns
 #' A tensor with the same shape as `x`.
 #'
-#' # Examples
-#' ```python
-#' x = np.array([-1., 0., 1.])
-#' x_hard_sigmoid = keras.ops.hard_sigmoid(x)
-#' print(x_hard_sigmoid)
-#' # array([0.3, 0.5, 0.7], shape=(3,), dtype=float64)
-#' ```
-#'
 #' @param x Input tensor.
 #'
 #' @export
 #' @family ops
 #' @seealso
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/hard_sigmoid>
+#'
+#' @examples
+#' x <- c(-1., 0., 1.)
+#' x_hard_sigmoid <- keras::k_hard_sigmoid(x)
+#' print(x_hard_sigmoid)
+#' # array([0.3, 0.5, 0.7], shape=(3,), dtype=float64)
 k_hard_sigmoid <-
 function (x)
 keras$ops$hard_sigmoid(x)
