@@ -59,6 +59,7 @@ inversely), the input image is left-padded by 1 pixel.
 Other preprocessing layers: 
 \code{\link{layer_category_encoding}()},
 \code{\link{layer_discretization}()},
+\code{\link{layer_feature_space}()},
 \code{\link{layer_hashed_crossing}()},
 \code{\link{layer_hashing}()},
 \code{\link{layer_integer_lookup}()},

@@ -112,6 +112,7 @@ layer(input)
 Other preprocessing layers: 
 \code{\link{layer_category_encoding}()},
 \code{\link{layer_center_crop}()},
+\code{\link{layer_feature_space}()},
 \code{\link{layer_hashed_crossing}()},
 \code{\link{layer_hashing}()},
 \code{\link{layer_integer_lookup}()},

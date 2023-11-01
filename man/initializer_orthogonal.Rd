@@ -44,7 +44,7 @@ layer = keras.layers.Dense(3, kernel_initializer=initializer)
 
 \seealso{
 \itemize{
-\item \url{https://www.tensorflow.org/api_docs/python/tf/keras/initializers/orthogonal}
+\item \url{https://www.tensorflow.org/api_docs/python/tf/keras/initializers/OrthogonalInitializer}
 }
 
 Other initializer: 

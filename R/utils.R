@@ -27,7 +27,7 @@ to_categorical <- function(y, num_classes = NULL, dtype = "float32") {
   if (keras_version() < "3.0")
     args$dtype <- dtype
 
-  do.call(resolve_utils()$to_categorical, args)
+  do.call(keras$utils$to_categorical, args)
 
 }
 
@@ -65,7 +65,7 @@ get_file <- function(fname, origin, file_hash = NULL, cache_subdir = "datasets",
                      hash_algorithm = "auto", extract = FALSE,
                      archive_format = "auto", cache_dir = NULL,
                      untar = FALSE) {
-  resolve_utils()$get_file(
+  keras$utils$get_file(
     fname = fname,
     origin = origin,
     file_hash = file_hash,
@@ -104,7 +104,7 @@ hdf5_matrix <- function(datapath, dataset, start = 0, end = NULL, normalizer = N
   if (!have_h5py())
     stop("The h5py Python package is required to read h5 files")
 
-  resolve_utils()$HDF5Matrix(
+  keras$utils$HDF5Matrix(
     datapath = normalize_path(datapath),
     dataset = dataset,
     start = as.integer(start),
@@ -124,7 +124,7 @@ hdf5_matrix <- function(datapath, dataset, start = 0, end = NULL, normalizer = N
 #'
 #' @export
 normalize <- function(x, axis = -1, order = 2) {
-  resolve_utils()$normalize(
+  keras$utils$normalize(
     x = x,
     axis = as_axis(axis),
     order = as.integer(order)
@@ -177,7 +177,7 @@ normalize <- function(x, axis = -1, order = 2) {
 #' @export
 with_custom_object_scope <- function(objects, expr) {
   objects <- objects_with_py_function_names(objects)
-  with(resolve_utils()$custom_object_scope(objects), expr)
+  with(keras$utils$custom_object_scope(objects), expr)
 }
 
 #' @importFrom rlang names2

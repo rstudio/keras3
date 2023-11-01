@@ -538,11 +538,18 @@ make_r_name <- function(endpoint, module = py_eval(endpoint)$`__module__`) {
   #   - handle prefixes better
   # manual renames
   if(!is.null(r_name <- switch %(% { endpoint
-    "keras.preprocessing.image.array_to_img" = "image_from_array"
-    "keras.preprocessing.image.img_to_array" = "image_to_array"
-    "keras.preprocessing.image.load_img" =  "image_load"
-    "keras.preprocessing.image.save_img" = "image_array_save"
-    "keras.preprocessing.sequence.pad_sequences" = "pad_sequences"
+    # "keras.preprocessing.image.array_to_img" = "image_from_array"
+    # "keras.preprocessing.image.img_to_array" = "image_to_array"
+    # "keras.preprocessing.image.load_img" =  "image_load"
+    # "keras.preprocessing.image.save_img" = "image_array_save"
+    # "keras.preprocessing.sequence.pad_sequences" = "pad_sequences"
+
+    "keras.utils.array_to_img" = "image_from_array"
+    "keras.utils.img_to_array" = "image_to_array"
+    "keras.utils.load_img" =  "image_load"
+    "keras.utils.save_img" = "image_array_save"
+    "keras.utils.pad_sequences" = "pad_sequences"
+
     "keras.layers.LayerNormalization" = "layer_layer_normalization"
 
     "keras.utils.FeatureSpace" = "layer_feature_space"
@@ -566,6 +573,7 @@ make_r_name <- function(endpoint, module = py_eval(endpoint)$`__module__`) {
   x <- lapply(x, function(.x) switch(.x,
                                 "keras" = character(),
                                 "preprocessing" = character(),
+                                "utils" = character(),
                                 # "preprocessing" = character(),
                                 ops = "k",
                                 .x
@@ -581,6 +589,7 @@ make_r_name <- function(endpoint, module = py_eval(endpoint)$`__module__`) {
   prefix <- switch(prefix,
                    # "random" = "k_random",
                    # "config" = "k_config",
+
                    "ops" = "k",
                    prefix)
 

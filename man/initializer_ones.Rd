@@ -23,7 +23,7 @@ layer = Dense(3, kernel_initializer=initializer)
 
 \seealso{
 \itemize{
-\item \url{https://www.tensorflow.org/api_docs/python/tf/keras/initializers/ones}
+\item \url{https://www.tensorflow.org/api_docs/python/tf/keras/initializers/Ones}
 }
 
 Other initializer: 

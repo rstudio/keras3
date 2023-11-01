@@ -1,6 +1,7 @@
 
 # if(!"source:tools/utils.R" %in% search())
-  envir::attach_source("tools/utils.R")
+  # envir::attach_source("tools/utils.R")
+source("tools/utils.R")
 
 # TODO: add PR for purrr::rate_throttle("3 per minute")
 #
@@ -25,11 +26,13 @@
 # TODO: keras.Function ?? keras.Variable ?? keras.name_scope ??
 #
 # TODO: remove k_random_binomial() ??
+#
+# TODO: layer_feature_space() needs massaging.
 
 endpoints <- list_endpoints(skip = c(
   # to be processed / done
   "keras.saving",
-  "keras.utils",
+  # "keras.utils",
   "keras.backend",
   "keras.dtensor",
   "keras.mixed_precision",
@@ -84,10 +87,22 @@ endpoints <-
       return(df)
     }
 
+
+
+    # if(any(df$endpoint %>% str_detect("keras.ops.average_pool"))) browser()
+    return(df %>% filter(py_obj[[1]]$`_api_export_path`[[1]] == endpoint))
+
+
     # otherwise, default to picking the shortest name, but most precise
-    # submodule.
+    # sort keras.preprocessing before keras.utils
     df |>
-      slice_min(nchar(endpoint), n = 1, with_ties = FALSE)
+      mutate(
+        name = str_split(endpoint, fixed(".")) %>% map_chr(., ~.x[length(.x)]),
+        submodule = str_split(endpoint, fixed(".")) %>% map_chr(., ~.x[length(.x)-1])
+      ) |>
+      arrange(nchar(name), submodule) |>
+      slice(1)
+      # slice_min(nchar(endpoint), n = 1, with_ties = FALSE)
   }) %>%
   list_rbind() %>%
 
@@ -123,11 +138,18 @@ endpoints <-
     "keras.metrics.Metric"           # only for subclassing
     "keras.optimizers.schedules.LearningRateSchedule"  # only for subclassing
 
+    "keras.utils.PyDataset"
+    "keras.utils.Sequence"           # parallel processing in R no possible this way
+                                     # tfdatasets is ~100x better anyway.
+
+    "keras.utils.plot_model"        # S3 method plot()
+
     "keras.metrics.Accuracy"         # weird, only class handle, no fn handle - weird alias
                                      # for binary_accuracy, but without any threshold casting.
                                      # kind of confusing - the keras.metrices.<type>*_accuracy
                                      # endpoints are much preferable.
 
+    "keras.utils.Progbar"           # needs thinking
     "keras.layers.Wrapper"           # needs thinking
     "keras.layers.InputLayer"        # use Input instead
     "keras.layers.InputSpec"         # ??

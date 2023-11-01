@@ -103,6 +103,7 @@ Not used in \code{"multi_hot"} or \code{"one_hot"} modes.
 Other preprocessing layers: 
 \code{\link{layer_center_crop}()},
 \code{\link{layer_discretization}()},
+\code{\link{layer_feature_space}()},
 \code{\link{layer_hashed_crossing}()},
 \code{\link{layer_hashing}()},
 \code{\link{layer_integer_lookup}()},
