@@ -528,7 +528,8 @@ capture_args <- function(cl, modifiers = NULL, ignore = NULL,
 
 
 #' @importFrom rlang quos eval_tidy
-capture_args2 <- function(modifiers = NULL, ignore = NULL) {
+# capture_args2 <-
+  function(modifiers = NULL, ignore = NULL) {
   cl0 <- cl <- sys.call(-1L)
   envir <- parent.frame(2L)
   fn <- sys.function(-1L)
@@ -570,7 +571,7 @@ capture_args2 <- function(modifiers = NULL, ignore = NULL) {
 
 
 #' @importFrom rlang quos eval_tidy
-capture_args2 <- function(modifiers = NULL, ignore = NULL) {
+capture_args2 <- function(modifiers = NULL, ignore = NULL, force = NULL) {
   cl0 <- cl <- sys.call(-1L)
   envir <- parent.frame(1L)
   fn <- sys.function(-1L)
@@ -581,6 +582,7 @@ capture_args2 <- function(modifiers = NULL, ignore = NULL) {
   fn_arg_nms <- names(formals(fn))
   known_args <- intersect(names(cl), fn_arg_nms)
   known_args <- setdiff(known_args, ignore)
+  known_args <- union(known_args, force)
   names(known_args) <- known_args
   cl2 <- c(quote(list), lapply(known_args, as.symbol))
 
