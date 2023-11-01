@@ -70,7 +70,7 @@ r"-(Draws samples from a categorical distribution.
 #' @export
 #' @seealso
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/random/categorical>
-k_random_categorical <-
+random_categorical <-
 function (logits, num_samples, dtype = "int32", seed = NULL)
 {
     args <- capture_args2(list(num_samples = as_integer, seed = as_integer))
@@ -87,7 +87,7 @@ r"-()-"
 #' @export
 #' @seealso
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/random/dropout>
-k_random_dropout <-
+random_dropout <-
 function (inputs, rate, noise_shape = NULL, seed = NULL)
 {
     args <- capture_args2(NULL)
@@ -154,7 +154,7 @@ r"-(Draw random integers from a uniform distribution.
 #' @export
 #' @seealso
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/random/randint>
-k_random_integer <-
+random_integer <-
 function (shape, minval, maxval, dtype = "int32", seed = NULL)
 {
     args <- capture_args2(list(shape = normalize_shape, seed = as_integer,
@@ -208,7 +208,7 @@ r"-(Draw random samples from a normal (Gaussian) distribution.
 #' @export
 #' @seealso
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/random/normal>
-k_random_normal <-
+random_normal <-
 function (shape, mean = 0, stddev = 1, dtype = NULL, seed = NULL)
 {
     args <- capture_args2(list(shape = normalize_shape, seed = as_integer))
@@ -250,7 +250,7 @@ r"-(Shuffle the elements of a tensor uniformly at random along an axis.
 #' @export
 #' @seealso
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/random/shuffle>
-k_random_shuffle <-
+random_shuffle <-
 function (x, axis = 0L, seed = NULL)
 {
     args <- capture_args2(list(axis = as_axis, seed = as_integer))
@@ -311,7 +311,7 @@ r"-(Draw samples from a truncated normal distribution.
 #' @export
 #' @seealso
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/random/truncated_normal>
-k_random_truncated_normal <-
+random_truncated_normal <-
 function (shape, mean = 0, stddev = 1, dtype = NULL, seed = NULL)
 {
     args <- capture_args2(list(shape = normalize_shape, seed = as_integer))
@@ -378,7 +378,7 @@ r"-(Draw samples from a uniform distribution.
 #' @export
 #' @seealso
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/random/uniform>
-k_random_uniform <-
+random_uniform <-
 function (shape, minval = 0, maxval = 1, dtype = NULL, seed = NULL)
 {
     args <- capture_args2(list(shape = normalize_shape, seed = as_integer))
@@ -460,7 +460,7 @@ r"-(Generates variable seeds upon each call to a RNG-using function.
 #' @export
 #' @seealso
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/random/SeedGenerator>
-k_random_seed_generator <-
+random_seed_generator <-
 function (seed = NULL, ...)
 {
     args <- capture_args2(NULL)

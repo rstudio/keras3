@@ -557,7 +557,7 @@ make_r_name <- function(endpoint, module = py_eval(endpoint)$`__module__`) {
     "keras.ops.in_top_k" = "k_in_top_k"
     "keras.ops.top_k" = "k_top_k"
 
-    "keras.random.randint" = "k_random_integer"
+    "keras.random.randint" = "random_integer"
     # "keras.losses.LogCosh" = "loss_logcosh"
     NULL
   })) return(r_name)
@@ -579,10 +579,9 @@ make_r_name <- function(endpoint, module = py_eval(endpoint)$`__module__`) {
     prefix <- "learning_rate_schedule"
 
   prefix <- switch(prefix,
-                   "random" = "k_random",
+                   # "random" = "k_random",
+                   # "config" = "k_config",
                    "ops" = "k",
-                                # "preprocessing" = character(),
-
                    prefix)
 
   # if(endpoint == "keras.preprocessing.image_dataset_from_directory")
