@@ -58,7 +58,7 @@ Other activation functions:
 \code{\link{activation_linear}()},
 \code{\link{activation_log_softmax}()},
 \code{\link{activation_mish}()},
-\code{\link{activation_relu_6}()},
+\code{\link{activation_relu6}()},
 \code{\link{activation_selu}()},
 \code{\link{activation_sigmoid}()},
 \code{\link{activation_silu}()},
