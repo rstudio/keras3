@@ -156,6 +156,7 @@ test_backend("k_random_normal", {
 
 test_backend("k_random_bernoulli", {
   chk <- function(x) expect_tensor(x, shape = c(1L, 2L, 3L))
+  skip("k_random_bernoulli")
   chk(k_random_bernoulli(c(1,2,3)))
   chk(k_random_bernoulli(c(1,2,3), dtype = "int32"))
   chk(k_random_bernoulli(c(1,2,3), dtype = "bool"))

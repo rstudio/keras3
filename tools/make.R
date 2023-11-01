@@ -22,7 +22,9 @@
 # TODO: note in docs for k_logical_and (and friends) that these are dispatched
 #       to from & != and so on.
 
-# TODO: keras.Function ??
+# TODO: keras.Function ?? keras.Variable ?? keras.name_scope ??
+#
+# TODO: remove k_random_binomial() ??
 
 endpoints <- list_endpoints(skip = c(
   # to be processed / done
