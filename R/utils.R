@@ -729,7 +729,7 @@ named_list <- function(...)
 # random_array(2, 2, gen = seq)
 #
 # @export
-random_array <- function(..., gen = runif) {
+random_array <- function(..., gen = stats::runif) {
   dim <- unlist(c(...), use.names = FALSE)
   array(gen(prod(dim)), dim = dim)
 }
