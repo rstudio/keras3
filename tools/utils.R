@@ -545,32 +545,59 @@ make_r_name <- function(endpoint, module = py_eval(endpoint)$`__module__`) {
     "keras.preprocessing.sequence.pad_sequences" = "pad_sequences"
     "keras.layers.LayerNormalization" = "layer_layer_normalization"
 
+    "keras.utils.FeatureSpace" = "layer_feature_space"
+    # TODO: why is FeatureSpace not exported to keras.layers.FeatureSpace?
+    # Does instantiation and composition in one call make sense, or
+    # does the need for adapt() throw a wrench in the works (and mean that
+    # using compose_layer() doesn't make sense)...
+    # maybe this should have a name like "preprocess_feature_space()" or
+    # layer_preprocess_feature_space()? or
+
+
+    "keras.ops.in_top_k" = "k_in_top_k"
+    "keras.ops.top_k" = "k_top_k"
+
+    "keras.random.randint" = "k_random_integer"
     # "keras.losses.LogCosh" = "loss_logcosh"
     NULL
   })) return(r_name)
 
+  x <- endpoint |> str_split_1(fixed("."))
+  x <- lapply(x, function(.x) switch(.x,
+                                keras = character(),
+                                preprocessing = character(),
+                                ops = "k",
+                                .x
+                                ))
+
+  name <- x[length(x)]
+  prefix <- x[-length(x)] |> unlist() |>
+    str_replace("e?s$", "") |> str_flatten("_")
+
+  if(type == "learning_rate_schedule")
+    prefix <- "learning_rate_schedule"
+
+  prefix <- switch(prefix,
+                   "random" = "k_random",
+                   prefix)
+
   # if(endpoint == "keras.preprocessing.image_dataset_from_directory")
   #   browser()
-  if(endpoint |> startsWith("keras.ops."))
-    endpoint %<>% str_replace(fixed("keras.ops."), "keras.k.")
-  if(endpoint |> startsWith("keras.preprocessing."))
-    endpoint %<>% str_replace(fixed(".preprocessing."), ".")
+  # if(endpoint |> startsWith("keras.ops."))
+  #   endpoint %<>% str_replace(fixed("keras.ops."), "keras.k.")
+  # if(endpoint |> startsWith("keras.preprocessing."))
+  #   endpoint %<>% str_replace(fixed(".preprocessing."), ".")
 
 
-  if(endpoint == "keras.utils.FeatureSpace") return("layer_feature_space")
-  # TODO: why is FeatureSpace not exported to keras.layers.FeatureSpace?
-  # Does instantiation and composition in one call make sense, or
-  # does the need for adapt() throw a wrench in the works (and mean that
-  # using compose_layer() doesn't make sense)...
-  # maybe this should have a name like "preprocess_feature_space()" or
-  # layer_preprocess_feature_space()? or
-  x <- endpoint |>
-    reticulate:::str_drop_prefix("keras.") |>
-    str_split_1(fixed("."))
+  # if(endpoint == ) return("")
 
-  name <- x[length(x)] # __name__
-  x <- x[-length(x)] # submodules
-  x <- x[nzchar(x)]
+  # x <- endpoint |>
+  #   reticulate:::str_drop_prefix("keras.") |>
+  #   str_split_1(fixed("."))
+
+  # name <- x[length(x)] # __name__
+  # x <- x[-length(x)] # submodules
+  # x <- x[nzchar(x)]
 
   # "keras.optimizers.schedules.CosineDecay"
   # "optimizer_schedule_cosine_decay"
@@ -581,15 +608,15 @@ make_r_name <- function(endpoint, module = py_eval(endpoint)$`__module__`) {
   # if(!length(x))
   #   prefix <- x()
 
-  if(type == "learning_rate_schedule")
-    prefix <- "learning_rate_schedule"
-  else {
-    # x <-
-    # if(length(x) && !is_scalar(x))
-
-      # browser()
-    prefix <- x |> str_replace("e?s$", "") |> str_flatten("_")
-  }
+  # if(type == "learning_rate_schedule")
+  #   prefix <- "learning_rate_schedule"
+  # else {
+  #   # x <-
+  #   # if(length(x) && !is_scalar(x))
+  #
+  #     # browser()
+  #   prefix <- x |> str_replace("e?s$", "") |> str_flatten("_")
+  # }
 
   name <- name |>
     str_replace("NaN", "Nan") |>
@@ -645,14 +672,21 @@ make_r_name <- function(endpoint, module = py_eval(endpoint)$`__module__`) {
     name %<>% str_replace_all("_", "")
 
 
-  if(prefix != "k")
-    name %<>%
-    str_replace(glue("_?{prefix}_?"), "_") %>%
-    str_replace("^_", "") %>%
-    str_replace_all("_+", "_") %>%
-    str_replace("_$", "")
-  if(length(prefix) && prefix != "")
+  # if (prefix != "k") {
+  #   name %<>%
+  #     str_replace(glue("_?{prefix}_?"), "_") %>%
+  #     str_replace("^_", "") %>%
+  #     str_replace_all("_+", "_") %>%
+  #     str_replace("_$", "")
+  # }
+  # if (length(prefix) && prefix != "")
     name <- str_flatten(c(prefix, name), collapse = "_")
+
+  name %<>%
+    str_split_1("_") %>%
+    unique() %>%
+    .[nzchar(.)] %>%
+    str_flatten("_")
 
   ## fixes for specific wrappers
   # no _ in up_sampling
