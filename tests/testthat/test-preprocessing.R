@@ -71,7 +71,7 @@ test_succeeds("use of text tokenizer", {
 
 test_succeeds("image can be preprocessed", {
   if (have_pillow()) {
-    img <- image_load("digit.jpeg")
+    img <- image_load(test_path("digit.jpeg"))
     img_arr <- image_to_array(img)
     img_arr <- array_reshape(img_arr, c(1, dim(img_arr)))
     skip("imagenet_preprocess_input")
@@ -83,9 +83,9 @@ test_succeeds("image can be preprocessed", {
 
 test_succeeds("images arrays can be saved", {
   if (have_pillow()) {
-    img <- image_load("digit.jpeg")
+    img <- image_load(test_path("digit.jpeg"))
     img_arr <- image_to_array(img)
-    image_array_save(img_arr, "digit2.jpeg")
+    image_array_save(img_arr, test_path("digit2.jpeg"))
   }
 })
 
