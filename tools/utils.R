@@ -564,8 +564,9 @@ make_r_name <- function(endpoint, module = py_eval(endpoint)$`__module__`) {
 
   x <- endpoint |> str_split_1(fixed("."))
   x <- lapply(x, function(.x) switch(.x,
-                                keras = character(),
-                                preprocessing = character(),
+                                "keras" = character(),
+                                "preprocessing" = character(),
+                                # "preprocessing" = character(),
                                 ops = "k",
                                 .x
                                 ))
@@ -579,6 +580,9 @@ make_r_name <- function(endpoint, module = py_eval(endpoint)$`__module__`) {
 
   prefix <- switch(prefix,
                    "random" = "k_random",
+                   "ops" = "k",
+                                # "preprocessing" = character(),
+
                    prefix)
 
   # if(endpoint == "keras.preprocessing.image_dataset_from_directory")
@@ -719,8 +723,10 @@ transformers_registry <-
   imap(\(args, endpoint) {
     if(!str_detect(endpoint, "[*?]")) # not a glob
       names(args) <- str_c("+", names(args))
+    # if(endpoint == "keras.random.randint") browser()
     lapply(args, function(fn) {
       # if(grepl("normalize_padding", fn)) browser()
+      if(is.null(fn)) return(fn)
       fn <- str2lang(fn)
       if (is.call(fn) && !identical(fn[[1]], quote(`function`)))
         fn <- as.function.default(c(alist(x =), fn))
@@ -785,11 +791,25 @@ make_r_fn <- function(endpoint,
   if(endpoint |> startsWith("keras.activation")) {
     return(make_r_fn.activation(endpoint, py_obj, transformers))
   }
+
+  # if(endpoint == "keras.random.randint") {
+  #   frmls <- formals(keras$random$randint)
+  #   frmls$minval <- 0L
+  #   frmls$maxval <- 1L
+  #   return(as.function.default(, quote({
+  #     args <- capture_args2(list(shape = normalize_shape, seed = as_integer))
+  #     do.call(keras$random$randint, args)
+  #   }))
+  # }
+
+
   switch(keras_class_type(py_obj),
          layer = make_r_fn.layer(endpoint, py_obj, transformers),
          metric = ,
          loss = make_r_fn.loss(endpoint, py_obj, transformers),
          make_r_fn.default(endpoint, py_obj, transformers))
+
+
 }
 
 endpoint_to_expr <- function(endpoint) {

@@ -96,3 +96,8 @@ keras.layers.Softmax:
 
 keras.layers.PReLU:
   shared_axes: lapply(x, as_integer)
+
+keras.random.randint:
+  dtype: ~
+  maxval: as_integer(ceiling(x))
+  minval: as_integer
