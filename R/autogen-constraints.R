@@ -3,7 +3,7 @@
 
 # keras$constraints$MaxNorm
 # keras.constraints.MaxNorm
-# keras_core.src.constraints.constraints.MaxNorm
+# keras.src.constraints.constraints.MaxNorm
 r"-(MaxNorm weight constraint.
 
     Constrains the weights incident to each hidden unit
@@ -26,7 +26,6 @@ r"-(MaxNorm weight constraint.
             `(rows, cols, input_depth)`.
 
     )-"
-
 
 # keras.src.constraints.constraints.MaxNorm
 #' MaxNorm weight constraint.
@@ -64,7 +63,7 @@ function (max_value = 2L, axis = 0L)
 
 # keras$constraints$MinMaxNorm
 # keras.constraints.MinMaxNorm
-# keras_core.src.constraints.constraints.MinMaxNorm
+# keras.src.constraints.constraints.MinMaxNorm
 r"-(MinMaxNorm weight constraint.
 
     Constrains the weights incident to each hidden unit
@@ -92,7 +91,6 @@ r"-(MinMaxNorm weight constraint.
             to constrain the weights of each filter tensor of size
             `(rows, cols, input_depth)`.
     )-"
-
 
 # keras.src.constraints.constraints.MinMaxNorm
 #' MinMaxNorm weight constraint.
@@ -136,9 +134,8 @@ function (min_value = 0, max_value = 1, rate = 1, axis = 0L)
 
 # keras$constraints$NonNeg
 # keras.constraints.NonNeg
-# keras_core.src.constraints.constraints.NonNeg
+# keras.src.constraints.constraints.NonNeg
 r"-(Constrains the weights to be non-negative.)-"
-
 
 # keras.src.constraints.constraints.NonNeg
 #' Constrains the weights to be non-negative.
@@ -157,7 +154,7 @@ function ()
 
 # keras$constraints$UnitNorm
 # keras.constraints.UnitNorm
-# keras_core.src.constraints.constraints.UnitNorm
+# keras.src.constraints.constraints.UnitNorm
 r"-(Constrains the weights incident to each hidden unit to have unit norm.
 
     Args:
@@ -173,7 +170,6 @@ r"-(Constrains the weights incident to each hidden unit to have unit norm.
             to constrain the weights of each filter tensor of size
             `(rows, cols, input_depth)`.
     )-"
-
 
 # keras.src.constraints.constraints.UnitNorm
 #' Constrains the weights incident to each hidden unit to have unit norm.

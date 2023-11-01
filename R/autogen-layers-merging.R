@@ -3,7 +3,7 @@
 
 # keras$layers$Add
 # keras.layers.Add
-# keras_core.src.layers.merging.add.Add
+# keras.src.layers.merging.add.Add
 r"-(Performs elementwise addition operation.
 
     It takes as input a list of tensors, all of the same shape,
@@ -28,7 +28,6 @@ r"-(Performs elementwise addition operation.
     >>> model = keras.models.Model(inputs=[input1, input2], outputs=out)
 
     )-"
-
 
 # keras.src.layers.merging.add.Add
 #' Performs elementwise addition operation.
@@ -87,7 +86,7 @@ function (inputs, ...)
 
 # keras$layers$Average
 # keras.layers.Average
-# keras_core.src.layers.merging.average.Average
+# keras.src.layers.merging.average.Average
 r"-(Averages a list of inputs element-wise..
 
     It takes as input a list of tensors, all of the same shape,
@@ -112,7 +111,6 @@ r"-(Averages a list of inputs element-wise..
     >>> model = keras.models.Model(inputs=[input1, input2], outputs=out)
 
     )-"
-
 
 # keras.src.layers.merging.average.Average
 #' Averages a list of inputs element-wise..
@@ -171,7 +169,7 @@ function (inputs, ...)
 
 # keras$layers$Concatenate
 # keras.layers.Concatenate
-# keras_core.src.layers.merging.concatenate.Concatenate
+# keras.src.layers.merging.concatenate.Concatenate
 r"-(Concatenates a list of inputs.
 
     It takes as input a list of tensors, all of the same shape except
@@ -197,7 +195,6 @@ r"-(Concatenates a list of inputs.
     Returns:
         A tensor, the concatenation of the inputs alongside axis `axis`.
     )-"
-
 
 # keras.src.layers.merging.concatenate.Concatenate
 #' Concatenates a list of inputs.
@@ -255,7 +252,7 @@ function (inputs, ..., axis = -1L)
 
 # keras$layers$Dot
 # keras.layers.Dot
-# keras_core.src.layers.merging.dot.Dot
+# keras.src.layers.merging.dot.Dot
 r"-(Computes element-wise dot product of two tensors.
 
     It takes a list of inputs of size 2, and the axes
@@ -296,7 +293,6 @@ r"-(Computes element-wise dot product of two tensors.
     Returns:
         A tensor, the dot product of the samples from the inputs.
     )-"
-
 
 # keras.src.layers.merging.dot.Dot
 #' Computes element-wise dot product of two tensors.
@@ -369,7 +365,7 @@ function (inputs, ..., axes, normalize = FALSE)
 
 # keras$layers$Maximum
 # keras.layers.Maximum
-# keras_core.src.layers.merging.maximum.Maximum
+# keras.src.layers.merging.maximum.Maximum
 r"-(Computes element-wise maximum on a list of inputs.
 
     It takes as input a list of tensors, all of the same shape,
@@ -394,7 +390,6 @@ r"-(Computes element-wise maximum on a list of inputs.
     >>> model = keras.models.Model(inputs=[input1, input2], outputs=out)
 
     )-"
-
 
 # keras.src.layers.merging.maximum.Maximum
 #' Computes element-wise maximum on a list of inputs.
@@ -453,7 +448,7 @@ function (inputs, ...)
 
 # keras$layers$Minimum
 # keras.layers.Minimum
-# keras_core.src.layers.merging.minimum.Minimum
+# keras.src.layers.merging.minimum.Minimum
 r"-(Computes elementwise minimum on a list of inputs.
 
     It takes as input a list of tensors, all of the same shape,
@@ -478,7 +473,6 @@ r"-(Computes elementwise minimum on a list of inputs.
     >>> model = keras.models.Model(inputs=[input1, input2], outputs=out)
 
     )-"
-
 
 # keras.src.layers.merging.minimum.Minimum
 #' Computes elementwise minimum on a list of inputs.
@@ -537,7 +531,7 @@ function (inputs, ...)
 
 # keras$layers$Multiply
 # keras.layers.Multiply
-# keras_core.src.layers.merging.multiply.Multiply
+# keras.src.layers.merging.multiply.Multiply
 r"-(Performs elementwise multiplication.
 
     It takes as input a list of tensors, all of the same shape,
@@ -562,7 +556,6 @@ r"-(Performs elementwise multiplication.
     >>> model = keras.models.Model(inputs=[input1, input2], outputs=out)
 
     )-"
-
 
 # keras.src.layers.merging.multiply.Multiply
 #' Performs elementwise multiplication.
@@ -621,7 +614,7 @@ function (inputs, ...)
 
 # keras$layers$Subtract
 # keras.layers.Subtract
-# keras_core.src.layers.merging.subtract.Subtract
+# keras.src.layers.merging.subtract.Subtract
 r"-(Performs elementwise subtraction.
 
     It takes as input a list of tensors of size 2 both of the
@@ -647,7 +640,6 @@ r"-(Performs elementwise subtraction.
     >>> model = keras.models.Model(inputs=[input1, input2], outputs=out)
 
     )-"
-
 
 # keras.src.layers.merging.subtract.Subtract
 #' Performs elementwise subtraction.

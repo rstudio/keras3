@@ -3,7 +3,7 @@
 
 # keras$layers$TorchModuleWrapper
 # keras.layers.TorchModuleWrapper
-# keras_core.src.utils.torch_utils.TorchModuleWrapper
+# keras.src.utils.torch_utils.TorchModuleWrapper
 r"-(Torch module wrapper layer.
 
     `TorchModuleWrapper` is a wrapper class that can turn any
@@ -68,7 +68,6 @@ r"-(Torch module wrapper layer.
     model.fit(train_loader, epochs=5)
     ```
     )-"
-
 
 # keras.src.utils.torch_utils.TorchModuleWrapper
 #' Torch module wrapper layer.

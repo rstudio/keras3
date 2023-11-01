@@ -3,7 +3,7 @@
 
 # keras$layers$Dense
 # keras.layers.Dense
-# keras_core.src.layers.core.dense.Dense
+# keras.src.layers.core.dense.Dense
 r"-(Just your regular densely-connected NN layer.
 
     `Dense` implements the operation:
@@ -49,7 +49,6 @@ r"-(Just your regular densely-connected NN layer.
         For instance, for a 2D input with shape `(batch_size, input_dim)`,
         the output would have shape `(batch_size, units)`.
     )-"
-
 
 # keras.src.layers.core.dense.Dense
 #' Just your regular densely-connected NN layer.
@@ -119,7 +118,7 @@ function (object, units, activation = NULL, use_bias = TRUE,
 
 # keras$layers$EinsumDense
 # keras.layers.EinsumDense
-# keras_core.src.layers.core.einsum_dense.EinsumDense
+# keras.src.layers.core.einsum_dense.EinsumDense
 r"-(A layer that uses `einsum` as the backing computation.
 
     This layer can perform einsum calculations of arbitrary dimensionality.
@@ -202,7 +201,6 @@ r"-(A layer that uses `einsum` as the backing computation.
     >>> output_tensor.shape
     (None, 32, 64)
     )-"
-
 
 # keras.src.layers.core.einsum_dense.EinsumDense
 #' A layer that uses `einsum` as the backing computation.
@@ -312,7 +310,7 @@ function (object, equation, output_shape, activation = NULL,
 
 # keras$layers$Embedding
 # keras.layers.Embedding
-# keras_core.src.layers.core.embedding.Embedding
+# keras.src.layers.core.embedding.Embedding
 r"-(Turns positive integers (indexes) into dense vectors of fixed size.
 
     e.g. `[[4], [20]] -> [[0.25, 0.1], [0.6, -0.2]]`
@@ -360,7 +358,6 @@ r"-(Turns positive integers (indexes) into dense vectors of fixed size.
     Output shape:
         3D tensor with shape: `(batch_size, input_length, output_dim)`.
     )-"
-
 
 # keras.src.layers.core.embedding.Embedding
 #' Turns positive integers (indexes) into dense vectors of fixed size.
@@ -432,13 +429,12 @@ function (object, input_dim, output_dim, embeddings_initializer = "uniform",
 
 # keras$layers$Identity
 # keras.layers.Identity
-# keras_core.src.layers.core.identity.Identity
+# keras.src.layers.core.identity.Identity
 r"-(Identity layer.
 
     This layer should be used as a placeholder when no operation is to be
     performed. The layer just returns its `inputs` argument as output.
     )-"
-
 
 # keras.src.layers.core.identity.Identity
 #' Identity layer.
@@ -466,7 +462,7 @@ function (object, ...)
 
 # keras$layers$Input
 # keras.layers.Input
-# keras_core.src.layers.core.input_layer.Input
+# keras.src.layers.core.input_layer.Input
 r"-(Used to instantiate a Keras tensor.
 
     A Keras tensor is a symbolic tensor-like object, which we augment with
@@ -511,7 +507,6 @@ r"-(Used to instantiate a Keras tensor.
     model = Model(x, y)
     ```
     )-"
-
 
 # keras.src.layers.core.input_layer.Input
 #' Used to instantiate a Keras tensor.
@@ -573,7 +568,7 @@ function (shape = NULL, batch_size = NULL, dtype = NULL, sparse = NULL,
 
 # keras$layers$Lambda
 # keras.layers.Lambda
-# keras_core.src.layers.core.lambda_layer.Lambda
+# keras.src.layers.core.lambda_layer.Lambda
 r"-(Wraps arbitrary expressions as a `Layer` object.
 
     The `Lambda` layer exists so that arbitrary expressions can be used
@@ -621,7 +616,6 @@ r"-(Wraps arbitrary expressions as a `Layer` object.
         arguments: Optional dictionary of keyword arguments to be passed to the
             function.
     )-"
-
 
 # keras.src.layers.core.lambda_layer.Lambda
 #' Wraps arbitrary expressions as a `Layer` object.
@@ -690,7 +684,7 @@ function (object, f, output_shape = NULL, mask = NULL, arguments = NULL,
 
 # keras$layers$Masking
 # keras.layers.Masking
-# keras_core.src.layers.core.masking.Masking
+# keras.src.layers.core.masking.Masking
 r"-(Masks a sequence by using a mask value to skip timesteps.
 
     For each timestep in the input tensor (dimension #1 in the tensor),
@@ -727,7 +721,6 @@ r"-(Masks a sequence by using a mask value to skip timesteps.
     a mask value of `False`, while a non-masked (i.e. usable) timestep
     is denoted by a mask value of `True`.
     )-"
-
 
 # keras.src.layers.core.masking.Masking
 #' Masks a sequence by using a mask value to skip timesteps.

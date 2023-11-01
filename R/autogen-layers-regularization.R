@@ -3,7 +3,7 @@
 
 # keras$layers$ActivityRegularization
 # keras.layers.ActivityRegularization
-# keras_core.src.layers.regularization.activity_regularization.ActivityRegularization
+# keras.src.layers.regularization.activity_regularization.ActivityRegularization
 r"-(Layer that applies an update to the cost function based input activity.
 
     Args:
@@ -18,7 +18,6 @@ r"-(Layer that applies an update to the cost function based input activity.
     Output shape:
         Same shape as input.
     )-"
-
 
 # keras.src.layers.regularization.activity_regularization.ActivityRegularization
 #' Layer that applies an update to the cost function based input activity.
@@ -55,7 +54,7 @@ function (object, l1 = 0, l2 = 0, ...)
 
 # keras$layers$Dropout
 # keras.layers.Dropout
-# keras_core.src.layers.regularization.dropout.Dropout
+# keras.src.layers.regularization.dropout.Dropout
 r"-(Applies dropout to the input.
 
     The `Dropout` layer randomly sets input units to 0 with a frequency of
@@ -88,7 +87,6 @@ r"-(Applies dropout to the input.
         training: Python boolean indicating whether the layer should behave in
             training mode (adding dropout) or in inference mode (doing nothing).
     )-"
-
 
 # keras.src.layers.regularization.dropout.Dropout
 #' Applies dropout to the input.
@@ -141,7 +139,7 @@ function (object, rate, noise_shape = NULL, seed = NULL, ...)
 
 # keras$layers$GaussianDropout
 # keras.layers.GaussianDropout
-# keras_core.src.layers.regularization.gaussian_dropout.GaussianDropout
+# keras.src.layers.regularization.gaussian_dropout.GaussianDropout
 r"-(Apply multiplicative 1-centered Gaussian noise.
 
     As it is a regularization layer, it is only active at training time.
@@ -157,7 +155,6 @@ r"-(Apply multiplicative 1-centered Gaussian noise.
         training: Python boolean indicating whether the layer should behave in
             training mode (adding dropout) or in inference mode (doing nothing).
     )-"
-
 
 # keras.src.layers.regularization.gaussian_dropout.GaussianDropout
 #' Apply multiplicative 1-centered Gaussian noise.
@@ -193,7 +190,7 @@ function (object, rate, seed = NULL, ...)
 
 # keras$layers$GaussianNoise
 # keras.layers.GaussianNoise
-# keras_core.src.layers.regularization.gaussian_noise.GaussianNoise
+# keras.src.layers.regularization.gaussian_noise.GaussianNoise
 r"-(Apply additive zero-centered Gaussian noise.
 
     This is useful to mitigate overfitting
@@ -212,7 +209,6 @@ r"-(Apply additive zero-centered Gaussian noise.
         training: Python boolean indicating whether the layer should behave in
             training mode (adding noise) or in inference mode (doing nothing).
     )-"
-
 
 # keras.src.layers.regularization.gaussian_noise.GaussianNoise
 #' Apply additive zero-centered Gaussian noise.
@@ -251,7 +247,7 @@ function (object, stddev, seed = NULL, ...)
 
 # keras$layers$SpatialDropout1D
 # keras.layers.SpatialDropout1D
-# keras_core.src.layers.regularization.spatial_dropout.SpatialDropout1D
+# keras.src.layers.regularization.spatial_dropout.SpatialDropout1D
 r"-(Spatial 1D version of Dropout.
 
     This layer performs the same function as Dropout, however, it drops
@@ -280,7 +276,6 @@ r"-(Spatial 1D version of Dropout.
 
     - [Tompson et al., 2014](https://arxiv.org/abs/1411.4280)
     )-"
-
 
 # keras.src.layers.regularization.spatial_dropout.SpatialDropout1D
 #' Spatial 1D version of Dropout.
@@ -331,7 +326,7 @@ function (object, rate, seed = NULL, name = NULL, dtype = NULL)
 
 # keras$layers$SpatialDropout2D
 # keras.layers.SpatialDropout2D
-# keras_core.src.layers.regularization.spatial_dropout.SpatialDropout2D
+# keras.src.layers.regularization.spatial_dropout.SpatialDropout2D
 r"-(Spatial 2D version of Dropout.
 
     This version performs the same function as Dropout, however, it drops
@@ -369,7 +364,6 @@ r"-(Spatial 2D version of Dropout.
 
     - [Tompson et al., 2014](https://arxiv.org/abs/1411.4280)
     )-"
-
 
 # keras.src.layers.regularization.spatial_dropout.SpatialDropout2D
 #' Spatial 2D version of Dropout.
@@ -430,7 +424,7 @@ function (object, rate, data_format = NULL, seed = NULL, name = NULL,
 
 # keras$layers$SpatialDropout3D
 # keras.layers.SpatialDropout3D
-# keras_core.src.layers.regularization.spatial_dropout.SpatialDropout3D
+# keras.src.layers.regularization.spatial_dropout.SpatialDropout3D
 r"-(Spatial 3D version of Dropout.
 
     This version performs the same function as Dropout, however, it drops
@@ -468,7 +462,6 @@ r"-(Spatial 3D version of Dropout.
 
     - [Tompson et al., 2014](https://arxiv.org/abs/1411.4280)
     )-"
-
 
 # keras.src.layers.regularization.spatial_dropout.SpatialDropout3D
 #' Spatial 3D version of Dropout.

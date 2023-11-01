@@ -3,7 +3,7 @@
 
 # keras$layers$Bidirectional
 # keras.layers.Bidirectional
-# keras_core.src.layers.rnn.bidirectional.Bidirectional
+# keras.src.layers.rnn.bidirectional.Bidirectional
 r"-(Bidirectional wrapper for RNNs.
 
     Args:
@@ -74,7 +74,6 @@ r"-(Bidirectional wrapper for RNNs.
     model.compile(loss='categorical_crossentropy', optimizer='rmsprop')
     ```
     )-"
-
 
 # keras.src.layers.rnn.bidirectional.Bidirectional
 #' Bidirectional wrapper for RNNs.
@@ -168,7 +167,7 @@ function (object, layer, merge_mode = "concat", weights = NULL,
 
 # keras$layers$ConvLSTM1D
 # keras.layers.ConvLSTM1D
-# keras_core.src.layers.rnn.conv_lstm1d.ConvLSTM1D
+# keras.src.layers.rnn.conv_lstm1d.ConvLSTM1D
 r"-(1D Convolutional LSTM.
 
     Similar to an LSTM layer, but the input transformations
@@ -284,7 +283,6 @@ r"-(1D Convolutional LSTM.
         (the current implementation does not include the feedback loop on the
         cells output).
     )-"
-
 
 # keras.src.layers.rnn.conv_lstm1d.ConvLSTM1D
 #' 1D Convolutional LSTM.
@@ -427,7 +425,7 @@ function (object, filters, kernel_size, strides = 1L, padding = "valid",
 
 # keras$layers$ConvLSTM2D
 # keras.layers.ConvLSTM2D
-# keras_core.src.layers.rnn.conv_lstm2d.ConvLSTM2D
+# keras.src.layers.rnn.conv_lstm2d.ConvLSTM2D
 r"-(2D Convolutional LSTM.
 
     Similar to an LSTM layer, but the input transformations
@@ -543,7 +541,6 @@ r"-(2D Convolutional LSTM.
         (the current implementation does not include the feedback loop on the
         cells output).
     )-"
-
 
 # keras.src.layers.rnn.conv_lstm2d.ConvLSTM2D
 #' 2D Convolutional LSTM.
@@ -686,7 +683,7 @@ function (object, filters, kernel_size, strides = 1L, padding = "valid",
 
 # keras$layers$ConvLSTM3D
 # keras.layers.ConvLSTM3D
-# keras_core.src.layers.rnn.conv_lstm3d.ConvLSTM3D
+# keras.src.layers.rnn.conv_lstm3d.ConvLSTM3D
 r"-(3D Convolutional LSTM.
 
     Similar to an LSTM layer, but the input transformations
@@ -801,7 +798,6 @@ r"-(3D Convolutional LSTM.
         (the current implementation does not include the feedback loop on the
         cells output).
     )-"
-
 
 # keras.src.layers.rnn.conv_lstm3d.ConvLSTM3D
 #' 3D Convolutional LSTM.
@@ -943,7 +939,7 @@ function (object, filters, kernel_size, strides = 1L, padding = "valid",
 
 # keras$layers$GRU
 # keras.layers.GRU
-# keras_core.src.layers.rnn.gru.GRU
+# keras.src.layers.rnn.gru.GRU
 r"-(Gated Recurrent Unit - Cho et al. 2014.
 
     Based on available runtime hardware and constraints, this layer
@@ -1062,7 +1058,6 @@ r"-(Gated Recurrent Unit - Cho et al. 2014.
             call of the cell (optional, `None` causes creation
             of zero-filled initial state tensors). Defaults to `None`.
     )-"
-
 
 # keras.src.layers.rnn.gru.GRU
 #' Gated Recurrent Unit - Cho et al. 2014.
@@ -1210,7 +1205,7 @@ function (object, units, activation = "tanh", recurrent_activation = "sigmoid",
 
 # keras$layers$GRUCell
 # keras.layers.GRUCell
-# keras_core.src.layers.rnn.gru.GRUCell
+# keras.src.layers.rnn.gru.GRUCell
 r"-(Cell class for the GRU layer.
 
     This class processes one step within the whole time sequence input, whereas
@@ -1279,7 +1274,6 @@ r"-(Cell class for the GRU layer.
     >>> final_state.shape
     (32, 4)
     )-"
-
 
 # keras.src.layers.rnn.gru.GRUCell
 #' Cell class for the GRU layer.
@@ -1372,7 +1366,7 @@ function (units, activation = "tanh", recurrent_activation = "sigmoid",
 
 # keras$layers$LSTM
 # keras.layers.LSTM
-# keras_core.src.layers.rnn.lstm.LSTM
+# keras.src.layers.rnn.lstm.LSTM
 r"-(Long Short-Term Memory layer - Hochreiter 1997.
 
     Based on available runtime hardware and constraints, this layer
@@ -1484,7 +1478,6 @@ r"-(Long Short-Term Memory layer - Hochreiter 1997.
             call of the cell (optional, `None` causes creation
             of zero-filled initial state tensors). Defaults to `None`.
     )-"
-
 
 # keras.src.layers.rnn.lstm.LSTM
 #' Long Short-Term Memory layer - Hochreiter 1997.
@@ -1625,7 +1618,7 @@ function (object, units, activation = "tanh", recurrent_activation = "sigmoid",
 
 # keras$layers$LSTMCell
 # keras.layers.LSTMCell
-# keras_core.src.layers.rnn.lstm.LSTMCell
+# keras.src.layers.rnn.lstm.LSTMCell
 r"-(Cell class for the LSTM layer.
 
     This class processes one step within the whole time sequence input, whereas
@@ -1696,7 +1689,6 @@ r"-(Cell class for the LSTM layer.
     >>> final_state.shape
     (32, 4)
     )-"
-
 
 # keras.src.layers.rnn.lstm.LSTMCell
 #' Cell class for the LSTM layer.
@@ -1791,7 +1783,7 @@ function (units, activation = "tanh", recurrent_activation = "sigmoid",
 
 # keras$layers$RNN
 # keras.layers.RNN
-# keras_core.src.layers.rnn.rnn.RNN
+# keras.src.layers.rnn.rnn.RNN
 r"-(Base class for recurrent layers.
 
     Args:
@@ -1956,7 +1948,6 @@ r"-(Base class for recurrent layers.
     y = layer(x)
     ```
     )-"
-
 
 # keras.src.layers.rnn.rnn.RNN
 #' Base class for recurrent layers.
@@ -2142,7 +2133,7 @@ function (object, cell, return_sequences = FALSE, return_state = FALSE,
 
 # keras$layers$SimpleRNN
 # keras.layers.SimpleRNN
-# keras_core.src.layers.rnn.simple_rnn.SimpleRNN
+# keras.src.layers.rnn.simple_rnn.SimpleRNN
 r"-(Fully-connected RNN where the output is to be fed back as the new input.
 
     Args:
@@ -2225,7 +2216,6 @@ r"-(Fully-connected RNN where the output is to be fed back as the new input.
     whole_sequence_output, final_state = simple_rnn(inputs)
     ```
     )-"
-
 
 # keras.src.layers.rnn.simple_rnn.SimpleRNN
 #' Fully-connected RNN where the output is to be fed back as the new input.
@@ -2336,7 +2326,7 @@ function (object, units, activation = "tanh", use_bias = TRUE,
 
 # keras$layers$SimpleRNNCell
 # keras.layers.SimpleRNNCell
-# keras_core.src.layers.rnn.simple_rnn.SimpleRNNCell
+# keras.src.layers.rnn.simple_rnn.SimpleRNNCell
 r"-(Cell class for SimpleRNN.
 
     This class processes one step within the whole time sequence input, whereas
@@ -2399,7 +2389,6 @@ r"-(Cell class for SimpleRNN.
     whole_sequence_output, final_state = rnn(inputs)
     ```
     )-"
-
 
 # keras.src.layers.rnn.simple_rnn.SimpleRNNCell
 #' Cell class for SimpleRNN.
@@ -2484,7 +2473,7 @@ function (units, activation = "tanh", use_bias = TRUE, kernel_initializer = "glo
 
 # keras$layers$StackedRNNCells
 # keras.layers.StackedRNNCells
-# keras_core.src.layers.rnn.stacked_rnn_cells.StackedRNNCells
+# keras.src.layers.rnn.stacked_rnn_cells.StackedRNNCells
 r"-(Wrapper allowing a stack of RNN cells to behave as a single cell.
 
     Used to implement efficient stacked RNNs.
@@ -2508,7 +2497,6 @@ r"-(Wrapper allowing a stack of RNN cells to behave as a single cell.
     result = lstm_layer(x)
     ```
     )-"
-
 
 # keras.src.layers.rnn.stacked_rnn_cells.StackedRNNCells
 #' Wrapper allowing a stack of RNN cells to behave as a single cell.
@@ -2549,7 +2537,7 @@ function (cells, ...)
 
 # keras$layers$TimeDistributed
 # keras.layers.TimeDistributed
-# keras_core.src.layers.rnn.time_distributed.TimeDistributed
+# keras.src.layers.rnn.time_distributed.TimeDistributed
 r"-(This wrapper allows to apply a layer to every temporal slice of an input.
 
     Every input should be at least 3D, and the dimension of index one of the
@@ -2584,7 +2572,6 @@ r"-(This wrapper allows to apply a layer to every temporal slice of an input.
             a given timestep should be masked. This argument is passed to the
             wrapped layer (only if the layer supports this argument).
     )-"
-
 
 # keras.src.layers.rnn.time_distributed.TimeDistributed
 #' This wrapper allows to apply a layer to every temporal slice of an input.

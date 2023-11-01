@@ -3,7 +3,7 @@
 
 # keras$initializers$constant
 # keras.initializers.constant
-# keras_core.src.initializers.constant_initializers.Constant
+# keras.src.initializers.constant_initializers.Constant
 r"-(Initializer that generates tensors with constant values.
 
     Only scalar values are allowed.
@@ -23,7 +23,6 @@ r"-(Initializer that generates tensors with constant values.
     Args:
         value: A Python scalar.
     )-"
-
 
 # keras.src.initializers.constant_initializers.Constant
 #' Initializer that generates tensors with constant values.
@@ -62,7 +61,7 @@ function (value = 0)
 
 # keras$initializers$identity
 # keras.initializers.identity
-# keras_core.src.initializers.constant_initializers.Identity
+# keras.src.initializers.constant_initializers.Identity
 r"-(Initializer that generates the identity matrix.
 
     Only usable for generating 2D matrices.
@@ -80,7 +79,6 @@ r"-(Initializer that generates the identity matrix.
     Args:
         gain: Multiplicative factor to apply to the identity matrix.
     )-"
-
 
 # keras.src.initializers.constant_initializers.Identity
 #' Initializer that generates the identity matrix.
@@ -117,7 +115,7 @@ function (gain = 1)
 
 # keras$initializers$ones
 # keras.initializers.ones
-# keras_core.src.initializers.constant_initializers.Ones
+# keras.src.initializers.constant_initializers.Ones
 r"-(Initializer that generates tensors initialized to 1.
 
     Also available via the shortcut function `ones`.
@@ -132,7 +130,6 @@ r"-(Initializer that generates tensors initialized to 1.
     >>> initializer = Ones()
     >>> layer = Dense(3, kernel_initializer=initializer)
     )-"
-
 
 # keras.src.initializers.constant_initializers.Ones
 #' Initializer that generates tensors initialized to 1.
@@ -167,7 +164,7 @@ function ()
 
 # keras$initializers$zeros
 # keras.initializers.zeros
-# keras_core.src.initializers.constant_initializers.Zeros
+# keras.src.initializers.constant_initializers.Zeros
 r"-(Initializer that generates tensors initialized to 0.
 
     Examples:
@@ -180,7 +177,6 @@ r"-(Initializer that generates tensors initialized to 0.
     >>> initializer = Zeros()
     >>> layer = Dense(units=3, kernel_initializer=initializer)
     )-"
-
 
 # keras.src.initializers.constant_initializers.Zeros
 #' Initializer that generates tensors initialized to 0.
@@ -214,7 +210,7 @@ function ()
 
 # keras$initializers$GlorotNormal
 # keras.initializers.GlorotNormal
-# keras_core.src.initializers.random_initializers.GlorotNormal
+# keras.src.initializers.random_initializers.GlorotNormal
 r"-(The Glorot normal initializer, also called Xavier normal initializer.
 
     Draws samples from a truncated normal distribution centered on 0 with
@@ -246,7 +242,6 @@ r"-(The Glorot normal initializer, also called Xavier normal initializer.
 
     - [Glorot et al., 2010](http://proceedings.mlr.press/v9/glorot10a.html)
     )-"
-
 
 # keras.src.initializers.random_initializers.GlorotNormal
 #' The Glorot normal initializer, also called Xavier normal initializer.
@@ -296,7 +291,7 @@ function (seed = NULL)
 
 # keras$initializers$GlorotUniform
 # keras.initializers.GlorotUniform
-# keras_core.src.initializers.random_initializers.GlorotUniform
+# keras.src.initializers.random_initializers.GlorotUniform
 r"-(The Glorot uniform initializer, also called Xavier uniform initializer.
 
     Draws samples from a uniform distribution within `[-limit, limit]`, where
@@ -327,7 +322,6 @@ r"-(The Glorot uniform initializer, also called Xavier uniform initializer.
 
     - [Glorot et al., 2010](http://proceedings.mlr.press/v9/glorot10a.html)
     )-"
-
 
 # keras.src.initializers.random_initializers.GlorotUniform
 #' The Glorot uniform initializer, also called Xavier uniform initializer.
@@ -376,7 +370,7 @@ function (seed = NULL)
 
 # keras$initializers$HeNormal
 # keras.initializers.HeNormal
-# keras_core.src.initializers.random_initializers.HeNormal
+# keras.src.initializers.random_initializers.HeNormal
 r"-(He normal initializer.
 
     It draws samples from a truncated normal distribution centered on 0 with
@@ -407,7 +401,6 @@ r"-(He normal initializer.
 
     - [He et al., 2015](https://arxiv.org/abs/1502.01852)
     )-"
-
 
 # keras.src.initializers.random_initializers.HeNormal
 #' He normal initializer.
@@ -456,7 +449,7 @@ function (seed = NULL)
 
 # keras$initializers$HeUniform
 # keras.initializers.HeUniform
-# keras_core.src.initializers.random_initializers.HeUniform
+# keras.src.initializers.random_initializers.HeUniform
 r"-(He uniform variance scaling initializer.
 
     Draws samples from a uniform distribution within `[-limit, limit]`, where
@@ -487,7 +480,6 @@ r"-(He uniform variance scaling initializer.
 
     - [He et al., 2015](https://arxiv.org/abs/1502.01852)
     )-"
-
 
 # keras.src.initializers.random_initializers.HeUniform
 #' He uniform variance scaling initializer.
@@ -536,7 +528,7 @@ function (seed = NULL)
 
 # keras$initializers$LecunNormal
 # keras.initializers.LecunNormal
-# keras_core.src.initializers.random_initializers.LecunNormal
+# keras.src.initializers.random_initializers.LecunNormal
 r"-(Lecun normal initializer.
 
     Initializers allow you to pre-specify an initialization strategy, encoded in
@@ -571,7 +563,6 @@ r"-(Lecun normal initializer.
 
     - [Klambauer et al., 2017](https://arxiv.org/abs/1706.02515)
     )-"
-
 
 # keras.src.initializers.random_initializers.LecunNormal
 #' Lecun normal initializer.
@@ -624,7 +615,7 @@ function (seed = NULL)
 
 # keras$initializers$LecunUniform
 # keras.initializers.LecunUniform
-# keras_core.src.initializers.random_initializers.LecunUniform
+# keras.src.initializers.random_initializers.LecunUniform
 r"-(Lecun uniform initializer.
 
     Draws samples from a uniform distribution within `[-limit, limit]`, where
@@ -655,7 +646,6 @@ r"-(Lecun uniform initializer.
 
     - [Klambauer et al., 2017](https://arxiv.org/abs/1706.02515)
     )-"
-
 
 # keras.src.initializers.random_initializers.LecunUniform
 #' Lecun uniform initializer.
@@ -704,7 +694,7 @@ function (seed = NULL)
 
 # keras$initializers$orthogonal
 # keras.initializers.orthogonal
-# keras_core.src.initializers.random_initializers.OrthogonalInitializer
+# keras.src.initializers.random_initializers.OrthogonalInitializer
 r"-(Initializer that generates an orthogonal matrix.
 
     If the shape of the tensor to initialize is two-dimensional, it is
@@ -737,7 +727,6 @@ r"-(Initializer that generates an orthogonal matrix.
 
     - [Saxe et al., 2014](https://openreview.net/forum?id=_wzZwKpTDF_9C)
     )-"
-
 
 # keras.src.initializers.random_initializers.OrthogonalInitializer
 #' Initializer that generates an orthogonal matrix.
@@ -788,7 +777,7 @@ function (gain = 1, seed = NULL)
 
 # keras$initializers$RandomNormal
 # keras.initializers.RandomNormal
-# keras_core.src.initializers.random_initializers.RandomNormal
+# keras.src.initializers.random_initializers.RandomNormal
 r"-(Random normal initializer.
 
     Draws samples from a normal distribution for given parameters.
@@ -817,7 +806,6 @@ r"-(Random normal initializer.
             across multiple calls, use as seed an instance
             of `keras.backend.SeedGenerator`.
     )-"
-
 
 # keras.src.initializers.random_initializers.RandomNormal
 #' Random normal initializer.
@@ -865,7 +853,7 @@ function (mean = 0, stddev = 0.05, seed = NULL)
 
 # keras$initializers$RandomUniform
 # keras.initializers.RandomUniform
-# keras_core.src.initializers.random_initializers.RandomUniform
+# keras.src.initializers.random_initializers.RandomUniform
 r"-(Random uniform initializer.
 
     Draws samples from a uniform distribution for given parameters.
@@ -894,7 +882,6 @@ r"-(Random uniform initializer.
             across multiple calls, use as seed an instance
             of `keras.backend.SeedGenerator`.
     )-"
-
 
 # keras.src.initializers.random_initializers.RandomUniform
 #' Random uniform initializer.
@@ -942,7 +929,7 @@ function (minval = -0.05, maxval = 0.05, seed = NULL)
 
 # keras$initializers$TruncatedNormal
 # keras.initializers.TruncatedNormal
-# keras_core.src.initializers.random_initializers.TruncatedNormal
+# keras.src.initializers.random_initializers.TruncatedNormal
 r"-(Initializer that generates a truncated normal distribution.
 
     The values generated are similar to values from a
@@ -974,7 +961,6 @@ r"-(Initializer that generates a truncated normal distribution.
             across multiple calls, use as seed an instance
             of `keras.backend.SeedGenerator`.
     )-"
-
 
 # keras.src.initializers.random_initializers.TruncatedNormal
 #' Initializer that generates a truncated normal distribution.
@@ -1025,7 +1011,7 @@ function (mean = 0, stddev = 0.05, seed = NULL)
 
 # keras$initializers$VarianceScaling
 # keras.initializers.VarianceScaling
-# keras_core.src.initializers.random_initializers.VarianceScaling
+# keras.src.initializers.random_initializers.VarianceScaling
 r"-(Initializer that adapts its scale to the shape of its input tensors.
 
     With `distribution="truncated_normal" or "untruncated_normal"`, samples are
@@ -1066,7 +1052,6 @@ r"-(Initializer that adapts its scale to the shape of its input tensors.
             across multiple calls, use as seed an instance
             of `keras.backend.SeedGenerator`.
     )-"
-
 
 # keras.src.initializers.random_initializers.VarianceScaling
 #' Initializer that adapts its scale to the shape of its input tensors.

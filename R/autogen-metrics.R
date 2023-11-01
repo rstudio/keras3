@@ -3,7 +3,7 @@
 
 # keras$metrics$binary_focal_crossentropy
 # keras.metrics.binary_focal_crossentropy
-# keras_core.src.losses.losses.binary_focal_crossentropy
+# keras.src.losses.losses.binary_focal_crossentropy
 r"-(Computes the binary focal crossentropy loss.
 
     According to [Lin et al., 2018](https://arxiv.org/pdf/1708.02002.pdf), it
@@ -53,7 +53,6 @@ r"-(Computes the binary focal crossentropy loss.
     >>> loss
     array([0.330, 0.206], dtype=float32)
     )-"
-
 
 # keras.src.losses.losses.binary_focal_crossentropy
 #' Computes the binary focal crossentropy loss.
@@ -120,7 +119,7 @@ function (y_true, y_pred, apply_class_balancing = FALSE, alpha = 0.25,
 
 # keras$metrics$categorical_focal_crossentropy
 # keras.metrics.categorical_focal_crossentropy
-# keras_core.src.losses.losses.categorical_focal_crossentropy
+# keras.src.losses.losses.categorical_focal_crossentropy
 r"-(Computes the categorical focal crossentropy loss.
 
     Args:
@@ -155,7 +154,6 @@ r"-(Computes the categorical focal crossentropy loss.
     >>> loss
     array([2.63401289e-04, 6.75912094e-01], dtype=float32)
     )-"
-
 
 # keras.src.losses.losses.categorical_focal_crossentropy
 #' Computes the categorical focal crossentropy loss.
@@ -208,7 +206,7 @@ function (y_true, y_pred, alpha = 0.25, gamma = 2, from_logits = FALSE,
 
 # keras$metrics$huber
 # keras.metrics.huber
-# keras_core.src.losses.losses.huber
+# keras.src.losses.losses.huber
 r"-(Computes Huber loss value.
 
     Formula:
@@ -240,7 +238,6 @@ r"-(Computes Huber loss value.
     Returns:
         Tensor with one scalar loss entry per sample.
     )-"
-
 
 # keras.src.losses.losses.huber
 #' Computes Huber loss value.
@@ -287,7 +284,7 @@ function (y_true, y_pred, delta = 1)
 
 # keras$metrics$log_cosh
 # keras.metrics.log_cosh
-# keras_core.src.losses.losses.log_cosh
+# keras.src.losses.losses.log_cosh
 r"-(Logarithm of the hyperbolic cosine of the prediction error.
 
     Formula:
@@ -314,7 +311,6 @@ r"-(Logarithm of the hyperbolic cosine of the prediction error.
     Returns:
         Logcosh error values with shape = `[batch_size, d0, .. dN-1]`.
     )-"
-
 
 # keras.src.losses.losses.log_cosh
 #' Logarithm of the hyperbolic cosine of the prediction error.
@@ -357,7 +353,7 @@ function (y_true, y_pred)
 
 # keras$metrics$BinaryAccuracy
 # keras.metrics.BinaryAccuracy
-# keras_core.src.metrics.accuracy_metrics.BinaryAccuracy
+# keras.src.metrics.accuracy_metrics.BinaryAccuracy
 r"-(Calculates how often predictions match binary labels.
 
     This metric creates two local variables, `total` and `count` that are used
@@ -395,7 +391,6 @@ r"-(Calculates how often predictions match binary labels.
                   metrics=[keras.metrics.BinaryAccuracy()])
     ```
     )-"
-
 
 # keras.src.metrics.accuracy_metrics.BinaryAccuracy
 #' Calculates how often predictions match binary labels.
@@ -461,7 +456,7 @@ structure(function (y_true, y_pred, threshold = 0.5, ..., name = "binary_accurac
 
 # keras$metrics$CategoricalAccuracy
 # keras.metrics.CategoricalAccuracy
-# keras_core.src.metrics.accuracy_metrics.CategoricalAccuracy
+# keras.src.metrics.accuracy_metrics.CategoricalAccuracy
 r"-(Calculates how often predictions match one-hot labels.
 
     You can provide logits of classes as `y_pred`, since argmax of
@@ -506,7 +501,6 @@ r"-(Calculates how often predictions match one-hot labels.
                   metrics=[keras.metrics.CategoricalAccuracy()])
     ```
     )-"
-
 
 # keras.src.metrics.accuracy_metrics.CategoricalAccuracy
 #' Calculates how often predictions match one-hot labels.
@@ -579,7 +573,7 @@ structure(function (y_true, y_pred, ..., name = "categorical_accuracy",
 
 # keras$metrics$SparseCategoricalAccuracy
 # keras.metrics.SparseCategoricalAccuracy
-# keras_core.src.metrics.accuracy_metrics.SparseCategoricalAccuracy
+# keras.src.metrics.accuracy_metrics.SparseCategoricalAccuracy
 r"-(Calculates how often predictions match integer labels.
 
     ```python
@@ -622,7 +616,6 @@ r"-(Calculates how often predictions match integer labels.
                   metrics=[keras.metrics.SparseCategoricalAccuracy()])
     ```
     )-"
-
 
 # keras.src.metrics.accuracy_metrics.SparseCategoricalAccuracy
 #' Calculates how often predictions match integer labels.
@@ -693,7 +686,7 @@ structure(function (y_true, y_pred, ..., name = "sparse_categorical_accuracy",
 
 # keras$metrics$SparseTopKCategoricalAccuracy
 # keras.metrics.SparseTopKCategoricalAccuracy
-# keras_core.src.metrics.accuracy_metrics.SparseTopKCategoricalAccuracy
+# keras.src.metrics.accuracy_metrics.SparseTopKCategoricalAccuracy
 r"-(Computes how often integer targets are in the top `K` predictions.
 
     Args:
@@ -723,7 +716,6 @@ r"-(Computes how often integer targets are in the top `K` predictions.
                   metrics=[keras.metrics.SparseTopKCategoricalAccuracy()])
     ```
     )-"
-
 
 # keras.src.metrics.accuracy_metrics.SparseTopKCategoricalAccuracy
 #' Computes how often integer targets are in the top `K` predictions.
@@ -782,7 +774,7 @@ structure(function (y_true, y_pred, k = 5L, ..., name = "sparse_top_k_categorica
 
 # keras$metrics$TopKCategoricalAccuracy
 # keras.metrics.TopKCategoricalAccuracy
-# keras_core.src.metrics.accuracy_metrics.TopKCategoricalAccuracy
+# keras.src.metrics.accuracy_metrics.TopKCategoricalAccuracy
 r"-(Computes how often targets are in the top `K` predictions.
 
     Args:
@@ -814,7 +806,6 @@ r"-(Computes how often targets are in the top `K` predictions.
                   metrics=[keras.metrics.TopKCategoricalAccuracy()])
     ```
     )-"
-
 
 # keras.src.metrics.accuracy_metrics.TopKCategoricalAccuracy
 #' Computes how often targets are in the top `K` predictions.
@@ -875,7 +866,7 @@ structure(function (y_true, y_pred, k = 5L, ..., name = "top_k_categorical_accur
 
 # keras$metrics$AUC
 # keras.metrics.AUC
-# keras_core.src.metrics.confusion_metrics.AUC
+# keras.src.metrics.confusion_metrics.AUC
 r"-(Approximates the AUC (Area under the curve) of the ROC or PR curves.
 
     The AUC (Area under the curve) of the ROC (Receiver operating
@@ -994,7 +985,6 @@ r"-(Approximates the AUC (Area under the curve) of the ROC or PR curves.
                   metrics=[keras.metrics.AUC(from_logits=True)])
     ```
     )-"
-
 
 # keras.src.metrics.confusion_metrics.AUC
 #' Approximates the AUC (Area under the curve) of the ROC or PR curves.
@@ -1137,7 +1127,7 @@ function (..., num_thresholds = 200L, curve = "ROC", summation_method = "interpo
 
 # keras$metrics$FalseNegatives
 # keras.metrics.FalseNegatives
-# keras_core.src.metrics.confusion_metrics.FalseNegatives
+# keras.src.metrics.confusion_metrics.FalseNegatives
 r"-(Calculates the number of false negatives.
 
     If `sample_weight` is given, calculates the sum of the weights of
@@ -1170,7 +1160,6 @@ r"-(Calculates the number of false negatives.
     >>> m.result()
     1.0
     )-"
-
 
 # keras.src.metrics.confusion_metrics.FalseNegatives
 #' Calculates the number of false negatives.
@@ -1225,7 +1214,7 @@ function (..., thresholds = NULL, name = NULL, dtype = NULL)
 
 # keras$metrics$FalsePositives
 # keras.metrics.FalsePositives
-# keras_core.src.metrics.confusion_metrics.FalsePositives
+# keras.src.metrics.confusion_metrics.FalsePositives
 r"-(Calculates the number of false positives.
 
     If `sample_weight` is given, calculates the sum of the weights of
@@ -1258,7 +1247,6 @@ r"-(Calculates the number of false positives.
     >>> m.result()
     1.0
     )-"
-
 
 # keras.src.metrics.confusion_metrics.FalsePositives
 #' Calculates the number of false positives.
@@ -1313,7 +1301,7 @@ function (..., thresholds = NULL, name = NULL, dtype = NULL)
 
 # keras$metrics$Precision
 # keras.metrics.Precision
-# keras_core.src.metrics.confusion_metrics.Precision
+# keras.src.metrics.confusion_metrics.Precision
 r"-(Computes the precision of the predictions with respect to the labels.
 
     The metric creates two local variables, `true_positives` and
@@ -1394,7 +1382,6 @@ r"-(Computes the precision of the predictions with respect to the labels.
                   metrics=[keras.metrics.Precision(thresholds=0)])
     ```
     )-"
-
 
 # keras.src.metrics.confusion_metrics.Precision
 #' Computes the precision of the predictions with respect to the labels.
@@ -1502,7 +1489,7 @@ function (..., thresholds = NULL, top_k = NULL, class_id = NULL,
 
 # keras$metrics$PrecisionAtRecall
 # keras.metrics.PrecisionAtRecall
-# keras_core.src.metrics.confusion_metrics.PrecisionAtRecall
+# keras.src.metrics.confusion_metrics.PrecisionAtRecall
 r"-(Computes best precision where recall is >= specified value.
 
     This metric creates four local variables, `true_positives`,
@@ -1550,7 +1537,6 @@ r"-(Computes best precision where recall is >= specified value.
         metrics=[keras.metrics.PrecisionAtRecall(recall=0.8)])
     ```
     )-"
-
 
 # keras.src.metrics.confusion_metrics.PrecisionAtRecall
 #' Computes best precision where recall is >= specified value.
@@ -1621,7 +1607,7 @@ function (..., recall, num_thresholds = 200L, class_id = NULL,
 
 # keras$metrics$Recall
 # keras.metrics.Recall
-# keras_core.src.metrics.confusion_metrics.Recall
+# keras.src.metrics.confusion_metrics.Recall
 r"-(Computes the recall of the predictions with respect to the labels.
 
     This metric creates two local variables, `true_positives` and
@@ -1686,7 +1672,6 @@ r"-(Computes the recall of the predictions with respect to the labels.
                   metrics=[keras.metrics.Recall(thresholds=0)])
     ```
     )-"
-
 
 # keras.src.metrics.confusion_metrics.Recall
 #' Computes the recall of the predictions with respect to the labels.
@@ -1774,7 +1759,7 @@ function (..., thresholds = NULL, top_k = NULL, class_id = NULL,
 
 # keras$metrics$RecallAtPrecision
 # keras.metrics.RecallAtPrecision
-# keras_core.src.metrics.confusion_metrics.RecallAtPrecision
+# keras.src.metrics.confusion_metrics.RecallAtPrecision
 r"-(Computes best recall where precision is >= specified value.
 
     For a given score-label-distribution the required precision might not
@@ -1825,7 +1810,6 @@ r"-(Computes best recall where precision is >= specified value.
         metrics=[keras.metrics.RecallAtPrecision(precision=0.8)])
     ```
     )-"
-
 
 # keras.src.metrics.confusion_metrics.RecallAtPrecision
 #' Computes best recall where precision is >= specified value.
@@ -1899,7 +1883,7 @@ function (..., precision, num_thresholds = 200L, class_id = NULL,
 
 # keras$metrics$SensitivityAtSpecificity
 # keras.metrics.SensitivityAtSpecificity
-# keras_core.src.metrics.confusion_metrics.SensitivityAtSpecificity
+# keras.src.metrics.confusion_metrics.SensitivityAtSpecificity
 r"-(Computes best sensitivity where specificity is >= specified value.
 
     `Sensitivity` measures the proportion of actual positives that are correctly
@@ -1956,7 +1940,6 @@ r"-(Computes best sensitivity where specificity is >= specified value.
         metrics=[keras.metrics.SensitivityAtSpecificity()])
     ```
     )-"
-
 
 # keras.src.metrics.confusion_metrics.SensitivityAtSpecificity
 #' Computes best sensitivity where specificity is >= specified value.
@@ -2036,7 +2019,7 @@ function (..., specificity, num_thresholds = 200L, class_id = NULL,
 
 # keras$metrics$SpecificityAtSensitivity
 # keras.metrics.SpecificityAtSensitivity
-# keras_core.src.metrics.confusion_metrics.SpecificityAtSensitivity
+# keras.src.metrics.confusion_metrics.SpecificityAtSensitivity
 r"-(Computes best specificity where sensitivity is >= specified value.
 
     `Sensitivity` measures the proportion of actual positives that are correctly
@@ -2093,7 +2076,6 @@ r"-(Computes best specificity where sensitivity is >= specified value.
         metrics=[keras.metrics.SpecificityAtSensitivity()])
     ```
     )-"
-
 
 # keras.src.metrics.confusion_metrics.SpecificityAtSensitivity
 #' Computes best specificity where sensitivity is >= specified value.
@@ -2173,7 +2155,7 @@ function (..., sensitivity, num_thresholds = 200L, class_id = NULL,
 
 # keras$metrics$TrueNegatives
 # keras.metrics.TrueNegatives
-# keras_core.src.metrics.confusion_metrics.TrueNegatives
+# keras.src.metrics.confusion_metrics.TrueNegatives
 r"-(Calculates the number of true negatives.
 
     If `sample_weight` is given, calculates the sum of the weights of
@@ -2206,7 +2188,6 @@ r"-(Calculates the number of true negatives.
     >>> m.result()
     1.0
     )-"
-
 
 # keras.src.metrics.confusion_metrics.TrueNegatives
 #' Calculates the number of true negatives.
@@ -2261,7 +2242,7 @@ function (..., thresholds = NULL, name = NULL, dtype = NULL)
 
 # keras$metrics$TruePositives
 # keras.metrics.TruePositives
-# keras_core.src.metrics.confusion_metrics.TruePositives
+# keras.src.metrics.confusion_metrics.TruePositives
 r"-(Calculates the number of true positives.
 
     If `sample_weight` is given, calculates the sum of the weights of
@@ -2294,7 +2275,6 @@ r"-(Calculates the number of true positives.
     >>> m.result()
     1.0
     )-"
-
 
 # keras.src.metrics.confusion_metrics.TruePositives
 #' Calculates the number of true positives.
@@ -2349,7 +2329,7 @@ function (..., thresholds = NULL, name = NULL, dtype = NULL)
 
 # keras$metrics$F1Score
 # keras.metrics.F1Score
-# keras_core.src.metrics.f_score_metrics.F1Score
+# keras.src.metrics.f_score_metrics.F1Score
 r"-(Computes F-1 Score.
 
     Formula:
@@ -2399,7 +2379,6 @@ r"-(Computes F-1 Score.
     >>> result = metric.result()
     array([0.5      , 0.8      , 0.6666667], dtype=float32)
     )-"
-
 
 # keras.src.metrics.f_score_metrics.F1Score
 #' Computes F-1 Score.
@@ -2468,7 +2447,7 @@ function (..., average = NULL, threshold = NULL, name = "f1_score",
 
 # keras$metrics$FBetaScore
 # keras.metrics.FBetaScore
-# keras_core.src.metrics.f_score_metrics.FBetaScore
+# keras.src.metrics.f_score_metrics.FBetaScore
 r"-(Computes F-Beta score.
 
     Formula:
@@ -2524,7 +2503,6 @@ r"-(Computes F-Beta score.
     >>> result
     [0.3846154 , 0.90909094, 0.8333334 ]
     )-"
-
 
 # keras.src.metrics.f_score_metrics.FBetaScore
 #' Computes F-Beta score.
@@ -2599,7 +2577,7 @@ function (..., average = NULL, beta = 1, threshold = NULL, name = "fbeta_score",
 
 # keras$metrics$CategoricalHinge
 # keras.metrics.CategoricalHinge
-# keras_core.src.metrics.hinge_metrics.CategoricalHinge
+# keras.src.metrics.hinge_metrics.CategoricalHinge
 r"-(Computes the categorical hinge metric between `y_true` and `y_pred`.
 
     Args:
@@ -2617,7 +2595,6 @@ r"-(Computes the categorical hinge metric between `y_true` and `y_pred`.
     >>> m.result()
     1.2
     )-"
-
 
 # keras.src.metrics.hinge_metrics.CategoricalHinge
 #' Computes the categorical hinge metric between `y_true` and `y_pred`.
@@ -2682,7 +2659,7 @@ structure(function (y_true, y_pred, ..., name = "categorical_hinge",
 
 # keras$metrics$Hinge
 # keras.metrics.Hinge
-# keras_core.src.metrics.hinge_metrics.Hinge
+# keras.src.metrics.hinge_metrics.Hinge
 r"-(Computes the hinge metric between `y_true` and `y_pred`.
 
     `y_true` values are expected to be -1 or 1. If binary (0 or 1) labels are
@@ -2704,7 +2681,6 @@ r"-(Computes the hinge metric between `y_true` and `y_pred`.
     >>> m.result()
     1.1
     )-"
-
 
 # keras.src.metrics.hinge_metrics.Hinge
 #' Computes the hinge metric between `y_true` and `y_pred`.
@@ -2768,7 +2744,7 @@ structure(function (y_true, y_pred, ..., name = "hinge", dtype = NULL)
 
 # keras$metrics$SquaredHinge
 # keras.metrics.SquaredHinge
-# keras_core.src.metrics.hinge_metrics.SquaredHinge
+# keras.src.metrics.hinge_metrics.SquaredHinge
 r"-(Computes the hinge metric between `y_true` and `y_pred`.
 
     `y_true` values are expected to be -1 or 1. If binary (0 or 1) labels are
@@ -2790,7 +2766,6 @@ r"-(Computes the hinge metric between `y_true` and `y_pred`.
     >>> m.result()
     1.46
     )-"
-
 
 # keras.src.metrics.hinge_metrics.SquaredHinge
 #' Computes the hinge metric between `y_true` and `y_pred`.
@@ -2855,7 +2830,7 @@ structure(function (y_true, y_pred, ..., name = "squared_hinge",
 
 # keras$metrics$BinaryIoU
 # keras.metrics.BinaryIoU
-# keras_core.src.metrics.iou_metrics.BinaryIoU
+# keras.src.metrics.iou_metrics.BinaryIoU
 r"-(Computes the Intersection-Over-Union metric for class 0 and/or 1.
 
     Formula:
@@ -2928,7 +2903,6 @@ r"-(Computes the Intersection-Over-Union metric for class 0 and/or 1.
     )
     ```
     )-"
-
 
 # keras.src.metrics.iou_metrics.BinaryIoU
 #' Computes the Intersection-Over-Union metric for class 0 and/or 1.
@@ -3023,7 +2997,7 @@ function (..., target_class_ids = list(0L, 1L), threshold = 0.5,
 
 # keras$metrics$IoU
 # keras.metrics.IoU
-# keras_core.src.metrics.iou_metrics.IoU
+# keras.src.metrics.iou_metrics.IoU
 r"-(Computes the Intersection-Over-Union metric for specific target classes.
 
     Formula:
@@ -3100,7 +3074,6 @@ r"-(Computes the Intersection-Over-Union metric for specific target classes.
         metrics=[keras.metrics.IoU(num_classes=2, target_class_ids=[0])])
     ```
     )-"
-
 
 # keras.src.metrics.iou_metrics.IoU
 #' Computes the Intersection-Over-Union metric for specific target classes.
@@ -3199,7 +3172,7 @@ function (..., num_classes, target_class_ids, name = NULL, dtype = NULL,
 
 # keras$metrics$MeanIoU
 # keras.metrics.MeanIoU
-# keras_core.src.metrics.iou_metrics.MeanIoU
+# keras.src.metrics.iou_metrics.MeanIoU
 r"-(Computes the mean Intersection-Over-Union metric.
 
     Formula:
@@ -3267,7 +3240,6 @@ r"-(Computes the mean Intersection-Over-Union metric.
         metrics=[keras.metrics.MeanIoU(num_classes=2)])
     ```
     )-"
-
 
 # keras.src.metrics.iou_metrics.MeanIoU
 #' Computes the mean Intersection-Over-Union metric.
@@ -3356,7 +3328,7 @@ function (..., num_classes, name = NULL, dtype = NULL, ignore_class = NULL,
 
 # keras$metrics$OneHotIoU
 # keras.metrics.OneHotIoU
-# keras_core.src.metrics.iou_metrics.OneHotIoU
+# keras.src.metrics.iou_metrics.OneHotIoU
 r"-(Computes the Intersection-Over-Union metric for one-hot encoded labels.
 
     Formula:
@@ -3438,7 +3410,6 @@ r"-(Computes the Intersection-Over-Union metric for one-hot encoded labels.
     )
     ```
     )-"
-
 
 # keras.src.metrics.iou_metrics.OneHotIoU
 #' Computes the Intersection-Over-Union metric for one-hot encoded labels.
@@ -3539,7 +3510,7 @@ function (..., num_classes, target_class_ids, name = NULL, dtype = NULL,
 
 # keras$metrics$OneHotMeanIoU
 # keras.metrics.OneHotMeanIoU
-# keras_core.src.metrics.iou_metrics.OneHotMeanIoU
+# keras.src.metrics.iou_metrics.OneHotMeanIoU
 r"-(Computes mean Intersection-Over-Union metric for one-hot encoded labels.
 
     Formula:
@@ -3616,7 +3587,6 @@ r"-(Computes mean Intersection-Over-Union metric for one-hot encoded labels.
         metrics=[keras.metrics.OneHotMeanIoU(num_classes=3)])
     ```
     )-"
-
 
 # keras.src.metrics.iou_metrics.OneHotMeanIoU
 #' Computes mean Intersection-Over-Union metric for one-hot encoded labels.
@@ -3712,7 +3682,7 @@ function (..., num_classes, name = NULL, dtype = NULL, ignore_class = NULL,
 
 # keras$metrics$BinaryCrossentropy
 # keras.metrics.BinaryCrossentropy
-# keras_core.src.metrics.probabilistic_metrics.BinaryCrossentropy
+# keras.src.metrics.probabilistic_metrics.BinaryCrossentropy
 r"-(Computes the crossentropy metric between the labels and predictions.
 
     This is the crossentropy metric class to be used when there are only two
@@ -3754,7 +3724,6 @@ r"-(Computes the crossentropy metric between the labels and predictions.
         metrics=[keras.metrics.BinaryCrossentropy()])
     ```
     )-"
-
 
 # keras.src.metrics.probabilistic_metrics.BinaryCrossentropy
 #' Computes the crossentropy metric between the labels and predictions.
@@ -3833,7 +3802,7 @@ structure(function (y_true, y_pred, from_logits = FALSE, label_smoothing = 0,
 
 # keras$metrics$CategoricalCrossentropy
 # keras.metrics.CategoricalCrossentropy
-# keras_core.src.metrics.probabilistic_metrics.CategoricalCrossentropy
+# keras.src.metrics.probabilistic_metrics.CategoricalCrossentropy
 r"-(Computes the crossentropy metric between the labels and predictions.
 
     This is the crossentropy metric class to be used when there are multiple
@@ -3888,7 +3857,6 @@ r"-(Computes the crossentropy metric between the labels and predictions.
         metrics=[keras.metrics.CategoricalCrossentropy()])
     ```
     )-"
-
 
 # keras.src.metrics.probabilistic_metrics.CategoricalCrossentropy
 #' Computes the crossentropy metric between the labels and predictions.
@@ -3978,7 +3946,7 @@ structure(function (y_true, y_pred, from_logits = FALSE, label_smoothing = 0,
 
 # keras$metrics$KLDivergence
 # keras.metrics.KLDivergence
-# keras_core.src.metrics.probabilistic_metrics.KLDivergence
+# keras.src.metrics.probabilistic_metrics.KLDivergence
 r"-(Computes Kullback-Leibler divergence metric between `y_true` and
     `y_pred`.
 
@@ -4013,7 +3981,6 @@ r"-(Computes Kullback-Leibler divergence metric between `y_true` and
                   metrics=[keras.metrics.KLDivergence()])
     ```
     )-"
-
 
 # keras.src.metrics.probabilistic_metrics.KLDivergence
 #' Computes Kullback-Leibler divergence metric between `y_true` and
@@ -4097,7 +4064,7 @@ structure(function (y_true, y_pred, ..., name = "kl_divergence",
 
 # keras$metrics$Poisson
 # keras.metrics.Poisson
-# keras_core.src.metrics.probabilistic_metrics.Poisson
+# keras.src.metrics.probabilistic_metrics.Poisson
 r"-(Computes the Poisson metric between `y_true` and `y_pred`.
 
     Formula:
@@ -4133,7 +4100,6 @@ r"-(Computes the Poisson metric between `y_true` and `y_pred`.
                   metrics=[keras.metrics.Poisson()])
     ```
     )-"
-
 
 # keras.src.metrics.probabilistic_metrics.Poisson
 #' Computes the Poisson metric between `y_true` and `y_pred`.
@@ -4212,7 +4178,7 @@ structure(function (y_true, y_pred, ..., name = "poisson", dtype = NULL)
 
 # keras$metrics$SparseCategoricalCrossentropy
 # keras.metrics.SparseCategoricalCrossentropy
-# keras_core.src.metrics.probabilistic_metrics.SparseCategoricalCrossentropy
+# keras.src.metrics.probabilistic_metrics.SparseCategoricalCrossentropy
 r"-(Computes the crossentropy metric between the labels and predictions.
 
     Use this crossentropy metric when there are two or more label classes.
@@ -4268,7 +4234,6 @@ r"-(Computes the crossentropy metric between the labels and predictions.
         metrics=[keras.metrics.SparseCategoricalCrossentropy()])
     ```
     )-"
-
 
 # keras.src.metrics.probabilistic_metrics.SparseCategoricalCrossentropy
 #' Computes the crossentropy metric between the labels and predictions.
@@ -4366,7 +4331,7 @@ structure(function (y_true, y_pred, from_logits = FALSE, ignore_class = NULL,
 
 # keras$metrics$Mean
 # keras.metrics.Mean
-# keras_core.src.metrics.reduction_metrics.Mean
+# keras.src.metrics.reduction_metrics.Mean
 r"-(Compute the (weighted) mean of the given values.
 
     For example, if values is `[1, 3, 5, 7]` then the mean is 4.
@@ -4392,7 +4357,6 @@ r"-(Compute the (weighted) mean of the given values.
     2.0
     ```
     )-"
-
 
 # keras.src.metrics.reduction_metrics.Mean
 #' Compute the (weighted) mean of the given values.
@@ -4438,7 +4402,7 @@ function (..., name = "mean", dtype = NULL)
 
 # keras$metrics$MeanMetricWrapper
 # keras.metrics.MeanMetricWrapper
-# keras_core.src.metrics.reduction_metrics.MeanMetricWrapper
+# keras.src.metrics.reduction_metrics.MeanMetricWrapper
 r"-(Wrap a stateless metric function with the Mean metric.
 
     You could use this class to quickly build a mean metric from a function. The
@@ -4462,7 +4426,6 @@ r"-(Wrap a stateless metric function with the Mean metric.
         dtype: (Optional) data type of the metric result.
         **kwargs: Keyword arguments to pass on to `fn`.
     )-"
-
 
 # keras.src.metrics.reduction_metrics.MeanMetricWrapper
 #' Wrap a stateless metric function with the Mean metric.
@@ -4502,7 +4465,7 @@ function (..., fn, name = NULL, dtype = NULL)
 
 # keras$metrics$Sum
 # keras.metrics.Sum
-# keras_core.src.metrics.reduction_metrics.Sum
+# keras.src.metrics.reduction_metrics.Sum
 r"-(Compute the (weighted) sum of the given values.
 
     For example, if `values` is `[1, 3, 5, 7]` then their sum is 16.
@@ -4527,7 +4490,6 @@ r"-(Compute the (weighted) sum of the given values.
     >>> m.result()
     4.0
     )-"
-
 
 # keras.src.metrics.reduction_metrics.Sum
 #' Compute the (weighted) sum of the given values.
@@ -4572,7 +4534,7 @@ function (..., name = "sum", dtype = NULL)
 
 # keras$metrics$CosineSimilarity
 # keras.metrics.CosineSimilarity
-# keras_core.src.metrics.regression_metrics.CosineSimilarity
+# keras.src.metrics.regression_metrics.CosineSimilarity
 r"-(Computes the cosine similarity between the labels and predictions.
 
     Formula:
@@ -4618,7 +4580,6 @@ r"-(Computes the cosine similarity between the labels and predictions.
         metrics=[keras.metrics.CosineSimilarity(axis=1)])
     ```
     )-"
-
 
 # keras.src.metrics.regression_metrics.CosineSimilarity
 #' Computes the cosine similarity between the labels and predictions.
@@ -4682,7 +4643,7 @@ function (..., name = "cosine_similarity", dtype = NULL, axis = -1L)
 
 # keras$metrics$LogCoshError
 # keras.metrics.LogCoshError
-# keras_core.src.metrics.regression_metrics.LogCoshError
+# keras.src.metrics.regression_metrics.LogCoshError
 r"-(Computes the logarithm of the hyperbolic cosine of the prediction error.
 
     Formula:
@@ -4718,7 +4679,6 @@ r"-(Computes the logarithm of the hyperbolic cosine of the prediction error.
                   metrics=[keras.metrics.LogCoshError()])
     ```
     )-"
-
 
 # keras.src.metrics.regression_metrics.LogCoshError
 #' Computes the logarithm of the hyperbolic cosine of the prediction error.
@@ -4772,7 +4732,7 @@ function (..., name = "logcosh", dtype = NULL)
 
 # keras$metrics$MeanAbsoluteError
 # keras.metrics.MeanAbsoluteError
-# keras_core.src.metrics.regression_metrics.MeanAbsoluteError
+# keras.src.metrics.regression_metrics.MeanAbsoluteError
 r"-(Computes the mean absolute error between the labels and predictions.
 
     Formula:
@@ -4808,7 +4768,6 @@ r"-(Computes the mean absolute error between the labels and predictions.
         metrics=[keras.metrics.MeanAbsoluteError()])
     ```
     )-"
-
 
 # keras.src.metrics.regression_metrics.MeanAbsoluteError
 #' Computes the mean absolute error between the labels and predictions.
@@ -4879,7 +4838,7 @@ structure(function (y_true, y_pred, ..., name = "mean_absolute_error",
 
 # keras$metrics$MeanAbsolutePercentageError
 # keras.metrics.MeanAbsolutePercentageError
-# keras_core.src.metrics.regression_metrics.MeanAbsolutePercentageError
+# keras.src.metrics.regression_metrics.MeanAbsolutePercentageError
 r"-(Computes mean absolute percentage error between `y_true` and `y_pred`.
 
     Formula:
@@ -4915,7 +4874,6 @@ r"-(Computes mean absolute percentage error between `y_true` and `y_pred`.
         metrics=[keras.metrics.MeanAbsolutePercentageError()])
     ```
     )-"
-
 
 # keras.src.metrics.regression_metrics.MeanAbsolutePercentageError
 #' Computes mean absolute percentage error between `y_true` and `y_pred`.
@@ -4993,7 +4951,7 @@ structure(function (y_true, y_pred, ..., name = "mean_absolute_percentage_error"
 
 # keras$metrics$MeanSquaredError
 # keras.metrics.MeanSquaredError
-# keras_core.src.metrics.regression_metrics.MeanSquaredError
+# keras.src.metrics.regression_metrics.MeanSquaredError
 r"-(Computes the mean squared error between `y_true` and `y_pred`.
 
     Formula:
@@ -5013,7 +4971,6 @@ r"-(Computes the mean squared error between `y_true` and `y_pred`.
     >>> m.result()
     0.25
     )-"
-
 
 # keras.src.metrics.regression_metrics.MeanSquaredError
 #' Computes the mean squared error between `y_true` and `y_pred`.
@@ -5070,7 +5027,7 @@ structure(function (y_true, y_pred, ..., name = "mean_squared_error",
 
 # keras$metrics$MeanSquaredLogarithmicError
 # keras.metrics.MeanSquaredLogarithmicError
-# keras_core.src.metrics.regression_metrics.MeanSquaredLogarithmicError
+# keras.src.metrics.regression_metrics.MeanSquaredLogarithmicError
 r"-(Computes mean squared logarithmic error between `y_true` and `y_pred`.
 
     Formula:
@@ -5106,7 +5063,6 @@ r"-(Computes mean squared logarithmic error between `y_true` and `y_pred`.
         metrics=[keras.metrics.MeanSquaredLogarithmicError()])
     ```
     )-"
-
 
 # keras.src.metrics.regression_metrics.MeanSquaredLogarithmicError
 #' Computes mean squared logarithmic error between `y_true` and `y_pred`.
@@ -5184,7 +5140,7 @@ structure(function (y_true, y_pred, ..., name = "mean_squared_logarithmic_error"
 
 # keras$metrics$R2Score
 # keras.metrics.R2Score
-# keras_core.src.metrics.regression_metrics.R2Score
+# keras.src.metrics.regression_metrics.R2Score
 r"-(Computes R2 score.
 
     Formula:
@@ -5234,7 +5190,6 @@ r"-(Computes R2 score.
     >>> result
     0.57142854
     )-"
-
 
 # keras.src.metrics.regression_metrics.R2Score
 #' Computes R2 score.
@@ -5303,7 +5258,7 @@ function (..., class_aggregation = "uniform_average", num_regressors = 0L,
 
 # keras$metrics$RootMeanSquaredError
 # keras.metrics.RootMeanSquaredError
-# keras_core.src.metrics.regression_metrics.RootMeanSquaredError
+# keras.src.metrics.regression_metrics.RootMeanSquaredError
 r"-(Computes root mean squared error metric between `y_true` and `y_pred`.
 
     Formula:
@@ -5340,7 +5295,6 @@ r"-(Computes root mean squared error metric between `y_true` and `y_pred`.
         metrics=[keras.metrics.RootMeanSquaredError()])
     ```
     )-"
-
 
 # keras.src.metrics.regression_metrics.RootMeanSquaredError
 #' Computes root mean squared error metric between `y_true` and `y_pred`.

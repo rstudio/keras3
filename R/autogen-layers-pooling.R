@@ -3,7 +3,7 @@
 
 # keras$layers$AveragePooling1D
 # keras.layers.AveragePooling1D
-# keras_core.src.layers.pooling.average_pooling1d.AveragePooling1D
+# keras.src.layers.pooling.average_pooling1d.AveragePooling1D
 r"-(Average pooling for temporal data.
 
     Downsamples the input representation by taking the average value over the
@@ -68,7 +68,6 @@ r"-(Average pooling for temporal data.
     ...    strides=1, padding="same")
     >>> avg_pool_1d(x)
     )-"
-
 
 # keras.src.layers.pooling.average_pooling1d.AveragePooling1D
 #' Average pooling for temporal data.
@@ -160,7 +159,7 @@ function (object, pool_size, strides = NULL, padding = "valid",
 
 # keras$layers$AveragePooling2D
 # keras.layers.AveragePooling2D
-# keras_core.src.layers.pooling.average_pooling2d.AveragePooling2D
+# keras.src.layers.pooling.average_pooling2d.AveragePooling2D
 r"-(Average pooling operation for 2D spatial data.
 
     Downsamples the input along its spatial dimensions (height and width)
@@ -242,7 +241,6 @@ r"-(Average pooling operation for 2D spatial data.
     ...    strides=(1, 1), padding="same")
     >>> avg_pool_2d(x)
     )-"
-
 
 # keras.src.layers.pooling.average_pooling2d.AveragePooling2D
 #' Average pooling operation for 2D spatial data.
@@ -351,7 +349,7 @@ function (object, pool_size, strides = NULL, padding = "valid",
 
 # keras$layers$AveragePooling3D
 # keras.layers.AveragePooling3D
-# keras_core.src.layers.pooling.average_pooling3d.AveragePooling3D
+# keras.src.layers.pooling.average_pooling3d.AveragePooling3D
 r"-(Average pooling operation for 3D data (spatial or spatio-temporal).
 
     Downsamples the input along its spatial dimensions (depth, height, and
@@ -409,7 +407,6 @@ r"-(Average pooling operation for 3D data (spatial or spatio-temporal).
     outputs = layer(inputs)  # Shape: (batch_size, 10, 10, 10, 3)
     ```
     )-"
-
 
 # keras.src.layers.pooling.average_pooling3d.AveragePooling3D
 #' Average pooling operation for 3D data (spatial or spatio-temporal).
@@ -488,7 +485,7 @@ function (object, pool_size, strides = NULL, padding = "valid",
 
 # keras$layers$GlobalAveragePooling1D
 # keras.layers.GlobalAveragePooling1D
-# keras_core.src.layers.pooling.global_average_pooling1d.GlobalAveragePooling1D
+# keras.src.layers.pooling.global_average_pooling1d.GlobalAveragePooling1D
 r"-(Global average pooling operation for temporal data.
 
     Args:
@@ -536,7 +533,6 @@ r"-(Global average pooling operation for temporal data.
     >>> y.shape
     (2, 4)
     )-"
-
 
 # keras.src.layers.pooling.global_average_pooling1d.GlobalAveragePooling1D
 #' Global average pooling operation for temporal data.
@@ -605,7 +601,7 @@ function (object, data_format = NULL, keepdims = FALSE, ...)
 
 # keras$layers$GlobalAveragePooling2D
 # keras.layers.GlobalAveragePooling2D
-# keras_core.src.layers.pooling.global_average_pooling2d.GlobalAveragePooling2D
+# keras.src.layers.pooling.global_average_pooling2d.GlobalAveragePooling2D
 r"-(Global average pooling operation for 2D data.
 
     Args:
@@ -649,7 +645,6 @@ r"-(Global average pooling operation for 2D data.
     >>> y.shape
     (2, 3)
     )-"
-
 
 # keras.src.layers.pooling.global_average_pooling2d.GlobalAveragePooling2D
 #' Global average pooling operation for 2D data.
@@ -714,7 +709,7 @@ function (object, data_format = NULL, keepdims = FALSE, ...)
 
 # keras$layers$GlobalAveragePooling3D
 # keras.layers.GlobalAveragePooling3D
-# keras_core.src.layers.pooling.global_average_pooling3d.GlobalAveragePooling3D
+# keras.src.layers.pooling.global_average_pooling3d.GlobalAveragePooling3D
 r"-(Global average pooling operation for 3D data.
 
     Args:
@@ -759,7 +754,6 @@ r"-(Global average pooling operation for 3D data.
     >>> y.shape
     (2, 3)
     )-"
-
 
 # keras.src.layers.pooling.global_average_pooling3d.GlobalAveragePooling3D
 #' Global average pooling operation for 3D data.
@@ -825,7 +819,7 @@ function (object, data_format = NULL, keepdims = FALSE, ...)
 
 # keras$layers$GlobalMaxPooling1D
 # keras.layers.GlobalMaxPooling1D
-# keras_core.src.layers.pooling.global_max_pooling1d.GlobalMaxPooling1D
+# keras.src.layers.pooling.global_max_pooling1d.GlobalMaxPooling1D
 r"-(Global max pooling operation for temporal data.
 
     Args:
@@ -868,7 +862,6 @@ r"-(Global max pooling operation for temporal data.
     >>> y.shape
     (2, 4)
     )-"
-
 
 # keras.src.layers.pooling.global_max_pooling1d.GlobalMaxPooling1D
 #' Global max pooling operation for temporal data.
@@ -931,7 +924,7 @@ function (object, data_format = NULL, keepdims = FALSE, ...)
 
 # keras$layers$GlobalMaxPooling2D
 # keras.layers.GlobalMaxPooling2D
-# keras_core.src.layers.pooling.global_max_pooling2d.GlobalMaxPooling2D
+# keras.src.layers.pooling.global_max_pooling2d.GlobalMaxPooling2D
 r"-(Global max pooling operation for 2D data.
 
     Args:
@@ -975,7 +968,6 @@ r"-(Global max pooling operation for 2D data.
     >>> y.shape
     (2, 3)
     )-"
-
 
 # keras.src.layers.pooling.global_max_pooling2d.GlobalMaxPooling2D
 #' Global max pooling operation for 2D data.
@@ -1039,7 +1031,7 @@ function (object, data_format = NULL, keepdims = FALSE, ...)
 
 # keras$layers$GlobalMaxPooling3D
 # keras.layers.GlobalMaxPooling3D
-# keras_core.src.layers.pooling.global_max_pooling3d.GlobalMaxPooling3D
+# keras.src.layers.pooling.global_max_pooling3d.GlobalMaxPooling3D
 r"-(Global max pooling operation for 3D data.
 
     Args:
@@ -1084,7 +1076,6 @@ r"-(Global max pooling operation for 3D data.
     >>> y.shape
     (2, 3)
     )-"
-
 
 # keras.src.layers.pooling.global_max_pooling3d.GlobalMaxPooling3D
 #' Global max pooling operation for 3D data.
@@ -1149,7 +1140,7 @@ function (object, data_format = NULL, keepdims = FALSE, ...)
 
 # keras$layers$MaxPooling1D
 # keras.layers.MaxPooling1D
-# keras_core.src.layers.pooling.max_pooling1d.MaxPooling1D
+# keras.src.layers.pooling.max_pooling1d.MaxPooling1D
 r"-(Max pooling operation for 1D temporal data.
 
     Downsamples the input representation by taking the maximum value over a
@@ -1215,7 +1206,6 @@ r"-(Max pooling operation for 1D temporal data.
     ...    strides=1, padding="same")
     >>> max_pool_1d(x)
     )-"
-
 
 # keras.src.layers.pooling.max_pooling1d.MaxPooling1D
 #' Max pooling operation for 1D temporal data.
@@ -1308,7 +1298,7 @@ function (object, pool_size = 2L, strides = NULL, padding = "valid",
 
 # keras$layers$MaxPooling2D
 # keras.layers.MaxPooling2D
-# keras_core.src.layers.pooling.max_pooling2d.MaxPooling2D
+# keras.src.layers.pooling.max_pooling2d.MaxPooling2D
 r"-(Max pooling operation for 2D spatial data.
 
     Downsamples the input along its spatial dimensions (height and width)
@@ -1390,7 +1380,6 @@ r"-(Max pooling operation for 2D spatial data.
     ...    strides=(1, 1), padding="same")
     >>> max_pool_2d(x)
     )-"
-
 
 # keras.src.layers.pooling.max_pooling2d.MaxPooling2D
 #' Max pooling operation for 2D spatial data.
@@ -1499,7 +1488,7 @@ function (object, pool_size = list(2L, 2L), strides = NULL, padding = "valid",
 
 # keras$layers$MaxPooling3D
 # keras.layers.MaxPooling3D
-# keras_core.src.layers.pooling.max_pooling3d.MaxPooling3D
+# keras.src.layers.pooling.max_pooling3d.MaxPooling3D
 r"-(Max pooling operation for 3D data (spatial or spatio-temporal).
 
     Downsamples the input along its spatial dimensions (depth, height, and
@@ -1557,7 +1546,6 @@ r"-(Max pooling operation for 3D data (spatial or spatio-temporal).
     outputs = layer(inputs)  # Shape: (batch_size, 10, 10, 10, 3)
     ```
     )-"
-
 
 # keras.src.layers.pooling.max_pooling3d.MaxPooling3D
 #' Max pooling operation for 3D data (spatial or spatio-temporal).

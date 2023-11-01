@@ -3,7 +3,7 @@
 
 # keras$optimizers$schedules$CosineDecay
 # keras.optimizers.schedules.CosineDecay
-# keras_core.src.optimizers.schedules.learning_rate_schedule.CosineDecay
+# keras.src.optimizers.schedules.learning_rate_schedule.CosineDecay
 r"-(A `LearningRateSchedule` that uses a cosine decay with optional warmup.
 
     See [Loshchilov & Hutter, ICLR2016](https://arxiv.org/abs/1608.03983),
@@ -98,7 +98,6 @@ r"-(A `LearningRateSchedule` that uses a cosine decay with optional warmup.
         step and outputs the decayed learning rate, a scalar tensor of the
         same type as `initial_learning_rate`.
     )-"
-
 
 # keras.src.optimizers.schedules.learning_rate_schedule.CosineDecay
 #' A `LearningRateSchedule` that uses a cosine decay with optional warmup.
@@ -210,7 +209,7 @@ function (initial_learning_rate, decay_steps, alpha = 0, name = "CosineDecay",
 
 # keras$optimizers$schedules$CosineDecayRestarts
 # keras.optimizers.schedules.CosineDecayRestarts
-# keras_core.src.optimizers.schedules.learning_rate_schedule.CosineDecayRestarts
+# keras.src.optimizers.schedules.learning_rate_schedule.CosineDecayRestarts
 r"-(A `LearningRateSchedule` that uses a cosine decay schedule with restarts.
 
     See [Loshchilov & Hutter, ICLR2016](https://arxiv.org/abs/1608.03983),
@@ -262,7 +261,6 @@ r"-(A `LearningRateSchedule` that uses a cosine decay schedule with restarts.
         step and outputs the decayed learning rate, a scalar tensor of the
         same type as `initial_learning_rate`.
     )-"
-
 
 # keras.src.optimizers.schedules.learning_rate_schedule.CosineDecayRestarts
 #' A `LearningRateSchedule` that uses a cosine decay schedule with restarts.
@@ -331,7 +329,7 @@ function (initial_learning_rate, first_decay_steps, t_mul = 2,
 
 # keras$optimizers$schedules$ExponentialDecay
 # keras.optimizers.schedules.ExponentialDecay
-# keras_core.src.optimizers.schedules.learning_rate_schedule.ExponentialDecay
+# keras.src.optimizers.schedules.learning_rate_schedule.ExponentialDecay
 r"-(A `LearningRateSchedule` that uses an exponential decay schedule.
 
     When training a model, it is often useful to lower the learning rate as
@@ -391,7 +389,6 @@ r"-(A `LearningRateSchedule` that uses an exponential decay schedule.
         step and outputs the decayed learning rate, a scalar tensor of the
         same type as `initial_learning_rate`.
     )-"
-
 
 # keras.src.optimizers.schedules.learning_rate_schedule.ExponentialDecay
 #' A `LearningRateSchedule` that uses an exponential decay schedule.
@@ -470,7 +467,7 @@ function (initial_learning_rate, decay_steps, decay_rate, staircase = FALSE,
 
 # keras$optimizers$schedules$InverseTimeDecay
 # keras.optimizers.schedules.InverseTimeDecay
-# keras_core.src.optimizers.schedules.learning_rate_schedule.InverseTimeDecay
+# keras.src.optimizers.schedules.learning_rate_schedule.InverseTimeDecay
 r"-(A `LearningRateSchedule` that uses an inverse time decay schedule.
 
     When training a model, it is often useful to lower the learning rate as
@@ -531,7 +528,6 @@ r"-(A `LearningRateSchedule` that uses an inverse time decay schedule.
         step and outputs the decayed learning rate, a scalar tensor of the
         same type as `initial_learning_rate`.
     )-"
-
 
 # keras.src.optimizers.schedules.learning_rate_schedule.InverseTimeDecay
 #' A `LearningRateSchedule` that uses an inverse time decay schedule.
@@ -611,7 +607,7 @@ function (initial_learning_rate, decay_steps, decay_rate, staircase = FALSE,
 
 # keras$optimizers$schedules$PiecewiseConstantDecay
 # keras.optimizers.schedules.PiecewiseConstantDecay
-# keras_core.src.optimizers.schedules.learning_rate_schedule.PiecewiseConstantDecay
+# keras.src.optimizers.schedules.learning_rate_schedule.PiecewiseConstantDecay
 r"-(A `LearningRateSchedule` that uses a piecewise constant decay schedule.
 
     The function returns a 1-arg callable to compute the piecewise constant
@@ -663,7 +659,6 @@ r"-(A `LearningRateSchedule` that uses a piecewise constant decay schedule.
         ValueError: if the number of elements in the `boundaries` and `values`
         lists do not match.
     )-"
-
 
 # keras.src.optimizers.schedules.learning_rate_schedule.PiecewiseConstantDecay
 #' A `LearningRateSchedule` that uses a piecewise constant decay schedule.
@@ -732,7 +727,7 @@ function (boundaries, values, name = "PiecewiseConstant")
 
 # keras$optimizers$schedules$PolynomialDecay
 # keras.optimizers.schedules.PolynomialDecay
-# keras_core.src.optimizers.schedules.learning_rate_schedule.PolynomialDecay
+# keras.src.optimizers.schedules.learning_rate_schedule.PolynomialDecay
 r"-(A `LearningRateSchedule` that uses a polynomial decay schedule.
 
     It is commonly observed that a monotonically decreasing learning rate, whose
@@ -813,7 +808,6 @@ r"-(A `LearningRateSchedule` that uses a polynomial decay schedule.
         step and outputs the decayed learning rate, a scalar tensor of the
         same type as `initial_learning_rate`.
     )-"
-
 
 # keras.src.optimizers.schedules.learning_rate_schedule.PolynomialDecay
 #' A `LearningRateSchedule` that uses a polynomial decay schedule.

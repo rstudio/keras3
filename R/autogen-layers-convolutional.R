@@ -3,7 +3,7 @@
 
 # keras$layers$Conv1D
 # keras.layers.Conv1D
-# keras_core.src.layers.convolutional.conv1d.Conv1D
+# keras.src.layers.convolutional.conv1d.Conv1D
 r"-(1D convolution layer (e.g. temporal convolution).
 
     This layer creates a convolution kernel that is convolved with the layer
@@ -88,7 +88,6 @@ r"-(1D convolution layer (e.g. temporal convolution).
     >>> print(y.shape)
     (4, 8, 32)
     )-"
-
 
 # keras.src.layers.convolutional.conv1d.Conv1D
 #' 1D convolution layer (e.g. temporal convolution).
@@ -199,7 +198,7 @@ function (object, filters, kernel_size, strides = 1L, padding = "valid",
 
 # keras$layers$Conv1DTranspose
 # keras.layers.Conv1DTranspose
-# keras_core.src.layers.convolutional.conv1d_transpose.Conv1DTranspose
+# keras.src.layers.convolutional.conv1d_transpose.Conv1DTranspose
 r"-(1D transposed convolution layer.
 
     The need for transposed convolutions generally arise from the desire to use
@@ -279,7 +278,6 @@ r"-(1D transposed convolution layer.
     >>> print(y.shape)
     (4, 21, 32)
     )-"
-
 
 # keras.src.layers.convolutional.conv1d_transpose.Conv1DTranspose
 #' 1D transposed convolution layer.
@@ -385,7 +383,7 @@ function (object, filters, kernel_size, strides = 1L, padding = "valid",
 
 # keras$layers$Conv2D
 # keras.layers.Conv2D
-# keras_core.src.layers.convolutional.conv2d.Conv2D
+# keras.src.layers.convolutional.conv2d.Conv2D
 r"-(2D convolution layer.
 
     This layer creates a convolution kernel that is convolved with the layer
@@ -465,7 +463,6 @@ r"-(2D convolution layer.
     >>> print(y.shape)
     (4, 8, 8, 32)
     )-"
-
 
 # keras.src.layers.convolutional.conv2d.Conv2D
 #' 2D convolution layer.
@@ -572,7 +569,7 @@ function (object, filters, kernel_size, strides = list(1L, 1L),
 
 # keras$layers$Conv2DTranspose
 # keras.layers.Conv2DTranspose
-# keras_core.src.layers.convolutional.conv2d_transpose.Conv2DTranspose
+# keras.src.layers.convolutional.conv2d_transpose.Conv2DTranspose
 r"-(2D transposed convolution layer.
 
     The need for transposed convolutions generally arise from the desire to use
@@ -654,7 +651,6 @@ r"-(2D transposed convolution layer.
     >>> print(y.shape)
     (4, 20, 16, 32)
     )-"
-
 
 # keras.src.layers.convolutional.conv2d_transpose.Conv2DTranspose
 #' 2D transposed convolution layer.
@@ -763,7 +759,7 @@ function (object, filters, kernel_size, strides = list(1L, 1L),
 
 # keras$layers$Conv3D
 # keras.layers.Conv3D
-# keras_core.src.layers.convolutional.conv3d.Conv3D
+# keras.src.layers.convolutional.conv3d.Conv3D
 r"-(3D convolution layer.
 
     This layer creates a convolution kernel that is convolved with the layer
@@ -849,7 +845,6 @@ r"-(3D convolution layer.
     >>> print(y.shape)
     (4, 8, 8, 8, 32)
     )-"
-
 
 # keras.src.layers.convolutional.conv3d.Conv3D
 #' 3D convolution layer.
@@ -962,7 +957,7 @@ function (object, filters, kernel_size, strides = list(1L, 1L,
 
 # keras$layers$Conv3DTranspose
 # keras.layers.Conv3DTranspose
-# keras_core.src.layers.convolutional.conv3d_transpose.Conv3DTranspose
+# keras.src.layers.convolutional.conv3d_transpose.Conv3DTranspose
 r"-(3D transposed convolution layer.
 
     The need for transposed convolutions generally arise from the desire to use
@@ -1049,7 +1044,6 @@ r"-(3D transposed convolution layer.
     >>> print(y.shape)
     (4, 20, 16, 24, 32)
     )-"
-
 
 # keras.src.layers.convolutional.conv3d_transpose.Conv3DTranspose
 #' 3D transposed convolution layer.
@@ -1163,7 +1157,7 @@ function (object, filters, kernel_size, strides = list(1L, 1L,
 
 # keras$layers$DepthwiseConv1D
 # keras.layers.DepthwiseConv1D
-# keras_core.src.layers.convolutional.depthwise_conv1d.DepthwiseConv1D
+# keras.src.layers.convolutional.depthwise_conv1d.DepthwiseConv1D
 r"-(1D depthwise convolution layer.
 
     Depthwise convolution is a type of convolution in which each input channel
@@ -1254,7 +1248,6 @@ r"-(1D depthwise convolution layer.
     >>> print(y.shape)
     (4, 4, 36)
     )-"
-
 
 # keras.src.layers.convolutional.depthwise_conv1d.DepthwiseConv1D
 #' 1D depthwise convolution layer.
@@ -1372,7 +1365,7 @@ function (object, kernel_size, strides = 1L, padding = "valid",
 
 # keras$layers$DepthwiseConv2D
 # keras.layers.DepthwiseConv2D
-# keras_core.src.layers.convolutional.depthwise_conv2d.DepthwiseConv2D
+# keras.src.layers.convolutional.depthwise_conv2d.DepthwiseConv2D
 r"-(2D depthwise convolution layer.
 
     Depthwise convolution is a type of convolution in which each input channel
@@ -1463,7 +1456,6 @@ r"-(2D depthwise convolution layer.
     >>> print(y.shape)
     (4, 8, 8, 36)
     )-"
-
 
 # keras.src.layers.convolutional.depthwise_conv2d.DepthwiseConv2D
 #' 2D depthwise convolution layer.
@@ -1581,7 +1573,7 @@ function (object, kernel_size, strides = list(1L, 1L), padding = "valid",
 
 # keras$layers$SeparableConv1D
 # keras.layers.SeparableConv1D
-# keras_core.src.layers.convolutional.separable_conv1d.SeparableConv1D
+# keras.src.layers.convolutional.separable_conv1d.SeparableConv1D
 r"-(1D separable convolution layer.
 
     This layer performs a depthwise convolution that acts separately on
@@ -1665,7 +1657,6 @@ r"-(1D separable convolution layer.
     >>> print(y.shape)
     (4, 4, 4)
     )-"
-
 
 # keras.src.layers.convolutional.separable_conv1d.SeparableConv1D
 #' 1D separable convolution layer.
@@ -1777,7 +1768,7 @@ function (object, filters, kernel_size, strides = 1L, padding = "valid",
 
 # keras$layers$SeparableConv2D
 # keras.layers.SeparableConv2D
-# keras_core.src.layers.convolutional.separable_conv2d.SeparableConv2D
+# keras.src.layers.convolutional.separable_conv2d.SeparableConv2D
 r"-(2D separable convolution layer.
 
     This layer performs a depthwise convolution that acts separately on
@@ -1861,7 +1852,6 @@ r"-(2D separable convolution layer.
     >>> print(y.shape)
     (4, 4, 4, 4)
     )-"
-
 
 # keras.src.layers.convolutional.separable_conv2d.SeparableConv2D
 #' 2D separable convolution layer.

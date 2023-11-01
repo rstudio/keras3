@@ -3,7 +3,7 @@
 
 # keras$ops$image$affine_transform
 # keras.ops.image.affine_transform
-# keras_core.src.ops.image.affine_transform
+# keras.src.ops.image.affine_transform
 r"-(Applies the given transform(s) to the image(s).
 
     Args:
@@ -79,7 +79,6 @@ r"-(Applies the given transform(s) to the image(s).
     >>> y.shape
     (2, 3, 64, 80)
     )-"
-
 
 # keras.src.ops.image.affine_transform
 #' Applies the given transform(s) to the image(s).
@@ -178,7 +177,7 @@ function (image, transform, interpolation = "bilinear", fill_mode = "constant",
 
 # keras$ops$image$extract_patches
 # keras.ops.image.extract_patches
-# keras_core.src.ops.image.extract_patches
+# keras.src.ops.image.extract_patches
 r"-(Extracts patches from the image(s).
 
     Args:
@@ -216,7 +215,6 @@ r"-(Extracts patches from the image(s).
     >>> patches.shape
     (18, 18, 27)
     )-"
-
 
 # keras.src.ops.image.extract_patches
 #' Extracts patches from the image(s).
@@ -273,7 +271,7 @@ function (image, size, strides = NULL, dilation_rate = 1L, padding = "valid",
 
 # keras$ops$image$map_coordinates
 # keras.ops.image.map_coordinates
-# keras_core.src.ops.image.map_coordinates
+# keras.src.ops.image.map_coordinates
 r"-(Map the input array to new coordinates by interpolation..
 
     Note that interpolation near boundaries differs from the scipy function,
@@ -310,7 +308,6 @@ r"-(Map the input array to new coordinates by interpolation..
         Output image or batch of images.
 
     )-"
-
 
 # keras.src.ops.image.map_coordinates
 #' Map the input array to new coordinates by interpolation..
@@ -363,7 +360,7 @@ function (input, coordinates, order, fill_mode = "constant",
 
 # keras$ops$image$pad_images
 # keras.ops.image.pad_images
-# keras_core.src.ops.image.pad_images
+# keras.src.ops.image.pad_images
 r"-(Pad `images` with zeros to the specified `height` and `width`.
 
     Args:
@@ -397,7 +394,6 @@ r"-(Pad `images` with zeros to the specified `height` and `width`.
     ... )
     >>> padded_batch.shape
     (2, 20, 30, 3))-"
-
 
 # keras.src.ops.image.pad_images
 #' Pad `images` with zeros to the specified `height` and `width`.
@@ -451,7 +447,7 @@ keras$ops$image$pad_images(images, top_padding, left_padding,
 
 # keras$ops$image$resize
 # keras.ops.image.resize
-# keras_core.src.ops.image.resize
+# keras.src.ops.image.resize
 r"-(Resize images to size using the specified interpolation method.
 
     Args:
@@ -491,7 +487,6 @@ r"-(Resize images to size using the specified interpolation method.
     >>> y.shape
     (2, 3, 2, 2)
     )-"
-
 
 # keras.src.ops.image.resize
 #' Resize images to size using the specified interpolation method.

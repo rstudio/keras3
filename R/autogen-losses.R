@@ -3,7 +3,7 @@
 
 # keras$losses$BinaryCrossentropy
 # keras.losses.BinaryCrossentropy
-# keras_core.src.losses.losses.BinaryCrossentropy
+# keras.src.losses.losses.BinaryCrossentropy
 r"-(Computes the cross-entropy loss between true labels and predicted labels.
 
     Use this cross-entropy loss for binary (0 or 1) classification applications.
@@ -83,7 +83,6 @@ r"-(Computes the cross-entropy loss between true labels and predicted labels.
     >>> # 2. Update `y_pred` to use probabilities instead of logits
     >>> y_pred = [0.6, 0.3, 0.2, 0.8] # OR [[0.6, 0.3], [0.2, 0.8]]
     )-"
-
 
 # keras.src.losses.losses.BinaryCrossentropy
 #' Computes the cross-entropy loss between true labels and predicted labels.
@@ -199,7 +198,7 @@ structure(function (y_true, y_pred, from_logits = FALSE, label_smoothing = 0,
 
 # keras$losses$BinaryFocalCrossentropy
 # keras.losses.BinaryFocalCrossentropy
-# keras_core.src.losses.losses.BinaryFocalCrossentropy
+# keras.src.losses.losses.BinaryFocalCrossentropy
 r"-(Computes focal cross-entropy loss between true labels and predictions.
 
     Binary cross-entropy loss is often used for binary (0 or 1) classification
@@ -329,7 +328,6 @@ r"-(Computes focal cross-entropy loss between true labels and predictions.
     >>> loss(y_true, y_pred)
     array([0.0004 0.8670], dtype=float32)
     )-"
-
 
 # keras.src.losses.losses.BinaryFocalCrossentropy
 #' Computes focal cross-entropy loss between true labels and predictions.
@@ -524,7 +522,7 @@ structure(function (y_true, y_pred, apply_class_balancing = FALSE,
 
 # keras$losses$CategoricalCrossentropy
 # keras.losses.CategoricalCrossentropy
-# keras_core.src.losses.losses.CategoricalCrossentropy
+# keras.src.losses.losses.CategoricalCrossentropy
 r"-(Computes the crossentropy loss between the labels and predictions.
 
     Use this crossentropy loss function when there are two or more label
@@ -582,7 +580,6 @@ r"-(Computes the crossentropy loss between the labels and predictions.
                   loss=keras.losses.CategoricalCrossentropy())
     ```
     )-"
-
 
 # keras.src.losses.losses.CategoricalCrossentropy
 #' Computes the crossentropy loss between the labels and predictions.
@@ -680,7 +677,7 @@ structure(function (y_true, y_pred, from_logits = FALSE, label_smoothing = 0,
 
 # keras$losses$CategoricalFocalCrossentropy
 # keras.losses.CategoricalFocalCrossentropy
-# keras_core.src.losses.losses.CategoricalFocalCrossentropy
+# keras.src.losses.losses.CategoricalFocalCrossentropy
 r"-(Computes the alpha balanced focal crossentropy loss.
 
     Use this crossentropy loss function when there are two or more label
@@ -779,7 +776,6 @@ r"-(Computes the alpha balanced focal crossentropy loss.
                   loss=keras.losses.CategoricalFocalCrossentropy())
     ```
     )-"
-
 
 # keras.src.losses.losses.CategoricalFocalCrossentropy
 #' Computes the alpha balanced focal crossentropy loss.
@@ -920,7 +916,7 @@ structure(function (y_true, y_pred, alpha = 0.25, gamma = 2,
 
 # keras$losses$CategoricalHinge
 # keras.losses.CategoricalHinge
-# keras_core.src.losses.losses.CategoricalHinge
+# keras.src.losses.losses.CategoricalHinge
 r"-(Computes the categorical hinge loss between `y_true` & `y_pred`.
 
     Formula:
@@ -937,7 +933,6 @@ r"-(Computes the categorical hinge loss between `y_true` & `y_pred`.
             Supported options are `"sum"`, `"sum_over_batch_size"` or `None`.
         name: Optional name for the loss instance.
     )-"
-
 
 # keras.src.losses.losses.CategoricalHinge
 #' Computes the categorical hinge loss between `y_true` & `y_pred`.
@@ -997,7 +992,7 @@ structure(function (y_true, y_pred, ..., reduction = "sum_over_batch_size",
 
 # keras$losses$CosineSimilarity
 # keras.losses.CosineSimilarity
-# keras_core.src.losses.losses.CosineSimilarity
+# keras.src.losses.losses.CosineSimilarity
 r"-(Computes the cosine similarity between `y_true` & `y_pred`.
 
     Note that it is a number between -1 and 1. When it is a negative number
@@ -1021,7 +1016,6 @@ r"-(Computes the cosine similarity between `y_true` & `y_pred`.
             Supported options are `"sum"`, `"sum_over_batch_size"` or `None`.
         name: Optional name for the loss instance.
     )-"
-
 
 # keras.src.losses.losses.CosineSimilarity
 #' Computes the cosine similarity between `y_true` & `y_pred`.
@@ -1090,7 +1084,7 @@ structure(function (y_true, y_pred, axis = -1L, ..., reduction = "sum_over_batch
 
 # keras$losses$Hinge
 # keras.losses.Hinge
-# keras_core.src.losses.losses.Hinge
+# keras.src.losses.losses.Hinge
 r"-(Computes the hinge loss between `y_true` & `y_pred`.
 
     Formula:
@@ -1108,7 +1102,6 @@ r"-(Computes the hinge loss between `y_true` & `y_pred`.
             Supported options are `"sum"`, `"sum_over_batch_size"` or `None`.
         name: Optional name for the loss instance.
     )-"
-
 
 # keras.src.losses.losses.Hinge
 #' Computes the hinge loss between `y_true` & `y_pred`.
@@ -1166,7 +1159,7 @@ structure(function (y_true, y_pred, ..., reduction = "sum_over_batch_size",
 
 # keras$losses$Huber
 # keras.losses.Huber
-# keras_core.src.losses.losses.Huber
+# keras.src.losses.losses.Huber
 r"-(Computes the Huber loss between `y_true` & `y_pred`.
 
     Formula:
@@ -1190,7 +1183,6 @@ r"-(Computes the Huber loss between `y_true` & `y_pred`.
             `"sum_over_batch_size"`.
         name: Optional name for the instance.
     )-"
-
 
 # keras.src.losses.losses.Huber
 #' Computes the Huber loss between `y_true` & `y_pred`.
@@ -1259,7 +1251,7 @@ structure(function (y_true, y_pred, delta = 1, ..., reduction = "sum_over_batch_
 
 # keras$losses$KLDivergence
 # keras.losses.KLDivergence
-# keras_core.src.losses.losses.KLDivergence
+# keras.src.losses.losses.KLDivergence
 r"-(Computes Kullback-Leibler divergence loss between `y_true` & `y_pred`.
 
     Formula:
@@ -1274,7 +1266,6 @@ r"-(Computes Kullback-Leibler divergence loss between `y_true` & `y_pred`.
             Supported options are `"sum"`, `"sum_over_batch_size"` or `None`.
         name: Optional name for the loss instance.
     )-"
-
 
 # keras.src.losses.losses.KLDivergence
 #' Computes Kullback-Leibler divergence loss between `y_true` & `y_pred`.
@@ -1332,7 +1323,7 @@ structure(function (y_true, y_pred, ..., reduction = "sum_over_batch_size",
 
 # keras$losses$LogCosh
 # keras.losses.LogCosh
-# keras_core.src.losses.losses.LogCosh
+# keras.src.losses.losses.LogCosh
 r"-(Computes the logarithm of the hyperbolic cosine of the prediction error.
 
     Formula:
@@ -1349,7 +1340,6 @@ r"-(Computes the logarithm of the hyperbolic cosine of the prediction error.
             `"sum_over_batch_size"`.
         name: Optional name for the instance.
     )-"
-
 
 # keras.src.losses.losses.LogCosh
 #' Computes the logarithm of the hyperbolic cosine of the prediction error.
@@ -1409,7 +1399,7 @@ structure(function (y_true, y_pred, ..., reduction = "sum_over_batch_size",
 
 # keras$losses$MeanAbsoluteError
 # keras.losses.MeanAbsoluteError
-# keras_core.src.losses.losses.MeanAbsoluteError
+# keras.src.losses.losses.MeanAbsoluteError
 r"-(Computes the mean of absolute difference between labels and predictions.
 
     Formula:
@@ -1424,7 +1414,6 @@ r"-(Computes the mean of absolute difference between labels and predictions.
             Supported options are `"sum"`, `"sum_over_batch_size"` or `None`.
         name: Optional name for the loss instance.
     )-"
-
 
 # keras.src.losses.losses.MeanAbsoluteError
 #' Computes the mean of absolute difference between labels and predictions.
@@ -1475,7 +1464,7 @@ structure(function (y_true, y_pred, ..., reduction = "sum_over_batch_size",
 
 # keras$losses$MeanAbsolutePercentageError
 # keras.losses.MeanAbsolutePercentageError
-# keras_core.src.losses.losses.MeanAbsolutePercentageError
+# keras.src.losses.losses.MeanAbsolutePercentageError
 r"-(Computes the mean absolute percentage error between `y_true` & `y_pred`.
 
     Formula:
@@ -1490,7 +1479,6 @@ r"-(Computes the mean absolute percentage error between `y_true` & `y_pred`.
             Supported options are `"sum"`, `"sum_over_batch_size"` or `None`.
         name: Optional name for the loss instance.
     )-"
-
 
 # keras.src.losses.losses.MeanAbsolutePercentageError
 #' Computes the mean absolute percentage error between `y_true` & `y_pred`.
@@ -1548,7 +1536,7 @@ structure(function (y_true, y_pred, ..., reduction = "sum_over_batch_size",
 
 # keras$losses$MeanSquaredError
 # keras.losses.MeanSquaredError
-# keras_core.src.losses.losses.MeanSquaredError
+# keras.src.losses.losses.MeanSquaredError
 r"-(Computes the mean of squares of errors between labels and predictions.
 
     Formula:
@@ -1563,7 +1551,6 @@ r"-(Computes the mean of squares of errors between labels and predictions.
             Supported options are `"sum"`, `"sum_over_batch_size"` or `None`.
         name: Optional name for the loss instance.
     )-"
-
 
 # keras.src.losses.losses.MeanSquaredError
 #' Computes the mean of squares of errors between labels and predictions.
@@ -1616,7 +1603,7 @@ structure(function (y_true, y_pred, ..., reduction = "sum_over_batch_size",
 
 # keras$losses$MeanSquaredLogarithmicError
 # keras.losses.MeanSquaredLogarithmicError
-# keras_core.src.losses.losses.MeanSquaredLogarithmicError
+# keras.src.losses.losses.MeanSquaredLogarithmicError
 r"-(Computes the mean squared logarithmic error between `y_true` & `y_pred`.
 
     Formula:
@@ -1631,7 +1618,6 @@ r"-(Computes the mean squared logarithmic error between `y_true` & `y_pred`.
             Supported options are `"sum"`, `"sum_over_batch_size"` or `None`.
         name: Optional name for the loss instance.
     )-"
-
 
 # keras.src.losses.losses.MeanSquaredLogarithmicError
 #' Computes the mean squared logarithmic error between `y_true` & `y_pred`.
@@ -1689,7 +1675,7 @@ structure(function (y_true, y_pred, ..., reduction = "sum_over_batch_size",
 
 # keras$losses$Poisson
 # keras.losses.Poisson
-# keras_core.src.losses.losses.Poisson
+# keras.src.losses.losses.Poisson
 r"-(Computes the Poisson loss between `y_true` & `y_pred`.
 
     Formula:
@@ -1704,7 +1690,6 @@ r"-(Computes the Poisson loss between `y_true` & `y_pred`.
             Supported options are `"sum"`, `"sum_over_batch_size"` or `None`.
         name: Optional name for the loss instance.
     )-"
-
 
 # keras.src.losses.losses.Poisson
 #' Computes the Poisson loss between `y_true` & `y_pred`.
@@ -1762,7 +1747,7 @@ structure(function (y_true, y_pred, ..., reduction = "sum_over_batch_size",
 
 # keras$losses$SparseCategoricalCrossentropy
 # keras.losses.SparseCategoricalCrossentropy
-# keras_core.src.losses.losses.SparseCategoricalCrossentropy
+# keras.src.losses.losses.SparseCategoricalCrossentropy
 r"-(Computes the crossentropy loss between the labels and predictions.
 
     Use this crossentropy loss function when there are two or more label
@@ -1817,7 +1802,6 @@ r"-(Computes the crossentropy loss between the labels and predictions.
                   loss=keras.losses.SparseCategoricalCrossentropy())
     ```
     )-"
-
 
 # keras.src.losses.losses.SparseCategoricalCrossentropy
 #' Computes the crossentropy loss between the labels and predictions.
@@ -1920,7 +1904,7 @@ structure(function (y_true, y_pred, from_logits = FALSE, ignore_class = NULL,
 
 # keras$losses$SquaredHinge
 # keras.losses.SquaredHinge
-# keras_core.src.losses.losses.SquaredHinge
+# keras.src.losses.losses.SquaredHinge
 r"-(Computes the squared hinge loss between `y_true` & `y_pred`.
 
     Formula:
@@ -1938,7 +1922,6 @@ r"-(Computes the squared hinge loss between `y_true` & `y_pred`.
             Supported options are `"sum"`, `"sum_over_batch_size"` or `None`.
         name: Optional name for the loss instance.
     )-"
-
 
 # keras.src.losses.losses.SquaredHinge
 #' Computes the squared hinge loss between `y_true` & `y_pred`.

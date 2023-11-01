@@ -3,7 +3,7 @@
 
 # keras$layers$AdditiveAttention
 # keras.layers.AdditiveAttention
-# keras_core.src.layers.attention.additive_attention.AdditiveAttention
+# keras.src.layers.attention.additive_attention.AdditiveAttention
 r"-(Additive attention layer, a.k.a. Bahdanau-style attention.
 
     Inputs are a list with 2 or 3 elements:
@@ -55,7 +55,6 @@ r"-(Additive attention layer, a.k.a. Bahdanau-style attention.
         (Optional) Attention scores after masking and softmax with shape
             `(batch_size, Tq, Tv)`.
     )-"
-
 
 # keras.src.layers.attention.additive_attention.AdditiveAttention
 #' Additive attention layer, a.k.a. Bahdanau-style attention.
@@ -127,7 +126,7 @@ function (object, use_scale = TRUE, dropout = 0, ...)
 
 # keras$layers$Attention
 # keras.layers.Attention
-# keras_core.src.layers.attention.attention.Attention
+# keras.src.layers.attention.attention.Attention
 r"-(Dot-product attention layer, a.k.a. Luong-style attention.
 
     Inputs are a list with 2 or 3 elements:
@@ -182,7 +181,6 @@ r"-(Dot-product attention layer, a.k.a. Luong-style attention.
         (Optional) Attention scores after masking and softmax with shape
             `(batch_size, Tq, Tv)`.
     )-"
-
 
 # keras.src.layers.attention.attention.Attention
 #' Dot-product attention layer, a.k.a. Luong-style attention.
@@ -258,7 +256,7 @@ function (object, use_scale = FALSE, score_mode = "dot", dropout = 0,
 
 # keras$layers$GroupQueryAttention
 # keras.layers.GroupQueryAttention
-# keras_core.src.layers.attention.grouped_query_attention.GroupedQueryAttention
+# keras.src.layers.attention.grouped_query_attention.GroupedQueryAttention
 r"-(Grouped Query Attention layer.
 
     This is an implementation of grouped-query attention introduced by
@@ -325,7 +323,6 @@ r"-(Grouped Query Attention layer.
         attention_scores: (Optional) attention coefficients of shape
             `(batch_dim, num_query_heads, target_seq_len, source_seq_len)`.
     )-"
-
 
 # keras.src.layers.attention.grouped_query_attention.GroupedQueryAttention
 #' Grouped Query Attention layer.
@@ -416,7 +413,7 @@ function (object, head_dim, num_query_heads, num_key_value_heads,
 
 # keras$layers$MultiHeadAttention
 # keras.layers.MultiHeadAttention
-# keras_core.src.layers.attention.multi_head_attention.MultiHeadAttention
+# keras.src.layers.attention.multi_head_attention.MultiHeadAttention
 r"-(MultiHeadAttention layer.
 
     This is an implementation of multi-headed attention as described in the
@@ -492,7 +489,6 @@ r"-(MultiHeadAttention layer.
         attention_scores: (Optional) multi-head attention coefficients over
             attention axes.
     )-"
-
 
 # keras.src.layers.attention.multi_head_attention.MultiHeadAttention
 #' MultiHeadAttention layer.

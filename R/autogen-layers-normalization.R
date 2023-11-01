@@ -3,7 +3,7 @@
 
 # keras$layers$BatchNormalization
 # keras.layers.BatchNormalization
-# keras_core.src.layers.normalization.batch_normalization.BatchNormalization
+# keras.src.layers.normalization.batch_normalization.BatchNormalization
 r"-(Layer that normalizes its inputs.
 
     Batch normalization applies a transformation that maintains the mean output
@@ -108,7 +108,6 @@ r"-(Layer that normalizes its inputs.
         `compile()` on a model, the new value doesn't take effect for this model
         until `compile()` is called again.
     )-"
-
 
 # keras.src.layers.normalization.batch_normalization.BatchNormalization
 #' Layer that normalizes its inputs.
@@ -236,7 +235,7 @@ function (object, axis = -1L, momentum = 0.99, epsilon = 0.001,
 
 # keras$layers$GroupNormalization
 # keras.layers.GroupNormalization
-# keras_core.src.layers.normalization.group_normalization.GroupNormalization
+# keras.src.layers.normalization.group_normalization.GroupNormalization
 r"-(Group normalization layer.
 
     Group Normalization divides the channels into groups and computes
@@ -290,7 +289,6 @@ r"-(Group normalization layer.
 
     - [Yuxin Wu & Kaiming He, 2018](https://arxiv.org/abs/1803.08494)
     )-"
-
 
 # keras.src.layers.normalization.group_normalization.GroupNormalization
 #' Group normalization layer.
@@ -371,7 +369,7 @@ function (object, groups = 32L, axis = -1L, epsilon = 0.001,
 
 # keras$layers$LayerNormalization
 # keras.layers.LayerNormalization
-# keras_core.src.layers.normalization.layer_normalization.LayerNormalization
+# keras.src.layers.normalization.layer_normalization.LayerNormalization
 r"-(Layer normalization layer (Ba et al., 2016).
 
     Normalize the activations of the previous layer for each given example in a
@@ -467,7 +465,6 @@ r"-(Layer normalization layer (Ba et al., 2016).
 
     - [Lei Ba et al., 2016](https://arxiv.org/abs/1607.06450).
     )-"
-
 
 # keras.src.layers.normalization.layer_normalization.LayerNormalization
 #' Layer normalization layer (Ba et al., 2016).
@@ -586,7 +583,7 @@ function (object, axis = -1L, epsilon = 0.001, center = TRUE,
 
 # keras$layers$SpectralNormalization
 # keras.layers.SpectralNormalization
-# keras_core.src.layers.normalization.spectral_normalization.SpectralNormalization
+# keras.src.layers.normalization.spectral_normalization.SpectralNormalization
 r"-(Performs spectral normalization on the weights of a target layer.
 
     This wrapper controls the Lipschitz constant of the weights of a layer by
@@ -619,7 +616,6 @@ r"-(Performs spectral normalization on the weights of a target layer.
 
     - [Spectral Normalization for GAN](https://arxiv.org/abs/1802.05957).
     )-"
-
 
 # keras.src.layers.normalization.spectral_normalization.SpectralNormalization
 #' Performs spectral normalization on the weights of a target layer.
@@ -674,7 +670,7 @@ function (object, layer, power_iterations = 1L, ...)
 
 # keras$layers$UnitNormalization
 # keras.layers.UnitNormalization
-# keras_core.src.layers.normalization.unit_normalization.UnitNormalization
+# keras.src.layers.normalization.unit_normalization.UnitNormalization
 r"-(Unit normalization layer.
 
     Normalize a batch of inputs so that each input in the batch has a L2 norm
@@ -693,7 +689,6 @@ r"-(Unit normalization layer.
             typically the batch axis or axes. `-1` is the last dimension
             in the input. Defaults to `-1`.
     )-"
-
 
 # keras.src.layers.normalization.unit_normalization.UnitNormalization
 #' Unit normalization layer.

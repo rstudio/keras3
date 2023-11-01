@@ -3,7 +3,7 @@
 
 # keras$activations$elu
 # keras.activations.elu
-# keras_core.src.activations.activations.elu
+# keras.src.activations.activations.elu
 r"-(Exponential Linear Unit.
 
     The exponential linear unit (ELU) with `alpha > 0` is define as:
@@ -27,7 +27,6 @@ r"-(Exponential Linear Unit.
 
     - [Clevert et al., 2016](https://arxiv.org/abs/1511.07289)
     )-"
-
 
 # keras.src.activations.activations.elu
 #' Exponential Linear Unit.
@@ -67,13 +66,12 @@ structure(function (x, alpha = 1)
 
 # keras$activations$exponential
 # keras.activations.exponential
-# keras_core.src.activations.activations.exponential
+# keras.src.activations.activations.exponential
 r"-(Exponential activation function.
 
     Args:
         x: Input tensor.
     )-"
-
 
 # keras.src.activations.activations.exponential
 #' Exponential activation function.
@@ -94,7 +92,7 @@ structure(function (x)
 
 # keras$activations$gelu
 # keras.activations.gelu
-# keras_core.src.activations.activations.gelu
+# keras.src.activations.activations.gelu
 r"-(Gaussian error linear unit (GELU) activation function.
 
     The Gaussian error linear unit (GELU) is defined as:
@@ -113,7 +111,6 @@ r"-(Gaussian error linear unit (GELU) activation function.
 
     - [Hendrycks et al., 2016](https://arxiv.org/abs/1606.08415)
     )-"
-
 
 # keras.src.activations.activations.gelu
 #' Gaussian error linear unit (GELU) activation function.
@@ -147,7 +144,7 @@ structure(function (x, approximate = FALSE)
 
 # keras$activations$hard_sigmoid
 # keras.activations.hard_sigmoid
-# keras_core.src.activations.activations.hard_sigmoid
+# keras.src.activations.activations.hard_sigmoid
 r"-(Hard sigmoid activation function.
 
     The hard sigmoid activation is defined as:
@@ -166,7 +163,6 @@ r"-(Hard sigmoid activation function.
 
     - [Wikipedia "Hard sigmoid"](https://en.wikipedia.org/wiki/Hard_sigmoid)
     )-"
-
 
 # keras.src.activations.activations.hard_sigmoid
 #' Hard sigmoid activation function.
@@ -200,7 +196,7 @@ structure(function (x)
 
 # keras$activations$leaky_relu
 # keras.activations.leaky_relu
-# keras_core.src.activations.activations.leaky_relu
+# keras.src.activations.activations.leaky_relu
 r"-(Leaky relu activation function.
 
     Args:
@@ -208,7 +204,6 @@ r"-(Leaky relu activation function.
         negative_slope: A `float` that controls the slope
             for values lower than the threshold.
     )-"
-
 
 # keras.src.activations.activations.leaky_relu
 #' Leaky relu activation function.
@@ -231,7 +226,7 @@ structure(function (x, negative_slope = 0.2)
 
 # keras$activations$linear
 # keras.activations.linear
-# keras_core.src.activations.activations.linear
+# keras.src.activations.activations.linear
 r"-(Linear activation function (pass-through).
 
     A "linear" activation is an identity function:
@@ -240,7 +235,6 @@ r"-(Linear activation function (pass-through).
     Args:
         x: Input tensor.
     )-"
-
 
 # keras.src.activations.activations.linear
 #' Linear activation function (pass-through).
@@ -265,7 +259,7 @@ structure(function (x)
 
 # keras$activations$log_softmax
 # keras.activations.log_softmax
-# keras_core.src.activations.activations.log_softmax
+# keras.src.activations.activations.log_softmax
 r"-(Log-Softmax activation function.
 
     Each input vector is handled independently.
@@ -276,7 +270,6 @@ r"-(Log-Softmax activation function.
         x: Input tensor.
         axis: Integer, axis along which the softmax is applied.
     )-"
-
 
 # keras.src.activations.activations.log_softmax
 #' Log-Softmax activation function.
@@ -303,7 +296,7 @@ structure(function (x, axis = -1L)
 
 # keras$activations$mish
 # keras.activations.mish
-# keras_core.src.activations.activations.mish
+# keras.src.activations.activations.mish
 r"-(Mish activation function.
 
     It is defined as:
@@ -321,7 +314,6 @@ r"-(Mish activation function.
 
     - [Misra, 2019](https://arxiv.org/abs/1908.08681)
     )-"
-
 
 # keras.src.activations.activations.mish
 #' Mish activation function.
@@ -354,7 +346,7 @@ structure(function (x)
 
 # keras$activations$relu
 # keras.activations.relu
-# keras_core.src.activations.activations.relu
+# keras.src.activations.activations.relu
 r"-(Applies the rectified linear unit activation function.
 
     With default values, this returns the standard ReLU activation:
@@ -388,7 +380,6 @@ r"-(Applies the rectified linear unit activation function.
     Returns:
         A tensor with the same shape and dtype as input `x`.
     )-"
-
 
 # keras.src.activations.activations.relu
 #' Applies the rectified linear unit activation function.
@@ -440,7 +431,7 @@ structure(function (x, negative_slope = 0, max_value = NULL,
 
 # keras$activations$relu6
 # keras.activations.relu6
-# keras_core.src.activations.activations.relu6
+# keras.src.activations.activations.relu6
 r"-(Relu6 activation function.
 
     It's the ReLU function, but truncated to a maximum value of 6.
@@ -448,7 +439,6 @@ r"-(Relu6 activation function.
     Args:
         x: Input tensor.
     )-"
-
 
 # keras.src.activations.activations.relu6
 #' Relu6 activation function.
@@ -472,7 +462,7 @@ structure(function (x)
 
 # keras$activations$selu
 # keras.activations.selu
-# keras_core.src.activations.activations.selu
+# keras.src.activations.activations.selu
 r"-(Scaled Exponential Linear Unit (SELU).
 
     The Scaled Exponential Linear Unit (SELU) activation function is defined as:
@@ -508,7 +498,6 @@ r"-(Scaled Exponential Linear Unit (SELU).
 
     - [Klambauer et al., 2017](https://arxiv.org/abs/1706.02515)
     )-"
-
 
 # keras.src.activations.activations.selu
 #' Scaled Exponential Linear Unit (SELU).
@@ -558,7 +547,7 @@ structure(function (x)
 
 # keras$activations$sigmoid
 # keras.activations.sigmoid
-# keras_core.src.activations.activations.sigmoid
+# keras.src.activations.activations.sigmoid
 r"-(Sigmoid activation function.
 
     It is defined as: `sigmoid(x) = 1 / (1 + exp(-x))`.
@@ -574,7 +563,6 @@ r"-(Sigmoid activation function.
     Args:
         x: Input tensor.
     )-"
-
 
 # keras.src.activations.activations.sigmoid
 #' Sigmoid activation function.
@@ -606,7 +594,7 @@ structure(function (x)
 
 # keras$activations$silu
 # keras.activations.silu
-# keras_core.src.activations.activations.silu
+# keras.src.activations.activations.silu
 r"-(Swish (or Silu) activation function.
 
     It is defined as: `swish(x) = x * sigmoid(x)`.
@@ -622,7 +610,6 @@ r"-(Swish (or Silu) activation function.
 
     - [Ramachandran et al., 2017](https://arxiv.org/abs/1710.05941)
     )-"
-
 
 # keras.src.activations.activations.silu
 #' Swish (or Silu) activation function.
@@ -653,7 +640,7 @@ structure(function (x)
 
 # keras$activations$softmax
 # keras.activations.softmax
-# keras_core.src.activations.activations.softmax
+# keras.src.activations.activations.softmax
 r"-(Softmax converts a vector of values to a probability distribution.
 
     The elements of the output vector are in range `[0, 1]` and sum to 1.
@@ -675,7 +662,6 @@ r"-(Softmax converts a vector of values to a probability distribution.
         x : Input tensor.
         axis: Integer, axis along which the softmax is applied.
     )-"
-
 
 # keras.src.activations.activations.softmax
 #' Softmax converts a vector of values to a probability distribution.
@@ -713,7 +699,7 @@ structure(function (x, axis = -1L)
 
 # keras$activations$softplus
 # keras.activations.softplus
-# keras_core.src.activations.activations.softplus
+# keras.src.activations.activations.softplus
 r"-(Softplus activation function.
 
     It is defined as: `softplus(x) = log(exp(x) + 1)`.
@@ -721,7 +707,6 @@ r"-(Softplus activation function.
     Args:
         x: Input tensor.
     )-"
-
 
 # keras.src.activations.activations.softplus
 #' Softplus activation function.
@@ -745,7 +730,7 @@ structure(function (x)
 
 # keras$activations$softsign
 # keras.activations.softsign
-# keras_core.src.activations.activations.softsign
+# keras.src.activations.activations.softsign
 r"-(Softsign activation function.
 
     Softsign is defined as: `softsign(x) = x / (abs(x) + 1)`.
@@ -753,7 +738,6 @@ r"-(Softsign activation function.
     Args:
         x: Input tensor.
     )-"
-
 
 # keras.src.activations.activations.softsign
 #' Softsign activation function.
@@ -777,7 +761,7 @@ structure(function (x)
 
 # keras$activations$tanh
 # keras.activations.tanh
-# keras_core.src.activations.activations.tanh
+# keras.src.activations.activations.tanh
 r"-(Hyperbolic tangent activation function.
 
     It is defined as:
@@ -787,7 +771,6 @@ r"-(Hyperbolic tangent activation function.
     Args:
         x: Input tensor.
     )-"
-
 
 # keras.src.activations.activations.tanh
 #' Hyperbolic tangent activation function.

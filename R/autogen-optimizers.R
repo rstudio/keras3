@@ -3,7 +3,7 @@
 
 # keras$optimizers$Adadelta
 # keras.optimizers.Adadelta
-# keras_core.src.optimizers.adadelta.Adadelta
+# keras.src.optimizers.adadelta.Adadelta
 r"-(Optimizer that implements the Adadelta algorithm.
 
     Adadelta optimization is a stochastic gradient descent method that is based
@@ -72,7 +72,6 @@ r"-(Optimizer that implements the Adadelta algorithm.
 
     - [Zeiler, 2012](http://arxiv.org/abs/1212.5701)
     )-"
-
 
 # keras.src.optimizers.adadelta.Adadelta
 #' Optimizer that implements the Adadelta algorithm.
@@ -160,7 +159,7 @@ function (learning_rate = 0.001, rho = 0.95, epsilon = 1e-07,
 
 # keras$optimizers$Adafactor
 # keras.optimizers.Adafactor
-# keras_core.src.optimizers.adafactor.Adafactor
+# keras.src.optimizers.adafactor.Adafactor
 r"-(Optimizer that implements the Adafactor algorithm.
 
     Adafactor is commonly used in NLP tasks, and has the advantage
@@ -232,7 +231,6 @@ r"-(Optimizer that implements the Adafactor algorithm.
     - [Shazeer, Noam et al., 2018](https://arxiv.org/abs/1804.04235).
 
     )-"
-
 
 # keras.src.optimizers.adafactor.Adafactor
 #' Optimizer that implements the Adafactor algorithm.
@@ -323,7 +321,7 @@ function (learning_rate = 0.001, beta_2_decay = -0.8, epsilon_1 = 1e-30,
 
 # keras$optimizers$Adagrad
 # keras.optimizers.Adagrad
-# keras_core.src.optimizers.adagrad.Adagrad
+# keras.src.optimizers.adagrad.Adagrad
 r"-(Optimizer that implements the Adagrad algorithm.
 
     Adagrad is an optimizer with parameter-specific learning rates,
@@ -386,7 +384,6 @@ r"-(Optimizer that implements the Adagrad algorithm.
     - [Duchi et al., 2011](
         http://www.jmlr.org/papers/volume12/duchi11a/duchi11a.pdf).
     )-"
-
 
 # keras.src.optimizers.adagrad.Adagrad
 #' Optimizer that implements the Adagrad algorithm.
@@ -468,7 +465,7 @@ function (learning_rate = 0.001, initial_accumulator_value = 0.1,
 
 # keras$optimizers$Adam
 # keras.optimizers.Adam
-# keras_core.src.optimizers.adam.Adam
+# keras.src.optimizers.adam.Adam
 r"-(Optimizer that implements the Adam algorithm.
 
     Adam optimization is a stochastic gradient descent method that is based on
@@ -540,7 +537,6 @@ r"-(Optimizer that implements the Adam algorithm.
           automatically set a loss scale factor.
 
     )-"
-
 
 # keras.src.optimizers.adam.Adam
 #' Optimizer that implements the Adam algorithm.
@@ -632,7 +628,7 @@ function (learning_rate = 0.001, beta_1 = 0.9, beta_2 = 0.999,
 
 # keras$optimizers$Adamax
 # keras.optimizers.Adamax
-# keras_core.src.optimizers.adamax.Adamax
+# keras.src.optimizers.adamax.Adamax
 r"-(Optimizer that implements the Adamax algorithm.
 
     Adamax, a variant of Adam based on the infinity norm, is a first-order
@@ -714,7 +710,6 @@ r"-(Optimizer that implements the Adamax algorithm.
 
     - [Kingma et al., 2014](http://arxiv.org/abs/1412.6980)
     )-"
-
 
 # keras.src.optimizers.adamax.Adamax
 #' Optimizer that implements the Adamax algorithm.
@@ -816,7 +811,7 @@ function (learning_rate = 0.001, beta_1 = 0.9, beta_2 = 0.999,
 
 # keras$optimizers$AdamW
 # keras.optimizers.AdamW
-# keras_core.src.optimizers.adamw.AdamW
+# keras.src.optimizers.adamw.AdamW
 r"-(Optimizer that implements the AdamW algorithm.
 
     AdamW optimization is a stochastic gradient descent method that is based on
@@ -898,7 +893,6 @@ r"-(Optimizer that implements the AdamW algorithm.
     - [Reddi et al., 2018](
         https://openreview.net/pdf?id=ryQu7f-RZ) for `amsgrad`.
     )-"
-
 
 # keras.src.optimizers.adamw.AdamW
 #' Optimizer that implements the AdamW algorithm.
@@ -1000,7 +994,7 @@ function (learning_rate = 0.001, weight_decay = 0.004, beta_1 = 0.9,
 
 # keras$optimizers$Ftrl
 # keras.optimizers.Ftrl
-# keras_core.src.optimizers.ftrl.Ftrl
+# keras.src.optimizers.ftrl.Ftrl
 r"-(Optimizer that implements the FTRL algorithm.
 
     "Follow The Regularized Leader" (FTRL) is an optimization algorithm
@@ -1106,7 +1100,6 @@ r"-(Optimizer that implements the FTRL algorithm.
           automatically set a loss scale factor.
 
     )-"
-
 
 # keras.src.optimizers.ftrl.Ftrl
 #' Optimizer that implements the FTRL algorithm.
@@ -1233,7 +1226,7 @@ function (learning_rate = 0.001, learning_rate_power = -0.5,
 
 # keras$optimizers$Lion
 # keras.optimizers.Lion
-# keras_core.src.optimizers.lion.Lion
+# keras.src.optimizers.lion.Lion
 r"-(Optimizer that implements the Lion algorithm.
 
     The Lion optimizer is a stochastic-gradient-descent method that uses the
@@ -1306,7 +1299,6 @@ r"-(Optimizer that implements the Lion algorithm.
         http://github.com/google/automl/tree/master/lion)
 
     )-"
-
 
 # keras.src.optimizers.lion.Lion
 #' Optimizer that implements the Lion algorithm.
@@ -1397,7 +1389,7 @@ function (learning_rate = 0.001, beta_1 = 0.9, beta_2 = 0.99,
 
 # keras$optimizers$LossScaleOptimizer
 # keras.optimizers.LossScaleOptimizer
-# keras_core.src.optimizers.loss_scale_optimizer.LossScaleOptimizer
+# keras.src.optimizers.loss_scale_optimizer.LossScaleOptimizer
 r"-(An optimizer that dynamically scales the loss to prevent underflow.
 
     Loss scaling is a technique to prevent numeric underflow in intermediate
@@ -1463,7 +1455,6 @@ r"-(An optimizer that dynamically scales the loss to prevent underflow.
           automatically set a loss scale factor.
 
     )-"
-
 
 # keras.src.optimizers.loss_scale_optimizer.LossScaleOptimizer
 #' An optimizer that dynamically scales the loss to prevent underflow.
@@ -1549,7 +1540,7 @@ function (inner_optimizer, initial_scale = 32768, dynamic_growth_steps = 2000L,
 
 # keras$optimizers$Nadam
 # keras.optimizers.Nadam
-# keras_core.src.optimizers.nadam.Nadam
+# keras.src.optimizers.nadam.Nadam
 r"-(Optimizer that implements the Nadam algorithm.
 
     Much like Adam is essentially RMSprop with momentum, Nadam is Adam with
@@ -1616,7 +1607,6 @@ r"-(Optimizer that implements the Nadam algorithm.
     - [Dozat, 2015](http://cs229.stanford.edu/proj2015/054_report.pdf).
 
     )-"
-
 
 # keras.src.optimizers.nadam.Nadam
 #' Optimizer that implements the Nadam algorithm.
@@ -1701,7 +1691,7 @@ function (learning_rate = 0.001, beta_1 = 0.9, beta_2 = 0.999,
 
 # keras$optimizers$RMSprop
 # keras.optimizers.RMSprop
-# keras_core.src.optimizers.rmsprop.RMSprop
+# keras.src.optimizers.rmsprop.RMSprop
 r"-(Optimizer that implements the RMSprop algorithm.
 
     The gist of RMSprop is to:
@@ -1783,7 +1773,6 @@ r"-(Optimizer that implements the RMSprop algorithm.
     - [Hinton, 2012](
         http://www.cs.toronto.edu/~tijmen/csc321/slides/lecture_slides_lec6.pdf)
     )-"
-
 
 # keras.src.optimizers.rmsprop.RMSprop
 #' Optimizer that implements the RMSprop algorithm.
@@ -1885,7 +1874,7 @@ function (learning_rate = 0.001, rho = 0.9, momentum = 0, epsilon = 1e-07,
 
 # keras$optimizers$SGD
 # keras.optimizers.SGD
-# keras_core.src.optimizers.sgd.SGD
+# keras.src.optimizers.sgd.SGD
 r"-(Gradient descent (with momentum) optimizer.
 
     Update rule for parameter `w` with gradient `g` when `momentum` is 0:
@@ -1957,7 +1946,6 @@ r"-(Gradient descent (with momentum) optimizer.
           automatically set a loss scale factor.
 
     )-"
-
 
 # keras.src.optimizers.sgd.SGD
 #' Gradient descent (with momentum) optimizer.

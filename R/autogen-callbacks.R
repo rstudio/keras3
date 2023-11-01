@@ -3,7 +3,7 @@
 
 # keras$callbacks$BackupAndRestore
 # keras.callbacks.BackupAndRestore
-# keras_core.src.callbacks.backup_and_restore_callback.BackupAndRestore
+# keras.src.callbacks.backup_and_restore_callback.BackupAndRestore
 r"-(Callback to back up and restore the training state.
 
     `BackupAndRestore` callback is intended to recover training from an
@@ -66,7 +66,6 @@ r"-(Callback to back up and restore the training state.
           training is finished. Use `False` if you'd like to keep the checkpoint
           for future usage.
     )-"
-
 
 # keras.src.callbacks.backup_and_restore_callback.BackupAndRestore
 #' Callback to back up and restore the training state.
@@ -146,7 +145,7 @@ function (backup_dir, save_freq = "epoch", delete_checkpoint = TRUE)
 
 # keras$callbacks$CSVLogger
 # keras.callbacks.CSVLogger
-# keras_core.src.callbacks.csv_logger.CSVLogger
+# keras.src.callbacks.csv_logger.CSVLogger
 r"-(Callback that streams epoch results to a CSV file.
 
     Supports all values that can be represented as a string,
@@ -165,7 +164,6 @@ r"-(Callback that streams epoch results to a CSV file.
     model.fit(X_train, Y_train, callbacks=[csv_logger])
     ```
     )-"
-
 
 # keras.src.callbacks.csv_logger.CSVLogger
 #' Callback that streams epoch results to a CSV file.
@@ -199,7 +197,7 @@ function (filename, separator = ",", append = FALSE)
 
 # keras$callbacks$EarlyStopping
 # keras.callbacks.EarlyStopping
-# keras_core.src.callbacks.early_stopping.EarlyStopping
+# keras.src.callbacks.early_stopping.EarlyStopping
 r"-(Stop training when a monitored metric has stopped improving.
 
     Assuming the goal of a training is to minimize the loss. With this, the
@@ -256,7 +254,6 @@ r"-(Stop training when a monitored metric has stopped improving.
     >>> len(history.history['loss'])  # Only 4 epochs are run.
     4
     )-"
-
 
 # keras.src.callbacks.early_stopping.EarlyStopping
 #' Stop training when a monitored metric has stopped improving.
@@ -332,7 +329,7 @@ function (monitor = "val_loss", min_delta = 0L, patience = 0L,
 
 # keras$callbacks$LambdaCallback
 # keras.callbacks.LambdaCallback
-# keras_core.src.callbacks.lambda_callback.LambdaCallback
+# keras.src.callbacks.lambda_callback.LambdaCallback
 r"-(Callback for creating simple, custom callbacks on-the-fly.
 
     This callback is constructed with anonymous functions that will be called
@@ -390,7 +387,6 @@ r"-(Callback for creating simple, custom callbacks on-the-fly.
                          cleanup_callback])
     ```
     )-"
-
 
 # keras.src.callbacks.lambda_callback.LambdaCallback
 #' Callback for creating simple, custom callbacks on-the-fly.
@@ -465,7 +461,7 @@ function (on_epoch_begin = NULL, on_epoch_end = NULL, on_train_begin = NULL,
 
 # keras$callbacks$LearningRateScheduler
 # keras.callbacks.LearningRateScheduler
-# keras_core.src.callbacks.learning_rate_scheduler.LearningRateScheduler
+# keras.src.callbacks.learning_rate_scheduler.LearningRateScheduler
 r"-(Learning rate scheduler.
 
     At the beginning of every epoch, this callback gets the updated learning
@@ -501,7 +497,6 @@ r"-(Learning rate scheduler.
     0.00607
 
     )-"
-
 
 # keras.src.callbacks.learning_rate_scheduler.LearningRateScheduler
 #' Learning rate scheduler.
@@ -555,7 +550,7 @@ function (schedule, verbose = 0L)
 
 # keras$callbacks$ModelCheckpoint
 # keras.callbacks.ModelCheckpoint
-# keras_core.src.callbacks.model_checkpoint.ModelCheckpoint
+# keras.src.callbacks.model_checkpoint.ModelCheckpoint
 r"-(Callback to save the Keras model or model weights at some frequency.
 
     `ModelCheckpoint` callback is used in conjunction with training using
@@ -666,7 +661,6 @@ r"-(Callback to save the Keras model or model weights at some frequency.
             overwrites the model weights already saved if the performance of
             current model is better than this value.
     )-"
-
 
 # keras.src.callbacks.model_checkpoint.ModelCheckpoint
 #' Callback to save the Keras model or model weights at some frequency.
@@ -794,7 +788,7 @@ function (filepath, monitor = "val_loss", verbose = 0L, save_best_only = FALSE,
 
 # keras$callbacks$ProgbarLogger
 # keras.callbacks.ProgbarLogger
-# keras_core.src.callbacks.progbar_logger.ProgbarLogger
+# keras.src.callbacks.progbar_logger.ProgbarLogger
 r"-(Callback that prints metrics to stdout.
 
     Args:
@@ -805,7 +799,6 @@ r"-(Callback that prints metrics to stdout.
     Raises:
         ValueError: In case of invalid `count_mode`.
     )-"
-
 
 # keras.src.callbacks.progbar_logger.ProgbarLogger
 #' Callback that prints metrics to stdout.
@@ -833,7 +826,7 @@ function (count_mode = NULL)
 
 # keras$callbacks$ReduceLROnPlateau
 # keras.callbacks.ReduceLROnPlateau
-# keras_core.src.callbacks.reduce_lr_on_plateau.ReduceLROnPlateau
+# keras.src.callbacks.reduce_lr_on_plateau.ReduceLROnPlateau
 r"-(Reduce learning rate when a metric has stopped improving.
 
     Models often benefit from reducing the learning rate by a factor
@@ -868,7 +861,6 @@ r"-(Reduce learning rate when a metric has stopped improving.
             operation after the learning rate has been reduced.
         min_lr: Float. Lower bound on the learning rate.
     )-"
-
 
 # keras.src.callbacks.reduce_lr_on_plateau.ReduceLROnPlateau
 #' Reduce learning rate when a metric has stopped improving.
@@ -922,7 +914,7 @@ function (monitor = "val_loss", factor = 0.1, patience = 10L,
 
 # keras$callbacks$RemoteMonitor
 # keras.callbacks.RemoteMonitor
-# keras_core.src.callbacks.remote_monitor.RemoteMonitor
+# keras.src.callbacks.remote_monitor.RemoteMonitor
 r"-(Callback used to stream events to a server.
 
     Requires the `requests` library.
@@ -943,7 +935,6 @@ r"-(Callback used to stream events to a server.
         send_as_json: Boolean; whether the request should be
             sent as `"application/json"`.
     )-"
-
 
 # keras.src.callbacks.remote_monitor.RemoteMonitor
 #' Callback used to stream events to a server.
@@ -981,7 +972,7 @@ function (root = "http://localhost:9000", path = "/publish/epoch/end/",
 
 # keras$callbacks$TensorBoard
 # keras.callbacks.TensorBoard
-# keras_core.src.callbacks.tensorboard.TensorBoard
+# keras.src.callbacks.tensorboard.TensorBoard
 r"-(Enable visualizations for TensorBoard.
 
     TensorBoard is a visualization tool provided with TensorFlow. A TensorFlow
@@ -1121,7 +1112,6 @@ r"-(Enable visualizations for TensorBoard.
     model.fit(x_train, y_train, epochs=2, callbacks=[tensorboard_callback])
     ```
     )-"
-
 
 # keras.src.callbacks.tensorboard.TensorBoard
 #' Enable visualizations for TensorBoard.
@@ -1279,9 +1269,8 @@ function (log_dir = "logs", histogram_freq = 0L, write_graph = TRUE,
 
 # keras$callbacks$TerminateOnNaN
 # keras.callbacks.TerminateOnNaN
-# keras_core.src.callbacks.terminate_on_nan.TerminateOnNaN
+# keras.src.callbacks.terminate_on_nan.TerminateOnNaN
 r"-(Callback that terminates training when a NaN loss is encountered.)-"
-
 
 # keras.src.callbacks.terminate_on_nan.TerminateOnNaN
 #' Callback that terminates training when a NaN loss is encountered.

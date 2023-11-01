@@ -3,7 +3,7 @@
 
 # keras$regularizers$l1
 # keras.regularizers.l1
-# keras_core.src.regularizers.regularizers.L1
+# keras.src.regularizers.regularizers.L1
 r"-(A regularizer that applies a L1 regularization penalty.
 
     The L1 regularization penalty is computed as:
@@ -18,7 +18,6 @@ r"-(A regularizer that applies a L1 regularization penalty.
     Arguments:
         l1: float, L1 regularization factor.
     )-"
-
 
 # keras.src.regularizers.regularizers.L1
 #' A regularizer that applies a L1 regularization penalty.
@@ -50,7 +49,7 @@ function (l1 = 0.01)
 
 # keras$regularizers$L1L2
 # keras.regularizers.L1L2
-# keras_core.src.regularizers.regularizers.L1L2
+# keras.src.regularizers.regularizers.L1L2
 r"-(A regularizer that applies both L1 and L2 regularization penalties.
 
     The L1 regularization penalty is computed as:
@@ -69,7 +68,6 @@ r"-(A regularizer that applies both L1 and L2 regularization penalties.
         l1: float, L1 regularization factor.
         l2: float, L2 regularization factor.
     )-"
-
 
 # keras.src.regularizers.regularizers.L1L2
 #' A regularizer that applies both L1 and L2 regularization penalties.
@@ -105,7 +103,7 @@ function (l1 = 0, l2 = 0)
 
 # keras$regularizers$l2
 # keras.regularizers.l2
-# keras_core.src.regularizers.regularizers.L2
+# keras.src.regularizers.regularizers.L2
 r"-(A regularizer that applies a L2 regularization penalty.
 
     The L2 regularization penalty is computed as:
@@ -120,7 +118,6 @@ r"-(A regularizer that applies a L2 regularization penalty.
     Arguments:
         l2: float, L2 regularization factor.
     )-"
-
 
 # keras.src.regularizers.regularizers.L2
 #' A regularizer that applies a L2 regularization penalty.
@@ -152,7 +149,7 @@ function (l2 = 0.01)
 
 # keras$regularizers$OrthogonalRegularizer
 # keras.regularizers.OrthogonalRegularizer
-# keras_core.src.regularizers.regularizers.OrthogonalRegularizer
+# keras.src.regularizers.regularizers.OrthogonalRegularizer
 r"-(Regularizer that encourages input vectors to be orthogonal to each other.
 
     It can be applied to either the rows of a matrix (`mode="rows"`) or its
@@ -176,7 +173,6 @@ r"-(Regularizer that encourages input vectors to be orthogonal to each other.
     >>> regularizer = OrthogonalRegularizer(factor=0.01)
     >>> layer = Dense(units=4, kernel_regularizer=regularizer)
     )-"
-
 
 # keras.src.regularizers.regularizers.OrthogonalRegularizer
 #' Regularizer that encourages input vectors to be orthogonal to each other.

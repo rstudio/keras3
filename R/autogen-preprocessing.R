@@ -3,7 +3,7 @@
 
 # keras$preprocessing$image_dataset_from_directory
 # keras.preprocessing.image_dataset_from_directory
-# keras_core.src.utils.image_dataset_utils.image_dataset_from_directory
+# keras.src.utils.image_dataset_utils.image_dataset_from_directory
 r"-(Generates a `tf.data.Dataset` from image files in a directory.
 
     If your directory structure is:
@@ -118,7 +118,6 @@ r"-(Generates a `tf.data.Dataset` from image files in a directory.
     - if `color_mode` is `"rgba"`,
         there are 4 channels in the image tensors.
     )-"
-
 
 # keras.src.utils.image_dataset_utils.image_dataset_from_directory
 #' Generates a `tf.data.Dataset` from image files in a directory.
@@ -253,7 +252,7 @@ function (directory, labels = "inferred", label_mode = "int",
 
 # keras$preprocessing$image$save_img
 # keras.preprocessing.image.save_img
-# keras_core.src.utils.image_utils.save_img
+# keras.src.utils.image_utils.save_img
 r"-(Saves an image stored as a NumPy array to a path or file object.
 
     Args:
@@ -267,7 +266,6 @@ r"-(Saves an image stored as a NumPy array to a path or file object.
         scale: Whether to rescale image values to be within `[0, 255]`.
         **kwargs: Additional keyword arguments passed to `PIL.Image.save()`.
     )-"
-
 
 # keras.src.utils.image_utils.save_img
 #' Saves an image stored as a NumPy array to a path or file object.
@@ -296,7 +294,7 @@ function (x, path, data_format = NULL, file_format = NULL, scale = TRUE,
 
 # keras$preprocessing$image$array_to_img
 # keras.preprocessing.image.array_to_img
-# keras_core.src.utils.image_utils.array_to_img
+# keras.src.utils.image_utils.array_to_img
 r"-(Converts a 3D NumPy array to a PIL Image instance.
 
     Usage:
@@ -322,7 +320,6 @@ r"-(Converts a 3D NumPy array to a PIL Image instance.
     Returns:
         A PIL Image instance.
     )-"
-
 
 # keras.src.utils.image_utils.array_to_img
 #' Converts a 3D NumPy array to a PIL Image instance.
@@ -363,7 +360,7 @@ function (x, data_format = NULL, scale = TRUE, dtype = NULL)
 
 # keras$preprocessing$image$load_img
 # keras.preprocessing.image.load_img
-# keras_core.src.utils.image_utils.load_img
+# keras.src.utils.image_utils.load_img
 r"-(Loads an image into PIL format.
 
     Usage:
@@ -395,7 +392,6 @@ r"-(Loads an image into PIL format.
     Returns:
         A PIL Image instance.
     )-"
-
 
 # keras.src.utils.image_utils.load_img
 #' Loads an image into PIL format.
@@ -443,7 +439,7 @@ function (path, color_mode = "rgb", target_size = NULL, interpolation = "nearest
 
 # keras$preprocessing$image$img_to_array
 # keras.preprocessing.image.img_to_array
-# keras_core.src.utils.image_utils.img_to_array
+# keras.src.utils.image_utils.img_to_array
 r"-(Converts a PIL Image instance to a NumPy array.
 
     Usage:
@@ -468,7 +464,6 @@ r"-(Converts a PIL Image instance to a NumPy array.
     Returns:
         A 3D NumPy array.
     )-"
-
 
 # keras.src.utils.image_utils.img_to_array
 #' Converts a PIL Image instance to a NumPy array.
@@ -508,7 +503,7 @@ function (img, data_format = NULL, dtype = NULL)
 
 # keras$preprocessing$sequence$pad_sequences
 # keras.preprocessing.sequence.pad_sequences
-# keras_core.src.utils.sequence_utils.pad_sequences
+# keras.src.utils.sequence_utils.pad_sequences
 r"-(Pads sequences to the same length.
 
     This function transforms a list (of length `num_samples`)
@@ -566,7 +561,6 @@ r"-(Pads sequences to the same length.
     Returns:
         NumPy array with shape `(len(sequences), maxlen)`
     )-"
-
 
 # keras.src.utils.sequence_utils.pad_sequences
 #' Pads sequences to the same length.
@@ -648,7 +642,7 @@ function (sequences, maxlen = NULL, dtype = "int32", padding = "pre",
 
 # keras$preprocessing$text_dataset_from_directory
 # keras.preprocessing.text_dataset_from_directory
-# keras_core.src.utils.text_dataset_utils.text_dataset_from_directory
+# keras.src.utils.text_dataset_utils.text_dataset_from_directory
 r"-(Generates a `tf.data.Dataset` from text files in a directory.
 
     If your directory structure is:
@@ -734,7 +728,6 @@ r"-(Generates a `tf.data.Dataset` from text files in a directory.
         of shape `(batch_size, num_classes)`, representing a one-hot
         encoding of the class index.
     )-"
-
 
 # keras.src.utils.text_dataset_utils.text_dataset_from_directory
 #' Generates a `tf.data.Dataset` from text files in a directory.
@@ -839,7 +832,7 @@ function (directory, labels = "inferred", label_mode = "int",
 
 # keras$preprocessing$timeseries_dataset_from_array
 # keras.preprocessing.timeseries_dataset_from_array
-# keras_core.src.utils.timeseries_dataset_utils.timeseries_dataset_from_array
+# keras.src.utils.timeseries_dataset_utils.timeseries_dataset_from_array
 r"-(Creates a dataset of sliding windows over a timeseries provided as array.
 
     This function takes in a sequence of data-points gathered at
@@ -951,7 +944,6 @@ r"-(Creates a dataset of sliding windows over a timeseries provided as array.
         break
     ```
     )-"
-
 
 # keras.src.utils.timeseries_dataset_utils.timeseries_dataset_from_array
 #' Creates a dataset of sliding windows over a timeseries provided as array.

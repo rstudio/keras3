@@ -3,7 +3,7 @@
 
 # keras$layers$TFSMLayer
 # keras.layers.TFSMLayer
-# keras_core.src.export.export_lib.TFSMLayer
+# keras.src.export.export_lib.TFSMLayer
 r"-(Reload a Keras model/layer that was saved via SavedModel / ExportArchive.
 
     Arguments:
@@ -41,7 +41,6 @@ r"-(Reload a Keras model/layer that was saved via SavedModel / ExportArchive.
     saved as a standalone endpoint in the artifact, and provide its name
     to the `TFSMLayer` via the `call_training_endpoint` argument.
     )-"
-
 
 # keras.src.export.export_lib.TFSMLayer
 #' Reload a Keras model/layer that was saved via SavedModel / ExportArchive.
