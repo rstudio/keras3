@@ -252,6 +252,11 @@ df |>
     # else
     #   file <- glue("R/autogen-{grp$endpoint_sans_name}.R")
 
+    txt <- txt |>
+      str_split_lines() |>
+      str_remove_non_ascii() |>
+      str_flatten_lines()
+
     writeLines(txt, file)
   })
 

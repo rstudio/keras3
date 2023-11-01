@@ -96,6 +96,27 @@ attach_eval({
                      content = trim(str_flatten_lines(content)))))
   }
 
+  str_detect_non_ascii <- function(chr) {
+    map_lgl(chr, \(x) {
+      if (Encoding(x) == "unknown") {
+        Encoding(x) <- "UTF-8"
+      }
+      Encoding(x) != "unknown"
+    })
+  }
+
+  str_remove_non_ascii <- function(chr) {
+    i <- str_detect_non_ascii(chr)
+    if (any(i)) {
+      chr[i] <- chr[i] |> map_chr(\(x) {
+        x |>
+          iconv(to = "ASCII") |>
+          str_replace_all(fixed("??"), "")
+      })
+    }
+    chr
+  }
+
   # ignore empty trailing arg
   c <- function(...)
     base::do.call(base::c, rlang::list2(...), quote = TRUE)
@@ -1256,6 +1277,11 @@ get_docstring <-
 get_fixed_docstring <- function(endpoint) {
 
   d <- inspect$getdoc(py_eval(endpoint)) %||% ""
+
+  d %<>% str_remove_non_ascii()
+  # if(str_detect_non_ascii(d))
+  #   d <- d %>% iconv(to = "ASCII") %>% gsub("??", "", ., fixed = TRUE)
+
   replace <- function(old_txt, new_txt) {
     d <<- stringi::stri_replace_first_fixed(d, old_txt, new_txt)
   }

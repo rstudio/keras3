@@ -1148,7 +1148,7 @@ r"-(Downloads a file from a URL if it not already in the cache.
     Returns:
         Path to the downloaded file.
 
-    **⚠️ Warning on malicious downloads ⚠️**
+    ** Warning on malicious downloads **
 
     Downloading something from the Internet carries a risk.
     NEVER download a file/archive if you do not trust the source.
@@ -1180,7 +1180,7 @@ r"-(Downloads a file from a URL if it not already in the cache.
 #' # Returns
 #' Path to the downloaded file.
 #'
-#' **⚠️ Warning on malicious downloads ⚠️**
+#' ** Warning on malicious downloads **
 #'
 #' Downloading something from the Internet carries a risk.
 #' NEVER download a file/archive if you do not trust the source.
