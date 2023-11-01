@@ -215,7 +215,7 @@ test_succeeds("images_dataset_from_directory", {
   on.exit(unlink(dir, recursive = TRUE))
 
   for(i in 0:3)
-    dir.create(file.path(dir, n2w(i,))
+    dir.create(file.path(dir, n2w(i,)))
 
   mnist <- dataset_mnist()
   ind <- which(mnist$train$y %in% 0:3)
