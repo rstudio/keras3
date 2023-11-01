@@ -275,7 +275,10 @@ r"-(Returns a tensor of shape `shape` where `indices` are set to `values`.
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/scatter>
 k_scatter <-
 function (indices, values, shape)
-keras$ops$scatter(indices, values, shape)
+{
+    args <- capture_args2(list(shape = normalize_shape))
+    do.call(keras$ops$scatter, args)
+}
 
 
 # keras$ops$scatter_update
@@ -498,7 +501,10 @@ r"-(Return a slice of an input tensor.
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/slice>
 k_slice <-
 function (inputs, start_indices, shape)
-keras$ops$slice(inputs, start_indices, shape)
+{
+    args <- capture_args2(list(shape = normalize_shape))
+    do.call(keras$ops$slice, args)
+}
 
 
 # keras$ops$slice_update
@@ -5085,7 +5091,7 @@ r"-(Broadcast a tensor to a new shape.
 k_broadcast_to <-
 function (x, shape)
 {
-    args <- capture_args2(list(shape = as_integer))
+    args <- capture_args2(list(shape = normalize_shape))
     do.call(keras$ops$broadcast_to, args)
 }
 
@@ -6144,7 +6150,10 @@ r"-(Return a tensor of given shape and type filled with uninitialized data.
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/empty>
 k_empty <-
 function (shape, dtype = NULL)
-keras$ops$empty(shape, dtype)
+{
+    args <- capture_args2(list(shape = normalize_shape))
+    do.call(keras$ops$empty, args)
+}
 
 
 # keras$ops$equal
@@ -6467,7 +6476,10 @@ r"-(Return a new tensor of given shape and type, filled with `fill_value`.
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/full>
 k_full <-
 function (shape, fill_value, dtype = NULL)
-keras$ops$full(shape, fill_value, dtype)
+{
+    args <- capture_args2(list(shape = normalize_shape))
+    do.call(keras$ops$full, args)
+}
 
 
 # keras$ops$full_like
@@ -8007,7 +8019,10 @@ r"-(Return a new tensor of given shape and type, filled with ones.
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/ones>
 k_ones <-
 function (shape, dtype = NULL)
-keras$ops$ones(shape, dtype)
+{
+    args <- capture_args2(list(shape = normalize_shape))
+    do.call(keras$ops$ones, args)
+}
 
 
 # keras$ops$ones_like
@@ -9770,7 +9785,10 @@ r"-(Return a new tensor of given shape and type, filled with zeros.
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/zeros>
 k_zeros <-
 function (shape, dtype = NULL)
-keras$ops$zeros(shape, dtype)
+{
+    args <- capture_args2(list(shape = normalize_shape))
+    do.call(keras$ops$zeros, args)
+}
 
 
 # keras$ops$zeros_like

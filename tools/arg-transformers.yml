@@ -11,6 +11,7 @@
 "*":
   axis: as_axis
   axes: as_axis
+  shape: normalize_shape
   # output_mode: ~
 
 "keras.layers.ZeroPadding2D":
