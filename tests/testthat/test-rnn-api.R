@@ -23,7 +23,8 @@ test_succeeds("layer_lstm_cell", {
 
 test_succeeds("layer_gru_cell", {
   # GRUCell
- inputs <- k_random_uniform(c(32, 10, 8))
+ inputs <- random_uniform(c(32, 10, 8))
+ # inputs <- k_random_uniform(c(32, 10, 8))
  output <- inputs %>% layer_rnn(layer_gru_cell(4))
  expect_true(output$shape == shape(32, 4))
 

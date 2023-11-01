@@ -105,3 +105,26 @@ keras.ops.true_divide:
 
 keras.layers.Masking:
   mask_value: see description
+
+# keras.metrics.binary_accuracy:
+#   threshold: see description
+#
+# keras.metrics.sparse_top_k_categorical_accuracy:
+#   k: Integer
+#
+# keras.metrics.top_k_categorical_accuracy:
+#   k: Integer
+
+keras.random.dropout:
+  inputs: see description
+  rate: see description
+  noise_shape: see description
+
+keras.utils.FeatureSpace:
+  object: see description
+  features: see description
+  output_mode: see description
+  crosses: see description
+  crossing_dim: see description
+  hashing_dim: see description
+  num_discretization_bins: Integer

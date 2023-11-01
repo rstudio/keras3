@@ -12,6 +12,7 @@
   axis: as_axis
   axes: as_axis
   shape: normalize_shape
+  seed: as_integer
   # output_mode: ~
 
 "keras.layers.ZeroPadding2D":
@@ -101,3 +102,6 @@ keras.random.randint:
   dtype: ~
   maxval: as_integer(ceiling(x))
   minval: as_integer
+
+keras.random.dropout:
+  noise_shape: normalize_shape

@@ -489,6 +489,13 @@ r"-(One-stop utility for preprocessing and encoding structured data.
 #' FeatureSpace.string_hashed(num_bins, output_mode="one_hot", name=None)
 #' ```
 #' @param name String, name for the object
+#' @param object see description
+#' @param features see description
+#' @param output_mode see description
+#' @param crosses see description
+#' @param crossing_dim see description
+#' @param hashing_dim see description
+#' @param num_discretization_bins Integer
 #'
 #' @export
 #' @family preprocessing layers
@@ -1008,7 +1015,7 @@ function (directory, labels = "inferred", label_mode = "int",
     seed = NULL, validation_split = NULL, subset = NULL, follow_links = FALSE)
 {
     args <- capture_args2(list(labels = as_integer, label_mode = as_integer,
-        batch_size = as_integer))
+        batch_size = as_integer, seed = as_integer))
     do.call(keras$utils$audio_dataset_from_directory, args)
 }
 
@@ -1090,7 +1097,8 @@ split_dataset <-
 function (dataset, left_size = NULL, right_size = NULL, shuffle = FALSE,
     seed = NULL)
 {
-    args <- capture_args2(list(left_size = as_integer, right_size = as_integer))
+    args <- capture_args2(list(left_size = as_integer, right_size = as_integer,
+        seed = as_integer))
     do.call(keras$utils$split_dataset, args)
 }
 
@@ -1467,7 +1475,7 @@ function (directory, labels = "inferred", label_mode = "int",
     follow_links = FALSE, crop_to_aspect_ratio = FALSE, data_format = NULL)
 {
     args <- capture_args2(list(labels = as_integer, label_mode = as_integer,
-        batch_size = as_integer))
+        batch_size = as_integer, seed = as_integer))
     do.call(keras$utils$image_dataset_from_directory, args)
 }
 
@@ -2287,7 +2295,7 @@ function (directory, labels = "inferred", label_mode = "int",
     follow_links = FALSE)
 {
     args <- capture_args2(list(labels = as_integer, label_mode = as_integer,
-        batch_size = as_integer))
+        batch_size = as_integer, seed = as_integer))
     do.call(keras$utils$text_dataset_from_directory, args)
 }
 

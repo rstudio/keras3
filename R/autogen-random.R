@@ -81,8 +81,15 @@ function (logits, num_samples, dtype = "int32", seed = NULL)
 # keras.random.dropout
 # keras.src.random.random.dropout
 r"-()-"
+#' random dropout
+#'
+#' @description
+#' Randomly set some portion of values in the tensor to 0.
 #'
 #' @param seed Initial seed for the random number generator
+#' @param inputs see description
+#' @param rate see description
+#' @param noise_shape see description
 #'
 #' @export
 #' @seealso
@@ -90,7 +97,7 @@ r"-()-"
 random_dropout <-
 function (inputs, rate, noise_shape = NULL, seed = NULL)
 {
-    args <- capture_args2(NULL)
+    args <- capture_args2(list(seed = as_integer, noise_shape = normalize_shape))
     do.call(keras$random$dropout, args)
 }
 
@@ -463,6 +470,6 @@ r"-(Generates variable seeds upon each call to a RNG-using function.
 random_seed_generator <-
 function (seed = NULL, ...)
 {
-    args <- capture_args2(NULL)
+    args <- capture_args2(list(seed = as_integer))
     do.call(keras$random$SeedGenerator, args)
 }

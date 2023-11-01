@@ -1278,6 +1278,14 @@ get_fixed_docstring <- function(endpoint) {
 
   d <- inspect$getdoc(py_eval(endpoint)) %||% ""
 
+  if(d == "") {
+    return(switch(endpoint,
+      "keras.random.dropout" = r"{random dropout
+
+        Randomly set some portion of values in the tensor to 0.}",
+      ""))
+  }
+
   d %<>% str_remove_non_ascii()
   # if(str_detect_non_ascii(d))
   #   d <- d %>% iconv(to = "ASCII") %>% gsub("??", "", ., fixed = TRUE)

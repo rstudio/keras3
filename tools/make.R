@@ -32,6 +32,10 @@ source("tools/utils.R")
 # TODO: to_categorical():
 #    - handle factor/character https://github.com/rstudio/keras/issues/1055
 #    - make it 1 based?
+#
+# TODO: param descriptions - make it more robust to changes upstream
+#     autoinject "see description" without needing it in the yml.
+#     yml is only for explicit overrides
 
 endpoints <- list_endpoints(skip = c(
   # to be processed / done
