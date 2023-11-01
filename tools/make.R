@@ -28,6 +28,10 @@ source("tools/utils.R")
 # TODO: remove k_random_binomial() ??
 #
 # TODO: layer_feature_space() needs massaging.
+#
+# TODO: to_categorical():
+#    - handle factor/character https://github.com/rstudio/keras/issues/1055
+#    - make it 1 based?
 
 endpoints <- list_endpoints(skip = c(
   # to be processed / done
@@ -143,6 +147,10 @@ endpoints <-
                                      # tfdatasets is ~100x better anyway.
 
     "keras.utils.plot_model"        # S3 method plot()
+
+                                       # TODO: revisit custom_object_scope()
+    "keras.utils.custom_object_scope"  # need custom work to resolve py_names -
+                                       # manually wrapped to `with_custom_object_scope()`
 
     "keras.metrics.Accuracy"         # weird, only class handle, no fn handle - weird alias
                                      # for binary_accuracy, but without any threshold casting.
