@@ -981,7 +981,7 @@ r"-(Computes the 2D Fast Fourier Transform along the last two axes of input.
 #' @family ops
 #' @seealso
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/fft2>
-k_fft_2 <-
+k_fft2 <-
 function (x)
 keras$ops$fft2(x)
 
@@ -3063,7 +3063,7 @@ r"-(Rectified linear unit activation function with upper bound of 6.
 #' @family ops
 #' @seealso
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/relu6>
-k_relu_6 <-
+k_relu6 <-
 function (x)
 keras$ops$relu6(x)
 
@@ -4590,7 +4590,7 @@ r"-(Element-wise arc tangent of `x1/x2` choosing the quadrant correctly.
 #' @family ops
 #' @seealso
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/arctan2>
-k_arctan_2 <-
+k_arctan2 <-
 function (x1, x2)
 keras$ops$arctan2(x1, x2)
 
@@ -6378,7 +6378,7 @@ r"-(Calculate `exp(x) - 1` for all elements in the tensor.
 #' @family ops
 #' @seealso
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/expm1>
-k_expm_1 <-
+k_expm1 <-
 function (x)
 keras$ops$expm1(x)
 
@@ -7151,7 +7151,7 @@ r"-(Return the base 10 logarithm of the input tensor, element-wise.
 #' @family ops
 #' @seealso
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/log10>
-k_log_10 <-
+k_log10 <-
 function (x)
 keras$ops$log10(x)
 
@@ -7186,7 +7186,7 @@ r"-(Returns the natural logarithm of one plus the `x`, element-wise.
 #' @family ops
 #' @seealso
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/log1p>
-k_log_1_p <-
+k_log1p <-
 function (x)
 keras$ops$log1p(x)
 
@@ -7218,7 +7218,7 @@ r"-(Base-2 logarithm of `x`, element-wise.
 #' @family ops
 #' @seealso
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/log2>
-k_log_2 <-
+k_log2 <-
 function (x)
 keras$ops$log2(x)
 

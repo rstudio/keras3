@@ -532,6 +532,10 @@ make_r_name <- function(endpoint, module = py_eval(endpoint)$`__module__`) {
 
   type <- keras_class_type(py_eval(endpoint))
 
+  # TODO: this func is due a refactor
+  #   - we should only call snake_case() on camelcase objects (e.g.,
+  #     no need to call it on ops.
+  #   - handle prefixes better
   # manual renames
   if(!is.null(r_name <- switch %(% { endpoint
     "keras.preprocessing.image.array_to_img" = "image_from_array"
@@ -596,11 +600,14 @@ make_r_name <- function(endpoint, module = py_eval(endpoint)$`__module__`) {
     str_replace("XLarge", "Xlarge") |>
 
     str_replace("IoU", "Iou") |>
-    str_replace("FBeta", "Fbeta") |>
+    str_replace("FBeta", "Fbeta")
     # str_replace("FBeta", "Fbeta") |>
     # str_replace("EfficientNet", "Efficientnet") |>
 
-    snakecase::to_snake_case() |>
+  if(str_detect(name, "[[:upper:]]"))
+    name %<>% snakecase::to_snake_case()
+
+  name <- name |>
 
     str_replace("_([0-9])_d(_|$)", "_\\1d\\2") |>  # conv_1_d  ->  conv_1d
     # str_replace("efficient_net_(.+)$", "efficientnet_\\1") |>
@@ -617,6 +624,10 @@ make_r_name <- function(endpoint, module = py_eval(endpoint)$`__module__`) {
 
     str_replace("f_1", "f1") |>
     str_replace("r_2", "r2") |>
+    # str_replace("log_2", "log2") |>
+    # str_replace("log_10", "log10") |>
+    # str_replace("log_1_p", "log1p") |>
+    # str_replace("relu_6", "relu6") |>
 
     str_replace_all("max_norm", "maxnorm") |>
     str_replace_all("non_neg", "nonneg") |>

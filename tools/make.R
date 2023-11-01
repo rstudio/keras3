@@ -18,6 +18,9 @@ if(!"source:tools/utils.R" %in% search())
 # TODO: next: losses, metrics, saving, guides/vignettes
 
 # TODO: bidirectional, time_distributed -- need special caseing
+#
+# TODO: note in docs for k_logical_and (and friends) that these are dispatched
+#       to from & != and so on.
 
 
 endpoints <- list_endpoints(skip = c(

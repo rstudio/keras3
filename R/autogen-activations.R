@@ -462,7 +462,7 @@ r"-(Relu6 activation function.
 #' @family activation functions
 #' @seealso
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/activations/relu6>
-activation_relu_6 <-
+activation_relu6 <-
 structure(function (x)
 {
     args <- capture_args2(NULL)
