@@ -6,7 +6,7 @@
 #' @rdname pipe
 #' @keywords internal
 #' @export
-#' @import magrittr
+#' @importFrom magrittr %<>% %>%
 #' @usage lhs \%>\% rhs
 NULL
 
@@ -22,7 +22,7 @@ magrittr::`%<>%`
 #' @rdname multi-assign
 #' @keywords internal
 #' @export
-#' @import zeallot
+#' @importFrom zeallot %<-%
 #' @usage x \%<-\% value
 NULL
 

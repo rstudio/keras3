@@ -4,7 +4,7 @@ context("rnn api")
 
 test_succeeds("layer_lstm_cell", {
   # LSTMCell
-  inputs <- k_random_normal(c(32, 10, 8))
+  inputs <- random_normal(c(32, 10, 8))
   rnn <- layer_rnn(cell = layer_lstm_cell(units = 4))
   output <- rnn(inputs)
   expect_equal(dim(output),  c(32, 4))

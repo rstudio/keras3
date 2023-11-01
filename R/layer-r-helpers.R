@@ -11,6 +11,14 @@ as_integer <- function(x) {
     x
 }
 
+as_integer_array <- function(x) {
+  if(is.atomic(x))
+    x <- as.array(x)
+  if(is.array(x) && storage.mode(x) != "integer")
+    storage.mode(x) <- "integer"
+  x
+}
+
 as_integer_tuple <- function(x, force_tuple = FALSE) {
   if (is.null(x))
     x

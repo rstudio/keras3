@@ -17,6 +17,20 @@ layer_feature_space(
 )
 }
 \arguments{
+\item{object}{see description}
+
+\item{features}{see description}
+
+\item{output_mode}{see description}
+
+\item{crosses}{see description}
+
+\item{crossing_dim}{see description}
+
+\item{hashing_dim}{see description}
+
+\item{num_discretization_bins}{Integer}
+
 \item{name}{String, name for the object}
 
 \item{feature_names}{Dict mapping the names of your features to their

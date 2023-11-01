@@ -105,3 +105,7 @@ keras.random.randint:
 
 keras.random.dropout:
   noise_shape: normalize_shape
+
+keras.utils.to_categorical:
+  x: as_integer_array
+  num_classes: as_integer

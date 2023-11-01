@@ -36,6 +36,16 @@ source("tools/utils.R")
 # TODO: param descriptions - make it more robust to changes upstream
 #     autoinject "see description" without needing it in the yml.
 #     yml is only for explicit overrides
+#
+# TODO: implement and export as_shape(), make k_shape() a little nicer (e.g, an integer w/ NA)
+#
+# TODO: implement dim() S3 generic.
+#
+# TODO: remove @import methods ??
+#
+# TODO: add @import reticulate ??
+#
+# TODO: remove any tensorflow imports / DESCRIPTION deps
 
 endpoints <- list_endpoints(skip = c(
   # to be processed / done
