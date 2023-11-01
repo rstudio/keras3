@@ -707,28 +707,28 @@ named_list <- function(...)
 
 
 
-#' Generate a Random Array
-#'
-#' This function generates an array with random numbers.
-#' The dimensions of the array are specified by the user.
-#' The generation function for the random numbers can also be customized.
-#'
-#' @param ... Dimensions for the array as separate integers or as a single vector.
-#' @param gen A function for generating random numbers, defaulting to `runif`.
-#'
-#' @return Returns an array with the specified dimensions filled with random numbers.
-#'
-#' @examples
-#' # Create a 3x3 matrix with random numbers from uniform distribution
-#' random_array(3, 3)
-#'
-#' # Create a 2x2x2 array with random numbers from normal distribution
-#' random_array(2, 2, 2, gen = rnorm)
-#'
-#' # Create a 2x2 array with a sequence of integers.
-#' random_array(2, 2, gen = seq)
-#'
-#' @export
+# Generate a Random Array
+#
+# This function generates an array with random numbers.
+# The dimensions of the array are specified by the user.
+# The generation function for the random numbers can also be customized.
+#
+# @param ... Dimensions for the array as separate integers or as a single vector.
+# @param gen A function for generating random numbers, defaulting to `runif`.
+#
+# @return Returns an array with the specified dimensions filled with random numbers.
+#
+# @examples
+# # Create a 3x3 matrix with random numbers from uniform distribution
+# random_array(3, 3)
+#
+# # Create a 2x2x2 array with random numbers from normal distribution
+# random_array(2, 2, 2, gen = rnorm)
+#
+# # Create a 2x2 array with a sequence of integers.
+# random_array(2, 2, gen = seq)
+#
+# @export
 random_array <- function(..., gen = runif) {
   dim <- unlist(c(...), use.names = FALSE)
   array(gen(prod(dim)), dim = dim)

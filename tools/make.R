@@ -36,7 +36,6 @@ source("tools/utils.R")
 endpoints <- list_endpoints(skip = c(
   # to be processed / done
   "keras.saving",
-  # "keras.utils",
   "keras.backend",
   "keras.dtensor",
   "keras.mixed_precision",
