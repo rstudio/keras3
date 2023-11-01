@@ -23,7 +23,6 @@ Other model functions:
 \code{\link{get_layer}()},
 \code{\link{keras_model_sequential}()},
 \code{\link{keras_model}()},
-\code{\link{multi_gpu_model}()},
 \code{\link{predict.keras.models.model.Model}()},
 \code{\link{predict_generator}()},
 \code{\link{predict_on_batch}()},

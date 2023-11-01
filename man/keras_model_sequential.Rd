@@ -83,7 +83,6 @@ Other model functions:
 \code{\link{get_config}()},
 \code{\link{get_layer}()},
 \code{\link{keras_model}()},
-\code{\link{multi_gpu_model}()},
 \code{\link{pop_layer}()},
 \code{\link{predict.keras.models.model.Model}()},
 \code{\link{predict_generator}()},

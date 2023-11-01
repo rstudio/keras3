@@ -75,7 +75,7 @@ programs \code{shasum} and \code{sha256sum} can compute the hash.
 \section{Returns}{
 Path to the downloaded file.
 
-\strong{⚠️ Warning on malicious downloads ⚠️}
+** Warning on malicious downloads **
 
 Downloading something from the Internet carries a risk.
 NEVER download a file/archive if you do not trust the source.
