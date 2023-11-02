@@ -20,13 +20,15 @@ metric_binary_crossentropy(
 
 \item{y_pred}{The predicted values. shape = \verb{[batch_size, d0, .. dN]}.}
 
-\item{from_logits}{Whether \code{y_pred} is expected to be a logits tensor. By
-default, we assume that \code{y_pred} encodes a probability distribution.}
+\item{from_logits}{(Optional) Whether output is expected
+to be a logits tensor. By default, we consider
+that output encodes a probability distribution.}
 
-\item{label_smoothing}{Float in \verb{[0, 1]}. If > \code{0} then smooth the labels by
-squeezing them towards 0.5, that is,
-using \code{1. - 0.5 * label_smoothing} for the target class
-and \code{0.5 * label_smoothing} for the non-target class.}
+\item{label_smoothing}{(Optional) Float in \verb{[0, 1]}.
+When > 0, label values are smoothed,
+meaning the confidence on label values are relaxed.
+e.g. \code{label_smoothing=0.2} means that we will use
+a value of 0.1 for label "0" and 0.9 for label "1".}
 
 \item{axis}{The axis along which the mean is computed. Defaults to \code{-1}.}
 

@@ -32,16 +32,17 @@ reference. It helps to gradually reduce the importance given to
 simple examples in a smooth manner. When \code{gamma} = 0, there is
 no focal effect on the categorical crossentropy.}
 
-\item{from_logits}{Whether \code{y_pred} is expected to be a logits tensor. By
-default, we assume that \code{y_pred} encodes a probability
+\item{from_logits}{Whether \code{output} is expected to be a logits tensor. By
+default, we consider that \code{output} encodes a probability
 distribution.}
 
-\item{label_smoothing}{Float in \verb{[0, 1].} If > \code{0} then smooth the labels. For
-example, if \code{0.1}, use \code{0.1 / num_classes} for non-target labels
-and \code{0.9 + 0.1 / num_classes} for target labels.}
+\item{label_smoothing}{Float in \verb{[0, 1].} When > 0, label values are smoothed,
+meaning the confidence on label values are relaxed. For example, if
+\code{0.1}, use \code{0.1 / num_classes} for non-target labels and
+\code{0.9 + 0.1 / num_classes} for target labels.}
 
-\item{axis}{Defaults to \code{-1}. The dimension along which the entropy is
-computed.}
+\item{axis}{The axis along which to compute crossentropy (the features
+axis). Defaults to \code{-1}.}
 
 \item{...}{Passed on to the Python callable}
 

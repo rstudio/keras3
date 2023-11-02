@@ -20,15 +20,18 @@ loss_binary_crossentropy(
 
 \item{y_pred}{The predicted values. shape = \verb{[batch_size, d0, .. dN]}.}
 
-\item{from_logits}{Whether \code{y_pred} is expected to be a logits tensor. By
-default, we assume that \code{y_pred} encodes a probability distribution.}
+\item{from_logits}{Whether to interpret \code{y_pred} as a tensor of
+\href{https://en.wikipedia.org/wiki/Logit}{logit} values. By default, we
+assume that \code{y_pred} is probabilities (i.e., values in \verb{[0, 1]).}}
 
-\item{label_smoothing}{Float in \verb{[0, 1]}. If > \code{0} then smooth the labels by
-squeezing them towards 0.5, that is,
-using \code{1. - 0.5 * label_smoothing} for the target class
-and \code{0.5 * label_smoothing} for the non-target class.}
+\item{label_smoothing}{Float in range \verb{[0, 1].} When 0, no smoothing occurs.
+When > 0, we compute the loss between the predicted labels
+and a smoothed version of the true labels, where the smoothing
+squeezes the labels towards 0.5. Larger values of
+\code{label_smoothing} correspond to heavier smoothing.}
 
-\item{axis}{The axis along which the mean is computed. Defaults to \code{-1}.}
+\item{axis}{The axis along which to compute crossentropy (the features axis).
+Defaults to \code{-1}.}
 
 \item{...}{Passed on to the Python callable}
 

@@ -27,20 +27,25 @@ loss_binary_focal_crossentropy(
 binary classes 0 and 1.}
 
 \item{alpha}{A weight balancing factor for class 1, default is \code{0.25} as
-mentioned in the reference. The weight for class 0 is \code{1.0 - alpha}.}
+mentioned in reference \href{https://arxiv.org/pdf/1708.02002.pdf}{Lin et al., 2018}.  The weight for class 0 is
+\code{1.0 - alpha}.}
 
-\item{gamma}{A focusing parameter, default is \code{2.0} as mentioned in the
-reference.}
+\item{gamma}{A focusing parameter used to compute the focal factor, default is
+\code{2.0} as mentioned in the reference
+\href{https://arxiv.org/pdf/1708.02002.pdf}{Lin et al., 2018}.}
 
-\item{from_logits}{Whether \code{y_pred} is expected to be a logits tensor. By
-default, we assume that \code{y_pred} encodes a probability distribution.}
+\item{from_logits}{Whether to interpret \code{y_pred} as a tensor of
+\href{https://en.wikipedia.org/wiki/Logit}{logit} values. By default, we
+assume that \code{y_pred} are probabilities (i.e., values in \verb{[0, 1]}).}
 
-\item{label_smoothing}{Float in \verb{[0, 1]}. If > \code{0} then smooth the labels by
-squeezing them towards 0.5, that is,
-using \code{1. - 0.5 * label_smoothing} for the target class
-and \code{0.5 * label_smoothing} for the non-target class.}
+\item{label_smoothing}{Float in \verb{[0, 1]}. When \code{0}, no smoothing occurs.
+When > \code{0}, we compute the loss between the predicted labels
+and a smoothed version of the true labels, where the smoothing
+squeezes the labels towards \code{0.5}.
+Larger values of \code{label_smoothing} correspond to heavier smoothing.}
 
-\item{axis}{The axis along which the mean is computed. Defaults to \code{-1}.}
+\item{axis}{The axis along which to compute crossentropy (the features axis).
+Defaults to \code{-1}.}
 
 \item{...}{Passed on to the Python callable}
 

@@ -20,15 +20,18 @@ metric_categorical_crossentropy(
 
 \item{y_pred}{Tensor of predicted targets.}
 
-\item{from_logits}{Whether \code{y_pred} is expected to be a logits tensor. By
-default, we assume that \code{y_pred} encodes a probability distribution.}
+\item{from_logits}{(Optional) Whether output is expected to be
+a logits tensor. By default, we consider that output
+encodes a probability distribution.}
 
-\item{label_smoothing}{Float in \verb{[0, 1].} If > \code{0} then smooth the labels. For
-example, if \code{0.1}, use \code{0.1 / num_classes} for non-target labels
-and \code{0.9 + 0.1 / num_classes} for target labels.}
+\item{label_smoothing}{(Optional) Float in \verb{[0, 1]}.
+When > 0, label values are smoothed, meaning the confidence
+on label values are relaxed. e.g. \code{label_smoothing=0.2} means
+that we will use a value of 0.1 for label
+"0" and 0.9 for label "1".}
 
-\item{axis}{Defaults to \code{-1}. The dimension along which the entropy is
-computed.}
+\item{axis}{(Optional) Defaults to \code{-1}.
+The dimension along which entropy is computed.}
 
 \item{...}{Passed on to the Python callable}
 
