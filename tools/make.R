@@ -1,7 +1,7 @@
 
-# if(!"source:tools/utils.R" %in% search())
-  # envir::attach_source("tools/utils.R")
-source("tools/utils.R")
+
+if(!"source:tools/utils.R" %in% search()) envir::attach_source("tools/utils.R")
+# source("tools/utils.R")
 
 # TODO: add PR for purrr::rate_throttle("3 per minute")
 #
@@ -10,7 +10,7 @@ source("tools/utils.R")
 # TODO: fix py_func(), for r_to_py.R6ClassGenerator
 #   can't use __signature__ anymore in keras_core...
 
-## TODO: "keras.applications.convnext" is a module, filtered out, has good stuff
+## TODO: "keras.applications.convnext" is a module, filtered out has good stuff
 
 # TODO: initializer families:
 # <class 'keras.initializers.constant_initializers.Zeros'>
@@ -180,9 +180,13 @@ endpoints <-
     "keras.optimizers.LegacyOptimizerWarning"
   })
 
+# fs::path("tools/raw", gsub(".", "-", endpoint, fixed = TRUE), ext = "R")
 
-df <- endpoints |> purrr::set_names() |>
-  lapply(mk_export) |>
+exports <- endpoints |>
+  purrr::set_names() |>
+  lapply(mk_export)
+
+df <- exports |>
   lapply(\(e) {
     e |>
       unclass() |>
@@ -191,29 +195,80 @@ df <- endpoints |> purrr::set_names() |>
   }) |>
   list_rbind()
 
+if(FALSE) {
+
+fs::dir_create(glue_data(df, "src/wrappers/{r_name}/"))
+
+dfo <- df %>%
+  mutate(wrappers_dir = glue("src/wrappers/{r_name}/"))
+
+df <- dfo %>%
+  mutate(dump_file = glue("src/wrappers/{r_name}/r_wrapper_raw.R")) %>%
+  rowwise() %>%
+  mutate(
+    raw_dumpfile = str_flatten_lines(
+      str_glue("# {endpoint}"),
+      str_glue("# {module}.{name}"),
+      str_c('r"-{', trim(docstring), '}-"'),
+      "",
+      dump
+    ),
+    old_dumpfile = dumpfile_path %>% {if(file.exists(.)) {message("exists: ", .); str_flatten_lines(readLines(.))} else "''"},
+    old_docstring = str2expression(old_dumpfile)[[1]]) %>%
+  ungroup() %>%
+  mutate(is_new = !file.exists(dumpfile_path),
+         is_changed = (!is_new) & docstring != old_docstring)
+
+df_new <- df %>% filter(is_new)
+
+df_new %>%
+  rowwise() %>%
+  mutate(writeout = {
+    writeLines(dumpfile, dumpfile_path)
+  })
+
+df_changed <- df %>% filter(is_changed)
+
+stop("!!!")
+
+
+
+
+df <- df %>%
+
+  rowwise() %>%
+  mutate(
+  ) %>%
+
+    # writeLines(txt, dump_filepath)
+    # dump_filepath
+  # ) %>%
+  ungroup()
+
+
+df$dumpfile
+
+}
+
 df <- df |>
   mutate(endpoint_sans_name = str_extract(endpoint, "keras\\.(.*)\\.[^.]+$", 1))
 
+
 df |>
-  mutate(endpoint_sans_name = endpoint_sans_name %>%
-           replace_val(c("preprocessing.image", "preprocessing.sequence"),
-                       "preprocessing")) %>%
+  # mutate(endpoint_sans_name = endpoint_sans_name %>%
+  #          replace_val(c("preprocessing.image", "preprocessing.sequence"),
+  #                      "preprocessing")) %>%
   arrange(endpoint_sans_name, module, r_name) |>
   mutate(file = if_else(endpoint_sans_name == "layers",
                         {
-                          # browser()
                         module |>
                           str_replace("^keras(_core)?\\.(src\\.)?", "") |>
                           str_replace(paste0(endpoint_sans_name, "\\."), "") |>
-                          str_replace("^([^.]+).*", paste0(endpoint_sans_name, "-\\1.R")) #|> unique()
-                          # str_sub("\\.?src\\.?", "") |>
-                          # str_sub(fixed("."), "-") |>
-                          # str_c(".R")
+                          str_replace("^([^.]+).*", paste0(endpoint_sans_name, "-\\1.R"))
                         },
                         str_c(endpoint_sans_name %>% str_replace_all(fixed("."), "-"), ".R")
                         )
                         ) |>
-  # select(endpoint, endpoint_sans_name, module, file)  |> print(n=Inf)
   group_by(file) |>
   dplyr::group_walk(\(df, grp) {
 
@@ -223,7 +278,6 @@ df |>
     # str_flatten(c('r"-(', l$`__doc__`, ')-"'), ""),
     # "\n",
 
-#
 #     fs::dir_create("tools/raw")
 #     withr::with_dir("tools/raw", {
 #       endpoint_dir <-df$endpoint |>
