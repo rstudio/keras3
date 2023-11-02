@@ -28,7 +28,7 @@ optimizer_adam_w(
 a callable that takes no arguments and returns the actual value to
 use. The learning rate. Defaults to \code{0.001}.}
 
-\item{weight_decay}{Float, defaults to None. If set, weight decay is applied.}
+\item{weight_decay}{Float. If set, weight decay is applied.}
 
 \item{beta_1}{A float value or a constant float tensor, or a callable
 that takes no arguments and returns the actual value to use. The
@@ -52,11 +52,11 @@ Defaults to \code{False}.}
 \item{clipnorm}{Float. If set, the gradient of each weight is individually
 clipped so that its norm is no higher than this value.}
 
-\item{clipvalue}{Float. If set, the gradient of each weight is clipped to be no
-higher than this value.}
+\item{clipvalue}{Float. If set, the gradient of each weight is clipped to be
+no higher than this value.}
 
-\item{global_clipnorm}{Float. If set, the gradient of all weights is clipped so
-that their global norm is no higher than this value.}
+\item{global_clipnorm}{Float. If set, the gradient of all weights is clipped
+so that their global norm is no higher than this value.}
 
 \item{use_ema}{Boolean, defaults to False. If True, exponential moving average
 (EMA) is applied. EMA consists of computing an exponential moving

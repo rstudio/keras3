@@ -213,6 +213,7 @@ Other ops:
 \code{\link{k_unstack}()},
 \code{\link{k_var}()},
 \code{\link{k_vdot}()},
+\code{\link{k_vectorized_map}()},
 \code{\link{k_vstack}()},
 \code{\link{k_where}()},
 \code{\link{k_while_loop}()},

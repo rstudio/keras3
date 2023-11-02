@@ -46,16 +46,16 @@ constant and \code{relative_step=True}, learning rate will be adjusted
 based on current iterations. This is a default learning rate decay
 in Adafactor.}
 
-\item{weight_decay}{Float, defaults to None. If set, weight decay is applied.}
+\item{weight_decay}{Float. If set, weight decay is applied.}
 
 \item{clipnorm}{Float. If set, the gradient of each weight is individually
 clipped so that its norm is no higher than this value.}
 
-\item{clipvalue}{Float. If set, the gradient of each weight is clipped to be no
-higher than this value.}
+\item{clipvalue}{Float. If set, the gradient of each weight is clipped to be
+no higher than this value.}
 
-\item{global_clipnorm}{Float. If set, the gradient of all weights is clipped so
-that their global norm is no higher than this value.}
+\item{global_clipnorm}{Float. If set, the gradient of all weights is clipped
+so that their global norm is no higher than this value.}
 
 \item{use_ema}{Boolean, defaults to False. If True, exponential moving average
 (EMA) is applied. EMA consists of computing an exponential moving

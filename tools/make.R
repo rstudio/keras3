@@ -184,7 +184,7 @@ endpoints <-
 
 exports <- endpoints |>
   purrr::set_names() |>
-  lapply(mk_export)
+  map(mk_export)
 
 df <- exports |>
   lapply(\(e) {

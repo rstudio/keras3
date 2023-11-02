@@ -103,17 +103,16 @@ attach_eval({
       if (Encoding(x) == "unknown") {
         Encoding(x) <- "UTF-8"
       }
-      Encoding(x) != "unknown"
+      !isTRUE(Encoding(x) == "unknown")
     })
   }
 
   str_remove_non_ascii <- function(chr) {
+    chr <- str_split_lines(chr)
     i <- str_detect_non_ascii(chr)
     if (any(i)) {
       chr[i] <- chr[i] |> map_chr(\(x) {
-        x |>
-          iconv(to = "ASCII") |>
-          str_replace_all(fixed("??"), "")
+          iconv(x, to = "ASCII", sub = "")
       })
     }
     chr
@@ -1298,6 +1297,7 @@ get_docstring <-
 get_fixed_docstring <- function(endpoint) {
 
   d <- inspect$getdoc(py_eval(endpoint)) %||% ""
+
 
   if(d == "") {
     return(switch(endpoint,

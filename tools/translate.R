@@ -1,7 +1,12 @@
 
-if(!"source:tools/utils.R" %in% search())
-  envir::attach_source("tools/utils.R")
+if(!"source:tools/utils.R" %in% search()) envir::attach_source("tools/utils.R")
 
+source("tools/make.R")
+
+
+df_new
+
+source("tools/translate-tools.R")
 
 # game plan:
 #
@@ -74,6 +79,7 @@ if(!"source:tools/utils.R" %in% search())
 
 
 ## What about tests?
+if(FALSE) {
 
 gptrd_files <- Sys.glob("tools/raw/*/gpt-4*") %>%
   .[!duplicated(dirname(.))] %>%
@@ -85,6 +91,7 @@ invisible(lapply(gptrd_files, \(f) {
   wrapper <- readLines("r-wrapper-literal.R") %>% .[!startsWith(., "#")]
   writeLines(str_flatten_lines(roxygen, wrapper), "r-wrapper-llm.R")
 }))
+}
 
   # }
   # file.copy(., file.path(dirname(.), "r-wrapper-llm.R"),
@@ -119,7 +126,7 @@ if (use_codellama) {
 # py_install("tiktoken")
 
 tiktoken <- import("tiktoken")
-encoder <- tiktoken$encoding_for_model('gpt-3.5-turbo')
+encoder <- tiktoken$encoding_for_model('gpt-3.5-turbo') #
 encoder$encode(get_roxygen(path)) |> length()
 
 get_translation <- function(path) {
@@ -136,11 +143,11 @@ time <- system.time(chat_completion <- openai$ChatCompletion$create(
   messages = chat_messages %(% {
 
     system = str_squish(
-              "You translate all Python idioms and code to R, correct typos,
-              wrap `NULL`, `TRUE` and `FALSE` in backticks as needed for properly
-              formatted roxygen,
-              move examples from description to an @examples roxygen section
-              leave everthing else the same.
+              "You translate Python to R (including docs, code, idioms), correct typos,
+              and output properly formatted roxygen.
+              You always wrap `NULL`, `TRUE` and `FALSE` in backticks as needed.
+              You move examples from description to an @examples roxygen section as needed.
+              You leave everthing else the same.
                ")
 
     ###
@@ -167,20 +174,15 @@ time <- system.time(chat_completion <- openai$ChatCompletion$create(
     #' layer = Dense(units=3, kernel_initializer=initializer)
     #' ```
     #'
-    #' @export
     #' @family initializer
-    #' @seealso
-    #' + <https://www.tensorflow.org/api_docs/python/tf/keras/initializers/zeros>
+    #' @export
     )---"
 
     assistant = r"---(
     #' Initializer that generates tensors initialized to 0.
     #'
-    #' @export
     #' @family initializer
-    #' @seealso
-    #' + <https://www.tensorflow.org/api_docs/python/tf/keras/initializers/zeros>
-    #'
+    #' @export
     #' @examples
     #' # Standalone usage:
     #' initializer <- initializer_zeros()
@@ -243,12 +245,9 @@ time <- system.time(chat_completion <- openai$ChatCompletion$create(
 #' @param object Object to compose the layer with. A tensor, array, or sequential model.
 #' @param ... Passed on to the Python callable
 #'
-#' @export
 #' @family core layers
-#' @seealso
-#' + <https://www.tensorflow.org/api_docs/python/tf/keras/layers/Embedding>
-    )---"
-
+#' @export
+)---"
 
     assistant = r"---(
 #' Turns positive integers (indexes) into dense vectors of fixed size.
@@ -280,15 +279,12 @@ time <- system.time(chat_completion <- openai$ChatCompletion$create(
 #'     then all subsequent layers in the model need
 #'     to support masking or an exception will be raised.
 #'     If `mask_zero` is set to `TRUE`, as a consequence,
-#'     index 0 cannot be used in the vocabulary (input_dim should
+#'     index 0 cannot be used in the vocabulary (`input_dim` should
 #'     equal size of vocabulary + 1).
 #' @param object Object to compose the layer with. A tensor, array, or sequential model.
-#' @param ... Passed on to the Python callable
-#' @export
+#' @param ... For forward/backward compatability.
 #' @family core layers
-#' @seealso
-#' + <https://www.tensorflow.org/api_docs/python/tf/keras/layers/Embedding>
-#'
+#' @export
 #' @examples
 #' model <- keras_model_sequential() %>%
 #'   layer_embedding(1000, 64, input_length = 10)
@@ -349,6 +345,7 @@ time <- system.time(chat_completion <- openai$ChatCompletion$create(
 #' y$shape   # (4, 26, 26, 2)
 )--"
 
+    # ---- layer_hashing example ----
     user = r"---(
 #' ```python
 #' layer = keras.layers.Hashing(num_bins=3, salt=133)
@@ -369,7 +366,13 @@ time <- system.time(chat_completion <- openai$ChatCompletion$create(
 #' layer(inp)
 )---"
 
-    ## maybe we leave tuple refs in the docs, reexport reticulate::tuple()
+    user = get_roxygen(path)
+  }
+))
+
+
+
+## maybe we leave tuple refs in the docs, reexport reticulate::tuple()
 #      user = r"---(
 #  #' @param salt A single unsigned integer or None.
 #  #'     If passed, the hash function used will be SipHash64,
@@ -391,9 +394,7 @@ time <- system.time(chat_completion <- openai$ChatCompletion$create(
 #  #'     Defaults to `NULL`.
 #  )---"
 
-    user = get_roxygen(path)
-  }
-))
+
 print(time)
 chat_completion
 }

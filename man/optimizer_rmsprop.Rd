@@ -43,16 +43,16 @@ variance of the gradient; if False, by the uncentered second moment.
 Setting this to \code{True} may help with training, but is slightly more
 expensive in terms of computation and memory. Defaults to \code{False}.}
 
-\item{weight_decay}{Float, defaults to None. If set, weight decay is applied.}
+\item{weight_decay}{Float. If set, weight decay is applied.}
 
 \item{clipnorm}{Float. If set, the gradient of each weight is individually
 clipped so that its norm is no higher than this value.}
 
-\item{clipvalue}{Float. If set, the gradient of each weight is clipped to be no
-higher than this value.}
+\item{clipvalue}{Float. If set, the gradient of each weight is clipped to be
+no higher than this value.}
 
-\item{global_clipnorm}{Float. If set, the gradient of all weights is clipped so
-that their global norm is no higher than this value.}
+\item{global_clipnorm}{Float. If set, the gradient of all weights is clipped
+so that their global norm is no higher than this value.}
 
 \item{use_ema}{Boolean, defaults to False. If True, exponential moving average
 (EMA) is applied. EMA consists of computing an exponential moving

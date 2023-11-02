@@ -31,24 +31,24 @@ r"-(Optimizer that implements the Adadelta algorithm.
         name: String. The name to use
           for momentum accumulator weights created by
           the optimizer.
-      weight_decay: Float, defaults to None. If set, weight decay is applied.
-      clipnorm: Float. If set, the gradient of each weight is individually
+        weight_decay: Float. If set, weight decay is applied.
+        clipnorm: Float. If set, the gradient of each weight is individually
           clipped so that its norm is no higher than this value.
-      clipvalue: Float. If set, the gradient of each weight is clipped to be no
-          higher than this value.
-      global_clipnorm: Float. If set, the gradient of all weights is clipped so
-          that their global norm is no higher than this value.
-      use_ema: Boolean, defaults to False. If True, exponential moving average
+        clipvalue: Float. If set, the gradient of each weight is clipped to be
+          no higher than this value.
+        global_clipnorm: Float. If set, the gradient of all weights is clipped
+          so that their global norm is no higher than this value.
+        use_ema: Boolean, defaults to False. If True, exponential moving average
           (EMA) is applied. EMA consists of computing an exponential moving
           average of the weights of the model (as the weight values change after
           each training batch), and periodically overwriting the weights with
           their moving average.
-      ema_momentum: Float, defaults to 0.99. Only used if `use_ema=True`.
+        ema_momentum: Float, defaults to 0.99. Only used if `use_ema=True`.
           This is the momentum to use when computing
           the EMA of the model's weights:
           `new_average = ema_momentum * old_average + (1 - ema_momentum) *
           current_variable_value`.
-      ema_overwrite_frequency: Int or None, defaults to None. Only used if
+        ema_overwrite_frequency: Int or None, defaults to None. Only used if
           `use_ema=True`. Every `ema_overwrite_frequency` steps of iterations,
           we overwrite the model variable by its moving average.
           If None, the optimizer
@@ -59,7 +59,7 @@ r"-(Optimizer that implements the Adadelta algorithm.
           variables in-place). When using the built-in `fit()` training loop,
           this happens automatically after the last epoch,
           and you don't need to do anything.
-      loss_scale_factor: Float or `None`. If a float, the scale factor will
+        loss_scale_factor: Float or `None`. If a float, the scale factor will
           be multiplied the loss before computing gradients, and the inverse of
           the scale factor will be multiplied by the gradients before updating
           variables. Useful for preventing underflow during mixed precision
@@ -91,51 +91,51 @@ r"-(Optimizer that implements the Adadelta algorithm.
 #' - [Zeiler, 2012](http://arxiv.org/abs/1212.5701)
 #'
 #' @param learning_rate A float, a
-#'       `keras.optimizers.schedules.LearningRateSchedule` instance, or
-#'       a callable that takes no arguments and returns the actual value to
-#'       use. The learning rate. Defaults to `0.001`. Note that `Adadelta`
-#'       tends to benefit from higher initial learning rate values compared
-#'       to other optimizers. To match the exact form in the original paper,
-#'       use 1.0.
+#'     `keras.optimizers.schedules.LearningRateSchedule` instance, or
+#'     a callable that takes no arguments and returns the actual value to
+#'     use. The learning rate. Defaults to `0.001`. Note that `Adadelta`
+#'     tends to benefit from higher initial learning rate values compared
+#'     to other optimizers. To match the exact form in the original paper,
+#'     use 1.0.
 #' @param rho A floating point value. The decay rate. Defaults to `0.95`.
 #' @param epsilon Small floating point value for maintaining numerical stability.
 #' @param name String. The name to use
-#'     for momentum accumulator weights created by
-#'     the optimizer.
-#' @param weight_decay Float, defaults to None. If set, weight decay is applied.
+#'   for momentum accumulator weights created by
+#'   the optimizer.
+#' @param weight_decay Float. If set, weight decay is applied.
 #' @param clipnorm Float. If set, the gradient of each weight is individually
-#'     clipped so that its norm is no higher than this value.
-#' @param clipvalue Float. If set, the gradient of each weight is clipped to be no
-#'     higher than this value.
-#' @param global_clipnorm Float. If set, the gradient of all weights is clipped so
-#'     that their global norm is no higher than this value.
+#'   clipped so that its norm is no higher than this value.
+#' @param clipvalue Float. If set, the gradient of each weight is clipped to be
+#'   no higher than this value.
+#' @param global_clipnorm Float. If set, the gradient of all weights is clipped
+#'   so that their global norm is no higher than this value.
 #' @param use_ema Boolean, defaults to False. If True, exponential moving average
-#'     (EMA) is applied. EMA consists of computing an exponential moving
-#'     average of the weights of the model (as the weight values change after
-#'     each training batch), and periodically overwriting the weights with
-#'     their moving average.
+#'   (EMA) is applied. EMA consists of computing an exponential moving
+#'   average of the weights of the model (as the weight values change after
+#'   each training batch), and periodically overwriting the weights with
+#'   their moving average.
 #' @param ema_momentum Float, defaults to 0.99. Only used if `use_ema=True`.
-#'     This is the momentum to use when computing
-#'     the EMA of the model's weights:
-#'     `new_average = ema_momentum * old_average + (1 - ema_momentum) *
-#'     current_variable_value`.
+#'   This is the momentum to use when computing
+#'   the EMA of the model's weights:
+#'   `new_average = ema_momentum * old_average + (1 - ema_momentum) *
+#'   current_variable_value`.
 #' @param ema_overwrite_frequency Int or None, defaults to None. Only used if
-#'     `use_ema=True`. Every `ema_overwrite_frequency` steps of iterations,
-#'     we overwrite the model variable by its moving average.
-#'     If None, the optimizer
-#'     does not overwrite model variables in the middle of training, and you
-#'     need to explicitly overwrite the variables at the end of training
-#'     by calling `optimizer.finalize_variable_values()`
-#'     (which updates the model
-#'     variables in-place). When using the built-in `fit()` training loop,
-#'     this happens automatically after the last epoch,
-#'     and you don't need to do anything.
+#'   `use_ema=True`. Every `ema_overwrite_frequency` steps of iterations,
+#'   we overwrite the model variable by its moving average.
+#'   If None, the optimizer
+#'   does not overwrite model variables in the middle of training, and you
+#'   need to explicitly overwrite the variables at the end of training
+#'   by calling `optimizer.finalize_variable_values()`
+#'   (which updates the model
+#'   variables in-place). When using the built-in `fit()` training loop,
+#'   this happens automatically after the last epoch,
+#'   and you don't need to do anything.
 #' @param loss_scale_factor Float or `None`. If a float, the scale factor will
-#'     be multiplied the loss before computing gradients, and the inverse of
-#'     the scale factor will be multiplied by the gradients before updating
-#'     variables. Useful for preventing underflow during mixed precision
-#'     training. Alternately, `keras.optimizers.LossScaleOptimizer` will
-#'     automatically set a loss scale factor.
+#'   be multiplied the loss before computing gradients, and the inverse of
+#'   the scale factor will be multiplied by the gradients before updating
+#'   variables. Useful for preventing underflow during mixed precision
+#'   training. Alternately, `keras.optimizers.LossScaleOptimizer` will
+#'   automatically set a loss scale factor.
 #'
 #' @param ... Passed on to the Python callable
 #'
@@ -186,24 +186,24 @@ r"-(Optimizer that implements the Adafactor algorithm.
         name: String. The name to use
           for momentum accumulator weights created by
           the optimizer.
-      weight_decay: Float, defaults to None. If set, weight decay is applied.
-      clipnorm: Float. If set, the gradient of each weight is individually
+        weight_decay: Float. If set, weight decay is applied.
+        clipnorm: Float. If set, the gradient of each weight is individually
           clipped so that its norm is no higher than this value.
-      clipvalue: Float. If set, the gradient of each weight is clipped to be no
-          higher than this value.
-      global_clipnorm: Float. If set, the gradient of all weights is clipped so
-          that their global norm is no higher than this value.
-      use_ema: Boolean, defaults to False. If True, exponential moving average
+        clipvalue: Float. If set, the gradient of each weight is clipped to be
+          no higher than this value.
+        global_clipnorm: Float. If set, the gradient of all weights is clipped
+          so that their global norm is no higher than this value.
+        use_ema: Boolean, defaults to False. If True, exponential moving average
           (EMA) is applied. EMA consists of computing an exponential moving
           average of the weights of the model (as the weight values change after
           each training batch), and periodically overwriting the weights with
           their moving average.
-      ema_momentum: Float, defaults to 0.99. Only used if `use_ema=True`.
+        ema_momentum: Float, defaults to 0.99. Only used if `use_ema=True`.
           This is the momentum to use when computing
           the EMA of the model's weights:
           `new_average = ema_momentum * old_average + (1 - ema_momentum) *
           current_variable_value`.
-      ema_overwrite_frequency: Int or None, defaults to None. Only used if
+        ema_overwrite_frequency: Int or None, defaults to None. Only used if
           `use_ema=True`. Every `ema_overwrite_frequency` steps of iterations,
           we overwrite the model variable by its moving average.
           If None, the optimizer
@@ -214,7 +214,7 @@ r"-(Optimizer that implements the Adafactor algorithm.
           variables in-place). When using the built-in `fit()` training loop,
           this happens automatically after the last epoch,
           and you don't need to do anything.
-      loss_scale_factor: Float or `None`. If a float, the scale factor will
+        loss_scale_factor: Float or `None`. If a float, the scale factor will
           be multiplied the loss before computing gradients, and the inverse of
           the scale factor will be multiplied by the gradients before updating
           variables. Useful for preventing underflow during mixed precision
@@ -242,58 +242,58 @@ r"-(Optimizer that implements the Adafactor algorithm.
 #' - [Shazeer, Noam et al., 2018](https://arxiv.org/abs/1804.04235).
 #'
 #' @param learning_rate A float, a
-#'       `keras.optimizers.schedules.LearningRateSchedule` instance, or
-#'       a callable that takes no arguments and returns the actual value to
-#'       use. The learning rate. Defaults to `0.001`.
+#'     `keras.optimizers.schedules.LearningRateSchedule` instance, or
+#'     a callable that takes no arguments and returns the actual value to
+#'     use. The learning rate. Defaults to `0.001`.
 #' @param beta_2_decay float, defaults to -0.8. The decay rate of `beta_2`.
 #' @param epsilon_1 float, defaults to 1e-30. A small offset to keep denominator
-#'       away from 0.
+#'     away from 0.
 #' @param epsilon_2 float, defaults to 1e-3. A small offset to avoid learning
-#'       rate becoming too small by time.
+#'     rate becoming too small by time.
 #' @param clip_threshold float, defaults to 1.0. Clipping threshold. This is a
-#'       part of Adafactor algorithm, independent from `clipnorm`,
-#'       `clipvalue`, and `global_clipnorm`.
+#'     part of Adafactor algorithm, independent from `clipnorm`,
+#'     `clipvalue`, and `global_clipnorm`.
 #' @param relative_step bool, defaults to True. If `learning_rate` is a
-#'       constant and `relative_step=True`, learning rate will be adjusted
-#'       based on current iterations. This is a default learning rate decay
-#'       in Adafactor.
+#'     constant and `relative_step=True`, learning rate will be adjusted
+#'     based on current iterations. This is a default learning rate decay
+#'     in Adafactor.
 #' @param name String. The name to use
-#'     for momentum accumulator weights created by
-#'     the optimizer.
-#' @param weight_decay Float, defaults to None. If set, weight decay is applied.
+#'   for momentum accumulator weights created by
+#'   the optimizer.
+#' @param weight_decay Float. If set, weight decay is applied.
 #' @param clipnorm Float. If set, the gradient of each weight is individually
-#'     clipped so that its norm is no higher than this value.
-#' @param clipvalue Float. If set, the gradient of each weight is clipped to be no
-#'     higher than this value.
-#' @param global_clipnorm Float. If set, the gradient of all weights is clipped so
-#'     that their global norm is no higher than this value.
+#'   clipped so that its norm is no higher than this value.
+#' @param clipvalue Float. If set, the gradient of each weight is clipped to be
+#'   no higher than this value.
+#' @param global_clipnorm Float. If set, the gradient of all weights is clipped
+#'   so that their global norm is no higher than this value.
 #' @param use_ema Boolean, defaults to False. If True, exponential moving average
-#'     (EMA) is applied. EMA consists of computing an exponential moving
-#'     average of the weights of the model (as the weight values change after
-#'     each training batch), and periodically overwriting the weights with
-#'     their moving average.
+#'   (EMA) is applied. EMA consists of computing an exponential moving
+#'   average of the weights of the model (as the weight values change after
+#'   each training batch), and periodically overwriting the weights with
+#'   their moving average.
 #' @param ema_momentum Float, defaults to 0.99. Only used if `use_ema=True`.
-#'     This is the momentum to use when computing
-#'     the EMA of the model's weights:
-#'     `new_average = ema_momentum * old_average + (1 - ema_momentum) *
-#'     current_variable_value`.
+#'   This is the momentum to use when computing
+#'   the EMA of the model's weights:
+#'   `new_average = ema_momentum * old_average + (1 - ema_momentum) *
+#'   current_variable_value`.
 #' @param ema_overwrite_frequency Int or None, defaults to None. Only used if
-#'     `use_ema=True`. Every `ema_overwrite_frequency` steps of iterations,
-#'     we overwrite the model variable by its moving average.
-#'     If None, the optimizer
-#'     does not overwrite model variables in the middle of training, and you
-#'     need to explicitly overwrite the variables at the end of training
-#'     by calling `optimizer.finalize_variable_values()`
-#'     (which updates the model
-#'     variables in-place). When using the built-in `fit()` training loop,
-#'     this happens automatically after the last epoch,
-#'     and you don't need to do anything.
+#'   `use_ema=True`. Every `ema_overwrite_frequency` steps of iterations,
+#'   we overwrite the model variable by its moving average.
+#'   If None, the optimizer
+#'   does not overwrite model variables in the middle of training, and you
+#'   need to explicitly overwrite the variables at the end of training
+#'   by calling `optimizer.finalize_variable_values()`
+#'   (which updates the model
+#'   variables in-place). When using the built-in `fit()` training loop,
+#'   this happens automatically after the last epoch,
+#'   and you don't need to do anything.
 #' @param loss_scale_factor Float or `None`. If a float, the scale factor will
-#'     be multiplied the loss before computing gradients, and the inverse of
-#'     the scale factor will be multiplied by the gradients before updating
-#'     variables. Useful for preventing underflow during mixed precision
-#'     training. Alternately, `keras.optimizers.LossScaleOptimizer` will
-#'     automatically set a loss scale factor.
+#'   be multiplied the loss before computing gradients, and the inverse of
+#'   the scale factor will be multiplied by the gradients before updating
+#'   variables. Useful for preventing underflow during mixed precision
+#'   training. Alternately, `keras.optimizers.LossScaleOptimizer` will
+#'   automatically set a loss scale factor.
 #'
 #' @param ... Passed on to the Python callable
 #'
@@ -336,24 +336,24 @@ r"-(Optimizer that implements the Adagrad algorithm.
         name: String. The name to use
           for momentum accumulator weights created by
           the optimizer.
-      weight_decay: Float, defaults to None. If set, weight decay is applied.
-      clipnorm: Float. If set, the gradient of each weight is individually
+        weight_decay: Float. If set, weight decay is applied.
+        clipnorm: Float. If set, the gradient of each weight is individually
           clipped so that its norm is no higher than this value.
-      clipvalue: Float. If set, the gradient of each weight is clipped to be no
-          higher than this value.
-      global_clipnorm: Float. If set, the gradient of all weights is clipped so
-          that their global norm is no higher than this value.
-      use_ema: Boolean, defaults to False. If True, exponential moving average
+        clipvalue: Float. If set, the gradient of each weight is clipped to be
+          no higher than this value.
+        global_clipnorm: Float. If set, the gradient of all weights is clipped
+          so that their global norm is no higher than this value.
+        use_ema: Boolean, defaults to False. If True, exponential moving average
           (EMA) is applied. EMA consists of computing an exponential moving
           average of the weights of the model (as the weight values change after
           each training batch), and periodically overwriting the weights with
           their moving average.
-      ema_momentum: Float, defaults to 0.99. Only used if `use_ema=True`.
+        ema_momentum: Float, defaults to 0.99. Only used if `use_ema=True`.
           This is the momentum to use when computing
           the EMA of the model's weights:
           `new_average = ema_momentum * old_average + (1 - ema_momentum) *
           current_variable_value`.
-      ema_overwrite_frequency: Int or None, defaults to None. Only used if
+        ema_overwrite_frequency: Int or None, defaults to None. Only used if
           `use_ema=True`. Every `ema_overwrite_frequency` steps of iterations,
           we overwrite the model variable by its moving average.
           If None, the optimizer
@@ -364,7 +364,7 @@ r"-(Optimizer that implements the Adagrad algorithm.
           variables in-place). When using the built-in `fit()` training loop,
           this happens automatically after the last epoch,
           and you don't need to do anything.
-      loss_scale_factor: Float or `None`. If a float, the scale factor will
+        loss_scale_factor: Float or `None`. If a float, the scale factor will
           be multiplied the loss before computing gradients, and the inverse of
           the scale factor will be multiplied by the gradients before updating
           variables. Useful for preventing underflow during mixed precision
@@ -390,52 +390,52 @@ r"-(Optimizer that implements the Adagrad algorithm.
 #'     http://www.jmlr.org/papers/volume12/duchi11a/duchi11a.pdf).
 #'
 #' @param learning_rate A float, a
-#'       `keras.optimizers.schedules.LearningRateSchedule` instance, or
-#'       a callable that takes no arguments and returns the actual value to
-#'       use. The learning rate. Defaults to `0.001`. Note that `Adagrad`
-#'       tends to benefit from higher initial learning rate values compared
-#'       to other optimizers. To match the exact form in the original paper,
-#'       use `1.0`.
+#'     `keras.optimizers.schedules.LearningRateSchedule` instance, or
+#'     a callable that takes no arguments and returns the actual value to
+#'     use. The learning rate. Defaults to `0.001`. Note that `Adagrad`
+#'     tends to benefit from higher initial learning rate values compared
+#'     to other optimizers. To match the exact form in the original paper,
+#'     use `1.0`.
 #' @param initial_accumulator_value Floating point value. Starting value for the
-#'       accumulators (per-parameter momentum values). Must be non-negative.
+#'     accumulators (per-parameter momentum values). Must be non-negative.
 #' @param epsilon Small floating point value for maintaining numerical stability.
 #' @param name String. The name to use
-#'     for momentum accumulator weights created by
-#'     the optimizer.
-#' @param weight_decay Float, defaults to None. If set, weight decay is applied.
+#'   for momentum accumulator weights created by
+#'   the optimizer.
+#' @param weight_decay Float. If set, weight decay is applied.
 #' @param clipnorm Float. If set, the gradient of each weight is individually
-#'     clipped so that its norm is no higher than this value.
-#' @param clipvalue Float. If set, the gradient of each weight is clipped to be no
-#'     higher than this value.
-#' @param global_clipnorm Float. If set, the gradient of all weights is clipped so
-#'     that their global norm is no higher than this value.
+#'   clipped so that its norm is no higher than this value.
+#' @param clipvalue Float. If set, the gradient of each weight is clipped to be
+#'   no higher than this value.
+#' @param global_clipnorm Float. If set, the gradient of all weights is clipped
+#'   so that their global norm is no higher than this value.
 #' @param use_ema Boolean, defaults to False. If True, exponential moving average
-#'     (EMA) is applied. EMA consists of computing an exponential moving
-#'     average of the weights of the model (as the weight values change after
-#'     each training batch), and periodically overwriting the weights with
-#'     their moving average.
+#'   (EMA) is applied. EMA consists of computing an exponential moving
+#'   average of the weights of the model (as the weight values change after
+#'   each training batch), and periodically overwriting the weights with
+#'   their moving average.
 #' @param ema_momentum Float, defaults to 0.99. Only used if `use_ema=True`.
-#'     This is the momentum to use when computing
-#'     the EMA of the model's weights:
-#'     `new_average = ema_momentum * old_average + (1 - ema_momentum) *
-#'     current_variable_value`.
+#'   This is the momentum to use when computing
+#'   the EMA of the model's weights:
+#'   `new_average = ema_momentum * old_average + (1 - ema_momentum) *
+#'   current_variable_value`.
 #' @param ema_overwrite_frequency Int or None, defaults to None. Only used if
-#'     `use_ema=True`. Every `ema_overwrite_frequency` steps of iterations,
-#'     we overwrite the model variable by its moving average.
-#'     If None, the optimizer
-#'     does not overwrite model variables in the middle of training, and you
-#'     need to explicitly overwrite the variables at the end of training
-#'     by calling `optimizer.finalize_variable_values()`
-#'     (which updates the model
-#'     variables in-place). When using the built-in `fit()` training loop,
-#'     this happens automatically after the last epoch,
-#'     and you don't need to do anything.
+#'   `use_ema=True`. Every `ema_overwrite_frequency` steps of iterations,
+#'   we overwrite the model variable by its moving average.
+#'   If None, the optimizer
+#'   does not overwrite model variables in the middle of training, and you
+#'   need to explicitly overwrite the variables at the end of training
+#'   by calling `optimizer.finalize_variable_values()`
+#'   (which updates the model
+#'   variables in-place). When using the built-in `fit()` training loop,
+#'   this happens automatically after the last epoch,
+#'   and you don't need to do anything.
 #' @param loss_scale_factor Float or `None`. If a float, the scale factor will
-#'     be multiplied the loss before computing gradients, and the inverse of
-#'     the scale factor will be multiplied by the gradients before updating
-#'     variables. Useful for preventing underflow during mixed precision
-#'     training. Alternately, `keras.optimizers.LossScaleOptimizer` will
-#'     automatically set a loss scale factor.
+#'   be multiplied the loss before computing gradients, and the inverse of
+#'   the scale factor will be multiplied by the gradients before updating
+#'   variables. Useful for preventing underflow during mixed precision
+#'   training. Alternately, `keras.optimizers.LossScaleOptimizer` will
+#'   automatically set a loss scale factor.
 #'
 #' @param ... Passed on to the Python callable
 #'
@@ -491,24 +491,24 @@ r"-(Optimizer that implements the Adam algorithm.
         name: String. The name to use
           for momentum accumulator weights created by
           the optimizer.
-      weight_decay: Float, defaults to None. If set, weight decay is applied.
-      clipnorm: Float. If set, the gradient of each weight is individually
+        weight_decay: Float. If set, weight decay is applied.
+        clipnorm: Float. If set, the gradient of each weight is individually
           clipped so that its norm is no higher than this value.
-      clipvalue: Float. If set, the gradient of each weight is clipped to be no
-          higher than this value.
-      global_clipnorm: Float. If set, the gradient of all weights is clipped so
-          that their global norm is no higher than this value.
-      use_ema: Boolean, defaults to False. If True, exponential moving average
+        clipvalue: Float. If set, the gradient of each weight is clipped to be
+          no higher than this value.
+        global_clipnorm: Float. If set, the gradient of all weights is clipped
+          so that their global norm is no higher than this value.
+        use_ema: Boolean, defaults to False. If True, exponential moving average
           (EMA) is applied. EMA consists of computing an exponential moving
           average of the weights of the model (as the weight values change after
           each training batch), and periodically overwriting the weights with
           their moving average.
-      ema_momentum: Float, defaults to 0.99. Only used if `use_ema=True`.
+        ema_momentum: Float, defaults to 0.99. Only used if `use_ema=True`.
           This is the momentum to use when computing
           the EMA of the model's weights:
           `new_average = ema_momentum * old_average + (1 - ema_momentum) *
           current_variable_value`.
-      ema_overwrite_frequency: Int or None, defaults to None. Only used if
+        ema_overwrite_frequency: Int or None, defaults to None. Only used if
           `use_ema=True`. Every `ema_overwrite_frequency` steps of iterations,
           we overwrite the model variable by its moving average.
           If None, the optimizer
@@ -519,7 +519,7 @@ r"-(Optimizer that implements the Adam algorithm.
           variables in-place). When using the built-in `fit()` training loop,
           this happens automatically after the last epoch,
           and you don't need to do anything.
-      loss_scale_factor: Float or `None`. If a float, the scale factor will
+        loss_scale_factor: Float or `None`. If a float, the scale factor will
           be multiplied the loss before computing gradients, and the inverse of
           the scale factor will be multiplied by the gradients before updating
           variables. Useful for preventing underflow during mixed precision
@@ -541,61 +541,61 @@ r"-(Optimizer that implements the Adam algorithm.
 #' data/parameters*".
 #'
 #' @param learning_rate A float, a
-#'       `keras.optimizers.schedules.LearningRateSchedule` instance, or
-#'       a callable that takes no arguments and returns the actual value to
-#'       use. The learning rate. Defaults to `0.001`.
+#'     `keras.optimizers.schedules.LearningRateSchedule` instance, or
+#'     a callable that takes no arguments and returns the actual value to
+#'     use. The learning rate. Defaults to `0.001`.
 #' @param beta_1 A float value or a constant float tensor, or a callable
-#'       that takes no arguments and returns the actual value to use. The
-#'       exponential decay rate for the 1st moment estimates. Defaults to
-#'       `0.9`.
+#'     that takes no arguments and returns the actual value to use. The
+#'     exponential decay rate for the 1st moment estimates. Defaults to
+#'     `0.9`.
 #' @param beta_2 A float value or a constant float tensor, or a callable
-#'       that takes no arguments and returns the actual value to use. The
-#'       exponential decay rate for the 2nd moment estimates. Defaults to
-#'       `0.999`.
+#'     that takes no arguments and returns the actual value to use. The
+#'     exponential decay rate for the 2nd moment estimates. Defaults to
+#'     `0.999`.
 #' @param epsilon A small constant for numerical stability. This epsilon is
-#'       "epsilon hat" in the Kingma and Ba paper (in the formula just before
-#'       Section 2.1), not the epsilon in Algorithm 1 of the paper. Defaults
-#'       to `1e-7`.
+#'     "epsilon hat" in the Kingma and Ba paper (in the formula just before
+#'     Section 2.1), not the epsilon in Algorithm 1 of the paper. Defaults
+#'     to `1e-7`.
 #' @param amsgrad Boolean. Whether to apply AMSGrad variant of this algorithm
-#'       from the paper "On the Convergence of Adam and beyond". Defaults
-#'       to `False`.
+#'     from the paper "On the Convergence of Adam and beyond". Defaults
+#'     to `False`.
 #' @param name String. The name to use
-#'     for momentum accumulator weights created by
-#'     the optimizer.
-#' @param weight_decay Float, defaults to None. If set, weight decay is applied.
+#'   for momentum accumulator weights created by
+#'   the optimizer.
+#' @param weight_decay Float. If set, weight decay is applied.
 #' @param clipnorm Float. If set, the gradient of each weight is individually
-#'     clipped so that its norm is no higher than this value.
-#' @param clipvalue Float. If set, the gradient of each weight is clipped to be no
-#'     higher than this value.
-#' @param global_clipnorm Float. If set, the gradient of all weights is clipped so
-#'     that their global norm is no higher than this value.
+#'   clipped so that its norm is no higher than this value.
+#' @param clipvalue Float. If set, the gradient of each weight is clipped to be
+#'   no higher than this value.
+#' @param global_clipnorm Float. If set, the gradient of all weights is clipped
+#'   so that their global norm is no higher than this value.
 #' @param use_ema Boolean, defaults to False. If True, exponential moving average
-#'     (EMA) is applied. EMA consists of computing an exponential moving
-#'     average of the weights of the model (as the weight values change after
-#'     each training batch), and periodically overwriting the weights with
-#'     their moving average.
+#'   (EMA) is applied. EMA consists of computing an exponential moving
+#'   average of the weights of the model (as the weight values change after
+#'   each training batch), and periodically overwriting the weights with
+#'   their moving average.
 #' @param ema_momentum Float, defaults to 0.99. Only used if `use_ema=True`.
-#'     This is the momentum to use when computing
-#'     the EMA of the model's weights:
-#'     `new_average = ema_momentum * old_average + (1 - ema_momentum) *
-#'     current_variable_value`.
+#'   This is the momentum to use when computing
+#'   the EMA of the model's weights:
+#'   `new_average = ema_momentum * old_average + (1 - ema_momentum) *
+#'   current_variable_value`.
 #' @param ema_overwrite_frequency Int or None, defaults to None. Only used if
-#'     `use_ema=True`. Every `ema_overwrite_frequency` steps of iterations,
-#'     we overwrite the model variable by its moving average.
-#'     If None, the optimizer
-#'     does not overwrite model variables in the middle of training, and you
-#'     need to explicitly overwrite the variables at the end of training
-#'     by calling `optimizer.finalize_variable_values()`
-#'     (which updates the model
-#'     variables in-place). When using the built-in `fit()` training loop,
-#'     this happens automatically after the last epoch,
-#'     and you don't need to do anything.
+#'   `use_ema=True`. Every `ema_overwrite_frequency` steps of iterations,
+#'   we overwrite the model variable by its moving average.
+#'   If None, the optimizer
+#'   does not overwrite model variables in the middle of training, and you
+#'   need to explicitly overwrite the variables at the end of training
+#'   by calling `optimizer.finalize_variable_values()`
+#'   (which updates the model
+#'   variables in-place). When using the built-in `fit()` training loop,
+#'   this happens automatically after the last epoch,
+#'   and you don't need to do anything.
 #' @param loss_scale_factor Float or `None`. If a float, the scale factor will
-#'     be multiplied the loss before computing gradients, and the inverse of
-#'     the scale factor will be multiplied by the gradients before updating
-#'     variables. Useful for preventing underflow during mixed precision
-#'     training. Alternately, `keras.optimizers.LossScaleOptimizer` will
-#'     automatically set a loss scale factor.
+#'   be multiplied the loss before computing gradients, and the inverse of
+#'   the scale factor will be multiplied by the gradients before updating
+#'   variables. Useful for preventing underflow during mixed precision
+#'   training. Alternately, `keras.optimizers.LossScaleOptimizer` will
+#'   automatically set a loss scale factor.
 #' @param ... Passed on to the Python callable
 #'
 #' @export
@@ -657,24 +657,24 @@ r"-(Optimizer that implements the Adamax algorithm.
             name: String. The name to use
           for momentum accumulator weights created by
           the optimizer.
-      weight_decay: Float, defaults to None. If set, weight decay is applied.
-      clipnorm: Float. If set, the gradient of each weight is individually
+        weight_decay: Float. If set, weight decay is applied.
+        clipnorm: Float. If set, the gradient of each weight is individually
           clipped so that its norm is no higher than this value.
-      clipvalue: Float. If set, the gradient of each weight is clipped to be no
-          higher than this value.
-      global_clipnorm: Float. If set, the gradient of all weights is clipped so
-          that their global norm is no higher than this value.
-      use_ema: Boolean, defaults to False. If True, exponential moving average
+        clipvalue: Float. If set, the gradient of each weight is clipped to be
+          no higher than this value.
+        global_clipnorm: Float. If set, the gradient of all weights is clipped
+          so that their global norm is no higher than this value.
+        use_ema: Boolean, defaults to False. If True, exponential moving average
           (EMA) is applied. EMA consists of computing an exponential moving
           average of the weights of the model (as the weight values change after
           each training batch), and periodically overwriting the weights with
           their moving average.
-      ema_momentum: Float, defaults to 0.99. Only used if `use_ema=True`.
+        ema_momentum: Float, defaults to 0.99. Only used if `use_ema=True`.
           This is the momentum to use when computing
           the EMA of the model's weights:
           `new_average = ema_momentum * old_average + (1 - ema_momentum) *
           current_variable_value`.
-      ema_overwrite_frequency: Int or None, defaults to None. Only used if
+        ema_overwrite_frequency: Int or None, defaults to None. Only used if
           `use_ema=True`. Every `ema_overwrite_frequency` steps of iterations,
           we overwrite the model variable by its moving average.
           If None, the optimizer
@@ -685,7 +685,7 @@ r"-(Optimizer that implements the Adamax algorithm.
           variables in-place). When using the built-in `fit()` training loop,
           this happens automatically after the last epoch,
           and you don't need to do anything.
-      loss_scale_factor: Float or `None`. If a float, the scale factor will
+        loss_scale_factor: Float or `None`. If a float, the scale factor will
           be multiplied the loss before computing gradients, and the inverse of
           the scale factor will be multiplied by the gradients before updating
           variables. Useful for preventing underflow during mixed precision
@@ -730,51 +730,51 @@ r"-(Optimizer that implements the Adamax algorithm.
 #' - [Kingma et al., 2014](http://arxiv.org/abs/1412.6980)
 #'
 #' @param learning_rate A float, a
-#'       `keras.optimizers.schedules.LearningRateSchedule` instance, or
-#'       a callable that takes no arguments and returns the actual value to
-#'       use. The learning rate. Defaults to `0.001`.
+#'     `keras.optimizers.schedules.LearningRateSchedule` instance, or
+#'     a callable that takes no arguments and returns the actual value to
+#'     use. The learning rate. Defaults to `0.001`.
 #' @param beta_1 A float value or a constant float tensor. The exponential decay
-#'       rate for the 1st moment estimates.
+#'     rate for the 1st moment estimates.
 #' @param beta_2 A float value or a constant float tensor. The exponential decay
-#'       rate for the exponentially weighted infinity norm.
+#'     rate for the exponentially weighted infinity norm.
 #' @param epsilon A small constant for numerical stability.
-#'       name: String. The name to use
-#'     for momentum accumulator weights created by
-#'     the optimizer.
-#' @param weight_decay Float, defaults to None. If set, weight decay is applied.
+#'     name: String. The name to use
+#'   for momentum accumulator weights created by
+#'   the optimizer.
+#' @param weight_decay Float. If set, weight decay is applied.
 #' @param clipnorm Float. If set, the gradient of each weight is individually
-#'     clipped so that its norm is no higher than this value.
-#' @param clipvalue Float. If set, the gradient of each weight is clipped to be no
-#'     higher than this value.
-#' @param global_clipnorm Float. If set, the gradient of all weights is clipped so
-#'     that their global norm is no higher than this value.
+#'   clipped so that its norm is no higher than this value.
+#' @param clipvalue Float. If set, the gradient of each weight is clipped to be
+#'   no higher than this value.
+#' @param global_clipnorm Float. If set, the gradient of all weights is clipped
+#'   so that their global norm is no higher than this value.
 #' @param use_ema Boolean, defaults to False. If True, exponential moving average
-#'     (EMA) is applied. EMA consists of computing an exponential moving
-#'     average of the weights of the model (as the weight values change after
-#'     each training batch), and periodically overwriting the weights with
-#'     their moving average.
+#'   (EMA) is applied. EMA consists of computing an exponential moving
+#'   average of the weights of the model (as the weight values change after
+#'   each training batch), and periodically overwriting the weights with
+#'   their moving average.
 #' @param ema_momentum Float, defaults to 0.99. Only used if `use_ema=True`.
-#'     This is the momentum to use when computing
-#'     the EMA of the model's weights:
-#'     `new_average = ema_momentum * old_average + (1 - ema_momentum) *
-#'     current_variable_value`.
+#'   This is the momentum to use when computing
+#'   the EMA of the model's weights:
+#'   `new_average = ema_momentum * old_average + (1 - ema_momentum) *
+#'   current_variable_value`.
 #' @param ema_overwrite_frequency Int or None, defaults to None. Only used if
-#'     `use_ema=True`. Every `ema_overwrite_frequency` steps of iterations,
-#'     we overwrite the model variable by its moving average.
-#'     If None, the optimizer
-#'     does not overwrite model variables in the middle of training, and you
-#'     need to explicitly overwrite the variables at the end of training
-#'     by calling `optimizer.finalize_variable_values()`
-#'     (which updates the model
-#'     variables in-place). When using the built-in `fit()` training loop,
-#'     this happens automatically after the last epoch,
-#'     and you don't need to do anything.
+#'   `use_ema=True`. Every `ema_overwrite_frequency` steps of iterations,
+#'   we overwrite the model variable by its moving average.
+#'   If None, the optimizer
+#'   does not overwrite model variables in the middle of training, and you
+#'   need to explicitly overwrite the variables at the end of training
+#'   by calling `optimizer.finalize_variable_values()`
+#'   (which updates the model
+#'   variables in-place). When using the built-in `fit()` training loop,
+#'   this happens automatically after the last epoch,
+#'   and you don't need to do anything.
 #' @param loss_scale_factor Float or `None`. If a float, the scale factor will
-#'     be multiplied the loss before computing gradients, and the inverse of
-#'     the scale factor will be multiplied by the gradients before updating
-#'     variables. Useful for preventing underflow during mixed precision
-#'     training. Alternately, `keras.optimizers.LossScaleOptimizer` will
-#'     automatically set a loss scale factor.
+#'   be multiplied the loss before computing gradients, and the inverse of
+#'   the scale factor will be multiplied by the gradients before updating
+#'   variables. Useful for preventing underflow during mixed precision
+#'   training. Alternately, `keras.optimizers.LossScaleOptimizer` will
+#'   automatically set a loss scale factor.
 #'
 #' @param name String, name for the object
 #' @param ... Passed on to the Python callable
@@ -834,24 +834,24 @@ r"-(Optimizer that implements the AdamW algorithm.
         name: String. The name to use
           for momentum accumulator weights created by
           the optimizer.
-      weight_decay: Float, defaults to None. If set, weight decay is applied.
-      clipnorm: Float. If set, the gradient of each weight is individually
+        weight_decay: Float. If set, weight decay is applied.
+        clipnorm: Float. If set, the gradient of each weight is individually
           clipped so that its norm is no higher than this value.
-      clipvalue: Float. If set, the gradient of each weight is clipped to be no
-          higher than this value.
-      global_clipnorm: Float. If set, the gradient of all weights is clipped so
-          that their global norm is no higher than this value.
-      use_ema: Boolean, defaults to False. If True, exponential moving average
+        clipvalue: Float. If set, the gradient of each weight is clipped to be
+          no higher than this value.
+        global_clipnorm: Float. If set, the gradient of all weights is clipped
+          so that their global norm is no higher than this value.
+        use_ema: Boolean, defaults to False. If True, exponential moving average
           (EMA) is applied. EMA consists of computing an exponential moving
           average of the weights of the model (as the weight values change after
           each training batch), and periodically overwriting the weights with
           their moving average.
-      ema_momentum: Float, defaults to 0.99. Only used if `use_ema=True`.
+        ema_momentum: Float, defaults to 0.99. Only used if `use_ema=True`.
           This is the momentum to use when computing
           the EMA of the model's weights:
           `new_average = ema_momentum * old_average + (1 - ema_momentum) *
           current_variable_value`.
-      ema_overwrite_frequency: Int or None, defaults to None. Only used if
+        ema_overwrite_frequency: Int or None, defaults to None. Only used if
           `use_ema=True`. Every `ema_overwrite_frequency` steps of iterations,
           we overwrite the model variable by its moving average.
           If None, the optimizer
@@ -862,7 +862,7 @@ r"-(Optimizer that implements the AdamW algorithm.
           variables in-place). When using the built-in `fit()` training loop,
           this happens automatically after the last epoch,
           and you don't need to do anything.
-      loss_scale_factor: Float or `None`. If a float, the scale factor will
+        loss_scale_factor: Float or `None`. If a float, the scale factor will
           be multiplied the loss before computing gradients, and the inverse of
           the scale factor will be multiplied by the gradients before updating
           variables. Useful for preventing underflow during mixed precision
@@ -900,61 +900,61 @@ r"-(Optimizer that implements the AdamW algorithm.
 #'     https://openreview.net/pdf?id=ryQu7f-RZ) for `amsgrad`.
 #'
 #' @param learning_rate A float, a
-#'       `keras.optimizers.schedules.LearningRateSchedule` instance, or
-#'       a callable that takes no arguments and returns the actual value to
-#'       use. The learning rate. Defaults to `0.001`.
+#'     `keras.optimizers.schedules.LearningRateSchedule` instance, or
+#'     a callable that takes no arguments and returns the actual value to
+#'     use. The learning rate. Defaults to `0.001`.
 #' @param beta_1 A float value or a constant float tensor, or a callable
-#'       that takes no arguments and returns the actual value to use. The
-#'       exponential decay rate for the 1st moment estimates.
-#'       Defaults to `0.9`.
+#'     that takes no arguments and returns the actual value to use. The
+#'     exponential decay rate for the 1st moment estimates.
+#'     Defaults to `0.9`.
 #' @param beta_2 A float value or a constant float tensor, or a callable
-#'       that takes no arguments and returns the actual value to use. The
-#'       exponential decay rate for the 2nd moment estimates.
-#'       Defaults to `0.999`.
+#'     that takes no arguments and returns the actual value to use. The
+#'     exponential decay rate for the 2nd moment estimates.
+#'     Defaults to `0.999`.
 #' @param epsilon A small constant for numerical stability. This epsilon is
-#'       "epsilon hat" in the Kingma and Ba paper (in the formula just
-#'       before Section 2.1), not the epsilon in Algorithm 1 of the paper.
-#'       Defaults to 1e-7.
+#'     "epsilon hat" in the Kingma and Ba paper (in the formula just
+#'     before Section 2.1), not the epsilon in Algorithm 1 of the paper.
+#'     Defaults to 1e-7.
 #' @param amsgrad Boolean. Whether to apply AMSGrad variant of this algorithm
-#'       from the paper "On the Convergence of Adam and beyond".
-#'       Defaults to `False`.
+#'     from the paper "On the Convergence of Adam and beyond".
+#'     Defaults to `False`.
 #' @param name String. The name to use
-#'     for momentum accumulator weights created by
-#'     the optimizer.
-#' @param weight_decay Float, defaults to None. If set, weight decay is applied.
+#'   for momentum accumulator weights created by
+#'   the optimizer.
+#' @param weight_decay Float. If set, weight decay is applied.
 #' @param clipnorm Float. If set, the gradient of each weight is individually
-#'     clipped so that its norm is no higher than this value.
-#' @param clipvalue Float. If set, the gradient of each weight is clipped to be no
-#'     higher than this value.
-#' @param global_clipnorm Float. If set, the gradient of all weights is clipped so
-#'     that their global norm is no higher than this value.
+#'   clipped so that its norm is no higher than this value.
+#' @param clipvalue Float. If set, the gradient of each weight is clipped to be
+#'   no higher than this value.
+#' @param global_clipnorm Float. If set, the gradient of all weights is clipped
+#'   so that their global norm is no higher than this value.
 #' @param use_ema Boolean, defaults to False. If True, exponential moving average
-#'     (EMA) is applied. EMA consists of computing an exponential moving
-#'     average of the weights of the model (as the weight values change after
-#'     each training batch), and periodically overwriting the weights with
-#'     their moving average.
+#'   (EMA) is applied. EMA consists of computing an exponential moving
+#'   average of the weights of the model (as the weight values change after
+#'   each training batch), and periodically overwriting the weights with
+#'   their moving average.
 #' @param ema_momentum Float, defaults to 0.99. Only used if `use_ema=True`.
-#'     This is the momentum to use when computing
-#'     the EMA of the model's weights:
-#'     `new_average = ema_momentum * old_average + (1 - ema_momentum) *
-#'     current_variable_value`.
+#'   This is the momentum to use when computing
+#'   the EMA of the model's weights:
+#'   `new_average = ema_momentum * old_average + (1 - ema_momentum) *
+#'   current_variable_value`.
 #' @param ema_overwrite_frequency Int or None, defaults to None. Only used if
-#'     `use_ema=True`. Every `ema_overwrite_frequency` steps of iterations,
-#'     we overwrite the model variable by its moving average.
-#'     If None, the optimizer
-#'     does not overwrite model variables in the middle of training, and you
-#'     need to explicitly overwrite the variables at the end of training
-#'     by calling `optimizer.finalize_variable_values()`
-#'     (which updates the model
-#'     variables in-place). When using the built-in `fit()` training loop,
-#'     this happens automatically after the last epoch,
-#'     and you don't need to do anything.
+#'   `use_ema=True`. Every `ema_overwrite_frequency` steps of iterations,
+#'   we overwrite the model variable by its moving average.
+#'   If None, the optimizer
+#'   does not overwrite model variables in the middle of training, and you
+#'   need to explicitly overwrite the variables at the end of training
+#'   by calling `optimizer.finalize_variable_values()`
+#'   (which updates the model
+#'   variables in-place). When using the built-in `fit()` training loop,
+#'   this happens automatically after the last epoch,
+#'   and you don't need to do anything.
 #' @param loss_scale_factor Float or `None`. If a float, the scale factor will
-#'     be multiplied the loss before computing gradients, and the inverse of
-#'     the scale factor will be multiplied by the gradients before updating
-#'     variables. Useful for preventing underflow during mixed precision
-#'     training. Alternately, `keras.optimizers.LossScaleOptimizer` will
-#'     automatically set a loss scale factor.
+#'   be multiplied the loss before computing gradients, and the inverse of
+#'   the scale factor will be multiplied by the gradients before updating
+#'   variables. Useful for preventing underflow during mixed precision
+#'   training. Alternately, `keras.optimizers.LossScaleOptimizer` will
+#'   automatically set a loss scale factor.
 #'
 #' @param ... Passed on to the Python callable
 #'
@@ -1045,24 +1045,24 @@ r"-(Optimizer that implements the FTRL algorithm.
         name: String. The name to use
           for momentum accumulator weights created by
           the optimizer.
-      weight_decay: Float, defaults to None. If set, weight decay is applied.
-      clipnorm: Float. If set, the gradient of each weight is individually
+        weight_decay: Float. If set, weight decay is applied.
+        clipnorm: Float. If set, the gradient of each weight is individually
           clipped so that its norm is no higher than this value.
-      clipvalue: Float. If set, the gradient of each weight is clipped to be no
-          higher than this value.
-      global_clipnorm: Float. If set, the gradient of all weights is clipped so
-          that their global norm is no higher than this value.
-      use_ema: Boolean, defaults to False. If True, exponential moving average
+        clipvalue: Float. If set, the gradient of each weight is clipped to be
+          no higher than this value.
+        global_clipnorm: Float. If set, the gradient of all weights is clipped
+          so that their global norm is no higher than this value.
+        use_ema: Boolean, defaults to False. If True, exponential moving average
           (EMA) is applied. EMA consists of computing an exponential moving
           average of the weights of the model (as the weight values change after
           each training batch), and periodically overwriting the weights with
           their moving average.
-      ema_momentum: Float, defaults to 0.99. Only used if `use_ema=True`.
+        ema_momentum: Float, defaults to 0.99. Only used if `use_ema=True`.
           This is the momentum to use when computing
           the EMA of the model's weights:
           `new_average = ema_momentum * old_average + (1 - ema_momentum) *
           current_variable_value`.
-      ema_overwrite_frequency: Int or None, defaults to None. Only used if
+        ema_overwrite_frequency: Int or None, defaults to None. Only used if
           `use_ema=True`. Every `ema_overwrite_frequency` steps of iterations,
           we overwrite the model variable by its moving average.
           If None, the optimizer
@@ -1073,7 +1073,7 @@ r"-(Optimizer that implements the FTRL algorithm.
           variables in-place). When using the built-in `fit()` training loop,
           this happens automatically after the last epoch,
           and you don't need to do anything.
-      loss_scale_factor: Float or `None`. If a float, the scale factor will
+        loss_scale_factor: Float or `None`. If a float, the scale factor will
           be multiplied the loss before computing gradients, and the inverse of
           the scale factor will be multiplied by the gradients before updating
           variables. Useful for preventing underflow during mixed precision
@@ -1128,62 +1128,62 @@ r"-(Optimizer that implements the FTRL algorithm.
 #' is replaced with a gradient with shrinkage.
 #'
 #' @param learning_rate A float, a
-#'       `keras.optimizers.schedules.LearningRateSchedule` instance, or
-#'       a callable that takes no arguments and returns the actual value to
-#'       use. The learning rate. Defaults to `0.001`.
+#'     `keras.optimizers.schedules.LearningRateSchedule` instance, or
+#'     a callable that takes no arguments and returns the actual value to
+#'     use. The learning rate. Defaults to `0.001`.
 #' @param learning_rate_power A float value, must be less or equal to zero.
-#'       Controls how the learning rate decreases during training. Use zero
-#'       for a fixed learning rate.
+#'     Controls how the learning rate decreases during training. Use zero
+#'     for a fixed learning rate.
 #' @param initial_accumulator_value The starting value for accumulators. Only
-#'       zero or positive values are allowed.
+#'     zero or positive values are allowed.
 #' @param l1_regularization_strength A float value, must be greater than or equal
-#'       to zero. Defaults to `0.0`.
+#'     to zero. Defaults to `0.0`.
 #' @param l2_regularization_strength A float value, must be greater than or equal
-#'       to zero. Defaults to `0.0`.
+#'     to zero. Defaults to `0.0`.
 #' @param l2_shrinkage_regularization_strength A float value, must be greater
-#'       than or equal to zero. This differs from L2 above in that the L2
-#'       above is a stabilization penalty, whereas this L2 shrinkage is a
-#'       magnitude penalty. When input is sparse shrinkage will only happen
-#'       on the active weights.
+#'     than or equal to zero. This differs from L2 above in that the L2
+#'     above is a stabilization penalty, whereas this L2 shrinkage is a
+#'     magnitude penalty. When input is sparse shrinkage will only happen
+#'     on the active weights.
 #' @param beta A float value, representing the beta value from the paper.
-#'       Defaults to `0.0`.
+#'     Defaults to `0.0`.
 #' @param name String. The name to use
-#'     for momentum accumulator weights created by
-#'     the optimizer.
-#' @param weight_decay Float, defaults to None. If set, weight decay is applied.
+#'   for momentum accumulator weights created by
+#'   the optimizer.
+#' @param weight_decay Float. If set, weight decay is applied.
 #' @param clipnorm Float. If set, the gradient of each weight is individually
-#'     clipped so that its norm is no higher than this value.
-#' @param clipvalue Float. If set, the gradient of each weight is clipped to be no
-#'     higher than this value.
-#' @param global_clipnorm Float. If set, the gradient of all weights is clipped so
-#'     that their global norm is no higher than this value.
+#'   clipped so that its norm is no higher than this value.
+#' @param clipvalue Float. If set, the gradient of each weight is clipped to be
+#'   no higher than this value.
+#' @param global_clipnorm Float. If set, the gradient of all weights is clipped
+#'   so that their global norm is no higher than this value.
 #' @param use_ema Boolean, defaults to False. If True, exponential moving average
-#'     (EMA) is applied. EMA consists of computing an exponential moving
-#'     average of the weights of the model (as the weight values change after
-#'     each training batch), and periodically overwriting the weights with
-#'     their moving average.
+#'   (EMA) is applied. EMA consists of computing an exponential moving
+#'   average of the weights of the model (as the weight values change after
+#'   each training batch), and periodically overwriting the weights with
+#'   their moving average.
 #' @param ema_momentum Float, defaults to 0.99. Only used if `use_ema=True`.
-#'     This is the momentum to use when computing
-#'     the EMA of the model's weights:
-#'     `new_average = ema_momentum * old_average + (1 - ema_momentum) *
-#'     current_variable_value`.
+#'   This is the momentum to use when computing
+#'   the EMA of the model's weights:
+#'   `new_average = ema_momentum * old_average + (1 - ema_momentum) *
+#'   current_variable_value`.
 #' @param ema_overwrite_frequency Int or None, defaults to None. Only used if
-#'     `use_ema=True`. Every `ema_overwrite_frequency` steps of iterations,
-#'     we overwrite the model variable by its moving average.
-#'     If None, the optimizer
-#'     does not overwrite model variables in the middle of training, and you
-#'     need to explicitly overwrite the variables at the end of training
-#'     by calling `optimizer.finalize_variable_values()`
-#'     (which updates the model
-#'     variables in-place). When using the built-in `fit()` training loop,
-#'     this happens automatically after the last epoch,
-#'     and you don't need to do anything.
+#'   `use_ema=True`. Every `ema_overwrite_frequency` steps of iterations,
+#'   we overwrite the model variable by its moving average.
+#'   If None, the optimizer
+#'   does not overwrite model variables in the middle of training, and you
+#'   need to explicitly overwrite the variables at the end of training
+#'   by calling `optimizer.finalize_variable_values()`
+#'   (which updates the model
+#'   variables in-place). When using the built-in `fit()` training loop,
+#'   this happens automatically after the last epoch,
+#'   and you don't need to do anything.
 #' @param loss_scale_factor Float or `None`. If a float, the scale factor will
-#'     be multiplied the loss before computing gradients, and the inverse of
-#'     the scale factor will be multiplied by the gradients before updating
-#'     variables. Useful for preventing underflow during mixed precision
-#'     training. Alternately, `keras.optimizers.LossScaleOptimizer` will
-#'     automatically set a loss scale factor.
+#'   be multiplied the loss before computing gradients, and the inverse of
+#'   the scale factor will be multiplied by the gradients before updating
+#'   variables. Useful for preventing underflow during mixed precision
+#'   training. Alternately, `keras.optimizers.LossScaleOptimizer` will
+#'   automatically set a loss scale factor.
 #' @param ... Passed on to the Python callable
 #'
 #' @export
@@ -1234,24 +1234,24 @@ r"-(Optimizer that implements the Lion algorithm.
         name: String. The name to use
           for momentum accumulator weights created by
           the optimizer.
-      weight_decay: Float, defaults to None. If set, weight decay is applied.
-      clipnorm: Float. If set, the gradient of each weight is individually
+        weight_decay: Float. If set, weight decay is applied.
+        clipnorm: Float. If set, the gradient of each weight is individually
           clipped so that its norm is no higher than this value.
-      clipvalue: Float. If set, the gradient of each weight is clipped to be no
-          higher than this value.
-      global_clipnorm: Float. If set, the gradient of all weights is clipped so
-          that their global norm is no higher than this value.
-      use_ema: Boolean, defaults to False. If True, exponential moving average
+        clipvalue: Float. If set, the gradient of each weight is clipped to be
+          no higher than this value.
+        global_clipnorm: Float. If set, the gradient of all weights is clipped
+          so that their global norm is no higher than this value.
+        use_ema: Boolean, defaults to False. If True, exponential moving average
           (EMA) is applied. EMA consists of computing an exponential moving
           average of the weights of the model (as the weight values change after
           each training batch), and periodically overwriting the weights with
           their moving average.
-      ema_momentum: Float, defaults to 0.99. Only used if `use_ema=True`.
+        ema_momentum: Float, defaults to 0.99. Only used if `use_ema=True`.
           This is the momentum to use when computing
           the EMA of the model's weights:
           `new_average = ema_momentum * old_average + (1 - ema_momentum) *
           current_variable_value`.
-      ema_overwrite_frequency: Int or None, defaults to None. Only used if
+        ema_overwrite_frequency: Int or None, defaults to None. Only used if
           `use_ema=True`. Every `ema_overwrite_frequency` steps of iterations,
           we overwrite the model variable by its moving average.
           If None, the optimizer
@@ -1262,7 +1262,7 @@ r"-(Optimizer that implements the Lion algorithm.
           variables in-place). When using the built-in `fit()` training loop,
           this happens automatically after the last epoch,
           and you don't need to do anything.
-      loss_scale_factor: Float or `None`. If a float, the scale factor will
+        loss_scale_factor: Float or `None`. If a float, the scale factor will
           be multiplied the loss before computing gradients, and the inverse of
           the scale factor will be multiplied by the gradients before updating
           variables. Useful for preventing underflow during mixed precision
@@ -1297,54 +1297,54 @@ r"-(Optimizer that implements the Lion algorithm.
 #'     http://github.com/google/automl/tree/master/lion)
 #'
 #' @param learning_rate A float, a
-#'       `keras.optimizers.schedules.LearningRateSchedule` instance, or
-#'       a callable that takes no arguments and returns the actual value to
-#'       use. The learning rate. Defaults to `0.001`.
+#'     `keras.optimizers.schedules.LearningRateSchedule` instance, or
+#'     a callable that takes no arguments and returns the actual value to
+#'     use. The learning rate. Defaults to `0.001`.
 #' @param beta_1 A float value or a constant float tensor, or a callable
-#'       that takes no arguments and returns the actual value to use. The
-#'       rate to combine the current gradient and the 1st moment estimate.
-#'       Defaults to `0.9`.
+#'     that takes no arguments and returns the actual value to use. The
+#'     rate to combine the current gradient and the 1st moment estimate.
+#'     Defaults to `0.9`.
 #' @param beta_2 A float value or a constant float tensor, or a callable
-#'       that takes no arguments and returns the actual value to use. The
-#'       exponential decay rate for the 1st moment estimate. Defaults to
-#'       `0.99`.
+#'     that takes no arguments and returns the actual value to use. The
+#'     exponential decay rate for the 1st moment estimate. Defaults to
+#'     `0.99`.
 #' @param name String. The name to use
-#'     for momentum accumulator weights created by
-#'     the optimizer.
-#' @param weight_decay Float, defaults to None. If set, weight decay is applied.
+#'   for momentum accumulator weights created by
+#'   the optimizer.
+#' @param weight_decay Float. If set, weight decay is applied.
 #' @param clipnorm Float. If set, the gradient of each weight is individually
-#'     clipped so that its norm is no higher than this value.
-#' @param clipvalue Float. If set, the gradient of each weight is clipped to be no
-#'     higher than this value.
-#' @param global_clipnorm Float. If set, the gradient of all weights is clipped so
-#'     that their global norm is no higher than this value.
+#'   clipped so that its norm is no higher than this value.
+#' @param clipvalue Float. If set, the gradient of each weight is clipped to be
+#'   no higher than this value.
+#' @param global_clipnorm Float. If set, the gradient of all weights is clipped
+#'   so that their global norm is no higher than this value.
 #' @param use_ema Boolean, defaults to False. If True, exponential moving average
-#'     (EMA) is applied. EMA consists of computing an exponential moving
-#'     average of the weights of the model (as the weight values change after
-#'     each training batch), and periodically overwriting the weights with
-#'     their moving average.
+#'   (EMA) is applied. EMA consists of computing an exponential moving
+#'   average of the weights of the model (as the weight values change after
+#'   each training batch), and periodically overwriting the weights with
+#'   their moving average.
 #' @param ema_momentum Float, defaults to 0.99. Only used if `use_ema=True`.
-#'     This is the momentum to use when computing
-#'     the EMA of the model's weights:
-#'     `new_average = ema_momentum * old_average + (1 - ema_momentum) *
-#'     current_variable_value`.
+#'   This is the momentum to use when computing
+#'   the EMA of the model's weights:
+#'   `new_average = ema_momentum * old_average + (1 - ema_momentum) *
+#'   current_variable_value`.
 #' @param ema_overwrite_frequency Int or None, defaults to None. Only used if
-#'     `use_ema=True`. Every `ema_overwrite_frequency` steps of iterations,
-#'     we overwrite the model variable by its moving average.
-#'     If None, the optimizer
-#'     does not overwrite model variables in the middle of training, and you
-#'     need to explicitly overwrite the variables at the end of training
-#'     by calling `optimizer.finalize_variable_values()`
-#'     (which updates the model
-#'     variables in-place). When using the built-in `fit()` training loop,
-#'     this happens automatically after the last epoch,
-#'     and you don't need to do anything.
+#'   `use_ema=True`. Every `ema_overwrite_frequency` steps of iterations,
+#'   we overwrite the model variable by its moving average.
+#'   If None, the optimizer
+#'   does not overwrite model variables in the middle of training, and you
+#'   need to explicitly overwrite the variables at the end of training
+#'   by calling `optimizer.finalize_variable_values()`
+#'   (which updates the model
+#'   variables in-place). When using the built-in `fit()` training loop,
+#'   this happens automatically after the last epoch,
+#'   and you don't need to do anything.
 #' @param loss_scale_factor Float or `None`. If a float, the scale factor will
-#'     be multiplied the loss before computing gradients, and the inverse of
-#'     the scale factor will be multiplied by the gradients before updating
-#'     variables. Useful for preventing underflow during mixed precision
-#'     training. Alternately, `keras.optimizers.LossScaleOptimizer` will
-#'     automatically set a loss scale factor.
+#'   be multiplied the loss before computing gradients, and the inverse of
+#'   the scale factor will be multiplied by the gradients before updating
+#'   variables. Useful for preventing underflow during mixed precision
+#'   training. Alternately, `keras.optimizers.LossScaleOptimizer` will
+#'   automatically set a loss scale factor.
 #'
 #' @param ... Passed on to the Python callable
 #'
@@ -1394,24 +1394,24 @@ r"-(An optimizer that dynamically scales the loss to prevent underflow.
         name: String. The name to use
           for momentum accumulator weights created by
           the optimizer.
-      weight_decay: Float, defaults to None. If set, weight decay is applied.
-      clipnorm: Float. If set, the gradient of each weight is individually
+        weight_decay: Float. If set, weight decay is applied.
+        clipnorm: Float. If set, the gradient of each weight is individually
           clipped so that its norm is no higher than this value.
-      clipvalue: Float. If set, the gradient of each weight is clipped to be no
-          higher than this value.
-      global_clipnorm: Float. If set, the gradient of all weights is clipped so
-          that their global norm is no higher than this value.
-      use_ema: Boolean, defaults to False. If True, exponential moving average
+        clipvalue: Float. If set, the gradient of each weight is clipped to be
+          no higher than this value.
+        global_clipnorm: Float. If set, the gradient of all weights is clipped
+          so that their global norm is no higher than this value.
+        use_ema: Boolean, defaults to False. If True, exponential moving average
           (EMA) is applied. EMA consists of computing an exponential moving
           average of the weights of the model (as the weight values change after
           each training batch), and periodically overwriting the weights with
           their moving average.
-      ema_momentum: Float, defaults to 0.99. Only used if `use_ema=True`.
+        ema_momentum: Float, defaults to 0.99. Only used if `use_ema=True`.
           This is the momentum to use when computing
           the EMA of the model's weights:
           `new_average = ema_momentum * old_average + (1 - ema_momentum) *
           current_variable_value`.
-      ema_overwrite_frequency: Int or None, defaults to None. Only used if
+        ema_overwrite_frequency: Int or None, defaults to None. Only used if
           `use_ema=True`. Every `ema_overwrite_frequency` steps of iterations,
           we overwrite the model variable by its moving average.
           If None, the optimizer
@@ -1422,7 +1422,7 @@ r"-(An optimizer that dynamically scales the loss to prevent underflow.
           variables in-place). When using the built-in `fit()` training loop,
           this happens automatically after the last epoch,
           and you don't need to do anything.
-      loss_scale_factor: Float or `None`. If a float, the scale factor will
+        loss_scale_factor: Float or `None`. If a float, the scale factor will
           be multiplied the loss before computing gradients, and the inverse of
           the scale factor will be multiplied by the gradients before updating
           variables. Useful for preventing underflow during mixed precision
@@ -1450,49 +1450,49 @@ r"-(An optimizer that dynamically scales the loss to prevent underflow.
 #'
 #' @param inner_optimizer The `keras.optimizers.Optimizer` instance to wrap.
 #' @param initial_scale Float. The initial loss scale. This scale will be updated
-#'       during training. It is recommended for this to be a very high
-#'       number, because a loss scale that is too high gets lowered far more
-#'       quickly than a loss scale that is too low gets raised.
+#'     during training. It is recommended for this to be a very high
+#'     number, because a loss scale that is too high gets lowered far more
+#'     quickly than a loss scale that is too low gets raised.
 #' @param dynamic_growth_steps Int. How often to update the scale upwards. After
-#'       every `dynamic_growth_steps` steps with finite gradients, the
-#'       loss scale is doubled.
+#'     every `dynamic_growth_steps` steps with finite gradients, the
+#'     loss scale is doubled.
 #' @param name String. The name to use
-#'     for momentum accumulator weights created by
-#'     the optimizer.
-#' @param weight_decay Float, defaults to None. If set, weight decay is applied.
+#'   for momentum accumulator weights created by
+#'   the optimizer.
+#' @param weight_decay Float. If set, weight decay is applied.
 #' @param clipnorm Float. If set, the gradient of each weight is individually
-#'     clipped so that its norm is no higher than this value.
-#' @param clipvalue Float. If set, the gradient of each weight is clipped to be no
-#'     higher than this value.
-#' @param global_clipnorm Float. If set, the gradient of all weights is clipped so
-#'     that their global norm is no higher than this value.
+#'   clipped so that its norm is no higher than this value.
+#' @param clipvalue Float. If set, the gradient of each weight is clipped to be
+#'   no higher than this value.
+#' @param global_clipnorm Float. If set, the gradient of all weights is clipped
+#'   so that their global norm is no higher than this value.
 #' @param use_ema Boolean, defaults to False. If True, exponential moving average
-#'     (EMA) is applied. EMA consists of computing an exponential moving
-#'     average of the weights of the model (as the weight values change after
-#'     each training batch), and periodically overwriting the weights with
-#'     their moving average.
+#'   (EMA) is applied. EMA consists of computing an exponential moving
+#'   average of the weights of the model (as the weight values change after
+#'   each training batch), and periodically overwriting the weights with
+#'   their moving average.
 #' @param ema_momentum Float, defaults to 0.99. Only used if `use_ema=True`.
-#'     This is the momentum to use when computing
-#'     the EMA of the model's weights:
-#'     `new_average = ema_momentum * old_average + (1 - ema_momentum) *
-#'     current_variable_value`.
+#'   This is the momentum to use when computing
+#'   the EMA of the model's weights:
+#'   `new_average = ema_momentum * old_average + (1 - ema_momentum) *
+#'   current_variable_value`.
 #' @param ema_overwrite_frequency Int or None, defaults to None. Only used if
-#'     `use_ema=True`. Every `ema_overwrite_frequency` steps of iterations,
-#'     we overwrite the model variable by its moving average.
-#'     If None, the optimizer
-#'     does not overwrite model variables in the middle of training, and you
-#'     need to explicitly overwrite the variables at the end of training
-#'     by calling `optimizer.finalize_variable_values()`
-#'     (which updates the model
-#'     variables in-place). When using the built-in `fit()` training loop,
-#'     this happens automatically after the last epoch,
-#'     and you don't need to do anything.
+#'   `use_ema=True`. Every `ema_overwrite_frequency` steps of iterations,
+#'   we overwrite the model variable by its moving average.
+#'   If None, the optimizer
+#'   does not overwrite model variables in the middle of training, and you
+#'   need to explicitly overwrite the variables at the end of training
+#'   by calling `optimizer.finalize_variable_values()`
+#'   (which updates the model
+#'   variables in-place). When using the built-in `fit()` training loop,
+#'   this happens automatically after the last epoch,
+#'   and you don't need to do anything.
 #' @param loss_scale_factor Float or `None`. If a float, the scale factor will
-#'     be multiplied the loss before computing gradients, and the inverse of
-#'     the scale factor will be multiplied by the gradients before updating
-#'     variables. Useful for preventing underflow during mixed precision
-#'     training. Alternately, `keras.optimizers.LossScaleOptimizer` will
-#'     automatically set a loss scale factor.
+#'   be multiplied the loss before computing gradients, and the inverse of
+#'   the scale factor will be multiplied by the gradients before updating
+#'   variables. Useful for preventing underflow during mixed precision
+#'   training. Alternately, `keras.optimizers.LossScaleOptimizer` will
+#'   automatically set a loss scale factor.
 #' @param ... Passed on to the Python callable
 #'
 #' @export
@@ -1538,24 +1538,24 @@ r"-(Optimizer that implements the Nadam algorithm.
         name: String. The name to use
           for momentum accumulator weights created by
           the optimizer.
-      weight_decay: Float, defaults to None. If set, weight decay is applied.
-      clipnorm: Float. If set, the gradient of each weight is individually
+        weight_decay: Float. If set, weight decay is applied.
+        clipnorm: Float. If set, the gradient of each weight is individually
           clipped so that its norm is no higher than this value.
-      clipvalue: Float. If set, the gradient of each weight is clipped to be no
-          higher than this value.
-      global_clipnorm: Float. If set, the gradient of all weights is clipped so
-          that their global norm is no higher than this value.
-      use_ema: Boolean, defaults to False. If True, exponential moving average
+        clipvalue: Float. If set, the gradient of each weight is clipped to be
+          no higher than this value.
+        global_clipnorm: Float. If set, the gradient of all weights is clipped
+          so that their global norm is no higher than this value.
+        use_ema: Boolean, defaults to False. If True, exponential moving average
           (EMA) is applied. EMA consists of computing an exponential moving
           average of the weights of the model (as the weight values change after
           each training batch), and periodically overwriting the weights with
           their moving average.
-      ema_momentum: Float, defaults to 0.99. Only used if `use_ema=True`.
+        ema_momentum: Float, defaults to 0.99. Only used if `use_ema=True`.
           This is the momentum to use when computing
           the EMA of the model's weights:
           `new_average = ema_momentum * old_average + (1 - ema_momentum) *
           current_variable_value`.
-      ema_overwrite_frequency: Int or None, defaults to None. Only used if
+        ema_overwrite_frequency: Int or None, defaults to None. Only used if
           `use_ema=True`. Every `ema_overwrite_frequency` steps of iterations,
           we overwrite the model variable by its moving average.
           If None, the optimizer
@@ -1566,7 +1566,7 @@ r"-(Optimizer that implements the Nadam algorithm.
           variables in-place). When using the built-in `fit()` training loop,
           this happens automatically after the last epoch,
           and you don't need to do anything.
-      loss_scale_factor: Float or `None`. If a float, the scale factor will
+        loss_scale_factor: Float or `None`. If a float, the scale factor will
           be multiplied the loss before computing gradients, and the inverse of
           the scale factor will be multiplied by the gradients before updating
           variables. Useful for preventing underflow during mixed precision
@@ -1589,58 +1589,58 @@ r"-(Optimizer that implements the Nadam algorithm.
 #' - [Dozat, 2015](http://cs229.stanford.edu/proj2015/054_report.pdf).
 #'
 #' @param learning_rate A float, a
-#'       `keras.optimizers.schedules.LearningRateSchedule` instance, or
-#'       a callable that takes no arguments and returns the actual value to
-#'       use. The learning rate. Defaults to `0.001`.
+#'     `keras.optimizers.schedules.LearningRateSchedule` instance, or
+#'     a callable that takes no arguments and returns the actual value to
+#'     use. The learning rate. Defaults to `0.001`.
 #' @param beta_1 A float value or a constant float tensor, or a callable
-#'       that takes no arguments and returns the actual value to use. The
-#'       exponential decay rate for the 1st moment estimates.
-#'       Defaults to `0.9`.
+#'     that takes no arguments and returns the actual value to use. The
+#'     exponential decay rate for the 1st moment estimates.
+#'     Defaults to `0.9`.
 #' @param beta_2 A float value or a constant float tensor, or a callable
-#'       that takes no arguments and returns the actual value to use. The
-#'       exponential decay rate for the 2nd moment estimates. Defaults to
-#'       `0.999`.
+#'     that takes no arguments and returns the actual value to use. The
+#'     exponential decay rate for the 2nd moment estimates. Defaults to
+#'     `0.999`.
 #' @param epsilon A small constant for numerical stability. This epsilon is
-#'       "epsilon hat" in the Kingma and Ba paper (in the formula just before
-#'       Section 2.1), not the epsilon in Algorithm 1 of the paper.
-#'       Defaults to `1e-7`.
+#'     "epsilon hat" in the Kingma and Ba paper (in the formula just before
+#'     Section 2.1), not the epsilon in Algorithm 1 of the paper.
+#'     Defaults to `1e-7`.
 #' @param name String. The name to use
-#'     for momentum accumulator weights created by
-#'     the optimizer.
-#' @param weight_decay Float, defaults to None. If set, weight decay is applied.
+#'   for momentum accumulator weights created by
+#'   the optimizer.
+#' @param weight_decay Float. If set, weight decay is applied.
 #' @param clipnorm Float. If set, the gradient of each weight is individually
-#'     clipped so that its norm is no higher than this value.
-#' @param clipvalue Float. If set, the gradient of each weight is clipped to be no
-#'     higher than this value.
-#' @param global_clipnorm Float. If set, the gradient of all weights is clipped so
-#'     that their global norm is no higher than this value.
+#'   clipped so that its norm is no higher than this value.
+#' @param clipvalue Float. If set, the gradient of each weight is clipped to be
+#'   no higher than this value.
+#' @param global_clipnorm Float. If set, the gradient of all weights is clipped
+#'   so that their global norm is no higher than this value.
 #' @param use_ema Boolean, defaults to False. If True, exponential moving average
-#'     (EMA) is applied. EMA consists of computing an exponential moving
-#'     average of the weights of the model (as the weight values change after
-#'     each training batch), and periodically overwriting the weights with
-#'     their moving average.
+#'   (EMA) is applied. EMA consists of computing an exponential moving
+#'   average of the weights of the model (as the weight values change after
+#'   each training batch), and periodically overwriting the weights with
+#'   their moving average.
 #' @param ema_momentum Float, defaults to 0.99. Only used if `use_ema=True`.
-#'     This is the momentum to use when computing
-#'     the EMA of the model's weights:
-#'     `new_average = ema_momentum * old_average + (1 - ema_momentum) *
-#'     current_variable_value`.
+#'   This is the momentum to use when computing
+#'   the EMA of the model's weights:
+#'   `new_average = ema_momentum * old_average + (1 - ema_momentum) *
+#'   current_variable_value`.
 #' @param ema_overwrite_frequency Int or None, defaults to None. Only used if
-#'     `use_ema=True`. Every `ema_overwrite_frequency` steps of iterations,
-#'     we overwrite the model variable by its moving average.
-#'     If None, the optimizer
-#'     does not overwrite model variables in the middle of training, and you
-#'     need to explicitly overwrite the variables at the end of training
-#'     by calling `optimizer.finalize_variable_values()`
-#'     (which updates the model
-#'     variables in-place). When using the built-in `fit()` training loop,
-#'     this happens automatically after the last epoch,
-#'     and you don't need to do anything.
+#'   `use_ema=True`. Every `ema_overwrite_frequency` steps of iterations,
+#'   we overwrite the model variable by its moving average.
+#'   If None, the optimizer
+#'   does not overwrite model variables in the middle of training, and you
+#'   need to explicitly overwrite the variables at the end of training
+#'   by calling `optimizer.finalize_variable_values()`
+#'   (which updates the model
+#'   variables in-place). When using the built-in `fit()` training loop,
+#'   this happens automatically after the last epoch,
+#'   and you don't need to do anything.
 #' @param loss_scale_factor Float or `None`. If a float, the scale factor will
-#'     be multiplied the loss before computing gradients, and the inverse of
-#'     the scale factor will be multiplied by the gradients before updating
-#'     variables. Useful for preventing underflow during mixed precision
-#'     training. Alternately, `keras.optimizers.LossScaleOptimizer` will
-#'     automatically set a loss scale factor.
+#'   be multiplied the loss before computing gradients, and the inverse of
+#'   the scale factor will be multiplied by the gradients before updating
+#'   variables. Useful for preventing underflow during mixed precision
+#'   training. Alternately, `keras.optimizers.LossScaleOptimizer` will
+#'   automatically set a loss scale factor.
 #'
 #' @param ... Passed on to the Python callable
 #'
@@ -1692,24 +1692,24 @@ r"-(Optimizer that implements the RMSprop algorithm.
         name: String. The name to use
           for momentum accumulator weights created by
           the optimizer.
-      weight_decay: Float, defaults to None. If set, weight decay is applied.
-      clipnorm: Float. If set, the gradient of each weight is individually
+        weight_decay: Float. If set, weight decay is applied.
+        clipnorm: Float. If set, the gradient of each weight is individually
           clipped so that its norm is no higher than this value.
-      clipvalue: Float. If set, the gradient of each weight is clipped to be no
-          higher than this value.
-      global_clipnorm: Float. If set, the gradient of all weights is clipped so
-          that their global norm is no higher than this value.
-      use_ema: Boolean, defaults to False. If True, exponential moving average
+        clipvalue: Float. If set, the gradient of each weight is clipped to be
+          no higher than this value.
+        global_clipnorm: Float. If set, the gradient of all weights is clipped
+          so that their global norm is no higher than this value.
+        use_ema: Boolean, defaults to False. If True, exponential moving average
           (EMA) is applied. EMA consists of computing an exponential moving
           average of the weights of the model (as the weight values change after
           each training batch), and periodically overwriting the weights with
           their moving average.
-      ema_momentum: Float, defaults to 0.99. Only used if `use_ema=True`.
+        ema_momentum: Float, defaults to 0.99. Only used if `use_ema=True`.
           This is the momentum to use when computing
           the EMA of the model's weights:
           `new_average = ema_momentum * old_average + (1 - ema_momentum) *
           current_variable_value`.
-      ema_overwrite_frequency: Int or None, defaults to None. Only used if
+        ema_overwrite_frequency: Int or None, defaults to None. Only used if
           `use_ema=True`. Every `ema_overwrite_frequency` steps of iterations,
           we overwrite the model variable by its moving average.
           If None, the optimizer
@@ -1720,7 +1720,7 @@ r"-(Optimizer that implements the RMSprop algorithm.
           variables in-place). When using the built-in `fit()` training loop,
           this happens automatically after the last epoch,
           and you don't need to do anything.
-      loss_scale_factor: Float or `None`. If a float, the scale factor will
+        loss_scale_factor: Float or `None`. If a float, the scale factor will
           be multiplied the loss before computing gradients, and the inverse of
           the scale factor will be multiplied by the gradients before updating
           variables. Useful for preventing underflow during mixed precision
@@ -1770,57 +1770,57 @@ r"-(Optimizer that implements the RMSprop algorithm.
 #'     http://www.cs.toronto.edu/~tijmen/csc321/slides/lecture_slides_lec6.pdf)
 #'
 #' @param learning_rate A float, a
-#'       `keras.optimizers.schedules.LearningRateSchedule` instance, or
-#'       a callable that takes no arguments and returns the actual value to
-#'       use. The learning rate. Defaults to `0.001`.
+#'     `keras.optimizers.schedules.LearningRateSchedule` instance, or
+#'     a callable that takes no arguments and returns the actual value to
+#'     use. The learning rate. Defaults to `0.001`.
 #' @param rho float, defaults to 0.9. Discounting factor for the old gradients.
 #' @param momentum float, defaults to 0.0. If not 0.0., the optimizer tracks the
-#'       momentum value, with a decay rate equals to `1 - momentum`.
+#'     momentum value, with a decay rate equals to `1 - momentum`.
 #' @param epsilon A small constant for numerical stability. This epsilon is
-#'       "epsilon hat" in the Kingma and Ba paper (in the formula just before
-#'       Section 2.1), not the epsilon in Algorithm 1 of the paper. Defaults
-#'       to 1e-7.
+#'     "epsilon hat" in the Kingma and Ba paper (in the formula just before
+#'     Section 2.1), not the epsilon in Algorithm 1 of the paper. Defaults
+#'     to 1e-7.
 #' @param centered Boolean. If `True`, gradients are normalized by the estimated
-#'       variance of the gradient; if False, by the uncentered second moment.
-#'       Setting this to `True` may help with training, but is slightly more
-#'       expensive in terms of computation and memory. Defaults to `False`.
+#'     variance of the gradient; if False, by the uncentered second moment.
+#'     Setting this to `True` may help with training, but is slightly more
+#'     expensive in terms of computation and memory. Defaults to `False`.
 #' @param name String. The name to use
-#'     for momentum accumulator weights created by
-#'     the optimizer.
-#' @param weight_decay Float, defaults to None. If set, weight decay is applied.
+#'   for momentum accumulator weights created by
+#'   the optimizer.
+#' @param weight_decay Float. If set, weight decay is applied.
 #' @param clipnorm Float. If set, the gradient of each weight is individually
-#'     clipped so that its norm is no higher than this value.
-#' @param clipvalue Float. If set, the gradient of each weight is clipped to be no
-#'     higher than this value.
-#' @param global_clipnorm Float. If set, the gradient of all weights is clipped so
-#'     that their global norm is no higher than this value.
+#'   clipped so that its norm is no higher than this value.
+#' @param clipvalue Float. If set, the gradient of each weight is clipped to be
+#'   no higher than this value.
+#' @param global_clipnorm Float. If set, the gradient of all weights is clipped
+#'   so that their global norm is no higher than this value.
 #' @param use_ema Boolean, defaults to False. If True, exponential moving average
-#'     (EMA) is applied. EMA consists of computing an exponential moving
-#'     average of the weights of the model (as the weight values change after
-#'     each training batch), and periodically overwriting the weights with
-#'     their moving average.
+#'   (EMA) is applied. EMA consists of computing an exponential moving
+#'   average of the weights of the model (as the weight values change after
+#'   each training batch), and periodically overwriting the weights with
+#'   their moving average.
 #' @param ema_momentum Float, defaults to 0.99. Only used if `use_ema=True`.
-#'     This is the momentum to use when computing
-#'     the EMA of the model's weights:
-#'     `new_average = ema_momentum * old_average + (1 - ema_momentum) *
-#'     current_variable_value`.
+#'   This is the momentum to use when computing
+#'   the EMA of the model's weights:
+#'   `new_average = ema_momentum * old_average + (1 - ema_momentum) *
+#'   current_variable_value`.
 #' @param ema_overwrite_frequency Int or None, defaults to None. Only used if
-#'     `use_ema=True`. Every `ema_overwrite_frequency` steps of iterations,
-#'     we overwrite the model variable by its moving average.
-#'     If None, the optimizer
-#'     does not overwrite model variables in the middle of training, and you
-#'     need to explicitly overwrite the variables at the end of training
-#'     by calling `optimizer.finalize_variable_values()`
-#'     (which updates the model
-#'     variables in-place). When using the built-in `fit()` training loop,
-#'     this happens automatically after the last epoch,
-#'     and you don't need to do anything.
+#'   `use_ema=True`. Every `ema_overwrite_frequency` steps of iterations,
+#'   we overwrite the model variable by its moving average.
+#'   If None, the optimizer
+#'   does not overwrite model variables in the middle of training, and you
+#'   need to explicitly overwrite the variables at the end of training
+#'   by calling `optimizer.finalize_variable_values()`
+#'   (which updates the model
+#'   variables in-place). When using the built-in `fit()` training loop,
+#'   this happens automatically after the last epoch,
+#'   and you don't need to do anything.
 #' @param loss_scale_factor Float or `None`. If a float, the scale factor will
-#'     be multiplied the loss before computing gradients, and the inverse of
-#'     the scale factor will be multiplied by the gradients before updating
-#'     variables. Useful for preventing underflow during mixed precision
-#'     training. Alternately, `keras.optimizers.LossScaleOptimizer` will
-#'     automatically set a loss scale factor.
+#'   be multiplied the loss before computing gradients, and the inverse of
+#'   the scale factor will be multiplied by the gradients before updating
+#'   variables. Useful for preventing underflow during mixed precision
+#'   training. Alternately, `keras.optimizers.LossScaleOptimizer` will
+#'   automatically set a loss scale factor.
 #'
 #' @param ... Passed on to the Python callable
 #'
@@ -1876,24 +1876,24 @@ r"-(Gradient descent (with momentum) optimizer.
         name: String. The name to use
           for momentum accumulator weights created by
           the optimizer.
-      weight_decay: Float, defaults to None. If set, weight decay is applied.
-      clipnorm: Float. If set, the gradient of each weight is individually
+        weight_decay: Float. If set, weight decay is applied.
+        clipnorm: Float. If set, the gradient of each weight is individually
           clipped so that its norm is no higher than this value.
-      clipvalue: Float. If set, the gradient of each weight is clipped to be no
-          higher than this value.
-      global_clipnorm: Float. If set, the gradient of all weights is clipped so
-          that their global norm is no higher than this value.
-      use_ema: Boolean, defaults to False. If True, exponential moving average
+        clipvalue: Float. If set, the gradient of each weight is clipped to be
+          no higher than this value.
+        global_clipnorm: Float. If set, the gradient of all weights is clipped
+          so that their global norm is no higher than this value.
+        use_ema: Boolean, defaults to False. If True, exponential moving average
           (EMA) is applied. EMA consists of computing an exponential moving
           average of the weights of the model (as the weight values change after
           each training batch), and periodically overwriting the weights with
           their moving average.
-      ema_momentum: Float, defaults to 0.99. Only used if `use_ema=True`.
+        ema_momentum: Float, defaults to 0.99. Only used if `use_ema=True`.
           This is the momentum to use when computing
           the EMA of the model's weights:
           `new_average = ema_momentum * old_average + (1 - ema_momentum) *
           current_variable_value`.
-      ema_overwrite_frequency: Int or None, defaults to None. Only used if
+        ema_overwrite_frequency: Int or None, defaults to None. Only used if
           `use_ema=True`. Every `ema_overwrite_frequency` steps of iterations,
           we overwrite the model variable by its moving average.
           If None, the optimizer
@@ -1904,7 +1904,7 @@ r"-(Gradient descent (with momentum) optimizer.
           variables in-place). When using the built-in `fit()` training loop,
           this happens automatically after the last epoch,
           and you don't need to do anything.
-      loss_scale_factor: Float or `None`. If a float, the scale factor will
+        loss_scale_factor: Float or `None`. If a float, the scale factor will
           be multiplied the loss before computing gradients, and the inverse of
           the scale factor will be multiplied by the gradients before updating
           variables. Useful for preventing underflow during mixed precision
@@ -1936,51 +1936,51 @@ r"-(Gradient descent (with momentum) optimizer.
 #' ```
 #'
 #' @param learning_rate A float, a
-#'       `keras.optimizers.schedules.LearningRateSchedule` instance, or
-#'       a callable that takes no arguments and returns the actual value to
-#'       use. The learning rate. Defaults to `0.01`.
+#'     `keras.optimizers.schedules.LearningRateSchedule` instance, or
+#'     a callable that takes no arguments and returns the actual value to
+#'     use. The learning rate. Defaults to `0.01`.
 #' @param momentum float hyperparameter >= 0 that accelerates gradient descent in
-#'       the relevant direction and dampens oscillations. 0 is vanilla
-#'       gradient descent. Defaults to `0.0`.
+#'     the relevant direction and dampens oscillations. 0 is vanilla
+#'     gradient descent. Defaults to `0.0`.
 #' @param nesterov boolean. Whether to apply Nesterov momentum.
-#'       Defaults to `False`.
+#'     Defaults to `False`.
 #' @param name String. The name to use
-#'     for momentum accumulator weights created by
-#'     the optimizer.
-#' @param weight_decay Float, defaults to None. If set, weight decay is applied.
+#'   for momentum accumulator weights created by
+#'   the optimizer.
+#' @param weight_decay Float. If set, weight decay is applied.
 #' @param clipnorm Float. If set, the gradient of each weight is individually
-#'     clipped so that its norm is no higher than this value.
-#' @param clipvalue Float. If set, the gradient of each weight is clipped to be no
-#'     higher than this value.
-#' @param global_clipnorm Float. If set, the gradient of all weights is clipped so
-#'     that their global norm is no higher than this value.
+#'   clipped so that its norm is no higher than this value.
+#' @param clipvalue Float. If set, the gradient of each weight is clipped to be
+#'   no higher than this value.
+#' @param global_clipnorm Float. If set, the gradient of all weights is clipped
+#'   so that their global norm is no higher than this value.
 #' @param use_ema Boolean, defaults to False. If True, exponential moving average
-#'     (EMA) is applied. EMA consists of computing an exponential moving
-#'     average of the weights of the model (as the weight values change after
-#'     each training batch), and periodically overwriting the weights with
-#'     their moving average.
+#'   (EMA) is applied. EMA consists of computing an exponential moving
+#'   average of the weights of the model (as the weight values change after
+#'   each training batch), and periodically overwriting the weights with
+#'   their moving average.
 #' @param ema_momentum Float, defaults to 0.99. Only used if `use_ema=True`.
-#'     This is the momentum to use when computing
-#'     the EMA of the model's weights:
-#'     `new_average = ema_momentum * old_average + (1 - ema_momentum) *
-#'     current_variable_value`.
+#'   This is the momentum to use when computing
+#'   the EMA of the model's weights:
+#'   `new_average = ema_momentum * old_average + (1 - ema_momentum) *
+#'   current_variable_value`.
 #' @param ema_overwrite_frequency Int or None, defaults to None. Only used if
-#'     `use_ema=True`. Every `ema_overwrite_frequency` steps of iterations,
-#'     we overwrite the model variable by its moving average.
-#'     If None, the optimizer
-#'     does not overwrite model variables in the middle of training, and you
-#'     need to explicitly overwrite the variables at the end of training
-#'     by calling `optimizer.finalize_variable_values()`
-#'     (which updates the model
-#'     variables in-place). When using the built-in `fit()` training loop,
-#'     this happens automatically after the last epoch,
-#'     and you don't need to do anything.
+#'   `use_ema=True`. Every `ema_overwrite_frequency` steps of iterations,
+#'   we overwrite the model variable by its moving average.
+#'   If None, the optimizer
+#'   does not overwrite model variables in the middle of training, and you
+#'   need to explicitly overwrite the variables at the end of training
+#'   by calling `optimizer.finalize_variable_values()`
+#'   (which updates the model
+#'   variables in-place). When using the built-in `fit()` training loop,
+#'   this happens automatically after the last epoch,
+#'   and you don't need to do anything.
 #' @param loss_scale_factor Float or `None`. If a float, the scale factor will
-#'     be multiplied the loss before computing gradients, and the inverse of
-#'     the scale factor will be multiplied by the gradients before updating
-#'     variables. Useful for preventing underflow during mixed precision
-#'     training. Alternately, `keras.optimizers.LossScaleOptimizer` will
-#'     automatically set a loss scale factor.
+#'   be multiplied the loss before computing gradients, and the inverse of
+#'   the scale factor will be multiplied by the gradients before updating
+#'   variables. Useful for preventing underflow during mixed precision
+#'   training. Alternately, `keras.optimizers.LossScaleOptimizer` will
+#'   automatically set a loss scale factor.
 #' @param ... Passed on to the Python callable
 #'
 #' @export
