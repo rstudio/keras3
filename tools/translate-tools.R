@@ -99,16 +99,24 @@ prompt_translate_roxygen_instructions_and_examples <- list %(% {
   assistant = r"---(
     #' Initializer that generates tensors initialized to 0.
     #'
-    #' @family initializer
-    #' @export
-    #' @examples
+    #' @description
+    #'
+    #' # Examples
+    #'
+    #' ```{r}
     #' # Standalone usage:
     #' initializer <- initializer_zeros()
     #' values <- initializer(shape = c(2, 2))
+    #' ```
     #'
+    #' ```{r}
     #' # Usage in a Keras layer:
     #' initializer <- initializer_zeros()
     #' layer <- layer_dense(units = 3, kernel_initializer = initializer)
+    #' ```
+    #'
+    #' @family initializer
+    #' @export
     )---"
 
   # ---- layer_embedding ----
@@ -174,6 +182,23 @@ prompt_translate_roxygen_instructions_and_examples <- list %(% {
     #'
     #' This layer can only be used on positive integer inputs of a fixed range.
     #'
+    #' # Examples
+    #' ```{r}
+    #' model <- keras_model_sequential() %>%
+    #'   layer_embedding(1000, 64, input_length = 10)
+    #'
+    #' # The model will take as input an integer matrix of size (batch,
+    #' # input_length), and the largest integer (i.e. word index) in the input
+    #' # should be no larger than 999 (vocabulary size).
+    #' # Now model$output_shape is (NA, 10, 64), where `NA` is the batch
+    #' # dimension.
+    #'
+    #' input_array <- random_array(c(32, 10), gen = sample.int)
+    #' model %>% compile('rmsprop', 'mse')
+    #' output_array <- model %>% predict(input_array)
+    #' print(dim(output_array))   # (32, 10, 64)
+    #' ```
+    #'
     #' # Input Shape
     #'     2D tensor with shape: `(batch_size, input_length)`.
     #'
@@ -203,20 +228,7 @@ prompt_translate_roxygen_instructions_and_examples <- list %(% {
     #' @family core layers
     #' @export
     #' @examples
-    #' model <- keras_model_sequential() %>%
-    #'   layer_embedding(1000, 64, input_length = 10)
-    #'
-    #' # The model will take as input an integer matrix of size (batch,
-    #' # input_length), and the largest integer (i.e. word index) in the input
-    #' # should be no larger than 999 (vocabulary size).
-    #' # Now model$output_shape is (NA, 10, 64), where `NA` is the batch
-    #' # dimension.
-    #'
-    #' input_array <- random_array(c(32, 10), gen = sample.int)
-    #' model %>% compile('rmsprop', 'mse')
-    #' output_array <- model %>% predict(input_array)
-    #' print(dim(output_array))
-    #' # (32, 10, 64)
+
     )---"
 
 
@@ -252,14 +264,15 @@ prompt_translate_roxygen_instructions_and_examples <- list %(% {
     )--"
 
   assistant = r"--(
-    #' @examples
+    #' ```{r}
     #' # The inputs are 28x28 RGB images with `channels_last` and the batch
     #' # size is 4.
-    #' input_shape = shape(4, 28, 28, 3)
+    #' input_shape <- shape(4, 28, 28, 3)
     #' x <- tf$random$normal(input_shape)
     #' y <- x |>
     #'   layer_conv_2d(2, 3, activation='relu')
     #' y$shape   # (4, 26, 26, 2)
+    #' ```
     )--"
 
   # ---- layer_hashing example ----
@@ -277,10 +290,11 @@ prompt_translate_roxygen_instructions_and_examples <- list %(% {
     )---"
 
   assistant = r"---(
-    #' @examples
+    #' ```{r}
     #' layer <- layer_hashing(num_bins = 3, salt = 133)
     #' inp <- c('A', 'B', 'C', 'D', 'E')
     #' layer(inp)
+    #' ```
     )---"
 }
 
