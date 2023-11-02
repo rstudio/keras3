@@ -1,3 +1,5 @@
+#!source envir::attach_source(.file)
+
 # ---- setup attach  ----
 
 library_stable <-
@@ -553,17 +555,8 @@ make_r_name <- function(endpoint, module = py_eval(endpoint)$`__module__`) {
 
   type <- keras_class_type(py_eval(endpoint))
 
-  # TODO: this func is due a refactor
-  #   - we should only call snake_case() on camelcase objects (e.g.,
-  #     no need to call it on ops.
-  #   - handle prefixes better
   # manual renames
   if(!is.null(r_name <- switch %(% { endpoint
-    # "keras.preprocessing.image.array_to_img" = "image_from_array"
-    # "keras.preprocessing.image.img_to_array" = "image_to_array"
-    # "keras.preprocessing.image.load_img" =  "image_load"
-    # "keras.preprocessing.image.save_img" = "image_array_save"
-    # "keras.preprocessing.sequence.pad_sequences" = "pad_sequences"
 
     "keras.utils.array_to_img" = "image_from_array"
     "keras.utils.img_to_array" = "image_to_array"
@@ -610,7 +603,6 @@ make_r_name <- function(endpoint, module = py_eval(endpoint)$`__module__`) {
   prefix <- switch(prefix,
                    # "random" = "k_random",
                    # "config" = "k_config",
-
                    "ops" = "k",
                    prefix)
 
@@ -622,8 +614,13 @@ make_r_name <- function(endpoint, module = py_eval(endpoint)$`__module__`) {
   #   endpoint %<>% str_replace(fixed(".preprocessing."), ".")
 
 
-  # if(endpoint == ) return("")
-
+  # if(endpoint == "keras.utils.FeatureSpace") return("layer_feature_space")
+  # # TODO: why is FeatureSpace not exported to keras.layers.FeatureSpace?
+  # # Does instantiation and composition in one call make sense, or
+  # # does the need for adapt() throw a wrench in the works (and mean that
+  # # using compose_layer() doesn't make sense)...
+  # # maybe this should have a name like "preprocess_feature_space()" or
+  # # layer_preprocess_feature_space()? or
   # x <- endpoint |>
   #   reticulate:::str_drop_prefix("keras.") |>
   #   str_split_1(fixed("."))
@@ -632,21 +629,21 @@ make_r_name <- function(endpoint, module = py_eval(endpoint)$`__module__`) {
   # x <- x[-length(x)] # submodules
   # x <- x[nzchar(x)]
 
-  # "keras.optimizers.schedules.CosineDecay"
-  # "optimizer_schedule_cosine_decay"
-  # "learning_rate_schedule_cosine_decay"
+  # # "keras.optimizers.schedules.CosineDecay"
+  # # "optimizer_schedule_cosine_decay"
+  # # "learning_rate_schedule_cosine_decay"
 
-  # if(length(x) >= 2)
-  #   x <- x[-1] # drop "keras" from "keras.layers.Dense
-  # if(!length(x))
-  #   prefix <- x()
+  # # if(length(x) >= 2)
+  # #   x <- x[-1] # drop "keras" from "keras.layers.Dense
+  # # if(!length(x))
+  # #   prefix <- x()
 
   # if(type == "learning_rate_schedule")
   #   prefix <- "learning_rate_schedule"
   # else {
   #   # x <-
   #   # if(length(x) && !is_scalar(x))
-  #
+
   #     # browser()
   #   prefix <- x |> str_replace("e?s$", "") |> str_flatten("_")
   # }
@@ -755,6 +752,7 @@ transformers_registry <-
     # if(endpoint == "keras.random.randint") browser()
     lapply(args, function(fn) {
       # if(grepl("normalize_padding", fn)) browser()
+      # if(!is_string(fn)) browser()
       if(is.null(fn)) return(fn)
       fn <- str2lang(fn)
       if (is.call(fn) && !identical(fn[[1]], quote(`function`)))
@@ -1092,24 +1090,35 @@ mk_export <- function(endpoint) {
        endpoint |> startsWith("keras.metrics.")) &&
       inherits(py_obj, "python.builtin.type"))
     local({
+      # each metric and loss is provided as two handles: a function and a class
+      # here, we fetch the matching function handle for the type handle
+      # we make an export obj for this function handle, and then recursively
+      # combine the docs and params from both.
       endpoint2 <- str_replace(endpoint, name, snakecase::to_snake_case(name))
       py_obj2 <- NULL
       tryCatch(
         py_obj2 <- py_eval(endpoint2),
         python.builtin.AttributeError = function(e) {
-
           if(!endpoint %in% known_metrics_without_function_handles)
             message(endpoint2, " not found")
-          # message('"', endpoint, '"')
         }
       )
       if(is.null(py_obj2)) return()
 
       ep2 <- mk_export(endpoint2)
-      params <<- modifyList(params, ep2$params)
+      # params <<- modifyList(params, ep2$params)
+      for(nm in names(ep2$params)) {
+        pdoc1 <- params[[nm]]; pdoc2 <- ep2$params[[nm]]
+        if(str_squish(pdoc1 %||% "") == str_squish(pdoc2 %||% "")) next
+
+        params[[nm]] <- c(pdoc1, pdoc2) %>% .[which.max(str_length(str_squish(.)))] #str_split_lines() |> unique() |> str_flatten_lines()
+      }
+
       for(section in setdiff(names(ep2$doc), "title"))
         doc[[section]] %<>% str_flatten_lines(ep2$doc[[section]], .)
+
       doc <<- doc
+      params <<- params
     })
 
   tags <- make_roxygen_tags(endpoint, py_obj, type)
@@ -1121,7 +1130,7 @@ mk_export <- function(endpoint) {
       parse_params_section() %>%
       {glue("- `{names(.)}`: {unname(.)}") }
     str_flatten_lines()
-    ## This kidna works, but fails if there is a nested list within,
+    ## This kinda works, but fails if there is a nested list within,
     ## like w/ layer_additive_attention
     # doc$call_arguments %<>%
     #   parse_params_section() %>%
@@ -1186,13 +1195,30 @@ mk_export <- function(endpoint) {
   # }
 
   # finish
-  dump <- dump_keras_export(doc, params, tags, r_name, r_fn)
+  roxygen <- dump_roxygen(doc, params, tags)
+  dump <- dump_keras_export(roxygen, r_name, r_fn)
 
   as.list(environment())
 }
 
 
-dump_keras_export <- function(doc, params, tags, r_name, r_fn) {
+dump_keras_export <- function(roxygen, r_name, r_fn) {
+
+  roxygen %<>%
+    str_split_lines() %>%
+    str_c("#' ", .)
+
+  fn_def <- str_flatten_lines(str_c(r_name, " <-"),
+                              deparse(r_fn))
+
+  str_flatten_lines(roxygen, fn_def) |>
+    str_split_lines() |> str_trim("right") |>
+    str_flatten_lines()
+}
+
+
+
+dump_roxygen <- function(doc, params, tags) {
 
   params <- params %>%
     { glue("@param {names(.)} {list_simplify(., ptype = '')}") } %>%
@@ -1213,8 +1239,6 @@ dump_keras_export <- function(doc, params, tags, r_name, r_fn) {
   # r <- "`\\[\\1\\]`"
   # doc$description %<>% gsub(m, r, ., perl = TRUE)
 
-
-
   main <- lapply(names(doc), \(nm) {
     md_heading <- if (nm %in% c("description", "title", "details")) # "note"
       character() else
@@ -1227,25 +1251,21 @@ dump_keras_export <- function(doc, params, tags, r_name, r_fn) {
     str_flatten("\n")
 
   roxygen <- c(main, params, tags) %>%
-    str_flatten("\n\n") %>% str_split_lines() %>%
-    str_c("#' ", .) %>%
-    str_flatten_lines() %>%
+    str_flatten("\n\n") %>%
     str_split_lines() %>%
     str_trim("right") %>%
     str_flatten_lines()
 
   # compact roxygen
   roxygen %<>% {
-    while (nchar(.) != nchar(. <- gsub(strrep("#'\n", 2), "#'\n", ., fixed = TRUE))) {} # TODO: do this in dump
+    while (nchar(.) != nchar(. <- gsub(strrep("#'\n", 2), "#'\n", ., fixed = TRUE))) {}
     while (nchar(.) != nchar(. <- gsub(strrep("\n", 3), "\n\n", ., fixed = TRUE))) {}
     .
   }
 
-  fn_def <- str_flatten_lines(str_c(r_name, " <-"),
-                              deparse(r_fn))
-
-  str_flatten_lines(roxygen, fn_def) |>
-    str_split_lines() |> str_trim("right") |>
+  str_flatten_lines(roxygen) |>
+    str_split_lines() |>
+    str_trim("right") |>
     str_flatten_lines()
 }
 

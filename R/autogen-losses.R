@@ -162,13 +162,16 @@ r"-(Computes the cross-entropy loss between true labels and predicted labels.
 #' # Returns
 #' Binary crossentropy loss value. shape = `[batch_size, d0, .. dN-1]`.
 #'
-#' @param from_logits Whether `y_pred` is expected to be a logits tensor. By
-#'     default, we assume that `y_pred` encodes a probability distribution.
-#' @param label_smoothing Float in `[0, 1]`. If > `0` then smooth the labels by
-#'     squeezing them towards 0.5, that is,
-#'     using `1. - 0.5 * label_smoothing` for the target class
-#'     and `0.5 * label_smoothing` for the non-target class.
-#' @param axis The axis along which the mean is computed. Defaults to `-1`.
+#' @param from_logits Whether to interpret `y_pred` as a tensor of
+#'     [logit](https://en.wikipedia.org/wiki/Logit) values. By default, we
+#'     assume that `y_pred` is probabilities (i.e., values in `[0, 1]).`
+#' @param label_smoothing Float in range `[0, 1].` When 0, no smoothing occurs.
+#'     When > 0, we compute the loss between the predicted labels
+#'     and a smoothed version of the true labels, where the smoothing
+#'     squeezes the labels towards 0.5. Larger values of
+#'     `label_smoothing` correspond to heavier smoothing.
+#' @param axis The axis along which to compute crossentropy (the features axis).
+#'     Defaults to `-1`.
 #' @param reduction Type of reduction to apply to the loss. In almost all cases
 #'     this should be `"sum_over_batch_size"`.
 #'     Supported options are `"sum"`, `"sum_over_batch_size"` or `None`.
@@ -479,16 +482,22 @@ r"-(Computes focal cross-entropy loss between true labels and predictions.
 #' @param apply_class_balancing A bool, whether to apply weight balancing on the
 #'     binary classes 0 and 1.
 #' @param alpha A weight balancing factor for class 1, default is `0.25` as
-#'     mentioned in the reference. The weight for class 0 is `1.0 - alpha`.
-#' @param gamma A focusing parameter, default is `2.0` as mentioned in the
-#'     reference.
-#' @param from_logits Whether `y_pred` is expected to be a logits tensor. By
-#'     default, we assume that `y_pred` encodes a probability distribution.
-#' @param label_smoothing Float in `[0, 1]`. If > `0` then smooth the labels by
-#'     squeezing them towards 0.5, that is,
-#'     using `1. - 0.5 * label_smoothing` for the target class
-#'     and `0.5 * label_smoothing` for the non-target class.
-#' @param axis The axis along which the mean is computed. Defaults to `-1`.
+#'     mentioned in reference [Lin et al., 2018](
+#'     https://arxiv.org/pdf/1708.02002.pdf).  The weight for class 0 is
+#'     `1.0 - alpha`.
+#' @param gamma A focusing parameter used to compute the focal factor, default is
+#'     `2.0` as mentioned in the reference
+#'     [Lin et al., 2018](https://arxiv.org/pdf/1708.02002.pdf).
+#' @param from_logits Whether to interpret `y_pred` as a tensor of
+#'     [logit](https://en.wikipedia.org/wiki/Logit) values. By default, we
+#'     assume that `y_pred` are probabilities (i.e., values in `[0, 1]`).
+#' @param label_smoothing Float in `[0, 1]`. When `0`, no smoothing occurs.
+#'     When > `0`, we compute the loss between the predicted labels
+#'     and a smoothed version of the true labels, where the smoothing
+#'     squeezes the labels towards `0.5`.
+#'     Larger values of `label_smoothing` correspond to heavier smoothing.
+#' @param axis The axis along which to compute crossentropy (the features axis).
+#'     Defaults to `-1`.
 #' @param reduction Type of reduction to apply to the loss. In almost all cases
 #'     this should be `"sum_over_batch_size"`.
 #'     Supported options are `"sum"`, `"sum_over_batch_size"` or `None`.
@@ -637,11 +646,12 @@ r"-(Computes the crossentropy loss between the labels and predictions.
 #'
 #' @param from_logits Whether `y_pred` is expected to be a logits tensor. By
 #'     default, we assume that `y_pred` encodes a probability distribution.
-#' @param label_smoothing Float in `[0, 1].` If > `0` then smooth the labels. For
-#'     example, if `0.1`, use `0.1 / num_classes` for non-target labels
-#'     and `0.9 + 0.1 / num_classes` for target labels.
-#' @param axis Defaults to `-1`. The dimension along which the entropy is
-#'     computed.
+#' @param label_smoothing Float in `[0, 1].` When > 0, label values are smoothed,
+#'     meaning the confidence on label values are relaxed. For example, if
+#'     `0.1`, use `0.1 / num_classes` for non-target labels and
+#'     `0.9 + 0.1 / num_classes` for target labels.
+#' @param axis The axis along which to compute crossentropy (the features
+#'     axis). Defaults to `-1`.
 #' @param reduction Type of reduction to apply to the loss. In almost all cases
 #'     this should be `"sum_over_batch_size"`.
 #'     Supported options are `"sum"`, `"sum_over_batch_size"` or `None`.
@@ -869,14 +879,15 @@ r"-(Computes the alpha balanced focal crossentropy loss.
 #'     reference. It helps to gradually reduce the importance given to
 #'     simple examples in a smooth manner. When `gamma` = 0, there is
 #'     no focal effect on the categorical crossentropy.
-#' @param from_logits Whether `y_pred` is expected to be a logits tensor. By
-#'     default, we assume that `y_pred` encodes a probability
+#' @param from_logits Whether `output` is expected to be a logits tensor. By
+#'     default, we consider that `output` encodes a probability
 #'     distribution.
-#' @param label_smoothing Float in `[0, 1].` If > `0` then smooth the labels. For
-#'     example, if `0.1`, use `0.1 / num_classes` for non-target labels
-#'     and `0.9 + 0.1 / num_classes` for target labels.
-#' @param axis Defaults to `-1`. The dimension along which the entropy is
-#'     computed.
+#' @param label_smoothing Float in `[0, 1].` When > 0, label values are smoothed,
+#'     meaning the confidence on label values are relaxed. For example, if
+#'     `0.1`, use `0.1 / num_classes` for non-target labels and
+#'     `0.9 + 0.1 / num_classes` for target labels.
+#' @param axis The axis along which to compute crossentropy (the features
+#'     axis). Defaults to `-1`.
 #' @param reduction Type of reduction to apply to the loss. In almost all cases
 #'     this should be `"sum_over_batch_size"`.
 #'     Supported options are `"sum"`, `"sum_over_batch_size"` or `None`.
@@ -1039,7 +1050,8 @@ r"-(Computes the cosine similarity between `y_true` & `y_pred`.
 #' # [-0., -0.99999994, 0.99999994]
 #' ```
 #'
-#' @param axis Axis along which to determine similarity. Defaults to `-1`.
+#' @param axis The axis along which the cosine similarity is computed
+#'     (the features axis). Defaults to `-1`.
 #' @param reduction Type of reduction to apply to the loss. In almost all cases
 #'     this should be `"sum_over_batch_size"`.
 #'     Supported options are `"sum"`, `"sum_over_batch_size"` or `None`.
