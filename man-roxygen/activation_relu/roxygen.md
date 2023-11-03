@@ -9,27 +9,49 @@ change the max value of the activation,
 and to use a non-zero multiple of the input for values below the threshold.
 
 # Examples
-```python
-x = [-10, -5, 0.0, 5, 10]
-keras.activations.relu(x)
-# [ 0.,  0.,  0.,  5., 10.]
-keras.activations.relu(x, negative_slope=0.5)
-# [-5. , -2.5,  0. ,  5. , 10. ]
-keras.activations.relu(x, max_value=5.)
-# [0., 0., 0., 5., 5.]
-keras.activations.relu(x, threshold=5.)
-# [-0., -0.,  0.,  0., 10.]
+
+```r
+x <- c(-10, -5, 0, 5, 10)
+activation_relu(x)
+```
+
+```
+## tf.Tensor([ 0.  0.  0.  5. 10.], shape=(5), dtype=float32)
+```
+
+```r
+activation_relu(x, negative_slope = 0.5)
+```
+
+```
+## tf.Tensor([-5.  -2.5  0.   5.  10. ], shape=(5), dtype=float32)
+```
+
+```r
+activation_relu(x, max_value = 5)
+```
+
+```
+## tf.Tensor([0. 0. 0. 5. 5.], shape=(5), dtype=float32)
+```
+
+```r
+activation_relu(x, threshold = 5)
+```
+
+```
+## tf.Tensor([-0. -0.  0.  0. 10.], shape=(5), dtype=float32)
 ```
 
 # Returns
     A tensor with the same shape and dtype as input `x`.
 
 @param x Input tensor.
-@param negative_slope A `float` that controls the slope
+@param negative_slope A `numeric` that controls the slope
     for values lower than the threshold.
-@param max_value A `float` that sets the saturation threshold (the largest
+@param max_value A `numeric` that sets the saturation threshold (the largest
     value the function will return).
-@param threshold A `float` giving the threshold value of the activation
+@param threshold A `numeric` giving the threshold value of the activation
     function below which values will be damped or set to zero.
 
 @export

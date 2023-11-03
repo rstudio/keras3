@@ -1,6 +1,8 @@
 
 
 if(!"source:tools/utils.R" %in% search()) envir::attach_source("tools/utils.R")
+if(!"source:tools/translate-tools.R" %in% search()) envir::attach_source("tools/translate-tools.R")
+
 # source("tools/utils.R")
 
 # TODO: add PR for purrr::rate_throttle("3 per minute")
@@ -186,12 +188,11 @@ exports <- endpoints |>
   purrr::set_names() |>
   lapply(mk_export)
 
+n_openai_calls_made <- 0L
+max_openai_calls <- 1L
 
 
-augment_export <- function(ex) {
-
-  ex$man_roxygen_dir <- glue("man-roxygen/{ex$r_name}/")
-  # if(!fs::dir_exists(ex$man_roxygen_dir)) {
+make_new_man_roxygen_dir <- function(ex) {
   ex$man_roxygen_dir |>
     fs::dir_create() |>
     withr::local_dir()
@@ -207,13 +208,17 @@ augment_export <- function(ex) {
   writeLines(roxygen, "docstring_as_roxygen.md")
 
 
-  do_call_openai <- FALSE
+  do_call_openai <-
+    (n_openai_calls_made < max_openai_calls) &&
+    str_detect(roxygen, "```python")
+
   if (do_call_openai) {
-    ex$completion <- completion <-
-      get_translated_roxygen(roxygen)
+    ex$completion <- completion <- get_translated_roxygen(roxygen)
+    n_openai_calls_made <<- n_openai_calls_made + 1L
     write_rds(completion, "completion.rds")
     writeLines(completion, "roxygen.Rmd")
     tryCatch({
+      library(keras)
       keras$utils$clear_session()
       knitr::knit("roxygen.Rmd", "roxygen.md",
                   quiet = TRUE, envir = new.env())
@@ -226,6 +231,35 @@ augment_export <- function(ex) {
   }
 
   ex
+}
+
+update_man_roxygen_dir <- function(ex) {
+  withr::local_dir(ex$man_roxygen_dir)
+  old_docstring <- "docstring.md" |> readLines() |> str_flatten_lines()
+  is_changed <- ex$docstring != old_docstring
+  if(!is_changed) return(ex)
+
+  import_from({ex}, docstring, roxygen)
+
+  old_roxygen_rmd <- read_file("roxygen.Rmd")
+  old_docstring_as_roxygen <- read_file("docstring_as_roxygen.md")
+  system("git diff -u1 docstring_as_roxygen.md roxygen.Rmd > fixup.patch")
+
+  writeLines(docstring, "docstring.md")
+  writeLines(roxygen, "docstring_as_roxygen.md")
+  res <- system("git apply --3way fixup.patch") # --unidiff-zero --verbose
+
+  # if res == error: nothing else: knitr::knit() ?
+  # knitting should really be a separate step...
+}
+
+augment_export <- function(ex) {
+
+  ex$man_roxygen_dir <- glue("man-roxygen/{ex$r_name}/")
+  if (fs::dir_exists(ex$man_roxygen_dir))
+    update_man_roxygen_dir(ex)
+  else
+    make_new_man_roxygen_dir(ex)
 
 }
 
