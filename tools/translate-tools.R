@@ -7,7 +7,7 @@ openai <- import("openai")
 tiktoken <- import("tiktoken")
 encoder <- tiktoken$encoding_for_model('gpt-4')
 
-get_n_tokens <- function(txt) {
+count_tokens <- function(txt) {
   txt |> unlist(use.names = FALSE) |> str_flatten_lines() |>
     encoder$encode() |>
     length()
@@ -39,24 +39,41 @@ get_translated_roxygen <- function(roxygen) {
   if(!str_detect(roxygen, fixed("\n")))
     roxygen %<>% get_roxygen()
 
-  (completion <- openai$ChatCompletion$create(
+  messages <- chat_messages(
+    !!!prompt_translate_roxygen_instructions_and_examples,
+    user = roxygen
+  )
+  n_tokens_roxygen <- count_tokens(roxygen)
+  n_tokens_messages <- count_tokens(messages)
+  max_response_tokens <- ceiling(n_tokens_roxygen * 1.2) |> as.integer()
+
+
+  model <-
+    if(n_tokens_messages + max_response_tokens <= 4097) "gpt-3.5-turbo" else "gpt-3.5-turbo-16k"
+    # if(n_tokens_messages + max_response_tokens <= 8192) "gpt-4" else "gpt-4-32k"
     # model="gpt-4",                #  8,192 context window
     # model="gpt-4-32k"             # 32,768 context window
-    model="gpt-3.5-turbo",          #  4,097 context window
+    # model="gpt-3.5-turbo",        #  4,097 context window
     # model="gpt-3.5-turbo-16k",    # 16,385 context window
-    temperature = 0,
-    max_tokens = as.integer(round(length(encoder$encode(roxygen))*1.2)),
-    messages = chat_messages(
-      !!!prompt_translate_roxygen_instructions_and_examples,
-      user = roxygen
-    ))) |> system.time() -> runtime
 
+  if(!model %in% c("gpt-4", "gpt-3.5-turbo"))
+    message("using model: ", model,
+            "first line: ", str_extract(roxygen, "^[^\n]*"))
+
+  runtime <- system.time({
+    completion <- openai$ChatCompletion$create(
+      model = model,
+      temperature = 0,
+      max_tokens = max_response_tokens,
+      messages = messages
+    )
+  })
   completion$runtime <- runtime[["elapsed"]]
 
-  roxygen2 <- completion$choices[[1L]]$message$content
-  attr(roxygen2, "completion") <- completion
-  attr(roxygen2, "cost") <- get_cost(completion)
-  roxygen2
+  translated_roxygen <- completion$choices[[1L]]$message$content
+  attr(translated_roxygen, "completion") <- completion
+  attr(translated_roxygen, "cost") <- get_cost(completion)
+  translated_roxygen
 }
 
 
