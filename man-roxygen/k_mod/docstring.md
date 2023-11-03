@@ -1,0 +1,8 @@
+Returns the element-wise remainder of division.
+
+Args:
+    x1: First tensor.
+    x2: Second tensor.
+
+Returns:
+    Output tensor, element-wise remainder of division.

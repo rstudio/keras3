@@ -1,0 +1,43 @@
+Extracts patches from the image(s).
+
+@description
+
+# Returns
+Extracted patches 3D (if not batched) or 4D (if batched)
+
+# Examples
+```python
+image = np.random.random(
+    (2, 20, 20, 3)
+).astype("float32") # batch of 2 RGB images
+patches = keras.ops.image.extract_patches(image, (5, 5))
+patches.shape
+# (2, 4, 4, 75)
+image = np.random.random((20, 20, 3)).astype("float32") # 1 RGB image
+patches = keras.ops.image.extract_patches(image, (3, 3), (1, 1))
+patches.shape
+# (18, 18, 27)
+```
+
+@param image Input image or batch of images. Must be 3D or 4D.
+@param size Patch size int or tuple (patch_height, patch_widht)
+@param strides strides along height and width. If not specified, or
+    if `None`, it defaults to the same value as `size`.
+@param dilation_rate This is the input stride, specifying how far two
+    consecutive patch samples are in the input. For value other than 1,
+    strides must be 1. NOTE: `strides > 1` is not supported in
+    conjunction with `dilation_rate > 1`
+@param padding The type of padding algorithm to use: `"same"` or `"valid"`.
+@param data_format string, either `"channels_last"` or `"channels_first"`.
+    The ordering of the dimensions in the inputs. `"channels_last"`
+    corresponds to inputs with shape `(batch, height, width, channels)`
+    while `"channels_first"` corresponds to inputs with shape
+    `(batch, channels, height, weight)`. It defaults to the
+    `image_data_format` value found in your Keras config file at
+    `~/.keras/keras.json`. If you never set it, then it will be
+    `"channels_last"`.
+
+@export
+@family ops
+@seealso
++ <https://www.tensorflow.org/api_docs/python/tf/keras/ops/image/extract_patches>

@@ -1,0 +1,10 @@
+Divide arguments element-wise.
+
+`keras.ops.true_divide` is an alias for this function.
+
+Args:
+    x1: First input tensor.
+    x2: Second input tensor.
+
+Returns:
+    Output tensor, the quotient `x1/x2`, element-wise.
