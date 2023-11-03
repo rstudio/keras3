@@ -853,6 +853,8 @@ make_r_fn.default <- function(endpoint, py_obj, transformers) {
     transformers <- NULL
 
   frmls <- formals(py_obj)
+  if(endpoint == "keras.ops.vectorized_map")
+    names(frmls) %<>% replace_val("function", "f")
   body <- bquote({
     args <- capture_args2(.(transformers))
     do.call(.(py_obj_expr), args)
@@ -1011,7 +1013,19 @@ make_r_fn.layer <- function(endpoint, py_obj, transformers) {
       create_layer(.(py_obj_expr), object, args)
     })
 
-  } else {
+  }
+  # else if (endpoint == "keras.ops.vectorized_map") {
+  #   # rename `function` -> `func`. because roxygen gets very confused
+  #   # if you have an R parser reserved word as an arg name
+  #   names(frmls) %<>% replace_val("function", "f")
+  #   fn_body <- bquote({
+  #     args <- capture_args2(.(transformers), ignore = "object")
+  #     names(args)[match("f", names(args))] <- "function"
+  #     create_layer(.(py_obj_expr), object, args)
+  #   })
+  #
+  # }
+  else {
     # default path for all other layers
 
     frmls <- c(alist(object = ), frmls)
@@ -1081,7 +1095,7 @@ mk_export <- function(endpoint) {
   r_name <- make_r_name(endpoint, module)
   params <- parse_params_section(doc$arguments, treat_as_dots = vararg_paramater_names(py_obj))
 
-  if(endpoint == "keras.layers.Lambda") {
+  if(endpoint %in% c("keras.layers.Lambda", "keras.ops.vectorized_map")) {
     names(params)[match("function", names(params))] <- "f"
   }
 

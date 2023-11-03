@@ -4,10 +4,10 @@ if(!"source:tools/utils.R" %in% search()) envir::attach_source("tools/utils.R")
 readRenviron("~/.Renviron")
 import("os")$environ$update(list(OPENAI_API_KEY = Sys.getenv("OPENAI_API_KEY")))
 openai <- import("openai")
+tiktoken <- import("tiktoken")
+encoder <- tiktoken$encoding_for_model('gpt-4')
 
 get_n_tokens <- function(txt) {
-  tiktoken <- import("tiktoken")
-  encoder <- tiktoken$encoding_for_model('gpt-4')
   txt |> unlist(use.names = FALSE) |> str_flatten_lines() |>
     encoder$encode() |>
     length()
@@ -40,9 +40,9 @@ get_translated_roxygen <- function(roxygen) {
     roxygen %<>% get_roxygen()
 
   (completion <- openai$ChatCompletion$create(
-    model="gpt-4",                  #  8,192 context window
+    # model="gpt-4",                #  8,192 context window
     # model="gpt-4-32k"             # 32,768 context window
-    # model="gpt-3.5-turbo",        #  4,097 context window
+    model="gpt-3.5-turbo",          #  4,097 context window
     # model="gpt-3.5-turbo-16k",    # 16,385 context window
     temperature = 0,
     max_tokens = as.integer(round(length(encoder$encode(roxygen))*1.2)),
@@ -53,7 +53,7 @@ get_translated_roxygen <- function(roxygen) {
 
   completion$runtime <- runtime[["elapsed"]]
 
-  roxygen2 <- chat_completion$choices[[1L]]$message$content
+  roxygen2 <- completion$choices[[1L]]$message$content
   attr(roxygen2, "completion") <- completion
   attr(roxygen2, "cost") <- get_cost(completion)
   roxygen2
@@ -70,7 +70,8 @@ prompt_translate_roxygen_instructions_and_examples <- list %(% {
     You translate Python to R (including docs, code, idioms), correct typos,
     and output properly formatted roxygen.
     You always wrap `NULL`, `TRUE` and `FALSE` in backticks as needed.
-    You move examples from description to an @examples roxygen section as needed.
+    You translate python code chunks to R code chunks.
+    You output Rmd and/or roxygen.
     You leave everthing else the same.
   }")
 

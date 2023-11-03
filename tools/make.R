@@ -184,7 +184,75 @@ endpoints <-
 
 exports <- endpoints |>
   purrr::set_names() |>
-  map(mk_export)
+  lapply(mk_export)
+
+export <- exports$keras.layers.Hashing
+
+augment_export <- function(ex) {
+  ex$man_roxygen_dir <- glue("man-roxygen/{ex$r_name}/")
+  # if(!fs::dir_exists(ex$man_roxygen_dir)) {
+    ex %<>% within({
+      man_roxygen_dir |>
+        fs::dir_create() |>
+        withr::local_dir()
+
+      is_new <- TRUE
+      is_changed <- FALSE
+      old_docstring <- ""
+      old_roxygen_intermediate <- ""
+      writeLines(docstring, "docstring.md")
+      writeLines(roxygen, "roxygen_intermediate.md")
+      do_call_openai <- FALSE
+      if(do_call_openai) {
+        completion <- get_translated_roxygen(roxygen)
+        write_rds(completion, "completion.rds")
+        writeLines(completion, "roxygen.Rmd")
+        tryCatch({
+          keras$utils$clear_session()
+          knitr::knit("roxygen.Rmd", "roxygen.md", quiet = TRUE, envir = new.env())
+        }, error = function(e) {
+          warning("Failed to render docs for", ex$r_name)
+        })
+      } else {
+        writeLines(roxygen, "roxygen.Rmd")
+      }
+      if(!file.exists("roxygen.md"))
+        file.copy("roxygen.Rmd", "roxygen.md")
+    })
+    return(ex)
+
+
+# }
+#
+#   ex %<>% within({
+#     withr::local_dir(man_roxygen_dir)
+#     is_new <- FALSE
+#
+#   })
+#
+#   ex$old_docstring <- readLines("docstring.md")
+}
+ex2 <- augment_export(exports$keras.activations.elu)
+setwd(ex2$man_roxygen_dir)
+rmarkdown::render("roxygen.Rmd", #run_pandoc =
+                  # output_format = "github_document",
+                  output_format = rmarkdown::github_document(
+                    hard_line_breaks = TRUE,
+                    html_preview = FALSE
+                    # pandoc_args = c()
+                      ),
+                  # quiet = TRUE,
+
+                  output_file = "roxygen.md", envir = new.env())
+
+knitr::knit("roxygen.Rmd", "roxygen.md")
+
+
+setwd(here::here())
+
+
+
+ex2 <- augment_export(export)
 
 df <- exports |>
   lapply(\(e) {
@@ -195,12 +263,29 @@ df <- exports |>
   }) |>
   list_rbind()
 
+
+df <- df %>%
+  mutate(man_roxygen_dir = fs::dir_create(glue("man-roxygen2/{r_name}/")))
+
+df %>%
+  split_by
+
+
 if(FALSE) {
 
-fs::dir_create(glue_data(df, "src/wrappers/{r_name}/"))
 
-dfo <- df %>%
-  mutate(wrappers_dir = glue("src/wrappers/{r_name}/"))
+  df %>%
+    rowwise() %>%
+    mutate(write_out = withr::with_dir(man_roxygen_dir, {
+      writeLines(docstring, "docstring.md")
+      writeLines(roxygen, "roxygen_intermediate.md")
+      writeLines(roxygen, "roxygen.Rmd")
+      writeLines(roxygen, "roxygen.md")
+    }))
+
+    # dump_file = glue("src/wrappers/{r_name}/r_wrapper_raw.R")) %>%
+
+
 
 df <- dfo %>%
   mutate(dump_file = glue("src/wrappers/{r_name}/r_wrapper_raw.R")) %>%
@@ -357,7 +442,6 @@ map(xx, format)
   filter(!endpoint %in% "keras.Sequential.build") #|>
 
 
-# k_fft_2 vs k_fft2
 # start w/ the export endpoint, and augment it.
 
 
