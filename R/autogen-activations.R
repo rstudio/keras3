@@ -29,10 +29,10 @@ r"-(Exponential Linear Unit.
 #' Exponential Linear Unit.
 #'
 #' @description
-#' The exponential linear unit (ELU) with `alpha > 0` is define as:
+#' The exponential linear unit (ELU) with `alpha > 0` is defined as:
 #'
 #' - `x` if `x > 0`
-#' - alpha * `exp(x) - 1` if `x < 0`
+#' - `alpha * exp(x) - 1` if `x < 0`
 #'
 #' ELUs have negative values which pushes the mean of the activations
 #' closer to zero.
@@ -366,38 +366,12 @@ r"-(Applies the rectified linear unit activation function.
 #' and to use a non-zero multiple of the input for values below the threshold.
 #'
 #' # Examples
-#'
-#' ```r
+#' ```{r}
 #' x <- c(-10, -5, 0, 5, 10)
 #' activation_relu(x)
-#' ```
-#'
-#' ```
-#' ## tf.Tensor([ 0.  0.  0.  5. 10.], shape=(5), dtype=float32)
-#' ```
-#'
-#' ```r
 #' activation_relu(x, negative_slope = 0.5)
-#' ```
-#'
-#' ```
-#' ## tf.Tensor([-5.  -2.5  0.   5.  10. ], shape=(5), dtype=float32)
-#' ```
-#'
-#' ```r
 #' activation_relu(x, max_value = 5)
-#' ```
-#'
-#' ```
-#' ## tf.Tensor([0. 0. 0. 5. 5.], shape=(5), dtype=float32)
-#' ```
-#'
-#' ```r
 #' activation_relu(x, threshold = 5)
-#' ```
-#'
-#' ```
-#' ## tf.Tensor([-0. -0.  0.  0. 10.], shape=(5), dtype=float32)
 #' ```
 #'
 #' # Returns

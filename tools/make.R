@@ -5,7 +5,6 @@ if(!"source:tools/translate-tools.R" %in% search()) envir::attach_source("tools/
 
 
 # start by regenerating patch files
-if(FALSE) {
 
 make_translation_patchfiles <- function() {
   fs::dir_ls("man-roxygen/", type = "directory") |>
@@ -15,7 +14,7 @@ make_translation_patchfiles <- function() {
       withr::local_dir(dir)
       if(file_exists("translate.patch") &&
          file_info("roxygen.Rmd")$change_time <= file_info("translate.patch")$birth_time) {
-        # message("skipping generating patch: ", dir)
+        message("skipping generating patch: ", dir)
         return()
       }
       message("updating patchfile: ", dir)
@@ -51,11 +50,13 @@ get_translations <- function() {
     })
 }
 
-get_translations()
+if(FALSE) {
 
-make_translation_patchfiles()
+  get_translations()
 
 }
+make_translation_patchfiles()
+
 # z <- "man-roxygen/activation_elu/roxygen.Rmd" |> read_file() |>
 #   get_translated_roxygen()
 #
@@ -64,6 +65,8 @@ make_translation_patchfiles()
 
 
 # source("tools/utils.R")
+
+# TODO: # fix `fit()` not returning `history` correctly
 
 # TODO: add PR for purrr::rate_throttle("3 per minute")
 #
@@ -321,17 +324,20 @@ update_man_roxygen_dir <- function(ex) {
   if(!is_changed) {
     message("returning early")
     return(ex)
-}
+  }
   import_from({ex}, docstring, roxygen)
 
-  old_docstring_as_roxygen <- read_file("docstring_as_roxygen.md")
-  old_roxygen_rmd <- read_file("roxygen.Rmd")
-  system("git diff -u1 docstring_as_roxygen.md roxygen.Rmd > fixup.patch")
+  # old_docstring_as_roxygen <- read_file("docstring_as_roxygen.md")
+  # old_roxygen_rmd <- read_file("roxygen.Rmd")
+  # system("git diff -u1 docstring_as_roxygen.md roxygen.Rmd > fixup.patch")
 
   writeLines(docstring, "docstring.md")
   writeLines(roxygen, "docstring_as_roxygen.md")
+  writeLines(roxygen, "roxygen.Rmd")
+
   res <- system("git apply --3way fixup.patch") # --unidiff-zero --verbose
 
+  ex
   # if res == error: nothing else: knitr::knit() ?
   # knitting should really be a separate step...
 }
@@ -340,10 +346,10 @@ update_man_roxygen_dir <- function(ex) {
 augment_export <- function(ex) {
 
   ex$man_roxygen_dir <- glue("man-roxygen/{ex$r_name}/")
-  # if (fs::dir_exists(ex$man_roxygen_dir))
-  #   update_man_roxygen_dir(ex)
-  # else
-  #   make_new_man_roxygen_dir(ex)
+  if (fs::dir_exists(ex$man_roxygen_dir))
+    update_man_roxygen_dir(ex)
+  else
+    make_new_man_roxygen_dir(ex)
   ex
 }
 
@@ -359,6 +365,7 @@ augment_export(exports$keras.activations.relu)
 
 
 }
+
 df <- exports |>
   lapply(\(e) {
     e |>
@@ -396,7 +403,7 @@ df |>
 
         str_c('r"-(', py_obj$`__doc__`, ')-"'),
         # str_c('r"-(', docstring, ')-"'),
-        str_c("#' ", readLines(fs::path(man_roxygen_dir, "roxygen.md"))),
+        str_c("#' ", readLines(fs::path(man_roxygen_dir, "roxygen.Rmd"))),
         str_c(r_name, " <- "),
         deparse(r_fn),
         ""

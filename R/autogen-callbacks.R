@@ -68,64 +68,76 @@ r"-(Callback to back up and restore the training state.
 #' Callback to back up and restore the training state.
 #'
 #' @description
-#' `BackupAndRestore` callback is intended to recover training from an
-#' interruption that has happened in the middle of a `Model.fit` execution, by
+#' `backup_and_restore` callback is intended to recover training from an
+#' interruption that has happened in the middle of a `fit` execution, by
 #' backing up the training states in a temporary checkpoint file, at the end of
 #' each epoch. Each backup overwrites the previously written checkpoint file,
 #' so at any given time there is at most one such checkpoint file for
 #' backup/restoring purpose.
 #'
 #' If training restarts before completion, the training state (which includes
-#' the `Model` weights and epoch number) is restored to the most recently saved
-#' state at the beginning of a new `Model.fit` run. At the completion of a
-#' `Model.fit` run, the temporary checkpoint file is deleted.
+#' the model weights and epoch number) is restored to the most recently saved
+#' state at the beginning of a new `fit` run. At the completion of a
+#' `fit` run, the temporary checkpoint file is deleted.
 #'
 #' Note that the user is responsible to bring jobs back after the interruption.
 #' This callback is important for the backup and restore mechanism for fault
 #' tolerance purpose, and the model to be restored from a previous checkpoint
 #' is expected to be the same as the one used to back up. If user changes
-#' arguments passed to compile or fit, the checkpoint saved for fault tolerance
+#' arguments passed to `compile` or `fit`, the checkpoint saved for fault tolerance
 #' can become invalid.
 #'
 #' # Examples
-#' ```python
-#' class InterruptingCallback(keras.callbacks.Callback):
-#'   def on_epoch_begin(self, epoch, logs=None):
-#'     if epoch == 4:
-#'       raise RuntimeError('Interrupting!')
-#' callback = keras.callbacks.BackupAndRestore(backup_dir="/tmp/backup")
-#' model = keras.models.Sequential([keras.layers.Dense(10)])
-#' model.compile(keras.optimizers.SGD(), loss='mse')
-#' try:
-#'   model.fit(np.arange(100).reshape(5, 20), np.zeros(5), epochs=10,
-#'             batch_size=1, callbacks=[callback, InterruptingCallback()],
-#'             verbose=0)
-#' except:
-#'   pass
-#' history = model.fit(np.arange(100).reshape(5, 20), np.zeros(5),
-#'                     epochs=10, batch_size=1, callbacks=[callback],
-#'                     verbose=0)
+#'
+#' ```{r}
+#' callback_interrupting <- new_callback_class(
+#'   "InterruptingCallback",
+#'   on_epoch_begin = function(epoch, logs = NULL) {
+#'     if (epoch == 4) {
+#'       stop('Interrupting!')
+#'     }
+#'   }
+#' )
+#' unlink("/tmp/backup", recursive = TRUE)
+#' callback <- callback_backup_and_restore(backup_dir = "/tmp/backup")
+#' model <- keras_model_sequential() %>%
+#'   layer_dense(10)
+#' model %>% compile(optimizer = optimizer_sgd(), loss = 'mse')
+#'
+#' try({
+#'   model %>% fit(x = k_ones(c(5, 20)),
+#'                 y = k_zeros(5),
+#'                 epochs = 10, batch_size = 1,
+#'                 callbacks = list(callback, callback_interrupting()),
+#'                 verbose = 0)
+#' })
+#'
+#' history <- model %>% fit(x = k_ones(c(5, 20)),
+#'                          y = k_zeros(5),
+#'                          epochs = 10, batch_size = 1,
+#'                          callbacks = list(callback),
+#'                          verbose = 0)
+#'
 #' # Only 6 more epochs are run, since first training got interrupted at
 #' # zero-indexed epoch 4, second training will continue from 4 to 9.
-#' len(history.history['loss'])
-#' 6
+#' nrow(as.data.frame(history))
 #' ```
 #'
 #' @param backup_dir String, path of directory where to store the data
 #'     needed to restore the model. The directory
 #'     cannot be reused elsewhere to store other files, e.g. by the
-#'     `BackupAndRestore` callback of another training run,
-#'     or by another callback (e.g. `ModelCheckpoint`)
+#'     `backup_and_restore` callback of another training run,
+#'     or by another callback (e.g. `callback_model_checkpoint`)
 #'     of the same training run.
-#' @param save_freq `"epoch"`, integer, or `False`. When set to `"epoch"`
+#' @param save_freq `"epoch"`, integer, or `FALSE`. When set to `"epoch"`,
 #'   the callback saves the checkpoint at the end of each epoch.
 #'   When set to an integer, the callback saves the checkpoint every
-#'   `save_freq` batches. Set `save_freq=False` only if using
-#'   preemption checkpointing (i.e. with `save_before_preemption=True`).
-#' @param delete_checkpoint Boolean, defaults to `True`. This `BackupAndRestore`
+#'   `save_freq` batches. Set `save_freq = FALSE` only if using
+#'   preemption checkpointing (i.e. with `save_before_preemption = TRUE`).
+#' @param delete_checkpoint Boolean, defaults to `TRUE`. This `backup_and_restore`
 #'   callback works by saving a checkpoint to back up the training state.
-#'   If `delete_checkpoint=True`, the checkpoint will be deleted after
-#'   training is finished. Use `False` if you'd like to keep the checkpoint
+#'   If `delete_checkpoint = TRUE`, the checkpoint will be deleted after
+#'   training is finished. Use `FALSE` if you'd like to keep the checkpoint
 #'   for future usage.
 #'
 #' @export
@@ -164,18 +176,18 @@ r"-(Callback that streams epoch results to a CSV file.
 #'
 #' @description
 #' Supports all values that can be represented as a string,
-#' including 1D iterables such as `np.ndarray`.
+#' including 1D iterables such as atomic vectors.
 #'
 #' # Examples
-#' ```python
-#' csv_logger = CSVLogger('training.log')
-#' model.fit(X_train, Y_train, callbacks=[csv_logger])
+#' ```{r}
+#' csv_logger <- callback_csv_logger('training.log')
+#' model %>% fit(X_train, Y_train, callbacks = list(csv_logger))
 #' ```
 #'
 #' @param filename Filename of the CSV file, e.g. `'run/log.csv'`.
 #' @param separator String used to separate elements in the CSV file.
-#' @param append Boolean. True: append if file exists (useful for continuing
-#'     training). False: overwrite existing file.
+#' @param append Boolean. `TRUE`: append if file exists (useful for continuing
+#'     training). `FALSE`: overwrite existing file.
 #'
 #' @export
 #' @family callback
