@@ -109,3 +109,6 @@ keras.random.dropout:
 keras.utils.to_categorical:
   x: as_integer_array
   num_classes: as_integer
+
+keras.ops.reshape:
+  new_shape: normalize_shape
