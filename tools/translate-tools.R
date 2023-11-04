@@ -89,6 +89,8 @@ prompt_translate_roxygen_instructions_and_examples <- list %(% {
     and output properly formatted roxygen.
     You always wrap `NULL`, `TRUE` and `FALSE` in backticks as needed.
     You translate python code chunks to R code chunks.
+    Make sure that each R code chunk is runnable. Fill in boilerplate
+    or elided code with actual runnable code.
     You output Rmd and/or roxygen.
     You leave everthing else the same.
   }")

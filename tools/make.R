@@ -57,7 +57,7 @@ get_translations <- function() {
   fs::dir_ls("man-roxygen/", type = "directory") |>
     set_names(basename) %>%
     keep(\(dir) read_file(path(dir, "roxygen.Rmd")) |> str_detect("```python")) |>
-    head(2) |>
+    head(4) |>
     purrr::walk(\(dir) {
       # browser()
       withr::local_dir(dir)
