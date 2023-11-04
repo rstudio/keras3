@@ -49,8 +49,8 @@ get_translated_roxygen <- function(roxygen) {
 
 
   model <-
-    if(n_tokens_messages + max_response_tokens <= 4097) "gpt-3.5-turbo" else "gpt-3.5-turbo-16k"
-    # if(n_tokens_messages + max_response_tokens <= 8192) "gpt-4" else "gpt-4-32k"
+    # if(n_tokens_messages + max_response_tokens <= 4097) "gpt-3.5-turbo" else "gpt-3.5-turbo-16k"
+    if(n_tokens_messages + max_response_tokens <= 8192) "gpt-4" else "gpt-4-32k"
     # model="gpt-4",                #  8,192 context window
     # model="gpt-4-32k"             # 32,768 context window
     # model="gpt-3.5-turbo",        #  4,097 context window
