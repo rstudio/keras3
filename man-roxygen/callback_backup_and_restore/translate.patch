@@ -1,6 +1,6 @@
 diff --git a/man-roxygen/callback_backup_and_restore/roxygen.Rmd b/man-roxygen/callback_backup_and_restore/roxygen.Rmd
 index 963dd9c0..0ee3d972 100644
---- a/man-roxygen/callback_backup_and_restore/docstring_as_roxygen.md
+--- a/man-roxygen/callback_backup_and_restore/roxygen.Rmd
 +++ b/man-roxygen/callback_backup_and_restore/roxygen.Rmd
 @@ -3,4 +3,4 @@ Callback to back up and restore the training state.
  @description

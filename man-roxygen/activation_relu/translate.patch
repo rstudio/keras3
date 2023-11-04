@@ -1,6 +1,6 @@
 diff --git a/man-roxygen/activation_relu/roxygen.Rmd b/man-roxygen/activation_relu/roxygen.Rmd
 index 7530ecc2..40cade8e 100644
---- a/man-roxygen/activation_relu/docstring_as_roxygen.md
+--- a/man-roxygen/activation_relu/roxygen.Rmd
 +++ b/man-roxygen/activation_relu/roxygen.Rmd
 @@ -11,12 +11,8 @@ and to use a non-zero multiple of the input for values below the threshold.
  # Examples

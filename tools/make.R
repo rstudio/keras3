@@ -9,7 +9,7 @@ if(!"source:tools/translate-tools.R" %in% search()) envir::attach_source("tools/
 make_translation_patchfiles <- function() {
   fs::dir_ls("man-roxygen/", type = "directory") |>
     # head(3) |>
-    keep(~str_detect(.x, "backup|_elu|_relu")) %>%
+    # keep(~str_detect(.x, "backup|_elu|_relu")) %>%
     set_names(dirname) |>
     walk(\(dir) {
       # withr::local_dir(dir)
@@ -26,7 +26,8 @@ make_translation_patchfiles <- function() {
       patch_filepath <- dir/"translate.patch"
       # diff <-
         read_file(patch_filepath) |>
-        str_replace(fixed("docstring_as_roxygen.md"), "roxygen.Rmd") |>
+        str_replace_all(fixed("/docstring_as_roxygen.md"), "/roxygen.Rmd") |>
+        # str_replace(fixed("/docstring_as_roxygen.md"), "/roxygen.Rmd") |>
         write_file(patch_filepath)
 
                       # | sed 's|docstring_as_roxygen.md|roxygen.Rmd|' > translate.patch")
@@ -35,16 +36,21 @@ make_translation_patchfiles <- function() {
     })
 }
 
-apply_translation_patchfiles <- function() {
-  fs::dir_ls("man-roxygen/", type = "directory") |>
+apply_translation_patchfiles <- function(filepath = fs::dir_ls("man-roxygen/", type = "directory") ) {
+  filepath |>
+    fs::as_fs_path() |>
     # head(3) |>
     set_names(basename) %>%
     purrr::walk(\(dir) {
-      withr::local_dir(dir)
-      system2("git", c("apply --3way --recount --allow-empty translate.patch"))
+      # withr::local_dir(dir)
+      system2t("git", c("apply --no-index --recount --allow-empty", # --3way
+                        dir/"translate.patch"))
+      # system(glue("patch -p2 < {dir}/translate.patch"))
     }) |>
-    discard(\(x) is.null(x) || x == 0)
+    discard(\(x) is.null(x) || x == 0) |>
+    invisible()
 }
+
 "git apply --3way --allow-empty translate.patch"
 
 get_translations <- function() {
@@ -123,6 +129,8 @@ make_translation_patchfiles()
 # TODO: add @import reticulate ??
 #
 # TODO: remove any tensorflow imports / DESCRIPTION deps
+
+if(FALSE)
 local({
   x <- keras$callbacks$BackupAndRestore
   x$`__doc__` <- str_replace(keras$callbacks$BackupAndRestore$`__doc__`, "Note that the user", "Note that the user  asdfa asdfdsaf asdfasdf ")
@@ -337,12 +345,12 @@ make_new_man_roxygen_dir <- function(ex) {
 update_man_roxygen_dir <- function(ex) {
   message("updating ", ex$r_name)
   withr::local_dir(ex$man_roxygen_dir)
-  old_docstring <- "docstring.md" |> readLines() |> str_flatten_lines()
-  is_changed <- ex$docstring != old_docstring
-  if(!is_changed) {
-    message("returning early")
-    return(ex)
-  }
+  # old_docstring <- "docstring.md" |> readLines() |> str_flatten_lines()
+  # is_changed <- ex$docstring != old_docstring
+  # if(!is_changed) {
+  #   message("returning early")
+  #   return(ex)
+  # }
   import_from({ex}, docstring, roxygen)
 
   # old_docstring_as_roxygen <- read_file("docstring_as_roxygen.md")
@@ -374,9 +382,12 @@ augment_export <- function(ex) {
 exports <- exports |>
   map(augment_export)
 
-stop("here")
+
+# apply_translation_patchfiles("man-roxygen/callback_backup_and_restore")
+
 apply_translation_patchfiles()
 
+# stop("here")
 
 if(FALSE) {
 exports$keras.activations.relu$docstring <-

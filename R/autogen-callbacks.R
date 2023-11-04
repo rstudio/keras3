@@ -98,7 +98,7 @@ r"-(Callback to back up and restore the training state.
 #'     }
 #'   }
 #' )
-#' unlink("/tmp/backup", recursive = TRUE)
+#'
 #' callback <- callback_backup_and_restore(backup_dir = "/tmp/backup")
 #' model <- keras_model_sequential() %>%
 #'   layer_dense(10)
