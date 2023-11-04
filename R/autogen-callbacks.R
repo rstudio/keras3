@@ -264,27 +264,29 @@ r"-(Stop training when a monitored metric has stopped improving.
 #' @description
 #' Assuming the goal of a training is to minimize the loss. With this, the
 #' metric to be monitored would be `'loss'`, and mode would be `'min'`. A
-#' `model.fit()` training loop will check at end of every epoch whether
+#' `model$fit()` training loop will check at end of every epoch whether
 #' the loss is no longer decreasing, considering the `min_delta` and
 #' `patience` if applicable. Once it's found no longer decreasing,
-#' `model.stop_training` is marked True and the training terminates.
+#' `model$stop_training` is marked `TRUE` and the training terminates.
 #'
-#' The quantity to be monitored needs to be available in `logs` dict.
-#' To make it so, pass the loss or metrics at `model.compile()`.
+#' The quantity to be monitored needs to be available in `logs` list.
+#' To make it so, pass the loss or metrics at `model$compile()`.
 #'
 #' # Examples
-#' ```python
-#' callback = keras.callbacks.EarlyStopping(monitor='loss',
-#'                                               patience=3)
+#' ```{r}
+#' callback <- callback_early_stopping(monitor = 'loss',
+#'                                    patience = 3)
 #' # This callback will stop the training when there is no improvement in
 #' # the loss for three consecutive epochs.
-#' model = keras.models.Sequential([keras.layers.Dense(10)])
-#' model.compile(keras.optimizers.SGD(), loss='mse')
-#' history = model.fit(np.arange(100).reshape(5, 20), np.zeros(5),
-#'                     epochs=10, batch_size=1, callbacks=[callback],
-#'                     verbose=0)
-#' len(history.history['loss'])  # Only 4 epochs are run.
-#' # 4
+#' model <- keras_model_sequential() %>%
+#'   layer_dense(10)
+#' model %>% compile(optimizer = optimizer_sgd(), loss = 'mse')
+#' history <- model %>% fit(x = k_ones(c(5, 20)),
+#'                          y = k_zeros(5),
+#'                          epochs = 10, batch_size = 1,
+#'                          callbacks = list(callback),
+#'                          verbose = 0)
+#' nrow(as.data.frame(history))  # Only 4 epochs are run.
 #' ```
 #'
 #' @param monitor Quantity to be monitored. Defaults to `"val_loss"`.
@@ -300,16 +302,16 @@ r"-(Stop training when a monitored metric has stopped improving.
 #'     it will stop when the quantity monitored has stopped increasing; in
 #'     `"auto"` mode, the direction is automatically inferred from the name
 #'     of the monitored quantity. Defaults to `"auto"`.
-#' @param baseline Baseline value for the monitored quantity. If not `None`,
+#' @param baseline Baseline value for the monitored quantity. If not `NULL`,
 #'     training will stop if the model doesn't show improvement over the
-#'     baseline. Defaults to `None`.
+#'     baseline. Defaults to `NULL`.
 #' @param restore_best_weights Whether to restore model weights from the epoch
-#'     with the best value of the monitored quantity. If `False`, the model
+#'     with the best value of the monitored quantity. If `FALSE`, the model
 #'     weights obtained at the last step of training are used. An epoch
 #'     will be restored regardless of the performance relative to the
 #'     `baseline`. If no epoch improves on `baseline`, training will run
 #'     for `patience` epochs and restore weights from the best epoch in
-#'     that set. Defaults to `False`.
+#'     that set. Defaults to `FALSE`.
 #' @param start_from_epoch Number of epochs to wait before starting to monitor
 #'     improvement. This allows for a warm-up period in which no
 #'     improvement is expected and thus training will not be stopped.
@@ -406,33 +408,52 @@ r"-(Callback for creating simple, custom callbacks on-the-fly.
 #'   expected arguments.
 #'
 #' # Examples
-#'     ```python
-#'     # Print the batch number at the beginning of every batch.
-#'     batch_print_callback = LambdaCallback(
-#'         on_train_batch_begin=lambda batch,logs: print(batch))
 #'
-#'     # Stream the epoch loss to a file in JSON format. The file content
-#'     # is not well-formed JSON but rather has a JSON object per line.
-#'     import json
-#'     json_log = open('loss_log.json', mode='wt', buffering=1)
-#'     json_logging_callback = LambdaCallback(
-#'         on_epoch_end=lambda epoch, logs: json_log.write(
-#'             json.dumps({'epoch': epoch, 'loss': logs['loss']}) + '
-#' '),
-#'         on_train_end=lambda logs: json_log.close()
+#' ```{r}
+#' # Print the batch number at the beginning of every batch.
+#' batch_print_callback <- callback_lambda(
+#'   on_train_batch_begin = function(batch, logs) {
+#'     print(batch)
+#'   }
+#' )
+#'
+#' # Stream the epoch loss to a file in JSON format. The file content
+#' # is not well-formed JSON but rather has a JSON object per line.
+#' json_log <- file('loss_log.json', open = 'wt', blocking = 1)
+#' json_logging_callback <- callback_lambda(
+#'   on_epoch_end = function(epoch, logs) {
+#'     jsonlite::write_json(
+#'       x = list(epoch = epoch, loss = logs$loss),
+#'       file = json_log,
+#'       append = TRUE
 #'     )
+#'   },
+#'   on_train_end = function(logs) {
+#'     close(json_log)
+#'   }
+#' )
 #'
-#'     # Terminate some processes after having finished model training.
-#'     processes = ...
-#'     cleanup_callback = LambdaCallback(
-#'         on_train_end=lambda logs: [
-#'             p.terminate() for p in processes if p.is_alive()])
+#' # Terminate some processes after having finished model training.
+#' processes <- ...
+#' cleanup_callback <- callback_lambda(
+#'   on_train_end = function(logs) {
+#'     for (p in processes) {
+#'       if (is_alive(p)) {
+#'         terminate(p)
+#'       }
+#'     }
+#'   }
+#' )
 #'
-#'     model.fit(...,
-#'               callbacks=[batch_print_callback,
-#'                          json_logging_callback,
-#'                          cleanup_callback])
-#'     ```
+#' model %>% fit(
+#'   ...,
+#'   callbacks = list(
+#'     batch_print_callback,
+#'     json_logging_callback,
+#'     cleanup_callback
+#'   )
+#' )
+#' ```
 #'
 #' @param on_epoch_begin called at the beginning of every epoch.
 #' @param on_epoch_end called at the end of every epoch.
@@ -442,7 +463,7 @@ r"-(Callback for creating simple, custom callbacks on-the-fly.
 #' @param on_train_batch_end called at the end of every train batch.
 #' @param ... Any function in `Callback` that you want to override by
 #'     passing `function_name=function`. For example,
-#'     `LambdaCallback(.., on_train_end=train_end_fn)`. The custom function
+#'     `callback_lambda(.., on_train_end=train_end_fn)`. The custom function
 #'     needs to have same arguments as the ones defined in `Callback`.
 #'
 #' @export
