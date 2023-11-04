@@ -220,20 +220,12 @@ to_keras_training_history <- function(history) {
   params <- history$params
 
   # we only see this info before TF 2.2
-  if (tensorflow::tf_version() < "2.2") {
-    if (params$do_validation) {
-      if (!is.null(params$validation_steps))
-        params$validation_samples <- params$validation_steps
-      else
-        params$validation_samples <- dim(history$validation_data[[1]])[[1]]
-    }
-  }
 
   # normalize metrics
   metrics <- history$history
-  metrics <- lapply(metrics, function(metric) {
-    as.numeric(lapply(metric, mean))
-  })
+  # metrics <- lapply(metrics, function(metric) {
+  #   as.numeric(lapply(metric, mean))
+  # })
 
   # create history
   keras_training_history(
@@ -245,14 +237,14 @@ to_keras_training_history <- function(history) {
 keras_training_history <- function(params, metrics) {
 
   # pad missing metrics with NA
-  rows <- max(as.integer(lapply(metrics, length)))
-  for (metric in names(metrics)) {
-    metric_data <- metrics[[metric]]
-    pad <- rows - length(metric_data)
-    pad_data <- rep_len(NA, pad)
-    metric_data <- c(metric_data, pad_data)
-    metrics[[metric]] <- metric_data
-  }
+  # rows <- max(as.integer(lapply(metrics, length)))
+  # for (metric in names(metrics)) {
+  #   metric_data <- metrics[[metric]]
+  #   pad <- rows - length(metric_data)
+  #   pad_data <- rep_len(NA, pad)
+  #   metric_data <- c(metric_data, pad_data)
+  #   metrics[[metric]] <- metric_data
+  # }
 
   # return history
   structure(class = "keras_training_history", list(
