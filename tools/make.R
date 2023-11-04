@@ -3,6 +3,9 @@
 if(!"source:tools/utils.R" %in% search()) envir::attach_source("tools/utils.R")
 if(!"source:tools/translate-tools.R" %in% search()) envir::attach_source("tools/translate-tools.R")
 
+# The source of truth for the current translation should be...?
+#    - the autogened file R/autogen-*.R, or
+#    - man-roxygen/*/roxygen.Rmd
 
 # start by regenerating patch files
 

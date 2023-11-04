@@ -526,27 +526,29 @@ r"-(Learning rate scheduler.
 #' the optimizer.
 #'
 #' # Examples
-#' ```python
+#' ```{r}
 #' # This function keeps the initial learning rate for the first ten epochs
 #' # and decreases it exponentially after that.
-#' def scheduler(epoch, lr):
-#'     if epoch < 10:
-#'         return lr
-#'     else:
-#'         return lr * ops.exp(-0.1)
-#' # >>>
-#' model = keras.models.Sequential([keras.layers.Dense(10)])
-#' model.compile(keras.optimizers.SGD(), loss='mse')
-#' round(model.optimizer.learning_rate, 5)
-#' # 0.01
+#' scheduler <- function(epoch, lr) {
+#'     if (epoch < 10) {
+#'         return(lr)
+#'     } else {
+#'         return(lr * exp(-0.1))
+#'     }
+#' }
+#'
+#' model <- keras_model_sequential() %>%
+#'   layer_dense(units = 10)
+#' model %>% compile(optimizer = optimizer_sgd(), loss = 'mse')
+#' round(model$optimizer$lr, 5)
 #' ```
 #'
-#' ```python
-#' callback = keras.callbacks.LearningRateScheduler(scheduler)
-#' history = model.fit(np.arange(100).reshape(5, 20), np.zeros(5),
-#'                     epochs=15, callbacks=[callback], verbose=0)
-#' round(model.optimizer.learning_rate, 5)
-#' # 0.00607
+#' ```{r}
+#' callback <- callback_learning_rate_scheduler(schedule = scheduler)
+#' history <- model %>% fit(x = matrix(runif(100), nrow = 5, ncol = 20),
+#'                          y = rep(0, 5),
+#'                          epochs = 15, callbacks = list(callback), verbose = 0)
+#' round(model$optimizer$lr, 5)
 #' ```
 #'
 #' @param schedule A function that takes an epoch index (integer, indexed from 0)
@@ -682,7 +684,7 @@ r"-(Callback to save the Keras model or model weights at some frequency.
 #'
 #' @description
 #' `ModelCheckpoint` callback is used in conjunction with training using
-#' `model.fit()` to save a model or weights (in a checkpoint file) at some
+#' `model %>% fit()` to save a model or weights (in a checkpoint file) at some
 #' interval, so the model or weights can be loaded later to continue the
 #' training from the state saved.
 #'
@@ -698,47 +700,46 @@ r"-(Callback to save the Keras model or model weights at some frequency.
 #' - Whether only weights are saved, or the whole model is saved.
 #'
 #' # Examples
-#' ```python
-#' model.compile(loss=..., optimizer=...,
-#'               metrics=['accuracy'])
+#' ```{r}
+#' model %>% compile(loss = ..., optimizer = ..., metrics = c('accuracy'))
 #'
-#' EPOCHS = 10
-#' checkpoint_filepath = '/tmp/ckpt/checkpoint.model.keras'
-#' model_checkpoint_callback = keras.callbacks.ModelCheckpoint(
-#'     filepath=checkpoint_filepath,
-#'     monitor='val_accuracy',
-#'     mode='max',
-#'     save_best_only=True)
+#' EPOCHS <- 10
+#' checkpoint_filepath <- '/tmp/ckpt/checkpoint.model.keras'
+#' model_checkpoint_callback <- callback_model_checkpoint(
+#'     filepath = checkpoint_filepath,
+#'     monitor = 'val_accuracy',
+#'     mode = 'max',
+#'     save_best_only = TRUE)
 #'
 #' # Model is saved at the end of every epoch, if it's the best seen so far.
-#' model.fit(epochs=EPOCHS, callbacks=[model_checkpoint_callback])
+#' model %>% fit(epochs = EPOCHS, callbacks = list(model_checkpoint_callback))
 #'
 #' # The model (that are considered the best) can be loaded as -
-#' keras.models.load_model(checkpoint_filepath)
+#' keras::load_model_hdf5(checkpoint_filepath)
 #'
 #' # Alternatively, one could checkpoint just the model weights as -
-#' checkpoint_filepath = '/tmp/ckpt/checkpoint.weights.h5'
-#' model_checkpoint_callback = keras.callbacks.ModelCheckpoint(
-#'     filepath=checkpoint_filepath,
-#'     save_weights_only=True,
-#'     monitor='val_accuracy',
-#'     mode='max',
-#'     save_best_only=True)
+#' checkpoint_filepath <- '/tmp/ckpt/checkpoint.weights.h5'
+#' model_checkpoint_callback <- callback_model_checkpoint(
+#'     filepath = checkpoint_filepath,
+#'     save_weights_only = TRUE,
+#'     monitor = 'val_accuracy',
+#'     mode = 'max',
+#'     save_best_only = TRUE)
 #'
 #' # Model weights are saved at the end of every epoch, if it's the best seen
 #' # so far.
-#' model.fit(epochs=EPOCHS, callbacks=[model_checkpoint_callback])
+#' model %>% fit(epochs = EPOCHS, callbacks = list(model_checkpoint_callback))
 #'
 #' # The model weights (that are considered the best) can be loaded as -
-#' model.load_weights(checkpoint_filepath)
+#' model %>% load_model_weights_hdf5(checkpoint_filepath)
 #' ```
 #'
-#' @param filepath string or `PathLike`, path to save the model file.
+#' @param filepath string, path to save the model file.
 #'     `filepath` can contain named formatting options,
 #'     which will be filled the value of `epoch` and keys in `logs`
 #'     (passed in `on_epoch_end`).
 #'     The `filepath` name needs to end with `".weights.h5"` when
-#'     `save_weights_only=True` or should end with `".keras"` when
+#'     `save_weights_only=TRUE` or should end with `".keras"` when
 #'     checkpoint saving the whole model (default).
 #'     For example:
 #'     if `filepath` is `"{epoch:02d}-{val_loss:.2f}.keras"`, then the
@@ -746,34 +747,34 @@ r"-(Callback to save the Keras model or model weights at some frequency.
 #'     validation loss in the filename. The directory of the filepath
 #'     should not be reused by any other callbacks to avoid conflicts.
 #' @param monitor The metric name to monitor. Typically the metrics are set by
-#'     the `Model.compile` method. Note:
+#'     the `model %>% compile()` method. Note:
 #'     * Prefix the name with `"val_"` to monitor validation metrics.
 #'     * Use `"loss"` or `"val_loss"` to monitor the model's total loss.
 #'     * If you specify metrics as strings, like `"accuracy"`, pass the
 #'         same string (with or without the `"val_"` prefix).
 #'     * If you pass `metrics.Metric` objects, `monitor` should be set to
-#'         `metric.name`
+#'         `metric$name`
 #'     * If you're not sure about the metric names you can check the
-#'         contents of the `history.history` dictionary returned by
-#'         `history = model.fit()`
+#'         contents of the `history$metrics` list returned by
+#'         `history <- model %>% fit()`
 #'     * Multi-output models set additional prefixes on the metric names.
 #' @param verbose Verbosity mode, 0 or 1. Mode 0 is silent, and mode 1
 #'     displays messages when the callback takes an action.
-#' @param save_best_only if `save_best_only=True`, it only saves when the model
+#' @param save_best_only if `save_best_only=TRUE`, it only saves when the model
 #'     is considered the "best" and the latest best model according to the
 #'     quantity monitored will not be overwritten. If `filepath` doesn't
 #'     contain formatting options like `{epoch}` then `filepath` will be
 #'     overwritten by each new better model.
-#' @param mode one of {`"auto"`, `"min"`, `"max"`}. If `save_best_only=True`, the
+#' @param mode one of {`"auto"`, `"min"`, `"max"`}. If `save_best_only=TRUE`, the
 #'     decision to overwrite the current save file is made based on either
 #'     the maximization or the minimization of the monitored quantity.
 #'     For `val_acc`, this should be `"max"`, for `val_loss` this should be
 #'     `"min"`, etc. In `"auto"` mode, the mode is set to `"max"` if the
 #'     quantities monitored are `"acc"` or start with `"fmeasure"` and are
 #'     set to `"min"` for the rest of the quantities.
-#' @param save_weights_only if True, then only the model's weights will be saved
-#'     (`model.save_weights(filepath)`), else the full model is saved
-#'     (`model.save(filepath)`).
+#' @param save_weights_only if TRUE, then only the model's weights will be saved
+#'     (`model %>% save_model_weights_hdf5(filepath)`), else the full model is saved
+#'     (`model %>% save_model_hdf5(filepath)`).
 #' @param save_freq `"epoch"` or integer. When using `"epoch"`, the callback
 #'     saves the model after each epoch. When using integer, the callback
 #'     saves the model at end of this many batches. If the `Model` is
@@ -783,7 +784,7 @@ r"-(Callback to save the Keras model or model weights at some frequency.
 #'     could reflect as little as 1 batch, since the metrics get reset
 #'     every epoch). Defaults to `"epoch"`.
 #' @param initial_value_threshold Floating point initial "best" value of the
-#'     metric to be monitored. Only applies if `save_best_value=True`. Only
+#'     metric to be monitored. Only applies if `save_best_value=TRUE`. Only
 #'     overwrites the model weights already saved if the performance of
 #'     current model is better than this value.
 #'
@@ -881,14 +882,14 @@ r"-(Reduce learning rate when a metric has stopped improving.
 #' of epochs, the learning rate is reduced.
 #'
 #' # Examples
-#' ```python
-#' reduce_lr = ReduceLROnPlateau(monitor='val_loss', factor=0.2,
-#'                               patience=5, min_lr=0.001)
-#' model.fit(x_train, y_train, callbacks=[reduce_lr])
+#' ```{r}
+#' reduce_lr <- callback_reduce_lr_on_plateau(monitor = 'val_loss', factor = 0.2,
+#'                                            patience = 5, min_lr = 0.001)
+#' model %>% fit(x_train, y_train, callbacks = list(reduce_lr))
 #' ```
 #'
 #' @param monitor String. Quantity to be monitored.
-#' @param factor Float. Factor by which the learning rate will be reduced.
+#' @param factor Numeric. Factor by which the learning rate will be reduced.
 #'     `new_lr = lr * factor`.
 #' @param patience Integer. Number of epochs with no improvement after which
 #'     learning rate will be reduced.
@@ -899,12 +900,12 @@ r"-(Reduce learning rate when a metric has stopped improving.
 #'     be reduced when the quantity monitored has stopped increasing; in
 #'     `'auto'` mode, the direction is automatically inferred from the name
 #'     of the monitored quantity.
-#' @param min_delta Float. Threshold for measuring the new optimum, to only focus
+#' @param min_delta Numeric. Threshold for measuring the new optimum, to only focus
 #'     on significant changes.
 #' @param cooldown Integer. Number of epochs to wait before resuming normal
 #'     operation after the learning rate has been reduced.
-#' @param min_lr Float. Lower bound on the learning rate.
-#' @param ... Passed on to the Python callable
+#' @param min_lr Numeric. Lower bound on the learning rate.
+#' @param ... For forward/backward compatability.
 #'
 #' @export
 #' @family callback
@@ -1130,10 +1131,10 @@ r"-(Enable visualizations for TensorBoard.
 #' * Weight histograms
 #' * Sampled profiling
 #'
-#' When used in `model.evaluate()` or regular validation
+#' When used in `model$evaluate()` or regular validation
 #' in addition to epoch summaries, there will be a summary that records
-#' evaluation metrics vs `model.optimizer.iterations` written. The metric names
-#' will be prepended with `evaluation`, with `model.optimizer.iterations` being
+#' evaluation metrics vs `model$optimizer$iterations` written. The metric names
+#' will be prepended with `evaluation`, with `model$optimizer$iterations` being
 #' the step in the visualized TensorBoard.
 #'
 #' If you have installed TensorFlow with pip, you should be able
@@ -1149,72 +1150,72 @@ r"-(Enable visualizations for TensorBoard.
 #' # Examples
 #' Basic usage:
 #'
-#' ```python
-#' tensorboard_callback = keras.callbacks.TensorBoard(log_dir="./logs")
-#' model.fit(x_train, y_train, epochs=2, callbacks=[tensorboard_callback])
+#' ```{r}
+#' tensorboard_callback <- callback_tensorboard(log_dir = "./logs")
+#' model %>% fit(x_train, y_train, epochs = 2, callbacks = list(tensorboard_callback))
 #' # Then run the tensorboard command to view the visualizations.
 #' ```
 #'
 #' Custom batch-level summaries in a subclassed Model:
 #'
-#' ```python
-#' class MyModel(keras.Model):
+#' ```{r}
+#' MyModel <- keras_model_custom(name = "MyModel", function(self) {
+#'   self$dense <- layer_dense(units = 10)
+#'   function (self, x, mask = NULL) {
+#'     outputs <- self$dense(x)
+#'     tf$summary$histogram('outputs', outputs)
+#'     outputs
+#'   }
+#' })
 #'
-#'     def build(self, _):
-#'         self.dense = keras.layers.Dense(10)
-#'
-#'     def call(self, x):
-#'         outputs = self.dense(x)
-#'         tf.summary.histogram('outputs', outputs)
-#'         return outputs
-#'
-#' model = MyModel()
-#' model.compile('sgd', 'mse')
+#' model <- MyModel()
+#' model %>% compile(optimizer = 'sgd', loss = 'mse')
 #'
 #' # Make sure to set `update_freq=N` to log a batch-level summary every N
 #' # batches.  In addition to any `tf.summary` contained in `model.call()`,
 #' # metrics added in `Model.compile` will be logged every N batches.
-#' tb_callback = keras.callbacks.TensorBoard('./logs', update_freq=1)
-#' model.fit(x_train, y_train, callbacks=[tb_callback])
+#' tb_callback <- callback_tensorboard(log_dir = './logs', update_freq = 1)
+#' model %>% fit(x_train, y_train, callbacks = list(tb_callback))
 #' ```
 #'
 #' Custom batch-level summaries in a Functional API Model:
 #'
-#' ```python
-#' def my_summary(x):
-#'     tf.summary.histogram('x', x)
-#'     return x
+#' ```{r}
+#' my_summary <- function(x) {
+#'   tf$summary$histogram('x', x)
+#'   x
+#' }
 #'
-#' inputs = keras.Input(10)
-#' x = keras.layers.Dense(10)(inputs)
-#' outputs = keras.layers.Lambda(my_summary)(x)
-#' model = keras.Model(inputs, outputs)
-#' model.compile('sgd', 'mse')
+#' inputs <- layer_input(shape = 10)
+#' x <- layer_dense(units = 10)(inputs)
+#' outputs <- layer_lambda(my_summary)(x)
+#' model <- keras_model(inputs = inputs, outputs = outputs)
+#' model %>% compile(optimizer = 'sgd', loss = 'mse')
 #'
 #' # Make sure to set `update_freq=N` to log a batch-level summary every N
 #' # batches. In addition to any `tf.summary` contained in `Model.call`,
 #' # metrics added in `Model.compile` will be logged every N batches.
-#' tb_callback = keras.callbacks.TensorBoard('./logs', update_freq=1)
-#' model.fit(x_train, y_train, callbacks=[tb_callback])
+#' tb_callback <- callback_tensorboard(log_dir = './logs', update_freq = 1)
+#' model %>% fit(x_train, y_train, callbacks = list(tb_callback))
 #' ```
 #'
 #' Profiling:
 #'
-#' ```python
+#' ```{r}
 #' # Profile a single batch, e.g. the 5th batch.
-#' tensorboard_callback = keras.callbacks.TensorBoard(
-#'     log_dir='./logs', profile_batch=5)
-#' model.fit(x_train, y_train, epochs=2, callbacks=[tensorboard_callback])
+#' tensorboard_callback <- callback_tensorboard(
+#'   log_dir = './logs', profile_batch = 5)
+#' model %>% fit(x_train, y_train, epochs = 2, callbacks = list(tensorboard_callback))
 #'
 #' # Profile a range of batches, e.g. from 10 to 20.
-#' tensorboard_callback = keras.callbacks.TensorBoard(
-#'     log_dir='./logs', profile_batch=(10,20))
-#' model.fit(x_train, y_train, epochs=2, callbacks=[tensorboard_callback])
+#' tensorboard_callback <- callback_tensorboard(
+#'   log_dir = './logs', profile_batch = c(10, 20))
+#' model %>% fit(x_train, y_train, epochs = 2, callbacks = list(tensorboard_callback))
 #' ```
 #'
 #' @param log_dir the path of the directory where to save the log files to be
 #'     parsed by TensorBoard. e.g.,
-#'     `log_dir = os.path.join(working_dir, 'logs')`.
+#'     `log_dir = file.path(working_dir, 'logs')`.
 #'     This directory should not be reused by any other callbacks.
 #' @param histogram_freq frequency (in epochs) at which to compute
 #'     weight histograms for the layers of the model. If set to 0,
@@ -1223,7 +1224,7 @@ r"-(Enable visualizations for TensorBoard.
 #' @param write_graph (Not supported at this time)
 #'     Whether to visualize the graph in TensorBoard.
 #'     Note that the log file can become quite large
-#'     when `write_graph` is set to `True`.
+#'     when `write_graph` is set to `TRUE`.
 #' @param write_images whether to write model weights to visualize as image in
 #'     TensorBoard.
 #' @param write_steps_per_second whether to log the training steps per second

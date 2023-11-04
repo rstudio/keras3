@@ -29,7 +29,7 @@ callback_lambda(
 
 \item{...}{Any function in \code{Callback} that you want to override by
 passing \verb{function_name=function}. For example,
-\code{LambdaCallback(.., on_train_end=train_end_fn)}. The custom function
+\code{callback_lambda(.., on_train_end=train_end_fn)}. The custom function
 needs to have same arguments as the ones defined in \code{Callback}.}
 }
 \description{
@@ -48,35 +48,49 @@ expected arguments.
 }
 }
 \section{Examples}{
-\if{html}{\out{<div class="sourceCode">}}\preformatted{```python
-# Print the batch number at the beginning of every batch.
-batch_print_callback = LambdaCallback(
-    on_train_batch_begin=lambda batch,logs: print(batch))
+\if{html}{\out{<div class="sourceCode {r}">}}\preformatted{# Print the batch number at the beginning of every batch.
+batch_print_callback <- callback_lambda(
+  on_train_batch_begin = function(batch, logs) \{
+    print(batch)
+  \}
+)
 
 # Stream the epoch loss to a file in JSON format. The file content
 # is not well-formed JSON but rather has a JSON object per line.
-import json
-json_log = open('loss_log.json', mode='wt', buffering=1)
-json_logging_callback = LambdaCallback(
-    on_epoch_end=lambda epoch, logs: json_log.write(
-        json.dumps(\{'epoch': epoch, 'loss': logs['loss']\}) + '
-}\if{html}{\out{</div>}}
-
-'),
-on_train_end=lambda logs: json_log.close()
+json_log <- file('loss_log.json', open = 'wt', blocking = 1)
+json_logging_callback <- callback_lambda(
+  on_epoch_end = function(epoch, logs) \{
+    jsonlite::write_json(
+      x = list(epoch = epoch, loss = logs$loss),
+      file = json_log,
+      append = TRUE
+    )
+  \},
+  on_train_end = function(logs) \{
+    close(json_log)
+  \}
 )
 
-\if{html}{\out{<div class="sourceCode">}}\preformatted{# Terminate some processes after having finished model training.
-processes = ...
-cleanup_callback = LambdaCallback(
-    on_train_end=lambda logs: [
-        p.terminate() for p in processes if p.is_alive()])
+# Terminate some processes after having finished model training.
+processes <- ...
+cleanup_callback <- callback_lambda(
+  on_train_end = function(logs) \{
+    for (p in processes) \{
+      if (is_alive(p)) \{
+        terminate(p)
+      \}
+    \}
+  \}
+)
 
-model.fit(...,
-          callbacks=[batch_print_callback,
-                     json_logging_callback,
-                     cleanup_callback])
-```
+model \%>\% fit(
+  ...,
+  callbacks = list(
+    batch_print_callback,
+    json_logging_callback,
+    cleanup_callback
+  )
+)
 }\if{html}{\out{</div>}}
 }
 

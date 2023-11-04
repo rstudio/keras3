@@ -12,10 +12,10 @@ activation_elu(x, alpha = 1)
 \item{alpha}{Numeric. See description for details.}
 }
 \description{
-The exponential linear unit (ELU) with \code{alpha > 0} is define as:
+The exponential linear unit (ELU) with \code{alpha > 0} is defined as:
 \itemize{
 \item \code{x} if \code{x > 0}
-\item alpha * \code{exp(x) - 1} if \code{x < 0}
+\item \code{alpha * exp(x) - 1} if \code{x < 0}
 }
 
 ELUs have negative values which pushes the mean of the activations

@@ -2,19 +2,34 @@
 % Please edit documentation in R/autogen-ops.R
 \name{k_vectorized_map}
 \alias{k_vectorized_map}
-\title{Parallel map of \code{function} on axis 0 of tensor \code{x}.}
+\title{Parallel map of \code{function} on axis 0 of tensor(s) \code{elements}.}
 \usage{
-k_vectorized_map(`function`, x)
+k_vectorized_map(`function`, elements)
 }
 \description{
-Schematically, \code{vectorized_map} implements the following:
+Schematically, \code{vectorized_map} implements the following,
+in the case of a single tensor input \code{elements}:
 
-\if{html}{\out{<div class="sourceCode python">}}\preformatted{def vectorized_map(function, x)
+\if{html}{\out{<div class="sourceCode python">}}\preformatted{def vectorized_map(function, elements)
     outputs = []
-    for element in x:
-        outputs.append(function(element))
+    for e in elements:
+        outputs.append(function(e))
     return stack(outputs)
 }\if{html}{\out{</div>}}
+
+In the case of an iterable of tensors \code{elements},
+it implements the following:
+
+\if{html}{\out{<div class="sourceCode python">}}\preformatted{def vectorized_map(function, elements)
+    batch_size = elements[0].shape[0]
+    outputs = []
+    for index in range(batch_size):
+        outputs.append(function([e[index] for e in elements]))
+    return np.stack(outputs)
+}\if{html}{\out{</div>}}
+
+In this case, \code{function} is expected to take as input
+a single list of tensor arguments.
 }
 \seealso{
 \itemize{

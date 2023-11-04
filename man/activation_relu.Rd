@@ -9,13 +9,13 @@ activation_relu(x, negative_slope = 0, max_value = NULL, threshold = 0)
 \arguments{
 \item{x}{Input tensor.}
 
-\item{negative_slope}{A \code{float} that controls the slope
+\item{negative_slope}{A \code{numeric} that controls the slope
 for values lower than the threshold.}
 
-\item{max_value}{A \code{float} that sets the saturation threshold (the largest
+\item{max_value}{A \code{numeric} that sets the saturation threshold (the largest
 value the function will return).}
 
-\item{threshold}{A \code{float} giving the threshold value of the activation
+\item{threshold}{A \code{numeric} giving the threshold value of the activation
 function below which values will be damped or set to zero.}
 }
 \description{
@@ -27,15 +27,15 @@ change the max value of the activation,
 and to use a non-zero multiple of the input for values below the threshold.
 }
 \section{Examples}{
-\if{html}{\out{<div class="sourceCode python">}}\preformatted{x = [-10, -5, 0.0, 5, 10]
-keras.activations.relu(x)
-# [ 0.,  0.,  0.,  5., 10.]
-keras.activations.relu(x, negative_slope=0.5)
-# [-5. , -2.5,  0. ,  5. , 10. ]
-keras.activations.relu(x, max_value=5.)
-# [0., 0., 0., 5., 5.]
-keras.activations.relu(x, threshold=5.)
-# [-0., -0.,  0.,  0., 10.]
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{x <- c(-10, -5, 0, 5, 10)
+activation_relu(x)
+#> tf.Tensor([ 0.  0.  0.  5. 10.], shape=(5), dtype=float32)
+activation_relu(x, negative_slope = 0.5)
+#> tf.Tensor([-5.  -2.5  0.   5.  10. ], shape=(5), dtype=float32)
+activation_relu(x, max_value = 5)
+#> tf.Tensor([0. 0. 0. 5. 5.], shape=(5), dtype=float32)
+activation_relu(x, threshold = 5)
+#> tf.Tensor([-0. -0.  0.  0. 10.], shape=(5), dtype=float32)
 }\if{html}{\out{</div>}}
 }
 

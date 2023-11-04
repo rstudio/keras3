@@ -11,16 +11,16 @@ callback_csv_logger(filename, separator = ",", append = FALSE)
 
 \item{separator}{String used to separate elements in the CSV file.}
 
-\item{append}{Boolean. True: append if file exists (useful for continuing
-training). False: overwrite existing file.}
+\item{append}{Boolean. \code{TRUE}: append if file exists (useful for continuing
+training). \code{FALSE}: overwrite existing file.}
 }
 \description{
 Supports all values that can be represented as a string,
-including 1D iterables such as \code{np.ndarray}.
+including 1D iterables such as atomic vectors.
 }
 \section{Examples}{
-\if{html}{\out{<div class="sourceCode python">}}\preformatted{csv_logger = CSVLogger('training.log')
-model.fit(X_train, Y_train, callbacks=[csv_logger])
+\if{html}{\out{<div class="sourceCode {r}">}}\preformatted{csv_logger <- callback_csv_logger('training.log')
+model \%>\% fit(X_train, Y_train, callbacks = list(csv_logger))
 }\if{html}{\out{</div>}}
 }
 

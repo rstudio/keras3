@@ -1,0 +1,117 @@
+diff --git a/man-roxygen/callback_tensorboard/roxygen.Rmd b/man-roxygen/callback_tensorboard/roxygen.Rmd
+index 41dc7964..fef9eb63 100644
+--- a/man-roxygen/callback_tensorboard/roxygen.Rmd
++++ b/man-roxygen/callback_tensorboard/roxygen.Rmd
+@@ -13,6 +13,6 @@ This callback logs events for TensorBoard, including:
+ 
+-When used in `model.evaluate()` or regular validation
++When used in `model$evaluate()` or regular validation
+ in addition to epoch summaries, there will be a summary that records
+-evaluation metrics vs `model.optimizer.iterations` written. The metric names
+-will be prepended with `evaluation`, with `model.optimizer.iterations` being
++evaluation metrics vs `model$optimizer$iterations` written. The metric names
++will be prepended with `evaluation`, with `model$optimizer$iterations` being
+ the step in the visualized TensorBoard.
+@@ -32,5 +32,5 @@ Basic usage:
+ 
+-```python
+-tensorboard_callback = keras.callbacks.TensorBoard(log_dir="./logs")
+-model.fit(x_train, y_train, epochs=2, callbacks=[tensorboard_callback])
++```{r}
++tensorboard_callback <- callback_tensorboard(log_dir = "./logs")
++model %>% fit(x_train, y_train, epochs = 2, callbacks = list(tensorboard_callback))
+ # Then run the tensorboard command to view the visualizations.
+@@ -40,15 +40,14 @@ Custom batch-level summaries in a subclassed Model:
+ 
+-```python
+-class MyModel(keras.Model):
++```{r}
++MyModel <- keras_model_custom(name = "MyModel", function(self) {
++  self$dense <- layer_dense(units = 10)
++  function (self, x, mask = NULL) {
++    outputs <- self$dense(x)
++    tf$summary$histogram('outputs', outputs)
++    outputs
++  }
++})
+ 
+-    def build(self, _):
+-        self.dense = keras.layers.Dense(10)
+-
+-    def call(self, x):
+-        outputs = self.dense(x)
+-        tf.summary.histogram('outputs', outputs)
+-        return outputs
+-
+-model = MyModel()
+-model.compile('sgd', 'mse')
++model <- MyModel()
++model %>% compile(optimizer = 'sgd', loss = 'mse')
+ 
+@@ -57,4 +56,4 @@ model.compile('sgd', 'mse')
+ # metrics added in `Model.compile` will be logged every N batches.
+-tb_callback = keras.callbacks.TensorBoard('./logs', update_freq=1)
+-model.fit(x_train, y_train, callbacks=[tb_callback])
++tb_callback <- callback_tensorboard(log_dir = './logs', update_freq = 1)
++model %>% fit(x_train, y_train, callbacks = list(tb_callback))
+ ```
+@@ -63,12 +62,13 @@ Custom batch-level summaries in a Functional API Model:
+ 
+-```python
+-def my_summary(x):
+-    tf.summary.histogram('x', x)
+-    return x
++```{r}
++my_summary <- function(x) {
++  tf$summary$histogram('x', x)
++  x
++}
+ 
+-inputs = keras.Input(10)
+-x = keras.layers.Dense(10)(inputs)
+-outputs = keras.layers.Lambda(my_summary)(x)
+-model = keras.Model(inputs, outputs)
+-model.compile('sgd', 'mse')
++inputs <- layer_input(shape = 10)
++x <- layer_dense(units = 10)(inputs)
++outputs <- layer_lambda(my_summary)(x)
++model <- keras_model(inputs = inputs, outputs = outputs)
++model %>% compile(optimizer = 'sgd', loss = 'mse')
+ 
+@@ -77,4 +77,4 @@ model.compile('sgd', 'mse')
+ # metrics added in `Model.compile` will be logged every N batches.
+-tb_callback = keras.callbacks.TensorBoard('./logs', update_freq=1)
+-model.fit(x_train, y_train, callbacks=[tb_callback])
++tb_callback <- callback_tensorboard(log_dir = './logs', update_freq = 1)
++model %>% fit(x_train, y_train, callbacks = list(tb_callback))
+ ```
+@@ -83,12 +83,12 @@ Profiling:
+ 
+-```python
++```{r}
+ # Profile a single batch, e.g. the 5th batch.
+-tensorboard_callback = keras.callbacks.TensorBoard(
+-    log_dir='./logs', profile_batch=5)
+-model.fit(x_train, y_train, epochs=2, callbacks=[tensorboard_callback])
++tensorboard_callback <- callback_tensorboard(
++  log_dir = './logs', profile_batch = 5)
++model %>% fit(x_train, y_train, epochs = 2, callbacks = list(tensorboard_callback))
+ 
+ # Profile a range of batches, e.g. from 10 to 20.
+-tensorboard_callback = keras.callbacks.TensorBoard(
+-    log_dir='./logs', profile_batch=(10,20))
+-model.fit(x_train, y_train, epochs=2, callbacks=[tensorboard_callback])
++tensorboard_callback <- callback_tensorboard(
++  log_dir = './logs', profile_batch = c(10, 20))
++model %>% fit(x_train, y_train, epochs = 2, callbacks = list(tensorboard_callback))
+ ```
+@@ -97,3 +97,3 @@ model.fit(x_train, y_train, epochs=2, callbacks=[tensorboard_callback])
+     parsed by TensorBoard. e.g.,
+-    `log_dir = os.path.join(working_dir, 'logs')`.
++    `log_dir = file.path(working_dir, 'logs')`.
+     This directory should not be reused by any other callbacks.
+@@ -106,3 +106,3 @@ model.fit(x_train, y_train, epochs=2, callbacks=[tensorboard_callback])
+     Note that the log file can become quite large
+-    when `write_graph` is set to `True`.
++    when `write_graph` is set to `TRUE`.
+ @param write_images whether to write model weights to visualize as image in
