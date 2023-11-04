@@ -1,7 +1,7 @@
-diff --git a/docstring_as_roxygen.md b/roxygen.Rmd
+diff --git a/man-roxygen/activation_elu/roxygen.Rmd b/man-roxygen/activation_elu/roxygen.Rmd
 index 5f24ad70..1bf8111a 100644
---- a/docstring_as_roxygen.md
-+++ b/roxygen.Rmd
+--- a/man-roxygen/activation_elu/docstring_as_roxygen.md
++++ b/man-roxygen/activation_elu/roxygen.Rmd
 @@ -3,6 +3,6 @@ Exponential Linear Unit.
  @description
 -The exponential linear unit (ELU) with `alpha > 0` is define as:
