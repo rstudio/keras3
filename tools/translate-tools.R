@@ -351,6 +351,75 @@ prompt_translate_roxygen_instructions_and_examples <- list %(% {
     @seealso
       + <https://www.tensorflow.org/api_docs/python/tf/keras/activations/relu>
     }--"
+
+  user = r"--{
+    ```python
+    class InterruptingCallback(keras.callbacks.Callback):
+      def on_epoch_begin(self, epoch, logs=None):
+        if epoch == 4:
+          raise RuntimeError('Interrupting!')
+    callback = keras.callbacks.BackupAndRestore(backup_dir="/tmp/backup")
+    model = keras.models.Sequential([keras.layers.Dense(10)])
+    model.compile(keras.optimizers.SGD(), loss='mse')
+    try:
+      model.fit(np.arange(100).reshape(5, 20), np.zeros(5), epochs=10,
+                batch_size=1, callbacks=[callback, InterruptingCallback()],
+                verbose=0)
+    except:
+      pass
+    history = model.fit(np.arange(100).reshape(5, 20), np.zeros(5),
+                        epochs=10, batch_size=1, callbacks=[callback],
+                        verbose=0)
+    # Only 6 more epochs are run, since first training got interrupted at
+    # zero-indexed epoch 4, second training will continue from 4 to 9.
+    len(history.history['loss'])
+    6
+    ```
+    }--"
+  assistant = r"--{
+    ```{r}
+    callback_interrupting <- new_callback_class(
+      "InterruptingCallback",
+      on_epoch_begin = function(epoch, logs = NULL) {
+        if (epoch == 4) {
+          stop('Interrupting!')
+        }
+      }
+    )
+    unlink("/tmp/backup", recursive = TRUE)
+    callback <- callback_backup_and_restore(backup_dir = "/tmp/backup")
+    model <- keras_model_sequential() %>%
+      layer_dense(10)
+    model %>% compile(optimizer = optimizer_sgd(), loss = 'mse')
+
+    try({
+      model %>% fit(x = k_ones(c(5, 20)),
+                    y = k_zeros(5),
+                    epochs = 10, batch_size = 1,
+                    callbacks = list(callback, callback_interrupting()),
+                    verbose = 0)
+    })
+
+    history <- model %>% fit(x = k_ones(c(5, 20)),
+                             y = k_zeros(5),
+                             epochs = 10, batch_size = 1,
+                             callbacks = list(callback),
+                             verbose = 0)
+
+    # Only 6 more epochs are run, since first training got interrupted at
+    # zero-indexed epoch 4, second training will continue from 4 to 9.
+    nrow(as.data.frame(history))
+    ```
+    }--"
+
+  user = r"--{
+    Supports all values that can be represented as a string,
+    including 1D iterables such as `np.ndarray`.
+    }--"
+  assistant = r"--{
+    Supports all values that can be represented as a string,
+    including 1D iterables such as atomic vectors.
+    }--"
 }
 
 
