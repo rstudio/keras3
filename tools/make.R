@@ -9,31 +9,43 @@ if(!"source:tools/translate-tools.R" %in% search()) envir::attach_source("tools/
 make_translation_patchfiles <- function() {
   fs::dir_ls("man-roxygen/", type = "directory") |>
     # head(3) |>
+    keep(~str_detect(.x, "backup|_elu|_relu")) %>%
     set_names(dirname) |>
     walk(\(dir) {
-      withr::local_dir(dir)
-      if(file_exists("translate.patch") &&
-         file_info("roxygen.Rmd")$change_time <= file_info("translate.patch")$birth_time) {
-        message("skipping generating patch: ", dir)
-        return()
-      }
+      # withr::local_dir(dir)
+      # if(file_exists("translate.patch") &&
+      #    file_info("roxygen.Rmd")$change_time <= file_info("translate.patch")$birth_time) {
+      #   message("skipping generating patch: ", dir)
+      #   return()
+      # }
       message("updating patchfile: ", dir)
-      system2("git", c("diff --output=translate.patch --diff-algorithm=minimal -U1",
-                       "docstring_as_roxygen.md roxygen.Rmd"))
+      diff <- suppressWarnings( # returns 1 on diff
+        system2t("git", c("diff -U1 --no-index --diff-algorithm=minimal",
+                          glue("--output={dir}/translate.patch"),
+                      dir / "docstring_as_roxygen.md", dir / "roxygen.Rmd")))
+      patch_filepath <- dir/"translate.patch"
+      # diff <-
+        read_file(patch_filepath) |>
+        str_replace(fixed("docstring_as_roxygen.md"), "roxygen.Rmd") |>
+        write_file(patch_filepath)
+
+                      # | sed 's|docstring_as_roxygen.md|roxygen.Rmd|' > translate.patch")
+      # system2("git", c("diff --output=translate.patch --diff-algorithm=minimal -U1 --no-index",
+                       # "docstring_as_roxygen.md roxygen.Rmd "))
     })
 }
 
 apply_translation_patchfiles <- function() {
   fs::dir_ls("man-roxygen/", type = "directory") |>
-    head(3) |>
-    set_names(dirname) %>%
+    # head(3) |>
+    set_names(basename) %>%
     purrr::walk(\(dir) {
       withr::local_dir(dir)
-      system2("git", c("apply --3way --allow-empty translate.patch"))
+      system2("git", c("apply --3way --recount --allow-empty translate.patch"))
     }) |>
     discard(\(x) is.null(x) || x == 0)
 }
-
+"git apply --3way --allow-empty translate.patch"
 
 get_translations <- function() {
   fs::dir_ls("man-roxygen/", type = "directory") |>
@@ -111,6 +123,10 @@ make_translation_patchfiles()
 # TODO: add @import reticulate ??
 #
 # TODO: remove any tensorflow imports / DESCRIPTION deps
+local({
+  x <- keras$callbacks$BackupAndRestore
+  x$`__doc__` <- str_replace(keras$callbacks$BackupAndRestore$`__doc__`, "Note that the user", "Note that the user  asdfa asdfdsaf asdfasdf ")
+})
 
 endpoints <- list_endpoints(skip = c(
   # to be processed / done
@@ -316,6 +332,8 @@ make_new_man_roxygen_dir <- function(ex) {
   ex
 }
 
+
+
 update_man_roxygen_dir <- function(ex) {
   message("updating ", ex$r_name)
   withr::local_dir(ex$man_roxygen_dir)
@@ -335,7 +353,7 @@ update_man_roxygen_dir <- function(ex) {
   writeLines(roxygen, "docstring_as_roxygen.md")
   writeLines(roxygen, "roxygen.Rmd")
 
-  res <- system("git apply --3way fixup.patch") # --unidiff-zero --verbose
+  # res <- system("git apply --3way translate.patch") # --unidiff-zero --verbose
 
   ex
   # if res == error: nothing else: knitr::knit() ?
@@ -355,6 +373,10 @@ augment_export <- function(ex) {
 
 exports <- exports |>
   map(augment_export)
+
+stop("here")
+apply_translation_patchfiles()
+
 
 if(FALSE) {
 exports$keras.activations.relu$docstring <-

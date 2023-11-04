@@ -125,6 +125,8 @@ attach_eval({
   c <- function(...)
     base::do.call(base::c, rlang::list2(...), quote = TRUE)
 
+  import_from(reticulate, system2t)
+
 }, mask.ok = "c")
 
 # ---- venv ----
