@@ -24,6 +24,7 @@ library_stable <-
             exclude = exclude)
   }
 
+library_stable(fs)
 library_stable(readr)
 library_stable(stringr)
 library_stable(tibble)

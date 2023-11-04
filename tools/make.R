@@ -3,6 +3,47 @@
 if(!"source:tools/utils.R" %in% search()) envir::attach_source("tools/utils.R")
 if(!"source:tools/translate-tools.R" %in% search()) envir::attach_source("tools/translate-tools.R")
 
+
+# start by regenerating patch files
+
+make_translation_patchfiles <- function() {
+  fs::dir_ls("man-roxygen/", type = "directory") |>
+    # head(3) |>
+    set_names(dirname) |>
+    walk(\(dir) {
+      withr::local_dir(dir)
+      if(file_exists("translate.patch") &&
+         file_info("roxygen.Rmd")$change_time <= file_info("translate.patch")$birth_time) {
+        message("skipping generating patch: ", dir)
+        return()
+      }
+      system2("git", c("diff --output=translate.patch --diff-algorithm=minimal -U1",
+                       "docstring_as_roxygen.md roxygen.Rmd"))
+    })
+}
+
+apply_translation_patchfiles <- function() {
+  fs::dir_ls("man-roxygen/", type = "directory") |>
+    head(3) |>
+    set_names(dirname) %>%
+    purrr::walk(\(dir) {
+      withr::local_dir(dir)
+
+      system2("git", c("apply --3way --allow-empty translate.patch"))
+    }) |>
+    discard(\(x) is.null(x) || x == 0)
+}
+
+
+
+make_translation_patchfiles()
+# z <- "man-roxygen/activation_elu/roxygen.Rmd" |> read_file() |>
+#   get_translated_roxygen()
+#
+# apply_translation_patchfiles()
+# write_lines(z, "man-roxygen/activation_elu/roxygen.Rmd") -> z2
+
+
 # source("tools/utils.R")
 
 # TODO: add PR for purrr::rate_throttle("3 per minute")
@@ -184,6 +225,27 @@ endpoints <-
 
 # fs::path("tools/raw", gsub(".", "-", endpoint, fixed = TRUE), ext = "R")
 
+make_patch_files <- function() {
+  fs::dir_ls("man-roxygen/", type = "directory") |>
+    # head(3) |>
+    purrr::walk(\(dir) {
+  # fs::dir_map("man-roxygen/", type = "directory", \(dir) {
+    withr::local_dir(dir)
+    # print(dir)
+    # https://git-scm.com/docs/git-diff
+    system2("git", c("diff --output=translate.patch --diff-algorithm=minimal -U1",
+                     "docstring_as_roxygen.md roxygen.Rmd"))
+  }) #|> invisible()
+}
+make_patch_files()
+
+apply_patch_files <- function() {
+  fs::dir_map("man-roxygen/", \(dir) {
+    withr::local_dir(dir)
+
+  })
+}
+
 exports <- endpoints |>
   purrr::set_names() |>
   lapply(mk_export)
@@ -206,7 +268,6 @@ make_new_man_roxygen_dir <- function(ex) {
 
   writeLines(docstring, "docstring.md")
   writeLines(roxygen, "docstring_as_roxygen.md")
-
 
   do_call_openai <-
     (n_openai_calls_made < max_openai_calls) &&
@@ -234,15 +295,18 @@ make_new_man_roxygen_dir <- function(ex) {
 }
 
 update_man_roxygen_dir <- function(ex) {
+  message("updating ", ex$r_name)
   withr::local_dir(ex$man_roxygen_dir)
   old_docstring <- "docstring.md" |> readLines() |> str_flatten_lines()
   is_changed <- ex$docstring != old_docstring
-  if(!is_changed) return(ex)
-
+  if(!is_changed) {
+    message("returning early")
+    return(ex)
+}
   import_from({ex}, docstring, roxygen)
 
-  old_roxygen_rmd <- read_file("roxygen.Rmd")
   old_docstring_as_roxygen <- read_file("docstring_as_roxygen.md")
+  old_roxygen_rmd <- read_file("roxygen.Rmd")
   system("git diff -u1 docstring_as_roxygen.md roxygen.Rmd > fixup.patch")
 
   writeLines(docstring, "docstring.md")
@@ -262,6 +326,12 @@ augment_export <- function(ex) {
     make_new_man_roxygen_dir(ex)
 
 }
+
+exports$keras.activations.relu$docstring <-
+  read_file(fs::path("man-roxygen",
+                     exports$keras.activations.relu$r_name,
+                     "docstring.md"))
+augment_export(exports$keras.activations.relu)
 
 exports <- exports |>
   map(augment_export)

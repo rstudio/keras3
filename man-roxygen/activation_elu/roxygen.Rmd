@@ -1,10 +1,10 @@
 Exponential Linear Unit.
 
 @description
-The exponential linear unit (ELU) with `alpha > 0` is define as:
+The exponential linear unit (ELU) with `alpha > 0` is defined as:
 
 - `x` if `x > 0`
-- alpha * `exp(x) - 1` if `x < 0`
+- `alpha * exp(x) - 1` if `x < 0`
 
 ELUs have negative values which pushes the mean of the activations
 closer to zero.
