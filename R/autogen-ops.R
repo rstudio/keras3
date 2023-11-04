@@ -648,16 +648,33 @@ function (x, num = NULL, axis = 0L)
 
 # keras.ops.vectorized_map
 # keras.src.ops.core.vectorized_map
-r"-(Parallel map of `function` on axis 0 of tensor `x`.
+r"-(Parallel map of `function` on axis 0 of tensor(s) `elements`.
 
-    Schematically, `vectorized_map` implements the following:
+    Schematically, `vectorized_map` implements the following,
+    in the case of a single tensor input `elements`:
 
     ```python
-    def vectorized_map(function, x)
+    def vectorized_map(function, elements)
         outputs = []
-        for element in x:
-            outputs.append(function(element))
+        for e in elements:
+            outputs.append(function(e))
         return stack(outputs)
+    ```
+
+    In the case of an iterable of tensors `elements`,
+    it implements the following:
+
+    ```python
+    def vectorized_map(function, elements)
+        batch_size = elements[0].shape[0]
+        outputs = []
+        for index in range(batch_size):
+            outputs.append(function([e[index] for e in elements]))
+        return np.stack(outputs)
+    ```
+
+    In this case, `function` is expected to take as input
+    a single list of tensor arguments.
     )-"
 #' Parallel map of `function` on axis 0 of tensor `x`.
 #'
@@ -677,8 +694,8 @@ r"-(Parallel map of `function` on axis 0 of tensor `x`.
 #' @seealso
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/vectorized_map>
 k_vectorized_map <-
-function (`function`, x)
-keras$ops$vectorized_map(`function`, x)
+function (`function`, elements)
+keras$ops$vectorized_map(`function`, elements)
 
 
 # keras.ops.while_loop
@@ -8066,7 +8083,10 @@ r"-(Gives a new shape to a tensor without changing its data.
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/reshape>
 k_reshape <-
 function (x, new_shape)
-keras$ops$reshape(x, new_shape)
+{
+    args <- capture_args2(list(new_shape = normalize_shape))
+    do.call(keras$ops$reshape, args)
+}
 
 
 # keras.ops.roll
