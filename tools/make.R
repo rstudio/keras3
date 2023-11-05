@@ -5,7 +5,7 @@ if(!"source:tools/translate-tools.R" %in% search()) envir::attach_source("tools/
 
 # The source of truth for the current translation should be...?
 #    - the autogened file R/autogen-*.R, or
-#    - man-src/*/roxygen.Rmd
+#    - man-src/*/2-translated.Rmd
 
 # start by regenerating patch files
 
@@ -15,27 +15,29 @@ make_translation_patchfiles <- function() {
     # keep(~str_detect(.x, "backup|_elu|_relu")) %>%
     set_names(dirname) |>
     walk(\(dir) {
-      # withr::local_dir(dir)
-      # if(file_exists("translate.patch") &&
-      #    file_info("roxygen.Rmd")$change_time <= file_info("translate.patch")$birth_time) {
-      #   message("skipping generating patch: ", dir)
-      #   return()
-      # }
+      withr::with_dir(dir, {
+        if (file_exists("translate.patch") &&
+            file_info("2-translated.Rmd")$change_time <= file_info("translate.patch")$birth_time) {
+          # message("skipping generating patch: ", dir)
+          return()
+        }
+      })
       message("updating patchfile: ", dir)
       diff <- suppressWarnings( # returns 1 on diff
-        system2t("git", c("diff -U1 --no-index --diff-algorithm=minimal",
+        system2t("git", c("diff -U1 --no-index",
+                          # "--diff-algorithm=minimal",
                           glue("--output={dir}/translate.patch"),
-                      dir / "docstring_as_roxygen.md", dir / "roxygen.Rmd")))
+                      dir / "1-formatted.md", dir / "2-translated.Rmd")))
       patch_filepath <- dir/"translate.patch"
       # diff <-
         read_file(patch_filepath) |>
-        str_replace_all(fixed("/docstring_as_roxygen.md"), "/roxygen.Rmd") |>
-        # str_replace(fixed("/docstring_as_roxygen.md"), "/roxygen.Rmd") |>
+        str_replace_all(fixed("/1-formatted.md"), "/2-translated.Rmd") |>
+        # str_replace(fixed("/1-formatted.md"), "/2-translated.Rmd") |>
         write_file(patch_filepath)
 
-                      # | sed 's|docstring_as_roxygen.md|roxygen.Rmd|' > translate.patch")
+                      # | sed 's|1-formatted.md|2-translated.Rmd|' > translate.patch")
       # system2("git", c("diff --output=translate.patch --diff-algorithm=minimal -U1 --no-index",
-                       # "docstring_as_roxygen.md roxygen.Rmd "))
+                       # "1-formatted.md 2-translated.Rmd "))
     })
 }
 
@@ -59,14 +61,14 @@ apply_translation_patchfiles <- function(filepath = fs::dir_ls("man-src/", type 
 get_translations <- function() {
   fs::dir_ls("man-src/", type = "directory") |>
     set_names(basename) %>%
-    keep(\(dir) read_file(path(dir, "roxygen.Rmd")) |> str_detect("```python")) |>
+    keep(\(dir) read_file(path(dir, "2-translated.Rmd")) |> str_detect("```python")) |>
     head(4) |>
     purrr::walk(\(dir) {
       # browser()
       withr::local_dir(dir)
-      og <- "roxygen.Rmd" |> read_file()
+      og <- "2-translated.Rmd" |> read_file()
       new <- og |> get_translated_roxygen()
-      new |> write_lines("roxygen.Rmd")
+      new |> write_lines("2-translated.Rmd")
       write_rds(new, "completion.rds")
     })
 }
@@ -78,11 +80,27 @@ if(FALSE) {
 }
 make_translation_patchfiles()
 
-# z <- "man-src/activation_elu/roxygen.Rmd" |> read_file() |>
+render_roxygen_rmds <- function(filepath = fs::dir_ls("man-src/", type = "directory")) {
+  # this should probably happen in a separate R session...
+  filepath |>
+    fs::as_fs_path() |>
+    # head(3) |>
+    set_names(basename) %>%
+    purrr::walk(\(dir) {
+      withr::local_dir(dir)
+      keras$utils$clear_session()
+      knitr::knit("2-translated.Rmd", "3-rendered.md",
+                  quiet = TRUE, envir = new.env())
+    })
+    # discard(\(x) is.null(x) || x == 0) |>
+    # invisible()
+}
+
+# z <- "man-src/activation_elu/2-translated.Rmd" |> read_file() |>
 #   get_translated_roxygen()
 #
 # apply_translation_patchfiles()
-# write_lines(z, "man-src/activation_elu/roxygen.Rmd") -> z2
+# write_lines(z, "man-src/activation_elu/2-translated.Rmd") -> z2
 
 
 # source("tools/utils.R")
@@ -283,7 +301,7 @@ endpoints <-
 #     # print(dir)
 #     # https://git-scm.com/docs/git-diff
 #     system2("git", c("diff --output=translate.patch --diff-algorithm=minimal -U1",
-#                      "docstring_as_roxygen.md roxygen.Rmd"))
+#                      "1-formatted.md 2-translated.Rmd"))
 #   }) #|> invisible()
 # }
 # make_patch_files()
@@ -315,8 +333,8 @@ make_new_man_roxygen_dir <- function(ex) {
 
   import_from({ex}, docstring, roxygen)
 
-  writeLines(docstring, "docstring.md")
-  writeLines(roxygen, "docstring_as_roxygen.md")
+  writeLines(docstring, "0-docstring.md")
+  writeLines(roxygen, "1-formatted.md")
 
   do_call_openai <-
     (n_openai_calls_made < max_openai_calls) &&
@@ -326,18 +344,18 @@ make_new_man_roxygen_dir <- function(ex) {
     ex$completion <- completion <- get_translated_roxygen(roxygen)
     n_openai_calls_made <<- n_openai_calls_made + 1L
     write_rds(completion, "completion.rds")
-    writeLines(completion, "roxygen.Rmd")
+    writeLines(completion, "2-translated.Rmd")
     tryCatch({
       library(keras)
       keras$utils$clear_session()
-      knitr::knit("roxygen.Rmd", "roxygen.md",
+      knitr::knit("2-translated.Rmd", "roxygen.md",
                   quiet = TRUE, envir = new.env())
     }, error = function(e) {
       warning("Failed to render docs for", ex$r_name)
     })
   } else {
-    writeLines(roxygen, "roxygen.Rmd")
-    file.copy("roxygen.Rmd", "roxygen.md")
+    writeLines(roxygen, "2-translated.Rmd")
+    file.copy("2-translated.Rmd", "roxygen.md")
   }
 
   ex
@@ -354,7 +372,7 @@ make_new_man_roxygen_dir <- function(ex) {
 update_man_roxygen_dir <- function(ex) {
   message("updating ", ex$r_name)
   withr::local_dir(ex$man_roxygen_dir)
-  # old_docstring <- "docstring.md" |> readLines() |> str_flatten_lines()
+  # old_docstring <- "0-docstring.md" |> readLines() |> str_flatten_lines()
   # is_changed <- ex$docstring != old_docstring
   # if(!is_changed) {
   #   message("returning early")
@@ -362,13 +380,13 @@ update_man_roxygen_dir <- function(ex) {
   # }
   import_from({ex}, docstring, roxygen)
 
-  # old_docstring_as_roxygen <- read_file("docstring_as_roxygen.md")
-  # old_roxygen_rmd <- read_file("roxygen.Rmd")
-  # system("git diff -u1 docstring_as_roxygen.md roxygen.Rmd > fixup.patch")
+  # old_docstring_as_roxygen <- read_file("1-formatted.md")
+  # old_roxygen_rmd <- read_file("2-translated.Rmd")
+  # system("git diff -u1 1-formatted.md 2-translated.Rmd > fixup.patch")
 
-  writeLines(docstring, "docstring.md")           # 0-original.md
-  writeLines(roxygen, "docstring_as_roxygen.md")  # 1-formatted.md
-  writeLines(roxygen, "roxygen.Rmd")              # 2-translated.md
+  writeLines(docstring, "0-docstring.md")           # 0-original.md
+  writeLines(roxygen, "1-formatted.md")  # 1-formatted.md
+  writeLines(roxygen, "2-translated.Rmd")              # 2-translated.md
   writeLines(str_flatten_lines(                   # 3-rendered.md
     str_c(ex$r_name, " <-"),
     deparse(ex$r_fn)
@@ -406,7 +424,7 @@ if(FALSE) {
 exports$keras.activations.relu$docstring <-
   read_file(fs::path("man-src",
                      exports$keras.activations.relu$r_name,
-                     "docstring.md"))
+                     "0-docstring.md"))
 augment_export(exports$keras.activations.relu)
 
 
@@ -450,9 +468,9 @@ df |>
         # str_c('r"-(', py_obj$`__doc__`, ')-"'),
         # str_c('r"-(', docstring, ')-"'),
 
-        # str_c("#' ", readLines(fs::path(man_roxygen_dir, "roxygen.Rmd"))),
-        glue(r"--(#' @eval readLines("{fs::path(man_roxygen_dir, "roxygen.Rmd")}") )--"),
-        # glue(r"--(#' @backref "{fs::path(man_roxygen_dir, "roxygen.Rmd")}" )--"),
+        # str_c("#' ", readLines(fs::path(man_roxygen_dir, "2-translated.Rmd"))),
+        glue(r"--(#' @eval readLines("{fs::path(man_roxygen_dir, "2-translated.Rmd")}") )--"),
+        # glue(r"--(#' @backref "{fs::path(man_roxygen_dir, "2-translated.Rmd")}" )--"),
         str_c(r_name, " <- "),
         deparse(r_fn),
         ""
@@ -514,7 +532,7 @@ ex2 <- augment_export(exports$keras.activations.elu)
 
 
 setwd(ex2$man_roxygen_dir)
-rmarkdown::render("roxygen.Rmd", #run_pandoc =
+rmarkdown::render("2-translated.Rmd", #run_pandoc =
                   # output_format = "github_document",
                   output_format = rmarkdown::github_document(
                     hard_line_breaks = TRUE,
@@ -525,7 +543,7 @@ rmarkdown::render("roxygen.Rmd", #run_pandoc =
 
                   output_file = "roxygen.md", envir = new.env())
 
-knitr::knit("roxygen.Rmd", "roxygen.md")
+knitr::knit("2-translated.Rmd", "roxygen.md")
 
 
 setwd(here::here())
@@ -544,9 +562,9 @@ if(FALSE) {
   df %>%
     rowwise() %>%
     mutate(write_out = withr::with_dir(man_roxygen_dir, {
-      writeLines(docstring, "docstring.md")
+      writeLines(docstring, "0-docstring.md")
       writeLines(roxygen, "roxygen_intermediate.md")
-      writeLines(roxygen, "roxygen.Rmd")
+      writeLines(roxygen, "2-translated.Rmd")
       writeLines(roxygen, "roxygen.md")
     }))
 
