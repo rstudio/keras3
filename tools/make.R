@@ -5,12 +5,12 @@ if(!"source:tools/translate-tools.R" %in% search()) envir::attach_source("tools/
 
 # The source of truth for the current translation should be...?
 #    - the autogened file R/autogen-*.R, or
-#    - man-roxygen/*/roxygen.Rmd
+#    - man-src/*/roxygen.Rmd
 
 # start by regenerating patch files
 
 make_translation_patchfiles <- function() {
-  fs::dir_ls("man-roxygen/", type = "directory") |>
+  fs::dir_ls("man-src/", type = "directory") |>
     # head(3) |>
     # keep(~str_detect(.x, "backup|_elu|_relu")) %>%
     set_names(dirname) |>
@@ -39,7 +39,7 @@ make_translation_patchfiles <- function() {
     })
 }
 
-apply_translation_patchfiles <- function(filepath = fs::dir_ls("man-roxygen/", type = "directory") ) {
+apply_translation_patchfiles <- function(filepath = fs::dir_ls("man-src/", type = "directory") ) {
   filepath |>
     fs::as_fs_path() |>
     # head(3) |>
@@ -54,10 +54,10 @@ apply_translation_patchfiles <- function(filepath = fs::dir_ls("man-roxygen/", t
     invisible()
 }
 
-"git apply --3way --allow-empty translate.patch"
+# "git apply --3way --allow-empty translate.patch"
 
 get_translations <- function() {
-  fs::dir_ls("man-roxygen/", type = "directory") |>
+  fs::dir_ls("man-src/", type = "directory") |>
     set_names(basename) %>%
     keep(\(dir) read_file(path(dir, "roxygen.Rmd")) |> str_detect("```python")) |>
     head(4) |>
@@ -78,11 +78,11 @@ if(FALSE) {
 }
 make_translation_patchfiles()
 
-# z <- "man-roxygen/activation_elu/roxygen.Rmd" |> read_file() |>
+# z <- "man-src/activation_elu/roxygen.Rmd" |> read_file() |>
 #   get_translated_roxygen()
 #
 # apply_translation_patchfiles()
-# write_lines(z, "man-roxygen/activation_elu/roxygen.Rmd") -> z2
+# write_lines(z, "man-src/activation_elu/roxygen.Rmd") -> z2
 
 
 # source("tools/utils.R")
@@ -275,10 +275,10 @@ endpoints <-
 # fs::path("tools/raw", gsub(".", "-", endpoint, fixed = TRUE), ext = "R")
 #
 # make_patch_files <- function() {
-#   fs::dir_ls("man-roxygen/", type = "directory") |>
+#   fs::dir_ls("man-src/", type = "directory") |>
 #     # head(3) |>
 #     purrr::walk(\(dir) {
-#   # fs::dir_map("man-roxygen/", type = "directory", \(dir) {
+#   # fs::dir_map("man-src/", type = "directory", \(dir) {
 #     withr::local_dir(dir)
 #     # print(dir)
 #     # https://git-scm.com/docs/git-diff
@@ -289,7 +289,7 @@ endpoints <-
 # make_patch_files()
 #
 # apply_patch_files <- function() {
-#   fs::dir_map("man-roxygen/", \(dir) {
+#   fs::dir_map("man-src/", \(dir) {
 #     withr::local_dir(dir)
 #
 #   })
@@ -343,6 +343,12 @@ make_new_man_roxygen_dir <- function(ex) {
   ex
 }
 
+# stages:
+# 1. make patchfile containing changes required from 1-formatted.md to 2-translated.md
+# 2. writeout new original.md, formatted.md
+# 3. apply patchfile
+# 4. render translated
+
 
 
 update_man_roxygen_dir <- function(ex) {
@@ -360,10 +366,10 @@ update_man_roxygen_dir <- function(ex) {
   # old_roxygen_rmd <- read_file("roxygen.Rmd")
   # system("git diff -u1 docstring_as_roxygen.md roxygen.Rmd > fixup.patch")
 
-  writeLines(docstring, "docstring.md")
-  writeLines(roxygen, "docstring_as_roxygen.md")
-  writeLines(roxygen, "roxygen.Rmd")
-  writeLines(str_flatten_lines(
+  writeLines(docstring, "docstring.md")           # 0-original.md
+  writeLines(roxygen, "docstring_as_roxygen.md")  # 1-formatted.md
+  writeLines(roxygen, "roxygen.Rmd")              # 2-translated.md
+  writeLines(str_flatten_lines(                   # 3-rendered.md
     str_c(ex$r_name, " <-"),
     deparse(ex$r_fn)
   ), "function.R")
@@ -378,7 +384,7 @@ update_man_roxygen_dir <- function(ex) {
 
 augment_export <- function(ex) {
 
-  ex$man_roxygen_dir <- glue("man-roxygen/{ex$r_name}/")
+  ex$man_roxygen_dir <- glue("man-src/{ex$r_name}/")
   if (fs::dir_exists(ex$man_roxygen_dir))
     update_man_roxygen_dir(ex)
   else
@@ -390,7 +396,7 @@ exports <- exports |>
   map(augment_export)
 
 
-# apply_translation_patchfiles("man-roxygen/callback_backup_and_restore")
+# apply_translation_patchfiles("man-src/callback_backup_and_restore")
 
 apply_translation_patchfiles()
 
@@ -398,7 +404,7 @@ apply_translation_patchfiles()
 
 if(FALSE) {
 exports$keras.activations.relu$docstring <-
-  read_file(fs::path("man-roxygen",
+  read_file(fs::path("man-src",
                      exports$keras.activations.relu$r_name,
                      "docstring.md"))
 augment_export(exports$keras.activations.relu)
@@ -493,7 +499,7 @@ stop("DONE", call. = FALSE)
 
 
 # df <- df %>%
-#   mutate(man_roxygen_dir = fs::dir_create(glue("man-roxygen2/{r_name}/")))
+#   mutate(man_roxygen_dir = fs::dir_create(glue("man-src2/{r_name}/")))
 
 
 

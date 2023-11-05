@@ -1,6 +1,7 @@
 ^.*\.Rproj$
 ^\.Rproj\.user$
 ^man-roxygen/
+^man-src/
 ^resources/
 ^.*\.hdf5$
 ^README\.R?md$

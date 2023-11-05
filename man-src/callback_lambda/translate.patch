@@ -1,7 +1,7 @@
-diff --git a/man-roxygen/callback_lambda/roxygen.Rmd b/man-roxygen/callback_lambda/roxygen.Rmd
+diff --git a/man-src/callback_lambda/roxygen.Rmd b/man-src/callback_lambda/roxygen.Rmd
 index 56eb7493..7f653e2f 100644
---- a/man-roxygen/callback_lambda/roxygen.Rmd
-+++ b/man-roxygen/callback_lambda/roxygen.Rmd
+--- a/man-src/callback_lambda/roxygen.Rmd
++++ b/man-src/callback_lambda/roxygen.Rmd
 @@ -17,29 +17,48 @@ Note that the callbacks expects positional arguments, as:
  # Examples
 -    ```python

@@ -1,7 +1,7 @@
-diff --git a/man-roxygen/callback_csv_logger/roxygen.Rmd b/man-roxygen/callback_csv_logger/roxygen.Rmd
+diff --git a/man-src/callback_csv_logger/roxygen.Rmd b/man-src/callback_csv_logger/roxygen.Rmd
 index 40dcc47e..a39b40b8 100644
---- a/man-roxygen/callback_csv_logger/roxygen.Rmd
-+++ b/man-roxygen/callback_csv_logger/roxygen.Rmd
+--- a/man-src/callback_csv_logger/roxygen.Rmd
++++ b/man-src/callback_csv_logger/roxygen.Rmd
 @@ -4,8 +4,8 @@ Callback that streams epoch results to a CSV file.
  Supports all values that can be represented as a string,
 -including 1D iterables such as `np.ndarray`.
