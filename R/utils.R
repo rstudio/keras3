@@ -663,7 +663,7 @@ drop_nulls <- function(x, i = NULL) {
 }
 
 #' @export
-as.array.keras.backend.common.variables.KerasVariable <- function(x) {
+as.array.keras.backend.common.variables.KerasVariable <- function(x, ...) {
   as_r_value(k_convert_to_numpy(x))
 }
 
