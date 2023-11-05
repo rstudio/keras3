@@ -92,6 +92,8 @@ make_translation_patchfiles()
 
 # source("tools/utils.R")
 
+# TODO: swap arg order in k_vectorized_map
+
 # TODO: reticulate, support NO_COLOR (or similar) to disable the link wrapper around `py_last_error()` hint.
 
 # TODO: # fix `fit()` not returning `history` correctly
