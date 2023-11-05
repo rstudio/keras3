@@ -1,7 +1,5 @@
 Convert a NumPy array to a tensor.
 
-@description
-
 # Returns
 A tensor of the specified `dtype`.
 

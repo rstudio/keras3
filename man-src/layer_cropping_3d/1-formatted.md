@@ -1,7 +1,5 @@
 Cropping layer for 3D data (e.g. spatial or spatio-temporal).
 
-@description
-
 # Examples
 ```python
 input_shape = (2, 28, 28, 10, 3)

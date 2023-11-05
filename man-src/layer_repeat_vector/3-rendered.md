@@ -1,7 +1,5 @@
 Repeats the input n times.
 
-@description
-
 # Examples
 ```python
 x = keras.Input(shape=(32,))

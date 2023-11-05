@@ -51,9 +51,12 @@ quantity and if no improvement is seen for a 'patience' number
 of epochs, the learning rate is reduced.
 }
 \section{Examples}{
-\if{html}{\out{<div class="sourceCode {r}">}}\preformatted{reduce_lr <- callback_reduce_lr_on_plateau(monitor = 'val_loss', factor = 0.2,
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{reduce_lr <- callback_reduce_lr_on_plateau(monitor = 'val_loss', factor = 0.2,
                                            patience = 5, min_lr = 0.001)
 model \%>\% fit(x_train, y_train, callbacks = list(reduce_lr))
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode">}}\preformatted{## Error in eval(expr, envir, enclos): object 'model' not found
 }\if{html}{\out{</div>}}
 }
 

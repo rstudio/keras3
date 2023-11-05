@@ -1,7 +1,5 @@
 Resize images to size using the specified interpolation method.
 
-@description
-
 # Returns
 Resized image or batch of images.
 

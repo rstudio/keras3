@@ -1,7 +1,5 @@
 Computes the Fast Fourier Transform along last axis of input.
 
-@description
-
 # Returns
 A tuple containing two tensors - the real and imaginary parts of the
 output tensor.

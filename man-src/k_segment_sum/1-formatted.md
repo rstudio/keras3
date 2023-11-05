@@ -1,7 +1,5 @@
 Computes the sum of segments in a tensor.
 
-@description
-
 # Returns
 A tensor containing the sum of segments, where each element
 represents the sum of the corresponding segment in `data`.

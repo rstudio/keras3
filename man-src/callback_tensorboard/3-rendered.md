@@ -11,10 +11,10 @@ This callback logs events for TensorBoard, including:
 * Weight histograms
 * Sampled profiling
 
-When used in `model.evaluate()` or regular validation
+When used in `model$evaluate()` or regular validation
 in addition to epoch summaries, there will be a summary that records
-evaluation metrics vs `model.optimizer.iterations` written. The metric names
-will be prepended with `evaluation`, with `model.optimizer.iterations` being
+evaluation metrics vs `model$optimizer$iterations` written. The metric names
+will be prepended with `evaluation`, with `model$optimizer$iterations` being
 the step in the visualized TensorBoard.
 
 If you have installed TensorFlow with pip, you should be able
@@ -30,72 +30,134 @@ You can find more information about TensorBoard
 # Examples
 Basic usage:
 
-```python
-tensorboard_callback = keras.callbacks.TensorBoard(log_dir="./logs")
-model.fit(x_train, y_train, epochs=2, callbacks=[tensorboard_callback])
+
+```r
+tensorboard_callback <- callback_tensorboard(log_dir = "./logs")
+model %>% fit(x_train, y_train, epochs = 2, callbacks = list(tensorboard_callback))
+```
+
+```
+## Error in eval(expr, envir, enclos): object 'model' not found
+```
+
+```r
 # Then run the tensorboard command to view the visualizations.
 ```
 
 Custom batch-level summaries in a subclassed Model:
 
-```python
-class MyModel(keras.Model):
 
-    def build(self, _):
-        self.dense = keras.layers.Dense(10)
+```r
+MyModel <- keras_model_custom(name = "MyModel", function(self) {
+  self$dense <- layer_dense(units = 10)
+  function (self, x, mask = NULL) {
+    outputs <- self$dense(x)
+    tf$summary$histogram('outputs', outputs)
+    outputs
+  }
+})
 
-    def call(self, x):
-        outputs = self.dense(x)
-        tf.summary.histogram('outputs', outputs)
-        return outputs
+model <- MyModel()
+```
 
-model = MyModel()
-model.compile('sgd', 'mse')
+```
+## RModel.call() missing 1 required positional argument: 'inputs'
+```
 
+```r
+model %>% compile(optimizer = 'sgd', loss = 'mse')
+```
+
+```
+## Error in eval(expr, envir, enclos): object 'model' not found
+```
+
+```r
 # Make sure to set `update_freq=N` to log a batch-level summary every N
 # batches.  In addition to any `tf.summary` contained in `model.call()`,
 # metrics added in `Model.compile` will be logged every N batches.
-tb_callback = keras.callbacks.TensorBoard('./logs', update_freq=1)
-model.fit(x_train, y_train, callbacks=[tb_callback])
+tb_callback <- callback_tensorboard(log_dir = './logs', update_freq = 1)
+model %>% fit(x_train, y_train, callbacks = list(tb_callback))
+```
+
+```
+## Error in eval(expr, envir, enclos): object 'model' not found
 ```
 
 Custom batch-level summaries in a Functional API Model:
 
-```python
-def my_summary(x):
-    tf.summary.histogram('x', x)
-    return x
 
-inputs = keras.Input(10)
-x = keras.layers.Dense(10)(inputs)
-outputs = keras.layers.Lambda(my_summary)(x)
-model = keras.Model(inputs, outputs)
-model.compile('sgd', 'mse')
+```r
+my_summary <- function(x) {
+  tf$summary$histogram('x', x)
+  x
+}
 
+inputs <- layer_input(shape = 10)
+x <- layer_dense(units = 10)(inputs)
+outputs <- layer_lambda(my_summary)(x)
+```
+
+```
+## Lambda.__init__() missing 1 required positional argument: 'function'
+```
+
+```r
+model <- keras_model(inputs = inputs, outputs = outputs)
+```
+
+```
+## Error in eval(expr, envir, enclos): object 'outputs' not found
+```
+
+```r
+model %>% compile(optimizer = 'sgd', loss = 'mse')
+```
+
+```
+## Error in eval(expr, envir, enclos): object 'model' not found
+```
+
+```r
 # Make sure to set `update_freq=N` to log a batch-level summary every N
 # batches. In addition to any `tf.summary` contained in `Model.call`,
 # metrics added in `Model.compile` will be logged every N batches.
-tb_callback = keras.callbacks.TensorBoard('./logs', update_freq=1)
-model.fit(x_train, y_train, callbacks=[tb_callback])
+tb_callback <- callback_tensorboard(log_dir = './logs', update_freq = 1)
+model %>% fit(x_train, y_train, callbacks = list(tb_callback))
+```
+
+```
+## Error in eval(expr, envir, enclos): object 'model' not found
 ```
 
 Profiling:
 
-```python
-# Profile a single batch, e.g. the 5th batch.
-tensorboard_callback = keras.callbacks.TensorBoard(
-    log_dir='./logs', profile_batch=5)
-model.fit(x_train, y_train, epochs=2, callbacks=[tensorboard_callback])
 
+```r
+# Profile a single batch, e.g. the 5th batch.
+tensorboard_callback <- callback_tensorboard(
+  log_dir = './logs', profile_batch = 5)
+model %>% fit(x_train, y_train, epochs = 2, callbacks = list(tensorboard_callback))
+```
+
+```
+## Error in eval(expr, envir, enclos): object 'model' not found
+```
+
+```r
 # Profile a range of batches, e.g. from 10 to 20.
-tensorboard_callback = keras.callbacks.TensorBoard(
-    log_dir='./logs', profile_batch=(10,20))
-model.fit(x_train, y_train, epochs=2, callbacks=[tensorboard_callback])
+tensorboard_callback <- callback_tensorboard(
+  log_dir = './logs', profile_batch = c(10, 20))
+model %>% fit(x_train, y_train, epochs = 2, callbacks = list(tensorboard_callback))
+```
+
+```
+## Error in eval(expr, envir, enclos): object 'model' not found
 ```
 
 @param log_dir the path of the directory where to save the log files to be
     parsed by TensorBoard. e.g.,
-    `log_dir = os.path.join(working_dir, 'logs')`.
+    `log_dir = file.path(working_dir, 'logs')`.
     This directory should not be reused by any other callbacks.
 @param histogram_freq frequency (in epochs) at which to compute
     weight histograms for the layers of the model. If set to 0,
@@ -104,7 +166,7 @@ model.fit(x_train, y_train, epochs=2, callbacks=[tensorboard_callback])
 @param write_graph (Not supported at this time)
     Whether to visualize the graph in TensorBoard.
     Note that the log file can become quite large
-    when `write_graph` is set to `True`.
+    when `write_graph` is set to `TRUE`.
 @param write_images whether to write model weights to visualize as image in
     TensorBoard.
 @param write_steps_per_second whether to log the training steps per second

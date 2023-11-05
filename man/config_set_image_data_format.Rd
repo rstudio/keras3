@@ -12,11 +12,7 @@ config_set_image_data_format(data_format)
 \description{
 Set the value of the image data format convention.
 }
-\section{Examples}{
-\if{html}{\out{<div class="sourceCode python">}}\preformatted{keras.config.image_data_format()
-# 'channels_last'
-}\if{html}{\out{</div>}}
-
+\details{
 \if{html}{\out{<div class="sourceCode python">}}\preformatted{keras.config.set_image_data_format('channels_first')
 keras.config.image_data_format()
 # 'channels_first'
@@ -24,6 +20,11 @@ keras.config.image_data_format()
 
 \if{html}{\out{<div class="sourceCode python">}}\preformatted{# Set it back to `'channels_last'`
 keras.config.set_image_data_format('channels_last')
+}\if{html}{\out{</div>}}
+}
+\section{Examples}{
+\if{html}{\out{<div class="sourceCode python">}}\preformatted{keras.config.image_data_format()
+# 'channels_last'
 }\if{html}{\out{</div>}}
 }
 

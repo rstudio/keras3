@@ -1,7 +1,5 @@
 Shuffle the elements of a tensor uniformly at random along an axis.
 
-@description
-
 @param x The tensor to be shuffled.
 @param axis An integer specifying the axis along which to shuffle. Defaults to
     `0`.

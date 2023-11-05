@@ -1,7 +1,5 @@
 Return a tensor with ones at and below a diagonal and zeros elsewhere.
 
-@description
-
 # Returns
 Tensor with its lower triangle filled with ones and zeros elsewhere.
 `T[i, j] == 1` for `j <= i + k`, 0 otherwise.

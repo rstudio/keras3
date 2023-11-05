@@ -97,14 +97,19 @@ You can find more information about TensorBoard
 \section{Examples}{
 Basic usage:
 
-\if{html}{\out{<div class="sourceCode {r}">}}\preformatted{tensorboard_callback <- callback_tensorboard(log_dir = "./logs")
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{tensorboard_callback <- callback_tensorboard(log_dir = "./logs")
 model \%>\% fit(x_train, y_train, epochs = 2, callbacks = list(tensorboard_callback))
-# Then run the tensorboard command to view the visualizations.
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode">}}\preformatted{## Error in eval(expr, envir, enclos): object 'model' not found
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{# Then run the tensorboard command to view the visualizations.
 }\if{html}{\out{</div>}}
 
 Custom batch-level summaries in a subclassed Model:
 
-\if{html}{\out{<div class="sourceCode {r}">}}\preformatted{MyModel <- keras_model_custom(name = "MyModel", function(self) \{
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{MyModel <- keras_model_custom(name = "MyModel", function(self) \{
   self$dense <- layer_dense(units = 10)
   function (self, x, mask = NULL) \{
     outputs <- self$dense(x)
@@ -114,18 +119,30 @@ Custom batch-level summaries in a subclassed Model:
 \})
 
 model <- MyModel()
-model \%>\% compile(optimizer = 'sgd', loss = 'mse')
+}\if{html}{\out{</div>}}
 
-# Make sure to set `update_freq=N` to log a batch-level summary every N
+\if{html}{\out{<div class="sourceCode">}}\preformatted{## RModel.call() missing 1 required positional argument: 'inputs'
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{model \%>\% compile(optimizer = 'sgd', loss = 'mse')
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode">}}\preformatted{## Error in eval(expr, envir, enclos): object 'model' not found
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{# Make sure to set `update_freq=N` to log a batch-level summary every N
 # batches.  In addition to any `tf.summary` contained in `model.call()`,
 # metrics added in `Model.compile` will be logged every N batches.
 tb_callback <- callback_tensorboard(log_dir = './logs', update_freq = 1)
 model \%>\% fit(x_train, y_train, callbacks = list(tb_callback))
 }\if{html}{\out{</div>}}
 
+\if{html}{\out{<div class="sourceCode">}}\preformatted{## Error in eval(expr, envir, enclos): object 'model' not found
+}\if{html}{\out{</div>}}
+
 Custom batch-level summaries in a Functional API Model:
 
-\if{html}{\out{<div class="sourceCode {r}">}}\preformatted{my_summary <- function(x) \{
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{my_summary <- function(x) \{
   tf$summary$histogram('x', x)
   x
 \}
@@ -133,27 +150,51 @@ Custom batch-level summaries in a Functional API Model:
 inputs <- layer_input(shape = 10)
 x <- layer_dense(units = 10)(inputs)
 outputs <- layer_lambda(my_summary)(x)
-model <- keras_model(inputs = inputs, outputs = outputs)
-model \%>\% compile(optimizer = 'sgd', loss = 'mse')
+}\if{html}{\out{</div>}}
 
-# Make sure to set `update_freq=N` to log a batch-level summary every N
+\if{html}{\out{<div class="sourceCode">}}\preformatted{## Lambda.__init__() missing 1 required positional argument: 'function'
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{model <- keras_model(inputs = inputs, outputs = outputs)
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode">}}\preformatted{## Error in eval(expr, envir, enclos): object 'outputs' not found
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{model \%>\% compile(optimizer = 'sgd', loss = 'mse')
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode">}}\preformatted{## Error in eval(expr, envir, enclos): object 'model' not found
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{# Make sure to set `update_freq=N` to log a batch-level summary every N
 # batches. In addition to any `tf.summary` contained in `Model.call`,
 # metrics added in `Model.compile` will be logged every N batches.
 tb_callback <- callback_tensorboard(log_dir = './logs', update_freq = 1)
 model \%>\% fit(x_train, y_train, callbacks = list(tb_callback))
 }\if{html}{\out{</div>}}
 
+\if{html}{\out{<div class="sourceCode">}}\preformatted{## Error in eval(expr, envir, enclos): object 'model' not found
+}\if{html}{\out{</div>}}
+
 Profiling:
 
-\if{html}{\out{<div class="sourceCode {r}">}}\preformatted{# Profile a single batch, e.g. the 5th batch.
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{# Profile a single batch, e.g. the 5th batch.
 tensorboard_callback <- callback_tensorboard(
   log_dir = './logs', profile_batch = 5)
 model \%>\% fit(x_train, y_train, epochs = 2, callbacks = list(tensorboard_callback))
+}\if{html}{\out{</div>}}
 
-# Profile a range of batches, e.g. from 10 to 20.
+\if{html}{\out{<div class="sourceCode">}}\preformatted{## Error in eval(expr, envir, enclos): object 'model' not found
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{# Profile a range of batches, e.g. from 10 to 20.
 tensorboard_callback <- callback_tensorboard(
   log_dir = './logs', profile_batch = c(10, 20))
 model \%>\% fit(x_train, y_train, epochs = 2, callbacks = list(tensorboard_callback))
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode">}}\preformatted{## Error in eval(expr, envir, enclos): object 'model' not found
 }\if{html}{\out{</div>}}
 }
 

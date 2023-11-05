@@ -1,7 +1,5 @@
 Computes the QR decomposition of a tensor.
 
-@description
-
 # Returns
 A tuple containing two tensors. The first tensor represents the
 orthogonal matrix Q, and the second tensor represents the upper

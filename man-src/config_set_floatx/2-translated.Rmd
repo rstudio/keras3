@@ -1,7 +1,5 @@
 Set the default float dtype.
 
-@description
-
 # Note
 It is not recommended to set this to `"float16"` for training,
 as this will likely cause numeric stability issues.

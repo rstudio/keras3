@@ -1,7 +1,5 @@
 Constrains the weights to be non-negative.
 
-@description
-
 @export
 @family constraint
 @seealso

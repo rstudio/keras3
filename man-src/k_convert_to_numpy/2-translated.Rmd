@@ -1,7 +1,5 @@
 Convert a tensor to a NumPy array.
 
-@description
-
 # Returns
     A NumPy array.
 

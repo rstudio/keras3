@@ -1,7 +1,5 @@
 Return the number of dimensions of a tensor.
 
-@description
-
 # Returns
     The number of dimensions in `x`.
 

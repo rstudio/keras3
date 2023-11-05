@@ -1,7 +1,5 @@
 Applies the given transform(s) to the image(s).
 
-@description
-
 # Returns
 Applied affine transform image or batch of images.
 

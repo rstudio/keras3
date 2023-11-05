@@ -1,7 +1,5 @@
 Return the default image data format convention.
 
-@description
-
 # Returns
 A string, either `'channels_first'` or `'channels_last'`.
 

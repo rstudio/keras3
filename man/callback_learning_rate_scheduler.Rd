@@ -20,7 +20,7 @@ epoch and current learning rate, and applies the updated learning rate on
 the optimizer.
 }
 \section{Examples}{
-\if{html}{\out{<div class="sourceCode {r}">}}\preformatted{# This function keeps the initial learning rate for the first ten epochs
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{# This function keeps the initial learning rate for the first ten epochs
 # and decreases it exponentially after that.
 scheduler <- function(epoch, lr) \{
     if (epoch < 10) \{
@@ -36,11 +36,29 @@ model \%>\% compile(optimizer = optimizer_sgd(), loss = 'mse')
 round(model$optimizer$lr, 5)
 }\if{html}{\out{</div>}}
 
-\if{html}{\out{<div class="sourceCode {r}">}}\preformatted{callback <- callback_learning_rate_scheduler(schedule = scheduler)
+\if{html}{\out{<div class="sourceCode">}}\preformatted{## 'SGD' object has no attribute 'lr'
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{callback <- callback_learning_rate_scheduler(schedule = scheduler)
 history <- model \%>\% fit(x = matrix(runif(100), nrow = 5, ncol = 20),
                          y = rep(0, 5),
                          epochs = 15, callbacks = list(callback), verbose = 0)
-round(model$optimizer$lr, 5)
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode">}}\preformatted{## Graph execution error:
+## 
+## Detected at node compile_loss/mse/sub defined at (most recent call last):
+## <stack traces unavailable>
+## Incompatible shapes: [5] vs. [5,10]
+## 	 [[\{\{node compile_loss/mse/sub\}\}]]
+## 	tf2xla conversion failed while converting __inference_one_step_on_data_1648[]. Run with TF_DUMP_GRAPH_PREFIX=/path/to/dump/dir and --vmodule=xla_compiler=2 to obtain a dump of the compiled functions.
+## 	 [[StatefulPartitionedCall]] [Op:__inference_one_step_on_iterator_1663]
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{round(model$optimizer$lr, 5)
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode">}}\preformatted{## 'SGD' object has no attribute 'lr'
 }\if{html}{\out{</div>}}
 }
 

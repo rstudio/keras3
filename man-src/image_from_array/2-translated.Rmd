@@ -1,7 +1,5 @@
 Converts a 3D NumPy array to a PIL Image instance.
 
-@description
-
 # Usage
 ```python
 from PIL import Image

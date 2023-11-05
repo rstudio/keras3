@@ -1,7 +1,5 @@
 Compute the standard deviation along the specified axis.
 
-@description
-
 # Returns
     Output tensor containing the standard deviation values.
 

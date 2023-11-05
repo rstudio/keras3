@@ -1,7 +1,5 @@
 Returns the indices of the minium values along an axis.
 
-@description
-
 # Returns
 Tensor of indices. It has the same shape as `x`, with the dimension
 along `axis` removed.

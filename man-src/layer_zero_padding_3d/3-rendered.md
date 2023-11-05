@@ -1,7 +1,5 @@
 Zero-padding layer for 3D data (spatial or spatio-temporal).
 
-@description
-
 # Examples
 ```python
 input_shape = (1, 1, 2, 2, 3)

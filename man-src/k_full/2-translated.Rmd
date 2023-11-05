@@ -1,7 +1,5 @@
 Return a new tensor of given shape and type, filled with `fill_value`.
 
-@description
-
 # Returns
     Output tensor.
 

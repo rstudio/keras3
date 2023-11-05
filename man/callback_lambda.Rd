@@ -48,7 +48,7 @@ expected arguments.
 }
 }
 \section{Examples}{
-\if{html}{\out{<div class="sourceCode {r}">}}\preformatted{# Print the batch number at the beginning of every batch.
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{# Print the batch number at the beginning of every batch.
 batch_print_callback <- callback_lambda(
   on_train_batch_begin = function(batch, logs) \{
     print(batch)
@@ -73,7 +73,12 @@ json_logging_callback <- callback_lambda(
 
 # Terminate some processes after having finished model training.
 processes <- ...
-cleanup_callback <- callback_lambda(
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode">}}\preformatted{## Error in eval(expr, envir, enclos): '...' used in an incorrect context
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{cleanup_callback <- callback_lambda(
   on_train_end = function(logs) \{
     for (p in processes) \{
       if (is_alive(p)) \{
@@ -91,6 +96,9 @@ model \%>\% fit(
     cleanup_callback
   )
 )
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode">}}\preformatted{## Error in model \%>\% fit(..., callbacks = list(batch_print_callback, json_logging_callback, : '...' used in an incorrect context
 }\if{html}{\out{</div>}}
 }
 

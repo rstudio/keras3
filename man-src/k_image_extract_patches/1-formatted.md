@@ -1,7 +1,5 @@
 Extracts patches from the image(s).
 
-@description
-
 # Returns
 Extracted patches 3D (if not batched) or 4D (if batched)
 

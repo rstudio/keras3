@@ -1,7 +1,5 @@
 Evenly round to the given number of decimals.
 
-@description
-
 # Returns
     Output tensor.
 

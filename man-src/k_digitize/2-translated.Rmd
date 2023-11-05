@@ -1,7 +1,5 @@
 Returns the indices of the bins to which each value in `x` belongs.
 
-@description
-
 # Returns
 Output array of indices, of same shape as `x`.
 

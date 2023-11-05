@@ -1245,10 +1245,12 @@ dump_roxygen <- function(doc, params, tags) {
   doc$arguments <- NULL
 
   # for(rd_sec in c("description", "details", "note")) {
-  for(rd_sec in c("description")) {
-    if(!is.null(sec <- doc[[rd_sec]]))
-      sec <- str_flatten(c(glue("@{rd_sec}"), str_trim(sec)), "\n")
-    doc[[rd_sec]] <- sec
+  # if(grepl("allback that terminates traini", doc$title)) browser()
+  for(rd_sec_name in c("description")) {
+    if(nzchar(rd_sec <- doc[[rd_sec_name]] %||% ""))
+      doc[[rd_sec_name]] <- str_flatten(c(glue("@{rd_sec_name}"), str_trim(rd_sec)), "\n")
+    else
+      doc[[rd_sec_name]] <- NULL
   }
 
   # [^(]             # is not followed by an opening parens (indicating a md link)
@@ -1261,6 +1263,7 @@ dump_roxygen <- function(doc, params, tags) {
     md_heading <- if (nm %in% c("description", "title", "details")) # "note"
       character() else
         snakecase::to_title_case(nm, prefix = "# ")
+    # if(nm == "description" && doc$description == "@")
     str_flatten(c(md_heading, doc[[nm]]), "\n")
   })
 

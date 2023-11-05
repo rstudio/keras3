@@ -96,9 +96,13 @@ at the end of every epoch, or after a fixed number of training batches.
 }
 }
 \section{Examples}{
-\if{html}{\out{<div class="sourceCode {r}">}}\preformatted{model \%>\% compile(loss = ..., optimizer = ..., metrics = c('accuracy'))
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{model \%>\% compile(loss = ..., optimizer = ..., metrics = c('accuracy'))
+}\if{html}{\out{</div>}}
 
-EPOCHS <- 10
+\if{html}{\out{<div class="sourceCode">}}\preformatted{## Error in model \%>\% compile(loss = ..., optimizer = ..., metrics = c("accuracy")): '...' used in an incorrect context
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{EPOCHS <- 10
 checkpoint_filepath <- '/tmp/ckpt/checkpoint.model.keras'
 model_checkpoint_callback <- callback_model_checkpoint(
     filepath = checkpoint_filepath,
@@ -108,11 +112,19 @@ model_checkpoint_callback <- callback_model_checkpoint(
 
 # Model is saved at the end of every epoch, if it's the best seen so far.
 model \%>\% fit(epochs = EPOCHS, callbacks = list(model_checkpoint_callback))
+}\if{html}{\out{</div>}}
 
-# The model (that are considered the best) can be loaded as -
+\if{html}{\out{<div class="sourceCode">}}\preformatted{## Error in eval(expr, envir, enclos): object 'model' not found
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{# The model (that are considered the best) can be loaded as -
 keras::load_model_hdf5(checkpoint_filepath)
+}\if{html}{\out{</div>}}
 
-# Alternatively, one could checkpoint just the model weights as -
+\if{html}{\out{<div class="sourceCode">}}\preformatted{## File not found: filepath=/tmp/ckpt/checkpoint.model.keras. Please ensure the file is an accessible `.keras` zip file.
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{# Alternatively, one could checkpoint just the model weights as -
 checkpoint_filepath <- '/tmp/ckpt/checkpoint.weights.h5'
 model_checkpoint_callback <- callback_model_checkpoint(
     filepath = checkpoint_filepath,
@@ -124,9 +136,16 @@ model_checkpoint_callback <- callback_model_checkpoint(
 # Model weights are saved at the end of every epoch, if it's the best seen
 # so far.
 model \%>\% fit(epochs = EPOCHS, callbacks = list(model_checkpoint_callback))
+}\if{html}{\out{</div>}}
 
-# The model weights (that are considered the best) can be loaded as -
+\if{html}{\out{<div class="sourceCode">}}\preformatted{## Error in eval(expr, envir, enclos): object 'model' not found
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{# The model weights (that are considered the best) can be loaded as -
 model \%>\% load_model_weights_hdf5(checkpoint_filepath)
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode">}}\preformatted{## Error in eval(expr, envir, enclos): object 'model' not found
 }\if{html}{\out{</div>}}
 }
 

@@ -1,7 +1,5 @@
 Layer that applies an update to the cost function based input activity.
 
-@description
-
 # Input Shape
 Arbitrary. Use the keyword argument `input_shape`
 (tuple of integers, does not include the samples axis)

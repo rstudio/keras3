@@ -1,7 +1,5 @@
 Returns a tensor with `axes` transposed.
 
-@description
-
 # Returns
     `x` with its axes permuted.
 

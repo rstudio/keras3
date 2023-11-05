@@ -16,12 +16,14 @@ make_translation_patchfiles <- function() {
     set_names(dirname) |>
     walk(\(dir) {
       withr::with_dir(dir, {
-        if (file_exists("translate.patch") &&
-            file_info("2-translated.Rmd")$change_time <= file_info("translate.patch")$birth_time) {
-          # message("skipping generating patch: ", dir)
-          return()
+        needs_update <- file_exists("translate.patch") &&
+            file_info("2-translated.Rmd")$change_time <= file_info("translate.patch")$birth_time
+        # {
+        #   # message("skipping generating patch: ", dir)
+        #   return()
         }
-      })
+      )
+      # if(!needs_update) return()
       message("updating patchfile: ", dir)
       diff <- suppressWarnings( # returns 1 on diff
         system2t("git", c("diff -U1 --no-index",
@@ -454,7 +456,8 @@ df |>
         # str_c('r"-(', docstring, ')-"'),
 
         # str_c("#' ", readLines(fs::path(man_roxygen_dir, "2-translated.Rmd"))),
-        glue(r"--(#' @eval readLines("{fs::path(man_roxygen_dir, "2-translated.Rmd")}") )--"),
+        # glue(r"--(#' @eval readLines("{fs::path(man_roxygen_dir, "2-translated.Rmd")}") )--"),
+        glue(r"--(#' @eval readLines("{fs::path(man_roxygen_dir, "3-rendered.md")}") )--"),
         # glue(r"--(#' @backref "{fs::path(man_roxygen_dir, "2-translated.Rmd")}" )--"),
         str_c(r_name, " <- "),
         deparse(r_fn),
@@ -509,6 +512,8 @@ render_roxygen_rmds <- function(filepath = fs::dir_ls("man-src/", type = "direct
       withr::local_dir(dir)
       message("rendering: ", dir)
       keras$utils$clear_session()
+      # Set knitr options to halt on errors
+      # knitr::opts_chunk$set(error = FALSE)
       knitr::knit("2-translated.Rmd", "3-rendered.md",
                   quiet = TRUE, envir = new.env())
     })

@@ -1,7 +1,5 @@
 Return the minimum of a tensor or minimum along an axis.
 
-@description
-
 # Returns
     Minimum of `x`.
 

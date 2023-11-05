@@ -1,7 +1,5 @@
 Sum of a tensor over the given axes.
 
-@description
-
 # Returns
     Output tensor containing the sum.
 

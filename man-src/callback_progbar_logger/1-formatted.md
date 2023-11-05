@@ -1,7 +1,5 @@
 Callback that prints metrics to stdout.
 
-@description
-
 # Raises
     ValueError: In case of invalid `count_mode`.
 

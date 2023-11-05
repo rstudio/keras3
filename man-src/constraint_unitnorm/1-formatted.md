@@ -1,7 +1,5 @@
 Constrains the weights incident to each hidden unit to have unit norm.
 
-@description
-
 @param axis integer, axis along which to calculate weight norms.
 For instance, in a `Dense` layer the weight matrix
 has shape `(input_dim, output_dim)`,

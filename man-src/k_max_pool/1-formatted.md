@@ -1,7 +1,5 @@
 Max pooling operation.
 
-@description
-
 # Returns
     A tensor of rank N+2, the result of the max pooling operation.
 

@@ -1,7 +1,5 @@
 Return the cumulative product of elements along a given axis.
 
-@description
-
 # Returns
     Output tensor.
 

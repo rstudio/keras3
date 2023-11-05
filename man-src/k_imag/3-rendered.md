@@ -1,7 +1,5 @@
 Return the imaginary part of the complex argument.
 
-@description
-
 # Returns
     The imaginary component of the complex argument.
 

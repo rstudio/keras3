@@ -1,7 +1,5 @@
 While loop implementation.
 
-@description
-
 # Returns
 A list/tuple of tensors, has the same shape and dtype as `inputs`.
 

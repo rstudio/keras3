@@ -1,7 +1,5 @@
 Broadcast a tensor to a new shape.
 
-@description
-
 # Returns
 A tensor with the desired shape.
 

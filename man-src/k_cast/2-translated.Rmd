@@ -1,7 +1,5 @@
 Cast a tensor to the desired dtype.
 
-@description
-
 # Returns
 A tensor of the specified `dtype`.
 

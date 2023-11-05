@@ -1,7 +1,5 @@
 Returns the indices that would sort a tensor.
 
-@description
-
 # Returns
 Tensor of indices that sort `x` along the specified `axis`.
 

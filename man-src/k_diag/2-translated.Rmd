@@ -1,7 +1,5 @@
 Extract a diagonal or construct a diagonal array.
 
-@description
-
 # Returns
 The extracted diagonal or constructed diagonal tensor.
 

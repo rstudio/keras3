@@ -1,7 +1,5 @@
 Stops gradient computation.
 
-@description
-
 # Returns
 The variable with gradient computation disabled.
 

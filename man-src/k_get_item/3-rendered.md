@@ -1,7 +1,5 @@
 Return `x[key]`.
 
-@description
-
 @param x see description
 @param key see description
 

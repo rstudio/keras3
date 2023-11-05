@@ -1,7 +1,5 @@
 Bidirectional wrapper for RNNs.
 
-@description
-
 # Call Arguments
 The call arguments for this layer are the same as those of the
 wrapped RNN layer. Beware that when passing the `initial_state`

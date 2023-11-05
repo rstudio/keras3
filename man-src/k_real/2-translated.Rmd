@@ -1,7 +1,5 @@
 Return the real part of the complex argument.
 
-@description
-
 # Returns
     The real component of the complex argument.
 

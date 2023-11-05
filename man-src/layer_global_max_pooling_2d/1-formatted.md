@@ -1,7 +1,5 @@
 Global max pooling operation for 2D data.
 
-@description
-
 # Input Shape
 - If `data_format='channels_last'`:
     4D tensor with shape:

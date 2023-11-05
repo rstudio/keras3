@@ -63,7 +63,7 @@ The quantity to be monitored needs to be available in \code{logs} list.
 To make it so, pass the loss or metrics at \code{model$compile()}.
 }
 \section{Examples}{
-\if{html}{\out{<div class="sourceCode {r}">}}\preformatted{callback <- callback_early_stopping(monitor = 'loss',
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{callback <- callback_early_stopping(monitor = 'loss',
                                    patience = 3)
 # This callback will stop the training when there is no improvement in
 # the loss for three consecutive epochs.
@@ -76,6 +76,9 @@ history <- model \%>\% fit(x = k_ones(c(5, 20)),
                          callbacks = list(callback),
                          verbose = 0)
 nrow(as.data.frame(history))  # Only 4 epochs are run.
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode">}}\preformatted{## [1] 10
 }\if{html}{\out{</div>}}
 }
 

@@ -1,7 +1,5 @@
 Gives a new shape to a tensor without changing its data.
 
-@description
-
 # Returns
     The reshaped tensor.
 

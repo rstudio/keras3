@@ -1,7 +1,5 @@
 Saves an image stored as a NumPy array to a path or file object.
 
-@description
-
 @param path Path or file object.
 @param x NumPy array.
 @param data_format Image data format, either `"channels_first"` or

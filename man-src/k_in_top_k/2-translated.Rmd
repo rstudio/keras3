@@ -1,7 +1,5 @@
 Checks if the targets are in the top-k predictions.
 
-@description
-
 # Returns
 A boolean tensor of the same shape as `targets`, where each element
 indicates whether the corresponding target is in the top-k predictions.

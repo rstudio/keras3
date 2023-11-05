@@ -1,7 +1,5 @@
 Global max pooling operation for temporal data.
 
-@description
-
 # Input Shape
 - If `data_format='channels_last'`:
     3D tensor with shape:

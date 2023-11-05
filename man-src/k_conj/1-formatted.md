@@ -1,7 +1,5 @@
 Shorthand for `keras.ops.conjugate`.
 
-@description
-
 @param x see description
 
 @export

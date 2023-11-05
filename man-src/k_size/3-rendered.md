@@ -1,7 +1,5 @@
 Return the number of elements in a tensor.
 
-@description
-
 # Returns
     Number of elements in `x`.
 

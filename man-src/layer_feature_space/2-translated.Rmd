@@ -1,7 +1,5 @@
 One-stop utility for preprocessing and encoding structured data.
 
-@description
-
 # Examples
 **Basic usage with a dict of input data:**
 

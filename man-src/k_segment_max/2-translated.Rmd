@@ -1,7 +1,5 @@
 Computes the max of segments in a tensor.
 
-@description
-
 # Returns
 A tensor containing the max of segments, where each element
 represents the max of the corresponding segment in `data`.

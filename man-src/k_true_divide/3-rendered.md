@@ -1,7 +1,5 @@
 Alias for `keras.ops.divide`.
 
-@description
-
 @param x1 see description
 @param x2 see description
 

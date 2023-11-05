@@ -1,7 +1,5 @@
 Fully-connected RNN where the output is to be fed back as the new input.
 
-@description
-
 # Call Arguments
 - `sequence`: A 3D tensor, with shape `[batch, timesteps, feature]`.
 - `mask`: Binary tensor of shape `[batch, timesteps]` indicating whether

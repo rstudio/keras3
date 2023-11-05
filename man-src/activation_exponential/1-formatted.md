@@ -1,7 +1,5 @@
 Exponential activation function.
 
-@description
-
 @param x Input tensor.
 
 @export

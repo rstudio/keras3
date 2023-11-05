@@ -1,7 +1,5 @@
 Cosine, element-wise.
 
-@description
-
 # Returns
     The corresponding cosine values.
 

@@ -1,7 +1,5 @@
 Computes the categorical focal crossentropy loss.
 
-@description
-
 # Returns
 Categorical focal crossentropy loss value.
 

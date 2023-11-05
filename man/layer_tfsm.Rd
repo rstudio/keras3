@@ -36,12 +36,7 @@ it may be named \code{'serving_default'}.}
 \description{
 Reload a Keras model/layer that was saved via SavedModel / ExportArchive.
 }
-\section{Examples}{
-\if{html}{\out{<div class="sourceCode python">}}\preformatted{model.export("path/to/artifact")
-reloaded_layer = TFSMLayer("path/to/artifact")
-outputs = reloaded_layer(inputs)
-}\if{html}{\out{</div>}}
-
+\details{
 The reloaded object can be used like a regular Keras layer, and supports
 training/fine-tuning of its trainable weights. Note that the reloaded
 object retains none of the internal structure or custom methods of the
@@ -61,6 +56,12 @@ in \verb{__call__()}), make sure that the training-time call function is
 saved as a standalone endpoint in the artifact, and provide its name
 to the \code{TFSMLayer} via the \code{call_training_endpoint} argument.
 }
+}
+\section{Examples}{
+\if{html}{\out{<div class="sourceCode python">}}\preformatted{model.export("path/to/artifact")
+reloaded_layer = TFSMLayer("path/to/artifact")
+outputs = reloaded_layer(inputs)
+}\if{html}{\out{</div>}}
 }
 
 \seealso{

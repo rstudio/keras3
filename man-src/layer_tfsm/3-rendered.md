@@ -1,7 +1,5 @@
 Reload a Keras model/layer that was saved via SavedModel / ExportArchive.
 
-@description
-
 # Examples
 ```python
 model.export("path/to/artifact")

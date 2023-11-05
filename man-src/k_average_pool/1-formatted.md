@@ -1,7 +1,5 @@
 Average pooling operation.
 
-@description
-
 # Returns
     A tensor of rank N+2, the result of the average pooling operation.
 

@@ -1,7 +1,5 @@
 Return the indices of the elements that are non-zero.
 
-@description
-
 # Returns
     Indices of elements that are non-zero.
 
