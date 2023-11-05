@@ -1,7 +1,7 @@
-diff --git a/man-src/callback_learning_rate_scheduler/roxygen.Rmd b/man-src/callback_learning_rate_scheduler/roxygen.Rmd
+diff --git a/man-src/callback_learning_rate_scheduler/2-translated.Rmd b/man-src/callback_learning_rate_scheduler/2-translated.Rmd
 index 84b452ea..0368cf7e 100644
---- a/man-src/callback_learning_rate_scheduler/roxygen.Rmd
-+++ b/man-src/callback_learning_rate_scheduler/roxygen.Rmd
+--- a/man-src/callback_learning_rate_scheduler/2-translated.Rmd
++++ b/man-src/callback_learning_rate_scheduler/2-translated.Rmd
 @@ -9,23 +9,25 @@ the optimizer.
  # Examples
 -```python

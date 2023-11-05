@@ -80,21 +80,6 @@ if(FALSE) {
 }
 make_translation_patchfiles()
 
-render_roxygen_rmds <- function(filepath = fs::dir_ls("man-src/", type = "directory")) {
-  # this should probably happen in a separate R session...
-  filepath |>
-    fs::as_fs_path() |>
-    # head(3) |>
-    set_names(basename) %>%
-    purrr::walk(\(dir) {
-      withr::local_dir(dir)
-      keras$utils$clear_session()
-      knitr::knit("2-translated.Rmd", "3-rendered.md",
-                  quiet = TRUE, envir = new.env())
-    })
-    # discard(\(x) is.null(x) || x == 0) |>
-    # invisible()
-}
 
 # z <- "man-src/activation_elu/2-translated.Rmd" |> read_file() |>
 #   get_translated_roxygen()
@@ -512,6 +497,27 @@ df |>
 
 # devtools::document()
 devtools::load_all()
+
+
+render_roxygen_rmds <- function(filepath = fs::dir_ls("man-src/", type = "directory")) {
+  # this should probably happen in a separate R session...
+  filepath |>
+    fs::as_fs_path() |>
+    # head(3) |>
+    set_names(basename) %>%
+    purrr::walk(\(dir) {
+      withr::local_dir(dir)
+      message("rendering: ", dir)
+      keras$utils$clear_session()
+      knitr::knit("2-translated.Rmd", "3-rendered.md",
+                  quiet = TRUE, envir = new.env())
+    })
+  # discard(\(x) is.null(x) || x == 0) |>
+  # invisible()
+}
+
+render_roxygen_rmds()
+
 devtools::document(roclets = c('rd', 'namespace'))
 stop("DONE", call. = FALSE)
 

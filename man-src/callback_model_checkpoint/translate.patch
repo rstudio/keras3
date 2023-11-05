@@ -1,7 +1,7 @@
-diff --git a/man-src/callback_model_checkpoint/roxygen.Rmd b/man-src/callback_model_checkpoint/roxygen.Rmd
+diff --git a/man-src/callback_model_checkpoint/2-translated.Rmd b/man-src/callback_model_checkpoint/2-translated.Rmd
 index a16fe56a..2ad2c7b0 100644
---- a/man-src/callback_model_checkpoint/roxygen.Rmd
-+++ b/man-src/callback_model_checkpoint/roxygen.Rmd
+--- a/man-src/callback_model_checkpoint/2-translated.Rmd
++++ b/man-src/callback_model_checkpoint/2-translated.Rmd
 @@ -4,3 +4,3 @@ Callback to save the Keras model or model weights at some frequency.
  `ModelCheckpoint` callback is used in conjunction with training using
 -`model.fit()` to save a model or weights (in a checkpoint file) at some

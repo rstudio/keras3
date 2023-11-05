@@ -1,7 +1,7 @@
-diff --git a/man-src/callback_early_stopping/roxygen.Rmd b/man-src/callback_early_stopping/roxygen.Rmd
+diff --git a/man-src/callback_early_stopping/2-translated.Rmd b/man-src/callback_early_stopping/2-translated.Rmd
 index 6965cb9f..a8dd33a3 100644
---- a/man-src/callback_early_stopping/roxygen.Rmd
-+++ b/man-src/callback_early_stopping/roxygen.Rmd
+--- a/man-src/callback_early_stopping/2-translated.Rmd
++++ b/man-src/callback_early_stopping/2-translated.Rmd
 @@ -5,23 +5,25 @@ Assuming the goal of a training is to minimize the loss. With this, the
  metric to be monitored would be `'loss'`, and mode would be `'min'`. A
 -`model.fit()` training loop will check at end of every epoch whether

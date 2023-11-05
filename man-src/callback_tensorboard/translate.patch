@@ -1,7 +1,7 @@
-diff --git a/man-src/callback_tensorboard/roxygen.Rmd b/man-src/callback_tensorboard/roxygen.Rmd
+diff --git a/man-src/callback_tensorboard/2-translated.Rmd b/man-src/callback_tensorboard/2-translated.Rmd
 index 41dc7964..fef9eb63 100644
---- a/man-src/callback_tensorboard/roxygen.Rmd
-+++ b/man-src/callback_tensorboard/roxygen.Rmd
+--- a/man-src/callback_tensorboard/2-translated.Rmd
++++ b/man-src/callback_tensorboard/2-translated.Rmd
 @@ -13,6 +13,6 @@ This callback logs events for TensorBoard, including:
  
 -When used in `model.evaluate()` or regular validation
