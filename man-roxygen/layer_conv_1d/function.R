@@ -1,0 +1,13 @@
+layer_conv_1d <-
+function (object, filters, kernel_size, strides = 1L, padding = "valid", 
+    data_format = NULL, dilation_rate = 1L, groups = 1L, activation = NULL, 
+    use_bias = TRUE, kernel_initializer = "glorot_uniform", bias_initializer = "zeros", 
+    kernel_regularizer = NULL, bias_regularizer = NULL, activity_regularizer = NULL, 
+    kernel_constraint = NULL, bias_constraint = NULL, ...) 
+{
+    args <- capture_args2(list(filters = as_integer, kernel_size = as_integer_tuple, 
+        strides = as_integer_tuple, dilation_rate = as_integer_tuple, 
+        groups = as_integer, input_shape = normalize_shape, batch_size = as_integer, 
+        batch_input_shape = normalize_shape), ignore = "object")
+    create_layer(keras$layers$Conv1D, object, args)
+}

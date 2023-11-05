@@ -363,6 +363,10 @@ update_man_roxygen_dir <- function(ex) {
   writeLines(docstring, "docstring.md")
   writeLines(roxygen, "docstring_as_roxygen.md")
   writeLines(roxygen, "roxygen.Rmd")
+  writeLines(str_flatten_lines(
+    str_c(ex$r_name, " <-"),
+    deparse(ex$r_fn)
+  ), "function.R")
 
   # res <- system("git apply --3way translate.patch") # --unidiff-zero --verbose
 
