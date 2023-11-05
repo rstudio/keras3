@@ -128,3 +128,7 @@ keras.utils.FeatureSpace:
   crossing_dim: see description
   hashing_dim: see description
   num_discretization_bins: Integer
+
+keras.ops.vectorized_map:
+  function: a function
+  elements: a tensor
