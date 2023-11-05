@@ -1,1 +1,0 @@
-Return `x[key]`.
