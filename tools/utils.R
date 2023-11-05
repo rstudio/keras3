@@ -836,8 +836,7 @@ make_r_fn <- function(endpoint,
 
   switch(keras_class_type(py_obj),
          layer = make_r_fn.layer(endpoint, py_obj, transformers),
-         metric = ,
-         loss = make_r_fn.loss(endpoint, py_obj, transformers),
+         metric = , loss = make_r_fn.loss(endpoint, py_obj, transformers),
          make_r_fn.default(endpoint, py_obj, transformers))
 
 
@@ -858,8 +857,13 @@ make_r_fn.default <- function(endpoint, py_obj, transformers) {
     transformers <- NULL
 
   frmls <- formals(py_obj)
-  if(endpoint == "keras.ops.vectorized_map")
+
+  if(endpoint == "keras.ops.vectorized_map") {
     names(frmls) %<>% replace_val("function", "f")
+    # swap the tensor is the first arg, for better pipe-ability
+    frmls <- frmls[unique(c(2, 1, seq_along(frmls)))]
+  }
+
   body <- bquote({
     args <- capture_args2(.(transformers))
     do.call(.(py_obj_expr), args)

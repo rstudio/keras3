@@ -132,3 +132,4 @@ keras.utils.FeatureSpace:
 keras.ops.vectorized_map:
   function: a function
   elements: see description
+

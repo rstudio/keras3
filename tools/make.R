@@ -3,9 +3,62 @@
 if(!"source:tools/utils.R" %in% search()) envir::attach_source("tools/utils.R")
 if(!"source:tools/translate-tools.R" %in% search()) envir::attach_source("tools/translate-tools.R")
 
+
+
+# TODO: swap arg order in k_vectorized_map
+
+# TODO: reticulate, support NO_COLOR (or similar) to disable the link wrapper around `py_last_error()` hint.
+
+# TODO: # fix `fit()` not returning `history` correctly
+
+# TODO: add PR for purrr::rate_throttle("3 per minute")
+#
+# TODO: in reticulate: virtualenv_starter(): check for --enable-shared
+
+# TODO: fix py_func(), for r_to_py.R6ClassGenerator
+#   can't use __signature__ anymore in keras_core...
+
+## TODO: "keras.applications.convnext" is a module, filtered out has good stuff
+
+# TODO: initializer families:
+# <class 'keras.initializers.constant_initializers.Zeros'>
+# <class 'keras.initializers.random_initializers.RandomUniform'>
+
+# TODO: next: losses, metrics, saving, guides/vignettes
+
+# TODO: bidirectional, time_distributed -- need special caseing
+#
+# TODO: note in docs for k_logical_and (and friends) that these are dispatched
+#       to from & != and so on.
+
+# TODO: keras.Function ?? keras.Variable ?? keras.name_scope ??
+#
+# TODO: remove k_random_binomial() ??
+#
+# TODO: layer_feature_space() needs massaging.
+#
+# TODO: to_categorical():
+#    - handle factor/character https://github.com/rstudio/keras/issues/1055
+#    - make it 1 based?
+#
+# TODO: param descriptions - make it more robust to changes upstream
+#     autoinject "see description" without needing it in the yml.
+#     yml is only for explicit overrides
+#
+# TODO: implement and export as_shape(), make k_shape() a little nicer (e.g, an integer w/ NA)
+#
+# TODO: implement dim() S3 generic.
+#
+# TODO: remove @import methods ??
+#
+# TODO: add @import reticulate ??
+#
+# TODO: remove any tensorflow imports / DESCRIPTION deps
+
 # The source of truth for the current translation should be...?
 #    - the autogened file R/autogen-*.R, or
 #    - man-src/*/2-translated.Rmd
+
 
 # start by regenerating patch files
 
@@ -92,55 +145,6 @@ make_translation_patchfiles()
 
 # source("tools/utils.R")
 
-# TODO: swap arg order in k_vectorized_map
-
-# TODO: reticulate, support NO_COLOR (or similar) to disable the link wrapper around `py_last_error()` hint.
-
-# TODO: # fix `fit()` not returning `history` correctly
-
-# TODO: add PR for purrr::rate_throttle("3 per minute")
-#
-# TODO: in reticulate: virtualenv_starter(): check for --enable-shared
-
-# TODO: fix py_func(), for r_to_py.R6ClassGenerator
-#   can't use __signature__ anymore in keras_core...
-
-## TODO: "keras.applications.convnext" is a module, filtered out has good stuff
-
-# TODO: initializer families:
-# <class 'keras.initializers.constant_initializers.Zeros'>
-# <class 'keras.initializers.random_initializers.RandomUniform'>
-
-# TODO: next: losses, metrics, saving, guides/vignettes
-
-# TODO: bidirectional, time_distributed -- need special caseing
-#
-# TODO: note in docs for k_logical_and (and friends) that these are dispatched
-#       to from & != and so on.
-
-# TODO: keras.Function ?? keras.Variable ?? keras.name_scope ??
-#
-# TODO: remove k_random_binomial() ??
-#
-# TODO: layer_feature_space() needs massaging.
-#
-# TODO: to_categorical():
-#    - handle factor/character https://github.com/rstudio/keras/issues/1055
-#    - make it 1 based?
-#
-# TODO: param descriptions - make it more robust to changes upstream
-#     autoinject "see description" without needing it in the yml.
-#     yml is only for explicit overrides
-#
-# TODO: implement and export as_shape(), make k_shape() a little nicer (e.g, an integer w/ NA)
-#
-# TODO: implement dim() S3 generic.
-#
-# TODO: remove @import methods ??
-#
-# TODO: add @import reticulate ??
-#
-# TODO: remove any tensorflow imports / DESCRIPTION deps
 
 if(FALSE)
 local({
@@ -308,50 +312,6 @@ exports <- endpoints |>
   purrr::set_names() |>
   lapply(mk_export)
 
-n_openai_calls_made <- 0L
-max_openai_calls <- 1L
-
-
-make_new_man_roxygen_dir <- function(ex) {
-  ex$man_roxygen_dir |>
-    fs::dir_create() |>
-    withr::local_dir()
-
-  ex$is_new <- TRUE
-  ex$is_changed <- FALSE
-  ex$old_docstring <- ""
-  ex$old_roxygen_intermediate <- ""
-
-  import_from({ex}, docstring, roxygen)
-
-  writeLines(docstring, "0-docstring.md")
-  writeLines(roxygen, "1-formatted.md")
-
-  do_call_openai <-
-    (n_openai_calls_made < max_openai_calls) &&
-    str_detect(roxygen, "```python")
-
-  if (do_call_openai) {
-    ex$completion <- completion <- get_translated_roxygen(roxygen)
-    n_openai_calls_made <<- n_openai_calls_made + 1L
-    write_rds(completion, "completion.rds")
-    writeLines(completion, "2-translated.Rmd")
-    tryCatch({
-      library(keras)
-      keras$utils$clear_session()
-      knitr::knit("2-translated.Rmd", "roxygen.md",
-                  quiet = TRUE, envir = new.env())
-    }, error = function(e) {
-      warning("Failed to render docs for", ex$r_name)
-    })
-  } else {
-    writeLines(roxygen, "2-translated.Rmd")
-    file.copy("2-translated.Rmd", "roxygen.md")
-  }
-
-  ex
-}
-
 # stages:
 # 1. make patchfile containing changes required from 1-formatted.md to 2-translated.md
 # 2. writeout new original.md, formatted.md
@@ -411,15 +371,6 @@ apply_translation_patchfiles()
 
 # stop("here")
 
-if(FALSE) {
-exports$keras.activations.relu$docstring <-
-  read_file(fs::path("man-src",
-                     exports$keras.activations.relu$r_name,
-                     "0-docstring.md"))
-augment_export(exports$keras.activations.relu)
-
-
-}
 
 df <- exports |>
   lapply(\(e) {
@@ -434,8 +385,7 @@ df <- exports |>
 df <- df |>
   mutate(endpoint_sans_name = str_extract(endpoint, "keras\\.(.*)\\.[^.]+$", 1))
 
-
-df |>
+df <- df |>
   arrange(endpoint_sans_name, module, r_name) |>
   mutate(file = if_else(endpoint_sans_name == "layers",
                         {
@@ -445,10 +395,14 @@ df |>
                             str_replace("^([^.]+).*", paste0(endpoint_sans_name, "-\\1.R"))
                         },
                         str_c(endpoint_sans_name %>% str_replace_all(fixed("."), "-"), ".R"))
-         ) |>
+         )
+
+stop("lllll")
+# ?? TODO: where is ~/github/rstudio/keras/R/autogen-preprocessing.R coming from?
+#
+df |>
   group_by(file) |>
   dplyr::group_walk(\(df, grp) {
-
 
     txt <- df |>
       rowwise() |>
@@ -766,3 +720,58 @@ str()
 # l$`__doc__` |> trim() |> split_docstring_into_sections()
 #
 #   cat()
+
+  n_openai_calls_made <- 0L
+  max_openai_calls <- 1L
+
+
+  make_new_man_roxygen_dir <- function(ex) {
+    ex$man_roxygen_dir |>
+      fs::dir_create() |>
+      withr::local_dir()
+
+    ex$is_new <- TRUE
+    ex$is_changed <- FALSE
+    ex$old_docstring <- ""
+    ex$old_roxygen_intermediate <- ""
+
+    import_from({ex}, docstring, roxygen)
+
+    writeLines(docstring, "0-docstring.md")
+    writeLines(roxygen, "1-formatted.md")
+
+    do_call_openai <-
+      (n_openai_calls_made < max_openai_calls) &&
+      str_detect(roxygen, "```python")
+
+    if (do_call_openai) {
+      ex$completion <- completion <- get_translated_roxygen(roxygen)
+      n_openai_calls_made <<- n_openai_calls_made + 1L
+      write_rds(completion, "completion.rds")
+      writeLines(completion, "2-translated.Rmd")
+      tryCatch({
+        library(keras)
+        keras$utils$clear_session()
+        knitr::knit("2-translated.Rmd", "roxygen.md",
+                    quiet = TRUE, envir = new.env())
+      }, error = function(e) {
+        warning("Failed to render docs for", ex$r_name)
+      })
+    } else {
+      writeLines(roxygen, "2-translated.Rmd")
+      file.copy("2-translated.Rmd", "roxygen.md")
+    }
+
+    ex
+  }
+
+
+  if(FALSE) {
+    exports$keras.activations.relu$docstring <-
+      read_file(fs::path("man-src",
+                         exports$keras.activations.relu$r_name,
+                         "0-docstring.md"))
+    augment_export(exports$keras.activations.relu)
+
+
+  }

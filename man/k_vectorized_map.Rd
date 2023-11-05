@@ -9,7 +9,7 @@ k_vectorized_map(`function`, elements)
 \arguments{
 \item{function}{a function}
 
-\item{elements}{a tensor}
+\item{elements}{see description}
 }
 \description{
 Schematically, \code{vectorized_map} implements the following,
