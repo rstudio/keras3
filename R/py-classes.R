@@ -598,7 +598,8 @@ print.py_R6ClassGenerator <- function(x, ...) {
   NextMethod()
 }
 
-#' @exportS3Method pillar::type_sum
+# @exportS3Method pillar::type_sum
+#' @rawNamespace S3method(pillar::type_sum,py_R6ClassGenerator)
 type_sum.py_R6ClassGenerator <- function(x) {
   cl <- class(x)[[1L]]
   if(startsWith(cl, "R6type."))
