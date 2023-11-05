@@ -434,12 +434,15 @@ df |>
     txt <- df |>
       rowwise() |>
       mutate(final_dump = str_flatten_lines(
-        glue("# {endpoint}"),
-        glue("# {module}.{name}"),
+        # glue("# {endpoint}"),
+        # glue("# {module}.{name}"),
 
-        str_c('r"-(', py_obj$`__doc__`, ')-"'),
+        # str_c('r"-(', py_obj$`__doc__`, ')-"'),
         # str_c('r"-(', docstring, ')-"'),
-        str_c("#' ", readLines(fs::path(man_roxygen_dir, "roxygen.Rmd"))),
+
+        # str_c("#' ", readLines(fs::path(man_roxygen_dir, "roxygen.Rmd"))),
+        glue(r"--(#' @eval readLines("{fs::path(man_roxygen_dir, "roxygen.Rmd")}") )--"),
+        # glue(r"--(#' @backref "{fs::path(man_roxygen_dir, "roxygen.Rmd")}" )--"),
         str_c(r_name, " <- "),
         deparse(r_fn),
         ""
@@ -480,7 +483,8 @@ df |>
   })
 
 # devtools::document()
-
+devtools::load_all()
+devtools::document(roclets = c('rd', 'namespace'))
 stop("DONE", call. = FALSE)
 
 

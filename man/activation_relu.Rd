@@ -27,15 +27,11 @@ change the max value of the activation,
 and to use a non-zero multiple of the input for values below the threshold.
 }
 \section{Examples}{
-\if{html}{\out{<div class="sourceCode r">}}\preformatted{x <- c(-10, -5, 0, 5, 10)
+\if{html}{\out{<div class="sourceCode {r}">}}\preformatted{x <- c(-10, -5, 0, 5, 10)
 activation_relu(x)
-#> tf.Tensor([ 0.  0.  0.  5. 10.], shape=(5), dtype=float32)
 activation_relu(x, negative_slope = 0.5)
-#> tf.Tensor([-5.  -2.5  0.   5.  10. ], shape=(5), dtype=float32)
 activation_relu(x, max_value = 5)
-#> tf.Tensor([0. 0. 0. 5. 5.], shape=(5), dtype=float32)
 activation_relu(x, threshold = 5)
-#> tf.Tensor([-0. -0.  0.  0. 10.], shape=(5), dtype=float32)
 }\if{html}{\out{</div>}}
 }
 

@@ -19,7 +19,7 @@ callback_reduce_lr_on_plateau(
 \arguments{
 \item{monitor}{String. Quantity to be monitored.}
 
-\item{factor}{Float. Factor by which the learning rate will be reduced.
+\item{factor}{Numeric. Factor by which the learning rate will be reduced.
 \code{new_lr = lr * factor}.}
 
 \item{patience}{Integer. Number of epochs with no improvement after which
@@ -34,15 +34,15 @@ be reduced when the quantity monitored has stopped increasing; in
 \code{'auto'} mode, the direction is automatically inferred from the name
 of the monitored quantity.}
 
-\item{min_delta}{Float. Threshold for measuring the new optimum, to only focus
+\item{min_delta}{Numeric. Threshold for measuring the new optimum, to only focus
 on significant changes.}
 
 \item{cooldown}{Integer. Number of epochs to wait before resuming normal
 operation after the learning rate has been reduced.}
 
-\item{min_lr}{Float. Lower bound on the learning rate.}
+\item{min_lr}{Numeric. Lower bound on the learning rate.}
 
-\item{...}{Passed on to the Python callable}
+\item{...}{For forward/backward compatability.}
 }
 \description{
 Models often benefit from reducing the learning rate by a factor
@@ -51,9 +51,9 @@ quantity and if no improvement is seen for a 'patience' number
 of epochs, the learning rate is reduced.
 }
 \section{Examples}{
-\if{html}{\out{<div class="sourceCode python">}}\preformatted{reduce_lr = ReduceLROnPlateau(monitor='val_loss', factor=0.2,
-                              patience=5, min_lr=0.001)
-model.fit(x_train, y_train, callbacks=[reduce_lr])
+\if{html}{\out{<div class="sourceCode {r}">}}\preformatted{reduce_lr <- callback_reduce_lr_on_plateau(monitor = 'val_loss', factor = 0.2,
+                                           patience = 5, min_lr = 0.001)
+model \%>\% fit(x_train, y_train, callbacks = list(reduce_lr))
 }\if{html}{\out{</div>}}
 }
 

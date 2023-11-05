@@ -16,12 +16,12 @@ callback_model_checkpoint(
 )
 }
 \arguments{
-\item{filepath}{string or \code{PathLike}, path to save the model file.
+\item{filepath}{string, path to save the model file.
 \code{filepath} can contain named formatting options,
 which will be filled the value of \code{epoch} and keys in \code{logs}
 (passed in \code{on_epoch_end}).
 The \code{filepath} name needs to end with \code{".weights.h5"} when
-\code{save_weights_only=True} or should end with \code{".keras"} when
+\code{save_weights_only=TRUE} or should end with \code{".keras"} when
 checkpoint saving the whole model (default).
 For example:
 if \code{filepath} is \code{"{epoch:02d}-{val_loss:.2f}.keras"}, then the
@@ -30,32 +30,32 @@ validation loss in the filename. The directory of the filepath
 should not be reused by any other callbacks to avoid conflicts.}
 
 \item{monitor}{The metric name to monitor. Typically the metrics are set by
-the \code{Model.compile} method. Note:
+the \code{model \%>\% compile()} method. Note:
 * Prefix the name with \code{"val_"} to monitor validation metrics.
 * Use \code{"loss"} or \code{"val_loss"} to monitor the model's total loss.
 * If you specify metrics as strings, like \code{"accuracy"}, pass the
 same string (with or without the \code{"val_"} prefix).
 * If you pass \code{metrics.Metric} objects, \code{monitor} should be set to
-\code{metric.name}
+\code{metric$name}
 * If you're not sure about the metric names you can check the
-contents of the \code{history.history} dictionary returned by
-\code{history = model.fit()}
+contents of the \code{history$metrics} list returned by
+\code{history <- model \%>\% fit()}
 * Multi-output models set additional prefixes on the metric names.}
 
 \item{verbose}{Verbosity mode, 0 or 1. Mode 0 is silent, and mode 1
 displays messages when the callback takes an action.}
 
-\item{save_best_only}{if \code{save_best_only=True}, it only saves when the model
+\item{save_best_only}{if \code{save_best_only=TRUE}, it only saves when the model
 is considered the "best" and the latest best model according to the
 quantity monitored will not be overwritten. If \code{filepath} doesn't
 contain formatting options like \code{{epoch}} then \code{filepath} will be
 overwritten by each new better model.}
 
-\item{save_weights_only}{if True, then only the model's weights will be saved
-(\code{model.save_weights(filepath)}), else the full model is saved
-(\code{model.save(filepath)}).}
+\item{save_weights_only}{if TRUE, then only the model's weights will be saved
+(\code{model \%>\% save_model_weights_hdf5(filepath)}), else the full model is saved
+(\code{model \%>\% save_model_hdf5(filepath)}).}
 
-\item{mode}{one of {\code{"auto"}, \code{"min"}, \code{"max"}}. If \code{save_best_only=True}, the
+\item{mode}{one of {\code{"auto"}, \code{"min"}, \code{"max"}}. If \code{save_best_only=TRUE}, the
 decision to overwrite the current save file is made based on either
 the maximization or the minimization of the monitored quantity.
 For \code{val_acc}, this should be \code{"max"}, for \code{val_loss} this should be
@@ -73,13 +73,13 @@ could reflect as little as 1 batch, since the metrics get reset
 every epoch). Defaults to \code{"epoch"}.}
 
 \item{initial_value_threshold}{Floating point initial "best" value of the
-metric to be monitored. Only applies if \code{save_best_value=True}. Only
+metric to be monitored. Only applies if \code{save_best_value=TRUE}. Only
 overwrites the model weights already saved if the performance of
 current model is better than this value.}
 }
 \description{
 \code{ModelCheckpoint} callback is used in conjunction with training using
-\code{model.fit()} to save a model or weights (in a checkpoint file) at some
+\code{model \%>\% fit()} to save a model or weights (in a checkpoint file) at some
 interval, so the model or weights can be loaded later to continue the
 training from the state saved.
 
@@ -96,38 +96,37 @@ at the end of every epoch, or after a fixed number of training batches.
 }
 }
 \section{Examples}{
-\if{html}{\out{<div class="sourceCode python">}}\preformatted{model.compile(loss=..., optimizer=...,
-              metrics=['accuracy'])
+\if{html}{\out{<div class="sourceCode {r}">}}\preformatted{model \%>\% compile(loss = ..., optimizer = ..., metrics = c('accuracy'))
 
-EPOCHS = 10
-checkpoint_filepath = '/tmp/ckpt/checkpoint.model.keras'
-model_checkpoint_callback = keras.callbacks.ModelCheckpoint(
-    filepath=checkpoint_filepath,
-    monitor='val_accuracy',
-    mode='max',
-    save_best_only=True)
+EPOCHS <- 10
+checkpoint_filepath <- '/tmp/ckpt/checkpoint.model.keras'
+model_checkpoint_callback <- callback_model_checkpoint(
+    filepath = checkpoint_filepath,
+    monitor = 'val_accuracy',
+    mode = 'max',
+    save_best_only = TRUE)
 
 # Model is saved at the end of every epoch, if it's the best seen so far.
-model.fit(epochs=EPOCHS, callbacks=[model_checkpoint_callback])
+model \%>\% fit(epochs = EPOCHS, callbacks = list(model_checkpoint_callback))
 
 # The model (that are considered the best) can be loaded as -
-keras.models.load_model(checkpoint_filepath)
+keras::load_model_hdf5(checkpoint_filepath)
 
 # Alternatively, one could checkpoint just the model weights as -
-checkpoint_filepath = '/tmp/ckpt/checkpoint.weights.h5'
-model_checkpoint_callback = keras.callbacks.ModelCheckpoint(
-    filepath=checkpoint_filepath,
-    save_weights_only=True,
-    monitor='val_accuracy',
-    mode='max',
-    save_best_only=True)
+checkpoint_filepath <- '/tmp/ckpt/checkpoint.weights.h5'
+model_checkpoint_callback <- callback_model_checkpoint(
+    filepath = checkpoint_filepath,
+    save_weights_only = TRUE,
+    monitor = 'val_accuracy',
+    mode = 'max',
+    save_best_only = TRUE)
 
 # Model weights are saved at the end of every epoch, if it's the best seen
 # so far.
-model.fit(epochs=EPOCHS, callbacks=[model_checkpoint_callback])
+model \%>\% fit(epochs = EPOCHS, callbacks = list(model_checkpoint_callback))
 
 # The model weights (that are considered the best) can be loaded as -
-model.load_weights(checkpoint_filepath)
+model \%>\% load_model_weights_hdf5(checkpoint_filepath)
 }\if{html}{\out{</div>}}
 }
 

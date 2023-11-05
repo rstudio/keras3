@@ -20,25 +20,27 @@ epoch and current learning rate, and applies the updated learning rate on
 the optimizer.
 }
 \section{Examples}{
-\if{html}{\out{<div class="sourceCode python">}}\preformatted{# This function keeps the initial learning rate for the first ten epochs
+\if{html}{\out{<div class="sourceCode {r}">}}\preformatted{# This function keeps the initial learning rate for the first ten epochs
 # and decreases it exponentially after that.
-def scheduler(epoch, lr):
-    if epoch < 10:
-        return lr
-    else:
-        return lr * ops.exp(-0.1)
-# >>>
-model = keras.models.Sequential([keras.layers.Dense(10)])
-model.compile(keras.optimizers.SGD(), loss='mse')
-round(model.optimizer.learning_rate, 5)
-# 0.01
+scheduler <- function(epoch, lr) \{
+    if (epoch < 10) \{
+        return(lr)
+    \} else \{
+        return(lr * exp(-0.1))
+    \}
+\}
+
+model <- keras_model_sequential() \%>\%
+  layer_dense(units = 10)
+model \%>\% compile(optimizer = optimizer_sgd(), loss = 'mse')
+round(model$optimizer$lr, 5)
 }\if{html}{\out{</div>}}
 
-\if{html}{\out{<div class="sourceCode python">}}\preformatted{callback = keras.callbacks.LearningRateScheduler(scheduler)
-history = model.fit(np.arange(100).reshape(5, 20), np.zeros(5),
-                    epochs=15, callbacks=[callback], verbose=0)
-round(model.optimizer.learning_rate, 5)
-# 0.00607
+\if{html}{\out{<div class="sourceCode {r}">}}\preformatted{callback <- callback_learning_rate_scheduler(schedule = scheduler)
+history <- model \%>\% fit(x = matrix(runif(100), nrow = 5, ncol = 20),
+                         y = rep(0, 5),
+                         epochs = 15, callbacks = list(callback), verbose = 0)
+round(model$optimizer$lr, 5)
 }\if{html}{\out{</div>}}
 }
 

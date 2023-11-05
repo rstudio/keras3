@@ -51,7 +51,7 @@ arguments passed to \code{compile} or \code{fit}, the checkpoint saved for fault
 can become invalid.
 }
 \section{Examples}{
-\if{html}{\out{<div class="sourceCode r">}}\preformatted{callback_interrupting <- new_callback_class(
+\if{html}{\out{<div class="sourceCode {r}">}}\preformatted{callback_interrupting <- new_callback_class(
   "InterruptingCallback",
   on_epoch_begin = function(epoch, logs = NULL) \{
     if (epoch == 4) \{
@@ -72,9 +72,6 @@ try(\{
                 callbacks = list(callback, callback_interrupting()),
                 verbose = 0)
 \})
-#> Error in (structure(function (self, epoch, logs = NULL)  : 
-#>   RuntimeError: Interrupting!
-#> Run `reticulate::py_last_error()` for details.
 
 history <- model \%>\% fit(x = k_ones(c(5, 20)),
                          y = k_zeros(5),
@@ -85,7 +82,6 @@ history <- model \%>\% fit(x = k_ones(c(5, 20)),
 # Only 6 more epochs are run, since first training got interrupted at
 # zero-indexed epoch 4, second training will continue from 4 to 9.
 nrow(as.data.frame(history))
-#> [1] 10
 }\if{html}{\out{</div>}}
 }
 
