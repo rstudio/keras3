@@ -92,6 +92,8 @@ make_translation_patchfiles()
 
 # source("tools/utils.R")
 
+# TODO: reticulate, support NO_COLOR (or similar) to disable the link wrapper around `py_last_error()` hint.
+
 # TODO: # fix `fit()` not returning `history` correctly
 
 # TODO: add PR for purrr::rate_throttle("3 per minute")
@@ -457,6 +459,7 @@ df |>
 
         # str_c("#' ", readLines(fs::path(man_roxygen_dir, "2-translated.Rmd"))),
         # glue(r"--(#' @eval readLines("{fs::path(man_roxygen_dir, "2-translated.Rmd")}") )--"),
+        glue(r"--(#        file.edit("{fs::path(man_roxygen_dir, "2-translated.Rmd")}") )--"),
         glue(r"--(#' @eval readLines("{fs::path(man_roxygen_dir, "3-rendered.md")}") )--"),
         # glue(r"--(#' @backref "{fs::path(man_roxygen_dir, "2-translated.Rmd")}" )--"),
         str_c(r_name, " <- "),
