@@ -39,19 +39,17 @@ model <- keras_model_sequential() %>%
   layer_dense(10)
 model %>% compile(optimizer = optimizer_sgd(), loss = 'mse')
 
-try({
+tryCatch({
   model %>% fit(x = k_ones(c(5, 20)),
                 y = k_zeros(5),
                 epochs = 10, batch_size = 1,
                 callbacks = list(callback, callback_interrupting()),
                 verbose = 0)
-})
+}, python.builtin.RuntimeError = function(e) message("Interrupted!"))
 ```
 
 ```
-## Error in (structure(function (self, epoch, logs = NULL)  : 
-##   RuntimeError: Interrupting!
-## [90mRun ]8;;rstudio:run:reticulate::py_last_error()`reticulate::py_last_error()`]8;; for details.[39m
+## Interrupted!
 ```
 
 ```r

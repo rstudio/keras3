@@ -31,8 +31,8 @@ training is finished. Use \code{FALSE} if you'd like to keep the checkpoint
 for future usage.}
 }
 \description{
-`backup_and_restore` callback is intended to recover training from an
-interruption that has happened in the middle of a `fit` execution, by
+\code{backup_and_restore} callback is intended to recover training from an
+interruption that has happened in the middle of a \code{fit} execution, by
 backing up the training states in a temporary checkpoint file, at the end of
 each epoch. Each backup overwrites the previously written checkpoint file,
 so at any given time there is at most one such checkpoint file for
@@ -40,52 +40,44 @@ backup/restoring purpose.
 
 If training restarts before completion, the training state (which includes
 the model weights and epoch number) is restored to the most recently saved
-state at the beginning of a new `fit` run. At the completion of a
-`fit` run, the temporary checkpoint file is deleted.
+state at the beginning of a new \code{fit} run. At the completion of a
+\code{fit} run, the temporary checkpoint file is deleted.
 
 Note that the user is responsible to bring jobs back after the interruption.
 This callback is important for the backup and restore mechanism for fault
 tolerance purpose, and the model to be restored from a previous checkpoint
 is expected to be the same as the one used to back up. If user changes
-arguments passed to `compile` or `fit`, the checkpoint saved for fault tolerance
+arguments passed to \code{compile} or \code{fit}, the checkpoint saved for fault tolerance
 can become invalid.
-
-# Examples
-
-
-
-```r
-callback_interrupting <- new_callback_class(
+}
+\section{Examples}{
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{callback_interrupting <- new_callback_class(
   "InterruptingCallback",
-  on_epoch_begin = function(epoch, logs = NULL) {
-    if (epoch == 4) {
+  on_epoch_begin = function(epoch, logs = NULL) \{
+    if (epoch == 4) \{
       stop('Interrupting!')
-    }
-  }
+    \}
+  \}
 )
 
 callback <- callback_backup_and_restore(backup_dir = "/tmp/backup")
-model <- keras_model_sequential() %>%
+model <- keras_model_sequential() \%>\%
   layer_dense(10)
-model %>% compile(optimizer = optimizer_sgd(), loss = 'mse')
+model \%>\% compile(optimizer = optimizer_sgd(), loss = 'mse')
 
-try({
-  model %>% fit(x = k_ones(c(5, 20)),
+tryCatch(\{
+  model \%>\% fit(x = k_ones(c(5, 20)),
                 y = k_zeros(5),
                 epochs = 10, batch_size = 1,
                 callbacks = list(callback, callback_interrupting()),
                 verbose = 0)
-})
-```
+\}, python.builtin.RuntimeError = function(e) message("Interrupted!"))
+}\if{html}{\out{</div>}}
 
-```
-## Error in (structure(function (self, epoch, logs = NULL)  : 
-##   RuntimeError: Interrupting!
-## [90mRun ]8;;rstudio:run:reticulate::py_last_error()`reticulate::py_last_error()`]8;; for details.[39m
-```
+\if{html}{\out{<div class="sourceCode">}}\preformatted{## Interrupted!
+}\if{html}{\out{</div>}}
 
-```r
-history <- model %>% fit(x = k_ones(c(5, 20)),
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{history <- model \%>\% fit(x = k_ones(c(5, 20)),
                          y = k_zeros(5),
                          epochs = 10, batch_size = 1,
                          callbacks = list(callback),
@@ -94,12 +86,12 @@ history <- model %>% fit(x = k_ones(c(5, 20)),
 # Only 6 more epochs are run, since first training got interrupted at
 # zero-indexed epoch 4, second training will continue from 4 to 9.
 nrow(as.data.frame(history))
-```
+}\if{html}{\out{</div>}}
 
-```
-## [1] 10
-```
+\if{html}{\out{<div class="sourceCode">}}\preformatted{## [1] 10
+}\if{html}{\out{</div>}}
 }
+
 \seealso{
 \itemize{
 \item \url{https://www.tensorflow.org/api_docs/python/tf/keras/callbacks/BackupAndRestore}

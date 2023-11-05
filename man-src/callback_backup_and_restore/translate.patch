@@ -1,5 +1,5 @@
 diff --git a/man-src/callback_backup_and_restore/2-translated.Rmd b/man-src/callback_backup_and_restore/2-translated.Rmd
-index 963dd9c0..0ee3d972 100644
+index 963dd9c0..75958bc1 100644
 --- a/man-src/callback_backup_and_restore/2-translated.Rmd
 +++ b/man-src/callback_backup_and_restore/2-translated.Rmd
 @@ -3,4 +3,4 @@ Callback to back up and restore the training state.
@@ -59,13 +59,13 @@ index 963dd9c0..0ee3d972 100644
 +  layer_dense(10)
 +model %>% compile(optimizer = optimizer_sgd(), loss = 'mse')
 +
-+try({
++tryCatch({
 +  model %>% fit(x = k_ones(c(5, 20)),
 +                y = k_zeros(5),
 +                epochs = 10, batch_size = 1,
 +                callbacks = list(callback, callback_interrupting()),
 +                verbose = 0)
-+})
++}, python.builtin.RuntimeError = function(e) message("Interrupted!"))
 +
 +history <- model %>% fit(x = k_ones(c(5, 20)),
 +                         y = k_zeros(5),
