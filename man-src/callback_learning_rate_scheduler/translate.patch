@@ -1,8 +1,8 @@
 diff --git a/man-src/callback_learning_rate_scheduler/2-translated.Rmd b/man-src/callback_learning_rate_scheduler/2-translated.Rmd
-index 84b452ea..0368cf7e 100644
+index 84b452ea..413f1def 100644
 --- a/man-src/callback_learning_rate_scheduler/2-translated.Rmd
 +++ b/man-src/callback_learning_rate_scheduler/2-translated.Rmd
-@@ -9,23 +9,25 @@ the optimizer.
+@@ -9,23 +9,23 @@ the optimizer.
  # Examples
 -```python
 +```{r}
@@ -19,17 +19,15 @@ index 84b452ea..0368cf7e 100644
 -round(model.optimizer.learning_rate, 5)
 -# 0.01
 +scheduler <- function(epoch, lr) {
-+    if (epoch < 10) {
-+        return(lr)
-+    } else {
-+        return(lr * exp(-0.1))
-+    }
++  if (epoch < 10)
++    return(lr)
++  else
++    return(lr * exp(-0.1))
 +}
 +
-+model <- keras_model_sequential() %>%
-+  layer_dense(units = 10)
-+model %>% compile(optimizer = optimizer_sgd(), loss = 'mse')
-+round(model$optimizer$lr, 5)
++model <- keras_model_sequential() |> layer_dense(units = 10)
++model |> compile(optimizer = optimizer_sgd(), loss = 'mse')
++model$optimizer$learning_rate |> as.array() |> round(5)
  ```
  
 -```python
@@ -40,8 +38,8 @@ index 84b452ea..0368cf7e 100644
 -# 0.00607
 +```{r}
 +callback <- callback_learning_rate_scheduler(schedule = scheduler)
-+history <- model %>% fit(x = matrix(runif(100), nrow = 5, ncol = 20),
-+                         y = rep(0, 5),
-+                         epochs = 15, callbacks = list(callback), verbose = 0)
-+round(model$optimizer$lr, 5)
++history <- model |> fit(x = array(runif(100), c(5, 20)),
++                        y = array(0, c(5, 1)),
++                        epochs = 15, callbacks = list(callback), verbose = 0)
++model$optimizer$learning_rate |> as.array() |> round(5)
  ```

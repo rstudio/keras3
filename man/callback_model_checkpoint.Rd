@@ -121,7 +121,8 @@ model \%>\% fit(epochs = EPOCHS, callbacks = list(model_checkpoint_callback))
 keras::load_model_hdf5(checkpoint_filepath)
 }\if{html}{\out{</div>}}
 
-\if{html}{\out{<div class="sourceCode">}}\preformatted{## File not found: filepath=/tmp/ckpt/checkpoint.model.keras. Please ensure the file is an accessible `.keras` zip file.
+\if{html}{\out{<div class="sourceCode">}}\preformatted{## File not found: filepath=/tmp/ckpt/checkpoint.model.keras. Please ensure the file is an accessible `.keras` zip
+## file.
 }\if{html}{\out{</div>}}
 
 \if{html}{\out{<div class="sourceCode r">}}\preformatted{# Alternatively, one could checkpoint just the model weights as -

@@ -6,6 +6,11 @@
 \usage{
 k_vectorized_map(`function`, elements)
 }
+\arguments{
+\item{function}{a function}
+
+\item{elements}{a tensor}
+}
 \description{
 Schematically, \code{vectorized_map} implements the following,
 in the case of a single tensor input \code{elements}:

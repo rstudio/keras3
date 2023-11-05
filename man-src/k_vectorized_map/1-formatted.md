@@ -27,6 +27,9 @@ def vectorized_map(function, elements)
 In this case, `function` is expected to take as input
 a single list of tensor arguments.
 
+@param function a function
+@param elements a tensor
+
 @export
 @family ops
 @seealso

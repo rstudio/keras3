@@ -50,7 +50,8 @@ keras::load_model_hdf5(checkpoint_filepath)
 ```
 
 ```
-## File not found: filepath=/tmp/ckpt/checkpoint.model.keras. Please ensure the file is an accessible `.keras` zip file.
+## File not found: filepath=/tmp/ckpt/checkpoint.model.keras. Please ensure the file is an accessible `.keras` zip
+## file.
 ```
 
 ```r
