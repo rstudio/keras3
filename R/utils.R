@@ -662,8 +662,10 @@ drop_nulls <- function(x, i = NULL) {
   x[!drop]
 }
 
-
-
+#' @export
+as.array.keras.backend.common.variables.KerasVariable <- function(x) {
+  as_r_value(k_convert_to_numpy(x))
+}
 
 as_r_value <- function (x) {
   if (inherits(x, "python.builtin.object"))
