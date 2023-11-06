@@ -62,24 +62,8 @@ model$history$epoch
 ```
 
 ```r
-model$history %>% keras:::to_keras_training_history() %>% as.data.frame() %>% print()
-```
+# model$history %>% keras:::to_keras_training_history() %>% as.data.frame() %>% print()
 
-```
-##    epoch     value metric     data
-## 1      1 0.8029032   loss training
-## 2      2 0.5227790   loss training
-## 3      3 0.3403872   loss training
-## 4      4 0.2216299   loss training
-## 5      5        NA   loss training
-## 6      6        NA   loss training
-## 7      7        NA   loss training
-## 8      8        NA   loss training
-## 9      9        NA   loss training
-## 10    10        NA   loss training
-```
-
-```r
 history <- model %>% fit(x = k_ones(c(5, 20)),
                          y = k_zeros(5),
                          epochs = 10, batch_size = 1,
