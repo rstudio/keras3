@@ -18,7 +18,7 @@ image_load(
 \item{color_mode}{One of \code{"grayscale"}, \code{"rgb"}, \code{"rgba"}. Default: \code{"rgb"}.
 The desired image format.}
 
-\item{target_size}{Either \code{None} (default to original size) or tuple of ints
+\item{target_size}{Either \code{NULL} (default to original size) or tuple of ints
 \verb{(img_height, img_width)}.}
 
 \item{interpolation}{Interpolation method used to resample the image if the
@@ -41,10 +41,24 @@ the center with target aspect ratio before resizing.}
 Loads an image into PIL format.
 }
 \section{Usage}{
-\if{html}{\out{<div class="sourceCode python">}}\preformatted{image = keras.utils.load_img(image_path)
-input_arr = keras.utils.img_to_array(image)
-input_arr = np.array([input_arr])  # Convert single image to a batch.
-predictions = model.predict(input_arr)
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{image_path <- get_file(origin = "https://www.r-project.org/logo/Rlogo.png")
+(image <- image_load(image_path))
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode">}}\preformatted{## <PIL.Image.Image image mode=RGB size=724x561 at 0x2DC49E6B0>
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{input_arr <- image_to_array(image)
+str(input_arr)
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode">}}\preformatted{##  num [1:561, 1:724, 1:3] 0 0 0 0 0 0 0 0 0 0 ...
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{input_arr \%<>\% array_reshape(dim = c(1, dim(input_arr))) # Convert single image to a batch.
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{model |> predict(input_arr)
 }\if{html}{\out{</div>}}
 }
 

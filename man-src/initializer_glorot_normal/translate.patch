@@ -1,0 +1,37 @@
+diff --git a/man-src/initializer_glorot_normal/2-translated.Rmd b/man-src/initializer_glorot_normal/2-translated.Rmd
+--- a/man-src/initializer_glorot_normal/2-translated.Rmd
++++ b/man-src/initializer_glorot_normal/2-translated.Rmd
+@@ -9,12 +9,12 @@ in the weight tensor.
+ # Examples
+-```python
++```{r}
+ # Standalone usage:
+-initializer = GlorotNormal()
+-values = initializer(shape=(2, 2))
++initializer <- initializer_glorot_normal()
++values <- initializer(shape = c(2, 2))
+ ```
+ 
+-```python
++```{r}
+ # Usage in a Keras layer:
+-initializer = GlorotNormal()
+-layer = Dense(3, kernel_initializer=initializer)
++initializer <- initializer_glorot_normal()
++layer <- layer_dense(units = 3, kernel_initializer = initializer)
+ ```
+@@ -24,10 +24,10 @@ layer = Dense(3, kernel_initializer=initializer)
+ 
+-@param seed A Python integer or instance of
+-`keras.backend.SeedGenerator`.
++@param seed An integer or instance of
++`random_seed_generator()`.
+ Used to make the behavior of the initializer
+ deterministic. Note that an initializer seeded with an integer
+-or `None` (unseeded) will produce the same random values
++or `NULL` (unseeded) will produce the same random values
+ across multiple calls. To get different random values
+ across multiple calls, use as seed an instance
+-of `keras.backend.SeedGenerator`.
++of `random_seed_generator()`.
+ 

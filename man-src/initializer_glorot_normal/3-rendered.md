@@ -7,29 +7,31 @@ input units in the weight tensor and `fan_out` is the number of output units
 in the weight tensor.
 
 # Examples
-```python
+
+```r
 # Standalone usage:
-initializer = GlorotNormal()
-values = initializer(shape=(2, 2))
+initializer <- initializer_glorot_normal()
+values <- initializer(shape = c(2, 2))
 ```
 
-```python
+
+```r
 # Usage in a Keras layer:
-initializer = GlorotNormal()
-layer = Dense(3, kernel_initializer=initializer)
+initializer <- initializer_glorot_normal()
+layer <- layer_dense(units = 3, kernel_initializer = initializer)
 ```
 
 # Reference
 - [Glorot et al., 2010](http://proceedings.mlr.press/v9/glorot10a.html)
 
-@param seed A Python integer or instance of
-`keras.backend.SeedGenerator`.
+@param seed An integer or instance of
+`random_seed_generator()`.
 Used to make the behavior of the initializer
 deterministic. Note that an initializer seeded with an integer
-or `None` (unseeded) will produce the same random values
+or `NULL` (unseeded) will produce the same random values
 across multiple calls. To get different random values
 across multiple calls, use as seed an instance
-of `keras.backend.SeedGenerator`.
+of `random_seed_generator()`.
 
 @export
 @family initializer

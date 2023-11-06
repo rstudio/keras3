@@ -9,15 +9,15 @@ get_registered_object(name, custom_objects = NULL, module_objects = NULL)
 \arguments{
 \item{name}{The name to look up.}
 
-\item{custom_objects}{A dictionary of custom objects to look the name up in.
+\item{custom_objects}{A named list of custom objects to look the name up in.
 Generally, custom_objects is provided by the user.}
 
-\item{module_objects}{A dictionary of custom objects to look the name up in.
+\item{module_objects}{A named list of custom objects to look the name up in.
 Generally, module_objects is provided by midlevel library
 implementers.}
 }
 \value{
-An instantiable class associated with \code{name}, or \code{None} if no such class
+An instantiable class associated with \code{name}, or \code{NULL} if no such class
 exists.
 }
 \description{
@@ -26,10 +26,13 @@ framework. It maps strings to the objects associated with them for
 serialization/deserialization.
 }
 \section{Examples}{
-\if{html}{\out{<div class="sourceCode python">}}\preformatted{def from_config(cls, config, custom_objects=None):
-    if 'my_custom_object_name' in config:
-        config['hidden_cls'] = tf.keras.saving.get_registered_object(
-            config['my_custom_object_name'], custom_objects=custom_objects)
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{from_config <- function(cls, config, custom_objects = NULL) \{
+  if ('my_custom_object_name' \%in\% names(config)) \{
+    config$hidden_cls <- get_registered_object(
+      config$my_custom_object_name,
+      custom_objects = custom_objects)
+  \}
+\}
 }\if{html}{\out{</div>}}
 }
 

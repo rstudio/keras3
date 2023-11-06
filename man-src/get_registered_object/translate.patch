@@ -1,0 +1,32 @@
+diff --git a/man-src/get_registered_object/2-translated.Rmd b/man-src/get_registered_object/2-translated.Rmd
+--- a/man-src/get_registered_object/2-translated.Rmd
++++ b/man-src/get_registered_object/2-translated.Rmd
+@@ -8,7 +8,10 @@ serialization/deserialization.
+ # Examples
+-```python
+-def from_config(cls, config, custom_objects=None):
+-    if 'my_custom_object_name' in config:
+-        config['hidden_cls'] = tf.keras.saving.get_registered_object(
+-            config['my_custom_object_name'], custom_objects=custom_objects)
++```{r, eval = FALSE}
++from_config <- function(cls, config, custom_objects = NULL) {
++  if ('my_custom_object_name' %in% names(config)) {
++    config$hidden_cls <- get_registered_object(
++      config$my_custom_object_name,
++      custom_objects = custom_objects)
++  }
++}
+ ```
+@@ -16,3 +19,3 @@ def from_config(cls, config, custom_objects=None):
+ @returns
+-An instantiable class associated with `name`, or `None` if no such class
++An instantiable class associated with `name`, or `NULL` if no such class
+ exists.
+@@ -20,5 +23,5 @@ exists.
+ @param name The name to look up.
+-@param custom_objects A dictionary of custom objects to look the name up in.
++@param custom_objects A named list of custom objects to look the name up in.
+     Generally, custom_objects is provided by the user.
+-@param module_objects A dictionary of custom objects to look the name up in.
++@param module_objects A named list of custom objects to look the name up in.
+     Generally, module_objects is provided by midlevel library

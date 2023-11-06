@@ -7,7 +7,7 @@
 get_custom_objects()
 }
 \value{
-\if{html}{\out{<div class="sourceCode">}}\preformatted{Global dictionary mapping registered class names to classes.
+\if{html}{\out{<div class="sourceCode">}}\preformatted{Global dictionary (named list) mapping registered class names to classes.
 }\if{html}{\out{</div>}}
 }
 \description{
@@ -16,8 +16,8 @@ global dictionary of custom objects, and will not appear in the returned
 dictionary.
 }
 \section{Examples}{
-\if{html}{\out{<div class="sourceCode python">}}\preformatted{get_custom_objects().clear()
-get_custom_objects()['MyObject'] = MyObject
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{get_custom_objects()$clear()
+get_custom_objects()$update(list(MyObject = MyObject))
 }\if{html}{\out{</div>}}
 }
 

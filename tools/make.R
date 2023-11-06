@@ -83,8 +83,8 @@ make_translation_patchfiles <- function() {
     set_names(dirname) |>
     walk(\(dir) {
       withr::with_dir(dir, {
-        needs_update <- file_exists("translate.patch") &&
-            file_info("2-translated.Rmd")$change_time >= file_info("translate.patch")$birth_time
+        doesnt_need_update <- file_exists("translate.patch") &&
+            file_info("2-translated.Rmd")$change_time < file_info("translate.patch")$birth_time
         }
       )
       # if(!needs_update) return()

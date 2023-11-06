@@ -2,7 +2,7 @@
 % Please edit documentation in R/autogen-utils.R
 \name{image_to_array}
 \alias{image_to_array}
-\title{Converts a PIL Image instance to a NumPy array.}
+\title{Converts a PIL Image instance to a matrix.}
 \usage{
 image_to_array(img, data_format = NULL, dtype = NULL)
 }
@@ -10,26 +10,29 @@ image_to_array(img, data_format = NULL, dtype = NULL)
 \item{img}{Input PIL Image instance.}
 
 \item{data_format}{Image data format, can be either \code{"channels_first"} or
-\code{"channels_last"}. Defaults to \code{None}, in which case the global
-setting \code{keras.backend.image_data_format()} is used (unless you
+\code{"channels_last"}. Defaults to \code{NULL}, in which case the global
+setting \code{config_image_data_format()} is used (unless you
 changed it, it defaults to \code{"channels_last"}).}
 
-\item{dtype}{Dtype to use. \code{None} means the global setting
-\code{keras.backend.floatx()} is used (unless you changed it, it
+\item{dtype}{Dtype to use. \code{NULL} means the global setting
+\code{config_floatx()} is used (unless you changed it, it
 defaults to \code{"float32"}).}
 }
 \value{
-\if{html}{\out{<div class="sourceCode">}}\preformatted{A 3D NumPy array.
+\if{html}{\out{<div class="sourceCode">}}\preformatted{A 3D array.
 }\if{html}{\out{</div>}}
 }
 \description{
-Converts a PIL Image instance to a NumPy array.
+Converts a PIL Image instance to a matrix.
 }
 \section{Usage}{
-\if{html}{\out{<div class="sourceCode python">}}\preformatted{from PIL import Image
-img_data = np.random.random(size=(100, 100, 3))
-img = keras.utils.array_to_img(img_data)
-array = keras.utils.image.img_to_array(img)
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{img_data <- random_uniform(c(100, 100, 3))
+img <- image_from_array(img_data)
+array <- image_to_array(img)
+str(array)
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode">}}\preformatted{##  num [1:100, 1:100, 1:3] 179 41 69 100 108 173 14 64 200 163 ...
 }\if{html}{\out{</div>}}
 }
 

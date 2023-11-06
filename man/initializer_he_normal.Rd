@@ -7,14 +7,14 @@
 initializer_he_normal(seed = NULL)
 }
 \arguments{
-\item{seed}{A Python integer or instance of
-\code{keras.backend.SeedGenerator}.
+\item{seed}{An integer or instance of
+\code{random_seed_generator()}.
 Used to make the behavior of the initializer
 deterministic. Note that an initializer seeded with an integer
-or \code{None} (unseeded) will produce the same random values
+or \code{NULL} (unseeded) will produce the same random values
 across multiple calls. To get different random values
 across multiple calls, use as seed an instance
-of \code{keras.backend.SeedGenerator}.}
+of \code{random_seed_generator()}.}
 }
 \description{
 It draws samples from a truncated normal distribution centered on 0 with
@@ -22,14 +22,14 @@ It draws samples from a truncated normal distribution centered on 0 with
 the weight tensor.
 }
 \section{Examples}{
-\if{html}{\out{<div class="sourceCode python">}}\preformatted{# Standalone usage:
-initializer = HeNormal()
-values = initializer(shape=(2, 2))
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{# Standalone usage:
+initializer <- initializer_he_normal()
+values <- initializer(shape = c(2, 2))
 }\if{html}{\out{</div>}}
 
-\if{html}{\out{<div class="sourceCode python">}}\preformatted{# Usage in a Keras layer:
-initializer = HeNormal()
-layer = Dense(3, kernel_initializer=initializer)
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{# Usage in a Keras layer:
+initializer <- initializer_he_normal()
+layer <- layer_dense(units = 3, kernel_initializer = initializer)
 }\if{html}{\out{</div>}}
 }
 

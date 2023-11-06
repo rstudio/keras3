@@ -3,11 +3,33 @@ Loads an image into PIL format.
 @description
 
 # Usage
-```python
-image = keras.utils.load_img(image_path)
-input_arr = keras.utils.img_to_array(image)
-input_arr = np.array([input_arr])  # Convert single image to a batch.
-predictions = model.predict(input_arr)
+
+```r
+image_path <- get_file(origin = "https://www.r-project.org/logo/Rlogo.png")
+(image <- image_load(image_path))
+```
+
+```
+## <PIL.Image.Image image mode=RGB size=724x561 at 0x2DC49E6B0>
+```
+
+```r
+input_arr <- image_to_array(image)
+str(input_arr)
+```
+
+```
+##  num [1:561, 1:724, 1:3] 0 0 0 0 0 0 0 0 0 0 ...
+```
+
+```r
+input_arr %<>% array_reshape(dim = c(1, dim(input_arr))) # Convert single image to a batch.
+```
+
+
+
+```r
+model |> predict(input_arr)
 ```
 
 @returns
@@ -16,7 +38,7 @@ predictions = model.predict(input_arr)
 @param path Path to image file.
 @param color_mode One of `"grayscale"`, `"rgb"`, `"rgba"`. Default: `"rgb"`.
     The desired image format.
-@param target_size Either `None` (default to original size) or tuple of ints
+@param target_size Either `NULL` (default to original size) or tuple of ints
     `(img_height, img_width)`.
 @param interpolation Interpolation method used to resample the image if the
     target size is different from that of the loaded image. Supported

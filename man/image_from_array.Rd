@@ -2,36 +2,39 @@
 % Please edit documentation in R/autogen-utils.R
 \name{image_from_array}
 \alias{image_from_array}
-\title{Converts a 3D NumPy array to a PIL Image instance.}
+\title{Converts a 3D array to a PIL Image instance.}
 \usage{
 image_from_array(x, data_format = NULL, scale = TRUE, dtype = NULL)
 }
 \arguments{
-\item{x}{Input data, in any form that can be converted to a NumPy array.}
+\item{x}{Input data, in any form that can be converted to an array.}
 
 \item{data_format}{Image data format, can be either \code{"channels_first"} or
-\code{"channels_last"}. Defaults to \code{None}, in which case the global
-setting \code{keras.backend.image_data_format()} is used (unless you
+\code{"channels_last"}. Defaults to \code{NULL}, in which case the global
+setting \code{config_image_data_format()} is used (unless you
 changed it, it defaults to \code{"channels_last"}).}
 
 \item{scale}{Whether to rescale the image such that minimum and maximum values
-are 0 and 255 respectively. Defaults to \code{True}.}
+are 0 and 255 respectively. Defaults to \code{TRUE}.}
 
-\item{dtype}{Dtype to use. \code{None} means the global setting
-\code{keras.backend.floatx()} is used (unless you changed it, it
-defaults to \code{"float32"}). Defaults to \code{None}.}
+\item{dtype}{Dtype to use. \code{NULL} means the global setting
+\code{config_floatx()} is used (unless you changed it, it
+defaults to \code{"float32"}). Defaults to \code{NULL}.}
 }
 \value{
 \if{html}{\out{<div class="sourceCode">}}\preformatted{A PIL Image instance.
 }\if{html}{\out{</div>}}
 }
 \description{
-Converts a 3D NumPy array to a PIL Image instance.
+Converts a 3D array to a PIL Image instance.
 }
 \section{Usage}{
-\if{html}{\out{<div class="sourceCode python">}}\preformatted{from PIL import Image
-img = np.random.random(size=(100, 100, 3))
-pil_img = keras.utils.array_to_img(img)
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{img <- array(runif(30000), dim = c(100, 100, 3))
+pil_img <- image_from_array(img)
+pil_img
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode">}}\preformatted{## <PIL.Image.Image image mode=RGB size=100x100 at 0x2DC49E710>
 }\if{html}{\out{</div>}}
 }
 

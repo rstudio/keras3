@@ -7,7 +7,7 @@
 initializer_constant(value = 0)
 }
 \arguments{
-\item{value}{A Python scalar.}
+\item{value}{A numeric scalar.}
 }
 \description{
 Only scalar values are allowed.
@@ -15,14 +15,14 @@ The constant value provided must be convertible to the dtype requested
 when calling the initializer.
 }
 \section{Examples}{
-\if{html}{\out{<div class="sourceCode python">}}\preformatted{# Standalone usage:
-initializer = Constant(10.)
-values = initializer(shape=(2, 2))
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{# Standalone usage:
+initializer <- initializer_constant(10)
+values <- initializer(shape = c(2, 2))
 }\if{html}{\out{</div>}}
 
-\if{html}{\out{<div class="sourceCode python">}}\preformatted{# Usage in a Keras layer:
-initializer = Constant(10.)
-layer = Dense(3, kernel_initializer=initializer)
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{# Usage in a Keras layer:
+initializer <- initializer_constant(10)
+layer <- layer_dense(units = 3, kernel_initializer = initializer)
 }\if{html}{\out{</div>}}
 }
 

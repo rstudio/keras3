@@ -7,14 +7,14 @@
 initializer_he_uniform(seed = NULL)
 }
 \arguments{
-\item{seed}{A Python integer or instance of
-\code{keras.backend.SeedGenerator}.
+\item{seed}{A integer or instance of
+\code{random_seed_generator()}.
 Used to make the behavior of the initializer
 deterministic. Note that an initializer seeded with an integer
-or \code{None} (unseeded) will produce the same random values
+or \code{NULL} (unseeded) will produce the same random values
 across multiple calls. To get different random values
 across multiple calls, use as seed an instance
-of \code{keras.backend.SeedGenerator}.}
+of \code{random_seed_generator()}.}
 }
 \description{
 Draws samples from a uniform distribution within \verb{[-limit, limit]}, where
@@ -22,14 +22,14 @@ Draws samples from a uniform distribution within \verb{[-limit, limit]}, where
 weight tensor).
 }
 \section{Examples}{
-\if{html}{\out{<div class="sourceCode python">}}\preformatted{# Standalone usage:
-initializer = HeUniform()
-values = initializer(shape=(2, 2))
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{# Standalone usage:
+initializer <- initializer_he_uniform()
+values <- initializer(shape = c(2, 2))
 }\if{html}{\out{</div>}}
 
-\if{html}{\out{<div class="sourceCode python">}}\preformatted{# Usage in a Keras layer:
-initializer = HeUniform()
-layer = Dense(3, kernel_initializer=initializer)
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{# Usage in a Keras layer:
+initializer <- initializer_he_uniform()
+layer <- layer_dense(units = 3, kernel_initializer = initializer)
 }\if{html}{\out{</div>}}
 }
 

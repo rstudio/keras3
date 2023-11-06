@@ -1,25 +1,30 @@
-Converts a PIL Image instance to a NumPy array.
+Converts a PIL Image instance to a matrix.
 
 @description
 
 # Usage
-```python
-from PIL import Image
-img_data = np.random.random(size=(100, 100, 3))
-img = keras.utils.array_to_img(img_data)
-array = keras.utils.image.img_to_array(img)
+
+```r
+img_data <- random_uniform(c(100, 100, 3))
+img <- image_from_array(img_data)
+array <- image_to_array(img)
+str(array)
+```
+
+```
+##  num [1:100, 1:100, 1:3] 179 41 69 100 108 173 14 64 200 163 ...
 ```
 
 @returns
-    A 3D NumPy array.
+    A 3D array.
 
 @param img Input PIL Image instance.
 @param data_format Image data format, can be either `"channels_first"` or
-    `"channels_last"`. Defaults to `None`, in which case the global
-    setting `keras.backend.image_data_format()` is used (unless you
+    `"channels_last"`. Defaults to `NULL`, in which case the global
+    setting `config_image_data_format()` is used (unless you
     changed it, it defaults to `"channels_last"`).
-@param dtype Dtype to use. `None` means the global setting
-    `keras.backend.floatx()` is used (unless you changed it, it
+@param dtype Dtype to use. `NULL` means the global setting
+    `config_floatx()` is used (unless you changed it, it
     defaults to `"float32"`).
 
 @export
