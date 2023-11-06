@@ -5,7 +5,7 @@ Converts a 3D array to a PIL Image instance.
 # Usage
 ```{r}
 img <- array(runif(30000), dim = c(100, 100, 3))
-pil_img <- image_to_array(img)
+pil_img <- image_from_array(img)
 pil_img
 ```
 
