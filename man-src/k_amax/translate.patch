@@ -1,0 +1,52 @@
+diff --git a/man-src/k_amax/2-translated.Rmd b/man-src/k_amax/2-translated.Rmd
+--- a/man-src/k_amax/2-translated.Rmd
++++ b/man-src/k_amax/2-translated.Rmd
+@@ -1,2 +1,2 @@
+-Returns the maximum of an array or maximum value along an axis.
++Returns the maximum of a vector or maximum value along an axis.
+ 
+@@ -5,18 +5,7 @@ Returns the maximum of an array or maximum value along an axis.
+ # Examples
+-```python
+-x = keras.ops.convert_to_tensor([[1, 3, 5], [2, 3, 6]])
+-keras.ops.amax(x)
+-# array(6, dtype=int32)
+-```
+-
+-```python
+-x = keras.ops.convert_to_tensor([[1, 6, 8], [1, 5, 2]])
+-keras.ops.amax(x, axis=0)
+-# array([1, 6, 8], dtype=int32)
+-```
+-
+-```python
+-x = keras.ops.convert_to_tensor([[1, 6, 8], [1, 5, 2]])
+-keras.ops.amax(x, axis=1, keepdims=True)
+-# array([[8], [5]], dtype=int32)
++```{r}
++(x <- k_convert_to_tensor(rbind(c(1, 3, 5), c(1, 5, 2))))
++k_amax(x)
++k_amax(x, axis = 1)
++k_amax(x, axis = 1, keepdims = TRUE)
+ ```
+@@ -24,5 +13,5 @@ keras.ops.amax(x, axis=1, keepdims=True)
+ @returns
+-An array with the maximum value. If `axis=None`, the result is a scalar
+-value representing the maximum element in the entire array. If `axis` is
+-given, the result is an array with the maximum values along
++A tensor with the maximum value. If `axis = NULL`, the result is a scalar
++value representing the maximum element in the entire tensor. If `axis` is
++given, the result is a tensor with the maximum values along
+ the specified axis.
+@@ -31,7 +20,7 @@ the specified axis.
+ @param axis Axis along which to compute the maximum.
+-    By default (`axis=None`), find the maximum value in all the
+-    dimensions of the input array.
+-@param keepdims If `True`, axes which are reduced are left in the result as
++    By default (`axis=NULL`), find the maximum value in all the
++    dimensions of the input tensor.
++@param keepdims If `TRUE`, axes which are reduced are left in the result as
+     dimensions that are broadcast to the size of the original
+-    input tensor. Defaults to `False`.
++    input tensor. Defaults to `FALSE`.
+ 

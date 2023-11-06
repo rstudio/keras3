@@ -86,13 +86,14 @@ make_translation_patchfiles <- function() {
     # keep(~str_detect(.x, "backup|_elu|_relu")) %>%
     set_names(dirname) |>
     walk(\(dir) {
-      withr::with_dir(dir, {
-        doesnt_need_update <- file_exists("translate.patch") &&
-            file_info("2-translated.Rmd")$change_time < file_info("translate.patch")$birth_time
-        }
-      )
-      # if(!needs_update) return()
-      message("updating patchfile: ", dir)
+      # withr::with_dir(dir, {
+      #   # timestamps don't work because the translation file gets rewritten.
+      #   doesnt_need_update <- file_exists("translate.patch") &&
+      #       file_info("2-translated.Rmd")$change_time < file_info("translate.patch")$birth_time
+      #   }
+      # )
+      # if(doesnt_need_update) return()
+      # message("updating patchfile: ", dir)
       diff <- suppressWarnings( # returns 1 on diff
         system2t("git", c("diff -U1 --no-index",
                           # "--diff-algorithm=minimal",
@@ -504,6 +505,9 @@ render_roxygen_rmds <- function(filepath = fs::dir_ls("man-src/", type = "direct
       knitr::opts_chunk$set(error = FALSE)
       knitr::knit("2-translated.Rmd", "3-rendered.md",
                   quiet = TRUE, envir = new.env())
+      readLines("3-rendered.md") |>
+        str_replace_all(" at 0x[0-9A-F]{9}>$", ">") |>
+        writeLines("3-rendered.md")
     })
   # discard(\(x) is.null(x) || x == 0) |>
   # invisible()

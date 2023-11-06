@@ -11,7 +11,7 @@ pil_img
 ```
 
 ```
-## <PIL.Image.Image image mode=RGB size=100x100 at 0x2DC49E710>
+## <PIL.Image.Image image mode=RGB size=100x100 at 0x2FC5967A0>
 ```
 
 @returns

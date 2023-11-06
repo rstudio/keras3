@@ -541,14 +541,6 @@ function (x)
 keras$ops$abs(x)
 
 
-"man-src/k_absolute/1-formatted.md" # view the upstream doc
-"man-src/k_absolute/2-translated.Rmd" # |>file.edit() # or cmd+click to edit man page
-#' @eval readLines("man-src/k_absolute/3-rendered.md")
-k_absolute <-
-function (x)
-keras$ops$absolute(x)
-
-
 "man-src/k_add/1-formatted.md" # view the upstream doc
 "man-src/k_add/2-translated.Rmd" # |>file.edit() # or cmd+click to edit man page
 #' @eval readLines("man-src/k_add/3-rendered.md")

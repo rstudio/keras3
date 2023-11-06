@@ -1,0 +1,22 @@
+diff --git a/man-src/k_absolute/2-translated.Rmd b/man-src/k_absolute/2-translated.Rmd
+--- a/man-src/k_absolute/2-translated.Rmd
++++ b/man-src/k_absolute/2-translated.Rmd
+@@ -3,9 +3,8 @@ Compute the absolute value element-wise.
+ @description
+-`keras.ops.abs` is a shorthand for this function.
++`keras::k_abs` is a shorthand for this function.
+ 
+ # Examples
+-```python
+-x = keras.ops.convert_to_tensor([-1.2, 1.2])
+-keras.ops.absolute(x)
+-# array([1.2, 1.2], dtype=float32)
++```{r}
++x <- k_constant(c(-1.2, 1.2))
++k_abs(x)
+ ```
+@@ -13,3 +12,3 @@ keras.ops.absolute(x)
+ @returns
+-An array containing the absolute value of each element in `x`.
++A tensor containing the absolute value of each element in `x`.
+ 
