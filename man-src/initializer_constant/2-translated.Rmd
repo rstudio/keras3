@@ -6,19 +6,19 @@ The constant value provided must be convertible to the dtype requested
 when calling the initializer.
 
 # Examples
-```python
+```{r}
 # Standalone usage:
-initializer = Constant(10.)
-values = initializer(shape=(2, 2))
+initializer <- initializer_constant(10)
+values <- initializer(shape = c(2, 2))
 ```
 
-```python
+```{r}
 # Usage in a Keras layer:
-initializer = Constant(10.)
-layer = Dense(3, kernel_initializer=initializer)
+initializer <- initializer_constant(10)
+layer <- layer_dense(units = 3, kernel_initializer = initializer)
 ```
 
-@param value A Python scalar.
+@param value A numeric scalar.
 
 @export
 @family initializer

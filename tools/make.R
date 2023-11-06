@@ -87,7 +87,7 @@ make_translation_patchfiles <- function() {
             file_info("2-translated.Rmd")$change_time >= file_info("translate.patch")$birth_time
         }
       )
-      if(!needs_update) return()
+      # if(!needs_update) return()
       message("updating patchfile: ", dir)
       diff <- suppressWarnings( # returns 1 on diff
         system2t("git", c("diff -U1 --no-index",
@@ -131,8 +131,8 @@ get_translations <- function() {
   fs::dir_ls("man-src/", type = "directory") |>
     set_names(basename) %>%
     keep(\(dir) read_file(path(dir, "2-translated.Rmd")) |> str_detect("```python")) |>
-    (\(x) mesage("remaining: ", length(x))) () |>
-    head(10) |>
+    (\(x) { message("remaining: ", length(x)); x})() |>
+    head(20) |>
     purrr::walk(\(dir) {
       # browser()
       withr::local_dir(dir)
