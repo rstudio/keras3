@@ -3,7 +3,12 @@
 if(!"source:tools/utils.R" %in% search()) envir::attach_source("tools/utils.R")
 if(!"source:tools/translate-tools.R" %in% search()) envir::attach_source("tools/translate-tools.R")
 
+# TODO: @param ... Passed on to the Python callable - scrub this from formatted.md
 
+# TODO: revisit history - also mentions in docs (e.g., in callback_model_checkpoint())
+
+# TODO: BackupAndRestore is broken, doesn't respect current epoch. file/fix upstream.
+#       ~/github/keras-team/keras/keras/callbacks/backup_and_restore_callback.py
 
 # TODO: swap arg order in k_vectorized_map
 
@@ -397,7 +402,7 @@ df <- df |>
                         str_c(endpoint_sans_name %>% str_replace_all(fixed("."), "-"), ".R"))
          )
 
-stop("lllll")
+# stop("lllll")
 # ?? TODO: where is ~/github/rstudio/keras/R/autogen-preprocessing.R coming from?
 
 df |>
@@ -418,6 +423,7 @@ df |>
         # glue(r"--(#' @eval readLines("{fs::path(man_roxygen_dir, "2-translated.Rmd")}") )--"),
 
         # glue(r"--(#        file.edit("{fs::path(man_roxygen_dir, "2-translated.Rmd")}") )--"),
+        glue(r"--("{fs::path(man_roxygen_dir, "1-formatted.md")}" # view the upstream doc)--"),
         glue(r"--("{fs::path(man_roxygen_dir, "2-translated.Rmd")}" # |>file.edit() # or cmd+click to edit man page)--"),
 
         # glue(r"--(file.edit("{fs::path(man_roxygen_dir, "2-translated.Rmd")}"))--") %>% cli::style_hyperlink(., paste0("ide:run:", .)),

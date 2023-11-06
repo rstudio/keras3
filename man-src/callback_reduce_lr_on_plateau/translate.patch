@@ -1,5 +1,5 @@
 diff --git a/man-src/callback_reduce_lr_on_plateau/2-translated.Rmd b/man-src/callback_reduce_lr_on_plateau/2-translated.Rmd
-index 63296454..77f7a3db 100644
+index 63296454..52377d5b 100644
 --- a/man-src/callback_reduce_lr_on_plateau/2-translated.Rmd
 +++ b/man-src/callback_reduce_lr_on_plateau/2-translated.Rmd
 @@ -9,6 +9,6 @@ of epochs, the learning rate is reduced.
@@ -8,7 +8,7 @@ index 63296454..77f7a3db 100644
 -reduce_lr = ReduceLROnPlateau(monitor='val_loss', factor=0.2,
 -                              patience=5, min_lr=0.001)
 -model.fit(x_train, y_train, callbacks=[reduce_lr])
-+```{r}
++```{r, eval = FALSE}
 +reduce_lr <- callback_reduce_lr_on_plateau(monitor = 'val_loss', factor = 0.2,
 +                                           patience = 5, min_lr = 0.001)
 +model %>% fit(x_train, y_train, callbacks = list(reduce_lr))

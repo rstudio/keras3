@@ -55,9 +55,6 @@ of epochs, the learning rate is reduced.
                                            patience = 5, min_lr = 0.001)
 model \%>\% fit(x_train, y_train, callbacks = list(reduce_lr))
 }\if{html}{\out{</div>}}
-
-\if{html}{\out{<div class="sourceCode">}}\preformatted{## Error in eval(expr, envir, enclos): object 'model' not found
-}\if{html}{\out{</div>}}
 }
 
 \seealso{

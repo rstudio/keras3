@@ -14,10 +14,6 @@ reduce_lr <- callback_reduce_lr_on_plateau(monitor = 'val_loss', factor = 0.2,
 model %>% fit(x_train, y_train, callbacks = list(reduce_lr))
 ```
 
-```
-## Error in eval(expr, envir, enclos): object 'model' not found
-```
-
 @param monitor String. Quantity to be monitored.
 @param factor Numeric. Factor by which the learning rate will be reduced.
     `new_lr = lr * factor`.

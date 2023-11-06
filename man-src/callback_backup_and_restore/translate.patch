@@ -1,12 +1,12 @@
 diff --git a/man-src/callback_backup_and_restore/2-translated.Rmd b/man-src/callback_backup_and_restore/2-translated.Rmd
-index 963dd9c0..75958bc1 100644
+index 963dd9c0..02d72925 100644
 --- a/man-src/callback_backup_and_restore/2-translated.Rmd
 +++ b/man-src/callback_backup_and_restore/2-translated.Rmd
 @@ -3,4 +3,4 @@ Callback to back up and restore the training state.
  @description
 -`BackupAndRestore` callback is intended to recover training from an
 -interruption that has happened in the middle of a `Model.fit` execution, by
-+`backup_and_restore` callback is intended to recover training from an
++`callback_backup_and_restore` callback is intended to recover training from an
 +interruption that has happened in the middle of a `fit` execution, by
  backing up the training states in a temporary checkpoint file, at the end of
 @@ -11,5 +11,5 @@ backup/restoring purpose.
@@ -23,7 +23,7 @@ index 963dd9c0..75958bc1 100644
 -arguments passed to compile or fit, the checkpoint saved for fault tolerance
 +arguments passed to `compile` or `fit`, the checkpoint saved for fault tolerance
  can become invalid.
-@@ -23,23 +23,36 @@ can become invalid.
+@@ -23,23 +23,40 @@ can become invalid.
  # Examples
 -```python
 -class InterruptingCallback(keras.callbacks.Callback):
@@ -54,7 +54,8 @@ index 963dd9c0..75958bc1 100644
 +  }
 +)
 +
-+callback <- callback_backup_and_restore(backup_dir = "/tmp/backup")
++backup_dir <- tempfile()
++callback <- callback_backup_and_restore(backup_dir = backup_dir)
 +model <- keras_model_sequential() %>%
 +  layer_dense(10)
 +model %>% compile(optimizer = optimizer_sgd(), loss = 'mse')
@@ -66,6 +67,9 @@ index 963dd9c0..75958bc1 100644
 +                callbacks = list(callback, callback_interrupting()),
 +                verbose = 0)
 +}, python.builtin.RuntimeError = function(e) message("Interrupted!"))
++
++model$history$epoch
++model$history %>% keras:::to_keras_training_history() %>% as.data.frame() %>% print()
 +
 +history <- model %>% fit(x = k_ones(c(5, 20)),
 +                         y = k_zeros(5),
@@ -79,7 +83,7 @@ index 963dd9c0..75958bc1 100644
 -6
 +nrow(as.data.frame(history))
  ```
-@@ -49,14 +62,14 @@ len(history.history['loss'])
+@@ -49,14 +66,14 @@ len(history.history['loss'])
      cannot be reused elsewhere to store other files, e.g. by the
 -    `BackupAndRestore` callback of another training run,
 -    or by another callback (e.g. `ModelCheckpoint`)

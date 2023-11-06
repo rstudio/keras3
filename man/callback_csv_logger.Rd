@@ -22,9 +22,6 @@ including 1D iterables such as atomic vectors.
 \if{html}{\out{<div class="sourceCode r">}}\preformatted{csv_logger <- callback_csv_logger('training.log')
 model \%>\% fit(X_train, Y_train, callbacks = list(csv_logger))
 }\if{html}{\out{</div>}}
-
-\if{html}{\out{<div class="sourceCode">}}\preformatted{## Error in eval(expr, envir, enclos): object 'model' not found
-}\if{html}{\out{</div>}}
 }
 
 \seealso{

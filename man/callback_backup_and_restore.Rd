@@ -31,7 +31,7 @@ training is finished. Use \code{FALSE} if you'd like to keep the checkpoint
 for future usage.}
 }
 \description{
-\code{backup_and_restore} callback is intended to recover training from an
+\code{callback_backup_and_restore} callback is intended to recover training from an
 interruption that has happened in the middle of a \code{fit} execution, by
 backing up the training states in a temporary checkpoint file, at the end of
 each epoch. Each backup overwrites the previously written checkpoint file,
@@ -60,7 +60,8 @@ can become invalid.
   \}
 )
 
-callback <- callback_backup_and_restore(backup_dir = "/tmp/backup")
+backup_dir <- tempfile()
+callback <- callback_backup_and_restore(backup_dir = backup_dir)
 model <- keras_model_sequential() \%>\%
   layer_dense(10)
 model \%>\% compile(optimizer = optimizer_sgd(), loss = 'mse')
@@ -75,6 +76,28 @@ tryCatch(\{
 }\if{html}{\out{</div>}}
 
 \if{html}{\out{<div class="sourceCode">}}\preformatted{## Interrupted!
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{model$history$epoch
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode">}}\preformatted{## [1] 0 1 2 3
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{model$history \%>\% keras:::to_keras_training_history() \%>\% as.data.frame() \%>\% print()
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode">}}\preformatted{##    epoch     value metric     data
+## 1      1 0.4167342   loss training
+## 2      2 0.2713403   loss training
+## 3      3 0.1766727   loss training
+## 4      4 0.1150336   loss training
+## 5      5        NA   loss training
+## 6      6        NA   loss training
+## 7      7        NA   loss training
+## 8      8        NA   loss training
+## 9      9        NA   loss training
+## 10    10        NA   loss training
 }\if{html}{\out{</div>}}
 
 \if{html}{\out{<div class="sourceCode r">}}\preformatted{history <- model \%>\% fit(x = k_ones(c(5, 20)),
