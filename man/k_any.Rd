@@ -26,19 +26,19 @@ The tensor containing the logical OR reduction over the \code{axis}.
 Test whether any array element along a given axis evaluates to \code{TRUE}.
 }
 \section{Examples}{
-\if{html}{\out{<div class="sourceCode r">}}\preformatted{x <- k_constant(c(TRUE, FALSE))
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{x <- k_array(c(TRUE, FALSE))
 k_any(x)
 }\if{html}{\out{</div>}}
 
 \if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor(True, shape=(), dtype=bool)
 }\if{html}{\out{</div>}}
 
-\if{html}{\out{<div class="sourceCode r">}}\preformatted{(x <- k_convert_to_tensor(array(c(TRUE, FALSE, TRUE, TRUE, TRUE, TRUE), dim = c(3, 2))))
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{(x <- k_reshape(c(TRUE, FALSE, TRUE, TRUE, TRUE, TRUE), c(3, 2)))
 }\if{html}{\out{</div>}}
 
 \if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor(
-## [[ True  True]
-##  [False  True]
+## [[ True False]
+##  [ True  True]
 ##  [ True  True]], shape=(3, 2), dtype=bool)
 }\if{html}{\out{</div>}}
 

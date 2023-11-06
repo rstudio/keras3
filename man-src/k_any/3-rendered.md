@@ -5,7 +5,7 @@ Test whether any array element along a given axis evaluates to `TRUE`.
 # Examples
 
 ```r
-x <- k_constant(c(TRUE, FALSE))
+x <- k_array(c(TRUE, FALSE))
 k_any(x)
 ```
 
@@ -15,13 +15,13 @@ k_any(x)
 
 
 ```r
-(x <- k_convert_to_tensor(array(c(TRUE, FALSE, TRUE, TRUE, TRUE, TRUE), dim = c(3, 2))))
+(x <- k_reshape(c(TRUE, FALSE, TRUE, TRUE, TRUE, TRUE), c(3, 2)))
 ```
 
 ```
 ## tf.Tensor(
-## [[ True  True]
-##  [False  True]
+## [[ True False]
+##  [ True  True]
 ##  [ True  True]], shape=(3, 2), dtype=bool)
 ```
 

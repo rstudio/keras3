@@ -11,26 +11,40 @@ of `x1` and `x2` `= +/-inf`.
 
 # Examples
 Consider four points in different quadrants:
-```python
-x = keras.ops.convert_to_tensor([-1, +1, +1, -1])
-y = keras.ops.convert_to_tensor([-1, -1, +1, +1])
-keras.ops.arctan2(y, x) * 180 / numpy.pi
-# array([-135., -45., 45., 135.], dtype=float32)
+
+```r
+x <- k_array(c(-1, 1, 1, -1))
+y <- k_array(c(-1, -1, 1, 1))
+k_arctan2(y, x) * 180 / pi
+```
+
+```
+## tf.Tensor([-135.  -45.   45.  135.], shape=(4), dtype=float64)
 ```
 
 Note the order of the parameters. `arctan2` is defined also when x2=0 and
 at several other points, obtaining values in the range `[-pi, pi]`:
-```python
-keras.ops.arctan2(
-    keras.ops.array([1., -1.]),
-    keras.ops.array([0., 0.]),
+
+```r
+k_arctan2(
+    k_array(c(1, -1)),
+    k_array(c(0, 0))
 )
-# array([ 1.5707964, -1.5707964], dtype=float32)
-keras.ops.arctan2(
-    keras.ops.array([0., 0., numpy.inf]),
-    keras.ops.array([+0., -0., numpy.inf]),
+```
+
+```
+## tf.Tensor([ 1.57079633 -1.57079633], shape=(2), dtype=float64)
+```
+
+```r
+k_arctan2(
+    k_array(c(0, 0, Inf)),
+    k_array(c(+0, -0, Inf))
 )
-# array([0., 3.1415925, 0.7853982], dtype=float32)
+```
+
+```
+## tf.Tensor([0.         3.14159265 0.78539816], shape=(3), dtype=float64)
 ```
 
 @returns

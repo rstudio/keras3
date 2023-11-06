@@ -3,10 +3,14 @@ Inverse sine, element-wise.
 @description
 
 # Examples
-```python
-x = keras.ops.convert_to_tensor([1, -1, 0])
-keras.ops.arcsin(x)
-# array([ 1.5707964, -1.5707964,  0.], dtype=float32)
+
+```r
+x <- k_convert_to_tensor(c(1, -1, 0))
+k_arcsin(x)
+```
+
+```
+## tf.Tensor([ 1.5707963 -1.5707963  0.       ], shape=(3), dtype=float32)
 ```
 
 @returns

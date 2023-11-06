@@ -5,7 +5,7 @@ Compute the absolute value element-wise.
 
 # Examples
 ```{r}
-x <- k_constant(c(-1.2, 1.2))
+x <- k_array(c(-1.2, 1.2))
 k_abs(x)
 ```
 

@@ -3,10 +3,14 @@ Inverse hyperbolic sine, element-wise.
 @description
 
 # Examples
-```python
-x = keras.ops.convert_to_tensor([1, -1, 0])
-keras.ops.arcsinh(x)
-# array([0.88137364, -0.88137364, 0.0], dtype=float32)
+
+```r
+x <- k_convert_to_tensor(c(1, -1, 0))
+k_arcsinh(x)
+```
+
+```
+## tf.Tensor([ 0.8813736 -0.8813736  0.       ], shape=(3), dtype=float32)
 ```
 
 @returns

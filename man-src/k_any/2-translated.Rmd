@@ -4,18 +4,22 @@ Test whether any array element along a given axis evaluates to `TRUE`.
 
 # Examples
 ```{r}
-x <- k_constant(c(TRUE, FALSE))
+x <- k_array(c(TRUE, FALSE))
 k_any(x)
 ```
 
 ```{r}
-(x <- k_convert_to_tensor(array(c(TRUE, FALSE, TRUE, TRUE, TRUE, TRUE), dim = c(3, 2))))
+(x <- k_reshape(c(FALSE, FALSE, FALSE, 
+                  TRUE, FALSE, FALSE), c(2, 3)))
 k_any(x, axis = 1)
+k_any(x, axis = 2)
+k_any(x, axis = -1)
 ```
 
 `keepdims = TRUE` outputs a tensor with dimensions reduced to one.
 ```{r}
 k_any(x, keepdims = TRUE)
+k_any(x, 1, keepdims = TRUE)
 ```
 
 @returns

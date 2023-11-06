@@ -17,9 +17,11 @@ Tensor of the inverse tangent of each element in \code{x}, in the interval
 Trigonometric inverse tangent, element-wise.
 }
 \section{Examples}{
-\if{html}{\out{<div class="sourceCode python">}}\preformatted{x = keras.ops.convert_to_tensor([0, 1])
-keras.ops.arctan(x)
-# array([0., 0.7853982], dtype=float32)
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{x <- k_convert_to_tensor(c(0, 1))
+k_arctan(x)
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor([0.        0.7853982], shape=(2), dtype=float32)
 }\if{html}{\out{</div>}}
 }
 

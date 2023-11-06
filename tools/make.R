@@ -6,6 +6,8 @@ if(!"source:tools/translate-tools.R" %in% search()) envir::attach_source("tools/
 # TODO: in reticulate, change subclassed dict autoconversion back to off:
 #      so that keras$utils$get_custom_objects()$clear() works.
 #
+# TODO: k_array() should take a 'shape' argument
+#
 # TODO: remove k_amax() and friends, they're redundant w/ k_max(), which already
 #       takes an axis arg. Only there for numpy api compatability, which
 #       doesn't matter to us.
@@ -507,8 +509,10 @@ render_roxygen_rmds <- function(filepath = fs::dir_ls("man-src/", type = "direct
       knitr::knit("2-translated.Rmd", "3-rendered.md",
                   quiet = TRUE, envir = new.env())
       x <- readLines("3-rendered.md")
-      x <- x |>
-        str_replace_all(" at 0x[0-9A-F]{9}>$", ">")
+      # TODO: these filters should be confined to chunk outputs only,
+      # probably as a knitr hook
+      x <- x |> str_replace_all(" at 0x[0-9A-F]{9}>$", ">")
+      x <- x[!str_detect(x, r"{## .*rstudio:run:reticulate::py_last_error\(\).*}")]
       x |> writeLines("3-rendered.md")
     })
   # discard(\(x) is.null(x) || x == 0) |>

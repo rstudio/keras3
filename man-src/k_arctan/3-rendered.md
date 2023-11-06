@@ -3,10 +3,14 @@ Trigonometric inverse tangent, element-wise.
 @description
 
 # Examples
-```python
-x = keras.ops.convert_to_tensor([0, 1])
-keras.ops.arctan(x)
-# array([0., 0.7853982], dtype=float32)
+
+```r
+x <- k_convert_to_tensor(c(0, 1))
+k_arctan(x)
+```
+
+```
+## tf.Tensor([0.        0.7853982], shape=(2), dtype=float32)
 ```
 
 @returns

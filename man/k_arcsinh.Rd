@@ -16,9 +16,11 @@ Output tensor of same shape as \code{x}.
 Inverse hyperbolic sine, element-wise.
 }
 \section{Examples}{
-\if{html}{\out{<div class="sourceCode python">}}\preformatted{x = keras.ops.convert_to_tensor([1, -1, 0])
-keras.ops.arcsinh(x)
-# array([0.88137364, -0.88137364, 0.0], dtype=float32)
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{x <- k_convert_to_tensor(c(1, -1, 0))
+k_arcsinh(x)
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor([ 0.8813736 -0.8813736  0.       ], shape=(3), dtype=float32)
 }\if{html}{\out{</div>}}
 }
 

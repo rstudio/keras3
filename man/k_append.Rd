@@ -18,44 +18,39 @@ If \code{NULL}, both tensors are flattened before use.}
 A tensor with the values of \code{x2} appended to \code{x1}.
 }
 \description{
-# Examples
-
-```r
-x1 <- k_convert_to_tensor(c(1, 2, 3))
+Append tensor \code{x2} to the end of tensor \code{x1}.
+}
+\section{Examples}{
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{x1 <- k_convert_to_tensor(c(1, 2, 3))
 x2 <- k_convert_to_tensor(rbind(c(4, 5, 6), c(7, 8, 9)))
 k_append(x1, x2)
-```
+}\if{html}{\out{</div>}}
 
-```
-## tf.Tensor([1. 2. 3. 4. 5. 6. 7. 8. 9.], shape=(9), dtype=float64)
-```
+\if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor([1. 2. 3. 4. 5. 6. 7. 8. 9.], shape=(9), dtype=float64)
+}\if{html}{\out{</div>}}
 
-When `axis` is specified, `x1` and `x2` must have compatible shapes.
+When \code{axis} is specified, \code{x1} and \code{x2} must have compatible shapes.
 
-```r
-x1 <- k_convert_to_tensor(rbind(c(1, 2, 3), c(4, 5, 6)))
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{x1 <- k_convert_to_tensor(rbind(c(1, 2, 3), c(4, 5, 6)))
 x2 <- k_convert_to_tensor(rbind(c(7, 8, 9)))
 k_append(x1, x2, axis = 1)
-```
+}\if{html}{\out{</div>}}
 
-```
-## tf.Tensor(
+\if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor(
 ## [[1. 2. 3.]
 ##  [4. 5. 6.]
 ##  [7. 8. 9.]], shape=(3, 3), dtype=float64)
-```
+}\if{html}{\out{</div>}}
 
-```r
-x3 <- k_convert_to_tensor(c(7, 8, 9))
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{x3 <- k_convert_to_tensor(c(7, 8, 9))
 try(k_append(x1, x3, axis = 1))
-```
+}\if{html}{\out{</div>}}
 
-```
-## Error in py_call_impl(callable, call_args$unnamed, call_args$named) : 
-##   tensorflow.python.framework.errors_impl.InvalidArgumentError: {{function_node __wrapped__ConcatV2_N_2_device_/job:localhost/replica:0/task:0/device:CPU:0}} ConcatOp : Ranks of all input tensors should match: shape[0] = [2,3] vs. shape[1] = [3] [Op:ConcatV2] name: concat
-## [90mRun ]8;;rstudio:run:reticulate::py_last_error()`reticulate::py_last_error()`]8;; for details.[39m
-```
+\if{html}{\out{<div class="sourceCode">}}\preformatted{## Error in py_call_impl(callable, call_args$unnamed, call_args$named) : 
+##   tensorflow.python.framework.errors_impl.InvalidArgumentError: \{\{function_node __wrapped__ConcatV2_N_2_device_/job:localhost/replica:0/task:0/device:CPU:0\}\} ConcatOp : Ranks of all input tensors should match: shape[0] = [2,3] vs. shape[1] = [3] [Op:ConcatV2] name: concat
+}\if{html}{\out{</div>}}
 }
+
 \seealso{
 \itemize{
 \item \url{https://www.tensorflow.org/api_docs/python/tf/keras/ops/append}
