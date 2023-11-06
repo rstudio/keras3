@@ -12,7 +12,7 @@ diff --git a/man-src/k_absolute/2-translated.Rmd b/man-src/k_absolute/2-translat
 -keras.ops.absolute(x)
 -# array([1.2, 1.2], dtype=float32)
 +```{r}
-+x <- k_constant(c(-1.2, 1.2))
++x <- k_array(c(-1.2, 1.2))
 +k_abs(x)
  ```
 @@ -13,3 +12,3 @@ keras.ops.absolute(x)

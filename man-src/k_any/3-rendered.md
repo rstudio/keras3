@@ -15,14 +15,14 @@ k_any(x)
 
 
 ```r
-(x <- k_reshape(c(TRUE, FALSE, TRUE, TRUE, TRUE, TRUE), c(3, 2)))
+(x <- k_reshape(c(FALSE, FALSE, FALSE, 
+                  TRUE, FALSE, FALSE), c(2, 3)))
 ```
 
 ```
 ## tf.Tensor(
-## [[ True False]
-##  [ True  True]
-##  [ True  True]], shape=(3, 2), dtype=bool)
+## [[False False False]
+##  [ True False False]], shape=(2, 3), dtype=bool)
 ```
 
 ```r
@@ -30,7 +30,23 @@ k_any(x, axis = 1)
 ```
 
 ```
-## tf.Tensor([ True  True], shape=(2), dtype=bool)
+## tf.Tensor([ True False False], shape=(3), dtype=bool)
+```
+
+```r
+k_any(x, axis = 2)
+```
+
+```
+## tf.Tensor([False  True], shape=(2), dtype=bool)
+```
+
+```r
+k_any(x, axis = -1)
+```
+
+```
+## tf.Tensor([False  True], shape=(2), dtype=bool)
 ```
 
 `keepdims = TRUE` outputs a tensor with dimensions reduced to one.
@@ -41,6 +57,14 @@ k_any(x, keepdims = TRUE)
 
 ```
 ## tf.Tensor([[ True]], shape=(1, 1), dtype=bool)
+```
+
+```r
+k_any(x, 1, keepdims = TRUE)
+```
+
+```
+## tf.Tensor([[ True False False]], shape=(1, 3), dtype=bool)
 ```
 
 @returns

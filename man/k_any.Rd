@@ -33,19 +33,31 @@ k_any(x)
 \if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor(True, shape=(), dtype=bool)
 }\if{html}{\out{</div>}}
 
-\if{html}{\out{<div class="sourceCode r">}}\preformatted{(x <- k_reshape(c(TRUE, FALSE, TRUE, TRUE, TRUE, TRUE), c(3, 2)))
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{(x <- k_reshape(c(FALSE, FALSE, FALSE, 
+                  TRUE, FALSE, FALSE), c(2, 3)))
 }\if{html}{\out{</div>}}
 
 \if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor(
-## [[ True False]
-##  [ True  True]
-##  [ True  True]], shape=(3, 2), dtype=bool)
+## [[False False False]
+##  [ True False False]], shape=(2, 3), dtype=bool)
 }\if{html}{\out{</div>}}
 
 \if{html}{\out{<div class="sourceCode r">}}\preformatted{k_any(x, axis = 1)
 }\if{html}{\out{</div>}}
 
-\if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor([ True  True], shape=(2), dtype=bool)
+\if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor([ True False False], shape=(3), dtype=bool)
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{k_any(x, axis = 2)
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor([False  True], shape=(2), dtype=bool)
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{k_any(x, axis = -1)
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor([False  True], shape=(2), dtype=bool)
 }\if{html}{\out{</div>}}
 
 \code{keepdims = TRUE} outputs a tensor with dimensions reduced to one.
@@ -54,6 +66,12 @@ k_any(x)
 }\if{html}{\out{</div>}}
 
 \if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor([[ True]], shape=(1, 1), dtype=bool)
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{k_any(x, 1, keepdims = TRUE)
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor([[ True False False]], shape=(1, 3), dtype=bool)
 }\if{html}{\out{</div>}}
 }
 

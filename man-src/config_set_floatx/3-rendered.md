@@ -32,7 +32,6 @@ config_floatx
 ##     do.call(keras$config$floatx, args)
 ## }
 ## <environment: namespace:keras>
-## file: ../../R/autogen-config.R
 ```
 
 
