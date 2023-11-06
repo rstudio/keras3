@@ -11,33 +11,44 @@ clutter from old models and layers, especially when memory is limited.
 
 Example 1: calling `clear_session()` when creating models in a loop
 
-```python
-for _ in range(100):
+```{r}
+for (i in 1:100) {
   # Without `clear_session()`, each iteration of this loop will
   # slightly increase the size of the global state managed by Keras
-  model = keras.Sequential([
-      keras.layers.Dense(10) for _ in range(10)])
+  model <- keras_model_sequential()
+  for (j in 1:10) {
+    model <- model |> layer_dense(units = 10)
+  }
+}
 
-for _ in range(100):
+for (i in 1:100) {
   # With `clear_session()` called at the beginning,
   # Keras starts with a blank state at each iteration
   # and memory consumption is constant over time.
-  keras.backend.clear_session()
-  model = keras.Sequential([
-      keras.layers.Dense(10) for _ in range(10)])
+  k_clear_session()
+  model <- keras_model_sequential()
+  for (j in 1:10) {
+    model <- model |> layer_dense(units = 10)
+  }
+}
 ```
 
 Example 2: resetting the layer name generation counter
 
-```python
-layers = [keras.layers.Dense(10) for _ in range(10)]
-new_layer = keras.layers.Dense(10)
-print(new_layer.name)
-# dense_10
-keras.backend.clear_session()
-new_layer = keras.layers.Dense(10)
-print(new_layer.name)
-# dense
+```{r, include = FALSE}
+clear_session()
+```
+
+
+```{r}
+layers <- lapply(1:10, \(i) layer_dense(units = 10))
+
+new_layer <- layer_dense(units = 10)
+print(new_layer$name)
+
+clear_session()
+new_layer <- layer_dense(units = 10)
+print(new_layer$name)
 ```
 
 @export

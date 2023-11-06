@@ -73,7 +73,8 @@ get_translated_roxygen <- function(roxygen) {
 
   translated_roxygen <- completion$choices[[1L]]$message$content
   attr(translated_roxygen, "completion") <- completion
-  attr(translated_roxygen, "cost") <- get_cost(completion)
+  attr(translated_roxygen, "cost") <- cost <- get_cost(completion)
+  message("cost: ", cost)
   translated_roxygen
 }
 

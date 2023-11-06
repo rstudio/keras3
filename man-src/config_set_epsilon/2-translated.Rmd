@@ -1,20 +1,18 @@
 Set the value of the fuzz factor used in numeric expressions.
 
 # Examples
-```python
-keras.config.epsilon()
-# 1e-07
+```{r}
+config_epsilon()
 ```
 
-```python
-keras.config.set_epsilon(1e-5)
-keras.config.epsilon()
-# 1e-05
+```{r}
+config_set_epsilon(1e-5)
+config_epsilon()
 ```
 
-```python
+```{r}
 # Set it back to the default value.
-keras.config.set_epsilon(1e-7)
+config_set_epsilon(1e-7)
 ```
 
 @param value float. New value of epsilon.

@@ -4,9 +4,8 @@ Return the default image data format convention.
 A string, either `'channels_first'` or `'channels_last'`.
 
 # Examples
-```python
-keras.config.image_data_format()
-# 'channels_last'
+```
+keras::config_image_data_format()
 ```
 
 @export

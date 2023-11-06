@@ -3,6 +3,15 @@
 if(!"source:tools/utils.R" %in% search()) envir::attach_source("tools/utils.R")
 if(!"source:tools/translate-tools.R" %in% search()) envir::attach_source("tools/translate-tools.R")
 
+# TODO: in reticulate, change subclassed dict autoconversion back to off:
+#      so that keras$utils$get_custom_objects()$clear() works.
+#
+# TODO: get_custom_objects() needs thinking
+
+# TODO: r_name autogen: move "set" to tail, so have config_floatx(), config_floatx_set()
+
+# TODO: maybe move ops to `op_*` instead of `k_*` ?
+
 # TODO: @param ... Passed on to the Python callable - scrub this from formatted.md
 
 # TODO: revisit history - also mentions in docs (e.g., in callback_model_checkpoint())
@@ -122,12 +131,14 @@ get_translations <- function() {
   fs::dir_ls("man-src/", type = "directory") |>
     set_names(basename) %>%
     keep(\(dir) read_file(path(dir, "2-translated.Rmd")) |> str_detect("```python")) |>
-    head(4) |>
+    head(10) |>
     purrr::walk(\(dir) {
       # browser()
       withr::local_dir(dir)
       og <- "2-translated.Rmd" |> read_file()
+      message("Translating: ", basename(dir))
       new <- og |> get_translated_roxygen()
+      # message("cost: ")
       new |> write_lines("2-translated.Rmd")
       write_rds(new, "completion.rds")
     })

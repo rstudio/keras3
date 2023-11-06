@@ -50,7 +50,7 @@ backend_normalize_shape <- function(shape) {
 
 k_is_tensor <- function(x) keras$utils$is_keras_tensor(x)
 
-k_clear_session <- function() keras$backend$clear_session()
+# k_clear_session <- function() keras$backend$clear_session()
 
 k_variable <- function(...) keras$Variable(...)
 
