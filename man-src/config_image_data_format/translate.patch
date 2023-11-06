@@ -1,7 +1,7 @@
 diff --git a/man-src/config_image_data_format/2-translated.Rmd b/man-src/config_image_data_format/2-translated.Rmd
 --- a/man-src/config_image_data_format/2-translated.Rmd
 +++ b/man-src/config_image_data_format/2-translated.Rmd
-@@ -8,5 +8,4 @@ A string, either `'channels_first'` or `'channels_last'`.
+@@ -5,5 +5,4 @@ Return the default image data format convention.
  # Examples
 -```python
 -keras.config.image_data_format()
