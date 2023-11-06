@@ -1,5 +1,4 @@
 diff --git a/man-src/activation_relu/2-translated.Rmd b/man-src/activation_relu/2-translated.Rmd
-index 7530ecc2..40cade8e 100644
 --- a/man-src/activation_relu/2-translated.Rmd
 +++ b/man-src/activation_relu/2-translated.Rmd
 @@ -11,12 +11,8 @@ and to use a non-zero multiple of the input for values below the threshold.

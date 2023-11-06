@@ -1,5 +1,4 @@
 diff --git a/man-src/get_file/2-translated.Rmd b/man-src/get_file/2-translated.Rmd
-index fbe86514..4cc051a1 100644
 --- a/man-src/get_file/2-translated.Rmd
 +++ b/man-src/get_file/2-translated.Rmd
 @@ -14,6 +14,6 @@ programs `shasum` and `sha256sum` can compute the hash.

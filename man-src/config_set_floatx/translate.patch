@@ -1,8 +1,7 @@
 diff --git a/man-src/config_set_floatx/2-translated.Rmd b/man-src/config_set_floatx/2-translated.Rmd
-index edbff4cf..a43703fb 100644
 --- a/man-src/config_set_floatx/2-translated.Rmd
 +++ b/man-src/config_set_floatx/2-translated.Rmd
-@@ -7,19 +7,17 @@ Instead, mixed precision, which leverages
+@@ -9,19 +9,17 @@ Instead, mixed precision, which leverages
  a mix of `float16` and `float32`. It can be configured by calling
 -`keras.mixed_precision.set_dtype_policy('mixed_float16')`.
 +`keras::keras$mixed_precision$set_dtype_policy('mixed_float16')`.

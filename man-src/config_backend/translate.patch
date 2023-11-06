@@ -1,8 +1,7 @@
 diff --git a/man-src/config_backend/2-translated.Rmd b/man-src/config_backend/2-translated.Rmd
-index e0d53d9b..95f673e5 100644
 --- a/man-src/config_backend/2-translated.Rmd
 +++ b/man-src/config_backend/2-translated.Rmd
-@@ -7,4 +7,4 @@ String, the name of the backend Keras is currently using. One of
+@@ -9,4 +9,4 @@ String, the name of the backend Keras is currently using. One of
  # Examples
 -```python
 -keras.config.backend()

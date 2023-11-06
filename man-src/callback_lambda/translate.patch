@@ -1,5 +1,4 @@
 diff --git a/man-src/callback_lambda/2-translated.Rmd b/man-src/callback_lambda/2-translated.Rmd
-index 56eb7493..7ae56f08 100644
 --- a/man-src/callback_lambda/2-translated.Rmd
 +++ b/man-src/callback_lambda/2-translated.Rmd
 @@ -17,29 +17,48 @@ Note that the callbacks expects positional arguments, as:

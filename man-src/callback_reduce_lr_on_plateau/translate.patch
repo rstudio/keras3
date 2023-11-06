@@ -1,5 +1,4 @@
 diff --git a/man-src/callback_reduce_lr_on_plateau/2-translated.Rmd b/man-src/callback_reduce_lr_on_plateau/2-translated.Rmd
-index 63296454..52377d5b 100644
 --- a/man-src/callback_reduce_lr_on_plateau/2-translated.Rmd
 +++ b/man-src/callback_reduce_lr_on_plateau/2-translated.Rmd
 @@ -9,6 +9,6 @@ of epochs, the learning rate is reduced.

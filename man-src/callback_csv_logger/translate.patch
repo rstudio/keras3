@@ -1,5 +1,4 @@
 diff --git a/man-src/callback_csv_logger/2-translated.Rmd b/man-src/callback_csv_logger/2-translated.Rmd
-index 40dcc47e..06aa086d 100644
 --- a/man-src/callback_csv_logger/2-translated.Rmd
 +++ b/man-src/callback_csv_logger/2-translated.Rmd
 @@ -4,8 +4,8 @@ Callback that streams epoch results to a CSV file.

@@ -1,8 +1,7 @@
 diff --git a/man-src/config_set_epsilon/2-translated.Rmd b/man-src/config_set_epsilon/2-translated.Rmd
-index 27a95bc7..69251314 100644
 --- a/man-src/config_set_epsilon/2-translated.Rmd
 +++ b/man-src/config_set_epsilon/2-translated.Rmd
-@@ -3,16 +3,14 @@ Set the value of the fuzz factor used in numeric expressions.
+@@ -5,16 +5,14 @@ Set the value of the fuzz factor used in numeric expressions.
  # Examples
 -```python
 -keras.config.epsilon()

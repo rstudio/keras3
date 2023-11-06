@@ -1,5 +1,4 @@
 diff --git a/man-src/config_floatx/2-translated.Rmd b/man-src/config_floatx/2-translated.Rmd
-index d48e22e2..67ceca5b 100644
 --- a/man-src/config_floatx/2-translated.Rmd
 +++ b/man-src/config_floatx/2-translated.Rmd
 @@ -9,5 +9,4 @@ String, the current default float type.

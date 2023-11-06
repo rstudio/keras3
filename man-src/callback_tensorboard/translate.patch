@@ -1,5 +1,4 @@
 diff --git a/man-src/callback_tensorboard/2-translated.Rmd b/man-src/callback_tensorboard/2-translated.Rmd
-index 41dc7964..6d41c711 100644
 --- a/man-src/callback_tensorboard/2-translated.Rmd
 +++ b/man-src/callback_tensorboard/2-translated.Rmd
 @@ -13,9 +13,9 @@ This callback logs events for TensorBoard, including:

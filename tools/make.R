@@ -84,10 +84,7 @@ make_translation_patchfiles <- function() {
     walk(\(dir) {
       withr::with_dir(dir, {
         needs_update <- file_exists("translate.patch") &&
-            file_info("2-translated.Rmd")$change_time <= file_info("translate.patch")$birth_time
-        # {
-        #   # message("skipping generating patch: ", dir)
-        #   return()
+            file_info("2-translated.Rmd")$change_time >= file_info("translate.patch")$birth_time
         }
       )
       # if(!needs_update) return()
@@ -98,11 +95,14 @@ make_translation_patchfiles <- function() {
                           glue("--output={dir}/translate.patch"),
                       dir / "1-formatted.md", dir / "2-translated.Rmd")))
       patch_filepath <- dir/"translate.patch"
-      # diff <-
-        read_file(patch_filepath) |>
-        str_replace_all(fixed("/1-formatted.md"), "/2-translated.Rmd") |>
+      patch <- read_lines(patch_filepath)
+      if(!length(patch)) return()
+      # if(grepl("hard_sigmoi", dir)) browser()
+      patch <- patch[-2] # drop index <hash>..<hash> line
+      patch[1:3] <- str_replace(patch[1:3], fixed("/1-formatted.md"), "/2-translated.Rmd")
+      write_lines(patch, patch_filepath)
+
         # str_replace(fixed("/1-formatted.md"), "/2-translated.Rmd") |>
-        write_file(patch_filepath)
 
                       # | sed 's|1-formatted.md|2-translated.Rmd|' > translate.patch")
       # system2("git", c("diff --output=translate.patch --diff-algorithm=minimal -U1 --no-index",

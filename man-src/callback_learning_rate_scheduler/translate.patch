@@ -1,5 +1,4 @@
 diff --git a/man-src/callback_learning_rate_scheduler/2-translated.Rmd b/man-src/callback_learning_rate_scheduler/2-translated.Rmd
-index 84b452ea..413f1def 100644
 --- a/man-src/callback_learning_rate_scheduler/2-translated.Rmd
 +++ b/man-src/callback_learning_rate_scheduler/2-translated.Rmd
 @@ -9,23 +9,23 @@ the optimizer.

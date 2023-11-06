@@ -1,5 +1,4 @@
 diff --git a/man-src/activation_elu/2-translated.Rmd b/man-src/activation_elu/2-translated.Rmd
-index 5f24ad70..1bf8111a 100644
 --- a/man-src/activation_elu/2-translated.Rmd
 +++ b/man-src/activation_elu/2-translated.Rmd
 @@ -3,6 +3,6 @@ Exponential Linear Unit.

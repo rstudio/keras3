@@ -1,15 +1,14 @@
 diff --git a/man-src/config_set_image_data_format/2-translated.Rmd b/man-src/config_set_image_data_format/2-translated.Rmd
-index 0012c424..a23aa769 100644
 --- a/man-src/config_set_image_data_format/2-translated.Rmd
 +++ b/man-src/config_set_image_data_format/2-translated.Rmd
-@@ -3,4 +3,4 @@ Set the value of the image data format convention.
+@@ -5,4 +5,4 @@ Set the value of the image data format convention.
  # Examples
 -```python
 -keras.config.image_data_format()
 +```{r}
 +config_image_data_format()
  # 'channels_last'
-@@ -8,11 +8,10 @@ keras.config.image_data_format()
+@@ -10,11 +10,10 @@ keras.config.image_data_format()
  
 -```python
 -keras.config.set_image_data_format('channels_first')
@@ -26,7 +25,7 @@ index 0012c424..a23aa769 100644
 -keras.config.set_image_data_format('channels_last')
 +keras::config_set_image_data_format('channels_last')
  ```
-@@ -23,2 +22,2 @@ keras.config.set_image_data_format('channels_last')
+@@ -25,2 +24,2 @@ keras.config.set_image_data_format('channels_last')
  @seealso
 -+ <https://www.tensorflow.org/api_docs/python/tf/keras/config/set_image_data_format>
 ++ <https://www.tensorflow.org/api_docs/python/tf/keras/config/set_image_data_format

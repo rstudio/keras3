@@ -1,5 +1,4 @@
 diff --git a/man-src/callback_backup_and_restore/2-translated.Rmd b/man-src/callback_backup_and_restore/2-translated.Rmd
-index 963dd9c0..caa763a9 100644
 --- a/man-src/callback_backup_and_restore/2-translated.Rmd
 +++ b/man-src/callback_backup_and_restore/2-translated.Rmd
 @@ -3,4 +3,4 @@ Callback to back up and restore the training state.

@@ -1,8 +1,7 @@
 diff --git a/man-src/config_epsilon/2-translated.Rmd b/man-src/config_epsilon/2-translated.Rmd
-index 1072e7b1..f40ff1a8 100644
 --- a/man-src/config_epsilon/2-translated.Rmd
 +++ b/man-src/config_epsilon/2-translated.Rmd
-@@ -6,5 +6,4 @@ A float.
+@@ -8,5 +8,4 @@ A float.
  # Examples
 -```python
 -keras.config.epsilon()

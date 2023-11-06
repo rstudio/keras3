@@ -1,5 +1,4 @@
 diff --git a/man-src/clear_session/2-translated.Rmd b/man-src/clear_session/2-translated.Rmd
-index 609625a0..ce921f17 100644
 --- a/man-src/clear_session/2-translated.Rmd
 +++ b/man-src/clear_session/2-translated.Rmd
 @@ -13,10 +13,13 @@ Example 1: calling `clear_session()` when creating models in a loop
