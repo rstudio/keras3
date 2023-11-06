@@ -138,7 +138,7 @@ get_translations <- function() {
     set_names(basename) %>%
     keep(\(dir) read_file(path(dir, "2-translated.Rmd")) |> str_detect("```python")) |>
     (\(x) { message("remaining: ", length(x)); x})() |>
-    head(20) |>
+    head(25) |>
     purrr::walk(\(dir) {
       # browser()
       withr::local_dir(dir)

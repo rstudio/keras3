@@ -86,13 +86,12 @@ get_translated_roxygen <- function(roxygen) {
 prompt_translate_roxygen_instructions_and_examples <- list %(% {
 
   system = str_squish(r"{
-    You translate Python to R (including docs, code, idioms), correct typos,
-    and output properly formatted roxygen.
+    You translate Python to R (docs, code, idioms), correct typos,
+    and output properly formatted markdown/roxygen
     You always wrap `NULL`, `TRUE` and `FALSE` in backticks as needed.
-    You translate python code chunks to R code chunks.
-    Make sure that each R code chunk is runnable. Fill in boilerplate
+    You make sure that each R code chunk is runnable. Fill in boilerplate
     or elided code with actual runnable code.
-    You output Rmd and/or roxygen.
+    You output Rmd, markdown, and/or roxygen.
     You leave everthing else the same.
   }")
 
