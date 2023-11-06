@@ -85,12 +85,13 @@ use_backend <- function(backend = c("tensorflow", "cntk", "theano", "plaidml")) 
 
 #' Main Keras module
 #'
-#'
 #' The `keras` module object is the equivalent of
-#' `keras <- tensorflow::tf$keras` and provided mainly as a convenience.
+#' `retirculate::import("keras")` and provided mainly as a convenience.
 #'
 #' @return the keras Python module
 #' @export
+#' @usage NULL
+#' @format An object of class `python.builtin.module`
 keras <- NULL
 
 .onLoad <- function(libname, pkgname) {
