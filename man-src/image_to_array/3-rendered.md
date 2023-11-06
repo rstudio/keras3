@@ -5,14 +5,21 @@ Converts a PIL Image instance to a matrix.
 # Usage
 
 ```r
-img_data <- random_uniform(c(100, 100, 3))
-img <- image_from_array(img_data)
+image_path <- get_file(origin = "https://www.r-project.org/logo/Rlogo.png")
+(img <- image_load(image_path))
+```
+
+```
+## <PIL.Image.Image image mode=RGB size=724x561>
+```
+
+```r
 array <- image_to_array(img)
 str(array)
 ```
 
 ```
-##  num [1:100, 1:100, 1:3] 229 196 62 227 170 42 192 10 163 65 ...
+##  num [1:561, 1:724, 1:3] 0 0 0 0 0 0 0 0 0 0 ...
 ```
 
 @returns

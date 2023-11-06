@@ -5,7 +5,7 @@ The inverse of `cos` so that, if `y = cos(x)`, then `x = arccos(y)`.
 
 # Examples
 ```{r}
-x <- k_onvert_to_tensor(c(1, -1))
+x <- k_convert_to_tensor(c(1, -1))
 k_arccos(x)
 ```
 

@@ -22,7 +22,6 @@ Zeros are treated as \code{False} and non-zeros are treated as \code{True}.
 }
 
 Other ops: 
-\code{\link{k_absolute}()},
 \code{\link{k_abs}()},
 \code{\link{k_add}()},
 \code{\link{k_all}()},

@@ -22,7 +22,6 @@ Replace NaN with zero and infinity with large finite numbers.
 }
 
 Other ops: 
-\code{\link{k_absolute}()},
 \code{\link{k_abs}()},
 \code{\link{k_add}()},
 \code{\link{k_all}()},

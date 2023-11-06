@@ -22,7 +22,6 @@ Calculate \code{exp(x) - 1} for all elements in the tensor.
 }
 
 Other ops: 
-\code{\link{k_absolute}()},
 \code{\link{k_abs}()},
 \code{\link{k_add}()},
 \code{\link{k_all}()},

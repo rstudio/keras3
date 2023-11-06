@@ -2,7 +2,7 @@
 % Please edit documentation in R/autogen-ops.R
 \name{k_amin}
 \alias{k_amin}
-\title{Returns the minimum of an array or minimum value along an axis.}
+\title{Returns the minimum of a vector or minimum value along an axis.}
 \usage{
 k_amin(x, axis = NULL, keepdims = FALSE)
 }
@@ -10,36 +10,47 @@ k_amin(x, axis = NULL, keepdims = FALSE)
 \item{x}{Input tensor.}
 
 \item{axis}{Axis along which to compute the minimum.
-By default (\code{axis=None}), find the minimum value in all the
-dimensions of the input array.}
+By default (\code{axis=NULL}), find the minimum value in all the
+dimensions of the input tensor.}
 
-\item{keepdims}{If \code{True}, axes which are reduced are left in the result as
+\item{keepdims}{If \code{TRUE}, axes which are reduced are left in the result as
 dimensions that are broadcast to the size of the original
-input tensor. Defaults to \code{False}.}
+input tensor. Defaults to \code{FALSE}.}
 }
 \value{
-An array with the minimum value. If \code{axis=None}, the result is a scalar
-value representing the minimum element in the entire array. If \code{axis} is
-given, the result is an array with the minimum values along
+A tensor with the minimum value. If \code{axis = NULL}, the result is a scalar
+value representing the minimum element in the entire tensor. If \code{axis} is
+given, the result is a tensor with the minimum values along
 the specified axis.
 }
 \description{
-Returns the minimum of an array or minimum value along an axis.
+Returns the minimum of a vector or minimum value along an axis.
 }
 \section{Examples}{
-\if{html}{\out{<div class="sourceCode python">}}\preformatted{x = keras.ops.convert_to_tensor([1, 3, 5, 2, 3, 6])
-keras.ops.amin(x)
-# array(1, dtype=int32)
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{(x <- k_convert_to_tensor(rbind(c(1, 3, 5), c(1, 5, 2))))
 }\if{html}{\out{</div>}}
 
-\if{html}{\out{<div class="sourceCode python">}}\preformatted{x = keras.ops.convert_to_tensor([[1, 6, 8], [7, 5, 3]])
-keras.ops.amin(x, axis=0)
-# array([1,5,3], dtype=int32)
+\if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor(
+## [[1. 3. 5.]
+##  [1. 5. 2.]], shape=(2, 3), dtype=float64)
 }\if{html}{\out{</div>}}
 
-\if{html}{\out{<div class="sourceCode python">}}\preformatted{x = keras.ops.convert_to_tensor([[1, 6, 8], [7, 5, 3]])
-keras.ops.amin(x, axis=1, keepdims=True)
-# array([[1],[3]], dtype=int32)
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{k_amin(x)
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor(1.0, shape=(), dtype=float64)
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{k_amin(x, axis = 1)
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor([1. 3. 2.], shape=(3), dtype=float64)
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{k_amin(x, axis = 1, keepdims = TRUE)
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor([[1. 3. 2.]], shape=(1, 3), dtype=float64)
 }\if{html}{\out{</div>}}
 }
 
@@ -49,7 +60,6 @@ keras.ops.amin(x, axis=1, keepdims=True)
 }
 
 Other ops: 
-\code{\link{k_absolute}()},
 \code{\link{k_abs}()},
 \code{\link{k_add}()},
 \code{\link{k_all}()},

@@ -5,7 +5,7 @@ diff --git a/man-src/image_to_array/2-translated.Rmd b/man-src/image_to_array/2-
 -Converts a PIL Image instance to a NumPy array.
 +Converts a PIL Image instance to a matrix.
  
-@@ -5,7 +5,7 @@ Converts a PIL Image instance to a NumPy array.
+@@ -5,7 +5,8 @@ Converts a PIL Image instance to a NumPy array.
  # Usage
 -```python
 -from PIL import Image
@@ -13,17 +13,18 @@ diff --git a/man-src/image_to_array/2-translated.Rmd b/man-src/image_to_array/2-
 -img = keras.utils.array_to_img(img_data)
 -array = keras.utils.image.img_to_array(img)
 +```{r}
-+img_data <- random_uniform(c(100, 100, 3))
-+img <- image_from_array(img_data)
++image_path <- get_file(origin = "https://www.r-project.org/logo/Rlogo.png")
++(img <- image_load(image_path))
++
 +array <- image_to_array(img)
 +str(array)
  ```
-@@ -13,3 +13,3 @@ array = keras.utils.image.img_to_array(img)
+@@ -13,3 +14,3 @@ array = keras.utils.image.img_to_array(img)
  @returns
 -    A 3D NumPy array.
 +    A 3D array.
  
-@@ -17,7 +17,7 @@ array = keras.utils.image.img_to_array(img)
+@@ -17,7 +18,7 @@ array = keras.utils.image.img_to_array(img)
  @param data_format Image data format, can be either `"channels_first"` or
 -    `"channels_last"`. Defaults to `None`, in which case the global
 -    setting `keras.backend.image_data_format()` is used (unless you

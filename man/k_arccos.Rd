@@ -17,9 +17,11 @@ x-coordinate in radians \verb{[0, pi]}.
 The inverse of \code{cos} so that, if \code{y = cos(x)}, then \code{x = arccos(y)}.
 }
 \section{Examples}{
-\if{html}{\out{<div class="sourceCode python">}}\preformatted{x = keras.ops.convert_to_tensor([1, -1])
-keras.ops.arccos(x)
-# array([0.0, 3.1415927], dtype=float32)
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{x <- k_convert_to_tensor(c(1, -1))
+k_arccos(x)
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor([0.        3.1415925], shape=(2), dtype=float32)
 }\if{html}{\out{</div>}}
 }
 
@@ -29,7 +31,6 @@ keras.ops.arccos(x)
 }
 
 Other ops: 
-\code{\link{k_absolute}()},
 \code{\link{k_abs}()},
 \code{\link{k_add}()},
 \code{\link{k_all}()},

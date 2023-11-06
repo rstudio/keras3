@@ -27,7 +27,6 @@ Select values from \code{x} at the 1-D \code{indices} along the given axis.
 }
 
 Other ops: 
-\code{\link{k_absolute}()},
 \code{\link{k_abs}()},
 \code{\link{k_add}()},
 \code{\link{k_all}()},

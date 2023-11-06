@@ -45,7 +45,7 @@ Loads an image into PIL format.
 (image <- image_load(image_path))
 }\if{html}{\out{</div>}}
 
-\if{html}{\out{<div class="sourceCode">}}\preformatted{## <PIL.Image.Image image mode=RGB size=724x561 at 0x2DC49E6B0>
+\if{html}{\out{<div class="sourceCode">}}\preformatted{## <PIL.Image.Image image mode=RGB size=724x561>
 }\if{html}{\out{</div>}}
 
 \if{html}{\out{<div class="sourceCode r">}}\preformatted{input_arr <- image_to_array(image)

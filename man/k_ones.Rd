@@ -24,7 +24,6 @@ Return a new tensor of given shape and type, filled with ones.
 }
 
 Other ops: 
-\code{\link{k_absolute}()},
 \code{\link{k_abs}()},
 \code{\link{k_add}()},
 \code{\link{k_all}()},

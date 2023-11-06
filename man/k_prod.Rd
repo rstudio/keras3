@@ -31,7 +31,6 @@ Return the product of tensor elements over a given axis.
 }
 
 Other ops: 
-\code{\link{k_absolute}()},
 \code{\link{k_abs}()},
 \code{\link{k_add}()},
 \code{\link{k_all}()},

@@ -60,7 +60,6 @@ This ops supports 1D and 2D depthwise convolution.
 }
 
 Other ops: 
-\code{\link{k_absolute}()},
 \code{\link{k_abs}()},
 \code{\link{k_add}()},
 \code{\link{k_all}()},

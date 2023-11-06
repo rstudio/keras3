@@ -10,14 +10,14 @@ initializer_ones()
 Also available via the shortcut function \code{ones}.
 }
 \section{Examples}{
-\if{html}{\out{<div class="sourceCode python">}}\preformatted{# Standalone usage:
-initializer = Ones()
-values = initializer(shape=(2, 2))
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{# Standalone usage:
+initializer <- initializer_ones()
+values <- initializer(shape = c(2, 2))
 }\if{html}{\out{</div>}}
 
-\if{html}{\out{<div class="sourceCode python">}}\preformatted{# Usage in a Keras layer:
-initializer = Ones()
-layer = Dense(3, kernel_initializer=initializer)
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{# Usage in a Keras layer:
+initializer <- initializer_ones()
+layer <- layer_dense(units = 3, kernel_initializer = initializer)
 }\if{html}{\out{</div>}}
 }
 

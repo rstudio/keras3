@@ -11,30 +11,51 @@ Return evenly spaced values within a given interval.
     interval `[start, stop)`, with spacing between values given by step.
 
 # Examples
-```python
-keras.ops.arange(3)
-# array([0, 1, 2], dtype=int32)
+
+```r
+keras::k_arange(3L)
 ```
 
-```python
-keras.ops.arange(3.0)
-# array([0., 1., 2.], dtype=float32)
+```
+## tf.Tensor([0 1 2], shape=(3), dtype=int32)
 ```
 
-```python
-keras.ops.arange(3, 7)
-# array([3, 4, 5, 6], dtype=int32)
+```r
+keras::k_arange(3) # float
 ```
 
-```python
-keras.ops.arange(3, 7, 2)
-# array([3, 5], dtype=int32)
+```
+## tf.Tensor([0 1 2], shape=(3), dtype=int32)
+```
+
+```r
+keras::k_arange(3, dtype = 'int32') #int
+```
+
+```
+## tf.Tensor([0 1 2], shape=(3), dtype=int32)
+```
+
+```r
+keras::k_arange(3L, 7L)
+```
+
+```
+## tf.Tensor([3 4 5 6], shape=(4), dtype=int32)
+```
+
+```r
+keras::k_arange(3L, 7L, 2L)
+```
+
+```
+## tf.Tensor([3 5], shape=(2), dtype=int32)
 ```
 
 @returns
 Tensor of evenly spaced values.
 For floating point arguments, the length of the result is
-`ceil((stop - start)/step)`. Because of floating point overflow, this
+`ceiling((stop - start)/step)`. Because of floating point overflow, this
 rule may result in the last element of out being greater than stop.
 
 @param start Integer or real, representing the start of the interval. The
@@ -42,7 +63,7 @@ rule may result in the last element of out being greater than stop.
 @param stop Integer or real, representing the end of the interval. The
     interval does not include this value, except in some cases where
     `step` is not an integer and floating point round-off affects the
-    lenght of `out`. Defaults to `None`.
+    length of `out`. Defaults to `NULL`.
 @param step Integer or real, represent the spacing between values. For any
     output `out`, this is the distance between two adjacent values,
     `out[i+1] - out[i]`. The default step size is 1. If `step` is

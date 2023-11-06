@@ -9,7 +9,7 @@ initializer_orthogonal(gain = 1, seed = NULL)
 \arguments{
 \item{gain}{Multiplicative factor to apply to the orthogonal matrix.}
 
-\item{seed}{A Python integer. Used to make the behavior of the initializer
+\item{seed}{An integer. Used to make the behavior of the initializer
 deterministic.}
 }
 \description{
@@ -20,19 +20,19 @@ has fewer rows than columns then the output will have orthogonal rows.
 Otherwise, the output will have orthogonal columns.
 
 If the shape of the tensor to initialize is more than two-dimensional,
-a matrix of shape \verb{(shape[0] * ... * shape[n - 2], shape[n - 1])}
+a matrix of shape \verb{(shape[1] * ... * shape[n - 1], shape[n])}
 is initialized, where \code{n} is the length of the shape vector.
 The matrix is subsequently reshaped to give a tensor of the desired shape.
 }
 \section{Examples}{
-\if{html}{\out{<div class="sourceCode python">}}\preformatted{# Standalone usage:
-initializer = keras.initializers.Orthogonal()
-values = initializer(shape=(2, 2))
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{# Standalone usage:
+initializer <- initializer_orthogonal()
+values <- initializer(shape = c(2, 2))
 }\if{html}{\out{</div>}}
 
-\if{html}{\out{<div class="sourceCode python">}}\preformatted{# Usage in a Keras layer:
-initializer = keras.initializers.Orthogonal()
-layer = keras.layers.Dense(3, kernel_initializer=initializer)
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{# Usage in a Keras layer:
+initializer <- initializer_orthogonal()
+layer <- layer_dense(units = 3, kernel_initializer = initializer)
 }\if{html}{\out{</div>}}
 }
 

@@ -63,7 +63,6 @@ x.diagonal(0, 0, 1)
 }
 
 Other ops: 
-\code{\link{k_absolute}()},
 \code{\link{k_abs}()},
 \code{\link{k_add}()},
 \code{\link{k_all}()},

@@ -51,7 +51,6 @@ arguments \code{axisa}, \code{axisb} and \code{axisc}. Use \code{axis} instead.
 }
 
 Other ops: 
-\code{\link{k_absolute}()},
 \code{\link{k_abs}()},
 \code{\link{k_add}()},
 \code{\link{k_all}()},

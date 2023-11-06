@@ -27,7 +27,6 @@ Given two vectors \code{x1} and \code{x2}, the outer product is:
 }
 
 Other ops: 
-\code{\link{k_absolute}()},
 \code{\link{k_abs}()},
 \code{\link{k_add}()},
 \code{\link{k_all}()},

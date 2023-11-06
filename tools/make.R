@@ -125,6 +125,7 @@ apply_translation_patchfiles <- function(filepath = fs::dir_ls("man-src/", type 
       system2t("git", c("apply --no-index --recount --allow-empty", # --3way
                         dir/"translate.patch"))
       # system(glue("patch -p2 < {dir}/translate.patch"))
+      # TODO: this needs to propogate errors up from applying the patchfile
     }) |>
     discard(\(x) is.null(x) || x == 0) |>
     invisible()
@@ -505,9 +506,10 @@ render_roxygen_rmds <- function(filepath = fs::dir_ls("man-src/", type = "direct
       knitr::opts_chunk$set(error = FALSE)
       knitr::knit("2-translated.Rmd", "3-rendered.md",
                   quiet = TRUE, envir = new.env())
-      readLines("3-rendered.md") |>
-        str_replace_all(" at 0x[0-9A-F]{9}>$", ">") |>
-        writeLines("3-rendered.md")
+      x <- readLines("3-rendered.md")
+      x <- x |>
+        str_replace_all(" at 0x[0-9A-F]{9}>$", ">")
+      x |> writeLines("3-rendered.md")
     })
   # discard(\(x) is.null(x) || x == 0) |>
   # invisible()

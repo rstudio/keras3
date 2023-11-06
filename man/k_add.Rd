@@ -18,22 +18,31 @@ The tensor containing the element-wise sum of \code{x1} and \code{x2}.
 Add arguments element-wise.
 }
 \section{Examples}{
-\if{html}{\out{<div class="sourceCode python">}}\preformatted{x1 = keras.ops.convert_to_tensor([1, 4])
-x2 = keras.ops.convert_to_tensor([5, 6])
-keras.ops.add(x1, x2)
-# array([6, 10], dtype=int32)
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{x1 <- k_convert_to_tensor(c(1, 4))
+x2 <- k_convert_to_tensor(c(5, 6))
+k_add(x1, x2)
 }\if{html}{\out{</div>}}
 
-\code{keras.ops.add} also broadcasts shapes:
+\if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor([ 6. 10.], shape=(2), dtype=float32)
+}\if{html}{\out{</div>}}
 
-\if{html}{\out{<div class="sourceCode python">}}\preformatted{x1 = keras.ops.convert_to_tensor(
-    [[5, 4],
-     [5, 6]]
-)
-x2 = keras.ops.convert_to_tensor([5, 6])
-keras.ops.add(x1, x2)
-# array([[10 10]
-#        [10 12]], shape=(2, 2), dtype=int32)
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{# alias for x1 + x2
+x1 + x2
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor([ 6. 10.], shape=(2), dtype=float32)
+}\if{html}{\out{</div>}}
+
+\code{k_add} also broadcasts shapes:
+
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{x1 <- k_convert_to_tensor(array(c(5, 5, 4, 6), dim =c(2, 2)))
+x2 <- k_convert_to_tensor(c(5, 6))
+k_add(x1, x2)
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor(
+## [[10. 10.]
+##  [10. 12.]], shape=(2, 2), dtype=float64)
 }\if{html}{\out{</div>}}
 }
 
@@ -43,7 +52,6 @@ keras.ops.add(x1, x2)
 }
 
 Other ops: 
-\code{\link{k_absolute}()},
 \code{\link{k_abs}()},
 \code{\link{k_all}()},
 \code{\link{k_amax}()},

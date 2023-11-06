@@ -26,13 +26,18 @@ defaults to \code{"float32"}).}
 Converts a PIL Image instance to a matrix.
 }
 \section{Usage}{
-\if{html}{\out{<div class="sourceCode r">}}\preformatted{img_data <- random_uniform(c(100, 100, 3))
-img <- image_from_array(img_data)
-array <- image_to_array(img)
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{image_path <- get_file(origin = "https://www.r-project.org/logo/Rlogo.png")
+(img <- image_load(image_path))
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode">}}\preformatted{## <PIL.Image.Image image mode=RGB size=724x561>
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{array <- image_to_array(img)
 str(array)
 }\if{html}{\out{</div>}}
 
-\if{html}{\out{<div class="sourceCode">}}\preformatted{##  num [1:100, 1:100, 1:3] 179 41 69 100 108 173 14 64 200 163 ...
+\if{html}{\out{<div class="sourceCode">}}\preformatted{##  num [1:561, 1:724, 1:3] 0 0 0 0 0 0 0 0 0 0 ...
 }\if{html}{\out{</div>}}
 }
 

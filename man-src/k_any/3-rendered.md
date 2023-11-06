@@ -1,25 +1,46 @@
-Test whether any array element along a given axis evaluates to `True`.
+Test whether any array element along a given axis evaluates to `TRUE`.
 
 @description
 
 # Examples
-```python
-x = keras.ops.convert_to_tensor([True, False])
-keras.ops.any(x)
-# array(True, shape=(), dtype=bool)
+
+```r
+x <- k_constant(c(TRUE, FALSE))
+k_any(x)
 ```
 
-```python
-x = keras.ops.convert_to_tensor([[True, False], [True, True]])
-keras.ops.any(x, axis=0)
-# array([ True  True], shape=(2,), dtype=bool)
+```
+## tf.Tensor(True, shape=(), dtype=bool)
 ```
 
-`keepdims=True` outputs a tensor with dimensions reduced to one.
-```python
-x = keras.ops.convert_to_tensor([[True, False], [True, True]])
-keras.ops.all(x, keepdims=True)
-# array([[False]], shape=(1, 1), dtype=bool)
+
+```r
+(x <- k_convert_to_tensor(array(c(TRUE, FALSE, TRUE, TRUE, TRUE, TRUE), dim = c(3, 2))))
+```
+
+```
+## tf.Tensor(
+## [[ True  True]
+##  [False  True]
+##  [ True  True]], shape=(3, 2), dtype=bool)
+```
+
+```r
+k_any(x, axis = 1)
+```
+
+```
+## tf.Tensor([ True  True], shape=(2), dtype=bool)
+```
+
+`keepdims = TRUE` outputs a tensor with dimensions reduced to one.
+
+```r
+k_any(x, keepdims = TRUE)
+```
+
+```
+## tf.Tensor([[ True]], shape=(1, 1), dtype=bool)
 ```
 
 @returns
@@ -28,12 +49,12 @@ The tensor containing the logical OR reduction over the `axis`.
 @param x Input tensor.
 @param axis An integer or tuple of integers that represent the axis along
     which a logical OR reduction is performed. The default
-    (`axis=None`) is to perform a logical OR over all the dimensions
+    (`axis = NULL`) is to perform a logical OR over all the dimensions
     of the input array. `axis` may be negative, in which case it counts
     for the last to the first axis.
-@param keepdims If `True`, axes which are reduced are left in the result as
+@param keepdims If `TRUE`, axes which are reduced are left in the result as
     dimensions with size one. With this option, the result will
-    broadcast correctly against the input array. Defaults to`False`.
+    broadcast correctly against the input array. Defaults to `FALSE`.
 
 @export
 @family ops

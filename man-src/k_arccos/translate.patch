@@ -8,6 +8,6 @@ diff --git a/man-src/k_arccos/2-translated.Rmd b/man-src/k_arccos/2-translated.R
 -keras.ops.arccos(x)
 -# array([0.0, 3.1415927], dtype=float32)
 +```{r}
-+x <- k_onvert_to_tensor(c(1, -1))
++x <- k_convert_to_tensor(c(1, -1))
 +k_arccos(x)
  ```

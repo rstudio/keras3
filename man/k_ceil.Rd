@@ -23,7 +23,6 @@ The ceil of the scalar \code{x} is the smallest integer \code{i}, such that
 }
 
 Other ops: 
-\code{\link{k_absolute}()},
 \code{\link{k_abs}()},
 \code{\link{k_add}()},
 \code{\link{k_all}()},

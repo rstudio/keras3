@@ -22,7 +22,6 @@ The floor of the scalar \code{x} is the largest integer \code{i}, such that \cod
 }
 
 Other ops: 
-\code{\link{k_absolute}()},
 \code{\link{k_abs}()},
 \code{\link{k_add}()},
 \code{\link{k_all}()},

@@ -1,17 +1,21 @@
 Compute the absolute value element-wise.
 
 @description
-`keras.ops.abs` is a shorthand for this function.
+`keras::k_abs` is a shorthand for this function.
 
 # Examples
-```python
-x = keras.ops.convert_to_tensor([-1.2, 1.2])
-keras.ops.absolute(x)
-# array([1.2, 1.2], dtype=float32)
+
+```r
+x <- k_constant(c(-1.2, 1.2))
+k_abs(x)
+```
+
+```
+## tf.Tensor([1.2 1.2], shape=(2), dtype=float64)
 ```
 
 @returns
-An array containing the absolute value of each element in `x`.
+A tensor containing the absolute value of each element in `x`.
 
 @param x Input tensor.
 

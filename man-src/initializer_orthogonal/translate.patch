@@ -23,7 +23,7 @@ diff --git a/man-src/initializer_orthogonal/2-translated.Rmd b/man-src/initializ
 -initializer = keras.initializers.Orthogonal()
 -layer = keras.layers.Dense(3, kernel_initializer=initializer)
 +initializer <- initializer_orthogonal()
-+layer <- layer_dense(3, kernel_initializer = initializer)
++layer <- layer_dense(units = 3, kernel_initializer = initializer)
  ```
 @@ -31,3 +31,3 @@ layer = keras.layers.Dense(3, kernel_initializer=initializer)
  @param gain Multiplicative factor to apply to the orthogonal matrix.

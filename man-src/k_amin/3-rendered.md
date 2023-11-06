@@ -1,39 +1,56 @@
-Returns the minimum of an array or minimum value along an axis.
+Returns the minimum of a vector or minimum value along an axis.
 
 @description
 
 # Examples
-```python
-x = keras.ops.convert_to_tensor([1, 3, 5, 2, 3, 6])
-keras.ops.amin(x)
-# array(1, dtype=int32)
+
+```r
+(x <- k_convert_to_tensor(rbind(c(1, 3, 5), c(1, 5, 2))))
 ```
 
-```python
-x = keras.ops.convert_to_tensor([[1, 6, 8], [7, 5, 3]])
-keras.ops.amin(x, axis=0)
-# array([1,5,3], dtype=int32)
+```
+## tf.Tensor(
+## [[1. 3. 5.]
+##  [1. 5. 2.]], shape=(2, 3), dtype=float64)
 ```
 
-```python
-x = keras.ops.convert_to_tensor([[1, 6, 8], [7, 5, 3]])
-keras.ops.amin(x, axis=1, keepdims=True)
-# array([[1],[3]], dtype=int32)
+```r
+k_amin(x)
+```
+
+```
+## tf.Tensor(1.0, shape=(), dtype=float64)
+```
+
+```r
+k_amin(x, axis = 1)
+```
+
+```
+## tf.Tensor([1. 3. 2.], shape=(3), dtype=float64)
+```
+
+```r
+k_amin(x, axis = 1, keepdims = TRUE)
+```
+
+```
+## tf.Tensor([[1. 3. 2.]], shape=(1, 3), dtype=float64)
 ```
 
 @returns
-An array with the minimum value. If `axis=None`, the result is a scalar
-value representing the minimum element in the entire array. If `axis` is
-given, the result is an array with the minimum values along
+A tensor with the minimum value. If `axis = NULL`, the result is a scalar
+value representing the minimum element in the entire tensor. If `axis` is
+given, the result is a tensor with the minimum values along
 the specified axis.
 
 @param x Input tensor.
 @param axis Axis along which to compute the minimum.
-    By default (`axis=None`), find the minimum value in all the
-    dimensions of the input array.
-@param keepdims If `True`, axes which are reduced are left in the result as
+    By default (`axis=NULL`), find the minimum value in all the
+    dimensions of the input tensor.
+@param keepdims If `TRUE`, axes which are reduced are left in the result as
     dimensions that are broadcast to the size of the original
-    input tensor. Defaults to `False`.
+    input tensor. Defaults to `FALSE`.
 
 @export
 @family ops

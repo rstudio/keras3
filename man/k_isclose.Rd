@@ -24,7 +24,6 @@ Return whether two tensors are element-wise almost equal.
 }
 
 Other ops: 
-\code{\link{k_absolute}()},
 \code{\link{k_abs}()},
 \code{\link{k_add}()},
 \code{\link{k_all}()},

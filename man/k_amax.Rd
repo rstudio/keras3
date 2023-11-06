@@ -2,7 +2,7 @@
 % Please edit documentation in R/autogen-ops.R
 \name{k_amax}
 \alias{k_amax}
-\title{Returns the maximum of an array or maximum value along an axis.}
+\title{Returns the maximum of a vector or maximum value along an axis.}
 \usage{
 k_amax(x, axis = NULL, keepdims = FALSE)
 }
@@ -10,36 +10,47 @@ k_amax(x, axis = NULL, keepdims = FALSE)
 \item{x}{Input tensor.}
 
 \item{axis}{Axis along which to compute the maximum.
-By default (\code{axis=None}), find the maximum value in all the
-dimensions of the input array.}
+By default (\code{axis=NULL}), find the maximum value in all the
+dimensions of the input tensor.}
 
-\item{keepdims}{If \code{True}, axes which are reduced are left in the result as
+\item{keepdims}{If \code{TRUE}, axes which are reduced are left in the result as
 dimensions that are broadcast to the size of the original
-input tensor. Defaults to \code{False}.}
+input tensor. Defaults to \code{FALSE}.}
 }
 \value{
-An array with the maximum value. If \code{axis=None}, the result is a scalar
-value representing the maximum element in the entire array. If \code{axis} is
-given, the result is an array with the maximum values along
+A tensor with the maximum value. If \code{axis = NULL}, the result is a scalar
+value representing the maximum element in the entire tensor. If \code{axis} is
+given, the result is a tensor with the maximum values along
 the specified axis.
 }
 \description{
-Returns the maximum of an array or maximum value along an axis.
+Returns the maximum of a vector or maximum value along an axis.
 }
 \section{Examples}{
-\if{html}{\out{<div class="sourceCode python">}}\preformatted{x = keras.ops.convert_to_tensor([[1, 3, 5], [2, 3, 6]])
-keras.ops.amax(x)
-# array(6, dtype=int32)
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{(x <- k_convert_to_tensor(rbind(c(1, 3, 5), c(1, 5, 2))))
 }\if{html}{\out{</div>}}
 
-\if{html}{\out{<div class="sourceCode python">}}\preformatted{x = keras.ops.convert_to_tensor([[1, 6, 8], [1, 5, 2]])
-keras.ops.amax(x, axis=0)
-# array([1, 6, 8], dtype=int32)
+\if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor(
+## [[1. 3. 5.]
+##  [1. 5. 2.]], shape=(2, 3), dtype=float64)
 }\if{html}{\out{</div>}}
 
-\if{html}{\out{<div class="sourceCode python">}}\preformatted{x = keras.ops.convert_to_tensor([[1, 6, 8], [1, 5, 2]])
-keras.ops.amax(x, axis=1, keepdims=True)
-# array([[8], [5]], dtype=int32)
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{k_amax(x)
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor(5.0, shape=(), dtype=float64)
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{k_amax(x, axis = 1)
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor([1. 5. 5.], shape=(3), dtype=float64)
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{k_amax(x, axis = 1, keepdims = TRUE)
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor([[1. 5. 5.]], shape=(1, 3), dtype=float64)
 }\if{html}{\out{</div>}}
 }
 
@@ -49,7 +60,6 @@ keras.ops.amax(x, axis=1, keepdims=True)
 }
 
 Other ops: 
-\code{\link{k_absolute}()},
 \code{\link{k_abs}()},
 \code{\link{k_add}()},
 \code{\link{k_all}()},

@@ -4,10 +4,14 @@ Trigonometric inverse cosine, element-wise.
 The inverse of `cos` so that, if `y = cos(x)`, then `x = arccos(y)`.
 
 # Examples
-```python
-x = keras.ops.convert_to_tensor([1, -1])
-keras.ops.arccos(x)
-# array([0.0, 3.1415927], dtype=float32)
+
+```r
+x <- k_convert_to_tensor(c(1, -1))
+k_arccos(x)
+```
+
+```
+## tf.Tensor([0.        3.1415925], shape=(2), dtype=float32)
 ```
 
 @returns

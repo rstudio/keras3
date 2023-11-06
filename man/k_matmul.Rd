@@ -33,7 +33,6 @@ to its dimensions. After matrix multiplication the appended 1 is removed.
 }
 
 Other ops: 
-\code{\link{k_absolute}()},
 \code{\link{k_abs}()},
 \code{\link{k_add}()},
 \code{\link{k_all}()},

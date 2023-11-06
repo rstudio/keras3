@@ -25,7 +25,6 @@ Sorts the elements of \code{x} along a given axis in ascending order.
 }
 
 Other ops: 
-\code{\link{k_absolute}()},
 \code{\link{k_abs}()},
 \code{\link{k_add}()},
 \code{\link{k_all}()},

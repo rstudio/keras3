@@ -29,7 +29,6 @@ x = keras.ops.cast(x, dtype="float16")
 }
 
 Other ops: 
-\code{\link{k_absolute}()},
 \code{\link{k_abs}()},
 \code{\link{k_add}()},
 \code{\link{k_all}()},

@@ -25,7 +25,6 @@ Insert a new axis at the \code{axis} position in the expanded tensor shape.
 }
 
 Other ops: 
-\code{\link{k_absolute}()},
 \code{\link{k_abs}()},
 \code{\link{k_add}()},
 \code{\link{k_all}()},

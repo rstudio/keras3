@@ -10,7 +10,7 @@ image_path <- get_file(origin = "https://www.r-project.org/logo/Rlogo.png")
 ```
 
 ```
-## <PIL.Image.Image image mode=RGB size=724x561 at 0x2FC596920>
+## <PIL.Image.Image image mode=RGB size=724x561>
 ```
 
 ```r

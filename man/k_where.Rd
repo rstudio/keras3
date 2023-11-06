@@ -26,7 +26,6 @@ Return elements chosen from \code{x1} or \code{x2} depending on \code{condition}
 }
 
 Other ops: 
-\code{\link{k_absolute}()},
 \code{\link{k_abs}()},
 \code{\link{k_add}()},
 \code{\link{k_all}()},

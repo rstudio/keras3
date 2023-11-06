@@ -7,33 +7,33 @@
 initializer_random_uniform(minval = -0.05, maxval = 0.05, seed = NULL)
 }
 \arguments{
-\item{minval}{A python scalar or a scalar keras tensor. Lower bound of the
+\item{minval}{A numeric scalar or a scalar keras tensor. Lower bound of the
 range of random values to generate (inclusive).}
 
-\item{maxval}{A python scalar or a scalar keras tensor. Upper bound of the
+\item{maxval}{A numeric scalar or a scalar keras tensor. Upper bound of the
 range of random values to generate (exclusive).}
 
-\item{seed}{A Python integer or instance of
-\code{keras.backend.SeedGenerator}.
+\item{seed}{An integer or instance of
+\code{random_seed_generator()}.
 Used to make the behavior of the initializer
 deterministic. Note that an initializer seeded with an integer
-or \code{None} (unseeded) will produce the same random values
+or \code{NULL} (unseeded) will produce the same random values
 across multiple calls. To get different random values
 across multiple calls, use as seed an instance
-of \code{keras.backend.SeedGenerator}.}
+of \code{random_seed_generator()}.}
 }
 \description{
 Draws samples from a uniform distribution for given parameters.
 }
 \section{Examples}{
-\if{html}{\out{<div class="sourceCode python">}}\preformatted{# Standalone usage:
-initializer = RandomUniform(minval=0.0, maxval=1.0)
-values = initializer(shape=(2, 2))
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{# Standalone usage:
+initializer <- initializer_random_uniform(minval = 0.0, maxval = 1.0)
+values <- initializer(shape = c(2, 2))
 }\if{html}{\out{</div>}}
 
-\if{html}{\out{<div class="sourceCode python">}}\preformatted{# Usage in a Keras layer:
-initializer = RandomUniform(minval=0.0, maxval=1.0)
-layer = Dense(3, kernel_initializer=initializer)
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{# Usage in a Keras layer:
+initializer <- initializer_random_uniform(minval = 0.0, maxval = 1.0)
+layer <- layer_dense(units = 3, kernel_initializer = initializer)
 }\if{html}{\out{</div>}}
 }
 

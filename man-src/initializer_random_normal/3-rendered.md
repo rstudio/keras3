@@ -4,30 +4,32 @@ Random normal initializer.
 Draws samples from a normal distribution for given parameters.
 
 # Examples
-```python
+
+```r
 # Standalone usage:
-initializer = RandomNormal(mean=0.0, stddev=1.0)
-values = initializer(shape=(2, 2))
+initializer <- initializer_random_normal(mean = 0.0, stddev = 1.0)
+values <- initializer(shape = c(2, 2))
 ```
 
-```python
+
+```r
 # Usage in a Keras layer:
-initializer = RandomNormal(mean=0.0, stddev=1.0)
-layer = Dense(3, kernel_initializer=initializer)
+initializer <- initializer_random_normal(mean = 0.0, stddev = 1.0)
+layer <- layer_dense(units = 3, kernel_initializer = initializer)
 ```
 
-@param mean A python scalar or a scalar keras tensor. Mean of the random
+@param mean A numeric scalar. Mean of the random
     values to generate.
-@param stddev A python scalar or a scalar keras tensor. Standard deviation of
+@param stddev A numeric scalar. Standard deviation of
    the random values to generate.
-@param seed A Python integer or instance of
-    `keras.backend.SeedGenerator`.
+@param seed An integer or instance of
+    `random_seed_generator()`.
     Used to make the behavior of the initializer
     deterministic. Note that an initializer seeded with an integer
-    or `None` (unseeded) will produce the same random values
+    or `NULL` (unseeded) will produce the same random values
     across multiple calls. To get different random values
     across multiple calls, use as seed an instance
-    of `keras.backend.SeedGenerator`.
+    of `random_seed_generator()`.
 
 @export
 @family initializer

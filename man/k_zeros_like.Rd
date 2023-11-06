@@ -24,7 +24,6 @@ Return a tensor of zeros with the same shape and type as \code{x}.
 }
 
 Other ops: 
-\code{\link{k_absolute}()},
 \code{\link{k_abs}()},
 \code{\link{k_add}()},
 \code{\link{k_all}()},

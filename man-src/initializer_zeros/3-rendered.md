@@ -3,16 +3,18 @@ Initializer that generates tensors initialized to 0.
 @description
 
 # Examples
-```python
+
+```r
 # Standalone usage:
-initializer = Zeros()
-values = initializer(shape=(2, 2))
+initializer <- initializer_zeros()
+values <- initializer(shape = c(2, 2))
 ```
 
-```python
+
+```r
 # Usage in a Keras layer:
-initializer = Zeros()
-layer = Dense(units=3, kernel_initializer=initializer)
+initializer <- initializer_zeros()
+layer <- layer_dense(units = 3, kernel_initializer = initializer)
 ```
 
 @export

@@ -26,7 +26,6 @@ Return a full tensor with the same shape and type as the given tensor.
 }
 
 Other ops: 
-\code{\link{k_absolute}()},
 \code{\link{k_abs}()},
 \code{\link{k_add}()},
 \code{\link{k_all}()},

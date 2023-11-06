@@ -7,20 +7,20 @@
 initializer_truncated_normal(mean = 0, stddev = 0.05, seed = NULL)
 }
 \arguments{
-\item{mean}{A python scalar or a scalar keras tensor. Mean of the random
+\item{mean}{A numeric scalar. Mean of the random
 values to generate.}
 
-\item{stddev}{A python scalar or a scalar keras tensor. Standard deviation of
+\item{stddev}{A numeric scalar. Standard deviation of
 the random values to generate.}
 
-\item{seed}{A Python integer or instance of
-\code{keras.backend.SeedGenerator}.
+\item{seed}{An integer or instance of
+\code{random_seed_generator()}.
 Used to make the behavior of the initializer
 deterministic. Note that an initializer seeded with an integer
-or \code{None} (unseeded) will produce the same random values
+or \code{NULL} (unseeded) will produce the same random values
 across multiple calls. To get different random values
 across multiple calls, use as seed an instance
-of \code{keras.backend.SeedGenerator}.}
+of \code{random_seed_generator()}.}
 }
 \description{
 The values generated are similar to values from a
@@ -29,14 +29,14 @@ than two standard deviations from the mean are
 discarded and re-drawn.
 }
 \section{Examples}{
-\if{html}{\out{<div class="sourceCode python">}}\preformatted{# Standalone usage:
-initializer = TruncatedNormal(mean=0., stddev=1.)
-values = initializer(shape=(2, 2))
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{# Standalone usage:
+initializer <- initializer_truncated_normal(mean = 0, stddev = 1)
+values <- initializer(shape = c(2, 2))
 }\if{html}{\out{</div>}}
 
-\if{html}{\out{<div class="sourceCode python">}}\preformatted{# Usage in a Keras layer:
-initializer = TruncatedNormal(mean=0., stddev=1.)
-layer = Dense(3, kernel_initializer=initializer)
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{# Usage in a Keras layer:
+initializer <- initializer_truncated_normal(mean = 0, stddev = 1)
+layer <- layer_dense(units = 3, kernel_initializer = initializer)
 }\if{html}{\out{</div>}}
 }
 

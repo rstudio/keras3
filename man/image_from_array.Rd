@@ -34,7 +34,7 @@ pil_img <- image_from_array(img)
 pil_img
 }\if{html}{\out{</div>}}
 
-\if{html}{\out{<div class="sourceCode">}}\preformatted{## <PIL.Image.Image image mode=RGB size=100x100 at 0x2DC49E710>
+\if{html}{\out{<div class="sourceCode">}}\preformatted{## <PIL.Image.Image image mode=RGB size=100x100>
 }\if{html}{\out{</div>}}
 }
 

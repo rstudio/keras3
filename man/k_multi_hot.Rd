@@ -37,7 +37,6 @@ keras.ops.multi_hot(data, num_tokens=5)
 }
 
 Other ops: 
-\code{\link{k_absolute}()},
 \code{\link{k_abs}()},
 \code{\link{k_add}()},
 \code{\link{k_all}()},

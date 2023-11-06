@@ -2,7 +2,7 @@
 % Please edit documentation in R/autogen-ops.R
 \name{k_all}
 \alias{k_all}
-\title{Test whether all array elements along a given axis evaluate to \code{True}.}
+\title{Test whether all array elements along a given axis evaluate to \code{TRUE}.}
 \usage{
 k_all(x, axis = NULL, keepdims = FALSE)
 }
@@ -11,36 +11,49 @@ k_all(x, axis = NULL, keepdims = FALSE)
 
 \item{axis}{An integer or tuple of integers that represent the axis along
 which a logical AND reduction is performed. The default
-(\code{axis=None}) is to perform a logical AND over all the dimensions
+(\code{axis=NULL}) is to perform a logical AND over all the dimensions
 of the input array. \code{axis} may be negative, in which case it counts
 for the last to the first axis.}
 
-\item{keepdims}{If \code{True}, axes which are reduced are left in the result as
+\item{keepdims}{If \code{TRUE}, axes which are reduced are left in the result as
 dimensions with size one. With this option, the result will
-broadcast correctly against the input array. Defaults to\code{False}.}
+broadcast correctly against the input array. Defaults to\code{FALSE}.}
 }
 \value{
 The tensor containing the logical AND reduction over the \code{axis}.
 }
 \description{
-Test whether all array elements along a given axis evaluate to \code{True}.
+Test whether all array elements along a given axis evaluate to \code{TRUE}.
 }
 \section{Examples}{
-\if{html}{\out{<div class="sourceCode python">}}\preformatted{x = keras.ops.convert_to_tensor([True, False])
-keras.ops.all(x)
-# array(False, shape=(), dtype=bool)
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{x <- k_convert_to_tensor(c(TRUE, FALSE))
+k_all(x)
 }\if{html}{\out{</div>}}
 
-\if{html}{\out{<div class="sourceCode python">}}\preformatted{x = keras.ops.convert_to_tensor([[True, False], [True, True]])
-keras.ops.all(x, axis=0)
-# array([ True False], shape=(2,), dtype=bool)
+\if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor(False, shape=(), dtype=bool)
 }\if{html}{\out{</div>}}
 
-\code{keepdims=True} outputs a tensor with dimensions reduced to one.
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{(x <- k_convert_to_tensor(array(c(TRUE, FALSE, TRUE, TRUE, TRUE, TRUE), dim = c(3, 2))))
+}\if{html}{\out{</div>}}
 
-\if{html}{\out{<div class="sourceCode python">}}\preformatted{x = keras.ops.convert_to_tensor([[True, False], [True, True]])
-keras.ops.all(x, keepdims=True)
-# array([[False]], shape=(1, 1), dtype=bool)
+\if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor(
+## [[ True  True]
+##  [False  True]
+##  [ True  True]], shape=(3, 2), dtype=bool)
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{k_all(x, axis = 1)
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor([False  True], shape=(2), dtype=bool)
+}\if{html}{\out{</div>}}
+
+\code{keepdims = TRUE} outputs a tensor with dimensions reduced to one.
+
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{k_all(x, keepdims = TRUE)
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor([[False]], shape=(1, 1), dtype=bool)
 }\if{html}{\out{</div>}}
 }
 
@@ -50,7 +63,6 @@ keras.ops.all(x, keepdims=True)
 }
 
 Other ops: 
-\code{\link{k_absolute}()},
 \code{\link{k_abs}()},
 \code{\link{k_add}()},
 \code{\link{k_amax}()},

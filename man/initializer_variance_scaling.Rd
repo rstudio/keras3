@@ -19,14 +19,14 @@ initializer_variance_scaling(
 \item{distribution}{Random distribution to use.
 One of \code{"truncated_normal"}, \code{"untruncated_normal"}, or \code{"uniform"}.}
 
-\item{seed}{A Python integer or instance of
-\code{keras.backend.SeedGenerator}.
+\item{seed}{An integer or instance of
+\code{random_seed_generator()}.
 Used to make the behavior of the initializer
 deterministic. Note that an initializer seeded with an integer
-or \code{None} (unseeded) will produce the same random values
+or \code{NULL} (unseeded) will produce the same random values
 across multiple calls. To get different random values
 across multiple calls, use as seed an instance
-of \code{keras.backend.SeedGenerator}.}
+of \code{random_seed_generator()}.}
 }
 \description{
 With \verb{distribution="truncated_normal" or "untruncated_normal"}, samples are
@@ -42,16 +42,16 @@ With \code{distribution="uniform"}, samples are drawn from a uniform distributio
 within \verb{[-limit, limit]}, where \code{limit = sqrt(3 * scale / n)}.
 }
 \section{Examples}{
-\if{html}{\out{<div class="sourceCode python">}}\preformatted{# Standalone usage:
-initializer = VarianceScaling(
-#     scale=0.1, mode='fan_in', distribution='uniform')
-values = initializer(shape=(2, 2))
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{# Standalone usage:
+initializer <- initializer_variance_scaling(scale = 0.1, mode = 'fan_in',
+                                            distribution = 'uniform')
+values <- initializer(shape = c(2, 2))
 }\if{html}{\out{</div>}}
 
-\if{html}{\out{<div class="sourceCode python">}}\preformatted{# Usage in a Keras layer:
-initializer = VarianceScaling(
-#     scale=0.1, mode='fan_in', distribution='uniform')
-layer = Dense(3, kernel_initializer=initializer)
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{# Usage in a Keras layer:
+initializer <- initializer_variance_scaling(scale = 0.1, mode = 'fan_in',
+                                            distribution = 'uniform')
+layer <- layer_dense(units = 3, kernel_initializer = initializer)
 }\if{html}{\out{</div>}}
 }
 

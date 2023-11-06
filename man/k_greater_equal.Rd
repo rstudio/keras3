@@ -24,7 +24,6 @@ Return the truth value of \code{x1 >= x2} element-wise.
 }
 
 Other ops: 
-\code{\link{k_absolute}()},
 \code{\link{k_abs}()},
 \code{\link{k_add}()},
 \code{\link{k_all}()},
