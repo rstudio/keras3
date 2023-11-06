@@ -1,5 +1,7 @@
 Pad a tensor.
 
+@description
+
 # Note
 Torch backend only supports modes `"constant"`, `"reflect"`,
     `"symmetric"` and `"circular"`.

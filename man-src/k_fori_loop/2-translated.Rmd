@@ -1,5 +1,7 @@
 For loop implementation.
 
+@description
+
 # Returns
 The final state after the loop.
 

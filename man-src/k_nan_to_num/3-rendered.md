@@ -1,5 +1,7 @@
 Replace NaN with zero and infinity with large finite numbers.
 
+@description
+
 # Returns
     `x`, with non-finite values replaced.
 

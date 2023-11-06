@@ -1,5 +1,7 @@
 Pad `images` with zeros to the specified `height` and `width`.
 
+@description
+
 # Returns
 If `images` were 4D, a 4D float Tensor of shape
     `(batch, target_height, target_width, channels)`

@@ -1,5 +1,7 @@
 Unpacks the given dimension of a rank-R tensor into rank-(R-1) tensors.
 
+@description
+
 # Returns
 A list of tensors unpacked along the given axis.
 

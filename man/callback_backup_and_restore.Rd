@@ -84,23 +84,9 @@ tryCatch(\{
 \if{html}{\out{<div class="sourceCode">}}\preformatted{## [1] 0 1 2 3
 }\if{html}{\out{</div>}}
 
-\if{html}{\out{<div class="sourceCode r">}}\preformatted{model$history \%>\% keras:::to_keras_training_history() \%>\% as.data.frame() \%>\% print()
-}\if{html}{\out{</div>}}
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{# model$history \%>\% keras:::to_keras_training_history() \%>\% as.data.frame() \%>\% print()
 
-\if{html}{\out{<div class="sourceCode">}}\preformatted{##    epoch     value metric     data
-## 1      1 0.8029032   loss training
-## 2      2 0.5227790   loss training
-## 3      3 0.3403872   loss training
-## 4      4 0.2216299   loss training
-## 5      5        NA   loss training
-## 6      6        NA   loss training
-## 7      7        NA   loss training
-## 8      8        NA   loss training
-## 9      9        NA   loss training
-## 10    10        NA   loss training
-}\if{html}{\out{</div>}}
-
-\if{html}{\out{<div class="sourceCode r">}}\preformatted{history <- model \%>\% fit(x = k_ones(c(5, 20)),
+history <- model \%>\% fit(x = k_ones(c(5, 20)),
                          y = k_zeros(5),
                          epochs = 10, batch_size = 1,
                          callbacks = list(callback),

@@ -1,5 +1,7 @@
 Returns the maximum of an array or maximum value along an axis.
 
+@description
+
 # Returns
 An array with the maximum value. If `axis=None`, the result is a scalar
 value representing the maximum element in the entire array. If `axis` is

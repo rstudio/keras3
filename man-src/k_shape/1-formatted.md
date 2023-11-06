@@ -1,5 +1,7 @@
 Gets the shape of the tensor input.
 
+@description
+
 # Note
 On the tensorflow backend, when `x` is a `tf.Tensor` with dynamic
 shape, dimensions which are dynamic in the context of a compiled function

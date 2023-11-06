@@ -1,5 +1,7 @@
 Zero-padding layer for 1D input (e.g. temporal sequence).
 
+@description
+
 # Examples
 ```python
 input_shape = (2, 2, 3)

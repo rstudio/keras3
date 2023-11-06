@@ -1,5 +1,7 @@
 Converts a PIL Image instance to a NumPy array.
 
+@description
+
 # Usage
 ```python
 from PIL import Image

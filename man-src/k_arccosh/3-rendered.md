@@ -1,5 +1,7 @@
 Inverse hyperbolic cosine, element-wise.
 
+@description
+
 # Returns
 Output tensor of same shape as x.
 

@@ -1,5 +1,5 @@
 diff --git a/man-src/callback_backup_and_restore/2-translated.Rmd b/man-src/callback_backup_and_restore/2-translated.Rmd
-index 963dd9c0..02d72925 100644
+index 963dd9c0..caa763a9 100644
 --- a/man-src/callback_backup_and_restore/2-translated.Rmd
 +++ b/man-src/callback_backup_and_restore/2-translated.Rmd
 @@ -3,4 +3,4 @@ Callback to back up and restore the training state.
@@ -69,7 +69,7 @@ index 963dd9c0..02d72925 100644
 +}, python.builtin.RuntimeError = function(e) message("Interrupted!"))
 +
 +model$history$epoch
-+model$history %>% keras:::to_keras_training_history() %>% as.data.frame() %>% print()
++# model$history %>% keras:::to_keras_training_history() %>% as.data.frame() %>% print()
 +
 +history <- model %>% fit(x = k_ones(c(5, 20)),
 +                         y = k_zeros(5),

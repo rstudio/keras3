@@ -14,8 +14,7 @@ A string, either \code{'channels_first'} or \code{'channels_last'}.
 }
 
 \section{Examples}{
-\if{html}{\out{<div class="sourceCode python">}}\preformatted{keras.config.image_data_format()
-# 'channels_last'
+\if{html}{\out{<div class="sourceCode">}}\preformatted{keras::config_image_data_format()
 }\if{html}{\out{</div>}}
 }
 

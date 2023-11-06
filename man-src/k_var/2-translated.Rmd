@@ -1,5 +1,7 @@
 Compute the variance along the specified axes.
 
+@description
+
 # Returns
     Output tensor containing the variance.
 

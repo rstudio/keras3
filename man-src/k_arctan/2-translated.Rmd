@@ -1,5 +1,7 @@
 Trigonometric inverse tangent, element-wise.
 
+@description
+
 # Returns
 Tensor of the inverse tangent of each element in `x`, in the interval
 `[-pi/2, pi/2]`.

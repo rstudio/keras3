@@ -1,5 +1,7 @@
 Select values from `x` at the 1-D `indices` along the given axis.
 
+@description
+
 # Returns
     The corresponding tensor of values.
 

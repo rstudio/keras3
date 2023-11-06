@@ -1,5 +1,7 @@
 Test whether any array element along a given axis evaluates to `True`.
 
+@description
+
 # Returns
 The tensor containing the logical OR reduction over the `axis`.
 

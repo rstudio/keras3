@@ -1,5 +1,7 @@
 Evaluates the Einstein summation convention on the operands.
 
+@description
+
 # Returns
 The calculation based on the Einstein summation convention.
 

@@ -1,5 +1,7 @@
 Computes the 2D Fast Fourier Transform along the last two axes of input.
 
+@description
+
 # Returns
 A tuple containing two tensors - the real and imaginary parts of the
 output.

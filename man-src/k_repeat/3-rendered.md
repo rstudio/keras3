@@ -1,5 +1,7 @@
 Repeat each element of a tensor after themselves.
 
+@description
+
 # Returns
     Output tensor.
 

@@ -1,5 +1,7 @@
 Base class for recurrent layers.
 
+@description
+
 # Call Arguments
 - `inputs`: Input tensor.
 - `initial_state`: List of initial state tensors to be passed to the first

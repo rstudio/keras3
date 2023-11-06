@@ -98,7 +98,9 @@ FeatureSpace.string_hashed(num_bins, output_mode="one_hot", name=None)
 \description{
 One-stop utility for preprocessing and encoding structured data.
 }
-\details{
+\section{Examples}{
+\strong{Basic usage with a dict of input data:}
+
 \if{html}{\out{<div class="sourceCode python">}}\preformatted{raw_data = \{
     "float_values": [0.0, 0.1, 0.2, 0.3],
     "string_values": ["zero", "one", "two", "three"],
@@ -216,9 +218,6 @@ crossing_layer = feature_space.crossers["feature1_X_feature2"]
 \if{html}{\out{<div class="sourceCode python">}}\preformatted{feature_space.save("featurespace.keras")
 reloaded_feature_space = keras.models.load_model("featurespace.keras")
 }\if{html}{\out{</div>}}
-}
-\section{Examples}{
-\strong{Basic usage with a dict of input data:}
 }
 
 \seealso{

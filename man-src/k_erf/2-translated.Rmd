@@ -1,5 +1,7 @@
 Computes the error function of `x`, element-wise.
 
+@description
+
 # Returns
 A tensor with the same dtype as `x`.
 

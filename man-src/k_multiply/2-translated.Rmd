@@ -1,5 +1,7 @@
 Multiply arguments element-wise.
 
+@description
+
 # Returns
     Output tensor, element-wise product of `x1` and `x2`.
 

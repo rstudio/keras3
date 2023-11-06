@@ -25,15 +25,14 @@ width for all axes.}
 \description{
 Pad a tensor.
 }
-\details{
-Note:
-Tensorflow backend only supports modes \code{"constant"}, \code{"reflect"}
-and \code{"symmetric"}.
-}
 \section{Note}{
 Torch backend only supports modes \code{"constant"}, \code{"reflect"},
 \code{"symmetric"} and \code{"circular"}.
 Only Torch backend supports \code{"circular"} mode.
+
+Note:
+Tensorflow backend only supports modes \code{"constant"}, \code{"reflect"}
+and \code{"symmetric"}.
 }
 
 \section{Returns}{

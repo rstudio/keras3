@@ -1,5 +1,7 @@
 Global average pooling operation for 3D data.
 
+@description
+
 # Input Shape
 - If `data_format='channels_last'`:
     5D tensor with shape:

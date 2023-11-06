@@ -12,19 +12,22 @@ config_set_epsilon(value)
 \description{
 Set the value of the fuzz factor used in numeric expressions.
 }
-\details{
-\if{html}{\out{<div class="sourceCode python">}}\preformatted{keras.config.set_epsilon(1e-5)
-keras.config.epsilon()
-# 1e-05
+\section{Examples}{
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{config_epsilon()
 }\if{html}{\out{</div>}}
 
-\if{html}{\out{<div class="sourceCode python">}}\preformatted{# Set it back to the default value.
-keras.config.set_epsilon(1e-7)
+\if{html}{\out{<div class="sourceCode">}}\preformatted{## [1] 1e-07
 }\if{html}{\out{</div>}}
-}
-\section{Examples}{
-\if{html}{\out{<div class="sourceCode python">}}\preformatted{keras.config.epsilon()
-# 1e-07
+
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{config_set_epsilon(1e-5)
+config_epsilon()
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode">}}\preformatted{## [1] 1e-05
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{# Set it back to the default value.
+config_set_epsilon(1e-7)
 }\if{html}{\out{</div>}}
 }
 

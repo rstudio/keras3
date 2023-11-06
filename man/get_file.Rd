@@ -20,7 +20,7 @@ get_file(
 \arguments{
 \item{fname}{Name of the file. If an absolute path, e.g. \code{"/path/to/file.txt"}
 is specified, the file will be saved at that location.
-If \code{None}, the name of the file at \code{origin} will be used.}
+If \code{NULL}, the name of the file at \code{origin} will be used.}
 
 \item{origin}{Original URL of the file.}
 
@@ -41,17 +41,16 @@ specified, the file will be saved at that location.}
 options are \verb{"md5'}, \verb{"sha256'}, and \verb{"auto'}.
 The default 'auto' detects the hash algorithm in use.}
 
-\item{extract}{True tries extracting the file as an Archive, like tar or zip.}
+\item{extract}{\code{TRUE} tries extracting the file as an Archive, like tar or zip.}
 
 \item{archive_format}{Archive format to try for extracting the file.
-Options are \verb{"auto'}, \verb{"tar'}, \verb{"zip'}, and \code{None}.
+Options are \verb{"auto'}, \verb{"tar'}, \verb{"zip'}, and \code{NULL}.
 \code{"tar"} includes tar, tar.gz, and tar.bz files.
-The default \code{"auto"} corresponds to \verb{["tar", "zip"]}.
-None or an empty list will return no matches found.}
+The default \code{"auto"} corresponds to \code{c("tar", "zip")}.
+\code{NULL} or an empty list will return no matches found.}
 
-\item{cache_dir}{Location to store cached files, when None it
-defaults ether \verb{$KERAS_HOME} if the \code{KERAS_HOME} environment
-variable is set or \verb{~/.keras/}.}
+\item{cache_dir}{Location to store cached files, when \code{NULL} it
+defaults to \code{Sys.getenv("KERAS_HOME", '~/.keras/')}.}
 }
 \description{
 By default the file at the url \code{origin} is downloaded to the
@@ -65,9 +64,9 @@ Passing a hash will verify the file after download. The command line
 programs \code{shasum} and \code{sha256sum} can compute the hash.
 }
 \section{Examples}{
-\if{html}{\out{<div class="sourceCode python">}}\preformatted{path_to_downloaded_file = get_file(
-    origin="https://storage.googleapis.com/download.tensorflow.org/example_images/flower_photos.tgz",
-    extract=True,
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{path_to_downloaded_file <- get_file(
+    origin = "https://storage.googleapis.com/download.tensorflow.org/example_images/flower_photos.tgz",
+    extract = TRUE
 )
 }\if{html}{\out{</div>}}
 }

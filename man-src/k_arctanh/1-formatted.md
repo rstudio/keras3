@@ -1,5 +1,7 @@
 Inverse hyperbolic tangent, element-wise.
 
+@description
+
 # Returns
     Output tensor of same shape as `x`.
 

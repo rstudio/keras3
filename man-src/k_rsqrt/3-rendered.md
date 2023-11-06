@@ -1,5 +1,7 @@
 Computes reciprocal of square root of x element-wise.
 
+@description
+
 # Returns
 A tensor with the same dtype as `x`.
 

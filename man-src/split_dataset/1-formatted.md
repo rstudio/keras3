@@ -1,5 +1,7 @@
 Splits a dataset into a left half and a right half (e.g. train / test).
 
+@description
+
 # Returns
 A tuple of two `tf.data.Dataset` objects:
 the left and right splits.

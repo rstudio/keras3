@@ -1,5 +1,5 @@
 diff --git a/man-src/clear_session/2-translated.Rmd b/man-src/clear_session/2-translated.Rmd
-index 609625a0..f474c327 100644
+index 609625a0..ce921f17 100644
 --- a/man-src/clear_session/2-translated.Rmd
 +++ b/man-src/clear_session/2-translated.Rmd
 @@ -13,10 +13,13 @@ Example 1: calling `clear_session()` when creating models in a loop
@@ -26,7 +26,7 @@ index 609625a0..f474c327 100644
 -  keras.backend.clear_session()
 -  model = keras.Sequential([
 -      keras.layers.Dense(10) for _ in range(10)])
-+  k_clear_session()
++  clear_session()
 +  model <- keras_model_sequential()
 +  for (j in 1:10) {
 +    model <- model |> layer_dense(units = 10)

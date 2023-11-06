@@ -1,5 +1,7 @@
 Return a tensor of given shape and type filled with uninitialized data.
 
+@description
+
 # Returns
     The empty tensor.
 

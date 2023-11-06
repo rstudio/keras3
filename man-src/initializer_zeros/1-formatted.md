@@ -1,5 +1,7 @@
 Initializer that generates tensors initialized to 0.
 
+@description
+
 # Examples
 ```python
 # Standalone usage:

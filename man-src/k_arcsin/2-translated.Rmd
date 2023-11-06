@@ -1,5 +1,7 @@
 Inverse sine, element-wise.
 
+@description
+
 # Returns
 Tensor of the inverse sine of each element in `x`, in radians and in
 the closed interval `[-pi/2, pi/2]`.

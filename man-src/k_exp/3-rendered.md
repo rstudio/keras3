@@ -1,5 +1,7 @@
 Calculate the exponential of all elements in the input tensor.
 
+@description
+
 # Returns
     Output tensor, element-wise exponential of `x`.
 

@@ -1,5 +1,7 @@
 Test whether all array elements along a given axis evaluate to `True`.
 
+@description
+
 # Returns
 The tensor containing the logical AND reduction over the `axis`.
 

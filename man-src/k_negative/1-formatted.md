@@ -1,5 +1,7 @@
 Numerical negative, element-wise.
 
+@description
+
 # Returns
     Output tensor, `y = -x`.
 

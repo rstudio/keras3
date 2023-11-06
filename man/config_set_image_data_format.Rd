@@ -12,24 +12,30 @@ config_set_image_data_format(data_format)
 \description{
 Set the value of the image data format convention.
 }
-\details{
-\if{html}{\out{<div class="sourceCode python">}}\preformatted{keras.config.set_image_data_format('channels_first')
-keras.config.image_data_format()
-# 'channels_first'
+\section{Examples}{
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{config_image_data_format()
 }\if{html}{\out{</div>}}
 
-\if{html}{\out{<div class="sourceCode python">}}\preformatted{# Set it back to `'channels_last'`
-keras.config.set_image_data_format('channels_last')
+\if{html}{\out{<div class="sourceCode">}}\preformatted{## [1] "channels_last"
 }\if{html}{\out{</div>}}
-}
-\section{Examples}{
-\if{html}{\out{<div class="sourceCode python">}}\preformatted{keras.config.image_data_format()
-# 'channels_last'
+
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{# 'channels_last'
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{keras::config_set_image_data_format('channels_first')
+config_image_data_format()
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode">}}\preformatted{## [1] "channels_first"
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{# Set it back to `'channels_last'`
+keras::config_set_image_data_format('channels_last')
 }\if{html}{\out{</div>}}
 }
 
 \seealso{
 \itemize{
-\item \url{https://www.tensorflow.org/api_docs/python/tf/keras/config/set_image_data_format}
+\item <https://www.tensorflow.org/api_docs/python/tf/keras/config/set_image_data_format
 }
 }

@@ -14,8 +14,10 @@ String, the current default float type.
 }
 
 \section{Examples}{
-\if{html}{\out{<div class="sourceCode python">}}\preformatted{keras.config.floatx()
-# 'float32'
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{keras:::config_floatx()
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode">}}\preformatted{## [1] "float32"
 }\if{html}{\out{</div>}}
 }
 

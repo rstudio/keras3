@@ -1,5 +1,7 @@
 Layer that reshapes inputs into the given shape.
 
+@description
+
 # Input Shape
 Arbitrary, although all dimensions in the input shape must be
 known/fixed. Use the keyword argument `input_shape` (tuple of integers,

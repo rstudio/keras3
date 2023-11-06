@@ -1,5 +1,7 @@
 Return the product of tensor elements over a given axis.
 
+@description
+
 # Returns
     Product of elements of `x` over the given axis or axes.
 

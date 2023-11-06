@@ -1,5 +1,7 @@
 Applies an activation function to an output.
 
+@description
+
 # Examples
 ```python
 layer = keras.layers.Activation('relu')

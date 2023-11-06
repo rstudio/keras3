@@ -1,5 +1,7 @@
 Natural logarithm, element-wise.
 
+@description
+
 # Returns
     Output tensor, element-wise natural logarithm of `x`.
 

@@ -1,5 +1,7 @@
 Compute the weighted average along the specified axis.
 
+@description
+
 # Returns
 Return the average along the specified axis.
 

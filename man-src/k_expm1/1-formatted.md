@@ -1,5 +1,7 @@
 Calculate `exp(x) - 1` for all elements in the tensor.
 
+@description
+
 # Returns
     Output tensor, element-wise exponential minus one.
 

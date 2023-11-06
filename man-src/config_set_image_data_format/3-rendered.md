@@ -1,5 +1,7 @@
 Set the value of the image data format convention.
 
+@description
+
 # Examples
 
 ```r

@@ -1,5 +1,7 @@
 Count the number of occurrences of each value in a tensor of integers.
 
+@description
+
 # Returns
 1D tensor where each element gives the number of occurrence(s) of its
 index value in x. Its length is the maximum between `max(x) + 1` and

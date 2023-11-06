@@ -1,5 +1,7 @@
 Return the maximum of a tensor or maximum along an axis.
 
+@description
+
 # Returns
     Maximum of `x`.
 

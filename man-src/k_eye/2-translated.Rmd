@@ -1,5 +1,7 @@
 Return a 2-D tensor with ones on the diagonal and zeros elsewhere.
 
+@description
+
 # Returns
     Tensor with ones on the k-th diagonal and zeros elsewhere.
 

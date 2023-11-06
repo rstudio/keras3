@@ -1,5 +1,7 @@
 Returns the minimum of an array or minimum value along an axis.
 
+@description
+
 # Returns
 An array with the minimum value. If `axis=None`, the result is a scalar
 value representing the minimum element in the entire array. If `axis` is

@@ -1,5 +1,7 @@
 Returns the cumulative sum of elements along a given axis.
 
+@description
+
 # Returns
     Output tensor.
 

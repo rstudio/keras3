@@ -1,5 +1,7 @@
 Computes the logarithm of sum of exponentials of elements in a tensor.
 
+@description
+
 # Returns
 A tensor containing the logarithm of the sum of exponentials of
 elements in `x`.

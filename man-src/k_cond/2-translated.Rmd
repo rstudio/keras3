@@ -1,5 +1,7 @@
 Conditionally applies `true_fn` or `false_fn`.
 
+@description
+
 # Returns
     The output of either `true_fn` or `false_fn` depending on pred.
 

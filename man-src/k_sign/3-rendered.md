@@ -1,5 +1,7 @@
 Returns a tensor with the signs of the elements of `x`.
 
+@description
+
 # Returns
     Output tensor of same shape as `x`.
 

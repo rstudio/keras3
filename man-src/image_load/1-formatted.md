@@ -1,5 +1,7 @@
 Loads an image into PIL format.
 
+@description
+
 # Usage
 ```python
 image = keras.utils.load_img(image_path)

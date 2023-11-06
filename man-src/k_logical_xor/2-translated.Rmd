@@ -1,5 +1,7 @@
 Compute the truth value of `x1 XOR x2`, element-wise.
 
+@description
+
 # Returns
     Output boolean tensor.
 

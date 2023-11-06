@@ -1,5 +1,7 @@
 Interchange two axes of a tensor.
 
+@description
+
 # Returns
     A tensor with the axes swapped.
 

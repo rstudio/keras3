@@ -9,16 +9,15 @@ initializer_zeros()
 \description{
 Initializer that generates tensors initialized to 0.
 }
-\details{
-\if{html}{\out{<div class="sourceCode python">}}\preformatted{# Usage in a Keras layer:
-initializer = Zeros()
-layer = Dense(units=3, kernel_initializer=initializer)
-}\if{html}{\out{</div>}}
-}
 \section{Examples}{
 \if{html}{\out{<div class="sourceCode python">}}\preformatted{# Standalone usage:
 initializer = Zeros()
 values = initializer(shape=(2, 2))
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode python">}}\preformatted{# Usage in a Keras layer:
+initializer = Zeros()
+layer = Dense(units=3, kernel_initializer=initializer)
 }\if{html}{\out{</div>}}
 }
 

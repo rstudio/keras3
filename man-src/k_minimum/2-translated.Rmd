@@ -1,5 +1,7 @@
 Element-wise minimum of `x1` and `x2`.
 
+@description
+
 # Returns
     Output tensor, element-wise minimum of `x1` and `x2`.
 

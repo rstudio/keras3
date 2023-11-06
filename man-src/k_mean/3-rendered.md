@@ -1,5 +1,7 @@
 Compute the arithmetic mean along the specified axes.
 
+@description
+
 # Returns
     Output tensor containing the mean values.
 

@@ -17,21 +17,31 @@ It is not recommended to set this to \code{"float16"} for training,
 as this will likely cause numeric stability issues.
 Instead, mixed precision, which leverages
 a mix of \code{float16} and \code{float32}. It can be configured by calling
-\code{keras.mixed_precision.set_dtype_policy('mixed_float16')}.
+\code{keras::keras$mixed_precision$set_dtype_policy('mixed_float16')}.
 }
 
 \section{Examples}{
-\if{html}{\out{<div class="sourceCode python">}}\preformatted{keras.config.floatx()
-# 'float32'
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{config_floatx()
 }\if{html}{\out{</div>}}
 
-\if{html}{\out{<div class="sourceCode python">}}\preformatted{keras.config.set_floatx('float64')
-keras.config.floatx()
-# 'float64'
+\if{html}{\out{<div class="sourceCode">}}\preformatted{## [1] "float32"
 }\if{html}{\out{</div>}}
 
-\if{html}{\out{<div class="sourceCode python">}}\preformatted{# Set it back to float32
-keras.config.set_floatx('float32')
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{config_set_floatx('float64')
+config_floatx
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode">}}\preformatted{## function ()
+## \{
+##     args <- capture_args2(NULL)
+##     do.call(keras$config$floatx, args)
+## \}
+## <environment: namespace:keras>
+## file: ../../R/autogen-config.R
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{# Set it back to float32
+config_set_floatx('float32')
 }\if{html}{\out{</div>}}
 }
 

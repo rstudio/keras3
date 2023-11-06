@@ -1,5 +1,7 @@
 Test element-wise for positive or negative infinity.
 
+@description
+
 # Returns
     Output boolean tensor.
 

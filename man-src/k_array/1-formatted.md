@@ -1,5 +1,7 @@
 Create a tensor.
 
+@description
+
 # Returns
 A tensor.
 

@@ -1,5 +1,7 @@
 Set the value of the fuzz factor used in numeric expressions.
 
+@description
+
 # Examples
 ```python
 keras.config.epsilon()

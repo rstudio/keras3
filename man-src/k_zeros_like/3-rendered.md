@@ -1,5 +1,7 @@
 Return a tensor of zeros with the same shape and type as `x`.
 
+@description
+
 # Returns
     A tensor of zeros with the same shape and type as `x`.
 

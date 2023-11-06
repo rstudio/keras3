@@ -1,5 +1,7 @@
 Add arguments element-wise.
 
+@description
+
 # Returns
 The tensor containing the element-wise sum of `x1` and `x2`.
 

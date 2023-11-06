@@ -14,8 +14,10 @@ A float.
 }
 
 \section{Examples}{
-\if{html}{\out{<div class="sourceCode python">}}\preformatted{keras.config.epsilon()
-# 1e-07
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{keras::config_epsilon()
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode">}}\preformatted{## [1] 1e-07
 }\if{html}{\out{</div>}}
 }
 

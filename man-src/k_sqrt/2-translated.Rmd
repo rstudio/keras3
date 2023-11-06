@@ -1,5 +1,7 @@
 Return the non-negative square root of a tensor, element-wise.
 
+@description
+
 # Returns
     Output tensor, the non-negative square root of `x`.
 

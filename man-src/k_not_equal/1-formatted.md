@@ -1,5 +1,7 @@
 Return `(x1 != x2)` element-wise.
 
+@description
+
 # Returns
     Output tensor, element-wise comparsion of `x1` and `x2`.
 

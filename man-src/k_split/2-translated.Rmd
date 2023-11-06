@@ -1,5 +1,7 @@
 Split a tensor into chunks.
 
+@description
+
 # Note
 A split does not have to result in equal division when using
 Torch backend.

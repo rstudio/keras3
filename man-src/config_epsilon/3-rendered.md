@@ -1,5 +1,7 @@
 Return the value of the fuzz factor used in numeric expressions.
 
+@description
+
 # Returns
 A float.
 

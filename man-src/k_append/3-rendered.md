@@ -1,5 +1,7 @@
 Append tensor `x2` to the end of tensor `x1`.
 
+@description
+
 # Returns
 A tensor with the values of `x2` appended to `x1`.
 

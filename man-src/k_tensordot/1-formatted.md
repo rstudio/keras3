@@ -1,5 +1,7 @@
 Compute the tensor dot product along specified axes.
 
+@description
+
 # Returns
     The tensor dot product of the inputs.
 

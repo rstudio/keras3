@@ -1,5 +1,7 @@
 Return whether two tensors are element-wise almost equal.
 
+@description
+
 # Returns
     Output boolean tensor.
 

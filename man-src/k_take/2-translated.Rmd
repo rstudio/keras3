@@ -1,5 +1,7 @@
 Take elements from a tensor along an axis.
 
+@description
+
 # Returns
     The corresponding tensor of values.
 
