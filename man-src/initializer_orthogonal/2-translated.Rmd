@@ -22,7 +22,7 @@ values <- initializer(shape = c(2, 2))
 ```{r}
 # Usage in a Keras layer:
 initializer <- initializer_orthogonal()
-layer <- layer_dense(3, kernel_initializer = initializer)
+layer <- layer_dense(units = 3, kernel_initializer = initializer)
 ```
 
 # Reference
