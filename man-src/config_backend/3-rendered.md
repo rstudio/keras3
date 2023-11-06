@@ -5,8 +5,16 @@ String, the name of the backend Keras is currently using. One of
 `"tensorflow"`, `"torch"`, or `"jax"`.
 
 # Examples
-```python
-keras.config.backend()
+
+```r
+keras::config_backend()
+```
+
+```
+## [1] "tensorflow"
+```
+
+```r
 # 'tensorflow'
 ```
 

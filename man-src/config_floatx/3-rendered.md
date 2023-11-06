@@ -7,9 +7,13 @@ E.g. `'float16'`, `'float32'`, `'float64'`.
 String, the current default float type.
 
 # Examples
-```python
-keras.config.floatx()
-# 'float32'
+
+```r
+keras:::config_floatx()
+```
+
+```
+## [1] "float32"
 ```
 
 @export

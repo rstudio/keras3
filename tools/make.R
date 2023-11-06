@@ -131,6 +131,7 @@ get_translations <- function() {
   fs::dir_ls("man-src/", type = "directory") |>
     set_names(basename) %>%
     keep(\(dir) read_file(path(dir, "2-translated.Rmd")) |> str_detect("```python")) |>
+    (\(x) mesage("remaining: ", length(x))) () |>
     head(10) |>
     purrr::walk(\(dir) {
       # browser()
@@ -140,7 +141,7 @@ get_translations <- function() {
       new <- og |> get_translated_roxygen()
       # message("cost: ")
       new |> write_lines("2-translated.Rmd")
-      write_rds(new, "completion.rds")
+      # write_rds(new, "completion.rds")
     })
 }
 

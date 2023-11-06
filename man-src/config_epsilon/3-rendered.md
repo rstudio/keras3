@@ -4,9 +4,13 @@ Return the value of the fuzz factor used in numeric expressions.
 A float.
 
 # Examples
-```python
-keras.config.epsilon()
-# 1e-07
+
+```r
+keras::config_epsilon()
+```
+
+```
+## [1] 1e-07
 ```
 
 @export

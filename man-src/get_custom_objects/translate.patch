@@ -1,0 +1,17 @@
+diff --git a/man-src/get_custom_objects/2-translated.Rmd b/man-src/get_custom_objects/2-translated.Rmd
+index 31865b90..8823a0b2 100644
+--- a/man-src/get_custom_objects/2-translated.Rmd
++++ b/man-src/get_custom_objects/2-translated.Rmd
+@@ -8,5 +8,4 @@ dictionary.
+ # Examples
+-```python
+-get_custom_objects().clear()
+-get_custom_objects()['MyObject'] = MyObject
++```{r, eval = FALSE}
++get_custom_objects()$update(list(MyObject = MyObject))
+ ```
+@@ -14,3 +13,3 @@ get_custom_objects()['MyObject'] = MyObject
+ # Returns
+-    Global dictionary mapping registered class names to classes.
++    Global list mapping registered class names to classes.
+ 
