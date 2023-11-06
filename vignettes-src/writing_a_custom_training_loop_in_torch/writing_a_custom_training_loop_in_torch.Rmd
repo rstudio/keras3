@@ -1,15 +1,24 @@
-"""
-Title: Writing a training loop from scratch in PyTorch
-Author: [fchollet](https://twitter.com/fchollet)
-Date created: 2023/06/25
-Last modified: 2023/06/25
-Description: Writing low-level training & evaluation loops in PyTorch.
-Accelerator: None
-"""
-"""
-## Setup
-"""
+---
+title: Writing a training loop from scratch in PyTorch
+author: '[fchollet](https://twitter.com/fchollet)'
+date-created: 2023/06/25
+last-modified: 2023/06/25
+description: Writing low-level training & evaluation loops in PyTorch.
+accelerator: None
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Writing a training loop from scratch in PyTorch}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+knit: >
+  (function(input, encoding) rmarkdown::render(
+    input, encoding=encoding,
+    output_file='03-rendered.md')))
+---
 
+## Setup
+
+```python
 import os
 
 # This guide can only be run with the torch backend.
@@ -18,8 +27,8 @@ os.environ["KERAS_BACKEND"] = "torch"
 import torch
 import keras as keras
 import numpy as np
+```
 
-"""
 ## Introduction
 
 Keras provides default training and evaluation loops, `fit()` and `evaluate()`.
@@ -34,9 +43,7 @@ is called repeatedly during `fit()`.
 
 Now, if you want very low-level control over training & evaluation, you should write
 your own training & evaluation loops from scratch. This is what this guide is about.
-"""
 
-"""
 ## A first end-to-end example
 
 To write a custom training loop, we need the following ingredients:
@@ -53,9 +60,8 @@ Let's line them up. We'll use torch-native objects in each case --
 except, of course, for the Keras model.
 
 First, let's get the model and the MNIST dataset:
-"""
 
-
+```python
 # Let's consider a simple MNIST model
 def get_model():
     inputs = keras.Input(shape=(784,), name="digits")
@@ -96,19 +102,19 @@ train_dataloader = torch.utils.data.DataLoader(
 val_dataloader = torch.utils.data.DataLoader(
     val_dataset, batch_size=batch_size, shuffle=False
 )
+```
 
-"""
 Next, here's our PyTorch optimizer and our PyTorch loss function:
-"""
 
+```python
 # Instantiate a torch optimizer
 model = get_model()
 optimizer = torch.optim.Adam(model.parameters(), lr=1e-3)
 
 # Instantiate a torch loss function
 loss_fn = torch.nn.CrossEntropyLoss()
+```
 
-"""
 Let's train our model using mini-batch gradient with a custom training loop.
 
 Calling `loss.backward()` on a loss tensor triggers backpropagation.
@@ -124,13 +130,13 @@ Here's our training loop, step by step:
 - For each epoch, we open a `for` loop that iterates over the dataset, in batches
 - For each batch, we call the model on the input data to retrive the predictions,
 then we use them to compute a loss value
-- We call `loss.backward()` to 
+- We call `loss.backward()` to
 - Outside the scope, we retrieve the gradients of the weights
 of the model with regard to the loss
 - Finally, we use the optimizer to update the weights of the model based on the
 gradients
-"""
 
+```python
 epochs = 3
 for epoch in range(epochs):
     for step, (inputs, targets) in enumerate(train_dataloader):
@@ -151,8 +157,8 @@ for epoch in range(epochs):
                 f"Training loss (for 1 batch) at step {step}: {loss.detach().numpy():.4f}"
             )
             print(f"Seen so far: {(step + 1) * batch_size} samples")
+```
 
-"""
 As an alternative, let's look at what the loop looks like when using a Keras optimizer
 and a Keras loss function.
 
@@ -168,8 +174,8 @@ as well as Python `unittest` APIs use the argument order convention
 `fn(y_true, y_pred)` (reference values first, predicted values second),
 PyTorch actually uses `fn(y_pred, y_true)` for its losses.
 So make sure to invert the order of `logits` and `targets`.
-"""
 
+```python
 model = get_model()
 optimizer = keras.optimizers.Adam(learning_rate=1e-3)
 loss_fn = keras.losses.CategoricalCrossentropy(from_logits=True)
@@ -200,8 +206,8 @@ for epoch in range(epochs):
                 f"Training loss (for 1 batch) at step {step}: {loss.detach().numpy():.4f}"
             )
             print(f"Seen so far: {(step + 1) * batch_size} samples")
+```
 
-"""
 ## Low-level handling of metrics
 
 Let's add metrics monitoring to this basic training loop.
@@ -217,8 +223,8 @@ loops written from scratch. Here's the flow:
 
 Let's use this knowledge to compute `CategoricalAccuracy` on training and
 validation data at the end of each epoch:
-"""
 
+```python
 # Get a fresh model
 model = get_model()
 
@@ -230,11 +236,11 @@ loss_fn = keras.losses.CategoricalCrossentropy(from_logits=True)
 # Prepare the metrics.
 train_acc_metric = keras.metrics.CategoricalAccuracy()
 val_acc_metric = keras.metrics.CategoricalAccuracy()
+```
 
-"""
 Here's our training & evaluation loop:
-"""
 
+```python
 for epoch in range(epochs):
     print(f"\nStart of epoch {epoch}")
     for step, (inputs, targets) in enumerate(train_dataloader):
@@ -280,9 +286,8 @@ for epoch in range(epochs):
     val_acc = val_acc_metric.result()
     val_acc_metric.reset_state()
     print(f"Validation acc: {float(val_acc):.4f}")
+```
 
-
-"""
 ## Low-level handling of losses tracked by the model
 
 Layers & models recursively track any losses created during the forward pass
@@ -294,19 +299,17 @@ If you want to be using these loss components, you should sum them
 and add them to the main loss in your training step.
 
 Consider this layer, that creates an activity regularization loss:
-"""
 
-
+```python
 class ActivityRegularizationLayer(keras.layers.Layer):
     def call(self, inputs):
         self.add_loss(1e-2 * torch.sum(inputs))
         return inputs
+```
 
-
-"""
 Let's build a really simple model that uses it:
-"""
 
+```python
 inputs = keras.Input(shape=(784,), name="digits")
 x = keras.layers.Dense(64, activation="relu")(inputs)
 # Insert activity regularization as a layer
@@ -315,11 +318,11 @@ x = keras.layers.Dense(64, activation="relu")(x)
 outputs = keras.layers.Dense(10, name="predictions")(x)
 
 model = keras.Model(inputs=inputs, outputs=outputs)
+```
 
-"""
 Here's what our training loop should look like now:
-"""
 
+```python
 # Get a fresh model
 model = get_model()
 
@@ -379,7 +382,6 @@ for epoch in range(epochs):
     val_acc = val_acc_metric.result()
     val_acc_metric.reset_state()
     print(f"Validation acc: {float(val_acc):.4f}")
+```
 
-"""
 That's it!
-"""

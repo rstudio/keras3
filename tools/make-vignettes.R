@@ -148,12 +148,14 @@ make_guide <- function(guide) {
   # guide == path to tutobook from upstream
   name <- guide |> path_file() |> path_ext_remove()
   dir <- dir_create("vignettes-src", name)
+
   file_copy(guide, path("vignettes-src", name, basename(guide)), overwrite = TRUE)
-  file_copy(guide, path("vignettes-src", name, path_ext_set(name, "Rmd")), overwrite = TRUE)
+  # file_copy(guide, , overwrite = TRUE)
 
   # file_copy(guide, path("vignettes-src", name, "0-tutobook.py"), overwrite = TRUE)
-  tutobook_to_rmd(guide, outfile = path(dir, "1-formatted.md"))
-  tutobook_to_rmd(guide, outfile = path(dir, "2-translated.Rmd"))
+  # tutobook_to_rmd(guide, outfile = path(dir, "1-formatted.md"))
+  # tutobook_to_rmd(guide, outfile = path(dir, "2-translated.Rmd"))
+  tutobook_to_rmd(guide, outfile = path("vignettes-src", name, path_ext_set(name, "Rmd")))
 }
 
 lapply(guides, make_guide)

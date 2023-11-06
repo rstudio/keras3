@@ -1,12 +1,21 @@
-"""
-Title: Multi-GPU and distributed training
-Author: [fchollet](https://twitter.com/fchollet)
-Date created: 2020/04/28
-Last modified: 2020/04/29
-Description: Guide to multi-GPU & distributed training for Keras models.
-Accelerator: GPU
-"""
-"""
+---
+title: Multi-GPU and distributed training
+author: '[fchollet](https://twitter.com/fchollet)'
+date-created: 2020/04/28
+last-modified: 2020/04/29
+description: Guide to multi-GPU & distributed training for Keras models.
+accelerator: GPU
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Multi-GPU and distributed training}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+knit: >
+  (function(input, encoding) rmarkdown::render(
+    input, encoding=encoding,
+    output_file='03-rendered.md')))
+---
+
 ## Introduction
 
 There are generally two ways to distribute computation across multiple devices:
@@ -37,17 +46,13 @@ distributed training). This is a good setup for large-scale industry workflows, 
 training high-resolution image classification models on tens of millions of images using
 20-100 GPUs.
 
-
-"""
-
-"""
 ## Setup
-"""
 
+```python
 import tensorflow as tf
 import keras
+```
 
-"""
 ## Single-host, multi-device synchronous training
 
 In this setup, you have one machine with several GPUs on it (typically 2 to 8). Each
@@ -112,10 +117,7 @@ model.evaluate(test_dataset)
 
 Here's a simple end-to-end runnable example:
 
-
-"""
-
-
+```python
 def get_compiled_model():
     # Make a simple 2-layer densely-connected neural network.
     inputs = keras.Input(shape=(784,))
@@ -172,8 +174,8 @@ model.fit(train_dataset, epochs=2, validation_data=val_dataset)
 
 # Test the model on all available devices.
 model.evaluate(test_dataset)
+```
 
-"""
 ## Using callbacks to ensure fault tolerance
 
 When using distributed training, you should always make sure you have a strategy to
@@ -183,8 +185,8 @@ at regular intervals (e.g. every 100 batches or every epoch). You can then resta
 training from your saved model.
 
 Here's a simple example:
-"""
 
+```python
 import os
 from tensorflow import keras
 
@@ -235,8 +237,8 @@ run_training(epochs=1)
 
 # Calling the same function again will resume from where we left off
 run_training(epochs=1)
+```
 
-"""
 ## `tf.data` performance tips
 
 When doing distributed training, the efficiency with which you load data can often become
@@ -269,9 +271,7 @@ your data pipeline will run asynchronously from your model,
 with new samples being preprocessed and stored in a buffer while the current batch
 samples are used to train the model. The next batch will be prefetched in GPU memory by
 the time the current batch is over.
-"""
 
-"""
 ## Multi-worker distributed synchronous training
 
 **How it works**
@@ -347,7 +347,6 @@ storage location).
 chief worker, runs evaluation on it (asynchronously from the other workers) and writes
 evaluation logs (e.g. TensorBoard logs).
 
-
 **Running code on each worker**
 
 You would run training code on each worker (including the chief) and evaluation code on
@@ -369,10 +368,6 @@ does not need to communicate with other machines) and call `model.evaluate()`. I
 loading the latest checkpoint saved by the chief worker to a Cloud storage location, and
 would save evaluation logs to the same location as the chief logs.
 
-
-"""
-
-"""
 ### Example: code running in a multi-worker setup
 
 On the chief (worker 0):
@@ -385,7 +380,6 @@ os.environ['TF_CONFIG'] = json.dumps({
     },
     'task': {'type': 'worker', 'index': 0}
 })
-
 
 # Open a strategy scope and create/restore the model.
 strategy = tf.distribute.experimental.MultiWorkerMirroredStrategy()
@@ -415,7 +409,6 @@ os.environ['TF_CONFIG'] = json.dumps({
     'task': {'type': 'worker', 'index': worker_index}
 })
 
-
 # Open a strategy scope and create/restore the model.
 # You can restore from the checkpoint saved by the chief.
 strategy = tf.distribute.experimental.MultiWorkerMirroredStrategy()
@@ -442,12 +435,7 @@ results = model.evaluate(val_dataset)
 # Then, log the results on a shared location, write TensorBoard logs, etc
 ```
 
-
-"""
-
-"""
 ### Further reading
-
 
 1. [TensorFlow distributed training guide](
     https://www.tensorflow.org/guide/distributed_training)
@@ -459,4 +447,3 @@ results = model.evaluate(val_dataset)
     https://www.tensorflow.org/api_docs/python/tf/distribute/experimental/MultiWorkerMirroredStrategy)
 5. [Distributed training in tf.keras with Weights & Biases](
     https://towardsdatascience.com/distributed-training-in-tf-keras-with-w-b-ccf021f9322e)
-"""

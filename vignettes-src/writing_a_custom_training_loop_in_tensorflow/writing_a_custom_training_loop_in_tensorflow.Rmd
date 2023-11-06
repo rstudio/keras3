@@ -1,15 +1,24 @@
-"""
-Title: Writing a training loop from scratch in TensorFlow
-Author: [fchollet](https://twitter.com/fchollet)
-Date created: 2019/03/01
-Last modified: 2023/06/25
-Description: Writing low-level training & evaluation loops in TensorFlow.
-Accelerator: None
-"""
-"""
-## Setup
-"""
+---
+title: Writing a training loop from scratch in TensorFlow
+author: '[fchollet](https://twitter.com/fchollet)'
+date-created: 2019/03/01
+last-modified: 2023/06/25
+description: Writing low-level training & evaluation loops in TensorFlow.
+accelerator: None
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Writing a training loop from scratch in TensorFlow}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+knit: >
+  (function(input, encoding) rmarkdown::render(
+    input, encoding=encoding,
+    output_file='03-rendered.md')))
+---
 
+## Setup
+
+```python
 import time
 import os
 
@@ -19,8 +28,8 @@ os.environ["KERAS_BACKEND"] = "tensorflow"
 import tensorflow as tf
 import keras as keras
 import numpy as np
+```
 
-"""
 ## Introduction
 
 Keras provides default training and evaluation loops, `fit()` and `evaluate()`.
@@ -35,15 +44,12 @@ is called repeatedly during `fit()`.
 
 Now, if you want very low-level control over training & evaluation, you should write
 your own training & evaluation loops from scratch. This is what this guide is about.
-"""
 
-"""
 ## A first end-to-end example
 
 Let's consider a simple MNIST model:
-"""
 
-
+```python
 def get_model():
     inputs = keras.Input(shape=(784,), name="digits")
     x1 = keras.layers.Dense(64, activation="relu")(inputs)
@@ -54,13 +60,13 @@ def get_model():
 
 
 model = get_model()
+```
 
-"""
 Let's train it using mini-batch gradient with a custom training loop.
 
 First, we're going to need an optimizer, a loss function, and a dataset:
-"""
 
+```python
 # Instantiate an optimizer.
 optimizer = keras.optimizers.Adam(learning_rate=1e-3)
 # Instantiate a loss function.
@@ -85,8 +91,8 @@ train_dataset = train_dataset.shuffle(buffer_size=1024).batch(batch_size)
 # Prepare the validation dataset.
 val_dataset = tf.data.Dataset.from_tensor_slices((x_val, y_val))
 val_dataset = val_dataset.batch(batch_size)
+```
 
-"""
 Calling a model inside a `GradientTape` scope enables you to retrieve the gradients of
 the trainable weights of the layer with respect to a loss value. Using an optimizer
 instance, you can use these gradients to update these variables (which you can
@@ -102,8 +108,8 @@ Here's our training loop, step by step:
 of the model with regard to the loss
 - Finally, we use the optimizer to update the weights of the model based on the
 gradients
-"""
 
+```python
 epochs = 3
 for epoch in range(epochs):
     print(f"\nStart of epoch {epoch}")
@@ -138,8 +144,8 @@ for epoch in range(epochs):
                 f"Training loss (for 1 batch) at step {step}: {float(loss_value):.4f}"
             )
             print(f"Seen so far: {(step + 1) * batch_size} samples")
+```
 
-"""
 ## Low-level handling of metrics
 
 Let's add metrics monitoring to this basic loop.
@@ -155,8 +161,8 @@ loops written from scratch. Here's the flow:
 
 Let's use this knowledge to compute `SparseCategoricalAccuracy` on training and
 validation data at the end of each epoch:
-"""
 
+```python
 # Get a fresh model
 model = get_model()
 
@@ -168,11 +174,11 @@ loss_fn = keras.losses.SparseCategoricalCrossentropy(from_logits=True)
 # Prepare the metrics.
 train_acc_metric = keras.metrics.SparseCategoricalAccuracy()
 val_acc_metric = keras.metrics.SparseCategoricalAccuracy()
+```
 
-"""
 Here's our training & evaluation loop:
-"""
 
+```python
 epochs = 2
 for epoch in range(epochs):
     print(f"\nStart of epoch {epoch}")
@@ -212,8 +218,8 @@ for epoch in range(epochs):
     val_acc_metric.reset_state()
     print(f"Validation acc: {float(val_acc):.4f}")
     print(f"Time taken: {time.time() - start_time:.2f}s")
+```
 
-"""
 ## Speeding-up your training step with `tf.function`
 
 The default runtime in TensorFlow is eager execution.
@@ -227,9 +233,8 @@ with no knowledge of what comes next.
 
 You can compile into a static graph any function that takes tensors as input.
 Just add a `@tf.function` decorator on it, like this:
-"""
 
-
+```python
 @tf.function
 def train_step(x, y):
     with tf.GradientTape() as tape:
@@ -239,23 +244,20 @@ def train_step(x, y):
     optimizer.apply(grads, model.trainable_weights)
     train_acc_metric.update_state(y, logits)
     return loss_value
+```
 
-
-"""
 Let's do the same with the evaluation step:
-"""
 
-
+```python
 @tf.function
 def test_step(x, y):
     val_logits = model(x, training=False)
     val_acc_metric.update_state(y, val_logits)
+```
 
-
-"""
 Now, let's re-run our training loop with this compiled training step:
-"""
 
+```python
 epochs = 2
 for epoch in range(epochs):
     print(f"\nStart of epoch {epoch}")
@@ -287,12 +289,10 @@ for epoch in range(epochs):
     val_acc_metric.reset_state()
     print(f"Validation acc: {float(val_acc):.4f}")
     print(f"Time taken: {time.time() - start_time:.2f}s")
+```
 
-"""
 Much faster, isn't it?
-"""
 
-"""
 ## Low-level handling of losses tracked by the model
 
 Layers & models recursively track any losses created during the forward pass
@@ -305,19 +305,16 @@ and add them to the main loss in your training step.
 
 Consider this layer, that creates an activity regularization loss:
 
-"""
-
-
+```python
 class ActivityRegularizationLayer(keras.layers.Layer):
     def call(self, inputs):
         self.add_loss(1e-2 * tf.reduce_sum(inputs))
         return inputs
+```
 
-
-"""
 Let's build a really simple model that uses it:
-"""
 
+```python
 inputs = keras.Input(shape=(784,), name="digits")
 x = keras.layers.Dense(64, activation="relu")(inputs)
 # Insert activity regularization as a layer
@@ -326,12 +323,11 @@ x = keras.layers.Dense(64, activation="relu")(x)
 outputs = keras.layers.Dense(10, name="predictions")(x)
 
 model = keras.Model(inputs=inputs, outputs=outputs)
+```
 
-"""
 Here's what our training step should look like now:
-"""
 
-
+```python
 @tf.function
 def train_step(x, y):
     with tf.GradientTape() as tape:
@@ -343,9 +339,8 @@ def train_step(x, y):
     optimizer.apply(grads, model.trainable_weights)
     train_acc_metric.update_state(y, logits)
     return loss_value
+```
 
-
-"""
 ## Summary
 
 Now you know everything there is to know about using built-in training loops and
@@ -353,9 +348,7 @@ writing your own from scratch.
 
 To conclude, here's a simple end-to-end example that ties together everything
 you've learned in this guide: a DCGAN trained on MNIST digits.
-"""
 
-"""
 ## End-to-end example: a GAN training loop from scratch
 
 You may be familiar with Generative Adversarial Networks (GANs). GANs can generate new
@@ -387,8 +380,8 @@ For a much more detailed overview of how GANs works, see
 
 Let's implement this training loop. First, create the discriminator meant to classify
 fake vs real digits:
-"""
 
+```python
 discriminator = keras.Sequential(
     [
         keras.Input(shape=(28, 28, 1)),
@@ -402,13 +395,13 @@ discriminator = keras.Sequential(
     name="discriminator",
 )
 discriminator.summary()
+```
 
-"""
 Then let's create a generator network,
 that turns latent vectors into outputs of shape `(28, 28, 1)` (representing
 MNIST digits):
-"""
 
+```python
 latent_dim = 128
 
 generator = keras.Sequential(
@@ -430,12 +423,12 @@ generator = keras.Sequential(
     ],
     name="generator",
 )
+```
 
-"""
 Here's the key bit: the training loop. As you can see it is quite straightforward. The
 training step function only takes 17 lines.
-"""
 
+```python
 # Instantiate one optimizer for the discriminator and another for the generator.
 d_optimizer = keras.optimizers.Adam(learning_rate=0.0003)
 g_optimizer = keras.optimizers.Adam(learning_rate=0.0004)
@@ -480,15 +473,14 @@ def train_step(real_images):
     grads = tape.gradient(g_loss, generator.trainable_weights)
     g_optimizer.apply(grads, generator.trainable_weights)
     return d_loss, g_loss, generated_images
+```
 
-
-"""
 Let's train our GAN, by repeatedly calling `train_step` on batches of images.
 
 Since our discriminator and generator are convnets, you're going to want to
 run this code on a GPU.
-"""
 
+```python
 # Prepare the dataset. We use both the training & test MNIST digits.
 batch_size = 64
 (x_train, _), (x_test, _) = keras.datasets.mnist.load_data()
@@ -524,8 +516,7 @@ for epoch in range(epochs):
         # Remove the lines below to actually train the model!
         if step > 10:
             break
+```
 
-"""
 That's it! You'll get nice-looking fake MNIST digits after just ~30s of training on the
 Colab GPU.
-"""

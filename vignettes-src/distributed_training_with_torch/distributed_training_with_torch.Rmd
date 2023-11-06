@@ -1,12 +1,21 @@
-"""
-Title: Multi-GPU distributed training with PyTorch
-Author: [fchollet](https://twitter.com/fchollet)
-Date created: 2023/06/29
-Last modified: 2023/06/29
-Description: Guide to multi-GPU training for Keras models with PyTorch.
-Accelerator: GPU
-"""
-"""
+---
+title: Multi-GPU distributed training with PyTorch
+author: '[fchollet](https://twitter.com/fchollet)'
+date-created: 2023/06/29
+last-modified: 2023/06/29
+description: Guide to multi-GPU training for Keras models with PyTorch.
+accelerator: GPU
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Multi-GPU distributed training with PyTorch}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+knit: >
+  (function(input, encoding) rmarkdown::render(
+    input, encoding=encoding,
+    output_file='03-rendered.md')))
+---
+
 ## Introduction
 
 There are generally two ways to distribute computation across multiple devices:
@@ -31,15 +40,13 @@ module wrapper to train Keras, with minimal changes to your code,
 on multiple GPUs (typically 2 to 16) installed on a single machine (single host,
 multi-device training). This is the most common setup for researchers and small-scale
 industry workflows.
-"""
 
-"""
 ## Setup
 
 Let's start by defining the function that creates the model that we will train,
 and the function that creates the dataset we will train on (MNIST in this case).
-"""
 
+```python
 import os
 
 os.environ["KERAS_BACKEND"] = "torch"
@@ -100,14 +107,12 @@ def get_dataset():
         torch.from_numpy(x_train), torch.from_numpy(y_train)
     )
     return dataset
+```
 
-
-"""
 Next, let's define a simple PyTorch training loop that targets
 a GPU (note the calls to `.cuda()`).
-"""
 
-
+```python
 def train_model(model, dataloader, num_epochs, optimizer, loss_fn):
     for epoch in range(num_epochs):
         running_loss = 0.0
@@ -133,9 +138,8 @@ def train_model(model, dataloader, num_epochs, optimizer, loss_fn):
             f"Epoch {epoch + 1}/{num_epochs}, "
             f"Loss: {running_loss / running_loss_count}"
         )
+```
 
-
-"""
 ## Single-host, multi-device synchronous training
 
 In this setup, you have one machine with several GPUs on it (typically 2 to 16). Each
@@ -180,8 +184,8 @@ per device. Each process will run the `per_device_launch_fn` function.
 a separate device in each process.
 
 Here's the flow, where each step is split into its own utility function:
-"""
 
+```python
 # Config
 num_gpu = torch.cuda.device_count()
 num_epochs = 2
@@ -250,12 +254,11 @@ def per_device_launch_fn(current_gpu_index, num_gpu):
     train_model(ddp_model, dataloader, num_epochs, optimizer, loss_fn)
 
     cleanup()
+```
 
-
-"""
 Time to start multiple processes:
-"""
 
+```python
 if __name__ == "__main__":
     # We use the "fork" method rather than "spawn" to support notebooks
     torch.multiprocessing.start_processes(
@@ -265,7 +268,6 @@ if __name__ == "__main__":
         join=True,
         start_method="fork",
     )
+```
 
-"""
 That's it!
-"""

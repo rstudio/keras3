@@ -1,12 +1,21 @@
-"""
-Title: Multi-GPU distributed training with JAX
-Author: [fchollet](https://twitter.com/fchollet)
-Date created: 2023/07/11
-Last modified: 2023/07/11
-Description: Guide to multi-GPU/TPU training for Keras models with JAX.
-Accelerator: GPU
-"""
-"""
+---
+title: Multi-GPU distributed training with JAX
+author: '[fchollet](https://twitter.com/fchollet)'
+date-created: 2023/07/11
+last-modified: 2023/07/11
+description: Guide to multi-GPU/TPU training for Keras models with JAX.
+accelerator: GPU
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Multi-GPU distributed training with JAX}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+knit: >
+  (function(input, encoding) rmarkdown::render(
+    input, encoding=encoding,
+    output_file='03-rendered.md')))
+---
+
 ## Introduction
 
 There are generally two ways to distribute computation across multiple devices:
@@ -30,15 +39,13 @@ Specifically, this guide teaches you how to use `jax.sharding` APIs to train Ker
 models, with minimal changes to your code, on multiple GPUs or TPUS (typically 2 to 16)
 installed on a single machine (single host, multi-device training). This is the
 most common setup for researchers and small-scale industry workflows.
-"""
 
-"""
 ## Setup
 
 Let's start by defining the function that creates the model that we will train,
 and the function that creates the dataset we will train on (MNIST in this case).
-"""
 
+```python
 import os
 
 os.environ["KERAS_BACKEND"] = "jax"
@@ -106,9 +113,8 @@ def get_datasets():
     train_data = tf.data.Dataset.from_tensor_slices((x_train, y_train))
     eval_data = tf.data.Dataset.from_tensor_slices((x_test, y_test))
     return train_data, eval_data
+```
 
-
-"""
 ## Single-host, multi-device synchronous training
 
 In this setup, you have one machine with several GPUs or TPUs on it (typically 2 to 16).
@@ -151,8 +157,8 @@ would use the `jax.sharding` features. Here's how it works:
   to split the batch across devices before invoking the train step.
 
 Here's the flow, where each step is split into its own utility function:
-"""
 
+```python
 # Config
 num_epochs = 2
 batch_size = 64
@@ -265,7 +271,6 @@ for variable, value in zip(
     model.non_trainable_variables, non_trainable_variables
 ):
     variable.assign(value)
+```
 
-"""
 That's it!
-"""

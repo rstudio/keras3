@@ -1,12 +1,21 @@
-"""
-Title: Multi-GPU distributed training with TensorFlow
-Author: [fchollet](https://twitter.com/fchollet)
-Date created: 2020/04/28
-Last modified: 2023/06/29
-Description: Guide to multi-GPU training for Keras models with TensorFlow.
-Accelerator: GPU
-"""
-"""
+---
+title: Multi-GPU distributed training with TensorFlow
+author: '[fchollet](https://twitter.com/fchollet)'
+date-created: 2020/04/28
+last-modified: 2023/06/29
+description: Guide to multi-GPU training for Keras models with TensorFlow.
+accelerator: GPU
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Multi-GPU distributed training with TensorFlow}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+knit: >
+  (function(input, encoding) rmarkdown::render(
+    input, encoding=encoding,
+    output_file='03-rendered.md')))
+---
+
 ## Introduction
 
 There are generally two ways to distribute computation across multiple devices:
@@ -31,20 +40,18 @@ models on multiple GPUs, with minimal changes to your code,
 on multiple GPUs (typically 2 to 16) installed on a single machine (single host,
 multi-device training). This is the most common setup for researchers and small-scale
 industry workflows.
-"""
 
-"""
 ## Setup
-"""
 
+```python
 import os
 
 os.environ["KERAS_BACKEND"] = "tensorflow"
 
 import tensorflow as tf
 import keras as keras
+```
 
-"""
 ## Single-host, multi-device synchronous training
 
 In this setup, you have one machine with several GPUs on it (typically 2 to 16). Each
@@ -109,9 +116,8 @@ with strategy.scope():
 ```
 
 Here's a simple end-to-end runnable example:
-"""
 
-
+```python
 def get_compiled_model():
     # Make a simple 2-layer densely-connected neural network.
     inputs = keras.Input(shape=(784,))
@@ -170,8 +176,8 @@ with strategy.scope():
 
     # Test the model on all available devices.
     model.evaluate(test_dataset)
+```
 
-"""
 ## Using callbacks to ensure fault tolerance
 
 When using distributed training, you should always make sure you have a strategy to
@@ -181,8 +187,8 @@ at regular intervals (e.g. every 100 batches or every epoch). You can then resta
 training from your saved model.
 
 Here's a simple example:
-"""
 
+```python
 # Prepare a directory to store all the checkpoints.
 checkpoint_dir = "./ckpt"
 if not os.path.exists(checkpoint_dir):
@@ -233,8 +239,8 @@ run_training(epochs=1)
 
 # Calling the same function again will resume from where we left off
 run_training(epochs=1)
+```
 
-"""
 ## `tf.data` performance tips
 
 When doing distributed training, the efficiency with which you load data can often become
@@ -267,8 +273,5 @@ your data pipeline will run asynchronously from your model,
 with new samples being preprocessed and stored in a buffer while the current batch
 samples are used to train the model. The next batch will be prefetched in GPU memory by
 the time the current batch is over.
-"""
 
-"""
 That's it!
-"""

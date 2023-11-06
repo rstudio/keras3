@@ -1,12 +1,21 @@
-"""
-Title: Writing your own callbacks
-Authors: Rick Chao, Francois Chollet
-Date created: 2019/03/20
-Last modified: 2023/06/25
-Description: Complete guide to writing new Keras callbacks.
-Accelerator: GPU
-"""
-"""
+---
+title: Writing your own callbacks
+authors: Rick Chao, Francois Chollet
+date-created: 2019/03/20
+last-modified: 2023/06/25
+description: Complete guide to writing new Keras callbacks.
+accelerator: GPU
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Writing your own callbacks}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+knit: >
+  (function(input, encoding) rmarkdown::render(
+    input, encoding=encoding,
+    output_file='03-rendered.md')))
+---
+
 ## Introduction
 
 A callback is a powerful tool to customize the behavior of a Keras model during
@@ -17,16 +26,14 @@ to visualize training progress and results with TensorBoard, or
 In this guide, you will learn what a Keras callback is, what it can do, and how you can
 build your own. We provide a few demos of simple callback applications to get you
 started.
-"""
 
-"""
 ## Setup
-"""
 
+```python
 import numpy as np
 import keras as keras
+```
 
-"""
 ## Keras callbacks overview
 
 All callbacks subclass the `keras.callbacks.Callback` class, and
@@ -40,9 +47,7 @@ model methods:
 - `keras.Model.fit()`
 - `keras.Model.evaluate()`
 - `keras.Model.predict()`
-"""
 
-"""
 ## An overview of callback methods
 
 ### Global methods
@@ -75,16 +80,13 @@ Called at the beginning of an epoch during training.
 #### `on_epoch_end(self, epoch, logs=None)`
 
 Called at the end of an epoch during training.
-"""
 
-"""
 ## A basic example
 
 Let's take a look at a concrete example. To get started, let's import tensorflow and
 define a simple Sequential Keras model:
-"""
 
-
+```python
 # Define the Keras model to add callbacks to
 def get_model():
     model = keras.Sequential()
@@ -95,12 +97,11 @@ def get_model():
         metrics=["mean_absolute_error"],
     )
     return model
+```
 
-
-"""
 Then, load the MNIST data for training and testing from Keras datasets API:
-"""
 
+```python
 # Load example MNIST data and pre-process it
 (x_train, y_train), (x_test, y_test) = keras.datasets.mnist.load_data()
 x_train = x_train.reshape(-1, 784).astype("float32") / 255.0
@@ -111,8 +112,8 @@ x_train = x_train[:1000]
 y_train = y_train[:1000]
 x_test = x_test[:1000]
 y_test = y_test[:1000]
+```
 
-"""
 Now, define a simple custom callback that logs:
 
 - When `fit`/`evaluate`/`predict` starts & ends
@@ -120,9 +121,8 @@ Now, define a simple custom callback that logs:
 - When each training batch starts & ends
 - When each evaluation (test) batch starts & ends
 - When each inference (prediction) batch starts & ends
-"""
 
-
+```python
 class CustomCallback(keras.callbacks.Callback):
     def on_train_begin(self, logs=None):
         keys = list(logs.keys())
@@ -203,12 +203,11 @@ class CustomCallback(keras.callbacks.Callback):
                 batch, keys
             )
         )
+```
 
-
-"""
 Let's try it out:
-"""
 
+```python
 model = get_model()
 model.fit(
     x_train,
@@ -225,15 +224,14 @@ res = model.evaluate(
 )
 
 res = model.predict(x_test, batch_size=128, callbacks=[CustomCallback()])
+```
 
-"""
 ### Usage of `logs` dict
 
 The `logs` dict contains the loss value, and all the metrics at the end of a batch or
 epoch. Example includes the loss and mean absolute error.
-"""
 
-
+```python
 class LossAndErrorPrintingCallback(keras.callbacks.Callback):
     def on_train_batch_end(self, batch, logs=None):
         print(
@@ -275,8 +273,8 @@ res = model.evaluate(
     verbose=0,
     callbacks=[LossAndErrorPrintingCallback()],
 )
+```
 
-"""
 ## Usage of `self.model` attribute
 
 In addition to receiving log information when one of their methods is called,
@@ -296,9 +294,7 @@ what the model is learning over time.
 - etc.
 
 Let's see this in action in a couple of examples.
-"""
 
-"""
 ## Examples of Keras callback applications
 
 ### Early stopping at minimum loss
@@ -309,9 +305,8 @@ minimum of loss has been reached, by setting the attribute `self.model.stop_trai
 epochs we should wait before stopping after having reached a local minimum.
 
 `keras.callbacks.EarlyStopping` provides a more complete and general implementation.
-"""
 
-
+```python
 class EarlyStoppingAtMinLoss(keras.callbacks.Callback):
     """Stop training when the loss is at its min, i.e. the loss stops decreasing.
 
@@ -363,17 +358,16 @@ model.fit(
     verbose=0,
     callbacks=[LossAndErrorPrintingCallback(), EarlyStoppingAtMinLoss()],
 )
+```
 
-"""
 ### Learning rate scheduling
 
 In this example, we show how a custom Callback can be used to dynamically change the
 learning rate of the optimizer during the course of training.
 
 See `callbacks.LearningRateScheduler` for a more general implementations.
-"""
 
-
+```python
 class CustomLearningRateScheduler(keras.callbacks.Callback):
     """Learning rate scheduler which sets the learning rate according to schedule.
 
@@ -432,12 +426,11 @@ model.fit(
         CustomLearningRateScheduler(lr_schedule),
     ],
 )
+```
 
-"""
 ### Built-in Keras callbacks
 
 Be sure to check out the existing Keras callbacks by
 reading the [API docs](https://keras.io/api/callbacks/).
 Applications include logging to CSV, saving
 the model, visualizing metrics in TensorBoard, and a lot more!
-"""
