@@ -67,10 +67,10 @@ model$history %>% keras:::to_keras_training_history() %>% as.data.frame() %>% pr
 
 ```
 ##    epoch     value metric     data
-## 1      1 0.4167342   loss training
-## 2      2 0.2713403   loss training
-## 3      3 0.1766727   loss training
-## 4      4 0.1150336   loss training
+## 1      1 0.8029032   loss training
+## 2      2 0.5227790   loss training
+## 3      3 0.3403872   loss training
+## 4      4 0.2216299   loss training
 ## 5      5        NA   loss training
 ## 6      6        NA   loss training
 ## 7      7        NA   loss training

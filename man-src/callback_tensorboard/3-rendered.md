@@ -42,17 +42,16 @@ Custom batch-level summaries in a subclassed Model:
 
 
 ```r
-MyModel <- new_model_class("MyModel", 
+MyModel <- new_model_class("MyModel",
   initialize = function() {
-  self$dense <- layer_dense(units = 10)
-    
+    self$dense <- layer_dense(units = 10)
   },
   call = function(x) {
     outputs <- x |> self$dense()
     tf$summary$histogram('outputs', outputs)
     outputs
   }
-})
+)
 
 model <- MyModel()
 model |> compile(optimizer = 'sgd', loss = 'mse')
@@ -74,8 +73,8 @@ my_summary <- function(x) {
 }
 
 inputs <- layer_input(10)
-outputs <- inputs |> 
-  layer_dense(10) |> 
+outputs <- inputs |>
+  layer_dense(10) |>
   layer_lambda(my_summary)
 
 model <- keras_model(inputs, outputs)
@@ -95,13 +94,13 @@ Profiling:
 # Profile a single batch, e.g. the 5th batch.
 tensorboard_callback <- callback_tensorboard(
   log_dir = './logs', profile_batch = 5)
-model |> fit(x_train, y_train, epochs = 2, 
+model |> fit(x_train, y_train, epochs = 2,
              callbacks = list(tensorboard_callback))
 
 # Profile a range of batches, e.g. from 10 to 20.
 tensorboard_callback <- callback_tensorboard(
   log_dir = './logs', profile_batch = c(10, 20))
-model |> fit(x_train, y_train, epochs = 2, 
+model |> fit(x_train, y_train, epochs = 2,
              callbacks = list(tensorboard_callback))
 ```
 

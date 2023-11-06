@@ -495,7 +495,7 @@ render_roxygen_rmds()
 
 devtools::document(roclets = c('rd', 'namespace'))
 stop("DONE", call. = FALSE)
-
+#   git add man-src/*/2-*
 
 
 "file.edit('man-src/callback_progbar_logger/2-translated.Rmd')" %>%

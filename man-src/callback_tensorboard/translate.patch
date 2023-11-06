@@ -1,5 +1,5 @@
 diff --git a/man-src/callback_tensorboard/2-translated.Rmd b/man-src/callback_tensorboard/2-translated.Rmd
-index 41dc7964..0a7b122b 100644
+index 41dc7964..6d41c711 100644
 --- a/man-src/callback_tensorboard/2-translated.Rmd
 +++ b/man-src/callback_tensorboard/2-translated.Rmd
 @@ -13,9 +13,9 @@ This callback logs events for TensorBoard, including:
@@ -29,7 +29,7 @@ index 41dc7964..0a7b122b 100644
 +tensorboard_callback <- callback_tensorboard(log_dir = "./logs")
 +model %>% fit(x_train, y_train, epochs = 2, callbacks = list(tensorboard_callback))
  # Then run the tensorboard command to view the visualizations.
-@@ -40,21 +41,23 @@ Custom batch-level summaries in a subclassed Model:
+@@ -40,21 +41,22 @@ Custom batch-level summaries in a subclassed Model:
  
 -```python
 -class MyModel(keras.Model):
@@ -51,17 +51,16 @@ index 41dc7964..0a7b122b 100644
 -tb_callback = keras.callbacks.TensorBoard('./logs', update_freq=1)
 -model.fit(x_train, y_train, callbacks=[tb_callback])
 +```{r, eval = FALSE}
-+MyModel <- new_model_class("MyModel", 
++MyModel <- new_model_class("MyModel",
 +  initialize = function() {
-+  self$dense <- layer_dense(units = 10)
-+    
++    self$dense <- layer_dense(units = 10)
 +  },
 +  call = function(x) {
 +    outputs <- x |> self$dense()
 +    tf$summary$histogram('outputs', outputs)
 +    outputs
 +  }
-+})
++)
 +
 +model <- MyModel()
 +model |> compile(optimizer = 'sgd', loss = 'mse')
@@ -72,7 +71,7 @@ index 41dc7964..0a7b122b 100644
 +tb_callback <- callback_tensorboard(log_dir = './logs', update_freq = 1)
 +model |> fit(x_train, y_train, callbacks = list(tb_callback))
  ```
-@@ -63,12 +66,15 @@ Custom batch-level summaries in a Functional API Model:
+@@ -63,12 +65,15 @@ Custom batch-level summaries in a Functional API Model:
  
 -```python
 -def my_summary(x):
@@ -85,8 +84,8 @@ index 41dc7964..0a7b122b 100644
 +}
 +
 +inputs <- layer_input(10)
-+outputs <- inputs |> 
-+  layer_dense(10) |> 
++outputs <- inputs |>
++  layer_dense(10) |>
 +  layer_lambda(my_summary)
  
 -inputs = keras.Input(10)
@@ -97,14 +96,14 @@ index 41dc7964..0a7b122b 100644
 +model <- keras_model(inputs, outputs)
 +model |> compile(optimizer = 'sgd', loss = 'mse')
  
-@@ -77,4 +83,4 @@ model.compile('sgd', 'mse')
+@@ -77,4 +82,4 @@ model.compile('sgd', 'mse')
  # metrics added in `Model.compile` will be logged every N batches.
 -tb_callback = keras.callbacks.TensorBoard('./logs', update_freq=1)
 -model.fit(x_train, y_train, callbacks=[tb_callback])
 +tb_callback <- callback_tensorboard(log_dir = './logs', update_freq = 1)
 +model |> fit(x_train, y_train, callbacks = list(tb_callback))
  ```
-@@ -83,12 +89,14 @@ Profiling:
+@@ -83,12 +88,14 @@ Profiling:
  
 -```python
 +```{r, eval = FALSE}
@@ -114,7 +113,7 @@ index 41dc7964..0a7b122b 100644
 -model.fit(x_train, y_train, epochs=2, callbacks=[tensorboard_callback])
 +tensorboard_callback <- callback_tensorboard(
 +  log_dir = './logs', profile_batch = 5)
-+model |> fit(x_train, y_train, epochs = 2, 
++model |> fit(x_train, y_train, epochs = 2,
 +             callbacks = list(tensorboard_callback))
  
  # Profile a range of batches, e.g. from 10 to 20.
@@ -123,15 +122,15 @@ index 41dc7964..0a7b122b 100644
 -model.fit(x_train, y_train, epochs=2, callbacks=[tensorboard_callback])
 +tensorboard_callback <- callback_tensorboard(
 +  log_dir = './logs', profile_batch = c(10, 20))
-+model |> fit(x_train, y_train, epochs = 2, 
++model |> fit(x_train, y_train, epochs = 2,
 +             callbacks = list(tensorboard_callback))
  ```
-@@ -97,3 +105,3 @@ model.fit(x_train, y_train, epochs=2, callbacks=[tensorboard_callback])
+@@ -97,3 +104,3 @@ model.fit(x_train, y_train, epochs=2, callbacks=[tensorboard_callback])
      parsed by TensorBoard. e.g.,
 -    `log_dir = os.path.join(working_dir, 'logs')`.
 +    `log_dir = file.path(working_dir, 'logs')`.
      This directory should not be reused by any other callbacks.
-@@ -106,3 +114,3 @@ model.fit(x_train, y_train, epochs=2, callbacks=[tensorboard_callback])
+@@ -106,3 +113,3 @@ model.fit(x_train, y_train, epochs=2, callbacks=[tensorboard_callback])
      Note that the log file can become quite large
 -    when `write_graph` is set to `True`.
 +    when `write_graph` is set to `TRUE`.
