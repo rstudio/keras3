@@ -16,7 +16,6 @@ Note that the callbacks expects positional arguments, as:
 
 # Examples
 
-
 ```r
 # Print the batch number at the beginning of every batch.
 batch_print_callback <- callback_lambda(
@@ -25,14 +24,14 @@ batch_print_callback <- callback_lambda(
   }
 )
 
-# Stream the epoch loss to a file in JSON format. The file content
-# is not well-formed JSON but rather has a JSON object per line.
-json_log <- file('loss_log.json', open = 'wt', blocking = 1)
+# Stream the epoch loss to a file in new-line delimited JSON format
+# (one valid JSON object per line)
+json_log <- file('loss_log.json', open = 'wt')
 json_logging_callback <- callback_lambda(
   on_epoch_end = function(epoch, logs) {
     jsonlite::write_json(
-      x = list(epoch = epoch, loss = logs$loss),
-      file = json_log,
+      list(epoch = epoch, loss = logs$loss),
+      json_log,
       append = TRUE
     )
   },
@@ -43,13 +42,6 @@ json_logging_callback <- callback_lambda(
 
 # Terminate some processes after having finished model training.
 processes <- ...
-```
-
-```
-## Error in eval(expr, envir, enclos): '...' used in an incorrect context
-```
-
-```r
 cleanup_callback <- callback_lambda(
   on_train_end = function(logs) {
     for (p in processes) {
@@ -68,10 +60,6 @@ model %>% fit(
     cleanup_callback
   )
 )
-```
-
-```
-## Error in model %>% fit(..., callbacks = list(batch_print_callback, json_logging_callback, : '...' used in an incorrect context
 ```
 
 @param on_epoch_begin called at the beginning of every epoch.

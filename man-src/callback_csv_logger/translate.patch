@@ -1,5 +1,5 @@
 diff --git a/man-src/callback_csv_logger/2-translated.Rmd b/man-src/callback_csv_logger/2-translated.Rmd
-index 40dcc47e..a39b40b8 100644
+index 40dcc47e..06aa086d 100644
 --- a/man-src/callback_csv_logger/2-translated.Rmd
 +++ b/man-src/callback_csv_logger/2-translated.Rmd
 @@ -4,8 +4,8 @@ Callback that streams epoch results to a CSV file.
@@ -11,7 +11,7 @@ index 40dcc47e..a39b40b8 100644
 -```python
 -csv_logger = CSVLogger('training.log')
 -model.fit(X_train, Y_train, callbacks=[csv_logger])
-+```{r}
++```r
 +csv_logger <- callback_csv_logger('training.log')
 +model %>% fit(X_train, Y_train, callbacks = list(csv_logger))
  ```
