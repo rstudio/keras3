@@ -6,6 +6,10 @@ if(!"source:tools/translate-tools.R" %in% search()) envir::attach_source("tools/
 # TODO: in reticulate, change subclassed dict autoconversion back to off:
 #      so that keras$utils$get_custom_objects()$clear() works.
 #
+# TODO: remove k_amax() and friends, they're redundant w/ k_max(), which already
+#       takes an axis arg. Only there for numpy api compatability, which
+#       doesn't matter to us.
+#
 # TODO: get_custom_objects() needs thinking
 
 # TODO: r_name autogen: move "set" to tail, so have config_floatx(), config_floatx_set()
@@ -300,6 +304,8 @@ endpoints <-
     "keras.callbacks.History"        # always added to fit() by default
 
     "keras.optimizers.LegacyOptimizerWarning"
+
+    "keras.ops.absolute" # alias  dup of abs.
   })
 
 # fs::path("tools/raw", gsub(".", "-", endpoint, fixed = TRUE), ext = "R")
