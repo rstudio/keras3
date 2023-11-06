@@ -1,7 +1,7 @@
 Callback to back up and restore the training state.
 
 @description
-`backup_and_restore` callback is intended to recover training from an
+`callback_backup_and_restore` callback is intended to recover training from an
 interruption that has happened in the middle of a `fit` execution, by
 backing up the training states in a temporary checkpoint file, at the end of
 each epoch. Each backup overwrites the previously written checkpoint file,
@@ -33,7 +33,8 @@ callback_interrupting <- new_callback_class(
   }
 )
 
-callback <- callback_backup_and_restore(backup_dir = "/tmp/backup")
+backup_dir <- tempfile()
+callback <- callback_backup_and_restore(backup_dir = backup_dir)
 model <- keras_model_sequential() %>%
   layer_dense(10)
 model %>% compile(optimizer = optimizer_sgd(), loss = 'mse')
@@ -45,6 +46,9 @@ tryCatch({
                 callbacks = list(callback, callback_interrupting()),
                 verbose = 0)
 }, python.builtin.RuntimeError = function(e) message("Interrupted!"))
+
+model$history$epoch
+model$history %>% keras:::to_keras_training_history() %>% as.data.frame() %>% print()
 
 history <- model %>% fit(x = k_ones(c(5, 20)),
                          y = k_zeros(5),
