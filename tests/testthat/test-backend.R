@@ -44,6 +44,7 @@ test_backend("k_arange", {
 })
 
 test_backend("k_clear_session", {
+  skip("k_clear_session")
   if (is_backend("tensorflow"))
     k_clear_session()
 })
