@@ -1,6 +1,6 @@
 library(envir)
 attach_source("tools/utils.R")
-attach_source("tools/common.R")
+# attach_source("tools/common.R")
 
 
 munge_tutobook <- function(tutobook) {
@@ -37,6 +37,12 @@ munge_tutobook <- function(tutobook) {
 
         frontmatter <- yaml::as.yaml(x) %>% str_trim("right")
         frontmatter %<>% str_flatten_lines(vignette)
+        frontmatter %<>% str_flatten_lines(., trim(r"---{
+        knit: >
+          (function(input, encoding) rmarkdown::render(
+            input, encoding=encoding,
+            output_file='03-rendered.md')))
+        }---"))
 
         # frontmatter <- str_c(x[,1], ": ", x[,2])
         out <- str_flatten_lines("---", frontmatter, "---")
@@ -90,10 +96,14 @@ fetch_tutobook_filepaths <- function(...) {
     .[!duplicated(basename(.))]
 
 }
+# tutobook = readLines(path_to_tutobook),
 
-
-tutobook_to_rmd <- function(path_to_tutobook, outdir = "vignettes") {
-  tutobook <-
+tutobook_to_rmd <- function(path_to_tutobook, outfile = NULL, tutobook = NULL) {
+  if(is.null(tutobook))
+    tutobook <- readLines(path_to_tutobook)
+  if(is.null(outfile) && !missing(path_to_tutobook)) {
+    outfile <- path_ext_set(path_to_tutobook, "Rmd")
+  }
   # tutobook <- readr::read_file(path_to_tutobook)
   # name <- path_to_tutobook %>%
   #   basename() %>% fs::path_ext_remove() %>%
@@ -101,18 +111,22 @@ tutobook_to_rmd <- function(path_to_tutobook, outdir = "vignettes") {
 
   # vignette_header <- glue::glue(title = name)
     tutobook <- try({
-      path_to_tutobook |>
-        readLines(warn = FALSE) |>
-        munge_tutobook()
+        munge_tutobook(tutobook)
     }, silent = TRUE)
   if(inherits(tutobook, "try-error")) {
     message("converting failed: ", path_to_tutobook)
     return()
   }
 
-  new_filename <- basename(path_to_tutobook) %>% fs::path_ext_set(".Rmd")
-  fs::dir_create(outdir)
-  writeLines(tutobook, file.path(outdir, new_filename))
+  # new_filename <- basename(path_to_tutobook) %>% fs::path_ext_set(".Rmd")
+  # fs::dir_create(outdir)
+  if(is.null(outfile))
+    tutobook
+  else {
+    writeLines(tutobook, outfile)
+    invisible(outfile)
+  }
+
 }
 
 
@@ -130,6 +144,22 @@ examples <-
   }
 
 
+make_guide <- function(guide) {
+  # guide == path to tutobook from upstream
+  name <- guide |> path_file() |> path_ext_remove()
+  dir <- dir_create("vignettes-src", name)
+  file_copy(guide, path("vignettes-src", name, basename(guide)), overwrite = TRUE)
+  file_copy(guide, path("vignettes-src", name, path_ext_set(name, "Rmd")), overwrite = TRUE)
+
+  # file_copy(guide, path("vignettes-src", name, "0-tutobook.py"), overwrite = TRUE)
+  tutobook_to_rmd(guide, outfile = path(dir, "1-formatted.md"))
+  tutobook_to_rmd(guide, outfile = path(dir, "2-translated.Rmd"))
+}
+
+lapply(guides, make_guide)
+# make_guide(guides[1])
+
+stop()
 
 # lapply(guides[9], tutobook_to_rmd)
 lapply(guides, tutobook_to_rmd, outdir = "vignettes/guides")
