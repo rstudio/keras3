@@ -399,8 +399,9 @@ df <- df |>
 
 stop("lllll")
 # ?? TODO: where is ~/github/rstudio/keras/R/autogen-preprocessing.R coming from?
-#
+
 df |>
+
   group_by(file) |>
   dplyr::group_walk(\(df, grp) {
 
@@ -415,7 +416,11 @@ df |>
 
         # str_c("#' ", readLines(fs::path(man_roxygen_dir, "2-translated.Rmd"))),
         # glue(r"--(#' @eval readLines("{fs::path(man_roxygen_dir, "2-translated.Rmd")}") )--"),
-        glue(r"--(#        file.edit("{fs::path(man_roxygen_dir, "2-translated.Rmd")}") )--"),
+
+        # glue(r"--(#        file.edit("{fs::path(man_roxygen_dir, "2-translated.Rmd")}") )--"),
+        glue(r"--("{fs::path(man_roxygen_dir, "2-translated.Rmd")}" # |>file.edit() # or cmd+click to edit man page)--"),
+
+        # glue(r"--(file.edit("{fs::path(man_roxygen_dir, "2-translated.Rmd")}"))--") %>% cli::style_hyperlink(., paste0("ide:run:", .)),
         glue(r"--(#' @eval readLines("{fs::path(man_roxygen_dir, "3-rendered.md")}") )--"),
         # glue(r"--(#' @backref "{fs::path(man_roxygen_dir, "2-translated.Rmd")}" )--"),
         str_c(r_name, " <- "),
@@ -472,7 +477,7 @@ render_roxygen_rmds <- function(filepath = fs::dir_ls("man-src/", type = "direct
       message("rendering: ", dir)
       keras$utils$clear_session()
       # Set knitr options to halt on errors
-      # knitr::opts_chunk$set(error = FALSE)
+      knitr::opts_chunk$set(error = FALSE)
       knitr::knit("2-translated.Rmd", "3-rendered.md",
                   quiet = TRUE, envir = new.env())
     })
@@ -484,6 +489,14 @@ render_roxygen_rmds()
 
 devtools::document(roclets = c('rd', 'namespace'))
 stop("DONE", call. = FALSE)
+
+
+
+"file.edit('man-src/callback_progbar_logger/2-translated.Rmd')" %>%
+  cli::style_hyperlink(., paste0("ide:run:", .)) %>%
+  dput()
+
+# file.edit('man-src/callback_progbar_logger/2-translated.Rmd')
 
 
 # df <- df %>%
