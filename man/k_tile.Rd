@@ -11,6 +11,10 @@ k_tile(x, repeats)
 
 \item{repeats}{The number of repetitions of \code{x} along each axis.}
 }
+\value{
+\if{html}{\out{<div class="sourceCode">}}\preformatted{The tiled output tensor.
+}\if{html}{\out{</div>}}
+}
 \description{
 If \code{repeats} has length \code{d}, the result will have dimension of
 \code{max(d, x.ndim)}.
@@ -20,11 +24,6 @@ new axes.
 
 If \code{x.ndim > d}, \code{repeats} is promoted to \code{x.ndim} by prepending 1's to it.
 }
-\section{Returns}{
-\if{html}{\out{<div class="sourceCode">}}\preformatted{The tiled output tensor.
-}\if{html}{\out{</div>}}
-}
-
 \seealso{
 \itemize{
 \item \url{https://www.tensorflow.org/api_docs/python/tf/keras/ops/tile}

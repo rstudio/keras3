@@ -39,6 +39,11 @@ computation above.}
 \item{name}{String.  Optional name of the operation. Defaults to
 \code{"PolynomialDecay"}.}
 }
+\value{
+A 1-arg callable learning rate schedule that takes the current optimizer
+step and outputs the decayed learning rate, a scalar tensor of the
+same type as \code{initial_learning_rate}.
+}
 \description{
 It is commonly observed that a monotonically decreasing learning rate, whose
 degree of change is carefully chosen, results in a better performing model.
@@ -163,10 +168,6 @@ The learning rate schedule is also serializable and deserializable using
 }
 
 \section{Returns}{
-A 1-arg callable learning rate schedule that takes the current optimizer
-step and outputs the decayed learning rate, a scalar tensor of the
-same type as \code{initial_learning_rate}.
-
 A 1-arg callable learning rate schedule that takes the current optimizer
 step and outputs the decayed learning rate, a scalar tensor of the
 same type as \code{initial_learning_rate}.

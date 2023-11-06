@@ -43,7 +43,7 @@ tensor.
     prevent tokens from attending to future tokens (e.g., used in a
     decoder Transformer).
 
-# Returns
+@returns
 attention_output: Result of the computation, of shape
     `(batch_dim, target_seq_len, feature_dim)`, where `target_seq_len`
     is for target sequence length and `feature_dim` is the query input

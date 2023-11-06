@@ -1,8 +1,6 @@
 Compute the q-th quantile(s) of the data along the specified axis.
 
-@description
-
-# Returns
+@returns
 The quantile(s). If `q` is a single probability and `axis=None`, then
 the result is a scalar. If multiple probabilies levels are given, first
 axis of the result corresponds to the quantiles. The other axes are the

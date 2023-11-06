@@ -3,10 +3,6 @@ Converts a class vector (integers) to binary class matrix.
 @description
 E.g. for use with `categorical_crossentropy`.
 
-# Returns
-A binary matrix representation of the input as a NumPy array. The class
-axis is placed last.
-
 # Examples
 ```python
 a = keras.utils.to_categorical([0, 1, 2, 3], num_classes=4)
@@ -33,6 +29,10 @@ loss = keras.backend.categorical_crossentropy(a, a)
 print(np.around(loss, 5))
 # [0. 0. 0. 0.]
 ```
+
+@returns
+A binary matrix representation of the input as a NumPy array. The class
+axis is placed last.
 
 @param x Array-like with class values to be converted into a matrix
     (integers from 0 to `num_classes - 1`).

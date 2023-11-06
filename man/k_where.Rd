@@ -13,14 +13,13 @@ k_where(condition, x1 = NULL, x2 = NULL)
 
 \item{x2}{Values from which to choose when \code{condition} is \code{False}.}
 }
-\description{
-Return elements chosen from \code{x1} or \code{x2} depending on \code{condition}.
-}
-\section{Returns}{
+\value{
 A tensor with elements from \code{x1} where \code{condition} is \code{True}, and
 elements from \code{x2} where \code{condition} is \code{False}.
 }
-
+\description{
+Return elements chosen from \code{x1} or \code{x2} depending on \code{condition}.
+}
 \seealso{
 \itemize{
 \item \url{https://www.tensorflow.org/api_docs/python/tf/keras/ops/where}

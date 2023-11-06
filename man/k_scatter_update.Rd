@@ -15,6 +15,10 @@ equal to the first dimension of \code{updates}.}
 
 \item{updates}{A tensor, the new values to be put to \code{inputs} at \code{indices}.}
 }
+\value{
+\if{html}{\out{<div class="sourceCode">}}\preformatted{A tensor, has the same shape and dtype as `inputs`.
+}\if{html}{\out{</div>}}
+}
 \description{
 At a high level, this operation does \code{inputs[indices] = updates}.
 Assume \code{inputs} is a tensor of shape \verb{(D0, D1, ..., Dn)}, there are 2 main
@@ -48,11 +52,6 @@ updates = np.array([[1., 1., 1, 1,], [1., 1., 1, 1,])
 inputs = keras.ops.scatter_update(inputs, indices, updates)
 }\if{html}{\out{</div>}}
 }
-\section{Returns}{
-\if{html}{\out{<div class="sourceCode">}}\preformatted{A tensor, has the same shape and dtype as `inputs`.
-}\if{html}{\out{</div>}}
-}
-
 \seealso{
 \itemize{
 \item \url{https://www.tensorflow.org/api_docs/python/tf/keras/ops/scatter_update}

@@ -3,7 +3,7 @@ Roll tensor elements along a given axis.
 @description
 Elements that roll beyond the last position are re-introduced at the first.
 
-# Returns
+@returns
     Output tensor.
 
 @param x Input tensor.

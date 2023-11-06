@@ -2,16 +2,16 @@ Computes the logarithm of sum of exponentials of elements in a tensor.
 
 @description
 
-# Returns
-A tensor containing the logarithm of the sum of exponentials of
-elements in `x`.
-
 # Examples
 ```python
 x = keras.ops.convert_to_tensor([1., 2., 3.])
 logsumexp(x)
 # 3.407606
 ```
+
+@returns
+A tensor containing the logarithm of the sum of exponentials of
+elements in `x`.
 
 @param x Input tensor.
 @param axis An integer or a tuple of integers specifying the axis/axes

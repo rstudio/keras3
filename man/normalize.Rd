@@ -13,15 +13,14 @@ normalize(x, axis = -1L, order = 2L)
 
 \item{order}{Normalization order (e.g. \code{order=2} for L2 norm).}
 }
+\value{
+\if{html}{\out{<div class="sourceCode">}}\preformatted{A normalized copy of the array.
+}\if{html}{\out{</div>}}
+}
 \description{
 If the input is a NumPy array, a NumPy array will be returned.
 If it's a backend tensor, a backend tensor will be returned.
 }
-\section{Returns}{
-\if{html}{\out{<div class="sourceCode">}}\preformatted{A normalized copy of the array.
-}\if{html}{\out{</div>}}
-}
-
 \seealso{
 \itemize{
 \item \url{https://www.tensorflow.org/api_docs/python/tf/keras/utils/normalize}

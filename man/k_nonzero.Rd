@@ -9,14 +9,13 @@ k_nonzero(x)
 \arguments{
 \item{x}{Input tensor.}
 }
-\description{
-Return the indices of the elements that are non-zero.
-}
-\section{Returns}{
+\value{
 \if{html}{\out{<div class="sourceCode">}}\preformatted{Indices of elements that are non-zero.
 }\if{html}{\out{</div>}}
 }
-
+\description{
+Return the indices of the elements that are non-zero.
+}
 \seealso{
 \itemize{
 \item \url{https://www.tensorflow.org/api_docs/python/tf/keras/ops/nonzero}

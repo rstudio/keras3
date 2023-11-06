@@ -16,6 +16,10 @@ Generally, custom_objects is provided by the user.}
 Generally, module_objects is provided by midlevel library
 implementers.}
 }
+\value{
+An instantiable class associated with \code{name}, or \code{None} if no such class
+exists.
+}
 \description{
 This function is part of the Keras serialization and deserialization
 framework. It maps strings to the objects associated with them for
@@ -27,11 +31,6 @@ serialization/deserialization.
         config['hidden_cls'] = tf.keras.saving.get_registered_object(
             config['my_custom_object_name'], custom_objects=custom_objects)
 }\if{html}{\out{</div>}}
-}
-
-\section{Returns}{
-An instantiable class associated with \code{name}, or \code{None} if no such class
-exists.
 }
 
 \seealso{

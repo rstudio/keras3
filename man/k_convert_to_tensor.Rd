@@ -11,13 +11,12 @@ k_convert_to_tensor(x, dtype = NULL)
 
 \item{dtype}{The target type.}
 }
+\value{
+A tensor of the specified \code{dtype}.
+}
 \description{
 Convert a NumPy array to a tensor.
 }
-\section{Returns}{
-A tensor of the specified \code{dtype}.
-}
-
 \section{Examples}{
 \if{html}{\out{<div class="sourceCode python">}}\preformatted{x = np.array([1, 2, 3])
 y = keras.ops.convert_to_tensor(x)

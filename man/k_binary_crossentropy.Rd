@@ -20,17 +20,16 @@ Set it to \code{True} if \code{output} represents logits; otherwise,
 set it to \code{False} if \code{output} represents probabilities.
 Defaults to\code{False}.}
 }
+\value{
+Integer tensor: The computed binary cross-entropy loss between
+\code{target} and \code{output}.
+}
 \description{
 The binary cross-entropy loss is commonly used in binary
 classification tasks where each input sample belongs to one
 of the two classes. It measures the dissimilarity between the
 target and output probabilities or logits.
 }
-\section{Returns}{
-Integer tensor: The computed binary cross-entropy loss between
-\code{target} and \code{output}.
-}
-
 \section{Examples}{
 \if{html}{\out{<div class="sourceCode python">}}\preformatted{target = keras.ops.convert_to_tensor([0, 1, 1, 0])
 output = keras.ops.convert_to_tensor([0.1, 0.9, 0.8, 0.2])

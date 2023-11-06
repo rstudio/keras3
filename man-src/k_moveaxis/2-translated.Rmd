@@ -3,7 +3,7 @@ Move axes of a tensor to new positions.
 @description
 Other axes remain in their original order.
 
-# Returns
+@returns
     Tensor with moved axes.
 
 @param x Tensor whose axes should be reordered.

@@ -19,10 +19,6 @@ connectivity pattern that is compatible with said convolution.
 - If `data_format="channels_first"`:
     A 3D tensor with shape: `(batch_shape, filters, new_steps)`
 
-# Returns
-A 3D tensor representing
-`activation(conv1d_transpose(inputs, kernel) + bias)`.
-
 # Raises
 ValueError: when both `strides > 1` and `dilation_rate > 1`.
 
@@ -39,6 +35,10 @@ y = keras.layers.Conv1DTranspose(32, 3, 2, activation='relu')(x)
 print(y.shape)
 # (4, 21, 32)
 ```
+
+@returns
+A 3D tensor representing
+`activation(conv1d_transpose(inputs, kernel) + bias)`.
 
 @param filters int, the dimension of the output space (the number of filters
     in the transpose convolution).

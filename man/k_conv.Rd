@@ -47,14 +47,13 @@ specifying the dilation rate to use for dilated convolution. If
 \code{dilation_rate} is int, then every spatial dimension shares
 the same \code{dilation_rate}.}
 }
-\description{
-This ops supports 1D, 2D and 3D convolution.
-}
-\section{Returns}{
+\value{
 \if{html}{\out{<div class="sourceCode">}}\preformatted{A tensor of rank N+2, the result of the conv operation.
 }\if{html}{\out{</div>}}
 }
-
+\description{
+This ops supports 1D, 2D and 3D convolution.
+}
 \seealso{
 \itemize{
 \item \url{https://www.tensorflow.org/api_docs/python/tf/keras/ops/conv}

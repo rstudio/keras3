@@ -11,14 +11,13 @@ k_divide(x1, x2)
 
 \item{x2}{Second input tensor.}
 }
-\description{
-\code{keras.ops.true_divide} is an alias for this function.
-}
-\section{Returns}{
+\value{
 \if{html}{\out{<div class="sourceCode">}}\preformatted{Output tensor, the quotient `x1/x2`, element-wise.
 }\if{html}{\out{</div>}}
 }
-
+\description{
+\code{keras.ops.true_divide} is an alias for this function.
+}
 \seealso{
 \itemize{
 \item \url{https://www.tensorflow.org/api_docs/python/tf/keras/ops/divide}

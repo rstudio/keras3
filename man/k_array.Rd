@@ -11,13 +11,12 @@ k_array(x, dtype = NULL)
 
 \item{dtype}{The desired data-type for the tensor.}
 }
+\value{
+A tensor.
+}
 \description{
 Create a tensor.
 }
-\section{Returns}{
-A tensor.
-}
-
 \section{Examples}{
 \if{html}{\out{<div class="sourceCode python">}}\preformatted{keras.ops.array([1, 2, 3])
 # array([1, 2, 3], dtype=int32)

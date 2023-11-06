@@ -2,9 +2,6 @@ Extracts patches from the image(s).
 
 @description
 
-# Returns
-Extracted patches 3D (if not batched) or 4D (if batched)
-
 # Examples
 ```python
 image = np.random.random(
@@ -18,6 +15,9 @@ patches = keras.ops.image.extract_patches(image, (3, 3), (1, 1))
 patches.shape
 # (18, 18, 27)
 ```
+
+@returns
+Extracted patches 3D (if not batched) or 4D (if batched)
 
 @param image Input image or batch of images. Must be 3D or 4D.
 @param size Patch size int or tuple (patch_height, patch_widht)

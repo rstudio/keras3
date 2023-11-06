@@ -26,6 +26,10 @@ across multiple calls. To get different random values
 across multiple calls, use as seed an instance
 of \code{keras.random.SeedGenerator}.}
 }
+\value{
+\if{html}{\out{<div class="sourceCode">}}\preformatted{A 2-D tensor with (batch_size, num_samples).
+}\if{html}{\out{</div>}}
+}
 \description{
 This function takes as input \code{logits}, a 2-D input tensor with shape
 (batch_size, num_classes). Each row of the input represents a categorical
@@ -37,11 +41,6 @@ where each row contains samples from the corresponding row in \code{logits}.
 Each column index contains an independent samples drawn from the input
 distribution.
 }
-\section{Returns}{
-\if{html}{\out{<div class="sourceCode">}}\preformatted{A 2-D tensor with (batch_size, num_samples).
-}\if{html}{\out{</div>}}
-}
-
 \seealso{
 \itemize{
 \item \url{https://www.tensorflow.org/api_docs/python/tf/keras/random/categorical}

@@ -14,6 +14,10 @@ normalization is applied.}
 
 \item{...}{Base layer keyword arguments, such as \code{name} and \code{dtype}.}
 }
+\value{
+\if{html}{\out{<div class="sourceCode">}}\preformatted{Softmaxed output with the same shape as `inputs`.
+}\if{html}{\out{</div>}}
+}
 \description{
 Formula:
 
@@ -35,11 +39,6 @@ f(x) = exp_x / sum(exp_x)
 \item \code{mask}: A boolean mask of the same shape as \code{inputs}. The mask
 specifies 1 to keep and 0 to mask. Defaults to \code{None}.
 }
-}
-
-\section{Returns}{
-\if{html}{\out{<div class="sourceCode">}}\preformatted{Softmaxed output with the same shape as `inputs`.
-}\if{html}{\out{</div>}}
 }
 
 \seealso{

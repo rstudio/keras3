@@ -1,8 +1,6 @@
 Join a sequence of tensors along an existing axis.
 
-@description
-
-# Returns
+@returns
     The concatenated tensor.
 
 @param xs The sequence of tensors to concatenate.

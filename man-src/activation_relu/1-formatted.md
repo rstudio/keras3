@@ -21,7 +21,7 @@ keras.activations.relu(x, threshold=5.)
 # [-0., -0.,  0.,  0., 10.]
 ```
 
-# Returns
+@returns
     A tensor with the same shape and dtype as input `x`.
 
 @param x Input tensor.

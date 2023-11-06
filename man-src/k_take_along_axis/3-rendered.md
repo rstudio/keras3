@@ -1,8 +1,6 @@
 Select values from `x` at the 1-D `indices` along the given axis.
 
-@description
-
-# Returns
+@returns
     The corresponding tensor of values.
 
 @param x Source tensor.

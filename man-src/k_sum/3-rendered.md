@@ -1,8 +1,6 @@
 Sum of a tensor over the given axes.
 
-@description
-
-# Returns
+@returns
     Output tensor containing the sum.
 
 @param x Input tensor.

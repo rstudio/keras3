@@ -3,7 +3,7 @@ Computes the element-wise NOT of the given input tensor.
 @description
 Zeros are treated as `False` and non-zeros are treated as `True`.
 
-# Returns
+@returns
     Output tensor, element-wise logical NOT of the input.
 
 @param x Input tensor.

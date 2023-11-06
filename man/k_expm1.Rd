@@ -9,14 +9,13 @@ k_expm1(x)
 \arguments{
 \item{x}{Input values.}
 }
-\description{
-Calculate \code{exp(x) - 1} for all elements in the tensor.
-}
-\section{Returns}{
+\value{
 \if{html}{\out{<div class="sourceCode">}}\preformatted{Output tensor, element-wise exponential minus one.
 }\if{html}{\out{</div>}}
 }
-
+\description{
+Calculate \code{exp(x) - 1} for all elements in the tensor.
+}
 \seealso{
 \itemize{
 \item \url{https://www.tensorflow.org/api_docs/python/tf/keras/ops/expm1}

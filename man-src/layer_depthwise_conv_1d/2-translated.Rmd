@@ -34,10 +34,6 @@ are generated per input channel in the depthwise step.
     A 3D tensor with shape:
     `(batch_shape, channels * depth_multiplier, new_steps)`
 
-# Returns
-A 3D tensor representing
-`activation(depthwise_conv1d(inputs, kernel) + bias)`.
-
 # Raises
 ValueError: when both `strides > 1` and `dilation_rate > 1`.
 
@@ -48,6 +44,10 @@ y = keras.layers.DepthwiseConv1D(3, 3, 2, activation='relu')(x)
 print(y.shape)
 # (4, 4, 36)
 ```
+
+@returns
+A 3D tensor representing
+`activation(depthwise_conv1d(inputs, kernel) + bias)`.
 
 @param kernel_size int or tuple/list of 1 integer, specifying the size of the
     depthwise convolution window.

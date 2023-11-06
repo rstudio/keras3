@@ -1,8 +1,6 @@
 Compute the tensor dot product along specified axes.
 
-@description
-
-# Returns
+@returns
     The tensor dot product of the inputs.
 
 @param x1 First tensor.

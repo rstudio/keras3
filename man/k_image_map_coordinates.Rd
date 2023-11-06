@@ -42,16 +42,15 @@ pixel.}
 \item{fill_value}{Value used for points outside the boundaries of the input if
 \code{fill_mode="constant"}. Defaults to \code{0}.}
 }
+\value{
+\if{html}{\out{<div class="sourceCode">}}\preformatted{Output image or batch of images.
+}\if{html}{\out{</div>}}
+}
 \description{
 Note that interpolation near boundaries differs from the scipy function,
 because we fixed an outstanding bug
 \href{https://github.com/scipy/scipy/issues/2640}{scipy/issues/2640}.
 }
-\section{Returns}{
-\if{html}{\out{<div class="sourceCode">}}\preformatted{Output image or batch of images.
-}\if{html}{\out{</div>}}
-}
-
 \seealso{
 \itemize{
 \item \url{https://www.tensorflow.org/api_docs/python/tf/keras/ops/image/map_coordinates}

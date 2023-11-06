@@ -1,8 +1,6 @@
 Evenly round to the given number of decimals.
 
-@description
-
-# Returns
+@returns
     Output tensor.
 
 @param x Input tensor.

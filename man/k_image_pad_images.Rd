@@ -30,16 +30,15 @@ Tensor of shape \verb{(height, width, channels)}.}
 
 \item{right_padding}{Number of columns of zeros to add on the right.}
 }
-\description{
-Pad \code{images} with zeros to the specified \code{height} and \code{width}.
-}
-\section{Returns}{
+\value{
 If \code{images} were 4D, a 4D float Tensor of shape
 \verb{(batch, target_height, target_width, channels)}
 If \code{images} were 3D, a 3D float Tensor of shape
 \verb{(target_height, target_width, channels)}
 }
-
+\description{
+Pad \code{images} with zeros to the specified \code{height} and \code{width}.
+}
 \section{Examples}{
 \if{html}{\out{<div class="sourceCode python">}}\preformatted{images = np.random.random((15, 25, 3))
 padded_images = keras.ops.image.pad_images(

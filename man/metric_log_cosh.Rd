@@ -11,6 +11,10 @@ metric_log_cosh(y_true, y_pred)
 
 \item{y_pred}{The predicted values with shape = \verb{[batch_size, d0, .. dN]}.}
 }
+\value{
+\if{html}{\out{<div class="sourceCode">}}\preformatted{Logcosh error values with shape = `[batch_size, d0, .. dN-1]`.
+}\if{html}{\out{</div>}}
+}
 \description{
 Formula:
 
@@ -27,11 +31,6 @@ the occasional wildly incorrect prediction.
 y_pred = [[1., 1.], [0., 0.]]
 loss = keras.losses.log_cosh(y_true, y_pred)
 # 0.108
-}\if{html}{\out{</div>}}
-}
-
-\section{Returns}{
-\if{html}{\out{<div class="sourceCode">}}\preformatted{Logcosh error values with shape = `[batch_size, d0, .. dN-1]`.
 }\if{html}{\out{</div>}}
 }
 

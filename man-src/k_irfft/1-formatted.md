@@ -15,10 +15,6 @@ Along the axis IRFFT is computed on, if `fft_length / 2 + 1` is smaller than
 the corresponding dimension of the input, the dimension is cropped. If it is
 larger, the dimension is padded with zeros.
 
-# Returns
-A tensor containing the inverse real-valued Fast Fourier Transform
-along the last axis of `x`.
-
 # Examples
 ```python
 real = keras.ops.convert_to_tensor([0.0, 1.0, 2.0, 3.0, 4.0])
@@ -31,6 +27,10 @@ irfft((real, imag))
 irfft(rfft(real, 5), 5)
 # array([0.0, 1.0, 2.0, 3.0, 4.0])
 ```
+
+@returns
+A tensor containing the inverse real-valued Fast Fourier Transform
+along the last axis of `x`.
 
 @param x Tuple of the real and imaginary parts of the input tensor. Both
     tensors in the tuple should be of floating type.

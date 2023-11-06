@@ -81,6 +81,10 @@ bias after being updated by an \code{Optimizer}.}
 
 \item{...}{Passed on to the Python callable}
 }
+\value{
+A 3D tensor representing
+\code{activation(conv1d_transpose(inputs, kernel) + bias)}.
+}
 \description{
 The need for transposed convolutions generally arise from the desire to use
 a transformation going in the opposite direction of a normal convolution,
@@ -104,11 +108,6 @@ A 3D tensor with shape: \verb{(batch_shape, new_steps, filters)}
 \item If \code{data_format="channels_first"}:
 A 3D tensor with shape: \verb{(batch_shape, filters, new_steps)}
 }
-}
-
-\section{Returns}{
-A 3D tensor representing
-\code{activation(conv1d_transpose(inputs, kernel) + bias)}.
 }
 
 \section{Raises}{

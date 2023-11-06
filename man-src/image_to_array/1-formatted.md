@@ -10,7 +10,7 @@ img = keras.utils.array_to_img(img_data)
 array = keras.utils.image.img_to_array(img)
 ```
 
-# Returns
+@returns
     A 3D NumPy array.
 
 @param img Input PIL Image instance.

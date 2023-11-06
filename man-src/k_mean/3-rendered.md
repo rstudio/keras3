@@ -1,8 +1,6 @@
 Compute the arithmetic mean along the specified axes.
 
-@description
-
-# Returns
+@returns
     Output tensor containing the mean values.
 
 @param x Input tensor.

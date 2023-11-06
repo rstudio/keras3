@@ -25,9 +25,6 @@ connectivity pattern that is compatible with said convolution.
     `(batch_size, filters, new_spatial_dim1, new_spatial_dim2,
     new_spatial_dim3)`
 
-# Returns
-A 5D tensor representing `activation(conv3d(inputs, kernel) + bias)`.
-
 # Raises
 ValueError: when both `strides > 1` and `dilation_rate > 1`.
 
@@ -44,6 +41,9 @@ y = keras.layers.Conv3DTranspose(32, 2, 2, activation='relu')(x)
 print(y.shape)
 # (4, 20, 16, 24, 32)
 ```
+
+@returns
+A 5D tensor representing `activation(conv3d(inputs, kernel) + bias)`.
 
 @param filters int, the dimension of the output space (the number of filters
     in the transposed convolution).

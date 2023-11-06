@@ -6,7 +6,7 @@ Split a tensor into chunks.
 A split does not have to result in equal division when using
 Torch backend.
 
-# Returns
+@returns
     A list of tensors.
 
 @param x Input tensor.

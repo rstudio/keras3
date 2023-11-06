@@ -22,15 +22,14 @@ this number of bins in the output tensor. If greater than
 \code{max(x) + 1}, each value of the output at an index higher than
 \code{max(x)} is set to 0.}
 }
-\description{
-Count the number of occurrences of each value in a tensor of integers.
-}
-\section{Returns}{
+\value{
 1D tensor where each element gives the number of occurrence(s) of its
 index value in x. Its length is the maximum between \code{max(x) + 1} and
 minlength.
 }
-
+\description{
+Count the number of occurrences of each value in a tensor of integers.
+}
 \section{Examples}{
 \if{html}{\out{<div class="sourceCode python">}}\preformatted{x = keras.ops.array([1, 2, 2, 3], dtype="uint8")
 keras.ops.bincount(x)

@@ -77,26 +77,7 @@ reserve for validation.}
 \item{follow_links}{Whether to visits subdirectories pointed to by symlinks.
 Defaults to \code{False}.}
 }
-\description{
-If your directory structure is:
-
-\if{html}{\out{<div class="sourceCode">}}\preformatted{main_directory/
-...class_a/
-......a_audio_1.wav
-......a_audio_2.wav
-...class_b/
-......b_audio_1.wav
-......b_audio_2.wav
-}\if{html}{\out{</div>}}
-
-Then calling \code{audio_dataset_from_directory(main_directory, labels='inferred')}
-will return a \code{tf.data.Dataset} that yields batches of audio files from
-the subdirectories \code{class_a} and \code{class_b}, together with labels
-0 and 1 (0 corresponding to \code{class_a} and 1 corresponding to \code{class_b}).
-
-Only \code{.wav} files are supported at this time.
-}
-\section{Returns}{
+\value{
 A \code{tf.data.Dataset} object.
 \itemize{
 \item If \code{label_mode} is \code{None}, it yields \code{string} tensors of shape
@@ -118,7 +99,25 @@ of shape \verb{(batch_size, num_classes)}, representing a one-hot
 encoding of the class index.
 }
 }
+\description{
+If your directory structure is:
 
+\if{html}{\out{<div class="sourceCode">}}\preformatted{main_directory/
+...class_a/
+......a_audio_1.wav
+......a_audio_2.wav
+...class_b/
+......b_audio_1.wav
+......b_audio_2.wav
+}\if{html}{\out{</div>}}
+
+Then calling \code{audio_dataset_from_directory(main_directory, labels='inferred')}
+will return a \code{tf.data.Dataset} that yields batches of audio files from
+the subdirectories \code{class_a} and \code{class_b}, together with labels
+0 and 1 (0 corresponding to \code{class_a} and 1 corresponding to \code{class_b}).
+
+Only \code{.wav} files are supported at this time.
+}
 \seealso{
 \itemize{
 \item \url{https://www.tensorflow.org/api_docs/python/tf/keras/utils/audio_dataset_from_directory}

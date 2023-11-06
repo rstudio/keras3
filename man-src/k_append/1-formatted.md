@@ -2,9 +2,6 @@ Append tensor `x2` to the end of tensor `x1`.
 
 @description
 
-# Returns
-A tensor with the values of `x2` appended to `x1`.
-
 # Examples
 ```python
 x1 = keras.ops.convert_to_tensor([1, 2, 3])
@@ -28,6 +25,9 @@ keras.ops.append(x1, x3, axis=0)
 # TypeError: Cannot concatenate arrays with different numbers of
 # dimensions: got (2, 3), (3,).
 ```
+
+@returns
+A tensor with the values of `x2` appended to `x1`.
 
 @param x1 First input tensor.
 @param x2 Second input tensor.

@@ -40,13 +40,12 @@ and \code{0.9 + 0.1 / num_classes} for target labels.}
 \item{axis}{Defaults to \code{-1}. The dimension along which the entropy is
 computed.}
 }
+\value{
+Categorical focal crossentropy loss value.
+}
 \description{
 Computes the categorical focal crossentropy loss.
 }
-\section{Returns}{
-Categorical focal crossentropy loss value.
-}
-
 \section{Examples}{
 \if{html}{\out{<div class="sourceCode python">}}\preformatted{y_true = [[0, 1, 0], [0, 0, 1]]
 y_pred = [[0.05, 0.9, 0.05], [0.1, 0.85, 0.05]]

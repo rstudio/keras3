@@ -29,6 +29,10 @@ quadratic to linear. Defaults to \code{1.0}.}
 
 \item{name}{Optional name for the instance.}
 }
+\value{
+\if{html}{\out{<div class="sourceCode">}}\preformatted{Tensor with one scalar loss entry per sample.
+}\if{html}{\out{</div>}}
+}
 \description{
 Formula:
 
@@ -60,11 +64,6 @@ See: \href{https://en.wikipedia.org/wiki/Huber_loss}{Huber loss}.
 y_pred = [[0.6, 0.4], [0.4, 0.6]]
 loss = keras.losses.huber(y_true, y_pred)
 # 0.155
-}\if{html}{\out{</div>}}
-}
-
-\section{Returns}{
-\if{html}{\out{<div class="sourceCode">}}\preformatted{Tensor with one scalar loss entry per sample.
 }\if{html}{\out{</div>}}
 }
 

@@ -2,9 +2,6 @@ Computes the categorical focal crossentropy loss.
 
 @description
 
-# Returns
-Categorical focal crossentropy loss value.
-
 # Examples
 ```python
 y_true = [[0, 1, 0], [0, 0, 1]]
@@ -14,6 +11,9 @@ assert loss.shape == (2,)
 loss
 # array([2.63401289e-04, 6.75912094e-01], dtype=float32)
 ```
+
+@returns
+Categorical focal crossentropy loss value.
 
 @param y_true Tensor of one-hot true targets.
 @param y_pred Tensor of predicted targets.

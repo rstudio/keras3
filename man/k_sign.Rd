@@ -9,14 +9,13 @@ k_sign(x)
 \arguments{
 \item{x}{Input tensor.}
 }
-\description{
-Returns a tensor with the signs of the elements of \code{x}.
-}
-\section{Returns}{
+\value{
 \if{html}{\out{<div class="sourceCode">}}\preformatted{Output tensor of same shape as `x`.
 }\if{html}{\out{</div>}}
 }
-
+\description{
+Returns a tensor with the signs of the elements of \code{x}.
+}
 \seealso{
 \itemize{
 \item \url{https://www.tensorflow.org/api_docs/python/tf/keras/ops/sign}

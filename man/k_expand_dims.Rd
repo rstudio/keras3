@@ -12,14 +12,13 @@ k_expand_dims(x, axis)
 \item{axis}{Position in the expanded axes where the new axis
 (or axes) is placed.}
 }
-\description{
-Insert a new axis at the \code{axis} position in the expanded tensor shape.
-}
-\section{Returns}{
+\value{
 \if{html}{\out{<div class="sourceCode">}}\preformatted{Output tensor with the number of dimensions increased.
 }\if{html}{\out{</div>}}
 }
-
+\description{
+Insert a new axis at the \code{axis} position in the expanded tensor shape.
+}
 \seealso{
 \itemize{
 \item \url{https://www.tensorflow.org/api_docs/python/tf/keras/ops/expand_dims}

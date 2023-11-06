@@ -19,7 +19,7 @@ isinstance(data, tuple)
 x, y = data
 ```
 
-# Returns
+@returns
     Tuple in the format used in `Model.fit()`.
 
 @param x Features to pass to `Model`.

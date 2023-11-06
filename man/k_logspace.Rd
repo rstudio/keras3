@@ -34,17 +34,16 @@ included. Defaults to\code{True}.}
 \item{axis}{The axis in the result to store the samples. Relevant only
 if start or stop are array-like.}
 }
+\value{
+\if{html}{\out{<div class="sourceCode">}}\preformatted{A tensor of evenly spaced samples on a log scale.
+}\if{html}{\out{</div>}}
+}
 \description{
 In linear space, the sequence starts at \code{base ** start} and ends with
 \code{base ** stop} (see \code{endpoint} below).
 }
 \section{Note}{
 Torch backend does not support \code{axis} argument.
-}
-
-\section{Returns}{
-\if{html}{\out{<div class="sourceCode">}}\preformatted{A tensor of evenly spaced samples on a log scale.
-}\if{html}{\out{</div>}}
 }
 
 \seealso{

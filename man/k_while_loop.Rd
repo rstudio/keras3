@@ -21,13 +21,12 @@ loop to run. If provided, the \code{cond} output is AND-ed with an
 additional condition ensuring the number of iterations executed is
 no greater than \code{maximum_iterations}.}
 }
+\value{
+A list/tuple of tensors, has the same shape and dtype as \code{inputs}.
+}
 \description{
 While loop implementation.
 }
-\section{Returns}{
-A list/tuple of tensors, has the same shape and dtype as \code{inputs}.
-}
-
 \section{Examples}{
 \if{html}{\out{<div class="sourceCode python">}}\preformatted{i = 0
 cond = lambda i: i < 10

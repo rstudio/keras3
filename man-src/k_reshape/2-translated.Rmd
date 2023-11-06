@@ -1,8 +1,6 @@
 Gives a new shape to a tensor without changing its data.
 
-@description
-
-# Returns
+@returns
     The reshaped tensor.
 
 @param x Input tensor.

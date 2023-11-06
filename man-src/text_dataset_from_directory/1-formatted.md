@@ -20,7 +20,7 @@ texts from the subdirectories `class_a` and `class_b`, together with labels
 
 Only `.txt` files are supported at this time.
 
-# Returns
+@returns
 A `tf.data.Dataset` object.
 
 - If `label_mode` is `None`, it yields `string` tensors of shape

@@ -14,13 +14,12 @@ k_append(x1, x2, axis = NULL)
 \item{axis}{Axis along which tensor \code{x2} is appended to tensor \code{x1}.
 If \code{None}, both tensors are flattened before use.}
 }
+\value{
+A tensor with the values of \code{x2} appended to \code{x1}.
+}
 \description{
 Append tensor \code{x2} to the end of tensor \code{x1}.
 }
-\section{Returns}{
-A tensor with the values of \code{x2} appended to \code{x1}.
-}
-
 \section{Examples}{
 \if{html}{\out{<div class="sourceCode python">}}\preformatted{x1 = keras.ops.convert_to_tensor([1, 2, 3])
 x2 = keras.ops.convert_to_tensor([[4, 5, 6], [7, 8, 9]])

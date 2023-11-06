@@ -10,14 +10,13 @@ k_fft(x)
 \item{x}{Tuple of the real and imaginary parts of the input tensor. Both
 tensors in the tuple should be of floating type.}
 }
-\description{
-Computes the Fast Fourier Transform along last axis of input.
-}
-\section{Returns}{
+\value{
 A tuple containing two tensors - the real and imaginary parts of the
 output tensor.
 }
-
+\description{
+Computes the Fast Fourier Transform along last axis of input.
+}
 \section{Examples}{
 \if{html}{\out{<div class="sourceCode python">}}\preformatted{x = (
     keras.ops.convert_to_tensor([1., 2.]),

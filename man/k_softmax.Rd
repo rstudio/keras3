@@ -11,6 +11,9 @@ k_softmax(x, axis = -1L)
 
 \item{axis}{Integer, axis along which the softmax is applied.}
 }
+\value{
+A tensor with the same shape as \code{x}.
+}
 \description{
 The elements of the output vector lie within the range \verb{(0, 1)}, and their
 total sum is exactly 1 (excluding the floating point rounding error).
@@ -21,10 +24,6 @@ axis along which the function is applied within the input.
 It is defined as:
 \code{f(x) = exp(x) / sum(exp(x))}
 }
-\section{Returns}{
-A tensor with the same shape as \code{x}.
-}
-
 \section{Examples}{
 \if{html}{\out{<div class="sourceCode python">}}\preformatted{x = np.array([-1., 0., 1.])
 x_softmax = keras.ops.softmax(x)

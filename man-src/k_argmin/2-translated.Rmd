@@ -2,10 +2,6 @@ Returns the indices of the minium values along an axis.
 
 @description
 
-# Returns
-Tensor of indices. It has the same shape as `x`, with the dimension
-along `axis` removed.
-
 # Examples
 ```python
 x = keras.ops.arange(6).reshape(2, 3) + 10
@@ -19,6 +15,10 @@ keras.ops.argmin(x, axis=0)
 keras.ops.argmin(x, axis=1)
 # array([0, 0], dtype=int32)
 ```
+
+@returns
+Tensor of indices. It has the same shape as `x`, with the dimension
+along `axis` removed.
 
 @param x Input tensor.
 @param axis By default, the index is into the flattened tensor, otherwise

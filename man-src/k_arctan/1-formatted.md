@@ -2,16 +2,16 @@ Trigonometric inverse tangent, element-wise.
 
 @description
 
-# Returns
-Tensor of the inverse tangent of each element in `x`, in the interval
-`[-pi/2, pi/2]`.
-
 # Examples
 ```python
 x = keras.ops.convert_to_tensor([0, 1])
 keras.ops.arctan(x)
 # array([0., 0.7853982], dtype=float32)
 ```
+
+@returns
+Tensor of the inverse tangent of each element in `x`, in the interval
+`[-pi/2, pi/2]`.
 
 @param x Input tensor.
 

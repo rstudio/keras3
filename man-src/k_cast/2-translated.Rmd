@@ -2,14 +2,14 @@ Cast a tensor to the desired dtype.
 
 @description
 
-# Returns
-A tensor of the specified `dtype`.
-
 # Examples
 ```python
 x = keras.ops.arange(4)
 x = keras.ops.cast(x, dtype="float16")
 ```
+
+@returns
+A tensor of the specified `dtype`.
 
 @param x A tensor or variable.
 @param dtype The target type.

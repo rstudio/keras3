@@ -9,7 +9,7 @@ new axes.
 
 If `x.ndim > d`, `repeats` is promoted to `x.ndim` by prepending 1's to it.
 
-# Returns
+@returns
     The tiled output tensor.
 
 @param x Input tensor.

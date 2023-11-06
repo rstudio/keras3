@@ -12,9 +12,6 @@ Formula:
 loss = y_pred - y_true * log(y_pred)
 ```
 
-# Returns
-Poisson loss values with shape = `[batch_size, d0, .. dN-1]`.
-
 # Examples
 ```python
 y_true = np.random.randint(0, 2, size=(2, 3))
@@ -26,6 +23,9 @@ assert np.allclose(
     loss, np.mean(y_pred - y_true * np.log(y_pred), axis=-1),
     atol=1e-5)
 ```
+
+@returns
+Poisson loss values with shape = `[batch_size, d0, .. dN-1]`.
 
 @param reduction Type of reduction to apply to the loss. In almost all cases
     this should be `"sum_over_batch_size"`.

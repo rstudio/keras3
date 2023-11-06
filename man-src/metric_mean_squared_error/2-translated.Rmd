@@ -25,7 +25,7 @@ m.result()
 # 0.25
 ```
 
-# Returns
+@returns
     Mean squared error values with shape = `[batch_size, d0, .. dN-1]`.
 
 @param name (Optional) string name of the metric instance.

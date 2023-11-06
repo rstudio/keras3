@@ -9,14 +9,13 @@ k_isnan(x)
 \arguments{
 \item{x}{Input tensor.}
 }
-\description{
-Test element-wise for NaN and return result as a boolean tensor.
-}
-\section{Returns}{
+\value{
 \if{html}{\out{<div class="sourceCode">}}\preformatted{Output boolean tensor.
 }\if{html}{\out{</div>}}
 }
-
+\description{
+Test element-wise for NaN and return result as a boolean tensor.
+}
 \seealso{
 \itemize{
 \item \url{https://www.tensorflow.org/api_docs/python/tf/keras/ops/isnan}

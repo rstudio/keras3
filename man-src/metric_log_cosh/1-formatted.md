@@ -19,7 +19,7 @@ loss = keras.losses.log_cosh(y_true, y_pred)
 # 0.108
 ```
 
-# Returns
+@returns
     Logcosh error values with shape = `[batch_size, d0, .. dN-1]`.
 
 @param y_true Ground truth values with shape = `[batch_size, d0, .. dN]`.

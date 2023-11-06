@@ -1,8 +1,6 @@
 Interchange two axes of a tensor.
 
-@description
-
-# Returns
+@returns
     A tensor with the axes swapped.
 
 @param x Input tensor.

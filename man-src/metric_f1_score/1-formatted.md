@@ -10,9 +10,6 @@ This is the harmonic mean of precision and recall.
 Its output range is `[0, 1]`. It works for both multi-class
 and multi-label classification.
 
-# Returns
-F-1 Score: float.
-
 # Examples
 ```python
 metric = keras.metrics.F1Score(threshold=0.5)
@@ -26,6 +23,9 @@ metric.update_state(y_true, y_pred)
 result = metric.result()
 # array([0.5      , 0.8      , 0.6666667], dtype=float32)
 ```
+
+@returns
+F-1 Score: float.
 
 @param average Type of averaging to be performed on data.
     Acceptable values are `None`, `"micro"`, `"macro"`

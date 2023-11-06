@@ -98,26 +98,7 @@ preserved.}
 \item{data_format}{If None uses keras.config.image_data_format()
 otherwise either 'channel_last' or 'channel_first'.}
 }
-\description{
-If your directory structure is:
-
-\if{html}{\out{<div class="sourceCode">}}\preformatted{main_directory/
-...class_a/
-......a_image_1.jpg
-......a_image_2.jpg
-...class_b/
-......b_image_1.jpg
-......b_image_2.jpg
-}\if{html}{\out{</div>}}
-
-Then calling \code{image_dataset_from_directory(main_directory, labels='inferred')} will return a \code{tf.data.Dataset} that yields batches of
-images from the subdirectories \code{class_a} and \code{class_b}, together with labels
-0 and 1 (0 corresponding to \code{class_a} and 1 corresponding to \code{class_b}).
-
-Supported image formats: \code{.jpeg}, \code{.jpg}, \code{.png}, \code{.bmp}, \code{.gif}.
-Animated gifs are truncated to the first frame.
-}
-\section{Returns}{
+\value{
 A \code{tf.data.Dataset} object.
 \itemize{
 \item If \code{label_mode} is \code{None}, it yields \code{float32} tensors of shape
@@ -149,7 +130,25 @@ there are 3 channels in the image tensors.
 there are 4 channels in the image tensors.
 }
 }
+\description{
+If your directory structure is:
 
+\if{html}{\out{<div class="sourceCode">}}\preformatted{main_directory/
+...class_a/
+......a_image_1.jpg
+......a_image_2.jpg
+...class_b/
+......b_image_1.jpg
+......b_image_2.jpg
+}\if{html}{\out{</div>}}
+
+Then calling \code{image_dataset_from_directory(main_directory, labels='inferred')} will return a \code{tf.data.Dataset} that yields batches of
+images from the subdirectories \code{class_a} and \code{class_b}, together with labels
+0 and 1 (0 corresponding to \code{class_a} and 1 corresponding to \code{class_b}).
+
+Supported image formats: \code{.jpeg}, \code{.jpg}, \code{.png}, \code{.bmp}, \code{.gif}.
+Animated gifs are truncated to the first frame.
+}
 \seealso{
 \itemize{
 \item \url{https://www.tensorflow.org/api_docs/python/tf/keras/utils/image_dataset_from_directory}

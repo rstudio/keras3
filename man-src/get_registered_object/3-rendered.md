@@ -13,7 +13,7 @@ def from_config(cls, config, custom_objects=None):
             config['my_custom_object_name'], custom_objects=custom_objects)
 ```
 
-# Returns
+@returns
 An instantiable class associated with `name`, or `None` if no such class
 exists.
 

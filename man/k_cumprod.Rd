@@ -12,14 +12,13 @@ k_cumprod(x, axis = NULL)
 \item{axis}{Axis along which the cumulative product is computed.
 By default the input is flattened.}
 }
-\description{
-Return the cumulative product of elements along a given axis.
-}
-\section{Returns}{
+\value{
 \if{html}{\out{<div class="sourceCode">}}\preformatted{Output tensor.
 }\if{html}{\out{</div>}}
 }
-
+\description{
+Return the cumulative product of elements along a given axis.
+}
 \seealso{
 \itemize{
 \item \url{https://www.tensorflow.org/api_docs/python/tf/keras/ops/cumprod}

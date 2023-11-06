@@ -2,12 +2,6 @@ Pad `images` with zeros to the specified `height` and `width`.
 
 @description
 
-# Returns
-If `images` were 4D, a 4D float Tensor of shape
-    `(batch, target_height, target_width, channels)`
-If `images` were 3D, a 3D float Tensor of shape
-    `(target_height, target_width, channels)`
-
 # Examples
 ```python
 images = np.random.random((15, 25, 3))
@@ -26,6 +20,12 @@ padded_batch = keras.ops.image.pad_images(
 padded_batch.shape
 # (2, 20, 30, 3)
 ```
+
+@returns
+If `images` were 4D, a 4D float Tensor of shape
+    `(batch, target_height, target_width, channels)`
+If `images` were 3D, a 3D float Tensor of shape
+    `(target_height, target_width, channels)`
 
 @param images 4D Tensor of shape `(batch, height, width, channels)` or 3D
     Tensor of shape `(height, width, channels)`.

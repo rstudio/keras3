@@ -72,25 +72,7 @@ When \code{subset="both"}, the utility returns a tuple of two datasets
 \item{follow_links}{Whether to visits subdirectories pointed to by symlinks.
 Defaults to \code{False}.}
 }
-\description{
-If your directory structure is:
-
-\if{html}{\out{<div class="sourceCode">}}\preformatted{main_directory/
-...class_a/
-......a_text_1.txt
-......a_text_2.txt
-...class_b/
-......b_text_1.txt
-......b_text_2.txt
-}\if{html}{\out{</div>}}
-
-Then calling \code{text_dataset_from_directory(main_directory, labels='inferred')} will return a \code{tf.data.Dataset} that yields batches of
-texts from the subdirectories \code{class_a} and \code{class_b}, together with labels
-0 and 1 (0 corresponding to \code{class_a} and 1 corresponding to \code{class_b}).
-
-Only \code{.txt} files are supported at this time.
-}
-\section{Returns}{
+\value{
 A \code{tf.data.Dataset} object.
 \itemize{
 \item If \code{label_mode} is \code{None}, it yields \code{string} tensors of shape
@@ -111,7 +93,24 @@ of shape \verb{(batch_size, num_classes)}, representing a one-hot
 encoding of the class index.
 }
 }
+\description{
+If your directory structure is:
 
+\if{html}{\out{<div class="sourceCode">}}\preformatted{main_directory/
+...class_a/
+......a_text_1.txt
+......a_text_2.txt
+...class_b/
+......b_text_1.txt
+......b_text_2.txt
+}\if{html}{\out{</div>}}
+
+Then calling \code{text_dataset_from_directory(main_directory, labels='inferred')} will return a \code{tf.data.Dataset} that yields batches of
+texts from the subdirectories \code{class_a} and \code{class_b}, together with labels
+0 and 1 (0 corresponding to \code{class_a} and 1 corresponding to \code{class_b}).
+
+Only \code{.txt} files are supported at this time.
+}
 \seealso{
 \itemize{
 \item \url{https://www.tensorflow.org/api_docs/python/tf/keras/utils/text_dataset_from_directory}

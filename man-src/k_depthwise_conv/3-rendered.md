@@ -3,7 +3,7 @@ General N-D depthwise convolution.
 @description
 This ops supports 1D and 2D depthwise convolution.
 
-# Returns
+@returns
     A tensor of rank N+2, the result of the depthwise conv operation.
 
 @param inputs Tensor of rank N+2. `inputs` has shape

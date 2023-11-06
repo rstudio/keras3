@@ -51,15 +51,14 @@ specifying the dilation rate to use for dilated convolution. If
 \code{dilation_rate} is int, then every spatial dimension shares
 the same \code{dilation_rate}.}
 }
+\value{
+\if{html}{\out{<div class="sourceCode">}}\preformatted{A tensor of rank N+2, the result of the depthwise conv operation.
+}\if{html}{\out{</div>}}
+}
 \description{
 This ops supports 1D and 2D separable convolution. \code{separable_conv} is
 a depthwise conv followed by a pointwise conv.
 }
-\section{Returns}{
-\if{html}{\out{<div class="sourceCode">}}\preformatted{A tensor of rank N+2, the result of the depthwise conv operation.
-}\if{html}{\out{</div>}}
-}
-
 \seealso{
 \itemize{
 \item \url{https://www.tensorflow.org/api_docs/python/tf/keras/ops/separable_conv}

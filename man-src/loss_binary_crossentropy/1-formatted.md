@@ -75,7 +75,7 @@ keras.losses.BinaryCrossentropy() # OR ...('from_logits=False')
 y_pred = [0.6, 0.3, 0.2, 0.8] # OR [[0.6, 0.3], [0.2, 0.8]]
 ```
 
-# Returns
+@returns
 Binary crossentropy loss value. shape = `[batch_size, d0, .. dN-1]`.
 
 @param from_logits Whether to interpret `y_pred` as a tensor of

@@ -1,8 +1,6 @@
 Average pooling operation.
 
-@description
-
-# Returns
+@returns
     A tensor of rank N+2, the result of the average pooling operation.
 
 @param inputs Tensor of rank N+2. `inputs` has shape

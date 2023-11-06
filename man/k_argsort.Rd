@@ -12,13 +12,12 @@ k_argsort(x, axis = -1L)
 \item{axis}{Axis along which to sort. Defaults to\code{-1} (the last axis). If
 \code{None}, the flattened tensor is used.}
 }
+\value{
+Tensor of indices that sort \code{x} along the specified \code{axis}.
+}
 \description{
 Returns the indices that would sort a tensor.
 }
-\section{Returns}{
-Tensor of indices that sort \code{x} along the specified \code{axis}.
-}
-
 \section{Examples}{
 One dimensional array:
 

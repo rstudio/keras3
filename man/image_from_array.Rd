@@ -21,6 +21,10 @@ are 0 and 255 respectively. Defaults to \code{True}.}
 \code{keras.backend.floatx()} is used (unless you changed it, it
 defaults to \code{"float32"}). Defaults to \code{None}.}
 }
+\value{
+\if{html}{\out{<div class="sourceCode">}}\preformatted{A PIL Image instance.
+}\if{html}{\out{</div>}}
+}
 \description{
 Converts a 3D NumPy array to a PIL Image instance.
 }
@@ -28,11 +32,6 @@ Converts a 3D NumPy array to a PIL Image instance.
 \if{html}{\out{<div class="sourceCode python">}}\preformatted{from PIL import Image
 img = np.random.random(size=(100, 100, 3))
 pil_img = keras.utils.array_to_img(img)
-}\if{html}{\out{</div>}}
-}
-
-\section{Returns}{
-\if{html}{\out{<div class="sourceCode">}}\preformatted{A PIL Image instance.
 }\if{html}{\out{</div>}}
 }
 

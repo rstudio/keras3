@@ -14,13 +14,12 @@ If \code{x} is 1-D, return a 2-D tensor with \code{x} on the k-th diagonal.}
 above the main diagonal, and \code{k < 0} for diagonals below
 the main diagonal.}
 }
+\value{
+The extracted diagonal or constructed diagonal tensor.
+}
 \description{
 Extract a diagonal or construct a diagonal array.
 }
-\section{Returns}{
-The extracted diagonal or constructed diagonal tensor.
-}
-
 \section{Examples}{
 \if{html}{\out{<div class="sourceCode python">}}\preformatted{from keras import ops
 x = ops.arange(9).reshape((3, 3))

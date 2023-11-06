@@ -5,15 +5,15 @@ The mean and variance are calculated by aggregating the contents of `x`
 across `axes`. If `x` is 1-D and `axes = [0]` this is just the mean and
 variance of a vector.
 
-# Returns
-A tuple containing two tensors - mean and variance.
-
 # Examples
 ```python
 x = keras.ops.convert_to_tensor([0, 1, 2, 3, 100], dtype="float32")
 keras.ops.moments(x, axes=[0])
 # (array(21.2, dtype=float32), array(1553.3601, dtype=float32))
 ```
+
+@returns
+A tuple containing two tensors - mean and variance.
 
 @param x Input tensor.
 @param axes A list of axes which to compute mean and variance.

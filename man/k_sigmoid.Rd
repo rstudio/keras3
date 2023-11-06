@@ -9,13 +9,12 @@ k_sigmoid(x)
 \arguments{
 \item{x}{Input tensor.}
 }
+\value{
+A tensor with the same shape as \code{x}.
+}
 \description{
 It is defined as \code{f(x) = 1 / (1 + exp(-x))}.
 }
-\section{Returns}{
-A tensor with the same shape as \code{x}.
-}
-
 \section{Examples}{
 \if{html}{\out{<div class="sourceCode python">}}\preformatted{x = keras.ops.convert_to_tensor([-6.0, 1.0, 0.0, 1.0, 6.0])
 keras.ops.sigmoid(x)

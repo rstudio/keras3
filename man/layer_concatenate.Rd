@@ -13,6 +13,10 @@ layer_concatenate(inputs, ..., axis = -1L)
 
 \item{axis}{Axis along which to concatenate.}
 }
+\value{
+\if{html}{\out{<div class="sourceCode">}}\preformatted{A tensor, the concatenation of the inputs alongside axis `axis`.
+}\if{html}{\out{</div>}}
+}
 \description{
 It takes as input a list of tensors, all of the same shape except
 for the concatenation axis, and returns a single tensor that is the
@@ -29,11 +33,6 @@ Usage in a Keras model:
 \if{html}{\out{<div class="sourceCode python">}}\preformatted{x1 = keras.layers.Dense(8)(np.arange(10).reshape(5, 2))
 x2 = keras.layers.Dense(8)(np.arange(10, 20).reshape(5, 2))
 y = keras.layers.Concatenate()([x1, x2])
-}\if{html}{\out{</div>}}
-}
-
-\section{Returns}{
-\if{html}{\out{<div class="sourceCode">}}\preformatted{A tensor, the concatenation of the inputs alongside axis `axis`.
 }\if{html}{\out{</div>}}
 }
 

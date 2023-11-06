@@ -2,9 +2,6 @@ Resize images to size using the specified interpolation method.
 
 @description
 
-# Returns
-Resized image or batch of images.
-
 # Examples
 ```python
 x = np.random.random((2, 4, 4, 3)) # batch of 2 RGB images
@@ -27,6 +24,9 @@ y = keras.ops.image.resize(x, (2, 2),
 y.shape
 # (2, 3, 2, 2)
 ```
+
+@returns
+Resized image or batch of images.
 
 @param image Input image or batch of images. Must be 3D or 4D.
 @param size Size of output image in `(height, width)` format.

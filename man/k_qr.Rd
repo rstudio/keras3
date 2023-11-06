@@ -13,15 +13,14 @@ k_qr(x, mode = "reduced")
 - 'reduced': Returns the reduced QR decomposition. (default)
 - 'complete': Returns the complete QR decomposition.}
 }
-\description{
-Computes the QR decomposition of a tensor.
-}
-\section{Returns}{
+\value{
 A tuple containing two tensors. The first tensor represents the
 orthogonal matrix Q, and the second tensor represents the upper
 triangular matrix R.
 }
-
+\description{
+Computes the QR decomposition of a tensor.
+}
 \section{Examples}{
 \if{html}{\out{<div class="sourceCode python">}}\preformatted{x = keras.ops.convert_to_tensor([[1., 2.], [3., 4.], [5., 6.]])
 q, r = qr(x)

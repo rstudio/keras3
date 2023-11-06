@@ -16,9 +16,6 @@ loss = maximum(neg - pos + 1, 0)
 
 where `neg=maximum((1-y_true)*y_pred)` and `pos=sum(y_true*y_pred)`
 
-# Returns
-Categorical hinge loss values with shape = `[batch_size, d0, .. dN-1]`.
-
 # Examples
 ```python
 y_true = np.random.randint(0, 3, size=(2,))
@@ -26,6 +23,9 @@ y_true = np.eye(np.max(y_true) + 1)[y_true]
 y_pred = np.random.random(size=(2, 3))
 loss = keras.losses.categorical_hinge(y_true, y_pred)
 ```
+
+@returns
+Categorical hinge loss values with shape = `[batch_size, d0, .. dN-1]`.
 
 @param reduction Type of reduction to apply to the loss. In almost all cases
     this should be `"sum_over_batch_size"`.

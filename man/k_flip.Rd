@@ -12,14 +12,13 @@ k_flip(x, axis = NULL)
 \item{axis}{Axis or axes along which to flip the tensor. The default,
 \code{axis=None}, will flip over all of the axes of the input tensor.}
 }
-\description{
-The shape of the tensor is preserved, but the elements are reordered.
-}
-\section{Returns}{
+\value{
 \if{html}{\out{<div class="sourceCode">}}\preformatted{Output tensor with entries of `axis` reversed.
 }\if{html}{\out{</div>}}
 }
-
+\description{
+The shape of the tensor is preserved, but the elements are reordered.
+}
 \seealso{
 \itemize{
 \item \url{https://www.tensorflow.org/api_docs/python/tf/keras/ops/flip}

@@ -6,9 +6,6 @@ lengths `S0, S1, ..., SN-1`, this creates an `N` N-dimensional tensors
 `G0, G1, ..., GN-1` each with shape `(S0, ..., SN-1)` where the output
 `Gi` is constructed by expanding `Ti` to the result shape.
 
-# Returns
-Sequence of N tensors.
-
 # Examples
 ```python
 from keras import ops
@@ -27,6 +24,9 @@ grid_y
 #        [4, 5, 6],
 #        [4, 5, 6]])
 ```
+
+@returns
+Sequence of N tensors.
 
 @param ... 1-D tensors representing the coordinates of a grid.
 @param indexing Cartesian (`"xy"`, default) or matrix (`"ij"`) indexing

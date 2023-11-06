@@ -20,7 +20,7 @@ f(x) = exp_x / sum(exp_x)
 - `mask`: A boolean mask of the same shape as `inputs`. The mask
     specifies 1 to keep and 0 to mask. Defaults to `None`.
 
-# Returns
+@returns
     Softmaxed output with the same shape as `inputs`.
 
 @param axis Integer, or list of Integers, axis along which the softmax

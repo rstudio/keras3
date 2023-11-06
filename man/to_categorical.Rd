@@ -13,14 +13,13 @@ to_categorical(x, num_classes = NULL)
 \item{num_classes}{Total number of classes. If \code{None}, this would be inferred
 as \code{max(x) + 1}. Defaults to \code{None}.}
 }
-\description{
-E.g. for use with \code{categorical_crossentropy}.
-}
-\section{Returns}{
+\value{
 A binary matrix representation of the input as a NumPy array. The class
 axis is placed last.
 }
-
+\description{
+E.g. for use with \code{categorical_crossentropy}.
+}
 \section{Examples}{
 \if{html}{\out{<div class="sourceCode python">}}\preformatted{a = keras.utils.to_categorical([0, 1, 2, 3], num_classes=4)
 print(a)

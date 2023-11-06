@@ -9,14 +9,13 @@ k_arctan(x)
 \arguments{
 \item{x}{Input tensor.}
 }
-\description{
-Trigonometric inverse tangent, element-wise.
-}
-\section{Returns}{
+\value{
 Tensor of the inverse tangent of each element in \code{x}, in the interval
 \verb{[-pi/2, pi/2]}.
 }
-
+\description{
+Trigonometric inverse tangent, element-wise.
+}
 \section{Examples}{
 \if{html}{\out{<div class="sourceCode python">}}\preformatted{x = keras.ops.convert_to_tensor([0, 1])
 keras.ops.arctan(x)

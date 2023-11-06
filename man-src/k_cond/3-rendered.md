@@ -1,8 +1,6 @@
 Conditionally applies `true_fn` or `false_fn`.
 
-@description
-
-# Returns
+@returns
     The output of either `true_fn` or `false_fn` depending on pred.
 
 @param pred Boolean scalar type

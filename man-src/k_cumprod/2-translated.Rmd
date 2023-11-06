@@ -1,8 +1,6 @@
 Return the cumulative product of elements along a given axis.
 
-@description
-
-# Returns
+@returns
     Output tensor.
 
 @param x Input tensor.

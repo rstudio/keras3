@@ -9,14 +9,13 @@ k_vstack(xs)
 \arguments{
 \item{xs}{Sequence of tensors.}
 }
-\description{
-Stack tensors in sequence vertically (row wise).
-}
-\section{Returns}{
+\value{
 \if{html}{\out{<div class="sourceCode">}}\preformatted{Tensor formed by stacking the given tensors.
 }\if{html}{\out{</div>}}
 }
-
+\description{
+Stack tensors in sequence vertically (row wise).
+}
 \seealso{
 \itemize{
 \item \url{https://www.tensorflow.org/api_docs/python/tf/keras/ops/vstack}

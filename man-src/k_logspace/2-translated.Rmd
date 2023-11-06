@@ -7,7 +7,7 @@ In linear space, the sequence starts at `base ** start` and ends with
 # Note
 Torch backend does not support `axis` argument.
 
-# Returns
+@returns
     A tensor of evenly spaced samples on a log scale.
 
 @param start The starting value of the sequence.

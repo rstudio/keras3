@@ -9,14 +9,13 @@ k_tan(x)
 \arguments{
 \item{x}{Input tensor.}
 }
-\description{
-Compute tangent, element-wise.
-}
-\section{Returns}{
+\value{
 \if{html}{\out{<div class="sourceCode">}}\preformatted{Output tensor of same shape as `x`.
 }\if{html}{\out{</div>}}
 }
-
+\description{
+Compute tangent, element-wise.
+}
 \seealso{
 \itemize{
 \item \url{https://www.tensorflow.org/api_docs/python/tf/keras/ops/tan}

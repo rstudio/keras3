@@ -16,14 +16,13 @@ over all elements. Defaults to\code{None}.}
 \item{keepdims}{A boolean indicating whether to keep the dimensions of
 the input tensor when computing the sum. Defaults to\code{False}.}
 }
-\description{
-Computes the logarithm of sum of exponentials of elements in a tensor.
-}
-\section{Returns}{
+\value{
 A tensor containing the logarithm of the sum of exponentials of
 elements in \code{x}.
 }
-
+\description{
+Computes the logarithm of sum of exponentials of elements in a tensor.
+}
 \section{Examples}{
 \if{html}{\out{<div class="sourceCode python">}}\preformatted{x = keras.ops.convert_to_tensor([1., 2., 3.])
 logsumexp(x)

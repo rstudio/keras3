@@ -47,7 +47,7 @@ keras.utils.pad_sequences(sequence, maxlen=2)
 #        [5, 6]], dtype=int32)
 ```
 
-# Returns
+@returns
     NumPy array with shape `(len(sequences), maxlen)`
 
 @param sequences List of sequences (each sequence is a list of integers).

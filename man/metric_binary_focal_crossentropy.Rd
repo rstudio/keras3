@@ -39,6 +39,10 @@ and \code{0.5 * label_smoothing} for the non-target class.}
 
 \item{axis}{The axis along which the mean is computed. Defaults to \code{-1}.}
 }
+\value{
+Binary focal crossentropy loss value
+with shape = \verb{[batch_size, d0, .. dN-1]}.
+}
 \description{
 According to \href{https://arxiv.org/pdf/1708.02002.pdf}{Lin et al., 2018}, it
 helps to apply a focal factor to down-weight easy examples and focus more on
@@ -56,11 +60,6 @@ weight balancing factor for the binary classes 0 and 1 as follows:
 \code{weight = 1 - alpha} for class 0
 where \code{alpha} is a float in the range of \verb{[0, 1]}.
 }
-\section{Returns}{
-Binary focal crossentropy loss value
-with shape = \verb{[batch_size, d0, .. dN-1]}.
-}
-
 \section{Examples}{
 \if{html}{\out{<div class="sourceCode python">}}\preformatted{y_true = [[0, 1], [0, 0]]
 y_pred = [[0.6, 0.4], [0.4, 0.6]]

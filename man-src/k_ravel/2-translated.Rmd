@@ -3,7 +3,7 @@ Return a contiguous flattened tensor.
 @description
 A 1-D tensor, containing the elements of the input, is returned.
 
-# Returns
+@returns
     Output tensor.
 
 @param x Input tensor.

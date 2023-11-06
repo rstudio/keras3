@@ -1,8 +1,6 @@
 Take elements from a tensor along an axis.
 
-@description
-
-# Returns
+@returns
     The corresponding tensor of values.
 
 @param x Source tensor.

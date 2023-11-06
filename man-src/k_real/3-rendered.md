@@ -1,8 +1,6 @@
 Return the real part of the complex argument.
 
-@description
-
-# Returns
+@returns
     The real component of the complex argument.
 
 @param x Input tensor.

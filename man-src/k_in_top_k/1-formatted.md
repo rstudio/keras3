@@ -2,10 +2,6 @@ Checks if the targets are in the top-k predictions.
 
 @description
 
-# Returns
-A boolean tensor of the same shape as `targets`, where each element
-indicates whether the corresponding target is in the top-k predictions.
-
 # Examples
 ```python
 targets = keras.ops.convert_to_tensor([2, 5, 3])
@@ -16,6 +12,10 @@ predictions = keras.ops.convert_to_tensor(
 in_top_k(targets, predictions, k=3)
 # array([ True False  True], shape=(3,), dtype=bool)
 ```
+
+@returns
+A boolean tensor of the same shape as `targets`, where each element
+indicates whether the corresponding target is in the top-k predictions.
 
 @param targets A tensor of true labels.
 @param predictions A tensor of predicted labels.

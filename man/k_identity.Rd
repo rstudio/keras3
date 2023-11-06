@@ -11,15 +11,14 @@ k_identity(n, dtype = NULL)
 
 \item{dtype}{Data type of the output tensor.}
 }
+\value{
+\if{html}{\out{<div class="sourceCode">}}\preformatted{The identity tensor.
+}\if{html}{\out{</div>}}
+}
 \description{
 The identity tensor is a square tensor with ones on the main diagonal and
 zeros elsewhere.
 }
-\section{Returns}{
-\if{html}{\out{<div class="sourceCode">}}\preformatted{The identity tensor.
-}\if{html}{\out{</div>}}
-}
-
 \seealso{
 \itemize{
 \item \url{https://www.tensorflow.org/api_docs/python/tf/keras/ops/identity}

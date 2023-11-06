@@ -1,8 +1,6 @@
 Return the minimum of a tensor or minimum along an axis.
 
-@description
-
-# Returns
+@returns
     Minimum of `x`.
 
 @param x Input tensor.

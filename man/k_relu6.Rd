@@ -9,13 +9,12 @@ k_relu6(x)
 \arguments{
 \item{x}{Input tensor.}
 }
+\value{
+A tensor with the same shape as \code{x}.
+}
 \description{
 It is defined as \code{f(x) = np.clip(x, 0, 6)}.
 }
-\section{Returns}{
-A tensor with the same shape as \code{x}.
-}
-
 \section{Examples}{
 \if{html}{\out{<div class="sourceCode python">}}\preformatted{x = keras.ops.convert_to_tensor([-3.0, -2.0, 0.1, 0.2, 6.0, 8.0])
 keras.ops.relu6(x)

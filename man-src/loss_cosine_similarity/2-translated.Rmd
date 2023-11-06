@@ -26,9 +26,6 @@ Formula:
 loss = -sum(l2_norm(y_true) * l2_norm(y_pred))
 ```
 
-# Returns
-Cosine similarity tensor.
-
 # Examples
 ```python
 y_true = [[0., 1.], [1., 1.], [1., 1.]]
@@ -36,6 +33,9 @@ y_pred = [[1., 0.], [1., 1.], [-1., -1.]]
 loss = keras.losses.cosine_similarity(y_true, y_pred, axis=-1)
 # [-0., -0.99999994, 0.99999994]
 ```
+
+@returns
+Cosine similarity tensor.
 
 @param axis The axis along which the cosine similarity is computed
     (the features axis). Defaults to `-1`.

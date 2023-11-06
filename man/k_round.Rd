@@ -11,14 +11,13 @@ k_round(x, decimals = 0L)
 
 \item{decimals}{Number of decimal places to round to. Defaults to \code{0}.}
 }
-\description{
-Evenly round to the given number of decimals.
-}
-\section{Returns}{
+\value{
 \if{html}{\out{<div class="sourceCode">}}\preformatted{Output tensor.
 }\if{html}{\out{</div>}}
 }
-
+\description{
+Evenly round to the given number of decimals.
+}
 \seealso{
 \itemize{
 \item \url{https://www.tensorflow.org/api_docs/python/tf/keras/ops/round}

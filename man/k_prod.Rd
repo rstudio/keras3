@@ -18,14 +18,13 @@ are left in the result as dimensions with size one.}
 
 \item{dtype}{Data type of the returned tensor.}
 }
-\description{
-Return the product of tensor elements over a given axis.
-}
-\section{Returns}{
+\value{
 \if{html}{\out{<div class="sourceCode">}}\preformatted{Product of elements of `x` over the given axis or axes.
 }\if{html}{\out{</div>}}
 }
-
+\description{
+Return the product of tensor elements over a given axis.
+}
 \seealso{
 \itemize{
 \item \url{https://www.tensorflow.org/api_docs/python/tf/keras/ops/prod}

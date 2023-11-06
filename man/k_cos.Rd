@@ -9,14 +9,13 @@ k_cos(x)
 \arguments{
 \item{x}{Input tensor.}
 }
-\description{
-Cosine, element-wise.
-}
-\section{Returns}{
+\value{
 \if{html}{\out{<div class="sourceCode">}}\preformatted{The corresponding cosine values.
 }\if{html}{\out{</div>}}
 }
-
+\description{
+Cosine, element-wise.
+}
 \seealso{
 \itemize{
 \item \url{https://www.tensorflow.org/api_docs/python/tf/keras/ops/cos}

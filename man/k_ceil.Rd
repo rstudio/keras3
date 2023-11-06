@@ -9,15 +9,14 @@ k_ceil(x)
 \arguments{
 \item{x}{Input tensor.}
 }
+\value{
+\if{html}{\out{<div class="sourceCode">}}\preformatted{The ceiling of each element in `x`, with float dtype.
+}\if{html}{\out{</div>}}
+}
 \description{
 The ceil of the scalar \code{x} is the smallest integer \code{i}, such that
 \code{i >= x}.
 }
-\section{Returns}{
-\if{html}{\out{<div class="sourceCode">}}\preformatted{The ceiling of each element in `x`, with float dtype.
-}\if{html}{\out{</div>}}
-}
-
 \seealso{
 \itemize{
 \item \url{https://www.tensorflow.org/api_docs/python/tf/keras/ops/ceil}

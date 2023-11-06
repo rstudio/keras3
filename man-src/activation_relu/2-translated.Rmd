@@ -17,7 +17,7 @@ activation_relu(x, max_value = 5)
 activation_relu(x, threshold = 5)
 ```
 
-# Returns
+@returns
     A tensor with the same shape and dtype as input `x`.
 
 @param x Input tensor.

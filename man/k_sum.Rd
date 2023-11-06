@@ -15,14 +15,13 @@ compute the sum of the flattened tensor.}
 \item{keepdims}{If this is set to \code{True}, the axes which are reduced are left
 in the result as dimensions with size one.}
 }
-\description{
-Sum of a tensor over the given axes.
-}
-\section{Returns}{
+\value{
 \if{html}{\out{<div class="sourceCode">}}\preformatted{Output tensor containing the sum.
 }\if{html}{\out{</div>}}
 }
-
+\description{
+Sum of a tensor over the given axes.
+}
 \seealso{
 \itemize{
 \item \url{https://www.tensorflow.org/api_docs/python/tf/keras/ops/sum}

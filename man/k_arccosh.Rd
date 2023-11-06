@@ -9,13 +9,12 @@ k_arccosh(x)
 \arguments{
 \item{x}{Input tensor.}
 }
+\value{
+Output tensor of same shape as x.
+}
 \description{
 Inverse hyperbolic cosine, element-wise.
 }
-\section{Returns}{
-Output tensor of same shape as x.
-}
-
 \section{Examples}{
 \if{html}{\out{<div class="sourceCode python">}}\preformatted{x = keras.ops.convert_to_tensor([10, 100])
 keras.ops.arccosh(x)

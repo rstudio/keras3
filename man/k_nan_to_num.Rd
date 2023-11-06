@@ -9,14 +9,13 @@ k_nan_to_num(x)
 \arguments{
 \item{x}{Input data.}
 }
-\description{
-Replace NaN with zero and infinity with large finite numbers.
-}
-\section{Returns}{
+\value{
 \if{html}{\out{<div class="sourceCode">}}\preformatted{`x`, with non-finite values replaced.
 }\if{html}{\out{</div>}}
 }
-
+\description{
+Replace NaN with zero and infinity with large finite numbers.
+}
 \seealso{
 \itemize{
 \item \url{https://www.tensorflow.org/api_docs/python/tf/keras/ops/nan_to_num}

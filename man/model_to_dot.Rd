@@ -45,15 +45,14 @@ have an \code{activation} property).}
 
 \item{...}{Passed on to the Python callable}
 }
-\description{
-Convert a Keras model to dot format.
-}
-\section{Returns}{
+\value{
 A \code{pydot.Dot} instance representing the Keras model or
 a \code{pydot.Cluster} instance representing nested model if
 \code{subgraph=True}.
 }
-
+\description{
+Convert a Keras model to dot format.
+}
 \seealso{
 \itemize{
 \item \url{https://www.tensorflow.org/api_docs/python/tf/keras/utils/model_to_dot}

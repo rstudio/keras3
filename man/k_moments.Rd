@@ -20,15 +20,14 @@ variance) across all devices at each training step in a
 distributed training strategy. If \code{False}, each replica uses its own
 local batch statistics.}
 }
+\value{
+A tuple containing two tensors - mean and variance.
+}
 \description{
 The mean and variance are calculated by aggregating the contents of \code{x}
 across \code{axes}. If \code{x} is 1-D and \verb{axes = [0]} this is just the mean and
 variance of a vector.
 }
-\section{Returns}{
-A tuple containing two tensors - mean and variance.
-}
-
 \section{Examples}{
 \if{html}{\out{<div class="sourceCode python">}}\preformatted{x = keras.ops.convert_to_tensor([0, 1, 2, 3, 100], dtype="float32")
 keras.ops.moments(x, axes=[0])

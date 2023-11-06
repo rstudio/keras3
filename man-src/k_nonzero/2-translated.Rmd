@@ -1,8 +1,6 @@
 Return the indices of the elements that are non-zero.
 
-@description
-
-# Returns
+@returns
     Indices of elements that are non-zero.
 
 @param x Input tensor.

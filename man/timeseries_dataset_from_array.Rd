@@ -59,13 +59,7 @@ data for test or validation.}
 will not be used in the output sequences.
 This is useful to reserve part of the data for test or validation.}
 }
-\description{
-This function takes in a sequence of data-points gathered at
-equal intervals, along with time series parameters such as
-length of the sequences/windows, spacing between two sequence/windows, etc.,
-to produce batches of timeseries inputs and targets.
-}
-\section{Returns}{
+\value{
 A \code{tf.data.Dataset} instance. If \code{targets} was passed, the dataset yields
 tuple \verb{(batch_of_sequences, batch_of_targets)}. If not, the dataset yields
 only \code{batch_of_sequences}.
@@ -132,7 +126,12 @@ for batch in zip(input_dataset, target_dataset):
     break
 }\if{html}{\out{</div>}}
 }
-
+\description{
+This function takes in a sequence of data-points gathered at
+equal intervals, along with time series parameters such as
+length of the sequences/windows, spacing between two sequence/windows, etc.,
+to produce batches of timeseries inputs and targets.
+}
 \seealso{
 \itemize{
 \item \url{https://www.tensorflow.org/api_docs/python/tf/keras/utils/timeseries_dataset_from_array}

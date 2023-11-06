@@ -14,7 +14,7 @@ Dot product of two tensors.
 # Note
 Torch backend does not accept 0-D tensors as arguments.
 
-# Returns
+@returns
     Dot product of `x1` and `x2`.
 
 @param x1 First argument.

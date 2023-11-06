@@ -2,12 +2,6 @@ Returns the minimum of an array or minimum value along an axis.
 
 @description
 
-# Returns
-An array with the minimum value. If `axis=None`, the result is a scalar
-value representing the minimum element in the entire array. If `axis` is
-given, the result is an array with the minimum values along
-the specified axis.
-
 # Examples
 ```python
 x = keras.ops.convert_to_tensor([1, 3, 5, 2, 3, 6])
@@ -26,6 +20,12 @@ x = keras.ops.convert_to_tensor([[1, 6, 8], [7, 5, 3]])
 keras.ops.amin(x, axis=1, keepdims=True)
 # array([[1],[3]], dtype=int32)
 ```
+
+@returns
+An array with the minimum value. If `axis=None`, the result is a scalar
+value representing the minimum element in the entire array. If `axis` is
+given, the result is an array with the minimum values along
+the specified axis.
 
 @param x Input tensor.
 @param axis Axis along which to compute the minimum.

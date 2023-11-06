@@ -34,7 +34,7 @@ updates = np.array([[1., 1., 1, 1,], [1., 1., 1, 1,])
 inputs = keras.ops.scatter_update(inputs, indices, updates)
 ```
 
-# Returns
+@returns
     A tensor, has the same shape and dtype as `inputs`.
 
 @param inputs A tensor, the tensor to be updated.

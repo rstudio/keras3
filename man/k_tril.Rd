@@ -12,15 +12,14 @@ k_tril(x, k = 0L)
 \item{k}{Diagonal above which to zero elements. Defaults to \code{0}. the
 main diagonal. \code{k < 0} is below it, and \code{k > 0} is above it.}
 }
+\value{
+\if{html}{\out{<div class="sourceCode">}}\preformatted{Lower triangle of `x`, of same shape and data type as `x`.
+}\if{html}{\out{</div>}}
+}
 \description{
 For tensors with \code{ndim} exceeding 2, \code{tril} will apply to the
 final two axes.
 }
-\section{Returns}{
-\if{html}{\out{<div class="sourceCode">}}\preformatted{Lower triangle of `x`, of same shape and data type as `x`.
-}\if{html}{\out{</div>}}
-}
-
 \seealso{
 \itemize{
 \item \url{https://www.tensorflow.org/api_docs/python/tf/keras/ops/tril}

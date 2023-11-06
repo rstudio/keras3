@@ -90,7 +90,7 @@ model.compile(optimizer='adam',
               loss=keras.losses.CategoricalFocalCrossentropy())
 ```
 
-# Returns
+@returns
 Categorical focal crossentropy loss value.
 
 @param alpha A weight balancing factor for all classes, default is `0.25` as

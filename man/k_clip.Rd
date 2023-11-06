@@ -13,16 +13,15 @@ k_clip(x, x_min, x_max)
 
 \item{x_max}{Maximum value.}
 }
+\value{
+\if{html}{\out{<div class="sourceCode">}}\preformatted{The clipped tensor.
+}\if{html}{\out{</div>}}
+}
 \description{
 Given an interval, values outside the interval are clipped to the
 interval edges. For example, if an interval of \verb{[0, 1]} is specified,
 values smaller than 0 become 0, and values larger than 1 become 1.
 }
-\section{Returns}{
-\if{html}{\out{<div class="sourceCode">}}\preformatted{The clipped tensor.
-}\if{html}{\out{</div>}}
-}
-
 \seealso{
 \itemize{
 \item \url{https://www.tensorflow.org/api_docs/python/tf/keras/ops/clip}

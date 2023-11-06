@@ -39,6 +39,9 @@ The dimension along which entropy is computed.}
 
 \item{dtype}{(Optional) data type of the metric result.}
 }
+\value{
+Sparse categorical crossentropy loss value.
+}
 \description{
 Use this crossentropy metric when there are two or more label classes.
 It expects labels to be provided as integers. If you want to provide labels
@@ -91,10 +94,6 @@ Usage with \code{compile()} API:
     loss='mse',
     metrics=[keras.metrics.SparseCategoricalCrossentropy()])
 }\if{html}{\out{</div>}}
-}
-
-\section{Returns}{
-Sparse categorical crossentropy loss value.
 }
 
 \seealso{

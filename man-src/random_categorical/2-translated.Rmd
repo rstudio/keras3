@@ -11,7 +11,7 @@ where each row contains samples from the corresponding row in `logits`.
 Each column index contains an independent samples drawn from the input
 distribution.
 
-# Returns
+@returns
     A 2-D tensor with (batch_size, num_samples).
 
 @param logits 2-D Tensor with shape (batch_size, num_classes). Each row

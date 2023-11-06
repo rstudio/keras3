@@ -23,6 +23,9 @@ metric_mean_absolute_error(
 
 \item{dtype}{(Optional) data type of the metric result.}
 }
+\value{
+Mean absolute error values with shape = \verb{[batch_size, d0, .. dN-1]}.
+}
 \description{
 \if{html}{\out{<div class="sourceCode python">}}\preformatted{loss = mean(abs(y_true - y_pred), axis=-1)
 }\if{html}{\out{</div>}}
@@ -58,10 +61,6 @@ Usage with \code{compile()} API:
     loss='mse',
     metrics=[keras.metrics.MeanAbsoluteError()])
 }\if{html}{\out{</div>}}
-}
-
-\section{Returns}{
-Mean absolute error values with shape = \verb{[batch_size, d0, .. dN-1]}.
 }
 
 \seealso{

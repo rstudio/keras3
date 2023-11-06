@@ -10,7 +10,7 @@ Matrix product of two tensors.
 - If the second tensor is 1-D, it is promoted to a matrix by appending a 1
   to its dimensions. After matrix multiplication the appended 1 is removed.
 
-# Returns
+@returns
     Output tensor, matrix product of the inputs.
 
 @param x1 First tensor.

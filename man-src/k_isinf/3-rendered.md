@@ -1,8 +1,6 @@
 Test element-wise for positive or negative infinity.
 
-@description
-
-# Returns
+@returns
     Output boolean tensor.
 
 @param x Input tensor.

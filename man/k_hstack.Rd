@@ -9,15 +9,14 @@ k_hstack(xs)
 \arguments{
 \item{xs}{Sequence of tensors.}
 }
+\value{
+\if{html}{\out{<div class="sourceCode">}}\preformatted{The tensor formed by stacking the given tensors.
+}\if{html}{\out{</div>}}
+}
 \description{
 This is equivalent to concatenation along the first axis for 1-D tensors,
 and along the second axis for all other tensors.
 }
-\section{Returns}{
-\if{html}{\out{<div class="sourceCode">}}\preformatted{The tensor formed by stacking the given tensors.
-}\if{html}{\out{</div>}}
-}
-
 \seealso{
 \itemize{
 \item \url{https://www.tensorflow.org/api_docs/python/tf/keras/ops/hstack}

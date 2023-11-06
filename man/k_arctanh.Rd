@@ -9,14 +9,13 @@ k_arctanh(x)
 \arguments{
 \item{x}{Input tensor.}
 }
-\description{
-Inverse hyperbolic tangent, element-wise.
-}
-\section{Returns}{
+\value{
 \if{html}{\out{<div class="sourceCode">}}\preformatted{Output tensor of same shape as `x`.
 }\if{html}{\out{</div>}}
 }
-
+\description{
+Inverse hyperbolic tangent, element-wise.
+}
 \seealso{
 \itemize{
 \item \url{https://www.tensorflow.org/api_docs/python/tf/keras/ops/arctanh}

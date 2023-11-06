@@ -29,6 +29,9 @@ Supported options are \code{"sum"}, \code{"sum_over_batch_size"} or \code{None}.
 
 \item{name}{Optional name for the loss instance.}
 }
+\value{
+Cosine similarity tensor.
+}
 \description{
 Formula:
 
@@ -54,10 +57,6 @@ Formula:
 \if{html}{\out{<div class="sourceCode python">}}\preformatted{loss = -sum(l2_norm(y_true) * l2_norm(y_pred))
 }\if{html}{\out{</div>}}
 }
-\section{Returns}{
-Cosine similarity tensor.
-}
-
 \section{Examples}{
 \if{html}{\out{<div class="sourceCode python">}}\preformatted{y_true = [[0., 1.], [1., 1.], [1., 1.]]
 y_pred = [[1., 0.], [1., 1.], [-1., -1.]]

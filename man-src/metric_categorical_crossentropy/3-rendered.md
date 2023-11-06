@@ -50,7 +50,7 @@ model.compile(
     metrics=[keras.metrics.CategoricalCrossentropy()])
 ```
 
-# Returns
+@returns
 Categorical crossentropy loss value.
 
 @param name (Optional) string name of the metric instance.

@@ -15,13 +15,12 @@ output form.}
 
 \item{...}{The operands to compute the Einstein sum of.}
 }
+\value{
+The calculation based on the Einstein summation convention.
+}
 \description{
 Evaluates the Einstein summation convention on the operands.
 }
-\section{Returns}{
-The calculation based on the Einstein summation convention.
-}
-
 \section{Examples}{
 \if{html}{\out{<div class="sourceCode python">}}\preformatted{from keras import ops
 a = ops.arange(25).reshape(5, 5)

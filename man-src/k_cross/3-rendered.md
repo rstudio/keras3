@@ -17,7 +17,7 @@ the cross product is returned.
 Torch backend does not support two dimensional vectors, or the
 arguments `axisa`, `axisb` and `axisc`. Use `axis` instead.
 
-# Returns
+@returns
     Vector cross product(s).
 
 @param x1 Components of the first vector(s).

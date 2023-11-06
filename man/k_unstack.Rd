@@ -14,13 +14,12 @@ if \code{None}.}
 
 \item{axis}{The axis along which to unpack.}
 }
+\value{
+A list of tensors unpacked along the given axis.
+}
 \description{
 Unpacks the given dimension of a rank-R tensor into rank-(R-1) tensors.
 }
-\section{Returns}{
-A list of tensors unpacked along the given axis.
-}
-
 \section{Examples}{
 \if{html}{\out{<div class="sourceCode python">}}\preformatted{x = keras.ops.array([[1, 2], [3, 4]])
 keras.ops.unstack(x, axis=0)

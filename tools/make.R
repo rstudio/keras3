@@ -87,7 +87,7 @@ make_translation_patchfiles <- function() {
             file_info("2-translated.Rmd")$change_time >= file_info("translate.patch")$birth_time
         }
       )
-      # if(!needs_update) return()
+      if(!needs_update) return()
       message("updating patchfile: ", dir)
       diff <- suppressWarnings( # returns 1 on diff
         system2t("git", c("diff -U1 --no-index",

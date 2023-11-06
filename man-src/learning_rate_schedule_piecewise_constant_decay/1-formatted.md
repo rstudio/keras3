@@ -25,7 +25,11 @@ as the learning rate. The learning rate schedule is also serializable and
 deserializable using `keras.optimizers.schedules.serialize` and
 `keras.optimizers.schedules.deserialize`.
 
-# Returns
+# Raises
+ValueError: if the number of elements in the `boundaries` and `values`
+lists do not match.
+
+@returns
 A 1-arg callable learning rate schedule that takes the current optimizer
 step and outputs the decayed learning rate, a scalar tensor of the
 same type as the boundary tensors.
@@ -34,10 +38,6 @@ The output of the 1-arg function that takes the `step`
 is `values[0]` when `step <= boundaries[0]`,
 `values[1]` when `step > boundaries[0]` and `step <= boundaries[1]`,
 ..., and `values[-1]` when `step > boundaries[-1]`.
-
-# Raises
-ValueError: if the number of elements in the `boundaries` and `values`
-lists do not match.
 
 @param boundaries A list of Python numbers with strictly increasing
     entries, and with all elements having the same type as the

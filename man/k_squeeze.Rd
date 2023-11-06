@@ -11,14 +11,13 @@ k_squeeze(x, axis = NULL)
 
 \item{axis}{Select a subset of the entries of length one in the shape.}
 }
-\description{
-Remove axes of length one from \code{x}.
-}
-\section{Returns}{
+\value{
 The input tensor with all or a subset of the dimensions of
 length 1 removed.
 }
-
+\description{
+Remove axes of length one from \code{x}.
+}
 \seealso{
 \itemize{
 \item \url{https://www.tensorflow.org/api_docs/python/tf/keras/ops/squeeze}

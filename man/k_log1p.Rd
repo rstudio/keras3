@@ -9,14 +9,13 @@ k_log1p(x)
 \arguments{
 \item{x}{Input tensor.}
 }
-\description{
-Calculates \code{log(1 + x)}.
-}
-\section{Returns}{
+\value{
 \if{html}{\out{<div class="sourceCode">}}\preformatted{Output tensor, element-wise natural logarithm of `1 + x`.
 }\if{html}{\out{</div>}}
 }
-
+\description{
+Calculates \code{log(1 + x)}.
+}
 \seealso{
 \itemize{
 \item \url{https://www.tensorflow.org/api_docs/python/tf/keras/ops/log1p}

@@ -11,6 +11,9 @@ k_gelu(x, approximate = TRUE)
 
 \item{approximate}{Approximate version of GELU activation. Defaults to \code{True}.}
 }
+\value{
+A tensor with the same shape as \code{x}.
+}
 \description{
 If \code{approximate} is \code{True}, it is defined as:
 \code{f(x) = 0.5 * x * (1 + tanh(sqrt(2 / pi) * (x + 0.044715 * x^3)))}
@@ -19,10 +22,6 @@ Or if \code{approximate} is \code{False}, it is defined as:
 \code{f(x) = x * P(X <= x) = 0.5 * x * (1 + erf(x / sqrt(2)))},
 where \code{P(X) ~ N(0, 1)}.
 }
-\section{Returns}{
-A tensor with the same shape as \code{x}.
-}
-
 \section{Examples}{
 \if{html}{\out{<div class="sourceCode python">}}\preformatted{x = np.array([-1., 0., 1.])
 x_gelu = keras.ops.gelu(x)

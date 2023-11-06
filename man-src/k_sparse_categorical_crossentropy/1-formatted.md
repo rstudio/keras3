@@ -6,10 +6,6 @@ cross-entropy, but it is used when the target tensor contains integer
 class labels instead of one-hot encoded vectors. It measures the
 dissimilarity between the target and output probabilities or logits.
 
-# Returns
-Integer tensor: The computed sparse categorical cross-entropy
-loss between `target` and `output`.
-
 # Examples
 ```python
 target = keras.ops.convert_to_tensor([0, 1, 2], dtype=int32)
@@ -20,6 +16,10 @@ output = keras.ops.convert_to_tensor(
 sparse_categorical_crossentropy(target, output)
 # array([0.10536056 0.22314355 0.6931472 ], shape=(3,), dtype=float32)
 ```
+
+@returns
+Integer tensor: The computed sparse categorical cross-entropy
+loss between `target` and `output`.
 
 @param target The target tensor representing the true class labels as
     integers. Its shape should match the shape of the `output`

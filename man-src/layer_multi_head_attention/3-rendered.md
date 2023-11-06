@@ -46,7 +46,7 @@ a linear projection and return.
     prevent tokens from attending to future tokens (e.g., used in a
     decoder Transformer).
 
-# Returns
+@returns
 attention_output: The result of the computation, of shape `(B, T, E)`,
     where `T` is for target sequence shapes and `E` is the query input
     last dimension if `output_shape` is `None`. Otherwise, the

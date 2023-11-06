@@ -9,7 +9,7 @@ The endpoint of the interval can optionally be excluded.
 # Note
 Torch backend does not support `axis` argument.
 
-# Returns
+@returns
 A tensor of evenly spaced numbers.
 If `retstep` is `True`, returns `(samples, step)`
 

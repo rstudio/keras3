@@ -11,14 +11,13 @@ k_ones(shape, dtype = NULL)
 
 \item{dtype}{Desired data type of the tensor.}
 }
-\description{
-Return a new tensor of given shape and type, filled with ones.
-}
-\section{Returns}{
+\value{
 \if{html}{\out{<div class="sourceCode">}}\preformatted{Tensor of ones with the given shape and dtype.
 }\if{html}{\out{</div>}}
 }
-
+\description{
+Return a new tensor of given shape and type, filled with ones.
+}
 \seealso{
 \itemize{
 \item \url{https://www.tensorflow.org/api_docs/python/tf/keras/ops/ones}

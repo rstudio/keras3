@@ -23,6 +23,10 @@ metric_mean_squared_error(
 
 \item{dtype}{(Optional) data type of the metric result.}
 }
+\value{
+\if{html}{\out{<div class="sourceCode">}}\preformatted{Mean squared error values with shape = `[batch_size, d0, .. dN-1]`.
+}\if{html}{\out{</div>}}
+}
 \description{
 Formula:
 
@@ -44,11 +48,6 @@ loss = keras.losses.mean_squared_error(y_true, y_pred)
 m.update_state([[0, 1], [0, 0]], [[1, 1], [0, 0]])
 m.result()
 # 0.25
-}\if{html}{\out{</div>}}
-}
-
-\section{Returns}{
-\if{html}{\out{<div class="sourceCode">}}\preformatted{Mean squared error values with shape = `[batch_size, d0, .. dN-1]`.
 }\if{html}{\out{</div>}}
 }
 

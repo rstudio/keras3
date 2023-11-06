@@ -1,8 +1,6 @@
 Return the element-wise square of the input.
 
-@description
-
-# Returns
+@returns
     Output tensor, the square of `x`.
 
 @param x Input tensor.

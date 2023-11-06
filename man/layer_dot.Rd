@@ -22,6 +22,10 @@ before taking the dot product. If set to \code{True}, then
 the output of the dot product is the cosine proximity
 between the two samples.}
 }
+\value{
+\if{html}{\out{<div class="sourceCode">}}\preformatted{A tensor, the dot product of the samples from the inputs.
+}\if{html}{\out{</div>}}
+}
 \description{
 It takes a list of inputs of size 2, and the axes
 corresponding to each input along with the dot product
@@ -45,11 +49,6 @@ Usage in a Keras model:
 \if{html}{\out{<div class="sourceCode python">}}\preformatted{x1 = keras.layers.Dense(8)(np.arange(10).reshape(5, 2))
 x2 = keras.layers.Dense(8)(np.arange(10, 20).reshape(5, 2))
 y = keras.layers.Dot(axes=1)([x1, x2])
-}\if{html}{\out{</div>}}
-}
-
-\section{Returns}{
-\if{html}{\out{<div class="sourceCode">}}\preformatted{A tensor, the dot product of the samples from the inputs.
 }\if{html}{\out{</div>}}
 }
 

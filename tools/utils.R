@@ -1264,6 +1264,11 @@ dump_roxygen <- function(doc, params, tags) {
   # r <- "`\\[\\1\\]`"
   # doc$description %<>% gsub(m, r, ., perl = TRUE)
 
+  if(!is.null(returns <- doc$returns)) {
+    returns %<>% str_flatten_lines("@returns", .)
+    doc$returns <- NULL
+  }
+
   main <- lapply(names(doc), \(nm) {
     md_heading <- if (nm %in% c("description", "title", "details")) # "note"
       character() else
@@ -1276,7 +1281,7 @@ dump_roxygen <- function(doc, params, tags) {
     {glue("@{names(.)} {list_simplify(.)}")} %>%
     str_flatten("\n")
 
-  roxygen <- c(main, params, tags) %>%
+  roxygen <- c(main, returns, params, tags) %>%
     str_flatten("\n\n") %>%
     str_split_lines() %>%
     str_trim("right") %>%

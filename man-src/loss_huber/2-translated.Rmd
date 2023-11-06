@@ -33,7 +33,7 @@ loss = keras.losses.huber(y_true, y_pred)
 # 0.155
 ```
 
-# Returns
+@returns
     Tensor with one scalar loss entry per sample.
 
 @param delta A float, the point where the Huber loss function changes from a

@@ -15,14 +15,13 @@ is to compute the variance of the flattened tensor.}
 \item{keepdims}{If this is set to \code{True}, the axes which are reduced are left
 in the result as dimensions with size one.}
 }
-\description{
-Compute the variance along the specified axes.
-}
-\section{Returns}{
+\value{
 \if{html}{\out{<div class="sourceCode">}}\preformatted{Output tensor containing the variance.
 }\if{html}{\out{</div>}}
 }
-
+\description{
+Compute the variance along the specified axes.
+}
 \seealso{
 \itemize{
 \item \url{https://www.tensorflow.org/api_docs/python/tf/keras/ops/var}

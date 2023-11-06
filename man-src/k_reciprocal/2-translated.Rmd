@@ -3,7 +3,7 @@ Return the reciprocal of the argument, element-wise.
 @description
 Calculates `1/x`.
 
-# Returns
+@returns
     Output tensor, element-wise reciprocal of `x`.
 
 @param x Input tensor.

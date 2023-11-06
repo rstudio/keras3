@@ -102,6 +102,10 @@ bias after being updated by an \code{Optimizer}.}
 
 \item{...}{Passed on to the Python callable}
 }
+\value{
+A 3D tensor representing
+\code{activation(separable_conv1d(inputs, kernel) + bias)}.
+}
 \description{
 This layer performs a depthwise convolution that acts separately on
 channels, followed by a pointwise convolution that mixes channels.
@@ -125,11 +129,6 @@ A 3D tensor with shape: \verb{(batch_shape, new_steps, filters)}
 \item If \code{data_format="channels_first"}:
 A 3D tensor with shape: \verb{(batch_shape, filters, new_steps)}
 }
-}
-
-\section{Returns}{
-A 3D tensor representing
-\code{activation(separable_conv1d(inputs, kernel) + bias)}.
 }
 
 \section{Examples}{

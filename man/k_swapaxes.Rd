@@ -13,14 +13,13 @@ k_swapaxes(x, axis1, axis2)
 
 \item{axis2}{Second axis.}
 }
-\description{
-Interchange two axes of a tensor.
-}
-\section{Returns}{
+\value{
 \if{html}{\out{<div class="sourceCode">}}\preformatted{A tensor with the axes swapped.
 }\if{html}{\out{</div>}}
 }
-
+\description{
+Interchange two axes of a tensor.
+}
 \seealso{
 \itemize{
 \item \url{https://www.tensorflow.org/api_docs/python/tf/keras/ops/swapaxes}

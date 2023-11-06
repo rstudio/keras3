@@ -11,14 +11,13 @@ k_logaddexp(x1, x2)
 
 \item{x2}{Input tensor.}
 }
-\description{
-Calculates \code{log(exp(x1) + exp(x2))}.
-}
-\section{Returns}{
+\value{
 Output tensor, element-wise logarithm of the sum of exponentiations
 of the inputs.
 }
-
+\description{
+Calculates \code{log(exp(x1) + exp(x2))}.
+}
 \seealso{
 \itemize{
 \item \url{https://www.tensorflow.org/api_docs/python/tf/keras/ops/logaddexp}

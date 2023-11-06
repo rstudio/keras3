@@ -1,8 +1,6 @@
 Returns a copy of `x`.
 
-@description
-
-# Returns
+@returns
     A copy of `x`.
 
 @param x Input tensor.

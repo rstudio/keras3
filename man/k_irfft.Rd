@@ -14,6 +14,10 @@ tensors in the tuple should be of floating type.}
 specified, it is inferred from the length of the last axis of \code{x}.
 Defaults to \code{None}.}
 }
+\value{
+A tensor containing the inverse real-valued Fast Fourier Transform
+along the last axis of \code{x}.
+}
 \description{
 Computes the inverse 1D Discrete Fourier Transform of a real-valued signal
 over the inner-most dimension of input.
@@ -29,11 +33,6 @@ Along the axis IRFFT is computed on, if \code{fft_length / 2 + 1} is smaller tha
 the corresponding dimension of the input, the dimension is cropped. If it is
 larger, the dimension is padded with zeros.
 }
-\section{Returns}{
-A tensor containing the inverse real-valued Fast Fourier Transform
-along the last axis of \code{x}.
-}
-
 \section{Examples}{
 \if{html}{\out{<div class="sourceCode python">}}\preformatted{real = keras.ops.convert_to_tensor([0.0, 1.0, 2.0, 3.0, 4.0])
 imag = keras.ops.convert_to_tensor([0.0, 1.0, 2.0, 3.0, 4.0])

@@ -1,8 +1,6 @@
 Return the number of dimensions of a tensor.
 
-@description
-
-# Returns
+@returns
     The number of dimensions in `x`.
 
 @param x Input tensor.

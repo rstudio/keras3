@@ -14,6 +14,10 @@ the starting indices for updating.}
 
 \item{shape}{The full shape of the returned slice.}
 }
+\value{
+\if{html}{\out{<div class="sourceCode">}}\preformatted{A tensor, has the same shape and dtype as `inputs`.
+}\if{html}{\out{</div>}}
+}
 \description{
 At a high level, this operation is an explicit replacement for array slicing
 e.g. \code{inputs[start_indices: start_indices + shape]}.
@@ -27,11 +31,6 @@ shape = np.array([2, 2])
 inputs = keras.ops.slice(inputs, start_indices, updates)
 }\if{html}{\out{</div>}}
 }
-\section{Returns}{
-\if{html}{\out{<div class="sourceCode">}}\preformatted{A tensor, has the same shape and dtype as `inputs`.
-}\if{html}{\out{</div>}}
-}
-
 \seealso{
 \itemize{
 \item \url{https://www.tensorflow.org/api_docs/python/tf/keras/ops/slice}

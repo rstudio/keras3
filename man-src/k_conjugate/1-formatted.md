@@ -6,7 +6,7 @@ of its imaginary part.
 
 `keras.ops.conj` is a shorthand for this function.
 
-# Returns
+@returns
     The complex conjugate of each element in `x`.
 
 @param x Input tensor.

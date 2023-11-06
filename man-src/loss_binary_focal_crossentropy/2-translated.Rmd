@@ -146,7 +146,7 @@ loss(y_true, y_pred)
 # array([0.0004 0.8670], dtype=float32)
 ```
 
-# Returns
+@returns
 Binary focal crossentropy loss value
 with shape = `[batch_size, d0, .. dN-1]`.
 

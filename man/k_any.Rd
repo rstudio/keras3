@@ -19,13 +19,12 @@ for the last to the first axis.}
 dimensions with size one. With this option, the result will
 broadcast correctly against the input array. Defaults to\code{False}.}
 }
+\value{
+The tensor containing the logical OR reduction over the \code{axis}.
+}
 \description{
 Test whether any array element along a given axis evaluates to \code{True}.
 }
-\section{Returns}{
-The tensor containing the logical OR reduction over the \code{axis}.
-}
-
 \section{Examples}{
 \if{html}{\out{<div class="sourceCode python">}}\preformatted{x = keras.ops.convert_to_tensor([True, False])
 keras.ops.any(x)

@@ -17,13 +17,12 @@ should be updated and returned by this function.}
 
 \item{init_val}{The initial value of the loop state.}
 }
+\value{
+The final state after the loop.
+}
 \description{
 For loop implementation.
 }
-\section{Returns}{
-The final state after the loop.
-}
-
 \section{Examples}{
 \if{html}{\out{<div class="sourceCode python">}}\preformatted{lower = 0
 upper = 10

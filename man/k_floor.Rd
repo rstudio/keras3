@@ -9,14 +9,13 @@ k_floor(x)
 \arguments{
 \item{x}{Input tensor.}
 }
-\description{
-The floor of the scalar \code{x} is the largest integer \code{i}, such that \code{i <= x}.
-}
-\section{Returns}{
+\value{
 \if{html}{\out{<div class="sourceCode">}}\preformatted{Output tensor, element-wise floor of `x`.
 }\if{html}{\out{</div>}}
 }
-
+\description{
+The floor of the scalar \code{x} is the largest integer \code{i}, such that \code{i <= x}.
+}
 \seealso{
 \itemize{
 \item \url{https://www.tensorflow.org/api_docs/python/tf/keras/ops/floor}

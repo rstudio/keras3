@@ -1,8 +1,6 @@
 Convert a Keras model to dot format.
 
-@description
-
-# Returns
+@returns
 A `pydot.Dot` instance representing the Keras model or
 a `pydot.Cluster` instance representing nested model if
 `subgraph=True`.

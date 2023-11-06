@@ -12,14 +12,13 @@ k_transpose(x, axes = NULL)
 \item{axes}{Sequence of integers. Permutation of the dimensions of \code{x}.
 By default, the order of the axes are reversed.}
 }
-\description{
-Returns a tensor with \code{axes} transposed.
-}
-\section{Returns}{
+\value{
 \if{html}{\out{<div class="sourceCode">}}\preformatted{`x` with its axes permuted.
 }\if{html}{\out{</div>}}
 }
-
+\description{
+Returns a tensor with \code{axes} transposed.
+}
 \seealso{
 \itemize{
 \item \url{https://www.tensorflow.org/api_docs/python/tf/keras/ops/transpose}

@@ -1,8 +1,6 @@
 Sorts the elements of `x` along a given axis in ascending order.
 
-@description
-
-# Returns
+@returns
     Sorted tensor.
 
 @param x Input tensor.

@@ -1,8 +1,6 @@
 Compute the median along the specified axis.
 
-@description
-
-# Returns
+@returns
     The output tensor.
 
 @param x Input tensor.

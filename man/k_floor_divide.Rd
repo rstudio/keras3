@@ -11,14 +11,13 @@ k_floor_divide(x1, x2)
 
 \item{x2}{Denominator.}
 }
-\description{
-Returns the largest integer smaller or equal to the division of inputs.
-}
-\section{Returns}{
+\value{
 \if{html}{\out{<div class="sourceCode">}}\preformatted{Output tensor, `y = floor(x1/x2)`
 }\if{html}{\out{</div>}}
 }
-
+\description{
+Returns the largest integer smaller or equal to the division of inputs.
+}
 \seealso{
 \itemize{
 \item \url{https://www.tensorflow.org/api_docs/python/tf/keras/ops/floor_divide}

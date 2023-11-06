@@ -1,8 +1,6 @@
 Base-2 logarithm of `x`, element-wise.
 
-@description
-
-# Returns
+@returns
     Output tensor, element-wise base-2 logarithm of `x`.
 
 @param x Input tensor.

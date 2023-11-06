@@ -1,8 +1,6 @@
 Replace NaN with zero and infinity with large finite numbers.
 
-@description
-
-# Returns
+@returns
     `x`, with non-finite values replaced.
 
 @param x Input data.

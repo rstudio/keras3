@@ -52,6 +52,9 @@ Supported options are \code{"sum"}, \code{"sum_over_batch_size"} or \code{None}.
 
 \item{name}{Optional name for the loss instance.}
 }
+\value{
+Categorical focal crossentropy loss value.
+}
 \description{
 Use this crossentropy loss function when there are two or more label
 classes and if you want to handle class imbalance without using
@@ -136,10 +139,6 @@ Usage with the \code{compile()} API:
 \if{html}{\out{<div class="sourceCode python">}}\preformatted{model.compile(optimizer='adam',
               loss=keras.losses.CategoricalFocalCrossentropy())
 }\if{html}{\out{</div>}}
-}
-
-\section{Returns}{
-Categorical focal crossentropy loss value.
 }
 
 \seealso{

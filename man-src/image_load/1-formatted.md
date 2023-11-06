@@ -10,7 +10,7 @@ input_arr = np.array([input_arr])  # Convert single image to a batch.
 predictions = model.predict(input_arr)
 ```
 
-# Returns
+@returns
     A PIL Image instance.
 
 @param path Path to image file.

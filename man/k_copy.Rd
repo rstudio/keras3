@@ -9,14 +9,13 @@ k_copy(x)
 \arguments{
 \item{x}{Input tensor.}
 }
-\description{
-Returns a copy of \code{x}.
-}
-\section{Returns}{
+\value{
 \if{html}{\out{<div class="sourceCode">}}\preformatted{A copy of `x`.
 }\if{html}{\out{</div>}}
 }
-
+\description{
+Returns a copy of \code{x}.
+}
 \seealso{
 \itemize{
 \item \url{https://www.tensorflow.org/api_docs/python/tf/keras/ops/copy}

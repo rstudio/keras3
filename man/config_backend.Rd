@@ -6,14 +6,13 @@
 \usage{
 config_backend()
 }
-\description{
-Publicly accessible method for determining the current backend.
-}
-\section{Returns}{
+\value{
 String, the name of the backend Keras is currently using. One of
 \code{"tensorflow"}, \code{"torch"}, or \code{"jax"}.
 }
-
+\description{
+Publicly accessible method for determining the current backend.
+}
 \section{Examples}{
 \if{html}{\out{<div class="sourceCode r">}}\preformatted{keras::config_backend()
 }\if{html}{\out{</div>}}

@@ -1,8 +1,6 @@
 Convert a tensor to a NumPy array.
 
-@description
-
-# Returns
+@returns
     A NumPy array.
 
 @param x A tensor.

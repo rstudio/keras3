@@ -6,13 +6,12 @@
 \usage{
 config_image_data_format()
 }
+\value{
+A string, either \code{'channels_first'} or \code{'channels_last'}.
+}
 \description{
 Return the default image data format convention.
 }
-\section{Returns}{
-A string, either \code{'channels_first'} or \code{'channels_last'}.
-}
-
 \section{Examples}{
 \if{html}{\out{<div class="sourceCode">}}\preformatted{keras::config_image_data_format()
 }\if{html}{\out{</div>}}

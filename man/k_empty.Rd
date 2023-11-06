@@ -11,14 +11,13 @@ k_empty(shape, dtype = NULL)
 
 \item{dtype}{Desired data type of the empty tensor.}
 }
-\description{
-Return a tensor of given shape and type filled with uninitialized data.
-}
-\section{Returns}{
+\value{
 \if{html}{\out{<div class="sourceCode">}}\preformatted{The empty tensor.
 }\if{html}{\out{</div>}}
 }
-
+\description{
+Return a tensor of given shape and type filled with uninitialized data.
+}
 \seealso{
 \itemize{
 \item \url{https://www.tensorflow.org/api_docs/python/tf/keras/ops/empty}

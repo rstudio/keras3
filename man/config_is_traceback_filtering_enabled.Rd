@@ -6,6 +6,10 @@
 \usage{
 config_is_traceback_filtering_enabled()
 }
+\value{
+Boolean, \code{True} if traceback filtering is enabled,
+and \code{False} otherwise.
+}
 \description{
 Raw Keras tracebacks (also known as stack traces)
 involve many internal frames, which can be
@@ -21,11 +25,6 @@ If you have previously disabled traceback filtering via
 \code{keras.config.disable_traceback_filtering()}, you can re-enable it via
 \code{keras.config.enable_traceback_filtering()}.
 }
-\section{Returns}{
-Boolean, \code{True} if traceback filtering is enabled,
-and \code{False} otherwise.
-}
-
 \seealso{
 \itemize{
 \item \url{https://www.tensorflow.org/api_docs/python/tf/keras/config/is_traceback_filtering_enabled}

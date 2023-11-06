@@ -6,7 +6,7 @@ equal intervals, along with time series parameters such as
 length of the sequences/windows, spacing between two sequence/windows, etc.,
 to produce batches of timeseries inputs and targets.
 
-# Returns
+@returns
 A `tf.data.Dataset` instance. If `targets` was passed, the dataset yields
 tuple `(batch_of_sequences, batch_of_targets)`. If not, the dataset yields
 only `batch_of_sequences`.

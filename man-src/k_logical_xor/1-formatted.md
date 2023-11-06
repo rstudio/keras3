@@ -1,8 +1,6 @@
 Compute the truth value of `x1 XOR x2`, element-wise.
 
-@description
-
-# Returns
+@returns
     Output boolean tensor.
 
 @param x1 First input tensor.

@@ -1,8 +1,6 @@
 Stack tensors in sequence vertically (row wise).
 
-@description
-
-# Returns
+@returns
     Tensor formed by stacking the given tensors.
 
 @param xs Sequence of tensors.

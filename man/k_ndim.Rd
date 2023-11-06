@@ -9,14 +9,13 @@ k_ndim(x)
 \arguments{
 \item{x}{Input tensor.}
 }
-\description{
-Return the number of dimensions of a tensor.
-}
-\section{Returns}{
+\value{
 \if{html}{\out{<div class="sourceCode">}}\preformatted{The number of dimensions in `x`.
 }\if{html}{\out{</div>}}
 }
-
+\description{
+Return the number of dimensions of a tensor.
+}
 \seealso{
 \itemize{
 \item \url{https://www.tensorflow.org/api_docs/python/tf/keras/ops/ndim}

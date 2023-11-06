@@ -56,7 +56,7 @@ model.compile(
     metrics=[keras.metrics.SparseCategoricalCrossentropy()])
 ```
 
-# Returns
+@returns
 Sparse categorical crossentropy loss value.
 
 @param name (Optional) string name of the metric instance.

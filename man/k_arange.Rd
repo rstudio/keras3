@@ -23,6 +23,12 @@ specified as a position argument, \code{start} must also be given.}
 \item{dtype}{The type of the output array. If \code{dtype} is not given, infer the
 data type from the other input arguments.}
 }
+\value{
+Tensor of evenly spaced values.
+For floating point arguments, the length of the result is
+\code{ceil((stop - start)/step)}. Because of floating point overflow, this
+rule may result in the last element of out being greater than stop.
+}
 \description{
 \code{arange} can be called with a varying number of positional arguments:
 \itemize{
@@ -35,13 +41,6 @@ stop).
 interval \verb{[start, stop)}, with spacing between values given by step.
 }
 }
-\section{Returns}{
-Tensor of evenly spaced values.
-For floating point arguments, the length of the result is
-\code{ceil((stop - start)/step)}. Because of floating point overflow, this
-rule may result in the last element of out being greater than stop.
-}
-
 \section{Examples}{
 \if{html}{\out{<div class="sourceCode python">}}\preformatted{keras.ops.arange(3)
 # array([0, 1, 2], dtype=int32)

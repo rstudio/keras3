@@ -9,14 +9,13 @@ k_log(x)
 \arguments{
 \item{x}{Input tensor.}
 }
-\description{
-Natural logarithm, element-wise.
-}
-\section{Returns}{
+\value{
 \if{html}{\out{<div class="sourceCode">}}\preformatted{Output tensor, element-wise natural logarithm of `x`.
 }\if{html}{\out{</div>}}
 }
-
+\description{
+Natural logarithm, element-wise.
+}
 \seealso{
 \itemize{
 \item \url{https://www.tensorflow.org/api_docs/python/tf/keras/ops/log}

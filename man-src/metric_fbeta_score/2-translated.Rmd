@@ -11,9 +11,6 @@ This is the weighted harmonic mean of precision and recall.
 Its output range is `[0, 1]`. It works for both multi-class
 and multi-label classification.
 
-# Returns
-F-Beta Score: float.
-
 # Examples
 ```python
 metric = keras.metrics.FBetaScore(beta=2.0, threshold=0.5)
@@ -28,6 +25,9 @@ result = metric.result()
 result
 # [0.3846154 , 0.90909094, 0.8333334 ]
 ```
+
+@returns
+F-Beta Score: float.
 
 @param average Type of averaging to be performed across per-class results
     in the multi-class case.

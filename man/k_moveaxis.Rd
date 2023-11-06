@@ -14,14 +14,13 @@ k_moveaxis(x, source, destination)
 \item{destination}{Destinations positions for each of the original axes.
 These must also be unique.}
 }
-\description{
-Other axes remain in their original order.
-}
-\section{Returns}{
+\value{
 \if{html}{\out{<div class="sourceCode">}}\preformatted{Tensor with moved axes.
 }\if{html}{\out{</div>}}
 }
-
+\description{
+Other axes remain in their original order.
+}
 \seealso{
 \itemize{
 \item \url{https://www.tensorflow.org/api_docs/python/tf/keras/ops/moveaxis}

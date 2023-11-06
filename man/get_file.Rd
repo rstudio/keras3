@@ -52,6 +52,17 @@ The default \code{"auto"} corresponds to \code{c("tar", "zip")}.
 \item{cache_dir}{Location to store cached files, when \code{NULL} it
 defaults to \code{Sys.getenv("KERAS_HOME", '~/.keras/')}.}
 }
+\value{
+Path to the downloaded file.
+
+** Warning on malicious downloads **
+
+Downloading something from the Internet carries a risk.
+NEVER download a file/archive if you do not trust the source.
+We recommend that you specify the \code{file_hash} argument
+(if the hash of the source file is known) to make sure that the file you
+are getting is the one you expect.
+}
 \description{
 By default the file at the url \code{origin} is downloaded to the
 cache_dir \verb{~/.keras}, placed in the cache_subdir \code{datasets},
@@ -69,18 +80,6 @@ programs \code{shasum} and \code{sha256sum} can compute the hash.
     extract = TRUE
 )
 }\if{html}{\out{</div>}}
-}
-
-\section{Returns}{
-Path to the downloaded file.
-
-** Warning on malicious downloads **
-
-Downloading something from the Internet carries a risk.
-NEVER download a file/archive if you do not trust the source.
-We recommend that you specify the \code{file_hash} argument
-(if the hash of the source file is known) to make sure that the file you
-are getting is the one you expect.
 }
 
 \seealso{

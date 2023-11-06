@@ -8,9 +8,6 @@ Or if `approximate` is `False`, it is defined as:
 `f(x) = x * P(X <= x) = 0.5 * x * (1 + erf(x / sqrt(2)))`,
 where `P(X) ~ N(0, 1)`.
 
-# Returns
-A tensor with the same shape as `x`.
-
 # Examples
 ```python
 x = np.array([-1., 0., 1.])
@@ -18,6 +15,9 @@ x_gelu = keras.ops.gelu(x)
 print(x_gelu)
 # array([-0.15865525, 0., 0.84134475], shape=(3,), dtype=float64)
 ```
+
+@returns
+A tensor with the same shape as `x`.
 
 @param x Input tensor.
 @param approximate Approximate version of GELU activation. Defaults to `True`.

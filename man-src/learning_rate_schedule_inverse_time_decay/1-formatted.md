@@ -47,7 +47,7 @@ model.compile(optimizer=keras.optimizers.SGD(
 model.fit(data, labels, epochs=5)
 ```
 
-# Returns
+@returns
 A 1-arg callable learning rate schedule that takes the current optimizer
 step and outputs the decayed learning rate, a scalar tensor of the
 same type as `initial_learning_rate`.

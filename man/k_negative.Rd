@@ -9,14 +9,13 @@ k_negative(x)
 \arguments{
 \item{x}{Input tensor.}
 }
-\description{
-Numerical negative, element-wise.
-}
-\section{Returns}{
+\value{
 \if{html}{\out{<div class="sourceCode">}}\preformatted{Output tensor, `y = -x`.
 }\if{html}{\out{</div>}}
 }
-
+\description{
+Numerical negative, element-wise.
+}
 \seealso{
 \itemize{
 \item \url{https://www.tensorflow.org/api_docs/python/tf/keras/ops/negative}

@@ -48,7 +48,7 @@ model.compile(optimizer='sgd',
               metrics=[keras.metrics.Poisson()])
 ```
 
-# Returns
+@returns
 Poisson loss values with shape = `[batch_size, d0, .. dN-1]`.
 
 @param name (Optional) string name of the metric instance.

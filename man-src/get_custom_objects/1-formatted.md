@@ -11,7 +11,7 @@ get_custom_objects().clear()
 get_custom_objects()['MyObject'] = MyObject
 ```
 
-# Returns
+@returns
     Global dictionary mapping registered class names to classes.
 
 @export

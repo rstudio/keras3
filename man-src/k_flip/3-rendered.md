@@ -3,7 +3,7 @@ Reverse the order of elements in the tensor along the given axis.
 @description
 The shape of the tensor is preserved, but the elements are reordered.
 
-# Returns
+@returns
     Output tensor with entries of `axis` reversed.
 
 @param x Input tensor.

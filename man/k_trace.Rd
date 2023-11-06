@@ -18,6 +18,11 @@ Defaults to \code{0}.(first axis).}
 \item{axis2}{Axis to be used as the second axis of the 2-D sub-arrays.
 Defaults to \code{1} (second axis).}
 }
+\value{
+If \code{x} is 2-D, the sum of the diagonal is returned. If \code{x} has
+larger dimensions, then a tensor of sums along diagonals is
+returned.
+}
 \description{
 If \code{x} is 2-D, the sum along its diagonal with the given offset is
 returned, i.e., the sum of elements \code{x[i, i+offset]} for all \code{i}.
@@ -29,12 +34,6 @@ returned.
 The shape of the resulting tensor is the same as that of \code{x} with \code{axis1}
 and \code{axis2} removed.
 }
-\section{Returns}{
-If \code{x} is 2-D, the sum of the diagonal is returned. If \code{x} has
-larger dimensions, then a tensor of sums along diagonals is
-returned.
-}
-
 \seealso{
 \itemize{
 \item \url{https://www.tensorflow.org/api_docs/python/tf/keras/ops/trace}

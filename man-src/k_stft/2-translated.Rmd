@@ -5,10 +5,6 @@ The STFT computes the Fourier transform of short overlapping windows of the
 input. This giving frequency components of the signal as they change over
 time.
 
-# Returns
-A tuple containing two tensors - the real and imaginary parts of the
-STFT output.
-
 # Examples
 ```python
 x = keras.ops.convert_to_tensor([0.0, 1.0, 2.0, 3.0, 4.0])
@@ -19,6 +15,10 @@ stft(x, 3, 2, 3)
 #    [0.0, 0.64951905],
 #    [0.0, -0.64951905]]))
 ```
+
+@returns
+A tuple containing two tensors - the real and imaginary parts of the
+STFT output.
 
 @param x Input tensor.
 @param sequence_length An integer representing the sequence length.

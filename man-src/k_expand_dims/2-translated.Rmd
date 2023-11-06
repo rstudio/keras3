@@ -3,7 +3,7 @@ Expand the shape of a tensor.
 @description
 Insert a new axis at the `axis` position in the expanded tensor shape.
 
-# Returns
+@returns
     Output tensor with the number of dimensions increased.
 
 @param x Input tensor.

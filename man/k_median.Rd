@@ -16,14 +16,13 @@ version of the array.}
 \item{keepdims}{If this is set to \code{True}, the axes which are reduce
 are left in the result as dimensions with size one.}
 }
-\description{
-Compute the median along the specified axis.
-}
-\section{Returns}{
+\value{
 \if{html}{\out{<div class="sourceCode">}}\preformatted{The output tensor.
 }\if{html}{\out{</div>}}
 }
-
+\description{
+Compute the median along the specified axis.
+}
 \seealso{
 \itemize{
 \item \url{https://www.tensorflow.org/api_docs/python/tf/keras/ops/median}

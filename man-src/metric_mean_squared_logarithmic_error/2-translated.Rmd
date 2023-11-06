@@ -45,7 +45,7 @@ model.compile(
     metrics=[keras.metrics.MeanSquaredLogarithmicError()])
 ```
 
-# Returns
+@returns
 Mean squared logarithmic error values with shape = `[batch_size, d0, ..
 dN-1]`.
 

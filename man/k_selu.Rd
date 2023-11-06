@@ -9,16 +9,15 @@ k_selu(x)
 \arguments{
 \item{x}{Input tensor.}
 }
+\value{
+A tensor with the same shape as \code{x}.
+}
 \description{
 It is defined as:
 
 \verb{f(x) =  scale * alpha * (exp(x) - 1.) for x < 0},
 \verb{f(x) = scale * x for x >= 0}.
 }
-\section{Returns}{
-A tensor with the same shape as \code{x}.
-}
-
 \section{Examples}{
 \if{html}{\out{<div class="sourceCode python">}}\preformatted{x = np.array([-1., 0., 1.])
 x_selu = keras.ops.selu(x)

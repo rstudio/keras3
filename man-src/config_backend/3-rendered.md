@@ -2,10 +2,6 @@ Publicly accessible method for determining the current backend.
 
 @description
 
-# Returns
-String, the name of the backend Keras is currently using. One of
-`"tensorflow"`, `"torch"`, or `"jax"`.
-
 # Examples
 
 ```r
@@ -19,6 +15,10 @@ keras::config_backend()
 ```r
 # 'tensorflow'
 ```
+
+@returns
+String, the name of the backend Keras is currently using. One of
+`"tensorflow"`, `"torch"`, or `"jax"`.
 
 @export
 @seealso

@@ -1,8 +1,6 @@
 Remove axes of length one from `x`.
 
-@description
-
-# Returns
+@returns
 The input tensor with all or a subset of the dimensions of
 length 1 removed.
 

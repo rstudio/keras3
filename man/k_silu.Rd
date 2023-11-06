@@ -9,14 +9,13 @@ k_silu(x)
 \arguments{
 \item{x}{Input tensor.}
 }
+\value{
+A tensor with the same shape as \code{x}.
+}
 \description{
 The SiLU activation function is computed by the sigmoid function multiplied
 by its input. It is defined as \code{f(x) = x * sigmoid(x)}.
 }
-\section{Returns}{
-A tensor with the same shape as \code{x}.
-}
-
 \section{Examples}{
 \if{html}{\out{<div class="sourceCode python">}}\preformatted{x = keras.ops.convert_to_tensor([-6.0, 1.0, 0.0, 1.0, 6.0])
 keras.ops.sigmoid(x)

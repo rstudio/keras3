@@ -5,7 +5,7 @@ Real values are finite when they are not NaN, not positive infinity, and
 not negative infinity. Complex values are finite when both their real
 and imaginary parts are finite.
 
-# Returns
+@returns
     Output boolean tensor.
 
 @param x Input tensor.

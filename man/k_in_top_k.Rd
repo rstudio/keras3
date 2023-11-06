@@ -13,14 +13,13 @@ k_in_top_k(targets, predictions, k)
 
 \item{k}{An integer representing the number of predictions to consider.}
 }
-\description{
-Checks if the targets are in the top-k predictions.
-}
-\section{Returns}{
+\value{
 A boolean tensor of the same shape as \code{targets}, where each element
 indicates whether the corresponding target is in the top-k predictions.
 }
-
+\description{
+Checks if the targets are in the top-k predictions.
+}
 \section{Examples}{
 \if{html}{\out{<div class="sourceCode python">}}\preformatted{targets = keras.ops.convert_to_tensor([2, 5, 3])
 predictions = keras.ops.convert_to_tensor(

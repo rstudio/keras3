@@ -1,8 +1,6 @@
 Return a full tensor with the same shape and type as the given tensor.
 
-@description
-
-# Returns
+@returns
     Tensor of `fill_value` with the same shape and type as `x`.
 
 @param x Input tensor.

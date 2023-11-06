@@ -15,6 +15,10 @@ the starting indices for updating.}
 \item{updates}{A tensor, the new values to be put to \code{inputs} at \code{indices}.
 \code{updates} must have the same rank as \code{inputs}.}
 }
+\value{
+\if{html}{\out{<div class="sourceCode">}}\preformatted{A tensor, has the same shape and dtype as `inputs`.
+}\if{html}{\out{</div>}}
+}
 \description{
 At a high level, this operation does
 \code{inputs[start_indices: start_indices + updates.shape] = updates}.
@@ -32,11 +36,6 @@ updates = np.ones((2, 2))
 inputs = keras.ops.slice_update(inputs, start_indices, updates)
 }\if{html}{\out{</div>}}
 }
-\section{Returns}{
-\if{html}{\out{<div class="sourceCode">}}\preformatted{A tensor, has the same shape and dtype as `inputs`.
-}\if{html}{\out{</div>}}
-}
-
 \seealso{
 \itemize{
 \item \url{https://www.tensorflow.org/api_docs/python/tf/keras/ops/slice_update}

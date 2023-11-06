@@ -24,15 +24,15 @@ m.result()
 # 1.1
 ```
 
-# Returns
-Hinge loss values with shape = `[batch_size, d0, .. dN-1]`.
-
 # Examples
 ```python
 y_true = np.random.choice([-1, 1], size=(2, 3))
 y_pred = np.random.random(size=(2, 3))
 loss = keras.losses.hinge(y_true, y_pred)
 ```
+
+@returns
+Hinge loss values with shape = `[batch_size, d0, .. dN-1]`.
 
 @param name (Optional) string name of the metric instance.
 @param dtype (Optional) data type of the metric result.

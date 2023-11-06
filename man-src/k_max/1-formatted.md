@@ -1,8 +1,6 @@
 Return the maximum of a tensor or maximum along an axis.
 
-@description
-
-# Returns
+@returns
     Maximum of `x`.
 
 @param x Input tensor.

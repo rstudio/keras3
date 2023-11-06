@@ -11,14 +11,13 @@ k_concatenate(xs, axis = 0L)
 
 \item{axis}{The axis along which the tensors will be joined. Defaults to \code{0}.}
 }
-\description{
-Join a sequence of tensors along an existing axis.
-}
-\section{Returns}{
+\value{
 \if{html}{\out{<div class="sourceCode">}}\preformatted{The concatenated tensor.
 }\if{html}{\out{</div>}}
 }
-
+\description{
+Join a sequence of tensors along an existing axis.
+}
 \seealso{
 \itemize{
 \item \url{https://www.tensorflow.org/api_docs/python/tf/keras/ops/concatenate}

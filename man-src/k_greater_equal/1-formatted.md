@@ -1,8 +1,6 @@
 Return the truth value of `x1 >= x2` element-wise.
 
-@description
-
-# Returns
+@returns
     Output tensor, element-wise comparison of `x1` and `x2`.
 
 @param x1 First input tensor.

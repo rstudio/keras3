@@ -6,7 +6,7 @@ argument is used for the calculation of the dot product.
 
 Multidimensional tensors are flattened before the dot product is taken.
 
-# Returns
+@returns
     Output tensor.
 
 @param x1 First input tensor. If complex, its complex conjugate is taken

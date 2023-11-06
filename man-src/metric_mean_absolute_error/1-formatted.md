@@ -39,7 +39,7 @@ model.compile(
     metrics=[keras.metrics.MeanAbsoluteError()])
 ```
 
-# Returns
+@returns
 Mean absolute error values with shape = `[batch_size, d0, .. dN-1]`.
 
 @param name (Optional) string name of the metric instance.

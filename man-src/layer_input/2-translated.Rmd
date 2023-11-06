@@ -9,9 +9,6 @@ For instance, if `a`, `b` and `c` are Keras tensors,
 it becomes possible to do:
 `model = Model(input=[a, b], output=c)`
 
-# Returns
-A Keras tensor.
-
 # Examples
 ```python
 # This is a logistic regression in Keras
@@ -19,6 +16,9 @@ x = Input(shape=(32,))
 y = Dense(16, activation='softmax')(x)
 model = Model(x, y)
 ```
+
+@returns
+A Keras tensor.
 
 @param shape A shape tuple (tuple of integers or `None` objects),
     not including the batch size.

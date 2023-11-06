@@ -13,14 +13,13 @@ k_full(shape, fill_value, dtype = NULL)
 
 \item{dtype}{Desired data type of the tensor.}
 }
-\description{
-Return a new tensor of given shape and type, filled with \code{fill_value}.
-}
-\section{Returns}{
+\value{
 \if{html}{\out{<div class="sourceCode">}}\preformatted{Output tensor.
 }\if{html}{\out{</div>}}
 }
-
+\description{
+Return a new tensor of given shape and type, filled with \code{fill_value}.
+}
 \seealso{
 \itemize{
 \item \url{https://www.tensorflow.org/api_docs/python/tf/keras/ops/full}

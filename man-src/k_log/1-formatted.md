@@ -1,8 +1,6 @@
 Natural logarithm, element-wise.
 
-@description
-
-# Returns
+@returns
     Output tensor, element-wise natural logarithm of `x`.
 
 @param x Input tensor.

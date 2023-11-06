@@ -9,14 +9,13 @@ k_sqrt(x)
 \arguments{
 \item{x}{Input tensor.}
 }
-\description{
-Return the non-negative square root of a tensor, element-wise.
-}
-\section{Returns}{
+\value{
 \if{html}{\out{<div class="sourceCode">}}\preformatted{Output tensor, the non-negative square root of `x`.
 }\if{html}{\out{</div>}}
 }
-
+\description{
+Return the non-negative square root of a tensor, element-wise.
+}
 \seealso{
 \itemize{
 \item \url{https://www.tensorflow.org/api_docs/python/tf/keras/ops/sqrt}

@@ -40,6 +40,9 @@ Supported options are \code{"sum"}, \code{"sum_over_batch_size"} or \code{None}.
 
 \item{name}{Optional name for the loss instance.}
 }
+\value{
+Sparse categorical crossentropy loss value.
+}
 \description{
 Use this crossentropy loss function when there are two or more label
 classes.  We expect labels to be provided as integers. If you want to
@@ -94,10 +97,6 @@ Usage with the \code{compile()} API:
 \if{html}{\out{<div class="sourceCode python">}}\preformatted{model.compile(optimizer='sgd',
               loss=keras.losses.SparseCategoricalCrossentropy())
 }\if{html}{\out{</div>}}
-}
-
-\section{Returns}{
-Sparse categorical crossentropy loss value.
 }
 
 \seealso{

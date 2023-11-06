@@ -17,6 +17,9 @@ metric_poisson(y_true, y_pred, ..., name = "poisson", dtype = NULL)
 
 \item{dtype}{(Optional) data type of the metric result.}
 }
+\value{
+Poisson loss values with shape = \verb{[batch_size, d0, .. dN-1]}.
+}
 \description{
 Formula:
 
@@ -60,10 +63,6 @@ Usage with \code{compile()} API:
               loss='mse',
               metrics=[keras.metrics.Poisson()])
 }\if{html}{\out{</div>}}
-}
-
-\section{Returns}{
-Poisson loss values with shape = \verb{[batch_size, d0, .. dN-1]}.
 }
 
 \seealso{

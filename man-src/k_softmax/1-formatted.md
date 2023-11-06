@@ -10,9 +10,6 @@ axis along which the function is applied within the input.
 It is defined as:
 `f(x) = exp(x) / sum(exp(x))`
 
-# Returns
-A tensor with the same shape as `x`.
-
 # Examples
 ```python
 x = np.array([-1., 0., 1.])
@@ -20,6 +17,9 @@ x_softmax = keras.ops.softmax(x)
 print(x_softmax)
 # array([0.09003057, 0.24472847, 0.66524096], shape=(3,), dtype=float64)
 ```
+
+@returns
+A tensor with the same shape as `x`.
 
 @param x Input tensor.
 @param axis Integer, axis along which the softmax is applied.

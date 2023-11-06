@@ -14,14 +14,13 @@ k_repeat(x, repeats, axis = NULL)
 \item{axis}{The axis along which to repeat values. By default, use
 the flattened input array, and return a flat output array.}
 }
-\description{
-Repeat each element of a tensor after themselves.
-}
-\section{Returns}{
+\value{
 \if{html}{\out{<div class="sourceCode">}}\preformatted{Output tensor.
 }\if{html}{\out{</div>}}
 }
-
+\description{
+Repeat each element of a tensor after themselves.
+}
 \seealso{
 \itemize{
 \item \url{https://www.tensorflow.org/api_docs/python/tf/keras/ops/repeat}

@@ -21,7 +21,7 @@ loss = keras.losses.huber(y_true, y_pred)
 # 0.155
 ```
 
-# Returns
+@returns
     Tensor with one scalar loss entry per sample.
 
 @param y_true tensor of true targets.

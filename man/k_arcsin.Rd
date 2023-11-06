@@ -9,14 +9,13 @@ k_arcsin(x)
 \arguments{
 \item{x}{Input tensor.}
 }
-\description{
-Inverse sine, element-wise.
-}
-\section{Returns}{
+\value{
 Tensor of the inverse sine of each element in \code{x}, in radians and in
 the closed interval \verb{[-pi/2, pi/2]}.
 }
-
+\description{
+Inverse sine, element-wise.
+}
 \section{Examples}{
 \if{html}{\out{<div class="sourceCode python">}}\preformatted{x = keras.ops.convert_to_tensor([1, -1, 0])
 keras.ops.arcsin(x)

@@ -3,7 +3,7 @@ Returns the natural logarithm of one plus the `x`, element-wise.
 @description
 Calculates `log(1 + x)`.
 
-# Returns
+@returns
     Output tensor, element-wise natural logarithm of `1 + x`.
 
 @param x Input tensor.

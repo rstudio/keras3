@@ -33,6 +33,10 @@ supported. By default, \code{"nearest"} is used.}
 size without aspect ratio distortion. The image is cropped in
 the center with target aspect ratio before resizing.}
 }
+\value{
+\if{html}{\out{<div class="sourceCode">}}\preformatted{A PIL Image instance.
+}\if{html}{\out{</div>}}
+}
 \description{
 Loads an image into PIL format.
 }
@@ -41,11 +45,6 @@ Loads an image into PIL format.
 input_arr = keras.utils.img_to_array(image)
 input_arr = np.array([input_arr])  # Convert single image to a batch.
 predictions = model.predict(input_arr)
-}\if{html}{\out{</div>}}
-}
-
-\section{Returns}{
-\if{html}{\out{<div class="sourceCode">}}\preformatted{A PIL Image instance.
 }\if{html}{\out{</div>}}
 }
 

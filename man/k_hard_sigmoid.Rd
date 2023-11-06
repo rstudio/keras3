@@ -9,15 +9,14 @@ k_hard_sigmoid(x)
 \arguments{
 \item{x}{Input tensor.}
 }
+\value{
+A tensor with the same shape as \code{x}.
+}
 \description{
 It is defined as:
 
 \verb{0 if x < -2.5}, \verb{1 if x > 2.5}, \verb{(0.2 * x) + 0.5 if -2.5 <= x <= 2.5}.
 }
-\section{Returns}{
-A tensor with the same shape as \code{x}.
-}
-
 \section{Examples}{
 \if{html}{\out{<div class="sourceCode python">}}\preformatted{x = np.array([-1., 0., 1.])
 x_hard_sigmoid = keras.ops.hard_sigmoid(x)

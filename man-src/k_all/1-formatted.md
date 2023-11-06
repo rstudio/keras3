@@ -2,9 +2,6 @@ Test whether all array elements along a given axis evaluate to `True`.
 
 @description
 
-# Returns
-The tensor containing the logical AND reduction over the `axis`.
-
 # Examples
 ```python
 x = keras.ops.convert_to_tensor([True, False])
@@ -24,6 +21,9 @@ x = keras.ops.convert_to_tensor([[True, False], [True, True]])
 keras.ops.all(x, keepdims=True)
 # array([[False]], shape=(1, 1), dtype=bool)
 ```
+
+@returns
+The tensor containing the logical AND reduction over the `axis`.
 
 @param x Input tensor.
 @param axis An integer or tuple of integers that represent the axis along

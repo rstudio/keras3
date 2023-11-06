@@ -4,15 +4,15 @@ Encodes integer labels as multi-hot vectors.
 This function encodes integer labels as multi-hot vectors, where each label
 is mapped to a binary value in the resulting vector.
 
-# Returns
-Tensor: The multi-hot encoded tensor.
-
 # Examples
 ```python
 data = keras.ops.convert_to_tensor([0, 4])
 keras.ops.multi_hot(data, num_tokens=5)
 # array([1.0, 0.0, 0.0, 0.0, 1.0], dtype=float32)
 ```
+
+@returns
+Tensor: The multi-hot encoded tensor.
 
 @param inputs Tensor of integer labels to be converted to multi-hot vectors.
 @param num_tokens Integer, the total number of unique tokens or classes.

@@ -45,7 +45,7 @@ The learning rate schedule is also serializable and deserializable using
 `keras.optimizers.schedules.serialize` and
 `keras.optimizers.schedules.deserialize`.
 
-# Returns
+@returns
 A 1-arg callable learning rate schedule that takes the current optimizer
 step and outputs the decayed learning rate, a scalar tensor of the
 same type as `initial_learning_rate`.

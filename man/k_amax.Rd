@@ -17,16 +17,15 @@ dimensions of the input array.}
 dimensions that are broadcast to the size of the original
 input tensor. Defaults to \code{False}.}
 }
-\description{
-Returns the maximum of an array or maximum value along an axis.
-}
-\section{Returns}{
+\value{
 An array with the maximum value. If \code{axis=None}, the result is a scalar
 value representing the maximum element in the entire array. If \code{axis} is
 given, the result is an array with the maximum values along
 the specified axis.
 }
-
+\description{
+Returns the maximum of an array or maximum value along an axis.
+}
 \section{Examples}{
 \if{html}{\out{<div class="sourceCode python">}}\preformatted{x = keras.ops.convert_to_tensor([[1, 3, 5], [2, 3, 6]])
 keras.ops.amax(x)

@@ -9,13 +9,12 @@ k_log_sigmoid(x)
 \arguments{
 \item{x}{Input tensor.}
 }
+\value{
+A tensor with the same shape as \code{x}.
+}
 \description{
 It is defined as \code{f(x) = log(1 / (1 + exp(-x)))}.
 }
-\section{Returns}{
-A tensor with the same shape as \code{x}.
-}
-
 \section{Examples}{
 \if{html}{\out{<div class="sourceCode python">}}\preformatted{x = keras.ops.convert_to_tensor([-0.541391, 0.0, 0.50, 5.0])
 keras.ops.log_sigmoid(x)

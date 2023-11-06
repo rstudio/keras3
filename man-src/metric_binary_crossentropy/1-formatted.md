@@ -39,7 +39,7 @@ model.compile(
     metrics=[keras.metrics.BinaryCrossentropy()])
 ```
 
-# Returns
+@returns
 Binary crossentropy loss value. shape = `[batch_size, d0, .. dN-1]`.
 
 @param name (Optional) string name of the metric instance.

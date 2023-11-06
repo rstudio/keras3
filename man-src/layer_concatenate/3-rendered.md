@@ -20,7 +20,7 @@ x2 = keras.layers.Dense(8)(np.arange(10, 20).reshape(5, 2))
 y = keras.layers.Concatenate()([x1, x2])
 ```
 
-# Returns
+@returns
     A tensor, the concatenation of the inputs alongside axis `axis`.
 
 @param axis Axis along which to concatenate.

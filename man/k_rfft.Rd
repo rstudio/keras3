@@ -13,6 +13,10 @@ k_rfft(x, fft_length = NULL)
 specified, it is inferred from the length of the last axis of \code{x}.
 Defaults to \code{None}.}
 }
+\value{
+A tuple containing two tensors - the real and imaginary parts of the
+output.
+}
 \description{
 Computes the 1D Discrete Fourier Transform of a real-valued signal over the
 inner-most dimension of input.
@@ -26,11 +30,6 @@ Along the axis RFFT is computed on, if \code{fft_length} is smaller than the
 corresponding dimension of the input, the dimension is cropped. If it is
 larger, the dimension is padded with zeros.
 }
-\section{Returns}{
-A tuple containing two tensors - the real and imaginary parts of the
-output.
-}
-
 \section{Examples}{
 \if{html}{\out{<div class="sourceCode python">}}\preformatted{x = keras.ops.convert_to_tensor([0.0, 1.0, 2.0, 3.0, 4.0])
 rfft(x)

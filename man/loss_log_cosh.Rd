@@ -25,6 +25,10 @@ loss_log_cosh(
 
 \item{name}{Optional name for the instance.}
 }
+\value{
+\if{html}{\out{<div class="sourceCode">}}\preformatted{Logcosh error values with shape = `[batch_size, d0, .. dN-1]`.
+}\if{html}{\out{</div>}}
+}
 \description{
 Formula:
 
@@ -48,11 +52,6 @@ where x is the error \code{y_pred - y_true}.
 y_pred = [[1., 1.], [0., 0.]]
 loss = keras.losses.log_cosh(y_true, y_pred)
 # 0.108
-}\if{html}{\out{</div>}}
-}
-
-\section{Returns}{
-\if{html}{\out{<div class="sourceCode">}}\preformatted{Logcosh error values with shape = `[batch_size, d0, .. dN-1]`.
 }\if{html}{\out{</div>}}
 }
 

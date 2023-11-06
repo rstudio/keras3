@@ -9,14 +9,13 @@ k_convert_to_numpy(x)
 \arguments{
 \item{x}{A tensor.}
 }
-\description{
-Convert a tensor to a NumPy array.
-}
-\section{Returns}{
+\value{
 \if{html}{\out{<div class="sourceCode">}}\preformatted{A NumPy array.
 }\if{html}{\out{</div>}}
 }
-
+\description{
+Convert a tensor to a NumPy array.
+}
 \seealso{
 \itemize{
 \item \url{https://www.tensorflow.org/api_docs/python/tf/keras/ops/convert_to_numpy}

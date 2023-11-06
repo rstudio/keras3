@@ -10,12 +10,6 @@ Return evenly spaced values within a given interval.
 * `arange(start, stop, step)`: Values are generated within the half-open
     interval `[start, stop)`, with spacing between values given by step.
 
-# Returns
-Tensor of evenly spaced values.
-For floating point arguments, the length of the result is
-`ceil((stop - start)/step)`. Because of floating point overflow, this
-rule may result in the last element of out being greater than stop.
-
 # Examples
 ```python
 keras.ops.arange(3)
@@ -36,6 +30,12 @@ keras.ops.arange(3, 7)
 keras.ops.arange(3, 7, 2)
 # array([3, 5], dtype=int32)
 ```
+
+@returns
+Tensor of evenly spaced values.
+For floating point arguments, the length of the result is
+`ceil((stop - start)/step)`. Because of floating point overflow, this
+rule may result in the last element of out being greater than stop.
 
 @param start Integer or real, representing the start of the interval. The
     interval includes this value.

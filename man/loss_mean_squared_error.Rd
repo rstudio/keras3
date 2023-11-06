@@ -25,6 +25,10 @@ Supported options are \code{"sum"}, \code{"sum_over_batch_size"} or \code{None}.
 
 \item{name}{Optional name for the loss instance.}
 }
+\value{
+\if{html}{\out{<div class="sourceCode">}}\preformatted{Mean squared error values with shape = `[batch_size, d0, .. dN-1]`.
+}\if{html}{\out{</div>}}
+}
 \description{
 Formula:
 
@@ -40,11 +44,6 @@ Formula:
 \if{html}{\out{<div class="sourceCode python">}}\preformatted{y_true = np.random.randint(0, 2, size=(2, 3))
 y_pred = np.random.random(size=(2, 3))
 loss = keras.losses.mean_squared_error(y_true, y_pred)
-}\if{html}{\out{</div>}}
-}
-
-\section{Returns}{
-\if{html}{\out{<div class="sourceCode">}}\preformatted{Mean squared error values with shape = `[batch_size, d0, .. dN-1]`.
 }\if{html}{\out{</div>}}
 }
 

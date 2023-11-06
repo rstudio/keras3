@@ -27,6 +27,9 @@ Supported options are \code{"sum"}, \code{"sum_over_batch_size"} or \code{None}.
 
 \item{name}{Optional name for the loss instance.}
 }
+\value{
+Categorical hinge loss values with shape = \verb{[batch_size, d0, .. dN-1]}.
+}
 \description{
 Formula:
 
@@ -41,10 +44,6 @@ Formula:
 
 where \code{neg=maximum((1-y_true)*y_pred)} and \code{pos=sum(y_true*y_pred)}
 }
-\section{Returns}{
-Categorical hinge loss values with shape = \verb{[batch_size, d0, .. dN-1]}.
-}
-
 \section{Examples}{
 \if{html}{\out{<div class="sourceCode python">}}\preformatted{y_true = np.random.randint(0, 3, size=(2,))
 y_true = np.eye(np.max(y_true) + 1)[y_true]

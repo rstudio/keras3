@@ -11,14 +11,13 @@ k_mod(x1, x2)
 
 \item{x2}{Second tensor.}
 }
-\description{
-Returns the element-wise remainder of division.
-}
-\section{Returns}{
+\value{
 \if{html}{\out{<div class="sourceCode">}}\preformatted{Output tensor, element-wise remainder of division.
 }\if{html}{\out{</div>}}
 }
-
+\description{
+Returns the element-wise remainder of division.
+}
 \seealso{
 \itemize{
 \item \url{https://www.tensorflow.org/api_docs/python/tf/keras/ops/mod}

@@ -26,17 +26,16 @@ is computed.
 Defaults to \code{-1}, which corresponds to the last dimension of
 the tensors.}
 }
+\value{
+Integer tensor: The computed categorical cross-entropy loss between
+\code{target} and \code{output}.
+}
 \description{
 The categorical cross-entropy loss is commonly used in multi-class
 classification tasks where each input sample can belong to one of
 multiple classes. It measures the dissimilarity
 between the target and output probabilities or logits.
 }
-\section{Returns}{
-Integer tensor: The computed categorical cross-entropy loss between
-\code{target} and \code{output}.
-}
-
 \section{Examples}{
 \if{html}{\out{<div class="sourceCode python">}}\preformatted{target = keras.ops.convert_to_tensor(
 [[1, 0, 0],

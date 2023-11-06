@@ -11,6 +11,10 @@ k_dot(x1, x2)
 
 \item{x2}{Second argument.}
 }
+\value{
+\if{html}{\out{<div class="sourceCode">}}\preformatted{Dot product of `x1` and `x2`.
+}\if{html}{\out{</div>}}
+}
 \description{
 \itemize{
 \item If both \code{x1} and \code{x2} are 1-D tensors, it is inner product of vectors
@@ -26,11 +30,6 @@ axis of \code{x2}: \verb{dot(x1, x2)[i,j,k,m] = sum(a[i,j,:] * b[k,:,m])}.
 }
 \section{Note}{
 Torch backend does not accept 0-D tensors as arguments.
-}
-
-\section{Returns}{
-\if{html}{\out{<div class="sourceCode">}}\preformatted{Dot product of `x1` and `x2`.
-}\if{html}{\out{</div>}}
 }
 
 \seealso{

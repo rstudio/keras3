@@ -11,14 +11,13 @@ k_isclose(x1, x2)
 
 \item{x2}{Second input tensor.}
 }
-\description{
-Return whether two tensors are element-wise almost equal.
-}
-\section{Returns}{
+\value{
 \if{html}{\out{<div class="sourceCode">}}\preformatted{Output boolean tensor.
 }\if{html}{\out{</div>}}
 }
-
+\description{
+Return whether two tensors are element-wise almost equal.
+}
 \seealso{
 \itemize{
 \item \url{https://www.tensorflow.org/api_docs/python/tf/keras/ops/isclose}

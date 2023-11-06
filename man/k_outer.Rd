@@ -11,17 +11,16 @@ k_outer(x1, x2)
 
 \item{x2}{Second input tensor.}
 }
+\value{
+\if{html}{\out{<div class="sourceCode">}}\preformatted{Outer product of `x1` and `x2`.
+}\if{html}{\out{</div>}}
+}
 \description{
 Given two vectors \code{x1} and \code{x2}, the outer product is:
 
 \if{html}{\out{<div class="sourceCode">}}\preformatted{out[i, j] = x1[i] * x2[j]
 }\if{html}{\out{</div>}}
 }
-\section{Returns}{
-\if{html}{\out{<div class="sourceCode">}}\preformatted{Outer product of `x1` and `x2`.
-}\if{html}{\out{</div>}}
-}
-
 \seealso{
 \itemize{
 \item \url{https://www.tensorflow.org/api_docs/python/tf/keras/ops/outer}

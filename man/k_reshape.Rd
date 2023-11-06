@@ -13,14 +13,13 @@ k_reshape(x, new_shape)
 One shape dimension can be -1 in which case the value is
 inferred from the length of the array and remaining dimensions.}
 }
-\description{
-Gives a new shape to a tensor without changing its data.
-}
-\section{Returns}{
+\value{
 \if{html}{\out{<div class="sourceCode">}}\preformatted{The reshaped tensor.
 }\if{html}{\out{</div>}}
 }
-
+\description{
+Gives a new shape to a tensor without changing its data.
+}
 \seealso{
 \itemize{
 \item \url{https://www.tensorflow.org/api_docs/python/tf/keras/ops/reshape}

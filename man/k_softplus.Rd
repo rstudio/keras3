@@ -9,14 +9,13 @@ k_softplus(x)
 \arguments{
 \item{x}{Input tensor.}
 }
+\value{
+A tensor with the same shape as \code{x}.
+}
 \description{
 It is defined as \code{f(x) = log(exp(x) + 1)}, where \code{log} is the natural
 logarithm and \code{exp} is the exponential function.
 }
-\section{Returns}{
-A tensor with the same shape as \code{x}.
-}
-
 \section{Examples}{
 \if{html}{\out{<div class="sourceCode python">}}\preformatted{x = keras.ops.convert_to_tensor([-0.555, 0.0, 0.555])
 keras.ops.softplus(x)

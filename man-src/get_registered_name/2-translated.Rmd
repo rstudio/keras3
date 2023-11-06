@@ -5,7 +5,7 @@ This function is part of the Keras serialization and deserialization
 framework. It maps objects to the string names associated with those objects
 for serialization/deserialization.
 
-# Returns
+@returns
 The name associated with the object, or the default Python name if the
 object is not registered.
 

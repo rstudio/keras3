@@ -23,6 +23,10 @@ scalar. By default, the last axis.}
 defines the vector(s) and cross product(s). Overrides \code{axisa},
 \code{axisb} and \code{axisc}.}
 }
+\value{
+\if{html}{\out{<div class="sourceCode">}}\preformatted{Vector cross product(s).
+}\if{html}{\out{</div>}}
+}
 \description{
 The cross product of \code{x1} and \code{x2} in R^3 is a vector
 perpendicular to both \code{x1} and \code{x2}. If \code{x1} and \code{x2} are arrays of
@@ -39,11 +43,6 @@ the cross product is returned.
 \section{Note}{
 Torch backend does not support two dimensional vectors, or the
 arguments \code{axisa}, \code{axisb} and \code{axisc}. Use \code{axis} instead.
-}
-
-\section{Returns}{
-\if{html}{\out{<div class="sourceCode">}}\preformatted{Vector cross product(s).
-}\if{html}{\out{</div>}}
 }
 
 \seealso{

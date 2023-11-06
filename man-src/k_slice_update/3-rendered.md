@@ -18,7 +18,7 @@ updates = np.ones((2, 2))
 inputs = keras.ops.slice_update(inputs, start_indices, updates)
 ```
 
-# Returns
+@returns
     A tensor, has the same shape and dtype as `inputs`.
 
 @param inputs A tensor, the tensor to be updated.

@@ -1,8 +1,6 @@
 Returns a tensor with the signs of the elements of `x`.
 
-@description
-
-# Returns
+@returns
     Output tensor of same shape as `x`.
 
 @param x Input tensor.

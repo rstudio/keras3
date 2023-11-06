@@ -34,6 +34,11 @@ pposed to continuous, fashion.}
 \item{name}{String.  Optional name of the operation.  Defaults to
 \code{"InverseTimeDecay"}.}
 }
+\value{
+A 1-arg callable learning rate schedule that takes the current optimizer
+step and outputs the decayed learning rate, a scalar tensor of the
+same type as \code{initial_learning_rate}.
+}
 \description{
 When training a model, it is often useful to lower the learning rate as
 the training progresses. This schedule applies the inverse decay function
@@ -122,10 +127,6 @@ model.fit(data, labels, epochs=5)
 }
 
 \section{Returns}{
-A 1-arg callable learning rate schedule that takes the current optimizer
-step and outputs the decayed learning rate, a scalar tensor of the
-same type as \code{initial_learning_rate}.
-
 A 1-arg callable learning rate schedule that takes the current optimizer
 step and outputs the decayed learning rate, a scalar tensor of the
 same type as \code{initial_learning_rate}.

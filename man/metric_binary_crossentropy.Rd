@@ -38,6 +38,9 @@ a value of 0.1 for label "0" and 0.9 for label "1".}
 
 \item{dtype}{(Optional) data type of the metric result.}
 }
+\value{
+Binary crossentropy loss value. shape = \verb{[batch_size, d0, .. dN-1]}.
+}
 \description{
 This is the crossentropy metric class to be used when there are only two
 label classes (0 and 1).
@@ -73,10 +76,6 @@ Usage with \code{compile()} API:
     loss='mse',
     metrics=[keras.metrics.BinaryCrossentropy()])
 }\if{html}{\out{</div>}}
-}
-
-\section{Returns}{
-Binary crossentropy loss value. shape = \verb{[batch_size, d0, .. dN-1]}.
 }
 
 \seealso{

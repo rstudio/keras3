@@ -12,14 +12,13 @@ k_log_softmax(x, axis = -1L)
 \item{axis}{Integer, axis along which the log-softmax is applied.
 Defaults to \code{-1}.}
 }
+\value{
+A tensor with the same shape as \code{x}.
+}
 \description{
 It is defined as:
 \code{f(x) = x - max(x) - log(sum(exp(x - max(x))))}
 }
-\section{Returns}{
-A tensor with the same shape as \code{x}.
-}
-
 \section{Examples}{
 \if{html}{\out{<div class="sourceCode python">}}\preformatted{x = np.array([-1., 0., 1.])
 x_log_softmax = keras.ops.log_softmax(x)

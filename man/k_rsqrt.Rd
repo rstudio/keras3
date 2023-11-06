@@ -9,13 +9,12 @@ k_rsqrt(x)
 \arguments{
 \item{x}{input tensor}
 }
+\value{
+A tensor with the same dtype as \code{x}.
+}
 \description{
 Computes reciprocal of square root of x element-wise.
 }
-\section{Returns}{
-A tensor with the same dtype as \code{x}.
-}
-
 \section{Examples}{
 \if{html}{\out{<div class="sourceCode python">}}\preformatted{x = keras.ops.convert_to_tensor([1.0, 10.0, 100.0])
 keras.ops.rsqrt(x)

@@ -1,8 +1,6 @@
 Returns a tensor with `axes` transposed.
 
-@description
-
-# Returns
+@returns
     `x` with its axes permuted.
 
 @param x Input tensor.

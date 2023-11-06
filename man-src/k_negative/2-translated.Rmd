@@ -1,8 +1,6 @@
 Numerical negative, element-wise.
 
-@description
-
-# Returns
+@returns
     Output tensor, `y = -x`.
 
 @param x Input tensor.

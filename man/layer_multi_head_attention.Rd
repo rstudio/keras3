@@ -59,6 +59,15 @@ attention over all axes, but batch, heads, and features.}
 
 \item{...}{Passed on to the Python callable}
 }
+\value{
+attention_output: The result of the computation, of shape \verb{(B, T, E)},
+where \code{T} is for target sequence shapes and \code{E} is the query input
+last dimension if \code{output_shape} is \code{None}. Otherwise, the
+multi-head outputs are projected to the shape specified by
+\code{output_shape}.
+attention_scores: (Optional) multi-head attention coefficients over
+attention axes.
+}
 \description{
 This is an implementation of multi-headed attention as described in the
 paper "Attention is all you Need"
@@ -106,16 +115,6 @@ layer/model, or \code{False} (inference) if there is no parent layer.
 prevent tokens from attending to future tokens (e.g., used in a
 decoder Transformer).
 }
-}
-
-\section{Returns}{
-attention_output: The result of the computation, of shape \verb{(B, T, E)},
-where \code{T} is for target sequence shapes and \code{E} is the query input
-last dimension if \code{output_shape} is \code{None}. Otherwise, the
-multi-head outputs are projected to the shape specified by
-\code{output_shape}.
-attention_scores: (Optional) multi-head attention coefficients over
-attention axes.
 }
 
 \seealso{

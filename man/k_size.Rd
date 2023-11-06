@@ -9,14 +9,13 @@ k_size(x)
 \arguments{
 \item{x}{Input tensor.}
 }
-\description{
-Return the number of elements in a tensor.
-}
-\section{Returns}{
+\value{
 \if{html}{\out{<div class="sourceCode">}}\preformatted{Number of elements in `x`.
 }\if{html}{\out{</div>}}
 }
-
+\description{
+Return the number of elements in a tensor.
+}
 \seealso{
 \itemize{
 \item \url{https://www.tensorflow.org/api_docs/python/tf/keras/ops/size}

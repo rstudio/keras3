@@ -12,14 +12,13 @@ k_sort(x, axis = -1L)
 \item{axis}{Axis along which to sort. If \code{None}, the tensor is flattened
 before sorting. Defaults to \code{-1}; the last axis.}
 }
-\description{
-Sorts the elements of \code{x} along a given axis in ascending order.
-}
-\section{Returns}{
+\value{
 \if{html}{\out{<div class="sourceCode">}}\preformatted{Sorted tensor.
 }\if{html}{\out{</div>}}
 }
-
+\description{
+Sorts the elements of \code{x} along a given axis in ascending order.
+}
 \seealso{
 \itemize{
 \item \url{https://www.tensorflow.org/api_docs/python/tf/keras/ops/sort}

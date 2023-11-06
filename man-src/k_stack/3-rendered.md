@@ -4,7 +4,7 @@ Join a sequence of tensors along a new axis.
 The `axis` parameter specifies the index of the new axis in the
 dimensions of the result.
 
-# Returns
+@returns
     The stacked tensor.
 
 @param x A sequence of tensors.

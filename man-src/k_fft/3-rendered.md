@@ -2,10 +2,6 @@ Computes the Fast Fourier Transform along last axis of input.
 
 @description
 
-# Returns
-A tuple containing two tensors - the real and imaginary parts of the
-output tensor.
-
 # Examples
 ```python
 x = (
@@ -15,6 +11,10 @@ x = (
 fft(x)
 # (array([ 3., -1.], dtype=float32), array([ 1., -1.], dtype=float32))
 ```
+
+@returns
+A tuple containing two tensors - the real and imaginary parts of the
+output tensor.
 
 @param x Tuple of the real and imaginary parts of the input tensor. Both
 tensors in the tuple should be of floating type.

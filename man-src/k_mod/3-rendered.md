@@ -1,8 +1,6 @@
 Returns the element-wise remainder of division.
 
-@description
-
-# Returns
+@returns
     Output tensor, element-wise remainder of division.
 
 @param x1 First tensor.

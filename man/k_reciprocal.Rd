@@ -9,14 +9,13 @@ k_reciprocal(x)
 \arguments{
 \item{x}{Input tensor.}
 }
-\description{
-Calculates \code{1/x}.
-}
-\section{Returns}{
+\value{
 \if{html}{\out{<div class="sourceCode">}}\preformatted{Output tensor, element-wise reciprocal of `x`.
 }\if{html}{\out{</div>}}
 }
-
+\description{
+Calculates \code{1/x}.
+}
 \seealso{
 \itemize{
 \item \url{https://www.tensorflow.org/api_docs/python/tf/keras/ops/reciprocal}

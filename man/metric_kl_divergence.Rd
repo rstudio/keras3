@@ -17,6 +17,9 @@ metric_kl_divergence(y_true, y_pred, ..., name = "kl_divergence", dtype = NULL)
 
 \item{dtype}{(Optional) data type of the metric result.}
 }
+\value{
+KL Divergence loss values with shape = \verb{[batch_size, d0, .. dN-1]}.
+}
 \description{
 Formula:
 
@@ -52,10 +55,6 @@ Usage with \code{compile()} API:
               loss='mse',
               metrics=[keras.metrics.KLDivergence()])
 }\if{html}{\out{</div>}}
-}
-
-\section{Returns}{
-KL Divergence loss values with shape = \verb{[batch_size, d0, .. dN-1]}.
 }
 
 \section{Examples}{

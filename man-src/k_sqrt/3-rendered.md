@@ -1,8 +1,6 @@
 Return the non-negative square root of a tensor, element-wise.
 
-@description
-
-# Returns
+@returns
     Output tensor, the non-negative square root of `x`.
 
 @param x Input tensor.

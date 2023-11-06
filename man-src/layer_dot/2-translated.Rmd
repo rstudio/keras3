@@ -27,7 +27,7 @@ x2 = keras.layers.Dense(8)(np.arange(10, 20).reshape(5, 2))
 y = keras.layers.Dot(axes=1)([x1, x2])
 ```
 
-# Returns
+@returns
     A tensor, the dot product of the samples from the inputs.
 
 @param axes Integer or tuple of integers, axis or axes along which to

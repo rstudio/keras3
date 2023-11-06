@@ -13,14 +13,13 @@ k_cond(pred, true_fn, false_fn)
 
 \item{false_fn}{Callable returning the output for the \code{pred == False} case.}
 }
-\description{
-Conditionally applies \code{true_fn} or \code{false_fn}.
-}
-\section{Returns}{
+\value{
 \if{html}{\out{<div class="sourceCode">}}\preformatted{The output of either `true_fn` or `false_fn` depending on pred.
 }\if{html}{\out{</div>}}
 }
-
+\description{
+Conditionally applies \code{true_fn} or \code{false_fn}.
+}
 \seealso{
 \itemize{
 \item \url{https://www.tensorflow.org/api_docs/python/tf/keras/ops/cond}

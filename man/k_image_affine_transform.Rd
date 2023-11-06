@@ -57,13 +57,12 @@ while \code{"channels_first"} corresponds to inputs with shape
 \verb{~/.keras/keras.json}. If you never set it, then it will be
 \code{"channels_last"}.}
 }
+\value{
+Applied affine transform image or batch of images.
+}
 \description{
 Applies the given transform(s) to the image(s).
 }
-\section{Returns}{
-Applied affine transform image or batch of images.
-}
-
 \section{Examples}{
 \if{html}{\out{<div class="sourceCode python">}}\preformatted{x = np.random.random((2, 64, 80, 3)) # batch of 2 RGB images
 transform = np.array(

@@ -19,9 +19,6 @@ outputs as well.
 - If `data_format="channels_first"`:
     A 3D tensor with shape: `(batch_shape, filters, new_steps)`
 
-# Returns
-A 3D tensor representing `activation(conv1d(inputs, kernel) + bias)`.
-
 # Raises
 ValueError: when both `strides > 1` and `dilation_rate > 1`.
 
@@ -34,6 +31,9 @@ y = keras.layers.Conv1D(32, 3, activation='relu')(x)
 print(y.shape)
 # (4, 8, 32)
 ```
+
+@returns
+A 3D tensor representing `activation(conv1d(inputs, kernel) + bias)`.
 
 @param filters int, the dimension of the output space (the number of filters
     in the convolution).

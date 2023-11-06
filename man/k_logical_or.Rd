@@ -11,14 +11,13 @@ k_logical_or(x1, x2)
 
 \item{x2}{Input tensor.}
 }
-\description{
-Zeros are treated as \code{False} and non-zeros are treated as \code{True}.
-}
-\section{Returns}{
+\value{
 \if{html}{\out{<div class="sourceCode">}}\preformatted{Output tensor, element-wise logical OR of the inputs.
 }\if{html}{\out{</div>}}
 }
-
+\description{
+Zeros are treated as \code{False} and non-zeros are treated as \code{True}.
+}
 \seealso{
 \itemize{
 \item \url{https://www.tensorflow.org/api_docs/python/tf/keras/ops/logical_or}

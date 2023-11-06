@@ -45,6 +45,9 @@ converted to be 1, and the rest 0. If \code{threshold} is
 
 \item{dtype}{Optional. Data type of the metric result.}
 }
+\value{
+F-Beta Score: float.
+}
 \description{
 Formula:
 
@@ -56,10 +59,6 @@ This is the weighted harmonic mean of precision and recall.
 Its output range is \verb{[0, 1]}. It works for both multi-class
 and multi-label classification.
 }
-\section{Returns}{
-F-Beta Score: float.
-}
-
 \section{Examples}{
 \if{html}{\out{<div class="sourceCode python">}}\preformatted{metric = keras.metrics.FBetaScore(beta=2.0, threshold=0.5)
 y_true = np.array([[1, 1, 1],

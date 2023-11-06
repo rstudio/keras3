@@ -16,14 +16,13 @@ flattened tensor.}
 \item{keepdims}{If this is set to \code{True}, the axes which are reduced are left
 in the result as dimensions with size one.}
 }
-\description{
-Compute the standard deviation along the specified axis.
-}
-\section{Returns}{
+\value{
 \if{html}{\out{<div class="sourceCode">}}\preformatted{Output tensor containing the standard deviation values.
 }\if{html}{\out{</div>}}
 }
-
+\description{
+Compute the standard deviation along the specified axis.
+}
 \seealso{
 \itemize{
 \item \url{https://www.tensorflow.org/api_docs/python/tf/keras/ops/std}

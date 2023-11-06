@@ -12,15 +12,14 @@ k_leaky_relu(x, negative_slope = 0.2)
 \item{negative_slope}{Slope of the activation function at x < 0.
 Defaults to \code{0.2}.}
 }
+\value{
+A tensor with the same shape as \code{x}.
+}
 \description{
 It allows a small gradient when the unit is not active, it is defined as:
 
 \verb{f(x) = alpha * x for x < 0} or \verb{f(x) = x for x >= 0}.
 }
-\section{Returns}{
-A tensor with the same shape as \code{x}.
-}
-
 \section{Examples}{
 \if{html}{\out{<div class="sourceCode python">}}\preformatted{x = np.array([-1., 0., 1.])
 x_leaky_relu = keras.ops.leaky_relu(x)

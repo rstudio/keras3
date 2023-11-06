@@ -2,9 +2,6 @@ Extract a diagonal or construct a diagonal array.
 
 @description
 
-# Returns
-The extracted diagonal or constructed diagonal tensor.
-
 # Examples
 ```python
 from keras import ops
@@ -30,6 +27,9 @@ ops.diag(ops.diag(x)))
 #        [0, 4, 0],
 #        [0, 0, 8]])
 ```
+
+@returns
+The extracted diagonal or constructed diagonal tensor.
 
 @param x Input tensor. If `x` is 2-D, returns the k-th diagonal of `x`.
     If `x` is 1-D, return a 2-D tensor with `x` on the k-th diagonal.

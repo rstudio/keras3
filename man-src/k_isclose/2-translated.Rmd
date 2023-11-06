@@ -1,8 +1,6 @@
 Return whether two tensors are element-wise almost equal.
 
-@description
-
-# Returns
+@returns
     Output boolean tensor.
 
 @param x1 First input tensor.

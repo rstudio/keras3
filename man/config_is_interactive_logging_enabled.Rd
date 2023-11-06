@@ -6,16 +6,15 @@
 \usage{
 config_is_interactive_logging_enabled()
 }
+\value{
+Boolean, \code{True} if interactive logging is enabled,
+and \code{False} otherwise.
+}
 \description{
 To switch between writing logs to stdout and \code{absl.logging}, you may use
 \code{keras.config.enable_interactive_logging()} and
 \code{keras.config.disable_interactie_logging()}.
 }
-\section{Returns}{
-Boolean, \code{True} if interactive logging is enabled,
-and \code{False} otherwise.
-}
-
 \seealso{
 \itemize{
 \item \url{https://www.tensorflow.org/api_docs/python/tf/keras/config/is_interactive_logging_enabled}

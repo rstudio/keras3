@@ -19,10 +19,6 @@ activation function to produce the final output.
 - If `data_format="channels_first"`:
     A 4D tensor with shape: `(batch_size, filters, new_height, new_width)`
 
-# Returns
-A 4D tensor representing
-`activation(separable_conv2d(inputs, kernel) + bias)`.
-
 # Examples
 ```python
 x = np.random.rand(4, 10, 10, 12)
@@ -30,6 +26,10 @@ y = keras.layers.SeparableConv2D(3, 4, 3, 2, activation='relu')(x)
 print(y.shape)
 # (4, 4, 4, 4)
 ```
+
+@returns
+A 4D tensor representing
+`activation(separable_conv2d(inputs, kernel) + bias)`.
 
 @param filters int, the dimensionality of the output space (i.e. the number
     of filters in the pointwise convolution).

@@ -5,7 +5,7 @@ Given an interval, values outside the interval are clipped to the
 interval edges. For example, if an interval of `[0, 1]` is specified,
 values smaller than 0 become 0, and values larger than 1 become 1.
 
-# Returns
+@returns
     The clipped tensor.
 
 @param x Input tensor.

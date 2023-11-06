@@ -18,6 +18,9 @@ Defaults to \code{0}.(first axis).}
 \item{axis2}{Axis to be used as the second axis of the 2-D sub-arrays.
 Defaults to \code{1} (second axis).}
 }
+\value{
+Tensor of diagonals.
+}
 \description{
 If \code{x} is 2-D, returns the diagonal of \code{x} with the given offset, i.e., the
 collection of elements of the form \code{x[i, i+offset]}.
@@ -30,10 +33,6 @@ The shape of the resulting array can be determined by removing \code{axis1}
 and \code{axis2} and appending an index to the right equal to the size of
 the resulting diagonals.
 }
-\section{Returns}{
-Tensor of diagonals.
-}
-
 \section{Examples}{
 \if{html}{\out{<div class="sourceCode python">}}\preformatted{from keras import ops
 x = ops.arange(4).reshape((2, 2))

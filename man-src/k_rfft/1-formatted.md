@@ -13,10 +13,6 @@ Along the axis RFFT is computed on, if `fft_length` is smaller than the
 corresponding dimension of the input, the dimension is cropped. If it is
 larger, the dimension is padded with zeros.
 
-# Returns
-A tuple containing two tensors - the real and imaginary parts of the
-output.
-
 # Examples
 ```python
 x = keras.ops.convert_to_tensor([0.0, 1.0, 2.0, 3.0, 4.0])
@@ -28,6 +24,10 @@ rfft(x)
 rfft(x, 3)
 # (array([3.0, -1.5]), array([0.0, 0.8660254]))
 ```
+
+@returns
+A tuple containing two tensors - the real and imaginary parts of the
+output.
 
 @param x Input tensor.
 @param fft_length An integer representing the number of the fft length. If not

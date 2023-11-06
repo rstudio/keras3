@@ -12,13 +12,12 @@ k_digitize(x, bins)
 \item{bins}{Array of bins. It has to be one-dimensional and monotonically
 increasing.}
 }
+\value{
+Output array of indices, of same shape as \code{x}.
+}
 \description{
 Returns the indices of the bins to which each value in \code{x} belongs.
 }
-\section{Returns}{
-Output array of indices, of same shape as \code{x}.
-}
-
 \section{Examples}{
 \if{html}{\out{<div class="sourceCode python">}}\preformatted{x = np.array([0.0, 1.0, 3.0, 1.6])
 bins = np.array([0.0, 3.0, 4.5, 7.0])

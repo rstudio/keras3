@@ -42,6 +42,11 @@ Setting to \code{None} will skip warmup and begins decay phase from
 
 \item{warmup_steps}{A Python int. Number of steps to warmup over.}
 }
+\value{
+A 1-arg callable learning rate schedule that takes the current optimizer
+step and outputs the decayed learning rate, a scalar tensor of the
+same type as \code{initial_learning_rate}.
+}
 \description{
 See \href{https://arxiv.org/abs/1608.03983}{Loshchilov & Hutter, ICLR2016},
 SGDR: Stochastic Gradient Descent with Warm Restarts.
@@ -182,10 +187,6 @@ deserializable using \code{keras.optimizers.schedules.serialize} and
 \code{keras.optimizers.schedules.deserialize}.
 }
 \section{Returns}{
-A 1-arg callable learning rate schedule that takes the current optimizer
-step and outputs the decayed learning rate, a scalar tensor of the
-same type as \code{initial_learning_rate}.
-
 A 1-arg callable learning rate schedule that takes the current optimizer
 step and outputs the decayed learning rate, a scalar tensor of the
 same type as \code{initial_learning_rate}.

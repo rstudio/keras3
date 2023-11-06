@@ -2,14 +2,14 @@ Return the value of the fuzz factor used in numeric expressions.
 
 @description
 
-# Returns
-A float.
-
 # Examples
 ```python
 keras.config.epsilon()
 # 1e-07
 ```
+
+@returns
+A float.
 
 @export
 @seealso

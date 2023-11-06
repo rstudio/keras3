@@ -13,6 +13,10 @@ pack_x_y_sample_weight(x, y = NULL, sample_weight = NULL)
 
 \item{sample_weight}{Sample weight for each element.}
 }
+\value{
+\if{html}{\out{<div class="sourceCode">}}\preformatted{Tuple in the format used in `Model.fit()`.
+}\if{html}{\out{</div>}}
+}
 \description{
 This is a convenience utility for packing data into the tuple formats
 that \code{Model.fit()} uses.
@@ -29,11 +33,6 @@ data = pack_x_y_sample_weight(x, y)
 isinstance(data, tuple)
 # True
 x, y = data
-}\if{html}{\out{</div>}}
-}
-
-\section{Returns}{
-\if{html}{\out{<div class="sourceCode">}}\preformatted{Tuple in the format used in `Model.fit()`.
 }\if{html}{\out{</div>}}
 }
 

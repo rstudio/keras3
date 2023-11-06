@@ -11,14 +11,13 @@ k_equal(x1, x2)
 
 \item{x2}{Tensor to compare.}
 }
-\description{
-Returns \code{(x1 == x2)} element-wise.
-}
-\section{Returns}{
+\value{
 \if{html}{\out{<div class="sourceCode">}}\preformatted{Output tensor, element-wise comparison of `x1` and `x2`.
 }\if{html}{\out{</div>}}
 }
-
+\description{
+Returns \code{(x1 == x2)} element-wise.
+}
 \seealso{
 \itemize{
 \item \url{https://www.tensorflow.org/api_docs/python/tf/keras/ops/equal}

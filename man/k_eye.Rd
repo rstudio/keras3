@@ -17,14 +17,13 @@ and a negative value to a lower diagonal.}
 
 \item{dtype}{Data type of the returned tensor.}
 }
-\description{
-Return a 2-D tensor with ones on the diagonal and zeros elsewhere.
-}
-\section{Returns}{
+\value{
 \if{html}{\out{<div class="sourceCode">}}\preformatted{Tensor with ones on the k-th diagonal and zeros elsewhere.
 }\if{html}{\out{</div>}}
 }
-
+\description{
+Return a 2-D tensor with ones on the diagonal and zeros elsewhere.
+}
 \seealso{
 \itemize{
 \item \url{https://www.tensorflow.org/api_docs/python/tf/keras/ops/eye}

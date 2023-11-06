@@ -5,7 +5,7 @@ Note that interpolation near boundaries differs from the scipy function,
 because we fixed an outstanding bug
 [scipy/issues/2640](https://github.com/scipy/scipy/issues/2640).
 
-# Returns
+@returns
     Output image or batch of images.
 
 @param input The input array.

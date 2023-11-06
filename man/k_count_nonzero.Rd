@@ -12,13 +12,12 @@ k_count_nonzero(x, axis = NULL)
 \item{axis}{Axis or tuple of axes along which to count the number of
 non-zeros. Defaults to \code{None}.}
 }
+\value{
+int or tensor of ints.
+}
 \description{
 If no axis is specified then all non-zeros in the tensor are counted.
 }
-\section{Returns}{
-int or tensor of ints.
-}
-
 \section{Examples}{
 \if{html}{\out{<div class="sourceCode python">}}\preformatted{x = keras.ops.array([[0, 1, 7, 0], [3, 0, 2, 19]])
 keras.ops.count_nonzero(x)

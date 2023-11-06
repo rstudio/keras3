@@ -6,10 +6,6 @@ classification tasks where each input sample belongs to one
 of the two classes. It measures the dissimilarity between the
 target and output probabilities or logits.
 
-# Returns
-Integer tensor: The computed binary cross-entropy loss between
-`target` and `output`.
-
 # Examples
 ```python
 target = keras.ops.convert_to_tensor([0, 1, 1, 0])
@@ -18,6 +14,10 @@ binary_crossentropy(target, output)
 # array([0.10536054 0.10536054 0.22314355 0.22314355],
 #       shape=(4,), dtype=float32)
 ```
+
+@returns
+Integer tensor: The computed binary cross-entropy loss between
+`target` and `output`.
 
 @param target The target tensor representing the true binary labels.
     Its shape should match the shape of the `output` tensor.

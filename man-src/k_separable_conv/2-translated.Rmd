@@ -4,7 +4,7 @@ General N-D separable convolution.
 This ops supports 1D and 2D separable convolution. `separable_conv` is
 a depthwise conv followed by a pointwise conv.
 
-# Returns
+@returns
     A tensor of rank N+2, the result of the depthwise conv operation.
 
 @param inputs Tensor of rank N+2. `inputs` has shape

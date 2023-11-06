@@ -17,14 +17,13 @@ added. Defaults to \code{-1}, which corresponds to the last dimension.}
 \item{dtype}{(optional) The data type of the resulting tensor. Default
 is backend's float type.}
 }
+\value{
+Tensor: The multi-hot encoded tensor.
+}
 \description{
 This function encodes integer labels as multi-hot vectors, where each label
 is mapped to a binary value in the resulting vector.
 }
-\section{Returns}{
-Tensor: The multi-hot encoded tensor.
-}
-
 \section{Examples}{
 \if{html}{\out{<div class="sourceCode python">}}\preformatted{data = keras.ops.convert_to_tensor([0, 4])
 keras.ops.multi_hot(data, num_tokens=5)

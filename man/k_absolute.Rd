@@ -9,13 +9,12 @@ k_absolute(x)
 \arguments{
 \item{x}{Input tensor.}
 }
+\value{
+An array containing the absolute value of each element in \code{x}.
+}
 \description{
 \code{keras.ops.abs} is a shorthand for this function.
 }
-\section{Returns}{
-An array containing the absolute value of each element in \code{x}.
-}
-
 \section{Examples}{
 \if{html}{\out{<div class="sourceCode python">}}\preformatted{x = keras.ops.convert_to_tensor([-1.2, 1.2])
 keras.ops.absolute(x)

@@ -1,8 +1,6 @@
 Return the product of tensor elements over a given axis.
 
-@description
-
-# Returns
+@returns
     Product of elements of `x` over the given axis or axes.
 
 @param x Input tensor.

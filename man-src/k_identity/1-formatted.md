@@ -4,7 +4,7 @@ Return the identity tensor.
 The identity tensor is a square tensor with ones on the main diagonal and
 zeros elsewhere.
 
-# Returns
+@returns
     The identity tensor.
 
 @param n Number of rows (and columns) in the `n x n` output tensor.

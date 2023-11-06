@@ -9,13 +9,12 @@ k_softsign(x)
 \arguments{
 \item{x}{Input tensor.}
 }
+\value{
+A tensor with the same shape as \code{x}.
+}
 \description{
 It is defined as \code{f(x) = x / (abs(x) + 1)}.
 }
-\section{Returns}{
-A tensor with the same shape as \code{x}.
-}
-
 \section{Examples}{
 \if{html}{\out{<div class="sourceCode python">}}\preformatted{x = keras.ops.convert_to_tensor([-0.100, -10.0, 1.0, 0.0, 100.0])
 keras.ops.softsign(x)

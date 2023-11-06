@@ -2,9 +2,6 @@ Compute the weighted average along the specified axis.
 
 @description
 
-# Returns
-Return the average along the specified axis.
-
 # Examples
 ```python
 data = keras.ops.arange(1, 5)
@@ -39,6 +36,9 @@ keras.ops.average(
 #     ...
 # ValueError: Axis must be specified when shapes of a and weights differ.
 ```
+
+@returns
+Return the average along the specified axis.
 
 @param x Input tensor.
 @param axis Integer along which to average `x`. The default, `axis=None`,

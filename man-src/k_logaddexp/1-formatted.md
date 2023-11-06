@@ -3,7 +3,7 @@ Logarithm of the sum of exponentiations of the inputs.
 @description
 Calculates `log(exp(x1) + exp(x2))`.
 
-# Returns
+@returns
 Output tensor, element-wise logarithm of the sum of exponentiations
 of the inputs.
 

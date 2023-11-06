@@ -12,16 +12,15 @@ k_meshgrid(..., indexing = "xy")
 \item{indexing}{Cartesian (\code{"xy"}, default) or matrix (\code{"ij"}) indexing
 of output.}
 }
+\value{
+Sequence of N tensors.
+}
 \description{
 Given \code{N} 1-D tensors \verb{T0, T1, ..., TN-1} as inputs with corresponding
 lengths \verb{S0, S1, ..., SN-1}, this creates an \code{N} N-dimensional tensors
 \verb{G0, G1, ..., GN-1} each with shape \verb{(S0, ..., SN-1)} where the output
 \code{Gi} is constructed by expanding \code{Ti} to the result shape.
 }
-\section{Returns}{
-Sequence of N tensors.
-}
-
 \section{Examples}{
 \if{html}{\out{<div class="sourceCode python">}}\preformatted{from keras import ops
 x = ops.array([1, 2, 3])

@@ -12,9 +12,6 @@ The shape of the resulting array can be determined by removing `axis1`
 and `axis2` and appending an index to the right equal to the size of
 the resulting diagonals.
 
-# Returns
-Tensor of diagonals.
-
 # Examples
 ```python
 from keras import ops
@@ -39,6 +36,9 @@ x.diagonal(0, 0, 1)
 # array([[0, 6],
 #        [1, 7]])
 ```
+
+@returns
+Tensor of diagonals.
 
 @param x Input tensor.
 @param offset Offset of the diagonal from the main diagonal.

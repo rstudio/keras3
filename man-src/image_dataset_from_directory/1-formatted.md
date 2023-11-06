@@ -21,7 +21,7 @@ images from the subdirectories `class_a` and `class_b`, together with labels
 Supported image formats: `.jpeg`, `.jpg`, `.png`, `.bmp`, `.gif`.
 Animated gifs are truncated to the first frame.
 
-# Returns
+@returns
 A `tf.data.Dataset` object.
 
 - If `label_mode` is `None`, it yields `float32` tensors of shape

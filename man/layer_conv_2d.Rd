@@ -90,6 +90,9 @@ bias after being updated by an \code{Optimizer}.}
 
 \item{...}{Passed on to the Python callable}
 }
+\value{
+A 4D tensor representing \code{activation(conv2d(inputs, kernel) + bias)}.
+}
 \description{
 This layer creates a convolution kernel that is convolved with the layer
 input over a single spatial (or temporal) dimension to produce a tensor of
@@ -113,10 +116,6 @@ A 4D tensor with shape: \verb{(batch_size, new_height, new_width, filters)}
 \item If \code{data_format="channels_first"}:
 A 4D tensor with shape: \verb{(batch_size, filters, new_height, new_width)}
 }
-}
-
-\section{Returns}{
-A 4D tensor representing \code{activation(conv2d(inputs, kernel) + bias)}.
 }
 
 \section{Raises}{

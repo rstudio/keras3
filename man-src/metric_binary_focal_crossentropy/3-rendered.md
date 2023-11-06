@@ -17,10 +17,6 @@ weight balancing factor for the binary classes 0 and 1 as follows:
 `weight = 1 - alpha` for class 0
 where `alpha` is a float in the range of `[0, 1]`.
 
-# Returns
-Binary focal crossentropy loss value
-with shape = `[batch_size, d0, .. dN-1]`.
-
 # Examples
 ```python
 y_true = [[0, 1], [0, 0]]
@@ -31,6 +27,10 @@ assert loss.shape == (2,)
 loss
 # array([0.330, 0.206], dtype=float32)
 ```
+
+@returns
+Binary focal crossentropy loss value
+with shape = `[batch_size, d0, .. dN-1]`.
 
 @param y_true Ground truth values, of shape `(batch_size, d0, .. dN)`.
 @param y_pred The predicted values, of shape `(batch_size, d0, .. dN)`.

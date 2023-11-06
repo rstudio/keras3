@@ -2,9 +2,6 @@ While loop implementation.
 
 @description
 
-# Returns
-A list/tuple of tensors, has the same shape and dtype as `inputs`.
-
 # Examples
 ```python
 i = 0
@@ -13,6 +10,9 @@ body = lambda i: i + 1
 keras.ops.while_loop(cond, body, [i])[0]
 # 10
 ```
+
+@returns
+A list/tuple of tensors, has the same shape and dtype as `inputs`.
 
 @param cond A callable that represents the termination condition of the loop.
     Must have the same number of args as `loop_vars`, and return a bool.

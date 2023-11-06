@@ -9,15 +9,14 @@ get_source_inputs(tensor)
 \arguments{
 \item{tensor}{The tensor to start from.}
 }
+\value{
+\if{html}{\out{<div class="sourceCode">}}\preformatted{List of input tensors.
+}\if{html}{\out{</div>}}
+}
 \description{
 Output will always be a list of tensors
 (potentially with 1 element).
 }
-\section{Returns}{
-\if{html}{\out{<div class="sourceCode">}}\preformatted{List of input tensors.
-}\if{html}{\out{</div>}}
-}
-
 \seealso{
 \itemize{
 \item \url{https://www.tensorflow.org/api_docs/python/tf/keras/utils/get_source_inputs}

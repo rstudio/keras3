@@ -2,9 +2,6 @@ Applies the given transform(s) to the image(s).
 
 @description
 
-# Returns
-Applied affine transform image or batch of images.
-
 # Examples
 ```python
 x = np.random.random((2, 64, 80, 3)) # batch of 2 RGB images
@@ -40,6 +37,9 @@ y = keras.ops.image.affine_transform(x, transform,
 y.shape
 # (2, 3, 64, 80)
 ```
+
+@returns
+Applied affine transform image or batch of images.
 
 @param image Input image or batch of images. Must be 3D or 4D.
 @param transform Projective transform matrix/matrices. A vector of length 8 or

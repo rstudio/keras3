@@ -25,9 +25,6 @@ outputs as well.
     `(batch_size, filters, new_spatial_dim1, new_spatial_dim2,
     new_spatial_dim3)`
 
-# Returns
-A 5D tensor representing `activation(conv3d(inputs, kernel) + bias)`.
-
 # Raises
 ValueError: when both `strides > 1` and `dilation_rate > 1`.
 
@@ -38,6 +35,9 @@ y = keras.layers.Conv3D(32, 3, activation='relu')(x)
 print(y.shape)
 # (4, 8, 8, 8, 32)
 ```
+
+@returns
+A 5D tensor representing `activation(conv3d(inputs, kernel) + bias)`.
 
 @param filters int, the dimension of the output space (the number of filters
     in the convolution).

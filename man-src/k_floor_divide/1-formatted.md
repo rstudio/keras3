@@ -1,8 +1,6 @@
 Returns the largest integer smaller or equal to the division of inputs.
 
-@description
-
-# Returns
+@returns
     Output tensor, `y = floor(x1/x2)`
 
 @param x1 Numerator.

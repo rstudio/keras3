@@ -43,14 +43,13 @@ inputs. If \code{data_format="channels_last"}, \code{inputs} is of shape
 \code{data_format="channels_first"}, \code{inputs} is of shape
 \verb{(batch_size, channels, ...)}.}
 }
-\description{
-Max pooling operation.
-}
-\section{Returns}{
+\value{
 \if{html}{\out{<div class="sourceCode">}}\preformatted{A tensor of rank N+2, the result of the max pooling operation.
 }\if{html}{\out{</div>}}
 }
-
+\description{
+Max pooling operation.
+}
 \seealso{
 \itemize{
 \item \url{https://www.tensorflow.org/api_docs/python/tf/keras/ops/max_pool}

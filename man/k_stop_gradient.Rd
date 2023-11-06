@@ -10,13 +10,12 @@ k_stop_gradient(variable)
 \item{variable}{A tensor variable for which the gradient
 computation is to be disabled.}
 }
+\value{
+The variable with gradient computation disabled.
+}
 \description{
 Stops gradient computation.
 }
-\section{Returns}{
-The variable with gradient computation disabled.
-}
-
 \section{Examples}{
 \if{html}{\out{<div class="sourceCode python">}}\preformatted{var = keras.backend.convert_to_tensor(
     [1., 2., 3.],

@@ -5,7 +5,7 @@ To switch between writing logs to stdout and `absl.logging`, you may use
 `keras.config.enable_interactive_logging()` and
 `keras.config.disable_interactie_logging()`.
 
-# Returns
+@returns
 Boolean, `True` if interactive logging is enabled,
 and `False` otherwise.
 

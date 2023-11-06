@@ -7,7 +7,7 @@ Given two vectors `x1` and `x2`, the outer product is:
 out[i, j] = x1[i] * x2[j]
 ```
 
-# Returns
+@returns
     Outer product of `x1` and `x2`.
 
 @param x1 First input tensor.

@@ -11,7 +11,7 @@ returned.
 The shape of the resulting tensor is the same as that of `x` with `axis1`
 and `axis2` removed.
 
-# Returns
+@returns
 If `x` is 2-D, the sum of the diagonal is returned. If `x` has
 larger dimensions, then a tensor of sums along diagonals is
 returned.

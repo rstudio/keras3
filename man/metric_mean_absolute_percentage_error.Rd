@@ -23,6 +23,9 @@ metric_mean_absolute_percentage_error(
 
 \item{dtype}{(Optional) data type of the metric result.}
 }
+\value{
+Mean absolute percentage error values with shape = \verb{[batch_size, d0, .. dN-1]}.
+}
 \description{
 Formula:
 
@@ -63,10 +66,6 @@ Usage with \code{compile()} API:
     loss='mse',
     metrics=[keras.metrics.MeanAbsolutePercentageError()])
 }\if{html}{\out{</div>}}
-}
-
-\section{Returns}{
-Mean absolute percentage error values with shape = \verb{[batch_size, d0, .. dN-1]}.
 }
 
 \seealso{

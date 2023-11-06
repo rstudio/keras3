@@ -2,14 +2,14 @@ Return the default image data format convention.
 
 @description
 
-# Returns
-A string, either `'channels_first'` or `'channels_last'`.
-
 # Examples
 ```python
 keras.config.image_data_format()
 # 'channels_last'
 ```
+
+@returns
+A string, either `'channels_first'` or `'channels_last'`.
 
 @export
 @seealso

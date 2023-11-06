@@ -1,8 +1,6 @@
 Test element-wise for NaN and return result as a boolean tensor.
 
-@description
-
-# Returns
+@returns
     Output boolean tensor.
 
 @param x Input tensor.

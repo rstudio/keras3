@@ -4,16 +4,16 @@ Inverse Short-Time Fourier Transform along the last axis of the input.
 To reconstruct an original waveform, the parameters should be the same in
 `stft`.
 
-# Returns
-A tensor containing the inverse Short-Time Fourier Transform along the
-last axis of `x`.
-
 # Examples
 ```python
 x = keras.ops.convert_to_tensor([0.0, 1.0, 2.0, 3.0, 4.0])
 istft(stft(x, 1, 1, 1), 1, 1, 1)
 # array([0.0, 1.0, 2.0, 3.0, 4.0])
 ```
+
+@returns
+A tensor containing the inverse Short-Time Fourier Transform along the
+last axis of `x`.
 
 @param x Tuple of the real and imaginary parts of the input tensor. Both
     tensors in the tuple should be of floating type.

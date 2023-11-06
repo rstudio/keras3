@@ -2,9 +2,6 @@ Create a tensor.
 
 @description
 
-# Returns
-A tensor.
-
 # Examples
 ```python
 keras.ops.array([1, 2, 3])
@@ -15,6 +12,9 @@ keras.ops.array([1, 2, 3])
 keras.ops.array([1, 2, 3], dtype="float32")
 # array([1., 2., 3.], dtype=float32)
 ```
+
+@returns
+A tensor.
 
 @param x Input tensor.
 @param dtype The desired data-type for the tensor.

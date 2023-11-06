@@ -9,14 +9,13 @@ k_isinf(x)
 \arguments{
 \item{x}{Input tensor.}
 }
-\description{
-Test element-wise for positive or negative infinity.
-}
-\section{Returns}{
+\value{
 \if{html}{\out{<div class="sourceCode">}}\preformatted{Output boolean tensor.
 }\if{html}{\out{</div>}}
 }
-
+\description{
+Test element-wise for positive or negative infinity.
+}
 \seealso{
 \itemize{
 \item \url{https://www.tensorflow.org/api_docs/python/tf/keras/ops/isinf}

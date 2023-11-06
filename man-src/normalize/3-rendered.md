@@ -4,7 +4,7 @@ Normalizes an array.
 If the input is a NumPy array, a NumPy array will be returned.
 If it's a backend tensor, a backend tensor will be returned.
 
-# Returns
+@returns
     A normalized copy of the array.
 
 @param x Array to normalize.

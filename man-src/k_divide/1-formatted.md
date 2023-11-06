@@ -3,7 +3,7 @@ Divide arguments element-wise.
 @description
 `keras.ops.true_divide` is an alias for this function.
 
-# Returns
+@returns
     Output tensor, the quotient `x1/x2`, element-wise.
 
 @param x1 First input tensor.

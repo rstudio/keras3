@@ -32,13 +32,12 @@ while \code{"channels_first"} corresponds to inputs with shape
 \verb{~/.keras/keras.json}. If you never set it, then it will be
 \code{"channels_last"}.}
 }
+\value{
+Resized image or batch of images.
+}
 \description{
 Resize images to size using the specified interpolation method.
 }
-\section{Returns}{
-Resized image or batch of images.
-}
-
 \section{Examples}{
 \if{html}{\out{<div class="sourceCode python">}}\preformatted{x = np.random.random((2, 4, 4, 3)) # batch of 2 RGB images
 y = keras.ops.image.resize(x, (2, 2))

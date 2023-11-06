@@ -4,7 +4,7 @@ Return upper triangle of a tensor.
 For tensors with `ndim` exceeding 2, `triu` will apply to the
 final two axes.
 
-# Returns
+@returns
     Upper triangle of `x`, of same shape and data type as `x`.
 
 @param x Input tensor.

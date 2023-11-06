@@ -2,11 +2,6 @@ Computes the QR decomposition of a tensor.
 
 @description
 
-# Returns
-A tuple containing two tensors. The first tensor represents the
-orthogonal matrix Q, and the second tensor represents the upper
-triangular matrix R.
-
 # Examples
 ```python
 x = keras.ops.convert_to_tensor([[1., 2.], [3., 4.], [5., 6.]])
@@ -16,6 +11,11 @@ print(q)
 #        [-0.5070925   0.2760267 ]
 #        [-0.8451542  -0.34503305]], shape=(3, 2), dtype=float32)
 ```
+
+@returns
+A tuple containing two tensors. The first tensor represents the
+orthogonal matrix Q, and the second tensor represents the upper
+triangular matrix R.
 
 @param x Input tensor.
 @param mode A string specifying the mode of the QR decomposition.

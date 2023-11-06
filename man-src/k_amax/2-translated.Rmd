@@ -2,12 +2,6 @@ Returns the maximum of an array or maximum value along an axis.
 
 @description
 
-# Returns
-An array with the maximum value. If `axis=None`, the result is a scalar
-value representing the maximum element in the entire array. If `axis` is
-given, the result is an array with the maximum values along
-the specified axis.
-
 # Examples
 ```python
 x = keras.ops.convert_to_tensor([[1, 3, 5], [2, 3, 6]])
@@ -26,6 +20,12 @@ x = keras.ops.convert_to_tensor([[1, 6, 8], [1, 5, 2]])
 keras.ops.amax(x, axis=1, keepdims=True)
 # array([[8], [5]], dtype=int32)
 ```
+
+@returns
+An array with the maximum value. If `axis=None`, the result is a scalar
+value representing the maximum element in the entire array. If `axis` is
+given, the result is an array with the maximum values along
+the specified axis.
 
 @param x Input tensor.
 @param axis Axis along which to compute the maximum.

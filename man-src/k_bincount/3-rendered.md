@@ -2,11 +2,6 @@ Count the number of occurrences of each value in a tensor of integers.
 
 @description
 
-# Returns
-1D tensor where each element gives the number of occurrence(s) of its
-index value in x. Its length is the maximum between `max(x) + 1` and
-minlength.
-
 # Examples
 ```python
 x = keras.ops.array([1, 2, 2, 3], dtype="uint8")
@@ -21,6 +16,11 @@ minlength = (keras.ops.max(x).numpy() + 1) + 2 # 6
 keras.ops.bincount(x, minlength=minlength)
 # array([0, 1, 2, 1, 0, 0], dtype=int32)
 ```
+
+@returns
+1D tensor where each element gives the number of occurrence(s) of its
+index value in x. Its length is the maximum between `max(x) + 1` and
+minlength.
 
 @param x Input tensor.
     It must be of dimension 1, and it must only contain non-negative

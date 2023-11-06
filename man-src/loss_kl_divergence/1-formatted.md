@@ -12,9 +12,6 @@ Formula:
 loss = y_true * log(y_true / y_pred)
 ```
 
-# Returns
-KL Divergence loss values with shape = `[batch_size, d0, .. dN-1]`.
-
 # Examples
 ```python
 y_true = np.random.randint(0, 2, size=(2, 3)).astype(np.float32)
@@ -26,6 +23,9 @@ y_pred = ops.clip(y_pred, 1e-7, 1)
 assert np.array_equal(
     loss, np.sum(y_true * np.log(y_true / y_pred), axis=-1))
 ```
+
+@returns
+KL Divergence loss values with shape = `[batch_size, d0, .. dN-1]`.
 
 @param reduction Type of reduction to apply to the loss. In almost all cases
     this should be `"sum_over_batch_size"`.

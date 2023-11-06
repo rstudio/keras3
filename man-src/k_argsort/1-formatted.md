@@ -2,9 +2,6 @@ Returns the indices that would sort a tensor.
 
 @description
 
-# Returns
-Tensor of indices that sort `x` along the specified `axis`.
-
 # Examples
 One dimensional array:
 ```python
@@ -29,6 +26,9 @@ keras.ops.argsort(x, axis=1)
 #        [1, 0],
 #        [0, 1]], dtype=int32)
 ```
+
+@returns
+Tensor of indices that sort `x` along the specified `axis`.
 
 @param x Input tensor.
 @param axis Axis along which to sort. Defaults to`-1` (the last axis). If

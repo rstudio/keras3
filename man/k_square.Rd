@@ -9,14 +9,13 @@ k_square(x)
 \arguments{
 \item{x}{Input tensor.}
 }
-\description{
-Return the element-wise square of the input.
-}
-\section{Returns}{
+\value{
 \if{html}{\out{<div class="sourceCode">}}\preformatted{Output tensor, the square of `x`.
 }\if{html}{\out{</div>}}
 }
-
+\description{
+Return the element-wise square of the input.
+}
 \seealso{
 \itemize{
 \item \url{https://www.tensorflow.org/api_docs/python/tf/keras/ops/square}

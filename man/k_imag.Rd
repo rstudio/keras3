@@ -9,14 +9,13 @@ k_imag(x)
 \arguments{
 \item{x}{Input tensor.}
 }
-\description{
-Return the imaginary part of the complex argument.
-}
-\section{Returns}{
+\value{
 \if{html}{\out{<div class="sourceCode">}}\preformatted{The imaginary component of the complex argument.
 }\if{html}{\out{</div>}}
 }
-
+\description{
+Return the imaginary part of the complex argument.
+}
 \seealso{
 \itemize{
 \item \url{https://www.tensorflow.org/api_docs/python/tf/keras/ops/imag}

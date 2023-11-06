@@ -11,14 +11,13 @@ k_not_equal(x1, x2)
 
 \item{x2}{Second input tensor.}
 }
-\description{
-Return \code{(x1 != x2)} element-wise.
-}
-\section{Returns}{
+\value{
 \if{html}{\out{<div class="sourceCode">}}\preformatted{Output tensor, element-wise comparsion of `x1` and `x2`.
 }\if{html}{\out{</div>}}
 }
-
+\description{
+Return \code{(x1 != x2)} element-wise.
+}
 \seealso{
 \itemize{
 \item \url{https://www.tensorflow.org/api_docs/python/tf/keras/ops/not_equal}

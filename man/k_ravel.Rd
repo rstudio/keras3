@@ -9,14 +9,13 @@ k_ravel(x)
 \arguments{
 \item{x}{Input tensor.}
 }
-\description{
-A 1-D tensor, containing the elements of the input, is returned.
-}
-\section{Returns}{
+\value{
 \if{html}{\out{<div class="sourceCode">}}\preformatted{Output tensor.
 }\if{html}{\out{</div>}}
 }
-
+\description{
+A 1-D tensor, containing the elements of the input, is returned.
+}
 \seealso{
 \itemize{
 \item \url{https://www.tensorflow.org/api_docs/python/tf/keras/ops/ravel}

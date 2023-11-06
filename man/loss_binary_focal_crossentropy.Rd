@@ -55,6 +55,10 @@ Supported options are \code{"sum"}, \code{"sum_over_batch_size"} or \code{None}.
 
 \item{name}{Optional name for the loss instance.}
 }
+\value{
+Binary focal crossentropy loss value
+with shape = \verb{[batch_size, d0, .. dN-1]}.
+}
 \description{
 According to \href{https://arxiv.org/pdf/1708.02002.pdf}{Lin et al., 2018}, it
 helps to apply a focal factor to down-weight easy examples and focus more on
@@ -190,11 +194,6 @@ loss = keras.losses.BinaryFocalCrossentropy(
 loss(y_true, y_pred)
 # array([0.0004 0.8670], dtype=float32)
 }\if{html}{\out{</div>}}
-}
-
-\section{Returns}{
-Binary focal crossentropy loss value
-with shape = \verb{[batch_size, d0, .. dN-1]}.
 }
 
 \seealso{

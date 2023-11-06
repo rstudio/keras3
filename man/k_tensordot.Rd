@@ -20,14 +20,13 @@ to \code{x1}, second to \code{x2}. Both sequences must be of the
 same length.
 }}
 }
-\description{
-Compute the tensor dot product along specified axes.
-}
-\section{Returns}{
+\value{
 \if{html}{\out{<div class="sourceCode">}}\preformatted{The tensor dot product of the inputs.
 }\if{html}{\out{</div>}}
 }
-
+\description{
+Compute the tensor dot product along specified axes.
+}
 \seealso{
 \itemize{
 \item \url{https://www.tensorflow.org/api_docs/python/tf/keras/ops/tensordot}

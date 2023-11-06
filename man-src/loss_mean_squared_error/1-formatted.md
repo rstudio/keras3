@@ -19,7 +19,7 @@ y_pred = np.random.random(size=(2, 3))
 loss = keras.losses.mean_squared_error(y_true, y_pred)
 ```
 
-# Returns
+@returns
     Mean squared error values with shape = `[batch_size, d0, .. dN-1]`.
 
 @param reduction Type of reduction to apply to the loss. In almost all cases

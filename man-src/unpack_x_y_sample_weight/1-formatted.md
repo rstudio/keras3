@@ -19,7 +19,7 @@ sample_weight is None
 # True
 ```
 
-# Returns
+@returns
 The unpacked tuple, with `None`s for `y` and `sample_weight` if they are
 not provided.
 

@@ -11,14 +11,13 @@ k_zeros_like(x, dtype = NULL)
 
 \item{dtype}{Overrides the data type of the result.}
 }
-\description{
-Return a tensor of zeros with the same shape and type as \code{x}.
-}
-\section{Returns}{
+\value{
 \if{html}{\out{<div class="sourceCode">}}\preformatted{A tensor of zeros with the same shape and type as `x`.
 }\if{html}{\out{</div>}}
 }
-
+\description{
+Return a tensor of zeros with the same shape and type as \code{x}.
+}
 \seealso{
 \itemize{
 \item \url{https://www.tensorflow.org/api_docs/python/tf/keras/ops/zeros_like}

@@ -4,7 +4,7 @@ Return lower triangle of a tensor.
 For tensors with `ndim` exceeding 2, `tril` will apply to the
 final two axes.
 
-# Returns
+@returns
     Lower triangle of `x`, of same shape and data type as `x`.
 
 @param x Input tensor.

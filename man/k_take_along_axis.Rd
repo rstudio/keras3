@@ -14,14 +14,13 @@ k_take_along_axis(x, indices, axis = NULL)
 \item{axis}{The axis over which to select values. By default, the flattened
 input tensor is used.}
 }
-\description{
-Select values from \code{x} at the 1-D \code{indices} along the given axis.
-}
-\section{Returns}{
+\value{
 \if{html}{\out{<div class="sourceCode">}}\preformatted{The corresponding tensor of values.
 }\if{html}{\out{</div>}}
 }
-
+\description{
+Select values from \code{x} at the 1-D \code{indices} along the given axis.
+}
 \seealso{
 \itemize{
 \item \url{https://www.tensorflow.org/api_docs/python/tf/keras/ops/take_along_axis}

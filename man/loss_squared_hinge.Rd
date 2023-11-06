@@ -27,6 +27,9 @@ Supported options are \code{"sum"}, \code{"sum_over_batch_size"} or \code{None}.
 
 \item{name}{Optional name for the loss instance.}
 }
+\value{
+Squared hinge loss values with shape = \verb{[batch_size, d0, .. dN-1]}.
+}
 \description{
 Formula:
 
@@ -41,10 +44,6 @@ Formula:
 \code{y_true} values are expected to be -1 or 1. If binary (0 or 1) labels are
 provided we will convert them to -1 or 1.
 }
-\section{Returns}{
-Squared hinge loss values with shape = \verb{[batch_size, d0, .. dN-1]}.
-}
-
 \section{Examples}{
 \if{html}{\out{<div class="sourceCode python">}}\preformatted{y_true = np.random.choice([-1, 1], size=(2, 3))
 y_pred = np.random.random(size=(2, 3))

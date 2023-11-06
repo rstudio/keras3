@@ -19,14 +19,13 @@ value in \code{segment_ids}.}
 \item{sorted}{A boolean indicating whether \code{segment_ids} is sorted.
 Defaults to\code{False}.}
 }
-\description{
-Computes the sum of segments in a tensor.
-}
-\section{Returns}{
+\value{
 A tensor containing the sum of segments, where each element
 represents the sum of the corresponding segment in \code{data}.
 }
-
+\description{
+Computes the sum of segments in a tensor.
+}
 \section{Examples}{
 \if{html}{\out{<div class="sourceCode python">}}\preformatted{data = keras.ops.convert_to_tensor([1, 2, 10, 20, 100, 200])
 segment_ids = keras.ops.convert_to_tensor([0, 0, 1, 1, 2, 2])

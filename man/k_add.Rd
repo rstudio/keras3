@@ -11,13 +11,12 @@ k_add(x1, x2)
 
 \item{x2}{Second input tensor.}
 }
+\value{
+The tensor containing the element-wise sum of \code{x1} and \code{x2}.
+}
 \description{
 Add arguments element-wise.
 }
-\section{Returns}{
-The tensor containing the element-wise sum of \code{x1} and \code{x2}.
-}
-
 \section{Examples}{
 \if{html}{\out{<div class="sourceCode python">}}\preformatted{x1 = keras.ops.convert_to_tensor([1, 4])
 x2 = keras.ops.convert_to_tensor([5, 6])

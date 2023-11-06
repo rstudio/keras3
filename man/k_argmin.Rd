@@ -12,14 +12,13 @@ k_argmin(x, axis = NULL)
 \item{axis}{By default, the index is into the flattened tensor, otherwise
 along the specified axis.}
 }
-\description{
-Returns the indices of the minium values along an axis.
-}
-\section{Returns}{
+\value{
 Tensor of indices. It has the same shape as \code{x}, with the dimension
 along \code{axis} removed.
 }
-
+\description{
+Returns the indices of the minium values along an axis.
+}
 \section{Examples}{
 \if{html}{\out{<div class="sourceCode python">}}\preformatted{x = keras.ops.arange(6).reshape(2, 3) + 10
 x

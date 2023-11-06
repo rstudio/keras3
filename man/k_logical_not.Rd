@@ -9,14 +9,13 @@ k_logical_not(x)
 \arguments{
 \item{x}{Input tensor.}
 }
-\description{
-Zeros are treated as \code{False} and non-zeros are treated as \code{True}.
-}
-\section{Returns}{
+\value{
 \if{html}{\out{<div class="sourceCode">}}\preformatted{Output tensor, element-wise logical NOT of the input.
 }\if{html}{\out{</div>}}
 }
-
+\description{
+Zeros are treated as \code{False} and non-zeros are treated as \code{True}.
+}
 \seealso{
 \itemize{
 \item \url{https://www.tensorflow.org/api_docs/python/tf/keras/ops/logical_not}

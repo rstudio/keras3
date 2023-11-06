@@ -32,17 +32,16 @@ cross-entropy is computed.
 Defaults to \code{-1}, which corresponds to the last dimension
 of the tensors.}
 }
+\value{
+Integer tensor: The computed sparse categorical cross-entropy
+loss between \code{target} and \code{output}.
+}
 \description{
 The sparse categorical cross-entropy loss is similar to categorical
 cross-entropy, but it is used when the target tensor contains integer
 class labels instead of one-hot encoded vectors. It measures the
 dissimilarity between the target and output probabilities or logits.
 }
-\section{Returns}{
-Integer tensor: The computed sparse categorical cross-entropy
-loss between \code{target} and \code{output}.
-}
-
 \section{Examples}{
 \if{html}{\out{<div class="sourceCode python">}}\preformatted{target = keras.ops.convert_to_tensor([0, 1, 2], dtype=int32)
 output = keras.ops.convert_to_tensor(

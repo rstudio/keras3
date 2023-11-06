@@ -83,6 +83,9 @@ bias after being updated by an \code{Optimizer}.}
 
 \item{...}{Passed on to the Python callable}
 }
+\value{
+A 5D tensor representing \code{activation(conv3d(inputs, kernel) + bias)}.
+}
 \description{
 The need for transposed convolutions generally arise from the desire to use
 a transformation going in the opposite direction of a normal convolution,
@@ -110,10 +113,6 @@ connectivity pattern that is compatible with said convolution.
 5D tensor with shape:
 \verb{(batch_size, filters, new_spatial_dim1, new_spatial_dim2, new_spatial_dim3)}
 }
-}
-
-\section{Returns}{
-A 5D tensor representing \code{activation(conv3d(inputs, kernel) + bias)}.
 }
 
 \section{Raises}{

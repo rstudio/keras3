@@ -11,14 +11,13 @@ k_power(x1, x2)
 
 \item{x2}{The exponents.}
 }
-\description{
-First tensor elements raised to powers from second tensor, element-wise.
-}
-\section{Returns}{
+\value{
 \if{html}{\out{<div class="sourceCode">}}\preformatted{Output tensor, the bases in `x1` raised to the exponents in `x2`.
 }\if{html}{\out{</div>}}
 }
-
+\description{
+First tensor elements raised to powers from second tensor, element-wise.
+}
 \seealso{
 \itemize{
 \item \url{https://www.tensorflow.org/api_docs/python/tf/keras/ops/power}

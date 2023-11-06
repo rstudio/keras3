@@ -30,6 +30,16 @@ type.}
 \item{name}{A string. Optional name of the operation. Defaults to
 \code{"PiecewiseConstant"}.}
 }
+\value{
+A 1-arg callable learning rate schedule that takes the current optimizer
+step and outputs the decayed learning rate, a scalar tensor of the
+same type as the boundary tensors.
+
+The output of the 1-arg function that takes the \code{step}
+is \code{values[0]} when \code{step <= boundaries[0]},
+\code{values[1]} when \code{step > boundaries[0]} and \code{step <= boundaries[1]},
+..., and \code{values[-1]} when \code{step > boundaries[-1]}.
+}
 \description{
 The function returns a 1-arg callable to compute the piecewise constant
 when passed the current optimizer step. This can be useful for changing the
@@ -77,6 +87,14 @@ deserializable using \code{keras.optimizers.schedules.serialize} and
 \code{keras.optimizers.schedules.deserialize}.
 }
 
+\section{Raises}{
+ValueError: if the number of elements in the \code{boundaries} and \code{values}
+lists do not match.
+
+ValueError: if the number of elements in the \code{boundaries} and \code{values}
+lists do not match.
+}
+
 \section{Returns}{
 A 1-arg callable learning rate schedule that takes the current optimizer
 step and outputs the decayed learning rate, a scalar tensor of the
@@ -86,23 +104,6 @@ The output of the 1-arg function that takes the \code{step}
 is \code{values[0]} when \code{step <= boundaries[0]},
 \code{values[1]} when \code{step > boundaries[0]} and \code{step <= boundaries[1]},
 ..., and \code{values[-1]} when \code{step > boundaries[-1]}.
-
-A 1-arg callable learning rate schedule that takes the current optimizer
-step and outputs the decayed learning rate, a scalar tensor of the
-same type as the boundary tensors.
-
-The output of the 1-arg function that takes the \code{step}
-is \code{values[0]} when \code{step <= boundaries[0]},
-\code{values[1]} when \code{step > boundaries[0]} and \code{step <= boundaries[1]},
-..., and \code{values[-1]} when \code{step > boundaries[-1]}.
-}
-
-\section{Raises}{
-ValueError: if the number of elements in the \code{boundaries} and \code{values}
-lists do not match.
-
-ValueError: if the number of elements in the \code{boundaries} and \code{values}
-lists do not match.
 }
 
 \seealso{

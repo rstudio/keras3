@@ -13,6 +13,9 @@ k_extract_sequences(x, sequence_length, sequence_stride)
 
 \item{sequence_stride}{An integer representing the sequences hop size.}
 }
+\value{
+A tensor of sequences with shape \verb{[..., num_sequences, sequence_length].}
+}
 \description{
 Slides a window of size \code{sequence_length} over the last axis of the input
 with a stride of \code{sequence_stride}, replacing the last axis with
@@ -23,10 +26,6 @@ computed by:
 
 \verb{num_sequences = 1 + (N - sequence_length) // sequence_stride}
 }
-\section{Returns}{
-A tensor of sequences with shape \verb{[..., num_sequences, sequence_length].}
-}
-
 \section{Examples}{
 \if{html}{\out{<div class="sourceCode python">}}\preformatted{x = keras.ops.convert_to_tensor([1, 2, 3, 4, 5, 6])
 extract_sequences(x, 3, 2)

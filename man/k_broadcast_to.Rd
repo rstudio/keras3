@@ -12,13 +12,12 @@ k_broadcast_to(x, shape)
 \item{shape}{The shape of the desired tensor. A single integer \code{i} is
 interpreted as \verb{(i,)}.}
 }
+\value{
+A tensor with the desired shape.
+}
 \description{
 Broadcast a tensor to a new shape.
 }
-\section{Returns}{
-A tensor with the desired shape.
-}
-
 \section{Examples}{
 \if{html}{\out{<div class="sourceCode python">}}\preformatted{x = keras.ops.array([1, 2, 3])
 keras.ops.broadcast_to(x, (3, 3))

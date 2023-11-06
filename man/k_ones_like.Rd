@@ -11,14 +11,13 @@ k_ones_like(x, dtype = NULL)
 
 \item{dtype}{Overrides the data type of the result.}
 }
-\description{
-Return a tensor of ones with the same shape and type of \code{x}.
-}
-\section{Returns}{
+\value{
 \if{html}{\out{<div class="sourceCode">}}\preformatted{A tensor of ones with the same shape and type as `x`.
 }\if{html}{\out{</div>}}
 }
-
+\description{
+Return a tensor of ones with the same shape and type of \code{x}.
+}
 \seealso{
 \itemize{
 \item \url{https://www.tensorflow.org/api_docs/python/tf/keras/ops/ones_like}

@@ -9,9 +9,6 @@ is the first function parameter, the "x-coordinate" is the second.) By IEEE
 convention, this function is defined for `x2 = +/-0` and for either or both
 of `x1` and `x2` `= +/-inf`.
 
-# Returns
-Tensor of angles in radians, in the range `[-pi, pi]`.
-
 # Examples
 Consider four points in different quadrants:
 ```python
@@ -35,6 +32,9 @@ keras.ops.arctan2(
 )
 # array([0., 3.1415925, 0.7853982], dtype=float32)
 ```
+
+@returns
+Tensor of angles in radians, in the range `[-pi, pi]`.
 
 @param x1 First input tensor.
 @param x2 Second input tensor.

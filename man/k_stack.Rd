@@ -11,15 +11,14 @@ k_stack(x, axis = 0L)
 
 \item{axis}{Axis along which to stack. Defaults to \code{0}.}
 }
+\value{
+\if{html}{\out{<div class="sourceCode">}}\preformatted{The stacked tensor.
+}\if{html}{\out{</div>}}
+}
 \description{
 The \code{axis} parameter specifies the index of the new axis in the
 dimensions of the result.
 }
-\section{Returns}{
-\if{html}{\out{<div class="sourceCode">}}\preformatted{The stacked tensor.
-}\if{html}{\out{</div>}}
-}
-
 \seealso{
 \itemize{
 \item \url{https://www.tensorflow.org/api_docs/python/tf/keras/ops/stack}

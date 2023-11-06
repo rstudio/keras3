@@ -9,14 +9,13 @@ k_exp(x)
 \arguments{
 \item{x}{Input tensor.}
 }
-\description{
-Calculate the exponential of all elements in the input tensor.
-}
-\section{Returns}{
+\value{
 \if{html}{\out{<div class="sourceCode">}}\preformatted{Output tensor, element-wise exponential of `x`.
 }\if{html}{\out{</div>}}
 }
-
+\description{
+Calculate the exponential of all elements in the input tensor.
+}
 \seealso{
 \itemize{
 \item \url{https://www.tensorflow.org/api_docs/python/tf/keras/ops/exp}

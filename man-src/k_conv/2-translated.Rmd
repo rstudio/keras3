@@ -3,7 +3,7 @@ General N-D convolution.
 @description
 This ops supports 1D, 2D and 3D convolution.
 
-# Returns
+@returns
     A tensor of rank N+2, the result of the conv operation.
 
 @param inputs Tensor of rank N+2. `inputs` has shape

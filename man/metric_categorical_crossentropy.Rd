@@ -39,6 +39,9 @@ The dimension along which entropy is computed.}
 
 \item{dtype}{(Optional) data type of the metric result.}
 }
+\value{
+Categorical crossentropy loss value.
+}
 \description{
 This is the crossentropy metric class to be used when there are multiple
 label classes (2 or more). It assumes that labels are one-hot encoded,
@@ -85,10 +88,6 @@ Usage with \code{compile()} API:
     loss='mse',
     metrics=[keras.metrics.CategoricalCrossentropy()])
 }\if{html}{\out{</div>}}
-}
-
-\section{Returns}{
-Categorical crossentropy loss value.
 }
 
 \seealso{

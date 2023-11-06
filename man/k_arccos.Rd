@@ -9,14 +9,13 @@ k_arccos(x)
 \arguments{
 \item{x}{Input tensor.}
 }
-\description{
-The inverse of \code{cos} so that, if \code{y = cos(x)}, then \code{x = arccos(y)}.
-}
-\section{Returns}{
+\value{
 Tensor of the angle of the ray intersecting the unit circle at the given
 x-coordinate in radians \verb{[0, pi]}.
 }
-
+\description{
+The inverse of \code{cos} so that, if \code{y = cos(x)}, then \code{x = arccos(y)}.
+}
 \section{Examples}{
 \if{html}{\out{<div class="sourceCode python">}}\preformatted{x = keras.ops.convert_to_tensor([1, -1])
 keras.ops.arccos(x)

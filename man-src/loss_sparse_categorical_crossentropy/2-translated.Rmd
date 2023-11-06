@@ -60,7 +60,7 @@ model.compile(optimizer='sgd',
               loss=keras.losses.SparseCategoricalCrossentropy())
 ```
 
-# Returns
+@returns
 Sparse categorical crossentropy loss value.
 
 @param from_logits Whether `y_pred` is expected to be a logits tensor. By

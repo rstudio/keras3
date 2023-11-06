@@ -24,13 +24,12 @@ in \code{x} are assumed to have a weight equal to one.
 The only constraint on weights is that `sum(weights)` must not be 0.
 }\if{html}{\out{</div>}}}
 }
+\value{
+Return the average along the specified axis.
+}
 \description{
 Compute the weighted average along the specified axis.
 }
-\section{Returns}{
-Return the average along the specified axis.
-}
-
 \section{Examples}{
 \if{html}{\out{<div class="sourceCode python">}}\preformatted{data = keras.ops.arange(1, 5)
 data

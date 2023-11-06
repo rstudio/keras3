@@ -9,13 +9,12 @@ k_erf(x)
 \arguments{
 \item{x}{Input tensor.}
 }
+\value{
+A tensor with the same dtype as \code{x}.
+}
 \description{
 Computes the error function of \code{x}, element-wise.
 }
-\section{Returns}{
-A tensor with the same dtype as \code{x}.
-}
-
 \section{Examples}{
 \if{html}{\out{<div class="sourceCode python">}}\preformatted{x = np.array([-3.0, -2.0, -1.0, 0.0, 1.0])
 keras.ops.erf(x)

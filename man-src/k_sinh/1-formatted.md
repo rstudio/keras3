@@ -1,8 +1,6 @@
 Hyperbolic sine, element-wise.
 
-@description
-
-# Returns
+@returns
     Output tensor of same shape as `x`.
 
 @param x Input tensor.

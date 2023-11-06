@@ -11,14 +11,13 @@ k_logical_xor(x1, x2)
 
 \item{x2}{Second input tensor.}
 }
-\description{
-Compute the truth value of \verb{x1 XOR x2}, element-wise.
-}
-\section{Returns}{
+\value{
 \if{html}{\out{<div class="sourceCode">}}\preformatted{Output boolean tensor.
 }\if{html}{\out{</div>}}
 }
-
+\description{
+Compute the truth value of \verb{x1 XOR x2}, element-wise.
+}
 \seealso{
 \itemize{
 \item \url{https://www.tensorflow.org/api_docs/python/tf/keras/ops/logical_xor}

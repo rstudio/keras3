@@ -9,16 +9,15 @@ k_isfinite(x)
 \arguments{
 \item{x}{Input tensor.}
 }
+\value{
+\if{html}{\out{<div class="sourceCode">}}\preformatted{Output boolean tensor.
+}\if{html}{\out{</div>}}
+}
 \description{
 Real values are finite when they are not NaN, not positive infinity, and
 not negative infinity. Complex values are finite when both their real
 and imaginary parts are finite.
 }
-\section{Returns}{
-\if{html}{\out{<div class="sourceCode">}}\preformatted{Output boolean tensor.
-}\if{html}{\out{</div>}}
-}
-
 \seealso{
 \itemize{
 \item \url{https://www.tensorflow.org/api_docs/python/tf/keras/ops/isfinite}

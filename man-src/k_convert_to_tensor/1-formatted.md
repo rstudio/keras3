@@ -2,14 +2,14 @@ Convert a NumPy array to a tensor.
 
 @description
 
-# Returns
-A tensor of the specified `dtype`.
-
 # Examples
 ```python
 x = np.array([1, 2, 3])
 y = keras.ops.convert_to_tensor(x)
 ```
+
+@returns
+A tensor of the specified `dtype`.
 
 @param x A NumPy array.
 @param dtype The target type.

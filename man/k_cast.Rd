@@ -11,13 +11,12 @@ k_cast(x, dtype)
 
 \item{dtype}{The target type.}
 }
+\value{
+A tensor of the specified \code{dtype}.
+}
 \description{
 Cast a tensor to the desired dtype.
 }
-\section{Returns}{
-A tensor of the specified \code{dtype}.
-}
-
 \section{Examples}{
 \if{html}{\out{<div class="sourceCode python">}}\preformatted{x = keras.ops.arange(4)
 x = keras.ops.cast(x, dtype="float16")

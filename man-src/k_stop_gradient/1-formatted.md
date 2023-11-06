@@ -2,9 +2,6 @@ Stops gradient computation.
 
 @description
 
-# Returns
-The variable with gradient computation disabled.
-
 # Examples
 ```python
 var = keras.backend.convert_to_tensor(
@@ -13,6 +10,9 @@ var = keras.backend.convert_to_tensor(
 )
 var = keras.ops.stop_gradient(var)
 ```
+
+@returns
+The variable with gradient computation disabled.
 
 @param variable A tensor variable for which the gradient
 computation is to be disabled.

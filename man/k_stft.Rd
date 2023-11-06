@@ -33,16 +33,15 @@ used. Defaults to \code{"hann"}.}
 centered at time \code{t * sequence_stride}. Otherwise, the t-th sequence
 begins at time \code{t * sequence_stride}. Defaults to \code{True}.}
 }
+\value{
+A tuple containing two tensors - the real and imaginary parts of the
+STFT output.
+}
 \description{
 The STFT computes the Fourier transform of short overlapping windows of the
 input. This giving frequency components of the signal as they change over
 time.
 }
-\section{Returns}{
-A tuple containing two tensors - the real and imaginary parts of the
-STFT output.
-}
-
 \section{Examples}{
 \if{html}{\out{<div class="sourceCode python">}}\preformatted{x = keras.ops.convert_to_tensor([0.0, 1.0, 2.0, 3.0, 4.0])
 stft(x, 3, 2, 3)

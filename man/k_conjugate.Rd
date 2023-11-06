@@ -9,17 +9,16 @@ k_conjugate(x)
 \arguments{
 \item{x}{Input tensor.}
 }
+\value{
+\if{html}{\out{<div class="sourceCode">}}\preformatted{The complex conjugate of each element in `x`.
+}\if{html}{\out{</div>}}
+}
 \description{
 The complex conjugate of a complex number is obtained by changing the sign
 of its imaginary part.
 
 \code{keras.ops.conj} is a shorthand for this function.
 }
-\section{Returns}{
-\if{html}{\out{<div class="sourceCode">}}\preformatted{The complex conjugate of each element in `x`.
-}\if{html}{\out{</div>}}
-}
-
 \seealso{
 \itemize{
 \item \url{https://www.tensorflow.org/api_docs/python/tf/keras/ops/conjugate}

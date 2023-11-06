@@ -1,8 +1,6 @@
 Return the imaginary part of the complex argument.
 
-@description
-
-# Returns
+@returns
     The imaginary component of the complex argument.
 
 @param x Input tensor.

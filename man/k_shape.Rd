@@ -10,6 +10,10 @@ k_shape(x)
 \item{x}{A tensor. This function will try to access the \code{shape} attribute of
 the input tensor.}
 }
+\value{
+A tuple of integers or None values, indicating the shape of the input
+tensor.
+}
 \description{
 Gets the shape of the tensor input.
 }
@@ -17,11 +21,6 @@ Gets the shape of the tensor input.
 On the tensorflow backend, when \code{x} is a \code{tf.Tensor} with dynamic
 shape, dimensions which are dynamic in the context of a compiled function
 will have a \code{tf.Tensor} value instead of a static integer value.
-}
-
-\section{Returns}{
-A tuple of integers or None values, indicating the shape of the input
-tensor.
 }
 
 \section{Examples}{

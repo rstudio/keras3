@@ -19,10 +19,6 @@ activation function to produce the final output.
 - If `data_format="channels_first"`:
     A 3D tensor with shape: `(batch_shape, filters, new_steps)`
 
-# Returns
-A 3D tensor representing
-`activation(separable_conv1d(inputs, kernel) + bias)`.
-
 # Examples
 ```python
 x = np.random.rand(4, 10, 12)
@@ -30,6 +26,10 @@ y = keras.layers.SeparableConv1D(3, 4, 3, 2, activation='relu')(x)
 print(y.shape)
 # (4, 4, 4)
 ```
+
+@returns
+A 3D tensor representing
+`activation(separable_conv1d(inputs, kernel) + bias)`.
 
 @param filters int, the dimensionality of the output space (i.e. the number
     of filters in the pointwise convolution).

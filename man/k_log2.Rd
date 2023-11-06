@@ -9,14 +9,13 @@ k_log2(x)
 \arguments{
 \item{x}{Input tensor.}
 }
-\description{
-Base-2 logarithm of \code{x}, element-wise.
-}
-\section{Returns}{
+\value{
 \if{html}{\out{<div class="sourceCode">}}\preformatted{Output tensor, element-wise base-2 logarithm of `x`.
 }\if{html}{\out{</div>}}
 }
-
+\description{
+Base-2 logarithm of \code{x}, element-wise.
+}
 \seealso{
 \itemize{
 \item \url{https://www.tensorflow.org/api_docs/python/tf/keras/ops/log2}

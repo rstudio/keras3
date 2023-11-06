@@ -6,13 +6,13 @@ global dictionary of custom objects, and will not appear in the returned
 dictionary.
 
 # Examples
-
-```r
-get_custom_objects()$update(list(MyObject = MyObject))
+```python
+get_custom_objects().clear()
+get_custom_objects()['MyObject'] = MyObject
 ```
 
-# Returns
-    Global list mapping registered class names to classes.
+@returns
+    Global dictionary mapping registered class names to classes.
 
 @export
 @seealso

@@ -19,17 +19,16 @@ along \code{axis}.}
 
 \item{axis}{Axis along which to split. Defaults to \code{0}.}
 }
+\value{
+\if{html}{\out{<div class="sourceCode">}}\preformatted{A list of tensors.
+}\if{html}{\out{</div>}}
+}
 \description{
 Split a tensor into chunks.
 }
 \section{Note}{
 A split does not have to result in equal division when using
 Torch backend.
-}
-
-\section{Returns}{
-\if{html}{\out{<div class="sourceCode">}}\preformatted{A list of tensors.
-}\if{html}{\out{</div>}}
 }
 
 \seealso{

@@ -22,6 +22,10 @@ width for all axes.}
 \code{"reflect"}, \code{"symmetric"}, \code{"wrap"}, \code{"empty"},
 \code{"circular"}. Defaults to\code{"constant"}.}
 }
+\value{
+\if{html}{\out{<div class="sourceCode">}}\preformatted{Padded tensor.
+}\if{html}{\out{</div>}}
+}
 \description{
 Pad a tensor.
 }
@@ -33,11 +37,6 @@ Only Torch backend supports \code{"circular"} mode.
 Note:
 Tensorflow backend only supports modes \code{"constant"}, \code{"reflect"}
 and \code{"symmetric"}.
-}
-
-\section{Returns}{
-\if{html}{\out{<div class="sourceCode">}}\preformatted{Padded tensor.
-}\if{html}{\out{</div>}}
 }
 
 \seealso{

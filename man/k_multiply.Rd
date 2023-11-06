@@ -11,14 +11,13 @@ k_multiply(x1, x2)
 
 \item{x2}{Second input tensor.}
 }
-\description{
-Multiply arguments element-wise.
-}
-\section{Returns}{
+\value{
 \if{html}{\out{<div class="sourceCode">}}\preformatted{Output tensor, element-wise product of `x1` and `x2`.
 }\if{html}{\out{</div>}}
 }
-
+\description{
+Multiply arguments element-wise.
+}
 \seealso{
 \itemize{
 \item \url{https://www.tensorflow.org/api_docs/python/tf/keras/ops/multiply}

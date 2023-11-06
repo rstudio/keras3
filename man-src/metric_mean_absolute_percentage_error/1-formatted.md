@@ -45,7 +45,7 @@ model.compile(
     metrics=[keras.metrics.MeanAbsolutePercentageError()])
 ```
 
-# Returns
+@returns
 Mean absolute percentage error values with shape = `[batch_size, d0, ..
 dN-1]`.
 

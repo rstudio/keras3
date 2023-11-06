@@ -15,7 +15,7 @@ If you have previously disabled traceback filtering via
 `keras.config.disable_traceback_filtering()`, you can re-enable it via
 `keras.config.enable_traceback_filtering()`.
 
-# Returns
+@returns
 Boolean, `True` if traceback filtering is enabled,
 and `False` otherwise.
 

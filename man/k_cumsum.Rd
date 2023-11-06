@@ -12,14 +12,13 @@ k_cumsum(x, axis = NULL)
 \item{axis}{Axis along which the cumulative sum is computed.
 By default the input is flattened.}
 }
-\description{
-Returns the cumulative sum of elements along a given axis.
-}
-\section{Returns}{
+\value{
 \if{html}{\out{<div class="sourceCode">}}\preformatted{Output tensor.
 }\if{html}{\out{</div>}}
 }
-
+\description{
+Returns the cumulative sum of elements along a given axis.
+}
 \seealso{
 \itemize{
 \item \url{https://www.tensorflow.org/api_docs/python/tf/keras/ops/cumsum}

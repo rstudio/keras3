@@ -2,10 +2,6 @@ Splits a dataset into a left half and a right half (e.g. train / test).
 
 @description
 
-# Returns
-A tuple of two `tf.data.Dataset` objects:
-the left and right splits.
-
 # Examples
 ```python
 data = np.random.random(size=(1000, 4))
@@ -15,6 +11,10 @@ int(left_ds.cardinality())
 int(right_ds.cardinality())
 # 200
 ```
+
+@returns
+A tuple of two `tf.data.Dataset` objects:
+the left and right splits.
 
 @param dataset
     A `tf.data.Dataset`, a `torch.utils.data.Dataset` object,

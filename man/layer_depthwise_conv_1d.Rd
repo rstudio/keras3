@@ -83,6 +83,10 @@ bias after being updated by an \code{Optimizer}.}
 
 \item{...}{Passed on to the Python callable}
 }
+\value{
+A 3D tensor representing
+\code{activation(depthwise_conv1d(inputs, kernel) + bias)}.
+}
 \description{
 Depthwise convolution is a type of convolution in which each input channel
 is convolved with a different kernel (called a depthwise kernel). You can
@@ -122,11 +126,6 @@ A 3D tensor with shape:
 A 3D tensor with shape:
 \verb{(batch_shape, channels * depth_multiplier, new_steps)}
 }
-}
-
-\section{Returns}{
-A 3D tensor representing
-\code{activation(depthwise_conv1d(inputs, kernel) + bias)}.
 }
 
 \section{Raises}{

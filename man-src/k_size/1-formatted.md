@@ -1,8 +1,6 @@
 Return the number of elements in a tensor.
 
-@description
-
-# Returns
+@returns
     Number of elements in `x`.
 
 @param x Input tensor.

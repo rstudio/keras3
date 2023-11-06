@@ -38,15 +38,14 @@ used. Defaults to \code{"hann"}.}
 \item{center}{Whether \code{x} was padded on both sides so that the t-th sequence
 is centered at time \code{t * sequence_stride}. Defaults to \code{True}.}
 }
+\value{
+A tensor containing the inverse Short-Time Fourier Transform along the
+last axis of \code{x}.
+}
 \description{
 To reconstruct an original waveform, the parameters should be the same in
 \code{stft}.
 }
-\section{Returns}{
-A tensor containing the inverse Short-Time Fourier Transform along the
-last axis of \code{x}.
-}
-
 \section{Examples}{
 \if{html}{\out{<div class="sourceCode python">}}\preformatted{x = keras.ops.convert_to_tensor([0.0, 1.0, 2.0, 3.0, 4.0])
 istft(stft(x, 1, 1, 1), 1, 1, 1)

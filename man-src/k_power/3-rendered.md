@@ -1,8 +1,6 @@
 First tensor elements raised to powers from second tensor, element-wise.
 
-@description
-
-# Returns
+@returns
     Output tensor, the bases in `x1` raised to the exponents in `x2`.
 
 @param x1 The bases.

@@ -18,6 +18,10 @@ value the function will return).}
 \item{threshold}{A \code{numeric} giving the threshold value of the activation
 function below which values will be damped or set to zero.}
 }
+\value{
+\if{html}{\out{<div class="sourceCode">}}\preformatted{A tensor with the same shape and dtype as input `x`.
+}\if{html}{\out{</div>}}
+}
 \description{
 With default values, this returns the standard ReLU activation:
 \code{max(x, 0)}, the element-wise maximum of 0 and the input tensor.
@@ -50,11 +54,6 @@ activation_relu(x)
 }\if{html}{\out{</div>}}
 
 \if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor([-0. -0.  0.  0. 10.], shape=(5), dtype=float32)
-}\if{html}{\out{</div>}}
-}
-
-\section{Returns}{
-\if{html}{\out{<div class="sourceCode">}}\preformatted{A tensor with the same shape and dtype as input `x`.
 }\if{html}{\out{</div>}}
 }
 

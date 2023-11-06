@@ -17,14 +17,13 @@ in the result as dimensions with size one. Defaults to\code{False}.}
 
 \item{initial}{The minimum value of an output element. Defaults to\code{None}.}
 }
-\description{
-Return the maximum of a tensor or maximum along an axis.
-}
-\section{Returns}{
+\value{
 \if{html}{\out{<div class="sourceCode">}}\preformatted{Maximum of `x`.
 }\if{html}{\out{</div>}}
 }
-
+\description{
+Return the maximum of a tensor or maximum along an axis.
+}
 \seealso{
 \itemize{
 \item \url{https://www.tensorflow.org/api_docs/python/tf/keras/ops/max}

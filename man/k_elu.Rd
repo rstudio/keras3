@@ -11,15 +11,14 @@ k_elu(x, alpha = 1)
 
 \item{alpha}{A scalar, slope of positive section. Defaults to \code{1.0}.}
 }
+\value{
+A tensor with the same shape as \code{x}.
+}
 \description{
 It is defined as:
 
 \verb{f(x) =  alpha * (exp(x) - 1.) for x < 0}, \verb{f(x) = x for x >= 0}.
 }
-\section{Returns}{
-A tensor with the same shape as \code{x}.
-}
-
 \section{Examples}{
 \if{html}{\out{<div class="sourceCode python">}}\preformatted{x = np.array([-1., 0., 1.])
 x_elu = keras.ops.elu(x)

@@ -6,13 +6,12 @@
 \usage{
 config_epsilon()
 }
+\value{
+A float.
+}
 \description{
 Return the value of the fuzz factor used in numeric expressions.
 }
-\section{Returns}{
-A float.
-}
-
 \section{Examples}{
 \if{html}{\out{<div class="sourceCode r">}}\preformatted{keras::config_epsilon()
 }\if{html}{\out{</div>}}

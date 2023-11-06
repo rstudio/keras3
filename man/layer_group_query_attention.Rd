@@ -50,6 +50,14 @@ layer_group_query_attention(
 
 \item{...}{Passed on to the Python callable}
 }
+\value{
+attention_output: Result of the computation, of shape
+\verb{(batch_dim, target_seq_len, feature_dim)}, where \code{target_seq_len}
+is for target sequence length and \code{feature_dim} is the query input
+last dim.
+attention_scores: (Optional) attention coefficients of shape
+\verb{(batch_dim, num_query_heads, target_seq_len, source_seq_len)}.
+}
 \description{
 This is an implementation of grouped-query attention introduced by
 \href{https://arxiv.org/abs/2305.13245}{Ainslie et al., 2023}. Here
@@ -94,15 +102,6 @@ layer/model or \code{False} (inference) if there is no parent layer.
 prevent tokens from attending to future tokens (e.g., used in a
 decoder Transformer).
 }
-}
-
-\section{Returns}{
-attention_output: Result of the computation, of shape
-\verb{(batch_dim, target_seq_len, feature_dim)}, where \code{target_seq_len}
-is for target sequence length and \code{feature_dim} is the query input
-last dim.
-attention_scores: (Optional) attention coefficients of shape
-\verb{(batch_dim, num_query_heads, target_seq_len, source_seq_len)}.
 }
 
 \seealso{

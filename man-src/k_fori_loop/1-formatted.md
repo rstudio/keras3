@@ -2,9 +2,6 @@ For loop implementation.
 
 @description
 
-# Returns
-The final state after the loop.
-
 # Examples
 ```python
 lower = 0
@@ -14,6 +11,9 @@ init_val = 0
 keras.ops.fori_loop(lower, upper, body_fun, init_val)
 # 45
 ```
+
+@returns
+The final state after the loop.
 
 @param lower The initial value of the loop variable.
 @param upper The upper bound of the loop variable.

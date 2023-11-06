@@ -37,13 +37,12 @@ while \code{"channels_first"} corresponds to inputs with shape
 \verb{~/.keras/keras.json}. If you never set it, then it will be
 \code{"channels_last"}.}
 }
+\value{
+Extracted patches 3D (if not batched) or 4D (if batched)
+}
 \description{
 Extracts patches from the image(s).
 }
-\section{Returns}{
-Extracted patches 3D (if not batched) or 4D (if batched)
-}
-
 \section{Examples}{
 \if{html}{\out{<div class="sourceCode python">}}\preformatted{image = np.random.random(
     (2, 20, 20, 3)

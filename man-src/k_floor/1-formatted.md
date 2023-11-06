@@ -3,7 +3,7 @@ Return the floor of the input, element-wise.
 @description
 The floor of the scalar `x` is the largest integer `i`, such that `i <= x`.
 
-# Returns
+@returns
     Output tensor, element-wise floor of `x`.
 
 @param x Input tensor.

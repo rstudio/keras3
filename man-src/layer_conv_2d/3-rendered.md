@@ -19,9 +19,6 @@ outputs as well.
 - If `data_format="channels_first"`:
     A 4D tensor with shape: `(batch_size, filters, new_height, new_width)`
 
-# Returns
-A 4D tensor representing `activation(conv2d(inputs, kernel) + bias)`.
-
 # Raises
 ValueError: when both `strides > 1` and `dilation_rate > 1`.
 
@@ -32,6 +29,9 @@ y = keras.layers.Conv2D(32, 3, activation='relu')(x)
 print(y.shape)
 # (4, 8, 8, 32)
 ```
+
+@returns
+A 4D tensor representing `activation(conv2d(inputs, kernel) + bias)`.
 
 @param filters int, the dimension of the output space (the number of filters
     in the convolution).

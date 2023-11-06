@@ -11,6 +11,9 @@ k_arctan2(x1, x2)
 
 \item{x2}{Second input tensor.}
 }
+\value{
+Tensor of angles in radians, in the range \verb{[-pi, pi]}.
+}
 \description{
 The quadrant (i.e., branch) is chosen so that \code{arctan2(x1, x2)} is the
 signed angle in radians between the ray ending at the origin and passing
@@ -20,10 +23,6 @@ is the first function parameter, the "x-coordinate" is the second.) By IEEE
 convention, this function is defined for \verb{x2 = +/-0} and for either or both
 of \code{x1} and \code{x2} \verb{= +/-inf}.
 }
-\section{Returns}{
-Tensor of angles in radians, in the range \verb{[-pi, pi]}.
-}
-
 \section{Examples}{
 Consider four points in different quadrants:
 

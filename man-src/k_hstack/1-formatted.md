@@ -4,7 +4,7 @@ Stack tensors in sequence horizontally (column wise).
 This is equivalent to concatenation along the first axis for 1-D tensors,
 and along the second axis for all other tensors.
 
-# Returns
+@returns
     The tensor formed by stacking the given tensors.
 
 @param xs Sequence of tensors.

@@ -32,6 +32,10 @@ remove values from sequences larger than
 
 \item{value}{Float or String, padding value. (Optional, defaults to 0.)}
 }
+\value{
+\if{html}{\out{<div class="sourceCode">}}\preformatted{NumPy array with shape `(len(sequences), maxlen)`
+}\if{html}{\out{</div>}}
+}
 \description{
 This function transforms a list (of length \code{num_samples})
 of sequences (lists of integers)
@@ -75,11 +79,6 @@ keras.utils.pad_sequences(sequence)
 #        [5, 6]], dtype=int32)
 }\if{html}{\out{</div>}}
 }
-\section{Returns}{
-\if{html}{\out{<div class="sourceCode">}}\preformatted{NumPy array with shape `(len(sequences), maxlen)`
-}\if{html}{\out{</div>}}
-}
-
 \seealso{
 \itemize{
 \item \url{https://www.tensorflow.org/api_docs/python/tf/keras/utils/pad_sequences}

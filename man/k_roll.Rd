@@ -15,14 +15,13 @@ k_roll(x, shift, axis = NULL)
 array is flattened before shifting, after which the original
 shape is restored.}
 }
-\description{
-Elements that roll beyond the last position are re-introduced at the first.
-}
-\section{Returns}{
+\value{
 \if{html}{\out{<div class="sourceCode">}}\preformatted{Output tensor.
 }\if{html}{\out{</div>}}
 }
-
+\description{
+Elements that roll beyond the last position are re-introduced at the first.
+}
 \seealso{
 \itemize{
 \item \url{https://www.tensorflow.org/api_docs/python/tf/keras/ops/roll}

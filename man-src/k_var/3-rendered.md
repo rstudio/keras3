@@ -1,8 +1,6 @@
 Compute the variance along the specified axes.
 
-@description
-
-# Returns
+@returns
     Output tensor containing the variance.
 
 @param x Input tensor.

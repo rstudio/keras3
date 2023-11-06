@@ -9,13 +9,12 @@ k_relu(x)
 \arguments{
 \item{x}{Input tensor.}
 }
+\value{
+A tensor with the same shape as \code{x}.
+}
 \description{
 It is defined as \code{f(x) = max(0, x)}.
 }
-\section{Returns}{
-A tensor with the same shape as \code{x}.
-}
-
 \section{Examples}{
 \if{html}{\out{<div class="sourceCode python">}}\preformatted{x1 = keras.ops.convert_to_tensor([-1.0, 0.0, 1.0, 0.2])
 keras.ops.relu(x1)

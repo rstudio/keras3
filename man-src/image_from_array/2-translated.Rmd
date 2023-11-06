@@ -9,7 +9,7 @@ img = np.random.random(size=(100, 100, 3))
 pil_img = keras.utils.array_to_img(img)
 ```
 
-# Returns
+@returns
     A PIL Image instance.
 
 @param x Input data, in any form that can be converted to a NumPy array.

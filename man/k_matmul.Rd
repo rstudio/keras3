@@ -11,6 +11,10 @@ k_matmul(x1, x2)
 
 \item{x2}{Second tensor.}
 }
+\value{
+\if{html}{\out{<div class="sourceCode">}}\preformatted{Output tensor, matrix product of the inputs.
+}\if{html}{\out{</div>}}
+}
 \description{
 \itemize{
 \item If both tensors are 1-dimensional, the dot product (scalar) is returned.
@@ -23,11 +27,6 @@ a 1 to its dimensions. After matrix multiplication the prepended
 to its dimensions. After matrix multiplication the appended 1 is removed.
 }
 }
-\section{Returns}{
-\if{html}{\out{<div class="sourceCode">}}\preformatted{Output tensor, matrix product of the inputs.
-}\if{html}{\out{</div>}}
-}
-
 \seealso{
 \itemize{
 \item \url{https://www.tensorflow.org/api_docs/python/tf/keras/ops/matmul}

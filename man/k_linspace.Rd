@@ -36,6 +36,10 @@ spacing between samples.}
 \item{axis}{The axis in the result to store the samples. Relevant only if
 start or stop are array-like. Defaults to \code{0}.}
 }
+\value{
+A tensor of evenly spaced numbers.
+If \code{retstep} is \code{True}, returns \verb{(samples, step)}
+}
 \description{
 Returns \code{num} evenly spaced samples, calculated over the interval
 \verb{[start, stop]}.
@@ -44,11 +48,6 @@ The endpoint of the interval can optionally be excluded.
 }
 \section{Note}{
 Torch backend does not support \code{axis} argument.
-}
-
-\section{Returns}{
-A tensor of evenly spaced numbers.
-If \code{retstep} is \code{True}, returns \verb{(samples, step)}
 }
 
 \seealso{

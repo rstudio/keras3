@@ -9,14 +9,13 @@ k_log10(x)
 \arguments{
 \item{x}{Input tensor.}
 }
-\description{
-Return the base 10 logarithm of the input tensor, element-wise.
-}
-\section{Returns}{
+\value{
 \if{html}{\out{<div class="sourceCode">}}\preformatted{Output tensor, element-wise base 10 logarithm of `x`.
 }\if{html}{\out{</div>}}
 }
-
+\description{
+Return the base 10 logarithm of the input tensor, element-wise.
+}
 \seealso{
 \itemize{
 \item \url{https://www.tensorflow.org/api_docs/python/tf/keras/ops/log10}

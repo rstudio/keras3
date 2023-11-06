@@ -1,8 +1,6 @@
 Repeat each element of a tensor after themselves.
 
-@description
-
-# Returns
+@returns
     Output tensor.
 
 @param x Input tensor.

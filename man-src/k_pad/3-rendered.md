@@ -11,7 +11,7 @@ Note:
     Tensorflow backend only supports modes `"constant"`, `"reflect"`
     and `"symmetric"`.
 
-# Returns
+@returns
     Padded tensor.
 
 @param x Tensor to pad.

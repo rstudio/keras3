@@ -2,15 +2,15 @@ Inverse hyperbolic cosine, element-wise.
 
 @description
 
-# Returns
-Output tensor of same shape as x.
-
 # Examples
 ```python
 x = keras.ops.convert_to_tensor([10, 100])
 keras.ops.arccosh(x)
 # array([2.993223, 5.298292], dtype=float32)
 ```
+
+@returns
+Output tensor of same shape as x.
 
 @param x Input tensor.
 

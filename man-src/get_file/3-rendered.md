@@ -20,7 +20,7 @@ path_to_downloaded_file <- get_file(
 )
 ```
 
-# Returns
+@returns
 Path to the downloaded file.
 
 ** Warning on malicious downloads **

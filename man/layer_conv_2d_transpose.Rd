@@ -83,6 +83,10 @@ bias after being updated by an \code{Optimizer}.}
 
 \item{...}{Passed on to the Python callable}
 }
+\value{
+A 4D tensor representing
+\code{activation(conv2d_transpose(inputs, kernel) + bias)}.
+}
 \description{
 The need for transposed convolutions generally arise from the desire to use
 a transformation going in the opposite direction of a normal convolution,
@@ -106,11 +110,6 @@ A 4D tensor with shape: \verb{(batch_size, new_height, new_width, filters)}
 \item If \code{data_format="channels_first"}:
 A 4D tensor with shape: \verb{(batch_size, filters, new_height, new_width)}
 }
-}
-
-\section{Returns}{
-A 4D tensor representing
-\code{activation(conv2d_transpose(inputs, kernel) + bias)}.
 }
 
 \section{Raises}{

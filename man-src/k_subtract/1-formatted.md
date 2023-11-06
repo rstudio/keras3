@@ -1,8 +1,6 @@
 Subtract arguments element-wise.
 
-@description
-
-# Returns
+@returns
     Output tensor, element-wise difference of `x1` and `x2`.
 
 @param x1 First input tensor.

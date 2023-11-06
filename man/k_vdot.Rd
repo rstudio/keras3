@@ -12,17 +12,16 @@ before calculation of the dot product.}
 
 \item{x2}{Second input tensor.}
 }
+\value{
+\if{html}{\out{<div class="sourceCode">}}\preformatted{Output tensor.
+}\if{html}{\out{</div>}}
+}
 \description{
 If the first argument is complex, the complex conjugate of the first
 argument is used for the calculation of the dot product.
 
 Multidimensional tensors are flattened before the dot product is taken.
 }
-\section{Returns}{
-\if{html}{\out{<div class="sourceCode">}}\preformatted{Output tensor.
-}\if{html}{\out{</div>}}
-}
-
 \seealso{
 \itemize{
 \item \url{https://www.tensorflow.org/api_docs/python/tf/keras/ops/vdot}

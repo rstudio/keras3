@@ -3,7 +3,7 @@ Computes the element-wise logical OR of the given input tensors.
 @description
 Zeros are treated as `False` and non-zeros are treated as `True`.
 
-# Returns
+@returns
     Output tensor, element-wise logical OR of the inputs.
 
 @param x1 Input tensor.

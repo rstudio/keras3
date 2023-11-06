@@ -1,8 +1,6 @@
 Cosine, element-wise.
 
-@description
-
-# Returns
+@returns
     The corresponding cosine values.
 
 @param x Input tensor.

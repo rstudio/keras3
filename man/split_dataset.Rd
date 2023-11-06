@@ -33,14 +33,13 @@ Defaults to \code{None}.}
 
 \item{seed}{A random seed for shuffling.}
 }
-\description{
-Splits a dataset into a left half and a right half (e.g. train / test).
-}
-\section{Returns}{
+\value{
 A tuple of two \code{tf.data.Dataset} objects:
 the left and right splits.
 }
-
+\description{
+Splits a dataset into a left half and a right half (e.g. train / test).
+}
 \section{Examples}{
 \if{html}{\out{<div class="sourceCode python">}}\preformatted{data = np.random.random(size=(1000, 4))
 left_ds, right_ds = keras.utils.split_dataset(data, left_size=0.8)

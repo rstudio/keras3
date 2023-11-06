@@ -25,6 +25,9 @@ Supported options are \code{"sum"}, \code{"sum_over_batch_size"} or \code{None}.
 
 \item{name}{Optional name for the loss instance.}
 }
+\value{
+Mean absolute error values with shape = \verb{[batch_size, d0, .. dN-1]}.
+}
 \description{
 \if{html}{\out{<div class="sourceCode python">}}\preformatted{loss = mean(abs(y_true - y_pred), axis=-1)
 }\if{html}{\out{</div>}}
@@ -34,10 +37,6 @@ Formula:
 \if{html}{\out{<div class="sourceCode python">}}\preformatted{loss = mean(abs(y_true - y_pred))
 }\if{html}{\out{</div>}}
 }
-\section{Returns}{
-Mean absolute error values with shape = \verb{[batch_size, d0, .. dN-1]}.
-}
-
 \section{Examples}{
 \if{html}{\out{<div class="sourceCode python">}}\preformatted{y_true = np.random.randint(0, 2, size=(2, 3))
 y_pred = np.random.random(size=(2, 3))

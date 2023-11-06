@@ -6,10 +6,6 @@ classification tasks where each input sample can belong to one of
 multiple classes. It measures the dissimilarity
 between the target and output probabilities or logits.
 
-# Returns
-Integer tensor: The computed categorical cross-entropy loss between
-`target` and `output`.
-
 # Examples
 ```python
 target = keras.ops.convert_to_tensor(
@@ -23,6 +19,10 @@ output = keras.ops.convert_to_tensor(
 categorical_crossentropy(target, output)
 # array([0.10536054 0.22314355 0.6931472 ], shape=(3,), dtype=float32)
 ```
+
+@returns
+Integer tensor: The computed categorical cross-entropy loss between
+`target` and `output`.
 
 @param target The target tensor representing the true categorical labels.
     Its shape should match the shape of the `output` tensor

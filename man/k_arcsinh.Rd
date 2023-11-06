@@ -9,13 +9,12 @@ k_arcsinh(x)
 \arguments{
 \item{x}{Input tensor.}
 }
+\value{
+Output tensor of same shape as \code{x}.
+}
 \description{
 Inverse hyperbolic sine, element-wise.
 }
-\section{Returns}{
-Output tensor of same shape as \code{x}.
-}
-
 \section{Examples}{
 \if{html}{\out{<div class="sourceCode python">}}\preformatted{x = keras.ops.convert_to_tensor([1, -1, 0])
 keras.ops.arcsinh(x)

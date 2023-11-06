@@ -18,6 +18,10 @@ changed it, it defaults to \code{"channels_last"}).}
 \code{keras.backend.floatx()} is used (unless you changed it, it
 defaults to \code{"float32"}).}
 }
+\value{
+\if{html}{\out{<div class="sourceCode">}}\preformatted{A 3D NumPy array.
+}\if{html}{\out{</div>}}
+}
 \description{
 Converts a PIL Image instance to a NumPy array.
 }
@@ -26,11 +30,6 @@ Converts a PIL Image instance to a NumPy array.
 img_data = np.random.random(size=(100, 100, 3))
 img = keras.utils.array_to_img(img_data)
 array = keras.utils.image.img_to_array(img)
-}\if{html}{\out{</div>}}
-}
-
-\section{Returns}{
-\if{html}{\out{<div class="sourceCode">}}\preformatted{A 3D NumPy array.
 }\if{html}{\out{</div>}}
 }
 

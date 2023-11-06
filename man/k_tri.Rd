@@ -17,14 +17,13 @@ k_tri(N, M = NULL, k = 0L, dtype = NULL)
 
 \item{dtype}{Data type of the returned tensor. The default is "float32".}
 }
-\description{
-Return a tensor with ones at and below a diagonal and zeros elsewhere.
-}
-\section{Returns}{
+\value{
 Tensor with its lower triangle filled with ones and zeros elsewhere.
 \code{T[i, j] == 1} for \code{j <= i + k}, 0 otherwise.
 }
-
+\description{
+Return a tensor with ones at and below a diagonal and zeros elsewhere.
+}
 \seealso{
 \itemize{
 \item \url{https://www.tensorflow.org/api_docs/python/tf/keras/ops/tri}

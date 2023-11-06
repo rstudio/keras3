@@ -41,6 +41,9 @@ Supported options are \code{"sum"}, \code{"sum_over_batch_size"} or \code{None}.
 
 \item{name}{Optional name for the loss instance.}
 }
+\value{
+Binary crossentropy loss value. shape = \verb{[batch_size, d0, .. dN-1]}.
+}
 \description{
 Use this cross-entropy loss for binary (0 or 1) classification applications.
 The loss function requires the following inputs:
@@ -112,10 +115,6 @@ keras.losses.BinaryCrossentropy() # OR ...('from_logits=False')
 # 2. Update `y_pred` to use probabilities instead of logits
 y_pred = [0.6, 0.3, 0.2, 0.8] # OR [[0.6, 0.3], [0.2, 0.8]]
 }\if{html}{\out{</div>}}
-}
-
-\section{Returns}{
-Binary crossentropy loss value. shape = \verb{[batch_size, d0, .. dN-1]}.
 }
 
 \seealso{

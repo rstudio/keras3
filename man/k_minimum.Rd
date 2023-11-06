@@ -11,14 +11,13 @@ k_minimum(x1, x2)
 
 \item{x2}{Second tensor.}
 }
-\description{
-Element-wise minimum of \code{x1} and \code{x2}.
-}
-\section{Returns}{
+\value{
 \if{html}{\out{<div class="sourceCode">}}\preformatted{Output tensor, element-wise minimum of `x1` and `x2`.
 }\if{html}{\out{</div>}}
 }
-
+\description{
+Element-wise minimum of \code{x1} and \code{x2}.
+}
 \seealso{
 \itemize{
 \item \url{https://www.tensorflow.org/api_docs/python/tf/keras/ops/minimum}

@@ -92,6 +92,9 @@ bias after being updated by an \code{Optimizer}.}
 
 \item{...}{Passed on to the Python callable}
 }
+\value{
+A 3D tensor representing \code{activation(conv1d(inputs, kernel) + bias)}.
+}
 \description{
 This layer creates a convolution kernel that is convolved with the layer
 input over a single spatial (or temporal) dimension to produce a tensor of
@@ -115,10 +118,6 @@ A 3D tensor with shape: \verb{(batch_shape, new_steps, filters)}
 \item If \code{data_format="channels_first"}:
 A 3D tensor with shape: \verb{(batch_shape, filters, new_steps)}
 }
-}
-
-\section{Returns}{
-A 3D tensor representing \code{activation(conv1d(inputs, kernel) + bias)}.
 }
 
 \section{Raises}{

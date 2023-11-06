@@ -1,8 +1,6 @@
 Element-wise maximum of `x1` and `x2`.
 
-@description
-
-# Returns
+@returns
     Output tensor, element-wise maximum of `x1` and `x2`.
 
 @param x1 First tensor.

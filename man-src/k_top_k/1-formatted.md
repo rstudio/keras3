@@ -2,11 +2,6 @@ Finds the top-k values and their indices in a tensor.
 
 @description
 
-# Returns
-A tuple containing two tensors. The first tensor contains the
-top-k values, and the second tensor contains the indices of the
-top-k values in the input tensor.
-
 # Examples
 ```python
 x = keras.ops.convert_to_tensor([5, 2, 7, 1, 9, 3])
@@ -16,6 +11,11 @@ print(values)
 print(indices)
 # array([4 2 0], shape=(3,), dtype=int32)
 ```
+
+@returns
+A tuple containing two tensors. The first tensor contains the
+top-k values, and the second tensor contains the indices of the
+top-k values in the input tensor.
 
 @param x Input tensor.
 @param k An integer representing the number of top elements to retrieve.

@@ -9,6 +9,10 @@ unpack_x_y_sample_weight(data)
 \arguments{
 \item{data}{A tuple of the form \verb{(x,)}, \verb{(x, y)}, or \verb{(x, y, sample_weight)}.}
 }
+\value{
+The unpacked tuple, with \code{None}s for \code{y} and \code{sample_weight} if they are
+not provided.
+}
 \description{
 This is a convenience utility to be used when overriding
 \code{Model.train_step}, \code{Model.test_step}, or \code{Model.predict_step}.
@@ -26,11 +30,6 @@ x, y, sample_weight = unpack_x_y_sample_weight(data)
 sample_weight is None
 # True
 }\if{html}{\out{</div>}}
-}
-
-\section{Returns}{
-The unpacked tuple, with \code{None}s for \code{y} and \code{sample_weight} if they are
-not provided.
 }
 
 \seealso{

@@ -1,8 +1,6 @@
 Return a new tensor of given shape and type, filled with ones.
 
-@description
-
-# Returns
+@returns
     Tensor of ones with the given shape and dtype.
 
 @param shape Shape of the new tensor.

@@ -2,9 +2,6 @@ Evaluates the Einstein summation convention on the operands.
 
 @description
 
-# Returns
-The calculation based on the Einstein summation convention.
-
 # Examples
 ```python
 from keras import ops
@@ -87,6 +84,9 @@ ops.einsum(a, [0, 1], b, [1])
 ops.einsum("...j, j", a, b)
 # array([ 30,  80, 130, 180, 230])
 ```
+
+@returns
+The calculation based on the Einstein summation convention.
 
 @param subscripts Specifies the subscripts for summation as comma separated
     list of subscript labels. An implicit (classical Einstein

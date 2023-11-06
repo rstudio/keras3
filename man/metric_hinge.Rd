@@ -19,6 +19,9 @@ to -1 or 1 with shape = \verb{[batch_size, d0, .. dN]}.}
 
 \item{dtype}{(Optional) data type of the metric result.}
 }
+\value{
+Hinge loss values with shape = \verb{[batch_size, d0, .. dN-1]}.
+}
 \description{
 Formula:
 
@@ -41,10 +44,6 @@ m.update_state([[0, 1], [0, 0]], [[0.6, 0.4], [0.4, 0.6]],
 m.result()
 # 1.1
 }\if{html}{\out{</div>}}
-}
-
-\section{Returns}{
-Hinge loss values with shape = \verb{[batch_size, d0, .. dN-1]}.
 }
 
 \section{Examples}{

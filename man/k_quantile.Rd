@@ -30,16 +30,15 @@ fractional part of the index surrounded by \code{i} and \code{j}.
 \item{keepdims}{If this is set to \code{True}, the axes which are reduce
 are left in the result as dimensions with size one.}
 }
-\description{
-Compute the q-th quantile(s) of the data along the specified axis.
-}
-\section{Returns}{
+\value{
 The quantile(s). If \code{q} is a single probability and \code{axis=None}, then
 the result is a scalar. If multiple probabilies levels are given, first
 axis of the result corresponds to the quantiles. The other axes are the
 axes that remain after the reduction of \code{x}.
 }
-
+\description{
+Compute the q-th quantile(s) of the data along the specified axis.
+}
 \seealso{
 \itemize{
 \item \url{https://www.tensorflow.org/api_docs/python/tf/keras/ops/quantile}
