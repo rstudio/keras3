@@ -87,25 +87,24 @@ jobs:
         # echo "::set-output name=year-week::$(date -u "+%Y-%U")"
         # echo "::set-output name=date::$(date -u "+%F")"
 
-      - name: Restore R package cache
-        uses: actions/cache@v3
-        id: r-package-cache
-        with:
-          path: ${{ env.R_LIBS_USER }}
-          key: ${{ matrix.os }}-${{ steps.setup-r.outputs.installed-r-version }}-${{ steps.get-date.outputs.year-week }}-2
+      # - name: Restore R package cache
+      #   uses: actions/cache@v3
+      #   id: r-package-cache
+      #   with:
+      #     path: ${{ env.R_LIBS_USER }}
+      #     key: ${{ matrix.os }}-${{ steps.setup-r.outputs.installed-r-version }}-${{ steps.get-date.outputs.year-week }}-2
 
       - name: install dev reticulate
         run: if(!require("remotes", quietly = TRUE)) install.packages("remotes"); remotes::install_github("rstudio/reticulate")
 
       - uses: r-lib/actions/setup-r-dependencies@v2
         with:
-          extra-packages: any::rcmdcheck
-          # , local::.
+          extra-packages: any::rcmdcheck, local::.
           cache-version: 1
           # upgrade: 'TRUE'
 
-      - name: install keras r pkg (workaround pak bug in r-lib/actions/setup-r-dependencies)
-        run: remotes::install_local(dependencies = TRUE)
+      # - name: install keras r pkg (workaround pak bug in r-lib/actions/setup-r-dependencies)
+      #   run: remotes::install_local(dependencies = TRUE)
 
       - name: Install Tensorflow + Keras deps
         run: keras::install_keras(python_version = '${{ matrix.python }}')
