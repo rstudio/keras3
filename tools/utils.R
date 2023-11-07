@@ -127,6 +127,23 @@ attach_eval({
 
   import_from(reticulate, system2t)
 
+
+  .sprintf_transformer <- function(text, envir) {
+    m <- regexpr(":.+$", text)
+    if (m != -1L) {
+      format <- substring(regmatches(text, m), 2)
+      regmatches(text, m) <- ""
+    } else {
+      format <- "s"
+    }
+    res <- eval(str2lang(text), envir)
+    sprintf(paste0("%", format), res)
+  }
+
+  glue_fmt <- function(..., .envir = parent.frame()) {
+    glue(..., .transformer = .sprintf_transformer, .envir = .envir)
+  }
+
 }, mask.ok = "c")
 
 # ---- venv ----

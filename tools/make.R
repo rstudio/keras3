@@ -3,6 +3,17 @@
 if(!"source:tools/utils.R" %in% search()) envir::attach_source("tools/utils.R")
 if(!"source:tools/translate-tools.R" %in% search()) envir::attach_source("tools/translate-tools.R")
 
+# TODO:  self$model$stop_training <- TRUE should work. Need to avoid propogating `$<-` past first.
+# TODO: new_callback_class() should accept an empty final trailing , DONE
+#
+# TODO: new_callback_class() should wrap callables to make epoch/batch n 1 based,
+#       make logs persistent (e.g., wrap the user callable w/ `logs$update(<callback_return>`))
+#
+# TODO: refactor tools/make.R to use git apply --3way, stop on each symbol. Make a workflow that
+#       causes every symbol update to be a single commit. e.g., update_docs() - scans through man-src/*, on first
+#       dir that needs changes, it stops, give an opportunity for me to edit, stage, commit, then
+#       rerun `update_docs()`
+
 # TODO: in reticulate, change subclassed dict autoconversion back to off:
 #      so that keras$utils$get_custom_objects()$clear() works.
 #
