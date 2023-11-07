@@ -22,9 +22,9 @@ jobs:
       matrix:
         include:
 
-          - {os: 'ubuntu-latest' , python: '3.9' , r: 'release'}
+          # - {os: 'ubuntu-latest' , python: '3.9' , r: 'release'}
           - {os: 'ubuntu-latest' , python: '3.10', r: 'release'}
-          - {os: 'ubuntu-latest' , python: '3.11', r: 'release'}
+          # - {os: 'ubuntu-latest' , python: '3.11', r: 'release'}
 
           ## the happy path - default everything
           # - {os: 'ubuntu-latest' , tf: 'default', r: 'release'}
@@ -94,8 +94,8 @@ jobs:
       #     path: ${{ env.R_LIBS_USER }}
       #     key: ${{ matrix.os }}-${{ steps.setup-r.outputs.installed-r-version }}-${{ steps.get-date.outputs.year-week }}-2
 
-      - name: install dev reticulate
-        run: if(!require("remotes", quietly = TRUE)) install.packages("remotes"); remotes::install_github("rstudio/reticulate")
+      # - name: install dev reticulate
+      #   run: if(!require("remotes", quietly = TRUE)) install.packages("remotes"); remotes::install_github("rstudio/reticulate")
 
       - uses: r-lib/actions/setup-r-dependencies@v2
         with:
