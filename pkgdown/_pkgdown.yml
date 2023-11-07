@@ -97,16 +97,14 @@ reference:
     contents:
       - keras_model
       - keras_model_sequential
-      - keras_model_custom
-      - multi_gpu_model
-      - summary.keras.engine.training.Model
-      - compile.keras.engine.training.Model
-      - evaluate.keras.engine.training.Model
-      - export_savedmodel.keras.engine.training.Model
-      - fit.keras.engine.training.Model
+      - summary.keras.models.model.Model
+      - compile.keras.models.model.Model
+      - evaluate.keras.models.model.Model
+      - export_savedmodel.keras.models.model.Model
+      - fit.keras.models.model.Model
       - fit_generator
       - evaluate_generator
-      - predict.keras.engine.training.Model
+      - predict.keras.models.model.Model
       - predict_proba
       - predict_classes
       - predict_on_batch
@@ -160,7 +158,6 @@ reference:
       - layer_activation_relu
       - layer_activation_leaky_relu
       - layer_activation_parametric_relu
-      - layer_activation_thresholded_relu
       - layer_activation_elu
       - layer_activation_softmax
       - layer_activation_selu
@@ -391,7 +388,7 @@ reference:
   - title: "Utils"
     contents:
       - plot.keras_training_history
-      - plot.keras.engine.training.Model
+      - plot.keras.models.model.Model
       - zip_lists
       - mark_active
       - timeseries_generator
