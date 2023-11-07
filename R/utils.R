@@ -667,6 +667,21 @@ as.array.keras.backend.common.variables.KerasVariable <- function(x, ...) {
   as_r_value(k_convert_to_numpy(x))
 }
 
+#' @export
+as.numeric.keras.backend.common.variables.KerasVariable <- function(x, ...) {
+  as.numeric(as_r_value(k_convert_to_numpy(x)))
+}
+
+#' @export
+as.double.keras.backend.common.variables.KerasVariable <- function(x, ...) {
+  as.double(as_r_value(k_convert_to_numpy(x)))
+}
+
+#' @export
+as.integer.keras.backend.common.variables.KerasVariable <- function(x, ...) {
+  as.integer(as_r_value(k_convert_to_numpy(x)))
+}
+
 as_r_value <- function (x) {
   if (inherits(x, "python.builtin.object"))
     py_to_r(x)
