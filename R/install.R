@@ -25,13 +25,18 @@ install_keras <- function(...,
   withr::local_path(dirname(python))
   system2 <- reticulate:::system2t
 
-  # system2("python", "-m pip install keras-nightly tf-nightly")
-  # system2("python", "-m pip install tf-nightly")
-  # system2("python", "-m pip uninstall keras")
-  # system2("python", "-m pip install keras-nightly")
+
   # message("DONE!")
   # return()
+  system2("python", "-m pip install tensorflow")
+  system2("python", "-m pip install keras-nightly")
 
+  if(Sys.getenv("CI") == "true") {
+    system2("python", "-m pip install tf-nightly keras-nightly")
+    return()
+    # system2("python", "-m pip uninstall keras")
+    # system2("python", "-m pip install keras-nightly tf-nightly")
+  }
 
   # withr::local_dir(withr::local_tempdir())
   keras_team_keras_dir <- "~/github/keras-team/keras"
