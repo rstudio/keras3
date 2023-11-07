@@ -37,6 +37,7 @@ config_floatx
 ##     do.call(keras$config$floatx, args)
 ## \}
 ## <environment: namespace:keras>
+## file: ../../R/autogen-config.R
 }\if{html}{\out{</div>}}
 
 \if{html}{\out{<div class="sourceCode r">}}\preformatted{# Set it back to float32
