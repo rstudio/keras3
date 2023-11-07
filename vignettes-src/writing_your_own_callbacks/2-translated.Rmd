@@ -159,7 +159,8 @@ model <- get_model()
 model |> fit(
   mnist$train$x, mnist$train$y,
   epochs = 2, verbose = 0, validation_split = 0.5,
-  callbacks = list(callback_custom()))
+  callbacks = list(callback_custom())
+)
 
 res <- model |> evaluate(
   mnist$test$x, mnist$test$y,
@@ -167,7 +168,11 @@ res <- model |> evaluate(
   callbacks = list(callback_custom())
 )
 
-res <- model |> predict(mnist$test$x, callbacks = list(callback_custom()))
+res <- model |> predict(
+  mnist$test$x, 
+  verbose = 0,
+  callbacks = list(callback_custom())
+)
 ```
 
 ### Usage of `logs` dict

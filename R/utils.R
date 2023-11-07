@@ -752,12 +752,12 @@ knit_vignette <- function(input, ..., output_dir) {
   )
   rmarkdown::render(
     input,
-    output_format = rmarkdown::github_document(preserve_yaml = TRUE),#, ext = "Rmd"), #
+    output_format = rmarkdown::github_document(preserve_yaml = TRUE),
     # output_format = rmarkdown::md_document( preserve_yaml = TRUE, ext = "Rmd"), #
     # output_format = rmarkdown::md_document(preserve_yaml = FALSE), # , ext = "Rmd"
     output_file = output_file,
-    ...,
-    envir = new.env(parent = globalenv())
+    envir = new.env(parent = globalenv()),
+    ...
   )
   x <- readLines(output_file)
   # if(length(grep("^knit: keras:::knit_vignette", x) -> i))
@@ -771,11 +771,19 @@ knit_vignette <- function(input, ..., output_dir) {
   fm$knit <- NULL
   fm$output <- "rmarkdown::html_vignette"
   fm$accelerator <- NULL
-  fm$date <- format(Sys.Date())
+  last_modified_date <- reticulate:::system2t("git", c("log -1 --pretty=format:'%ad'",
+                                         "--date=format:'%Y-%m-%d'",
+                                         "--", shQuote(input)), stdout = TRUE)
+  # message("Last modified: ", last_modified_date)
+  fm$date <- sprintf("Last Modified: %s; Last Rendered: %s",
+                     last_modified_date, format(Sys.Date()))
+  # TODO: fm$date <- Last compiled on `r format(Sys.time(), '%d %B, %Y')`, last updated on `r system(git `
+  # fm$date <- format(Sys.Date())
   fm$vignette <- glue::glue_data(list(title = fm$title),
     "%\\VignetteIndexEntry{<<title>>} %\\VignetteEngine{knitr::rmarkdown} %\\VignetteEncoding{UTF-8}",
     .open = "<<", .close = ">>" )
-  x <- c("---", as.yaml(fm), "---", x[-(1:end_fm_i)])
+
+  x <- c("---", trimws(as.yaml(fm), "right"), "---", x[-(1:end_fm_i)])
   writeLines(x, output_file)
 }
 

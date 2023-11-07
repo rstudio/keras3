@@ -886,6 +886,15 @@ make_r_fn.default <- function(endpoint, py_obj, transformers) {
     do.call(.(py_obj_expr), args)
   })
 
+
+  if(endpoint == "keras.utils.set_random_seed") {
+    body <- bquote({
+      args <- capture_args2(.(transformers))
+      set.seed(args$seed)
+      do.call(.(py_obj_expr), args)
+    })
+  }
+
   # if(endpoint == "keras.preprocessing.image.save_img")
   if(endpoint == "keras.utils.save_img")
     frmls <- frmls[unique(c("x", "path", names(frmls)))] # swap so img is first arg, better for pipe

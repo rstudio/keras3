@@ -5,10 +5,9 @@ date-created: 2019/03/20
 last-modified: 2023/06/25
 description: Complete guide to writing new Keras callbacks.
 output: rmarkdown::html_vignette
-date: '2023-11-07'
+date: 'Last Modified: 2023-11-07; Last Rendered: 2023-11-07'
 vignette: '%\VignetteIndexEntry{Writing your own callbacks} %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}'
-
 ---
 
 Writing your own callbacks
@@ -169,7 +168,8 @@ model <- get_model()
 model |> fit(
   mnist$train$x, mnist$train$y,
   epochs = 2, verbose = 0, validation_split = 0.5,
-  callbacks = list(callback_custom()))
+  callbacks = list(callback_custom())
+)
 ## Starting training; got logs:  Named list()
 ## 
 ## Start epoch 0 of training; got logs:  Named list()
@@ -355,7 +355,11 @@ res <- model |> evaluate(
 ##  $ loss               : num 6.15
 ##  $ mean_absolute_error: num 2.04
 
-res <- model |> predict(mnist$test$x, callbacks = list(callback_custom()))
+res <- model |> predict(
+  mnist$test$x, 
+  verbose = 0,
+  callbacks = list(callback_custom())
+)
 ## Start predicting; got logs:  Named list()
 ## 
 ## ...Predicting: start of batch 0; got logs:  Named list()
@@ -394,8 +398,6 @@ res <- model |> predict(mnist$test$x, callbacks = list(callback_custom()))
 ##  $ outputs:<tf.Tensor: shape=(8, 1), dtype=float32, numpy=…>
 ## 
 ## Stop predicting; got logs:  Named list()
-## 
-## 7/7 - 0s - 7ms/step
 ```
 
 ### Usage of `logs` dict
