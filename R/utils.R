@@ -779,11 +779,18 @@ knit_vignette <- function(input, ..., output_dir) {
                      last_modified_date, format(Sys.Date()))
   # TODO: fm$date <- Last compiled on `r format(Sys.time(), '%d %B, %Y')`, last updated on `r system(git `
   # fm$date <- format(Sys.Date())
-  fm$vignette <- glue::glue_data(list(title = fm$title),
-    "%\\VignetteIndexEntry{<<title>>} %\\VignetteEngine{knitr::rmarkdown} %\\VignetteEncoding{UTF-8}",
-    .open = "<<", .close = ">>" )
+  vignette <- glue::glue_data(list(title = fm$title), .trim = FALSE,
+                              .open = "<<", .close = ">>",
+"vignette: >
+  %\\VignetteIndexEntry{<<title>>}
+  %\\VignetteEngine{knitr::rmarkdown}
+  %\\VignetteEncoding{UTF-8}")
 
-  x <- c("---", trimws(as.yaml(fm), "right"), "---", x[-(1:end_fm_i)])
+  # dumping vignette via as.yaml breaks downstream, the rd entry needs to be a block
+  fm <- as.yaml(fm) # has a trailing \n
+  fm <- paste0(fm, vignette)
+
+  x <- c("---", fm, "---", x[-(1:end_fm_i)])
   writeLines(x, output_file)
 }
 

@@ -6,8 +6,10 @@ last-modified: 2023/06/25
 description: Complete guide to writing new Keras callbacks.
 output: rmarkdown::html_vignette
 date: 'Last Modified: 2023-11-07; Last Rendered: 2023-11-07'
-vignette: '%\VignetteIndexEntry{Writing your own callbacks} %\VignetteEngine{knitr::rmarkdown}
-  %\VignetteEncoding{UTF-8}'
+vignette: >
+  %\VignetteIndexEntry{Writing your own callbacks}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
 ---
 
 Writing your own callbacks
