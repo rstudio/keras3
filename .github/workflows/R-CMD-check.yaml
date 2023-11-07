@@ -22,9 +22,9 @@ jobs:
       matrix:
         include:
 
-          # - {os: 'ubuntu-latest' , python: '3.9' , r: 'release'}
+          - {os: 'ubuntu-latest' , python: '3.9' , r: 'release'}
           - {os: 'ubuntu-latest' , python: '3.10', r: 'release'}
-          # - {os: 'ubuntu-latest' , python: '3.11', r: 'release'}
+          - {os: 'ubuntu-latest' , python: '3.11', r: 'release'}
 
           ## the happy path - default everything
           # - {os: 'ubuntu-latest' , tf: 'default', r: 'release'}
@@ -76,20 +76,13 @@ jobs:
           use-public-rspm: true
           Ncpus: '2L'
 
-      - name: Get Date
-        id: get-date
-        shell: bash
-        run: |
-          echo "year-week=$(date -u "+%Y-%U")" >> $GITHUB_OUTPUT
-          echo "date=$(date -u "+%F")"         >> $GITHUB_OUTPUT
-
       - uses: r-lib/actions/setup-r-dependencies@v2
         with:
           extra-packages: any::rcmdcheck, local::.
           cache-version: 1
           upgrade: 'TRUE'
 
-      - name: Install Tensorflow + Keras deps
+      - name: Install Keras
         run: keras::install_keras(python_version = '${{ matrix.python }}')
 
       - uses: r-lib/actions/check-r-package@v2
