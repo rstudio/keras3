@@ -5,15 +5,7 @@ date-created: 2019/03/20
 last-modified: 2023/06/25
 description: Complete guide to writing new Keras callbacks.
 accelerator: GPU
-output: rmarkdown::html_vignette
-vignette: >
-  %\VignetteIndexEntry{Writing your own callbacks}
-  %\VignetteEngine{knitr::rmarkdown}
-  %\VignetteEncoding{UTF-8}
-knit: >
-  (function(input, encoding) rmarkdown::render(
-    input, encoding=encoding,
-    output_file='03-rendered.md')))
+knit: keras:::knit_vignette
 ---
 
 ## Introduction
@@ -116,11 +108,12 @@ flatten_and_rescale <- function(x) {
 mnist$train$x <- flatten_and_rescale(mnist$train$x)
 mnist$test$x  <- flatten_and_rescale(mnist$test$x)
 
-# limit to 100 samples
-mnist$train$x <- mnist$train$x[1:200,]
-mnist$train$y <- mnist$train$y[1:200]
-mnist$test$x  <- mnist$test$x[1:200,]
-mnist$test$y  <- mnist$test$y[1:200]
+# limit to 500 samples
+n <- 200
+mnist$train$x <- mnist$train$x[1:n,]
+mnist$train$y <- mnist$train$y[1:n]
+mnist$test$x  <- mnist$test$x[1:n,]
+mnist$test$y  <- mnist$test$y[1:n]
 ```
 
 Now, define a simple custom callback that logs:
@@ -353,7 +346,7 @@ callback_custom_learning_rate_scheduler <- new_callback_class(
     # # Set the value back to the optimizer before this epoch starts
     optimizer <- self$model$optimizer
     optimizer$learning_rate <- scheduled_lr
-    cat(sprintf("\nEpoch %05d: Learning rate is %6.4f.\n", epoch, scheduled_lr))
+    cat(sprintf("\nEpoch %03d: Learning rate is %6.4f.\n", epoch, scheduled_lr))
   }
 )
 

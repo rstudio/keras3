@@ -3,6 +3,8 @@
 if(!"source:tools/utils.R" %in% search()) envir::attach_source("tools/utils.R")
 if(!"source:tools/translate-tools.R" %in% search()) envir::attach_source("tools/translate-tools.R")
 
+# TODO: set_random_seed() should set R seed too.
+
 # TODO:  self$model$stop_training <- TRUE should work. Need to avoid propogating `$<-` past first.
 # TODO: new_callback_class() should accept an empty final trailing , DONE
 #

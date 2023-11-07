@@ -729,6 +729,55 @@ named_list <- function(...)
             .check_assign = FALSE)
 
 
+knit_vignette <- function(input, ..., output_dir) {
+  # print(sys.call())
+  # stop()
+  if(getwd() != dirname(input)) {
+    message("Changing wd")
+    owd <- setwd(dirname(input))
+    on.exit(setwd(owd))
+  }
+
+
+  # ~/github/rstudio/keras/vignettes/writing_your_own_callbacks.Rmd
+  name <- basename(dirname(normalizePath(input)))
+  output_file <- normalizePath(sprintf("../../vignettes/%s.Rmd", name),
+                               mustWork = FALSE)
+
+  set.seed(1)
+  keras::set_random_seed(1)
+  knitr::opts_chunk$set(
+    collapse = TRUE,
+    comment = "##" #>
+  )
+  rmarkdown::render(
+    input,
+    output_format = rmarkdown::github_document(preserve_yaml = TRUE),#, ext = "Rmd"), #
+    # output_format = rmarkdown::md_document( preserve_yaml = TRUE, ext = "Rmd"), #
+    # output_format = rmarkdown::md_document(preserve_yaml = FALSE), # , ext = "Rmd"
+    output_file = output_file,
+    ...,
+    envir = new.env(parent = globalenv())
+  )
+  x <- readLines(output_file)
+  # if(length(grep("^knit: keras:::knit_vignette", x) -> i))
+    # x <- x[-i]
+  end_fm_i <- which(x == "---")[2]
+  x_fm <- x[2:(end_fm_i-1)]
+  yaml.load <- getExportedValue("yaml", "yaml.load")
+  as.yaml <- getExportedValue("yaml", "as.yaml")
+  fm <- yaml.load(x_fm)
+
+  fm$knit <- NULL
+  fm$output <- "rmarkdown::html_vignette"
+  fm$accelerator <- NULL
+  fm$date <- format(Sys.Date())
+  fm$vignette <- glue::glue_data(list(title = fm$title),
+    "%\\VignetteIndexEntry{<<title>>} %\\VignetteEngine{knitr::rmarkdown} %\\VignetteEncoding{UTF-8}",
+    .open = "<<", .close = ">>" )
+  x <- c("---", as.yaml(fm), "---", x[-(1:end_fm_i)])
+  writeLines(x, output_file)
+}
 
 
 # Generate a Random Array
