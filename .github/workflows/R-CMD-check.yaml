@@ -99,9 +99,13 @@ jobs:
 
       - uses: r-lib/actions/setup-r-dependencies@v2
         with:
-          extra-packages: any::rcmdcheck, local::.
+          extra-packages: any::rcmdcheck
+          # , local::.
           cache-version: 1
           # upgrade: 'TRUE'
+
+      - name: install keras r pkg (workaround pak bug in r-lib/actions/setup-r-dependencies)
+        run: remotes::install_local(dependencies = TRUE)
 
       - name: Install Tensorflow + Keras deps
         run: keras::install_keras(python_version = '${{ matrix.python }}')
