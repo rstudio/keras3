@@ -4,7 +4,7 @@
 #' @export
 new_metric_class <-
 function(classname, ..., initialize, update_state, result) {
-  members <- capture_args(match.call(), ignore = "classname")
+  members <- capture_args2(ignore = "classname")
   new_py_class(classname, members,
               inherit = keras::keras$metrics$Metric,
               parent_env = parent.frame())
@@ -14,7 +14,7 @@ function(classname, ..., initialize, update_state, result) {
 #' @export
 new_loss_class <-
 function(classname, ..., call = NULL) {
-  members <- capture_args(match.call(), ignore = "classname")
+  members <- capture_args2(ignore = "classname")
   members$call <- call
   new_py_class(classname, members,
               inherit = keras::keras$losses$Loss,
@@ -43,7 +43,7 @@ function(classname,
          on_train_batch_begin = NULL,
          on_train_batch_end = NULL) {
 
-  members <- capture_args(match.call(), ignore = "classname")
+  members <- capture_args2(ignore = "classname")
   members <- drop_nulls(members,
     names(which(vapply(formals(sys.function()), is.null, TRUE))))
 
@@ -60,7 +60,7 @@ function(classname, ...,
          initialize = NULL, call = NULL,
          train_step = NULL, predict_step = NULL, test_step = NULL,
          compute_loss = NULL, compute_metrics = NULL) {
-  members <- capture_args(match.call(), ignore = "classname")
+  members <- capture_args2(ignore = "classname")
   members <- drop_nulls(members,
     names(which(vapply(formals(sys.function()), is.null, TRUE))))
 
@@ -97,7 +97,7 @@ function(classname, ...,
 new_layer_class <-
 function(classname, ...,
          initialize = NULL, build = NULL, call = NULL, get_config = NULL) {
-  members <- capture_args(match.call(),  ignore = "classname")
+  members <- capture_args2(ignore = "classname")
   members <- drop_nulls(members,
     names(which(vapply(formals(sys.function()), is.null, TRUE))))
 

@@ -336,12 +336,16 @@ split_dots_named_unnamed <- function(dots) {
 
 assert_all_dots_named <- function(envir = parent.frame(), cl) {
 
-  x <- eval(quote(list(...)), envir)
-  if(!length(x))
-    return()
+  x <- evalq(eval(substitute(alist(...))), envir)
+  if (!length(x)) return()
+
+  if (identical(x[length(x)], list(quote(expr =))))
+    x[[length(x)]] <- NULL
+
+  if (!length(x)) return()
 
   x <- names(x)
-  if(is.character(x) && !anyNA(x) && all(x != ""))
+  if (is.character(x) && !anyNA(x) && all(x != ""))
     return()
 
   stop("All arguments provided to `...` must be named.\n",
@@ -440,12 +444,13 @@ capture_args <- function(cl, modifiers = NULL, ignore = NULL,
 
 #' @importFrom rlang quos eval_tidy
 capture_args2 <- function(modifiers = NULL, ignore = NULL, force = NULL) {
-  cl0 <- cl <- sys.call(-1L)
+  cl <- sys.call(-1L)
   envir <- parent.frame(1L)
   fn <- sys.function(-1L)
 
-  # match.call()
-  cl <- match.call(fn, cl0, expand.dots = TRUE, envir = parent.frame(2))
+  if (identical(cl[length(cl)], as.call(list(quote(expr = )))))
+    cl[[length(cl)]] <- NULL
+  cl <- match.call(fn, cl, expand.dots = TRUE, envir = parent.frame(2))
 
   fn_arg_nms <- names(formals(fn))
   known_args <- intersect(names(cl), fn_arg_nms)
@@ -459,6 +464,8 @@ capture_args2 <- function(modifiers = NULL, ignore = NULL, force = NULL) {
     # this might reorder args by assuming ... are last, but it doesn't matter
     # since everything is supplied as a keyword arg to the Python side anyway
     cl2 <- c(cl2, quote(...))
+    # use list2 to accept trailing empty `,`
+    cl2[[1]] <- quote(rlang::list2)
   }
 
   args <- eval(as.call(cl2), envir)
@@ -750,5 +757,3 @@ random_array <- function(..., gen = stats::runif) {
   dim <- unlist(c(...), use.names = FALSE)
   array(gen(prod(dim)), dim = dim)
 }
-
-
