@@ -198,6 +198,79 @@ list_endpoints <- function(
   unlist(lapply(module, .list_endpoints, depth = 1L))
 }
 
+
+filter_out_endpoint_aliases <- function(endpoints) {
+  stopifnot(is.character(endpoints))
+  # some endpoints are aliases. resolve unique endoints.
+  endpoints <-
+    endpoints %>%
+    tibble(endpoint = .) %>%
+    mutate(py_obj = map(endpoint, py_eval)) %>%
+
+    # filter non py objects, e.g., version strings
+    filter(map_lgl(py_obj, inherits, "python.builtin.object")) %>%
+
+    mutate(
+      id = map_chr(py_obj, py_id),
+      py_type = map_chr(py_obj, \(o) class(o) %>%
+                          grep("^python\\.builtin\\.", ., value = TRUE) %>%
+                          sub("python.builtin.", "", ., fixed = TRUE) %>%
+                          .[1])) %>%
+
+    # filter out literal aliases, i.e., identical py ids.
+    dplyr::group_split(id) %>%
+    map(\(df) {
+      if(nrow(df) == 1) return(df)
+      # for the pooling layer aliases, pick the longer/clearer name
+      if(all(grepl(r"(keras\.layers\.(Global)?(Avg|Average|Max)Pool(ing)?[1234]D)",
+                   df$endpoint)))
+        return(df |> slice_max(nchar(endpoint)))
+
+      # keep aliases of losses under metrics, for complete autocomplete with 'metric_'
+      if(all(df$endpoint |> str_detect("^keras\\.(metrics|losses)\\."))) {
+        # message("keeping aliases: ", str_flatten_comma(df$endpoint))
+        return(df)
+      }
+
+      # if(any(df$endpoint %>% str_detect("keras.ops.average_pool"))) browser()
+      return(df %>% filter(py_obj[[1]]$`_api_export_path`[[1]] == endpoint))
+
+
+      # otherwise, default to picking the shortest name, but most precise
+      # sort keras.preprocessing before keras.utils
+      df |>
+        mutate(
+          name = str_split(endpoint, fixed(".")) %>% map_chr(., ~.x[length(.x)]),
+          submodule = str_split(endpoint, fixed(".")) %>% map_chr(., ~.x[length(.x)-1])
+        ) |>
+        arrange(nchar(name), submodule) |>
+        slice(1)
+      # slice_min(nchar(endpoint), n = 1, with_ties = FALSE)
+    }) %>%
+    list_rbind() %>%
+
+    # filter duplicate endpoint names, where all that differs is capitalization.
+    # this mostly affects endpoints offered as both function and class handles:
+    # metrics, losses, and merging layers.
+    # if we have both functional and type api interfaces, we
+    # just want the type right now (we dynamically fetch the matching
+    # functional counterpart later as needed, e.g., metrics)
+    split(., snakecase::to_upper_camel_case(.$endpoint)) %>%
+    map(\(df) {
+      if(nrow(df) == 1) return(df)
+      # prefer names w/ more capital letters (i.e., the class handles)
+      i <- which.max(nchar(gsub("[^A-Z]*", "", df$endpoint)))
+      # message(sprintf("keep: %s drop: %s",
+      #                 str_pad(df$endpoint[i], 50, "right"),
+      #                 str_flatten_comma(df$endpoint[-i])))
+      df[i,]
+    }) %>%
+    list_rbind() %>%
+    .$endpoint %>% unlist()
+  endpoints
+}
+
+
 if(FALSE) {
   list_endpoints(c("keras.activations", "keras.regularizers"))
 
@@ -1419,6 +1492,144 @@ get_fixed_docstring <- function(endpoint) {
   # replace("Standalone usage:\n", "Examples:\n\nStandalone usage:\n")
   d
 }
+
+
+# ---- man-src ----
+
+
+
+format_py_signature <- function(x) {
+  if(is_string(x)) # endpoint
+    x <- py_eval(x)
+  if(!inherits(x, "inspect.Signature"))
+    x <- inspect$signature(x)
+
+  x <- py_str(x)
+  if(length(xc <- str_split_1(x, ",")) >= 4) {
+    x <- xc |> str_trim() |> str_flatten(",\n  ")
+    str_sub(x, 1, 1) <- "(\n  "
+    str_sub(x, -1, -1) <- "\n)"
+  }
+  as_glue(x)
+}
+
+# format_py_signature(keras$layers$Dense)
+# format_py_signature(keras$Model)
+
+
+format_man_src_0 <- function(endpoint) {
+  as_glue(str_flatten_lines(
+    endpoint,
+    "__signature__",
+    format_py_signature(endpoint),
+    "__doc__",
+    get_docstring(endpoint)
+  ))
+}
+
+# format_man_src_0("keras.Model")
+#
+# df %>%
+#   rowwise() %>%
+#   mutate(dump_man_src_0 = {
+#     dir_create(path("man-src", r_name))
+#     endpoint |>
+#       format_man_src_0() |>
+#       write_lines(path("man-src", r_name, "0-upstream.md"))
+#   })
+
+# unlink("man-src/k_absolute", recursive = T)
+
+git <- function(..., retries = 3) {
+  for(i in seq(retries)) {
+    res <- suppressWarnings(system2t("git", c(...)))
+    if(identical(res, 128L)) {
+      # probably .git/index.lock contention with vscode
+      Sys.sleep(.1)
+      next
+    } else if (identical(res, 0L)) {
+      break
+    } else {
+      cat("res <- "); dput(res)
+      stop("non-0 exit from git add")
+    }
+  }
+}
+
+man_src_pull_upstream_updates <- function(directories = dir_ls("man-src/", type = "directory")) {
+
+  vscode_settings <- og_vscode_settings <-
+    jsonlite::read_json(".vscode/settings.json")
+  vscode_settings %<>% modifyList(list("git.autorefresh" = FALSE,
+                                       "git.autofetch" = FALSE))
+  jsonlite::write_json(vscode_settings, ".vscode/settings.json")
+  withr::defer(jsonlite::write_json(og_vscode_settings, ".vscode/settings.json",
+                                    pretty = TRUE))
+
+  system("code -s", intern = TRUE) # force rereading of settings.json?
+
+  directories |>
+    set_names(dirname) |>
+    walk(\(dir) {
+      old_upstream <- read_lines(path(dir, "0-upstream.md"))
+      endpoint <- old_upstream[1]
+      old_upstream <- str_flatten_lines(old_upstream)
+      new_upstream <- format_man_src_0(endpoint)
+      if(new_upstream == old_upstream) return() # nothing to update
+
+      if (file.exists(dir / "2-translated.Rmd"))
+        git(
+          "diff -U1 --no-index",
+          "--diff-algorithm=minimal",
+          paste0("--output=", dir / "translate.patch"),
+          dir / "1-formatted.md",
+          dir / "2-translated.Rmd"
+        )
+
+      export <- mk_export(endpoint)
+      write_lines(export$roxygen, dir/"1-formatted.md")
+      write_lines(export$roxygen, dir/"2-translated.Rmd")
+
+      if (!file.exists(dir / "translate.patch") ||
+          !length(patch <- read_lines(dir / "translate.patch")))
+        return()
+
+      patch[c(1L, 3L)] %<>% str_replace(fixed("/1-formatted.md"), "/2-translated.Rmd")
+      # patch <- patch[-2] # drop index <hash>..<hash> line
+      write_lines(patch, dir / "translate.patch")
+
+      git("add", dir/"2-translated.Rmd")
+      git("apply --3way --recount --allow-empty", dir/"translate.patch")
+    })
+}
+
+
+man_src_render_translated <- function(directories = dir_ls("man-src/", type = "directory")) {
+
+  directories |>
+    as_fs_path() |>
+    set_names(basename) %>%
+    purrr::walk(\(dir) {
+      withr::local_dir(dir)
+      message("rendering: ", dir)
+      keras$utils$clear_session()
+      # Set knitr options to halt on errors
+      knitr::opts_chunk$set(error = FALSE)
+      knitr::knit("2-translated.Rmd",
+                  "3-rendered.md",
+                  quiet = TRUE,
+                  envir = new.env())
+      x <- read_lines("3-rendered.md")
+      # TODO: these filters should be confined to chunk outputs only,
+      # probably as a knitr hook
+      x <- x |> str_replace_all(" at 0x[0-9A-F]{9}>$", ">")
+      x <-
+        x[!str_detect(x, r"{## .*rstudio:run:reticulate::py_last_error\(\).*}")]
+      x |> write_lines("3-rendered.md")
+    })
+
+}
+
 
 # ---- misc utils ----
 
