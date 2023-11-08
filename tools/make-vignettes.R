@@ -133,20 +133,6 @@ tutobook_to_rmd <- function(path_to_tutobook, outfile = NULL, tutobook = NULL) {
 }
 
 
-guides <-
-  fetch_tutobook_filepaths %(% {
-    "~/github/keras-team/keras/guides"
-    "~/github/keras-team/keras-io/guides/keras_core"
-    "~/github/keras-team/keras-io/guides"
-  }
-
-examples <-
-  fetch_tutobook_filepaths %(% {
-    "~/github/keras-team/keras/examples/"
-    # "~/github/keras-team/keras-io/examples/"
-  }
-
-
 make_guide <- function(guide) {
   # guide == path to tutobook from upstream
   name <- guide |> path_file() |> path_ext_remove()
@@ -158,12 +144,6 @@ make_guide <- function(guide) {
   translated_path <- path("vignettes-src", name, "2-translated.Rmd")
   if(!file_exists(translated_path))
     file_copy(formatted_path, translated_path)
-  # file_copy(guide, path("vignettes-src", name, basename(guide)), overwrite = TRUE)
-  # file_copy(guide, , overwrite = TRUE)
-
-  # file_copy(guide, path("vignettes-src", name, "0-tutobook.py"), overwrite = TRUE)
-  # tutobook_to_rmd(guide, outfile = path(dir, "1-formatted.md"))
-  # tutobook_to_rmd(guide, outfile = path(dir, "2-translated.Rmd"))
 }
 
 vignettes_src_pull_upstream_updates <- function() {
@@ -209,36 +189,51 @@ vignettes_src_pull_upstream_updates <- function() {
     })
 }
 
+
+vignette_src_render_translated <-
+  function(directories = dir_ls("vignettes-src/", type = "directory")) {
+    directories |>
+      as_fs_path() |>
+      # set_names(basename) %>%
+      purrr::walk(\(dir) {
+        # withr::local_dir(dir)
+        message("rendering: ", dir)
+        keras$utils$clear_session()
+        # TODO: This should really be a callr call
+        # Set knitr options to halt on errors
+        knitr::opts_chunk$set(error = FALSE)
+        keras:::knit_vignette(dir / "2-translated.Rmd")
+      })
+  }
+
+
+guides <-
+  fetch_tutobook_filepaths %(% {
+    "~/github/keras-team/keras/guides"
+    "~/github/keras-team/keras-io/guides/keras_core"
+    "~/github/keras-team/keras-io/guides"
+  }
+
+examples <-
+  fetch_tutobook_filepaths %(% {
+    "~/github/keras-team/keras/examples/"
+    # "~/github/keras-team/keras-io/examples/"
+  }
+
+
+
 vignettes_src_pull_upstream_updates()
 
 lapply(guides, make_guide)
 # make_guide(guides[1])
 
+vignette_src_render_translated()
 
 # TODO: I should be using knitr::knit() directly, not rmarkdown::render()
 # to avoid reflowing/rewrapping prose lines.
 
 # TODO: there is an extra new line before ```{r} blocks in the translated rmd.
 
-vignette_src_render_translated <-
-function(directories = dir_ls("vignettes-src/", type = "directory")) {
-  message(deparse1(sys.call()))
-  directories |>
-    as_fs_path() |>
-    # set_names(basename) %>%
-    purrr::walk(\(dir) {
-      # withr::local_dir(dir)
-      message("rendering: ", dir)
-      keras$utils$clear_session()
-      # Set knitr options to halt on errors
-      # This should really be a callr
-      knitr::opts_chunk$set(error = FALSE)
-      keras:::knit_vignette(dir / "2-translated.Rmd")
-      # ~/github/rstudio/keras/vignettes-src/custom_train_step_in_jax/2-translated.Rmd
-    })
-}
-
-vignette_src_render_translated()
 
 stop("DONE", call. = FALSE)
 
