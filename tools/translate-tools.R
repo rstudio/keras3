@@ -3,8 +3,14 @@ if(!"source:tools/utils.R" %in% search()) envir::attach_source("tools/utils.R")
 
 readRenviron("~/.Renviron")
 import("os")$environ$update(list(OPENAI_API_KEY = Sys.getenv("OPENAI_API_KEY")))
+tryCatch({
+
 openai <- import("openai")
 tiktoken <- import("tiktoken")
+}, error = function(e) {
+  py_install(c("openai", "tiktoken"))
+  stop()
+})
 encoder <- tiktoken$encoding_for_model('gpt-4')
 
 count_tokens <- function(txt) {

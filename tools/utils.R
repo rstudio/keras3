@@ -220,6 +220,7 @@ filter_out_endpoint_aliases <- function(endpoints) {
     # filter out literal aliases, i.e., identical py ids.
     dplyr::group_split(id) %>%
     map(\(df) {
+      # browser()
       if(nrow(df) == 1) return(df)
       # for the pooling layer aliases, pick the longer/clearer name
       if(all(grepl(r"(keras\.layers\.(Global)?(Avg|Average|Max)Pool(ing)?[1234]D)",
@@ -233,7 +234,10 @@ filter_out_endpoint_aliases <- function(endpoints) {
       }
 
       # if(any(df$endpoint %>% str_detect("keras.ops.average_pool"))) browser()
-      return(df %>% filter(py_obj[[1]]$`_api_export_path`[[1]] == endpoint))
+      out <- try(df %>% filter(py_obj[[1]]$`_keras_api_names`[[1]] == endpoint))
+      if(inherits(out, "try-error"))
+         browser()
+      return(out)
 
 
       # otherwise, default to picking the shortest name, but most precise
@@ -1189,8 +1193,8 @@ known_metrics_without_function_handles <- c %(% {
 }
 
 
-mk_export <- memoise(function(endpoint) {
-
+mk_export <- memoise(.mk_export <- function(endpoint, quiet = FALSE) {
+  message(glue(".mk_export('{endpoint}', {quiet})"))
   # py parts
   py_obj <- py_eval(endpoint)
   name <- py_obj$`__name__`
@@ -1214,11 +1218,17 @@ mk_export <- memoise(function(endpoint) {
        endpoint |> startsWith("keras.metrics.")) &&
       inherits(py_obj, "python.builtin.type"))
     local({
+      # browser()
       # each metric and loss is provided as two handles: a function and a class
       # here, we fetch the matching function handle for the type handle
       # we make an export obj for this function handle, and then recursively
       # combine the docs and params from both.
       endpoint2 <- str_replace(endpoint, name, snakecase::to_snake_case(name))
+      if(endpoint == endpoint2) {
+        message("Function handle not found for: ", endpoint)
+        # if `name` not same as endpoint tail, e.g., keras.losses.Reduction / ReductionV2
+        return()
+      }
       py_obj2 <- NULL
       tryCatch(
         py_obj2 <- py_eval(endpoint2),
@@ -1229,7 +1239,7 @@ mk_export <- memoise(function(endpoint) {
       )
       if(is.null(py_obj2)) return()
 
-      ep2 <- mk_export(endpoint2)
+      ep2 <- mk_export(endpoint2, quiet = TRUE)
       # params <<- modifyList(params, ep2$params)
       for(nm in names(ep2$params)) {
         pdoc1 <- params[[nm]]; pdoc2 <- ep2$params[[nm]]
@@ -1287,12 +1297,11 @@ mk_export <- memoise(function(endpoint) {
     }
   })
 
-  if(!in_recursive_call())
+  if(!quiet)
     local({
       if (length(undocumented_params <-
                  setdiff(names(formals(r_fn)),
                          unlist(strsplit(names(params) %||% character(), ","))))) {
-        # browser()
         x <- list2("{endpoint}" := map(set_names(undocumented_params), ~"see description"))
         writeLines(yaml::as.yaml(x))
         # message(endpoint, ":")
@@ -1540,14 +1549,14 @@ format_man_src_0 <- function(endpoint) {
 
 # unlink("man-src/k_absolute", recursive = T)
 
-git <- function(..., retries = 3) {
+git <- function(..., retries = 3, valid_exit_codes = 0L) {
   for(i in seq(retries)) {
     res <- suppressWarnings(system2t("git", c(...)))
     if(identical(res, 128L)) {
       # probably .git/index.lock contention with vscode
       Sys.sleep(.1)
       next
-    } else if (identical(res, 0L)) {
+    } else if (any(map_lgl(valid_exit_codes, identical, res))) {
       break
     } else {
       cat("res <- "); dput(res)
@@ -1556,8 +1565,9 @@ git <- function(..., retries = 3) {
   }
 }
 
-man_src_pull_upstream_updates <- function(directories = dir_ls("man-src/", type = "directory")) {
 
+man_src_pull_upstream_updates <- function(directories = dir_ls("man-src/", type = "directory")) {
+  message(deparse1(sys.call()))
   vscode_settings <- og_vscode_settings <-
     jsonlite::read_json(".vscode/settings.json")
   vscode_settings %<>% modifyList(list("git.autorefresh" = FALSE,
@@ -1569,7 +1579,7 @@ man_src_pull_upstream_updates <- function(directories = dir_ls("man-src/", type 
   system("code -s", intern = TRUE) # force rereading of settings.json?
 
   directories |>
-    set_names(dirname) |>
+    set_names(basename) |>
     walk(\(dir) {
       old_upstream <- read_lines(path(dir, "0-upstream.md"))
       endpoint <- old_upstream[1]
@@ -1583,7 +1593,8 @@ man_src_pull_upstream_updates <- function(directories = dir_ls("man-src/", type 
           "--diff-algorithm=minimal",
           paste0("--output=", dir / "translate.patch"),
           dir / "1-formatted.md",
-          dir / "2-translated.Rmd"
+          dir / "2-translated.Rmd",
+          valid_exit_codes = c(0L, 1L)
         )
 
       export <- mk_export(endpoint)
@@ -1605,7 +1616,7 @@ man_src_pull_upstream_updates <- function(directories = dir_ls("man-src/", type 
 
 
 man_src_render_translated <- function(directories = dir_ls("man-src/", type = "directory")) {
-
+  message(deparse1(sys.call()))
   directories |>
     as_fs_path() |>
     # set_names(basename) %>%

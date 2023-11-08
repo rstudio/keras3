@@ -31,18 +31,19 @@ install_keras <- function(...,
   # return()
   # system2("python", "-m pip install tensorflow")
 
-  if(Sys.getenv("CI") == "true") {
+  if(Sys.getenv("CI") == "true" || !devel) {
     system2("python", "-m pip install tf-nightly keras-nightly")
+    message("DONE")
     return()
     # system2("python", "-m pip uninstall keras")
     # system2("python", "-m pip install keras-nightly tf-nightly")
   }
 
-  if(!devel) {
-    system2("python", "-m pip install keras-nightly tf-nightly")
-    message("DONE")
-    return()
-  }
+  # if(!devel) {
+  #   system2("python", "-m pip install keras-nightly tf-nightly")
+  #   message("DONE")
+  #   return()
+  # }
 
 
   # withr::local_dir(withr::local_tempdir())

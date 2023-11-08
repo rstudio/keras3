@@ -115,11 +115,13 @@ endpoints <- list_endpoints(skip = c(
   "keras.applications",
   "keras.legacy",
   "keras.distribution",  # multi-host multi-device training
+  "keras.protobuf", # ???
 
   "keras.datasets",            # datasets unchanged, no need to autogen
   "keras.preprocessing.text",  # deprecated
   "keras.estimator",           # deprecated
   "keras.optimizers.legacy",
+
 
   "keras.src"                  # internal
 )) %>%
