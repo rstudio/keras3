@@ -34,5 +34,6 @@ the left and right splits.
 @param seed A random seed for shuffling.
 
 @export
+@family utils
 @seealso
 + <https://www.tensorflow.org/api_docs/python/tf/keras/utils/split_dataset>

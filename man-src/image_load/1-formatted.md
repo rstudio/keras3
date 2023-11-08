@@ -30,5 +30,6 @@ predictions = model.predict(input_arr)
     the center with target aspect ratio before resizing.
 
 @export
+@family utils
 @seealso
 + <https://www.tensorflow.org/api_docs/python/tf/keras/utils/load_img>

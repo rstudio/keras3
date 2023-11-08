@@ -112,5 +112,6 @@ Rules regarding number of channels in the yielded images:
     otherwise either 'channel_last' or 'channel_first'.
 
 @export
+@family utils
 @seealso
 + <https://www.tensorflow.org/api_docs/python/tf/keras/utils/image_dataset_from_directory>

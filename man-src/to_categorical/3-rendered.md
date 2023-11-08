@@ -40,5 +40,6 @@ axis is placed last.
     as `max(x) + 1`. Defaults to `None`.
 
 @export
+@family utils
 @seealso
 + <https://www.tensorflow.org/api_docs/python/tf/keras/utils/to_categorical>

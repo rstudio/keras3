@@ -26,5 +26,6 @@ might leverage NumPy APIs.
 @param seed Integer, the random seed to use.
 
 @export
+@family utils
 @seealso
 + <https://www.tensorflow.org/api_docs/python/tf/keras/utils/set_random_seed>

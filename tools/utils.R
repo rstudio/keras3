@@ -532,6 +532,8 @@ make_roxygen_tags <- function(endpoint, py_obj, type) {
     family <- "ops"
   else if (endpoint |> startsWith("keras.activation"))
     family <- "activation functions"
+  else if (endpoint |> startsWith("keras.utils"))
+    family <- "utils"
   else
     family <- type
 

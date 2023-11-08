@@ -22,5 +22,6 @@ a `pydot.Cluster` instance representing nested model if
 @param ... Passed on to the Python callable
 
 @export
+@family utils
 @seealso
 + <https://www.tensorflow.org/api_docs/python/tf/keras/utils/model_to_dot>

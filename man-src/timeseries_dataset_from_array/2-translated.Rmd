@@ -109,5 +109,6 @@ for batch in zip(input_dataset, target_dataset):
     This is useful to reserve part of the data for test or validation.
 
 @export
+@family utils
 @seealso
 + <https://www.tensorflow.org/api_docs/python/tf/keras/utils/timeseries_dataset_from_array>

@@ -12,5 +12,6 @@ object is not registered.
 @param obj The object to look up.
 
 @export
+@family utils
 @seealso
 + <https://www.tensorflow.org/api_docs/python/tf/keras/utils/get_registered_name>

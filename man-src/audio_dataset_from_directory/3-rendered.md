@@ -86,5 +86,6 @@ Rules regarding labels format:
     Defaults to `False`.
 
 @export
+@family utils
 @seealso
 + <https://www.tensorflow.org/api_docs/python/tf/keras/utils/audio_dataset_from_directory>

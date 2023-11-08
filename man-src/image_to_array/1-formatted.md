@@ -23,5 +23,6 @@ array = keras.utils.image.img_to_array(img)
     defaults to `"float32"`).
 
 @export
+@family utils
 @seealso
 + <https://www.tensorflow.org/api_docs/python/tf/keras/utils/img_to_array>

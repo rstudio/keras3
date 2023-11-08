@@ -24,5 +24,6 @@ pil_img = keras.utils.array_to_img(img)
     defaults to `"float32"`). Defaults to `None`.
 
 @export
+@family utils
 @seealso
 + <https://www.tensorflow.org/api_docs/python/tf/keras/utils/array_to_img>

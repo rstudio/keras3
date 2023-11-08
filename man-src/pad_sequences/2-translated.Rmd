@@ -64,5 +64,6 @@ keras.utils.pad_sequences(sequence, maxlen=2)
 @param value Float or String, padding value. (Optional, defaults to 0.)
 
 @export
+@family utils
 @seealso
 + <https://www.tensorflow.org/api_docs/python/tf/keras/utils/pad_sequences>

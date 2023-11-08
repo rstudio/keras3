@@ -709,6 +709,35 @@ x
 # layer_alpha_dropout
 # layer_activation_thresholded_relu
 
+# TODO: "activation layers" not "activations layers" as a family tag
+
+
+# map_chr(df$tags, ~.x$"family" %||% '') %>% unique() %>% writeLines()
+# activation functions
+# callback
+
+# core layers
+# convolutional layers
+# pooling layers
+# activations layers
+# merging layers
+# normalization layers
+# reshaping layers
+# attention layers
+# preprocessing layers
+# regularization layers
+# recurrent layers
+
+
+# constraint
+# initializer
+# loss
+# metric
+# ops
+# optimizer
+# learning_rate_schedule
+
+
 make_r_fn("keras.layers.PReLU")
 
 mk_export("keras.layers.PReLU")

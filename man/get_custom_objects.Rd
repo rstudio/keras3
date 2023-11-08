@@ -25,4 +25,28 @@ get_custom_objects()$update(list(MyObject = MyObject))
 \itemize{
 \item \url{https://www.tensorflow.org/api_docs/python/tf/keras/utils/get_custom_objects}
 }
+
+Other utils: 
+\code{\link{audio_dataset_from_directory}()},
+\code{\link{clear_session}()},
+\code{\link{get_file}()},
+\code{\link{get_registered_name}()},
+\code{\link{get_registered_object}()},
+\code{\link{get_source_inputs}()},
+\code{\link{image_array_save}()},
+\code{\link{image_dataset_from_directory}()},
+\code{\link{image_from_array}()},
+\code{\link{image_load}()},
+\code{\link{image_to_array}()},
+\code{\link{model_to_dot}()},
+\code{\link{normalize}()},
+\code{\link{pack_x_y_sample_weight}()},
+\code{\link{pad_sequences}()},
+\code{\link{set_random_seed}()},
+\code{\link{split_dataset}()},
+\code{\link{text_dataset_from_directory}()},
+\code{\link{timeseries_dataset_from_array}()},
+\code{\link{to_categorical}()},
+\code{\link{unpack_x_y_sample_weight}()}
 }
+\concept{utils}

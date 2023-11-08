@@ -57,5 +57,6 @@ are getting is the one you expect.
     defaults to `Sys.getenv("KERAS_HOME", '~/.keras/')`.
 
 @export
+@family utils
 @seealso
 + <https://www.tensorflow.org/api_docs/python/tf/keras/utils/get_file>

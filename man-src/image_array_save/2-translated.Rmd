@@ -11,5 +11,6 @@ Saves an image stored as a NumPy array to a path or file object.
 @param ... Additional keyword arguments passed to `PIL.Image.save()`.
 
 @export
+@family utils
 @seealso
 + <https://www.tensorflow.org/api_docs/python/tf/keras/utils/save_img>

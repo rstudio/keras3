@@ -15,5 +15,6 @@ get_custom_objects()['MyObject'] = MyObject
     Global dictionary mapping registered class names to classes.
 
 @export
+@family utils
 @seealso
 + <https://www.tensorflow.org/api_docs/python/tf/keras/utils/get_custom_objects>

@@ -41,5 +41,6 @@ print(new_layer.name)
 ```
 
 @export
+@family utils
 @seealso
 + <https://www.tensorflow.org/api_docs/python/tf/keras/utils/clear_session>

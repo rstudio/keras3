@@ -10,5 +10,6 @@ Output will always be a list of tensors
 @param tensor The tensor to start from.
 
 @export
+@family utils
 @seealso
 + <https://www.tensorflow.org/api_docs/python/tf/keras/utils/get_source_inputs>

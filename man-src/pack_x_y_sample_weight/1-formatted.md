@@ -27,5 +27,6 @@ x, y = data
 @param sample_weight Sample weight for each element.
 
 @export
+@family utils
 @seealso
 + <https://www.tensorflow.org/api_docs/python/tf/keras/utils/pack_x_y_sample_weight>

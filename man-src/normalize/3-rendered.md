@@ -12,5 +12,6 @@ If it's a backend tensor, a backend tensor will be returned.
 @param order Normalization order (e.g. `order=2` for L2 norm).
 
 @export
+@family utils
 @seealso
 + <https://www.tensorflow.org/api_docs/python/tf/keras/utils/normalize>
