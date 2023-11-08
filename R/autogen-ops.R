@@ -881,6 +881,17 @@ function (x, offset = 0L, axis1 = 0L, axis2 = 1L)
 }
 
 
+"man-src/k_diff/1-formatted.md" # view the upstream doc
+"man-src/k_diff/2-translated.Rmd" # |>file.edit() # or cmd+click to edit man page
+#' @eval readLines("man-src/k_diff/3-rendered.md")
+k_diff <-
+function (a, n = 1L, axis = -1L)
+{
+    args <- capture_args2(list(n = as_integer, axis = as_axis))
+    do.call(keras$ops$diff, args)
+}
+
+
 "man-src/k_digitize/1-formatted.md" # view the upstream doc
 "man-src/k_digitize/2-translated.Rmd" # |>file.edit() # or cmd+click to edit man page
 #' @eval readLines("man-src/k_digitize/3-rendered.md")

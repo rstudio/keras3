@@ -105,6 +105,7 @@ Other ops:
 \code{\link{k_cumsum}()},
 \code{\link{k_diagonal}()},
 \code{\link{k_diag}()},
+\code{\link{k_diff}()},
 \code{\link{k_digitize}()},
 \code{\link{k_divide}()},
 \code{\link{k_dot}()},

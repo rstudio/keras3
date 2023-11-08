@@ -1608,7 +1608,7 @@ man_src_render_translated <- function(directories = dir_ls("man-src/", type = "d
 
   directories |>
     as_fs_path() |>
-    set_names(basename) %>%
+    # set_names(basename) %>%
     purrr::walk(\(dir) {
       withr::local_dir(dir)
       message("rendering: ", dir)
@@ -1623,8 +1623,7 @@ man_src_render_translated <- function(directories = dir_ls("man-src/", type = "d
       # TODO: these filters should be confined to chunk outputs only,
       # probably as a knitr hook
       x <- x |> str_replace_all(" at 0x[0-9A-F]{9}>$", ">")
-      x <-
-        x[!str_detect(x, r"{## .*rstudio:run:reticulate::py_last_error\(\).*}")]
+      x <- x[!str_detect(x, r"{## .*rstudio:run:reticulate::py_last_error\(\).*}")]
       x |> write_lines("3-rendered.md")
     })
 

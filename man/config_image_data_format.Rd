@@ -13,7 +13,10 @@ A string, either \code{'channels_first'} or \code{'channels_last'}.
 Return the default image data format convention.
 }
 \section{Examples}{
-\if{html}{\out{<div class="sourceCode">}}\preformatted{keras::config_image_data_format()
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{config_image_data_format()
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode">}}\preformatted{## [1] "channels_last"
 }\if{html}{\out{</div>}}
 }
 

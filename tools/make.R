@@ -267,9 +267,10 @@ df |>
 
 
 man_src_pull_upstream_updates()
+
+devtools::load_all() # TODO: render should be w/ an installed package and in a fresh r session w/ only `library(keras)`
 man_src_render_translated()
 
-devtools::load_all()
 devtools::document(roclets = c('rd', 'namespace'))
 
 stop("DONE", call. = FALSE)
