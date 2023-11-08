@@ -102,6 +102,86 @@ if(!"source:tools/translate-tools.R" %in% search()) envir::attach_source("tools/
 
 # start by regenerating patch files
 
+
+format_py_signature <- function(x) {
+  if(!inherits(x, "inspect.Signature"))
+    x <- inspect$signature(x)
+
+  x <- py_str(x)
+  if(length(xc <- str_split_1(x, ",")) >= 4) {
+    x <- xc |> str_trim() |> str_flatten(",\n  ")
+    str_sub(x, 1, 1) <- "(\n  "
+    str_sub(x, -1, -1) <- "\n)"
+  }
+  as_glue(x)
+}
+
+format_py_signature(keras$layers$Dense) |> cat()
+format_py_signature(keras$Model) |> cat()
+
+
+format_man_src_0 <- function(endpoint) {
+  py_obj <- py_eval(endpoint)
+  as_glue(str_flatten_lines(
+    endpoint,
+    "__signature__",
+    format_py_signature(py_obj),
+    "__doc__",
+    get_docstring(endpoint)
+  ))
+}
+
+format_man_src_0("keras.Model")
+
+df %>%
+  rowwise() %>%
+  mutate(dump_man_src_0 = {
+    dir_create(path("man-src", r_name))
+    endpoint |>
+      format_man_src_0() |>
+      write_lines(path("man-src", r_name, "0-upstream.md"))
+  })
+
+#
+# man_src_pull_upstream_updates <- function() {
+#   fs::dir_ls("man-src/", type = "directory") |>
+#     # head(3) |>
+#     # keep(~str_detect(.x, "backup|_elu|_relu")) %>%
+#     set_names(dirname) |>
+#     walk(\(dir) {
+#       withr::local_dir(dir)
+#       og <- read_lines(dir_ls(glob = "0-*"))
+#
+#       # withr::with_dir(dir, {
+#       #   # timestamps don't work because the translation file gets rewritten.
+#       #   doesnt_need_update <- file_exists("translate.patch") &&
+#       #       file_info("2-translated.Rmd")$change_time < file_info("translate.patch")$birth_time
+#       #   }
+#       # )
+#       # if(doesnt_need_update) return()
+#       # message("updating patchfile: ", dir)
+#       diff <- suppressWarnings( # returns 1 on diff
+#         system2t("git", c("diff -U1 --no-index",
+#                           # "--diff-algorithm=minimal",
+#                           glue("--output={dir}/translate.patch"),
+#                           dir / "1-formatted.md", dir / "2-translated.Rmd")))
+#       patch_filepath <- dir/"translate.patch"
+#       patch <- read_lines(patch_filepath)
+#       if(!length(patch)) return()
+#       # if(grepl("hard_sigmoi", dir)) browser()
+#       patch <- patch[-2] # drop index <hash>..<hash> line
+#       patch[1:3] <- str_replace(patch[1:3], fixed("/1-formatted.md"), "/2-translated.Rmd")
+#       write_lines(patch, patch_filepath)
+#     }
+#
+#
+# man_src_render
+#
+# vignettes_src_pull_upstream_updates
+# vignettes_src_render
+
+
+
 make_translation_patchfiles <- function() {
   fs::dir_ls("man-src/", type = "directory") |>
     # head(3) |>

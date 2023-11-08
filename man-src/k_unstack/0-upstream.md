@@ -1,0 +1,20 @@
+keras.ops.unstack
+__signature__
+(x, num=None, axis=0)
+__doc__
+Unpacks the given dimension of a rank-R tensor into rank-(R-1) tensors.
+
+Args:
+    x: The input tensor.
+    num: The length of the dimension axis. Automatically inferred
+        if `None`.
+    axis: The axis along which to unpack.
+
+Returns:
+    A list of tensors unpacked along the given axis.
+
+Example:
+
+>>> x = keras.ops.array([[1, 2], [3, 4]])
+>>> keras.ops.unstack(x, axis=0)
+[array([1, 2]), array([3, 4])]

@@ -1,0 +1,15 @@
+keras.ops.sum
+__signature__
+(x, axis=None, keepdims=False)
+__doc__
+Sum of a tensor over the given axes.
+
+Args:
+    x: Input tensor.
+    axis: Axis or axes along which the sum is computed. The default is to
+        compute the sum of the flattened tensor.
+    keepdims: If this is set to `True`, the axes which are reduced are left
+        in the result as dimensions with size one.
+
+Returns:
+    Output tensor containing the sum.

@@ -1,0 +1,25 @@
+keras.ops.dot
+__signature__
+(x1, x2)
+__doc__
+Dot product of two tensors.
+
+- If both `x1` and `x2` are 1-D tensors, it is inner product of vectors
+  (without complex conjugation).
+- If both `x1` and `x2` are 2-D tensors, it is matrix multiplication.
+- If either `x1` or `x2` is 0-D (scalar), it is equivalent to `x1 * x2`.
+- If `x1` is an N-D tensor and `x2` is a 1-D tensor, it is a sum product
+  over the last axis of `x1` and `x2`.
+- If `x1` is an N-D tensor and `x2` is an M-D tensor (where `M>=2`),
+  it is a sum product over the last axis of `x1` and the second-to-last
+  axis of `x2`: `dot(x1, x2)[i,j,k,m] = sum(a[i,j,:] * b[k,:,m])`.
+
+Args:
+    x1: First argument.
+    x2: Second argument.
+
+Note:
+    Torch backend does not accept 0-D tensors as arguments.
+
+Returns:
+    Dot product of `x1` and `x2`.

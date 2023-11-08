@@ -1,0 +1,24 @@
+keras.ops.in_top_k
+__signature__
+(targets, predictions, k)
+__doc__
+Checks if the targets are in the top-k predictions.
+
+Args:
+    targets: A tensor of true labels.
+    predictions: A tensor of predicted labels.
+    k: An integer representing the number of predictions to consider.
+
+Returns:
+    A boolean tensor of the same shape as `targets`, where each element
+    indicates whether the corresponding target is in the top-k predictions.
+
+Example:
+
+>>> targets = keras.ops.convert_to_tensor([2, 5, 3])
+>>> predictions = keras.ops.convert_to_tensor(
+... [[0.1, 0.4, 0.6, 0.9, 0.5],
+...  [0.1, 0.7, 0.9, 0.8, 0.3],
+...  [0.1, 0.6, 0.9, 0.9, 0.5]])
+>>> in_top_k(targets, predictions, k=3)
+array([ True False  True], shape=(3,), dtype=bool)

@@ -1,0 +1,18 @@
+keras.ops.tensordot
+__signature__
+(x1, x2, axes=2)
+__doc__
+Compute the tensor dot product along specified axes.
+
+Args:
+    x1: First tensor.
+    x2: Second tensor.
+    axes: - If an integer, N, sum over the last N axes of `x1` and the
+            first N axes of `x2` in order. The sizes of the corresponding
+            axes must match.
+          - Or, a list of axes to be summed over, first sequence applying
+            to `x1`, second to `x2`. Both sequences must be of the
+            same length.
+
+Returns:
+    The tensor dot product of the inputs.

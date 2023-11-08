@@ -1,0 +1,26 @@
+keras.activations.elu
+__signature__
+(x, alpha=1.0)
+__doc__
+Exponential Linear Unit.
+
+The exponential linear unit (ELU) with `alpha > 0` is define as:
+
+- `x` if `x > 0`
+- alpha * `exp(x) - 1` if `x < 0`
+
+ELUs have negative values which pushes the mean of the activations
+closer to zero.
+
+Mean activations that are closer to zero enable faster learning as they
+bring the gradient closer to the natural gradient.
+ELUs saturate to a negative value when the argument gets smaller.
+Saturation means a small derivative which decreases the variation
+and the information that is propagated to the next layer.
+
+Args:
+    x: Input tensor.
+
+Reference:
+
+- [Clevert et al., 2016](https://arxiv.org/abs/1511.07289)

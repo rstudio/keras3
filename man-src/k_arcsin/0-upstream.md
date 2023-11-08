@@ -1,0 +1,17 @@
+keras.ops.arcsin
+__signature__
+(x)
+__doc__
+Inverse sine, element-wise.
+
+Args:
+    x: Input tensor.
+
+Returns:
+    Tensor of the inverse sine of each element in `x`, in radians and in
+    the closed interval `[-pi/2, pi/2]`.
+
+Example:
+>>> x = keras.ops.convert_to_tensor([1, -1, 0])
+>>> keras.ops.arcsin(x)
+array([ 1.5707964, -1.5707964,  0.], dtype=float32)

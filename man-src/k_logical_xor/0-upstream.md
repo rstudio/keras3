@@ -1,0 +1,12 @@
+keras.ops.logical_xor
+__signature__
+(x1, x2)
+__doc__
+Compute the truth value of `x1 XOR x2`, element-wise.
+
+Args:
+    x1: First input tensor.
+    x2: Second input tensor.
+
+Returns:
+    Output boolean tensor.

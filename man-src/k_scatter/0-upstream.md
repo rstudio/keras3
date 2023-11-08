@@ -1,0 +1,27 @@
+keras.ops.scatter
+__signature__
+(indices, values, shape)
+__doc__
+Returns a tensor of shape `shape` where `indices` are set to `values`.
+
+At a high level, this operation does `zeros[indices] = updates` and
+returns the output. It is equivalent to:
+
+```python
+zeros = keras.ops.zeros(shape)
+output = keras.ops.scatter_update(zeros, indices, values)
+```
+
+Args:
+    indices: A tensor or list/tuple specifying
+        indices for the values in `values`.
+    values: A tensor, the values to be set at `indices`.
+    shape: Shape of the output tensor.
+
+Example:
+
+>>> indices = [[0, 1], [1, 1]]
+>>> values = np.array([1., 1.])
+>>> keras.ops.scatter(indices, values, shape=(2, 2))
+array([[0., 1.],
+       [0., 1.]])
