@@ -23,3 +23,4 @@ inst/doc
 .Renviron
 revdep
 debug.py
+man-src/*/translate.patch
