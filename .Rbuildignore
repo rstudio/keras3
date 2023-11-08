@@ -1,7 +1,7 @@
 ^.*\.Rproj$
 ^\.Rproj\.user$
-^man-roxygen/
-^man-src/
+^man-roxygen$
+^man-src$
 ^resources/
 ^.*\.hdf5$
 ^README\.R?md$
@@ -12,7 +12,7 @@
 ^runs$
 ^issues$
 ^external$
-^vignettes-src/
+^vignettes-src$
 ^vignettes/examples$
 ^vignettes/new-guides$
 ^vignettes/learn\.Rmd$

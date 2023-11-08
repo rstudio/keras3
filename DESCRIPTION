@@ -35,7 +35,6 @@ Imports:
     magrittr,
     zeallot,
     glue,
-    methods,
     R6,
     rlang
 Suggests:

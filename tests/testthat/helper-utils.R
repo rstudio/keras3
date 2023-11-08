@@ -84,8 +84,7 @@ test_call_succeeds <- function(call_name, expr, required_version = NULL) {
 }
 
 is_backend <- function(name) {
-  if (keras$`__name__` == "keras_core" ||
-     package_version(keras$`__version__`) >= "3.0.0")
+  if (keras_version() >= "3.0")
     backend <- keras$config$backend()
   else
     backend <- backend()$backend()
