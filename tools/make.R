@@ -122,7 +122,6 @@ endpoints <- list_endpoints(skip = c(
   "keras.estimator",           # deprecated
   "keras.optimizers.legacy",
 
-
   "keras.src"                  # internal
 )) %>%
   c(list_endpoints("keras.applications", max_depth = 0)) %>%
@@ -189,16 +188,16 @@ df <- exports |>
 
 df <- df |>
   mutate(
-    man_roxygen_dir = path("man-src", r_name),
+    man_src_dir = path("man-src", r_name),
     endpoint_sans_name = str_extract(endpoint, "keras\\.(.*)\\.[^.]+$", 1))
 
-if(!all(dir_exists(df$man_roxygen_dir))) {
+if(!all(dir_exists(df$man_src_dir))) {
   df |>
-    filter(!dir_exists(man_roxygen_dir)) |>
+    filter(!dir_exists(man_src_dir)) |>
     rowwise() |>
-    mutate(init_man_roxygen_dir = {
+    mutate(init_man_src_dir = {
       # browser()
-      man_roxygen_dir |>
+      man_src_dir |>
         dir_create() |>
         withr::with_dir({
           write_lines(format_man_src_0(endpoint), "0-upstream.md")
@@ -221,8 +220,6 @@ df <- df |>
                         str_c(endpoint_sans_name %>% str_replace_all(fixed("."), "-"), ".R"))
   )
 
-# stop("lllll")
-# ?? TODO: where is ~/github/rstudio/keras/R/autogen-preprocessing.R coming from?
 
 df |>
   group_by(file) |>
@@ -231,22 +228,11 @@ df |>
     txt <- df |>
       rowwise() |>
       mutate(final_dump = str_flatten_lines(
-        # glue("# {endpoint}"),
-        # glue("# {module}.{name}"),
 
-        # str_c('r"-(', py_obj$`__doc__`, ')-"'),
-        # str_c('r"-(', docstring, ')-"'),
+        glue(r"--("{fs::path(man_src_dir, "1-formatted.md")}" # view the upstream doc)--"),
+        glue(r"--("{fs::path(man_src_dir, "2-translated.Rmd")}" # |>file.edit() # or cmd+click to edit man page)--"),
 
-        # str_c("#' ", readLines(fs::path(man_roxygen_dir, "2-translated.Rmd"))),
-        # glue(r"--(#' @eval readLines("{fs::path(man_roxygen_dir, "2-translated.Rmd")}") )--"),
-
-        # glue(r"--(#        file.edit("{fs::path(man_roxygen_dir, "2-translated.Rmd")}") )--"),
-        glue(r"--("{fs::path(man_roxygen_dir, "1-formatted.md")}" # view the upstream doc)--"),
-        glue(r"--("{fs::path(man_roxygen_dir, "2-translated.Rmd")}" # |>file.edit() # or cmd+click to edit man page)--"),
-
-        # glue(r"--(file.edit("{fs::path(man_roxygen_dir, "2-translated.Rmd")}"))--") %>% cli::style_hyperlink(., paste0("ide:run:", .)),
-        glue(r"--(#' @eval readLines("{fs::path(man_roxygen_dir, "3-rendered.md")}") )--"),
-        # glue(r"--(#' @backref "{fs::path(man_roxygen_dir, "2-translated.Rmd")}" )--"),
+        glue(r"--(#' @eval readLines("{fs::path(man_src_dir, "3-rendered.md")}") )--"),
         str_c(r_name, " <- "),
         deparse(r_fn),
         ""
@@ -293,19 +279,6 @@ man_src_render_translated()
 devtools::document(roclets = c('rd', 'namespace'))
 
 stop("DONE", call. = FALSE)
-
-
-# stages:
-# 1. make patchfile containing changes required from 1-formatted.md to 2-translated.md
-# 2. writeout new original.md, formatted.md
-# 3. apply patchfile
-# 4. render translated
-
-
-# dir_ls("man-src") %>%
-# man_src_compile <- function() {
-# }
-
 
 
 # {
@@ -523,9 +496,9 @@ local({
 
 
 
-update_man_roxygen_dir <- function(ex) {
+update_man_src_dir <- function(ex) {
   message("updating ", ex$r_name)
-  withr::local_dir(ex$man_roxygen_dir)
+  withr::local_dir(ex$man_src_dir)
   # old_docstring <- "0-docstring.md" |> readLines() |> str_flatten_lines()
   # is_changed <- ex$docstring != old_docstring
   # if(!is_changed) {
@@ -556,11 +529,11 @@ update_man_roxygen_dir <- function(ex) {
 
 augment_export <- function(ex) {
 
-  ex$man_roxygen_dir <- glue("man-src/{ex$r_name}/")
-  if (fs::dir_exists(ex$man_roxygen_dir))
-    update_man_roxygen_dir(ex)
+  ex$man_src_dir <- glue("man-src/{ex$r_name}/")
+  if (fs::dir_exists(ex$man_src_dir))
+    update_man_src_dir(ex)
   else
-    make_new_man_roxygen_dir(ex)
+    make_new_man_src_dir(ex)
   ex
 }
 
@@ -628,7 +601,7 @@ stop("DONE", call. = FALSE)
 
 
 # df <- df %>%
-#   mutate(man_roxygen_dir = fs::dir_create(glue("man-src2/{r_name}/")))
+#   mutate(man_src_dir = fs::dir_create(glue("man-src2/{r_name}/")))
 
 
 
@@ -642,7 +615,7 @@ ex2 <- augment_export(exports$keras.activations.elu)
 
 
 
-setwd(ex2$man_roxygen_dir)
+setwd(ex2$man_src_dir)
 rmarkdown::render("2-translated.Rmd", #run_pandoc =
                   # output_format = "github_document",
                   output_format = rmarkdown::github_document(
@@ -672,7 +645,7 @@ if(FALSE) {
 
   df %>%
     rowwise() %>%
-    mutate(write_out = withr::with_dir(man_roxygen_dir, {
+    mutate(write_out = withr::with_dir(man_src_dir, {
       writeLines(docstring, "0-docstring.md")
       writeLines(roxygen, "roxygen_intermediate.md")
       writeLines(roxygen, "2-translated.Rmd")
@@ -895,8 +868,8 @@ str()
   max_openai_calls <- 1L
 
 
-  make_new_man_roxygen_dir <- function(ex) {
-    ex$man_roxygen_dir |>
+  make_new_man_src_dir <- function(ex) {
+    ex$man_src_dir |>
       fs::dir_create() |>
       withr::local_dir()
 
