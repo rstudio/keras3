@@ -5,31 +5,28 @@ date-created: 2019/03/20
 last-modified: 2023/06/25
 description: Complete guide to writing new Keras callbacks.
 output: rmarkdown::html_vignette
-date: 'Last Modified: 2023-11-07; Last Rendered: 2023-11-07'
+date: 'Last Modified: 2023-11-08; Last Rendered: 2023-11-08'
 vignette: >
   %\VignetteIndexEntry{Writing your own callbacks}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
 
-Writing your own callbacks
-================
-
 ## Introduction
 
-A callback is a powerful tool to customize the behavior of a Keras model
-during training, evaluation, or inference. Examples include
-`keras.callbacks.TensorBoard` to visualize training progress and results
-with TensorBoard, or `keras.callbacks.ModelCheckpoint` to periodically
-save your model during training.
+A callback is a powerful tool to customize the behavior of a Keras model during
+training, evaluation, or inference. Examples include `keras.callbacks.TensorBoard`
+to visualize training progress and results with TensorBoard, or
+`keras.callbacks.ModelCheckpoint` to periodically save your model during training.
 
-In this guide, you will learn what a Keras callback is, what it can do,
-and how you can build your own. We provide a few demos of simple
-callback applications to get you started.
+In this guide, you will learn what a Keras callback is, what it can do, and how you can
+build your own. We provide a few demos of simple callback applications to get you
+started.
 
 ## Setup
 
-``` r
+
+```r
 library(keras)
 `add<-` <- `+`
 envir::import_from(dplyr, last)
@@ -38,12 +35,12 @@ envir::import_from(dplyr, last)
 ## Keras callbacks overview
 
 All callbacks subclass the `keras.callbacks.Callback` class, and
-override a set of methods called at various stages of training, testing,
-and predicting. Callbacks are useful to get a view on internal states
-and statistics of the model during training.
+override a set of methods called at various stages of training, testing, and
+predicting. Callbacks are useful to get a view on internal states and statistics of
+the model during training.
 
-You can pass a list of callbacks (as the keyword argument `callbacks`)
-to the following model methods:
+You can pass a list of callbacks (as the keyword argument `callbacks`) to the following
+model methods:
 
 - `fit()`
 - `evaluate()`
@@ -65,13 +62,12 @@ Called at the end of `fit`/`evaluate`/`predict`.
 
 #### `on_(train|test|predict)_batch_begin(batch, logs = NULL)`
 
-Called right before processing a batch during
-training/testing/predicting.
+Called right before processing a batch during training/testing/predicting.
 
 #### `on_(train|test|predict)_batch_end(batch, logs = NULL)`
 
-Called at the end of training/testing/predicting a batch. Within this
-method, `logs` is a named list containing the metrics results.
+Called at the end of training/testing/predicting a batch. Within this method, `logs` is
+a named list containing the metrics results.
 
 ### Epoch-level methods (training only)
 
@@ -85,10 +81,11 @@ Called at the end of an epoch during training.
 
 ## A basic example
 
-Let’s take a look at a concrete example. To get started, let’s import
-tensorflow and define a simple Sequential Keras model:
+Let's take a look at a concrete example. To get started, let's import tensorflow and
+define a simple Sequential Keras model:
 
-``` r
+
+```r
 # Define the Keras model to add callbacks to
 get_model <- function() {
   model <- keras_model_sequential()
@@ -102,10 +99,10 @@ get_model <- function() {
 }
 ```
 
-Then, load the MNIST data for training and testing from Keras datasets
-API:
+Then, load the MNIST data for training and testing from Keras datasets API:
 
-``` r
+
+```r
 # Load example MNIST data and pre-process it
 mnist <- dataset_mnist()
 
@@ -134,7 +131,8 @@ Now, define a simple custom callback that logs:
 - When each evaluation (test) batch starts & ends
 - When each inference (prediction) batch starts & ends
 
-``` r
+
+```r
 show <- function(msg, logs) {
   cat(glue::glue(msg, .envir = parent.frame()),
       "got logs: ", sep = "; ")
@@ -163,9 +161,9 @@ callback_custom <- new_callback_class(
 )
 ```
 
-Let’s try it out:
+Let's try it out:
 
-``` r
+```r
 model <- get_model()
 model |> fit(
   mnist$train$x, mnist$train$y,
@@ -358,7 +356,7 @@ res <- model |> evaluate(
 ##  $ mean_absolute_error: num 2.04
 
 res <- model |> predict(
-  mnist$test$x, 
+  mnist$test$x,
   verbose = 0,
   callbacks = list(callback_custom())
 )
@@ -403,12 +401,10 @@ res <- model |> predict(
 ```
 
 ### Usage of `logs` dict
+The `logs` named list contains the loss value, and all the metrics at the end of a batch or
+epoch. Example includes the loss and mean absolute error.
 
-The `logs` named list contains the loss value, and all the metrics at
-the end of a batch or epoch. Example includes the loss and mean absolute
-error.
-
-``` r
+```r
 callback_print_loss_and_mae <- new_callback_class(
   "LossAndErrorPrintingCallback",
 
@@ -464,46 +460,42 @@ res = model |> evaluate(
 ## Up to batch 5, the average loss is    7.25.
 ## Up to batch 6, the average loss is    6.91.
 ```
+For more information about callbacks, you can check out the [Keras callback API documentation](https://keras.io/api/callbacks/).
 
-For more information about callbacks, you can check out the [Keras
-callback API documentation](https://keras.io/api/callbacks/).
 
 ## Usage of `self$model` attribute
 
-In addition to receiving log information when one of their methods is
-called, callbacks have access to the model associated with the current
-round of training/evaluation/inference: `self$model`.
+In addition to receiving log information when one of their methods is called,
+callbacks have access to the model associated with the current round of
+training/evaluation/inference: `self$model`.
 
-Here are of few of the things you can do with `self$model` in a
-callback:
+Here are of few of the things you can do with `self$model` in a callback:
 
-- Set `self$model$stop_training <- TRUE` to immediately interrupt
-  training.
-- Mutate hyperparameters of the optimizer (available as
-  `self$model$optimizer`), such as `self$model$optimizer$learning_rate`.
+- Set `self$model$stop_training <- TRUE` to immediately interrupt training.
+- Mutate hyperparameters of the optimizer (available as `self$model$optimizer`),
+such as `self$model$optimizer$learning_rate`.
 - Save the model at period intervals.
-- Record the output of `model |> predict()` on a few test samples at the
-  end of each epoch, to use as a sanity check during training.
-- Extract visualizations of intermediate features at the end of each
-  epoch, to monitor what the model is learning over time.
+- Record the output of `model |> predict()` on a few test samples at the end of each
+epoch, to use as a sanity check during training.
+- Extract visualizations of intermediate features at the end of each epoch, to monitor
+what the model is learning over time.
 - etc.
 
-Let’s see this in action in a couple of examples.
+Let's see this in action in a couple of examples.
 
 ## Examples of Keras callback applications
 
 ### Early stopping at minimum loss
 
-This first example shows the creation of a `Callback` that stops
-training when the minimum of loss has been reached, by setting the
-attribute `self$model$stop_training` (boolean). Optionally, you can
-provide an argument `patience` to specify how many epochs we should wait
-before stopping after having reached a local minimum.
+This first example shows the creation of a `Callback` that stops training when the
+minimum of loss has been reached, by setting the attribute `self$model$stop_training`
+(boolean). Optionally, you can provide an argument `patience` to specify how many
+epochs we should wait before stopping after having reached a local minimum.
 
-`callback_early_stopping()` provides a more complete and general
-implementation.
+`callback_early_stopping()` provides a more complete and general implementation.
 
-``` r
+
+```r
 callback_early_stopping_at_min_loss <- new_callback_class(
   "EarlyStoppingAtMinLoss",
   `__doc__` =
@@ -600,18 +592,16 @@ model |> fit(
 ## Epoch 00006: early stopping
 ```
 
+
 ### Learning rate scheduling
 
-In this example, we show how a custom Callback can be used to
-dynamically change the learning rate of the optimizer during the course
-of training.
+In this example, we show how a custom Callback can be used to dynamically change the
+learning rate of the optimizer during the course of training.
 
-See `keras$callbacks$LearningRateScheduler` for a more general
-implementations (in RStudio, press F1 while the cursor is over
-`LearningRateScheduler` and a browser will open to [this
-page](https://www.tensorflow.org/versions/r2.5/api_docs/python/tf/keras/callbacks/LearningRateScheduler)).
+See `keras$callbacks$LearningRateScheduler` for a more general implementations (in RStudio, press F1 while the cursor is over `LearningRateScheduler` and a browser will open to [this page](https://www.tensorflow.org/versions/r2.5/api_docs/python/tf/keras/callbacks/LearningRateScheduler)).
 
-``` r
+
+```r
 callback_custom_learning_rate_scheduler <- new_callback_class(
   "CustomLearningRateScheduler",
   `__doc__` =
@@ -784,7 +774,7 @@ model |> fit(
 
 ### Built-in Keras callbacks
 
-Be sure to check out the existing Keras callbacks by reading the [API
-docs](https://keras.io/api/callbacks/). Applications include logging to
-CSV, saving the model, visualizing metrics in TensorBoard, and a lot
-more!
+Be sure to check out the existing Keras callbacks by
+reading the [API docs](https://keras.io/api/callbacks/).
+Applications include logging to CSV, saving
+the model, visualizing metrics in TensorBoard, and a lot more!

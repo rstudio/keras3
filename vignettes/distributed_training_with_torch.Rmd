@@ -4,8 +4,8 @@ author: '[fchollet](https://twitter.com/fchollet)'
 date-created: 2023/06/29
 last-modified: 2023/06/29
 description: Guide to multi-GPU training for Keras models with PyTorch.
-accelerator: GPU
 output: rmarkdown::html_vignette
+date: 'Last Modified: 2023-11-08; Last Rendered: 2023-11-08'
 vignette: >
   %\VignetteIndexEntry{Multi-GPU distributed training with PyTorch}
   %\VignetteEngine{knitr::rmarkdown}
@@ -49,7 +49,7 @@ os.environ["KERAS_BACKEND"] = "torch"
 
 import torch
 import numpy as np
-import keras as keras
+import keras
 
 
 def get_model():

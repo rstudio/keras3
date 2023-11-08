@@ -4,8 +4,8 @@ author: '[fchollet](https://twitter.com/fchollet)'
 date-created: 2019/03/01
 last-modified: 2020/04/12
 description: Complete guide to the functional API.
-accelerator: GPU
 output: rmarkdown::html_vignette
+date: 'Last Modified: 2023-11-08; Last Rendered: 2023-11-08'
 vignette: >
   %\VignetteIndexEntry{The Functional API}
   %\VignetteEngine{knitr::rmarkdown}
@@ -16,7 +16,7 @@ vignette: >
 
 ```python
 import numpy as np
-import keras as keras
+import keras
 from keras import layers
 from keras import ops
 ```

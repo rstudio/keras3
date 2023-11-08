@@ -4,8 +4,8 @@ author: '[fchollet](https://twitter.com/fchollet)'
 date-created: 2019/03/01
 last-modified: 2023/06/25
 description: Complete guide to writing `Layer` and `Model` objects from scratch.
-accelerator: None
 output: rmarkdown::html_vignette
+date: 'Last Modified: 2023-11-08; Last Rendered: 2023-11-08'
 vignette: >
   %\VignetteIndexEntry{Making new layers and models via subclassing}
   %\VignetteEngine{knitr::rmarkdown}
@@ -33,7 +33,7 @@ Let's dive in.
 
 ```python
 import numpy as np
-import keras as keras
+import keras
 from keras import ops
 from keras import layers
 ```

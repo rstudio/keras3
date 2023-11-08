@@ -4,8 +4,8 @@ author: '[fchollet](https://twitter.com/fchollet)'
 date-created: 2020/04/28
 last-modified: 2023/06/29
 description: Guide to multi-GPU training for Keras models with TensorFlow.
-accelerator: GPU
 output: rmarkdown::html_vignette
+date: 'Last Modified: 2023-11-08; Last Rendered: 2023-11-08'
 vignette: >
   %\VignetteIndexEntry{Multi-GPU distributed training with TensorFlow}
   %\VignetteEngine{knitr::rmarkdown}
@@ -45,7 +45,7 @@ import os
 os.environ["KERAS_BACKEND"] = "tensorflow"
 
 import tensorflow as tf
-import keras as keras
+import keras
 ```
 
 ## Single-host, multi-device synchronous training

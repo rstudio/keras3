@@ -4,8 +4,8 @@ author: Neel Kovelamudi
 date-created: 2023/03/15
 last-modified: 2023/03/15
 description: A more advanced guide on customizing saving for your layers and models.
-accelerator: None
 output: rmarkdown::html_vignette
+date: 'Last Modified: 2023-11-08; Last Rendered: 2023-11-08'
 vignette: >
   %\VignetteIndexEntry{Customizing Saving and Serialization}
   %\VignetteEngine{knitr::rmarkdown}

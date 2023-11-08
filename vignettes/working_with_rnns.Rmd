@@ -4,8 +4,8 @@ authors: Scott Zhu, Francois Chollet
 date-created: 2019/07/08
 last-modified: 2023/07/10
 description: Complete guide to using & customizing RNN layers.
-accelerator: GPU
 output: rmarkdown::html_vignette
+date: 'Last Modified: 2023-11-08; Last Rendered: 2023-11-08'
 vignette: >
   %\VignetteIndexEntry{Working with RNNs}
   %\VignetteEngine{knitr::rmarkdown}

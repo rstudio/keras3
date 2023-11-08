@@ -4,8 +4,8 @@ author: '[fchollet](https://twitter.com/fchollet)'
 date-created: 2019/03/01
 last-modified: 2023/06/25
 description: Writing low-level training & evaluation loops in TensorFlow.
-accelerator: None
 output: rmarkdown::html_vignette
+date: 'Last Modified: 2023-11-08; Last Rendered: 2023-11-08'
 vignette: >
   %\VignetteIndexEntry{Writing a training loop from scratch in TensorFlow}
   %\VignetteEngine{knitr::rmarkdown}
@@ -22,7 +22,7 @@ import os
 os.environ["KERAS_BACKEND"] = "tensorflow"
 
 import tensorflow as tf
-import keras as keras
+import keras
 import numpy as np
 ```
 

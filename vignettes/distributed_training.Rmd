@@ -4,8 +4,8 @@ author: '[fchollet](https://twitter.com/fchollet)'
 date-created: 2020/04/28
 last-modified: 2020/04/29
 description: Guide to multi-GPU & distributed training for Keras models.
-accelerator: GPU
 output: rmarkdown::html_vignette
+date: 'Last Modified: 2023-11-08; Last Rendered: 2023-11-08'
 vignette: >
   %\VignetteIndexEntry{Multi-GPU and distributed training}
   %\VignetteEngine{knitr::rmarkdown}

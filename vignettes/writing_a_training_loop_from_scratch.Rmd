@@ -4,8 +4,8 @@ author: '[fchollet](https://twitter.com/fchollet)'
 date-created: 2019/03/01
 last-modified: 2023/07/10
 description: Complete guide to writing low-level training & evaluation loops.
-accelerator: None
 output: rmarkdown::html_vignette
+date: 'Last Modified: 2023-11-08; Last Rendered: 2023-11-08'
 vignette: >
   %\VignetteIndexEntry{Writing a training loop from scratch}
   %\VignetteEngine{knitr::rmarkdown}

@@ -4,8 +4,8 @@ author: '[fchollet](https://twitter.com/fchollet)'
 date-created: 2023/07/10
 last-modified: 2023/07/10
 description: First contact with the new multi-backend Keras.
-accelerator: GPU
 output: rmarkdown::html_vignette
+date: 'Last Modified: 2023-11-08; Last Rendered: 2023-11-08'
 vignette: >
   %\VignetteIndexEntry{Getting started with Keras Core}
   %\VignetteEngine{knitr::rmarkdown}

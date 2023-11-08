@@ -4,8 +4,8 @@ author: '[fchollet](https://twitter.com/fchollet)'
 date-created: 2020/04/12
 last-modified: 2023/06/25
 description: Complete guide to the Sequential model.
-accelerator: GPU
 output: rmarkdown::html_vignette
+date: 'Last Modified: 2023-11-08; Last Rendered: 2023-11-08'
 vignette: >
   %\VignetteIndexEntry{The Sequential model}
   %\VignetteEngine{knitr::rmarkdown}
@@ -15,7 +15,7 @@ vignette: >
 ## Setup
 
 ```python
-import keras as keras
+import keras
 from keras import layers
 from keras import ops
 ```

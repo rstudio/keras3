@@ -5,8 +5,8 @@ date-created: 2020/07/25
 last-modified: 2021/04/23
 description: Overview of how to leverage preprocessing layers to create end-to-end
   models.
-accelerator: GPU
 output: rmarkdown::html_vignette
+date: 'Last Modified: 2023-11-08; Last Rendered: 2023-11-08'
 vignette: >
   %\VignetteIndexEntry{Working with preprocessing layers}
   %\VignetteEngine{knitr::rmarkdown}

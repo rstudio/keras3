@@ -4,8 +4,8 @@ author: '[fchollet](https://twitter.com/fchollet)'
 date-created: 2020/04/15
 last-modified: 2023/06/14
 description: Complete guide to overriding the training step of the Model class.
-accelerator: GPU
 output: rmarkdown::html_vignette
+date: 'Last Modified: 2023-11-08; Last Rendered: 2023-11-08'
 vignette: >
   %\VignetteIndexEntry{Customizing what happens in `fit()`}
   %\VignetteEngine{knitr::rmarkdown}

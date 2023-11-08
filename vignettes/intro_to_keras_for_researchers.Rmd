@@ -5,8 +5,8 @@ date-created: 2020/04/01
 last-modified: 2020/10/02
 description: Everything you need to know to use Keras & TensorFlow for deep learning
   research.
-accelerator: None
 output: rmarkdown::html_vignette
+date: 'Last Modified: 2023-11-08; Last Rendered: 2023-11-08'
 vignette: >
   %\VignetteIndexEntry{Introduction to Keras for Researchers}
   %\VignetteEngine{knitr::rmarkdown}

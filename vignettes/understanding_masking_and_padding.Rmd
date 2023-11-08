@@ -4,8 +4,8 @@ authors: Scott Zhu, Francois Chollet
 date-created: 2019/07/16
 last-modified: 2023/06/25
 description: Complete guide to using mask-aware sequence layers in Keras.
-accelerator: None
 output: rmarkdown::html_vignette
+date: 'Last Modified: 2023-11-08; Last Rendered: 2023-11-08'
 vignette: >
   %\VignetteIndexEntry{Understanding masking & padding}
   %\VignetteEngine{knitr::rmarkdown}
@@ -16,7 +16,7 @@ vignette: >
 
 ```python
 import numpy as np
-import keras as keras
+import keras
 from keras import ops
 from keras import layers
 ```

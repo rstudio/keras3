@@ -762,6 +762,7 @@ knit_vignette <- function(input, ..., output_dir) {
   #   envir = new.env(parent = globalenv()),
   #   ...
   # )
+  library(keras)
   knitr::knit(
     input,
     # output_format = rmarkdown::github_document(preserve_yaml = TRUE),

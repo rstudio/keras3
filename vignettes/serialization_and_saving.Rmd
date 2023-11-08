@@ -4,8 +4,8 @@ authors: Neel Kovelamudi, Francois Chollet
 date-created: 2023/06/14
 last-modified: 2023/06/30
 description: Complete guide to saving, serializing, and exporting models.
-accelerator: None
 output: rmarkdown::html_vignette
+date: 'Last Modified: 2023-11-08; Last Rendered: 2023-11-08'
 vignette: >
   %\VignetteIndexEntry{Save, serialize, and export models}
   %\VignetteEngine{knitr::rmarkdown}

@@ -4,8 +4,8 @@ author: '[fchollet](https://twitter.com/fchollet)'
 date-created: 2020/04/15
 last-modified: 2023/06/25
 description: Complete guide to transfer learning & fine-tuning in Keras.
-accelerator: GPU
 output: rmarkdown::html_vignette
+date: 'Last Modified: 2023-11-08; Last Rendered: 2023-11-08'
 vignette: >
   %\VignetteIndexEntry{Transfer learning & fine-tuning}
   %\VignetteEngine{knitr::rmarkdown}
@@ -16,7 +16,7 @@ vignette: >
 
 ```python
 import numpy as np
-import keras as keras
+import keras
 from keras import layers
 import tensorflow_datasets as tfds
 import matplotlib.pyplot as plt
