@@ -14,7 +14,7 @@ identical to Layer Normalization (see Layer Normalization docs for details).
 Relation to Instance Normalization:
 If the number of groups is set to the input dimension (number of groups is
 equal to number of channels), then this operation becomes identical to
-Instance Normalization.
+Instance Normalization. You can achieve this via `groups=-1`.
 
 # Input Shape
 Arbitrary. Use the keyword argument
