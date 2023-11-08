@@ -12,8 +12,8 @@
 install_keras <- function(...,
                           envname = "r-keras",
                           extra_packages = NULL,
-                          python_version = "3.10",
-                          devel = FALSE
+                          python_version = "3.10"
+                          # devel = FALSE
                           # backend = c("tensorflow", "jax", "pytorch")
                           ) {
 
