@@ -3,8 +3,8 @@ Return the default image data format convention.
 @description
 
 # Examples
-```
-keras::config_image_data_format()
+```{r}
+config_image_data_format()
 ```
 
 @returns
