@@ -6,14 +6,7 @@ last-modified: 2023/06/27
 description: Overriding the training step of the Model class with PyTorch.
 accelerator: GPU
 output: rmarkdown::html_vignette
-vignette: >
-  %\VignetteIndexEntry{Customizing what happens in `fit()` with PyTorch}
-  %\VignetteEngine{knitr::rmarkdown}
-  %\VignetteEncoding{UTF-8}
-knit: >
-  (function(input, encoding) rmarkdown::render(
-    input, encoding=encoding,
-    output_file='03-rendered.md')))
+knit: keras:::knit_vignette
 ---
 
 ## Introduction

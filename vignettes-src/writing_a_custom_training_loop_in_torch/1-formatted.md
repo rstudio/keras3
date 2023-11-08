@@ -6,14 +6,7 @@ last-modified: 2023/06/25
 description: Writing low-level training & evaluation loops in PyTorch.
 accelerator: None
 output: rmarkdown::html_vignette
-vignette: >
-  %\VignetteIndexEntry{Writing a training loop from scratch in PyTorch}
-  %\VignetteEngine{knitr::rmarkdown}
-  %\VignetteEncoding{UTF-8}
-knit: >
-  (function(input, encoding) rmarkdown::render(
-    input, encoding=encoding,
-    output_file='03-rendered.md')))
+knit: keras:::knit_vignette
 ---
 
 ## Setup

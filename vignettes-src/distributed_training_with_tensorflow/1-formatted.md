@@ -6,14 +6,7 @@ last-modified: 2023/06/29
 description: Guide to multi-GPU training for Keras models with TensorFlow.
 accelerator: GPU
 output: rmarkdown::html_vignette
-vignette: >
-  %\VignetteIndexEntry{Multi-GPU distributed training with TensorFlow}
-  %\VignetteEngine{knitr::rmarkdown}
-  %\VignetteEncoding{UTF-8}
-knit: >
-  (function(input, encoding) rmarkdown::render(
-    input, encoding=encoding,
-    output_file='03-rendered.md')))
+knit: keras:::knit_vignette
 ---
 
 ## Introduction

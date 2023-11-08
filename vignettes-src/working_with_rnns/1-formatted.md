@@ -6,14 +6,7 @@ last-modified: 2023/07/10
 description: Complete guide to using & customizing RNN layers.
 accelerator: GPU
 output: rmarkdown::html_vignette
-vignette: >
-  %\VignetteIndexEntry{Working with RNNs}
-  %\VignetteEngine{knitr::rmarkdown}
-  %\VignetteEncoding{UTF-8}
-knit: >
-  (function(input, encoding) rmarkdown::render(
-    input, encoding=encoding,
-    output_file='03-rendered.md')))
+knit: keras:::knit_vignette
 ---
 
 ## Introduction

@@ -6,14 +6,7 @@ last-modified: 2023/06/25
 description: Complete guide to using mask-aware sequence layers in Keras.
 accelerator: None
 output: rmarkdown::html_vignette
-vignette: >
-  %\VignetteIndexEntry{Understanding masking & padding}
-  %\VignetteEngine{knitr::rmarkdown}
-  %\VignetteEncoding{UTF-8}
-knit: >
-  (function(input, encoding) rmarkdown::render(
-    input, encoding=encoding,
-    output_file='03-rendered.md')))
+knit: keras:::knit_vignette
 ---
 
 ## Setup

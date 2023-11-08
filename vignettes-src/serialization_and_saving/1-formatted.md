@@ -6,14 +6,7 @@ last-modified: 2023/06/30
 description: Complete guide to saving, serializing, and exporting models.
 accelerator: None
 output: rmarkdown::html_vignette
-vignette: >
-  %\VignetteIndexEntry{Save, serialize, and export models}
-  %\VignetteEngine{knitr::rmarkdown}
-  %\VignetteEncoding{UTF-8}
-knit: >
-  (function(input, encoding) rmarkdown::render(
-    input, encoding=encoding,
-    output_file='03-rendered.md')))
+knit: keras:::knit_vignette
 ---
 
 **Note: this guide assumes Keras >= 2.13**

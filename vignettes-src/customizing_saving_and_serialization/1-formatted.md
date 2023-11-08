@@ -6,14 +6,7 @@ last-modified: 2023/03/15
 description: A more advanced guide on customizing saving for your layers and models.
 accelerator: None
 output: rmarkdown::html_vignette
-vignette: >
-  %\VignetteIndexEntry{Customizing Saving and Serialization}
-  %\VignetteEngine{knitr::rmarkdown}
-  %\VignetteEncoding{UTF-8}
-knit: >
-  (function(input, encoding) rmarkdown::render(
-    input, encoding=encoding,
-    output_file='03-rendered.md')))
+knit: keras:::knit_vignette
 ---
 
 ## Introduction

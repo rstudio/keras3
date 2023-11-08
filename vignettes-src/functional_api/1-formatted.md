@@ -6,14 +6,7 @@ last-modified: 2020/04/12
 description: Complete guide to the functional API.
 accelerator: GPU
 output: rmarkdown::html_vignette
-vignette: >
-  %\VignetteIndexEntry{The Functional API}
-  %\VignetteEngine{knitr::rmarkdown}
-  %\VignetteEncoding{UTF-8}
-knit: >
-  (function(input, encoding) rmarkdown::render(
-    input, encoding=encoding,
-    output_file='03-rendered.md')))
+knit: keras:::knit_vignette
 ---
 
 ## Setup

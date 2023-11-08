@@ -7,14 +7,7 @@ description: Everything you need to know to use Keras & TensorFlow for deep lear
   research.
 accelerator: None
 output: rmarkdown::html_vignette
-vignette: >
-  %\VignetteIndexEntry{Introduction to Keras for Researchers}
-  %\VignetteEngine{knitr::rmarkdown}
-  %\VignetteEncoding{UTF-8}
-knit: >
-  (function(input, encoding) rmarkdown::render(
-    input, encoding=encoding,
-    output_file='03-rendered.md')))
+knit: keras:::knit_vignette
 ---
 
 ## Setup

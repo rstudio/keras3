@@ -732,17 +732,20 @@ named_list <- function(...)
 knit_vignette <- function(input, ..., output_dir) {
   # print(sys.call())
   # stop()
-  if(getwd() != dirname(input)) {
-    message("Changing wd")
-    owd <- setwd(dirname(input))
+  input <- normalizePath(input)
+  render_dir <- dirname(input)
+  if(getwd() != render_dir) {
+    message("Changing wd to ", render_dir)
+    owd <- setwd(render_dir)
     on.exit(setwd(owd))
   }
 
 
   # ~/github/rstudio/keras/vignettes/writing_your_own_callbacks.Rmd
-  name <- basename(dirname(normalizePath(input)))
+  name <- basename(render_dir)
   output_file <- normalizePath(sprintf("../../vignettes/%s.Rmd", name),
                                mustWork = FALSE)
+  message("output_file: ", output_file)
 
   set.seed(1)
   keras::set_random_seed(1)

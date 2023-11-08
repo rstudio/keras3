@@ -29,22 +29,23 @@ munge_tutobook <- function(tutobook) {
         x[,1] %<>% snakecase::to_snake_case() %<>% str_replace_all("_", "-")
         x <- rlang::set_names(nm = x[,1], as.list(x[,2]))
         x$output <- "rmarkdown::html_vignette"
-        vignette <- glue_data(list(title = x$title), r"---(
-        vignette: >
-          %\VignetteIndexEntry{<<title>>}
-          %\VignetteEngine{knitr::rmarkdown}
-          %\VignetteEncoding{UTF-8}
-        )---", .open = "<<", .close = ">>")
-        # x$repo <- https://github.com/rstudio/keras
+        x$knit <- "keras:::knit_vignette"
+        # vignette <- glue_data(list(title = x$title), r"---(
+        # vignette: >
+        #   %\VignetteIndexEntry{<<title>>}
+        #   %\VignetteEngine{knitr::rmarkdown}
+        #   %\VignetteEncoding{UTF-8}
+        # )---", .open = "<<", .close = ">>")
+        # # x$repo <- https://github.com/rstudio/keras
 
         frontmatter <- yaml::as.yaml(x) %>% str_trim("right")
-        frontmatter %<>% str_flatten_lines(vignette)
-        frontmatter %<>% str_flatten_lines(., trim(r"---{
-        knit: >
-          (function(input, encoding) rmarkdown::render(
-            input, encoding=encoding,
-            output_file='03-rendered.md')))
-        }---"))
+        # frontmatter %<>% str_flatten_lines(vignette)
+        # frontmatter %<>% str_flatten_lines(., trim(r"---{
+        # knit: >
+        #   (function(input, encoding) rmarkdown::render(
+        #     input, encoding=encoding,
+        #     output_file='03-rendered.md')))
+        # }---"))
 
         # frontmatter <- str_c(x[,1], ": ", x[,2])
         out <- str_flatten_lines("---", frontmatter, "---")
@@ -213,15 +214,34 @@ vignettes_src_pull_upstream_updates()
 lapply(guides, make_guide)
 # make_guide(guides[1])
 
-stop()
+
+
+vignette_src_render_translated <-
+function(directories = dir_ls("vignettes-src/", type = "directory")) {
+  message(deparse1(sys.call()))
+  directories |>
+    as_fs_path() |>
+    # set_names(basename) %>%
+    purrr::walk(\(dir) {
+      # withr::local_dir(dir)
+      message("rendering: ", dir)
+      keras$utils$clear_session()
+      # Set knitr options to halt on errors
+      # This should really be a callr
+      knitr::opts_chunk$set(error = FALSE)
+      keras:::knit_vignette(dir / "2-translated.Rmd")
+      # ~/github/rstudio/keras/vignettes-src/custom_train_step_in_jax/2-translated.Rmd
+    })
+}
+
+vignette_src_render_translated()
+
+stop("DONE", call. = FALSE)
+
 
 # lapply(guides[9], tutobook_to_rmd)
 lapply(guides, tutobook_to_rmd, outdir = "vignettes/guides")
 lapply(examples, tutobook_to_rmd, outdir = "vignettes/examples")
-
-
-
-
 
 
 
