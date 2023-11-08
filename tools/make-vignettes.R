@@ -5,6 +5,8 @@ attach_source("tools/utils.R")
 
 munge_tutobook <- function(tutobook) {
 
+  # browser()
+
   df <- tibble(
     line = tutobook
   )
@@ -149,14 +151,64 @@ make_guide <- function(guide) {
   name <- guide |> path_file() |> path_ext_remove()
   dir <- dir_create("vignettes-src", name)
 
-  file_copy(guide, path("vignettes-src", name, basename(guide)), overwrite = TRUE)
+  file_copy(guide, path("vignettes-src", name, "0-tutobook.py"), overwrite = TRUE)
+  formatted_path <- path("vignettes-src", name, "1-formatted.md")
+  tutobook_to_rmd(guide, outfile = formatted_path)
+  translated_path <- path("vignettes-src", name, "2-translated.Rmd")
+  if(!file_exists(translated_path))
+    file_copy(formatted_path, translated_path)
+  # file_copy(guide, path("vignettes-src", name, basename(guide)), overwrite = TRUE)
   # file_copy(guide, , overwrite = TRUE)
 
   # file_copy(guide, path("vignettes-src", name, "0-tutobook.py"), overwrite = TRUE)
   # tutobook_to_rmd(guide, outfile = path(dir, "1-formatted.md"))
   # tutobook_to_rmd(guide, outfile = path(dir, "2-translated.Rmd"))
-  tutobook_to_rmd(guide, outfile = path("vignettes-src", name, path_ext_set(name, "Rmd")))
 }
+
+vignettes_src_pull_upstream_updates <- function() {
+  dir_ls("vignettes-src/", type = "directory") |>
+    walk(\(dir) {
+      # withr::local_dir(dir)
+      name <- path_file(dir)
+      upstream_filepath <- guides %>% .[path_ext_remove(path_file(.)) == name]
+      stopifnot(length(upstream_filepath) == 1)
+      # browser()
+      old_upstream <- read_file(dir / "0-tutobook.py")
+      new_upstream <- read_file(upstream_filepath)
+      if(old_upstream == new_upstream) return()
+
+      if (file.exists(dir / "2-translated.Rmd"))
+        git(
+          "diff -U1 --no-index",
+          "--diff-algorithm=minimal",
+          paste0("--output=", dir / "translate.patch"),
+          dir / "1-formatted.md",
+          dir / "2-translated.Rmd",
+          valid_exit_codes = c(0L, 1L)
+        )
+
+      write_lines(new_upstream, dir/"0-tutobook.py")
+      rmd <- munge_tutobook(str_split_lines(new_upstream))
+      # export <- mk_export(endpoint)
+      write_lines(rmd, dir/"1-formatted.md")
+      write_lines(rmd, dir/"2-translated.Rmd")
+
+      if (!file.exists(dir / "translate.patch") ||
+          !length(patch <- read_lines(dir / "translate.patch")))
+        return()
+
+      patch[c(1L, 3L)] %<>% str_replace(fixed("/1-formatted.md"), "/2-translated.Rmd")
+      # patch <- patch[-2] # drop index <hash>..<hash> line
+      write_lines(patch, dir / "translate.patch")
+
+      git("add", dir/"2-translated.Rmd")
+      git("apply --3way --recount --allow-empty", dir/"translate.patch",
+          valid_exit_codes = c(0L, 1L))
+
+    })
+}
+
+vignettes_src_pull_upstream_updates()
 
 lapply(guides, make_guide)
 # make_guide(guides[1])

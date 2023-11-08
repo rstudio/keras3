@@ -53,7 +53,7 @@ os.environ["KERAS_BACKEND"] = "jax"
 import jax
 import numpy as np
 import tensorflow as tf
-import keras as keras
+import keras
 
 from jax.experimental import mesh_utils
 from jax.sharding import Mesh

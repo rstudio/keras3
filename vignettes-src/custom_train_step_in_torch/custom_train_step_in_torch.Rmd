@@ -54,7 +54,7 @@ import os
 os.environ["KERAS_BACKEND"] = "torch"
 
 import torch
-import keras as keras
+import keras
 from keras import layers
 import numpy as np
 ```

@@ -53,7 +53,7 @@ os.environ["KERAS_BACKEND"] = "torch"
 
 import torch
 import numpy as np
-import keras as keras
+import keras
 
 
 def get_model():

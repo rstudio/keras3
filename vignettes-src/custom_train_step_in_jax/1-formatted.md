@@ -54,7 +54,7 @@ import os
 os.environ["KERAS_BACKEND"] = "jax"
 
 import jax
-import keras as keras
+import keras
 import numpy as np
 ```
 

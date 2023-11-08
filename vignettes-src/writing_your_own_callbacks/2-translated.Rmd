@@ -169,7 +169,7 @@ res <- model |> evaluate(
 )
 
 res <- model |> predict(
-  mnist$test$x, 
+  mnist$test$x,
   verbose = 0,
   callbacks = list(callback_custom())
 )

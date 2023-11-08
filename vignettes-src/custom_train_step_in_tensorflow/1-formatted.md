@@ -54,7 +54,7 @@ import os
 os.environ["KERAS_BACKEND"] = "tensorflow"
 
 import tensorflow as tf
-import keras as keras
+import keras
 from keras import layers
 import numpy as np
 ```
