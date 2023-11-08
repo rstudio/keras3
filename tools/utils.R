@@ -43,6 +43,7 @@ library(assertthat, include.only = c("assert_that"))
 
 attach_eval({
   import_from(TKutils, `%error%`)
+  import_from(memoise, memoise)
 
   is_scalar <- function(x) identical(length(x), 1L)
 
@@ -1115,7 +1116,7 @@ known_metrics_without_function_handles <- c %(% {
 }
 
 
-mk_export <- function(endpoint) {
+mk_export <- memoise(function(endpoint) {
 
   # py parts
   py_obj <- py_eval(endpoint)
@@ -1249,7 +1250,7 @@ mk_export <- function(endpoint) {
   dump <- dump_keras_export(roxygen, r_name, r_fn)
 
   as.list(environment())
-}
+})
 
 
 dump_keras_export <- function(roxygen, r_name, r_fn) {

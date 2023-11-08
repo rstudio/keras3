@@ -143,37 +143,132 @@ df %>%
       write_lines(path("man-src", r_name, "0-upstream.md"))
   })
 
-#
-# man_src_pull_upstream_updates <- function() {
-#   fs::dir_ls("man-src/", type = "directory") |>
-#     # head(3) |>
-#     # keep(~str_detect(.x, "backup|_elu|_relu")) %>%
-#     set_names(dirname) |>
-#     walk(\(dir) {
-#       withr::local_dir(dir)
-#       og <- read_lines(dir_ls(glob = "0-*"))
-#
-#       # withr::with_dir(dir, {
-#       #   # timestamps don't work because the translation file gets rewritten.
-#       #   doesnt_need_update <- file_exists("translate.patch") &&
-#       #       file_info("2-translated.Rmd")$change_time < file_info("translate.patch")$birth_time
-#       #   }
-#       # )
-#       # if(doesnt_need_update) return()
-#       # message("updating patchfile: ", dir)
-#       diff <- suppressWarnings( # returns 1 on diff
-#         system2t("git", c("diff -U1 --no-index",
-#                           # "--diff-algorithm=minimal",
-#                           glue("--output={dir}/translate.patch"),
-#                           dir / "1-formatted.md", dir / "2-translated.Rmd")))
-#       patch_filepath <- dir/"translate.patch"
-#       patch <- read_lines(patch_filepath)
-#       if(!length(patch)) return()
-#       # if(grepl("hard_sigmoi", dir)) browser()
-#       patch <- patch[-2] # drop index <hash>..<hash> line
-#       patch[1:3] <- str_replace(patch[1:3], fixed("/1-formatted.md"), "/2-translated.Rmd")
-#       write_lines(patch, patch_filepath)
-#     }
+
+man_src_pull_upstream_updates <- function() {
+
+  vscode_settings <- og_vscode_settings <-
+    jsonlite::read_json(".vscode/settings.json")
+  vscode_settings %<>% modifyList(list("git.autorefresh" = FALSE,
+                                       "git.autofetch" = FALSE))
+  jsonlite::write_json(vscode_settings, ".vscode/settings.json")
+  withr::defer(jsonlite::write_json(og_vscode_settings, ".vscode/settings.json",
+                                    pretty = TRUE))
+
+  fs::dir_ls("man-src/", type = "directory") |>
+    # head(3) |>
+    # keep(~str_detect(.x, "backup|_elu|_relu")) %>%
+    set_names(dirname) |>
+    walk(\(dir) {
+      # withr::local_dir(dir)
+      old_upstream <- read_lines(path(dir, "0-upstream.md"))
+      endpoint <- old_upstream[1]
+      old_upstream <- str_flatten_lines(old_upstream)
+      new_upstream <- format_man_src_0(endpoint)
+      # if(new_upstream == old_upstream) return() # nothing to update
+
+
+      if (file.exists(dir / "2-translated.Rmd"))
+        suppressWarnings(system2t("git", c(
+          "diff -U1 --no-index",
+          "--diff-algorithm=minimal",
+          paste0("--output=", dir / "translate.patch"),
+          dir / "1-formatted.md",
+          dir / "2-translated.Rmd"
+        )))
+
+      export <- mk_export(endpoint)
+      write_lines(export$roxygen, dir/"1-formatted.md")
+      write_lines(export$roxygen, dir/"2-translated.Rmd")
+
+      if(!file.exists(dir / "translate.patch")) return()
+      patch <- read_lines(dir / "translate.patch")
+      if(!length(patch)) return()
+
+      patch[c(1L, 3L)] %<>% str_replace(fixed("/1-formatted.md"), "/2-translated.Rmd")
+      # patch <- patch[-2] # drop index <hash>..<hash> line
+      write_lines(patch, dir / "translate.patch")
+
+      # if(file.exists(".git/index.lock")) {message("Sleeping...."); Sys.sleep(.2)}
+      # Sys.sleep(.2)
+      system2t("git", c("add", dir/"2-translated.Rmd"))
+
+      # if(file.exists(".git/index.lock")) {message("Sleeping...."); Sys.sleep(.2)}
+      # Sys.sleep(.1) # needed to release 'keras/.git/index.lock'
+      # Sys.sleep(.2)
+      res <- system2t("git", c("apply --3way --recount --allow-empty", dir/"translate.patch"))
+      if(!identical(res, 0L)) {
+        cat("res <- "); dput(res)
+        stop("non-0 exit from git apply")
+      }
+      # stop()
+    })
+}
+
+
+
+man_src_pull_upstream_updates2 <- function() {
+
+  vscode_settings <- og_vscode_settings <-
+    jsonlite::read_json(".vscode/settings.json")
+  vscode_settings %<>% modifyList(list("git.autorefresh" = FALSE,
+                                       "git.autofetch" = FALSE))
+  jsonlite::write_json(vscode_settings, ".vscode/settings.json")
+  withr::defer(jsonlite::write_json(og_vscode_settings, ".vscode/settings.json",
+                                    pretty = TRUE))
+
+  fs::dir_ls("man-src/", type = "directory") |>
+    # head(3) |>
+    # keep(~str_detect(.x, "backup|_elu|_relu")) %>%
+    set_names(dirname) |>
+    walk(\(dir) {
+      # withr::local_dir(dir)
+      old_upstream <- read_lines(path(dir, "0-upstream.md"))
+      endpoint <- old_upstream[1]
+      old_upstream <- str_flatten_lines(old_upstream)
+      new_upstream <- format_man_src_0(endpoint)
+      # if(new_upstream == old_upstream) return() # nothing to update
+
+
+      export <- mk_export(endpoint)
+
+      if (!file.exists(dir / "2-translated.Rmd")) {
+        write_lines(export$roxygen, dir/"1-formatted.md")
+        write_lines(export$roxygen, dir/"2-translated.Rmd")
+        return()
+      }
+      write_lines(export$roxygen, dir/"1-formatted-new.md")
+      write_lines(export$roxygen, dir/"2-translated-new.Rmd")
+
+        # -m --merge <path1> <path2> <base> <result>
+        #   Perform a three-way merge by providing paths for two modified versions of
+        #   a file, the common origin of both modified versions and the output file
+        #   to save merge results.
+
+      system2("code", "--merge",
+              dir / "2-translated.Rmd",
+              dir / "2-translated-new.Rmd",
+              dir / "1-formatted-new.md",
+              dir/ "2-output.Rmd")
+      stop()
+      if(!identical(res, 0L)) {
+        cat("res <- "); dput(res)
+        stop("non-0 exit from git apply")
+      }
+      # stop()
+    })
+}
+
+
+
+
+man_src_pull_upstream_updates2()
+
+
+man_src_reformat_0 <- function() {
+
+}
+
+man_src_pull_upstream_updates()
 #
 #
 # man_src_render
