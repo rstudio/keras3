@@ -3,8 +3,13 @@ Return the default image data format convention.
 @description
 
 # Examples
+
+```r
+config_image_data_format()
 ```
-keras::config_image_data_format()
+
+```
+## [1] "channels_last"
 ```
 
 @returns

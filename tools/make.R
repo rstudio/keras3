@@ -160,7 +160,7 @@ git <- function(..., retries = 3) {
   }
 }
 
-man_src_pull_upstream_updates <- function() {
+man_src_pull_upstream_updates <- function(directories = dir_ls("man-src/", type = "directory")) {
 
   # If you encounter
   vscode_settings <- og_vscode_settings <-
@@ -173,20 +173,14 @@ man_src_pull_upstream_updates <- function() {
 
   system("code -s", intern = TRUE) # force rereading of settings.json?
 
-  fs::dir_ls("man-src/", type = "directory") |>
-
-
-    # head(3) |>
-    # keep(~str_detect(.x, "backup|_elu|_relu")) %>%
+  directories |>
     set_names(dirname) |>
     walk(\(dir) {
-      # withr::local_dir(dir)
       old_upstream <- read_lines(path(dir, "0-upstream.md"))
       endpoint <- old_upstream[1]
       old_upstream <- str_flatten_lines(old_upstream)
       new_upstream <- format_man_src_0(endpoint)
-      # if(new_upstream == old_upstream) return() # nothing to update
-
+      if(new_upstream == old_upstream) return() # nothing to update
 
       if (file.exists(dir / "2-translated.Rmd"))
         git(
@@ -214,7 +208,62 @@ man_src_pull_upstream_updates <- function() {
     })
 }
 
+
+man_src_render_translated <- function(directories = dir_ls("man-src/", type = "directory")) {
+
+  directories |>
+      as_fs_path() |>
+      set_names(basename) %>%
+      purrr::walk(\(dir) {
+        withr::local_dir(dir)
+        message("rendering: ", dir)
+        keras$utils$clear_session()
+        # Set knitr options to halt on errors
+        knitr::opts_chunk$set(error = FALSE)
+        knitr::knit("2-translated.Rmd",
+                    "3-rendered.md",
+                    quiet = TRUE,
+                    envir = new.env())
+        x <- read_lines("3-rendered.md")
+        # TODO: these filters should be confined to chunk outputs only,
+        # probably as a knitr hook
+        x <- x |> str_replace_all(" at 0x[0-9A-F]{9}>$", ">")
+        x <-
+          x[!str_detect(x, r"{## .*rstudio:run:reticulate::py_last_error\(\).*}")]
+        x |> write_lines("3-rendered.md")
+      })
+  }
+
 man_src_pull_upstream_updates()
+man_src_render_translated()
+
+# {
+#
+#   render_roxygen_rmds <- function(filepath = fs::dir_ls("man-src/", type = "directory")) {
+#     # this should probably happen in a separate R session...
+#     filepath |>
+#       fs::as_fs_path() |>
+#       # head(3) |>
+#       set_names(basename) %>%
+#       purrr::walk(\(dir) {
+#         withr::local_dir(dir)
+#         message("rendering: ", dir)
+#         keras$utils$clear_session()
+#         # Set knitr options to halt on errors
+#         knitr::opts_chunk$set(error = FALSE)
+#         knitr::knit("2-translated.Rmd", "3-rendered.md",
+#                     quiet = TRUE, envir = new.env())
+#         x <- readLines("3-rendered.md")
+#         # TODO: these filters should be confined to chunk outputs only,
+#         # probably as a knitr hook
+#         x <- x |> str_replace_all(" at 0x[0-9A-F]{9}>$", ">")
+#         x <- x[!str_detect(x, r"{## .*rstudio:run:reticulate::py_last_error\(\).*}")]
+#         x |> writeLines("3-rendered.md")
+#       })
+#     # discard(\(x) is.null(x) || x == 0) |>
+#     # invisible()
+#   }
+# }
 
 
 #
