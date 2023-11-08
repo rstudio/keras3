@@ -1597,6 +1597,7 @@ man_src_pull_upstream_updates <- function(directories = dir_ls("man-src/", type 
           valid_exit_codes = c(0L, 1L)
         )
 
+      write_lines(new_upstream, dir/"0-upstream.md")
       export <- mk_export(endpoint)
       write_lines(export$roxygen, dir/"1-formatted.md")
       write_lines(export$roxygen, dir/"2-translated.Rmd")
