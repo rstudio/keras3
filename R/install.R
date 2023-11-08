@@ -31,7 +31,9 @@ install_keras <- function(...,
   # return()
   # system2("python", "-m pip install tensorflow")
 
-  if(Sys.getenv("CI") == "true" || !devel) {
+  # if(Sys.getenv("CI") == "true" || !devel) {
+  if(FALSE) {
+    # tf-nightly conflicts w/ keras-nightly...
     system2("python", "-m pip install tf-nightly keras-nightly")
     message("DONE")
     return()
