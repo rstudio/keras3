@@ -16,13 +16,64 @@
     <loc>/articles/custom_models.html</loc>
   </url>
   <url>
+    <loc>/articles/custom_train_step_in_jax.html</loc>
+  </url>
+  <url>
+    <loc>/articles/custom_train_step_in_tensorflow.html</loc>
+  </url>
+  <url>
+    <loc>/articles/custom_train_step_in_torch.html</loc>
+  </url>
+  <url>
+    <loc>/articles/customizing_saving_and_serialization.html</loc>
+  </url>
+  <url>
+    <loc>/articles/customizing_what_happens_in_fit.html</loc>
+  </url>
+  <url>
+    <loc>/articles/distributed_training.html</loc>
+  </url>
+  <url>
+    <loc>/articles/distributed_training_with_jax.html</loc>
+  </url>
+  <url>
+    <loc>/articles/distributed_training_with_tensorflow.html</loc>
+  </url>
+  <url>
+    <loc>/articles/distributed_training_with_torch.html</loc>
+  </url>
+  <url>
+    <loc>/articles/examples/actor_critic_cartpole.html</loc>
+  </url>
+  <url>
     <loc>/articles/examples/addition_rnn.html</loc>
+  </url>
+  <url>
+    <loc>/articles/examples/antirectifier.html</loc>
+  </url>
+  <url>
+    <loc>/articles/examples/attention_mil_classification.html</loc>
+  </url>
+  <url>
+    <loc>/articles/examples/autoencoder.html</loc>
   </url>
   <url>
     <loc>/articles/examples/babi_memnn.html</loc>
   </url>
   <url>
     <loc>/articles/examples/babi_rnn.html</loc>
+  </url>
+  <url>
+    <loc>/articles/examples/bidirectional_lstm_imdb.html</loc>
+  </url>
+  <url>
+    <loc>/articles/examples/bit.html</loc>
+  </url>
+  <url>
+    <loc>/articles/examples/captcha_ocr.html</loc>
+  </url>
+  <url>
+    <loc>/articles/examples/cct.html</loc>
   </url>
   <url>
     <loc>/articles/examples/cifar10_cnn.html</loc>
@@ -34,13 +85,70 @@
     <loc>/articles/examples/cifar10_resnet.html</loc>
   </url>
   <url>
+    <loc>/articles/examples/collaborative_filtering_movielens.html</loc>
+  </url>
+  <url>
     <loc>/articles/examples/conv_filter_visualization.html</loc>
   </url>
   <url>
     <loc>/articles/examples/conv_lstm.html</loc>
   </url>
   <url>
+    <loc>/articles/examples/convmixer.html</loc>
+  </url>
+  <url>
+    <loc>/articles/examples/cutmix.html</loc>
+  </url>
+  <url>
+    <loc>/articles/examples/cyclegan.html</loc>
+  </url>
+  <url>
+    <loc>/articles/examples/dcgan_overriding_train_step.html</loc>
+  </url>
+  <url>
+    <loc>/articles/examples/ddim.html</loc>
+  </url>
+  <url>
+    <loc>/articles/examples/ddpm.html</loc>
+  </url>
+  <url>
     <loc>/articles/examples/deep_dream.html</loc>
+  </url>
+  <url>
+    <loc>/articles/examples/deep_neural_decision_forests.html</loc>
+  </url>
+  <url>
+    <loc>/articles/examples/deeplabv3_plus.html</loc>
+  </url>
+  <url>
+    <loc>/articles/examples/deit.html</loc>
+  </url>
+  <url>
+    <loc>/articles/examples/demo_custom_jax_workflow.html</loc>
+  </url>
+  <url>
+    <loc>/articles/examples/demo_custom_layer_backend_agnostic.html</loc>
+  </url>
+  <url>
+    <loc>/articles/examples/demo_custom_tf_workflow.html</loc>
+  </url>
+  <url>
+    <loc>/articles/examples/demo_custom_torch_workflow.html</loc>
+  </url>
+  <url>
+    <loc>/articles/examples/demo_functional.html</loc>
+  </url>
+  <url>
+    <loc>/articles/examples/demo_jax_distributed.html</loc>
+  </url>
+  <url>
+    <loc>/articles/examples/demo_mnist_convnet.html</loc>
+  </url>
+  <url>
+    <loc>/articles/examples/demo_subclass.html</loc>
+  </url>
+  <url>
+    <loc>/articles/examples/demo_torch_multi_gpu.html</loc>
   </url>
   <url>
     <loc>/articles/examples/eager_cvae.html</loc>
@@ -58,10 +166,49 @@
     <loc>/articles/examples/eager_styletransfer.html</loc>
   </url>
   <url>
+    <loc>/articles/examples/eanet.html</loc>
+  </url>
+  <url>
+    <loc>/articles/examples/eeg_signal_classification.html</loc>
+  </url>
+  <url>
+    <loc>/articles/examples/end_to_end_mlm_with_bert.html</loc>
+  </url>
+  <url>
+    <loc>/articles/examples/endpoint_layer_pattern.html</loc>
+  </url>
+  <url>
     <loc>/articles/examples/fine_tuning.html</loc>
   </url>
   <url>
+    <loc>/articles/examples/fixres.html</loc>
+  </url>
+  <url>
+    <loc>/articles/examples/gpt2_text_generation_with_kerasnlp.html</loc>
+  </url>
+  <url>
+    <loc>/articles/examples/grad_cam.html</loc>
+  </url>
+  <url>
+    <loc>/articles/examples/gradient_centralization.html</loc>
+  </url>
+  <url>
+    <loc>/articles/examples/image_captioning.html</loc>
+  </url>
+  <url>
+    <loc>/articles/examples/image_classification_from_scratch.html</loc>
+  </url>
+  <url>
+    <loc>/articles/examples/image_classification_with_vision_transformer.html</loc>
+  </url>
+  <url>
+    <loc>/articles/examples/image_classifier.html</loc>
+  </url>
+  <url>
     <loc>/articles/examples/image_ocr.html</loc>
+  </url>
+  <url>
+    <loc>/articles/examples/imbalanced_classification.html</loc>
   </url>
   <url>
     <loc>/articles/examples/imdb_bidirectional_lstm.html</loc>
@@ -82,7 +229,28 @@
     <loc>/articles/examples/index.html</loc>
   </url>
   <url>
+    <loc>/articles/examples/integrated_gradients.html</loc>
+  </url>
+  <url>
+    <loc>/articles/examples/involution.html</loc>
+  </url>
+  <url>
+    <loc>/articles/examples/keypoint_detection.html</loc>
+  </url>
+  <url>
+    <loc>/articles/examples/knowledge_distillation.html</loc>
+  </url>
+  <url>
+    <loc>/articles/examples/latent_walk.html</loc>
+  </url>
+  <url>
+    <loc>/articles/examples/learnable_resizer.html</loc>
+  </url>
+  <url>
     <loc>/articles/examples/lstm_benchmark.html</loc>
+  </url>
+  <url>
+    <loc>/articles/examples/lstm_character_level_text_generation.html</loc>
   </url>
   <url>
     <loc>/articles/examples/lstm_seq2seq.html</loc>
@@ -92,6 +260,18 @@
   </url>
   <url>
     <loc>/articles/examples/lstm_text_generation.html</loc>
+  </url>
+  <url>
+    <loc>/articles/examples/metric_learning.html</loc>
+  </url>
+  <url>
+    <loc>/articles/examples/mirnet.html</loc>
+  </url>
+  <url>
+    <loc>/articles/examples/mixup.html</loc>
+  </url>
+  <url>
+    <loc>/articles/examples/mlp_image_classification.html</loc>
   </url>
   <url>
     <loc>/articles/examples/mmd_cvae.html</loc>
@@ -107,6 +287,9 @@
   </url>
   <url>
     <loc>/articles/examples/mnist_cnn_embeddings.html</loc>
+  </url>
+  <url>
+    <loc>/articles/examples/mnist_convnet.html</loc>
   </url>
   <url>
     <loc>/articles/examples/mnist_dataset_api.html</loc>
@@ -136,6 +319,18 @@
     <loc>/articles/examples/mnist_transfer_cnn.html</loc>
   </url>
   <url>
+    <loc>/articles/examples/multiple_choice_task_with_transfer_learning.html</loc>
+  </url>
+  <url>
+    <loc>/articles/examples/ner_transformers.html</loc>
+  </url>
+  <url>
+    <loc>/articles/examples/neural_machine_translation_with_keras_nlp.html</loc>
+  </url>
+  <url>
+    <loc>/articles/examples/neural_machine_translation_with_transformer.html</loc>
+  </url>
+  <url>
     <loc>/articles/examples/neural_style_transfer.html</loc>
   </url>
   <url>
@@ -145,10 +340,28 @@
     <loc>/articles/examples/nueral_doodle.html</loc>
   </url>
   <url>
+    <loc>/articles/examples/object_detection_using_vision_transformer.html</loc>
+  </url>
+  <url>
+    <loc>/articles/examples/oxford_pets_image_segmentation.html</loc>
+  </url>
+  <url>
+    <loc>/articles/examples/perceiver_image_classification.html</loc>
+  </url>
+  <url>
+    <loc>/articles/examples/pixelcnn.html</loc>
+  </url>
+  <url>
     <loc>/articles/examples/pretrained_word_embeddings.html</loc>
   </url>
   <url>
+    <loc>/articles/examples/pretraining_BERT.html</loc>
+  </url>
+  <url>
     <loc>/articles/examples/quora_siamese_lstm.html</loc>
+  </url>
+  <url>
+    <loc>/articles/examples/reptile.html</loc>
   </url>
   <url>
     <loc>/articles/examples/reuters_mlp.html</loc>
@@ -157,13 +370,94 @@
     <loc>/articles/examples/reuters_mlp_relu_vs_selu.html</loc>
   </url>
   <url>
+    <loc>/articles/examples/semisupervised_simclr.html</loc>
+  </url>
+  <url>
+    <loc>/articles/examples/shiftvit.html</loc>
+  </url>
+  <url>
+    <loc>/articles/examples/siamese_contrastive.html</loc>
+  </url>
+  <url>
+    <loc>/articles/examples/siamese_network.html</loc>
+  </url>
+  <url>
+    <loc>/articles/examples/simsiam.html</loc>
+  </url>
+  <url>
+    <loc>/articles/examples/speaker_recognition_using_cnn.html</loc>
+  </url>
+  <url>
     <loc>/articles/examples/stateful_lstm.html</loc>
+  </url>
+  <url>
+    <loc>/articles/examples/structured_data_classification_from_scratch.html</loc>
+  </url>
+  <url>
+    <loc>/articles/examples/structured_data_classification_with_feature_space.html</loc>
+  </url>
+  <url>
+    <loc>/articles/examples/subclassing_conv_layers.html</loc>
+  </url>
+  <url>
+    <loc>/articles/examples/super_resolution_sub_pixel.html</loc>
+  </url>
+  <url>
+    <loc>/articles/examples/supervised_contrastive_learning.html</loc>
+  </url>
+  <url>
+    <loc>/articles/examples/swim_transformers.html</loc>
+  </url>
+  <url>
+    <loc>/articles/examples/tabtransformer.html</loc>
+  </url>
+  <url>
+    <loc>/articles/examples/tensorflow_numpy_models.html</loc>
+  </url>
+  <url>
+    <loc>/articles/examples/text_classification_from_scratch.html</loc>
   </url>
   <url>
     <loc>/articles/examples/text_explanation_lime.html</loc>
   </url>
   <url>
+    <loc>/articles/examples/text_generation_gpt.html</loc>
+  </url>
+  <url>
+    <loc>/articles/examples/text_generation_with_miniature_gpt.html</loc>
+  </url>
+  <url>
+    <loc>/articles/examples/tf_serving.html</loc>
+  </url>
+  <url>
     <loc>/articles/examples/tfprob_vae.html</loc>
+  </url>
+  <url>
+    <loc>/articles/examples/timeseries_anomaly_detection.html</loc>
+  </url>
+  <url>
+    <loc>/articles/examples/timeseries_classification_from_scratch.html</loc>
+  </url>
+  <url>
+    <loc>/articles/examples/timeseries_classification_transformer.html</loc>
+  </url>
+  <url>
+    <loc>/articles/examples/timeseries_traffic_forecasting.html</loc>
+  </url>
+  <url>
+    <loc>/articles/examples/timeseries_weather_forecasting.html</loc>
+  </url>
+  <url>
+    <loc>/articles/examples/token_learner.html</loc>
+  </url>
+  <url>
+    <loc>/articles/examples/torchvision_keras.html</loc>
+  </url>
+  <url>
+    <loc>/articles/examples/trainer_pattern.html</loc>
+  </url>
+  <url>
+    <loc>/articles/examples/uk_ireland_accent_recognition.html</loc>
   </url>
   <url>
     <loc>/articles/examples/unet.html</loc>
@@ -172,13 +466,28 @@
     <loc>/articles/examples/unet_linux.html</loc>
   </url>
   <url>
+    <loc>/articles/examples/vae.html</loc>
+  </url>
+  <url>
     <loc>/articles/examples/variational_autoencoder.html</loc>
   </url>
   <url>
     <loc>/articles/examples/variational_autoencoder_deconv.html</loc>
   </url>
   <url>
+    <loc>/articles/examples/video_transformers.html</loc>
+  </url>
+  <url>
+    <loc>/articles/examples/visualizing_what_convnets_learn.html</loc>
+  </url>
+  <url>
     <loc>/articles/examples/vq_vae.html</loc>
+  </url>
+  <url>
+    <loc>/articles/examples/wgan_gp.html</loc>
+  </url>
+  <url>
+    <loc>/articles/examples/zero_dce.html</loc>
   </url>
   <url>
     <loc>/articles/faq.html</loc>
@@ -190,13 +499,85 @@
     <loc>/articles/getting_started.html</loc>
   </url>
   <url>
+    <loc>/articles/getting_started_with_keras_core.html</loc>
+  </url>
+  <url>
     <loc>/articles/guide_keras.html</loc>
+  </url>
+  <url>
+    <loc>/articles/guides/custom_train_step_in_jax.html</loc>
+  </url>
+  <url>
+    <loc>/articles/guides/custom_train_step_in_tensorflow.html</loc>
+  </url>
+  <url>
+    <loc>/articles/guides/custom_train_step_in_torch.html</loc>
+  </url>
+  <url>
+    <loc>/articles/guides/customizing_saving_and_serialization.html</loc>
   </url>
   <url>
     <loc>/articles/guides/customizing_what_happens_in_fit.html</loc>
   </url>
   <url>
+    <loc>/articles/guides/distributed_training.html</loc>
+  </url>
+  <url>
+    <loc>/articles/guides/distributed_training_with_jax.html</loc>
+  </url>
+  <url>
+    <loc>/articles/guides/distributed_training_with_tensorflow.html</loc>
+  </url>
+  <url>
+    <loc>/articles/guides/distributed_training_with_torch.html</loc>
+  </url>
+  <url>
+    <loc>/articles/guides/functional_api.html</loc>
+  </url>
+  <url>
+    <loc>/articles/guides/getting_started_with_keras_core.html</loc>
+  </url>
+  <url>
+    <loc>/articles/guides/intro_to_keras_for_engineers.html</loc>
+  </url>
+  <url>
+    <loc>/articles/guides/intro_to_keras_for_researchers.html</loc>
+  </url>
+  <url>
     <loc>/articles/guides/making_new_layers_and_models_via_subclassing.html</loc>
+  </url>
+  <url>
+    <loc>/articles/guides/preprocessing_layers.html</loc>
+  </url>
+  <url>
+    <loc>/articles/guides/sequential_model.html</loc>
+  </url>
+  <url>
+    <loc>/articles/guides/serialization_and_saving.html</loc>
+  </url>
+  <url>
+    <loc>/articles/guides/training_with_built_in_methods.html</loc>
+  </url>
+  <url>
+    <loc>/articles/guides/transfer_learning.html</loc>
+  </url>
+  <url>
+    <loc>/articles/guides/understanding_masking_and_padding.html</loc>
+  </url>
+  <url>
+    <loc>/articles/guides/working_with_rnns.html</loc>
+  </url>
+  <url>
+    <loc>/articles/guides/writing_a_custom_training_loop_in_jax.html</loc>
+  </url>
+  <url>
+    <loc>/articles/guides/writing_a_custom_training_loop_in_tensorflow.html</loc>
+  </url>
+  <url>
+    <loc>/articles/guides/writing_a_custom_training_loop_in_torch.html</loc>
+  </url>
+  <url>
+    <loc>/articles/guides/writing_a_training_loop_from_scratch.html</loc>
   </url>
   <url>
     <loc>/articles/guides/writing_your_own_callbacks.html</loc>
@@ -205,7 +586,16 @@
     <loc>/articles/index.html</loc>
   </url>
   <url>
+    <loc>/articles/intro_to_keras_for_engineers.html</loc>
+  </url>
+  <url>
+    <loc>/articles/intro_to_keras_for_researchers.html</loc>
+  </url>
+  <url>
     <loc>/articles/learn.html</loc>
+  </url>
+  <url>
+    <loc>/articles/making_new_layers_and_models_via_subclassing.html</loc>
   </url>
   <url>
     <loc>/articles/new-guides/customizing_what_happens_in_fit.html</loc>
@@ -229,6 +619,9 @@
     <loc>/articles/new-guides/writing_your_own_callbacks.html</loc>
   </url>
   <url>
+    <loc>/articles/preprocessing_layers.html</loc>
+  </url>
+  <url>
     <loc>/articles/python_subclasses.html</loc>
   </url>
   <url>
@@ -236,6 +629,9 @@
   </url>
   <url>
     <loc>/articles/sequential_model.html</loc>
+  </url>
+  <url>
+    <loc>/articles/serialization_and_saving.html</loc>
   </url>
   <url>
     <loc>/articles/subclasses.html</loc>
@@ -248,6 +644,12 @@
   </url>
   <url>
     <loc>/articles/training_visualization.html</loc>
+  </url>
+  <url>
+    <loc>/articles/training_with_built_in_methods.html</loc>
+  </url>
+  <url>
+    <loc>/articles/transfer_learning.html</loc>
   </url>
   <url>
     <loc>/articles/tutorial_basic_classification.html</loc>
@@ -263,6 +665,27 @@
   </url>
   <url>
     <loc>/articles/tutorial_save_and_restore.html</loc>
+  </url>
+  <url>
+    <loc>/articles/understanding_masking_and_padding.html</loc>
+  </url>
+  <url>
+    <loc>/articles/working_with_rnns.html</loc>
+  </url>
+  <url>
+    <loc>/articles/writing_a_custom_training_loop_in_jax.html</loc>
+  </url>
+  <url>
+    <loc>/articles/writing_a_custom_training_loop_in_tensorflow.html</loc>
+  </url>
+  <url>
+    <loc>/articles/writing_a_custom_training_loop_in_torch.html</loc>
+  </url>
+  <url>
+    <loc>/articles/writing_a_training_loop_from_scratch.html</loc>
+  </url>
+  <url>
+    <loc>/articles/writing_your_own_callbacks.html</loc>
   </url>
   <url>
     <loc>/authors.html</loc>
@@ -292,16 +715,133 @@
     <loc>/reference/Metric.html</loc>
   </url>
   <url>
+    <loc>/reference/activation_elu.html</loc>
+  </url>
+  <url>
+    <loc>/reference/activation_exponential.html</loc>
+  </url>
+  <url>
+    <loc>/reference/activation_gelu.html</loc>
+  </url>
+  <url>
+    <loc>/reference/activation_hard_sigmoid.html</loc>
+  </url>
+  <url>
+    <loc>/reference/activation_leaky_relu.html</loc>
+  </url>
+  <url>
+    <loc>/reference/activation_linear.html</loc>
+  </url>
+  <url>
+    <loc>/reference/activation_log_softmax.html</loc>
+  </url>
+  <url>
+    <loc>/reference/activation_mish.html</loc>
+  </url>
+  <url>
     <loc>/reference/activation_relu.html</loc>
+  </url>
+  <url>
+    <loc>/reference/activation_relu6.html</loc>
+  </url>
+  <url>
+    <loc>/reference/activation_selu.html</loc>
+  </url>
+  <url>
+    <loc>/reference/activation_sigmoid.html</loc>
+  </url>
+  <url>
+    <loc>/reference/activation_silu.html</loc>
+  </url>
+  <url>
+    <loc>/reference/activation_softmax.html</loc>
+  </url>
+  <url>
+    <loc>/reference/activation_softplus.html</loc>
+  </url>
+  <url>
+    <loc>/reference/activation_softsign.html</loc>
+  </url>
+  <url>
+    <loc>/reference/activation_tanh.html</loc>
   </url>
   <url>
     <loc>/reference/adapt.html</loc>
   </url>
   <url>
+    <loc>/reference/application_convnext_base.html</loc>
+  </url>
+  <url>
+    <loc>/reference/application_convnext_large.html</loc>
+  </url>
+  <url>
+    <loc>/reference/application_convnext_small.html</loc>
+  </url>
+  <url>
+    <loc>/reference/application_convnext_tiny.html</loc>
+  </url>
+  <url>
+    <loc>/reference/application_convnext_xlarge.html</loc>
+  </url>
+  <url>
     <loc>/reference/application_densenet.html</loc>
   </url>
   <url>
+    <loc>/reference/application_densenet121.html</loc>
+  </url>
+  <url>
+    <loc>/reference/application_densenet169.html</loc>
+  </url>
+  <url>
+    <loc>/reference/application_densenet201.html</loc>
+  </url>
+  <url>
     <loc>/reference/application_efficientnet.html</loc>
+  </url>
+  <url>
+    <loc>/reference/application_efficientnet_b0.html</loc>
+  </url>
+  <url>
+    <loc>/reference/application_efficientnet_b1.html</loc>
+  </url>
+  <url>
+    <loc>/reference/application_efficientnet_b2.html</loc>
+  </url>
+  <url>
+    <loc>/reference/application_efficientnet_b3.html</loc>
+  </url>
+  <url>
+    <loc>/reference/application_efficientnet_b4.html</loc>
+  </url>
+  <url>
+    <loc>/reference/application_efficientnet_b5.html</loc>
+  </url>
+  <url>
+    <loc>/reference/application_efficientnet_b6.html</loc>
+  </url>
+  <url>
+    <loc>/reference/application_efficientnet_b7.html</loc>
+  </url>
+  <url>
+    <loc>/reference/application_efficientnet_v2b0.html</loc>
+  </url>
+  <url>
+    <loc>/reference/application_efficientnet_v2b1.html</loc>
+  </url>
+  <url>
+    <loc>/reference/application_efficientnet_v2b2.html</loc>
+  </url>
+  <url>
+    <loc>/reference/application_efficientnet_v2b3.html</loc>
+  </url>
+  <url>
+    <loc>/reference/application_efficientnet_v2l.html</loc>
+  </url>
+  <url>
+    <loc>/reference/application_efficientnet_v2m.html</loc>
+  </url>
+  <url>
+    <loc>/reference/application_efficientnet_v2s.html</loc>
   </url>
   <url>
     <loc>/reference/application_inception_resnet_v2.html</loc>
@@ -319,25 +859,64 @@
     <loc>/reference/application_mobilenet_v3.html</loc>
   </url>
   <url>
+    <loc>/reference/application_mobilenet_v3_large.html</loc>
+  </url>
+  <url>
+    <loc>/reference/application_mobilenet_v3_small.html</loc>
+  </url>
+  <url>
     <loc>/reference/application_nasnet.html</loc>
+  </url>
+  <url>
+    <loc>/reference/application_nasnetlarge.html</loc>
+  </url>
+  <url>
+    <loc>/reference/application_nasnetmobile.html</loc>
   </url>
   <url>
     <loc>/reference/application_resnet.html</loc>
   </url>
   <url>
+    <loc>/reference/application_resnet101.html</loc>
+  </url>
+  <url>
+    <loc>/reference/application_resnet101_v2.html</loc>
+  </url>
+  <url>
+    <loc>/reference/application_resnet152.html</loc>
+  </url>
+  <url>
+    <loc>/reference/application_resnet152_v2.html</loc>
+  </url>
+  <url>
     <loc>/reference/application_resnet50.html</loc>
+  </url>
+  <url>
+    <loc>/reference/application_resnet50_v2.html</loc>
   </url>
   <url>
     <loc>/reference/application_vgg.html</loc>
   </url>
   <url>
+    <loc>/reference/application_vgg16.html</loc>
+  </url>
+  <url>
+    <loc>/reference/application_vgg19.html</loc>
+  </url>
+  <url>
     <loc>/reference/application_xception.html</loc>
+  </url>
+  <url>
+    <loc>/reference/audio_dataset_from_directory.html</loc>
   </url>
   <url>
     <loc>/reference/backend.html</loc>
   </url>
   <url>
     <loc>/reference/bidirectional.html</loc>
+  </url>
+  <url>
+    <loc>/reference/callback_backup_and_restore.html</loc>
   </url>
   <url>
     <loc>/reference/callback_csv_logger.html</loc>
@@ -370,10 +949,73 @@
     <loc>/reference/callback_terminate_on_naan.html</loc>
   </url>
   <url>
+    <loc>/reference/callback_terminate_on_nan.html</loc>
+  </url>
+  <url>
+    <loc>/reference/clear_session.html</loc>
+  </url>
+  <url>
     <loc>/reference/clone_model.html</loc>
   </url>
   <url>
     <loc>/reference/compile.keras.engine.training.Model.html</loc>
+  </url>
+  <url>
+    <loc>/reference/compile.keras.models.model.Model.html</loc>
+  </url>
+  <url>
+    <loc>/reference/config_backend.html</loc>
+  </url>
+  <url>
+    <loc>/reference/config_disable_interactive_logging.html</loc>
+  </url>
+  <url>
+    <loc>/reference/config_disable_traceback_filtering.html</loc>
+  </url>
+  <url>
+    <loc>/reference/config_enable_interactive_logging.html</loc>
+  </url>
+  <url>
+    <loc>/reference/config_enable_traceback_filtering.html</loc>
+  </url>
+  <url>
+    <loc>/reference/config_enable_unsafe_deserialization.html</loc>
+  </url>
+  <url>
+    <loc>/reference/config_epsilon.html</loc>
+  </url>
+  <url>
+    <loc>/reference/config_floatx.html</loc>
+  </url>
+  <url>
+    <loc>/reference/config_image_data_format.html</loc>
+  </url>
+  <url>
+    <loc>/reference/config_is_interactive_logging_enabled.html</loc>
+  </url>
+  <url>
+    <loc>/reference/config_is_traceback_filtering_enabled.html</loc>
+  </url>
+  <url>
+    <loc>/reference/config_set_epsilon.html</loc>
+  </url>
+  <url>
+    <loc>/reference/config_set_floatx.html</loc>
+  </url>
+  <url>
+    <loc>/reference/config_set_image_data_format.html</loc>
+  </url>
+  <url>
+    <loc>/reference/constraint_maxnorm.html</loc>
+  </url>
+  <url>
+    <loc>/reference/constraint_minmaxnorm.html</loc>
+  </url>
+  <url>
+    <loc>/reference/constraint_nonneg.html</loc>
+  </url>
+  <url>
+    <loc>/reference/constraint_unitnorm.html</loc>
   </url>
   <url>
     <loc>/reference/constraints.html</loc>
@@ -418,13 +1060,22 @@
     <loc>/reference/evaluate.keras.engine.training.Model.html</loc>
   </url>
   <url>
+    <loc>/reference/evaluate.keras.models.model.Model.html</loc>
+  </url>
+  <url>
     <loc>/reference/evaluate_generator.html</loc>
   </url>
   <url>
     <loc>/reference/export_savedmodel.keras.engine.training.Model.html</loc>
   </url>
   <url>
+    <loc>/reference/export_savedmodel.keras.models.model.Model.html</loc>
+  </url>
+  <url>
     <loc>/reference/fit.keras.engine.training.Model.html</loc>
+  </url>
+  <url>
+    <loc>/reference/fit.keras.models.model.Model.html</loc>
   </url>
   <url>
     <loc>/reference/fit_generator.html</loc>
@@ -454,6 +1105,9 @@
     <loc>/reference/get_config.html</loc>
   </url>
   <url>
+    <loc>/reference/get_custom_objects.html</loc>
+  </url>
+  <url>
     <loc>/reference/get_file.html</loc>
   </url>
   <url>
@@ -461,6 +1115,15 @@
   </url>
   <url>
     <loc>/reference/get_layer.html</loc>
+  </url>
+  <url>
+    <loc>/reference/get_registered_name.html</loc>
+  </url>
+  <url>
+    <loc>/reference/get_registered_object.html</loc>
+  </url>
+  <url>
+    <loc>/reference/get_source_inputs.html</loc>
   </url>
   <url>
     <loc>/reference/get_vocabulary.html</loc>
@@ -478,10 +1141,16 @@
     <loc>/reference/hdf5_matrix.html</loc>
   </url>
   <url>
+    <loc>/reference/image_array_save.html</loc>
+  </url>
+  <url>
     <loc>/reference/image_data_generator.html</loc>
   </url>
   <url>
     <loc>/reference/image_dataset_from_directory.html</loc>
+  </url>
+  <url>
+    <loc>/reference/image_from_array.html</loc>
   </url>
   <url>
     <loc>/reference/image_load.html</loc>
@@ -556,19 +1225,64 @@
     <loc>/reference/k_abs.html</loc>
   </url>
   <url>
+    <loc>/reference/k_add.html</loc>
+  </url>
+  <url>
     <loc>/reference/k_all.html</loc>
+  </url>
+  <url>
+    <loc>/reference/k_amax.html</loc>
+  </url>
+  <url>
+    <loc>/reference/k_amin.html</loc>
   </url>
   <url>
     <loc>/reference/k_any.html</loc>
   </url>
   <url>
+    <loc>/reference/k_append.html</loc>
+  </url>
+  <url>
     <loc>/reference/k_arange.html</loc>
+  </url>
+  <url>
+    <loc>/reference/k_arccos.html</loc>
+  </url>
+  <url>
+    <loc>/reference/k_arccosh.html</loc>
+  </url>
+  <url>
+    <loc>/reference/k_arcsin.html</loc>
+  </url>
+  <url>
+    <loc>/reference/k_arcsinh.html</loc>
+  </url>
+  <url>
+    <loc>/reference/k_arctan.html</loc>
+  </url>
+  <url>
+    <loc>/reference/k_arctan2.html</loc>
+  </url>
+  <url>
+    <loc>/reference/k_arctanh.html</loc>
   </url>
   <url>
     <loc>/reference/k_argmax.html</loc>
   </url>
   <url>
     <loc>/reference/k_argmin.html</loc>
+  </url>
+  <url>
+    <loc>/reference/k_argsort.html</loc>
+  </url>
+  <url>
+    <loc>/reference/k_array.html</loc>
+  </url>
+  <url>
+    <loc>/reference/k_average.html</loc>
+  </url>
+  <url>
+    <loc>/reference/k_average_pool.html</loc>
   </url>
   <url>
     <loc>/reference/k_backend.html</loc>
@@ -595,6 +1309,12 @@
     <loc>/reference/k_binary_crossentropy.html</loc>
   </url>
   <url>
+    <loc>/reference/k_bincount.html</loc>
+  </url>
+  <url>
+    <loc>/reference/k_broadcast_to.html</loc>
+  </url>
+  <url>
     <loc>/reference/k_cast.html</loc>
   </url>
   <url>
@@ -602,6 +1322,9 @@
   </url>
   <url>
     <loc>/reference/k_categorical_crossentropy.html</loc>
+  </url>
+  <url>
+    <loc>/reference/k_ceil.html</loc>
   </url>
   <url>
     <loc>/reference/k_clear_session.html</loc>
@@ -613,7 +1336,19 @@
     <loc>/reference/k_concatenate.html</loc>
   </url>
   <url>
+    <loc>/reference/k_cond.html</loc>
+  </url>
+  <url>
+    <loc>/reference/k_conj.html</loc>
+  </url>
+  <url>
+    <loc>/reference/k_conjugate.html</loc>
+  </url>
+  <url>
     <loc>/reference/k_constant.html</loc>
+  </url>
+  <url>
+    <loc>/reference/k_conv.html</loc>
   </url>
   <url>
     <loc>/reference/k_conv1d.html</loc>
@@ -631,10 +1366,31 @@
     <loc>/reference/k_conv3d_transpose.html</loc>
   </url>
   <url>
+    <loc>/reference/k_conv_transpose.html</loc>
+  </url>
+  <url>
+    <loc>/reference/k_convert_to_numpy.html</loc>
+  </url>
+  <url>
+    <loc>/reference/k_convert_to_tensor.html</loc>
+  </url>
+  <url>
+    <loc>/reference/k_copy.html</loc>
+  </url>
+  <url>
     <loc>/reference/k_cos.html</loc>
   </url>
   <url>
+    <loc>/reference/k_cosh.html</loc>
+  </url>
+  <url>
+    <loc>/reference/k_count_nonzero.html</loc>
+  </url>
+  <url>
     <loc>/reference/k_count_params.html</loc>
+  </url>
+  <url>
+    <loc>/reference/k_cross.html</loc>
   </url>
   <url>
     <loc>/reference/k_ctc_batch_cost.html</loc>
@@ -652,7 +1408,22 @@
     <loc>/reference/k_cumsum.html</loc>
   </url>
   <url>
+    <loc>/reference/k_depthwise_conv.html</loc>
+  </url>
+  <url>
     <loc>/reference/k_depthwise_conv2d.html</loc>
+  </url>
+  <url>
+    <loc>/reference/k_diag.html</loc>
+  </url>
+  <url>
+    <loc>/reference/k_diagonal.html</loc>
+  </url>
+  <url>
+    <loc>/reference/k_digitize.html</loc>
+  </url>
+  <url>
+    <loc>/reference/k_divide.html</loc>
   </url>
   <url>
     <loc>/reference/k_dot.html</loc>
@@ -664,13 +1435,22 @@
     <loc>/reference/k_dtype.html</loc>
   </url>
   <url>
+    <loc>/reference/k_einsum.html</loc>
+  </url>
+  <url>
     <loc>/reference/k_elu.html</loc>
+  </url>
+  <url>
+    <loc>/reference/k_empty.html</loc>
   </url>
   <url>
     <loc>/reference/k_epsilon.html</loc>
   </url>
   <url>
     <loc>/reference/k_equal.html</loc>
+  </url>
+  <url>
+    <loc>/reference/k_erf.html</loc>
   </url>
   <url>
     <loc>/reference/k_eval.html</loc>
@@ -682,13 +1462,34 @@
     <loc>/reference/k_expand_dims.html</loc>
   </url>
   <url>
+    <loc>/reference/k_expm1.html</loc>
+  </url>
+  <url>
+    <loc>/reference/k_extract_sequences.html</loc>
+  </url>
+  <url>
     <loc>/reference/k_eye.html</loc>
+  </url>
+  <url>
+    <loc>/reference/k_fft.html</loc>
+  </url>
+  <url>
+    <loc>/reference/k_fft2.html</loc>
   </url>
   <url>
     <loc>/reference/k_flatten.html</loc>
   </url>
   <url>
+    <loc>/reference/k_flip.html</loc>
+  </url>
+  <url>
     <loc>/reference/k_floatx.html</loc>
+  </url>
+  <url>
+    <loc>/reference/k_floor.html</loc>
+  </url>
+  <url>
+    <loc>/reference/k_floor_divide.html</loc>
   </url>
   <url>
     <loc>/reference/k_foldl.html</loc>
@@ -697,10 +1498,25 @@
     <loc>/reference/k_foldr.html</loc>
   </url>
   <url>
+    <loc>/reference/k_fori_loop.html</loc>
+  </url>
+  <url>
+    <loc>/reference/k_full.html</loc>
+  </url>
+  <url>
+    <loc>/reference/k_full_like.html</loc>
+  </url>
+  <url>
     <loc>/reference/k_function.html</loc>
   </url>
   <url>
     <loc>/reference/k_gather.html</loc>
+  </url>
+  <url>
+    <loc>/reference/k_gelu.html</loc>
+  </url>
+  <url>
+    <loc>/reference/k_get_item.html</loc>
   </url>
   <url>
     <loc>/reference/k_get_session.html</loc>
@@ -727,10 +1543,31 @@
     <loc>/reference/k_hard_sigmoid.html</loc>
   </url>
   <url>
+    <loc>/reference/k_hstack.html</loc>
+  </url>
+  <url>
     <loc>/reference/k_identity.html</loc>
   </url>
   <url>
+    <loc>/reference/k_imag.html</loc>
+  </url>
+  <url>
+    <loc>/reference/k_image_affine_transform.html</loc>
+  </url>
+  <url>
     <loc>/reference/k_image_data_format.html</loc>
+  </url>
+  <url>
+    <loc>/reference/k_image_extract_patches.html</loc>
+  </url>
+  <url>
+    <loc>/reference/k_image_map_coordinates.html</loc>
+  </url>
+  <url>
+    <loc>/reference/k_image_pad_images.html</loc>
+  </url>
+  <url>
+    <loc>/reference/k_image_resize.html</loc>
   </url>
   <url>
     <loc>/reference/k_in_test_phase.html</loc>
@@ -745,6 +1582,9 @@
     <loc>/reference/k_int_shape.html</loc>
   </url>
   <url>
+    <loc>/reference/k_irfft.html</loc>
+  </url>
+  <url>
     <loc>/reference/k_is_keras_tensor.html</loc>
   </url>
   <url>
@@ -757,7 +1597,25 @@
     <loc>/reference/k_is_tensor.html</loc>
   </url>
   <url>
+    <loc>/reference/k_isclose.html</loc>
+  </url>
+  <url>
+    <loc>/reference/k_isfinite.html</loc>
+  </url>
+  <url>
+    <loc>/reference/k_isinf.html</loc>
+  </url>
+  <url>
+    <loc>/reference/k_isnan.html</loc>
+  </url>
+  <url>
+    <loc>/reference/k_istft.html</loc>
+  </url>
+  <url>
     <loc>/reference/k_l2_normalize.html</loc>
+  </url>
+  <url>
+    <loc>/reference/k_leaky_relu.html</loc>
   </url>
   <url>
     <loc>/reference/k_learning_phase.html</loc>
@@ -769,6 +1627,9 @@
     <loc>/reference/k_less_equal.html</loc>
   </url>
   <url>
+    <loc>/reference/k_linspace.html</loc>
+  </url>
+  <url>
     <loc>/reference/k_local_conv1d.html</loc>
   </url>
   <url>
@@ -776,6 +1637,39 @@
   </url>
   <url>
     <loc>/reference/k_log.html</loc>
+  </url>
+  <url>
+    <loc>/reference/k_log10.html</loc>
+  </url>
+  <url>
+    <loc>/reference/k_log1p.html</loc>
+  </url>
+  <url>
+    <loc>/reference/k_log2.html</loc>
+  </url>
+  <url>
+    <loc>/reference/k_log_sigmoid.html</loc>
+  </url>
+  <url>
+    <loc>/reference/k_log_softmax.html</loc>
+  </url>
+  <url>
+    <loc>/reference/k_logaddexp.html</loc>
+  </url>
+  <url>
+    <loc>/reference/k_logical_and.html</loc>
+  </url>
+  <url>
+    <loc>/reference/k_logical_not.html</loc>
+  </url>
+  <url>
+    <loc>/reference/k_logical_or.html</loc>
+  </url>
+  <url>
+    <loc>/reference/k_logical_xor.html</loc>
+  </url>
+  <url>
+    <loc>/reference/k_logspace.html</loc>
   </url>
   <url>
     <loc>/reference/k_logsumexp.html</loc>
@@ -787,7 +1681,13 @@
     <loc>/reference/k_map_fn.html</loc>
   </url>
   <url>
+    <loc>/reference/k_matmul.html</loc>
+  </url>
+  <url>
     <loc>/reference/k_max.html</loc>
+  </url>
+  <url>
+    <loc>/reference/k_max_pool.html</loc>
   </url>
   <url>
     <loc>/reference/k_maximum.html</loc>
@@ -796,16 +1696,46 @@
     <loc>/reference/k_mean.html</loc>
   </url>
   <url>
+    <loc>/reference/k_median.html</loc>
+  </url>
+  <url>
+    <loc>/reference/k_meshgrid.html</loc>
+  </url>
+  <url>
     <loc>/reference/k_min.html</loc>
   </url>
   <url>
     <loc>/reference/k_minimum.html</loc>
   </url>
   <url>
+    <loc>/reference/k_mod.html</loc>
+  </url>
+  <url>
+    <loc>/reference/k_moments.html</loc>
+  </url>
+  <url>
+    <loc>/reference/k_moveaxis.html</loc>
+  </url>
+  <url>
     <loc>/reference/k_moving_average_update.html</loc>
   </url>
   <url>
+    <loc>/reference/k_multi_hot.html</loc>
+  </url>
+  <url>
+    <loc>/reference/k_multiply.html</loc>
+  </url>
+  <url>
+    <loc>/reference/k_nan_to_num.html</loc>
+  </url>
+  <url>
     <loc>/reference/k_ndim.html</loc>
+  </url>
+  <url>
+    <loc>/reference/k_negative.html</loc>
+  </url>
+  <url>
+    <loc>/reference/k_nonzero.html</loc>
   </url>
   <url>
     <loc>/reference/k_normalize_batch_in_training.html</loc>
@@ -823,6 +1753,12 @@
     <loc>/reference/k_ones_like.html</loc>
   </url>
   <url>
+    <loc>/reference/k_outer.html</loc>
+  </url>
+  <url>
+    <loc>/reference/k_pad.html</loc>
+  </url>
+  <url>
     <loc>/reference/k_permute_dimensions.html</loc>
   </url>
   <url>
@@ -838,10 +1774,19 @@
     <loc>/reference/k_pow.html</loc>
   </url>
   <url>
+    <loc>/reference/k_power.html</loc>
+  </url>
+  <url>
     <loc>/reference/k_print_tensor.html</loc>
   </url>
   <url>
     <loc>/reference/k_prod.html</loc>
+  </url>
+  <url>
+    <loc>/reference/k_qr.html</loc>
+  </url>
+  <url>
+    <loc>/reference/k_quantile.html</loc>
   </url>
   <url>
     <loc>/reference/k_random_bernoulli.html</loc>
@@ -862,7 +1807,19 @@
     <loc>/reference/k_random_uniform_variable.html</loc>
   </url>
   <url>
+    <loc>/reference/k_ravel.html</loc>
+  </url>
+  <url>
+    <loc>/reference/k_real.html</loc>
+  </url>
+  <url>
+    <loc>/reference/k_reciprocal.html</loc>
+  </url>
+  <url>
     <loc>/reference/k_relu.html</loc>
+  </url>
+  <url>
+    <loc>/reference/k_relu6.html</loc>
   </url>
   <url>
     <loc>/reference/k_repeat.html</loc>
@@ -886,10 +1843,37 @@
     <loc>/reference/k_reverse.html</loc>
   </url>
   <url>
+    <loc>/reference/k_rfft.html</loc>
+  </url>
+  <url>
     <loc>/reference/k_rnn.html</loc>
   </url>
   <url>
+    <loc>/reference/k_roll.html</loc>
+  </url>
+  <url>
     <loc>/reference/k_round.html</loc>
+  </url>
+  <url>
+    <loc>/reference/k_rsqrt.html</loc>
+  </url>
+  <url>
+    <loc>/reference/k_scatter.html</loc>
+  </url>
+  <url>
+    <loc>/reference/k_scatter_update.html</loc>
+  </url>
+  <url>
+    <loc>/reference/k_segment_max.html</loc>
+  </url>
+  <url>
+    <loc>/reference/k_segment_sum.html</loc>
+  </url>
+  <url>
+    <loc>/reference/k_selu.html</loc>
+  </url>
+  <url>
+    <loc>/reference/k_separable_conv.html</loc>
   </url>
   <url>
     <loc>/reference/k_separable_conv2d.html</loc>
@@ -910,7 +1894,22 @@
     <loc>/reference/k_sign.html</loc>
   </url>
   <url>
+    <loc>/reference/k_silu.html</loc>
+  </url>
+  <url>
     <loc>/reference/k_sin.html</loc>
+  </url>
+  <url>
+    <loc>/reference/k_sinh.html</loc>
+  </url>
+  <url>
+    <loc>/reference/k_size.html</loc>
+  </url>
+  <url>
+    <loc>/reference/k_slice.html</loc>
+  </url>
+  <url>
+    <loc>/reference/k_slice_update.html</loc>
   </url>
   <url>
     <loc>/reference/k_softmax.html</loc>
@@ -922,6 +1921,9 @@
     <loc>/reference/k_softsign.html</loc>
   </url>
   <url>
+    <loc>/reference/k_sort.html</loc>
+  </url>
+  <url>
     <loc>/reference/k_sparse_categorical_crossentropy.html</loc>
   </url>
   <url>
@@ -929,6 +1931,9 @@
   </url>
   <url>
     <loc>/reference/k_spatial_3d_padding.html</loc>
+  </url>
+  <url>
+    <loc>/reference/k_split.html</loc>
   </url>
   <url>
     <loc>/reference/k_sqrt.html</loc>
@@ -946,13 +1951,31 @@
     <loc>/reference/k_std.html</loc>
   </url>
   <url>
+    <loc>/reference/k_stft.html</loc>
+  </url>
+  <url>
     <loc>/reference/k_stop_gradient.html</loc>
+  </url>
+  <url>
+    <loc>/reference/k_subtract.html</loc>
   </url>
   <url>
     <loc>/reference/k_sum.html</loc>
   </url>
   <url>
+    <loc>/reference/k_swapaxes.html</loc>
+  </url>
+  <url>
     <loc>/reference/k_switch.html</loc>
+  </url>
+  <url>
+    <loc>/reference/k_take.html</loc>
+  </url>
+  <url>
+    <loc>/reference/k_take_along_axis.html</loc>
+  </url>
+  <url>
+    <loc>/reference/k_tan.html</loc>
   </url>
   <url>
     <loc>/reference/k_tanh.html</loc>
@@ -961,13 +1984,34 @@
     <loc>/reference/k_temporal_padding.html</loc>
   </url>
   <url>
+    <loc>/reference/k_tensordot.html</loc>
+  </url>
+  <url>
     <loc>/reference/k_tile.html</loc>
   </url>
   <url>
     <loc>/reference/k_to_dense.html</loc>
   </url>
   <url>
+    <loc>/reference/k_top_k.html</loc>
+  </url>
+  <url>
+    <loc>/reference/k_trace.html</loc>
+  </url>
+  <url>
     <loc>/reference/k_transpose.html</loc>
+  </url>
+  <url>
+    <loc>/reference/k_tri.html</loc>
+  </url>
+  <url>
+    <loc>/reference/k_tril.html</loc>
+  </url>
+  <url>
+    <loc>/reference/k_triu.html</loc>
+  </url>
+  <url>
+    <loc>/reference/k_true_divide.html</loc>
   </url>
   <url>
     <loc>/reference/k_truncated_normal.html</loc>
@@ -989,6 +2033,21 @@
   </url>
   <url>
     <loc>/reference/k_variable.html</loc>
+  </url>
+  <url>
+    <loc>/reference/k_vdot.html</loc>
+  </url>
+  <url>
+    <loc>/reference/k_vectorized_map.html</loc>
+  </url>
+  <url>
+    <loc>/reference/k_vstack.html</loc>
+  </url>
+  <url>
+    <loc>/reference/k_where.html</loc>
+  </url>
+  <url>
+    <loc>/reference/k_while_loop.html</loc>
   </url>
   <url>
     <loc>/reference/k_zeros.html</loc>
@@ -1069,6 +2128,9 @@
     <loc>/reference/layer_batch_normalization.html</loc>
   </url>
   <url>
+    <loc>/reference/layer_bidirectional.html</loc>
+  </url>
+  <url>
     <loc>/reference/layer_category_encoding.html</loc>
   </url>
   <url>
@@ -1141,7 +2203,13 @@
     <loc>/reference/layer_dropout.html</loc>
   </url>
   <url>
+    <loc>/reference/layer_einsum_dense.html</loc>
+  </url>
+  <url>
     <loc>/reference/layer_embedding.html</loc>
+  </url>
+  <url>
+    <loc>/reference/layer_feature_space.html</loc>
   </url>
   <url>
     <loc>/reference/layer_flatten.html</loc>
@@ -1171,13 +2239,25 @@
     <loc>/reference/layer_global_max_pooling_3d.html</loc>
   </url>
   <url>
+    <loc>/reference/layer_group_normalization.html</loc>
+  </url>
+  <url>
+    <loc>/reference/layer_group_query_attention.html</loc>
+  </url>
+  <url>
     <loc>/reference/layer_gru.html</loc>
   </url>
   <url>
     <loc>/reference/layer_gru_cell.html</loc>
   </url>
   <url>
+    <loc>/reference/layer_hashed_crossing.html</loc>
+  </url>
+  <url>
     <loc>/reference/layer_hashing.html</loc>
+  </url>
+  <url>
+    <loc>/reference/layer_identity.html</loc>
   </url>
   <url>
     <loc>/reference/layer_input.html</loc>
@@ -1232,6 +2312,9 @@
   </url>
   <url>
     <loc>/reference/layer_permute.html</loc>
+  </url>
+  <url>
+    <loc>/reference/layer_random_brightness.html</loc>
   </url>
   <url>
     <loc>/reference/layer_random_contrast.html</loc>
@@ -1294,6 +2377,9 @@
     <loc>/reference/layer_spatial_dropout_3d.html</loc>
   </url>
   <url>
+    <loc>/reference/layer_spectral_normalization.html</loc>
+  </url>
+  <url>
     <loc>/reference/layer_stacked_rnn_cells.html</loc>
   </url>
   <url>
@@ -1304,6 +2390,18 @@
   </url>
   <url>
     <loc>/reference/layer_text_vectorization.html</loc>
+  </url>
+  <url>
+    <loc>/reference/layer_tfsm.html</loc>
+  </url>
+  <url>
+    <loc>/reference/layer_time_distributed.html</loc>
+  </url>
+  <url>
+    <loc>/reference/layer_torch_module_wrapper.html</loc>
+  </url>
+  <url>
+    <loc>/reference/layer_unit_normalization.html</loc>
   </url>
   <url>
     <loc>/reference/layer_upsampling_1d.html</loc>
@@ -1348,10 +2446,55 @@
     <loc>/reference/loss_binary_crossentropy.html</loc>
   </url>
   <url>
+    <loc>/reference/loss_binary_focal_crossentropy.html</loc>
+  </url>
+  <url>
+    <loc>/reference/loss_categorical_crossentropy.html</loc>
+  </url>
+  <url>
+    <loc>/reference/loss_categorical_focal_crossentropy.html</loc>
+  </url>
+  <url>
+    <loc>/reference/loss_categorical_hinge.html</loc>
+  </url>
+  <url>
     <loc>/reference/loss_cosine_proximity.html</loc>
   </url>
   <url>
+    <loc>/reference/loss_cosine_similarity.html</loc>
+  </url>
+  <url>
+    <loc>/reference/loss_hinge.html</loc>
+  </url>
+  <url>
+    <loc>/reference/loss_huber.html</loc>
+  </url>
+  <url>
+    <loc>/reference/loss_kl_divergence.html</loc>
+  </url>
+  <url>
+    <loc>/reference/loss_log_cosh.html</loc>
+  </url>
+  <url>
+    <loc>/reference/loss_mean_absolute_error.html</loc>
+  </url>
+  <url>
+    <loc>/reference/loss_mean_absolute_percentage_error.html</loc>
+  </url>
+  <url>
     <loc>/reference/loss_mean_squared_error.html</loc>
+  </url>
+  <url>
+    <loc>/reference/loss_mean_squared_logarithmic_error.html</loc>
+  </url>
+  <url>
+    <loc>/reference/loss_poisson.html</loc>
+  </url>
+  <url>
+    <loc>/reference/loss_sparse_categorical_crossentropy.html</loc>
+  </url>
+  <url>
+    <loc>/reference/loss_squared_hinge.html</loc>
   </url>
   <url>
     <loc>/reference/make_sampling_table.html</loc>
@@ -1372,10 +2515,19 @@
     <loc>/reference/metric_binary_crossentropy.html</loc>
   </url>
   <url>
+    <loc>/reference/metric_binary_focal_crossentropy.html</loc>
+  </url>
+  <url>
+    <loc>/reference/metric_binary_iou.html</loc>
+  </url>
+  <url>
     <loc>/reference/metric_categorical_accuracy.html</loc>
   </url>
   <url>
     <loc>/reference/metric_categorical_crossentropy.html</loc>
+  </url>
+  <url>
+    <loc>/reference/metric_categorical_focal_crossentropy.html</loc>
   </url>
   <url>
     <loc>/reference/metric_categorical_hinge.html</loc>
@@ -1387,16 +2539,37 @@
     <loc>/reference/metric_cosine_similarity.html</loc>
   </url>
   <url>
+    <loc>/reference/metric_f1_score.html</loc>
+  </url>
+  <url>
     <loc>/reference/metric_false_negatives.html</loc>
   </url>
   <url>
     <loc>/reference/metric_false_positives.html</loc>
   </url>
   <url>
+    <loc>/reference/metric_fbeta_score.html</loc>
+  </url>
+  <url>
     <loc>/reference/metric_hinge.html</loc>
   </url>
   <url>
+    <loc>/reference/metric_huber.html</loc>
+  </url>
+  <url>
+    <loc>/reference/metric_iou.html</loc>
+  </url>
+  <url>
+    <loc>/reference/metric_kl_divergence.html</loc>
+  </url>
+  <url>
     <loc>/reference/metric_kullback_leibler_divergence.html</loc>
+  </url>
+  <url>
+    <loc>/reference/metric_log_cosh.html</loc>
+  </url>
+  <url>
+    <loc>/reference/metric_log_cosh_error.html</loc>
   </url>
   <url>
     <loc>/reference/metric_logcosh_error.html</loc>
@@ -1429,6 +2602,12 @@
     <loc>/reference/metric_mean_wrapper.html</loc>
   </url>
   <url>
+    <loc>/reference/metric_one_hot_iou.html</loc>
+  </url>
+  <url>
+    <loc>/reference/metric_one_hot_mean_iou.html</loc>
+  </url>
+  <url>
     <loc>/reference/metric_poisson.html</loc>
   </url>
   <url>
@@ -1436,6 +2615,9 @@
   </url>
   <url>
     <loc>/reference/metric_precision_at_recall.html</loc>
+  </url>
+  <url>
+    <loc>/reference/metric_r2_score.html</loc>
   </url>
   <url>
     <loc>/reference/metric_recall.html</loc>
@@ -1480,6 +2662,9 @@
     <loc>/reference/model_from_saved_model.html</loc>
   </url>
   <url>
+    <loc>/reference/model_to_dot.html</loc>
+  </url>
+  <url>
     <loc>/reference/model_to_json.html</loc>
   </url>
   <url>
@@ -1507,13 +2692,28 @@
     <loc>/reference/optimizer_adadelta.html</loc>
   </url>
   <url>
+    <loc>/reference/optimizer_adafactor.html</loc>
+  </url>
+  <url>
     <loc>/reference/optimizer_adagrad.html</loc>
   </url>
   <url>
     <loc>/reference/optimizer_adam.html</loc>
   </url>
   <url>
+    <loc>/reference/optimizer_adam_w.html</loc>
+  </url>
+  <url>
     <loc>/reference/optimizer_adamax.html</loc>
+  </url>
+  <url>
+    <loc>/reference/optimizer_ftrl.html</loc>
+  </url>
+  <url>
+    <loc>/reference/optimizer_lion.html</loc>
+  </url>
+  <url>
+    <loc>/reference/optimizer_loss_scale.html</loc>
   </url>
   <url>
     <loc>/reference/optimizer_nadam.html</loc>
@@ -1525,6 +2725,9 @@
     <loc>/reference/optimizer_sgd.html</loc>
   </url>
   <url>
+    <loc>/reference/pack_x_y_sample_weight.html</loc>
+  </url>
+  <url>
     <loc>/reference/pad_sequences.html</loc>
   </url>
   <url>
@@ -1532,6 +2735,9 @@
   </url>
   <url>
     <loc>/reference/plot.keras.engine.training.Model.html</loc>
+  </url>
+  <url>
+    <loc>/reference/plot.keras.models.model.Model.html</loc>
   </url>
   <url>
     <loc>/reference/plot.keras_training_history.html</loc>
@@ -1543,6 +2749,9 @@
     <loc>/reference/predict.keras.engine.training.Model.html</loc>
   </url>
   <url>
+    <loc>/reference/predict.keras.models.model.Model.html</loc>
+  </url>
+  <url>
     <loc>/reference/predict_generator.html</loc>
   </url>
   <url>
@@ -1552,10 +2761,43 @@
     <loc>/reference/predict_proba.html</loc>
   </url>
   <url>
+    <loc>/reference/random_categorical.html</loc>
+  </url>
+  <url>
+    <loc>/reference/random_dropout.html</loc>
+  </url>
+  <url>
+    <loc>/reference/random_integer.html</loc>
+  </url>
+  <url>
+    <loc>/reference/random_normal.html</loc>
+  </url>
+  <url>
+    <loc>/reference/random_seed_generator.html</loc>
+  </url>
+  <url>
+    <loc>/reference/random_shuffle.html</loc>
+  </url>
+  <url>
+    <loc>/reference/random_truncated_normal.html</loc>
+  </url>
+  <url>
+    <loc>/reference/random_uniform.html</loc>
+  </url>
+  <url>
     <loc>/reference/reexports.html</loc>
   </url>
   <url>
     <loc>/reference/regularizer_l1.html</loc>
+  </url>
+  <url>
+    <loc>/reference/regularizer_l1_l2.html</loc>
+  </url>
+  <url>
+    <loc>/reference/regularizer_l2.html</loc>
+  </url>
+  <url>
+    <loc>/reference/regularizer_orthogonal.html</loc>
   </url>
   <url>
     <loc>/reference/reset_states.html</loc>
@@ -1585,13 +2827,22 @@
     <loc>/reference/serialize_model.html</loc>
   </url>
   <url>
+    <loc>/reference/set_random_seed.html</loc>
+  </url>
+  <url>
     <loc>/reference/set_vocabulary.html</loc>
   </url>
   <url>
     <loc>/reference/skipgrams.html</loc>
   </url>
   <url>
+    <loc>/reference/split_dataset.html</loc>
+  </url>
+  <url>
     <loc>/reference/summary.keras.engine.training.Model.html</loc>
+  </url>
+  <url>
+    <loc>/reference/summary.keras.models.model.Model.html</loc>
   </url>
   <url>
     <loc>/reference/text_dataset_from_directory.html</loc>
@@ -1631,6 +2882,9 @@
   </url>
   <url>
     <loc>/reference/train_on_batch.html</loc>
+  </url>
+  <url>
+    <loc>/reference/unpack_x_y_sample_weight.html</loc>
   </url>
   <url>
     <loc>/reference/use_implementation.html</loc>

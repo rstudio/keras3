@@ -19,7 +19,7 @@ of metric functions that start with prefix metric_*."><meta property="og:image" 
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">keras</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">2.8.0.9000</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">2.13.0.9000</span>
       </span>
     </div>
 
@@ -173,76 +173,89 @@ of metric functions that start with prefix <code>metric_*</code>.</p>
     <h2>Arguments</h2>
     <dl><dt>name</dt>
 <dd><p>(Optional) string name of the metric instance.</p></dd>
+
+
 <dt>dtype</dt>
 <dd><p>(Optional) data type of the metric result.</p></dd>
+
 </dl></div>
     <div id="value">
     <h2>Value</h2>
-    <p>A (subclassed) <code>Metric</code> instance that can be passed directly to
+    
+
+<p>A (subclassed) <code>Metric</code> instance that can be passed directly to
 <code>compile(metrics = )</code>, or used as a standalone object. See <code>?Metric</code> for
 example usage.</p>
     </div>
     <div id="usage-with-compile">
     <h2>Usage with <code>compile</code></h2>
-    <p></p><div class="sourceCode r"><pre><code><span class="va">model</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://generics.r-lib.org/reference/compile.html" class="external-link">compile</a></span><span class="op">(</span>
-  optimizer <span class="op">=</span> <span class="st">'sgd'</span>,
-  loss <span class="op">=</span> <span class="st">'mse'</span>,
-  metrics <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="fu">metric_SOME_METRIC</span><span class="op">(</span><span class="op">)</span>, <span class="fu">metric_SOME_OTHER_METRIC</span><span class="op">(</span><span class="op">)</span><span class="op">)</span>
-<span class="op">)</span></code></pre><p></p></div>
+    
+
+
+<p></p><div class="sourceCode r"><pre><code><span><span class="va">model</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://generics.r-lib.org/reference/compile.html" class="external-link">compile</a></span><span class="op">(</span></span>
+<span>  optimizer <span class="op">=</span> <span class="st">'sgd'</span>,</span>
+<span>  loss <span class="op">=</span> <span class="st">'mse'</span>,</span>
+<span>  metrics <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="fu">metric_SOME_METRIC</span><span class="op">(</span><span class="op">)</span>, <span class="fu">metric_SOME_OTHER_METRIC</span><span class="op">(</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="op">)</span></span></code></pre><p></p></div>
     </div>
     <div id="standalone-usage">
     <h2>Standalone usage</h2>
-    <p></p><div class="sourceCode r"><pre><code><span class="va">m</span> <span class="op">&lt;-</span> <span class="fu">metric_SOME_METRIC</span><span class="op">(</span><span class="op">)</span>
-<span class="kw">for</span> <span class="op">(</span><span class="va">e</span> <span class="kw">in</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html" class="external-link">seq</a></span><span class="op">(</span><span class="va">epochs</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span>
-  <span class="kw">for</span> <span class="op">(</span><span class="va">i</span> <span class="kw">in</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html" class="external-link">seq</a></span><span class="op">(</span><span class="va">train_steps</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span>
-    <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="va">y_true</span>, <span class="va">y_pred</span>, sample_weight <span class="op">=</span> <span class="cn">NULL</span><span class="op">)</span> <span class="op"><a href="../reference/multi-assign.html">%&lt;-%</a></span> <span class="va">...</span>
-    <span class="va">m</span><span class="op">$</span><span class="fu">update_state</span><span class="op">(</span><span class="va">y_true</span>, <span class="va">y_pred</span>, <span class="va">sample_weight</span><span class="op">)</span>
-  <span class="op">}</span>
-  <span class="fu"><a href="https://rdrr.io/r/base/cat.html" class="external-link">cat</a></span><span class="op">(</span><span class="st">'Final epoch result: '</span>, <span class="fu"><a href="https://rdrr.io/r/base/numeric.html" class="external-link">as.numeric</a></span><span class="op">(</span><span class="va">m</span><span class="op">$</span><span class="fu">result</span><span class="op">(</span><span class="op">)</span><span class="op">)</span>, <span class="st">"\n"</span><span class="op">)</span>
-  <span class="va">m</span><span class="op">$</span><span class="fu">reset_state</span><span class="op">(</span><span class="op">)</span>
-<span class="op">}</span></code></pre><p></p></div>
+    
+
+
+<p></p><div class="sourceCode r"><pre><code><span><span class="va">m</span> <span class="op">&lt;-</span> <span class="fu">metric_SOME_METRIC</span><span class="op">(</span><span class="op">)</span></span>
+<span><span class="kw">for</span> <span class="op">(</span><span class="va">e</span> <span class="kw">in</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html" class="external-link">seq</a></span><span class="op">(</span><span class="va">epochs</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span></span>
+<span>  <span class="kw">for</span> <span class="op">(</span><span class="va">i</span> <span class="kw">in</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html" class="external-link">seq</a></span><span class="op">(</span><span class="va">train_steps</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span></span>
+<span>    <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="va">y_true</span>, <span class="va">y_pred</span>, sample_weight <span class="op">=</span> <span class="cn">NULL</span><span class="op">)</span> <span class="op"><a href="../reference/multi-assign.html">%&lt;-%</a></span> <span class="va">...</span></span>
+<span>    <span class="va">m</span><span class="op">$</span><span class="fu">update_state</span><span class="op">(</span><span class="va">y_true</span>, <span class="va">y_pred</span>, <span class="va">sample_weight</span><span class="op">)</span></span>
+<span>  <span class="op">}</span></span>
+<span>  <span class="fu"><a href="https://rdrr.io/r/base/cat.html" class="external-link">cat</a></span><span class="op">(</span><span class="st">'Final epoch result: '</span>, <span class="fu"><a href="https://rdrr.io/r/base/numeric.html" class="external-link">as.numeric</a></span><span class="op">(</span><span class="va">m</span><span class="op">$</span><span class="fu">result</span><span class="op">(</span><span class="op">)</span><span class="op">)</span>, <span class="st">"\n"</span><span class="op">)</span></span>
+<span>  <span class="va">m</span><span class="op">$</span><span class="fu">reset_state</span><span class="op">(</span><span class="op">)</span></span>
+<span><span class="op">}</span></span></code></pre><p></p></div>
     </div>
     <div id="custom-metric-subclass-">
     <h2>Custom Metric (subclass)</h2>
     
 
-<p>To be implemented by subclasses:</p><ul><li><p><code>initialize()</code>: All state variables should be created in this method by calling <code>self$add_weight()</code> like:</p><div class="sourceCode"><pre><code><span class="va">self</span><span class="op">$</span><span class="va">var</span> <span class="op">&lt;-</span> <span class="va">self</span><span class="op">$</span><span class="fu">add_weight</span><span class="op">(</span><span class="va">...</span><span class="op">)</span></code></pre></div></li>
-<li><p><code>update_state()</code>: Has all updates to the state variables like:</p><div class="sourceCode"><pre><code><span class="va">self</span><span class="op">$</span><span class="va">var</span><span class="op">$</span><span class="fu">assign_add</span><span class="op">(</span><span class="va">...</span><span class="op">)</span></code></pre></div></li>
+<p>To be implemented by subclasses:</p><ul><li><p><code>initialize()</code>: All state variables should be created in this method by calling <code>self$add_weight()</code> like:</p>
+<p></p><div class="sourceCode"><pre><code><span id="cb1-1"><a href="#cb1-1" tabindex="-1"></a>self<span class="sc">$</span>var <span class="ot">&lt;-</span> self<span class="sc">$</span><span class="fu">add_weight</span>(...)</span></code></pre><p></p></div></li>
+<li><p><code>update_state()</code>: Has all updates to the state variables like:</p>
+<p></p><div class="sourceCode"><pre><code><span id="cb1-1"><a href="#cb1-1" tabindex="-1"></a>self<span class="sc">$</span>var<span class="sc">$</span><span class="fu">assign_add</span>(...)</span></code></pre><p></p></div></li>
 <li><p><code>result()</code>: Computes and returns a value for the metric from the state variables.</p></li>
-</ul><p>Example custom metric subclass:</p><div class="sourceCode R"><pre><code><span class="va">metric_binary_true_positives</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/new-classes.html">new_metric_class</a></span><span class="op">(</span>
-  classname <span class="op">=</span> <span class="st">"BinaryTruePositives"</span>,
-  initialize <span class="op">=</span> <span class="kw">function</span><span class="op">(</span><span class="va">name</span> <span class="op">=</span> <span class="st">'binary_true_positives'</span>, <span class="va">...</span><span class="op">)</span> <span class="op">{</span>
-    <span class="va">super</span><span class="op">$</span><span class="fu">initialize</span><span class="op">(</span>name <span class="op">=</span> <span class="va">name</span>, <span class="va">...</span><span class="op">)</span>
-    <span class="va">self</span><span class="op">$</span><span class="va">true_positives</span> <span class="op">&lt;-</span>
-      <span class="va">self</span><span class="op">$</span><span class="fu">add_weight</span><span class="op">(</span>name <span class="op">=</span> <span class="st">'tp'</span>, initializer <span class="op">=</span> <span class="st">'zeros'</span><span class="op">)</span>
-  <span class="op">}</span>,
-
-  update_state <span class="op">=</span> <span class="kw">function</span><span class="op">(</span><span class="va">y_true</span>, <span class="va">y_pred</span>, <span class="va">sample_weight</span> <span class="op">=</span> <span class="cn">NULL</span><span class="op">)</span> <span class="op">{</span>
-    <span class="va">y_true</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/k_cast.html">k_cast</a></span><span class="op">(</span><span class="va">y_true</span>, <span class="st">"bool"</span><span class="op">)</span>
-    <span class="va">y_pred</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/k_cast.html">k_cast</a></span><span class="op">(</span><span class="va">y_pred</span>, <span class="st">"bool"</span><span class="op">)</span>
-
-    <span class="va">values</span> <span class="op">&lt;-</span> <span class="va">y_true</span> <span class="op">&amp;</span> <span class="va">y_pred</span>
-    <span class="va">values</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/k_cast.html">k_cast</a></span><span class="op">(</span><span class="va">values</span>, <span class="va">self</span><span class="op">$</span><span class="va">dtype</span><span class="op">)</span>
-    <span class="kw">if</span> <span class="op">(</span><span class="op">!</span><span class="fu"><a href="https://rdrr.io/r/base/NULL.html" class="external-link">is.null</a></span><span class="op">(</span><span class="va">sample_weight</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span>
-      <span class="va">sample_weight</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/k_cast.html">k_cast</a></span><span class="op">(</span><span class="va">sample_weight</span>, <span class="va">self</span><span class="op">$</span><span class="va">dtype</span><span class="op">)</span>
-      <span class="va">sample_weight</span> <span class="op">&lt;-</span> <span class="va">tf</span><span class="op">$</span><span class="fu">broadcast_to</span><span class="op">(</span><span class="va">sample_weight</span>, <span class="va">values</span><span class="op">$</span><span class="va">shape</span><span class="op">)</span>
-      <span class="va">values</span> <span class="op">&lt;-</span> <span class="va">values</span> <span class="op">*</span> <span class="va">sample_weight</span>
-    <span class="op">}</span>
-    <span class="va">self</span><span class="op">$</span><span class="va">true_positives</span><span class="op">$</span><span class="fu">assign_add</span><span class="op">(</span><span class="va">tf</span><span class="op">$</span><span class="fu">reduce_sum</span><span class="op">(</span><span class="va">values</span><span class="op">)</span><span class="op">)</span>
-  <span class="op">}</span>,
-
-  result <span class="op">=</span> <span class="kw">function</span><span class="op">(</span><span class="op">)</span>
-    <span class="va">self</span><span class="op">$</span><span class="va">true_positives</span>
-<span class="op">)</span>
-<span class="va">model</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://generics.r-lib.org/reference/compile.html" class="external-link">compile</a></span><span class="op">(</span><span class="va">...</span>, metrics <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="fu">metric_binary_true_positives</span><span class="op">(</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></code></pre><p></p></div>
+</ul><p>Example custom metric subclass:</p>
+<p></p><div class="sourceCode R"><pre><code><span><span class="va">metric_binary_true_positives</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/new-classes.html">new_metric_class</a></span><span class="op">(</span></span>
+<span>  classname <span class="op">=</span> <span class="st">"BinaryTruePositives"</span>,</span>
+<span>  initialize <span class="op">=</span> <span class="kw">function</span><span class="op">(</span><span class="va">name</span> <span class="op">=</span> <span class="st">'binary_true_positives'</span>, <span class="va">...</span><span class="op">)</span> <span class="op">{</span></span>
+<span>    <span class="va">super</span><span class="op">$</span><span class="fu">initialize</span><span class="op">(</span>name <span class="op">=</span> <span class="va">name</span>, <span class="va">...</span><span class="op">)</span></span>
+<span>    <span class="va">self</span><span class="op">$</span><span class="va">true_positives</span> <span class="op">&lt;-</span></span>
+<span>      <span class="va">self</span><span class="op">$</span><span class="fu">add_weight</span><span class="op">(</span>name <span class="op">=</span> <span class="st">'tp'</span>, initializer <span class="op">=</span> <span class="st">'zeros'</span><span class="op">)</span></span>
+<span>  <span class="op">}</span>,</span>
+<span></span>
+<span>  update_state <span class="op">=</span> <span class="kw">function</span><span class="op">(</span><span class="va">y_true</span>, <span class="va">y_pred</span>, <span class="va">sample_weight</span> <span class="op">=</span> <span class="cn">NULL</span><span class="op">)</span> <span class="op">{</span></span>
+<span>    <span class="va">y_true</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/k_cast.html">k_cast</a></span><span class="op">(</span><span class="va">y_true</span>, <span class="st">"bool"</span><span class="op">)</span></span>
+<span>    <span class="va">y_pred</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/k_cast.html">k_cast</a></span><span class="op">(</span><span class="va">y_pred</span>, <span class="st">"bool"</span><span class="op">)</span></span>
+<span></span>
+<span>    <span class="va">values</span> <span class="op">&lt;-</span> <span class="va">y_true</span> <span class="op">&amp;</span> <span class="va">y_pred</span></span>
+<span>    <span class="va">values</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/k_cast.html">k_cast</a></span><span class="op">(</span><span class="va">values</span>, <span class="va">self</span><span class="op">$</span><span class="va">dtype</span><span class="op">)</span></span>
+<span>    <span class="kw">if</span> <span class="op">(</span><span class="op">!</span><span class="fu"><a href="https://rdrr.io/r/base/NULL.html" class="external-link">is.null</a></span><span class="op">(</span><span class="va">sample_weight</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span></span>
+<span>      <span class="va">sample_weight</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/k_cast.html">k_cast</a></span><span class="op">(</span><span class="va">sample_weight</span>, <span class="va">self</span><span class="op">$</span><span class="va">dtype</span><span class="op">)</span></span>
+<span>      <span class="va">sample_weight</span> <span class="op">&lt;-</span> <span class="va">tf</span><span class="op">$</span><span class="fu">broadcast_to</span><span class="op">(</span><span class="va">sample_weight</span>, <span class="va">values</span><span class="op">$</span><span class="va">shape</span><span class="op">)</span></span>
+<span>      <span class="va">values</span> <span class="op">&lt;-</span> <span class="va">values</span> <span class="op">*</span> <span class="va">sample_weight</span></span>
+<span>    <span class="op">}</span></span>
+<span>    <span class="va">self</span><span class="op">$</span><span class="va">true_positives</span><span class="op">$</span><span class="fu">assign_add</span><span class="op">(</span><span class="va">tf</span><span class="op">$</span><span class="fu">reduce_sum</span><span class="op">(</span><span class="va">values</span><span class="op">)</span><span class="op">)</span></span>
+<span>  <span class="op">}</span>,</span>
+<span></span>
+<span>  result <span class="op">=</span> <span class="kw">function</span><span class="op">(</span><span class="op">)</span></span>
+<span>    <span class="va">self</span><span class="op">$</span><span class="va">true_positives</span></span>
+<span><span class="op">)</span></span>
+<span><span class="va">model</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://generics.r-lib.org/reference/compile.html" class="external-link">compile</a></span><span class="op">(</span><span class="va">...</span>, metrics <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="fu">metric_binary_true_positives</span><span class="op">(</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span></code></pre><p></p></div>
 <p>The same <code>metric_binary_true_positives</code> could be built with <code>%py_class%</code> like
-this:</p><div class="sourceCode"><pre><code>metric_binary_true_positives(keras$metrics$Metric) %py_class% {
-  initialize &lt;- &lt;same-as-above&gt;,
-  update_state &lt;- &lt;same-as-above&gt;,
-  result &lt;- &lt;same-as-above&gt;
-}
-</code></pre></div>
-
+this:</p>
+<p></p><div class="sourceCode"><pre><code><span id="cb1-1"><a href="#cb1-1" tabindex="-1"></a><span class="fu">metric_binary_true_positives</span>(keras<span class="sc">$</span>metrics<span class="sc">$</span>Metric) <span class="sc">%py_class%</span> {</span>
+<span id="cb1-2"><a href="#cb1-2" tabindex="-1"></a>  initialize <span class="ot">&lt;-</span> <span class="er">&lt;</span>same<span class="sc">-</span>as<span class="sc">-</span>above<span class="sc">&gt;</span>,</span>
+<span id="cb1-3"><a href="#cb1-3" tabindex="-1"></a>  update_state <span class="ot">&lt;-</span> <span class="er">&lt;</span>same<span class="sc">-</span>as<span class="sc">-</span>above<span class="sc">&gt;</span>,</span>
+<span id="cb1-4"><a href="#cb1-4" tabindex="-1"></a>  result <span class="ot">&lt;-</span> <span class="er">&lt;</span>same<span class="sc">-</span>as<span class="sc">-</span>above<span class="sc">&gt;</span></span>
+<span id="cb1-5"><a href="#cb1-5" tabindex="-1"></a>}</span></code></pre><p></p></div>
     </div>
 
   </div>
@@ -257,7 +270,7 @@ this:</p><div class="sourceCode"><pre><code>metric_binary_true_positives(keras$m
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.3.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.7.</p>
 </div>
 
       </footer></div>

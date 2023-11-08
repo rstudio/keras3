@@ -17,7 +17,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">keras</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">2.8.0.9000</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">2.13.0.9000</span>
       </span>
     </div>
 
@@ -193,26 +193,26 @@ and restored using <code><a href="save_model_weights_hdf5.html">save_model_weigh
 </dl></div>
     <div id="see-also">
     <h2>See also</h2>
-    <div class="dont-index"><p><a href="constraints.html">constraints</a></p></div>
+    <div class="dont-index"><p><a href="constraint_unitnorm.html">constraint_unitnorm</a> and related constraints</p></div>
     </div>
 
     <div id="ref-examples">
     <h2>Examples</h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="kw">if</span> <span class="op">(</span><span class="cn">FALSE</span><span class="op">)</span> <span class="op">{</span></span>
-<span class="r-in"><span class="va">CustomNonNegConstraint</span> <span class="op">&lt;-</span> <span class="fu">R6</span><span class="fu">::</span><span class="kw"><a href="https://r6.r-lib.org/reference/R6Class.html" class="external-link">R6Class</a></span><span class="op">(</span></span>
-<span class="r-in">  <span class="st">"CustomNonNegConstraint"</span>,</span>
-<span class="r-in">  inherit <span class="op">=</span> <span class="va">KerasConstraint</span>,</span>
-<span class="r-in">  public <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span></span>
-<span class="r-in">    call <span class="op">=</span> <span class="kw">function</span><span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="op">{</span></span>
-<span class="r-in">       <span class="va">w</span> <span class="op">*</span> <span class="fu"><a href="k_cast.html">k_cast</a></span><span class="op">(</span><span class="fu"><a href="k_greater_equal.html">k_greater_equal</a></span><span class="op">(</span><span class="va">w</span>, <span class="fl">0</span><span class="op">)</span>, <span class="fu"><a href="k_floatx.html">k_floatx</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span></span>
-<span class="r-in">    <span class="op">}</span></span>
-<span class="r-in">  <span class="op">)</span></span>
-<span class="r-in"><span class="op">)</span></span>
-<span class="r-in"></span>
-<span class="r-in"><span class="fu"><a href="layer_dense.html">layer_dense</a></span><span class="op">(</span>units <span class="op">=</span> <span class="fl">32</span>, input_shape <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">784</span><span class="op">)</span>,</span>
-<span class="r-in">            kernel_constraint <span class="op">=</span> <span class="va">CustomNonNegConstraint</span><span class="op">$</span><span class="fu">new</span><span class="op">(</span><span class="op">)</span><span class="op">)</span></span>
-<span class="r-in"><span class="op">}</span></span>
-<span class="r-in"></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="kw">if</span> <span class="op">(</span><span class="cn">FALSE</span><span class="op">)</span> <span class="op">{</span></span></span>
+<span class="r-in"><span><span class="va">CustomNonNegConstraint</span> <span class="op">&lt;-</span> <span class="fu">R6</span><span class="fu">::</span><span class="kw"><a href="https://r6.r-lib.org/reference/R6Class.html" class="external-link">R6Class</a></span><span class="op">(</span></span></span>
+<span class="r-in"><span>  <span class="st">"CustomNonNegConstraint"</span>,</span></span>
+<span class="r-in"><span>  inherit <span class="op">=</span> <span class="va">KerasConstraint</span>,</span></span>
+<span class="r-in"><span>  public <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span></span></span>
+<span class="r-in"><span>    call <span class="op">=</span> <span class="kw">function</span><span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="op">{</span></span></span>
+<span class="r-in"><span>       <span class="va">w</span> <span class="op">*</span> <span class="fu"><a href="k_cast.html">k_cast</a></span><span class="op">(</span><span class="fu"><a href="k_greater_equal.html">k_greater_equal</a></span><span class="op">(</span><span class="va">w</span>, <span class="fl">0</span><span class="op">)</span>, <span class="fu"><a href="k_floatx.html">k_floatx</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-in"><span>    <span class="op">}</span></span></span>
+<span class="r-in"><span>  <span class="op">)</span></span></span>
+<span class="r-in"><span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="fu"><a href="layer_dense.html">layer_dense</a></span><span class="op">(</span>units <span class="op">=</span> <span class="fl">32</span>, input_shape <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">784</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>            kernel_constraint <span class="op">=</span> <span class="va">CustomNonNegConstraint</span><span class="op">$</span><span class="fu">new</span><span class="op">(</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="op">}</span></span></span>
+<span class="r-in"><span></span></span>
 </code></pre></div>
     </div>
   </div>
@@ -227,7 +227,7 @@ and restored using <code><a href="save_model_weights_hdf5.html">save_model_weigh
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.3.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.7.</p>
 </div>
 
       </footer></div>

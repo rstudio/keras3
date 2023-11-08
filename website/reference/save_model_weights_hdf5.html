@@ -17,7 +17,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">keras</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">2.8.0.9000</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">2.13.0.9000</span>
       </span>
     </div>
 
@@ -165,35 +165,46 @@
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">save_model_weights_hdf5</span><span class="op">(</span><span class="va">object</span>, <span class="va">filepath</span>, overwrite <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>
-
-<span class="fu">load_model_weights_hdf5</span><span class="op">(</span>
-  <span class="va">object</span>,
-  <span class="va">filepath</span>,
-  by_name <span class="op">=</span> <span class="cn">FALSE</span>,
-  skip_mismatch <span class="op">=</span> <span class="cn">FALSE</span>,
-  reshape <span class="op">=</span> <span class="cn">FALSE</span>
-<span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">save_model_weights_hdf5</span><span class="op">(</span><span class="va">object</span>, <span class="va">filepath</span>, overwrite <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu">load_model_weights_hdf5</span><span class="op">(</span></span>
+<span>  <span class="va">object</span>,</span>
+<span>  <span class="va">filepath</span>,</span>
+<span>  by_name <span class="op">=</span> <span class="cn">FALSE</span>,</span>
+<span>  skip_mismatch <span class="op">=</span> <span class="cn">FALSE</span>,</span>
+<span>  reshape <span class="op">=</span> <span class="cn">FALSE</span></span>
+<span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
     <h2>Arguments</h2>
     <dl><dt>object</dt>
 <dd><p>Model object to save/load</p></dd>
+
+
 <dt>filepath</dt>
 <dd><p>Path to the file</p></dd>
+
+
 <dt>overwrite</dt>
 <dd><p>Whether to silently overwrite any existing
 file at the target location</p></dd>
+
+
 <dt>by_name</dt>
 <dd><p>Whether to load weights by name or by topological order.</p></dd>
+
+
 <dt>skip_mismatch</dt>
 <dd><p>Logical, whether to skip loading of layers
 where there is a mismatch in the number of weights, or a mismatch in the
 shape of the weight (only valid when <code>by_name = FALSE</code>).</p></dd>
+
+
 <dt>reshape</dt>
 <dd><p>Reshape weights to fit the layer when the correct number
 of values are present but the shape does not match.</p></dd>
+
 </dl></div>
     <div id="details">
     <h2>Details</h2>
@@ -235,7 +246,7 @@ where some of the layers have changed.</p>
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.3.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.7.</p>
 </div>
 
       </footer></div>

@@ -17,7 +17,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">keras</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">2.8.0.9000</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">2.13.0.9000</span>
       </span>
     </div>
 
@@ -169,23 +169,41 @@
     <h2>Arguments</h2>
     <dl><dt>y_true</dt>
 <dd><p>Tensor of true targets.</p></dd>
+
+
 <dt>y_pred</dt>
 <dd><p>Tensor of predicted targets.</p></dd>
+
+
 <dt>...</dt>
 <dd><p>Passed on to the underlying metric. Used for forwards and backwards compatibility.</p></dd>
+
+
 <dt>axis</dt>
 <dd><p>(Optional) (1-based) Defaults to -1. The dimension along which the metric is computed.</p></dd>
+
+
 <dt>name</dt>
 <dd><p>(Optional) string name of the metric instance.</p></dd>
+
+
 <dt>dtype</dt>
 <dd><p>(Optional) data type of the metric result.</p></dd>
+
 </dl></div>
     <div id="value">
     <h2>Value</h2>
-    <p>If <code>y_true</code> and <code>y_pred</code> are missing, a (subclassed) <code>Metric</code>instance is returned. The <code>Metric</code> object can be passed directly to
+    
+
+<p>If <code>y_true</code> and <code>y_pred</code> are missing, a (subclassed) <code>Metric</code></p>
+
+
+<p>instance is returned. The <code>Metric</code> object can be passed directly to
 <code>compile(metrics = )</code> or used as a standalone object. See <code><a href="Metric.html">?Metric</a></code> for
-example usage.
-Alternatively, if called with <code>y_true</code> and <code>y_pred</code> arguments, then the
+example usage.</p>
+
+
+<p>Alternatively, if called with <code>y_true</code> and <code>y_pred</code> arguments, then the
 computed case-wise values for the mini-batch are returned directly.</p>
     </div>
 
@@ -201,7 +219,7 @@ computed case-wise values for the mini-batch are returned directly.</p>
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.3.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.7.</p>
 </div>
 
       </footer></div>

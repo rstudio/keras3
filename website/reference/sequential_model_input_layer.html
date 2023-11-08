@@ -17,7 +17,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">keras</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">2.8.0.9000</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">2.13.0.9000</span>
       </span>
     </div>
 
@@ -165,18 +165,18 @@
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">sequential_model_input_layer</span><span class="op">(</span>
-  input_shape <span class="op">=</span> <span class="cn">NULL</span>,
-  batch_size <span class="op">=</span> <span class="cn">NULL</span>,
-  dtype <span class="op">=</span> <span class="cn">NULL</span>,
-  input_tensor <span class="op">=</span> <span class="cn">NULL</span>,
-  sparse <span class="op">=</span> <span class="cn">NULL</span>,
-  name <span class="op">=</span> <span class="cn">NULL</span>,
-  ragged <span class="op">=</span> <span class="cn">NULL</span>,
-  type_spec <span class="op">=</span> <span class="cn">NULL</span>,
-  <span class="va">...</span>,
-  input_layer_name <span class="op">=</span> <span class="cn">NULL</span>
-<span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">sequential_model_input_layer</span><span class="op">(</span></span>
+<span>  input_shape <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  batch_size <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  dtype <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  input_tensor <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  sparse <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  name <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  ragged <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  type_spec <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  <span class="va">...</span>,</span>
+<span>  input_layer_name <span class="op">=</span> <span class="cn">NULL</span></span>
+<span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
@@ -184,32 +184,49 @@
     <dl><dt>input_shape</dt>
 <dd><p>an integer vector of dimensions (not including the batch
 axis), or a <code>tf$TensorShape</code> instance (also not including the batch axis).</p></dd>
+
+
 <dt>batch_size</dt>
 <dd><p>Optional input batch size (integer or NULL).</p></dd>
+
+
 <dt>dtype</dt>
 <dd><p>Optional datatype of the input. When not provided, the Keras
 default float type will be used.</p></dd>
+
+
 <dt>input_tensor</dt>
 <dd><p>Optional tensor to use as layer input. If set, the layer
 will use the <code>tf$TypeSpec</code> of this tensor rather than creating a new
 placeholder tensor.</p></dd>
+
+
 <dt>sparse</dt>
 <dd><p>Boolean, whether the placeholder created is meant to be sparse.
 Default to <code>FALSE</code>.</p></dd>
+
+
 <dt>ragged</dt>
 <dd><p>Boolean, whether the placeholder created is meant to be ragged.
 In this case, values of 'NULL' in the 'shape' argument represent ragged
 dimensions. For more information about <code>RaggedTensors</code>, see this
 <a href="https://www.tensorflow.org/guide/ragged_tensor" class="external-link">guide</a>. Default to
 <code>FALSE</code>.</p></dd>
+
+
 <dt>type_spec</dt>
 <dd><p>A <code>tf$TypeSpec</code> object to create Input from. This
 <code>tf$TypeSpec</code> represents the entire batch. When provided, all other args
 except name must be <code>NULL</code>.</p></dd>
+
+
 <dt>...</dt>
 <dd><p>additional arguments passed on to <code>keras$layers$InputLayer</code>.</p></dd>
+
+
 <dt>input_layer_name, name</dt>
 <dd><p>Optional name of the input layer (string).</p></dd>
+
 </dl></div>
 
   </div>
@@ -224,7 +241,7 @@ except name must be <code>NULL</code>.</p></dd>
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.3.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.7.</p>
 </div>
 
       </footer></div>

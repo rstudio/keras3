@@ -17,7 +17,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">keras</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">2.8.0.9000</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">2.13.0.9000</span>
       </span>
     </div>
 
@@ -156,7 +156,7 @@
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Create a Keras Layer</h1>
-    <small class="dont-index">Source: <a href="https://github.com/rstudio/keras/blob/HEAD/R/layers-core.R" class="external-link"><code>R/layers-core.R</code></a></small>
+    <small class="dont-index">Source: <a href="https://github.com/rstudio/keras/blob/HEAD/R/layer-r-helpers.R" class="external-link"><code>R/layer-r-helpers.R</code></a></small>
     <div class="hidden name"><code>create_layer.Rd</code></div>
     </div>
 
@@ -165,23 +165,30 @@
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">create_layer</span><span class="op">(</span><span class="va">layer_class</span>, <span class="va">object</span>, args <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">create_layer</span><span class="op">(</span><span class="va">layer_class</span>, <span class="va">object</span>, args <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
     <h2>Arguments</h2>
     <dl><dt>layer_class</dt>
 <dd><p>Python layer class or R6 class of type KerasLayer</p></dd>
+
+
 <dt>object</dt>
 <dd><p>Object to compose layer with. This is either a
 <code><a href="keras_model_sequential.html">keras_model_sequential()</a></code> to add the layer to, or another Layer which
 this layer will call.</p></dd>
+
+
 <dt>args</dt>
 <dd><p>List of arguments to layer constructor function</p></dd>
+
 </dl></div>
     <div id="value">
     <h2>Value</h2>
-    <p>A Keras layer</p>
+    
+
+<p>A Keras layer</p>
     </div>
     <div id="note">
     <h2>Note</h2>
@@ -201,7 +208,7 @@ layer is created without a connection to an existing graph.</p>
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.3.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.7.</p>
 </div>
 
       </footer></div>

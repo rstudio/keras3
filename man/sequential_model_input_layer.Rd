@@ -50,3 +50,4 @@ except name must be \code{NULL}.}
 \description{
 sequential_model_input_layer
 }
+\keyword{internal}

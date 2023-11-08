@@ -23,7 +23,7 @@ words, but eliminate the top 20 most common words".'><meta property="og:image" c
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">keras</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">2.8.0.9000</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">2.13.0.9000</span>
       </span>
     </div>
 
@@ -177,52 +177,75 @@ words, but eliminate the top 20 most common words".</p>
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">dataset_imdb</span><span class="op">(</span>
-  path <span class="op">=</span> <span class="st">"imdb.npz"</span>,
-  num_words <span class="op">=</span> <span class="cn">NULL</span>,
-  skip_top <span class="op">=</span> <span class="fl">0L</span>,
-  maxlen <span class="op">=</span> <span class="cn">NULL</span>,
-  seed <span class="op">=</span> <span class="fl">113L</span>,
-  start_char <span class="op">=</span> <span class="fl">1L</span>,
-  oov_char <span class="op">=</span> <span class="fl">2L</span>,
-  index_from <span class="op">=</span> <span class="fl">3L</span>
-<span class="op">)</span>
-
-<span class="fu">dataset_imdb_word_index</span><span class="op">(</span>path <span class="op">=</span> <span class="st">"imdb_word_index.json"</span><span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">dataset_imdb</span><span class="op">(</span></span>
+<span>  path <span class="op">=</span> <span class="st">"imdb.npz"</span>,</span>
+<span>  num_words <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  skip_top <span class="op">=</span> <span class="fl">0L</span>,</span>
+<span>  maxlen <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  seed <span class="op">=</span> <span class="fl">113L</span>,</span>
+<span>  start_char <span class="op">=</span> <span class="fl">1L</span>,</span>
+<span>  oov_char <span class="op">=</span> <span class="fl">2L</span>,</span>
+<span>  index_from <span class="op">=</span> <span class="fl">3L</span></span>
+<span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu">dataset_imdb_word_index</span><span class="op">(</span>path <span class="op">=</span> <span class="st">"imdb_word_index.json"</span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
     <h2>Arguments</h2>
     <dl><dt>path</dt>
 <dd><p>Where to cache the data (relative to <code>~/.keras/dataset</code>).</p></dd>
+
+
 <dt>num_words</dt>
 <dd><p>Max number of words to include. Words are ranked by how
 often they occur (in the training set) and only the most frequent words are
 kept</p></dd>
+
+
 <dt>skip_top</dt>
 <dd><p>Skip the top N most frequently occuring words (which may not
 be informative).</p></dd>
+
+
 <dt>maxlen</dt>
 <dd><p>sequences longer than this will be filtered out.</p></dd>
+
+
 <dt>seed</dt>
 <dd><p>random seed for sample shuffling.</p></dd>
+
+
 <dt>start_char</dt>
 <dd><p>The start of a sequence will be marked with this character.
 Set to 1 because 0 is usually the padding character.</p></dd>
+
+
 <dt>oov_char</dt>
 <dd><p>Words that were cut out because of the <code>num_words</code> or
 <code>skip_top</code> limit will be replaced with this character.</p></dd>
+
+
 <dt>index_from</dt>
 <dd><p>Index actual words with this index and higher.</p></dd>
+
 </dl></div>
     <div id="value">
     <h2>Value</h2>
-    <p>Lists of training and test data: <code>train$x, train$y, test$x, test$y</code>.
-The <code>x</code> data includes integer sequences. If the <code>num_words</code> argument was
+    
+
+<p>Lists of training and test data: <code>train$x, train$y, test$x, test$y</code>.</p>
+
+
+<p>The <code>x</code> data includes integer sequences. If the <code>num_words</code> argument was
 specific, the maximum possible index value is <code>num_words-1</code>. If the
-<code>maxlen`` argument was specified, the largest possible sequence length is </code>maxlen`.
-The <code>y</code> data includes a set of integer labels (0 or 1).
-The <code>dataset_imdb_word_index()</code> function returns a list where the
+<code>maxlen`` argument was specified, the largest possible sequence length is </code>maxlen`.</p>
+
+
+<p>The <code>y</code> data includes a set of integer labels (0 or 1).</p>
+
+
+<p>The <code>dataset_imdb_word_index()</code> function returns a list where the
 names are words and the values are integer.</p>
     </div>
     <div id="details">
@@ -253,7 +276,7 @@ to encode any unknown word.</p>
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.3.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.7.</p>
 </div>
 
       </footer></div>

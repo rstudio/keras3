@@ -17,7 +17,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">keras</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">2.8.0.9000</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">2.13.0.9000</span>
       </span>
     </div>
 
@@ -165,14 +165,14 @@
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">model_to_saved_model</span><span class="op">(</span>
-  <span class="va">model</span>,
-  <span class="va">saved_model_path</span>,
-  custom_objects <span class="op">=</span> <span class="cn">NULL</span>,
-  as_text <span class="op">=</span> <span class="cn">FALSE</span>,
-  input_signature <span class="op">=</span> <span class="cn">NULL</span>,
-  serving_only <span class="op">=</span> <span class="cn">FALSE</span>
-<span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">model_to_saved_model</span><span class="op">(</span></span>
+<span>  <span class="va">model</span>,</span>
+<span>  <span class="va">saved_model_path</span>,</span>
+<span>  custom_objects <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  as_text <span class="op">=</span> <span class="cn">FALSE</span>,</span>
+<span>  input_signature <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  serving_only <span class="op">=</span> <span class="cn">FALSE</span></span>
+<span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
@@ -180,24 +180,37 @@
     <dl><dt>model</dt>
 <dd><p>A Keras model to be saved. If the model is subclassed, the flag
 <code>serving_only</code> must be set to <code>TRUE</code>.</p></dd>
+
+
 <dt>saved_model_path</dt>
 <dd><p>a string specifying the path to the SavedModel directory.</p></dd>
+
+
 <dt>custom_objects</dt>
 <dd><p>Optional dictionary mapping string names to custom classes
 or functions (e.g. custom loss functions).</p></dd>
+
+
 <dt>as_text</dt>
 <dd><p>bool, <code>FALSE</code> by default. Whether to write the SavedModel proto in text
 format. Currently unavailable in serving-only mode.</p></dd>
+
+
 <dt>input_signature</dt>
 <dd><p>A possibly nested sequence of <code>tf.TensorSpec</code> objects, used to
 specify the expected model inputs. See tf.function for more details.</p></dd>
+
+
 <dt>serving_only</dt>
 <dd><p>bool, <code>FALSE</code> by default. When this is true, only the
 prediction graph is saved.</p></dd>
+
 </dl></div>
     <div id="value">
     <h2>Value</h2>
-    <p>Invisibly returns the <code>saved_model_path</code>.</p>
+    
+
+<p>Invisibly returns the <code>saved_model_path</code>.</p>
     </div>
     <div id="note">
     <h2>Note</h2>
@@ -222,7 +235,7 @@ version &gt;= "2.0".</p>
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.3.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.7.</p>
 </div>
 
       </footer></div>

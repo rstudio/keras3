@@ -17,7 +17,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">keras</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">2.8.0.9000</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">2.13.0.9000</span>
       </span>
     </div>
 
@@ -161,8 +161,65 @@
 
     <div class="section level2">
 <h2 class="page-header" data-toc-text="development version" id="keras-development-version">keras (development version)<a class="anchor" aria-label="anchor" href="#keras-development-version"></a></h2>
-<ul><li><p><code><a href="https://rstudio.github.io/reticulate/reference/r-py-conversion.html" class="external-link">r_to_py()</a></code> method for R6 classes and <code>%py_class%</code> gain support for <code>private</code> fields and methods. Any R objects stored in private will only be available to methods, and will not be converted to Python.</p></li>
+</div>
+    <div class="section level2">
+<h2 class="page-header" data-toc-text="2.13.0" id="keras-2130">keras 2.13.0<small>2023-08-15</small><a class="anchor" aria-label="anchor" href="#keras-2130"></a></h2>
+<ul><li><p>Default TF version installed by <code><a href="../reference/install_keras.html">install_keras()</a></code> is now 2.13.</p></li>
 <li>
+<p>Updated layers:</p>
+<ul><li>
+<code><a href="../reference/layer_batch_normalization.html">layer_batch_normalization()</a></code> updated signature, with changes to options for distributed training.</li>
+<li>
+<code><a href="../reference/layer_embedding.html">layer_embedding()</a></code> gains a <code>sparse</code> argument.</li>
+</ul></li>
+<li><p>Fixed deadlock when an R generator was passed to <code><a href="https://generics.r-lib.org/reference/fit.html" class="external-link">fit()</a></code>, <code><a href="https://rdrr.io/r/stats/predict.html" class="external-link">predict()</a></code>, and other endpoints.</p></li>
+<li><p>When <code>fit(verbose = "auto")</code> is evaluated in the context of a knitr document (e.g., quarto or rmarkdown document being rendered), verbose will now default to <code>2</code>, showing one line per epoch.</p></li>
+</ul></div>
+    <div class="section level2">
+<h2 class="page-header" data-toc-text="2.11.1" id="keras-2111">keras 2.11.1<small>2023-03-20</small><a class="anchor" aria-label="anchor" href="#keras-2111"></a></h2>
+<ul><li><p>Update S3 method formals per new CRAN requirement (<code>r_to_py.keras_layer_wrapper()</code>)</p></li>
+<li><p>Fixed an issue where <code><a href="../reference/get_file.html">get_file()</a></code> would place incorrectly save files in the current working directory. (<a href="https://github.com/rstudio/keras/issues/1365" class="external-link">#1365</a>)</p></li>
+</ul></div>
+    <div class="section level2">
+<h2 class="page-header" data-toc-text="2.11.0" id="keras-2110">keras 2.11.0<small>2022-12-20</small><a class="anchor" aria-label="anchor" href="#keras-2110"></a></h2>
+<ul><li><p>Default TensorFlow version installed by <code><a href="../reference/install_keras.html">install_keras()</a></code> is now 2.11.</p></li>
+<li><p>All optimizers have been updated for keras/tensorflow version 2.11. Arguments to all the optimizers have changed. To access the previous optimizer implementations, use the constructors available at <code>keras$optimizers$legacy</code>. For example, use <code>keras$optimizers$legacy$Adam()</code> for the previous implementation of <code><a href="../reference/optimizer_adam.html">optimizer_adam()</a></code>.</p></li>
+<li><p>New optimizer <code>optimizer_frtl()</code>.</p></li>
+<li>
+<p>updates to layers:</p>
+<ul><li>
+<code><a href="../reference/layer_attention.html">layer_attention()</a></code> gains <code>score_mode</code> and <code>dropout</code> arguments.</li>
+<li>
+<code><a href="../reference/layer_discretization.html">layer_discretization()</a></code> gains <code>output_mode</code> and <code>sparse</code> arguments.</li>
+<li>
+<code><a href="../reference/layer_gaussian_dropout.html">layer_gaussian_dropout()</a></code> and <code><a href="../reference/layer_gaussian_noise.html">layer_gaussian_noise()</a></code> gain a <code>seed</code> argument.</li>
+<li>
+<code><a href="../reference/layer_hashing.html">layer_hashing()</a></code> gains <code>output_mode</code> and <code>sparse</code> arguments.</li>
+<li>
+<code><a href="../reference/layer_integer_lookup.html">layer_integer_lookup()</a></code> gains <code>vocabulary_dtype</code> and <code>idf_weights</code> arguments.</li>
+<li>
+<code><a href="../reference/layer_normalization.html">layer_normalization()</a></code> gains an <code>invert</code> argument.</li>
+<li>
+<code><a href="../reference/layer_string_lookup.html">layer_string_lookup()</a></code> gains an <code>idf_weights</code> argument.</li>
+</ul></li>
+<li><p>Fixed issue where <code>input_shape</code> supplied to custom layers defined with <code><a href="../reference/new-classes.html">new_layer_class()</a></code><br>
+would result in an error (<a href="https://github.com/rstudio/keras/issues/1338" class="external-link">#1338</a>)</p></li>
+<li><p>New <code><a href="../reference/callback_backup_and_restore.html">callback_backup_and_restore()</a></code>, for resuming an interrupted <code><a href="https://generics.r-lib.org/reference/fit.html" class="external-link">fit()</a></code> call.</p></li>
+<li>
+<p>The merging family of layers (<code>layer_add</code>, <code>layer_concatenate</code>, etc.) gain the ability to accept layers in <code>...</code>, allowing for easier composition of residual blocks with the pipe <code>%&gt;%</code>. e.g. something like this now works:</p>
+<div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span></span>
+<span><span class="va">block_1_output</span> <span class="op">&lt;-</span> <span class="va">...</span></span>
+<span><span class="va">block_2_output</span> <span class="op">&lt;-</span> <span class="va">block_1_output</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span> </span>
+<span>  <span class="fu"><a href="../reference/layer_conv_2d.html">layer_conv_2d</a></span><span class="op">(</span><span class="fl">64</span>, <span class="fl">3</span>, activation <span class="op">=</span> <span class="st">"relu"</span>, padding <span class="op">=</span> <span class="st">"same"</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span> </span>
+<span>  <span class="fu"><a href="../reference/layer_add.html">layer_add</a></span><span class="op">(</span><span class="va">block_1_output</span><span class="op">)</span></span></code></pre></div>
+</li>
+<li><p><code>model$get_config()</code> method now returns an R object that can be safely serialized to rds.</p></li>
+<li><p><code><a href="../reference/keras_array.html">keras_array()</a></code> now reflects unconverted Python objects. This enables passing objects like <code>pandas.Series()</code> to <code><a href="https://generics.r-lib.org/reference/fit.html" class="external-link">fit()</a></code> and <code><a href="https://rdrr.io/pkg/tensorflow/man/evaluate.html" class="external-link">evaluate()</a></code> methods. (<a href="https://github.com/rstudio/keras/issues/1341" class="external-link">#1341</a>)</p></li>
+</ul></div>
+    <div class="section level2">
+<h2 class="page-header" data-toc-text="2.9.0" id="keras-290">keras 2.9.0<small>2022-05-23</small><a class="anchor" aria-label="anchor" href="#keras-290"></a></h2>
+<ul><li>
 <p>New functions for constructing custom keras subclasses:</p>
 <ul><li><code><a href="../reference/new-classes.html">new_model_class()</a></code></li>
 <li><code><a href="../reference/new-classes.html">new_layer_class()</a></code></li>
@@ -173,6 +230,7 @@
 <code><a href="../reference/new_learning_rate_schedule_class.html">new_learning_rate_schedule_class()</a></code>.</li>
 </ul><p>Also provided is <code><a href="../reference/new-classes.html">mark_active()</a></code>, a decorator for indicating a class method should be an active binding (i.e., decorated with Python’s <code>@property</code>). <code><a href="../reference/new-classes.html">mark_active()</a></code> can be used in the <code>new_*_class</code> family of class constructors as well as <code>%py_class%</code>.</p>
 </li>
+<li><p><code>r_to_py()</code> method for R6 classes and <code>%py_class%</code> gain support for <code>private</code> fields and methods. Any R objects stored in <code>private</code> will only be available to methods, and will not be converted to Python.</p></li>
 <li>
 <p>New family of functions for controlling optimizer learning rates during training:</p>
 <ul><li><code><a href="../reference/learning_rate_schedule_cosine_decay.html">learning_rate_schedule_cosine_decay()</a></code></li>
@@ -183,13 +241,15 @@
 <li><code><a href="../reference/learning_rate_schedule_polynomial_decay.html">learning_rate_schedule_polynomial_decay()</a></code></li>
 </ul><p>Also, a function for constructing custom learning rate schedules: <code><a href="../reference/new_learning_rate_schedule_class.html">new_learning_rate_schedule_class()</a></code>.</p>
 </li>
+<li><p>New L2 unit normilization layer: <code><a href="../reference/layer_unit_normalization.html">layer_unit_normalization()</a></code>.</p></li>
+<li><p>New <code>regularizer_orthogonal</code>, a regularizer that encourages orthogonality between the rows (or columns) or a weight matrix.</p></li>
 <li><p>New <code><a href="../reference/zip_lists.html">zip_lists()</a></code> function for transposing lists, optionally matching by name.</p></li>
 <li><p>New <code><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot()</a></code> S3 method for models.</p></li>
 <li><p><code>pydot</code> is now included in the packages installed by <code><a href="../reference/install_keras.html">install_keras()</a></code>.</p></li>
 <li><p>The <code>png</code> package is now listed under Suggests.</p></li>
 <li><p>The <code>%&lt;&gt;%</code> assignment pipe from magrittr is exported.</p></li>
 <li>
-<p><code><a href="https://rdrr.io/r/base/format.html" class="external-link">format()</a></code> method for keras models (and derivative methods <code><a href="https://rdrr.io/r/base/print.html" class="external-link">print()</a></code>, <code><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary()</a></code>, <code><a href="https://rdrr.io/r/utils/str.html" class="external-link">str()</a></code>, and <code><a href="https://rstudio.github.io/reticulate/reference/py_str.html" class="external-link">py_str()</a></code>):</p>
+<p><code><a href="https://rdrr.io/r/base/format.html" class="external-link">format()</a></code> method for keras models (and derivative methods <code><a href="https://rdrr.io/r/base/print.html" class="external-link">print()</a></code>, <code><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary()</a></code>, <code><a href="https://rdrr.io/r/utils/str.html" class="external-link">str()</a></code>, and <code>py_str()</code>):</p>
 <ul><li>gain a new arg <code>compact</code>. If <code>TRUE</code> (the default) white-space only lines are stripped out of <code>model.summary()</code>.</li>
 <li>If any layers are marked non-trainable or frozen, the model summary now includes a “Trainable” column, indicating if a layer is frozen.</li>
 </ul></li>
@@ -207,22 +267,24 @@
 <li>
 <code>start_index</code> and <code>end_index</code> now are 1-based.</li>
 </ul></li>
-<li><p><code>image_dataste_from_directory()</code> gains a <code>crop_to_aspect_ratio</code> argument which can be used to prevent distorting images when resizing to a new aspect ratio.</p></li>
+<li><p><code><a href="../reference/image_dataset_from_directory.html">image_dataset_from_directory()</a></code> gains a <code>crop_to_aspect_ratio</code> argument which can be used to prevent distorting images when resizing to a new aspect ratio.</p></li>
 <li><p><code>Layer</code> is deprecated, superseded by <code><a href="../reference/new-classes.html">new_layer_class()</a></code>.</p></li>
-<li><p><code><a href="../reference/save_model_tf.html">load_model_tf()</a></code> argument <code>custom_objects</code> gains the ability to accept an unnamed list (e.g, of object returned by <code><a href="../reference/new-classes.html">new_layer_class()</a></code> or similar). Appropriate names for the supplied objects are automatically infered.</p></li>
+<li><p><code><a href="../reference/save_model_tf.html">load_model_tf()</a></code> argument <code>custom_objects</code> gains the ability to accept an unnamed list (e.g, of objects returned by <code><a href="../reference/new-classes.html">new_layer_class()</a></code> or similar). Appropriate names for the supplied objects are automatically inferred.</p></li>
 <li><p>Fixed an issue where negative values less than -1 supplied to <code>axis</code> arguments were selecting the wrong axis.</p></li>
 <li><p><code><a href="../reference/get_layer.html">get_layer()</a></code> gains the ability to accept negative values for the <code>index</code> argument.</p></li>
 <li><p>Fixed warning from <code><a href="../reference/create_layer_wrapper.html">create_layer_wrapper()</a></code> when the custom layer didn’t have an overridden <code>initialize</code> or <code>__init__</code> method.</p></li>
 <li>
 <p>Backend functions:</p>
 <ul><li>k_clip() <code>min_value</code> and <code>max_value</code> gain default values of <code>NULL</code>, can be omitted. <code>NULL</code> is taken as -Inf or Inf, respectively.</li>
-<li>k_squeeze(): <code>axis</code> argument can be ommitted, in which case all axes of size 1 are dropped.</li>
+<li>k_squeeze(): <code>axis</code> argument can be omitted, in which case all axes of size 1 are dropped.</li>
 <li>k_tile(): <code>n</code> argument can now be supplied as a tensor.</li>
 <li>New function <code><a href="../reference/k_unstack.html">k_unstack()</a></code>.</li>
 </ul></li>
 <li><p>KerasTensor objects (e.g, returned by <code><a href="../reference/layer_input.html">layer_input()</a></code>) now inherit S3 methods for <code>"tensorflow.tensor"</code>.</p></li>
 <li><p><code><a href="../reference/plot.keras_training_history.html">plot.keras_training_history()</a></code> no longer issues message <code>`geom_smooth()` using formula 'y ~ x'</code> when <code>method = "ggplot2"</code>.</p></li>
 <li><p><code>print</code> and related methods for models (<code>format</code>, <code>summary</code>) now accept a <code>width</code> argument.</p></li>
+<li><p><code><a href="https://rdrr.io/pkg/tensorflow/man/evaluate.html" class="external-link">evaluate()</a></code>, <code><a href="https://generics.r-lib.org/reference/fit.html" class="external-link">fit()</a></code>, and <code><a href="https://rdrr.io/r/stats/predict.html" class="external-link">predict()</a></code> methods for keras Models now default to <code>verbose = "auto"</code>, with verbosity adjusted appropriately based on calls to <code>keras$utils$disable_interactive_logging()</code>, and contexts like <code>ParameterServerStrategy</code>.</p></li>
+<li><p><code><a href="../reference/install_keras.html">install_keras()</a></code> now accepts <code>version = "release-cpu"</code> as a valid specification.</p></li>
 </ul></div>
     <div class="section level2">
 <h2 class="page-header" data-toc-text="2.8.0" id="keras-280">keras 2.8.0<small>2022-02-09</small><a class="anchor" aria-label="anchor" href="#keras-280"></a></h2>
@@ -241,9 +303,9 @@
 <li><p>Models gain <code><a href="https://rdrr.io/r/base/format.html" class="external-link">format()</a></code> and <code><a href="https://rdrr.io/r/base/print.html" class="external-link">print()</a></code> S3 methods for compatibility with the latest reticulate. Both are powered by <code>model$summary()</code>.</p></li>
 <li><p><code><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary()</a></code> method for Models gains arguments <code>expand_nested</code> and <code>show_trainable</code>, both default to <code>FALSE</code>.</p></li>
 <li><p><code><a href="../reference/keras_model_custom.html">keras_model_custom()</a></code> is soft deprecated. Please define custom models by subclassing <code>keras$Model</code> directly using <code>%py_class%</code> or <code><a href="https://r6.r-lib.org/reference/R6Class.html" class="external-link">R6::R6Class()</a></code>.</p></li>
-<li><p>Fixed warning issued by <code><a href="../reference/k_random_bernoulli.html">k_random_binomial()</a></code>.</p></li>
-<li><p>Fixed error raised when <code><a href="../reference/k_random_bernoulli.html">k_random_binomial()</a></code> was passed a non-floating dtype.</p></li>
-<li><p>Added <code>k_random_bernouli()</code> as an alias for <code><a href="../reference/k_random_bernoulli.html">k_random_binomial()</a></code>.</p></li>
+<li><p>Fixed warning issued by <code>k_random_binomial()</code>.</p></li>
+<li><p>Fixed error raised when <code>k_random_binomial()</code> was passed a non-floating dtype.</p></li>
+<li><p>Added <code>k_random_bernouli()</code> as an alias for <code>k_random_binomial()</code>.</p></li>
 <li><p><code><a href="../reference/image_load.html">image_load()</a></code> gains a <code>color_mode</code> argument.</p></li>
 <li><p>Fixed issue where <code><a href="../reference/create_layer_wrapper.html">create_layer_wrapper()</a></code> would not include arguments with a <code>NULL</code> default value in the returned wrapper.</p></li>
 <li><p>Fixed issue in <code>r_to_py.R6ClassGenerator</code> (and <code>%py_class%</code>) where single-expression <code>initialize</code> functions defined without <code>{</code> would error.</p></li>
@@ -273,17 +335,17 @@
 <li><code><a href="../reference/layer_conv_lstm_1d.html">layer_conv_lstm_1d()</a></code></li>
 <li><code><a href="../reference/layer_conv_lstm_3d.html">layer_conv_lstm_3d()</a></code></li>
 </ul></li>
-<li><p><code><a href="../reference/layer_cudnn_gru.html">layer_cudnn_gru()</a></code> and <code><a href="../reference/layer_cudnn_lstm.html">layer_cudnn_lstm()</a></code> are deprecated. <code><a href="../reference/layer_gru.html">layer_gru()</a></code> and <code><a href="../reference/layer_lstm.html">layer_lstm()</a></code> will automatically use CuDNN if it is available.</p></li>
+<li><p><code>layer_cudnn_gru()</code> and <code>layer_cudnn_lstm()</code> are deprecated. <code><a href="../reference/layer_gru.html">layer_gru()</a></code> and <code><a href="../reference/layer_lstm.html">layer_lstm()</a></code> will automatically use CuDNN if it is available.</p></li>
 <li><p><code><a href="../reference/layer_lstm.html">layer_lstm()</a></code> and <code><a href="../reference/layer_gru.html">layer_gru()</a></code>: default value for <code>recurrent_activation</code> changed from <code>"hard_sigmoid"</code> to <code>"sigmoid"</code>.</p></li>
 <li><p><code><a href="../reference/layer_gru.html">layer_gru()</a></code>: default value <code>reset_after</code> changed from <code>FALSE</code> to <code>TRUE</code></p></li>
 <li><p>New vignette: “Transfer learning and fine-tuning”.</p></li>
 <li>
 <p>New applications:</p>
-<ul><li>MobileNet V3: <code><a href="../reference/application_mobilenet_v3.html">application_mobilenet_v3_large()</a></code>, <code><a href="../reference/application_mobilenet_v3.html">application_mobilenet_v3_small()</a></code>
+<ul><li>MobileNet V3: <code><a href="../reference/application_mobilenet_v3_large.html">application_mobilenet_v3_large()</a></code>, <code><a href="../reference/application_mobilenet_v3_small.html">application_mobilenet_v3_small()</a></code>
 </li>
-<li>ResNet: <code><a href="../reference/application_resnet.html">application_resnet101()</a></code>, <code><a href="../reference/application_resnet.html">application_resnet152()</a></code>, <code><a href="../reference/application_resnet.html">resnet_preprocess_input()</a></code>
+<li>ResNet: <code><a href="../reference/application_resnet101.html">application_resnet101()</a></code>, <code><a href="../reference/application_resnet152.html">application_resnet152()</a></code>, <code>resnet_preprocess_input()</code>
 </li>
-<li>ResNet V2:<code><a href="../reference/application_resnet.html">application_resnet50_v2()</a></code>, <code><a href="../reference/application_resnet.html">application_resnet101_v2()</a></code>, <code><a href="../reference/application_resnet.html">application_resnet152_v2()</a></code> and <code><a href="../reference/application_resnet.html">resnet_v2_preprocess_input()</a></code>
+<li>ResNet V2:<code><a href="../reference/application_resnet50_v2.html">application_resnet50_v2()</a></code>, <code><a href="../reference/application_resnet101_v2.html">application_resnet101_v2()</a></code>, <code><a href="../reference/application_resnet152_v2.html">application_resnet152_v2()</a></code> and <code>resnet_v2_preprocess_input()</code>
 </li>
 <li>EfficientNet: <code>application_efficientnet_b{0,1,2,3,4,5,6,7}()</code>
 </li>
@@ -295,7 +357,7 @@
 <li><p>Signatures for layer functions are in the process of being simplified. Standard layer arguments are moving to <code>...</code> where appropriate (and will need to be provided as named arguments). Standard layer arguments include: <code>input_shape</code>, <code>batch_input_shape</code>, <code>batch_size</code>, <code>dtype</code>, <code>name</code>, <code>trainable</code>, <code>weights</code>. Layers updated: <code>layer_global_{max,average}_pooling_{1,2,3}d()</code>, <code><a href="../reference/time_distributed.html">time_distributed()</a></code>, <code><a href="../reference/bidirectional.html">bidirectional()</a></code>, <code><a href="../reference/layer_gru.html">layer_gru()</a></code>, <code><a href="../reference/layer_lstm.html">layer_lstm()</a></code>, <code><a href="../reference/layer_simple_rnn.html">layer_simple_rnn()</a></code></p></li>
 <li><p>All the backend function with a shape argument <code>k_*(shape =)</code> that now accept a a mix of integer tensors and R numerics in the supplied list.</p></li>
 <li><p>All layer functions now accept <code>NA</code> as a synonym for <code>NULL</code> in arguments that specify shape as a vector of dimension values, e.g., <code>input_shape</code>, <code>batch_input_shape</code>.</p></li>
-<li><p><code><a href="../reference/k_random_uniform.html">k_random_uniform()</a></code> now automatically casts <code>minval</code> and <code>maxval</code> to the output dtype.</p></li>
+<li><p><code>k_random_uniform()</code> now automatically casts <code>minval</code> and <code>maxval</code> to the output dtype.</p></li>
 <li><p><code><a href="../reference/install_keras.html">install_keras()</a></code> gains arg with default <code>pip_ignore_installed = TRUE</code>.</p></li>
 </ul></div>
     <div class="section level2">
@@ -313,8 +375,8 @@
 <li><code><a href="../reference/layer_random_rotation.html">layer_random_rotation()</a></code></li>
 <li><code><a href="../reference/layer_random_zoom.html">layer_random_zoom()</a></code></li>
 <li><code><a href="../reference/layer_random_contrast.html">layer_random_contrast()</a></code></li>
-<li><code><a href="../reference/layer_random_height.html">layer_random_height()</a></code></li>
-<li><code><a href="../reference/layer_random_width.html">layer_random_width()</a></code></li>
+<li><code>layer_random_height()</code></li>
+<li><code>layer_random_width()</code></li>
 </ul><p>Categorical features preprocessing:</p>
 <ul><li><code><a href="../reference/layer_category_encoding.html">layer_category_encoding()</a></code></li>
 <li><code><a href="../reference/layer_hashing.html">layer_hashing()</a></code></li>
@@ -351,11 +413,11 @@
 </ul></li>
 <li>
 <p>Existing layer instances gain the ability to be added to sequential models via a call. E.g.:</p>
-<div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
-<code class="sourceCode R">
-<span class="va">layer</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/layer_dense.html">layer_dense</a></span><span class="op">(</span>units <span class="op">=</span> <span class="fl">10</span><span class="op">)</span>
-<span class="va">model</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/keras_model_sequential.html">keras_model_sequential</a></span><span class="op">(</span>input_shape <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1</span>,<span class="fl">2</span>,<span class="fl">3</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span>
-  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/layer.html" class="external-link">layer</a></span><span class="op">(</span><span class="op">)</span></code></pre></div>
+<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span></span>
+<span><span class="va">layer</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/layer_dense.html">layer_dense</a></span><span class="op">(</span>units <span class="op">=</span> <span class="fl">10</span><span class="op">)</span></span>
+<span><span class="va">model</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/keras_model_sequential.html">keras_model_sequential</a></span><span class="op">(</span>input_shape <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1</span>,<span class="fl">2</span>,<span class="fl">3</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="fu">layer</span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
 </li>
 <li><p>Functions in the <em>merging layer</em> family gain the ability to return a layer instance if the first argument <code>inputs</code> is missing. (affected: <code><a href="../reference/layer_concatenate.html">layer_concatenate()</a></code>, <code><a href="../reference/layer_add.html">layer_add()</a></code>, <code><a href="../reference/layer_subtract.html">layer_subtract()</a></code>, <code><a href="../reference/layer_multiply.html">layer_multiply()</a></code>, <code><a href="../reference/layer_average.html">layer_average()</a></code>, <code><a href="../reference/layer_maximum.html">layer_maximum()</a></code>, <code><a href="../reference/layer_minimum.html">layer_minimum()</a></code> , <code><a href="../reference/layer_dot.html">layer_dot()</a></code>)</p></li>
 <li><p><code>%py_class%</code> gains the ability to delay initializing the Python session until first use. It is now safe to implement and export <code>%py_class%</code> objects in an R package.</p></li>
@@ -388,15 +450,15 @@
 <li><p>The <code>keras</code> Python module is exported</p></li>
 <li>
 <p>Major changes to the underlying handling of custom R6 layer classes.</p>
-<ul><li>A new <code><a href="https://rstudio.github.io/reticulate/reference/r-py-conversion.html" class="external-link">r_to_py()</a></code> method is provided for <code>R6ClassGenerator</code> objects.</li>
+<ul><li>A new <code>r_to_py()</code> method is provided for <code>R6ClassGenerator</code> objects.</li>
 <li>R6 custom layers can now inherit directly from Python layer classes or other R6 custom layer classes.</li>
-<li>Custom R6 layers can now be instantiated directly after conversion of the class generator with <code><a href="https://rstudio.github.io/reticulate/reference/r-py-conversion.html" class="external-link">r_to_py()</a></code>, without going through <code><a href="../reference/create_layer.html">create_layer()</a></code>.</li>
+<li>Custom R6 layers can now be instantiated directly after conversion of the class generator with <code>r_to_py()</code>, without going through <code><a href="../reference/create_layer.html">create_layer()</a></code>.</li>
 <li>
 <code>KerasLayer</code> is deprecated (new classes should inherit directly from <code>keras$layers$Layer</code>).</li>
 <li>
 <code>KerasWrapper</code> is deprecated (new classes should inherit directly from <code>keras$layers$Wrapper</code>).</li>
 <li>
-<code><a href="../reference/create_wrapper.html">create_wrapper()</a></code> is deprecated (no longer needed, use <code><a href="../reference/create_layer.html">create_layer()</a></code> directly).</li>
+<code>create_wrapper()</code> is deprecated (no longer needed, use <code><a href="../reference/create_layer.html">create_layer()</a></code> directly).</li>
 <li>All layer class methods provided as R functions now have a <code>super</code> in scope that resolves to the Python super class object.</li>
 <li>Methods of <code>super</code> can be accessed in the 3 common ways:
 <ul><li>(Python 3 style): <code>super()$"__init__"()</code>
@@ -429,8 +491,8 @@
 <ul><li><p>All the loss functions gain the ability to return a callable (a <code>keras$losses$Loss</code> instance) if <code>y_true</code> and <code>y_pred</code> arguments are missing.</p></li>
 <li>
 <p>New builtin loss functions:</p>
-<ul><li><code><a href="../reference/loss-functions.html">loss_huber()</a></code></li>
-<li><code><a href="../reference/loss-functions.html">loss_kl_divergence()</a></code></li>
+<ul><li><code><a href="../reference/loss_huber.html">loss_huber()</a></code></li>
+<li><code><a href="../reference/loss_kl_divergence.html">loss_kl_divergence()</a></code></li>
 </ul></li>
 </ul></li>
 <li>
@@ -452,15 +514,15 @@
 <li><code><a href="../reference/metric_recall_at_precision.html">metric_recall_at_precision()</a></code></li>
 <li><code><a href="../reference/metric_root_mean_squared_error.html">metric_root_mean_squared_error()</a></code></li>
 <li><code><a href="../reference/metric_sparse_categorical_accuracy.html">metric_sparse_categorical_accuracy()</a></code></li>
-<li><code><a href="../reference/metric_mean_tensor.html">metric_mean_tensor()</a></code></li>
+<li><code>metric_mean_tensor()</code></li>
 <li><code><a href="../reference/metric_mean_wrapper.html">metric_mean_wrapper()</a></code></li>
 <li><code><a href="../reference/metric_mean_iou.html">metric_mean_iou()</a></code></li>
-<li><code><a href="../reference/metric_mean_relative_error.html">metric_mean_relative_error()</a></code></li>
-<li><code><a href="../reference/metric_logcosh_error.html">metric_logcosh_error()</a></code></li>
+<li><code>metric_mean_relative_error()</code></li>
+<li><code>metric_logcosh_error()</code></li>
 <li><code><a href="../reference/metric_mean.html">metric_mean()</a></code></li>
 <li><code><a href="../reference/metric_cosine_similarity.html">metric_cosine_similarity()</a></code></li>
 <li><code><a href="../reference/metric_categorical_hinge.html">metric_categorical_hinge()</a></code></li>
-<li><code><a href="../reference/metric_accuracy.html">metric_accuracy()</a></code></li>
+<li><code>metric_accuracy()</code></li>
 <li><code><a href="../reference/metric_auc.html">metric_auc()</a></code></li>
 </ul></li>
 </ul></li>
@@ -577,9 +639,9 @@
 <ul><li><p>Improve handling of <code><a href="../reference/timeseries_generator.html">timeseries_generator()</a></code> in calls to <code><a href="../reference/fit_generator.html">fit_generator()</a></code></p></li>
 <li><p>Add support for <code>input_shape</code> argument to <code><a href="../reference/layer_dropout.html">layer_dropout()</a></code></p></li>
 <li><p>Improve error message for data frames passed to <code><a href="https://generics.r-lib.org/reference/fit.html" class="external-link">fit()</a></code>, etc.</p></li>
-<li><p>Use 1-based axis indices for <code><a href="../reference/k_gather.html">k_gather()</a></code></p></li>
+<li><p>Use 1-based axis indices for <code>k_gather()</code></p></li>
 <li><p>Added <code>version</code> parameter to <code><a href="../reference/install_keras.html">install_keras()</a></code> for installing alternate/older versions</p></li>
-<li><p>Added <code><a href="../reference/activation_relu.html">activation_exponential()</a></code> function.</p></li>
+<li><p>Added <code><a href="../reference/activation_exponential.html">activation_exponential()</a></code> function.</p></li>
 <li><p>Added <code>threshold</code> parameter to <code><a href="../reference/activation_relu.html">activation_relu()</a></code></p></li>
 <li><p>Added <code>restore_best_weights</code> parameter to <code><a href="../reference/callback_model_checkpoint.html">callback_model_checkpoint()</a></code></p></li>
 <li><p>Added <code>update_freq</code> parameter to <code><a href="../reference/callback_tensorboard.html">callback_tensorboard()</a></code></p></li>
@@ -589,7 +651,7 @@
 <li><p>Added <code>data_format</code> argument to <code><a href="../reference/layer_separable_conv_1d.html">layer_separable_conv_1d()</a></code>, <code><a href="../reference/layer_average_pooling_1d.html">layer_average_pooling_1d()</a></code>, <code><a href="../reference/layer_global_max_pooling_1d.html">layer_global_max_pooling_1d()</a></code>, and <code><a href="../reference/layer_global_average_pooling_1d.html">layer_global_average_pooling_1d()</a></code></p></li>
 <li><p>Added <code>interpolation</code> argument to <code><a href="../reference/layer_upsampling_1d.html">layer_upsampling_1d()</a></code> and <code><a href="../reference/layer_upsampling_2d.html">layer_upsampling_2d()</a></code></p></li>
 <li><p>Added <code>dtype</code> argument to <code><a href="../reference/to_categorical.html">to_categorical()</a></code></p></li>
-<li><p>Added <code><a href="../reference/layer_activation_selu.html">layer_activation_selu()</a></code> function.</p></li>
+<li><p>Added <code>layer_activation_selu()</code> function.</p></li>
 <li><p>Added <code>KerasWrapper</code> class and corresponding <code>create_wrapper</code> function.</p></li>
 </ul></div>
     <div class="section level2">
@@ -599,8 +661,8 @@
 <li><p>Fix issue with user-supplied <code>output_shape</code> in <code><a href="../reference/layer_lambda.html">layer_lambda()</a></code> not being supplied to tensorflow backends</p></li>
 <li><p>Filter out metrics that were created for callbacks (e.g. <code>lr</code>)</p></li>
 <li><p>Added <code><a href="../reference/application_mobilenet_v2.html">application_mobilenet_v2()</a></code> pre-trained model</p></li>
-<li><p>Added <code>sample_weight</code> parameter to <code><a href="../reference/flow_images_from_data.html">flow_images_from_data()</a></code></p></li>
-<li><p>Use native Keras implementation (rather than SciPy) for <code><a href="../reference/image_to_array.html">image_array_save()</a></code></p></li>
+<li><p>Added <code>sample_weight</code> parameter to <code>flow_images_from_data()</code></p></li>
+<li><p>Use native Keras implementation (rather than SciPy) for <code><a href="../reference/image_array_save.html">image_array_save()</a></code></p></li>
 <li><p>Default <code><a href="../reference/layer_flatten.html">layer_flatten()</a></code> <code>data_format</code> argument to <code>NULL</code> (which defaults to global Keras config).</p></li>
 <li><p>Add <code>baseline</code> argument to <code><a href="../reference/callback_early_stopping.html">callback_early_stopping()</a></code> (stop training if a given baseline isn’t reached).</p></li>
 <li><p>Add <code>data_format</code> argument to <code><a href="../reference/layer_conv_1d.html">layer_conv_1d()</a></code>.</p></li>
@@ -622,13 +684,13 @@
 <h3 id="keras-2-2-0">Keras 2.1.6<a class="anchor" aria-label="anchor" href="#keras-2-2-0"></a></h3>
 <ul><li><p>Fix issue with single-element vectors passed to text preprocessing functions</p></li>
 <li><p>Compatibility with TensorFlow v1.7 Keras implementation</p></li>
-<li><p>Support <code>workers</code> parameter for native Keras generators (e.g. <code><a href="../reference/flow_images_from_directory.html">flow_images_from_directory()</a></code>)</p></li>
-<li><p>Accept tensor as argument to <code><a href="../reference/k_pow.html">k_pow()</a></code></p></li>
+<li><p>Support <code>workers</code> parameter for native Keras generators (e.g. <code>flow_images_from_directory()</code>)</p></li>
+<li><p>Accept tensor as argument to <code>k_pow()</code></p></li>
 <li><p>In <code><a href="../reference/callback_reduce_lr_on_plateau.html">callback_reduce_lr_on_plateau()</a></code>, rename <code>epsilon</code> argument to <code>min_delta</code> (backwards-compatible).</p></li>
 <li><p>Add <code>axis</code> parameter to <code><a href="../reference/k_softmax.html">k_softmax()</a></code></p></li>
 <li><p>Add <code>send_as_json</code> parameter to <code><a href="../reference/callback_remote_monitor.html">callback_remote_monitor()</a></code></p></li>
 <li><p>Add <code>data_format</code> method to <code><a href="../reference/layer_flatten.html">layer_flatten()</a></code></p></li>
-<li><p>In <code><a href="../reference/multi_gpu_model.html">multi_gpu_model()</a></code>, add arguments <code>cpu_merge</code> and <code>cpu_relocation</code> (controlling whether to force the template model’s weights to be on CPU, and whether to operate merge operations on CPU or GPU).</p></li>
+<li><p>In <code>multi_gpu_model()</code>, add arguments <code>cpu_merge</code> and <code>cpu_relocation</code> (controlling whether to force the template model’s weights to be on CPU, and whether to operate merge operations on CPU or GPU).</p></li>
 <li><p>Record correct loss name for tfruns when custom functions are provided for <code>loss</code></p></li>
 </ul></div>
 <div class="section level3">
@@ -653,7 +715,7 @@
 <ul><li><p>Models saved via <code><a href="https://rdrr.io/pkg/tensorflow/man/export_savedmodel.html" class="external-link">export_savedmodel()</a></code> that make use of learning phases can now be exported without having to manually reload the original model.</p></li>
 <li><p>Ensure that models saved via <code><a href="https://rdrr.io/pkg/tensorflow/man/export_savedmodel.html" class="external-link">export_savedmodel()</a></code> can be served from CloudML</p></li>
 <li><p>Run image data generators with R preprocessing functions on the main thread</p></li>
-<li><p>Return R list from <code><a href="../reference/texts_to_sequences.html">texts_to_sequences()</a></code></p></li>
+<li><p>Return R list from <code>texts_to_sequences()</code></p></li>
 <li><p>Various fixes for <code><a href="../reference/use_implementation.html">use_implementation()</a></code> function</p></li>
 </ul></div>
 </div>
@@ -662,7 +724,7 @@
 <ul><li><p>Added <code>theme_bw</code> option to plot method for training history</p></li>
 <li><p>Support TF Dataset objects as generators for <code><a href="../reference/fit_generator.html">fit_generator()</a></code>, etc.</p></li>
 <li><p>Added <code><a href="../reference/use_implementation.html">use_implementation()</a></code> and <code><a href="../reference/use_implementation.html">use_backend()</a></code> functions as alternative to setting <code>KERAS_IMPLEMENATION</code> and <code>KERAS_BACKEND</code> environment variables.</p></li>
-<li><p>Added R wrappers for Keras backend functions (e.g. <code><a href="../reference/k_variable.html">k_variable()</a></code>, <code><a href="../reference/k_dot.html">k_dot()</a></code>, etc.)</p></li>
+<li><p>Added R wrappers for Keras backend functions (e.g. <code>k_variable()</code>, <code><a href="../reference/k_dot.html">k_dot()</a></code>, etc.)</p></li>
 <li><p>Use 1-based axis for <code>normalize</code> function.</p></li>
 <li><p>Fix issue with printing training history after early stopping.</p></li>
 <li><p>Experimental support for using the PlaidML backend.</p></li>
@@ -673,7 +735,7 @@
 </ul></div>
     <div class="section level2">
 <h2 class="page-header" data-toc-text="2.0.9" id="keras-209">keras 2.0.9<small>2017-11-17</small><a class="anchor" aria-label="anchor" href="#keras-209"></a></h2>
-<ul><li><p>Added <code><a href="../reference/multi_gpu_model.html">multi_gpu_model()</a></code> function.</p></li>
+<ul><li><p>Added <code>multi_gpu_model()</code> function.</p></li>
 <li><p>Automatically call <code><a href="../reference/keras_array.html">keras_array()</a></code> on the results of generator functions.</p></li>
 <li><p>Ensure that <code>steps_per_epoch</code> is passed as an integer</p></li>
 <li><p>Import <code><a href="https://rdrr.io/pkg/tensorflow/man/evaluate.html" class="external-link">evaluate()</a></code> generic from tensorflow package</p></li>
@@ -689,16 +751,16 @@
 <li><p>Use <code>tensorflow.keras</code> for tensorflow implementation (TF v1.4)</p></li>
 <li><p>Added <code><a href="../reference/application_inception_resnet_v2.html">application_inception_resnet_v2()</a></code> pre-trained model</p></li>
 <li><p>Added <code><a href="../reference/dataset_fashion_mnist.html">dataset_fashion_mnist()</a></code> dataset</p></li>
-<li><p>Added <code><a href="../reference/layer_cudnn_gru.html">layer_cudnn_gru()</a></code> and <code><a href="../reference/layer_cudnn_lstm.html">layer_cudnn_lstm()</a></code> (faster recurrent layers backed by <a href="https://developer.nvidia.com/cudnn" class="external-link">CuDNN</a>)</p></li>
+<li><p>Added <code>layer_cudnn_gru()</code> and <code>layer_cudnn_lstm()</code> (faster recurrent layers backed by <a href="https://developer.nvidia.com/cudnn" class="external-link">CuDNN</a>)</p></li>
 <li><p>Added <code><a href="../reference/layer_minimum.html">layer_minimum()</a></code> function</p></li>
 <li><p>Added <code>interpolation</code> parameter to <code><a href="../reference/image_load.html">image_load()</a></code> function</p></li>
-<li><p>Add <code><a href="../reference/save_text_tokenizer.html">save_text_tokenizer()</a></code> and <code><a href="../reference/save_text_tokenizer.html">load_text_tokenizer()</a></code> functions.</p></li>
+<li><p>Add <code>save_text_tokenizer()</code> and <code>load_text_tokenizer()</code> functions.</p></li>
 <li><p>Fix for progress bar output in Keras &gt;= 2.0.9</p></li>
 <li><p>Remove deprecated <code>implementation</code> argument from recurrent layers</p></li>
 <li><p>Support for passing generators for validation data in <code><a href="../reference/fit_generator.html">fit_generator()</a></code></p></li>
 <li><p>Accept single integer arguments for kernel sizes</p></li>
 <li><p>Add standard layer arguments to <code><a href="../reference/layer_flatten.html">layer_flatten()</a></code> and <code><a href="../reference/layer_separable_conv_2d.html">layer_separable_conv_2d()</a></code></p></li>
-<li><p>Added <code><a href="../reference/image_to_array.html">image_array_resize()</a></code> and <code><a href="../reference/image_to_array.html">image_array_save()</a></code> for 3D image arrays.</p></li>
+<li><p>Added <code>image_array_resize()</code> and <code><a href="../reference/image_array_save.html">image_array_save()</a></code> for 3D image arrays.</p></li>
 <li><p>Allow custom layers and lambda layers to accept list parameters.</p></li>
 <li><p>Expose <code>add_loss()</code> function for custom layers</p></li>
 </ul></div>
@@ -727,7 +789,7 @@
 <li><p><code>to_numpy_array()</code> utility function for custom generators (enables custom generators to yield C-ordered arrays of the correct float type)</p></li>
 <li><p>Added <code>batch_size</code> and <code>write_grads</code> arguments to <code><a href="../reference/callback_tensorboard.html">callback_tensorboard()</a></code></p></li>
 <li><p>Added <code>return_state</code> argument to recurrent layers.</p></li>
-<li><p>Don’t re-export <code><a href="https://rdrr.io/pkg/tensorflow/man/install_tensorflow.html" class="external-link">install_tensorflow()</a></code> and <code><a href="https://rdrr.io/pkg/tensorflow/man/tf_config.html" class="external-link">tf_config()</a></code> from tensorflow package.</p></li>
+<li><p>Don’t re-export <code>install_tensorflow()</code> and <code>tf_config()</code> from tensorflow package.</p></li>
 <li><p><code><a href="../reference/is_keras_available.html">is_keras_available()</a></code> function to probe whether the Keras Python package is available in the current environment.</p></li>
 <li><p><code><a href="https://rdrr.io/r/base/as.data.frame.html" class="external-link">as.data.frame()</a></code> S3 method for Keras training history</p></li>
 <li><p>Remove names from <code><a href="../reference/keras_model.html">keras_model()</a></code> inputs</p></li>
@@ -754,7 +816,7 @@
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.3.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.7.</p>
 </div>
 
       </footer></div>

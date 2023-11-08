@@ -17,7 +17,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">keras</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">2.8.0.9000</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">2.13.0.9000</span>
       </span>
     </div>
 
@@ -165,15 +165,18 @@
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">custom_metric</span><span class="op">(</span><span class="va">name</span>, <span class="va">metric_fn</span><span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">custom_metric</span><span class="op">(</span><span class="va">name</span>, <span class="va">metric_fn</span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
     <h2>Arguments</h2>
     <dl><dt>name</dt>
 <dd><p>name used to show training progress output</p></dd>
+
+
 <dt>metric_fn</dt>
 <dd><p>An R function with signature <code>function(y_true, y_pred){}</code> that accepts tensors.</p></dd>
+
 </dl></div>
     <div id="details">
     <h2>Details</h2>
@@ -190,53 +193,11 @@ also specify the metric in the call the <code><a href="save_model_hdf5.html">loa
 <code><a href="with_custom_object_scope.html">with_custom_object_scope()</a></code> which will allow you to refer to the
 metric by name just like you do with built in keras metrics.</p>
 <p>Documentation on the available backend tensor functions can be
-found at <a href="https://keras.rstudio.com/articles/backend.html#backend-functions" class="external-link">https://keras.rstudio.com/articles/backend.html#backend-functions</a>.</p>
+found at <a href="https://tensorflow.rstudio.com/reference/keras/#backend" class="external-link">https://tensorflow.rstudio.com/reference/keras/#backend</a>.</p>
 <p>Alternative ways of supplying custom metrics:</p><ul><li><p><code>custom_metric():</code> Arbitrary R function.</p></li>
 <li><p><code><a href="metric_mean_wrapper.html">metric_mean_wrapper()</a></code>: Wrap an arbitrary R function in a <code>Metric</code> instance.</p></li>
 <li><p>subclass <code>keras$metrics$Metric</code>: see <code><a href="Metric.html">?Metric</a></code> for example.</p></li>
 </ul></div>
-    <div id="see-also">
-    <h2>See also</h2>
-    <div class="dont-index"><p>Other metrics: 
-<code><a href="metric_accuracy.html">metric_accuracy</a>()</code>,
-<code><a href="metric_auc.html">metric_auc</a>()</code>,
-<code><a href="metric_binary_accuracy.html">metric_binary_accuracy</a>()</code>,
-<code><a href="metric_binary_crossentropy.html">metric_binary_crossentropy</a>()</code>,
-<code><a href="metric_categorical_accuracy.html">metric_categorical_accuracy</a>()</code>,
-<code><a href="metric_categorical_crossentropy.html">metric_categorical_crossentropy</a>()</code>,
-<code><a href="metric_categorical_hinge.html">metric_categorical_hinge</a>()</code>,
-<code><a href="metric_cosine_similarity.html">metric_cosine_similarity</a>()</code>,
-<code><a href="metric_false_negatives.html">metric_false_negatives</a>()</code>,
-<code><a href="metric_false_positives.html">metric_false_positives</a>()</code>,
-<code><a href="metric_hinge.html">metric_hinge</a>()</code>,
-<code><a href="metric_kullback_leibler_divergence.html">metric_kullback_leibler_divergence</a>()</code>,
-<code><a href="metric_logcosh_error.html">metric_logcosh_error</a>()</code>,
-<code><a href="metric_mean_absolute_error.html">metric_mean_absolute_error</a>()</code>,
-<code><a href="metric_mean_absolute_percentage_error.html">metric_mean_absolute_percentage_error</a>()</code>,
-<code><a href="metric_mean_iou.html">metric_mean_iou</a>()</code>,
-<code><a href="metric_mean_relative_error.html">metric_mean_relative_error</a>()</code>,
-<code><a href="metric_mean_squared_error.html">metric_mean_squared_error</a>()</code>,
-<code><a href="metric_mean_squared_logarithmic_error.html">metric_mean_squared_logarithmic_error</a>()</code>,
-<code><a href="metric_mean_tensor.html">metric_mean_tensor</a>()</code>,
-<code><a href="metric_mean_wrapper.html">metric_mean_wrapper</a>()</code>,
-<code><a href="metric_mean.html">metric_mean</a>()</code>,
-<code><a href="metric_poisson.html">metric_poisson</a>()</code>,
-<code><a href="metric_precision_at_recall.html">metric_precision_at_recall</a>()</code>,
-<code><a href="metric_precision.html">metric_precision</a>()</code>,
-<code><a href="metric_recall_at_precision.html">metric_recall_at_precision</a>()</code>,
-<code><a href="metric_recall.html">metric_recall</a>()</code>,
-<code><a href="metric_root_mean_squared_error.html">metric_root_mean_squared_error</a>()</code>,
-<code><a href="metric_sensitivity_at_specificity.html">metric_sensitivity_at_specificity</a>()</code>,
-<code><a href="metric_sparse_categorical_accuracy.html">metric_sparse_categorical_accuracy</a>()</code>,
-<code><a href="metric_sparse_categorical_crossentropy.html">metric_sparse_categorical_crossentropy</a>()</code>,
-<code><a href="metric_sparse_top_k_categorical_accuracy.html">metric_sparse_top_k_categorical_accuracy</a>()</code>,
-<code><a href="metric_specificity_at_sensitivity.html">metric_specificity_at_sensitivity</a>()</code>,
-<code><a href="metric_squared_hinge.html">metric_squared_hinge</a>()</code>,
-<code><a href="metric_sum.html">metric_sum</a>()</code>,
-<code><a href="metric_top_k_categorical_accuracy.html">metric_top_k_categorical_accuracy</a>()</code>,
-<code><a href="metric_true_negatives.html">metric_true_negatives</a>()</code>,
-<code><a href="metric_true_positives.html">metric_true_positives</a>()</code></p></div>
-    </div>
 
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
@@ -250,7 +211,7 @@ found at <a href="https://keras.rstudio.com/articles/backend.html#backend-functi
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.3.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.7.</p>
 </div>
 
       </footer></div>

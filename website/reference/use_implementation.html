@@ -17,7 +17,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">keras</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">2.8.0.9000</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">2.13.0.9000</span>
       </span>
     </div>
 
@@ -165,18 +165,21 @@
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">use_implementation</span><span class="op">(</span>implementation <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"keras"</span>, <span class="st">"tensorflow"</span><span class="op">)</span><span class="op">)</span>
-
-<span class="fu">use_backend</span><span class="op">(</span>backend <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"tensorflow"</span>, <span class="st">"cntk"</span>, <span class="st">"theano"</span>, <span class="st">"plaidml"</span><span class="op">)</span><span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">use_implementation</span><span class="op">(</span>implementation <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"keras"</span>, <span class="st">"tensorflow"</span><span class="op">)</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu">use_backend</span><span class="op">(</span>backend <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"tensorflow"</span>, <span class="st">"cntk"</span>, <span class="st">"theano"</span>, <span class="st">"plaidml"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
     <h2>Arguments</h2>
     <dl><dt>implementation</dt>
 <dd><p>One of "keras" or "tensorflow" (defaults to "keras").</p></dd>
+
+
 <dt>backend</dt>
 <dd><p>One of "tensorflow", "cntk", or "theano" (defaults
 to "tensorflow")</p></dd>
+
 </dl></div>
     <div id="details">
     <h2>Details</h2>
@@ -184,7 +187,7 @@ to "tensorflow")</p></dd>
 and the implementation native to TensorFlow) and supports multiple
 backends ("tensorflow", "cntk", "theano", and "plaidml"). These functions allow
 switching between the various implementations and backends.</p>
-<p>The functions should be called after <code><a href="https://keras.rstudio.com" class="external-link">library(keras)</a></code> and before calling
+<p>The functions should be called after <code><a href="https://tensorflow.rstudio.com/" class="external-link">library(keras)</a></code> and before calling
 other functions within the package (see below for an example).</p>
 <p>The default implementation and backend should be suitable for most
 use cases. The "tensorflow" implementation is useful when using Keras
@@ -194,16 +197,16 @@ R package).</p>
 
     <div id="ref-examples">
     <h2>Examples</h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="kw">if</span> <span class="op">(</span><span class="cn">FALSE</span><span class="op">)</span> <span class="op">{</span></span>
-<span class="r-in"><span class="co"># use the tensorflow implementation</span></span>
-<span class="r-in"><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://keras.rstudio.com" class="external-link">keras</a></span><span class="op">)</span></span>
-<span class="r-in"><span class="fu">use_implementation</span><span class="op">(</span><span class="st">"tensorflow"</span><span class="op">)</span></span>
-<span class="r-in"></span>
-<span class="r-in"><span class="co"># use the cntk backend</span></span>
-<span class="r-in"><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://keras.rstudio.com" class="external-link">keras</a></span><span class="op">)</span></span>
-<span class="r-in"><span class="fu">use_backend</span><span class="op">(</span><span class="st">"theano"</span><span class="op">)</span></span>
-<span class="r-in"><span class="op">}</span></span>
-<span class="r-in"></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="kw">if</span> <span class="op">(</span><span class="cn">FALSE</span><span class="op">)</span> <span class="op">{</span></span></span>
+<span class="r-in"><span><span class="co"># use the tensorflow implementation</span></span></span>
+<span class="r-in"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://tensorflow.rstudio.com/" class="external-link">keras</a></span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu">use_implementation</span><span class="op">(</span><span class="st">"tensorflow"</span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># use the cntk backend</span></span></span>
+<span class="r-in"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://tensorflow.rstudio.com/" class="external-link">keras</a></span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu">use_backend</span><span class="op">(</span><span class="st">"theano"</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="op">}</span></span></span>
+<span class="r-in"><span></span></span>
 </code></pre></div>
     </div>
   </div>
@@ -218,7 +221,7 @@ R package).</p>
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.3.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.7.</p>
 </div>
 
       </footer></div>

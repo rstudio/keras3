@@ -17,7 +17,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">keras</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">2.8.0.9000</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">2.13.0.9000</span>
       </span>
     </div>
 
@@ -165,28 +165,39 @@
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">save_model_hdf5</span><span class="op">(</span><span class="va">object</span>, <span class="va">filepath</span>, overwrite <span class="op">=</span> <span class="cn">TRUE</span>, include_optimizer <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>
-
-<span class="fu">load_model_hdf5</span><span class="op">(</span><span class="va">filepath</span>, custom_objects <span class="op">=</span> <span class="cn">NULL</span>, compile <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">save_model_hdf5</span><span class="op">(</span><span class="va">object</span>, <span class="va">filepath</span>, overwrite <span class="op">=</span> <span class="cn">TRUE</span>, include_optimizer <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu">load_model_hdf5</span><span class="op">(</span><span class="va">filepath</span>, custom_objects <span class="op">=</span> <span class="cn">NULL</span>, compile <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
     <h2>Arguments</h2>
     <dl><dt>object</dt>
 <dd><p>Model object to save</p></dd>
+
+
 <dt>filepath</dt>
 <dd><p>File path</p></dd>
+
+
 <dt>overwrite</dt>
 <dd><p>Overwrite existing file if necessary</p></dd>
+
+
 <dt>include_optimizer</dt>
 <dd><p>If <code>TRUE</code>, save optimizer's state.</p></dd>
+
+
 <dt>custom_objects</dt>
 <dd><p>Mapping class names (or function names) of custom
 (non-Keras) objects to class/functions (for example, custom metrics
 or custom loss functions). This mapping can be done with the dict()
 function of reticulate.</p></dd>
+
+
 <dt>compile</dt>
 <dd><p>Whether to compile the model after loading.</p></dd>
+
 </dl></div>
     <div id="details">
     <h2>Details</h2>
@@ -231,7 +242,7 @@ R objects that can be persisted across R sessions.</p>
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.3.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.7.</p>
 </div>
 
       </footer></div>

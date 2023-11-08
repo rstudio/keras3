@@ -17,7 +17,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">keras</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">2.8.0.9000</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">2.13.0.9000</span>
       </span>
     </div>
 
@@ -165,19 +165,24 @@
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="va">sym</span> <span class="op">%&lt;-active%</span> <span class="va">value</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="va">sym</span> <span class="op">%&lt;-active%</span> <span class="va">value</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
     <h2>Arguments</h2>
     <dl><dt>sym</dt>
 <dd><p>symbol to bind</p></dd>
+
+
 <dt>value</dt>
 <dd><p>A function to call when the value of <code>sym</code> is accessed.</p></dd>
+
 </dl></div>
     <div id="value">
     <h2>Value</h2>
-    <p><code>value</code>, invisibly</p>
+    
+
+<p><code>value</code>, invisibly</p>
     </div>
     <div id="details">
     <h2>Details</h2>
@@ -191,29 +196,30 @@
 
     <div id="ref-examples">
     <h2>Examples</h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="va">x</span> <span class="op">%&lt;-active%</span> <span class="kw">function</span><span class="op">(</span><span class="va">value</span><span class="op">)</span> <span class="op">{</span></span>
-<span class="r-in">  <span class="fu"><a href="https://rdrr.io/r/base/message.html" class="external-link">message</a></span><span class="op">(</span><span class="st">"Evaluating function of active binding"</span><span class="op">)</span></span>
-<span class="r-in">  <span class="kw">if</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/missing.html" class="external-link">missing</a></span><span class="op">(</span><span class="va">value</span><span class="op">)</span><span class="op">)</span></span>
-<span class="r-in">    <span class="fu"><a href="https://rdrr.io/r/stats/Uniform.html" class="external-link">runif</a></span><span class="op">(</span><span class="fl">1</span><span class="op">)</span></span>
-<span class="r-in">  <span class="kw">else</span></span>
-<span class="r-in">   <span class="fu"><a href="https://rdrr.io/r/base/message.html" class="external-link">message</a></span><span class="op">(</span><span class="st">"Received: "</span>, <span class="va">value</span><span class="op">)</span></span>
-<span class="r-in"><span class="op">}</span></span>
-<span class="r-in"><span class="va">x</span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/Random.html" class="external-link">set.seed</a></span><span class="op">(</span><span class="fl">1234</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">x</span> <span class="op">%&lt;-active%</span> <span class="kw">function</span><span class="op">(</span><span class="va">value</span><span class="op">)</span> <span class="op">{</span></span></span>
+<span class="r-in"><span>  <span class="fu"><a href="https://rdrr.io/r/base/message.html" class="external-link">message</a></span><span class="op">(</span><span class="st">"Evaluating function of active binding"</span><span class="op">)</span></span></span>
+<span class="r-in"><span>  <span class="kw">if</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/missing.html" class="external-link">missing</a></span><span class="op">(</span><span class="va">value</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-in"><span>    <span class="fu"><a href="https://rdrr.io/r/stats/Uniform.html" class="external-link">runif</a></span><span class="op">(</span><span class="fl">1</span><span class="op">)</span></span></span>
+<span class="r-in"><span>  <span class="kw">else</span></span></span>
+<span class="r-in"><span>   <span class="fu"><a href="https://rdrr.io/r/base/message.html" class="external-link">message</a></span><span class="op">(</span><span class="st">"Received: "</span>, <span class="va">value</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="op">}</span></span></span>
+<span class="r-in"><span><span class="va">x</span></span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> Evaluating function of active binding</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 0.8365774</span>
-<span class="r-in"><span class="va">x</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 0.1137034</span>
+<span class="r-in"><span><span class="va">x</span></span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> Evaluating function of active binding</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 0.9449075</span>
-<span class="r-in"><span class="va">x</span> <span class="op">&lt;-</span> <span class="st">"foo"</span></span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> Evaluating function of active binding</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> Received: foo</span>
-<span class="r-in"><span class="va">x</span> <span class="op">&lt;-</span> <span class="st">"foo"</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 0.6222994</span>
+<span class="r-in"><span><span class="va">x</span> <span class="op">&lt;-</span> <span class="st">"foo"</span></span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> Evaluating function of active binding</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> Received: foo</span>
-<span class="r-in"><span class="va">x</span></span>
+<span class="r-in"><span><span class="va">x</span> <span class="op">&lt;-</span> <span class="st">"foo"</span></span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> Evaluating function of active binding</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 0.5089196</span>
-<span class="r-in"><span class="fu"><a href="https://rdrr.io/r/base/rm.html" class="external-link">rm</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="co"># cleanup</span></span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> Received: foo</span>
+<span class="r-in"><span><span class="va">x</span></span></span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> Evaluating function of active binding</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 0.6092747</span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/rm.html" class="external-link">rm</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="co"># cleanup</span></span></span>
 </code></pre></div>
     </div>
   </div>
@@ -228,7 +234,7 @@
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.3.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.7.</p>
 </div>
 
       </footer></div>

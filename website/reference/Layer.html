@@ -18,7 +18,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">keras</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">2.8.0.9000</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">2.13.0.9000</span>
       </span>
     </div>
 
@@ -167,88 +167,103 @@
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">Layer</span><span class="op">(</span>
-  <span class="va">classname</span>,
-  <span class="va">initialize</span>,
-  build <span class="op">=</span> <span class="cn">NULL</span>,
-  call <span class="op">=</span> <span class="cn">NULL</span>,
-  compute_output_shape <span class="op">=</span> <span class="cn">NULL</span>,
-  <span class="va">...</span>,
-  inherit <span class="op">=</span> <span class="fu">keras</span><span class="fu">::</span><span class="va"><a href="keras.html">keras</a></span><span class="op">$</span><span class="va">layers</span><span class="op">$</span><span class="va">Layer</span>
-<span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">Layer</span><span class="op">(</span></span>
+<span>  <span class="va">classname</span>,</span>
+<span>  <span class="va">initialize</span>,</span>
+<span>  build <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  call <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  compute_output_shape <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  <span class="va">...</span>,</span>
+<span>  inherit <span class="op">=</span> <span class="fu">keras</span><span class="fu">::</span><span class="va"><a href="keras.html">keras</a></span><span class="op">$</span><span class="va">layers</span><span class="op">$</span><span class="va">Layer</span></span>
+<span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
     <h2>Arguments</h2>
     <dl><dt>classname</dt>
 <dd><p>the name of the custom Layer.</p></dd>
+
+
 <dt>initialize</dt>
 <dd><p>a function. This is where you define the arguments used to further
 build your layer. For example, a dense layer would take the <code>units</code> argument.
 You should always call <code>super()$`__init__()`</code> to initialize the base
 inherited layer.</p></dd>
+
+
 <dt>build</dt>
 <dd><p>a function that takes <code>input_shape</code> as argument. This is where you will
 define your weights. Note that if your layer doesn't define trainable weights then
 you need not implement this method.</p></dd>
+
+
 <dt>call</dt>
 <dd><p>This is where the layer's logic lives. Unless you want your layer to
 support masking, you only have to care about the first argument passed to <code>call</code>
 (the input tensor).</p></dd>
+
+
 <dt>compute_output_shape</dt>
 <dd><p>a function that takes <code>input_shape</code> as an argument. In
 case your layer modifies the shape of its input, you should specify here the
 shape transformation logic. This allows Keras to do automatic shape inference.
 If you don't modify the shape of the input then you need not implement this
 method.</p></dd>
+
+
 <dt>...</dt>
 <dd><p>Any other methods and/or attributes can be specified using named
 arguments. They will be added to the layer class.</p></dd>
+
+
 <dt>inherit</dt>
 <dd><p>the Keras layer to inherit from.</p></dd>
+
 </dl></div>
     <div id="value">
     <h2>Value</h2>
-    <p>A function that wraps <code>create_layer</code>, similar to <code><a href="layer_dense.html">keras::layer_dense</a></code>.</p>
+    
+
+<p>A function that wraps <code>create_layer</code>, similar to <code><a href="layer_dense.html">keras::layer_dense</a></code>.</p>
     </div>
 
     <div id="ref-examples">
     <h2>Examples</h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="kw">if</span> <span class="op">(</span><span class="cn">FALSE</span><span class="op">)</span> <span class="op">{</span></span>
-<span class="r-in"></span>
-<span class="r-in"><span class="va">layer_dense2</span> <span class="op">&lt;-</span> <span class="fu">Layer</span><span class="op">(</span></span>
-<span class="r-in">  <span class="st">"Dense2"</span>,</span>
-<span class="r-in"></span>
-<span class="r-in">  initialize <span class="op">=</span> <span class="kw">function</span><span class="op">(</span><span class="va">units</span><span class="op">)</span> <span class="op">{</span></span>
-<span class="r-in">    <span class="fu">super</span><span class="op">(</span><span class="op">)</span><span class="op">$</span><span class="fu">`__init__`</span><span class="op">(</span><span class="op">)</span></span>
-<span class="r-in">    <span class="va">self</span><span class="op">$</span><span class="va">units</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/integer.html" class="external-link">as.integer</a></span><span class="op">(</span><span class="va">units</span><span class="op">)</span></span>
-<span class="r-in">  <span class="op">}</span>,</span>
-<span class="r-in"></span>
-<span class="r-in">  build <span class="op">=</span> <span class="kw">function</span><span class="op">(</span><span class="va">input_shape</span><span class="op">)</span> <span class="op">{</span></span>
-<span class="r-in">    <span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/class.html" class="external-link">class</a></span><span class="op">(</span><span class="va">input_shape</span><span class="op">)</span><span class="op">)</span></span>
-<span class="r-in">    <span class="va">self</span><span class="op">$</span><span class="va">kernel</span> <span class="op">&lt;-</span> <span class="va">self</span><span class="op">$</span><span class="fu">add_weight</span><span class="op">(</span></span>
-<span class="r-in">      name <span class="op">=</span> <span class="st">"kernel"</span>,</span>
-<span class="r-in">      shape <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="va">input_shape</span><span class="op">[[</span><span class="fl">2</span><span class="op">]</span><span class="op">]</span>, <span class="va">self</span><span class="op">$</span><span class="va">units</span><span class="op">)</span>,</span>
-<span class="r-in">      initializer <span class="op">=</span> <span class="st">"uniform"</span>,</span>
-<span class="r-in">      trainable <span class="op">=</span> <span class="cn">TRUE</span></span>
-<span class="r-in">    <span class="op">)</span></span>
-<span class="r-in">  <span class="op">}</span>,</span>
-<span class="r-in"></span>
-<span class="r-in">  call <span class="op">=</span> <span class="kw">function</span><span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="op">{</span></span>
-<span class="r-in">    <span class="fu">tensorflow</span><span class="fu">::</span><span class="va"><a href="https://rdrr.io/pkg/tensorflow/man/tf.html" class="external-link">tf</a></span><span class="op">$</span><span class="fu">matmul</span><span class="op">(</span><span class="va">x</span>, <span class="va">self</span><span class="op">$</span><span class="va">kernel</span><span class="op">)</span></span>
-<span class="r-in">  <span class="op">}</span>,</span>
-<span class="r-in"></span>
-<span class="r-in">  compute_output_shape <span class="op">=</span> <span class="kw">function</span><span class="op">(</span><span class="va">input_shape</span><span class="op">)</span> <span class="op">{</span></span>
-<span class="r-in">    <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="va">input_shape</span><span class="op">[[</span><span class="fl">1</span><span class="op">]</span><span class="op">]</span>, <span class="va">self</span><span class="op">$</span><span class="va">units</span><span class="op">)</span></span>
-<span class="r-in">  <span class="op">}</span></span>
-<span class="r-in"></span>
-<span class="r-in"><span class="op">)</span></span>
-<span class="r-in"></span>
-<span class="r-in"><span class="va">l</span> <span class="op">&lt;-</span> <span class="fu">layer_dense2</span><span class="op">(</span>units <span class="op">=</span> <span class="fl">10</span><span class="op">)</span></span>
-<span class="r-in"><span class="fu">l</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/matrix.html" class="external-link">matrix</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/Uniform.html" class="external-link">runif</a></span><span class="op">(</span><span class="fl">10</span><span class="op">)</span>, ncol <span class="op">=</span> <span class="fl">1</span><span class="op">)</span><span class="op">)</span></span>
-<span class="r-in"></span>
-<span class="r-in"><span class="op">}</span></span>
-<span class="r-in"></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="kw">if</span> <span class="op">(</span><span class="cn">FALSE</span><span class="op">)</span> <span class="op">{</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="va">layer_dense2</span> <span class="op">&lt;-</span> <span class="fu">Layer</span><span class="op">(</span></span></span>
+<span class="r-in"><span>  <span class="st">"Dense2"</span>,</span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span>  initialize <span class="op">=</span> <span class="kw">function</span><span class="op">(</span><span class="va">units</span><span class="op">)</span> <span class="op">{</span></span></span>
+<span class="r-in"><span>    <span class="fu">super</span><span class="op">(</span><span class="op">)</span><span class="op">$</span><span class="fu">`__init__`</span><span class="op">(</span><span class="op">)</span></span></span>
+<span class="r-in"><span>    <span class="va">self</span><span class="op">$</span><span class="va">units</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/integer.html" class="external-link">as.integer</a></span><span class="op">(</span><span class="va">units</span><span class="op">)</span></span></span>
+<span class="r-in"><span>  <span class="op">}</span>,</span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span>  build <span class="op">=</span> <span class="kw">function</span><span class="op">(</span><span class="va">input_shape</span><span class="op">)</span> <span class="op">{</span></span></span>
+<span class="r-in"><span>    <span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/class.html" class="external-link">class</a></span><span class="op">(</span><span class="va">input_shape</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-in"><span>    <span class="va">self</span><span class="op">$</span><span class="va">kernel</span> <span class="op">&lt;-</span> <span class="va">self</span><span class="op">$</span><span class="fu">add_weight</span><span class="op">(</span></span></span>
+<span class="r-in"><span>      name <span class="op">=</span> <span class="st">"kernel"</span>,</span></span>
+<span class="r-in"><span>      shape <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="va">input_shape</span><span class="op">[[</span><span class="fl">2</span><span class="op">]</span><span class="op">]</span>, <span class="va">self</span><span class="op">$</span><span class="va">units</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>      initializer <span class="op">=</span> <span class="st">"uniform"</span>,</span></span>
+<span class="r-in"><span>      trainable <span class="op">=</span> <span class="cn">TRUE</span></span></span>
+<span class="r-in"><span>    <span class="op">)</span></span></span>
+<span class="r-in"><span>  <span class="op">}</span>,</span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span>  call <span class="op">=</span> <span class="kw">function</span><span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="op">{</span></span></span>
+<span class="r-in"><span>    <span class="fu">tensorflow</span><span class="fu">::</span><span class="va"><a href="https://rdrr.io/pkg/tensorflow/man/tf.html" class="external-link">tf</a></span><span class="op">$</span><span class="fu">matmul</span><span class="op">(</span><span class="va">x</span>, <span class="va">self</span><span class="op">$</span><span class="va">kernel</span><span class="op">)</span></span></span>
+<span class="r-in"><span>  <span class="op">}</span>,</span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span>  compute_output_shape <span class="op">=</span> <span class="kw">function</span><span class="op">(</span><span class="va">input_shape</span><span class="op">)</span> <span class="op">{</span></span></span>
+<span class="r-in"><span>    <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="va">input_shape</span><span class="op">[[</span><span class="fl">1</span><span class="op">]</span><span class="op">]</span>, <span class="va">self</span><span class="op">$</span><span class="va">units</span><span class="op">)</span></span></span>
+<span class="r-in"><span>  <span class="op">}</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="va">l</span> <span class="op">&lt;-</span> <span class="fu">layer_dense2</span><span class="op">(</span>units <span class="op">=</span> <span class="fl">10</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu">l</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/matrix.html" class="external-link">matrix</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/Uniform.html" class="external-link">runif</a></span><span class="op">(</span><span class="fl">10</span><span class="op">)</span>, ncol <span class="op">=</span> <span class="fl">1</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="op">}</span></span></span>
+<span class="r-in"><span></span></span>
 </code></pre></div>
     </div>
   </div>
@@ -263,7 +278,7 @@ arguments. They will be added to the layer class.</p></dd>
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.3.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.7.</p>
 </div>
 
       </footer></div>

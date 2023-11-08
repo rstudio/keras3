@@ -18,7 +18,7 @@ University."><meta property="og:image" content="/logo.png"><!-- mathjax --><scri
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">keras</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">2.8.0.9000</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">2.13.0.9000</span>
       </span>
     </div>
 
@@ -167,11 +167,11 @@ University.</p>
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">dataset_boston_housing</span><span class="op">(</span>
-  path <span class="op">=</span> <span class="st">"boston_housing.npz"</span>,
-  test_split <span class="op">=</span> <span class="fl">0.2</span>,
-  seed <span class="op">=</span> <span class="fl">113L</span>
-<span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">dataset_boston_housing</span><span class="op">(</span></span>
+<span>  path <span class="op">=</span> <span class="st">"boston_housing.npz"</span>,</span>
+<span>  test_split <span class="op">=</span> <span class="fl">0.2</span>,</span>
+<span>  seed <span class="op">=</span> <span class="fl">113L</span></span>
+<span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
@@ -179,16 +179,25 @@ University.</p>
     <dl><dt>path</dt>
 <dd><p>Path where to cache the dataset locally (relative to
 ~/.keras/datasets).</p></dd>
+
+
 <dt>test_split</dt>
 <dd><p>fraction of the data to reserve as test set.</p></dd>
+
+
 <dt>seed</dt>
 <dd><p>Random seed for shuffling the data before computing the test
 split.</p></dd>
+
 </dl></div>
     <div id="value">
     <h2>Value</h2>
-    <p>Lists of training and test data: <code>train$x, train$y, test$x, test$y</code>.
-Samples contain 13 attributes of houses at different locations around
+    
+
+<p>Lists of training and test data: <code>train$x, train$y, test$x, test$y</code>.</p>
+
+
+<p>Samples contain 13 attributes of houses at different locations around
 the Boston suburbs in the late 1970s. Targets are the median values of the
 houses at a location (in k$).</p>
     </div>
@@ -215,7 +224,7 @@ houses at a location (in k$).</p>
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.3.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.7.</p>
 </div>
 
       </footer></div>

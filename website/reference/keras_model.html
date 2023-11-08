@@ -17,7 +17,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">keras</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">2.8.0.9000</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">2.13.0.9000</span>
       </span>
     </div>
 
@@ -165,61 +165,65 @@
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">keras_model</span><span class="op">(</span><span class="va">inputs</span>, outputs <span class="op">=</span> <span class="cn">NULL</span>, <span class="va">...</span><span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">keras_model</span><span class="op">(</span><span class="va">inputs</span>, outputs <span class="op">=</span> <span class="cn">NULL</span>, <span class="va">...</span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
     <h2>Arguments</h2>
     <dl><dt>inputs</dt>
 <dd><p>Input layer</p></dd>
+
+
 <dt>outputs</dt>
 <dd><p>Output layer</p></dd>
+
+
 <dt>...</dt>
 <dd><p>Any additional arguments</p></dd>
+
 </dl></div>
     <div id="see-also">
     <h2>See also</h2>
     <div class="dont-index"><p>Other model functions: 
-<code><a href="compile.keras.engine.training.Model.html">compile.keras.engine.training.Model</a>()</code>,
-<code><a href="evaluate.keras.engine.training.Model.html">evaluate.keras.engine.training.Model</a>()</code>,
+<code><a href="compile.keras.models.model.Model.html">compile.keras.models.model.Model</a>()</code>,
+<code><a href="evaluate.keras.models.model.Model.html">evaluate.keras.models.model.Model</a>()</code>,
 <code><a href="evaluate_generator.html">evaluate_generator</a>()</code>,
-<code><a href="fit.keras.engine.training.Model.html">fit.keras.engine.training.Model</a>()</code>,
+<code><a href="fit.keras.models.model.Model.html">fit.keras.models.model.Model</a>()</code>,
 <code><a href="fit_generator.html">fit_generator</a>()</code>,
 <code><a href="get_config.html">get_config</a>()</code>,
 <code><a href="get_layer.html">get_layer</a>()</code>,
 <code><a href="keras_model_sequential.html">keras_model_sequential</a>()</code>,
-<code><a href="multi_gpu_model.html">multi_gpu_model</a>()</code>,
 <code><a href="pop_layer.html">pop_layer</a>()</code>,
-<code><a href="predict.keras.engine.training.Model.html">predict.keras.engine.training.Model</a>()</code>,
+<code><a href="predict.keras.models.model.Model.html">predict.keras.models.model.Model</a>()</code>,
 <code><a href="predict_generator.html">predict_generator</a>()</code>,
 <code><a href="predict_on_batch.html">predict_on_batch</a>()</code>,
 <code><a href="predict_proba.html">predict_proba</a>()</code>,
-<code><a href="summary.keras.engine.training.Model.html">summary.keras.engine.training.Model</a>()</code>,
+<code><a href="summary.keras.models.model.Model.html">summary.keras.models.model.Model</a>()</code>,
 <code><a href="train_on_batch.html">train_on_batch</a>()</code></p></div>
     </div>
 
     <div id="ref-examples">
     <h2>Examples</h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="kw">if</span> <span class="op">(</span><span class="cn">FALSE</span><span class="op">)</span> <span class="op">{</span></span>
-<span class="r-in"><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://keras.rstudio.com" class="external-link">keras</a></span><span class="op">)</span></span>
-<span class="r-in"></span>
-<span class="r-in"><span class="co"># input layer</span></span>
-<span class="r-in"><span class="va">inputs</span> <span class="op">&lt;-</span> <span class="fu"><a href="layer_input.html">layer_input</a></span><span class="op">(</span>shape <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">784</span><span class="op">)</span><span class="op">)</span></span>
-<span class="r-in"></span>
-<span class="r-in"><span class="co"># outputs compose input + dense layers</span></span>
-<span class="r-in"><span class="va">predictions</span> <span class="op">&lt;-</span> <span class="va">inputs</span> <span class="op"><a href="pipe.html">%&gt;%</a></span></span>
-<span class="r-in">  <span class="fu"><a href="layer_dense.html">layer_dense</a></span><span class="op">(</span>units <span class="op">=</span> <span class="fl">64</span>, activation <span class="op">=</span> <span class="st">'relu'</span><span class="op">)</span> <span class="op"><a href="pipe.html">%&gt;%</a></span></span>
-<span class="r-in">  <span class="fu"><a href="layer_dense.html">layer_dense</a></span><span class="op">(</span>units <span class="op">=</span> <span class="fl">64</span>, activation <span class="op">=</span> <span class="st">'relu'</span><span class="op">)</span> <span class="op"><a href="pipe.html">%&gt;%</a></span></span>
-<span class="r-in">  <span class="fu"><a href="layer_dense.html">layer_dense</a></span><span class="op">(</span>units <span class="op">=</span> <span class="fl">10</span>, activation <span class="op">=</span> <span class="st">'softmax'</span><span class="op">)</span></span>
-<span class="r-in"></span>
-<span class="r-in"><span class="co"># create and compile model</span></span>
-<span class="r-in"><span class="va">model</span> <span class="op">&lt;-</span> <span class="fu">keras_model</span><span class="op">(</span>inputs <span class="op">=</span> <span class="va">inputs</span>, outputs <span class="op">=</span> <span class="va">predictions</span><span class="op">)</span></span>
-<span class="r-in"><span class="va">model</span> <span class="op"><a href="pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://generics.r-lib.org/reference/compile.html" class="external-link">compile</a></span><span class="op">(</span></span>
-<span class="r-in">  optimizer <span class="op">=</span> <span class="st">'rmsprop'</span>,</span>
-<span class="r-in">  loss <span class="op">=</span> <span class="st">'categorical_crossentropy'</span>,</span>
-<span class="r-in">  metrics <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">'accuracy'</span><span class="op">)</span></span>
-<span class="r-in"><span class="op">)</span></span>
-<span class="r-in"><span class="op">}</span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="kw">if</span> <span class="op">(</span><span class="cn">FALSE</span><span class="op">)</span> <span class="op">{</span></span></span>
+<span class="r-in"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://tensorflow.rstudio.com/" class="external-link">keras</a></span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># input layer</span></span></span>
+<span class="r-in"><span><span class="va">inputs</span> <span class="op">&lt;-</span> <span class="fu"><a href="layer_input.html">layer_input</a></span><span class="op">(</span>shape <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">784</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># outputs compose input + dense layers</span></span></span>
+<span class="r-in"><span><span class="va">predictions</span> <span class="op">&lt;-</span> <span class="va">inputs</span> <span class="op"><a href="pipe.html">%&gt;%</a></span></span></span>
+<span class="r-in"><span>  <span class="fu"><a href="layer_dense.html">layer_dense</a></span><span class="op">(</span>units <span class="op">=</span> <span class="fl">64</span>, activation <span class="op">=</span> <span class="st">'relu'</span><span class="op">)</span> <span class="op"><a href="pipe.html">%&gt;%</a></span></span></span>
+<span class="r-in"><span>  <span class="fu"><a href="layer_dense.html">layer_dense</a></span><span class="op">(</span>units <span class="op">=</span> <span class="fl">64</span>, activation <span class="op">=</span> <span class="st">'relu'</span><span class="op">)</span> <span class="op"><a href="pipe.html">%&gt;%</a></span></span></span>
+<span class="r-in"><span>  <span class="fu"><a href="layer_dense.html">layer_dense</a></span><span class="op">(</span>units <span class="op">=</span> <span class="fl">10</span>, activation <span class="op">=</span> <span class="st">'softmax'</span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># create and compile model</span></span></span>
+<span class="r-in"><span><span class="va">model</span> <span class="op">&lt;-</span> <span class="fu">keras_model</span><span class="op">(</span>inputs <span class="op">=</span> <span class="va">inputs</span>, outputs <span class="op">=</span> <span class="va">predictions</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">model</span> <span class="op"><a href="pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://generics.r-lib.org/reference/compile.html" class="external-link">compile</a></span><span class="op">(</span></span></span>
+<span class="r-in"><span>  optimizer <span class="op">=</span> <span class="st">'rmsprop'</span>,</span></span>
+<span class="r-in"><span>  loss <span class="op">=</span> <span class="st">'categorical_crossentropy'</span>,</span></span>
+<span class="r-in"><span>  metrics <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">'accuracy'</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="op">}</span></span></span>
 </code></pre></div>
     </div>
   </div>
@@ -234,7 +238,7 @@
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.3.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.7.</p>
 </div>
 
       </footer></div>

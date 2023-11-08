@@ -380,6 +380,10 @@ reference:
   - title: "Deprecated"
     contents:
       - KerasLayer
+      - adapt
+      - bidirectional
+      - keras-package
+      - time_distributed
       # - KerasWrapper
       # - create_wrapper
       # - loss_cosine_proximity

@@ -119,6 +119,7 @@ keras_model_sequential <- function(layers = NULL, name = NULL, ...) {
 #' @param ... additional arguments passed on to `keras$layers$InputLayer`.
 #' @param input_layer_name,name  Optional name of the input layer (string).
 #'
+#' @keywords internal
 sequential_model_input_layer <- function(input_shape = NULL,
                                          batch_size = NULL,
                                          dtype = NULL,

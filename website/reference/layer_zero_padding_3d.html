@@ -17,7 +17,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">keras</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">2.8.0.9000</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">2.13.0.9000</span>
       </span>
     </div>
 
@@ -156,7 +156,7 @@
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Zero-padding layer for 3D data (spatial or spatio-temporal).</h1>
-    <small class="dont-index">Source: <a href="https://github.com/rstudio/keras/blob/HEAD/R/layers-convolutional.R" class="external-link"><code>R/layers-convolutional.R</code></a></small>
+    <small class="dont-index">Source: <a href="https://github.com/rstudio/keras/blob/HEAD/R/autogen-layers-reshaping.R" class="external-link"><code>R/autogen-layers-reshaping.R</code></a></small>
     <div class="hidden name"><code>layer_zero_padding_3d.Rd</code></div>
     </div>
 
@@ -165,77 +165,81 @@
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">layer_zero_padding_3d</span><span class="op">(</span>
-  <span class="va">object</span>,
-  padding <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1L</span>, <span class="fl">1L</span>, <span class="fl">1L</span><span class="op">)</span>,
-  data_format <span class="op">=</span> <span class="cn">NULL</span>,
-  batch_size <span class="op">=</span> <span class="cn">NULL</span>,
-  name <span class="op">=</span> <span class="cn">NULL</span>,
-  trainable <span class="op">=</span> <span class="cn">NULL</span>,
-  weights <span class="op">=</span> <span class="cn">NULL</span>
-<span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">layer_zero_padding_3d</span><span class="op">(</span></span>
+<span>  <span class="va">object</span>,</span>
+<span>  padding <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="fl">1L</span>, <span class="fl">1L</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="fl">1L</span>, <span class="fl">1L</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="fl">1L</span>, <span class="fl">1L</span><span class="op">)</span><span class="op">)</span>,</span>
+<span>  data_format <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  <span class="va">...</span></span>
+<span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
     <h2>Arguments</h2>
     <dl><dt>object</dt>
-<dd><p>What to compose the new <code>Layer</code> instance with. Typically a
-Sequential model or a Tensor (e.g., as returned by <code><a href="layer_input.html">layer_input()</a></code>).
-The return value depends on <code>object</code>. If <code>object</code> is:</p><ul><li><p>missing or <code>NULL</code>, the <code>Layer</code> instance is returned.</p></li>
-<li><p>a <code>Sequential</code> model, the model with an additional layer is returned.</p></li>
-<li><p>a Tensor, the output tensor from <code>layer_instance(object)</code> is returned.</p></li>
-</ul></dd>
+<dd><p>Object to compose the layer with. A tensor, array, or sequential model.</p></dd>
+
+
 <dt>padding</dt>
-<dd><p>int, or list of 3 ints, or list of 3 lists of 2 ints.</p><ul><li><p>If int: the same symmetric padding is applied to width and height.</p></li>
-<li><p>If list of 3 ints: interpreted as three different symmetric padding values:
-<code>(symmetric_dim1_pad, symmetric_dim2_pad, symmetric_dim3_pad)</code>.</p></li>
-<li><p>If list of 3 lists of 2 ints: interpreted as <code>((left_dim1_pad, right_dim1_pad), (left_dim2_pad, right_dim2_pad), (left_dim3_pad, right_dim3_pad))</code></p></li>
-</ul></dd>
+<dd><p>Int, or tuple of 3 ints, or tuple of 3 tuples of 2 ints.
+- If int: the same symmetric padding is applied to depth, height,
+and width.
+- If tuple of 3 ints: interpreted as three different symmetric
+padding values for depth, height, and width:
+<code>(symmetric_dim1_pad, symmetric_dim2_pad, symmetric_dim3_pad)</code>.
+- If tuple of 3 tuples of 2 ints: interpreted as
+<code>((left_dim1_pad, right_dim1_pad), (left_dim2_pad, right_dim2_pad), (left_dim3_pad, right_dim3_pad))</code>.</p></dd>
+
+
 <dt>data_format</dt>
-<dd><p>A string, one of <code>channels_last</code> (default) or
-<code>channels_first</code>. The ordering of the dimensions in the inputs.
-<code>channels_last</code> corresponds to inputs with shape <code>(batch, spatial_dim1, spatial_dim2, spatial_dim3, channels)</code> while <code>channels_first</code> corresponds
-to inputs with shape <code>(batch, channels, spatial_dim1, spatial_dim2, spatial_dim3)</code>. It defaults to the <code>image_data_format</code> value found in your
-Keras config file at <code>~/.keras/keras.json</code>. If you never set it, then it
-will be "channels_last".</p></dd>
-<dt>batch_size</dt>
-<dd><p>Fixed batch size for layer</p></dd>
-<dt>name</dt>
-<dd><p>An optional name string for the layer. Should be unique in a
-model (do not reuse the same name twice). It will be autogenerated if it
-isn't provided.</p></dd>
-<dt>trainable</dt>
-<dd><p>Whether the layer weights will be updated during training.</p></dd>
-<dt>weights</dt>
-<dd><p>Initial weights for layer.</p></dd>
+<dd><p>A string, one of <code>"channels_last"</code> (default) or
+<code>"channels_first"</code>. The ordering of the dimensions in the inputs.
+<code>"channels_last"</code> corresponds to inputs with shape
+<code>(batch_size, spatial_dim1, spatial_dim2, spatial_dim3, channels)</code>
+while <code>"channels_first"</code> corresponds to inputs with shape
+<code>(batch_size, channels, spatial_dim1, spatial_dim2, spatial_dim3)</code>.
+When unspecified, uses <code>image_data_format</code> value found in your Keras
+config file at <code>~/.keras/keras.json</code> (if exists). Defaults to
+<code>"channels_last"</code>.</p></dd>
+
+
+<dt>...</dt>
+<dd><p>Passed on to the Python callable</p></dd>
+
 </dl></div>
+    <div id="examples">
+    <h2>Examples</h2>
+    <p></p><div class="sourceCode python"><pre><code><span id="cb1-1"><a href="#cb1-1" tabindex="-1"></a>input_shape <span class="op">=</span> (<span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">2</span>, <span class="dv">3</span>)</span>
+<span id="cb1-2"><a href="#cb1-2" tabindex="-1"></a>x <span class="op">=</span> np.arange(np.prod(input_shape)).reshape(input_shape)</span>
+<span id="cb1-3"><a href="#cb1-3" tabindex="-1"></a>y <span class="op">=</span> keras.layers.ZeroPadding3D(padding<span class="op">=</span><span class="dv">2</span>)(x)</span>
+<span id="cb1-4"><a href="#cb1-4" tabindex="-1"></a>y.shape</span>
+<span id="cb1-5"><a href="#cb1-5" tabindex="-1"></a><span class="co"># (1, 5, 6, 6, 3)</span></span></code></pre><p></p></div>
+    </div>
     <div id="input-shape">
-    <h2>Input shape</h2>
-    <p>5D tensor with shape:</p><ul><li><p>If <code>data_format</code> is <code>"channels_last"</code>: <code>(batch, first_axis_to_pad, second_axis_to_pad, third_axis_to_pad, depth)</code></p></li>
-<li><p>If <code>data_format</code> is <code>"channels_first"</code>: <code>(batch, depth, first_axis_to_pad, second_axis_to_pad, third_axis_to_pad)</code></p></li>
+    <h2>Input Shape</h2>
+    <p>5D tensor with shape:</p><ul><li><p>If <code>data_format</code> is <code>"channels_last"</code>:
+<code>(batch_size, first_axis_to_pad, second_axis_to_pad, third_axis_to_pad, depth)</code></p></li>
+<li><p>If <code>data_format</code> is <code>"channels_first"</code>:
+<code>(batch_size, depth, first_axis_to_pad, second_axis_to_pad, third_axis_to_pad)</code></p></li>
 </ul></div>
     <div id="output-shape">
-    <h2>Output shape</h2>
-    <p>5D tensor with shape:</p><ul><li><p>If <code>data_format</code> is <code>"channels_last"</code>: <code>(batch, first_padded_axis, second_padded_axis, third_axis_to_pad, depth)</code></p></li>
-<li><p>If <code>data_format</code> is <code>"channels_first"</code>: <code>(batch, depth, first_padded_axis, second_padded_axis, third_axis_to_pad)</code></p></li>
+    <h2>Output Shape</h2>
+    <p>5D tensor with shape:</p><ul><li><p>If <code>data_format</code> is <code>"channels_last"</code>:
+<code>(batch_size, first_padded_axis, second_padded_axis, third_axis_to_pad, depth)</code></p></li>
+<li><p>If <code>data_format</code> is <code>"channels_first"</code>:
+<code>(batch_size, depth, first_padded_axis, second_padded_axis, third_axis_to_pad)</code></p></li>
 </ul></div>
     <div id="see-also">
     <h2>See also</h2>
-    <div class="dont-index"><p>Other convolutional layers: 
-<code><a href="layer_conv_1d_transpose.html">layer_conv_1d_transpose</a>()</code>,
-<code><a href="layer_conv_1d.html">layer_conv_1d</a>()</code>,
-<code><a href="layer_conv_2d_transpose.html">layer_conv_2d_transpose</a>()</code>,
-<code><a href="layer_conv_2d.html">layer_conv_2d</a>()</code>,
-<code><a href="layer_conv_3d_transpose.html">layer_conv_3d_transpose</a>()</code>,
-<code><a href="layer_conv_3d.html">layer_conv_3d</a>()</code>,
-<code><a href="layer_conv_lstm_2d.html">layer_conv_lstm_2d</a>()</code>,
+    <div class="dont-index">
+<ul><li><p><a href="https://www.tensorflow.org/api_docs/python/tf/keras/layers/ZeroPadding3D" class="external-link">https://www.tensorflow.org/api_docs/python/tf/keras/layers/ZeroPadding3D</a></p></li>
+</ul><p>Other reshaping layers: 
 <code><a href="layer_cropping_1d.html">layer_cropping_1d</a>()</code>,
 <code><a href="layer_cropping_2d.html">layer_cropping_2d</a>()</code>,
 <code><a href="layer_cropping_3d.html">layer_cropping_3d</a>()</code>,
-<code><a href="layer_depthwise_conv_1d.html">layer_depthwise_conv_1d</a>()</code>,
-<code><a href="layer_depthwise_conv_2d.html">layer_depthwise_conv_2d</a>()</code>,
-<code><a href="layer_separable_conv_1d.html">layer_separable_conv_1d</a>()</code>,
-<code><a href="layer_separable_conv_2d.html">layer_separable_conv_2d</a>()</code>,
+<code><a href="layer_flatten.html">layer_flatten</a>()</code>,
+<code><a href="layer_permute.html">layer_permute</a>()</code>,
+<code><a href="layer_repeat_vector.html">layer_repeat_vector</a>()</code>,
+<code><a href="layer_reshape.html">layer_reshape</a>()</code>,
 <code><a href="layer_upsampling_1d.html">layer_upsampling_1d</a>()</code>,
 <code><a href="layer_upsampling_2d.html">layer_upsampling_2d</a>()</code>,
 <code><a href="layer_upsampling_3d.html">layer_upsampling_3d</a>()</code>,
@@ -255,7 +259,7 @@ isn't provided.</p></dd>
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.3.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.7.</p>
 </div>
 
       </footer></div>

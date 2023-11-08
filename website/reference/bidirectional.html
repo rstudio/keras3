@@ -17,7 +17,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">keras</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">2.8.0.9000</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">2.13.0.9000</span>
       </span>
     </div>
 
@@ -156,7 +156,7 @@
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Bidirectional wrapper for RNNs</h1>
-    <small class="dont-index">Source: <a href="https://github.com/rstudio/keras/blob/HEAD/R/layer-wrappers.R" class="external-link"><code>R/layer-wrappers.R</code></a></small>
+    <small class="dont-index">Source: <a href="https://github.com/rstudio/keras/blob/HEAD/R/layer-r-helpers.R" class="external-link"><code>R/layer-r-helpers.R</code></a></small>
     <div class="hidden name"><code>bidirectional.Rd</code></div>
     </div>
 
@@ -165,25 +165,22 @@
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">bidirectional</span><span class="op">(</span>
-  <span class="va">object</span>,
-  <span class="va">layer</span>,
-  merge_mode <span class="op">=</span> <span class="st">"concat"</span>,
-  weights <span class="op">=</span> <span class="cn">NULL</span>,
-  backward_layer <span class="op">=</span> <span class="cn">NULL</span>,
-  <span class="va">...</span>
-<span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">bidirectional</span><span class="op">(</span></span>
+<span>  <span class="va">object</span>,</span>
+<span>  <span class="va">layer</span>,</span>
+<span>  merge_mode <span class="op">=</span> <span class="st">"concat"</span>,</span>
+<span>  weights <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  backward_layer <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  <span class="va">...</span></span>
+<span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
     <h2>Arguments</h2>
     <dl><dt>object</dt>
-<dd><p>What to compose the new <code>Layer</code> instance with. Typically a
-Sequential model or a Tensor (e.g., as returned by <code><a href="layer_input.html">layer_input()</a></code>).
-The return value depends on <code>object</code>. If <code>object</code> is:</p><ul><li><p>missing or <code>NULL</code>, the <code>Layer</code> instance is returned.</p></li>
-<li><p>a <code>Sequential</code> model, the model with an additional layer is returned.</p></li>
-<li><p>a Tensor, the output tensor from <code>layer_instance(object)</code> is returned.</p></li>
-</ul></dd>
+<dd><p>Object to compose the layer with. A tensor, array, or sequential model.</p></dd>
+
+
 <dt>layer</dt>
 <dd><p>A <code>RNN</code> layer instance, such as <code><a href="layer_lstm.html">layer_lstm()</a></code> or
 <code><a href="layer_gru.html">layer_gru()</a></code>. It could also be a <code>keras$layers$Layer</code> instance that
@@ -198,14 +195,20 @@ cell and use it with <code><a href="layer_rnn.html">layer_rnn()</a></code>, inst
 <li><p>When <code>returns_sequences = TRUE</code>, the output of the masked timestep will
 be zero regardless of the layer's original <code>zero_output_for_mask</code> value.</p></li>
 </ol></dd>
+
+
 <dt>merge_mode</dt>
 <dd><p>Mode by which outputs of the forward and backward RNNs will
 be combined. One of <code>'sum'</code>, <code>'mul'</code>, <code>'concat'</code>, <code>'ave'</code>, <code>NULL</code>. If
 <code>NULL</code>, the outputs will not be combined, they will be returned as a list.
 Default value is <code>'concat'</code>.</p></dd>
+
+
 <dt>weights</dt>
 <dd><p>Split and propagated to the <code>initial_weights</code> attribute on the
 forward and backward layer.</p></dd>
+
+
 <dt>backward_layer</dt>
 <dd><p>Optional <code>keras.layers.RNN</code>, or <code>keras.layers.Layer</code>
 instance to be used to handle backwards input processing. If
@@ -216,8 +219,11 @@ those of the <code>layer</code> argument, in particular it should have the same 
 for <code>stateful</code>, <code>return_states</code>, <code>return_sequences</code>, etc. In addition,
 <code>backward_layer</code> and <code>layer</code> should have different <code>go_backwards</code> argument
 values. A <code>ValueError</code> will be raised if these requirements are not met.</p></dd>
+
+
 <dt>...</dt>
 <dd><p>standard layer arguments.</p></dd>
+
 </dl></div>
     <div id="see-also">
     <h2>See also</h2>
@@ -240,7 +246,7 @@ values. A <code>ValueError</code> will be raised if these requirements are not m
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.3.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.7.</p>
 </div>
 
       </footer></div>

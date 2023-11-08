@@ -19,7 +19,7 @@ the existing layers."><meta property="og:image" content="/logo.png"><!-- mathjax
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">keras</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">2.8.0.9000</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">2.13.0.9000</span>
       </span>
     </div>
 
@@ -169,7 +169,7 @@ the existing layers.</p>
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">clone_model</span><span class="op">(</span><span class="va">model</span>, input_tensors <span class="op">=</span> <span class="cn">NULL</span>, clone_function <span class="op">=</span> <span class="cn">NULL</span><span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">clone_model</span><span class="op">(</span><span class="va">model</span>, input_tensors <span class="op">=</span> <span class="cn">NULL</span>, clone_function <span class="op">=</span> <span class="cn">NULL</span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
@@ -177,9 +177,13 @@ the existing layers.</p>
     <dl><dt>model</dt>
 <dd><p>Instance of Keras model (could be a functional model or a
 Sequential model).</p></dd>
+
+
 <dt>input_tensors</dt>
 <dd><p>Optional list of input tensors to build the model upon.
 If not provided, placeholders will be created.</p></dd>
+
+
 <dt>clone_function</dt>
 <dd><p>Callable to be used to clone each layer in the target
 model (except <code>InputLayer</code> instances). It takes as argument the layer
@@ -191,6 +195,7 @@ following serialization/deserialization function:</p>
 e.g. by wrapping certain layers of interest (you might want to replace all
 LSTM instances with equivalent <code>Bidirectional(LSTM(...))</code> instances, for
 example).</p></dd>
+
 </dl></div>
 
   </div>
@@ -205,7 +210,7 @@ example).</p></dd>
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.3.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.7.</p>
 </div>
 
       </footer></div>

@@ -18,7 +18,7 @@ keras$callbacks$Callback directly."><meta property="og:image" content="/logo.png
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">keras</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">2.8.0.9000</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">2.13.0.9000</span>
       </span>
     </div>
 
@@ -173,13 +173,15 @@ keras$callbacks$Callback directly."><meta property="og:image" content="/logo.png
     </div>
     <div id="value">
     <h2>Value</h2>
-    <p>KerasCallback.</p>
+    
+
+<p>KerasCallback.</p>
     </div>
     <div id="details">
     <h2>Details</h2>
     <p>The <code>logs</code> named list that callback methods take as argument will
 contain keys for quantities relevant to the current batch or epoch.</p>
-<p>Currently, the <code><a href="fit.keras.engine.training.Model.html">fit.keras.engine.training.Model()</a></code> method for sequential
+<p>Currently, the <code><a href="fit.keras.models.model.Model.html">fit.keras.models.model.Model()</a></code> method for sequential
 models will include the following quantities in the <code>logs</code> that
 it passes to its callbacks:</p><ul><li><p><code>on_epoch_end</code>: logs include <code>acc</code> and <code>loss</code>, and optionally include <code>val_loss</code> (if validation is enabled in <code>fit</code>), and <code>val_acc</code> (if validation and accuracy monitoring are enabled).</p></li>
 <li><p><code>on_batch_begin</code>: logs include <code>size</code>, the number of samples in the current batch.</p></li>
@@ -225,22 +227,22 @@ it passes to its callbacks:</p><ul><li><p><code>on_epoch_end</code>: logs includ
 
     <div id="ref-examples">
     <h2>Examples</h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="kw">if</span> <span class="op">(</span><span class="cn">FALSE</span><span class="op">)</span> <span class="op">{</span></span>
-<span class="r-in"><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://keras.rstudio.com" class="external-link">keras</a></span><span class="op">)</span></span>
-<span class="r-in"></span>
-<span class="r-in"><span class="va">LossHistory</span> <span class="op">&lt;-</span> <span class="fu">R6</span><span class="fu">::</span><span class="kw"><a href="https://r6.r-lib.org/reference/R6Class.html" class="external-link">R6Class</a></span><span class="op">(</span><span class="st">"LossHistory"</span>,</span>
-<span class="r-in">  inherit <span class="op">=</span> <span class="va">KerasCallback</span>,</span>
-<span class="r-in"></span>
-<span class="r-in">  public <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span></span>
-<span class="r-in"></span>
-<span class="r-in">    losses <span class="op">=</span> <span class="cn">NULL</span>,</span>
-<span class="r-in"></span>
-<span class="r-in">    on_batch_end <span class="op">=</span> <span class="kw">function</span><span class="op">(</span><span class="va">batch</span>, <span class="va">logs</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span></span>
-<span class="r-in">      <span class="va">self</span><span class="op">$</span><span class="va">losses</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="va">self</span><span class="op">$</span><span class="va">losses</span>, <span class="va">logs</span><span class="op">[[</span><span class="st">"loss"</span><span class="op">]</span><span class="op">]</span><span class="op">)</span></span>
-<span class="r-in">    <span class="op">}</span></span>
-<span class="r-in">  <span class="op">)</span></span>
-<span class="r-in"><span class="op">)</span></span>
-<span class="r-in"><span class="op">}</span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="kw">if</span> <span class="op">(</span><span class="cn">FALSE</span><span class="op">)</span> <span class="op">{</span></span></span>
+<span class="r-in"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://tensorflow.rstudio.com/" class="external-link">keras</a></span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="va">LossHistory</span> <span class="op">&lt;-</span> <span class="fu">R6</span><span class="fu">::</span><span class="kw"><a href="https://r6.r-lib.org/reference/R6Class.html" class="external-link">R6Class</a></span><span class="op">(</span><span class="st">"LossHistory"</span>,</span></span>
+<span class="r-in"><span>  inherit <span class="op">=</span> <span class="va">KerasCallback</span>,</span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span>  public <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span>    losses <span class="op">=</span> <span class="cn">NULL</span>,</span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span>    on_batch_end <span class="op">=</span> <span class="kw">function</span><span class="op">(</span><span class="va">batch</span>, <span class="va">logs</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span></span></span>
+<span class="r-in"><span>      <span class="va">self</span><span class="op">$</span><span class="va">losses</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="va">self</span><span class="op">$</span><span class="va">losses</span>, <span class="va">logs</span><span class="op">[[</span><span class="st">"loss"</span><span class="op">]</span><span class="op">]</span><span class="op">)</span></span></span>
+<span class="r-in"><span>    <span class="op">}</span></span></span>
+<span class="r-in"><span>  <span class="op">)</span></span></span>
+<span class="r-in"><span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="op">}</span></span></span>
 </code></pre></div>
     </div>
   </div>
@@ -255,7 +257,7 @@ it passes to its callbacks:</p><ul><li><p><code>on_epoch_end</code>: logs includ
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.3.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.7.</p>
 </div>
 
       </footer></div>

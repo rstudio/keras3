@@ -17,7 +17,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">keras</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">2.8.0.9000</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">2.13.0.9000</span>
       </span>
     </div>
 
@@ -156,7 +156,7 @@
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>This layer wrapper allows to apply a layer to every temporal slice of an input</h1>
-    <small class="dont-index">Source: <a href="https://github.com/rstudio/keras/blob/HEAD/R/layer-wrappers.R" class="external-link"><code>R/layer-wrappers.R</code></a></small>
+    <small class="dont-index">Source: <a href="https://github.com/rstudio/keras/blob/HEAD/R/layer-r-helpers.R" class="external-link"><code>R/layer-r-helpers.R</code></a></small>
     <div class="hidden name"><code>time_distributed.Rd</code></div>
     </div>
 
@@ -165,22 +165,22 @@
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">time_distributed</span><span class="op">(</span><span class="va">object</span>, <span class="va">layer</span>, <span class="va">...</span><span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">time_distributed</span><span class="op">(</span><span class="va">object</span>, <span class="va">layer</span>, <span class="va">...</span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
     <h2>Arguments</h2>
     <dl><dt>object</dt>
-<dd><p>What to compose the new <code>Layer</code> instance with. Typically a
-Sequential model or a Tensor (e.g., as returned by <code><a href="layer_input.html">layer_input()</a></code>).
-The return value depends on <code>object</code>. If <code>object</code> is:</p><ul><li><p>missing or <code>NULL</code>, the <code>Layer</code> instance is returned.</p></li>
-<li><p>a <code>Sequential</code> model, the model with an additional layer is returned.</p></li>
-<li><p>a Tensor, the output tensor from <code>layer_instance(object)</code> is returned.</p></li>
-</ul></dd>
+<dd><p>Object to compose the layer with. A tensor, array, or sequential model.</p></dd>
+
+
 <dt>layer</dt>
 <dd><p>a <code>tf.keras.layers.Layer</code> instance.</p></dd>
+
+
 <dt>...</dt>
 <dd><p>standard layer arguments.</p></dd>
+
 </dl></div>
     <div id="details">
     <h2>Details</h2>
@@ -190,10 +190,11 @@ first input will be considered to be the temporal dimension.</p>
 with <code>channels_last</code> data format, across 10 timesteps.
 The batch input shape is <code>(32, 10, 128, 128, 3)</code>.</p>
 <p>You can then use <code>TimeDistributed</code> to apply the same <code>Conv2D</code> layer to each
-of the 10 timesteps, independently:</p><div class="sourceCode R"><pre><code><span class="va">input</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/layer_input.html">layer_input</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">10</span>, <span class="fl">128</span>, <span class="fl">128</span>, <span class="fl">3</span><span class="op">)</span><span class="op">)</span>
-<span class="va">conv_layer</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/layer_conv_2d.html">layer_conv_2d</a></span><span class="op">(</span>filters <span class="op">=</span> <span class="fl">64</span>, kernel_size <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">3</span>, <span class="fl">3</span><span class="op">)</span><span class="op">)</span>
-<span class="va">output</span> <span class="op">&lt;-</span> <span class="va">input</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="../reference/time_distributed.html">time_distributed</a></span><span class="op">(</span><span class="va">conv_layer</span><span class="op">)</span>
-<span class="va">output</span><span class="op">$</span><span class="va">shape</span> <span class="co"># TensorShape([None, 10, 126, 126, 64])</span></code></pre><p></p></div>
+of the 10 timesteps, independently:</p>
+<p></p><div class="sourceCode R"><pre><code><span><span class="va">input</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/layer_input.html">layer_input</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">10</span>, <span class="fl">128</span>, <span class="fl">128</span>, <span class="fl">3</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="va">conv_layer</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/layer_conv_2d.html">layer_conv_2d</a></span><span class="op">(</span>filters <span class="op">=</span> <span class="fl">64</span>, kernel_size <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">3</span>, <span class="fl">3</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="va">output</span> <span class="op">&lt;-</span> <span class="va">input</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="../reference/time_distributed.html">time_distributed</a></span><span class="op">(</span><span class="va">conv_layer</span><span class="op">)</span></span>
+<span><span class="va">output</span><span class="op">$</span><span class="va">shape</span> <span class="co"># TensorShape([None, 10, 126, 126, 64])</span></span></code></pre><p></p></div>
 <p>Because <code>TimeDistributed</code> applies the same instance of <code>Conv2D</code> to each of the
 timestamps, the same set of weights are used at each timestamp.</p>
     </div>
@@ -217,7 +218,7 @@ timestamps, the same set of weights are used at each timestamp.</p>
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.3.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.7.</p>
 </div>
 
       </footer></div>

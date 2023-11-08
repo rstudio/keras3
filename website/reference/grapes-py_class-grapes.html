@@ -17,7 +17,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">keras</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">2.8.0.9000</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">2.13.0.9000</span>
       </span>
     </div>
 
@@ -165,91 +165,105 @@
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="va">spec</span> <span class="op">%py_class%</span> <span class="va">body</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="va">spec</span> <span class="op">%py_class%</span> <span class="va">body</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
     <h2>Arguments</h2>
     <dl><dt>spec</dt>
 <dd><p>a bare symbol <code>MyClassName</code>, or a call <code>MyClassName(SuperClass)</code></p></dd>
+
+
 <dt>body</dt>
 <dd><p>an expression that can be evaluated to construct the class
 methods.</p></dd>
+
 </dl></div>
     <div id="value">
     <h2>Value</h2>
-    <p>The python class constructor, invisibly. Note, the same constructor is
+    
+
+<p>The python class constructor, invisibly. Note, the same constructor is
 also assigned in the parent frame.</p>
-    </div>
-    <div id="see-also">
-    <h2>See also</h2>
-    <div class="dont-index"><p><a href="https://keras.rstudio.com/articles/new-guides/python_subclasses.html" class="external-link">https://keras.rstudio.com/articles/new-guides/python_subclasses.html</a></p></div>
     </div>
 
     <div id="ref-examples">
     <h2>Examples</h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="kw">if</span> <span class="op">(</span><span class="cn">FALSE</span><span class="op">)</span> <span class="op">{</span></span>
-<span class="r-in"><span class="va">MyClass</span> <span class="op">%py_class%</span> <span class="op">{</span></span>
-<span class="r-in">  <span class="va">initialize</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="op">{</span></span>
-<span class="r-in">    <span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="st">"Hi from MyClass$initialize()!"</span><span class="op">)</span></span>
-<span class="r-in">    <span class="va">self</span><span class="op">$</span><span class="va">x</span> <span class="op">&lt;-</span> <span class="va">x</span></span>
-<span class="r-in">  <span class="op">}</span></span>
-<span class="r-in">  <span class="va">my_method</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="op">)</span> <span class="op">{</span></span>
-<span class="r-in">    <span class="va">self</span><span class="op">$</span><span class="va">x</span></span>
-<span class="r-in">  <span class="op">}</span></span>
-<span class="r-in"><span class="op">}</span></span>
-<span class="r-in"></span>
-<span class="r-in"><span class="va">my_class_instance</span> <span class="op">&lt;-</span> <span class="fu">MyClass</span><span class="op">(</span><span class="fl">42</span><span class="op">)</span></span>
-<span class="r-in"><span class="va">my_class_instance</span><span class="op">$</span><span class="fu">my_method</span><span class="op">(</span><span class="op">)</span></span>
-<span class="r-in"></span>
-<span class="r-in"><span class="fu">MyClass2</span><span class="op">(</span><span class="va">MyClass</span><span class="op">)</span> <span class="op">%py_class%</span> <span class="op">{</span></span>
-<span class="r-in">  <span class="st">"This will be a __doc__ string for MyClass2"</span></span>
-<span class="r-in"></span>
-<span class="r-in">  <span class="va">initialize</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">...</span><span class="op">)</span> <span class="op">{</span></span>
-<span class="r-in">    <span class="st">"This will be the __doc__ string for the MyClass2.__init__() method"</span></span>
-<span class="r-in">    <span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="st">"Hi from MyClass2$initialize()!"</span><span class="op">)</span></span>
-<span class="r-in">    <span class="va">super</span><span class="op">$</span><span class="fu">initialize</span><span class="op">(</span><span class="va">...</span><span class="op">)</span></span>
-<span class="r-in">  <span class="op">}</span></span>
-<span class="r-in"><span class="op">}</span></span>
-<span class="r-in"></span>
-<span class="r-in"><span class="va">my_class_instance2</span> <span class="op">&lt;-</span> <span class="fu">MyClass2</span><span class="op">(</span><span class="fl">42</span><span class="op">)</span></span>
-<span class="r-in"><span class="va">my_class_instance2</span><span class="op">$</span><span class="fu">my_method</span><span class="op">(</span><span class="op">)</span></span>
-<span class="r-in"></span>
-<span class="r-in"><span class="fu">reticulate</span><span class="fu">::</span><span class="fu"><a href="https://rstudio.github.io/reticulate/reference/py_help.html" class="external-link">py_help</a></span><span class="op">(</span><span class="va">MyClass2</span><span class="op">)</span> <span class="co"># see the __doc__ strings and more!</span></span>
-<span class="r-in"></span>
-<span class="r-in"><span class="co"># In addition to `self`, there is also `private` available.</span></span>
-<span class="r-in"><span class="co"># This is an R environment unique to each class instance, where you can</span></span>
-<span class="r-in"><span class="co"># store objects that you don't want converted to Python, but still want</span></span>
-<span class="r-in"><span class="co"># available from methods. You can also assign methods to private, and</span></span>
-<span class="r-in"><span class="co"># `self` and `private` will be available in private methods.</span></span>
-<span class="r-in"></span>
-<span class="r-in"><span class="va">MyClass</span> <span class="op">%py_class%</span> <span class="op">{</span></span>
-<span class="r-in"></span>
-<span class="r-in">  <span class="va">initialize</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="op">{</span></span>
-<span class="r-in">    <span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="st">"Hi from MyClass$initialize()!"</span><span class="op">)</span></span>
-<span class="r-in">    <span class="va">private</span><span class="op">$</span><span class="va">y</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste</a></span><span class="op">(</span><span class="st">"A Private field:"</span>, <span class="va">x</span><span class="op">)</span></span>
-<span class="r-in">  <span class="op">}</span></span>
-<span class="r-in"></span>
-<span class="r-in">  <span class="va">get_private_field</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="op">)</span> <span class="op">{</span></span>
-<span class="r-in">    <span class="va">private</span><span class="op">$</span><span class="va">y</span></span>
-<span class="r-in">  <span class="op">}</span></span>
-<span class="r-in"></span>
-<span class="r-in">  <span class="va">private</span><span class="op">$</span><span class="va">a_private_method</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="op">)</span> <span class="op">{</span></span>
-<span class="r-in">    <span class="fu"><a href="https://rdrr.io/r/base/cat.html" class="external-link">cat</a></span><span class="op">(</span><span class="st">"a_private_method() was called.\n"</span><span class="op">)</span></span>
-<span class="r-in">    <span class="fu"><a href="https://rdrr.io/r/base/cat.html" class="external-link">cat</a></span><span class="op">(</span><span class="st">"private$y is "</span>, <span class="fu"><a href="https://rdrr.io/r/base/sQuote.html" class="external-link">sQuote</a></span><span class="op">(</span><span class="va">private</span><span class="op">$</span><span class="va">y</span><span class="op">)</span>, <span class="st">"\n"</span><span class="op">)</span></span>
-<span class="r-in">  <span class="op">}</span></span>
-<span class="r-in"></span>
-<span class="r-in">  <span class="va">call_private_method</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="op">)</span></span>
-<span class="r-in">    <span class="va">private</span><span class="op">$</span><span class="fu">a_private_method</span><span class="op">(</span><span class="op">)</span></span>
-<span class="r-in"><span class="op">}</span></span>
-<span class="r-in"></span>
-<span class="r-in"><span class="va">inst1</span> <span class="op">&lt;-</span> <span class="fu">MyClass</span><span class="op">(</span><span class="fl">1</span><span class="op">)</span></span>
-<span class="r-in"><span class="va">inst2</span> <span class="op">&lt;-</span> <span class="fu">MyClass</span><span class="op">(</span><span class="fl">2</span><span class="op">)</span></span>
-<span class="r-in"><span class="va">inst1</span><span class="op">$</span><span class="fu">get_private_field</span><span class="op">(</span><span class="op">)</span></span>
-<span class="r-in"><span class="va">inst2</span><span class="op">$</span><span class="fu">get_private_field</span><span class="op">(</span><span class="op">)</span></span>
-<span class="r-in"><span class="va">inst1</span><span class="op">$</span><span class="fu">call_private_method</span><span class="op">(</span><span class="op">)</span></span>
-<span class="r-in"><span class="va">inst2</span><span class="op">$</span><span class="fu">call_private_method</span><span class="op">(</span><span class="op">)</span></span>
-<span class="r-in"><span class="op">}</span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="kw">if</span> <span class="op">(</span><span class="cn">FALSE</span><span class="op">)</span> <span class="op">{</span></span></span>
+<span class="r-in"><span><span class="va">MyClass</span> <span class="op">%py_class%</span> <span class="op">{</span></span></span>
+<span class="r-in"><span>  <span class="va">initialize</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="op">{</span></span></span>
+<span class="r-in"><span>    <span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="st">"Hi from MyClass$initialize()!"</span><span class="op">)</span></span></span>
+<span class="r-in"><span>    <span class="va">self</span><span class="op">$</span><span class="va">x</span> <span class="op">&lt;-</span> <span class="va">x</span></span></span>
+<span class="r-in"><span>  <span class="op">}</span></span></span>
+<span class="r-in"><span>  <span class="va">my_method</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="op">)</span> <span class="op">{</span></span></span>
+<span class="r-in"><span>    <span class="va">self</span><span class="op">$</span><span class="va">x</span></span></span>
+<span class="r-in"><span>  <span class="op">}</span></span></span>
+<span class="r-in"><span><span class="op">}</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="va">my_class_instance</span> <span class="op">&lt;-</span> <span class="fu">MyClass</span><span class="op">(</span><span class="fl">42</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">my_class_instance</span><span class="op">$</span><span class="fu">my_method</span><span class="op">(</span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="fu">MyClass2</span><span class="op">(</span><span class="va">MyClass</span><span class="op">)</span> <span class="op">%py_class%</span> <span class="op">{</span></span></span>
+<span class="r-in"><span>  <span class="st">"This will be a __doc__ string for MyClass2"</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span>  <span class="va">initialize</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">...</span><span class="op">)</span> <span class="op">{</span></span></span>
+<span class="r-in"><span>    <span class="st">"This will be the __doc__ string for the MyClass2.__init__() method"</span></span></span>
+<span class="r-in"><span>    <span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="st">"Hi from MyClass2$initialize()!"</span><span class="op">)</span></span></span>
+<span class="r-in"><span>    <span class="va">super</span><span class="op">$</span><span class="fu">initialize</span><span class="op">(</span><span class="va">...</span><span class="op">)</span></span></span>
+<span class="r-in"><span>  <span class="op">}</span></span></span>
+<span class="r-in"><span><span class="op">}</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="va">my_class_instance2</span> <span class="op">&lt;-</span> <span class="fu">MyClass2</span><span class="op">(</span><span class="fl">42</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">my_class_instance2</span><span class="op">$</span><span class="fu">my_method</span><span class="op">(</span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="fu">reticulate</span><span class="fu">::</span><span class="fu"><a href="https://rstudio.github.io/reticulate/reference/py_help.html" class="external-link">py_help</a></span><span class="op">(</span><span class="va">MyClass2</span><span class="op">)</span> <span class="co"># see the __doc__ strings and more!</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># In addition to `self`, there is also `private` available.</span></span></span>
+<span class="r-in"><span><span class="co"># This is an R environment unique to each class instance, where you can</span></span></span>
+<span class="r-in"><span><span class="co"># store objects that you don't want converted to Python, but still want</span></span></span>
+<span class="r-in"><span><span class="co"># available from methods. You can also assign methods to private, and</span></span></span>
+<span class="r-in"><span><span class="co"># `self` and `private` will be available in private methods.</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="va">MyClass</span> <span class="op">%py_class%</span> <span class="op">{</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span>  <span class="va">initialize</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="op">{</span></span></span>
+<span class="r-in"><span>    <span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="st">"Hi from MyClass$initialize()!"</span><span class="op">)</span></span></span>
+<span class="r-in"><span>    <span class="va">private</span><span class="op">$</span><span class="va">y</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste</a></span><span class="op">(</span><span class="st">"A Private field:"</span>, <span class="va">x</span><span class="op">)</span></span></span>
+<span class="r-in"><span>  <span class="op">}</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span>  <span class="va">get_private_field</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="op">)</span> <span class="op">{</span></span></span>
+<span class="r-in"><span>    <span class="va">private</span><span class="op">$</span><span class="va">y</span></span></span>
+<span class="r-in"><span>  <span class="op">}</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span>  <span class="va">private</span><span class="op">$</span><span class="va">a_private_method</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="op">)</span> <span class="op">{</span></span></span>
+<span class="r-in"><span>    <span class="fu"><a href="https://rdrr.io/r/base/cat.html" class="external-link">cat</a></span><span class="op">(</span><span class="st">"a_private_method() was called.\n"</span><span class="op">)</span></span></span>
+<span class="r-in"><span>    <span class="fu"><a href="https://rdrr.io/r/base/cat.html" class="external-link">cat</a></span><span class="op">(</span><span class="st">"private$y is "</span>, <span class="fu"><a href="https://rdrr.io/r/base/sQuote.html" class="external-link">sQuote</a></span><span class="op">(</span><span class="va">private</span><span class="op">$</span><span class="va">y</span><span class="op">)</span>, <span class="st">"\n"</span><span class="op">)</span></span></span>
+<span class="r-in"><span>  <span class="op">}</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span>  <span class="va">call_private_method</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="op">)</span></span></span>
+<span class="r-in"><span>    <span class="va">private</span><span class="op">$</span><span class="fu">a_private_method</span><span class="op">(</span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span>  <span class="co"># equivalent of @property decorator in python</span></span></span>
+<span class="r-in"><span>  <span class="va">an_active_property</span> <span class="op"><a href="grapes-set-active-grapes.html">%&lt;-active%</a></span> <span class="kw">function</span><span class="op">(</span><span class="va">x</span> <span class="op">=</span> <span class="cn">NULL</span><span class="op">)</span> <span class="op">{</span></span></span>
+<span class="r-in"><span>    <span class="kw">if</span><span class="op">(</span><span class="op">!</span><span class="fu"><a href="https://rdrr.io/r/base/NULL.html" class="external-link">is.null</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span></span></span>
+<span class="r-in"><span>      <span class="fu"><a href="https://rdrr.io/r/base/cat.html" class="external-link">cat</a></span><span class="op">(</span><span class="st">"`an_active_property` was assigned"</span>, <span class="va">x</span>, <span class="st">"\n"</span><span class="op">)</span></span></span>
+<span class="r-in"><span>      <span class="kw"><a href="https://rdrr.io/r/base/function.html" class="external-link">return</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span></span></span>
+<span class="r-in"><span>    <span class="op">}</span> <span class="kw">else</span> <span class="op">{</span></span></span>
+<span class="r-in"><span>      <span class="fu"><a href="https://rdrr.io/r/base/cat.html" class="external-link">cat</a></span><span class="op">(</span><span class="st">"`an_active_property` was accessed\n"</span><span class="op">)</span></span></span>
+<span class="r-in"><span>      <span class="kw"><a href="https://rdrr.io/r/base/function.html" class="external-link">return</a></span><span class="op">(</span><span class="fl">42</span><span class="op">)</span></span></span>
+<span class="r-in"><span>    <span class="op">}</span></span></span>
+<span class="r-in"><span>  <span class="op">}</span></span></span>
+<span class="r-in"><span><span class="op">}</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="va">inst1</span> <span class="op">&lt;-</span> <span class="fu">MyClass</span><span class="op">(</span><span class="fl">1</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">inst2</span> <span class="op">&lt;-</span> <span class="fu">MyClass</span><span class="op">(</span><span class="fl">2</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">inst1</span><span class="op">$</span><span class="fu">get_private_field</span><span class="op">(</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">inst2</span><span class="op">$</span><span class="fu">get_private_field</span><span class="op">(</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">inst1</span><span class="op">$</span><span class="fu">call_private_method</span><span class="op">(</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">inst2</span><span class="op">$</span><span class="fu">call_private_method</span><span class="op">(</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">inst1</span><span class="op">$</span><span class="va">an_active_property</span></span></span>
+<span class="r-in"><span><span class="va">inst1</span><span class="op">$</span><span class="va">an_active_property</span> <span class="op">&lt;-</span> <span class="fl">11</span></span></span>
+<span class="r-in"><span><span class="op">}</span></span></span>
 </code></pre></div>
     </div>
   </div>
@@ -264,7 +278,7 @@ also assigned in the parent frame.</p>
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.3.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.7.</p>
 </div>
 
       </footer></div>

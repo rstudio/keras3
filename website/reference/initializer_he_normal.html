@@ -19,7 +19,7 @@ the weight tensor."><meta property="og:image" content="/logo.png"><!-- mathjax -
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">keras</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">2.8.0.9000</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">2.13.0.9000</span>
       </span>
     </div>
 
@@ -158,7 +158,7 @@ the weight tensor."><meta property="og:image" content="/logo.png"><!-- mathjax -
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>He normal initializer.</h1>
-    <small class="dont-index">Source: <a href="https://github.com/rstudio/keras/blob/HEAD/R/initializers.R" class="external-link"><code>R/initializers.R</code></a></small>
+    <small class="dont-index">Source: <a href="https://github.com/rstudio/keras/blob/HEAD/R/autogen-initializers.R" class="external-link"><code>R/autogen-initializers.R</code></a></small>
     <div class="hidden name"><code>initializer_he_normal.Rd</code></div>
     </div>
 
@@ -169,21 +169,41 @@ the weight tensor.</p>
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">initializer_he_normal</span><span class="op">(</span>seed <span class="op">=</span> <span class="cn">NULL</span><span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">initializer_he_normal</span><span class="op">(</span>seed <span class="op">=</span> <span class="cn">NULL</span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
     <h2>Arguments</h2>
     <dl><dt>seed</dt>
-<dd><p>Integer used to seed the random generator.</p></dd>
+<dd><p>An integer or instance of
+<code><a href="random_seed_generator.html">random_seed_generator()</a></code>.
+Used to make the behavior of the initializer
+deterministic. Note that an initializer seeded with an integer
+or <code>NULL</code> (unseeded) will produce the same random values
+across multiple calls. To get different random values
+across multiple calls, use as seed an instance
+of <code><a href="random_seed_generator.html">random_seed_generator()</a></code>.</p></dd>
+
 </dl></div>
-    <div id="references">
-    <h2>References</h2>
-    <p>He et al., https://arxiv.org/abs/1502.01852</p>
+    <div id="examples">
+    <h2>Examples</h2>
+    <p></p><div class="sourceCode r"><pre><code><span><span class="co"># Standalone usage:</span></span>
+<span><span class="va">initializer</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/initializer_he_normal.html">initializer_he_normal</a></span><span class="op">(</span><span class="op">)</span></span>
+<span><span class="va">values</span> <span class="op">&lt;-</span> <span class="fu">initializer</span><span class="op">(</span>shape <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">2</span>, <span class="fl">2</span><span class="op">)</span><span class="op">)</span></span></code></pre><p></p></div>
+<p></p><div class="sourceCode r"><pre><code><span><span class="co"># Usage in a Keras layer:</span></span>
+<span><span class="va">initializer</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/initializer_he_normal.html">initializer_he_normal</a></span><span class="op">(</span><span class="op">)</span></span>
+<span><span class="va">layer</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/layer_dense.html">layer_dense</a></span><span class="op">(</span>units <span class="op">=</span> <span class="fl">3</span>, kernel_initializer <span class="op">=</span> <span class="va">initializer</span><span class="op">)</span></span></code></pre><p></p></div>
     </div>
+    <div id="reference">
+    <h2>Reference</h2>
+    
+<ul><li><p><a href="https://arxiv.org/abs/1502.01852" class="external-link">He et al., 2015</a></p></li>
+</ul></div>
     <div id="see-also">
     <h2>See also</h2>
-    <div class="dont-index"><p>Other initializers: 
+    <div class="dont-index">
+<ul><li><p><a href="https://www.tensorflow.org/api_docs/python/tf/keras/initializers/HeNormal" class="external-link">https://www.tensorflow.org/api_docs/python/tf/keras/initializers/HeNormal</a></p></li>
+</ul><p>Other initializer: 
 <code><a href="initializer_constant.html">initializer_constant</a>()</code>,
 <code><a href="initializer_glorot_normal.html">initializer_glorot_normal</a>()</code>,
 <code><a href="initializer_glorot_uniform.html">initializer_glorot_uniform</a>()</code>,
@@ -212,7 +232,7 @@ the weight tensor.</p>
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.3.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.7.</p>
 </div>
 
       </footer></div>

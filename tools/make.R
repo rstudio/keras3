@@ -13,6 +13,8 @@ if(!"source:tools/translate-tools.R" %in% search()) envir::attach_source("tools/
 # TODO: new_callback_class() should wrap callables to make epoch/batch n 1 based,
 #       make logs persistent (e.g., wrap the user callable w/ `logs$update(<callback_return>`))
 #
+# TODO: list in arg not formatting correctly file:///Users/tomasz/github/rstudio/keras/website/reference/layer_random_zoom.html fill_modepkg
+#
 # TODO: refactor tools/make.R to use git apply --3way, stop on each symbol. Make a workflow that
 #       causes every symbol update to be a single commit. e.g., update_docs() - scans through man-src/*, on first
 #       dir that needs changes, it stops, give an opportunity for me to edit, stage, commit, then

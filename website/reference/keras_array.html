@@ -18,7 +18,7 @@ in-memory layout and floating point data type for the current Keras backend."><m
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">keras</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">2.8.0.9000</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">2.13.0.9000</span>
       </span>
     </div>
 
@@ -167,21 +167,26 @@ in-memory layout and floating point data type for the current Keras backend.</p>
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">keras_array</span><span class="op">(</span><span class="va">x</span>, dtype <span class="op">=</span> <span class="cn">NULL</span><span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">keras_array</span><span class="op">(</span><span class="va">x</span>, dtype <span class="op">=</span> <span class="cn">NULL</span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
     <h2>Arguments</h2>
     <dl><dt>x</dt>
 <dd><p>Object or list of objects to convert</p></dd>
+
+
 <dt>dtype</dt>
 <dd><p>NumPy data type (e.g. float32, float64). If this is unspecified
 then R doubles will be converted to the default floating point type for the
 current Keras backend.</p></dd>
+
 </dl></div>
     <div id="value">
     <h2>Value</h2>
-    <p>NumPy array with the specified <code>dtype</code> (or list of NumPy arrays if a
+    
+
+<p>NumPy array with the specified <code>dtype</code> (or list of NumPy arrays if a
 list was passed for <code>x</code>).</p>
     </div>
     <div id="details">
@@ -206,7 +211,7 @@ order then it is returned unmodified (no additional copies are made).</p>
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.3.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.7.</p>
 </div>
 
       </footer></div>

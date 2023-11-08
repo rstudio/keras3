@@ -18,7 +18,7 @@ test_on_batch()."><meta property="og:image" content="/logo.png"><!-- mathjax -->
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">keras</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">2.8.0.9000</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">2.13.0.9000</span>
       </span>
     </div>
 
@@ -167,59 +167,71 @@ test_on_batch()."><meta property="og:image" content="/logo.png"><!-- mathjax -->
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">evaluate_generator</span><span class="op">(</span>
-  <span class="va">object</span>,
-  <span class="va">generator</span>,
-  <span class="va">steps</span>,
-  max_queue_size <span class="op">=</span> <span class="fl">10</span>,
-  workers <span class="op">=</span> <span class="fl">1</span>,
-  callbacks <span class="op">=</span> <span class="cn">NULL</span>
-<span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">evaluate_generator</span><span class="op">(</span></span>
+<span>  <span class="va">object</span>,</span>
+<span>  <span class="va">generator</span>,</span>
+<span>  <span class="va">steps</span>,</span>
+<span>  max_queue_size <span class="op">=</span> <span class="fl">10</span>,</span>
+<span>  workers <span class="op">=</span> <span class="fl">1</span>,</span>
+<span>  callbacks <span class="op">=</span> <span class="cn">NULL</span></span>
+<span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
     <h2>Arguments</h2>
     <dl><dt>object</dt>
 <dd><p>Model object to evaluate</p></dd>
+
+
 <dt>generator</dt>
 <dd><p>Generator yielding lists (inputs, targets) or (inputs,
 targets, sample_weights)</p></dd>
+
+
 <dt>steps</dt>
 <dd><p>Total number of steps (batches of samples) to yield from
 <code>generator</code> before stopping.</p></dd>
+
+
 <dt>max_queue_size</dt>
 <dd><p>Maximum size for the generator queue. If unspecified,
 <code>max_queue_size</code> will default to 10.</p></dd>
+
+
 <dt>workers</dt>
 <dd><p>Maximum number of threads to use for parallel processing. Note that
 parallel processing will only be performed for native Keras generators (e.g.
-<code><a href="flow_images_from_directory.html">flow_images_from_directory()</a></code>) as R based generators must run on the main thread.</p></dd>
+<code>flow_images_from_directory()</code>) as R based generators must run on the main thread.</p></dd>
+
+
 <dt>callbacks</dt>
 <dd><p>List of callbacks to apply during evaluation.</p></dd>
+
 </dl></div>
     <div id="value">
     <h2>Value</h2>
-    <p>Named list of model test loss (or losses for models with multiple outputs)
+    
+
+<p>Named list of model test loss (or losses for models with multiple outputs)
 and model metrics.</p>
     </div>
     <div id="see-also">
     <h2>See also</h2>
     <div class="dont-index"><p>Other model functions: 
-<code><a href="compile.keras.engine.training.Model.html">compile.keras.engine.training.Model</a>()</code>,
-<code><a href="evaluate.keras.engine.training.Model.html">evaluate.keras.engine.training.Model</a>()</code>,
-<code><a href="fit.keras.engine.training.Model.html">fit.keras.engine.training.Model</a>()</code>,
+<code><a href="compile.keras.models.model.Model.html">compile.keras.models.model.Model</a>()</code>,
+<code><a href="evaluate.keras.models.model.Model.html">evaluate.keras.models.model.Model</a>()</code>,
+<code><a href="fit.keras.models.model.Model.html">fit.keras.models.model.Model</a>()</code>,
 <code><a href="fit_generator.html">fit_generator</a>()</code>,
 <code><a href="get_config.html">get_config</a>()</code>,
 <code><a href="get_layer.html">get_layer</a>()</code>,
 <code><a href="keras_model_sequential.html">keras_model_sequential</a>()</code>,
 <code><a href="keras_model.html">keras_model</a>()</code>,
-<code><a href="multi_gpu_model.html">multi_gpu_model</a>()</code>,
 <code><a href="pop_layer.html">pop_layer</a>()</code>,
-<code><a href="predict.keras.engine.training.Model.html">predict.keras.engine.training.Model</a>()</code>,
+<code><a href="predict.keras.models.model.Model.html">predict.keras.models.model.Model</a>()</code>,
 <code><a href="predict_generator.html">predict_generator</a>()</code>,
 <code><a href="predict_on_batch.html">predict_on_batch</a>()</code>,
 <code><a href="predict_proba.html">predict_proba</a>()</code>,
-<code><a href="summary.keras.engine.training.Model.html">summary.keras.engine.training.Model</a>()</code>,
+<code><a href="summary.keras.models.model.Model.html">summary.keras.models.model.Model</a>()</code>,
 <code><a href="train_on_batch.html">train_on_batch</a>()</code></p></div>
     </div>
 
@@ -235,7 +247,7 @@ and model metrics.</p>
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.3.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.7.</p>
 </div>
 
       </footer></div>

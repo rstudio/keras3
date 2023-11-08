@@ -17,7 +17,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">keras</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">2.8.0.9000</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">2.13.0.9000</span>
       </span>
     </div>
 
@@ -156,7 +156,7 @@
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Callback that prints metrics to stdout.</h1>
-    <small class="dont-index">Source: <a href="https://github.com/rstudio/keras/blob/HEAD/R/callbacks.R" class="external-link"><code>R/callbacks.R</code></a></small>
+    <small class="dont-index">Source: <a href="https://github.com/rstudio/keras/blob/HEAD/R/autogen-callbacks.R" class="external-link"><code>R/autogen-callbacks.R</code></a></small>
     <div class="hidden name"><code>callback_progbar_logger.Rd</code></div>
     </div>
 
@@ -165,23 +165,27 @@
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">callback_progbar_logger</span><span class="op">(</span>count_mode <span class="op">=</span> <span class="st">"samples"</span>, stateful_metrics <span class="op">=</span> <span class="cn">NULL</span><span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">callback_progbar_logger</span><span class="op">(</span>count_mode <span class="op">=</span> <span class="cn">NULL</span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
     <h2>Arguments</h2>
     <dl><dt>count_mode</dt>
-<dd><p>One of "steps" or "samples". Whether the progress bar
-should count samples seens or steps (batches) seen.</p></dd>
-<dt>stateful_metrics</dt>
-<dd><p>List of metric names that should <em>not</em>
-be averaged onver an epoch. Metrics in this list will be logged
-as-is in <code>on_epoch_end</code>. All others will be averaged in
-<code>on_epoch_end</code>.</p></dd>
+<dd><p>One of <code>"steps"</code> or <code>"samples"</code>.
+Whether the progress bar should
+count samples seen or steps (batches) seen.</p></dd>
+
 </dl></div>
+    <div id="raises">
+    <h2>Raises</h2>
+    <p></p><div class="sourceCode"><pre><code><span id="cb1-1"><a href="#cb1-1" tabindex="-1"></a>ValueError<span class="sc">:</span> In case of invalid <span class="st">`</span><span class="at">count_mode</span><span class="st">`</span>.</span></code></pre><p></p></div>
+    </div>
     <div id="see-also">
     <h2>See also</h2>
-    <div class="dont-index"><p>Other callbacks: 
+    <div class="dont-index">
+<ul><li><p><a href="https://www.tensorflow.org/api_docs/python/tf/keras/callbacks/ProgbarLogger" class="external-link">https://www.tensorflow.org/api_docs/python/tf/keras/callbacks/ProgbarLogger</a></p></li>
+</ul><p>Other callback: 
+<code><a href="callback_backup_and_restore.html">callback_backup_and_restore</a>()</code>,
 <code><a href="callback_csv_logger.html">callback_csv_logger</a>()</code>,
 <code><a href="callback_early_stopping.html">callback_early_stopping</a>()</code>,
 <code><a href="callback_lambda.html">callback_lambda</a>()</code>,
@@ -190,7 +194,7 @@ as-is in <code>on_epoch_end</code>. All others will be averaged in
 <code><a href="callback_reduce_lr_on_plateau.html">callback_reduce_lr_on_plateau</a>()</code>,
 <code><a href="callback_remote_monitor.html">callback_remote_monitor</a>()</code>,
 <code><a href="callback_tensorboard.html">callback_tensorboard</a>()</code>,
-<code><a href="callback_terminate_on_naan.html">callback_terminate_on_naan</a>()</code></p></div>
+<code><a href="callback_terminate_on_nan.html">callback_terminate_on_nan</a>()</code></p></div>
     </div>
 
   </div>
@@ -205,7 +209,7 @@ as-is in <code>on_epoch_end</code>. All others will be averaged in
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.3.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.7.</p>
 </div>
 
       </footer></div>

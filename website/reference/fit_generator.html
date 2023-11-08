@@ -19,7 +19,7 @@ parallel to training your model on GPU."><meta property="og:image" content="/log
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">keras</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">2.8.0.9000</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">2.13.0.9000</span>
       </span>
     </div>
 
@@ -169,35 +169,36 @@ parallel to training your model on GPU.</p>
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">fit_generator</span><span class="op">(</span>
-  <span class="va">object</span>,
-  <span class="va">generator</span>,
-  <span class="va">steps_per_epoch</span>,
-  epochs <span class="op">=</span> <span class="fl">1</span>,
-  verbose <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/options.html" class="external-link">getOption</a></span><span class="op">(</span><span class="st">"keras.fit_verbose"</span>, default <span class="op">=</span> <span class="fl">1</span><span class="op">)</span>,
-  callbacks <span class="op">=</span> <span class="cn">NULL</span>,
-  view_metrics <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/options.html" class="external-link">getOption</a></span><span class="op">(</span><span class="st">"keras.view_metrics"</span>, default <span class="op">=</span> <span class="st">"auto"</span><span class="op">)</span>,
-  validation_data <span class="op">=</span> <span class="cn">NULL</span>,
-  validation_steps <span class="op">=</span> <span class="cn">NULL</span>,
-  class_weight <span class="op">=</span> <span class="cn">NULL</span>,
-  max_queue_size <span class="op">=</span> <span class="fl">10</span>,
-  workers <span class="op">=</span> <span class="fl">1</span>,
-  initial_epoch <span class="op">=</span> <span class="fl">0</span>
-<span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">fit_generator</span><span class="op">(</span></span>
+<span>  <span class="va">object</span>,</span>
+<span>  <span class="va">generator</span>,</span>
+<span>  <span class="va">steps_per_epoch</span>,</span>
+<span>  epochs <span class="op">=</span> <span class="fl">1</span>,</span>
+<span>  verbose <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/options.html" class="external-link">getOption</a></span><span class="op">(</span><span class="st">"keras.fit_verbose"</span>, default <span class="op">=</span> <span class="fl">1</span><span class="op">)</span>,</span>
+<span>  callbacks <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  view_metrics <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/options.html" class="external-link">getOption</a></span><span class="op">(</span><span class="st">"keras.view_metrics"</span>, default <span class="op">=</span> <span class="st">"auto"</span><span class="op">)</span>,</span>
+<span>  validation_data <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  validation_steps <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  class_weight <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  max_queue_size <span class="op">=</span> <span class="fl">10</span>,</span>
+<span>  workers <span class="op">=</span> <span class="fl">1</span>,</span>
+<span>  initial_epoch <span class="op">=</span> <span class="fl">0</span></span>
+<span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
     <h2>Arguments</h2>
     <dl><dt>object</dt>
 <dd><p>Keras model object</p></dd>
+
+
 <dt>generator</dt>
 <dd><p>A generator (e.g. like the one provided by
-<code><a href="flow_images_from_directory.html">flow_images_from_directory()</a></code> or a custom R
+flow_images_from_directory() or a custom R
 <a href="https://rstudio.github.io/reticulate/articles/calling_python.html#generators-1" class="external-link">generator function</a>).</p>
-<p>The output of the generator must be a list of one of these forms:</p><div class="sourceCode"><pre><code> - (inputs, targets)
- - (inputs, targets, sample_weights)
-</code></pre></div>
-
+<p>The output of the generator must be a list of one of these forms:</p>
+<p></p><div class="sourceCode"><pre><code><span id="cb1-1"><a href="#cb1-1" tabindex="-1"></a> <span class="sc">-</span> (inputs, targets)</span>
+<span id="cb1-2"><a href="#cb1-2" tabindex="-1"></a> <span class="sc">-</span> (inputs, targets, sample_weights)</span></code></pre><p></p></div>
 <p>This list (a single output of the generator) makes a single batch.
 Therefore, all arrays in this list must have the same length (equal to
 the size of this batch). Different batches may have different sizes.
@@ -205,11 +206,15 @@ For example, the last batch of the epoch is commonly smaller than the
 others, if the size of the dataset is not divisible by the batch size.
 The generator is expected to loop over its data indefinitely. An epoch
 finishes when <code>steps_per_epoch</code> batches have been seen by the model.</p></dd>
+
+
 <dt>steps_per_epoch</dt>
 <dd><p>Total number of steps (batches of samples) to yield
 from <code>generator</code> before declaring one epoch finished and starting the next
 epoch. It should typically be equal to the number of samples if your
 dataset divided by the batch size.</p></dd>
+
+
 <dt>epochs</dt>
 <dd><p>Integer. Number of epochs to train the model.
 An epoch is an iteration over the entire data provided, as defined by
@@ -217,17 +222,26 @@ An epoch is an iteration over the entire data provided, as defined by
 <code>epochs</code> is to be understood as "final epoch". The model is not trained
 for a number of iterations given by <code>epochs</code>, but merely until the epoch
 of index <code>epochs</code> is reached.</p></dd>
+
+
 <dt>verbose</dt>
-<dd><p>Verbosity mode (0 = silent, 1 = progress bar, 2 = one line per
-epoch).</p></dd>
+<dd><p>Verbosity mode (0 = silent, 1 = progress bar, 2 = one line
+per epoch). Defaults to 1 in most contexts, 2 if in knitr render or running
+on a distributed training server.</p></dd>
+
+
 <dt>callbacks</dt>
 <dd><p>List of callbacks to apply during training.</p></dd>
+
+
 <dt>view_metrics</dt>
 <dd><p>View realtime plot of training metrics (by epoch). The
 default (<code>"auto"</code>) will display the plot when running within RStudio,
 <code>metrics</code> were specified during model <code><a href="https://generics.r-lib.org/reference/compile.html" class="external-link">compile()</a></code>, <code>epochs &gt; 1</code> and
 <code>verbose &gt; 0</code>. Use the global <code>keras.view_metrics</code> option to establish a
 different default.</p></dd>
+
+
 <dt>validation_data</dt>
 <dd><p>this can be either:</p><ul><li><p>a generator for the validation data</p></li>
 <li><p>a list (inputs, targets)</p></li>
@@ -236,49 +250,61 @@ on which to evaluate
 the loss and any model metrics at the end of each epoch.
 The model will not be trained on this data.</p></li>
 </ul></dd>
+
+
 <dt>validation_steps</dt>
 <dd><p>Only relevant if <code>validation_data</code> is a generator.
 Total number of steps (batches of samples) to yield from <code>generator</code> before
 stopping at the end of every epoch. It should typically be equal to the number
 of samples of your validation dataset divided by the batch size.</p></dd>
+
+
 <dt>class_weight</dt>
 <dd><p>Optional named list mapping class indices (integer) to a
 weight (float) value, used for weighting the loss function (during
 training only). This can be useful to tell the model to "pay more
 attention" to samples from an under-represented class.</p></dd>
+
+
 <dt>max_queue_size</dt>
 <dd><p>Maximum size for the generator queue. If unspecified,
 <code>max_queue_size</code> will default to 10.</p></dd>
+
+
 <dt>workers</dt>
 <dd><p>Maximum number of threads to use for parallel processing. Note that
 parallel processing will only be performed for native Keras generators (e.g.
-<code><a href="flow_images_from_directory.html">flow_images_from_directory()</a></code>) as R based generators must run on the main thread.</p></dd>
+<code>flow_images_from_directory()</code>) as R based generators must run on the main thread.</p></dd>
+
+
 <dt>initial_epoch</dt>
 <dd><p>epoch at which to start training (useful for resuming a
 previous training run)</p></dd>
+
 </dl></div>
     <div id="value">
     <h2>Value</h2>
-    <p>Training history object (invisibly)</p>
+    
+
+<p>Training history object (invisibly)</p>
     </div>
     <div id="see-also">
     <h2>See also</h2>
     <div class="dont-index"><p>Other model functions: 
-<code><a href="compile.keras.engine.training.Model.html">compile.keras.engine.training.Model</a>()</code>,
-<code><a href="evaluate.keras.engine.training.Model.html">evaluate.keras.engine.training.Model</a>()</code>,
+<code><a href="compile.keras.models.model.Model.html">compile.keras.models.model.Model</a>()</code>,
+<code><a href="evaluate.keras.models.model.Model.html">evaluate.keras.models.model.Model</a>()</code>,
 <code><a href="evaluate_generator.html">evaluate_generator</a>()</code>,
-<code><a href="fit.keras.engine.training.Model.html">fit.keras.engine.training.Model</a>()</code>,
+<code><a href="fit.keras.models.model.Model.html">fit.keras.models.model.Model</a>()</code>,
 <code><a href="get_config.html">get_config</a>()</code>,
 <code><a href="get_layer.html">get_layer</a>()</code>,
 <code><a href="keras_model_sequential.html">keras_model_sequential</a>()</code>,
 <code><a href="keras_model.html">keras_model</a>()</code>,
-<code><a href="multi_gpu_model.html">multi_gpu_model</a>()</code>,
 <code><a href="pop_layer.html">pop_layer</a>()</code>,
-<code><a href="predict.keras.engine.training.Model.html">predict.keras.engine.training.Model</a>()</code>,
+<code><a href="predict.keras.models.model.Model.html">predict.keras.models.model.Model</a>()</code>,
 <code><a href="predict_generator.html">predict_generator</a>()</code>,
 <code><a href="predict_on_batch.html">predict_on_batch</a>()</code>,
 <code><a href="predict_proba.html">predict_proba</a>()</code>,
-<code><a href="summary.keras.engine.training.Model.html">summary.keras.engine.training.Model</a>()</code>,
+<code><a href="summary.keras.models.model.Model.html">summary.keras.models.model.Model</a>()</code>,
 <code><a href="train_on_batch.html">train_on_batch</a>()</code></p></div>
     </div>
 
@@ -294,7 +320,7 @@ previous training run)</p></dd>
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.3.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.7.</p>
 </div>
 
       </footer></div>

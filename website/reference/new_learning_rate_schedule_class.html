@@ -17,7 +17,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">keras</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">2.8.0.9000</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">2.13.0.9000</span>
       </span>
     </div>
 
@@ -165,33 +165,42 @@
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">new_learning_rate_schedule_class</span><span class="op">(</span>
-  <span class="va">classname</span>,
-  <span class="va">...</span>,
-  initialize <span class="op">=</span> <span class="cn">NULL</span>,
-  <span class="va">call</span>,
-  get_config <span class="op">=</span> <span class="cn">NULL</span>
-<span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">new_learning_rate_schedule_class</span><span class="op">(</span></span>
+<span>  <span class="va">classname</span>,</span>
+<span>  <span class="va">...</span>,</span>
+<span>  initialize <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  <span class="va">call</span>,</span>
+<span>  get_config <span class="op">=</span> <span class="cn">NULL</span></span>
+<span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
     <h2>Arguments</h2>
     <dl><dt>classname</dt>
 <dd><p>string</p></dd>
+
+
 <dt>...</dt>
 <dd><p>methods and properties of the schedule class</p></dd>
+
+
 <dt>initialize, get_config</dt>
 <dd><p>Additional recommended methods to implement.</p><ul><li><p><a href="https://www.tensorflow.org/api_docs/python/tf/keras/optimizers/schedules/LearningRateSchedule" class="external-link">https://www.tensorflow.org/api_docs/python/tf/keras/optimizers/schedules/LearningRateSchedule</a></p></li>
 </ul></dd>
+
+
 <dt>call</dt>
 <dd><p>function which takes a step argument (scalar integer tensor, the
 current training step count, and returns the new learning rate). For
 tracking additional state, objects <code>self</code> and <code>private</code> are automatically
 injected into the scope of the function.</p></dd>
+
 </dl></div>
     <div id="value">
     <h2>Value</h2>
-    <p>A <code>LearningRateSchedule</code> class generator.</p>
+    
+
+<p>A <code>LearningRateSchedule</code> class generator.</p>
     </div>
 
   </div>
@@ -206,7 +215,7 @@ injected into the scope of the function.</p></dd>
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.3.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.7.</p>
 </div>
 
       </footer></div>

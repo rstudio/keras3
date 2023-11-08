@@ -17,7 +17,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">keras</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">2.8.0.9000</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">2.13.0.9000</span>
       </span>
     </div>
 
@@ -165,15 +165,18 @@
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">with_custom_object_scope</span><span class="op">(</span><span class="va">objects</span>, <span class="va">expr</span><span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">with_custom_object_scope</span><span class="op">(</span><span class="va">objects</span>, <span class="va">expr</span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
     <h2>Arguments</h2>
     <dl><dt>objects</dt>
 <dd><p>Named list of objects</p></dd>
+
+
 <dt>expr</dt>
 <dd><p>Expression to evaluate</p></dd>
+
 </dl></div>
     <div id="details">
     <h2>Details</h2>
@@ -189,33 +192,33 @@ block of code, and is automatically recognized when loading saved models.</p>
 
     <div id="ref-examples">
     <h2>Examples</h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="kw">if</span> <span class="op">(</span><span class="cn">FALSE</span><span class="op">)</span> <span class="op">{</span></span>
-<span class="r-in"><span class="co"># define custom metric</span></span>
-<span class="r-in"><span class="va">metric_top_3_categorical_accuracy</span> <span class="op">&lt;-</span></span>
-<span class="r-in">  <span class="fu"><a href="custom_metric.html">custom_metric</a></span><span class="op">(</span><span class="st">"top_3_categorical_accuracy"</span>, <span class="kw">function</span><span class="op">(</span><span class="va">y_true</span>, <span class="va">y_pred</span><span class="op">)</span> <span class="op">{</span></span>
-<span class="r-in">    <span class="fu"><a href="metric_top_k_categorical_accuracy.html">metric_top_k_categorical_accuracy</a></span><span class="op">(</span><span class="va">y_true</span>, <span class="va">y_pred</span>, k <span class="op">=</span> <span class="fl">3</span><span class="op">)</span></span>
-<span class="r-in">  <span class="op">}</span><span class="op">)</span></span>
-<span class="r-in"></span>
-<span class="r-in"><span class="fu">with_custom_object_scope</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span>top_k_acc <span class="op">=</span> <span class="va">sparse_top_k_cat_acc</span><span class="op">)</span>, <span class="op">{</span></span>
-<span class="r-in"></span>
-<span class="r-in">  <span class="co"># ...define model...</span></span>
-<span class="r-in"></span>
-<span class="r-in">  <span class="co"># compile model (refer to "top_k_acc" by name)</span></span>
-<span class="r-in">  <span class="va">model</span> <span class="op"><a href="pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://generics.r-lib.org/reference/compile.html" class="external-link">compile</a></span><span class="op">(</span></span>
-<span class="r-in">    loss <span class="op">=</span> <span class="st">"binary_crossentropy"</span>,</span>
-<span class="r-in">    optimizer <span class="op">=</span> <span class="fu"><a href="optimizer_nadam.html">optimizer_nadam</a></span><span class="op">(</span><span class="op">)</span>,</span>
-<span class="r-in">    metrics <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"top_k_acc"</span><span class="op">)</span></span>
-<span class="r-in">  <span class="op">)</span></span>
-<span class="r-in"></span>
-<span class="r-in">  <span class="co"># save the model</span></span>
-<span class="r-in">  <span class="fu"><a href="save_model_hdf5.html">save_model_hdf5</a></span><span class="op">(</span><span class="st">"my_model.h5"</span><span class="op">)</span></span>
-<span class="r-in"></span>
-<span class="r-in">  <span class="co"># loading the model within the custom object scope doesn't</span></span>
-<span class="r-in">  <span class="co"># require explicitly providing the custom_object</span></span>
-<span class="r-in">  <span class="fu"><a href="save_model_hdf5.html">load_model_hdf5</a></span><span class="op">(</span><span class="st">"my_model.h5"</span><span class="op">)</span></span>
-<span class="r-in"><span class="op">}</span><span class="op">)</span></span>
-<span class="r-in"><span class="op">}</span></span>
-<span class="r-in"></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="kw">if</span> <span class="op">(</span><span class="cn">FALSE</span><span class="op">)</span> <span class="op">{</span></span></span>
+<span class="r-in"><span><span class="co"># define custom metric</span></span></span>
+<span class="r-in"><span><span class="va">metric_top_3_categorical_accuracy</span> <span class="op">&lt;-</span></span></span>
+<span class="r-in"><span>  <span class="fu"><a href="custom_metric.html">custom_metric</a></span><span class="op">(</span><span class="st">"top_3_categorical_accuracy"</span>, <span class="kw">function</span><span class="op">(</span><span class="va">y_true</span>, <span class="va">y_pred</span><span class="op">)</span> <span class="op">{</span></span></span>
+<span class="r-in"><span>    <span class="fu"><a href="metric_top_k_categorical_accuracy.html">metric_top_k_categorical_accuracy</a></span><span class="op">(</span><span class="va">y_true</span>, <span class="va">y_pred</span>, k <span class="op">=</span> <span class="fl">3</span><span class="op">)</span></span></span>
+<span class="r-in"><span>  <span class="op">}</span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="fu">with_custom_object_scope</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span>top_k_acc <span class="op">=</span> <span class="va">sparse_top_k_cat_acc</span><span class="op">)</span>, <span class="op">{</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span>  <span class="co"># ...define model...</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span>  <span class="co"># compile model (refer to "top_k_acc" by name)</span></span></span>
+<span class="r-in"><span>  <span class="va">model</span> <span class="op"><a href="pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://generics.r-lib.org/reference/compile.html" class="external-link">compile</a></span><span class="op">(</span></span></span>
+<span class="r-in"><span>    loss <span class="op">=</span> <span class="st">"binary_crossentropy"</span>,</span></span>
+<span class="r-in"><span>    optimizer <span class="op">=</span> <span class="fu"><a href="optimizer_nadam.html">optimizer_nadam</a></span><span class="op">(</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>    metrics <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"top_k_acc"</span><span class="op">)</span></span></span>
+<span class="r-in"><span>  <span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span>  <span class="co"># save the model</span></span></span>
+<span class="r-in"><span>  <span class="fu"><a href="save_model_hdf5.html">save_model_hdf5</a></span><span class="op">(</span><span class="st">"my_model.h5"</span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span>  <span class="co"># loading the model within the custom object scope doesn't</span></span></span>
+<span class="r-in"><span>  <span class="co"># require explicitly providing the custom_object</span></span></span>
+<span class="r-in"><span>  <span class="fu"><a href="save_model_hdf5.html">load_model_hdf5</a></span><span class="op">(</span><span class="st">"my_model.h5"</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="op">}</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="op">}</span></span></span>
+<span class="r-in"><span></span></span>
 </code></pre></div>
     </div>
   </div>
@@ -230,7 +233,7 @@ block of code, and is automatically recognized when loading saved models.</p>
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.3.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.7.</p>
 </div>
 
       </footer></div>

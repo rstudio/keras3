@@ -17,7 +17,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">keras</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">2.8.0.9000</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">2.13.0.9000</span>
       </span>
     </div>
 
@@ -165,18 +165,18 @@
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">timeseries_generator</span><span class="op">(</span>
-  <span class="va">data</span>,
-  <span class="va">targets</span>,
-  <span class="va">length</span>,
-  sampling_rate <span class="op">=</span> <span class="fl">1</span>,
-  stride <span class="op">=</span> <span class="fl">1</span>,
-  start_index <span class="op">=</span> <span class="fl">0</span>,
-  end_index <span class="op">=</span> <span class="cn">NULL</span>,
-  shuffle <span class="op">=</span> <span class="cn">FALSE</span>,
-  reverse <span class="op">=</span> <span class="cn">FALSE</span>,
-  batch_size <span class="op">=</span> <span class="fl">128</span>
-<span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">timeseries_generator</span><span class="op">(</span></span>
+<span>  <span class="va">data</span>,</span>
+<span>  <span class="va">targets</span>,</span>
+<span>  <span class="va">length</span>,</span>
+<span>  sampling_rate <span class="op">=</span> <span class="fl">1</span>,</span>
+<span>  stride <span class="op">=</span> <span class="fl">1</span>,</span>
+<span>  start_index <span class="op">=</span> <span class="fl">0</span>,</span>
+<span>  end_index <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  shuffle <span class="op">=</span> <span class="cn">FALSE</span>,</span>
+<span>  reverse <span class="op">=</span> <span class="cn">FALSE</span>,</span>
+<span>  batch_size <span class="op">=</span> <span class="fl">128</span></span>
+<span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
@@ -184,36 +184,55 @@
     <dl><dt>data</dt>
 <dd><p>Object containing consecutive data points (timesteps). The data
 should be 2D, and axis 1 is expected to be the time dimension.</p></dd>
+
+
 <dt>targets</dt>
 <dd><p>Targets corresponding to timesteps in <code>data</code>.
 It should have same length as <code>data</code>.</p></dd>
+
+
 <dt>length</dt>
 <dd><p>Length of the output sequences (in number of timesteps).</p></dd>
+
+
 <dt>sampling_rate</dt>
 <dd><p>Period between successive individual timesteps
 within sequences. For rate <code>r</code>, timesteps <code>data[i]</code>, <code>data[i-r]</code>, ... <code>data[i - length]</code>
 are used for create a sample sequence.</p></dd>
+
+
 <dt>stride</dt>
 <dd><p>Period between successive output sequences.
 For stride <code>s</code>, consecutive output samples would
 be centered around <code>data[i]</code>, <code>data[i+s]</code>, <code>data[i+2*s]</code>, etc.</p></dd>
+
+
 <dt>start_index, end_index</dt>
 <dd><p>Data points earlier than <code>start_index</code>
 or later than <code>end_index</code> will not be used in the output sequences.
 This is useful to reserve part of the data for test or validation.</p></dd>
+
+
 <dt>shuffle</dt>
 <dd><p>Whether to shuffle output samples,
 or instead draw them in chronological order.</p></dd>
+
+
 <dt>reverse</dt>
 <dd><p>Boolean: if <code>true</code>, timesteps in each output sample will be
 in reverse chronological order.</p></dd>
+
+
 <dt>batch_size</dt>
 <dd><p>Number of timeseries samples in each batch
 (except maybe the last one).</p></dd>
+
 </dl></div>
     <div id="value">
     <h2>Value</h2>
-    <p>An object that can be passed to generator based training
+    
+
+<p>An object that can be passed to generator based training
 functions (e.g. <code><a href="fit_generator.html">fit_generator()</a></code>).ma</p>
     </div>
 
@@ -229,7 +248,7 @@ functions (e.g. <code><a href="fit_generator.html">fit_generator()</a></code>).m
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.3.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.7.</p>
 </div>
 
       </footer></div>

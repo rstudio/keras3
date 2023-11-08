@@ -17,7 +17,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">keras</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">2.8.0.9000</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">2.13.0.9000</span>
       </span>
     </div>
 
@@ -165,40 +165,53 @@
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="co"># S3 method for keras_training_history</span>
-<span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span>
-  <span class="va">x</span>,
-  <span class="va">y</span>,
-  metrics <span class="op">=</span> <span class="cn">NULL</span>,
-  method <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"auto"</span>, <span class="st">"ggplot2"</span>, <span class="st">"base"</span><span class="op">)</span>,
-  smooth <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/options.html" class="external-link">getOption</a></span><span class="op">(</span><span class="st">"keras.plot.history.smooth"</span>, <span class="cn">TRUE</span><span class="op">)</span>,
-  theme_bw <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/options.html" class="external-link">getOption</a></span><span class="op">(</span><span class="st">"keras.plot.history.theme_bw"</span>, <span class="cn">FALSE</span><span class="op">)</span>,
-  <span class="va">...</span>
-<span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="co"># S3 method for keras_training_history</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span></span>
+<span>  <span class="va">x</span>,</span>
+<span>  <span class="va">y</span>,</span>
+<span>  metrics <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  method <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"auto"</span>, <span class="st">"ggplot2"</span>, <span class="st">"base"</span><span class="op">)</span>,</span>
+<span>  smooth <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/options.html" class="external-link">getOption</a></span><span class="op">(</span><span class="st">"keras.plot.history.smooth"</span>, <span class="cn">TRUE</span><span class="op">)</span>,</span>
+<span>  theme_bw <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/options.html" class="external-link">getOption</a></span><span class="op">(</span><span class="st">"keras.plot.history.theme_bw"</span>, <span class="cn">FALSE</span><span class="op">)</span>,</span>
+<span>  <span class="va">...</span></span>
+<span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
     <h2>Arguments</h2>
     <dl><dt>x</dt>
 <dd><p>Training history object returned from
-<code><a href="fit.keras.engine.training.Model.html">fit.keras.engine.training.Model()</a></code>.</p></dd>
+<code><a href="fit.keras.models.model.Model.html">fit.keras.models.model.Model()</a></code>.</p></dd>
+
+
 <dt>y</dt>
 <dd><p>Unused.</p></dd>
+
+
 <dt>metrics</dt>
 <dd><p>One or more metrics to plot (e.g. <code>c('loss', 'accuracy')</code>).
 Defaults to plotting all captured metrics.</p></dd>
+
+
 <dt>method</dt>
 <dd><p>Method to use for plotting. The default "auto" will use
 <span class="pkg">ggplot2</span> if available, and otherwise will use base graphics.</p></dd>
+
+
 <dt>smooth</dt>
 <dd><p>Whether a loess smooth should be added to the plot, only
 available for the <code>ggplot2</code> method. If the number of epochs is smaller
 than ten, it is forced to false.</p></dd>
+
+
 <dt>theme_bw</dt>
 <dd><p>Use <code><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html" class="external-link">ggplot2::theme_bw()</a></code> to plot the history in
 black and white.</p></dd>
+
+
 <dt>...</dt>
 <dd><p>Additional parameters to pass to the <code><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot()</a></code> method.</p></dd>
+
 </dl></div>
 
   </div>
@@ -213,7 +226,7 @@ black and white.</p></dd>
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.3.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.7.</p>
 </div>
 
       </footer></div>

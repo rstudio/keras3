@@ -17,7 +17,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">keras</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">2.8.0.9000</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">2.13.0.9000</span>
       </span>
     </div>
 
@@ -165,7 +165,7 @@
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">create_layer_wrapper</span><span class="op">(</span><span class="va">Layer</span>, modifiers <span class="op">=</span> <span class="cn">NULL</span>, convert <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">create_layer_wrapper</span><span class="op">(</span><span class="va">Layer</span>, modifiers <span class="op">=</span> <span class="cn">NULL</span>, convert <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
@@ -173,23 +173,37 @@
     <dl><dt>Layer</dt>
 <dd><p>A R6 or Python class generator that inherits from
 <code>keras$layers$Layer</code></p></dd>
+
+
 <dt>modifiers</dt>
 <dd><p>A named list of functions to modify to user-supplied
 arguments before they are passed on to the class constructor. (e.g.,
 <code>list(units = as.integer)</code>)</p></dd>
+
+
 <dt>convert</dt>
 <dd><p>Boolean, whether the Python class and its methods should by
 default convert python objects to R objects.</p>
 <p>See guide 'making_new_layers_and_models_via_subclassing.Rmd' for example usage.</p></dd>
+
 </dl></div>
     <div id="value">
     <h2>Value</h2>
-    <p>An R function that behaves similarly to the builtin keras <code>layer_*</code>functions. When called, it will create the class instance, and also
+    
+
+<p>An R function that behaves similarly to the builtin keras <code>layer_*</code></p>
+
+
+<p>functions. When called, it will create the class instance, and also
 optionally call it on a supplied argument <code>object</code> if it is present. This
-enables keras layers to compose nicely with the pipe (<code>%&gt;%</code>).
-The R function will arguments taken from the <code>initialize</code> (or <code>__init__</code>)
-method of the Layer.
-If Layer is an R6 object, this will delay initializing the python
+enables keras layers to compose nicely with the pipe (<code>%&gt;%</code>).</p>
+
+
+<p>The R function will arguments taken from the <code>initialize</code> (or <code>__init__</code>)
+method of the Layer.</p>
+
+
+<p>If Layer is an R6 object, this will delay initializing the python
 session, so it is safe to use in an R package.</p>
     </div>
 
@@ -205,7 +219,7 @@ session, so it is safe to use in an R package.</p>
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.3.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.7.</p>
 </div>
 
       </footer></div>
