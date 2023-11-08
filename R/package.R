@@ -304,6 +304,7 @@ keras_version <- function() {
   ver <-
     as_r_value(py_get_attr(keras, "__version__", TRUE)) %||%
     tensorflow::tf_config()$version_str
-  ver <- regmatches(ver, regexec("^([0-9\\.]+).*$", ver))[[1L]][[2L]]
+  ver <- gsub("[^0-9.-]+", ".", as.character(ver), perl = TRUE)
+  ver <- gsub("[.-]+", ".", ver, perl = TRUE)
   package_version(ver)
 }
