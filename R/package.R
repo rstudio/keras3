@@ -13,18 +13,26 @@
 #'   Turing machine.
 #' - Is capable of running on top of multiple back-ends including
 #'   [TensorFlow](https://github.com/tensorflow/tensorflow),
-#'   [CNTK](https://github.com/Microsoft/cntk),
-#'   or [Theano](https://github.com/Theano/Theano).
+#'   [Jax](https://github.com/google/jax),
+#'   or [PyTorch](https://github.com/pytorch/pytorch).
 #'
-#' See the package website at <https://tensorflow.rstudio.com> for complete documentation.
+#' See the package website at <https://keras.rstudio.com> for complete documentation.
 #'
-#' @import methods
 #' @import R6
-#' @importFrom reticulate import dict iterate import_from_path py_iterator py_call py_capture_output py_get_attr py_has_attr py_is_null_xptr py_to_r r_to_py tuple
+#' @importFrom reticulate
+#'   import import_from_path py_install
+#'   dict tuple
+#'   iterate py_iterator iter_next
+#'   py_call py_eval
+#'   py_capture_output py_is_null_xptr
+#'   py_get_attr py_has_attr
+#'   py_to_r r_to_py
 #' @importFrom graphics par plot points
 #' @importFrom tensorflow tf_version tf_config install_tensorflow
 #' @aliases keras-package
 "_PACKAGE"
+
+# @import methods
 
 # package level global state
 .globals <- new.env(parent = emptyenv())

@@ -21,11 +21,11 @@ building essentially any deep learning model, from a memory network to a neural
 Turing machine.
 \item Is capable of running on top of multiple back-ends including
 \href{https://github.com/tensorflow/tensorflow}{TensorFlow},
-\href{https://github.com/Microsoft/cntk}{CNTK},
-or \href{https://github.com/Theano/Theano}{Theano}.
+\href{https://github.com/google/jax}{Jax},
+or \href{https://github.com/pytorch/pytorch}{PyTorch}.
 }
 
-See the package website at \url{https://tensorflow.rstudio.com} for complete documentation.
+See the package website at \url{https://keras.rstudio.com} for complete documentation.
 }
 \seealso{
 Useful links:
