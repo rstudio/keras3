@@ -3,6 +3,9 @@
 if(!"source:tools/utils.R" %in% search()) envir::attach_source("tools/utils.R")
 if(!"source:tools/translate-tools.R" %in% search()) envir::attach_source("tools/translate-tools.R")
 
+# TODO: train_on_batch and related methods should be autogen'd and exported. Or maybe we curate those,
+#       and don't export them? (I.e., have the few people that need them access methods via model$train_on_batch())
+
 # TODO: use @concept or @keywords tags derived from module - then use that to autogenerate _pkgdown.yml
 #
 # TODO: fix CI: parsing of version string for keras-nightly broken.
