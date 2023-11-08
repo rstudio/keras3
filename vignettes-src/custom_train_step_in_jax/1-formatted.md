@@ -4,14 +4,9 @@ author: '[fchollet](https://twitter.com/fchollet)'
 date-created: 2023/06/27
 last-modified: 2023/06/27
 description: Overriding the training step of the Model class with JAX.
+accelerator: GPU
 output: rmarkdown::html_vignette
-vignette: |
-  %\VignetteIndexEntry{Customizing what happens in `fit()` with JAX} %\VignetteEngine{knitr::rmarkdown} %\VignetteEncoding{UTF-8}
-date: 'Last Modified: 2023-11-08; Last Rendered: 2023-11-08'
-vignette: >
-  %\VignetteIndexEntry{Customizing what happens in `fit()` with JAX}
-  %\VignetteEngine{knitr::rmarkdown}
-  %\VignetteEncoding{UTF-8}
+knit: keras:::knit_vignette
 ---
 
 ## Introduction

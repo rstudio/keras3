@@ -753,12 +753,21 @@ knit_vignette <- function(input, ..., output_dir) {
     collapse = TRUE,
     comment = "##" #>
   )
-  rmarkdown::render(
+  # rmarkdown::render(
+  #   input,
+  #   output_format = rmarkdown::github_document(preserve_yaml = TRUE),
+  #   # output_format = rmarkdown::md_document( preserve_yaml = TRUE, ext = "Rmd"), #
+  #   # output_format = rmarkdown::md_document(preserve_yaml = FALSE), # , ext = "Rmd"
+  #   output_file = output_file,
+  #   envir = new.env(parent = globalenv()),
+  #   ...
+  # )
+  knitr::knit(
     input,
-    output_format = rmarkdown::github_document(preserve_yaml = TRUE),
+    # output_format = rmarkdown::github_document(preserve_yaml = TRUE),
     # output_format = rmarkdown::md_document( preserve_yaml = TRUE, ext = "Rmd"), #
     # output_format = rmarkdown::md_document(preserve_yaml = FALSE), # , ext = "Rmd"
-    output_file = output_file,
+    output = output_file,
     envir = new.env(parent = globalenv()),
     ...
   )

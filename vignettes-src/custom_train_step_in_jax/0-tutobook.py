@@ -1,19 +1,13 @@
----
-title: Customizing what happens in `fit()` with JAX
-author: '[fchollet](https://twitter.com/fchollet)'
-date-created: 2023/06/27
-last-modified: 2023/06/27
-description: Overriding the training step of the Model class with JAX.
-output: rmarkdown::html_vignette
-vignette: |
-  %\VignetteIndexEntry{Customizing what happens in `fit()` with JAX} %\VignetteEngine{knitr::rmarkdown} %\VignetteEncoding{UTF-8}
-date: 'Last Modified: 2023-11-08; Last Rendered: 2023-11-08'
-vignette: >
-  %\VignetteIndexEntry{Customizing what happens in `fit()` with JAX}
-  %\VignetteEngine{knitr::rmarkdown}
-  %\VignetteEncoding{UTF-8}
----
+"""
+Title: Customizing what happens in `fit()` with JAX
+Author: [fchollet](https://twitter.com/fchollet)
+Date created: 2023/06/27
+Last modified: 2023/06/27
+Description: Overriding the training step of the Model class with JAX.
+Accelerator: GPU
+"""
 
+"""
 ## Introduction
 
 When you're doing supervised learning, you can use `fit()` and everything works
@@ -42,10 +36,12 @@ API. You can do this whether you're building `Sequential` models, Functional API
 models, or subclassed models.
 
 Let's see how that works.
+"""
 
+"""
 ## Setup
+"""
 
-```python
 import os
 
 # This guide can only be run with the JAX backend.
@@ -54,8 +50,8 @@ os.environ["KERAS_BACKEND"] = "jax"
 import jax
 import keras
 import numpy as np
-```
 
+"""
 ## A first simple example
 
 Let's start from a simple example:
@@ -66,7 +62,7 @@ to compute the loss as well as the updated values for the non-trainable
 variables of the model. Internally, it calls `stateless_call()` and
 the built-in `compute_loss()`.
 - We implement a fully-stateless `train_step()` method to compute current
-metric values (including the loss) as well as updated values for the
+metric values (including the loss) as well as updated values for the 
 trainable variables, the optimizer variables, and the metric variables.
 
 Note that you can also take into account the `sample_weight` argument by:
@@ -75,8 +71,9 @@ Note that you can also take into account the `sample_weight` argument by:
 - Passing `sample_weight` to `compute_loss()`
 - Passing `sample_weight` alongside `y` and `y_pred`
 to metrics in `stateless_update_state()`
+"""
 
-```python
+
 class CustomModel(keras.Model):
     def compute_loss_and_updates(
         self,
@@ -152,11 +149,12 @@ class CustomModel(keras.Model):
             new_metrics_vars,
         )
         return logs, state
-```
 
+
+"""
 Let's try this out:
+"""
 
-```python
 # Construct and compile an instance of CustomModel
 inputs = keras.Input(shape=(32,))
 outputs = keras.layers.Dense(1)(inputs)
@@ -167,16 +165,18 @@ model.compile(optimizer="adam", loss="mse", metrics=["mae"])
 x = np.random.random((1000, 32))
 y = np.random.random((1000, 1))
 model.fit(x, y, epochs=3)
-```
 
+
+"""
 ## Going lower-level
 
 Naturally, you could just skip passing a loss function in `compile()`, and instead do
 everything *manually* in `train_step`. Likewise for metrics.
 
 Here's a lower-level example, that only uses `compile()` to configure the optimizer:
+"""
 
-```python
+
 class CustomModel(keras.Model):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
@@ -284,14 +284,16 @@ model.compile(optimizer="adam")
 x = np.random.random((1000, 32))
 y = np.random.random((1000, 1))
 model.fit(x, y, epochs=5)
-```
 
+
+"""
 ## Providing your own evaluation step
 
 What if you want to do the same for calls to `model.evaluate()`? Then you would
 override `test_step` in exactly the same way. Here's what it looks like:
+"""
 
-```python
+
 class CustomModel(keras.Model):
     def test_step(self, state, data):
         # Unpack the data.
@@ -348,6 +350,8 @@ model.compile(loss="mse", metrics=["mae"])
 x = np.random.random((1000, 32))
 y = np.random.random((1000, 1))
 model.evaluate(x, y)
-```
 
+
+"""
 That's it!
+"""

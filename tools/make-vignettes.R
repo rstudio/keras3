@@ -215,6 +215,8 @@ lapply(guides, make_guide)
 # make_guide(guides[1])
 
 
+# TODO: I should be using knitr::knit() directly, not rmarkdown::render()
+# to avoid reflowing/rewrapping prose lines.
 
 vignette_src_render_translated <-
 function(directories = dir_ls("vignettes-src/", type = "directory")) {
