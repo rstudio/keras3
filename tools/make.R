@@ -192,6 +192,23 @@ df <- df |>
     man_roxygen_dir = path("man-src", r_name),
     endpoint_sans_name = str_extract(endpoint, "keras\\.(.*)\\.[^.]+$", 1))
 
+if(!all(dir_exists(df$man_roxygen_dir))) {
+  df |>
+    filter(!dir_exists(man_roxygen_dir)) |>
+    rowwise() |>
+    mutate(init_man_roxygen_dir = {
+      # browser()
+      man_roxygen_dir |>
+        dir_create() |>
+        withr::with_dir({
+          write_lines(format_man_src_0(endpoint), "0-upstream.md")
+          write_lines(roxygen, "1-formatted.md")
+          write_lines(roxygen, "2-translated.Rmd")
+          NULL
+        })
+    })
+}
+
 df <- df |>
   arrange(endpoint_sans_name, module, r_name) |>
   mutate(file = if_else(endpoint_sans_name == "layers",

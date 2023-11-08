@@ -22,17 +22,11 @@ config_floatx()
 
 ```r
 config_set_floatx('float64')
-config_floatx
+config_floatx()
 ```
 
 ```
-## function ()
-## {
-##     args <- capture_args2(NULL)
-##     do.call(keras$config$floatx, args)
-## }
-## <environment: namespace:keras>
-## file: ../../R/autogen-config.R
+## [1] "float64"
 ```
 
 

@@ -254,6 +254,14 @@ function (data, segment_ids, num_segments = NULL, sorted = FALSE)
 }
 
 
+"man-src/k_solve/1-formatted.md" # view the upstream doc
+"man-src/k_solve/2-translated.Rmd" # |>file.edit() # or cmd+click to edit man page
+#' @eval readLines("man-src/k_solve/3-rendered.md")
+k_solve <-
+function (a, b)
+keras$ops$solve(a, b)
+
+
 "man-src/k_stft/1-formatted.md" # view the upstream doc
 "man-src/k_stft/2-translated.Rmd" # |>file.edit() # or cmd+click to edit man page
 #' @eval readLines("man-src/k_stft/3-rendered.md")

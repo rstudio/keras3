@@ -233,8 +233,10 @@ filter_out_endpoint_aliases <- function(endpoints) {
         return(df)
       }
 
+      # `_api_export_path`
+      # `_api_export_symbol_id`
       # if(any(df$endpoint %>% str_detect("keras.ops.average_pool"))) browser()
-      out <- try(df %>% filter(py_obj[[1]]$`_keras_api_names`[[1]] == endpoint))
+      out <- try(df %>% filter(py_obj[[1]]$`_api_export_path`[[1]] == endpoint))
       if(inherits(out, "try-error"))
          browser()
       return(out)
@@ -1194,7 +1196,7 @@ known_metrics_without_function_handles <- c %(% {
 
 
 mk_export <- memoise(.mk_export <- function(endpoint, quiet = FALSE) {
-  message(glue(".mk_export('{endpoint}', {quiet})"))
+  # message(glue(".mk_export('{endpoint}', {quiet})"))
   # py parts
   py_obj <- py_eval(endpoint)
   name <- py_obj$`__name__`
@@ -1508,6 +1510,8 @@ get_fixed_docstring <- function(endpoint) {
 
 
 format_py_signature <- function(x) {
+  {
+
   if(is_string(x)) # endpoint
     x <- py_eval(x)
   if(!inherits(x, "inspect.Signature"))
@@ -1519,6 +1523,7 @@ format_py_signature <- function(x) {
     str_sub(x, 1, 1) <- "(\n  "
     str_sub(x, -1, -1) <- "\n)"
   }
+  } %error% browser()
   as_glue(x)
 }
 
@@ -1560,7 +1565,7 @@ git <- function(..., retries = 3, valid_exit_codes = 0L) {
       break
     } else {
       cat("res <- "); dput(res)
-      stop("non-0 exit from git add")
+      stop("non-0 exit from git ", str_split1_on_first(..1, " ")[[1]])
     }
   }
 }
@@ -1580,9 +1585,19 @@ man_src_pull_upstream_updates <- function(directories = dir_ls("man-src/", type 
 
   directories |>
     set_names(basename) |>
-    walk(\(dir) {
+    lapply(\(dir) {
+      dir %<>% as_fs_path()
       old_upstream <- read_lines(path(dir, "0-upstream.md"))
       endpoint <- old_upstream[1]
+
+      py_obj <- NULL
+      tryCatch({ py_obj <- py_eval(endpoint) },
+               error = function(e) NULL,
+               python.builtin.AttributeError = function(e) NULL)
+      if(is.null(py_obj)) {
+        unlink(dir, recursive = TRUE)
+        return()
+      }
       old_upstream <- str_flatten_lines(old_upstream)
       new_upstream <- format_man_src_0(endpoint)
       if(new_upstream == old_upstream) return() # nothing to update
@@ -1611,8 +1626,10 @@ man_src_pull_upstream_updates <- function(directories = dir_ls("man-src/", type 
       write_lines(patch, dir / "translate.patch")
 
       git("add", dir/"2-translated.Rmd")
-      git("apply --3way --recount --allow-empty", dir/"translate.patch")
-    })
+      git("apply --3way --recount --allow-empty", dir/"translate.patch",
+          valid_exit_codes = c(0L, 1L))
+    }) |>
+    invisible()
 }
 
 

@@ -189,6 +189,7 @@ Other ops:
 \code{\link{k_slice}()},
 \code{\link{k_softmax}()},
 \code{\link{k_softplus}()},
+\code{\link{k_solve}()},
 \code{\link{k_sort}()},
 \code{\link{k_sparse_categorical_crossentropy}()},
 \code{\link{k_split}()},

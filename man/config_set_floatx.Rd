@@ -28,16 +28,10 @@ a mix of \code{float16} and \code{float32}. It can be configured by calling
 }\if{html}{\out{</div>}}
 
 \if{html}{\out{<div class="sourceCode r">}}\preformatted{config_set_floatx('float64')
-config_floatx
+config_floatx()
 }\if{html}{\out{</div>}}
 
-\if{html}{\out{<div class="sourceCode">}}\preformatted{## function ()
-## \{
-##     args <- capture_args2(NULL)
-##     do.call(keras$config$floatx, args)
-## \}
-## <environment: namespace:keras>
-## file: ../../R/autogen-config.R
+\if{html}{\out{<div class="sourceCode">}}\preformatted{## [1] "float64"
 }\if{html}{\out{</div>}}
 
 \if{html}{\out{<div class="sourceCode r">}}\preformatted{# Set it back to float32
