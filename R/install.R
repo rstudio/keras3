@@ -12,7 +12,8 @@
 install_keras <- function(...,
                           envname = "r-keras",
                           extra_packages = NULL,
-                          python_version = "3.10"
+                          python_version = "3.10",
+                          devel = FALSE
                           # backend = c("tensorflow", "jax", "pytorch")
                           ) {
 
@@ -28,8 +29,7 @@ install_keras <- function(...,
 
   # message("DONE!")
   # return()
-  system2("python", "-m pip install tensorflow")
-  system2("python", "-m pip install keras-nightly")
+  # system2("python", "-m pip install tensorflow")
 
   if(Sys.getenv("CI") == "true") {
     system2("python", "-m pip install tf-nightly keras-nightly")
@@ -37,6 +37,13 @@ install_keras <- function(...,
     # system2("python", "-m pip uninstall keras")
     # system2("python", "-m pip install keras-nightly tf-nightly")
   }
+
+  if(!devel) {
+    system2("python", "-m pip install keras-nightly tf-nightly")
+    message("DONE")
+    return()
+  }
+
 
   # withr::local_dir(withr::local_tempdir())
   keras_team_keras_dir <- "~/github/keras-team/keras"
