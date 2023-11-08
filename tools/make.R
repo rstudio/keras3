@@ -104,6 +104,8 @@ if(!"source:tools/translate-tools.R" %in% search()) envir::attach_source("tools/
 
 
 format_py_signature <- function(x) {
+  if(is_string(x)) # endpoint
+    x <- py_eval(x)
   if(!inherits(x, "inspect.Signature"))
     x <- inspect$signature(x)
 
@@ -116,16 +118,15 @@ format_py_signature <- function(x) {
   as_glue(x)
 }
 
-format_py_signature(keras$layers$Dense) |> cat()
-format_py_signature(keras$Model) |> cat()
+# format_py_signature(keras$layers$Dense)
+# format_py_signature(keras$Model)
 
 
 format_man_src_0 <- function(endpoint) {
-  py_obj <- py_eval(endpoint)
   as_glue(str_flatten_lines(
     endpoint,
     "__signature__",
-    format_py_signature(py_obj),
+    format_py_signature(endpoint),
     "__doc__",
     get_docstring(endpoint)
   ))
