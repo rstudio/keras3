@@ -12,11 +12,11 @@ Return evenly spaced values within a given interval.
 
 # Examples
 ```{r}
-keras::k_arange(3L)
-keras::k_arange(3) # float
-keras::k_arange(3, dtype = 'int32') #int
-keras::k_arange(3L, 7L)
-keras::k_arange(3L, 7L, 2L)
+k_arange(3L)
+k_arange(3) # float
+k_arange(3, dtype = 'int32') #int
+k_arange(3L, 7L)
+k_arange(3L, 7L, 2L)
 ```
 
 @returns
