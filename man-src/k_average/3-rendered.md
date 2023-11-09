@@ -57,11 +57,11 @@ k_average(
 ```
 
 ```r
+# Error: Axis must be specified when shapes of a and weights differ.
 try(k_average(
   data,
   weights = k_array(c(1/4, 3/4))
 ))
-# Error: Axis must be specified when shapes of a and weights differ.
 ```
 
 @returns

@@ -73,11 +73,11 @@ data
 \if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor([0.75 2.75 4.75], shape=(3), dtype=float64)
 }\if{html}{\out{</div>}}
 
-\if{html}{\out{<div class="sourceCode r">}}\preformatted{try(k_average(
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{# Error: Axis must be specified when shapes of a and weights differ.
+try(k_average(
   data,
   weights = k_array(c(1/4, 3/4))
 ))
-# Error: Axis must be specified when shapes of a and weights differ.
 }\if{html}{\out{</div>}}
 }
 
