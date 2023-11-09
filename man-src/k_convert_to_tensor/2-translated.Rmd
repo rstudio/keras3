@@ -5,7 +5,7 @@ Convert an array to a tensor.
 # Examples
 ```{r}
 x <- array(c(1, 2, 3))
-y <- convert_to_tensor(x)
+y <- k_convert_to_tensor(x)
 y
 ```
 
