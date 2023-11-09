@@ -1716,20 +1716,21 @@ man_src_render_translated <- function(directories = dir_ls("man-src/", type = "d
     as_fs_path() |>
     # set_names(basename) %>%
     purrr::walk(\(dir) {
-      withr::local_dir(dir)
-      message("rendering: ", dir)
-      keras$utils$clear_session()
-      # Set knitr options to halt on errors
-      knitr::opts_chunk$set(error = FALSE)
-      knitr::knit("2-translated.Rmd", "3-rendered.md",
-                  quiet = TRUE, envir = new.env(parent = globalenv()))
-      x <- read_lines("3-rendered.md")
-      # TODO: these filters should be confined to chunk outputs only,
-      # probably as a knitr hook
-      x <- x |> str_replace_all(" at 0x[0-9A-F]{9}>$", ">")
-      x <- x[!str_detect(x, r"{## .*rstudio:run:reticulate::py_last_error\(\).*}")]
-      x <- x[!str_detect(x, r"{## .*reticulate::py_last_error\(\).*}")]
-      x |> write_lines("3-rendered.md")
+      keras:::knit_man_src(dir / "2-translated.Rmd")
+      # withr::local_dir(dir)
+      # message("rendering: ", dir)
+      # keras$utils$clear_session()
+      # # Set knitr options to halt on errors
+      # knitr::opts_chunk$set(error = FALSE)
+      # knitr::knit("2-translated.Rmd", "3-rendered.md",
+      #             quiet = TRUE, envir = new.env(parent = globalenv()))
+      # x <- read_lines("3-rendered.md")
+      # # TODO: these filters should be confined to chunk outputs only,
+      # # probably as a knitr hook
+      # x <- x |> str_replace_all(" at 0x[0-9A-F]{9}>$", ">")
+      # x <- x[!str_detect(x, r"{## .*rstudio:run:reticulate::py_last_error\(\).*}")]
+      # x <- x[!str_detect(x, r"{## .*reticulate::py_last_error\(\).*}")]
+      # x |> write_lines("3-rendered.md")
     })
 
 }
