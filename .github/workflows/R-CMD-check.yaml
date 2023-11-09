@@ -25,6 +25,7 @@ jobs:
           - {os: 'ubuntu-latest' , python: '3.9' , r: 'release'}
           - {os: 'ubuntu-latest' , python: '3.10', r: 'release'}
           - {os: 'ubuntu-latest' , python: '3.11', r: 'release'}
+          - {os: 'ubuntu-latest' , python: '3.12', r: 'release'}
 
           ## the happy path - default everything
           # - {os: 'ubuntu-latest' , tf: 'default', r: 'release'}
