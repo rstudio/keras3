@@ -18,4 +18,5 @@ x-coordinate in radians `[0, pi]`.
 @export
 @family ops
 @seealso
++ <https:/keras.io/keras_core/api/ops/numpy#arccos-function>
 + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/arccos>

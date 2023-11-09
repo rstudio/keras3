@@ -110,4 +110,5 @@ model$load_weights(checkpoint_filepath)
 @export
 @family callback
 @seealso
++ <https:/keras.io/api/callbacks/model_checkpoint#modelcheckpoint-class>
 + <https://www.tensorflow.org/api_docs/python/tf/keras/callbacks/ModelCheckpoint>

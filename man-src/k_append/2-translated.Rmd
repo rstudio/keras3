@@ -29,4 +29,5 @@ A tensor with the values of `x2` appended to `x1`.
 @export
 @family ops
 @seealso
++ <https:/keras.io/keras_core/api/ops/numpy#append-function>
 + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/append>

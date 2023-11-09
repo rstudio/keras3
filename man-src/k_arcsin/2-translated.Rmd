@@ -17,4 +17,5 @@ the closed interval `[-pi/2, pi/2]`.
 @export
 @family ops
 @seealso
++ <https:/keras.io/keras_core/api/ops/numpy#arcsin-function>
 + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/arcsin>

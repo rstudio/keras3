@@ -48,4 +48,5 @@ Return the average along the specified axis.
 @export
 @family ops
 @seealso
++ <https:/keras.io/keras_core/api/ops/numpy#average-function>
 + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/average>
