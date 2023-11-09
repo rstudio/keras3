@@ -27,10 +27,13 @@ computed by:
 \verb{num_sequences = 1 + (N - sequence_length) // sequence_stride}
 }
 \section{Examples}{
-\if{html}{\out{<div class="sourceCode python">}}\preformatted{x = keras.ops.convert_to_tensor([1, 2, 3, 4, 5, 6])
-extract_sequences(x, 3, 2)
-# array([[1, 2, 3],
-#    [3, 4, 5]])
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{x <- k_convert_to_tensor(1:6)
+k_extract_sequences(x, 3, 2)
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor(
+## [[1 2 3]
+##  [3 4 5]], shape=(2, 3), dtype=int32)
 }\if{html}{\out{</div>}}
 }
 

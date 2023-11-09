@@ -28,6 +28,10 @@ knit_man_src <- function(input, ..., output_dir) {
   knitr::opts_chunk$set(fig.path=paste0("man/figures/", basename(dir), "/"))
   knitr::knit("2-translated.Rmd", "3-rendered.md",
               quiet = TRUE, envir = new.env(parent = globalenv()))
+  if(!length(list.files(true_figs_dir))) {
+    unlink(true_figs_dir)
+    unlink(fake_figs_dir)
+  }
   x <- readLines("3-rendered.md")
   x <- trimws(x, "right")
   # TODO: these filters should be confined to chunk outputs only,

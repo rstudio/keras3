@@ -16,9 +16,14 @@ A tensor with the same dtype as \code{x}.
 Computes the error function of \code{x}, element-wise.
 }
 \section{Examples}{
-\if{html}{\out{<div class="sourceCode python">}}\preformatted{x = np.array([-3.0, -2.0, -1.0, 0.0, 1.0])
-keras.ops.erf(x)
-# array([-0.99998 , -0.99532, -0.842701,  0.,  0.842701], dtype=float32)
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{x <- k_array(c(-3, -2, -1, 0, 1))
+k_erf(x)
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor([-0.99997791 -0.99532227 -0.84270079  0.          0.84270079], shape=(5), dtype=float64)
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{# array([-0.99998 , -0.99532, -0.842701,  0.,  0.842701], dtype=float32)
 }\if{html}{\out{</div>}}
 }
 

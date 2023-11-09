@@ -9,24 +9,31 @@ k_gelu(x, approximate = TRUE)
 \arguments{
 \item{x}{Input tensor.}
 
-\item{approximate}{Approximate version of GELU activation. Defaults to \code{True}.}
+\item{approximate}{Approximate version of GELU activation. Defaults to \code{TRUE}.}
 }
 \value{
 A tensor with the same shape as \code{x}.
 }
 \description{
-If \code{approximate} is \code{True}, it is defined as:
+If \code{approximate} is \code{TRUE}, it is defined as:
 \code{f(x) = 0.5 * x * (1 + tanh(sqrt(2 / pi) * (x + 0.044715 * x^3)))}
 
-Or if \code{approximate} is \code{False}, it is defined as:
+Or if \code{approximate} is \code{FALSE}, it is defined as:
 \code{f(x) = x * P(X <= x) = 0.5 * x * (1 + erf(x / sqrt(2)))},
 where \code{P(X) ~ N(0, 1)}.
 }
 \section{Examples}{
-\if{html}{\out{<div class="sourceCode python">}}\preformatted{x = np.array([-1., 0., 1.])
-x_gelu = keras.ops.gelu(x)
-print(x_gelu)
-# array([-0.15865525, 0., 0.84134475], shape=(3,), dtype=float64)
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{x <- k_array(c(-1., 0., 1.))
+k_gelu(x)
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor([-0.15880801  0.          0.84119199], shape=(3), dtype=float64)
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{k_gelu(x, FALSE)
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor([-0.15865525  0.          0.84134475], shape=(3), dtype=float64)
 }\if{html}{\out{</div>}}
 }
 

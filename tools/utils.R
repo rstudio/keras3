@@ -1712,11 +1712,12 @@ man_src_pull_upstream_updates <- function(directories = dir_ls("man-src/", type 
 
 man_src_render_translated <- function(directories = dir_ls("man-src/", type = "directory")) {
   message(deparse1(sys.call()))
+  include("tools/knit.R")
   directories |>
     as_fs_path() |>
     # set_names(basename) %>%
     purrr::walk(\(dir) {
-      keras:::knit_man_src(dir / "2-translated.Rmd")
+      knit_man_src(dir / "2-translated.Rmd")
       # withr::local_dir(dir)
       # message("rendering: ", dir)
       # keras$utils$clear_session()
