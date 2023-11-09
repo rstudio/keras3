@@ -6,12 +6,23 @@ It is defined as:
 `0 if x < -2.5`, `1 if x > 2.5`, `(0.2 * x) + 0.5 if -2.5 <= x <= 2.5`.
 
 # Examples
-```python
-x = np.array([-1., 0., 1.])
-x_hard_sigmoid = keras.ops.hard_sigmoid(x)
-print(x_hard_sigmoid)
-# array([0.3, 0.5, 0.7], shape=(3,), dtype=float64)
+
+```r
+x <- k_array(c(-1., 0., 1.))
+k_hard_sigmoid(x)
 ```
+
+```
+## tf.Tensor([0.33333333 0.5        0.66666667], shape=(3), dtype=float64)
+```
+
+```r
+x <- as.array(seq(-5, 5, .1))
+plot(x, k_hard_sigmoid(x),
+     type = 'l', panel.first = grid(), frame.plot = FALSE)
+```
+
+![plot of chunk unnamed-chunk-1](man/figures/k_hard_sigmoid/unnamed-chunk-1-1.png)
 
 @returns
 A tensor with the same shape as `x`.

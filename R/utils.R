@@ -816,7 +816,9 @@ knit_man_src <- function(input, ..., output_dir) {
   keras$utils$clear_session()
   # Set knitr options to halt on errors
   knitr::opts_chunk$set(error = FALSE)
-  knitr::knit("2-translated.Rmd", "3-rendered.md",
+  file.symlink("man/figures", paste0("../../man/figures/", basename(dir)))
+  knitr::opts_chunk$set(fig.path=paste0("man/figures/", basename(dir)))
+    knitr::knit("2-translated.Rmd", "3-rendered.md",
               quiet = TRUE, envir = new.env(parent = globalenv()))
   x <- readLines("3-rendered.md")
   x <- trimws(x, "right")
@@ -828,6 +830,16 @@ knit_man_src <- function(input, ..., output_dir) {
     x <- x[-(1:3)]
     while(x[1] == "") x <- x[-1]
   }
+  figs <- list.files("man/figures", full.names = TRUE)
+  figs_dir <- "man/figures"
+  figs_dir2 <- fs::dir_create("../../man/figures/", basename(dir))
+
+
+  file.rename(figs, new_figs_loc)
+
+  new_figs_loc <- paste0("../../man/figures/", basename(dir), basename(figs))
+  file.rename(figs, new_figs_loc)
+  file.symlink(figs, new_figs_loc)
 
   x <- sub(" at 0x[0-9A-F]{9}>$", ">", x, perl = TRUE)
   x <- x[!grepl(r"{## .*rstudio:run:reticulate::py_last_error\(\).*}", x)]

@@ -169,6 +169,17 @@ if(FALSE) {
 
   get_translations()
 
+  list.files("man-src", "2-translated\\.Rmd$", recursive = TRUE,
+             full.names = TRUE) %>%
+    walk(\(f) {
+      x <- read_file(f)
+      x <- str_flatten_lines("---",
+                             "knit: knitr:::knit_man_src",
+                             "---",
+                             x)
+      write_lines(x, f)
+    })
+
 }
 
 # start by regenerating patch files
