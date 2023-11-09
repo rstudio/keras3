@@ -16,4 +16,5 @@ Compute the tensor dot product along specified axes.
 @export
 @family ops
 @seealso
++ <https:/keras.io/keras_core/api/ops/numpy#tensordot-function>
 + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/tensordot>

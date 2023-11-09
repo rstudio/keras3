@@ -41,4 +41,5 @@ loss between `target` and `output`.
 @export
 @family ops
 @seealso
++ <https:/keras.io/keras_core/api/ops/nn#sparsecategoricalcrossentropy-function>
 + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/sparse_categorical_crossentropy>

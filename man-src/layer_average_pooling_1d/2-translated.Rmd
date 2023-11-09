@@ -73,4 +73,5 @@ avg_pool_1d(x)
 @export
 @family pooling layers
 @seealso
++ <https:/keras.io/api/layers/pooling_layers/average_pooling1d#averagepooling1d-class>
 + <https://www.tensorflow.org/api_docs/python/tf/keras/layers/AveragePooling1D>

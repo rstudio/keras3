@@ -31,4 +31,5 @@ model = keras.models.Model(inputs=[input1, input2], outputs=out)
 @export
 @family merging layers
 @seealso
++ <https:/keras.io/api/layers/merging_layers/minimum#minimum-class>
 + <https://www.tensorflow.org/api_docs/python/tf/keras/layers/Minimum>

@@ -8,4 +8,5 @@ It's the ReLU function, but truncated to a maximum value of 6.
 @export
 @family activation functions
 @seealso
++ <https:/keras.io/keras_core/api/layers/activations#relu6-function>
 + <https://www.tensorflow.org/api_docs/python/tf/keras/activations/relu6>

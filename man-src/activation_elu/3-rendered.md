@@ -24,4 +24,5 @@ and the information that is propagated to the next layer.
 @export
 @family activation functions
 @seealso
++ <https:/keras.io/api/layers/activations#elu-function>
 + <https://www.tensorflow.org/api_docs/python/tf/keras/activations/elu>

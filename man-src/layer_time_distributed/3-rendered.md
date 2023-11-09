@@ -39,4 +39,5 @@ the timestamps, the same set of weights are used at each timestamp.
 @export
 @family recurrent layers
 @seealso
++ <https:/keras.io/api/layers/recurrent_layers/time_distributed#timedistributed-class>
 + <https://www.tensorflow.org/api_docs/python/tf/keras/layers/TimeDistributed>

@@ -49,4 +49,5 @@ model.add(Lambda(lambda x: x ** 2))
 @export
 @family core layers
 @seealso
++ <https:/keras.io/api/layers/core_layers/lambda#lambda-class>
 + <https://www.tensorflow.org/api_docs/python/tf/keras/layers/Lambda>

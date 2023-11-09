@@ -35,4 +35,5 @@ not have any variables/weights that can be frozen during training.)
 @export
 @family regularization layers
 @seealso
++ <https:/keras.io/api/layers/regularization_layers/dropout#dropout-class>
 + <https://www.tensorflow.org/api_docs/python/tf/keras/layers/Dropout>

@@ -50,4 +50,5 @@ Cosine similarity tensor.
 @export
 @family loss
 @seealso
++ <https:/keras.io/api/losses/regression_losses#cosinesimilarity-class>
 + <https://www.tensorflow.org/api_docs/python/tf/keras/losses/CosineSimilarity>

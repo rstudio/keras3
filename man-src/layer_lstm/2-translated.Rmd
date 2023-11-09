@@ -116,4 +116,5 @@ final_carry_state.shape
 @export
 @family recurrent layers
 @seealso
++ <https:/keras.io/api/layers/recurrent_layers/lstm#lstm-class>
 + <https://www.tensorflow.org/api_docs/python/tf/keras/layers/LSTM>

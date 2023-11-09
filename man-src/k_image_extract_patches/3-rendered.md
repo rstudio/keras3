@@ -40,4 +40,5 @@ Extracted patches 3D (if not batched) or 4D (if batched)
 @export
 @family ops
 @seealso
++ <https:/keras.io/keras_core/api/ops/image#extractpatches-function>
 + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/image/extract_patches>

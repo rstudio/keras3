@@ -20,5 +20,5 @@ A tensor of the specified `dtype`.
 @export
 @family ops
 @seealso
-+ https:/keras.io/keras_core/api/ops/core#converttotensor-function
-+ https://www.tensorflow.org/api_docs/python/tf/keras/ops/convert_to_tensor
++ <https:/keras.io/keras_core/api/ops/core#converttotensor-function>
++ <https://www.tensorflow.org/api_docs/python/tf/keras/ops/convert_to_tensor>

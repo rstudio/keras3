@@ -63,4 +63,5 @@ the smaller the updates.
 @export
 @family optimizer
 @seealso
++ <https:/keras.io/api/optimizers/adagrad#adagrad-class>
 + <https://www.tensorflow.org/api_docs/python/tf/keras/optimizers/Adagrad>

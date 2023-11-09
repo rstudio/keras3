@@ -14,4 +14,5 @@ Return the product of tensor elements over a given axis.
 @export
 @family ops
 @seealso
++ <https:/keras.io/keras_core/api/ops/numpy#prod-function>
 + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/prod>

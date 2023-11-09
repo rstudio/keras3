@@ -22,4 +22,5 @@ in the input. Defaults to `-1`.
 @export
 @family normalization layers
 @seealso
++ <https:/keras.io/api/layers/normalization_layers/unit_normalization#unitnormalization-class>
 + <https://www.tensorflow.org/api_docs/python/tf/keras/layers/UnitNormalization>

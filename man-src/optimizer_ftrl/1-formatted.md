@@ -106,4 +106,5 @@ is replaced with a gradient with shrinkage.
 @export
 @family optimizer
 @seealso
++ <https:/keras.io/api/optimizers/ftrl#ftrl-class>
 + <https://www.tensorflow.org/api_docs/python/tf/keras/optimizers/Ftrl>

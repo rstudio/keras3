@@ -57,4 +57,5 @@ activation_relu(x, threshold = 5)
 @export
 @family activation functions
 @seealso
++ <https:/keras.io/api/layers/activations#relu-function>
 + <https://www.tensorflow.org/api_docs/python/tf/keras/activations/relu>

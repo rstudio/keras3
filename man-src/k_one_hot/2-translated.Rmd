@@ -33,4 +33,5 @@ is determined by `dtype` or the default data type of the backend.
 @export
 @family ops
 @seealso
++ <https:/keras.io/keras_core/api/ops/nn#onehot-function>
 + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/one_hot>

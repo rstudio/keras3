@@ -33,4 +33,5 @@ Same as input.
 @export
 @family regularization layers
 @seealso
++ <https:/keras.io/api/layers/regularization_layers/spatial_dropout1d#spatialdropout1d-class>
 + <https://www.tensorflow.org/api_docs/python/tf/keras/layers/SpatialDropout1D>

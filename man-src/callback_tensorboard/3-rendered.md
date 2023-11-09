@@ -150,4 +150,5 @@ model |> fit(x_train, y_train, epochs = 2,
 @export
 @family callback
 @seealso
++ <https:/keras.io/api/callbacks/tensorboard#tensorboard-class>
 + <https://www.tensorflow.org/api_docs/python/tf/keras/callbacks/TensorBoard>

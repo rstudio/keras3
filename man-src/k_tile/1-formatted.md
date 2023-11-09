@@ -18,4 +18,5 @@ If `x.ndim > d`, `repeats` is promoted to `x.ndim` by prepending 1's to it.
 @export
 @family ops
 @seealso
++ <https:/keras.io/keras_core/api/ops/numpy#tile-function>
 + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/tile>

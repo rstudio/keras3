@@ -15,4 +15,5 @@ f(x) = x for x >= 0
 @export
 @family activations layers
 @seealso
++ <https:/keras.io/api/layers/activation_layers/elu#elu-class>
 + <https://www.tensorflow.org/api_docs/python/tf/keras/layers/ELU>

@@ -21,4 +21,5 @@ Otherwise the serialized JSON will be sent within a form.
 @export
 @family callback
 @seealso
++ <https:/keras.io/api/callbacks/remote_monitor#remotemonitor-class>
 + <https://www.tensorflow.org/api_docs/python/tf/keras/callbacks/RemoteMonitor>

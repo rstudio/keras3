@@ -62,4 +62,5 @@ output = random_bright(image, training=True)
 @export
 @family preprocessing layers
 @seealso
++ <https:/keras.io/api/layers/preprocessing_layers/image_augmentation/random_brightness#randombrightness-class>
 + <https://www.tensorflow.org/api_docs/python/tf/keras/layers/RandomBrightness>

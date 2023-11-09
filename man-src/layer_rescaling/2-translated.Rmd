@@ -27,4 +27,5 @@ floats.
 @export
 @family preprocessing layers
 @seealso
++ <https:/keras.io/api/layers/preprocessing_layers/image_preprocessing/rescaling#rescaling-class>
 + <https://www.tensorflow.org/api_docs/python/tf/keras/layers/Rescaling>

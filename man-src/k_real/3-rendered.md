@@ -8,4 +8,5 @@ Return the real part of the complex argument.
 @export
 @family ops
 @seealso
++ <https:/keras.io/keras_core/api/ops/numpy#real-function>
 + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/real>

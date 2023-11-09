@@ -33,4 +33,5 @@ keras.config.set_floatx('float32')
 
 @export
 @seealso
++ <https:/keras.io/keras_core/api/utils/config_utils#setfloatx-function>
 + <https://www.tensorflow.org/api_docs/python/tf/keras/config/set_floatx>

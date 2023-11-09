@@ -8,4 +8,5 @@ Return the base 10 logarithm of the input tensor, element-wise.
 @export
 @family ops
 @seealso
++ <https:/keras.io/keras_core/api/ops/numpy#log10-function>
 + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/log10>

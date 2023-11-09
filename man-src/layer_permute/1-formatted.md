@@ -28,4 +28,5 @@ of the input.
 @export
 @family reshaping layers
 @seealso
++ <https:/keras.io/api/layers/reshaping_layers/permute#permute-class>
 + <https://www.tensorflow.org/api_docs/python/tf/keras/layers/Permute>

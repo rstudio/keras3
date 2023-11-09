@@ -57,4 +57,5 @@ Attention outputs of shape `(batch_size, Tq, dim)`.
 @export
 @family attention layers
 @seealso
++ <https:/keras.io/api/layers/attention_layers/attention#attention-class>
 + <https://www.tensorflow.org/api_docs/python/tf/keras/layers/Attention>

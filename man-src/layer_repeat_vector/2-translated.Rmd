@@ -23,4 +23,5 @@ y.shape
 @export
 @family reshaping layers
 @seealso
++ <https:/keras.io/api/layers/reshaping_layers/repeat_vector#repeatvector-class>
 + <https://www.tensorflow.org/api_docs/python/tf/keras/layers/RepeatVector>

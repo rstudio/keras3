@@ -34,4 +34,5 @@ samples dimension (batch size).
 @export
 @family reshaping layers
 @seealso
++ <https:/keras.io/api/layers/reshaping_layers/reshape#reshape-class>
 + <https://www.tensorflow.org/api_docs/python/tf/keras/layers/Reshape>

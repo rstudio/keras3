@@ -11,4 +11,5 @@ is applied along.
 @export
 @family activation functions
 @seealso
++ <https:/keras.io/keras_core/api/layers/activations#logsoftmax-function>
 + <https://www.tensorflow.org/api_docs/python/tf/keras/activations/log_softmax>

@@ -38,4 +38,5 @@ Poisson loss values with shape = `[batch_size, d0, .. dN-1]`.
 @export
 @family loss
 @seealso
++ <https:/keras.io/api/losses/probabilistic_losses#poisson-class>
 + <https://www.tensorflow.org/api_docs/python/tf/keras/losses/Poisson>

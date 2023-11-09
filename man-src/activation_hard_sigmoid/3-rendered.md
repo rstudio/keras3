@@ -18,4 +18,5 @@ of the sigmoid activation.
 @export
 @family activation functions
 @seealso
++ <https:/keras.io/keras_core/api/layers/activations#hardsigmoid-function>
 + <https://www.tensorflow.org/api_docs/python/tf/keras/activations/hard_sigmoid>

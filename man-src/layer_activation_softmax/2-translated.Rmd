@@ -31,4 +31,5 @@ f(x) = exp_x / sum(exp_x)
 @export
 @family activations layers
 @seealso
++ <https:/keras.io/api/layers/activation_layers/softmax#softmax-class>
 + <https://www.tensorflow.org/api_docs/python/tf/keras/layers/Softmax>

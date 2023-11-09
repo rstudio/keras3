@@ -50,4 +50,5 @@ y.shape
 @export
 @family pooling layers
 @seealso
++ <https:/keras.io/api/layers/pooling_layers/global_average_pooling1d#globalaveragepooling1d-class>
 + <https://www.tensorflow.org/api_docs/python/tf/keras/layers/GlobalAveragePooling1D>

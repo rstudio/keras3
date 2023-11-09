@@ -12,4 +12,5 @@ Zeros are treated as `False` and non-zeros are treated as `True`.
 @export
 @family ops
 @seealso
++ <https:/keras.io/keras_core/api/ops/numpy#logicalor-function>
 + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/logical_or>

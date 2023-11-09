@@ -72,4 +72,5 @@ w = w + momentum * velocity - learning_rate * g
 @export
 @family optimizer
 @seealso
++ <https:/keras.io/api/optimizers/sgd#sgd-class>
 + <https://www.tensorflow.org/api_docs/python/tf/keras/optimizers/SGD>

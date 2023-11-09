@@ -90,4 +90,5 @@ max_pool_2d(x)
 @export
 @family pooling layers
 @seealso
++ <https:/keras.io/api/layers/pooling_layers/max_pooling2d#maxpooling2d-class>
 + <https://www.tensorflow.org/api_docs/python/tf/keras/layers/MaxPooling2D>

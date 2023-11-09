@@ -83,4 +83,5 @@ A 4D tensor representing `activation(conv2d(inputs, kernel) + bias)`.
 @export
 @family convolutional layers
 @seealso
++ <https:/keras.io/api/layers/convolution_layers/convolution2d#conv2d-class>
 + <https://www.tensorflow.org/api_docs/python/tf/keras/layers/Conv2D>

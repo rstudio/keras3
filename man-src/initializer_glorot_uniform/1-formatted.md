@@ -33,4 +33,5 @@ of `keras.backend.SeedGenerator`.
 @export
 @family initializer
 @seealso
++ <https:/keras.io/api/layers/initializers#glorotuniform-class>
 + <https://www.tensorflow.org/api_docs/python/tf/keras/initializers/GlorotUniform>

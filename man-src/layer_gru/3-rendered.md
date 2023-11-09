@@ -123,4 +123,5 @@ final_state.shape
 @export
 @family recurrent layers
 @seealso
++ <https:/keras.io/api/layers/recurrent_layers/gru#gru-class>
 + <https://www.tensorflow.org/api_docs/python/tf/keras/layers/GRU>

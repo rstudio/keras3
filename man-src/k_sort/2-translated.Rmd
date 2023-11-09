@@ -10,4 +10,5 @@ Sorts the elements of `x` along a given axis in ascending order.
 @export
 @family ops
 @seealso
++ <https:/keras.io/keras_core/api/ops/numpy#sort-function>
 + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/sort>

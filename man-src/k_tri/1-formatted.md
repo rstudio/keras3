@@ -14,4 +14,5 @@ Tensor with its lower triangle filled with ones and zeros elsewhere.
 @export
 @family ops
 @seealso
++ <https:/keras.io/keras_core/api/ops/numpy#tri-function>
 + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/tri>

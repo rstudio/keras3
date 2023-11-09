@@ -18,4 +18,5 @@ when using this layer as the first layer in a model.
 @export
 @family regularization layers
 @seealso
++ <https:/keras.io/api/layers/regularization_layers/activity_regularization#activityregularization-class>
 + <https://www.tensorflow.org/api_docs/python/tf/keras/layers/ActivityRegularization>

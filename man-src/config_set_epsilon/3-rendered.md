@@ -32,4 +32,5 @@ config_set_epsilon(1e-7)
 
 @export
 @seealso
++ <https:/keras.io/keras_core/api/utils/config_utils#setepsilon-function>
 + <https://www.tensorflow.org/api_docs/python/tf/keras/config/set_epsilon>

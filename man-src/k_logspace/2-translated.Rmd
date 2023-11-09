@@ -26,4 +26,5 @@ Torch backend does not support `axis` argument.
 @export
 @family ops
 @seealso
++ <https:/keras.io/keras_core/api/ops/numpy#logspace-function>
 + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/logspace>

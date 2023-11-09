@@ -22,4 +22,5 @@ Also available via the shortcut function `keras.constraints.max_norm`.
 @export
 @family constraint
 @seealso
++ <https:/keras.io/api/layers/constraints#maxnorm-class>
 + <https://www.tensorflow.org/api_docs/python/tf/keras/constraints/MaxNorm>

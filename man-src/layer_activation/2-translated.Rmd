@@ -20,4 +20,5 @@ layer([-3.0, -1.0, 0.0, 2.0])
 @export
 @family activations layers
 @seealso
++ <https:/keras.io/api/layers/core_layers/activation#activation-class>
 + <https://www.tensorflow.org/api_docs/python/tf/keras/layers/Activation>

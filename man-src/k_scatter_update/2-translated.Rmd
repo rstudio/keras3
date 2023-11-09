@@ -46,4 +46,5 @@ inputs = keras.ops.scatter_update(inputs, indices, updates)
 @export
 @family ops
 @seealso
++ <https:/keras.io/keras_core/api/ops/core#scatterupdate-function>
 + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/scatter_update>

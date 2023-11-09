@@ -94,4 +94,5 @@ A 4D tensor representing
 @export
 @family convolutional layers
 @seealso
++ <https:/keras.io/api/layers/convolution_layers/depthwise_convolution2d#depthwiseconv2d-class>
 + <https://www.tensorflow.org/api_docs/python/tf/keras/layers/DepthwiseConv2D>

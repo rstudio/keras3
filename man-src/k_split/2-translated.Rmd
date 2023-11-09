@@ -22,4 +22,5 @@ If an integer, N, the tensor will be split into N
 @export
 @family ops
 @seealso
++ <https:/keras.io/keras_core/api/ops/numpy#split-function>
 + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/split>

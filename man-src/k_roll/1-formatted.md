@@ -15,4 +15,5 @@ Elements that roll beyond the last position are re-introduced at the first.
 @export
 @family ops
 @seealso
++ <https:/keras.io/keras_core/api/ops/numpy#roll-function>
 + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/roll>

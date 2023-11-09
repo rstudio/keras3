@@ -13,4 +13,5 @@ Return a 2-D tensor with ones on the diagonal and zeros elsewhere.
 @export
 @family ops
 @seealso
++ <https:/keras.io/keras_core/api/ops/numpy#eye-function>
 + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/eye>

@@ -12,4 +12,5 @@ count samples seen or steps (batches) seen.
 @export
 @family callback
 @seealso
++ <https:/keras.io/api/callbacks/progbar_logger#progbarlogger-class>
 + <https://www.tensorflow.org/api_docs/python/tf/keras/callbacks/ProgbarLogger>

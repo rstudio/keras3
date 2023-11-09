@@ -11,4 +11,5 @@ Gives a new shape to a tensor without changing its data.
 @export
 @family ops
 @seealso
++ <https:/keras.io/keras_core/api/ops/numpy#reshape-function>
 + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/reshape>

@@ -13,4 +13,5 @@ Insert a new axis at the `axis` position in the expanded tensor shape.
 @export
 @family ops
 @seealso
++ <https:/keras.io/keras_core/api/ops/numpy#expanddims-function>
 + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/expand_dims>

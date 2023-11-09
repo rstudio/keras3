@@ -12,4 +12,5 @@ Sum of a tensor over the given axes.
 @export
 @family ops
 @seealso
++ <https:/keras.io/keras_core/api/ops/numpy#sum-function>
 + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/sum>

@@ -66,4 +66,5 @@ keras.utils.pad_sequences(sequence, maxlen=2)
 @export
 @family utils
 @seealso
++ <https:/keras.io/keras_core/api/data_loading/timeseries#padsequences-function>
 + <https://www.tensorflow.org/api_docs/python/tf/keras/utils/pad_sequences>

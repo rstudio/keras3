@@ -27,4 +27,5 @@ result = leaky_relu_layer(input)
 @export
 @family activations layers
 @seealso
++ <https:/keras.io/api/layers/activation_layers/leaky_relu#leakyrelu-class>
 + <https://www.tensorflow.org/api_docs/python/tf/keras/layers/LeakyReLU>

@@ -83,4 +83,5 @@ A 3D tensor representing
 @export
 @family convolutional layers
 @seealso
++ <https:/keras.io/api/layers/convolution_layers/convolution1d_transpose#conv1dtranspose-class>
 + <https://www.tensorflow.org/api_docs/python/tf/keras/layers/Conv1DTranspose>

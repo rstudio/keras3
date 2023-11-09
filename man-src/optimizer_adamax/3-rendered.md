@@ -83,4 +83,5 @@ w = w - current_lr * m / (u + epsilon)
 @export
 @family optimizer
 @seealso
++ <https:/keras.io/api/optimizers/adamax#adamax-class>
 + <https://www.tensorflow.org/api_docs/python/tf/keras/optimizers/Adamax>

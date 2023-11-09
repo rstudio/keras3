@@ -28,4 +28,5 @@ config file at `~/.keras/keras.json` (if exists). Defaults to
 @export
 @family reshaping layers
 @seealso
++ <https:/keras.io/api/layers/reshaping_layers/flatten#flatten-class>
 + <https://www.tensorflow.org/api_docs/python/tf/keras/layers/Flatten>

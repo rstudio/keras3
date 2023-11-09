@@ -125,4 +125,5 @@ loss should match the AUC `from_logits` constructor argument.
 @export
 @family metric
 @seealso
++ <https:/keras.io/api/metrics/classification_metrics#auc-class>
 + <https://www.tensorflow.org/api_docs/python/tf/keras/metrics/AUC>

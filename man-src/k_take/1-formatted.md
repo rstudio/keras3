@@ -11,4 +11,5 @@ Take elements from a tensor along an axis.
 @export
 @family ops
 @seealso
++ <https:/keras.io/keras_core/api/ops/numpy#take-function>
 + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/take>

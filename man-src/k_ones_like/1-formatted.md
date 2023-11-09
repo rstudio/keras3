@@ -9,4 +9,5 @@ Return a tensor of ones with the same shape and type of `x`.
 @export
 @family ops
 @seealso
++ <https:/keras.io/keras_core/api/ops/numpy#oneslike-function>
 + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/ones_like>

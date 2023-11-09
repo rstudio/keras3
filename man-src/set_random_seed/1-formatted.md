@@ -28,4 +28,5 @@ might leverage NumPy APIs.
 @export
 @family utils
 @seealso
++ <https:/keras.io/api/utils/python_utils#setrandomseed-function>
 + <https://www.tensorflow.org/api_docs/python/tf/keras/utils/set_random_seed>

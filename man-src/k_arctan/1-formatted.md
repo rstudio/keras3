@@ -18,4 +18,5 @@ Tensor of the inverse tangent of each element in `x`, in the interval
 @export
 @family ops
 @seealso
++ <https:/keras.io/keras_core/api/ops/numpy#arctan-function>
 + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/arctan>

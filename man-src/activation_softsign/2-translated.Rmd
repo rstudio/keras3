@@ -8,4 +8,5 @@ Softsign is defined as: `softsign(x) = x / (abs(x) + 1)`.
 @export
 @family activation functions
 @seealso
++ <https:/keras.io/api/layers/activations#softsign-function>
 + <https://www.tensorflow.org/api_docs/python/tf/keras/activations/softsign>

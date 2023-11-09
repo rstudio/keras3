@@ -28,4 +28,5 @@ A tensor of sequences with shape `[..., num_sequences, sequence_length].`
 @export
 @family ops
 @seealso
++ <https:/keras.io/keras_core/api/ops/core#extractsequences-function>
 + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/extract_sequences>

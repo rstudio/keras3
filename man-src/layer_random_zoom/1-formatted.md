@@ -83,4 +83,5 @@ out_img = layer(input_img)
 @export
 @family preprocessing layers
 @seealso
++ <https:/keras.io/api/layers/preprocessing_layers/image_augmentation/random_zoom#randomzoom-class>
 + <https://www.tensorflow.org/api_docs/python/tf/keras/layers/RandomZoom>

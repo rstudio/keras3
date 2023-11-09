@@ -51,4 +51,5 @@ print(output_array.shape)
 @export
 @family core layers
 @seealso
++ <https:/keras.io/api/layers/core_layers/embedding#embedding-class>
 + <https://www.tensorflow.org/api_docs/python/tf/keras/layers/Embedding>

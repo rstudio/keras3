@@ -98,4 +98,5 @@ Normalization layer with group size set to 1.
 @export
 @family normalization layers
 @seealso
++ <https:/keras.io/api/layers/normalization_layers/layer_normalization#layernormalization-class>
 + <https://www.tensorflow.org/api_docs/python/tf/keras/layers/LayerNormalization>

@@ -44,4 +44,5 @@ y
 @export
 @family reshaping layers
 @seealso
++ <https:/keras.io/api/layers/reshaping_layers/zero_padding1d#zeropadding1d-class>
 + <https://www.tensorflow.org/api_docs/python/tf/keras/layers/ZeroPadding1D>

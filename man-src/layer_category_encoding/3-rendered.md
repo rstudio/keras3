@@ -83,4 +83,5 @@ layer([[0, 1], [0, 0], [1, 2], [3, 1]], count_weights=count_weights)
 @export
 @family preprocessing layers
 @seealso
++ <https:/keras.io/api/layers/preprocessing_layers/categorical/category_encoding#categoryencoding-class>
 + <https://www.tensorflow.org/api_docs/python/tf/keras/layers/CategoryEncoding>

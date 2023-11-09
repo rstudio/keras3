@@ -42,4 +42,5 @@ is denoted by a mask value of `True`.
 @export
 @family core layers
 @seealso
++ <https:/keras.io/api/layers/core_layers/masking#masking-class>
 + <https://www.tensorflow.org/api_docs/python/tf/keras/layers/Masking>

@@ -83,4 +83,5 @@ Sparse categorical crossentropy loss value.
 @export
 @family loss
 @seealso
++ <https:/keras.io/api/losses/probabilistic_losses#sparsecategoricalcrossentropy-class>
 + <https://www.tensorflow.org/api_docs/python/tf/keras/losses/SparseCategoricalCrossentropy>

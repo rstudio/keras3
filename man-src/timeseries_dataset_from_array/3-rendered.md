@@ -111,4 +111,5 @@ for batch in zip(input_dataset, target_dataset):
 @export
 @family utils
 @seealso
++ <https:/keras.io/api/data_loading/timeseries#timeseriesdatasetfromarray-function>
 + <https://www.tensorflow.org/api_docs/python/tf/keras/utils/timeseries_dataset_from_array>

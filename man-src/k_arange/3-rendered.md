@@ -74,4 +74,5 @@ rule may result in the last element of out being greater than stop.
 @export
 @family ops
 @seealso
++ <https:/keras.io/keras_core/api/ops/numpy#arange-function>
 + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/arange>

@@ -64,4 +64,5 @@ len(history.history['loss'])
 @export
 @family callback
 @seealso
++ <https:/keras.io/api/callbacks/backup_and_restore#backupandrestore-class>
 + <https://www.tensorflow.org/api_docs/python/tf/keras/callbacks/BackupAndRestore>

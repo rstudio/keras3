@@ -85,4 +85,5 @@ A 4D tensor representing
 @export
 @family convolutional layers
 @seealso
++ <https:/keras.io/api/layers/convolution_layers/convolution2d_transpose#conv2dtranspose-class>
 + <https://www.tensorflow.org/api_docs/python/tf/keras/layers/Conv2DTranspose>

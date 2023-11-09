@@ -105,4 +105,5 @@ Note that:
 @export
 @family normalization layers
 @seealso
++ <https:/keras.io/api/layers/normalization_layers/batch_normalization#batchnormalization-class>
 + <https://www.tensorflow.org/api_docs/python/tf/keras/layers/BatchNormalization>

@@ -26,4 +26,5 @@ keras.ops.scatter(indices, values, shape=(2, 2))
 @export
 @family ops
 @seealso
++ <https:/keras.io/keras_core/api/ops/core#scatter-function>
 + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/scatter>

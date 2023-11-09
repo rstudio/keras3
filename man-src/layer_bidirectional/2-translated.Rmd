@@ -75,4 +75,5 @@ model.compile(loss='categorical_crossentropy', optimizer='rmsprop')
 @export
 @family recurrent layers
 @seealso
++ <https:/keras.io/api/layers/recurrent_layers/bidirectional#bidirectional-class>
 + <https://www.tensorflow.org/api_docs/python/tf/keras/layers/Bidirectional>

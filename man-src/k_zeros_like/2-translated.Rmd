@@ -9,4 +9,5 @@ Return a tensor of zeros with the same shape and type as `x`.
 @export
 @family ops
 @seealso
++ <https:/keras.io/keras_core/api/ops/numpy#zeroslike-function>
 + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/zeros_like>

@@ -25,4 +25,5 @@ triangular matrix R.
 @export
 @family ops
 @seealso
++ <https:/keras.io/keras_core/api/ops/core#qr-function>
 + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/qr>

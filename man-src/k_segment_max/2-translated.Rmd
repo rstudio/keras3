@@ -27,4 +27,5 @@ represents the max of the corresponding segment in `data`.
 @export
 @family ops
 @seealso
++ <https:/keras.io/keras_core/api/ops/core#segmentmax-function>
 + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/segment_max>

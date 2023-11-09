@@ -42,4 +42,5 @@ axis is placed last.
 @export
 @family utils
 @seealso
++ <https:/keras.io/api/utils/python_utils#tocategorical-function>
 + <https://www.tensorflow.org/api_docs/python/tf/keras/utils/to_categorical>

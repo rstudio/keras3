@@ -60,4 +60,5 @@ outputs = layer(inputs)  # Shape: (batch_size, 10, 10, 10, 3)
 @export
 @family pooling layers
 @seealso
++ <https:/keras.io/api/layers/pooling_layers/average_pooling3d#averagepooling3d-class>
 + <https://www.tensorflow.org/api_docs/python/tf/keras/layers/AveragePooling3D>

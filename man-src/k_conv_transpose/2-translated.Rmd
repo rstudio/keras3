@@ -44,4 +44,5 @@ Also known as de-convolution. This ops supports 1D, 2D and 3D convolution.
 @export
 @family ops
 @seealso
++ <https:/keras.io/keras_core/api/ops/nn#convtranspose-function>
 + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/conv_transpose>

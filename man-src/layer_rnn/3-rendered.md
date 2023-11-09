@@ -166,4 +166,5 @@ y = layer(x)
 @export
 @family recurrent layers
 @seealso
++ <https:/keras.io/api/layers/recurrent_layers/rnn#rnn-class>
 + <https://www.tensorflow.org/api_docs/python/tf/keras/layers/RNN>

@@ -218,9 +218,11 @@ endpoints %<>% setdiff(c %(% {
 })
 
 
+
 exports <- endpoints |>
   purrr::set_names() |>
   lapply(mk_export)
+
 
 
 df <- exports |>
@@ -254,6 +256,8 @@ if(!all(dir_exists(df$man_src_dir))) {
         })
     })
 }
+
+
 
 df <- df |>
   arrange(endpoint_sans_name, module, r_name) |>
@@ -319,6 +323,7 @@ df |>
 
 
 man_src_pull_upstream_updates()
+
 
 devtools::load_all() # TODO: render should be w/ an installed package and in a fresh r session w/ only `library(keras)`
 man_src_render_translated()

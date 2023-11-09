@@ -49,4 +49,5 @@ loss = keras.losses.huber(y_true, y_pred)
 @export
 @family loss
 @seealso
++ <https:/keras.io/api/losses/regression_losses#huber-class>
 + <https://www.tensorflow.org/api_docs/python/tf/keras/losses/Huber>

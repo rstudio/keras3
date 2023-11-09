@@ -11,4 +11,5 @@ Repeat each element of a tensor after themselves.
 @export
 @family ops
 @seealso
++ <https:/keras.io/keras_core/api/ops/numpy#repeat-function>
 + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/repeat>

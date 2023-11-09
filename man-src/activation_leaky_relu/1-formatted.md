@@ -7,4 +7,5 @@ Leaky relu activation function.
 @export
 @family activation functions
 @seealso
++ <https:/keras.io/keras_core/api/layers/activations#leakyrelu-function>
 + <https://www.tensorflow.org/api_docs/python/tf/keras/activations/leaky_relu>

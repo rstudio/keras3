@@ -32,4 +32,5 @@ predictions = model.predict(input_arr)
 @export
 @family utils
 @seealso
++ <https:/keras.io/api/data_loading/image#loadimg-function>
 + <https://www.tensorflow.org/api_docs/python/tf/keras/utils/load_img>

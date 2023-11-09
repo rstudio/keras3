@@ -133,4 +133,5 @@ An `int32` tensor of shape `(batch_size, ...)`.
 @export
 @family preprocessing layers
 @seealso
++ <https:/keras.io/api/layers/preprocessing_layers/categorical/hashing#hashing-class>
 + <https://www.tensorflow.org/api_docs/python/tf/keras/layers/Hashing>

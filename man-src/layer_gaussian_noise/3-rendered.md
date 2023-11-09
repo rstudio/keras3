@@ -21,4 +21,5 @@ As it is a regularization layer, it is only active at training time.
 @export
 @family regularization layers
 @seealso
++ <https:/keras.io/api/layers/regularization_layers/gaussian_noise#gaussiannoise-class>
 + <https://www.tensorflow.org/api_docs/python/tf/keras/layers/GaussianNoise>

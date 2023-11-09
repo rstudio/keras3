@@ -9,4 +9,5 @@ Return a tensor of given shape and type filled with uninitialized data.
 @export
 @family ops
 @seealso
++ <https:/keras.io/keras_core/api/ops/numpy#empty-function>
 + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/empty>

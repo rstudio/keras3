@@ -24,4 +24,5 @@ layer = Dense(units=4, kernel_regularizer=regularizer)
 
 @export
 @seealso
++ <https:/keras.io/api/layers/regularizers#orthogonalregularizer-class>
 + <https://www.tensorflow.org/api_docs/python/tf/keras/regularizers/OrthogonalRegularizer>

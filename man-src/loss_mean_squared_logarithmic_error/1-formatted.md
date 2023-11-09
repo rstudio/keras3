@@ -38,4 +38,5 @@ dN-1]`.
 @export
 @family loss
 @seealso
++ <https:/keras.io/api/losses/regression_losses#meansquaredlogarithmicerror-class>
 + <https://www.tensorflow.org/api_docs/python/tf/keras/losses/MeanSquaredLogarithmicError>

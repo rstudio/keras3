@@ -49,4 +49,5 @@ the output would have shape `(batch_size, units)`.
 @export
 @family core layers
 @seealso
++ <https:/keras.io/api/layers/core_layers/dense#dense-class>
 + <https://www.tensorflow.org/api_docs/python/tf/keras/layers/Dense>

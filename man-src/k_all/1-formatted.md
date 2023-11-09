@@ -38,4 +38,5 @@ The tensor containing the logical AND reduction over the `axis`.
 @export
 @family ops
 @seealso
++ <https:/keras.io/keras_core/api/ops/numpy#all-function>
 + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/all>

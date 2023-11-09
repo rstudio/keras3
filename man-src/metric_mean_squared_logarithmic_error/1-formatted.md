@@ -58,4 +58,5 @@ dN-1]`.
 @export
 @family metric
 @seealso
++ <https:/keras.io/api/metrics/regression_metrics#meansquaredlogarithmicerror-class>
 + <https://www.tensorflow.org/api_docs/python/tf/keras/metrics/MeanSquaredLogarithmicError>

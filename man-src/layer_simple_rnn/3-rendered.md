@@ -86,4 +86,5 @@ whole_sequence_output, final_state = simple_rnn(inputs)
 @export
 @family recurrent layers
 @seealso
++ <https:/keras.io/api/layers/recurrent_layers/simple_rnn#simplernn-class>
 + <https://www.tensorflow.org/api_docs/python/tf/keras/layers/SimpleRNN>

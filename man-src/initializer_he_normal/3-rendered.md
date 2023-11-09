@@ -35,4 +35,5 @@ of `random_seed_generator()`.
 @export
 @family initializer
 @seealso
++ <https:/keras.io/api/layers/initializers#henormal-class>
 + <https://www.tensorflow.org/api_docs/python/tf/keras/initializers/HeNormal>

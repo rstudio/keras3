@@ -13,4 +13,5 @@ Saves an image stored as a NumPy array to a path or file object.
 @export
 @family utils
 @seealso
++ <https:/keras.io/api/data_loading/image#saveimg-function>
 + <https://www.tensorflow.org/api_docs/python/tf/keras/utils/save_img>

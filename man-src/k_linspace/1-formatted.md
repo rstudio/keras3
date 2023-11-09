@@ -31,4 +31,5 @@ If `retstep` is `True`, returns `(samples, step)`
 @export
 @family ops
 @seealso
++ <https:/keras.io/keras_core/api/ops/numpy#linspace-function>
 + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/linspace>

@@ -41,4 +41,5 @@ inversely), the input image is left-padded by 1 pixel.
 @export
 @family preprocessing layers
 @seealso
++ <https:/keras.io/api/layers/preprocessing_layers/image_preprocessing/center_crop#centercrop-class>
 + <https://www.tensorflow.org/api_docs/python/tf/keras/layers/CenterCrop>

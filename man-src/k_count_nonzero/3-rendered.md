@@ -41,4 +41,5 @@ An integer or a tensor of integers.
 @export
 @family ops
 @seealso
++ <https:/keras.io/keras_core/api/ops/numpy#countnonzero-function>
 + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/count_nonzero>

@@ -65,4 +65,5 @@ layer((feat1, feat2))
 @export
 @family preprocessing layers
 @seealso
++ <https:/keras.io/api/layers/preprocessing_layers/categorical/hashed_crossing#hashedcrossing-class>
 + <https://www.tensorflow.org/api_docs/python/tf/keras/layers/HashedCrossing>

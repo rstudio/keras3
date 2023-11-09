@@ -6,4 +6,5 @@ Return `x[key]`.
 @export
 @family ops
 @seealso
++ <https:/keras.io/keras_core/api/ops/numpy#getitem-function>
 + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/get_item>

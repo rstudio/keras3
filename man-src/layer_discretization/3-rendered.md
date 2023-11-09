@@ -81,4 +81,5 @@ layer(input)
 @export
 @family preprocessing layers
 @seealso
++ <https:/keras.io/api/layers/preprocessing_layers/numerical/discretization#discretization-class>
 + <https://www.tensorflow.org/api_docs/python/tf/keras/layers/Discretization>

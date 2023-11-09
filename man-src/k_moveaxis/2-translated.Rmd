@@ -14,4 +14,5 @@ Other axes remain in their original order.
 @export
 @family ops
 @seealso
++ <https:/keras.io/keras_core/api/ops/numpy#moveaxis-function>
 + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/moveaxis>

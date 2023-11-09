@@ -11,4 +11,5 @@ Calculates `1/x`.
 @export
 @family ops
 @seealso
++ <https:/keras.io/keras_core/api/ops/numpy#reciprocal-function>
 + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/reciprocal>

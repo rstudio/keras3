@@ -309,4 +309,5 @@ either directly or via `adapt()` before calling `get_vocabulary()`.
 @export
 @family preprocessing layers
 @seealso
++ <https:/keras.io/api/layers/preprocessing_layers/categorical/integer_lookup#integerlookup-class>
 + <https://www.tensorflow.org/api_docs/python/tf/keras/layers/IntegerLookup>

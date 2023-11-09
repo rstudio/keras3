@@ -10,4 +10,5 @@ Returns the cumulative sum of elements along a given axis.
 @export
 @family ops
 @seealso
++ <https:/keras.io/keras_core/api/ops/numpy#cumsum-function>
 + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/cumsum>

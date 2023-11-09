@@ -8,4 +8,5 @@ Return the imaginary part of the complex argument.
 @export
 @family ops
 @seealso
++ <https:/keras.io/keras_core/api/ops/numpy#imag-function>
 + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/imag>

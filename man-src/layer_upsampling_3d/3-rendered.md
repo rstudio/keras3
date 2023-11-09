@@ -48,4 +48,5 @@ y.shape
 @export
 @family reshaping layers
 @seealso
++ <https:/keras.io/api/layers/reshaping_layers/up_sampling3d#upsampling3d-class>
 + <https://www.tensorflow.org/api_docs/python/tf/keras/layers/UpSampling3D>

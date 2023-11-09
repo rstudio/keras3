@@ -9,4 +9,5 @@ it returns the input, unmodified.
 @export
 @family activation functions
 @seealso
++ <https:/keras.io/keras_core/api/layers/activations#linear-function>
 + <https://www.tensorflow.org/api_docs/python/tf/keras/activations/linear>

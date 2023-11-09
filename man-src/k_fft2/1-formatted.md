@@ -24,4 +24,5 @@ tensors in the tuple should be of floating type.
 @export
 @family ops
 @seealso
++ <https:/keras.io/keras_core/api/ops/fft#fft2-function>
 + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/fft2>

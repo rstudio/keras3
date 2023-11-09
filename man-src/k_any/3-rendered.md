@@ -83,4 +83,5 @@ The tensor containing the logical OR reduction over the `axis`.
 @export
 @family ops
 @seealso
++ <https:/keras.io/keras_core/api/ops/numpy#any-function>
 + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/any>

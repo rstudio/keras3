@@ -11,4 +11,5 @@ elements from `x2` where `condition` is `False`.
 @export
 @family ops
 @seealso
++ <https:/keras.io/keras_core/api/ops/numpy#where-function>
 + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/where>

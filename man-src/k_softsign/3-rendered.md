@@ -18,4 +18,5 @@ A tensor with the same shape as `x`.
 @export
 @family ops
 @seealso
++ <https:/keras.io/keras_core/api/ops/nn#softsign-function>
 + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/softsign>

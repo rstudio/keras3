@@ -15,4 +15,5 @@ to constrain the weights of each filter tensor of size
 @export
 @family constraint
 @seealso
++ <https:/keras.io/api/layers/constraints#unitnorm-class>
 + <https://www.tensorflow.org/api_docs/python/tf/keras/constraints/UnitNorm>

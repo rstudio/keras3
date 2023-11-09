@@ -57,4 +57,5 @@ Note that the callbacks expects positional arguments, as:
 @export
 @family callback
 @seealso
++ <https:/keras.io/api/callbacks/lambda_callback#lambdacallback-class>
 + <https://www.tensorflow.org/api_docs/python/tf/keras/callbacks/LambdaCallback>

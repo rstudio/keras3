@@ -16,4 +16,5 @@ In this case, the default value used is `l2=0.01`.
 
 @export
 @seealso
++ <https:/keras.io/api/layers/regularizers#l2-class>
 + <https://www.tensorflow.org/api_docs/python/tf/keras/regularizers/L2>

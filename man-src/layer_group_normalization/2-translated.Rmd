@@ -60,4 +60,5 @@ Same shape as input.
 @export
 @family normalization layers
 @seealso
++ <https:/keras.io/api/layers/normalization_layers/group_normalization#groupnormalization-class>
 + <https://www.tensorflow.org/api_docs/python/tf/keras/layers/GroupNormalization>

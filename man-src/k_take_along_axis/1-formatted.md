@@ -11,4 +11,5 @@ Select values from `x` at the 1-D `indices` along the given axis.
 @export
 @family ops
 @seealso
++ <https:/keras.io/keras_core/api/ops/numpy#takealongaxis-function>
 + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/take_along_axis>

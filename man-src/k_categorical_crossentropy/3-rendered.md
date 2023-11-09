@@ -45,4 +45,5 @@ Integer tensor: The computed categorical cross-entropy loss between
 @export
 @family ops
 @seealso
++ <https:/keras.io/keras_core/api/ops/nn#categoricalcrossentropy-function>
 + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/categorical_crossentropy>

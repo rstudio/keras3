@@ -16,4 +16,5 @@ assumed to be zero. The sigmoid function always returns a value between
 @export
 @family activation functions
 @seealso
++ <https:/keras.io/api/layers/activations#sigmoid-function>
 + <https://www.tensorflow.org/api_docs/python/tf/keras/activations/sigmoid>

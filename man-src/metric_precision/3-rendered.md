@@ -91,4 +91,5 @@ model.compile(optimizer='adam',
 @export
 @family metric
 @seealso
++ <https:/keras.io/api/metrics/classification_metrics#precision-class>
 + <https://www.tensorflow.org/api_docs/python/tf/keras/metrics/Precision>

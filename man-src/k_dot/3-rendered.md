@@ -23,4 +23,5 @@ Torch backend does not accept 0-D tensors as arguments.
 @export
 @family ops
 @seealso
++ <https:/keras.io/keras_core/api/ops/numpy#dot-function>
 + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/dot>

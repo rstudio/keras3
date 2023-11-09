@@ -30,4 +30,5 @@ inputs = keras.ops.slice_update(inputs, start_indices, updates)
 @export
 @family ops
 @seealso
++ <https:/keras.io/keras_core/api/ops/core#sliceupdate-function>
 + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/slice_update>

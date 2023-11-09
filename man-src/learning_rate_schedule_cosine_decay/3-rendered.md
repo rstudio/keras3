@@ -95,4 +95,5 @@ same type as `initial_learning_rate`.
 @export
 @family learning_rate_schedule
 @seealso
++ <https:/keras.io/api/optimizers/learning_rate_schedules/cosine_decay#cosinedecay-class>
 + <https://www.tensorflow.org/api_docs/python/tf/keras/optimizers/schedules/CosineDecay>

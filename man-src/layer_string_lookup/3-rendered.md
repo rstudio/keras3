@@ -305,4 +305,5 @@ vocabulary either directly or via `adapt()` before calling
 @export
 @family preprocessing layers
 @seealso
++ <https:/keras.io/api/layers/preprocessing_layers/categorical/string_lookup#stringlookup-class>
 + <https://www.tensorflow.org/api_docs/python/tf/keras/layers/StringLookup>

@@ -38,4 +38,5 @@ model.compile(optimizer='sgd',
 @export
 @family metric
 @seealso
++ <https:/keras.io/api/metrics/regression_metrics#logcosherror-class>
 + <https://www.tensorflow.org/api_docs/python/tf/keras/metrics/LogCoshError>

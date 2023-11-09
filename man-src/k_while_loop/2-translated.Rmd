@@ -28,4 +28,5 @@ A list/tuple of tensors, has the same shape and dtype as `inputs`.
 @export
 @family ops
 @seealso
++ <https:/keras.io/keras_core/api/ops/core#whileloop-function>
 + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/while_loop>

@@ -24,4 +24,5 @@ a `pydot.Cluster` instance representing nested model if
 @export
 @family utils
 @seealso
++ <https:/keras.io/api/utils/model_plotting_utils#modeltodot-function>
 + <https://www.tensorflow.org/api_docs/python/tf/keras/utils/model_to_dot>

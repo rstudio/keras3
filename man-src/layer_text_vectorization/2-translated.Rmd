@@ -198,4 +198,5 @@ vectorize_layer.get_vocabulary()
 @export
 @family preprocessing layers
 @seealso
++ <https:/keras.io/api/layers/preprocessing_layers/text/text_vectorization#textvectorization-class>
 + <https://www.tensorflow.org/api_docs/python/tf/keras/layers/TextVectorization>

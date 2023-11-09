@@ -8,4 +8,5 @@ Returns a tensor with the signs of the elements of `x`.
 @export
 @family ops
 @seealso
++ <https:/keras.io/keras_core/api/ops/numpy#sign-function>
 + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/sign>

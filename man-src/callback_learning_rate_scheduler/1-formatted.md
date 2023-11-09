@@ -38,4 +38,5 @@ round(model.optimizer.learning_rate, 5)
 @export
 @family callback
 @seealso
++ <https:/keras.io/api/callbacks/learning_rate_scheduler#learningratescheduler-class>
 + <https://www.tensorflow.org/api_docs/python/tf/keras/callbacks/LearningRateScheduler>

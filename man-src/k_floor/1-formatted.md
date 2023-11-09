@@ -11,4 +11,5 @@ The floor of the scalar `x` is the largest integer `i`, such that `i <= x`.
 @export
 @family ops
 @seealso
++ <https:/keras.io/keras_core/api/ops/numpy#floor-function>
 + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/floor>

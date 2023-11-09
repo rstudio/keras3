@@ -33,4 +33,5 @@ loss = keras.losses.mean_squared_error(y_true, y_pred)
 @export
 @family loss
 @seealso
++ <https:/keras.io/api/losses/regression_losses#meansquarederror-class>
 + <https://www.tensorflow.org/api_docs/python/tf/keras/losses/MeanSquaredError>

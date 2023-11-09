@@ -5,4 +5,5 @@ Exponential activation function.
 @export
 @family activation functions
 @seealso
++ <https:/keras.io/api/layers/activations#exponential-function>
 + <https://www.tensorflow.org/api_docs/python/tf/keras/activations/exponential>

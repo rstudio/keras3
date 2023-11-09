@@ -23,4 +23,5 @@ where `alpha` is a learned array with the same shape as x.
 @export
 @family activations layers
 @seealso
++ <https:/keras.io/api/layers/activation_layers/prelu#prelu-class>
 + <https://www.tensorflow.org/api_docs/python/tf/keras/layers/PReLU>

@@ -9,4 +9,5 @@ Element-wise maximum of `x1` and `x2`.
 @export
 @family ops
 @seealso
++ <https:/keras.io/keras_core/api/ops/numpy#maximum-function>
 + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/maximum>

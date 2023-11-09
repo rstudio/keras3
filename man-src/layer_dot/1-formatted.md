@@ -45,4 +45,5 @@ y = keras.layers.Dot(axes=1)([x1, x2])
 @export
 @family merging layers
 @seealso
++ <https:/keras.io/api/layers/merging_layers/dot#dot-class>
 + <https://www.tensorflow.org/api_docs/python/tf/keras/layers/Dot>

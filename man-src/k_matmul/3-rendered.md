@@ -19,4 +19,5 @@ Matrix product of two tensors.
 @export
 @family ops
 @seealso
++ <https:/keras.io/keras_core/api/ops/numpy#matmul-function>
 + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/matmul>

@@ -10,4 +10,5 @@ It is defined as:
 @export
 @family activation functions
 @seealso
++ <https:/keras.io/api/layers/activations#tanh-function>
 + <https://www.tensorflow.org/api_docs/python/tf/keras/activations/tanh>

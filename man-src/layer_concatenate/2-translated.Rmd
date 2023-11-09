@@ -30,4 +30,5 @@ y = keras.layers.Concatenate()([x1, x2])
 @export
 @family merging layers
 @seealso
++ <https:/keras.io/api/layers/merging_layers/concatenate#concatenate-class>
 + <https://www.tensorflow.org/api_docs/python/tf/keras/layers/Concatenate>

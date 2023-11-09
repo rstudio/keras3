@@ -61,4 +61,5 @@ print(y)
 @export
 @family reshaping layers
 @seealso
++ <https:/keras.io/api/layers/reshaping_layers/up_sampling2d#upsampling2d-class>
 + <https://www.tensorflow.org/api_docs/python/tf/keras/layers/UpSampling2D>

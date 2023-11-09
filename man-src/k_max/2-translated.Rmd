@@ -13,4 +13,5 @@ Return the maximum of a tensor or maximum along an axis.
 @export
 @family ops
 @seealso
++ <https:/keras.io/keras_core/api/ops/numpy#max-function>
 + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/max>

@@ -46,4 +46,5 @@ Resized image or batch of images.
 @export
 @family ops
 @seealso
++ <https:/keras.io/keras_core/api/ops/image#resize-function>
 + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/image/resize>

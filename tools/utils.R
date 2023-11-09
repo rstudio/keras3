@@ -1670,7 +1670,12 @@ man_src_pull_upstream_updates <- function(directories = dir_ls("man-src/", type 
       }
       old_upstream <- str_flatten_lines(old_upstream)
       new_upstream <- format_man_src_0(endpoint)
-      if(new_upstream == old_upstream) return() # nothing to update
+      # if(new_upstream == old_upstream) return() # nothing to update
+
+      export <- mk_export(endpoint)
+      old_formatted <- read_file(dir/ "1-formatted.md")
+      new_formatted <- export$roxygen
+      if(new_formatted == old_formatted) return() # nothing to update
 
       if (file.exists(dir / "2-translated.Rmd"))
         git(
@@ -1683,7 +1688,6 @@ man_src_pull_upstream_updates <- function(directories = dir_ls("man-src/", type 
         )
 
       write_lines(new_upstream, dir/"0-upstream.md")
-      export <- mk_export(endpoint)
       write_lines(export$roxygen, dir/"1-formatted.md")
       write_lines(export$roxygen, dir/"2-translated.Rmd")
 
@@ -1715,7 +1719,7 @@ man_src_render_translated <- function(directories = dir_ls("man-src/", type = "d
       # Set knitr options to halt on errors
       knitr::opts_chunk$set(error = FALSE)
       knitr::knit("2-translated.Rmd", "3-rendered.md",
-                  quiet = TRUE, envir = new.env())
+                  quiet = TRUE, envir = new.env(parent = globalenv()))
       x <- read_lines("3-rendered.md")
       # TODO: these filters should be confined to chunk outputs only,
       # probably as a knitr hook

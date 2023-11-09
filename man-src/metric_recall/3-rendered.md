@@ -71,4 +71,5 @@ model.compile(optimizer='adam',
 @export
 @family metric
 @seealso
++ <https:/keras.io/api/metrics/classification_metrics#recall-class>
 + <https://www.tensorflow.org/api_docs/python/tf/keras/metrics/Recall>

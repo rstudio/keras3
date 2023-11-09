@@ -63,4 +63,5 @@ pposed to continuous, fashion.
 @export
 @family learning_rate_schedule
 @seealso
++ <https:/keras.io/api/optimizers/learning_rate_schedules/inverse_time_decay#inversetimedecay-class>
 + <https://www.tensorflow.org/api_docs/python/tf/keras/optimizers/schedules/InverseTimeDecay>

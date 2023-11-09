@@ -69,4 +69,5 @@ learning rate can be set, as in most other Keras optimizers.
 @export
 @family optimizer
 @seealso
++ <https:/keras.io/api/optimizers/adadelta#adadelta-class>
 + <https://www.tensorflow.org/api_docs/python/tf/keras/optimizers/Adadelta>

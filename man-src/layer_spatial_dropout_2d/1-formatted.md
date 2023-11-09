@@ -42,4 +42,5 @@ Same as input.
 @export
 @family regularization layers
 @seealso
++ <https:/keras.io/api/layers/regularization_layers/spatial_dropout2d#spatialdropout2d-class>
 + <https://www.tensorflow.org/api_docs/python/tf/keras/layers/SpatialDropout2D>

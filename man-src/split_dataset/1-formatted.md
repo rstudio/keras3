@@ -36,4 +36,5 @@ the left and right splits.
 @export
 @family utils
 @seealso
++ <https:/keras.io/api/utils/python_utils#splitdataset-function>
 + <https://www.tensorflow.org/api_docs/python/tf/keras/utils/split_dataset>
