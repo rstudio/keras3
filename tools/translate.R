@@ -116,7 +116,7 @@ if (use_codellama) {
 # TODO: bulleted list in image_dataset_from_directory in arg `label_mode` not formatting correctly
 #
 # if(FALSE) {
-# models <- openai$Model$list()
+models <- openai$Model$list()
 #
 # models[1:2] %>% str()
 #

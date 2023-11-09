@@ -100,6 +100,45 @@ if(!"source:tools/translate-tools.R" %in% search()) envir::attach_source("tools/
 #    - man-src/*/2-translated.Rmd
 
 
+
+get_translations <- function() {
+  dirs <- fs::dir_ls("man-src/", type = "directory") |>
+    set_names(basename) %>%
+    keep(\(dir) read_file(path(dir, "2-translated.Rmd")) |> str_detect("```python")) |>
+    (\(x) { message("remaining: ", length(x)); x})() |>
+    head(10) |>
+    purrr::walk(\(dir) {
+      # browser()
+      withr::local_dir(dir)
+      og <- "2-translated.Rmd" |> read_file()
+      message("Translating: ", basename(dir))
+      new <- og |> get_translated_roxygen()
+      # message("cost: ")
+      new |> write_lines("2-translated.Rmd")
+      # write_rds(new, "completion.rds")
+    })
+
+
+  x <- system("git diff --name-only", intern = TRUE) %>%
+    grep("2-translated.Rmd$", ., value = TRUE)
+
+  x %>%
+    double_quote() %>%
+    str_flatten(",\n  ") %>%
+    str_c("  ", .) %>%
+    c("file.edit(", ., ")") %>%
+    str_flatten_lines() %>%
+    message()
+  # message(sprintf("file.edit(%s)", shQuote(dirs))
+  # file.edit({str_flatten(x, ', ')})}")
+}
+
+if(FALSE) {
+
+  get_translations()
+
+}
+
 # start by regenerating patch files
 
 
@@ -429,29 +468,6 @@ apply_translation_patchfiles <- function(filepath = fs::dir_ls("man-src/", type 
 
 # "git apply --3way --allow-empty translate.patch"
 
-get_translations <- function() {
-  fs::dir_ls("man-src/", type = "directory") |>
-    set_names(basename) %>%
-    keep(\(dir) read_file(path(dir, "2-translated.Rmd")) |> str_detect("```python")) |>
-    (\(x) { message("remaining: ", length(x)); x})() |>
-    head(25) |>
-    purrr::walk(\(dir) {
-      # browser()
-      withr::local_dir(dir)
-      og <- "2-translated.Rmd" |> read_file()
-      message("Translating: ", basename(dir))
-      new <- og |> get_translated_roxygen()
-      # message("cost: ")
-      new |> write_lines("2-translated.Rmd")
-      # write_rds(new, "completion.rds")
-    })
-}
-
-if(FALSE) {
-
-  get_translations()
-
-}
 make_translation_patchfiles()
 
 

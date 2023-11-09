@@ -4,9 +4,8 @@ if(!"source:tools/utils.R" %in% search()) envir::attach_source("tools/utils.R")
 readRenviron("~/.Renviron")
 import("os")$environ$update(list(OPENAI_API_KEY = Sys.getenv("OPENAI_API_KEY")))
 tryCatch({
-
-openai <- import("openai")
-tiktoken <- import("tiktoken")
+  openai <- import("openai")
+  tiktoken <- import("tiktoken")
 }, error = function(e) {
   py_install(c("openai", "tiktoken"))
   stop()
@@ -17,6 +16,14 @@ count_tokens <- function(txt) {
   txt |> unlist(use.names = FALSE) |> str_flatten_lines() |>
     encoder$encode() |>
     length()
+}
+
+get_models <- function() {
+  x <- openai$models$list()
+  map_chr(x$data, "id") %>%
+      grep("gpt", ., value = T)
+  # %>%
+      # grep("4", ., value = T)
 }
 
 
@@ -55,8 +62,8 @@ get_translated_roxygen <- function(roxygen) {
 
 
   model <-
-    # if(n_tokens_messages + max_response_tokens <= 4097) "gpt-3.5-turbo" else "gpt-3.5-turbo-16k"
-    if(n_tokens_messages + max_response_tokens <= 8192) "gpt-4" else "gpt-4-32k"
+    if(n_tokens_messages + max_response_tokens <= 4097) "gpt-3.5-turbo" else "gpt-3.5-turbo-16k"
+    # if(n_tokens_messages + max_response_tokens <= 8192) "gpt-4" else "gpt-4-32k"
     # model="gpt-4",                #  8,192 context window
     # model="gpt-4-32k"             # 32,768 context window
     # model="gpt-3.5-turbo",        #  4,097 context window
@@ -68,7 +75,9 @@ get_translated_roxygen <- function(roxygen) {
 
   message("calling openai. first line: ", str_extract(roxygen, "^[^\n]*"))
   runtime <- system.time({
-    completion <- openai$ChatCompletion$create(
+    # client <- openai$OpenAI()
+    # completion <- openai$ChatCompletion$create(
+    completion <- openai$chat$completions$create(
       model = model,
       temperature = 0,
       max_tokens = max_response_tokens,

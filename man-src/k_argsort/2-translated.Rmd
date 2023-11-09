@@ -4,35 +4,26 @@ Returns the indices that would sort a tensor.
 
 # Examples
 One dimensional array:
-```python
-x = keras.ops.array([3, 1, 2])
-keras.ops.argsort(x)
-# array([1, 2, 0], dtype=int32)
+```{r}
+x <- k_array(c(3, 1, 2))
+k_argsort(x)
 ```
 
 Two-dimensional array:
-```python
-x = keras.ops.array([[0, 3], [3, 2], [4, 5]])
-x
-# array([[0, 3],
-#        [3, 2],
-#        [4, 5]], dtype=int32)
-keras.ops.argsort(x, axis=0)
-# array([[0, 1],
-#        [1, 0],
-#        [2, 2]], dtype=int32)
-keras.ops.argsort(x, axis=1)
-# array([[0, 1],
-#        [1, 0],
-#        [0, 1]], dtype=int32)
+```{r}
+x <- k_array(rbind(c(0, 3),
+                   c(3, 2),
+                   c(4, 5)), dtype = "int32")
+k_argsort(x, axis = 1)
+k_argsort(x, axis = 2)
 ```
 
 @returns
 Tensor of indices that sort `x` along the specified `axis`.
 
 @param x Input tensor.
-@param axis Axis along which to sort. Defaults to`-1` (the last axis). If
-    `None`, the flattened tensor is used.
+@param axis Axis along which to sort. Defaults to `-1` (the last axis). If
+    `NULL`, the flattened tensor is used.
 
 @export
 @family ops

@@ -3,14 +3,9 @@ Create a tensor.
 @description
 
 # Examples
-```python
-keras.ops.array([1, 2, 3])
-# array([1, 2, 3], dtype=int32)
-```
-
-```python
-keras.ops.array([1, 2, 3], dtype="float32")
-# array([1., 2., 3.], dtype=float32)
+```{r}
+k_array(c(1, 2, 3))
+k_array(c(1, 2, 3), dtype = "float32")
 ```
 
 @returns

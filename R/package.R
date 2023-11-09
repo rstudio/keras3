@@ -138,6 +138,12 @@ keras <- NULL
       if(!py_has_attr(keras, "ops"))
         reticulate::py_set_attr(keras, "ops",  keras$backend)
 
+      tryCatch(
+        import("tensorflow")$experimental$numpy$experimental_enable_numpy_behavior(),
+        error = function(e) {
+          message("failed setting experimental_enable_numpy_behavior")
+        })
+
     },
 
     on_error = function(e) {
