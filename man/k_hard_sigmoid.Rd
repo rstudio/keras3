@@ -30,7 +30,7 @@ plot(x, k_hard_sigmoid(x),
      type = 'l', panel.first = grid(), frame.plot = FALSE)
 }\if{html}{\out{</div>}}
 
-\figure{man/figures/k_hard_sigmoid/unnamed-chunk-1-1.png}
+\figure{k_hard_sigmoid-unnamed-chunk-1-1.png}
 }
 
 \seealso{

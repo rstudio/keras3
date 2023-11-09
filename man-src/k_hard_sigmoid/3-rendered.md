@@ -22,7 +22,7 @@ plot(x, k_hard_sigmoid(x),
      type = 'l', panel.first = grid(), frame.plot = FALSE)
 ```
 
-![plot of chunk unnamed-chunk-1](man/figures/k_hard_sigmoid/unnamed-chunk-1-1.png)
+![plot of chunk unnamed-chunk-1](k_hard_sigmoid-unnamed-chunk-1-1.svg)
 
 @returns
 A tensor with the same shape as `x`.

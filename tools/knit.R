@@ -9,27 +9,71 @@ knit_man_src <- function(input, ..., output_dir) {
   keras$utils$clear_session()
   # Set knitr options to halt on errors
   knitr::opts_chunk$set(error = FALSE)
-  true_figs_dir <- paste0("../../man/figures/", basename(dir))
-  fake_figs_dir <- paste0("man/figures/", basename(dir))
+  # if(FALSE) {
+#
+#   true_figs_dir <- paste0("../../man/figures/", basename(dir))
+#   fake_figs_dir <- paste0("man/figures/", basename(dir))
+#
+#   message('Sys.readlink("man/figures") ', Sys.readlink("man/figures"))
+#   # unlink(Sys.readlink("man/figures"), recursive = TRUE, force = TRUE)
+#   # unlink("man/figures", recursive = TRUE, force = TRUE)
+#   unlink("man", recursive = TRUE, force = TRUE)
+#   unlink(true_figs_dir, recursive = TRUE, force = TRUE)
+#   dir.create(true_figs_dir, recursive = TRUE)
+#   dir.create(dirname(fake_figs_dir), recursive = TRUE)
+#   file.symlink(paste0("../../", true_figs_dir),
+#                fake_figs_dir)
+#   }
+  if(FALSE) {
 
-  message('Sys.readlink("man/figures") ', Sys.readlink("man/figures"))
-  # unlink(Sys.readlink("man/figures"), recursive = TRUE, force = TRUE)
-  # unlink("man/figures", recursive = TRUE, force = TRUE)
-  unlink("man", recursive = TRUE, force = TRUE)
-  unlink(true_figs_dir, recursive = TRUE, force = TRUE)
-  dir.create(true_figs_dir, recursive = TRUE)
-  dir.create(dirname(fake_figs_dir), recursive = TRUE)
-  file.symlink(paste0("../../", true_figs_dir),
-               fake_figs_dir)
-  # system("ls -al man/figures")
+    true_figs_dir <- paste0("../../man/figures/")
+    fake_figs_dir <- paste0("man/figures/")
+
+    unlink(Sys.glob(paste0("../../man/figures/", basename(dir), "-*")))
+    # message('Sys.readlink("man/figures") ', Sys.readlink("man/figures"))
+    # unlink(Sys.readlink("man/figures"), recursive = TRUE, force = TRUE)
+    # unlink("man/figures", recursive = TRUE, force = TRUE)
+    unlink("man", recursive = TRUE, force = TRUE)
+    unlink("figure", recursive = TRUE, force = TRUE)
+    # unlink(true_figs_dir, recursive = TRUE, force = TRUE)
+    dir.create(true_figs_dir, recursive = TRUE, showWarnings = FALSE)
+    dir.create(dirname(fake_figs_dir), recursive = TRUE)
+    fs::link_create(
+      paste0("../", true_figs_dir),
+      fake_figs_dir
+    )
+    # file.symlink(paste0("../", true_figs_dir),
+    #              fake_figs_dir)
+  }
+  system("ls -alR")
   # normalizePath(fake_figs_dir)
 
+    true_figs_dir <- paste0("../../man/figures/")
+    fake_figs_dir <- paste0("figures/")
 
-  knitr::opts_chunk$set(fig.path=paste0("man/figures/", basename(dir), "/"))
+
+    unlink(Sys.glob(paste0("../../man/figures/", basename(dir), "-*")))
+    # message('Sys.readlink("man/figures") ', Sys.readlink("man/figures"))
+    # unlink(Sys.readlink("man/figures"), recursive = TRUE, force = TRUE)
+    # unlink("man/figures", recursive = TRUE, force = TRUE)
+    unlink("man", recursive = TRUE, force = TRUE)
+    unlink("figures", recursive = TRUE, force = TRUE)
+    # unlink(true_figs_dir, recursive = TRUE, force = TRUE)
+    # dir.create(true_figs_dir, recursive = TRUE, showWarnings = FALSE)
+    # dir.create(dirname(fake_figs_dir), recursive = TRUE)
+    fs::link_create( true_figs_dir, "figures" )
+    # file.symlink(paste0("../", true_figs_dir),
+    #              fake_figs_dir)
+  # }
+
+  knitr::opts_chunk$set(
+    fig.path = paste0("figures/", basename(dir), "-"),
+    fig.width = 3, fig.height = 3, dev = "svg"
+    )
   knitr::knit("2-translated.Rmd", "3-rendered.md",
               quiet = TRUE, envir = new.env(parent = globalenv()))
-  if(!length(list.files(true_figs_dir))) {
-    unlink(true_figs_dir)
+  if(!length(Sys.glob(paste0("figures/", basename(dir), "-*")))) {
+    # unlink(true_figs_dir)
     unlink(fake_figs_dir)
   }
   x <- readLines("3-rendered.md")
@@ -56,6 +100,9 @@ knit_man_src <- function(input, ..., output_dir) {
   x <- sub(" at 0x[0-9A-F]{9}>$", ">", x, perl = TRUE)
   x <- x[!grepl(r"{## .*rstudio:run:reticulate::py_last_error\(\).*}", x)]
   x <- x[!grepl(r"{## .*reticulate::py_last_error\(\).*}", x)]
+
+  x <- sub("](figures/", "](", x, fixed = TRUE)
+  # x <- sub("](man/figures/", "](", x, fixed = TRUE)
 
   writeLines(x, "3-rendered.md")
 
