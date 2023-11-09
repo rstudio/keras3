@@ -15,7 +15,7 @@ k_any(x)
 
 
 ```r
-(x <- k_reshape(c(FALSE, FALSE, FALSE, 
+(x <- k_reshape(c(FALSE, FALSE, FALSE,
                   TRUE, FALSE, FALSE), c(2, 3)))
 ```
 

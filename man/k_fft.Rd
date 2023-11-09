@@ -25,7 +25,7 @@ k_fft(x)
 
 \if{html}{\out{<div class="sourceCode">}}\preformatted{## [[1]]
 ## tf.Tensor([ 3. -1.], shape=(2), dtype=float64)
-## 
+##
 ## [[2]]
 ## tf.Tensor([ 1. -1.], shape=(2), dtype=float64)
 }\if{html}{\out{</div>}}

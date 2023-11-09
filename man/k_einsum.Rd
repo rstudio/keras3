@@ -22,79 +22,86 @@ The calculation based on the Einstein summation convention.
 Evaluates the Einstein summation convention on the operands.
 }
 \section{Examples}{
-\if{html}{\out{<div class="sourceCode python">}}\preformatted{from keras import ops
-a = ops.arange(25).reshape(5, 5)
-b = ops.arange(5)
-c = ops.arange(6).reshape(2, 3)
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{k_einsum <- keras:::k_einsum
+a <- k_arange(25) |> k_reshape(c(5, 5))
+b <- k_arange(5)
+c <- k_arange(6) |> k_reshape(c(2, 3))
 }\if{html}{\out{</div>}}
 
 Trace of a matrix:
 
-\if{html}{\out{<div class="sourceCode python">}}\preformatted{ops.einsum("ii", a)
-# 60
-ops.einsum(a, [0, 0])
-# 60
-ops.trace(a)
-# 60
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{k_einsum("ii", a)
+k_trace(a)
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor(60.0, shape=(), dtype=float64)
+## tf.Tensor(60.0, shape=(), dtype=float64)
 }\if{html}{\out{</div>}}
 
 Extract the diagonal:
 
-\if{html}{\out{<div class="sourceCode python">}}\preformatted{ops.einsum("ii -> i", a)
-# array([ 0,  6, 12, 18, 24])
-ops.einsum(a, [0, 0], [0])
-# array([ 0,  6, 12, 18, 24])
-ops.diag(a)
-# array([ 0,  6, 12, 18, 24])
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{k_einsum("ii -> i", a)
+k_diag(a)
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor([ 0.  6. 12. 18. 24.], shape=(5), dtype=float64)
+## tf.Tensor([ 0.  6. 12. 18. 24.], shape=(5), dtype=float64)
 }\if{html}{\out{</div>}}
 
 Sum over an axis:
 
-\if{html}{\out{<div class="sourceCode python">}}\preformatted{ops.einsum("ij -> i", a)
-# array([ 10,  35,  60,  85, 110])
-ops.einsum(a, [0, 1], [0])
-# array([ 10,  35,  60,  85, 110])
-ops.sum(a, axis=1)
-# array([ 10,  35,  60,  85, 110])
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{k_einsum("ij -> i", a)
+k_sum(a, axis = 2)
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor([ 10.  35.  60.  85. 110.], shape=(5), dtype=float64)
+## tf.Tensor([ 10.  35.  60.  85. 110.], shape=(5), dtype=float64)
 }\if{html}{\out{</div>}}
 
 For higher dimensional tensors summing a single axis can be done
 with ellipsis:
 
-\if{html}{\out{<div class="sourceCode python">}}\preformatted{ops.einsum("...j -> ...", a)
-# array([ 10,  35,  60,  85, 110])
-np.einsum(a, [..., 1], [...])
-# array([ 10,  35,  60,  85, 110])
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{k_einsum("...j -> ...", a)
+k_sum(a, axis = -1)
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor([ 10.  35.  60.  85. 110.], shape=(5), dtype=float64)
+## tf.Tensor([ 10.  35.  60.  85. 110.], shape=(5), dtype=float64)
 }\if{html}{\out{</div>}}
 
 Compute a matrix transpose or reorder any number of axes:
 
-\if{html}{\out{<div class="sourceCode python">}}\preformatted{ops.einsum("ji", c)
-# array([[0, 3],
-#        [1, 4],
-#        [2, 5]])
-ops.einsum("ij -> ji", c)
-# array([[0, 3],
-#        [1, 4],
-#        [2, 5]])
-ops.einsum(c, [1, 0])
-# array([[0, 3],
-#        [1, 4],
-#        [2, 5]])
-ops.transpose(c)
-# array([[0, 3],
-#        [1, 4],
-#        [2, 5]])
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{k_einsum("ji", c)
+k_einsum("ij -> ji", c)
+k_transpose(c)
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor(
+## [[0. 3.]
+##  [1. 4.]
+##  [2. 5.]], shape=(3, 2), dtype=float64)
+## tf.Tensor(
+## [[0. 3.]
+##  [1. 4.]
+##  [2. 5.]], shape=(3, 2), dtype=float64)
+## tf.Tensor(
+## [[0. 3.]
+##  [1. 4.]
+##  [2. 5.]], shape=(3, 2), dtype=float64)
 }\if{html}{\out{</div>}}
 
 Matrix vector multiplication:
 
-\if{html}{\out{<div class="sourceCode python">}}\preformatted{ops.einsum("ij, j", a, b)
-# array([ 30,  80, 130, 180, 230])
-ops.einsum(a, [0, 1], b, [1])
-# array([ 30,  80, 130, 180, 230])
-ops.einsum("...j, j", a, b)
-# array([ 30,  80, 130, 180, 230])
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{k_einsum("ij, j", a, b)
+k_einsum("...j, j", a, b)
+a \%*\% b
+k_matmul(a, b)
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor([ 30.  80. 130. 180. 230.], shape=(5), dtype=float64)
+## tf.Tensor([ 30.  80. 130. 180. 230.], shape=(5), dtype=float64)
+## tf.Tensor([ 30.  80. 130. 180. 230.], shape=(5), dtype=float64)
+## tf.Tensor([ 30.  80. 130. 180. 230.], shape=(5), dtype=float64)
 }\if{html}{\out{</div>}}
 }
 

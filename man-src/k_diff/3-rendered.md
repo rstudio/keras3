@@ -25,7 +25,7 @@ k_diff(x, n = 2)
 ```
 
 ```r
-x <- k_array(rbind(c(1, 3, 6, 10), 
+x <- k_array(rbind(c(1, 3, 6, 10),
                   c(0, 5, 6, 8)))
 k_diff(x)
 ```

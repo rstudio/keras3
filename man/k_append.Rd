@@ -46,7 +46,7 @@ k_append(x1, x2, axis = 1)
 try(k_append(x1, x3, axis = 1))
 }\if{html}{\out{</div>}}
 
-\if{html}{\out{<div class="sourceCode">}}\preformatted{## Error in py_call_impl(callable, call_args$unnamed, call_args$named) : 
+\if{html}{\out{<div class="sourceCode">}}\preformatted{## Error in py_call_impl(callable, call_args$unnamed, call_args$named) :
 ##   tensorflow.python.framework.errors_impl.InvalidArgumentError: \{\{function_node __wrapped__ConcatV2_N_2_device_/job:localhost/replica:0/task:0/device:CPU:0\}\} ConcatOp : Ranks of all input tensors should match: shape[0] = [2,3] vs. shape[1] = [3] [Op:ConcatV2] name: concat
 }\if{html}{\out{</div>}}
 }

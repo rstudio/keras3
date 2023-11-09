@@ -34,25 +34,25 @@ and \code{axis2} and appending an index to the right equal to the size of
 the resulting diagonals.
 }
 \section{Examples}{
-\if{html}{\out{<div class="sourceCode r">}}\preformatted{x <- k_arange(4) |> k_reshape(c(2, 2))
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{x <- k_arange(4L) |> k_reshape(c(2, 2))
 x
 }\if{html}{\out{</div>}}
 
 \if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor(
-## [[0. 1.]
-##  [2. 3.]], shape=(2, 2), dtype=float64)
+## [[0 1]
+##  [2 3]], shape=(2, 2), dtype=int32)
 }\if{html}{\out{</div>}}
 
 \if{html}{\out{<div class="sourceCode r">}}\preformatted{k_diagonal(x)
 }\if{html}{\out{</div>}}
 
-\if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor([0. 3.], shape=(2), dtype=float64)
+\if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor([0 3], shape=(2), dtype=int32)
 }\if{html}{\out{</div>}}
 
 \if{html}{\out{<div class="sourceCode r">}}\preformatted{k_diagonal(x, offset = 1)
 }\if{html}{\out{</div>}}
 
-\if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor([1.], shape=(1), dtype=float64)
+\if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor([1], shape=(1), dtype=int32)
 }\if{html}{\out{</div>}}
 
 \if{html}{\out{<div class="sourceCode r">}}\preformatted{x <- k_array(1:8) |> k_reshape(c(2, 2, 2))
@@ -62,12 +62,12 @@ x
 \if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor(
 ## [[[1 2]
 ##   [3 4]]
-## 
+##
 ##  [[5 6]
 ##   [7 8]]], shape=(2, 2, 2), dtype=int64)
 }\if{html}{\out{</div>}}
 
-\if{html}{\out{<div class="sourceCode r">}}\preformatted{x |> k_diagonal(0) 
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{x |> k_diagonal(0)
 }\if{html}{\out{</div>}}
 
 \if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor(

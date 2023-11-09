@@ -65,7 +65,7 @@ try(k_average(
 ```
 
 ```
-## Error in py_call_impl(callable, call_args$unnamed, call_args$named) : 
+## Error in py_call_impl(callable, call_args$unnamed, call_args$named) :
 ##   tensorflow.python.framework.errors_impl.InvalidArgumentError: Expected 'tf.Tensor(False, shape=(), dtype=bool)' to be true. Summarized data: 3, 2
 ## 2
 ```

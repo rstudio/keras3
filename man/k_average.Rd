@@ -80,7 +80,7 @@ try(k_average(
 ))
 }\if{html}{\out{</div>}}
 
-\if{html}{\out{<div class="sourceCode">}}\preformatted{## Error in py_call_impl(callable, call_args$unnamed, call_args$named) : 
+\if{html}{\out{<div class="sourceCode">}}\preformatted{## Error in py_call_impl(callable, call_args$unnamed, call_args$named) :
 ##   tensorflow.python.framework.errors_impl.InvalidArgumentError: Expected 'tf.Tensor(False, shape=(), dtype=bool)' to be true. Summarized data: 3, 2
 ## 2
 }\if{html}{\out{</div>}}

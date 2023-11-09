@@ -33,7 +33,7 @@ k_any(x)
 \if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor(True, shape=(), dtype=bool)
 }\if{html}{\out{</div>}}
 
-\if{html}{\out{<div class="sourceCode r">}}\preformatted{(x <- k_reshape(c(FALSE, FALSE, FALSE, 
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{(x <- k_reshape(c(FALSE, FALSE, FALSE,
                   TRUE, FALSE, FALSE), c(2, 3)))
 }\if{html}{\out{</div>}}
 

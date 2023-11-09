@@ -36,7 +36,7 @@ k_diff(x)
 \if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor([  1.   1. -10.], shape=(3), dtype=float64)
 }\if{html}{\out{</div>}}
 
-\if{html}{\out{<div class="sourceCode r">}}\preformatted{x <- k_array(rbind(c(1, 3, 6, 10), 
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{x <- k_array(rbind(c(1, 3, 6, 10),
                   c(0, 5, 6, 8)))
 k_diff(x)
 }\if{html}{\out{</div>}}

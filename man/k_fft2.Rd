@@ -29,7 +29,7 @@ k_fft2(x)
 ## tf.Tensor(
 ## [[ 6.  0.]
 ##  [ 0. -2.]], shape=(2, 2), dtype=float64)
-## 
+##
 ## [[2]]
 ## tf.Tensor(
 ## [[ 2.  0.]
