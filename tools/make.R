@@ -134,7 +134,12 @@ get_translations <- function() {
         str_replace_all(fixed("= np.array"), "<- k_array") %>%
         str_replace_all(fixed("np.array"), "k_array") %>%
         str_replace_all(fixed(").reshape("), "|> k_reshape(c(") %>%
-        str_replace_all(fixed("None"), "NULL")
+        str_replace_all(fixed("None"), "NULL") %>%
+        str_replace_all(fixed("k_convert_to_tensor(["), "k_convert_to_tensor(c(") %>%
+        str_replace_all(fixed("k_array(["), "k_array(c(") %>%
+        str_replace_all(fixed("])"), "))") %>%
+        identity()
+        # str_replace_all(fixed("k_convert_to_tensor(["), "k_array(c(") %>%
       new |> write_lines(dir/"2-translated.Rmd")
       file.edit(dir/"2-translated.Rmd")
       stop()
@@ -145,7 +150,6 @@ get_translations <- function() {
       new |> write_lines("2-translated.Rmd")
       # write_rds(new, "completion.rds")
     })
-
 
   x <- system("git diff --name-only", intern = TRUE) %>%
     grep("2-translated.Rmd$", ., value = TRUE)
