@@ -116,3 +116,6 @@ keras.ops.reshape:
 keras.ops.diagonal:
   axis1: as_axis
   axis2: as_axis
+
+keras.ops.digitize:
+  bins: as.array

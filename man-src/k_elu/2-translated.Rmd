@@ -6,11 +6,9 @@ It is defined as:
 `f(x) =  alpha * (exp(x) - 1.) for x < 0`, `f(x) = x for x >= 0`.
 
 # Examples
-```python
-x = np.array([-1., 0., 1.])
-x_elu = keras.ops.elu(x)
-print(x_elu)
-# array([-0.63212055, 0., 1.], shape=(3,), dtype=float64)
+```{r}
+x <- k_array(c(-1., 0., 1.))
+k_elu(x)
 ```
 
 @returns

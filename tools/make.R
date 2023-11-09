@@ -3,6 +3,8 @@
 if(!"source:tools/utils.R" %in% search()) envir::attach_source("tools/utils.R")
 if(!"source:tools/translate-tools.R" %in% search()) envir::attach_source("tools/translate-tools.R")
 
+# TODO: k_fft() should really accept and return complex tensors too.
+
 # TODO: the 2-translated.Rmd should include a chunk w/ the function def (for easy seeing while editing)
 #       with chunk options (include = FALSE)
 #
@@ -111,14 +113,25 @@ if(!"source:tools/translate-tools.R" %in% search()) envir::attach_source("tools/
 
 get_translations <- function() {
   dirs <- fs::dir_ls("man-src/", type = "directory") |>
+    sort() %>%
     set_names(basename) %>%
-    keep(\(dir) read_file(path(dir, "2-translated.Rmd")) |> str_detect("```python")) |>
+    keep(\(dir) read_file(path(dir, "2-translated.Rmd")) |>
+           str_detect("```python")) |>
     (\(x) { message("remaining: ", length(x)); x})() |>
     head(30) |>
     purrr::walk(\(dir) {
-      # browser()
+      og <-  read_file(dir/"2-translated.Rmd")
+      new <- og %>%
+        str_replace_all("```python", "```{r}") %>%
+        str_replace_all(fixed("keras.ops."), "k_") %>%
+        str_replace_all(fixed("ops."), "k_") %>%
+        str_replace_all(fixed("= np.array"), "<- k_array") %>%
+        str_replace_all(fixed("np.array"), "k_array") %>%
+        str_replace_all(fixed("None"), "NULL")
+      new |> write_lines(dir/"2-translated.Rmd")
+      file.edit(dir/"2-translated.Rmd")
+      stop()
       withr::local_dir(dir)
-      og <- "2-translated.Rmd" |> read_file()
       message("Translating: ", basename(dir))
       new <- og |> get_translated_roxygen()
       # message("cost: ")
@@ -141,11 +154,11 @@ get_translations <- function() {
   # file.edit({str_flatten(x, ', ')})}")
 }
 
-if(FALSE) {
+# if(FALSE) {
 
   get_translations()
 
-}
+# }
 
 # start by regenerating patch files
 
