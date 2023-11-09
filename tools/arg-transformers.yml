@@ -112,3 +112,7 @@ keras.utils.to_categorical:
 
 keras.ops.reshape:
   new_shape: normalize_shape
+
+keras.ops.diagonal:
+  axis1: as_axis
+  axis2: as_axis

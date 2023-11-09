@@ -3,29 +3,13 @@ Extract a diagonal or construct a diagonal array.
 @description
 
 # Examples
-```python
-from keras import ops
-x = ops.arange(9).reshape((3, 3))
+```{r}
+x <- k_arange(9) |> k_reshape(c(3, 3))
 x
-# array([[0, 1, 2],
-#        [3, 4, 5],
-#        [6, 7, 8]])
-```
-
-```python
-ops.diag(x)
-# array([0, 4, 8])
-ops.diag(x, k=1)
-# array([1, 5])
-ops.diag(x, k=-1)
-# array([3, 7])
-```
-
-```python
-ops.diag(ops.diag(x)))
-# array([[0, 0, 0],
-#        [0, 4, 0],
-#        [0, 0, 8]])
+k_diag(x)
+k_diag(x, k = 1)
+k_diag(x, k = -1)
+k_diag(k_diag(x))
 ```
 
 @returns

@@ -13,42 +13,18 @@ and `axis2` and appending an index to the right equal to the size of
 the resulting diagonals.
 
 # Examples
-```python
-from keras import ops
-x = ops.arange(4).reshape((2, 2))
+```{r}
+x <- k_arange(4) |> k_reshape(c(2, 2))
 x
-# array([[0, 1],
-#        [2, 3]])
-x.diagonal()
-# array([0, 3])
-x.diagonal(1)
-# array([1])
+k_diagonal(x)
+k_diagonal(x, offset = 1)
+
+x <- k_array(1:8) |> k_reshape(c(2, 2, 2))
+x
+k_diagonal(x, 0, 2)
 ```
 
-```python
-x = ops.arange(8).reshape((2, 2, 2))
-x
-# array([[[0, 1],
-#         [2, 3]],
-#        [[4, 5],
-#         [6, 7]]])
-x.diagonal(0, 0, 1)
-# array([[0, 6],
-#        [1, 7]])
-```
-
-@returns
-Tensor of diagonals.
-
-@param x Input tensor.
-@param offset Offset of the diagonal from the main diagonal.
-    Can be positive or negative. Defaults to `0`.(main diagonal).
-@param axis1 Axis to be used as the first axis of the 2-D sub-arrays.
-    Defaults to `0`.(first axis).
-@param axis2 Axis to be used as the second axis of the 2-D sub-arrays.
-    Defaults to `1` (second axis).
-
-@export
 @family ops
+@export
 @seealso
 + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/diagonal>
