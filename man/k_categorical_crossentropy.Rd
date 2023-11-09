@@ -17,9 +17,9 @@ tensor except for the last dimension.}
 
 \item{from_logits}{(optional) Whether \code{output} is a tensor of logits or
 probabilities.
-Set it to \code{True} if \code{output} represents logits; otherwise,
-set it to \code{False} if \code{output} represents probabilities.
-Defaults to\code{False}.}
+Set it to \code{TRUE} if \code{output} represents logits; otherwise,
+set it to \code{FALSE} if \code{output} represents probabilities.
+Defaults to \code{FALSE}.}
 
 \item{axis}{(optional) The axis along which the categorical cross-entropy
 is computed.
@@ -37,16 +37,16 @@ multiple classes. It measures the dissimilarity
 between the target and output probabilities or logits.
 }
 \section{Examples}{
-\if{html}{\out{<div class="sourceCode python">}}\preformatted{target = keras.ops.convert_to_tensor(
-[[1, 0, 0],
- [0, 1, 0],
- [0, 0, 1]])
-output = keras.ops.convert_to_tensor(
-[[0.9, 0.05, 0.05],
- [0.1, 0.8, 0.1],
- [0.2, 0.3, 0.5]])
-categorical_crossentropy(target, output)
-# array([0.10536054 0.22314355 0.6931472 ], shape=(3,), dtype=float32)
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{target <- k_array(rbind(c(1, 0, 0),
+                        c(0, 1, 0),
+                        c(0, 0, 1)))
+output <- k_array(rbind(c(0.9, 0.05, 0.05),
+                        c(0.1, 0.8, 0.1),
+                        c(0.2, 0.3, 0.5)))
+k_categorical_crossentropy(target, output)
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor([0.10536052 0.22314355 0.69314718], shape=(3), dtype=float64)
 }\if{html}{\out{</div>}}
 }
 

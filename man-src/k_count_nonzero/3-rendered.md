@@ -4,22 +4,39 @@ Counts the number of non-zero values in `x` along the given `axis`.
 If no axis is specified then all non-zeros in the tensor are counted.
 
 # Examples
-```python
-x = keras.ops.array([[0, 1, 7, 0], [3, 0, 2, 19]])
-keras.ops.count_nonzero(x)
-# 5
-keras.ops.count_nonzero(x, axis=0)
-# array([1, 1, 2, 1], dtype=int64)
-keras.ops.count_nonzero(x, axis=1)
-# array([2, 3], dtype=int64)
+
+```r
+x <- k_array(rbind(c(0, 1, 7, 0),
+                   c(3, 0, 2, 19)))
+k_count_nonzero(x)
+```
+
+```
+## tf.Tensor(5, shape=(), dtype=int64)
+```
+
+```r
+k_count_nonzero(x, axis = 1)
+```
+
+```
+## tf.Tensor([1 1 2 1], shape=(4), dtype=int64)
+```
+
+```r
+k_count_nonzero(x, axis = 2)
+```
+
+```
+## tf.Tensor([2 3], shape=(2), dtype=int64)
 ```
 
 @returns
-int or tensor of ints.
+An integer or a tensor of integers.
 
 @param x Input tensor.
-@param axis Axis or tuple of axes along which to count the number of
-    non-zeros. Defaults to `None`.
+@param axis Axis or a tuple of axes along which to count the number of
+    non-zeros. Defaults to `NULL`.
 
 @export
 @family ops

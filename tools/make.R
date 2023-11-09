@@ -3,6 +3,14 @@
 if(!"source:tools/utils.R" %in% search()) envir::attach_source("tools/utils.R")
 if(!"source:tools/translate-tools.R" %in% search()) envir::attach_source("tools/translate-tools.R")
 
+# TODO: the 2-translated.Rmd should include a chunk w/ the function def (for easy seeing while editing)
+#       with chunk options (include = FALSE)
+#
+# TODO: bring back callback_backup_and_restore()?
+
+# TODO: any formals that are transformed w/ as_axis should have the default arg also
+#       transformed. .e.g, k_diagonal(axis1 = 1, axis2 = 2)
+
 # TODO: train_on_batch and related methods should be autogen'd and exported. Or maybe we curate those,
 #       and don't export them? (I.e., have the few people that need them access methods via model$train_on_batch())
 

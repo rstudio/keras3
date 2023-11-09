@@ -64,15 +64,18 @@ install_keras <- function(...,
   # browser()
   system2("git", "pull")
   # system2("python", c("-m pip install -r requirements.txt")) # unpin tf-nightly for Python 3.12
-  system2("python", c("-m pip install -r requirements-common.txt"))
-  system2("python", c("-m pip install ipython")) # for interactive debugging
-  system2("python", c("-m pip install openai tiktoken")) # for roxygen generation
-  system2("python", c("-m pip install tf-nightly jax[cpu]")) # unpin tf-nightly for Python 3.12
-  system2("python", c("-m pip uninstall -y keras keras-nightly"))
-  system2("python", c("-m pip install torch torchvision")) # needed for pip_build.py?? (but why?)
 
-  system2("python", c("pip_build.py --install"))
-  system2("python", c("-m pip uninstall -y torch torchvision"))
+  system2("python", "-m pip install -r requirements-common.txt")
+  system2("python", "-m pip install ipython") # for interactive debugging
+  system2("python", "-m pip install openai tiktoken") # for roxygen generation
+  system2("python", "-m pip install git+https://github.com/keras-team/keras-cv.git")
+  system2("python", "-m pip install git+https://github.com/keras-team/keras-nlp.git")
+  system2("python", "-m pip install torch torchvision") # needed for pip_build.py?? (but why?)
+  system2("python", "-m pip install --ignore-installed tf-nightly jax[cpu]") # unpin tf-nightly for Python 3.12
+  # system2("python", "-m pip uninstall -y keras keras-core keras_core keras-nightly")
+
+  system2("python", "pip_build.py --install")
+  system2("python", "-m pip uninstall -y torch torchvision")
   message("Done!")
 
   return(invisible())

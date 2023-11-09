@@ -25,6 +25,31 @@ def keras_class_type(x):
     return "metric"
   return ""
 
+
+
+import inspect
+
+def py_get_class_from_method(meth):
+    if inspect.ismethod(meth):
+        for cls in inspect.getmro(meth.__self__.__class__):
+            if cls.__dict__.get(meth.__name__) is meth:
+                return cls
+        meth = meth.__func__  # fallback to __qualname__ parsing
+    if inspect.isfunction(meth):
+        cls = getattr(
+            inspect.getmodule(meth),
+            meth.__qualname__.split(".<locals>", 1)[0].rsplit(".", 1)[0],
+        )
+        if isinstance(cls, type):
+            return cls
+    return getattr(meth, "__objclass__", None)  # handle special descriptor objects
+
+
+def py_ismethod(function):
+    return py_get_class_from_method(function) is not None
+
+# import keras_cv
+# import keras_nlp
   # if issubclass(x, keras.):
   #   return "Activation"
   # if issubclass(x, keras.applications):

@@ -2,30 +2,40 @@
 % Please edit documentation in R/autogen-ops.R
 \name{k_convert_to_tensor}
 \alias{k_convert_to_tensor}
-\title{Convert a NumPy array to a tensor.}
+\title{Convert an array to a tensor.}
 \usage{
-k_convert_to_tensor(x, dtype = NULL)
+k_convert_to_tensor(x, dtype = NULL, sparse = NULL)
 }
 \arguments{
-\item{x}{A NumPy array.}
+\item{x}{An array.}
 
 \item{dtype}{The target type.}
+
+\item{sparse}{Whether to keep sparse tensors. \code{False} will cause sparse
+tensors to be densified. The default value of \code{None} means that
+sparse tensors are kept only if the backend supports them.}
 }
 \value{
 A tensor of the specified \code{dtype}.
 }
 \description{
-Convert a NumPy array to a tensor.
+Convert an array to a tensor.
 }
 \section{Examples}{
-\if{html}{\out{<div class="sourceCode python">}}\preformatted{x = np.array([1, 2, 3])
-y = keras.ops.convert_to_tensor(x)
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{x <- array(c(1, 2, 3))
+y <- k_convert_to_tensor(x)
+y
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor([1. 2. 3.], shape=(3), dtype=float64)
 }\if{html}{\out{</div>}}
 }
 
 \seealso{
 \itemize{
-\item \url{https://www.tensorflow.org/api_docs/python/tf/keras/ops/convert_to_tensor}
+\item \code{\link[=k_array]{k_array()}}
+\item https:/keras.io/keras_core/api/ops/core#converttotensor-function
+\item https://www.tensorflow.org/api_docs/python/tf/keras/ops/convert_to_tensor
 }
 
 Other ops: 

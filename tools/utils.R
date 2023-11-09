@@ -162,7 +162,9 @@ tf <- import("tensorflow")
 local({
   `__main__` <- reticulate::import_main()
   `__main__`$keras <- keras
+  `__main__`$keras_core <- keras
   `__main__`$tf <- tf
+  `__main__`$tensorflow <- tf
 })
 py_eval("tf.experimental.numpy.experimental_enable_numpy_behavior()")
 
@@ -170,7 +172,7 @@ source_python("tools/common.py") # keras_class_type()
 rm(r) # TODO: fix in reticulate, don't export r
 
 
-# ---- find ----
+# ---- collect endpoints ----
 
 
 list_endpoints <- function(
@@ -470,8 +472,6 @@ parse_params_section <- function(docstring_args_section, treat_as_dots = NULL) {
   out
 }
 
-# TODO: bring back callback_backup_and_restore()?
-
 fence_in_examples_w_prompt_prefix <- function(docstring) {
 
   # fence in code examples that are missing fences
@@ -575,7 +575,6 @@ backtick_not_links <- function(d) {
       names(.) <- gsub("NA.", "", names(.), fixed = TRUE)
       .
     } %>% {
-      # browser()
       i <- which(names(.) == "prose")
       names(.) <- NULL
       .[i] <- .backtick_not_links(.[i])
@@ -592,11 +591,11 @@ backtick_not_links <- function(d) {
   #     [0-9a-zA-Z,\[\]\ -><.]+  # Capture numbers, brackets, and specific symbols
   re <- regex(comments = TRUE, pattern = r"--(
       (                 # Open capture group for main pattern
-      [^\ \n]*      # anything not a space or newline
-      \[              # Match an opening square bracket
+      [^\ \n]*          # anything not a space or newline
+      \[                # Match an opening square bracket
           .+            # capture anything greedily
         \]              # Match a closing square bracket
-      [^\ \n\(]*       #  # anything not a space or bounary or open parens
+      [^\ \n\(]*        # anything not a space or bounary or open parens
       )                 # Close capture group
       (?!\()            # Lookahead to ensure no opening parenthesis follows
     )--")
@@ -627,8 +626,9 @@ make_roxygen_tags <- function(endpoint, py_obj, type) {
   if (isTRUE(family != ""))
     out$family <- family
 
-  link <- get_tf_doc_link(endpoint)
-  out$seealso <- sprintf("\n+ <%s>", link)
+  links <- c(get_keras_doc_link(endpoint),
+             get_tf_doc_link(endpoint))
+  out$seealso <- str_flatten_lines("", glue("+ <{links}>"))
 
   out
 }
@@ -637,6 +637,78 @@ make_roxygen_tags <- function(endpoint, py_obj, type) {
 get_tf_doc_link <- function(endpoint) {
   url_tail <- str_replace_all(endpoint, fixed('.'), '/')
   glue("https://www.tensorflow.org/api_docs/python/tf/{url_tail}")
+}
+
+# py_eval("isclass")
+
+make_map_of_endpoints_to_keras_io_urls <- function(master) {
+
+  # withr::with_dir("~/github/keras-team/keras-io", system("git pull"))
+  master <- import_from_path("master",
+      "~/github/keras-team/keras-io/scripts/")$MASTER
+
+  get_type <- function(object_) {
+    if (inspect$isclass(object_)) {
+      return("class")
+    } else if (py_ismethod(object_)) {
+      return("method")
+    } else if (inspect$isfunction(object_)) {
+      return("function")
+    } else if (py_has_attr(object_, "fget")) {
+      return("property")
+    } else {
+      stop(sprintf("%s is detected as not a class, a method, a property, nor a function.", object_))
+    }
+  }
+
+  recursive_make_map <- function(entry, current_url) {
+    current_url <- path(current_url, entry$path)
+    entry_map <- list()
+    if ("generate" %in% names(entry)) {
+      for (symbol in entry$generate) {
+        symbol <- sub("keras_core", "keras", symbol)
+        object_ <- try(py_eval(symbol), silent = TRUE)
+        if(inherits(object_, "try-error")) {
+          next
+        }
+        object_type <- get_type(object_)
+        object_name <- last(str_split_1(symbol, fixed(".")))
+
+        if (startsWith(symbol, "tensorflow.keras."))
+          symbol <- sub("tensorflow.keras.", "keras.", symbol, fixed = TRUE)
+
+        object_name <- tolower(gsub("_", "", object_name))
+        entry_map[[symbol]] <- paste0(current_url, "#", object_name, "-", object_type)
+      }
+    }
+
+    if ("children" %in% names(entry)) {
+      for (child in entry$children) {
+        child_map <- recursive_make_map(child, current_url)
+        entry_map <- c(entry_map, child_map)
+      }
+    }
+    return(entry_map)
+  }
+
+  out <- recursive_make_map(master, fs::path(""))
+  nms <- names(out)
+  out <- map_chr(out, identity)
+  # out <- sub("keras_core", "keras", out, fixed = TRUE)
+  out <- path("https://keras.io/", out)
+  out <- as.list(out)
+  names(out) <- nms
+  out
+}
+
+upstream_keras_io_urls_map <- make_map_of_endpoints_to_keras_io_urls(keras_io_site_map)
+
+
+# Assume the reticulate package has been used to interface with Python objects
+
+
+get_keras_doc_link <- function(endpoint) {
+  upstream_keras_io_urls_map[[endpoint]]
 }
 
 
@@ -944,11 +1016,6 @@ make_r_fn <- function(endpoint,
 
 }
 
-endpoint_to_expr <- function(endpoint) {
-  py_obj_expr <- endpoint |> str_split_1(fixed(".")) |>
-    glue::backtick() |> str_flatten("$") |> str2lang()
-  py_obj_expr
-}
 
 make_r_fn.default <- function(endpoint, py_obj, transformers) {
   # transformers <- get_arg_transformers(py_obj)
@@ -1647,15 +1714,14 @@ man_src_render_translated <- function(directories = dir_ls("man-src/", type = "d
       keras$utils$clear_session()
       # Set knitr options to halt on errors
       knitr::opts_chunk$set(error = FALSE)
-      knitr::knit("2-translated.Rmd",
-                  "3-rendered.md",
-                  quiet = TRUE,
-                  envir = new.env())
+      knitr::knit("2-translated.Rmd", "3-rendered.md",
+                  quiet = TRUE, envir = new.env())
       x <- read_lines("3-rendered.md")
       # TODO: these filters should be confined to chunk outputs only,
       # probably as a knitr hook
       x <- x |> str_replace_all(" at 0x[0-9A-F]{9}>$", ">")
       x <- x[!str_detect(x, r"{## .*rstudio:run:reticulate::py_last_error\(\).*}")]
+      x <- x[!str_detect(x, r"{## .*reticulate::py_last_error\(\).*}")]
       x |> write_lines("3-rendered.md")
     })
 
@@ -1665,6 +1731,11 @@ man_src_render_translated <- function(directories = dir_ls("man-src/", type = "d
 # ---- misc utils ----
 
 
+endpoint_to_expr <- function(endpoint) {
+  py_obj_expr <- endpoint |> str_split_1(fixed(".")) |>
+    glue::backtick() |> str_flatten("$") |> str2lang()
+  py_obj_expr
+}
 
 # rename2(list(a = "b", a = z))
 

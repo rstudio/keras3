@@ -1,20 +1,31 @@
-Convert a NumPy array to a tensor.
+Convert an array to a tensor.
 
 @description
 
 # Examples
-```python
-x = np.array([1, 2, 3])
-y = keras.ops.convert_to_tensor(x)
+
+```r
+x <- array(c(1, 2, 3))
+y <- k_convert_to_tensor(x)
+y
+```
+
+```
+## tf.Tensor([1. 2. 3.], shape=(3), dtype=float64)
 ```
 
 @returns
 A tensor of the specified `dtype`.
 
-@param x A NumPy array.
+@param x An array.
 @param dtype The target type.
+@param sparse Whether to keep sparse tensors. `False` will cause sparse
+    tensors to be densified. The default value of `None` means that
+    sparse tensors are kept only if the backend supports them.
 
 @export
 @family ops
 @seealso
-+ <https://www.tensorflow.org/api_docs/python/tf/keras/ops/convert_to_tensor>
++ [k_array()]
++ https:/keras.io/keras_core/api/ops/core#converttotensor-function
++ https://www.tensorflow.org/api_docs/python/tf/keras/ops/convert_to_tensor

@@ -29,8 +29,8 @@ keras$ops$convert_to_numpy(x)
 "man-src/k_convert_to_tensor/2-translated.Rmd" # |>file.edit() # or cmd+click to edit man page
 #' @eval readLines("man-src/k_convert_to_tensor/3-rendered.md")
 k_convert_to_tensor <-
-function (x, dtype = NULL)
-keras$ops$convert_to_tensor(x, dtype)
+function (x, dtype = NULL, sparse = NULL)
+keras$ops$convert_to_tensor(x, dtype, sparse)
 
 
 "man-src/k_fori_loop/1-formatted.md" # view the upstream doc
@@ -883,8 +883,8 @@ function (x, k = 0L)
 k_diagonal <-
 function (x, offset = 0L, axis1 = 0L, axis2 = 1L)
 {
-    args <- capture_args2(list(offset = as_integer, axis1 = as_integer,
-        axis2 = as_integer))
+    args <- capture_args2(list(offset = as_integer, axis1 = as_axis,
+        axis2 = as_axis))
     do.call(keras$ops$diagonal, args)
 }
 

@@ -12,7 +12,7 @@ k_diff(a, n = 1L, axis = -1L)
 \item{n}{The number of times values are differenced. Defaults to \code{1}.}
 
 \item{axis}{Axis to compute discrete difference(s) along.
-Defaults to \code{-1}.(last axis).}
+Defaults to \code{-1} (last axis).}
 }
 \value{
 Tensor of diagonals.
@@ -23,20 +23,33 @@ the given axis, higher differences are calculated by using \code{diff}
 recursively.
 }
 \section{Examples}{
-\if{html}{\out{<div class="sourceCode python">}}\preformatted{from keras import ops
-x = ops.convert_to_tensor([1, 2, 4, 7, 0])
-ops.diff(x)
-# array([ 1,  2,  3, -7])
-ops.diff(x, n=2)
-# array([  1,   1, -10])
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{x <- k_array(c(1, 2, 4, 7, 0))
+k_diff(x)
 }\if{html}{\out{</div>}}
 
-\if{html}{\out{<div class="sourceCode python">}}\preformatted{x = ops.convert_to_tensor([[1, 3, 6, 10], [0, 5, 6, 8]])
-ops.diff(x)
-# array([[2, 3, 4],
-#        [5, 1, 2]])
-ops.diff(x, axis=0)
-# array([[-1,  2,  0, -2]])
+\if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor([ 1.  2.  3. -7.], shape=(4), dtype=float64)
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{k_diff(x, n = 2)
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor([  1.   1. -10.], shape=(3), dtype=float64)
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{x <- k_array(rbind(c(1, 3, 6, 10), 
+                  c(0, 5, 6, 8)))
+k_diff(x)
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor(
+## [[2. 3. 4.]
+##  [5. 1. 2.]], shape=(2, 3), dtype=float64)
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{k_diff(x, axis = 1)
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor([[-1.  2.  0. -2.]], shape=(1, 4), dtype=float64)
 }\if{html}{\out{</div>}}
 }
 

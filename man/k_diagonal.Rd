@@ -13,10 +13,10 @@ k_diagonal(x, offset = 0L, axis1 = 0L, axis2 = 1L)
 Can be positive or negative. Defaults to \code{0}.(main diagonal).}
 
 \item{axis1}{Axis to be used as the first axis of the 2-D sub-arrays.
-Defaults to \code{0}.(first axis).}
+Defaults to \code{1}.(first axis).}
 
 \item{axis2}{Axis to be used as the second axis of the 2-D sub-arrays.
-Defaults to \code{1} (second axis).}
+Defaults to \code{2} (second axis).}
 }
 \value{
 Tensor of diagonals.
@@ -34,26 +34,61 @@ and \code{axis2} and appending an index to the right equal to the size of
 the resulting diagonals.
 }
 \section{Examples}{
-\if{html}{\out{<div class="sourceCode python">}}\preformatted{from keras import ops
-x = ops.arange(4).reshape((2, 2))
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{x <- k_arange(4) |> k_reshape(c(2, 2))
 x
-# array([[0, 1],
-#        [2, 3]])
-x.diagonal()
-# array([0, 3])
-x.diagonal(1)
-# array([1])
 }\if{html}{\out{</div>}}
 
-\if{html}{\out{<div class="sourceCode python">}}\preformatted{x = ops.arange(8).reshape((2, 2, 2))
+\if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor(
+## [[0 1]
+##  [2 3]], shape=(2, 2), dtype=int32)
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{k_diagonal(x)
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor([0 3], shape=(2), dtype=int32)
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{k_diagonal(x, offset = 1)
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor([1], shape=(1), dtype=int32)
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{x <- k_array(1:8) |> k_reshape(c(2, 2, 2))
 x
-# array([[[0, 1],
-#         [2, 3]],
-#        [[4, 5],
-#         [6, 7]]])
-x.diagonal(0, 0, 1)
-# array([[0, 6],
-#        [1, 7]])
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor(
+## [[[1 2]
+##   [3 4]]
+## 
+##  [[5 6]
+##   [7 8]]], shape=(2, 2, 2), dtype=int64)
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{x |> k_diagonal(0) 
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor(
+## [[1 7]
+##  [2 8]], shape=(2, 2), dtype=int64)
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{x |> k_diagonal(0, 1, 2) # same as above, the default
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor(
+## [[1 7]
+##  [2 8]], shape=(2, 2), dtype=int64)
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{x |> k_diagonal(0, 2, 3)
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor(
+## [[1 4]
+##  [5 8]], shape=(2, 2), dtype=int64)
 }\if{html}{\out{</div>}}
 }
 

@@ -3,29 +3,52 @@ Extract a diagonal or construct a diagonal array.
 @description
 
 # Examples
-```python
-from keras import ops
-x = ops.arange(9).reshape((3, 3))
+
+```r
+x <- k_arange(9) |> k_reshape(c(3, 3))
 x
-# array([[0, 1, 2],
-#        [3, 4, 5],
-#        [6, 7, 8]])
 ```
 
-```python
-ops.diag(x)
-# array([0, 4, 8])
-ops.diag(x, k=1)
-# array([1, 5])
-ops.diag(x, k=-1)
-# array([3, 7])
+```
+## tf.Tensor(
+## [[0 1 2]
+##  [3 4 5]
+##  [6 7 8]], shape=(3, 3), dtype=int32)
 ```
 
-```python
-ops.diag(ops.diag(x)))
-# array([[0, 0, 0],
-#        [0, 4, 0],
-#        [0, 0, 8]])
+```r
+k_diag(x)
+```
+
+```
+## tf.Tensor([0 4 8], shape=(3), dtype=int32)
+```
+
+```r
+k_diag(x, k = 1)
+```
+
+```
+## tf.Tensor([1 5], shape=(2), dtype=int32)
+```
+
+```r
+k_diag(x, k = -1)
+```
+
+```
+## tf.Tensor([3 7], shape=(2), dtype=int32)
+```
+
+```r
+k_diag(k_diag(x))
+```
+
+```
+## tf.Tensor(
+## [[0 0 0]
+##  [0 4 0]
+##  [0 0 8]], shape=(3, 3), dtype=int32)
 ```
 
 @returns
