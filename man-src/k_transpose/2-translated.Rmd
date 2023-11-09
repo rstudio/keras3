@@ -1,7 +1,7 @@
 Returns a tensor with `axes` transposed.
 
 @returns
-    `x` with its axes permuted.
+`x` with its axes permuted.
 
 @param x Input tensor.
 @param axes Sequence of integers. Permutation of the dimensions of `x`.

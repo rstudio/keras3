@@ -4,6 +4,8 @@ if(!"source:tools/utils.R" %in% search()) envir::attach_source("tools/utils.R")
 if(!"source:tools/translate-tools.R" %in% search()) envir::attach_source("tools/translate-tools.R")
 
 # TODO: k_fft() should really accept and return complex tensors too.
+#
+# TODO: k_reshape should take ...
 
 # TODO: the 2-translated.Rmd should include a chunk w/ the function def (for easy seeing while editing)
 #       with chunk options (include = FALSE)
@@ -80,6 +82,8 @@ if(!"source:tools/translate-tools.R" %in% search()) envir::attach_source("tools/
 #
 # TODO: note in docs for k_logical_and (and friends) that these are dispatched
 #       to from & != and so on.
+#
+# TODO: k_arange: should it default to produce floats?
 
 # TODO: keras.Function ?? keras.Variable ?? keras.name_scope ??
 #
@@ -104,6 +108,8 @@ if(!"source:tools/translate-tools.R" %in% search()) envir::attach_source("tools/
 # TODO: add @import reticulate ??
 #
 # TODO: remove any tensorflow imports / DESCRIPTION deps
+#
+# TODO: trimws @returns
 
 # The source of truth for the current translation should be...?
 #    - the autogened file R/autogen-*.R, or
@@ -127,6 +133,7 @@ get_translations <- function() {
         str_replace_all(fixed("ops."), "k_") %>%
         str_replace_all(fixed("= np.array"), "<- k_array") %>%
         str_replace_all(fixed("np.array"), "k_array") %>%
+        str_replace_all(fixed(").reshape("), "|> k_reshape(c(") %>%
         str_replace_all(fixed("None"), "NULL")
       new |> write_lines(dir/"2-translated.Rmd")
       file.edit(dir/"2-translated.Rmd")
@@ -154,11 +161,11 @@ get_translations <- function() {
   # file.edit({str_flatten(x, ', ')})}")
 }
 
-# if(FALSE) {
+if(FALSE) {
 
   get_translations()
 
-# }
+}
 
 # start by regenerating patch files
 

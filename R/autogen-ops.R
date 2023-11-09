@@ -905,7 +905,10 @@ function (a, n = 1L, axis = -1L)
 #' @eval readLines("man-src/k_digitize/3-rendered.md")
 k_digitize <-
 function (x, bins)
-keras$ops$digitize(x, bins)
+{
+    args <- capture_args2(list(bins = as.array))
+    do.call(keras$ops$digitize, args)
+}
 
 
 "man-src/k_divide/1-formatted.md" # view the upstream doc

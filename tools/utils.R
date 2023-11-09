@@ -1448,7 +1448,9 @@ dump_roxygen <- function(doc, params, tags) {
   # doc$description %<>% gsub(m, r, ., perl = TRUE)
 
   if(!is.null(returns <- doc$returns)) {
-    returns %<>% str_flatten_lines("@returns", .)
+    returns %<>% str_flatten_lines() %>%
+      glue::trim() %>%
+      str_flatten_lines("@returns", .)
     doc$returns <- NULL
   }
 
