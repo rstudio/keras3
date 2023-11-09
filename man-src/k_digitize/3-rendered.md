@@ -3,10 +3,18 @@ Returns the indices of the bins to which each value in `x` belongs.
 @description
 
 # Examples
-```python
-x = np.array([0.0, 1.0, 3.0, 1.6])
-bins = np.array([0.0, 3.0, 4.5, 7.0])
-keras.ops.digitize(x, bins)
+
+```r
+x <- k_array(c(0.0, 1.0, 3.0, 1.6))
+bins <- array(c(0.0, 3.0, 4.5, 7.0))
+k_digitize(x, bins)
+```
+
+```
+## tf.Tensor([1 1 2 1], shape=(4), dtype=int32)
+```
+
+```r
 # array([1, 1, 2, 1])
 ```
 

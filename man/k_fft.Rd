@@ -7,23 +7,27 @@
 k_fft(x)
 }
 \arguments{
-\item{x}{Tuple of the real and imaginary parts of the input tensor. Both
-tensors in the tuple should be of floating type.}
+\item{x}{list of the real and imaginary parts of the input tensor. Both
+tensors provided should be of floating type.}
 }
 \value{
-A tuple containing two tensors - the real and imaginary parts of the
+A list containing two tensors - the real and imaginary parts of the
 output tensor.
 }
 \description{
 Computes the Fast Fourier Transform along last axis of input.
 }
 \section{Examples}{
-\if{html}{\out{<div class="sourceCode python">}}\preformatted{x = (
-    keras.ops.convert_to_tensor([1., 2.]),
-    keras.ops.convert_to_tensor([0., 1.]),
-)
-fft(x)
-# (array([ 3., -1.], dtype=float32), array([ 1., -1.], dtype=float32))
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{x = c(k_array(c(1., 2.)),
+      k_array(c(0., 1.)))
+k_fft(x)
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode">}}\preformatted{## [[1]]
+## tf.Tensor([ 3. -1.], shape=(2), dtype=float64)
+## 
+## [[2]]
+## tf.Tensor([ 1. -1.], shape=(2), dtype=float64)
 }\if{html}{\out{</div>}}
 }
 

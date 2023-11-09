@@ -19,10 +19,15 @@ Output array of indices, of same shape as \code{x}.
 Returns the indices of the bins to which each value in \code{x} belongs.
 }
 \section{Examples}{
-\if{html}{\out{<div class="sourceCode python">}}\preformatted{x = np.array([0.0, 1.0, 3.0, 1.6])
-bins = np.array([0.0, 3.0, 4.5, 7.0])
-keras.ops.digitize(x, bins)
-# array([1, 1, 2, 1])
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{x <- k_array(c(0.0, 1.0, 3.0, 1.6))
+bins <- array(c(0.0, 3.0, 4.5, 7.0))
+k_digitize(x, bins)
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor([1 1 2 1], shape=(4), dtype=int32)
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{# array([1, 1, 2, 1])
 }\if{html}{\out{</div>}}
 }
 

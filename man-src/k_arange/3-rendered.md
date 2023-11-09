@@ -13,7 +13,7 @@ Return evenly spaced values within a given interval.
 # Examples
 
 ```r
-keras::k_arange(3L)
+k_arange(3L)
 ```
 
 ```
@@ -21,7 +21,15 @@ keras::k_arange(3L)
 ```
 
 ```r
-keras::k_arange(3) # float
+k_arange(3) # float
+```
+
+```
+## tf.Tensor([0. 1. 2.], shape=(3), dtype=float64)
+```
+
+```r
+k_arange(3, dtype = 'int32') #int
 ```
 
 ```
@@ -29,15 +37,7 @@ keras::k_arange(3) # float
 ```
 
 ```r
-keras::k_arange(3, dtype = 'int32') #int
-```
-
-```
-## tf.Tensor([0 1 2], shape=(3), dtype=int32)
-```
-
-```r
-keras::k_arange(3L, 7L)
+k_arange(3L, 7L)
 ```
 
 ```
@@ -45,7 +45,7 @@ keras::k_arange(3L, 7L)
 ```
 
 ```r
-keras::k_arange(3L, 7L, 2L)
+k_arange(3L, 7L, 2L)
 ```
 
 ```

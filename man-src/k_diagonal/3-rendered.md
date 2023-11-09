@@ -21,8 +21,8 @@ x
 
 ```
 ## tf.Tensor(
-## [[0 1]
-##  [2 3]], shape=(2, 2), dtype=int32)
+## [[0. 1.]
+##  [2. 3.]], shape=(2, 2), dtype=float64)
 ```
 
 ```r
@@ -30,7 +30,7 @@ k_diagonal(x)
 ```
 
 ```
-## tf.Tensor([0 3], shape=(2), dtype=int32)
+## tf.Tensor([0. 3.], shape=(2), dtype=float64)
 ```
 
 ```r
@@ -38,7 +38,7 @@ k_diagonal(x, offset = 1)
 ```
 
 ```
-## tf.Tensor([1], shape=(1), dtype=int32)
+## tf.Tensor([1.], shape=(1), dtype=float64)
 ```
 
 ```r

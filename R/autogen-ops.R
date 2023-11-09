@@ -618,8 +618,10 @@ function (x1, x2, axis = NULL)
 k_arange <-
 function (start, stop = NULL, step = 1L, dtype = NULL)
 {
-    args <- capture_args2(list(start = as_integer, stop = as_integer,
-        step = as_integer))
+    args <- capture_args2(list(start = function (x)
+    np_array(x, dtype), stop = function (x)
+    np_array(x, dtype), step = function (x)
+    np_array(x, dtype)))
     do.call(keras$ops$arange, args)
 }
 

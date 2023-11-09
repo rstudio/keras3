@@ -3,23 +3,33 @@ Computes the 2D Fast Fourier Transform along the last two axes of input.
 @description
 
 # Examples
-```python
-x = (
-    keras.ops.convert_to_tensor([[1., 2.], [2., 1.]]),
-    keras.ops.convert_to_tensor([[0., 1.], [1., 0.]]),
-)
-fft2(x)
-# (array([[ 6.,  0.],
-#     [ 0., -2.]], dtype=float32), array([[ 2.,  0.],
-#     [ 0., -2.]], dtype=float32))
+
+```r
+x <- c(k_array(rbind(c(1, 2),
+                     c(2, 1))),
+       k_array(rbind(c(0, 1),
+                     c(1, 0))))
+k_fft2(x)
+```
+
+```
+## [[1]]
+## tf.Tensor(
+## [[ 6.  0.]
+##  [ 0. -2.]], shape=(2, 2), dtype=float64)
+## 
+## [[2]]
+## tf.Tensor(
+## [[ 2.  0.]
+##  [ 0. -2.]], shape=(2, 2), dtype=float64)
 ```
 
 @returns
-A tuple containing two tensors - the real and imaginary parts of the
+A list containing two tensors - the real and imaginary parts of the
 output.
 
-@param x Tuple of the real and imaginary parts of the input tensor. Both
-tensors in the tuple should be of floating type.
+@param x list of the real and imaginary parts of the input tensor. Both
+tensors provided should be of floating type.
 
 @export
 @family ops

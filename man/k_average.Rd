@@ -58,9 +58,9 @@ data
 }\if{html}{\out{</div>}}
 
 \if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor(
-## [[0 1]
-##  [2 3]
-##  [4 5]], shape=(3, 2), dtype=int32)
+## [[0. 1.]
+##  [2. 3.]
+##  [4. 5.]], shape=(3, 2), dtype=float64)
 }\if{html}{\out{</div>}}
 
 \if{html}{\out{<div class="sourceCode r">}}\preformatted{k_average(

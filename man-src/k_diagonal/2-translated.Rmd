@@ -14,14 +14,14 @@ the resulting diagonals.
 
 # Examples
 ```{r}
-x <- k_arange(4) |> k_reshape(c(2, 2))
+x <- k_arange(4L) |> k_reshape(c(2, 2))
 x
 k_diagonal(x)
 k_diagonal(x, offset = 1)
 
 x <- k_array(1:8) |> k_reshape(c(2, 2, 2))
 x
-x |> k_diagonal(0) 
+x |> k_diagonal(0)
 x |> k_diagonal(0, 1, 2) # same as above, the default
 x |> k_diagonal(0, 2, 3)
 ```

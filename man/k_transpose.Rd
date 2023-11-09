@@ -13,8 +13,7 @@ k_transpose(x, axes = NULL)
 By default, the order of the axes are reversed.}
 }
 \value{
-\if{html}{\out{<div class="sourceCode">}}\preformatted{`x` with its axes permuted.
-}\if{html}{\out{</div>}}
+\code{x} with its axes permuted.
 }
 \description{
 Returns a tensor with \code{axes} transposed.

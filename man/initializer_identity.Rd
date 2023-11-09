@@ -13,14 +13,14 @@ initializer_identity(gain = 1)
 Only usable for generating 2D matrices.
 }
 \section{Examples}{
-\if{html}{\out{<div class="sourceCode r">}}\preformatted{# Standalone usage:
-initializer <- initializer_identity()
-values <- initializer(shape = c(2, 2))
+\if{html}{\out{<div class="sourceCode python">}}\preformatted{# Standalone usage:
+initializer = Identity()
+values = initializer(shape=(2, 2))
 }\if{html}{\out{</div>}}
 
-\if{html}{\out{<div class="sourceCode r">}}\preformatted{# Usage in a Keras layer:
-initializer <- initializer_identity()
-layer <- layer_dense(units = 3, kernel_initializer = initializer)
+\if{html}{\out{<div class="sourceCode python">}}\preformatted{# Usage in a Keras layer:
+initializer = Identity()
+layer = Dense(3, kernel_initializer=initializer)
 }\if{html}{\out{</div>}}
 }
 

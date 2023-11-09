@@ -5,7 +5,7 @@ Extract a diagonal or construct a diagonal array.
 # Examples
 
 ```r
-x <- k_arange(9) |> k_reshape(c(3, 3))
+x <- k_arange(9L) |> k_reshape(c(3, 3))
 x
 ```
 

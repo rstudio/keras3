@@ -21,7 +21,7 @@ The extracted diagonal or constructed diagonal tensor.
 Extract a diagonal or construct a diagonal array.
 }
 \section{Examples}{
-\if{html}{\out{<div class="sourceCode r">}}\preformatted{x <- k_arange(9) |> k_reshape(c(3, 3))
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{x <- k_arange(9L) |> k_reshape(c(3, 3))
 x
 }\if{html}{\out{</div>}}
 

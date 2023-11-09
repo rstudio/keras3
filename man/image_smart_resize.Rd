@@ -13,7 +13,7 @@ image_smart_resize(
 )
 }
 \arguments{
-\item{x}{Input image or batch of images (as a tensor or NumPy array).
+\item{x}{Input image or batch of images (as a tensor or array).
 Must be in format \verb{(height, width, channels)}
 or \verb{(batch_size, height, width, channels)}.}
 
@@ -31,7 +31,7 @@ backend).}
 }
 \value{
 Array with shape \verb{(size[1], size[2], channels)}.
-If the input image was a NumPy array, the output is a NumPy array,
+If the input image was an array, the output is an array,
 and if it was a backend-native tensor,
 the output is a backend-native tensor.
 }

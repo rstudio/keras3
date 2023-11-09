@@ -9,7 +9,7 @@ Cast a tensor to the desired dtype.
 ```
 
 ```
-## tf.Tensor([0 1 2 3], shape=(4), dtype=int32)
+## tf.Tensor([0. 1. 2. 3.], shape=(4), dtype=float64)
 ```
 
 ```r

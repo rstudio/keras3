@@ -24,12 +24,15 @@ The final state after the loop.
 For loop implementation.
 }
 \section{Examples}{
-\if{html}{\out{<div class="sourceCode python">}}\preformatted{lower = 0
-upper = 10
-body_fun = lambda i, s: (i + 1, s + i)
-init_val = 0
-keras.ops.fori_loop(lower, upper, body_fun, init_val)
-# 45
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{lower <- 0L
+upper <- 10L
+body_fun <- function(i, state) state + i
+init_state <- 0L
+final_state <- k_fori_loop(lower, upper, body_fun, init_state)
+final_state
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor(45, shape=(), dtype=int32)
 }\if{html}{\out{</div>}}
 }
 

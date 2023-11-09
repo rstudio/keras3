@@ -1626,7 +1626,7 @@ format_man_src_0 <- function(endpoint) {
 
 # unlink("man-src/k_absolute", recursive = T)
 
-git <- function(..., retries = 3, valid_exit_codes = 0L) {
+git <- function(..., retries = 4L, valid_exit_codes = 0L) {
   for(i in seq(retries)) {
     res <- suppressWarnings(system2t("git", c(...)))
     if(identical(res, 128L)) {

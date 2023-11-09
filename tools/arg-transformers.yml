@@ -121,6 +121,6 @@ keras.ops.digitize:
   bins: as.array
 
 keras.ops.arange:
-  start: ~
-  stop: ~
-  step: ~
+  start: np_array(x, dtype)
+  stop:  np_array(x, dtype)
+  step:  np_array(x, dtype)
