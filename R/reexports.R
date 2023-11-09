@@ -42,6 +42,10 @@ reticulate::use_condaenv
 #' @export
 reticulate::array_reshape
 
+#' @importFrom reticulate np_array
+#' @export
+reticulate::np_array
+
 #' @importFrom reticulate tuple
 #' @export
 reticulate::tuple

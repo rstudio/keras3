@@ -1675,9 +1675,10 @@ man_src_pull_upstream_updates <- function(directories = dir_ls("man-src/", type 
       # if(new_upstream == old_upstream) return() # nothing to update
 
       export <- mk_export(endpoint)
-      old_formatted <- read_file(dir/ "1-formatted.md")
+      old_formatted <- read_file(dir/ "1-formatted.md") |> str_trim()
       new_formatted <- export$roxygen
       if(new_formatted == old_formatted) return() # nothing to update
+      # write_lines(new_formatted); return()
 
       if (file.exists(dir / "2-translated.Rmd"))
         git(

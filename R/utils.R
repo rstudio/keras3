@@ -807,6 +807,39 @@ knit_vignette <- function(input, ..., output_dir) {
   writeLines(x, output_file)
 }
 
+# TODO: move these out of the package namespace, we don't want a knitr dep on cran
+knit_man_src <- function(input, ..., output_dir) {
+  library(keras)
+  dir <- dirname(input)
+  withr::local_dir(dir)
+  message("rendering: ", dir)
+  keras$utils$clear_session()
+  # Set knitr options to halt on errors
+  knitr::opts_chunk$set(error = FALSE)
+  knitr::knit("2-translated.Rmd", "3-rendered.md",
+              quiet = TRUE, envir = new.env(parent = globalenv()))
+  x <- readLines("3-rendered.md")
+  x <- trimws(x, "right")
+  # TODO: these filters should be confined to chunk outputs only,
+  # probably as a knitr hook
+  # strip object addresses; no noisy diff
+  if(x[1] == "---") {
+    stopifnot(x[3] == "---")
+    x <- x[-(1:3)]
+    while(x[1] == "") x <- x[-1]
+  }
+
+  x <- sub(" at 0x[0-9A-F]{9}>$", ">", x, perl = TRUE)
+  x <- x[!grepl(r"{## .*rstudio:run:reticulate::py_last_error\(\).*}", x)]
+  x <- x[!grepl(r"{## .*reticulate::py_last_error\(\).*}", x)]
+
+  writeLines(x, "3-rendered.md")
+
+  message("Done!    file.edit('", file.path(dir, "3-rendered.md"), "')")
+
+}
+
+
 
 # Generate a Random Array
 #

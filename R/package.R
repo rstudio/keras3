@@ -27,6 +27,7 @@
 #'   py_capture_output py_is_null_xptr
 #'   py_get_attr py_has_attr
 #'   py_to_r r_to_py
+#'   np_array
 #' @importFrom graphics par plot points
 #' @importFrom tensorflow tf_version tf_config install_tensorflow
 #' @aliases keras-package

@@ -1,9 +1,17 @@
+---
+knit: keras:::knit_man_src
+---
+
+```{r, include=FALSE}
+knitr::opts_chunk$set(results = 'hold')
+```
 Evaluates the Einstein summation convention on the operands.
 
 @description
 
 # Examples
 ```{r}
+k_einsum <- keras:::k_einsum
 a <- k_arange(25) |> k_reshape(c(5, 5))
 b <- k_arange(5)
 c <- k_arange(6) |> k_reshape(c(2, 3))
