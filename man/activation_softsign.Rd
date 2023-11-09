@@ -14,6 +14,7 @@ Softsign is defined as: \code{softsign(x) = x / (abs(x) + 1)}.
 }
 \seealso{
 \itemize{
+\item \url{https:/keras.io/api/layers/activations#softsign-function}
 \item \url{https://www.tensorflow.org/api_docs/python/tf/keras/activations/softsign}
 }
 

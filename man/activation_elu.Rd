@@ -35,6 +35,7 @@ and the information that is propagated to the next layer.
 
 \seealso{
 \itemize{
+\item \url{https:/keras.io/api/layers/activations#elu-function}
 \item \url{https://www.tensorflow.org/api_docs/python/tf/keras/activations/elu}
 }
 

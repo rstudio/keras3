@@ -34,8 +34,8 @@ y
 \seealso{
 \itemize{
 \item \code{\link[=k_array]{k_array()}}
-\item https:/keras.io/keras_core/api/ops/core#converttotensor-function
-\item https://www.tensorflow.org/api_docs/python/tf/keras/ops/convert_to_tensor
+\item \url{https:/keras.io/keras_core/api/ops/core#converttotensor-function}
+\item \url{https://www.tensorflow.org/api_docs/python/tf/keras/ops/convert_to_tensor}
 }
 
 Other ops: 

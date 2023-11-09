@@ -48,6 +48,7 @@ training mode (adding dropout) or in inference mode (doing nothing).
 
 \seealso{
 \itemize{
+\item \url{https:/keras.io/api/layers/regularization_layers/dropout#dropout-class}
 \item \url{https://www.tensorflow.org/api_docs/python/tf/keras/layers/Dropout}
 }
 

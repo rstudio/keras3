@@ -28,6 +28,7 @@ print(x_selu)
 
 \seealso{
 \itemize{
+\item \url{https:/keras.io/keras_core/api/ops/nn#selu-function}
 \item \url{https://www.tensorflow.org/api_docs/python/tf/keras/ops/selu}
 }
 

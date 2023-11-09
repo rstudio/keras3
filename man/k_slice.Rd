@@ -33,6 +33,7 @@ inputs = keras.ops.slice(inputs, start_indices, updates)
 }
 \seealso{
 \itemize{
+\item \url{https:/keras.io/keras_core/api/ops/core#slice-function}
 \item \url{https://www.tensorflow.org/api_docs/python/tf/keras/ops/slice}
 }
 

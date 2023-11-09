@@ -55,6 +55,7 @@ Convert a Keras model to dot format.
 }
 \seealso{
 \itemize{
+\item \url{https:/keras.io/api/utils/model_plotting_utils#modeltodot-function}
 \item \url{https://www.tensorflow.org/api_docs/python/tf/keras/utils/model_to_dot}
 }
 

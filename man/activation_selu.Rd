@@ -47,6 +47,7 @@ and the number of input units is "large enough"
 
 \seealso{
 \itemize{
+\item \url{https:/keras.io/api/layers/activations#selu-function}
 \item \url{https://www.tensorflow.org/api_docs/python/tf/keras/activations/selu}
 }
 

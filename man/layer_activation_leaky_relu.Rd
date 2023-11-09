@@ -34,6 +34,7 @@ result = leaky_relu_layer(input)
 
 \seealso{
 \itemize{
+\item \url{https:/keras.io/api/layers/activation_layers/leaky_relu#leakyrelu-class}
 \item \url{https://www.tensorflow.org/api_docs/python/tf/keras/layers/LeakyReLU}
 }
 

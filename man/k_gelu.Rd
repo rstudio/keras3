@@ -32,6 +32,7 @@ print(x_gelu)
 
 \seealso{
 \itemize{
+\item \url{https:/keras.io/keras_core/api/ops/nn#gelu-function}
 \item \url{https://www.tensorflow.org/api_docs/python/tf/keras/ops/gelu}
 }
 

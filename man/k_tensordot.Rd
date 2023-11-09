@@ -29,6 +29,7 @@ Compute the tensor dot product along specified axes.
 }
 \seealso{
 \itemize{
+\item \url{https:/keras.io/keras_core/api/ops/numpy#tensordot-function}
 \item \url{https://www.tensorflow.org/api_docs/python/tf/keras/ops/tensordot}
 }
 

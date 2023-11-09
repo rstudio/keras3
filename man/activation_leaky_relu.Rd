@@ -17,6 +17,7 @@ Leaky relu activation function.
 }
 \seealso{
 \itemize{
+\item \url{https:/keras.io/keras_core/api/layers/activations#leakyrelu-function}
 \item \url{https://www.tensorflow.org/api_docs/python/tf/keras/activations/leaky_relu}
 }
 

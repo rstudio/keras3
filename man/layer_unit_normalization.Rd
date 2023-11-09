@@ -30,6 +30,7 @@ print(np.sum(normalized_data[0, :] ** 2)
 
 \seealso{
 \itemize{
+\item \url{https:/keras.io/api/layers/normalization_layers/unit_normalization#unitnormalization-class}
 \item \url{https://www.tensorflow.org/api_docs/python/tf/keras/layers/UnitNormalization}
 }
 

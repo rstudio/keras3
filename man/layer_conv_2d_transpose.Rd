@@ -133,6 +133,7 @@ print(y.shape)
 
 \seealso{
 \itemize{
+\item \url{https:/keras.io/api/layers/convolution_layers/convolution2d_transpose#conv2dtranspose-class}
 \item \url{https://www.tensorflow.org/api_docs/python/tf/keras/layers/Conv2DTranspose}
 }
 

@@ -175,6 +175,7 @@ same type as \code{initial_learning_rate}.
 
 \seealso{
 \itemize{
+\item \url{https:/keras.io/api/optimizers/learning_rate_schedules/polynomial_decay#polynomialdecay-class}
 \item \url{https://www.tensorflow.org/api_docs/python/tf/keras/optimizers/schedules/PolynomialDecay}
 }
 

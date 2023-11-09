@@ -15,6 +15,7 @@ it returns the input, unmodified.
 }
 \seealso{
 \itemize{
+\item \url{https:/keras.io/keras_core/api/layers/activations#linear-function}
 \item \url{https://www.tensorflow.org/api_docs/python/tf/keras/activations/linear}
 }
 

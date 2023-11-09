@@ -59,6 +59,7 @@ print(new_layer$name)
 }
 \seealso{
 \itemize{
+\item \url{https:/keras.io/keras_core/api/utils/config_utils#clearsession-function}
 \item \url{https://www.tensorflow.org/api_docs/python/tf/keras/utils/clear_session}
 }
 

@@ -22,6 +22,7 @@ In this case, the default value used is \code{l2=0.01}.
 }
 \seealso{
 \itemize{
+\item \url{https:/keras.io/api/layers/regularizers#l2-class}
 \item \url{https://www.tensorflow.org/api_docs/python/tf/keras/regularizers/L2}
 }
 }

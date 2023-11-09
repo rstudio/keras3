@@ -24,6 +24,7 @@ Sum of a tensor over the given axes.
 }
 \seealso{
 \itemize{
+\item \url{https:/keras.io/keras_core/api/ops/numpy#sum-function}
 \item \url{https://www.tensorflow.org/api_docs/python/tf/keras/ops/sum}
 }
 

@@ -119,6 +119,7 @@ y_pred = [0.6, 0.3, 0.2, 0.8] # OR [[0.6, 0.3], [0.2, 0.8]]
 
 \seealso{
 \itemize{
+\item \url{https:/keras.io/api/losses/probabilistic_losses#binarycrossentropy-class}
 \item \url{https://www.tensorflow.org/api_docs/python/tf/keras/losses/BinaryCrossentropy}
 }
 

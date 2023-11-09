@@ -29,6 +29,7 @@ layer([-3.0, -1.0, 0.0, 2.0])
 
 \seealso{
 \itemize{
+\item \url{https:/keras.io/api/layers/core_layers/activation#activation-class}
 \item \url{https://www.tensorflow.org/api_docs/python/tf/keras/layers/Activation}
 }
 

@@ -61,6 +61,7 @@ loss = keras.losses.categorical_hinge(y_true, y_pred)
 
 \seealso{
 \itemize{
+\item \url{https:/keras.io/api/metrics/hinge_metrics#categoricalhinge-class}
 \item \url{https://www.tensorflow.org/api_docs/python/tf/keras/metrics/CategoricalHinge}
 }
 

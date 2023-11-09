@@ -23,6 +23,7 @@ Select values from \code{x} at the 1-D \code{indices} along the given axis.
 }
 \seealso{
 \itemize{
+\item \url{https:/keras.io/keras_core/api/ops/numpy#takealongaxis-function}
 \item \url{https://www.tensorflow.org/api_docs/python/tf/keras/ops/take_along_axis}
 }
 

@@ -68,6 +68,7 @@ in \code{"channels_first"} format.
 
 \seealso{
 \itemize{
+\item \url{https:/keras.io/api/layers/preprocessing_layers/image_preprocessing/resizing#resizing-class}
 \item \url{https://www.tensorflow.org/api_docs/python/tf/keras/layers/Resizing}
 }
 

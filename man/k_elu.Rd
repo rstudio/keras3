@@ -29,6 +29,7 @@ print(x_elu)
 
 \seealso{
 \itemize{
+\item \url{https:/keras.io/keras_core/api/ops/nn#elu-function}
 \item \url{https://www.tensorflow.org/api_docs/python/tf/keras/ops/elu}
 }
 

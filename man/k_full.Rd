@@ -22,6 +22,7 @@ Return a new tensor of given shape and type, filled with \code{fill_value}.
 }
 \seealso{
 \itemize{
+\item \url{https:/keras.io/keras_core/api/ops/numpy#full-function}
 \item \url{https://www.tensorflow.org/api_docs/python/tf/keras/ops/full}
 }
 

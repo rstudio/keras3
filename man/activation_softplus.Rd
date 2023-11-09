@@ -14,6 +14,7 @@ It is defined as: \code{softplus(x) = log(exp(x) + 1)}.
 }
 \seealso{
 \itemize{
+\item \url{https:/keras.io/api/layers/activations#softplus-function}
 \item \url{https://www.tensorflow.org/api_docs/python/tf/keras/activations/softplus}
 }
 

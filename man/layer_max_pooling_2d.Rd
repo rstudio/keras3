@@ -114,6 +114,7 @@ max_pool_2d(x)
 
 \seealso{
 \itemize{
+\item \url{https:/keras.io/api/layers/pooling_layers/max_pooling2d#maxpooling2d-class}
 \item \url{https://www.tensorflow.org/api_docs/python/tf/keras/layers/MaxPooling2D}
 }
 

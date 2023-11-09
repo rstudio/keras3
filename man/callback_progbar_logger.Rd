@@ -21,6 +21,7 @@ Callback that prints metrics to stdout.
 
 \seealso{
 \itemize{
+\item \url{https:/keras.io/api/callbacks/progbar_logger#progbarlogger-class}
 \item \url{https://www.tensorflow.org/api_docs/python/tf/keras/callbacks/ProgbarLogger}
 }
 

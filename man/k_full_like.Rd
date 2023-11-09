@@ -22,6 +22,7 @@ Return a full tensor with the same shape and type as the given tensor.
 }
 \seealso{
 \itemize{
+\item \url{https:/keras.io/keras_core/api/ops/numpy#fulllike-function}
 \item \url{https://www.tensorflow.org/api_docs/python/tf/keras/ops/full_like}
 }
 

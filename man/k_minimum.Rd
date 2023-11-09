@@ -20,6 +20,7 @@ Element-wise minimum of \code{x1} and \code{x2}.
 }
 \seealso{
 \itemize{
+\item \url{https:/keras.io/keras_core/api/ops/numpy#minimum-function}
 \item \url{https://www.tensorflow.org/api_docs/python/tf/keras/ops/minimum}
 }
 

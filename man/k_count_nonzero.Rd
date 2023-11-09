@@ -42,6 +42,7 @@ k_count_nonzero(x)
 
 \seealso{
 \itemize{
+\item \url{https:/keras.io/keras_core/api/ops/numpy#countnonzero-function}
 \item \url{https://www.tensorflow.org/api_docs/python/tf/keras/ops/count_nonzero}
 }
 

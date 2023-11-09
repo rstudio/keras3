@@ -18,6 +18,7 @@ Zeros are treated as \code{False} and non-zeros are treated as \code{True}.
 }
 \seealso{
 \itemize{
+\item \url{https:/keras.io/keras_core/api/ops/numpy#logicalnot-function}
 \item \url{https://www.tensorflow.org/api_docs/python/tf/keras/ops/logical_not}
 }
 

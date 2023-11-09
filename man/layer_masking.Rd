@@ -52,6 +52,7 @@ is denoted by a mask value of \code{True}.
 
 \seealso{
 \itemize{
+\item \url{https:/keras.io/api/layers/core_layers/masking#masking-class}
 \item \url{https://www.tensorflow.org/api_docs/python/tf/keras/layers/Masking}
 }
 

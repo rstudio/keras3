@@ -69,6 +69,7 @@ y.shape
 
 \seealso{
 \itemize{
+\item \url{https:/keras.io/api/layers/reshaping_layers/cropping3d#cropping3d-class}
 \item \url{https://www.tensorflow.org/api_docs/python/tf/keras/layers/Cropping3D}
 }
 

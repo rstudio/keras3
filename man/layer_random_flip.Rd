@@ -42,6 +42,7 @@ By default, the layer will output floats.
 
 \seealso{
 \itemize{
+\item \url{https:/keras.io/api/layers/preprocessing_layers/image_augmentation/random_flip#randomflip-class}
 \item \url{https://www.tensorflow.org/api_docs/python/tf/keras/layers/RandomFlip}
 }
 

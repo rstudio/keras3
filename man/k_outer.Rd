@@ -23,6 +23,7 @@ Given two vectors \code{x1} and \code{x2}, the outer product is:
 }
 \seealso{
 \itemize{
+\item \url{https:/keras.io/keras_core/api/ops/numpy#outer-function}
 \item \url{https://www.tensorflow.org/api_docs/python/tf/keras/ops/outer}
 }
 

@@ -37,6 +37,7 @@ model = keras.models.Model(inputs=[input1, input2], outputs=out)
 
 \seealso{
 \itemize{
+\item \url{https:/keras.io/api/layers/merging_layers/add#add-class}
 \item \url{https://www.tensorflow.org/api_docs/python/tf/keras/layers/Add}
 }
 

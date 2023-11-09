@@ -32,6 +32,7 @@ layer = Dense(units=4, kernel_regularizer=regularizer)
 
 \seealso{
 \itemize{
+\item \url{https:/keras.io/api/layers/regularizers#orthogonalregularizer-class}
 \item \url{https://www.tensorflow.org/api_docs/python/tf/keras/regularizers/OrthogonalRegularizer}
 }
 }

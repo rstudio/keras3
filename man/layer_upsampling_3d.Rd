@@ -61,6 +61,7 @@ y.shape
 
 \seealso{
 \itemize{
+\item \url{https:/keras.io/api/layers/reshaping_layers/up_sampling3d#upsampling3d-class}
 \item \url{https://www.tensorflow.org/api_docs/python/tf/keras/layers/UpSampling3D}
 }
 

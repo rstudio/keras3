@@ -52,6 +52,7 @@ int(right_ds.cardinality())
 
 \seealso{
 \itemize{
+\item \url{https:/keras.io/api/utils/python_utils#splitdataset-function}
 \item \url{https://www.tensorflow.org/api_docs/python/tf/keras/utils/split_dataset}
 }
 

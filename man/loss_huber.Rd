@@ -69,6 +69,7 @@ loss = keras.losses.huber(y_true, y_pred)
 
 \seealso{
 \itemize{
+\item \url{https:/keras.io/api/losses/regression_losses#huber-class}
 \item \url{https://www.tensorflow.org/api_docs/python/tf/keras/losses/Huber}
 }
 

@@ -51,6 +51,7 @@ loss = keras.losses.mean_absolute_percentage_error(y_true, y_pred)
 
 \seealso{
 \itemize{
+\item \url{https:/keras.io/api/losses/regression_losses#meanabsolutepercentageerror-class}
 \item \url{https://www.tensorflow.org/api_docs/python/tf/keras/losses/MeanAbsolutePercentageError}
 }
 

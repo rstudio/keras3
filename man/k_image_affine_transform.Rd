@@ -99,6 +99,7 @@ y.shape
 
 \seealso{
 \itemize{
+\item \url{https:/keras.io/keras_core/api/ops/image#affinetransform-function}
 \item \url{https://www.tensorflow.org/api_docs/python/tf/keras/ops/image/affine_transform}
 }
 

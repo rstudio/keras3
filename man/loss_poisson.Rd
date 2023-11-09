@@ -53,6 +53,7 @@ assert np.allclose(
 
 \seealso{
 \itemize{
+\item \url{https:/keras.io/api/losses/probabilistic_losses#poisson-class}
 \item \url{https://www.tensorflow.org/api_docs/python/tf/keras/losses/Poisson}
 }
 

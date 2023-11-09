@@ -85,6 +85,7 @@ Attention outputs of shape \verb{(batch_size, Tq, dim)}.
 
 \seealso{
 \itemize{
+\item \url{https:/keras.io/api/layers/attention_layers/attention#attention-class}
 \item \url{https://www.tensorflow.org/api_docs/python/tf/keras/layers/Attention}
 }
 

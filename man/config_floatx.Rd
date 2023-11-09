@@ -22,6 +22,7 @@ E.g. \code{'float16'}, \code{'float32'}, \code{'float64'}.
 
 \seealso{
 \itemize{
+\item \url{https:/keras.io/keras_core/api/utils/config_utils#floatx-function}
 \item \url{https://www.tensorflow.org/api_docs/python/tf/keras/config/floatx}
 }
 }

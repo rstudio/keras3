@@ -24,6 +24,7 @@ values smaller than 0 become 0, and values larger than 1 become 1.
 }
 \seealso{
 \itemize{
+\item \url{https:/keras.io/keras_core/api/ops/numpy#clip-function}
 \item \url{https://www.tensorflow.org/api_docs/python/tf/keras/ops/clip}
 }
 

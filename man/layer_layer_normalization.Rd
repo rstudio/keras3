@@ -128,6 +128,7 @@ Normalization layer with group size set to 1.
 
 \seealso{
 \itemize{
+\item \url{https:/keras.io/api/layers/normalization_layers/layer_normalization#layernormalization-class}
 \item \url{https://www.tensorflow.org/api_docs/python/tf/keras/layers/LayerNormalization}
 }
 

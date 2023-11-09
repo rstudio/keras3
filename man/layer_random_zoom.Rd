@@ -109,6 +109,7 @@ out_img = layer(input_img)
 
 \seealso{
 \itemize{
+\item \url{https:/keras.io/api/layers/preprocessing_layers/image_augmentation/random_zoom#randomzoom-class}
 \item \url{https://www.tensorflow.org/api_docs/python/tf/keras/layers/RandomZoom}
 }
 

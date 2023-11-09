@@ -18,6 +18,7 @@ Test element-wise for NaN and return result as a boolean tensor.
 }
 \seealso{
 \itemize{
+\item \url{https:/keras.io/keras_core/api/ops/numpy#isnan-function}
 \item \url{https://www.tensorflow.org/api_docs/python/tf/keras/ops/isnan}
 }
 

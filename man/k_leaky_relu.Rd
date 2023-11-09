@@ -30,6 +30,7 @@ print(x_leaky_relu)
 
 \seealso{
 \itemize{
+\item \url{https:/keras.io/keras_core/api/ops/nn#leakyrelu-function}
 \item \url{https://www.tensorflow.org/api_docs/python/tf/keras/ops/leaky_relu}
 }
 

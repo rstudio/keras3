@@ -67,6 +67,7 @@ loss = keras.losses.cosine_similarity(y_true, y_pred, axis=-1)
 
 \seealso{
 \itemize{
+\item \url{https:/keras.io/api/losses/regression_losses#cosinesimilarity-class}
 \item \url{https://www.tensorflow.org/api_docs/python/tf/keras/losses/CosineSimilarity}
 }
 

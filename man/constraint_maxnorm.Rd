@@ -29,6 +29,7 @@ Also available via the shortcut function \code{keras.constraints.max_norm}.
 }
 \seealso{
 \itemize{
+\item \url{https:/keras.io/api/layers/constraints#maxnorm-class}
 \item \url{https://www.tensorflow.org/api_docs/python/tf/keras/constraints/MaxNorm}
 }
 

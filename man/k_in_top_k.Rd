@@ -33,6 +33,7 @@ in_top_k(targets, predictions, k=3)
 
 \seealso{
 \itemize{
+\item \url{https:/keras.io/keras_core/api/ops/core#intopk-function}
 \item \url{https://www.tensorflow.org/api_docs/python/tf/keras/ops/in_top_k}
 }
 

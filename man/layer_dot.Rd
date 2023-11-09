@@ -54,6 +54,7 @@ y = keras.layers.Dot(axes=1)([x1, x2])
 
 \seealso{
 \itemize{
+\item \url{https:/keras.io/api/layers/merging_layers/dot#dot-class}
 \item \url{https://www.tensorflow.org/api_docs/python/tf/keras/layers/Dot}
 }
 

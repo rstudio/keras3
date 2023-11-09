@@ -26,6 +26,7 @@ If \code{x.ndim > d}, \code{repeats} is promoted to \code{x.ndim} by prepending 
 }
 \seealso{
 \itemize{
+\item \url{https:/keras.io/keras_core/api/ops/numpy#tile-function}
 \item \url{https://www.tensorflow.org/api_docs/python/tf/keras/ops/tile}
 }
 

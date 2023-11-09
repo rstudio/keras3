@@ -38,6 +38,7 @@ keras.ops.while_loop(cond, body, [i])[0]
 
 \seealso{
 \itemize{
+\item \url{https:/keras.io/keras_core/api/ops/core#whileloop-function}
 \item \url{https://www.tensorflow.org/api_docs/python/tf/keras/ops/while_loop}
 }
 

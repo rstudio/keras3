@@ -27,6 +27,7 @@ var = keras.ops.stop_gradient(var)
 
 \seealso{
 \itemize{
+\item \url{https:/keras.io/keras_core/api/ops/core#stopgradient-function}
 \item \url{https://www.tensorflow.org/api_docs/python/tf/keras/ops/stop_gradient}
 }
 
