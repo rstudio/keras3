@@ -1,3 +1,6 @@
+---
+knit: ({source("../../tools/knit.R"); knit_man_src})
+---
 Converts integer tensor `x` into a one-hot tensor.
 
 @description

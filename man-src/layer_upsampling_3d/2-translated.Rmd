@@ -1,3 +1,6 @@
+---
+knit: ({source("../../tools/knit.R"); knit_man_src})
+---
 Upsampling layer for 3D inputs.
 
 @description

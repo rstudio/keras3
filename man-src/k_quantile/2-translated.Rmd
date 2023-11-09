@@ -1,3 +1,6 @@
+---
+knit: ({source("../../tools/knit.R"); knit_man_src})
+---
 Compute the q-th quantile(s) of the data along the specified axis.
 
 @returns

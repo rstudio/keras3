@@ -1,3 +1,6 @@
+---
+knit: ({source("../../tools/knit.R"); knit_man_src})
+---
 Callback to back up and restore the training state.
 
 @description

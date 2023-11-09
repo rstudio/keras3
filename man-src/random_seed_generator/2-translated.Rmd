@@ -1,3 +1,6 @@
+---
+knit: ({source("../../tools/knit.R"); knit_man_src})
+---
 Generates variable seeds upon each call to a RNG-using function.
 
 @description

@@ -1,3 +1,6 @@
+---
+knit: ({source("../../tools/knit.R"); knit_man_src})
+---
 Fully-connected RNN where the output is to be fed back as the new input.
 
 @description

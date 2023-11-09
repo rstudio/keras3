@@ -1,3 +1,6 @@
+---
+knit: ({source("../../tools/knit.R"); knit_man_src})
+---
 Layer that reshapes inputs into the given shape.
 
 @description

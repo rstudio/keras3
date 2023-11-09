@@ -1,3 +1,6 @@
+---
+knit: ({source("../../tools/knit.R"); knit_man_src})
+---
 Sigmoid Linear Unit (SiLU) activation function, also known as Swish.
 
 @description

@@ -1,3 +1,6 @@
+---
+knit: ({source("../../tools/knit.R"); knit_man_src})
+---
 Real-valued Fast Fourier Transform along the last axis of the input.
 
 @description

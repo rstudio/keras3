@@ -1,3 +1,6 @@
+---
+knit: ({source("../../tools/knit.R"); knit_man_src})
+---
 Compute the truth value of `x1 XOR x2`, element-wise.
 
 @returns

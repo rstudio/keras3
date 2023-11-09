@@ -1,3 +1,6 @@
+---
+knit: ({source("../../tools/knit.R"); knit_man_src})
+---
 Rectified linear unit activation function with upper bound of 6.
 
 @description

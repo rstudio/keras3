@@ -1,3 +1,6 @@
+---
+knit: ({source("../../tools/knit.R"); knit_man_src})
+---
 Test element-wise for positive or negative infinity.
 
 @returns

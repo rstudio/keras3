@@ -1,3 +1,6 @@
+---
+knit: ({source("../../tools/knit.R"); knit_man_src})
+---
 Splits a dataset into a left half and a right half (e.g. train / test).
 
 @description

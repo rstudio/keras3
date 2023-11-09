@@ -1,3 +1,6 @@
+---
+knit: ({source("../../tools/knit.R"); knit_man_src})
+---
 Computes binary cross-entropy loss between target and output tensor.
 
 @description

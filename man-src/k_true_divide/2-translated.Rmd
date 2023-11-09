@@ -1,3 +1,6 @@
+---
+knit: ({source("../../tools/knit.R"); knit_man_src})
+---
 Alias for `keras.ops.divide`.
 
 @param x1 see description

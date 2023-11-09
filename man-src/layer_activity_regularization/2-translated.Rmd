@@ -1,3 +1,6 @@
+---
+knit: ({source("../../tools/knit.R"); knit_man_src})
+---
 Layer that applies an update to the cost function based input activity.
 
 @description

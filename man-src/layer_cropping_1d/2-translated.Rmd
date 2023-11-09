@@ -1,3 +1,6 @@
+---
+knit: ({source("../../tools/knit.R"); knit_man_src})
+---
 Cropping layer for 1D input (e.g. temporal sequence).
 
 @description

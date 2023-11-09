@@ -1,3 +1,6 @@
+---
+knit: ({source("../../tools/knit.R"); knit_man_src})
+---
 Returns the class associated with `name` if it is registered with Keras.
 
 @description

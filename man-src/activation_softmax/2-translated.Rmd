@@ -1,3 +1,6 @@
+---
+knit: ({source("../../tools/knit.R"); knit_man_src})
+---
 Softmax converts a vector of values to a probability distribution.
 
 @description

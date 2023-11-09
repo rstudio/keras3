@@ -1,3 +1,6 @@
+---
+knit: ({source("../../tools/knit.R"); knit_man_src})
+---
 Saves an image stored as a NumPy array to a path or file object.
 
 @param path Path or file object.

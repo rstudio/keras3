@@ -1,3 +1,6 @@
+---
+knit: ({source("../../tools/knit.R"); knit_man_src})
+---
 Computes best sensitivity where specificity is >= specified value.
 
 @description

@@ -1,3 +1,6 @@
+---
+knit: ({source("../../tools/knit.R"); knit_man_src})
+---
 Counts the number of non-zero values in `x` along the given `axis`.
 
 @description

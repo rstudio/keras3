@@ -1,3 +1,6 @@
+---
+knit: ({source("../../tools/knit.R"); knit_man_src})
+---
 Gives a new shape to a tensor without changing its data.
 
 @returns

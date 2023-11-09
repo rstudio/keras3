@@ -1,3 +1,6 @@
+---
+knit: ({source("../../tools/knit.R"); knit_man_src})
+---
 Return the non-negative square root of a tensor, element-wise.
 
 @returns

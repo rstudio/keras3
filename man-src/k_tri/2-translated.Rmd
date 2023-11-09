@@ -1,3 +1,6 @@
+---
+knit: ({source("../../tools/knit.R"); knit_man_src})
+---
 Return a tensor with ones at and below a diagonal and zeros elsewhere.
 
 @returns

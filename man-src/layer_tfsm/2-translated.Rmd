@@ -1,3 +1,6 @@
+---
+knit: ({source("../../tools/knit.R"); knit_man_src})
+---
 Reload a Keras model/layer that was saved via SavedModel / ExportArchive.
 
 @description

@@ -1,3 +1,6 @@
+---
+knit: ({source("../../tools/knit.R"); knit_man_src})
+---
 Update an input by slicing in a tensor of updated values.
 
 @description

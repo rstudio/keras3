@@ -1,3 +1,6 @@
+---
+knit: ({source("../../tools/knit.R"); knit_man_src})
+---
 Wraps arbitrary expressions as a `Layer` object.
 
 @description

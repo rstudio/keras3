@@ -1,3 +1,6 @@
+---
+knit: ({source("../../tools/knit.R"); knit_man_src})
+---
 Return whether a tensor is finite, element-wise.
 
 @description

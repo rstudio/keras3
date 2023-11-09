@@ -1,3 +1,6 @@
+---
+knit: ({source("../../tools/knit.R"); knit_man_src})
+---
 Returns the indices of the bins to which each value in `x` belongs.
 
 @description

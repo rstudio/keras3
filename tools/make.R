@@ -172,11 +172,15 @@ if(FALSE) {
   list.files("man-src", "2-translated\\.Rmd$", recursive = TRUE,
              full.names = TRUE) %>%
     walk(\(f) {
-      x <- read_file(f)
-      x <- str_flatten_lines("---",
-                             "knit: knitr:::knit_man_src",
-                             "---",
-                             x)
+      x <- read_lines(f)
+      while(x[1] == "---") {
+        x <- x[-(1:3)]
+      }
+      x <- str_trim(str_flatten_lines(
+        "---",
+        'knit: ({source("../../tools/knit.R"); knit_man_src})',
+        "---",
+        x))
       write_lines(x, f)
     })
 

@@ -1,3 +1,6 @@
+---
+knit: ({source("../../tools/knit.R"); knit_man_src})
+---
 Test whether all array elements along a given axis evaluate to `TRUE`.
 
 @description

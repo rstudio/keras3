@@ -1,3 +1,6 @@
+---
+knit: ({source("../../tools/knit.R"); knit_man_src})
+---
 Checks if the targets are in the top-k predictions.
 
 @description

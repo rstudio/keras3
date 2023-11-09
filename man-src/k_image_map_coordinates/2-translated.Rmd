@@ -1,3 +1,6 @@
+---
+knit: ({source("../../tools/knit.R"); knit_man_src})
+---
 Map the input array to new coordinates by interpolation..
 
 @description

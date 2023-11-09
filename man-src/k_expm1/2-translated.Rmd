@@ -1,3 +1,6 @@
+---
+knit: ({source("../../tools/knit.R"); knit_man_src})
+---
 Calculate `exp(x) - 1` for all elements in the tensor.
 
 @returns

@@ -1,3 +1,6 @@
+---
+knit: ({source("../../tools/knit.R"); knit_man_src})
+---
 Join a sequence of tensors along an existing axis.
 
 @returns

@@ -1,3 +1,6 @@
+---
+knit: ({source("../../tools/knit.R"); knit_man_src})
+---
 A preprocessing layer that maps strings to (possibly encoded) indices.
 
 @description

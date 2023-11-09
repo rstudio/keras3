@@ -1,3 +1,6 @@
+---
+knit: ({source("../../tools/knit.R"); knit_man_src})
+---
 Constrains the weights incident to each hidden unit to have unit norm.
 
 @param axis integer, axis along which to calculate weight norms.

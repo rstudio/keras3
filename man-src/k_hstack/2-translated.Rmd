@@ -1,3 +1,6 @@
+---
+knit: ({source("../../tools/knit.R"); knit_man_src})
+---
 Stack tensors in sequence horizontally (column wise).
 
 @description

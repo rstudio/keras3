@@ -1,3 +1,6 @@
+---
+knit: ({source("../../tools/knit.R"); knit_man_src})
+---
 Gaussian Error Linear Unit (GELU) activation function.
 
 @description

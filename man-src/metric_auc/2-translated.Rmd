@@ -1,3 +1,6 @@
+---
+knit: ({source("../../tools/knit.R"); knit_man_src})
+---
 Approximates the AUC (Area under the curve) of the ROC or PR curves.
 
 @description

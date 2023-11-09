@@ -1,3 +1,6 @@
+---
+knit: ({source("../../tools/knit.R"); knit_man_src})
+---
 Initializer that adapts its scale to the shape of its input tensors.
 
 @description

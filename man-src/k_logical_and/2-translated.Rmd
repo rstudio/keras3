@@ -1,3 +1,6 @@
+---
+knit: ({source("../../tools/knit.R"); knit_man_src})
+---
 Computes the element-wise logical AND of the given input tensors.
 
 @description

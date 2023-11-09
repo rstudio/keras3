@@ -1,3 +1,6 @@
+---
+knit: ({source("../../tools/knit.R"); knit_man_src})
+---
 Pad `images` with zeros to the specified `height` and `width`.
 
 @description

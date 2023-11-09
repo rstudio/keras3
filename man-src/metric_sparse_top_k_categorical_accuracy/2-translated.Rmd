@@ -1,3 +1,6 @@
+---
+knit: ({source("../../tools/knit.R"); knit_man_src})
+---
 Computes how often integer targets are in the top `K` predictions.
 
 @description

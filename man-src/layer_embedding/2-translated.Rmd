@@ -1,3 +1,6 @@
+---
+knit: ({source("../../tools/knit.R"); knit_man_src})
+---
 Turns positive integers (indexes) into dense vectors of fixed size.
 
 @description

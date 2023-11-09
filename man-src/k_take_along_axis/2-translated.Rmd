@@ -1,3 +1,6 @@
+---
+knit: ({source("../../tools/knit.R"); knit_man_src})
+---
 Select values from `x` at the 1-D `indices` along the given axis.
 
 @returns

@@ -1,5 +1,5 @@
 ---
-knit: keras:::knit_man_src
+knit: ({source("../../tools/knit.R"); knit_man_src})
 ---
 
 ```{r, include=FALSE}

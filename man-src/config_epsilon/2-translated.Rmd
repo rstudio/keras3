@@ -1,3 +1,6 @@
+---
+knit: ({source("../../tools/knit.R"); knit_man_src})
+---
 Return the value of the fuzz factor used in numeric expressions.
 
 @description

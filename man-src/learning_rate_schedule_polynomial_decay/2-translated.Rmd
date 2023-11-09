@@ -1,3 +1,6 @@
+---
+knit: ({source("../../tools/knit.R"); knit_man_src})
+---
 A `LearningRateSchedule` that uses a polynomial decay schedule.
 
 @description

@@ -1,3 +1,6 @@
+---
+knit: ({source("../../tools/knit.R"); knit_man_src})
+---
 Returns the natural logarithm of one plus the `x`, element-wise.
 
 @description

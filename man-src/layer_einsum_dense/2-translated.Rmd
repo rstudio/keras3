@@ -1,3 +1,6 @@
+---
+knit: ({source("../../tools/knit.R"); knit_man_src})
+---
 A layer that uses `einsum` as the backing computation.
 
 @description

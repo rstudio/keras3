@@ -1,3 +1,6 @@
+---
+knit: ({source("../../tools/knit.R"); knit_man_src})
+---
 Draw random samples from a normal (Gaussian) distribution.
 
 @param shape The shape of the random values to generate.

@@ -1,3 +1,6 @@
+---
+knit: ({source("../../tools/knit.R"); knit_man_src})
+---
 Count the number of occurrences of each value in a tensor of integers.
 
 @description

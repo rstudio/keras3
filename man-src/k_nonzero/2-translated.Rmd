@@ -1,3 +1,6 @@
+---
+knit: ({source("../../tools/knit.R"); knit_man_src})
+---
 Return the indices of the elements that are non-zero.
 
 @returns
