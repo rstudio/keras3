@@ -3,52 +3,79 @@ Compute the weighted average along the specified axis.
 @description
 
 # Examples
-```python
-data = keras.ops.arange(1, 5)
+
+```r
+data <- k_arange(1, 5, dtype = "int32")
 data
-# array([1, 2, 3, 4], dtype=int32)
-keras.ops.average(data)
-# array(2.5, dtype=float32)
-keras.ops.average(
-    keras.ops.arange(1, 11),
-    weights=keras.ops.arange(10, 0, -1)
-)
-# array(4., dtype=float32)
 ```
 
-```python
-data = keras.ops.arange(6).reshape((3, 2))
+```
+## tf.Tensor([1 2 3 4], shape=(4), dtype=int32)
+```
+
+```r
+k_average(data)
+```
+
+```
+## tf.Tensor(2.5, shape=(), dtype=float64)
+```
+
+```r
+k_average(
+  k_arange(1, 11),
+  weights = k_arange(10, 0, -1)
+)
+```
+
+```
+## tf.Tensor(4.0, shape=(), dtype=float64)
+```
+
+```r
+data <- k_arange(6) |> k_reshape(c(3, 2))
 data
-# array([[0, 1],
-#        [2, 3],
-#        [4, 5]], dtype=int32)
-keras.ops.average(
-    data,
-    axis=1,
-    weights=keras.ops.array([1./4, 3./4])
+```
+
+```
+## tf.Tensor(
+## [[0 1]
+##  [2 3]
+##  [4 5]], shape=(3, 2), dtype=int32)
+```
+
+```r
+k_average(
+  data,
+  axis = 2,
+  weights = k_array(c(1/4, 3/4))
 )
-# array([0.75, 2.75, 4.75], dtype=float32)
-keras.ops.average(
-    data,
-    weights=keras.ops.array([1./4, 3./4])
-)
-# Traceback (most recent call last):
-#     ...
-# ValueError: Axis must be specified when shapes of a and weights differ.
+```
+
+```
+## tf.Tensor([0.75 2.75 4.75], shape=(3), dtype=float64)
+```
+
+```r
+try(k_average(
+  data,
+  weights = k_array(c(1/4, 3/4))
+))
+# Error: Axis must be specified when shapes of a and weights differ.
 ```
 
 @returns
 Return the average along the specified axis.
 
 @param x Input tensor.
-@param axis Integer along which to average `x`. The default, `axis=None`,
+@param axis Integer along which to average `x`. The default, `axis=NULL`,
     will average over all of the elements of the input tensor. If axis
     is negative it counts from the last to the first axis.
 @param weights Tensor of wieghts associated with the values in `x`. Each
     value in `x` contributes to the average according to its
     associated weight. The weights array can either be 1-D (in which
     case its length must be the size of a along the given axis) or of
-    the same shape as `x`. If `weights=None` (default), then all data
+    the same shape as `x`. If `weights=NULL` (default), then all data
     in `x` are assumed to have a weight equal to one.
 
     The 1-D calculation is: `avg = sum(a * weights) / sum(weights)`.

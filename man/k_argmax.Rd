@@ -20,16 +20,31 @@ along \code{axis} removed.
 Returns the indices of the maximum values along an axis.
 }
 \section{Examples}{
-\if{html}{\out{<div class="sourceCode python">}}\preformatted{x = keras.ops.arange(6).reshape(2, 3) + 10
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{x <- k_arange(6L) |> k_reshape(c(2, 3)) |> k_add(10)
 x
-# array([[10, 11, 12],
-#        [13, 14, 15]], dtype=int32)
-keras.ops.argmax(x)
-# array(5, dtype=int32)
-keras.ops.argmax(x, axis=0)
-# array([1, 1, 1], dtype=int32)
-keras.ops.argmax(x, axis=1)
-# array([2, 2], dtype=int32)
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor(
+## [[10. 11. 12.]
+##  [13. 14. 15.]], shape=(2, 3), dtype=float32)
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{k_argmax(x)
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor(5, shape=(), dtype=int32)
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{k_argmax(x, axis = 1)
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor([1 1 1], shape=(3), dtype=int32)
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{k_argmax(x, axis = 2)
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor([2 2], shape=(2), dtype=int32)
 }\if{html}{\out{</div>}}
 }
 

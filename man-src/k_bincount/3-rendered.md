@@ -3,18 +3,46 @@ Count the number of occurrences of each value in a tensor of integers.
 @description
 
 # Examples
-```python
-x = keras.ops.array([1, 2, 2, 3], dtype="uint8")
-keras.ops.bincount(x)
-# array([0, 1, 2, 1], dtype=int32)
-weights = x / 2
-weights
-# array([0.5, 1., 1., 1.5], dtype=float64)
-keras.ops.bincount(x, weights=weights)
-# array([0., 0.5, 2., 1.5], dtype=float64)
-minlength = (keras.ops.max(x).numpy() + 1) + 2 # 6
-keras.ops.bincount(x, minlength=minlength)
-# array([0, 1, 2, 1, 0, 0], dtype=int32)
+
+```r
+(x <- k_array(c(1, 2, 2, 3), dtype = "uint8"))
+```
+
+```
+## tf.Tensor([1 2 2 3], shape=(4), dtype=uint8)
+```
+
+```r
+k_bincount(x)
+```
+
+```
+## tf.Tensor([0 1 2 1], shape=(4), dtype=int32)
+```
+
+```r
+(weights <- x / 2)
+```
+
+```
+## tf.Tensor([0.5 1.  1.  1.5], shape=(4), dtype=float32)
+```
+
+```r
+k_bincount(x, weights = weights)
+```
+
+```
+## tf.Tensor([0.  0.5 2.  1.5], shape=(4), dtype=float32)
+```
+
+```r
+minlength <- as.integer(k_max(x) + 1 + 2) # 6
+k_bincount(x, minlength = minlength)
+```
+
+```
+## tf.Tensor([0 1 2 1 0 0], shape=(6), dtype=int32)
 ```
 
 @returns
@@ -26,7 +54,7 @@ minlength.
     It must be of dimension 1, and it must only contain non-negative
     integer(s).
 @param weights Weight tensor.
-    It must have the same length as `x`. The default value is `None`.
+    It must have the same length as `x`. The default value is `NULL`.
     If specified, `x` is weighted by it, i.e. if `n = x[i]`,
     `out[n] += weight[i]` instead of the default behavior `out[n] += 1`.
 @param minlength An integer.

@@ -30,7 +30,7 @@ Supports \code{bilinear}, \code{nearest}, \code{bicubic},
 backend).}
 }
 \value{
-Array with shape \verb{(size[0], size[1], channels)}.
+Array with shape \verb{(size[1], size[2], channels)}.
 If the input image was a NumPy array, the output is a NumPy array,
 and if it was a backend-native tensor,
 the output is a backend-native tensor.
@@ -43,8 +43,8 @@ height and width.
 
 You could simply do, in TF (or JAX equivalent):
 
-\if{html}{\out{<div class="sourceCode python">}}\preformatted{size = (200, 200)
-ds = ds.map(lambda img: resize(img, size))
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{size <- c(200, 200)
+ds <- ds$map(\\(img) tf$image$resize(img, size))
 }\if{html}{\out{</div>}}
 
 However, if you do this, you distort the aspect ratio of your images, since
@@ -52,14 +52,14 @@ in general they do not all have the same aspect ratio as \code{size}. This is
 fine in many cases, but not always (e.g. for image generation models
 this can be a problem).
 
-Note that passing the argument \code{preserve_aspect_ratio=True} to \code{resize}
+Note that passing the argument \code{preserve_aspect_ratio=TRUE} to \code{tf$image$resize()}
 will preserve the aspect ratio, but at the cost of no longer respecting the
 provided target size.
 
 This calls for:
 
-\if{html}{\out{<div class="sourceCode python">}}\preformatted{size = (200, 200)
-ds = ds.map(lambda img: smart_resize(img, size))
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{size <- c(200, 200)
+ds <- ds$map(\\(img) image_smart_resize(img, size))
 }\if{html}{\out{</div>}}
 
 Your output images will actually be \verb{(200, 200)}, and will not be distorted.
@@ -69,7 +69,7 @@ get cropped out.
 The resizing process is:
 \enumerate{
 \item Take the largest centered crop of the image that has the same aspect
-ratio as the target size. For instance, if \verb{size=(200, 200)} and the input
+ratio as the target size. For instance, if \code{size=c(200, 200)} and the input
 image has size \verb{(340, 500)}, we take a crop of \verb{(340, 340)} centered along
 the width.
 \item Resize the cropped image to the target size. In the example above,

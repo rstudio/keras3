@@ -3,14 +3,21 @@ Create a tensor.
 @description
 
 # Examples
-```python
-keras.ops.array([1, 2, 3])
-# array([1, 2, 3], dtype=int32)
+
+```r
+k_array(c(1, 2, 3))
 ```
 
-```python
-keras.ops.array([1, 2, 3], dtype="float32")
-# array([1., 2., 3.], dtype=float32)
+```
+## tf.Tensor([1. 2. 3.], shape=(3), dtype=float64)
+```
+
+```r
+k_array(c(1, 2, 3), dtype = "float32")
+```
+
+```
+## tf.Tensor([1. 2. 3.], shape=(3), dtype=float32)
 ```
 
 @returns

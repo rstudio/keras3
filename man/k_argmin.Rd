@@ -2,7 +2,7 @@
 % Please edit documentation in R/autogen-ops.R
 \name{k_argmin}
 \alias{k_argmin}
-\title{Returns the indices of the minium values along an axis.}
+\title{Returns the indices of the minimum values along an axis.}
 \usage{
 k_argmin(x, axis = NULL)
 }
@@ -17,19 +17,34 @@ Tensor of indices. It has the same shape as \code{x}, with the dimension
 along \code{axis} removed.
 }
 \description{
-Returns the indices of the minium values along an axis.
+Returns the indices of the minimum values along an axis.
 }
 \section{Examples}{
-\if{html}{\out{<div class="sourceCode python">}}\preformatted{x = keras.ops.arange(6).reshape(2, 3) + 10
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{x <- k_arange(6L) |> k_reshape(c(2, 3)) |> k_add(10)
 x
-# array([[10, 11, 12],
-#        [13, 14, 15]], dtype=int32)
-keras.ops.argmin(x)
-# array(0, dtype=int32)
-keras.ops.argmin(x, axis=0)
-# array([0, 0, 0], dtype=int32)
-keras.ops.argmin(x, axis=1)
-# array([0, 0], dtype=int32)
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor(
+## [[10. 11. 12.]
+##  [13. 14. 15.]], shape=(2, 3), dtype=float32)
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{k_argmin(x)
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor(0, shape=(), dtype=int32)
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{k_argmin(x, axis = 1)
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor([0 0 0], shape=(3), dtype=int32)
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{k_argmin(x, axis = 2)
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor([0 0], shape=(2), dtype=int32)
 }\if{html}{\out{</div>}}
 }
 

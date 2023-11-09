@@ -158,10 +158,13 @@ inspect <- import("inspect")
 # keras <- import("keras_core")
 # keras <- import("tensorflow.keras")
 keras <- import("keras")
+tf <- import("tensorflow")
 local({
   `__main__` <- reticulate::import_main()
   `__main__`$keras <- keras
+  `__main__`$tf <- tf
 })
+py_eval("tf.experimental.numpy.experimental_enable_numpy_behavior()")
 
 source_python("tools/common.py") # keras_class_type()
 rm(r) # TODO: fix in reticulate, don't export r

@@ -8,9 +8,10 @@ height and width.
 
 You could simply do, in TF (or JAX equivalent):
 
-```python
-size = (200, 200)
-ds = ds.map(lambda img: resize(img, size))
+
+```r
+size <- c(200, 200)
+ds <- ds$map(\(img) tf$image$resize(img, size))
 ```
 
 However, if you do this, you distort the aspect ratio of your images, since
@@ -18,15 +19,16 @@ in general they do not all have the same aspect ratio as `size`. This is
 fine in many cases, but not always (e.g. for image generation models
 this can be a problem).
 
-Note that passing the argument `preserve_aspect_ratio=True` to `resize`
+Note that passing the argument `preserve_aspect_ratio=TRUE` to `tf$image$resize()`
 will preserve the aspect ratio, but at the cost of no longer respecting the
 provided target size.
 
 This calls for:
 
-```python
-size = (200, 200)
-ds = ds.map(lambda img: smart_resize(img, size))
+
+```r
+size <- c(200, 200)
+ds <- ds$map(\(img) image_smart_resize(img, size))
 ```
 
 Your output images will actually be `(200, 200)`, and will not be distorted.
@@ -36,14 +38,14 @@ get cropped out.
 The resizing process is:
 
 1. Take the largest centered crop of the image that has the same aspect
-ratio as the target size. For instance, if `size=(200, 200)` and the input
+ratio as the target size. For instance, if `size=c(200, 200)` and the input
 image has size `(340, 500)`, we take a crop of `(340, 340)` centered along
 the width.
 2. Resize the cropped image to the target size. In the example above,
 we resize the `(340, 340)` crop to `(200, 200)`.
 
 @returns
-Array with shape `(size[0], size[1], channels)`.
+Array with shape `(size[1], size[2], channels)`.
 If the input image was a NumPy array, the output is a NumPy array,
 and if it was a backend-native tensor,
 the output is a backend-native tensor.

@@ -3,9 +3,21 @@ Cast a tensor to the desired dtype.
 @description
 
 # Examples
-```python
-x = keras.ops.arange(4)
-x = keras.ops.cast(x, dtype="float16")
+
+```r
+(x <- k_arange(4))
+```
+
+```
+## tf.Tensor([0 1 2 3], shape=(4), dtype=int32)
+```
+
+```r
+k_cast(x, dtype = "float16")
+```
+
+```
+## tf.Tensor([0. 1. 2. 3.], shape=(4), dtype=float16)
 ```
 
 @returns

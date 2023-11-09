@@ -9,8 +9,7 @@ k_broadcast_to(x, shape)
 \arguments{
 \item{x}{The tensor to broadcast.}
 
-\item{shape}{The shape of the desired tensor. A single integer \code{i} is
-interpreted as \verb{(i,)}.}
+\item{shape}{The shape of the desired tensor.}
 }
 \value{
 A tensor with the desired shape.
@@ -19,11 +18,14 @@ A tensor with the desired shape.
 Broadcast a tensor to a new shape.
 }
 \section{Examples}{
-\if{html}{\out{<div class="sourceCode python">}}\preformatted{x = keras.ops.array([1, 2, 3])
-keras.ops.broadcast_to(x, (3, 3))
-# array([[1, 2, 3],
-#        [1, 2, 3],
-#        [1, 2, 3]])
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{x <- k_array(c(1, 2, 3))
+k_broadcast_to(x, shape = c(3, 3))
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor(
+## [[1. 2. 3.]
+##  [1. 2. 3.]
+##  [1. 2. 3.]], shape=(3, 3), dtype=float64)
 }\if{html}{\out{</div>}}
 }
 

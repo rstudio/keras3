@@ -16,9 +16,9 @@ or logits. Its shape should match the shape of the
 
 \item{from_logits}{(optional) Whether \code{output} is a tensor of logits or
 probabilities.
-Set it to \code{True} if \code{output} represents logits; otherwise,
-set it to \code{False} if \code{output} represents probabilities.
-Defaults to\code{False}.}
+Set it to \code{TRUE} if \code{output} represents logits; otherwise,
+set it to \code{FALSE} if \code{output} represents probabilities.
+Defaults to \code{FALSE}.}
 }
 \value{
 Integer tensor: The computed binary cross-entropy loss between
@@ -31,11 +31,12 @@ of the two classes. It measures the dissimilarity between the
 target and output probabilities or logits.
 }
 \section{Examples}{
-\if{html}{\out{<div class="sourceCode python">}}\preformatted{target = keras.ops.convert_to_tensor([0, 1, 1, 0])
-output = keras.ops.convert_to_tensor([0.1, 0.9, 0.8, 0.2])
-binary_crossentropy(target, output)
-# array([0.10536054 0.10536054 0.22314355 0.22314355],
-#       shape=(4,), dtype=float32)
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{target <- k_array(c(0, 1, 1, 0))
+output <- k_array(c(0.1, 0.9, 0.8, 0.2))
+k_binary_crossentropy(target, output)
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor([0.10536052 0.10536052 0.22314355 0.22314355], shape=(4), dtype=float64)
 }\if{html}{\out{</div>}}
 }
 

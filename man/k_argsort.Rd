@@ -9,8 +9,8 @@ k_argsort(x, axis = -1L)
 \arguments{
 \item{x}{Input tensor.}
 
-\item{axis}{Axis along which to sort. Defaults to\code{-1} (the last axis). If
-\code{None}, the flattened tensor is used.}
+\item{axis}{Axis along which to sort. Defaults to \code{-1} (the last axis). If
+\code{NULL}, the flattened tensor is used.}
 }
 \value{
 Tensor of indices that sort \code{x} along the specified \code{axis}.
@@ -21,26 +21,34 @@ Returns the indices that would sort a tensor.
 \section{Examples}{
 One dimensional array:
 
-\if{html}{\out{<div class="sourceCode python">}}\preformatted{x = keras.ops.array([3, 1, 2])
-keras.ops.argsort(x)
-# array([1, 2, 0], dtype=int32)
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{x <- k_array(c(3, 1, 2))
+k_argsort(x)
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor([1 2 0], shape=(3), dtype=int32)
 }\if{html}{\out{</div>}}
 
 Two-dimensional array:
 
-\if{html}{\out{<div class="sourceCode python">}}\preformatted{x = keras.ops.array([[0, 3], [3, 2], [4, 5]])
-x
-# array([[0, 3],
-#        [3, 2],
-#        [4, 5]], dtype=int32)
-keras.ops.argsort(x, axis=0)
-# array([[0, 1],
-#        [1, 0],
-#        [2, 2]], dtype=int32)
-keras.ops.argsort(x, axis=1)
-# array([[0, 1],
-#        [1, 0],
-#        [0, 1]], dtype=int32)
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{x <- k_array(rbind(c(0, 3),
+                   c(3, 2),
+                   c(4, 5)), dtype = "int32")
+k_argsort(x, axis = 1)
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor(
+## [[0 1]
+##  [1 0]
+##  [2 2]], shape=(3, 2), dtype=int32)
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{k_argsort(x, axis = 2)
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor(
+## [[0 1]
+##  [1 0]
+##  [0 1]], shape=(3, 2), dtype=int32)
 }\if{html}{\out{</div>}}
 }
 

@@ -7,12 +7,15 @@ of the two classes. It measures the dissimilarity between the
 target and output probabilities or logits.
 
 # Examples
-```python
-target = keras.ops.convert_to_tensor([0, 1, 1, 0])
-output = keras.ops.convert_to_tensor([0.1, 0.9, 0.8, 0.2])
-binary_crossentropy(target, output)
-# array([0.10536054 0.10536054 0.22314355 0.22314355],
-#       shape=(4,), dtype=float32)
+
+```r
+target <- k_array(c(0, 1, 1, 0))
+output <- k_array(c(0.1, 0.9, 0.8, 0.2))
+k_binary_crossentropy(target, output)
+```
+
+```
+## tf.Tensor([0.10536052 0.10536052 0.22314355 0.22314355], shape=(4), dtype=float64)
 ```
 
 @returns
@@ -26,9 +29,9 @@ Integer tensor: The computed binary cross-entropy loss between
     `target` tensor.
 @param from_logits (optional) Whether `output` is a tensor of logits or
     probabilities.
-    Set it to `True` if `output` represents logits; otherwise,
-    set it to `False` if `output` represents probabilities.
-    Defaults to`False`.
+    Set it to `TRUE` if `output` represents logits; otherwise,
+    set it to `FALSE` if `output` represents probabilities.
+    Defaults to `FALSE`.
 
 @export
 @family ops

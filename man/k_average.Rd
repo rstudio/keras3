@@ -9,7 +9,7 @@ k_average(x, axis = NULL, weights = NULL)
 \arguments{
 \item{x}{Input tensor.}
 
-\item{axis}{Integer along which to average \code{x}. The default, \code{axis=None},
+\item{axis}{Integer along which to average \code{x}. The default, \code{axis=NULL},
 will average over all of the elements of the input tensor. If axis
 is negative it counts from the last to the first axis.}
 
@@ -17,7 +17,7 @@ is negative it counts from the last to the first axis.}
 value in \code{x} contributes to the average according to its
 associated weight. The weights array can either be 1-D (in which
 case its length must be the size of a along the given axis) or of
-the same shape as \code{x}. If \code{weights=None} (default), then all data
+the same shape as \code{x}. If \code{weights=NULL} (default), then all data
 in \code{x} are assumed to have a weight equal to one.
 
 \if{html}{\out{<div class="sourceCode">}}\preformatted{The 1-D calculation is: `avg = sum(a * weights) / sum(weights)`.
@@ -31,36 +31,53 @@ Return the average along the specified axis.
 Compute the weighted average along the specified axis.
 }
 \section{Examples}{
-\if{html}{\out{<div class="sourceCode python">}}\preformatted{data = keras.ops.arange(1, 5)
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{data <- k_arange(1, 5, dtype = "int32")
 data
-# array([1, 2, 3, 4], dtype=int32)
-keras.ops.average(data)
-# array(2.5, dtype=float32)
-keras.ops.average(
-    keras.ops.arange(1, 11),
-    weights=keras.ops.arange(10, 0, -1)
-)
-# array(4., dtype=float32)
 }\if{html}{\out{</div>}}
 
-\if{html}{\out{<div class="sourceCode python">}}\preformatted{data = keras.ops.arange(6).reshape((3, 2))
+\if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor([1 2 3 4], shape=(4), dtype=int32)
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{k_average(data)
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor(2.5, shape=(), dtype=float64)
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{k_average(
+  k_arange(1, 11),
+  weights = k_arange(10, 0, -1)
+)
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor(4.0, shape=(), dtype=float64)
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{data <- k_arange(6) |> k_reshape(c(3, 2))
 data
-# array([[0, 1],
-#        [2, 3],
-#        [4, 5]], dtype=int32)
-keras.ops.average(
-    data,
-    axis=1,
-    weights=keras.ops.array([1./4, 3./4])
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor(
+## [[0 1]
+##  [2 3]
+##  [4 5]], shape=(3, 2), dtype=int32)
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{k_average(
+  data,
+  axis = 2,
+  weights = k_array(c(1/4, 3/4))
 )
-# array([0.75, 2.75, 4.75], dtype=float32)
-keras.ops.average(
-    data,
-    weights=keras.ops.array([1./4, 3./4])
-)
-# Traceback (most recent call last):
-#     ...
-# ValueError: Axis must be specified when shapes of a and weights differ.
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor([0.75 2.75 4.75], shape=(3), dtype=float64)
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{try(k_average(
+  data,
+  weights = k_array(c(1/4, 3/4))
+))
+# Error: Axis must be specified when shapes of a and weights differ.
 }\if{html}{\out{</div>}}
 }
 

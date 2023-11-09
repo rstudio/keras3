@@ -18,8 +18,16 @@ A tensor of the specified \code{dtype}.
 Cast a tensor to the desired dtype.
 }
 \section{Examples}{
-\if{html}{\out{<div class="sourceCode python">}}\preformatted{x = keras.ops.arange(4)
-x = keras.ops.cast(x, dtype="float16")
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{(x <- k_arange(4))
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor([0 1 2 3], shape=(4), dtype=int32)
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{k_cast(x, dtype = "float16")
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor([0. 1. 2. 3.], shape=(4), dtype=float16)
 }\if{html}{\out{</div>}}
 }
 
