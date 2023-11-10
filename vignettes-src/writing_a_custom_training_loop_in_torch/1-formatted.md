@@ -6,7 +6,7 @@ last-modified: 2023/06/25
 description: Writing low-level training & evaluation loops in PyTorch.
 accelerator: None
 output: rmarkdown::html_vignette
-knit: keras:::knit_vignette
+knit: ({source("../../tools/knit.R"); knit_vignette)
 ---
 
 ## Setup

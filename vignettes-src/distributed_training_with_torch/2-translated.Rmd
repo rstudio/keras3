@@ -6,7 +6,7 @@ last-modified: 2023/06/29
 description: Guide to multi-GPU training for Keras models with PyTorch.
 accelerator: GPU
 output: rmarkdown::html_vignette
-knit: keras:::knit_vignette
+knit: ({source("../../tools/knit.R"); knit_vignette)
 ---
 
 ## Introduction

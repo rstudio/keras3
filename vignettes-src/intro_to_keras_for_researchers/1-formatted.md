@@ -7,7 +7,7 @@ description: Everything you need to know to use Keras & TensorFlow for deep lear
   research.
 accelerator: None
 output: rmarkdown::html_vignette
-knit: keras:::knit_vignette
+knit: ({source("../../tools/knit.R"); knit_vignette)
 ---
 
 ## Setup

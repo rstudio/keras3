@@ -101,7 +101,7 @@ knit_vignette <- function(input, ..., output_dir) {
     ...
   )
   x <- readLines(output_file)
-  # if(length(grep("^knit: keras:::knit_vignette", x) -> i))
+  # if(length(grep("^knit: ({source("../../tools/knit.R"); knit_vignette)", x) -> i))
   # x <- x[-i]
   end_fm_i <- which(x == "---")[2]
   x_fm <- x[2:(end_fm_i-1)]

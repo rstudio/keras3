@@ -6,7 +6,7 @@ last-modified: 2023/06/14
 description: Complete guide to overriding the training step of the Model class.
 accelerator: GPU
 output: rmarkdown::html_vignette
-knit: keras:::knit_vignette
+knit: ({source("../../tools/knit.R"); knit_vignette)
 ---
 
 ## Introduction

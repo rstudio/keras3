@@ -6,7 +6,7 @@ last-modified: 2023/07/10
 description: Complete guide to using & customizing RNN layers.
 accelerator: GPU
 output: rmarkdown::html_vignette
-knit: keras:::knit_vignette
+knit: ({source("../../tools/knit.R"); knit_vignette)
 ---
 
 ## Introduction

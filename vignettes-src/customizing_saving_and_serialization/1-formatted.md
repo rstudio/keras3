@@ -6,7 +6,7 @@ last-modified: 2023/03/15
 description: A more advanced guide on customizing saving for your layers and models.
 accelerator: None
 output: rmarkdown::html_vignette
-knit: keras:::knit_vignette
+knit: ({source("../../tools/knit.R"); knit_vignette)
 ---
 
 ## Introduction
