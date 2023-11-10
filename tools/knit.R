@@ -64,6 +64,7 @@ knit_vignette <- function(input, ..., output_dir) {
   # print(sys.call())
   # stop()
   # input <- normalizePath(input)
+  library(keras)
   render_dir <- dirname(normalizePath(input))
   if(getwd() != render_dir) {
     message("Changing wd to ", render_dir)
@@ -92,7 +93,6 @@ knit_vignette <- function(input, ..., output_dir) {
   #   envir = new.env(parent = globalenv()),
   #   ...
   # )
-  library(keras)
   knitr::knit(
     "2-translated.Rmd",
     # output_format = rmarkdown::github_document(preserve_yaml = TRUE),

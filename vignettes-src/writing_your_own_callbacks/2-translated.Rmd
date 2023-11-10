@@ -5,7 +5,7 @@ date-created: 2019/03/20
 last-modified: 2023/06/25
 description: Complete guide to writing new Keras callbacks.
 accelerator: GPU
-knit: ({source(here::here('tools/knit.R')); knit_vignette})
+knit: ({source(here::here("tools/knit.R")); knit_vignette})
 ---
 
 ## Introduction
@@ -108,8 +108,8 @@ flatten_and_rescale <- function(x) {
 mnist$train$x <- flatten_and_rescale(mnist$train$x)
 mnist$test$x  <- flatten_and_rescale(mnist$test$x)
 
-# limit to 500 samples
-n <- 200
+# limit to 1000 samples
+n <- 1000
 mnist$train$x <- mnist$train$x[1:n,]
 mnist$train$y <- mnist$train$y[1:n]
 mnist$test$x  <- mnist$test$x[1:n,]
@@ -158,19 +158,22 @@ Let's try it out:
 model <- get_model()
 model |> fit(
   mnist$train$x, mnist$train$y,
-  epochs = 2, verbose = 0, validation_split = 0.5,
+  batch_size = 128, 
+  epochs = 2, 
+  verbose = 0, 
+  validation_split = 0.5,
   callbacks = list(callback_custom())
 )
 
 res <- model |> evaluate(
   mnist$test$x, mnist$test$y,
-  verbose = 0,
+  batch_size = 128, verbose = 0, 
   callbacks = list(callback_custom())
 )
 
 res <- model |> predict(
   mnist$test$x,
-  verbose = 0,
+  batch_size = 128, verbose = 0, 
   callbacks = list(callback_custom())
 )
 ```
@@ -201,13 +204,13 @@ callback_print_loss_and_mae <- new_callback_class(
 model <- get_model()
 model |> fit(
   mnist$train$x, mnist$train$y,
-  epochs = 2, verbose = 0,
+  epochs = 2, verbose = 0, batch_size = 128,
   callbacks = list(callback_print_loss_and_mae())
 )
 
 res = model |> evaluate(
   mnist$test$x, mnist$test$y,
-  verbose = 0,
+  verbose = 0, batch_size = 128,
   callbacks = list(callback_print_loss_and_mae())
 )
 ```
@@ -301,9 +304,8 @@ model <- get_model()
 model |> fit(
   mnist$train$x,
   mnist$train$y,
-  batch_size = 64,
-  steps_per_epoch = 5,
   epochs = 30,
+  batch_size = 64,
   verbose = 0,
   callbacks = list(callback_print_loss_and_mae(),
                    callback_early_stopping_at_min_loss())
@@ -374,8 +376,6 @@ model |> fit(
   mnist$train$x,
   mnist$train$y,
   batch_size = 64,
-  steps_per_epoch = 5,
-  epochs = 15,
   verbose = 0,
   callbacks = list(
     callback_print_loss_and_mae(),
@@ -387,6 +387,6 @@ model |> fit(
 ### Built-in Keras callbacks
 
 Be sure to check out the existing Keras callbacks by
-reading the [API docs](https://keras.io/api/callbacks/).
+reading the [API docs](https://keras.posit.co/reference/callbacks/).
 Applications include logging to CSV, saving
 the model, visualizing metrics in TensorBoard, and a lot more!
