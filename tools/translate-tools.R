@@ -18,12 +18,17 @@ count_tokens <- function(txt) {
     length()
 }
 
+if(FALSE) {
+  # see which models are available
 get_models <- function() {
   x <- openai$models$list()
   map_chr(x$data, "id") %>%
-      grep("gpt", ., value = T)
-  # %>%
-      # grep("4", ., value = T)
+    grep("gpt", ., value = T) %>%
+    grep("gpt-4", ., value = T) %>%
+    sort() %>%
+    cbind()
+}
+
 }
 
 
@@ -32,7 +37,8 @@ get_cost <- function(completion, ..., model = completion$model,
                      completion_tokens = completion$usage$completion_tokens
 ) {
   cost <-
-       if(model |> startsWith("gpt-4-32k"))          list(input = 0.06,   output = 0.12)
+       if(model == "gpt-4-1106-preview")             list(input = 0.01,   output = 0.03)
+  else if(model |> startsWith("gpt-4-32k"))          list(input = 0.06,   output = 0.12)
   else if(model |> startsWith("gpt-4"))              list(input = 0.03,   output = 0.06)
   else if(model |> startsWith("gpt-3.5-turbo-16k"))  list(input = 0.003,  output = 0.004)
   else if(model |> startsWith("gpt-3.5-turbo"))      list(input = 0.0015, output = 0.002)
@@ -48,9 +54,16 @@ get_roxygen <- function(path) {
 
 
 get_translated_roxygen <- function(roxygen) {
-  roxygen %<>% str_flatten_lines()
-  if(!str_detect(roxygen, fixed("\n")))
-    roxygen %<>% get_roxygen()
+  file_in <- NULL
+  if(is_string(roxygen) && fs::file_exists(roxygen)) {
+    file_in <- roxygen
+    roxygen <- read_file(roxygen)
+  } else {
+    roxygen %<>% str_flatten_lines()
+  }
+
+  # if(!str_detect(roxygen, fixed("\n")))
+    # roxygen %<>% get_roxygen()
 
   messages <- chat_messages(
     !!!prompt_translate_roxygen_instructions_and_examples,
@@ -61,8 +74,8 @@ get_translated_roxygen <- function(roxygen) {
   max_response_tokens <- ceiling(n_tokens_roxygen * 1.2) |> as.integer()
 
 
-  model <-
-    if(n_tokens_messages + max_response_tokens <= 4097) "gpt-3.5-turbo" else "gpt-3.5-turbo-16k"
+  model <- "gpt-4-1106-preview"
+    # if(n_tokens_messages + max_response_tokens <= 4097) "gpt-3.5-turbo" else "gpt-3.5-turbo-16k"
     # if(n_tokens_messages + max_response_tokens <= 8192) "gpt-4" else "gpt-4-32k"
     # model="gpt-4",                #  8,192 context window
     # model="gpt-4-32k"             # 32,768 context window
@@ -90,7 +103,13 @@ get_translated_roxygen <- function(roxygen) {
   attr(translated_roxygen, "completion") <- completion
   attr(translated_roxygen, "cost") <- cost <- get_cost(completion)
   message("cost: ", cost)
-  translated_roxygen
+  if(is.null(file_in)) {
+    return(translated_roxygen)
+
+  } else {
+    write_lines(file_in, translated_roxygen)
+    invisible(translated_roxygen)
+  }
 }
 
 
@@ -102,12 +121,10 @@ prompt_translate_roxygen_instructions_and_examples <- list %(% {
 
   system = str_squish(r"{
     You translate Python to R (docs, code, idioms), correct typos,
-    and output properly formatted markdown/roxygen
+    and output properly formatted rmarkdown/roxygen
     You always wrap `NULL`, `TRUE` and `FALSE` in backticks as needed.
-    You make sure that each R code chunk is runnable. Fill in boilerplate
-    or elided code with actual runnable code.
     You output Rmd, markdown, and/or roxygen.
-    You leave everthing else the same.
+    LEAVE EVERYTHING ELSE THE SAME.
   }")
 
   # ---- initializer ----
@@ -205,7 +222,7 @@ prompt_translate_roxygen_instructions_and_examples <- list %(% {
         index 0 cannot be used in the vocabulary (input_dim should
         equal size of vocabulary + 1).
     @param object Object to compose the layer with. A tensor, array, or sequential model.
-    @param ... Passed on to the Python callable
+    @param ... For forward/backward compatability.
 
     @family core layers
     @export
@@ -236,10 +253,10 @@ prompt_translate_roxygen_instructions_and_examples <- list %(% {
     ```
 
     # Input Shape
-        2D tensor with shape: `(batch_size, input_length)`.
+    2D tensor with shape: `(batch_size, input_length)`.
 
     # Output Shape
-        3D tensor with shape: `(batch_size, input_length, output_dim)`.
+    3D tensor with shape: `(batch_size, input_length, output_dim)`.
 
     @param input_dim Integer. Size of the vocabulary,
         i.e. maximum integer index + 1.
@@ -261,10 +278,9 @@ prompt_translate_roxygen_instructions_and_examples <- list %(% {
         equal size of vocabulary + 1).
     @param object Object to compose the layer with. A tensor, array, or sequential model.
     @param ... For forward/backward compatability.
+
     @family core layers
     @export
-    @examples
-
     )---"
 
   # ---- activation_relu ----
@@ -309,29 +325,29 @@ prompt_translate_roxygen_instructions_and_examples <- list %(% {
     )--"
 
   # ---- layer_conv_2d code example ----
-  user = r"--(
-    ```python
-    # The inputs are 28x28 RGB images with `channels_last` and the batch
-    # size is 4.
-    input_shape = (4, 28, 28, 3)
-    x = tf.random.normal(input_shape)
-    y = tf.keras.layers.Conv2D(
-    2, 3, activation='relu', input_shape=input_shape[1:])(x)
-    print(y.shape)
-    # (4, 26, 26, 2)
-    ```
-    )--"
-  assistant = r"--(
-    ```{r}
-    # The inputs are 28x28 RGB images with `channels_last` and the batch
-    # size is 4.
-    input_shape <- shape(4, 28, 28, 3)
-    x <- tf$random$normal(input_shape)
-    y <- x |>
-      layer_conv_2d(2, 3, activation='relu')
-    y$shape   # (4, 26, 26, 2)
-    ```
-    )--"
+  # user = r"--(
+  #   ```python
+  #   # The inputs are 28x28 RGB images with `channels_last` and the batch
+  #   # size is 4.
+  #   input_shape = (4, 28, 28, 3)
+  #   x = tf.random.normal(input_shape)
+  #   y = tf.keras.layers.Conv2D(
+  #   2, 3, activation='relu', input_shape=input_shape[1:])(x)
+  #   print(y.shape)
+  #   # (4, 26, 26, 2)
+  #   ```
+  #   )--"
+  # assistant = r"--(
+  #   ```{r}
+  #   # The inputs are 28x28 RGB images with `channels_last` and the batch
+  #   # size is 4.
+  #   input_shape <- shape(4, 28, 28, 3)
+  #   x <- tf$random$normal(input_shape)
+  #   y <- x |>
+  #     layer_conv_2d(2, 3, activation='relu')
+  #   y$shape   # (4, 26, 26, 2)
+  #   ```
+  #   )--"
 
   # ---- layer_hashing example ----
   user = r"---(
@@ -355,19 +371,19 @@ prompt_translate_roxygen_instructions_and_examples <- list %(% {
     ```
     )---"
 
-  # ---- leave tags unchanged ----
-  user = r"--{
-    @export
-    @family activation functions
-    @seealso
-      + <https://www.tensorflow.org/api_docs/python/tf/keras/activations/relu>
-    }--"
-  assistant = r"--{
-    @export
-    @family activation functions
-    @seealso
-      + <https://www.tensorflow.org/api_docs/python/tf/keras/activations/relu>
-    }--"
+  #' # ---- leave tags unchanged ----
+  #' user = r"--{
+  #'   @export
+  #'   @family activation functions
+  #'   @seealso
+  #'     + <https://www.tensorflow.org/api_docs/python/tf/keras/activations/relu>
+  #'   }--"
+  #' assistant = r"--{
+  #'   @export
+  #'   @family activation functions
+  #'   @seealso
+  #'     + <https://www.tensorflow.org/api_docs/python/tf/keras/activations/relu>
+  #'   }--"
 
   user = r"--{
     ```python
