@@ -139,3 +139,6 @@ keras.ops.image.pad_images:
   right_padding:  as_integer
   target_height:  as_integer
   target_width:   as_integer
+
+keras.ops.one_hot:
+  num_classes: as_integer

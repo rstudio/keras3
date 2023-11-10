@@ -6,17 +6,17 @@ Computes the QR decomposition of a tensor.
 @description
 
 # Examples
-```python
-x = keras.ops.convert_to_tensor([[1., 2.], [3., 4.], [5., 6.]])
-q, r = qr(x)
-print(q)
+```{r}
+x <- k_convert_to_tensor(rbind(c(1, 2), c(3, 4), c(5, 6)))
+c(q, r) %<-% k_qr(x)
+q
 # array([[-0.16903079  0.897085]
 #        [-0.5070925   0.2760267 ]
 #        [-0.8451542  -0.34503305]], shape=(3, 2), dtype=float32)
 ```
 
 @returns
-A tuple containing two tensors. The first tensor represents the
+A list containing two tensors. The first tensor represents the
 orthogonal matrix Q, and the second tensor represents the upper
 triangular matrix R.
 
@@ -30,3 +30,4 @@ triangular matrix R.
 @seealso
 + <https:/keras.io/keras_core/api/ops/core#qr-function>
 + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/qr>
+

@@ -728,7 +728,12 @@ named_list <- function(...)
             .homonyms = "error",
             .check_assign = FALSE)
 
-
+#' @export
+py_to_r.tensorflow.python.ops.gen_linalg_ops.Qr <- function(x) {
+  x <- py_eval("tuple")(x)
+  names(x) <- c("q", "r")
+  x
+}
 
 # Generate a Random Array
 #

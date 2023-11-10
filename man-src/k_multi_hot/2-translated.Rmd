@@ -8,10 +8,9 @@ This function encodes integer labels as multi-hot vectors, where each label
 is mapped to a binary value in the resulting vector.
 
 # Examples
-```python
-data = keras.ops.convert_to_tensor([0, 4])
-keras.ops.multi_hot(data, num_tokens=5)
-# array([1.0, 0.0, 0.0, 0.0, 1.0], dtype=float32)
+```{r}
+data <- k_convert_to_tensor(c(0, 4))
+k_multi_hot(data, num_tokens=5)
 ```
 
 @returns
@@ -28,3 +27,4 @@ Tensor: The multi-hot encoded tensor.
 @family ops
 @seealso
 + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/multi_hot>
+

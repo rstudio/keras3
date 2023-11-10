@@ -162,7 +162,7 @@ get_translations <- function() {
         str_replace_all("True", "TRUE") %>%
         str_replace_all("False", "FALSE") %>%
         str_replace_all(fixed("np.random.random(("), "random_uniform(c(") %>%
-        str_replace_all("([0-9])\\.[0]\\b", "\\1") %>%
+        str_replace_all("([0-9])\\.0?\\b", "\\1") %>%
         str_flatten_lines() %>%
         identity()
         # str_replace_all(fixed("k_convert_to_tensor(["), "k_array(c(") %>%
