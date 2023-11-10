@@ -1,0 +1,1 @@
+./k_minimum/2-translated.Rmd

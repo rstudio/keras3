@@ -1,0 +1,1 @@
+./k_sqrt/2-translated.Rmd

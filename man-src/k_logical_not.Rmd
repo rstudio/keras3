@@ -1,0 +1,1 @@
+./k_logical_not/2-translated.Rmd

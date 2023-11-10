@@ -184,6 +184,19 @@ if(FALSE) {
       write_lines(x, f)
     })
 
+  withr::with_dir("man-src", {
+    list.dirs(full.names = TRUE) %>%
+      as_fs_path() %>%
+      walk(\(d) {
+        if (!file_exists(d / "2-translated.Rmd"))
+          return()
+        # browser()
+        link_create(path(d, "2-translated.Rmd"),
+                    path(d, ext = "Rmd"))
+      })
+  })
+
+
 }
 
 # start by regenerating patch files

@@ -1,0 +1,1 @@
+./k_min/2-translated.Rmd

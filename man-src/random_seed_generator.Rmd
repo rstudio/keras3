@@ -1,0 +1,1 @@
+./random_seed_generator/2-translated.Rmd

@@ -1,0 +1,1 @@
+./get_file/2-translated.Rmd

@@ -1,0 +1,1 @@
+./k_sin/2-translated.Rmd

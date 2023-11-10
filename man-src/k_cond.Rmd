@@ -1,0 +1,1 @@
+./k_cond/2-translated.Rmd

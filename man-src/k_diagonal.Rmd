@@ -1,0 +1,1 @@
+./k_diagonal/2-translated.Rmd

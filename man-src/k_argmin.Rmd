@@ -1,0 +1,1 @@
+./k_argmin/2-translated.Rmd

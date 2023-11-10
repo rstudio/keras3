@@ -1,0 +1,1 @@
+./k_image_pad_images/2-translated.Rmd

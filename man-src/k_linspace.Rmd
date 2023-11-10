@@ -1,0 +1,1 @@
+./k_linspace/2-translated.Rmd

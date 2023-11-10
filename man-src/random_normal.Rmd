@@ -1,0 +1,1 @@
+./random_normal/2-translated.Rmd

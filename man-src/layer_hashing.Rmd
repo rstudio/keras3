@@ -1,0 +1,1 @@
+./layer_hashing/2-translated.Rmd

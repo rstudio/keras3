@@ -1,0 +1,1 @@
+./k_cumsum/2-translated.Rmd

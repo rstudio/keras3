@@ -1,0 +1,1 @@
+./k_mean/2-translated.Rmd
