@@ -11,7 +11,7 @@ k_shape(x)
 the input tensor.}
 }
 \value{
-A tuple of integers or None values, indicating the shape of the input
+A list of integers or NULL values, indicating the shape of the input
 tensor.
 }
 \description{
@@ -24,9 +24,15 @@ will have a \code{tf.Tensor} value instead of a static integer value.
 }
 
 \section{Examples}{
-\if{html}{\out{<div class="sourceCode python">}}\preformatted{x = keras.zeros((8, 12))
-keras.ops.shape(x)
-# (8, 12)
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{x <- k_zeros(c(8, 12))
+k_shape(x)
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode">}}\preformatted{## [[1]]
+## [1] 8
+##
+## [[2]]
+## [1] 12
 }\if{html}{\out{</div>}}
 }
 

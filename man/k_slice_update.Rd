@@ -9,7 +9,7 @@ k_slice_update(inputs, start_indices, updates)
 \arguments{
 \item{inputs}{A tensor, the tensor to be updated.}
 
-\item{start_indices}{A list/tuple of shape \verb{(inputs.ndim,)}, specifying
+\item{start_indices}{A list of length \code{inputs$ndim}, specifying
 the starting indices for updating.}
 
 \item{updates}{A tensor, the new values to be put to \code{inputs} at \code{indices}.
@@ -22,18 +22,26 @@ the starting indices for updating.}
 \description{
 At a high level, this operation does
 \code{inputs[start_indices: start_indices + updates.shape] = updates}.
-Assume inputs is a tensor of shape \verb{(D0, D1, ..., Dn)},
-\code{start_indices} must be a list/tuple of n integers, specifying the starting
+Assume inputs is a tensor of shape \verb{(D1, D2, ..., Dn)},
+\code{start_indices} must be a list of n integers, specifying the starting
 indices. \code{updates} must have the same rank as \code{inputs}, and the size of each
 dim must not exceed \code{Di - start_indices[i]}. For example, if we have 2D
-inputs \verb{inputs = np.zeros((5, 5))}, and we want to update the intersection
+inputs \code{inputs = k_zeros(c(5, 5))}, and we want to update the intersection
 of last 2 rows and last 2 columns as 1, i.e.,
-\verb{inputs[3:, 3:] = np.ones((2, 2))}, then we can use the code below:
+\code{inputs[4:5, 4:5] = k_ones(c(2, 2))}, then we can use the code below:
 
-\if{html}{\out{<div class="sourceCode python">}}\preformatted{inputs = np.zeros((5, 5))
-start_indices = [3, 3]
-updates = np.ones((2, 2))
-inputs = keras.ops.slice_update(inputs, start_indices, updates)
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{inputs <- k_zeros(c(5, 5))
+start_indices <- c(3, 3)
+updates <- k_ones(c(2, 2))
+k_slice_update(inputs, start_indices, updates)
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor(
+## [[0. 0. 0. 0. 0.]
+##  [0. 0. 0. 0. 0.]
+##  [0. 0. 1. 1. 0.]
+##  [0. 0. 1. 1. 0.]
+##  [0. 0. 0. 0. 0.]], shape=(5, 5), dtype=float32)
 }\if{html}{\out{</div>}}
 }
 \seealso{

@@ -7,28 +7,42 @@
 k_slice(inputs, start_indices, shape)
 }
 \arguments{
-\item{inputs}{A tensor, the tensor to be updated.}
+\item{inputs}{A tensor, the tensor to be sliced.}
 
-\item{start_indices}{A list/tuple of shape \verb{(inputs.ndim,)}, specifying
+\item{start_indices}{A list of length \code{inputs$ndim}, specifying
 the starting indices for updating.}
 
 \item{shape}{The full shape of the returned slice.}
 }
 \value{
-\if{html}{\out{<div class="sourceCode">}}\preformatted{A tensor, has the same shape and dtype as `inputs`.
-}\if{html}{\out{</div>}}
+A tensor, has the same shape and dtype as \code{inputs}.
 }
 \description{
 At a high level, this operation is an explicit replacement for array slicing
-e.g. \code{inputs[start_indices: start_indices + shape]}.
+e.g. \code{inputs[start_indices:(start_indices + shape)]}.
 Unlike slicing via brackets, this operation will accept tensor start
 indices on all backends, which is useful when indices dynamically computed
 via other tensor operations.
 
-\if{html}{\out{<div class="sourceCode python">}}\preformatted{inputs = np.zeros((5, 5))
-start_indices = np.array([3, 3])
-shape = np.array([2, 2])
-inputs = keras.ops.slice(inputs, start_indices, updates)
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{(inputs <- k_arange(5*5) |> k_reshape(c(5, 5)))
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor(
+## [[ 0.  1.  2.  3.  4.]
+##  [ 5.  6.  7.  8.  9.]
+##  [10. 11. 12. 13. 14.]
+##  [15. 16. 17. 18. 19.]
+##  [20. 21. 22. 23. 24.]], shape=(5, 5), dtype=float64)
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{start_indices <- c(3, 3)
+shape <- c(2, 2)
+k_slice(inputs, start_indices, shape)
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor(
+## [[12. 13.]
+##  [17. 18.]], shape=(2, 2), dtype=float64)
 }\if{html}{\out{</div>}}
 }
 \seealso{

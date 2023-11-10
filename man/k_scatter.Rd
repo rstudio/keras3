@@ -7,7 +7,7 @@
 k_scatter(indices, values, shape)
 }
 \arguments{
-\item{indices}{A tensor or list/tuple specifying
+\item{indices}{A tensor or list specifying
 indices for the values in \code{values}.}
 
 \item{values}{A tensor, the values to be set at \code{indices}.}
@@ -18,16 +18,18 @@ indices for the values in \code{values}.}
 At a high level, this operation does \code{zeros[indices] = updates} and
 returns the output. It is equivalent to:
 
-\if{html}{\out{<div class="sourceCode python">}}\preformatted{zeros = keras.ops.zeros(shape)
-output = keras.ops.scatter_update(zeros, indices, values)
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{output <- k_scatter_update(k_zeros(shape), indices, values)
 }\if{html}{\out{</div>}}
 }
 \section{Examples}{
-\if{html}{\out{<div class="sourceCode python">}}\preformatted{indices = [[0, 1], [1, 1]]
-values = np.array([1., 1.])
-keras.ops.scatter(indices, values, shape=(2, 2))
-# array([[0., 1.],
-#        [0., 1.]])
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{indices <- rbind(c(1, 2), c(2, 2))
+values <- k_array(c(1, 1))
+k_scatter(indices, values, shape= c(2, 2))
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor(
+## [[0. 1.]
+##  [0. 1.]], shape=(2, 2), dtype=float64)
 }\if{html}{\out{</div>}}
 }
 

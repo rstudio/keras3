@@ -19,10 +19,11 @@ It is defined as:
 \verb{f(x) = scale * x for x >= 0}.
 }
 \section{Examples}{
-\if{html}{\out{<div class="sourceCode python">}}\preformatted{x = np.array([-1., 0., 1.])
-x_selu = keras.ops.selu(x)
-print(x_selu)
-# array([-1.11133055, 0., 1.05070098], shape=(3,), dtype=float64)
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{x <- k_array(c(-1, 0, 1))
+k_selu(x)
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor([-1.11133074  0.          1.05070099], shape=(3), dtype=float64)
 }\if{html}{\out{</div>}}
 }
 

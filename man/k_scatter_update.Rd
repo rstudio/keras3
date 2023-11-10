@@ -9,7 +9,7 @@ k_scatter_update(inputs, indices, updates)
 \arguments{
 \item{inputs}{A tensor, the tensor to be updated.}
 
-\item{indices}{A tensor or list/tuple of shape \verb{(N, inputs.ndim)}, specifying
+\item{indices}{A tensor or list of shape \verb{(N, inputs$ndim)}, specifying
 indices to update. \code{N} is the number of indices to update, must be
 equal to the first dimension of \code{updates}.}
 
@@ -21,35 +21,79 @@ equal to the first dimension of \code{updates}.}
 }
 \description{
 At a high level, this operation does \code{inputs[indices] = updates}.
-Assume \code{inputs} is a tensor of shape \verb{(D0, D1, ..., Dn)}, there are 2 main
+Assume \code{inputs} is a tensor of shape \verb{(D1, D2, ..., Dn)}, there are 2 main
 usages of \code{scatter_update}.
 \enumerate{
 \item \code{indices} is a 2D tensor of shape \verb{(num_updates, n)}, where \code{num_updates}
 is the number of updates to perform, and \code{updates} is a 1D tensor of
-shape \verb{(num_updates,)}. For example, if \code{inputs} is \verb{zeros((4, 4, 4))},
-and we want to update \code{inputs[1, 2, 3]} and \code{inputs[0, 1, 3]} as 1, then
+shape \code{(num_updates)}. For example, if \code{inputs} is \code{k_zeros(c(4, 4, 4))},
+and we want to update \code{inputs[2, 3, 4]} and \code{inputs[1, 2, 4]} as 1, then
 we can use:
 }
 
-\if{html}{\out{<div class="sourceCode python">}}\preformatted{inputs = np.zeros((4, 4, 4))
-indices = [[1, 2, 3], [0, 1, 3]]
-updates = np.array([1., 1.])
-inputs = keras.ops.scatter_update(inputs, indices, updates)
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{inputs <- k_zeros(c(4, 4, 4))
+indices <- rbind(c(2, 3, 4), c(1, 2, 4))
+updates <- k_array(c(1, 1), "float32")
+k_scatter_update(inputs, indices, updates)
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor(
+## [[[0. 0. 0. 0.]
+##   [0. 0. 0. 1.]
+##   [0. 0. 0. 0.]
+##   [0. 0. 0. 0.]]
+##
+##  [[0. 0. 0. 0.]
+##   [0. 0. 0. 0.]
+##   [0. 0. 0. 1.]
+##   [0. 0. 0. 0.]]
+##
+##  [[0. 0. 0. 0.]
+##   [0. 0. 0. 0.]
+##   [0. 0. 0. 0.]
+##   [0. 0. 0. 0.]]
+##
+##  [[0. 0. 0. 0.]
+##   [0. 0. 0. 0.]
+##   [0. 0. 0. 0.]
+##   [0. 0. 0. 0.]]], shape=(4, 4, 4), dtype=float32)
 }\if{html}{\out{</div>}}
 
 2 \code{indices} is a 2D tensor of shape \verb{(num_updates, k)}, where \code{num_updates}
-is the number of updates to perform, and \code{k} (\code{k < n}) is the size of
+is the number of updates to perform, and \code{k} (\code{k <= n}) is the size of
 each index in \code{indices}. \code{updates} is a \code{n - k}-D tensor of shape
-\verb{(num_updates, inputs.shape[k:])}. For example, if
-\verb{inputs = np.zeros((4, 4, 4))}, and we want to update \verb{inputs[1, 2, :]}
-and \verb{inputs[2, 3, :]} as \verb{[1, 1, 1, 1]}, then \code{indices} would have shape
+\verb{(num_updates, inputs.shape[k:))}. For example, if
+\code{inputs = k_zeros(c(4, 4, 4))}, and we want to update \code{inputs[1, 2, ]}
+and \code{inputs[2, 3, ]} as \verb{[1, 1, 1, 1]}, then \code{indices} would have shape
 \verb{(num_updates, 2)} (\code{k = 2}), and \code{updates} would have shape
 \verb{(num_updates, 4)} (\verb{inputs.shape[2:] = 4}). See the code below:
 
-\if{html}{\out{<div class="sourceCode python">}}\preformatted{inputs = np.zeros((4, 4, 4))
-indices = [[1, 2], [2, 3]]
-updates = np.array([[1., 1., 1, 1,], [1., 1., 1, 1,])
-inputs = keras.ops.scatter_update(inputs, indices, updates)
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{inputs <- k_zeros(c(4, 4, 4))
+indices <- rbind(c(2, 3), c(3, 4))
+updates <- k_array(rbind(c(1, 1, 1, 1), c(1, 1, 1, 1)), "float32")
+k_scatter_update(inputs, indices, updates)
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor(
+## [[[0. 0. 0. 0.]
+##   [0. 0. 0. 0.]
+##   [0. 0. 0. 0.]
+##   [0. 0. 0. 0.]]
+##
+##  [[0. 0. 0. 0.]
+##   [0. 0. 0. 0.]
+##   [1. 1. 1. 1.]
+##   [0. 0. 0. 0.]]
+##
+##  [[0. 0. 0. 0.]
+##   [0. 0. 0. 0.]
+##   [0. 0. 0. 0.]
+##   [1. 1. 1. 1.]]
+##
+##  [[0. 0. 0. 0.]
+##   [0. 0. 0. 0.]
+##   [0. 0. 0. 0.]
+##   [0. 0. 0. 0.]]], shape=(4, 4, 4), dtype=float32)
 }\if{html}{\out{</div>}}
 }
 \seealso{

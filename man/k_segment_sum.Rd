@@ -17,7 +17,7 @@ segments. If not specified, it is inferred from the maximum
 value in \code{segment_ids}.}
 
 \item{sorted}{A boolean indicating whether \code{segment_ids} is sorted.
-Defaults to\code{False}.}
+Defaults to\code{FALSE}.}
 }
 \value{
 A tensor containing the sum of segments, where each element
@@ -27,11 +27,13 @@ represents the sum of the corresponding segment in \code{data}.
 Computes the sum of segments in a tensor.
 }
 \section{Examples}{
-\if{html}{\out{<div class="sourceCode python">}}\preformatted{data = keras.ops.convert_to_tensor([1, 2, 10, 20, 100, 200])
-segment_ids = keras.ops.convert_to_tensor([0, 0, 1, 1, 2, 2])
-num_segments = 3
-keras.ops.segment_sum(data, segment_ids,num_segments)
-# array([3, 30, 300], dtype=int32)
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{data <- k_array(c(1, 2, 10, 20, 100, 200))
+segment_ids <- k_array(c(1, 1, 2, 2, 3, 3), "int32")
+num_segments <- 3
+k_segment_sum(data, segment_ids, num_segments)
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor([  3.  30. 300.], shape=(3), dtype=float64)
 }\if{html}{\out{</div>}}
 }
 

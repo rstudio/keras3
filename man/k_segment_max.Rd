@@ -17,7 +17,7 @@ segments. If not specified, it is inferred from the maximum
 value in \code{segment_ids}.}
 
 \item{sorted}{A boolean indicating whether \code{segment_ids} is sorted.
-Defaults to\code{False}.}
+Defaults to\code{FALSE}.}
 }
 \value{
 A tensor containing the max of segments, where each element
@@ -27,11 +27,16 @@ represents the max of the corresponding segment in \code{data}.
 Computes the max of segments in a tensor.
 }
 \section{Examples}{
-\if{html}{\out{<div class="sourceCode python">}}\preformatted{data = keras.ops.convert_to_tensor([1, 2, 10, 20, 100, 200])
-segment_ids = keras.ops.convert_to_tensor([0, 0, 1, 1, 2, 2])
-num_segments = 3
-keras.ops.segment_max(data, segment_ids, num_segments)
-# array([2, 20, 200], dtype=int32)
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{data <- k_convert_to_tensor(c(1, 2, 10, 20, 100, 200))
+segment_ids <- k_array(c(1, 1, 2, 2, 3, 3), "int32")
+num_segments <- 3
+k_segment_max(data, segment_ids, num_segments)
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor([  2.  20. 200.], shape=(3), dtype=float32)
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{# array([2, 20, 200], dtype=int32)
 }\if{html}{\out{</div>}}
 }
 
