@@ -3,26 +3,37 @@ Resize images to size using the specified interpolation method.
 @description
 
 # Examples
-```python
-x = np.random.random((2, 4, 4, 3)) # batch of 2 RGB images
-y = keras.ops.image.resize(x, (2, 2))
-y.shape
-# (2, 2, 2, 3)
+
+```r
+x <- random_uniform(c(2, 4, 4, 3)) # batch of 2 RGB images
+y <- k_image_resize(x, c(2, 2))
+y$shape
 ```
 
-```python
-x = np.random.random((4, 4, 3)) # single RGB image
-y = keras.ops.image.resize(x, (2, 2))
-y.shape
-# (2, 2, 3)
+```
+## TensorShape([2, 2, 2, 3])
 ```
 
-```python
-x = np.random.random((2, 3, 4, 4)) # batch of 2 RGB images
-y = keras.ops.image.resize(x, (2, 2),
-    data_format="channels_first")
-y.shape
-# (2, 3, 2, 2)
+
+```r
+x <- random_uniform(c(4, 4, 3)) # single RGB image
+y <- k_image_resize(x, c(2, 2))
+y$shape
+```
+
+```
+## TensorShape([2, 2, 3])
+```
+
+
+```r
+x <- random_uniform(c(2, 3, 4, 4)) # batch of 2 RGB images
+y <- k_image_resize(x, c(2, 2), data_format="channels_first")
+y$shape
+```
+
+```
+## TensorShape([2, 3, 2, 2])
 ```
 
 @returns
@@ -33,7 +44,7 @@ Resized image or batch of images.
 @param interpolation Interpolation method. Available methods are `"nearest"`,
     `"bilinear"`, and `"bicubic"`. Defaults to `"bilinear"`.
 @param antialias Whether to use an antialiasing filter when downsampling an
-    image. Defaults to `False`.
+    image. Defaults to `FALSE`.
 @param data_format string, either `"channels_last"` or `"channels_first"`.
     The ordering of the dimensions in the inputs. `"channels_last"`
     corresponds to inputs with shape `(batch, height, width, channels)`

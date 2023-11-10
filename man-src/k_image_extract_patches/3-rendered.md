@@ -3,16 +3,29 @@ Extracts patches from the image(s).
 @description
 
 # Examples
-```python
-image = np.random.random(
-    (2, 20, 20, 3)
-).astype("float32") # batch of 2 RGB images
-patches = keras.ops.image.extract_patches(image, (5, 5))
-patches.shape
+
+```r
+image <- random_uniform(c(2, 20, 20, 3), dtype = "float32") # batch of 2 RGB images
+patches <- k_image_extract_patches(image, c(5, 5))
+patches$shape
+```
+
+```
+## TensorShape([2, 4, 4, 75])
+```
+
+```r
 # (2, 4, 4, 75)
-image = np.random.random((20, 20, 3)).astype("float32") # 1 RGB image
-patches = keras.ops.image.extract_patches(image, (3, 3), (1, 1))
-patches.shape
+image <- random_uniform(c(20, 20, 3), dtype = "float32") # 1 RGB image
+patches <- k_image_extract_patches(image, c(3, 3), c(1, 1))
+patches$shape
+```
+
+```
+## TensorShape([18, 18, 27])
+```
+
+```r
 # (18, 18, 27)
 ```
 
@@ -20,9 +33,9 @@ patches.shape
 Extracted patches 3D (if not batched) or 4D (if batched)
 
 @param image Input image or batch of images. Must be 3D or 4D.
-@param size Patch size int or tuple (patch_height, patch_widht)
+@param size Patch size int or list (patch_height, patch_width)
 @param strides strides along height and width. If not specified, or
-    if `None`, it defaults to the same value as `size`.
+    if `NULL`, it defaults to the same value as `size`.
 @param dilation_rate This is the input stride, specifying how far two
     consecutive patch samples are in the input. For value other than 1,
     strides must be 1. NOTE: `strides > 1` is not supported in
@@ -42,3 +55,4 @@ Extracted patches 3D (if not batched) or 4D (if batched)
 @seealso
 + <https:/keras.io/keras_core/api/ops/image#extractpatches-function>
 + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/image/extract_patches>
+

@@ -1,3 +1,6 @@
+---
+knit: ({source(here::here("tools/knit.R")); knit_man_src})
+---
 Inverse real-valued Fast Fourier transform along the last axis.
 
 @description
@@ -16,30 +19,22 @@ the corresponding dimension of the input, the dimension is cropped. If it is
 larger, the dimension is padded with zeros.
 
 # Examples
-```python
-real = keras.ops.convert_to_tensor([0.0, 1.0, 2.0, 3.0, 4.0])
-imag = keras.ops.convert_to_tensor([0.0, 1.0, 2.0, 3.0, 4.0])
-irfft((real, imag))
-# array([0.66666667, -0.9106836, 0.24401694])
+
+```r
+real <- k_array(c(0, 1, 2, 3, 4))
+imag <- k_array(c(0, 1, 2, 3, 4))
+k_irfft(c(real, imag))
 ```
 
-```python
-irfft(rfft(real, 5), 5)
-# array([0.0, 1.0, 2.0, 3.0, 4.0])
+```
+## tf.Tensor(
+## [ 2.         -2.06066017  0.5        -0.35355339  0.          0.06066017
+##  -0.5         0.35355339], shape=(8), dtype=float64)
 ```
 
-@returns
-A tensor containing the inverse real-valued Fast Fourier Transform
-along the last axis of `x`.
+```r
+# array([0.66666667, -0.9106836, 0.24401694))
+```
 
-@param x Tuple of the real and imaginary parts of the input tensor. Both
-    tensors in the tuple should be of floating type.
-@param fft_length An integer representing the number of the fft length. If not
-    specified, it is inferred from the length of the last axis of `x`.
-    Defaults to `None`.
 
-@export
-@family ops
-@seealso
-+ <https:/keras.io/keras_core/api/ops/fft#irfft-function>
-+ <https://www.tensorflow.org/api_docs/python/tf/keras/ops/irfft>
+

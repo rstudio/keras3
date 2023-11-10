@@ -117,6 +117,12 @@ if(!"source:tools/translate-tools.R" %in% search()) envir::attach_source("tools/
 # TODO: remove any tensorflow imports / DESCRIPTION deps
 #
 # TODO: trimws @returns
+#
+# TODO: k_istft k_irfft example is wrong, investigate
+#
+# TODO: rename: k_image_pad_images -> k_image_pad
+#
+# TODO: shape accessor for x$shape?
 
 # The source of truth for the current translation should be...?
 #    - the autogened file R/autogen-*.R, or
@@ -127,14 +133,16 @@ if(!"source:tools/translate-tools.R" %in% search()) envir::attach_source("tools/
 get_translations <- function() {
   dirs <- fs::dir_ls("man-src/", type = "directory") |>
     sort() %>%
+    .[grep("^k_", basename(.))] %>%
     set_names(basename) %>%
     keep(\(dir) read_file(path(dir, "2-translated.Rmd")) |>
            str_detect("```python")) |>
     (\(x) { message("remaining: ", length(x)); x})() |>
-    head(30) |>
+    head(10) |>
     purrr::walk(\(dir) {
       og <-  read_file(dir/"2-translated.Rmd")
       new <- og %>%
+        str_split_lines() %>%
         str_replace_all("```python", "```{r}") %>%
         str_replace_all(fixed("keras.ops."), "k_") %>%
         str_replace_all(fixed("ops."), "k_") %>%
@@ -145,11 +153,23 @@ get_translations <- function() {
         str_replace_all(fixed("k_convert_to_tensor(["), "k_convert_to_tensor(c(") %>%
         str_replace_all(fixed("k_array(["), "k_array(c(") %>%
         str_replace_all(fixed("])"), "))") %>%
+        str_replace_all("^([a-z_0-9A-Z]+) =", "\\1 <-") %>%
+        str_replace_all("None", "NULL") %>%
+        str_replace_all("dict", "named list") %>%
+        str_replace_all("Dict", "Named list") %>%
+        str_replace_all("tuple", "list") %>%
+        str_replace_all("Tuple", "List") %>%
+        str_replace_all("True", "TRUE") %>%
+        str_replace_all("False", "FALSE") %>%
+        str_replace_all(fixed("np.random.random(("), "random_uniform(c(") %>%
+        str_replace_all("([0-9])\\.[0]\\b", "\\1") %>%
+        str_flatten_lines() %>%
         identity()
         # str_replace_all(fixed("k_convert_to_tensor(["), "k_array(c(") %>%
       new |> write_lines(dir/"2-translated.Rmd")
       file.edit(dir/"2-translated.Rmd")
-      stop()
+      # stop()
+      return()
       withr::local_dir(dir)
       message("Translating: ", basename(dir))
       new <- og |> get_translated_roxygen()
@@ -391,9 +411,14 @@ man_src_render_translated()
 
 devtools::document(roclets = c('rd', 'namespace'))
 
-remotes::install_local()
+if(interactive()) local({
+  rx <- callr::r_bg(\() remotes::install_local(force = TRUE, upgrade =  "never"))
+  later::later(\() cat(rx$read_all_output()), delay = 17)
+}) else
+  remotes::install_local(force = TRUE)
 
-pkgdown::build_site()
+# remotes::update_packages(upgrade = "always")
+# pkgdown::build_site()
 
 stop("DONE", call. = FALSE)
 

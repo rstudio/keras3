@@ -43,8 +43,13 @@ function (input, coordinates, order, fill_mode = "constant",
 k_image_pad_images <-
 function (images, top_padding = NULL, left_padding = NULL, target_height = NULL,
     target_width = NULL, bottom_padding = NULL, right_padding = NULL)
-keras$ops$image$pad_images(images, top_padding, left_padding,
-    target_height, target_width, bottom_padding, right_padding)
+{
+    args <- capture_args2(list(images = as_integer, top_padding = as_integer,
+        bottom_padding = as_integer, left_padding = as_integer,
+        right_padding = as_integer, target_height = as_integer,
+        target_width = as_integer))
+    do.call(keras$ops$image$pad_images, args)
+}
 
 
 "man-src/k_image_resize.Rmd" # |>file.edit() # or cmd+click to edit man page
@@ -53,5 +58,7 @@ keras$ops$image$pad_images(images, top_padding, left_padding,
 k_image_resize <-
 function (image, size, interpolation = "bilinear", antialias = FALSE,
     data_format = "channels_last")
-keras$ops$image$resize(image, size, interpolation, antialias,
-    data_format)
+{
+    args <- capture_args2(list(size = as_integer))
+    do.call(keras$ops$image$resize, args)
+}

@@ -27,7 +27,7 @@ k_irfft(c(real, imag))
 ```
 
 ```{r}
-k_irfft(k_rfft(real, 5)5)
+k_irfft(k_rfft(real, 5), 5)
 # array([0.0, 1.0, 2.0, 3.0, 4.0))
 ```
 
@@ -46,4 +46,3 @@ along the last axis of `x`.
 @seealso
 + <https:/keras.io/keras_core/api/ops/fft#irfft-function>
 + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/irfft>
-

@@ -189,7 +189,7 @@ function (x, sequence_length, sequence_stride, fft_length, length = NULL,
 {
     args <- capture_args2(list(sequence_length = as_integer,
         sequence_stride = as_integer, fft_length = as_integer,
-        length = as_integer))
+        length = as_integer, x = tuple))
     do.call(keras$ops$istft, args)
 }
 
