@@ -5,7 +5,7 @@ date-created: 2020/04/15
 last-modified: 2023/06/27
 description: Overriding the training step of the Model class with TensorFlow.
 output: rmarkdown::html_vignette
-date: 'Last Modified: 2023-11-08; Last Rendered: 2023-11-08'
+date: 'Last Modified: 2023-11-10; Last Rendered: 2023-11-10'
 vignette: >
   %\VignetteIndexEntry{Customizing what happens in `fit()` with TensorFlow}
   %\VignetteEngine{knitr::rmarkdown}

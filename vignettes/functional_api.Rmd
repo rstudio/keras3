@@ -5,7 +5,7 @@ date-created: 2019/03/01
 last-modified: 2020/04/12
 description: Complete guide to the functional API.
 output: rmarkdown::html_vignette
-date: 'Last Modified: 2023-11-08; Last Rendered: 2023-11-08'
+date: 'Last Modified: 2023-11-10; Last Rendered: 2023-11-10'
 vignette: >
   %\VignetteIndexEntry{The Functional API}
   %\VignetteEngine{knitr::rmarkdown}

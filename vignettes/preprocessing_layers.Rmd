@@ -6,7 +6,7 @@ last-modified: 2021/04/23
 description: Overview of how to leverage preprocessing layers to create end-to-end
   models.
 output: rmarkdown::html_vignette
-date: 'Last Modified: 2023-11-08; Last Rendered: 2023-11-08'
+date: 'Last Modified: 2023-11-10; Last Rendered: 2023-11-10'
 vignette: >
   %\VignetteIndexEntry{Working with preprocessing layers}
   %\VignetteEngine{knitr::rmarkdown}

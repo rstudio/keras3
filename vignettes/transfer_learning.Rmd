@@ -5,7 +5,7 @@ date-created: 2020/04/15
 last-modified: 2023/06/25
 description: Complete guide to transfer learning & fine-tuning in Keras.
 output: rmarkdown::html_vignette
-date: 'Last Modified: 2023-11-08; Last Rendered: 2023-11-08'
+date: 'Last Modified: 2023-11-10; Last Rendered: 2023-11-10'
 vignette: >
   %\VignetteIndexEntry{Transfer learning & fine-tuning}
   %\VignetteEngine{knitr::rmarkdown}

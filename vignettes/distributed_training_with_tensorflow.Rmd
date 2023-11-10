@@ -5,7 +5,7 @@ date-created: 2020/04/28
 last-modified: 2023/06/29
 description: Guide to multi-GPU training for Keras models with TensorFlow.
 output: rmarkdown::html_vignette
-date: 'Last Modified: 2023-11-08; Last Rendered: 2023-11-08'
+date: 'Last Modified: 2023-11-10; Last Rendered: 2023-11-10'
 vignette: >
   %\VignetteIndexEntry{Multi-GPU distributed training with TensorFlow}
   %\VignetteEngine{knitr::rmarkdown}

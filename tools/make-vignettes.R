@@ -29,7 +29,7 @@ munge_tutobook <- function(tutobook) {
         x[,1] %<>% snakecase::to_snake_case() %<>% str_replace_all("_", "-")
         x <- rlang::set_names(nm = x[,1], as.list(x[,2]))
         x$output <- "rmarkdown::html_vignette"
-        x$knit <- "keras:::knit_vignette"
+        x$knit <- '({source("../../tools/knit.R"); knit_vignette)'
         # vignette <- glue_data(list(title = x$title), r"---(
         # vignette: >
         #   %\VignetteIndexEntry{<<title>>}
@@ -189,6 +189,7 @@ vignettes_src_pull_upstream_updates <- function() {
     })
 }
 
+include("tools/knit.R")
 
 vignette_src_render_translated <-
   function(directories = dir_ls("vignettes-src/", type = "directory")) {
@@ -198,11 +199,11 @@ vignette_src_render_translated <-
       purrr::walk(\(dir) {
         # withr::local_dir(dir)
         message("rendering: ", dir)
-        keras$utils$clear_session()
+        # keras$utils$clear_session()
         # TODO: This should really be a callr call
         # Set knitr options to halt on errors
-        knitr::opts_chunk$set(error = FALSE)
-        keras:::knit_vignette(dir / "2-translated.Rmd")
+        # knitr::opts_chunk$set(error = FALSE)
+        knit_vignette(dir / "2-translated.Rmd")
       })
   }
 

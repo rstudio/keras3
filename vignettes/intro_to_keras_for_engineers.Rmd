@@ -6,7 +6,7 @@ last-modified: 2020/04/28
 description: Everything you need to know to use Keras to build real-world machine
   learning solutions.
 output: rmarkdown::html_vignette
-date: 'Last Modified: 2023-11-08; Last Rendered: 2023-11-08'
+date: 'Last Modified: 2023-11-10; Last Rendered: 2023-11-10'
 vignette: >
   %\VignetteIndexEntry{Introduction to Keras for Engineers}
   %\VignetteEngine{knitr::rmarkdown}
