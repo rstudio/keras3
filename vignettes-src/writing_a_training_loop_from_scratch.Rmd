@@ -1,0 +1,1 @@
+writing_a_training_loop_from_scratch/2-translated.Rmd

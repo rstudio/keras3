@@ -1,0 +1,1 @@
+getting_started_with_keras_core/2-translated.Rmd

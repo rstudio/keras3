@@ -1,0 +1,1 @@
+sequential_model/2-translated.Rmd

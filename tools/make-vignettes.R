@@ -30,32 +30,16 @@ munge_tutobook <- function(tutobook) {
         x <- rlang::set_names(nm = x[,1], as.list(x[,2]))
         x$output <- "rmarkdown::html_vignette"
         x$knit <- '({source("../../tools/knit.R"); knit_vignette)'
-        # vignette <- glue_data(list(title = x$title), r"---(
-        # vignette: >
-        #   %\VignetteIndexEntry{<<title>>}
-        #   %\VignetteEngine{knitr::rmarkdown}
-        #   %\VignetteEncoding{UTF-8}
-        # )---", .open = "<<", .close = ">>")
         # # x$repo <- https://github.com/rstudio/keras
 
-        frontmatter <- yaml::as.yaml(x) %>% str_trim("right")
-        # frontmatter %<>% str_flatten_lines(vignette)
-        # frontmatter %<>% str_flatten_lines(., trim(r"---{
-        # knit: >
-        #   (function(input, encoding) rmarkdown::render(
-        #     input, encoding=encoding,
-        #     output_file='03-rendered.md')))
-        # }---"))
-
-        # frontmatter <- str_c(x[,1], ": ", x[,2])
+        frontmatter <- yaml::as.yaml(x) |> str_trim("right")
         out <- str_flatten_lines("---", frontmatter, "---")
         return(out)
       }
-        # browser()
 
-      out <- .x$line %>%
-        str_trim("right") %>%
-        str_flatten_lines() %>%
+      out <- .x$line |>
+        str_trim("right") |>
+        str_flatten_lines() |>
         str_trim()
 
       if(out == "")
@@ -64,33 +48,34 @@ munge_tutobook <- function(tutobook) {
       if(.grp$is_code) {
 
         type <- .grp$section_type
-        # if(i)
         if(is.na(type) || type == "")
-          # browser()
-        # if(type == "")
           type <- "python"
-        out <- str_flatten_lines(
-          sprintf("```%s", type), out, "```")
+        out <- str_flatten_lines(sprintf("```%s", type), out, "```")
+
       } else {
-        out <- out %>%
-          str_replace_all("\n\n\n", "\n\n") %>%
-          str_replace_all("\n\n\n", "\n\n") %>%
-          str_replace_all("\n\n\n", "\n\n") %>%
-          str_replace_all("\n\n\n", "\n\n")
+
+        out <- str_compact_newlines(out)
+
       }
       out
 
     }) %>%
     keep(., . != "") %>%
     str_flatten("\n\n")
-  # print()
-  # print(n = Inf)
 
+}
+
+str_compact_newlines <- function(x, max_consecutive_new_lines = 2) {
+  x <- x |> str_flatten_lines()
+  while (nchar(x) != nchar(x <- gsub(
+    strrep("\n", max_consecutive_new_lines + 1),
+    strrep("\n", max_consecutive_new_lines),
+    x, fixed = TRUE))) {}
+  x
 }
 
 
 fetch_tutobook_filepaths <- function(...) {
-  # Sys.glob(c(...)) %>%
   c(...) %>%
     lapply(list.files, full.names = TRUE,
            recursive = TRUE, pattern = "\\.py$") %>%
@@ -144,6 +129,9 @@ make_guide <- function(guide) {
   translated_path <- path("vignettes-src", name, "2-translated.Rmd")
   if(!file_exists(translated_path))
     file_copy(formatted_path, translated_path)
+  link <- path("vignettes-src", name, ext = "Rmd")
+  if(!file_exists(link))
+    link_create(path(name, "2-translated.Rmd"), link)
 }
 
 vignettes_src_pull_upstream_updates <- function() {
