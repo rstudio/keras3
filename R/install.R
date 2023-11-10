@@ -105,12 +105,15 @@ install_keras <- function(...,
 #' @rdname config_backend
 #' @param value string, one of `"tensorflow"`, `"jax"`, or `"torch"`.
 config_set_backend <- function(value = c("tensorflow", "jax", "torch")) {
+  value <- match.arg(value)
   if(py_available() && !exists("module", envir = keras)) {
     # is the keras module already imported? reticulate:::py_module_proxy_import()
     # removes 'module' from the lazy_loaded PyObjectRef module env
-    stop("The keras backend must be set before keras has inititialized. Please restart the R session")
+    if(config_backend() == value)
+      return(invisible(value))
+    else
+      stop("The keras backend must be set before keras has inititialized. Please restart the R session")
   }
-  value <- match.arg(value)
   Sys.setenv(KERAS_BACKEND = value)
   if(py_available())
     import("os")$environ$update(list(KERAS_BACKEND = value))
