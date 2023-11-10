@@ -1,9 +1,15 @@
 
 destination: website
 
+# template:
+#   params:
+#     bootswatch: cosmo
+
+url: https://keras.posit.co
+
 template:
-  params:
-    bootswatch: cosmo
+  bootstrap: 5
+  bootswatch: cosmo
 
 navbar:
   title: "Keras for R"
@@ -25,6 +31,13 @@ navbar:
           href: articles/tutorial_overfit_underfit.html
         - text: "Save and Restore Models"
           href: articles/tutorial_save_and_restore.html
+
+    - text: "Guides"
+      menu:
+        - text: "Writing Your Own Callbacks"
+          href: articles/writing_your_own_callbacks.html
+          source: ../vignettes-src/writing_your_own_callbacks/2-translated.Rmd
+
     - text: "Articles"
       menu:
         - text: "Guides (New for TF 2.6)"
@@ -81,6 +94,7 @@ navbar:
           href: articles/custom_models.html
         - text: "Saving and serializing"
           href: articles/saving_serializing.html
+
     - text: Learn
       href: articles/learn.html
     - text: Tools
@@ -112,49 +126,55 @@ reference:
       - clone_model
       - freeze_weights
 
-  - title: "Core Layers"
+  - title: "Layers"
+
+  - subtitle: "Core Layers"
     contents:
       - has_concept("core layers")
 
-  - title: "Reshaping Layers"
+  - subtitle: "Reshaping Layers"
     contents:
       - has_concept("reshaping layers")
 
-  - title: "Convolutional Layers"
+  - subtitle: "Convolutional Layers"
     contents:
       - has_concept("convolutional layers")
 
-  - title: "Pooling Layers"
+  - subtitle: "Pooling Layers"
     contents:
       - has_concept("pooling layers")
 
-  - title: "Activation Layers"
+  - subtitle: "Activation Layers"
     contents:
       - starts_with("layer_activation")
 
-  - title: "Recurrent Layers"
+  - subtitle: "Recurrent Layers"
     contents:
       - has_concept("recurrent layers")
 
-  - title: "preprocessing Layers"
+  - subtitle: "preprocessing Layers"
     contents:
       - has_concept("preprocessing layers")
 
-  - title: "Attention Layers"
+  - subtitle: "Attention Layers"
     contents:
       - has_concept("attention layers")
 
-  - title: "Normalization Layers"
+  - subtitle: "Normalization Layers"
     contents:
       - has_concept("normalization layers")
 
-  - title: "Regularization Layers"
+  - subtitle: "Regularization Layers"
     contents:
       - has_concept("regularization layers")
 
-  - title: "Merge Layers"
+  - subtitle: "Merge Layers"
     contents:
       - has_concept("merging layers")
+
+  - subtitle: "Other Layers"
+    contents:
+      - starts_with("layer_")
 
   - title: "Layer Methods"
     contents:
@@ -311,6 +331,8 @@ reference:
       - starts_with("random")
 
   - title: "Operations"
+    desc: >
+      Functions that are safe to call in Eager and Graph mode
     contents:
       - starts_with("k_")
 
