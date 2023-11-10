@@ -332,10 +332,12 @@ df |>
       rowwise() |>
       mutate(final_dump = str_flatten_lines(
 
-        glue(r"--("{fs::path(man_src_dir, "1-formatted.md")}" # view the upstream doc)--"),
-        glue(r"--("{fs::path(man_src_dir, "2-translated.Rmd")}" # |>file.edit() # or cmd+click to edit man page)--"),
-
+        glue(r"--("{fs::path('man-src', r_name, ext = 'Rmd')}" # |>file.edit() # or cmd+click to edit man page)--"),
+        glue(r"--("{fs::path(man_src_dir, "0-upstream.md")}" # view the upstream doc)--"),
+        # glue(r"--("{fs::path('man-src', r_name, ext = 'Rmd') "2-translated.Rmd")}" # |>file.edit() # or cmd+click to edit man page)--"),
         glue(r"--(#' @eval readLines("{fs::path(man_src_dir, "3-rendered.md")}") )--"),
+
+        # glue(r"--(#' @eval readLines("{fs::path(man_src_dir, "3-rendered.md")}") )--"),
         str_c(r_name, " <- "),
         deparse(r_fn),
         ""
