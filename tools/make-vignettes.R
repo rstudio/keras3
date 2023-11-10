@@ -29,7 +29,7 @@ munge_tutobook <- function(tutobook) {
         x[,1] %<>% snakecase::to_snake_case() %<>% str_replace_all("_", "-")
         x <- rlang::set_names(nm = x[,1], as.list(x[,2]))
         x$output <- "rmarkdown::html_vignette"
-        x$knit <- '({source("../../tools/knit.R"); knit_vignette)'
+        x$knit <- '({source(here::here("tools/knit.R")); knit_vignette)'
         # # x$repo <- https://github.com/rstudio/keras
 
         frontmatter <- yaml::as.yaml(x) |> str_trim("right")
@@ -116,7 +116,12 @@ tutobook_to_rmd <- function(path_to_tutobook, outfile = NULL, tutobook = NULL) {
   }
 
 }
-
+# (function(input, ...) {
+#   invisible(system(paste0('({source(here::here("tools/knit.R")); knit_vignette}) "', input, '" ', ''))) })(
+#     '/Users/tomasz/github/rstudio/keras/vignettes-src/writing_your_own_callbacks.Rmd',
+#     encoding = 'UTF-8',
+#     output_dir = '/var/folders/hn/ck2j_bjx0kjg65jxqtbcb91c0000gp/T/RtmpT5oKKf/preview-12663547e158b.dir'
+#   )
 
 make_guide <- function(guide) {
   # guide == path to tutobook from upstream
@@ -252,4 +257,3 @@ vignette: >
 )----'
   glue::glue(template, .open = "<<", .close = ">>")
 }
-

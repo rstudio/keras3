@@ -3,7 +3,7 @@
 # TODO: move these out of the package namespace, we don't want a knitr dep on cran
 knit_man_src <- function(input, ..., output_dir) {
   library(keras)
-  dir <- dirname(input)
+  dir <- dirname(normalizePath(input))
   withr::local_dir(dir)
   message("knit_man_src(", glue::double_quote(input), ")")
 
@@ -63,8 +63,8 @@ knit_man_src <- function(input, ..., output_dir) {
 knit_vignette <- function(input, ..., output_dir) {
   # print(sys.call())
   # stop()
-  input <- normalizePath(input)
-  render_dir <- dirname(input)
+  # input <- normalizePath(input)
+  render_dir <- dirname(normalizePath(input))
   if(getwd() != render_dir) {
     message("Changing wd to ", render_dir)
     owd <- setwd(render_dir)
@@ -94,7 +94,7 @@ knit_vignette <- function(input, ..., output_dir) {
   # )
   library(keras)
   knitr::knit(
-    input,
+    "2-translated.Rmd",
     # output_format = rmarkdown::github_document(preserve_yaml = TRUE),
     # output_format = rmarkdown::md_document( preserve_yaml = TRUE, ext = "Rmd"), #
     # output_format = rmarkdown::md_document(preserve_yaml = FALSE), # , ext = "Rmd"
@@ -103,7 +103,7 @@ knit_vignette <- function(input, ..., output_dir) {
     ...
   )
   x <- readLines(output_file)
-  # if(length(grep("^knit: ({source("../../tools/knit.R"); knit_vignette)", x) -> i))
+  # if(length(grep("^knit: ({source(here::here("tools/knit.R")); knit_vignette})", x) -> i))
   # x <- x[-i]
   end_fm_i <- which(x == "---")[2]
   x_fm <- x[2:(end_fm_i-1)]
@@ -190,7 +190,7 @@ knit_vignette <- function(input, ..., output_dir) {
 # figs <- list.files("man/figures", full.names = TRUE)
 # figs_dir <- "man/figures"
 # figs_dir2 <- fs::dir_create("../../man/figures/", basename(dir))
-# # source("../../tools/knit.R")$knit_man_src
+# # source(here::here("tools/knit.R"))$knit_man_src
 #
 # file.rename(figs, new_figs_loc)
 #
