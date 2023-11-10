@@ -24,3 +24,4 @@ inst/doc
 revdep
 debug.py
 man-src/*/translate.patch
+*.keras
