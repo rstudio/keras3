@@ -7,9 +7,9 @@ knit_man_src <- function(input, ..., output_dir) {
   withr::local_dir(dir)
   message("knit_man_src(", glue::double_quote(input), ")")
 
-  keras$utils$clear_session()
   fig.path <- paste0(basename(dir), "-")
   unlink(Sys.glob(paste0("../../man/figures/", fig.path, "*.svg")))
+  unlink(Sys.glob(paste0(fig.path, "*.svg")))
 
   og_knitr_chunks <- knitr::opts_chunk$get()
   on.exit(do.call(knitr::opts_chunk$set, og_knitr_chunks), add = TRUE)
@@ -20,7 +20,9 @@ knit_man_src <- function(input, ..., output_dir) {
     dev = "svg"
   )
 
-  unlink(Sys.glob(paste0(fig.path, "*.svg")))
+  keras$utils$clear_session()
+  set.seed(1L)
+  keras$utils$set_random_seed(1L)
 
   knitr::knit("2-translated.Rmd", "3-rendered.md",
               quiet = TRUE, envir = new.env(parent = globalenv()))
@@ -75,10 +77,10 @@ knit_vignette <- function(input, ..., output_dir) {
                                mustWork = FALSE)
   message("output_file: ", output_file)
 
-  set.seed(1)
-  keras::set_random_seed(1)
+  set.seed(1L)
+  keras$utils$set_random_seed(1L)
   knitr::opts_chunk$set(
-    collapse = TRUE,
+    # collapse = TRUE,
     comment = "##" #>
   )
   # rmarkdown::render(

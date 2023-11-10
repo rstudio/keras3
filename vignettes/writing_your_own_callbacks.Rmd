@@ -170,6 +170,9 @@ model |> fit(
   epochs = 2, verbose = 0, validation_split = 0.5,
   callbacks = list(callback_custom())
 )
+```
+
+```
 ## Starting training; got logs:  Named list()
 ## 
 ## Start epoch 0 of training; got logs:  Named list()
@@ -301,12 +304,17 @@ model |> fit(
 ##  $ mean_absolute_error    : num 2.25
 ##  $ val_loss               : num 4.82
 ##  $ val_mean_absolute_error: num 1.85
+```
 
+```r
 res <- model |> evaluate(
   mnist$test$x, mnist$test$y,
   verbose = 0,
   callbacks = list(callback_custom())
 )
+```
+
+```
 ## Start testing; got logs:  Named list()
 ## 
 ## ...Evaluating: start of batch 0; got logs:  Named list()
@@ -354,12 +362,17 @@ res <- model |> evaluate(
 ## Stop testing; got logs: List of 2
 ##  $ loss               : num 6.15
 ##  $ mean_absolute_error: num 2.04
+```
 
+```r
 res <- model |> predict(
   mnist$test$x,
   verbose = 0,
   callbacks = list(callback_custom())
 )
+```
+
+```
 ## Start predicting; got logs:  Named list()
 ## 
 ## ...Predicting: start of batch 0; got logs:  Named list()
@@ -430,6 +443,9 @@ model |> fit(
   epochs = 2, verbose = 0,
   callbacks = list(callback_print_loss_and_mae())
 )
+```
+
+```
 ## Up to batch 0, the average loss is   26.27.
 ## Up to batch 1, the average loss is  412.34.
 ## Up to batch 2, the average loss is  282.25.
@@ -446,12 +462,17 @@ model |> fit(
 ## Up to batch 5, the average loss is    9.91.
 ## Up to batch 6, the average loss is    9.24.
 ## The average loss for epoch  1 is      9.24 and mean absolute error is    2.45.
+```
 
+```r
 res = model |> evaluate(
   mnist$test$x, mnist$test$y,
   verbose = 0,
   callbacks = list(callback_print_loss_and_mae())
 )
+```
+
+```
 ## Up to batch 0, the average loss is    6.75.
 ## Up to batch 1, the average loss is    7.60.
 ## Up to batch 2, the average loss is    7.16.
@@ -558,6 +579,9 @@ model |> fit(
   callbacks = list(callback_print_loss_and_mae(),
                    callback_early_stopping_at_min_loss())
 )
+```
+
+```
 ## Up to batch 0, the average loss is   29.74.
 ## Up to batch 1, the average loss is  467.31.
 ## Up to batch 2, the average loss is  319.13.
@@ -665,6 +689,9 @@ model |> fit(
     callback_custom_learning_rate_scheduler(lr_schedule)
   )
 )
+```
+
+```
 ## 
 ## Epoch 000: Learning rate is 0.1000.
 ## Up to batch 0, the average loss is   27.86.
