@@ -8,14 +8,22 @@ shape, dimensions which are dynamic in the context of a compiled function
 will have a `tf.Tensor` value instead of a static integer value.
 
 # Examples
-```python
-x = keras.zeros((8, 12))
-keras.ops.shape(x)
-# (8, 12)
+
+```r
+x <- k_zeros(c(8, 12))
+k_shape(x)
+```
+
+```
+## [[1]]
+## [1] 8
+##
+## [[2]]
+## [1] 12
 ```
 
 @returns
-A tuple of integers or None values, indicating the shape of the input
+A list of integers or NULL values, indicating the shape of the input
 tensor.
 
 @param x A tensor. This function will try to access the `shape` attribute of

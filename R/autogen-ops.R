@@ -47,7 +47,7 @@ keras$ops$fori_loop(lower, upper, body_fun, init_val)
 k_scatter <-
 function (indices, values, shape)
 {
-    args <- capture_args2(list(shape = normalize_shape))
+    args <- capture_args2(list(indices = as_index, shape = normalize_shape))
     do.call(keras$ops$scatter, args)
 }
 
@@ -57,7 +57,10 @@ function (indices, values, shape)
 #' @eval readLines("man-src/k_scatter_update/3-rendered.md")
 k_scatter_update <-
 function (inputs, indices, updates)
-keras$ops$scatter_update(inputs, indices, updates)
+{
+    args <- capture_args2(list(indices = as_index))
+    do.call(keras$ops$scatter_update, args)
+}
 
 
 "man-src/k_shape.Rmd" # |>file.edit() # or cmd+click to edit man page
@@ -74,7 +77,7 @@ keras$ops$shape(x)
 k_slice <-
 function (inputs, start_indices, shape)
 {
-    args <- capture_args2(list(shape = normalize_shape))
+    args <- capture_args2(list(shape = normalize_shape, start_indices = as_index))
     do.call(keras$ops$slice, args)
 }
 
@@ -84,7 +87,10 @@ function (inputs, start_indices, shape)
 #' @eval readLines("man-src/k_slice_update/3-rendered.md")
 k_slice_update <-
 function (inputs, start_indices, updates)
-keras$ops$slice_update(inputs, start_indices, updates)
+{
+    args <- capture_args2(list(start_indices = as_index))
+    do.call(keras$ops$slice_update, args)
+}
 
 
 "man-src/k_stop_gradient.Rmd" # |>file.edit() # or cmd+click to edit man page
@@ -238,7 +244,7 @@ keras$ops$rsqrt(x)
 k_segment_max <-
 function (data, segment_ids, num_segments = NULL, sorted = FALSE)
 {
-    args <- capture_args2(list(num_segments = as_integer))
+    args <- capture_args2(list(segment_ids = as_index, num_segments = as_integer))
     do.call(keras$ops$segment_max, args)
 }
 
@@ -249,7 +255,7 @@ function (data, segment_ids, num_segments = NULL, sorted = FALSE)
 k_segment_sum <-
 function (data, segment_ids, num_segments = NULL, sorted = FALSE)
 {
-    args <- capture_args2(list(num_segments = as_integer))
+    args <- capture_args2(list(segment_ids = as_index, num_segments = as_integer))
     do.call(keras$ops$segment_sum, args)
 }
 
@@ -1654,7 +1660,7 @@ keras$ops$swapaxes(x, axis1, axis2)
 k_take <-
 function (x, indices, axis = NULL)
 {
-    args <- capture_args2(list(axis = as_axis))
+    args <- capture_args2(list(indices = as_index, axis = as_axis))
     do.call(keras$ops$take, args)
 }
 
@@ -1665,7 +1671,7 @@ function (x, indices, axis = NULL)
 k_take_along_axis <-
 function (x, indices, axis = NULL)
 {
-    args <- capture_args2(list(axis = as_axis))
+    args <- capture_args2(list(indices = as_index, axis = as_axis))
     do.call(keras$ops$take_along_axis, args)
 }
 

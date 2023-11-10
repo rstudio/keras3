@@ -11,16 +11,16 @@ indices on all backends, which is useful when indices dynamically computed
 via other tensor operations.
 
 ```{r}
-inputs <- k_zeros(c(5, 5))
+(inputs <- k_arange(5*5) |> k_reshape(c(5, 5)))
 start_indices <- c(3, 3)
-shape <- k_array(c(2, 2))
-k_slice(inputs, start_indices, updates)
+shape <- c(2, 2)
+k_slice(inputs, start_indices, shape)
 ```
 
 @returns
-    A tensor, has the same shape and dtype as `inputs`.
+A tensor, has the same shape and dtype as `inputs`.
 
-@param inputs A tensor, the tensor to be updated.
+@param inputs A tensor, the tensor to be sliced.
 @param start_indices A list of length `inputs$ndim`, specifying
     the starting indices for updating.
 @param shape The full shape of the returned slice.

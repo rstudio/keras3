@@ -3,11 +3,19 @@ Computes the max of segments in a tensor.
 @description
 
 # Examples
-```python
-data = keras.ops.convert_to_tensor([1, 2, 10, 20, 100, 200])
-segment_ids = keras.ops.convert_to_tensor([0, 0, 1, 1, 2, 2])
-num_segments = 3
-keras.ops.segment_max(data, segment_ids, num_segments)
+
+```r
+data <- k_convert_to_tensor(c(1, 2, 10, 20, 100, 200))
+segment_ids <- k_array(c(1, 1, 2, 2, 3, 3), "int32")
+num_segments <- 3
+k_segment_max(data, segment_ids, num_segments)
+```
+
+```
+## tf.Tensor([  2.  20. 200.], shape=(3), dtype=float32)
+```
+
+```r
 # array([2, 20, 200], dtype=int32)
 ```
 
@@ -22,7 +30,7 @@ represents the max of the corresponding segment in `data`.
     segments. If not specified, it is inferred from the maximum
     value in `segment_ids`.
 @param sorted A boolean indicating whether `segment_ids` is sorted.
-    Defaults to`False`.
+    Defaults to`FALSE`.
 
 @export
 @family ops
