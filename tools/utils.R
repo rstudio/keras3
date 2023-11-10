@@ -1044,7 +1044,7 @@ make_r_fn.default <- function(endpoint, py_obj, transformers) {
       args <- capture_args2(.(transformers))
       set.seed(args$seed)
       # set Python/NumPy random seed
-      reticulate::py_set_seed(seed)
+      reticulate::py_set_seed(args$seed)
       do.call(.(py_obj_expr), args)
     })
   }

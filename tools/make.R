@@ -3,6 +3,9 @@
 if(!"source:tools/utils.R" %in% search()) envir::attach_source("tools/utils.R")
 if(!"source:tools/translate-tools.R" %in% search()) envir::attach_source("tools/translate-tools.R")
 
+# TODO: consider using quilt or stgit instead of the manual git calls
+# https://stacked-git.github.io   https://savannah.nongnu.org/projects/quilt/ https://blog.tfnico.com/2020/07/git-tools-for-keeping-patches-on-top-of.html
+
 # TODO: k_fft() should really accept and return complex tensors too.
 #
 # TODO: we should export keras::shape()
@@ -387,6 +390,10 @@ devtools::load_all() # TODO: render should be w/ an installed package and in a f
 man_src_render_translated()
 
 devtools::document(roclets = c('rd', 'namespace'))
+
+remotes::install_local()
+
+pkgdown::build_site()
 
 stop("DONE", call. = FALSE)
 

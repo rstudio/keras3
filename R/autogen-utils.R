@@ -239,6 +239,7 @@ function (seed)
 {
     args <- capture_args2(list(seed = as_integer))
     set.seed(args$seed)
+    reticulate::py_set_seed(args$seed)
     do.call(keras$utils$set_random_seed, args)
 }
 
