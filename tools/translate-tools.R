@@ -102,12 +102,11 @@ get_translated_roxygen <- function(roxygen) {
   translated_roxygen <- completion$choices[[1L]]$message$content
   attr(translated_roxygen, "completion") <- completion
   attr(translated_roxygen, "cost") <- cost <- get_cost(completion)
-  message("cost: ", cost)
+  message("cost: ", cost, " completion time: ", runtime[["elapsed"]])
   if(is.null(file_in)) {
     return(translated_roxygen)
-
   } else {
-    write_lines(file_in, translated_roxygen)
+    write_lines(translated_roxygen, normalizePath(file_in))
     invisible(translated_roxygen)
   }
 }
