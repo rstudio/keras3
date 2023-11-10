@@ -128,9 +128,9 @@
     </div>
     <div class="section level2">
     <h2 id="examples">Examples<a class="anchor" aria-label="anchor" href="#examples"></a></h2>
-    <p></p><div class="sourceCode python"><pre><code><span id="cb1-1"><a href="#cb1-1" tabindex="-1"></a>x <span class="op">=</span> keras.ops.convert_to_tensor([<span class="op">-</span><span class="fl">0.541391</span>, <span class="fl">0.0</span>, <span class="fl">0.50</span>, <span class="fl">5.0</span>])</span>
-<span id="cb1-2"><a href="#cb1-2" tabindex="-1"></a>keras.ops.log_sigmoid(x)</span>
-<span id="cb1-3"><a href="#cb1-3" tabindex="-1"></a><span class="co"># array([-1.0000418, -0.6931472, -0.474077, -0.00671535], dtype=float32)</span></span></code></pre><p></p></div>
+    <p></p><div class="sourceCode r"><pre><code><span><span class="va">x</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/k_convert_to_tensor.html">k_convert_to_tensor</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="op">-</span><span class="fl">0.541391</span>, <span class="fl">0.0</span>, <span class="fl">0.50</span>, <span class="fl">5.0</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="fu"><a href="../reference/k_log_sigmoid.html">k_log_sigmoid</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span></span></code></pre><p></p></div>
+<p></p><div class="sourceCode"><pre><code><span id="cb1-1"><a href="#cb1-1" tabindex="-1"></a><span class="do">## tf.Tensor([-1.0000418  -0.6931472  -0.474077   -0.00671535], shape=(4), dtype=float32)</span></span></code></pre><p></p></div>
     </div>
     <div class="section level2">
     <h2 id="see-also">See also<a class="anchor" aria-label="anchor" href="#see-also"></a></h2>

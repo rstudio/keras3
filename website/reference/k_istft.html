@@ -129,7 +129,7 @@ stft."><meta property="og:image" content="https://keras.posit.co/logo.png"><!-- 
     <h2 id="arguments">Arguments<a class="anchor" aria-label="anchor" href="#arguments"></a></h2>
     <dl><dt>x</dt>
 <dd><p>Tuple of the real and imaginary parts of the input tensor. Both
-tensors in the tuple should be of floating type.</p></dd>
+tensors in the list should be of floating type.</p></dd>
 
 
 <dt>sequence_length</dt>
@@ -148,20 +148,20 @@ tensors in the tuple should be of floating type.</p></dd>
 <dt>length</dt>
 <dd><p>An integer representing the output is clipped to exactly length.
 If not specified, no padding or clipping take place. Defaults to
-<code>None</code>.</p></dd>
+<code>NULL</code>.</p></dd>
 
 
 <dt>window</dt>
-<dd><p>A string, a tensor of the window or <code>None</code>. If <code>window</code> is a
+<dd><p>A string, a tensor of the window or <code>NULL</code>. If <code>window</code> is a
 string, available values are <code>"hann"</code> and <code>"hamming"</code>. If <code>window</code>
 is a tensor, it will be used directly as the window and its length
-must be <code>sequence_length</code>. If <code>window</code> is <code>None</code>, no windowing is
+must be <code>sequence_length</code>. If <code>window</code> is <code>NULL</code>, no windowing is
 used. Defaults to <code>"hann"</code>.</p></dd>
 
 
 <dt>center</dt>
 <dd><p>Whether <code>x</code> was padded on both sides so that the t-th sequence
-is centered at time <code>t * sequence_stride</code>. Defaults to <code>True</code>.</p></dd>
+is centered at time <code>t * sequence_stride</code>. Defaults to <code>TRUE</code>.</p></dd>
 
 </dl></div>
     <div class="section level2">
@@ -173,9 +173,10 @@ last axis of <code>x</code>.</p>
     </div>
     <div class="section level2">
     <h2 id="examples">Examples<a class="anchor" aria-label="anchor" href="#examples"></a></h2>
-    <p></p><div class="sourceCode python"><pre><code><span id="cb1-1"><a href="#cb1-1" tabindex="-1"></a>x <span class="op">=</span> keras.ops.convert_to_tensor([<span class="fl">0.0</span>, <span class="fl">1.0</span>, <span class="fl">2.0</span>, <span class="fl">3.0</span>, <span class="fl">4.0</span>])</span>
-<span id="cb1-2"><a href="#cb1-2" tabindex="-1"></a>istft(stft(x, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">1</span>), <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">1</span>)</span>
-<span id="cb1-3"><a href="#cb1-3" tabindex="-1"></a><span class="co"># array([0.0, 1.0, 2.0, 3.0, 4.0])</span></span></code></pre><p></p></div>
+    <p></p><div class="sourceCode r"><pre><code><span><span class="va">x</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/k_convert_to_tensor.html">k_convert_to_tensor</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">1</span>, <span class="fl">2</span>, <span class="fl">3</span>, <span class="fl">4</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="fu"><a href="../reference/k_istft.html">k_istft</a></span><span class="op">(</span><span class="fu"><a href="../reference/k_stft.html">k_stft</a></span><span class="op">(</span><span class="va">x</span>, <span class="fl">1</span>, <span class="fl">1</span>, <span class="fl">1</span><span class="op">)</span>, <span class="fl">1</span>, <span class="fl">1</span>, <span class="fl">1</span><span class="op">)</span></span></code></pre><p></p></div>
+<p></p><div class="sourceCode"><pre><code><span id="cb1-1"><a href="#cb1-1" tabindex="-1"></a><span class="do">## tf.Tensor([], shape=(0), dtype=float32)</span></span></code></pre><p></p></div>
+<p></p><div class="sourceCode r"><pre><code><span><span class="co"># array([0.0, 1.0, 2.0, 3.0, 4.0])</span></span></code></pre><p></p></div>
     </div>
     <div class="section level2">
     <h2 id="see-also">See also<a class="anchor" aria-label="anchor" href="#see-also"></a></h2>

@@ -147,23 +147,31 @@ larger, the dimension is padded with zeros.</p>
 <dt>fft_length</dt>
 <dd><p>An integer representing the number of the fft length. If not
 specified, it is inferred from the length of the last axis of <code>x</code>.
-Defaults to <code>None</code>.</p></dd>
+Defaults to <code>NULL</code>.</p></dd>
 
 </dl></div>
     <div class="section level2">
     <h2 id="value">Value<a class="anchor" aria-label="anchor" href="#value"></a></h2>
     
 
-<p>A tuple containing two tensors - the real and imaginary parts of the
+<p>A list containing two tensors - the real and imaginary parts of the
 output.</p>
     </div>
     <div class="section level2">
     <h2 id="examples">Examples<a class="anchor" aria-label="anchor" href="#examples"></a></h2>
-    <p></p><div class="sourceCode python"><pre><code><span id="cb1-1"><a href="#cb1-1" tabindex="-1"></a>x <span class="op">=</span> keras.ops.convert_to_tensor([<span class="fl">0.0</span>, <span class="fl">1.0</span>, <span class="fl">2.0</span>, <span class="fl">3.0</span>, <span class="fl">4.0</span>])</span>
-<span id="cb1-2"><a href="#cb1-2" tabindex="-1"></a>rfft(x)</span>
-<span id="cb1-3"><a href="#cb1-3" tabindex="-1"></a><span class="co"># (array([10.0, -2.5, -2.5]), array([0.0, 3.4409548, 0.81229924]))</span></span></code></pre><p></p></div>
-<p></p><div class="sourceCode python"><pre><code><span id="cb1-1"><a href="#cb1-1" tabindex="-1"></a>rfft(x, <span class="dv">3</span>)</span>
-<span id="cb1-2"><a href="#cb1-2" tabindex="-1"></a><span class="co"># (array([3.0, -1.5]), array([0.0, 0.8660254]))</span></span></code></pre><p></p></div>
+    <p></p><div class="sourceCode r"><pre><code><span><span class="va">x</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/k_convert_to_tensor.html">k_convert_to_tensor</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">1</span>, <span class="fl">2</span>, <span class="fl">3</span>, <span class="fl">4</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="fu"><a href="../reference/k_rfft.html">k_rfft</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span></span></code></pre><p></p></div>
+<p></p><div class="sourceCode"><pre><code><span id="cb1-1"><a href="#cb1-1" tabindex="-1"></a><span class="do">## [[1]]</span></span>
+<span id="cb1-2"><a href="#cb1-2" tabindex="-1"></a><span class="do">## tf.Tensor([10.  -2.5 -2.5], shape=(3), dtype=float32)</span></span>
+<span id="cb1-3"><a href="#cb1-3" tabindex="-1"></a><span class="do">##</span></span>
+<span id="cb1-4"><a href="#cb1-4" tabindex="-1"></a><span class="do">## [[2]]</span></span>
+<span id="cb1-5"><a href="#cb1-5" tabindex="-1"></a><span class="do">## tf.Tensor([0.        3.440955  0.8122992], shape=(3), dtype=float32)</span></span></code></pre><p></p></div>
+<p></p><div class="sourceCode r"><pre><code><span><span class="fu"><a href="../reference/k_rfft.html">k_rfft</a></span><span class="op">(</span><span class="va">x</span>, <span class="fl">3</span><span class="op">)</span></span></code></pre><p></p></div>
+<p></p><div class="sourceCode"><pre><code><span id="cb1-1"><a href="#cb1-1" tabindex="-1"></a><span class="do">## [[1]]</span></span>
+<span id="cb1-2"><a href="#cb1-2" tabindex="-1"></a><span class="do">## tf.Tensor([ 3.  -1.5], shape=(2), dtype=float32)</span></span>
+<span id="cb1-3"><a href="#cb1-3" tabindex="-1"></a><span class="do">##</span></span>
+<span id="cb1-4"><a href="#cb1-4" tabindex="-1"></a><span class="do">## [[2]]</span></span>
+<span id="cb1-5"><a href="#cb1-5" tabindex="-1"></a><span class="do">## tf.Tensor([0.        0.8660254], shape=(2), dtype=float32)</span></span></code></pre><p></p></div>
     </div>
     <div class="section level2">
     <h2 id="see-also">See also<a class="anchor" aria-label="anchor" href="#see-also"></a></h2>

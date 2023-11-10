@@ -147,14 +147,14 @@ larger, the dimension is padded with zeros.</p>
     <div class="section level2">
     <h2 id="arguments">Arguments<a class="anchor" aria-label="anchor" href="#arguments"></a></h2>
     <dl><dt>x</dt>
-<dd><p>Tuple of the real and imaginary parts of the input tensor. Both
-tensors in the tuple should be of floating type.</p></dd>
+<dd><p>List of the real and imaginary parts of the input tensor. Both
+tensors in the list should be of floating type.</p></dd>
 
 
 <dt>fft_length</dt>
 <dd><p>An integer representing the number of the fft length. If not
 specified, it is inferred from the length of the last axis of <code>x</code>.
-Defaults to <code>None</code>.</p></dd>
+Defaults to <code>NULL</code>.</p></dd>
 
 </dl></div>
     <div class="section level2">
@@ -166,12 +166,21 @@ along the last axis of <code>x</code>.</p>
     </div>
     <div class="section level2">
     <h2 id="examples">Examples<a class="anchor" aria-label="anchor" href="#examples"></a></h2>
-    <p></p><div class="sourceCode python"><pre><code><span id="cb1-1"><a href="#cb1-1" tabindex="-1"></a>real <span class="op">=</span> keras.ops.convert_to_tensor([<span class="fl">0.0</span>, <span class="fl">1.0</span>, <span class="fl">2.0</span>, <span class="fl">3.0</span>, <span class="fl">4.0</span>])</span>
-<span id="cb1-2"><a href="#cb1-2" tabindex="-1"></a>imag <span class="op">=</span> keras.ops.convert_to_tensor([<span class="fl">0.0</span>, <span class="fl">1.0</span>, <span class="fl">2.0</span>, <span class="fl">3.0</span>, <span class="fl">4.0</span>])</span>
-<span id="cb1-3"><a href="#cb1-3" tabindex="-1"></a>irfft((real, imag))</span>
-<span id="cb1-4"><a href="#cb1-4" tabindex="-1"></a><span class="co"># array([0.66666667, -0.9106836, 0.24401694])</span></span></code></pre><p></p></div>
-<p></p><div class="sourceCode python"><pre><code><span id="cb1-1"><a href="#cb1-1" tabindex="-1"></a>irfft(rfft(real, <span class="dv">5</span>), <span class="dv">5</span>)</span>
-<span id="cb1-2"><a href="#cb1-2" tabindex="-1"></a><span class="co"># array([0.0, 1.0, 2.0, 3.0, 4.0])</span></span></code></pre><p></p></div>
+    <p></p><div class="sourceCode r"><pre><code><span><span class="va">real</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/k_array.html">k_array</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">1</span>, <span class="fl">2</span>, <span class="fl">3</span>, <span class="fl">4</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="va">imag</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/k_array.html">k_array</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">1</span>, <span class="fl">2</span>, <span class="fl">3</span>, <span class="fl">4</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="fu"><a href="../reference/k_irfft.html">k_irfft</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="va">real</span>, <span class="va">imag</span><span class="op">)</span><span class="op">)</span></span></code></pre><p></p></div>
+<p></p><div class="sourceCode"><pre><code><span id="cb1-1"><a href="#cb1-1" tabindex="-1"></a><span class="do">## tf.Tensor(</span></span>
+<span id="cb1-2"><a href="#cb1-2" tabindex="-1"></a><span class="do">## [ 2.         -2.06066017  0.5        -0.35355339  0.          0.06066017</span></span>
+<span id="cb1-3"><a href="#cb1-3" tabindex="-1"></a><span class="do">##  -0.5         0.35355339], shape=(8), dtype=float64)</span></span></code></pre><p></p></div>
+<p></p><div class="sourceCode r"><pre><code><span><span class="co"># array([0.66666667, -0.9106836, 0.24401694))</span></span></code></pre><p></p></div>
+<p></p><div class="sourceCode r"><pre><code><span><span class="fu"><a href="../reference/k_irfft.html">k_irfft</a></span><span class="op">(</span><span class="fu"><a href="../reference/k_rfft.html">k_rfft</a></span><span class="op">(</span><span class="va">real</span>, <span class="fl">5</span><span class="op">)</span>, <span class="fl">5</span><span class="op">)</span></span></code></pre><p></p></div>
+<p></p><div class="sourceCode"><pre><code><span id="cb1-1"><a href="#cb1-1" tabindex="-1"></a><span class="do">## tf.Tensor([0. 1. 2. 3. 4.], shape=(5), dtype=float64)</span></span></code></pre><p></p></div>
+<p>[ 2.         -2.06066017  0.5        -0.35355339  0.          0.06066017</p><div class="section">
+<h3 id="-r-a-">-0.5         0.35355339]: R:%202.%20%20%20%20%20%20%20%20%20-2.06066017%20%200.5%20%20%20%20%20%20%20%20-0.35355339%20%200.%20%20%20%20%20%20%20%20%20%200.06066017%0A##%20%20-0.5%20%20%20%20%20%20%20%20%200.35355339<a class="anchor" aria-label="anchor" href="#-r-a-"></a></h3>
+
+
+</div>
+
     </div>
     <div class="section level2">
     <h2 id="see-also">See also<a class="anchor" aria-label="anchor" href="#see-also"></a></h2>

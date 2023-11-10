@@ -142,18 +142,25 @@ of output.</p></dd>
     </div>
     <div class="section level2">
     <h2 id="examples">Examples<a class="anchor" aria-label="anchor" href="#examples"></a></h2>
-    <p></p><div class="sourceCode python"><pre><code><span id="cb1-1"><a href="#cb1-1" tabindex="-1"></a><span class="im">from</span> keras <span class="im">import</span> ops</span>
-<span id="cb1-2"><a href="#cb1-2" tabindex="-1"></a>x <span class="op">=</span> ops.array([<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>])</span>
-<span id="cb1-3"><a href="#cb1-3" tabindex="-1"></a>y <span class="op">=</span> ops.array([<span class="dv">4</span>, <span class="dv">5</span>, <span class="dv">6</span>])</span></code></pre><p></p></div>
-<p></p><div class="sourceCode python"><pre><code><span id="cb1-1"><a href="#cb1-1" tabindex="-1"></a>grid_x, grid_y <span class="op">=</span> ops.meshgrid(x, y, indexing<span class="op">=</span><span class="st">"ij"</span>)</span>
-<span id="cb1-2"><a href="#cb1-2" tabindex="-1"></a>grid_x</span>
-<span id="cb1-3"><a href="#cb1-3" tabindex="-1"></a><span class="co"># array([[1, 1, 1],</span></span>
-<span id="cb1-4"><a href="#cb1-4" tabindex="-1"></a><span class="co">#        [2, 2, 2],</span></span>
-<span id="cb1-5"><a href="#cb1-5" tabindex="-1"></a><span class="co">#        [3, 3, 3]])</span></span>
-<span id="cb1-6"><a href="#cb1-6" tabindex="-1"></a>grid_y</span>
-<span id="cb1-7"><a href="#cb1-7" tabindex="-1"></a><span class="co"># array([[4, 5, 6],</span></span>
-<span id="cb1-8"><a href="#cb1-8" tabindex="-1"></a><span class="co">#        [4, 5, 6],</span></span>
-<span id="cb1-9"><a href="#cb1-9" tabindex="-1"></a><span class="co">#        [4, 5, 6]])</span></span></code></pre><p></p></div>
+    <p></p><div class="sourceCode r"><pre><code><span><span class="va">x</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/k_array.html">k_array</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">2</span>, <span class="fl">3</span><span class="op">)</span>, <span class="st">"int32"</span><span class="op">)</span></span>
+<span><span class="va">y</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/k_array.html">k_array</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">4</span>, <span class="fl">5</span>, <span class="fl">6</span><span class="op">)</span>, <span class="st">"int32"</span><span class="op">)</span></span></code></pre><p></p></div>
+<p></p><div class="sourceCode r"><pre><code><span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="va">grid_x</span>, <span class="va">grid_y</span><span class="op">)</span> <span class="op"><a href="../reference/multi-assign.html">%&lt;-%</a></span> <span class="fu"><a href="../reference/k_meshgrid.html">k_meshgrid</a></span><span class="op">(</span><span class="va">x</span>, <span class="va">y</span>, indexing<span class="op">=</span><span class="st">"ij"</span><span class="op">)</span></span>
+<span><span class="va">grid_x</span></span></code></pre><p></p></div>
+<p></p><div class="sourceCode"><pre><code><span id="cb1-1"><a href="#cb1-1" tabindex="-1"></a><span class="do">## tf.Tensor(</span></span>
+<span id="cb1-2"><a href="#cb1-2" tabindex="-1"></a><span class="do">## [[1 1 1]</span></span>
+<span id="cb1-3"><a href="#cb1-3" tabindex="-1"></a><span class="do">##  [2 2 2]</span></span>
+<span id="cb1-4"><a href="#cb1-4" tabindex="-1"></a><span class="do">##  [3 3 3]], shape=(3, 3), dtype=int32)</span></span></code></pre><p></p></div>
+<p></p><div class="sourceCode r"><pre><code><span><span class="co"># array([[1, 1, 1],</span></span>
+<span><span class="co">#        [2, 2, 2],</span></span>
+<span><span class="co">#        [3, 3, 3]))</span></span>
+<span><span class="va">grid_y</span></span></code></pre><p></p></div>
+<p></p><div class="sourceCode"><pre><code><span id="cb1-1"><a href="#cb1-1" tabindex="-1"></a><span class="do">## tf.Tensor(</span></span>
+<span id="cb1-2"><a href="#cb1-2" tabindex="-1"></a><span class="do">## [[4 5 6]</span></span>
+<span id="cb1-3"><a href="#cb1-3" tabindex="-1"></a><span class="do">##  [4 5 6]</span></span>
+<span id="cb1-4"><a href="#cb1-4" tabindex="-1"></a><span class="do">##  [4 5 6]], shape=(3, 3), dtype=int32)</span></span></code></pre><p></p></div>
+<p></p><div class="sourceCode r"><pre><code><span><span class="co"># array([[4, 5, 6],</span></span>
+<span><span class="co">#        [4, 5, 6],</span></span>
+<span><span class="co">#        [4, 5, 6]))</span></span></code></pre><p></p></div>
     </div>
     <div class="section level2">
     <h2 id="see-also">See also<a class="anchor" aria-label="anchor" href="#see-also"></a></h2>

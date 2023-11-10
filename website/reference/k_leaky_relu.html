@@ -136,10 +136,14 @@ Defaults to <code>0.2</code>.</p></dd>
     </div>
     <div class="section level2">
     <h2 id="examples">Examples<a class="anchor" aria-label="anchor" href="#examples"></a></h2>
-    <p></p><div class="sourceCode python"><pre><code><span id="cb1-1"><a href="#cb1-1" tabindex="-1"></a>x <span class="op">=</span> np.array([<span class="op">-</span><span class="fl">1.</span>, <span class="fl">0.</span>, <span class="fl">1.</span>])</span>
-<span id="cb1-2"><a href="#cb1-2" tabindex="-1"></a>x_leaky_relu <span class="op">=</span> keras.ops.leaky_relu(x)</span>
-<span id="cb1-3"><a href="#cb1-3" tabindex="-1"></a><span class="bu">print</span>(x_leaky_relu)</span>
-<span id="cb1-4"><a href="#cb1-4" tabindex="-1"></a><span class="co"># array([-0.2,  0. ,  1. ], shape=(3,), dtype=float64)</span></span></code></pre><p></p></div>
+    <p></p><div class="sourceCode r"><pre><code><span><span class="va">x</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/k_array.html">k_array</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="op">-</span><span class="fl">1.</span>, <span class="fl">0.</span>, <span class="fl">1.</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="fu"><a href="../reference/k_leaky_relu.html">k_leaky_relu</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span></span></code></pre><p></p></div>
+<p></p><div class="sourceCode"><pre><code><span id="cb1-1"><a href="#cb1-1" tabindex="-1"></a><span class="do">## tf.Tensor([-0.2  0.   1. ], shape=(3), dtype=float64)</span></span></code></pre><p></p></div>
+<p></p><div class="sourceCode r"><pre><code><span><span class="co"># array([-0.2,  0. ,  1. ], shape=(3,), dtype=float64)</span></span></code></pre><p></p></div>
+<p></p><div class="sourceCode r"><pre><code><span><span class="va">x</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html" class="external-link">seq</a></span><span class="op">(</span><span class="op">-</span><span class="fl">5</span>, <span class="fl">5</span>, <span class="fl">.1</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">x</span>, <span class="fu"><a href="../reference/k_leaky_relu.html">k_leaky_relu</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span>,</span>
+<span>     type <span class="op">=</span> <span class="st">'l'</span>, panel.first <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/graphics/grid.html" class="external-link">grid</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span></span></code></pre><p></p></div>
+<p><img src="figures/k_leaky_relu-unnamed-chunk-2-1.svg" alt=""></p>
     </div>
     <div class="section level2">
     <h2 id="see-also">See also<a class="anchor" aria-label="anchor" href="#see-also"></a></h2>
