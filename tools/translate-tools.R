@@ -66,7 +66,8 @@ get_translated_roxygen <- function(roxygen) {
     # roxygen %<>% get_roxygen()
 
   messages <- chat_messages(
-    !!!prompt_translate_roxygen_instructions_and_examples,
+    !!!prompt_translate_chunk,
+    # !!!prompt_translate_roxygen_instructions_and_examples,
     user = roxygen
   )
   n_tokens_roxygen <- count_tokens(roxygen)
@@ -456,12 +457,84 @@ prompt_translate_roxygen_instructions_and_examples <- list %(% {
 
 
 
+prompt_translate_chunk <- list %(% {
 
+  system = str_squish(r"{
+    You translate Python to R (docs, code, idioms), correct typos,
+    and output properly formatted rmarkdown/roxygen
+    You always wrap `NULL`, `TRUE` and `FALSE` in backticks as needed.
+    You output Rmd, markdown, and/or roxygen.
+    LEAVE EVERYTHING ELSE THE SAME.
+  }")
 
+user = r"--{
+```python
+class MyDense(keras.layers.Layer):
+    def __init__(self, units, activation=None, name=None):
+        super().__init__(name=name)
+        self.units = units
+        self.activation = keras.activations.get(activation)
 
+    def build(self, input_shape):
+        input_dim = input_shape[-1]
+        self.w = self.add_weight(
+            shape=(input_dim, self.units),
+            initializer=keras.initializers.GlorotNormal(),
+            name="kernel",
+            trainable=True,
+        )
 
+        self.b = self.add_weight(
+            shape=(self.units,),
+            initializer=keras.initializers.Zeros(),
+            name="bias",
+            trainable=True,
+        )
 
+    def call(self, inputs):
+        # Use Keras ops to create backend-agnostic layers/metrics/etc.
+        x = keras.ops.matmul(inputs, self.w) + self.b
+        return self.activation(x)
+```
+}--"
 
+assistant = r"--{
+```{r}
+layer_my_dense <- new_layer_class(
+  classname = "MyDense",
+
+  initialize = function(self, units, activation = NULL, name = NULL) {
+    super$initialize(name = name)
+    self$units <- units
+    self$activation <- keras$activations$get(activation)
+  },
+
+  build = function(self, input_shape) {
+    input_dim <- tail(input_shape, 1)
+    self$w <- self$add_weight(
+      shape = c(input_dim, self$units),
+      initializer = initializer_glorot_normal(),
+      name = "kernel",
+      trainable = TRUE
+    )
+
+    self$b <- self$add_weight(
+      shape = c(self$units),
+      initializer = initializer_zeros(),
+      name = "bias",
+      trainable = TRUE
+    )
+  },
+
+  call = function(self, inputs) {
+    # Use k_* Ops to create backend-agnostic layers/metrics/etc.
+    x <- (inputs %*% self$w) + self$b
+    self$activation(x)
+  }
+)
+```
+}--"
+}
 
 
 
