@@ -6,7 +6,7 @@ last-modified: 2023/06/25
 description: Writing low-level training & evaluation loops in JAX.
 accelerator: None
 output: rmarkdown::html_vignette
-knit: ({source("../../tools/knit.R"); knit_vignette})
+knit: ({source(here::here("tools/knit.R")); knit_vignette})
 ---
 
 ## Setup

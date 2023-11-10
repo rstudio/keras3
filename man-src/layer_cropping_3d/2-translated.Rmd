@@ -1,5 +1,5 @@
 ---
-knit: ({source("../../tools/knit.R"); knit_man_src})
+knit: ({source(here::here("tools/knit.R")); knit_man_src})
 ---
 Cropping layer for 3D data (e.g. spatial or spatio-temporal).
 

@@ -6,7 +6,7 @@ last-modified: 2023/07/10
 description: First contact with the new multi-backend Keras.
 accelerator: GPU
 output: rmarkdown::html_vignette
-knit: ({source("../../tools/knit.R"); knit_vignette})
+knit: ({source(here::here("tools/knit.R")); knit_vignette})
 ---
 
 ## Introduction

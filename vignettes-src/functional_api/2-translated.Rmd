@@ -6,7 +6,7 @@ last-modified: 2020/04/12
 description: Complete guide to the functional API.
 accelerator: GPU
 output: rmarkdown::html_vignette
-knit: ({source("../../tools/knit.R"); knit_vignette})
+knit: ({source(here::here("tools/knit.R")); knit_vignette})
 ---
 
 ## Setup

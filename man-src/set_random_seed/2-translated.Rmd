@@ -1,5 +1,5 @@
 ---
-knit: ({source("../../tools/knit.R"); knit_man_src})
+knit: ({source(here::here("tools/knit.R")); knit_man_src})
 ---
 Sets all random seeds (Python, NumPy, and backend framework, e.g. TF).
 

@@ -1,5 +1,5 @@
 ---
-knit: ({source("../../tools/knit.R"); knit_man_src})
+knit: ({source(here::here("tools/knit.R")); knit_man_src})
 ---
 Wrapper allowing a stack of RNN cells to behave as a single cell.
 

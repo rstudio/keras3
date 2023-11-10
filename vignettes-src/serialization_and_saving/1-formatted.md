@@ -6,7 +6,7 @@ last-modified: 2023/06/30
 description: Complete guide to saving, serializing, and exporting models.
 accelerator: None
 output: rmarkdown::html_vignette
-knit: ({source("../../tools/knit.R"); knit_vignette})
+knit: ({source(here::here("tools/knit.R")); knit_vignette})
 ---
 
 **Note: this guide assumes Keras >= 2.13**

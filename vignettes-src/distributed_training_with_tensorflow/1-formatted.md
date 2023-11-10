@@ -6,7 +6,7 @@ last-modified: 2023/06/29
 description: Guide to multi-GPU training for Keras models with TensorFlow.
 accelerator: GPU
 output: rmarkdown::html_vignette
-knit: ({source("../../tools/knit.R"); knit_vignette})
+knit: ({source(here::here("tools/knit.R")); knit_vignette})
 ---
 
 ## Introduction

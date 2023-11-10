@@ -1,5 +1,5 @@
 ---
-knit: ({source("../../tools/knit.R"); knit_man_src})
+knit: ({source(here::here("tools/knit.R")); knit_man_src})
 ---
 A regularizer that applies a L1 regularization penalty.
 

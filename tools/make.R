@@ -178,7 +178,7 @@ if(FALSE) {
       }
       x <- str_trim(str_flatten_lines(
         "---",
-        'knit: ({source("../../tools/knit.R"); knit_man_src})',
+        'knit: ({source(here::here("tools/knit.R")); knit_man_src})',
         "---",
         x))
       write_lines(x, f)

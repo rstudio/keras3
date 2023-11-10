@@ -6,7 +6,7 @@ last-modified: 2023/06/27
 description: Overriding the training step of the Model class with TensorFlow.
 accelerator: GPU
 output: rmarkdown::html_vignette
-knit: ({source("../../tools/knit.R"); knit_vignette})
+knit: ({source(here::here("tools/knit.R")); knit_vignette})
 ---
 
 ## Introduction

@@ -6,7 +6,7 @@ last-modified: 2023/06/25
 description: Complete guide to transfer learning & fine-tuning in Keras.
 accelerator: GPU
 output: rmarkdown::html_vignette
-knit: ({source("../../tools/knit.R"); knit_vignette})
+knit: ({source(here::here("tools/knit.R")); knit_vignette})
 ---
 
 ## Setup
