@@ -58,6 +58,130 @@ knit_man_src <- function(input, ..., output_dir) {
 }
 
 
+knit_vignette <- function(input, ..., output_dir) {
+  # print(sys.call())
+  # stop()
+  input <- normalizePath(input)
+  render_dir <- dirname(input)
+  if(getwd() != render_dir) {
+    message("Changing wd to ", render_dir)
+    owd <- setwd(render_dir)
+    on.exit(setwd(owd))
+  }
+
+  # ~/github/rstudio/keras/vignettes/writing_your_own_callbacks.Rmd
+  name <- basename(render_dir)
+  output_file <- normalizePath(sprintf("../../vignettes/%s.Rmd", name),
+                               mustWork = FALSE)
+  message("output_file: ", output_file)
+
+  set.seed(1)
+  keras::set_random_seed(1)
+  knitr::opts_chunk$set(
+    collapse = TRUE,
+    comment = "##" #>
+  )
+  # rmarkdown::render(
+  #   input,
+  #   output_format = rmarkdown::github_document(preserve_yaml = TRUE),
+  #   # output_format = rmarkdown::md_document( preserve_yaml = TRUE, ext = "Rmd"), #
+  #   # output_format = rmarkdown::md_document(preserve_yaml = FALSE), # , ext = "Rmd"
+  #   output_file = output_file,
+  #   envir = new.env(parent = globalenv()),
+  #   ...
+  # )
+  library(keras)
+  knitr::knit(
+    input,
+    # output_format = rmarkdown::github_document(preserve_yaml = TRUE),
+    # output_format = rmarkdown::md_document( preserve_yaml = TRUE, ext = "Rmd"), #
+    # output_format = rmarkdown::md_document(preserve_yaml = FALSE), # , ext = "Rmd"
+    output = output_file,
+    envir = new.env(parent = globalenv()),
+    ...
+  )
+  x <- readLines(output_file)
+  # if(length(grep("^knit: keras:::knit_vignette", x) -> i))
+  # x <- x[-i]
+  end_fm_i <- which(x == "---")[2]
+  x_fm <- x[2:(end_fm_i-1)]
+  yaml.load <- getExportedValue("yaml", "yaml.load")
+  as.yaml <- getExportedValue("yaml", "as.yaml")
+  fm <- yaml.load(x_fm)
+
+  fm$knit <- NULL
+  fm$output <- "rmarkdown::html_vignette"
+  fm$accelerator <- NULL
+  last_modified_date <- reticulate:::system2t("git", c("log -1 --pretty=format:'%ad'",
+                                                       "--date=format:'%Y-%m-%d'",
+                                                       "--", shQuote(input)), stdout = TRUE)
+  # message("Last modified: ", last_modified_date)
+  fm$date <- sprintf("Last Modified: %s; Last Rendered: %s",
+                     last_modified_date, format(Sys.Date()))
+  # TODO: fm$date <- Last compiled on `r format(Sys.time(), '%d %B, %Y')`, last updated on `r system(git `
+  # fm$date <- format(Sys.Date())
+  vignette <- glue::glue_data(list(title = fm$title), .trim = FALSE,
+                              .open = "<<", .close = ">>",
+                              "vignette: >
+  %\\VignetteIndexEntry{<<title>>}
+  %\\VignetteEngine{knitr::rmarkdown}
+  %\\VignetteEncoding{UTF-8}")
+
+  # dumping vignette via as.yaml breaks downstream, the rd entry needs to be a block
+  fm <- as.yaml(fm) # has a trailing \n
+  fm <- paste0(fm, vignette)
+
+  x <- c("---", fm, "---", x[-(1:end_fm_i)])
+  writeLines(x, output_file)
+}
+
+
+# TODO: move these out of the package namespace, we don't want a knitr dep on cran
+# knit_man_src <- function(input, ..., output_dir) {
+#   library(keras)
+#   dir <- dirname(input)
+#   withr::local_dir(dir)
+#   message("rendering: ", dir)
+#   keras$utils$clear_session()
+#   # Set knitr options to halt on errors
+#   knitr::opts_chunk$set(error = FALSE)
+#   file.symlink("man/figures", paste0("../../man/figures/", basename(dir)))
+#   knitr::opts_chunk$set(fig.path=paste0("man/figures/", basename(dir)))
+#     knitr::knit("2-translated.Rmd", "3-rendered.md",
+#               quiet = TRUE, envir = new.env(parent = globalenv()))
+#   x <- readLines("3-rendered.md")
+#   x <- trimws(x, "right")
+#   # TODO: these filters should be confined to chunk outputs only,
+#   # probably as a knitr hook
+#   # strip object addresses; no noisy diff
+#   if(x[1] == "---") {
+#     stopifnot(x[3] == "---")
+#     x <- x[-(1:3)]
+#     while(x[1] == "") x <- x[-1]
+#   }
+#   figs <- list.files("man/figures", full.names = TRUE)
+#   figs_dir <- "man/figures"
+#   figs_dir2 <- fs::dir_create("../../man/figures/", basename(dir))
+#
+#
+#   file.rename(figs, new_figs_loc)
+#
+#   new_figs_loc <- paste0("../../man/figures/", basename(dir), basename(figs))
+#   file.rename(figs, new_figs_loc)
+#   file.symlink(figs, new_figs_loc)
+#
+#   x <- sub(" at 0x[0-9A-F]{9}>$", ">", x, perl = TRUE)
+#   x <- x[!grepl(r"{## .*rstudio:run:reticulate::py_last_error\(\).*}", x)]
+#   x <- x[!grepl(r"{## .*reticulate::py_last_error\(\).*}", x)]
+#
+#   writeLines(x, "3-rendered.md")
+#
+#   message("Done!    file.edit('", file.path(dir, "3-rendered.md"), "')")
+#
+# }
+
+
+
   # x <- sub("](figures/", "](", x, fixed = TRUE)
   # x <- sub("](man/figures/", "](", x, fixed = TRUE)
 
