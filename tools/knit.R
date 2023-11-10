@@ -8,6 +8,9 @@ knit_man_src <- function(input, ..., output_dir) {
   message("rendering: ", dir)
   keras$utils$clear_session()
   # Set knitr options to halt on errors
+  #
+  og_knitr_chunks <- knitr::opts_chunk$get()
+  on.exit(do.call(knitr::opts_chunk$set, og_knitr_chunks), add = TRUE)
   knitr::opts_chunk$set(error = FALSE)
   # if(FALSE) {
 #
@@ -47,6 +50,7 @@ knit_man_src <- function(input, ..., output_dir) {
   }
   system("ls -alR")
   # normalizePath(fake_figs_dir)
+if(FALSE) {
 
     true_figs_dir <- paste0("../../man/figures/")
     fake_figs_dir <- paste0("figures/")
@@ -61,21 +65,47 @@ knit_man_src <- function(input, ..., output_dir) {
     # unlink(true_figs_dir, recursive = TRUE, force = TRUE)
     # dir.create(true_figs_dir, recursive = TRUE, showWarnings = FALSE)
     # dir.create(dirname(fake_figs_dir), recursive = TRUE)
-    fs::link_create( true_figs_dir, "figures" )
+    fs::link_create( true_figs_dir, "figures")
     # file.symlink(paste0("../", true_figs_dir),
     #              fake_figs_dir)
   # }
 
-  knitr::opts_chunk$set(
-    fig.path = paste0("figures/", basename(dir), "-"),
-    fig.width = 3, fig.height = 3, dev = "svg"
+    knitr::opts_chunk$set(
+      fig.path = paste0("figures/", basename(dir), "-"),
+      # fig.width = 3, fig.height = 3, dev = "png"
     )
+}
+  fig.path <- paste0(basename(dir), "-")
+
+  knitr::opts_chunk$set(
+    fig.path = fig.path,
+      # fig.width = 3, fig.height = 3,
+    dev = "svg"
+    # fig.width = 4, fig.height = 4, dev = "svg"
+  )
+
+  unlink(Sys.glob(paste0(fig.path, "*.svg")))
+
   knitr::knit("2-translated.Rmd", "3-rendered.md",
               quiet = TRUE, envir = new.env(parent = globalenv()))
-  if(!length(Sys.glob(paste0("figures/", basename(dir), "-*")))) {
-    # unlink(true_figs_dir)
-    unlink(fake_figs_dir)
-  }
+
+  # browser()
+  unlink(Sys.glob(paste0("../../man/figures/", fig.path, "*.svg")))
+  figs <- Sys.glob(paste0(fig.path, "*.svg"))
+
+  # link_create(
+  link_path <- fs::path("../../man/figures", basename(figs))
+  link_target <- fs::path_rel(figs, dirname(link_path))
+  fs::link_create(link_target, link_path)
+  # fs::path_rel(figs, "../../man/figures")
+  # fs::path("../../man/figures", figs)
+    # )
+  # browser()
+  # if(!length(Sys.glob(paste0("figures/", basename(dir), "-*")))) {
+  #   # unlink(true_figs_dir)
+  #   unlink(fake_figs_dir)
+  # }
+
   x <- readLines("3-rendered.md")
   x <- trimws(x, "right")
   # TODO: these filters should be confined to chunk outputs only,
@@ -101,7 +131,7 @@ knit_man_src <- function(input, ..., output_dir) {
   x <- x[!grepl(r"{## .*rstudio:run:reticulate::py_last_error\(\).*}", x)]
   x <- x[!grepl(r"{## .*reticulate::py_last_error\(\).*}", x)]
 
-  x <- sub("](figures/", "](", x, fixed = TRUE)
+  # x <- sub("](figures/", "](", x, fixed = TRUE)
   # x <- sub("](man/figures/", "](", x, fixed = TRUE)
 
   writeLines(x, "3-rendered.md")

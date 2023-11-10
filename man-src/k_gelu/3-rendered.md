@@ -27,6 +27,17 @@ k_gelu(x, FALSE)
 ## tf.Tensor([-0.15865525  0.          0.84134475], shape=(3), dtype=float64)
 ```
 
+
+
+```r
+x <- seq(-5, 5, .1)
+plot(x, k_gelu(x),
+     type = "l", #, frame.plot = FALSE,
+     panel.first = grid())
+```
+
+![plot of chunk unnamed-chunk-2](k_gelu-unnamed-chunk-2-1.svg)
+
 @returns
 A tensor with the same shape as `x`.
 

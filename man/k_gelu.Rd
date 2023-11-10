@@ -35,6 +35,14 @@ k_gelu(x)
 
 \if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor([-0.15865525  0.          0.84134475], shape=(3), dtype=float64)
 }\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{x <- seq(-5, 5, .1)
+plot(x, k_gelu(x),
+     type = "l", #, frame.plot = FALSE,
+     panel.first = grid())
+}\if{html}{\out{</div>}}
+
+\if{html}{\figure{k_gelu-unnamed-chunk-2-1.svg}}
 }
 
 \seealso{
