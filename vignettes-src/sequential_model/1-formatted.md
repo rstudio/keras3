@@ -6,7 +6,7 @@ last-modified: 2023/06/25
 description: Complete guide to the Sequential model.
 accelerator: GPU
 output: rmarkdown::html_vignette
-knit: ({source("../../tools/knit.R"); knit_vignette)
+knit: ({source("../../tools/knit.R"); knit_vignette})
 ---
 
 ## Setup

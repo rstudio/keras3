@@ -6,7 +6,7 @@ last-modified: 2023/07/11
 description: Guide to multi-GPU/TPU training for Keras models with JAX.
 accelerator: GPU
 output: rmarkdown::html_vignette
-knit: ({source("../../tools/knit.R"); knit_vignette)
+knit: ({source("../../tools/knit.R"); knit_vignette})
 ---
 
 ## Introduction

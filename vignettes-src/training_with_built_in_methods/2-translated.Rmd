@@ -6,7 +6,7 @@ last-modified: 2023/03/25
 description: Complete guide to training & evaluation with `fit()` and `evaluate()`.
 accelerator: GPU
 output: rmarkdown::html_vignette
-knit: ({source("../../tools/knit.R"); knit_vignette)
+knit: ({source("../../tools/knit.R"); knit_vignette})
 ---
 
 ## Setup

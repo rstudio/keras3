@@ -7,7 +7,7 @@ description: Everything you need to know to use Keras to build real-world machin
   learning solutions.
 accelerator: None
 output: rmarkdown::html_vignette
-knit: ({source("../../tools/knit.R"); knit_vignette)
+knit: ({source("../../tools/knit.R"); knit_vignette})
 ---
 
 ## Setup

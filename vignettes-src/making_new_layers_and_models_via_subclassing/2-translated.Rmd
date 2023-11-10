@@ -6,7 +6,7 @@ last-modified: 2023/06/25
 description: Complete guide to writing `Layer` and `Model` objects from scratch.
 accelerator: None
 output: rmarkdown::html_vignette
-knit: ({source("../../tools/knit.R"); knit_vignette)
+knit: ({source("../../tools/knit.R"); knit_vignette})
 ---
 
 ## Introduction

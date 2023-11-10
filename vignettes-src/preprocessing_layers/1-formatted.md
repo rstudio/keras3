@@ -7,7 +7,7 @@ description: Overview of how to leverage preprocessing layers to create end-to-e
   models.
 accelerator: GPU
 output: rmarkdown::html_vignette
-knit: ({source("../../tools/knit.R"); knit_vignette)
+knit: ({source("../../tools/knit.R"); knit_vignette})
 ---
 
 ## Keras preprocessing
