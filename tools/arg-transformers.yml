@@ -142,3 +142,25 @@ keras.ops.image.pad_images:
 
 keras.ops.one_hot:
   num_classes: as_integer
+
+keras.ops.slice_update:
+  start_indices: as_index
+
+keras.ops.slice:
+  start_indices: as_index
+
+keras.ops.segment_sum:
+  segment_ids: as_index
+
+keras.ops.segment_max:
+  segment_ids: as_index
+
+keras.ops.scatter:
+  indices: as_index
+
+keras.ops.scatter_update:
+  indices: as_index
+
+"keras.ops.*":
+  segment_ids: as_index
+  indices: as_index

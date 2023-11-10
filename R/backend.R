@@ -37,6 +37,14 @@ as_axis <- function(axis) {
   else axis
 }
 
+as_index <- function(x) {
+  if(storage.mode(x) == "double")
+    storage.mode(x) <- "integer"
+  # k_array() pass through here...
+  # TODO: implement an efficient way to check for negative slices
+  x - 1L
+}
+
 
 backend_normalize_shape <- function(shape) {
 

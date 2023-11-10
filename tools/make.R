@@ -125,6 +125,14 @@ if(!"source:tools/translate-tools.R" %in% search()) envir::attach_source("tools/
 # TODO: shape accessor for x$shape?
 #
 # TODO: this should work: k_convert_to_tensor(c(1, 3, 2, 0), "int32")
+#
+# TODO: as_0_based_index() utility: as_integer(x + 1)
+#
+# TODO: k_array(<r_array>) should default to float32, not float64
+#
+# TODO: k_array(<r_int>) why int64, and not int32?
+#
+# TODO: revisit docs for k_scatter_update and k_scatter, remove python sliceisms
 
 # The source of truth for the current translation should be...?
 #    - the autogened file R/autogen-*.R, or
@@ -157,14 +165,15 @@ get_translations <- function() {
         str_replace_all(fixed("])"), "))") %>%
         str_replace_all("^([a-z_0-9A-Z]+) =", "\\1 <-") %>%
         str_replace_all("None", "NULL") %>%
-        str_replace_all("dict", "named list") %>%
-        str_replace_all("Dict", "Named list") %>%
+        str_replace_all("\\bdict", "named list") %>%
+        str_replace_all("\\bDict", "Named list") %>%
         str_replace_all("tuple", "list") %>%
         str_replace_all("Tuple", "List") %>%
         str_replace_all("True", "TRUE") %>%
         str_replace_all("False", "FALSE") %>%
         str_replace_all(fixed("np.random.random(("), "random_uniform(c(") %>%
         str_replace_all("([0-9])\\.0?\\b", "\\1") %>%
+        str_replace_all(fixed("list/list"), "list") %>%
         str_flatten_lines() %>%
         identity()
         # str_replace_all(fixed("k_convert_to_tensor(["), "k_array(c(") %>%

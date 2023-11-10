@@ -1065,7 +1065,7 @@ make_r_fn.op <- function(endpoint, py_obj, transformers) {
   body <- cl <- as.call(c(py_obj_expr, syms))
 
   if(endpoint == "keras.ops.meshgrid") {
-    browser()
+    # browser()
     body <- rlang::zap_srcref(quote({
       args <- lapply(list(...), function(x) {
         if(storage.mode(x) == "double")

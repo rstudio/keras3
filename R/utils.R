@@ -479,11 +479,11 @@ capture_args2 <- function(modifiers = NULL, ignore = NULL, force = NULL) {
   for (nm in nms_to_modify) {
 
     # escape hatch: user supplied python objects pass through untransformed
-    if (inherits(args[[nm]] -> val, "python.builtin.object"))
-      next
+    # if (inherits(args[[nm]] -> val, "python.builtin.object")) next
 
     # list() so if modifier returns NULL, don't remove the arg
-    args[nm] <- list(modifiers[[nm]](val))
+    args[nm] <- list(modifiers[[nm]](args[[nm]]))
+    # args[nm] <- list(modifiers[[nm]](val))
   }
 
   args
