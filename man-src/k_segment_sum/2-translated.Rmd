@@ -6,12 +6,11 @@ Computes the sum of segments in a tensor.
 @description
 
 # Examples
-```python
-data = keras.ops.convert_to_tensor([1, 2, 10, 20, 100, 200])
-segment_ids = keras.ops.convert_to_tensor([0, 0, 1, 1, 2, 2])
-num_segments = 3
-keras.ops.segment_sum(data, segment_ids,num_segments)
-# array([3, 30, 300], dtype=int32)
+```{r}
+data <- k_array(c(1, 2, 10, 20, 100, 200))
+segment_ids <- k_array(c(1, 1, 2, 2, 3, 3), "int32")
+num_segments <- 3
+k_segment_sum(data, segment_ids, num_segments)
 ```
 
 @returns
@@ -25,7 +24,7 @@ represents the sum of the corresponding segment in `data`.
     segments. If not specified, it is inferred from the maximum
     value in `segment_ids`.
 @param sorted A boolean indicating whether `segment_ids` is sorted.
-    Defaults to`False`.
+    Defaults to`FALSE`.
 
 @export
 @family ops
