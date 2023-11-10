@@ -142,7 +142,7 @@ keras <- NULL
       tryCatch(
         import("tensorflow")$experimental$numpy$experimental_enable_numpy_behavior(),
         error = function(e) {
-          message("failed setting experimental_enable_numpy_behavior")
+          packageStartupMessage("failed setting experimental_enable_numpy_behavior")
         })
 
     },
