@@ -205,13 +205,14 @@ If <code>NULL</code>, both tensors are flattened before use.</p></dd>
 <span id="cb1-4"><a href="#cb1-4" tabindex="-1"></a><span class="do">##  [7. 8. 9.]], shape=(3, 3), dtype=float64)</span></span></code></pre><p></p></div>
 <p></p><div class="sourceCode r"><pre><code><span><span class="va">x3</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/k_convert_to_tensor.html">k_convert_to_tensor</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">7</span>, <span class="fl">8</span>, <span class="fl">9</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/try.html" class="external-link">try</a></span><span class="op">(</span><span class="fu"><a href="../reference/k_append.html">k_append</a></span><span class="op">(</span><span class="va">x1</span>, <span class="va">x3</span>, axis <span class="op">=</span> <span class="fl">1</span><span class="op">)</span><span class="op">)</span></span></code></pre><p></p></div>
-<p></p><div class="sourceCode"><pre><code><span id="cb1-1"><a href="#cb1-1" tabindex="-1"></a><span class="do">## Error in py_call_impl(callable, call_args$unnamed, call_args$named) : </span></span>
+<p></p><div class="sourceCode"><pre><code><span id="cb1-1"><a href="#cb1-1" tabindex="-1"></a><span class="do">## Error in py_call_impl(callable, call_args$unnamed, call_args$named) :</span></span>
 <span id="cb1-2"><a href="#cb1-2" tabindex="-1"></a><span class="do">##   tensorflow.python.framework.errors_impl.InvalidArgumentError: {{function_node __wrapped__ConcatV2_N_2_device_/job:localhost/replica:0/task:0/device:CPU:0}} ConcatOp : Ranks of all input tensors should match: shape[0] = [2,3] vs. shape[1] = [3] [Op:ConcatV2] name: concat</span></span></code></pre><p></p></div>
     </div>
     <div id="see-also">
     <h2>See also</h2>
     <div class="dont-index">
-<ul><li><p><a href="https://www.tensorflow.org/api_docs/python/tf/keras/ops/append" class="external-link">https://www.tensorflow.org/api_docs/python/tf/keras/ops/append</a></p></li>
+<ul><li><p><a href="https:/keras.io/keras_core/api/ops/numpy#append-function">https:/keras.io/keras_core/api/ops/numpy#append-function</a></p></li>
+<li><p><a href="https://www.tensorflow.org/api_docs/python/tf/keras/ops/append" class="external-link">https://www.tensorflow.org/api_docs/python/tf/keras/ops/append</a></p></li>
 </ul><p>Other ops: 
 <code><a href="k_abs.html">k_abs</a>()</code>,
 <code><a href="k_add.html">k_add</a>()</code>,
@@ -258,6 +259,7 @@ If <code>NULL</code>, both tensors are flattened before use.</p></dd>
 <code><a href="k_depthwise_conv.html">k_depthwise_conv</a>()</code>,
 <code><a href="k_diagonal.html">k_diagonal</a>()</code>,
 <code><a href="k_diag.html">k_diag</a>()</code>,
+<code><a href="k_diff.html">k_diff</a>()</code>,
 <code><a href="k_digitize.html">k_digitize</a>()</code>,
 <code><a href="k_divide.html">k_divide</a>()</code>,
 <code><a href="k_dot.html">k_dot</a>()</code>,
@@ -373,6 +375,7 @@ If <code>NULL</code>, both tensors are flattened before use.</p></dd>
 <code><a href="k_softmax.html">k_softmax</a>()</code>,
 <code><a href="k_softplus.html">k_softplus</a>()</code>,
 <code><a href="k_softsign.html">k_softsign</a>()</code>,
+<code><a href="k_solve.html">k_solve</a>()</code>,
 <code><a href="k_sort.html">k_sort</a>()</code>,
 <code><a href="k_sparse_categorical_crossentropy.html">k_sparse_categorical_crossentropy</a>()</code>,
 <code><a href="k_split.html">k_split</a>()</code>,

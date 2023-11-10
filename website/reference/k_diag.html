@@ -189,27 +189,29 @@ the main diagonal.</p></dd>
     </div>
     <div id="examples">
     <h2>Examples</h2>
-    <p></p><div class="sourceCode python"><pre><code><span id="cb1-1"><a href="#cb1-1" tabindex="-1"></a><span class="im">from</span> keras <span class="im">import</span> ops</span>
-<span id="cb1-2"><a href="#cb1-2" tabindex="-1"></a>x <span class="op">=</span> ops.arange(<span class="dv">9</span>).reshape((<span class="dv">3</span>, <span class="dv">3</span>))</span>
-<span id="cb1-3"><a href="#cb1-3" tabindex="-1"></a>x</span>
-<span id="cb1-4"><a href="#cb1-4" tabindex="-1"></a><span class="co"># array([[0, 1, 2],</span></span>
-<span id="cb1-5"><a href="#cb1-5" tabindex="-1"></a><span class="co">#        [3, 4, 5],</span></span>
-<span id="cb1-6"><a href="#cb1-6" tabindex="-1"></a><span class="co">#        [6, 7, 8]])</span></span></code></pre><p></p></div>
-<p></p><div class="sourceCode python"><pre><code><span id="cb1-1"><a href="#cb1-1" tabindex="-1"></a>ops.diag(x)</span>
-<span id="cb1-2"><a href="#cb1-2" tabindex="-1"></a><span class="co"># array([0, 4, 8])</span></span>
-<span id="cb1-3"><a href="#cb1-3" tabindex="-1"></a>ops.diag(x, k<span class="op">=</span><span class="dv">1</span>)</span>
-<span id="cb1-4"><a href="#cb1-4" tabindex="-1"></a><span class="co"># array([1, 5])</span></span>
-<span id="cb1-5"><a href="#cb1-5" tabindex="-1"></a>ops.diag(x, k<span class="op">=-</span><span class="dv">1</span>)</span>
-<span id="cb1-6"><a href="#cb1-6" tabindex="-1"></a><span class="co"># array([3, 7])</span></span></code></pre><p></p></div>
-<p></p><div class="sourceCode python"><pre><code><span id="cb1-1"><a href="#cb1-1" tabindex="-1"></a>ops.diag(ops.diag(x)))</span>
-<span id="cb1-2"><a href="#cb1-2" tabindex="-1"></a><span class="co"># array([[0, 0, 0],</span></span>
-<span id="cb1-3"><a href="#cb1-3" tabindex="-1"></a><span class="co">#        [0, 4, 0],</span></span>
-<span id="cb1-4"><a href="#cb1-4" tabindex="-1"></a><span class="co">#        [0, 0, 8]])</span></span></code></pre><p></p></div>
+    <p></p><div class="sourceCode r"><pre><code><span><span class="va">x</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/k_arange.html">k_arange</a></span><span class="op">(</span><span class="fl">9L</span><span class="op">)</span> <span class="op">|&gt;</span> <span class="fu"><a href="../reference/k_reshape.html">k_reshape</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">3</span>, <span class="fl">3</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="va">x</span></span></code></pre><p></p></div>
+<p></p><div class="sourceCode"><pre><code><span id="cb1-1"><a href="#cb1-1" tabindex="-1"></a><span class="do">## tf.Tensor(</span></span>
+<span id="cb1-2"><a href="#cb1-2" tabindex="-1"></a><span class="do">## [[0 1 2]</span></span>
+<span id="cb1-3"><a href="#cb1-3" tabindex="-1"></a><span class="do">##  [3 4 5]</span></span>
+<span id="cb1-4"><a href="#cb1-4" tabindex="-1"></a><span class="do">##  [6 7 8]], shape=(3, 3), dtype=int32)</span></span></code></pre><p></p></div>
+<p></p><div class="sourceCode r"><pre><code><span><span class="fu"><a href="../reference/k_diag.html">k_diag</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span></span></code></pre><p></p></div>
+<p></p><div class="sourceCode"><pre><code><span id="cb1-1"><a href="#cb1-1" tabindex="-1"></a><span class="do">## tf.Tensor([0 4 8], shape=(3), dtype=int32)</span></span></code></pre><p></p></div>
+<p></p><div class="sourceCode r"><pre><code><span><span class="fu"><a href="../reference/k_diag.html">k_diag</a></span><span class="op">(</span><span class="va">x</span>, k <span class="op">=</span> <span class="fl">1</span><span class="op">)</span></span></code></pre><p></p></div>
+<p></p><div class="sourceCode"><pre><code><span id="cb1-1"><a href="#cb1-1" tabindex="-1"></a><span class="do">## tf.Tensor([1 5], shape=(2), dtype=int32)</span></span></code></pre><p></p></div>
+<p></p><div class="sourceCode r"><pre><code><span><span class="fu"><a href="../reference/k_diag.html">k_diag</a></span><span class="op">(</span><span class="va">x</span>, k <span class="op">=</span> <span class="op">-</span><span class="fl">1</span><span class="op">)</span></span></code></pre><p></p></div>
+<p></p><div class="sourceCode"><pre><code><span id="cb1-1"><a href="#cb1-1" tabindex="-1"></a><span class="do">## tf.Tensor([3 7], shape=(2), dtype=int32)</span></span></code></pre><p></p></div>
+<p></p><div class="sourceCode r"><pre><code><span><span class="fu"><a href="../reference/k_diag.html">k_diag</a></span><span class="op">(</span><span class="fu"><a href="../reference/k_diag.html">k_diag</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span><span class="op">)</span></span></code></pre><p></p></div>
+<p></p><div class="sourceCode"><pre><code><span id="cb1-1"><a href="#cb1-1" tabindex="-1"></a><span class="do">## tf.Tensor(</span></span>
+<span id="cb1-2"><a href="#cb1-2" tabindex="-1"></a><span class="do">## [[0 0 0]</span></span>
+<span id="cb1-3"><a href="#cb1-3" tabindex="-1"></a><span class="do">##  [0 4 0]</span></span>
+<span id="cb1-4"><a href="#cb1-4" tabindex="-1"></a><span class="do">##  [0 0 8]], shape=(3, 3), dtype=int32)</span></span></code></pre><p></p></div>
     </div>
     <div id="see-also">
     <h2>See also</h2>
     <div class="dont-index">
-<ul><li><p><a href="https://www.tensorflow.org/api_docs/python/tf/keras/ops/diag" class="external-link">https://www.tensorflow.org/api_docs/python/tf/keras/ops/diag</a></p></li>
+<ul><li><p><a href="https:/keras.io/keras_core/api/ops/numpy#diag-function">https:/keras.io/keras_core/api/ops/numpy#diag-function</a></p></li>
+<li><p><a href="https://www.tensorflow.org/api_docs/python/tf/keras/ops/diag" class="external-link">https://www.tensorflow.org/api_docs/python/tf/keras/ops/diag</a></p></li>
 </ul><p>Other ops: 
 <code><a href="k_abs.html">k_abs</a>()</code>,
 <code><a href="k_add.html">k_add</a>()</code>,
@@ -256,6 +258,7 @@ the main diagonal.</p></dd>
 <code><a href="k_cumsum.html">k_cumsum</a>()</code>,
 <code><a href="k_depthwise_conv.html">k_depthwise_conv</a>()</code>,
 <code><a href="k_diagonal.html">k_diagonal</a>()</code>,
+<code><a href="k_diff.html">k_diff</a>()</code>,
 <code><a href="k_digitize.html">k_digitize</a>()</code>,
 <code><a href="k_divide.html">k_divide</a>()</code>,
 <code><a href="k_dot.html">k_dot</a>()</code>,
@@ -371,6 +374,7 @@ the main diagonal.</p></dd>
 <code><a href="k_softmax.html">k_softmax</a>()</code>,
 <code><a href="k_softplus.html">k_softplus</a>()</code>,
 <code><a href="k_softsign.html">k_softsign</a>()</code>,
+<code><a href="k_solve.html">k_solve</a>()</code>,
 <code><a href="k_sort.html">k_sort</a>()</code>,
 <code><a href="k_sparse_categorical_crossentropy.html">k_sparse_categorical_crossentropy</a>()</code>,
 <code><a href="k_split.html">k_split</a>()</code>,

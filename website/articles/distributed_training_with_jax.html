@@ -195,6 +195,8 @@
       <h1 data-toc-skip>Multi-GPU distributed training with JAX</h1>
                         <h4 data-toc-skip class="author"><a href="https://twitter.com/fchollet" class="external-link">fchollet</a></h4>
             
+            <h4 data-toc-skip class="date">Last Modified: 2023-11-10;
+Last Rendered: 2023-11-10</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/rstudio/keras/blob/HEAD/vignettes/distributed_training_with_jax.Rmd" class="external-link"><code>vignettes/distributed_training_with_jax.Rmd</code></a></small>
       <div class="hidden name"><code>distributed_training_with_jax.Rmd</code></div>
@@ -243,7 +245,7 @@ will train, and the function that creates the dataset we will train on
 <span id="cb1-5"><a href="#cb1-5" tabindex="-1"></a><span class="im">import</span> jax</span>
 <span id="cb1-6"><a href="#cb1-6" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
 <span id="cb1-7"><a href="#cb1-7" tabindex="-1"></a><span class="im">import</span> tensorflow <span class="im">as</span> tf</span>
-<span id="cb1-8"><a href="#cb1-8" tabindex="-1"></a><span class="im">import</span> keras <span class="im">as</span> keras</span>
+<span id="cb1-8"><a href="#cb1-8" tabindex="-1"></a><span class="im">import</span> keras</span>
 <span id="cb1-9"><a href="#cb1-9" tabindex="-1"></a></span>
 <span id="cb1-10"><a href="#cb1-10" tabindex="-1"></a><span class="im">from</span> jax.experimental <span class="im">import</span> mesh_utils</span>
 <span id="cb1-11"><a href="#cb1-11" tabindex="-1"></a><span class="im">from</span> jax.sharding <span class="im">import</span> Mesh</span>

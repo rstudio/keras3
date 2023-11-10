@@ -196,12 +196,13 @@ should be updated and returned by this function.</p></dd>
     </div>
     <div id="examples">
     <h2>Examples</h2>
-    <p></p><div class="sourceCode python"><pre><code><span id="cb1-1"><a href="#cb1-1" tabindex="-1"></a>lower <span class="op">=</span> <span class="dv">0</span></span>
-<span id="cb1-2"><a href="#cb1-2" tabindex="-1"></a>upper <span class="op">=</span> <span class="dv">10</span></span>
-<span id="cb1-3"><a href="#cb1-3" tabindex="-1"></a>body_fun <span class="op">=</span> <span class="kw">lambda</span> i, s: (i <span class="op">+</span> <span class="dv">1</span>, s <span class="op">+</span> i)</span>
-<span id="cb1-4"><a href="#cb1-4" tabindex="-1"></a>init_val <span class="op">=</span> <span class="dv">0</span></span>
-<span id="cb1-5"><a href="#cb1-5" tabindex="-1"></a>keras.ops.fori_loop(lower, upper, body_fun, init_val)</span>
-<span id="cb1-6"><a href="#cb1-6" tabindex="-1"></a><span class="co"># 45</span></span></code></pre><p></p></div>
+    <p></p><div class="sourceCode r"><pre><code><span><span class="va">lower</span> <span class="op">&lt;-</span> <span class="fl">0L</span></span>
+<span><span class="va">upper</span> <span class="op">&lt;-</span> <span class="fl">10L</span></span>
+<span><span class="va">body_fun</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">i</span>, <span class="va">state</span><span class="op">)</span> <span class="va">state</span> <span class="op">+</span> <span class="va">i</span></span>
+<span><span class="va">init_state</span> <span class="op">&lt;-</span> <span class="fl">0L</span></span>
+<span><span class="va">final_state</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/k_fori_loop.html">k_fori_loop</a></span><span class="op">(</span><span class="va">lower</span>, <span class="va">upper</span>, <span class="va">body_fun</span>, <span class="va">init_state</span><span class="op">)</span></span>
+<span><span class="va">final_state</span></span></code></pre><p></p></div>
+<p></p><div class="sourceCode"><pre><code><span id="cb1-1"><a href="#cb1-1" tabindex="-1"></a><span class="do">## tf.Tensor(45, shape=(), dtype=int32)</span></span></code></pre><p></p></div>
     </div>
     <div id="see-also">
     <h2>See also</h2>
@@ -254,6 +255,7 @@ should be updated and returned by this function.</p></dd>
 <code><a href="k_depthwise_conv.html">k_depthwise_conv</a>()</code>,
 <code><a href="k_diagonal.html">k_diagonal</a>()</code>,
 <code><a href="k_diag.html">k_diag</a>()</code>,
+<code><a href="k_diff.html">k_diff</a>()</code>,
 <code><a href="k_digitize.html">k_digitize</a>()</code>,
 <code><a href="k_divide.html">k_divide</a>()</code>,
 <code><a href="k_dot.html">k_dot</a>()</code>,
@@ -368,6 +370,7 @@ should be updated and returned by this function.</p></dd>
 <code><a href="k_softmax.html">k_softmax</a>()</code>,
 <code><a href="k_softplus.html">k_softplus</a>()</code>,
 <code><a href="k_softsign.html">k_softsign</a>()</code>,
+<code><a href="k_solve.html">k_solve</a>()</code>,
 <code><a href="k_sort.html">k_sort</a>()</code>,
 <code><a href="k_sparse_categorical_crossentropy.html">k_sparse_categorical_crossentropy</a>()</code>,
 <code><a href="k_split.html">k_split</a>()</code>,

@@ -324,6 +324,60 @@ reference:
       - "%py_class%"
       - "%<-active%"
 
+  - title: "Catchall"
+    contents:
+      - starts_with("a")
+      - starts_with("b")
+      - starts_with("c")
+      - starts_with("d")
+      - starts_with("e")
+      - starts_with("f")
+      - starts_with("g")
+      - starts_with("h")
+      - starts_with("i")
+      - starts_with("j")
+      - starts_with("k")
+      - starts_with("l")
+      - starts_with("m")
+      - starts_with("n")
+      - starts_with("o")
+      - starts_with("p")
+      - starts_with("q")
+      - starts_with("r")
+      - starts_with("s")
+      - starts_with("t")
+      - starts_with("u")
+      - starts_with("v")
+      - starts_with("w")
+      - starts_with("x")
+      - starts_with("y")
+      - starts_with("z")
+      - starts_with("A")
+      - starts_with("B")
+      - starts_with("C")
+      - starts_with("D")
+      - starts_with("E")
+      - starts_with("F")
+      - starts_with("G")
+      - starts_with("H")
+      - starts_with("I")
+      - starts_with("J")
+      - starts_with("K")
+      - starts_with("L")
+      - starts_with("M")
+      - starts_with("N")
+      - starts_with("O")
+      - starts_with("P")
+      - starts_with("Q")
+      - starts_with("R")
+      - starts_with("S")
+      - starts_with("T")
+      - starts_with("U")
+      - starts_with("V")
+      - starts_with("W")
+      - starts_with("X")
+      - starts_with("Y")
+      - starts_with("Z")
   - title: "Deprecated"
     contents:
       - KerasLayer
@@ -337,6 +391,7 @@ reference:
       # - layer_cudnn_gru
       # - layer_cudnn_lstm
       # - layer_dense_features
+
 
 
 #

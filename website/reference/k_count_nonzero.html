@@ -175,30 +175,32 @@
 
 
 <dt>axis</dt>
-<dd><p>Axis or tuple of axes along which to count the number of
-non-zeros. Defaults to <code>None</code>.</p></dd>
+<dd><p>Axis or a tuple of axes along which to count the number of
+non-zeros. Defaults to <code>NULL</code>.</p></dd>
 
 </dl></div>
     <div id="value">
     <h2>Value</h2>
     
 
-<p>int or tensor of ints.</p>
+<p>An integer or a tensor of integers.</p>
     </div>
     <div id="examples">
     <h2>Examples</h2>
-    <p></p><div class="sourceCode python"><pre><code><span id="cb1-1"><a href="#cb1-1" tabindex="-1"></a>x <span class="op">=</span> keras.ops.array([[<span class="dv">0</span>, <span class="dv">1</span>, <span class="dv">7</span>, <span class="dv">0</span>], [<span class="dv">3</span>, <span class="dv">0</span>, <span class="dv">2</span>, <span class="dv">19</span>]])</span>
-<span id="cb1-2"><a href="#cb1-2" tabindex="-1"></a>keras.ops.count_nonzero(x)</span>
-<span id="cb1-3"><a href="#cb1-3" tabindex="-1"></a><span class="co"># 5</span></span>
-<span id="cb1-4"><a href="#cb1-4" tabindex="-1"></a>keras.ops.count_nonzero(x, axis<span class="op">=</span><span class="dv">0</span>)</span>
-<span id="cb1-5"><a href="#cb1-5" tabindex="-1"></a><span class="co"># array([1, 1, 2, 1], dtype=int64)</span></span>
-<span id="cb1-6"><a href="#cb1-6" tabindex="-1"></a>keras.ops.count_nonzero(x, axis<span class="op">=</span><span class="dv">1</span>)</span>
-<span id="cb1-7"><a href="#cb1-7" tabindex="-1"></a><span class="co"># array([2, 3], dtype=int64)</span></span></code></pre><p></p></div>
+    <p></p><div class="sourceCode r"><pre><code><span><span class="va">x</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/k_array.html">k_array</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/cbind.html" class="external-link">rbind</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">1</span>, <span class="fl">7</span>, <span class="fl">0</span><span class="op">)</span>,</span>
+<span>                   <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">3</span>, <span class="fl">0</span>, <span class="fl">2</span>, <span class="fl">19</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="fu"><a href="../reference/k_count_nonzero.html">k_count_nonzero</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span></span></code></pre><p></p></div>
+<p></p><div class="sourceCode"><pre><code><span id="cb1-1"><a href="#cb1-1" tabindex="-1"></a><span class="do">## tf.Tensor(5, shape=(), dtype=int64)</span></span></code></pre><p></p></div>
+<p></p><div class="sourceCode r"><pre><code><span><span class="fu"><a href="../reference/k_count_nonzero.html">k_count_nonzero</a></span><span class="op">(</span><span class="va">x</span>, axis <span class="op">=</span> <span class="fl">1</span><span class="op">)</span></span></code></pre><p></p></div>
+<p></p><div class="sourceCode"><pre><code><span id="cb1-1"><a href="#cb1-1" tabindex="-1"></a><span class="do">## tf.Tensor([1 1 2 1], shape=(4), dtype=int64)</span></span></code></pre><p></p></div>
+<p></p><div class="sourceCode r"><pre><code><span><span class="fu"><a href="../reference/k_count_nonzero.html">k_count_nonzero</a></span><span class="op">(</span><span class="va">x</span>, axis <span class="op">=</span> <span class="fl">2</span><span class="op">)</span></span></code></pre><p></p></div>
+<p></p><div class="sourceCode"><pre><code><span id="cb1-1"><a href="#cb1-1" tabindex="-1"></a><span class="do">## tf.Tensor([2 3], shape=(2), dtype=int64)</span></span></code></pre><p></p></div>
     </div>
     <div id="see-also">
     <h2>See also</h2>
     <div class="dont-index">
-<ul><li><p><a href="https://www.tensorflow.org/api_docs/python/tf/keras/ops/count_nonzero" class="external-link">https://www.tensorflow.org/api_docs/python/tf/keras/ops/count_nonzero</a></p></li>
+<ul><li><p><a href="https:/keras.io/keras_core/api/ops/numpy#countnonzero-function">https:/keras.io/keras_core/api/ops/numpy#countnonzero-function</a></p></li>
+<li><p><a href="https://www.tensorflow.org/api_docs/python/tf/keras/ops/count_nonzero" class="external-link">https://www.tensorflow.org/api_docs/python/tf/keras/ops/count_nonzero</a></p></li>
 </ul><p>Other ops: 
 <code><a href="k_abs.html">k_abs</a>()</code>,
 <code><a href="k_add.html">k_add</a>()</code>,
@@ -245,6 +247,7 @@ non-zeros. Defaults to <code>None</code>.</p></dd>
 <code><a href="k_depthwise_conv.html">k_depthwise_conv</a>()</code>,
 <code><a href="k_diagonal.html">k_diagonal</a>()</code>,
 <code><a href="k_diag.html">k_diag</a>()</code>,
+<code><a href="k_diff.html">k_diff</a>()</code>,
 <code><a href="k_digitize.html">k_digitize</a>()</code>,
 <code><a href="k_divide.html">k_divide</a>()</code>,
 <code><a href="k_dot.html">k_dot</a>()</code>,
@@ -360,6 +363,7 @@ non-zeros. Defaults to <code>None</code>.</p></dd>
 <code><a href="k_softmax.html">k_softmax</a>()</code>,
 <code><a href="k_softplus.html">k_softplus</a>()</code>,
 <code><a href="k_softsign.html">k_softsign</a>()</code>,
+<code><a href="k_solve.html">k_solve</a>()</code>,
 <code><a href="k_sort.html">k_sort</a>()</code>,
 <code><a href="k_sparse_categorical_crossentropy.html">k_sparse_categorical_crossentropy</a>()</code>,
 <code><a href="k_split.html">k_split</a>()</code>,

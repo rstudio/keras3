@@ -1156,6 +1156,9 @@
     <loc>/reference/image_load.html</loc>
   </url>
   <url>
+    <loc>/reference/image_smart_resize.html</loc>
+  </url>
+  <url>
     <loc>/reference/image_to_array.html</loc>
   </url>
   <url>
@@ -1418,6 +1421,9 @@
   </url>
   <url>
     <loc>/reference/k_diagonal.html</loc>
+  </url>
+  <url>
+    <loc>/reference/k_diff.html</loc>
   </url>
   <url>
     <loc>/reference/k_digitize.html</loc>
@@ -1919,6 +1925,9 @@
   </url>
   <url>
     <loc>/reference/k_softsign.html</loc>
+  </url>
+  <url>
+    <loc>/reference/k_solve.html</loc>
   </url>
   <url>
     <loc>/reference/k_sort.html</loc>

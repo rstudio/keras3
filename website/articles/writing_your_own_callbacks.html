@@ -194,8 +194,8 @@
     <div class="page-header toc-ignore">
       <h1 data-toc-skip>Writing your own callbacks</h1>
             
-            <h4 data-toc-skip class="date">Last Modified: 2023-11-07;
-Last Rendered: 2023-11-07</h4>
+            <h4 data-toc-skip class="date">Last Modified: 2023-11-10;
+Last Rendered: 2023-11-10</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/rstudio/keras/blob/HEAD/vignettes/writing_your_own_callbacks.Rmd" class="external-link"><code>vignettes/writing_your_own_callbacks.Rmd</code></a></small>
       <div class="hidden name"><code>writing_your_own_callbacks.Rmd</code></div>
@@ -205,11 +205,8 @@ Last Rendered: 2023-11-07</h4>
     
     
 <div class="section level2">
-<h2 id="writing-your-own-callbacks">Writing your own callbacks<a class="anchor" aria-label="anchor" href="#writing-your-own-callbacks"></a>
+<h2 id="introduction">Introduction<a class="anchor" aria-label="anchor" href="#introduction"></a>
 </h2>
-<div class="section level3">
-<h3 id="introduction">Introduction<a class="anchor" aria-label="anchor" href="#introduction"></a>
-</h3>
 <p>A callback is a powerful tool to customize the behavior of a Keras
 model during training, evaluation, or inference. Examples include
 <code>keras.callbacks.TensorBoard</code> to visualize training progress
@@ -220,17 +217,17 @@ model during training.</p>
 do, and how you can build your own. We provide a few demos of simple
 callback applications to get you started.</p>
 </div>
-<div class="section level3">
-<h3 id="setup">Setup<a class="anchor" aria-label="anchor" href="#setup"></a>
-</h3>
+<div class="section level2">
+<h2 id="setup">Setup<a class="anchor" aria-label="anchor" href="#setup"></a>
+</h2>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://tensorflow.rstudio.com/" class="external-link">keras</a></span><span class="op">)</span></span>
 <span><span class="va">`add&lt;-`</span> <span class="op">&lt;-</span> <span class="va">`+`</span></span>
 <span><span class="fu">envir</span><span class="fu">::</span><span class="fu"><a href="https://t-kalinowski.github.io/envir/reference/import_from.html" class="external-link">import_from</a></span><span class="op">(</span><span class="va">dplyr</span>, <span class="va">last</span><span class="op">)</span></span></code></pre></div>
 </div>
-<div class="section level3">
-<h3 id="keras-callbacks-overview">Keras callbacks overview<a class="anchor" aria-label="anchor" href="#keras-callbacks-overview"></a>
-</h3>
+<div class="section level2">
+<h2 id="keras-callbacks-overview">Keras callbacks overview<a class="anchor" aria-label="anchor" href="#keras-callbacks-overview"></a>
+</h2>
 <p>All callbacks subclass the <code>keras.callbacks.Callback</code>
 class, and override a set of methods called at various stages of
 training, testing, and predicting. Callbacks are useful to get a view on
@@ -243,66 +240,66 @@ internal states and statistics of the model during training.</p>
 <li><code><a href="https://rdrr.io/r/stats/predict.html" class="external-link">predict()</a></code></li>
 </ul>
 </div>
+<div class="section level2">
+<h2 id="an-overview-of-callback-methods">An overview of callback methods<a class="anchor" aria-label="anchor" href="#an-overview-of-callback-methods"></a>
+</h2>
 <div class="section level3">
-<h3 id="an-overview-of-callback-methods">An overview of callback methods<a class="anchor" aria-label="anchor" href="#an-overview-of-callback-methods"></a>
+<h3 id="global-methods">Global methods<a class="anchor" aria-label="anchor" href="#global-methods"></a>
 </h3>
 <div class="section level4">
-<h4 id="global-methods">Global methods<a class="anchor" aria-label="anchor" href="#global-methods"></a>
-</h4>
-<div class="section level5">
-<h5 id="on_traintestpredict_beginlogs-null">
+<h4 id="on_traintestpredict_beginlogs-null">
 <code>on_(train|test|predict)_begin(logs = NULL)</code><a class="anchor" aria-label="anchor" href="#on_traintestpredict_beginlogs-null"></a>
-</h5>
+</h4>
 <p>Called at the beginning of
 <code>fit</code>/<code>evaluate</code>/<code>predict</code>.</p>
 </div>
-<div class="section level5">
-<h5 id="on_traintestpredict_endlogs-null">
+<div class="section level4">
+<h4 id="on_traintestpredict_endlogs-null">
 <code>on_(train|test|predict)_end(logs = NULL)</code><a class="anchor" aria-label="anchor" href="#on_traintestpredict_endlogs-null"></a>
-</h5>
+</h4>
 <p>Called at the end of
 <code>fit</code>/<code>evaluate</code>/<code>predict</code>.</p>
 </div>
 </div>
+<div class="section level3">
+<h3 id="batch-level-methods-for-trainingtestingpredicting">Batch-level methods for training/testing/predicting<a class="anchor" aria-label="anchor" href="#batch-level-methods-for-trainingtestingpredicting"></a>
+</h3>
 <div class="section level4">
-<h4 id="batch-level-methods-for-trainingtestingpredicting">Batch-level methods for training/testing/predicting<a class="anchor" aria-label="anchor" href="#batch-level-methods-for-trainingtestingpredicting"></a>
-</h4>
-<div class="section level5">
-<h5 id="on_traintestpredict_batch_beginbatch-logs-null">
+<h4 id="on_traintestpredict_batch_beginbatch-logs-null">
 <code>on_(train|test|predict)_batch_begin(batch, logs = NULL)</code><a class="anchor" aria-label="anchor" href="#on_traintestpredict_batch_beginbatch-logs-null"></a>
-</h5>
+</h4>
 <p>Called right before processing a batch during
 training/testing/predicting.</p>
 </div>
-<div class="section level5">
-<h5 id="on_traintestpredict_batch_endbatch-logs-null">
+<div class="section level4">
+<h4 id="on_traintestpredict_batch_endbatch-logs-null">
 <code>on_(train|test|predict)_batch_end(batch, logs = NULL)</code><a class="anchor" aria-label="anchor" href="#on_traintestpredict_batch_endbatch-logs-null"></a>
-</h5>
+</h4>
 <p>Called at the end of training/testing/predicting a batch. Within this
 method, <code>logs</code> is a named list containing the metrics
 results.</p>
 </div>
 </div>
+<div class="section level3">
+<h3 id="epoch-level-methods-training-only">Epoch-level methods (training only)<a class="anchor" aria-label="anchor" href="#epoch-level-methods-training-only"></a>
+</h3>
 <div class="section level4">
-<h4 id="epoch-level-methods-training-only">Epoch-level methods (training only)<a class="anchor" aria-label="anchor" href="#epoch-level-methods-training-only"></a>
-</h4>
-<div class="section level5">
-<h5 id="on_epoch_beginepoch-logs-null">
+<h4 id="on_epoch_beginepoch-logs-null">
 <code>on_epoch_begin(epoch, logs = NULL)</code><a class="anchor" aria-label="anchor" href="#on_epoch_beginepoch-logs-null"></a>
-</h5>
+</h4>
 <p>Called at the beginning of an epoch during training.</p>
 </div>
-<div class="section level5">
-<h5 id="on_epoch_endepoch-logs-null">
+<div class="section level4">
+<h4 id="on_epoch_endepoch-logs-null">
 <code>on_epoch_end(epoch, logs = NULL)</code><a class="anchor" aria-label="anchor" href="#on_epoch_endepoch-logs-null"></a>
-</h5>
+</h4>
 <p>Called at the end of an epoch during training.</p>
 </div>
 </div>
 </div>
-<div class="section level3">
-<h3 id="a-basic-example">A basic example<a class="anchor" aria-label="anchor" href="#a-basic-example"></a>
-</h3>
+<div class="section level2">
+<h2 id="a-basic-example">A basic example<a class="anchor" aria-label="anchor" href="#a-basic-example"></a>
+</h2>
 <p>Let’s take a look at a concrete example. To get started, let’s import
 tensorflow and define a simple Sequential Keras model:</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
@@ -381,8 +378,8 @@ starts &amp; ends</li>
 <span>  <span class="va">mnist</span><span class="op">$</span><span class="va">train</span><span class="op">$</span><span class="va">x</span>, <span class="va">mnist</span><span class="op">$</span><span class="va">train</span><span class="op">$</span><span class="va">y</span>,</span>
 <span>  epochs <span class="op">=</span> <span class="fl">2</span>, verbose <span class="op">=</span> <span class="fl">0</span>, validation_split <span class="op">=</span> <span class="fl">0.5</span>,</span>
 <span>  callbacks <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="fu">callback_custom</span><span class="op">(</span><span class="op">)</span><span class="op">)</span></span>
-<span><span class="op">)</span></span>
-<span><span class="co">## Starting training; got logs:  Named list()</span></span>
+<span><span class="op">)</span></span></code></pre></div>
+<pre><code><span><span class="co">## Starting training; got logs:  Named list()</span></span>
 <span><span class="co">## </span></span>
 <span><span class="co">## Start epoch 0 of training; got logs:  Named list()</span></span>
 <span><span class="co">## </span></span>
@@ -512,14 +509,14 @@ starts &amp; ends</li>
 <span><span class="co">##  $ loss                   : num 8.4</span></span>
 <span><span class="co">##  $ mean_absolute_error    : num 2.25</span></span>
 <span><span class="co">##  $ val_loss               : num 4.82</span></span>
-<span><span class="co">##  $ val_mean_absolute_error: num 1.85</span></span>
-<span></span>
-<span><span class="va">res</span> <span class="op">&lt;-</span> <span class="va">model</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://rdrr.io/pkg/tensorflow/man/evaluate.html" class="external-link">evaluate</a></span><span class="op">(</span></span>
+<span><span class="co">##  $ val_mean_absolute_error: num 1.85</span></span></code></pre>
+<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">res</span> <span class="op">&lt;-</span> <span class="va">model</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://rdrr.io/pkg/tensorflow/man/evaluate.html" class="external-link">evaluate</a></span><span class="op">(</span></span>
 <span>  <span class="va">mnist</span><span class="op">$</span><span class="va">test</span><span class="op">$</span><span class="va">x</span>, <span class="va">mnist</span><span class="op">$</span><span class="va">test</span><span class="op">$</span><span class="va">y</span>,</span>
 <span>  verbose <span class="op">=</span> <span class="fl">0</span>,</span>
 <span>  callbacks <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="fu">callback_custom</span><span class="op">(</span><span class="op">)</span><span class="op">)</span></span>
-<span><span class="op">)</span></span>
-<span><span class="co">## Start testing; got logs:  Named list()</span></span>
+<span><span class="op">)</span></span></code></pre></div>
+<pre><code><span><span class="co">## Start testing; got logs:  Named list()</span></span>
 <span><span class="co">## </span></span>
 <span><span class="co">## ...Evaluating: start of batch 0; got logs:  Named list()</span></span>
 <span><span class="co">## </span></span>
@@ -565,14 +562,14 @@ starts &amp; ends</li>
 <span><span class="co">## </span></span>
 <span><span class="co">## Stop testing; got logs: List of 2</span></span>
 <span><span class="co">##  $ loss               : num 6.15</span></span>
-<span><span class="co">##  $ mean_absolute_error: num 2.04</span></span>
-<span></span>
-<span><span class="va">res</span> <span class="op">&lt;-</span> <span class="va">model</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://rdrr.io/r/stats/predict.html" class="external-link">predict</a></span><span class="op">(</span></span>
-<span>  <span class="va">mnist</span><span class="op">$</span><span class="va">test</span><span class="op">$</span><span class="va">x</span>, </span>
+<span><span class="co">##  $ mean_absolute_error: num 2.04</span></span></code></pre>
+<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">res</span> <span class="op">&lt;-</span> <span class="va">model</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://rdrr.io/r/stats/predict.html" class="external-link">predict</a></span><span class="op">(</span></span>
+<span>  <span class="va">mnist</span><span class="op">$</span><span class="va">test</span><span class="op">$</span><span class="va">x</span>,</span>
 <span>  verbose <span class="op">=</span> <span class="fl">0</span>,</span>
 <span>  callbacks <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="fu">callback_custom</span><span class="op">(</span><span class="op">)</span><span class="op">)</span></span>
-<span><span class="op">)</span></span>
-<span><span class="co">## Start predicting; got logs:  Named list()</span></span>
+<span><span class="op">)</span></span></code></pre></div>
+<pre><code><span><span class="co">## Start predicting; got logs:  Named list()</span></span>
 <span><span class="co">## </span></span>
 <span><span class="co">## ...Predicting: start of batch 0; got logs:  Named list()</span></span>
 <span><span class="co">## </span></span>
@@ -609,14 +606,14 @@ starts &amp; ends</li>
 <span><span class="co">## ...Predicting: end of batch 6; got logs: List of 1</span></span>
 <span><span class="co">##  $ outputs:&lt;tf.Tensor: shape=(8, 1), dtype=float32, numpy=…&gt;</span></span>
 <span><span class="co">## </span></span>
-<span><span class="co">## Stop predicting; got logs:  Named list()</span></span></code></pre></div>
-<div class="section level4">
-<h4 id="usage-of-logs-dict">Usage of <code>logs</code> dict<a class="anchor" aria-label="anchor" href="#usage-of-logs-dict"></a>
-</h4>
+<span><span class="co">## Stop predicting; got logs:  Named list()</span></span></code></pre>
+<div class="section level3">
+<h3 id="usage-of-logs-dict">Usage of <code>logs</code> dict<a class="anchor" aria-label="anchor" href="#usage-of-logs-dict"></a>
+</h3>
 <p>The <code>logs</code> named list contains the loss value, and all the
 metrics at the end of a batch or epoch. Example includes the loss and
 mean absolute error.</p>
-<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">callback_print_loss_and_mae</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/new-classes.html">new_callback_class</a></span><span class="op">(</span></span>
 <span>  <span class="st">"LossAndErrorPrintingCallback"</span>,</span>
 <span></span>
@@ -641,8 +638,8 @@ mean absolute error.</p>
 <span>  <span class="va">mnist</span><span class="op">$</span><span class="va">train</span><span class="op">$</span><span class="va">x</span>, <span class="va">mnist</span><span class="op">$</span><span class="va">train</span><span class="op">$</span><span class="va">y</span>,</span>
 <span>  epochs <span class="op">=</span> <span class="fl">2</span>, verbose <span class="op">=</span> <span class="fl">0</span>,</span>
 <span>  callbacks <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="fu">callback_print_loss_and_mae</span><span class="op">(</span><span class="op">)</span><span class="op">)</span></span>
-<span><span class="op">)</span></span>
-<span><span class="co">## Up to batch 0, the average loss is   26.27.</span></span>
+<span><span class="op">)</span></span></code></pre></div>
+<pre><code><span><span class="co">## Up to batch 0, the average loss is   26.27.</span></span>
 <span><span class="co">## Up to batch 1, the average loss is  412.34.</span></span>
 <span><span class="co">## Up to batch 2, the average loss is  282.25.</span></span>
 <span><span class="co">## Up to batch 3, the average loss is  214.56.</span></span>
@@ -657,27 +654,27 @@ mean absolute error.</p>
 <span><span class="co">## Up to batch 4, the average loss is   10.78.</span></span>
 <span><span class="co">## Up to batch 5, the average loss is    9.91.</span></span>
 <span><span class="co">## Up to batch 6, the average loss is    9.24.</span></span>
-<span><span class="co">## The average loss for epoch  1 is      9.24 and mean absolute error is    2.45.</span></span>
-<span></span>
-<span><span class="va">res</span> <span class="op">=</span> <span class="va">model</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://rdrr.io/pkg/tensorflow/man/evaluate.html" class="external-link">evaluate</a></span><span class="op">(</span></span>
+<span><span class="co">## The average loss for epoch  1 is      9.24 and mean absolute error is    2.45.</span></span></code></pre>
+<div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">res</span> <span class="op">=</span> <span class="va">model</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://rdrr.io/pkg/tensorflow/man/evaluate.html" class="external-link">evaluate</a></span><span class="op">(</span></span>
 <span>  <span class="va">mnist</span><span class="op">$</span><span class="va">test</span><span class="op">$</span><span class="va">x</span>, <span class="va">mnist</span><span class="op">$</span><span class="va">test</span><span class="op">$</span><span class="va">y</span>,</span>
 <span>  verbose <span class="op">=</span> <span class="fl">0</span>,</span>
 <span>  callbacks <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="fu">callback_print_loss_and_mae</span><span class="op">(</span><span class="op">)</span><span class="op">)</span></span>
-<span><span class="op">)</span></span>
-<span><span class="co">## Up to batch 0, the average loss is    6.75.</span></span>
+<span><span class="op">)</span></span></code></pre></div>
+<pre><code><span><span class="co">## Up to batch 0, the average loss is    6.75.</span></span>
 <span><span class="co">## Up to batch 1, the average loss is    7.60.</span></span>
 <span><span class="co">## Up to batch 2, the average loss is    7.16.</span></span>
 <span><span class="co">## Up to batch 3, the average loss is    7.48.</span></span>
 <span><span class="co">## Up to batch 4, the average loss is    7.20.</span></span>
 <span><span class="co">## Up to batch 5, the average loss is    7.25.</span></span>
-<span><span class="co">## Up to batch 6, the average loss is    6.91.</span></span></code></pre></div>
+<span><span class="co">## Up to batch 6, the average loss is    6.91.</span></span></code></pre>
 <p>For more information about callbacks, you can check out the <a href="https://keras.io/api/callbacks/" class="external-link">Keras callback API
 documentation</a>.</p>
 </div>
 </div>
-<div class="section level3">
-<h3 id="usage-of-selfmodel-attribute">Usage of <code>self$model</code> attribute<a class="anchor" aria-label="anchor" href="#usage-of-selfmodel-attribute"></a>
-</h3>
+<div class="section level2">
+<h2 id="usage-of-selfmodel-attribute">Usage of <code>self$model</code> attribute<a class="anchor" aria-label="anchor" href="#usage-of-selfmodel-attribute"></a>
+</h2>
 <p>In addition to receiving log information when one of their methods is
 called, callbacks have access to the model associated with the current
 round of training/evaluation/inference: <code>self$model</code>.</p>
@@ -699,12 +696,12 @@ epoch, to monitor what the model is learning over time.</li>
 </ul>
 <p>Let’s see this in action in a couple of examples.</p>
 </div>
+<div class="section level2">
+<h2 id="examples-of-keras-callback-applications">Examples of Keras callback applications<a class="anchor" aria-label="anchor" href="#examples-of-keras-callback-applications"></a>
+</h2>
 <div class="section level3">
-<h3 id="examples-of-keras-callback-applications">Examples of Keras callback applications<a class="anchor" aria-label="anchor" href="#examples-of-keras-callback-applications"></a>
+<h3 id="early-stopping-at-minimum-loss">Early stopping at minimum loss<a class="anchor" aria-label="anchor" href="#early-stopping-at-minimum-loss"></a>
 </h3>
-<div class="section level4">
-<h4 id="early-stopping-at-minimum-loss">Early stopping at minimum loss<a class="anchor" aria-label="anchor" href="#early-stopping-at-minimum-loss"></a>
-</h4>
 <p>This first example shows the creation of a <code>Callback</code> that
 stops training when the minimum of loss has been reached, by setting the
 attribute <code>self$model$stop_training</code> (boolean). Optionally,
@@ -713,7 +710,7 @@ epochs we should wait before stopping after having reached a local
 minimum.</p>
 <p><code><a href="../reference/callback_early_stopping.html">callback_early_stopping()</a></code> provides a more complete and
 general implementation.</p>
-<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">callback_early_stopping_at_min_loss</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/new-classes.html">new_callback_class</a></span><span class="op">(</span></span>
 <span>  <span class="st">"EarlyStoppingAtMinLoss"</span>,</span>
 <span>  `__doc__` <span class="op">=</span></span>
@@ -775,8 +772,8 @@ general implementation.</p>
 <span>  verbose <span class="op">=</span> <span class="fl">0</span>,</span>
 <span>  callbacks <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="fu">callback_print_loss_and_mae</span><span class="op">(</span><span class="op">)</span>,</span>
 <span>                   <span class="fu">callback_early_stopping_at_min_loss</span><span class="op">(</span><span class="op">)</span><span class="op">)</span></span>
-<span><span class="op">)</span></span>
-<span><span class="co">## Up to batch 0, the average loss is   29.74.</span></span>
+<span><span class="op">)</span></span></code></pre></div>
+<pre><code><span><span class="co">## Up to batch 0, the average loss is   29.74.</span></span>
 <span><span class="co">## Up to batch 1, the average loss is  467.31.</span></span>
 <span><span class="co">## Up to batch 2, the average loss is  319.13.</span></span>
 <span><span class="co">## Up to batch 3, the average loss is  240.82.</span></span>
@@ -807,11 +804,11 @@ general implementation.</p>
 <span><span class="co">## Up to batch 3, the average loss is   12.52.</span></span>
 <span><span class="co">## The average loss for epoch  5 is     12.52 and mean absolute error is    2.91.</span></span>
 <span><span class="co">## Restoring model weights from the end of the best epoch.</span></span>
-<span><span class="co">## Epoch 00006: early stopping</span></span></code></pre></div>
+<span><span class="co">## Epoch 00006: early stopping</span></span></code></pre>
 </div>
-<div class="section level4">
-<h4 id="learning-rate-scheduling">Learning rate scheduling<a class="anchor" aria-label="anchor" href="#learning-rate-scheduling"></a>
-</h4>
+<div class="section level3">
+<h3 id="learning-rate-scheduling">Learning rate scheduling<a class="anchor" aria-label="anchor" href="#learning-rate-scheduling"></a>
+</h3>
 <p>In this example, we show how a custom Callback can be used to
 dynamically change the learning rate of the optimizer during the course
 of training.</p>
@@ -819,7 +816,7 @@ of training.</p>
 general implementations (in RStudio, press F1 while the cursor is over
 <code>LearningRateScheduler</code> and a browser will open to <a href="https://www.tensorflow.org/versions/r2.5/api_docs/python/tf/keras/callbacks/LearningRateScheduler" class="external-link">this
 page</a>).</p>
-<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb17"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">callback_custom_learning_rate_scheduler</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/new-classes.html">new_callback_class</a></span><span class="op">(</span></span>
 <span>  <span class="st">"CustomLearningRateScheduler"</span>,</span>
 <span>  `__doc__` <span class="op">=</span></span>
@@ -882,8 +879,8 @@ page</a>).</p>
 <span>    <span class="fu">callback_print_loss_and_mae</span><span class="op">(</span><span class="op">)</span>,</span>
 <span>    <span class="fu">callback_custom_learning_rate_scheduler</span><span class="op">(</span><span class="va">lr_schedule</span><span class="op">)</span></span>
 <span>  <span class="op">)</span></span>
-<span><span class="op">)</span></span>
-<span><span class="co">## </span></span>
+<span><span class="op">)</span></span></code></pre></div>
+<pre><code><span><span class="co">## </span></span>
 <span><span class="co">## Epoch 000: Learning rate is 0.1000.</span></span>
 <span><span class="co">## Up to batch 0, the average loss is   27.86.</span></span>
 <span><span class="co">## Up to batch 1, the average loss is  464.16.</span></span>
@@ -987,15 +984,14 @@ page</a>).</p>
 <span><span class="co">## Up to batch 1, the average loss is    2.36.</span></span>
 <span><span class="co">## Up to batch 2, the average loss is    2.41.</span></span>
 <span><span class="co">## Up to batch 3, the average loss is    1.87.</span></span>
-<span><span class="co">## The average loss for epoch 14 is      1.87 and mean absolute error is    1.01.</span></span></code></pre></div>
+<span><span class="co">## The average loss for epoch 14 is      1.87 and mean absolute error is    1.01.</span></span></code></pre>
 </div>
-<div class="section level4">
-<h4 id="built-in-keras-callbacks">Built-in Keras callbacks<a class="anchor" aria-label="anchor" href="#built-in-keras-callbacks"></a>
-</h4>
+<div class="section level3">
+<h3 id="built-in-keras-callbacks">Built-in Keras callbacks<a class="anchor" aria-label="anchor" href="#built-in-keras-callbacks"></a>
+</h3>
 <p>Be sure to check out the existing Keras callbacks by reading the <a href="https://keras.io/api/callbacks/" class="external-link">API docs</a>. Applications
 include logging to CSV, saving the model, visualizing metrics in
 TensorBoard, and a lot more!</p>
-</div>
 </div>
 </div>
   </div>

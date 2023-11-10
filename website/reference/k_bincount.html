@@ -178,7 +178,7 @@ integer(s).</p></dd>
 
 <dt>weights</dt>
 <dd><p>Weight tensor.
-It must have the same length as <code>x</code>. The default value is <code>None</code>.
+It must have the same length as <code>x</code>. The default value is <code>NULL</code>.
 If specified, <code>x</code> is weighted by it, i.e. if <code>n = x[i]</code>,
 <code>out[n] += weight[i]</code> instead of the default behavior <code>out[n] += 1</code>.</p></dd>
 
@@ -201,22 +201,23 @@ minlength.</p>
     </div>
     <div id="examples">
     <h2>Examples</h2>
-    <p></p><div class="sourceCode python"><pre><code><span id="cb1-1"><a href="#cb1-1" tabindex="-1"></a>x <span class="op">=</span> keras.ops.array([<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">2</span>, <span class="dv">3</span>], dtype<span class="op">=</span><span class="st">"uint8"</span>)</span>
-<span id="cb1-2"><a href="#cb1-2" tabindex="-1"></a>keras.ops.bincount(x)</span>
-<span id="cb1-3"><a href="#cb1-3" tabindex="-1"></a><span class="co"># array([0, 1, 2, 1], dtype=int32)</span></span>
-<span id="cb1-4"><a href="#cb1-4" tabindex="-1"></a>weights <span class="op">=</span> x <span class="op">/</span> <span class="dv">2</span></span>
-<span id="cb1-5"><a href="#cb1-5" tabindex="-1"></a>weights</span>
-<span id="cb1-6"><a href="#cb1-6" tabindex="-1"></a><span class="co"># array([0.5, 1., 1., 1.5], dtype=float64)</span></span>
-<span id="cb1-7"><a href="#cb1-7" tabindex="-1"></a>keras.ops.bincount(x, weights<span class="op">=</span>weights)</span>
-<span id="cb1-8"><a href="#cb1-8" tabindex="-1"></a><span class="co"># array([0., 0.5, 2., 1.5], dtype=float64)</span></span>
-<span id="cb1-9"><a href="#cb1-9" tabindex="-1"></a>minlength <span class="op">=</span> (keras.ops.<span class="bu">max</span>(x).numpy() <span class="op">+</span> <span class="dv">1</span>) <span class="op">+</span> <span class="dv">2</span> <span class="co"># 6</span></span>
-<span id="cb1-10"><a href="#cb1-10" tabindex="-1"></a>keras.ops.bincount(x, minlength<span class="op">=</span>minlength)</span>
-<span id="cb1-11"><a href="#cb1-11" tabindex="-1"></a><span class="co"># array([0, 1, 2, 1, 0, 0], dtype=int32)</span></span></code></pre><p></p></div>
+    <p></p><div class="sourceCode r"><pre><code><span><span class="op">(</span><span class="va">x</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/k_array.html">k_array</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">2</span>, <span class="fl">2</span>, <span class="fl">3</span><span class="op">)</span>, dtype <span class="op">=</span> <span class="st">"uint8"</span><span class="op">)</span><span class="op">)</span></span></code></pre><p></p></div>
+<p></p><div class="sourceCode"><pre><code><span id="cb1-1"><a href="#cb1-1" tabindex="-1"></a><span class="do">## tf.Tensor([1 2 2 3], shape=(4), dtype=uint8)</span></span></code></pre><p></p></div>
+<p></p><div class="sourceCode r"><pre><code><span><span class="fu"><a href="../reference/k_bincount.html">k_bincount</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span></span></code></pre><p></p></div>
+<p></p><div class="sourceCode"><pre><code><span id="cb1-1"><a href="#cb1-1" tabindex="-1"></a><span class="do">## tf.Tensor([0 1 2 1], shape=(4), dtype=int32)</span></span></code></pre><p></p></div>
+<p></p><div class="sourceCode r"><pre><code><span><span class="op">(</span><span class="va">weights</span> <span class="op">&lt;-</span> <span class="va">x</span> <span class="op">/</span> <span class="fl">2</span><span class="op">)</span></span></code></pre><p></p></div>
+<p></p><div class="sourceCode"><pre><code><span id="cb1-1"><a href="#cb1-1" tabindex="-1"></a><span class="do">## tf.Tensor([0.5 1.  1.  1.5], shape=(4), dtype=float32)</span></span></code></pre><p></p></div>
+<p></p><div class="sourceCode r"><pre><code><span><span class="fu"><a href="../reference/k_bincount.html">k_bincount</a></span><span class="op">(</span><span class="va">x</span>, weights <span class="op">=</span> <span class="va">weights</span><span class="op">)</span></span></code></pre><p></p></div>
+<p></p><div class="sourceCode"><pre><code><span id="cb1-1"><a href="#cb1-1" tabindex="-1"></a><span class="do">## tf.Tensor([0.  0.5 2.  1.5], shape=(4), dtype=float32)</span></span></code></pre><p></p></div>
+<p></p><div class="sourceCode r"><pre><code><span><span class="va">minlength</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/integer.html" class="external-link">as.integer</a></span><span class="op">(</span><span class="fu"><a href="../reference/k_max.html">k_max</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="op">+</span> <span class="fl">1</span> <span class="op">+</span> <span class="fl">2</span><span class="op">)</span> <span class="co"># 6</span></span>
+<span><span class="fu"><a href="../reference/k_bincount.html">k_bincount</a></span><span class="op">(</span><span class="va">x</span>, minlength <span class="op">=</span> <span class="va">minlength</span><span class="op">)</span></span></code></pre><p></p></div>
+<p></p><div class="sourceCode"><pre><code><span id="cb1-1"><a href="#cb1-1" tabindex="-1"></a><span class="do">## tf.Tensor([0 1 2 1 0 0], shape=(6), dtype=int32)</span></span></code></pre><p></p></div>
     </div>
     <div id="see-also">
     <h2>See also</h2>
     <div class="dont-index">
-<ul><li><p><a href="https://www.tensorflow.org/api_docs/python/tf/keras/ops/bincount" class="external-link">https://www.tensorflow.org/api_docs/python/tf/keras/ops/bincount</a></p></li>
+<ul><li><p><a href="https:/keras.io/keras_core/api/ops/numpy#bincount-function">https:/keras.io/keras_core/api/ops/numpy#bincount-function</a></p></li>
+<li><p><a href="https://www.tensorflow.org/api_docs/python/tf/keras/ops/bincount" class="external-link">https://www.tensorflow.org/api_docs/python/tf/keras/ops/bincount</a></p></li>
 </ul><p>Other ops: 
 <code><a href="k_abs.html">k_abs</a>()</code>,
 <code><a href="k_add.html">k_add</a>()</code>,
@@ -263,6 +264,7 @@ minlength.</p>
 <code><a href="k_depthwise_conv.html">k_depthwise_conv</a>()</code>,
 <code><a href="k_diagonal.html">k_diagonal</a>()</code>,
 <code><a href="k_diag.html">k_diag</a>()</code>,
+<code><a href="k_diff.html">k_diff</a>()</code>,
 <code><a href="k_digitize.html">k_digitize</a>()</code>,
 <code><a href="k_divide.html">k_divide</a>()</code>,
 <code><a href="k_dot.html">k_dot</a>()</code>,
@@ -378,6 +380,7 @@ minlength.</p>
 <code><a href="k_softmax.html">k_softmax</a>()</code>,
 <code><a href="k_softplus.html">k_softplus</a>()</code>,
 <code><a href="k_softsign.html">k_softsign</a>()</code>,
+<code><a href="k_solve.html">k_solve</a>()</code>,
 <code><a href="k_sort.html">k_sort</a>()</code>,
 <code><a href="k_sparse_categorical_crossentropy.html">k_sparse_categorical_crossentropy</a>()</code>,
 <code><a href="k_split.html">k_split</a>()</code>,
