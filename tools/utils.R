@@ -1043,6 +1043,8 @@ make_r_fn.default <- function(endpoint, py_obj, transformers) {
     body <- bquote({
       args <- capture_args2(.(transformers))
       set.seed(args$seed)
+      # set Python/NumPy random seed
+      reticulate::py_set_seed(seed)
       do.call(.(py_obj_expr), args)
     })
   }
