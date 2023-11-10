@@ -21,11 +21,22 @@ It allows a small gradient when the unit is not active, it is defined as:
 \verb{f(x) = alpha * x for x < 0} or \verb{f(x) = x for x >= 0}.
 }
 \section{Examples}{
-\if{html}{\out{<div class="sourceCode python">}}\preformatted{x = np.array([-1., 0., 1.])
-x_leaky_relu = keras.ops.leaky_relu(x)
-print(x_leaky_relu)
-# array([-0.2,  0. ,  1. ], shape=(3,), dtype=float64)
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{x <- k_array(c(-1., 0., 1.))
+k_leaky_relu(x)
 }\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor([-0.2  0.   1. ], shape=(3), dtype=float64)
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{# array([-0.2,  0. ,  1. ], shape=(3,), dtype=float64)
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{x <- seq(-5, 5, .1)
+plot(x, k_leaky_relu(x),
+     type = 'l', panel.first = grid())
+}\if{html}{\out{</div>}}
+
+\if{html}{\figure{k_leaky_relu-unnamed-chunk-2-1.svg}}
 }
 
 \seealso{

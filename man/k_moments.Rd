@@ -11,27 +11,33 @@ k_moments(x, axes, keepdims = FALSE, synchronized = FALSE)
 
 \item{axes}{A list of axes which to compute mean and variance.}
 
-\item{keepdims}{If this is set to \code{True}, the axes which are reduced are left
+\item{keepdims}{If this is set to \code{TRUE}, the axes which are reduced are left
 in the result as dimensions with size one.}
 
 \item{synchronized}{Only applicable with the TensorFlow backend.
-If \code{True}, synchronizes the global batch statistics (mean and
+If \code{TRUE}, synchronizes the global batch statistics (mean and
 variance) across all devices at each training step in a
-distributed training strategy. If \code{False}, each replica uses its own
+distributed training strategy. If \code{FALSE}, each replica uses its own
 local batch statistics.}
 }
 \value{
-A tuple containing two tensors - mean and variance.
+A list containing two tensors - mean and variance.
 }
 \description{
 The mean and variance are calculated by aggregating the contents of \code{x}
-across \code{axes}. If \code{x} is 1-D and \verb{axes = [0]} this is just the mean and
+across \code{axes}. If \code{x} is 1-D and \code{axes = c(1)} this is just the mean and
 variance of a vector.
 }
 \section{Examples}{
-\if{html}{\out{<div class="sourceCode python">}}\preformatted{x = keras.ops.convert_to_tensor([0, 1, 2, 3, 100], dtype="float32")
-keras.ops.moments(x, axes=[0])
-# (array(21.2, dtype=float32), array(1553.3601, dtype=float32))
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{x <- k_convert_to_tensor(c(0, 1, 2, 3, 100), dtype="float32")
+k_moments(x, axes=c(1))
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode">}}\preformatted{## [[1]]
+## tf.Tensor(21.2, shape=(), dtype=float32)
+##
+## [[2]]
+## tf.Tensor(1553.36, shape=(), dtype=float32)
 }\if{html}{\out{</div>}}
 }
 

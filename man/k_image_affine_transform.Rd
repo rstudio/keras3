@@ -64,36 +64,44 @@ Applied affine transform image or batch of images.
 Applies the given transform(s) to the image(s).
 }
 \section{Examples}{
-\if{html}{\out{<div class="sourceCode python">}}\preformatted{x = np.random.random((2, 64, 80, 3)) # batch of 2 RGB images
-transform = np.array(
-    [
-        [1.5, 0, -20, 0, 1.5, -16, 0, 0],  # zoom
-        [1, 0, -20, 0, 1, -16, 0, 0],  # translation
-    ]
-)
-y = keras.ops.image.affine_transform(x, transform)
-y.shape
-# (2, 64, 80, 3)
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{x <- random_uniform(c(2, 64, 80, 3)) # batch of 2 RGB images
+transform <- k_array(rbind(c(1.5, 0, -20, 0, 1.5, -16, 0, 0),  # zoom
+                           c(1, 0, -20, 0, 1, -16, 0, 0)))  # translation))
+y <- k_image_affine_transform(x, transform)
+y$shape
 }\if{html}{\out{</div>}}
 
-\if{html}{\out{<div class="sourceCode python">}}\preformatted{x = np.random.random((64, 80, 3)) # single RGB image
-transform = np.array([1.0, 0.5, -20, 0.5, 1.0, -16, 0, 0])  # shear
-y = keras.ops.image.affine_transform(x, transform)
-y.shape
-# (64, 80, 3)
+\if{html}{\out{<div class="sourceCode">}}\preformatted{## TensorShape([2, 64, 80, 3])
 }\if{html}{\out{</div>}}
 
-\if{html}{\out{<div class="sourceCode python">}}\preformatted{x = np.random.random((2, 3, 64, 80)) # batch of 2 RGB images
-transform = np.array(
-    [
-        [1.5, 0, -20, 0, 1.5, -16, 0, 0],  # zoom
-        [1, 0, -20, 0, 1, -16, 0, 0],  # translation
-    ]
-)
-y = keras.ops.image.affine_transform(x, transform,
-    data_format="channels_first")
-y.shape
-# (2, 3, 64, 80)
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{# (2, 64, 80, 3)
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{x <- random_uniform(c(64, 80, 3)) # single RGB image
+transform <- k_array(c(1.0, 0.5, -20, 0.5, 1.0, -16, 0, 0))  # shear
+y <- k_image_affine_transform(x, transform)
+y$shape
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode">}}\preformatted{## TensorShape([64, 80, 3])
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{# (64, 80, 3)
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{x <- random_uniform(c(2, 3, 64, 80)) # batch of 2 RGB images
+transform <- k_array(rbind(
+  c(1.5, 0,-20, 0, 1.5,-16, 0, 0),  # zoom
+  c(1, 0,-20, 0, 1,-16, 0, 0)  # translation
+))
+y <- k_image_affine_transform(x, transform, data_format = "channels_first")
+y$shape
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode">}}\preformatted{## TensorShape([2, 3, 64, 80])
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{# (2, 3, 64, 80)
 }\if{html}{\out{</div>}}
 }
 

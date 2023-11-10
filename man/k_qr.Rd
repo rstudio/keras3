@@ -14,7 +14,7 @@ k_qr(x, mode = "reduced")
 - 'complete': Returns the complete QR decomposition.}
 }
 \value{
-A tuple containing two tensors. The first tensor represents the
+A list containing two tensors. The first tensor represents the
 orthogonal matrix Q, and the second tensor represents the upper
 triangular matrix R.
 }
@@ -22,10 +22,18 @@ triangular matrix R.
 Computes the QR decomposition of a tensor.
 }
 \section{Examples}{
-\if{html}{\out{<div class="sourceCode python">}}\preformatted{x = keras.ops.convert_to_tensor([[1., 2.], [3., 4.], [5., 6.]])
-q, r = qr(x)
-print(q)
-# array([[-0.16903079  0.897085]
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{x <- k_convert_to_tensor(rbind(c(1, 2), c(3, 4), c(5, 6)))
+c(q, r) \%<-\% k_qr(x)
+q
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor(
+## [[-0.16903085  0.89708523]
+##  [-0.50709255  0.27602622]
+##  [-0.84515425 -0.34503278]], shape=(3, 2), dtype=float64)
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{# array([[-0.16903079  0.897085]
 #        [-0.5070925   0.2760267 ]
 #        [-0.8451542  -0.34503305]], shape=(3, 2), dtype=float32)
 }\if{html}{\out{</div>}}

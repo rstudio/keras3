@@ -11,10 +11,10 @@ k_rfft(x, fft_length = NULL)
 
 \item{fft_length}{An integer representing the number of the fft length. If not
 specified, it is inferred from the length of the last axis of \code{x}.
-Defaults to \code{None}.}
+Defaults to \code{NULL}.}
 }
 \value{
-A tuple containing two tensors - the real and imaginary parts of the
+A list containing two tensors - the real and imaginary parts of the
 output.
 }
 \description{
@@ -31,13 +31,25 @@ corresponding dimension of the input, the dimension is cropped. If it is
 larger, the dimension is padded with zeros.
 }
 \section{Examples}{
-\if{html}{\out{<div class="sourceCode python">}}\preformatted{x = keras.ops.convert_to_tensor([0.0, 1.0, 2.0, 3.0, 4.0])
-rfft(x)
-# (array([10.0, -2.5, -2.5]), array([0.0, 3.4409548, 0.81229924]))
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{x <- k_convert_to_tensor(c(0, 1, 2, 3, 4))
+k_rfft(x)
 }\if{html}{\out{</div>}}
 
-\if{html}{\out{<div class="sourceCode python">}}\preformatted{rfft(x, 3)
-# (array([3.0, -1.5]), array([0.0, 0.8660254]))
+\if{html}{\out{<div class="sourceCode">}}\preformatted{## [[1]]
+## tf.Tensor([10.  -2.5 -2.5], shape=(3), dtype=float32)
+##
+## [[2]]
+## tf.Tensor([0.        3.440955  0.8122992], shape=(3), dtype=float32)
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{k_rfft(x, 3)
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode">}}\preformatted{## [[1]]
+## tf.Tensor([ 3.  -1.5], shape=(2), dtype=float32)
+##
+## [[2]]
+## tf.Tensor([0.        0.8660254], shape=(2), dtype=float32)
 }\if{html}{\out{</div>}}
 }
 

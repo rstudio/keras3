@@ -13,13 +13,21 @@ k_relu6(x)
 A tensor with the same shape as \code{x}.
 }
 \description{
-It is defined as \code{f(x) = np.clip(x, 0, 6)}.
+It is defined as \code{f(x) = k_clip(x, 0, 6)}.
 }
 \section{Examples}{
-\if{html}{\out{<div class="sourceCode python">}}\preformatted{x = keras.ops.convert_to_tensor([-3.0, -2.0, 0.1, 0.2, 6.0, 8.0])
-keras.ops.relu6(x)
-# array([0.0, 0.0, 0.1, 0.2, 6.0, 6.0], dtype=float32)
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{x <- k_convert_to_tensor(c(-3, -2, 0.1, 0.2, 6, 8))
+k_relu6(x)
 }\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor([0.  0.  0.1 0.2 6.  6. ], shape=(6), dtype=float32)
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{x <- seq(-10, 10, .1)
+plot(x, k_relu6(x))
+}\if{html}{\out{</div>}}
+
+\if{html}{\figure{k_relu6-unnamed-chunk-2-1.svg}}
 }
 
 \seealso{

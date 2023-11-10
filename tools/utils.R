@@ -1049,18 +1049,6 @@ make_r_fn.default <- function(endpoint, py_obj, transformers) {
     })
   }
 
-  if(endpoint == "keras.ops.meshgrid") {
-    body <- bquote({
-      args <- lapply(list(...), function(x) {
-        if(storage.mode(x) == "double")
-          np_array(x, 'int64')
-        else
-          x
-      })
-      keras$ops$meshgrid(!!!args, indexing = indexing)
-    })
-  }
-
   # if(endpoint == "keras.preprocessing.image.save_img")
   if(endpoint == "keras.utils.save_img")
     frmls <- frmls[unique(c("x", "path", names(frmls)))] # swap so img is first arg, better for pipe
@@ -1073,9 +1061,26 @@ make_r_fn.op <- function(endpoint, py_obj, transformers) {
   frmls <- formals(py_obj)
   py_obj_expr <- endpoint_to_expr(endpoint)
   syms <- lapply(names(frmls), as.symbol)
-  cl <- as.call(c(py_obj_expr, syms))
+  # names(syms) <- names(frmls) # TODO: args passed should be named
+  body <- cl <- as.call(c(py_obj_expr, syms))
+
+  if(endpoint == "keras.ops.meshgrid") {
+    browser()
+    body <- rlang::zap_srcref(quote({
+      args <- lapply(list(...), function(x) {
+        if(storage.mode(x) == "double")
+          np_array(x, 'int64')
+        else
+          x
+      })
+      keras$ops$meshgrid(!!!args, indexing = indexing)
+    }))
+    transformers <- NULL
+  }
+
+
   if(!length(transformers)) {
-    fn <- as.function.default(c(frmls, cl))
+    fn <- as.function.default(c(frmls, body))
   } else
     fn <- make_r_fn.default(endpoint, py_obj, transformers)
 

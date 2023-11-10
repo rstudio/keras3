@@ -7,9 +7,21 @@ and the index corresponding to the integer value is marked as 1, while
 all other indices are marked as 0.
 
 # Examples
-```python
-x = keras.ops.convert_to_tensor([1, 3, 2, 0])
-one_hot(x, num_classes=4)
+
+```r
+x <- k_array(c(1, 3, 2, 0), "int32")
+k_one_hot(x, num_classes=4)
+```
+
+```
+## tf.Tensor(
+## [[0. 1. 0. 0.]
+##  [0. 0. 0. 1.]
+##  [0. 0. 1. 0.]
+##  [1. 0. 0. 0.]], shape=(4, 4), dtype=float32)
+```
+
+```r
 # array([[0. 1. 0. 0.]
 #        [0. 0. 0. 1.]
 #        [0. 0. 1. 0.]
@@ -35,3 +47,4 @@ is determined by `dtype` or the default data type of the backend.
 @seealso
 + <https:/keras.io/keras_core/api/ops/nn#onehot-function>
 + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/one_hot>
+

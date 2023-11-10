@@ -40,20 +40,24 @@ If \code{images} were 3D, a 3D float Tensor of shape
 Pad \code{images} with zeros to the specified \code{height} and \code{width}.
 }
 \section{Examples}{
-\if{html}{\out{<div class="sourceCode python">}}\preformatted{images = np.random.random((15, 25, 3))
-padded_images = keras.ops.image.pad_images(
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{images <- random_uniform(c(15, 25, 3))
+padded_images <- k_image_pad_images(
     images, 2, 3, target_height=20, target_width=30
 )
-padded_images.shape
-# (20, 30, 3)
+padded_images$shape
 }\if{html}{\out{</div>}}
 
-\if{html}{\out{<div class="sourceCode python">}}\preformatted{batch_images = np.random.random((2, 15, 25, 3))
-padded_batch = keras.ops.image.pad_images(
-    batch_images, 2, 3, target_height=20, target_width=30
-)
-padded_batch.shape
-# (2, 20, 30, 3)
+\if{html}{\out{<div class="sourceCode">}}\preformatted{## TensorShape([20, 30, 3])
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{batch_images <- random_uniform(c(2, 15, 25, 3))
+padded_batch <- k_image_pad_images(batch_images, 2, 3,
+                                   target_height = 20,
+                                   target_width = 30)
+padded_batch$shape
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode">}}\preformatted{## TensorShape([2, 20, 30, 3])
 }\if{html}{\out{</div>}}
 }
 

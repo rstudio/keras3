@@ -16,7 +16,7 @@ k_istft(
 }
 \arguments{
 \item{x}{Tuple of the real and imaginary parts of the input tensor. Both
-tensors in the tuple should be of floating type.}
+tensors in the list should be of floating type.}
 
 \item{sequence_length}{An integer representing the sequence length.}
 
@@ -27,16 +27,16 @@ tensors in the tuple should be of floating type.}
 
 \item{length}{An integer representing the output is clipped to exactly length.
 If not specified, no padding or clipping take place. Defaults to
-\code{None}.}
+\code{NULL}.}
 
-\item{window}{A string, a tensor of the window or \code{None}. If \code{window} is a
+\item{window}{A string, a tensor of the window or \code{NULL}. If \code{window} is a
 string, available values are \code{"hann"} and \code{"hamming"}. If \code{window}
 is a tensor, it will be used directly as the window and its length
-must be \code{sequence_length}. If \code{window} is \code{None}, no windowing is
+must be \code{sequence_length}. If \code{window} is \code{NULL}, no windowing is
 used. Defaults to \code{"hann"}.}
 
 \item{center}{Whether \code{x} was padded on both sides so that the t-th sequence
-is centered at time \code{t * sequence_stride}. Defaults to \code{True}.}
+is centered at time \code{t * sequence_stride}. Defaults to \code{TRUE}.}
 }
 \value{
 A tensor containing the inverse Short-Time Fourier Transform along the
@@ -47,9 +47,14 @@ To reconstruct an original waveform, the parameters should be the same in
 \code{stft}.
 }
 \section{Examples}{
-\if{html}{\out{<div class="sourceCode python">}}\preformatted{x = keras.ops.convert_to_tensor([0.0, 1.0, 2.0, 3.0, 4.0])
-istft(stft(x, 1, 1, 1), 1, 1, 1)
-# array([0.0, 1.0, 2.0, 3.0, 4.0])
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{x <- k_convert_to_tensor(c(0, 1, 2, 3, 4))
+k_istft(k_stft(x, 1, 1, 1), 1, 1, 1)
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor([], shape=(0), dtype=float32)
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{# array([0.0, 1.0, 2.0, 3.0, 4.0])
 }\if{html}{\out{</div>}}
 }
 

@@ -7,12 +7,12 @@
 k_irfft(x, fft_length = NULL)
 }
 \arguments{
-\item{x}{Tuple of the real and imaginary parts of the input tensor. Both
-tensors in the tuple should be of floating type.}
+\item{x}{List of the real and imaginary parts of the input tensor. Both
+tensors in the list should be of floating type.}
 
 \item{fft_length}{An integer representing the number of the fft length. If not
 specified, it is inferred from the length of the last axis of \code{x}.
-Defaults to \code{None}.}
+Defaults to \code{NULL}.}
 }
 \value{
 A tensor containing the inverse real-valued Fast Fourier Transform
@@ -34,15 +34,28 @@ the corresponding dimension of the input, the dimension is cropped. If it is
 larger, the dimension is padded with zeros.
 }
 \section{Examples}{
-\if{html}{\out{<div class="sourceCode python">}}\preformatted{real = keras.ops.convert_to_tensor([0.0, 1.0, 2.0, 3.0, 4.0])
-imag = keras.ops.convert_to_tensor([0.0, 1.0, 2.0, 3.0, 4.0])
-irfft((real, imag))
-# array([0.66666667, -0.9106836, 0.24401694])
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{real <- k_array(c(0, 1, 2, 3, 4))
+imag <- k_array(c(0, 1, 2, 3, 4))
+k_irfft(c(real, imag))
 }\if{html}{\out{</div>}}
 
-\if{html}{\out{<div class="sourceCode python">}}\preformatted{irfft(rfft(real, 5), 5)
-# array([0.0, 1.0, 2.0, 3.0, 4.0])
+\if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor(
+## [ 2.         -2.06066017  0.5        -0.35355339  0.          0.06066017
+##  -0.5         0.35355339], shape=(8), dtype=float64)
 }\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{# array([0.66666667, -0.9106836, 0.24401694))
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{k_irfft(k_rfft(real, 5), 5)
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor([0. 1. 2. 3. 4.], shape=(5), dtype=float64)
+}\if{html}{\out{</div>}}
+
+[ 2.         -2.06066017  0.5        -0.35355339  0.          0.06066017
+\subsection{-0.5         0.35355339]: R:\%202.\%20\%20\%20\%20\%20\%20\%20\%20\%20-2.06066017\%20\%200.5\%20\%20\%20\%20\%20\%20\%20\%20-0.35355339\%20\%200.\%20\%20\%20\%20\%20\%20\%20\%20\%20\%200.06066017\%0A##\%20\%20-0.5\%20\%20\%20\%20\%20\%20\%20\%20\%200.35355339}{
+}
 }
 
 \seealso{

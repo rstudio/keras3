@@ -16,10 +16,10 @@ k_image_extract_patches(
 \arguments{
 \item{image}{Input image or batch of images. Must be 3D or 4D.}
 
-\item{size}{Patch size int or tuple (patch_height, patch_widht)}
+\item{size}{Patch size int or list (patch_height, patch_width)}
 
 \item{strides}{strides along height and width. If not specified, or
-if \code{None}, it defaults to the same value as \code{size}.}
+if \code{NULL}, it defaults to the same value as \code{size}.}
 
 \item{dilation_rate}{This is the input stride, specifying how far two
 consecutive patch samples are in the input. For value other than 1,
@@ -44,16 +44,24 @@ Extracted patches 3D (if not batched) or 4D (if batched)
 Extracts patches from the image(s).
 }
 \section{Examples}{
-\if{html}{\out{<div class="sourceCode python">}}\preformatted{image = np.random.random(
-    (2, 20, 20, 3)
-).astype("float32") # batch of 2 RGB images
-patches = keras.ops.image.extract_patches(image, (5, 5))
-patches.shape
-# (2, 4, 4, 75)
-image = np.random.random((20, 20, 3)).astype("float32") # 1 RGB image
-patches = keras.ops.image.extract_patches(image, (3, 3), (1, 1))
-patches.shape
-# (18, 18, 27)
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{image <- random_uniform(c(2, 20, 20, 3), dtype = "float32") # batch of 2 RGB images
+patches <- k_image_extract_patches(image, c(5, 5))
+patches$shape
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode">}}\preformatted{## TensorShape([2, 4, 4, 75])
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{# (2, 4, 4, 75)
+image <- random_uniform(c(20, 20, 3), dtype = "float32") # 1 RGB image
+patches <- k_image_extract_patches(image, c(3, 3), c(1, 1))
+patches$shape
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode">}}\preformatted{## TensorShape([18, 18, 27])
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{# (18, 18, 27)
 }\if{html}{\out{</div>}}
 }
 

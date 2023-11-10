@@ -22,20 +22,35 @@ lengths \verb{S0, S1, ..., SN-1}, this creates an \code{N} N-dimensional tensors
 \code{Gi} is constructed by expanding \code{Ti} to the result shape.
 }
 \section{Examples}{
-\if{html}{\out{<div class="sourceCode python">}}\preformatted{from keras import ops
-x = ops.array([1, 2, 3])
-y = ops.array([4, 5, 6])
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{x <- k_array(c(1, 2, 3), "int32")
+y <- k_array(c(4, 5, 6), "int32")
 }\if{html}{\out{</div>}}
 
-\if{html}{\out{<div class="sourceCode python">}}\preformatted{grid_x, grid_y = ops.meshgrid(x, y, indexing="ij")
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{c(grid_x, grid_y) \%<-\% k_meshgrid(x, y, indexing="ij")
 grid_x
-# array([[1, 1, 1],
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor(
+## [[1 1 1]
+##  [2 2 2]
+##  [3 3 3]], shape=(3, 3), dtype=int32)
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{# array([[1, 1, 1],
 #        [2, 2, 2],
-#        [3, 3, 3]])
+#        [3, 3, 3]))
 grid_y
-# array([[4, 5, 6],
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor(
+## [[4 5 6]
+##  [4 5 6]
+##  [4 5 6]], shape=(3, 3), dtype=int32)
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{# array([[4, 5, 6],
 #        [4, 5, 6],
-#        [4, 5, 6]])
+#        [4, 5, 6]))
 }\if{html}{\out{</div>}}
 }
 

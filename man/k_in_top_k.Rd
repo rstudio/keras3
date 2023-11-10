@@ -21,13 +21,16 @@ indicates whether the corresponding target is in the top-k predictions.
 Checks if the targets are in the top-k predictions.
 }
 \section{Examples}{
-\if{html}{\out{<div class="sourceCode python">}}\preformatted{targets = keras.ops.convert_to_tensor([2, 5, 3])
-predictions = keras.ops.convert_to_tensor(
-[[0.1, 0.4, 0.6, 0.9, 0.5],
- [0.1, 0.7, 0.9, 0.8, 0.3],
- [0.1, 0.6, 0.9, 0.9, 0.5]])
-in_top_k(targets, predictions, k=3)
-# array([ True False  True], shape=(3,), dtype=bool)
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{targets <- k_array(c(2, 5, 3), "int32")
+predictions <- k_array(dtype = "float32", rbind(
+  c(0.1, 0.4, 0.6, 0.9, 0.5),
+  c(0.1, 0.7, 0.9, 0.8, 0.3),
+  c(0.1, 0.6, 0.9, 0.9, 0.5)
+))
+k_in_top_k(targets, predictions, k = 3L)
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor([ True False  True], shape=(3), dtype=bool)
 }\if{html}{\out{</div>}}
 }
 

@@ -16,9 +16,14 @@ A tensor with the same dtype as \code{x}.
 Computes reciprocal of square root of x element-wise.
 }
 \section{Examples}{
-\if{html}{\out{<div class="sourceCode python">}}\preformatted{x = keras.ops.convert_to_tensor([1.0, 10.0, 100.0])
-keras.ops.rsqrt(x)
-# array([1.0, 0.31622776, 0.1], dtype=float32)
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{x <- k_convert_to_tensor(c(1, 10, 100))
+k_rsqrt(x)
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor([1.         0.31622776 0.1       ], shape=(3), dtype=float32)
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{# array([1, 0.31622776, 0.1], dtype=float32)
 }\if{html}{\out{</div>}}
 }
 

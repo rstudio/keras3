@@ -28,7 +28,6 @@ k_irfft(c(real, imag))
 
 ```{r}
 k_irfft(k_rfft(real, 5), 5)
-# array([0.0, 1.0, 2.0, 3.0, 4.0))
 ```
 
 @returns

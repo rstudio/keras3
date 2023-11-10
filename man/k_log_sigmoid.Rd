@@ -16,9 +16,11 @@ A tensor with the same shape as \code{x}.
 It is defined as \code{f(x) = log(1 / (1 + exp(-x)))}.
 }
 \section{Examples}{
-\if{html}{\out{<div class="sourceCode python">}}\preformatted{x = keras.ops.convert_to_tensor([-0.541391, 0.0, 0.50, 5.0])
-keras.ops.log_sigmoid(x)
-# array([-1.0000418, -0.6931472, -0.474077, -0.00671535], dtype=float32)
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{x <- k_convert_to_tensor(c(-0.541391, 0.0, 0.50, 5.0))
+k_log_sigmoid(x)
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor([-1.0000418  -0.6931472  -0.474077   -0.00671535], shape=(4), dtype=float32)
 }\if{html}{\out{</div>}}
 }
 

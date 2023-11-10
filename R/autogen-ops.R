@@ -446,7 +446,8 @@ function (inputs, num_tokens, axis = -1L, dtype = NULL)
 k_one_hot <-
 function (x, num_classes, axis = -1L, dtype = NULL)
 {
-    args <- capture_args2(list(x = as_integer, axis = as_axis))
+    args <- capture_args2(list(x = as_integer, axis = as_axis,
+        num_classes = as_integer))
     do.call(keras$ops$one_hot, args)
 }
 
@@ -1287,7 +1288,14 @@ function (x, axis = NULL, keepdims = FALSE)
 #' @eval readLines("man-src/k_meshgrid/3-rendered.md")
 k_meshgrid <-
 function (..., indexing = "xy")
-keras$ops$meshgrid(..., indexing)
+{
+    args <- lapply(list(...), function(x) {
+        if (storage.mode(x) == "double")
+            np_array(x, "int64")
+        else x
+    })
+    keras$ops$meshgrid(!!!args, indexing = indexing)
+}
 
 
 "man-src/k_min.Rmd" # |>file.edit() # or cmd+click to edit man page

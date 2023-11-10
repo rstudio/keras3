@@ -1,14 +1,26 @@
 Rectified linear unit activation function with upper bound of 6.
 
 @description
-It is defined as `f(x) = np.clip(x, 0, 6)`.
+It is defined as `f(x) = k_clip(x, 0, 6)`.
 
 # Examples
-```python
-x = keras.ops.convert_to_tensor([-3.0, -2.0, 0.1, 0.2, 6.0, 8.0])
-keras.ops.relu6(x)
-# array([0.0, 0.0, 0.1, 0.2, 6.0, 6.0], dtype=float32)
+
+```r
+x <- k_convert_to_tensor(c(-3, -2, 0.1, 0.2, 6, 8))
+k_relu6(x)
 ```
+
+```
+## tf.Tensor([0.  0.  0.1 0.2 6.  6. ], shape=(6), dtype=float32)
+```
+
+```r
+x <- seq(-10, 10, .1)
+plot(x, k_relu6(x))
+```
+
+![plot of chunk unnamed-chunk-2](k_relu6-unnamed-chunk-2-1.svg)
+
 
 @returns
 A tensor with the same shape as `x`.
@@ -20,3 +32,4 @@ A tensor with the same shape as `x`.
 @seealso
 + <https:/keras.io/keras_core/api/ops/nn#relu6-function>
 + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/relu6>
+

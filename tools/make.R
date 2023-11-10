@@ -123,6 +123,8 @@ if(!"source:tools/translate-tools.R" %in% search()) envir::attach_source("tools/
 # TODO: rename: k_image_pad_images -> k_image_pad
 #
 # TODO: shape accessor for x$shape?
+#
+# TODO: this should work: k_convert_to_tensor(c(1, 3, 2, 0), "int32")
 
 # The source of truth for the current translation should be...?
 #    - the autogened file R/autogen-*.R, or

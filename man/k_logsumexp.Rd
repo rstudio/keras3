@@ -9,12 +9,12 @@ k_logsumexp(x, axis = NULL, keepdims = FALSE)
 \arguments{
 \item{x}{Input tensor.}
 
-\item{axis}{An integer or a tuple of integers specifying the axis/axes
-along which to compute the sum. If \code{None}, the sum is computed
-over all elements. Defaults to\code{None}.}
+\item{axis}{An integer or a list of integers specifying the axis/axes
+along which to compute the sum. If \code{NULL}, the sum is computed
+over all elements. Defaults to\code{NULL}.}
 
 \item{keepdims}{A boolean indicating whether to keep the dimensions of
-the input tensor when computing the sum. Defaults to\code{False}.}
+the input tensor when computing the sum. Defaults to\code{FALSE}.}
 }
 \value{
 A tensor containing the logarithm of the sum of exponentials of
@@ -24,9 +24,11 @@ elements in \code{x}.
 Computes the logarithm of sum of exponentials of elements in a tensor.
 }
 \section{Examples}{
-\if{html}{\out{<div class="sourceCode python">}}\preformatted{x = keras.ops.convert_to_tensor([1., 2., 3.])
-logsumexp(x)
-# 3.407606
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{x <- k_convert_to_tensor(c(1, 2, 3))
+k_logsumexp(x)
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor(3.407606, shape=(), dtype=float32)
 }\if{html}{\out{</div>}}
 }
 

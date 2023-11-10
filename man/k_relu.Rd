@@ -16,10 +16,18 @@ A tensor with the same shape as \code{x}.
 It is defined as \code{f(x) = max(0, x)}.
 }
 \section{Examples}{
-\if{html}{\out{<div class="sourceCode python">}}\preformatted{x1 = keras.ops.convert_to_tensor([-1.0, 0.0, 1.0, 0.2])
-keras.ops.relu(x1)
-# array([0.0, 0.0, 1.0, 0.2], dtype=float32)
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{x1 <- k_convert_to_tensor(c(-1, 0, 1, 0.2))
+k_relu(x1)
 }\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor([0.  0.  1.  0.2], shape=(4), dtype=float32)
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{x <- seq(-10, 10, .1)
+plot(x, k_relu(x))
+}\if{html}{\out{</div>}}
+
+\if{html}{\figure{k_relu-unnamed-chunk-2-1.svg}}
 }
 
 \seealso{

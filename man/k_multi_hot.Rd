@@ -25,9 +25,11 @@ This function encodes integer labels as multi-hot vectors, where each label
 is mapped to a binary value in the resulting vector.
 }
 \section{Examples}{
-\if{html}{\out{<div class="sourceCode python">}}\preformatted{data = keras.ops.convert_to_tensor([0, 4])
-keras.ops.multi_hot(data, num_tokens=5)
-# array([1.0, 0.0, 0.0, 0.0, 1.0], dtype=float32)
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{data <- k_convert_to_tensor(c(0, 4))
+k_multi_hot(data, num_tokens=5)
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor([1. 0. 0. 0. 1.], shape=(5), dtype=float32)
 }\if{html}{\out{</div>}}
 }
 

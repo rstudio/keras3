@@ -14,28 +14,45 @@ corresponding dimension of the input, the dimension is cropped. If it is
 larger, the dimension is padded with zeros.
 
 # Examples
-```python
-x = keras.ops.convert_to_tensor([0.0, 1.0, 2.0, 3.0, 4.0])
-rfft(x)
-# (array([10.0, -2.5, -2.5]), array([0.0, 3.4409548, 0.81229924]))
+
+```r
+x <- k_convert_to_tensor(c(0, 1, 2, 3, 4))
+k_rfft(x)
 ```
 
-```python
-rfft(x, 3)
-# (array([3.0, -1.5]), array([0.0, 0.8660254]))
+```
+## [[1]]
+## tf.Tensor([10.  -2.5 -2.5], shape=(3), dtype=float32)
+##
+## [[2]]
+## tf.Tensor([0.        3.440955  0.8122992], shape=(3), dtype=float32)
+```
+
+
+```r
+k_rfft(x, 3)
+```
+
+```
+## [[1]]
+## tf.Tensor([ 3.  -1.5], shape=(2), dtype=float32)
+##
+## [[2]]
+## tf.Tensor([0.        0.8660254], shape=(2), dtype=float32)
 ```
 
 @returns
-A tuple containing two tensors - the real and imaginary parts of the
+A list containing two tensors - the real and imaginary parts of the
 output.
 
 @param x Input tensor.
 @param fft_length An integer representing the number of the fft length. If not
     specified, it is inferred from the length of the last axis of `x`.
-    Defaults to `None`.
+    Defaults to `NULL`.
 
 @export
 @family ops
 @seealso
 + <https:/keras.io/keras_core/api/ops/fft#rfft-function>
 + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/rfft>
+

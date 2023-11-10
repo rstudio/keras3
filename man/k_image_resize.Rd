@@ -21,7 +21,7 @@ k_image_resize(
 \code{"bilinear"}, and \code{"bicubic"}. Defaults to \code{"bilinear"}.}
 
 \item{antialias}{Whether to use an antialiasing filter when downsampling an
-image. Defaults to \code{False}.}
+image. Defaults to \code{FALSE}.}
 
 \item{data_format}{string, either \code{"channels_last"} or \code{"channels_first"}.
 The ordering of the dimensions in the inputs. \code{"channels_last"}
@@ -39,23 +39,28 @@ Resized image or batch of images.
 Resize images to size using the specified interpolation method.
 }
 \section{Examples}{
-\if{html}{\out{<div class="sourceCode python">}}\preformatted{x = np.random.random((2, 4, 4, 3)) # batch of 2 RGB images
-y = keras.ops.image.resize(x, (2, 2))
-y.shape
-# (2, 2, 2, 3)
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{x <- random_uniform(c(2, 4, 4, 3)) # batch of 2 RGB images
+y <- k_image_resize(x, c(2, 2))
+y$shape
 }\if{html}{\out{</div>}}
 
-\if{html}{\out{<div class="sourceCode python">}}\preformatted{x = np.random.random((4, 4, 3)) # single RGB image
-y = keras.ops.image.resize(x, (2, 2))
-y.shape
-# (2, 2, 3)
+\if{html}{\out{<div class="sourceCode">}}\preformatted{## TensorShape([2, 2, 2, 3])
 }\if{html}{\out{</div>}}
 
-\if{html}{\out{<div class="sourceCode python">}}\preformatted{x = np.random.random((2, 3, 4, 4)) # batch of 2 RGB images
-y = keras.ops.image.resize(x, (2, 2),
-    data_format="channels_first")
-y.shape
-# (2, 3, 2, 2)
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{x <- random_uniform(c(4, 4, 3)) # single RGB image
+y <- k_image_resize(x, c(2, 2))
+y$shape
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode">}}\preformatted{## TensorShape([2, 2, 3])
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{x <- random_uniform(c(2, 3, 4, 4)) # batch of 2 RGB images
+y <- k_image_resize(x, c(2, 2), data_format="channels_first")
+y$shape
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode">}}\preformatted{## TensorShape([2, 3, 2, 2])
 }\if{html}{\out{</div>}}
 }
 

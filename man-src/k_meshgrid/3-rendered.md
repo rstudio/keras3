@@ -7,22 +7,43 @@ lengths `S0, S1, ..., SN-1`, this creates an `N` N-dimensional tensors
 `Gi` is constructed by expanding `Ti` to the result shape.
 
 # Examples
-```python
-from keras import ops
-x = ops.array([1, 2, 3])
-y = ops.array([4, 5, 6])
+
+```r
+x <- k_array(c(1, 2, 3), "int32")
+y <- k_array(c(4, 5, 6), "int32")
 ```
 
-```python
-grid_x, grid_y = ops.meshgrid(x, y, indexing="ij")
+
+```r
+c(grid_x, grid_y) %<-% k_meshgrid(x, y, indexing="ij")
 grid_x
+```
+
+```
+## tf.Tensor(
+## [[1 1 1]
+##  [2 2 2]
+##  [3 3 3]], shape=(3, 3), dtype=int32)
+```
+
+```r
 # array([[1, 1, 1],
 #        [2, 2, 2],
-#        [3, 3, 3]])
+#        [3, 3, 3]))
 grid_y
+```
+
+```
+## tf.Tensor(
+## [[4 5 6]
+##  [4 5 6]
+##  [4 5 6]], shape=(3, 3), dtype=int32)
+```
+
+```r
 # array([[4, 5, 6],
 #        [4, 5, 6],
-#        [4, 5, 6]])
+#        [4, 5, 6]))
 ```
 
 @returns
@@ -37,3 +58,4 @@ Sequence of N tensors.
 @seealso
 + <https:/keras.io/keras_core/api/ops/numpy#meshgrid-function>
 + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/meshgrid>
+
