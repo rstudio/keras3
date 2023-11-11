@@ -12,7 +12,7 @@ k_mean(x, axis = NULL, keepdims = FALSE)
 \item{axis}{Axis or axes along which the means are computed. The default
 is to compute the mean of the flattened tensor.}
 
-\item{keepdims}{If this is set to \code{True}, the axes which are reduced are left
+\item{keepdims}{If this is set to \code{TRUE}, the axes which are reduced are left
 in the result as dimensions with size one.}
 }
 \value{
