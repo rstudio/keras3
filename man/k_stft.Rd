@@ -23,18 +23,18 @@ k_stft(
 \item{fft_length}{An integer representing the size of the FFT to apply. If not
 specified, uses the smallest power of 2 enclosing \code{sequence_length}.}
 
-\item{window}{A string, a tensor of the window or \code{None}. If \code{window} is a
+\item{window}{A string, a tensor of the window or \code{NULL}. If \code{window} is a
 string, available values are \code{"hann"} and \code{"hamming"}. If \code{window}
 is a tensor, it will be used directly as the window and its length
-must be \code{sequence_length}. If \code{window} is \code{None}, no windowing is
+must be \code{sequence_length}. If \code{window} is \code{NULL}, no windowing is
 used. Defaults to \code{"hann"}.}
 
 \item{center}{Whether to pad \code{x} on both sides so that the t-th sequence is
 centered at time \code{t * sequence_stride}. Otherwise, the t-th sequence
-begins at time \code{t * sequence_stride}. Defaults to \code{True}.}
+begins at time \code{t * sequence_stride}. Defaults to \code{TRUE}.}
 }
 \value{
-A tuple containing two tensors - the real and imaginary parts of the
+A list containing two tensors - the real and imaginary parts of the
 STFT output.
 }
 \description{
@@ -43,13 +43,21 @@ input. This giving frequency components of the signal as they change over
 time.
 }
 \section{Examples}{
-\if{html}{\out{<div class="sourceCode python">}}\preformatted{x = keras.ops.convert_to_tensor([0.0, 1.0, 2.0, 3.0, 4.0])
-stft(x, 3, 2, 3)
-# (array([[0.75, -0.375],
-#    [3.75, -1.875],
-#    [5.25, -2.625]]), array([[0.0, 0.64951905],
-#    [0.0, 0.64951905],
-#    [0.0, -0.64951905]]))
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{x <- k_array(c(0, 1, 2, 3, 4))
+k_stft(x, 3, 2, 3)
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode">}}\preformatted{## [[1]]
+## tf.Tensor(
+## [[ 0.  0.]
+##  [ 2. -1.]
+##  [ 4. -2.]], shape=(3, 2), dtype=float64)
+##
+## [[2]]
+## tf.Tensor(
+## [[ 0.          0.        ]
+##  [ 0.         -1.73205081]
+##  [ 0.         -3.46410162]], shape=(3, 2), dtype=float64)
 }\if{html}{\out{</div>}}
 }
 

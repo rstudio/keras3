@@ -18,10 +18,14 @@ A tensor with the same shape and dtype as \code{a}.
 Solves for \code{x} in the equation \code{a * x = b}.
 }
 \section{Examples}{
-\if{html}{\out{<div class="sourceCode python">}}\preformatted{a = np.array([[1, 2], [4, 5]], dtype="float32")
-b = np.array([[2, 4], [8, 10]], dtype="float32")
-keras.ops.solve(x1, x2)
-# array([[2, 0], [0, 2]], dtype="float32")
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{a <- k_array(c(1, 2, 4, 5), dtype="float32") |> k_reshape(c(2, 2))
+b <- k_array(c(2, 4, 8, 10), dtype="float32") |> k_reshape(c(2, 2))
+k_solve(a, b)
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor(
+## [[2. 0.]
+##  [0. 2.]], shape=(2, 2), dtype=float32)
 }\if{html}{\out{</div>}}
 }
 

@@ -135,6 +135,8 @@ if(!"source:tools/translate-tools.R" %in% search()) envir::attach_source("tools/
 # TODO: revisit docs for k_scatter_update and k_scatter, remove python sliceisms
 
 # TODO: fix k_vectorized_map() arg rename kludge
+#
+# TODO: revisit k_vectorized_map() man page
 # The source of truth for the current translation should be...?
 #    - the autogened file R/autogen-*.R, or
 #    - man-src/*/2-translated.Rmd
@@ -144,7 +146,7 @@ if(!"source:tools/translate-tools.R" %in% search()) envir::attach_source("tools/
 get_translations <- function() {
   dirs <- fs::dir_ls("man-src/", type = "directory") |>
     sort() %>%
-    .[grep("^k_", basename(.))] %>%
+    # .[grep("^k_", basename(.))] %>%
     set_names(basename) %>%
     keep(\(dir) read_file(path(dir, "2-translated.Rmd")) |>
            str_detect("```python")) |>

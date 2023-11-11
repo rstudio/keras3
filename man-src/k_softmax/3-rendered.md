@@ -11,11 +11,14 @@ It is defined as:
 `f(x) = exp(x) / sum(exp(x))`
 
 # Examples
-```python
-x = np.array([-1., 0., 1.])
-x_softmax = keras.ops.softmax(x)
-print(x_softmax)
-# array([0.09003057, 0.24472847, 0.66524096], shape=(3,), dtype=float64)
+
+```r
+x <- k_array(c(-1, 0, 1))
+k_softmax(x)
+```
+
+```
+## tf.Tensor([0.09003057 0.24472847 0.66524096], shape=(3), dtype=float64)
 ```
 
 @returns
@@ -29,3 +32,4 @@ A tensor with the same shape as `x`.
 @seealso
 + <https:/keras.io/keras_core/api/ops/nn#softmax-function>
 + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/softmax>
+

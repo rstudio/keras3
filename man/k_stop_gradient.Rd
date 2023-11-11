@@ -17,11 +17,8 @@ The variable with gradient computation disabled.
 Stops gradient computation.
 }
 \section{Examples}{
-\if{html}{\out{<div class="sourceCode python">}}\preformatted{var = keras.backend.convert_to_tensor(
-    [1., 2., 3.],
-    dtype="float32"
-)
-var = keras.ops.stop_gradient(var)
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{var <- k_convert_to_tensor(c(1, 2, 3), dtype="float32")
+var <- k_stop_gradient(var)
 }\if{html}{\out{</div>}}
 }
 

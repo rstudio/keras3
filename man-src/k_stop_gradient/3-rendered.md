@@ -3,12 +3,10 @@ Stops gradient computation.
 @description
 
 # Examples
-```python
-var = keras.backend.convert_to_tensor(
-    [1., 2., 3.],
-    dtype="float32"
-)
-var = keras.ops.stop_gradient(var)
+
+```r
+var <- k_convert_to_tensor(c(1, 2, 3), dtype="float32")
+var <- k_stop_gradient(var)
 ```
 
 @returns

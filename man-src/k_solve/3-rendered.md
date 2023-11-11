@@ -3,11 +3,17 @@ Solves for `x` in the equation `a * x = b`.
 @description
 
 # Examples
-```python
-a = np.array([[1, 2], [4, 5]], dtype="float32")
-b = np.array([[2, 4], [8, 10]], dtype="float32")
-keras.ops.solve(x1, x2)
-# array([[2, 0], [0, 2]], dtype="float32")
+
+```r
+a <- k_array(c(1, 2, 4, 5), dtype="float32") |> k_reshape(c(2, 2))
+b <- k_array(c(2, 4, 8, 10), dtype="float32") |> k_reshape(c(2, 2))
+k_solve(a, b)
+```
+
+```
+## tf.Tensor(
+## [[2. 0.]
+##  [0. 2.]], shape=(2, 2), dtype=float32)
 ```
 
 @returns

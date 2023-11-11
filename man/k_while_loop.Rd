@@ -11,10 +11,10 @@ k_while_loop(cond, body, loop_vars, maximum_iterations = NULL)
 Must have the same number of args as \code{loop_vars}, and return a bool.}
 
 \item{body}{A callable that represents the loop body. Must have the same
-number of args as \code{loop_vars}, and return a list/tuple of the same
+number of args as \code{loop_vars}, and return a list of the same
 length, shape and dtype as \code{loop_vars}.}
 
-\item{loop_vars}{A list/tuple of tensors, the loop variables.}
+\item{loop_vars}{A list of tensors, the loop variables.}
 
 \item{maximum_iterations}{Optional maximum number of iterations of the while
 loop to run. If provided, the \code{cond} output is AND-ed with an
@@ -22,17 +22,26 @@ additional condition ensuring the number of iterations executed is
 no greater than \code{maximum_iterations}.}
 }
 \value{
-A list/tuple of tensors, has the same shape and dtype as \code{inputs}.
+A list of tensors, has the same shape and dtype as \code{loop_vars}.
 }
 \description{
 While loop implementation.
 }
 \section{Examples}{
-\if{html}{\out{<div class="sourceCode python">}}\preformatted{i = 0
-cond = lambda i: i < 10
-body = lambda i: i + 1
-keras.ops.while_loop(cond, body, [i])[0]
-# 10
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{i <- 0
+loop_vars <- list(i)
+
+# cond() must return a scalar bool
+cond <- function(i) i < 10L
+
+# body must return same shape as loop_vars
+body <- function(i) list(i + 1L)
+
+k_while_loop(cond, body, loop_vars)
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode">}}\preformatted{## [[1]]
+## tf.Tensor(10.0, shape=(), dtype=float32)
 }\if{html}{\out{</div>}}
 }
 

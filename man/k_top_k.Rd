@@ -12,10 +12,10 @@ k_top_k(x, k, sorted = TRUE)
 \item{k}{An integer representing the number of top elements to retrieve.}
 
 \item{sorted}{A boolean indicating whether to sort the output in
-descending order. Defaults to\code{True}.}
+descending order. Defaults to\code{TRUE}.}
 }
 \value{
-A tuple containing two tensors. The first tensor contains the
+A list containing two tensors. The first tensor contains the
 top-k values, and the second tensor contains the indices of the
 top-k values in the input tensor.
 }
@@ -23,12 +23,18 @@ top-k values in the input tensor.
 Finds the top-k values and their indices in a tensor.
 }
 \section{Examples}{
-\if{html}{\out{<div class="sourceCode python">}}\preformatted{x = keras.ops.convert_to_tensor([5, 2, 7, 1, 9, 3])
-values, indices = top_k(x, k=3)
-print(values)
-# array([9 7 5], shape=(3,), dtype=int32)
-print(indices)
-# array([4 2 0], shape=(3,), dtype=int32)
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{x <- k_array(c(5, 2, 7, 1, 9, 3), "int32")
+c(values, indices) \%<-\% k_top_k(x, k=3)
+values
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor([9 7 5], shape=(3), dtype=int32)
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{indices
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor([4 2 0], shape=(3), dtype=int32)
 }\if{html}{\out{</div>}}
 }
 

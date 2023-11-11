@@ -16,10 +16,18 @@ A tensor with the same shape as \code{x}.
 It is defined as \code{f(x) = x / (abs(x) + 1)}.
 }
 \section{Examples}{
-\if{html}{\out{<div class="sourceCode python">}}\preformatted{x = keras.ops.convert_to_tensor([-0.100, -10.0, 1.0, 0.0, 100.0])
-keras.ops.softsign(x)
-# Array([-0.09090909, -0.90909094, 0.5, 0.0, 0.990099], dtype=float32)
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{x <- k_convert_to_tensor(c(-0.100, -10.0, 1.0, 0.0, 100.0))
+k_softsign(x)
 }\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor([-0.09090909 -0.90909094  0.5         0.          0.990099  ], shape=(5), dtype=float32)
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{x <- seq(-10, 10, .1)
+plot(x, k_softsign(x), ylim = c(-1, 1))
+}\if{html}{\out{</div>}}
+
+\if{html}{\figure{k_softsign-unnamed-chunk-2-1.svg}}
 }
 
 \seealso{

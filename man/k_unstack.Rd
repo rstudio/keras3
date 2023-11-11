@@ -10,7 +10,7 @@ k_unstack(x, num = NULL, axis = 0L)
 \item{x}{The input tensor.}
 
 \item{num}{The length of the dimension axis. Automatically inferred
-if \code{None}.}
+if \code{NULL}.}
 
 \item{axis}{The axis along which to unpack.}
 }
@@ -21,10 +21,46 @@ A list of tensors unpacked along the given axis.
 Unpacks the given dimension of a rank-R tensor into rank-(R-1) tensors.
 }
 \section{Examples}{
-\if{html}{\out{<div class="sourceCode python">}}\preformatted{x = keras.ops.array([[1, 2], [3, 4]])
-keras.ops.unstack(x, axis=0)
-# [array([1, 2]), array([3, 4])]
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{x <- k_array(rbind(c(1, 2),
+                   c(3, 4)))
+k_unstack(x, axis=1)
 }\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode">}}\preformatted{## [[1]]
+## tf.Tensor([1. 2.], shape=(2), dtype=float64)
+##
+## [[2]]
+## tf.Tensor([3. 4.], shape=(2), dtype=float64)
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{k_unstack(x, axis=2)
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode">}}\preformatted{## [[1]]
+## tf.Tensor([1. 3.], shape=(2), dtype=float64)
+##
+## [[2]]
+## tf.Tensor([2. 4.], shape=(2), dtype=float64)
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{all.equal(k_unstack(x),
+          k_unstack(x, axis = 1))
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode">}}\preformatted{## [1] TRUE
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{all.equal(k_unstack(x, axis = -1),
+          k_unstack(x, axis = 2))
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode">}}\preformatted{## [1] TRUE
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{# [array([1, 2)), array([3, 4))]
+}\if{html}{\out{</div>}}
+
+[3, 4))]: R:3,\%204))
 }
 
 \seealso{

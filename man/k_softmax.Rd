@@ -25,10 +25,11 @@ It is defined as:
 \code{f(x) = exp(x) / sum(exp(x))}
 }
 \section{Examples}{
-\if{html}{\out{<div class="sourceCode python">}}\preformatted{x = np.array([-1., 0., 1.])
-x_softmax = keras.ops.softmax(x)
-print(x_softmax)
-# array([0.09003057, 0.24472847, 0.66524096], shape=(3,), dtype=float64)
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{x <- k_array(c(-1, 0, 1))
+k_softmax(x)
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor([0.09003057 0.24472847 0.66524096], shape=(3), dtype=float64)
 }\if{html}{\out{</div>}}
 }
 

@@ -8,31 +8,63 @@ k_vectorized_map(elements, f)
 }
 \arguments{
 \item{elements}{see description}
+
+\item{f}{A function taking either a tensor, or list of tensors.}
 }
 \description{
 Schematically, \code{vectorized_map} implements the following,
 in the case of a single tensor input \code{elements}:
 
-\if{html}{\out{<div class="sourceCode python">}}\preformatted{def vectorized_map(function, elements)
-    outputs = []
-    for e in elements:
-        outputs.append(function(e))
-    return stack(outputs)
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{k_vectorized_map <- function(elements, f) \{
+  apply(elements, 1, f)
+\}
 }\if{html}{\out{</div>}}
 
 In the case of an iterable of tensors \code{elements},
 it implements the following:
 
-\if{html}{\out{<div class="sourceCode python">}}\preformatted{def vectorized_map(function, elements)
-    batch_size = elements[0].shape[0]
-    outputs = []
-    for index in range(batch_size):
-        outputs.append(function([e[index] for e in elements]))
-    return np.stack(outputs)
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{k_vectorized_map <- function(elements, f) \{
+    batch_size <- elements[[1]]$shape[[1]]
+    outputs <- vector("list", batch_size)
+    outputs <- lapply(seq(batch_size), \\(index) \{
+        f(lapply(elements, \\(e) e[index, all_dims()]))
+    \}
+    k_stack(outputs)
+\}
 }\if{html}{\out{</div>}}
 
 In this case, \code{function} is expected to take as input
 a single list of tensor arguments.
+
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{(x <- k_arange(4*4) |> k_reshape(c(4,4)))
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor(
+## [[ 0.  1.  2.  3.]
+##  [ 4.  5.  6.  7.]
+##  [ 8.  9. 10. 11.]
+##  [12. 13. 14. 15.]], shape=(4, 4), dtype=float64)
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{x |> k_vectorized_map(\\(row) \{row + 10\})
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor(
+## [[10. 11. 12. 13.]
+##  [14. 15. 16. 17.]
+##  [18. 19. 20. 21.]
+##  [22. 23. 24. 25.]], shape=(4, 4), dtype=float64)
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{list(x, x, x) |> k_vectorized_map(\\(rows) Reduce(`+`, rows))
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor(
+## [[ 0.  3.  6.  9.]
+##  [12. 15. 18. 21.]
+##  [24. 27. 30. 33.]
+##  [36. 39. 42. 45.]], shape=(4, 4), dtype=float64)
+}\if{html}{\out{</div>}}
 }
 \seealso{
 \itemize{
