@@ -24,37 +24,66 @@ The resulting output shape when using the "same" padding option is:
 # Examples
 `strides=1` and `padding="valid"`:
 
-```python
-x = np.array([1., 2., 3., 4., 5.])
-x = np.reshape(x, [1, 5, 1])
-avg_pool_1d = keras.layers.AveragePooling1D(pool_size=2,
-   strides=1, padding="valid")
-avg_pool_1d(x)
+
+```r
+x <- k_array(c(1., 2., 3., 4., 5.)) |> k_reshape(c(1, 5, 1))
+output <- x |>
+  layer_average_pooling_1d(pool_size = 2,
+                           strides = 1,
+                           padding = "valid")
+output
+```
+
+```
+## tf.Tensor(
+## [[[1.5]
+##   [2.5]
+##   [3.5]
+##   [4.5]]], shape=(1, 4, 1), dtype=float32)
 ```
 
 `strides=2` and `padding="valid"`:
 
-```python
-x = np.array([1., 2., 3., 4., 5.])
-x = np.reshape(x, [1, 5, 1])
-avg_pool_1d = keras.layers.AveragePooling1D(pool_size=2,
-   strides=2, padding="valid")
-avg_pool_1d(x)
+
+```r
+x <- k_array(c(1., 2., 3., 4., 5.)) |> k_reshape(c(1, 5, 1))
+output <- x |>
+  layer_average_pooling_1d(pool_size = 2,
+                           strides = 2,
+                           padding = "valid")
+output
+```
+
+```
+## tf.Tensor(
+## [[[1.5]
+##   [3.5]]], shape=(1, 2, 1), dtype=float32)
 ```
 
 `strides=1` and `padding="same"`:
 
-```python
-x = np.array([1., 2., 3., 4., 5.])
-x = np.reshape(x, [1, 5, 1])
-avg_pool_1d = keras.layers.AveragePooling1D(pool_size=2,
-   strides=1, padding="same")
-avg_pool_1d(x)
+
+```r
+x <- k_array(c(1., 2., 3., 4., 5.)) |> k_reshape(c(1, 5, 1))
+output <- x |>
+  layer_average_pooling_1d(pool_size = 2,
+                           strides = 1,
+                           padding = "same")
+output
+```
+
+```
+## tf.Tensor(
+## [[[1.5]
+##   [2.5]
+##   [3.5]
+##   [4.5]
+##   [5. ]]], shape=(1, 5, 1), dtype=float32)
 ```
 
 @param pool_size int, size of the max pooling window.
-@param strides int or None. Specifies how much the pooling window moves
-    for each pooling step. If None, it will default to `pool_size`.
+@param strides int or `NULL`. Specifies how much the pooling window moves
+    for each pooling step. If `NULL`, it will default to `pool_size`.
 @param padding string, either `"valid"` or `"same"` (case-insensitive).
     `"valid"` means no padding. `"same"` results in padding evenly to
     the left/right or up/down of the input such that output has the same

@@ -10,7 +10,7 @@ layer_activation(object, activation, ...)
 \item{object}{Object to compose the layer with. A tensor, array, or sequential model.}
 
 \item{activation}{Activation function. It could be a callable, or the name of
-an activation from the \code{keras.activations} namespace.}
+an activation from the \verb{keras::activation_*} namespace.}
 
 \item{...}{Base layer keyword arguments, such as \code{name} and \code{dtype}.}
 }
@@ -18,12 +18,26 @@ an activation from the \code{keras.activations} namespace.}
 Applies an activation function to an output.
 }
 \section{Examples}{
-\if{html}{\out{<div class="sourceCode python">}}\preformatted{layer = keras.layers.Activation('relu')
-layer([-3.0, -1.0, 0.0, 2.0])
-# [0.0, 0.0, 0.0, 2.0]
-layer = keras.layers.Activation(keras.activations.relu)
-layer([-3.0, -1.0, 0.0, 2.0])
-# [0.0, 0.0, 0.0, 2.0]
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{x <- array(c(-3, -1, 0, 2))
+layer <- layer_activation(activation = 'relu')
+layer(x)
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor([0. 0. 0. 2.], shape=(4), dtype=float32)
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{layer <- layer_activation(activation = activation_relu)
+layer(x)
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor([0. 0. 0. 2.], shape=(4), dtype=float32)
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{layer <- layer_activation(activation = k_relu)
+layer(x)
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor([0. 0. 0. 2.], shape=(4), dtype=float32)
 }\if{html}{\out{</div>}}
 }
 

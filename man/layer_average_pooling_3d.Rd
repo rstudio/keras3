@@ -17,11 +17,11 @@ layer_average_pooling_3d(
 \arguments{
 \item{object}{Object to compose the layer with. A tensor, array, or sequential model.}
 
-\item{pool_size}{int or tuple of 3 integers, factors by which to downscale
+\item{pool_size}{int or list of 3 integers, factors by which to downscale
 (dim1, dim2, dim3). If only one integer is specified, the same
 window length will be used for all dimensions.}
 
-\item{strides}{int or tuple of 3 integers, or None. Strides values. If None,
+\item{strides}{int or list of 3 integers, or \code{NULL}. Strides values. If \code{NULL},
 it will default to \code{pool_size}. If only one int is specified, the
 same stride size will be used for all dimensions.}
 
@@ -73,14 +73,15 @@ width) by taking the average value over an input window (of size defined by
 }
 
 \section{Examples}{
-\if{html}{\out{<div class="sourceCode python">}}\preformatted{depth = 30
-height = 30
-width = 30
-channels = 3
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{depth <- height <- width <- 30
+channels <- 3
 
-inputs = keras.layers.Input(shape=(depth, height, width, channels))
-layer = keras.layers.AveragePooling3D(pool_size=3)
-outputs = layer(inputs)  # Shape: (batch_size, 10, 10, 10, 3)
+inputs <- layer_input(shape = c(depth, height, width, channels))
+outputs <- inputs |> layer_average_pooling_3d(pool_size = 3)
+outputs # Shape: (batch_size, 10, 10, 10, 3)
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode">}}\preformatted{## <KerasTensor shape=(None, 10, 10, 10, 3), dtype=float32, sparse=False, name=keras_tensor_1>
 }\if{html}{\out{</div>}}
 }
 

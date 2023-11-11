@@ -5,24 +5,35 @@ It takes as input a list of tensors, all of the same shape,
 and returns a single tensor (also of the same shape).
 
 # Examples
-```python
-input_shape = (2, 3, 4)
-x1 = np.random.rand(*input_shape)
-x2 = np.random.rand(*input_shape)
-y = keras.layers.Add()([x1, x2])
+
+```r
+input_shape <- c(1, 2, 3)
+x1 <- k_ones(input_shape)
+x2 <- k_ones(input_shape)
+layer_add(x1, x2)
+```
+
+```
+## tf.Tensor(
+## [[[2. 2. 2.]
+##   [2. 2. 2.]]], shape=(1, 2, 3), dtype=float32)
 ```
 
 Usage in a Keras model:
 
-```python
-input1 = keras.layers.Input(shape=(16,))
-x1 = keras.layers.Dense(8, activation='relu')(input1)
-input2 = keras.layers.Input(shape=(32,))
-x2 = keras.layers.Dense(8, activation='relu')(input2)
-# equivalent to `added = keras.layers.add([x1, x2])`
-added = keras.layers.Add()([x1, x2])
-out = keras.layers.Dense(4)(added)
-model = keras.models.Model(inputs=[input1, input2], outputs=out)
+
+```r
+input1 <- layer_input(shape = c(16))
+x1 <- input1 |> layer_dense(8, activation = 'relu')
+
+input2 <- layer_input(shape = c(32))
+x2 <- input2 |> layer_dense(8, activation = 'relu')
+
+# equivalent to `added = layer_add([x1, x2))`
+added <- layer_add(x1, x2)
+output <- added |> layer_dense(4)
+
+model <- keras_model(inputs = c(input1, input2), outputs = output)
 ```
 
 @param ... Passed on to the Python callable

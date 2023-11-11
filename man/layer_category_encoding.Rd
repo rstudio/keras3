@@ -45,7 +45,7 @@ This layer provides options for condensing data into a categorical encoding
 when the total number of tokens are known in advance. It accepts integer
 values as inputs, and it outputs a dense or sparse representation of those
 inputs. For integer inputs where the total number of tokens is not known,
-use \code{keras.layers.IntegerLookup} instead.
+use \code{layer_integer_lookup()} instead.
 
 \strong{Note:} This layer is safe to use inside a \code{tf.data} pipeline
 (independently of which backend you're using).
@@ -53,36 +53,51 @@ use \code{keras.layers.IntegerLookup} instead.
 \section{Examples}{
 \strong{One-hot encoding data}
 
-\if{html}{\out{<div class="sourceCode python">}}\preformatted{layer = keras.layers.CategoryEncoding(
-          num_tokens=4, output_mode="one_hot")
-layer([3, 2, 0, 1])
-# array([[0., 0., 0., 1.],
-#         [0., 0., 1., 0.],
-#         [1., 0., 0., 0.],
-#         [0., 1., 0., 0.]]>
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{layer <- layer_category_encoding(num_tokens = 4, output_mode = "one_hot")
+x <- k_array(c(3, 2, 0, 1), "int32")
+layer(x)
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor(
+## [[0. 0. 0. 1.]
+##  [0. 0. 1. 0.]
+##  [1. 0. 0. 0.]
+##  [0. 1. 0. 0.]], shape=(4, 4), dtype=float32)
 }\if{html}{\out{</div>}}
 
 \strong{Multi-hot encoding data}
 
-\if{html}{\out{<div class="sourceCode python">}}\preformatted{layer = keras.layers.CategoryEncoding(
-          num_tokens=4, output_mode="multi_hot")
-layer([[0, 1], [0, 0], [1, 2], [3, 1]])
-# array([[1., 1., 0., 0.],
-#         [1., 0., 0., 0.],
-#         [0., 1., 1., 0.],
-#         [0., 1., 0., 1.]]>
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{layer <- layer_category_encoding(num_tokens = 4, output_mode = "multi_hot")
+x <- k_array(rbind(c(0, 1),
+                   c(0, 0),
+                   c(1, 2),
+                   c(3, 1)), "int32")
+layer(x)
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor(
+## [[1. 1. 0. 0.]
+##  [1. 0. 0. 0.]
+##  [0. 1. 1. 0.]
+##  [0. 1. 0. 1.]], shape=(4, 4), dtype=float32)
 }\if{html}{\out{</div>}}
 
 \strong{Using weighted inputs in \code{"count"} mode}
 
-\if{html}{\out{<div class="sourceCode python">}}\preformatted{layer = keras.layers.CategoryEncoding(
-          num_tokens=4, output_mode="count")
-count_weights = np.array([[.1, .2], [.1, .1], [.2, .3], [.4, .2]])
-layer([[0, 1], [0, 0], [1, 2], [3, 1]], count_weights=count_weights)
-#   array([[0.1, 0.2, 0. , 0. ],
-#          [0.2, 0. , 0. , 0. ],
-#          [0. , 0.2, 0.3, 0. ],
-#          [0. , 0.2, 0. , 0.4]]>
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{layer <- layer_category_encoding(num_tokens = 4, output_mode = "count")
+count_weights <- k_array(rbind(c(.1, .2),
+                               c(.1, .1),
+                               c(.2, .3),
+                               c(.4, .2)))
+x <- k_array(rbind(c(0, 1),
+                   c(0, 0),
+                   c(1, 2),
+                   c(3, 1)), "int32")
+layer(x, count_weights = count_weights)
+#   array([[01, 02, 0. , 0. ],
+#          [02, 0. , 0. , 0. ],
+#          [0. , 02, 03, 0. ],
+#          [0. , 02, 0. , 04]]>
 }\if{html}{\out{</div>}}
 }
 

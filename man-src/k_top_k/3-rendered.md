@@ -6,7 +6,20 @@ Finds the top-k values and their indices in a tensor.
 
 ```r
 x <- k_array(c(5, 2, 7, 1, 9, 3), "int32")
-c(values, indices) %<-% k_top_k(x, k=3)
+k_top_k(x, k = 3)
+```
+
+```
+## $values
+## tf.Tensor([9 7 5], shape=(3), dtype=int32)
+##
+## $indices
+## tf.Tensor([4 2 0], shape=(3), dtype=int32)
+```
+
+
+```r
+c(values, indices) %<-% k_top_k(x, k = 3)
 values
 ```
 
@@ -37,4 +50,3 @@ descending order. Defaults to`TRUE`.
 @seealso
 + <https:/keras.io/keras_core/api/ops/core#topk-function>
 + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/top_k>
-

@@ -23,21 +23,24 @@ width) by taking the average value over an input window (of size defined by
     `(batch_size, channels, pooled_dim1, pooled_dim2, pooled_dim3)`
 
 # Examples
-```python
-depth = 30
-height = 30
-width = 30
-channels = 3
 
-inputs = keras.layers.Input(shape=(depth, height, width, channels))
-layer = keras.layers.AveragePooling3D(pool_size=3)
-outputs = layer(inputs)  # Shape: (batch_size, 10, 10, 10, 3)
+```r
+depth <- height <- width <- 30
+channels <- 3
+
+inputs <- layer_input(shape = c(depth, height, width, channels))
+outputs <- inputs |> layer_average_pooling_3d(pool_size = 3)
+outputs # Shape: (batch_size, 10, 10, 10, 3)
 ```
 
-@param pool_size int or tuple of 3 integers, factors by which to downscale
+```
+## <KerasTensor shape=(None, 10, 10, 10, 3), dtype=float32, sparse=False, name=keras_tensor_1>
+```
+
+@param pool_size int or list of 3 integers, factors by which to downscale
     (dim1, dim2, dim3). If only one integer is specified, the same
     window length will be used for all dimensions.
-@param strides int or tuple of 3 integers, or None. Strides values. If None,
+@param strides int or list of 3 integers, or `NULL`. Strides values. If `NULL`,
     it will default to `pool_size`. If only one int is specified, the
     same stride size will be used for all dimensions.
 @param padding string, either `"valid"` or `"same"` (case-insensitive).

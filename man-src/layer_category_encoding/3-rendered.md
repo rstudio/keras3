@@ -5,7 +5,7 @@ This layer provides options for condensing data into a categorical encoding
 when the total number of tokens are known in advance. It accepts integer
 values as inputs, and it outputs a dense or sparse representation of those
 inputs. For integer inputs where the total number of tokens is not known,
-use `keras.layers.IntegerLookup` instead.
+use `layer_integer_lookup()` instead.
 
 **Note:** This layer is safe to use inside a `tf.data` pipeline
 (independently of which backend you're using).
@@ -13,39 +13,59 @@ use `keras.layers.IntegerLookup` instead.
 # Examples
 **One-hot encoding data**
 
-```python
-layer = keras.layers.CategoryEncoding(
-          num_tokens=4, output_mode="one_hot")
-layer([3, 2, 0, 1])
-# array([[0., 0., 0., 1.],
-#         [0., 0., 1., 0.],
-#         [1., 0., 0., 0.],
-#         [0., 1., 0., 0.]]>
+
+```r
+layer <- layer_category_encoding(num_tokens = 4, output_mode = "one_hot")
+x <- k_array(c(3, 2, 0, 1), "int32")
+layer(x)
+```
+
+```
+## tf.Tensor(
+## [[0. 0. 0. 1.]
+##  [0. 0. 1. 0.]
+##  [1. 0. 0. 0.]
+##  [0. 1. 0. 0.]], shape=(4, 4), dtype=float32)
 ```
 
 **Multi-hot encoding data**
 
-```python
-layer = keras.layers.CategoryEncoding(
-          num_tokens=4, output_mode="multi_hot")
-layer([[0, 1], [0, 0], [1, 2], [3, 1]])
-# array([[1., 1., 0., 0.],
-#         [1., 0., 0., 0.],
-#         [0., 1., 1., 0.],
-#         [0., 1., 0., 1.]]>
+
+```r
+layer <- layer_category_encoding(num_tokens = 4, output_mode = "multi_hot")
+x <- k_array(rbind(c(0, 1),
+                   c(0, 0),
+                   c(1, 2),
+                   c(3, 1)), "int32")
+layer(x)
+```
+
+```
+## tf.Tensor(
+## [[1. 1. 0. 0.]
+##  [1. 0. 0. 0.]
+##  [0. 1. 1. 0.]
+##  [0. 1. 0. 1.]], shape=(4, 4), dtype=float32)
 ```
 
 **Using weighted inputs in `"count"` mode**
 
-```python
-layer = keras.layers.CategoryEncoding(
-          num_tokens=4, output_mode="count")
-count_weights = np.array([[.1, .2], [.1, .1], [.2, .3], [.4, .2]])
-layer([[0, 1], [0, 0], [1, 2], [3, 1]], count_weights=count_weights)
-#   array([[0.1, 0.2, 0. , 0. ],
-#          [0.2, 0. , 0. , 0. ],
-#          [0. , 0.2, 0.3, 0. ],
-#          [0. , 0.2, 0. , 0.4]]>
+
+```r
+layer <- layer_category_encoding(num_tokens = 4, output_mode = "count")
+count_weights <- k_array(rbind(c(.1, .2),
+                               c(.1, .1),
+                               c(.2, .3),
+                               c(.4, .2)))
+x <- k_array(rbind(c(0, 1),
+                   c(0, 0),
+                   c(1, 2),
+                   c(3, 1)), "int32")
+layer(x, count_weights = count_weights)
+#   array([[01, 02, 0. , 0. ],
+#          [02, 0. , 0. , 0. ],
+#          [0. , 02, 03, 0. ],
+#          [0. , 02, 0. , 04]]>
 ```
 
 # Call Arguments

@@ -21,15 +21,17 @@ normalization is applied.}
 \description{
 Formula:
 
-\if{html}{\out{<div class="sourceCode python">}}\preformatted{exp_x = exp(x - max(x))
+\if{html}{\out{<div class="sourceCode">}}\preformatted{exp_x <- exp(x - max(x))
 f(x) = exp_x / sum(exp_x)
 }\if{html}{\out{</div>}}
 }
 \section{Examples}{
-\if{html}{\out{<div class="sourceCode python">}}\preformatted{>>>softmax_layer = keras.layers.activations.Softmax()
-# >>>input = np.array([1.0, 2.0, 1.0])
-# >>>result = softmax_layer(input)
-# [0.21194157, 0.5761169, 0.21194157]
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{softmax_layer <- layer_activation_softmax()
+input <- k_array(c(1, 2, 1))
+softmax_layer(input)
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor([0.21194157 0.5761169  0.21194157], shape=(3), dtype=float32)
 }\if{html}{\out{</div>}}
 }
 
@@ -37,7 +39,7 @@ f(x) = exp_x / sum(exp_x)
 \itemize{
 \item \code{inputs}: The inputs (logits) to the softmax layer.
 \item \code{mask}: A boolean mask of the same shape as \code{inputs}. The mask
-specifies 1 to keep and 0 to mask. Defaults to \code{None}.
+specifies 1 to keep and 0 to mask. Defaults to \code{NULL}.
 }
 }
 

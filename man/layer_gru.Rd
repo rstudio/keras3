@@ -187,7 +187,7 @@ of zero-filled initial state tensors). Defaults to \code{None}.
 }
 
 Other recurrent layers: 
-\code{\link{layer_bidirectional}()},
+\code{\link{bidirectional}()},
 \code{\link{layer_conv_lstm_1d}()},
 \code{\link{layer_conv_lstm_2d}()},
 \code{\link{layer_conv_lstm_3d}()},

@@ -2,23 +2,27 @@ Softmax activation layer.
 
 @description
 Formula:
-``` python
-exp_x = exp(x - max(x))
+```
+exp_x <- exp(x - max(x))
 f(x) = exp_x / sum(exp_x)
 ```
 
 # Examples
-```python
->>>softmax_layer = keras.layers.activations.Softmax()
-# >>>input = np.array([1.0, 2.0, 1.0])
-# >>>result = softmax_layer(input)
-# [0.21194157, 0.5761169, 0.21194157]
+
+```r
+softmax_layer <- layer_activation_softmax()
+input <- k_array(c(1, 2, 1))
+softmax_layer(input)
+```
+
+```
+## tf.Tensor([0.21194157 0.5761169  0.21194157], shape=(3), dtype=float32)
 ```
 
 # Call Arguments
 - `inputs`: The inputs (logits) to the softmax layer.
 - `mask`: A boolean mask of the same shape as `inputs`. The mask
-    specifies 1 to keep and 0 to mask. Defaults to `None`.
+    specifies 1 to keep and 0 to mask. Defaults to `NULL`.
 
 @returns
     Softmaxed output with the same shape as `inputs`.

@@ -24,7 +24,17 @@ Finds the top-k values and their indices in a tensor.
 }
 \section{Examples}{
 \if{html}{\out{<div class="sourceCode r">}}\preformatted{x <- k_array(c(5, 2, 7, 1, 9, 3), "int32")
-c(values, indices) \%<-\% k_top_k(x, k=3)
+k_top_k(x, k = 3)
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode">}}\preformatted{## $values
+## tf.Tensor([9 7 5], shape=(3), dtype=int32)
+##
+## $indices
+## tf.Tensor([4 2 0], shape=(3), dtype=int32)
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{c(values, indices) \%<-\% k_top_k(x, k = 3)
 values
 }\if{html}{\out{</div>}}
 

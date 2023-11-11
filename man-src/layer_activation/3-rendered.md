@@ -3,17 +3,37 @@ Applies an activation function to an output.
 @description
 
 # Examples
-```python
-layer = keras.layers.Activation('relu')
-layer([-3.0, -1.0, 0.0, 2.0])
-# [0.0, 0.0, 0.0, 2.0]
-layer = keras.layers.Activation(keras.activations.relu)
-layer([-3.0, -1.0, 0.0, 2.0])
-# [0.0, 0.0, 0.0, 2.0]
+
+```r
+x <- array(c(-3, -1, 0, 2))
+layer <- layer_activation(activation = 'relu')
+layer(x)
+```
+
+```
+## tf.Tensor([0. 0. 0. 2.], shape=(4), dtype=float32)
+```
+
+```r
+layer <- layer_activation(activation = activation_relu)
+layer(x)
+```
+
+```
+## tf.Tensor([0. 0. 0. 2.], shape=(4), dtype=float32)
+```
+
+```r
+layer <- layer_activation(activation = k_relu)
+layer(x)
+```
+
+```
+## tf.Tensor([0. 0. 0. 2.], shape=(4), dtype=float32)
 ```
 
 @param activation Activation function. It could be a callable, or the name of
-    an activation from the `keras.activations` namespace.
+    an activation from the `keras::activation_*` namespace.
 @param ... Base layer keyword arguments, such as `name` and `dtype`.
 @param object Object to compose the layer with. A tensor, array, or sequential model.
 

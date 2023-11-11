@@ -2,6 +2,9 @@ Bidirectional wrapper for RNNs.
 
 @description
 
+Bidirectional wrapper for RNNs, allowing the same RNN to be used for both
+forward and backward passes.
+
 # Call Arguments
 The call arguments for this layer are the same as those of the
 wrapped RNN layer. Beware that when passing the `initial_state`
@@ -11,53 +14,56 @@ the forward RNN call and the last half in the list of elements
 will be passed to the backward RNN call.
 
 # Note
-instantiating a `Bidirectional` layer from an existing RNN layer
+Instantiating a `Bidirectional` layer from an existing RNN layer
 instance will not reuse the weights state of the RNN layer instance -- the
 `Bidirectional` layer will have freshly initialized weights.
 
-# Examples
-```python
-model = Sequential([
-    Input(shape=(5, 10)),
-    Bidirectional(LSTM(10, return_sequences=True),
-    Bidirectional(LSTM(10)),
-    Dense(5, activation="softmax"),
-])
-model.compile(loss='categorical_crossentropy', optimizer='rmsprop')
+
+```r
+model <- keras_model_sequential(input_shape = c(5, 10)) |>
+  bidirectional(layer_lstm(units = 10, return_sequences = TRUE)) |>
+  bidirectional(layer_lstm(units = 10)) |>
+  layer_dense(units = 5, activation = "softmax")
+
+model |> compile(loss = 'categorical_crossentropy',
+                 optimizer = 'rmsprop')
 
 # With custom backward layer
-forward_layer = LSTM(10, return_sequences=True)
-backward_layer = LSTM(10, activation='relu', return_sequences=True,
-                      go_backwards=True)
-model = Sequential([
-    Input(shape=(5, 10)),
-    Bidirectional(forward_layer, backward_layer=backward_layer),
-    Dense(5, activation="softmax"),
-])
-model.compile(loss='categorical_crossentropy', optimizer='rmsprop')
+forward_layer <- layer_lstm(units = 10, return_sequences = TRUE)
+backward_layer <- layer_lstm(units = 10, return_sequences = TRUE,
+                             go_backwards = TRUE, activation = 'relu')
+
+model <- keras_model_sequential(input_shape = c(5, 10)) |>
+  bidirectional(forward_layer, backward_layer = backward_layer) |>
+  layer_dense(units = 5, activation = "softmax")
+
+model |> compile(
+  loss = 'categorical_crossentropy',
+  optimizer = 'rmsprop'
+)
 ```
 
-@param layer `keras.layers.RNN` instance, such as
-    `keras.layers.LSTM` or `keras.layers.GRU`.
-    It could also be a `keras.layers.Layer` instance
+@param layer `layer_RNN` instance, such as
+    `layer_lstm()` or `layer_gru()`.
+    It could also be any `Layer` instance
     that meets the following criteria:
     1. Be a sequence-processing layer (accepts 3D+ inputs).
     2. Have a `go_backwards`, `return_sequences` and `return_state`
-    attribute (with the same semantics as for the `RNN` class).
+    attribute (with the same semantics as for the `layer_rnn()` class).
     3. Have an `input_spec` attribute.
     4. Implement serialization via `get_config()` and `from_config()`.
     Note that the recommended way to create new RNN layers is to write a
-    custom RNN cell and use it with `keras.layers.RNN`, instead of
-    subclassing `keras.layers.Layer` directly.
-    When `return_sequences` is `True`, the output of the masked
+    custom RNN cell and use it with `layer_rnn()`, instead of
+    creating a `new_layer_class()` directly.
+    When `return_sequences` is `TRUE`, the output of the masked
     timestep will be zero regardless of the layer's original
     `zero_output_for_mask` value.
 @param merge_mode Mode by which outputs of the forward and backward RNNs
-    will be combined. One of `{"sum", "mul", "concat", "ave", None}`.
-    If `None`, the outputs will not be combined,
+    will be combined. One of `"sum"`, `"mul"`, `"concat"`, `"ave"`, or `NULL`.
+    If `NULL`, the outputs will not be combined,
     they will be returned as a list. Defaults to `"concat"`.
-@param backward_layer Optional `keras.layers.RNN`,
-    or `keras.layers.Layer` instance to be used to handle
+@param backward_layer Optional `layer_rnn()`,
+    or a `Layer` instance to be used to handle
     backwards input processing.
     If `backward_layer` is not provided, the layer instance passed
     as the `layer` argument will be used to generate the backward layer

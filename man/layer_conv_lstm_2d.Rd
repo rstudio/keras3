@@ -195,7 +195,7 @@ cells output).
 }
 
 Other recurrent layers: 
-\code{\link{layer_bidirectional}()},
+\code{\link{bidirectional}()},
 \code{\link{layer_conv_lstm_1d}()},
 \code{\link{layer_conv_lstm_3d}()},
 \code{\link{layer_gru_cell}()},

@@ -16,22 +16,29 @@ It takes as input a list of tensors, all of the same shape,
 and returns a single tensor (also of the same shape).
 }
 \section{Examples}{
-\if{html}{\out{<div class="sourceCode python">}}\preformatted{input_shape = (2, 3, 4)
-x1 = np.random.rand(*input_shape)
-x2 = np.random.rand(*input_shape)
-y = keras.layers.Average()([x1, x2])
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{input_shape <- c(1, 2, 3)
+x1 <- k_ones(input_shape)
+x2 <- k_zeros(input_shape)
+layer_average(x1, x2)
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor(
+## [[[0.5 0.5 0.5]
+##   [0.5 0.5 0.5]]], shape=(1, 2, 3), dtype=float32)
 }\if{html}{\out{</div>}}
 
 Usage in a Keras model:
 
-\if{html}{\out{<div class="sourceCode python">}}\preformatted{input1 = keras.layers.Input(shape=(16,))
-x1 = keras.layers.Dense(8, activation='relu')(input1)
-input2 = keras.layers.Input(shape=(32,))
-x2 = keras.layers.Dense(8, activation='relu')(input2)
-# equivalent to `y = keras.layers.average([x1, x2])`
-y = keras.layers.Average()([x1, x2])
-out = keras.layers.Dense(4)(y)
-model = keras.models.Model(inputs=[input1, input2], outputs=out)
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{input1 <- layer_input(shape = c(16))
+x1 <- input1 |> layer_dense(8, activation = 'relu')
+
+input2 <- layer_input(shape = c(32))
+x2 <- input2 |> layer_dense(8, activation = 'relu')
+
+added <- layer_average(x1, x2)
+output <- added |> layer_dense(4)
+
+model <- keras_model(inputs = c(input1, input2), outputs = output)
 }\if{html}{\out{</div>}}
 }
 

@@ -42,3 +42,4 @@ A list of tensors, has the same shape and dtype as `loop_vars`.
 @seealso
 + <https:/keras.io/keras_core/api/ops/core#whileloop-function>
 + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/while_loop>
+

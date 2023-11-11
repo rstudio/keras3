@@ -26,3 +26,4 @@ A tensor with the same shape and dtype as `a`.
 @family ops
 @seealso
 + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/solve>
+

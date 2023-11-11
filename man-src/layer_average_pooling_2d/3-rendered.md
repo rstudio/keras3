@@ -31,44 +31,74 @@ The resulting output shape when using the `"same"` padding option is:
 # Examples
 `strides=(1, 1)` and `padding="valid"`:
 
-```python
-x = np.array([[1., 2., 3.],
-              [4., 5., 6.],
-              [7., 8., 9.]])
-x = np.reshape(x, [1, 3, 3, 1])
-avg_pool_2d = keras.layers.AveragePooling2D(pool_size=(2, 2),
-   strides=(1, 1), padding="valid")
-avg_pool_2d(x)
+
+```r
+x <- k_array(1:9, "float32") |> k_reshape(c(1, 3, 3, 1))
+output <- x |>
+  layer_average_pooling_2d(pool_size = c(2, 2),
+                           strides = c(1, 1),
+                           padding = "valid")
+output
+```
+
+```
+## tf.Tensor(
+## [[[[3.]
+##    [4.]]
+##
+##   [[6.]
+##    [7.]]]], shape=(1, 2, 2, 1), dtype=float32)
 ```
 
 `strides=(2, 2)` and `padding="valid"`:
 
-```python
-x = np.array([[1., 2., 3., 4.],
-             [5., 6., 7., 8.],
-             [9., 10., 11., 12.]])
-x = np.reshape(x, [1, 3, 4, 1])
-avg_pool_2d = keras.layers.AveragePooling2D(pool_size=(2, 2),
-   strides=(2, 2), padding="valid")
-avg_pool_2d(x)
+
+```r
+x <- k_array(1:12, "float32") |> k_reshape(c(1, 3, 4, 1))
+output <- x |>
+  layer_average_pooling_2d(pool_size = c(2, 2),
+                           strides = c(2, 2),
+                           padding = "valid")
+output
+```
+
+```
+## tf.Tensor(
+## [[[[3.5]
+##    [5.5]]]], shape=(1, 1, 2, 1), dtype=float32)
 ```
 
 `stride=(1, 1)` and `padding="same"`:
 
-```python
-x = np.array([[1., 2., 3.],
-                 [4., 5., 6.],
-                 [7., 8., 9.]])
-x = np.reshape(x, [1, 3, 3, 1])
-avg_pool_2d = keras.layers.AveragePooling2D(pool_size=(2, 2),
-   strides=(1, 1), padding="same")
-avg_pool_2d(x)
+
+```r
+x <- k_array(1:9, "float32") |> k_reshape(c(1, 3, 3, 1))
+output <- x |>
+  layer_average_pooling_2d(pool_size = c(2, 2),
+                           strides = c(1, 1),
+                           padding = "same")
+output
 ```
 
-@param pool_size int or tuple of 2 integers, factors by which to downscale
+```
+## tf.Tensor(
+## [[[[3. ]
+##    [4. ]
+##    [4.5]]
+##
+##   [[6. ]
+##    [7. ]
+##    [7.5]]
+##
+##   [[7.5]
+##    [8.5]
+##    [9. ]]]], shape=(1, 3, 3, 1), dtype=float32)
+```
+
+@param pool_size int or list of 2 integers, factors by which to downscale
     (dim1, dim2). If only one integer is specified, the same
     window length will be used for all dimensions.
-@param strides int or tuple of 2 integers, or None. Strides values. If None,
+@param strides int or list of 2 integers, or `NULL`. Strides values. If `NULL`,
     it will default to `pool_size`. If only one int is specified, the
     same stride size will be used for all dimensions.
 @param padding string, either `"valid"` or `"same"` (case-insensitive).

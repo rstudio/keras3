@@ -19,8 +19,8 @@ layer_average_pooling_1d(
 
 \item{pool_size}{int, size of the max pooling window.}
 
-\item{strides}{int or None. Specifies how much the pooling window moves
-for each pooling step. If None, it will default to \code{pool_size}.}
+\item{strides}{int or \code{NULL}. Specifies how much the pooling window moves
+for each pooling step. If \code{NULL}, it will default to \code{pool_size}.}
 
 \item{padding}{string, either \code{"valid"} or \code{"same"} (case-insensitive).
 \code{"valid"} means no padding. \code{"same"} results in padding evenly to
@@ -69,29 +69,52 @@ The resulting output shape when using the "same" padding option is:
 \section{Examples}{
 \code{strides=1} and \code{padding="valid"}:
 
-\if{html}{\out{<div class="sourceCode python">}}\preformatted{x = np.array([1., 2., 3., 4., 5.])
-x = np.reshape(x, [1, 5, 1])
-avg_pool_1d = keras.layers.AveragePooling1D(pool_size=2,
-   strides=1, padding="valid")
-avg_pool_1d(x)
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{x <- k_array(c(1., 2., 3., 4., 5.)) |> k_reshape(c(1, 5, 1))
+output <- x |>
+  layer_average_pooling_1d(pool_size = 2,
+                           strides = 1,
+                           padding = "valid")
+output
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor(
+## [[[1.5]
+##   [2.5]
+##   [3.5]
+##   [4.5]]], shape=(1, 4, 1), dtype=float32)
 }\if{html}{\out{</div>}}
 
 \code{strides=2} and \code{padding="valid"}:
 
-\if{html}{\out{<div class="sourceCode python">}}\preformatted{x = np.array([1., 2., 3., 4., 5.])
-x = np.reshape(x, [1, 5, 1])
-avg_pool_1d = keras.layers.AveragePooling1D(pool_size=2,
-   strides=2, padding="valid")
-avg_pool_1d(x)
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{x <- k_array(c(1., 2., 3., 4., 5.)) |> k_reshape(c(1, 5, 1))
+output <- x |>
+  layer_average_pooling_1d(pool_size = 2,
+                           strides = 2,
+                           padding = "valid")
+output
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor(
+## [[[1.5]
+##   [3.5]]], shape=(1, 2, 1), dtype=float32)
 }\if{html}{\out{</div>}}
 
 \code{strides=1} and \code{padding="same"}:
 
-\if{html}{\out{<div class="sourceCode python">}}\preformatted{x = np.array([1., 2., 3., 4., 5.])
-x = np.reshape(x, [1, 5, 1])
-avg_pool_1d = keras.layers.AveragePooling1D(pool_size=2,
-   strides=1, padding="same")
-avg_pool_1d(x)
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{x <- k_array(c(1., 2., 3., 4., 5.)) |> k_reshape(c(1, 5, 1))
+output <- x |>
+  layer_average_pooling_1d(pool_size = 2,
+                           strides = 1,
+                           padding = "same")
+output
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor(
+## [[[1.5]
+##   [2.5]
+##   [3.5]
+##   [4.5]
+##   [5. ]]], shape=(1, 5, 1), dtype=float32)
 }\if{html}{\out{</div>}}
 }
 
