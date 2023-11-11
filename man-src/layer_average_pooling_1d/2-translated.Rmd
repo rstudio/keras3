@@ -32,7 +32,7 @@ x <- k_array(c(1., 2., 3., 4., 5.)) |> k_reshape(c(1, 5, 1))
 output <- x |>
   layer_average_pooling_1d(pool_size = 2,
                            strides = 1,
-                           padding = "valid") |>
+                           padding = "valid")
 output
 ```
 
