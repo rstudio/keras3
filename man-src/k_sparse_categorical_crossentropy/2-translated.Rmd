@@ -10,14 +10,12 @@ class labels instead of one-hot encoded vectors. It measures the
 dissimilarity between the target and output probabilities or logits.
 
 # Examples
-```python
-target = keras.ops.convert_to_tensor([0, 1, 2], dtype=int32)
-output = keras.ops.convert_to_tensor(
-[[0.9, 0.05, 0.05],
- [0.1, 0.8, 0.1],
- [0.2, 0.3, 0.5]])
-sparse_categorical_crossentropy(target, output)
-# array([0.10536056 0.22314355 0.6931472 ], shape=(3,), dtype=float32)
+```{r}
+target <- k_array(c(0, 1, 2), dtype="int32")
+output <- k_array(rbind(c(0.9, 0.05, 0.05), 
+                        c(0.1, 0.8,  0.1), 
+                        c(0.2, 0.3,  0.5)))
+k_sparse_categorical_crossentropy(target, output)
 ```
 
 @returns
@@ -33,9 +31,9 @@ loss between `target` and `output`.
     for the last dimension.
 @param from_logits (optional) Whether `output` is a tensor of logits
     or probabilities.
-    Set it to `True` if `output` represents logits; otherwise,
-    set it to `False` if `output` represents probabilities.
-    Defaults to`False`.
+    Set it to `TRUE` if `output` represents logits; otherwise,
+    set it to `FALSE` if `output` represents probabilities.
+    Defaults to`FALSE`.
 @param axis (optional) The axis along which the sparse categorical
     cross-entropy is computed.
     Defaults to `-1`, which corresponds to the last dimension
@@ -46,3 +44,4 @@ loss between `target` and `output`.
 @seealso
 + <https:/keras.io/keras_core/api/ops/nn#sparsecategoricalcrossentropy-function>
 + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/sparse_categorical_crossentropy>
+

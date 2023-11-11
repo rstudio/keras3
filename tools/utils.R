@@ -1027,12 +1027,6 @@ make_r_fn.default <- function(endpoint, py_obj, transformers) {
 
   frmls <- formals(py_obj)
 
-  if(endpoint == "keras.ops.vectorized_map") {
-    names(frmls) %<>% replace_val("function", "f")
-    # swap the tensor is the first arg, for better pipe-ability
-    frmls <- frmls[unique(c(2, 1, seq_along(frmls)))]
-  }
-
   body <- bquote({
     args <- capture_args2(.(transformers))
     do.call(.(py_obj_expr), args)
@@ -1076,6 +1070,15 @@ make_r_fn.op <- function(endpoint, py_obj, transformers) {
       keras$ops$meshgrid(!!!args, indexing = indexing)
     }))
     transformers <- NULL
+  }
+
+
+  if(endpoint == "keras.ops.vectorized_map") {
+    names(frmls) %<>% replace_val("function", "f")
+    # swap the tensor is the first arg, for better pipe-ability
+    stopifnot(length(frmls) == 2) # new arg, update manually
+    return(function(elements, f) keras$ops$vectorized_map(f, elements))
+    # frmls <- frmls[unique(c(2, 1, seq_along(frmls)))]
   }
 
 
@@ -1135,7 +1138,6 @@ make_r_fn.loss <- function(endpoint, py_obj, transformers) {
       .(py_obj_expr) else .(py_obj_expr_fn)
     do.call(callable, args)
   })
-
 
   fn <- as.function.default(c(frmls, body))
   attr(fn, "py_function_name") <- py_obj_fn$`__name__`

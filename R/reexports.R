@@ -74,6 +74,10 @@ tensorflow::shape
 #' @export
 tensorflow::as_tensor
 
+#' @importFrom tensorflow all_dims
+#' @export
+tensorflow::all_dims
+
 #' @importFrom tfruns flags
 #' @export
 tfruns::flags

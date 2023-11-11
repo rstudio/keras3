@@ -134,6 +134,7 @@ if(!"source:tools/translate-tools.R" %in% search()) envir::attach_source("tools/
 #
 # TODO: revisit docs for k_scatter_update and k_scatter, remove python sliceisms
 
+# TODO: fix k_vectorized_map() arg rename kludge
 # The source of truth for the current translation should be...?
 #    - the autogened file R/autogen-*.R, or
 #    - man-src/*/2-translated.Rmd
@@ -172,7 +173,7 @@ get_translations <- function() {
         str_replace_all("True", "TRUE") %>%
         str_replace_all("False", "FALSE") %>%
         str_replace_all(fixed("np.random.random(("), "random_uniform(c(") %>%
-        str_replace_all("([0-9])\\.0?\\b", "\\1") %>%
+        str_replace_all("([0-9])(\\.0?\\b)", "\\1") %>%
         str_replace_all(fixed("list/list"), "list") %>%
         str_flatten_lines() %>%
         identity()

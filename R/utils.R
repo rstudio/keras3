@@ -735,6 +735,13 @@ py_to_r.tensorflow.python.ops.gen_linalg_ops.Qr <- function(x) {
   x
 }
 
+#' @export
+py_to_r.tensorflow.python.ops.gen_nn_ops.TopKV2 <- function(x) {
+  x <- py_eval("tuple")(x)
+  names(x) <- c("values", "indices")
+  x
+}
+
 # Generate a Random Array
 #
 # This function generates an array with random numbers.

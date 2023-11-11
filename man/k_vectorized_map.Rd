@@ -4,11 +4,9 @@
 \alias{k_vectorized_map}
 \title{Parallel map of \code{function} on axis 0 of tensor(s) \code{elements}.}
 \usage{
-k_vectorized_map(`function`, elements)
+k_vectorized_map(elements, f)
 }
 \arguments{
-\item{function}{a function}
-
 \item{elements}{see description}
 }
 \description{

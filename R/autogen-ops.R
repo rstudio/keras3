@@ -116,8 +116,8 @@ function (x, num = NULL, axis = 0L)
 "man-src/k_vectorized_map/0-upstream.md" # view the upstream doc
 #' @eval readLines("man-src/k_vectorized_map/3-rendered.md")
 k_vectorized_map <-
-function (`function`, elements)
-keras$ops$vectorized_map(`function`, elements)
+function (elements, f)
+keras$ops$vectorized_map(f, elements)
 
 
 "man-src/k_while_loop.Rmd" # |>file.edit() # or cmd+click to edit man page

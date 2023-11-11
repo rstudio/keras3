@@ -9,18 +9,13 @@ input. This giving frequency components of the signal as they change over
 time.
 
 # Examples
-```python
-x = keras.ops.convert_to_tensor([0.0, 1.0, 2.0, 3.0, 4.0])
-stft(x, 3, 2, 3)
-# (array([[0.75, -0.375],
-#    [3.75, -1.875],
-#    [5.25, -2.625]]), array([[0.0, 0.64951905],
-#    [0.0, 0.64951905],
-#    [0.0, -0.64951905]]))
+```{r}
+x <- k_array(c(0, 1, 2, 3, 4))
+k_stft(x, 3, 2, 3)
 ```
 
 @returns
-A tuple containing two tensors - the real and imaginary parts of the
+A list containing two tensors - the real and imaginary parts of the
 STFT output.
 
 @param x Input tensor.
@@ -28,17 +23,18 @@ STFT output.
 @param sequence_stride An integer representing the sequence hop size.
 @param fft_length An integer representing the size of the FFT to apply. If not
     specified, uses the smallest power of 2 enclosing `sequence_length`.
-@param window A string, a tensor of the window or `None`. If `window` is a
+@param window A string, a tensor of the window or `NULL`. If `window` is a
     string, available values are `"hann"` and `"hamming"`. If `window`
     is a tensor, it will be used directly as the window and its length
-    must be `sequence_length`. If `window` is `None`, no windowing is
+    must be `sequence_length`. If `window` is `NULL`, no windowing is
     used. Defaults to `"hann"`.
 @param center Whether to pad `x` on both sides so that the t-th sequence is
     centered at time `t * sequence_stride`. Otherwise, the t-th sequence
-    begins at time `t * sequence_stride`. Defaults to `True`.
+    begins at time `t * sequence_stride`. Defaults to `TRUE`.
 
 @export
 @family ops
 @seealso
 + <https:/keras.io/keras_core/api/ops/fft#stft-function>
 + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/stft>
+
