@@ -34,9 +34,8 @@ ValueError: when both `strides > 1` and `dilation_rate > 1`.
 # Examples
 ```{r}
 x <- random_uniform(c(4, 10, 10, 10, 128))
-y <- x |> layer_conv_3d(32, 3, activation='relu')
+y <- x |> layer_conv_3d(32, 3, activation = 'relu')
 y$shape
-# (4, 8, 8, 8, 32)
 ```
 
 @returns
@@ -66,7 +65,7 @@ A 5D tensor representing `activation(conv3d(inputs, kernel) + bias)`.
     rate to use for dilated convolution.
 @param groups A positive int specifying the number of groups in which the
     input is split along the channel axis. Each group is convolved
-    separately with `filters // groups` filters. The output is the
+    separately with `filters %/% groups` filters. The output is the
     concatenation of all the `groups` results along the channel axis.
     Input channels and `filters` must both be divisible by `groups`.
 @param activation Activation function. If `NULL`, no activation is applied.
