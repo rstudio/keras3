@@ -3,8 +3,8 @@
 @description
 This layer creates a convolution kernel that is convolved with the layer
 input over a single spatial (or temporal) dimension to produce a tensor of
-outputs. If `use_bias` is True, a bias vector is created and added to the
-outputs. Finally, if `activation` is not `None`, it is applied to the
+outputs. If `use_bias` is TRUE, a bias vector is created and added to the
+outputs. Finally, if `activation` is not `NULL`, it is applied to the
 outputs as well.
 
 # Input Shape
@@ -23,11 +23,15 @@ outputs as well.
 ValueError: when both `strides > 1` and `dilation_rate > 1`.
 
 # Examples
-```python
-x = np.random.rand(4, 10, 10, 128)
-y = keras.layers.Conv2D(32, 3, activation='relu')(x)
-print(y.shape)
-# (4, 8, 8, 32)
+
+```r
+x <- random_uniform(c(4, 10, 10, 128))
+y <- x |> layer_conv_2d(32, 3, activation='relu')
+y$shape
+```
+
+```
+## TensorShape([4, 8, 8, 32])
 ```
 
 @returns
@@ -35,9 +39,9 @@ A 4D tensor representing `activation(conv2d(inputs, kernel) + bias)`.
 
 @param filters int, the dimension of the output space (the number of filters
     in the convolution).
-@param kernel_size int or tuple/list of 2 integer, specifying the size of the
+@param kernel_size int or list of 2 integer, specifying the size of the
     convolution window.
-@param strides int or tuple/list of 2 integer, specifying the stride length
+@param strides int or list of 2 integer, specifying the stride length
     of the convolution. `strides > 1` is incompatible with
     `dilation_rate > 1`.
 @param padding string, either `"valid"` or `"same"` (case-insensitive).
@@ -53,18 +57,18 @@ A 4D tensor representing `activation(conv2d(inputs, kernel) + bias)`.
     `image_data_format` value found in your Keras config file at
     `~/.keras/keras.json`. If you never set it, then it will be
     `"channels_last"`.
-@param dilation_rate int or tuple/list of 2 integers, specifying the dilation
+@param dilation_rate int or list of 2 integers, specifying the dilation
     rate to use for dilated convolution.
 @param groups A positive int specifying the number of groups in which the
     input is split along the channel axis. Each group is convolved
     separately with `filters // groups` filters. The output is the
     concatenation of all the `groups` results along the channel axis.
     Input channels and `filters` must both be divisible by `groups`.
-@param activation Activation function. If `None`, no activation is applied.
-@param use_bias bool, if `True`, bias will be added to the output.
-@param kernel_initializer Initializer for the convolution kernel. If `None`,
+@param activation Activation function. If `NULL`, no activation is applied.
+@param use_bias bool, if `TRUE`, bias will be added to the output.
+@param kernel_initializer Initializer for the convolution kernel. If `NULL`,
     the default initializer (`"glorot_uniform"`) will be used.
-@param bias_initializer Initializer for the bias vector. If `None`, the
+@param bias_initializer Initializer for the bias vector. If `NULL`, the
     default initializer (`"zeros"`) will be used.
 @param kernel_regularizer Optional regularizer for the convolution kernel.
 @param bias_regularizer Optional regularizer for the bias vector.

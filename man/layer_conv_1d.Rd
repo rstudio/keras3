@@ -31,10 +31,10 @@ layer_conv_1d(
 \item{filters}{int, the dimension of the output space (the number of filters
 in the convolution).}
 
-\item{kernel_size}{int or tuple/list of 1 integer, specifying the size of the
+\item{kernel_size}{int or list of 1 integer, specifying the size of the
 convolution window.}
 
-\item{strides}{int or tuple/list of 1 integer, specifying the stride length
+\item{strides}{int or list of 1 integer, specifying the stride length
 of the convolution. \code{strides > 1} is incompatible with
 \code{dilation_rate > 1}.}
 
@@ -55,7 +55,7 @@ while \code{"channels_first"} corresponds to inputs with shape
 value found in your Keras config file at \verb{~/.keras/keras.json}.
 If you never set it, then it will be \code{"channels_last"}.}
 
-\item{dilation_rate}{int or tuple/list of 1 integers, specifying the dilation
+\item{dilation_rate}{int or list of 1 integers, specifying the dilation
 rate to use for dilated convolution.}
 
 \item{groups}{A positive int specifying the number of groups in which the
@@ -64,14 +64,14 @@ separately with \verb{filters // groups} filters. The output is the
 concatenation of all the \code{groups} results along the channel axis.
 Input channels and \code{filters} must both be divisible by \code{groups}.}
 
-\item{activation}{Activation function. If \code{None}, no activation is applied.}
+\item{activation}{Activation function. If \code{NULL}, no activation is applied.}
 
-\item{use_bias}{bool, if \code{True}, bias will be added to the output.}
+\item{use_bias}{bool, if \code{TRUE}, bias will be added to the output.}
 
-\item{kernel_initializer}{Initializer for the convolution kernel. If \code{None},
+\item{kernel_initializer}{Initializer for the convolution kernel. If \code{NULL},
 the default initializer (\code{"glorot_uniform"}) will be used.}
 
-\item{bias_initializer}{Initializer for the bias vector. If \code{None}, the
+\item{bias_initializer}{Initializer for the bias vector. If \code{NULL}, the
 default initializer (\code{"zeros"}) will be used.}
 
 \item{kernel_regularizer}{Optional regularizer for the convolution kernel.}
@@ -98,8 +98,8 @@ A 3D tensor representing \code{activation(conv1d(inputs, kernel) + bias)}.
 \description{
 This layer creates a convolution kernel that is convolved with the layer
 input over a single spatial (or temporal) dimension to produce a tensor of
-outputs. If \code{use_bias} is True, a bias vector is created and added to the
-outputs. Finally, if \code{activation} is not \code{None}, it is applied to the
+outputs. If \code{use_bias} is \code{TRUE}, a bias vector is created and added to the
+outputs. Finally, if \code{activation} is not \code{NULL}, it is applied to the
 outputs as well.
 }
 \section{Input Shape}{
@@ -125,12 +125,14 @@ ValueError: when both \code{strides > 1} and \code{dilation_rate > 1}.
 }
 
 \section{Examples}{
-\if{html}{\out{<div class="sourceCode python">}}\preformatted{# The inputs are 128-length vectors with 10 timesteps, and the
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{# The inputs are 128-length vectors with 10 timesteps, and the
 # batch size is 4.
-x = np.random.rand(4, 10, 128)
-y = keras.layers.Conv1D(32, 3, activation='relu')(x)
-print(y.shape)
-# (4, 8, 32)
+x <- random_uniform(c(4, 10, 128))
+y <- x |> layer_conv_1d(32, 3, activation='relu')
+y$shape
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode">}}\preformatted{## TensorShape([4, 8, 32])
 }\if{html}{\out{</div>}}
 }
 

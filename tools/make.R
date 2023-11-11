@@ -147,6 +147,7 @@ if(!"source:tools/translate-tools.R" %in% search()) envir::attach_source("tools/
 
 # TODO: get rid of this in params: @param ... Passed on to the Python callable
 
+# TODO: global doc search for None/True/False/[Tt]uple/[Dd]ict(ionary|\\b)
 
 
 get_translations <- function() {

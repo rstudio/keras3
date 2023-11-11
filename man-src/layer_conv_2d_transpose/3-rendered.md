@@ -24,15 +24,23 @@ ValueError: when both `strides > 1` and `dilation_rate > 1`.
 
 # References
 - [A guide to convolution arithmetic for deep learning](
-    https://arxiv.org/abs/1603.07285v1)
+    https://arxiv.org/abs/160307285v1)
 - [Deconvolutional Networks](
     https://www.matthewzeiler.com/mattzeiler/deconvolutionalnetworks.pdf)
 
 # Examples
-```python
-x = np.random.rand(4, 10, 8, 128)
-y = keras.layers.Conv2DTranspose(32, 2, 2, activation='relu')(x)
-print(y.shape)
+
+```r
+x <- random_uniform(c(4, 10, 8, 128))
+y <- x |> layer_conv_2d_transpose(32, 2, 2, activation='relu')
+y$shape
+```
+
+```
+## TensorShape([4, 20, 16, 32])
+```
+
+```r
 # (4, 20, 16, 32)
 ```
 
@@ -42,9 +50,9 @@ A 4D tensor representing
 
 @param filters int, the dimension of the output space (the number of filters
     in the transposed convolution).
-@param kernel_size int or tuple/list of 1 integer, specifying the size of the
+@param kernel_size int or list of 1 integer, specifying the size of the
     transposed convolution window.
-@param strides int or tuple/list of 1 integer, specifying the stride length
+@param strides int or list of 1 integer, specifying the stride length
     of the transposed convolution. `strides > 1` is incompatible with
     `dilation_rate > 1`.
 @param padding string, either `"valid"` or `"same"` (case-insensitive).
@@ -60,13 +68,13 @@ A 4D tensor representing
     `image_data_format` value found in your Keras config file at
     `~/.keras/keras.json`. If you never set it, then it will be
     `"channels_last"`.
-@param dilation_rate int or tuple/list of 1 integers, specifying the dilation
+@param dilation_rate int or list of 1 integers, specifying the dilation
     rate to use for dilated transposed convolution.
-@param activation Activation function. If `None`, no activation is applied.
-@param use_bias bool, if `True`, bias will be added to the output.
-@param kernel_initializer Initializer for the convolution kernel. If `None`,
+@param activation Activation function. If `NULL`, no activation is applied.
+@param use_bias bool, if `TRUE`, bias will be added to the output.
+@param kernel_initializer Initializer for the convolution kernel. If `NULL`,
     the default initializer (`"glorot_uniform"`) will be used.
-@param bias_initializer Initializer for the bias vector. If `None`, the
+@param bias_initializer Initializer for the bias vector. If `NULL`, the
     default initializer (`"zeros"`) will be used.
 @param kernel_regularizer Optional regularizer for the convolution kernel.
 @param bias_regularizer Optional regularizer for the bias vector.

@@ -14,13 +14,13 @@ layer_cropping_2d(
 \arguments{
 \item{object}{Object to compose the layer with. A tensor, array, or sequential model.}
 
-\item{cropping}{Int, or tuple of 2 ints, or tuple of 2 tuples of 2 ints.
+\item{cropping}{Int, or list of 2 ints, or list of 2 lists of 2 ints.
 - If int: the same symmetric cropping is applied to height and
 width.
-- If tuple of 2 ints: interpreted as two different symmetric
+- If list of 2 ints: interpreted as two different symmetric
 cropping values for height and width:
 \verb{(symmetric_height_crop, symmetric_width_crop)}.
-- If tuple of 2 tuples of 2 ints: interpreted as
+- If list of 2 lists of 2 ints: interpreted as
 \verb{((top_crop, bottom_crop), (left_crop, right_crop))}.}
 
 \item{data_format}{A string, one of \code{"channels_last"} (default) or
@@ -39,11 +39,13 @@ config file at \verb{~/.keras/keras.json} (if exists). Defaults to
 It crops along spatial dimensions, i.e. height and width.
 }
 \section{Examples}{
-\if{html}{\out{<div class="sourceCode python">}}\preformatted{input_shape = (2, 28, 28, 3)
-x = np.arange(np.prod(input_shape)).reshape(input_shape)
-y = keras.layers.Cropping2D(cropping=((2, 2), (4, 4)))(x)
-y.shape
-# (2, 24, 20, 3)
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{input_shape <- c(2, 28, 28, 3)
+x <- k_arange(prod(input_shape), dtype ='int32') |> k_reshape(input_shape)
+y <- x |> layer_cropping_2d(cropping=list(c(2, 2), c(4, 4)))
+y$shape
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode">}}\preformatted{## TensorShape([2, 24, 20, 3])
 }\if{html}{\out{</div>}}
 }
 

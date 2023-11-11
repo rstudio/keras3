@@ -30,10 +30,10 @@ layer_conv_2d_transpose(
 \item{filters}{int, the dimension of the output space (the number of filters
 in the transposed convolution).}
 
-\item{kernel_size}{int or tuple/list of 1 integer, specifying the size of the
+\item{kernel_size}{int or list of 1 integer, specifying the size of the
 transposed convolution window.}
 
-\item{strides}{int or tuple/list of 1 integer, specifying the stride length
+\item{strides}{int or list of 1 integer, specifying the stride length
 of the transposed convolution. \code{strides > 1} is incompatible with
 \code{dilation_rate > 1}.}
 
@@ -52,17 +52,17 @@ while \code{"channels_first"} corresponds to inputs with shape
 \verb{~/.keras/keras.json}. If you never set it, then it will be
 \code{"channels_last"}.}
 
-\item{dilation_rate}{int or tuple/list of 1 integers, specifying the dilation
+\item{dilation_rate}{int or list of 1 integers, specifying the dilation
 rate to use for dilated transposed convolution.}
 
-\item{activation}{Activation function. If \code{None}, no activation is applied.}
+\item{activation}{Activation function. If \code{NULL}, no activation is applied.}
 
-\item{use_bias}{bool, if \code{True}, bias will be added to the output.}
+\item{use_bias}{bool, if \code{TRUE}, bias will be added to the output.}
 
-\item{kernel_initializer}{Initializer for the convolution kernel. If \code{None},
+\item{kernel_initializer}{Initializer for the convolution kernel. If \code{NULL},
 the default initializer (\code{"glorot_uniform"}) will be used.}
 
-\item{bias_initializer}{Initializer for the bias vector. If \code{None}, the
+\item{bias_initializer}{Initializer for the bias vector. If \code{NULL}, the
 default initializer (\code{"zeros"}) will be used.}
 
 \item{kernel_regularizer}{Optional regularizer for the convolution kernel.}
@@ -118,16 +118,21 @@ ValueError: when both \code{strides > 1} and \code{dilation_rate > 1}.
 
 \section{References}{
 \itemize{
-\item \href{https://arxiv.org/abs/1603.07285v1}{A guide to convolution arithmetic for deep learning}
+\item \href{https://arxiv.org/abs/160307285v1}{A guide to convolution arithmetic for deep learning}
 \item \href{https://www.matthewzeiler.com/mattzeiler/deconvolutionalnetworks.pdf}{Deconvolutional Networks}
 }
 }
 
 \section{Examples}{
-\if{html}{\out{<div class="sourceCode python">}}\preformatted{x = np.random.rand(4, 10, 8, 128)
-y = keras.layers.Conv2DTranspose(32, 2, 2, activation='relu')(x)
-print(y.shape)
-# (4, 20, 16, 32)
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{x <- random_uniform(c(4, 10, 8, 128))
+y <- x |> layer_conv_2d_transpose(32, 2, 2, activation='relu')
+y$shape
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode">}}\preformatted{## TensorShape([4, 20, 16, 32])
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{# (4, 20, 16, 32)
 }\if{html}{\out{</div>}}
 }
 

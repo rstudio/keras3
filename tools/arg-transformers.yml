@@ -170,5 +170,5 @@ keras.ops.scatter_update:
   segment_ids: as_index
   indices: as_index
 
-keras.layers.DepthwiseConv1D:
+# keras.layers.DepthwiseConv1D:
 

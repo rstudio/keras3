@@ -9,11 +9,11 @@ layer_cropping_1d(object, cropping = list(1L, 1L), ...)
 \arguments{
 \item{object}{Object to compose the layer with. A tensor, array, or sequential model.}
 
-\item{cropping}{Int, or tuple of int (length 2), or dictionary.
+\item{cropping}{Int, or list of int (length 2).
 \itemize{
 \item If int: how many units should be trimmed off at the beginning and
 end of the cropping dimension (axis 1).
-\item If tuple of 2 ints: how many units should be trimmed off at the
+\item If list of 2 ints: how many units should be trimmed off at the
 beginning and end of the cropping dimension
 (\verb{(left_crop, right_crop)}).
 }}
@@ -24,19 +24,29 @@ beginning and end of the cropping dimension
 It crops along the time dimension (axis 1).
 }
 \section{Examples}{
-\if{html}{\out{<div class="sourceCode python">}}\preformatted{input_shape = (2, 3, 2)
-x = np.arange(np.prod(input_shape)).reshape(input_shape)
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{input_shape <- c(2, 3, 2)
+x <- k_arange(prod(input_shape)) |> k_reshape(input_shape)
 x
-# [[[ 0  1]
-#   [ 2  3]
-#   [ 4  5]]
-#  [[ 6  7]
-#   [ 8  9]
-#   [10 11]]]
-y = keras.layers.Cropping1D(cropping=1)(x)
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor(
+## [[[ 0.  1.]
+##   [ 2.  3.]
+##   [ 4.  5.]]
+##
+##  [[ 6.  7.]
+##   [ 8.  9.]
+##   [10. 11.]]], shape=(2, 3, 2), dtype=float64)
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{y <- x |> layer_cropping_1d(cropping = 1)
 y
-# [[[2 3]]
-#  [[8 9]]]
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor(
+## [[[2. 3.]]
+##
+##  [[8. 9.]]], shape=(2, 1, 2), dtype=float32)
 }\if{html}{\out{</div>}}
 }
 

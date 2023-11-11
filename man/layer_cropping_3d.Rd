@@ -14,13 +14,13 @@ layer_cropping_3d(
 \arguments{
 \item{object}{Object to compose the layer with. A tensor, array, or sequential model.}
 
-\item{cropping}{Int, or tuple of 3 ints, or tuple of 3 tuples of 2 ints.
+\item{cropping}{Int, or list of 3 ints, or list of 3 lists of 2 ints.
 - If int: the same symmetric cropping is applied to depth, height,
 and width.
-- If tuple of 3 ints: interpreted as three different symmetric
+- If list of 3 ints: interpreted as three different symmetric
 cropping values for depth, height, and width:
 \verb{(symmetric_dim1_crop, symmetric_dim2_crop, symmetric_dim3_crop)}.
-- If tuple of 3 tuples of 2 ints: interpreted as
+- If list of 3 lists of 2 ints: interpreted as
 \verb{((left_dim1_crop, right_dim1_crop), (left_dim2_crop, right_dim2_crop), (left_dim3_crop, right_dim3_crop))}.}
 
 \item{data_format}{A string, one of \code{"channels_last"} (default) or
@@ -39,11 +39,13 @@ config file at \verb{~/.keras/keras.json} (if exists). Defaults to
 Cropping layer for 3D data (e.g. spatial or spatio-temporal).
 }
 \section{Examples}{
-\if{html}{\out{<div class="sourceCode python">}}\preformatted{input_shape = (2, 28, 28, 10, 3)
-x = np.arange(np.prod(input_shape)).reshape(input_shape)
-y = keras.layers.Cropping3D(cropping=(2, 4, 2))(x)
-y.shape
-# (2, 24, 20, 6, 3)
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{input_shape <- c(2, 28, 28, 10, 3)
+x <- input_shape \%>\% \{ k_reshape(seq(prod(.)), .) \}
+y <- x |> layer_cropping_3d(cropping = c(2, 4, 2))
+y$shape
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode">}}\preformatted{## TensorShape([2, 24, 20, 6, 3])
 }\if{html}{\out{</div>}}
 }
 
