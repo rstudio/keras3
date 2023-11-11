@@ -145,12 +145,15 @@ if(!"source:tools/translate-tools.R" %in% search()) envir::attach_source("tools/
 #
 # TODO: `axis` arg in merging layers has to wrong transformer, should be `as_axis()`, is `as_integer()`
 
+# TODO: get rid of this in params: @param ... Passed on to the Python callable
+
 
 
 get_translations <- function() {
   dirs <- fs::dir_ls("man-src/", type = "directory") |>
     sort() %>%
     # .[grep("^k_", basename(.))] %>%
+    .[grep("^layer_", basename(.))] %>%
     set_names(basename) %>%
     keep(\(dir) read_file(path(dir, "2-translated.Rmd")) |>
            str_detect("```python")) |>
@@ -170,6 +173,7 @@ get_translations <- function() {
         str_replace_all(fixed("k_convert_to_tensor(["), "k_convert_to_tensor(c(") %>%
         str_replace_all(fixed("k_array(["), "k_array(c(") %>%
         str_replace_all(fixed("])"), "))") %>%
+        str_replace_all(fixed("np.random.rand"), "random_uniform(c") %>%
         str_replace_all("^([a-z_0-9A-Z]+) =", "\\1 <-") %>%
         str_replace_all("None", "NULL") %>%
         str_replace_all("\\bdict", "named list") %>%

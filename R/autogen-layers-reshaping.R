@@ -21,7 +21,7 @@ layer_cropping_2d <-
 function (object, cropping = list(list(0L, 0L), list(0L, 0L)),
     data_format = NULL, ...)
 {
-    args <- capture_args2(list(cropping = as_integer, padding = function (x)
+    args <- capture_args2(list(cropping = function (x)
     normalize_cropping(x, 2L), input_shape = normalize_shape,
         batch_size = as_integer, batch_input_shape = normalize_shape),
         ignore = "object")
@@ -36,7 +36,7 @@ layer_cropping_3d <-
 function (object, cropping = list(list(1L, 1L), list(1L, 1L),
     list(1L, 1L)), data_format = NULL, ...)
 {
-    args <- capture_args2(list(cropping = as_integer, padding = function (x)
+    args <- capture_args2(list(cropping = function (x)
     normalize_cropping(x, 3L), input_shape = normalize_shape,
         batch_size = as_integer, batch_input_shape = normalize_shape),
         ignore = "object")

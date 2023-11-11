@@ -22,10 +22,10 @@
   padding: normalize_padding(x, 3L)
 
 "keras.layers.Cropping2D":
-  padding: normalize_cropping(x, 2L)
+  cropping: normalize_cropping(x, 2L)
 
 "keras.layers.Cropping3D":
-  padding: normalize_cropping(x, 3L)
+  cropping: normalize_cropping(x, 3L)
 
 "keras.layers.*":
   +input_shape: normalize_shape
@@ -169,3 +169,6 @@ keras.ops.scatter_update:
 "keras.ops.*":
   segment_ids: as_index
   indices: as_index
+
+keras.layers.DepthwiseConv1D:
+
