@@ -49,8 +49,7 @@ function (object, alpha_initializer = "Zeros", alpha_regularizer = NULL,
 {
     args <- capture_args2(list(input_shape = normalize_shape,
         batch_size = as_integer, batch_input_shape = normalize_shape,
-        shared_axes = function (x)
-        lapply(x, as_integer)), ignore = "object")
+        shared_axes = as_axis), ignore = "object")
     create_layer(keras$layers$PReLU, object, args)
 }
 
@@ -75,7 +74,7 @@ function (object, max_value = NULL, negative_slope = 0, threshold = 0,
 layer_activation_softmax <-
 function (object, axis = -1L, ...)
 {
-    args <- capture_args2(list(axis = as_integer, input_shape = normalize_shape,
+    args <- capture_args2(list(axis = as_axis, input_shape = normalize_shape,
         batch_size = as_integer, batch_input_shape = normalize_shape),
         ignore = "object")
     create_layer(keras$layers$Softmax, object, args)

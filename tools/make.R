@@ -136,10 +136,14 @@ if(!"source:tools/translate-tools.R" %in% search()) envir::attach_source("tools/
 
 # TODO: fix k_vectorized_map() arg rename kludge
 #
+# TODO: layer_category_encoding()(count_weights) call arg example not working
+#
 # TODO: revisit k_vectorized_map() man page
 # The source of truth for the current translation should be...?
 #    - the autogened file R/autogen-*.R, or
 #    - man-src/*/2-translated.Rmd
+#
+# TODO: `axis` arg in merging layers has to wrong transformer, should be `as_axis()`, is `as_integer()`
 
 
 
@@ -177,6 +181,8 @@ get_translations <- function() {
         str_replace_all(fixed("np.random.random(("), "random_uniform(c(") %>%
         str_replace_all("([0-9])(\\.0?\\b)", "\\1") %>%
         str_replace_all(fixed("list/list"), "list") %>%
+        str_replace_all(fixed("keras.layers."), "layer_") %>%
+        str_replace_all(fixed("layers."), "layer_") %>%
         str_flatten_lines() %>%
         identity()
         # str_replace_all(fixed("k_convert_to_tensor(["), "k_array(c(") %>%
@@ -302,6 +308,7 @@ endpoints %<>% setdiff(c %(% {
   "keras.layers.Wrapper"           # needs thinking
   "keras.layers.InputLayer"        # use Input instead
   "keras.layers.InputSpec"         # ??
+  # "keras.layers.Bidirectional"         # ??
   "keras.callbacks.CallbackList"   # just an abstract list
   "keras.callbacks.History"        # always added to fit() by default
 

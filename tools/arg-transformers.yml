@@ -83,20 +83,25 @@ keras.layers.TextVectorization:
 
 # in keras 3 we'll make these 1 based
 # in keras 2, keep them 0 based
-keras.layers.Concatenate:
-  axis: as_integer
+# keras.layers.Concatenate:
+#   axis: as_integer
+#
+# keras.layers.Dot:
+#   axes: as_integer
+#
+# keras.layers.LayerNormalization:
+#   axis: as_integer
+#
+# keras.layers.Softmax:
+#   axis: as_integer
+#
+# keras.layers.PReLU:
+#   shared_axes: lapply(x, as_integer)
 
-keras.layers.Dot:
-  axes: as_integer
-
-keras.layers.LayerNormalization:
-  axis: as_integer
-
-keras.layers.Softmax:
-  axis: as_integer
 
 keras.layers.PReLU:
-  shared_axes: lapply(x, as_integer)
+  shared_axes: as_axis
+
 
 keras.random.randint:
   dtype: ~

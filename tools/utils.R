@@ -757,6 +757,8 @@ make_r_name <- function(endpoint, module = py_eval(endpoint)$`__module__`) {
     "keras.ops.top_k" = "k_top_k"
 
     "keras.random.randint" = "random_integer"
+
+    "keras.layers.Bidirectional" = "bidirectional"
     # "keras.losses.LogCosh" = "loss_logcosh"
     NULL
   })) return(r_name)
