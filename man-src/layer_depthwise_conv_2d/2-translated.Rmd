@@ -41,20 +41,19 @@ are generated per input channel in the depthwise step.
 ValueError: when both `strides > 1` and `dilation_rate > 1`.
 
 # Examples
-```python
-x = np.random.rand(4, 10, 10, 12)
-y = keras.layers.DepthwiseConv2D(3, 3, activation='relu')(x)
-print(y.shape)
-# (4, 8, 8, 36)
+```{r}
+x <- random_uniform(c(4, 10, 10, 12))
+y <- x |> layer_depthwise_conv_2d(3, 3, activation = 'relu')
+y$shape
 ```
 
 @returns
 A 4D tensor representing
 `activation(depthwise_conv2d(inputs, kernel) + bias)`.
 
-@param kernel_size int or tuple/list of 2 integer, specifying the size of the
+@param kernel_size int or list of 2 integer, specifying the size of the
     depthwise convolution window.
-@param strides int or tuple/list of 2 integer, specifying the stride length
+@param strides int or list of 2 integer, specifying the stride length
     of the depthwise convolution. `strides > 1` is incompatible with
     `dilation_rate > 1`.
 @param padding string, either `"valid"` or `"same"` (case-insensitive).
@@ -71,14 +70,14 @@ A 4D tensor representing
     `(batch, features, steps)`. It defaults to the `image_data_format`
     value found in your Keras config file at `~/.keras/keras.json`.
     If you never set it, then it will be `"channels_last"`.
-@param dilation_rate int or tuple/list of 2 integers, specifying the dilation
+@param dilation_rate int or list of 2 integers, specifying the dilation
     rate to use for dilated convolution.
-@param activation Activation function. If `None`, no activation is applied.
-@param use_bias bool, if `True`, bias will be added to the output.
+@param activation Activation function. If `NULL`, no activation is applied.
+@param use_bias bool, if `TRUE`, bias will be added to the output.
 @param depthwise_initializer Initializer for the convolution kernel.
-    If `None`, the default initializer (`"glorot_uniform"`)
+    If `NULL`, the default initializer (`"glorot_uniform"`)
     will be used.
-@param bias_initializer Initializer for the bias vector. If `None`, the
+@param bias_initializer Initializer for the bias vector. If `NULL`, the
     default initializer (`"zeros"`) will be used.
 @param depthwise_regularizer Optional regularizer for the convolution kernel.
 @param bias_regularizer Optional regularizer for the bias vector.
