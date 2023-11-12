@@ -13,7 +13,7 @@ k_hard_sigmoid(x)
 ```
 
 ```
-## tf.Tensor([0.33333333 0.5        0.66666667], shape=(3), dtype=float64)
+## tf.Tensor([0.3333333 0.5       0.6666667], shape=(3), dtype=float32)
 ```
 
 ```r

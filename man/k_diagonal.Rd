@@ -64,7 +64,7 @@ x
 ##   [3 4]]
 ##
 ##  [[5 6]
-##   [7 8]]], shape=(2, 2, 2), dtype=int64)
+##   [7 8]]], shape=(2, 2, 2), dtype=int32)
 }\if{html}{\out{</div>}}
 
 \if{html}{\out{<div class="sourceCode r">}}\preformatted{x |> k_diagonal(0)
@@ -72,7 +72,7 @@ x
 
 \if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor(
 ## [[1 7]
-##  [2 8]], shape=(2, 2), dtype=int64)
+##  [2 8]], shape=(2, 2), dtype=int32)
 }\if{html}{\out{</div>}}
 
 \if{html}{\out{<div class="sourceCode r">}}\preformatted{x |> k_diagonal(0, 1, 2) # same as above, the default
@@ -80,7 +80,7 @@ x
 
 \if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor(
 ## [[1 7]
-##  [2 8]], shape=(2, 2), dtype=int64)
+##  [2 8]], shape=(2, 2), dtype=int32)
 }\if{html}{\out{</div>}}
 
 \if{html}{\out{<div class="sourceCode r">}}\preformatted{x |> k_diagonal(0, 2, 3)
@@ -88,7 +88,7 @@ x
 
 \if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor(
 ## [[1 4]
-##  [5 8]], shape=(2, 2), dtype=int64)
+##  [5 8]], shape=(2, 2), dtype=int32)
 }\if{html}{\out{</div>}}
 }
 
@@ -181,6 +181,7 @@ Other ops:
 \code{\link{k_imag}()},
 \code{\link{k_in_top_k}()},
 \code{\link{k_irfft}()},
+\code{\link{k_is_tensor}()},
 \code{\link{k_isclose}()},
 \code{\link{k_isfinite}()},
 \code{\link{k_isinf}()},

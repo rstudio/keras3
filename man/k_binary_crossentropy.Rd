@@ -36,7 +36,7 @@ output <- k_array(c(0.1, 0.9, 0.8, 0.2))
 k_binary_crossentropy(target, output)
 }\if{html}{\out{</div>}}
 
-\if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor([0.10536052 0.10536052 0.22314355 0.22314355], shape=(4), dtype=float64)
+\if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor([0.10536054 0.10536054 0.22314355 0.22314355], shape=(4), dtype=float32)
 }\if{html}{\out{</div>}}
 }
 
@@ -129,6 +129,7 @@ Other ops:
 \code{\link{k_imag}()},
 \code{\link{k_in_top_k}()},
 \code{\link{k_irfft}()},
+\code{\link{k_is_tensor}()},
 \code{\link{k_isclose}()},
 \code{\link{k_isfinite}()},
 \code{\link{k_isinf}()},

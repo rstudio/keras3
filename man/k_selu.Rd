@@ -23,7 +23,7 @@ It is defined as:
 k_selu(x)
 }\if{html}{\out{</div>}}
 
-\if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor([-1.11133074  0.          1.05070099], shape=(3), dtype=float64)
+\if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor([-1.1113307  0.         1.050701 ], shape=(3), dtype=float32)
 }\if{html}{\out{</div>}}
 }
 
@@ -117,6 +117,7 @@ Other ops:
 \code{\link{k_imag}()},
 \code{\link{k_in_top_k}()},
 \code{\link{k_irfft}()},
+\code{\link{k_is_tensor}()},
 \code{\link{k_isclose}()},
 \code{\link{k_isfinite}()},
 \code{\link{k_isinf}()},

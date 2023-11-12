@@ -25,7 +25,7 @@ It allows a small gradient when the unit is not active, it is defined as:
 k_leaky_relu(x)
 }\if{html}{\out{</div>}}
 
-\if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor([-0.2  0.   1. ], shape=(3), dtype=float64)
+\if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor([-0.2  0.   1. ], shape=(3), dtype=float32)
 }\if{html}{\out{</div>}}
 
 \if{html}{\out{<div class="sourceCode r">}}\preformatted{# array([-0.2,  0. ,  1. ], shape=(3,), dtype=float64)
@@ -129,6 +129,7 @@ Other ops:
 \code{\link{k_imag}()},
 \code{\link{k_in_top_k}()},
 \code{\link{k_irfft}()},
+\code{\link{k_is_tensor}()},
 \code{\link{k_isclose}()},
 \code{\link{k_isfinite}()},
 \code{\link{k_isinf}()},

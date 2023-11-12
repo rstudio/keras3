@@ -12,7 +12,7 @@ k_log_softmax(x)
 ```
 
 ```
-## tf.Tensor([-2.40760596 -1.40760596 -0.40760596], shape=(3), dtype=float64)
+## tf.Tensor([-2.407606   -1.4076059  -0.40760595], shape=(3), dtype=float32)
 ```
 
 @returns

@@ -13,7 +13,7 @@ k_elu(x)
 ```
 
 ```
-## tf.Tensor([-0.63212056  0.          1.        ], shape=(3), dtype=float64)
+## tf.Tensor([-0.63212055  0.          1.        ], shape=(3), dtype=float32)
 ```
 
 @returns

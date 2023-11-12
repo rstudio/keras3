@@ -21,7 +21,7 @@ Create a tensor.
 \if{html}{\out{<div class="sourceCode r">}}\preformatted{k_array(c(1, 2, 3))
 }\if{html}{\out{</div>}}
 
-\if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor([1. 2. 3.], shape=(3), dtype=float64)
+\if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor([1. 2. 3.], shape=(3), dtype=float32)
 }\if{html}{\out{</div>}}
 
 \if{html}{\out{<div class="sourceCode r">}}\preformatted{k_array(c(1, 2, 3), dtype = "float32")
@@ -120,6 +120,7 @@ Other ops:
 \code{\link{k_imag}()},
 \code{\link{k_in_top_k}()},
 \code{\link{k_irfft}()},
+\code{\link{k_is_tensor}()},
 \code{\link{k_isclose}()},
 \code{\link{k_isfinite}()},
 \code{\link{k_isinf}()},

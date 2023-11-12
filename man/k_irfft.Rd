@@ -40,8 +40,8 @@ k_irfft(c(real, imag))
 }\if{html}{\out{</div>}}
 
 \if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor(
-## [ 2.         -2.06066017  0.5        -0.35355339  0.          0.06066017
-##  -0.5         0.35355339], shape=(8), dtype=float64)
+## [ 2.         -2.0606601   0.5        -0.35355338  0.          0.06066012
+##  -0.5         0.35355338], shape=(8), dtype=float32)
 }\if{html}{\out{</div>}}
 
 \if{html}{\out{<div class="sourceCode r">}}\preformatted{# array([0.66666667, -0.9106836, 0.24401694))
@@ -50,11 +50,11 @@ k_irfft(c(real, imag))
 \if{html}{\out{<div class="sourceCode r">}}\preformatted{k_irfft(k_rfft(real, 5), 5)
 }\if{html}{\out{</div>}}
 
-\if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor([0. 1. 2. 3. 4.], shape=(5), dtype=float64)
+\if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor([0.         0.99999994 2.         3.         4.        ], shape=(5), dtype=float32)
 }\if{html}{\out{</div>}}
 
-[ 2.         -2.06066017  0.5        -0.35355339  0.          0.06066017
-\subsection{-0.5         0.35355339]: R:\%202.\%20\%20\%20\%20\%20\%20\%20\%20\%20-2.06066017\%20\%200.5\%20\%20\%20\%20\%20\%20\%20\%20-0.35355339\%20\%200.\%20\%20\%20\%20\%20\%20\%20\%20\%20\%200.06066017\%0A##\%20\%20-0.5\%20\%20\%20\%20\%20\%20\%20\%20\%200.35355339}{
+[ 2.         -2.0606601   0.5        -0.35355338  0.          0.06066012
+\subsection{-0.5         0.35355338]: R:\%202.\%20\%20\%20\%20\%20\%20\%20\%20\%20-2.0606601\%20\%20\%200.5\%20\%20\%20\%20\%20\%20\%20\%20-0.35355338\%20\%200.\%20\%20\%20\%20\%20\%20\%20\%20\%20\%200.06066012\%0A##\%20\%20-0.5\%20\%20\%20\%20\%20\%20\%20\%20\%200.35355338}{
 }
 }
 
@@ -147,6 +147,7 @@ Other ops:
 \code{\link{k_image_resize}()},
 \code{\link{k_imag}()},
 \code{\link{k_in_top_k}()},
+\code{\link{k_is_tensor}()},
 \code{\link{k_isclose}()},
 \code{\link{k_isfinite}()},
 \code{\link{k_isinf}()},

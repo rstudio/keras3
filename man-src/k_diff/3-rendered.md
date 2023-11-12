@@ -13,7 +13,7 @@ k_diff(x)
 ```
 
 ```
-## tf.Tensor([ 1.  2.  3. -7.], shape=(4), dtype=float64)
+## tf.Tensor([ 1.  2.  3. -7.], shape=(4), dtype=float32)
 ```
 
 ```r
@@ -21,7 +21,7 @@ k_diff(x, n = 2)
 ```
 
 ```
-## tf.Tensor([  1.   1. -10.], shape=(3), dtype=float64)
+## tf.Tensor([  1.   1. -10.], shape=(3), dtype=float32)
 ```
 
 ```r

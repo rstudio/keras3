@@ -20,7 +20,7 @@ k_scatter(indices, values, shape= c(2, 2))
 ```
 ## tf.Tensor(
 ## [[0. 1.]
-##  [0. 1.]], shape=(2, 2), dtype=float64)
+##  [0. 1.]], shape=(2, 2), dtype=float32)
 ```
 
 @param indices A tensor or list specifying

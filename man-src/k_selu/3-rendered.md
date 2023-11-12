@@ -14,7 +14,7 @@ k_selu(x)
 ```
 
 ```
-## tf.Tensor([-1.11133074  0.          1.05070099], shape=(3), dtype=float64)
+## tf.Tensor([-1.1113307  0.         1.050701 ], shape=(3), dtype=float32)
 ```
 
 @returns

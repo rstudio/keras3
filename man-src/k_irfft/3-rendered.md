@@ -25,8 +25,8 @@ k_irfft(c(real, imag))
 
 ```
 ## tf.Tensor(
-## [ 2.         -2.06066017  0.5        -0.35355339  0.          0.06066017
-##  -0.5         0.35355339], shape=(8), dtype=float64)
+## [ 2.         -2.0606601   0.5        -0.35355338  0.          0.06066012
+##  -0.5         0.35355338], shape=(8), dtype=float32)
 ```
 
 ```r
@@ -39,7 +39,7 @@ k_irfft(k_rfft(real, 5), 5)
 ```
 
 ```
-## tf.Tensor([0. 1. 2. 3. 4.], shape=(5), dtype=float64)
+## tf.Tensor([0.         0.99999994 2.         3.         4.        ], shape=(5), dtype=float32)
 ```
 
 @returns

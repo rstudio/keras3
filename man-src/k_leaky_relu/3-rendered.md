@@ -13,7 +13,7 @@ k_leaky_relu(x)
 ```
 
 ```
-## tf.Tensor([-0.2  0.   1. ], shape=(3), dtype=float64)
+## tf.Tensor([-0.2  0.   1. ], shape=(3), dtype=float32)
 ```
 
 ```r

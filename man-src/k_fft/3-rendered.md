@@ -12,10 +12,10 @@ k_fft(x)
 
 ```
 ## [[1]]
-## tf.Tensor([ 3. -1.], shape=(2), dtype=float64)
+## tf.Tensor([ 3. -1.], shape=(2), dtype=float32)
 ##
 ## [[2]]
-## tf.Tensor([ 1. -1.], shape=(2), dtype=float64)
+## tf.Tensor([ 1. -1.], shape=(2), dtype=float32)
 ```
 
 @returns

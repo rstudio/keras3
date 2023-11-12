@@ -15,7 +15,7 @@ k_binary_crossentropy(target, output)
 ```
 
 ```
-## tf.Tensor([0.10536052 0.10536052 0.22314355 0.22314355], shape=(4), dtype=float64)
+## tf.Tensor([0.10536054 0.10536054 0.22314355 0.22314355], shape=(4), dtype=float32)
 ```
 
 @returns

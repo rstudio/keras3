@@ -12,7 +12,7 @@ k_segment_sum(data, segment_ids, num_segments)
 ```
 
 ```
-## tf.Tensor([  3.  30. 300.], shape=(3), dtype=float64)
+## tf.Tensor([  3.  30. 300.], shape=(3), dtype=float32)
 ```
 
 @returns

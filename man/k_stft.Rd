@@ -51,13 +51,13 @@ k_stft(x, 3, 2, 3)
 ## tf.Tensor(
 ## [[ 0.  0.]
 ##  [ 2. -1.]
-##  [ 4. -2.]], shape=(3, 2), dtype=float64)
+##  [ 4. -2.]], shape=(3, 2), dtype=float32)
 ##
 ## [[2]]
 ## tf.Tensor(
-## [[ 0.          0.        ]
-##  [ 0.         -1.73205081]
-##  [ 0.         -3.46410162]], shape=(3, 2), dtype=float64)
+## [[ 0.         0.       ]
+##  [ 0.        -1.7320508]
+##  [ 0.        -3.4641016]], shape=(3, 2), dtype=float32)
 }\if{html}{\out{</div>}}
 }
 
@@ -151,6 +151,7 @@ Other ops:
 \code{\link{k_imag}()},
 \code{\link{k_in_top_k}()},
 \code{\link{k_irfft}()},
+\code{\link{k_is_tensor}()},
 \code{\link{k_isclose}()},
 \code{\link{k_isfinite}()},
 \code{\link{k_isinf}()},

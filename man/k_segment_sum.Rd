@@ -33,7 +33,7 @@ num_segments <- 3
 k_segment_sum(data, segment_ids, num_segments)
 }\if{html}{\out{</div>}}
 
-\if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor([  3.  30. 300.], shape=(3), dtype=float64)
+\if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor([  3.  30. 300.], shape=(3), dtype=float32)
 }\if{html}{\out{</div>}}
 }
 
@@ -127,6 +127,7 @@ Other ops:
 \code{\link{k_imag}()},
 \code{\link{k_in_top_k}()},
 \code{\link{k_irfft}()},
+\code{\link{k_is_tensor}()},
 \code{\link{k_isclose}()},
 \code{\link{k_isfinite}()},
 \code{\link{k_isinf}()},

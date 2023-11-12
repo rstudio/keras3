@@ -20,7 +20,7 @@ Computes the error function of \code{x}, element-wise.
 k_erf(x)
 }\if{html}{\out{</div>}}
 
-\if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor([-0.99997791 -0.99532227 -0.84270079  0.          0.84270079], shape=(5), dtype=float64)
+\if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor([-0.99997795 -0.9953222  -0.84270084  0.          0.84270084], shape=(5), dtype=float32)
 }\if{html}{\out{</div>}}
 
 \if{html}{\out{<div class="sourceCode r">}}\preformatted{# array([-0.99998 , -0.99532, -0.842701,  0.,  0.842701], dtype=float32)
@@ -115,6 +115,7 @@ Other ops:
 \code{\link{k_imag}()},
 \code{\link{k_in_top_k}()},
 \code{\link{k_irfft}()},
+\code{\link{k_is_tensor}()},
 \code{\link{k_isclose}()},
 \code{\link{k_isfinite}()},
 \code{\link{k_isinf}()},

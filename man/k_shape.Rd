@@ -18,7 +18,7 @@ tensor.
 Gets the shape of the tensor input.
 }
 \section{Note}{
-On the tensorflow backend, when \code{x} is a \code{tf.Tensor} with dynamic
+On the TensorFlow backend, when \code{x} is a \code{tf.Tensor} with dynamic
 shape, dimensions which are dynamic in the context of a compiled function
 will have a \code{tf.Tensor} value instead of a static integer value.
 }
@@ -126,6 +126,7 @@ Other ops:
 \code{\link{k_imag}()},
 \code{\link{k_in_top_k}()},
 \code{\link{k_irfft}()},
+\code{\link{k_is_tensor}()},
 \code{\link{k_isclose}()},
 \code{\link{k_isfinite}()},
 \code{\link{k_isinf}()},

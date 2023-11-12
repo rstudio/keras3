@@ -31,7 +31,7 @@ y <- k_array(c(-1, -1, 1, 1))
 k_arctan2(y, x) * 180 / pi
 }\if{html}{\out{</div>}}
 
-\if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor([-135.  -45.   45.  135.], shape=(4), dtype=float64)
+\if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor([-135.        -44.999996   44.999996  135.      ], shape=(4), dtype=float32)
 }\if{html}{\out{</div>}}
 
 Note the order of the parameters. \code{arctan2} is defined also when x2=0 and
@@ -43,7 +43,7 @@ at several other points, obtaining values in the range \verb{[-pi, pi]}:
 )
 }\if{html}{\out{</div>}}
 
-\if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor([ 1.57079633 -1.57079633], shape=(2), dtype=float64)
+\if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor([ 1.5707964 -1.5707964], shape=(2), dtype=float32)
 }\if{html}{\out{</div>}}
 
 \if{html}{\out{<div class="sourceCode r">}}\preformatted{k_arctan2(
@@ -52,7 +52,7 @@ at several other points, obtaining values in the range \verb{[-pi, pi]}:
 )
 }\if{html}{\out{</div>}}
 
-\if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor([0.         3.14159265 0.78539816], shape=(3), dtype=float64)
+\if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor([0.        3.1415925 0.7853982], shape=(3), dtype=float32)
 }\if{html}{\out{</div>}}
 }
 
@@ -145,6 +145,7 @@ Other ops:
 \code{\link{k_imag}()},
 \code{\link{k_in_top_k}()},
 \code{\link{k_irfft}()},
+\code{\link{k_is_tensor}()},
 \code{\link{k_isclose}()},
 \code{\link{k_isfinite}()},
 \code{\link{k_isinf}()},

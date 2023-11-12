@@ -13,7 +13,7 @@ k_broadcast_to(x, shape = c(3, 3))
 ## tf.Tensor(
 ## [[1. 2. 3.]
 ##  [1. 2. 3.]
-##  [1. 2. 3.]], shape=(3, 3), dtype=float64)
+##  [1. 2. 3.]], shape=(3, 3), dtype=float32)
 ```
 
 @returns

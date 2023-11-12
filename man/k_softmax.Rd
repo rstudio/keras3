@@ -29,7 +29,7 @@ It is defined as:
 k_softmax(x)
 }\if{html}{\out{</div>}}
 
-\if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor([0.09003057 0.24472847 0.66524096], shape=(3), dtype=float64)
+\if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor([0.09003057 0.24472848 0.66524094], shape=(3), dtype=float32)
 }\if{html}{\out{</div>}}
 }
 
@@ -123,6 +123,7 @@ Other ops:
 \code{\link{k_imag}()},
 \code{\link{k_in_top_k}()},
 \code{\link{k_irfft}()},
+\code{\link{k_is_tensor}()},
 \code{\link{k_isclose}()},
 \code{\link{k_isfinite}()},
 \code{\link{k_isinf}()},

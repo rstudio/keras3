@@ -9,7 +9,7 @@ k_array(c(1, 2, 3))
 ```
 
 ```
-## tf.Tensor([1. 2. 3.], shape=(3), dtype=float64)
+## tf.Tensor([1. 2. 3.], shape=(3), dtype=float32)
 ```
 
 ```r

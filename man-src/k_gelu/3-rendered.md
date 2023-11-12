@@ -16,7 +16,7 @@ k_gelu(x)
 ```
 
 ```
-## tf.Tensor([-0.15880801  0.          0.84119199], shape=(3), dtype=float64)
+## tf.Tensor([-0.15880796  0.          0.841192  ], shape=(3), dtype=float32)
 ```
 
 ```r
@@ -24,7 +24,7 @@ k_gelu(x, FALSE)
 ```
 
 ```
-## tf.Tensor([-0.15865525  0.          0.84134475], shape=(3), dtype=float64)
+## tf.Tensor([-0.15865526  0.          0.8413447 ], shape=(3), dtype=float32)
 ```
 
 

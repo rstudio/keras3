@@ -52,7 +52,7 @@ x
 ##   [3 4]]
 ##
 ##  [[5 6]
-##   [7 8]]], shape=(2, 2, 2), dtype=int64)
+##   [7 8]]], shape=(2, 2, 2), dtype=int32)
 ```
 
 ```r
@@ -62,7 +62,7 @@ x |> k_diagonal(0)
 ```
 ## tf.Tensor(
 ## [[1 7]
-##  [2 8]], shape=(2, 2), dtype=int64)
+##  [2 8]], shape=(2, 2), dtype=int32)
 ```
 
 ```r
@@ -72,7 +72,7 @@ x |> k_diagonal(0, 1, 2) # same as above, the default
 ```
 ## tf.Tensor(
 ## [[1 7]
-##  [2 8]], shape=(2, 2), dtype=int64)
+##  [2 8]], shape=(2, 2), dtype=int32)
 ```
 
 ```r
@@ -82,7 +82,7 @@ x |> k_diagonal(0, 2, 3)
 ```
 ## tf.Tensor(
 ## [[1 4]
-##  [5 8]], shape=(2, 2), dtype=int64)
+##  [5 8]], shape=(2, 2), dtype=int32)
 ```
 
 @returns
