@@ -40,8 +40,5 @@ timestamps, the same set of weights are used at each timestamp.
 \itemize{
 \item \url{https://www.tensorflow.org/api_docs/python/tf/keras/layers/TimeDistributed}
 }
-
-Other layer wrappers: 
-\code{\link{bidirectional}()}
 }
 \concept{layer wrappers}

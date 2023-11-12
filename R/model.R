@@ -1438,6 +1438,3 @@ confirm_overwrite <- function(filepath, overwrite) {
     }
   }
 }
-
-
-

@@ -25,7 +25,7 @@ output_array <- model |> predict(input_array)
 ```
 
 ```
-## 1/1 - 0s - 51ms/step
+## 1/1 - 0s - 49ms/step
 ```
 
 ```r

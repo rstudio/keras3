@@ -11,7 +11,7 @@ This layer can only be used on positive integer inputs of a fixed range.
 This layer can only be used on positive integer inputs of a fixed range.
 
 # Examples
-```{r}
+```{r, results='hide'} 
 model <- keras_model_sequential() |>
   layer_embedding(1000, 64)
 

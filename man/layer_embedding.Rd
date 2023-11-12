@@ -66,7 +66,7 @@ model |> compile('rmsprop', 'mse')
 output_array <- model |> predict(input_array)
 }\if{html}{\out{</div>}}
 
-\if{html}{\out{<div class="sourceCode">}}\preformatted{## 1/1 - 0s - 51ms/step
+\if{html}{\out{<div class="sourceCode">}}\preformatted{## 1/1 - 0s - 49ms/step
 }\if{html}{\out{</div>}}
 
 \if{html}{\out{<div class="sourceCode r">}}\preformatted{dim(output_array)    # (32, 10, 64)
