@@ -4,6 +4,7 @@ Computes the mean of absolute difference between labels and predictions.
 ```python
 loss = mean(abs(y_true - y_pred), axis=-1)
 ```
+
 Formula:
 
 ```python

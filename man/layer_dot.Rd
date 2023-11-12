@@ -11,14 +11,14 @@ layer_dot(inputs, ..., axes, normalize = FALSE)
 
 \item{...}{Standard layer keyword arguments.}
 
-\item{axes}{Integer or tuple of integers, axis or axes along which to
-take the dot product. If a tuple, should be two integers
+\item{axes}{Integer or list of integers, axis or axes along which to
+take the dot product. If a list, should be two integers
 corresponding to the desired axis from the first input and the
 desired axis from the second input, respectively. Note that the
 size of the two selected axes must match.}
 
 \item{normalize}{Whether to L2-normalize samples along the dot product axis
-before taking the dot product. If set to \code{True}, then
+before taking the dot product. If set to \code{TRUE}, then
 the output of the dot product is the cosine proximity
 between the two samples.}
 }
@@ -35,20 +35,41 @@ Let's say \code{x} and \code{y} are the two input tensors with shapes
 \verb{(2, 3, 5)} and \verb{(2, 10, 3)}. The batch dimension should be
 of same size for both the inputs, and \code{axes} should correspond
 to the dimensions that have the same size in the corresponding
-inputs. e.g. with \verb{axes=(1, 2)}, the dot product of \code{x}, and \code{y}
+inputs. e.g. with \code{axes = c(1, 2)}, the dot product of \code{x}, and \code{y}
 will result in a tensor with shape \verb{(2, 5, 10)}
 }
 \section{Examples}{
-\if{html}{\out{<div class="sourceCode python">}}\preformatted{x = np.arange(10).reshape(1, 5, 2)
-y = np.arange(10, 20).reshape(1, 2, 5)
-keras.layers.Dot(axes=(1, 2))([x, y])
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{x <- k_reshape(0:9,   c(1, 5, 2))
+y <- k_reshape(10:19, c(1, 2, 5))
+layer_dot(x, y, axes=c(2, 3))
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor(
+## [[[260 360]
+##   [320 445]]], shape=(1, 2, 2), dtype=int64)
 }\if{html}{\out{</div>}}
 
 Usage in a Keras model:
 
-\if{html}{\out{<div class="sourceCode python">}}\preformatted{x1 = keras.layers.Dense(8)(np.arange(10).reshape(5, 2))
-x2 = keras.layers.Dense(8)(np.arange(10, 20).reshape(5, 2))
-y = keras.layers.Dot(axes=1)([x1, x2])
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{x1 <- k_reshape(0:9, c(5, 2)) |> layer_dense(8)
+x2 <- k_reshape(10:19, c(5, 2)) |> layer_dense(8)
+x1$shape
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode">}}\preformatted{## TensorShape([5, 8])
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{x2$shape
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode">}}\preformatted{## TensorShape([5, 8])
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{y <- layer_dot(x1, x2, axes=2)
+y$shape
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode">}}\preformatted{## TensorShape([5, 1])
 }\if{html}{\out{</div>}}
 }
 

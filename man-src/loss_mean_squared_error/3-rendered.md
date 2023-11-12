@@ -6,6 +6,7 @@ Formula:
 ```python
 loss = mean(square(y_true - y_pred), axis=-1)
 ```
+
 Formula:
 
 ```python

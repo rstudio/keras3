@@ -16,30 +16,46 @@ Same as input shape.
 
 # Examples
 Discretize float values based on provided buckets.
-```python
-input = np.array([[-1.5, 1.0, 3.4, .5], [0.0, 3.0, 1.3, 0.0]])
-layer = Discretization(bin_boundaries=[0., 1., 2.])
-layer(input)
-# array([[0, 2, 3, 1],
-#        [1, 3, 2, 1]])
+
+```r
+input <- k_array(rbind(c(-1.5, 1, 3.4, 0.5),
+                       c(0, 3, 1.3, 0),
+                       c(-.5, 0, .5, 1),
+                       c(1.5, 2, 2.5, 3)))
+output <- input |> layer_discretization(bin_boundaries = c(0, 1, 2))
+output
+```
+
+```
+## tf.Tensor(
+## [[0 2 3 1]
+##  [1 3 2 1]
+##  [0 1 1 2]
+##  [2 3 3 3]], shape=(4, 4), dtype=int64)
 ```
 
 Discretize float values based on a number of buckets to compute.
-```python
-input = np.array([[-1.5, 1.0, 3.4, .5], [0.0, 3.0, 1.3, 0.0]])
-layer = Discretization(num_bins=4, epsilon=0.01)
-layer.adapt(input)
+
+```r
+layer <- layer_discretization(num_bins = 4, epsilon = 0.01)
+layer |> adapt(input)
 layer(input)
-# array([[0, 2, 3, 2],
-#        [1, 3, 3, 1]])
+```
+
+```
+## tf.Tensor(
+## [[0 2 3 1]
+##  [1 3 2 1]
+##  [0 1 1 2]
+##  [2 3 3 3]], shape=(4, 4), dtype=int64)
 ```
 
 @param bin_boundaries A list of bin boundaries.
     The leftmost and rightmost bins
-    will always extend to `-inf` and `inf`,
-    so `bin_boundaries=[0., 1., 2.]`
-    generates bins `(-inf, 0.)`, `[0., 1.)`, `[1., 2.)`,
-    and `[2., +inf)`.
+    will always extend to `-Inf` and `Inf`,
+    so `bin_boundaries = c(0, 1, 2)`
+    generates bins `(-Inf, 0)`, `[0, 1)`, `[1, 2)`,
+    and `[2, +Inf)`.
     If this option is set, `adapt()` should not be called.
 @param num_bins The integer number of bins to compute.
     If this option is set,
@@ -72,8 +88,8 @@ layer(input)
     Defaults to `"int"`.
 @param sparse Boolean. Only applicable to `"one_hot"`, `"multi_hot"`,
     and `"count"` output modes. Only supported with TensorFlow
-    backend. If `True`, returns a `SparseTensor` instead of
-    a dense `Tensor`. Defaults to `False`.
+    backend. If `TRUE`, returns a `SparseTensor` instead of
+    a dense `Tensor`. Defaults to `FALSE`.
 @param object Object to compose the layer with. A tensor, array, or sequential model.
 @param name String, name for the object
 @param dtype datatype (e.g., `"float32"`).
@@ -83,3 +99,4 @@ layer(input)
 @seealso
 + <https:/keras.io/api/layers/preprocessing_layers/numerical/discretization#discretization-class>
 + <https://www.tensorflow.org/api_docs/python/tf/keras/layers/Discretization>
+

@@ -24,44 +24,55 @@ i.e. maximum integer index + 1.}
 \item{output_dim}{Integer. Dimension of the dense embedding.}
 
 \item{embeddings_initializer}{Initializer for the \code{embeddings}
-matrix (see \code{keras.initializers}).}
+matrix (see \verb{keras::initializer_*}).}
 
 \item{embeddings_regularizer}{Regularizer function applied to
-the \code{embeddings} matrix (see \code{keras.regularizers}).}
+the \code{embeddings} matrix (see \verb{keras::regularizer_*}).}
 
 \item{embeddings_constraint}{Constraint function applied to
-the \code{embeddings} matrix (see \code{keras.constraints}).}
+the \code{embeddings} matrix (see \verb{keras::constraint_*}).}
 
 \item{mask_zero}{Boolean, whether or not the input value 0 is a special
 "padding" value that should be masked out.
 This is useful when using recurrent layers which
-may take variable length input. If this is \code{True},
+may take variable length input. If this is \code{TRUE},
 then all subsequent layers in the model need
 to support masking or an exception will be raised.
-If mask_zero is set to True, as a consequence,
-index 0 cannot be used in the vocabulary (input_dim should
+If \code{mask_zero} is set to \code{TRUE}, as a consequence,
+index 0 cannot be used in the vocabulary (\code{input_dim} should
 equal size of vocabulary + 1).}
 
-\item{...}{Passed on to the Python callable}
+\item{...}{For forward/backward compatability.}
 }
 \description{
-e.g. \verb{[[4], [20]] -> [[0.25, 0.1], [0.6, -0.2]]}
+e.g \verb{rbind(4L, 20L) --> rbind(c(0.25, 0.1), c(0.6, -0.2))}
+
+This layer can only be used on positive integer inputs of a fixed range.
 
 This layer can only be used on positive integer inputs of a fixed range.
 }
 \section{Examples}{
-\if{html}{\out{<div class="sourceCode python">}}\preformatted{model = keras.Sequential()
-model.add(keras.layers.Embedding(1000, 64, input_length=10))
-# The model will take as input an integer matrix of size (batch,
-# input_length), and the largest integer (i.e. word index) in the input
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{model <- keras_model_sequential() |>
+  layer_embedding(1000, 64)
+
+# The model will take as input an integer matrix of size (batch,input_length),
+# and the largest integer (i.e. word index) in the input
 # should be no larger than 999 (vocabulary size).
-# Now model.output_shape is (None, 10, 64), where `None` is the batch
+# Now model$output_shape is (NA, 10, 64), where `NA` is the batch
 # dimension.
-input_array = np.random.randint(1000, size=(32, 10))
-model.compile('rmsprop', 'mse')
-output_array = model.predict(input_array)
-print(output_array.shape)
-# (32, 10, 64)
+
+input_array <- random_integer(shape = c(32, 10), minval = 0, maxval = 1000)
+model |> compile('rmsprop', 'mse')
+output_array <- model |> predict(input_array)
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode">}}\preformatted{## 1/1 - 0s - 51ms/step
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{dim(output_array)    # (32, 10, 64)
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode">}}\preformatted{## [1] 32 10 64
 }\if{html}{\out{</div>}}
 }
 
@@ -70,8 +81,7 @@ print(output_array.shape)
 }
 
 \section{Output Shape}{
-\if{html}{\out{<div class="sourceCode">}}\preformatted{3D tensor with shape: `(batch_size, input_length, output_dim)`.
-}\if{html}{\out{</div>}}
+3D tensor with shape: \verb{(batch_size, input_length, output_dim)}.
 }
 
 \seealso{

@@ -37,6 +37,7 @@ Formula:
 Note that \code{y_pred} and \code{y_true} cannot be less or equal to 0. Negative
 values and 0 values will be replaced with \code{keras.backend.epsilon()}
 (default to \code{1e-7}).
+
 Formula:
 
 \if{html}{\out{<div class="sourceCode python">}}\preformatted{loss = mean(square(log(y_true + 1) - log(y_pred + 1)))

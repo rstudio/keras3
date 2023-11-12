@@ -37,6 +37,7 @@ Formula:
 }\if{html}{\out{</div>}}
 
 where \code{neg=maximum((1-y_true)*y_pred)} and \code{pos=sum(y_true*y_pred)}
+
 Formula:
 
 \if{html}{\out{<div class="sourceCode python">}}\preformatted{loss = maximum(neg - pos + 1, 0)

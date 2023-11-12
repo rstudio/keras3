@@ -6,6 +6,7 @@ Formula:
 ```python
 loss = mean(maximum(1 - y_true * y_pred, 0), axis=-1)
 ```
+
 Formula:
 
 ```python

@@ -30,7 +30,7 @@ axis expression sequence.}
 
 \item{output_shape}{The expected shape of the output tensor
 (excluding the batch dimension and any dimensions
-represented by ellipses). You can specify \code{None} for any dimension
+represented by ellipses). You can specify \code{NA} or \code{NULL} for any dimension
 that is unknown or can be inferred from the input shape.}
 
 \item{activation}{Activation function to use. If you don't specify anything,
@@ -66,15 +66,17 @@ This layer can perform einsum calculations of arbitrary dimensionality.
 
 This example shows how to instantiate a standard Keras dense layer using
 einsum operations. This example is equivalent to
-\code{keras.layers.Dense(64, use_bias=True)}.
+\code{layer_Dense(64, use_bias=TRUE)}.
 
-\if{html}{\out{<div class="sourceCode python">}}\preformatted{layer = keras.layers.EinsumDense("ab,bc->ac",
-                                      output_shape=64,
-                                      bias_axes="c")
-input_tensor = keras.Input(shape=[32])
-output_tensor = layer(input_tensor)
-output_tensor.shape
-# (None, 64)
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{input <- layer_input(shape = c(32))
+output <- input |>
+  layer_einsum_dense("ab,bc->ac",
+                     output_shape = 64,
+                     bias_axes = "c")
+output # shape: (NULL, 64)
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode">}}\preformatted{## <KerasTensor shape=(None, 64), dtype=float32, sparse=False, name=keras_tensor_1>
 }\if{html}{\out{</div>}}
 
 \strong{Applying a dense layer to a sequence}
@@ -82,16 +84,18 @@ output_tensor.shape
 This example shows how to instantiate a layer that applies the same dense
 operation to every element in a sequence. Here, the \code{output_shape} has two
 values (since there are two non-batch dimensions in the output); the first
-dimension in the \code{output_shape} is \code{None}, because the sequence dimension
+dimension in the \code{output_shape} is \code{NA}, because the sequence dimension
 \code{b} has an unknown shape.
 
-\if{html}{\out{<div class="sourceCode python">}}\preformatted{layer = keras.layers.EinsumDense("abc,cd->abd",
-                                      output_shape=(None, 64),
-                                      bias_axes="d")
-input_tensor = keras.Input(shape=[32, 128])
-output_tensor = layer(input_tensor)
-output_tensor.shape
-# (None, 32, 64)
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{input <- layer_input(shape = c(32, 128))
+output <- input |>
+  layer_einsum_dense("abc,cd->abd",
+                     output_shape = c(NA, 64),
+                     bias_axes = "d")
+output  #shape (NA, 32, 64)
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode">}}\preformatted{## <KerasTensor shape=(None, None, 64), dtype=float32, sparse=False, name=keras_tensor_3>
 }\if{html}{\out{</div>}}
 
 \strong{Applying a dense layer to a sequence using ellipses}
@@ -105,13 +109,16 @@ Because we are using ellipsis notation and have specified only one axis, the
 layer can handle any number of sequence dimensions - including the case
 where no sequence dimension exists.
 
-\if{html}{\out{<div class="sourceCode python">}}\preformatted{layer = keras.layers.EinsumDense("...x,xy->...y",
-                                      output_shape=64,
-                                      bias_axes="y")
-input_tensor = keras.Input(shape=[32, 128])
-output_tensor = layer(input_tensor)
-output_tensor.shape
-# (None, 32, 64)
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{input <- layer_input(shape = c(32, 128))
+output <- input |>
+  layer_einsum_dense("...x,xy->...y",
+                     output_shape = 64,
+                     bias_axes = "y")
+
+output  #shape (NA, 32, 64)
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode">}}\preformatted{## <KerasTensor shape=(None, 32, 64), dtype=float32, sparse=False, name=keras_tensor_5>
 }\if{html}{\out{</div>}}
 }
 

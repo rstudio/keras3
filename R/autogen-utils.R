@@ -21,7 +21,7 @@ function (object, features, output_mode = "concat", crosses = NULL,
     name = NULL, feature_names = NULL)
 {
     args <- capture_args2(list(crossing_dim = as_integer, hashing_dim = as_integer,
-        num_discretization_bins = as_integer, feature_names = as_integer),
+        num_discretization_bins = as_integer, features = as.list),
         ignore = "object")
     create_layer(keras$utils$FeatureSpace, object, args)
 }

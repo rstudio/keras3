@@ -171,4 +171,9 @@ keras.ops.scatter_update:
   indices: as_index
 
 # keras.layers.DepthwiseConv1D:
+keras.layers.EinsumDense:
+  output_shape: normalize_shape
+
+keras.utils.FeatureSpace:
+  features: as.list
 

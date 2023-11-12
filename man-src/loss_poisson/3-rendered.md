@@ -6,6 +6,7 @@ Formula:
 ```python
 loss = y_pred - y_true * log(y_pred)
 ```
+
 Formula:
 
 ```python

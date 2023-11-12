@@ -148,6 +148,22 @@ if(!"source:tools/translate-tools.R" %in% search()) envir::attach_source("tools/
 # TODO: get rid of this in params: @param ... Passed on to the Python callable
 
 # TODO: global doc search for None/True/False/[Tt]uple/[Dd]ict(ionary|\\b)
+#
+# TODO: layer_feature_space() needs many helpers for float_normalized() and friends
+#       output_mode = 'dict' should be 'named list' ?
+#
+# TODO: feature_space saving errors
+#
+# TODO: write a .git_reset() helper that restores everything except tools/*
+#
+# TODO: this shouldn't error (empty last arg should be no-op):
+if(FALSE) {
+  keras$utils$FeatureSpace$cross(
+    feature_names=c("string_values", "int_values"),
+    crossing_dim=32,
+    output_mode="int",
+  )
+}
 
 
 get_translations <- function() {

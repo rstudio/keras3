@@ -46,6 +46,7 @@ loss = mean(loss, axis=-1)
 }\if{html}{\out{</div>}}
 
 See: \href{https://en.wikipedia.org/wiki/Huber_loss}{Huber loss}.
+
 Formula:
 
 \if{html}{\out{<div class="sourceCode python">}}\preformatted{for x in error:

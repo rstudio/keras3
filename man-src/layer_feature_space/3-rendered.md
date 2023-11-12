@@ -1,6 +1,47 @@
 One-stop utility for preprocessing and encoding structured data.
 
 @description
+**Available feature types:**
+
+Note that all features can be referred to by their string name,
+e.g. `"integer_categorical"`. When using the string name, the default
+argument values are used.
+
+```python
+# Plain float values.
+FeatureSpace.float(name=None)
+
+# Float values to be preprocessed via featurewise standardization
+# (i.e. via a `keras.layers.Normalization` layer).
+FeatureSpace.float_normalized(name=None)
+
+# Float values to be preprocessed via linear rescaling
+# (i.e. via a `keras.layers.Rescaling` layer).
+FeatureSpace.float_rescaled(scale=1., offset=0., name=None)
+
+# Float values to be discretized. By default, the discrete
+# representation will then be one-hot encoded.
+FeatureSpace.float_discretized(
+    num_bins, bin_boundaries=None, output_mode="one_hot", name=None)
+
+# Integer values to be indexed. By default, the discrete
+# representation will then be one-hot encoded.
+FeatureSpace.integer_categorical(
+    max_tokens=None, num_oov_indices=1, output_mode="one_hot", name=None)
+
+# String values to be indexed. By default, the discrete
+# representation will then be one-hot encoded.
+FeatureSpace.string_categorical(
+    max_tokens=None, num_oov_indices=1, output_mode="one_hot", name=None)
+
+# Integer values to be hashed into a fixed number of bins.
+# By default, the discrete representation will then be one-hot encoded.
+FeatureSpace.integer_hashed(num_bins, output_mode="one_hot", name=None)
+
+# String values to be hashed into a fixed number of bins.
+# By default, the discrete representation will then be one-hot encoded.
+FeatureSpace.string_hashed(num_bins, output_mode="one_hot", name=None)
+```
 
 # Examples
 **Basic usage with a dict of input data:**
@@ -132,75 +173,28 @@ reloaded_feature_space = keras.models.load_model("featurespace.keras")
 ```
 
 @param feature_names Dict mapping the names of your features to their
-        type specification, e.g. `{"my_feature": "integer_categorical"}`
-        or `{"my_feature": FeatureSpace.integer_categorical()}`.
-        For a complete list of all supported types, see
-        "Available feature types" paragraph below.
-    output_mode: One of `"concat"` or `"dict"`. In concat mode, all
-        features get concatenated together into a single vector.
-        In dict mode, the FeatureSpace returns a dict of individually
-        encoded features (with the same keys as the input dict keys).
-    crosses: List of features to be crossed together, e.g.
-        `crosses=[("feature_1", "feature_2")]`. The features will be
-        "crossed" by hashing their combined value into
-        a fixed-length vector.
-    crossing_dim: Default vector size for hashing crossed features.
-        Defaults to `32`.
-    hashing_dim: Default vector size for hashing features of type
-        `"integer_hashed"` and `"string_hashed"`. Defaults to `32`.
-    num_discretization_bins: Default number of bins to be used for
-        discretizing features of type `"float_discretized"`.
-        Defaults to `32`.
-
-**Available feature types:**
-
-Note that all features can be referred to by their string name,
-e.g. `"integer_categorical"`. When using the string name, the default
-argument values are used.
-
-```python
-# Plain float values.
-FeatureSpace.float(name=None)
-
-# Float values to be preprocessed via featurewise standardization
-# (i.e. via a `keras.layers.Normalization` layer).
-FeatureSpace.float_normalized(name=None)
-
-# Float values to be preprocessed via linear rescaling
-# (i.e. via a `keras.layers.Rescaling` layer).
-FeatureSpace.float_rescaled(scale=1., offset=0., name=None)
-
-# Float values to be discretized. By default, the discrete
-# representation will then be one-hot encoded.
-FeatureSpace.float_discretized(
-    num_bins, bin_boundaries=None, output_mode="one_hot", name=None)
-
-# Integer values to be indexed. By default, the discrete
-# representation will then be one-hot encoded.
-FeatureSpace.integer_categorical(
-    max_tokens=None, num_oov_indices=1, output_mode="one_hot", name=None)
-
-# String values to be indexed. By default, the discrete
-# representation will then be one-hot encoded.
-FeatureSpace.string_categorical(
-    max_tokens=None, num_oov_indices=1, output_mode="one_hot", name=None)
-
-# Integer values to be hashed into a fixed number of bins.
-# By default, the discrete representation will then be one-hot encoded.
-FeatureSpace.integer_hashed(num_bins, output_mode="one_hot", name=None)
-
-# String values to be hashed into a fixed number of bins.
-# By default, the discrete representation will then be one-hot encoded.
-FeatureSpace.string_hashed(num_bins, output_mode="one_hot", name=None)
-```
+    type specification, e.g. `{"my_feature": "integer_categorical"}`
+    or `{"my_feature": FeatureSpace.integer_categorical()}`.
+    For a complete list of all supported types, see
+    "Available feature types" paragraph below.
+@param output_mode One of `"concat"` or `"dict"`. In concat mode, all
+    features get concatenated together into a single vector.
+    In dict mode, the FeatureSpace returns a dict of individually
+    encoded features (with the same keys as the input dict keys).
+@param crosses List of features to be crossed together, e.g.
+    `crosses=[("feature_1", "feature_2")]`. The features will be
+    "crossed" by hashing their combined value into
+    a fixed-length vector.
+@param crossing_dim Default vector size for hashing crossed features.
+    Defaults to `32`.
+@param hashing_dim Default vector size for hashing features of type
+    `"integer_hashed"` and `"string_hashed"`. Defaults to `32`.
+@param num_discretization_bins Default number of bins to be used for
+    discretizing features of type `"float_discretized"`.
+    Defaults to `32`.
 @param name String, name for the object
 @param object see description
 @param features see description
-@param output_mode see description
-@param crosses see description
-@param crossing_dim see description
-@param hashing_dim see description
-@param num_discretization_bins Integer
 
 @export
 @family preprocessing layers

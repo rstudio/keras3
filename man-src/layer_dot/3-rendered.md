@@ -9,34 +9,63 @@ Let's say `x` and `y` are the two input tensors with shapes
 `(2, 3, 5)` and `(2, 10, 3)`. The batch dimension should be
 of same size for both the inputs, and `axes` should correspond
 to the dimensions that have the same size in the corresponding
-inputs. e.g. with `axes=(1, 2)`, the dot product of `x`, and `y`
+inputs. e.g. with `axes = c(1, 2)`, the dot product of `x`, and `y`
 will result in a tensor with shape `(2, 5, 10)`
 
 # Examples
-```python
-x = np.arange(10).reshape(1, 5, 2)
-y = np.arange(10, 20).reshape(1, 2, 5)
-keras.layers.Dot(axes=(1, 2))([x, y])
+
+```r
+x <- k_reshape(0:9,   c(1, 5, 2))
+y <- k_reshape(10:19, c(1, 2, 5))
+layer_dot(x, y, axes=c(2, 3))
+```
+
+```
+## tf.Tensor(
+## [[[260 360]
+##   [320 445]]], shape=(1, 2, 2), dtype=int64)
 ```
 
 Usage in a Keras model:
 
-```python
-x1 = keras.layers.Dense(8)(np.arange(10).reshape(5, 2))
-x2 = keras.layers.Dense(8)(np.arange(10, 20).reshape(5, 2))
-y = keras.layers.Dot(axes=1)([x1, x2])
+
+```r
+x1 <- k_reshape(0:9, c(5, 2)) |> layer_dense(8)
+x2 <- k_reshape(10:19, c(5, 2)) |> layer_dense(8)
+x1$shape
+```
+
+```
+## TensorShape([5, 8])
+```
+
+```r
+x2$shape
+```
+
+```
+## TensorShape([5, 8])
+```
+
+```r
+y <- layer_dot(x1, x2, axes=2)
+y$shape
+```
+
+```
+## TensorShape([5, 1])
 ```
 
 @returns
     A tensor, the dot product of the samples from the inputs.
 
-@param axes Integer or tuple of integers, axis or axes along which to
-    take the dot product. If a tuple, should be two integers
+@param axes Integer or list of integers, axis or axes along which to
+    take the dot product. If a list, should be two integers
     corresponding to the desired axis from the first input and the
     desired axis from the second input, respectively. Note that the
     size of the two selected axes must match.
 @param normalize Whether to L2-normalize samples along the dot product axis
-    before taking the dot product. If set to `True`, then
+    before taking the dot product. If set to `TRUE`, then
     the output of the dot product is the cosine proximity
     between the two samples.
 @param ... Standard layer keyword arguments.

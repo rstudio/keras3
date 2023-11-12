@@ -75,6 +75,7 @@ weight balancing factor for the binary classes 0 and 1 as follows:
 \code{weight = alpha} for class 1 (\code{target == 1})
 \code{weight = 1 - alpha} for class 0
 where \code{alpha} is a float in the range of \verb{[0, 1]}.
+
 Binary cross-entropy loss is often used for binary (0 or 1) classification
 tasks. The loss function requires the following inputs:
 \itemize{

@@ -35,6 +35,7 @@ Formula:
 Division by zero is prevented by dividing by \code{maximum(y_true, epsilon)}
 where \code{epsilon = keras.backend.epsilon()}
 (default to \code{1e-7}).
+
 Formula:
 
 \if{html}{\out{<div class="sourceCode python">}}\preformatted{loss = 100 * mean(abs((y_true - y_pred) / y_true))

@@ -21,15 +21,25 @@ layer_feature_space(
 
 \item{features}{see description}
 
-\item{output_mode}{see description}
+\item{output_mode}{One of \code{"concat"} or \code{"dict"}. In concat mode, all
+features get concatenated together into a single vector.
+In dict mode, the FeatureSpace returns a dict of individually
+encoded features (with the same keys as the input dict keys).}
 
-\item{crosses}{see description}
+\item{crosses}{List of features to be crossed together, e.g.
+\verb{crosses=[("feature_1", "feature_2")]}. The features will be
+"crossed" by hashing their combined value into
+a fixed-length vector.}
 
-\item{crossing_dim}{see description}
+\item{crossing_dim}{Default vector size for hashing crossed features.
+Defaults to \code{32}.}
 
-\item{hashing_dim}{see description}
+\item{hashing_dim}{Default vector size for hashing features of type
+\code{"integer_hashed"} and \code{"string_hashed"}. Defaults to \code{32}.}
 
-\item{num_discretization_bins}{Integer}
+\item{num_discretization_bins}{Default number of bins to be used for
+discretizing features of type \code{"float_discretized"}.
+Defaults to \code{32}.}
 
 \item{name}{String, name for the object}
 
@@ -37,23 +47,9 @@ layer_feature_space(
 type specification, e.g. \code{{"my_feature": "integer_categorical"}}
 or \code{{"my_feature": FeatureSpace.integer_categorical()}}.
 For a complete list of all supported types, see
-"Available feature types" paragraph below.
-output_mode: One of \code{"concat"} or \code{"dict"}. In concat mode, all
-features get concatenated together into a single vector.
-In dict mode, the FeatureSpace returns a dict of individually
-encoded features (with the same keys as the input dict keys).
-crosses: List of features to be crossed together, e.g.
-\verb{crosses=[("feature_1", "feature_2")]}. The features will be
-"crossed" by hashing their combined value into
-a fixed-length vector.
-crossing_dim: Default vector size for hashing crossed features.
-Defaults to \code{32}.
-hashing_dim: Default vector size for hashing features of type
-\code{"integer_hashed"} and \code{"string_hashed"}. Defaults to \code{32}.
-num_discretization_bins: Default number of bins to be used for
-discretizing features of type \code{"float_discretized"}.
-Defaults to \code{32}.
-
+"Available feature types" paragraph below.}
+}
+\description{
 \strong{Available feature types:}
 
 Note that all features can be referred to by their string name,
@@ -93,10 +89,7 @@ FeatureSpace.integer_hashed(num_bins, output_mode="one_hot", name=None)
 # String values to be hashed into a fixed number of bins.
 # By default, the discrete representation will then be one-hot encoded.
 FeatureSpace.string_hashed(num_bins, output_mode="one_hot", name=None)
-}\if{html}{\out{</div>}}}
-}
-\description{
-One-stop utility for preprocessing and encoding structured data.
+}\if{html}{\out{</div>}}
 }
 \section{Examples}{
 \strong{Basic usage with a dict of input data:}

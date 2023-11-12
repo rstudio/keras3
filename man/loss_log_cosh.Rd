@@ -39,6 +39,7 @@ Note that \code{log(cosh(x))} is approximately equal to \code{(x ** 2) / 2} for 
 \code{x} and to \code{abs(x) - log(2)} for large \code{x}. This means that 'logcosh' works
 mostly like the mean squared error, but will not be so strongly affected by
 the occasional wildly incorrect prediction.
+
 Formula:
 
 \if{html}{\out{<div class="sourceCode python">}}\preformatted{error = y_pred - y_true

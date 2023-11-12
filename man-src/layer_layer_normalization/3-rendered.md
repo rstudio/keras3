@@ -92,7 +92,6 @@ Normalization layer with group size set to 1.
 @param gamma_constraint Optional constraint for the gamma weight.
     None by default.
 @param ... Base layer keyword arguments (e.g. `name` and `dtype`).
-
 @param object Object to compose the layer with. A tensor, array, or sequential model.
 
 @export

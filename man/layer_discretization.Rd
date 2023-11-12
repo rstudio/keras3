@@ -20,10 +20,10 @@ layer_discretization(
 
 \item{bin_boundaries}{A list of bin boundaries.
 The leftmost and rightmost bins
-will always extend to \code{-inf} and \code{inf},
-so \verb{bin_boundaries=[0., 1., 2.]}
-generates bins \verb{(-inf, 0.)}, \verb{[0., 1.)}, \verb{[1., 2.)},
-and \verb{[2., +inf)}.
+will always extend to \code{-Inf} and \code{Inf},
+so \code{bin_boundaries = c(0, 1, 2)}
+generates bins \verb{(-Inf, 0)}, \verb{[0, 1)}, \verb{[1, 2)},
+and \verb{[2, +Inf)}.
 If this option is set, \code{adapt()} should not be called.}
 
 \item{num_bins}{The integer number of bins to compute.
@@ -60,8 +60,8 @@ Defaults to \code{"int"}.}
 
 \item{sparse}{Boolean. Only applicable to \code{"one_hot"}, \code{"multi_hot"},
 and \code{"count"} output modes. Only supported with TensorFlow
-backend. If \code{True}, returns a \code{SparseTensor} instead of
-a dense \code{Tensor}. Defaults to \code{False}.}
+backend. If \code{TRUE}, returns a \code{SparseTensor} instead of
+a dense \code{Tensor}. Defaults to \code{FALSE}.}
 
 \item{dtype}{datatype (e.g., \code{"float32"}).}
 
@@ -86,21 +86,33 @@ Same as input shape.
 \section{Examples}{
 Discretize float values based on provided buckets.
 
-\if{html}{\out{<div class="sourceCode python">}}\preformatted{input = np.array([[-1.5, 1.0, 3.4, .5], [0.0, 3.0, 1.3, 0.0]])
-layer = Discretization(bin_boundaries=[0., 1., 2.])
-layer(input)
-# array([[0, 2, 3, 1],
-#        [1, 3, 2, 1]])
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{input <- k_array(rbind(c(-1.5, 1, 3.4, 0.5),
+                       c(0, 3, 1.3, 0),
+                       c(-.5, 0, .5, 1),
+                       c(1.5, 2, 2.5, 3)))
+output <- input |> layer_discretization(bin_boundaries = c(0, 1, 2))
+output
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor(
+## [[0 2 3 1]
+##  [1 3 2 1]
+##  [0 1 1 2]
+##  [2 3 3 3]], shape=(4, 4), dtype=int64)
 }\if{html}{\out{</div>}}
 
 Discretize float values based on a number of buckets to compute.
 
-\if{html}{\out{<div class="sourceCode python">}}\preformatted{input = np.array([[-1.5, 1.0, 3.4, .5], [0.0, 3.0, 1.3, 0.0]])
-layer = Discretization(num_bins=4, epsilon=0.01)
-layer.adapt(input)
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{layer <- layer_discretization(num_bins = 4, epsilon = 0.01)
+layer |> adapt(input)
 layer(input)
-# array([[0, 2, 3, 2],
-#        [1, 3, 3, 1]])
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor(
+## [[0 2 3 1]
+##  [1 3 2 1]
+##  [0 1 1 2]
+##  [2 3 3 3]], shape=(4, 4), dtype=int64)
 }\if{html}{\out{</div>}}
 }
 

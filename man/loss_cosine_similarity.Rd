@@ -45,6 +45,7 @@ setting where you try to maximize the proximity between predictions and
 targets. If either \code{y_true} or \code{y_pred} is a zero vector, cosine
 similarity will be 0 regardless of the proximity between predictions
 and targets.
+
 Note that it is a number between -1 and 1. When it is a negative number
 between -1 and 0, 0 indicates orthogonality and values closer to -1
 indicate greater similarity. This makes it usable as a loss function in a

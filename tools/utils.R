@@ -384,8 +384,11 @@ split_docstring_into_sections <- function(docstring) {
   m[1:2] <- m[1:2] %|% c("title", "description")
   m <- zoo::na.locf0(m)
 
-  # if(grepl("BatchNormalization", docstring))
-  #   browser()
+  # if(grepl("FeatureSpace"))
+  # If sections follow Args
+
+  # if(grepl("FeatureSpace", docstring)) browser()
+  # if(grepl("Leaky relu activation function.", docstring)) browser()
 
   # TODO: in BatchNormalization, there is more prose after "Reference:" section
   ind_lvl <- str_width(str_extract(x, "^[ ]*"))
@@ -400,6 +403,23 @@ split_docstring_into_sections <- function(docstring) {
 
     x[maybe_new_sec[1]] %<>% paste0("\n", .)
     x %<>% str_split_lines()
+  }
+
+  # keras.utils.FeatureSpace
+  if("arguments" %in% m) {
+    # check if args designation overflowed into another section
+    # args are always termianted by an empty line
+    is_arg <- m == "arguments"
+    w_is_arg <- which(is_arg)
+    new_lines_in_section <- which(is_arg & x == "")
+    for (i in new_lines_in_section) {
+      if (x[i + 1] == "" || ind_lvl[i + 1] == ind_lvl[w_is_arg[1]]) {
+        w_is_arg2 <- w_is_arg %>% .[. < i]
+        not_a <- setdiff(w_is_arg, w_is_arg2)
+        if (length(not_a))
+          m[not_a] <- "description"
+      }
+    }
   }
 
   sections <- split(x, m) |>
@@ -1665,6 +1685,12 @@ git <- function(..., retries = 4L, valid_exit_codes = 0L) {
   }
 }
 
+git_reset <- function(..., except = "./tools") {
+  git("stash push --", ..., except)
+  git("reset --hard")
+  git("stash pop")
+}
+
 
 man_src_pull_upstream_updates <- function(directories = dir_ls("man-src/", type = "directory")) {
   message(deparse1(sys.call()))
@@ -1768,6 +1794,8 @@ endpoint_to_expr <- function(endpoint) {
     glue::backtick() |> str_flatten("$") |> str2lang()
   py_obj_expr
 }
+
+
 
 # rename2(list(a = "b", a = z))
 

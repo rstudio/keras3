@@ -76,7 +76,6 @@ w = w - current_lr * m / (u + epsilon)
   variables. Useful for preventing underflow during mixed precision
   training. Alternately, `keras.optimizers.LossScaleOptimizer` will
   automatically set a loss scale factor.
-
 @param name String, name for the object
 @param ... Passed on to the Python callable
 

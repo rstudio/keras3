@@ -8,16 +8,20 @@ This layer can perform einsum calculations of arbitrary dimensionality.
 
 This example shows how to instantiate a standard Keras dense layer using
 einsum operations. This example is equivalent to
-`keras.layers.Dense(64, use_bias=True)`.
+`layer_Dense(64, use_bias=TRUE)`.
 
-```python
-layer = keras.layers.EinsumDense("ab,bc->ac",
-                                      output_shape=64,
-                                      bias_axes="c")
-input_tensor = keras.Input(shape=[32])
-output_tensor = layer(input_tensor)
-output_tensor.shape
-# (None, 64)
+
+```r
+input <- layer_input(shape = c(32))
+output <- input |>
+  layer_einsum_dense("ab,bc->ac",
+                     output_shape = 64,
+                     bias_axes = "c")
+output # shape: (NULL, 64)
+```
+
+```
+## <KerasTensor shape=(None, 64), dtype=float32, sparse=False, name=keras_tensor_1>
 ```
 
 **Applying a dense layer to a sequence**
@@ -25,17 +29,21 @@ output_tensor.shape
 This example shows how to instantiate a layer that applies the same dense
 operation to every element in a sequence. Here, the `output_shape` has two
 values (since there are two non-batch dimensions in the output); the first
-dimension in the `output_shape` is `None`, because the sequence dimension
+dimension in the `output_shape` is `NA`, because the sequence dimension
 `b` has an unknown shape.
 
-```python
-layer = keras.layers.EinsumDense("abc,cd->abd",
-                                      output_shape=(None, 64),
-                                      bias_axes="d")
-input_tensor = keras.Input(shape=[32, 128])
-output_tensor = layer(input_tensor)
-output_tensor.shape
-# (None, 32, 64)
+
+```r
+input <- layer_input(shape = c(32, 128))
+output <- input |>
+  layer_einsum_dense("abc,cd->abd",
+                     output_shape = c(NA, 64),
+                     bias_axes = "d")
+output  #shape (NA, 32, 64)
+```
+
+```
+## <KerasTensor shape=(None, None, 64), dtype=float32, sparse=False, name=keras_tensor_3>
 ```
 
 **Applying a dense layer to a sequence using ellipses**
@@ -49,14 +57,19 @@ Because we are using ellipsis notation and have specified only one axis, the
 layer can handle any number of sequence dimensions - including the case
 where no sequence dimension exists.
 
-```python
-layer = keras.layers.EinsumDense("...x,xy->...y",
-                                      output_shape=64,
-                                      bias_axes="y")
-input_tensor = keras.Input(shape=[32, 128])
-output_tensor = layer(input_tensor)
-output_tensor.shape
-# (None, 32, 64)
+
+```r
+input <- layer_input(shape = c(32, 128))
+output <- input |>
+  layer_einsum_dense("...x,xy->...y",
+                     output_shape = 64,
+                     bias_axes = "y")
+
+output  #shape (NA, 32, 64)
+```
+
+```
+## <KerasTensor shape=(None, 32, 64), dtype=float32, sparse=False, name=keras_tensor_5>
 ```
 
 @param equation An equation describing the einsum to perform.
@@ -66,7 +79,7 @@ output_tensor.shape
     axis expression sequence.
 @param output_shape The expected shape of the output tensor
     (excluding the batch dimension and any dimensions
-    represented by ellipses). You can specify `None` for any dimension
+    represented by ellipses). You can specify `NA` or `NULL` for any dimension
     that is unknown or can be inferred from the input shape.
 @param activation Activation function to use. If you don't specify anything,
     no activation is applied
@@ -90,3 +103,4 @@ output_tensor.shape
 @family core layers
 @seealso
 + <https://www.tensorflow.org/api_docs/python/tf/keras/layers/EinsumDense>
+

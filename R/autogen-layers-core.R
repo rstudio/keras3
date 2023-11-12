@@ -27,8 +27,8 @@ function (object, equation, output_shape, activation = NULL,
     kernel_constraint = NULL, bias_constraint = NULL, ...)
 {
     args <- capture_args2(list(input_shape = normalize_shape,
-        batch_size = as_integer, batch_input_shape = normalize_shape),
-        ignore = "object")
+        batch_size = as_integer, batch_input_shape = normalize_shape,
+        output_shape = normalize_shape), ignore = "object")
     create_layer(keras$layers$EinsumDense, object, args)
 }
 

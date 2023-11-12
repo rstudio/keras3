@@ -3,15 +3,23 @@ Flattens the input. Does not affect the batch size.
 @description
 
 # Note
-If inputs are shaped `(batch,)` without a feature axis, then
+If inputs are shaped `(batch)` without a feature axis, then
 flattening adds an extra channel dimension and output shape is `(batch, 1)`.
 
 # Examples
-```python
-x = keras.Input(shape=(10, 64))
-y = keras.layers.Flatten()(x)
-y.shape
-# (None, 640)
+
+```r
+x <- layer_input(shape=c(10, 64))
+y <- x |> layer_flatten()
+y$shape
+```
+
+```
+## [[1]]
+## NULL
+##
+## [[2]]
+## [1] 640
 ```
 
 @param data_format A string, one of `"channels_last"` (default) or

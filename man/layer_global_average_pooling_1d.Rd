@@ -23,10 +23,10 @@ value found in your Keras config file at \verb{~/.keras/keras.json}.
 If you never set it, then it will be \code{"channels_last"}.}
 
 \item{keepdims}{A boolean, whether to keep the temporal dimension or not.
-If \code{keepdims} is \code{False} (default), the rank of the tensor is
-reduced for spatial dimensions. If \code{keepdims} is \code{True}, the
+If \code{keepdims} is \code{FALSE} (default), the rank of the tensor is
+reduced for spatial dimensions. If \code{keepdims} is \code{TRUE}, the
 temporal dimension are retained with length 1.
-The behavior is the same as for \code{tf.reduce_mean} or \code{np.mean}.}
+The behavior is the same as for \code{tf$reduce_mean()} or \code{k_mean()}.}
 
 \item{...}{Passed on to the Python callable}
 }
@@ -54,9 +54,9 @@ a given step should be masked (excluded from the average).
 
 \section{Output Shape}{
 \itemize{
-\item If \code{keepdims=False}:
+\item If \code{keepdims=FALSE}:
 2D tensor with shape \verb{(batch_size, features)}.
-\item If \code{keepdims=True}:
+\item If \code{keepdims=TRUE}:
 \itemize{
 \item If \code{data_format="channels_last"}:
 3D tensor with shape \verb{(batch_size, 1, features)}
@@ -67,10 +67,12 @@ a given step should be masked (excluded from the average).
 }
 
 \section{Examples}{
-\if{html}{\out{<div class="sourceCode python">}}\preformatted{x = np.random.rand(2, 3, 4)
-y = keras.layers.GlobalAveragePooling1D()(x)
-y.shape
-# (2, 4)
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{x <- random_uniform(c(2, 3, 4))
+y <- x |> layer_global_average_pooling_1d()
+y$shape
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode">}}\preformatted{## TensorShape([2, 4])
 }\if{html}{\out{</div>}}
 }
 
