@@ -35,11 +35,11 @@ inference on CPU. Thus it has separate biases for `kernel` and
 For example:
 
 ```{r}
-inputs <- random_uniform(c((32, 10, 8))
+inputs <- random_uniform(c(32, 10, 8))
 outputs <- inputs |> layer_gru(4)
-output$shape
+outputs$shape
 # (32, 4)
-gru <- layer_GRU(,4, return_sequences=TRUE, return_state=TRUE)
+gru <- layer_gru(, 4, return_sequences = TRUE, return_state = TRUE)
 c(whole_sequence_output, final_state) %<-% gru(inputs)
 whole_sequence_output$shape
 final_state$shape
