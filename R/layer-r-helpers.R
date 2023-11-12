@@ -365,7 +365,10 @@ adapt <- function(object, data, ..., batch_size=NULL, steps=NULL) {
   args <- capture_args(match.call(),
     list(batch_size = as_nullable_integer,
          step = as_nullable_integer),
-    ignore = "object")
+    ignore = c("object", "data"))
+  # `data` named to `dataset` in keras3 keras.utils.FeatureSpace
+  # pass it as a positional arg
+  args <- c(list(data), args)
   do.call(object$adapt, args)
   invisible(object)
 }
