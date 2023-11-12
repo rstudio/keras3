@@ -16,31 +16,27 @@ This class processes one step within the whole time sequence input, whereas
     `recurrent_dropout` is used.
 
 # Examples
-```python
-inputs = np.random.random((32, 10, 8))
-rnn = keras.layers.RNN(keras.layers.GRUCell(4))
-output = rnn(inputs)
-output.shape
-# (32, 4)
-rnn = keras.layers.RNN(
-   keras.layers.GRUCell(4),
-   return_sequences=True,
-   return_state=True)
-whole_sequence_output, final_state = rnn(inputs)
-whole_sequence_output.shape
-# (32, 10, 4)
-final_state.shape
-# (32, 4)
+```{r}
+inputs <- random_uniform(c(32, 10, 8))
+outputs <- inputs |> layer_rnn(layer_gru_cell(4))
+outputs$shape
+rnn <- layer_rnn(
+   cell = layer_gru_cell(4),
+   return_sequences=TRUE,
+   return_state=TRUE)
+c(whole_sequence_output, final_state) %<-% rnn(inputs)
+whole_sequence_output$shape
+final_state$shape
 ```
 
 @param units Positive integer, dimensionality of the output space.
 @param activation Activation function to use. Default: hyperbolic tangent
-    (`tanh`). If you pass None, no activation is applied
+    (`tanh`). If you pass `NULL`, no activation is applied
     (ie. "linear" activation: `a(x) = x`).
 @param recurrent_activation Activation function to use for the recurrent step.
-    Default: sigmoid (`sigmoid`). If you pass `None`, no activation is
+    Default: sigmoid (`sigmoid`). If you pass `NULL`, no activation is
     applied (ie. "linear" activation: `a(x) = x`).
-@param use_bias Boolean, (default `True`), whether the layer
+@param use_bias Boolean, (default `TRUE`), whether the layer
     should use a bias vector.
 @param kernel_initializer Initializer for the `kernel` weights matrix,
     used for the linear transformation of the inputs. Default:
@@ -50,24 +46,24 @@ final_state.shape
     of the recurrent state. Default: `"orthogonal"`.
 @param bias_initializer Initializer for the bias vector. Default: `"zeros"`.
 @param kernel_regularizer Regularizer function applied to the `kernel` weights
-    matrix. Default: `None`.
+    matrix. Default: `NULL`.
 @param recurrent_regularizer Regularizer function applied to the
-    `recurrent_kernel` weights matrix. Default: `None`.
+    `recurrent_kernel` weights matrix. Default: `NULL`.
 @param bias_regularizer Regularizer function applied to the bias vector.
-    Default: `None`.
+    Default: `NULL`.
 @param kernel_constraint Constraint function applied to the `kernel` weights
-    matrix. Default: `None`.
+    matrix. Default: `NULL`.
 @param recurrent_constraint Constraint function applied to the
-    `recurrent_kernel` weights matrix. Default: `None`.
+    `recurrent_kernel` weights matrix. Default: `NULL`.
 @param bias_constraint Constraint function applied to the bias vector.
-    Default: `None`.
+    Default: `NULL`.
 @param dropout Float between 0 and 1. Fraction of the units to drop for the
     linear transformation of the inputs. Default: 0.
 @param recurrent_dropout Float between 0 and 1. Fraction of the units to drop
     for the linear transformation of the recurrent state. Default: 0.
 @param reset_after GRU convention (whether to apply reset gate after or
-    before matrix multiplication). False = "before",
-    True = "after" (default and cuDNN compatible).
+    before matrix multiplication). `FALSE` = `"before"`,
+    `TRUE` = `"after"` (default and cuDNN compatible).
 @param seed Random seed for dropout.
 @param ... Passed on to the Python callable
 
