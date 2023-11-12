@@ -1691,6 +1691,13 @@ git_reset <- function(..., except = "./tools") {
   git("stash pop")
 }
 
+view_translation_diff <- function(r_name) {
+  system2("code", c("--diff",
+    sprintf("man-src/%s/1-formatted.md", r_name),
+    sprintf("man-src/%s/2-translated.Rmd", r_name)
+  ))
+}
+
 
 man_src_pull_upstream_updates <- function(directories = dir_ls("man-src/", type = "directory")) {
   message(deparse1(sys.call()))
