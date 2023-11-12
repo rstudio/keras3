@@ -45,9 +45,7 @@ equal size of vocabulary + 1).}
 \item{...}{For forward/backward compatability.}
 }
 \description{
-e.g \verb{rbind(4L, 20L) --> rbind(c(0.25, 0.1), c(0.6, -0.2))}
-
-This layer can only be used on positive integer inputs of a fixed range.
+e.g. \code{rbind(4L, 20L)} \eqn{\rightarrow}{->} \code{rbind(c(0.25, 0.1), c(0.6, -0.2))}
 
 This layer can only be used on positive integer inputs of a fixed range.
 }
@@ -63,13 +61,8 @@ This layer can only be used on positive integer inputs of a fixed range.
 
 input_array <- random_integer(shape = c(32, 10), minval = 0, maxval = 1000)
 model |> compile('rmsprop', 'mse')
-output_array <- model |> predict(input_array)
-}\if{html}{\out{</div>}}
-
-\if{html}{\out{<div class="sourceCode">}}\preformatted{## 1/1 - 0s - 49ms/step
-}\if{html}{\out{</div>}}
-
-\if{html}{\out{<div class="sourceCode r">}}\preformatted{dim(output_array)    # (32, 10, 64)
+output_array <- model |> predict(input_array, verbose = 0)
+dim(output_array)    # (32, 10, 64)
 }\if{html}{\out{</div>}}
 
 \if{html}{\out{<div class="sourceCode">}}\preformatted{## [1] 32 10 64

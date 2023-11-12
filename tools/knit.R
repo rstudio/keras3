@@ -59,6 +59,10 @@ knit_man_src <- function(input, ..., output_dir) {
   # message("Done!    file.edit('", file.path(dir, "3-rendered.md"), "')")
 }
 
+.GlobalEnv$.Last <- function() {
+  message("Finished!")
+}
+
 
 knit_vignette <- function(input, ..., output_dir) {
   # print(sys.call())

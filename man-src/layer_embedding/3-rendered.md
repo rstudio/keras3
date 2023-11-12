@@ -1,9 +1,7 @@
 Turns positive integers (indexes) into dense vectors of fixed size.
 
 @description
-e.g `rbind(4L, 20L) --> rbind(c(0.25, 0.1), c(0.6, -0.2))`
-
-This layer can only be used on positive integer inputs of a fixed range.
+e.g. `rbind(4L, 20L)` \eqn{\rightarrow}{->} `rbind(c(0.25, 0.1), c(0.6, -0.2))`
 
 This layer can only be used on positive integer inputs of a fixed range.
 
@@ -21,14 +19,7 @@ model <- keras_model_sequential() |>
 
 input_array <- random_integer(shape = c(32, 10), minval = 0, maxval = 1000)
 model |> compile('rmsprop', 'mse')
-output_array <- model |> predict(input_array)
-```
-
-```
-## 1/1 - 0s - 49ms/step
-```
-
-```r
+output_array <- model |> predict(input_array, verbose = 0)
 dim(output_array)    # (32, 10, 64)
 ```
 
