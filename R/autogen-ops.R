@@ -41,6 +41,14 @@ function (lower, upper, body_fun, init_val)
 keras$ops$fori_loop(lower, upper, body_fun, init_val)
 
 
+"man-src/k_is_tensor.Rmd" # |>file.edit() # or cmd+click to edit man page
+"man-src/k_is_tensor/0-upstream.md" # view the upstream doc
+#' @eval readLines("man-src/k_is_tensor/3-rendered.md")
+k_is_tensor <-
+function (x)
+keras$ops$is_tensor(x)
+
+
 "man-src/k_scatter.Rmd" # |>file.edit() # or cmd+click to edit man page
 "man-src/k_scatter/0-upstream.md" # view the upstream doc
 #' @eval readLines("man-src/k_scatter/3-rendered.md")

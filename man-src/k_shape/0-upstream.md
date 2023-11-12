@@ -4,7 +4,7 @@ __signature__
 __doc__
 Gets the shape of the tensor input.
 
-Note: On the tensorflow backend, when `x` is a `tf.Tensor` with dynamic
+Note: On the TensorFlow backend, when `x` is a `tf.Tensor` with dynamic
 shape, dimensions which are dynamic in the context of a compiled function
 will have a `tf.Tensor` value instead of a static integer value.
 
