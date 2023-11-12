@@ -154,9 +154,12 @@ if(!"source:tools/translate-tools.R" %in% search()) envir::attach_source("tools/
 #
 # TODO: feature_space saving errors
 #
+# TODO: layer_lambda docs: bring back section on serialization and limitations after
+#       fixing serialization.
+#
 # TODO: write a .git_reset() helper that restores everything except tools/*
 #
-# TODO: a layer_hashed_crossing() instance should have a customized wrapper that 
+# TODO: a layer_hashed_crossing() instance should have a customized wrapper that
 #       splices in the args, so instead of layer(list(a, b)), you can do layer(a, b)
 #       also, the example should maybe be nicer, with a named list/dict being passed,
 #       instead of a tuple

@@ -177,3 +177,6 @@ keras.layers.EinsumDense:
 keras.utils.FeatureSpace:
   features: as.list
 
+keras.layers.HashedCrossing:
+  num_bins: as_integer
+
