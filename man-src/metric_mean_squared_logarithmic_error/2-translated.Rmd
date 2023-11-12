@@ -13,6 +13,7 @@ loss = mean(square(log(y_true + 1) - log(y_pred + 1)), axis=-1)
 Note that `y_pred` and `y_true` cannot be less or equal to 0. Negative
 values and 0 values will be replaced with `keras.backend.epsilon()`
 (default to `1e-7`).
+
 Formula:
 
 ```python

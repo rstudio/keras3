@@ -60,7 +60,6 @@ Nesterov momentum.
   variables. Useful for preventing underflow during mixed precision
   training. Alternately, `keras.optimizers.LossScaleOptimizer` will
   automatically set a loss scale factor.
-
 @param ... Passed on to the Python callable
 
 @export

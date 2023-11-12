@@ -58,7 +58,6 @@ output = random_bright(image, training=True)
     The brightness adjustment will be scaled to this range, and the
     output values will be clipped to this range.
 @param seed optional integer, for fixed RNG behavior.
-
 @param object Object to compose the layer with. A tensor, array, or sequential model.
 @param ... Passed on to the Python callable
 

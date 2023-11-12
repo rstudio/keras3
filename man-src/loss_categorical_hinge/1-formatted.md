@@ -8,6 +8,7 @@ loss = maximum(neg - pos + 1, 0)
 ```
 
 where `neg=maximum((1-y_true)*y_pred)` and `pos=sum(y_true*y_pred)`
+
 Formula:
 
 ```python

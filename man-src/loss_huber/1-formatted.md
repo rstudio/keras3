@@ -12,6 +12,7 @@ for x in error:
 loss = mean(loss, axis=-1)
 ```
 See: [Huber loss](https://en.wikipedia.org/wiki/Huber_loss).
+
 Formula:
 
 ```python

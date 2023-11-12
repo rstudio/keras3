@@ -7,6 +7,7 @@ Computes the mean absolute error between the labels and predictions.
 ```python
 loss = mean(abs(y_true - y_pred), axis=-1)
 ```
+
 Formula:
 
 ```python
