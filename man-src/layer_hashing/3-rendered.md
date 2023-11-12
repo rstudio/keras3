@@ -29,54 +29,74 @@ to use this layer.
 
 **Example (FarmHash64)**
 
-```python
-layer = keras.layers.Hashing(num_bins=3)
-inp = [['A'], ['B'], ['C'], ['D'], ['E']]
+
+```r
+layer <- layer_hashing(num_bins = 3)
+inp <- c('A', 'B', 'C', 'D', 'E') |> array(dim = c(5, 1))
 layer(inp)
-# array([[1],
-#         [0],
-#         [1],
-#         [1],
-#         [2]])>
+```
+
+```
+## tf.Tensor(
+## [[1]
+##  [0]
+##  [1]
+##  [1]
+##  [2]], shape=(5, 1), dtype=int64)
 ```
 
 **Example (FarmHash64) with a mask value**
 
-```python
-layer = keras.layers.Hashing(num_bins=3, mask_value='')
-inp = [['A'], ['B'], [''], ['C'], ['D']]
+
+```r
+layer <- layer_hashing(num_bins=3, mask_value='')
+inp <- c('A', 'B', '', 'C', 'D') |> array(dim = c(5, 1))
 layer(inp)
-# array([[1],
-#         [1],
-#         [0],
-#         [2],
-#         [2]])
+```
+
+```
+## tf.Tensor(
+## [[1]
+##  [1]
+##  [0]
+##  [2]
+##  [2]], shape=(5, 1), dtype=int64)
 ```
 
 **Example (SipHash64)**
 
-```python
-layer = keras.layers.Hashing(num_bins=3, salt=[133, 137])
-inp = [['A'], ['B'], ['C'], ['D'], ['E']]
+
+```r
+layer <- layer_hashing(num_bins=3, salt=c(133, 137))
+inp <- c('A', 'B', 'C', 'D', 'E') |> array(dim = c(5, 1))
 layer(inp)
-# array([[1],
-#         [2],
-#         [1],
-#         [0],
-#         [2]])
+```
+
+```
+## tf.Tensor(
+## [[1]
+##  [2]
+##  [1]
+##  [0]
+##  [2]], shape=(5, 1), dtype=int64)
 ```
 
 **Example (Siphash64 with a single integer, same as `salt=[133, 133]`)**
 
-```python
-layer = keras.layers.Hashing(num_bins=3, salt=133)
-inp = [['A'], ['B'], ['C'], ['D'], ['E']]
+
+```r
+layer <- layer_hashing(num_bins=3, salt=133)
+inp <- c('A', 'B', 'C', 'D', 'E') |> array(dim = c(5, 1))
 layer(inp)
-# array([[0],
-#         [0],
-#         [2],
-#         [1],
-#         [0]])
+```
+
+```
+## tf.Tensor(
+## [[0]
+##  [0]
+##  [2]
+##  [1]
+##  [0]], shape=(5, 1), dtype=int64)
 ```
 
 # Input Shape
@@ -93,16 +113,16 @@ An `int32` tensor of shape `(batch_size, ...)`.
     bin, so the effective number of bins is `(num_bins - 1)`
     if `mask_value` is set.
 @param mask_value A value that represents masked inputs, which are mapped to
-    index 0. `None` means no mask term will be added and the
-    hashing will start at index 0. Defaults to `None`.
-@param salt A single unsigned integer or None.
+    index 0. `NULL` means no mask term will be added and the
+    hashing will start at index 0. Defaults to `NULL`.
+@param salt A single unsigned integer or `NULL`.
     If passed, the hash function used will be SipHash64,
     with these values used as an additional input
     (known as a "salt" in cryptography).
-    These should be non-zero. If `None`, uses the FarmHash64 hash
-    function. It also supports tuple/list of 2 unsigned
+    These should be non-zero. If `NULL`, uses the FarmHash64 hash
+    function. It also supports list of 2 unsigned
     integer numbers, see reference paper for details.
-    Defaults to `None`.
+    Defaults to `NULL`.
 @param output_mode Specification for the output of the layer. Values can be
     `"int"`, `"one_hot"`, `"multi_hot"`, or
     `"count"` configuring the layer as follows:
@@ -125,8 +145,8 @@ An `int32` tensor of shape `(batch_size, ...)`.
     Defaults to `"int"`.
 @param sparse Boolean. Only applicable to `"one_hot"`, `"multi_hot"`,
     and `"count"` output modes. Only supported with TensorFlow
-    backend. If `True`, returns a `SparseTensor` instead of
-    a dense `Tensor`. Defaults to `False`.
+    backend. If `TRUE`, returns a `SparseTensor` instead of
+    a dense `Tensor`. Defaults to `FALSE`.
 @param ... Keyword arguments to construct a layer.
 @param object Object to compose the layer with. A tensor, array, or sequential model.
 
@@ -135,3 +155,4 @@ An `int32` tensor of shape `(batch_size, ...)`.
 @seealso
 + <https:/keras.io/api/layers/preprocessing_layers/categorical/hashing#hashing-class>
 + <https://www.tensorflow.org/api_docs/python/tf/keras/layers/Hashing>
+

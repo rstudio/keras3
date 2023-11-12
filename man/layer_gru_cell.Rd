@@ -29,14 +29,14 @@ layer_gru_cell(
 \item{units}{Positive integer, dimensionality of the output space.}
 
 \item{activation}{Activation function to use. Default: hyperbolic tangent
-(\code{tanh}). If you pass None, no activation is applied
+(\code{tanh}). If you pass \code{NULL}, no activation is applied
 (ie. "linear" activation: \code{a(x) = x}).}
 
 \item{recurrent_activation}{Activation function to use for the recurrent step.
-Default: sigmoid (\code{sigmoid}). If you pass \code{None}, no activation is
+Default: sigmoid (\code{sigmoid}). If you pass \code{NULL}, no activation is
 applied (ie. "linear" activation: \code{a(x) = x}).}
 
-\item{use_bias}{Boolean, (default \code{True}), whether the layer
+\item{use_bias}{Boolean, (default \code{TRUE}), whether the layer
 should use a bias vector.}
 
 \item{kernel_initializer}{Initializer for the \code{kernel} weights matrix,
@@ -50,22 +50,22 @@ of the recurrent state. Default: \code{"orthogonal"}.}
 \item{bias_initializer}{Initializer for the bias vector. Default: \code{"zeros"}.}
 
 \item{kernel_regularizer}{Regularizer function applied to the \code{kernel} weights
-matrix. Default: \code{None}.}
+matrix. Default: \code{NULL}.}
 
 \item{recurrent_regularizer}{Regularizer function applied to the
-\code{recurrent_kernel} weights matrix. Default: \code{None}.}
+\code{recurrent_kernel} weights matrix. Default: \code{NULL}.}
 
 \item{bias_regularizer}{Regularizer function applied to the bias vector.
-Default: \code{None}.}
+Default: \code{NULL}.}
 
 \item{kernel_constraint}{Constraint function applied to the \code{kernel} weights
-matrix. Default: \code{None}.}
+matrix. Default: \code{NULL}.}
 
 \item{recurrent_constraint}{Constraint function applied to the
-\code{recurrent_kernel} weights matrix. Default: \code{None}.}
+\code{recurrent_kernel} weights matrix. Default: \code{NULL}.}
 
 \item{bias_constraint}{Constraint function applied to the bias vector.
-Default: \code{None}.}
+Default: \code{NULL}.}
 
 \item{dropout}{Float between 0 and 1. Fraction of the units to drop for the
 linear transformation of the inputs. Default: 0.}
@@ -74,8 +74,8 @@ linear transformation of the inputs. Default: 0.}
 for the linear transformation of the recurrent state. Default: 0.}
 
 \item{reset_after}{GRU convention (whether to apply reset gate after or
-before matrix multiplication). False = "before",
-True = "after" (default and cuDNN compatible).}
+before matrix multiplication). \code{FALSE} = \code{"before"},
+\code{TRUE} = \code{"after"} (default and cuDNN compatible).}
 
 \item{seed}{Random seed for dropout.}
 
@@ -97,20 +97,29 @@ training mode or in inference mode. Only relevant when \code{dropout} or
 }
 
 \section{Examples}{
-\if{html}{\out{<div class="sourceCode python">}}\preformatted{inputs = np.random.random((32, 10, 8))
-rnn = keras.layers.RNN(keras.layers.GRUCell(4))
-output = rnn(inputs)
-output.shape
-# (32, 4)
-rnn = keras.layers.RNN(
-   keras.layers.GRUCell(4),
-   return_sequences=True,
-   return_state=True)
-whole_sequence_output, final_state = rnn(inputs)
-whole_sequence_output.shape
-# (32, 10, 4)
-final_state.shape
-# (32, 4)
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{inputs <- random_uniform(c(32, 10, 8))
+outputs <- inputs |> layer_rnn(layer_gru_cell(4))
+outputs$shape
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode">}}\preformatted{## TensorShape([32, 4])
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{rnn <- layer_rnn(
+   cell = layer_gru_cell(4),
+   return_sequences=TRUE,
+   return_state=TRUE)
+c(whole_sequence_output, final_state) \%<-\% rnn(inputs)
+whole_sequence_output$shape
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode">}}\preformatted{## TensorShape([32, 10, 4])
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{final_state$shape
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode">}}\preformatted{## TensorShape([32, 4])
 }\if{html}{\out{</div>}}
 }
 

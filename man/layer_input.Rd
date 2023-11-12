@@ -15,11 +15,11 @@ layer_input(
 )
 }
 \arguments{
-\item{shape}{A shape tuple (tuple of integers or \code{None} objects),
+\item{shape}{A shape list (list of integers or \code{NULL} objects),
 not including the batch size.
-For instance, \verb{shape=(32,)} indicates that the expected input
-will be batches of 32-dimensional vectors. Elements of this tuple
-can be \code{None}; \code{None} elements represent dimensions where the shape
+For instance, \code{shape = c(32)} indicates that the expected input
+will be batches of 32-dimensional vectors. Elements of this list
+can be \code{NULL} or \code{NA}; \code{NULL}/\code{NA} elements represent dimensions where the shape
 is not known and may vary (e.g. sequence length).}
 
 \item{batch_size}{Optional static batch size (integer).}
@@ -28,10 +28,10 @@ is not known and may vary (e.g. sequence length).}
 (e.g. \code{"float32"}, \code{"int32"}...)}
 
 \item{sparse}{A boolean specifying whether the expected input will be sparse
-tensors. Note that, if \code{sparse} is \code{False}, sparse tensors can still
+tensors. Note that, if \code{sparse} is \code{FALSE}, sparse tensors can still
 be passed into the input - they will be densified with a default
 value of 0. This feature is only supported with the TensorFlow
-backend. Defaults to \code{False}.}
+backend. Defaults to \code{FALSE}.}
 
 \item{batch_shape}{Shape, including the batch dim.}
 
@@ -53,13 +53,13 @@ inputs and outputs of the model.
 
 For instance, if \code{a}, \code{b} and \code{c} are Keras tensors,
 it becomes possible to do:
-\verb{model = Model(input=[a, b], output=c)}
+\code{model <- keras_model(input = c(a, b), output = c)}
 }
 \section{Examples}{
-\if{html}{\out{<div class="sourceCode python">}}\preformatted{# This is a logistic regression in Keras
-x = Input(shape=(32,))
-y = Dense(16, activation='softmax')(x)
-model = Model(x, y)
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{# This is a logistic regression in Keras
+input <- layer_input(shape=c(32))
+output <- input |> layer_dense(16, activation='softmax')
+model <- keras_model(input, output)
 }\if{html}{\out{</div>}}
 }
 

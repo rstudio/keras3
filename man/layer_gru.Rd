@@ -39,16 +39,16 @@ layer_gru(
 
 \item{activation}{Activation function to use.
 Default: hyperbolic tangent (\code{tanh}).
-If you pass \code{None}, no activation is applied
+If you pass \code{NULL}, no activation is applied
 (ie. "linear" activation: \code{a(x) = x}).}
 
 \item{recurrent_activation}{Activation function to use
 for the recurrent step.
 Default: sigmoid (\code{sigmoid}).
-If you pass \code{None}, no activation is applied
+If you pass \code{NULL}, no activation is applied
 (ie. "linear" activation: \code{a(x) = x}).}
 
-\item{use_bias}{Boolean, (default \code{True}), whether the layer
+\item{use_bias}{Boolean, (default \code{TRUE}), whether the layer
 should use a bias vector.}
 
 \item{kernel_initializer}{Initializer for the \code{kernel} weights matrix,
@@ -62,25 +62,25 @@ state. Default: \code{"orthogonal"}.}
 \item{bias_initializer}{Initializer for the bias vector. Default: \code{"zeros"}.}
 
 \item{kernel_regularizer}{Regularizer function applied to the \code{kernel} weights
-matrix. Default: \code{None}.}
+matrix. Default: \code{NULL}.}
 
 \item{recurrent_regularizer}{Regularizer function applied to the
-\code{recurrent_kernel} weights matrix. Default: \code{None}.}
+\code{recurrent_kernel} weights matrix. Default: \code{NULL}.}
 
 \item{bias_regularizer}{Regularizer function applied to the bias vector.
-Default: \code{None}.}
+Default: \code{NULL}.}
 
 \item{activity_regularizer}{Regularizer function applied to the output of the
-layer (its "activation"). Default: \code{None}.}
+layer (its "activation"). Default: \code{NULL}.}
 
 \item{kernel_constraint}{Constraint function applied to the \code{kernel} weights
-matrix. Default: \code{None}.}
+matrix. Default: \code{NULL}.}
 
 \item{recurrent_constraint}{Constraint function applied to the
-\code{recurrent_kernel} weights matrix. Default: \code{None}.}
+\code{recurrent_kernel} weights matrix. Default: \code{NULL}.}
 
 \item{bias_constraint}{Constraint function applied to the bias vector.
-Default: \code{None}.}
+Default: \code{NULL}.}
 
 \item{dropout}{Float between 0 and 1. Fraction of the units to drop for the
 linear transformation of the inputs. Default: 0.}
@@ -91,29 +91,29 @@ for the linear transformation of the recurrent state. Default: 0.}
 \item{seed}{Random seed for dropout.}
 
 \item{return_sequences}{Boolean. Whether to return the last output
-in the output sequence, or the full sequence. Default: \code{False}.}
+in the output sequence, or the full sequence. Default: \code{FALSE}.}
 
 \item{return_state}{Boolean. Whether to return the last state in addition
-to the output. Default: \code{False}.}
+to the output. Default: \code{FALSE}.}
 
-\item{go_backwards}{Boolean (default \code{False}).
-If \code{True}, process the input sequence backwards and return the
+\item{go_backwards}{Boolean (default \code{FALSE}).
+If \code{TRUE}, process the input sequence backwards and return the
 reversed sequence.}
 
-\item{stateful}{Boolean (default: \code{False}). If \code{True}, the last state
+\item{stateful}{Boolean (default: \code{FALSE}). If \code{TRUE}, the last state
 for each sample at index i in a batch will be used as initial
 state for the sample of index i in the following batch.}
 
-\item{unroll}{Boolean (default: \code{False}).
-If \code{True}, the network will be unrolled,
+\item{unroll}{Boolean (default: \code{FALSE}).
+If \code{TRUE}, the network will be unrolled,
 else a symbolic loop will be used.
 Unrolling can speed-up a RNN,
 although it tends to be more memory-intensive.
 Unrolling is only suitable for short sequences.}
 
 \item{reset_after}{GRU convention (whether to apply reset gate after or
-before matrix multiplication). \code{False} is \code{"before"},
-\code{True} is \code{"after"} (default and cuDNN compatible).}
+before matrix multiplication). \code{FALSE} is \code{"before"},
+\code{TRUE} is \code{"after"} (default and cuDNN compatible).}
 
 \item{...}{Passed on to the Python callable}
 }
@@ -130,9 +130,9 @@ The requirements to use the cuDNN implementation are:
 \item \code{activation} == \code{tanh}
 \item \code{recurrent_activation} == \code{sigmoid}
 \item \code{dropout} == 0 and \code{recurrent_dropout} == 0
-\item \code{unroll} is \code{False}
-\item \code{use_bias} is \code{True}
-\item \code{reset_after} is \code{True}
+\item \code{unroll} is \code{FALSE}
+\item \code{use_bias} is \code{TRUE}
+\item \code{reset_after} is \code{TRUE}
 \item Inputs, if use masking, are strictly right-padded.
 \item Eager execution is enabled in the outermost context.
 }
@@ -144,22 +144,32 @@ hidden state before matrix multiplication. The other one is based on
 
 The second variant is compatible with CuDNNGRU (GPU-only) and allows
 inference on CPU. Thus it has separate biases for \code{kernel} and
-\code{recurrent_kernel}. To use this variant, set \code{reset_after=True} and
+\code{recurrent_kernel}. To use this variant, set \code{reset_after=TRUE} and
 \code{recurrent_activation='sigmoid'}.
 
 For example:
 
-\if{html}{\out{<div class="sourceCode python">}}\preformatted{inputs = np.random.random((32, 10, 8))
-gru = keras.layers.GRU(4)
-output = gru(inputs)
-output.shape
-# (32, 4)
-gru = keras.layers.GRU(4, return_sequences=True, return_state=True)
-whole_sequence_output, final_state = gru(inputs)
-whole_sequence_output.shape
-# (32, 10, 4)
-final_state.shape
-# (32, 4)
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{inputs <- random_uniform(c(32, 10, 8))
+outputs <- inputs |> layer_gru(4)
+outputs$shape
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode">}}\preformatted{## TensorShape([32, 4])
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{# (32, 4)
+gru <- layer_gru(, 4, return_sequences = TRUE, return_state = TRUE)
+c(whole_sequence_output, final_state) \%<-\% gru(inputs)
+whole_sequence_output$shape
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode">}}\preformatted{## TensorShape([32, 10, 4])
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{final_state$shape
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode">}}\preformatted{## TensorShape([32, 4])
 }\if{html}{\out{</div>}}
 }
 \section{Call Arguments}{
@@ -167,16 +177,16 @@ final_state.shape
 \item \code{inputs}: A 3D tensor, with shape \verb{(batch, timesteps, feature)}.
 \item \code{mask}: Binary tensor of shape \verb{(samples, timesteps)} indicating whether
 a given timestep should be masked  (optional).
-An individual \code{True} entry indicates that the corresponding timestep
-should be utilized, while a \code{False} entry indicates that the
-corresponding timestep should be ignored. Defaults to \code{None}.
+An individual \code{TRUE} entry indicates that the corresponding timestep
+should be utilized, while a \code{FALSE} entry indicates that the
+corresponding timestep should be ignored. Defaults to \code{NULL}.
 \item \code{training}: Python boolean indicating whether the layer should behave in
 training mode or in inference mode. This argument is passed to the
 cell when calling it. This is only relevant if \code{dropout} or
-\code{recurrent_dropout} is used  (optional). Defaults to \code{None}.
+\code{recurrent_dropout} is used  (optional). Defaults to \code{NULL}.
 \item \code{initial_state}: List of initial state tensors to be passed to the first
-call of the cell (optional, \code{None} causes creation
-of zero-filled initial state tensors). Defaults to \code{None}.
+call of the cell (optional, \code{NULL} causes creation
+of zero-filled initial state tensors). Defaults to \code{NULL}.
 }
 }
 

@@ -22,17 +22,17 @@ bin, so the effective number of bins is \code{(num_bins - 1)}
 if \code{mask_value} is set.}
 
 \item{mask_value}{A value that represents masked inputs, which are mapped to
-index 0. \code{None} means no mask term will be added and the
-hashing will start at index 0. Defaults to \code{None}.}
+index 0. \code{NULL} means no mask term will be added and the
+hashing will start at index 0. Defaults to \code{NULL}.}
 
-\item{salt}{A single unsigned integer or None.
+\item{salt}{A single unsigned integer or \code{NULL}.
 If passed, the hash function used will be SipHash64,
 with these values used as an additional input
 (known as a "salt" in cryptography).
-These should be non-zero. If \code{None}, uses the FarmHash64 hash
-function. It also supports tuple/list of 2 unsigned
+These should be non-zero. If \code{NULL}, uses the FarmHash64 hash
+function. It also supports list of 2 unsigned
 integer numbers, see reference paper for details.
-Defaults to \code{None}.}
+Defaults to \code{NULL}.}
 
 \item{output_mode}{Specification for the output of the layer. Values can be
 \code{"int"}, \code{"one_hot"}, \code{"multi_hot"}, or
@@ -57,8 +57,8 @@ Defaults to \code{"int"}.}
 
 \item{sparse}{Boolean. Only applicable to \code{"one_hot"}, \code{"multi_hot"},
 and \code{"count"} output modes. Only supported with TensorFlow
-backend. If \code{True}, returns a \code{SparseTensor} instead of
-a dense \code{Tensor}. Defaults to \code{False}.}
+backend. If \code{TRUE}, returns a \code{SparseTensor} instead of
+a dense \code{Tensor}. Defaults to \code{FALSE}.}
 
 \item{...}{Keyword arguments to construct a layer.}
 }
@@ -91,50 +91,62 @@ to use this layer.
 
 \strong{Example (FarmHash64)}
 
-\if{html}{\out{<div class="sourceCode python">}}\preformatted{layer = keras.layers.Hashing(num_bins=3)
-inp = [['A'], ['B'], ['C'], ['D'], ['E']]
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{layer <- layer_hashing(num_bins = 3)
+inp <- c('A', 'B', 'C', 'D', 'E') |> array(dim = c(5, 1))
 layer(inp)
-# array([[1],
-#         [0],
-#         [1],
-#         [1],
-#         [2]])>
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor(
+## [[1]
+##  [0]
+##  [1]
+##  [1]
+##  [2]], shape=(5, 1), dtype=int64)
 }\if{html}{\out{</div>}}
 
 \strong{Example (FarmHash64) with a mask value}
 
-\if{html}{\out{<div class="sourceCode python">}}\preformatted{layer = keras.layers.Hashing(num_bins=3, mask_value='')
-inp = [['A'], ['B'], [''], ['C'], ['D']]
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{layer <- layer_hashing(num_bins=3, mask_value='')
+inp <- c('A', 'B', '', 'C', 'D') |> array(dim = c(5, 1))
 layer(inp)
-# array([[1],
-#         [1],
-#         [0],
-#         [2],
-#         [2]])
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor(
+## [[1]
+##  [1]
+##  [0]
+##  [2]
+##  [2]], shape=(5, 1), dtype=int64)
 }\if{html}{\out{</div>}}
 
 \strong{Example (SipHash64)}
 
-\if{html}{\out{<div class="sourceCode python">}}\preformatted{layer = keras.layers.Hashing(num_bins=3, salt=[133, 137])
-inp = [['A'], ['B'], ['C'], ['D'], ['E']]
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{layer <- layer_hashing(num_bins=3, salt=c(133, 137))
+inp <- c('A', 'B', 'C', 'D', 'E') |> array(dim = c(5, 1))
 layer(inp)
-# array([[1],
-#         [2],
-#         [1],
-#         [0],
-#         [2]])
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor(
+## [[1]
+##  [2]
+##  [1]
+##  [0]
+##  [2]], shape=(5, 1), dtype=int64)
 }\if{html}{\out{</div>}}
 
 \strong{Example (Siphash64 with a single integer, same as \verb{salt=[133, 133]})}
 
-\if{html}{\out{<div class="sourceCode python">}}\preformatted{layer = keras.layers.Hashing(num_bins=3, salt=133)
-inp = [['A'], ['B'], ['C'], ['D'], ['E']]
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{layer <- layer_hashing(num_bins=3, salt=133)
+inp <- c('A', 'B', 'C', 'D', 'E') |> array(dim = c(5, 1))
 layer(inp)
-# array([[0],
-#         [0],
-#         [2],
-#         [1],
-#         [0]])
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor(
+## [[0]
+##  [0]
+##  [2]
+##  [1]
+##  [0]], shape=(5, 1), dtype=int64)
 }\if{html}{\out{</div>}}
 }
 \section{Input Shape}{

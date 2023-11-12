@@ -21,47 +21,37 @@ argument.}
 
 \item{output_shape}{Expected output shape from function. This argument
 can usually be inferred if not explicitly provided.
-Can be a tuple or function. If a tuple, it only specifies
+Can be a list or function. If a list, it only specifies
 the first dimension onward; sample dimension is assumed
 either the same as the input:
-\verb{output_shape = (input_shape[0], ) + output_shape} or,
-the input is \code{None} and the sample dimension is also \code{None}:
-\verb{output_shape = (None, ) + output_shape}.
+\code{output_shape = c(input_shape[1], output_shape)} or,
+the input is \code{NULL} and the sample dimension is also \code{NULL}:
+\code{output_shape = c(NA, output_shape)}.
 If a function, it specifies the
 entire shape as a function of the input shape:
 \code{output_shape = f(input_shape)}.}
 
-\item{mask}{Either None (indicating no masking) or a callable with the same
+\item{mask}{Either \code{NULL} (indicating no masking) or a callable with the same
 signature as the \code{compute_mask} layer method, or a tensor
 that will be returned as output mask regardless
 of what the input is.}
 
-\item{arguments}{Optional dictionary of keyword arguments to be passed to the
+\item{arguments}{Optional named list of arguments to be passed to the
 function.}
 
 \item{...}{Passed on to the Python callable}
 }
 \description{
-The \code{Lambda} layer exists so that arbitrary expressions can be used
+The \code{layer_lambda()} layer exists so that arbitrary expressions can be used
 as a \code{Layer} when constructing Sequential
 and Functional API models. \code{Lambda} layers are best suited for simple
 operations or quick experimentation. For more advanced use cases,
-prefer writing new subclasses of \code{Layer}.
-
-WARNING: \code{Lambda} layers have (de)serialization limitations!
-
-The main reason to subclass \code{Layer} instead of using a
-\code{Lambda} layer is saving and inspecting a model. \code{Lambda} layers
-are saved by serializing the Python bytecode, which is fundamentally
-non-portable and potentially unsafe.
-They should only be loaded in the same environment where
-they were saved. Subclassed layers can be saved in a more portable way
-by overriding their \code{get_config()} method. Models that rely on
-subclassed Layers are also often easier to visualize and reason about.
+prefer writing new subclasses of \code{Layer} using \code{\link[=new_layer_class]{new_layer_class()}}.
 }
 \section{Examples}{
-\if{html}{\out{<div class="sourceCode python">}}\preformatted{# add a x -> x^2 layer
-model.add(Lambda(lambda x: x ** 2))
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{# add a x -> x^2 layer
+model <- keras_model_sequential()
+model |> layer_lambda(\\(x) x^2)
 }\if{html}{\out{</div>}}
 }
 

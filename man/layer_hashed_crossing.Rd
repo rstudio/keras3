@@ -27,8 +27,8 @@ array the same size as \code{num_bins}, containing a 1 at the input's
 bin index. Defaults to \code{"int"}.}
 
 \item{sparse}{Boolean. Only applicable to \code{"one_hot"} mode and only valid
-when using the TensorFlow backend. If \code{True}, returns
-a \code{SparseTensor} instead of a dense \code{Tensor}. Defaults to \code{False}.}
+when using the TensorFlow backend. If \code{TRUE}, returns
+a \code{SparseTensor} instead of a dense \code{Tensor}. Defaults to \code{FALSE}.}
 
 \item{name}{String, name for the object}
 
@@ -39,10 +39,10 @@ a \code{SparseTensor} instead of a dense \code{Tensor}. Defaults to \code{False}
 \description{
 This layer performs crosses of categorical features using the "hashing
 trick". Conceptually, the transformation can be thought of as:
-`hash(concatenate(features)) \% num_bins.
+\code{hash(concatenate(features)) \%\% num_bins}.
 
 This layer currently only performs crosses of scalar inputs and batches of
-scalar inputs. Valid input shapes are \verb{(batch_size, 1)}, \verb{(batch_size,)} and
+scalar inputs. Valid input shapes are \verb{(batch_size, 1)}, \code{(batch_size)} and
 \verb{()}.
 
 \strong{Note:} This layer wraps \code{tf.keras.layers.HashedCrossing}. It cannot
@@ -53,32 +53,35 @@ It can also always be used as part of an input preprocessing pipeline
 with any backend (outside the model itself), which is how we recommend
 to use this layer.
 
-\strong{Note:} This layer is safe to use inside a \code{tf.data} pipeline
+\strong{Note:} This layer is safe to use inside a \code{tfdatasets} pipeline
 (independently of which backend you're using).
 }
 \section{Examples}{
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{feat1 <- c('A', 'B', 'A', 'B', 'A') |> as.array()
+feat2 <- c(101, 101, 101, 102, 102) |> as.integer() |> as.array()
+}\if{html}{\out{</div>}}
+
 \strong{Crossing two scalar features.}
 
-\if{html}{\out{<div class="sourceCode python">}}\preformatted{layer = keras.layers.HashedCrossing(
-    num_bins=5)
-feat1 = np.array(['A', 'B', 'A', 'B', 'A'])
-feat2 = np.array([101, 101, 101, 102, 102])
-layer((feat1, feat2))
-# array([1, 4, 1, 1, 3])
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{layer <- layer_hashed_crossing(num_bins = 5)
+layer(list(feat1, feat2))
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor([1 4 1 1 3], shape=(5), dtype=int64)
 }\if{html}{\out{</div>}}
 
 \strong{Crossing and one-hotting two scalar features.}
 
-\if{html}{\out{<div class="sourceCode python">}}\preformatted{layer = keras.layers.HashedCrossing(
-    num_bins=5, output_mode='one_hot')
-feat1 = np.array(['A', 'B', 'A', 'B', 'A'])
-feat2 = np.array([101, 101, 101, 102, 102])
-layer((feat1, feat2))
-# array([[0., 1., 0., 0., 0.],
-#         [0., 0., 0., 0., 1.],
-#         [0., 1., 0., 0., 0.],
-#         [0., 1., 0., 0., 0.],
-#         [0., 0., 0., 1., 0.]], dtype=float32)
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{layer <- layer_hashed_crossing(num_bins = 5, output_mode = 'one_hot')
+layer(list(feat1, feat2))
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor(
+## [[0. 1. 0. 0. 0.]
+##  [0. 0. 0. 0. 1.]
+##  [0. 1. 0. 0. 0.]
+##  [0. 1. 0. 0. 0.]
+##  [0. 0. 0. 1. 0.]], shape=(5, 5), dtype=float32)
 }\if{html}{\out{</div>}}
 }
 
