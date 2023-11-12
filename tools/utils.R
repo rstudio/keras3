@@ -1094,6 +1094,17 @@ make_r_fn.op <- function(endpoint, py_obj, transformers) {
     transformers <- NULL
   }
 
+  if(endpoint == "keras.ops.array") {
+    if(!identical(frmls, as.pairlist(alist(x = , dtype = NULL)))) { browser(); stop()}
+    # k_array(c(1,2,3), "int32") fails because implicitly casting eager
+    # float tensors to int throws a python error. So we explicitly cast first.
+    return(function(x, dtype = NULL) {
+      if(!is.null(dtype) && !inherits(x, "python.builtin.object"))
+        x <- np_array(x, dtype)
+      keras$ops$array(x, dtype)
+    })
+  }
+
 
   if(endpoint == "keras.ops.vectorized_map") {
     names(frmls) %<>% replace_val("function", "f")

@@ -735,7 +735,11 @@ function (x, axis = -1L)
 #' @eval readLines("man-src/k_array/3-rendered.md")
 k_array <-
 function (x, dtype = NULL)
-keras$ops$array(x, dtype)
+{
+    if (!is.null(dtype) && !inherits(x, "python.builtin.object"))
+        x <- np_array(x, dtype)
+    keras$ops$array(x, dtype)
+}
 
 
 "man-src/k_average.Rmd" # |>file.edit() # or cmd+click to edit man page
