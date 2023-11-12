@@ -156,6 +156,11 @@ if(!"source:tools/translate-tools.R" %in% search()) envir::attach_source("tools/
 #
 # TODO: write a .git_reset() helper that restores everything except tools/*
 #
+# TODO: a layer_hashed_crossing() instance should have a customized wrapper that 
+#       splices in the args, so instead of layer(list(a, b)), you can do layer(a, b)
+#       also, the example should maybe be nicer, with a named list/dict being passed,
+#       instead of a tuple
+#
 # TODO: this shouldn't error (empty last arg should be no-op):
 if(FALSE) {
   keras$utils$FeatureSpace$cross(
@@ -164,7 +169,7 @@ if(FALSE) {
     output_mode="int",
   )
 }
-
+memoise::forget(mk_export)
 
 get_translations <- function() {
   dirs <- fs::dir_ls("man-src/", type = "directory") |>
