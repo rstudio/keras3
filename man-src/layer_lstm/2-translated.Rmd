@@ -15,56 +15,51 @@ The requirements to use the cuDNN implementation are:
 1. `activation` == `tanh`
 2. `recurrent_activation` == `sigmoid`
 3. `dropout` == 0 and `recurrent_dropout` == 0
-4. `unroll` is `False`
-5. `use_bias` is `True`
+4. `unroll` is `FALSE`
+5. `use_bias` is `TRUE`
 6. Inputs, if use masking, are strictly right-padded.
 7. Eager execution is enabled in the outermost context.
 
 For example:
 
-```python
-inputs = np.random.random((32, 10, 8))
-lstm = keras.layers.LSTM(4)
-output = lstm(inputs)
-output.shape
-# (32, 4)
-lstm = keras.layers.LSTM(
-    4, return_sequences=True, return_state=True)
-whole_seq_output, final_memory_state, final_carry_state = lstm(inputs)
-whole_seq_output.shape
-# (32, 10, 4)
-final_memory_state.shape
-# (32, 4)
-final_carry_state.shape
-# (32, 4)
+```{r}
+input <- random_uniform(c(32, 10, 8))
+output <- input |> layer_lstm(4)
+output$shape
+
+lstm <- layer_lstm(units = 4, return_sequences = TRUE, return_state = TRUE)
+c(whole_seq_output, final_memory_state, final_carry_state) %<-% lstm(inputs)
+whole_seq_output$shape
+final_memory_state$shape
+final_carry_state$shape
 ```
 
 # Call Arguments
 - `inputs`: A 3D tensor, with shape `(batch, timesteps, feature)`.
 - `mask`: Binary tensor of shape `(samples, timesteps)` indicating whether
     a given timestep should be masked  (optional).
-    An individual `True` entry indicates that the corresponding timestep
-    should be utilized, while a `False` entry indicates that the
-    corresponding timestep should be ignored. Defaults to `None`.
-- `training`: Python boolean indicating whether the layer should behave in
+    An individual `TRUE` entry indicates that the corresponding timestep
+    should be utilized, while a `FALSE` entry indicates that the
+    corresponding timestep should be ignored. Defaults to `NULL`.
+- `training`: Boolean indicating whether the layer should behave in
     training mode or in inference mode. This argument is passed to the
     cell when calling it. This is only relevant if `dropout` or
-    `recurrent_dropout` is used  (optional). Defaults to `None`.
+    `recurrent_dropout` is used  (optional). Defaults to `NULL`.
 - `initial_state`: List of initial state tensors to be passed to the first
-    call of the cell (optional, `None` causes creation
-    of zero-filled initial state tensors). Defaults to `None`.
+    call of the cell (optional, `NULL` causes creation
+    of zero-filled initial state tensors). Defaults to `NULL`.
 
 @param units Positive integer, dimensionality of the output space.
 @param activation Activation function to use.
     Default: hyperbolic tangent (`tanh`).
-    If you pass `None`, no activation is applied
+    If you pass `NULL`, no activation is applied
     (ie. "linear" activation: `a(x) = x`).
 @param recurrent_activation Activation function to use
     for the recurrent step.
     Default: sigmoid (`sigmoid`).
-    If you pass `None`, no activation is applied
+    If you pass `NULL`, no activation is applied
     (ie. "linear" activation: `a(x) = x`).
-@param use_bias Boolean, (default `True`), whether the layer
+@param use_bias Boolean, (default `TRUE`), whether the layer
     should use a bias vector.
 @param kernel_initializer Initializer for the `kernel` weights matrix,
     used for the linear transformation of the inputs. Default:
@@ -73,42 +68,42 @@ final_carry_state.shape
     weights matrix, used for the linear transformation of the recurrent
     state. Default: `"orthogonal"`.
 @param bias_initializer Initializer for the bias vector. Default: `"zeros"`.
-@param unit_forget_bias Boolean (default `True`). If `True`,
+@param unit_forget_bias Boolean (default `TRUE`). If `TRUE`,
     add 1 to the bias of the forget gate at initialization.
-    Setting it to `True` will also force `bias_initializer="zeros"`.
+    Setting it to `TRUE` will also force `bias_initializer="zeros"`.
     This is recommended in [Jozefowicz et al.](
     https://github.com/mlresearch/v37/blob/gh-pages/jozefowicz15.pdf)
 @param kernel_regularizer Regularizer function applied to the `kernel` weights
-    matrix. Default: `None`.
+    matrix. Default: `NULL`.
 @param recurrent_regularizer Regularizer function applied to the
-    `recurrent_kernel` weights matrix. Default: `None`.
+    `recurrent_kernel` weights matrix. Default: `NULL`.
 @param bias_regularizer Regularizer function applied to the bias vector.
-    Default: `None`.
+    Default: `NULL`.
 @param activity_regularizer Regularizer function applied to the output of the
-    layer (its "activation"). Default: `None`.
+    layer (its "activation"). Default: `NULL`.
 @param kernel_constraint Constraint function applied to the `kernel` weights
-    matrix. Default: `None`.
+    matrix. Default: `NULL`.
 @param recurrent_constraint Constraint function applied to the
-    `recurrent_kernel` weights matrix. Default: `None`.
+    `recurrent_kernel` weights matrix. Default: `NULL`.
 @param bias_constraint Constraint function applied to the bias vector.
-    Default: `None`.
+    Default: `NULL`.
 @param dropout Float between 0 and 1. Fraction of the units to drop for the
     linear transformation of the inputs. Default: 0.
 @param recurrent_dropout Float between 0 and 1. Fraction of the units to drop
     for the linear transformation of the recurrent state. Default: 0.
 @param seed Random seed for dropout.
 @param return_sequences Boolean. Whether to return the last output
-    in the output sequence, or the full sequence. Default: `False`.
+    in the output sequence, or the full sequence. Default: `FALSE`.
 @param return_state Boolean. Whether to return the last state in addition
-    to the output. Default: `False`.
-@param go_backwards Boolean (default: `False`).
-    If `True`, process the input sequence backwards and return the
+    to the output. Default: `FALSE`.
+@param go_backwards Boolean (default: `FALSE`).
+    If `TRUE`, process the input sequence backwards and return the
     reversed sequence.
-@param stateful Boolean (default: `False`). If `True`, the last state
+@param stateful Boolean (default: `FALSE`). If `TRUE`, the last state
     for each sample at index i in a batch will be used as initial
     state for the sample of index i in the following batch.
-@param unroll Boolean (default False).
-    If `True`, the network will be unrolled,
+@param unroll Boolean (default `FALSE`).
+    If `TRUE`, the network will be unrolled,
     else a symbolic loop will be used.
     Unrolling can speed-up a RNN,
     although it tends to be more memory-intensive.
