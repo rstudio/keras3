@@ -2,7 +2,7 @@
 % Please edit documentation in R/autogen-layers-rnn.R
 \name{layer_rnn}
 \alias{layer_rnn}
-\title{Base class for recurrent layers.}
+\title{Base class for recurrent layer_}
 \usage{
 layer_rnn(
   object,
@@ -27,10 +27,10 @@ cell can also take the optional argument \code{constants}, see
 section "Note on passing external constants" below.
 - A \code{state_size} attribute. This can be a single integer
 (single state) in which case it is the size of the recurrent
-state. This can also be a list/tuple of integers
+state. This can also be a list of integers
 (one size per state).
 - A \code{output_size} attribute, a single integer.
-- A \code{get_initial_state(batch_size=None)}
+- A \code{get_initial_state(batch_size=NULL)}
 method that creates a tensor meant to be fed to \code{call()} as the
 initial state, if the user didn't specify any initial state
 via other means. The returned initial state should have
@@ -41,34 +41,34 @@ or other values based on the cell's implementation.
 \verb{(batch_size, timesteps, features)}.
 If this method is not implemented
 by the cell, the RNN layer will create a zero filled tensor
-with shape \verb{(batch_size, cell.state_size)}.
+with shape \verb{(batch_size, cell$state_size)}.
 In the case that \code{cell} is a list of RNN cell instances, the cells
 will be stacked on top of each other in the RNN, resulting in an
 efficient stacked RNN.}
 
-\item{return_sequences}{Boolean (default \code{False}). Whether to return the last
+\item{return_sequences}{Boolean (default \code{FALSE}). Whether to return the last
 output in the output sequence, or the full sequence.}
 
-\item{return_state}{Boolean (default \code{False}).
+\item{return_state}{Boolean (default \code{FALSE}).
 Whether to return the last state in addition to the output.}
 
-\item{go_backwards}{Boolean (default \code{False}).
-If \code{True}, process the input sequence backwards and return the
+\item{go_backwards}{Boolean (default \code{FALSE}).
+If \code{TRUE}, process the input sequence backwards and return the
 reversed sequence.}
 
-\item{stateful}{Boolean (default \code{False}). If True, the last state
+\item{stateful}{Boolean (default \code{FALSE}). If TRUE, the last state
 for each sample at index \code{i} in a batch will be used as initial
 state for the sample of index \code{i} in the following batch.}
 
-\item{unroll}{Boolean (default \code{False}).
-If True, the network will be unrolled, else a symbolic loop will be
+\item{unroll}{Boolean (default \code{FALSE}).
+If TRUE, the network will be unrolled, else a symbolic loop will be
 used. Unrolling can speed-up a RNN, although it tends to be more
 memory-intensive. Unrolling is only suitable for short sequences.}
 
-\item{zero_output_for_mask}{Boolean (default \code{False}).
+\item{zero_output_for_mask}{Boolean (default \code{FALSE}).
 Whether the output should use zeros for the masked timesteps.
 Note that this field is only used when \code{return_sequences}
-is \code{True} and \code{mask} is provided.
+is \code{TRUE} and \code{mask} is provided.
 It can useful if you want to reuse the raw output sequence of
 the RNN without interference from the masked timesteps, e.g.,
 merging bidirectional RNNs.}
@@ -76,7 +76,7 @@ merging bidirectional RNNs.}
 \item{...}{Passed on to the Python callable}
 }
 \description{
-Base class for recurrent layers.
+Base class for recurrent layer_
 }
 \section{Call Arguments}{
 \itemize{
@@ -85,8 +85,8 @@ Base class for recurrent layers.
 call of the cell.
 \item \code{mask}: Binary tensor of shape \verb{[batch_size, timesteps]}
 indicating whether a given timestep should be masked.
-An individual \code{True} entry indicates that the corresponding
-timestep should be utilized, while a \code{False} entry indicates
+An individual \code{TRUE} entry indicates that the corresponding
+timestep should be utilized, while a \code{FALSE} entry indicates
 that the corresponding timestep should be ignored.
 \item \code{training}: Python boolean indicating whether the layer should behave in
 training mode or in inference mode. This argument is passed
@@ -113,8 +113,8 @@ Masking:
 
 This layer supports masking for input data with a variable number
 of timesteps. To introduce masks to your data,
-use a \code{keras.layers.Embedding} layer with the \code{mask_zero} parameter
-set to \code{True}.
+use a \code{layer_Embedding} layer with the \code{mask_zero} parameter
+set to \code{TRUE}.
 
 Note on using statefulness in RNNs:
 
@@ -125,7 +125,7 @@ between samples in different successive batches.
 
 To enable statefulness:
 \itemize{
-\item Specify \code{stateful=True} in the layer constructor.
+\item Specify \code{stateful=TRUE} in the layer constructor.
 \item Specify a fixed batch size for your model, by passing
 If sequential model:
 \code{batch_input_shape=(...)} to the first layer in your model.
@@ -133,8 +133,8 @@ Else for functional model with 1 or more Input layers:
 \code{batch_shape=(...)} to all the first layers in your model.
 This is the expected shape of your inputs
 \emph{including the batch size}.
-It should be a tuple of integers, e.g. \verb{(32, 10, 100)}.
-\item Specify \code{shuffle=False} when calling \code{fit()}.
+It should be a list of integers, e.g. \verb{(32, 10, 100)}.
+\item Specify \code{shuffle=FALSE} when calling \code{fit()}.
 }
 
 To reset the states of your model, call \code{.reset_states()} on either
@@ -154,46 +154,48 @@ the initial state of the RNN layer.
 }
 
 \section{Examples}{
-\if{html}{\out{<div class="sourceCode python">}}\preformatted{from keras.layers import RNN
-from keras import ops
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{# First, let's define a RNN Cell, as a layer subclass.
+MinimalRNNCell(keras$layers$Layer) \%py_class\% \{
+  initialize <- function(units, ...) \{
+    super$initialize(...)
+    self$units <- as.integer(units)
+    self$state_size <- as.integer(units)
+  \}
 
-# First, let's define a RNN Cell, as a layer subclass.
-class MinimalRNNCell(keras.layers.Layer):
+  build <- function(input_shape) \{
+    self$kernel <- self$add_weight(
+      shape = c(tail(input_shape, 1), self$units),
+      initializer = 'uniform',
+      name = 'kernel')
+    self$recurrent_kernel <- self$add_weight(
+      shape = c(self$units, self$units),
+      initializer = 'uniform',
+      name = 'recurrent_kernel')
+    self$built <- TRUE
+  \}
 
-    def __init__(self, units, **kwargs):
-        super().__init__(**kwargs)
-        self.units = units
-        self.state_size = units
+  call <- function(inputs, states) \{
+    prev_output <- states[[1]]
+    h <- k_matmul(inputs, self.kernel)
+    output <- h + k_matmul(prev_output, self$recurrent_kernel)
+    list(output, list(output))
+  \}
 
-    def build(self, input_shape):
-        self.kernel = self.add_weight(shape=(input_shape[-1], self.units),
-                                      initializer='uniform',
-                                      name='kernel')
-        self.recurrent_kernel = self.add_weight(
-            shape=(self.units, self.units),
-            initializer='uniform',
-            name='recurrent_kernel')
-        self.built = True
-
-    def call(self, inputs, states):
-        prev_output = states[0]
-        h = ops.matmul(inputs, self.kernel)
-        output = h + ops.matmul(prev_output, self.recurrent_kernel)
-        return output, [output]
+\}
 
 # Let's use this cell in a RNN layer:
 
-cell = MinimalRNNCell(32)
-x = keras.Input((None, 5))
-layer = RNN(cell)
-y = layer(x)
+cell <- MinimalRNNCell(units = 32)
+x <- layer_input(shape = shape(NULL, 5))
+layer <- layer_rnn(cell = cell)
+y <- layer(x)
 
 # Here's how to use the cell to build a stacked RNN:
 
-cells = [MinimalRNNCell(32), MinimalRNNCell(64)]
-x = keras.Input((None, 5))
-layer = RNN(cells)
-y = layer(x)
+cells <- list(MinimalRNNCell(units = 32), MinimalRNNCell(units = 4))
+x <- layer_input(shape = shape(NULL, 5))
+layer <- layer_rnn(cell = cells)
+y <- layer(x)
 }\if{html}{\out{</div>}}
 }
 
