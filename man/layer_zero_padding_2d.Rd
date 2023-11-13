@@ -9,12 +9,12 @@ layer_zero_padding_2d(object, padding = list(1L, 1L), data_format = NULL, ...)
 \arguments{
 \item{object}{Object to compose the layer with. A tensor, array, or sequential model.}
 
-\item{padding}{Int, or tuple of 2 ints, or tuple of 2 tuples of 2 ints.
+\item{padding}{Int, or list of 2 ints, or list of 2 lists of 2 ints.
 - If int: the same symmetric padding is applied to height and width.
-- If tuple of 2 ints: interpreted as two different symmetric padding
+- If list of 2 ints: interpreted as two different symmetric padding
 values for height and width:
 \verb{(symmetric_height_pad, symmetric_width_pad)}.
-- If tuple of 2 tuples of 2 ints: interpreted as
+- If list of 2 lists of 2 ints: interpreted as
 \verb{((top_pad, bottom_pad), (left_pad, right_pad))}.}
 
 \item{data_format}{A string, one of \code{"channels_last"} (default) or
@@ -34,25 +34,35 @@ This layer can add rows and columns of zeros at the top, bottom, left and
 right side of an image tensor.
 }
 \section{Examples}{
-\if{html}{\out{<div class="sourceCode python">}}\preformatted{input_shape = (1, 1, 2, 2)
-x = np.arange(np.prod(input_shape)).reshape(input_shape)
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{input_shape <- c(1, 1, 2, 2)
+x <- k_reshape(seq_len(prod(input_shape)), input_shape)
 x
-# [[[[0 1]
-#    [2 3]]]]
-y = keras.layers.ZeroPadding2D(padding=1)(x)
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor(
+## [[[[1 2]
+##    [3 4]]]], shape=(1, 1, 2, 2), dtype=int64)
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{y <- layer_zero_padding_2d(x, padding = 1)
 y
-# [[[[0 0]
-#    [0 0]
-#    [0 0]
-#    [0 0]]
-#   [[0 0]
-#    [0 1]
-#    [2 3]
-#    [0 0]]
-#   [[0 0]
-#    [0 0]
-#    [0 0]
-#    [0 0]]]]
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor(
+## [[[[0 0]
+##    [0 0]
+##    [0 0]
+##    [0 0]]
+##
+##   [[0 0]
+##    [1 2]
+##    [3 4]
+##    [0 0]]
+##
+##   [[0 0]
+##    [0 0]
+##    [0 0]
+##    [0 0]]]], shape=(1, 3, 4, 2), dtype=int64)
 }\if{html}{\out{</div>}}
 }
 

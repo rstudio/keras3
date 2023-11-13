@@ -9,11 +9,11 @@ layer_zero_padding_1d(object, padding = 1L, ...)
 \arguments{
 \item{object}{Object to compose the layer with. A tensor, array, or sequential model.}
 
-\item{padding}{Int, or tuple of int (length 2), or dictionary.
+\item{padding}{Int, or list of int (length 2), or named listionary.
 \itemize{
 \item If int: how many zeros to add at the beginning and end of
 the padding dimension (axis 1).
-\item If tuple of 2 ints: how many zeros to add at the beginning and the
+\item If list of 2 ints: how many zeros to add at the beginning and the
 end of the padding dimension (\verb{(left_pad, right_pad)}).
 }}
 
@@ -23,27 +23,37 @@ end of the padding dimension (\verb{(left_pad, right_pad)}).
 Zero-padding layer for 1D input (e.g. temporal sequence).
 }
 \section{Examples}{
-\if{html}{\out{<div class="sourceCode python">}}\preformatted{input_shape = (2, 2, 3)
-x = np.arange(np.prod(input_shape)).reshape(input_shape)
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{input_shape <- c(2, 2, 3)
+x <- k_reshape(seq_len(prod(input_shape)), input_shape)
 x
-# [[[ 0  1  2]
-#   [ 3  4  5]]
-#  [[ 6  7  8]
-#   [ 9 10 11]]]
-y = keras.layers.ZeroPadding1D(padding=2)(x)
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor(
+## [[[ 1  2  3]
+##   [ 4  5  6]]
+##
+##  [[ 7  8  9]
+##   [10 11 12]]], shape=(2, 2, 3), dtype=int64)
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{y <- layer_zero_padding_1d(x, padding = 2)
 y
-# [[[ 0  0  0]
-#   [ 0  0  0]
-#   [ 0  1  2]
-#   [ 3  4  5]
-#   [ 0  0  0]
-#   [ 0  0  0]]
-#  [[ 0  0  0]
-#   [ 0  0  0]
-#   [ 6  7  8]
-#   [ 9 10 11]
-#   [ 0  0  0]
-#   [ 0  0  0]]]
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor(
+## [[[ 0  0  0]
+##   [ 0  0  0]
+##   [ 1  2  3]
+##   [ 4  5  6]
+##   [ 0  0  0]
+##   [ 0  0  0]]
+##
+##  [[ 0  0  0]
+##   [ 0  0  0]
+##   [ 7  8  9]
+##   [10 11 12]
+##   [ 0  0  0]
+##   [ 0  0  0]]], shape=(2, 6, 3), dtype=int64)
 }\if{html}{\out{</div>}}
 }
 

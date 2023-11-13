@@ -5,26 +5,40 @@ This layer can add rows and columns of zeros at the top, bottom, left and
 right side of an image tensor.
 
 # Examples
-```python
-input_shape = (1, 1, 2, 2)
-x = np.arange(np.prod(input_shape)).reshape(input_shape)
+
+```r
+input_shape <- c(1, 1, 2, 2)
+x <- k_reshape(seq_len(prod(input_shape)), input_shape)
 x
-# [[[[0 1]
-#    [2 3]]]]
-y = keras.layers.ZeroPadding2D(padding=1)(x)
+```
+
+```
+## tf.Tensor(
+## [[[[1 2]
+##    [3 4]]]], shape=(1, 1, 2, 2), dtype=int64)
+```
+
+```r
+y <- layer_zero_padding_2d(x, padding = 1)
 y
-# [[[[0 0]
-#    [0 0]
-#    [0 0]
-#    [0 0]]
-#   [[0 0]
-#    [0 1]
-#    [2 3]
-#    [0 0]]
-#   [[0 0]
-#    [0 0]
-#    [0 0]
-#    [0 0]]]]
+```
+
+```
+## tf.Tensor(
+## [[[[0 0]
+##    [0 0]
+##    [0 0]
+##    [0 0]]
+##
+##   [[0 0]
+##    [1 2]
+##    [3 4]
+##    [0 0]]
+##
+##   [[0 0]
+##    [0 0]
+##    [0 0]
+##    [0 0]]]], shape=(1, 3, 4, 2), dtype=int64)
 ```
 
 # Input Shape
@@ -41,12 +55,12 @@ y
 - If `data_format` is `"channels_first"`:
   `(batch_size, channels, padded_height, padded_width)`
 
-@param padding Int, or tuple of 2 ints, or tuple of 2 tuples of 2 ints.
+@param padding Int, or list of 2 ints, or list of 2 lists of 2 ints.
     - If int: the same symmetric padding is applied to height and width.
-    - If tuple of 2 ints: interpreted as two different symmetric padding
+    - If list of 2 ints: interpreted as two different symmetric padding
       values for height and width:
       `(symmetric_height_pad, symmetric_width_pad)`.
-    - If tuple of 2 tuples of 2 ints: interpreted as
+    - If list of 2 lists of 2 ints: interpreted as
      `((top_pad, bottom_pad), (left_pad, right_pad))`.
 @param data_format A string, one of `"channels_last"` (default) or
     `"channels_first"`. The ordering of the dimensions in the inputs.
@@ -65,3 +79,4 @@ y
 @seealso
 + <https:/keras.io/api/layers/reshaping_layers/zero_padding2d#zeropadding2d-class>
 + <https://www.tensorflow.org/api_docs/python/tf/keras/layers/ZeroPadding2D>
+

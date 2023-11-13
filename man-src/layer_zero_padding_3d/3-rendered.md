@@ -3,12 +3,29 @@ Zero-padding layer for 3D data (spatial or spatio-temporal).
 @description
 
 # Examples
-```python
-input_shape = (1, 1, 2, 2, 3)
-x = np.arange(np.prod(input_shape)).reshape(input_shape)
-y = keras.layers.ZeroPadding3D(padding=2)(x)
-y.shape
-# (1, 5, 6, 6, 3)
+
+```r
+input_shape <- c(1, 1, 2, 2, 3)
+x <- k_reshape(seq_len(prod(input_shape)), input_shape)
+x
+```
+
+```
+## tf.Tensor(
+## [[[[[ 1  2  3]
+##     [ 4  5  6]]
+##
+##    [[ 7  8  9]
+##     [10 11 12]]]]], shape=(1, 1, 2, 2, 3), dtype=int64)
+```
+
+```r
+y <- layer_zero_padding_3d(x, padding = 2)
+y$shape
+```
+
+```
+## TensorShape([1, 5, 6, 6, 3])
 ```
 
 # Input Shape
@@ -29,13 +46,13 @@ y.shape
   `(batch_size, depth, first_padded_axis, second_padded_axis,
   third_axis_to_pad)`
 
-@param padding Int, or tuple of 3 ints, or tuple of 3 tuples of 2 ints.
+@param padding Int, or list of 3 ints, or list of 3 lists of 2 ints.
     - If int: the same symmetric padding is applied to depth, height,
       and width.
-    - If tuple of 3 ints: interpreted as three different symmetric
+    - If list of 3 ints: interpreted as three different symmetric
       padding values for depth, height, and width:
       `(symmetric_dim1_pad, symmetric_dim2_pad, symmetric_dim3_pad)`.
-    - If tuple of 3 tuples of 2 ints: interpreted as
+    - If list of 3 lists of 2 ints: interpreted as
       `((left_dim1_pad, right_dim1_pad), (left_dim2_pad,
       right_dim2_pad), (left_dim3_pad, right_dim3_pad))`.
 @param data_format A string, one of `"channels_last"` (default) or
@@ -55,3 +72,4 @@ y.shape
 @seealso
 + <https:/keras.io/api/layers/reshaping_layers/zero_padding3d#zeropadding3d-class>
 + <https://www.tensorflow.org/api_docs/python/tf/keras/layers/ZeroPadding3D>
+

@@ -14,13 +14,13 @@ layer_zero_padding_3d(
 \arguments{
 \item{object}{Object to compose the layer with. A tensor, array, or sequential model.}
 
-\item{padding}{Int, or tuple of 3 ints, or tuple of 3 tuples of 2 ints.
+\item{padding}{Int, or list of 3 ints, or list of 3 lists of 2 ints.
 - If int: the same symmetric padding is applied to depth, height,
 and width.
-- If tuple of 3 ints: interpreted as three different symmetric
+- If list of 3 ints: interpreted as three different symmetric
 padding values for depth, height, and width:
 \verb{(symmetric_dim1_pad, symmetric_dim2_pad, symmetric_dim3_pad)}.
-- If tuple of 3 tuples of 2 ints: interpreted as
+- If list of 3 lists of 2 ints: interpreted as
 \verb{((left_dim1_pad, right_dim1_pad), (left_dim2_pad, right_dim2_pad), (left_dim3_pad, right_dim3_pad))}.}
 
 \item{data_format}{A string, one of \code{"channels_last"} (default) or
@@ -39,11 +39,24 @@ config file at \verb{~/.keras/keras.json} (if exists). Defaults to
 Zero-padding layer for 3D data (spatial or spatio-temporal).
 }
 \section{Examples}{
-\if{html}{\out{<div class="sourceCode python">}}\preformatted{input_shape = (1, 1, 2, 2, 3)
-x = np.arange(np.prod(input_shape)).reshape(input_shape)
-y = keras.layers.ZeroPadding3D(padding=2)(x)
-y.shape
-# (1, 5, 6, 6, 3)
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{input_shape <- c(1, 1, 2, 2, 3)
+x <- k_reshape(seq_len(prod(input_shape)), input_shape)
+x
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor(
+## [[[[[ 1  2  3]
+##     [ 4  5  6]]
+##
+##    [[ 7  8  9]
+##     [10 11 12]]]]], shape=(1, 1, 2, 2, 3), dtype=int64)
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{y <- layer_zero_padding_3d(x, padding = 2)
+y$shape
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode">}}\preformatted{## TensorShape([1, 5, 6, 6, 3])
 }\if{html}{\out{</div>}}
 }
 
