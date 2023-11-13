@@ -17,11 +17,11 @@ layer_tfsm(
 \arguments{
 \item{object}{Object to compose the layer with. A tensor, array, or sequential model.}
 
-\item{filepath}{\code{str} or \code{pathlib.Path} object. The path to the SavedModel.}
+\item{filepath}{\code{str}. The path to the SavedModel.}
 
 \item{call_endpoint}{Name of the endpoint to use as the \code{call()} method
 of the reloaded layer. If the SavedModel was created
-via \code{model.export()},
+via \code{export_savedmodel()},
 then the default endpoint name is \code{'serve'}. In other cases
 it may be named \code{'serving_default'}.}
 
@@ -37,9 +37,9 @@ it may be named \code{'serving_default'}.}
 Reload a Keras model/layer that was saved via SavedModel / ExportArchive.
 }
 \section{Examples}{
-\if{html}{\out{<div class="sourceCode python">}}\preformatted{model.export("path/to/artifact")
-reloaded_layer = TFSMLayer("path/to/artifact")
-outputs = reloaded_layer(inputs)
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{model \%>\% export_savedmodel("path/to/artifact")
+reloaded_layer <- layer_tfsm("path/to/artifact")
+outputs <- reloaded_layer(inputs)
 }\if{html}{\out{</div>}}
 
 The reloaded object can be used like a regular Keras layer, and supports
@@ -51,15 +51,15 @@ function.
 \strong{Limitations:}
 \itemize{
 \item Only call endpoints with a single \code{inputs} tensor argument
-(which may optionally be a dict/tuple/list of tensors) are supported.
+(which may optionally be a named list/list of tensors) are supported.
 For endpoints with multiple separate input tensor arguments, consider
-subclassing \code{TFSMLayer} and implementing a \code{call()} method with a
+subclassing \code{layer_tfsm} and implementing a \code{call()} method with a
 custom signature.
 \item If you need training-time behavior to differ from inference-time behavior
-(i.e. if you need the reloaded object to support a \code{training=True} argument
+(i.e. if you need the reloaded object to support a \code{training=TRUE} argument
 in \verb{__call__()}), make sure that the training-time call function is
 saved as a standalone endpoint in the artifact, and provide its name
-to the \code{TFSMLayer} via the \code{call_training_endpoint} argument.
+to the \code{layer_tfsm} via the \code{call_training_endpoint} argument.
 }
 }
 
