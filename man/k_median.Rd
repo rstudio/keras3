@@ -10,10 +10,10 @@ k_median(x, axis = NULL, keepdims = FALSE)
 \item{x}{Input tensor.}
 
 \item{axis}{Axis or axes along which the medians are computed. Defaults to
-\code{axis=None} which is to compute the median(s) along a flattened
+\code{axis = NULL} which is to compute the median(s) along a flattened
 version of the array.}
 
-\item{keepdims}{If this is set to \code{True}, the axes which are reduce
+\item{keepdims}{If this is set to \code{TRUE}, the axes which are reduce
 are left in the result as dimensions with size one.}
 }
 \value{

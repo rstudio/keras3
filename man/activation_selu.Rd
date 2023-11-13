@@ -17,7 +17,7 @@ The Scaled Exponential Linear Unit (SELU) activation function is defined as:
 }
 
 where \code{alpha} and \code{scale} are pre-defined constants
-(\code{alpha=1.67326324} and \code{scale=1.05070098}).
+(\code{alpha = 1.67326324} and \code{scale = 1.05070098}).
 
 Basically, the SELU activation function multiplies \code{scale} (> 1) with the
 output of the \code{keras.activations.elu} function to ensure a slope larger

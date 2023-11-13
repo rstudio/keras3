@@ -11,7 +11,7 @@ k_all(x, axis = NULL, keepdims = FALSE)
 
 \item{axis}{An integer or tuple of integers that represent the axis along
 which a logical AND reduction is performed. The default
-(\code{axis=NULL}) is to perform a logical AND over all the dimensions
+(\code{axis = NULL}) is to perform a logical AND over all the dimensions
 of the input array. \code{axis} may be negative, in which case it counts
 for the last to the first axis.}
 

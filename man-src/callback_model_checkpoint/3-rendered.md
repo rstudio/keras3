@@ -59,7 +59,7 @@ model$load_weights(checkpoint_filepath)
     which will be filled the value of `epoch` and keys in `logs`
     (passed in `on_epoch_end`).
     The `filepath` name needs to end with `".weights.h5"` when
-    `save_weights_only=TRUE` or should end with `".keras"` when
+    `save_weights_only = TRUE` or should end with `".keras"` when
     checkpoint saving the whole model (default).
     For example:
     if `filepath` is `"{epoch:02d}-{val_loss:.2f}.keras"`, then the
@@ -80,7 +80,7 @@ model$load_weights(checkpoint_filepath)
     * Multi-output models set additional prefixes on the metric names.
 @param verbose Verbosity mode, 0 or 1. Mode 0 is silent, and mode 1
     displays messages when the callback takes an action.
-@param save_best_only if `save_best_only=TRUE`, it only saves when the model
+@param save_best_only if `save_best_only = TRUE`, it only saves when the model
     is considered the "best" and the latest best model according to the
     quantity monitored will not be overwritten. If `filepath` doesn't
     contain formatting options like `{epoch}` then `filepath` will be

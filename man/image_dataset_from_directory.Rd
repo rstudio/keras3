@@ -76,7 +76,7 @@ fraction of data to reserve for validation.}
 \item{subset}{Subset of the data to return.
 One of \code{"training"}, \code{"validation"}, or \code{"both"}.
 Only used if \code{validation_split} is set.
-When \code{subset="both"}, the utility returns a tuple of two datasets
+When \code{subset = "both"}, the utility returns a tuple of two datasets
 (the training and validation datasets respectively).}
 
 \item{interpolation}{String, the interpolation method used when
@@ -92,7 +92,7 @@ ratio distortion. When the original aspect ratio differs from the
 target aspect ratio, the output image will be cropped so as to
 return the largest possible window in the image
 (of size \code{image_size}) that matches the target aspect ratio. By
-default (\code{crop_to_aspect_ratio=False}), aspect ratio may not be
+default (\code{crop_to_aspect_ratio = False}), aspect ratio may not be
 preserved.}
 
 \item{data_format}{If None uses keras.config.image_data_format()
@@ -142,7 +142,7 @@ If your directory structure is:
 ......b_image_2.jpg
 }\if{html}{\out{</div>}}
 
-Then calling \code{image_dataset_from_directory(main_directory, labels='inferred')} will return a \code{tf.data.Dataset} that yields batches of
+Then calling \code{image_dataset_from_directory(main_directory, labels = 'inferred')} will return a \code{tf.data.Dataset} that yields batches of
 images from the subdirectories \code{class_a} and \code{class_b}, together with labels
 0 and 1 (0 corresponding to \code{class_a} and 1 corresponding to \code{class_b}).
 

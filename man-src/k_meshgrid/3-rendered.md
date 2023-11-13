@@ -15,7 +15,7 @@ y <- k_array(c(4, 5, 6), "int32")
 
 
 ```r
-c(grid_x, grid_y) %<-% k_meshgrid(x, y, indexing="ij")
+c(grid_x, grid_y) %<-% k_meshgrid(x, y, indexing = "ij")
 grid_x
 ```
 

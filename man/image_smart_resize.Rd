@@ -52,7 +52,7 @@ in general they do not all have the same aspect ratio as \code{size}. This is
 fine in many cases, but not always (e.g. for image generation models
 this can be a problem).
 
-Note that passing the argument \code{preserve_aspect_ratio=TRUE} to \code{tf$image$resize()}
+Note that passing the argument \code{preserve_aspect_ratio = TRUE} to \code{tf$image$resize()}
 will preserve the aspect ratio, but at the cost of no longer respecting the
 provided target size.
 
@@ -69,7 +69,7 @@ get cropped out.
 The resizing process is:
 \enumerate{
 \item Take the largest centered crop of the image that has the same aspect
-ratio as the target size. For instance, if \code{size=c(200, 200)} and the input
+ratio as the target size. For instance, if \code{size = c(200, 200)} and the input
 image has size \verb{(340, 500)}, we take a crop of \verb{(340, 340)} centered along
 the width.
 \item Resize the cropped image to the target size. In the example above,

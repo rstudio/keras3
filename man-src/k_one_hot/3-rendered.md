@@ -10,7 +10,7 @@ all other indices are marked as 0.
 
 ```r
 x <- k_array(c(1, 3, 2, 0), "int32")
-k_one_hot(x, num_classes=4)
+k_one_hot(x, num_classes = 4)
 ```
 
 ```
@@ -47,4 +47,3 @@ is determined by `dtype` or the default data type of the backend.
 @seealso
 + <https:/keras.io/keras_core/api/ops/nn#onehot-function>
 + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/one_hot>
-

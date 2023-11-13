@@ -14,7 +14,7 @@ main_directory/
 ```
 
 Then calling `audio_dataset_from_directory(main_directory,
-labels='inferred')`
+labels = 'inferred')`
 will return a `tf.data.Dataset` that yields batches of audio files from
 the subdirectories `class_a` and `class_b`, together with labels
 0 and 1 (0 corresponding to `class_a` and 1 corresponding to `class_b`).

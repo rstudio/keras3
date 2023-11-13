@@ -14,7 +14,7 @@ For instance, in a \code{Dense} layer the weight matrix
 has shape \verb{(input_dim, output_dim)},
 set \code{axis} to \code{0} to constrain each weight vector
 of length \verb{(input_dim,)}.
-In a \code{Conv2D} layer with \code{data_format="channels_last"},
+In a \code{Conv2D} layer with \code{data_format = "channels_last"},
 the weight tensor has shape
 \verb{(rows, cols, input_depth, output_depth)},
 set \code{axis} to \verb{[0, 1, 2]}

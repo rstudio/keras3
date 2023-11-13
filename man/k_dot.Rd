@@ -23,7 +23,7 @@ k_dot(x1, x2)
 \item If either \code{x1} or \code{x2} is 0-D (scalar), it is equivalent to \code{x1 * x2}.
 \item If \code{x1} is an N-D tensor and \code{x2} is a 1-D tensor, it is a sum product
 over the last axis of \code{x1} and \code{x2}.
-\item If \code{x1} is an N-D tensor and \code{x2} is an M-D tensor (where \code{M>=2}),
+\item If \code{x1} is an N-D tensor and \code{x2} is an M-D tensor (where \code{M >= 2}),
 it is a sum product over the last axis of \code{x1} and the second-to-last
 axis of \code{x2}: \verb{dot(x1, x2)[i,j,k,m] = sum(a[i,j,:] * b[k,:,m])}.
 }

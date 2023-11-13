@@ -111,7 +111,7 @@ If your directory structure is:
 ......b_audio_2.wav
 }\if{html}{\out{</div>}}
 
-Then calling \code{audio_dataset_from_directory(main_directory, labels='inferred')}
+Then calling \code{audio_dataset_from_directory(main_directory, labels = 'inferred')}
 will return a \code{tf.data.Dataset} that yields batches of audio files from
 the subdirectories \code{class_a} and \code{class_b}, together with labels
 0 and 1 (0 corresponding to \code{class_a} and 1 corresponding to \code{class_b}).

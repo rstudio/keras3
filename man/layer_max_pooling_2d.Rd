@@ -17,11 +17,11 @@ layer_max_pooling_2d(
 \arguments{
 \item{object}{Object to compose the layer with. A tensor, array, or sequential model.}
 
-\item{pool_size}{int or tuple of 2 integers, factors by which to downscale
+\item{pool_size}{int or list of 2 integers, factors by which to downscale
 (dim1, dim2). If only one integer is specified, the same
 window length will be used for all dimensions.}
 
-\item{strides}{int or tuple of 2 integers, or None. Strides values. If None,
+\item{strides}{int or list of 2 integers, or \code{NULL}. Strides values. If \code{NULL},
 it will default to \code{pool_size}. If only one int is specified, the
 same stride size will be used for all dimensions.}
 
@@ -51,11 +51,11 @@ The window is shifted by \code{strides} along each dimension.
 
 The resulting output when using the \code{"valid"} padding option has a spatial
 shape (number of rows or columns) of:
-\code{output_shape = math.floor((input_shape - pool_size) / strides) + 1}
+\code{output_shape = floor((input_shape - pool_size) / strides) + 1}
 (when \code{input_shape >= pool_size})
 
 The resulting output shape when using the \code{"same"} padding option is:
-\code{output_shape = math.floor((input_shape - 1) / strides) + 1}
+\code{output_shape = floor((input_shape - 1) / strides) + 1}
 }
 \section{Input Shape}{
 \itemize{
@@ -78,37 +78,64 @@ The resulting output shape when using the \code{"same"} padding option is:
 }
 
 \section{Examples}{
-\verb{strides=(1, 1)} and \code{padding="valid"}:
+\verb{strides = (1, 1)} and \code{padding = "valid"}:
 
-\if{html}{\out{<div class="sourceCode python">}}\preformatted{x = np.array([[1., 2., 3.],
-              [4., 5., 6.],
-              [7., 8., 9.]])
-x = np.reshape(x, [1, 3, 3, 1])
-max_pool_2d = keras.layers.MaxPooling2D(pool_size=(2, 2),
-   strides=(1, 1), padding="valid")
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{x <- rbind(c(1., 2., 3.),
+           c(4., 5., 6.),
+           c(7., 8., 9.)) |> k_reshape(c(1, 3, 3, 1))
+max_pool_2d <- layer_max_pooling_2d(pool_size = c(2, 2),
+                                    strides = c(1, 1),
+                                    padding = "valid")
 max_pool_2d(x)
 }\if{html}{\out{</div>}}
 
-\verb{strides=(2, 2)} and \code{padding="valid"}:
+\if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor(
+## [[[[5.]
+##    [6.]]
+##
+##   [[8.]
+##    [9.]]]], shape=(1, 2, 2, 1), dtype=float32)
+}\if{html}{\out{</div>}}
 
-\if{html}{\out{<div class="sourceCode python">}}\preformatted{x = np.array([[1., 2., 3., 4.],
-              [5., 6., 7., 8.],
-              [9., 10., 11., 12.]])
-x = np.reshape(x, [1, 3, 4, 1])
-max_pool_2d = keras.layers.MaxPooling2D(pool_size=(2, 2),
-   strides=(2, 2), padding="valid")
+\code{strides = c(2, 2)} and \code{padding = "valid"}:
+
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{x <- rbind(c(1., 2., 3., 4.),
+           c(5., 6., 7., 8.),
+           c(9., 10., 11., 12.)) |> k_reshape(c(1, 3, 4, 1))
+max_pool_2d <- layer_max_pooling_2d(pool_size = c(2, 2),
+                                    strides = c(2, 2),
+                                    padding = "valid")
 max_pool_2d(x)
 }\if{html}{\out{</div>}}
 
-\verb{stride=(1, 1)} and \code{padding="same"}:
+\if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor(
+## [[[[6.]
+##    [8.]]]], shape=(1, 1, 2, 1), dtype=float32)
+}\if{html}{\out{</div>}}
 
-\if{html}{\out{<div class="sourceCode python">}}\preformatted{x = np.array([[1., 2., 3.],
-              [4., 5., 6.],
-              [7., 8., 9.]])
-x = np.reshape(x, [1, 3, 3, 1])
-max_pool_2d = keras.layers.MaxPooling2D(pool_size=(2, 2),
-   strides=(1, 1), padding="same")
+\verb{stride = (1, 1)} and \code{padding = "same"}:
+
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{x <- rbind(c(1., 2., 3.),
+           c(4., 5., 6.),
+           c(7., 8., 9.)) |> k_reshape(c(1, 3, 3, 1))
+max_pool_2d <- layer_max_pooling_2d(pool_size = c(2, 2),
+                                    strides = c(1, 1),
+                                    padding = "same")
 max_pool_2d(x)
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor(
+## [[[[5.]
+##    [6.]
+##    [6.]]
+##
+##   [[8.]
+##    [9.]
+##    [9.]]
+##
+##   [[8.]
+##    [9.]
+##    [9.]]]], shape=(1, 3, 3, 1), dtype=float32)
 }\if{html}{\out{</div>}}
 }
 

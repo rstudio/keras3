@@ -26,7 +26,7 @@ lengths \verb{S0, S1, ..., SN-1}, this creates an \code{N} N-dimensional tensors
 y <- k_array(c(4, 5, 6), "int32")
 }\if{html}{\out{</div>}}
 
-\if{html}{\out{<div class="sourceCode r">}}\preformatted{c(grid_x, grid_y) \%<-\% k_meshgrid(x, y, indexing="ij")
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{c(grid_x, grid_y) \%<-\% k_meshgrid(x, y, indexing = "ij")
 grid_x
 }\if{html}{\out{</div>}}
 

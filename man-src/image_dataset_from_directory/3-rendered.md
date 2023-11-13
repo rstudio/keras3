@@ -14,7 +14,7 @@ main_directory/
 ```
 
 Then calling `image_dataset_from_directory(main_directory,
-labels='inferred')` will return a `tf.data.Dataset` that yields batches of
+labels = 'inferred')` will return a `tf.data.Dataset` that yields batches of
 images from the subdirectories `class_a` and `class_b`, together with labels
 0 and 1 (0 corresponding to `class_a` and 1 corresponding to `class_b`).
 
@@ -93,7 +93,7 @@ Rules regarding number of channels in the yielded images:
 @param subset Subset of the data to return.
     One of `"training"`, `"validation"`, or `"both"`.
     Only used if `validation_split` is set.
-    When `subset="both"`, the utility returns a tuple of two datasets
+    When `subset = "both"`, the utility returns a tuple of two datasets
     (the training and validation datasets respectively).
 @param interpolation String, the interpolation method used when
     resizing images. Defaults to `"bilinear"`.
@@ -106,7 +106,7 @@ Rules regarding number of channels in the yielded images:
     target aspect ratio, the output image will be cropped so as to
     return the largest possible window in the image
     (of size `image_size`) that matches the target aspect ratio. By
-    default (`crop_to_aspect_ratio=False`), aspect ratio may not be
+    default (`crop_to_aspect_ratio = False`), aspect ratio may not be
     preserved.
 @param data_format If None uses keras.config.image_data_format()
     otherwise either 'channel_last' or 'channel_first'.

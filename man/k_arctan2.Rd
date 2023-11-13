@@ -34,7 +34,7 @@ k_arctan2(y, x) * 180 / pi
 \if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor([-135.        -44.999996   44.999996  135.      ], shape=(4), dtype=float32)
 }\if{html}{\out{</div>}}
 
-Note the order of the parameters. \code{arctan2} is defined also when x2=0 and
+Note the order of the parameters. \code{arctan2} is defined also when x2 = 0 and
 at several other points, obtaining values in the range \verb{[-pi, pi]}:
 
 \if{html}{\out{<div class="sourceCode r">}}\preformatted{k_arctan2(

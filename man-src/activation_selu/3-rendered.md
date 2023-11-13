@@ -7,7 +7,7 @@ The Scaled Exponential Linear Unit (SELU) activation function is defined as:
 - `scale * alpha * (exp(x) - 1)` if `x < 0`
 
 where `alpha` and `scale` are pre-defined constants
-(`alpha=1.67326324` and `scale=1.05070098`).
+(`alpha = 1.67326324` and `scale = 1.05070098`).
 
 Basically, the SELU activation function multiplies `scale` (> 1) with the
 output of the `keras.activations.elu` function to ensure a slope larger

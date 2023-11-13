@@ -16,9 +16,9 @@ k_conv(
 \arguments{
 \item{inputs}{Tensor of rank N+2. \code{inputs} has shape
 \verb{(batch_size,) + inputs_spatial_shape + (num_channels,)} if
-\code{data_format="channels_last"}, or
+\code{data_format = "channels_last"}, or
 \verb{(batch_size, num_channels) + inputs_spatial_shape} if
-\code{data_format="channels_first"}.}
+\code{data_format = "channels_first"}.}
 
 \item{kernel}{Tensor of rank N+2. \code{kernel} has shape
 \verb{(kernel_spatial_shape, num_input_channels, num_output_channels)}.
@@ -33,13 +33,13 @@ the same \code{strides}.}
 \item{padding}{string, either \code{"valid"} or \code{"same"}. \code{"valid"} means no
 padding is applied, and \code{"same"} results in padding evenly to the
 left/right or up/down of the input such that output has the
-same height/width dimension as the input when \code{strides=1}.}
+same height/width dimension as the input when \code{strides = 1}.}
 
 \item{data_format}{A string, either \code{"channels_last"} or \code{"channels_first"}.
 \code{data_format} determines the ordering of the dimensions in the
-inputs. If \code{data_format="channels_last"}, \code{inputs} is of shape
+inputs. If \code{data_format = "channels_last"}, \code{inputs} is of shape
 \verb{(batch_size, ..., channels)} while if
-\code{data_format="channels_first"}, \code{inputs} is of shape
+\code{data_format = "channels_first"}, \code{inputs} is of shape
 \verb{(batch_size, channels, ...)}.}
 
 \item{dilation_rate}{int or int tuple/list of \code{len(inputs_spatial_shape)},

@@ -10,10 +10,10 @@ k_prod(x, axis = NULL, keepdims = FALSE, dtype = NULL)
 \item{x}{Input tensor.}
 
 \item{axis}{Axis or axes along which a product is performed. The default,
-\code{axis=None}, will compute the product of all elements
+\code{axis = NULL}, will compute the product of all elements
 in the input tensor.}
 
-\item{keepdims}{If this is set to \code{True}, the axes which are reduce
+\item{keepdims}{If this is set to \code{TRUE}, the axes which are reduce
 are left in the result as dimensions with size one.}
 
 \item{dtype}{Data type of the returned tensor.}

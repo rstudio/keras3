@@ -7,7 +7,7 @@ Pad `images` with zeros to the specified `height` and `width`.
 ```r
 images <- random_uniform(c(15, 25, 3))
 padded_images <- k_image_pad_images(
-    images, 2, 3, target_height=20, target_width=30
+    images, 2, 3, target_height = 20, target_width = 30
 )
 padded_images$shape
 ```

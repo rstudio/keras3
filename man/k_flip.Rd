@@ -10,7 +10,7 @@ k_flip(x, axis = NULL)
 \item{x}{Input tensor.}
 
 \item{axis}{Axis or axes along which to flip the tensor. The default,
-\code{axis=None}, will flip over all of the axes of the input tensor.}
+\code{axis = NULL}, will flip over all of the axes of the input tensor.}
 }
 \value{
 \if{html}{\out{<div class="sourceCode">}}\preformatted{Output tensor with entries of `axis` reversed.

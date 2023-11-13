@@ -31,7 +31,7 @@ Requires the \code{requests} library.
 Events are sent to \code{root + '/publish/epoch/end/'} by default. Calls are
 HTTP POST, with a \code{data} argument which is a
 JSON-encoded dictionary of event data.
-If \code{send_as_json=True}, the content type of the request will be
+If \code{send_as_json = True}, the content type of the request will be
 \code{"application/json"}.
 Otherwise the serialized JSON will be sent within a form.
 }

@@ -40,4 +40,3 @@ A tensor with the same shape as `x`.
 @seealso
 + <https:/keras.io/keras_core/api/ops/nn#leakyrelu-function>
 + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/leaky_relu>
-

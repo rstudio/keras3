@@ -14,7 +14,7 @@ constraint_minmaxnorm(min_value = 0, max_value = 1, rate = 1, axis = 0L)
 \item{rate}{rate for enforcing the constraint: weights will be
 rescaled to yield
 \code{(1 - rate) * norm + rate * norm.clip(min_value, max_value)}.
-Effectively, this means that rate=1.0 stands for strict
+Effectively, this means that rate = 1.0 stands for strict
 enforcement of the constraint, while rate<1.0 means that
 weights will be rescaled at each step to slowly move
 towards a value inside the desired interval.}
@@ -24,7 +24,7 @@ For instance, in a \code{Dense} layer the weight matrix
 has shape \verb{(input_dim, output_dim)},
 set \code{axis} to \code{0} to constrain each weight vector
 of length \verb{(input_dim,)}.
-In a \code{Conv2D} layer with \code{data_format="channels_last"},
+In a \code{Conv2D} layer with \code{data_format = "channels_last"},
 the weight tensor has shape
 \verb{(rows, cols, input_depth, output_depth)},
 set \code{axis} to \verb{[0, 1, 2]}

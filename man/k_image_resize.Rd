@@ -56,7 +56,7 @@ y$shape
 }\if{html}{\out{</div>}}
 
 \if{html}{\out{<div class="sourceCode r">}}\preformatted{x <- random_uniform(c(2, 3, 4, 4)) # batch of 2 RGB images
-y <- k_image_resize(x, c(2, 2), data_format="channels_first")
+y <- k_image_resize(x, c(2, 2), data_format = "channels_first")
 y$shape
 }\if{html}{\out{</div>}}
 

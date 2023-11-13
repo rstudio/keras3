@@ -42,7 +42,7 @@ Pad \code{images} with zeros to the specified \code{height} and \code{width}.
 \section{Examples}{
 \if{html}{\out{<div class="sourceCode r">}}\preformatted{images <- random_uniform(c(15, 25, 3))
 padded_images <- k_image_pad_images(
-    images, 2, 3, target_height=20, target_width=30
+    images, 2, 3, target_height = 20, target_width = 30
 )
 padded_images$shape
 }\if{html}{\out{</div>}}

@@ -26,7 +26,7 @@ is mapped to a binary value in the resulting vector.
 }
 \section{Examples}{
 \if{html}{\out{<div class="sourceCode r">}}\preformatted{data <- k_convert_to_tensor(c(0, 4))
-k_multi_hot(data, num_tokens=5)
+k_multi_hot(data, num_tokens = 5)
 }\if{html}{\out{</div>}}
 
 \if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor([1. 0. 0. 0. 1.], shape=(5), dtype=float32)

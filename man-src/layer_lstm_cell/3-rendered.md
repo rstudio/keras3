@@ -8,36 +8,53 @@ This class processes one step within the whole time sequence input, whereas
 - `inputs`: A 2D tensor, with shape `(batch, features)`.
 - `states`: A 2D tensor with shape `(batch, units)`, which is the state
     from the previous time step.
-- `training`: Python boolean indicating whether the layer should behave in
+- `training`: Boolean indicating whether the layer should behave in
     training mode or in inference mode. Only relevant when `dropout` or
     `recurrent_dropout` is used.
 
 # Examples
-```python
-inputs = np.random.random((32, 10, 8))
-rnn = keras.layers.RNN(keras.layers.LSTMCell(4))
-output = rnn(inputs)
-output.shape
-# (32, 4)
-rnn = keras.layers.RNN(
-   keras.layers.LSTMCell(4),
-   return_sequences=True,
-   return_state=True)
-whole_sequence_output, final_state = rnn(inputs)
-whole_sequence_output.shape
-# (32, 10, 4)
-final_state.shape
-# (32, 4)
+
+```r
+inputs <- random_uniform(c(32, 10, 8))
+output <- inputs |>
+  layer_rnn(cell = layer_lstm_cell(4))
+output$shape
+```
+
+```
+## TensorShape([32, 4])
+```
+
+```r
+rnn <- layer_rnn(cell = layer_lstm_cell(4),
+                 return_sequences = T,
+                 return_state = T)
+c(whole_sequence_output, ...final_state) %<-% rnn(inputs)
+str(whole_sequence_output)
+```
+
+```
+## <tf.Tensor: shape=(32, 10, 4), dtype=float32, numpy=…>
+```
+
+```r
+str(final_state)
+```
+
+```
+## List of 2
+##  $ :<tf.Tensor: shape=(32, 4), dtype=float32, numpy=…>
+##  $ :<tf.Tensor: shape=(32, 4), dtype=float32, numpy=…>
 ```
 
 @param units Positive integer, dimensionality of the output space.
 @param activation Activation function to use. Default: hyperbolic tangent
-    (`tanh`). If you pass None, no activation is applied
+    (`tanh`). If you pass `NULL`, no activation is applied
     (ie. "linear" activation: `a(x) = x`).
 @param recurrent_activation Activation function to use for the recurrent step.
-    Default: sigmoid (`sigmoid`). If you pass `None`, no activation is
+    Default: sigmoid (`sigmoid`). If you pass `NULL`, no activation is
     applied (ie. "linear" activation: `a(x) = x`).
-@param use_bias Boolean, (default `True`), whether the layer
+@param use_bias Boolean, (default `TRUE`), whether the layer
     should use a bias vector.
 @param kernel_initializer Initializer for the `kernel` weights matrix,
     used for the linear transformation of the inputs. Default:
@@ -46,23 +63,23 @@ final_state.shape
     weights matrix, used for the linear transformation
     of the recurrent state. Default: `"orthogonal"`.
 @param bias_initializer Initializer for the bias vector. Default: `"zeros"`.
-@param unit_forget_bias Boolean (default `True`). If `True`,
+@param unit_forget_bias Boolean (default `TRUE`). If `TRUE`,
     add 1 to the bias of the forget gate at initialization.
-    Setting it to `True` will also force `bias_initializer="zeros"`.
+    Setting it to `TRUE` will also force `bias_initializer="zeros"`.
     This is recommended in [Jozefowicz et al.](
     https://github.com/mlresearch/v37/blob/gh-pages/jozefowicz15.pdf)
 @param kernel_regularizer Regularizer function applied to the `kernel` weights
-    matrix. Default: `None`.
+    matrix. Default: `NULL`.
 @param recurrent_regularizer Regularizer function applied to the
-    `recurrent_kernel` weights matrix. Default: `None`.
+    `recurrent_kernel` weights matrix. Default: `NULL`.
 @param bias_regularizer Regularizer function applied to the bias vector.
-    Default: `None`.
+    Default: `NULL`.
 @param kernel_constraint Constraint function applied to the `kernel` weights
-    matrix. Default: `None`.
+    matrix. Default: `NULL`.
 @param recurrent_constraint Constraint function applied to the
-    `recurrent_kernel` weights matrix. Default: `None`.
+    `recurrent_kernel` weights matrix. Default: `NULL`.
 @param bias_constraint Constraint function applied to the bias vector.
-    Default: `None`.
+    Default: `NULL`.
 @param dropout Float between 0 and 1. Fraction of the units to drop for the
     linear transformation of the inputs. Default: 0.
 @param recurrent_dropout Float between 0 and 1. Fraction of the units to drop

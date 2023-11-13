@@ -9,7 +9,7 @@ k_average(x, axis = NULL, weights = NULL)
 \arguments{
 \item{x}{Input tensor.}
 
-\item{axis}{Integer along which to average \code{x}. The default, \code{axis=NULL},
+\item{axis}{Integer along which to average \code{x}. The default, \code{axis = NULL},
 will average over all of the elements of the input tensor. If axis
 is negative it counts from the last to the first axis.}
 
@@ -17,7 +17,7 @@ is negative it counts from the last to the first axis.}
 value in \code{x} contributes to the average according to its
 associated weight. The weights array can either be 1-D (in which
 case its length must be the size of a along the given axis) or of
-the same shape as \code{x}. If \code{weights=NULL} (default), then all data
+the same shape as \code{x}. If \code{weights = NULL} (default), then all data
 in \code{x} are assumed to have a weight equal to one.
 
 \if{html}{\out{<div class="sourceCode">}}\preformatted{The 1-D calculation is: `avg = sum(a * weights) / sum(weights)`.

@@ -10,7 +10,7 @@ k_amin(x, axis = NULL, keepdims = FALSE)
 \item{x}{Input tensor.}
 
 \item{axis}{Axis along which to compute the minimum.
-By default (\code{axis=NULL}), find the minimum value in all the
+By default (\code{axis = NULL}), find the minimum value in all the
 dimensions of the input tensor.}
 
 \item{keepdims}{If \code{TRUE}, axes which are reduced are left in the result as

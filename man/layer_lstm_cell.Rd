@@ -29,14 +29,14 @@ layer_lstm_cell(
 \item{units}{Positive integer, dimensionality of the output space.}
 
 \item{activation}{Activation function to use. Default: hyperbolic tangent
-(\code{tanh}). If you pass None, no activation is applied
+(\code{tanh}). If you pass \code{NULL}, no activation is applied
 (ie. "linear" activation: \code{a(x) = x}).}
 
 \item{recurrent_activation}{Activation function to use for the recurrent step.
-Default: sigmoid (\code{sigmoid}). If you pass \code{None}, no activation is
+Default: sigmoid (\code{sigmoid}). If you pass \code{NULL}, no activation is
 applied (ie. "linear" activation: \code{a(x) = x}).}
 
-\item{use_bias}{Boolean, (default \code{True}), whether the layer
+\item{use_bias}{Boolean, (default \code{TRUE}), whether the layer
 should use a bias vector.}
 
 \item{kernel_initializer}{Initializer for the \code{kernel} weights matrix,
@@ -49,28 +49,28 @@ of the recurrent state. Default: \code{"orthogonal"}.}
 
 \item{bias_initializer}{Initializer for the bias vector. Default: \code{"zeros"}.}
 
-\item{unit_forget_bias}{Boolean (default \code{True}). If \code{True},
+\item{unit_forget_bias}{Boolean (default \code{TRUE}). If \code{TRUE},
 add 1 to the bias of the forget gate at initialization.
-Setting it to \code{True} will also force \code{bias_initializer="zeros"}.
+Setting it to \code{TRUE} will also force \code{bias_initializer="zeros"}.
 This is recommended in \href{https://github.com/mlresearch/v37/blob/gh-pages/jozefowicz15.pdf}{Jozefowicz et al.}}
 
 \item{kernel_regularizer}{Regularizer function applied to the \code{kernel} weights
-matrix. Default: \code{None}.}
+matrix. Default: \code{NULL}.}
 
 \item{recurrent_regularizer}{Regularizer function applied to the
-\code{recurrent_kernel} weights matrix. Default: \code{None}.}
+\code{recurrent_kernel} weights matrix. Default: \code{NULL}.}
 
 \item{bias_regularizer}{Regularizer function applied to the bias vector.
-Default: \code{None}.}
+Default: \code{NULL}.}
 
 \item{kernel_constraint}{Constraint function applied to the \code{kernel} weights
-matrix. Default: \code{None}.}
+matrix. Default: \code{NULL}.}
 
 \item{recurrent_constraint}{Constraint function applied to the
-\code{recurrent_kernel} weights matrix. Default: \code{None}.}
+\code{recurrent_kernel} weights matrix. Default: \code{NULL}.}
 
 \item{bias_constraint}{Constraint function applied to the bias vector.
-Default: \code{None}.}
+Default: \code{NULL}.}
 
 \item{dropout}{Float between 0 and 1. Fraction of the units to drop for the
 linear transformation of the inputs. Default: 0.}
@@ -91,27 +91,38 @@ This class processes one step within the whole time sequence input, whereas
 \item \code{inputs}: A 2D tensor, with shape \verb{(batch, features)}.
 \item \code{states}: A 2D tensor with shape \verb{(batch, units)}, which is the state
 from the previous time step.
-\item \code{training}: Python boolean indicating whether the layer should behave in
+\item \code{training}: Boolean indicating whether the layer should behave in
 training mode or in inference mode. Only relevant when \code{dropout} or
 \code{recurrent_dropout} is used.
 }
 }
 
 \section{Examples}{
-\if{html}{\out{<div class="sourceCode python">}}\preformatted{inputs = np.random.random((32, 10, 8))
-rnn = keras.layers.RNN(keras.layers.LSTMCell(4))
-output = rnn(inputs)
-output.shape
-# (32, 4)
-rnn = keras.layers.RNN(
-   keras.layers.LSTMCell(4),
-   return_sequences=True,
-   return_state=True)
-whole_sequence_output, final_state = rnn(inputs)
-whole_sequence_output.shape
-# (32, 10, 4)
-final_state.shape
-# (32, 4)
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{inputs <- random_uniform(c(32, 10, 8))
+output <- inputs |>
+  layer_rnn(cell = layer_lstm_cell(4))
+output$shape
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode">}}\preformatted{## TensorShape([32, 4])
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{rnn <- layer_rnn(cell = layer_lstm_cell(4),
+                 return_sequences = T,
+                 return_state = T)
+c(whole_sequence_output, ...final_state) \%<-\% rnn(inputs)
+str(whole_sequence_output)
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode">}}\preformatted{## <tf.Tensor: shape=(32, 10, 4), dtype=float32, numpy=…>
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{str(final_state)
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode">}}\preformatted{## List of 2
+##  $ :<tf.Tensor: shape=(32, 4), dtype=float32, numpy=…>
+##  $ :<tf.Tensor: shape=(32, 4), dtype=float32, numpy=…>
 }\if{html}{\out{</div>}}
 }
 

@@ -29,8 +29,8 @@ across \code{axes}. If \code{x} is 1-D and \code{axes = c(1)} this is just the m
 variance of a vector.
 }
 \section{Examples}{
-\if{html}{\out{<div class="sourceCode r">}}\preformatted{x <- k_convert_to_tensor(c(0, 1, 2, 3, 100), dtype="float32")
-k_moments(x, axes=c(1))
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{x <- k_convert_to_tensor(c(0, 1, 2, 3, 100), dtype = "float32")
+k_moments(x, axes = c(1))
 }\if{html}{\out{</div>}}
 
 \if{html}{\out{<div class="sourceCode">}}\preformatted{## [[1]]

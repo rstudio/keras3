@@ -46,7 +46,7 @@ The input is extended by wrapping around to the opposite edge.
 The input is extended by the nearest pixel.}
 
 \item{fill_value}{Value used for points outside the boundaries of the input if
-\code{fill_mode="constant"}. Defaults to \code{0}.}
+\code{fill_mode = "constant"}. Defaults to \code{0}.}
 
 \item{data_format}{string, either \code{"channels_last"} or \code{"channels_first"}.
 The ordering of the dimensions in the inputs. \code{"channels_last"}

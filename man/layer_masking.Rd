@@ -23,31 +23,32 @@ If any downstream layer does not support masking yet receives such
 an input mask, an exception will be raised.
 }
 \section{Examples}{
-Consider a NumPy data array \code{x} of shape \verb{(samples, timesteps, features)},
+Consider an array \code{x} of shape \code{c(samples, timesteps, features)},
 to be fed to an LSTM layer. You want to mask timestep #3 and #5 because you
 lack data for these timesteps. You can:
 \itemize{
-\item Set \verb{x[:, 3, :] = 0.} and \verb{x[:, 5, :] = 0.}
-\item Insert a \code{Masking} layer with \code{mask_value=0.} before the LSTM layer:
+\item Set \code{x[, 3, ] <- 0.} and \code{x[, 5, ] <- 0.}
+\item Insert a \code{layer_masking()} layer with \code{mask_value = 0.} before the LSTM layer:
 }
 
-\if{html}{\out{<div class="sourceCode python">}}\preformatted{samples, timesteps, features = 32, 10, 8
-inputs = np.random.random([samples, timesteps, features]).astype(np.float32)
-inputs[:, 3, :] = 0.
-inputs[:, 5, :] = 0.
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{c(samples, timesteps, features) \%<-\% c(32, 10, 8)
+inputs <- c(samples, timesteps, features) \%>\% \{ array(runif(prod(.)), dim = .) \}
+inputs[, 3, ] <- 0
+inputs[, 5, ] <- 0
 
-model = keras.models.Sequential()
-model.add(keras.layers.Masking(mask_value=0.)
-model.add(keras.layers.LSTM(32))
-output = model(inputs)
+model <- keras_model_sequential() \%>\%
+  layer_masking(mask_value = 0) \%>\%
+  layer_lstm(32)
+
+output <- model(inputs)
 # The time step 3 and 5 will be skipped from LSTM calculation.
 }\if{html}{\out{</div>}}
 }
 
 \section{Note}{
 in the Keras masking convention, a masked timestep is denoted by
-a mask value of \code{False}, while a non-masked (i.e. usable) timestep
-is denoted by a mask value of \code{True}.
+a mask value of \code{FALSE}, while a non-masked (i.e. usable) timestep
+is denoted by a mask value of \code{TRUE}.
 }
 
 \seealso{

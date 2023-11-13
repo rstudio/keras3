@@ -29,16 +29,16 @@ across multiple calls, use as seed an instance
 of \code{random_seed_generator()}.}
 }
 \description{
-With \verb{distribution="truncated_normal" or "untruncated_normal"}, samples are
+With \verb{distribution = "truncated_normal" or "untruncated_normal"}, samples are
 drawn from a truncated/untruncated normal distribution with a mean of zero
 and a standard deviation (after truncation, if used) \code{stddev = sqrt(scale / n)}, where \code{n} is:
 \itemize{
-\item number of input units in the weight tensor, if \code{mode="fan_in"}
-\item number of output units, if \code{mode="fan_out"}
-\item average of the numbers of input and output units, if \code{mode="fan_avg"}
+\item number of input units in the weight tensor, if \code{mode = "fan_in"}
+\item number of output units, if \code{mode = "fan_out"}
+\item average of the numbers of input and output units, if \code{mode = "fan_avg"}
 }
 
-With \code{distribution="uniform"}, samples are drawn from a uniform distribution
+With \code{distribution = "uniform"}, samples are drawn from a uniform distribution
 within \verb{[-limit, limit]}, where \code{limit = sqrt(3 * scale / n)}.
 }
 \section{Examples}{

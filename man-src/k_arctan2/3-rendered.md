@@ -22,7 +22,7 @@ k_arctan2(y, x) * 180 / pi
 ## tf.Tensor([-135.        -44.999996   44.999996  135.      ], shape=(4), dtype=float32)
 ```
 
-Note the order of the parameters. `arctan2` is defined also when x2=0 and
+Note the order of the parameters. `arctan2` is defined also when x2 = 0 and
 at several other points, obtaining values in the range `[-pi, pi]`:
 
 ```r

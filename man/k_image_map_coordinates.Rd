@@ -40,7 +40,7 @@ The input is extended by reflecting about the edge of the last
 pixel.}
 
 \item{fill_value}{Value used for points outside the boundaries of the input if
-\code{fill_mode="constant"}. Defaults to \code{0}.}
+\code{fill_mode = "constant"}. Defaults to \code{0}.}
 }
 \value{
 \if{html}{\out{<div class="sourceCode">}}\preformatted{Output image or batch of images.

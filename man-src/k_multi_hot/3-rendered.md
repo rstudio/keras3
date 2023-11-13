@@ -8,7 +8,7 @@ is mapped to a binary value in the resulting vector.
 
 ```r
 data <- k_convert_to_tensor(c(0, 4))
-k_multi_hot(data, num_tokens=5)
+k_multi_hot(data, num_tokens = 5)
 ```
 
 ```

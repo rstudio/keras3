@@ -142,7 +142,7 @@ outputs <- inputs |>
 model <- keras_model(inputs, outputs)
 model |> compile(optimizer = 'sgd', loss = 'mse')
 
-# Make sure to set `update_freq=N` to log a batch-level summary every N
+# Make sure to set `update_freq = N` to log a batch-level summary every N
 # batches. In addition to any `tf.summary` contained in `Model.call`,
 # metrics added in `Model.compile` will be logged every N batches.
 tb_callback <- callback_tensorboard(log_dir = './logs', update_freq = 1)
