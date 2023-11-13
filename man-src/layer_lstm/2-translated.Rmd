@@ -28,7 +28,7 @@ output <- input |> layer_lstm(4)
 output$shape
 
 lstm <- layer_lstm(units = 4, return_sequences = TRUE, return_state = TRUE)
-c(whole_seq_output, final_memory_state, final_carry_state) %<-% lstm(inputs)
+c(whole_seq_output, final_memory_state, final_carry_state) %<-% lstm(input)
 whole_seq_output$shape
 final_memory_state$shape
 final_carry_state$shape
