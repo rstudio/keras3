@@ -3,9 +3,6 @@
 if(!"source:tools/utils.R" %in% search()) envir::attach_source("tools/utils.R")
 if(!"source:tools/translate-tools.R" %in% search()) envir::attach_source("tools/translate-tools.R")
 
-# TODO: consider using quilt or stgit instead of the manual git calls
-# https://stacked-git.github.io   https://savannah.nongnu.org/projects/quilt/ https://blog.tfnico.com/2020/07/git-tools-for-keeping-patches-on-top-of.html
-
 # TODO: k_fft() should really accept and return complex tensors too.
 #
 # TODO: we should export keras::shape()
@@ -17,8 +14,6 @@ if(!"source:tools/translate-tools.R" %in% search()) envir::attach_source("tools/
 # TODO: the 2-translated.Rmd should include a chunk w/ the function def (for easy seeing while editing)
 #       with chunk options (include = FALSE)
 #
-# TODO: bring back callback_backup_and_restore()?
-
 # TODO: any formals that are transformed w/ as_axis should have the default arg also
 #       transformed. .e.g, k_diagonal(axis1 = 1, axis2 = 2)
 
@@ -27,8 +22,6 @@ if(!"source:tools/translate-tools.R" %in% search()) envir::attach_source("tools/
 
 # TODO: use @concept or @keywords tags derived from module - then use that to autogenerate _pkgdown.yml
 #
-# TODO: fix CI: parsing of version string for keras-nightly broken.
-
 # TODO:  self$model$stop_training <- TRUE should work. Need to avoid propogating `$<-` past first.
 # TODO: new_callback_class() should accept an empty final trailing , DONE
 #
@@ -179,17 +172,20 @@ if(FALSE) {
 memoise::forget(mk_export)
 
 get_translations <- function() {
-  dirs <- fs::dir_ls("man-src/", type = "directory") |>
+  dirs <- fs::dir_ls("man-src/", regexp = "\\.Rmd$") |>
     sort() %>%
     # .[grep("^k_", basename(.))] %>%
-    .[grep("^layer_", basename(.))] %>%
+    # .[grep("^layer_", basename(.))] %>%
     set_names(basename) %>%
-    keep(\(dir) read_file(path(dir, "2-translated.Rmd")) |>
+    # keep(\(dir) read_file(path(dir, "2-translated.Rmd")) |>
+    keep(\(dir) read_file(path(dir)) |>
            str_detect("```python")) |>
     (\(x) { message("remaining: ", length(x)); x})() |>
+    # (\(x) {walk(x, message); x})()
     head(10) |>
     purrr::walk(\(dir) {
-      og <-  read_file(dir/"2-translated.Rmd")
+      og <-  read_file(dir)
+      # og <-  read_file(dir/"2-translated.Rmd")
       new <- og %>%
         str_split_lines() %>%
         str_replace_all("```python", "```{r}") %>%
@@ -219,9 +215,11 @@ get_translations <- function() {
         str_flatten_lines() %>%
         identity()
         # str_replace_all(fixed("k_convert_to_tensor(["), "k_array(c(") %>%
-      new |> write_lines(dir/"2-translated.Rmd")
-      file.edit(dir/"2-translated.Rmd")
-      stop()
+      # new |> write_lines(dir/"2-translated.Rmd")
+      new |> write_lines(dir)
+      file.edit(dir)
+      # file.edit(dir/"2-translated.Rmd")
+      # stop()
       return()
       withr::local_dir(dir)
       message("Translating: ", basename(dir))
