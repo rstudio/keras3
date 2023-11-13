@@ -34,13 +34,13 @@ set_vocabulary(object, vocabulary, idf_weights = NULL, ...)
 
 \item{max_tokens}{Maximum size of the vocabulary for this layer. This should
 only be specified when adapting a vocabulary or when setting
-\code{pad_to_max_tokens=True}. Note that this vocabulary
+\code{pad_to_max_tokens=TRUE}. Note that this vocabulary
 contains 1 OOV token, so the effective number of tokens is
 \verb{(max_tokens - 1 - (1 if output_mode == "int" else 0))}.}
 
 \item{standardize}{Optional specification for standardization to apply to the
 input text. Values can be:
-- \code{None}: No standardization.
+- \code{NULL}: No standardization.
 - \code{"lower_and_strip_punctuation"}: Text will be lowercased and all
 punctuation removed.
 - \code{"lower"}: Text will be lowercased.
@@ -50,18 +50,18 @@ which should be standardized and returned.}
 
 \item{split}{Optional specification for splitting the input text.
 Values can be:
-- \code{None}: No splitting.
+- \code{NULL}: No splitting.
 - \code{"whitespace"}: Split on whitespace.
 - \code{"character"}: Split on each unicode character.
 - Callable: Standardized inputs will passed to the callable
 function, which should be split and returned.}
 
 \item{ngrams}{Optional specification for ngrams to create from the
-possibly-split input text. Values can be \code{None}, an integer
-or tuple of integers; passing an integer will create ngrams
-up to that integer, and passing a tuple of integers will
-create ngrams for the specified values in the tuple.
-Passing \code{None} means that no ngrams will be created.}
+possibly-split input text. Values can be \code{NULL}, an integer
+or list of integers; passing an integer will create ngrams
+up to that integer, and passing a list of integers will
+create ngrams for the specified values in the list.
+Passing \code{NULL} means that no ngrams will be created.}
 
 \item{output_mode}{Optional specification for the output of the layer.
 Values can be \code{"int"}, \code{"multi_hot"}, \code{"count"} or \code{"tf_idf"},
@@ -88,17 +88,17 @@ For all other output modes, currently only rank 1 inputs
 have its time dimension padded or truncated to exactly
 \code{output_sequence_length} values, resulting in a tensor of shape
 \verb{(batch_size, output_sequence_length)} regardless of how many tokens
-resulted from the splitting step. Defaults to \code{None}.}
+resulted from the splitting step. Defaults to \code{NULL}.}
 
 \item{pad_to_max_tokens}{Only valid in  \code{"multi_hot"}, \code{"count"},
-and \code{"tf_idf"} modes. If \code{True}, the output will have
+and \code{"tf_idf"} modes. If \code{TRUE}, the output will have
 its feature axis padded to \code{max_tokens} even if the number
 of unique tokens in the vocabulary is less than \code{max_tokens},
 resulting in a tensor of shape \verb{(batch_size, max_tokens)}
-regardless of vocabulary size. Defaults to \code{False}.}
+regardless of vocabulary size. Defaults to \code{FALSE}.}
 
 \item{vocabulary}{Optional. Either an array of strings or a string path to a
-text file. If passing an array, can pass a tuple, list,
+text file. If passing an array, can pass a list, list,
 1D NumPy array, or 1D tensor containing the string vocabulary terms.
 If passing a file path, the file should contain one line per term
 in the vocabulary. If this argument is set,
@@ -110,14 +110,14 @@ output_mode is "tf_idf". Should not be set otherwise.}
 
 \item{sparse}{Boolean. Only applicable to \code{"multi_hot"}, \code{"count"}, and
 \code{"tf_idf"} output modes. Only supported with TensorFlow
-backend. If \code{True}, returns a \code{SparseTensor}
-instead of a dense \code{Tensor}. Defaults to \code{False}.}
+backend. If \code{TRUE}, returns a \code{SparseTensor}
+instead of a dense \code{Tensor}. Defaults to \code{FALSE}.}
 
 \item{ragged}{Boolean. Only applicable to \code{"int"} output mode.
 Only supported with TensorFlow backend.
-If \code{True}, returns a \code{RaggedTensor} instead of a dense \code{Tensor},
+If \code{TRUE}, returns a \code{RaggedTensor} instead of a dense \code{Tensor},
 where each sequence may have a different length
-after string splitting. Defaults to \code{False}.}
+after string splitting. Defaults to \code{FALSE}.}
 
 \item{encoding}{Optional. The text encoding to use to interpret the input
 strings. Defaults to \code{"utf-8"}.}
@@ -138,7 +138,7 @@ of token indices (one example = 1D tensor of integer token indices) or a
 dense representation (one example = 1D tensor of float values representing
 data about the example's tokens). This layer is meant to handle natural
 language inputs. To handle simple string inputs (categorical strings or
-pre-tokenized strings) see \code{kers_core.layers.StringLookup}.
+pre-tokenized strings) see \code{layer_string_lookup()}.
 
 The vocabulary for the layer must be either supplied on construction or
 learned via \code{adapt()}. When this layer is adapted, it will analyze the
@@ -170,11 +170,11 @@ by the callable will be exactly as passed to this layer. The callable
 should return a tensor of the same shape as the input.
 \item When using a custom callable for \code{split}, the data received by the
 callable will have the 1st dimension squeezed out - instead of
-\verb{[["string to split"], ["another string to split"]]}, the Callable will
-see \verb{["string to split", "another string to split"]}.
+\code{list("string to split", "another string to split")}, the Callable will
+see \code{c("string to split", "another string to split")}.
 The callable should return a \code{tf.Tensor} of dtype \code{string}
 with the first dimension containing the split tokens -
-in this example, we should see something like \verb{[["string", "to", "split"], ["another", "string", "to", "split"]]}.
+in this example, we should see something like \code{list(c("string", "to", "split"), c("another", "string", "to", "split"))}.
 }
 
 \strong{Note:} This layer uses TensorFlow internally. It cannot
@@ -192,49 +192,57 @@ to use this layer.
 This example instantiates a \code{TextVectorization} layer that lowercases text,
 splits on whitespace, strips punctuation, and outputs integer vocab indices.
 
-\if{html}{\out{<div class="sourceCode python">}}\preformatted{max_tokens = 5000  # Maximum vocab size.
-max_len = 4  # Sequence length to pad the outputs to.
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{max_tokens <- 5000  # Maximum vocab size.
+max_len <- 4  # Sequence length to pad the outputs to.
 # Create the layer.
-vectorize_layer = TextVectorization(
-    max_tokens=max_tokens,
-    output_mode='int',
-    output_sequence_length=max_len)
+vectorize_layer <- layer_text_vectorization(
+    max_tokens = max_tokens,
+    output_mode = 'int',
+    output_sequence_length = max_len)
 }\if{html}{\out{</div>}}
 
-\if{html}{\out{<div class="sourceCode python">}}\preformatted{# Now that the vocab layer has been created, call `adapt` on the
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{# Now that the vocab layer has been created, call `adapt` on the
 # list of strings to create the vocabulary.
-vectorize_layer.adapt(["foo bar", "bar baz", "baz bada boom"])
+vectorize_layer \%>\% adapt(c("foo bar", "bar baz", "baz bada boom"))
 }\if{html}{\out{</div>}}
 
-\if{html}{\out{<div class="sourceCode python">}}\preformatted{# Now, the layer can map strings to integers -- you can use an
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{# Now, the layer can map strings to integers -- you can use an
 # embedding layer to map these integers to learned embeddings.
-input_data = [["foo qux bar"], ["qux baz"]]
+input_data <- rbind("foo qux bar", "qux baz")
 vectorize_layer(input_data)
-# array([[4, 1, 3, 0],
-#        [1, 2, 0, 0]])
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor(
+## [[4 1 3 0]
+##  [1 2 0 0]], shape=(2, 4), dtype=int64)
 }\if{html}{\out{</div>}}
 
 This example instantiates a \code{TextVectorization} layer by passing a list
 of vocabulary terms to the layer's \verb{__init__()} method.
 
-\if{html}{\out{<div class="sourceCode python">}}\preformatted{vocab_data = ["earth", "wind", "and", "fire"]
-max_len = 4  # Sequence length to pad the outputs to.
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{vocab_data <- c("earth", "wind", "and", "fire")
+max_len <- 4  # Sequence length to pad the outputs to.
 # Create the layer, passing the vocab directly. You can also pass the
 # vocabulary arg a path to a file containing one vocabulary word per
 # line.
-vectorize_layer = keras.layers.TextVectorization(
-    max_tokens=max_tokens,
-    output_mode='int',
-    output_sequence_length=max_len,
-    vocabulary=vocab_data)
+vectorize_layer <- layer_text_vectorization(
+    max_tokens = max_tokens,
+    output_mode = 'int',
+    output_sequence_length = max_len,
+    vocabulary = vocab_data)
 }\if{html}{\out{</div>}}
 
-\if{html}{\out{<div class="sourceCode python">}}\preformatted{# Because we've passed the vocabulary directly, we don't need to adapt
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{# Because we've passed the vocabulary directly, we don't need to adapt
 # the layer - the vocabulary is already set. The vocabulary contains the
 # padding token ('') and OOV token ('[UNK]')
 # as well as the passed tokens.
-vectorize_layer.get_vocabulary()
-# ['', '[UNK]', 'earth', 'wind', 'and', 'fire']
+vectorize_layer \%>\% get_vocabulary()
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode">}}\preformatted{## [1] ""      "[UNK]" "earth" "wind"  "and"   "fire"
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{# ['', '[UNK]', 'earth', 'wind', 'and', 'fire']
 }\if{html}{\out{</div>}}
 }
 

@@ -7,7 +7,7 @@ of token indices (one example = 1D tensor of integer token indices) or a
 dense representation (one example = 1D tensor of float values representing
 data about the example's tokens). This layer is meant to handle natural
 language inputs. To handle simple string inputs (categorical strings or
-pre-tokenized strings) see `kers_core.layers.StringLookup`.
+pre-tokenized strings) see `layer_string_lookup()`.
 
 The vocabulary for the layer must be either supplied on construction or
 learned via `adapt()`. When this layer is adapted, it will analyze the
@@ -38,12 +38,12 @@ this layer:
    should return a tensor of the same shape as the input.
 3. When using a custom callable for `split`, the data received by the
    callable will have the 1st dimension squeezed out - instead of
-   `[["string to split"], ["another string to split"]]`, the Callable will
-   see `["string to split", "another string to split"]`.
+   `list("string to split", "another string to split")`, the Callable will
+   see `c("string to split", "another string to split")`.
    The callable should return a `tf.Tensor` of dtype `string`
    with the first dimension containing the split tokens -
-   in this example, we should see something like `[["string", "to",
-   "split"], ["another", "string", "to", "split"]]`.
+   in this example, we should see something like `list(c("string", "to",
+   "split"), c("another", "string", "to", "split"))`.
 
 **Note:** This layer uses TensorFlow internally. It cannot
 be used as part of the compiled computation graph of a model with
@@ -60,64 +60,80 @@ to use this layer.
 This example instantiates a `TextVectorization` layer that lowercases text,
 splits on whitespace, strips punctuation, and outputs integer vocab indices.
 
-```python
-max_tokens = 5000  # Maximum vocab size.
-max_len = 4  # Sequence length to pad the outputs to.
+
+```r
+max_tokens <- 5000  # Maximum vocab size.
+max_len <- 4  # Sequence length to pad the outputs to.
 # Create the layer.
-vectorize_layer = TextVectorization(
-    max_tokens=max_tokens,
-    output_mode='int',
-    output_sequence_length=max_len)
+vectorize_layer <- layer_text_vectorization(
+    max_tokens = max_tokens,
+    output_mode = 'int',
+    output_sequence_length = max_len)
 ```
 
-```python
+
+```r
 # Now that the vocab layer has been created, call `adapt` on the
 # list of strings to create the vocabulary.
-vectorize_layer.adapt(["foo bar", "bar baz", "baz bada boom"])
+vectorize_layer %>% adapt(c("foo bar", "bar baz", "baz bada boom"))
 ```
 
-```python
+
+```r
 # Now, the layer can map strings to integers -- you can use an
 # embedding layer to map these integers to learned embeddings.
-input_data = [["foo qux bar"], ["qux baz"]]
+input_data <- rbind("foo qux bar", "qux baz")
 vectorize_layer(input_data)
-# array([[4, 1, 3, 0],
-#        [1, 2, 0, 0]])
+```
+
+```
+## tf.Tensor(
+## [[4 1 3 0]
+##  [1 2 0 0]], shape=(2, 4), dtype=int64)
 ```
 
 This example instantiates a `TextVectorization` layer by passing a list
 of vocabulary terms to the layer's `__init__()` method.
 
-```python
-vocab_data = ["earth", "wind", "and", "fire"]
-max_len = 4  # Sequence length to pad the outputs to.
+
+```r
+vocab_data <- c("earth", "wind", "and", "fire")
+max_len <- 4  # Sequence length to pad the outputs to.
 # Create the layer, passing the vocab directly. You can also pass the
 # vocabulary arg a path to a file containing one vocabulary word per
 # line.
-vectorize_layer = keras.layers.TextVectorization(
-    max_tokens=max_tokens,
-    output_mode='int',
-    output_sequence_length=max_len,
-    vocabulary=vocab_data)
+vectorize_layer <- layer_text_vectorization(
+    max_tokens = max_tokens,
+    output_mode = 'int',
+    output_sequence_length = max_len,
+    vocabulary = vocab_data)
 ```
 
-```python
+
+```r
 # Because we've passed the vocabulary directly, we don't need to adapt
 # the layer - the vocabulary is already set. The vocabulary contains the
 # padding token ('') and OOV token ('[UNK]')
 # as well as the passed tokens.
-vectorize_layer.get_vocabulary()
+vectorize_layer %>% get_vocabulary()
+```
+
+```
+## [1] ""      "[UNK]" "earth" "wind"  "and"   "fire"
+```
+
+```r
 # ['', '[UNK]', 'earth', 'wind', 'and', 'fire']
 ```
 
 @param max_tokens Maximum size of the vocabulary for this layer. This should
     only be specified when adapting a vocabulary or when setting
-    `pad_to_max_tokens=True`. Note that this vocabulary
+    `pad_to_max_tokens=TRUE`. Note that this vocabulary
     contains 1 OOV token, so the effective number of tokens is
     `(max_tokens - 1 - (1 if output_mode == "int" else 0))`.
 @param standardize Optional specification for standardization to apply to the
     input text. Values can be:
-    - `None`: No standardization.
+    - `NULL`: No standardization.
     - `"lower_and_strip_punctuation"`: Text will be lowercased and all
         punctuation removed.
     - `"lower"`: Text will be lowercased.
@@ -126,17 +142,17 @@ vectorize_layer.get_vocabulary()
         which should be standardized and returned.
 @param split Optional specification for splitting the input text.
     Values can be:
-    - `None`: No splitting.
+    - `NULL`: No splitting.
     - `"whitespace"`: Split on whitespace.
     - `"character"`: Split on each unicode character.
     - Callable: Standardized inputs will passed to the callable
         function, which should be split and returned.
 @param ngrams Optional specification for ngrams to create from the
-    possibly-split input text. Values can be `None`, an integer
-    or tuple of integers; passing an integer will create ngrams
-    up to that integer, and passing a tuple of integers will
-    create ngrams for the specified values in the tuple.
-    Passing `None` means that no ngrams will be created.
+    possibly-split input text. Values can be `NULL`, an integer
+    or list of integers; passing an integer will create ngrams
+    up to that integer, and passing a list of integers will
+    create ngrams for the specified values in the list.
+    Passing `NULL` means that no ngrams will be created.
 @param output_mode Optional specification for the output of the layer.
     Values can be `"int"`, `"multi_hot"`, `"count"` or `"tf_idf"`,
     configuring the layer as follows:
@@ -161,20 +177,20 @@ vectorize_layer.get_vocabulary()
     have its time dimension padded or truncated to exactly
     `output_sequence_length` values, resulting in a tensor of shape
     `(batch_size, output_sequence_length)` regardless of how many tokens
-    resulted from the splitting step. Defaults to `None`.
+    resulted from the splitting step. Defaults to `NULL`.
 @param pad_to_max_tokens Only valid in  `"multi_hot"`, `"count"`,
-    and `"tf_idf"` modes. If `True`, the output will have
+    and `"tf_idf"` modes. If `TRUE`, the output will have
     its feature axis padded to `max_tokens` even if the number
     of unique tokens in the vocabulary is less than `max_tokens`,
     resulting in a tensor of shape `(batch_size, max_tokens)`
-    regardless of vocabulary size. Defaults to `False`.
+    regardless of vocabulary size. Defaults to `FALSE`.
 @param vocabulary Optional. Either an array of strings or a string path to a
-    text file. If passing an array, can pass a tuple, list,
+    text file. If passing an array, can pass a list, list,
     1D NumPy array, or 1D tensor containing the string vocabulary terms.
     If passing a file path, the file should contain one line per term
     in the vocabulary. If this argument is set,
     there is no need to `adapt()` the layer.
-@param idf_weights Only valid when `output_mode` is `"tf_idf"`. A tuple, list,
+@param idf_weights Only valid when `output_mode` is `"tf_idf"`. A list, list,
     1D NumPy array, or 1D tensor of the same length as the vocabulary,
     containing the floating point inverse document frequency weights,
     which will be multiplied by per sample term counts for
@@ -182,13 +198,13 @@ vectorize_layer.get_vocabulary()
     and `output_mode` is `"tf_idf"`, this argument must be supplied.
 @param ragged Boolean. Only applicable to `"int"` output mode.
     Only supported with TensorFlow backend.
-    If `True`, returns a `RaggedTensor` instead of a dense `Tensor`,
+    If `TRUE`, returns a `RaggedTensor` instead of a dense `Tensor`,
     where each sequence may have a different length
-    after string splitting. Defaults to `False`.
+    after string splitting. Defaults to `FALSE`.
 @param sparse Boolean. Only applicable to `"multi_hot"`, `"count"`, and
     `"tf_idf"` output modes. Only supported with TensorFlow
-    backend. If `True`, returns a `SparseTensor`
-    instead of a dense `Tensor`. Defaults to `False`.
+    backend. If `TRUE`, returns a `SparseTensor`
+    instead of a dense `Tensor`. Defaults to `FALSE`.
 @param encoding Optional. The text encoding to use to interpret the input
     strings. Defaults to `"utf-8"`.
 @param object Object to compose the layer with. A tensor, array, or sequential model.
@@ -200,3 +216,4 @@ vectorize_layer.get_vocabulary()
 @seealso
 + <https:/keras.io/api/layers/preprocessing_layers/text/text_vectorization#textvectorization-class>
 + <https://www.tensorflow.org/api_docs/python/tf/keras/layers/TextVectorization>
+

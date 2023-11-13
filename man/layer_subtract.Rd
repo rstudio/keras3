@@ -13,26 +13,25 @@ layer_subtract(inputs, ...)
 }
 \description{
 It takes as input a list of tensors of size 2 both of the
-same shape, and returns a single tensor \code{(inputs[0] - inputs[1])}
+same shape, and returns a single tensor \verb{(inputs[0] - inputs[1))}
 of same shape.
 }
 \section{Examples}{
-\if{html}{\out{<div class="sourceCode python">}}\preformatted{input_shape = (2, 3, 4)
-x1 = np.random.rand(*input_shape)
-x2 = np.random.rand(*input_shape)
-y = keras.layers.Subtract()([x1, x2])
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{input_shape <- c(2, 3, 4)
+x1 <- random_uniform(input_shape)
+x2 <- random_uniform(input_shape)
+y <- layer_subtract(list(x1, x2))
 }\if{html}{\out{</div>}}
 
 Usage in a Keras model:
 
-\if{html}{\out{<div class="sourceCode python">}}\preformatted{input1 = keras.layers.Input(shape=(16,))
-x1 = keras.layers.Dense(8, activation='relu')(input1)
-input2 = keras.layers.Input(shape=(32,))
-x2 = keras.layers.Dense(8, activation='relu')(input2)
-# equivalent to `subtracted = keras.layers.subtract([x1, x2])`
-subtracted = keras.layers.Subtract()([x1, x2])
-out = keras.layers.Dense(4)(subtracted)
-model = keras.models.Model(inputs=[input1, input2], outputs=out)
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{input1 <- layer_input(shape = 16)
+x1 <- layer_dense(input1, units = 8, activation = 'relu')
+input2 <- layer_input(shape = 32)
+x2 <- layer_dense(input2, units = 8, activation = 'relu')
+subtracted <- layer_subtract(list(x1, x2))
+out <- layer_dense(subtracted, units = 4)
+model <- keras_model(inputs = list(input1, input2), outputs = out)
 }\if{html}{\out{</div>}}
 }
 
