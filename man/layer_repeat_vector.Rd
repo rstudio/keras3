@@ -17,10 +17,19 @@ layer_repeat_vector(object, n, ...)
 Repeats the input n times.
 }
 \section{Examples}{
-\if{html}{\out{<div class="sourceCode python">}}\preformatted{x = keras.Input(shape=(32,))
-y = keras.layers.RepeatVector(3)(x)
-y.shape
-# (None, 3, 32)
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{x <- layer_input(shape = 32)
+y <- layer_repeat_vector(x, n = 3)
+y$shape
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode">}}\preformatted{## [[1]]
+## NULL
+##
+## [[2]]
+## [1] 3
+##
+## [[3]]
+## [1] 32
 }\if{html}{\out{</div>}}
 }
 

@@ -3,11 +3,22 @@ Repeats the input n times.
 @description
 
 # Examples
-```python
-x = keras.Input(shape=(32,))
-y = keras.layers.RepeatVector(3)(x)
-y.shape
-# (None, 3, 32)
+
+```r
+x <- layer_input(shape = 32)
+y <- layer_repeat_vector(x, n = 3)
+y$shape
+```
+
+```
+## [[1]]
+## NULL
+##
+## [[2]]
+## [1] 3
+##
+## [[3]]
+## [1] 32
 ```
 
 # Input Shape
@@ -25,3 +36,4 @@ y.shape
 @seealso
 + <https:/keras.io/api/layers/reshaping_layers/repeat_vector#repeatvector-class>
 + <https://www.tensorflow.org/api_docs/python/tf/keras/layers/RepeatVector>
+

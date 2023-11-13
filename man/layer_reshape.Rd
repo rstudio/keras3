@@ -9,7 +9,7 @@ layer_reshape(object, target_shape, ...)
 \arguments{
 \item{object}{Object to compose the layer with. A tensor, array, or sequential model.}
 
-\item{target_shape}{Target shape. Tuple of integers, does not include the
+\item{target_shape}{Target shape. List of integers, does not include the
 samples dimension (batch size).}
 
 \item{...}{Passed on to the Python callable}
@@ -19,7 +19,7 @@ Layer that reshapes inputs into the given shape.
 }
 \section{Input Shape}{
 Arbitrary, although all dimensions in the input shape must be
-known/fixed. Use the keyword argument \code{input_shape} (tuple of integers,
+known/fixed. Use the keyword argument \code{input_shape} (list of integers,
 does not include the samples/batch size axis) when using this layer as
 the first layer in a model.
 }
@@ -29,16 +29,37 @@ the first layer in a model.
 }
 
 \section{Examples}{
-\if{html}{\out{<div class="sourceCode python">}}\preformatted{x = keras.Input(shape=(12,))
-y = keras.layers.Reshape((3, 4))(x)
-y.shape
-# (None, 3, 4)
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{x <- layer_input(shape = 12)
+y <- layer_reshape(x, c(3, 4))
+y$shape
 }\if{html}{\out{</div>}}
 
-\if{html}{\out{<div class="sourceCode python">}}\preformatted{# also supports shape inference using `-1` as dimension
-y = keras.layers.Reshape((-1, 2, 2))(x)
-y.shape
-# (None, 3, 2, 2)
+\if{html}{\out{<div class="sourceCode">}}\preformatted{## [[1]]
+## NULL
+##
+## [[2]]
+## [1] 3
+##
+## [[3]]
+## [1] 4
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{# also supports shape inference using `-1` as dimension
+y <- layer_reshape(x, c(-1, 2, 2))
+y$shape
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode">}}\preformatted{## [[1]]
+## NULL
+##
+## [[2]]
+## [1] 3
+##
+## [[3]]
+## [1] 2
+##
+## [[4]]
+## [1] 2
 }\if{html}{\out{</div>}}
 }
 
