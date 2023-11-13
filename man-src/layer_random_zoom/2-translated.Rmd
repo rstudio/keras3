@@ -26,29 +26,29 @@ or `(..., channels, height, width)`, in `"channels_first"` format.
 (independently of which backend you're using).
 
 # Examples
-```python
-input_img = np.random.random((32, 224, 224, 3))
-layer = keras.layers.RandomZoom(.5, .2)
-out_img = layer(input_img)
+```{r}
+input_img <- random_uniform(c(32, 224, 224, 3))
+layer <- layer_random_zoom(height_factor = .5, width_factor = .2)
+out_img <- layer(input_img)
 ```
 
-@param height_factor a float represented as fraction of value, or a tuple of
+@param height_factor a float represented as fraction of value, or a list of
     size 2 representing lower and upper bound for zooming vertically.
     When represented as a single float, this value is used for both the
     upper and lower bound. A positive value means zooming out, while a
     negative value means zooming in. For instance,
-    `height_factor=(0.2, 0.3)` result in an output zoomed out by a
+    `height_factor=c(0.2, 0.3)` result in an output zoomed out by a
     random amount in the range `[+20%, +30%]`.
-    `height_factor=(-0.3, -0.2)` result in an output zoomed in by a
+    `height_factor=c(-0.3, -0.2)` result in an output zoomed in by a
     random amount in the range `[+20%, +30%]`.
-@param width_factor a float represented as fraction of value, or a tuple of
+@param width_factor a float represented as fraction of value, or a list of
     size 2 representing lower and upper bound for zooming horizontally.
     When represented as a single float, this value is used for both the
-    upper and lower bound. For instance, `width_factor=(0.2, 0.3)`
+    upper and lower bound. For instance, `width_factor=c(0.2, 0.3)`
     result in an output zooming out between 20% to 30%.
-    `width_factor=(-0.3, -0.2)` result in an output zooming in between
-    20% to 30%. `None` means i.e., zooming vertical and horizontal
-    directions by preserving the aspect ratio. Defaults to `None`.
+    `width_factor=c(-0.3, -0.2)` result in an output zooming in between
+    20% to 30%. `NULL` means i.e., zooming vertical and horizontal
+    directions by preserving the aspect ratio. Defaults to `NULL`.
 @param fill_mode Points outside the boundaries of the input are filled
     according to the given mode. Available methods are `"constant"`,
     `"nearest"`, `"wrap"` and `"reflect"`. Defaults to `"constant"`.
@@ -88,3 +88,4 @@ out_img = layer(input_img)
 @seealso
 + <https:/keras.io/api/layers/preprocessing_layers/image_augmentation/random_zoom#randomzoom-class>
 + <https://www.tensorflow.org/api_docs/python/tf/keras/layers/RandomZoom>
+

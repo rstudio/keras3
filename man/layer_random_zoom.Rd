@@ -19,24 +19,24 @@ layer_random_zoom(
 \arguments{
 \item{object}{Object to compose the layer with. A tensor, array, or sequential model.}
 
-\item{height_factor}{a float represented as fraction of value, or a tuple of
+\item{height_factor}{a float represented as fraction of value, or a list of
 size 2 representing lower and upper bound for zooming vertically.
 When represented as a single float, this value is used for both the
 upper and lower bound. A positive value means zooming out, while a
 negative value means zooming in. For instance,
-\verb{height_factor=(0.2, 0.3)} result in an output zoomed out by a
+\code{height_factor=c(0.2, 0.3)} result in an output zoomed out by a
 random amount in the range \verb{[+20\%, +30\%]}.
-\verb{height_factor=(-0.3, -0.2)} result in an output zoomed in by a
+\code{height_factor=c(-0.3, -0.2)} result in an output zoomed in by a
 random amount in the range \verb{[+20\%, +30\%]}.}
 
-\item{width_factor}{a float represented as fraction of value, or a tuple of
+\item{width_factor}{a float represented as fraction of value, or a list of
 size 2 representing lower and upper bound for zooming horizontally.
 When represented as a single float, this value is used for both the
-upper and lower bound. For instance, \verb{width_factor=(0.2, 0.3)}
+upper and lower bound. For instance, \code{width_factor=c(0.2, 0.3)}
 result in an output zooming out between 20\% to 30\%.
-\verb{width_factor=(-0.3, -0.2)} result in an output zooming in between
-20\% to 30\%. \code{None} means i.e., zooming vertical and horizontal
-directions by preserving the aspect ratio. Defaults to \code{None}.}
+\code{width_factor=c(-0.3, -0.2)} result in an output zooming in between
+20\% to 30\%. \code{NULL} means i.e., zooming vertical and horizontal
+directions by preserving the aspect ratio. Defaults to \code{NULL}.}
 
 \item{fill_mode}{Points outside the boundaries of the input are filled
 according to the given mode. Available methods are \code{"constant"},
@@ -101,9 +101,9 @@ in \code{"channels_first"} format.
 }
 
 \section{Examples}{
-\if{html}{\out{<div class="sourceCode python">}}\preformatted{input_img = np.random.random((32, 224, 224, 3))
-layer = keras.layers.RandomZoom(.5, .2)
-out_img = layer(input_img)
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{input_img <- random_uniform(c(32, 224, 224, 3))
+layer <- layer_random_zoom(height_factor = .5, width_factor = .2)
+out_img <- layer(input_img)
 }\if{html}{\out{</div>}}
 }
 
