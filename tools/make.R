@@ -84,6 +84,8 @@ if(!"source:tools/translate-tools.R" %in% search()) envir::attach_source("tools/
 # <class 'keras.initializers.random_initializers.RandomUniform'>
 
 # TODO: next: losses, metrics, saving, guides/vignettes
+#
+# TODO: global search replace in man-src/*.Rmd "([^ ])=([^ ])" "\\1 = \\2"
 
 # TODO: bidirectional, time_distributed -- need special caseing
 #
@@ -208,7 +210,7 @@ get_translations <- function() {
         str_replace_all("True", "TRUE") %>%
         str_replace_all("False", "FALSE") %>%
         str_replace_all(fixed("np.random.random(("), "random_uniform(c(") %>%
-        str_replace_all("([0-9])(\\.0?\\b)", "\\1") %>%
+        # str_replace_all("([0-9])(\\.0?\\b)", "\\1") %>%
         str_replace_all(fixed("list/list"), "list") %>%
         str_replace_all(fixed("keras.layers."), "layer_") %>%
         str_replace_all(fixed("layers."), "layer_") %>%
@@ -472,6 +474,15 @@ if(interactive()) local({
 
 stop("DONE", call. = FALSE)
 
+list.files("man-src", pattern = "\\.Rmd$", full.names = TRUE) %>%
+  map(\(f) {
+    f |>
+      read_lines() |>
+      str_replace_all("([^ ])=([^ ])", "\\1 = \\2") |>
+      # TODO `True`, None
+      str_trim("right") %>%
+      write_lines(f)
+  })
 
 # {
 #
@@ -694,6 +705,7 @@ update_man_src_dir <- function(ex) {
   # if res == error: nothing else: knitr::knit() ?
   # knitting should really be a separate step...
 }
+
 
 
 augment_export <- function(ex) {
