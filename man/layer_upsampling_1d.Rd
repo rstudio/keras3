@@ -17,19 +17,33 @@ layer_upsampling_1d(object, size = 2L, ...)
 Repeats each temporal step \code{size} times along the time axis.
 }
 \section{Examples}{
-\if{html}{\out{<div class="sourceCode python">}}\preformatted{input_shape = (2, 2, 3)
-x = np.arange(np.prod(input_shape)).reshape(input_shape)
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{input_shape <- c(2, 2, 3)
+x <- seq_len(prod(input_shape)) \%>\% k_reshape(input_shape)
 x
-# [[[ 0  1  2]
-#   [ 3  4  5]]
-#  [[ 6  7  8]
-#   [ 9 10 11]]]
-y = keras.layers.UpSampling1D(size=2)(x)
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor(
+## [[[ 1  2  3]
+##   [ 4  5  6]]
+##
+##  [[ 7  8  9]
+##   [10 11 12]]], shape=(2, 2, 3), dtype=int64)
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{y <- layer_upsampling_1d(x, size = 2)
 y
-# [[[ 0.  1.  2.]
-#   [ 0.  1.  2.]
-#   [ 3.  4.  5.]
-#   [ 3.  4.  5.]]
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor(
+## [[[ 1  2  3]
+##   [ 1  2  3]
+##   [ 4  5  6]
+##   [ 4  5  6]]
+##
+##  [[ 7  8  9]
+##   [ 7  8  9]
+##   [10 11 12]
+##   [10 11 12]]], shape=(2, 4, 3), dtype=int64)
 }\if{html}{\out{</div>}}
 
 \verb{[[ 6.  7.  8.]}

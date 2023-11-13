@@ -4,20 +4,38 @@ Upsampling layer for 1D inputs.
 Repeats each temporal step `size` times along the time axis.
 
 # Examples
-```python
-input_shape = (2, 2, 3)
-x = np.arange(np.prod(input_shape)).reshape(input_shape)
+
+```r
+input_shape <- c(2, 2, 3)
+x <- seq_len(prod(input_shape)) %>% k_reshape(input_shape)
 x
-# [[[ 0  1  2]
-#   [ 3  4  5]]
-#  [[ 6  7  8]
-#   [ 9 10 11]]]
-y = keras.layers.UpSampling1D(size=2)(x)
+```
+
+```
+## tf.Tensor(
+## [[[ 1  2  3]
+##   [ 4  5  6]]
+##
+##  [[ 7  8  9]
+##   [10 11 12]]], shape=(2, 2, 3), dtype=int64)
+```
+
+```r
+y <- layer_upsampling_1d(x, size = 2)
 y
-# [[[ 0.  1.  2.]
-#   [ 0.  1.  2.]
-#   [ 3.  4.  5.]
-#   [ 3.  4.  5.]]
+```
+
+```
+## tf.Tensor(
+## [[[ 1  2  3]
+##   [ 1  2  3]
+##   [ 4  5  6]
+##   [ 4  5  6]]
+##
+##  [[ 7  8  9]
+##   [ 7  8  9]
+##   [10 11 12]
+##   [10 11 12]]], shape=(2, 4, 3), dtype=int64)
 ```
 
  `[[ 6.  7.  8.]`
@@ -40,3 +58,4 @@ y
 @seealso
 + <https:/keras.io/api/layers/reshaping_layers/up_sampling1d#upsampling1d-class>
 + <https://www.tensorflow.org/api_docs/python/tf/keras/layers/UpSampling1D>
+

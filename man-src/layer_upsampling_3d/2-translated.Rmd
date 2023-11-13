@@ -8,12 +8,11 @@ Repeats the 1st, 2nd and 3rd dimensions
 of the data by `size[0]`, `size[1]` and `size[2]` respectively.
 
 # Examples
-```python
-input_shape = (2, 1, 2, 1, 3)
-x = np.ones(input_shape)
-y = keras.layers.UpSampling3D(size=(2, 2, 2))(x)
-y.shape
-# (2, 2, 4, 2, 3)
+```{r}
+input_shape <- c(2, 1, 2, 1, 3)
+x <- array(1, dim = input_shape)
+y <- layer_upsampling_3d(x, size = c(2, 2, 2))
+y$shape
 ```
 
 # Input Shape
@@ -32,7 +31,7 @@ y.shape
     `(batch_size, channels, upsampled_dim1, upsampled_dim2,
     upsampled_dim3)`
 
-@param size Int, or tuple of 3 integers.
+@param size Int, or list of 3 integers.
     The upsampling factors for dim1, dim2 and dim3.
 @param data_format A string,
     one of `"channels_last"` (default) or `"channels_first"`.
@@ -53,3 +52,4 @@ y.shape
 @seealso
 + <https:/keras.io/api/layers/reshaping_layers/up_sampling3d#upsampling3d-class>
 + <https://www.tensorflow.org/api_docs/python/tf/keras/layers/UpSampling3D>
+

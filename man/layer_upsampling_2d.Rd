@@ -15,7 +15,7 @@ layer_upsampling_2d(
 \arguments{
 \item{object}{Object to compose the layer with. A tensor, array, or sequential model.}
 
-\item{size}{Int, or tuple of 2 integers.
+\item{size}{Int, or list of 2 integers.
 The upsampling factors for rows and columns.}
 
 \item{data_format}{A string,
@@ -41,23 +41,39 @@ The implementation uses interpolative resizing, given the resize method
 to repeat the rows and columns of the data.
 }
 \section{Examples}{
-\if{html}{\out{<div class="sourceCode python">}}\preformatted{input_shape = (2, 2, 1, 3)
-x = np.arange(np.prod(input_shape)).reshape(input_shape)
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{input_shape <- c(2, 2, 1, 3)
+x <- k_reshape(seq_len(prod(input_shape)), input_shape)
 print(x)
-# [[[[ 0  1  2]]
-#   [[ 3  4  5]]]
-#  [[[ 6  7  8]]
-#   [[ 9 10 11]]]]
-y = keras.layers.UpSampling2D(size=(1, 2))(x)
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor(
+## [[[[ 1  2  3]]
+##
+##   [[ 4  5  6]]]
+##
+##
+##  [[[ 7  8  9]]
+##
+##   [[10 11 12]]]], shape=(2, 2, 1, 3), dtype=int64)
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{y <- layer_upsampling_2d(x, size = c(1, 2))
 print(y)
-# [[[[ 0  1  2]
-#    [ 0  1  2]]
-#   [[ 3  4  5]
-#    [ 3  4  5]]]
-#  [[[ 6  7  8]
-#    [ 6  7  8]]
-#   [[ 9 10 11]
-#    [ 9 10 11]]]]
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor(
+## [[[[ 1  2  3]
+##    [ 1  2  3]]
+##
+##   [[ 4  5  6]
+##    [ 4  5  6]]]
+##
+##
+##  [[[ 7  8  9]
+##    [ 7  8  9]]
+##
+##   [[10 11 12]
+##    [10 11 12]]]], shape=(2, 2, 2, 3), dtype=int64)
 }\if{html}{\out{</div>}}
 }
 

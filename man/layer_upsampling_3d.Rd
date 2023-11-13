@@ -9,7 +9,7 @@ layer_upsampling_3d(object, size = list(2L, 2L, 2L), data_format = NULL, ...)
 \arguments{
 \item{object}{Object to compose the layer with. A tensor, array, or sequential model.}
 
-\item{size}{Int, or tuple of 3 integers.
+\item{size}{Int, or list of 3 integers.
 The upsampling factors for dim1, dim2 and dim3.}
 
 \item{data_format}{A string,
@@ -31,11 +31,13 @@ Repeats the 1st, 2nd and 3rd dimensions
 of the data by \code{size[0]}, \code{size[1]} and \code{size[2]} respectively.
 }
 \section{Examples}{
-\if{html}{\out{<div class="sourceCode python">}}\preformatted{input_shape = (2, 1, 2, 1, 3)
-x = np.ones(input_shape)
-y = keras.layers.UpSampling3D(size=(2, 2, 2))(x)
-y.shape
-# (2, 2, 4, 2, 3)
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{input_shape <- c(2, 1, 2, 1, 3)
+x <- array(1, dim = input_shape)
+y <- layer_upsampling_3d(x, size = c(2, 2, 2))
+y$shape
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode">}}\preformatted{## TensorShape([2, 2, 4, 2, 3])
 }\if{html}{\out{</div>}}
 }
 

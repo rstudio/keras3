@@ -9,7 +9,7 @@ layer_unit_normalization(object, axis = -1L, ...)
 \arguments{
 \item{object}{Object to compose the layer with. A tensor, array, or sequential model.}
 
-\item{axis}{Integer or list/tuple. The axis or axes to normalize across.
+\item{axis}{Integer or list. The axis or axes to normalize across.
 Typically, this is the features axis or axes. The left-out axes are
 typically the batch axis or axes. \code{-1} is the last dimension
 in the input. Defaults to \code{-1}.}
@@ -21,10 +21,12 @@ Normalize a batch of inputs so that each input in the batch has a L2 norm
 equal to 1 (across the axes specified in \code{axis}).
 }
 \section{Examples}{
-\if{html}{\out{<div class="sourceCode python">}}\preformatted{data = np.arange(6).reshape(2, 3)
-normalized_data = keras.layers.UnitNormalization()(data)
-print(np.sum(normalized_data[0, :] ** 2)
-# 1.0
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{data <- k_reshape(1:6, new_shape =c(2, 3))
+normalized_data <- layer_unit_normalization(data)
+sum(normalized_data[1,]^2)
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor(0.9999999, shape=(), dtype=float32)
 }\if{html}{\out{</div>}}
 }
 
