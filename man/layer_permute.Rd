@@ -9,9 +9,9 @@ layer_permute(object, dims, ...)
 \arguments{
 \item{object}{Object to compose the layer with. A tensor, array, or sequential model.}
 
-\item{dims}{Tuple of integers. Permutation pattern does not include the
+\item{dims}{List of integers. Permutation pattern does not include the
 batch dimension. Indexing starts at 1.
-For instance, \verb{(2, 1)} permutes the first and second dimensions
+For instance, \code{c(2, 1)} permutes the first and second dimensions
 of the input.}
 
 \item{...}{Passed on to the Python callable}
@@ -29,10 +29,19 @@ to the specified pattern.
 }
 
 \section{Examples}{
-\if{html}{\out{<div class="sourceCode python">}}\preformatted{x = keras.Input(shape=(10, 64))
-y = keras.layers.Permute((2, 1))(x)
-y.shape
-# (None, 64, 10)
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{x <- layer_input(shape=c(10, 64))
+y <- layer_permute(x, c(2, 1))
+y$shape
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode">}}\preformatted{## [[1]]
+## NULL
+##
+## [[2]]
+## [1] 64
+##
+## [[3]]
+## [1] 10
 }\if{html}{\out{</div>}}
 }
 
