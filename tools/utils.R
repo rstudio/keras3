@@ -55,7 +55,7 @@ attach_eval({
     x
   }
 
-
+  `%error%` <- function(x, y)  tryCatch(x, error = function(e) y)
 
   py_is <- function(x, y) identical(py_id(x), py_id(y))
 
@@ -1757,15 +1757,18 @@ view_translation_diff <- function(r_name) {
 
 man_src_pull_upstream_updates <- function(directories = dir_ls("man-src/", type = "directory")) {
   message(deparse1(sys.call()))
-  vscode_settings <- og_vscode_settings <-
-    jsonlite::read_json(".vscode/settings.json")
-  vscode_settings %<>% modifyList(list("git.autorefresh" = FALSE,
-                                       "git.autofetch" = FALSE))
-  jsonlite::write_json(vscode_settings, ".vscode/settings.json")
-  withr::defer(jsonlite::write_json(og_vscode_settings, ".vscode/settings.json",
-                                    pretty = TRUE))
+  vscode_settings_file <- ".vscode/settings.json"
+  if(file.exists(vscode_settings_file)) {
+    vscode_settings <- og_vscode_settings <-
+      jsonlite::read_json(vscode_settings_file)
+    vscode_settings %<>% modifyList(list("git.autorefresh" = FALSE,
+                                         "git.autofetch" = FALSE))
+    jsonlite::write_json(vscode_settings, vscode_settings_file)
+    withr::defer(jsonlite::write_json(og_vscode_settings, vscode_settings_file,
+                                      pretty = TRUE))
+    system("code -s", intern = TRUE) # force rereading of settings.json?
+  }
 
-  system("code -s", intern = TRUE) # force rereading of settings.json?
 
   directories |>
     set_names(basename) |>
