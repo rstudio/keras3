@@ -16,18 +16,18 @@ layer_normalization(
 \arguments{
 \item{object}{Object to compose the layer with. A tensor, array, or sequential model.}
 
-\item{axis}{Integer, tuple of integers, or None. The axis or axes that should
+\item{axis}{Integer, list of integers, or NULL. The axis or axes that should
 have a separate mean and variance for each index in the shape.
-For example, if shape is \verb{(None, 5)} and \code{axis=1}, the layer will
+For example, if shape is \verb{(NULL, 5)} and \code{axis=1}, the layer will
 track 5 separate mean and variance values for the last axis.
-If \code{axis} is set to \code{None}, the layer will normalize
+If \code{axis} is set to \code{NULL}, the layer will normalize
 all elements in the input by a scalar mean and variance.
 When \code{-1}, the last axis of the input is assumed to be a
 feature dimension and is normalized per index.
 Note that in the specific case of batched scalar inputs where
 the only axis is the batch axis, the default will normalize
 each index in the batch separately.
-In this case, consider passing \code{axis=None}. Defaults to \code{-1}.}
+In this case, consider passing \code{axis=NULL}. Defaults to \code{-1}.}
 
 \item{mean}{The mean value(s) to use during normalization. The passed value(s)
 will be broadcast to the shape of the kept axes above;
@@ -39,7 +39,7 @@ value(s) will be broadcast to the shape of the kept axes above;
 if the value(s) cannot be broadcast, an error will be raised when
 this layer's \code{build()} method is called.}
 
-\item{invert}{If \code{True}, this layer will apply the inverse transformation
+\item{invert}{If \code{TRUE}, this layer will apply the inverse transformation
 to its inputs: it would turn a normalized input back into its
 original form.}
 
@@ -59,48 +59,57 @@ be called before \code{fit()}, \code{evaluate()}, or \code{predict()}.
 \section{Examples}{
 Calculate a global mean and variance by analyzing the dataset in \code{adapt()}.
 
-\if{html}{\out{<div class="sourceCode python">}}\preformatted{adapt_data = np.array([1., 2., 3., 4., 5.], dtype='float32')
-input_data = np.array([1., 2., 3.], dtype='float32')
-layer = keras.layers.Normalization(axis=None)
-layer.adapt(adapt_data)
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{adapt_data <- k_array(c(1., 2., 3., 4., 5.), dtype='float32')
+input_data <- k_array(c(1., 2., 3.), dtype='float32')
+layer <- layer_normalization(axis = NULL)
+layer \%>\% adapt(adapt_data)
 layer(input_data)
-# array([-1.4142135, -0.70710677, 0.], dtype=float32)
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor([-1.4142135  -0.70710677  0.        ], shape=(3), dtype=float32)
 }\if{html}{\out{</div>}}
 
 Calculate a mean and variance for each index on the last axis.
 
-\if{html}{\out{<div class="sourceCode python">}}\preformatted{adapt_data = np.array([[0., 7., 4.],
-                       [2., 9., 6.],
-                       [0., 7., 4.],
-                       [2., 9., 6.]], dtype='float32')
-input_data = np.array([[0., 7., 4.]], dtype='float32')
-layer = keras.layers.Normalization(axis=-1)
-layer.adapt(adapt_data)
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{adapt_data <- k_array(rbind(c(0., 7., 4.),
+                       c(2., 9., 6.),
+                       c(0., 7., 4.),
+                       c(2., 9., 6.)), dtype='float32')
+input_data <- k_array(matrix(c(0., 7., 4.), nrow = 1), dtype='float32')
+layer <- layer_normalization(axis=-1)
+layer \%>\% adapt(adapt_data)
 layer(input_data)
-# array([-1., -1., -1.], dtype=float32)
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor([[-1. -1. -1.]], shape=(1, 3), dtype=float32)
 }\if{html}{\out{</div>}}
 
 Pass the mean and variance directly.
 
-\if{html}{\out{<div class="sourceCode python">}}\preformatted{input_data = np.array([[1.], [2.], [3.]], dtype='float32')
-layer = keras.layers.Normalization(mean=3., variance=2.)
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{input_data <- k_array(rbind(1, 2, 3), dtype='float32')
+layer <- layer_normalization(mean=3., variance=2.)
 layer(input_data)
-# array([[-1.4142135 ],
-#        [-0.70710677],
-#        [ 0.        ]], dtype=float32)
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor(
+## [[-1.4142135 ]
+##  [-0.70710677]
+##  [ 0.        ]], shape=(3, 1), dtype=float32)
 }\if{html}{\out{</div>}}
 
 Use the layer to de-normalize inputs (after adapting the layer).
 
-\if{html}{\out{<div class="sourceCode python">}}\preformatted{adapt_data = np.array([[0., 7., 4.],
-                       [2., 9., 6.],
-                       [0., 7., 4.],
-                       [2., 9., 6.]], dtype='float32')
-input_data = np.array([[1., 2., 3.]], dtype='float32')
-layer = keras.layers.Normalization(axis=-1, invert=True)
-layer.adapt(adapt_data)
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{adapt_data <- k_array(rbind(c(0., 7., 4.),
+                       c(2., 9., 6.),
+                       c(0., 7., 4.),
+                       c(2., 9., 6.)), dtype='float32')
+input_data <- k_array(c(1., 2., 3.), dtype='float32')
+layer <- layer_normalization(axis=-1, invert=TRUE)
+layer \%>\% adapt(adapt_data)
 layer(input_data)
-# array([2., 10., 8.], dtype=float32)
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor([[ 2. 10.  8.]], shape=(1, 3), dtype=float32)
 }\if{html}{\out{</div>}}
 }
 
