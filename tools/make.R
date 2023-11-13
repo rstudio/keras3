@@ -167,6 +167,8 @@ if(!"source:tools/translate-tools.R" %in% search()) envir::attach_source("tools/
 #       instead of a tuple
 #
 # TODO: this shouldn't error (empty last arg should be no-op):
+#
+# TODO: layer_torch_module_wrapper raises an error - aybe incompatible torch version?
 if(FALSE) {
   keras$utils$FeatureSpace$cross(
     feature_names=c("string_values", "int_values"),
@@ -219,7 +221,7 @@ get_translations <- function() {
         # str_replace_all(fixed("k_convert_to_tensor(["), "k_array(c(") %>%
       new |> write_lines(dir/"2-translated.Rmd")
       file.edit(dir/"2-translated.Rmd")
-      # stop()
+      stop()
       return()
       withr::local_dir(dir)
       message("Translating: ", basename(dir))

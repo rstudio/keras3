@@ -9,7 +9,7 @@ layer_time_distributed(object, layer, ...)
 \arguments{
 \item{object}{Object to compose the layer with. A tensor, array, or sequential model.}
 
-\item{layer}{a \code{keras.layers.Layer} instance.}
+\item{layer}{a \code{layer_Layer} instance.}
 
 \item{...}{Passed on to the Python callable}
 }
@@ -24,21 +24,36 @@ The batch input shape is \verb{(32, 10, 128, 128, 3)}.
 You can then use \code{TimeDistributed} to apply the same \code{Conv2D} layer to each
 of the 10 timesteps, independently:
 
-\if{html}{\out{<div class="sourceCode python">}}\preformatted{inputs = layers.Input(shape=(10, 128, 128, 3), batch_size=32)
-conv_2d_layer = layers.Conv2D(64, (3, 3))
-outputs = layers.TimeDistributed(conv_2d_layer)(inputs)
-outputs.shape
-# (32, 10, 126, 126, 64)
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{inputs <- layer_input(shape = c(10, 128, 128, 3), batch_size = 32)
+conv_2d_layer <- layer_conv_2d(filters = 64, kernel_size = c(3, 3))
+outputs <- layer_time_distributed(inputs, layer = conv_2d_layer)
+outputs$shape
 }\if{html}{\out{</div>}}
 
-Because \code{TimeDistributed} applies the same instance of \code{Conv2D} to each of
+\if{html}{\out{<div class="sourceCode">}}\preformatted{## [[1]]
+## [1] 32
+##
+## [[2]]
+## [1] 10
+##
+## [[3]]
+## [1] 126
+##
+## [[4]]
+## [1] 126
+##
+## [[5]]
+## [1] 64
+}\if{html}{\out{</div>}}
+
+Because \code{layer_time_distributed} applies the same instance of \code{layer_conv2d} to each of
 the timestamps, the same set of weights are used at each timestamp.
 }
 \section{Call Arguments}{
 \itemize{
 \item \code{inputs}: Input tensor of shape (batch, time, ...) or nested tensors,
 and each of which has shape (batch, time, ...).
-\item \code{training}: Python boolean indicating whether the layer should behave in
+\item \code{training}: Boolean indicating whether the layer should behave in
 training mode or in inference mode. This argument is passed to the
 wrapped layer (only if the layer supports this argument).
 \item \code{mask}: Binary tensor of shape \verb{(samples, timesteps)} indicating whether
