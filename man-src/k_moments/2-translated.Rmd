@@ -10,8 +10,8 @@ variance of a vector.
 
 # Examples
 ```{r}
-x <- k_convert_to_tensor(c(0, 1, 2, 3, 100), dtype="float32")
-k_moments(x, axes=c(1))
+x <- k_convert_to_tensor(c(0, 1, 2, 3, 100), dtype = "float32")
+k_moments(x, axes = c(1))
 ```
 
 @returns

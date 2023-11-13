@@ -20,7 +20,7 @@ y <- k_array(c(-1, -1, 1, 1))
 k_arctan2(y, x) * 180 / pi
 ```
 
-Note the order of the parameters. `arctan2` is defined also when x2=0 and
+Note the order of the parameters. `arctan2` is defined also when x2 = 0 and
 at several other points, obtaining values in the range `[-pi, pi]`:
 ```{r}
 k_arctan2(

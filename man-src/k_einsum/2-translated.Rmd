@@ -2,7 +2,7 @@
 knit: ({source(here::here("tools/knit.R")); knit_man_src})
 ---
 
-```{r, include=FALSE}
+```{r, include = FALSE}
 knitr::opts_chunk$set(results = 'hold')
 ```
 Evaluates the Einstein summation convention on the operands.

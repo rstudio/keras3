@@ -13,7 +13,7 @@ recursively.
 x <- k_array(c(1, 2, 4, 7, 0))
 k_diff(x)
 k_diff(x, n = 2)
-x <- k_array(rbind(c(1, 3, 6, 10), 
+x <- k_array(rbind(c(1, 3, 6, 10),
                   c(0, 5, 6, 8)))
 k_diff(x)
 k_diff(x, axis = 1)

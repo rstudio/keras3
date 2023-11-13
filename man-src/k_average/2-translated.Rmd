@@ -35,14 +35,14 @@ try(k_average(
 Return the average along the specified axis.
 
 @param x Input tensor.
-@param axis Integer along which to average `x`. The default, `axis=NULL`,
+@param axis Integer along which to average `x`. The default, `axis = NULL`,
     will average over all of the elements of the input tensor. If axis
     is negative it counts from the last to the first axis.
 @param weights Tensor of wieghts associated with the values in `x`. Each
     value in `x` contributes to the average according to its
     associated weight. The weights array can either be 1-D (in which
     case its length must be the size of a along the given axis) or of
-    the same shape as `x`. If `weights=NULL` (default), then all data
+    the same shape as `x`. If `weights = NULL` (default), then all data
     in `x` are assumed to have a weight equal to one.
 
     The 1-D calculation is: `avg = sum(a * weights) / sum(weights)`.

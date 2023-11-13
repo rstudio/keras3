@@ -27,7 +27,7 @@ The tensor containing the logical AND reduction over the `axis`.
 @param x Input tensor.
 @param axis An integer or tuple of integers that represent the axis along
     which a logical AND reduction is performed. The default
-    (`axis=NULL`) is to perform a logical AND over all the dimensions
+    (`axis = NULL`) is to perform a logical AND over all the dimensions
     of the input array. `axis` may be negative, in which case it counts
     for the last to the first axis.
 @param keepdims If `TRUE`, axes which are reduced are left in the result as

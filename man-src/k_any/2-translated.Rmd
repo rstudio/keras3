@@ -12,7 +12,7 @@ k_any(x)
 ```
 
 ```{r}
-(x <- k_reshape(c(FALSE, FALSE, FALSE, 
+(x <- k_reshape(c(FALSE, FALSE, FALSE,
                   TRUE, FALSE, FALSE), c(2, 3)))
 k_any(x, axis = 1)
 k_any(x, axis = 2)

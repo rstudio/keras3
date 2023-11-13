@@ -21,8 +21,8 @@ k_gelu(x, FALSE)
 
 ```{r}
 x <- seq(-5, 5, .1)
-plot(x, k_gelu(x), 
-     type = "l", #, frame.plot = FALSE, 
+plot(x, k_gelu(x),
+     type = "l", #, frame.plot = FALSE,
      panel.first = grid())
 ```
 

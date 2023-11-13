@@ -34,7 +34,7 @@ because we fixed an outstanding bug
         The input is extended by reflecting about the edge of the last
         pixel.
 @param fill_value Value used for points outside the boundaries of the input if
-    `fill_mode="constant"`. Defaults to `0`.
+    `fill_mode = "constant"`. Defaults to `0`.
 
 @export
 @family ops
