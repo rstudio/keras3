@@ -28,10 +28,10 @@ layer_simple_rnn_cell(
 
 \item{activation}{Activation function to use.
 Default: hyperbolic tangent (\code{tanh}).
-If you pass \code{None}, no activation is applied
+If you pass \code{NULL}, no activation is applied
 (ie. "linear" activation: \code{a(x) = x}).}
 
-\item{use_bias}{Boolean, (default \code{True}), whether the layer
+\item{use_bias}{Boolean, (default \code{TRUE}), whether the layer
 should use a bias vector.}
 
 \item{kernel_initializer}{Initializer for the \code{kernel} weights matrix,
@@ -45,22 +45,22 @@ of the recurrent state. Default: \code{"orthogonal"}.}
 \item{bias_initializer}{Initializer for the bias vector. Default: \code{"zeros"}.}
 
 \item{kernel_regularizer}{Regularizer function applied to the \code{kernel} weights
-matrix. Default: \code{None}.}
+matrix. Default: \code{NULL}.}
 
 \item{recurrent_regularizer}{Regularizer function applied to the
-\code{recurrent_kernel} weights matrix. Default: \code{None}.}
+\code{recurrent_kernel} weights matrix. Default: \code{NULL}.}
 
 \item{bias_regularizer}{Regularizer function applied to the bias vector.
-Default: \code{None}.}
+Default: \code{NULL}.}
 
 \item{kernel_constraint}{Constraint function applied to the \code{kernel} weights
-matrix. Default: \code{None}.}
+matrix. Default: \code{NULL}.}
 
 \item{recurrent_constraint}{Constraint function applied to the
-\code{recurrent_kernel} weights matrix. Default: \code{None}.}
+\code{recurrent_kernel} weights matrix. Default: \code{NULL}.}
 
 \item{bias_constraint}{Constraint function applied to the bias vector.
-Default: \code{None}.}
+Default: \code{NULL}.}
 
 \item{dropout}{Float between 0 and 1. Fraction of the units to drop for the
 linear transformation of the inputs. Default: 0.}
@@ -88,17 +88,17 @@ training mode or in inference mode. Only relevant when \code{dropout} or
 }
 
 \section{Examples}{
-\if{html}{\out{<div class="sourceCode python">}}\preformatted{inputs = np.random.random([32, 10, 8]).astype(np.float32)
-rnn = keras.layers.RNN(keras.layers.SimpleRNNCell(4))
-output = rnn(inputs)  # The output has shape `(32, 4)`.
-rnn = keras.layers.RNN(
-    keras.layers.SimpleRNNCell(4),
-    return_sequences=True,
-    return_state=True
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{inputs <- random_uniform(c(32, 10, 8))
+rnn <- layer_rnn(cell = layer_simple_rnn_cell(units = 4))
+output <- rnn(inputs)  # The output has shape `(32, 4)`.
+rnn <- layer_rnn(
+    cell = layer_simple_rnn_cell(units = 4),
+    return_sequences=TRUE,
+    return_state=TRUE
 )
 # whole_sequence_output has shape `(32, 10, 4)`.
 # final_state has shape `(32, 4)`.
-whole_sequence_output, final_state = rnn(inputs)
+c(whole_sequence_output, final_state) \%<-\% rnn(inputs)
 }\if{html}{\out{</div>}}
 }
 

@@ -37,10 +37,10 @@ layer_simple_rnn(
 
 \item{activation}{Activation function to use.
 Default: hyperbolic tangent (\code{tanh}).
-If you pass None, no activation is applied
+If you pass NULL, no activation is applied
 (ie. "linear" activation: \code{a(x) = x}).}
 
-\item{use_bias}{Boolean, (default \code{True}), whether the layer uses
+\item{use_bias}{Boolean, (default \code{TRUE}), whether the layer uses
 a bias vector.}
 
 \item{kernel_initializer}{Initializer for the \code{kernel} weights matrix,
@@ -54,25 +54,25 @@ state.  Default: \code{"orthogonal"}.}
 \item{bias_initializer}{Initializer for the bias vector. Default: \code{"zeros"}.}
 
 \item{kernel_regularizer}{Regularizer function applied to the \code{kernel} weights
-matrix. Default: \code{None}.}
+matrix. Default: \code{NULL}.}
 
 \item{recurrent_regularizer}{Regularizer function applied to the
-\code{recurrent_kernel} weights matrix. Default: \code{None}.}
+\code{recurrent_kernel} weights matrix. Default: \code{NULL}.}
 
 \item{bias_regularizer}{Regularizer function applied to the bias vector.
-Default: \code{None}.}
+Default: \code{NULL}.}
 
 \item{activity_regularizer}{Regularizer function applied to the output of the
-layer (its "activation"). Default: \code{None}.}
+layer (its "activation"). Default: \code{NULL}.}
 
 \item{kernel_constraint}{Constraint function applied to the \code{kernel} weights
-matrix. Default: \code{None}.}
+matrix. Default: \code{NULL}.}
 
 \item{recurrent_constraint}{Constraint function applied to the
-\code{recurrent_kernel} weights matrix.  Default: \code{None}.}
+\code{recurrent_kernel} weights matrix.  Default: \code{NULL}.}
 
 \item{bias_constraint}{Constraint function applied to the bias vector.
-Default: \code{None}.}
+Default: \code{NULL}.}
 
 \item{dropout}{Float between 0 and 1.
 Fraction of the units to drop for the linear transformation
@@ -83,21 +83,21 @@ Fraction of the units to drop for the linear transformation of the
 recurrent state. Default: 0.}
 
 \item{return_sequences}{Boolean. Whether to return the last output
-in the output sequence, or the full sequence. Default: \code{False}.}
+in the output sequence, or the full sequence. Default: \code{FALSE}.}
 
 \item{return_state}{Boolean. Whether to return the last state
-in addition to the output. Default: \code{False}.}
+in addition to the output. Default: \code{FALSE}.}
 
-\item{go_backwards}{Boolean (default: \code{False}).
-If \code{True}, process the input sequence backwards and return the
+\item{go_backwards}{Boolean (default: \code{FALSE}).
+If \code{TRUE}, process the input sequence backwards and return the
 reversed sequence.}
 
-\item{stateful}{Boolean (default: \code{False}). If \code{True}, the last state
+\item{stateful}{Boolean (default: \code{FALSE}). If \code{TRUE}, the last state
 for each sample at index i in a batch will be used as initial
 state for the sample of index i in the following batch.}
 
-\item{unroll}{Boolean (default: \code{False}).
-If \code{True}, the network will be unrolled,
+\item{unroll}{Boolean (default: \code{FALSE}).
+If \code{TRUE}, the network will be unrolled,
 else a symbolic loop will be used.
 Unrolling can speed-up a RNN,
 although it tends to be more memory-intensive.
@@ -114,9 +114,9 @@ Fully-connected RNN where the output is to be fed back as the new input.
 \itemize{
 \item \code{sequence}: A 3D tensor, with shape \verb{[batch, timesteps, feature]}.
 \item \code{mask}: Binary tensor of shape \verb{[batch, timesteps]} indicating whether
-a given timestep should be masked. An individual \code{True} entry
+a given timestep should be masked. An individual \code{TRUE} entry
 indicates that the corresponding timestep should be utilized,
-while a \code{False} entry indicates that the corresponding timestep
+while a \code{FALSE} entry indicates that the corresponding timestep
 should be ignored.
 \item \code{training}: Python boolean indicating whether the layer should behave in
 training mode or in inference mode.
@@ -128,15 +128,15 @@ call of the cell.
 }
 
 \section{Examples}{
-\if{html}{\out{<div class="sourceCode python">}}\preformatted{inputs = np.random.random((32, 10, 8))
-simple_rnn = keras.layers.SimpleRNN(4)
-output = simple_rnn(inputs)  # The output has shape `(32, 4)`.
-simple_rnn = keras.layers.SimpleRNN(
-    4, return_sequences=True, return_state=True
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{inputs <- random_uniform(c(32, 10, 8))
+simple_rnn <- layer_simple_rnn(units = 4)
+output <- simple_rnn(inputs)  # The output has shape `(32, 4)`.
+simple_rnn <- layer_simple_rnn(
+    units = 4, return_sequences=TRUE, return_state=TRUE
 )
 # whole_sequence_output has shape `(32, 10, 4)`.
 # final_state has shape `(32, 4)`.
-whole_sequence_output, final_state = simple_rnn(inputs)
+c(whole_sequence_output, final_state) \%<-\% simple_rnn(inputs)
 }\if{html}{\out{</div>}}
 }
 

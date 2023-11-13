@@ -13,26 +13,27 @@ This class processes one step within the whole time sequence input, whereas
     `recurrent_dropout` is used.
 
 # Examples
-```python
-inputs = np.random.random([32, 10, 8]).astype(np.float32)
-rnn = keras.layers.RNN(keras.layers.SimpleRNNCell(4))
-output = rnn(inputs)  # The output has shape `(32, 4)`.
-rnn = keras.layers.RNN(
-    keras.layers.SimpleRNNCell(4),
-    return_sequences=True,
-    return_state=True
+
+```r
+inputs <- random_uniform(c(32, 10, 8))
+rnn <- layer_rnn(cell = layer_simple_rnn_cell(units = 4))
+output <- rnn(inputs)  # The output has shape `(32, 4)`.
+rnn <- layer_rnn(
+    cell = layer_simple_rnn_cell(units = 4),
+    return_sequences=TRUE,
+    return_state=TRUE
 )
 # whole_sequence_output has shape `(32, 10, 4)`.
 # final_state has shape `(32, 4)`.
-whole_sequence_output, final_state = rnn(inputs)
+c(whole_sequence_output, final_state) %<-% rnn(inputs)
 ```
 
 @param units Positive integer, dimensionality of the output space.
 @param activation Activation function to use.
     Default: hyperbolic tangent (`tanh`).
-    If you pass `None`, no activation is applied
+    If you pass `NULL`, no activation is applied
     (ie. "linear" activation: `a(x) = x`).
-@param use_bias Boolean, (default `True`), whether the layer
+@param use_bias Boolean, (default `TRUE`), whether the layer
     should use a bias vector.
 @param kernel_initializer Initializer for the `kernel` weights matrix,
     used for the linear transformation of the inputs. Default:
@@ -42,17 +43,17 @@ whole_sequence_output, final_state = rnn(inputs)
     of the recurrent state. Default: `"orthogonal"`.
 @param bias_initializer Initializer for the bias vector. Default: `"zeros"`.
 @param kernel_regularizer Regularizer function applied to the `kernel` weights
-    matrix. Default: `None`.
+    matrix. Default: `NULL`.
 @param recurrent_regularizer Regularizer function applied to the
-    `recurrent_kernel` weights matrix. Default: `None`.
+    `recurrent_kernel` weights matrix. Default: `NULL`.
 @param bias_regularizer Regularizer function applied to the bias vector.
-    Default: `None`.
+    Default: `NULL`.
 @param kernel_constraint Constraint function applied to the `kernel` weights
-    matrix. Default: `None`.
+    matrix. Default: `NULL`.
 @param recurrent_constraint Constraint function applied to the
-    `recurrent_kernel` weights matrix. Default: `None`.
+    `recurrent_kernel` weights matrix. Default: `NULL`.
 @param bias_constraint Constraint function applied to the bias vector.
-    Default: `None`.
+    Default: `NULL`.
 @param dropout Float between 0 and 1. Fraction of the units to drop for the
     linear transformation of the inputs. Default: 0.
 @param recurrent_dropout Float between 0 and 1. Fraction of the units to drop
@@ -64,3 +65,4 @@ whole_sequence_output, final_state = rnn(inputs)
 @family recurrent layers
 @seealso
 + <https://www.tensorflow.org/api_docs/python/tf/keras/layers/SimpleRNNCell>
+
