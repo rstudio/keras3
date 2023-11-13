@@ -3,7 +3,7 @@
 @description
 This layer performs a depthwise convolution that acts separately on
 channels, followed by a pointwise convolution that mixes channels.
-If `use_bias` is True and a bias initializer is provided,
+If `use_bias` is TRUE and a bias initializer is provided,
 it adds a bias vector to the output. It then optionally applies an
 activation function to produce the final output.
 
@@ -20,11 +20,15 @@ activation function to produce the final output.
     A 3D tensor with shape: `(batch_shape, filters, new_steps)`
 
 # Examples
-```python
-x = np.random.rand(4, 10, 12)
-y = keras.layers.SeparableConv1D(3, 4, 3, 2, activation='relu')(x)
-print(y.shape)
-# (4, 4, 4)
+
+```r
+x <- random_uniform(c(4, 10, 12))
+y <- layer_separable_conv_1d(x, 3, 2, 2, activation='relu')
+y$shape
+```
+
+```
+## TensorShape([4, 5, 3])
 ```
 
 @returns
@@ -33,9 +37,9 @@ A 3D tensor representing
 
 @param filters int, the dimensionality of the output space (i.e. the number
     of filters in the pointwise convolution).
-@param kernel_size int or tuple/list of 1 integers, specifying the size of the
+@param kernel_size int or list of 1 integers, specifying the size of the
     depthwise convolution window.
-@param strides int or tuple/list of 1 integers, specifying the stride length
+@param strides int or list of 1 integers, specifying the stride length
     of the depthwise convolution. If only one int is specified, the same
     stride size will be used for all dimensions. `strides > 1` is
     incompatible with `dilation_rate > 1`.
@@ -50,21 +54,21 @@ A 3D tensor representing
     `(batch, features, steps)`. It defaults to the `image_data_format`
     value found in your Keras config file at `~/.keras/keras.json`.
     If you never set it, then it will be `"channels_last"`.
-@param dilation_rate int or tuple/list of 1 integers, specifying the dilation
+@param dilation_rate int or list of 1 integers, specifying the dilation
     rate to use for dilated convolution. If only one int is specified,
     the same dilation rate will be used for all dimensions.
 @param depth_multiplier The number of depthwise convolution output channels
     for each input channel. The total number of depthwise convolution
     output channels will be equal to `input_channel * depth_multiplier`.
-@param activation Activation function. If `None`, no activation is applied.
-@param use_bias bool, if `True`, bias will be added to the output.
+@param activation Activation function. If `NULL`, no activation is applied.
+@param use_bias bool, if `TRUE`, bias will be added to the output.
 @param depthwise_initializer An initializer for the depthwise convolution
-    kernel. If None, then the default initializer (`"glorot_uniform"`)
+    kernel. If NULL, then the default initializer (`"glorot_uniform"`)
     will be used.
 @param pointwise_initializer An initializer for the pointwise convolution
-    kernel. If None, then the default initializer (`"glorot_uniform"`)
+    kernel. If NULL, then the default initializer (`"glorot_uniform"`)
     will be used.
-@param bias_initializer An initializer for the bias vector. If None, the
+@param bias_initializer An initializer for the bias vector. If NULL, the
     default initializer ('"zeros"') will be used.
 @param depthwise_regularizer Optional regularizer for the depthwise
     convolution kernel.
@@ -89,3 +93,4 @@ A 3D tensor representing
 @seealso
 + <https:/keras.io/api/layers/convolution_layers/separable_convolution1d#separableconv1d-class>
 + <https://www.tensorflow.org/api_docs/python/tf/keras/layers/SeparableConv1D>
+

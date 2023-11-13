@@ -34,10 +34,10 @@ layer_separable_conv_1d(
 \item{filters}{int, the dimensionality of the output space (i.e. the number
 of filters in the pointwise convolution).}
 
-\item{kernel_size}{int or tuple/list of 1 integers, specifying the size of the
+\item{kernel_size}{int or list of 1 integers, specifying the size of the
 depthwise convolution window.}
 
-\item{strides}{int or tuple/list of 1 integers, specifying the stride length
+\item{strides}{int or list of 1 integers, specifying the stride length
 of the depthwise convolution. If only one int is specified, the same
 stride size will be used for all dimensions. \code{strides > 1} is
 incompatible with \code{dilation_rate > 1}.}
@@ -55,7 +55,7 @@ while \code{"channels_first"} corresponds to inputs with shape
 value found in your Keras config file at \verb{~/.keras/keras.json}.
 If you never set it, then it will be \code{"channels_last"}.}
 
-\item{dilation_rate}{int or tuple/list of 1 integers, specifying the dilation
+\item{dilation_rate}{int or list of 1 integers, specifying the dilation
 rate to use for dilated convolution. If only one int is specified,
 the same dilation rate will be used for all dimensions.}
 
@@ -63,19 +63,19 @@ the same dilation rate will be used for all dimensions.}
 for each input channel. The total number of depthwise convolution
 output channels will be equal to \code{input_channel * depth_multiplier}.}
 
-\item{activation}{Activation function. If \code{None}, no activation is applied.}
+\item{activation}{Activation function. If \code{NULL}, no activation is applied.}
 
-\item{use_bias}{bool, if \code{True}, bias will be added to the output.}
+\item{use_bias}{bool, if \code{TRUE}, bias will be added to the output.}
 
 \item{depthwise_initializer}{An initializer for the depthwise convolution
-kernel. If None, then the default initializer (\code{"glorot_uniform"})
+kernel. If NULL, then the default initializer (\code{"glorot_uniform"})
 will be used.}
 
 \item{pointwise_initializer}{An initializer for the pointwise convolution
-kernel. If None, then the default initializer (\code{"glorot_uniform"})
+kernel. If NULL, then the default initializer (\code{"glorot_uniform"})
 will be used.}
 
-\item{bias_initializer}{An initializer for the bias vector. If None, the
+\item{bias_initializer}{An initializer for the bias vector. If NULL, the
 default initializer ('"zeros"') will be used.}
 
 \item{depthwise_regularizer}{Optional regularizer for the depthwise
@@ -109,7 +109,7 @@ A 3D tensor representing
 \description{
 This layer performs a depthwise convolution that acts separately on
 channels, followed by a pointwise convolution that mixes channels.
-If \code{use_bias} is True and a bias initializer is provided,
+If \code{use_bias} is TRUE and a bias initializer is provided,
 it adds a bias vector to the output. It then optionally applies an
 activation function to produce the final output.
 }
@@ -132,10 +132,12 @@ A 3D tensor with shape: \verb{(batch_shape, filters, new_steps)}
 }
 
 \section{Examples}{
-\if{html}{\out{<div class="sourceCode python">}}\preformatted{x = np.random.rand(4, 10, 12)
-y = keras.layers.SeparableConv1D(3, 4, 3, 2, activation='relu')(x)
-print(y.shape)
-# (4, 4, 4)
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{x <- random_uniform(c(4, 10, 12))
+y <- layer_separable_conv_1d(x, 3, 2, 2, activation='relu')
+y$shape
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode">}}\preformatted{## TensorShape([4, 5, 3])
 }\if{html}{\out{</div>}}
 }
 
