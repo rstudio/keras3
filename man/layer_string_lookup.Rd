@@ -27,9 +27,9 @@ layer_string_lookup(
 
 \item{max_tokens}{Maximum size of the vocabulary for this layer. This should
 only be specified when adapting the vocabulary or when setting
-\code{pad_to_max_tokens=True}. If None, there is no cap on the size of
+\code{pad_to_max_tokens=TRUE}. If NULL, there is no cap on the size of
 the vocabulary. Note that this size includes the OOV
-and mask tokens. Defaults to \code{None}.}
+and mask tokens. Defaults to \code{NULL}.}
 
 \item{num_oov_indices}{The number of out-of-vocabulary tokens to use.
 If this value is more than 1, OOV inputs are modulated to
@@ -41,21 +41,21 @@ the layer. Defaults to \code{1}.}
 \code{"int"}, the token is included in vocabulary and mapped to index 0.
 In other output modes, the token will not appear
 in the vocabulary and instances of the mask token
-in the input will be dropped. If set to \code{None},
-no mask term will be added. Defaults to \code{None}.}
+in the input will be dropped. If set to \code{NULL},
+no mask term will be added. Defaults to \code{NULL}.}
 
-\item{oov_token}{Only used when \code{invert} is True. The token to return for OOV
+\item{oov_token}{Only used when \code{invert} is TRUE. The token to return for OOV
 indices. Defaults to \code{"[UNK]"}.}
 
 \item{vocabulary}{Optional. Either an array of integers or a string path to a
-text file. If passing an array, can pass a tuple, list,
+text file. If passing an array, can pass a list, list,
 1D NumPy array, or 1D tensor containing the integer vocbulary terms.
 If passing a file path, the file should contain one line per term
 in the vocabulary. If this argument is set,
 there is no need to \code{adapt()} the layer.}
 
 \item{idf_weights}{Only valid when \code{output_mode} is \code{"tf_idf"}.
-A tuple, list, 1D NumPy array, or 1D tensor or the same length
+A list, list, 1D NumPy array, or 1D tensor or the same length
 as the vocabulary, containing the floating point inverse document
 frequency weights, which will be multiplied by per sample term
 counts for the final TF-IDF weight.
@@ -63,9 +63,9 @@ If the \code{vocabulary} argument is set, and \code{output_mode} is
 \code{"tf_idf"}, this argument must be supplied.}
 
 \item{invert}{Only valid when \code{output_mode} is \code{"int"}.
-If \code{True}, this layer will map indices to vocabulary items
+If \code{TRUE}, this layer will map indices to vocabulary items
 instead of mapping vocabulary items to indices.
-Defaults to \code{False}.}
+Defaults to \code{FALSE}.}
 
 \item{output_mode}{Specification for the output of the layer. Values can be
 \code{"int"}, \code{"one_hot"}, \code{"multi_hot"}, \code{"count"}, or \code{"tf_idf"}
@@ -93,16 +93,16 @@ For all other output modes, currently only output up to rank 2
 is supported. Defaults to \code{"int"}.}
 
 \item{pad_to_max_tokens}{Only applicable when \code{output_mode} is \code{"multi_hot"},
-\code{"count"}, or \code{"tf_idf"}. If \code{True}, the output will have
+\code{"count"}, or \code{"tf_idf"}. If \code{TRUE}, the output will have
 its feature axis padded to \code{max_tokens} even if the number
 of unique tokens in the vocabulary is less than \code{max_tokens},
 resulting in a tensor of shape \verb{(batch_size, max_tokens)}
-regardless of vocabulary size. Defaults to \code{False}.}
+regardless of vocabulary size. Defaults to \code{FALSE}.}
 
 \item{sparse}{Boolean. Only applicable to \code{"multi_hot"}, \code{"count"}, and
 \code{"tf_idf"} output modes. Only supported with TensorFlow
-backend. If \code{True}, returns a \code{SparseTensor}
-instead of a dense \code{Tensor}. Defaults to \code{False}.}
+backend. If \code{TRUE}, returns a \code{SparseTensor}
+instead of a dense \code{Tensor}. Defaults to \code{FALSE}.}
 
 \item{encoding}{Optional. The text encoding to use to interpret the input
 strings. Defaults to \code{"utf-8"}.}
@@ -118,7 +118,7 @@ strings. Defaults to \code{"utf-8"}.}
 This layer translates a set of arbitrary strings into integer output via a
 table-based vocabulary lookup. This layer will perform no splitting or
 transformation of input strings. For a layer than can split and tokenize
-natural language, see the \code{keras.layers.TextVectorization} layer.
+natural language, see the \code{layer_text_vectorization} layer.
 
 The vocabulary for the layer must be either supplied on construction or
 learned via \code{adapt()}. During \code{adapt()}, the layer will analyze a data set,
@@ -159,12 +159,15 @@ to use this layer.
 
 This example creates a lookup layer with a pre-existing vocabulary.
 
-\if{html}{\out{<div class="sourceCode python">}}\preformatted{vocab = ["a", "b", "c", "d"]
-data = [["a", "c", "d"], ["d", "z", "b"]]
-layer = StringLookup(vocabulary=vocab)
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{vocab <- c("a", "b", "c", "d")
+data <- rbind(c("a", "c", "d"), c("d", "z", "b"))
+layer <- layer_string_lookup(vocabulary=vocab)
 layer(data)
-# array([[1, 3, 4],
-#        [4, 0, 2]])
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor(
+## [[1 3 4]
+##  [4 0 2]], shape=(2, 3), dtype=int64)
 }\if{html}{\out{</div>}}
 
 \strong{Creating a lookup layer with an adapted vocabulary}
@@ -172,23 +175,28 @@ layer(data)
 This example creates a lookup layer and generates the vocabulary by
 analyzing the dataset.
 
-\if{html}{\out{<div class="sourceCode python">}}\preformatted{data = [["a", "c", "d"], ["d", "z", "b"]]
-layer = StringLookup()
-layer.adapt(data)
-layer.get_vocabulary()
-# ['[UNK]', 'd', 'z', 'c', 'b', 'a']
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{data <- rbind(c("a", "c", "d"), c("d", "z", "b"))
+layer <- layer_string_lookup()
+layer \%>\% adapt(data)
+get_vocabulary(layer)
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode">}}\preformatted{## [1] "[UNK]" "d"     "z"     "c"     "b"     "a"
 }\if{html}{\out{</div>}}
 
 Note that the OOV token \code{"[UNK]"} has been added to the vocabulary.
 The remaining tokens are sorted by frequency
 (\code{"d"}, which has 2 occurrences, is first) then by inverse sort order.
 
-\if{html}{\out{<div class="sourceCode python">}}\preformatted{data = [["a", "c", "d"], ["d", "z", "b"]]
-layer = StringLookup()
-layer.adapt(data)
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{data <- rbind(c("a", "c", "d"), c("d", "z", "b"))
+layer <- layer_string_lookup()
+layer \%>\% adapt(data)
 layer(data)
-# array([[5, 3, 1],
-#        [1, 2, 4]])
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor(
+## [[5 3 1]
+##  [1 2 4]], shape=(2, 3), dtype=int64)
 }\if{html}{\out{</div>}}
 
 \strong{Lookups with multiple OOV indices}
@@ -198,12 +206,15 @@ indices.  When a layer is created with more than one OOV index, any OOV
 values are hashed into the number of OOV buckets, distributing OOV values in
 a deterministic fashion across the set.
 
-\if{html}{\out{<div class="sourceCode python">}}\preformatted{vocab = ["a", "b", "c", "d"]
-data = [["a", "c", "d"], ["m", "z", "b"]]
-layer = StringLookup(vocabulary=vocab, num_oov_indices=2)
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{vocab <- c("a", "b", "c", "d")
+data <- rbind(c("a", "c", "d"), c("m", "z", "b"))
+layer <- layer_string_lookup(vocabulary = vocab, num_oov_indices = 2)
 layer(data)
-# array([[2, 4, 5],
-#        [0, 1, 3]])
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor(
+## [[2 4 5]
+##  [0 1 3]], shape=(2, 3), dtype=int64)
 }\if{html}{\out{</div>}}
 
 Note that the output for OOV value 'm' is 0, while the output for OOV value
@@ -216,15 +227,18 @@ value.
 Configure the layer with \code{output_mode='one_hot'}. Note that the first
 \code{num_oov_indices} dimensions in the ont_hot encoding represent OOV values.
 
-\if{html}{\out{<div class="sourceCode python">}}\preformatted{vocab = ["a", "b", "c", "d"]
-data = ["a", "b", "c", "d", "z"]
-layer = StringLookup(vocabulary=vocab, output_mode='one_hot')
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{vocab <- c("a", "b", "c", "d")
+data <- c("a", "b", "c", "d", "z")
+layer <- layer_string_lookup(vocabulary = vocab, output_mode = 'one_hot')
 layer(data)
-# array([[0., 1., 0., 0., 0.],
-#        [0., 0., 1., 0., 0.],
-#        [0., 0., 0., 1., 0.],
-#        [0., 0., 0., 0., 1.],
-#        [1., 0., 0., 0., 0.]], dtype=float32)
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor(
+## [[0 1 0 0 0]
+##  [0 0 1 0 0]
+##  [0 0 0 1 0]
+##  [0 0 0 0 1]
+##  [1 0 0 0 0]], shape=(5, 5), dtype=int64)
 }\if{html}{\out{</div>}}
 
 \strong{Multi-hot output}
@@ -232,12 +246,15 @@ layer(data)
 Configure the layer with \code{output_mode='multi_hot'}. Note that the first
 \code{num_oov_indices} dimensions in the multi_hot encoding represent OOV values.
 
-\if{html}{\out{<div class="sourceCode python">}}\preformatted{vocab = ["a", "b", "c", "d"]
-data = [["a", "c", "d", "d"], ["d", "z", "b", "z"]]
-layer = StringLookup(vocabulary=vocab, output_mode='multi_hot')
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{vocab <- c("a", "b", "c", "d")
+data <- rbind(c("a", "c", "d", "d"), c("d", "z", "b", "z"))
+layer <- layer_string_lookup(vocabulary = vocab, output_mode = 'multi_hot')
 layer(data)
-# array([[0., 1., 0., 1., 1.],
-#        [1., 0., 1., 0., 1.]], dtype=float32)
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor(
+## [[0 1 0 1 1]
+##  [1 0 1 0 1]], shape=(2, 5), dtype=int64)
 }\if{html}{\out{</div>}}
 
 \strong{Token count output}
@@ -245,12 +262,15 @@ layer(data)
 Configure the layer with \code{output_mode='count'}. As with multi_hot output,
 the first \code{num_oov_indices} dimensions in the output represent OOV values.
 
-\if{html}{\out{<div class="sourceCode python">}}\preformatted{vocab = ["a", "b", "c", "d"]
-data = [["a", "c", "d", "d"], ["d", "z", "b", "z"]]
-layer = StringLookup(vocabulary=vocab, output_mode='count')
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{vocab <- c("a", "b", "c", "d")
+data <- rbind(c("a", "c", "d", "d"), c("d", "z", "b", "z"))
+layer <- layer_string_lookup(vocabulary = vocab, output_mode = 'count')
 layer(data)
-# array([[0., 1., 0., 1., 2.],
-#        [2., 0., 1., 0., 1.]], dtype=float32)
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor(
+## [[0 1 0 1 2]
+##  [2 0 1 0 1]], shape=(2, 5), dtype=int64)
 }\if{html}{\out{</div>}}
 
 \strong{TF-IDF output}
@@ -263,27 +283,33 @@ are the inverse document frequency weights per token. These should be
 provided along with the vocabulary. Note that the \code{idf_weight} for OOV
 values will default to the average of all idf weights passed in.
 
-\if{html}{\out{<div class="sourceCode python">}}\preformatted{vocab = ["a", "b", "c", "d"]
-idf_weights = [0.25, 0.75, 0.6, 0.4]
-data = [["a", "c", "d", "d"], ["d", "z", "b", "z"]]
-layer = StringLookup(output_mode="tf_idf")
-layer.set_vocabulary(vocab, idf_weights=idf_weights)
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{vocab <- c("a", "b", "c", "d")
+idf_weights <- c(0.25, 0.75, 0.6, 0.4)
+data <- rbind(c("a", "c", "d", "d"), c("d", "z", "b", "z"))
+layer <- layer_string_lookup(output_mode = "tf_idf")
+layer \%>\% set_vocabulary(vocab, idf_weights=idf_weights)
 layer(data)
-# array([[0.  , 0.25, 0.  , 0.6 , 0.8 ],
-#        [1.0 , 0.  , 0.75, 0.  , 0.4 ]], dtype=float32)
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor(
+## [[0.   0.25 0.   0.6  0.8 ]
+##  [1.   0.   0.75 0.   0.4 ]], shape=(2, 5), dtype=float32)
 }\if{html}{\out{</div>}}
 
 To specify the idf weights for oov values, you will need to pass the entire
 vocabularly including the leading oov token.
 
-\if{html}{\out{<div class="sourceCode python">}}\preformatted{vocab = ["[UNK]", "a", "b", "c", "d"]
-idf_weights = [0.9, 0.25, 0.75, 0.6, 0.4]
-data = [["a", "c", "d", "d"], ["d", "z", "b", "z"]]
-layer = StringLookup(output_mode="tf_idf")
-layer.set_vocabulary(vocab, idf_weights=idf_weights)
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{vocab <- c("[UNK]", "a", "b", "c", "d")
+idf_weights <- c(0.9, 0.25, 0.75, 0.6, 0.4)
+data <- rbind(c("a", "c", "d", "d"), c("d", "z", "b", "z"))
+layer <- layer_string_lookup(output_mode = "tf_idf")
+layer \%>\% set_vocabulary(vocab, idf_weights=idf_weights)
 layer(data)
-# array([[0.  , 0.25, 0.  , 0.6 , 0.8 ],
-#        [1.8 , 0.  , 0.75, 0.  , 0.4 ]], dtype=float32)
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor(
+## [[0.   0.25 0.   0.6  0.8 ]
+##  [1.8  0.   0.75 0.   0.4 ]], shape=(2, 5), dtype=float32)
 }\if{html}{\out{</div>}}
 
 When adapting the layer in \code{"tf_idf"} mode, each input sample will be
@@ -293,15 +319,18 @@ considered a document, and IDF weight per token will be calculated as
 \strong{Inverse lookup}
 
 This example demonstrates how to map indices to strings using this layer.
-(You can also use \code{adapt()} with \code{inverse=True}, but for simplicity we'll
+(You can also use \code{adapt()} with \code{inverse=TRUE}, but for simplicity we'll
 pass the vocab in this example.)
 
-\if{html}{\out{<div class="sourceCode python">}}\preformatted{vocab = ["a", "b", "c", "d"]
-data = [[1, 3, 4], [4, 0, 2]]
-layer = StringLookup(vocabulary=vocab, invert=True)
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{vocab <- c("a", "b", "c", "d")
+data <- rbind(c(1, 3, 4), c(4, 0, 2))
+layer <- layer_string_lookup(vocabulary = vocab, invert = TRUE)
 layer(data)
-# array([[b'a', b'c', b'd'],
-#        [b'd', b'[UNK]', b'b']], dtype=object)
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor(
+## [[b'a' b'c' b'd']
+##  [b'd' b'[UNK]' b'b']], shape=(2, 3), dtype=string)
 }\if{html}{\out{</div>}}
 
 Note that the first index correspond to the oov token by default.
@@ -311,14 +340,17 @@ Note that the first index correspond to the oov token by default.
 This example demonstrates how to use the vocabulary of a standard lookup
 layer to create an inverse lookup layer.
 
-\if{html}{\out{<div class="sourceCode python">}}\preformatted{vocab = ["a", "b", "c", "d"]
-data = [["a", "c", "d"], ["d", "z", "b"]]
-layer = StringLookup(vocabulary=vocab)
-i_layer = StringLookup(vocabulary=vocab, invert=True)
-int_data = layer(data)
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{vocab <- c("a", "b", "c", "d")
+data <- rbind(c("a", "c", "d"), c("d", "z", "b"))
+layer <- layer_string_lookup(vocabulary = vocab)
+i_layer <- layer_string_lookup(vocabulary = vocab, invert = TRUE)
+int_data <- layer(data)
 i_layer(int_data)
-# array([[b'a', b'c', b'd'],
-#        [b'd', b'[UNK]', b'b']], dtype=object)
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor(
+## [[b'a' b'c' b'd']
+##  [b'd' b'[UNK]' b'b']], shape=(2, 3), dtype=string)
 }\if{html}{\out{</div>}}
 
 In this example, the input value \code{"z"} resulted in an output of \code{"[UNK]"},

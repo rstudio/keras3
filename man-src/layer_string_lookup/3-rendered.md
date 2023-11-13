@@ -4,7 +4,7 @@ A preprocessing layer that maps strings to (possibly encoded) indices.
 This layer translates a set of arbitrary strings into integer output via a
 table-based vocabulary lookup. This layer will perform no splitting or
 transformation of input strings. For a layer than can split and tokenize
-natural language, see the `keras.layers.TextVectorization` layer.
+natural language, see the `layer_text_vectorization` layer.
 
 The vocabulary for the layer must be either supplied on construction or
 learned via `adapt()`. During `adapt()`, the layer will analyze a data set,
@@ -45,13 +45,18 @@ to use this layer.
 
 This example creates a lookup layer with a pre-existing vocabulary.
 
-```python
-vocab = ["a", "b", "c", "d"]
-data = [["a", "c", "d"], ["d", "z", "b"]]
-layer = StringLookup(vocabulary=vocab)
+
+```r
+vocab <- c("a", "b", "c", "d")
+data <- rbind(c("a", "c", "d"), c("d", "z", "b"))
+layer <- layer_string_lookup(vocabulary=vocab)
 layer(data)
-# array([[1, 3, 4],
-#        [4, 0, 2]])
+```
+
+```
+## tf.Tensor(
+## [[1 3 4]
+##  [4 0 2]], shape=(2, 3), dtype=int64)
 ```
 
 **Creating a lookup layer with an adapted vocabulary**
@@ -59,25 +64,34 @@ layer(data)
 This example creates a lookup layer and generates the vocabulary by
 analyzing the dataset.
 
-```python
-data = [["a", "c", "d"], ["d", "z", "b"]]
-layer = StringLookup()
-layer.adapt(data)
-layer.get_vocabulary()
-# ['[UNK]', 'd', 'z', 'c', 'b', 'a']
+
+```r
+data <- rbind(c("a", "c", "d"), c("d", "z", "b"))
+layer <- layer_string_lookup()
+layer %>% adapt(data)
+get_vocabulary(layer)
+```
+
+```
+## [1] "[UNK]" "d"     "z"     "c"     "b"     "a"
 ```
 
 Note that the OOV token `"[UNK]"` has been added to the vocabulary.
 The remaining tokens are sorted by frequency
 (`"d"`, which has 2 occurrences, is first) then by inverse sort order.
 
-```python
-data = [["a", "c", "d"], ["d", "z", "b"]]
-layer = StringLookup()
-layer.adapt(data)
+
+```r
+data <- rbind(c("a", "c", "d"), c("d", "z", "b"))
+layer <- layer_string_lookup()
+layer %>% adapt(data)
 layer(data)
-# array([[5, 3, 1],
-#        [1, 2, 4]])
+```
+
+```
+## tf.Tensor(
+## [[5 3 1]
+##  [1 2 4]], shape=(2, 3), dtype=int64)
 ```
 
 **Lookups with multiple OOV indices**
@@ -87,13 +101,18 @@ indices.  When a layer is created with more than one OOV index, any OOV
 values are hashed into the number of OOV buckets, distributing OOV values in
 a deterministic fashion across the set.
 
-```python
-vocab = ["a", "b", "c", "d"]
-data = [["a", "c", "d"], ["m", "z", "b"]]
-layer = StringLookup(vocabulary=vocab, num_oov_indices=2)
+
+```r
+vocab <- c("a", "b", "c", "d")
+data <- rbind(c("a", "c", "d"), c("m", "z", "b"))
+layer <- layer_string_lookup(vocabulary = vocab, num_oov_indices = 2)
 layer(data)
-# array([[2, 4, 5],
-#        [0, 1, 3]])
+```
+
+```
+## tf.Tensor(
+## [[2 4 5]
+##  [0 1 3]], shape=(2, 3), dtype=int64)
 ```
 
 Note that the output for OOV value 'm' is 0, while the output for OOV value
@@ -106,16 +125,21 @@ value.
 Configure the layer with `output_mode='one_hot'`. Note that the first
 `num_oov_indices` dimensions in the ont_hot encoding represent OOV values.
 
-```python
-vocab = ["a", "b", "c", "d"]
-data = ["a", "b", "c", "d", "z"]
-layer = StringLookup(vocabulary=vocab, output_mode='one_hot')
+
+```r
+vocab <- c("a", "b", "c", "d")
+data <- c("a", "b", "c", "d", "z")
+layer <- layer_string_lookup(vocabulary = vocab, output_mode = 'one_hot')
 layer(data)
-# array([[0., 1., 0., 0., 0.],
-#        [0., 0., 1., 0., 0.],
-#        [0., 0., 0., 1., 0.],
-#        [0., 0., 0., 0., 1.],
-#        [1., 0., 0., 0., 0.]], dtype=float32)
+```
+
+```
+## tf.Tensor(
+## [[0 1 0 0 0]
+##  [0 0 1 0 0]
+##  [0 0 0 1 0]
+##  [0 0 0 0 1]
+##  [1 0 0 0 0]], shape=(5, 5), dtype=int64)
 ```
 
 **Multi-hot output**
@@ -123,13 +147,18 @@ layer(data)
 Configure the layer with `output_mode='multi_hot'`. Note that the first
 `num_oov_indices` dimensions in the multi_hot encoding represent OOV values.
 
-```python
-vocab = ["a", "b", "c", "d"]
-data = [["a", "c", "d", "d"], ["d", "z", "b", "z"]]
-layer = StringLookup(vocabulary=vocab, output_mode='multi_hot')
+
+```r
+vocab <- c("a", "b", "c", "d")
+data <- rbind(c("a", "c", "d", "d"), c("d", "z", "b", "z"))
+layer <- layer_string_lookup(vocabulary = vocab, output_mode = 'multi_hot')
 layer(data)
-# array([[0., 1., 0., 1., 1.],
-#        [1., 0., 1., 0., 1.]], dtype=float32)
+```
+
+```
+## tf.Tensor(
+## [[0 1 0 1 1]
+##  [1 0 1 0 1]], shape=(2, 5), dtype=int64)
 ```
 
 **Token count output**
@@ -137,13 +166,18 @@ layer(data)
 Configure the layer with `output_mode='count'`. As with multi_hot output,
 the first `num_oov_indices` dimensions in the output represent OOV values.
 
-```python
-vocab = ["a", "b", "c", "d"]
-data = [["a", "c", "d", "d"], ["d", "z", "b", "z"]]
-layer = StringLookup(vocabulary=vocab, output_mode='count')
+
+```r
+vocab <- c("a", "b", "c", "d")
+data <- rbind(c("a", "c", "d", "d"), c("d", "z", "b", "z"))
+layer <- layer_string_lookup(vocabulary = vocab, output_mode = 'count')
 layer(data)
-# array([[0., 1., 0., 1., 2.],
-#        [2., 0., 1., 0., 1.]], dtype=float32)
+```
+
+```
+## tf.Tensor(
+## [[0 1 0 1 2]
+##  [2 0 1 0 1]], shape=(2, 5), dtype=int64)
 ```
 
 **TF-IDF output**
@@ -156,29 +190,39 @@ are the inverse document frequency weights per token. These should be
 provided along with the vocabulary. Note that the `idf_weight` for OOV
 values will default to the average of all idf weights passed in.
 
-```python
-vocab = ["a", "b", "c", "d"]
-idf_weights = [0.25, 0.75, 0.6, 0.4]
-data = [["a", "c", "d", "d"], ["d", "z", "b", "z"]]
-layer = StringLookup(output_mode="tf_idf")
-layer.set_vocabulary(vocab, idf_weights=idf_weights)
+
+```r
+vocab <- c("a", "b", "c", "d")
+idf_weights <- c(0.25, 0.75, 0.6, 0.4)
+data <- rbind(c("a", "c", "d", "d"), c("d", "z", "b", "z"))
+layer <- layer_string_lookup(output_mode = "tf_idf")
+layer %>% set_vocabulary(vocab, idf_weights=idf_weights)
 layer(data)
-# array([[0.  , 0.25, 0.  , 0.6 , 0.8 ],
-#        [1.0 , 0.  , 0.75, 0.  , 0.4 ]], dtype=float32)
+```
+
+```
+## tf.Tensor(
+## [[0.   0.25 0.   0.6  0.8 ]
+##  [1.   0.   0.75 0.   0.4 ]], shape=(2, 5), dtype=float32)
 ```
 
 To specify the idf weights for oov values, you will need to pass the entire
 vocabularly including the leading oov token.
 
-```python
-vocab = ["[UNK]", "a", "b", "c", "d"]
-idf_weights = [0.9, 0.25, 0.75, 0.6, 0.4]
-data = [["a", "c", "d", "d"], ["d", "z", "b", "z"]]
-layer = StringLookup(output_mode="tf_idf")
-layer.set_vocabulary(vocab, idf_weights=idf_weights)
+
+```r
+vocab <- c("[UNK]", "a", "b", "c", "d")
+idf_weights <- c(0.9, 0.25, 0.75, 0.6, 0.4)
+data <- rbind(c("a", "c", "d", "d"), c("d", "z", "b", "z"))
+layer <- layer_string_lookup(output_mode = "tf_idf")
+layer %>% set_vocabulary(vocab, idf_weights=idf_weights)
 layer(data)
-# array([[0.  , 0.25, 0.  , 0.6 , 0.8 ],
-#        [1.8 , 0.  , 0.75, 0.  , 0.4 ]], dtype=float32)
+```
+
+```
+## tf.Tensor(
+## [[0.   0.25 0.   0.6  0.8 ]
+##  [1.8  0.   0.75 0.   0.4 ]], shape=(2, 5), dtype=float32)
 ```
 
 When adapting the layer in `"tf_idf"` mode, each input sample will be
@@ -188,16 +232,21 @@ considered a document, and IDF weight per token will be calculated as
 **Inverse lookup**
 
 This example demonstrates how to map indices to strings using this layer.
-(You can also use `adapt()` with `inverse=True`, but for simplicity we'll
+(You can also use `adapt()` with `inverse=TRUE`, but for simplicity we'll
 pass the vocab in this example.)
 
-```python
-vocab = ["a", "b", "c", "d"]
-data = [[1, 3, 4], [4, 0, 2]]
-layer = StringLookup(vocabulary=vocab, invert=True)
+
+```r
+vocab <- c("a", "b", "c", "d")
+data <- rbind(c(1, 3, 4), c(4, 0, 2))
+layer <- layer_string_lookup(vocabulary = vocab, invert = TRUE)
 layer(data)
-# array([[b'a', b'c', b'd'],
-#        [b'd', b'[UNK]', b'b']], dtype=object)
+```
+
+```
+## tf.Tensor(
+## [[b'a' b'c' b'd']
+##  [b'd' b'[UNK]' b'b']], shape=(2, 3), dtype=string)
 ```
 
 Note that the first index correspond to the oov token by default.
@@ -207,15 +256,20 @@ Note that the first index correspond to the oov token by default.
 This example demonstrates how to use the vocabulary of a standard lookup
 layer to create an inverse lookup layer.
 
-```python
-vocab = ["a", "b", "c", "d"]
-data = [["a", "c", "d"], ["d", "z", "b"]]
-layer = StringLookup(vocabulary=vocab)
-i_layer = StringLookup(vocabulary=vocab, invert=True)
-int_data = layer(data)
+
+```r
+vocab <- c("a", "b", "c", "d")
+data <- rbind(c("a", "c", "d"), c("d", "z", "b"))
+layer <- layer_string_lookup(vocabulary = vocab)
+i_layer <- layer_string_lookup(vocabulary = vocab, invert = TRUE)
+int_data <- layer(data)
 i_layer(int_data)
-# array([[b'a', b'c', b'd'],
-#        [b'd', b'[UNK]', b'b']], dtype=object)
+```
+
+```
+## tf.Tensor(
+## [[b'a' b'c' b'd']
+##  [b'd' b'[UNK]' b'b']], shape=(2, 3), dtype=string)
 ```
 
 In this example, the input value `"z"` resulted in an output of `"[UNK]"`,
@@ -227,9 +281,9 @@ vocabulary either directly or via `adapt()` before calling
 
 @param max_tokens Maximum size of the vocabulary for this layer. This should
     only be specified when adapting the vocabulary or when setting
-    `pad_to_max_tokens=True`. If None, there is no cap on the size of
+    `pad_to_max_tokens=TRUE`. If NULL, there is no cap on the size of
     the vocabulary. Note that this size includes the OOV
-    and mask tokens. Defaults to `None`.
+    and mask tokens. Defaults to `NULL`.
 @param num_oov_indices The number of out-of-vocabulary tokens to use.
     If this value is more than 1, OOV inputs are modulated to
     determine their OOV value.
@@ -239,12 +293,12 @@ vocabulary either directly or via `adapt()` before calling
     `"int"`, the token is included in vocabulary and mapped to index 0.
     In other output modes, the token will not appear
     in the vocabulary and instances of the mask token
-    in the input will be dropped. If set to `None`,
-    no mask term will be added. Defaults to `None`.
-@param oov_token Only used when `invert` is True. The token to return for OOV
+    in the input will be dropped. If set to `NULL`,
+    no mask term will be added. Defaults to `NULL`.
+@param oov_token Only used when `invert` is TRUE. The token to return for OOV
     indices. Defaults to `"[UNK]"`.
 @param vocabulary Optional. Either an array of integers or a string path to a
-    text file. If passing an array, can pass a tuple, list,
+    text file. If passing an array, can pass a list, list,
     1D NumPy array, or 1D tensor containing the integer vocbulary terms.
     If passing a file path, the file should contain one line per term
     in the vocabulary. If this argument is set,
@@ -252,16 +306,16 @@ vocabulary either directly or via `adapt()` before calling
 @param vocabulary_dtype The dtype of the vocabulary terms, for example
     `"int64"` or `"int32"`. Defaults to `"int64"`.
 @param idf_weights Only valid when `output_mode` is `"tf_idf"`.
-    A tuple, list, 1D NumPy array, or 1D tensor or the same length
+    A list, list, 1D NumPy array, or 1D tensor or the same length
     as the vocabulary, containing the floating point inverse document
     frequency weights, which will be multiplied by per sample term
     counts for the final TF-IDF weight.
     If the `vocabulary` argument is set, and `output_mode` is
     `"tf_idf"`, this argument must be supplied.
 @param invert Only valid when `output_mode` is `"int"`.
-    If `True`, this layer will map indices to vocabulary items
+    If `TRUE`, this layer will map indices to vocabulary items
     instead of mapping vocabulary items to indices.
-    Defaults to `False`.
+    Defaults to `FALSE`.
 @param output_mode Specification for the output of the layer. Values can be
     `"int"`, `"one_hot"`, `"multi_hot"`, `"count"`, or `"tf_idf"`
     configuring the layer as follows:
@@ -287,15 +341,15 @@ vocabulary either directly or via `adapt()` before calling
     For all other output modes, currently only output up to rank 2
     is supported. Defaults to `"int"`.
 @param pad_to_max_tokens Only applicable when `output_mode` is `"multi_hot"`,
-    `"count"`, or `"tf_idf"`. If `True`, the output will have
+    `"count"`, or `"tf_idf"`. If `TRUE`, the output will have
     its feature axis padded to `max_tokens` even if the number
     of unique tokens in the vocabulary is less than `max_tokens`,
     resulting in a tensor of shape `(batch_size, max_tokens)`
-    regardless of vocabulary size. Defaults to `False`.
+    regardless of vocabulary size. Defaults to `FALSE`.
 @param sparse Boolean. Only applicable to `"multi_hot"`, `"count"`, and
     `"tf_idf"` output modes. Only supported with TensorFlow
-    backend. If `True`, returns a `SparseTensor`
-    instead of a dense `Tensor`. Defaults to `False`.
+    backend. If `TRUE`, returns a `SparseTensor`
+    instead of a dense `Tensor`. Defaults to `FALSE`.
 @param encoding Optional. The text encoding to use to interpret the input
     strings. Defaults to `"utf-8"`.
 @param object Object to compose the layer with. A tensor, array, or sequential model.
@@ -307,3 +361,4 @@ vocabulary either directly or via `adapt()` before calling
 @seealso
 + <https:/keras.io/api/layers/preprocessing_layers/categorical/string_lookup#stringlookup-class>
 + <https://www.tensorflow.org/api_docs/python/tf/keras/layers/StringLookup>
+

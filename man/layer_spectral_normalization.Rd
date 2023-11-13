@@ -9,8 +9,8 @@ layer_spectral_normalization(object, layer, power_iterations = 1L, ...)
 \arguments{
 \item{object}{Object to compose the layer with. A tensor, array, or sequential model.}
 
-\item{layer}{A \code{keras.layers.Layer} instance that
-has either a \code{kernel} (e.g. \code{Conv2D}, \code{Dense}...)
+\item{layer}{A \code{Layer} instance that
+has either a \code{kernel} (e.g. \code{layer_conv_2d}, \code{layer_dense}...)
 or an \code{embeddings} attribute (\code{Embedding} layer).}
 
 \item{power_iterations}{int, the number of iterations during normalization.}
@@ -22,22 +22,28 @@ This wrapper controls the Lipschitz constant of the weights of a layer by
 constraining their spectral norm, which can stabilize the training of GANs.
 }
 \section{Examples}{
-Wrap \code{keras.layers.Conv2D}:
+Wrap \code{layer_conv_2d}:
 
-\if{html}{\out{<div class="sourceCode python">}}\preformatted{x = np.random.rand(1, 10, 10, 1)
-conv2d = SpectralNormalization(keras.layers.Conv2D(2, 2))
-y = conv2d(x)
-y.shape
-# (1, 9, 9, 2)
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{x <- random_uniform(c(1, 10, 10, 1))
+conv2d <- layer_spectral_normalization(
+  layer = layer_conv_2d(filters = 2, kernel_size = 2)
+)
+y <- conv2d(x)
+y$shape
 }\if{html}{\out{</div>}}
 
-Wrap \code{keras.layers.Dense}:
+\if{html}{\out{<div class="sourceCode">}}\preformatted{## TensorShape([1, 9, 9, 2])
+}\if{html}{\out{</div>}}
 
-\if{html}{\out{<div class="sourceCode python">}}\preformatted{x = np.random.rand(1, 10, 10, 1)
-dense = SpectralNormalization(keras.layers.Dense(10))
-y = dense(x)
-y.shape
-# (1, 10, 10, 10)
+Wrap \code{layer_Dense}:
+
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{x <- random_uniform(c(1, 10, 10, 1))
+dense <- layer_spectral_normalization(layer = layer_dense(units = 10))
+y <- dense(x)
+y$shape
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode">}}\preformatted{## TensorShape([1, 10, 10, 10])
 }\if{html}{\out{</div>}}
 }
 

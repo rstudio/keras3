@@ -5,29 +5,39 @@ This wrapper controls the Lipschitz constant of the weights of a layer by
 constraining their spectral norm, which can stabilize the training of GANs.
 
 # Examples
-Wrap `keras.layers.Conv2D`:
-```python
-x = np.random.rand(1, 10, 10, 1)
-conv2d = SpectralNormalization(keras.layers.Conv2D(2, 2))
-y = conv2d(x)
-y.shape
-# (1, 9, 9, 2)
+Wrap `layer_conv_2d`:
+
+```r
+x <- random_uniform(c(1, 10, 10, 1))
+conv2d <- layer_spectral_normalization(
+  layer = layer_conv_2d(filters = 2, kernel_size = 2)
+)
+y <- conv2d(x)
+y$shape
 ```
 
-Wrap `keras.layers.Dense`:
-```python
-x = np.random.rand(1, 10, 10, 1)
-dense = SpectralNormalization(keras.layers.Dense(10))
-y = dense(x)
-y.shape
-# (1, 10, 10, 10)
+```
+## TensorShape([1, 9, 9, 2])
+```
+
+Wrap `layer_Dense`:
+
+```r
+x <- random_uniform(c(1, 10, 10, 1))
+dense <- layer_spectral_normalization(layer = layer_dense(units = 10))
+y <- dense(x)
+y$shape
+```
+
+```
+## TensorShape([1, 10, 10, 10])
 ```
 
 # Reference
 - [Spectral Normalization for GAN](https://arxiv.org/abs/1802.05957).
 
-@param layer A `keras.layers.Layer` instance that
-    has either a `kernel` (e.g. `Conv2D`, `Dense`...)
+@param layer A `Layer` instance that
+    has either a `kernel` (e.g. `layer_conv_2d`, `layer_dense`...)
     or an `embeddings` attribute (`Embedding` layer).
 @param power_iterations int, the number of iterations during normalization.
 @param ... Base wrapper keyword arguments.
@@ -37,3 +47,4 @@ y.shape
 @family normalization layers
 @seealso
 + <https://www.tensorflow.org/api_docs/python/tf/keras/layers/SpectralNormalization>
+

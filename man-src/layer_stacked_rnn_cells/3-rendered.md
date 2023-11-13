@@ -4,18 +4,19 @@ Wrapper allowing a stack of RNN cells to behave as a single cell.
 Used to implement efficient stacked RNNs.
 
 # Examples
-```python
-batch_size = 3
-sentence_length = 5
-num_features = 2
-new_shape = (batch_size, sentence_length, num_features)
-x = np.reshape(np.arange(30), new_shape)
 
-rnn_cells = [keras.layers.LSTMCell(128) for _ in range(2)]
-stacked_lstm = keras.layers.StackedRNNCells(rnn_cells)
-lstm_layer = keras.layers.RNN(stacked_lstm)
+```r
+batch_size <- 3
+sentence_length <- 5
+num_features <- 2
+new_shape <- c(batch_size, sentence_length, num_features)
+x <- array(1:30, dim = new_shape)
 
-result = lstm_layer(x)
+rnn_cells <- lapply(1:2, function(x) layer_lstm_cell(units = 128))
+stacked_lstm <- layer_stacked_rnn_cells(rnn_cells)
+lstm_layer <- layer_rnn(cell = stacked_lstm)
+
+result <- lstm_layer(x)
 ```
 
 @param cells List of RNN cell instances.
@@ -25,3 +26,4 @@ result = lstm_layer(x)
 @family recurrent layers
 @seealso
 + <https://www.tensorflow.org/api_docs/python/tf/keras/layers/StackedRNNCells>
+
