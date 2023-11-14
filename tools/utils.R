@@ -1766,6 +1766,7 @@ git <- function(..., retries = 4L, valid_exit_codes = 0L) {
       stop("non-0 exit from git ", str_split1_on_first(..1, " ")[[1]])
     }
   }
+  res
 }
 
 git_reset <- function(..., except = "./tools") {
