@@ -193,8 +193,8 @@ reloaded_feature_space <- keras$models$load_model("featurespace.keras")
 
 @param feature_names
 Dict mapping the names of your features to their
-type specification, e.g. `{"my_feature": "integer_categorical"}`
-or `{"my_feature": FeatureSpace.integer_categorical()}`.
+type specification, e.g. `list(my_feature = "integer_categorical")`
+or `list(my_feature = feature_integer_categorical())`.
 For a complete list of all supported types, see
 "Available feature types" paragraph below.
 
@@ -206,7 +206,7 @@ encoded features (with the same keys as the input dict keys).
 
 @param crosses
 List of features to be crossed together, e.g.
-`crosses=[("feature_1", "feature_2")]`. The features will be
+`crosses=list(c("feature_1", "feature_2"))`. The features will be
 "crossed" by hashing their combined value into
 a fixed-length vector.
 
