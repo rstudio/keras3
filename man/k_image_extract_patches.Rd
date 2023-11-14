@@ -46,19 +46,19 @@ Extracts patches from the image(s).
 \section{Examples}{
 \if{html}{\out{<div class="sourceCode r">}}\preformatted{image <- random_uniform(c(2, 20, 20, 3), dtype = "float32") # batch of 2 RGB images
 patches <- k_image_extract_patches(image, c(5, 5))
-patches$shape
+shape(patches)
 }\if{html}{\out{</div>}}
 
-\if{html}{\out{<div class="sourceCode">}}\preformatted{## TensorShape([2, 4, 4, 75])
+\if{html}{\out{<div class="sourceCode">}}\preformatted{## (2, 4, 4, 75)
 }\if{html}{\out{</div>}}
 
 \if{html}{\out{<div class="sourceCode r">}}\preformatted{# (2, 4, 4, 75)
 image <- random_uniform(c(20, 20, 3), dtype = "float32") # 1 RGB image
 patches <- k_image_extract_patches(image, c(3, 3), c(1, 1))
-patches$shape
+shape(patches)
 }\if{html}{\out{</div>}}
 
-\if{html}{\out{<div class="sourceCode">}}\preformatted{## TensorShape([18, 18, 27])
+\if{html}{\out{<div class="sourceCode">}}\preformatted{## (18, 18, 27)
 }\if{html}{\out{</div>}}
 
 \if{html}{\out{<div class="sourceCode r">}}\preformatted{# (18, 18, 27)

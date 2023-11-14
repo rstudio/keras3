@@ -43,19 +43,19 @@ For example:
 layer <- layer_layer_normalization(axis = c(2, 3, 4))
 
 layer(k_ones(c(5, 20, 30, 40))) |> invisible() # build()
-layer$beta$shape
+shape(layer$beta)
 ```
 
 ```
-## TensorShape([20, 30, 40])
+## (20, 30, 40)
 ```
 
 ```r
-layer$gamma$shape
+shape(layer$gamma)
 ```
 
 ```
-## TensorShape([20, 30, 40])
+## (20, 30, 40)
 ```
 
 Note that other implementations of layer normalization may choose to define

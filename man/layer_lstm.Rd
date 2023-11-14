@@ -140,30 +140,30 @@ For example:
 
 \if{html}{\out{<div class="sourceCode r">}}\preformatted{input <- random_uniform(c(32, 10, 8))
 output <- input |> layer_lstm(4)
-output$shape
+shape(output)
 }\if{html}{\out{</div>}}
 
-\if{html}{\out{<div class="sourceCode">}}\preformatted{## TensorShape([32, 4])
+\if{html}{\out{<div class="sourceCode">}}\preformatted{## (32, 4)
 }\if{html}{\out{</div>}}
 
 \if{html}{\out{<div class="sourceCode r">}}\preformatted{lstm <- layer_lstm(units = 4, return_sequences = TRUE, return_state = TRUE)
 c(whole_seq_output, final_memory_state, final_carry_state) \%<-\% lstm(input)
-whole_seq_output$shape
+shape(whole_seq_output)
 }\if{html}{\out{</div>}}
 
-\if{html}{\out{<div class="sourceCode">}}\preformatted{## TensorShape([32, 10, 4])
+\if{html}{\out{<div class="sourceCode">}}\preformatted{## (32, 10, 4)
 }\if{html}{\out{</div>}}
 
-\if{html}{\out{<div class="sourceCode r">}}\preformatted{final_memory_state$shape
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{shape(final_memory_state)
 }\if{html}{\out{</div>}}
 
-\if{html}{\out{<div class="sourceCode">}}\preformatted{## TensorShape([32, 4])
+\if{html}{\out{<div class="sourceCode">}}\preformatted{## (32, 4)
 }\if{html}{\out{</div>}}
 
-\if{html}{\out{<div class="sourceCode r">}}\preformatted{final_carry_state$shape
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{shape(final_carry_state)
 }\if{html}{\out{</div>}}
 
-\if{html}{\out{<div class="sourceCode">}}\preformatted{## TensorShape([32, 4])
+\if{html}{\out{<div class="sourceCode">}}\preformatted{## (32, 4)
 }\if{html}{\out{</div>}}
 }
 \section{Call Arguments}{

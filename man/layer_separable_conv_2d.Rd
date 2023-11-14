@@ -134,10 +134,10 @@ A 4D tensor with shape: \verb{(batch_size, filters, new_height, new_width)}
 \section{Examples}{
 \if{html}{\out{<div class="sourceCode r">}}\preformatted{x <- random_uniform(c(4, 10, 10, 12))
 y <- layer_separable_conv_2d(x, 3, c(4, 3), 2, activation='relu')
-print(y$shape)
+shape(y)
 }\if{html}{\out{</div>}}
 
-\if{html}{\out{<div class="sourceCode">}}\preformatted{## TensorShape([4, 4, 4, 3])
+\if{html}{\out{<div class="sourceCode">}}\preformatted{## (4, 4, 4, 3)
 }\if{html}{\out{</div>}}
 }
 

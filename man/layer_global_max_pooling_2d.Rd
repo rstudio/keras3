@@ -57,10 +57,10 @@ Global max pooling operation for 2D data.
 \section{Examples}{
 \if{html}{\out{<div class="sourceCode r">}}\preformatted{x <- random_uniform(c(2, 4, 5, 3))
 y <- x |> layer_global_max_pooling_2d()
-y$shape
+shape(y)
 }\if{html}{\out{</div>}}
 
-\if{html}{\out{<div class="sourceCode">}}\preformatted{## TensorShape([2, 3])
+\if{html}{\out{<div class="sourceCode">}}\preformatted{## (2, 3)
 }\if{html}{\out{</div>}}
 }
 

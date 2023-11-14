@@ -27,11 +27,11 @@ ValueError: when both `strides > 1` and `dilation_rate > 1`.
 ```r
 x <- random_uniform(c(4, 10, 10, 128))
 y <- x |> layer_conv_2d(32, 3, activation='relu')
-y$shape
+shape(y)
 ```
 
 ```
-## TensorShape([4, 8, 8, 32])
+## (4, 8, 8, 32)
 ```
 
 @returns

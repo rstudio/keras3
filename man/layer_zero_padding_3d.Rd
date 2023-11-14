@@ -55,10 +55,10 @@ x
 }\if{html}{\out{</div>}}
 
 \if{html}{\out{<div class="sourceCode r">}}\preformatted{y <- layer_zero_padding_3d(x, padding = 2)
-y$shape
+shape(y)
 }\if{html}{\out{</div>}}
 
-\if{html}{\out{<div class="sourceCode">}}\preformatted{## TensorShape([1, 5, 6, 6, 3])
+\if{html}{\out{<div class="sourceCode">}}\preformatted{## (1, 5, 6, 6, 3)
 }\if{html}{\out{</div>}}
 }
 

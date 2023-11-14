@@ -17,7 +17,7 @@ it implements the following:
 
 ```r
 k_vectorized_map <- function(elements, f) {
-    batch_size <- elements[[1]]$shape[[1]]
+    batch_size <- elements[[1]] |> shape() |> _[[1]]
     outputs <- vector("list", batch_size)
     outputs <- lapply(seq(batch_size), \(index) {
         f(lapply(elements, \(e) e[index, all_dims()]))
@@ -78,4 +78,3 @@ A function taking either a tensor, or list of tensors.
 @family ops
 @seealso
 + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/vectorized_map>
-

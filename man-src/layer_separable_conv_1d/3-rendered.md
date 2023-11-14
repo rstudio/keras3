@@ -24,11 +24,11 @@ activation function to produce the final output.
 ```r
 x <- random_uniform(c(4, 10, 12))
 y <- layer_separable_conv_1d(x, 3, 2, 2, activation='relu')
-y$shape
+shape(y)
 ```
 
 ```
-## TensorShape([4, 5, 3])
+## (4, 5, 3)
 ```
 
 @returns

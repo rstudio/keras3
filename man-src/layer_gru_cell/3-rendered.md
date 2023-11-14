@@ -17,11 +17,11 @@ This class processes one step within the whole time sequence input, whereas
 ```r
 inputs <- random_uniform(c(32, 10, 8))
 outputs <- inputs |> layer_rnn(layer_gru_cell(4))
-outputs$shape
+shape(outputs)
 ```
 
 ```
-## TensorShape([32, 4])
+## (32, 4)
 ```
 
 ```r
@@ -30,19 +30,19 @@ rnn <- layer_rnn(
    return_sequences=TRUE,
    return_state=TRUE)
 c(whole_sequence_output, final_state) %<-% rnn(inputs)
-whole_sequence_output$shape
+shape(whole_sequence_output)
 ```
 
 ```
-## TensorShape([32, 10, 4])
+## (32, 10, 4)
 ```
 
 ```r
-final_state$shape
+shape(final_state)
 ```
 
 ```
-## TensorShape([32, 4])
+## (32, 4)
 ```
 
 @param units

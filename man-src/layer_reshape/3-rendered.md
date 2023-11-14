@@ -16,39 +16,22 @@ the first layer in a model.
 ```r
 x <- layer_input(shape = 12)
 y <- layer_reshape(x, c(3, 4))
-y$shape
+shape(y)
 ```
 
 ```
-## [[1]]
-## NULL
-##
-## [[2]]
-## [1] 3
-##
-## [[3]]
-## [1] 4
+## (NA, 3, 4)
 ```
 
 
 ```r
 # also supports shape inference using `-1` as dimension
 y <- layer_reshape(x, c(-1, 2, 2))
-y$shape
+shape(y)
 ```
 
 ```
-## [[1]]
-## NULL
-##
-## [[2]]
-## [1] 3
-##
-## [[3]]
-## [1] 2
-##
-## [[4]]
-## [1] 2
+## (NA, 3, 2, 2)
 ```
 
 @param target_shape

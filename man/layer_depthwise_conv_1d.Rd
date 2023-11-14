@@ -139,10 +139,10 @@ y <- x |> layer_depthwise_conv_1d(
   depth_multiplier = 3,
   activation = 'relu'
 )
-y$shape
+shape(y)
 }\if{html}{\out{</div>}}
 
-\if{html}{\out{<div class="sourceCode">}}\preformatted{## TensorShape([4, 8, 36])
+\if{html}{\out{<div class="sourceCode">}}\preformatted{## (4, 8, 36)
 }\if{html}{\out{</div>}}
 }
 

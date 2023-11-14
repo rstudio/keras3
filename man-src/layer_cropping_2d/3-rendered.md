@@ -9,11 +9,11 @@ It crops along spatial dimensions, i.e. height and width.
 input_shape <- c(2, 28, 28, 3)
 x <- k_arange(prod(input_shape), dtype ='int32') |> k_reshape(input_shape)
 y <- x |> layer_cropping_2d(cropping=list(c(2, 2), c(4, 4)))
-y$shape
+shape(y)
 ```
 
 ```
-## TensorShape([2, 24, 20, 3])
+## (2, 24, 20, 3)
 ```
 
 # Input Shape

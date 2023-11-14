@@ -46,11 +46,11 @@ y <- x |> layer_depthwise_conv_1d(
   depth_multiplier = 3,
   activation = 'relu'
 )
-y$shape
+shape(y)
 ```
 
 ```
-## TensorShape([4, 8, 36])
+## (4, 8, 36)
 ```
 
 @returns

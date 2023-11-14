@@ -44,20 +44,20 @@ Pad \code{images} with zeros to the specified \code{height} and \code{width}.
 padded_images <- k_image_pad_images(
     images, 2, 3, target_height = 20, target_width = 30
 )
-padded_images$shape
+shape(padded_images)
 }\if{html}{\out{</div>}}
 
-\if{html}{\out{<div class="sourceCode">}}\preformatted{## TensorShape([20, 30, 3])
+\if{html}{\out{<div class="sourceCode">}}\preformatted{## (20, 30, 3)
 }\if{html}{\out{</div>}}
 
 \if{html}{\out{<div class="sourceCode r">}}\preformatted{batch_images <- random_uniform(c(2, 15, 25, 3))
 padded_batch <- k_image_pad_images(batch_images, 2, 3,
                                    target_height = 20,
                                    target_width = 30)
-padded_batch$shape
+shape(padded_batch)
 }\if{html}{\out{</div>}}
 
-\if{html}{\out{<div class="sourceCode">}}\preformatted{## TensorShape([2, 20, 30, 3])
+\if{html}{\out{<div class="sourceCode">}}\preformatted{## (2, 20, 30, 3)
 }\if{html}{\out{</div>}}
 }
 

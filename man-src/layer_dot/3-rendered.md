@@ -32,28 +32,28 @@ Usage in a Keras model:
 ```r
 x1 <- k_reshape(0:9, c(5, 2)) |> layer_dense(8)
 x2 <- k_reshape(10:19, c(5, 2)) |> layer_dense(8)
-x1$shape
+shape(x1)
 ```
 
 ```
-## TensorShape([5, 8])
+## (5, 8)
 ```
 
 ```r
-x2$shape
+shape(x2)
 ```
 
 ```
-## TensorShape([5, 8])
+## (5, 8)
 ```
 
 ```r
 y <- layer_dot(x1, x2, axes=2)
-y$shape
+shape(y)
 ```
 
 ```
-## TensorShape([5, 1])
+## (5, 1)
 ```
 
 @returns

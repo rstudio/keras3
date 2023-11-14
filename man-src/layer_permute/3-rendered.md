@@ -15,18 +15,11 @@ to the specified pattern.
 ```r
 x <- layer_input(shape=c(10, 64))
 y <- layer_permute(x, c(2, 1))
-y$shape
+shape(y)
 ```
 
 ```
-## [[1]]
-## NULL
-##
-## [[2]]
-## [1] 64
-##
-## [[3]]
-## [1] 10
+## (NA, 64, 10)
 ```
 
 @param dims

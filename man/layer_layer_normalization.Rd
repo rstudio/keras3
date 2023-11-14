@@ -101,16 +101,16 @@ For example:
 \if{html}{\out{<div class="sourceCode r">}}\preformatted{layer <- layer_layer_normalization(axis = c(2, 3, 4))
 
 layer(k_ones(c(5, 20, 30, 40))) |> invisible() # build()
-layer$beta$shape
+shape(layer$beta)
 }\if{html}{\out{</div>}}
 
-\if{html}{\out{<div class="sourceCode">}}\preformatted{## TensorShape([20, 30, 40])
+\if{html}{\out{<div class="sourceCode">}}\preformatted{## (20, 30, 40)
 }\if{html}{\out{</div>}}
 
-\if{html}{\out{<div class="sourceCode r">}}\preformatted{layer$gamma$shape
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{shape(layer$gamma)
 }\if{html}{\out{</div>}}
 
-\if{html}{\out{<div class="sourceCode">}}\preformatted{## TensorShape([20, 30, 40])
+\if{html}{\out{<div class="sourceCode">}}\preformatted{## (20, 30, 40)
 }\if{html}{\out{</div>}}
 
 Note that other implementations of layer normalization may choose to define

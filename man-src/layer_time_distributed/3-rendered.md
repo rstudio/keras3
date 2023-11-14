@@ -16,24 +16,11 @@ of the 10 timesteps, independently:
 inputs <- layer_input(shape = c(10, 128, 128, 3), batch_size = 32)
 conv_2d_layer <- layer_conv_2d(filters = 64, kernel_size = c(3, 3))
 outputs <- layer_time_distributed(inputs, layer = conv_2d_layer)
-outputs$shape
+shape(outputs)
 ```
 
 ```
-## [[1]]
-## [1] 32
-##
-## [[2]]
-## [1] 10
-##
-## [[3]]
-## [1] 126
-##
-## [[4]]
-## [1] 126
-##
-## [[5]]
-## [1] 64
+## (32, 10, 126, 126, 64)
 ```
 
 Because `layer_time_distributed` applies the same instance of `layer_conv2d` to each of

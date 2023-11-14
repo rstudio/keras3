@@ -23,37 +23,37 @@ For example:
 ```r
 input <- random_uniform(c(32, 10, 8))
 output <- input |> layer_lstm(4)
-output$shape
+shape(output)
 ```
 
 ```
-## TensorShape([32, 4])
+## (32, 4)
 ```
 
 ```r
 lstm <- layer_lstm(units = 4, return_sequences = TRUE, return_state = TRUE)
 c(whole_seq_output, final_memory_state, final_carry_state) %<-% lstm(input)
-whole_seq_output$shape
+shape(whole_seq_output)
 ```
 
 ```
-## TensorShape([32, 10, 4])
-```
-
-```r
-final_memory_state$shape
-```
-
-```
-## TensorShape([32, 4])
+## (32, 10, 4)
 ```
 
 ```r
-final_carry_state$shape
+shape(final_memory_state)
 ```
 
 ```
-## TensorShape([32, 4])
+## (32, 4)
+```
+
+```r
+shape(final_carry_state)
+```
+
+```
+## (32, 4)
 ```
 
 # Call Arguments

@@ -151,25 +151,25 @@ For example:
 
 \if{html}{\out{<div class="sourceCode r">}}\preformatted{inputs <- random_uniform(c(32, 10, 8))
 outputs <- inputs |> layer_gru(4)
-outputs$shape
+shape(outputs)
 }\if{html}{\out{</div>}}
 
-\if{html}{\out{<div class="sourceCode">}}\preformatted{## TensorShape([32, 4])
+\if{html}{\out{<div class="sourceCode">}}\preformatted{## (32, 4)
 }\if{html}{\out{</div>}}
 
 \if{html}{\out{<div class="sourceCode r">}}\preformatted{# (32, 4)
 gru <- layer_gru(, 4, return_sequences = TRUE, return_state = TRUE)
 c(whole_sequence_output, final_state) \%<-\% gru(inputs)
-whole_sequence_output$shape
+shape(whole_sequence_output)
 }\if{html}{\out{</div>}}
 
-\if{html}{\out{<div class="sourceCode">}}\preformatted{## TensorShape([32, 10, 4])
+\if{html}{\out{<div class="sourceCode">}}\preformatted{## (32, 10, 4)
 }\if{html}{\out{</div>}}
 
-\if{html}{\out{<div class="sourceCode r">}}\preformatted{final_state$shape
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{shape(final_state)
 }\if{html}{\out{</div>}}
 
-\if{html}{\out{<div class="sourceCode">}}\preformatted{## TensorShape([32, 4])
+\if{html}{\out{<div class="sourceCode">}}\preformatted{## (32, 4)
 }\if{html}{\out{</div>}}
 }
 \section{Call Arguments}{

@@ -35,30 +35,30 @@ For example:
 ```r
 inputs <- random_uniform(c(32, 10, 8))
 outputs <- inputs |> layer_gru(4)
-outputs$shape
+shape(outputs)
 ```
 
 ```
-## TensorShape([32, 4])
+## (32, 4)
 ```
 
 ```r
 # (32, 4)
 gru <- layer_gru(, 4, return_sequences = TRUE, return_state = TRUE)
 c(whole_sequence_output, final_state) %<-% gru(inputs)
-whole_sequence_output$shape
+shape(whole_sequence_output)
 ```
 
 ```
-## TensorShape([32, 10, 4])
+## (32, 10, 4)
 ```
 
 ```r
-final_state$shape
+shape(final_state)
 ```
 
 ```
-## TensorShape([32, 4])
+## (32, 4)
 ```
 
 # Call Arguments

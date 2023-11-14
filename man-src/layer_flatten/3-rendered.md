@@ -11,15 +11,11 @@ flattening adds an extra channel dimension and output shape is `(batch, 1)`.
 ```r
 x <- layer_input(shape=c(10, 64))
 y <- x |> layer_flatten()
-y$shape
+shape(y)
 ```
 
 ```
-## [[1]]
-## NULL
-##
-## [[2]]
-## [1] 640
+## (NA, 640)
 ```
 
 @param data_format

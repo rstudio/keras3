@@ -27,23 +27,10 @@ of the 10 timesteps, independently:
 \if{html}{\out{<div class="sourceCode r">}}\preformatted{inputs <- layer_input(shape = c(10, 128, 128, 3), batch_size = 32)
 conv_2d_layer <- layer_conv_2d(filters = 64, kernel_size = c(3, 3))
 outputs <- layer_time_distributed(inputs, layer = conv_2d_layer)
-outputs$shape
+shape(outputs)
 }\if{html}{\out{</div>}}
 
-\if{html}{\out{<div class="sourceCode">}}\preformatted{## [[1]]
-## [1] 32
-##
-## [[2]]
-## [1] 10
-##
-## [[3]]
-## [1] 126
-##
-## [[4]]
-## [1] 126
-##
-## [[5]]
-## [1] 64
+\if{html}{\out{<div class="sourceCode">}}\preformatted{## (32, 10, 126, 126, 64)
 }\if{html}{\out{</div>}}
 
 Because \code{layer_time_distributed} applies the same instance of \code{layer_conv2d} to each of

@@ -134,10 +134,10 @@ A 3D tensor with shape: \verb{(batch_shape, filters, new_steps)}
 \section{Examples}{
 \if{html}{\out{<div class="sourceCode r">}}\preformatted{x <- random_uniform(c(4, 10, 12))
 y <- layer_separable_conv_1d(x, 3, 2, 2, activation='relu')
-y$shape
+shape(y)
 }\if{html}{\out{</div>}}
 
-\if{html}{\out{<div class="sourceCode">}}\preformatted{## TensorShape([4, 5, 3])
+\if{html}{\out{<div class="sourceCode">}}\preformatted{## (4, 5, 3)
 }\if{html}{\out{</div>}}
 }
 

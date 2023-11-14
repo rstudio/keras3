@@ -135,10 +135,10 @@ ValueError: when both \code{strides > 1} and \code{dilation_rate > 1}.
 \section{Examples}{
 \if{html}{\out{<div class="sourceCode r">}}\preformatted{x <- random_uniform(c(4, 10, 10, 12))
 y <- x |> layer_depthwise_conv_2d(3, 3, activation = 'relu')
-y$shape
+shape(y)
 }\if{html}{\out{</div>}}
 
-\if{html}{\out{<div class="sourceCode">}}\preformatted{## TensorShape([4, 3, 3, 12])
+\if{html}{\out{<div class="sourceCode">}}\preformatted{## (4, 3, 3, 12)
 }\if{html}{\out{</div>}}
 }
 

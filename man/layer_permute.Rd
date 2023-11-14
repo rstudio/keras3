@@ -31,17 +31,10 @@ to the specified pattern.
 \section{Examples}{
 \if{html}{\out{<div class="sourceCode r">}}\preformatted{x <- layer_input(shape=c(10, 64))
 y <- layer_permute(x, c(2, 1))
-y$shape
+shape(y)
 }\if{html}{\out{</div>}}
 
-\if{html}{\out{<div class="sourceCode">}}\preformatted{## [[1]]
-## NULL
-##
-## [[2]]
-## [1] 64
-##
-## [[3]]
-## [1] 10
+\if{html}{\out{<div class="sourceCode">}}\preformatted{## (NA, 64, 10)
 }\if{html}{\out{</div>}}
 }
 

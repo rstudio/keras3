@@ -7,18 +7,11 @@ Repeats the input n times.
 ```r
 x <- layer_input(shape = 32)
 y <- layer_repeat_vector(x, n = 3)
-y$shape
+shape(y)
 ```
 
 ```
-## [[1]]
-## NULL
-##
-## [[2]]
-## [1] 3
-##
-## [[3]]
-## [1] 32
+## (NA, 3, 32)
 ```
 
 # Input Shape

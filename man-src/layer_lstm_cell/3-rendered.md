@@ -18,11 +18,11 @@ This class processes one step within the whole time sequence input, whereas
 inputs <- random_uniform(c(32, 10, 8))
 output <- inputs |>
   layer_rnn(cell = layer_lstm_cell(4))
-output$shape
+shape(output)
 ```
 
 ```
-## TensorShape([32, 4])
+## (32, 4)
 ```
 
 ```r

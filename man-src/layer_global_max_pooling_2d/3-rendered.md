@@ -24,11 +24,11 @@ Global max pooling operation for 2D data.
 ```r
 x <- random_uniform(c(2, 4, 5, 3))
 y <- x |> layer_global_max_pooling_2d()
-y$shape
+shape(y)
 ```
 
 ```
-## TensorShape([2, 3])
+## (2, 3)
 ```
 
 @param data_format

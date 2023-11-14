@@ -44,10 +44,10 @@ Cropping layer for 3D data (e.g. spatial or spatio-temporal).
 \if{html}{\out{<div class="sourceCode r">}}\preformatted{input_shape <- c(2, 28, 28, 10, 3)
 x <- input_shape \%>\% \{ k_reshape(seq(prod(.)), .) \}
 y <- x |> layer_cropping_3d(cropping = c(2, 4, 2))
-y$shape
+shape(y)
 }\if{html}{\out{</div>}}
 
-\if{html}{\out{<div class="sourceCode">}}\preformatted{## TensorShape([2, 24, 20, 6, 3])
+\if{html}{\out{<div class="sourceCode">}}\preformatted{## (2, 24, 20, 6, 3)
 }\if{html}{\out{</div>}}
 }
 

@@ -24,7 +24,7 @@ In the case of an iterable of tensors \code{elements},
 it implements the following:
 
 \if{html}{\out{<div class="sourceCode r">}}\preformatted{k_vectorized_map <- function(elements, f) \{
-    batch_size <- elements[[1]]$shape[[1]]
+    batch_size <- elements[[1]] |> shape() |> _[[1]]
     outputs <- vector("list", batch_size)
     outputs <- lapply(seq(batch_size), \\(index) \{
         f(lapply(elements, \\(e) e[index, all_dims()]))

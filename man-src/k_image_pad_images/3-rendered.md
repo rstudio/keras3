@@ -9,11 +9,11 @@ images <- random_uniform(c(15, 25, 3))
 padded_images <- k_image_pad_images(
     images, 2, 3, target_height = 20, target_width = 30
 )
-padded_images$shape
+shape(padded_images)
 ```
 
 ```
-## TensorShape([20, 30, 3])
+## (20, 30, 3)
 ```
 
 
@@ -22,11 +22,11 @@ batch_images <- random_uniform(c(2, 15, 25, 3))
 padded_batch <- k_image_pad_images(batch_images, 2, 3,
                                    target_height = 20,
                                    target_width = 30)
-padded_batch$shape
+shape(padded_batch)
 ```
 
 ```
-## TensorShape([2, 20, 30, 3])
+## (2, 20, 30, 3)
 ```
 
 @returns

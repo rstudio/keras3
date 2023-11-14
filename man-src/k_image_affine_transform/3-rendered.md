@@ -9,11 +9,11 @@ x <- random_uniform(c(2, 64, 80, 3)) # batch of 2 RGB images
 transform <- k_array(rbind(c(1.5, 0, -20, 0, 1.5, -16, 0, 0),  # zoom
                            c(1, 0, -20, 0, 1, -16, 0, 0)))  # translation))
 y <- k_image_affine_transform(x, transform)
-y$shape
+shape(y)
 ```
 
 ```
-## TensorShape([2, 64, 80, 3])
+## (2, 64, 80, 3)
 ```
 
 ```r
@@ -25,11 +25,11 @@ y$shape
 x <- random_uniform(c(64, 80, 3)) # single RGB image
 transform <- k_array(c(1.0, 0.5, -20, 0.5, 1.0, -16, 0, 0))  # shear
 y <- k_image_affine_transform(x, transform)
-y$shape
+shape(y)
 ```
 
 ```
-## TensorShape([64, 80, 3])
+## (64, 80, 3)
 ```
 
 ```r
@@ -44,11 +44,11 @@ transform <- k_array(rbind(
   c(1, 0,-20, 0, 1,-16, 0, 0)  # translation
 ))
 y <- k_image_affine_transform(x, transform, data_format = "channels_first")
-y$shape
+shape(y)
 ```
 
 ```
-## TensorShape([2, 3, 64, 80])
+## (2, 3, 64, 80)
 ```
 
 ```r

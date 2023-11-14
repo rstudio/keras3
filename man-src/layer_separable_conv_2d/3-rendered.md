@@ -24,11 +24,11 @@ activation function to produce the final output.
 ```r
 x <- random_uniform(c(4, 10, 10, 12))
 y <- layer_separable_conv_2d(x, 3, c(4, 3), 2, activation='relu')
-print(y$shape)
+shape(y)
 ```
 
 ```
-## TensorShape([4, 4, 4, 3])
+## (4, 4, 4, 3)
 ```
 
 @returns
@@ -135,4 +135,3 @@ Passed on to the Python callable
 @seealso
 + <https:/keras.io/api/layers/convolution_layers/separable_convolution2d#separableconv2d-class>
 + <https://www.tensorflow.org/api_docs/python/tf/keras/layers/SeparableConv2D>
-

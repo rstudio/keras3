@@ -13,11 +13,11 @@ conv2d <- layer_spectral_normalization(
   layer = layer_conv_2d(filters = 2, kernel_size = 2)
 )
 y <- conv2d(x)
-y$shape
+shape(y)
 ```
 
 ```
-## TensorShape([1, 9, 9, 2])
+## (1, 9, 9, 2)
 ```
 
 Wrap `layer_Dense`:
@@ -26,11 +26,11 @@ Wrap `layer_Dense`:
 x <- random_uniform(c(1, 10, 10, 1))
 dense <- layer_spectral_normalization(layer = layer_dense(units = 10))
 y <- dense(x)
-y$shape
+shape(y)
 ```
 
 ```
-## TensorShape([1, 10, 10, 10])
+## (1, 10, 10, 10)
 ```
 
 # Reference

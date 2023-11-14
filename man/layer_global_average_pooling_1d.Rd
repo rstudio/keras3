@@ -69,10 +69,10 @@ a given step should be masked (excluded from the average).
 \section{Examples}{
 \if{html}{\out{<div class="sourceCode r">}}\preformatted{x <- random_uniform(c(2, 3, 4))
 y <- x |> layer_global_average_pooling_1d()
-y$shape
+shape(y)
 }\if{html}{\out{</div>}}
 
-\if{html}{\out{<div class="sourceCode">}}\preformatted{## TensorShape([2, 4])
+\if{html}{\out{<div class="sourceCode">}}\preformatted{## (2, 4)
 }\if{html}{\out{</div>}}
 }
 

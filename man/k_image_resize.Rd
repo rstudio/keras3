@@ -41,26 +41,26 @@ Resize images to size using the specified interpolation method.
 \section{Examples}{
 \if{html}{\out{<div class="sourceCode r">}}\preformatted{x <- random_uniform(c(2, 4, 4, 3)) # batch of 2 RGB images
 y <- k_image_resize(x, c(2, 2))
-y$shape
+shape(y)
 }\if{html}{\out{</div>}}
 
-\if{html}{\out{<div class="sourceCode">}}\preformatted{## TensorShape([2, 2, 2, 3])
+\if{html}{\out{<div class="sourceCode">}}\preformatted{## (2, 2, 2, 3)
 }\if{html}{\out{</div>}}
 
 \if{html}{\out{<div class="sourceCode r">}}\preformatted{x <- random_uniform(c(4, 4, 3)) # single RGB image
 y <- k_image_resize(x, c(2, 2))
-y$shape
+shape(y)
 }\if{html}{\out{</div>}}
 
-\if{html}{\out{<div class="sourceCode">}}\preformatted{## TensorShape([2, 2, 3])
+\if{html}{\out{<div class="sourceCode">}}\preformatted{## (2, 2, 3)
 }\if{html}{\out{</div>}}
 
 \if{html}{\out{<div class="sourceCode r">}}\preformatted{x <- random_uniform(c(2, 3, 4, 4)) # batch of 2 RGB images
 y <- k_image_resize(x, c(2, 2), data_format = "channels_first")
-y$shape
+shape(y)
 }\if{html}{\out{</div>}}
 
-\if{html}{\out{<div class="sourceCode">}}\preformatted{## TensorShape([2, 3, 2, 2])
+\if{html}{\out{<div class="sourceCode">}}\preformatted{## (2, 3, 2, 2)
 }\if{html}{\out{</div>}}
 }
 

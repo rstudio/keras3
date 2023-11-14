@@ -34,10 +34,10 @@ of the data by \code{size[0]}, \code{size[1]} and \code{size[2]} respectively.
 \if{html}{\out{<div class="sourceCode r">}}\preformatted{input_shape <- c(2, 1, 2, 1, 3)
 x <- array(1, dim = input_shape)
 y <- layer_upsampling_3d(x, size = c(2, 2, 2))
-y$shape
+shape(y)
 }\if{html}{\out{</div>}}
 
-\if{html}{\out{<div class="sourceCode">}}\preformatted{## TensorShape([2, 2, 4, 2, 3])
+\if{html}{\out{<div class="sourceCode">}}\preformatted{## (2, 2, 4, 2, 3)
 }\if{html}{\out{</div>}}
 }
 

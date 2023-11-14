@@ -29,10 +29,10 @@ conv2d <- layer_spectral_normalization(
   layer = layer_conv_2d(filters = 2, kernel_size = 2)
 )
 y <- conv2d(x)
-y$shape
+shape(y)
 }\if{html}{\out{</div>}}
 
-\if{html}{\out{<div class="sourceCode">}}\preformatted{## TensorShape([1, 9, 9, 2])
+\if{html}{\out{<div class="sourceCode">}}\preformatted{## (1, 9, 9, 2)
 }\if{html}{\out{</div>}}
 
 Wrap \code{layer_Dense}:
@@ -40,10 +40,10 @@ Wrap \code{layer_Dense}:
 \if{html}{\out{<div class="sourceCode r">}}\preformatted{x <- random_uniform(c(1, 10, 10, 1))
 dense <- layer_spectral_normalization(layer = layer_dense(units = 10))
 y <- dense(x)
-y$shape
+shape(y)
 }\if{html}{\out{</div>}}
 
-\if{html}{\out{<div class="sourceCode">}}\preformatted{## TensorShape([1, 10, 10, 10])
+\if{html}{\out{<div class="sourceCode">}}\preformatted{## (1, 10, 10, 10)
 }\if{html}{\out{</div>}}
 }
 

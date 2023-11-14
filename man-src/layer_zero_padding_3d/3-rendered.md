@@ -21,11 +21,11 @@ x
 
 ```r
 y <- layer_zero_padding_3d(x, padding = 2)
-y$shape
+shape(y)
 ```
 
 ```
-## TensorShape([1, 5, 6, 6, 3])
+## (1, 5, 6, 6, 3)
 ```
 
 # Input Shape

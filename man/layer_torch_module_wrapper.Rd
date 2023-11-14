@@ -64,8 +64,8 @@ Classifier(keras$Model) \%py_class\% \{
 \}
 
 model <- Classifier()
-model$build(c(1L, 28L, 28L))
-print("Output shape:", model(torch$ones(1L, 1L, 28L, 28L))$shape)
+model$build(shape(1, 28, 28))
+print("Output shape:", model(torch$ones(shape(1L, 1L, 28L, 28L))))
 
 model \%>\% compile(
     loss="sparse_categorical_crossentropy",
