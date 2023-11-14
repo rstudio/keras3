@@ -364,9 +364,7 @@ df <- exports |>
       map_if(\(attr) ! is_scalar_atomic(attr), list) |>
       as_tibble_row()
   }) |>
-  list_rbind()
-
-df <- df |>
+  list_rbind() |>
   select(r_name, endpoint, type, module, everything())
 
 
