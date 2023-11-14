@@ -392,6 +392,7 @@ if(!all(dir_exists(df$man_src_dir))) {
 
 
 # curate @family tags
+if(FALSE)
 local({
 df_families <- df %>%
   rowwise() %>%
@@ -407,6 +408,8 @@ keeper_families <- df_families %>%
 
 if(!identical(sort(keeper_families),
               sort(.keeper_families))) {
+  cat("added: ", str_flatten_comma(single_quote(setdiff(keeper_families, .keeper_families))))
+  cat("removed: ", str_flatten_comma(single_quote(setdiff(.keeper_families, keeper_families))))
   cat(".keeper_families <- "); dput(keeper_families)
   stop(".keeper_families definition in tools/utils.R needs to be updated.")
 }
