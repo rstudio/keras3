@@ -24,7 +24,7 @@ similarity is computed.}
 \description{
 Formula:
 
-\if{html}{\out{<div class="sourceCode python">}}\preformatted{loss = sum(l2_norm(y_true) * l2_norm(y_pred))
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{loss <- sum(l2_norm(y_true) * l2_norm(y_pred))
 }\if{html}{\out{</div>}}
 
 See: \href{https://en.wikipedia.org/wiki/Cosine_similarity}{Cosine Similarity}.
@@ -34,28 +34,29 @@ This metric keeps the average cosine similarity between \code{predictions} and
 \section{Examples}{
 Standalone usage:
 
-\if{html}{\out{<div class="sourceCode python">}}\preformatted{# l2_norm(y_true) = [[0., 1.], [1./1.414, 1./1.414]]
-# l2_norm(y_pred) = [[1., 0.], [1./1.414, 1./1.414]]
-# l2_norm(y_true) . l2_norm(y_pred) = [[0., 0.], [0.5, 0.5]]
-# result = mean(sum(l2_norm(y_true) . l2_norm(y_pred), axis=1))
-#        = ((0. + 0.) +  (0.5 + 0.5)) / 2
-m = keras.metrics.CosineSimilarity(axis=1)
-m.update_state([[0., 1.], [1., 1.]], [[1., 0.], [1., 1.]])
-m.result()
-# 0.49999997
-m.reset_state()
-m.update_state([[0., 1.], [1., 1.]], [[1., 0.], [1., 1.]],
-               sample_weight=[0.3, 0.7])
-m.result()
-# 0.6999999
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{m <- metric_cosine_similarity(axis=2)
+m$update_state(rbind(c(0., 1.), c(1., 1.)), rbind(c(1., 0.), c(1., 1.)))
+m$result()
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor(0.5, shape=(), dtype=float32)
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{m$reset_state()
+m$update_state(rbind(c(0., 1.), c(1., 1.)), rbind(c(1., 0.), c(1., 1.)),
+               sample_weight = c(0.3, 0.7))
+m$result()
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor(0.7, shape=(), dtype=float32)
 }\if{html}{\out{</div>}}
 
 Usage with \code{compile()} API:
 
-\if{html}{\out{<div class="sourceCode python">}}\preformatted{model.compile(
-    optimizer='sgd',
-    loss='mse',
-    metrics=[keras.metrics.CosineSimilarity(axis=1)])
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{model \%>\% compile(
+  optimizer = 'sgd',
+  loss = 'mse',
+  metrics = list(metric_cosine_similarity(axis=2)))
 }\if{html}{\out{</div>}}
 }
 
