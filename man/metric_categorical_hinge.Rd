@@ -31,7 +31,7 @@ Categorical hinge loss values with shape = \verb{[batch_size, d0, .. dN-1]}.
 \description{
 Formula:
 
-\if{html}{\out{<div class="sourceCode python">}}\preformatted{loss = maximum(neg - pos + 1, 0)
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{loss <- maximum(neg - pos + 1, 0)
 }\if{html}{\out{</div>}}
 
 where \code{neg=maximum((1-y_true)*y_pred)} and \code{pos=sum(y_true*y_pred)}
@@ -39,23 +39,21 @@ where \code{neg=maximum((1-y_true)*y_pred)} and \code{pos=sum(y_true*y_pred)}
 \section{Usage}{
 Standalone usage:
 
-\if{html}{\out{<div class="sourceCode python">}}\preformatted{m = keras.metrics.CategoricalHinge()
-m.update_state([[0, 1], [0, 0]], [[0.6, 0.4], [0.4, 0.6]])
-m.result().numpy()
-# 1.4000001
-m.reset_state()
-m.update_state([[0, 1], [0, 0]], [[0.6, 0.4], [0.4, 0.6]],
-               sample_weight=[1, 0])
-m.result()
-# 1.2
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{m <- metric_categorical_hinge()
+m$update_state(rbind(c(0, 1), c(0, 0)), rbind(c(0.6, 0.4), c(0.4, 0.6)))
+m$result()
 }\if{html}{\out{</div>}}
-}
 
-\section{Examples}{
-\if{html}{\out{<div class="sourceCode python">}}\preformatted{y_true = np.random.randint(0, 3, size=(2,))
-y_true = np.eye(np.max(y_true) + 1)[y_true]
-y_pred = np.random.random(size=(2, 3))
-loss = keras.losses.categorical_hinge(y_true, y_pred)
+\if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor(1.4000001, shape=(), dtype=float32)
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{m$reset_state()
+m$update_state(rbind(c(0, 1), c(0, 0)), rbind(c(0.6, 0.4), c(0.4, 0.6)),
+               sample_weight = c(1, 0))
+m$result()
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor(1.2, shape=(), dtype=float32)
 }\if{html}{\out{</div>}}
 }
 
