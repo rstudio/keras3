@@ -1978,7 +1978,22 @@ endpoint_to_expr <- function(endpoint) {
   py_obj_expr
 }
 
-
+format_shape <- function(...) {
+  NULL_to_NA <- function(x) {
+    if (is.null(x))
+      NA
+    else if (is.list(x))
+      lapply(x, NULL_to_NA)
+    else
+      x
+  }
+  shp <- list(...) |> NULL_to_NA() |>
+    unlist() |> paste() |> str_flatten_comma()
+  str_c("(", shp, ")")
+}
+# format_shape(1, 2, 3)
+# format_shape(1, 2, 3, NULL)
+# format_shape(1, 2, 3, NULL, list(NULL, 3))
 
 # rename2(list(a = "b", a = z))
 
