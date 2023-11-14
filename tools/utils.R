@@ -1844,6 +1844,8 @@ man_src_pull_upstream_updates <- function(directories = dir_ls("man-src/", type 
   }
 
 
+  conflicts <- FALSE
+
   directories |>
     set_names(basename) |>
     lapply(\(dir) {
@@ -1899,14 +1901,30 @@ man_src_pull_upstream_updates <- function(directories = dir_ls("man-src/", type 
       write_lines(patch, dir / "translate.patch")
 
       git("add", dir/"2-translated.Rmd")
-      git("apply --3way --recount --allow-empty",
+      exit_code <-
+        git("apply --3way --recount --allow-empty",
           "--unidiff-zero",
           "--ignore-whitespace",
           # "--whitespace=fix",
           dir/"translate.patch",
           valid_exit_codes = c(0L, 1L))
+      if(exit_code)
+        conflicts <<- TRUE
+
     }) |>
     invisible()
+
+  if (conflicts) {
+    continue <- FALSE
+    message("Translation conflicts encountered, resolve before continuing.")
+    if (interactive()) {
+      continue <- askYesNo("Type 'yes' when ready to continue.")
+    }
+    # if(length(git("diff --cached --name-only --diff-filter=U")))
+    if (continue)
+      stop("Merge Conflicts! Resolve before continuting.")
+  }
+
 }
 
 
