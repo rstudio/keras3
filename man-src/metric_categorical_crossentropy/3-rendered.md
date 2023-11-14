@@ -3,51 +3,67 @@ Computes the crossentropy metric between the labels and predictions.
 @description
 This is the crossentropy metric class to be used when there are multiple
 label classes (2 or more). It assumes that labels are one-hot encoded,
-e.g., when labels values are `[2, 0, 1]`, then
-`y_true` is `[[0, 0, 1], [1, 0, 0], [0, 1, 0]]`.
+e.g., when labels values are `c(2, 0, 1)`, then
+`y_true` is `rbind(c([0, 0, 1), c(1, 0, 0), c(0, 1, 0))`.
 
 # Examples
-```python
-y_true = [[0, 1, 0], [0, 0, 1]]
-y_pred = [[0.05, 0.95, 0], [0.1, 0.8, 0.1]]
-loss = keras.losses.categorical_crossentropy(y_true, y_pred)
-assert loss.shape == (2,)
+
+```r
+y_true <- rbind(c(0, 1, 0), c(0, 0, 1))
+y_pred <- rbind(c(0.05, 0.95, 0), c(0.1, 0.8, 0.1))
+loss <- loss_categorical_crossentropy(y_true, y_pred)
 loss
-# array([0.0513, 2.303], dtype=float32)
+```
+
+```
+## tf.Tensor([0.05129329 2.30258509], shape=(2), dtype=float64)
 ```
 Standalone usage:
 
-```python
+
+```r
 # EPSILON = 1e-7, y = y_true, y` = y_pred
-# y` = clip_ops.clip_by_value(output, EPSILON, 1. - EPSILON)
-# y` = [[0.05, 0.95, EPSILON], [0.1, 0.8, 0.1]]
+# y` = clip_k_clip_by_value(output, EPSILON, 1. - EPSILON)
+# y` = rbind(c(0.05, 0.95, EPSILON), c(0.1, 0.8, 0.1))
 # xent = -sum(y * log(y'), axis = -1)
 #      = -((log 0.95), (log 0.1))
 #      = [0.051, 2.302]
 # Reduced xent = (0.051 + 2.302) / 2
-m = keras.metrics.CategoricalCrossentropy()
-m.update_state([[0, 1, 0], [0, 0, 1]],
-               [[0.05, 0.95, 0], [0.1, 0.8, 0.1]])
-m.result()
+m <- metric_categorical_crossentropy()
+m$update_state(rbind(c(0, 1, 0), c(0, 0, 1)),
+               rbind(c(0.05, 0.95, 0), c(0.1, 0.8, 0.1)))
+m$result()
+```
+
+```
+## tf.Tensor(1.1769392, shape=(), dtype=float32)
+```
+
+```r
 # 1.1769392
 ```
 
-```python
-m.reset_state()
-m.update_state([[0, 1, 0], [0, 0, 1]],
-               [[0.05, 0.95, 0], [0.1, 0.8, 0.1]],
-               sample_weight=np.array([0.3, 0.7]))
-m.result()
-# 1.6271976
+
+```r
+m$reset_state()
+m$update_state(rbind(c(0, 1, 0), c(0, 0, 1)),
+               rbind(c(0.05, 0.95, 0), c(0.1, 0.8, 0.1)),
+               sample_weight = c(0.3, 0.7))
+m$result()
+```
+
+```
+## tf.Tensor(1.6271976, shape=(), dtype=float32)
 ```
 
 Usage with `compile()` API:
 
-```python
-model.compile(
-    optimizer='sgd',
-    loss='mse',
-    metrics=[keras.metrics.CategoricalCrossentropy()])
+
+```r
+model %>% compile(
+  optimizer = 'sgd',
+  loss = 'mse',
+  metrics = list(metric_categorical_crossentropy()))
 ```
 
 @returns
@@ -89,3 +105,4 @@ Passed on to the Python callable
 @seealso
 + <https:/keras.io/api/metrics/probabilistic_metrics#categoricalcrossentropy-class>
 + <https://www.tensorflow.org/api_docs/python/tf/keras/metrics/CategoricalCrossentropy>
+

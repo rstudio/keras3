@@ -33,35 +33,42 @@ frequency is ultimately returned as \verb{categorical accuracy}: an idempotent
 operation that simply divides \code{total} by \code{count}.
 
 \code{y_pred} and \code{y_true} should be passed in as vectors of probabilities,
-rather than as labels. If necessary, use \code{ops.one_hot} to expand \code{y_true} as
+rather than as labels. If necessary, use \code{k_one_hot} to expand \code{y_true} as
 a vector.
 
-If \code{sample_weight} is \code{None}, weights default to 1.
+If \code{sample_weight} is \code{NULL}, weights default to 1.
 Use \code{sample_weight} of 0 to mask values.
 }
 \section{Usage}{
 Standalone usage:
 
-\if{html}{\out{<div class="sourceCode python">}}\preformatted{m = keras.metrics.CategoricalAccuracy()
-m.update_state([[0, 0, 1], [0, 1, 0]], [[0.1, 0.9, 0.8],
-                [0.05, 0.95, 0]])
-m.result()
-# 0.5
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{m <- metric_categorical_accuracy()
+m$update_state(rbind(c(0, 0, 1), c(0, 1, 0)), rbind(c(0.1, 0.9, 0.8),
+                c(0.05, 0.95, 0)))
+m$result()
 }\if{html}{\out{</div>}}
 
-\if{html}{\out{<div class="sourceCode python">}}\preformatted{m.reset_state()
-m.update_state([[0, 0, 1], [0, 1, 0]], [[0.1, 0.9, 0.8],
-                [0.05, 0.95, 0]],
-               sample_weight=[0.7, 0.3])
-m.result()
-# 0.3
+\if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor(0.5, shape=(), dtype=float32)
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{m$reset_state()
+m$update_state(rbind(c(0, 0, 1), c(0, 1, 0)), rbind(c(0.1, 0.9, 0.8),
+               c(0.05, 0.95, 0)),
+               sample_weight = c(0.7, 0.3))
+m$result()
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor(0.3, shape=(), dtype=float32)
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{# 0.3
 }\if{html}{\out{</div>}}
 
 Usage with \code{compile()} API:
 
-\if{html}{\out{<div class="sourceCode python">}}\preformatted{model.compile(optimizer='sgd',
-              loss='categorical_crossentropy',
-              metrics=[keras.metrics.CategoricalAccuracy()])
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{model \%>\% compile(optimizer = 'sgd',
+                  loss = 'categorical_crossentropy',
+                  metrics = list(metric_categorical_accuracy()))
 }\if{html}{\out{</div>}}
 }
 
