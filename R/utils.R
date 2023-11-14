@@ -768,3 +768,83 @@ random_array <- function(..., gen = stats::runif) {
   dim <- unlist(c(...), use.names = FALSE)
   array(gen(prod(dim)), dim = dim)
 }
+
+
+
+
+
+#' shape utility
+#'
+#'
+#' @param ... objects used to create shapes
+#'
+#' @return a shape object, suitable for usage with most keras backends
+#' @export
+#'
+#' @examples
+#' shape(1, 2, 3)
+#'
+#' shape(NA,   2, 3)
+#' shape(NULL, 2, 3)
+#' shape(-1,   2, 3)
+#'
+#' layer_input(c(1, 2, 3))
+#' layer_input(shape(1, 2, 3))
+#' tensor <- layer_input(shape(1, 2, 3))
+#'
+#' shape(tensor)
+#' shape(tensor, 4)
+#' shape(5, tensor, 4)
+shape <- function(...) {
+
+  fix <- function(x) {
+    if (inherits(x, 'python.builtin.object')) {
+      shp <- as_r_value(py_get_attr(x, "shape", TRUE))
+      if (!is.null(shp))
+        return(fix(shp))
+    }
+
+    if (!is.atomic(x) || length(x) > 1)
+      lapply(x, fix)
+    else if (is.null(x) ||
+             isTRUE(is.na(x)) ||
+             (is.numeric(x) && isTRUE(x == -1)))
+      NA_integer_
+    else
+      as.integer(x)
+  }
+
+  shp <- unlist(fix(list(...)))
+  shp <- lapply(shp, function(x) if(is.na(x)) NULL else x)
+  class(shp) <- "shape"
+  shp
+}
+
+
+#' @export
+format.shape <- function(x, ...) {
+  x <- vapply(x, function(d) as.character(d %||% "NA"), "")
+  x <- paste0(x, collapse = ", ")
+  paste0("(", x, ")")
+}
+
+#' @export
+print.shape <- function(x, ...) {
+  writeLines(format(x, ...))
+  invisible(x)
+}
+
+#' @export
+`[.shape` <- function(x, ...) {
+  out <- unclass(x)[...]
+  class(out) <- class(x)
+  out
+}
+
+#' @export
+r_to_py.shape <- function(x, convert = FALSE) {
+  tuple(x)
+}
+
+
+
