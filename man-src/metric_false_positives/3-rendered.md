@@ -5,32 +5,40 @@ If `sample_weight` is given, calculates the sum of the weights of
 false positives. This metric creates one local variable, `accumulator`
 that is used to keep track of the number of false positives.
 
-If `sample_weight` is `None`, weights default to 1.
+If `sample_weight` is `NULL`, weights default to 1.
 Use `sample_weight` of 0 to mask values.
 
 # Usage
 Standalone usage:
 
-```python
-m = keras.metrics.FalsePositives()
-m.update_state([0, 1, 0, 0], [0, 0, 1, 1])
-m.result()
-# 2.0
+
+```r
+m <- metric_false_positives()
+m$update_state(c(0, 1, 0, 0), c(0, 0, 1, 1))
+m$result()
 ```
 
-```python
-m.reset_state()
-m.update_state([0, 1, 0, 0], [0, 0, 1, 1], sample_weight=[0, 0, 1, 0])
-m.result()
-# 1.0
+```
+## tf.Tensor(2.0, shape=(), dtype=float32)
+```
+
+
+```r
+m$reset_state()
+m$update_state(c(0, 1, 0, 0), c(0, 0, 1, 1), sample_weight = c(0, 0, 1, 0))
+m$result()
+```
+
+```
+## tf.Tensor(1.0, shape=(), dtype=float32)
 ```
 
 @param thresholds
 (Optional) Defaults to `0.5`. A float value, or a Python
-list/tuple of float threshold values in `[0, 1]`. A threshold is
+list of float threshold values in `[0, 1]`. A threshold is
 compared with prediction values to determine the truth value of
-predictions (i.e., above the threshold is `True`, below is `False`).
-If used with a loss function that sets `from_logits=True` (i.e. no
+predictions (i.e., above the threshold is `TRUE`, below is `FALSE`).
+If used with a loss function that sets `from_logits=TRUE` (i.e. no
 sigmoid applied to predictions), `thresholds` should be set to 0.
 One metric value is generated for each threshold value.
 
@@ -48,4 +56,5 @@ Passed on to the Python callable
 @family metrics
 @seealso
 + <https:/keras.io/api/metrics/classification_metrics#falsepositives-class>
-+ <https://www.tensorflow.org/api_docs/python/tf/keras/metrics/FalsePositives>
++ <https://www.tensorflow.org/api_docs/python/tf/keras/metrics/FALSEPositives>
+

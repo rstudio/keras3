@@ -10,10 +10,10 @@ metric_false_positives(..., thresholds = NULL, name = NULL, dtype = NULL)
 \item{...}{Passed on to the Python callable}
 
 \item{thresholds}{(Optional) Defaults to \code{0.5}. A float value, or a Python
-list/tuple of float threshold values in \verb{[0, 1]}. A threshold is
+list of float threshold values in \verb{[0, 1]}. A threshold is
 compared with prediction values to determine the truth value of
-predictions (i.e., above the threshold is \code{True}, below is \code{False}).
-If used with a loss function that sets \code{from_logits=True} (i.e. no
+predictions (i.e., above the threshold is \code{TRUE}, below is \code{FALSE}).
+If used with a loss function that sets \code{from_logits=TRUE} (i.e. no
 sigmoid applied to predictions), \code{thresholds} should be set to 0.
 One metric value is generated for each threshold value.}
 
@@ -26,29 +26,33 @@ If \code{sample_weight} is given, calculates the sum of the weights of
 false positives. This metric creates one local variable, \code{accumulator}
 that is used to keep track of the number of false positives.
 
-If \code{sample_weight} is \code{None}, weights default to 1.
+If \code{sample_weight} is \code{NULL}, weights default to 1.
 Use \code{sample_weight} of 0 to mask values.
 }
 \section{Usage}{
 Standalone usage:
 
-\if{html}{\out{<div class="sourceCode python">}}\preformatted{m = keras.metrics.FalsePositives()
-m.update_state([0, 1, 0, 0], [0, 0, 1, 1])
-m.result()
-# 2.0
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{m <- metric_false_positives()
+m$update_state(c(0, 1, 0, 0), c(0, 0, 1, 1))
+m$result()
 }\if{html}{\out{</div>}}
 
-\if{html}{\out{<div class="sourceCode python">}}\preformatted{m.reset_state()
-m.update_state([0, 1, 0, 0], [0, 0, 1, 1], sample_weight=[0, 0, 1, 0])
-m.result()
-# 1.0
+\if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor(2.0, shape=(), dtype=float32)
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{m$reset_state()
+m$update_state(c(0, 1, 0, 0), c(0, 0, 1, 1), sample_weight = c(0, 0, 1, 0))
+m$result()
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor(1.0, shape=(), dtype=float32)
 }\if{html}{\out{</div>}}
 }
 
 \seealso{
 \itemize{
 \item \url{https:/keras.io/api/metrics/classification_metrics#falsepositives-class}
-\item \url{https://www.tensorflow.org/api_docs/python/tf/keras/metrics/FalsePositives}
+\item \url{https://www.tensorflow.org/api_docs/python/tf/keras/metrics/FALSEPositives}
 }
 
 Other confusion metrics: 
