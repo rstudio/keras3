@@ -102,9 +102,9 @@ quantities monitored are `"acc"` or start with `"fmeasure"` and are
 set to `"min"` for the rest of the quantities.
 
 @param save_weights_only
-if True, then only the model's weights will be saved
-(`model.save_weights(filepath)`), else the full model is saved
-(`model.save(filepath)`).
+if `True`, then only the model's weights will be
+saved (`model.save_weights(filepath)`), else the full model is
+saved (`model.save(filepath)`).
 
 @param save_freq
 `"epoch"` or integer. When using `"epoch"`, the callback

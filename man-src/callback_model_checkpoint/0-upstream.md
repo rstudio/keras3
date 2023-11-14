@@ -105,9 +105,9 @@ Args:
         `"min"`, etc. In `"auto"` mode, the mode is set to `"max"` if the
         quantities monitored are `"acc"` or start with `"fmeasure"` and are
         set to `"min"` for the rest of the quantities.
-    save_weights_only: if True, then only the model's weights will be saved
-        (`model.save_weights(filepath)`), else the full model is saved
-        (`model.save(filepath)`).
+    save_weights_only: if `True`, then only the model's weights will be
+        saved (`model.save_weights(filepath)`), else the full model is
+        saved (`model.save(filepath)`).
     save_freq: `"epoch"` or integer. When using `"epoch"`, the callback
         saves the model after each epoch. When using integer, the callback
         saves the model at end of this many batches. If the `Model` is
