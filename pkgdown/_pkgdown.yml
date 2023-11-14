@@ -8,7 +8,7 @@ destination: website
 url: https://keras.posit.co
 
 template:
-  bootstrap: 5
+  # bootstrap: 5
   bootswatch: cosmo
 
 navbar:
@@ -126,6 +126,11 @@ reference:
       - clone_model
       - freeze_weights
 
+
+
+      # - has_concept("layers")
+
+
   - title: "Layers"
 
   - subtitle: "Core Layers"
@@ -135,6 +140,8 @@ reference:
   - subtitle: "Reshaping Layers"
     contents:
       - has_concept("reshaping layers")
+      # - has_concept("zero reshaping layers") # layer_zero_padding_2d
+      # - has_concept("up reshaping layers")  # upsampling
 
   - subtitle: "Convolutional Layers"
     contents:
@@ -143,18 +150,28 @@ reference:
   - subtitle: "Pooling Layers"
     contents:
       - has_concept("pooling layers")
+      # - has_concept("average pooling layers")
+      # - has_concept("average global pooling layers")
+      # - has_concept("global pooling layers")
+      # - has_concept("max pooling layers")
+      # - has_concept("max global pooling layers")
+
 
   - subtitle: "Activation Layers"
     contents:
-      - starts_with("layer_activation")
+      - has_concept("activation layers")
+      # - starts_with("layer_activation")
 
   - subtitle: "Recurrent Layers"
     contents:
-      - has_concept("recurrent layers")
+      - has_concept("rnn layers")
+      # - has_concept("conv rnn layers")
+      # - has_concept("recurrent layers")
 
   - subtitle: "preprocessing Layers"
     contents:
       - has_concept("preprocessing layers")
+      # - has_concept("random preprocessing layers")
 
   - subtitle: "Attention Layers"
     contents:
@@ -167,14 +184,16 @@ reference:
   - subtitle: "Regularization Layers"
     contents:
       - has_concept("regularization layers")
+      # - has_concept("spatial regularization layers")
+      # - has_concept("dropout spatial regularization layers")
 
-  - subtitle: "Merge Layers"
+  - subtitle: "Merging Layers"
     contents:
       - has_concept("merging layers")
 
-  - subtitle: "Other Layers"
-    contents:
-      - starts_with("layer_")
+  # - subtitle: "Other Layers"
+  #   contents:
+  #     - starts_with("layer_")
 
   - title: "Layer Methods"
     contents:
@@ -228,6 +247,8 @@ reference:
       # - make_sampling_table
       - timeseries_dataset_from_array
 
+
+
   - title: "Text Preprocessing"
     contents:
       - text_dataset_from_directory
@@ -259,7 +280,8 @@ reference:
 
   - title: "Optimizers"
     contents:
-      - starts_with("optimizer")
+      # - starts_with("optimizer")
+      - has_concept("optimizers")
 
   - title: "Learning Rate Schedules"
     contents:
@@ -268,20 +290,24 @@ reference:
 
   - title: "Callbacks"
     contents:
-      - starts_with("callback_")
+      # - starts_with("callback_")
       - KerasCallback
+      - has_concept("callbacks")
 
   - title: "Initializers"
     contents:
-      - has_concept("initializer")
+      # - has_concept("initializer")
+      - has_concept("initializers")
 
   - title: "Constraints"
     contents:
-      - has_concept("constraint")
+      # - has_concept("constraint")
+      - has_concept("constraints")
       - KerasConstraint
 
   - title: "Utils"
     contents:
+
       - has_concept("utils")
       - plot.keras_training_history
       - plot.keras.models.model.Model
@@ -329,16 +355,44 @@ reference:
   - title: "Random Tensor Generators"
     contents:
       - starts_with("random")
+      - has_concept("random")
 
   - title: "Operations"
     desc: >
       Functions that are safe to call in Eager and Graph mode
+
+  - subtitle: Core Operations
     contents:
+      - has_concept("core ops")
+
+  - subtitle: Math Operations
+    contents:
+      - has_concept("math ops")
+
+  - subtitle: General Tensor Operations
+    contents:
+      - has_concept("numpy ops")
+
+  - subtitle: "Neural Network Operations"
+    contents:
+      - has_concept("nn ops")
+
+  - subtitle: "Image Operations"
+    contents:
+      - has_concept("image ops")
       - starts_with("k_")
 
   - title: "Configuration"
     contents:
       - starts_with("config_")
+
+  - title: "Backend"
+    contents:
+      - has_concept("backend")
+
+  - title: "Trainers"
+    contents:
+      - has_concept("trainers")
 
   - title: "Python"
     contents:
@@ -346,60 +400,66 @@ reference:
       - "%py_class%"
       - "%<-active%"
 
-  - title: "Catchall"
+  # - title: "Catchall"
+  #   contents:
+  #     - starts_with("a")
+  #     - starts_with("b")
+  #     - starts_with("c")
+  #     - starts_with("d")
+  #     - starts_with("e")
+  #     - starts_with("f")
+  #     - starts_with("g")
+  #     - starts_with("h")
+  #     - starts_with("i")
+  #     - starts_with("j")
+  #     - starts_with("k")
+  #     - starts_with("l")
+  #     - starts_with("m")
+  #     - starts_with("n")
+  #     - starts_with("o")
+  #     - starts_with("p")
+  #     - starts_with("q")
+  #     - starts_with("r")
+  #     - starts_with("s")
+  #     - starts_with("t")
+  #     - starts_with("u")
+  #     - starts_with("v")
+  #     - starts_with("w")
+  #     - starts_with("x")
+  #     - starts_with("y")
+  #     - starts_with("z")
+  #     - starts_with("A")
+  #     - starts_with("B")
+  #     - starts_with("C")
+  #     - starts_with("D")
+  #     - starts_with("E")
+  #     - starts_with("F")
+  #     - starts_with("G")
+  #     - starts_with("H")
+  #     - starts_with("I")
+  #     - starts_with("J")
+  #     - starts_with("K")
+  #     - starts_with("L")
+  #     - starts_with("M")
+  #     - starts_with("N")
+  #     - starts_with("O")
+  #     - starts_with("P")
+  #     - starts_with("Q")
+  #     - starts_with("R")
+  #     - starts_with("S")
+  #     - starts_with("T")
+  #     - starts_with("U")
+  #     - starts_with("V")
+  #     - starts_with("W")
+  #     - starts_with("X")
+  #     - starts_with("Y")
+  #     - starts_with("Z")
+
+  - title: "Questioning"
     contents:
-      - starts_with("a")
-      - starts_with("b")
-      - starts_with("c")
-      - starts_with("d")
-      - starts_with("e")
-      - starts_with("f")
-      - starts_with("g")
-      - starts_with("h")
-      - starts_with("i")
-      - starts_with("j")
-      - starts_with("k")
-      - starts_with("l")
-      - starts_with("m")
-      - starts_with("n")
-      - starts_with("o")
-      - starts_with("p")
-      - starts_with("q")
-      - starts_with("r")
-      - starts_with("s")
-      - starts_with("t")
-      - starts_with("u")
-      - starts_with("v")
-      - starts_with("w")
-      - starts_with("x")
-      - starts_with("y")
-      - starts_with("z")
-      - starts_with("A")
-      - starts_with("B")
-      - starts_with("C")
-      - starts_with("D")
-      - starts_with("E")
-      - starts_with("F")
-      - starts_with("G")
-      - starts_with("H")
-      - starts_with("I")
-      - starts_with("J")
-      - starts_with("K")
-      - starts_with("L")
-      - starts_with("M")
-      - starts_with("N")
-      - starts_with("O")
-      - starts_with("P")
-      - starts_with("Q")
-      - starts_with("R")
-      - starts_with("S")
-      - starts_with("T")
-      - starts_with("U")
-      - starts_with("V")
-      - starts_with("W")
-      - starts_with("X")
-      - starts_with("Y")
-      - starts_with("Z")
+      - get_source_inputs
+      - predict_on_batch
+
   - title: "Deprecated"
     contents:
       - KerasLayer
@@ -463,3 +523,32 @@ reference:
 #     contents:
 #       - time_distributed
 #       - bidirectional
+
+
+      # - has_concept("ops")
+      # - has_concept("metrics")
+      # - has_concept("utils")
+      # - has_concept("losses")
+      # - has_concept("activations")
+      # - has_concept("random initializers")
+      # - has_concept("confusion metrics")
+      # - has_concept("regression metrics")
+      # - has_concept("backend")
+      # - has_concept("config backend")
+      # - has_concept("schedules optimizers")
+      # - has_concept("schedule rate learning schedules optimizers")
+      # - has_concept("rate learning schedules optimizers")
+      # - has_concept("learning schedules optimizers")
+      # - has_concept("image utils")
+      # - has_concept("probabilistic metrics")
+      # - has_concept("iou metrics")
+      # - has_concept("accuracy metrics")
+      # - has_concept("saving")
+      # - has_concept("regularizers")
+      # - has_concept("constant initializers")
+      # - has_concept("traceback utils")
+      # - has_concept("registration object saving")
+      # - has_concept("reduction metrics")
+      # - has_concept("object saving")
+      # - has_concept("io utils")
+      # - has_concept("hinge metrics")
