@@ -28,6 +28,7 @@ A boolean indicating whether to sort the output in
 descending order. Defaults to`True`.
 
 @export
+@family math ops
 @family ops
 @seealso
 + <https:/keras.io/keras_core/api/ops/core#topk-function>

@@ -30,6 +30,7 @@ should be updated and returned by this function.
 The initial value of the loop state.
 
 @export
+@family core ops
 @family ops
 @seealso
 + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/fori_loop>

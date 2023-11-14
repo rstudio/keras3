@@ -78,7 +78,10 @@ see description
 see description
 
 @export
+@family rotation random preprocessing layers
+@family random preprocessing layers
 @family preprocessing layers
+@family layers
 @seealso
 + <https:/keras.io/api/layers/preprocessing_layers/image_augmentation/random_rotation#randomrotation-class>
 + <https://www.tensorflow.org/api_docs/python/tf/keras/layers/RandomRotation>

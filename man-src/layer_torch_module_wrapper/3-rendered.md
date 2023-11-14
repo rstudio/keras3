@@ -75,6 +75,8 @@ Object to compose the layer with. A tensor, array, or sequential model.
 Passed on to the Python callable
 
 @export
+@family torch utils
+@family utils
 @seealso
 + <https://www.tensorflow.org/api_docs/python/tf/keras/layers/TorchModuleWrapper>
 

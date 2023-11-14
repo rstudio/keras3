@@ -33,7 +33,9 @@ Standard layer keyword arguments.
 layers to combine
 
 @export
+@family concatenate merging layers
 @family merging layers
+@family layers
 @seealso
 + <https:/keras.io/api/layers/merging_layers/concatenate#concatenate-class>
 + <https://www.tensorflow.org/api_docs/python/tf/keras/layers/Concatenate>

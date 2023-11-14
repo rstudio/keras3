@@ -25,4 +25,34 @@ If you have previously disabled traceback filtering via
 \itemize{
 \item \url{https://www.tensorflow.org/api_docs/python/tf/keras/config/enable_traceback_filtering}
 }
+
+Other traceback utils: 
+\code{\link{config_disable_traceback_filtering}()},
+\code{\link{config_is_traceback_filtering_enabled}()}
+
+Other utils: 
+\code{\link{audio_dataset_from_directory}()},
+\code{\link{config_disable_interactive_logging}()},
+\code{\link{config_disable_traceback_filtering}()},
+\code{\link{config_enable_interactive_logging}()},
+\code{\link{config_is_interactive_logging_enabled}()},
+\code{\link{config_is_traceback_filtering_enabled}()},
+\code{\link{get_file}()},
+\code{\link{image_array_save}()},
+\code{\link{image_dataset_from_directory}()},
+\code{\link{image_from_array}()},
+\code{\link{image_load}()},
+\code{\link{image_smart_resize}()},
+\code{\link{image_to_array}()},
+\code{\link{layer_torch_module_wrapper}()},
+\code{\link{model_to_dot}()},
+\code{\link{normalize}()},
+\code{\link{pad_sequences}()},
+\code{\link{set_random_seed}()},
+\code{\link{split_dataset}()},
+\code{\link{text_dataset_from_directory}()},
+\code{\link{timeseries_dataset_from_array}()},
+\code{\link{to_categorical}()}
 }
+\concept{traceback utils}
+\concept{utils}

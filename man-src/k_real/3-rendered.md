@@ -7,6 +7,7 @@ Return the real part of the complex argument.
 Input tensor.
 
 @export
+@family numpy ops
 @family ops
 @seealso
 + <https:/keras.io/keras_core/api/ops/numpy#real-function>

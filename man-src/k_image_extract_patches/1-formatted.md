@@ -49,6 +49,7 @@ while `"channels_first"` corresponds to inputs with shape
 `"channels_last"`.
 
 @export
+@family image ops
 @family ops
 @seealso
 + <https:/keras.io/keras_core/api/ops/image#extractpatches-function>

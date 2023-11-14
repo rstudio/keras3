@@ -46,6 +46,7 @@ Value used for points outside the boundaries of the input if
 `fill_mode = "constant"`. Defaults to `0`.
 
 @export
+@family image ops
 @family ops
 @seealso
 + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/image/map_coordinates>

@@ -86,7 +86,9 @@ Object to compose the layer with. A tensor, array, or sequential model.
 Passed on to the Python callable
 
 @export
+@family group normalization layers
 @family normalization layers
+@family layers
 @seealso
 + <https:/keras.io/api/layers/normalization_layers/group_normalization#groupnormalization-class>
 + <https://www.tensorflow.org/api_docs/python/tf/keras/layers/GroupNormalization>

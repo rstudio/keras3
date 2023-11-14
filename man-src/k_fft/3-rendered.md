@@ -27,6 +27,7 @@ list of the real and imaginary parts of the input tensor. Both
 tensors provided should be of floating type.
 
 @export
+@family math ops
 @family ops
 @seealso
 + <https:/keras.io/keras_core/api/ops/fft#fft-function>

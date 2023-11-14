@@ -14,6 +14,7 @@ A sequence of tensors.
 Axis along which to stack. Defaults to `0`.
 
 @export
+@family numpy ops
 @family ops
 @seealso
 + <https:/keras.io/keras_core/api/ops/numpy#stack-function>

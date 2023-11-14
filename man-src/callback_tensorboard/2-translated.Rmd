@@ -164,7 +164,8 @@ In case the same metadata file is to be
 used for all embedding layers, a single filename can be passed.
 
 @export
-@family callback
+@family tensorboard callbacks
+@family callbacks
 @seealso
 + <https:/keras.io/api/callbacks/tensorboard#tensorboard-class>
 + <https://www.tensorflow.org/api_docs/python/tf/keras/callbacks/TensorBoard>

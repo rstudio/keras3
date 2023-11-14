@@ -40,7 +40,10 @@ Initial seed for the random number generator
 datatype (e.g., `"float32"`).
 
 @export
+@family dropout spatial regularization layers
+@family spatial regularization layers
 @family regularization layers
+@family layers
 @seealso
 + <https:/keras.io/api/layers/regularization_layers/spatial_dropout1d#spatialdropout1d-class>
 + <https://www.tensorflow.org/api_docs/python/tf/keras/layers/SpatialDropout1D>

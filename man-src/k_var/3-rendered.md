@@ -15,6 +15,7 @@ If this is set to `True`, the axes which are reduced are left
 in the result as dimensions with size one.
 
 @export
+@family numpy ops
 @family ops
 @seealso
 + <https:/keras.io/keras_core/api/ops/numpy#var-function>

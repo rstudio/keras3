@@ -29,5 +29,6 @@ Ground truth values with shape = `[batch_size, d0, .. dN]`.
 The predicted values with shape = `[batch_size, d0, .. dN]`.
 
 @export
+@family losses
 @seealso
 + <https://www.tensorflow.org/api_docs/python/tf/keras/metrics/log_cosh>

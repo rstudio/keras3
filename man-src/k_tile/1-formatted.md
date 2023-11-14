@@ -19,6 +19,7 @@ Input tensor.
 The number of repetitions of `x` along each axis.
 
 @export
+@family numpy ops
 @family ops
 @seealso
 + <https:/keras.io/keras_core/api/ops/numpy#tile-function>

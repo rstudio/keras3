@@ -63,7 +63,7 @@ model \%>\% fit(x_train, y_train, callbacks = list(reduce_lr))
 \item \url{https://www.tensorflow.org/api_docs/python/tf/keras/callbacks/ReduceLROnPlateau}
 }
 
-Other callback: 
+Other callbacks: 
 \code{\link{callback_backup_and_restore}()},
 \code{\link{callback_csv_logger}()},
 \code{\link{callback_early_stopping}()},
@@ -75,4 +75,8 @@ Other callback:
 \code{\link{callback_tensorboard}()},
 \code{\link{callback_terminate_on_nan}()}
 }
-\concept{callback}
+\concept{callbacks}
+\concept{lr reduce callbacks}
+\concept{on lr reduce callbacks}
+\concept{plateau on lr reduce callbacks}
+\concept{reduce callbacks}

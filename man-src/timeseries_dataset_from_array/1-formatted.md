@@ -128,6 +128,8 @@ will not be used in the output sequences.
 This is useful to reserve part of the data for test or validation.
 
 @export
+@family dataset timeseri utils
+@family timeseri utils
 @family utils
 @seealso
 + <https:/keras.io/api/data_loading/timeseries#timeseriesdatasetfromarray-function>

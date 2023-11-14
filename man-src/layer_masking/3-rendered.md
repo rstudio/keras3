@@ -47,7 +47,9 @@ Passed on to the Python callable
 see description
 
 @export
+@family masking core layers
 @family core layers
+@family layers
 @seealso
 + <https:/keras.io/api/layers/core_layers/masking#masking-class>
 + <https://www.tensorflow.org/api_docs/python/tf/keras/layers/Masking>

@@ -30,6 +30,7 @@ A tensor of predicted labels.
 An integer representing the number of predictions to consider.
 
 @export
+@family math ops
 @family ops
 @seealso
 + <https:/keras.io/keras_core/api/ops/core#intopk-function>

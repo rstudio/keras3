@@ -31,6 +31,7 @@ Dtype to use. `None` means the global setting
 defaults to `"float32"`). Defaults to `None`.
 
 @export
+@family image utils
 @family utils
 @seealso
 + <https://www.tensorflow.org/api_docs/python/tf/keras/utils/array_to_img>

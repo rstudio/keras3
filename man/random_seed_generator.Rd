@@ -45,4 +45,16 @@ Usage in a layer:
 \itemize{
 \item \url{https://www.tensorflow.org/api_docs/python/tf/keras/random/SeedGenerator}
 }
+
+Other random: 
+\code{\link{random_categorical}()},
+\code{\link{random_dropout}()},
+\code{\link{random_integer}()},
+\code{\link{random_normal}()},
+\code{\link{random_shuffle}()},
+\code{\link{random_truncated_normal}()},
+\code{\link{random_uniform}()}
 }
+\concept{generator seed random}
+\concept{random}
+\concept{seed random}

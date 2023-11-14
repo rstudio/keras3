@@ -36,6 +36,7 @@ A boolean indicating whether `segment_ids` is sorted.
 Defaults to`FALSE`.
 
 @export
+@family math ops
 @family ops
 @seealso
 + <https:/keras.io/keras_core/api/ops/core#segmentsum-function>

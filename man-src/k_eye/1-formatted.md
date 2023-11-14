@@ -18,6 +18,7 @@ and a negative value to a lower diagonal.
 Data type of the returned tensor.
 
 @export
+@family numpy ops
 @family ops
 @seealso
 + <https:/keras.io/keras_core/api/ops/numpy#eye-function>

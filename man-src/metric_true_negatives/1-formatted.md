@@ -44,7 +44,8 @@ One metric value is generated for each threshold value.
 Passed on to the Python callable
 
 @export
-@family metric
+@family confusion metrics
+@family metrics
 @seealso
 + <https:/keras.io/api/metrics/classification_metrics#truenegatives-class>
 + <https://www.tensorflow.org/api_docs/python/tf/keras/metrics/TrueNegatives>

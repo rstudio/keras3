@@ -114,7 +114,10 @@ String, name for the object
 Passed on to the Python callable
 
 @export
+@family pooling1d max pooling layers
+@family max pooling layers
 @family pooling layers
+@family layers
 @seealso
 + <https:/keras.io/api/layers/pooling_layers/max_pooling1d#maxpooling1d-class>
 + <https://www.tensorflow.org/api_docs/python/tf/keras/layers/MaxPooling1D>

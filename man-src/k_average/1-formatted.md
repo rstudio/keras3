@@ -60,6 +60,7 @@ The 1-D calculation is: `avg = sum(a * weights) / sum(weights)`.
 The only constraint on weights is that `sum(weights)` must not be 0.
 
 @export
+@family numpy ops
 @family ops
 @seealso
 + <https:/keras.io/keras_core/api/ops/numpy#average-function>

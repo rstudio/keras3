@@ -40,7 +40,9 @@ Base layer keyword arguments, such as `name` and `dtype`.
 Object to compose the layer with. A tensor, array, or sequential model.
 
 @export
-@family activations layers
+@family relu activation layers
+@family activation layers
+@family layers
 @seealso
 + <https:/keras.io/api/layers/activation_layers/relu#relu-class>
 + <https://www.tensorflow.org/api_docs/python/tf/keras/layers/ReLU>

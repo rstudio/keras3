@@ -7,6 +7,7 @@ Convert a tensor to a NumPy array.
 A tensor.
 
 @export
+@family core ops
 @family ops
 @seealso
 + <https:/keras.io/keras_core/api/ops/core#converttonumpy-function>

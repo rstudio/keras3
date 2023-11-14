@@ -22,7 +22,8 @@ layer = Dense(3, kernel_initializer=initializer)
 A Python scalar.
 
 @export
-@family initializer
+@family constant initializers
+@family initializers
 @seealso
 + <https:/keras.io/api/layers/initializers#constant-class>
 + <https://www.tensorflow.org/api_docs/python/tf/keras/initializers/Constant>

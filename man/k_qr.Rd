@@ -47,7 +47,25 @@ q
 \item \url{https://www.tensorflow.org/api_docs/python/tf/keras/ops/qr}
 }
 
+Other math ops: 
+\code{\link{k_erf}()},
+\code{\link{k_extract_sequences}()},
+\code{\link{k_fft2}()},
+\code{\link{k_fft}()},
+\code{\link{k_in_top_k}()},
+\code{\link{k_irfft}()},
+\code{\link{k_istft}()},
+\code{\link{k_logsumexp}()},
+\code{\link{k_rfft}()},
+\code{\link{k_rsqrt}()},
+\code{\link{k_segment_max}()},
+\code{\link{k_segment_sum}()},
+\code{\link{k_solve}()},
+\code{\link{k_stft}()},
+\code{\link{k_top_k}()}
+
 Other ops: 
+\code{\link{get_source_inputs}()},
 \code{\link{k_abs}()},
 \code{\link{k_add}()},
 \code{\link{k_all}()},
@@ -247,4 +265,5 @@ Other ops:
 \code{\link{k_zeros_like}()},
 \code{\link{k_zeros}()}
 }
+\concept{math ops}
 \concept{ops}

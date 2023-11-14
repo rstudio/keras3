@@ -70,7 +70,9 @@ improvement is expected and thus training will not be stopped.
 Defaults to `0`.
 
 @export
-@family callback
+@family stopping early callbacks
+@family early callbacks
+@family callbacks
 @seealso
 + <https:/keras.io/api/callbacks/early_stopping#earlystopping-class>
 + <https://www.tensorflow.org/api_docs/python/tf/keras/callbacks/EarlyStopping>

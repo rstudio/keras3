@@ -35,5 +35,6 @@ A float, the point where the Huber loss function changes from a
 quadratic to linear. Defaults to `1.0`.
 
 @export
+@family losses
 @seealso
 + <https://www.tensorflow.org/api_docs/python/tf/keras/metrics/huber>

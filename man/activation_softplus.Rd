@@ -18,7 +18,7 @@ It is defined as: \code{softplus(x) = log(exp(x) + 1)}.
 \item \url{https://www.tensorflow.org/api_docs/python/tf/keras/activations/softplus}
 }
 
-Other activation functions: 
+Other activations: 
 \code{\link{activation_elu}()},
 \code{\link{activation_exponential}()},
 \code{\link{activation_gelu}()},
@@ -36,4 +36,4 @@ Other activation functions:
 \code{\link{activation_softsign}()},
 \code{\link{activation_tanh}()}
 }
-\concept{activation functions}
+\concept{activations}

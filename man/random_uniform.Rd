@@ -40,4 +40,14 @@ while the upper bound \code{maxval} is excluded.
 \itemize{
 \item \url{https://www.tensorflow.org/api_docs/python/tf/keras/random/uniform}
 }
+
+Other random: 
+\code{\link{random_categorical}()},
+\code{\link{random_dropout}()},
+\code{\link{random_integer}()},
+\code{\link{random_normal}()},
+\code{\link{random_seed_generator}()},
+\code{\link{random_shuffle}()},
+\code{\link{random_truncated_normal}()}
 }
+\concept{random}

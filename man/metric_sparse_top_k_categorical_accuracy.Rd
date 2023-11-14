@@ -60,7 +60,14 @@ Usage with \code{compile()} API:
 \item \url{https://www.tensorflow.org/api_docs/python/tf/keras/metrics/SparseTopKCategoricalAccuracy}
 }
 
-Other metric: 
+Other accuracy metrics: 
+\code{\link{metric_binary_accuracy}()},
+\code{\link{metric_categorical_accuracy}()},
+\code{\link{metric_sparse_categorical_accuracy}()},
+\code{\link{metric_top_k_categorical_accuracy}()}
+
+Other metrics: 
+\code{\link{custom_metric}()},
 \code{\link{metric_auc}()},
 \code{\link{metric_binary_accuracy}()},
 \code{\link{metric_binary_crossentropy}()},
@@ -103,4 +110,5 @@ Other metric:
 \code{\link{metric_true_negatives}()},
 \code{\link{metric_true_positives}()}
 }
-\concept{metric}
+\concept{accuracy metrics}
+\concept{metrics}

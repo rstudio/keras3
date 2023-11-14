@@ -46,6 +46,7 @@ specifying the dilation rate to use for dilated convolution. If
 the same `dilation_rate`.
 
 @export
+@family nn ops
 @family ops
 @seealso
 + <https:/keras.io/keras_core/api/ops/nn#conv-function>

@@ -73,7 +73,10 @@ String, name for the object
 datatype (e.g., `"float32"`).
 
 @export
+@family crossing hashed preprocessing layers
+@family hashed preprocessing layers
 @family preprocessing layers
+@family layers
 @seealso
 + <https:/keras.io/api/layers/preprocessing_layers/categorical/hashed_crossing#hashedcrossing-class>
 + <https://www.tensorflow.org/api_docs/python/tf/keras/layers/HashedCrossing>

@@ -7,6 +7,7 @@ Numerical negative, element-wise.
 Input tensor.
 
 @export
+@family numpy ops
 @family ops
 @seealso
 + <https:/keras.io/keras_core/api/ops/numpy#negative-function>

@@ -16,5 +16,7 @@ If you have previously disabled traceback filtering via
 `keras.config.enable_traceback_filtering()`.
 
 @export
+@family traceback utils
+@family utils
 @seealso
 + <https://www.tensorflow.org/api_docs/python/tf/keras/config/enable_traceback_filtering>

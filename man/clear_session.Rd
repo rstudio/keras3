@@ -63,27 +63,16 @@ print(new_layer$name)
 \item \url{https://www.tensorflow.org/api_docs/python/tf/keras/utils/clear_session}
 }
 
-Other utils: 
-\code{\link{audio_dataset_from_directory}()},
-\code{\link{get_custom_objects}()},
-\code{\link{get_file}()},
-\code{\link{get_registered_name}()},
-\code{\link{get_registered_object}()},
-\code{\link{get_source_inputs}()},
-\code{\link{image_array_save}()},
-\code{\link{image_dataset_from_directory}()},
-\code{\link{image_from_array}()},
-\code{\link{image_load}()},
-\code{\link{image_to_array}()},
-\code{\link{model_to_dot}()},
-\code{\link{normalize}()},
-\code{\link{pack_x_y_sample_weight}()},
-\code{\link{pad_sequences}()},
-\code{\link{set_random_seed}()},
-\code{\link{split_dataset}()},
-\code{\link{text_dataset_from_directory}()},
-\code{\link{timeseries_dataset_from_array}()},
-\code{\link{to_categorical}()},
-\code{\link{unpack_x_y_sample_weight}()}
+Other backend: 
+\code{\link{config_backend}()},
+\code{\link{config_epsilon}()},
+\code{\link{config_floatx}()},
+\code{\link{config_image_data_format}()},
+\code{\link{config_set_epsilon}()},
+\code{\link{config_set_floatx}()},
+\code{\link{config_set_image_data_format}()}
 }
-\concept{utils}
+\concept{backend}
+\concept{common backend}
+\concept{global common backend}
+\concept{state global common backend}

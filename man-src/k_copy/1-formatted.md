@@ -7,6 +7,7 @@ Returns a copy of `x`.
 Input tensor.
 
 @export
+@family numpy ops
 @family ops
 @seealso
 + <https:/keras.io/keras_core/api/ops/numpy#copy-function>

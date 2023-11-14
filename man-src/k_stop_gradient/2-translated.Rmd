@@ -19,6 +19,7 @@ A tensor variable for which the gradient
 computation is to be disabled.
 
 @export
+@family core ops
 @family ops
 @seealso
 + <https:/keras.io/keras_core/api/ops/core#stopgradient-function>

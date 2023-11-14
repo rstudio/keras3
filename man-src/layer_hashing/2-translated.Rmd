@@ -127,7 +127,9 @@ Keyword arguments to construct a layer.
 Object to compose the layer with. A tensor, array, or sequential model.
 
 @export
+@family hashing preprocessing layers
 @family preprocessing layers
+@family layers
 @seealso
 + <https:/keras.io/api/layers/preprocessing_layers/categorical/hashing#hashing-class>
 + <https://www.tensorflow.org/api_docs/python/tf/keras/layers/Hashing>

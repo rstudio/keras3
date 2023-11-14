@@ -88,7 +88,7 @@ nrow(as.data.frame(history))  # Only 4 epochs are run.
 \item \url{https://www.tensorflow.org/api_docs/python/tf/keras/callbacks/EarlyStopping}
 }
 
-Other callback: 
+Other callbacks: 
 \code{\link{callback_backup_and_restore}()},
 \code{\link{callback_csv_logger}()},
 \code{\link{callback_lambda}()},
@@ -100,4 +100,6 @@ Other callback:
 \code{\link{callback_tensorboard}()},
 \code{\link{callback_terminate_on_nan}()}
 }
-\concept{callback}
+\concept{callbacks}
+\concept{early callbacks}
+\concept{stopping early callbacks}

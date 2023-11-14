@@ -33,6 +33,7 @@ added. Defaults to `-1`, which corresponds to the last dimension.
 is backend's float type.
 
 @export
+@family nn ops
 @family ops
 @seealso
 + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/multi_hot>

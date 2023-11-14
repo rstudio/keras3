@@ -123,6 +123,8 @@ Random seed for dropout.
 Passed on to the Python callable
 
 @export
-@family recurrent layers
+@family lstm rnn layers
+@family rnn layers
+@family layers
 @seealso
 + <https://www.tensorflow.org/api_docs/python/tf/keras/layers/LSTMCell>

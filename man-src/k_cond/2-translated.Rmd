@@ -16,6 +16,7 @@ Callable returning the output for the `pred == True` case.
 Callable returning the output for the `pred == False` case.
 
 @export
+@family core ops
 @family ops
 @seealso
 + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/cond>

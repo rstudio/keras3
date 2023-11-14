@@ -41,6 +41,7 @@ dimensions that are broadcast to the size of the original
 input tensor. Defaults to `False`.
 
 @export
+@family numpy ops
 @family ops
 @seealso
 + <https:/keras.io/keras_core/api/ops/numpy#amax-function>

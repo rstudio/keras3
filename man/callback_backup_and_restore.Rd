@@ -107,7 +107,7 @@ nrow(as.data.frame(history))
 \item \url{https://www.tensorflow.org/api_docs/python/tf/keras/callbacks/BackupAndRestore}
 }
 
-Other callback: 
+Other callbacks: 
 \code{\link{callback_csv_logger}()},
 \code{\link{callback_early_stopping}()},
 \code{\link{callback_lambda}()},
@@ -119,4 +119,8 @@ Other callback:
 \code{\link{callback_tensorboard}()},
 \code{\link{callback_terminate_on_nan}()}
 }
-\concept{callback}
+\concept{and backup callbacks}
+\concept{backup callbacks}
+\concept{callback restore and backup callbacks}
+\concept{callbacks}
+\concept{restore and backup callbacks}

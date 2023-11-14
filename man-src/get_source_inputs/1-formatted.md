@@ -11,6 +11,8 @@ Output will always be a list of tensors
 The tensor to start from.
 
 @export
-@family utils
+@family util operation ops
+@family operation ops
+@family ops
 @seealso
 + <https://www.tensorflow.org/api_docs/python/tf/keras/utils/get_source_inputs>

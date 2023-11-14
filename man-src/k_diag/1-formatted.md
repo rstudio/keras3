@@ -41,6 +41,7 @@ above the main diagonal, and `k < 0` for diagonals below
 the main diagonal.
 
 @export
+@family numpy ops
 @family ops
 @seealso
 + <https:/keras.io/keras_core/api/ops/numpy#diag-function>

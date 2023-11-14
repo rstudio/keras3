@@ -21,6 +21,7 @@ Input tensor.
 The desired data-type for the tensor.
 
 @export
+@family numpy ops
 @family ops
 @seealso
 + <https:/keras.io/keras_core/api/ops/numpy#array-function>

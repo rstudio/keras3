@@ -55,7 +55,8 @@ attach_eval({
     x
   }
 
-  `%error%` <- function(x, y)  tryCatch(x, error = function(e) y)
+  `%error%` <- rlang::zap_srcref(function(x, y)  tryCatch(x, error = function(e) y))
+
 
   py_is <- function(x, y) identical(py_id(x), py_id(y))
 
@@ -65,7 +66,7 @@ attach_eval({
   }
 
   str_flatten_lines <- function(..., na.rm = FALSE) {
-    stringr::str_flatten(c(...), na.rm = na.rm, collapse = "\n")
+    stringr::str_flatten(unlist(c(...)), na.rm = na.rm, collapse = "\n")
   }
 
   str_split_lines <- function(...) {
@@ -627,24 +628,82 @@ backtick_not_links <- function(d) {
 
 # ---- roxygen -----
 
-make_roxygen_tags <- function(endpoint, py_obj, type) {
-  if(type == "layer")
-    family <- get_layer_family(py_obj)
-  else if (endpoint |> startsWith("keras.ops."))
-    family <- "ops"
-  else if (endpoint |> startsWith("keras.activation"))
-    family <- "activation functions"
-  else if (endpoint |> startsWith("keras.utils"))
-    family <- "utils"
-  else
-    family <- type
+make_roxygen_tags <- function(endpoint, py_obj = py_eval(endpoint), type) {
 
+  if(FALSE) {
+
+    df$tags %>%
+      map("family") %>%
+      lapply(single_quote) %>%
+      map_chr(str_flatten, collapse = " ") %>%
+      tibble(fams = .) %>%
+      group_by(fams) %>%
+      tally() %>%
+      arrange(n) %>%
+      print(n = Inf)
+
+
+    df$tags %>%
+      map("family") %>%
+      unlist() %>%
+      unique() %>%
+      sort()
+  }
+#
+#   if(type == "layer")
+#     family <- get_layer_family(py_obj)
+#   else if (endpoint |> startsWith("keras.ops."))
+#     family <- "ops"
+#   else if (endpoint |> startsWith("keras.activation"))
+#     family <- "activation functions"
+#   else if (endpoint |> startsWith("keras.utils"))
+#     family <- "utils"
+#   else
+#     family <- type
+#
   out <- list()
   out$export <- ""
+#
+#   # family is.na for dense_features
+#   if (isTRUE(family != ""))
+#     out$family <- family
+#
+#   # {
+#
+#   append(out$family) <-
 
-  # family is.na for dense_features
-  if (isTRUE(family != ""))
-    out$family <- family
+  out$family <-
+    py_obj$`__module__` %>%
+    str_split_1("[._]") %>%
+    setdiff(c("keras", "src")) %>%
+    # rev() %>%
+
+    # str_replace_all("_", " ") %>%
+    # str_split(fixed(" ")) %>%
+    # unique %>%
+    # unlist() %>%
+    # { map_chr(seq_along(.), \(i) .[1:i])) } %>%
+    {
+      map_chr(seq_along(.), \(i) {
+        x <- .[1:i]
+        if (length(x) > 1) {
+          skip <- unique(c(1, which(x %in% c("schedules"))))
+          if (length(skip))
+            x[-skip] <- x[-skip] |>
+              str_replace("e?s$", "")
+        }
+        str_flatten(rev(x), " ")
+      })
+    } %>%
+    setdiff(c("numpy")) %>%
+    map_chr(\(x) {
+      switch(x,
+             # "accuracy_metrics metrics" = "accuracy metrics"
+             x)
+    }) %>%
+    unique() %>%
+    rev()
+  # } %error% browser()
 
   links <- c(get_keras_doc_link(endpoint),
              get_tf_doc_link(endpoint))
@@ -1518,9 +1577,20 @@ dump_roxygen <- function(doc, params, tags) {
     str_flatten(c(md_heading, doc[[nm]]), "\n")
   })
 
-  tags <- tags %>%
-    {glue("@{names(.)} {list_simplify(.)}")} %>%
-    str_flatten("\n")
+  tags <- imap(tags, function(x, name) {
+    glue("@{name} {x}") |> str_trim("right")
+  }) |> str_flatten_lines()
+
+
+  # family <- tags$family %>%
+  #   {glue("@family {.}")} %>%
+  #   str_flatten_lines()
+  #
+  # tags$family <- NULL
+  # tags <- tags %>%
+  #   {glue("@{names(.)} {list_simplify(.)}")} %>%
+  #   str_flatten("\n")
+  # tags <- c(family, tags) %>% str_flatten_lines()
 
   roxygen <- c(main, returns, params, tags) %>%
     str_flatten("\n\n") %>%
@@ -1758,7 +1828,8 @@ view_translation_diff <- function(r_name) {
 }
 
 
-man_src_pull_upstream_updates <- function(directories = dir_ls("man-src/", type = "directory")) {
+man_src_pull_upstream_updates <- function(directories = dir_ls("man-src/", type = "directory"),
+                                          write_out_only_formatted = FALSE) {
   message(deparse1(sys.call()))
   vscode_settings_file <- ".vscode/settings.json"
   if(file.exists(vscode_settings_file)) {
@@ -1798,6 +1869,10 @@ man_src_pull_upstream_updates <- function(directories = dir_ls("man-src/", type 
       if(new_formatted == old_formatted) return() # nothing to update
       # write_lines(new_formatted); return()
 
+      if(write_out_only_formatted) {
+        write_lines(export$roxygen, dir/"1-formatted.md")
+        return()
+      }
       if (file.exists(dir / "2-translated.Rmd"))
         git(
           "diff --no-index",
@@ -1818,6 +1893,7 @@ man_src_pull_upstream_updates <- function(directories = dir_ls("man-src/", type 
           !length(patch <- read_lines(dir / "translate.patch")))
         return()
 
+      # return()
       patch[c(1L, 3L)] %<>% str_replace(fixed("/1-formatted.md"), "/2-translated.Rmd")
       # patch <- patch[-2] # drop index <hash>..<hash> line
       write_lines(patch, dir / "translate.patch")

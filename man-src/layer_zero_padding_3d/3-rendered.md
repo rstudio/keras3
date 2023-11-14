@@ -75,7 +75,10 @@ Object to compose the layer with. A tensor, array, or sequential model.
 Passed on to the Python callable
 
 @export
+@family padding3d zero reshaping layers
+@family zero reshaping layers
 @family reshaping layers
+@family layers
 @seealso
 + <https:/keras.io/api/layers/reshaping_layers/zero_padding3d#zeropadding3d-class>
 + <https://www.tensorflow.org/api_docs/python/tf/keras/layers/ZeroPadding3D>

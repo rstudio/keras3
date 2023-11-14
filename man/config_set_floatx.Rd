@@ -49,4 +49,23 @@ config_set_floatx('float32')
 \item \url{https:/keras.io/keras_core/api/utils/config_utils#setfloatx-function}
 \item \url{https://www.tensorflow.org/api_docs/python/tf/keras/config/set_floatx}
 }
+
+Other config backend: 
+\code{\link{config_backend}()},
+\code{\link{config_epsilon}()},
+\code{\link{config_floatx}()},
+\code{\link{config_image_data_format}()},
+\code{\link{config_set_epsilon}()},
+\code{\link{config_set_image_data_format}()}
+
+Other backend: 
+\code{\link{clear_session}()},
+\code{\link{config_backend}()},
+\code{\link{config_epsilon}()},
+\code{\link{config_floatx}()},
+\code{\link{config_image_data_format}()},
+\code{\link{config_set_epsilon}()},
+\code{\link{config_set_image_data_format}()}
 }
+\concept{backend}
+\concept{config backend}

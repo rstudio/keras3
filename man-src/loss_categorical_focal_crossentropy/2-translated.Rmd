@@ -141,6 +141,6 @@ Tensor of predicted targets.
 Passed on to the Python callable
 
 @export
-@family loss
+@family losses
 @seealso
 + <https://www.tensorflow.org/api_docs/python/tf/keras/losses/CategoricalFocalCrossentropy>

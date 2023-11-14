@@ -130,7 +130,10 @@ Object to compose the layer with. A tensor, array, or sequential model.
 Passed on to the Python callable
 
 @export
+@family conv2d separable convolutional layers
+@family separable convolutional layers
 @family convolutional layers
+@family layers
 @seealso
 + <https:/keras.io/api/layers/convolution_layers/separable_convolution2d#separableconv2d-class>
 + <https://www.tensorflow.org/api_docs/python/tf/keras/layers/SeparableConv2D>

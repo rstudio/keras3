@@ -66,6 +66,7 @@ This must be in the half-open interval `[0, num_classes)`, where
 Passed on to the Python callable
 
 @export
-@family metric
+@family confusion metrics
+@family metrics
 @seealso
 + <https://www.tensorflow.org/api_docs/python/tf/keras/metrics/RecallAtPrecision>

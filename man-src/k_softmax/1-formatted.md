@@ -28,6 +28,7 @@ Input tensor.
 Integer, axis along which the softmax is applied.
 
 @export
+@family nn ops
 @family ops
 @seealso
 + <https:/keras.io/keras_core/api/ops/nn#softmax-function>

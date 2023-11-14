@@ -64,5 +64,6 @@ and `0.5 * label_smoothing` for the non-target class.
 The axis along which the mean is computed. Defaults to `-1`.
 
 @export
+@family losses
 @seealso
 + <https://www.tensorflow.org/api_docs/python/tf/keras/metrics/binary_focal_crossentropy>

@@ -69,6 +69,7 @@ this number of bins in the output tensor. If greater than
 `max(x)` is set to 0.
 
 @export
+@family numpy ops
 @family ops
 @seealso
 + <https:/keras.io/keras_core/api/ops/numpy#bincount-function>

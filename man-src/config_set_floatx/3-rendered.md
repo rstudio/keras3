@@ -42,6 +42,8 @@ config_set_floatx('float32')
 String; `'float16'`, `'float32'`, or `'float64'`.
 
 @export
+@family config backend
+@family backend
 @seealso
 + <https:/keras.io/keras_core/api/utils/config_utils#setfloatx-function>
 + <https://www.tensorflow.org/api_docs/python/tf/keras/config/set_floatx>

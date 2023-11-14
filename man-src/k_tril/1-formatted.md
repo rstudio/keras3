@@ -15,6 +15,7 @@ Diagonal above which to zero elements. Defaults to `0`. the
 main diagonal. `k < 0` is below it, and `k > 0` is above it.
 
 @export
+@family numpy ops
 @family ops
 @seealso
 + <https:/keras.io/keras_core/api/ops/numpy#tril-function>

@@ -54,7 +54,7 @@ model$optimizer$learning_rate |> as.array() |> round(5)
 \item \url{https://www.tensorflow.org/api_docs/python/tf/keras/callbacks/LearningRateScheduler}
 }
 
-Other callback: 
+Other callbacks: 
 \code{\link{callback_backup_and_restore}()},
 \code{\link{callback_csv_logger}()},
 \code{\link{callback_early_stopping}()},
@@ -66,4 +66,7 @@ Other callback:
 \code{\link{callback_tensorboard}()},
 \code{\link{callback_terminate_on_nan}()}
 }
-\concept{callback}
+\concept{callbacks}
+\concept{learning callbacks}
+\concept{rate learning callbacks}
+\concept{scheduler rate learning callbacks}

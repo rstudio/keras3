@@ -43,6 +43,7 @@ defines the vector(s) and cross product(s). Overrides `axisa`,
 `axisb` and `axisc`.
 
 @export
+@family numpy ops
 @family ops
 @seealso
 + <https:/keras.io/keras_core/api/ops/numpy#cross-function>

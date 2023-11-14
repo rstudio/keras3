@@ -4,6 +4,7 @@ Shorthand for `keras.ops.absolute`.
 see description
 
 @export
+@family numpy ops
 @family ops
 @seealso
 + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/abs>

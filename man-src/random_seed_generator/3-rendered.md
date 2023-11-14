@@ -38,5 +38,8 @@ Initial seed for the random number generator
 Passed on to the Python callable
 
 @export
+@family generator seed random
+@family seed random
+@family random
 @seealso
 + <https://www.tensorflow.org/api_docs/python/tf/keras/random/SeedGenerator>

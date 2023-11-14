@@ -51,7 +51,9 @@ Base wrapper keyword arguments.
 Object to compose the layer with. A tensor, array, or sequential model.
 
 @export
+@family spectral normalization layers
 @family normalization layers
+@family layers
 @seealso
 + <https://www.tensorflow.org/api_docs/python/tf/keras/layers/SpectralNormalization>
 

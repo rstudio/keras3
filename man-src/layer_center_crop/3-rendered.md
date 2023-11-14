@@ -48,7 +48,10 @@ Object to compose the layer with. A tensor, array, or sequential model.
 Passed on to the Python callable
 
 @export
+@family crop center preprocessing layers
+@family center preprocessing layers
 @family preprocessing layers
+@family layers
 @seealso
 + <https:/keras.io/api/layers/preprocessing_layers/image_preprocessing/center_crop#centercrop-class>
 + <https://www.tensorflow.org/api_docs/python/tf/keras/layers/CenterCrop>

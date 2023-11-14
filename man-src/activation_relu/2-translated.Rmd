@@ -39,7 +39,7 @@ A `numeric` giving the threshold value of the activation
 function below which values will be damped or set to zero.
 
 @export
-@family activation functions
+@family activations
 @seealso
 + <https:/keras.io/api/layers/activations#relu-function>
 + <https://www.tensorflow.org/api_docs/python/tf/keras/activations/relu>

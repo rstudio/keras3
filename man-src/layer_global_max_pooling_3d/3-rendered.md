@@ -56,7 +56,11 @@ Object to compose the layer with. A tensor, array, or sequential model.
 Passed on to the Python callable
 
 @export
+@family pooling3d max global pooling layers
+@family max global pooling layers
+@family global pooling layers
 @family pooling layers
+@family layers
 @seealso
 + <https:/keras.io/api/layers/pooling_layers/global_max_pooling3d#globalmaxpooling3d-class>
 + <https://www.tensorflow.org/api_docs/python/tf/keras/layers/GlobalMaxPooling3D>

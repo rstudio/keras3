@@ -32,7 +32,8 @@ across multiple calls, use as seed an instance
 of `keras.backend.SeedGenerator`.
 
 @export
-@family initializer
+@family random initializers
+@family initializers
 @seealso
 + <https:/keras.io/api/layers/initializers#henormal-class>
 + <https://www.tensorflow.org/api_docs/python/tf/keras/initializers/HeNormal>

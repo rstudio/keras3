@@ -33,6 +33,7 @@ m.result()
 Passed on to the Python callable
 
 @export
-@family metric
+@family reduction metrics
+@family metrics
 @seealso
 + <https://www.tensorflow.org/api_docs/python/tf/keras/metrics/Mean>

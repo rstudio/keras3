@@ -114,7 +114,10 @@ Object to compose the layer with. A tensor, array, or sequential model.
 Passed on to the Python callable
 
 @export
+@family transpose conv1d convolutional layers
+@family conv1d convolutional layers
 @family convolutional layers
+@family layers
 @seealso
 + <https:/keras.io/api/layers/convolution_layers/convolution1d_transpose#conv1dtranspose-class>
 + <https://www.tensorflow.org/api_docs/python/tf/keras/layers/Conv1DTranspose>

@@ -31,6 +31,7 @@ Slope of the activation function at x < 0.
 Defaults to `0.2`.
 
 @export
+@family nn ops
 @family ops
 @seealso
 + <https:/keras.io/keras_core/api/ops/nn#leakyrelu-function>

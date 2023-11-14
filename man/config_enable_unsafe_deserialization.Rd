@@ -13,4 +13,12 @@ Disables safe mode globally, allowing deserialization of lambdas.
 \itemize{
 \item \url{https://www.tensorflow.org/api_docs/python/tf/keras/config/enable_unsafe_deserialization}
 }
+
+Other saving: 
+\code{\link{get_custom_objects}()},
+\code{\link{get_registered_name}()},
+\code{\link{get_registered_object}()}
 }
+\concept{lib serialization saving}
+\concept{saving}
+\concept{serialization saving}

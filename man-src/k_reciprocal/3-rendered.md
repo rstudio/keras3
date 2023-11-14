@@ -10,6 +10,7 @@ Calculates `1/x`.
 Input tensor.
 
 @export
+@family numpy ops
 @family ops
 @seealso
 + <https:/keras.io/keras_core/api/ops/numpy#reciprocal-function>

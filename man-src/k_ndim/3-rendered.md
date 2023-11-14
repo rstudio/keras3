@@ -7,6 +7,7 @@ Return the number of dimensions of a tensor.
 Input tensor.
 
 @export
+@family numpy ops
 @family ops
 @seealso
 + <https:/keras.io/keras_core/api/ops/numpy#ndim-function>

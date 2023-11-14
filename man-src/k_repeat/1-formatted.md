@@ -14,6 +14,7 @@ The axis along which to repeat values. By default, use
 the flattened input array, and return a flat output array.
 
 @export
+@family numpy ops
 @family ops
 @seealso
 + <https:/keras.io/keras_core/api/ops/numpy#repeat-function>

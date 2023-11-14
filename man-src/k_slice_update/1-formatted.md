@@ -33,6 +33,7 @@ A tensor, the new values to be put to `inputs` at `indices`.
 `updates` must have the same rank as `inputs`.
 
 @export
+@family core ops
 @family ops
 @seealso
 + <https:/keras.io/keras_core/api/ops/core#sliceupdate-function>

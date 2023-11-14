@@ -17,7 +17,7 @@ to constrain the weights of each filter tensor of size
 `(rows, cols, input_depth)`.
 
 @export
-@family constraint
+@family constraints
 @seealso
 + <https:/keras.io/api/layers/constraints#unitnorm-class>
 + <https://www.tensorflow.org/api_docs/python/tf/keras/constraints/UnitNorm>

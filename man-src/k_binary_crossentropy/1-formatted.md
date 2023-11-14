@@ -36,6 +36,7 @@ set it to `False` if `output` represents probabilities.
 Defaults to`False`.
 
 @export
+@family nn ops
 @family ops
 @seealso
 + <https:/keras.io/keras_core/api/ops/nn#binarycrossentropy-function>

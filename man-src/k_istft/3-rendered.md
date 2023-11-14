@@ -54,6 +54,7 @@ Whether `x` was padded on both sides so that the t-th sequence
 is centered at time `t * sequence_stride`. Defaults to `TRUE`.
 
 @export
+@family math ops
 @family ops
 @seealso
 + <https:/keras.io/keras_core/api/ops/fft#istft-function>

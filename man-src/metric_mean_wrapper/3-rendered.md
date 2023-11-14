@@ -29,6 +29,7 @@ The metric function to wrap, with signature
 Keyword arguments to pass on to `fn`.
 
 @export
-@family metric
+@family reduction metrics
+@family metrics
 @seealso
 + <https://www.tensorflow.org/api_docs/python/tf/keras/metrics/MeanMetricWrapper>

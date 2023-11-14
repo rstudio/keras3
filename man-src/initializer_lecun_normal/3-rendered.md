@@ -38,6 +38,7 @@ across multiple calls, use as seed an instance
 of `random_seed_generator()`.
 
 @export
-@family initializer
+@family random initializers
+@family initializers
 @seealso
 + <https://www.tensorflow.org/api_docs/python/tf/keras/initializers/LecunNormal>

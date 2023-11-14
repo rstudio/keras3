@@ -40,6 +40,7 @@ dimensions with size one. With this option, the result will
 broadcast correctly against the input array. Defaults to`FALSE`.
 
 @export
+@family numpy ops
 @family ops
 @seealso
 + <https:/keras.io/keras_core/api/ops/numpy#all-function>

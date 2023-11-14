@@ -29,7 +29,12 @@ layer <- layer_dense(units = 3, kernel_initializer = initializer)
 \item \url{https://www.tensorflow.org/api_docs/python/tf/keras/initializers/IdentityInitializer}
 }
 
-Other initializer: 
+Other constant initializers: 
+\code{\link{initializer_constant}()},
+\code{\link{initializer_ones}()},
+\code{\link{initializer_zeros}()}
+
+Other initializers: 
 \code{\link{initializer_constant}()},
 \code{\link{initializer_glorot_normal}()},
 \code{\link{initializer_glorot_uniform}()},
@@ -45,4 +50,5 @@ Other initializer:
 \code{\link{initializer_variance_scaling}()},
 \code{\link{initializer_zeros}()}
 }
-\concept{initializer}
+\concept{constant initializers}
+\concept{initializers}

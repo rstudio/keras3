@@ -10,6 +10,7 @@ Shape of the empty tensor.
 Desired data type of the empty tensor.
 
 @export
+@family numpy ops
 @family ops
 @seealso
 + <https:/keras.io/keras_core/api/ops/numpy#empty-function>

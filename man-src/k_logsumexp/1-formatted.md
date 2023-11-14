@@ -26,6 +26,7 @@ A boolean indicating whether to keep the dimensions of
 the input tensor when computing the sum. Defaults to`False`.
 
 @export
+@family math ops
 @family ops
 @seealso
 + <https:/keras.io/keras_core/api/ops/core#logsumexp-function>

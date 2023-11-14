@@ -35,5 +35,6 @@ across multiple calls, use as seed an instance
 of `keras.random.SeedGenerator`.
 
 @export
+@family random
 @seealso
 + <https://www.tensorflow.org/api_docs/python/tf/keras/random/uniform>

@@ -30,6 +30,10 @@ not provided.
 A tuple of the form `(x,)`, `(x, y)`, or `(x, y, sample_weight)`.
 
 @export
-@family utils
+@family util adapter adapter data trainers
+@family adapter adapter data trainers
+@family adapter data trainers
+@family data trainers
+@family trainers
 @seealso
 + <https://www.tensorflow.org/api_docs/python/tf/keras/utils/unpack_x_y_sample_weight>

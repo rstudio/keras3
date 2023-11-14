@@ -36,4 +36,23 @@ config_set_epsilon(1e-7)
 \item \url{https:/keras.io/keras_core/api/utils/config_utils#setepsilon-function}
 \item \url{https://www.tensorflow.org/api_docs/python/tf/keras/config/set_epsilon}
 }
+
+Other config backend: 
+\code{\link{config_backend}()},
+\code{\link{config_epsilon}()},
+\code{\link{config_floatx}()},
+\code{\link{config_image_data_format}()},
+\code{\link{config_set_floatx}()},
+\code{\link{config_set_image_data_format}()}
+
+Other backend: 
+\code{\link{clear_session}()},
+\code{\link{config_backend}()},
+\code{\link{config_epsilon}()},
+\code{\link{config_floatx}()},
+\code{\link{config_image_data_format}()},
+\code{\link{config_set_floatx}()},
+\code{\link{config_set_image_data_format}()}
 }
+\concept{backend}
+\concept{config backend}

@@ -21,6 +21,7 @@ Tuple of the real and imaginary parts of the input tensor. Both
 tensors in the tuple should be of floating type.
 
 @export
+@family math ops
 @family ops
 @seealso
 + <https:/keras.io/keras_core/api/ops/fft#fft-function>

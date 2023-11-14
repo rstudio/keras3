@@ -28,9 +28,9 @@ Constrains the weights incident to each hidden unit to have unit norm.
 \item \url{https://www.tensorflow.org/api_docs/python/tf/keras/constraints/UnitNorm}
 }
 
-Other constraint: 
+Other constraints: 
 \code{\link{constraint_maxnorm}()},
 \code{\link{constraint_minmaxnorm}()},
 \code{\link{constraint_nonneg}()}
 }
-\concept{constraint}
+\concept{constraints}

@@ -46,7 +46,7 @@ The predicted values with shape = `[batch_size, d0, .. dN]`.
 Passed on to the Python callable
 
 @export
-@family loss
+@family losses
 @seealso
 + <https:/keras.io/api/losses/hinge_losses#hinge-class>
 + <https://www.tensorflow.org/api_docs/python/tf/keras/losses/Hinge>

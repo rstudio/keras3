@@ -39,7 +39,12 @@ m.result()
 \item \url{https://www.tensorflow.org/api_docs/python/tf/keras/metrics/Sum}
 }
 
-Other metric: 
+Other reduction metrics: 
+\code{\link{metric_mean_wrapper}()},
+\code{\link{metric_mean}()}
+
+Other metrics: 
+\code{\link{custom_metric}()},
 \code{\link{metric_auc}()},
 \code{\link{metric_binary_accuracy}()},
 \code{\link{metric_binary_crossentropy}()},
@@ -82,4 +87,5 @@ Other metric:
 \code{\link{metric_true_negatives}()},
 \code{\link{metric_true_positives}()}
 }
-\concept{metric}
+\concept{metrics}
+\concept{reduction metrics}

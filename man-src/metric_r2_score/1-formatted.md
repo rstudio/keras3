@@ -59,6 +59,7 @@ Optional. data type of the metric result.
 Passed on to the Python callable
 
 @export
-@family metric
+@family regression metrics
+@family metrics
 @seealso
 + <https://www.tensorflow.org/api_docs/python/tf/keras/metrics/R2Score>

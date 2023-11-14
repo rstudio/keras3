@@ -111,6 +111,8 @@ Whether to visits subdirectories pointed to by symlinks.
 Defaults to `False`.
 
 @export
+@family dataset audio utils
+@family audio utils
 @family utils
 @seealso
 + <https:/keras.io/api/data_loading/audio#audiodatasetfromdirectory-function>

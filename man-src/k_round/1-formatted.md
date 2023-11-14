@@ -10,6 +10,7 @@ Input tensor.
 Number of decimal places to round to. Defaults to `0`.
 
 @export
+@family numpy ops
 @family ops
 @seealso
 + <https:/keras.io/keras_core/api/ops/numpy#round-function>

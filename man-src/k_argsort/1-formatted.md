@@ -38,6 +38,7 @@ Axis along which to sort. Defaults to`-1` (the last axis). If
 `None`, the flattened tensor is used.
 
 @export
+@family numpy ops
 @family ops
 @seealso
 + <https:/keras.io/keras_core/api/ops/numpy#argsort-function>

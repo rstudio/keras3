@@ -36,7 +36,7 @@ and the number of input units is "large enough"
 Input tensor.
 
 @export
-@family activation functions
+@family activations
 @seealso
 + <https:/keras.io/api/layers/activations#selu-function>
 + <https://www.tensorflow.org/api_docs/python/tf/keras/activations/selu>

@@ -45,6 +45,7 @@ additional condition ensuring the number of iterations executed is
 no greater than `maximum_iterations`.
 
 @export
+@family core ops
 @family ops
 @seealso
 + <https:/keras.io/keras_core/api/ops/core#whileloop-function>

@@ -68,7 +68,10 @@ Object to compose the layer with. A tensor, array, or sequential model.
 Passed on to the Python callable
 
 @export
+@family brightnes random preprocessing layers
+@family random preprocessing layers
 @family preprocessing layers
+@family layers
 @seealso
 + <https:/keras.io/api/layers/preprocessing_layers/image_augmentation/random_brightness#randombrightness-class>
 + <https://www.tensorflow.org/api_docs/python/tf/keras/layers/RandomBrightness>

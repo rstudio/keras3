@@ -22,4 +22,14 @@ Randomly set some portion of values in the tensor to 0.
 \itemize{
 \item \url{https://www.tensorflow.org/api_docs/python/tf/keras/random/dropout}
 }
+
+Other random: 
+\code{\link{random_categorical}()},
+\code{\link{random_integer}()},
+\code{\link{random_normal}()},
+\code{\link{random_seed_generator}()},
+\code{\link{random_shuffle}()},
+\code{\link{random_truncated_normal}()},
+\code{\link{random_uniform}()}
 }
+\concept{random}

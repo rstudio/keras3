@@ -18,6 +18,7 @@ in the result as dimensions with size one. Defaults to`False`.
 The maximum value of an output element. Defaults to`None`.
 
 @export
+@family numpy ops
 @family ops
 @seealso
 + <https:/keras.io/keras_core/api/ops/numpy#min-function>

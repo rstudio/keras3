@@ -7,6 +7,7 @@ Calculate the exponential of all elements in the input tensor.
 Input tensor.
 
 @export
+@family numpy ops
 @family ops
 @seealso
 + <https:/keras.io/keras_core/api/ops/numpy#exp-function>

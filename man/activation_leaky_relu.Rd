@@ -21,7 +21,7 @@ Leaky relu activation function.
 \item \url{https://www.tensorflow.org/api_docs/python/tf/keras/activations/leaky_relu}
 }
 
-Other activation functions: 
+Other activations: 
 \code{\link{activation_elu}()},
 \code{\link{activation_exponential}()},
 \code{\link{activation_gelu}()},
@@ -39,4 +39,4 @@ Other activation functions:
 \code{\link{activation_softsign}()},
 \code{\link{activation_tanh}()}
 }
-\concept{activation functions}
+\concept{activations}

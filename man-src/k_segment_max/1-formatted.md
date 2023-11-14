@@ -32,6 +32,7 @@ A boolean indicating whether `segment_ids` is sorted.
 Defaults to`False`.
 
 @export
+@family math ops
 @family ops
 @seealso
 + <https:/keras.io/keras_core/api/ops/core#segmentmax-function>

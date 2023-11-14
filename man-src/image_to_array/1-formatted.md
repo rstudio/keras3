@@ -28,6 +28,7 @@ Dtype to use. `None` means the global setting
 defaults to `"float32"`).
 
 @export
+@family image utils
 @family utils
 @seealso
 + <https:/keras.io/api/data_loading/image#imgtoarray-function>

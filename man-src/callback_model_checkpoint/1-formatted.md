@@ -102,9 +102,9 @@ quantities monitored are `"acc"` or start with `"fmeasure"` and are
 set to `"min"` for the rest of the quantities.
 
 @param save_weights_only
-if `True`, then only the model's weights will be
-saved (`model.save_weights(filepath)`), else the full model is
-saved (`model.save(filepath)`).
+if True, then only the model's weights will be saved
+(`model.save_weights(filepath)`), else the full model is saved
+(`model.save(filepath)`).
 
 @param save_freq
 `"epoch"` or integer. When using `"epoch"`, the callback
@@ -123,7 +123,9 @@ overwrites the model weights already saved if the performance of
 current model is better than this value.
 
 @export
-@family callback
+@family checkpoint model callbacks
+@family model callbacks
+@family callbacks
 @seealso
 + <https:/keras.io/api/callbacks/model_checkpoint#modelcheckpoint-class>
 + <https://www.tensorflow.org/api_docs/python/tf/keras/callbacks/ModelCheckpoint>

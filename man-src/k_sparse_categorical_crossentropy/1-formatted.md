@@ -46,6 +46,7 @@ Defaults to `-1`, which corresponds to the last dimension
 of the tensors.
 
 @export
+@family nn ops
 @family ops
 @seealso
 + <https:/keras.io/keras_core/api/ops/nn#sparsecategoricalcrossentropy-function>

@@ -35,6 +35,7 @@ Axis to be used as the second axis of the 2-D sub-arrays.
 Defaults to `1` (second axis).
 
 @export
+@family numpy ops
 @family ops
 @seealso
 + <https:/keras.io/keras_core/api/ops/numpy#trace-function>

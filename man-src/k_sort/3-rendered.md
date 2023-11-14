@@ -11,6 +11,7 @@ Axis along which to sort. If `None`, the tensor is flattened
 before sorting. Defaults to `-1`; the last axis.
 
 @export
+@family numpy ops
 @family ops
 @seealso
 + <https:/keras.io/keras_core/api/ops/numpy#sort-function>

@@ -16,6 +16,8 @@ keras::config_epsilon()
 A float.
 
 @export
+@family config backend
+@family backend
 @seealso
 + <https:/keras.io/keras_core/api/utils/config_utils#epsilon-function>
 + <https://www.tensorflow.org/api_docs/python/tf/keras/config/epsilon>

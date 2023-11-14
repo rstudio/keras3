@@ -125,7 +125,10 @@ Object to compose the layer with. A tensor, array, or sequential model.
 Passed on to the Python callable
 
 @export
+@family conv2d depthwise convolutional layers
+@family depthwise convolutional layers
 @family convolutional layers
+@family layers
 @seealso
 + <https:/keras.io/api/layers/convolution_layers/depthwise_convolution2d#depthwiseconv2d-class>
 + <https://www.tensorflow.org/api_docs/python/tf/keras/layers/DepthwiseConv2D>

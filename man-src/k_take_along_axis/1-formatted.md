@@ -14,6 +14,7 @@ The axis over which to select values. By default, the flattened
 input tensor is used.
 
 @export
+@family numpy ops
 @family ops
 @seealso
 + <https:/keras.io/keras_core/api/ops/numpy#takealongaxis-function>

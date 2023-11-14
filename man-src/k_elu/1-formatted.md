@@ -23,6 +23,7 @@ Input tensor.
 A scalar, slope of positive section. Defaults to `1.0`.
 
 @export
+@family nn ops
 @family ops
 @seealso
 + <https:/keras.io/keras_core/api/ops/nn#elu-function>

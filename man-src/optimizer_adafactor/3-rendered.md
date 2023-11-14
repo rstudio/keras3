@@ -99,7 +99,8 @@ automatically set a loss scale factor.
 Passed on to the Python callable
 
 @export
-@family optimizer
+@family adafactor optimizers
+@family optimizers
 @seealso
 + <https:/keras.io/api/optimizers/adafactor#adafactor-class>
 + <https://www.tensorflow.org/api_docs/python/tf/keras/optimizers/Adafactor>

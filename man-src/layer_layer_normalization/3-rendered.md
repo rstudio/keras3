@@ -125,7 +125,9 @@ Base layer keyword arguments (e.g. `name` and `dtype`).
 Object to compose the layer with. A tensor, array, or sequential model.
 
 @export
+@family layer normalization layers
 @family normalization layers
+@family layers
 @seealso
 + <https:/keras.io/api/layers/normalization_layers/layer_normalization#layernormalization-class>
 + <https://www.tensorflow.org/api_docs/python/tf/keras/layers/LayerNormalization>

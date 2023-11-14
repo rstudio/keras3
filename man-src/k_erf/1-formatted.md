@@ -16,6 +16,7 @@ A tensor with the same dtype as `x`.
 Input tensor.
 
 @export
+@family math ops
 @family ops
 @seealso
 + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/erf>

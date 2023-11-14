@@ -79,7 +79,14 @@ result
 \item \url{https://www.tensorflow.org/api_docs/python/tf/keras/metrics/FBetaScore}
 }
 
-Other metric: 
+Other score f metrics: 
+\code{\link{metric_f1_score}()}
+
+Other f metrics: 
+\code{\link{metric_f1_score}()}
+
+Other metrics: 
+\code{\link{custom_metric}()},
 \code{\link{metric_auc}()},
 \code{\link{metric_binary_accuracy}()},
 \code{\link{metric_binary_crossentropy}()},
@@ -122,4 +129,6 @@ Other metric:
 \code{\link{metric_true_negatives}()},
 \code{\link{metric_true_positives}()}
 }
-\concept{metric}
+\concept{f metrics}
+\concept{metrics}
+\concept{score f metrics}

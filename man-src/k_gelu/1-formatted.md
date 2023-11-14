@@ -26,6 +26,7 @@ Input tensor.
 Approximate version of GELU activation. Defaults to `True`.
 
 @export
+@family nn ops
 @family ops
 @seealso
 + <https:/keras.io/keras_core/api/ops/nn#gelu-function>

@@ -32,7 +32,9 @@ Base layer keyword arguments, such as `name` and `dtype`.
 Object to compose the layer with. A tensor, array, or sequential model.
 
 @export
+@family rescaling preprocessing layers
 @family preprocessing layers
+@family layers
 @seealso
 + <https:/keras.io/api/layers/preprocessing_layers/image_preprocessing/rescaling#rescaling-class>
 + <https://www.tensorflow.org/api_docs/python/tf/keras/layers/Rescaling>

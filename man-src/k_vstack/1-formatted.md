@@ -7,6 +7,7 @@ Stack tensors in sequence vertically (row wise).
 Sequence of tensors.
 
 @export
+@family numpy ops
 @family ops
 @seealso
 + <https:/keras.io/keras_core/api/ops/numpy#vstack-function>

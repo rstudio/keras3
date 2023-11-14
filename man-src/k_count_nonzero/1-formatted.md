@@ -25,6 +25,7 @@ Axis or tuple of axes along which to count the number of
 non-zeros. Defaults to `None`.
 
 @export
+@family numpy ops
 @family ops
 @seealso
 + <https:/keras.io/keras_core/api/ops/numpy#countnonzero-function>

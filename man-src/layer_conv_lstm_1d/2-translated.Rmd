@@ -174,7 +174,10 @@ Object to compose the layer with. A tensor, array, or sequential model.
 Passed on to the Python callable
 
 @export
-@family recurrent layers
+@family lstm1d conv rnn layers
+@family conv rnn layers
+@family rnn layers
+@family layers
 @seealso
 + <https:/keras.io/api/layers/recurrent_layers/conv_lstm1d#convlstm1d-class>
 + <https://www.tensorflow.org/api_docs/python/tf/keras/layers/ConvLSTM1D>

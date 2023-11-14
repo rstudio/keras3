@@ -79,6 +79,7 @@ The type of the output array. If `dtype` is not given, infer the
 data type from the other input arguments.
 
 @export
+@family numpy ops
 @family ops
 @seealso
 + <https:/keras.io/keras_core/api/ops/numpy#arange-function>

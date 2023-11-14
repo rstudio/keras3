@@ -23,6 +23,8 @@ keras.config.set_epsilon(1e-7)
 float. New value of epsilon.
 
 @export
+@family config backend
+@family backend
 @seealso
 + <https:/keras.io/keras_core/api/utils/config_utils#setepsilon-function>
 + <https://www.tensorflow.org/api_docs/python/tf/keras/config/set_epsilon>

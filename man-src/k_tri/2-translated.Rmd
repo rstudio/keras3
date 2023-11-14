@@ -22,6 +22,7 @@ The sub-diagonal at and below which the array is filled.
 Data type of the returned tensor. The default is "float32".
 
 @export
+@family numpy ops
 @family ops
 @seealso
 + <https:/keras.io/keras_core/api/ops/numpy#tri-function>

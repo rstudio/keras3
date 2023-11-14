@@ -97,6 +97,7 @@ equal to the first dimension of `updates`.
 A tensor, the new values to be put to `inputs` at `indices`.
 
 @export
+@family core ops
 @family ops
 @seealso
 + <https:/keras.io/keras_core/api/ops/core#scatterupdate-function>

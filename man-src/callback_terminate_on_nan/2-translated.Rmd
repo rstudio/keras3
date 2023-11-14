@@ -4,7 +4,10 @@ knit: ({source(here::here("tools/knit.R")); knit_man_src})
 Callback that terminates training when a NaN loss is encountered.
 
 @export
-@family callback
+@family nan on terminate callbacks
+@family on terminate callbacks
+@family terminate callbacks
+@family callbacks
 @seealso
 + <https:/keras.io/api/callbacks/terminate_on_nan#terminateonnan-class>
 + <https://www.tensorflow.org/api_docs/python/tf/keras/callbacks/TerminateOnNaN>

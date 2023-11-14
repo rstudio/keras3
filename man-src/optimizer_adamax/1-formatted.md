@@ -107,7 +107,8 @@ String, name for the object
 Passed on to the Python callable
 
 @export
-@family optimizer
+@family adamax optimizers
+@family optimizers
 @seealso
 + <https:/keras.io/api/optimizers/adamax#adamax-class>
 + <https://www.tensorflow.org/api_docs/python/tf/keras/optimizers/Adamax>

@@ -17,6 +17,7 @@ Position in the expanded axes where the new axis
 (or axes) is placed.
 
 @export
+@family numpy ops
 @family ops
 @seealso
 + <https:/keras.io/keras_core/api/ops/numpy#expanddims-function>

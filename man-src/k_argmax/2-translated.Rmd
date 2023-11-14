@@ -26,6 +26,7 @@ By default, the index is into the flattened tensor, otherwise
 along the specified axis.
 
 @export
+@family numpy ops
 @family ops
 @seealso
 + <https:/keras.io/keras_core/api/ops/numpy#argmax-function>

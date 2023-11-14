@@ -32,7 +32,9 @@ Passed on to the Python callable
 layers to combine
 
 @export
+@family multiply merging layers
 @family merging layers
+@family layers
 @seealso
 + <https:/keras.io/api/layers/merging_layers/multiply#multiply-class>
 + <https://www.tensorflow.org/api_docs/python/tf/keras/layers/Multiply>

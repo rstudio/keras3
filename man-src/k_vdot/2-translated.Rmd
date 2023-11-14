@@ -20,6 +20,7 @@ before calculation of the dot product.
 Second input tensor.
 
 @export
+@family numpy ops
 @family ops
 @seealso
 + <https:/keras.io/keras_core/api/ops/numpy#vdot-function>

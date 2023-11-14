@@ -58,6 +58,7 @@ Height of output images.
 Width of output images.
 
 @export
+@family image ops
 @family ops
 @seealso
 + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/image/pad_images>

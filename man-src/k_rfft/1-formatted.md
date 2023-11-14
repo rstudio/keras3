@@ -38,6 +38,7 @@ specified, it is inferred from the length of the last axis of `x`.
 Defaults to `None`.
 
 @export
+@family math ops
 @family ops
 @seealso
 + <https:/keras.io/keras_core/api/ops/fft#rfft-function>

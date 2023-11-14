@@ -32,6 +32,7 @@ across multiple calls, use as seed an instance
 of `keras.backend.SeedGenerator`.
 
 @export
-@family initializer
+@family random initializers
+@family initializers
 @seealso
 + <https://www.tensorflow.org/api_docs/python/tf/keras/initializers/LecunUniform>

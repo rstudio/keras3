@@ -41,7 +41,24 @@ final_state
 \item \url{https://www.tensorflow.org/api_docs/python/tf/keras/ops/fori_loop}
 }
 
+Other core ops: 
+\code{\link{k_cast}()},
+\code{\link{k_cond}()},
+\code{\link{k_convert_to_numpy}()},
+\code{\link{k_convert_to_tensor}()},
+\code{\link{k_is_tensor}()},
+\code{\link{k_scatter_update}()},
+\code{\link{k_scatter}()},
+\code{\link{k_shape}()},
+\code{\link{k_slice_update}()},
+\code{\link{k_slice}()},
+\code{\link{k_stop_gradient}()},
+\code{\link{k_unstack}()},
+\code{\link{k_vectorized_map}()},
+\code{\link{k_while_loop}()}
+
 Other ops: 
+\code{\link{get_source_inputs}()},
 \code{\link{k_abs}()},
 \code{\link{k_add}()},
 \code{\link{k_all}()},
@@ -241,4 +258,5 @@ Other ops:
 \code{\link{k_zeros_like}()},
 \code{\link{k_zeros}()}
 }
+\concept{core ops}
 \concept{ops}

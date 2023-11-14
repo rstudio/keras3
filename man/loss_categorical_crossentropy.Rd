@@ -101,7 +101,7 @@ Usage with the \code{compile()} API:
 \item \url{https://www.tensorflow.org/api_docs/python/tf/keras/losses/CategoricalCrossentropy}
 }
 
-Other loss: 
+Other losses: 
 \code{\link{loss_binary_crossentropy}()},
 \code{\link{loss_binary_focal_crossentropy}()},
 \code{\link{loss_categorical_focal_crossentropy}()},
@@ -117,6 +117,10 @@ Other loss:
 \code{\link{loss_mean_squared_logarithmic_error}()},
 \code{\link{loss_poisson}()},
 \code{\link{loss_sparse_categorical_crossentropy}()},
-\code{\link{loss_squared_hinge}()}
+\code{\link{loss_squared_hinge}()},
+\code{\link{metric_binary_focal_crossentropy}()},
+\code{\link{metric_categorical_focal_crossentropy}()},
+\code{\link{metric_huber}()},
+\code{\link{metric_log_cosh}()}
 }
-\concept{loss}
+\concept{losses}

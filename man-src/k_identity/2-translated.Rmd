@@ -17,6 +17,7 @@ Number of rows (and columns) in the `n x n` output tensor.
 Data type of the output tensor.
 
 @export
+@family numpy ops
 @family ops
 @seealso
 + <https:/keras.io/keras_core/api/ops/numpy#identity-function>

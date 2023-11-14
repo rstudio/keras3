@@ -57,6 +57,7 @@ First input tensor.
 Second input tensor.
 
 @export
+@family numpy ops
 @family ops
 @seealso
 + <https:/keras.io/keras_core/api/ops/numpy#arctan2-function>

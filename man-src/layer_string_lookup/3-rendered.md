@@ -386,7 +386,10 @@ String, name for the object
 Passed on to the Python callable
 
 @export
+@family lookup string preprocessing layers
+@family string preprocessing layers
 @family preprocessing layers
+@family layers
 @seealso
 + <https:/keras.io/api/layers/preprocessing_layers/categorical/string_lookup#stringlookup-class>
 + <https://www.tensorflow.org/api_docs/python/tf/keras/layers/StringLookup>

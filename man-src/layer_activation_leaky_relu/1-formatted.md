@@ -30,7 +30,10 @@ Base layer keyword arguments, such as
 Object to compose the layer with. A tensor, array, or sequential model.
 
 @export
-@family activations layers
+@family relu leaky activation layers
+@family leaky activation layers
+@family activation layers
+@family layers
 @seealso
 + <https:/keras.io/api/layers/activation_layers/leaky_relu#leakyrelu-class>
 + <https://www.tensorflow.org/api_docs/python/tf/keras/layers/LeakyReLU>

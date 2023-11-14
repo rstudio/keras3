@@ -21,7 +21,9 @@ Boolean. True: append if file exists (useful for continuing
 training). False: overwrite existing file.
 
 @export
-@family callback
+@family logger csv callbacks
+@family csv callbacks
+@family callbacks
 @seealso
 + <https:/keras.io/api/callbacks/csv_logger#csvlogger-class>
 + <https://www.tensorflow.org/api_docs/python/tf/keras/callbacks/CSVLogger>

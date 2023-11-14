@@ -71,7 +71,14 @@ patches$shape
 \item \url{https://www.tensorflow.org/api_docs/python/tf/keras/ops/image/extract_patches}
 }
 
+Other image ops: 
+\code{\link{k_image_affine_transform}()},
+\code{\link{k_image_map_coordinates}()},
+\code{\link{k_image_pad_images}()},
+\code{\link{k_image_resize}()}
+
 Other ops: 
+\code{\link{get_source_inputs}()},
 \code{\link{k_abs}()},
 \code{\link{k_add}()},
 \code{\link{k_all}()},
@@ -271,4 +278,5 @@ Other ops:
 \code{\link{k_zeros_like}()},
 \code{\link{k_zeros}()}
 }
+\concept{image ops}
 \concept{ops}

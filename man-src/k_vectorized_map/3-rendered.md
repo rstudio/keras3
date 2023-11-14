@@ -74,6 +74,7 @@ see description
 A function taking either a tensor, or list of tensors.
 
 @export
+@family core ops
 @family ops
 @seealso
 + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/vectorized_map>

@@ -41,9 +41,9 @@ to have the norm between a lower bound and an upper bound.
 \item \url{https://www.tensorflow.org/api_docs/python/tf/keras/constraints/MinMaxNorm}
 }
 
-Other constraint: 
+Other constraints: 
 \code{\link{constraint_maxnorm}()},
 \code{\link{constraint_nonneg}()},
 \code{\link{constraint_unitnorm}()}
 }
-\concept{constraint}
+\concept{constraints}

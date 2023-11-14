@@ -70,7 +70,9 @@ Object to compose the layer with. A tensor, array, or sequential model.
 For forward/backward compatability.
 
 @export
+@family embedding core layers
 @family core layers
+@family layers
 @seealso
 + <https:/keras.io/api/layers/core_layers/embedding#embedding-class>
 + <https://www.tensorflow.org/api_docs/python/tf/keras/layers/Embedding>

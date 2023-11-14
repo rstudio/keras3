@@ -90,7 +90,9 @@ Passed on to the Python callable
 see description
 
 @export
-@family recurrent layers
+@family bidirectional rnn layers
+@family rnn layers
+@family layers
 @seealso
 + <https:/keras.io/api/layers/recurrent_layers/bidirectional#bidirectional-class>
 + <https://www.tensorflow.org/api_docs/python/tf/keras/layers/Bidirectional>

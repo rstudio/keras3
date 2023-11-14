@@ -21,6 +21,7 @@ Tensor of the inverse tangent of each element in `x`, in the interval
 Input tensor.
 
 @export
+@family numpy ops
 @family ops
 @seealso
 + <https:/keras.io/keras_core/api/ops/numpy#arctan-function>

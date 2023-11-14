@@ -35,6 +35,7 @@ If this is set to `True`, the axes which are reduce
 are left in the result as dimensions with size one.
 
 @export
+@family numpy ops
 @family ops
 @seealso
 + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/quantile>

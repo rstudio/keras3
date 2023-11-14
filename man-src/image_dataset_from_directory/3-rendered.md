@@ -141,6 +141,8 @@ If None uses keras.config.image_data_format()
 otherwise either 'channel_last' or 'channel_first'.
 
 @export
+@family dataset image utils
+@family image utils
 @family utils
 @seealso
 + <https:/keras.io/api/data_loading/image#imagedatasetfromdirectory-function>

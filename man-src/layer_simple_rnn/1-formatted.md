@@ -129,7 +129,9 @@ Initial seed for the random number generator
 Passed on to the Python callable
 
 @export
-@family recurrent layers
+@family simple rnn layers
+@family rnn layers
+@family layers
 @seealso
 + <https:/keras.io/api/layers/recurrent_layers/simple_rnn#simplernn-class>
 + <https://www.tensorflow.org/api_docs/python/tf/keras/layers/SimpleRNN>

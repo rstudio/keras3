@@ -7,6 +7,7 @@ Return the number of elements in a tensor.
 Input tensor.
 
 @export
+@family numpy ops
 @family ops
 @seealso
 + <https:/keras.io/keras_core/api/ops/numpy#size-function>

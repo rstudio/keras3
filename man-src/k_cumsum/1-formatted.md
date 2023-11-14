@@ -11,6 +11,7 @@ Axis along which the cumulative sum is computed.
 By default the input is flattened.
 
 @export
+@family numpy ops
 @family ops
 @seealso
 + <https:/keras.io/keras_core/api/ops/numpy#cumsum-function>

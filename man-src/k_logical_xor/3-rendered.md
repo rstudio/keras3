@@ -10,6 +10,7 @@ First input tensor.
 Second input tensor.
 
 @export
+@family numpy ops
 @family ops
 @seealso
 + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/logical_xor>

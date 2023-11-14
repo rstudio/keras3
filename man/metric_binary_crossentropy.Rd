@@ -89,7 +89,14 @@ Usage with \code{compile()} API:
 \item \url{https://www.tensorflow.org/api_docs/python/tf/keras/metrics/BinaryCrossentropy}
 }
 
-Other metric: 
+Other probabilistic metrics: 
+\code{\link{metric_categorical_crossentropy}()},
+\code{\link{metric_kl_divergence}()},
+\code{\link{metric_poisson}()},
+\code{\link{metric_sparse_categorical_crossentropy}()}
+
+Other metrics: 
+\code{\link{custom_metric}()},
 \code{\link{metric_auc}()},
 \code{\link{metric_binary_accuracy}()},
 \code{\link{metric_binary_iou}()},
@@ -132,4 +139,5 @@ Other metric:
 \code{\link{metric_true_negatives}()},
 \code{\link{metric_true_positives}()}
 }
-\concept{metric}
+\concept{metrics}
+\concept{probabilistic metrics}

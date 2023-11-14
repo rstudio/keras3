@@ -226,7 +226,10 @@ String, name for the object
 Passed on to the Python callable
 
 @export
+@family vectorization text preprocessing layers
+@family text preprocessing layers
 @family preprocessing layers
+@family layers
 @seealso
 + <https:/keras.io/api/layers/preprocessing_layers/text/text_vectorization#textvectorization-class>
 + <https://www.tensorflow.org/api_docs/python/tf/keras/layers/TextVectorization>

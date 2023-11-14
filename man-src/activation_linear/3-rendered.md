@@ -8,7 +8,7 @@ it returns the input, unmodified.
 Input tensor.
 
 @export
-@family activation functions
+@family activations
 @seealso
 + <https:/keras.io/keras_core/api/layers/activations#linear-function>
 + <https://www.tensorflow.org/api_docs/python/tf/keras/activations/linear>

@@ -24,6 +24,7 @@ A tensor with the same dtype as `x`.
 input tensor
 
 @export
+@family math ops
 @family ops
 @seealso
 + <https:/keras.io/keras_core/api/ops/core#rsqrt-function>

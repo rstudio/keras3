@@ -75,6 +75,7 @@ remove values from sequences larger than
 Float or String, padding value. (Optional, defaults to 0.)
 
 @export
+@family sequence utils
 @family utils
 @seealso
 + <https:/keras.io/keras_core/api/data_loading/timeseries#padsequences-function>

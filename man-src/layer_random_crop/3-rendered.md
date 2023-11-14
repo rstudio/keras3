@@ -49,7 +49,10 @@ String, name for the object
 see description
 
 @export
+@family crop random preprocessing layers
+@family random preprocessing layers
 @family preprocessing layers
+@family layers
 @seealso
 + <https:/keras.io/api/layers/preprocessing_layers/image_augmentation/random_crop#randomcrop-class>
 + <https://www.tensorflow.org/api_docs/python/tf/keras/layers/RandomCrop>

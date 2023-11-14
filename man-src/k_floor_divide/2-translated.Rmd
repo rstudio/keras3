@@ -13,6 +13,7 @@ Numerator.
 Denominator.
 
 @export
+@family numpy ops
 @family ops
 @seealso
 + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/floor_divide>

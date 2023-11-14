@@ -36,6 +36,7 @@ An integer representing the sequences length.
 An integer representing the sequences hop size.
 
 @export
+@family math ops
 @family ops
 @seealso
 + <https:/keras.io/keras_core/api/ops/core#extractsequences-function>

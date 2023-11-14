@@ -33,6 +33,7 @@ Axis to compute discrete difference(s) along.
 Defaults to `-1` (last axis).
 
 @export
+@family numpy ops
 @family ops
 @seealso
 + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/diff>

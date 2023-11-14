@@ -41,6 +41,7 @@ distributed training strategy. If `FALSE`, each replica uses its own
 local batch statistics.
 
 @export
+@family nn ops
 @family ops
 @seealso
 + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/moments>

@@ -10,6 +10,7 @@ The floor of the scalar `x` is the largest integer `i`, such that `i <= x`.
 Input tensor.
 
 @export
+@family numpy ops
 @family ops
 @seealso
 + <https:/keras.io/keras_core/api/ops/numpy#floor-function>

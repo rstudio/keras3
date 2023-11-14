@@ -39,6 +39,7 @@ inputs. If `data_format = "channels_last"`, `inputs` is of shape
 `(batch_size, channels, ...)`.
 
 @export
+@family nn ops
 @family ops
 @seealso
 + <https:/keras.io/keras_core/api/ops/nn#averagepool-function>

@@ -10,7 +10,7 @@ It is defined as: `softplus(x) = log(exp(x) + 1)`.
 Input tensor.
 
 @export
-@family activation functions
+@family activations
 @seealso
 + <https:/keras.io/api/layers/activations#softplus-function>
 + <https://www.tensorflow.org/api_docs/python/tf/keras/activations/softplus>

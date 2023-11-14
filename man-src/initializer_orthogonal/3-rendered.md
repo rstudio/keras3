@@ -38,6 +38,7 @@ An integer. Used to make the behavior of the initializer
 deterministic.
 
 @export
-@family initializer
+@family random initializers
+@family initializers
 @seealso
 + <https://www.tensorflow.org/api_docs/python/tf/keras/initializers/OrthogonalInitializer>

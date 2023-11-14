@@ -108,7 +108,20 @@ Usage with a loss with \code{from_logits=True}:
 \item \url{https://www.tensorflow.org/api_docs/python/tf/keras/metrics/Precision}
 }
 
-Other metric: 
+Other confusion metrics: 
+\code{\link{metric_auc}()},
+\code{\link{metric_false_negatives}()},
+\code{\link{metric_false_positives}()},
+\code{\link{metric_precision_at_recall}()},
+\code{\link{metric_recall_at_precision}()},
+\code{\link{metric_recall}()},
+\code{\link{metric_sensitivity_at_specificity}()},
+\code{\link{metric_specificity_at_sensitivity}()},
+\code{\link{metric_true_negatives}()},
+\code{\link{metric_true_positives}()}
+
+Other metrics: 
+\code{\link{custom_metric}()},
 \code{\link{metric_auc}()},
 \code{\link{metric_binary_accuracy}()},
 \code{\link{metric_binary_crossentropy}()},
@@ -151,4 +164,5 @@ Other metric:
 \code{\link{metric_true_negatives}()},
 \code{\link{metric_true_positives}()}
 }
-\concept{metric}
+\concept{confusion metrics}
+\concept{metrics}

@@ -29,6 +29,7 @@ A tensor, the values to be set at `indices`.
 Shape of the output tensor.
 
 @export
+@family core ops
 @family ops
 @seealso
 + <https:/keras.io/keras_core/api/ops/core#scatter-function>

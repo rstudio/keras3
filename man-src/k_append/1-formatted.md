@@ -40,6 +40,7 @@ Axis along which tensor `x2` is appended to tensor `x1`.
 If `None`, both tensors are flattened before use.
 
 @export
+@family numpy ops
 @family ops
 @seealso
 + <https:/keras.io/keras_core/api/ops/numpy#append-function>

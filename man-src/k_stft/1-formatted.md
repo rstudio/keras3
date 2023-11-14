@@ -46,6 +46,7 @@ centered at time `t * sequence_stride`. Otherwise, the t-th sequence
 begins at time `t * sequence_stride`. Defaults to `True`.
 
 @export
+@family math ops
 @family ops
 @seealso
 + <https:/keras.io/keras_core/api/ops/fft#stft-function>

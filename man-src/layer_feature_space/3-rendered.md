@@ -260,7 +260,10 @@ see description
 see description
 
 @export
+@family space feature preprocessing layers
+@family feature preprocessing layers
 @family preprocessing layers
+@family layers
 @seealso
 + <https:/keras.io/api/utils/feature_space#featurespace-class>
 + <https://www.tensorflow.org/api_docs/python/tf/keras/utils/FeatureSpace>

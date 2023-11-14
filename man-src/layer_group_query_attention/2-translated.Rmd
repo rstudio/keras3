@@ -97,6 +97,9 @@ Object to compose the layer with. A tensor, array, or sequential model.
 Passed on to the Python callable
 
 @export
+@family query grouped attention layers
+@family grouped attention layers
 @family attention layers
+@family layers
 @seealso
 + <https://www.tensorflow.org/api_docs/python/tf/keras/layers/GroupQueryAttention>

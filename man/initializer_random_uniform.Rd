@@ -43,7 +43,19 @@ layer <- layer_dense(units = 3, kernel_initializer = initializer)
 \item \url{https://www.tensorflow.org/api_docs/python/tf/keras/initializers/RandomUniform}
 }
 
-Other initializer: 
+Other random initializers: 
+\code{\link{initializer_glorot_normal}()},
+\code{\link{initializer_glorot_uniform}()},
+\code{\link{initializer_he_normal}()},
+\code{\link{initializer_he_uniform}()},
+\code{\link{initializer_lecun_normal}()},
+\code{\link{initializer_lecun_uniform}()},
+\code{\link{initializer_orthogonal}()},
+\code{\link{initializer_random_normal}()},
+\code{\link{initializer_truncated_normal}()},
+\code{\link{initializer_variance_scaling}()}
+
+Other initializers: 
 \code{\link{initializer_constant}()},
 \code{\link{initializer_glorot_normal}()},
 \code{\link{initializer_glorot_uniform}()},
@@ -59,4 +71,5 @@ Other initializer:
 \code{\link{initializer_variance_scaling}()},
 \code{\link{initializer_zeros}()}
 }
-\concept{initializer}
+\concept{initializers}
+\concept{random initializers}

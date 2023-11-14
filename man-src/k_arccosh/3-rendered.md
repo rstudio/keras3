@@ -20,6 +20,7 @@ Output tensor of same shape as x.
 Input tensor.
 
 @export
+@family numpy ops
 @family ops
 @seealso
 + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/arccosh>

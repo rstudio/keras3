@@ -23,6 +23,7 @@ if `None`.
 The axis along which to unpack.
 
 @export
+@family core ops
 @family ops
 @seealso
 + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/unstack>

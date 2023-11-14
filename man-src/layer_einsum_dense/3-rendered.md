@@ -123,7 +123,10 @@ Base layer keyword arguments, such as `name` and `dtype`.
 Object to compose the layer with. A tensor, array, or sequential model.
 
 @export
+@family dense einsum core layers
+@family einsum core layers
 @family core layers
+@family layers
 @seealso
 + <https://www.tensorflow.org/api_docs/python/tf/keras/layers/EinsumDense>
 

@@ -20,6 +20,7 @@ layer = Dense(3, kernel_initializer=initializer)
 Multiplicative factor to apply to the identity matrix.
 
 @export
-@family initializer
+@family constant initializers
+@family initializers
 @seealso
 + <https://www.tensorflow.org/api_docs/python/tf/keras/initializers/IdentityInitializer>

@@ -42,6 +42,7 @@ Boolean, whether to shuffle the data before splitting it.
 A random seed for shuffling.
 
 @export
+@family dataset utils
 @family utils
 @seealso
 + <https:/keras.io/api/utils/python_utils#splitdataset-function>

@@ -70,5 +70,7 @@ Backend module to use (if different from the default
 backend).
 
 @export
+@family image utils
+@family utils
 @seealso
 + <https://www.tensorflow.org/api_docs/python/tf/keras/preprocessing/image/smart_resize>

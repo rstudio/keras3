@@ -30,6 +30,8 @@ Generally, module_objects is provided by midlevel library
 implementers.
 
 @export
-@family utils
+@family registration object saving
+@family object saving
+@family saving
 @seealso
 + <https://www.tensorflow.org/api_docs/python/tf/keras/utils/get_registered_object>

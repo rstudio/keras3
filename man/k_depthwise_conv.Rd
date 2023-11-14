@@ -60,7 +60,35 @@ This ops supports 1D and 2D depthwise convolution.
 \item \url{https://www.tensorflow.org/api_docs/python/tf/keras/ops/depthwise_conv}
 }
 
+Other nn ops: 
+\code{\link{k_average_pool}()},
+\code{\link{k_binary_crossentropy}()},
+\code{\link{k_categorical_crossentropy}()},
+\code{\link{k_conv_transpose}()},
+\code{\link{k_conv}()},
+\code{\link{k_elu}()},
+\code{\link{k_gelu}()},
+\code{\link{k_hard_sigmoid}()},
+\code{\link{k_leaky_relu}()},
+\code{\link{k_log_sigmoid}()},
+\code{\link{k_log_softmax}()},
+\code{\link{k_max_pool}()},
+\code{\link{k_moments}()},
+\code{\link{k_multi_hot}()},
+\code{\link{k_one_hot}()},
+\code{\link{k_relu6}()},
+\code{\link{k_relu}()},
+\code{\link{k_selu}()},
+\code{\link{k_separable_conv}()},
+\code{\link{k_sigmoid}()},
+\code{\link{k_silu}()},
+\code{\link{k_softmax}()},
+\code{\link{k_softplus}()},
+\code{\link{k_softsign}()},
+\code{\link{k_sparse_categorical_crossentropy}()}
+
 Other ops: 
+\code{\link{get_source_inputs}()},
 \code{\link{k_abs}()},
 \code{\link{k_add}()},
 \code{\link{k_all}()},
@@ -260,4 +288,5 @@ Other ops:
 \code{\link{k_zeros_like}()},
 \code{\link{k_zeros}()}
 }
+\concept{nn ops}
 \concept{ops}

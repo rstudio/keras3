@@ -110,7 +110,10 @@ Passed on to the Python callable
 see description
 
 @export
+@family head multi attention layers
+@family multi attention layers
 @family attention layers
+@family layers
 @seealso
 + <https:/keras.io/api/layers/attention_layers/multi_head_attention#multiheadattention-class>
 + <https://www.tensorflow.org/api_docs/python/tf/keras/layers/MultiHeadAttention>

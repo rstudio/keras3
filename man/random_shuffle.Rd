@@ -28,4 +28,14 @@ Shuffle the elements of a tensor uniformly at random along an axis.
 \itemize{
 \item \url{https://www.tensorflow.org/api_docs/python/tf/keras/random/shuffle}
 }
+
+Other random: 
+\code{\link{random_categorical}()},
+\code{\link{random_dropout}()},
+\code{\link{random_integer}()},
+\code{\link{random_normal}()},
+\code{\link{random_seed_generator}()},
+\code{\link{random_truncated_normal}()},
+\code{\link{random_uniform}()}
 }
+\concept{random}

@@ -12,6 +12,7 @@ One shape dimension can be -1 in which case the value is
 inferred from the length of the array and remaining dimensions.
 
 @export
+@family numpy ops
 @family ops
 @seealso
 + <https:/keras.io/keras_core/api/ops/numpy#reshape-function>

@@ -42,6 +42,7 @@ The axis in the result to store the samples. Relevant only if
 start or stop are array-like. Defaults to `0`.
 
 @export
+@family numpy ops
 @family ops
 @seealso
 + <https:/keras.io/keras_core/api/ops/numpy#linspace-function>

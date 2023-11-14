@@ -4,6 +4,7 @@ Shorthand for `keras.ops.conjugate`.
 see description
 
 @export
+@family numpy ops
 @family ops
 @seealso
 + <https:/keras.io/keras_core/api/ops/numpy#conj-function>

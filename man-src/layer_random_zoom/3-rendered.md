@@ -99,7 +99,10 @@ Base layer keyword arguments, such as `name` and `dtype`.
 Object to compose the layer with. A tensor, array, or sequential model.
 
 @export
+@family zoom random preprocessing layers
+@family random preprocessing layers
 @family preprocessing layers
+@family layers
 @seealso
 + <https:/keras.io/api/layers/preprocessing_layers/image_augmentation/random_zoom#randomzoom-class>
 + <https://www.tensorflow.org/api_docs/python/tf/keras/layers/RandomZoom>

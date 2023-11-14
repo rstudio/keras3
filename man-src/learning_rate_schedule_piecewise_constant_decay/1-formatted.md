@@ -55,7 +55,11 @@ A string. Optional name of the operation. Defaults to
 `"PiecewiseConstant"`.
 
 @export
-@family learning_rate_schedule
+@family schedule rate learning schedules optimizers
+@family rate learning schedules optimizers
+@family learning schedules optimizers
+@family schedules optimizers
+@family optimizers
 @seealso
 + <https:/keras.io/api/optimizers/learning_rate_schedules/piecewise_constant_decay#piecewiseconstantdecay-class>
 + <https://www.tensorflow.org/api_docs/python/tf/keras/optimizers/schedules/PiecewiseConstantDecay>

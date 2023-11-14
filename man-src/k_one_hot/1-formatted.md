@@ -38,6 +38,7 @@ Axis along which the encoding is performed. Defaults to
 provided, it defaults to the default data type of the backend.
 
 @export
+@family nn ops
 @family ops
 @seealso
 + <https:/keras.io/keras_core/api/ops/nn#onehot-function>

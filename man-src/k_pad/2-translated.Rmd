@@ -36,6 +36,7 @@ One of `"constant"`, `"edge"`, `"linear_ramp"`,
 `"circular"`. Defaults to`"constant"`.
 
 @export
+@family numpy ops
 @family ops
 @seealso
 + <https:/keras.io/keras_core/api/ops/numpy#pad-function>

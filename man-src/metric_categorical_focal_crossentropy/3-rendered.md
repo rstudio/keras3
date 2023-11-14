@@ -51,6 +51,7 @@ Defaults to `-1`. The dimension along which the entropy is
 computed.
 
 @export
+@family losses
 @seealso
 + <https://www.tensorflow.org/api_docs/python/tf/keras/metrics/categorical_focal_crossentropy>
 

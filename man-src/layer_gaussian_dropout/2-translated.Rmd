@@ -26,7 +26,10 @@ Object to compose the layer with. A tensor, array, or sequential model.
 Passed on to the Python callable
 
 @export
+@family dropout gaussian regularization layers
+@family gaussian regularization layers
 @family regularization layers
+@family layers
 @seealso
 + <https:/keras.io/api/layers/regularization_layers/gaussian_dropout#gaussiandropout-class>
 + <https://www.tensorflow.org/api_docs/python/tf/keras/layers/GaussianDropout>

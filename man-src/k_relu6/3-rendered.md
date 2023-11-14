@@ -29,6 +29,7 @@ A tensor with the same shape as `x`.
 Input tensor.
 
 @export
+@family nn ops
 @family ops
 @seealso
 + <https:/keras.io/keras_core/api/ops/nn#relu6-function>

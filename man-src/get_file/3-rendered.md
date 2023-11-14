@@ -76,6 +76,7 @@ Location to store cached files, when `NULL` it
 defaults to `Sys.getenv("KERAS_HOME", '~/.keras/')`.
 
 @export
+@family file utils
 @family utils
 @seealso
 + <https:/keras.io/api/utils/python_utils#getfile-function>

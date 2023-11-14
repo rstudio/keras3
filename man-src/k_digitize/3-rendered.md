@@ -29,6 +29,7 @@ Array of bins. It has to be one-dimensional and monotonically
 increasing.
 
 @export
+@family numpy ops
 @family ops
 @seealso
 + <https:/keras.io/keras_core/api/ops/numpy#digitize-function>

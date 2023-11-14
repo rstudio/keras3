@@ -18,6 +18,7 @@ array is flattened before shifting, after which the original
 shape is restored.
 
 @export
+@family numpy ops
 @family ops
 @seealso
 + <https:/keras.io/keras_core/api/ops/numpy#roll-function>

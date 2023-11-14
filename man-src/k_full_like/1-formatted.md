@@ -13,6 +13,7 @@ Fill value.
 Overrides data type of the result.
 
 @export
+@family numpy ops
 @family ops
 @seealso
 + <https:/keras.io/keras_core/api/ops/numpy#fulllike-function>

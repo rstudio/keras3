@@ -30,7 +30,7 @@ model \%>\% fit(X_train, Y_train, callbacks = list(csv_logger))
 \item \url{https://www.tensorflow.org/api_docs/python/tf/keras/callbacks/CSVLogger}
 }
 
-Other callback: 
+Other callbacks: 
 \code{\link{callback_backup_and_restore}()},
 \code{\link{callback_early_stopping}()},
 \code{\link{callback_lambda}()},
@@ -42,4 +42,6 @@ Other callback:
 \code{\link{callback_tensorboard}()},
 \code{\link{callback_terminate_on_nan}()}
 }
-\concept{callback}
+\concept{callbacks}
+\concept{csv callbacks}
+\concept{logger csv callbacks}

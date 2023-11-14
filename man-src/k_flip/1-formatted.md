@@ -14,6 +14,7 @@ Axis or axes along which to flip the tensor. The default,
 `axis=None`, will flip over all of the axes of the input tensor.
 
 @export
+@family numpy ops
 @family ops
 @seealso
 + <https:/keras.io/keras_core/api/ops/numpy#flip-function>

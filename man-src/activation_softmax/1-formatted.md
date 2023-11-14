@@ -23,7 +23,7 @@ Input tensor.
 Integer, axis along which the softmax is applied.
 
 @export
-@family activation functions
+@family activations
 @seealso
 + <https:/keras.io/api/layers/activations#softmax-function>
 + <https://www.tensorflow.org/api_docs/python/tf/keras/activations/softmax>

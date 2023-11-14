@@ -31,6 +31,7 @@ A tensor. This function will try to access the `shape` attribute of
 the input tensor.
 
 @export
+@family core ops
 @family ops
 @seealso
 + <https:/keras.io/keras_core/api/ops/core#shape-function>

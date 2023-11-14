@@ -20,6 +20,7 @@ Destinations positions for each of the original axes.
 These must also be unique.
 
 @export
+@family numpy ops
 @family ops
 @seealso
 + <https:/keras.io/keras_core/api/ops/numpy#moveaxis-function>

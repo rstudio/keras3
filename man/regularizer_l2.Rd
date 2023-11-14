@@ -25,4 +25,10 @@ In this case, the default value used is \code{l2=0.01}.
 \item \url{https:/keras.io/api/layers/regularizers#l2-class}
 \item \url{https://www.tensorflow.org/api_docs/python/tf/keras/regularizers/L2}
 }
+
+Other regularizers: 
+\code{\link{regularizer_l1_l2}()},
+\code{\link{regularizer_l1}()},
+\code{\link{regularizer_orthogonal}()}
 }
+\concept{regularizers}

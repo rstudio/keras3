@@ -33,9 +33,9 @@ Also available via the shortcut function \code{keras.constraints.max_norm}.
 \item \url{https://www.tensorflow.org/api_docs/python/tf/keras/constraints/MaxNorm}
 }
 
-Other constraint: 
+Other constraints: 
 \code{\link{constraint_minmaxnorm}()},
 \code{\link{constraint_nonneg}()},
 \code{\link{constraint_unitnorm}()}
 }
-\concept{constraint}
+\concept{constraints}

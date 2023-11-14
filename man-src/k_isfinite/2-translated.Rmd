@@ -15,6 +15,7 @@ and imaginary parts are finite.
 Input tensor.
 
 @export
+@family numpy ops
 @family ops
 @seealso
 + <https:/keras.io/keras_core/api/ops/numpy#isfinite-function>

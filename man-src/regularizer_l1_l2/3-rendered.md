@@ -22,6 +22,7 @@ float, L1 regularization factor.
 float, L2 regularization factor.
 
 @export
+@family regularizers
 @seealso
 + <https:/keras.io/api/layers/regularizers#l1l2-class>
 + <https://www.tensorflow.org/api_docs/python/tf/keras/regularizers/L1L2>

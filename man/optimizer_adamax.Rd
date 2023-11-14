@@ -120,7 +120,13 @@ w = w - current_lr * m / (u + epsilon)
 \item \url{https://www.tensorflow.org/api_docs/python/tf/keras/optimizers/Adamax}
 }
 
-Other optimizer: 
+Other optimizers: 
+\code{\link{learning_rate_schedule_cosine_decay_restarts}()},
+\code{\link{learning_rate_schedule_cosine_decay}()},
+\code{\link{learning_rate_schedule_exponential_decay}()},
+\code{\link{learning_rate_schedule_inverse_time_decay}()},
+\code{\link{learning_rate_schedule_piecewise_constant_decay}()},
+\code{\link{learning_rate_schedule_polynomial_decay}()},
 \code{\link{optimizer_adadelta}()},
 \code{\link{optimizer_adafactor}()},
 \code{\link{optimizer_adagrad}()},
@@ -133,4 +139,5 @@ Other optimizer:
 \code{\link{optimizer_rmsprop}()},
 \code{\link{optimizer_sgd}()}
 }
-\concept{optimizer}
+\concept{adamax optimizers}
+\concept{optimizers}

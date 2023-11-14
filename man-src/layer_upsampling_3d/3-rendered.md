@@ -57,7 +57,10 @@ Object to compose the layer with. A tensor, array, or sequential model.
 Passed on to the Python callable
 
 @export
+@family sampling3d up reshaping layers
+@family up reshaping layers
 @family reshaping layers
+@family layers
 @seealso
 + <https:/keras.io/api/layers/reshaping_layers/up_sampling3d#upsampling3d-class>
 + <https://www.tensorflow.org/api_docs/python/tf/keras/layers/UpSampling3D>

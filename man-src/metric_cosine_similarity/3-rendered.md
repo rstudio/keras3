@@ -53,7 +53,8 @@ similarity is computed.
 Passed on to the Python callable
 
 @export
-@family metric
+@family regression metrics
+@family metrics
 @seealso
 + <https:/keras.io/api/metrics/regression_metrics#cosinesimilarity-class>
 + <https://www.tensorflow.org/api_docs/python/tf/keras/metrics/CosineSimilarity>

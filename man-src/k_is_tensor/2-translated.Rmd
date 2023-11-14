@@ -13,6 +13,7 @@ tensor would return `False` if your backend is PyTorch or JAX.
 A variable.
 
 @export
+@family core ops
 @family ops
 @seealso
 + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/is_tensor>

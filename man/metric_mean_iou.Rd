@@ -96,7 +96,14 @@ Usage with \code{compile()} API:
 \item \url{https://www.tensorflow.org/api_docs/python/tf/keras/metrics/MeanIoU}
 }
 
-Other metric: 
+Other iou metrics: 
+\code{\link{metric_binary_iou}()},
+\code{\link{metric_iou}()},
+\code{\link{metric_one_hot_iou}()},
+\code{\link{metric_one_hot_mean_iou}()}
+
+Other metrics: 
+\code{\link{custom_metric}()},
 \code{\link{metric_auc}()},
 \code{\link{metric_binary_accuracy}()},
 \code{\link{metric_binary_crossentropy}()},
@@ -139,4 +146,5 @@ Other metric:
 \code{\link{metric_true_negatives}()},
 \code{\link{metric_true_positives}()}
 }
-\concept{metric}
+\concept{iou metrics}
+\concept{metrics}

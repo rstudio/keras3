@@ -11,6 +11,7 @@ The ceil of the scalar `x` is the smallest integer `i`, such that
 Input tensor.
 
 @export
+@family numpy ops
 @family ops
 @seealso
 + <https:/keras.io/keras_core/api/ops/numpy#ceil-function>

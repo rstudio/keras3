@@ -7,6 +7,7 @@ Return the element-wise square of the input.
 Input tensor.
 
 @export
+@family numpy ops
 @family ops
 @seealso
 + <https:/keras.io/keras_core/api/ops/numpy#square-function>

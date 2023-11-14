@@ -36,7 +36,10 @@ Base layer keyword arguments, such as
 Object to compose the layer with. A tensor, array, or sequential model.
 
 @export
+@family flip random preprocessing layers
+@family random preprocessing layers
 @family preprocessing layers
+@family layers
 @seealso
 + <https:/keras.io/api/layers/preprocessing_layers/image_augmentation/random_flip#randomflip-class>
 + <https://www.tensorflow.org/api_docs/python/tf/keras/layers/RandomFlip>

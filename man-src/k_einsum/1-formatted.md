@@ -99,6 +99,7 @@ output form.
 The operands to compute the Einstein sum of.
 
 @export
+@family numpy ops
 @family ops
 @seealso
 + <https:/keras.io/keras_core/api/ops/numpy#einsum-function>

@@ -57,6 +57,7 @@ Cartesian (`"xy"`, default) or matrix (`"ij"`) indexing
 of output.
 
 @export
+@family numpy ops
 @family ops
 @seealso
 + <https:/keras.io/keras_core/api/ops/numpy#meshgrid-function>

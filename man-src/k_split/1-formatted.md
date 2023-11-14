@@ -25,6 +25,7 @@ If an integer, N, the tensor will be split into N
 Axis along which to split. Defaults to `0`.
 
 @export
+@family numpy ops
 @family ops
 @seealso
 + <https:/keras.io/keras_core/api/ops/numpy#split-function>

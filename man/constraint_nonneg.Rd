@@ -15,9 +15,9 @@ Constrains the weights to be non-negative.
 \item \url{https://www.tensorflow.org/api_docs/python/tf/keras/constraints/NonNeg}
 }
 
-Other constraint: 
+Other constraints: 
 \code{\link{constraint_maxnorm}()},
 \code{\link{constraint_minmaxnorm}()},
 \code{\link{constraint_unitnorm}()}
 }
-\concept{constraint}
+\concept{constraints}

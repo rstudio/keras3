@@ -65,7 +65,12 @@ loss = keras.losses.categorical_hinge(y_true, y_pred)
 \item \url{https://www.tensorflow.org/api_docs/python/tf/keras/metrics/CategoricalHinge}
 }
 
-Other metric: 
+Other hinge metrics: 
+\code{\link{metric_hinge}()},
+\code{\link{metric_squared_hinge}()}
+
+Other metrics: 
+\code{\link{custom_metric}()},
 \code{\link{metric_auc}()},
 \code{\link{metric_binary_accuracy}()},
 \code{\link{metric_binary_crossentropy}()},
@@ -108,4 +113,5 @@ Other metric:
 \code{\link{metric_true_negatives}()},
 \code{\link{metric_true_positives}()}
 }
-\concept{metric}
+\concept{hinge metrics}
+\concept{metrics}

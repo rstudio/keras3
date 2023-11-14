@@ -13,6 +13,7 @@ First axis.
 Second axis.
 
 @export
+@family numpy ops
 @family ops
 @seealso
 + <https:/keras.io/keras_core/api/ops/numpy#swapaxes-function>

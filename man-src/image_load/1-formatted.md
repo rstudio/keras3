@@ -39,6 +39,7 @@ size without aspect ratio distortion. The image is cropped in
 the center with target aspect ratio before resizing.
 
 @export
+@family image utils
 @family utils
 @seealso
 + <https:/keras.io/api/data_loading/image#loadimg-function>

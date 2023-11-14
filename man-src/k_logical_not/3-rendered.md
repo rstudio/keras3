@@ -10,6 +10,7 @@ Zeros are treated as `False` and non-zeros are treated as `True`.
 Input tensor.
 
 @export
+@family numpy ops
 @family ops
 @seealso
 + <https:/keras.io/keras_core/api/ops/numpy#logicalnot-function>

@@ -88,7 +88,8 @@ is used to determine each sample's most likely associated label.
 Passed on to the Python callable
 
 @export
-@family metric
+@family iou metrics
+@family metrics
 @seealso
 + <https:/keras.io/api/metrics/segmentation_metrics#meaniou-class>
 + <https://www.tensorflow.org/api_docs/python/tf/keras/metrics/MeanIoU>

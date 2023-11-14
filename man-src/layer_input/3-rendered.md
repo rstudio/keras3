@@ -57,6 +57,10 @@ than creating a new placeholder tensor.
 Shape, including the batch dim.
 
 @export
+@family layer input core layers
+@family input core layers
+@family core layers
+@family layers
 @seealso
 + <https://www.tensorflow.org/api_docs/python/tf/keras/layers/Input>
 

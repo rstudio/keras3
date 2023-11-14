@@ -7,6 +7,7 @@ Test element-wise for positive or negative infinity.
 Input tensor.
 
 @export
+@family numpy ops
 @family ops
 @seealso
 + <https:/keras.io/keras_core/api/ops/numpy#isinf-function>

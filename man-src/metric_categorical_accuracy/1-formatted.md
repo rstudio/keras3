@@ -60,7 +60,8 @@ Tensor of predicted targets.
 Passed on to the Python callable
 
 @export
-@family metric
+@family accuracy metrics
+@family metrics
 @seealso
 + <https:/keras.io/api/metrics/accuracy_metrics#categoricalaccuracy-class>
 + <https://www.tensorflow.org/api_docs/python/tf/keras/metrics/CategoricalAccuracy>

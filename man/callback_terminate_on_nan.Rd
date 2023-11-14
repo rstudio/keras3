@@ -15,7 +15,7 @@ Callback that terminates training when a NaN loss is encountered.
 \item \url{https://www.tensorflow.org/api_docs/python/tf/keras/callbacks/TerminateOnNaN}
 }
 
-Other callback: 
+Other callbacks: 
 \code{\link{callback_backup_and_restore}()},
 \code{\link{callback_csv_logger}()},
 \code{\link{callback_early_stopping}()},
@@ -27,4 +27,7 @@ Other callback:
 \code{\link{callback_remote_monitor}()},
 \code{\link{callback_tensorboard}()}
 }
-\concept{callback}
+\concept{callbacks}
+\concept{nan on terminate callbacks}
+\concept{on terminate callbacks}
+\concept{terminate callbacks}

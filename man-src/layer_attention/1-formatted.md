@@ -65,6 +65,7 @@ Passed on to the Python callable
 
 @export
 @family attention layers
+@family layers
 @seealso
 + <https:/keras.io/api/layers/attention_layers/attention#attention-class>
 + <https://www.tensorflow.org/api_docs/python/tf/keras/layers/Attention>

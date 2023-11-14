@@ -18,6 +18,7 @@ A tensor or variable.
 The target type.
 
 @export
+@family core ops
 @family ops
 @seealso
 + <https:/keras.io/keras_core/api/ops/core#cast-function>

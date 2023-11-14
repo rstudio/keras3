@@ -22,6 +22,7 @@ x-coordinate in radians `[0, pi]`.
 Input tensor.
 
 @export
+@family numpy ops
 @family ops
 @seealso
 + <https:/keras.io/keras_core/api/ops/numpy#arccos-function>

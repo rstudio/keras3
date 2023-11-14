@@ -26,7 +26,7 @@ assumed to be zero. The sigmoid function always returns a value between
 \item \url{https://www.tensorflow.org/api_docs/python/tf/keras/activations/sigmoid}
 }
 
-Other activation functions: 
+Other activations: 
 \code{\link{activation_elu}()},
 \code{\link{activation_exponential}()},
 \code{\link{activation_gelu}()},
@@ -44,4 +44,4 @@ Other activation functions:
 \code{\link{activation_softsign}()},
 \code{\link{activation_tanh}()}
 }
-\concept{activation functions}
+\concept{activations}

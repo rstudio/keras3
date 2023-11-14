@@ -51,7 +51,11 @@ Numeric. Lower bound on the learning rate.
 For forward/backward compatability.
 
 @export
-@family callback
+@family plateau on lr reduce callbacks
+@family on lr reduce callbacks
+@family lr reduce callbacks
+@family reduce callbacks
+@family callbacks
 @seealso
 + <https:/keras.io/api/callbacks/reduce_lr_on_plateau#reducelronplateau-class>
 + <https://www.tensorflow.org/api_docs/python/tf/keras/callbacks/ReduceLROnPlateau>

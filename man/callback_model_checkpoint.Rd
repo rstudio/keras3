@@ -58,9 +58,11 @@ quantity monitored will not be overwritten. If \code{filepath} doesn't
 contain formatting options like \code{{epoch}} then \code{filepath} will be
 overwritten by each new better model.}
 
-\item{save_weights_only}{if TRUE, then only the model's weights will be saved
+\item{save_weights_only}{<<<<<<< oursif True, then only the model's weights will be saved(model.save_weights(filepath)), else the full model is saved(model.save(filepath)).
+
+if TRUE, then only the model's weights will be saved
 (\code{model |> save_model_weights_hdf5(filepath)}), else the full model is saved
-(\code{model |> save_model_hdf5(filepath)}).}
+(\code{model |> save_model_hdf5(filepath)}).theirs}
 
 \item{mode}{one of {\code{"auto"}, \code{"min"}, \code{"max"}}. If \code{save_best_only = TRUE}, the
 decision to overwrite the current save file is made based on either
@@ -142,7 +144,7 @@ model$load_weights(checkpoint_filepath)
 \item \url{https://www.tensorflow.org/api_docs/python/tf/keras/callbacks/ModelCheckpoint}
 }
 
-Other callback: 
+Other callbacks: 
 \code{\link{callback_backup_and_restore}()},
 \code{\link{callback_csv_logger}()},
 \code{\link{callback_early_stopping}()},
@@ -154,4 +156,6 @@ Other callback:
 \code{\link{callback_tensorboard}()},
 \code{\link{callback_terminate_on_nan}()}
 }
-\concept{callback}
+\concept{callbacks}
+\concept{checkpoint model callbacks}
+\concept{model callbacks}

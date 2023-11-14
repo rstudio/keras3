@@ -104,6 +104,7 @@ Axis to be used as the second axis of the 2-D sub-arrays.
 Defaults to `2` (second axis).
 
 @export
+@family numpy ops
 @family ops
 @seealso
 + <https:/keras.io/keras_core/api/ops/numpy#diagonal-function>

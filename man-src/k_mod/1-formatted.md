@@ -10,6 +10,7 @@ First tensor.
 Second tensor.
 
 @export
+@family numpy ops
 @family ops
 @seealso
 + <https:/keras.io/keras_core/api/ops/numpy#mod-function>

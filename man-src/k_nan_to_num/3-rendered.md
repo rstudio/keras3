@@ -7,6 +7,7 @@ Replace NaN with zero and infinity with large finite numbers.
 Input data.
 
 @export
+@family numpy ops
 @family ops
 @seealso
 + <https:/keras.io/keras_core/api/ops/numpy#nantonum-function>

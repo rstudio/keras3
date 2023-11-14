@@ -25,4 +25,23 @@ Return the value of the fuzz factor used in numeric expressions.
 \item \url{https:/keras.io/keras_core/api/utils/config_utils#epsilon-function}
 \item \url{https://www.tensorflow.org/api_docs/python/tf/keras/config/epsilon}
 }
+
+Other config backend: 
+\code{\link{config_backend}()},
+\code{\link{config_floatx}()},
+\code{\link{config_image_data_format}()},
+\code{\link{config_set_epsilon}()},
+\code{\link{config_set_floatx}()},
+\code{\link{config_set_image_data_format}()}
+
+Other backend: 
+\code{\link{clear_session}()},
+\code{\link{config_backend}()},
+\code{\link{config_floatx}()},
+\code{\link{config_image_data_format}()},
+\code{\link{config_set_epsilon}()},
+\code{\link{config_set_floatx}()},
+\code{\link{config_set_image_data_format}()}
 }
+\concept{backend}
+\concept{config backend}

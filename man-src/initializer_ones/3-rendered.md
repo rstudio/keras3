@@ -19,7 +19,8 @@ layer <- layer_dense(units = 3, kernel_initializer = initializer)
 ```
 
 @export
-@family initializer
+@family constant initializers
+@family initializers
 @seealso
 + <https:/keras.io/api/layers/initializers#ones-class>
 + <https://www.tensorflow.org/api_docs/python/tf/keras/initializers/Ones>

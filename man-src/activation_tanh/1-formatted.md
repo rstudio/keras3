@@ -9,7 +9,7 @@ It is defined as:
 Input tensor.
 
 @export
-@family activation functions
+@family activations
 @seealso
 + <https:/keras.io/api/layers/activations#tanh-function>
 + <https://www.tensorflow.org/api_docs/python/tf/keras/activations/tanh>

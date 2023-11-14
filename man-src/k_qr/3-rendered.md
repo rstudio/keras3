@@ -37,6 +37,7 @@ A string specifying the mode of the QR decomposition.
 - 'complete': Returns the complete QR decomposition.
 
 @export
+@family math ops
 @family ops
 @seealso
 + <https:/keras.io/keras_core/api/ops/core#qr-function>

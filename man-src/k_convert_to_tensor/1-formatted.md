@@ -23,6 +23,7 @@ tensors to be densified. The default value of `None` means that
 sparse tensors are kept only if the backend supports them.
 
 @export
+@family core ops
 @family ops
 @seealso
 + <https:/keras.io/keras_core/api/ops/core#converttotensor-function>

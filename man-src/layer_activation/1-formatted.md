@@ -23,7 +23,9 @@ Base layer keyword arguments, such as `name` and `dtype`.
 Object to compose the layer with. A tensor, array, or sequential model.
 
 @export
-@family activations layers
+@family activation activation layers
+@family activation layers
+@family layers
 @seealso
 + <https:/keras.io/api/layers/core_layers/activation#activation-class>
 + <https://www.tensorflow.org/api_docs/python/tf/keras/layers/Activation>

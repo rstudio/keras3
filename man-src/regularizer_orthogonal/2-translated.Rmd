@@ -29,6 +29,7 @@ input orthogonal to each other. In columns mode, it seeks to make
 the columns of the input orthogonal to each other.
 
 @export
+@family regularizers
 @seealso
 + <https:/keras.io/api/layers/regularizers#orthogonalregularizer-class>
 + <https://www.tensorflow.org/api_docs/python/tf/keras/regularizers/OrthogonalRegularizer>

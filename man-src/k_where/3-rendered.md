@@ -14,6 +14,7 @@ Values from which to choose when `condition` is `True`.
 Values from which to choose when `condition` is `False`.
 
 @export
+@family numpy ops
 @family ops
 @seealso
 + <https:/keras.io/keras_core/api/ops/numpy#where-function>

@@ -16,5 +16,6 @@ see description
 see description
 
 @export
+@family random
 @seealso
 + <https://www.tensorflow.org/api_docs/python/tf/keras/random/dropout>

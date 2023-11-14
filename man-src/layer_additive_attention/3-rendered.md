@@ -59,7 +59,9 @@ Object to compose the layer with. A tensor, array, or sequential model.
 Passed on to the Python callable
 
 @export
+@family additive attention layers
 @family attention layers
+@family layers
 @seealso
 + <https:/keras.io/api/layers/attention_layers/additive_attention#additiveattention-class>
 + <https://www.tensorflow.org/api_docs/python/tf/keras/layers/AdditiveAttention>
