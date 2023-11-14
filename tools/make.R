@@ -535,7 +535,7 @@ Sys.glob(c("man-src/*/2-*.Rmd")) %>%
     x <- read_lines(f)
 
     xx <- x |>
-      str_replace_all( "([^ ]+)\\$shape\\b", "shape(\\1)") |>
+      # str_replace_all( "([^ ]+)\\$shape\\b", "shape(\\1)") |>
       str_trim("right")
 
     write_lines(xx, f)
