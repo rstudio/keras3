@@ -81,55 +81,11 @@ model.fit(data, labels, epochs=5)
 \item \url{https://www.tensorflow.org/api_docs/python/tf/keras/optimizers/schedules/InverseTimeDecay}
 }
 
-Other schedule rate learning schedules optimizers: 
+Other optimizer learing rate schedules: 
 \code{\link{learning_rate_schedule_cosine_decay_restarts}()},
 \code{\link{learning_rate_schedule_cosine_decay}()},
 \code{\link{learning_rate_schedule_exponential_decay}()},
 \code{\link{learning_rate_schedule_piecewise_constant_decay}()},
 \code{\link{learning_rate_schedule_polynomial_decay}()}
-
-Other rate learning schedules optimizers: 
-\code{\link{learning_rate_schedule_cosine_decay_restarts}()},
-\code{\link{learning_rate_schedule_cosine_decay}()},
-\code{\link{learning_rate_schedule_exponential_decay}()},
-\code{\link{learning_rate_schedule_piecewise_constant_decay}()},
-\code{\link{learning_rate_schedule_polynomial_decay}()}
-
-Other learning schedules optimizers: 
-\code{\link{learning_rate_schedule_cosine_decay_restarts}()},
-\code{\link{learning_rate_schedule_cosine_decay}()},
-\code{\link{learning_rate_schedule_exponential_decay}()},
-\code{\link{learning_rate_schedule_piecewise_constant_decay}()},
-\code{\link{learning_rate_schedule_polynomial_decay}()}
-
-Other schedules optimizers: 
-\code{\link{learning_rate_schedule_cosine_decay_restarts}()},
-\code{\link{learning_rate_schedule_cosine_decay}()},
-\code{\link{learning_rate_schedule_exponential_decay}()},
-\code{\link{learning_rate_schedule_piecewise_constant_decay}()},
-\code{\link{learning_rate_schedule_polynomial_decay}()}
-
-Other optimizers: 
-\code{\link{learning_rate_schedule_cosine_decay_restarts}()},
-\code{\link{learning_rate_schedule_cosine_decay}()},
-\code{\link{learning_rate_schedule_exponential_decay}()},
-\code{\link{learning_rate_schedule_piecewise_constant_decay}()},
-\code{\link{learning_rate_schedule_polynomial_decay}()},
-\code{\link{optimizer_adadelta}()},
-\code{\link{optimizer_adafactor}()},
-\code{\link{optimizer_adagrad}()},
-\code{\link{optimizer_adam_w}()},
-\code{\link{optimizer_adamax}()},
-\code{\link{optimizer_adam}()},
-\code{\link{optimizer_ftrl}()},
-\code{\link{optimizer_lion}()},
-\code{\link{optimizer_loss_scale}()},
-\code{\link{optimizer_nadam}()},
-\code{\link{optimizer_rmsprop}()},
-\code{\link{optimizer_sgd}()}
 }
-\concept{learning schedules optimizers}
-\concept{optimizers}
-\concept{rate learning schedules optimizers}
-\concept{schedule rate learning schedules optimizers}
-\concept{schedules optimizers}
+\concept{optimizer learing rate schedules}

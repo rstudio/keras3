@@ -699,16 +699,15 @@ make_roxygen_tags <- function(endpoint, py_obj = py_eval(endpoint), type) {
       })
     } %>%
     setdiff(c("numpy")) %>%
-    map_chr(\(x) {
-      switch(x,
-             # "accuracy_metrics metrics" = "accuracy metrics"
-             x)
-    }) %>%
+    remap_families() %>%
     unique() %>%
     rev()
   # } %error% browser()
 
   out$family %<>% intersect(.keeper_families)
+  if(endpoint |> startsWith('keras.optimizers.schedules.')) {
+    out$family %<>% setdiff("optimizers")
+  }
 
   links <- c(get_keras_doc_link(endpoint),
              get_tf_doc_link(endpoint))
@@ -717,19 +716,66 @@ make_roxygen_tags <- function(endpoint, py_obj = py_eval(endpoint), type) {
   out
 }
 
+remap_families <- function(x) map_chr(x, \(autogend_fam) {
+  switch(autogend_fam,
+         "schedules optimizers" =,
+         "learning schedules optimizers" =,
+         "rate learning schedules optimizers" =,
+         "schedule rate learning schedules optimizers" =,
+         "rate learning schedules optimizers" = "optimizer learing rate schedules",
+         autogend_fam)
+})
+
 .keeper_families <-
-c("accuracy metrics", "activation layers", "activations", "attention layers",
-  "backend", "callbacks", "config backend", "confusion metrics",
-  "constant initializers", "constraints", "convolutional layers",
-  "core layers", "core ops", "global pooling layers", "image ops",
-  "image utils", "initializers", "iou metrics", "layers", "learning schedules optimizers",
-  "losses", "math ops", "merging layers", "metrics", "nn ops",
-  "normalization layers", "numpy ops", "ops", "optimizers", "pooling layers",
-  "preprocessing layers", "probabilistic metrics", "random", "random initializers",
-  "random preprocessing layers", "rate learning schedules optimizers",
-  "regression metrics", "regularization layers", "regularizers",
-  "reshaping layers", "rnn layers", "saving", "schedule rate learning schedules optimizers",
-  "schedules optimizers", "utils")
+  c(
+    "accuracy metrics",
+    "activation layers",
+    "activations",
+    "attention layers",
+    "backend",
+    "callbacks",
+    "config backend",
+    "confusion metrics",
+    "constant initializers",
+    "constraints",
+    "convolutional layers",
+    "core layers",
+    "core ops",
+    "global pooling layers",
+    "image ops",
+    "image utils",
+    "initializers",
+    "iou metrics",
+    "layers",
+    "losses",
+    "math ops",
+    "merging layers",
+    "metrics",
+    "nn ops",
+    "normalization layers",
+    "numpy ops",
+    "ops",
+    "optimizers",
+    "pooling layers",
+    "preprocessing layers",
+    "probabilistic metrics",
+    "random",
+    "random initializers",
+    "random preprocessing layers",
+
+    "schedules optimizers",
+    "learning schedules optimizers",
+    "rate learning schedules optimizers",
+    "schedule rate learning schedules optimizers",
+
+    "regression metrics",
+    "regularization layers",
+    "regularizers",
+    "reshaping layers",
+    "rnn layers",
+    "saving",
+    "utils"
+  ) |> remap_families() |> unique()
 
 
 get_tf_doc_link <- function(endpoint) {
