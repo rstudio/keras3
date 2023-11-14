@@ -1501,7 +1501,6 @@ mk_export <- memoise(.mk_export <- function(endpoint, quiet = FALSE) {
       for(section in setdiff(names(ep2$doc), "title")) {
 
         if (endpoint |> startsWith("keras.metrics.")) {
-          print(section)
           if (section == "examples") next
           if (section == "returns") next
         }
