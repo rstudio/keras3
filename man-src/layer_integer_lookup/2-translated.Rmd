@@ -89,8 +89,8 @@ a deterministic fashion across the set.
 vocab <- c(12, 36, 1138, 42) |> as.integer()
 data <- k_array(rbind(c(12, 1138, 42),
                       c(37, 1000, 36)))  # Note OOV tokens
-out <- data |> 
-  layer_integer_lookup(vocabulary = vocab, 
+out <- data |>
+  layer_integer_lookup(vocabulary = vocab,
                        num_oov_indices = 2)
 out
 ```
@@ -108,7 +108,7 @@ Configure the layer with `output_mode='one_hot'`. Note that the first
 ```{r}
 vocab <- c(12, 36, 1138, 42) |> as.integer()
 data <- k_array(c(12, 36, 1138, 42, 7), 'int32')  # Note OOV tokens
-layer <- layer_integer_lookup(vocabulary = vocab, 
+layer <- layer_integer_lookup(vocabulary = vocab,
                               output_mode = 'one_hot')
 layer(data)
 ```

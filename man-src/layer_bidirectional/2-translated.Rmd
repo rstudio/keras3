@@ -32,7 +32,7 @@ model |> compile(loss = 'categorical_crossentropy',
 
 # With custom backward layer
 forward_layer <- layer_lstm(units = 10, return_sequences = TRUE)
-backward_layer <- layer_lstm(units = 10, return_sequences = TRUE, 
+backward_layer <- layer_lstm(units = 10, return_sequences = TRUE,
                              go_backwards = TRUE, activation = 'relu')
 
 model <- keras_model_sequential(input_shape = c(5, 10)) |>

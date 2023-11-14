@@ -7,7 +7,7 @@ Unpacks the given dimension of a rank-R tensor into rank-(R-1) tensors.
 
 # Examples
 ```{r}
-x <- k_array(rbind(c(1, 2), 
+x <- k_array(rbind(c(1, 2),
                    c(3, 4)))
 k_unstack(x, axis=1)
 k_unstack(x, axis=2)
@@ -15,7 +15,7 @@ k_unstack(x, axis=2)
 
 
 ```{r}
-all.equal(k_unstack(x), 
+all.equal(k_unstack(x),
           k_unstack(x, axis = 1))
 all.equal(k_unstack(x, axis = -1),
           k_unstack(x, axis = 2))

@@ -15,7 +15,7 @@ loop_vars <- list(i)
 cond <- function(i) i < 10L
 
 # body must return same shape as loop_vars
-body <- function(i) list(i + 1L) 
+body <- function(i) list(i + 1L)
 
 k_while_loop(cond, body, loop_vars)
 ```

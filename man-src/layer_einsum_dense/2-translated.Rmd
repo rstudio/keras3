@@ -16,8 +16,8 @@ einsum operations. This example is equivalent to
 ```{r}
 input <- layer_input(shape = c(32))
 output <- input |>
-  layer_einsum_dense("ab,bc->ac", 
-                     output_shape = 64, 
+  layer_einsum_dense("ab,bc->ac",
+                     output_shape = 64,
                      bias_axes = "c")
 output # shape: (NULL, 64)
 ```

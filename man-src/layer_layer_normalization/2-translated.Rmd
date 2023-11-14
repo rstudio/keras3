@@ -54,7 +54,7 @@ normalized across. For example, Group Normalization
 ([Wu et al. 2018](https://arxiv.org/abs/1803.08494)) with group size of 1
 corresponds to a `layer_layer_normalization()` that normalizes across height, width,
 and channel and has `gamma` and `beta` span only the channel dimension.
-So, this `layer_layer_normalization()` implementation will not match a 
+So, this `layer_layer_normalization()` implementation will not match a
 `layer_group_normalization()` layer with group size set to 1.
 
 # Reference

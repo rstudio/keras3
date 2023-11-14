@@ -12,8 +12,8 @@ dissimilarity between the target and output probabilities or logits.
 # Examples
 ```{r}
 target <- k_array(c(0, 1, 2), dtype="int32")
-output <- k_array(rbind(c(0.9, 0.05, 0.05), 
-                        c(0.1, 0.8,  0.1), 
+output <- k_array(rbind(c(0.9, 0.05, 0.05),
+                        c(0.1, 0.8,  0.1),
                         c(0.2, 0.3,  0.5)))
 k_sparse_categorical_crossentropy(target, output)
 ```
