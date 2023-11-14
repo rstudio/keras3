@@ -15,10 +15,10 @@ metric_binary_iou(
 \arguments{
 \item{...}{Passed on to the Python callable}
 
-\item{target_class_ids}{A tuple or list of target class ids for which the
-metric is returned. Options are \verb{[0]}, \verb{[1]}, or \verb{[0, 1]}. With
-\verb{[0]} (or \verb{[1]}), the IoU metric for class 0 (or class 1,
-respectively) is returned. With \verb{[0, 1]}, the mean of IoUs for the
+\item{target_class_ids}{A list or list of target class ids for which the
+metric is returned. Options are \code{0}, \code{1}, or \code{c(0, 1)}. With
+\code{0} (or \code{1}), the IoU metric for class 0 (or class 1,
+respectively) is returned. With \code{c(0, 1)}, the mean of IoUs for the
 two classes is returned.}
 
 \item{threshold}{A threshold that applies to the prediction logits to convert
@@ -32,7 +32,7 @@ or predicted class 1 if the logit is above \code{threshold}.}
 \description{
 Formula:
 
-\if{html}{\out{<div class="sourceCode python">}}\preformatted{iou = true_positives / (true_positives + false_positives + false_negatives)
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{iou <- true_positives / (true_positives + false_positives + false_negatives)
 }\if{html}{\out{</div>}}
 
 Intersection-Over-Union is a common evaluation metric for semantic image
@@ -41,7 +41,7 @@ segmentation.
 To compute IoUs, the predictions are accumulated in a confusion matrix,
 weighted by \code{sample_weight} and the metric is then calculated from it.
 
-If \code{sample_weight} is \code{None}, weights default to 1.
+If \code{sample_weight} is \code{NULL}, weights default to 1.
 Use \code{sample_weight} of 0 to mask values.
 
 This class can be used to compute IoUs for a binary classification task
@@ -60,33 +60,32 @@ with \code{threshold=0}, this metric has the same behavior as \code{IoU}.
 \section{Examples}{
 Standalone usage:
 
-\if{html}{\out{<div class="sourceCode python">}}\preformatted{m = keras.metrics.BinaryIoU(target_class_ids=[0, 1], threshold=0.3)
-m.update_state([0, 1, 0, 1], [0.1, 0.2, 0.4, 0.7])
-m.result()
-# 0.33333334
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{m <- metric_binary_iou(target_class_ids=c(0L, 1L), threshold = 0.3)
+m$update_state(c(0, 1, 0, 1), c(0.1, 0.2, 0.4, 0.7))
+m$result()
 }\if{html}{\out{</div>}}
 
-\if{html}{\out{<div class="sourceCode python">}}\preformatted{m.reset_state()
-m.update_state([0, 1, 0, 1], [0.1, 0.2, 0.4, 0.7],
-               sample_weight=[0.2, 0.3, 0.4, 0.1])
-# cm = [[0.2, 0.4],
-#        [0.3, 0.1]]
-# sum_row = [0.6, 0.4], sum_col = [0.5, 0.5],
-# true_positives = [0.2, 0.1]
-# iou = [0.222, 0.125]
-m.result()
-# 0.17361112
+\if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor(0.33333334, shape=(), dtype=float32)
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{m$reset_state()
+m$update_state(c(0, 1, 0, 1), c(0.1, 0.2, 0.4, 0.7),
+               sample_weight = c(0.2, 0.3, 0.4, 0.1))
+m$result()
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor(0.17361109, shape=(), dtype=float32)
 }\if{html}{\out{</div>}}
 
 Usage with \code{compile()} API:
 
-\if{html}{\out{<div class="sourceCode python">}}\preformatted{model.compile(
-    optimizer='sgd',
-    loss='mse',
-    metrics=[keras.metrics.BinaryIoU(
-        target_class_ids=[0],
-        threshold=0.5
-    )]
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{model \%>\% compile(
+    optimizer = 'sgd',
+    loss = 'mse',
+    metrics = list(metric_binary_iou(
+        target_class_ids = 0L,
+        threshold = 0.5
+    ))
 )
 }\if{html}{\out{</div>}}
 }
