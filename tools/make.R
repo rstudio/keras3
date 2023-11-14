@@ -321,9 +321,8 @@ endpoints %<>% setdiff(c %(% {
   "keras.metrics.Metric"           # only for subclassing
   "keras.optimizers.schedules.LearningRateSchedule"  # only for subclassing
 
-  "keras.utils.PyDataset"
-  "keras.utils.Sequence"           # parallel processing in R no possible this way
-  # tfdatasets is ~100x better anyway.
+  "keras.utils.PyDataset"      # parallel processing in R not possible this way
+  "keras.utils.Sequence"       # tfdatasets is ~100x better anyway.
 
   "keras.utils.plot_model"        # S3 method plot()
 
@@ -331,12 +330,13 @@ endpoints %<>% setdiff(c %(% {
   "keras.utils.custom_object_scope"  # need custom work to resolve py_names -
   # manually wrapped to `with_custom_object_scope()`
 
-  "keras.metrics.Accuracy"         # weird, only class handle, no fn handle - weird alias
+  "keras.metrics.Accuracy"         # weird,
+  # only class handle, no fn handle - weird alias
   # for binary_accuracy, but without any threshold casting.
   # kind of confusing - the keras.metrices.<type>*_accuracy
   # endpoints are much preferable.
 
-  "keras.utils.Progbar"           # needs thinking
+  "keras.utils.Progbar"            # needs thinking
   "keras.layers.Wrapper"           # needs thinking
   "keras.layers.InputLayer"        # use Input instead
   "keras.layers.InputSpec"         # ??
@@ -346,7 +346,7 @@ endpoints %<>% setdiff(c %(% {
 
   "keras.optimizers.LegacyOptimizerWarning"
 
-  "keras.ops.absolute" # alias  dup of abs.
+  "keras.ops.absolute" # alias dup of abs.
 })
 
 

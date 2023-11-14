@@ -1516,6 +1516,7 @@ mk_export <- memoise(.mk_export <- function(endpoint, quiet = FALSE) {
   roxygen <- dump_roxygen(doc, params, tags)
   dump <- dump_keras_export(roxygen, r_name, r_fn)
 
+  rm(quiet)
   as.list(environment())
 })
 
