@@ -3,25 +3,31 @@ Computes F-1 Score.
 @description
 Formula:
 
-```python
-f1_score = 2 * (precision * recall) / (precision + recall)
+
+```r
+f1_score <- 2 * (precision * recall) / (precision + recall)
 ```
 This is the harmonic mean of precision and recall.
 Its output range is `[0, 1]`. It works for both multi-class
 and multi-label classification.
 
 # Examples
-```python
-metric = keras.metrics.F1Score(threshold=0.5)
-y_true = np.array([[1, 1, 1],
-                   [1, 0, 0],
-                   [1, 1, 0]], np.int32)
-y_pred = np.array([[0.2, 0.6, 0.7],
-                   [0.2, 0.6, 0.6],
-                   [0.6, 0.8, 0.0]], np.float32)
-metric.update_state(y_true, y_pred)
-result = metric.result()
-# array([0.5      , 0.8      , 0.6666667], dtype=float32)
+
+```r
+metric <- metric_f1_score(threshold = 0.5)
+y_true <- rbind(c(1, 1, 1),
+                c(1, 0, 0),
+                c(1, 1, 0))
+y_pred <- rbind(c(0.2, 0.6, 0.7),
+                c(0.2, 0.6, 0.6),
+                c(0.6, 0.8, 0.0))
+metric$update_state(y_true, y_pred)
+result <- metric$result()
+result
+```
+
+```
+## tf.Tensor([0.49999997 0.79999995 0.66666657], shape=(3), dtype=float32)
 ```
 
 @returns
@@ -29,9 +35,9 @@ F-1 Score: float.
 
 @param average
 Type of averaging to be performed on data.
-Acceptable values are `None`, `"micro"`, `"macro"`
-and `"weighted"`. Defaults to `None`.
-If `None`, no averaging is performed and `result()` will return
+Acceptable values are `NULL`, `"micro"`, `"macro"`
+and `"weighted"`. Defaults to `NULL`.
+If `NULL`, no averaging is performed and `result()` will return
 the score for each class.
 If `"micro"`, compute metrics globally by counting the total
 true positives, false negatives and false positives.
@@ -47,7 +53,7 @@ It can result in an score that is not between precision and recall.
 @param threshold
 Elements of `y_pred` greater than `threshold` are
 converted to be 1, and the rest 0. If `threshold` is
-`None`, the argmax of `y_pred` is converted to 1, and the rest to 0.
+`NULL`, the argmax of `y_pred` is converted to 1, and the rest to 0.
 
 @param name
 Optional. String name of the metric instance.
@@ -64,3 +70,4 @@ Passed on to the Python callable
 @family metrics
 @seealso
 + <https://www.tensorflow.org/api_docs/python/tf/keras/metrics/F1Score>
+

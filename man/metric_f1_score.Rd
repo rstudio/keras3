@@ -16,9 +16,9 @@ metric_f1_score(
 \item{...}{Passed on to the Python callable}
 
 \item{average}{Type of averaging to be performed on data.
-Acceptable values are \code{None}, \code{"micro"}, \code{"macro"}
-and \code{"weighted"}. Defaults to \code{None}.
-If \code{None}, no averaging is performed and \code{result()} will return
+Acceptable values are \code{NULL}, \code{"micro"}, \code{"macro"}
+and \code{"weighted"}. Defaults to \code{NULL}.
+If \code{NULL}, no averaging is performed and \code{result()} will return
 the score for each class.
 If \code{"micro"}, compute metrics globally by counting the total
 true positives, false negatives and false positives.
@@ -33,7 +33,7 @@ It can result in an score that is not between precision and recall.}
 
 \item{threshold}{Elements of \code{y_pred} greater than \code{threshold} are
 converted to be 1, and the rest 0. If \code{threshold} is
-\code{None}, the argmax of \code{y_pred} is converted to 1, and the rest to 0.}
+\code{NULL}, the argmax of \code{y_pred} is converted to 1, and the rest to 0.}
 
 \item{name}{Optional. String name of the metric instance.}
 
@@ -45,7 +45,7 @@ F-1 Score: float.
 \description{
 Formula:
 
-\if{html}{\out{<div class="sourceCode python">}}\preformatted{f1_score = 2 * (precision * recall) / (precision + recall)
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{f1_score <- 2 * (precision * recall) / (precision + recall)
 }\if{html}{\out{</div>}}
 
 This is the harmonic mean of precision and recall.
@@ -53,16 +53,19 @@ Its output range is \verb{[0, 1]}. It works for both multi-class
 and multi-label classification.
 }
 \section{Examples}{
-\if{html}{\out{<div class="sourceCode python">}}\preformatted{metric = keras.metrics.F1Score(threshold=0.5)
-y_true = np.array([[1, 1, 1],
-                   [1, 0, 0],
-                   [1, 1, 0]], np.int32)
-y_pred = np.array([[0.2, 0.6, 0.7],
-                   [0.2, 0.6, 0.6],
-                   [0.6, 0.8, 0.0]], np.float32)
-metric.update_state(y_true, y_pred)
-result = metric.result()
-# array([0.5      , 0.8      , 0.6666667], dtype=float32)
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{metric <- metric_f1_score(threshold = 0.5)
+y_true <- rbind(c(1, 1, 1),
+                c(1, 0, 0),
+                c(1, 1, 0))
+y_pred <- rbind(c(0.2, 0.6, 0.7),
+                c(0.2, 0.6, 0.6),
+                c(0.6, 0.8, 0.0))
+metric$update_state(y_true, y_pred)
+result <- metric$result()
+result
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor([0.49999997 0.79999995 0.66666657], shape=(3), dtype=float32)
 }\if{html}{\out{</div>}}
 }
 
