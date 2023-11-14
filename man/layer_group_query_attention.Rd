@@ -220,6 +220,4 @@ Other layers:
 \code{\link{layer_zero_padding_3d}()}
 }
 \concept{attention layers}
-\concept{grouped attention layers}
 \concept{layers}
-\concept{query grouped attention layers}

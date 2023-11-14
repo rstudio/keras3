@@ -40,8 +40,6 @@ Initial seed for the random number generator
 datatype (e.g., `"float32"`).
 
 @export
-@family dropout spatial regularization layers
-@family spatial regularization layers
 @family regularization layers
 @family layers
 @seealso

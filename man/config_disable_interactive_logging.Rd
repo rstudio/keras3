@@ -16,10 +16,6 @@ way, such as running a training or inference job on a server.
 \item \url{https://www.tensorflow.org/api_docs/python/tf/keras/config/disable_interactive_logging}
 }
 
-Other io utils: 
-\code{\link{config_enable_interactive_logging}()},
-\code{\link{config_is_interactive_logging_enabled}()}
-
 Other utils: 
 \code{\link{audio_dataset_from_directory}()},
 \code{\link{config_disable_traceback_filtering}()},
@@ -44,5 +40,4 @@ Other utils:
 \code{\link{timeseries_dataset_from_array}()},
 \code{\link{to_categorical}()}
 }
-\concept{io utils}
 \concept{utils}

@@ -175,6 +175,4 @@ Other layers:
 \code{\link{layer_zero_padding_3d}()}
 }
 \concept{core layers}
-\concept{lambda core layers}
-\concept{layer lambda core layers}
 \concept{layers}

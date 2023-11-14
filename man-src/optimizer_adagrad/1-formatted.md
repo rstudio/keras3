@@ -85,7 +85,6 @@ automatically set a loss scale factor.
 Passed on to the Python callable
 
 @export
-@family adagrad optimizers
 @family optimizers
 @seealso
 + <https:/keras.io/api/optimizers/adagrad#adagrad-class>

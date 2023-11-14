@@ -71,10 +71,6 @@ y$shape
 \item \url{https://www.tensorflow.org/api_docs/python/tf/keras/layers/GlobalMaxPooling3D}
 }
 
-Other max global pooling layers: 
-\code{\link{layer_global_max_pooling_1d}()},
-\code{\link{layer_global_max_pooling_2d}()}
-
 Other global pooling layers: 
 \code{\link{layer_global_average_pooling_1d}()},
 \code{\link{layer_global_average_pooling_2d}()},
@@ -202,6 +198,4 @@ Other layers:
 }
 \concept{global pooling layers}
 \concept{layers}
-\concept{max global pooling layers}
 \concept{pooling layers}
-\concept{pooling3d max global pooling layers}

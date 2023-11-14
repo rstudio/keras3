@@ -385,5 +385,3 @@ Other layers:
 }
 \concept{layers}
 \concept{preprocessing layers}
-\concept{text preprocessing layers}
-\concept{vectorization text preprocessing layers}

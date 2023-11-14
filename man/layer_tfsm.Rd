@@ -68,5 +68,3 @@ to the \code{layer_tfsm} via the \code{call_training_endpoint} argument.
 \item \url{https://www.tensorflow.org/api_docs/python/tf/keras/layers/TFSMLayer}
 }
 }
-\concept{export}
-\concept{lib export}

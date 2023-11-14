@@ -90,7 +90,6 @@ automatically set a loss scale factor.
 Passed on to the Python callable
 
 @export
-@family nadam optimizers
 @family optimizers
 @seealso
 + <https:/keras.io/api/optimizers/Nadam#nadam-class>

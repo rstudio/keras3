@@ -21,8 +21,6 @@ Boolean. `TRUE`: append if file exists (useful for continuing
 training). `FALSE`: overwrite existing file.
 
 @export
-@family logger csv callbacks
-@family csv callbacks
 @family callbacks
 @seealso
 + <https:/keras.io/api/callbacks/csv_logger#csvlogger-class>

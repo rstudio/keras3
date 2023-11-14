@@ -163,4 +163,3 @@ Other layers:
 }
 \concept{activation layers}
 \concept{layers}
-\concept{softmax activation layers}

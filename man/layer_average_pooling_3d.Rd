@@ -91,10 +91,6 @@ outputs # Shape: (batch_size, 10, 10, 10, 3)
 \item \url{https://www.tensorflow.org/api_docs/python/tf/keras/layers/AveragePooling3D}
 }
 
-Other average pooling layers: 
-\code{\link{layer_average_pooling_1d}()},
-\code{\link{layer_average_pooling_2d}()}
-
 Other pooling layers: 
 \code{\link{layer_average_pooling_1d}()},
 \code{\link{layer_average_pooling_2d}()},
@@ -213,7 +209,5 @@ Other layers:
 \code{\link{layer_zero_padding_2d}()},
 \code{\link{layer_zero_padding_3d}()}
 }
-\concept{average pooling layers}
 \concept{layers}
 \concept{pooling layers}
-\concept{pooling3d average pooling layers}

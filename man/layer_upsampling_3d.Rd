@@ -67,10 +67,6 @@ y$shape
 \item \url{https://www.tensorflow.org/api_docs/python/tf/keras/layers/UpSampling3D}
 }
 
-Other up reshaping layers: 
-\code{\link{layer_upsampling_1d}()},
-\code{\link{layer_upsampling_2d}()}
-
 Other reshaping layers: 
 \code{\link{layer_cropping_1d}()},
 \code{\link{layer_cropping_2d}()},
@@ -192,5 +188,3 @@ Other layers:
 }
 \concept{layers}
 \concept{reshaping layers}
-\concept{sampling3d up reshaping layers}
-\concept{up reshaping layers}

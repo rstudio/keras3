@@ -33,8 +33,6 @@ Base layer keyword arguments, such as
 Object to compose the layer with. A tensor, array, or sequential model.
 
 @export
-@family relu leaky activation layers
-@family leaky activation layers
 @family activation layers
 @family layers
 @seealso

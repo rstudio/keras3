@@ -157,4 +157,3 @@ Other layers:
 }
 \concept{layers}
 \concept{merging layers}
-\concept{multiply merging layers}

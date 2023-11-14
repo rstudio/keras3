@@ -152,5 +152,3 @@ Other layers:
 }
 \concept{activation layers}
 \concept{layers}
-\concept{leaky activation layers}
-\concept{relu leaky activation layers}

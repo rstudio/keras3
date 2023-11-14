@@ -36,24 +36,4 @@ sample_weight is None
 \itemize{
 \item \url{https://www.tensorflow.org/api_docs/python/tf/keras/utils/unpack_x_y_sample_weight}
 }
-
-Other util adapter adapter data trainers: 
-\code{\link{pack_x_y_sample_weight}()}
-
-Other adapter adapter data trainers: 
-\code{\link{pack_x_y_sample_weight}()}
-
-Other adapter data trainers: 
-\code{\link{pack_x_y_sample_weight}()}
-
-Other data trainers: 
-\code{\link{pack_x_y_sample_weight}()}
-
-Other trainers: 
-\code{\link{pack_x_y_sample_weight}()}
 }
-\concept{adapter adapter data trainers}
-\concept{adapter data trainers}
-\concept{data trainers}
-\concept{trainers}
-\concept{util adapter adapter data trainers}

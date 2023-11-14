@@ -47,7 +47,6 @@ Standard layer keyword arguments.
 layers to combine
 
 @export
-@family concatenate merging layers
 @family merging layers
 @family layers
 @seealso

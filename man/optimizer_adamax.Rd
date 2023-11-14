@@ -139,5 +139,4 @@ Other optimizers:
 \code{\link{optimizer_rmsprop}()},
 \code{\link{optimizer_sgd}()}
 }
-\concept{adamax optimizers}
 \concept{optimizers}

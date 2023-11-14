@@ -76,7 +76,3 @@ Other callbacks:
 \code{\link{callback_terminate_on_nan}()}
 }
 \concept{callbacks}
-\concept{lr reduce callbacks}
-\concept{on lr reduce callbacks}
-\concept{plateau on lr reduce callbacks}
-\concept{reduce callbacks}

@@ -54,7 +54,6 @@ Object to compose the layer with. A tensor, array, or sequential model.
 Passed on to the Python callable
 
 @export
-@family cropping2d reshaping layers
 @family reshaping layers
 @family layers
 @seealso

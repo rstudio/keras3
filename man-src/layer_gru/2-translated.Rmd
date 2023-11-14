@@ -170,7 +170,6 @@ Object to compose the layer with. A tensor, array, or sequential model.
 Passed on to the Python callable
 
 @export
-@family gru rnn layers
 @family rnn layers
 @family layers
 @seealso

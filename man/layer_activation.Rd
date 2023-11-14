@@ -159,6 +159,5 @@ Other layers:
 \code{\link{layer_zero_padding_2d}()},
 \code{\link{layer_zero_padding_3d}()}
 }
-\concept{activation activation layers}
 \concept{activation layers}
 \concept{layers}

@@ -225,8 +225,6 @@ String, name for the object
 Passed on to the Python callable
 
 @export
-@family vectorization text preprocessing layers
-@family text preprocessing layers
 @family preprocessing layers
 @family layers
 @seealso

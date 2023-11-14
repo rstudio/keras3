@@ -245,5 +245,4 @@ Other layers:
 \code{\link{layer_zero_padding_3d}()}
 }
 \concept{layers}
-\concept{normalization preprocessing layers}
 \concept{preprocessing layers}

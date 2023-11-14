@@ -55,6 +55,4 @@ Other random:
 \code{\link{random_truncated_normal}()},
 \code{\link{random_uniform}()}
 }
-\concept{generator seed random}
 \concept{random}
-\concept{seed random}

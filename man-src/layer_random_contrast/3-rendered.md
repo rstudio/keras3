@@ -43,7 +43,6 @@ Object to compose the layer with. A tensor, array, or sequential model.
 Passed on to the Python callable
 
 @export
-@family contrast random preprocessing layers
 @family random preprocessing layers
 @family preprocessing layers
 @family layers

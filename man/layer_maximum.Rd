@@ -156,5 +156,4 @@ Other layers:
 \code{\link{layer_zero_padding_3d}()}
 }
 \concept{layers}
-\concept{maximum merging layers}
 \concept{merging layers}

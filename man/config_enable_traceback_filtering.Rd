@@ -26,10 +26,6 @@ If you have previously disabled traceback filtering via
 \item \url{https://www.tensorflow.org/api_docs/python/tf/keras/config/enable_traceback_filtering}
 }
 
-Other traceback utils: 
-\code{\link{config_disable_traceback_filtering}()},
-\code{\link{config_is_traceback_filtering_enabled}()}
-
 Other utils: 
 \code{\link{audio_dataset_from_directory}()},
 \code{\link{config_disable_interactive_logging}()},
@@ -54,5 +50,4 @@ Other utils:
 \code{\link{timeseries_dataset_from_array}()},
 \code{\link{to_categorical}()}
 }
-\concept{traceback utils}
 \concept{utils}

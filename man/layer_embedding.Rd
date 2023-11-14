@@ -197,5 +197,4 @@ Other layers:
 \code{\link{layer_zero_padding_3d}()}
 }
 \concept{core layers}
-\concept{embedding core layers}
 \concept{layers}

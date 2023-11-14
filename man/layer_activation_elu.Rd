@@ -139,5 +139,4 @@ Other layers:
 \code{\link{layer_zero_padding_3d}()}
 }
 \concept{activation layers}
-\concept{elu activation layers}
 \concept{layers}

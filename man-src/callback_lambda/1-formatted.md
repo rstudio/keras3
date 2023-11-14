@@ -68,8 +68,6 @@ passing `function_name=function`. For example,
 needs to have same arguments as the ones defined in `Callback`.
 
 @export
-@family callback lambda callbacks
-@family lambda callbacks
 @family callbacks
 @seealso
 + <https:/keras.io/api/callbacks/lambda_callback#lambdacallback-class>

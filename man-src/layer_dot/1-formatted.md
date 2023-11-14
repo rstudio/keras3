@@ -50,7 +50,6 @@ Standard layer keyword arguments.
 layers to combine
 
 @export
-@family dot merging layers
 @family merging layers
 @family layers
 @seealso

@@ -218,7 +218,5 @@ Other layers:
 \code{\link{layer_zero_padding_2d}()},
 \code{\link{layer_zero_padding_3d}()}
 }
-\concept{crossing hashed preprocessing layers}
-\concept{hashed preprocessing layers}
 \concept{layers}
 \concept{preprocessing layers}

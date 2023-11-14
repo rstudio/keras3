@@ -194,10 +194,6 @@ cells output).
 \item \url{https://www.tensorflow.org/api_docs/python/tf/keras/layers/ConvLSTM2D}
 }
 
-Other conv rnn layers: 
-\code{\link{layer_conv_lstm_1d}()},
-\code{\link{layer_conv_lstm_3d}()}
-
 Other rnn layers: 
 \code{\link{bidirectional}()},
 \code{\link{layer_conv_lstm_1d}()},
@@ -317,7 +313,5 @@ Other layers:
 \code{\link{layer_zero_padding_2d}()},
 \code{\link{layer_zero_padding_3d}()}
 }
-\concept{conv rnn layers}
 \concept{layers}
-\concept{lstm2d conv rnn layers}
 \concept{rnn layers}

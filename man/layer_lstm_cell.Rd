@@ -131,9 +131,6 @@ str(whole_sequence_output)
 \item \url{https://www.tensorflow.org/api_docs/python/tf/keras/layers/LSTMCell}
 }
 
-Other lstm rnn layers: 
-\code{\link{layer_lstm}()}
-
 Other rnn layers: 
 \code{\link{bidirectional}()},
 \code{\link{layer_conv_lstm_1d}()},
@@ -254,5 +251,4 @@ Other layers:
 \code{\link{layer_zero_padding_3d}()}
 }
 \concept{layers}
-\concept{lstm rnn layers}
 \concept{rnn layers}

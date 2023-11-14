@@ -223,6 +223,4 @@ Other ops:
 \code{\link{k_zeros_like}()},
 \code{\link{k_zeros}()}
 }
-\concept{operation ops}
 \concept{ops}
-\concept{util operation ops}

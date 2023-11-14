@@ -120,7 +120,6 @@ Base layer keyword arguments (e.g. `name` and `dtype`).
 Object to compose the layer with. A tensor, array, or sequential model.
 
 @export
-@family layer normalization layers
 @family normalization layers
 @family layers
 @seealso

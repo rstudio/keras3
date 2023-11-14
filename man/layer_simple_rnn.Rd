@@ -146,9 +146,6 @@ c(whole_sequence_output, final_state) \%<-\% simple_rnn(inputs)
 \item \url{https://www.tensorflow.org/api_docs/python/tf/keras/layers/SimpleRNN}
 }
 
-Other simple rnn layers: 
-\code{\link{layer_simple_rnn_cell}()}
-
 Other rnn layers: 
 \code{\link{bidirectional}()},
 \code{\link{layer_conv_lstm_1d}()},
@@ -270,4 +267,3 @@ Other layers:
 }
 \concept{layers}
 \concept{rnn layers}
-\concept{simple rnn layers}

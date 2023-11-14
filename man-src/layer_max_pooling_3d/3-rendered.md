@@ -77,8 +77,6 @@ String, name for the object
 Passed on to the Python callable
 
 @export
-@family pooling3d max pooling layers
-@family max pooling layers
 @family pooling layers
 @family layers
 @seealso

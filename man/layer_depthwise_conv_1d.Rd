@@ -151,9 +151,6 @@ y$shape
 \item \url{https://www.tensorflow.org/api_docs/python/tf/keras/layers/DepthwiseConv1D}
 }
 
-Other depthwise convolutional layers: 
-\code{\link{layer_depthwise_conv_2d}()}
-
 Other convolutional layers: 
 \code{\link{layer_conv_1d_transpose}()},
 \code{\link{layer_conv_1d}()},
@@ -270,7 +267,5 @@ Other layers:
 \code{\link{layer_zero_padding_2d}()},
 \code{\link{layer_zero_padding_3d}()}
 }
-\concept{conv1d depthwise convolutional layers}
 \concept{convolutional layers}
-\concept{depthwise convolutional layers}
 \concept{layers}

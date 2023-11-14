@@ -72,14 +72,6 @@ Same as input.
 \item \url{https://www.tensorflow.org/api_docs/python/tf/keras/layers/SpatialDropout2D}
 }
 
-Other dropout spatial regularization layers: 
-\code{\link{layer_spatial_dropout_1d}()},
-\code{\link{layer_spatial_dropout_3d}()}
-
-Other spatial regularization layers: 
-\code{\link{layer_spatial_dropout_1d}()},
-\code{\link{layer_spatial_dropout_3d}()}
-
 Other regularization layers: 
 \code{\link{layer_activity_regularization}()},
 \code{\link{layer_dropout}()},
@@ -193,7 +185,5 @@ Other layers:
 \code{\link{layer_zero_padding_2d}()},
 \code{\link{layer_zero_padding_3d}()}
 }
-\concept{dropout spatial regularization layers}
 \concept{layers}
 \concept{regularization layers}
-\concept{spatial regularization layers}

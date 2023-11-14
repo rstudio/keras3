@@ -68,7 +68,6 @@ Object to compose the layer with. A tensor, array, or sequential model.
 For forward/backward compatability.
 
 @export
-@family embedding core layers
 @family core layers
 @family layers
 @seealso

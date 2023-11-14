@@ -182,7 +182,5 @@ Other layers:
 \code{\link{layer_zero_padding_2d}()},
 \code{\link{layer_zero_padding_3d}()}
 }
-\concept{center preprocessing layers}
-\concept{crop center preprocessing layers}
 \concept{layers}
 \concept{preprocessing layers}

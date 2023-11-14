@@ -26,19 +26,9 @@ get_custom_objects()$update(list(MyObject = MyObject))
 \item \url{https://www.tensorflow.org/api_docs/python/tf/keras/utils/get_custom_objects}
 }
 
-Other registration object saving: 
-\code{\link{get_registered_name}()},
-\code{\link{get_registered_object}()}
-
-Other object saving: 
-\code{\link{get_registered_name}()},
-\code{\link{get_registered_object}()}
-
 Other saving: 
 \code{\link{config_enable_unsafe_deserialization}()},
 \code{\link{get_registered_name}()},
 \code{\link{get_registered_object}()}
 }
-\concept{object saving}
-\concept{registration object saving}
 \concept{saving}

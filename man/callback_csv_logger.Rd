@@ -43,5 +43,3 @@ Other callbacks:
 \code{\link{callback_terminate_on_nan}()}
 }
 \concept{callbacks}
-\concept{csv callbacks}
-\concept{logger csv callbacks}

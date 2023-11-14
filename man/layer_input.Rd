@@ -182,6 +182,4 @@ Other layers:
 \code{\link{layer_zero_padding_3d}()}
 }
 \concept{core layers}
-\concept{input core layers}
-\concept{layer input core layers}
 \concept{layers}

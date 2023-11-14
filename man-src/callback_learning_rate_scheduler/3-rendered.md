@@ -49,9 +49,6 @@ learning rate as output (float).
 Integer. 0: quiet, 1: log update messages.
 
 @export
-@family scheduler rate learning callbacks
-@family rate learning callbacks
-@family learning callbacks
 @family callbacks
 @seealso
 + <https:/keras.io/api/callbacks/learning_rate_scheduler#learningratescheduler-class>

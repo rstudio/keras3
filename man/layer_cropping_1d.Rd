@@ -184,6 +184,5 @@ Other layers:
 \code{\link{layer_zero_padding_2d}()},
 \code{\link{layer_zero_padding_3d}()}
 }
-\concept{cropping1d reshaping layers}
 \concept{layers}
 \concept{reshaping layers}

@@ -92,9 +92,6 @@ automatically set a loss scale factor.
 Passed on to the Python callable
 
 @export
-@family optimizer scale los optimizers
-@family scale los optimizers
-@family los optimizers
 @family optimizers
 @seealso
 + <https://www.tensorflow.org/api_docs/python/tf/keras/optimizers/LossScaleOptimizer>

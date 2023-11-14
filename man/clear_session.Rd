@@ -73,6 +73,3 @@ Other backend:
 \code{\link{config_set_image_data_format}()}
 }
 \concept{backend}
-\concept{common backend}
-\concept{global common backend}
-\concept{state global common backend}

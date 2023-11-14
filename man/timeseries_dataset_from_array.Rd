@@ -162,6 +162,4 @@ Other utils:
 \code{\link{text_dataset_from_directory}()},
 \code{\link{to_categorical}()}
 }
-\concept{dataset timeseri utils}
-\concept{timeseri utils}
 \concept{utils}

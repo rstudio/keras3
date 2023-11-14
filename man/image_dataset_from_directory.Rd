@@ -188,6 +188,5 @@ Other utils:
 \code{\link{timeseries_dataset_from_array}()},
 \code{\link{to_categorical}()}
 }
-\concept{dataset image utils}
 \concept{image utils}
 \concept{utils}

@@ -101,5 +101,3 @@ Other callbacks:
 \code{\link{callback_terminate_on_nan}()}
 }
 \concept{callbacks}
-\concept{early callbacks}
-\concept{stopping early callbacks}

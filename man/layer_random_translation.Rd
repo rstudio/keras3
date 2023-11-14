@@ -244,4 +244,3 @@ Other layers:
 \concept{layers}
 \concept{preprocessing layers}
 \concept{random preprocessing layers}
-\concept{translation random preprocessing layers}

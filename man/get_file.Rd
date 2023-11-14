@@ -112,5 +112,4 @@ Other utils:
 \code{\link{timeseries_dataset_from_array}()},
 \code{\link{to_categorical}()}
 }
-\concept{file utils}
 \concept{utils}

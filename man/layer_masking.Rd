@@ -172,4 +172,3 @@ Other layers:
 }
 \concept{core layers}
 \concept{layers}
-\concept{masking core layers}

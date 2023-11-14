@@ -189,5 +189,4 @@ Other layers:
 \code{\link{layer_zero_padding_3d}()}
 }
 \concept{layers}
-\concept{reshape reshaping layers}
 \concept{reshaping layers}

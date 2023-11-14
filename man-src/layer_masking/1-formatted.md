@@ -45,7 +45,6 @@ Passed on to the Python callable
 see description
 
 @export
-@family masking core layers
 @family core layers
 @family layers
 @seealso

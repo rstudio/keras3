@@ -63,10 +63,6 @@ m$result()
 \item \url{https://www.tensorflow.org/api_docs/python/tf/keras/metrics/CategoricalHinge}
 }
 
-Other hinge metrics: 
-\code{\link{metric_hinge}()},
-\code{\link{metric_squared_hinge}()}
-
 Other metrics: 
 \code{\link{custom_metric}()},
 \code{\link{metric_auc}()},
@@ -111,5 +107,4 @@ Other metrics:
 \code{\link{metric_true_negatives}()},
 \code{\link{metric_true_positives}()}
 }
-\concept{hinge metrics}
 \concept{metrics}

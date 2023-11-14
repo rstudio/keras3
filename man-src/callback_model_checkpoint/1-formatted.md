@@ -123,8 +123,6 @@ overwrites the model weights already saved if the performance of
 current model is better than this value.
 
 @export
-@family checkpoint model callbacks
-@family model callbacks
 @family callbacks
 @seealso
 + <https:/keras.io/api/callbacks/model_checkpoint#modelcheckpoint-class>

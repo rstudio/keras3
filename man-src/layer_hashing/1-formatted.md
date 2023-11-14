@@ -144,7 +144,6 @@ Keyword arguments to construct a layer.
 Object to compose the layer with. A tensor, array, or sequential model.
 
 @export
-@family hashing preprocessing layers
 @family preprocessing layers
 @family layers
 @seealso

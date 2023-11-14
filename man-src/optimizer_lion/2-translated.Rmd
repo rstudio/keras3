@@ -97,7 +97,6 @@ automatically set a loss scale factor.
 Passed on to the Python callable
 
 @export
-@family lion optimizers
 @family optimizers
 @seealso
 + <https://www.tensorflow.org/api_docs/python/tf/keras/optimizers/Lion>

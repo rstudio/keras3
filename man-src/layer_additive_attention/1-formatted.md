@@ -59,7 +59,6 @@ Object to compose the layer with. A tensor, array, or sequential model.
 Passed on to the Python callable
 
 @export
-@family additive attention layers
 @family attention layers
 @family layers
 @seealso

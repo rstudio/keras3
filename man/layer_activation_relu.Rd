@@ -167,4 +167,3 @@ Other layers:
 }
 \concept{activation layers}
 \concept{layers}
-\concept{relu activation layers}

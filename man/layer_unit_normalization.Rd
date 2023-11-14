@@ -149,4 +149,3 @@ Other layers:
 }
 \concept{layers}
 \concept{normalization layers}
-\concept{unit normalization layers}

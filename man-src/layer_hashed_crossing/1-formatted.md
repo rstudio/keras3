@@ -76,8 +76,6 @@ String, name for the object
 datatype (e.g., `"float32"`).
 
 @export
-@family crossing hashed preprocessing layers
-@family hashed preprocessing layers
 @family preprocessing layers
 @family layers
 @seealso

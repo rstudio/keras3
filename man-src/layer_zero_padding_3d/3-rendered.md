@@ -75,8 +75,6 @@ Object to compose the layer with. A tensor, array, or sequential model.
 Passed on to the Python callable
 
 @export
-@family padding3d zero reshaping layers
-@family zero reshaping layers
 @family reshaping layers
 @family layers
 @seealso

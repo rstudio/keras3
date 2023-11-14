@@ -155,5 +155,3 @@ Other callbacks:
 \code{\link{callback_terminate_on_nan}()}
 }
 \concept{callbacks}
-\concept{checkpoint model callbacks}
-\concept{model callbacks}

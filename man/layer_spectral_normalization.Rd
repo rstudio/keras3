@@ -171,4 +171,3 @@ Other layers:
 }
 \concept{layers}
 \concept{normalization layers}
-\concept{spectral normalization layers}

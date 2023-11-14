@@ -44,7 +44,6 @@ Base wrapper keyword arguments.
 Object to compose the layer with. A tensor, array, or sequential model.
 
 @export
-@family spectral normalization layers
 @family normalization layers
 @family layers
 @seealso

@@ -41,19 +41,9 @@ serialization/deserialization.
 \item \url{https://www.tensorflow.org/api_docs/python/tf/keras/utils/get_registered_object}
 }
 
-Other registration object saving: 
-\code{\link{get_custom_objects}()},
-\code{\link{get_registered_name}()}
-
-Other object saving: 
-\code{\link{get_custom_objects}()},
-\code{\link{get_registered_name}()}
-
 Other saving: 
 \code{\link{config_enable_unsafe_deserialization}()},
 \code{\link{get_custom_objects}()},
 \code{\link{get_registered_name}()}
 }
-\concept{object saving}
-\concept{registration object saving}
 \concept{saving}

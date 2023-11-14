@@ -125,10 +125,6 @@ max_pool_1d(x)
 \item \url{https://www.tensorflow.org/api_docs/python/tf/keras/layers/MaxPooling1D}
 }
 
-Other max pooling layers: 
-\code{\link{layer_max_pooling_2d}()},
-\code{\link{layer_max_pooling_3d}()}
-
 Other pooling layers: 
 \code{\link{layer_average_pooling_1d}()},
 \code{\link{layer_average_pooling_2d}()},
@@ -248,6 +244,4 @@ Other layers:
 \code{\link{layer_zero_padding_3d}()}
 }
 \concept{layers}
-\concept{max pooling layers}
 \concept{pooling layers}
-\concept{pooling1d max pooling layers}

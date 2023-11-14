@@ -121,7 +121,4 @@ Other optimizers:
 \code{\link{optimizer_rmsprop}()},
 \code{\link{optimizer_sgd}()}
 }
-\concept{los optimizers}
-\concept{optimizer scale los optimizers}
 \concept{optimizers}
-\concept{scale los optimizers}

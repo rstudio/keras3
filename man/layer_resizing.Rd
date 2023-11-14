@@ -199,4 +199,3 @@ Other layers:
 }
 \concept{layers}
 \concept{preprocessing layers}
-\concept{resizing preprocessing layers}

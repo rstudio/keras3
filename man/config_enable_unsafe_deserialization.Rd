@@ -19,6 +19,4 @@ Other saving:
 \code{\link{get_registered_name}()},
 \code{\link{get_registered_object}()}
 }
-\concept{lib serialization saving}
 \concept{saving}
-\concept{serialization saving}

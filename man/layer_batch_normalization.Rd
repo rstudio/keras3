@@ -269,6 +269,5 @@ Other layers:
 \code{\link{layer_zero_padding_2d}()},
 \code{\link{layer_zero_padding_3d}()}
 }
-\concept{batch normalization layers}
 \concept{layers}
 \concept{normalization layers}

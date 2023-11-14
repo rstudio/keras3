@@ -124,4 +124,3 @@ Other optimizers:
 \code{\link{optimizer_rmsprop}()}
 }
 \concept{optimizers}
-\concept{sgd optimizers}

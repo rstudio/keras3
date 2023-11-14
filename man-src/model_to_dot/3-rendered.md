@@ -43,8 +43,6 @@ whether to display if a layer is trainable.
 Passed on to the Python callable
 
 @export
-@family visualization model utils
-@family model utils
 @family utils
 @seealso
 + <https:/keras.io/api/utils/model_plotting_utils#modeltodot-function>

@@ -334,8 +334,6 @@ String, name for the object
 Passed on to the Python callable
 
 @export
-@family lookup integer preprocessing layers
-@family integer preprocessing layers
 @family preprocessing layers
 @family layers
 @seealso

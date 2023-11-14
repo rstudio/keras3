@@ -495,6 +495,4 @@ Other layers:
 \code{\link{layer_zero_padding_3d}()}
 }
 \concept{layers}
-\concept{lookup string preprocessing layers}
 \concept{preprocessing layers}
-\concept{string preprocessing layers}

@@ -231,4 +231,3 @@ Other layers:
 \concept{layers}
 \concept{preprocessing layers}
 \concept{random preprocessing layers}
-\concept{rotation random preprocessing layers}

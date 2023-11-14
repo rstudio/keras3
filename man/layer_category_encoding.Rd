@@ -241,7 +241,5 @@ Other layers:
 \code{\link{layer_zero_padding_2d}()},
 \code{\link{layer_zero_padding_3d}()}
 }
-\concept{category preprocessing layers}
-\concept{encoding category preprocessing layers}
 \concept{layers}
 \concept{preprocessing layers}

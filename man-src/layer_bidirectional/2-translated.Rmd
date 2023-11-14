@@ -92,7 +92,6 @@ Passed on to the Python callable
 see description
 
 @export
-@family bidirectional rnn layers
 @family rnn layers
 @family layers
 @seealso

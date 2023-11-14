@@ -117,7 +117,6 @@ Object to compose the layer with. A tensor, array, or sequential model.
 Passed on to the Python callable
 
 @export
-@family normalization preprocessing layers
 @family preprocessing layers
 @family layers
 @seealso

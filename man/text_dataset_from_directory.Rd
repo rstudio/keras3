@@ -143,6 +143,4 @@ Other utils:
 \code{\link{timeseries_dataset_from_array}()},
 \code{\link{to_categorical}()}
 }
-\concept{dataset text utils}
-\concept{text utils}
 \concept{utils}

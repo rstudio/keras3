@@ -30,7 +30,6 @@ might leverage NumPy APIs.
 Integer, the random seed to use.
 
 @export
-@family rng utils
 @family utils
 @seealso
 + <https:/keras.io/api/utils/python_utils#setrandomseed-function>

@@ -28,6 +28,3 @@ Other callbacks:
 \code{\link{callback_tensorboard}()}
 }
 \concept{callbacks}
-\concept{nan on terminate callbacks}
-\concept{on terminate callbacks}
-\concept{terminate callbacks}

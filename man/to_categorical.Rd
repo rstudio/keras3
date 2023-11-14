@@ -51,9 +51,6 @@ print(np.around(loss, 5))
 \item \url{https://www.tensorflow.org/api_docs/python/tf/keras/utils/to_categorical}
 }
 
-Other numerical utils: 
-\code{\link{normalize}()}
-
 Other utils: 
 \code{\link{audio_dataset_from_directory}()},
 \code{\link{config_disable_interactive_logging}()},
@@ -78,5 +75,4 @@ Other utils:
 \code{\link{text_dataset_from_directory}()},
 \code{\link{timeseries_dataset_from_array}()}
 }
-\concept{numerical utils}
 \concept{utils}

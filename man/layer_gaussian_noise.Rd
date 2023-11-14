@@ -37,9 +37,6 @@ training mode (adding noise) or in inference mode (doing nothing).
 \item \url{https://www.tensorflow.org/api_docs/python/tf/keras/layers/GaussianNoise}
 }
 
-Other gaussian regularization layers: 
-\code{\link{layer_gaussian_dropout}()}
-
 Other regularization layers: 
 \code{\link{layer_activity_regularization}()},
 \code{\link{layer_dropout}()},
@@ -153,7 +150,5 @@ Other layers:
 \code{\link{layer_zero_padding_2d}()},
 \code{\link{layer_zero_padding_3d}()}
 }
-\concept{gaussian regularization layers}
 \concept{layers}
-\concept{noise gaussian regularization layers}
 \concept{regularization layers}

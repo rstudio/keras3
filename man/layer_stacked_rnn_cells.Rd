@@ -153,7 +153,5 @@ Other layers:
 \code{\link{layer_zero_padding_2d}()},
 \code{\link{layer_zero_padding_3d}()}
 }
-\concept{cell stacked rnn layers}
 \concept{layers}
 \concept{rnn layers}
-\concept{stacked rnn layers}

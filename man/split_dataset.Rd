@@ -80,5 +80,4 @@ Other utils:
 \code{\link{timeseries_dataset_from_array}()},
 \code{\link{to_categorical}()}
 }
-\concept{dataset utils}
 \concept{utils}

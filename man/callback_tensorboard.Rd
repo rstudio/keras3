@@ -184,4 +184,3 @@ Other callbacks:
 \code{\link{callback_terminate_on_nan}()}
 }
 \concept{callbacks}
-\concept{tensorboard callbacks}

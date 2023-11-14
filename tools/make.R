@@ -390,7 +390,9 @@ if(!all(dir_exists(df$man_src_dir))) {
     })
 }
 
+
 # curate @family tags
+local({
 df_families <- df %>%
   rowwise() %>%
   mutate(family = list(tags$family)) %>%
@@ -400,23 +402,36 @@ df_families <- df %>%
 keeper_families <- df_families %>%
   group_by(family) %>%
   tally() %>%
-  filter(n > 2) %>%
+  filter(n > 3) %>% # no point in families w/ less than 3 (e.g., la yer_max_pooling_[123]d)
   pull(family)
 
-df <- df %>%
-  split(seq_len(nrow(.))) %>%
-  map(\(.df) {
-    tags <- tags_in <- .df$tags[[1]]
-    family <- family_in <- tags$family
-    family %<>% intersect(keeper_families)
-    if(identical(family, family_in)) return(.df)
-    tags$family <- family
-    .df$tags <- list(tags)
-    .df$dump <- dump_roxygen(.df$doc, .df$params[[1]], .df$tags)
-    .df
-  }) %>%
-  list_rbind()
+if(!identical(sort(keeper_families),
+              sort(.keeper_families))) {
+  cat(".keeper_families <- "); dput(keeper_families)
+  stop(".keeper_families definition in tools/utils.R needs to be updated.")
+}
+
+## man_src_pull_upstream_updates() goes through mk_export() directly
+# df <- df %>%
+#   split(seq_len(nrow(.))) %>%
+#   map(\(.df) {
+#     # if(.df$r_name == "layer_global_average_pooling_1d") browser()
+#     tags <- tags_in <- .df$tags[[1]]
+#     family <- family_in <- tags$family
+#     family %<>% intersect(keeper_families)
+#     if(identical(family, family_in)) return(.df)
+#     tags$family <- family
+#     .df$tags <- list(tags)
+#
+#     # roxygen <- dump_roxygen(doc, params, tags)
+#     # dump <- dump_keras_export(roxygen, r_name, r_fn)
+#     .df$dump <- dump_keras_export(.df$doc, .df$params[[1]], .df$tags)
+#     .df$roxygen <- dump_roxygen(.df$doc, .df$params[[1]], .df$tags)
+#     .df
+#   }) %>%
+#   list_rbind()
   # mutate(tags = )
+})
 
 
 df <- df |>

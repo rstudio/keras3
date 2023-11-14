@@ -67,6 +67,3 @@ Other callbacks:
 \code{\link{callback_terminate_on_nan}()}
 }
 \concept{callbacks}
-\concept{learning callbacks}
-\concept{rate learning callbacks}
-\concept{scheduler rate learning callbacks}

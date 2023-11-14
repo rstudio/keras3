@@ -137,7 +137,6 @@ automatically set a loss scale factor.
 Passed on to the Python callable
 
 @export
-@family ftrl optimizers
 @family optimizers
 @seealso
 + <https:/keras.io/api/optimizers/ftrl#ftrl-class>

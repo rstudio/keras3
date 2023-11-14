@@ -160,4 +160,3 @@ Other layers:
 }
 \concept{activation layers}
 \concept{layers}
-\concept{prelu activation layers}

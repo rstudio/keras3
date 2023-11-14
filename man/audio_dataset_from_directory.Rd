@@ -150,6 +150,4 @@ Other utils:
 \code{\link{timeseries_dataset_from_array}()},
 \code{\link{to_categorical}()}
 }
-\concept{audio utils}
-\concept{dataset audio utils}
 \concept{utils}

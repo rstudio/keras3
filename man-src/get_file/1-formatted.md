@@ -76,7 +76,6 @@ defaults ether `$KERAS_HOME` if the `KERAS_HOME` environment
 variable is set or `~/.keras/`.
 
 @export
-@family file utils
 @family utils
 @seealso
 + <https:/keras.io/api/utils/python_utils#getfile-function>

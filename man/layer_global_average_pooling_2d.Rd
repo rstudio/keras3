@@ -75,10 +75,6 @@ y$shape
 \item \url{https://www.tensorflow.org/api_docs/python/tf/keras/layers/GlobalAveragePooling2D}
 }
 
-Other average global pooling layers: 
-\code{\link{layer_global_average_pooling_1d}()},
-\code{\link{layer_global_average_pooling_3d}()}
-
 Other global pooling layers: 
 \code{\link{layer_global_average_pooling_1d}()},
 \code{\link{layer_global_average_pooling_3d}()},
@@ -204,8 +200,6 @@ Other layers:
 \code{\link{layer_zero_padding_2d}()},
 \code{\link{layer_zero_padding_3d}()}
 }
-\concept{average global pooling layers}
 \concept{global pooling layers}
 \concept{layers}
 \concept{pooling layers}
-\concept{pooling2d average global pooling layers}

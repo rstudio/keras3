@@ -119,8 +119,4 @@ Other callbacks:
 \code{\link{callback_tensorboard}()},
 \code{\link{callback_terminate_on_nan}()}
 }
-\concept{and backup callbacks}
-\concept{backup callbacks}
-\concept{callback restore and backup callbacks}
 \concept{callbacks}
-\concept{restore and backup callbacks}

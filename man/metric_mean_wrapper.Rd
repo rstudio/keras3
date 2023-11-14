@@ -35,10 +35,6 @@ mse_metric = MeanMetricWrapper(fn=mse)
 \item \url{https://www.tensorflow.org/api_docs/python/tf/keras/metrics/MeanMetricWrapper}
 }
 
-Other reduction metrics: 
-\code{\link{metric_mean}()},
-\code{\link{metric_sum}()}
-
 Other metrics: 
 \code{\link{custom_metric}()},
 \code{\link{metric_auc}()},
@@ -84,4 +80,3 @@ Other metrics:
 \code{\link{metric_true_positives}()}
 }
 \concept{metrics}
-\concept{reduction metrics}

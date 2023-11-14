@@ -59,8 +59,6 @@ Object to compose the layer with. A tensor, array, or sequential model.
 Passed on to the Python callable
 
 @export
-@family sampling1d up reshaping layers
-@family up reshaping layers
 @family reshaping layers
 @family layers
 @seealso

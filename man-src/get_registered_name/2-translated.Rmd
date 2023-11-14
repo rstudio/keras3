@@ -16,8 +16,6 @@ object is not registered.
 The object to look up.
 
 @export
-@family registration object saving
-@family object saving
 @family saving
 @seealso
 + <https://www.tensorflow.org/api_docs/python/tf/keras/utils/get_registered_name>

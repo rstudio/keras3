@@ -107,8 +107,6 @@ Passed on to the Python callable
 see description
 
 @export
-@family head multi attention layers
-@family multi attention layers
 @family attention layers
 @family layers
 @seealso

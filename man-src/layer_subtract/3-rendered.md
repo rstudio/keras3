@@ -34,7 +34,6 @@ Passed on to the Python callable
 layers to combine
 
 @export
-@family subtract merging layers
 @family merging layers
 @family layers
 @seealso

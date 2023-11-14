@@ -10,7 +10,6 @@ Boolean, `True` if interactive logging is enabled,
 and `False` otherwise.
 
 @export
-@family io utils
 @family utils
 @seealso
 + <https://www.tensorflow.org/api_docs/python/tf/keras/config/is_interactive_logging_enabled>

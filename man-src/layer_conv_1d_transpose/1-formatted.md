@@ -114,8 +114,6 @@ Object to compose the layer with. A tensor, array, or sequential model.
 Passed on to the Python callable
 
 @export
-@family transpose conv1d convolutional layers
-@family conv1d convolutional layers
 @family convolutional layers
 @family layers
 @seealso

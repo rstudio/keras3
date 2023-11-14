@@ -54,8 +54,6 @@ Object to compose the layer with. A tensor, array, or sequential model.
 Passed on to the Python callable
 
 @export
-@family pooling1d max global pooling layers
-@family max global pooling layers
 @family global pooling layers
 @family pooling layers
 @family layers

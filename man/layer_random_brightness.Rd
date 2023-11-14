@@ -217,7 +217,6 @@ Other layers:
 \code{\link{layer_zero_padding_2d}()},
 \code{\link{layer_zero_padding_3d}()}
 }
-\concept{brightnes random preprocessing layers}
 \concept{layers}
 \concept{preprocessing layers}
 \concept{random preprocessing layers}

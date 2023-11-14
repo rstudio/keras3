@@ -130,7 +130,6 @@ Initial seed for the random number generator
 Passed on to the Python callable
 
 @export
-@family simple rnn layers
 @family rnn layers
 @family layers
 @seealso

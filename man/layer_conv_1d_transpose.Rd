@@ -137,9 +137,6 @@ y$shape
 \item \url{https://www.tensorflow.org/api_docs/python/tf/keras/layers/Conv1DTranspose}
 }
 
-Other conv1d convolutional layers: 
-\code{\link{layer_conv_1d}()}
-
 Other convolutional layers: 
 \code{\link{layer_conv_1d}()},
 \code{\link{layer_conv_2d_transpose}()},
@@ -256,7 +253,5 @@ Other layers:
 \code{\link{layer_zero_padding_2d}()},
 \code{\link{layer_zero_padding_3d}()}
 }
-\concept{conv1d convolutional layers}
 \concept{convolutional layers}
 \concept{layers}
-\concept{transpose conv1d convolutional layers}

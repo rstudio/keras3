@@ -4,8 +4,6 @@ knit: ({source(here::here("tools/knit.R")); knit_man_src})
 Disables safe mode globally, allowing deserialization of lambdas.
 
 @export
-@family lib serialization saving
-@family serialization saving
 @family saving
 @seealso
 + <https://www.tensorflow.org/api_docs/python/tf/keras/config/enable_unsafe_deserialization>

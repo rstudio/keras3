@@ -147,9 +147,6 @@ print(y$shape)
 \item \url{https://www.tensorflow.org/api_docs/python/tf/keras/layers/SeparableConv2D}
 }
 
-Other separable convolutional layers: 
-\code{\link{layer_separable_conv_1d}()}
-
 Other convolutional layers: 
 \code{\link{layer_conv_1d_transpose}()},
 \code{\link{layer_conv_1d}()},
@@ -266,7 +263,5 @@ Other layers:
 \code{\link{layer_zero_padding_2d}()},
 \code{\link{layer_zero_padding_3d}()}
 }
-\concept{conv2d separable convolutional layers}
 \concept{convolutional layers}
 \concept{layers}
-\concept{separable convolutional layers}

@@ -251,4 +251,3 @@ Other layers:
 \concept{layers}
 \concept{preprocessing layers}
 \concept{random preprocessing layers}
-\concept{zoom random preprocessing layers}

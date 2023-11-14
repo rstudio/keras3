@@ -20,10 +20,6 @@ To switch between writing logs to stdout and \code{absl.logging}, you may use
 \item \url{https://www.tensorflow.org/api_docs/python/tf/keras/config/is_interactive_logging_enabled}
 }
 
-Other io utils: 
-\code{\link{config_disable_interactive_logging}()},
-\code{\link{config_enable_interactive_logging}()}
-
 Other utils: 
 \code{\link{audio_dataset_from_directory}()},
 \code{\link{config_disable_interactive_logging}()},
@@ -48,5 +44,4 @@ Other utils:
 \code{\link{timeseries_dataset_from_array}()},
 \code{\link{to_categorical}()}
 }
-\concept{io utils}
 \concept{utils}

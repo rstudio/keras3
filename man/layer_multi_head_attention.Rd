@@ -234,6 +234,4 @@ Other layers:
 \code{\link{layer_zero_padding_3d}()}
 }
 \concept{attention layers}
-\concept{head multi attention layers}
 \concept{layers}
-\concept{multi attention layers}

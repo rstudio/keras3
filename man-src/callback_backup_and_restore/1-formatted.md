@@ -67,10 +67,6 @@ training is finished. Use `False` if you'd like to keep the checkpoint
 for future usage.
 
 @export
-@family callback restore and backup callbacks
-@family restore and backup callbacks
-@family and backup callbacks
-@family backup callbacks
 @family callbacks
 @seealso
 + <https:/keras.io/api/callbacks/backup_and_restore#backupandrestore-class>

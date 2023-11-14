@@ -168,6 +168,4 @@ Other layers:
 \code{\link{layer_zero_padding_3d}()}
 }
 \concept{layers}
-\concept{repeat reshaping layers}
 \concept{reshaping layers}
-\concept{vector repeat reshaping layers}

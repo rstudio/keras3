@@ -112,6 +112,4 @@ Other callbacks:
 \code{\link{callback_tensorboard}()},
 \code{\link{callback_terminate_on_nan}()}
 }
-\concept{callback lambda callbacks}
 \concept{callbacks}
-\concept{lambda callbacks}

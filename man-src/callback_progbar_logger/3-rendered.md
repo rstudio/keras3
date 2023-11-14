@@ -11,8 +11,6 @@ Whether the progress bar should
 count samples seen or steps (batches) seen.
 
 @export
-@family logger progbar callbacks
-@family progbar callbacks
 @family callbacks
 @seealso
 + <https:/keras.io/api/callbacks/progbar_logger#progbarlogger-class>

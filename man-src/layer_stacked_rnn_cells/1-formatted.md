@@ -25,8 +25,6 @@ List of RNN cell instances.
 Passed on to the Python callable
 
 @export
-@family cell stacked rnn layers
-@family stacked rnn layers
 @family rnn layers
 @family layers
 @seealso

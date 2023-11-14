@@ -49,7 +49,6 @@ String, name for the object
 see description
 
 @export
-@family crop random preprocessing layers
 @family random preprocessing layers
 @family preprocessing layers
 @family layers

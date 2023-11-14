@@ -72,10 +72,6 @@ y
 \item \url{https://www.tensorflow.org/api_docs/python/tf/keras/layers/ZeroPadding1D}
 }
 
-Other zero reshaping layers: 
-\code{\link{layer_zero_padding_2d}()},
-\code{\link{layer_zero_padding_3d}()}
-
 Other reshaping layers: 
 \code{\link{layer_cropping_1d}()},
 \code{\link{layer_cropping_2d}()},
@@ -196,6 +192,4 @@ Other layers:
 \code{\link{layer_zero_padding_3d}()}
 }
 \concept{layers}
-\concept{padding1d zero reshaping layers}
 \concept{reshaping layers}
-\concept{zero reshaping layers}

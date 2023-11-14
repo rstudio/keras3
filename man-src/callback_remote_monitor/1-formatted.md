@@ -28,8 +28,6 @@ Boolean; whether the request should be
 sent as `"application/json"`.
 
 @export
-@family monitor remote callbacks
-@family remote callbacks
 @family callbacks
 @seealso
 + <https:/keras.io/api/callbacks/remote_monitor#remotemonitor-class>

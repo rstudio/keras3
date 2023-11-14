@@ -674,6 +674,7 @@ make_roxygen_tags <- function(endpoint, py_obj = py_eval(endpoint), type) {
 #
 #   append(out$family) <-
 
+  # browser()
   out$family <-
     py_obj$`__module__` %>%
     str_split_1("[._]") %>%
@@ -707,12 +708,28 @@ make_roxygen_tags <- function(endpoint, py_obj = py_eval(endpoint), type) {
     rev()
   # } %error% browser()
 
+  out$family %<>% intersect(.keeper_families)
+
   links <- c(get_keras_doc_link(endpoint),
              get_tf_doc_link(endpoint))
   out$seealso <- str_flatten_lines("", glue("+ <{links}>"))
 
   out
 }
+
+.keeper_families <-
+c("accuracy metrics", "activation layers", "activations", "attention layers",
+  "backend", "callbacks", "config backend", "confusion metrics",
+  "constant initializers", "constraints", "convolutional layers",
+  "core layers", "core ops", "global pooling layers", "image ops",
+  "image utils", "initializers", "iou metrics", "layers", "learning schedules optimizers",
+  "losses", "math ops", "merging layers", "metrics", "nn ops",
+  "normalization layers", "numpy ops", "ops", "optimizers", "pooling layers",
+  "preprocessing layers", "probabilistic metrics", "random", "random initializers",
+  "random preprocessing layers", "rate learning schedules optimizers",
+  "regression metrics", "regularization layers", "regularizers",
+  "reshaping layers", "rnn layers", "saving", "schedule rate learning schedules optimizers",
+  "schedules optimizers", "utils")
 
 
 get_tf_doc_link <- function(endpoint) {
@@ -1392,7 +1409,6 @@ mk_export <- memoise(.mk_export <- function(endpoint, quiet = FALSE) {
   doc <- split_docstring_into_sections(docstring)
 
 
-
   # roxygen parts
   r_name <- make_r_name(endpoint, module)
   params <- parse_params_section(doc$arguments, treat_as_dots = vararg_paramater_names(py_obj))
@@ -1405,7 +1421,6 @@ mk_export <- memoise(.mk_export <- function(endpoint, quiet = FALSE) {
        endpoint |> startsWith("keras.metrics.")) &&
       inherits(py_obj, "python.builtin.type"))
     local({
-      # browser()
       # each metric and loss is provided as two handles: a function and a class
       # here, we fetch the matching function handle for the type handle
       # we make an export obj for this function handle, and then recursively
@@ -1532,6 +1547,7 @@ mk_export <- memoise(.mk_export <- function(endpoint, quiet = FALSE) {
   as.list(environment())
 })
 
+attributes(mk_export) <- attributes(.mk_export)
 
 dump_keras_export <- function(roxygen, r_name, r_fn) {
 

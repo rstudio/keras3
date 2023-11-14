@@ -167,4 +167,3 @@ Other layers:
 }
 \concept{layers}
 \concept{preprocessing layers}
-\concept{rescaling preprocessing layers}

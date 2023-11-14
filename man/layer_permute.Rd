@@ -171,5 +171,4 @@ Other layers:
 \code{\link{layer_zero_padding_3d}()}
 }
 \concept{layers}
-\concept{permute reshaping layers}
 \concept{reshaping layers}
