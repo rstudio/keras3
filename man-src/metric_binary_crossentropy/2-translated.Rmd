@@ -8,38 +8,34 @@ This is the crossentropy metric class to be used when there are only two
 label classes (0 and 1).
 
 # Examples
-```python
-y_true = [[0, 1], [0, 0]]
-y_pred = [[0.6, 0.4], [0.4, 0.6]]
-loss = keras.losses.binary_crossentropy(y_true, y_pred)
-assert loss.shape == (2,)
+```{r}
+y_true <- rbind(c(0, 1), c(0, 0))
+y_pred <- rbind(c(0.6, 0.4), c(0.4, 0.6))
+loss <- loss_binary_crossentropy(y_true, y_pred)
 loss
-# array([0.916 , 0.714], dtype=float32)
 ```
 Standalone usage:
 
-```python
-m = keras.metrics.BinaryCrossentropy()
-m.update_state([[0, 1], [0, 0]], [[0.6, 0.4], [0.4, 0.6]])
-m.result()
-# 0.81492424
+```{r}
+m <- metric_binary_crossentropy()
+m$update_state(rbind(c(0, 1), c(0, 0)), rbind(c(0.6, 0.4), c(0.4, 0.6)))
+m$result()
 ```
 
-```python
-m.reset_state()
-m.update_state([[0, 1], [0, 0]], [[0.6, 0.4], [0.4, 0.6]],
-               sample_weight=[1, 0])
-m.result()
-# 0.9162905
+```{r}
+m$reset_state()
+m$update_state(rbind(c(0, 1), c(0, 0)), rbind(c(0.6, 0.4), c(0.4, 0.6)),
+               sample_weight=c(1, 0))
+m$result()
 ```
 
 Usage with `compile()` API:
 
-```python
-model.compile(
-    optimizer='sgd',
-    loss='mse',
-    metrics=[keras.metrics.BinaryCrossentropy()])
+```{r, eval = FALSE}
+model %>% compile(
+    optimizer = 'sgd',
+    loss = 'mse',
+    metrics = list(metric_binary_crossentropy()))
 ```
 
 @returns
@@ -80,3 +76,4 @@ Passed on to the Python callable
 @seealso
 + <https:/keras.io/api/metrics/probabilistic_metrics#binarycrossentropy-class>
 + <https://www.tensorflow.org/api_docs/python/tf/keras/metrics/BinaryCrossentropy>
+
