@@ -21,9 +21,9 @@ metric_iou(
 
 \item{num_classes}{The possible number of labels the prediction task can have.}
 
-\item{target_class_ids}{A tuple or list of target class ids for which the
+\item{target_class_ids}{A list of target class ids for which the
 metric is returned. To compute IoU for a specific class, a list
-(or tuple) of a single id value should be provided.}
+of a single id value should be provided.}
 
 \item{name}{(Optional) string name of the metric instance.}
 
@@ -32,15 +32,15 @@ metric is returned. To compute IoU for a specific class, a list
 \item{ignore_class}{Optional integer. The ID of a class to be ignored during
 metric computation. This is useful, for example, in segmentation
 problems featuring a "void" class (commonly -1 or 255) in
-segmentation maps. By default (\code{ignore_class=None}), all classes are
+segmentation maps. By default (\code{ignore_class=NULL}), all classes are
 considered.}
 
 \item{sparse_y_true}{Whether labels are encoded using integers or
-dense floating point vectors. If \code{False}, the \code{argmax} function
+dense floating point vectors. If \code{FALSE}, the \code{argmax} function
 is used to determine each sample's most likely associated label.}
 
 \item{sparse_y_pred}{Whether predictions are encoded using integers or
-dense floating point vectors. If \code{False}, the \code{argmax} function
+dense floating point vectors. If \code{FALSE}, the \code{argmax} function
 is used to determine each sample's most likely associated label.}
 
 \item{axis}{(Optional) -1 is the dimension containing the logits.
@@ -49,7 +49,7 @@ Defaults to \code{-1}.}
 \description{
 Formula:
 
-\if{html}{\out{<div class="sourceCode python">}}\preformatted{iou = true_positives / (true_positives + false_positives + false_negatives)
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{iou <- true_positives / (true_positives + false_positives + false_negatives)
 }\if{html}{\out{</div>}}
 
 Intersection-Over-Union is a common evaluation metric for semantic image
@@ -58,7 +58,7 @@ segmentation.
 To compute IoUs, the predictions are accumulated in a confusion matrix,
 weighted by \code{sample_weight} and the metric is then calculated from it.
 
-If \code{sample_weight} is \code{None}, weights default to 1.
+If \code{sample_weight} is \code{NULL}, weights default to 1.
 Use \code{sample_weight} of 0 to mask values.
 
 Note, this class first computes IoUs for all individual classes, then
@@ -69,35 +69,29 @@ that specific class is returned.
 \section{Examples}{
 Standalone usage:
 
-\if{html}{\out{<div class="sourceCode python">}}\preformatted{# cm = [[1, 1],
-#        [1, 1]]
-# sum_row = [2, 2], sum_col = [2, 2], true_positives = [1, 1]
-# iou = true_positives / (sum_row + sum_col - true_positives))
-# iou = [0.33, 0.33]
-m = keras.metrics.IoU(num_classes=2, target_class_ids=[0])
-m.update_state([0, 0, 1, 1], [0, 1, 0, 1])
-m.result()
-# 0.33333334
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{m <- metric_iou(num_classes = 2L, target_class_ids = list(0L))
+m$update_state(c(0, 0, 1, 1), c(0, 1, 0, 1))
+m$result()
 }\if{html}{\out{</div>}}
 
-\if{html}{\out{<div class="sourceCode python">}}\preformatted{m.reset_state()
-m.update_state([0, 0, 1, 1], [0, 1, 0, 1],
-               sample_weight=[0.3, 0.3, 0.3, 0.1])
-# cm = [[0.3, 0.3],
-#        [0.3, 0.1]]
-# sum_row = [0.6, 0.4], sum_col = [0.6, 0.4],
-# true_positives = [0.3, 0.1]
-# iou = [0.33, 0.14]
-m.result()
-# 0.33333334
+\if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor(0.3333333, shape=(), dtype=float32)
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{m$reset_state()
+m$update_state(c(0, 0, 1, 1), c(0, 1, 0, 1),
+               sample_weight = c(0.3, 0.3, 0.3, 0.1))
+m$result()
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor(0.33333325, shape=(), dtype=float32)
 }\if{html}{\out{</div>}}
 
 Usage with \code{compile()} API:
 
-\if{html}{\out{<div class="sourceCode python">}}\preformatted{model.compile(
-    optimizer='sgd',
-    loss='mse',
-    metrics=[keras.metrics.IoU(num_classes=2, target_class_ids=[0])])
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{model \%>\% compile(
+  optimizer = 'sgd',
+  loss = 'mse',
+  metrics = list(metric_iou(num_classes = 2L, target_class_ids = list(0L))))
 }\if{html}{\out{</div>}}
 }
 

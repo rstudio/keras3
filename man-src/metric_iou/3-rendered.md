@@ -3,8 +3,9 @@ Computes the Intersection-Over-Union metric for specific target classes.
 @description
 Formula:
 
-```python
-iou = true_positives / (true_positives + false_positives + false_negatives)
+
+```r
+iou <- true_positives / (true_positives + false_positives + false_negatives)
 ```
 Intersection-Over-Union is a common evaluation metric for semantic image
 segmentation.
@@ -12,7 +13,7 @@ segmentation.
 To compute IoUs, the predictions are accumulated in a confusion matrix,
 weighted by `sample_weight` and the metric is then calculated from it.
 
-If `sample_weight` is `None`, weights default to 1.
+If `sample_weight` is `NULL`, weights default to 1.
 Use `sample_weight` of 0 to mask values.
 
 Note, this class first computes IoUs for all individual classes, then
@@ -23,47 +24,46 @@ that specific class is returned.
 # Examples
 Standalone usage:
 
-```python
-# cm = [[1, 1],
-#        [1, 1]]
-# sum_row = [2, 2], sum_col = [2, 2], true_positives = [1, 1]
-# iou = true_positives / (sum_row + sum_col - true_positives))
-# iou = [0.33, 0.33]
-m = keras.metrics.IoU(num_classes=2, target_class_ids=[0])
-m.update_state([0, 0, 1, 1], [0, 1, 0, 1])
-m.result()
-# 0.33333334
+
+```r
+m <- metric_iou(num_classes = 2L, target_class_ids = list(0L))
+m$update_state(c(0, 0, 1, 1), c(0, 1, 0, 1))
+m$result()
 ```
 
-```python
-m.reset_state()
-m.update_state([0, 0, 1, 1], [0, 1, 0, 1],
-               sample_weight=[0.3, 0.3, 0.3, 0.1])
-# cm = [[0.3, 0.3],
-#        [0.3, 0.1]]
-# sum_row = [0.6, 0.4], sum_col = [0.6, 0.4],
-# true_positives = [0.3, 0.1]
-# iou = [0.33, 0.14]
-m.result()
-# 0.33333334
+```
+## tf.Tensor(0.3333333, shape=(), dtype=float32)
+```
+
+
+```r
+m$reset_state()
+m$update_state(c(0, 0, 1, 1), c(0, 1, 0, 1),
+               sample_weight = c(0.3, 0.3, 0.3, 0.1))
+m$result()
+```
+
+```
+## tf.Tensor(0.33333325, shape=(), dtype=float32)
 ```
 
 Usage with `compile()` API:
 
-```python
-model.compile(
-    optimizer='sgd',
-    loss='mse',
-    metrics=[keras.metrics.IoU(num_classes=2, target_class_ids=[0])])
+
+```r
+model %>% compile(
+  optimizer = 'sgd',
+  loss = 'mse',
+  metrics = list(metric_iou(num_classes = 2L, target_class_ids = list(0L))))
 ```
 
 @param num_classes
 The possible number of labels the prediction task can have.
 
 @param target_class_ids
-A tuple or list of target class ids for which the
+A list of target class ids for which the
 metric is returned. To compute IoU for a specific class, a list
-(or tuple) of a single id value should be provided.
+of a single id value should be provided.
 
 @param name
 (Optional) string name of the metric instance.
@@ -75,17 +75,17 @@ metric is returned. To compute IoU for a specific class, a list
 Optional integer. The ID of a class to be ignored during
 metric computation. This is useful, for example, in segmentation
 problems featuring a "void" class (commonly -1 or 255) in
-segmentation maps. By default (`ignore_class=None`), all classes are
+segmentation maps. By default (`ignore_class=NULL`), all classes are
   considered.
 
 @param sparse_y_true
 Whether labels are encoded using integers or
-dense floating point vectors. If `False`, the `argmax` function
+dense floating point vectors. If `FALSE`, the `argmax` function
 is used to determine each sample's most likely associated label.
 
 @param sparse_y_pred
 Whether predictions are encoded using integers or
-dense floating point vectors. If `False`, the `argmax` function
+dense floating point vectors. If `FALSE`, the `argmax` function
 is used to determine each sample's most likely associated label.
 
 @param axis
@@ -100,3 +100,4 @@ Passed on to the Python callable
 @family metrics
 @seealso
 + <https://www.tensorflow.org/api_docs/python/tf/keras/metrics/IoU>
+
