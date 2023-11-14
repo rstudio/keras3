@@ -483,41 +483,41 @@ x$desc %<>% glue::trim()
 
 
 # dir_ls("man-src", glob = "1-*.md", recurse = TRUE) %>%
+#
+# Sys.glob(c("man-src/*/1-*.md", "man-src/*/2-*.Rmd")) %>%
+#   walk(\(f) {
+#     x <- read_file(f)
+#
+#     xx <- str_split_1(x, fixed("\n@"))
+#     ip <- startsWith(xx, "param ")
+#     xx[ip] <- xx[ip] %>%
+#       map_chr(\(x) {
+#         m <- str_match_all(x, regex("param ([^[:space:]]+)(.*)",
+#                                     dotall = TRUE, multiline = TRUE))[[1]]
+#         stopifnot(nrow(m) == 1)
+#         # browser()
+#         name <- m[,2]
+#         desc <- glue::trim(str_trim(m[,3]))
+#         sprintf("param %s\n%s\n", name, desc)
+#       })
+#
+#     x2 <- xx %>%
+#       str_flatten("\n@") %>%
+#       str_replace_all("[\n]+@param", "\n\n@param") %>%
+#       str_replace_all("[\n]+@param", "\n\n@param")
+#
+#     write_file(x2, f)
+#   })
 
-Sys.glob(c("man-src/*/1-*.md", "man-src/*/2-*.Rmd")) %>%
-  walk(\(f) {
-    x <- read_file(f)
-
-    xx <- str_split_1(x, fixed("\n@"))
-    ip <- startsWith(xx, "param ")
-    xx[ip] <- xx[ip] %>%
-      map_chr(\(x) {
-        m <- str_match_all(x, regex("param ([^[:space:]]+)(.*)",
-                                    dotall = TRUE, multiline = TRUE))[[1]]
-        stopifnot(nrow(m) == 1)
-        # browser()
-        name <- m[,2]
-        desc <- glue::trim(str_trim(m[,3]))
-        sprintf("param %s\n%s\n", name, desc)
-      })
-
-    x2 <- xx %>%
-      str_flatten("\n@") %>%
-      str_replace_all("[\n]+@param", "\n\n@param") %>%
-      str_replace_all("[\n]+@param", "\n\n@param")
-
-    write_file(x2, f)
-  })
-
-# man_src_pull_upstream_updates()
-# stop()
+man_src_pull_upstream_updates()
+# stop("FINITO")
 
 
 devtools::load_all() # TODO: render should be w/ an installed package and in a fresh r session w/ only `library(keras)`
 man_src_render_translated()
 
 devtools::document(roclets = c('rd', 'namespace'))
-stop()
+# stop()
 if(interactive()) local({
   rx <- callr::r_bg(\() remotes::install_local(force = TRUE, upgrade =  "never"))
   later::later(\() cat(rx$read_all_output()), delay = 17)
