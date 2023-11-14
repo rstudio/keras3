@@ -3,32 +3,44 @@ Computes the logarithm of the hyperbolic cosine of the prediction error.
 @description
 Formula:
 
-```python
-error = y_pred - y_true
-logcosh = mean(log((exp(error) + exp(-error))/2), axis=-1)
+
+```r
+error <- y_pred - y_true
+logcosh <- mean(log((exp(error) + exp(-error))/2), axis=-1)
 ```
 
 # Examples
 Standalone usage:
 
-```python
-m = keras.metrics.LogCoshError()
-m.update_state([[0, 1], [0, 0]], [[1, 1], [0, 0]])
-m.result()
-# 0.10844523
-m.reset_state()
-m.update_state([[0, 1], [0, 0]], [[1, 1], [0, 0]],
-               sample_weight=[1, 0])
-m.result()
-# 0.21689045
+
+```r
+m <- metric_log_cosh_error()
+m$update_state(rbind(c(0, 1), c(0, 0)), rbind(c(1, 1), c(0, 0)))
+m$result()
+```
+
+```
+## tf.Tensor(0.108445205, shape=(), dtype=float32)
+```
+
+```r
+m$reset_state()
+m$update_state(rbind(c(0, 1), c(0, 0)), rbind(c(1, 1), c(0, 0)),
+               sample_weight = c(1, 0))
+m$result()
+```
+
+```
+## tf.Tensor(0.21689041, shape=(), dtype=float32)
 ```
 
 Usage with `compile()` API:
 
-```python
-model.compile(optimizer='sgd',
-              loss='mse',
-              metrics=[keras.metrics.LogCoshError()])
+
+```r
+model %>% compile(optimizer = 'sgd',
+                  loss = 'mse',
+                  metrics = list(metric_log_cosh_error()))
 ```
 
 @param name
@@ -46,3 +58,4 @@ Passed on to the Python callable
 @seealso
 + <https:/keras.io/api/metrics/regression_metrics#logcosherror-class>
 + <https://www.tensorflow.org/api_docs/python/tf/keras/metrics/LogCoshError>
+

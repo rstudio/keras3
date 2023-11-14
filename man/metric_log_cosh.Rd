@@ -18,7 +18,7 @@ metric_log_cosh(y_true, y_pred)
 \description{
 Formula:
 
-\if{html}{\out{<div class="sourceCode python">}}\preformatted{loss = mean(log(cosh(y_pred - y_true)), axis=-1)
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{loss <- mean(log(cosh(y_pred - y_true)), axis=-1)
 }\if{html}{\out{</div>}}
 
 Note that \code{log(cosh(x))} is approximately equal to \code{(x ** 2) / 2} for small
@@ -27,10 +27,13 @@ mostly like the mean squared error, but will not be so strongly affected by
 the occasional wildly incorrect prediction.
 }
 \section{Examples}{
-\if{html}{\out{<div class="sourceCode python">}}\preformatted{y_true = [[0., 1.], [0., 0.]]
-y_pred = [[1., 1.], [0., 0.]]
-loss = keras.losses.log_cosh(y_true, y_pred)
-# 0.108
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{y_true <- rbind(c(0., 1.), c(0., 0.))
+y_pred <- rbind(c(1., 1.), c(0., 0.))
+loss <- metric_log_cosh(y_true, y_pred)
+loss
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor([ 2.16890413e-01 -1.90465432e-09], shape=(2), dtype=float64)
 }\if{html}{\out{</div>}}
 }
 

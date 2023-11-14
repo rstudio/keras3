@@ -16,29 +16,35 @@ metric_log_cosh_error(..., name = "logcosh", dtype = NULL)
 \description{
 Formula:
 
-\if{html}{\out{<div class="sourceCode python">}}\preformatted{error = y_pred - y_true
-logcosh = mean(log((exp(error) + exp(-error))/2), axis=-1)
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{error <- y_pred - y_true
+logcosh <- mean(log((exp(error) + exp(-error))/2), axis=-1)
 }\if{html}{\out{</div>}}
 }
 \section{Examples}{
 Standalone usage:
 
-\if{html}{\out{<div class="sourceCode python">}}\preformatted{m = keras.metrics.LogCoshError()
-m.update_state([[0, 1], [0, 0]], [[1, 1], [0, 0]])
-m.result()
-# 0.10844523
-m.reset_state()
-m.update_state([[0, 1], [0, 0]], [[1, 1], [0, 0]],
-               sample_weight=[1, 0])
-m.result()
-# 0.21689045
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{m <- metric_log_cosh_error()
+m$update_state(rbind(c(0, 1), c(0, 0)), rbind(c(1, 1), c(0, 0)))
+m$result()
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor(0.108445205, shape=(), dtype=float32)
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{m$reset_state()
+m$update_state(rbind(c(0, 1), c(0, 0)), rbind(c(1, 1), c(0, 0)),
+               sample_weight = c(1, 0))
+m$result()
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor(0.21689041, shape=(), dtype=float32)
 }\if{html}{\out{</div>}}
 
 Usage with \code{compile()} API:
 
-\if{html}{\out{<div class="sourceCode python">}}\preformatted{model.compile(optimizer='sgd',
-              loss='mse',
-              metrics=[keras.metrics.LogCoshError()])
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{model \%>\% compile(optimizer = 'sgd',
+                  loss = 'mse',
+                  metrics = list(metric_log_cosh_error()))
 }\if{html}{\out{</div>}}
 }
 

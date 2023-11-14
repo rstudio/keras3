@@ -2,8 +2,9 @@ Logarithm of the hyperbolic cosine of the prediction error.
 
 @description
 Formula:
-```python
-loss = mean(log(cosh(y_pred - y_true)), axis=-1)
+
+```r
+loss <- mean(log(cosh(y_pred - y_true)), axis=-1)
 ```
 
 Note that `log(cosh(x))` is approximately equal to `(x ** 2) / 2` for small
@@ -12,11 +13,16 @@ mostly like the mean squared error, but will not be so strongly affected by
 the occasional wildly incorrect prediction.
 
 # Examples
-```python
-y_true = [[0., 1.], [0., 0.]]
-y_pred = [[1., 1.], [0., 0.]]
-loss = keras.losses.log_cosh(y_true, y_pred)
-# 0.108
+
+```r
+y_true <- rbind(c(0., 1.), c(0., 0.))
+y_pred <- rbind(c(1., 1.), c(0., 0.))
+loss <- metric_log_cosh(y_true, y_pred)
+loss
+```
+
+```
+## tf.Tensor([ 2.16890413e-01 -1.90465432e-09], shape=(2), dtype=float64)
 ```
 
 @returns
@@ -32,3 +38,4 @@ The predicted values with shape = `[batch_size, d0, .. dN]`.
 @family losses
 @seealso
 + <https://www.tensorflow.org/api_docs/python/tf/keras/metrics/log_cosh>
+
