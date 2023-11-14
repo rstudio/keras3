@@ -366,6 +366,9 @@ df <- exports |>
   }) |>
   list_rbind()
 
+df <- df |>
+  select(r_name, endpoint, type, module, everything())
+
 
 df <- df |>
   mutate(
