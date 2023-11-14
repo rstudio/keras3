@@ -72,7 +72,7 @@ In dict mode, the FeatureSpace returns a dict of individually
 encoded features (with the same keys as the input dict keys).}
 
 \item{crosses}{List of features to be crossed together, e.g.
-\verb{crosses=[("feature_1", "feature_2")]}. The features will be
+\code{crosses=list(c("feature_1", "feature_2"))}. The features will be
 "crossed" by hashing their combined value into
 a fixed-length vector.}
 
@@ -89,8 +89,8 @@ Defaults to \code{32}.}
 \item{name}{String, name for the object}
 
 \item{feature_names}{Dict mapping the names of your features to their
-type specification, e.g. \code{{"my_feature": "integer_categorical"}}
-or \code{{"my_feature": FeatureSpace.integer_categorical()}}.
+type specification, e.g. \code{list(my_feature = "integer_categorical")}
+or \code{list(my_feature = feature_integer_categorical())}.
 For a complete list of all supported types, see
 "Available feature types" paragraph below.}
 }
