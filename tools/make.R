@@ -162,6 +162,7 @@ if(!"source:tools/translate-tools.R" %in% search()) envir::attach_source("tools/
 # TODO: this shouldn't error (empty last arg should be no-op):
 #
 # TODO: layer_torch_module_wrapper raises an error - aybe incompatible torch version?
+# TODO: `metric_binary_iou` should convert target_class_ids to integers automatically
 if(FALSE) {
   keras$utils$FeatureSpace$cross(
     feature_names=c("string_values", "int_values"),
