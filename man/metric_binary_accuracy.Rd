@@ -33,30 +33,40 @@ to compute the frequency with which \code{y_pred} matches \code{y_true}. This
 frequency is ultimately returned as \verb{binary accuracy}: an idempotent
 operation that simply divides \code{total} by \code{count}.
 
-If \code{sample_weight} is \code{None}, weights default to 1.
+If \code{sample_weight} is \code{NULL}, weights default to 1.
 Use \code{sample_weight} of 0 to mask values.
 }
 \section{Usage}{
 Standalone usage:
 
-\if{html}{\out{<div class="sourceCode python">}}\preformatted{m = keras.metrics.BinaryAccuracy()
-m.update_state([[1], [1], [0], [0]], [[0.98], [1], [0], [0.6]])
-m.result()
-# 0.75
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{m <- metric_binary_accuracy()
+m$update_state(rbind(1, 1, 0, 0), rbind(0.98, 1, 0, 0.6))
+m$result()
 }\if{html}{\out{</div>}}
 
-\if{html}{\out{<div class="sourceCode python">}}\preformatted{m.reset_state()
-m.update_state([[1], [1], [0], [0]], [[0.98], [1], [0], [0.6]],
-               sample_weight=[1, 0, 0, 1])
-m.result()
-# 0.5
+\if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor(0.75, shape=(), dtype=float32)
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{# 0.75
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{m$reset_state()
+m$update_state(rbind(1, 1, 0, 0), rbind(0.98, 1, 0, 0.6),
+               sample_weight = c(1, 0, 0, 1))
+m$result()
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor(0.5, shape=(), dtype=float32)
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{# 0.5
 }\if{html}{\out{</div>}}
 
 Usage with \code{compile()} API:
 
-\if{html}{\out{<div class="sourceCode python">}}\preformatted{model.compile(optimizer='sgd',
-              loss='binary_crossentropy',
-              metrics=[keras.metrics.BinaryAccuracy()])
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{model \%>\% compile(optimizer='sgd',
+                  loss='binary_crossentropy',
+                  metrics=list(metric_binary_accuracy()))
 }\if{html}{\out{</div>}}
 }
 
