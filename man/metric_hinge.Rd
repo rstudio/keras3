@@ -19,9 +19,6 @@ to -1 or 1 with shape = \verb{[batch_size, d0, .. dN]}.}
 
 \item{dtype}{(Optional) data type of the metric result.}
 }
-\value{
-Hinge loss values with shape = \verb{[batch_size, d0, .. dN-1]}.
-}
 \description{
 Formula:
 
@@ -49,13 +46,6 @@ m$result()
 }\if{html}{\out{</div>}}
 
 \if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor(1.1, shape=(), dtype=float32)
-}\if{html}{\out{</div>}}
-}
-
-\section{Examples}{
-\if{html}{\out{<div class="sourceCode r">}}\preformatted{y_true <- array(sample(c(-1, 1), 6, replace=TRUE), dim = c(2, 3))
-y_pred <- random_uniform(c(2, 3))
-loss <- loss_hinge(y_true, y_pred)
 }\if{html}{\out{</div>}}
 }
 

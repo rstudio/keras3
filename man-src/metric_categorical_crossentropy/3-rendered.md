@@ -7,17 +7,6 @@ e.g., when labels values are `c(2, 0, 1)`, then
 `y_true` is `rbind(c([0, 0, 1), c(1, 0, 0), c(0, 1, 0))`.
 
 # Examples
-
-```r
-y_true <- rbind(c(0, 1, 0), c(0, 0, 1))
-y_pred <- rbind(c(0.05, 0.95, 0), c(0.1, 0.8, 0.1))
-loss <- loss_categorical_crossentropy(y_true, y_pred)
-loss
-```
-
-```
-## tf.Tensor([0.05129329 2.30258509], shape=(2), dtype=float64)
-```
 Standalone usage:
 
 
@@ -65,9 +54,6 @@ model %>% compile(
   loss = 'mse',
   metrics = list(metric_categorical_crossentropy()))
 ```
-
-@returns
-Categorical crossentropy loss value.
 
 @param name
 (Optional) string name of the metric instance.

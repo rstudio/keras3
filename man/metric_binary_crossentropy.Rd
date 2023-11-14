@@ -38,23 +38,11 @@ a value of 0.1 for label "0" and 0.9 for label "1".}
 
 \item{dtype}{(Optional) data type of the metric result.}
 }
-\value{
-Binary crossentropy loss value. shape = \verb{[batch_size, d0, .. dN-1]}.
-}
 \description{
 This is the crossentropy metric class to be used when there are only two
 label classes (0 and 1).
 }
 \section{Examples}{
-\if{html}{\out{<div class="sourceCode r">}}\preformatted{y_true <- rbind(c(0, 1), c(0, 0))
-y_pred <- rbind(c(0.6, 0.4), c(0.4, 0.6))
-loss <- loss_binary_crossentropy(y_true, y_pred)
-loss
-}\if{html}{\out{</div>}}
-
-\if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor([0.91629073 0.71355818], shape=(2), dtype=float64)
-}\if{html}{\out{</div>}}
-
 Standalone usage:
 
 \if{html}{\out{<div class="sourceCode r">}}\preformatted{m <- metric_binary_crossentropy()

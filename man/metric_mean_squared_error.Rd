@@ -23,10 +23,6 @@ metric_mean_squared_error(
 
 \item{dtype}{(Optional) data type of the metric result.}
 }
-\value{
-\if{html}{\out{<div class="sourceCode">}}\preformatted{Mean squared error values with shape = `[batch_size, d0, .. dN-1]`.
-}\if{html}{\out{</div>}}
-}
 \description{
 Formula:
 
@@ -39,11 +35,6 @@ Formula:
 }\if{html}{\out{</div>}}
 }
 \section{Examples}{
-\if{html}{\out{<div class="sourceCode python">}}\preformatted{y_true = np.random.randint(0, 2, size=(2, 3))
-y_pred = np.random.random(size=(2, 3))
-loss = keras.losses.mean_squared_error(y_true, y_pred)
-}\if{html}{\out{</div>}}
-
 \if{html}{\out{<div class="sourceCode python">}}\preformatted{m = keras.metrics.MeanSquaredError()
 m.update_state([[0, 1], [0, 0]], [[1, 1], [0, 0]])
 m.result()

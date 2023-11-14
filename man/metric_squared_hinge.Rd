@@ -19,9 +19,6 @@ to -1 or 1 with shape = \verb{[batch_size, d0, .. dN]}.}
 
 \item{dtype}{(Optional) data type of the metric result.}
 }
-\value{
-Squared hinge loss values with shape = \verb{[batch_size, d0, .. dN-1]}.
-}
 \description{
 Formula:
 
@@ -43,13 +40,6 @@ m.update_state([[0, 1], [0, 0]], [[0.6, 0.4], [0.4, 0.6]],
                sample_weight=[1, 0])
 m.result()
 # 1.46
-}\if{html}{\out{</div>}}
-}
-
-\section{Examples}{
-\if{html}{\out{<div class="sourceCode python">}}\preformatted{y_true = np.random.choice([-1, 1], size=(2, 3))
-y_pred = np.random.random(size=(2, 3))
-loss = keras.losses.squared_hinge(y_true, y_pred)
 }\if{html}{\out{</div>}}
 }
 

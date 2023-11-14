@@ -18,11 +18,6 @@ loss = mean(square(log(y_true + 1) - log(y_pred + 1)))
 ```
 
 # Examples
-```python
-y_true = np.random.randint(0, 2, size=(2, 3))
-y_pred = np.random.random(size=(2, 3))
-loss = keras.losses.mean_squared_logarithmic_error(y_true, y_pred)
-```
 Standalone usage:
 
 ```python
@@ -45,10 +40,6 @@ model.compile(
     loss='mse',
     metrics=[keras.metrics.MeanSquaredLogarithmicError()])
 ```
-
-@returns
-Mean squared logarithmic error values with shape = `[batch_size, d0, ..
-dN-1]`.
 
 @param name
 (Optional) string name of the metric instance.

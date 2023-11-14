@@ -42,7 +42,9 @@ library(reticulate)
 library(assertthat, include.only = c("assert_that"))
 
 attach_eval({
-  import_from(TKutils, `%error%`)
+  `%error%` <-
+    function (x, y)
+      tryCatch(x, error = function(e) y)
   import_from(memoise, memoise)
 
   is_scalar <- function(x) identical(length(x), 1L)
@@ -1433,8 +1435,18 @@ mk_export <- memoise(.mk_export <- function(endpoint, quiet = FALSE) {
         params[[nm]] <- c(pdoc1, pdoc2) %>% .[which.max(str_length(str_squish(.)))] #str_split_lines() |> unique() |> str_flatten_lines()
       }
 
-      for(section in setdiff(names(ep2$doc), "title"))
+      # we don't really want to concatenate the sessions for metrics, only the doc
+      # parameters.
+      for(section in setdiff(names(ep2$doc), "title")) {
+
+        if (endpoint |> startsWith("keras.metrics.")) {
+          print(section)
+          if (section == "examples") next
+          if (section == "returns") next
+        }
+
         doc[[section]] %<>% str_flatten_lines(ep2$doc[[section]], .)
+      }
 
       doc <<- doc
       params <<- params

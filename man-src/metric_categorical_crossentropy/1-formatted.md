@@ -7,14 +7,6 @@ e.g., when labels values are `[2, 0, 1]`, then
 `y_true` is `[[0, 0, 1], [1, 0, 0], [0, 1, 0]]`.
 
 # Examples
-```python
-y_true = [[0, 1, 0], [0, 0, 1]]
-y_pred = [[0.05, 0.95, 0], [0.1, 0.8, 0.1]]
-loss = keras.losses.categorical_crossentropy(y_true, y_pred)
-assert loss.shape == (2,)
-loss
-# array([0.0513, 2.303], dtype=float32)
-```
 Standalone usage:
 
 ```python
@@ -49,9 +41,6 @@ model.compile(
     loss='mse',
     metrics=[keras.metrics.CategoricalCrossentropy()])
 ```
-
-@returns
-Categorical crossentropy loss value.
 
 @param name
 (Optional) string name of the metric instance.

@@ -36,17 +36,6 @@ m$result()
 ## tf.Tensor(1.1, shape=(), dtype=float32)
 ```
 
-# Examples
-
-```r
-y_true <- array(sample(c(-1, 1), 6, replace=TRUE), dim = c(2, 3))
-y_pred <- random_uniform(c(2, 3))
-loss <- loss_hinge(y_true, y_pred)
-```
-
-@returns
-Hinge loss values with shape = `[batch_size, d0, .. dN-1]`.
-
 @param name
 (Optional) string name of the metric instance.
 

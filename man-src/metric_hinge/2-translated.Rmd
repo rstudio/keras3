@@ -27,16 +27,6 @@ m$update_state(rbind(c(0, 1), c(0, 0)), rbind(c(0.6, 0.4), c(0.4, 0.6)),
 m$result()
 ```
 
-# Examples
-```{r}
-y_true <- array(sample(c(-1, 1), 6, replace=TRUE), dim = c(2, 3))
-y_pred <- random_uniform(c(2, 3))
-loss <- loss_hinge(y_true, y_pred)
-```
-
-@returns
-Hinge loss values with shape = `[batch_size, d0, .. dN-1]`.
-
 @param name
 (Optional) string name of the metric instance.
 

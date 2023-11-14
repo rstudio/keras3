@@ -5,14 +5,6 @@ This is the crossentropy metric class to be used when there are only two
 label classes (0 and 1).
 
 # Examples
-```python
-y_true = [[0, 1], [0, 0]]
-y_pred = [[0.6, 0.4], [0.4, 0.6]]
-loss = keras.losses.binary_crossentropy(y_true, y_pred)
-assert loss.shape == (2,)
-loss
-# array([0.916 , 0.714], dtype=float32)
-```
 Standalone usage:
 
 ```python
@@ -38,9 +30,6 @@ model.compile(
     loss='mse',
     metrics=[keras.metrics.BinaryCrossentropy()])
 ```
-
-@returns
-Binary crossentropy loss value. shape = `[batch_size, d0, .. dN-1]`.
 
 @param name
 (Optional) string name of the metric instance.

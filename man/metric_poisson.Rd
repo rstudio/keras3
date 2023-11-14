@@ -17,9 +17,6 @@ metric_poisson(y_true, y_pred, ..., name = "poisson", dtype = NULL)
 
 \item{dtype}{(Optional) data type of the metric result.}
 }
-\value{
-Poisson loss values with shape = \verb{[batch_size, d0, .. dN-1]}.
-}
 \description{
 Formula:
 
@@ -32,16 +29,6 @@ Formula:
 }\if{html}{\out{</div>}}
 }
 \section{Examples}{
-\if{html}{\out{<div class="sourceCode python">}}\preformatted{y_true = np.random.randint(0, 2, size=(2, 3))
-y_pred = np.random.random(size=(2, 3))
-loss = keras.losses.poisson(y_true, y_pred)
-assert loss.shape == (2,)
-y_pred = y_pred + 1e-7
-assert np.allclose(
-    loss, np.mean(y_pred - y_true * np.log(y_pred), axis=-1),
-    atol=1e-5)
-}\if{html}{\out{</div>}}
-
 Standalone usage:
 
 \if{html}{\out{<div class="sourceCode python">}}\preformatted{m = keras.metrics.Poisson()

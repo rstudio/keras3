@@ -5,17 +5,6 @@ This is the crossentropy metric class to be used when there are only two
 label classes (0 and 1).
 
 # Examples
-
-```r
-y_true <- rbind(c(0, 1), c(0, 0))
-y_pred <- rbind(c(0.6, 0.4), c(0.4, 0.6))
-loss <- loss_binary_crossentropy(y_true, y_pred)
-loss
-```
-
-```
-## tf.Tensor([0.91629073 0.71355818], shape=(2), dtype=float64)
-```
 Standalone usage:
 
 
@@ -50,9 +39,6 @@ model %>% compile(
     loss = 'mse',
     metrics = list(metric_binary_crossentropy()))
 ```
-
-@returns
-Binary crossentropy loss value. shape = `[batch_size, d0, .. dN-1]`.
 
 @param name
 (Optional) string name of the metric instance.

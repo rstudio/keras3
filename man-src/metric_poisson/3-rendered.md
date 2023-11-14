@@ -14,16 +14,6 @@ metric = y_pred - y_true * log(y_pred)
 ```
 
 # Examples
-```python
-y_true = np.random.randint(0, 2, size=(2, 3))
-y_pred = np.random.random(size=(2, 3))
-loss = keras.losses.poisson(y_true, y_pred)
-assert loss.shape == (2,)
-y_pred = y_pred + 1e-7
-assert np.allclose(
-    loss, np.mean(y_pred - y_true * np.log(y_pred), axis=-1),
-    atol=1e-5)
-```
 Standalone usage:
 
 ```python
@@ -48,9 +38,6 @@ model.compile(optimizer='sgd',
               loss='mse',
               metrics=[keras.metrics.Poisson()])
 ```
-
-@returns
-Poisson loss values with shape = `[batch_size, d0, .. dN-1]`.
 
 @param name
 (Optional) string name of the metric instance.

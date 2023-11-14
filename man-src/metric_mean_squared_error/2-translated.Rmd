@@ -18,19 +18,11 @@ loss = mean(square(y_true - y_pred))
 
 # Examples
 ```python
-y_true = np.random.randint(0, 2, size=(2, 3))
-y_pred = np.random.random(size=(2, 3))
-loss = keras.losses.mean_squared_error(y_true, y_pred)
-```
-```python
 m = keras.metrics.MeanSquaredError()
 m.update_state([[0, 1], [0, 0]], [[1, 1], [0, 0]])
 m.result()
 # 0.25
 ```
-
-@returns
-    Mean squared error values with shape = `[batch_size, d0, .. dN-1]`.
 
 @param name
 (Optional) string name of the metric instance.

@@ -39,9 +39,6 @@ The dimension along which entropy is computed.}
 
 \item{dtype}{(Optional) data type of the metric result.}
 }
-\value{
-Sparse categorical crossentropy loss value.
-}
 \description{
 Use this crossentropy metric when there are two or more label classes.
 It expects labels to be provided as integers. If you want to provide labels
@@ -52,14 +49,6 @@ There should be \code{num_classes} floating point values per feature for \code{y
 and a single floating point value per feature for \code{y_true}.
 }
 \section{Examples}{
-\if{html}{\out{<div class="sourceCode python">}}\preformatted{y_true = [1, 2]
-y_pred = [[0.05, 0.95, 0], [0.1, 0.8, 0.1]]
-loss = keras.losses.sparse_categorical_crossentropy(y_true, y_pred)
-assert loss.shape == (2,)
-loss
-# array([0.0513, 2.303], dtype=float32)
-}\if{html}{\out{</div>}}
-
 Standalone usage:
 
 \if{html}{\out{<div class="sourceCode python">}}\preformatted{# y_true = one_hot(y_true) = [[0, 1, 0], [0, 0, 1]]

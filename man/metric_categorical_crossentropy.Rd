@@ -39,9 +39,6 @@ The dimension along which entropy is computed.}
 
 \item{dtype}{(Optional) data type of the metric result.}
 }
-\value{
-Categorical crossentropy loss value.
-}
 \description{
 This is the crossentropy metric class to be used when there are multiple
 label classes (2 or more). It assumes that labels are one-hot encoded,
@@ -49,15 +46,6 @@ e.g., when labels values are \code{c(2, 0, 1)}, then
 \code{y_true} is \verb{rbind(c([0, 0, 1), c(1, 0, 0), c(0, 1, 0))}.
 }
 \section{Examples}{
-\if{html}{\out{<div class="sourceCode r">}}\preformatted{y_true <- rbind(c(0, 1, 0), c(0, 0, 1))
-y_pred <- rbind(c(0.05, 0.95, 0), c(0.1, 0.8, 0.1))
-loss <- loss_categorical_crossentropy(y_true, y_pred)
-loss
-}\if{html}{\out{</div>}}
-
-\if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor([0.05129329 2.30258509], shape=(2), dtype=float64)
-}\if{html}{\out{</div>}}
-
 Standalone usage:
 
 \if{html}{\out{<div class="sourceCode r">}}\preformatted{# EPSILON = 1e-7, y = y_true, y` = y_pred
