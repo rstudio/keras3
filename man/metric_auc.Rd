@@ -49,20 +49,20 @@ handle predictions equal to exactly 0 or 1.}
 
 \item{multi_label}{boolean indicating whether multilabel data should be
 treated as such, wherein AUC is computed separately for each label
-and then averaged across labels, or (when \code{False}) if the data
+and then averaged across labels, or (when \code{FALSE}) if the data
 should be flattened into a single label before AUC computation. In
 the latter case, when multilabel data is passed to AUC, each
 label-prediction pair is treated as an individual data point. Should
-be set to False for multi-class data.}
+be set to FALSE for multi-class data.}
 
 \item{num_labels}{(Optional) The number of labels, used when \code{multi_label} is
-True. If \code{num_labels} is not specified, then state variables get
+TRUE. If \code{num_labels} is not specified, then state variables get
 created on the first call to \code{update_state}.}
 
 \item{label_weights}{(Optional) list, array, or tensor of non-negative weights
 used to compute AUCs for multilabel data. When \code{multi_label} is
-True, the weights are applied to the individual label AUCs when they
-are averaged to produce the multi-label AUC. When it's False, they
+TRUE, the weights are applied to the individual label AUCs when they
+are averaged to produce the multi-label AUC. When it's FALSE, they
 are used to weight the individual label predictions in computing the
 confusion matrix on the flattened data. Note that this is unlike
 \code{class_weights} in that \code{class_weights} weights the example
@@ -105,46 +105,56 @@ split the predictions more evenly.
 
 For a best approximation of the real AUC, \code{predictions} should be
 distributed approximately uniformly in the range \verb{[0, 1]} (if
-\code{from_logits=False}). The quality of the AUC approximation may be poor if
+\code{from_logits=FALSE}). The quality of the AUC approximation may be poor if
 this is not the case. Setting \code{summation_method} to 'minoring' or 'majoring'
 can help quantify the error in the approximation by providing lower or upper
 bound estimate of the AUC.
 
-If \code{sample_weight} is \code{None}, weights default to 1.
+If \code{sample_weight} is \code{NULL}, weights default to 1.
 Use \code{sample_weight} of 0 to mask values.
 }
 \section{Usage}{
 Standalone usage:
 
-\if{html}{\out{<div class="sourceCode python">}}\preformatted{m = keras.metrics.AUC(num_thresholds=3)
-m.update_state([0, 0, 1, 1], [0, 0.5, 0.3, 0.9])
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{m <- metric_auc(num_thresholds = 3)
+m$update_state(c(0, 0, 1, 1), c(0, 0.5, 0.3, 0.9))
 # threshold values are [0 - 1e-7, 0.5, 1 + 1e-7]
 # tp = [2, 1, 0], fp = [2, 0, 0], fn = [0, 1, 2], tn = [0, 2, 2]
 # tp_rate = recall = [1, 0.5, 0], fp_rate = [1, 0, 0]
 # auc = ((((1 + 0.5) / 2) * (1 - 0)) + (((0.5 + 0) / 2) * (0 - 0)))
 #     = 0.75
-m.result()
-# 0.75
+m$result()
 }\if{html}{\out{</div>}}
 
-\if{html}{\out{<div class="sourceCode python">}}\preformatted{m.reset_state()
-m.update_state([0, 0, 1, 1], [0, 0.5, 0.3, 0.9],
-               sample_weight=[1, 0, 0, 1])
-m.result()
-# 1.0
+\if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor(0.75, shape=(), dtype=float32)
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{# 0.75
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{m$reset_state()
+m$update_state(c(0, 0, 1, 1), c(0, 0.5, 0.3, 0.9),
+               sample_weight=c(1, 0, 0, 1))
+m$result()
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor(1.0, shape=(), dtype=float32)
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{# 1.0
 }\if{html}{\out{</div>}}
 
 Usage with \code{compile()} API:
 
-\if{html}{\out{<div class="sourceCode python">}}\preformatted{# Reports the AUC of a model outputting a probability.
-model.compile(optimizer='sgd',
-              loss=keras.losses.BinaryCrossentropy(),
-              metrics=[keras.metrics.AUC()])
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{# Reports the AUC of a model outputting a probability.
+model \%>\% compile(optimizer = 'sgd',
+                  loss = loss_binary_crossentropy(),
+                  metrics = list(metric_auc()))
 
 # Reports the AUC of a model outputting a logit.
-model.compile(optimizer='sgd',
-              loss=keras.losses.BinaryCrossentropy(from_logits=True),
-              metrics=[keras.metrics.AUC(from_logits=True)])
+model \%>\% compile(optimizer = 'sgd',
+                  loss = loss_binary_crossentropy(from_logits = TRUE),
+                  metrics = list(metric_auc(from_logits = TRUE)))
 }\if{html}{\out{</div>}}
 }
 
