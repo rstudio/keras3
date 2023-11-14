@@ -19,14 +19,14 @@ This class processes one step within the whole time sequence input, whereas
 ```{r}
 inputs <- random_uniform(c(32, 10, 8))
 outputs <- inputs |> layer_rnn(layer_gru_cell(4))
-outputs$shape
+shape(outputs)
 rnn <- layer_rnn(
    cell = layer_gru_cell(4),
    return_sequences=TRUE,
    return_state=TRUE)
 c(whole_sequence_output, final_state) %<-% rnn(inputs)
-whole_sequence_output$shape
-final_state$shape
+shape(whole_sequence_output)
+shape(final_state)
 ```
 
 @param units

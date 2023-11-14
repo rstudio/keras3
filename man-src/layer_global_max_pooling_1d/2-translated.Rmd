@@ -26,7 +26,7 @@ Global max pooling operation for temporal data.
 ```{r}
 x <- random_uniform(c(2, 3, 4))
 y <- x |> layer_global_max_pooling_1d()
-y$shape
+shape(y)
 ```
 
 @param data_format

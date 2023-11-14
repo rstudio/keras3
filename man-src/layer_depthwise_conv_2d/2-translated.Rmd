@@ -44,7 +44,7 @@ ValueError: when both `strides > 1` and `dilation_rate > 1`.
 ```{r}
 x <- random_uniform(c(4, 10, 10, 12))
 y <- x |> layer_depthwise_conv_2d(3, 3, activation = 'relu')
-y$shape
+shape(y)
 ```
 
 @returns

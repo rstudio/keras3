@@ -31,7 +31,7 @@ ValueError: when both `strides > 1` and `dilation_rate > 1`.
 # batch size is 4.
 x <- random_uniform(c(4, 10, 128))
 y <- x |> layer_conv_1d(32, 3, activation='relu')
-y$shape
+shape(y)
 ```
 
 @returns

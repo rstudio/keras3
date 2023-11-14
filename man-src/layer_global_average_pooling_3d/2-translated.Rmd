@@ -26,7 +26,7 @@ Global average pooling operation for 3D data.
 ```{r}
 x <- random_uniform(c(2, 4, 5, 4, 3))
 y <- x |> layer_global_average_pooling_3d()
-y$shape
+shape(y)
 ```
 
 @param data_format

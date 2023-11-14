@@ -10,7 +10,7 @@ Cropping layer for 3D data (e.g. spatial or spatio-temporal).
 input_shape <- c(2, 28, 28, 10, 3)
 x <- input_shape %>% { k_reshape(seq(prod(.)), .) }
 y <- x |> layer_cropping_3d(cropping = c(2, 4, 2))
-y$shape
+shape(y)
 ```
 
 # Input Shape

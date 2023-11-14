@@ -27,10 +27,10 @@ Usage in a Keras model:
 ```{r}
 x1 <- k_reshape(0:9, c(5, 2)) |> layer_dense(8)
 x2 <- k_reshape(10:19, c(5, 2)) |> layer_dense(8)
-x1$shape
-x2$shape
+shape(x1)
+shape(x2)
 y <- layer_dot(x1, x2, axes=2)
-y$shape
+shape(y)
 ```
 
 @returns

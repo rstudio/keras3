@@ -9,7 +9,7 @@ Repeats the input n times.
 ```{r}
 x <- layer_input(shape = 32)
 y <- layer_repeat_vector(x, n = 3)
-y$shape
+shape(y)
 ```
 
 # Input Shape

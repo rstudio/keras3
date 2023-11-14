@@ -18,10 +18,10 @@ nn <- import("torch.nn")
 nnf <- import("torch.nn.functional")
 
 Classifier(keras$Model) %py_class% {
-  
+
   initialize <- function(...) {
     super$initialize(...)
-    
+
     self$conv1 <- layer_torch_module_wrapper(module = nn$Conv2d(
       in_channels=1L, out_channels=32L, kernel_size=c(3L, 3L)
     ))
@@ -35,7 +35,7 @@ Classifier(keras$Model) %py_class% {
       1600L, 10L
     ))
   }
-  
+
   call <- function(inputs) {
     x <- nnf$relu(self$conv1(inputs))
     x <- self$pool(x)
@@ -46,12 +46,12 @@ Classifier(keras$Model) %py_class% {
     x <- self$fc(x)
     nnf$softmax(x, dim=1L)
   }
-  
+
 }
-    
+
 model <- Classifier()
-model$build(c(1L, 28L, 28L))
-print("Output shape:", model(torch$ones(1L, 1L, 28L, 28L))$shape)
+model$build(shape(1, 28, 28))
+print("Output shape:", model(torch$ones(shape(1L, 1L, 28L, 28L))))
 
 model %>% compile(
     loss="sparse_categorical_crossentropy",
@@ -80,4 +80,3 @@ Passed on to the Python callable
 @family utils
 @seealso
 + <https://www.tensorflow.org/api_docs/python/tf/keras/layers/TorchModuleWrapper>
-

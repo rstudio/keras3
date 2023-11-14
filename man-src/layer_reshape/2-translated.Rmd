@@ -18,13 +18,13 @@ the first layer in a model.
 ```{r}
 x <- layer_input(shape = 12)
 y <- layer_reshape(x, c(3, 4))
-y$shape
+shape(y)
 ```
 
 ```{r}
 # also supports shape inference using `-1` as dimension
 y <- layer_reshape(x, c(-1, 2, 2))
-y$shape
+shape(y)
 ```
 
 @param target_shape

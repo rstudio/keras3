@@ -11,7 +11,7 @@ input_shape <- c(1, 1, 2, 2, 3)
 x <- k_reshape(seq_len(prod(input_shape)), input_shape)
 x
 y <- layer_zero_padding_3d(x, padding = 2)
-y$shape
+shape(y)
 ```
 
 # Input Shape

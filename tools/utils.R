@@ -704,7 +704,8 @@ make_roxygen_tags <- function(endpoint, py_obj = py_eval(endpoint), type) {
     rev()
   # } %error% browser()
 
-  out$family %<>% intersect(.keeper_families)
+   #
+   out$family %<>% intersect(.keeper_families)
   if(endpoint |> startsWith('keras.optimizers.schedules.')) {
     out$family %<>% setdiff("optimizers")
   }

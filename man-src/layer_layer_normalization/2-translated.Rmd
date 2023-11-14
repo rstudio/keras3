@@ -44,8 +44,8 @@ For example:
 layer <- layer_layer_normalization(axis = c(2, 3, 4))
 
 layer(k_ones(c(5, 20, 30, 40))) |> invisible() # build()
-layer$beta$shape
-layer$gamma$shape
+shape(layer$beta)
+shape(layer$gamma)
 ```
 
 Note that other implementations of layer normalization may choose to define
