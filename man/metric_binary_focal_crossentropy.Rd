@@ -48,12 +48,12 @@ According to \href{https://arxiv.org/pdf/1708.02002.pdf}{Lin et al., 2018}, it
 helps to apply a focal factor to down-weight easy examples and focus more on
 hard examples. By default, the focal tensor is computed as follows:
 
-\code{focal_factor = (1 - output) ** gamma} for class 1
-\code{focal_factor = output ** gamma} for class 0
+\code{focal_factor = (1 - output)^gamma} for class 1
+\code{focal_factor = output^gamma} for class 0
 where \code{gamma} is a focusing parameter. When \code{gamma} = 0, there is no focal
 effect on the binary crossentropy loss.
 
-If \code{apply_class_balancing == True}, this function also takes into account a
+If \code{apply_class_balancing == TRUE}, this function also takes into account a
 weight balancing factor for the binary classes 0 and 1 as follows:
 
 \code{weight = alpha} for class 1 (\code{target == 1})
@@ -61,13 +61,13 @@ weight balancing factor for the binary classes 0 and 1 as follows:
 where \code{alpha} is a float in the range of \verb{[0, 1]}.
 }
 \section{Examples}{
-\if{html}{\out{<div class="sourceCode python">}}\preformatted{y_true = [[0, 1], [0, 0]]
-y_pred = [[0.6, 0.4], [0.4, 0.6]]
-loss = keras.losses.binary_focal_crossentropy(
-       y_true, y_pred, gamma=2)
-assert loss.shape == (2,)
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{y_true <- rbind(c(0, 1), c(0, 0))
+y_pred <- rbind(c(0.6, 0.4), c(0.4, 0.6))
+loss <- loss_binary_focal_crossentropy(y_true, y_pred, gamma=2)
 loss
-# array([0.330, 0.206], dtype=float32)
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor([0.32986466 0.20579838], shape=(2), dtype=float64)
 }\if{html}{\out{</div>}}
 }
 
