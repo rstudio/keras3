@@ -13,7 +13,8 @@ of the sigmoid activation.
 # Reference
 - [Wikipedia "Hard sigmoid"](https://en.wikipedia.org/wiki/Hard_sigmoid)
 
-@param x Input tensor.
+@param x
+Input tensor.
 
 @export
 @family activation functions

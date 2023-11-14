@@ -95,27 +95,40 @@ output
 ##    [9. ]]]], shape=(1, 3, 3, 1), dtype=float32)
 ```
 
-@param pool_size int or list of 2 integers, factors by which to downscale
-    (dim1, dim2). If only one integer is specified, the same
-    window length will be used for all dimensions.
-@param strides int or list of 2 integers, or `NULL`. Strides values. If `NULL`,
-    it will default to `pool_size`. If only one int is specified, the
-    same stride size will be used for all dimensions.
-@param padding string, either `"valid"` or `"same"` (case-insensitive).
-    `"valid"` means no padding. `"same"` results in padding evenly to
-    the left/right or up/down of the input such that output has the same
-    height/width dimension as the input.
-@param data_format string, either `"channels_last"` or `"channels_first"`.
-    The ordering of the dimensions in the inputs. `"channels_last"`
-    corresponds to inputs with shape `(batch, height, width, channels)`
-    while `"channels_first"` corresponds to inputs with shape
-    `(batch, channels, height, width)`. It defaults to the
-    `image_data_format` value found in your Keras config file at
-    `~/.keras/keras.json`. If you never set it, then it will be
-    `"channels_last"`.
-@param object Object to compose the layer with. A tensor, array, or sequential model.
-@param name String, name for the object
-@param ... Passed on to the Python callable
+@param pool_size
+int or list of 2 integers, factors by which to downscale
+(dim1, dim2). If only one integer is specified, the same
+window length will be used for all dimensions.
+
+@param strides
+int or list of 2 integers, or `NULL`. Strides values. If `NULL`,
+it will default to `pool_size`. If only one int is specified, the
+same stride size will be used for all dimensions.
+
+@param padding
+string, either `"valid"` or `"same"` (case-insensitive).
+`"valid"` means no padding. `"same"` results in padding evenly to
+the left/right or up/down of the input such that output has the same
+height/width dimension as the input.
+
+@param data_format
+string, either `"channels_last"` or `"channels_first"`.
+The ordering of the dimensions in the inputs. `"channels_last"`
+corresponds to inputs with shape `(batch, height, width, channels)`
+while `"channels_first"` corresponds to inputs with shape
+`(batch, channels, height, width)`. It defaults to the
+`image_data_format` value found in your Keras config file at
+`~/.keras/keras.json`. If you never set it, then it will be
+`"channels_last"`.
+
+@param object
+Object to compose the layer with. A tensor, array, or sequential model.
+
+@param name
+String, name for the object
+
+@param ...
+Passed on to the Python callable
 
 @export
 @family pooling layers

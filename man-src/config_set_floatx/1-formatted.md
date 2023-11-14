@@ -29,7 +29,8 @@ keras.config.set_floatx('float32')
 # Raises
     ValueError: In case of invalid value.
 
-@param value String; `'float16'`, `'float32'`, or `'float64'`.
+@param value
+String; `'float16'`, `'float32'`, or `'float64'`.
 
 @export
 @seealso

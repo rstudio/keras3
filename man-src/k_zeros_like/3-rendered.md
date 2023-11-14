@@ -3,8 +3,11 @@ Return a tensor of zeros with the same shape and type as `x`.
 @returns
     A tensor of zeros with the same shape and type as `x`.
 
-@param x Input tensor.
-@param dtype Overrides the data type of the result.
+@param x
+Input tensor.
+
+@param dtype
+Overrides the data type of the result.
 
 @export
 @family ops

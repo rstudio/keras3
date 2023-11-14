@@ -9,7 +9,8 @@ tensor would return `False` if your backend is PyTorch or JAX.
 @returns
     `True` if `x` is a tensor, otherwise `False`.
 
-@param x A variable.
+@param x
+A variable.
 
 @export
 @family ops

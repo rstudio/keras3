@@ -15,7 +15,7 @@ k_tensordot(x1, x2, axes = 2L)
 \item If an integer, N, sum over the last N axes of \code{x1} and the
 first N axes of \code{x2} in order. The sizes of the corresponding
 axes must match.
-- Or, a list of axes to be summed over, first sequence applying
+\item Or, a list of axes to be summed over, first sequence applying
 to \code{x1}, second to \code{x2}. Both sequences must be of the
 same length.
 }}

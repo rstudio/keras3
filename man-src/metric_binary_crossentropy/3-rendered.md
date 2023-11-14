@@ -42,20 +42,35 @@ model.compile(
 @returns
 Binary crossentropy loss value. shape = `[batch_size, d0, .. dN-1]`.
 
-@param name (Optional) string name of the metric instance.
-@param dtype (Optional) data type of the metric result.
-@param from_logits (Optional) Whether output is expected
-    to be a logits tensor. By default, we consider
-    that output encodes a probability distribution.
-@param label_smoothing (Optional) Float in `[0, 1]`.
-    When > 0, label values are smoothed,
-    meaning the confidence on label values are relaxed.
-    e.g. `label_smoothing=0.2` means that we will use
-    a value of 0.1 for label "0" and 0.9 for label "1".
-@param y_true Ground truth values. shape = `[batch_size, d0, .. dN]`.
-@param y_pred The predicted values. shape = `[batch_size, d0, .. dN]`.
-@param axis The axis along which the mean is computed. Defaults to `-1`.
-@param ... Passed on to the Python callable
+@param name
+(Optional) string name of the metric instance.
+
+@param dtype
+(Optional) data type of the metric result.
+
+@param from_logits
+(Optional) Whether output is expected
+to be a logits tensor. By default, we consider
+that output encodes a probability distribution.
+
+@param label_smoothing
+(Optional) Float in `[0, 1]`.
+When > 0, label values are smoothed,
+meaning the confidence on label values are relaxed.
+e.g. `label_smoothing=0.2` means that we will use
+a value of 0.1 for label "0" and 0.9 for label "1".
+
+@param y_true
+Ground truth values. shape = `[batch_size, d0, .. dN]`.
+
+@param y_pred
+The predicted values. shape = `[batch_size, d0, .. dN]`.
+
+@param axis
+The axis along which the mean is computed. Defaults to `-1`.
+
+@param ...
+Passed on to the Python callable
 
 @export
 @family metric

@@ -47,10 +47,15 @@ k_diff(x, axis = 1)
 @returns
 Tensor of diagonals.
 
-@param a Input tensor.
-@param n The number of times values are differenced. Defaults to `1`.
-@param axis Axis to compute discrete difference(s) along.
-    Defaults to `-1` (last axis).
+@param a
+Input tensor.
+
+@param n
+The number of times values are differenced. Defaults to `1`.
+
+@param axis
+Axis to compute discrete difference(s) along.
+Defaults to `-1` (last axis).
 
 @export
 @family ops

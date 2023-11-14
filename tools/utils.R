@@ -1480,8 +1480,10 @@ dump_keras_export <- function(roxygen, r_name, r_fn) {
 dump_roxygen <- function(doc, params, tags) {
 
   params <- params %>%
-    { glue("@param {names(.)} {list_simplify(., ptype = '')}") } %>%
-    str_flatten("\n")
+    lapply(str_trim) %>%
+    lapply(glue::trim) %>%
+    { glue("@param {names(.)}\n{list_simplify(., ptype = '')}") } %>%
+    str_flatten("\n\n")
 
   doc$arguments <- NULL
 
@@ -1697,7 +1699,8 @@ git <- function(..., retries = 4L, valid_exit_codes = 0L) {
 }
 
 git_reset <- function(..., except = "./tools") {
-  stop(r"---{
+  # stop(
+    r"---{
 NEEDS A GUARRAIL
 don't call 'git stash pop' if we didn't make a new stash
 
@@ -1741,7 +1744,7 @@ no changes added to commit (use "git add" and/or "git commit -a")
 The stash entry is kept in case you need it again.
 res <- 1L
 Error in git("stash pop") : non-0 exit from git stash
-  }---")
+  }---" #|> stop()
   git("stash push --", ..., except)
   git("reset --hard")
   git("stash pop")
@@ -1797,8 +1800,10 @@ man_src_pull_upstream_updates <- function(directories = dir_ls("man-src/", type 
 
       if (file.exists(dir / "2-translated.Rmd"))
         git(
-          "diff -U1 --no-index",
-          "--diff-algorithm=minimal",
+          "diff --no-index",
+          "-U1",
+          # "-U0",
+          # "--diff-algorithm=minimal",
           paste0("--output=", dir / "translate.patch"),
           dir / "1-formatted.md",
           dir / "2-translated.Rmd",
@@ -1818,7 +1823,11 @@ man_src_pull_upstream_updates <- function(directories = dir_ls("man-src/", type 
       write_lines(patch, dir / "translate.patch")
 
       git("add", dir/"2-translated.Rmd")
-      git("apply --3way --recount --allow-empty", dir/"translate.patch",
+      git("apply --3way --recount --allow-empty",
+          "--unidiff-zero",
+          "--ignore-whitespace",
+          # "--whitespace=fix",
+          dir/"translate.patch",
           valid_exit_codes = c(0L, 1L))
     }) |>
     invisible()

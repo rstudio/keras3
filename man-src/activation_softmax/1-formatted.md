@@ -16,8 +16,11 @@ The softmax of each vector x is computed as
 
 The input values in are the log-odds of the resulting probability.
 
-@param x Input tensor.
-@param axis Integer, axis along which the softmax is applied.
+@param x
+Input tensor.
+
+@param axis
+Integer, axis along which the softmax is applied.
 
 @export
 @family activation functions

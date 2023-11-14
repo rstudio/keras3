@@ -21,16 +21,17 @@ layer_rnn(
 
 \item{cell}{A RNN cell instance or a list of RNN cell instances.
 A RNN cell is a class that has:
-- A \code{call(input_at_t, states_at_t)} method, returning
+\itemize{
+\item A \code{call(input_at_t, states_at_t)} method, returning
 \verb{(output_at_t, states_at_t_plus_1)}. The call method of the
 cell can also take the optional argument \code{constants}, see
 section "Note on passing external constants" below.
-- A \code{state_size} attribute. This can be a single integer
+\item A \code{state_size} attribute. This can be a single integer
 (single state) in which case it is the size of the recurrent
 state. This can also be a list of integers
 (one size per state).
-- A \code{output_size} attribute, a single integer.
-- A \code{get_initial_state(batch_size=NULL)}
+\item A \code{output_size} attribute, a single integer.
+\item A \code{get_initial_state(batch_size=NULL)}
 method that creates a tensor meant to be fed to \code{call()} as the
 initial state, if the user didn't specify any initial state
 via other means. The returned initial state should have
@@ -44,7 +45,8 @@ by the cell, the RNN layer will create a zero filled tensor
 with shape \verb{(batch_size, cell$state_size)}.
 In the case that \code{cell} is a list of RNN cell instances, the cells
 will be stacked on top of each other in the RNN, resulting in an
-efficient stacked RNN.}
+efficient stacked RNN.
+}}
 
 \item{return_sequences}{Boolean (default \code{FALSE}). Whether to return the last
 output in the output sequence, or the full sequence.}

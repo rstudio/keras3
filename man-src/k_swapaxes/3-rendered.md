@@ -3,9 +3,14 @@ Interchange two axes of a tensor.
 @returns
     A tensor with the axes swapped.
 
-@param x Input tensor.
-@param axis1 First axis.
-@param axis2 Second axis.
+@param x
+Input tensor.
+
+@param axis1
+First axis.
+
+@param axis2
+Second axis.
 
 @export
 @family ops

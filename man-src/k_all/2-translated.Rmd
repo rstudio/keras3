@@ -24,15 +24,20 @@ k_all(x, keepdims = TRUE)
 @returns
 The tensor containing the logical AND reduction over the `axis`.
 
-@param x Input tensor.
-@param axis An integer or tuple of integers that represent the axis along
-    which a logical AND reduction is performed. The default
-    (`axis = NULL`) is to perform a logical AND over all the dimensions
-    of the input array. `axis` may be negative, in which case it counts
-    for the last to the first axis.
-@param keepdims If `TRUE`, axes which are reduced are left in the result as
-    dimensions with size one. With this option, the result will
-    broadcast correctly against the input array. Defaults to`FALSE`.
+@param x
+Input tensor.
+
+@param axis
+An integer or tuple of integers that represent the axis along
+which a logical AND reduction is performed. The default
+(`axis = NULL`) is to perform a logical AND over all the dimensions
+of the input array. `axis` may be negative, in which case it counts
+for the last to the first axis.
+
+@param keepdims
+If `TRUE`, axes which are reduced are left in the result as
+dimensions with size one. With this option, the result will
+broadcast correctly against the input array. Defaults to`FALSE`.
 
 @export
 @family ops

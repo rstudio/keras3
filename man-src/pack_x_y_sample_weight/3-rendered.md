@@ -22,9 +22,14 @@ x, y = data
 @returns
     Tuple in the format used in `Model.fit()`.
 
-@param x Features to pass to `Model`.
-@param y Ground-truth targets to pass to `Model`.
-@param sample_weight Sample weight for each element.
+@param x
+Features to pass to `Model`.
+
+@param y
+Ground-truth targets to pass to `Model`.
+
+@param sample_weight
+Sample weight for each element.
 
 @export
 @family utils

@@ -19,8 +19,11 @@ print(x_gelu)
 @returns
 A tensor with the same shape as `x`.
 
-@param x Input tensor.
-@param approximate Approximate version of GELU activation. Defaults to `True`.
+@param x
+Input tensor.
+
+@param approximate
+Approximate version of GELU activation. Defaults to `True`.
 
 @export
 @family ops

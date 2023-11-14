@@ -26,15 +26,24 @@ loss = keras.losses.hinge(y_true, y_pred)
 @returns
 Hinge loss values with shape = `[batch_size, d0, .. dN-1]`.
 
-@param reduction Type of reduction to apply to the loss. In almost all cases
-    this should be `"sum_over_batch_size"`.
-    Supported options are `"sum"`, `"sum_over_batch_size"` or `None`.
-@param name Optional name for the loss instance.
-@param y_true The ground truth values. `y_true` values are expected to be -1
-    or 1. If binary (0 or 1) labels are provided they will be converted
-    to -1 or 1 with shape = `[batch_size, d0, .. dN]`.
-@param y_pred The predicted values with shape = `[batch_size, d0, .. dN]`.
-@param ... Passed on to the Python callable
+@param reduction
+Type of reduction to apply to the loss. In almost all cases
+this should be `"sum_over_batch_size"`.
+Supported options are `"sum"`, `"sum_over_batch_size"` or `None`.
+
+@param name
+Optional name for the loss instance.
+
+@param y_true
+The ground truth values. `y_true` values are expected to be -1
+or 1. If binary (0 or 1) labels are provided they will be converted
+to -1 or 1 with shape = `[batch_size, d0, .. dN]`.
+
+@param y_pred
+The predicted values with shape = `[batch_size, d0, .. dN]`.
+
+@param ...
+Passed on to the Python callable
 
 @export
 @family loss

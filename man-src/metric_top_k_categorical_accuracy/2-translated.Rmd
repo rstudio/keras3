@@ -33,13 +33,24 @@ model.compile(optimizer='sgd',
               metrics=[keras.metrics.TopKCategoricalAccuracy()])
 ```
 
-@param k (Optional) Number of top elements to look at for computing accuracy.
-    Defaults to `5`.
-@param name (Optional) string name of the metric instance.
-@param dtype (Optional) data type of the metric result.
-@param y_true Tensor of true targets.
-@param y_pred Tensor of predicted targets.
-@param ... Passed on to the Python callable
+@param k
+(Optional) Number of top elements to look at for computing accuracy.
+Defaults to `5`.
+
+@param name
+(Optional) string name of the metric instance.
+
+@param dtype
+(Optional) data type of the metric result.
+
+@param y_true
+Tensor of true targets.
+
+@param y_pred
+Tensor of predicted targets.
+
+@param ...
+Passed on to the Python callable
 
 @export
 @family metric

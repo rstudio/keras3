@@ -26,7 +26,8 @@ k_shape(x)
 A list of integers or NULL values, indicating the shape of the input
 tensor.
 
-@param x A tensor. This function will try to access the `shape` attribute of
+@param x
+A tensor. This function will try to access the `shape` attribute of
 the input tensor.
 
 @export

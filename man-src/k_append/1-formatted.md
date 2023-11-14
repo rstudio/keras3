@@ -29,10 +29,15 @@ keras.ops.append(x1, x3, axis=0)
 @returns
 A tensor with the values of `x2` appended to `x1`.
 
-@param x1 First input tensor.
-@param x2 Second input tensor.
-@param axis Axis along which tensor `x2` is appended to tensor `x1`.
-    If `None`, both tensors are flattened before use.
+@param x1
+First input tensor.
+
+@param x2
+Second input tensor.
+
+@param axis
+Axis along which tensor `x2` is appended to tensor `x1`.
+If `None`, both tensors are flattened before use.
 
 @export
 @family ops

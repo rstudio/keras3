@@ -34,13 +34,20 @@ except for the specified `axis` dimension, which will have
 a length of `num_classes`. The dtype of the output tensor
 is determined by `dtype` or the default data type of the backend.
 
-@param x Integer tensor to be encoded. The shape can be
-    arbitrary, but the dtype should be integer.
-@param num_classes Number of classes for the one-hot encoding.
-@param axis Axis along which the encoding is performed. Defaults to
-    `-1`, which represents the last axis.
-@param dtype (Optional) Data type of the output tensor. If not
-    provided, it defaults to the default data type of the backend.
+@param x
+Integer tensor to be encoded. The shape can be
+arbitrary, but the dtype should be integer.
+
+@param num_classes
+Number of classes for the one-hot encoding.
+
+@param axis
+Axis along which the encoding is performed. Defaults to
+`-1`, which represents the last axis.
+
+@param dtype
+(Optional) Data type of the output tensor. If not
+provided, it defaults to the default data type of the backend.
 
 @export
 @family ops

@@ -75,52 +75,73 @@ model.compile(optimizer='sgd',
               metrics=[keras.metrics.AUC(from_logits=True)])
 ```
 
-@param num_thresholds (Optional) The number of thresholds to
-    use when discretizing the roc curve. Values must be > 1.
-    Defaults to `200`.
-@param curve (Optional) Specifies the name of the curve to be computed,
-    `'ROC'` (default) or `'PR'` for the Precision-Recall-curve.
-@param summation_method (Optional) Specifies the [Riemann summation method](
-      https://en.wikipedia.org/wiki/Riemann_sum) used.
-      'interpolation' (default) applies mid-point summation scheme for
-      `ROC`.  For PR-AUC, interpolates (true/false) positives but not
-      the ratio that is precision (see Davis & Goadrich 2006 for
-      details); 'minoring' applies left summation for increasing
-      intervals and right summation for decreasing intervals; 'majoring'
-      does the opposite.
-@param name (Optional) string name of the metric instance.
-@param dtype (Optional) data type of the metric result.
-@param thresholds (Optional) A list of floating point values to use as the
-    thresholds for discretizing the curve. If set, the `num_thresholds`
-    parameter is ignored. Values should be in `[0, 1]`. Endpoint
-    thresholds equal to {`-epsilon`, `1+epsilon`} for a small positive
-    epsilon value will be automatically included with these to correctly
-    handle predictions equal to exactly 0 or 1.
-@param multi_label boolean indicating whether multilabel data should be
-    treated as such, wherein AUC is computed separately for each label
-    and then averaged across labels, or (when `False`) if the data
-    should be flattened into a single label before AUC computation. In
-    the latter case, when multilabel data is passed to AUC, each
-    label-prediction pair is treated as an individual data point. Should
-    be set to False for multi-class data.
-@param num_labels (Optional) The number of labels, used when `multi_label` is
-    True. If `num_labels` is not specified, then state variables get
-    created on the first call to `update_state`.
-@param label_weights (Optional) list, array, or tensor of non-negative weights
-    used to compute AUCs for multilabel data. When `multi_label` is
-    True, the weights are applied to the individual label AUCs when they
-    are averaged to produce the multi-label AUC. When it's False, they
-    are used to weight the individual label predictions in computing the
-    confusion matrix on the flattened data. Note that this is unlike
-    `class_weights` in that `class_weights` weights the example
-    depending on the value of its label, whereas `label_weights` depends
-    only on the index of that label before flattening; therefore
-    `label_weights` should not be used for multi-class data.
-@param from_logits boolean indicating whether the predictions (`y_pred` in
+@param num_thresholds
+(Optional) The number of thresholds to
+use when discretizing the roc curve. Values must be > 1.
+Defaults to `200`.
+
+@param curve
+(Optional) Specifies the name of the curve to be computed,
+`'ROC'` (default) or `'PR'` for the Precision-Recall-curve.
+
+@param summation_method
+(Optional) Specifies the [Riemann summation method](
+https://en.wikipedia.org/wiki/Riemann_sum) used.
+'interpolation' (default) applies mid-point summation scheme for
+`ROC`.  For PR-AUC, interpolates (true/false) positives but not
+the ratio that is precision (see Davis & Goadrich 2006 for
+details); 'minoring' applies left summation for increasing
+intervals and right summation for decreasing intervals; 'majoring'
+does the opposite.
+
+@param name
+(Optional) string name of the metric instance.
+
+@param dtype
+(Optional) data type of the metric result.
+
+@param thresholds
+(Optional) A list of floating point values to use as the
+thresholds for discretizing the curve. If set, the `num_thresholds`
+parameter is ignored. Values should be in `[0, 1]`. Endpoint
+thresholds equal to {`-epsilon`, `1+epsilon`} for a small positive
+epsilon value will be automatically included with these to correctly
+handle predictions equal to exactly 0 or 1.
+
+@param multi_label
+boolean indicating whether multilabel data should be
+treated as such, wherein AUC is computed separately for each label
+and then averaged across labels, or (when `False`) if the data
+should be flattened into a single label before AUC computation. In
+the latter case, when multilabel data is passed to AUC, each
+label-prediction pair is treated as an individual data point. Should
+be set to False for multi-class data.
+
+@param num_labels
+(Optional) The number of labels, used when `multi_label` is
+True. If `num_labels` is not specified, then state variables get
+created on the first call to `update_state`.
+
+@param label_weights
+(Optional) list, array, or tensor of non-negative weights
+used to compute AUCs for multilabel data. When `multi_label` is
+True, the weights are applied to the individual label AUCs when they
+are averaged to produce the multi-label AUC. When it's False, they
+are used to weight the individual label predictions in computing the
+confusion matrix on the flattened data. Note that this is unlike
+`class_weights` in that `class_weights` weights the example
+depending on the value of its label, whereas `label_weights` depends
+only on the index of that label before flattening; therefore
+`label_weights` should not be used for multi-class data.
+
+@param from_logits
+boolean indicating whether the predictions (`y_pred` in
 `update_state`) are probabilities or sigmoid logits. As a rule of thumb,
 when using a keras loss, the `from_logits` constructor argument of the
 loss should match the AUC `from_logits` constructor argument.
-@param ... Passed on to the Python callable
+
+@param ...
+Passed on to the Python callable
 
 @export
 @family metric

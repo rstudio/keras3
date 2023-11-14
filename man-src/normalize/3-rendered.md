@@ -7,9 +7,14 @@ If it's a backend tensor, a backend tensor will be returned.
 @returns
     A normalized copy of the array.
 
-@param x Array to normalize.
-@param axis axis along which to normalize.
-@param order Normalization order (e.g. `order=2` for L2 norm).
+@param x
+Array to normalize.
+
+@param axis
+axis along which to normalize.
+
+@param order
+Normalization order (e.g. `order=2` for L2 norm).
 
 @export
 @family utils

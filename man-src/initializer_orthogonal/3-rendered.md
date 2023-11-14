@@ -30,9 +30,12 @@ layer <- layer_dense(units = 3, kernel_initializer = initializer)
 # Reference
 - [Saxe et al., 2014](https://openreview.net/forum?id=_wzZwKpTDF_9C)
 
-@param gain Multiplicative factor to apply to the orthogonal matrix.
-@param seed An integer. Used to make the behavior of the initializer
-    deterministic.
+@param gain
+Multiplicative factor to apply to the orthogonal matrix.
+
+@param seed
+An integer. Used to make the behavior of the initializer
+deterministic.
 
 @export
 @family initializer

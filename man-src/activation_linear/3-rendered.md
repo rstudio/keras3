@@ -4,7 +4,8 @@ Linear activation function (pass-through).
 A "linear" activation is an identity function:
 it returns the input, unmodified.
 
-@param x Input tensor.
+@param x
+Input tensor.
 
 @export
 @family activation functions

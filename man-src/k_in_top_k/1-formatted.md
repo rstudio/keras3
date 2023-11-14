@@ -17,9 +17,14 @@ in_top_k(targets, predictions, k=3)
 A boolean tensor of the same shape as `targets`, where each element
 indicates whether the corresponding target is in the top-k predictions.
 
-@param targets A tensor of true labels.
-@param predictions A tensor of predicted labels.
-@param k An integer representing the number of predictions to consider.
+@param targets
+A tensor of true labels.
+
+@param predictions
+A tensor of predicted labels.
+
+@param k
+An integer representing the number of predictions to consider.
 
 @export
 @family ops

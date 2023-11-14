@@ -14,21 +14,28 @@ distribution.
 @returns
     A 2-D tensor with (batch_size, num_samples).
 
-@param logits 2-D Tensor with shape (batch_size, num_classes). Each row
-    should define a categorical distibution with the unnormalized
-    log-probabilities for all classes.
-@param num_samples Int, the number of independent samples to draw for each
-    row of the input. This will be the second dimension of the output
-    tensor's shape.
-@param dtype Optional dtype of the output tensor.
-@param seed A Python integer or instance of
-    `keras.random.SeedGenerator`.
-    Used to make the behavior of the initializer
-    deterministic. Note that an initializer seeded with an integer
-    or None (unseeded) will produce the same random values
-    across multiple calls. To get different random values
-    across multiple calls, use as seed an instance
-    of `keras.random.SeedGenerator`.
+@param logits
+2-D Tensor with shape (batch_size, num_classes). Each row
+should define a categorical distibution with the unnormalized
+log-probabilities for all classes.
+
+@param num_samples
+Int, the number of independent samples to draw for each
+row of the input. This will be the second dimension of the output
+tensor's shape.
+
+@param dtype
+Optional dtype of the output tensor.
+
+@param seed
+A Python integer or instance of
+`keras.random.SeedGenerator`.
+Used to make the behavior of the initializer
+deterministic. Note that an initializer seeded with an integer
+or None (unseeded) will produce the same random values
+across multiple calls. To get different random values
+across multiple calls, use as seed an instance
+of `keras.random.SeedGenerator`.
 
 @export
 @seealso

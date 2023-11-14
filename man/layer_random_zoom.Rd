@@ -41,21 +41,23 @@ directions by preserving the aspect ratio. Defaults to \code{NULL}.}
 \item{fill_mode}{Points outside the boundaries of the input are filled
 according to the given mode. Available methods are \code{"constant"},
 \code{"nearest"}, \code{"wrap"} and \code{"reflect"}. Defaults to \code{"constant"}.
-- \code{"reflect"}: \verb{(d c b a | a b c d | d c b a)}
+\itemize{
+\item \code{"reflect"}: \verb{(d c b a | a b c d | d c b a)}
 The input is extended by reflecting about the edge of the last
 pixel.
-- \code{"constant"}: \verb{(k k k k | a b c d | k k k k)}
+\item \code{"constant"}: \verb{(k k k k | a b c d | k k k k)}
 The input is extended by filling all values beyond
 the edge with the same constant value k specified by
 \code{fill_value}.
-- \code{"wrap"}: \verb{(a b c d | a b c d | a b c d)}
+\item \code{"wrap"}: \verb{(a b c d | a b c d | a b c d)}
 The input is extended by wrapping around to the opposite edge.
-- \code{"nearest"}: \verb{(a a a a | a b c d | d d d d)}
+\item \code{"nearest"}: \verb{(a a a a | a b c d | d d d d)}
 The input is extended by the nearest pixel.
 Note that when using torch backend, \code{"reflect"} is redirected to
 \code{"mirror"} \verb{(c d c b | a b c d | c b a b)} because torch does not
 support \code{"reflect"}.
-Note that torch backend does not support \code{"wrap"}.}
+Note that torch backend does not support \code{"wrap"}.
+}}
 
 \item{interpolation}{Interpolation mode. Supported values: \code{"nearest"},
 \code{"bilinear"}.}

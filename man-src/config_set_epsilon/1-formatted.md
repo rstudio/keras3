@@ -19,7 +19,8 @@ keras.config.epsilon()
 keras.config.set_epsilon(1e-7)
 ```
 
-@param value float. New value of epsilon.
+@param value
+float. New value of epsilon.
 
 @export
 @seealso

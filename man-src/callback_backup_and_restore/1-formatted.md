@@ -44,22 +44,27 @@ len(history.history['loss'])
 6
 ```
 
-@param backup_dir String, path of directory where to store the data
-    needed to restore the model. The directory
-    cannot be reused elsewhere to store other files, e.g. by the
-    `BackupAndRestore` callback of another training run,
-    or by another callback (e.g. `ModelCheckpoint`)
-    of the same training run.
-@param save_freq `"epoch"`, integer, or `False`. When set to `"epoch"`
-  the callback saves the checkpoint at the end of each epoch.
-  When set to an integer, the callback saves the checkpoint every
-  `save_freq` batches. Set `save_freq=False` only if using
-  preemption checkpointing (i.e. with `save_before_preemption=True`).
-@param delete_checkpoint Boolean, defaults to `True`. This `BackupAndRestore`
-  callback works by saving a checkpoint to back up the training state.
-  If `delete_checkpoint=True`, the checkpoint will be deleted after
-  training is finished. Use `False` if you'd like to keep the checkpoint
-  for future usage.
+@param backup_dir
+String, path of directory where to store the data
+needed to restore the model. The directory
+cannot be reused elsewhere to store other files, e.g. by the
+`BackupAndRestore` callback of another training run,
+or by another callback (e.g. `ModelCheckpoint`)
+of the same training run.
+
+@param save_freq
+`"epoch"`, integer, or `False`. When set to `"epoch"`
+the callback saves the checkpoint at the end of each epoch.
+When set to an integer, the callback saves the checkpoint every
+`save_freq` batches. Set `save_freq=False` only if using
+preemption checkpointing (i.e. with `save_before_preemption=True`).
+
+@param delete_checkpoint
+Boolean, defaults to `True`. This `BackupAndRestore`
+callback works by saving a checkpoint to back up the training state.
+If `delete_checkpoint=True`, the checkpoint will be deleted after
+training is finished. Use `False` if you'd like to keep the checkpoint
+for future usage.
 
 @export
 @family callback

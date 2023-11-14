@@ -26,14 +26,19 @@ y
 # Output Shape
     3D tensor with shape `(batch_size, cropped_axis, features)`
 
-@param cropping Int, or tuple of int (length 2), or dictionary.
+@param cropping
+Int, or tuple of int (length 2), or dictionary.
 - If int: how many units should be trimmed off at the beginning and
   end of the cropping dimension (axis 1).
 - If tuple of 2 ints: how many units should be trimmed off at the
   beginning and end of the cropping dimension
   (`(left_crop, right_crop)`).
-@param object Object to compose the layer with. A tensor, array, or sequential model.
-@param ... Passed on to the Python callable
+
+@param object
+Object to compose the layer with. A tensor, array, or sequential model.
+
+@param ...
+Passed on to the Python callable
 
 @export
 @family reshaping layers

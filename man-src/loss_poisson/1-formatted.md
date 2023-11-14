@@ -28,13 +28,22 @@ assert np.allclose(
 @returns
 Poisson loss values with shape = `[batch_size, d0, .. dN-1]`.
 
-@param reduction Type of reduction to apply to the loss. In almost all cases
-    this should be `"sum_over_batch_size"`.
-    Supported options are `"sum"`, `"sum_over_batch_size"` or `None`.
-@param name Optional name for the loss instance.
-@param y_true Ground truth values. shape = `[batch_size, d0, .. dN]`.
-@param y_pred The predicted values. shape = `[batch_size, d0, .. dN]`.
-@param ... Passed on to the Python callable
+@param reduction
+Type of reduction to apply to the loss. In almost all cases
+this should be `"sum_over_batch_size"`.
+Supported options are `"sum"`, `"sum_over_batch_size"` or `None`.
+
+@param name
+Optional name for the loss instance.
+
+@param y_true
+Ground truth values. shape = `[batch_size, d0, .. dN]`.
+
+@param y_pred
+The predicted values. shape = `[batch_size, d0, .. dN]`.
+
+@param ...
+Passed on to the Python callable
 
 @export
 @family loss

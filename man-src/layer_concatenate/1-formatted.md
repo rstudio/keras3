@@ -23,9 +23,14 @@ y = keras.layers.Concatenate()([x1, x2])
 @returns
     A tensor, the concatenation of the inputs alongside axis `axis`.
 
-@param axis Axis along which to concatenate.
-@param ... Standard layer keyword arguments.
-@param inputs layers to combine
+@param axis
+Axis along which to concatenate.
+
+@param ...
+Standard layer keyword arguments.
+
+@param inputs
+layers to combine
 
 @export
 @family merging layers

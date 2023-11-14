@@ -6,7 +6,8 @@ The floor of the scalar `x` is the largest integer `i`, such that `i <= x`.
 @returns
     Output tensor, element-wise floor of `x`.
 
-@param x Input tensor.
+@param x
+Input tensor.
 
 @export
 @family ops

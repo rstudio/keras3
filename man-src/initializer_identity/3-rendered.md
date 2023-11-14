@@ -18,7 +18,8 @@ initializer <- initializer_identity()
 layer <- layer_dense(units = 3, kernel_initializer = initializer)
 ```
 
-@param gain Multiplicative factor to apply to the identity matrix.
+@param gain
+Multiplicative factor to apply to the identity matrix.
 
 @export
 @family initializer

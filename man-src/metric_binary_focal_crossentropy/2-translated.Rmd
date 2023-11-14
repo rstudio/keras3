@@ -35,21 +35,36 @@ loss
 Binary focal crossentropy loss value
 with shape = `[batch_size, d0, .. dN-1]`.
 
-@param y_true Ground truth values, of shape `(batch_size, d0, .. dN)`.
-@param y_pred The predicted values, of shape `(batch_size, d0, .. dN)`.
-@param apply_class_balancing A bool, whether to apply weight balancing on the
-    binary classes 0 and 1.
-@param alpha A weight balancing factor for class 1, default is `0.25` as
-    mentioned in the reference. The weight for class 0 is `1.0 - alpha`.
-@param gamma A focusing parameter, default is `2.0` as mentioned in the
-    reference.
-@param from_logits Whether `y_pred` is expected to be a logits tensor. By
-    default, we assume that `y_pred` encodes a probability distribution.
-@param label_smoothing Float in `[0, 1]`. If > `0` then smooth the labels by
-    squeezing them towards 0.5, that is,
-    using `1. - 0.5 * label_smoothing` for the target class
-    and `0.5 * label_smoothing` for the non-target class.
-@param axis The axis along which the mean is computed. Defaults to `-1`.
+@param y_true
+Ground truth values, of shape `(batch_size, d0, .. dN)`.
+
+@param y_pred
+The predicted values, of shape `(batch_size, d0, .. dN)`.
+
+@param apply_class_balancing
+A bool, whether to apply weight balancing on the
+binary classes 0 and 1.
+
+@param alpha
+A weight balancing factor for class 1, default is `0.25` as
+mentioned in the reference. The weight for class 0 is `1.0 - alpha`.
+
+@param gamma
+A focusing parameter, default is `2.0` as mentioned in the
+reference.
+
+@param from_logits
+Whether `y_pred` is expected to be a logits tensor. By
+default, we assume that `y_pred` encodes a probability distribution.
+
+@param label_smoothing
+Float in `[0, 1]`. If > `0` then smooth the labels by
+squeezing them towards 0.5, that is,
+using `1. - 0.5 * label_smoothing` for the target class
+and `0.5 * label_smoothing` for the non-target class.
+
+@param axis
+The axis along which the mean is computed. Defaults to `-1`.
 
 @export
 @seealso

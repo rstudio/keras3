@@ -61,20 +61,33 @@ model.compile(
     metrics=[keras.metrics.OneHotMeanIoU(num_classes=3)])
 ```
 
-@param num_classes The possible number of labels the prediction task can have.
-@param name (Optional) string name of the metric instance.
-@param dtype (Optional) data type of the metric result.
-@param ignore_class Optional integer. The ID of a class to be ignored during
-    metric computation. This is useful, for example, in segmentation
-    problems featuring a "void" class (commonly -1 or 255) in
-    segmentation maps. By default (`ignore_class=None`), all classes are
-    considered.
-@param sparse_y_pred Whether predictions are encoded using natural numbers or
-    probability distribution vectors. If `False`, the `argmax`
-    function will be used to determine each sample's most likely
-    associated label.
-@param axis (Optional) The dimension containing the logits. Defaults to `-1`.
-@param ... Passed on to the Python callable
+@param num_classes
+The possible number of labels the prediction task can have.
+
+@param name
+(Optional) string name of the metric instance.
+
+@param dtype
+(Optional) data type of the metric result.
+
+@param ignore_class
+Optional integer. The ID of a class to be ignored during
+metric computation. This is useful, for example, in segmentation
+problems featuring a "void" class (commonly -1 or 255) in
+segmentation maps. By default (`ignore_class=None`), all classes are
+considered.
+
+@param sparse_y_pred
+Whether predictions are encoded using natural numbers or
+probability distribution vectors. If `False`, the `argmax`
+function will be used to determine each sample's most likely
+associated label.
+
+@param axis
+(Optional) The dimension containing the logits. Defaults to `-1`.
+
+@param ...
+Passed on to the Python callable
 
 @export
 @family metric

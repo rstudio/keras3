@@ -23,10 +23,15 @@ f(x) = exp_x / sum(exp_x)
 @returns
     Softmaxed output with the same shape as `inputs`.
 
-@param axis Integer, or list of Integers, axis along which the softmax
-    normalization is applied.
-@param ... Base layer keyword arguments, such as `name` and `dtype`.
-@param object Object to compose the layer with. A tensor, array, or sequential model.
+@param axis
+Integer, or list of Integers, axis along which the softmax
+normalization is applied.
+
+@param ...
+Base layer keyword arguments, such as `name` and `dtype`.
+
+@param object
+Object to compose the layer with. A tensor, array, or sequential model.
 
 @export
 @family activations layers

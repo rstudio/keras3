@@ -3,7 +3,8 @@ Numerical negative, element-wise.
 @returns
     Output tensor, `y = -x`.
 
-@param x Input tensor.
+@param x
+Input tensor.
 
 @export
 @family ops

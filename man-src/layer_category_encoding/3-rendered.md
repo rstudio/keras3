@@ -74,31 +74,38 @@ layer(x, count_weights = count_weights)
     weight for each sample value when summing up in `count` mode.
     Not used in `"multi_hot"` or `"one_hot"` modes.
 
-@param num_tokens The total number of tokens the layer should support. All
-    inputs to the layer must integers in the range `0 <= value <
-    num_tokens`, or an error will be thrown.
-@param output_mode Specification for the output of the layer.
-    Values can be `"one_hot"`, `"multi_hot"` or `"count"`,
-    configuring the layer as follows:
-        - `"one_hot"`: Encodes each individual element in the input
-            into an array of `num_tokens` size, containing a 1 at the
-            element index. If the last dimension is size 1, will encode
-            on that dimension. If the last dimension is not size 1,
-            will append a new dimension for the encoded output.
-        - `"multi_hot"`: Encodes each sample in the input into a single
-            array of `num_tokens` size, containing a 1 for each
-            vocabulary term present in the sample. Treats the last
-            dimension as the sample dimension, if input shape is
-            `(..., sample_length)`, output shape will be
-            `(..., num_tokens)`.
-        - `"count"`: Like `"multi_hot"`, but the int array contains a
-            count of the number of times the token at that index
-            appeared in the sample.
-    For all output modes, currently only output up to rank 2 is
-    supported.
-    Defaults to `"multi_hot"`.
-@param object Object to compose the layer with. A tensor, array, or sequential model.
-@param ... Passed on to the Python callable
+@param num_tokens
+The total number of tokens the layer should support. All
+inputs to the layer must integers in the range `0 <= value <
+num_tokens`, or an error will be thrown.
+
+@param output_mode
+Specification for the output of the layer.
+Values can be `"one_hot"`, `"multi_hot"` or `"count"`,
+configuring the layer as follows:
+    - `"one_hot"`: Encodes each individual element in the input
+        into an array of `num_tokens` size, containing a 1 at the
+        element index. If the last dimension is size 1, will encode
+        on that dimension. If the last dimension is not size 1,
+        will append a new dimension for the encoded output.
+    - `"multi_hot"`: Encodes each sample in the input into a single
+        array of `num_tokens` size, containing a 1 for each
+        vocabulary term present in the sample. Treats the last
+        dimension as the sample dimension, if input shape is
+        `(..., sample_length)`, output shape will be
+        `(..., num_tokens)`.
+    - `"count"`: Like `"multi_hot"`, but the int array contains a
+        count of the number of times the token at that index
+        appeared in the sample.
+For all output modes, currently only output up to rank 2 is
+supported.
+Defaults to `"multi_hot"`.
+
+@param object
+Object to compose the layer with. A tensor, array, or sequential model.
+
+@param ...
+Passed on to the Python callable
 
 @export
 @family preprocessing layers

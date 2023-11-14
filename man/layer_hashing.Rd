@@ -37,23 +37,25 @@ Defaults to \code{NULL}.}
 \item{output_mode}{Specification for the output of the layer. Values can be
 \code{"int"}, \code{"one_hot"}, \code{"multi_hot"}, or
 \code{"count"} configuring the layer as follows:
-- \code{"int"}: Return the integer bin indices directly.
-- \code{"one_hot"}: Encodes each individual element in the input into an
+\itemize{
+\item \code{"int"}: Return the integer bin indices directly.
+\item \code{"one_hot"}: Encodes each individual element in the input into an
 array the same size as \code{num_bins}, containing a 1
 at the input's bin index. If the last dimension is size 1,
 will encode on that dimension.
 If the last dimension is not size 1, will append a new
 dimension for the encoded output.
-- \code{"multi_hot"}: Encodes each sample in the input into a
+\item \code{"multi_hot"}: Encodes each sample in the input into a
 single array the same size as \code{num_bins},
 containing a 1 for each bin index
 index present in the sample. Treats the last dimension
 as the sample dimension, if input shape is
 \verb{(..., sample_length)}, output shape will be
 \verb{(..., num_tokens)}.
-- \code{"count"}: As \code{"multi_hot"}, but the int array contains a count of
+\item \code{"count"}: As \code{"multi_hot"}, but the int array contains a count of
 the number of times the bin index appeared in the sample.
-Defaults to \code{"int"}.}
+Defaults to \code{"int"}.
+}}
 
 \item{sparse}{Boolean. Only applicable to \code{"one_hot"}, \code{"multi_hot"},
 and \code{"count"} output modes. Only supported with TensorFlow

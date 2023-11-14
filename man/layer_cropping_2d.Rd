@@ -15,13 +15,15 @@ layer_cropping_2d(
 \item{object}{Object to compose the layer with. A tensor, array, or sequential model.}
 
 \item{cropping}{Int, or list of 2 ints, or list of 2 lists of 2 ints.
-- If int: the same symmetric cropping is applied to height and
+\itemize{
+\item If int: the same symmetric cropping is applied to height and
 width.
-- If list of 2 ints: interpreted as two different symmetric
+\item If list of 2 ints: interpreted as two different symmetric
 cropping values for height and width:
 \verb{(symmetric_height_crop, symmetric_width_crop)}.
-- If list of 2 lists of 2 ints: interpreted as
-\verb{((top_crop, bottom_crop), (left_crop, right_crop))}.}
+\item If list of 2 lists of 2 ints: interpreted as
+\verb{((top_crop, bottom_crop), (left_crop, right_crop))}.
+}}
 
 \item{data_format}{A string, one of \code{"channels_last"} (default) or
 \code{"channels_first"}. The ordering of the dimensions in the inputs.

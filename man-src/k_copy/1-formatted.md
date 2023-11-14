@@ -3,7 +3,8 @@ Returns a copy of `x`.
 @returns
     A copy of `x`.
 
-@param x Input tensor.
+@param x
+Input tensor.
 
 @export
 @family ops

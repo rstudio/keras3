@@ -72,27 +72,29 @@ Defaults to \code{FALSE}.}
 \item{output_mode}{Specification for the output of the layer. Values can be
 \code{"int"}, \code{"one_hot"}, \code{"multi_hot"}, \code{"count"}, or \code{"tf_idf"}
 configuring the layer as follows:
-- \code{"int"}: Return the vocabulary indices of the input tokens.
-- \code{"one_hot"}: Encodes each individual element in the input into an
+\itemize{
+\item \code{"int"}: Return the vocabulary indices of the input tokens.
+\item \code{"one_hot"}: Encodes each individual element in the input into an
 array the same size as the vocabulary,
 containing a 1 at the element index. If the last dimension
 is size 1, will encode on that dimension.
 If the last dimension is not size 1, will append a new
 dimension for the encoded output.
-- \code{"multi_hot"}: Encodes each sample in the input into a single
+\item \code{"multi_hot"}: Encodes each sample in the input into a single
 array the same size as the vocabulary,
 containing a 1 for each vocabulary term present in the sample.
 Treats the last dimension as the sample dimension,
 if input shape is \verb{(..., sample_length)},
 output shape will be \verb{(..., num_tokens)}.
-- \code{"count"}: As \code{"multi_hot"}, but the int array contains
+\item \code{"count"}: As \code{"multi_hot"}, but the int array contains
 a count of the number of times the token at that index
 appeared in the sample.
-- \code{"tf_idf"}: As \code{"multi_hot"}, but the TF-IDF algorithm is
+\item \code{"tf_idf"}: As \code{"multi_hot"}, but the TF-IDF algorithm is
 applied to find the value in each token slot.
 For \code{"int"} output, any shape of input and output is supported.
 For all other output modes, currently only output up to rank 2
-is supported. Defaults to \code{"int"}.}
+is supported. Defaults to \code{"int"}.
+}}
 
 \item{sparse}{Boolean. Only applicable to \code{"multi_hot"}, \code{"count"}, and
 \code{"tf_idf"} output modes. Only supported with TensorFlow

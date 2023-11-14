@@ -6,10 +6,13 @@ Gives a new shape to a tensor without changing its data.
 @returns
     The reshaped tensor.
 
-@param x Input tensor.
-@param new_shape The new shape should be compatible with the original shape.
-    One shape dimension can be -1 in which case the value is
-    inferred from the length of the array and remaining dimensions.
+@param x
+Input tensor.
+
+@param new_shape
+The new shape should be compatible with the original shape.
+One shape dimension can be -1 in which case the value is
+inferred from the length of the array and remaining dimensions.
 
 @export
 @family ops

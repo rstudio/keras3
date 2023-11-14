@@ -21,10 +21,12 @@ layer_hashed_crossing(
 
 \item{output_mode}{Specification for the output of the layer. Values can be
 \code{"int"}, or \code{"one_hot"} configuring the layer as follows:
-- \code{"int"}: Return the integer bin indices directly.
-- \code{"one_hot"}: Encodes each individual element in the input into an
+\itemize{
+\item \code{"int"}: Return the integer bin indices directly.
+\item \code{"one_hot"}: Encodes each individual element in the input into an
 array the same size as \code{num_bins}, containing a 1 at the input's
-bin index. Defaults to \code{"int"}.}
+bin index. Defaults to \code{"int"}.
+}}
 
 \item{sparse}{Boolean. Only applicable to \code{"one_hot"} mode and only valid
 when using the TensorFlow backend. If \code{TRUE}, returns

@@ -6,11 +6,16 @@ Elements that roll beyond the last position are re-introduced at the first.
 @returns
     Output tensor.
 
-@param x Input tensor.
-@param shift The number of places by which elements are shifted.
-@param axis The axis along which elements are shifted. By default, the
-    array is flattened before shifting, after which the original
-    shape is restored.
+@param x
+Input tensor.
+
+@param shift
+The number of places by which elements are shifted.
+
+@param axis
+The axis along which elements are shifted. By default, the
+array is flattened before shifting, after which the original
+shape is restored.
 
 @export
 @family ops

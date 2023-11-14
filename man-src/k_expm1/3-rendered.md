@@ -3,7 +3,8 @@ Calculate `exp(x) - 1` for all elements in the tensor.
 @returns
     Output tensor, element-wise exponential minus one.
 
-@param x Input values.
+@param x
+Input values.
 
 @export
 @family ops

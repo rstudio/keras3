@@ -85,11 +85,16 @@ k_scatter_update(inputs, indices, updates)
 @returns
     A tensor, has the same shape and dtype as `inputs`.
 
-@param inputs A tensor, the tensor to be updated.
-@param indices A tensor or list of shape `(N, inputs$ndim)`, specifying
-    indices to update. `N` is the number of indices to update, must be
-    equal to the first dimension of `updates`.
-@param updates A tensor, the new values to be put to `inputs` at `indices`.
+@param inputs
+A tensor, the tensor to be updated.
+
+@param indices
+A tensor or list of shape `(N, inputs$ndim)`, specifying
+indices to update. `N` is the number of indices to update, must be
+equal to the first dimension of `updates`.
+
+@param updates
+A tensor, the new values to be put to `inputs` at `indices`.
 
 @export
 @family ops

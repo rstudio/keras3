@@ -50,66 +50,95 @@ Rules regarding number of channels in the yielded images:
 - if `color_mode` is `"rgba"`,
     there are 4 channels in the image tensors.
 
-@param directory Directory where the data is located.
-    If `labels` is `"inferred"`, it should contain
-    subdirectories, each containing images for a class.
-    Otherwise, the directory structure is ignored.
-@param labels Either `"inferred"`
-    (labels are generated from the directory structure),
-    `None` (no labels),
-    or a list/tuple of integer labels of the same size as the number of
-    image files found in the directory. Labels should be sorted
-    according to the alphanumeric order of the image file paths
-    (obtained via `os.walk(directory)` in Python).
-@param label_mode String describing the encoding of `labels`. Options are:
-    - `"int"`: means that the labels are encoded as integers
-        (e.g. for `sparse_categorical_crossentropy` loss).
-    - `"categorical"` means that the labels are
-        encoded as a categorical vector
-        (e.g. for `categorical_crossentropy` loss).
-    - `"binary"` means that the labels (there can be only 2)
-        are encoded as `float32` scalars with values 0 or 1
-        (e.g. for `binary_crossentropy`).
-    - `None` (no labels).
-@param class_names Only valid if `labels` is `"inferred"`.
-    This is the explicit list of class names
-    (must match names of subdirectories). Used to control the order
-    of the classes (otherwise alphanumerical order is used).
-@param color_mode One of `"grayscale"`, `"rgb"`, `"rgba"`.
-    Defaults to `"rgb"`. Whether the images will be converted to
-    have 1, 3, or 4 channels.
-@param batch_size Size of the batches of data. Defaults to 32.
-    If `None`, the data will not be batched
-    (the dataset will yield individual samples).
-@param image_size Size to resize images to after they are read from disk,
-    specified as `(height, width)`. Defaults to `(256, 256)`.
-    Since the pipeline processes batches of images that must all have
-    the same size, this must be provided.
-@param shuffle Whether to shuffle the data. Defaults to `True`.
-    If set to `False`, sorts the data in alphanumeric order.
-@param seed Optional random seed for shuffling and transformations.
-@param validation_split Optional float between 0 and 1,
-    fraction of data to reserve for validation.
-@param subset Subset of the data to return.
-    One of `"training"`, `"validation"`, or `"both"`.
-    Only used if `validation_split` is set.
-    When `subset="both"`, the utility returns a tuple of two datasets
-    (the training and validation datasets respectively).
-@param interpolation String, the interpolation method used when
-    resizing images. Defaults to `"bilinear"`.
-    Supports `"bilinear"`, `"nearest"`, `"bicubic"`, `"area"`,
-    `"lanczos3"`, `"lanczos5"`, `"gaussian"`, `"mitchellcubic"`.
-@param follow_links Whether to visit subdirectories pointed to by symlinks.
-    Defaults to `False`.
-@param crop_to_aspect_ratio If `True`, resize the images without aspect
-    ratio distortion. When the original aspect ratio differs from the
-    target aspect ratio, the output image will be cropped so as to
-    return the largest possible window in the image
-    (of size `image_size`) that matches the target aspect ratio. By
-    default (`crop_to_aspect_ratio=False`), aspect ratio may not be
-    preserved.
-@param data_format If None uses keras.config.image_data_format()
-    otherwise either 'channel_last' or 'channel_first'.
+@param directory
+Directory where the data is located.
+If `labels` is `"inferred"`, it should contain
+subdirectories, each containing images for a class.
+Otherwise, the directory structure is ignored.
+
+@param labels
+Either `"inferred"`
+(labels are generated from the directory structure),
+`None` (no labels),
+or a list/tuple of integer labels of the same size as the number of
+image files found in the directory. Labels should be sorted
+according to the alphanumeric order of the image file paths
+(obtained via `os.walk(directory)` in Python).
+
+@param label_mode
+String describing the encoding of `labels`. Options are:
+- `"int"`: means that the labels are encoded as integers
+    (e.g. for `sparse_categorical_crossentropy` loss).
+- `"categorical"` means that the labels are
+    encoded as a categorical vector
+    (e.g. for `categorical_crossentropy` loss).
+- `"binary"` means that the labels (there can be only 2)
+    are encoded as `float32` scalars with values 0 or 1
+    (e.g. for `binary_crossentropy`).
+- `None` (no labels).
+
+@param class_names
+Only valid if `labels` is `"inferred"`.
+This is the explicit list of class names
+(must match names of subdirectories). Used to control the order
+of the classes (otherwise alphanumerical order is used).
+
+@param color_mode
+One of `"grayscale"`, `"rgb"`, `"rgba"`.
+Defaults to `"rgb"`. Whether the images will be converted to
+have 1, 3, or 4 channels.
+
+@param batch_size
+Size of the batches of data. Defaults to 32.
+If `None`, the data will not be batched
+(the dataset will yield individual samples).
+
+@param image_size
+Size to resize images to after they are read from disk,
+specified as `(height, width)`. Defaults to `(256, 256)`.
+Since the pipeline processes batches of images that must all have
+the same size, this must be provided.
+
+@param shuffle
+Whether to shuffle the data. Defaults to `True`.
+If set to `False`, sorts the data in alphanumeric order.
+
+@param seed
+Optional random seed for shuffling and transformations.
+
+@param validation_split
+Optional float between 0 and 1,
+fraction of data to reserve for validation.
+
+@param subset
+Subset of the data to return.
+One of `"training"`, `"validation"`, or `"both"`.
+Only used if `validation_split` is set.
+When `subset="both"`, the utility returns a tuple of two datasets
+(the training and validation datasets respectively).
+
+@param interpolation
+String, the interpolation method used when
+resizing images. Defaults to `"bilinear"`.
+Supports `"bilinear"`, `"nearest"`, `"bicubic"`, `"area"`,
+`"lanczos3"`, `"lanczos5"`, `"gaussian"`, `"mitchellcubic"`.
+
+@param follow_links
+Whether to visit subdirectories pointed to by symlinks.
+Defaults to `False`.
+
+@param crop_to_aspect_ratio
+If `True`, resize the images without aspect
+ratio distortion. When the original aspect ratio differs from the
+target aspect ratio, the output image will be cropped so as to
+return the largest possible window in the image
+(of size `image_size`) that matches the target aspect ratio. By
+default (`crop_to_aspect_ratio=False`), aspect ratio may not be
+preserved.
+
+@param data_format
+If None uses keras.config.image_data_format()
+otherwise either 'channel_last' or 'channel_first'.
 
 @export
 @family utils

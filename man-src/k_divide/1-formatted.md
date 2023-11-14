@@ -6,8 +6,11 @@ Divide arguments element-wise.
 @returns
     Output tensor, the quotient `x1/x2`, element-wise.
 
-@param x1 First input tensor.
-@param x2 Second input tensor.
+@param x1
+First input tensor.
+
+@param x2
+Second input tensor.
 
 @export
 @family ops

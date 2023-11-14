@@ -22,9 +22,14 @@ A list containing two tensors. The first tensor contains the
 top-k values, and the second tensor contains the indices of the
 top-k values in the input tensor.
 
-@param x Input tensor.
-@param k An integer representing the number of top elements to retrieve.
-@param sorted A boolean indicating whether to sort the output in
+@param x
+Input tensor.
+
+@param k
+An integer representing the number of top elements to retrieve.
+
+@param sorted
+A boolean indicating whether to sort the output in
 descending order. Defaults to`TRUE`.
 
 @export

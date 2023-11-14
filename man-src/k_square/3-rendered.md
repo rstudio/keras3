@@ -3,7 +3,8 @@ Return the element-wise square of the input.
 @returns
     Output tensor, the square of `x`.
 
-@param x Input tensor.
+@param x
+Input tensor.
 
 @export
 @family ops

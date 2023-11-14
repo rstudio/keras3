@@ -37,15 +37,26 @@ loss = keras.losses.huber(y_true, y_pred)
 @returns
     Tensor with one scalar loss entry per sample.
 
-@param delta A float, the point where the Huber loss function changes from a
-    quadratic to linear. Defaults to `1.0`.
-@param reduction Type of reduction to apply to loss. Options are `"sum"`,
-    `"sum_over_batch_size"` or `None`. Defaults to
-    `"sum_over_batch_size"`.
-@param name Optional name for the instance.
-@param y_true tensor of true targets.
-@param y_pred tensor of predicted targets.
-@param ... Passed on to the Python callable
+@param delta
+A float, the point where the Huber loss function changes from a
+quadratic to linear. Defaults to `1.0`.
+
+@param reduction
+Type of reduction to apply to loss. Options are `"sum"`,
+`"sum_over_batch_size"` or `None`. Defaults to
+`"sum_over_batch_size"`.
+
+@param name
+Optional name for the instance.
+
+@param y_true
+tensor of true targets.
+
+@param y_pred
+tensor of predicted targets.
+
+@param ...
+Passed on to the Python callable
 
 @export
 @family loss

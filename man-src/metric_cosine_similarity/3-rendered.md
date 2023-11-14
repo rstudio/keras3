@@ -39,11 +39,18 @@ model.compile(
     metrics=[keras.metrics.CosineSimilarity(axis=1)])
 ```
 
-@param name (Optional) string name of the metric instance.
-@param dtype (Optional) data type of the metric result.
-@param axis (Optional) Defaults to `-1`. The dimension along which the cosine
-    similarity is computed.
-@param ... Passed on to the Python callable
+@param name
+(Optional) string name of the metric instance.
+
+@param dtype
+(Optional) data type of the metric result.
+
+@param axis
+(Optional) Defaults to `-1`. The dimension along which the cosine
+similarity is computed.
+
+@param ...
+Passed on to the Python callable
 
 @export
 @family metric

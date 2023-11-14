@@ -17,8 +17,11 @@ Torch backend does not accept 0-D tensors as arguments.
 @returns
     Dot product of `x1` and `x2`.
 
-@param x1 First argument.
-@param x2 Second argument.
+@param x1
+First argument.
+
+@param x2
+Second argument.
 
 @export
 @family ops

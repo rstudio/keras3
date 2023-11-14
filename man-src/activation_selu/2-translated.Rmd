@@ -32,7 +32,8 @@ and the number of input units is "large enough"
 # Reference
 - [Klambauer et al., 2017](https://arxiv.org/abs/1706.02515)
 
-@param x Input tensor.
+@param x
+Input tensor.
 
 @export
 @family activation functions

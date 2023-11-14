@@ -47,20 +47,33 @@ layer((feat1, feat2))
 #         [0., 0., 0., 1., 0.]], dtype=float32)
 ```
 
-@param num_bins Number of hash bins.
-@param output_mode Specification for the output of the layer. Values can be
-    `"int"`, or `"one_hot"` configuring the layer as follows:
-    - `"int"`: Return the integer bin indices directly.
-    - `"one_hot"`: Encodes each individual element in the input into an
-        array the same size as `num_bins`, containing a 1 at the input's
-        bin index. Defaults to `"int"`.
-@param sparse Boolean. Only applicable to `"one_hot"` mode and only valid
-    when using the TensorFlow backend. If `True`, returns
-    a `SparseTensor` instead of a dense `Tensor`. Defaults to `False`.
-@param ... Keyword arguments to construct a layer.
-@param object Object to compose the layer with. A tensor, array, or sequential model.
-@param name String, name for the object
-@param dtype datatype (e.g., `"float32"`).
+@param num_bins
+Number of hash bins.
+
+@param output_mode
+Specification for the output of the layer. Values can be
+`"int"`, or `"one_hot"` configuring the layer as follows:
+- `"int"`: Return the integer bin indices directly.
+- `"one_hot"`: Encodes each individual element in the input into an
+    array the same size as `num_bins`, containing a 1 at the input's
+    bin index. Defaults to `"int"`.
+
+@param sparse
+Boolean. Only applicable to `"one_hot"` mode and only valid
+when using the TensorFlow backend. If `True`, returns
+a `SparseTensor` instead of a dense `Tensor`. Defaults to `False`.
+
+@param ...
+Keyword arguments to construct a layer.
+
+@param object
+Object to compose the layer with. A tensor, array, or sequential model.
+
+@param name
+String, name for the object
+
+@param dtype
+datatype (e.g., `"float32"`).
 
 @export
 @family preprocessing layers

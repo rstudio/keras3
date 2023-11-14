@@ -6,8 +6,11 @@ Zeros are treated as `False` and non-zeros are treated as `True`.
 @returns
     Output tensor, element-wise logical AND of the inputs.
 
-@param x1 Input tensor.
-@param x2 Input tensor.
+@param x1
+Input tensor.
+
+@param x2
+Input tensor.
 
 @export
 @family ops

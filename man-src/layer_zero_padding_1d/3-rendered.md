@@ -47,13 +47,18 @@ y
 # Output Shape
     3D tensor with shape `(batch_size, padded_axis, features)`
 
-@param padding Int, or list of int (length 2), or named listionary.
+@param padding
+Int, or list of int (length 2), or named listionary.
 - If int: how many zeros to add at the beginning and end of
   the padding dimension (axis 1).
 - If list of 2 ints: how many zeros to add at the beginning and the
   end of the padding dimension (`(left_pad, right_pad)`).
-@param object Object to compose the layer with. A tensor, array, or sequential model.
-@param ... Passed on to the Python callable
+
+@param object
+Object to compose the layer with. A tensor, array, or sequential model.
+
+@param ...
+Passed on to the Python callable
 
 @export
 @family reshaping layers

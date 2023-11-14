@@ -13,8 +13,11 @@ keras.ops.solve(x1, x2)
 @returns
 A tensor with the same shape and dtype as `a`.
 
-@param a Input tensor.
-@param b Input tensor.
+@param a
+Input tensor.
+
+@param b
+Input tensor.
 
 @export
 @family ops

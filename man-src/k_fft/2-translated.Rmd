@@ -16,7 +16,8 @@ k_fft(x)
 A list containing two tensors - the real and imaginary parts of the
 output tensor.
 
-@param x list of the real and imaginary parts of the input tensor. Both
+@param x
+list of the real and imaginary parts of the input tensor. Both
 tensors provided should be of floating type.
 
 @export

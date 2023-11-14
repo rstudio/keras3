@@ -12,7 +12,8 @@ of its imaginary part.
 @returns
     The complex conjugate of each element in `x`.
 
-@param x Input tensor.
+@param x
+Input tensor.
 
 @export
 @family ops

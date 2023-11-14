@@ -17,16 +17,23 @@ pil_img
 @returns
     A PIL Image instance.
 
-@param x Input data, in any form that can be converted to an array.
-@param data_format Image data format, can be either `"channels_first"` or
-    `"channels_last"`. Defaults to `NULL`, in which case the global
-    setting `config_image_data_format()` is used (unless you
-    changed it, it defaults to `"channels_last"`).
-@param scale Whether to rescale the image such that minimum and maximum values
-    are 0 and 255 respectively. Defaults to `TRUE`.
-@param dtype Dtype to use. `NULL` means the global setting
-    `config_floatx()` is used (unless you changed it, it
-    defaults to `"float32"`). Defaults to `NULL`.
+@param x
+Input data, in any form that can be converted to an array.
+
+@param data_format
+Image data format, can be either `"channels_first"` or
+`"channels_last"`. Defaults to `NULL`, in which case the global
+setting `config_image_data_format()` is used (unless you
+changed it, it defaults to `"channels_last"`).
+
+@param scale
+Whether to rescale the image such that minimum and maximum values
+are 0 and 255 respectively. Defaults to `TRUE`.
+
+@param dtype
+Dtype to use. `NULL` means the global setting
+`config_floatx()` is used (unless you changed it, it
+defaults to `"float32"`). Defaults to `NULL`.
 
 @export
 @family utils

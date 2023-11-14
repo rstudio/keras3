@@ -13,14 +13,19 @@ array = keras.utils.image.img_to_array(img)
 @returns
     A 3D NumPy array.
 
-@param img Input PIL Image instance.
-@param data_format Image data format, can be either `"channels_first"` or
-    `"channels_last"`. Defaults to `None`, in which case the global
-    setting `keras.backend.image_data_format()` is used (unless you
-    changed it, it defaults to `"channels_last"`).
-@param dtype Dtype to use. `None` means the global setting
-    `keras.backend.floatx()` is used (unless you changed it, it
-    defaults to `"float32"`).
+@param img
+Input PIL Image instance.
+
+@param data_format
+Image data format, can be either `"channels_first"` or
+`"channels_last"`. Defaults to `None`, in which case the global
+setting `keras.backend.image_data_format()` is used (unless you
+changed it, it defaults to `"channels_last"`).
+
+@param dtype
+Dtype to use. `None` means the global setting
+`keras.backend.floatx()` is used (unless you changed it, it
+defaults to `"float32"`).
 
 @export
 @family utils

@@ -59,17 +59,24 @@ y$shape
 @returns
     A tensor, the dot product of the samples from the inputs.
 
-@param axes Integer or list of integers, axis or axes along which to
-    take the dot product. If a list, should be two integers
-    corresponding to the desired axis from the first input and the
-    desired axis from the second input, respectively. Note that the
-    size of the two selected axes must match.
-@param normalize Whether to L2-normalize samples along the dot product axis
-    before taking the dot product. If set to `TRUE`, then
-    the output of the dot product is the cosine proximity
-    between the two samples.
-@param ... Standard layer keyword arguments.
-@param inputs layers to combine
+@param axes
+Integer or list of integers, axis or axes along which to
+take the dot product. If a list, should be two integers
+corresponding to the desired axis from the first input and the
+desired axis from the second input, respectively. Note that the
+size of the two selected axes must match.
+
+@param normalize
+Whether to L2-normalize samples along the dot product axis
+before taking the dot product. If set to `TRUE`, then
+the output of the dot product is the cosine proximity
+between the two samples.
+
+@param ...
+Standard layer keyword arguments.
+
+@param inputs
+layers to combine
 
 @export
 @family merging layers

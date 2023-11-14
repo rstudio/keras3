@@ -27,11 +27,20 @@ Same as input.
 # Reference
 - [Tompson et al., 2014](https://arxiv.org/abs/1411.4280)
 
-@param rate Float between 0 and 1. Fraction of the input units to drop.
-@param object Object to compose the layer with. A tensor, array, or sequential model.
-@param name String, name for the object
-@param seed Initial seed for the random number generator
-@param dtype datatype (e.g., `"float32"`).
+@param rate
+Float between 0 and 1. Fraction of the input units to drop.
+
+@param object
+Object to compose the layer with. A tensor, array, or sequential model.
+
+@param name
+String, name for the object
+
+@param seed
+Initial seed for the random number generator
+
+@param dtype
+datatype (e.g., `"float32"`).
 
 @export
 @family regularization layers

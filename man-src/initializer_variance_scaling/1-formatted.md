@@ -28,18 +28,25 @@ initializer = VarianceScaling(
 layer = Dense(3, kernel_initializer=initializer)
 ```
 
-@param scale Scaling factor (positive float).
-@param mode One of `"fan_in"`, `"fan_out"`, `"fan_avg"`.
-@param distribution Random distribution to use.
-    One of `"truncated_normal"`, `"untruncated_normal"`, or `"uniform"`.
-@param seed A Python integer or instance of
-    `keras.backend.SeedGenerator`.
-    Used to make the behavior of the initializer
-    deterministic. Note that an initializer seeded with an integer
-    or `None` (unseeded) will produce the same random values
-    across multiple calls. To get different random values
-    across multiple calls, use as seed an instance
-    of `keras.backend.SeedGenerator`.
+@param scale
+Scaling factor (positive float).
+
+@param mode
+One of `"fan_in"`, `"fan_out"`, `"fan_avg"`.
+
+@param distribution
+Random distribution to use.
+One of `"truncated_normal"`, `"untruncated_normal"`, or `"uniform"`.
+
+@param seed
+A Python integer or instance of
+`keras.backend.SeedGenerator`.
+Used to make the behavior of the initializer
+deterministic. Note that an initializer seeded with an integer
+or `None` (unseeded) will produce the same random values
+across multiple calls. To get different random values
+across multiple calls, use as seed an instance
+of `keras.backend.SeedGenerator`.
 
 @export
 @family initializer

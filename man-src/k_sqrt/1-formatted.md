@@ -3,7 +3,8 @@ Return the non-negative square root of a tensor, element-wise.
 @returns
     Output tensor, the non-negative square root of `x`.
 
-@param x Input tensor.
+@param x
+Input tensor.
 
 @export
 @family ops

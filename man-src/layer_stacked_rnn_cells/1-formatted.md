@@ -18,8 +18,11 @@ lstm_layer = keras.layers.RNN(stacked_lstm)
 result = lstm_layer(x)
 ```
 
-@param cells List of RNN cell instances.
-@param ... Passed on to the Python callable
+@param cells
+List of RNN cell instances.
+
+@param ...
+Passed on to the Python callable
 
 @export
 @family recurrent layers

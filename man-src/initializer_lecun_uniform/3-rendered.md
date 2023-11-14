@@ -23,7 +23,8 @@ layer <- layer_dense(units = 3, kernel_initializer = initializer)
 # Reference
 - [Klambauer et al., 2017](https://arxiv.org/abs/1706.02515)
 
-@param seed An integer or instance of
+@param seed
+An integer or instance of
 `random_seed_generator()`.
 Used to make the behavior of the initializer
 deterministic. Note that an initializer seeded with an integer

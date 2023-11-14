@@ -40,10 +40,13 @@ model$optimizer$learning_rate |> as.array() |> round(5)
 ## [1] 0.00607
 ```
 
-@param schedule A function that takes an epoch index (integer, indexed from 0)
-    and current learning rate (float) as inputs and returns a new
-    learning rate as output (float).
-@param verbose Integer. 0: quiet, 1: log update messages.
+@param schedule
+A function that takes an epoch index (integer, indexed from 0)
+and current learning rate (float) as inputs and returns a new
+learning rate as output (float).
+
+@param verbose
+Integer. 0: quiet, 1: log update messages.
 
 @export
 @family callback

@@ -36,17 +36,19 @@ in the range \verb{[-20\% * 2pi, 20\% * 2pi]}.}
 \item{fill_mode}{Points outside the boundaries of the input are filled
 according to the given mode
 (one of \verb{\{"constant", "reflect", "wrap", "nearest"\}}).
-- \emph{reflect}: \verb{(d c b a | a b c d | d c b a)}
+\itemize{
+\item \emph{reflect}: \verb{(d c b a | a b c d | d c b a)}
 The input is extended by reflecting about
 the edge of the last pixel.
-- \emph{constant}: \verb{(k k k k | a b c d | k k k k)}
+\item \emph{constant}: \verb{(k k k k | a b c d | k k k k)}
 The input is extended by
 filling all values beyond the edge with
 the same constant value k = 0.
-- \emph{wrap}: \verb{(a b c d | a b c d | a b c d)} The input is extended by
+\item \emph{wrap}: \verb{(a b c d | a b c d | a b c d)} The input is extended by
 wrapping around to the opposite edge.
-- \emph{nearest}: \verb{(a a a a | a b c d | d d d d)}
-The input is extended by the nearest pixel.}
+\item \emph{nearest}: \verb{(a a a a | a b c d | d d d d)}
+The input is extended by the nearest pixel.
+}}
 
 \item{interpolation}{Interpolation mode. Supported values: \code{"nearest"},
 \code{"bilinear"}.}

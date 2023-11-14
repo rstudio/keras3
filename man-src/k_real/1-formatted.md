@@ -3,7 +3,8 @@ Return the real part of the complex argument.
 @returns
     The real component of the complex argument.
 
-@param x Input tensor.
+@param x
+Input tensor.
 
 @export
 @family ops

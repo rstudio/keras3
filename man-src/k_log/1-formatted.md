@@ -3,7 +3,8 @@ Natural logarithm, element-wise.
 @returns
     Output tensor, element-wise natural logarithm of `x`.
 
-@param x Input tensor.
+@param x
+Input tensor.
 
 @export
 @family ops

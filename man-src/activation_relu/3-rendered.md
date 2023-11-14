@@ -46,13 +46,20 @@ activation_relu(x, threshold = 5)
 @returns
     A tensor with the same shape and dtype as input `x`.
 
-@param x Input tensor.
-@param negative_slope A `numeric` that controls the slope
-    for values lower than the threshold.
-@param max_value A `numeric` that sets the saturation threshold (the largest
-    value the function will return).
-@param threshold A `numeric` giving the threshold value of the activation
-    function below which values will be damped or set to zero.
+@param x
+Input tensor.
+
+@param negative_slope
+A `numeric` that controls the slope
+for values lower than the threshold.
+
+@param max_value
+A `numeric` that sets the saturation threshold (the largest
+value the function will return).
+
+@param threshold
+A `numeric` giving the threshold value of the activation
+function below which values will be damped or set to zero.
 
 @export
 @family activation functions

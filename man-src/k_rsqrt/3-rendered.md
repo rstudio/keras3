@@ -20,7 +20,8 @@ k_rsqrt(x)
 @returns
 A tensor with the same dtype as `x`.
 
-@param x input tensor
+@param x
+input tensor
 
 @export
 @family ops

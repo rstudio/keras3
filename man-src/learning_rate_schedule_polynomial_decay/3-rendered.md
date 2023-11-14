@@ -70,15 +70,26 @@ A 1-arg callable learning rate schedule that takes the current optimizer
 step and outputs the decayed learning rate, a scalar tensor of the
 same type as `initial_learning_rate`.
 
-@param initial_learning_rate A Python float. The initial learning rate.
-@param decay_steps A Python integer. Must be positive. See the decay
-    computation above.
-@param end_learning_rate A Python float. The minimal end learning rate.
-@param power A Python float. The power of the polynomial. Defaults to
-    `1.0`.
-@param cycle A boolean, whether it should cycle beyond decay_steps.
-@param name String.  Optional name of the operation. Defaults to
-    `"PolynomialDecay"`.
+@param initial_learning_rate
+A Python float. The initial learning rate.
+
+@param decay_steps
+A Python integer. Must be positive. See the decay
+computation above.
+
+@param end_learning_rate
+A Python float. The minimal end learning rate.
+
+@param power
+A Python float. The power of the polynomial. Defaults to
+`1.0`.
+
+@param cycle
+A boolean, whether it should cycle beyond decay_steps.
+
+@param name
+String.  Optional name of the operation. Defaults to
+`"PolynomialDecay"`.
 
 @export
 @family learning_rate_schedule

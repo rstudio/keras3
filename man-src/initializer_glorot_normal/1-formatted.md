@@ -22,7 +22,8 @@ layer = Dense(3, kernel_initializer=initializer)
 # Reference
 - [Glorot et al., 2010](http://proceedings.mlr.press/v9/glorot10a.html)
 
-@param seed A Python integer or instance of
+@param seed
+A Python integer or instance of
 `keras.backend.SeedGenerator`.
 Used to make the behavior of the initializer
 deterministic. Note that an initializer seeded with an integer

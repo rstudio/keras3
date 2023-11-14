@@ -31,17 +31,30 @@ in `__call__()`), make sure that the training-time call function is
 saved as a standalone endpoint in the artifact, and provide its name
 to the `layer_tfsm` via the `call_training_endpoint` argument.
 
-@param filepath `str`. The path to the SavedModel.
-@param call_endpoint Name of the endpoint to use as the `call()` method
-    of the reloaded layer. If the SavedModel was created
-    via `export_savedmodel()`,
-    then the default endpoint name is `'serve'`. In other cases
-    it may be named `'serving_default'`.
-@param object Object to compose the layer with. A tensor, array, or sequential model.
-@param name String, name for the object
-@param dtype datatype (e.g., `"float32"`).
-@param call_training_endpoint see description
-@param trainable see description
+@param filepath
+`str`. The path to the SavedModel.
+
+@param call_endpoint
+Name of the endpoint to use as the `call()` method
+of the reloaded layer. If the SavedModel was created
+via `export_savedmodel()`,
+then the default endpoint name is `'serve'`. In other cases
+it may be named `'serving_default'`.
+
+@param object
+Object to compose the layer with. A tensor, array, or sequential model.
+
+@param name
+String, name for the object
+
+@param dtype
+datatype (e.g., `"float32"`).
+
+@param call_training_endpoint
+see description
+
+@param trainable
+see description
 
 @export
 @seealso

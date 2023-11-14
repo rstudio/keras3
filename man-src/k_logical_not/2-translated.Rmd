@@ -9,7 +9,8 @@ Zeros are treated as `False` and non-zeros are treated as `True`.
 @returns
     Output tensor, element-wise logical NOT of the input.
 
-@param x Input tensor.
+@param x
+Input tensor.
 
 @export
 @family ops

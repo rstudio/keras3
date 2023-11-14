@@ -17,12 +17,17 @@ def from_config(cls, config, custom_objects=None):
 An instantiable class associated with `name`, or `None` if no such class
 exists.
 
-@param name The name to look up.
-@param custom_objects A dictionary of custom objects to look the name up in.
-    Generally, custom_objects is provided by the user.
-@param module_objects A dictionary of custom objects to look the name up in.
-    Generally, module_objects is provided by midlevel library
-    implementers.
+@param name
+The name to look up.
+
+@param custom_objects
+A dictionary of custom objects to look the name up in.
+Generally, custom_objects is provided by the user.
+
+@param module_objects
+A dictionary of custom objects to look the name up in.
+Generally, module_objects is provided by midlevel library
+implementers.
 
 @export
 @family utils

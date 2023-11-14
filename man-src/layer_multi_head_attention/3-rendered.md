@@ -55,25 +55,56 @@ attention_output: The result of the computation, of shape `(B, T, E)`,
 attention_scores: (Optional) multi-head attention coefficients over
     attention axes.
 
-@param num_heads Number of attention heads.
-@param key_dim Size of each attention head for query and key.
-@param value_dim Size of each attention head for value.
-@param dropout Dropout probability.
-@param use_bias Boolean, whether the dense layers use bias vectors/matrices.
-@param output_shape The expected shape of an output tensor, besides the batch
-    and sequence dims. If not specified, projects back to the query
-    feature dim (the query input's last dimension).
-@param attention_axes axes over which the attention is applied. `None` means
-    attention over all axes, but batch, heads, and features.
-@param kernel_initializer Initializer for dense layer kernels.
-@param bias_initializer Initializer for dense layer biases.
-@param kernel_regularizer Regularizer for dense layer kernels.
-@param bias_regularizer Regularizer for dense layer biases.
-@param activity_regularizer Regularizer for dense layer activity.
-@param kernel_constraint Constraint for dense layer kernels.
-@param bias_constraint Constraint for dense layer kernels.
-@param ... Passed on to the Python callable
-@param inputs see description
+@param num_heads
+Number of attention heads.
+
+@param key_dim
+Size of each attention head for query and key.
+
+@param value_dim
+Size of each attention head for value.
+
+@param dropout
+Dropout probability.
+
+@param use_bias
+Boolean, whether the dense layers use bias vectors/matrices.
+
+@param output_shape
+The expected shape of an output tensor, besides the batch
+and sequence dims. If not specified, projects back to the query
+feature dim (the query input's last dimension).
+
+@param attention_axes
+axes over which the attention is applied. `None` means
+attention over all axes, but batch, heads, and features.
+
+@param kernel_initializer
+Initializer for dense layer kernels.
+
+@param bias_initializer
+Initializer for dense layer biases.
+
+@param kernel_regularizer
+Regularizer for dense layer kernels.
+
+@param bias_regularizer
+Regularizer for dense layer biases.
+
+@param activity_regularizer
+Regularizer for dense layer activity.
+
+@param kernel_constraint
+Constraint for dense layer kernels.
+
+@param bias_constraint
+Constraint for dense layer kernels.
+
+@param ...
+Passed on to the Python callable
+
+@param inputs
+see description
 
 @export
 @family attention layers

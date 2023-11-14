@@ -17,12 +17,17 @@ k_logsumexp(x)
 A tensor containing the logarithm of the sum of exponentials of
 elements in `x`.
 
-@param x Input tensor.
-@param axis An integer or a list of integers specifying the axis/axes
-    along which to compute the sum. If `NULL`, the sum is computed
-    over all elements. Defaults to`NULL`.
-@param keepdims A boolean indicating whether to keep the dimensions of
-    the input tensor when computing the sum. Defaults to`FALSE`.
+@param x
+Input tensor.
+
+@param axis
+An integer or a list of integers specifying the axis/axes
+along which to compute the sum. If `NULL`, the sum is computed
+over all elements. Defaults to`NULL`.
+
+@param keepdims
+A boolean indicating whether to keep the dimensions of
+the input tensor when computing the sum. Defaults to`FALSE`.
 
 @export
 @family ops

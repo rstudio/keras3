@@ -40,13 +40,20 @@ x.diagonal(0, 0, 1)
 @returns
 Tensor of diagonals.
 
-@param x Input tensor.
-@param offset Offset of the diagonal from the main diagonal.
-    Can be positive or negative. Defaults to `0`.(main diagonal).
-@param axis1 Axis to be used as the first axis of the 2-D sub-arrays.
-    Defaults to `0`.(first axis).
-@param axis2 Axis to be used as the second axis of the 2-D sub-arrays.
-    Defaults to `1` (second axis).
+@param x
+Input tensor.
+
+@param offset
+Offset of the diagonal from the main diagonal.
+Can be positive or negative. Defaults to `0`.(main diagonal).
+
+@param axis1
+Axis to be used as the first axis of the 2-D sub-arrays.
+Defaults to `0`.(first axis).
+
+@param axis2
+Axis to be used as the second axis of the 2-D sub-arrays.
+Defaults to `1` (second axis).
 
 @export
 @family ops

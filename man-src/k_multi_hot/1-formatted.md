@@ -14,12 +14,19 @@ keras.ops.multi_hot(data, num_tokens=5)
 @returns
 Tensor: The multi-hot encoded tensor.
 
-@param inputs Tensor of integer labels to be converted to multi-hot vectors.
-@param num_tokens Integer, the total number of unique tokens or classes.
-@param axis (optional) Axis along which the multi-hot encoding should be
-    added. Defaults to `-1`, which corresponds to the last dimension.
-@param dtype (optional) The data type of the resulting tensor. Default
-    is backend's float type.
+@param inputs
+Tensor of integer labels to be converted to multi-hot vectors.
+
+@param num_tokens
+Integer, the total number of unique tokens or classes.
+
+@param axis
+(optional) Axis along which the multi-hot encoding should be
+added. Defaults to `-1`, which corresponds to the last dimension.
+
+@param dtype
+(optional) The data type of the resulting tensor. Default
+is backend's float type.
 
 @export
 @family ops

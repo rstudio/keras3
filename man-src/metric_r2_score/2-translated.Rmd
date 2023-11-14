@@ -38,19 +38,28 @@ result
 # 0.57142854
 ```
 
-@param class_aggregation Specifies how to aggregate scores corresponding to
-    different output classes (or target dimensions),
-    i.e. different dimensions on the last axis of the predictions.
-    Equivalent to `multioutput` argument in Scikit-Learn.
-    Should be one of
-    `None` (no aggregation), `"uniform_average"`,
-    `"variance_weighted_average"`.
-@param num_regressors Number of independent regressors used
-    ("Adjusted R2" score). 0 is the standard R2 score.
-    Defaults to `0`.
-@param name Optional. string name of the metric instance.
-@param dtype Optional. data type of the metric result.
-@param ... Passed on to the Python callable
+@param class_aggregation
+Specifies how to aggregate scores corresponding to
+different output classes (or target dimensions),
+i.e. different dimensions on the last axis of the predictions.
+Equivalent to `multioutput` argument in Scikit-Learn.
+Should be one of
+`None` (no aggregation), `"uniform_average"`,
+`"variance_weighted_average"`.
+
+@param num_regressors
+Number of independent regressors used
+("Adjusted R2" score). 0 is the standard R2 score.
+Defaults to `0`.
+
+@param name
+Optional. string name of the metric instance.
+
+@param dtype
+Optional. data type of the metric result.
+
+@param ...
+Passed on to the Python callable
 
 @export
 @family metric

@@ -44,13 +44,18 @@ value representing the maximum element in the entire tensor. If `axis` is
 given, the result is a tensor with the maximum values along
 the specified axis.
 
-@param x Input tensor.
-@param axis Axis along which to compute the maximum.
-    By default (`axis = NULL`), find the maximum value in all the
-    dimensions of the input tensor.
-@param keepdims If `TRUE`, axes which are reduced are left in the result as
-    dimensions that are broadcast to the size of the original
-    input tensor. Defaults to `FALSE`.
+@param x
+Input tensor.
+
+@param axis
+Axis along which to compute the maximum.
+By default (`axis = NULL`), find the maximum value in all the
+dimensions of the input tensor.
+
+@param keepdims
+If `TRUE`, axes which are reduced are left in the result as
+dimensions that are broadcast to the size of the original
+input tensor. Defaults to `FALSE`.
 
 @export
 @family ops

@@ -10,7 +10,8 @@ bounded below.
 # Reference
 - [Ramachandran et al., 2017](https://arxiv.org/abs/1710.05941)
 
-@param x Input tensor.
+@param x
+Input tensor.
 
 @export
 @family activation functions

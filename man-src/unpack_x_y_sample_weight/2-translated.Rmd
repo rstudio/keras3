@@ -26,7 +26,8 @@ sample_weight is None
 The unpacked tuple, with `None`s for `y` and `sample_weight` if they are
 not provided.
 
-@param data A tuple of the form `(x,)`, `(x, y)`, or `(x, y, sample_weight)`.
+@param data
+A tuple of the form `(x,)`, `(x, y)`, or `(x, y, sample_weight)`.
 
 @export
 @family utils

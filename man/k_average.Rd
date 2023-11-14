@@ -20,9 +20,8 @@ case its length must be the size of a along the given axis) or of
 the same shape as \code{x}. If \code{weights = NULL} (default), then all data
 in \code{x} are assumed to have a weight equal to one.
 
-\if{html}{\out{<div class="sourceCode">}}\preformatted{The 1-D calculation is: `avg = sum(a * weights) / sum(weights)`.
-The only constraint on weights is that `sum(weights)` must not be 0.
-}\if{html}{\out{</div>}}}
+The 1-D calculation is: \code{avg = sum(a * weights) / sum(weights)}.
+The only constraint on weights is that \code{sum(weights)} must not be 0.}
 }
 \value{
 Return the average along the specified axis.

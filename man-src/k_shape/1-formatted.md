@@ -18,7 +18,8 @@ keras.ops.shape(x)
 A tuple of integers or None values, indicating the shape of the input
 tensor.
 
-@param x A tensor. This function will try to access the `shape` attribute of
+@param x
+A tensor. This function will try to access the `shape` attribute of
 the input tensor.
 
 @export

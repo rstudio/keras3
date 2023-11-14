@@ -48,17 +48,26 @@ If the input image was a NumPy array, the output is a NumPy array,
 and if it was a backend-native tensor,
 the output is a backend-native tensor.
 
-@param x Input image or batch of images (as a tensor or NumPy array).
-    Must be in format `(height, width, channels)`
-    or `(batch_size, height, width, channels)`.
-@param size Tuple of `(height, width)` integer. Target size.
-@param interpolation String, interpolation to use for resizing.
-    Defaults to `'bilinear'`.
-    Supports `bilinear`, `nearest`, `bicubic`,
-    `lanczos3`, `lanczos5`.
-@param data_format `"channels_last"` or `"channels_first"`.
-@param backend_module Backend module to use (if different from the default
-    backend).
+@param x
+Input image or batch of images (as a tensor or NumPy array).
+Must be in format `(height, width, channels)`
+or `(batch_size, height, width, channels)`.
+
+@param size
+Tuple of `(height, width)` integer. Target size.
+
+@param interpolation
+String, interpolation to use for resizing.
+Defaults to `'bilinear'`.
+Supports `bilinear`, `nearest`, `bicubic`,
+`lanczos3`, `lanczos5`.
+
+@param data_format
+`"channels_last"` or `"channels_first"`.
+
+@param backend_module
+Backend module to use (if different from the default
+backend).
 
 @export
 @seealso

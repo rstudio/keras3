@@ -20,10 +20,13 @@ A list containing two tensors. The first tensor represents the
 orthogonal matrix Q, and the second tensor represents the upper
 triangular matrix R.
 
-@param x Input tensor.
-@param mode A string specifying the mode of the QR decomposition.
-    - 'reduced': Returns the reduced QR decomposition. (default)
-    - 'complete': Returns the complete QR decomposition.
+@param x
+Input tensor.
+
+@param mode
+A string specifying the mode of the QR decomposition.
+- 'reduced': Returns the reduced QR decomposition. (default)
+- 'complete': Returns the complete QR decomposition.
 
 @export
 @family ops

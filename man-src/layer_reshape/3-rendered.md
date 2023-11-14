@@ -51,10 +51,15 @@ y$shape
 ## [1] 2
 ```
 
-@param target_shape Target shape. List of integers, does not include the
+@param target_shape
+Target shape. List of integers, does not include the
 samples dimension (batch size).
-@param object Object to compose the layer with. A tensor, array, or sequential model.
-@param ... Passed on to the Python callable
+
+@param object
+Object to compose the layer with. A tensor, array, or sequential model.
+
+@param ...
+Passed on to the Python callable
 
 @export
 @family reshaping layers

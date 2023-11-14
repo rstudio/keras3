@@ -16,7 +16,8 @@ print(x_hard_sigmoid)
 @returns
 A tensor with the same shape as `x`.
 
-@param x Input tensor.
+@param x
+Input tensor.
 
 @export
 @family ops

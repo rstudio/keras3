@@ -21,11 +21,16 @@ inputs = keras.ops.slice_update(inputs, start_indices, updates)
 @returns
     A tensor, has the same shape and dtype as `inputs`.
 
-@param inputs A tensor, the tensor to be updated.
-@param start_indices A list/tuple of shape `(inputs.ndim,)`, specifying
-    the starting indices for updating.
-@param updates A tensor, the new values to be put to `inputs` at `indices`.
-    `updates` must have the same rank as `inputs`.
+@param inputs
+A tensor, the tensor to be updated.
+
+@param start_indices
+A list/tuple of shape `(inputs.ndim,)`, specifying
+the starting indices for updating.
+
+@param updates
+A tensor, the new values to be put to `inputs` at `indices`.
+`updates` must have the same rank as `inputs`.
 
 @export
 @family ops

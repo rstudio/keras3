@@ -19,14 +19,21 @@ By default, the layer will output floats.
 3D (unbatched) or 4D (batched) tensor with shape:
 `(..., height, width, channels)`, in `"channels_last"` format.
 
-@param mode String indicating which flip mode to use. Can be `"horizontal"`,
-    `"vertical"`, or `"horizontal_and_vertical"`. `"horizontal"` is a
-    left-right flip and `"vertical"` is a top-bottom flip. Defaults to
-    `"horizontal_and_vertical"`
-@param seed Integer. Used to create a random seed.
-@param ... Base layer keyword arguments, such as
-    `name` and `dtype`.
-@param object Object to compose the layer with. A tensor, array, or sequential model.
+@param mode
+String indicating which flip mode to use. Can be `"horizontal"`,
+`"vertical"`, or `"horizontal_and_vertical"`. `"horizontal"` is a
+left-right flip and `"vertical"` is a top-bottom flip. Defaults to
+`"horizontal_and_vertical"`
+
+@param seed
+Integer. Used to create a random seed.
+
+@param ...
+Base layer keyword arguments, such as
+`name` and `dtype`.
+
+@param object
+Object to compose the layer with. A tensor, array, or sequential model.
 
 @export
 @family preprocessing layers

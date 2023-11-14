@@ -8,9 +8,14 @@ values smaller than 0 become 0, and values larger than 1 become 1.
 @returns
     The clipped tensor.
 
-@param x Input tensor.
-@param x_min Minimum value.
-@param x_max Maximum value.
+@param x
+Input tensor.
+
+@param x_min
+Minimum value.
+
+@param x_max
+Maximum value.
 
 @export
 @family ops

@@ -16,7 +16,8 @@ initializer = Identity()
 layer = Dense(3, kernel_initializer=initializer)
 ```
 
-@param gain Multiplicative factor to apply to the identity matrix.
+@param gain
+Multiplicative factor to apply to the identity matrix.
 
 @export
 @family initializer

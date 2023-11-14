@@ -16,8 +16,11 @@ Matrix product of two tensors.
 @returns
     Output tensor, matrix product of the inputs.
 
-@param x1 First tensor.
-@param x2 Second tensor.
+@param x1
+First tensor.
+
+@param x2
+Second tensor.
 
 @export
 @family ops

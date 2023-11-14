@@ -23,10 +23,15 @@ k_scatter(indices, values, shape= c(2, 2))
 ##  [0. 1.]], shape=(2, 2), dtype=float32)
 ```
 
-@param indices A tensor or list specifying
-    indices for the values in `values`.
-@param values A tensor, the values to be set at `indices`.
-@param shape Shape of the output tensor.
+@param indices
+A tensor or list specifying
+indices for the values in `values`.
+
+@param values
+A tensor, the values to be set at `indices`.
+
+@param shape
+Shape of the output tensor.
 
 @export
 @family ops

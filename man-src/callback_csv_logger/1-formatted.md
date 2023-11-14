@@ -10,10 +10,15 @@ csv_logger = CSVLogger('training.log')
 model.fit(X_train, Y_train, callbacks=[csv_logger])
 ```
 
-@param filename Filename of the CSV file, e.g. `'run/log.csv'`.
-@param separator String used to separate elements in the CSV file.
-@param append Boolean. True: append if file exists (useful for continuing
-    training). False: overwrite existing file.
+@param filename
+Filename of the CSV file, e.g. `'run/log.csv'`.
+
+@param separator
+String used to separate elements in the CSV file.
+
+@param append
+Boolean. True: append if file exists (useful for continuing
+training). False: overwrite existing file.
 
 @export
 @family callback

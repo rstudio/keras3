@@ -1,6 +1,7 @@
 Shorthand for `keras.ops.absolute`.
 
-@param x see description
+@param x
+see description
 
 @export
 @family ops

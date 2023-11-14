@@ -10,12 +10,14 @@ layer_zero_padding_2d(object, padding = list(1L, 1L), data_format = NULL, ...)
 \item{object}{Object to compose the layer with. A tensor, array, or sequential model.}
 
 \item{padding}{Int, or list of 2 ints, or list of 2 lists of 2 ints.
-- If int: the same symmetric padding is applied to height and width.
-- If list of 2 ints: interpreted as two different symmetric padding
+\itemize{
+\item If int: the same symmetric padding is applied to height and width.
+\item If list of 2 ints: interpreted as two different symmetric padding
 values for height and width:
 \verb{(symmetric_height_pad, symmetric_width_pad)}.
-- If list of 2 lists of 2 ints: interpreted as
-\verb{((top_pad, bottom_pad), (left_pad, right_pad))}.}
+\item If list of 2 lists of 2 ints: interpreted as
+\verb{((top_pad, bottom_pad), (left_pad, right_pad))}.
+}}
 
 \item{data_format}{A string, one of \code{"channels_last"} (default) or
 \code{"channels_first"}. The ordering of the dimensions in the inputs.

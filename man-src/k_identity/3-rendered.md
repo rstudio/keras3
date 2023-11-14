@@ -7,8 +7,11 @@ zeros elsewhere.
 @returns
     The identity tensor.
 
-@param n Number of rows (and columns) in the `n x n` output tensor.
-@param dtype Data type of the output tensor.
+@param n
+Number of rows (and columns) in the `n x n` output tensor.
+
+@param dtype
+Data type of the output tensor.
 
 @export
 @family ops

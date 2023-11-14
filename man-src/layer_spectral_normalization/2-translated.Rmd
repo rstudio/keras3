@@ -29,12 +29,19 @@ y$shape
 # Reference
 - [Spectral Normalization for GAN](https://arxiv.org/abs/1802.05957).
 
-@param layer A `Layer` instance that
-    has either a `kernel` (e.g. `layer_conv_2d`, `layer_dense`...)
-    or an `embeddings` attribute (`Embedding` layer).
-@param power_iterations int, the number of iterations during normalization.
-@param ... Base wrapper keyword arguments.
-@param object Object to compose the layer with. A tensor, array, or sequential model.
+@param layer
+A `Layer` instance that
+has either a `kernel` (e.g. `layer_conv_2d`, `layer_dense`...)
+or an `embeddings` attribute (`Embedding` layer).
+
+@param power_iterations
+int, the number of iterations during normalization.
+
+@param ...
+Base wrapper keyword arguments.
+
+@param object
+Object to compose the layer with. A tensor, array, or sequential model.
 
 @export
 @family normalization layers

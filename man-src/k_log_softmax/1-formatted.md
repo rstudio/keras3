@@ -15,9 +15,12 @@ print(x_log_softmax)
 @returns
 A tensor with the same shape as `x`.
 
-@param x Input tensor.
-@param axis Integer, axis along which the log-softmax is applied.
-    Defaults to `-1`.
+@param x
+Input tensor.
+
+@param axis
+Integer, axis along which the log-softmax is applied.
+Defaults to `-1`.
 
 @export
 @family ops

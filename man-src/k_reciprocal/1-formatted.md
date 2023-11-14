@@ -6,7 +6,8 @@ Calculates `1/x`.
 @returns
     Output tensor, element-wise reciprocal of `x`.
 
-@param x Input tensor.
+@param x
+Input tensor.
 
 @export
 @family ops

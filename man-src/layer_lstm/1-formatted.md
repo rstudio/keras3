@@ -51,67 +51,116 @@ final_carry_state.shape
     call of the cell (optional, `None` causes creation
     of zero-filled initial state tensors). Defaults to `None`.
 
-@param units Positive integer, dimensionality of the output space.
-@param activation Activation function to use.
-    Default: hyperbolic tangent (`tanh`).
-    If you pass `None`, no activation is applied
-    (ie. "linear" activation: `a(x) = x`).
-@param recurrent_activation Activation function to use
-    for the recurrent step.
-    Default: sigmoid (`sigmoid`).
-    If you pass `None`, no activation is applied
-    (ie. "linear" activation: `a(x) = x`).
-@param use_bias Boolean, (default `True`), whether the layer
-    should use a bias vector.
-@param kernel_initializer Initializer for the `kernel` weights matrix,
-    used for the linear transformation of the inputs. Default:
-    `"glorot_uniform"`.
-@param recurrent_initializer Initializer for the `recurrent_kernel`
-    weights matrix, used for the linear transformation of the recurrent
-    state. Default: `"orthogonal"`.
-@param bias_initializer Initializer for the bias vector. Default: `"zeros"`.
-@param unit_forget_bias Boolean (default `True`). If `True`,
-    add 1 to the bias of the forget gate at initialization.
-    Setting it to `True` will also force `bias_initializer="zeros"`.
-    This is recommended in [Jozefowicz et al.](
-    https://github.com/mlresearch/v37/blob/gh-pages/jozefowicz15.pdf)
-@param kernel_regularizer Regularizer function applied to the `kernel` weights
-    matrix. Default: `None`.
-@param recurrent_regularizer Regularizer function applied to the
-    `recurrent_kernel` weights matrix. Default: `None`.
-@param bias_regularizer Regularizer function applied to the bias vector.
-    Default: `None`.
-@param activity_regularizer Regularizer function applied to the output of the
-    layer (its "activation"). Default: `None`.
-@param kernel_constraint Constraint function applied to the `kernel` weights
-    matrix. Default: `None`.
-@param recurrent_constraint Constraint function applied to the
-    `recurrent_kernel` weights matrix. Default: `None`.
-@param bias_constraint Constraint function applied to the bias vector.
-    Default: `None`.
-@param dropout Float between 0 and 1. Fraction of the units to drop for the
-    linear transformation of the inputs. Default: 0.
-@param recurrent_dropout Float between 0 and 1. Fraction of the units to drop
-    for the linear transformation of the recurrent state. Default: 0.
-@param seed Random seed for dropout.
-@param return_sequences Boolean. Whether to return the last output
-    in the output sequence, or the full sequence. Default: `False`.
-@param return_state Boolean. Whether to return the last state in addition
-    to the output. Default: `False`.
-@param go_backwards Boolean (default: `False`).
-    If `True`, process the input sequence backwards and return the
-    reversed sequence.
-@param stateful Boolean (default: `False`). If `True`, the last state
-    for each sample at index i in a batch will be used as initial
-    state for the sample of index i in the following batch.
-@param unroll Boolean (default False).
-    If `True`, the network will be unrolled,
-    else a symbolic loop will be used.
-    Unrolling can speed-up a RNN,
-    although it tends to be more memory-intensive.
-    Unrolling is only suitable for short sequences.
-@param object Object to compose the layer with. A tensor, array, or sequential model.
-@param ... Passed on to the Python callable
+@param units
+Positive integer, dimensionality of the output space.
+
+@param activation
+Activation function to use.
+Default: hyperbolic tangent (`tanh`).
+If you pass `None`, no activation is applied
+(ie. "linear" activation: `a(x) = x`).
+
+@param recurrent_activation
+Activation function to use
+for the recurrent step.
+Default: sigmoid (`sigmoid`).
+If you pass `None`, no activation is applied
+(ie. "linear" activation: `a(x) = x`).
+
+@param use_bias
+Boolean, (default `True`), whether the layer
+should use a bias vector.
+
+@param kernel_initializer
+Initializer for the `kernel` weights matrix,
+used for the linear transformation of the inputs. Default:
+`"glorot_uniform"`.
+
+@param recurrent_initializer
+Initializer for the `recurrent_kernel`
+weights matrix, used for the linear transformation of the recurrent
+state. Default: `"orthogonal"`.
+
+@param bias_initializer
+Initializer for the bias vector. Default: `"zeros"`.
+
+@param unit_forget_bias
+Boolean (default `True`). If `True`,
+add 1 to the bias of the forget gate at initialization.
+Setting it to `True` will also force `bias_initializer="zeros"`.
+This is recommended in [Jozefowicz et al.](
+https://github.com/mlresearch/v37/blob/gh-pages/jozefowicz15.pdf)
+
+@param kernel_regularizer
+Regularizer function applied to the `kernel` weights
+matrix. Default: `None`.
+
+@param recurrent_regularizer
+Regularizer function applied to the
+`recurrent_kernel` weights matrix. Default: `None`.
+
+@param bias_regularizer
+Regularizer function applied to the bias vector.
+Default: `None`.
+
+@param activity_regularizer
+Regularizer function applied to the output of the
+layer (its "activation"). Default: `None`.
+
+@param kernel_constraint
+Constraint function applied to the `kernel` weights
+matrix. Default: `None`.
+
+@param recurrent_constraint
+Constraint function applied to the
+`recurrent_kernel` weights matrix. Default: `None`.
+
+@param bias_constraint
+Constraint function applied to the bias vector.
+Default: `None`.
+
+@param dropout
+Float between 0 and 1. Fraction of the units to drop for the
+linear transformation of the inputs. Default: 0.
+
+@param recurrent_dropout
+Float between 0 and 1. Fraction of the units to drop
+for the linear transformation of the recurrent state. Default: 0.
+
+@param seed
+Random seed for dropout.
+
+@param return_sequences
+Boolean. Whether to return the last output
+in the output sequence, or the full sequence. Default: `False`.
+
+@param return_state
+Boolean. Whether to return the last state in addition
+to the output. Default: `False`.
+
+@param go_backwards
+Boolean (default: `False`).
+If `True`, process the input sequence backwards and return the
+reversed sequence.
+
+@param stateful
+Boolean (default: `False`). If `True`, the last state
+for each sample at index i in a batch will be used as initial
+state for the sample of index i in the following batch.
+
+@param unroll
+Boolean (default False).
+If `True`, the network will be unrolled,
+else a symbolic loop will be used.
+Unrolling can speed-up a RNN,
+although it tends to be more memory-intensive.
+Unrolling is only suitable for short sequences.
+
+@param object
+Object to compose the layer with. A tensor, array, or sequential model.
+
+@param ...
+Passed on to the Python callable
 
 @export
 @family recurrent layers

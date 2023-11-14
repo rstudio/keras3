@@ -17,10 +17,15 @@ inputs = keras.ops.slice(inputs, start_indices, updates)
 @returns
     A tensor, has the same shape and dtype as `inputs`.
 
-@param inputs A tensor, the tensor to be updated.
-@param start_indices A list/tuple of shape `(inputs.ndim,)`, specifying
-    the starting indices for updating.
-@param shape The full shape of the returned slice.
+@param inputs
+A tensor, the tensor to be updated.
+
+@param start_indices
+A list/tuple of shape `(inputs.ndim,)`, specifying
+the starting indices for updating.
+
+@param shape
+The full shape of the returned slice.
 
 @export
 @family ops

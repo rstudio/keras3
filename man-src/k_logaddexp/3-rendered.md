@@ -7,8 +7,11 @@ Calculates `log(exp(x1) + exp(x2))`.
 Output tensor, element-wise logarithm of the sum of exponentiations
 of the inputs.
 
-@param x1 Input tensor.
-@param x2 Input tensor.
+@param x1
+Input tensor.
+
+@param x2
+Input tensor.
 
 @export
 @family ops

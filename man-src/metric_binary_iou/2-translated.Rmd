@@ -66,17 +66,26 @@ model.compile(
 )
 ```
 
-@param target_class_ids A tuple or list of target class ids for which the
-    metric is returned. Options are `[0]`, `[1]`, or `[0, 1]`. With
-    `[0]` (or `[1]`), the IoU metric for class 0 (or class 1,
-    respectively) is returned. With `[0, 1]`, the mean of IoUs for the
-    two classes is returned.
-@param threshold A threshold that applies to the prediction logits to convert
-    them to either predicted class 0 if the logit is below `threshold`
-    or predicted class 1 if the logit is above `threshold`.
-@param name (Optional) string name of the metric instance.
-@param dtype (Optional) data type of the metric result.
-@param ... Passed on to the Python callable
+@param target_class_ids
+A tuple or list of target class ids for which the
+metric is returned. Options are `[0]`, `[1]`, or `[0, 1]`. With
+`[0]` (or `[1]`), the IoU metric for class 0 (or class 1,
+respectively) is returned. With `[0, 1]`, the mean of IoUs for the
+two classes is returned.
+
+@param threshold
+A threshold that applies to the prediction logits to convert
+them to either predicted class 0 if the logit is below `threshold`
+or predicted class 1 if the logit is above `threshold`.
+
+@param name
+(Optional) string name of the metric instance.
+
+@param dtype
+(Optional) data type of the metric result.
+
+@param ...
+Passed on to the Python callable
 
 @export
 @family metric

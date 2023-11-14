@@ -29,10 +29,13 @@ rfft(x, 3)
 A tuple containing two tensors - the real and imaginary parts of the
 output.
 
-@param x Input tensor.
-@param fft_length An integer representing the number of the fft length. If not
-    specified, it is inferred from the length of the last axis of `x`.
-    Defaults to `None`.
+@param x
+Input tensor.
+
+@param fft_length
+An integer representing the number of the fft length. If not
+specified, it is inferred from the length of the last axis of `x`.
+Defaults to `None`.
 
 @export
 @family ops

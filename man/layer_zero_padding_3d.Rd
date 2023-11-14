@@ -15,13 +15,15 @@ layer_zero_padding_3d(
 \item{object}{Object to compose the layer with. A tensor, array, or sequential model.}
 
 \item{padding}{Int, or list of 3 ints, or list of 3 lists of 2 ints.
-- If int: the same symmetric padding is applied to depth, height,
+\itemize{
+\item If int: the same symmetric padding is applied to depth, height,
 and width.
-- If list of 3 ints: interpreted as three different symmetric
+\item If list of 3 ints: interpreted as three different symmetric
 padding values for depth, height, and width:
 \verb{(symmetric_dim1_pad, symmetric_dim2_pad, symmetric_dim3_pad)}.
-- If list of 3 lists of 2 ints: interpreted as
-\verb{((left_dim1_pad, right_dim1_pad), (left_dim2_pad, right_dim2_pad), (left_dim3_pad, right_dim3_pad))}.}
+\item If list of 3 lists of 2 ints: interpreted as
+\verb{((left_dim1_pad, right_dim1_pad), (left_dim2_pad, right_dim2_pad), (left_dim3_pad, right_dim3_pad))}.
+}}
 
 \item{data_format}{A string, one of \code{"channels_last"} (default) or
 \code{"channels_first"}. The ordering of the dimensions in the inputs.

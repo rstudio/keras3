@@ -27,8 +27,11 @@ out <- layer_dense(subtracted, units = 4)
 model <- keras_model(inputs = list(input1, input2), outputs = out)
 ```
 
-@param ... Passed on to the Python callable
-@param inputs layers to combine
+@param ...
+Passed on to the Python callable
+
+@param inputs
+layers to combine
 
 @export
 @family merging layers

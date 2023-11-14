@@ -6,7 +6,8 @@ Replace NaN with zero and infinity with large finite numbers.
 @returns
     `x`, with non-finite values replaced.
 
-@param x Input data.
+@param x
+Input data.
 
 @export
 @family ops

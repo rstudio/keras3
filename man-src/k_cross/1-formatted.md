@@ -20,16 +20,27 @@ arguments `axisa`, `axisb` and `axisc`. Use `axis` instead.
 @returns
     Vector cross product(s).
 
-@param x1 Components of the first vector(s).
-@param x2 Components of the second vector(s).
-@param axisa Axis of `x1` that defines the vector(s). Defaults to `-1`.
-@param axisb Axis of `x2` that defines the vector(s). Defaults to `-1`.
-@param axisc Axis of the result containing the cross product vector(s).
-    Ignored if both input vectors have dimension 2, as the return is
-    scalar. By default, the last axis.
-@param axis If defined, the axis of `x1`, `x2` and the result that
-    defines the vector(s) and cross product(s). Overrides `axisa`,
-    `axisb` and `axisc`.
+@param x1
+Components of the first vector(s).
+
+@param x2
+Components of the second vector(s).
+
+@param axisa
+Axis of `x1` that defines the vector(s). Defaults to `-1`.
+
+@param axisb
+Axis of `x2` that defines the vector(s). Defaults to `-1`.
+
+@param axisc
+Axis of the result containing the cross product vector(s).
+Ignored if both input vectors have dimension 2, as the return is
+scalar. By default, the last axis.
+
+@param axis
+If defined, the axis of `x1`, `x2` and the result that
+defines the vector(s) and cross product(s). Overrides `axisa`,
+`axisb` and `axisc`.
 
 @export
 @family ops

@@ -39,52 +39,87 @@ print(y.shape)
 @returns
 A 5D tensor representing `activation(conv3d(inputs, kernel) + bias)`.
 
-@param filters int, the dimension of the output space (the number of filters
-    in the convolution).
-@param kernel_size int or tuple/list of 3 integer, specifying the size of the
-    convolution window.
-@param strides int or tuple/list of 3 integer, specifying the stride length
-    of the convolution. `strides > 1` is incompatible with
-    `dilation_rate > 1`.
-@param padding string, either `"valid"` or `"same"` (case-insensitive).
-    `"valid"` means no padding. `"same"` results in padding evenly to
-    the left/right or up/down of the input such that output has the same
-    height/width dimension as the input.
-@param data_format string, either `"channels_last"` or `"channels_first"`.
-    The ordering of the dimensions in the inputs. `"channels_last"`
-    corresponds to inputs with shape
-    `(batch_size, spatial_dim1, spatial_dim2, spatial_dim3, channels)`
-    while `"channels_first"` corresponds to inputs with shape
-    `(batch_size, spatial_dim1, spatial_dim2, spatial_dim3, channels)`.
-    It defaults to the `image_data_format` value found in your Keras
-    config file at `~/.keras/keras.json`. If you never set it, then it
-    will be `"channels_last"`.
-@param dilation_rate int or tuple/list of 3 integers, specifying the dilation
-    rate to use for dilated convolution.
-@param groups A positive int specifying the number of groups in which the
-    input is split along the channel axis. Each group is convolved
-    separately with `filters // groups` filters. The output is the
-    concatenation of all the `groups` results along the channel axis.
-    Input channels and `filters` must both be divisible by `groups`.
-@param activation Activation function. If `None`, no activation is applied.
-@param use_bias bool, if `True`, bias will be added to the output.
-@param kernel_initializer Initializer for the convolution kernel. If `None`,
-    the default initializer (`"glorot_uniform"`) will be used.
-@param bias_initializer Initializer for the bias vector. If `None`, the
-    default initializer (`"zeros"`) will be used.
-@param kernel_regularizer Optional regularizer for the convolution kernel.
-@param bias_regularizer Optional regularizer for the bias vector.
-@param activity_regularizer Optional regularizer function for the output.
-@param kernel_constraint Optional projection function to be applied to the
-    kernel after being updated by an `Optimizer` (e.g. used to implement
-    norm constraints or value constraints for layer weights). The
-    function must take as input the unprojected variable and must return
-    the projected variable (which must have the same shape). Constraints
-    are not safe to use when doing asynchronous distributed training.
-@param bias_constraint Optional projection function to be applied to the
-    bias after being updated by an `Optimizer`.
-@param object Object to compose the layer with. A tensor, array, or sequential model.
-@param ... Passed on to the Python callable
+@param filters
+int, the dimension of the output space (the number of filters
+in the convolution).
+
+@param kernel_size
+int or tuple/list of 3 integer, specifying the size of the
+convolution window.
+
+@param strides
+int or tuple/list of 3 integer, specifying the stride length
+of the convolution. `strides > 1` is incompatible with
+`dilation_rate > 1`.
+
+@param padding
+string, either `"valid"` or `"same"` (case-insensitive).
+`"valid"` means no padding. `"same"` results in padding evenly to
+the left/right or up/down of the input such that output has the same
+height/width dimension as the input.
+
+@param data_format
+string, either `"channels_last"` or `"channels_first"`.
+The ordering of the dimensions in the inputs. `"channels_last"`
+corresponds to inputs with shape
+`(batch_size, spatial_dim1, spatial_dim2, spatial_dim3, channels)`
+while `"channels_first"` corresponds to inputs with shape
+`(batch_size, spatial_dim1, spatial_dim2, spatial_dim3, channels)`.
+It defaults to the `image_data_format` value found in your Keras
+config file at `~/.keras/keras.json`. If you never set it, then it
+will be `"channels_last"`.
+
+@param dilation_rate
+int or tuple/list of 3 integers, specifying the dilation
+rate to use for dilated convolution.
+
+@param groups
+A positive int specifying the number of groups in which the
+input is split along the channel axis. Each group is convolved
+separately with `filters // groups` filters. The output is the
+concatenation of all the `groups` results along the channel axis.
+Input channels and `filters` must both be divisible by `groups`.
+
+@param activation
+Activation function. If `None`, no activation is applied.
+
+@param use_bias
+bool, if `True`, bias will be added to the output.
+
+@param kernel_initializer
+Initializer for the convolution kernel. If `None`,
+the default initializer (`"glorot_uniform"`) will be used.
+
+@param bias_initializer
+Initializer for the bias vector. If `None`, the
+default initializer (`"zeros"`) will be used.
+
+@param kernel_regularizer
+Optional regularizer for the convolution kernel.
+
+@param bias_regularizer
+Optional regularizer for the bias vector.
+
+@param activity_regularizer
+Optional regularizer function for the output.
+
+@param kernel_constraint
+Optional projection function to be applied to the
+kernel after being updated by an `Optimizer` (e.g. used to implement
+norm constraints or value constraints for layer weights). The
+function must take as input the unprojected variable and must return
+the projected variable (which must have the same shape). Constraints
+are not safe to use when doing asynchronous distributed training.
+
+@param bias_constraint
+Optional projection function to be applied to the
+bias after being updated by an `Optimizer`.
+
+@param object
+Object to compose the layer with. A tensor, array, or sequential model.
+
+@param ...
+Passed on to the Python callable
 
 @export
 @family convolutional layers

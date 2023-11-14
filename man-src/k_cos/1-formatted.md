@@ -3,7 +3,8 @@ Cosine, element-wise.
 @returns
     The corresponding cosine values.
 
-@param x Input tensor.
+@param x
+Input tensor.
 
 @export
 @family ops

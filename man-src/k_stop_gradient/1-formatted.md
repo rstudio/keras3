@@ -14,7 +14,8 @@ var = keras.ops.stop_gradient(var)
 @returns
 The variable with gradient computation disabled.
 
-@param variable A tensor variable for which the gradient
+@param variable
+A tensor variable for which the gradient
 computation is to be disabled.
 
 @export

@@ -6,7 +6,8 @@ Return the indices of the elements that are non-zero.
 @returns
     Indices of elements that are non-zero.
 
-@param x Input tensor.
+@param x
+Input tensor.
 
 @export
 @family ops

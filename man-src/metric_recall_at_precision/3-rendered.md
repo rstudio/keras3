@@ -44,15 +44,26 @@ model.compile(
     metrics=[keras.metrics.RecallAtPrecision(precision=0.8)])
 ```
 
-@param precision A scalar value in range `[0, 1]`.
-@param num_thresholds (Optional) Defaults to 200. The number of thresholds
-    to use for matching the given precision.
-@param class_id (Optional) Integer class ID for which we want binary metrics.
-    This must be in the half-open interval `[0, num_classes)`, where
-    `num_classes` is the last dimension of predictions.
-@param name (Optional) string name of the metric instance.
-@param dtype (Optional) data type of the metric result.
-@param ... Passed on to the Python callable
+@param precision
+A scalar value in range `[0, 1]`.
+
+@param num_thresholds
+(Optional) Defaults to 200. The number of thresholds
+to use for matching the given precision.
+
+@param class_id
+(Optional) Integer class ID for which we want binary metrics.
+This must be in the half-open interval `[0, num_classes)`, where
+`num_classes` is the last dimension of predictions.
+
+@param name
+(Optional) string name of the metric instance.
+
+@param dtype
+(Optional) data type of the metric result.
+
+@param ...
+Passed on to the Python callable
 
 @export
 @family metric

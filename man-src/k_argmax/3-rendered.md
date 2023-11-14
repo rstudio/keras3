@@ -43,9 +43,12 @@ k_argmax(x, axis = 2)
 Tensor of indices. It has the same shape as `x`, with the dimension
 along `axis` removed.
 
-@param x Input tensor.
-@param axis By default, the index is into the flattened tensor, otherwise
-    along the specified axis.
+@param x
+Input tensor.
+
+@param axis
+By default, the index is into the flattened tensor, otherwise
+along the specified axis.
 
 @export
 @family ops

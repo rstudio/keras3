@@ -3,9 +3,14 @@ Return a full tensor with the same shape and type as the given tensor.
 @returns
     Tensor of `fill_value` with the same shape and type as `x`.
 
-@param x Input tensor.
-@param fill_value Fill value.
-@param dtype Overrides data type of the result.
+@param x
+Input tensor.
+
+@param fill_value
+Fill value.
+
+@param dtype
+Overrides data type of the result.
 
 @export
 @family ops

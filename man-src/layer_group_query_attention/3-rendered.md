@@ -51,20 +51,47 @@ attention_output: Result of the computation, of shape
 attention_scores: (Optional) attention coefficients of shape
     `(batch_dim, num_query_heads, target_seq_len, source_seq_len)`.
 
-@param head_dim Size of each attention head.
-@param num_query_heads Number of query attention heads.
-@param num_key_value_heads Number of key and value attention heads.
-@param dropout Dropout probability.
-@param use_bias Boolean, whether the dense layers use bias vectors/matrices.
-@param kernel_initializer Initializer for dense layer kernels.
-@param bias_initializer Initializer for dense layer biases.
-@param kernel_regularizer Regularizer for dense layer kernels.
-@param bias_regularizer Regularizer for dense layer biases.
-@param activity_regularizer Regularizer for dense layer activity.
-@param kernel_constraint Constraint for dense layer kernels.
-@param bias_constraint Constraint for dense layer kernels.
-@param object Object to compose the layer with. A tensor, array, or sequential model.
-@param ... Passed on to the Python callable
+@param head_dim
+Size of each attention head.
+
+@param num_query_heads
+Number of query attention heads.
+
+@param num_key_value_heads
+Number of key and value attention heads.
+
+@param dropout
+Dropout probability.
+
+@param use_bias
+Boolean, whether the dense layers use bias vectors/matrices.
+
+@param kernel_initializer
+Initializer for dense layer kernels.
+
+@param bias_initializer
+Initializer for dense layer biases.
+
+@param kernel_regularizer
+Regularizer for dense layer kernels.
+
+@param bias_regularizer
+Regularizer for dense layer biases.
+
+@param activity_regularizer
+Regularizer for dense layer activity.
+
+@param kernel_constraint
+Constraint for dense layer kernels.
+
+@param bias_constraint
+Constraint for dense layer kernels.
+
+@param object
+Object to compose the layer with. A tensor, array, or sequential model.
+
+@param ...
+Passed on to the Python callable
 
 @export
 @family attention layers

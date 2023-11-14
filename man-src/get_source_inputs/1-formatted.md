@@ -7,7 +7,8 @@ Output will always be a list of tensors
 @returns
     List of input tensors.
 
-@param tensor The tensor to start from.
+@param tensor
+The tensor to start from.
 
 @export
 @family utils

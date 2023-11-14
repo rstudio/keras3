@@ -30,9 +30,12 @@ keras.ops.argsort(x, axis=1)
 @returns
 Tensor of indices that sort `x` along the specified `axis`.
 
-@param x Input tensor.
-@param axis Axis along which to sort. Defaults to`-1` (the last axis). If
-    `None`, the flattened tensor is used.
+@param x
+Input tensor.
+
+@param axis
+Axis along which to sort. Defaults to`-1` (the last axis). If
+`None`, the flattened tensor is used.
 
 @export
 @family ops

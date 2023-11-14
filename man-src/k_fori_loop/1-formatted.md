@@ -15,12 +15,19 @@ keras.ops.fori_loop(lower, upper, body_fun, init_val)
 @returns
 The final state after the loop.
 
-@param lower The initial value of the loop variable.
-@param upper The upper bound of the loop variable.
-@param body_fun A callable that represents the loop body. Must take two
-    arguments: the loop variable and the loop state. The loop state
-    should be updated and returned by this function.
-@param init_val The initial value of the loop state.
+@param lower
+The initial value of the loop variable.
+
+@param upper
+The upper bound of the loop variable.
+
+@param body_fun
+A callable that represents the loop body. Must take two
+arguments: the loop variable and the loop state. The loop state
+should be updated and returned by this function.
+
+@param init_val
+The initial value of the loop state.
 
 @export
 @family ops

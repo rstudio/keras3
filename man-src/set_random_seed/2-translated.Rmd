@@ -26,7 +26,8 @@ as your backend framework, since many workflows leverage `tf.data`
 pipelines (which feature random shuffling). Likewise many workflows
 might leverage NumPy APIs.
 
-@param seed Integer, the random seed to use.
+@param seed
+Integer, the random seed to use.
 
 @export
 @family utils

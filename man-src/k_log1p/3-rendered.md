@@ -6,7 +6,8 @@ Calculates `log(1 + x)`.
 @returns
     Output tensor, element-wise natural logarithm of `1 + x`.
 
-@param x Input tensor.
+@param x
+Input tensor.
 
 @export
 @family ops

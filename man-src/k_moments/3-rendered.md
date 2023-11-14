@@ -23,15 +23,22 @@ k_moments(x, axes = c(1))
 @returns
 A list containing two tensors - mean and variance.
 
-@param x Input tensor.
-@param axes A list of axes which to compute mean and variance.
-@param keepdims If this is set to `TRUE`, the axes which are reduced are left
-    in the result as dimensions with size one.
-@param synchronized Only applicable with the TensorFlow backend.
-    If `TRUE`, synchronizes the global batch statistics (mean and
-    variance) across all devices at each training step in a
-    distributed training strategy. If `FALSE`, each replica uses its own
-    local batch statistics.
+@param x
+Input tensor.
+
+@param axes
+A list of axes which to compute mean and variance.
+
+@param keepdims
+If this is set to `TRUE`, the axes which are reduced are left
+in the result as dimensions with size one.
+
+@param synchronized
+Only applicable with the TensorFlow backend.
+If `TRUE`, synchronizes the global batch statistics (mean and
+variance) across all devices at each training step in a
+distributed training strategy. If `FALSE`, each replica uses its own
+local batch statistics.
 
 @export
 @family ops

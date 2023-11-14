@@ -79,37 +79,56 @@ for batch in zip(input_dataset, target_dataset):
     break
 ```
 
-@param data Numpy array or eager tensor
-    containing consecutive data points (timesteps).
-    Axis 0 is expected to be the time dimension.
-@param targets Targets corresponding to timesteps in `data`.
-    `targets[i]` should be the target
-    corresponding to the window that starts at index `i`
-    (see example 2 below).
-    Pass `None` if you don't have target data (in this case the dataset
-    will only yield the input data).
-@param sequence_length Length of the output sequences
-    (in number of timesteps).
-@param sequence_stride Period between successive output sequences.
-    For stride `s`, output samples would
-    start at index `data[i]`, `data[i + s]`, `data[i + 2 * s]`, etc.
-@param sampling_rate Period between successive individual timesteps
-    within sequences. For rate `r`, timesteps
-    `data[i], data[i + r], ... data[i + sequence_length]`
-    are used for creating a sample sequence.
-@param batch_size Number of timeseries samples in each batch
-    (except maybe the last one). If `None`, the data will not be batched
-    (the dataset will yield individual samples).
-@param shuffle Whether to shuffle output samples,
-    or instead draw them in chronological order.
-@param seed Optional int; random seed for shuffling.
-@param start_index Optional int; data points earlier (exclusive)
-    than `start_index` will not be used
-    in the output sequences. This is useful to reserve part of the
-    data for test or validation.
-@param end_index Optional int; data points later (exclusive) than `end_index`
-    will not be used in the output sequences.
-    This is useful to reserve part of the data for test or validation.
+@param data
+Numpy array or eager tensor
+containing consecutive data points (timesteps).
+Axis 0 is expected to be the time dimension.
+
+@param targets
+Targets corresponding to timesteps in `data`.
+`targets[i]` should be the target
+corresponding to the window that starts at index `i`
+(see example 2 below).
+Pass `None` if you don't have target data (in this case the dataset
+will only yield the input data).
+
+@param sequence_length
+Length of the output sequences
+(in number of timesteps).
+
+@param sequence_stride
+Period between successive output sequences.
+For stride `s`, output samples would
+start at index `data[i]`, `data[i + s]`, `data[i + 2 * s]`, etc.
+
+@param sampling_rate
+Period between successive individual timesteps
+within sequences. For rate `r`, timesteps
+`data[i], data[i + r], ... data[i + sequence_length]`
+are used for creating a sample sequence.
+
+@param batch_size
+Number of timeseries samples in each batch
+(except maybe the last one). If `None`, the data will not be batched
+(the dataset will yield individual samples).
+
+@param shuffle
+Whether to shuffle output samples,
+or instead draw them in chronological order.
+
+@param seed
+Optional int; random seed for shuffling.
+
+@param start_index
+Optional int; data points earlier (exclusive)
+than `start_index` will not be used
+in the output sequences. This is useful to reserve part of the
+data for test or validation.
+
+@param end_index
+Optional int; data points later (exclusive) than `end_index`
+will not be used in the output sequences.
+This is useful to reserve part of the data for test or validation.
 
 @export
 @family utils

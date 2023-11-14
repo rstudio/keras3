@@ -25,18 +25,27 @@ inversely), the input image is left-padded by 1 pixel.
 **Note:** This layer is safe to use inside a `tf.data` pipeline
 (independently of which backend you're using).
 
-@param height Integer, the height of the output shape.
-@param width Integer, the width of the output shape.
-@param data_format string, either `"channels_last"` or `"channels_first"`.
-    The ordering of the dimensions in the inputs. `"channels_last"`
-    corresponds to inputs with shape `(batch, height, width, channels)`
-    while `"channels_first"` corresponds to inputs with shape
-    `(batch, channels, height, width)`. It defaults to the
-    `image_data_format` value found in your Keras config file at
-    `~/.keras/keras.json`. If you never set it, then it will be
-    `"channels_last"`.
-@param object Object to compose the layer with. A tensor, array, or sequential model.
-@param ... Passed on to the Python callable
+@param height
+Integer, the height of the output shape.
+
+@param width
+Integer, the width of the output shape.
+
+@param data_format
+string, either `"channels_last"` or `"channels_first"`.
+The ordering of the dimensions in the inputs. `"channels_last"`
+corresponds to inputs with shape `(batch, height, width, channels)`
+while `"channels_first"` corresponds to inputs with shape
+`(batch, channels, height, width)`. It defaults to the
+`image_data_format` value found in your Keras config file at
+`~/.keras/keras.json`. If you never set it, then it will be
+`"channels_last"`.
+
+@param object
+Object to compose the layer with. A tensor, array, or sequential model.
+
+@param ...
+Passed on to the Python callable
 
 @export
 @family preprocessing layers

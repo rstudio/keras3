@@ -113,55 +113,72 @@ layer = RNN(cells)
 y = layer(x)
 ```
 
-@param cell A RNN cell instance or a list of RNN cell instances.
-    A RNN cell is a class that has:
-    - A `call(input_at_t, states_at_t)` method, returning
-    `(output_at_t, states_at_t_plus_1)`. The call method of the
-    cell can also take the optional argument `constants`, see
-    section "Note on passing external constants" below.
-    - A `state_size` attribute. This can be a single integer
-    (single state) in which case it is the size of the recurrent
-    state. This can also be a list/tuple of integers
-    (one size per state).
-    - A `output_size` attribute, a single integer.
-    - A `get_initial_state(batch_size=None)`
-    method that creates a tensor meant to be fed to `call()` as the
-    initial state, if the user didn't specify any initial state
-    via other means. The returned initial state should have
-    shape `(batch_size, cell.state_size)`.
-    The cell might choose to create a tensor full of zeros,
-    or other values based on the cell's implementation.
-    `inputs` is the input tensor to the RNN layer, with shape
-    `(batch_size, timesteps, features)`.
-    If this method is not implemented
-    by the cell, the RNN layer will create a zero filled tensor
-    with shape `(batch_size, cell.state_size)`.
-    In the case that `cell` is a list of RNN cell instances, the cells
-    will be stacked on top of each other in the RNN, resulting in an
-    efficient stacked RNN.
-@param return_sequences Boolean (default `False`). Whether to return the last
-    output in the output sequence, or the full sequence.
-@param return_state Boolean (default `False`).
-    Whether to return the last state in addition to the output.
-@param go_backwards Boolean (default `False`).
-    If `True`, process the input sequence backwards and return the
-    reversed sequence.
-@param stateful Boolean (default `False`). If True, the last state
-    for each sample at index `i` in a batch will be used as initial
-    state for the sample of index `i` in the following batch.
-@param unroll Boolean (default `False`).
-    If True, the network will be unrolled, else a symbolic loop will be
-    used. Unrolling can speed-up a RNN, although it tends to be more
-    memory-intensive. Unrolling is only suitable for short sequences.
-@param zero_output_for_mask Boolean (default `False`).
-    Whether the output should use zeros for the masked timesteps.
-    Note that this field is only used when `return_sequences`
-    is `True` and `mask` is provided.
-    It can useful if you want to reuse the raw output sequence of
-    the RNN without interference from the masked timesteps, e.g.,
-    merging bidirectional RNNs.
-@param object Object to compose the layer with. A tensor, array, or sequential model.
-@param ... Passed on to the Python callable
+@param cell
+A RNN cell instance or a list of RNN cell instances.
+A RNN cell is a class that has:
+- A `call(input_at_t, states_at_t)` method, returning
+`(output_at_t, states_at_t_plus_1)`. The call method of the
+cell can also take the optional argument `constants`, see
+section "Note on passing external constants" below.
+- A `state_size` attribute. This can be a single integer
+(single state) in which case it is the size of the recurrent
+state. This can also be a list/tuple of integers
+(one size per state).
+- A `output_size` attribute, a single integer.
+- A `get_initial_state(batch_size=None)`
+method that creates a tensor meant to be fed to `call()` as the
+initial state, if the user didn't specify any initial state
+via other means. The returned initial state should have
+shape `(batch_size, cell.state_size)`.
+The cell might choose to create a tensor full of zeros,
+or other values based on the cell's implementation.
+`inputs` is the input tensor to the RNN layer, with shape
+`(batch_size, timesteps, features)`.
+If this method is not implemented
+by the cell, the RNN layer will create a zero filled tensor
+with shape `(batch_size, cell.state_size)`.
+In the case that `cell` is a list of RNN cell instances, the cells
+will be stacked on top of each other in the RNN, resulting in an
+efficient stacked RNN.
+
+@param return_sequences
+Boolean (default `False`). Whether to return the last
+output in the output sequence, or the full sequence.
+
+@param return_state
+Boolean (default `False`).
+Whether to return the last state in addition to the output.
+
+@param go_backwards
+Boolean (default `False`).
+If `True`, process the input sequence backwards and return the
+reversed sequence.
+
+@param stateful
+Boolean (default `False`). If True, the last state
+for each sample at index `i` in a batch will be used as initial
+state for the sample of index `i` in the following batch.
+
+@param unroll
+Boolean (default `False`).
+If True, the network will be unrolled, else a symbolic loop will be
+used. Unrolling can speed-up a RNN, although it tends to be more
+memory-intensive. Unrolling is only suitable for short sequences.
+
+@param zero_output_for_mask
+Boolean (default `False`).
+Whether the output should use zeros for the masked timesteps.
+Note that this field is only used when `return_sequences`
+is `True` and `mask` is provided.
+It can useful if you want to reuse the raw output sequence of
+the RNN without interference from the masked timesteps, e.g.,
+merging bidirectional RNNs.
+
+@param object
+Object to compose the layer with. A tensor, array, or sequential model.
+
+@param ...
+Passed on to the Python callable
 
 @export
 @family recurrent layers

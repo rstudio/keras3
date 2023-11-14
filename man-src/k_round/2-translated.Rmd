@@ -6,8 +6,11 @@ Evenly round to the given number of decimals.
 @returns
     Output tensor.
 
-@param x Input tensor.
-@param decimals Number of decimal places to round to. Defaults to `0`.
+@param x
+Input tensor.
+
+@param decimals
+Number of decimal places to round to. Defaults to `0`.
 
 @export
 @family ops

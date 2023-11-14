@@ -21,12 +21,17 @@ from_config <- function(cls, config, custom_objects = NULL) {
 An instantiable class associated with `name`, or `NULL` if no such class
 exists.
 
-@param name The name to look up.
-@param custom_objects A named list of custom objects to look the name up in.
-    Generally, custom_objects is provided by the user.
-@param module_objects A named list of custom objects to look the name up in.
-    Generally, module_objects is provided by midlevel library
-    implementers.
+@param name
+The name to look up.
+
+@param custom_objects
+A named list of custom objects to look the name up in.
+Generally, custom_objects is provided by the user.
+
+@param module_objects
+A named list of custom objects to look the name up in.
+Generally, module_objects is provided by midlevel library
+implementers.
 
 @export
 @family utils

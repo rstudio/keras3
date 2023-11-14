@@ -16,9 +16,12 @@ print(x_leaky_relu)
 @returns
 A tensor with the same shape as `x`.
 
-@param x Input tensor.
-@param negative_slope Slope of the activation function at x < 0.
-    Defaults to `0.2`.
+@param x
+Input tensor.
+
+@param negative_slope
+Slope of the activation function at x < 0.
+Defaults to `0.2`.
 
 @export
 @family ops

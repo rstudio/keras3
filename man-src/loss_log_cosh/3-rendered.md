@@ -30,13 +30,22 @@ loss = keras.losses.log_cosh(y_true, y_pred)
 @returns
     Logcosh error values with shape = `[batch_size, d0, .. dN-1]`.
 
-@param reduction Type of reduction to apply to loss. Options are `"sum"`,
-    `"sum_over_batch_size"` or `None`. Defaults to
-    `"sum_over_batch_size"`.
-@param name Optional name for the instance.
-@param y_true Ground truth values with shape = `[batch_size, d0, .. dN]`.
-@param y_pred The predicted values with shape = `[batch_size, d0, .. dN]`.
-@param ... Passed on to the Python callable
+@param reduction
+Type of reduction to apply to loss. Options are `"sum"`,
+`"sum_over_batch_size"` or `None`. Defaults to
+`"sum_over_batch_size"`.
+
+@param name
+Optional name for the instance.
+
+@param y_true
+Ground truth values with shape = `[batch_size, d0, .. dN]`.
+
+@param y_pred
+The predicted values with shape = `[batch_size, d0, .. dN]`.
+
+@param ...
+Passed on to the Python callable
 
 @export
 @family loss

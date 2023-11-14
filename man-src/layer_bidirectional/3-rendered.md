@@ -43,40 +43,51 @@ model |> compile(
 )
 ```
 
-@param layer `layer_RNN` instance, such as
-    `layer_lstm()` or `layer_gru()`.
-    It could also be any `Layer` instance
-    that meets the following criteria:
-    1. Be a sequence-processing layer (accepts 3D+ inputs).
-    2. Have a `go_backwards`, `return_sequences` and `return_state`
-    attribute (with the same semantics as for the `layer_rnn()` class).
-    3. Have an `input_spec` attribute.
-    4. Implement serialization via `get_config()` and `from_config()`.
-    Note that the recommended way to create new RNN layers is to write a
-    custom RNN cell and use it with `layer_rnn()`, instead of
-    creating a `new_layer_class()` directly.
-    When `return_sequences` is `TRUE`, the output of the masked
-    timestep will be zero regardless of the layer's original
-    `zero_output_for_mask` value.
-@param merge_mode Mode by which outputs of the forward and backward RNNs
-    will be combined. One of `"sum"`, `"mul"`, `"concat"`, `"ave"`, or `NULL`.
-    If `NULL`, the outputs will not be combined,
-    they will be returned as a list. Defaults to `"concat"`.
-@param backward_layer Optional `layer_rnn()`,
-    or a `Layer` instance to be used to handle
-    backwards input processing.
-    If `backward_layer` is not provided, the layer instance passed
-    as the `layer` argument will be used to generate the backward layer
-    automatically.
-    Note that the provided `backward_layer` layer should have properties
-    matching those of the `layer` argument, in particular
-    it should have the same values for `stateful`, `return_states`,
-    `return_sequences`, etc. In addition, `backward_layer`
-    and `layer` should have different `go_backwards` argument values.
-    A `ValueError` will be raised if these requirements are not met.
-@param object Object to compose the layer with. A tensor, array, or sequential model.
-@param ... Passed on to the Python callable
-@param weights see description
+@param layer
+`layer_RNN` instance, such as
+`layer_lstm()` or `layer_gru()`.
+It could also be any `Layer` instance
+that meets the following criteria:
+1. Be a sequence-processing layer (accepts 3D+ inputs).
+2. Have a `go_backwards`, `return_sequences` and `return_state`
+attribute (with the same semantics as for the `layer_rnn()` class).
+3. Have an `input_spec` attribute.
+4. Implement serialization via `get_config()` and `from_config()`.
+Note that the recommended way to create new RNN layers is to write a
+custom RNN cell and use it with `layer_rnn()`, instead of
+creating a `new_layer_class()` directly.
+When `return_sequences` is `TRUE`, the output of the masked
+timestep will be zero regardless of the layer's original
+`zero_output_for_mask` value.
+
+@param merge_mode
+Mode by which outputs of the forward and backward RNNs
+will be combined. One of `"sum"`, `"mul"`, `"concat"`, `"ave"`, or `NULL`.
+If `NULL`, the outputs will not be combined,
+they will be returned as a list. Defaults to `"concat"`.
+
+@param backward_layer
+Optional `layer_rnn()`,
+or a `Layer` instance to be used to handle
+backwards input processing.
+If `backward_layer` is not provided, the layer instance passed
+as the `layer` argument will be used to generate the backward layer
+automatically.
+Note that the provided `backward_layer` layer should have properties
+matching those of the `layer` argument, in particular
+it should have the same values for `stateful`, `return_states`,
+`return_sequences`, etc. In addition, `backward_layer`
+and `layer` should have different `go_backwards` argument values.
+A `ValueError` will be raised if these requirements are not met.
+
+@param object
+Object to compose the layer with. A tensor, array, or sequential model.
+
+@param ...
+Passed on to the Python callable
+
+@param weights
+see description
 
 @export
 @family recurrent layers

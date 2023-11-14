@@ -3,7 +3,8 @@ Test element-wise for positive or negative infinity.
 @returns
     Output boolean tensor.
 
-@param x Input tensor.
+@param x
+Input tensor.
 
 @export
 @family ops

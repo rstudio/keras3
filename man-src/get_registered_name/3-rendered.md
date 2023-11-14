@@ -9,7 +9,8 @@ for serialization/deserialization.
 The name associated with the object, or the default Python name if the
 object is not registered.
 
-@param obj The object to look up.
+@param obj
+The object to look up.
 
 @export
 @family utils

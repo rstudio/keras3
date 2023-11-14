@@ -6,7 +6,8 @@ A 1-D tensor, containing the elements of the input, is returned.
 @returns
     Output tensor.
 
-@param x Input tensor.
+@param x
+Input tensor.
 
 @export
 @family ops

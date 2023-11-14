@@ -27,14 +27,27 @@ If `images` were 4D, a 4D float Tensor of shape
 If `images` were 3D, a 3D float Tensor of shape
     `(target_height, target_width, channels)`
 
-@param images 4D Tensor of shape `(batch, height, width, channels)` or 3D
-    Tensor of shape `(height, width, channels)`.
-@param top_padding Number of rows of zeros to add on top.
-@param bottom_padding Number of rows of zeros to add at the bottom.
-@param left_padding Number of columns of zeros to add on the left.
-@param right_padding Number of columns of zeros to add on the right.
-@param target_height Height of output images.
-@param target_width Width of output images.
+@param images
+4D Tensor of shape `(batch, height, width, channels)` or 3D
+Tensor of shape `(height, width, channels)`.
+
+@param top_padding
+Number of rows of zeros to add on top.
+
+@param bottom_padding
+Number of rows of zeros to add at the bottom.
+
+@param left_padding
+Number of columns of zeros to add on the left.
+
+@param right_padding
+Number of columns of zeros to add on the right.
+
+@param target_height
+Height of output images.
+
+@param target_width
+Width of output images.
 
 @export
 @family ops

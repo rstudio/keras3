@@ -154,32 +154,53 @@ loss(y_true, y_pred)
 Binary focal crossentropy loss value
 with shape = `[batch_size, d0, .. dN-1]`.
 
-@param apply_class_balancing A bool, whether to apply weight balancing on the
-    binary classes 0 and 1.
-@param alpha A weight balancing factor for class 1, default is `0.25` as
-    mentioned in reference [Lin et al., 2018](
-    https://arxiv.org/pdf/1708.02002.pdf).  The weight for class 0 is
-    `1.0 - alpha`.
-@param gamma A focusing parameter used to compute the focal factor, default is
-    `2.0` as mentioned in the reference
-    [Lin et al., 2018](https://arxiv.org/pdf/1708.02002.pdf).
-@param from_logits Whether to interpret `y_pred` as a tensor of
-    [logit](https://en.wikipedia.org/wiki/Logit) values. By default, we
-    assume that `y_pred` are probabilities (i.e., values in `[0, 1]`).
-@param label_smoothing Float in `[0, 1]`. When `0`, no smoothing occurs.
-    When > `0`, we compute the loss between the predicted labels
-    and a smoothed version of the true labels, where the smoothing
-    squeezes the labels towards `0.5`.
-    Larger values of `label_smoothing` correspond to heavier smoothing.
-@param axis The axis along which to compute crossentropy (the features axis).
-    Defaults to `-1`.
-@param reduction Type of reduction to apply to the loss. In almost all cases
-    this should be `"sum_over_batch_size"`.
-    Supported options are `"sum"`, `"sum_over_batch_size"` or `None`.
-@param name Optional name for the loss instance.
-@param y_true Ground truth values, of shape `(batch_size, d0, .. dN)`.
-@param y_pred The predicted values, of shape `(batch_size, d0, .. dN)`.
-@param ... Passed on to the Python callable
+@param apply_class_balancing
+A bool, whether to apply weight balancing on the
+binary classes 0 and 1.
+
+@param alpha
+A weight balancing factor for class 1, default is `0.25` as
+mentioned in reference [Lin et al., 2018](
+https://arxiv.org/pdf/1708.02002.pdf).  The weight for class 0 is
+`1.0 - alpha`.
+
+@param gamma
+A focusing parameter used to compute the focal factor, default is
+`2.0` as mentioned in the reference
+[Lin et al., 2018](https://arxiv.org/pdf/1708.02002.pdf).
+
+@param from_logits
+Whether to interpret `y_pred` as a tensor of
+[logit](https://en.wikipedia.org/wiki/Logit) values. By default, we
+assume that `y_pred` are probabilities (i.e., values in `[0, 1]`).
+
+@param label_smoothing
+Float in `[0, 1]`. When `0`, no smoothing occurs.
+When > `0`, we compute the loss between the predicted labels
+and a smoothed version of the true labels, where the smoothing
+squeezes the labels towards `0.5`.
+Larger values of `label_smoothing` correspond to heavier smoothing.
+
+@param axis
+The axis along which to compute crossentropy (the features axis).
+Defaults to `-1`.
+
+@param reduction
+Type of reduction to apply to the loss. In almost all cases
+this should be `"sum_over_batch_size"`.
+Supported options are `"sum"`, `"sum_over_batch_size"` or `None`.
+
+@param name
+Optional name for the loss instance.
+
+@param y_true
+Ground truth values, of shape `(batch_size, d0, .. dN)`.
+
+@param y_pred
+The predicted values, of shape `(batch_size, d0, .. dN)`.
+
+@param ...
+Passed on to the Python callable
 
 @export
 @family loss

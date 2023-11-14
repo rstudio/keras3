@@ -3,7 +3,8 @@ knit: ({source(here::here("tools/knit.R")); knit_man_src})
 ---
 Exponential activation function.
 
-@param x Input tensor.
+@param x
+Input tensor.
 
 @export
 @family activation functions

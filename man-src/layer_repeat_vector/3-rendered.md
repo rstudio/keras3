@@ -27,9 +27,14 @@ y$shape
 # Output Shape
     3D tensor with shape `(batch_size, n, features)`.
 
-@param n Integer, repetition factor.
-@param object Object to compose the layer with. A tensor, array, or sequential model.
-@param ... Passed on to the Python callable
+@param n
+Integer, repetition factor.
+
+@param object
+Object to compose the layer with. A tensor, array, or sequential model.
+
+@param ...
+Passed on to the Python callable
 
 @export
 @family reshaping layers

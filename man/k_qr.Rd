@@ -10,8 +10,10 @@ k_qr(x, mode = "reduced")
 \item{x}{Input tensor.}
 
 \item{mode}{A string specifying the mode of the QR decomposition.
-- 'reduced': Returns the reduced QR decomposition. (default)
-- 'complete': Returns the complete QR decomposition.}
+\itemize{
+\item 'reduced': Returns the reduced QR decomposition. (default)
+\item 'complete': Returns the complete QR decomposition.
+}}
 }
 \value{
 A list containing two tensors. The first tensor represents the

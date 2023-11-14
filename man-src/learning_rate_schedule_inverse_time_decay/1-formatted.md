@@ -52,13 +52,22 @@ A 1-arg callable learning rate schedule that takes the current optimizer
 step and outputs the decayed learning rate, a scalar tensor of the
 same type as `initial_learning_rate`.
 
-@param initial_learning_rate A Python float. The initial learning rate.
-@param decay_steps How often to apply decay.
-@param decay_rate A Python number.  The decay rate.
-@param staircase Whether to apply decay in a discrete staircase, as o
+@param initial_learning_rate
+A Python float. The initial learning rate.
+
+@param decay_steps
+How often to apply decay.
+
+@param decay_rate
+A Python number.  The decay rate.
+
+@param staircase
+Whether to apply decay in a discrete staircase, as o
 pposed to continuous, fashion.
-@param name String.  Optional name of the operation.  Defaults to
-    `"InverseTimeDecay"`.
+
+@param name
+String.  Optional name of the operation.  Defaults to
+`"InverseTimeDecay"`.
 
 @export
 @family learning_rate_schedule

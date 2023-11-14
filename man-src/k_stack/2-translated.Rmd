@@ -10,8 +10,11 @@ dimensions of the result.
 @returns
     The stacked tensor.
 
-@param x A sequence of tensors.
-@param axis Axis along which to stack. Defaults to `0`.
+@param x
+A sequence of tensors.
+
+@param axis
+Axis along which to stack. Defaults to `0`.
 
 @export
 @family ops

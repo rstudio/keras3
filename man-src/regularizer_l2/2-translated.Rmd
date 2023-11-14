@@ -15,7 +15,8 @@ dense = Dense(3, kernel_regularizer='l2')
 
 In this case, the default value used is `l2=0.01`.
 
-@param l2 float, L2 regularization factor.
+@param l2
+float, L2 regularization factor.
 
 @export
 @seealso

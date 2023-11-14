@@ -50,23 +50,34 @@ model.compile(optimizer='adam',
               metrics=[keras.metrics.Recall(thresholds=0)])
 ```
 
-@param thresholds (Optional) A float value, or a Python list/tuple of float
-    threshold values in `[0, 1]`. A threshold is compared with
-    prediction values to determine the truth value of predictions (i.e.,
-    above the threshold is `True`, below is `False`). If used with a
-    loss function that sets `from_logits=True` (i.e. no sigmoid
-    applied to predictions), `thresholds` should be set to 0.
-    One metric value is generated for each threshold value.
-    If neither `thresholds` nor `top_k` are set,
-    the default is to calculate recall with `thresholds=0.5`.
-@param top_k (Optional) Unset by default. An int value specifying the top-k
-    predictions to consider when calculating recall.
-@param class_id (Optional) Integer class ID for which we want binary metrics.
-    This must be in the half-open interval `[0, num_classes)`, where
-    `num_classes` is the last dimension of predictions.
-@param name (Optional) string name of the metric instance.
-@param dtype (Optional) data type of the metric result.
-@param ... Passed on to the Python callable
+@param thresholds
+(Optional) A float value, or a Python list/tuple of float
+threshold values in `[0, 1]`. A threshold is compared with
+prediction values to determine the truth value of predictions (i.e.,
+above the threshold is `True`, below is `False`). If used with a
+loss function that sets `from_logits=True` (i.e. no sigmoid
+applied to predictions), `thresholds` should be set to 0.
+One metric value is generated for each threshold value.
+If neither `thresholds` nor `top_k` are set,
+the default is to calculate recall with `thresholds=0.5`.
+
+@param top_k
+(Optional) Unset by default. An int value specifying the top-k
+predictions to consider when calculating recall.
+
+@param class_id
+(Optional) Integer class ID for which we want binary metrics.
+This must be in the half-open interval `[0, num_classes)`, where
+`num_classes` is the last dimension of predictions.
+
+@param name
+(Optional) string name of the metric instance.
+
+@param dtype
+(Optional) data type of the metric result.
+
+@param ...
+Passed on to the Python callable
 
 @export
 @family metric

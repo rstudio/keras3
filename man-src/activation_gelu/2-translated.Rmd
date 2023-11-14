@@ -15,8 +15,11 @@ inputs by their sign as in ReLU.
 # Reference
 - [Hendrycks et al., 2016](https://arxiv.org/abs/1606.08415)
 
-@param x Input tensor.
-@param approximate A `bool`, whether to enable approximation.
+@param x
+Input tensor.
+
+@param approximate
+A `bool`, whether to enable approximation.
 
 @export
 @family activation functions

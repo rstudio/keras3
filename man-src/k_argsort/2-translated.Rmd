@@ -24,9 +24,12 @@ k_argsort(x, axis = 2)
 @returns
 Tensor of indices that sort `x` along the specified `axis`.
 
-@param x Input tensor.
-@param axis Axis along which to sort. Defaults to `-1` (the last axis). If
-    `NULL`, the flattened tensor is used.
+@param x
+Input tensor.
+
+@param axis
+Axis along which to sort. Defaults to `-1` (the last axis). If
+`NULL`, the flattened tensor is used.
 
 @export
 @family ops

@@ -20,19 +20,30 @@ stft(x, 3, 2, 3)
 A tuple containing two tensors - the real and imaginary parts of the
 STFT output.
 
-@param x Input tensor.
-@param sequence_length An integer representing the sequence length.
-@param sequence_stride An integer representing the sequence hop size.
-@param fft_length An integer representing the size of the FFT to apply. If not
-    specified, uses the smallest power of 2 enclosing `sequence_length`.
-@param window A string, a tensor of the window or `None`. If `window` is a
-    string, available values are `"hann"` and `"hamming"`. If `window`
-    is a tensor, it will be used directly as the window and its length
-    must be `sequence_length`. If `window` is `None`, no windowing is
-    used. Defaults to `"hann"`.
-@param center Whether to pad `x` on both sides so that the t-th sequence is
-    centered at time `t * sequence_stride`. Otherwise, the t-th sequence
-    begins at time `t * sequence_stride`. Defaults to `True`.
+@param x
+Input tensor.
+
+@param sequence_length
+An integer representing the sequence length.
+
+@param sequence_stride
+An integer representing the sequence hop size.
+
+@param fft_length
+An integer representing the size of the FFT to apply. If not
+specified, uses the smallest power of 2 enclosing `sequence_length`.
+
+@param window
+A string, a tensor of the window or `None`. If `window` is a
+string, available values are `"hann"` and `"hamming"`. If `window`
+is a tensor, it will be used directly as the window and its length
+must be `sequence_length`. If `window` is `None`, no windowing is
+used. Defaults to `"hann"`.
+
+@param center
+Whether to pad `x` on both sides so that the t-th sequence is
+centered at time `t * sequence_stride`. Otherwise, the t-th sequence
+begins at time `t * sequence_stride`. Defaults to `True`.
 
 @export
 @family ops

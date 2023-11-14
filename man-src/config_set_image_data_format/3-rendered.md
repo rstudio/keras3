@@ -32,7 +32,8 @@ config_image_data_format()
 keras::config_set_image_data_format('channels_last')
 ```
 
-@param data_format string. `'channels_first'` or `'channels_last'`.
+@param data_format
+string. `'channels_first'` or `'channels_last'`.
 
 @export
 @seealso

@@ -16,27 +16,38 @@ model <- keras_model_sequential()
 model |> layer_lambda(\(x) x^2)
 ```
 
-@param f The function to be evaluated. Takes input tensor as first
-    argument.
-@param output_shape Expected output shape from function. This argument
-    can usually be inferred if not explicitly provided.
-    Can be a list or function. If a list, it only specifies
-    the first dimension onward; sample dimension is assumed
-    either the same as the input:
-    `output_shape = c(input_shape[1], output_shape)` or,
-    the input is `NULL` and the sample dimension is also `NULL`:
-    `output_shape = c(NA, output_shape)`.
-    If a function, it specifies the
-    entire shape as a function of the input shape:
-    `output_shape = f(input_shape)`.
-@param mask Either `NULL` (indicating no masking) or a callable with the same
-    signature as the `compute_mask` layer method, or a tensor
-    that will be returned as output mask regardless
-    of what the input is.
-@param arguments Optional named list of arguments to be passed to the
-    function.
-@param object Object to compose the layer with. A tensor, array, or sequential model.
-@param ... Passed on to the Python callable
+@param f
+The function to be evaluated. Takes input tensor as first
+argument.
+
+@param output_shape
+Expected output shape from function. This argument
+can usually be inferred if not explicitly provided.
+Can be a list or function. If a list, it only specifies
+the first dimension onward; sample dimension is assumed
+either the same as the input:
+`output_shape = c(input_shape[1], output_shape)` or,
+the input is `NULL` and the sample dimension is also `NULL`:
+`output_shape = c(NA, output_shape)`.
+If a function, it specifies the
+entire shape as a function of the input shape:
+`output_shape = f(input_shape)`.
+
+@param mask
+Either `NULL` (indicating no masking) or a callable with the same
+signature as the `compute_mask` layer method, or a tensor
+that will be returned as output mask regardless
+of what the input is.
+
+@param arguments
+Optional named list of arguments to be passed to the
+function.
+
+@param object
+Object to compose the layer with. A tensor, array, or sequential model.
+
+@param ...
+Passed on to the Python callable
 
 @export
 @family core layers

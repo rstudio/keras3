@@ -6,8 +6,11 @@ Returns the element-wise remainder of division.
 @returns
     Output tensor, element-wise remainder of division.
 
-@param x1 First tensor.
-@param x2 Second tensor.
+@param x1
+First tensor.
+
+@param x2
+Second tensor.
 
 @export
 @family ops

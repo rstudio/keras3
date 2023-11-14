@@ -1,7 +1,10 @@
 Return `x[key]`.
 
-@param x see description
-@param key see description
+@param x
+see description
+
+@param key
+see description
 
 @export
 @family ops

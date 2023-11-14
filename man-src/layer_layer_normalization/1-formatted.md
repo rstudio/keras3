@@ -65,34 +65,59 @@ Normalization layer with group size set to 1.
 # Reference
 - [Lei Ba et al., 2016](https://arxiv.org/abs/1607.06450).
 
-@param axis Integer or List/Tuple. The axis or axes to normalize across.
-    Typically, this is the features axis/axes. The left-out axes are
-    typically the batch axis/axes. `-1` is the last dimension in the
-    input. Defaults to `-1`.
-@param epsilon Small float added to variance to avoid dividing by zero.
-    Defaults to 1e-3.
-@param center If True, add offset of `beta` to normalized tensor. If False,
-    `beta` is ignored. Defaults to `True`.
-@param scale If True, multiply by `gamma`. If False, `gamma` is not used.
-    When the next layer is linear (also e.g. `nn.relu`), this can be
-    disabled since the scaling will be done by the next layer.
-    Defaults to `True`.
-@param rms_scaling If True, `center` and `scale` are ignored, and the
-    inputs are scaled by `gamma` and the inverse square root
-    of the square of all inputs. This is an approximate and faster
-    approach that avoids ever computing the mean of the input.
-@param beta_initializer Initializer for the beta weight. Defaults to zeros.
-@param gamma_initializer Initializer for the gamma weight. Defaults to ones.
-@param beta_regularizer Optional regularizer for the beta weight.
-    None by default.
-@param gamma_regularizer Optional regularizer for the gamma weight.
-    None by default.
-@param beta_constraint Optional constraint for the beta weight.
-    None by default.
-@param gamma_constraint Optional constraint for the gamma weight.
-    None by default.
-@param ... Base layer keyword arguments (e.g. `name` and `dtype`).
-@param object Object to compose the layer with. A tensor, array, or sequential model.
+@param axis
+Integer or List/Tuple. The axis or axes to normalize across.
+Typically, this is the features axis/axes. The left-out axes are
+typically the batch axis/axes. `-1` is the last dimension in the
+input. Defaults to `-1`.
+
+@param epsilon
+Small float added to variance to avoid dividing by zero.
+Defaults to 1e-3.
+
+@param center
+If True, add offset of `beta` to normalized tensor. If False,
+`beta` is ignored. Defaults to `True`.
+
+@param scale
+If True, multiply by `gamma`. If False, `gamma` is not used.
+When the next layer is linear (also e.g. `nn.relu`), this can be
+disabled since the scaling will be done by the next layer.
+Defaults to `True`.
+
+@param rms_scaling
+If True, `center` and `scale` are ignored, and the
+inputs are scaled by `gamma` and the inverse square root
+of the square of all inputs. This is an approximate and faster
+approach that avoids ever computing the mean of the input.
+
+@param beta_initializer
+Initializer for the beta weight. Defaults to zeros.
+
+@param gamma_initializer
+Initializer for the gamma weight. Defaults to ones.
+
+@param beta_regularizer
+Optional regularizer for the beta weight.
+None by default.
+
+@param gamma_regularizer
+Optional regularizer for the gamma weight.
+None by default.
+
+@param beta_constraint
+Optional constraint for the beta weight.
+None by default.
+
+@param gamma_constraint
+Optional constraint for the gamma weight.
+None by default.
+
+@param ...
+Base layer keyword arguments (e.g. `name` and `dtype`).
+
+@param object
+Object to compose the layer with. A tensor, array, or sequential model.
 
 @export
 @family normalization layers

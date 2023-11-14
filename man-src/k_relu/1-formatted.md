@@ -13,7 +13,8 @@ keras.ops.relu(x1)
 @returns
 A tensor with the same shape as `x`.
 
-@param x Input tensor.
+@param x
+Input tensor.
 
 @export
 @family ops

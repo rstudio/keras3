@@ -6,7 +6,8 @@ Relu6 activation function.
 @description
 It's the ReLU function, but truncated to a maximum value of 6.
 
-@param x Input tensor.
+@param x
+Input tensor.
 
 @export
 @family activation functions

@@ -28,20 +28,29 @@ y.shape
 @returns
 Resized image or batch of images.
 
-@param image Input image or batch of images. Must be 3D or 4D.
-@param size Size of output image in `(height, width)` format.
-@param interpolation Interpolation method. Available methods are `"nearest"`,
-    `"bilinear"`, and `"bicubic"`. Defaults to `"bilinear"`.
-@param antialias Whether to use an antialiasing filter when downsampling an
-    image. Defaults to `False`.
-@param data_format string, either `"channels_last"` or `"channels_first"`.
-    The ordering of the dimensions in the inputs. `"channels_last"`
-    corresponds to inputs with shape `(batch, height, width, channels)`
-    while `"channels_first"` corresponds to inputs with shape
-    `(batch, channels, height, weight)`. It defaults to the
-    `image_data_format` value found in your Keras config file at
-    `~/.keras/keras.json`. If you never set it, then it will be
-    `"channels_last"`.
+@param image
+Input image or batch of images. Must be 3D or 4D.
+
+@param size
+Size of output image in `(height, width)` format.
+
+@param interpolation
+Interpolation method. Available methods are `"nearest"`,
+`"bilinear"`, and `"bicubic"`. Defaults to `"bilinear"`.
+
+@param antialias
+Whether to use an antialiasing filter when downsampling an
+image. Defaults to `False`.
+
+@param data_format
+string, either `"channels_last"` or `"channels_first"`.
+The ordering of the dimensions in the inputs. `"channels_last"`
+corresponds to inputs with shape `(batch, height, width, channels)`
+while `"channels_first"` corresponds to inputs with shape
+`(batch, channels, height, weight)`. It defaults to the
+`image_data_format` value found in your Keras config file at
+`~/.keras/keras.json`. If you never set it, then it will be
+`"channels_last"`.
 
 @export
 @family ops

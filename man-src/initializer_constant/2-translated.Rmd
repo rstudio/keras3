@@ -21,7 +21,8 @@ initializer <- initializer_constant(10)
 layer <- layer_dense(units = 3, kernel_initializer = initializer)
 ```
 
-@param value A numeric scalar.
+@param value
+A numeric scalar.
 
 @export
 @family initializer

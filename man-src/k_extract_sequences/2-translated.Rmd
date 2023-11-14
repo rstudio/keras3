@@ -22,9 +22,14 @@ k_extract_sequences(x, 3, 2)
 @returns
 A tensor of sequences with shape `[..., num_sequences, sequence_length].`
 
-@param x Input tensor.
-@param sequence_length An integer representing the sequences length.
-@param sequence_stride An integer representing the sequences hop size.
+@param x
+Input tensor.
+
+@param sequence_length
+An integer representing the sequences length.
+
+@param sequence_stride
+An integer representing the sequences hop size.
 
 @export
 @family ops

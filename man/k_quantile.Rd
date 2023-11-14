@@ -20,12 +20,14 @@ version of the array.}
 quantile. Available methods are \code{"linear"}, \code{"lower"}, \code{"higher"},
 \code{"midpoint"}, and \code{"nearest"}. Defaults to \code{"linear"}.
 If the desired quantile lies between two data points \code{i < j}:
-- \code{"linear"}: \code{i + (j - i) * fraction}, where fraction is the
+\itemize{
+\item \code{"linear"}: \code{i + (j - i) * fraction}, where fraction is the
 fractional part of the index surrounded by \code{i} and \code{j}.
-- \code{"lower"}: \code{i}.
-- \code{"higher"}: \code{j}.
-- \code{"midpoint"}: \code{(i + j) / 2}
-- \code{"nearest"}: \code{i} or \code{j}, whichever is nearest.}
+\item \code{"lower"}: \code{i}.
+\item \code{"higher"}: \code{j}.
+\item \code{"midpoint"}: \code{(i + j) / 2}
+\item \code{"nearest"}: \code{i} or \code{j}, whichever is nearest.
+}}
 
 \item{keepdims}{If this is set to \code{True}, the axes which are reduce
 are left in the result as dimensions with size one.}

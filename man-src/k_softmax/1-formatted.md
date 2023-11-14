@@ -21,8 +21,11 @@ print(x_softmax)
 @returns
 A tensor with the same shape as `x`.
 
-@param x Input tensor.
-@param axis Integer, axis along which the softmax is applied.
+@param x
+Input tensor.
+
+@param axis
+Integer, axis along which the softmax is applied.
 
 @export
 @family ops

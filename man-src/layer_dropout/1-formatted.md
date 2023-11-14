@@ -21,16 +21,25 @@ not have any variables/weights that can be frozen during training.)
 - `training`: Python boolean indicating whether the layer should behave in
     training mode (adding dropout) or in inference mode (doing nothing).
 
-@param rate Float between 0 and 1. Fraction of the input units to drop.
-@param noise_shape 1D integer tensor representing the shape of the
-    binary dropout mask that will be multiplied with the input.
-    For instance, if your inputs have shape
-    `(batch_size, timesteps, features)` and
-    you want the dropout mask to be the same for all timesteps,
-    you can use `noise_shape=(batch_size, 1, features)`.
-@param seed A Python integer to use as random seed.
-@param object Object to compose the layer with. A tensor, array, or sequential model.
-@param ... Passed on to the Python callable
+@param rate
+Float between 0 and 1. Fraction of the input units to drop.
+
+@param noise_shape
+1D integer tensor representing the shape of the
+binary dropout mask that will be multiplied with the input.
+For instance, if your inputs have shape
+`(batch_size, timesteps, features)` and
+you want the dropout mask to be the same for all timesteps,
+you can use `noise_shape=(batch_size, 1, features)`.
+
+@param seed
+A Python integer to use as random seed.
+
+@param object
+Object to compose the layer with. A tensor, array, or sequential model.
+
+@param ...
+Passed on to the Python callable
 
 @export
 @family regularization layers

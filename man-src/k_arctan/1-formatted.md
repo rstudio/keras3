@@ -13,7 +13,8 @@ keras.ops.arctan(x)
 Tensor of the inverse tangent of each element in `x`, in the interval
 `[-pi/2, pi/2]`.
 
-@param x Input tensor.
+@param x
+Input tensor.
 
 @export
 @family ops

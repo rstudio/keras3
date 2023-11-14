@@ -79,22 +79,27 @@ nrow(as.data.frame(history))
 ## [1] 10
 ```
 
-@param backup_dir String, path of directory where to store the data
-    needed to restore the model. The directory
-    cannot be reused elsewhere to store other files, e.g. by the
-    `backup_and_restore` callback of another training run,
-    or by another callback (e.g. `callback_model_checkpoint`)
-    of the same training run.
-@param save_freq `"epoch"`, integer, or `FALSE`. When set to `"epoch"`,
-  the callback saves the checkpoint at the end of each epoch.
-  When set to an integer, the callback saves the checkpoint every
-  `save_freq` batches. Set `save_freq = FALSE` only if using
-  preemption checkpointing (i.e. with `save_before_preemption = TRUE`).
-@param delete_checkpoint Boolean, defaults to `TRUE`. This `backup_and_restore`
-  callback works by saving a checkpoint to back up the training state.
-  If `delete_checkpoint = TRUE`, the checkpoint will be deleted after
-  training is finished. Use `FALSE` if you'd like to keep the checkpoint
-  for future usage.
+@param backup_dir
+String, path of directory where to store the data
+needed to restore the model. The directory
+cannot be reused elsewhere to store other files, e.g. by the
+`backup_and_restore` callback of another training run,
+or by another callback (e.g. `callback_model_checkpoint`)
+of the same training run.
+
+@param save_freq
+`"epoch"`, integer, or `FALSE`. When set to `"epoch"`,
+the callback saves the checkpoint at the end of each epoch.
+When set to an integer, the callback saves the checkpoint every
+`save_freq` batches. Set `save_freq = FALSE` only if using
+preemption checkpointing (i.e. with `save_before_preemption = TRUE`).
+
+@param delete_checkpoint
+Boolean, defaults to `TRUE`. This `backup_and_restore`
+callback works by saving a checkpoint to back up the training state.
+If `delete_checkpoint = TRUE`, the checkpoint will be deleted after
+training is finished. Use `FALSE` if you'd like to keep the checkpoint
+for future usage.
 
 @export
 @family callback

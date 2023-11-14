@@ -21,8 +21,11 @@ and the information that is propagated to the next layer.
 # Reference
 - [Clevert et al., 2016](https://arxiv.org/abs/1511.07289)
 
-@param x Input tensor.
-@param alpha Numeric. See description for details.
+@param x
+Input tensor.
+
+@param alpha
+Numeric. See description for details.
 
 @export
 @family activation functions

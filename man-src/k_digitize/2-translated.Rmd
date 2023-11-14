@@ -16,9 +16,12 @@ k_digitize(x, bins)
 @returns
 Output array of indices, of same shape as `x`.
 
-@param x Input array to be binned.
-@param bins Array of bins. It has to be one-dimensional and monotonically
-    increasing.
+@param x
+Input array to be binned.
+
+@param bins
+Array of bins. It has to be one-dimensional and monotonically
+increasing.
 
 @export
 @family ops

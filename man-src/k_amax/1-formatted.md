@@ -27,13 +27,18 @@ value representing the maximum element in the entire array. If `axis` is
 given, the result is an array with the maximum values along
 the specified axis.
 
-@param x Input tensor.
-@param axis Axis along which to compute the maximum.
-    By default (`axis=None`), find the maximum value in all the
-    dimensions of the input array.
-@param keepdims If `True`, axes which are reduced are left in the result as
-    dimensions that are broadcast to the size of the original
-    input tensor. Defaults to `False`.
+@param x
+Input tensor.
+
+@param axis
+Axis along which to compute the maximum.
+By default (`axis=None`), find the maximum value in all the
+dimensions of the input array.
+
+@param keepdims
+If `True`, axes which are reduced are left in the result as
+dimensions that are broadcast to the size of the original
+input tensor. Defaults to `False`.
 
 @export
 @family ops

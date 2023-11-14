@@ -32,11 +32,20 @@ m.result()
 @returns
     Mean squared error values with shape = `[batch_size, d0, .. dN-1]`.
 
-@param name (Optional) string name of the metric instance.
-@param dtype (Optional) data type of the metric result.
-@param y_true Ground truth values with shape = `[batch_size, d0, .. dN]`.
-@param y_pred The predicted values with shape = `[batch_size, d0, .. dN]`.
-@param ... Passed on to the Python callable
+@param name
+(Optional) string name of the metric instance.
+
+@param dtype
+(Optional) data type of the metric result.
+
+@param y_true
+Ground truth values with shape = `[batch_size, d0, .. dN]`.
+
+@param y_pred
+The predicted values with shape = `[batch_size, d0, .. dN]`.
+
+@param ...
+Passed on to the Python callable
 
 @export
 @family metric

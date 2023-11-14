@@ -93,30 +93,49 @@ model.compile(optimizer='adam',
 @returns
 Categorical focal crossentropy loss value.
 
-@param alpha A weight balancing factor for all classes, default is `0.25` as
-    mentioned in the reference. It can be a list of floats or a scalar.
-    In the multi-class case, alpha may be set by inverse class
-    frequency by using `compute_class_weight` from `sklearn.utils`.
-@param gamma A focusing parameter, default is `2.0` as mentioned in the
-    reference. It helps to gradually reduce the importance given to
-    simple examples in a smooth manner. When `gamma` = 0, there is
-    no focal effect on the categorical crossentropy.
-@param from_logits Whether `output` is expected to be a logits tensor. By
-    default, we consider that `output` encodes a probability
-    distribution.
-@param label_smoothing Float in `[0, 1].` When > 0, label values are smoothed,
-    meaning the confidence on label values are relaxed. For example, if
-    `0.1`, use `0.1 / num_classes` for non-target labels and
-    `0.9 + 0.1 / num_classes` for target labels.
-@param axis The axis along which to compute crossentropy (the features
-    axis). Defaults to `-1`.
-@param reduction Type of reduction to apply to the loss. In almost all cases
-    this should be `"sum_over_batch_size"`.
-    Supported options are `"sum"`, `"sum_over_batch_size"` or `None`.
-@param name Optional name for the loss instance.
-@param y_true Tensor of one-hot true targets.
-@param y_pred Tensor of predicted targets.
-@param ... Passed on to the Python callable
+@param alpha
+A weight balancing factor for all classes, default is `0.25` as
+mentioned in the reference. It can be a list of floats or a scalar.
+In the multi-class case, alpha may be set by inverse class
+frequency by using `compute_class_weight` from `sklearn.utils`.
+
+@param gamma
+A focusing parameter, default is `2.0` as mentioned in the
+reference. It helps to gradually reduce the importance given to
+simple examples in a smooth manner. When `gamma` = 0, there is
+no focal effect on the categorical crossentropy.
+
+@param from_logits
+Whether `output` is expected to be a logits tensor. By
+default, we consider that `output` encodes a probability
+distribution.
+
+@param label_smoothing
+Float in `[0, 1].` When > 0, label values are smoothed,
+meaning the confidence on label values are relaxed. For example, if
+`0.1`, use `0.1 / num_classes` for non-target labels and
+`0.9 + 0.1 / num_classes` for target labels.
+
+@param axis
+The axis along which to compute crossentropy (the features
+axis). Defaults to `-1`.
+
+@param reduction
+Type of reduction to apply to the loss. In almost all cases
+this should be `"sum_over_batch_size"`.
+Supported options are `"sum"`, `"sum_over_batch_size"` or `None`.
+
+@param name
+Optional name for the loss instance.
+
+@param y_true
+Tensor of one-hot true targets.
+
+@param y_pred
+Tensor of predicted targets.
+
+@param ...
+Passed on to the Python callable
 
 @export
 @family loss

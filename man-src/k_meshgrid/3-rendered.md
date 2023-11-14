@@ -49,9 +49,12 @@ grid_y
 @returns
 Sequence of N tensors.
 
-@param ... 1-D tensors representing the coordinates of a grid.
-@param indexing Cartesian (`"xy"`, default) or matrix (`"ij"`) indexing
-    of output.
+@param ...
+1-D tensors representing the coordinates of a grid.
+
+@param indexing
+Cartesian (`"xy"`, default) or matrix (`"ij"`) indexing
+of output.
 
 @export
 @family ops

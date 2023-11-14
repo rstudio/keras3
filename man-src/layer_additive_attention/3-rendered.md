@@ -44,12 +44,19 @@ Attention outputs of shape `(batch_size, Tq, dim)`.
 (Optional) Attention scores after masking and softmax with shape
     `(batch_size, Tq, Tv)`.
 
-@param use_scale If `True`, will create a scalar variable to scale the
-    attention scores.
-@param dropout Float between 0 and 1. Fraction of the units to drop for the
-    attention scores. Defaults to `0.0`.
-@param object Object to compose the layer with. A tensor, array, or sequential model.
-@param ... Passed on to the Python callable
+@param use_scale
+If `True`, will create a scalar variable to scale the
+attention scores.
+
+@param dropout
+Float between 0 and 1. Fraction of the units to drop for the
+attention scores. Defaults to `0.0`.
+
+@param object
+Object to compose the layer with. A tensor, array, or sequential model.
+
+@param ...
+Passed on to the Python callable
 
 @export
 @family attention layers

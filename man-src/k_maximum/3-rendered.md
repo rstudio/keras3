@@ -3,8 +3,11 @@ Element-wise maximum of `x1` and `x2`.
 @returns
     Output tensor, element-wise maximum of `x1` and `x2`.
 
-@param x1 First tensor.
-@param x2 Second tensor.
+@param x1
+First tensor.
+
+@param x2
+Second tensor.
 
 @export
 @family ops

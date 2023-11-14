@@ -26,8 +26,11 @@ out = keras.layers.Dense(4)(subtracted)
 model = keras.models.Model(inputs=[input1, input2], outputs=out)
 ```
 
-@param ... Passed on to the Python callable
-@param inputs layers to combine
+@param ...
+Passed on to the Python callable
+
+@param inputs
+layers to combine
 
 @export
 @family merging layers

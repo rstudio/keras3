@@ -32,11 +32,14 @@ irfft(rfft(real, 5), 5)
 A tensor containing the inverse real-valued Fast Fourier Transform
 along the last axis of `x`.
 
-@param x Tuple of the real and imaginary parts of the input tensor. Both
-    tensors in the tuple should be of floating type.
-@param fft_length An integer representing the number of the fft length. If not
-    specified, it is inferred from the length of the last axis of `x`.
-    Defaults to `None`.
+@param x
+Tuple of the real and imaginary parts of the input tensor. Both
+tensors in the tuple should be of floating type.
+
+@param fft_length
+An integer representing the number of the fft length. If not
+specified, it is inferred from the length of the last axis of `x`.
+Defaults to `None`.
 
 @export
 @family ops

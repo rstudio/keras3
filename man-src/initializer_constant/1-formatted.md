@@ -18,7 +18,8 @@ initializer = Constant(10.)
 layer = Dense(3, kernel_initializer=initializer)
 ```
 
-@param value A Python scalar.
+@param value
+A Python scalar.
 
 @export
 @family initializer

@@ -12,12 +12,17 @@ print(np.sum(normalized_data[0, :] ** 2)
 # 1.0
 ```
 
-@param axis Integer or list/tuple. The axis or axes to normalize across.
+@param axis
+Integer or list/tuple. The axis or axes to normalize across.
 Typically, this is the features axis or axes. The left-out axes are
 typically the batch axis or axes. `-1` is the last dimension
 in the input. Defaults to `-1`.
-@param object Object to compose the layer with. A tensor, array, or sequential model.
-@param ... Passed on to the Python callable
+
+@param object
+Object to compose the layer with. A tensor, array, or sequential model.
+
+@param ...
+Passed on to the Python callable
 
 @export
 @family normalization layers

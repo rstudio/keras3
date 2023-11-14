@@ -34,9 +34,12 @@ k_count_nonzero(x, axis = 2)
 @returns
 An integer or a tensor of integers.
 
-@param x Input tensor.
-@param axis Axis or a tuple of axes along which to count the number of
-    non-zeros. Defaults to `NULL`.
+@param x
+Input tensor.
+
+@param axis
+Axis or a tuple of axes along which to count the number of
+non-zeros. Defaults to `NULL`.
 
 @export
 @family ops

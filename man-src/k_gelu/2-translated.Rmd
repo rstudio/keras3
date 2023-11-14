@@ -29,8 +29,11 @@ plot(x, k_gelu(x),
 @returns
 A tensor with the same shape as `x`.
 
-@param x Input tensor.
-@param approximate Approximate version of GELU activation. Defaults to `TRUE`.
+@param x
+Input tensor.
+
+@param approximate
+Approximate version of GELU activation. Defaults to `TRUE`.
 
 @export
 @family ops

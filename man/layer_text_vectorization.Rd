@@ -40,21 +40,25 @@ contains 1 OOV token, so the effective number of tokens is
 
 \item{standardize}{Optional specification for standardization to apply to the
 input text. Values can be:
-- \code{NULL}: No standardization.
-- \code{"lower_and_strip_punctuation"}: Text will be lowercased and all
+\itemize{
+\item \code{NULL}: No standardization.
+\item \code{"lower_and_strip_punctuation"}: Text will be lowercased and all
 punctuation removed.
-- \code{"lower"}: Text will be lowercased.
-- \code{"strip_punctuation"}: All punctuation will be removed.
-- Callable: Inputs will passed to the callable function,
-which should be standardized and returned.}
+\item \code{"lower"}: Text will be lowercased.
+\item \code{"strip_punctuation"}: All punctuation will be removed.
+\item Callable: Inputs will passed to the callable function,
+which should be standardized and returned.
+}}
 
 \item{split}{Optional specification for splitting the input text.
 Values can be:
-- \code{NULL}: No splitting.
-- \code{"whitespace"}: Split on whitespace.
-- \code{"character"}: Split on each unicode character.
-- Callable: Standardized inputs will passed to the callable
-function, which should be split and returned.}
+\itemize{
+\item \code{NULL}: No splitting.
+\item \code{"whitespace"}: Split on whitespace.
+\item \code{"character"}: Split on each unicode character.
+\item Callable: Standardized inputs will passed to the callable
+function, which should be split and returned.
+}}
 
 \item{ngrams}{Optional specification for ngrams to create from the
 possibly-split input text. Values can be \code{NULL}, an integer
@@ -66,23 +70,25 @@ Passing \code{NULL} means that no ngrams will be created.}
 \item{output_mode}{Optional specification for the output of the layer.
 Values can be \code{"int"}, \code{"multi_hot"}, \code{"count"} or \code{"tf_idf"},
 configuring the layer as follows:
-- \code{"int"}: Outputs integer indices, one integer index per split
+\itemize{
+\item \code{"int"}: Outputs integer indices, one integer index per split
 string token. When \code{output_mode == "int"},
 0 is reserved for masked locations;
 this reduces the vocab size to \code{max_tokens - 2}
 instead of \code{max_tokens - 1}.
-- \code{"multi_hot"}: Outputs a single int array per batch, of either
+\item \code{"multi_hot"}: Outputs a single int array per batch, of either
 vocab_size or max_tokens size, containing 1s in all elements
 where the token mapped to that index exists at least
 once in the batch item.
-- \code{"count"}: Like \code{"multi_hot"}, but the int array contains
+\item \code{"count"}: Like \code{"multi_hot"}, but the int array contains
 a count of the number of times the token at that index
 appeared in the batch item.
-- \code{"tf_idf"}: Like \code{"multi_hot"}, but the TF-IDF algorithm
+\item \code{"tf_idf"}: Like \code{"multi_hot"}, but the TF-IDF algorithm
 is applied to find the value in each token slot.
 For \code{"int"} output, any shape of input and output is supported.
 For all other output modes, currently only rank 1 inputs
-(and rank 2 outputs after splitting) are supported.}
+(and rank 2 outputs after splitting) are supported.
+}}
 
 \item{output_sequence_length}{Only valid in INT mode. If set, the output will
 have its time dimension padded or truncated to exactly

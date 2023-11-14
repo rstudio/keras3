@@ -32,9 +32,14 @@ the timestamps, the same set of weights are used at each timestamp.
     a given timestep should be masked. This argument is passed to the
     wrapped layer (only if the layer supports this argument).
 
-@param layer a `keras.layers.Layer` instance.
-@param object Object to compose the layer with. A tensor, array, or sequential model.
-@param ... Passed on to the Python callable
+@param layer
+a `keras.layers.Layer` instance.
+
+@param object
+Object to compose the layer with. A tensor, array, or sequential model.
+
+@param ...
+Passed on to the Python callable
 
 @export
 @family recurrent layers

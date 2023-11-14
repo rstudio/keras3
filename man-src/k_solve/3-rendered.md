@@ -19,8 +19,11 @@ k_solve(a, b)
 @returns
 A tensor with the same shape and dtype as `a`.
 
-@param a Input tensor.
-@param b Input tensor.
+@param a
+Input tensor.
+
+@param b
+Input tensor.
 
 @export
 @family ops

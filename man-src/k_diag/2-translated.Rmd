@@ -18,11 +18,14 @@ k_diag(k_diag(x))
 @returns
 The extracted diagonal or constructed diagonal tensor.
 
-@param x Input tensor. If `x` is 2-D, returns the k-th diagonal of `x`.
-    If `x` is 1-D, return a 2-D tensor with `x` on the k-th diagonal.
-@param k The diagonal to consider. Defaults to `0`. Use `k > 0` for diagonals
-    above the main diagonal, and `k < 0` for diagonals below
-    the main diagonal.
+@param x
+Input tensor. If `x` is 2-D, returns the k-th diagonal of `x`.
+If `x` is 1-D, return a 2-D tensor with `x` on the k-th diagonal.
+
+@param k
+The diagonal to consider. Defaults to `0`. Use `k > 0` for diagonals
+above the main diagonal, and `k < 0` for diagonals below
+the main diagonal.
 
 @export
 @family ops

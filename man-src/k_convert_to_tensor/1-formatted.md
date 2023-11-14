@@ -11,11 +11,16 @@ y = keras.ops.convert_to_tensor(x)
 @returns
 A tensor of the specified `dtype`.
 
-@param x A NumPy array.
-@param dtype The target type.
-@param sparse Whether to keep sparse tensors. `False` will cause sparse
-    tensors to be densified. The default value of `None` means that
-    sparse tensors are kept only if the backend supports them.
+@param x
+A NumPy array.
+
+@param dtype
+The target type.
+
+@param sparse
+Whether to keep sparse tensors. `False` will cause sparse
+tensors to be densified. The default value of `None` means that
+sparse tensors are kept only if the backend supports them.
 
 @export
 @family ops

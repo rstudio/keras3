@@ -3,7 +3,8 @@ Calculate the exponential of all elements in the input tensor.
 @returns
     Output tensor, element-wise exponential of `x`.
 
-@param x Input tensor.
+@param x
+Input tensor.
 
 @export
 @family ops

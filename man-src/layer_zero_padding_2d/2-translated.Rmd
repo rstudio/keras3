@@ -30,24 +30,31 @@ y
 - If `data_format` is `"channels_first"`:
   `(batch_size, channels, padded_height, padded_width)`
 
-@param padding Int, or list of 2 ints, or list of 2 lists of 2 ints.
-    - If int: the same symmetric padding is applied to height and width.
-    - If list of 2 ints: interpreted as two different symmetric padding
-      values for height and width:
-      `(symmetric_height_pad, symmetric_width_pad)`.
-    - If list of 2 lists of 2 ints: interpreted as
-     `((top_pad, bottom_pad), (left_pad, right_pad))`.
-@param data_format A string, one of `"channels_last"` (default) or
-    `"channels_first"`. The ordering of the dimensions in the inputs.
-    `"channels_last"` corresponds to inputs with shape
-    `(batch_size, height, width, channels)` while `"channels_first"`
-    corresponds to inputs with shape
-    `(batch_size, channels, height, width)`.
-    When unspecified, uses `image_data_format` value found in your Keras
-    config file at `~/.keras/keras.json` (if exists). Defaults to
-    `"channels_last"`.
-@param object Object to compose the layer with. A tensor, array, or sequential model.
-@param ... Passed on to the Python callable
+@param padding
+Int, or list of 2 ints, or list of 2 lists of 2 ints.
+- If int: the same symmetric padding is applied to height and width.
+- If list of 2 ints: interpreted as two different symmetric padding
+  values for height and width:
+  `(symmetric_height_pad, symmetric_width_pad)`.
+- If list of 2 lists of 2 ints: interpreted as
+ `((top_pad, bottom_pad), (left_pad, right_pad))`.
+
+@param data_format
+A string, one of `"channels_last"` (default) or
+`"channels_first"`. The ordering of the dimensions in the inputs.
+`"channels_last"` corresponds to inputs with shape
+`(batch_size, height, width, channels)` while `"channels_first"`
+corresponds to inputs with shape
+`(batch_size, channels, height, width)`.
+When unspecified, uses `image_data_format` value found in your Keras
+config file at `~/.keras/keras.json` (if exists). Defaults to
+`"channels_last"`.
+
+@param object
+Object to compose the layer with. A tensor, array, or sequential model.
+
+@param ...
+Passed on to the Python callable
 
 @export
 @family reshaping layers

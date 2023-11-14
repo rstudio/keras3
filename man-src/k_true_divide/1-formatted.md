@@ -1,7 +1,10 @@
 Alias for `keras.ops.divide`.
 
-@param x1 see description
-@param x2 see description
+@param x1
+see description
+
+@param x2
+see description
 
 @export
 @family ops

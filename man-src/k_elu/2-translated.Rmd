@@ -17,8 +17,11 @@ k_elu(x)
 @returns
 A tensor with the same shape as `x`.
 
-@param x Input tensor.
-@param alpha A scalar, slope of positive section. Defaults to `1.0`.
+@param x
+Input tensor.
+
+@param alpha
+A scalar, slope of positive section. Defaults to `1.0`.
 
 @export
 @family ops

@@ -49,9 +49,14 @@ y
 # Output Shape
     3D tensor with shape: `(batch_size, upsampled_steps, features)`.
 
-@param size Integer. Upsampling factor.
-@param object Object to compose the layer with. A tensor, array, or sequential model.
-@param ... Passed on to the Python callable
+@param size
+Integer. Upsampling factor.
+
+@param object
+Object to compose the layer with. A tensor, array, or sequential model.
+
+@param ...
+Passed on to the Python callable
 
 @export
 @family reshaping layers

@@ -20,10 +20,15 @@ k_slice(inputs, start_indices, shape)
 @returns
 A tensor, has the same shape and dtype as `inputs`.
 
-@param inputs A tensor, the tensor to be sliced.
-@param start_indices A list of length `inputs$ndim`, specifying
-    the starting indices for updating.
-@param shape The full shape of the returned slice.
+@param inputs
+A tensor, the tensor to be sliced.
+
+@param start_indices
+A list of length `inputs$ndim`, specifying
+the starting indices for updating.
+
+@param shape
+The full shape of the returned slice.
 
 @export
 @family ops

@@ -18,24 +18,37 @@ loss
 @returns
 Categorical focal crossentropy loss value.
 
-@param y_true Tensor of one-hot true targets.
-@param y_pred Tensor of predicted targets.
-@param alpha A weight balancing factor for all classes, default is `0.25` as
-    mentioned in the reference. It can be a list of floats or a scalar.
-    In the multi-class case, alpha may be set by inverse class
-    frequency by using `compute_class_weight` from `sklearn.utils`.
-@param gamma A focusing parameter, default is `2.0` as mentioned in the
-    reference. It helps to gradually reduce the importance given to
-    simple examples in a smooth manner. When `gamma` = 0, there is
-    no focal effect on the categorical crossentropy.
-@param from_logits Whether `y_pred` is expected to be a logits tensor. By
-    default, we assume that `y_pred` encodes a probability
-    distribution.
-@param label_smoothing Float in `[0, 1].` If > `0` then smooth the labels. For
-    example, if `0.1`, use `0.1 / num_classes` for non-target labels
-    and `0.9 + 0.1 / num_classes` for target labels.
-@param axis Defaults to `-1`. The dimension along which the entropy is
-    computed.
+@param y_true
+Tensor of one-hot true targets.
+
+@param y_pred
+Tensor of predicted targets.
+
+@param alpha
+A weight balancing factor for all classes, default is `0.25` as
+mentioned in the reference. It can be a list of floats or a scalar.
+In the multi-class case, alpha may be set by inverse class
+frequency by using `compute_class_weight` from `sklearn.utils`.
+
+@param gamma
+A focusing parameter, default is `2.0` as mentioned in the
+reference. It helps to gradually reduce the importance given to
+simple examples in a smooth manner. When `gamma` = 0, there is
+no focal effect on the categorical crossentropy.
+
+@param from_logits
+Whether `y_pred` is expected to be a logits tensor. By
+default, we assume that `y_pred` encodes a probability
+distribution.
+
+@param label_smoothing
+Float in `[0, 1].` If > `0` then smooth the labels. For
+example, if `0.1`, use `0.1 / num_classes` for non-target labels
+and `0.9 + 0.1 / num_classes` for target labels.
+
+@param axis
+Defaults to `-1`. The dimension along which the entropy is
+computed.
 
 @export
 @seealso

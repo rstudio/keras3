@@ -31,23 +31,46 @@ N-D tensor with shape: `(batch_size, ..., units)`.
 For instance, for a 2D input with shape `(batch_size, input_dim)`,
 the output would have shape `(batch_size, units)`.
 
-@param units Positive integer, dimensionality of the output space.
-@param activation Activation function to use.
-    If you don't specify anything, no activation is applied
-    (ie. "linear" activation: `a(x) = x`).
-@param use_bias Boolean, whether the layer uses a bias vector.
-@param kernel_initializer Initializer for the `kernel` weights matrix.
-@param bias_initializer Initializer for the bias vector.
-@param kernel_regularizer Regularizer function applied to
-    the `kernel` weights matrix.
-@param bias_regularizer Regularizer function applied to the bias vector.
-@param activity_regularizer Regularizer function applied to
-    the output of the layer (its "activation").
-@param kernel_constraint Constraint function applied to
-    the `kernel` weights matrix.
-@param bias_constraint Constraint function applied to the bias vector.
-@param object Object to compose the layer with. A tensor, array, or sequential model.
-@param ... Passed on to the Python callable
+@param units
+Positive integer, dimensionality of the output space.
+
+@param activation
+Activation function to use.
+If you don't specify anything, no activation is applied
+(ie. "linear" activation: `a(x) = x`).
+
+@param use_bias
+Boolean, whether the layer uses a bias vector.
+
+@param kernel_initializer
+Initializer for the `kernel` weights matrix.
+
+@param bias_initializer
+Initializer for the bias vector.
+
+@param kernel_regularizer
+Regularizer function applied to
+the `kernel` weights matrix.
+
+@param bias_regularizer
+Regularizer function applied to the bias vector.
+
+@param activity_regularizer
+Regularizer function applied to
+the output of the layer (its "activation").
+
+@param kernel_constraint
+Constraint function applied to
+the `kernel` weights matrix.
+
+@param bias_constraint
+Constraint function applied to the bias vector.
+
+@param object
+Object to compose the layer with. A tensor, array, or sequential model.
+
+@param ...
+Passed on to the Python callable
 
 @export
 @family core layers

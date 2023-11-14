@@ -3,8 +3,11 @@ Return whether two tensors are element-wise almost equal.
 @returns
     Output boolean tensor.
 
-@param x1 First input tensor.
-@param x2 Second input tensor.
+@param x1
+First input tensor.
+
+@param x2
+Second input tensor.
 
 @export
 @family ops

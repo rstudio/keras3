@@ -31,8 +31,11 @@ class Dropout(keras.Layer):
         return x
 ```
 
-@param seed Initial seed for the random number generator
-@param ... Passed on to the Python callable
+@param seed
+Initial seed for the random number generator
+
+@param ...
+Passed on to the Python callable
 
 @export
 @seealso

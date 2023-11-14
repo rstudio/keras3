@@ -15,13 +15,15 @@ layer_cropping_3d(
 \item{object}{Object to compose the layer with. A tensor, array, or sequential model.}
 
 \item{cropping}{Int, or list of 3 ints, or list of 3 lists of 2 ints.
-- If int: the same symmetric cropping is applied to depth, height,
+\itemize{
+\item If int: the same symmetric cropping is applied to depth, height,
 and width.
-- If list of 3 ints: interpreted as three different symmetric
+\item If list of 3 ints: interpreted as three different symmetric
 cropping values for depth, height, and width:
 \verb{(symmetric_dim1_crop, symmetric_dim2_crop, symmetric_dim3_crop)}.
-- If list of 3 lists of 2 ints: interpreted as
-\verb{((left_dim1_crop, right_dim1_crop), (left_dim2_crop, right_dim2_crop), (left_dim3_crop, right_dim3_crop))}.}
+\item If list of 3 lists of 2 ints: interpreted as
+\verb{((left_dim1_crop, right_dim1_crop), (left_dim2_crop, right_dim2_crop), (left_dim3_crop, right_dim3_crop))}.
+}}
 
 \item{data_format}{A string, one of \code{"channels_last"} (default) or
 \code{"channels_first"}. The ordering of the dimensions in the inputs.

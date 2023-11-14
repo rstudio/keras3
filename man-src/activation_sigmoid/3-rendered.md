@@ -11,7 +11,8 @@ Sigmoid is equivalent to a 2-element softmax, where the second element is
 assumed to be zero. The sigmoid function always returns a value between
 0 and 1.
 
-@param x Input tensor.
+@param x
+Input tensor.
 
 @export
 @family activation functions

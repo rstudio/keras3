@@ -19,16 +19,21 @@ binary_crossentropy(target, output)
 Integer tensor: The computed binary cross-entropy loss between
 `target` and `output`.
 
-@param target The target tensor representing the true binary labels.
-    Its shape should match the shape of the `output` tensor.
-@param output The output tensor representing the predicted probabilities
-    or logits. Its shape should match the shape of the
-    `target` tensor.
-@param from_logits (optional) Whether `output` is a tensor of logits or
-    probabilities.
-    Set it to `True` if `output` represents logits; otherwise,
-    set it to `False` if `output` represents probabilities.
-    Defaults to`False`.
+@param target
+The target tensor representing the true binary labels.
+Its shape should match the shape of the `output` tensor.
+
+@param output
+The output tensor representing the predicted probabilities
+or logits. Its shape should match the shape of the
+`target` tensor.
+
+@param from_logits
+(optional) Whether `output` is a tensor of logits or
+probabilities.
+Set it to `True` if `output` represents logits; otherwise,
+set it to `False` if `output` represents probabilities.
+Defaults to`False`.
 
 @export
 @family ops

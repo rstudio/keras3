@@ -3,7 +3,8 @@ Stack tensors in sequence vertically (row wise).
 @returns
     Tensor formed by stacking the given tensors.
 
-@param xs Sequence of tensors.
+@param xs
+Sequence of tensors.
 
 @export
 @family ops

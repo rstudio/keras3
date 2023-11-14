@@ -54,13 +54,20 @@ model.compile(
 model.fit(train_loader, epochs=5)
 ```
 
-@param module `torch.nn.Module` instance. If it's a `LazyModule`
-    instance, then its parameters must be initialized before
-    passing the instance to `TorchModuleWrapper` (e.g. by calling
-    it once).
-@param name The name of the layer (string).
-@param object Object to compose the layer with. A tensor, array, or sequential model.
-@param ... Passed on to the Python callable
+@param module
+`torch.nn.Module` instance. If it's a `LazyModule`
+instance, then its parameters must be initialized before
+passing the instance to `TorchModuleWrapper` (e.g. by calling
+it once).
+
+@param name
+The name of the layer (string).
+
+@param object
+Object to compose the layer with. A tensor, array, or sequential model.
+
+@param ...
+Passed on to the Python callable
 
 @export
 @seealso

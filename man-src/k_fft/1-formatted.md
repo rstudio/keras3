@@ -16,7 +16,8 @@ fft(x)
 A tuple containing two tensors - the real and imaginary parts of the
 output tensor.
 
-@param x Tuple of the real and imaginary parts of the input tensor. Both
+@param x
+Tuple of the real and imaginary parts of the input tensor. Both
 tensors in the tuple should be of floating type.
 
 @export

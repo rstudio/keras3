@@ -3,7 +3,8 @@ Return the number of elements in a tensor.
 @returns
     Number of elements in `x`.
 
-@param x Input tensor.
+@param x
+Input tensor.
 
 @export
 @family ops

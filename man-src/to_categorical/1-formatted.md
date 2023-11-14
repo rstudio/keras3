@@ -34,10 +34,13 @@ print(np.around(loss, 5))
 A binary matrix representation of the input as a NumPy array. The class
 axis is placed last.
 
-@param x Array-like with class values to be converted into a matrix
-    (integers from 0 to `num_classes - 1`).
-@param num_classes Total number of classes. If `None`, this would be inferred
-    as `max(x) + 1`. Defaults to `None`.
+@param x
+Array-like with class values to be converted into a matrix
+(integers from 0 to `num_classes - 1`).
+
+@param num_classes
+Total number of classes. If `None`, this would be inferred
+as `max(x) + 1`. Defaults to `None`.
 
 @export
 @family utils

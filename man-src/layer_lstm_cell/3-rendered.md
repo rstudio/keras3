@@ -47,45 +47,80 @@ str(final_state)
 ##  $ :<tf.Tensor: shape=(32, 4), dtype=float32, numpy=…>
 ```
 
-@param units Positive integer, dimensionality of the output space.
-@param activation Activation function to use. Default: hyperbolic tangent
-    (`tanh`). If you pass `NULL`, no activation is applied
-    (ie. "linear" activation: `a(x) = x`).
-@param recurrent_activation Activation function to use for the recurrent step.
-    Default: sigmoid (`sigmoid`). If you pass `NULL`, no activation is
-    applied (ie. "linear" activation: `a(x) = x`).
-@param use_bias Boolean, (default `TRUE`), whether the layer
-    should use a bias vector.
-@param kernel_initializer Initializer for the `kernel` weights matrix,
-    used for the linear transformation of the inputs. Default:
-    `"glorot_uniform"`.
-@param recurrent_initializer Initializer for the `recurrent_kernel`
-    weights matrix, used for the linear transformation
-    of the recurrent state. Default: `"orthogonal"`.
-@param bias_initializer Initializer for the bias vector. Default: `"zeros"`.
-@param unit_forget_bias Boolean (default `TRUE`). If `TRUE`,
-    add 1 to the bias of the forget gate at initialization.
-    Setting it to `TRUE` will also force `bias_initializer="zeros"`.
-    This is recommended in [Jozefowicz et al.](
-    https://github.com/mlresearch/v37/blob/gh-pages/jozefowicz15.pdf)
-@param kernel_regularizer Regularizer function applied to the `kernel` weights
-    matrix. Default: `NULL`.
-@param recurrent_regularizer Regularizer function applied to the
-    `recurrent_kernel` weights matrix. Default: `NULL`.
-@param bias_regularizer Regularizer function applied to the bias vector.
-    Default: `NULL`.
-@param kernel_constraint Constraint function applied to the `kernel` weights
-    matrix. Default: `NULL`.
-@param recurrent_constraint Constraint function applied to the
-    `recurrent_kernel` weights matrix. Default: `NULL`.
-@param bias_constraint Constraint function applied to the bias vector.
-    Default: `NULL`.
-@param dropout Float between 0 and 1. Fraction of the units to drop for the
-    linear transformation of the inputs. Default: 0.
-@param recurrent_dropout Float between 0 and 1. Fraction of the units to drop
-    for the linear transformation of the recurrent state. Default: 0.
-@param seed Random seed for dropout.
-@param ... Passed on to the Python callable
+@param units
+Positive integer, dimensionality of the output space.
+
+@param activation
+Activation function to use. Default: hyperbolic tangent
+(`tanh`). If you pass `NULL`, no activation is applied
+(ie. "linear" activation: `a(x) = x`).
+
+@param recurrent_activation
+Activation function to use for the recurrent step.
+Default: sigmoid (`sigmoid`). If you pass `NULL`, no activation is
+applied (ie. "linear" activation: `a(x) = x`).
+
+@param use_bias
+Boolean, (default `TRUE`), whether the layer
+should use a bias vector.
+
+@param kernel_initializer
+Initializer for the `kernel` weights matrix,
+used for the linear transformation of the inputs. Default:
+`"glorot_uniform"`.
+
+@param recurrent_initializer
+Initializer for the `recurrent_kernel`
+weights matrix, used for the linear transformation
+of the recurrent state. Default: `"orthogonal"`.
+
+@param bias_initializer
+Initializer for the bias vector. Default: `"zeros"`.
+
+@param unit_forget_bias
+Boolean (default `TRUE`). If `TRUE`,
+add 1 to the bias of the forget gate at initialization.
+Setting it to `TRUE` will also force `bias_initializer="zeros"`.
+This is recommended in [Jozefowicz et al.](
+https://github.com/mlresearch/v37/blob/gh-pages/jozefowicz15.pdf)
+
+@param kernel_regularizer
+Regularizer function applied to the `kernel` weights
+matrix. Default: `NULL`.
+
+@param recurrent_regularizer
+Regularizer function applied to the
+`recurrent_kernel` weights matrix. Default: `NULL`.
+
+@param bias_regularizer
+Regularizer function applied to the bias vector.
+Default: `NULL`.
+
+@param kernel_constraint
+Constraint function applied to the `kernel` weights
+matrix. Default: `NULL`.
+
+@param recurrent_constraint
+Constraint function applied to the
+`recurrent_kernel` weights matrix. Default: `NULL`.
+
+@param bias_constraint
+Constraint function applied to the bias vector.
+Default: `NULL`.
+
+@param dropout
+Float between 0 and 1. Fraction of the units to drop for the
+linear transformation of the inputs. Default: 0.
+
+@param recurrent_dropout
+Float between 0 and 1. Fraction of the units to drop
+for the linear transformation of the recurrent state. Default: 0.
+
+@param seed
+Random seed for dropout.
+
+@param ...
+Passed on to the Python callable
 
 @export
 @family recurrent layers

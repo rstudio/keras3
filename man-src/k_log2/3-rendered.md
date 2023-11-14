@@ -3,7 +3,8 @@ Base-2 logarithm of `x`, element-wise.
 @returns
     Output tensor, element-wise base-2 logarithm of `x`.
 
-@param x Input tensor.
+@param x
+Input tensor.
 
 @export
 @family ops

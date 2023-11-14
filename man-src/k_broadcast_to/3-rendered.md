@@ -19,8 +19,11 @@ k_broadcast_to(x, shape = c(3, 3))
 @returns
 A tensor with the desired shape.
 
-@param x The tensor to broadcast.
-@param shape The shape of the desired tensor.
+@param x
+The tensor to broadcast.
+
+@param shape
+The shape of the desired tensor.
 
 @export
 @family ops

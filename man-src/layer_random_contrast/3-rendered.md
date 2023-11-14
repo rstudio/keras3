@@ -24,16 +24,23 @@ By default, the layer will output floats.
 3D (unbatched) or 4D (batched) tensor with shape:
 `(..., height, width, channels)`, in `"channels_last"` format.
 
-@param factor a positive float represented as fraction of value, or a tuple of
-    size 2 representing lower and upper bound.
-    When represented as a single float, lower = upper.
-    The contrast factor will be randomly picked between
-    `[1.0 - lower, 1.0 + upper]`. For any pixel x in the channel,
-    the output will be `(x - mean) * factor + mean`
-    where `mean` is the mean value of the channel.
-@param seed Integer. Used to create a random seed.
-@param object Object to compose the layer with. A tensor, array, or sequential model.
-@param ... Passed on to the Python callable
+@param factor
+a positive float represented as fraction of value, or a tuple of
+size 2 representing lower and upper bound.
+When represented as a single float, lower = upper.
+The contrast factor will be randomly picked between
+`[1.0 - lower, 1.0 + upper]`. For any pixel x in the channel,
+the output will be `(x - mean) * factor + mean`
+where `mean` is the mean value of the channel.
+
+@param seed
+Integer. Used to create a random seed.
+
+@param object
+Object to compose the layer with. A tensor, array, or sequential model.
+
+@param ...
+Passed on to the Python callable
 
 @export
 @family preprocessing layers

@@ -39,24 +39,33 @@ output = random_bright(image, training=True)
           shape=(2, 2, 3), dtype=int64)
 ```
 
-@param factor Float or a list/tuple of 2 floats between -1.0 and 1.0. The
-    factor is used to determine the lower bound and upper bound of the
-    brightness adjustment. A float value will be chosen randomly between
-    the limits. When -1.0 is chosen, the output image will be black, and
-    when 1.0 is chosen, the image will be fully white.
-    When only one float is provided, eg, 0.2,
-    then -0.2 will be used for lower bound and 0.2
-    will be used for upper bound.
-@param value_range Optional list/tuple of 2 floats
-    for the lower and upper limit
-    of the values of the input data.
-    To make no change, use `[0.0, 1.0]`, e.g., if the image input
-    has been scaled before this layer. Defaults to `[0.0, 255.0]`.
-    The brightness adjustment will be scaled to this range, and the
-    output values will be clipped to this range.
-@param seed optional integer, for fixed RNG behavior.
-@param object Object to compose the layer with. A tensor, array, or sequential model.
-@param ... Passed on to the Python callable
+@param factor
+Float or a list/tuple of 2 floats between -1.0 and 1.0. The
+factor is used to determine the lower bound and upper bound of the
+brightness adjustment. A float value will be chosen randomly between
+the limits. When -1.0 is chosen, the output image will be black, and
+when 1.0 is chosen, the image will be fully white.
+When only one float is provided, eg, 0.2,
+then -0.2 will be used for lower bound and 0.2
+will be used for upper bound.
+
+@param value_range
+Optional list/tuple of 2 floats
+for the lower and upper limit
+of the values of the input data.
+To make no change, use `[0.0, 1.0]`, e.g., if the image input
+has been scaled before this layer. Defaults to `[0.0, 255.0]`.
+The brightness adjustment will be scaled to this range, and the
+output values will be clipped to this range.
+
+@param seed
+optional integer, for fixed RNG behavior.
+
+@param object
+Object to compose the layer with. A tensor, array, or sequential model.
+
+@param ...
+Passed on to the Python callable
 
 @export
 @family preprocessing layers

@@ -35,13 +35,24 @@ model.compile(optimizer='sgd',
               metrics=[keras.metrics.BinaryAccuracy()])
 ```
 
-@param name (Optional) string name of the metric instance.
-@param dtype (Optional) data type of the metric result.
-@param threshold (Optional) Float representing the threshold for deciding
+@param name
+(Optional) string name of the metric instance.
+
+@param dtype
+(Optional) data type of the metric result.
+
+@param threshold
+(Optional) Float representing the threshold for deciding
 whether prediction values are 1 or 0.
-@param y_true Tensor of true targets.
-@param y_pred Tensor of predicted targets.
-@param ... Passed on to the Python callable
+
+@param y_true
+Tensor of true targets.
+
+@param y_pred
+Tensor of predicted targets.
+
+@param ...
+Passed on to the Python callable
 
 @export
 @family metric

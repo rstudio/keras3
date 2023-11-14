@@ -37,18 +37,25 @@ For floating point arguments, the length of the result is
 `ceil((stop - start)/step)`. Because of floating point overflow, this
 rule may result in the last element of out being greater than stop.
 
-@param start Integer or real, representing the start of the interval. The
-    interval includes this value.
-@param stop Integer or real, representing the end of the interval. The
-    interval does not include this value, except in some cases where
-    `step` is not an integer and floating point round-off affects the
-    lenght of `out`. Defaults to `None`.
-@param step Integer or real, represent the spacing between values. For any
-    output `out`, this is the distance between two adjacent values,
-    `out[i+1] - out[i]`. The default step size is 1. If `step` is
-    specified as a position argument, `start` must also be given.
-@param dtype The type of the output array. If `dtype` is not given, infer the
-    data type from the other input arguments.
+@param start
+Integer or real, representing the start of the interval. The
+interval includes this value.
+
+@param stop
+Integer or real, representing the end of the interval. The
+interval does not include this value, except in some cases where
+`step` is not an integer and floating point round-off affects the
+lenght of `out`. Defaults to `None`.
+
+@param step
+Integer or real, represent the spacing between values. For any
+output `out`, this is the distance between two adjacent values,
+`out[i+1] - out[i]`. The default step size is 1. If `step` is
+specified as a position argument, `start` must also be given.
+
+@param dtype
+The type of the output array. If `dtype` is not given, infer the
+data type from the other input arguments.
 
 @export
 @family ops

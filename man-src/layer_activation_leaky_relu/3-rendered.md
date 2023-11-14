@@ -18,11 +18,16 @@ result = leaky_relu_layer(input)
 # result = [-5. , -2.5,  0. ,  5. , 10.]
 ```
 
-@param negative_slope Float >= 0.0. Negative slope coefficient.
-  Defaults to `0.3`.
-@param ... Base layer keyword arguments, such as
-    `name` and `dtype`.
-@param object Object to compose the layer with. A tensor, array, or sequential model.
+@param negative_slope
+Float >= 0.0. Negative slope coefficient.
+Defaults to `0.3`.
+
+@param ...
+Base layer keyword arguments, such as
+`name` and `dtype`.
+
+@param object
+Object to compose the layer with. A tensor, array, or sequential model.
 
 @export
 @family activations layers

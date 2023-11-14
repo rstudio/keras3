@@ -29,21 +29,28 @@ y.shape
     `(batch_size, channels, upsampled_dim1, upsampled_dim2,
     upsampled_dim3)`
 
-@param size Int, or tuple of 3 integers.
-    The upsampling factors for dim1, dim2 and dim3.
-@param data_format A string,
-    one of `"channels_last"` (default) or `"channels_first"`.
-    The ordering of the dimensions in the inputs.
-    `"channels_last"` corresponds to inputs with shape
-    `(batch_size, spatial_dim1, spatial_dim2, spatial_dim3, channels)`
-    while `"channels_first"` corresponds to inputs with shape
-    `(batch_size, channels, spatial_dim1, spatial_dim2, spatial_dim3)`.
-    When unspecified, uses
-    `image_data_format` value found in your Keras config file at
-     `~/.keras/keras.json` (if exists) else `"channels_last"`.
-    Defaults to `"channels_last"`.
-@param object Object to compose the layer with. A tensor, array, or sequential model.
-@param ... Passed on to the Python callable
+@param size
+Int, or tuple of 3 integers.
+The upsampling factors for dim1, dim2 and dim3.
+
+@param data_format
+A string,
+one of `"channels_last"` (default) or `"channels_first"`.
+The ordering of the dimensions in the inputs.
+`"channels_last"` corresponds to inputs with shape
+`(batch_size, spatial_dim1, spatial_dim2, spatial_dim3, channels)`
+while `"channels_first"` corresponds to inputs with shape
+`(batch_size, channels, spatial_dim1, spatial_dim2, spatial_dim3)`.
+When unspecified, uses
+`image_data_format` value found in your Keras config file at
+ `~/.keras/keras.json` (if exists) else `"channels_last"`.
+Defaults to `"channels_last"`.
+
+@param object
+Object to compose the layer with. A tensor, array, or sequential model.
+
+@param ...
+Passed on to the Python callable
 
 @export
 @family reshaping layers

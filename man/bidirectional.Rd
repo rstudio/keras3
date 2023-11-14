@@ -20,17 +20,19 @@ bidirectional(
 \code{keras.layers.LSTM} or \code{keras.layers.GRU}.
 It could also be a \code{keras.layers.Layer} instance
 that meets the following criteria:
-1. Be a sequence-processing layer (accepts 3D+ inputs).
-2. Have a \code{go_backwards}, \code{return_sequences} and \code{return_state}
+\enumerate{
+\item Be a sequence-processing layer (accepts 3D+ inputs).
+\item Have a \code{go_backwards}, \code{return_sequences} and \code{return_state}
 attribute (with the same semantics as for the \code{RNN} class).
-3. Have an \code{input_spec} attribute.
-4. Implement serialization via \code{get_config()} and \code{from_config()}.
+\item Have an \code{input_spec} attribute.
+\item Implement serialization via \code{get_config()} and \code{from_config()}.
 Note that the recommended way to create new RNN layers is to write a
 custom RNN cell and use it with \code{keras.layers.RNN}, instead of
 subclassing \code{keras.layers.Layer} directly.
 When \code{return_sequences} is \code{True}, the output of the masked
 timestep will be zero regardless of the layer's original
-\code{zero_output_for_mask} value.}
+\code{zero_output_for_mask} value.
+}}
 
 \item{merge_mode}{Mode by which outputs of the forward and backward RNNs
 will be combined. One of \verb{\{"sum", "mul", "concat", "ave", None\}}.

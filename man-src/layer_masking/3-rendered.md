@@ -37,9 +37,14 @@ in the Keras masking convention, a masked timestep is denoted by
 a mask value of `FALSE`, while a non-masked (i.e. usable) timestep
 is denoted by a mask value of `TRUE`.
 
-@param object Object to compose the layer with. A tensor, array, or sequential model.
-@param ... Passed on to the Python callable
-@param mask_value see description
+@param object
+Object to compose the layer with. A tensor, array, or sequential model.
+
+@param ...
+Passed on to the Python callable
+
+@param mask_value
+see description
 
 @export
 @family core layers

@@ -22,10 +22,17 @@ floats.
 **Note:** This layer is safe to use inside a `tf.data` pipeline
 (independently of which backend you're using).
 
-@param scale Float, the scale to apply to the inputs.
-@param offset Float, the offset to apply to the inputs.
-@param ... Base layer keyword arguments, such as `name` and `dtype`.
-@param object Object to compose the layer with. A tensor, array, or sequential model.
+@param scale
+Float, the scale to apply to the inputs.
+
+@param offset
+Float, the offset to apply to the inputs.
+
+@param ...
+Base layer keyword arguments, such as `name` and `dtype`.
+
+@param object
+Object to compose the layer with. A tensor, array, or sequential model.
 
 @export
 @family preprocessing layers

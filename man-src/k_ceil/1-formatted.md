@@ -7,7 +7,8 @@ The ceil of the scalar `x` is the smallest integer `i`, such that
 @returns
     The ceiling of each element in `x`, with float dtype.
 
-@param x Input tensor.
+@param x
+Input tensor.
 
 @export
 @family ops

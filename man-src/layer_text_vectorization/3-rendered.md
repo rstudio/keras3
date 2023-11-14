@@ -126,90 +126,119 @@ vectorize_layer %>% get_vocabulary()
 # ['', '[UNK]', 'earth', 'wind', 'and', 'fire']
 ```
 
-@param max_tokens Maximum size of the vocabulary for this layer. This should
-    only be specified when adapting a vocabulary or when setting
-    `pad_to_max_tokens=TRUE`. Note that this vocabulary
-    contains 1 OOV token, so the effective number of tokens is
-    `(max_tokens - 1 - (1 if output_mode == "int" else 0))`.
-@param standardize Optional specification for standardization to apply to the
-    input text. Values can be:
-    - `NULL`: No standardization.
-    - `"lower_and_strip_punctuation"`: Text will be lowercased and all
-        punctuation removed.
-    - `"lower"`: Text will be lowercased.
-    - `"strip_punctuation"`: All punctuation will be removed.
-    - Callable: Inputs will passed to the callable function,
-        which should be standardized and returned.
-@param split Optional specification for splitting the input text.
-    Values can be:
-    - `NULL`: No splitting.
-    - `"whitespace"`: Split on whitespace.
-    - `"character"`: Split on each unicode character.
-    - Callable: Standardized inputs will passed to the callable
-        function, which should be split and returned.
-@param ngrams Optional specification for ngrams to create from the
-    possibly-split input text. Values can be `NULL`, an integer
-    or list of integers; passing an integer will create ngrams
-    up to that integer, and passing a list of integers will
-    create ngrams for the specified values in the list.
-    Passing `NULL` means that no ngrams will be created.
-@param output_mode Optional specification for the output of the layer.
-    Values can be `"int"`, `"multi_hot"`, `"count"` or `"tf_idf"`,
-    configuring the layer as follows:
-    - `"int"`: Outputs integer indices, one integer index per split
-        string token. When `output_mode == "int"`,
-        0 is reserved for masked locations;
-        this reduces the vocab size to `max_tokens - 2`
-        instead of `max_tokens - 1`.
-    - `"multi_hot"`: Outputs a single int array per batch, of either
-        vocab_size or max_tokens size, containing 1s in all elements
-        where the token mapped to that index exists at least
-        once in the batch item.
-    - `"count"`: Like `"multi_hot"`, but the int array contains
-        a count of the number of times the token at that index
-        appeared in the batch item.
-    - `"tf_idf"`: Like `"multi_hot"`, but the TF-IDF algorithm
-        is applied to find the value in each token slot.
-    For `"int"` output, any shape of input and output is supported.
-    For all other output modes, currently only rank 1 inputs
-    (and rank 2 outputs after splitting) are supported.
-@param output_sequence_length Only valid in INT mode. If set, the output will
-    have its time dimension padded or truncated to exactly
-    `output_sequence_length` values, resulting in a tensor of shape
-    `(batch_size, output_sequence_length)` regardless of how many tokens
-    resulted from the splitting step. Defaults to `NULL`.
-@param pad_to_max_tokens Only valid in  `"multi_hot"`, `"count"`,
-    and `"tf_idf"` modes. If `TRUE`, the output will have
-    its feature axis padded to `max_tokens` even if the number
-    of unique tokens in the vocabulary is less than `max_tokens`,
-    resulting in a tensor of shape `(batch_size, max_tokens)`
-    regardless of vocabulary size. Defaults to `FALSE`.
-@param vocabulary Optional. Either an array of strings or a string path to a
-    text file. If passing an array, can pass a list, list,
-    1D NumPy array, or 1D tensor containing the string vocabulary terms.
-    If passing a file path, the file should contain one line per term
-    in the vocabulary. If this argument is set,
-    there is no need to `adapt()` the layer.
-@param idf_weights Only valid when `output_mode` is `"tf_idf"`. A list, list,
-    1D NumPy array, or 1D tensor of the same length as the vocabulary,
-    containing the floating point inverse document frequency weights,
-    which will be multiplied by per sample term counts for
-    the final `tf_idf` weight. If the `vocabulary` argument is set,
-    and `output_mode` is `"tf_idf"`, this argument must be supplied.
-@param ragged Boolean. Only applicable to `"int"` output mode.
-    Only supported with TensorFlow backend.
-    If `TRUE`, returns a `RaggedTensor` instead of a dense `Tensor`,
-    where each sequence may have a different length
-    after string splitting. Defaults to `FALSE`.
-@param sparse Boolean. Only applicable to `"multi_hot"`, `"count"`, and
-    `"tf_idf"` output modes. Only supported with TensorFlow
-    backend. If `TRUE`, returns a `SparseTensor`
-    instead of a dense `Tensor`. Defaults to `FALSE`.
-@param encoding Optional. The text encoding to use to interpret the input
-    strings. Defaults to `"utf-8"`.
-@param object Object to compose the layer with. A tensor, array, or sequential model.
-@param name String, name for the object
-@param ... Passed on to the Python callable
+@param max_tokens
+Maximum size of the vocabulary for this layer. This should
+only be specified when adapting a vocabulary or when setting
+`pad_to_max_tokens=TRUE`. Note that this vocabulary
+contains 1 OOV token, so the effective number of tokens is
+`(max_tokens - 1 - (1 if output_mode == "int" else 0))`.
+
+@param standardize
+Optional specification for standardization to apply to the
+input text. Values can be:
+- `NULL`: No standardization.
+- `"lower_and_strip_punctuation"`: Text will be lowercased and all
+    punctuation removed.
+- `"lower"`: Text will be lowercased.
+- `"strip_punctuation"`: All punctuation will be removed.
+- Callable: Inputs will passed to the callable function,
+    which should be standardized and returned.
+
+@param split
+Optional specification for splitting the input text.
+Values can be:
+- `NULL`: No splitting.
+- `"whitespace"`: Split on whitespace.
+- `"character"`: Split on each unicode character.
+- Callable: Standardized inputs will passed to the callable
+    function, which should be split and returned.
+
+@param ngrams
+Optional specification for ngrams to create from the
+possibly-split input text. Values can be `NULL`, an integer
+or list of integers; passing an integer will create ngrams
+up to that integer, and passing a list of integers will
+create ngrams for the specified values in the list.
+Passing `NULL` means that no ngrams will be created.
+
+@param output_mode
+Optional specification for the output of the layer.
+Values can be `"int"`, `"multi_hot"`, `"count"` or `"tf_idf"`,
+configuring the layer as follows:
+- `"int"`: Outputs integer indices, one integer index per split
+    string token. When `output_mode == "int"`,
+    0 is reserved for masked locations;
+    this reduces the vocab size to `max_tokens - 2`
+    instead of `max_tokens - 1`.
+- `"multi_hot"`: Outputs a single int array per batch, of either
+    vocab_size or max_tokens size, containing 1s in all elements
+    where the token mapped to that index exists at least
+    once in the batch item.
+- `"count"`: Like `"multi_hot"`, but the int array contains
+    a count of the number of times the token at that index
+    appeared in the batch item.
+- `"tf_idf"`: Like `"multi_hot"`, but the TF-IDF algorithm
+    is applied to find the value in each token slot.
+For `"int"` output, any shape of input and output is supported.
+For all other output modes, currently only rank 1 inputs
+(and rank 2 outputs after splitting) are supported.
+
+@param output_sequence_length
+Only valid in INT mode. If set, the output will
+have its time dimension padded or truncated to exactly
+`output_sequence_length` values, resulting in a tensor of shape
+`(batch_size, output_sequence_length)` regardless of how many tokens
+resulted from the splitting step. Defaults to `NULL`.
+
+@param pad_to_max_tokens
+Only valid in  `"multi_hot"`, `"count"`,
+and `"tf_idf"` modes. If `TRUE`, the output will have
+its feature axis padded to `max_tokens` even if the number
+of unique tokens in the vocabulary is less than `max_tokens`,
+resulting in a tensor of shape `(batch_size, max_tokens)`
+regardless of vocabulary size. Defaults to `FALSE`.
+
+@param vocabulary
+Optional. Either an array of strings or a string path to a
+text file. If passing an array, can pass a list, list,
+1D NumPy array, or 1D tensor containing the string vocabulary terms.
+If passing a file path, the file should contain one line per term
+in the vocabulary. If this argument is set,
+there is no need to `adapt()` the layer.
+
+@param idf_weights
+Only valid when `output_mode` is `"tf_idf"`. A list, list,
+1D NumPy array, or 1D tensor of the same length as the vocabulary,
+containing the floating point inverse document frequency weights,
+which will be multiplied by per sample term counts for
+the final `tf_idf` weight. If the `vocabulary` argument is set,
+and `output_mode` is `"tf_idf"`, this argument must be supplied.
+
+@param ragged
+Boolean. Only applicable to `"int"` output mode.
+Only supported with TensorFlow backend.
+If `TRUE`, returns a `RaggedTensor` instead of a dense `Tensor`,
+where each sequence may have a different length
+after string splitting. Defaults to `FALSE`.
+
+@param sparse
+Boolean. Only applicable to `"multi_hot"`, `"count"`, and
+`"tf_idf"` output modes. Only supported with TensorFlow
+backend. If `TRUE`, returns a `SparseTensor`
+instead of a dense `Tensor`. Defaults to `FALSE`.
+
+@param encoding
+Optional. The text encoding to use to interpret the input
+strings. Defaults to `"utf-8"`.
+
+@param object
+Object to compose the layer with. A tensor, array, or sequential model.
+
+@param name
+String, name for the object
+
+@param ...
+Passed on to the Python callable
 
 @export
 @family preprocessing layers

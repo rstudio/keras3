@@ -37,8 +37,11 @@ x |> k_vectorized_map(\(row) {row + 10})
 list(x, x, x) |> k_vectorized_map(\(rows) Reduce(`+`, rows))
 ```
 
-@param elements see description
-@param f A function taking either a tensor, or list of tensors.
+@param elements
+see description
+
+@param f
+A function taking either a tensor, or list of tensors.
 
 @export
 @family ops

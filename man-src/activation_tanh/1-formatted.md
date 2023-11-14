@@ -5,7 +5,8 @@ It is defined as:
 `tanh(x) = sinh(x) / cosh(x)`, i.e.
 `tanh(x) = ((exp(x) - exp(-x)) / (exp(x) + exp(-x)))`.
 
-@param x Input tensor.
+@param x
+Input tensor.
 
 @export
 @family activation functions

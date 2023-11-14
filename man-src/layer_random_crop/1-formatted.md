@@ -26,14 +26,27 @@ floats.
 3D (unbatched) or 4D (batched) tensor with shape:
 `(..., target_height, target_width, channels)`.
 
-@param height Integer, the height of the output shape.
-@param width Integer, the width of the output shape.
-@param seed Integer. Used to create a random seed.
-@param ... Base layer keyword arguments, such as
-    `name` and `dtype`.
-@param object Object to compose the layer with. A tensor, array, or sequential model.
-@param name String, name for the object
-@param data_format see description
+@param height
+Integer, the height of the output shape.
+
+@param width
+Integer, the width of the output shape.
+
+@param seed
+Integer. Used to create a random seed.
+
+@param ...
+Base layer keyword arguments, such as
+`name` and `dtype`.
+
+@param object
+Object to compose the layer with. A tensor, array, or sequential model.
+
+@param name
+String, name for the object
+
+@param data_format
+see description
 
 @export
 @family preprocessing layers

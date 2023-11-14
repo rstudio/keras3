@@ -60,32 +60,55 @@ output <- input |>
 output  #shape (NA, 32, 64)
 ```
 
-@param equation An equation describing the einsum to perform.
-    This equation must be a valid einsum string of the form
-    `ab,bc->ac`, `...ab,bc->...ac`, or
-    `ab...,bc->ac...` where 'ab', 'bc', and 'ac' can be any valid einsum
-    axis expression sequence.
-@param output_shape The expected shape of the output tensor
-    (excluding the batch dimension and any dimensions
-    represented by ellipses). You can specify `NA` or `NULL` for any dimension
-    that is unknown or can be inferred from the input shape.
-@param activation Activation function to use. If you don't specify anything,
-    no activation is applied
-    (that is, a "linear" activation: `a(x) = x`).
-@param bias_axes A string containing the output dimension(s)
-    to apply a bias to. Each character in the `bias_axes` string
-    should correspond to a character in the output portion
-    of the `equation` string.
-@param kernel_initializer Initializer for the `kernel` weights matrix.
-@param bias_initializer Initializer for the bias vector.
-@param kernel_regularizer Regularizer function applied to the `kernel` weights
-    matrix.
-@param bias_regularizer Regularizer function applied to the bias vector.
-@param kernel_constraint Constraint function applied to the `kernel` weights
-    matrix.
-@param bias_constraint Constraint function applied to the bias vector.
-@param ... Base layer keyword arguments, such as `name` and `dtype`.
-@param object Object to compose the layer with. A tensor, array, or sequential model.
+@param equation
+An equation describing the einsum to perform.
+This equation must be a valid einsum string of the form
+`ab,bc->ac`, `...ab,bc->...ac`, or
+`ab...,bc->ac...` where 'ab', 'bc', and 'ac' can be any valid einsum
+axis expression sequence.
+
+@param output_shape
+The expected shape of the output tensor
+(excluding the batch dimension and any dimensions
+represented by ellipses). You can specify `NA` or `NULL` for any dimension
+that is unknown or can be inferred from the input shape.
+
+@param activation
+Activation function to use. If you don't specify anything,
+no activation is applied
+(that is, a "linear" activation: `a(x) = x`).
+
+@param bias_axes
+A string containing the output dimension(s)
+to apply a bias to. Each character in the `bias_axes` string
+should correspond to a character in the output portion
+of the `equation` string.
+
+@param kernel_initializer
+Initializer for the `kernel` weights matrix.
+
+@param bias_initializer
+Initializer for the bias vector.
+
+@param kernel_regularizer
+Regularizer function applied to the `kernel` weights
+matrix.
+
+@param bias_regularizer
+Regularizer function applied to the bias vector.
+
+@param kernel_constraint
+Constraint function applied to the `kernel` weights
+matrix.
+
+@param bias_constraint
+Constraint function applied to the bias vector.
+
+@param ...
+Base layer keyword arguments, such as `name` and `dtype`.
+
+@param object
+Object to compose the layer with. A tensor, array, or sequential model.
 
 @export
 @family core layers

@@ -50,8 +50,11 @@ k_arctan2(
 @returns
 Tensor of angles in radians, in the range `[-pi, pi]`.
 
-@param x1 First input tensor.
-@param x2 Second input tensor.
+@param x1
+First input tensor.
+
+@param x2
+Second input tensor.
 
 @export
 @family ops

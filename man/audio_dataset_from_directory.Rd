@@ -34,14 +34,16 @@ alphanumeric order of the audio file paths
 (obtained via \code{os.walk(directory)} in Python).}
 
 \item{label_mode}{String describing the encoding of \code{labels}. Options are:
-- \code{"int"}: means that the labels are encoded as integers (e.g. for
+\itemize{
+\item \code{"int"}: means that the labels are encoded as integers (e.g. for
 \code{sparse_categorical_crossentropy} loss).
-- \code{"categorical"} means that the labels are encoded as a categorical
+\item \code{"categorical"} means that the labels are encoded as a categorical
 vector (e.g. for \code{categorical_crossentropy} loss)
-- \code{"binary"} means that the labels (there can be only 2)
+\item \code{"binary"} means that the labels (there can be only 2)
 are encoded as \code{float32} scalars with values 0
 or 1 (e.g. for \code{binary_crossentropy}).
-- \code{None} (no labels).}
+\item \code{None} (no labels).
+}}
 
 \item{class_names}{Only valid if "labels" is \code{"inferred"}.
 This is the explicit list of class names

@@ -3,7 +3,8 @@ Return the base 10 logarithm of the input tensor, element-wise.
 @returns
     Output tensor, element-wise base 10 logarithm of `x`.
 
-@param x Input tensor.
+@param x
+Input tensor.
 
 @export
 @family ops

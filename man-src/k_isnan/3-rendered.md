@@ -3,7 +3,8 @@ Test element-wise for NaN and return result as a boolean tensor.
 @returns
     Output boolean tensor.
 
-@param x Input tensor.
+@param x
+Input tensor.
 
 @export
 @family ops

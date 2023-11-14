@@ -3,7 +3,8 @@ Convert a tensor to a NumPy array.
 @returns
     A NumPy array.
 
-@param x A tensor.
+@param x
+A tensor.
 
 @export
 @family ops

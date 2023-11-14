@@ -24,10 +24,15 @@ loss = keras.losses.huber(y_true, y_pred)
 @returns
     Tensor with one scalar loss entry per sample.
 
-@param y_true tensor of true targets.
-@param y_pred tensor of predicted targets.
-@param delta A float, the point where the Huber loss function changes from a
-    quadratic to linear. Defaults to `1.0`.
+@param y_true
+tensor of true targets.
+
+@param y_pred
+tensor of predicted targets.
+
+@param delta
+A float, the point where the Huber loss function changes from a
+quadratic to linear. Defaults to `1.0`.
 
 @export
 @seealso

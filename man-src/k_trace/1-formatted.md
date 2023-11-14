@@ -16,13 +16,20 @@ If `x` is 2-D, the sum of the diagonal is returned. If `x` has
 larger dimensions, then a tensor of sums along diagonals is
 returned.
 
-@param x Input tensor.
-@param offset Offset of the diagonal from the main diagonal. Can be
-    both positive and negative. Defaults to `0`.
-@param axis1 Axis to be used as the first axis of the 2-D sub-arrays.
-    Defaults to `0`.(first axis).
-@param axis2 Axis to be used as the second axis of the 2-D sub-arrays.
-    Defaults to `1` (second axis).
+@param x
+Input tensor.
+
+@param offset
+Offset of the diagonal from the main diagonal. Can be
+both positive and negative. Defaults to `0`.
+
+@param axis1
+Axis to be used as the first axis of the 2-D sub-arrays.
+Defaults to `0`.(first axis).
+
+@param axis2
+Axis to be used as the second axis of the 2-D sub-arrays.
+Defaults to `1` (second axis).
 
 @export
 @family ops

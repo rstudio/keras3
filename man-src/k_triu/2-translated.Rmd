@@ -10,9 +10,12 @@ final two axes.
 @returns
     Upper triangle of `x`, of same shape and data type as `x`.
 
-@param x Input tensor.
-@param k Diagonal below which to zero elements. Defaults to `0`. the
-    main diagonal. `k < 0` is below it, and `k > 0` is above it.
+@param x
+Input tensor.
+
+@param k
+Diagonal below which to zero elements. Defaults to `0`. the
+main diagonal. `k < 0` is below it, and `k > 0` is above it.
 
 @export
 @family ops

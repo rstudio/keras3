@@ -3,8 +3,11 @@ Return a tensor of ones with the same shape and type of `x`.
 @returns
     A tensor of ones with the same shape and type as `x`.
 
-@param x Input tensor.
-@param dtype Overrides the data type of the result.
+@param x
+Input tensor.
+
+@param dtype
+Overrides the data type of the result.
 
 @export
 @family ops

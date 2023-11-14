@@ -7,7 +7,8 @@ and along the second axis for all other tensors.
 @returns
     The tensor formed by stacking the given tensors.
 
-@param xs Sequence of tensors.
+@param xs
+Sequence of tensors.
 
 @export
 @family ops

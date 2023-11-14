@@ -3,7 +3,8 @@ Softsign activation function.
 @description
 Softsign is defined as: `softsign(x) = x / (abs(x) + 1)`.
 
-@param x Input tensor.
+@param x
+Input tensor.
 
 @export
 @family activation functions

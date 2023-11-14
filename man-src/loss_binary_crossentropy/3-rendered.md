@@ -78,23 +78,38 @@ y_pred = [0.6, 0.3, 0.2, 0.8] # OR [[0.6, 0.3], [0.2, 0.8]]
 @returns
 Binary crossentropy loss value. shape = `[batch_size, d0, .. dN-1]`.
 
-@param from_logits Whether to interpret `y_pred` as a tensor of
-    [logit](https://en.wikipedia.org/wiki/Logit) values. By default, we
-    assume that `y_pred` is probabilities (i.e., values in `[0, 1]).`
-@param label_smoothing Float in range `[0, 1].` When 0, no smoothing occurs.
-    When > 0, we compute the loss between the predicted labels
-    and a smoothed version of the true labels, where the smoothing
-    squeezes the labels towards 0.5. Larger values of
-    `label_smoothing` correspond to heavier smoothing.
-@param axis The axis along which to compute crossentropy (the features axis).
-    Defaults to `-1`.
-@param reduction Type of reduction to apply to the loss. In almost all cases
-    this should be `"sum_over_batch_size"`.
-    Supported options are `"sum"`, `"sum_over_batch_size"` or `None`.
-@param name Optional name for the loss instance.
-@param y_true Ground truth values. shape = `[batch_size, d0, .. dN]`.
-@param y_pred The predicted values. shape = `[batch_size, d0, .. dN]`.
-@param ... Passed on to the Python callable
+@param from_logits
+Whether to interpret `y_pred` as a tensor of
+[logit](https://en.wikipedia.org/wiki/Logit) values. By default, we
+assume that `y_pred` is probabilities (i.e., values in `[0, 1]).`
+
+@param label_smoothing
+Float in range `[0, 1].` When 0, no smoothing occurs.
+When > 0, we compute the loss between the predicted labels
+and a smoothed version of the true labels, where the smoothing
+squeezes the labels towards 0.5. Larger values of
+`label_smoothing` correspond to heavier smoothing.
+
+@param axis
+The axis along which to compute crossentropy (the features axis).
+Defaults to `-1`.
+
+@param reduction
+Type of reduction to apply to the loss. In almost all cases
+this should be `"sum_over_batch_size"`.
+Supported options are `"sum"`, `"sum_over_batch_size"` or `None`.
+
+@param name
+Optional name for the loss instance.
+
+@param y_true
+Ground truth values. shape = `[batch_size, d0, .. dN]`.
+
+@param y_pred
+The predicted values. shape = `[batch_size, d0, .. dN]`.
+
+@param ...
+Passed on to the Python callable
 
 @export
 @family loss

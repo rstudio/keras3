@@ -18,7 +18,8 @@ k_arccos(x)
 Tensor of the angle of the ray intersecting the unit circle at the given
 x-coordinate in radians `[0, pi]`.
 
-@param x Input tensor.
+@param x
+Input tensor.
 
 @export
 @family ops

@@ -9,9 +9,12 @@ Multidimensional tensors are flattened before the dot product is taken.
 @returns
     Output tensor.
 
-@param x1 First input tensor. If complex, its complex conjugate is taken
-    before calculation of the dot product.
-@param x2 Second input tensor.
+@param x1
+First input tensor. If complex, its complex conjugate is taken
+before calculation of the dot product.
+
+@param x2
+Second input tensor.
 
 @export
 @family ops

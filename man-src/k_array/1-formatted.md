@@ -16,8 +16,11 @@ keras.ops.array([1, 2, 3], dtype="float32")
 @returns
 A tensor.
 
-@param x Input tensor.
-@param dtype The desired data-type for the tensor.
+@param x
+Input tensor.
+
+@param dtype
+The desired data-type for the tensor.
 
 @export
 @family ops

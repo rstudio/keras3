@@ -17,9 +17,12 @@ keras.ops.count_nonzero(x, axis=1)
 @returns
 int or tensor of ints.
 
-@param x Input tensor.
-@param axis Axis or tuple of axes along which to count the number of
-    non-zeros. Defaults to `None`.
+@param x
+Input tensor.
+
+@param axis
+Axis or tuple of axes along which to count the number of
+non-zeros. Defaults to `None`.
 
 @export
 @family ops

@@ -12,10 +12,15 @@ keras.ops.unstack(x, axis=0)
 @returns
 A list of tensors unpacked along the given axis.
 
-@param x The input tensor.
-@param num The length of the dimension axis. Automatically inferred
-    if `None`.
-@param axis The axis along which to unpack.
+@param x
+The input tensor.
+
+@param num
+The length of the dimension axis. Automatically inferred
+if `None`.
+
+@param axis
+The axis along which to unpack.
 
 @export
 @family ops

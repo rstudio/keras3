@@ -15,7 +15,8 @@ where `softplus` is defined as:
 # Reference
 - [Misra, 2019](https://arxiv.org/abs/1908.08681)
 
-@param x Input tensor.
+@param x
+Input tensor.
 
 @export
 @family activation functions

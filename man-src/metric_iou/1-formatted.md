@@ -57,26 +57,43 @@ model.compile(
     metrics=[keras.metrics.IoU(num_classes=2, target_class_ids=[0])])
 ```
 
-@param num_classes The possible number of labels the prediction task can have.
-@param target_class_ids A tuple or list of target class ids for which the
-    metric is returned. To compute IoU for a specific class, a list
-    (or tuple) of a single id value should be provided.
-@param name (Optional) string name of the metric instance.
-@param dtype (Optional) data type of the metric result.
-@param ignore_class Optional integer. The ID of a class to be ignored during
-    metric computation. This is useful, for example, in segmentation
-    problems featuring a "void" class (commonly -1 or 255) in
-    segmentation maps. By default (`ignore_class=None`), all classes are
-      considered.
-@param sparse_y_true Whether labels are encoded using integers or
-    dense floating point vectors. If `False`, the `argmax` function
-    is used to determine each sample's most likely associated label.
-@param sparse_y_pred Whether predictions are encoded using integers or
-    dense floating point vectors. If `False`, the `argmax` function
-    is used to determine each sample's most likely associated label.
-@param axis (Optional) -1 is the dimension containing the logits.
-    Defaults to `-1`.
-@param ... Passed on to the Python callable
+@param num_classes
+The possible number of labels the prediction task can have.
+
+@param target_class_ids
+A tuple or list of target class ids for which the
+metric is returned. To compute IoU for a specific class, a list
+(or tuple) of a single id value should be provided.
+
+@param name
+(Optional) string name of the metric instance.
+
+@param dtype
+(Optional) data type of the metric result.
+
+@param ignore_class
+Optional integer. The ID of a class to be ignored during
+metric computation. This is useful, for example, in segmentation
+problems featuring a "void" class (commonly -1 or 255) in
+segmentation maps. By default (`ignore_class=None`), all classes are
+  considered.
+
+@param sparse_y_true
+Whether labels are encoded using integers or
+dense floating point vectors. If `False`, the `argmax` function
+is used to determine each sample's most likely associated label.
+
+@param sparse_y_pred
+Whether predictions are encoded using integers or
+dense floating point vectors. If `False`, the `argmax` function
+is used to determine each sample's most likely associated label.
+
+@param axis
+(Optional) -1 is the dimension containing the logits.
+Defaults to `-1`.
+
+@param ...
+Passed on to the Python callable
 
 @export
 @family metric

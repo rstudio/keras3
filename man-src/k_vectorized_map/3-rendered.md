@@ -67,8 +67,11 @@ list(x, x, x) |> k_vectorized_map(\(rows) Reduce(`+`, rows))
 ##  [36. 39. 42. 45.]], shape=(4, 4), dtype=float64)
 ```
 
-@param elements see description
-@param f A function taking either a tensor, or list of tensors.
+@param elements
+see description
+
+@param f
+A function taking either a tensor, or list of tensors.
 
 @export
 @family ops

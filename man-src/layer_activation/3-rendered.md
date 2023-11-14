@@ -32,10 +32,15 @@ layer(x)
 ## tf.Tensor([0. 0. 0. 2.], shape=(4), dtype=float32)
 ```
 
-@param activation Activation function. It could be a callable, or the name of
-    an activation from the `keras::activation_*` namespace.
-@param ... Base layer keyword arguments, such as `name` and `dtype`.
-@param object Object to compose the layer with. A tensor, array, or sequential model.
+@param activation
+Activation function. It could be a callable, or the name of
+an activation from the `keras::activation_*` namespace.
+
+@param ...
+Base layer keyword arguments, such as `name` and `dtype`.
+
+@param object
+Object to compose the layer with. A tensor, array, or sequential model.
 
 @export
 @family activations layers

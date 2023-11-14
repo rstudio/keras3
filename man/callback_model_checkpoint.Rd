@@ -36,16 +36,18 @@ should not be reused by any other callbacks to avoid conflicts.}
 
 \item{monitor}{The metric name to monitor. Typically the metrics are set by
 the \code{model |> compile()} method. Note:
-* Prefix the name with \code{"val_"} to monitor validation metrics.
-* Use \code{"loss"} or \code{"val_loss"} to monitor the model's total loss.
-* If you specify metrics as strings, like \code{"accuracy"}, pass the
+\itemize{
+\item Prefix the name with \code{"val_"} to monitor validation metrics.
+\item Use \code{"loss"} or \code{"val_loss"} to monitor the model's total loss.
+\item If you specify metrics as strings, like \code{"accuracy"}, pass the
 same string (with or without the \code{"val_"} prefix).
-* If you pass \code{Metric} objects (created by one of \verb{metric_*()}), \code{monitor} should be set to
+\item If you pass \code{Metric} objects (created by one of \verb{metric_*()}), \code{monitor} should be set to
 \code{metric$name}.
-* If you're not sure about the metric names you can check the
+\item If you're not sure about the metric names you can check the
 contents of the \code{history$metrics} list returned by
 \code{history <- model |> fit()}
-* Multi-output models set additional prefixes on the metric names.}
+\item Multi-output models set additional prefixes on the metric names.
+}}
 
 \item{verbose}{Verbosity mode, 0 or 1. Mode 0 is silent, and mode 1
 displays messages when the callback takes an action.}

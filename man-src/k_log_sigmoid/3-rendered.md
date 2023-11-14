@@ -17,7 +17,8 @@ k_log_sigmoid(x)
 @returns
 A tensor with the same shape as `x`.
 
-@param x Input tensor.
+@param x
+Input tensor.
 
 @export
 @family ops

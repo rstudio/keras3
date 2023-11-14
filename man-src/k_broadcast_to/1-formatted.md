@@ -14,9 +14,12 @@ keras.ops.broadcast_to(x, (3, 3))
 @returns
 A tensor with the desired shape.
 
-@param x The tensor to broadcast.
-@param shape The shape of the desired tensor. A single integer `i` is
-    interpreted as `(i,)`.
+@param x
+The tensor to broadcast.
+
+@param shape
+The shape of the desired tensor. A single integer `i` is
+interpreted as `(i,)`.
 
 @export
 @family ops

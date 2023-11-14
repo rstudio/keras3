@@ -12,7 +12,8 @@ keras.ops.erf(x)
 @returns
 A tensor with the same dtype as `x`.
 
-@param x Input tensor.
+@param x
+Input tensor.
 
 @export
 @family ops
