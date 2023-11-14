@@ -47,12 +47,13 @@ Categorical focal crossentropy loss value.
 Computes the categorical focal crossentropy loss.
 }
 \section{Examples}{
-\if{html}{\out{<div class="sourceCode python">}}\preformatted{y_true = [[0, 1, 0], [0, 0, 1]]
-y_pred = [[0.05, 0.9, 0.05], [0.1, 0.85, 0.05]]
-loss = keras.losses.categorical_focal_crossentropy(y_true, y_pred)
-assert loss.shape == (2,)
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{y_true <- rbind(c(0, 1, 0), c(0, 0, 1))
+y_pred <- rbind(c(0.05, 0.9, 0.05), c(0.1, 0.85, 0.05))
+loss <- loss_categorical_focal_crossentropy(y_true, y_pred)
 loss
-# array([2.63401289e-04, 6.75912094e-01], dtype=float32)
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor([2.63401289e-04 6.75912094e-01], shape=(2), dtype=float64)
 }\if{html}{\out{</div>}}
 }
 

@@ -3,13 +3,16 @@ Computes the categorical focal crossentropy loss.
 @description
 
 # Examples
-```python
-y_true = [[0, 1, 0], [0, 0, 1]]
-y_pred = [[0.05, 0.9, 0.05], [0.1, 0.85, 0.05]]
-loss = keras.losses.categorical_focal_crossentropy(y_true, y_pred)
-assert loss.shape == (2,)
+
+```r
+y_true <- rbind(c(0, 1, 0), c(0, 0, 1))
+y_pred <- rbind(c(0.05, 0.9, 0.05), c(0.1, 0.85, 0.05))
+loss <- loss_categorical_focal_crossentropy(y_true, y_pred)
 loss
-# array([2.63401289e-04, 6.75912094e-01], dtype=float32)
+```
+
+```
+## tf.Tensor([2.63401289e-04 6.75912094e-01], shape=(2), dtype=float64)
 ```
 
 @returns
@@ -50,3 +53,4 @@ computed.
 @export
 @seealso
 + <https://www.tensorflow.org/api_docs/python/tf/keras/metrics/categorical_focal_crossentropy>
+
