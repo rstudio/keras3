@@ -3,8 +3,9 @@ Computes the hinge metric between `y_true` and `y_pred`.
 @description
 Formula:
 
-```python
-loss = mean(maximum(1 - y_true * y_pred, 0), axis=-1)
+
+```r
+loss <- mean(maximum(1 - y_true * y_pred, 0), axis=-1)
 ```
 
 `y_true` values are expected to be -1 or 1. If binary (0 or 1) labels are
@@ -13,23 +14,34 @@ provided we will convert them to -1 or 1.
 # Usage
 Standalone usage:
 
-```python
-m = keras.metrics.Hinge()
-m.update_state([[0, 1], [0, 0]], [[0.6, 0.4], [0.4, 0.6]])
-m.result()
-# 1.3
-m.reset_state()
-m.update_state([[0, 1], [0, 0]], [[0.6, 0.4], [0.4, 0.6]],
-               sample_weight=[1, 0])
-m.result()
-# 1.1
+
+```r
+m <- metric_hinge()
+m$update_state(rbind(c(0, 1), c(0, 0)), rbind(c(0.6, 0.4), c(0.4, 0.6)))
+m$result()
+```
+
+```
+## tf.Tensor(1.3, shape=(), dtype=float32)
+```
+
+```r
+m$reset_state()
+m$update_state(rbind(c(0, 1), c(0, 0)), rbind(c(0.6, 0.4), c(0.4, 0.6)),
+               sample_weight = c(1, 0))
+m$result()
+```
+
+```
+## tf.Tensor(1.1, shape=(), dtype=float32)
 ```
 
 # Examples
-```python
-y_true = np.random.choice([-1, 1], size=(2, 3))
-y_pred = np.random.random(size=(2, 3))
-loss = keras.losses.hinge(y_true, y_pred)
+
+```r
+y_true <- array(sample(c(-1, 1), 6, replace=TRUE), dim = c(2, 3))
+y_pred <- random_uniform(c(2, 3))
+loss <- loss_hinge(y_true, y_pred)
 ```
 
 @returns
@@ -58,3 +70,4 @@ Passed on to the Python callable
 @seealso
 + <https:/keras.io/api/metrics/hinge_metrics#hinge-class>
 + <https://www.tensorflow.org/api_docs/python/tf/keras/metrics/Hinge>
+

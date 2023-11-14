@@ -18,9 +18,9 @@ metric_fbeta_score(
 
 \item{average}{Type of averaging to be performed across per-class results
 in the multi-class case.
-Acceptable values are \code{None}, \code{"micro"}, \code{"macro"} and
-\code{"weighted"}. Defaults to \code{None}.
-If \code{None}, no averaging is performed and \code{result()} will return
+Acceptable values are \code{NULL}, \code{"micro"}, \code{"macro"} and
+\code{"weighted"}. Defaults to \code{NULL}.
+If \code{NULL}, no averaging is performed and \code{result()} will return
 the score for each class.
 If \code{"micro"}, compute metrics globally by counting the total
 true positives, false negatives and false positives.
@@ -39,7 +39,7 @@ equation above). Defaults to \code{1}.}
 
 \item{threshold}{Elements of \code{y_pred} greater than \code{threshold} are
 converted to be 1, and the rest 0. If \code{threshold} is
-\code{None}, the argmax of \code{y_pred} is converted to 1, and the rest to 0.}
+\code{NULL}, the argmax of \code{y_pred} is converted to 1, and the rest to 0.}
 
 \item{name}{Optional. String name of the metric instance.}
 
@@ -51,8 +51,8 @@ F-Beta Score: float.
 \description{
 Formula:
 
-\if{html}{\out{<div class="sourceCode python">}}\preformatted{b2 = beta ** 2
-f_beta_score = (1 + b2) * (precision * recall) / (precision * b2 + recall)
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{b2 <- beta^2
+f_beta_score <- (1 + b2) * (precision * recall) / (precision * b2 + recall)
 }\if{html}{\out{</div>}}
 
 This is the weighted harmonic mean of precision and recall.
@@ -60,17 +60,18 @@ Its output range is \verb{[0, 1]}. It works for both multi-class
 and multi-label classification.
 }
 \section{Examples}{
-\if{html}{\out{<div class="sourceCode python">}}\preformatted{metric = keras.metrics.FBetaScore(beta=2.0, threshold=0.5)
-y_true = np.array([[1, 1, 1],
-                   [1, 0, 0],
-                   [1, 1, 0]], np.int32)
-y_pred = np.array([[0.2, 0.6, 0.7],
-                   [0.2, 0.6, 0.6],
-                   [0.6, 0.8, 0.0]], np.float32)
-metric.update_state(y_true, y_pred)
-result = metric.result()
-result
-# [0.3846154 , 0.90909094, 0.8333334 ]
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{metric <- metric_fbeta_score(beta = 2.0, threshold = 0.5)
+y_true <- rbind(c(1, 1, 1),
+                c(1, 0, 0),
+                c(1, 1, 0))
+y_pred <- rbind(c(0.2, 0.6, 0.7),
+                c(0.2, 0.6, 0.6),
+                c(0.6, 0.8, 0.0))
+metric$update_state(y_true, y_pred)
+metric$result()
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor([0.3846154  0.90909094 0.8333332 ], shape=(3), dtype=float32)
 }\if{html}{\out{</div>}}
 }
 

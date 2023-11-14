@@ -3,27 +3,31 @@ Computes F-Beta score.
 @description
 Formula:
 
-```python
-b2 = beta ** 2
-f_beta_score = (1 + b2) * (precision * recall) / (precision * b2 + recall)
+
+```r
+b2 <- beta^2
+f_beta_score <- (1 + b2) * (precision * recall) / (precision * b2 + recall)
 ```
 This is the weighted harmonic mean of precision and recall.
 Its output range is `[0, 1]`. It works for both multi-class
 and multi-label classification.
 
 # Examples
-```python
-metric = keras.metrics.FBetaScore(beta=2.0, threshold=0.5)
-y_true = np.array([[1, 1, 1],
-                   [1, 0, 0],
-                   [1, 1, 0]], np.int32)
-y_pred = np.array([[0.2, 0.6, 0.7],
-                   [0.2, 0.6, 0.6],
-                   [0.6, 0.8, 0.0]], np.float32)
-metric.update_state(y_true, y_pred)
-result = metric.result()
-result
-# [0.3846154 , 0.90909094, 0.8333334 ]
+
+```r
+metric <- metric_fbeta_score(beta = 2.0, threshold = 0.5)
+y_true <- rbind(c(1, 1, 1),
+                c(1, 0, 0),
+                c(1, 1, 0))
+y_pred <- rbind(c(0.2, 0.6, 0.7),
+                c(0.2, 0.6, 0.6),
+                c(0.6, 0.8, 0.0))
+metric$update_state(y_true, y_pred)
+metric$result()
+```
+
+```
+## tf.Tensor([0.3846154  0.90909094 0.8333332 ], shape=(3), dtype=float32)
 ```
 
 @returns
@@ -32,9 +36,9 @@ F-Beta Score: float.
 @param average
 Type of averaging to be performed across per-class results
 in the multi-class case.
-Acceptable values are `None`, `"micro"`, `"macro"` and
-`"weighted"`. Defaults to `None`.
-If `None`, no averaging is performed and `result()` will return
+Acceptable values are `NULL`, `"micro"`, `"macro"` and
+`"weighted"`. Defaults to `NULL`.
+If `NULL`, no averaging is performed and `result()` will return
 the score for each class.
 If `"micro"`, compute metrics globally by counting the total
 true positives, false negatives and false positives.
@@ -55,7 +59,7 @@ equation above). Defaults to `1`.
 @param threshold
 Elements of `y_pred` greater than `threshold` are
 converted to be 1, and the rest 0. If `threshold` is
-`None`, the argmax of `y_pred` is converted to 1, and the rest to 0.
+`NULL`, the argmax of `y_pred` is converted to 1, and the rest to 0.
 
 @param name
 Optional. String name of the metric instance.
@@ -72,3 +76,4 @@ Passed on to the Python callable
 @family metrics
 @seealso
 + <https://www.tensorflow.org/api_docs/python/tf/keras/metrics/FBetaScore>
+

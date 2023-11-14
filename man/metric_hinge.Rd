@@ -25,7 +25,7 @@ Hinge loss values with shape = \verb{[batch_size, d0, .. dN-1]}.
 \description{
 Formula:
 
-\if{html}{\out{<div class="sourceCode python">}}\preformatted{loss = mean(maximum(1 - y_true * y_pred, 0), axis=-1)
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{loss <- mean(maximum(1 - y_true * y_pred, 0), axis=-1)
 }\if{html}{\out{</div>}}
 
 \code{y_true} values are expected to be -1 or 1. If binary (0 or 1) labels are
@@ -34,22 +34,28 @@ provided we will convert them to -1 or 1.
 \section{Usage}{
 Standalone usage:
 
-\if{html}{\out{<div class="sourceCode python">}}\preformatted{m = keras.metrics.Hinge()
-m.update_state([[0, 1], [0, 0]], [[0.6, 0.4], [0.4, 0.6]])
-m.result()
-# 1.3
-m.reset_state()
-m.update_state([[0, 1], [0, 0]], [[0.6, 0.4], [0.4, 0.6]],
-               sample_weight=[1, 0])
-m.result()
-# 1.1
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{m <- metric_hinge()
+m$update_state(rbind(c(0, 1), c(0, 0)), rbind(c(0.6, 0.4), c(0.4, 0.6)))
+m$result()
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor(1.3, shape=(), dtype=float32)
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{m$reset_state()
+m$update_state(rbind(c(0, 1), c(0, 0)), rbind(c(0.6, 0.4), c(0.4, 0.6)),
+               sample_weight = c(1, 0))
+m$result()
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor(1.1, shape=(), dtype=float32)
 }\if{html}{\out{</div>}}
 }
 
 \section{Examples}{
-\if{html}{\out{<div class="sourceCode python">}}\preformatted{y_true = np.random.choice([-1, 1], size=(2, 3))
-y_pred = np.random.random(size=(2, 3))
-loss = keras.losses.hinge(y_true, y_pred)
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{y_true <- array(sample(c(-1, 1), 6, replace=TRUE), dim = c(2, 3))
+y_pred <- random_uniform(c(2, 3))
+loss <- loss_hinge(y_true, y_pred)
 }\if{html}{\out{</div>}}
 }
 
