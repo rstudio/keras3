@@ -3,42 +3,44 @@ Computes Kullback-Leibler divergence metric between `y_true` and
 @description
 Formula:
 
-```python
-loss = y_true * log(y_true / y_pred)
-```
 
-`y_pred`.
-
-Formula:
-
-```python
-metric = y_true * log(y_true / y_pred)
+```r
+loss <- y_true * log(y_true / y_pred)
 ```
 
 # Usage
 Standalone usage:
 
-```python
-m = keras.metrics.KLDivergence()
-m.update_state([[0, 1], [0, 0]], [[0.6, 0.4], [0.4, 0.6]])
-m.result()
-# 0.45814306
+
+```r
+m <- metric_kl_divergence()
+m$update_state(rbind(c(0, 1), c(0, 0)), rbind(c(0.6, 0.4), c(0.4, 0.6)))
+m$result()
 ```
 
-```python
-m.reset_state()
-m.update_state([[0, 1], [0, 0]], [[0.6, 0.4], [0.4, 0.6]],
-               sample_weight=[1, 0])
-m.result()
-# 0.9162892
+```
+## tf.Tensor(0.45814303, shape=(), dtype=float32)
+```
+
+
+```r
+m$reset_state()
+m$update_state(rbind(c(0, 1), c(0, 0)), rbind(c(0.6, 0.4), c(0.4, 0.6)),
+               sample_weight = c(1, 0))
+m$result()
+```
+
+```
+## tf.Tensor(0.91628915, shape=(), dtype=float32)
 ```
 
 Usage with `compile()` API:
 
-```python
-model.compile(optimizer='sgd',
-              loss='mse',
-              metrics=[keras.metrics.KLDivergence()])
+
+```r
+model %>% compile(optimizer = 'sgd',
+                  loss = 'mse',
+                  metrics = list(metric_kl_divergence()))
 ```
 
 @param name
@@ -62,3 +64,4 @@ Passed on to the Python callable
 @seealso
 + <https:/keras.io/api/metrics/probabilistic_metrics#kldivergence-class>
 + <https://www.tensorflow.org/api_docs/python/tf/keras/metrics/KLDivergence>
+

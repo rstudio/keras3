@@ -20,37 +20,34 @@ metric_kl_divergence(y_true, y_pred, ..., name = "kl_divergence", dtype = NULL)
 \description{
 Formula:
 
-\if{html}{\out{<div class="sourceCode python">}}\preformatted{loss = y_true * log(y_true / y_pred)
-}\if{html}{\out{</div>}}
-
-\code{y_pred}.
-
-Formula:
-
-\if{html}{\out{<div class="sourceCode python">}}\preformatted{metric = y_true * log(y_true / y_pred)
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{loss <- y_true * log(y_true / y_pred)
 }\if{html}{\out{</div>}}
 }
 \section{Usage}{
 Standalone usage:
 
-\if{html}{\out{<div class="sourceCode python">}}\preformatted{m = keras.metrics.KLDivergence()
-m.update_state([[0, 1], [0, 0]], [[0.6, 0.4], [0.4, 0.6]])
-m.result()
-# 0.45814306
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{m <- metric_kl_divergence()
+m$update_state(rbind(c(0, 1), c(0, 0)), rbind(c(0.6, 0.4), c(0.4, 0.6)))
+m$result()
 }\if{html}{\out{</div>}}
 
-\if{html}{\out{<div class="sourceCode python">}}\preformatted{m.reset_state()
-m.update_state([[0, 1], [0, 0]], [[0.6, 0.4], [0.4, 0.6]],
-               sample_weight=[1, 0])
-m.result()
-# 0.9162892
+\if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor(0.45814303, shape=(), dtype=float32)
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{m$reset_state()
+m$update_state(rbind(c(0, 1), c(0, 0)), rbind(c(0.6, 0.4), c(0.4, 0.6)),
+               sample_weight = c(1, 0))
+m$result()
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor(0.91628915, shape=(), dtype=float32)
 }\if{html}{\out{</div>}}
 
 Usage with \code{compile()} API:
 
-\if{html}{\out{<div class="sourceCode python">}}\preformatted{model.compile(optimizer='sgd',
-              loss='mse',
-              metrics=[keras.metrics.KLDivergence()])
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{model \%>\% compile(optimizer = 'sgd',
+                  loss = 'mse',
+                  metrics = list(metric_kl_divergence()))
 }\if{html}{\out{</div>}}
 }
 
