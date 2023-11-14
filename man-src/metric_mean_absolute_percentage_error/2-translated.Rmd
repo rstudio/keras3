@@ -6,42 +6,35 @@ Computes mean absolute percentage error between `y_true` and `y_pred`.
 @description
 Formula:
 
-```python
-loss = 100 * mean(abs((y_true - y_pred) / y_true), axis=-1)
+```{r, eval = FALSE}
+loss <- 100 * mean(abs((y_true - y_pred) / y_true), axis=-1)
 ```
 
 Division by zero is prevented by dividing by `maximum(y_true, epsilon)`
-where `epsilon = keras.backend.epsilon()`
+where `epsilon = keras$backend$epsilon()`
 (default to `1e-7`).
-
-Formula:
-
-```python
-loss = 100 * mean(abs((y_true - y_pred) / y_true))
-```
 
 # Examples
 Standalone usage:
 
-```python
-m = keras.metrics.MeanAbsolutePercentageError()
-m.update_state([[0, 1], [0, 0]], [[1, 1], [0, 0]])
-m.result()
-# 250000000.0
-m.reset_state()
-m.update_state([[0, 1], [0, 0]], [[1, 1], [0, 0]],
-               sample_weight=[1, 0])
-m.result()
-# 500000000.0
+```{r}
+m <- metric_mean_absolute_percentage_error()
+m$update_state(rbind(c(0, 1), c(0, 0)), rbind(c(1, 1), c(0, 0)))
+m$result()
+
+m$reset_state()
+m$update_state(rbind(c(0, 1), c(0, 0)), rbind(c(1, 1), c(0, 0)),
+               sample_weight = c(1, 0))
+m$result()
 ```
 
 Usage with `compile()` API:
 
-```python
-model.compile(
-    optimizer='sgd',
-    loss='mse',
-    metrics=[keras.metrics.MeanAbsolutePercentageError()])
+```{r, eval = FALSE}
+model %>% compile(
+    optimizer = 'sgd',
+    loss = 'mse',
+    metrics = list(metric_mean_absolute_percentage_error()))
 ```
 
 @param name
@@ -65,3 +58,4 @@ Passed on to the Python callable
 @seealso
 + <https:/keras.io/api/metrics/regression_metrics#meanabsolutepercentageerror-class>
 + <https://www.tensorflow.org/api_docs/python/tf/keras/metrics/MeanAbsolutePercentageError>
+

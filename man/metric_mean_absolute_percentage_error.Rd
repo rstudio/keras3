@@ -26,38 +26,39 @@ metric_mean_absolute_percentage_error(
 \description{
 Formula:
 
-\if{html}{\out{<div class="sourceCode python">}}\preformatted{loss = 100 * mean(abs((y_true - y_pred) / y_true), axis=-1)
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{loss <- 100 * mean(abs((y_true - y_pred) / y_true), axis=-1)
 }\if{html}{\out{</div>}}
 
 Division by zero is prevented by dividing by \code{maximum(y_true, epsilon)}
-where \code{epsilon = keras.backend.epsilon()}
+where \code{epsilon = keras$backend$epsilon()}
 (default to \code{1e-7}).
-
-Formula:
-
-\if{html}{\out{<div class="sourceCode python">}}\preformatted{loss = 100 * mean(abs((y_true - y_pred) / y_true))
-}\if{html}{\out{</div>}}
 }
 \section{Examples}{
 Standalone usage:
 
-\if{html}{\out{<div class="sourceCode python">}}\preformatted{m = keras.metrics.MeanAbsolutePercentageError()
-m.update_state([[0, 1], [0, 0]], [[1, 1], [0, 0]])
-m.result()
-# 250000000.0
-m.reset_state()
-m.update_state([[0, 1], [0, 0]], [[1, 1], [0, 0]],
-               sample_weight=[1, 0])
-m.result()
-# 500000000.0
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{m <- metric_mean_absolute_percentage_error()
+m$update_state(rbind(c(0, 1), c(0, 0)), rbind(c(1, 1), c(0, 0)))
+m$result()
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor(250000000.0, shape=(), dtype=float32)
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{m$reset_state()
+m$update_state(rbind(c(0, 1), c(0, 0)), rbind(c(1, 1), c(0, 0)),
+               sample_weight = c(1, 0))
+m$result()
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor(500000000.0, shape=(), dtype=float32)
 }\if{html}{\out{</div>}}
 
 Usage with \code{compile()} API:
 
-\if{html}{\out{<div class="sourceCode python">}}\preformatted{model.compile(
-    optimizer='sgd',
-    loss='mse',
-    metrics=[keras.metrics.MeanAbsolutePercentageError()])
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{model \%>\% compile(
+    optimizer = 'sgd',
+    loss = 'mse',
+    metrics = list(metric_mean_absolute_percentage_error()))
 }\if{html}{\out{</div>}}
 }
 

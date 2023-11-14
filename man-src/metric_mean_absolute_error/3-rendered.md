@@ -1,38 +1,47 @@
 Computes the mean absolute error between the labels and predictions.
 
 @description
-```python
-loss = mean(abs(y_true - y_pred), axis=-1)
-```
 
 Formula:
 
-```python
-loss = mean(abs(y_true - y_pred))
+
+```r
+loss <- mean(abs(y_true - y_pred))
 ```
 
 # Examples
 Standalone usage:
 
-```python
-m = keras.metrics.MeanAbsoluteError()
-m.update_state([[0, 1], [0, 0]], [[1, 1], [0, 0]])
-m.result()
-# 0.25
-m.reset_state()
-m.update_state([[0, 1], [0, 0]], [[1, 1], [0, 0]],
-               sample_weight=[1, 0])
-m.result()
-# 0.5
+
+```r
+m <- metric_mean_absolute_error()
+m$update_state(rbind(c(0, 1), c(0, 0)), rbind(c(1, 1), c(0, 0)))
+m$result()
+```
+
+```
+## tf.Tensor(0.25, shape=(), dtype=float32)
+```
+
+```r
+m$reset_state()
+m$update_state(rbind(c(0, 1), c(0, 0)), rbind(c(1, 1), c(0, 0)),
+               sample_weight = c(1, 0))
+m$result()
+```
+
+```
+## tf.Tensor(0.5, shape=(), dtype=float32)
 ```
 
 Usage with `compile()` API:
 
-```python
-model.compile(
-    optimizer='sgd',
-    loss='mse',
-    metrics=[keras.metrics.MeanAbsoluteError()])
+
+```r
+model %>% compile(
+    optimizer = 'sgd',
+    loss = 'mse',
+    metrics = list(metric_mean_absolute_error()))
 ```
 
 @param name
@@ -56,3 +65,4 @@ Passed on to the Python callable
 @seealso
 + <https:/keras.io/api/metrics/regression_metrics#meanabsoluteerror-class>
 + <https://www.tensorflow.org/api_docs/python/tf/keras/metrics/MeanAbsoluteError>
+
