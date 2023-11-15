@@ -26,19 +26,16 @@ metric_mean_squared_error(
 \description{
 Formula:
 
-\if{html}{\out{<div class="sourceCode python">}}\preformatted{loss = mean(square(y_true - y_pred), axis=-1)
-}\if{html}{\out{</div>}}
-
-Formula:
-
-\if{html}{\out{<div class="sourceCode python">}}\preformatted{loss = mean(square(y_true - y_pred))
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{loss <- mean(square(y_true - y_pred))
 }\if{html}{\out{</div>}}
 }
 \section{Examples}{
-\if{html}{\out{<div class="sourceCode python">}}\preformatted{m = keras.metrics.MeanSquaredError()
-m.update_state([[0, 1], [0, 0]], [[1, 1], [0, 0]])
-m.result()
-# 0.25
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{m <- metric_mean_squared_error()
+m$update_state(rbind(c(0, 1), c(0, 0)), rbind(c(1, 1), c(0, 0)))
+m$result()
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor(0.25, shape=(), dtype=float32)
 }\if{html}{\out{</div>}}
 }
 

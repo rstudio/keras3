@@ -1,24 +1,24 @@
 Computes the mean squared error between `y_true` and `y_pred`.
 
 @description
-Formula:
-
-```python
-loss = mean(square(y_true - y_pred), axis=-1)
-```
 
 Formula:
 
-```python
-loss = mean(square(y_true - y_pred))
+
+```r
+loss <- mean(square(y_true - y_pred))
 ```
 
 # Examples
-```python
-m = keras.metrics.MeanSquaredError()
-m.update_state([[0, 1], [0, 0]], [[1, 1], [0, 0]])
-m.result()
-# 0.25
+
+```r
+m <- metric_mean_squared_error()
+m$update_state(rbind(c(0, 1), c(0, 0)), rbind(c(1, 1), c(0, 0)))
+m$result()
+```
+
+```
+## tf.Tensor(0.25, shape=(), dtype=float32)
 ```
 
 @param name
@@ -42,3 +42,4 @@ Passed on to the Python callable
 @seealso
 + <https:/keras.io/api/metrics/regression_metrics#meansquarederror-class>
 + <https://www.tensorflow.org/api_docs/python/tf/keras/metrics/MeanSquaredError>
+

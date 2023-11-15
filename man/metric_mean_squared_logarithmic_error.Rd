@@ -26,38 +26,39 @@ metric_mean_squared_logarithmic_error(
 \description{
 Formula:
 
-\if{html}{\out{<div class="sourceCode python">}}\preformatted{loss = mean(square(log(y_true + 1) - log(y_pred + 1)), axis=-1)
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{loss <- mean(square(log(y_true + 1) - log(y_pred + 1)), axis=-1)
 }\if{html}{\out{</div>}}
 
 Note that \code{y_pred} and \code{y_true} cannot be less or equal to 0. Negative
-values and 0 values will be replaced with \code{keras.backend.epsilon()}
+values and 0 values will be replaced with \code{keras$backend$epsilon()}
 (default to \code{1e-7}).
-
-Formula:
-
-\if{html}{\out{<div class="sourceCode python">}}\preformatted{loss = mean(square(log(y_true + 1) - log(y_pred + 1)))
-}\if{html}{\out{</div>}}
 }
 \section{Examples}{
 Standalone usage:
 
-\if{html}{\out{<div class="sourceCode python">}}\preformatted{m = keras.metrics.MeanSquaredLogarithmicError()
-m.update_state([[0, 1], [0, 0]], [[1, 1], [0, 0]])
-m.result()
-# 0.12011322
-m.reset_state()
-m.update_state([[0, 1], [0, 0]], [[1, 1], [0, 0]],
-               sample_weight=[1, 0])
-m.result()
-# 0.24022643
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{m <- metric_mean_squared_logarithmic_error()
+m$update_state(rbind(c(0, 1), c(0, 0)), rbind(c(1, 1), c(0, 0)))
+m$result()
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor(0.12011322, shape=(), dtype=float32)
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{m$reset_state()
+m$update_state(rbind(c(0, 1), c(0, 0)), rbind(c(1, 1), c(0, 0)),
+               sample_weight = c(1, 0))
+m$result()
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor(0.24022643, shape=(), dtype=float32)
 }\if{html}{\out{</div>}}
 
 Usage with \code{compile()} API:
 
-\if{html}{\out{<div class="sourceCode python">}}\preformatted{model.compile(
-    optimizer='sgd',
-    loss='mse',
-    metrics=[keras.metrics.MeanSquaredLogarithmicError()])
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{model \%>\% compile(
+  optimizer = 'sgd',
+  loss = 'mse',
+  metrics = list(metric_mean_squared_logarithmic_error()))
 }\if{html}{\out{</div>}}
 }
 
