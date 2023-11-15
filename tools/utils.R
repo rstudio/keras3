@@ -1219,6 +1219,16 @@ make_r_fn.op <- function(endpoint, py_obj, transformers) {
     transformers <- NULL
   }
 
+
+  if(endpoint == "keras.ops.shape") {
+    stopifnot(length(frmls) == 1)
+    return(rlang::zap_srcref(function(x) {
+      out <- keras$ops$shape(x)
+      class(out) <- "keras_shape"
+      out
+    }))
+  }
+
   if(endpoint == "keras.ops.array") {
     if(!identical(frmls, as.pairlist(alist(x = , dtype = NULL)))) { browser(); stop()}
     # k_array(c(1,2,3), "int32") fails because implicitly casting eager

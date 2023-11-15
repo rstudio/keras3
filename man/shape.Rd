@@ -2,20 +2,32 @@
 % Please edit documentation in R/utils.R
 \name{shape}
 \alias{shape}
-\title{shape utility}
+\title{Tensor shape utility}
 \usage{
 shape(...)
 }
 \arguments{
-\item{...}{objects used to create shapes}
+\item{...}{A shape specification. Numerics, \code{NULL} and tensors are valid.
+\code{NULL}, \code{NA}, and \code{-1L} can be used to specify an unspecified dim size.
+Tensors are dispatched to \code{k_shape()} to extract the tensor shape. All
+other objects are coerced via \code{as.integer()}.}
 }
 \value{
-a shape object, suitable for usage with most keras backends
+A list with a \code{"keras_shape"} class attribute. Each element of the
+list will be either
+\itemize{
+\item \code{NULL},
+\item an integer,
+\item A scalar integer tensor. (e.g., when supplied a TF tensor with
+a unspecified dimension in a function being traced).
+}
 }
 \description{
-shape utility
+This function can be used to create or get the shape of an object.
 }
 \examples{
+\dontshow{if (keras::is_keras_available()) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
+
 shape(1, 2, 3)
 
 shape(NA,   2, 3)
@@ -24,9 +36,17 @@ shape(-1,   2, 3)
 
 layer_input(c(1, 2, 3))
 layer_input(shape(1, 2, 3))
-tensor <- layer_input(shape(1, 2, 3))
+symbolic_tensor <- layer_input(shape(1, 2, 3))
 
-shape(tensor)
-shape(tensor, 4)
-shape(5, tensor, 4)
+shape(symbolic_tensor)
+shape(symbolic_tensor, 4)
+shape(5, symbolic_tensor, 4)
+
+eager_tensor <- k_ones(c(1,2,3))
+shape(eager_tensor)
+k_shape(eager_tensor)
+\dontshow{\}) # examplesIf}
+}
+\seealso{
+\code{\link[=k_shape]{k_shape()}}
 }

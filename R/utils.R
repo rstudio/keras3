@@ -773,15 +773,27 @@ random_array <- function(..., gen = stats::runif) {
 
 
 
-#' shape utility
+#' Tensor shape utility
+#'
+#' This function can be used to create or get the shape of an object.
 #'
 #'
-#' @param ... objects used to create shapes
+#' @param ... A shape specification. Numerics, `NULL` and tensors are valid.
+#'   `NULL`, `NA`, and `-1L` can be used to specify an unspecified dim size.
+#'   Tensors are dispatched to `k_shape()` to extract the tensor shape. All
+#'   other objects are coerced via `as.integer()`.
 #'
-#' @return a shape object, suitable for usage with most keras backends
+#' @return A list with a `"keras_shape"` class attribute. Each element of the
+#'   list will be either
+#'   - `NULL`,
+#'   - an integer,
+#'   - A scalar integer tensor. (e.g., when supplied a TF tensor with
+#'   a unspecified dimension in a function being traced).
+#'
 #' @export
+#' @seealso [k_shape()]
+#' @examplesIf keras::is_keras_available()
 #'
-#' @examples
 #' shape(1, 2, 3)
 #'
 #' shape(NA,   2, 3)
@@ -790,11 +802,15 @@ random_array <- function(..., gen = stats::runif) {
 #'
 #' layer_input(c(1, 2, 3))
 #' layer_input(shape(1, 2, 3))
-#' tensor <- layer_input(shape(1, 2, 3))
+#' symbolic_tensor <- layer_input(shape(1, 2, 3))
 #'
-#' shape(tensor)
-#' shape(tensor, 4)
-#' shape(5, tensor, 4)
+#' shape(symbolic_tensor)
+#' shape(symbolic_tensor, 4)
+#' shape(5, symbolic_tensor, 4)
+#'
+#' eager_tensor <- k_ones(c(1,2,3))
+#' shape(eager_tensor)
+#' k_shape(eager_tensor)
 shape <- function(...) {
 
   fix <- function(x) {
