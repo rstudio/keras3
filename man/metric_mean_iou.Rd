@@ -29,15 +29,15 @@ This value must be provided, since a confusion matrix of dimension =
 \item{ignore_class}{Optional integer. The ID of a class to be ignored during
 metric computation. This is useful, for example, in segmentation
 problems featuring a "void" class (commonly -1 or 255) in
-segmentation maps. By default (\code{ignore_class=None}), all classes are
+segmentation maps. By default (\code{ignore_class=NULL}), all classes are
 considered.}
 
 \item{sparse_y_true}{Whether labels are encoded using integers or
-dense floating point vectors. If \code{False}, the \code{argmax} function
+dense floating point vectors. If \code{FALSE}, the \code{argmax} function
 is used to determine each sample's most likely associated label.}
 
 \item{sparse_y_pred}{Whether predictions are encoded using integers or
-dense floating point vectors. If \code{False}, the \code{argmax} function
+dense floating point vectors. If \code{FALSE}, the \code{argmax} function
 is used to determine each sample's most likely associated label.}
 
 \item{axis}{(Optional) The dimension containing the logits. Defaults to \code{-1}.}
@@ -45,7 +45,7 @@ is used to determine each sample's most likely associated label.}
 \description{
 Formula:
 
-\if{html}{\out{<div class="sourceCode python">}}\preformatted{iou = true_positives / (true_positives + false_positives + false_negatives)
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{iou <- true_positives / (true_positives + false_positives + false_negatives)
 }\if{html}{\out{</div>}}
 
 Intersection-Over-Union is a common evaluation metric for semantic image
@@ -54,7 +54,7 @@ segmentation.
 To compute IoUs, the predictions are accumulated in a confusion matrix,
 weighted by \code{sample_weight} and the metric is then calculated from it.
 
-If \code{sample_weight} is \code{None}, weights default to 1.
+If \code{sample_weight} is \code{NULL}, weights default to 1.
 Use \code{sample_weight} of 0 to mask values.
 
 Note that this class first computes IoUs for all individual classes, then
@@ -63,30 +63,34 @@ returns the mean of these values.
 \section{Examples}{
 Standalone usage:
 
-\if{html}{\out{<div class="sourceCode python">}}\preformatted{# cm = [[1, 1],
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{# cm = [[1, 1],
 #        [1, 1]]
 # sum_row = [2, 2], sum_col = [2, 2], true_positives = [1, 1]
 # iou = true_positives / (sum_row + sum_col - true_positives))
 # result = (1 / (2 + 2 - 1) + 1 / (2 + 2 - 1)) / 2 = 0.33
-m = keras.metrics.MeanIoU(num_classes=2)
-m.update_state([0, 0, 1, 1], [0, 1, 0, 1])
-m.result()
-# 0.33333334
+m <- metric_mean_iou(num_classes = 2)
+m$update_state(c(0, 0, 1, 1), c(0, 1, 0, 1))
+m$result()
 }\if{html}{\out{</div>}}
 
-\if{html}{\out{<div class="sourceCode python">}}\preformatted{m.reset_state()
-m.update_state([0, 0, 1, 1], [0, 1, 0, 1],
-               sample_weight=[0.3, 0.3, 0.3, 0.1])
-m.result().numpy()
-# 0.23809525
+\if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor(0.33333334, shape=(), dtype=float32)
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{m$reset_state()
+m$update_state(c(0, 0, 1, 1), c(0, 1, 0, 1),
+               sample_weight=c(0.3, 0.3, 0.3, 0.1))
+m$result()
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor(0.2380952, shape=(), dtype=float32)
 }\if{html}{\out{</div>}}
 
 Usage with \code{compile()} API:
 
-\if{html}{\out{<div class="sourceCode python">}}\preformatted{model.compile(
-    optimizer='sgd',
-    loss='mse',
-    metrics=[keras.metrics.MeanIoU(num_classes=2)])
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{model \%>\% compile(
+  optimizer = 'sgd',
+  loss = 'mse',
+  metrics = list(metric_mean_iou(num_classes=2)))
 }\if{html}{\out{</div>}}
 }
 

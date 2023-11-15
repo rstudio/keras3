@@ -180,3 +180,6 @@ keras.utils.FeatureSpace:
 keras.layers.HashedCrossing:
   num_bins: as_integer
 
+keras.metrics.MeanIoU:
+  num_classes: as_integer
+
