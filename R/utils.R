@@ -799,52 +799,56 @@ shape <- function(...) {
 
   fix <- function(x) {
     if (inherits(x, 'python.builtin.object')) {
-      shp <- as_r_value(py_get_attr(x, "shape", TRUE))
-      if (!is.null(shp))
-        return(fix(shp))
+      if (inherits(x, "tensorflow.python.framework.tensor_shape.TensorShape"))
+        return(as.integer(x))
+
+      tryCatch({
+        return(lapply(keras$ops$shape(x),
+                      function(d) as_r_value(d) %||% NA))
+      }, error = identity)
     }
 
     if (!is.atomic(x) || length(x) > 1)
       lapply(x, fix)
     else if (is.null(x) ||
-             isTRUE(is.na(x)) ||
-             (is.numeric(x) && isTRUE(x == -1)))
-      NA_integer_
+             isTRUE(suppressWarnings(is.na(x))) ||
+             (is.numeric(x) && isTRUE(suppressWarnings(x == -1L))))
+      NA_integer_ # so we can safely unlist()
     else
       as.integer(x)
   }
 
   shp <- unlist(fix(list(...)))
-  shp <- lapply(shp, function(x) if(is.na(x)) NULL else x)
-  class(shp) <- "shape"
+  shp <- lapply(shp, function(x)
+    if (isTRUE(suppressWarnings(is.na(x)))) NULL else x)
+  class(shp) <- "keras_shape"
   shp
 }
 
 
 #' @export
-format.shape <- function(x, ...) {
-  x <- vapply(x, function(d) as.character(d %||% "NA"), "")
+format.keras_shape <- function(x, ...) {
+  x <- vapply(x, function(d) format(d %||% "NA"), "")
   x <- paste0(x, collapse = ", ")
-  paste0("(", x, ")")
+  paste0("shape(", x, ")")
 }
 
 #' @export
-print.shape <- function(x, ...) {
+print.keras_shape <- function(x, ...) {
   writeLines(format(x, ...))
   invisible(x)
 }
 
 #' @export
-`[.shape` <- function(x, ...) {
+`[.keras_shape` <- function(x, ...) {
   out <- unclass(x)[...]
   class(out) <- class(x)
   out
 }
 
 #' @export
-r_to_py.shape <- function(x, convert = FALSE) {
+r_to_py.keras_shape <- function(x, convert = FALSE) {
   tuple(x)
 }
-
 
 
