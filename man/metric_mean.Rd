@@ -14,33 +14,30 @@ metric_mean(..., name = "mean", dtype = NULL)
 \item{dtype}{(Optional) data type of the metric result.}
 }
 \description{
-For example, if values is \verb{[1, 3, 5, 7]} then the mean is 4.
-If \code{sample_weight} was specified as \verb{[1, 1, 0, 0]} then the mean would be 2.
+For example, if values is \code{c(1, 3, 5, 7)} then the mean is 4.
+If \code{sample_weight} was specified as \code{c(1, 1, 0, 0)} then the mean would be 2.
 
 This metric creates two variables, \code{total} and \code{count}.
 The mean value returned is simply \code{total} divided by \code{count}.
 }
 \section{Examples}{
-\if{html}{\out{<div class="sourceCode python">}}\preformatted{m = Mean()
-m.update_state([1, 3, 5, 7])
-m.result()
-# 4.0
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{m <- metric_mean()
+m$update_state(c(1, 3, 5, 7))
+m$result()
 }\if{html}{\out{</div>}}
 
-\if{html}{\out{<div class="sourceCode python">}}\preformatted{m.reset_state()
-m.update_state([1, 3, 5, 7], sample_weight=[1, 1, 0, 0])
-m.result()
-# 2.0
+\if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor(4.0, shape=(), dtype=float32)
 }\if{html}{\out{</div>}}
 
-\if{html}{\out{<div class="sourceCode">}}\preformatted{
-
-[1, 3, 5, 7]: R:1,\%203,\%205,\%207
-[1, 1, 0, 0]: R:1,\%201,\%200,\%200
-[1, 3, 5, 7]: R:1,\%203,\%205,\%207
-[1, 3, 5, 7]: R:1,\%203,\%205,\%207
-[1, 1, 0, 0]: R:1,\%201,\%200,\%200
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{m$reset_state()
+m$update_state(c(1, 3, 5, 7), sample_weight = c(1, 1, 0, 0))
+m$result()
 }\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor(2.0, shape=(), dtype=float32)
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode">}}\preformatted{}\if{html}{\out{</div>}}
 }
 
 \seealso{

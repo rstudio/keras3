@@ -20,9 +20,9 @@ metric_one_hot_iou(
 
 \item{num_classes}{The possible number of labels the prediction task can have.}
 
-\item{target_class_ids}{A tuple or list of target class ids for which the
+\item{target_class_ids}{A list or list of target class ids for which the
 metric is returned. To compute IoU for a specific class, a list
-(or tuple) of a single id value should be provided.}
+(or list) of a single id value should be provided.}
 
 \item{name}{(Optional) string name of the metric instance.}
 
@@ -31,11 +31,11 @@ metric is returned. To compute IoU for a specific class, a list
 \item{ignore_class}{Optional integer. The ID of a class to be ignored during
 metric computation. This is useful, for example, in segmentation
 problems featuring a "void" class (commonly -1 or 255) in
-segmentation maps. By default (\code{ignore_class=None}), all classes are
+segmentation maps. By default (\code{ignore_class=NULL}), all classes are
 considered.}
 
 \item{sparse_y_pred}{Whether predictions are encoded using integers or
-dense floating point vectors. If \code{False}, the \code{argmax} function
+dense floating point vectors. If \code{FALSE}, the \code{argmax} function
 is used to determine each sample's most likely associated label.}
 
 \item{axis}{(Optional) The dimension containing the logits. Defaults to \code{-1}.}
@@ -43,7 +43,7 @@ is used to determine each sample's most likely associated label.}
 \description{
 Formula:
 
-\if{html}{\out{<div class="sourceCode python">}}\preformatted{iou = true_positives / (true_positives + false_positives + false_negatives)
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{iou <- true_positives / (true_positives + false_positives + false_negatives)
 }\if{html}{\out{</div>}}
 
 Intersection-Over-Union is a common evaluation metric for semantic image
@@ -52,7 +52,7 @@ segmentation.
 To compute IoUs, the predictions are accumulated in a confusion matrix,
 weighted by \code{sample_weight} and the metric is then calculated from it.
 
-If \code{sample_weight} is \code{None}, weights default to 1.
+If \code{sample_weight} is \code{NULL}, weights default to 1.
 Use \code{sample_weight} of 0 to mask values.
 
 This class can be used to compute IoU for multi-class classification tasks
@@ -72,33 +72,28 @@ computed.
 \section{Examples}{
 Standalone usage:
 
-\if{html}{\out{<div class="sourceCode python">}}\preformatted{y_true = np.array([[0, 0, 1], [1, 0, 0], [0, 1, 0], [1, 0, 0]])
-y_pred = np.array([[0.2, 0.3, 0.5], [0.1, 0.2, 0.7], [0.5, 0.3, 0.1],
-                      [0.1, 0.4, 0.5]])
-sample_weight = [0.1, 0.2, 0.3, 0.4]
-m = keras.metrics.OneHotIoU(num_classes=3, target_class_ids=[0, 2])
-m.update_state(
-    y_true=y_true, y_pred=y_pred, sample_weight=sample_weight)
-# cm = [[0, 0, 0.2+0.4],
-#       [0.3, 0, 0],
-#       [0, 0, 0.1]]
-# sum_row = [0.3, 0, 0.7], sum_col = [0.6, 0.3, 0.1]
-# true_positives = [0, 0, 0.1]
-# single_iou = true_positives / (sum_row + sum_col - true_positives))
-# mean_iou = (0 / (0.3 + 0.6 - 0) + 0.1 / (0.7 + 0.1 - 0.1)) / 2
-m.result()
-# 0.071
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{y_true <- rbind(c(0, 0, 1), c(1, 0, 0), c(0, 1, 0), c(1, 0, 0))
+y_pred <- rbind(c(0.2, 0.3, 0.5), c(0.1, 0.2, 0.7), c(0.5, 0.3, 0.1),
+                c(0.1, 0.4, 0.5))
+sample_weight <- c(0.1, 0.2, 0.3, 0.4)
+m <- metric_one_hot_iou(num_classes = 3L, target_class_ids = c(0L, 2L))
+m$update_state(
+    y_true = y_true, y_pred = y_pred, sample_weight = sample_weight)
+m$result()
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor(0.07142855, shape=(), dtype=float32)
 }\if{html}{\out{</div>}}
 
 Usage with \code{compile()} API:
 
-\if{html}{\out{<div class="sourceCode python">}}\preformatted{model.compile(
-    optimizer='sgd',
-    loss='mse',
-    metrics=[keras.metrics.OneHotIoU(
-        num_classes=3,
-        target_class_id=[1]
-    )]
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{model \%>\% compile(
+  optimizer = 'sgd',
+  loss = 'mse',
+  metrics = list(metric_one_hot_iou(
+    num_classes = 3L,
+    target_class_id = list(1L)
+  ))
 )
 }\if{html}{\out{</div>}}
 }

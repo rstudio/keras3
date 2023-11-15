@@ -10,7 +10,7 @@ metric_mean_wrapper(..., fn, name = NULL, dtype = NULL)
 \item{...}{Keyword arguments to pass on to \code{fn}.}
 
 \item{fn}{The metric function to wrap, with signature
-\verb{fn(y_true, y_pred, **kwargs)}.}
+\code{fn(y_true, y_pred)}.}
 
 \item{name}{(Optional) string name of the metric instance.}
 
@@ -19,15 +19,21 @@ metric_mean_wrapper(..., fn, name = NULL, dtype = NULL)
 \description{
 You could use this class to quickly build a mean metric from a function. The
 function needs to have the signature \code{fn(y_true, y_pred)} and return a
-per-sample loss array. \code{MeanMetricWrapper.result()} will return
+per-sample loss array. \code{metric_mean_wrapper$result()} will return
 the average metric value across all samples seen so far.
 
 For example:
 
-\if{html}{\out{<div class="sourceCode python">}}\preformatted{def mse(y_true, y_pred):
-    return (y_true - y_pred) ** 2
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{mse <- function(y_true, y_pred) \{
+  (y_true - y_pred)^2
+\}
 
-mse_metric = MeanMetricWrapper(fn=mse)
+mse_metric <- metric_mean_wrapper(fn = mse)
+mse_metric$update_state(c(0, 1), c(1, 1))
+mse_metric$result()
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor(0.5, shape=(), dtype=float32)
 }\if{html}{\out{</div>}}
 }
 \seealso{

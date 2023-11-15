@@ -6,21 +6,24 @@ Wrap a stateless metric function with the Mean metric.
 @description
 You could use this class to quickly build a mean metric from a function. The
 function needs to have the signature `fn(y_true, y_pred)` and return a
-per-sample loss array. `MeanMetricWrapper.result()` will return
+per-sample loss array. `metric_mean_wrapper$result()` will return
 the average metric value across all samples seen so far.
 
 For example:
 
-```python
-def mse(y_true, y_pred):
-    return (y_true - y_pred) ** 2
+```{r}
+mse <- function(y_true, y_pred) {
+  (y_true - y_pred)^2
+}
 
-mse_metric = MeanMetricWrapper(fn=mse)
+mse_metric <- metric_mean_wrapper(fn = mse)
+mse_metric$update_state(c(0, 1), c(1, 1))
+mse_metric$result()
 ```
 
 @param fn
 The metric function to wrap, with signature
-`fn(y_true, y_pred, **kwargs)`.
+`fn(y_true, y_pred)`.
 
 @param name
 (Optional) string name of the metric instance.
@@ -35,3 +38,4 @@ Keyword arguments to pass on to `fn`.
 @family metrics
 @seealso
 + <https://www.tensorflow.org/api_docs/python/tf/keras/metrics/MeanMetricWrapper>
+
