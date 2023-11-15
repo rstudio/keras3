@@ -662,60 +662,13 @@ backtick_not_links <- function(d) {
 
 make_roxygen_tags <- function(endpoint, py_obj = py_eval(endpoint), type) {
 
-  if(FALSE) {
-
-    df$tags %>%
-      map("family") %>%
-      lapply(single_quote) %>%
-      map_chr(str_flatten, collapse = " ") %>%
-      tibble(fams = .) %>%
-      group_by(fams) %>%
-      tally() %>%
-      arrange(n) %>%
-      print(n = Inf)
-
-
-    df$tags %>%
-      map("family") %>%
-      unlist() %>%
-      unique() %>%
-      sort()
-  }
-#
-#   if(type == "layer")
-#     family <- get_layer_family(py_obj)
-#   else if (endpoint |> startsWith("keras.ops."))
-#     family <- "ops"
-#   else if (endpoint |> startsWith("keras.activation"))
-#     family <- "activation functions"
-#   else if (endpoint |> startsWith("keras.utils"))
-#     family <- "utils"
-#   else
-#     family <- type
-#
   out <- list()
   out$export <- ""
-#
-#   # family is.na for dense_features
-#   if (isTRUE(family != ""))
-#     out$family <- family
-#
-#   # {
-#
-#   append(out$family) <-
 
-  # browser()
   family <-
     py_obj$`__module__` %>%
     str_split_1("[._]") %>%
     setdiff(c("keras", "src")) %>%
-    # rev() %>%
-
-    # str_replace_all("_", " ") %>%
-    # str_split(fixed(" ")) %>%
-    # unique %>%
-    # unlist() %>%
-    # { map_chr(seq_along(.), \(i) .[1:i])) } %>%
     {
       map_chr(seq_along(.), \(i) {
         x <- .[1:i]
@@ -732,8 +685,6 @@ make_roxygen_tags <- function(endpoint, py_obj = py_eval(endpoint), type) {
     remap_families() %>%
     unique() %>%
     rev()
-  # } %error% browser()
-
 
   if(!is.null(.keeper_families))
     family %<>% intersect(.keeper_families)
@@ -776,7 +727,6 @@ remap_families <- function(x) map_chr(x, \(autogend_fam) {
          autogend_fam)
 })
 
-
 .keeper_families <- #NULL
 c("io utils", "attention layers", "constant initializers", "constraints",
   "dataset utils", "regularizers", "saving", "accuracy metrics",
@@ -796,17 +746,11 @@ get_tf_doc_link <- function(endpoint) {
   glue("https://www.tensorflow.org/api_docs/python/tf/{url_tail}")
 }
 
-# py_eval("isclass")
-
 import_from("tools/endpoints-to-keras-io-urls.R", upstream_keras_io_urls_map)
-
-# Assume the reticulate package has been used to interface with Python objects
-
 
 get_keras_doc_link <- function(endpoint) {
   upstream_keras_io_urls_map[[endpoint]]
 }
-
 
 get_layer_family <- function(layer) {
 
