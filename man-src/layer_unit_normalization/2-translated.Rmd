@@ -9,9 +9,9 @@ equal to 1 (across the axes specified in `axis`).
 
 # Examples
 ```{r}
-data <- k_reshape(1:6, new_shape =c(2, 3))
+data <- k_reshape(1:6, new_shape = c(2, 3))
 normalized_data <- layer_unit_normalization(data)
-sum(normalized_data[1,]^2)
+k_sum(normalized_data[1,]^2)
 ```
 
 @param axis
