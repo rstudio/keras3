@@ -11,9 +11,6 @@ if(!"source:tools/translate-tools.R" %in% search()) envir::attach_source("tools/
 #       with chunk options (include = FALSE)
 
 # Processing:
-#
-# TODO: any formals that are transformed w/ as_axis should have the default arg also
-#       transformed. .e.g, k_diagonal(axis1 = 1, axis2 = 2)
 
 # TODO: train_on_batch and related methods should be autogen'd and exported. Or maybe we curate those,
 #       and don't export them? (I.e., have the few people that need them access methods via model$train_on_batch())
