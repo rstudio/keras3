@@ -20,31 +20,43 @@ list will be either
 \item an integer,
 \item A scalar integer tensor. (e.g., when supplied a TF tensor with
 a unspecified dimension in a function being traced).
-}
+}Examples
+
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{shape(1, 2, 3)
+#> shape(1, 2, 3)
+
+shape(NA,   2, 3)
+#> shape(NA, 2, 3)
+shape(NULL, 2, 3)
+#> shape(NA, 2, 3)
+shape(-1,   2, 3)
+#> shape(NA, 2, 3)
+
+layer_input(c(1, 2, 3))
+#> <KerasTensor shape=(None, 1, 2, 3), dtype=float32, sparse=None, name=keras_tensor>
+layer_input(shape(1, 2, 3))
+#> <KerasTensor shape=(None, 1, 2, 3), dtype=float32, sparse=None, name=keras_tensor_1>
+symbolic_tensor <- layer_input(shape(1, 2, 3))
+
+shape(symbolic_tensor)
+#> shape(NA, 1, 2, 3)
+shape(symbolic_tensor, 4)
+#> shape(NA, 1, 2, 3, 4)
+shape(5, symbolic_tensor, 4)
+#> shape(5, NA, 1, 2, 3, 4)
+
+eager_tensor <- k_ones(c(1,2,3))
+shape(eager_tensor)
+#> shape(1, 2, 3)
+k_shape(eager_tensor)
+#> shape(1, 2, 3)
+}\if{html}{\out{</div>}}
 }
 \description{
 This function can be used to create or get the shape of an object.
 }
 \examples{
 \dontshow{if (keras::is_keras_available()) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
-
-shape(1, 2, 3)
-
-shape(NA,   2, 3)
-shape(NULL, 2, 3)
-shape(-1,   2, 3)
-
-layer_input(c(1, 2, 3))
-layer_input(shape(1, 2, 3))
-symbolic_tensor <- layer_input(shape(1, 2, 3))
-
-shape(symbolic_tensor)
-shape(symbolic_tensor, 4)
-shape(5, symbolic_tensor, 4)
-
-eager_tensor <- k_ones(c(1,2,3))
-shape(eager_tensor)
-k_shape(eager_tensor)
 \dontshow{\}) # examplesIf}
 }
 \seealso{
