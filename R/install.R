@@ -68,8 +68,8 @@ install_keras <- function(...,
   system2("python", "-m pip install -r requirements-common.txt")
   system2("python", "-m pip install ipython") # for interactive debugging
   system2("python", "-m pip install openai tiktoken") # for roxygen generation
-  system2("python", "-m pip install git+https://github.com/keras-team/keras-cv.git")
-  system2("python", "-m pip install git+https://github.com/keras-team/keras-nlp.git")
+  # system2("python", "-m pip install git+https://github.com/keras-team/keras-cv.git")
+  # system2("python", "-m pip install git+https://github.com/keras-team/keras-nlp.git")
   system2("python", "-m pip install torch torchvision") # needed for pip_build.py?? (but why?)
   system2("python", "-m pip install --ignore-installed tf-nightly jax[cpu]") # unpin tf-nightly for Python 3.12
   # system2("python", "-m pip uninstall -y keras keras-core keras_core keras-nightly")
