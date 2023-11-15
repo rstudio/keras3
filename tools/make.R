@@ -350,23 +350,93 @@ endpoints %<>% setdiff(c %(% {
 })
 
 
+update_families_allow_list <- FALSE
+if (update_families_allow_list) {
+  .keeper_families <<- NULL
+}
 
 exports <- endpoints |>
   purrr::set_names() |>
   lapply(mk_export)
 
 
-
 df <- exports |>
   lapply(\(e) {
-    e |>
-      unclass() |>
-      map_if(\(attr) ! is_scalar_atomic(attr), list) |>
+    unclass(e) |> map_if(\(attr) !is_scalar_atomic(attr), list) |>
       as_tibble_row()
   }) |>
   list_rbind() |>
   select(r_name, endpoint, type, module, everything())
 
+
+# curate @family tags
+if(!update_families_allow_list) local({
+  # make sure our family allow list is up-to-date
+  # (i.e., new families weren't augogenerated)
+  # maybe update allow list
+
+  df_families <- df %>%
+    rowwise() %>% mutate(family = list(tags$family)) %>% ungroup() %>%
+    select(endpoint, r_name, family) %>%
+    tidyr::unchop(family, keep_empty = TRUE)
+
+  if(anyNA(df_families$family)) {
+    warning("R exports without a @family:")
+    df_families %>% filter(is.na(family)) %>% print(n = Inf)
+  }
+
+  families <- df_families$family %>% unlist() %>% unique() %>% .[!is.na(.)]
+
+  if(!setequal(families, .keeper_families)) {
+    cat("added: ", str_flatten_comma(single_quote(setdiff(families, .keeper_families))))
+    cat("removed: ", str_flatten_comma(single_quote(setdiff(.keeper_families, families))))
+    cat(".keeper_families <- "); dput(families)
+    stop(glue::trim(
+      ".keeper_families definition in tools/utils.R needs to be updated.
+       Either update per the above, or rerun tools/make.R with
+       `update_families_allow_list <- TRUE` and inspect interactively."))
+  }
+}) else {
+  # update_families_allow_list == TRUE
+
+  df_families <- df %>%
+    rowwise() %>% mutate(family = list(tags$family)) %>% ungroup() %>%
+    select(endpoint, r_name, family) %>%
+    tidyr::unchop(family, keep_empty = TRUE)
+
+  ## Inspect
+  symbol_families <- df_families %>%
+    group_by(endpoint, r_name) %>%
+    summarise(
+      n = n(),
+      families_pretty = family |> single_quote() |> rev() |> str_flatten_comma(),
+      families = list(family)
+    ) %>%
+    arrange(families_pretty) |>
+    print(n = Inf)
+
+  family_symbols <- df_families %>%
+    group_by(family) %>%
+    summarise(
+      n = n(),
+      r_names_pretty = r_name |> single_quote() |> rev() |> str_flatten_comma(),
+      r_names = list(r_name)
+    ) %>%
+    arrange(n, family) |>
+    print(n = Inf)
+
+
+  min_size_for_family <- 4
+  exception_families <- "io utils"
+
+  keeper_famalies <- family_symbols %>%
+    filter(n >= min_size_for_family | family %in% exception_families) %>%
+    pull(family)
+
+  dput_cb(keeper_famalies)
+  stop("Update tools/utils.R $ keeper_families")
+
+}
 
 df <- df |>
   mutate(
@@ -390,51 +460,6 @@ if(!all(dir_exists(df$man_src_dir))) {
     })
 }
 
-
-# curate @family tags
-if(FALSE)
-local({
-df_families <- df %>%
-  rowwise() %>%
-  mutate(family = list(tags$family)) %>%
-  select(endpoint, r_name, family) %>%
-  tidyr::unchop(family)
-
-keeper_families <- df_families %>%
-  group_by(family) %>%
-  tally() %>%
-  filter(n > 3) %>% # no point in families w/ less than 3 (e.g., la yer_max_pooling_[123]d)
-  pull(family)
-
-if(!identical(sort(keeper_families),
-              sort(.keeper_families))) {
-  cat("added: ", str_flatten_comma(single_quote(setdiff(keeper_families, .keeper_families))))
-  cat("removed: ", str_flatten_comma(single_quote(setdiff(.keeper_families, keeper_families))))
-  cat(".keeper_families <- "); dput(keeper_families)
-  stop(".keeper_families definition in tools/utils.R needs to be updated.")
-}
-
-## man_src_pull_upstream_updates() goes through mk_export() directly
-# df <- df %>%
-#   split(seq_len(nrow(.))) %>%
-#   map(\(.df) {
-#     # if(.df$r_name == "layer_global_average_pooling_1d") browser()
-#     tags <- tags_in <- .df$tags[[1]]
-#     family <- family_in <- tags$family
-#     family %<>% intersect(keeper_families)
-#     if(identical(family, family_in)) return(.df)
-#     tags$family <- family
-#     .df$tags <- list(tags)
-#
-#     # roxygen <- dump_roxygen(doc, params, tags)
-#     # dump <- dump_keras_export(roxygen, r_name, r_fn)
-#     .df$dump <- dump_keras_export(.df$doc, .df$params[[1]], .df$tags)
-#     .df$roxygen <- dump_roxygen(.df$doc, .df$params[[1]], .df$tags)
-#     .df
-#   }) %>%
-#   list_rbind()
-  # mutate(tags = )
-})
 
 
 df <- df |>

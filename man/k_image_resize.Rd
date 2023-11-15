@@ -76,8 +76,19 @@ Other image ops:
 \code{\link{k_image_map_coordinates}()},
 \code{\link{k_image_pad_images}()}
 
+Other image utils: 
+\code{\link{image_array_save}()},
+\code{\link{image_dataset_from_directory}()},
+\code{\link{image_from_array}()},
+\code{\link{image_load}()},
+\code{\link{image_smart_resize}()},
+\code{\link{image_to_array}()},
+\code{\link{k_image_affine_transform}()},
+\code{\link{k_image_extract_patches}()},
+\code{\link{k_image_map_coordinates}()},
+\code{\link{k_image_pad_images}()}
+
 Other ops: 
-\code{\link{get_source_inputs}()},
 \code{\link{k_abs}()},
 \code{\link{k_add}()},
 \code{\link{k_all}()},
@@ -278,4 +289,5 @@ Other ops:
 \code{\link{k_zeros}()}
 }
 \concept{image ops}
+\concept{image utils}
 \concept{ops}

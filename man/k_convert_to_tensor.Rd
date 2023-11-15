@@ -55,7 +55,6 @@ Other core ops:
 \code{\link{k_while_loop}()}
 
 Other ops: 
-\code{\link{get_source_inputs}()},
 \code{\link{k_abs}()},
 \code{\link{k_add}()},
 \code{\link{k_all}()},

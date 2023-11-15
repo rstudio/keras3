@@ -196,7 +196,6 @@ Other numpy ops:
 \code{\link{k_zeros}()}
 
 Other ops: 
-\code{\link{get_source_inputs}()},
 \code{\link{k_abs}()},
 \code{\link{k_add}()},
 \code{\link{k_all}()},

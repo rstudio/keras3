@@ -2,6 +2,8 @@
 
 # ---- setup attach  ----
 
+options(dplyr.summarise.inform = FALSE)
+
 library_stable <-
   function(package,
            lifecycle_exclude = c(
@@ -123,6 +125,34 @@ attach_eval({
       })
     }
     chr
+  }
+
+  dput_cb <- function (x, echo = TRUE)  {
+    obj_nm <- deparse(substitute(x))
+    out <- clipr::write_clip(capture.output(dput(x)))
+    if (echo)
+      cat("Object", sQuote(obj_nm), "is now in clipboard:\n",
+        glue::glue_collapse(out, sep = "\n", width = 160), "\n")
+    invisible(x)
+  }
+
+  cat_cb <- function(x, echo = TRUE, trunc_echo = TRUE) {
+    obj_nm <- deparse(substitute(x))
+    catted <- capture.output(cat(x))
+    tryCatch({
+      out <- clipr::write_clip(catted)
+      if (echo) {
+        width <- if (trunc_echo) 160 else Inf
+        cat("output of 'cat(", obj_nm, ")' is now in clipboard:\n",
+            glue::glue_collapse(out, sep = "\n", width = width), "\n")
+      }
+    }, error = function(e) {
+      warning("Could not write to clipboard")
+      print(e)
+      cat("This is what would have been written to clipboard:\n\n",
+          catted, "\n", sep = "")
+    })
+    invisible(x)
   }
 
   # ignore empty trailing arg
@@ -675,7 +705,7 @@ make_roxygen_tags <- function(endpoint, py_obj = py_eval(endpoint), type) {
 #   append(out$family) <-
 
   # browser()
-  out$family <-
+  family <-
     py_obj$`__module__` %>%
     str_split_1("[._]") %>%
     setdiff(c("keras", "src")) %>%
@@ -704,12 +734,31 @@ make_roxygen_tags <- function(endpoint, py_obj = py_eval(endpoint), type) {
     rev()
   # } %error% browser()
 
-   #
-   out$family %<>% intersect(.keeper_families)
+
+  if(!is.null(.keeper_families))
+    family %<>% intersect(.keeper_families)
+
+  if(endpoint |> startsWith("keras.utils."))
+    family %<>% c("utils") %>% unique()
+
   if(endpoint |> startsWith('keras.optimizers.schedules.')) {
-    out$family %<>% setdiff("optimizers")
+    family %<>% setdiff("optimizers")
   }
 
+  if("image ops" %in% family)
+    append(family, after = 1) <- "image utils"
+
+  if(endpoint == "keras.utils.get_source_inputs") {
+    family %<>% setdiff("ops")
+  }
+
+  if(endpoint |> endsWith("_dataset_from_directory"))
+    family %<>% c("dataset utils")
+
+  # if(endpoint == "keras.utils.clear_session")
+  #   family %<>% c("utils")
+
+  out$family <- family
   links <- c(get_keras_doc_link(endpoint),
              get_tf_doc_link(endpoint))
   out$seealso <- str_flatten_lines("", glue("+ <{links}>"))
@@ -727,56 +776,19 @@ remap_families <- function(x) map_chr(x, \(autogend_fam) {
          autogend_fam)
 })
 
-.keeper_families <-
-  c(
-    "accuracy metrics",
-    "activation layers",
-    "activations",
-    "attention layers",
-    "backend",
-    "callbacks",
-    "config backend",
-    "confusion metrics",
-    "constant initializers",
-    "constraints",
-    "convolutional layers",
-    "core layers",
-    "core ops",
-    "global pooling layers",
-    "image ops",
-    "image utils",
-    "initializers",
-    "iou metrics",
-    "layers",
-    "losses",
-    "math ops",
-    "merging layers",
-    "metrics",
-    "nn ops",
-    "normalization layers",
-    "numpy ops",
-    "ops",
-    "optimizers",
-    "pooling layers",
-    "preprocessing layers",
-    "probabilistic metrics",
-    "random",
-    "random initializers",
-    "random preprocessing layers",
 
-    "schedules optimizers",
-    "learning schedules optimizers",
-    "rate learning schedules optimizers",
-    "schedule rate learning schedules optimizers",
-
-    "regression metrics",
-    "regularization layers",
-    "regularizers",
-    "reshaping layers",
-    "rnn layers",
-    "saving",
-    "utils"
-  ) |> remap_families() |> unique()
+.keeper_families <- #NULL
+c("io utils", "attention layers", "constant initializers", "constraints",
+  "dataset utils", "regularizers", "saving", "accuracy metrics",
+  "image ops", "iou metrics", "normalization layers", "probabilistic metrics",
+  "activation layers", "global pooling layers", "optimizer learing rate schedules",
+  "config backend", "core layers", "random preprocessing layers",
+  "regularization layers", "backend", "merging layers", "random",
+  "regression metrics", "convolutional layers", "callbacks", "confusion metrics",
+  "image utils", "random initializers", "optimizers", "pooling layers",
+  "reshaping layers", "rnn layers", "core ops", "initializers",
+  "math ops", "activations", "preprocessing layers", "losses",
+  "nn ops", "utils", "metrics", "layers", "numpy ops", "ops") |> remap_families() |> unique()
 
 
 get_tf_doc_link <- function(endpoint) {
@@ -1159,7 +1171,6 @@ make_r_fn <- function(endpoint,
          layer = make_r_fn.layer(endpoint, py_obj, transformers),
          metric = , loss = make_r_fn.loss(endpoint, py_obj, transformers),
          make_r_fn.default(endpoint, py_obj, transformers))
-
 
 }
 

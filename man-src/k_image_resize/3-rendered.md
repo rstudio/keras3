@@ -65,6 +65,7 @@ while `"channels_first"` corresponds to inputs with shape
 
 @export
 @family image ops
+@family image utils
 @family ops
 @seealso
 + <https:/keras.io/keras_core/api/ops/image#resize-function>

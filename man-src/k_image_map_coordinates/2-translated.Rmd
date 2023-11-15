@@ -47,6 +47,7 @@ Value used for points outside the boundaries of the input if
 
 @export
 @family image ops
+@family image utils
 @family ops
 @seealso
 + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/image/map_coordinates>

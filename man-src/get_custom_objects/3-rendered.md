@@ -17,5 +17,6 @@ get_custom_objects()$update(list(MyObject = MyObject))
 
 @export
 @family saving
+@family utils
 @seealso
 + <https://www.tensorflow.org/api_docs/python/tf/keras/utils/get_custom_objects>
