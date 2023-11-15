@@ -37,7 +37,7 @@ y <- layer_upsampling_3d(x, size = c(2, 2, 2))
 shape(y)
 }\if{html}{\out{</div>}}
 
-\if{html}{\out{<div class="sourceCode">}}\preformatted{## (2, 2, 4, 2, 3)
+\if{html}{\out{<div class="sourceCode">}}\preformatted{## shape(2, 2, 4, 2, 3)
 }\if{html}{\out{</div>}}
 }
 

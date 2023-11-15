@@ -34,7 +34,7 @@ y <- x |> layer_flatten()
 shape(y)
 }\if{html}{\out{</div>}}
 
-\if{html}{\out{<div class="sourceCode">}}\preformatted{## (NA, 640)
+\if{html}{\out{<div class="sourceCode">}}\preformatted{## shape(NA, 640)
 }\if{html}{\out{</div>}}
 }
 

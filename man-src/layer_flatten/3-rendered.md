@@ -15,7 +15,7 @@ shape(y)
 ```
 
 ```
-## (NA, 640)
+## shape(NA, 640)
 ```
 
 @param data_format

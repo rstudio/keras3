@@ -73,7 +73,7 @@ y <- k_image_affine_transform(x, transform)
 shape(y)
 }\if{html}{\out{</div>}}
 
-\if{html}{\out{<div class="sourceCode">}}\preformatted{## (2, 64, 80, 3)
+\if{html}{\out{<div class="sourceCode">}}\preformatted{## shape(2, 64, 80, 3)
 }\if{html}{\out{</div>}}
 
 \if{html}{\out{<div class="sourceCode r">}}\preformatted{# (2, 64, 80, 3)
@@ -85,7 +85,7 @@ y <- k_image_affine_transform(x, transform)
 shape(y)
 }\if{html}{\out{</div>}}
 
-\if{html}{\out{<div class="sourceCode">}}\preformatted{## (64, 80, 3)
+\if{html}{\out{<div class="sourceCode">}}\preformatted{## shape(64, 80, 3)
 }\if{html}{\out{</div>}}
 
 \if{html}{\out{<div class="sourceCode r">}}\preformatted{# (64, 80, 3)
@@ -100,7 +100,7 @@ y <- k_image_affine_transform(x, transform, data_format = "channels_first")
 shape(y)
 }\if{html}{\out{</div>}}
 
-\if{html}{\out{<div class="sourceCode">}}\preformatted{## (2, 3, 64, 80)
+\if{html}{\out{<div class="sourceCode">}}\preformatted{## shape(2, 3, 64, 80)
 }\if{html}{\out{</div>}}
 
 \if{html}{\out{<div class="sourceCode r">}}\preformatted{# (2, 3, 64, 80)

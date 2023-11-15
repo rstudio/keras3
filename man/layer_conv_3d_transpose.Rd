@@ -132,7 +132,7 @@ y <- x |> layer_conv_3d_transpose(32, 2, 2, activation = 'relu')
 shape(y)
 }\if{html}{\out{</div>}}
 
-\if{html}{\out{<div class="sourceCode">}}\preformatted{## (4, 20, 16, 24, 32)
+\if{html}{\out{<div class="sourceCode">}}\preformatted{## shape(4, 20, 16, 24, 32)
 }\if{html}{\out{</div>}}
 }
 

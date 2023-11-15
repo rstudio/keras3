@@ -47,7 +47,7 @@ padded_images <- k_image_pad_images(
 shape(padded_images)
 }\if{html}{\out{</div>}}
 
-\if{html}{\out{<div class="sourceCode">}}\preformatted{## (20, 30, 3)
+\if{html}{\out{<div class="sourceCode">}}\preformatted{## shape(20, 30, 3)
 }\if{html}{\out{</div>}}
 
 \if{html}{\out{<div class="sourceCode r">}}\preformatted{batch_images <- random_uniform(c(2, 15, 25, 3))
@@ -57,7 +57,7 @@ padded_batch <- k_image_pad_images(batch_images, 2, 3,
 shape(padded_batch)
 }\if{html}{\out{</div>}}
 
-\if{html}{\out{<div class="sourceCode">}}\preformatted{## (2, 20, 30, 3)
+\if{html}{\out{<div class="sourceCode">}}\preformatted{## shape(2, 20, 30, 3)
 }\if{html}{\out{</div>}}
 }
 

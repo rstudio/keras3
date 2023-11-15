@@ -13,7 +13,7 @@ shape(padded_images)
 ```
 
 ```
-## (20, 30, 3)
+## shape(20, 30, 3)
 ```
 
 
@@ -26,7 +26,7 @@ shape(padded_batch)
 ```
 
 ```
-## (2, 20, 30, 3)
+## shape(2, 20, 30, 3)
 ```
 
 @returns

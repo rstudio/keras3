@@ -11,7 +11,7 @@ shape(y)
 ```
 
 ```
-## (NA, 3, 32)
+## shape(NA, 3, 32)
 ```
 
 # Input Shape

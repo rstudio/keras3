@@ -34,7 +34,7 @@ y <- layer_permute(x, c(2, 1))
 shape(y)
 }\if{html}{\out{</div>}}
 
-\if{html}{\out{<div class="sourceCode">}}\preformatted{## (NA, 64, 10)
+\if{html}{\out{<div class="sourceCode">}}\preformatted{## shape(NA, 64, 10)
 }\if{html}{\out{</div>}}
 }
 

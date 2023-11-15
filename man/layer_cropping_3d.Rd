@@ -47,7 +47,7 @@ y <- x |> layer_cropping_3d(cropping = c(2, 4, 2))
 shape(y)
 }\if{html}{\out{</div>}}
 
-\if{html}{\out{<div class="sourceCode">}}\preformatted{## (2, 24, 20, 6, 3)
+\if{html}{\out{<div class="sourceCode">}}\preformatted{## shape(2, 24, 20, 6, 3)
 }\if{html}{\out{</div>}}
 }
 

@@ -59,7 +59,7 @@ y <- x |> layer_global_max_pooling_1d()
 shape(y)
 }\if{html}{\out{</div>}}
 
-\if{html}{\out{<div class="sourceCode">}}\preformatted{## (2, 4)
+\if{html}{\out{<div class="sourceCode">}}\preformatted{## shape(2, 4)
 }\if{html}{\out{</div>}}
 }
 

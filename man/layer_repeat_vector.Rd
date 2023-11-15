@@ -22,7 +22,7 @@ y <- layer_repeat_vector(x, n = 3)
 shape(y)
 }\if{html}{\out{</div>}}
 
-\if{html}{\out{<div class="sourceCode">}}\preformatted{## (NA, 3, 32)
+\if{html}{\out{<div class="sourceCode">}}\preformatted{## shape(NA, 3, 32)
 }\if{html}{\out{</div>}}
 }
 

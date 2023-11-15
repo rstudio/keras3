@@ -28,7 +28,7 @@ shape(y)
 ```
 
 ```
-## (2, 3)
+## shape(2, 3)
 ```
 
 @param data_format

@@ -39,7 +39,7 @@ shape(outputs)
 ```
 
 ```
-## (32, 4)
+## shape(32, 4)
 ```
 
 ```r
@@ -50,7 +50,7 @@ shape(whole_sequence_output)
 ```
 
 ```
-## (32, 10, 4)
+## shape(32, 10, 4)
 ```
 
 ```r
@@ -58,7 +58,7 @@ shape(final_state)
 ```
 
 ```
-## (32, 4)
+## shape(32, 4)
 ```
 
 # Call Arguments

@@ -19,7 +19,7 @@ shape(y)
 ```
 
 ```
-## (NA, 64, 10)
+## shape(NA, 64, 10)
 ```
 
 @param dims

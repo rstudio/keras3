@@ -128,7 +128,7 @@ y <- x |> layer_conv_2d(32, 3, activation='relu')
 shape(y)
 }\if{html}{\out{</div>}}
 
-\if{html}{\out{<div class="sourceCode">}}\preformatted{## (4, 8, 8, 32)
+\if{html}{\out{<div class="sourceCode">}}\preformatted{## shape(4, 8, 8, 32)
 }\if{html}{\out{</div>}}
 }
 

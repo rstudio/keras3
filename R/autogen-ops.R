@@ -76,7 +76,11 @@ function (inputs, indices, updates)
 #' @eval readLines("man-src/k_shape/3-rendered.md")
 k_shape <-
 function (x)
-keras$ops$shape(x)
+{
+    out <- keras$ops$shape(x)
+    class(out) <- "keras_shape"
+    out
+}
 
 
 "man-src/k_slice.Rmd" # |>file.edit() # or cmd+click to edit man page

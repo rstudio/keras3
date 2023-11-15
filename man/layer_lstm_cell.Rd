@@ -104,7 +104,7 @@ output <- inputs |>
 shape(output)
 }\if{html}{\out{</div>}}
 
-\if{html}{\out{<div class="sourceCode">}}\preformatted{## (32, 4)
+\if{html}{\out{<div class="sourceCode">}}\preformatted{## shape(32, 4)
 }\if{html}{\out{</div>}}
 
 \if{html}{\out{<div class="sourceCode r">}}\preformatted{rnn <- layer_rnn(cell = layer_lstm_cell(4),

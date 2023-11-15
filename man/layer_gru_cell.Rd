@@ -102,7 +102,7 @@ outputs <- inputs |> layer_rnn(layer_gru_cell(4))
 shape(outputs)
 }\if{html}{\out{</div>}}
 
-\if{html}{\out{<div class="sourceCode">}}\preformatted{## (32, 4)
+\if{html}{\out{<div class="sourceCode">}}\preformatted{## shape(32, 4)
 }\if{html}{\out{</div>}}
 
 \if{html}{\out{<div class="sourceCode r">}}\preformatted{rnn <- layer_rnn(
@@ -113,13 +113,13 @@ c(whole_sequence_output, final_state) \%<-\% rnn(inputs)
 shape(whole_sequence_output)
 }\if{html}{\out{</div>}}
 
-\if{html}{\out{<div class="sourceCode">}}\preformatted{## (32, 10, 4)
+\if{html}{\out{<div class="sourceCode">}}\preformatted{## shape(32, 10, 4)
 }\if{html}{\out{</div>}}
 
 \if{html}{\out{<div class="sourceCode r">}}\preformatted{shape(final_state)
 }\if{html}{\out{</div>}}
 
-\if{html}{\out{<div class="sourceCode">}}\preformatted{## (32, 4)
+\if{html}{\out{<div class="sourceCode">}}\preformatted{## shape(32, 4)
 }\if{html}{\out{</div>}}
 }
 

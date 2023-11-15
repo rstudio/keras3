@@ -142,7 +142,7 @@ y <- x |> layer_depthwise_conv_1d(
 shape(y)
 }\if{html}{\out{</div>}}
 
-\if{html}{\out{<div class="sourceCode">}}\preformatted{## (4, 8, 36)
+\if{html}{\out{<div class="sourceCode">}}\preformatted{## shape(4, 8, 36)
 }\if{html}{\out{</div>}}
 }
 

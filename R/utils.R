@@ -790,10 +790,9 @@ random_array <- function(..., gen = stats::runif) {
 #'   - A scalar integer tensor. (e.g., when supplied a TF tensor with
 #'   a unspecified dimension in a function being traced).
 #'
-#' @export
-#' @seealso [k_shape()]
-#' @examplesIf keras::is_keras_available()
 #'
+#' # Examples
+#' ```{r}
 #' shape(1, 2, 3)
 #'
 #' shape(NA,   2, 3)
@@ -811,6 +810,12 @@ random_array <- function(..., gen = stats::runif) {
 #' eager_tensor <- k_ones(c(1,2,3))
 #' shape(eager_tensor)
 #' k_shape(eager_tensor)
+#' ```
+#'
+#' @export
+#' @seealso [k_shape()]
+#' @examplesIf keras::is_keras_available()
+
 shape <- function(...) {
 
   fix <- function(x) {

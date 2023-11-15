@@ -49,7 +49,7 @@ patches <- k_image_extract_patches(image, c(5, 5))
 shape(patches)
 }\if{html}{\out{</div>}}
 
-\if{html}{\out{<div class="sourceCode">}}\preformatted{## (2, 4, 4, 75)
+\if{html}{\out{<div class="sourceCode">}}\preformatted{## shape(2, 4, 4, 75)
 }\if{html}{\out{</div>}}
 
 \if{html}{\out{<div class="sourceCode r">}}\preformatted{# (2, 4, 4, 75)
@@ -58,7 +58,7 @@ patches <- k_image_extract_patches(image, c(3, 3), c(1, 1))
 shape(patches)
 }\if{html}{\out{</div>}}
 
-\if{html}{\out{<div class="sourceCode">}}\preformatted{## (18, 18, 27)
+\if{html}{\out{<div class="sourceCode">}}\preformatted{## shape(18, 18, 27)
 }\if{html}{\out{</div>}}
 
 \if{html}{\out{<div class="sourceCode r">}}\preformatted{# (18, 18, 27)

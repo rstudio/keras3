@@ -47,7 +47,7 @@ shape(layer$beta)
 ```
 
 ```
-## (20, 30, 40)
+## shape(20, 30, 40)
 ```
 
 ```r
@@ -55,7 +55,7 @@ shape(layer$gamma)
 ```
 
 ```
-## (20, 30, 40)
+## shape(20, 30, 40)
 ```
 
 Note that other implementations of layer normalization may choose to define

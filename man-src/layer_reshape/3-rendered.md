@@ -20,7 +20,7 @@ shape(y)
 ```
 
 ```
-## (NA, 3, 4)
+## shape(NA, 3, 4)
 ```
 
 
@@ -31,7 +31,7 @@ shape(y)
 ```
 
 ```
-## (NA, 3, 2, 2)
+## shape(NA, 3, 2, 2)
 ```
 
 @param target_shape

@@ -28,11 +28,7 @@ will have a \code{tf.Tensor} value instead of a static integer value.
 k_shape(x)
 }\if{html}{\out{</div>}}
 
-\if{html}{\out{<div class="sourceCode">}}\preformatted{## [[1]]
-## [1] 8
-##
-## [[2]]
-## [1] 12
+\if{html}{\out{<div class="sourceCode">}}\preformatted{## shape(8, 12)
 }\if{html}{\out{</div>}}
 }
 

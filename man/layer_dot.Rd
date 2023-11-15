@@ -56,20 +56,20 @@ x2 <- k_reshape(10:19, c(5, 2)) |> layer_dense(8)
 shape(x1)
 }\if{html}{\out{</div>}}
 
-\if{html}{\out{<div class="sourceCode">}}\preformatted{## (5, 8)
+\if{html}{\out{<div class="sourceCode">}}\preformatted{## shape(5, 8)
 }\if{html}{\out{</div>}}
 
 \if{html}{\out{<div class="sourceCode r">}}\preformatted{shape(x2)
 }\if{html}{\out{</div>}}
 
-\if{html}{\out{<div class="sourceCode">}}\preformatted{## (5, 8)
+\if{html}{\out{<div class="sourceCode">}}\preformatted{## shape(5, 8)
 }\if{html}{\out{</div>}}
 
 \if{html}{\out{<div class="sourceCode r">}}\preformatted{y <- layer_dot(x1, x2, axes=2)
 shape(y)
 }\if{html}{\out{</div>}}
 
-\if{html}{\out{<div class="sourceCode">}}\preformatted{## (5, 1)
+\if{html}{\out{<div class="sourceCode">}}\preformatted{## shape(5, 1)
 }\if{html}{\out{</div>}}
 }
 

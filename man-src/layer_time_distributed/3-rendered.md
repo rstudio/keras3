@@ -20,7 +20,7 @@ shape(outputs)
 ```
 
 ```
-## (32, 10, 126, 126, 64)
+## shape(32, 10, 126, 126, 64)
 ```
 
 Because `layer_time_distributed` applies the same instance of `layer_conv2d` to each of

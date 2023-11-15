@@ -137,7 +137,7 @@ y <- layer_separable_conv_1d(x, 3, 2, 2, activation='relu')
 shape(y)
 }\if{html}{\out{</div>}}
 
-\if{html}{\out{<div class="sourceCode">}}\preformatted{## (4, 5, 3)
+\if{html}{\out{<div class="sourceCode">}}\preformatted{## shape(4, 5, 3)
 }\if{html}{\out{</div>}}
 }
 

@@ -104,13 +104,13 @@ layer(k_ones(c(5, 20, 30, 40))) |> invisible() # build()
 shape(layer$beta)
 }\if{html}{\out{</div>}}
 
-\if{html}{\out{<div class="sourceCode">}}\preformatted{## (20, 30, 40)
+\if{html}{\out{<div class="sourceCode">}}\preformatted{## shape(20, 30, 40)
 }\if{html}{\out{</div>}}
 
 \if{html}{\out{<div class="sourceCode r">}}\preformatted{shape(layer$gamma)
 }\if{html}{\out{</div>}}
 
-\if{html}{\out{<div class="sourceCode">}}\preformatted{## (20, 30, 40)
+\if{html}{\out{<div class="sourceCode">}}\preformatted{## shape(20, 30, 40)
 }\if{html}{\out{</div>}}
 
 Note that other implementations of layer normalization may choose to define
