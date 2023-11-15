@@ -11,6 +11,9 @@ The new shape should be compatible with the original shape.
 One shape dimension can be -1 in which case the value is
 inferred from the length of the array and remaining dimensions.
 
+@param ...
+Passed on to the Python callable
+
 @export
 @family numpy ops
 @family ops

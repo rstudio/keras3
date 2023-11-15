@@ -1134,6 +1134,13 @@ make_r_fn.op <- function(endpoint, py_obj, transformers) {
     })
   }
 
+  if(endpoint == "keras.ops.reshape") {
+    stopifnot(identical(names(frmls), c("x", "new_shape")))
+
+    return(function(x, ..., new_shape = list(...)) {
+      keras$ops$reshape(x, tuple(lapply(shape(new_shape), function(d) d %||% -1L)))
+    })
+  }
 
   if(endpoint == "keras.ops.vectorized_map") {
     names(frmls) %<>% replace_val("function", "f")
