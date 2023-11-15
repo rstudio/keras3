@@ -39,7 +39,7 @@ y_true <- rbind(c(0, 0, 1), c(1, 0, 0), c(0, 1, 0), c(1, 0, 0))
 y_pred <- rbind(c(0.2, 0.3, 0.5), c(0.1, 0.2, 0.7), c(0.5, 0.3, 0.1),
                 c(0.1, 0.4, 0.5))
 sample_weight <- c(0.1, 0.2, 0.3, 0.4)
-m <- metric_one_hot_iou(num_classes = 3L, target_class_ids = c(0L, 2L))
+m <- metric_one_hot_iou(num_classes = 3, target_class_ids = c(0, 2))
 m$update_state(
     y_true = y_true, y_pred = y_pred, sample_weight = sample_weight)
 m$result()

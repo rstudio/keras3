@@ -26,11 +26,11 @@ metric_one_hot_mean_iou(
 \item{ignore_class}{Optional integer. The ID of a class to be ignored during
 metric computation. This is useful, for example, in segmentation
 problems featuring a "void" class (commonly -1 or 255) in
-segmentation maps. By default (\code{ignore_class=None}), all classes are
+segmentation maps. By default (\code{ignore_class=NULL}), all classes are
 considered.}
 
 \item{sparse_y_pred}{Whether predictions are encoded using natural numbers or
-probability distribution vectors. If \code{False}, the \code{argmax}
+probability distribution vectors. If \code{FALSE}, the \code{argmax}
 function will be used to determine each sample's most likely
 associated label.}
 
@@ -39,7 +39,7 @@ associated label.}
 \description{
 Formula:
 
-\if{html}{\out{<div class="sourceCode python">}}\preformatted{iou = true_positives / (true_positives + false_positives + false_negatives)
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{iou <- true_positives / (true_positives + false_positives + false_negatives)
 }\if{html}{\out{</div>}}
 
 Intersection-Over-Union is a common evaluation metric for semantic image
@@ -48,7 +48,7 @@ segmentation.
 To compute IoUs, the predictions are accumulated in a confusion matrix,
 weighted by \code{sample_weight} and the metric is then calculated from it.
 
-If \code{sample_weight} is \code{None}, weights default to 1.
+If \code{sample_weight} is \code{NULL}, weights default to 1.
 Use \code{sample_weight} of 0 to mask values.
 
 This class can be used to compute the mean IoU for multi-class
@@ -60,7 +60,7 @@ the class axis. Then the same computation steps as for the base \code{MeanIoU}
 class apply.
 
 Note, if there is only one channel in the labels and predictions, this class
-is the same as class \code{MeanIoU}. In this case, use \code{MeanIoU} instead.
+is the same as class \code{metric_mean_iou}. In this case, use \code{metric_mean_iou} instead.
 
 Also, make sure that \code{num_classes} is equal to the number of classes in the
 data, to avoid a "labels out of bound" error when the confusion matrix is
@@ -69,30 +69,25 @@ computed.
 \section{Examples}{
 Standalone usage:
 
-\if{html}{\out{<div class="sourceCode python">}}\preformatted{y_true = np.array([[0, 0, 1], [1, 0, 0], [0, 1, 0], [1, 0, 0]])
-y_pred = np.array([[0.2, 0.3, 0.5], [0.1, 0.2, 0.7], [0.5, 0.3, 0.1],
-                      [0.1, 0.4, 0.5]])
-sample_weight = [0.1, 0.2, 0.3, 0.4]
-m = keras.metrics.OneHotMeanIoU(num_classes=3)
-m.update_state(
-    y_true=y_true, y_pred=y_pred, sample_weight=sample_weight)
-# cm = [[0, 0, 0.2+0.4],
-#       [0.3, 0, 0],
-#       [0, 0, 0.1]]
-# sum_row = [0.3, 0, 0.7], sum_col = [0.6, 0.3, 0.1]
-# true_positives = [0, 0, 0.1]
-# single_iou = true_positives / (sum_row + sum_col - true_positives))
-# mean_iou = (0 + 0 + 0.1 / (0.7 + 0.1 - 0.1)) / 3
-m.result()
-# 0.048
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{y_true <- rbind(c(0, 0, 1), c(1, 0, 0), c(0, 1, 0), c(1, 0, 0))
+y_pred <- rbind(c(0.2, 0.3, 0.5), c(0.1, 0.2, 0.7), c(0.5, 0.3, 0.1),
+                c(0.1, 0.4, 0.5))
+sample_weight <- c(0.1, 0.2, 0.3, 0.4)
+m <- metric_one_hot_mean_iou(num_classes = 3L)
+m$update_state(
+    y_true = y_true, y_pred = y_pred, sample_weight = sample_weight)
+m$result()
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor(0.047619034, shape=(), dtype=float32)
 }\if{html}{\out{</div>}}
 
 Usage with \code{compile()} API:
 
-\if{html}{\out{<div class="sourceCode python">}}\preformatted{model.compile(
-    optimizer='sgd',
-    loss='mse',
-    metrics=[keras.metrics.OneHotMeanIoU(num_classes=3)])
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{model \%>\% compile(
+    optimizer = 'sgd',
+    loss = 'mse',
+    metrics = list(metric_one_hot_mean_iou(num_classes = 3L)))
 }\if{html}{\out{</div>}}
 }
 

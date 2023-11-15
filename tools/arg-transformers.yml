@@ -187,3 +187,5 @@ keras.metrics.OneHotIoU:
   num_classes: as_integer
   target_class_ids: lapply(x, as_integer)
 
+keras.metrics.OneHotMeanIoU:
+  num_classes: as_integer
