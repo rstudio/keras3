@@ -6,7 +6,7 @@ This metric creates two local variables, `true_positives` and
 ultimately returned as `recall`, an idempotent operation that simply divides
 `true_positives` by the sum of `true_positives` and `false_negatives`.
 
-If `sample_weight` is `None`, weights default to 1.
+If `sample_weight` is `NULL`, weights default to 1.
 Use `sample_weight` of 0 to mask values.
 
 If `top_k` is set, recall will be computed as how often on average a class
@@ -20,42 +20,52 @@ top-k predictions.
 # Usage
 Standalone usage:
 
-```python
-m = keras.metrics.Recall()
-m.update_state([0, 1, 1, 1], [1, 0, 1, 1])
-m.result()
-# 0.6666667
+
+```r
+m <- metric_recall()
+m$update_state(c(0, 1, 1, 1), c(1, 0, 1, 1))
+m$result()
 ```
 
-```python
-m.reset_state()
-m.update_state([0, 1, 1, 1], [1, 0, 1, 1], sample_weight=[0, 0, 1, 0])
-m.result()
-# 1.0
+```
+## tf.Tensor(0.6666667, shape=(), dtype=float32)
+```
+
+
+```r
+m$reset_state()
+m$update_state(c(0, 1, 1, 1), c(1, 0, 1, 1), sample_weight = c(0, 0, 1, 0))
+m$result()
+```
+
+```
+## tf.Tensor(0.9999999, shape=(), dtype=float32)
 ```
 
 Usage with `compile()` API:
 
-```python
-model.compile(optimizer='sgd',
-              loss='mse',
-              metrics=[keras.metrics.Recall()])
+
+```r
+model %>% compile(optimizer = 'sgd',
+                  loss = 'mse',
+                  metrics = list(metric_recall()))
 ```
 
-Usage with a loss with `from_logits=True`:
+Usage with a loss with `from_logits=TRUE`:
 
-```python
-model.compile(optimizer='adam',
-              loss=keras.losses.BinaryCrossentropy(from_logits=True),
-              metrics=[keras.metrics.Recall(thresholds=0)])
+
+```r
+model %>% compile(optimizer = 'adam',
+                  loss = loss_binary_crossentropy(from_logits=TRUE),
+                  metrics = list(metric_recall(thresholds=0)))
 ```
 
 @param thresholds
-(Optional) A float value, or a Python list/tuple of float
+(Optional) A float value, or a Python list of float
 threshold values in `[0, 1]`. A threshold is compared with
 prediction values to determine the truth value of predictions (i.e.,
-above the threshold is `True`, below is `False`). If used with a
-loss function that sets `from_logits=True` (i.e. no sigmoid
+above the threshold is `TRUE`, below is `FALSE`). If used with a
+loss function that sets `from_logits=TRUE` (i.e. no sigmoid
 applied to predictions), `thresholds` should be set to 0.
 One metric value is generated for each threshold value.
 If neither `thresholds` nor `top_k` are set,
@@ -85,3 +95,4 @@ Passed on to the Python callable
 @seealso
 + <https:/keras.io/api/metrics/classification_metrics#recall-class>
 + <https://www.tensorflow.org/api_docs/python/tf/keras/metrics/Recall>
+

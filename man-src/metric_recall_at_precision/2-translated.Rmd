@@ -12,7 +12,7 @@ This metric creates four local variables, `true_positives`,
 compute the recall at the given precision. The threshold for the given
 precision value is computed and used to evaluate the corresponding recall.
 
-If `sample_weight` is `None`, weights default to 1.
+If `sample_weight` is `NULL`, weights default to 1.
 Use `sample_weight` of 0 to mask values.
 
 If `class_id` is specified, we calculate precision by considering only the
@@ -23,28 +23,26 @@ indeed a correct label.
 # Usage
 Standalone usage:
 
-```python
-m = keras.metrics.RecallAtPrecision(0.8)
-m.update_state([0, 0, 1, 1], [0, 0.5, 0.3, 0.9])
-m.result()
-# 0.5
+```{r}
+m <- metric_recall_at_precision(precision = 0.8)
+m$update_state(c(0, 0, 1, 1), c(0, 0.5, 0.3, 0.9))
+m$result()
 ```
 
-```python
-m.reset_state()
-m.update_state([0, 0, 1, 1], [0, 0.5, 0.3, 0.9],
-               sample_weight=[1, 0, 0, 1])
-m.result()
-# 1.0
+```{r}
+m$reset_state()
+m$update_state(c(0, 0, 1, 1), c(0, 0.5, 0.3, 0.9),
+               sample_weight = c(1, 0, 0, 1))
+m$result()
 ```
 
 Usage with `compile()` API:
 
-```python
-model.compile(
-    optimizer='sgd',
-    loss='mse',
-    metrics=[keras.metrics.RecallAtPrecision(precision=0.8)])
+```{r, eval = FALSE}
+model %>% compile(
+    optimizer = 'sgd',
+    loss = 'mse',
+    metrics = list(metric_recall_at_precision(precision = 0.8)))
 ```
 
 @param precision
@@ -73,3 +71,4 @@ Passed on to the Python callable
 @family metrics
 @seealso
 + <https://www.tensorflow.org/api_docs/python/tf/keras/metrics/RecallAtPrecision>
+

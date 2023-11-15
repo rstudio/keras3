@@ -6,35 +6,33 @@ Computes root mean squared error metric between `y_true` and `y_pred`.
 @description
 Formula:
 
-```python
-loss = sqrt(mean((y_pred - y_true) ** 2))
+```{r, eval = FALSE}
+loss <- sqrt(mean((y_pred - y_true) ^ 2))
 ```
 
 # Examples
 Standalone usage:
 
-```python
-m = keras.metrics.RootMeanSquaredError()
-m.update_state([[0, 1], [0, 0]], [[1, 1], [0, 0]])
-m.result()
-# 0.5
+```{r}
+m <- metric_root_mean_squared_error()
+m$update_state(rbind(c(0, 1), c(0, 0)), rbind(c(1, 1), c(0, 0)))
+m$result()
 ```
 
-```python
-m.reset_state()
-m.update_state([[0, 1], [0, 0]], [[1, 1], [0, 0]],
-               sample_weight=[1, 0])
-m.result()
-# 0.70710677
+```{r}
+m$reset_state()
+m$update_state(rbind(c(0, 1), c(0, 0)), rbind(c(1, 1), c(0, 0)),
+               sample_weight = c(1, 0))
+m$result()
 ```
 
 Usage with `compile()` API:
 
-```python
-model.compile(
-    optimizer='sgd',
-    loss='mse',
-    metrics=[keras.metrics.RootMeanSquaredError()])
+```{r, eval = FALSE}
+model %>% compile(
+  optimizer = 'sgd',
+  loss = 'mse',
+  metrics = list(metric_root_mean_squared_error()))
 ```
 
 @param name
@@ -52,3 +50,4 @@ Passed on to the Python callable
 @seealso
 + <https:/keras.io/api/metrics/regression_metrics#rootmeansquarederror-class>
 + <https://www.tensorflow.org/api_docs/python/tf/keras/metrics/RootMeanSquaredError>
+

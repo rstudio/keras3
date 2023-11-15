@@ -27,7 +27,7 @@ encodes a probability distribution.}
 \item{ignore_class}{Optional integer. The ID of a class to be ignored during
 loss computation. This is useful, for example, in segmentation
 problems featuring a "void" class (commonly -1 or 255) in
-segmentation maps. By default (\code{ignore_class=None}), all classes are
+segmentation maps. By default (\code{ignore_class=NULL}), all classes are
 considered.}
 
 \item{axis}{(Optional) Defaults to \code{-1}.
@@ -42,7 +42,7 @@ The dimension along which entropy is computed.}
 \description{
 Use this crossentropy metric when there are two or more label classes.
 It expects labels to be provided as integers. If you want to provide labels
-that are one-hot encoded, please use the \code{CategoricalCrossentropy}
+that are one-hot encoded, please use the \code{metric_categorical_crossentropy()}
 metric instead.
 
 There should be \code{num_classes} floating point values per feature for \code{y_pred}
@@ -51,37 +51,34 @@ and a single floating point value per feature for \code{y_true}.
 \section{Examples}{
 Standalone usage:
 
-\if{html}{\out{<div class="sourceCode python">}}\preformatted{# y_true = one_hot(y_true) = [[0, 1, 0], [0, 0, 1]]
-# logits = log(y_pred)
-# softmax = exp(logits) / sum(exp(logits), axis=-1)
-# softmax = [[0.05, 0.95, EPSILON], [0.1, 0.8, 0.1]]
-# xent = -sum(y * log(softmax), 1)
-# log(softmax) = [[-2.9957, -0.0513, -16.1181],
-#                [-2.3026, -0.2231, -2.3026]]
-# y_true * log(softmax) = [[0, -0.0513, 0], [0, 0, -2.3026]]
-# xent = [0.0513, 2.3026]
-# Reduced xent = (0.0513 + 2.3026) / 2
-m = keras.metrics.SparseCategoricalCrossentropy()
-m.update_state([1, 2],
-               [[0.05, 0.95, 0], [0.1, 0.8, 0.1]])
-m.result()
-# 1.1769392
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{m <- metric_sparse_categorical_crossentropy()
+m$update_state(c(1, 2),
+               rbind(c(0.05, 0.95, 0), c(0.1, 0.8, 0.1)))
+m$result()
 }\if{html}{\out{</div>}}
 
-\if{html}{\out{<div class="sourceCode python">}}\preformatted{m.reset_state()
-m.update_state([1, 2],
-               [[0.05, 0.95, 0], [0.1, 0.8, 0.1]],
-               sample_weight=np.array([0.3, 0.7]))
-m.result()
-# 1.6271976
+\if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor(1.1769392, shape=(), dtype=float32)
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{m$reset_state()
+m$update_state(c(1, 2),
+               rbind(c(0.05, 0.95, 0), c(0.1, 0.8, 0.1)),
+               sample_weight = c(0.3, 0.7))
+m$result()
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor(1.6271976, shape=(), dtype=float32)
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{# 1.6271976
 }\if{html}{\out{</div>}}
 
 Usage with \code{compile()} API:
 
-\if{html}{\out{<div class="sourceCode python">}}\preformatted{model.compile(
-    optimizer='sgd',
-    loss='mse',
-    metrics=[keras.metrics.SparseCategoricalCrossentropy()])
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{model \%>\% compile(
+    optimizer = 'sgd',
+    loss = 'mse',
+    metrics = list(metric_sparse_categorical_crossentropy()))
 }\if{html}{\out{</div>}}
 }
 

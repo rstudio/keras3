@@ -24,7 +24,7 @@ metric_sparse_categorical_accuracy(
 \item{dtype}{(Optional) data type of the metric result.}
 }
 \description{
-\if{html}{\out{<div class="sourceCode python">}}\preformatted{acc = np.dot(sample_weight, np.equal(y_true, np.argmax(y_pred, axis=1))
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{acc <- sample_weight \%*\% (y_true == which.max(y_pred))
 }\if{html}{\out{</div>}}
 
 You can provide logits of classes as \code{y_pred}, since argmax of
@@ -35,30 +35,34 @@ to compute the frequency with which \code{y_pred} matches \code{y_true}. This
 frequency is ultimately returned as \verb{sparse categorical accuracy}: an
 idempotent operation that simply divides \code{total} by \code{count}.
 
-If \code{sample_weight} is \code{None}, weights default to 1.
+If \code{sample_weight} is \code{NULL}, weights default to 1.
 Use \code{sample_weight} of 0 to mask values.
 }
 \section{Usage}{
 Standalone usage:
 
-\if{html}{\out{<div class="sourceCode python">}}\preformatted{m = keras.metrics.SparseCategoricalAccuracy()
-m.update_state([[2], [1]], [[0.1, 0.6, 0.3], [0.05, 0.95, 0]])
-m.result()
-# 0.5
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{m <- metric_sparse_categorical_accuracy()
+m$update_state(rbind(2L, 1L), rbind(c(0.1, 0.6, 0.3), c(0.05, 0.95, 0)))
+m$result()
 }\if{html}{\out{</div>}}
 
-\if{html}{\out{<div class="sourceCode python">}}\preformatted{m.reset_state()
-m.update_state([[2], [1]], [[0.1, 0.6, 0.3], [0.05, 0.95, 0]],
-               sample_weight=[0.7, 0.3])
-m.result()
-# 0.3
+\if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor(0.5, shape=(), dtype=float32)
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{m$reset_state()
+m$update_state(rbind(2L, 1L), rbind(c(0.1, 0.6, 0.3), c(0.05, 0.95, 0)),
+               sample_weight = c(0.7, 0.3))
+m$result()
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor(0.3, shape=(), dtype=float32)
 }\if{html}{\out{</div>}}
 
 Usage with \code{compile()} API:
 
-\if{html}{\out{<div class="sourceCode python">}}\preformatted{model.compile(optimizer='sgd',
-              loss='sparse_categorical_crossentropy',
-              metrics=[keras.metrics.SparseCategoricalAccuracy()])
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{model \%>\% compile(optimizer = 'sgd',
+                  loss = 'sparse_categorical_crossentropy',
+                  metrics = list(metric_sparse_categorical_accuracy()))
 }\if{html}{\out{</div>}}
 }
 

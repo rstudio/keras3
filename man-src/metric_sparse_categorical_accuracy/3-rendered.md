@@ -1,8 +1,9 @@
 Calculates how often predictions match integer labels.
 
 @description
-```python
-acc = np.dot(sample_weight, np.equal(y_true, np.argmax(y_pred, axis=1))
+
+```r
+acc <- sample_weight %*% (y_true == which.max(y_pred))
 ```
 
 You can provide logits of classes as `y_pred`, since argmax of
@@ -13,33 +14,42 @@ to compute the frequency with which `y_pred` matches `y_true`. This
 frequency is ultimately returned as `sparse categorical accuracy`: an
 idempotent operation that simply divides `total` by `count`.
 
-If `sample_weight` is `None`, weights default to 1.
+If `sample_weight` is `NULL`, weights default to 1.
 Use `sample_weight` of 0 to mask values.
 
 # Usage
 Standalone usage:
 
-```python
-m = keras.metrics.SparseCategoricalAccuracy()
-m.update_state([[2], [1]], [[0.1, 0.6, 0.3], [0.05, 0.95, 0]])
-m.result()
-# 0.5
+
+```r
+m <- metric_sparse_categorical_accuracy()
+m$update_state(rbind(2L, 1L), rbind(c(0.1, 0.6, 0.3), c(0.05, 0.95, 0)))
+m$result()
 ```
 
-```python
-m.reset_state()
-m.update_state([[2], [1]], [[0.1, 0.6, 0.3], [0.05, 0.95, 0]],
-               sample_weight=[0.7, 0.3])
-m.result()
-# 0.3
+```
+## tf.Tensor(0.5, shape=(), dtype=float32)
+```
+
+
+```r
+m$reset_state()
+m$update_state(rbind(2L, 1L), rbind(c(0.1, 0.6, 0.3), c(0.05, 0.95, 0)),
+               sample_weight = c(0.7, 0.3))
+m$result()
+```
+
+```
+## tf.Tensor(0.3, shape=(), dtype=float32)
 ```
 
 Usage with `compile()` API:
 
-```python
-model.compile(optimizer='sgd',
-              loss='sparse_categorical_crossentropy',
-              metrics=[keras.metrics.SparseCategoricalAccuracy()])
+
+```r
+model %>% compile(optimizer = 'sgd',
+                  loss = 'sparse_categorical_crossentropy',
+                  metrics = list(metric_sparse_categorical_accuracy()))
 ```
 
 @param name
@@ -63,3 +73,4 @@ Passed on to the Python callable
 @seealso
 + <https:/keras.io/api/metrics/accuracy_metrics#sparsecategoricalaccuracy-class>
 + <https://www.tensorflow.org/api_docs/python/tf/keras/metrics/SparseCategoricalAccuracy>
+

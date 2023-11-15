@@ -20,31 +20,35 @@ metric_root_mean_squared_error(
 \description{
 Formula:
 
-\if{html}{\out{<div class="sourceCode python">}}\preformatted{loss = sqrt(mean((y_pred - y_true) ** 2))
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{loss <- sqrt(mean((y_pred - y_true) ^ 2))
 }\if{html}{\out{</div>}}
 }
 \section{Examples}{
 Standalone usage:
 
-\if{html}{\out{<div class="sourceCode python">}}\preformatted{m = keras.metrics.RootMeanSquaredError()
-m.update_state([[0, 1], [0, 0]], [[1, 1], [0, 0]])
-m.result()
-# 0.5
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{m <- metric_root_mean_squared_error()
+m$update_state(rbind(c(0, 1), c(0, 0)), rbind(c(1, 1), c(0, 0)))
+m$result()
 }\if{html}{\out{</div>}}
 
-\if{html}{\out{<div class="sourceCode python">}}\preformatted{m.reset_state()
-m.update_state([[0, 1], [0, 0]], [[1, 1], [0, 0]],
-               sample_weight=[1, 0])
-m.result()
-# 0.70710677
+\if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor(0.5, shape=(), dtype=float32)
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{m$reset_state()
+m$update_state(rbind(c(0, 1), c(0, 0)), rbind(c(1, 1), c(0, 0)),
+               sample_weight = c(1, 0))
+m$result()
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor(0.70710677, shape=(), dtype=float32)
 }\if{html}{\out{</div>}}
 
 Usage with \code{compile()} API:
 
-\if{html}{\out{<div class="sourceCode python">}}\preformatted{model.compile(
-    optimizer='sgd',
-    loss='mse',
-    metrics=[keras.metrics.RootMeanSquaredError()])
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{model \%>\% compile(
+  optimizer = 'sgd',
+  loss = 'mse',
+  metrics = list(metric_root_mean_squared_error()))
 }\if{html}{\out{</div>}}
 }
 

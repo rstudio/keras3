@@ -16,11 +16,11 @@ metric_recall(
 \arguments{
 \item{...}{Passed on to the Python callable}
 
-\item{thresholds}{(Optional) A float value, or a Python list/tuple of float
+\item{thresholds}{(Optional) A float value, or a Python list of float
 threshold values in \verb{[0, 1]}. A threshold is compared with
 prediction values to determine the truth value of predictions (i.e.,
-above the threshold is \code{True}, below is \code{False}). If used with a
-loss function that sets \code{from_logits=True} (i.e. no sigmoid
+above the threshold is \code{TRUE}, below is \code{FALSE}). If used with a
+loss function that sets \code{from_logits=TRUE} (i.e. no sigmoid
 applied to predictions), \code{thresholds} should be set to 0.
 One metric value is generated for each threshold value.
 If neither \code{thresholds} nor \code{top_k} are set,
@@ -43,7 +43,7 @@ This metric creates two local variables, \code{true_positives} and
 ultimately returned as \code{recall}, an idempotent operation that simply divides
 \code{true_positives} by the sum of \code{true_positives} and \code{false_negatives}.
 
-If \code{sample_weight} is \code{None}, weights default to 1.
+If \code{sample_weight} is \code{NULL}, weights default to 1.
 Use \code{sample_weight} of 0 to mask values.
 
 If \code{top_k} is set, recall will be computed as how often on average a class
@@ -57,30 +57,34 @@ top-k predictions.
 \section{Usage}{
 Standalone usage:
 
-\if{html}{\out{<div class="sourceCode python">}}\preformatted{m = keras.metrics.Recall()
-m.update_state([0, 1, 1, 1], [1, 0, 1, 1])
-m.result()
-# 0.6666667
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{m <- metric_recall()
+m$update_state(c(0, 1, 1, 1), c(1, 0, 1, 1))
+m$result()
 }\if{html}{\out{</div>}}
 
-\if{html}{\out{<div class="sourceCode python">}}\preformatted{m.reset_state()
-m.update_state([0, 1, 1, 1], [1, 0, 1, 1], sample_weight=[0, 0, 1, 0])
-m.result()
-# 1.0
+\if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor(0.6666667, shape=(), dtype=float32)
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{m$reset_state()
+m$update_state(c(0, 1, 1, 1), c(1, 0, 1, 1), sample_weight = c(0, 0, 1, 0))
+m$result()
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor(0.9999999, shape=(), dtype=float32)
 }\if{html}{\out{</div>}}
 
 Usage with \code{compile()} API:
 
-\if{html}{\out{<div class="sourceCode python">}}\preformatted{model.compile(optimizer='sgd',
-              loss='mse',
-              metrics=[keras.metrics.Recall()])
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{model \%>\% compile(optimizer = 'sgd',
+                  loss = 'mse',
+                  metrics = list(metric_recall()))
 }\if{html}{\out{</div>}}
 
-Usage with a loss with \code{from_logits=True}:
+Usage with a loss with \code{from_logits=TRUE}:
 
-\if{html}{\out{<div class="sourceCode python">}}\preformatted{model.compile(optimizer='adam',
-              loss=keras.losses.BinaryCrossentropy(from_logits=True),
-              metrics=[keras.metrics.Recall(thresholds=0)])
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{model \%>\% compile(optimizer = 'adam',
+                  loss = loss_binary_crossentropy(from_logits=TRUE),
+                  metrics = list(metric_recall(thresholds=0)))
 }\if{html}{\out{</div>}}
 }
 
