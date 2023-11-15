@@ -601,8 +601,11 @@ devtools::document(roclets = c('rd', 'namespace'))
 if(interactive()) local({
   rx <- callr::r_bg(\() remotes::install_local(force = TRUE, upgrade =  "never"))
   later::later(\() cat(rx$read_all_output()), delay = 17)
-}) else
+}) else {
   remotes::install_local(force = TRUE)
+  rcmdcheck::rcmdcheck()
+}
+
 
 # remotes::update_packages(upgrade = "always")
 # pkgdown::build_site()
