@@ -1844,57 +1844,12 @@ git <- function(..., retries = 4L, valid_exit_codes = 0L) {
   res
 }
 
-git_reset <- function(..., except = "./tools") {
-  # stop(
-    r"---{
-NEEDS A GUARRAIL
-don't call 'git stash pop' if we didn't make a new stash
-
-+ git stash push -- ./tools
-No local changes to save
-+ git reset --hard
-HEAD is now at dfbd04e44 prep to make
-+ git stash pop
-Auto-merging R/layer-r-helpers.R
-Auto-merging man-src/layer_feature_space/2-translated.Rmd
-CONFLICT (content): Merge conflict in man-src/layer_feature_space/2-translated.Rmd
-Auto-merging man/layer_feature_space.Rd
-Auto-merging tools/arg-transformers.yml
-CONFLICT (content): Merge conflict in tools/arg-transformers.yml
-Auto-merging tools/make.R
-CONFLICT (content): Merge conflict in tools/make.R
-Auto-merging tools/utils.R
-CONFLICT (content): Merge conflict in tools/utils.R
-R/feature-space.R already exists, no checkout
-benchmark.R already exists, no checkout
-error: could not restore untracked files from stash
-On branch feature/keras_core
-Your branch is ahead of 'origin/feature/keras_core' by 9 commits.
-  (use "git push" to publish your local commits)
-
-Unmerged paths:
-  (use "git restore --staged <file>..." to unstage)
-  (use "git add <file>..." to mark resolution)
-	both modified:   man-src/layer_feature_space/2-translated.Rmd
-	both modified:   tools/arg-transformers.yml
-	both modified:   tools/make.R
-	both modified:   tools/utils.R
-
-Untracked files:
-  (use "git add <file>..." to include in what will be committed)
-	man-src/layer_hashing/.vdoc.r
-	man-src/layer_input/.vdoc.r
-	man-src/layer_integer_lookup/.vdoc.r
-
-no changes added to commit (use "git add" and/or "git commit -a")
-The stash entry is kept in case you need it again.
-res <- 1L
-Error in git("stash pop") : non-0 exit from git stash
-  }---" #|> stop()
-  git("stash push --", ..., except)
-  git("reset --hard")
-  git("stash pop")
+git_restore <- function() {
+  git("restore man")
+  git("restore man-src")
+  git("restore --staged man-src")
 }
+
 
 view_translation_diff <- function(r_name) {
   system2("code", c("--diff",
