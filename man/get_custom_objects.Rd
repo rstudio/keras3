@@ -29,7 +29,8 @@ get_custom_objects()$update(list(MyObject = MyObject))
 Other saving: 
 \code{\link{config_enable_unsafe_deserialization}()},
 \code{\link{get_registered_name}()},
-\code{\link{get_registered_object}()}
+\code{\link{get_registered_object}()},
+\code{\link{layer_tfsm}()}
 
 Other utils: 
 \code{\link{audio_dataset_from_directory}()},

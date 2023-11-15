@@ -54,5 +54,7 @@ see description
 see description
 
 @export
+@family saving
+@family layers
 @seealso
 + <https://www.tensorflow.org/api_docs/python/tf/keras/layers/TFSMLayer>

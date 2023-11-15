@@ -26,7 +26,8 @@ for serialization/deserialization.
 Other saving: 
 \code{\link{config_enable_unsafe_deserialization}()},
 \code{\link{get_custom_objects}()},
-\code{\link{get_registered_object}()}
+\code{\link{get_registered_object}()},
+\code{\link{layer_tfsm}()}
 
 Other utils: 
 \code{\link{audio_dataset_from_directory}()},

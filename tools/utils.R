@@ -706,6 +706,9 @@ make_roxygen_tags <- function(endpoint, py_obj = py_eval(endpoint), type) {
   if(endpoint |> endsWith("_dataset_from_directory"))
     family %<>% c("dataset utils")
 
+  if(endpoint == "keras.layers.TFSMLayer")
+    family %<>% c("saving", "layers") %>% unique()
+
   # if(endpoint == "keras.utils.clear_session")
   #   family %<>% c("utils")
 

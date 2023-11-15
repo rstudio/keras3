@@ -17,6 +17,7 @@ Disables safe mode globally, allowing deserialization of lambdas.
 Other saving: 
 \code{\link{get_custom_objects}()},
 \code{\link{get_registered_name}()},
-\code{\link{get_registered_object}()}
+\code{\link{get_registered_object}()},
+\code{\link{layer_tfsm}()}
 }
 \concept{saving}
