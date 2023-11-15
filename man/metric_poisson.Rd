@@ -20,35 +20,36 @@ metric_poisson(y_true, y_pred, ..., name = "poisson", dtype = NULL)
 \description{
 Formula:
 
-\if{html}{\out{<div class="sourceCode python">}}\preformatted{loss = y_pred - y_true * log(y_pred)
-}\if{html}{\out{</div>}}
-
-Formula:
-
-\if{html}{\out{<div class="sourceCode python">}}\preformatted{metric = y_pred - y_true * log(y_pred)
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{metric <- y_pred - y_true * log(y_pred)
 }\if{html}{\out{</div>}}
 }
 \section{Examples}{
 Standalone usage:
 
-\if{html}{\out{<div class="sourceCode python">}}\preformatted{m = keras.metrics.Poisson()
-m.update_state([[0, 1], [0, 0]], [[1, 1], [0, 0]])
-m.result()
-# 0.49999997
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{m <- metric_poisson()
+m$update_state(rbind(c(0, 1), c(0, 0)), rbind(c(1, 1), c(0, 0)))
+m$result()
 }\if{html}{\out{</div>}}
 
-\if{html}{\out{<div class="sourceCode python">}}\preformatted{m.reset_state()
-m.update_state([[0, 1], [0, 0]], [[1, 1], [0, 0]],
-               sample_weight=[1, 0])
-m.result()
-# 0.99999994
+\if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor(0.49999997, shape=(), dtype=float32)
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{m$reset_state()
+m$update_state(rbind(c(0, 1), c(0, 0)), rbind(c(1, 1), c(0, 0)),
+               sample_weight = c(1, 0))
+m$result()
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor(0.99999994, shape=(), dtype=float32)
 }\if{html}{\out{</div>}}
 
 Usage with \code{compile()} API:
 
-\if{html}{\out{<div class="sourceCode python">}}\preformatted{model.compile(optimizer='sgd',
-              loss='mse',
-              metrics=[keras.metrics.Poisson()])
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{model \%>\% compile(
+  optimizer = 'sgd',
+  loss = 'mse',
+  metrics = list(metric_poisson())
+)
 }\if{html}{\out{</div>}}
 }
 

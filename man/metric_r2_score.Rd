@@ -20,7 +20,7 @@ different output classes (or target dimensions),
 i.e. different dimensions on the last axis of the predictions.
 Equivalent to \code{multioutput} argument in Scikit-Learn.
 Should be one of
-\code{None} (no aggregation), \code{"uniform_average"},
+\code{NULL} (no aggregation), \code{"uniform_average"},
 \code{"variance_weighted_average"}.}
 
 \item{num_regressors}{Number of independent regressors used
@@ -34,9 +34,9 @@ Defaults to \code{0}.}
 \description{
 Formula:
 
-\if{html}{\out{<div class="sourceCode python">}}\preformatted{sum_squares_residuals = sum((y_true - y_pred) ** 2)
-sum_squares = sum((y_true - mean(y_true)) ** 2)
-R2 = 1 - sum_squares_residuals / sum_squares
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{sum_squares_residuals <- sum((y_true - y_pred) ** 2)
+sum_squares <- sum((y_true - mean(y_true)) ** 2)
+R2 <- 1 - sum_squares_residuals / sum_squares
 }\if{html}{\out{</div>}}
 
 This is also called the
@@ -55,13 +55,14 @@ account for variation in the target.
 This metric can also compute the "Adjusted R2" score.
 }
 \section{Examples}{
-\if{html}{\out{<div class="sourceCode python">}}\preformatted{y_true = np.array([[1], [4], [3]], dtype=np.float32)
-y_pred = np.array([[2], [4], [4]], dtype=np.float32)
-metric = keras.metrics.R2Score()
-metric.update_state(y_true, y_pred)
-result = metric.result()
-result
-# 0.57142854
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{y_true <- rbind(1, 4, 3)
+y_pred <- rbind(2, 4, 4)
+metric <- metric_r2_score()
+metric$update_state(y_true, y_pred)
+metric$result()
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor(0.57142854, shape=(), dtype=float32)
 }\if{html}{\out{</div>}}
 }
 

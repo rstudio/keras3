@@ -6,7 +6,7 @@ This metric creates four local variables, `true_positives`,
 compute the precision at the given recall. The threshold for the given
 recall value is computed and used to evaluate the corresponding precision.
 
-If `sample_weight` is `None`, weights default to 1.
+If `sample_weight` is `NULL`, weights default to 1.
 Use `sample_weight` of 0 to mask values.
 
 If `class_id` is specified, we calculate precision by considering only the
@@ -17,28 +17,62 @@ indeed a correct label.
 # Usage
 Standalone usage:
 
-```python
-m = keras.metrics.PrecisionAtRecall(0.5)
-m.update_state([0, 0, 0, 1, 1], [0, 0.3, 0.8, 0.3, 0.8])
-m.result()
-# 0.5
+
+```r
+m <- metric_precision_at_recall(recall = 0.5)
+m$update_state(c(0, 0, 0, 1, 1), c(0, 0.3, 0.8, 0.3, 0.8))
+m$result()
 ```
 
-```python
-m.reset_state()
-m.update_state([0, 0, 0, 1, 1], [0, 0.3, 0.8, 0.3, 0.8],
-               sample_weight=[2, 2, 2, 1, 1])
-m.result()
-# 0.33333333
+```
+## [[  0   1   2   3   4   5   6   7   8   9  10  11  12  13  14  15  16  17
+##    18  19  20  21  22  23  24  25  26  27  28  29  30  31  32  33  34  35
+##    36  37  38  39  40  41  42  43  44  45  46  47  48  49  50  51  52  53
+##    54  55  56  57  58  59  60  61  62  63  64  65  66  67  68  69  70  71
+##    72  73  74  75  76  77  78  79  80  81  82  83  84  85  86  87  88  89
+##    90  91  92  93  94  95  96  97  98  99 100 101 102 103 104 105 106 107
+##   108 109 110 111 112 113 114 115 116 117 118 119 120 121 122 123 124 125
+##   126 127 128 129 130 131 132 133 134 135 136 137 138 139 140 141 142 143
+##   144 145 146 147 148 149 150 151 152 153 154 155 156 157 158 159]]
+```
+
+```
+## tf.Tensor(0.5, shape=(), dtype=float32)
+```
+
+
+```r
+m$reset_state()
+m$update_state(c(0, 0, 0, 1, 1), c(0, 0.3, 0.8, 0.3, 0.8),
+               sample_weight = c(2, 2, 2, 1, 1))
+m$result()
+```
+
+```
+## [[  0   1   2   3   4   5   6   7   8   9  10  11  12  13  14  15  16  17
+##    18  19  20  21  22  23  24  25  26  27  28  29  30  31  32  33  34  35
+##    36  37  38  39  40  41  42  43  44  45  46  47  48  49  50  51  52  53
+##    54  55  56  57  58  59  60  61  62  63  64  65  66  67  68  69  70  71
+##    72  73  74  75  76  77  78  79  80  81  82  83  84  85  86  87  88  89
+##    90  91  92  93  94  95  96  97  98  99 100 101 102 103 104 105 106 107
+##   108 109 110 111 112 113 114 115 116 117 118 119 120 121 122 123 124 125
+##   126 127 128 129 130 131 132 133 134 135 136 137 138 139 140 141 142 143
+##   144 145 146 147 148 149 150 151 152 153 154 155 156 157 158 159]]
+```
+
+```
+## tf.Tensor(0.33333334, shape=(), dtype=float32)
 ```
 
 Usage with `compile()` API:
 
-```python
-model.compile(
-    optimizer='sgd',
-    loss='mse',
-    metrics=[keras.metrics.PrecisionAtRecall(recall=0.8)])
+
+```r
+model %>% compile(
+  optimizer = 'sgd',
+  loss = 'mse',
+  metrics = list(metric_precision_at_recall(recall = 0.8))
+)
 ```
 
 @param recall
@@ -68,3 +102,4 @@ Passed on to the Python callable
 @seealso
 + <https:/keras.io/api/metrics/classification_metrics#precisionatrecall-class>
 + <https://www.tensorflow.org/api_docs/python/tf/keras/metrics/PrecisionAtRecall>
+

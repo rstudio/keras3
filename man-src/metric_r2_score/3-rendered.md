@@ -3,10 +3,11 @@ Computes R2 score.
 @description
 Formula:
 
-```python
-sum_squares_residuals = sum((y_true - y_pred) ** 2)
-sum_squares = sum((y_true - mean(y_true)) ** 2)
-R2 = 1 - sum_squares_residuals / sum_squares
+
+```r
+sum_squares_residuals <- sum((y_true - y_pred) ** 2)
+sum_squares <- sum((y_true - mean(y_true)) ** 2)
+R2 <- 1 - sum_squares_residuals / sum_squares
 ```
 
 This is also called the
@@ -25,14 +26,17 @@ is to ground-truth data.
 This metric can also compute the "Adjusted R2" score.
 
 # Examples
-```python
-y_true = np.array([[1], [4], [3]], dtype=np.float32)
-y_pred = np.array([[2], [4], [4]], dtype=np.float32)
-metric = keras.metrics.R2Score()
-metric.update_state(y_true, y_pred)
-result = metric.result()
-result
-# 0.57142854
+
+```r
+y_true <- rbind(1, 4, 3)
+y_pred <- rbind(2, 4, 4)
+metric <- metric_r2_score()
+metric$update_state(y_true, y_pred)
+metric$result()
+```
+
+```
+## tf.Tensor(0.57142854, shape=(), dtype=float32)
 ```
 
 @param class_aggregation
@@ -41,7 +45,7 @@ different output classes (or target dimensions),
 i.e. different dimensions on the last axis of the predictions.
 Equivalent to `multioutput` argument in Scikit-Learn.
 Should be one of
-`None` (no aggregation), `"uniform_average"`,
+`NULL` (no aggregation), `"uniform_average"`,
 `"variance_weighted_average"`.
 
 @param num_regressors
@@ -63,3 +67,4 @@ Passed on to the Python callable
 @family metrics
 @seealso
 + <https://www.tensorflow.org/api_docs/python/tf/keras/metrics/R2Score>
+

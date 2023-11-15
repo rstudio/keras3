@@ -16,11 +16,11 @@ metric_precision(
 \arguments{
 \item{...}{Passed on to the Python callable}
 
-\item{thresholds}{(Optional) A float value, or a Python list/tuple of float
+\item{thresholds}{(Optional) A float value, or a Python list of float
 threshold values in \verb{[0, 1]}. A threshold is compared with
 prediction values to determine the truth value of predictions (i.e.,
-above the threshold is \code{True}, below is \code{False}). If used with a
-loss function that sets \code{from_logits=True} (i.e. no sigmoid applied
+above the threshold is \code{TRUE}, below is \code{FALSE}). If used with a
+loss function that sets \code{from_logits=TRUE} (i.e. no sigmoid applied
 to predictions), \code{thresholds} should be set to 0. One metric value
 is generated for each threshold value. If neither \code{thresholds} nor
 \code{top_k} are set, the default is to calculate precision with
@@ -44,7 +44,7 @@ ultimately returned as \code{precision}, an idempotent operation that simply
 divides \code{true_positives} by the sum of \code{true_positives} and
 \code{false_positives}.
 
-If \code{sample_weight} is \code{None}, weights default to 1.
+If \code{sample_weight} is \code{NULL}, weights default to 1.
 Use \code{sample_weight} of 0 to mask values.
 
 If \code{top_k} is set, we'll calculate precision as how often on average a class
@@ -59,46 +59,54 @@ the top-k highest predictions, and computing the fraction of them for which
 \section{Usage}{
 Standalone usage:
 
-\if{html}{\out{<div class="sourceCode python">}}\preformatted{m = keras.metrics.Precision()
-m.update_state([0, 1, 1, 1], [1, 0, 1, 1])
-m.result()
-# 0.6666667
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{m <- metric_precision()
+m$update_state(c(0, 1, 1, 1), c(1, 0, 1, 1))
+m$result()
 }\if{html}{\out{</div>}}
 
-\if{html}{\out{<div class="sourceCode python">}}\preformatted{m.reset_state()
-m.update_state([0, 1, 1, 1], [1, 0, 1, 1], sample_weight=[0, 0, 1, 0])
-m.result()
-# 1.0
+\if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor(0.6666667, shape=(), dtype=float32)
 }\if{html}{\out{</div>}}
 
-\if{html}{\out{<div class="sourceCode python">}}\preformatted{# With top_k=2, it will calculate precision over y_true[:2]
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{m$reset_state()
+m$update_state(c(0, 1, 1, 1), c(1, 0, 1, 1), sample_weight=c(0, 0, 1, 0))
+m$result()
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor(0.9999999, shape=(), dtype=float32)
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{# With top_k=2, it will calculate precision over y_true[:2]
 # and y_pred[:2]
-m = keras.metrics.Precision(top_k=2)
-m.update_state([0, 0, 1, 1], [1, 1, 1, 1])
-m.result()
-# 0.0
+m <- metric_precision(top_k = 2)
+m$update_state(c(0, 0, 1, 1), c(1, 1, 1, 1))
+m$result()
 }\if{html}{\out{</div>}}
 
-\if{html}{\out{<div class="sourceCode python">}}\preformatted{# With top_k=4, it will calculate precision over y_true[:4]
+\if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor(0.0, shape=(), dtype=float32)
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{# With top_k=4, it will calculate precision over y_true[:4]
 # and y_pred[:4]
-m = keras.metrics.Precision(top_k=4)
-m.update_state([0, 0, 1, 1], [1, 1, 1, 1])
-m.result()
-# 0.5
+m <- metric_precision(top_k = 4)
+m$update_state(c(0, 0, 1, 1), c(1, 1, 1, 1))
+m$result()
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor(0.5, shape=(), dtype=float32)
 }\if{html}{\out{</div>}}
 
 Usage with \code{compile()} API:
 
-\if{html}{\out{<div class="sourceCode python">}}\preformatted{model.compile(optimizer='sgd',
-              loss='mse',
-              metrics=[keras.metrics.Precision()])
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{model \%>\% compile(optimizer = 'sgd',
+                  loss = 'mse',
+                  metrics = list(metric_precision()))
 }\if{html}{\out{</div>}}
 
-Usage with a loss with \code{from_logits=True}:
+Usage with a loss with \code{from_logits=TRUE}:
 
-\if{html}{\out{<div class="sourceCode python">}}\preformatted{model.compile(optimizer='adam',
-              loss=keras.losses.BinaryCrossentropy(from_logits=True),
-              metrics=[keras.metrics.Precision(thresholds=0)])
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{model \%>\% compile(optimizer = 'adam',
+                  loss = loss_binary_crossentropy(from_logits = TRUE),
+                  metrics = list(metric_precision(thresholds = 0)))
 }\if{html}{\out{</div>}}
 }
 
