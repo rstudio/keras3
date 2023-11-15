@@ -814,8 +814,6 @@ random_array <- function(..., gen = stats::runif) {
 #'
 #' @export
 #' @seealso [k_shape()]
-#' @examplesIf keras::is_keras_available()
-
 shape <- function(...) {
 
   fix <- function(x) {
@@ -848,6 +846,7 @@ shape <- function(...) {
 
 
 #' @export
+#' @rdname shape
 format.keras_shape <- function(x, ...) {
   x <- vapply(x, function(d) format(d %||% "NA"), "")
   x <- paste0(x, collapse = ", ")
@@ -855,11 +854,13 @@ format.keras_shape <- function(x, ...) {
 }
 
 #' @export
+#' @rdname shape
 print.keras_shape <- function(x, ...) {
   writeLines(format(x, ...))
   invisible(x)
 }
 
+#' @rdname shape
 #' @export
 `[.keras_shape` <- function(x, ...) {
   out <- unclass(x)[...]
@@ -867,9 +868,14 @@ print.keras_shape <- function(x, ...) {
   out
 }
 
+#' @rdname shape
 #' @export
 r_to_py.keras_shape <- function(x, convert = FALSE) {
   tuple(x)
 }
 
-
+#' @rdname shape
+#' @export
+as.integer.keras_shape <- function(x, ...) {
+  vapply(x, function(el) el %||% NA_integer_, 1L)
+}

@@ -21,9 +21,9 @@ Normalize a batch of inputs so that each input in the batch has a L2 norm
 equal to 1 (across the axes specified in \code{axis}).
 }
 \section{Examples}{
-\if{html}{\out{<div class="sourceCode r">}}\preformatted{data <- k_reshape(1:6, new_shape =c(2, 3))
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{data <- k_reshape(1:6, new_shape = c(2, 3))
 normalized_data <- layer_unit_normalization(data)
-sum(normalized_data[1,]^2)
+k_sum(normalized_data[1,]^2)
 }\if{html}{\out{</div>}}
 
 \if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor(0.9999999, shape=(), dtype=float32)

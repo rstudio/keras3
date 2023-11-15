@@ -1510,10 +1510,10 @@ function (x, repeats, axis = NULL)
 "man-src/k_reshape/0-upstream.md" # view the upstream doc
 #' @eval readLines("man-src/k_reshape/3-rendered.md")
 k_reshape <-
-function (x, new_shape)
+function (x, ..., new_shape = list(...))
 {
-    args <- capture_args2(list(new_shape = normalize_shape))
-    do.call(keras$ops$reshape, args)
+    keras$ops$reshape(x, tuple(lapply(shape(new_shape), function(d) d %||%
+        -1L)))
 }
 
 
