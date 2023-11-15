@@ -111,8 +111,8 @@ Whether to visits subdirectories pointed to by symlinks.
 Defaults to `False`.
 
 @export
-@family utils
 @family dataset utils
+@family utils
 @seealso
 + <https:/keras.io/api/data_loading/audio#audiodatasetfromdirectory-function>
 + <https://www.tensorflow.org/api_docs/python/tf/keras/utils/audio_dataset_from_directory>

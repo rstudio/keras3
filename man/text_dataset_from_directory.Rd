@@ -119,6 +119,13 @@ Only \code{.txt} files are supported at this time.
 \item \url{https://www.tensorflow.org/api_docs/python/tf/keras/utils/text_dataset_from_directory}
 }
 
+Other dataset utils: 
+\code{\link{audio_dataset_from_directory}()},
+\code{\link{image_dataset_from_directory}()},
+\code{\link{pack_x_y_sample_weight}()},
+\code{\link{split_dataset}()},
+\code{\link{unpack_x_y_sample_weight}()}
+
 Other utils: 
 \code{\link{audio_dataset_from_directory}()},
 \code{\link{clear_session}()},
@@ -150,11 +157,6 @@ Other utils:
 \code{\link{timeseries_dataset_from_array}()},
 \code{\link{to_categorical}()},
 \code{\link{unpack_x_y_sample_weight}()}
-
-Other dataset utils: 
-\code{\link{audio_dataset_from_directory}()},
-\code{\link{image_dataset_from_directory}()},
-\code{\link{split_dataset}()}
 }
 \concept{dataset utils}
 \concept{utils}

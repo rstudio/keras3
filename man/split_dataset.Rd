@@ -59,7 +59,9 @@ int(right_ds.cardinality())
 Other dataset utils: 
 \code{\link{audio_dataset_from_directory}()},
 \code{\link{image_dataset_from_directory}()},
-\code{\link{text_dataset_from_directory}()}
+\code{\link{pack_x_y_sample_weight}()},
+\code{\link{text_dataset_from_directory}()},
+\code{\link{unpack_x_y_sample_weight}()}
 
 Other utils: 
 \code{\link{audio_dataset_from_directory}()},

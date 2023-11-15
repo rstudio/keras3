@@ -157,6 +157,13 @@ Animated gifs are truncated to the first frame.
 \item \url{https://www.tensorflow.org/api_docs/python/tf/keras/utils/image_dataset_from_directory}
 }
 
+Other dataset utils: 
+\code{\link{audio_dataset_from_directory}()},
+\code{\link{pack_x_y_sample_weight}()},
+\code{\link{split_dataset}()},
+\code{\link{text_dataset_from_directory}()},
+\code{\link{unpack_x_y_sample_weight}()}
+
 Other image utils: 
 \code{\link{image_array_save}()},
 \code{\link{image_from_array}()},
@@ -200,11 +207,6 @@ Other utils:
 \code{\link{timeseries_dataset_from_array}()},
 \code{\link{to_categorical}()},
 \code{\link{unpack_x_y_sample_weight}()}
-
-Other dataset utils: 
-\code{\link{audio_dataset_from_directory}()},
-\code{\link{split_dataset}()},
-\code{\link{text_dataset_from_directory}()}
 }
 \concept{dataset utils}
 \concept{image utils}

@@ -703,16 +703,19 @@ make_roxygen_tags <- function(endpoint, py_obj = py_eval(endpoint), type) {
     family %<>% setdiff("ops")
   }
 
+  if(any(str_detect(py_obj$`__module__`, c("data_adapters", "data_adapter_utils"))))
+    family %<>% c("dataset utils", .)
+
   if(endpoint |> endsWith("_dataset_from_directory"))
-    family %<>% c("dataset utils")
+    family %<>% c("dataset utils", .)
 
   if(endpoint == "keras.layers.TFSMLayer")
-    family %<>% c("saving", "layers") %>% unique()
+    family %<>% c("saving", "layers", .)
 
   # if(endpoint == "keras.utils.clear_session")
   #   family %<>% c("utils")
 
-  out$family <- family
+  out$family <- unique(family)
   links <- c(get_keras_doc_link(endpoint),
              get_tf_doc_link(endpoint))
   out$seealso <- str_flatten_lines("", glue("+ <{links}>"))

@@ -27,6 +27,7 @@ not provided.
 A tuple of the form `(x,)`, `(x, y)`, or `(x, y, sample_weight)`.
 
 @export
+@family dataset utils
 @family utils
 @seealso
 + <https://www.tensorflow.org/api_docs/python/tf/keras/utils/unpack_x_y_sample_weight>
