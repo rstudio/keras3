@@ -4,7 +4,7 @@
 \alias{k_unstack}
 \title{Unpacks the given dimension of a rank-R tensor into rank-(R-1) tensors.}
 \usage{
-k_unstack(x, num = NULL, axis = 0L)
+k_unstack(x, num = NULL, axis = 1L)
 }
 \arguments{
 \item{x}{The input tensor.}

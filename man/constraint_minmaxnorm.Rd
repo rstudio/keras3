@@ -4,7 +4,7 @@
 \alias{constraint_minmaxnorm}
 \title{MinMaxNorm weight constraint.}
 \usage{
-constraint_minmaxnorm(min_value = 0, max_value = 1, rate = 1, axis = 0L)
+constraint_minmaxnorm(min_value = 0, max_value = 1, rate = 1, axis = 1L)
 }
 \arguments{
 \item{min_value}{the minimum norm for the incoming weights.}

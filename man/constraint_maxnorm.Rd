@@ -4,7 +4,7 @@
 \alias{constraint_maxnorm}
 \title{MaxNorm weight constraint.}
 \usage{
-constraint_maxnorm(max_value = 2L, axis = 0L)
+constraint_maxnorm(max_value = 2L, axis = 1L)
 }
 \arguments{
 \item{max_value}{the maximum norm value for the incoming weights.}

@@ -51,7 +51,7 @@ function (shape, mean = 0, stddev = 1, dtype = NULL, seed = NULL)
 "man-src/random_shuffle/0-upstream.md" # view the upstream doc
 #' @eval readLines("man-src/random_shuffle/3-rendered.md")
 random_shuffle <-
-function (x, axis = 0L, seed = NULL)
+function (x, axis = 1L, seed = NULL)
 {
     args <- capture_args2(list(axis = as_axis, seed = as_integer))
     do.call(keras$random$shuffle, args)

@@ -4,7 +4,7 @@
 \alias{k_split}
 \title{Split a tensor into chunks.}
 \usage{
-k_split(x, indices_or_sections, axis = 0L)
+k_split(x, indices_or_sections, axis = 1L)
 }
 \arguments{
 \item{x}{Input tensor.}

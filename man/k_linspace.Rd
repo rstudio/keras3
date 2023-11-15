@@ -11,7 +11,7 @@ k_linspace(
   endpoint = TRUE,
   retstep = FALSE,
   dtype = NULL,
-  axis = 0L
+  axis = 1L
 )
 }
 \arguments{

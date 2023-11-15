@@ -4,7 +4,7 @@
 \alias{random_shuffle}
 \title{Shuffle the elements of a tensor uniformly at random along an axis.}
 \usage{
-random_shuffle(x, axis = 0L, seed = NULL)
+random_shuffle(x, axis = 1L, seed = NULL)
 }
 \arguments{
 \item{x}{The tensor to be shuffled.}

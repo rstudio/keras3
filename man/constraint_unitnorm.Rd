@@ -4,7 +4,7 @@
 \alias{constraint_unitnorm}
 \title{Constrains the weights incident to each hidden unit to have unit norm.}
 \usage{
-constraint_unitnorm(axis = 0L)
+constraint_unitnorm(axis = 1L)
 }
 \arguments{
 \item{axis}{integer, axis along which to calculate weight norms.

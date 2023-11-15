@@ -5,7 +5,7 @@
 "man-src/constraint_maxnorm/0-upstream.md" # view the upstream doc
 #' @eval readLines("man-src/constraint_maxnorm/3-rendered.md")
 constraint_maxnorm <-
-function (max_value = 2L, axis = 0L)
+function (max_value = 2L, axis = 1L)
 {
     args <- capture_args2(list(max_value = as_integer, axis = as_axis))
     do.call(keras$constraints$MaxNorm, args)
@@ -16,7 +16,7 @@ function (max_value = 2L, axis = 0L)
 "man-src/constraint_minmaxnorm/0-upstream.md" # view the upstream doc
 #' @eval readLines("man-src/constraint_minmaxnorm/3-rendered.md")
 constraint_minmaxnorm <-
-function (min_value = 0, max_value = 1, rate = 1, axis = 0L)
+function (min_value = 0, max_value = 1, rate = 1, axis = 1L)
 {
     args <- capture_args2(list(axis = as_axis))
     do.call(keras$constraints$MinMaxNorm, args)
@@ -38,7 +38,7 @@ function ()
 "man-src/constraint_unitnorm/0-upstream.md" # view the upstream doc
 #' @eval readLines("man-src/constraint_unitnorm/3-rendered.md")
 constraint_unitnorm <-
-function (axis = 0L)
+function (axis = 1L)
 {
     args <- capture_args2(list(axis = as_axis))
     do.call(keras$constraints$UnitNorm, args)

@@ -4,7 +4,7 @@
 \alias{k_tensordot}
 \title{Compute the tensor dot product along specified axes.}
 \usage{
-k_tensordot(x1, x2, axes = 2L)
+k_tensordot(x1, x2, axes = 3L)
 }
 \arguments{
 \item{x1}{First tensor.}

@@ -4,7 +4,7 @@
 \alias{k_concatenate}
 \title{Join a sequence of tensors along an existing axis.}
 \usage{
-k_concatenate(xs, axis = 0L)
+k_concatenate(xs, axis = 1L)
 }
 \arguments{
 \item{xs}{The sequence of tensors to concatenate.}

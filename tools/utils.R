@@ -1033,10 +1033,13 @@ make_r_fn <- function(endpoint,
 
   # TODO: rename keras_class_type to keras_endpoint
   if(endpoint |> startsWith("keras.ops.")) {
-    return(make_r_fn.op(endpoint, py_obj, transformers))
-  }
-  if(endpoint |> startsWith("keras.activation")) {
-    return(make_r_fn.activation(endpoint, py_obj, transformers))
+
+    fn <- make_r_fn.op(endpoint, py_obj, transformers)
+
+  } else if(endpoint |> startsWith("keras.activation")) {
+
+    fn <- make_r_fn.activation(endpoint, py_obj, transformers)
+
   }
 
   # if(endpoint == "keras.random.randint") {
@@ -1050,10 +1053,41 @@ make_r_fn <- function(endpoint,
   # }
 
 
-  switch(keras_class_type(py_obj),
+  else {
+
+    fn <- switch(keras_class_type(py_obj),
          layer = make_r_fn.layer(endpoint, py_obj, transformers),
          metric = , loss = make_r_fn.loss(endpoint, py_obj, transformers),
          make_r_fn.default(endpoint, py_obj, transformers))
+  }
+
+  if (length(transformers)) {
+    frmls <- formals(fn)
+    for (name in intersect(names(frmls), names(transformers))) {
+      default <- frmls[[name]]
+      if(rlang::is_missing(default)) next
+
+      # if(deparse(t))
+      transformer_expr <- transformers[[name]]
+      if(deparse1(transformer_expr) %in% c("as_axis", "as_index")) {
+        default2 <- rapply(list(default),
+                           \(x) if(x >= 0L) x + 1L else x,
+                           classes = "integer", how = "replace")[[1L]]
+        frmls[name] <- list2("{name}" := default2)
+      }
+      #    is.integer(default) && default >= 0L) {
+      #
+      # }
+      # transformer <- eval(transformers[[name]], asNamespace('keras'))
+      # frmls[name] <- list2("{name}" := transformer(default)) #  } %error% browser()
+    }
+    ofn <- fn
+    formals(fn) <- frmls
+    if(length(attrs <- attributes(ofn)))
+      attributes(fn) <- attrs
+  }
+
+  fn
 
 }
 

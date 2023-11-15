@@ -4,7 +4,7 @@
 \alias{k_diagonal}
 \title{Return specified diagonals.}
 \usage{
-k_diagonal(x, offset = 0L, axis1 = 0L, axis2 = 1L)
+k_diagonal(x, offset = 0L, axis1 = 1L, axis2 = 2L)
 }
 \arguments{
 \item{x}{Input tensor.}

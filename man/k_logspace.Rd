@@ -11,7 +11,7 @@ k_logspace(
   endpoint = TRUE,
   base = 10L,
   dtype = NULL,
-  axis = 0L
+  axis = 1L
 )
 }
 \arguments{

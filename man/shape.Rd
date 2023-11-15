@@ -2,9 +2,24 @@
 % Please edit documentation in R/utils.R
 \name{shape}
 \alias{shape}
+\alias{format.keras_shape}
+\alias{print.keras_shape}
+\alias{[.keras_shape}
+\alias{r_to_py.keras_shape}
+\alias{as.integer.keras_shape}
 \title{Tensor shape utility}
 \usage{
 shape(...)
+
+\method{format}{keras_shape}(x, ...)
+
+\method{print}{keras_shape}(x, ...)
+
+\method{[}{keras_shape}(x, ...)
+
+\method{r_to_py}{keras_shape}(x, convert = FALSE)
+
+\method{as.integer}{keras_shape}(x, ...)
 }
 \arguments{
 \item{...}{A shape specification. Numerics, \code{NULL} and tensors are valid.
@@ -54,10 +69,6 @@ k_shape(eager_tensor)
 }
 \description{
 This function can be used to create or get the shape of an object.
-}
-\examples{
-\dontshow{if (keras::is_keras_available()) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
-\dontshow{\}) # examplesIf}
 }
 \seealso{
 \code{\link[=k_shape]{k_shape()}}

@@ -7,10 +7,10 @@ if(!"source:tools/translate-tools.R" %in% search()) envir::attach_source("tools/
 
 # TODO: k_fft() should really accept and return complex tensors too.
 # TODO: activation_resolve() or activation_get() as alias of keras.activation.get() ?
-
-# Processing:
 # TODO: the 2-translated.Rmd should include a chunk w/ the function def (for easy seeing while editing)
 #       with chunk options (include = FALSE)
+
+# Processing:
 #
 # TODO: any formals that are transformed w/ as_axis should have the default arg also
 #       transformed. .e.g, k_diagonal(axis1 = 1, axis2 = 2)

@@ -4,7 +4,7 @@
 \alias{k_stack}
 \title{Join a sequence of tensors along a new axis.}
 \usage{
-k_stack(x, axis = 0L)
+k_stack(x, axis = 1L)
 }
 \arguments{
 \item{x}{A sequence of tensors.}

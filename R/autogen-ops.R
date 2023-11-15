@@ -117,7 +117,7 @@ keras$ops$stop_gradient(variable)
 "man-src/k_unstack/0-upstream.md" # view the upstream doc
 #' @eval readLines("man-src/k_unstack/3-rendered.md")
 k_unstack <-
-function (x, num = NULL, axis = 0L)
+function (x, num = NULL, axis = 1L)
 {
     args <- capture_args2(list(axis = as_axis))
     do.call(keras$ops$unstack, args)
@@ -799,7 +799,7 @@ keras$ops$clip(x, x_min, x_max)
 "man-src/k_concatenate/0-upstream.md" # view the upstream doc
 #' @eval readLines("man-src/k_concatenate/3-rendered.md")
 k_concatenate <-
-function (xs, axis = 0L)
+function (xs, axis = 1L)
 {
     args <- capture_args2(list(axis = as_axis))
     do.call(keras$ops$concatenate, args)
@@ -906,7 +906,7 @@ function (x, k = 0L)
 "man-src/k_diagonal/0-upstream.md" # view the upstream doc
 #' @eval readLines("man-src/k_diagonal/3-rendered.md")
 k_diagonal <-
-function (x, offset = 0L, axis1 = 0L, axis2 = 1L)
+function (x, offset = 0L, axis1 = 1L, axis2 = 2L)
 {
     args <- capture_args2(list(offset = as_integer, axis1 = as_axis,
         axis2 = as_axis))
@@ -1164,7 +1164,7 @@ keras$ops$less_equal(x1, x2)
 #' @eval readLines("man-src/k_linspace/3-rendered.md")
 k_linspace <-
 function (start, stop, num = 50L, endpoint = TRUE, retstep = FALSE,
-    dtype = NULL, axis = 0L)
+    dtype = NULL, axis = 1L)
 {
     args <- capture_args2(list(num = as_integer, axis = as_axis))
     do.call(keras$ops$linspace, args)
@@ -1248,7 +1248,7 @@ keras$ops$logical_xor(x1, x2)
 #' @eval readLines("man-src/k_logspace/3-rendered.md")
 k_logspace <-
 function (start, stop, num = 50L, endpoint = TRUE, base = 10L,
-    dtype = NULL, axis = 0L)
+    dtype = NULL, axis = 1L)
 {
     args <- capture_args2(list(num = as_integer, base = as_integer,
         axis = as_axis))
@@ -1586,7 +1586,7 @@ function (x, axis = -1L)
 "man-src/k_split/0-upstream.md" # view the upstream doc
 #' @eval readLines("man-src/k_split/3-rendered.md")
 k_split <-
-function (x, indices_or_sections, axis = 0L)
+function (x, indices_or_sections, axis = 1L)
 {
     args <- capture_args2(list(indices_or_sections = as_integer,
         axis = as_axis))
@@ -1625,7 +1625,7 @@ function (x, axis = NULL)
 "man-src/k_stack/0-upstream.md" # view the upstream doc
 #' @eval readLines("man-src/k_stack/3-rendered.md")
 k_stack <-
-function (x, axis = 0L)
+function (x, axis = 1L)
 {
     args <- capture_args2(list(axis = as_axis))
     do.call(keras$ops$stack, args)
@@ -1712,7 +1712,7 @@ keras$ops$tanh(x)
 "man-src/k_tensordot/0-upstream.md" # view the upstream doc
 #' @eval readLines("man-src/k_tensordot/3-rendered.md")
 k_tensordot <-
-function (x1, x2, axes = 2L)
+function (x1, x2, axes = 3L)
 {
     args <- capture_args2(list(axes = as_axis))
     do.call(keras$ops$tensordot, args)
