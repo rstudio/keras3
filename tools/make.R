@@ -222,8 +222,8 @@ get_translations <- function() {
         str_replace_all(fixed("np.random.rand"), "random_uniform(c") %>%
         str_replace_all("^([a-z_0-9A-Z]+) =", "\\1 <-") %>%
         str_replace_all("None", "NULL") %>%
-        str_replace_all("\\bdict", "named list") %>%
-        str_replace_all("\\bDict", "Named list") %>%
+        str_replace_all("\\bdict(ionary)?", "named list") %>%
+        str_replace_all("\\bDict(ionary)?", "Named list") %>%
         str_replace_all("tuple", "list") %>%
         str_replace_all("Tuple", "List") %>%
         str_replace_all("True", "TRUE") %>%
@@ -231,6 +231,7 @@ get_translations <- function() {
         str_replace_all(fixed("np.random.random(("), "random_uniform(c(") %>%
         # str_replace_all("([0-9])(\\.0?\\b)", "\\1") %>%
         str_replace_all(fixed("list/list"), "list") %>%
+        str_replace_all(fixed("list/list", ignore_case = TRUE), "List") %>%
         str_replace_all(fixed("keras.layers."), "layer_") %>%
         str_replace_all(fixed("layers."), "layer_") %>%
         str_flatten_lines() %>%
@@ -503,13 +504,9 @@ df |>
     txt <- df |>
       rowwise() |>
       mutate(final_dump = str_flatten_lines(
-
         glue(r"--("{fs::path('man-src', r_name, ext = 'Rmd')}" # |>file.edit() # or cmd+click to edit man page)--"),
         glue(r"--("{fs::path(man_src_dir, "0-upstream.md")}" # view the upstream doc)--"),
-        # glue(r"--("{fs::path('man-src', r_name, ext = 'Rmd') "2-translated.Rmd")}" # |>file.edit() # or cmd+click to edit man page)--"),
         glue(r"--(#' @eval readLines("{fs::path(man_src_dir, "3-rendered.md")}") )--"),
-
-        # glue(r"--(#' @eval readLines("{fs::path(man_src_dir, "3-rendered.md")}") )--"),
         str_c(r_name, " <- "),
         deparse(r_fn),
         ""
@@ -527,23 +524,12 @@ df |>
       str_flatten_lines() |>
       str_trim()
 
-    txt <- txt %>% {
-      while (nchar(.) != nchar(. <- gsub("#'\n#'\n", "#'\n", ., fixed = TRUE))) {} # TODO: do this in dump
-      while (nchar(.) != nchar(. <- gsub("\n\n\n\n", "\n\n\n", ., fixed = TRUE))) {}
-      .
-    } %>%
+    txt <- txt %>%
+      str_flatten_and_compact_lines(roxygen = TRUE) %>%
       # handle empty @description TODO: handle this earlier, in dump.
       gsub("#' @description\n#'\n#' @", "#' @", ., fixed = TRUE)
 
-
     file <- paste0("R/autogen-", grp$file)
-    # if (grp$endpoint_sans_name == "layers") {
-    #   file <- "R/layers.R"
-    #   unlink(file)
-    # }
-    # else
-    #   file <- glue("R/autogen-{grp$endpoint_sans_name}.R")
-
     writeLines(txt, file)
   })
 

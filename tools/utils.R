@@ -127,10 +127,14 @@ attach_eval({
     chr
   }
 
-  str_normalize_whitespace <- function(...) {
-    str_split_lines(...) |>
+  str_flatten_and_compact_lines <- function(..., roxygen = FALSE) {
+    out <- str_split_lines(...) |>
       str_trim("right") |>
-      str_flatten_lines("\n{4,}", "\n\n\n")
+      str_flatten_lines() |>
+      str_replace_all("\n{4,}", "\n\n\n")
+    if(roxygen)
+      out <- out |> str_replace_all("\n(#'\n){3,}", "\n#'\n#'\n")
+    str_flatten_lines(out)
   }
 
   dput_cb <- function (x, echo = TRUE)  {
