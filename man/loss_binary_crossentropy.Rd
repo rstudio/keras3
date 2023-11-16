@@ -130,7 +130,7 @@ bce(y_true, y_pred)
 loss_binary_crossentropy() # OR ...('from_logits=FALSE')
 }\if{html}{\out{</div>}}
 
-\if{html}{\out{<div class="sourceCode">}}\preformatted{## <keras.src.losses.losses.BinaryCrossentropy object at 0x2a01b4a60>
+\if{html}{\out{<div class="sourceCode">}}\preformatted{## <keras.src.losses.losses.BinaryCrossentropy object>
 }\if{html}{\out{</div>}}
 
 \if{html}{\out{<div class="sourceCode r">}}\preformatted{# 2. Update `y_pred` to use probabilities instead of logits
