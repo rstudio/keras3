@@ -22,7 +22,7 @@ to -1 or 1 with shape = \verb{[batch_size, d0, .. dN]}.}
 \description{
 Formula:
 
-\if{html}{\out{<div class="sourceCode python">}}\preformatted{loss = mean(square(maximum(1 - y_true * y_pred, 0)), axis=-1)
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{loss <- mean(square(maximum(1 - y_true * y_pred, 0)))
 }\if{html}{\out{</div>}}
 
 \code{y_true} values are expected to be -1 or 1. If binary (0 or 1) labels are
@@ -31,15 +31,21 @@ provided we will convert them to -1 or 1.
 \section{Usage}{
 Standalone usage:
 
-\if{html}{\out{<div class="sourceCode python">}}\preformatted{m = keras.metrics.SquaredHinge()
-m.update_state([[0, 1], [0, 0]], [[0.6, 0.4], [0.4, 0.6]])
-m.result()
-# 1.86
-m.reset_state()
-m.update_state([[0, 1], [0, 0]], [[0.6, 0.4], [0.4, 0.6]],
-               sample_weight=[1, 0])
-m.result()
-# 1.46
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{m <- metric_squared_hinge()
+m$update_state(rbind(c(0, 1), c(0, 0)), rbind(c(0.6, 0.4), c(0.4, 0.6)))
+m$result()
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor(1.86, shape=(), dtype=float32)
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{m$reset_state()
+m$update_state(rbind(c(0, 1), c(0, 0)), rbind(c(0.6, 0.4), c(0.4, 0.6)),
+               sample_weight = c(1, 0))
+m$result()
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor(1.46, shape=(), dtype=float32)
 }\if{html}{\out{</div>}}
 }
 

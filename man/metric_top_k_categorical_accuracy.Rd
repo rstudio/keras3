@@ -33,26 +33,33 @@ Computes how often targets are in the top \code{K} predictions.
 \section{Usage}{
 Standalone usage:
 
-\if{html}{\out{<div class="sourceCode python">}}\preformatted{m = keras.metrics.TopKCategoricalAccuracy(k=1)
-m.update_state([[0, 0, 1], [0, 1, 0]],
-               [[0.1, 0.9, 0.8], [0.05, 0.95, 0]])
-m.result()
-# 0.5
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{m <- metric_top_k_categorical_accuracy(k = 1)
+m$update_state(
+  rbind(c(0, 0, 1), c(0, 1, 0)),
+  k_array(rbind(c(0.1, 0.9, 0.8), c(0.05, 0.95, 0)), dtype = "float32")
+)
+m$result()
 }\if{html}{\out{</div>}}
 
-\if{html}{\out{<div class="sourceCode python">}}\preformatted{m.reset_state()
-m.update_state([[0, 0, 1], [0, 1, 0]],
-               [[0.1, 0.9, 0.8], [0.05, 0.95, 0]],
-               sample_weight=[0.7, 0.3])
-m.result()
-# 0.3
+\if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor(0.5, shape=(), dtype=float32)
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{m$reset_state()
+m$update_state(
+  rbind(c(0, 0, 1), c(0, 1, 0)),
+  k_array(rbind(c(0.1, 0.9, 0.8), c(0.05, 0.95, 0)), dtype = "float32"),
+  sample_weight = c(0.7, 0.3))
+m$result()
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor(0.3, shape=(), dtype=float32)
 }\if{html}{\out{</div>}}
 
 Usage with \code{compile()} API:
 
-\if{html}{\out{<div class="sourceCode python">}}\preformatted{model.compile(optimizer='sgd',
-              loss='categorical_crossentropy',
-              metrics=[keras.metrics.TopKCategoricalAccuracy()])
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{model.compile(optimizer = 'sgd',
+              loss = 'categorical_crossentropy',
+              metrics = list(metric_top_k_categorical_accuracy()))
 }\if{html}{\out{</div>}}
 }
 

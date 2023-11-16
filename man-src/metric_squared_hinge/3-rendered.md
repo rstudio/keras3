@@ -3,8 +3,9 @@ Computes the hinge metric between `y_true` and `y_pred`.
 @description
 Formula:
 
-```python
-loss = mean(square(maximum(1 - y_true * y_pred, 0)), axis=-1)
+
+```r
+loss <- mean(square(maximum(1 - y_true * y_pred, 0)))
 ```
 
 `y_true` values are expected to be -1 or 1. If binary (0 or 1) labels are
@@ -13,16 +14,26 @@ provided we will convert them to -1 or 1.
 # Usage
 Standalone usage:
 
-```python
-m = keras.metrics.SquaredHinge()
-m.update_state([[0, 1], [0, 0]], [[0.6, 0.4], [0.4, 0.6]])
-m.result()
-# 1.86
-m.reset_state()
-m.update_state([[0, 1], [0, 0]], [[0.6, 0.4], [0.4, 0.6]],
-               sample_weight=[1, 0])
-m.result()
-# 1.46
+
+```r
+m <- metric_squared_hinge()
+m$update_state(rbind(c(0, 1), c(0, 0)), rbind(c(0.6, 0.4), c(0.4, 0.6)))
+m$result()
+```
+
+```
+## tf.Tensor(1.86, shape=(), dtype=float32)
+```
+
+```r
+m$reset_state()
+m$update_state(rbind(c(0, 1), c(0, 0)), rbind(c(0.6, 0.4), c(0.4, 0.6)),
+               sample_weight = c(1, 0))
+m$result()
+```
+
+```
+## tf.Tensor(1.46, shape=(), dtype=float32)
 ```
 
 @param name
@@ -47,3 +58,4 @@ Passed on to the Python callable
 @seealso
 + <https:/keras.io/api/metrics/hinge_metrics#squaredhinge-class>
 + <https://www.tensorflow.org/api_docs/python/tf/keras/metrics/SquaredHinge>
+

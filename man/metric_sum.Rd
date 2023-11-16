@@ -21,16 +21,20 @@ This metric creates one variable, \code{total}.
 This is ultimately returned as the sum value.
 }
 \section{Examples}{
-\if{html}{\out{<div class="sourceCode python">}}\preformatted{m = metrics.Sum()
-m.update_state([1, 3, 5, 7])
-m.result()
-# 16.0
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{m <- metric_sum()
+m$update_state(c(1, 3, 5, 7))
+m$result()
 }\if{html}{\out{</div>}}
 
-\if{html}{\out{<div class="sourceCode python">}}\preformatted{m = metrics.Sum()
-m.update_state([1, 3, 5, 7], sample_weight=[1, 1, 0, 0])
-m.result()
-# 4.0
+\if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor(16.0, shape=(), dtype=float32)
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{m <- metric_sum()
+m$update_state(c(1, 3, 5, 7), sample_weight = c(1, 1, 0, 0))
+m$result()
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor(4.0, shape=(), dtype=float32)
 }\if{html}{\out{</div>}}
 }
 

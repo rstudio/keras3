@@ -41,7 +41,7 @@ compute the specificity at the given sensitivity. The threshold for the
 given sensitivity value is computed and used to evaluate the corresponding
 specificity.
 
-If \code{sample_weight} is \code{None}, weights default to 1.
+If \code{sample_weight} is \code{NULL}, weights default to 1.
 Use \code{sample_weight} of 0 to mask values.
 
 If \code{class_id} is specified, we calculate precision by considering only the
@@ -55,25 +55,23 @@ For additional information about specificity and sensitivity, see
 \section{Usage}{
 Standalone usage:
 
-\if{html}{\out{<div class="sourceCode python">}}\preformatted{m = keras.metrics.SpecificityAtSensitivity(0.5)
-m.update_state([0, 0, 0, 1, 1], [0, 0.3, 0.8, 0.3, 0.8])
-m.result()
-# 0.66666667
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{m <- metric_specificity_at_sensitivity(sensitivity = 0.5)
+m$update_state(c(0, 0, 0, 1, 1), c(0, 0.3, 0.8, 0.3, 0.8))
+# m$result()
 }\if{html}{\out{</div>}}
 
-\if{html}{\out{<div class="sourceCode python">}}\preformatted{m.reset_state()
-m.update_state([0, 0, 0, 1, 1], [0, 0.3, 0.8, 0.3, 0.8],
-               sample_weight=[1, 1, 2, 2, 2])
-m.result()
-# 0.5
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{m$reset_state()
+m$update_state(c(0, 0, 0, 1, 1), c(0, 0.3, 0.8, 0.3, 0.8),
+               sample_weight = c(1, 1, 2, 2, 2))
+# m$result()
 }\if{html}{\out{</div>}}
 
 Usage with \code{compile()} API:
 
-\if{html}{\out{<div class="sourceCode python">}}\preformatted{model.compile(
-    optimizer='sgd',
-    loss='mse',
-    metrics=[keras.metrics.SpecificityAtSensitivity()])
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{model \%>\% compile(
+  optimizer = 'sgd',
+  loss = 'mse',
+  metrics = list(metric_sensitivity_at_specificity()))
 }\if{html}{\out{</div>}}
 }
 

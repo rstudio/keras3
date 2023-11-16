@@ -8,18 +8,26 @@ This metric creates one variable, `total`.
 This is ultimately returned as the sum value.
 
 # Examples
-```python
-m = metrics.Sum()
-m.update_state([1, 3, 5, 7])
-m.result()
-# 16.0
+
+```r
+m <- metric_sum()
+m$update_state(c(1, 3, 5, 7))
+m$result()
 ```
 
-```python
-m = metrics.Sum()
-m.update_state([1, 3, 5, 7], sample_weight=[1, 1, 0, 0])
-m.result()
-# 4.0
+```
+## tf.Tensor(16.0, shape=(), dtype=float32)
+```
+
+
+```r
+m <- metric_sum()
+m$update_state(c(1, 3, 5, 7), sample_weight = c(1, 1, 0, 0))
+m$result()
+```
+
+```
+## tf.Tensor(4.0, shape=(), dtype=float32)
 ```
 
 @param name
@@ -35,3 +43,4 @@ Passed on to the Python callable
 @family metrics
 @seealso
 + <https://www.tensorflow.org/api_docs/python/tf/keras/metrics/Sum>
+

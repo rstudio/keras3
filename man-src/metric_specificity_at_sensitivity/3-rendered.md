@@ -12,7 +12,7 @@ compute the specificity at the given sensitivity. The threshold for the
 given sensitivity value is computed and used to evaluate the corresponding
 specificity.
 
-If `sample_weight` is `None`, weights default to 1.
+If `sample_weight` is `NULL`, weights default to 1.
 Use `sample_weight` of 0 to mask values.
 
 If `class_id` is specified, we calculate precision by considering only the
@@ -26,28 +26,29 @@ For additional information about specificity and sensitivity, see
 # Usage
 Standalone usage:
 
-```python
-m = keras.metrics.SpecificityAtSensitivity(0.5)
-m.update_state([0, 0, 0, 1, 1], [0, 0.3, 0.8, 0.3, 0.8])
-m.result()
-# 0.66666667
+
+```r
+m <- metric_specificity_at_sensitivity(sensitivity = 0.5)
+m$update_state(c(0, 0, 0, 1, 1), c(0, 0.3, 0.8, 0.3, 0.8))
+# m$result()
 ```
 
-```python
-m.reset_state()
-m.update_state([0, 0, 0, 1, 1], [0, 0.3, 0.8, 0.3, 0.8],
-               sample_weight=[1, 1, 2, 2, 2])
-m.result()
-# 0.5
+
+```r
+m$reset_state()
+m$update_state(c(0, 0, 0, 1, 1), c(0, 0.3, 0.8, 0.3, 0.8),
+               sample_weight = c(1, 1, 2, 2, 2))
+# m$result()
 ```
 
 Usage with `compile()` API:
 
-```python
-model.compile(
-    optimizer='sgd',
-    loss='mse',
-    metrics=[keras.metrics.SpecificityAtSensitivity()])
+
+```r
+model %>% compile(
+  optimizer = 'sgd',
+  loss = 'mse',
+  metrics = list(metric_sensitivity_at_specificity()))
 ```
 
 @param sensitivity
@@ -77,3 +78,4 @@ Passed on to the Python callable
 @seealso
 + <https:/keras.io/api/metrics/classification_metrics#specificityatsensitivity-class>
 + <https://www.tensorflow.org/api_docs/python/tf/keras/metrics/SpecificityAtSensitivity>
+
