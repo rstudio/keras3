@@ -128,9 +128,9 @@ attach_eval({
   }
 
   str_normalize_whitespace <- function(...) {
-    x <- str_flatten_lines(...) |>
-      str_split_lines() |> str_trim("right") |> str_flatten_lines()
-    str_replace_all(x, "\n{3,}", "\n\n\n")
+    str_split_lines(...) |>
+      str_trim("right") |>
+      str_flatten_lines("\n{4,}", "\n\n\n")
   }
 
   dput_cb <- function (x, echo = TRUE)  {
@@ -281,8 +281,7 @@ filter_out_endpoint_aliases <- function(endpoints) {
       # `_api_export_symbol_id`
       # if(any(df$endpoint %>% str_detect("keras.ops.average_pool"))) browser()
       out <- try(df %>% filter(py_obj[[1]]$`_api_export_path`[[1]] == endpoint))
-      if(inherits(out, "try-error"))
-         browser()
+      # if(inherits(out, "try-error")) browser()
       return(out)
 
 
@@ -402,12 +401,12 @@ split_docstring_into_sections <- function(docstring) {
     docstring <- gsub(paste0(h, " "), paste0("\n", h, "\n"), docstring, fixed = TRUE)
   }
 
-  docstring <- docstring %>%
-    str_split_lines() %>%
-    # Input shape section in keras.layers.ConvLSTM{12}D has badly formatted item list
-    # (indentation)(wtf) - (If)  -> (indentation)(wtf)\n(indentation) - (If)
-    sub("^([ ]*)(.*[^ ].*)+[ ]+- (If|Else)", "\\1\\2\n\\1- \\3", .) %>%
-    str_flatten_lines()
+  # docstring <- docstring %>%
+  #   str_split_lines() %>%
+  #   # Input shape section in keras.layers.ConvLSTM{12}D has badly formatted item list
+  #   # (indentation)(wtf) - (If)  -> (indentation)(wtf)\n(indentation) - (If)
+  #   sub("^([ ]*)(.*[^ ].*)+[ ]+- (If|Else)", "\\1\\2\n\\1- \\3", .) %>%
+  #   str_flatten_lines()
 
   x <- str_split_1(docstring, "\n")
   if(length(x) <= 3)
@@ -418,7 +417,6 @@ split_docstring_into_sections <- function(docstring) {
   m <- zoo::na.locf0(m)
   m <- tidy_section_headings[m]
 
-  # browser()
 
   m[1:2] <- m[1:2] %|% c("title", "description")
   m <- zoo::na.locf0(m)
@@ -504,6 +502,8 @@ parse_params_section <- function(docstring_args_section, treat_as_dots = NULL) {
     c("") |> # append final new line to ensure glue::trim() still works when length(x) == 1
     str_flatten("\n") |> glue::trim() |> str_split_1("\n")
 
+  ## Replace with this smaller regex once https://github.com/keras-team/keras/pull/18790 is merged
+# m <- str_match(x, "^(?<name>[*]{0,2}[A-Za-z0-9_]+): *(?<desc>.*)$")
   m <- str_match(x, "^\\s{0,3}(?<name>[*]{0,2}[A-Za-z0-9_]+) ?: *(?<desc>.*)$")
 
   description <- m[,"desc"] %|% x
@@ -521,7 +521,7 @@ parse_params_section <- function(docstring_args_section, treat_as_dots = NULL) {
 
   param_name %<>% zoo::na.locf0()
 
-  {if(any(startsWith(param_name, "*"))) browser()} %error% browser()
+  # {if(any(startsWith(param_name, "*"))) browser()} %error% browser()
   # if both *args and **kwargs are documented, collapse them into the "..." param (todo)
 
   out <- split(description, param_name) |>
@@ -1740,20 +1740,17 @@ get_fixed_docstring <- function(endpoint) {
 
 
 format_py_signature <- function(x) {
-  {
-
-  if(is_string(x)) # endpoint
+  if (is_string(x)) # endpoint
     x <- py_eval(x)
-  if(!inherits(x, "inspect.Signature"))
+  if (!inherits(x, "inspect.Signature"))
     x <- inspect$signature(x)
 
   x <- py_str(x)
-  if(length(xc <- str_split_1(x, ",")) >= 4) {
+  if (length(xc <- str_split_1(x, ",")) >= 4) {
     x <- xc |> str_trim() |> str_flatten(",\n  ")
     str_sub(x, 1, 1) <- "(\n  "
     str_sub(x, -1, -1) <- "\n)"
   }
-  } %error% browser()
   as_glue(x)
 }
 
