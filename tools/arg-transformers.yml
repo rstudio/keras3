@@ -15,6 +15,14 @@
   seed: as_integer
   # output_mode: ~
 
+"keras.losses.*":
+  y_true: if(inherits(x, "python.builtin.object")) x else np_array(x)
+  y_pred: if(inherits(x, "python.builtin.object")) x else np_array(x)
+
+"keras.metrics.*":
+  y_true: if(inherits(x, "python.builtin.object")) x else np_array(x)
+  y_pred: if(inherits(x, "python.builtin.object")) x else np_array(x)
+
 "keras.layers.ZeroPadding2D":
   padding: normalize_padding(x, 2L)
 
