@@ -15,7 +15,7 @@ loss_categorical_hinge(
 \arguments{
 \item{y_true}{The ground truth values. \code{y_true} values are expected to be
 either \verb{\{-1, +1\}} or \verb{\{0, 1\}} (i.e. a one-hot-encoded tensor) with
-shape = \verb{[batch_size, d0, .. dN]}.}
+shape <- \verb{[batch_size, d0, .. dN]}.}
 
 \item{y_pred}{The predicted values with shape = \verb{[batch_size, d0, .. dN]}.}
 
@@ -23,7 +23,7 @@ shape = \verb{[batch_size, d0, .. dN]}.}
 
 \item{reduction}{Type of reduction to apply to the loss. In almost all cases
 this should be \code{"sum_over_batch_size"}.
-Supported options are \code{"sum"}, \code{"sum_over_batch_size"} or \code{None}.}
+Supported options are \code{"sum"}, \code{"sum_over_batch_size"} or \code{NULL}.}
 
 \item{name}{Optional name for the loss instance.}
 }
@@ -33,23 +33,15 @@ Categorical hinge loss values with shape = \verb{[batch_size, d0, .. dN-1]}.
 \description{
 Formula:
 
-\if{html}{\out{<div class="sourceCode python">}}\preformatted{loss = maximum(neg - pos + 1, 0)
-}\if{html}{\out{</div>}}
-
-where \code{neg=maximum((1-y_true)*y_pred)} and \code{pos=sum(y_true*y_pred)}
-
-Formula:
-
-\if{html}{\out{<div class="sourceCode python">}}\preformatted{loss = maximum(neg - pos + 1, 0)
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{loss <- maximum(neg - pos + 1, 0)
 }\if{html}{\out{</div>}}
 
 where \code{neg=maximum((1-y_true)*y_pred)} and \code{pos=sum(y_true*y_pred)}
 }
 \section{Examples}{
-\if{html}{\out{<div class="sourceCode python">}}\preformatted{y_true = np.random.randint(0, 3, size=(2,))
-y_true = np.eye(np.max(y_true) + 1)[y_true]
-y_pred = np.random.random(size=(2, 3))
-loss = keras.losses.categorical_hinge(y_true, y_pred)
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{y_true <- rbind(c(0, 1), c(0, 0))
+y_pred <- rbind(c(0.6, 0.4), c(0.4, 0.6))
+loss <- loss_categorical_hinge(y_true, y_pred)
 }\if{html}{\out{</div>}}
 }
 

@@ -22,7 +22,7 @@ loss_binary_crossentropy(
 
 \item{from_logits}{Whether to interpret \code{y_pred} as a tensor of
 \href{https://en.wikipedia.org/wiki/Logit}{logit} values. By default, we
-assume that \code{y_pred} is probabilities (i.e., values in \verb{[0, 1]).}}
+assume that \code{y_pred} is probabilities (i.e., values in \verb{[0, 1)).}}
 
 \item{label_smoothing}{Float in range \verb{[0, 1].} When 0, no smoothing occurs.
 When > 0, we compute the loss between the predicted labels
@@ -37,7 +37,7 @@ Defaults to \code{-1}.}
 
 \item{reduction}{Type of reduction to apply to the loss. In almost all cases
 this should be \code{"sum_over_batch_size"}.
-Supported options are \code{"sum"}, \code{"sum_over_batch_size"} or \code{None}.}
+Supported options are \code{"sum"}, \code{"sum_over_batch_size"} or \code{NULL}.}
 
 \item{name}{Optional name for the loss instance.}
 }
@@ -51,69 +51,90 @@ The loss function requires the following inputs:
 \item \code{y_true} (true label): This is either 0 or 1.
 \item \code{y_pred} (predicted value): This is the model's prediction, i.e, a single
 floating-point value which either represents a
-\verb{[logit](https://en.wikipedia.org/wiki/Logit), (i.e, value in [-inf, inf]}
-when \code{from_logits=True}) or a probability (i.e, value in \verb{[0., 1.]} when
-\code{from_logits=False}).
+\href{https://en.wikipedia.org/wiki/Logit}{logit}, (i.e, value in \verb{[-inf, inf]}
+when \code{from_logits=TRUE}) or a probability (i.e, value in \verb{[0., 1.]} when
+\code{from_logits=FALSE}).
 }
 }
 \section{Examples}{
-\if{html}{\out{<div class="sourceCode python">}}\preformatted{y_true = [[0, 1], [0, 0]]
-y_pred = [[0.6, 0.4], [0.4, 0.6]]
-loss = keras.losses.binary_crossentropy(y_true, y_pred)
-assert loss.shape == (2,)
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{y_true <- rbind(c(0, 1), c(0, 0))
+y_pred <- rbind(c(0.6, 0.4), c(0.4, 0.6))
+loss <- loss_binary_crossentropy(y_true, y_pred)
 loss
-# array([0.916 , 0.714], dtype=float32)
 }\if{html}{\out{</div>}}
 
-\strong{Recommended Usage:} (set \code{from_logits=True})
+\if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor([0.91629073 0.71355818], shape=(2), dtype=float64)
+}\if{html}{\out{</div>}}
+
+\strong{Recommended Usage:} (set \code{from_logits=TRUE})
 
 With \code{compile()} API:
 
-\if{html}{\out{<div class="sourceCode python">}}\preformatted{model.compile(
-    loss=keras.losses.BinaryCrossentropy(from_logits=True),
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{model \%>\% compile(
+    loss = loss_binary_crossentropy(from_logits=TRUE),
     ...
 )
 }\if{html}{\out{</div>}}
 
 As a standalone function:
 
-\if{html}{\out{<div class="sourceCode python">}}\preformatted{# Example 1: (batch_size = 1, number of samples = 4)
-y_true = [0, 1, 0, 0]
-y_pred = [-18.6, 0.51, 2.94, -12.8]
-bce = keras.losses.BinaryCrossentropy(from_logits=True)
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{# Example 1: (batch_size = 1, number of samples = 4)
+y_true <- k_array(c(0, 1, 0, 0))
+y_pred <- k_array(c(-18.6, 0.51, 2.94, -12.8))
+bce <- loss_binary_crossentropy(from_logits = TRUE)
 bce(y_true, y_pred)
-# 0.865
 }\if{html}{\out{</div>}}
 
-\if{html}{\out{<div class="sourceCode python">}}\preformatted{# Example 2: (batch_size = 2, number of samples = 4)
-y_true = [[0, 1], [0, 0]]
-y_pred = [[-18.6, 0.51], [2.94, -12.8]]
+\if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor(0.865458, shape=(), dtype=float32)
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{# Example 2: (batch_size = 2, number of samples = 4)
+y_true <- rbind(c(0, 1), c(0, 0))
+y_pred <- rbind(c(-18.6, 0.51), c(2.94, -12.8))
 # Using default 'auto'/'sum_over_batch_size' reduction type.
-bce = keras.losses.BinaryCrossentropy(from_logits=True)
+bce <- loss_binary_crossentropy(from_logits = TRUE)
 bce(y_true, y_pred)
-# 0.865
-# Using 'sample_weight' attribute
-bce(y_true, y_pred, sample_weight=[0.8, 0.2])
-# 0.243
-# Using 'sum' reduction` type.
-bce = keras.losses.BinaryCrossentropy(from_logits=True,
-    reduction="sum")
-bce(y_true, y_pred)
-# 1.730
-# Using 'none' reduction type.
-bce = keras.losses.BinaryCrossentropy(from_logits=True,
-    reduction=None)
-bce(y_true, y_pred)
-# array([0.235, 1.496], dtype=float32)
 }\if{html}{\out{</div>}}
 
-\strong{Default Usage:} (set \code{from_logits=False})
+\if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor(0.865458, shape=(), dtype=float32)
+}\if{html}{\out{</div>}}
 
-\if{html}{\out{<div class="sourceCode python">}}\preformatted{# Make the following updates to the above "Recommended Usage" section
-# 1. Set `from_logits=False`
-keras.losses.BinaryCrossentropy() # OR ...('from_logits=False')
-# 2. Update `y_pred` to use probabilities instead of logits
-y_pred = [0.6, 0.3, 0.2, 0.8] # OR [[0.6, 0.3], [0.2, 0.8]]
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{# Using 'sample_weight' attribute
+bce(y_true, y_pred, sample_weight = c(0.8, 0.2))
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor(0.2436386, shape=(), dtype=float32)
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{# 0.243
+# Using 'sum' reduction` type.
+bce <- loss_binary_crossentropy(from_logits = TRUE, reduction = "sum")
+bce(y_true, y_pred)
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor(1.730916, shape=(), dtype=float32)
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{# Using 'none' reduction type.
+bce <- loss_binary_crossentropy(from_logits = TRUE, reduction = NULL)
+bce(y_true, y_pred)
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor([0.23515666 1.4957594 ], shape=(2), dtype=float32)
+}\if{html}{\out{</div>}}
+
+\strong{Default Usage:} (set \code{from_logits=FALSE})
+
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{# Make the following updates to the above "Recommended Usage" section
+# 1. Set `from_logits=FALSE`
+loss_binary_crossentropy() # OR ...('from_logits=FALSE')
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode">}}\preformatted{## <keras.src.losses.losses.BinaryCrossentropy object at 0x2a01b4a60>
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{# 2. Update `y_pred` to use probabilities instead of logits
+y_pred <- c(0.6, 0.3, 0.2, 0.8) # OR [[0.6, 0.3], [0.2, 0.8]]
 }\if{html}{\out{</div>}}
 }
 

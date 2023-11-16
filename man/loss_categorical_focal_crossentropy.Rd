@@ -48,7 +48,7 @@ axis). Defaults to \code{-1}.}
 
 \item{reduction}{Type of reduction to apply to the loss. In almost all cases
 this should be \code{"sum_over_batch_size"}.
-Supported options are \code{"sum"}, \code{"sum_over_batch_size"} or \code{None}.}
+Supported options are \code{"sum"}, \code{"sum_over_batch_size"} or \code{NULL}.}
 
 \item{name}{Optional name for the loss instance.}
 }
@@ -66,17 +66,17 @@ helps to apply a focal factor to down-weight easy examples and focus more on
 hard examples. The general formula for the focal loss (FL)
 is as follows:
 
-\code{FL(p_t) = (1 - p_t) ** gamma * log(p_t)}
+\code{FL(p_t) = (1 - p_t)^gamma * log(p_t)}
 
 where \code{p_t} is defined as follows:
 \verb{p_t = output if y_true == 1, else 1 - output}
 
-\code{(1 - p_t) ** gamma} is the \code{modulating_factor}, where \code{gamma} is a focusing
+\code{(1 - p_t)^gamma} is the \code{modulating_factor}, where \code{gamma} is a focusing
 parameter. When \code{gamma} = 0, there is no focal effect on the cross entropy.
 \code{gamma} reduces the importance given to simple examples in a smooth manner.
 
 The authors use alpha-balanced variant of focal loss (FL) in the paper:
-\code{FL(p_t) = -alpha * (1 - p_t) ** gamma * log(p_t)}
+\code{FL(p_t) = -alpha * (1 - p_t)^gamma * log(p_t)}
 
 where \code{alpha} is the weight factor for the classes. If \code{alpha} = 1, the
 loss won't be able to handle class imbalance properly as all
@@ -85,7 +85,7 @@ constants. If alpha is a list, it must have the same length as the number
 of classes.
 
 The formula above can be generalized to:
-\code{FL(p_t) = alpha * (1 - p_t) ** gamma * CrossEntropy(y_true, y_pred)}
+\code{FL(p_t) = alpha * (1 - p_t)^gamma * CrossEntropy(y_true, y_pred)}
 
 where minus comes from \code{CrossEntropy(y_true, y_pred)} (CE).
 
@@ -97,47 +97,55 @@ example. The shape of both \code{y_pred} and \code{y_true} are
 \verb{(batch_size, num_classes)}.
 }
 \section{Examples}{
-\if{html}{\out{<div class="sourceCode python">}}\preformatted{y_true = [[0, 1, 0], [0, 0, 1]]
-y_pred = [[0.05, 0.9, 0.05], [0.1, 0.85, 0.05]]
-loss = keras.losses.categorical_focal_crossentropy(y_true, y_pred)
-assert loss.shape == (2,)
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{y_true <- rbind(c(0, 1, 0), c(0, 0, 1))
+y_pred <- rbind(c(0.05, 0.95, 0), c(0.1, 0.8, 0.1))
+loss <- loss_categorical_focal_crossentropy(y_true, y_pred)
 loss
-# array([2.63401289e-04, 6.75912094e-01], dtype=float32)
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor([3.20583090e-05 4.66273481e-01], shape=(2), dtype=float64)
 }\if{html}{\out{</div>}}
 
 Standalone usage:
 
-\if{html}{\out{<div class="sourceCode python">}}\preformatted{y_true = [[0., 1., 0.], [0., 0., 1.]]
-y_pred = [[0.05, 0.95, 0], [0.1, 0.8, 0.1]]
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{y_true <- rbind(c(0, 1, 0), c(0, 0, 1))
+y_pred <- rbind(c(0.05, 0.95, 0), c(0.1, 0.8, 0.1))
 # Using 'auto'/'sum_over_batch_size' reduction type.
-cce = keras.losses.CategoricalFocalCrossentropy()
+cce <- loss_categorical_focal_crossentropy()
 cce(y_true, y_pred)
-# 0.23315276
 }\if{html}{\out{</div>}}
 
-\if{html}{\out{<div class="sourceCode python">}}\preformatted{# Calling with 'sample_weight'.
-cce(y_true, y_pred, sample_weight=np.array([0.3, 0.7]))
-# 0.1632
+\if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor(0.23315276, shape=(), dtype=float32)
 }\if{html}{\out{</div>}}
 
-\if{html}{\out{<div class="sourceCode python">}}\preformatted{# Using 'sum' reduction type.
-cce = keras.losses.CategoricalFocalCrossentropy(
-    reduction="sum")
-cce(y_true, y_pred)
-# 0.46631
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{# Calling with 'sample_weight'.
+cce(y_true, y_pred, sample_weight = k_array(c(0.3, 0.7)))
 }\if{html}{\out{</div>}}
 
-\if{html}{\out{<div class="sourceCode python">}}\preformatted{# Using 'none' reduction type.
-cce = keras.losses.CategoricalFocalCrossentropy(
-    reduction=None)
+\if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor(0.16320053, shape=(), dtype=float32)
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{# Using 'sum' reduction type.
+cce <- loss_categorical_focal_crossentropy(reduction = "sum")
 cce(y_true, y_pred)
-# array([3.2058331e-05, 4.6627346e-01], dtype=float32)
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor(0.46630552, shape=(), dtype=float32)
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{# Using 'none' reduction type.
+cce <- loss_categorical_focal_crossentropy(reduction = NULL)
+cce(y_true, y_pred)
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor([3.2058331e-05 4.6627346e-01], shape=(2), dtype=float32)
 }\if{html}{\out{</div>}}
 
 Usage with the \code{compile()} API:
 
-\if{html}{\out{<div class="sourceCode python">}}\preformatted{model.compile(optimizer='adam',
-              loss=keras.losses.CategoricalFocalCrossentropy())
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{model \%>\% compile(
+  optimizer = 'adam',
+  loss = loss_categorical_focal_crossentropy())
 }\if{html}{\out{</div>}}
 }
 

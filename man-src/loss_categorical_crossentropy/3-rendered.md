@@ -9,52 +9,70 @@ point values per feature, i.e., the shape of both `y_pred` and `y_true` are
 `[batch_size, num_classes]`.
 
 # Examples
-```python
-y_true = [[0, 1, 0], [0, 0, 1]]
-y_pred = [[0.05, 0.95, 0], [0.1, 0.8, 0.1]]
-loss = keras.losses.categorical_crossentropy(y_true, y_pred)
-assert loss.shape == (2,)
+
+```r
+y_true <- rbind(c(0, 1, 0), c(0, 0, 1))
+y_pred <- rbind(c(0.05, 0.95, 0), c(0.1, 0.8, 0.1))
+loss <- loss_categorical_crossentropy(y_true, y_pred)
 loss
-# array([0.0513, 2.303], dtype=float32)
+```
+
+```
+## tf.Tensor([0.05129329 2.30258509], shape=(2), dtype=float64)
 ```
 Standalone usage:
 
-```python
-y_true = [[0, 1, 0], [0, 0, 1]]
-y_pred = [[0.05, 0.95, 0], [0.1, 0.8, 0.1]]
+
+```r
+y_true <- rbind(c(0, 1, 0), c(0, 0, 1))
+y_pred <- rbind(c(0.05, 0.95, 0), c(0.1, 0.8, 0.1))
 # Using 'auto'/'sum_over_batch_size' reduction type.
-cce = keras.losses.CategoricalCrossentropy()
+cce <- loss_categorical_crossentropy()
 cce(y_true, y_pred)
-# 1.177
 ```
 
-```python
+```
+## tf.Tensor(1.1769392, shape=(), dtype=float32)
+```
+
+
+```r
 # Calling with 'sample_weight'.
-cce(y_true, y_pred, sample_weight=np.array([0.3, 0.7]))
-# 0.814
+cce(y_true, y_pred, sample_weight = k_array(c(0.3, 0.7)))
 ```
 
-```python
+```
+## tf.Tensor(0.8135988, shape=(), dtype=float32)
+```
+
+
+```r
 # Using 'sum' reduction type.
-cce = keras.losses.CategoricalCrossentropy(
-    reduction="sum")
+cce <- loss_categorical_crossentropy(reduction = "sum")
 cce(y_true, y_pred)
-# 2.354
 ```
 
-```python
+```
+## tf.Tensor(2.3538785, shape=(), dtype=float32)
+```
+
+
+```r
 # Using 'none' reduction type.
-cce = keras.losses.CategoricalCrossentropy(
-    reduction=None)
+cce <- loss_categorical_crossentropy(reduction = NULL)
 cce(y_true, y_pred)
-# array([0.0513, 2.303], dtype=float32)
+```
+
+```
+## tf.Tensor([0.05129331 2.3025851 ], shape=(2), dtype=float32)
 ```
 
 Usage with the `compile()` API:
 
-```python
-model.compile(optimizer='sgd',
-              loss=keras.losses.CategoricalCrossentropy())
+
+```r
+model %>% compile(optimizer = 'sgd',
+              loss=loss_categorical_crossentropy())
 ```
 
 @returns
@@ -77,7 +95,7 @@ axis). Defaults to `-1`.
 @param reduction
 Type of reduction to apply to the loss. In almost all cases
 this should be `"sum_over_batch_size"`.
-Supported options are `"sum"`, `"sum_over_batch_size"` or `None`.
+Supported options are `"sum"`, `"sum_over_batch_size"` or `NULL`.
 
 @param name
 Optional name for the loss instance.
@@ -96,3 +114,4 @@ Passed on to the Python callable
 @seealso
 + <https:/keras.io/api/losses/probabilistic_losses#categoricalcrossentropy-class>
 + <https://www.tensorflow.org/api_docs/python/tf/keras/losses/CategoricalCrossentropy>
+

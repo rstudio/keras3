@@ -35,7 +35,7 @@ axis). Defaults to \code{-1}.}
 
 \item{reduction}{Type of reduction to apply to the loss. In almost all cases
 this should be \code{"sum_over_batch_size"}.
-Supported options are \code{"sum"}, \code{"sum_over_batch_size"} or \code{None}.}
+Supported options are \code{"sum"}, \code{"sum_over_batch_size"} or \code{NULL}.}
 
 \item{name}{Optional name for the loss instance.}
 }
@@ -51,47 +51,54 @@ point values per feature, i.e., the shape of both \code{y_pred} and \code{y_true
 \verb{[batch_size, num_classes]}.
 }
 \section{Examples}{
-\if{html}{\out{<div class="sourceCode python">}}\preformatted{y_true = [[0, 1, 0], [0, 0, 1]]
-y_pred = [[0.05, 0.95, 0], [0.1, 0.8, 0.1]]
-loss = keras.losses.categorical_crossentropy(y_true, y_pred)
-assert loss.shape == (2,)
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{y_true <- rbind(c(0, 1, 0), c(0, 0, 1))
+y_pred <- rbind(c(0.05, 0.95, 0), c(0.1, 0.8, 0.1))
+loss <- loss_categorical_crossentropy(y_true, y_pred)
 loss
-# array([0.0513, 2.303], dtype=float32)
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor([0.05129329 2.30258509], shape=(2), dtype=float64)
 }\if{html}{\out{</div>}}
 
 Standalone usage:
 
-\if{html}{\out{<div class="sourceCode python">}}\preformatted{y_true = [[0, 1, 0], [0, 0, 1]]
-y_pred = [[0.05, 0.95, 0], [0.1, 0.8, 0.1]]
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{y_true <- rbind(c(0, 1, 0), c(0, 0, 1))
+y_pred <- rbind(c(0.05, 0.95, 0), c(0.1, 0.8, 0.1))
 # Using 'auto'/'sum_over_batch_size' reduction type.
-cce = keras.losses.CategoricalCrossentropy()
+cce <- loss_categorical_crossentropy()
 cce(y_true, y_pred)
-# 1.177
 }\if{html}{\out{</div>}}
 
-\if{html}{\out{<div class="sourceCode python">}}\preformatted{# Calling with 'sample_weight'.
-cce(y_true, y_pred, sample_weight=np.array([0.3, 0.7]))
-# 0.814
+\if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor(1.1769392, shape=(), dtype=float32)
 }\if{html}{\out{</div>}}
 
-\if{html}{\out{<div class="sourceCode python">}}\preformatted{# Using 'sum' reduction type.
-cce = keras.losses.CategoricalCrossentropy(
-    reduction="sum")
-cce(y_true, y_pred)
-# 2.354
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{# Calling with 'sample_weight'.
+cce(y_true, y_pred, sample_weight = k_array(c(0.3, 0.7)))
 }\if{html}{\out{</div>}}
 
-\if{html}{\out{<div class="sourceCode python">}}\preformatted{# Using 'none' reduction type.
-cce = keras.losses.CategoricalCrossentropy(
-    reduction=None)
+\if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor(0.8135988, shape=(), dtype=float32)
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{# Using 'sum' reduction type.
+cce <- loss_categorical_crossentropy(reduction = "sum")
 cce(y_true, y_pred)
-# array([0.0513, 2.303], dtype=float32)
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor(2.3538785, shape=(), dtype=float32)
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{# Using 'none' reduction type.
+cce <- loss_categorical_crossentropy(reduction = NULL)
+cce(y_true, y_pred)
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor([0.05129331 2.3025851 ], shape=(2), dtype=float32)
 }\if{html}{\out{</div>}}
 
 Usage with the \code{compile()} API:
 
-\if{html}{\out{<div class="sourceCode python">}}\preformatted{model.compile(optimizer='sgd',
-              loss=keras.losses.CategoricalCrossentropy())
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{model \%>\% compile(optimizer = 'sgd',
+              loss=loss_categorical_crossentropy())
 }\if{html}{\out{</div>}}
 }
 

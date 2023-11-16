@@ -5,12 +5,12 @@ According to [Lin et al., 2018](https://arxiv.org/pdf/1708.02002.pdf), it
 helps to apply a focal factor to down-weight easy examples and focus more on
 hard examples. By default, the focal tensor is computed as follows:
 
-`focal_factor = (1 - output) ** gamma` for class 1
-`focal_factor = output ** gamma` for class 0
+`focal_factor = (1 - output)^gamma` for class 1
+`focal_factor = output^gamma` for class 0
 where `gamma` is a focusing parameter. When `gamma` = 0, there is no focal
 effect on the binary crossentropy loss.
 
-If `apply_class_balancing == True`, this function also takes into account a
+If `apply_class_balancing == TRUE`, this function also takes into account a
 weight balancing factor for the binary classes 0 and 1 as follows:
 
 `weight = alpha` for class 1 (`target == 1`)
@@ -23,9 +23,9 @@ tasks. The loss function requires the following inputs:
 - `y_true` (true label): This is either 0 or 1.
 - `y_pred` (predicted value): This is the model's prediction, i.e, a single
     floating-point value which either represents a
-    `[logit](https://en.wikipedia.org/wiki/Logit), (i.e, value in [-inf, inf]`
-    when `from_logits=True`) or a probability (i.e, value in `[0., 1.]` when
-    `from_logits=False`).
+    [logit](https://en.wikipedia.org/wiki/Logit), (i.e, value in `[-inf, inf]`
+    when `from_logits=TRUE`) or a probability (i.e, value in `[0., 1.]` when
+    `from_logits=FALSE`).
 
 According to [Lin et al., 2018](https://arxiv.org/pdf/1708.02002.pdf), it
 helps to apply a "focal factor" to down-weight easy examples and focus more
@@ -37,114 +37,156 @@ where `gamma` is a focusing parameter. When `gamma=0`, this function is
 equivalent to the binary crossentropy loss.
 
 # Examples
-```python
-y_true = [[0, 1], [0, 0]]
-y_pred = [[0.6, 0.4], [0.4, 0.6]]
-loss = keras.losses.binary_focal_crossentropy(
-       y_true, y_pred, gamma=2)
-assert loss.shape == (2,)
+
+```r
+y_true <- rbind(c(0, 1), c(0, 0))
+y_pred <- rbind(c(0.6, 0.4), c(0.4, 0.6))
+loss <- loss_binary_focal_crossentropy(y_true, y_pred, gamma = 2)
 loss
-# array([0.330, 0.206], dtype=float32)
+```
+
+```
+## tf.Tensor([0.32986466 0.20579838], shape=(2), dtype=float64)
 ```
 With the `compile()` API:
 
-```python
-model.compile(
-    loss=keras.losses.BinaryFocalCrossentropy(
-        gamma=2.0, from_logits=True),
+
+```r
+model %>% compile(
+    loss = loss_binary_focal_crossentropy(
+        gamma = 2.0, from_logits = TRUE),
     ...
 )
 ```
 
 As a standalone function:
 
-```python
+
+```r
 # Example 1: (batch_size = 1, number of samples = 4)
-y_true = [0, 1, 0, 0]
-y_pred = [-18.6, 0.51, 2.94, -12.8]
-loss = keras.losses.BinaryFocalCrossentropy(
-   gamma=2, from_logits=True)
+y_true <- k_array(c(0, 1, 0, 0))
+y_pred <- k_array(c(-18.6, 0.51, 2.94, -12.8))
+loss <- loss_binary_focal_crossentropy(gamma = 2, from_logits = TRUE)
 loss(y_true, y_pred)
-# 0.691
 ```
 
-```python
+```
+## tf.Tensor(0.6912122, shape=(), dtype=float32)
+```
+
+
+```r
 # Apply class weight
-loss = keras.losses.BinaryFocalCrossentropy(
-    apply_class_balancing=True, gamma=2, from_logits=True)
+loss <- loss_binary_focal_crossentropy(
+  apply_class_balancing = TRUE, gamma = 2, from_logits = TRUE)
 loss(y_true, y_pred)
-# 0.51
 ```
 
-```python
+```
+## tf.Tensor(0.5101333, shape=(), dtype=float32)
+```
+
+
+```r
 # Example 2: (batch_size = 2, number of samples = 4)
-y_true = [[0, 1], [0, 0]]
-y_pred = [[-18.6, 0.51], [2.94, -12.8]]
+y_true <- rbind(c(0, 1), c(0, 0))
+y_pred <- rbind(c(-18.6, 0.51), c(2.94, -12.8))
 # Using default 'auto'/'sum_over_batch_size' reduction type.
-loss = keras.losses.BinaryFocalCrossentropy(
-    gamma=3, from_logits=True)
+loss <- loss_binary_focal_crossentropy(
+    gamma = 3, from_logits = TRUE)
 loss(y_true, y_pred)
-# 0.647
 ```
 
-```python
+```
+## tf.Tensor(0.6469951, shape=(), dtype=float32)
+```
+
+
+```r
 # Apply class weight
-loss = keras.losses.BinaryFocalCrossentropy(
-     apply_class_balancing=True, gamma=3, from_logits=True)
+loss <- loss_binary_focal_crossentropy(
+     apply_class_balancing = TRUE, gamma = 3, from_logits = TRUE)
 loss(y_true, y_pred)
-# 0.482
 ```
 
-```python
+```
+## tf.Tensor(0.48214132, shape=(), dtype=float32)
+```
+
+
+```r
 # Using 'sample_weight' attribute with focal effect
-loss = keras.losses.BinaryFocalCrossentropy(
-    gamma=3, from_logits=True)
-loss(y_true, y_pred, sample_weight=[0.8, 0.2])
-# 0.133
+loss <- loss_binary_focal_crossentropy(
+    gamma = 3, from_logits = TRUE)
+loss(y_true, y_pred, sample_weight = c(0.8, 0.2))
 ```
 
-```python
+```
+## tf.Tensor(0.13312504, shape=(), dtype=float32)
+```
+
+
+```r
 # Apply class weight
-loss = keras.losses.BinaryFocalCrossentropy(
-     apply_class_balancing=True, gamma=3, from_logits=True)
-loss(y_true, y_pred, sample_weight=[0.8, 0.2])
-# 0.097
+loss <- loss_binary_focal_crossentropy(
+     apply_class_balancing = TRUE, gamma = 3, from_logits = TRUE)
+loss(y_true, y_pred, sample_weight = c(0.8, 0.2))
 ```
 
-```python
+```
+## tf.Tensor(0.09735977, shape=(), dtype=float32)
+```
+
+
+```r
 # Using 'sum' reduction` type.
-loss = keras.losses.BinaryFocalCrossentropy(
-    gamma=4, from_logits=True,
-    reduction="sum")
+loss <- loss_binary_focal_crossentropy(
+    gamma = 4, from_logits = TRUE,
+    reduction = "sum")
 loss(y_true, y_pred)
-# 1.222
 ```
 
-```python
+```
+## tf.Tensor(1.2218808, shape=(), dtype=float32)
+```
+
+
+```r
 # Apply class weight
-loss = keras.losses.BinaryFocalCrossentropy(
-    apply_class_balancing=True, gamma=4, from_logits=True,
-    reduction="sum")
+loss <- loss_binary_focal_crossentropy(
+    apply_class_balancing = TRUE, gamma = 4, from_logits = TRUE,
+    reduction = "sum")
 loss(y_true, y_pred)
-# 0.914
 ```
 
-```python
+```
+## tf.Tensor(0.9140807, shape=(), dtype=float32)
+```
+
+
+```r
 # Using 'none' reduction type.
-loss = keras.losses.BinaryFocalCrossentropy(
-    gamma=5, from_logits=True,
-    reduction=None)
+loss <- loss_binary_focal_crossentropy(
+    gamma = 5, from_logits = TRUE,
+    reduction = NULL)
 loss(y_true, y_pred)
-# array([0.0017 1.1561], dtype=float32)
 ```
 
-```python
+```
+## tf.Tensor([0.00174837 1.1561027 ], shape=(2), dtype=float32)
+```
+
+
+```r
 # Apply class weight
-loss = keras.losses.BinaryFocalCrossentropy(
-    apply_class_balancing=True, gamma=5, from_logits=True,
-    reduction=None)
+loss <- loss_binary_focal_crossentropy(
+    apply_class_balancing = TRUE, gamma = 5, from_logits = TRUE,
+    reduction = NULL)
 loss(y_true, y_pred)
-# array([0.0004 0.8670], dtype=float32)
+```
+
+```
+## tf.Tensor([4.3709317e-04 8.6707699e-01], shape=(2), dtype=float32)
 ```
 
 @returns
@@ -185,7 +227,7 @@ Defaults to `-1`.
 @param reduction
 Type of reduction to apply to the loss. In almost all cases
 this should be `"sum_over_batch_size"`.
-Supported options are `"sum"`, `"sum_over_batch_size"` or `None`.
+Supported options are `"sum"`, `"sum_over_batch_size"` or `NULL`.
 
 @param name
 Optional name for the loss instance.
@@ -203,3 +245,4 @@ Passed on to the Python callable
 @family losses
 @seealso
 + <https://www.tensorflow.org/api_docs/python/tf/keras/losses/BinaryFocalCrossentropy>
+

@@ -51,7 +51,7 @@ Defaults to \code{-1}.}
 
 \item{reduction}{Type of reduction to apply to the loss. In almost all cases
 this should be \code{"sum_over_batch_size"}.
-Supported options are \code{"sum"}, \code{"sum_over_batch_size"} or \code{None}.}
+Supported options are \code{"sum"}, \code{"sum_over_batch_size"} or \code{NULL}.}
 
 \item{name}{Optional name for the loss instance.}
 }
@@ -64,12 +64,12 @@ According to \href{https://arxiv.org/pdf/1708.02002.pdf}{Lin et al., 2018}, it
 helps to apply a focal factor to down-weight easy examples and focus more on
 hard examples. By default, the focal tensor is computed as follows:
 
-\code{focal_factor = (1 - output) ** gamma} for class 1
-\code{focal_factor = output ** gamma} for class 0
+\code{focal_factor = (1 - output)^gamma} for class 1
+\code{focal_factor = output^gamma} for class 0
 where \code{gamma} is a focusing parameter. When \code{gamma} = 0, there is no focal
 effect on the binary crossentropy loss.
 
-If \code{apply_class_balancing == True}, this function also takes into account a
+If \code{apply_class_balancing == TRUE}, this function also takes into account a
 weight balancing factor for the binary classes 0 and 1 as follows:
 
 \code{weight = alpha} for class 1 (\code{target == 1})
@@ -82,9 +82,9 @@ tasks. The loss function requires the following inputs:
 \item \code{y_true} (true label): This is either 0 or 1.
 \item \code{y_pred} (predicted value): This is the model's prediction, i.e, a single
 floating-point value which either represents a
-\verb{[logit](https://en.wikipedia.org/wiki/Logit), (i.e, value in [-inf, inf]}
-when \code{from_logits=True}) or a probability (i.e, value in \verb{[0., 1.]} when
-\code{from_logits=False}).
+\href{https://en.wikipedia.org/wiki/Logit}{logit}, (i.e, value in \verb{[-inf, inf]}
+when \code{from_logits=TRUE}) or a probability (i.e, value in \verb{[0., 1.]} when
+\code{from_logits=FALSE}).
 }
 
 According to \href{https://arxiv.org/pdf/1708.02002.pdf}{Lin et al., 2018}, it
@@ -97,103 +97,122 @@ where \code{gamma} is a focusing parameter. When \code{gamma=0}, this function i
 equivalent to the binary crossentropy loss.
 }
 \section{Examples}{
-\if{html}{\out{<div class="sourceCode python">}}\preformatted{y_true = [[0, 1], [0, 0]]
-y_pred = [[0.6, 0.4], [0.4, 0.6]]
-loss = keras.losses.binary_focal_crossentropy(
-       y_true, y_pred, gamma=2)
-assert loss.shape == (2,)
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{y_true <- rbind(c(0, 1), c(0, 0))
+y_pred <- rbind(c(0.6, 0.4), c(0.4, 0.6))
+loss <- loss_binary_focal_crossentropy(y_true, y_pred, gamma = 2)
 loss
-# array([0.330, 0.206], dtype=float32)
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor([0.32986466 0.20579838], shape=(2), dtype=float64)
 }\if{html}{\out{</div>}}
 
 With the \code{compile()} API:
 
-\if{html}{\out{<div class="sourceCode python">}}\preformatted{model.compile(
-    loss=keras.losses.BinaryFocalCrossentropy(
-        gamma=2.0, from_logits=True),
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{model \%>\% compile(
+    loss = loss_binary_focal_crossentropy(
+        gamma = 2.0, from_logits = TRUE),
     ...
 )
 }\if{html}{\out{</div>}}
 
 As a standalone function:
 
-\if{html}{\out{<div class="sourceCode python">}}\preformatted{# Example 1: (batch_size = 1, number of samples = 4)
-y_true = [0, 1, 0, 0]
-y_pred = [-18.6, 0.51, 2.94, -12.8]
-loss = keras.losses.BinaryFocalCrossentropy(
-   gamma=2, from_logits=True)
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{# Example 1: (batch_size = 1, number of samples = 4)
+y_true <- k_array(c(0, 1, 0, 0))
+y_pred <- k_array(c(-18.6, 0.51, 2.94, -12.8))
+loss <- loss_binary_focal_crossentropy(gamma = 2, from_logits = TRUE)
 loss(y_true, y_pred)
-# 0.691
 }\if{html}{\out{</div>}}
 
-\if{html}{\out{<div class="sourceCode python">}}\preformatted{# Apply class weight
-loss = keras.losses.BinaryFocalCrossentropy(
-    apply_class_balancing=True, gamma=2, from_logits=True)
-loss(y_true, y_pred)
-# 0.51
+\if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor(0.6912122, shape=(), dtype=float32)
 }\if{html}{\out{</div>}}
 
-\if{html}{\out{<div class="sourceCode python">}}\preformatted{# Example 2: (batch_size = 2, number of samples = 4)
-y_true = [[0, 1], [0, 0]]
-y_pred = [[-18.6, 0.51], [2.94, -12.8]]
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{# Apply class weight
+loss <- loss_binary_focal_crossentropy(
+  apply_class_balancing = TRUE, gamma = 2, from_logits = TRUE)
+loss(y_true, y_pred)
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor(0.5101333, shape=(), dtype=float32)
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{# Example 2: (batch_size = 2, number of samples = 4)
+y_true <- rbind(c(0, 1), c(0, 0))
+y_pred <- rbind(c(-18.6, 0.51), c(2.94, -12.8))
 # Using default 'auto'/'sum_over_batch_size' reduction type.
-loss = keras.losses.BinaryFocalCrossentropy(
-    gamma=3, from_logits=True)
+loss <- loss_binary_focal_crossentropy(
+    gamma = 3, from_logits = TRUE)
 loss(y_true, y_pred)
-# 0.647
 }\if{html}{\out{</div>}}
 
-\if{html}{\out{<div class="sourceCode python">}}\preformatted{# Apply class weight
-loss = keras.losses.BinaryFocalCrossentropy(
-     apply_class_balancing=True, gamma=3, from_logits=True)
+\if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor(0.6469951, shape=(), dtype=float32)
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{# Apply class weight
+loss <- loss_binary_focal_crossentropy(
+     apply_class_balancing = TRUE, gamma = 3, from_logits = TRUE)
 loss(y_true, y_pred)
-# 0.482
 }\if{html}{\out{</div>}}
 
-\if{html}{\out{<div class="sourceCode python">}}\preformatted{# Using 'sample_weight' attribute with focal effect
-loss = keras.losses.BinaryFocalCrossentropy(
-    gamma=3, from_logits=True)
-loss(y_true, y_pred, sample_weight=[0.8, 0.2])
-# 0.133
+\if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor(0.48214132, shape=(), dtype=float32)
 }\if{html}{\out{</div>}}
 
-\if{html}{\out{<div class="sourceCode python">}}\preformatted{# Apply class weight
-loss = keras.losses.BinaryFocalCrossentropy(
-     apply_class_balancing=True, gamma=3, from_logits=True)
-loss(y_true, y_pred, sample_weight=[0.8, 0.2])
-# 0.097
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{# Using 'sample_weight' attribute with focal effect
+loss <- loss_binary_focal_crossentropy(
+    gamma = 3, from_logits = TRUE)
+loss(y_true, y_pred, sample_weight = c(0.8, 0.2))
 }\if{html}{\out{</div>}}
 
-\if{html}{\out{<div class="sourceCode python">}}\preformatted{# Using 'sum' reduction` type.
-loss = keras.losses.BinaryFocalCrossentropy(
-    gamma=4, from_logits=True,
-    reduction="sum")
+\if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor(0.13312504, shape=(), dtype=float32)
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{# Apply class weight
+loss <- loss_binary_focal_crossentropy(
+     apply_class_balancing = TRUE, gamma = 3, from_logits = TRUE)
+loss(y_true, y_pred, sample_weight = c(0.8, 0.2))
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor(0.09735977, shape=(), dtype=float32)
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{# Using 'sum' reduction` type.
+loss <- loss_binary_focal_crossentropy(
+    gamma = 4, from_logits = TRUE,
+    reduction = "sum")
 loss(y_true, y_pred)
-# 1.222
 }\if{html}{\out{</div>}}
 
-\if{html}{\out{<div class="sourceCode python">}}\preformatted{# Apply class weight
-loss = keras.losses.BinaryFocalCrossentropy(
-    apply_class_balancing=True, gamma=4, from_logits=True,
-    reduction="sum")
-loss(y_true, y_pred)
-# 0.914
+\if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor(1.2218808, shape=(), dtype=float32)
 }\if{html}{\out{</div>}}
 
-\if{html}{\out{<div class="sourceCode python">}}\preformatted{# Using 'none' reduction type.
-loss = keras.losses.BinaryFocalCrossentropy(
-    gamma=5, from_logits=True,
-    reduction=None)
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{# Apply class weight
+loss <- loss_binary_focal_crossentropy(
+    apply_class_balancing = TRUE, gamma = 4, from_logits = TRUE,
+    reduction = "sum")
 loss(y_true, y_pred)
-# array([0.0017 1.1561], dtype=float32)
 }\if{html}{\out{</div>}}
 
-\if{html}{\out{<div class="sourceCode python">}}\preformatted{# Apply class weight
-loss = keras.losses.BinaryFocalCrossentropy(
-    apply_class_balancing=True, gamma=5, from_logits=True,
-    reduction=None)
+\if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor(0.9140807, shape=(), dtype=float32)
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{# Using 'none' reduction type.
+loss <- loss_binary_focal_crossentropy(
+    gamma = 5, from_logits = TRUE,
+    reduction = NULL)
 loss(y_true, y_pred)
-# array([0.0004 0.8670], dtype=float32)
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor([0.00174837 1.1561027 ], shape=(2), dtype=float32)
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{# Apply class weight
+loss <- loss_binary_focal_crossentropy(
+    apply_class_balancing = TRUE, gamma = 5, from_logits = TRUE,
+    reduction = NULL)
+loss(y_true, y_pred)
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor([4.3709317e-04 8.6707699e-01], shape=(2), dtype=float32)
 }\if{html}{\out{</div>}}
 }
 

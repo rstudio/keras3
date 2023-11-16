@@ -23,7 +23,7 @@ to -1 or 1 with shape = \verb{[batch_size, d0, .. dN]}.}
 
 \item{reduction}{Type of reduction to apply to the loss. In almost all cases
 this should be \code{"sum_over_batch_size"}.
-Supported options are \code{"sum"}, \code{"sum_over_batch_size"} or \code{None}.}
+Supported options are \code{"sum"}, \code{"sum_over_batch_size"} or \code{NULL}.}
 
 \item{name}{Optional name for the loss instance.}
 }
@@ -33,21 +33,20 @@ Hinge loss values with shape = \verb{[batch_size, d0, .. dN-1]}.
 \description{
 Formula:
 
-\if{html}{\out{<div class="sourceCode python">}}\preformatted{loss = mean(maximum(1 - y_true * y_pred, 0), axis=-1)
-}\if{html}{\out{</div>}}
-
-Formula:
-
-\if{html}{\out{<div class="sourceCode python">}}\preformatted{loss = maximum(1 - y_true * y_pred, 0)
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{loss <- mean(maximum(1 - y_true * y_pred, 0), axis=-1)
 }\if{html}{\out{</div>}}
 
 \code{y_true} values are expected to be -1 or 1. If binary (0 or 1) labels are
 provided we will convert them to -1 or 1.
 }
 \section{Examples}{
-\if{html}{\out{<div class="sourceCode python">}}\preformatted{y_true = np.random.choice([-1, 1], size=(2, 3))
-y_pred = np.random.random(size=(2, 3))
-loss = keras.losses.hinge(y_true, y_pred)
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{y_true <- array(sample(c(-1,1), 6, replace = TRUE), dim = c(2, 3))
+y_pred <- random_uniform(c(2, 3))
+loss <- loss_hinge(y_true, y_pred)
+loss
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor([1.0610152  0.93285507], shape=(2), dtype=float32)
 }\if{html}{\out{</div>}}
 }
 

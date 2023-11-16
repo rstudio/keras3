@@ -25,7 +25,7 @@ loss_cosine_similarity(
 
 \item{reduction}{Type of reduction to apply to the loss. In almost all cases
 this should be \code{"sum_over_batch_size"}.
-Supported options are \code{"sum"}, \code{"sum_over_batch_size"} or \code{None}.}
+Supported options are \code{"sum"}, \code{"sum_over_batch_size"} or \code{NULL}.}
 
 \item{name}{Optional name for the loss instance.}
 }
@@ -35,7 +35,7 @@ Cosine similarity tensor.
 \description{
 Formula:
 
-\if{html}{\out{<div class="sourceCode python">}}\preformatted{loss = -sum(l2_norm(y_true) * l2_norm(y_pred))
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{loss <- -sum(l2_norm(y_true) * l2_norm(y_pred))
 }\if{html}{\out{</div>}}
 
 Note that it is a number between -1 and 1. When it is a negative number
@@ -45,24 +45,15 @@ setting where you try to maximize the proximity between predictions and
 targets. If either \code{y_true} or \code{y_pred} is a zero vector, cosine
 similarity will be 0 regardless of the proximity between predictions
 and targets.
-
-Note that it is a number between -1 and 1. When it is a negative number
-between -1 and 0, 0 indicates orthogonality and values closer to -1
-indicate greater similarity. This makes it usable as a loss function in a
-setting where you try to maximize the proximity between predictions and
-targets. If either \code{y_true} or \code{y_pred} is a zero vector, cosine similarity
-will be 0 regardless of the proximity between predictions and targets.
-
-Formula:
-
-\if{html}{\out{<div class="sourceCode python">}}\preformatted{loss = -sum(l2_norm(y_true) * l2_norm(y_pred))
-}\if{html}{\out{</div>}}
 }
 \section{Examples}{
-\if{html}{\out{<div class="sourceCode python">}}\preformatted{y_true = [[0., 1.], [1., 1.], [1., 1.]]
-y_pred = [[1., 0.], [1., 1.], [-1., -1.]]
-loss = keras.losses.cosine_similarity(y_true, y_pred, axis=-1)
-# [-0., -0.99999994, 0.99999994]
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{y_true <- rbind(c(0., 1.), c(1., 1.), c(1., 1.))
+y_pred <- rbind(c(1., 0.), c(1., 1.), c(-1., -1.))
+loss <- loss_cosine_similarity(y_true, y_pred, axis=-1)
+loss
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor([-0. -1.  1.], shape=(3), dtype=float64)
 }\if{html}{\out{</div>}}
 }
 
