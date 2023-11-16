@@ -155,16 +155,41 @@ if(!"source:tools/translate-tools.R" %in% search()) envir::attach_source("tools/
 #       instead of a tuple
 #
 # TODO: this shouldn't error (empty last arg should be no-op):
+# if(FALSE) {
+# keras$utils$FeatureSpace$cross(
+#   feature_names=c("string_values", "int_values"),
+#   crossing_dim=32,
+#   output_mode="int",
+# )
+# }
 #
-# TODO: layer_torch_module_wrapper raises an error - aybe incompatible torch version?
+# TODO: layer_torch_module_wrapper raises an error - aybe incompatible torch version?a
 #
-if(FALSE) {
-  keras$utils$FeatureSpace$cross(
-    feature_names=c("string_values", "int_values"),
-    crossing_dim=32,
-    output_mode="int",
-  )
-}
+# TODO: config_{enable,disable,is_enabled}_traceback_filtering have identical docstrings,
+# should all be the same page.
+#
+# TODO: the whole man-src/*/upstream+patch workflow can be encapsulated in a custom
+#       roclet. Something like: `#' @adaptedFrom docstring_and_signature("keras.layers.Dense")
+#       Where `docstring_and_signature()` is a function in the package namespace that
+#       returns a string we keep track of for updates from upstream.
+#       This all can live in it's own (new) R package, that maybe also contains the
+#       convenient system call wrappers adapters from guildai-r, (which we'll want for
+#       git()). Also, maybe a concenience function that will generate
+#       the first pass of translating the upstream to roxygen.
+#       Not sure if/how pre-rendering/render-caching could be also be encapsulated
+#       in an roclet. Ideally `@cacheRenders` would dump pre-renders to man-src,
+#       but that needs some thinking.
+#
+# TODO: @family tags should be manually managed, not dynamically generated.
+#       perhaps in a yml file
+#
+# TODO: refactor so 'endpoint' can be a tuple like "keras.losses.Hinge,keras.losses.hinge"
+#       and 0-upstream.md is a concatenation of multiple endpoints, separated
+#       by a delimiter so we can do
+#       read_file("0-upstream.md") |>
+#         strsplit(str_c(strrep("~", 80), "\n")) |>
+#         lapply(format_upstream)
+
 memoise::forget(mk_export)
 
 get_translations <- function() {
