@@ -13,23 +13,26 @@ above) and shrinkage-type L2 regularization
 
 Initialization:
 
-```python
-n = 0
-sigma = 0
-z = 0
+
+```r
+n <- 0
+sigma <- 0
+z <- 0
 ```
 
 Update rule for one variable `w`:
 
-```python
-prev_n = n
-n = n + g ** 2
-sigma = (n ** -lr_power - prev_n ** -lr_power) / lr
-z = z + g - sigma * w
-if abs(z) < lambda_1:
-  w = 0
-else:
-  w = (sgn(z) * lambda_1 - z) / ((beta + sqrt(n)) / alpha + lambda_2)
+
+```r
+prev_n <- n
+n <- n + g^2
+sigma <- (n^(-lr_power) - prev_n^(-lr_power)) / lr
+z <- z + g - sigma * w
+if (abs(z) < lambda_1) {
+  w <- 0
+} else {
+  w <- (sgn(z) * lambda_1 - z) / ((beta + sqrt(n)) / alpha + lambda_2)
+}
 ```
 
 Notation:
@@ -99,38 +102,38 @@ Float. If set, the gradient of all weights is clipped
 so that their global norm is no higher than this value.
 
 @param use_ema
-Boolean, defaults to False. If True, exponential moving average
+Boolean, defaults to FALSE. If TRUE, exponential moving average
 (EMA) is applied. EMA consists of computing an exponential moving
 average of the weights of the model (as the weight values change after
 each training batch), and periodically overwriting the weights with
 their moving average.
 
 @param ema_momentum
-Float, defaults to 0.99. Only used if `use_ema=True`.
+Float, defaults to 0.99. Only used if `use_ema=TRUE`.
 This is the momentum to use when computing
 the EMA of the model's weights:
 `new_average = ema_momentum * old_average + (1 - ema_momentum) *
 current_variable_value`.
 
 @param ema_overwrite_frequency
-Int or None, defaults to None. Only used if
-`use_ema=True`. Every `ema_overwrite_frequency` steps of iterations,
+Int or NULL, defaults to NULL. Only used if
+`use_ema=TRUE`. Every `ema_overwrite_frequency` steps of iterations,
 we overwrite the model variable by its moving average.
-If None, the optimizer
+If NULL, the optimizer
 does not overwrite model variables in the middle of training, and you
 need to explicitly overwrite the variables at the end of training
-by calling `optimizer.finalize_variable_values()`
+by calling `optimizer$finalize_variable_values()`
 (which updates the model
 variables in-place). When using the built-in `fit()` training loop,
 this happens automatically after the last epoch,
 and you don't need to do anything.
 
 @param loss_scale_factor
-Float or `None`. If a float, the scale factor will
+Float or `NULL`. If a float, the scale factor will
 be multiplied the loss before computing gradients, and the inverse of
 the scale factor will be multiplied by the gradients before updating
 variables. Useful for preventing underflow during mixed precision
-training. Alternately, `keras.optimizers.LossScaleOptimizer` will
+training. Alternately, `optimizer_loss_scale` will
 automatically set a loss scale factor.
 
 @param ...
@@ -141,3 +144,4 @@ Passed on to the Python callable
 @seealso
 + <https:/keras.io/api/optimizers/ftrl#ftrl-class>
 + <https://www.tensorflow.org/api_docs/python/tf/keras/optimizers/Ftrl>
+

@@ -49,21 +49,21 @@ no higher than this value.}
 \item{global_clipnorm}{Float. If set, the gradient of all weights is clipped
 so that their global norm is no higher than this value.}
 
-\item{use_ema}{Boolean, defaults to False. If True, exponential moving average
+\item{use_ema}{Boolean, defaults to FALSE. If TRUE, exponential moving average
 (EMA) is applied. EMA consists of computing an exponential moving
 average of the weights of the model (as the weight values change after
 each training batch), and periodically overwriting the weights with
 their moving average.}
 
-\item{ema_momentum}{Float, defaults to 0.99. Only used if \code{use_ema=True}.
+\item{ema_momentum}{Float, defaults to 0.99. Only used if \code{use_ema=TRUE}.
 This is the momentum to use when computing
 the EMA of the model's weights:
 \code{new_average = ema_momentum * old_average + (1 - ema_momentum) * current_variable_value}.}
 
-\item{ema_overwrite_frequency}{Int or None, defaults to None. Only used if
-\code{use_ema=True}. Every \code{ema_overwrite_frequency} steps of iterations,
+\item{ema_overwrite_frequency}{Int or NULL, defaults to NULL. Only used if
+\code{use_ema=TRUE}. Every \code{ema_overwrite_frequency} steps of iterations,
 we overwrite the model variable by its moving average.
-If None, the optimizer
+If NULL, the optimizer
 does not overwrite model variables in the middle of training, and you
 need to explicitly overwrite the variables at the end of training
 by calling \code{optimizer.finalize_variable_values()}
@@ -76,7 +76,7 @@ and you don't need to do anything.}
 
 \item{...}{Passed on to the Python callable}
 
-\item{loss_scale_factor}{Float or \code{None}. If a float, the scale factor will
+\item{loss_scale_factor}{Float or \code{NULL}. If a float, the scale factor will
 be multiplied the loss before computing gradients, and the inverse of
 the scale factor will be multiplied by the gradients before updating
 variables. Useful for preventing underflow during mixed precision
@@ -93,19 +93,19 @@ references below).
 
 Initialization:
 
-\if{html}{\out{<div class="sourceCode python">}}\preformatted{m = 0  # Initialize initial 1st moment vector
-u = 0  # Initialize the exponentially weighted infinity norm
-t = 0  # Initialize timestep
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{m <- 0  # Initialize initial 1st moment vector
+u <- 0  # Initialize the exponentially weighted infinity norm
+t <- 0  # Initialize timestep
 }\if{html}{\out{</div>}}
 
 The update rule for parameter \code{w} with gradient \code{g} is described at the end
 of section 7.1 of the paper (see the referenece section):
 
-\if{html}{\out{<div class="sourceCode python">}}\preformatted{t += 1
-m = beta1 * m + (1 - beta) * g
-u = max(beta2 * u, abs(g))
-current_lr = learning_rate / (1 - beta1 ** t)
-w = w - current_lr * m / (u + epsilon)
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{t <-  t + 1
+m <- beta1 * m + (1 - beta) * g
+u <- max(beta2 * u, abs(g))
+current_lr <- learning_rate / (1 - beta1 ** t)
+w <- w - current_lr * m / (u + epsilon)
 }\if{html}{\out{</div>}}
 }
 \section{Reference}{
