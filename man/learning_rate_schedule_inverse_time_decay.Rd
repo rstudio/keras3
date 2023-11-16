@@ -13,11 +13,11 @@ learning_rate_schedule_inverse_time_decay(
 )
 }
 \arguments{
-\item{initial_learning_rate}{A Python float. The initial learning rate.}
+\item{initial_learning_rate}{A float. The initial learning rate.}
 
 \item{decay_steps}{How often to apply decay.}
 
-\item{decay_rate}{A Python number.  The decay rate.}
+\item{decay_rate}{A number.  The decay rate.}
 
 \item{staircase}{Whether to apply decay in a discrete staircase, as o
 pposed to continuous, fashion.}
@@ -42,36 +42,39 @@ rate when passed the current optimizer step. This can be useful for changing
 the learning rate value across different invocations of optimizer functions.
 It is computed as:
 
-\if{html}{\out{<div class="sourceCode python">}}\preformatted{def decayed_learning_rate(step):
-    return initial_learning_rate / (1 + decay_rate * step / decay_step)
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{decayed_learning_rate <- function(step) \{
+  initial_learning_rate / (1 + decay_rate * step / decay_step)
+\}
 }\if{html}{\out{</div>}}
 
-or, if \code{staircase} is \code{True}, as:
+or, if \code{staircase} is \code{TRUE}, as:
 
-\if{html}{\out{<div class="sourceCode python">}}\preformatted{def decayed_learning_rate(step):
-    return initial_learning_rate /
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{decayed_learning_rate <- function(step) \{
+  initial_learning_rate /
            (1 + decay_rate * floor(step / decay_step))
+\}
 }\if{html}{\out{</div>}}
 
-You can pass this schedule directly into a \code{keras.optimizers.Optimizer}
+You can pass this schedule directly into a \verb{optimizer_*}
 as the learning rate.
 }
 \section{Examples}{
 Fit a Keras model when decaying 1/t with a rate of 0.5:
 
-\if{html}{\out{<div class="sourceCode python">}}\preformatted{...
-initial_learning_rate = 0.1
-decay_steps = 1.0
-decay_rate = 0.5
-learning_rate_fn = keras.optimizers.schedules.InverseTimeDecay(
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{...
+initial_learning_rate <- 0.1
+decay_steps <- 1.0
+decay_rate <- 0.5
+learning_rate_fn <- learning_rate_schedule_inverse_time_decay(
     initial_learning_rate, decay_steps, decay_rate)
 
-model.compile(optimizer=keras.optimizers.SGD(
-                  learning_rate=learning_rate_fn),
-              loss='sparse_categorical_crossentropy',
-              metrics=['accuracy'])
+model \%>\% compile(
+  optimizer = optimizer_sgd(learning_rate=learning_rate_fn),
+  loss = 'sparse_categorical_crossentropy',
+  metrics = 'accuracy')
+)
 
-model.fit(data, labels, epochs=5)
+model \%>\% fit(data, labels, epochs=5)
 }\if{html}{\out{</div>}}
 }
 

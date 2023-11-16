@@ -42,20 +42,20 @@ learning rate value across different invocations of optimizer functions.
 use a learning rate that's 1.0 for the first 100001 steps, 0.5
 for the next 10000 steps, and 0.1 for any additional steps.
 
-\if{html}{\out{<div class="sourceCode python">}}\preformatted{step = ops.array(0)
-boundaries = [100000, 110000]
-values = [1.0, 0.5, 0.1]
-learning_rate_fn = keras.optimizers.schedules.PiecewiseConstantDecay(
-    boundaries, values)
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{step <- 0
+boundaries <- c(100000, 110000)
+values <- c(1.0, 0.5, 0.1)
+learning_rate_fn <- learning_rate_schedule_piecewise_constant_decay(
+  boundaries, values)
 
 # Later, whenever we perform an optimization step, we pass in the step.
-learning_rate = learning_rate_fn(step)
+learning_rate <- learning_rate_fn(step)
 }\if{html}{\out{</div>}}
 
-You can pass this schedule directly into a \code{keras.optimizers.Optimizer}
+You can pass this schedule directly into a \code{optimizer}
 as the learning rate. The learning rate schedule is also serializable and
-deserializable using \code{keras.optimizers.schedules.serialize} and
-\code{keras.optimizers.schedules.deserialize}.
+deserializable using \code{keras$optimizers$schedules$serialize} and
+\code{keras$optimizers$schedules$deserialize}.
 }
 
 \section{Raises}{

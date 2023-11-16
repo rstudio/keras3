@@ -19,23 +19,25 @@ when passed the current optimizer step. This can be useful for changing the
 learning rate value across different invocations of optimizer functions.
 It is computed as:
 
-```python
-def decayed_learning_rate(step):
-    step = min(step, decay_steps)
-    return ((initial_learning_rate - end_learning_rate) *
-            (1 - step / decay_steps) ^ (power)
-           ) + end_learning_rate
+```{r}
+decayed_learning_rate <- function(step) {
+  step = min(step, decay_steps)
+  ((initial_learning_rate - end_learning_rate) *
+    (1 - step / decay_steps) ^ (power)) +
+    end_learning_rate
+}
 ```
 
-If `cycle` is True then a multiple of `decay_steps` is used, the first one
+If `cycle` is TRUE then a multiple of `decay_steps` is used, the first one
 that is bigger than `step`.
 
-```python
-def decayed_learning_rate(step):
-    decay_steps = decay_steps * ceil(step / decay_steps)
-    return ((initial_learning_rate - end_learning_rate) *
-            (1 - step / decay_steps) ^ (power)
-           ) + end_learning_rate
+```{r}
+decayed_learning_rate <- function(step) {
+  decay_steps = decay_steps * ceil(step / decay_steps)
+  ((initial_learning_rate - end_learning_rate) *
+      (1 - step / decay_steps) ^ (power)) +
+    end_learning_rate
+}
 ```
 
 You can pass this schedule directly into a `keras.optimizers.Optimizer`
@@ -45,28 +47,29 @@ as the learning rate.
 Fit a model while decaying from 0.1 to 0.01 in 10000 steps using
 sqrt (i.e. power=0.5):
 
-```python
+```{r, eval=FALSE}
 ...
-starter_learning_rate = 0.1
-end_learning_rate = 0.01
-decay_steps = 10000
-learning_rate_fn = keras.optimizers.schedules.PolynomialDecay(
+starter_learning_rate <- 0.1
+end_learning_rate <- 0.01
+decay_steps <- 10000
+learning_rate_fn <- learning_rate_schedule_polynomial_decay(
     starter_learning_rate,
     decay_steps,
     end_learning_rate,
     power=0.5)
 
-model.compile(optimizer=keras.optimizers.SGD(
-                  learning_rate=learning_rate_fn),
-              loss='sparse_categorical_crossentropy',
-              metrics=['accuracy'])
+model %>% compile(
+  optimizer = optimizer_sgd(learning_rate=learning_rate_fn),
+  loss = 'sparse_categorical_crossentropy',
+  metrics = 'accuracy'
+)
 
-model.fit(data, labels, epochs=5)
+model %>% fit(data, labels, epochs=5)
 ```
 
 The learning rate schedule is also serializable and deserializable using
-`keras.optimizers.schedules.serialize` and
-`keras.optimizers.schedules.deserialize`.
+`keras$optimizers$schedules$serialize` and
+`keras$optimizers$schedules$deserialize`.
 
 @returns
 A 1-arg callable learning rate schedule that takes the current optimizer
@@ -74,17 +77,17 @@ step and outputs the decayed learning rate, a scalar tensor of the
 same type as `initial_learning_rate`.
 
 @param initial_learning_rate
-A Python float. The initial learning rate.
+A float. The initial learning rate.
 
 @param decay_steps
-A Python integer. Must be positive. See the decay
+A integer. Must be positive. See the decay
 computation above.
 
 @param end_learning_rate
-A Python float. The minimal end learning rate.
+A float. The minimal end learning rate.
 
 @param power
-A Python float. The power of the polynomial. Defaults to
+A float. The power of the polynomial. Defaults to
 `1.0`.
 
 @param cycle
@@ -99,3 +102,4 @@ String.  Optional name of the operation. Defaults to
 @seealso
 + <https:/keras.io/api/optimizers/learning_rate_schedules/polynomial_decay#polynomialdecay-class>
 + <https://www.tensorflow.org/api_docs/python/tf/keras/optimizers/schedules/PolynomialDecay>
+

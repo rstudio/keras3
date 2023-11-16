@@ -14,14 +14,14 @@ learning_rate_schedule_polynomial_decay(
 )
 }
 \arguments{
-\item{initial_learning_rate}{A Python float. The initial learning rate.}
+\item{initial_learning_rate}{A float. The initial learning rate.}
 
-\item{decay_steps}{A Python integer. Must be positive. See the decay
+\item{decay_steps}{A integer. Must be positive. See the decay
 computation above.}
 
-\item{end_learning_rate}{A Python float. The minimal end learning rate.}
+\item{end_learning_rate}{A float. The minimal end learning rate.}
 
-\item{power}{A Python float. The power of the polynomial. Defaults to
+\item{power}{A float. The power of the polynomial. Defaults to
 \code{1.0}.}
 
 \item{cycle}{A boolean, whether it should cycle beyond decay_steps.}
@@ -50,21 +50,23 @@ when passed the current optimizer step. This can be useful for changing the
 learning rate value across different invocations of optimizer functions.
 It is computed as:
 
-\if{html}{\out{<div class="sourceCode python">}}\preformatted{def decayed_learning_rate(step):
-    step = min(step, decay_steps)
-    return ((initial_learning_rate - end_learning_rate) *
-            (1 - step / decay_steps) ^ (power)
-           ) + end_learning_rate
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{decayed_learning_rate <- function(step) \{
+  step = min(step, decay_steps)
+  ((initial_learning_rate - end_learning_rate) *
+    (1 - step / decay_steps) ^ (power)) +
+    end_learning_rate
+\}
 }\if{html}{\out{</div>}}
 
-If \code{cycle} is True then a multiple of \code{decay_steps} is used, the first one
+If \code{cycle} is TRUE then a multiple of \code{decay_steps} is used, the first one
 that is bigger than \code{step}.
 
-\if{html}{\out{<div class="sourceCode python">}}\preformatted{def decayed_learning_rate(step):
-    decay_steps = decay_steps * ceil(step / decay_steps)
-    return ((initial_learning_rate - end_learning_rate) *
-            (1 - step / decay_steps) ^ (power)
-           ) + end_learning_rate
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{decayed_learning_rate <- function(step) \{
+  decay_steps = decay_steps * ceil(step / decay_steps)
+  ((initial_learning_rate - end_learning_rate) *
+      (1 - step / decay_steps) ^ (power)) +
+    end_learning_rate
+\}
 }\if{html}{\out{</div>}}
 
 You can pass this schedule directly into a \code{keras.optimizers.Optimizer}
@@ -74,27 +76,28 @@ as the learning rate.
 Fit a model while decaying from 0.1 to 0.01 in 10000 steps using
 sqrt (i.e. power=0.5):
 
-\if{html}{\out{<div class="sourceCode python">}}\preformatted{...
-starter_learning_rate = 0.1
-end_learning_rate = 0.01
-decay_steps = 10000
-learning_rate_fn = keras.optimizers.schedules.PolynomialDecay(
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{...
+starter_learning_rate <- 0.1
+end_learning_rate <- 0.01
+decay_steps <- 10000
+learning_rate_fn <- learning_rate_schedule_polynomial_decay(
     starter_learning_rate,
     decay_steps,
     end_learning_rate,
     power=0.5)
 
-model.compile(optimizer=keras.optimizers.SGD(
-                  learning_rate=learning_rate_fn),
-              loss='sparse_categorical_crossentropy',
-              metrics=['accuracy'])
+model \%>\% compile(
+  optimizer = optimizer_sgd(learning_rate=learning_rate_fn),
+  loss = 'sparse_categorical_crossentropy',
+  metrics = 'accuracy'
+)
 
-model.fit(data, labels, epochs=5)
+model \%>\% fit(data, labels, epochs=5)
 }\if{html}{\out{</div>}}
 
 The learning rate schedule is also serializable and deserializable using
-\code{keras.optimizers.schedules.serialize} and
-\code{keras.optimizers.schedules.deserialize}.
+\code{keras$optimizers$schedules$serialize} and
+\code{keras$optimizers$schedules$deserialize}.
 }
 
 \seealso{
