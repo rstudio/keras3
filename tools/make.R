@@ -18,7 +18,6 @@ if(!"source:tools/translate-tools.R" %in% search()) envir::attach_source("tools/
 # TODO: use @concept or @keywords tags derived from module - then use that to autogenerate _pkgdown.yml
 #
 # TODO:  self$model$stop_training <- TRUE should work. Need to avoid propogating `$<-` past first.
-# TODO: new_callback_class() should accept an empty final trailing , DONE
 #
 # TODO: new_callback_class() should wrap callables to make epoch/batch n 1 based,
 #       make logs persistent (e.g., wrap the user callable w/ `logs$update(<callback_return>`))
@@ -172,9 +171,9 @@ if(!"source:tools/translate-tools.R" %in% search()) envir::attach_source("tools/
 #       roclet. Something like: `#' @adaptedFrom docstring_and_signature("keras.layers.Dense")
 #       Where `docstring_and_signature()` is a function in the package namespace that
 #       returns a string we keep track of for updates from upstream.
-#       This all can live in it's own (new) R package, that maybe also contains the
+#       This all can live in it's own (new) R package, {roxytether} that maybe also contains the
 #       convenient system call wrappers adapters from guildai-r, (which we'll want for
-#       git()). Also, maybe a concenience function that will generate
+#       git()). Also, maybe a convenience function that will generate
 #       the first pass of translating the upstream to roxygen.
 #       Not sure if/how pre-rendering/render-caching could be also be encapsulated
 #       in an roclet. Ideally `@cacheRenders` would dump pre-renders to man-src,
