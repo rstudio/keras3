@@ -190,6 +190,8 @@ py_to_r_wrapper.keras.initializers.initializer.Initializer <- function(x) {
   })))
 }
 
+as_py_array <- function(x) if(inherits(x, "python.builtin.object")) x else np_array(x)
+
 #' @importFrom reticulate py_to_r_wrapper
 #' @export
 py_to_r_wrapper.keras.losses.loss.Loss <- function(x) {
