@@ -14,11 +14,11 @@ while the upper bound `maxval` is excluded.
 The shape of the random values to generate.
 
 @param minval
-Floats, defaults to 0. Lower bound of the range of
+Float, defaults to 0. Lower bound of the range of
 random values to generate (inclusive).
 
 @param maxval
-Floats, defaults to 1. Upper bound of the range of
+Float, defaults to 1. Upper bound of the range of
 random values to generate (exclusive).
 
 @param dtype
