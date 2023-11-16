@@ -127,6 +127,12 @@ attach_eval({
     chr
   }
 
+  str_normalize_whitespace <- function(...) {
+    x <- str_flatten_lines(...) |>
+      str_split_lines() |> str_trim("right") |> str_flatten_lines()
+    str_replace_all(x, "\n{3,}", "\n\n\n")
+  }
+
   dput_cb <- function (x, echo = TRUE)  {
     obj_nm <- deparse(substitute(x))
     out <- clipr::write_clip(capture.output(dput(x)))
