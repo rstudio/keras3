@@ -104,7 +104,7 @@ loss_binary_crossentropy() # OR ...('from_logits=FALSE')
 ```
 
 ```
-## <keras.src.losses.losses.BinaryCrossentropy object at 0x2a01b4a60>
+## <keras.src.losses.losses.BinaryCrossentropy object>
 ```
 
 ```r

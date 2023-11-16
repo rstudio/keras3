@@ -48,7 +48,7 @@ knit_man_src <- function(input, ..., output_dir) {
   # probably as a knitr hook
 
   # strip object addresses; no noisy diff
-  x <- sub(" at 0x[0-9A-F]{9}>$", ">", x, perl = TRUE)
+  x <- sub(" at 0x[0-9A-Fa-f]{9}>$", ">", x, perl = TRUE)
 
   # remove reticulate hint from exceptions
   x <- x[!grepl(r"{## .*rstudio:run:reticulate::py_last_error\(\).*}", x)]
