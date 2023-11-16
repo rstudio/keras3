@@ -33,7 +33,7 @@ remove values from sequences larger than
 \item{value}{Float or String, padding value. (Optional, defaults to 0.)}
 }
 \value{
-\if{html}{\out{<div class="sourceCode">}}\preformatted{NumPy array with shape `(len(sequences), maxlen)`
+\if{html}{\out{<div class="sourceCode">}}\preformatted{Array with shape `(len(sequences), maxlen)`
 }\if{html}{\out{</div>}}
 }
 \description{
@@ -54,29 +54,41 @@ the arguments \code{padding} and \code{truncating}, respectively.
 Pre-padding or removing values from the beginning of the sequence is the
 default.
 
-\if{html}{\out{<div class="sourceCode python">}}\preformatted{sequence = [[1], [2, 3], [4, 5, 6]]
-keras.utils.pad_sequences(sequence)
-# array([[0, 0, 1],
-#        [0, 2, 3],
-#        [4, 5, 6]], dtype=int32)
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{sequence <- list(c(1), c(2, 3), c(4, 5, 6))
+pad_sequences(sequence)
 }\if{html}{\out{</div>}}
 
-\if{html}{\out{<div class="sourceCode python">}}\preformatted{keras.utils.pad_sequences(sequence, value=-1)
-# array([[-1, -1,  1],
-#        [-1,  2,  3],
-#        [ 4,  5,  6]], dtype=int32)
+\if{html}{\out{<div class="sourceCode">}}\preformatted{##      [,1] [,2] [,3]
+## [1,]    0    0    1
+## [2,]    0    2    3
+## [3,]    4    5    6
 }\if{html}{\out{</div>}}
 
-\if{html}{\out{<div class="sourceCode python">}}\preformatted{keras.utils.pad_sequences(sequence, padding='post')
-# array([[1, 0, 0],
-#        [2, 3, 0],
-#        [4, 5, 6]], dtype=int32)
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{pad_sequences(sequence, value=-1)
 }\if{html}{\out{</div>}}
 
-\if{html}{\out{<div class="sourceCode python">}}\preformatted{keras.utils.pad_sequences(sequence, maxlen=2)
-# array([[0, 1],
-#        [2, 3],
-#        [5, 6]], dtype=int32)
+\if{html}{\out{<div class="sourceCode">}}\preformatted{##      [,1] [,2] [,3]
+## [1,]   -1   -1    1
+## [2,]   -1    2    3
+## [3,]    4    5    6
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{pad_sequences(sequence, padding='post')
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode">}}\preformatted{##      [,1] [,2] [,3]
+## [1,]    1    0    0
+## [2,]    2    3    0
+## [3,]    4    5    6
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{pad_sequences(sequence, maxlen=2)
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode">}}\preformatted{##      [,1] [,2]
+## [1,]    0    1
+## [2,]    2    3
+## [3,]    5    6
 }\if{html}{\out{</div>}}
 }
 \seealso{

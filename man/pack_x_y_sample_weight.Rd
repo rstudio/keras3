@@ -2,7 +2,7 @@
 % Please edit documentation in R/autogen-utils.R
 \name{pack_x_y_sample_weight}
 \alias{pack_x_y_sample_weight}
-\title{Packs user-provided data into a tuple.}
+\title{Packs user-provided data into a list.}
 \usage{
 pack_x_y_sample_weight(x, y = NULL, sample_weight = NULL)
 }
@@ -14,25 +14,22 @@ pack_x_y_sample_weight(x, y = NULL, sample_weight = NULL)
 \item{sample_weight}{Sample weight for each element.}
 }
 \value{
-\if{html}{\out{<div class="sourceCode">}}\preformatted{Tuple in the format used in `Model.fit()`.
+\if{html}{\out{<div class="sourceCode">}}\preformatted{List in the format used in `fit()`.
 }\if{html}{\out{</div>}}
 }
 \description{
-This is a convenience utility for packing data into the tuple formats
-that \code{Model.fit()} uses.
+This is a convenience utility for packing data into the list formats
+that \code{fit()} uses.
 }
 \section{Usage}{
 Standalone usage:
 
-\if{html}{\out{<div class="sourceCode python">}}\preformatted{x = ops.ones((10, 1))
-data = pack_x_y_sample_weight(x)
-isinstance(data, ops.Tensor)
-# True
-y = ops.ones((10, 1))
-data = pack_x_y_sample_weight(x, y)
-isinstance(data, tuple)
-# True
-x, y = data
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{x <- k_ones(c(10, 1))
+data <- pack_x_y_sample_weight(x)
+
+# TRUE
+y <- k_ones(c(10, 1))
+data <- pack_x_y_sample_weight(x, y)
 }\if{html}{\out{</div>}}
 }
 

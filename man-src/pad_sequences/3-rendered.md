@@ -18,37 +18,57 @@ the arguments `padding` and `truncating`, respectively.
 Pre-padding or removing values from the beginning of the sequence is the
 default.
 
-```python
-sequence = [[1], [2, 3], [4, 5, 6]]
-keras.utils.pad_sequences(sequence)
-# array([[0, 0, 1],
-#        [0, 2, 3],
-#        [4, 5, 6]], dtype=int32)
+
+```r
+sequence <- list(c(1), c(2, 3), c(4, 5, 6))
+pad_sequences(sequence)
 ```
 
-```python
-keras.utils.pad_sequences(sequence, value=-1)
-# array([[-1, -1,  1],
-#        [-1,  2,  3],
-#        [ 4,  5,  6]], dtype=int32)
+```
+##      [,1] [,2] [,3]
+## [1,]    0    0    1
+## [2,]    0    2    3
+## [3,]    4    5    6
 ```
 
-```python
-keras.utils.pad_sequences(sequence, padding='post')
-# array([[1, 0, 0],
-#        [2, 3, 0],
-#        [4, 5, 6]], dtype=int32)
+
+```r
+pad_sequences(sequence, value=-1)
 ```
 
-```python
-keras.utils.pad_sequences(sequence, maxlen=2)
-# array([[0, 1],
-#        [2, 3],
-#        [5, 6]], dtype=int32)
+```
+##      [,1] [,2] [,3]
+## [1,]   -1   -1    1
+## [2,]   -1    2    3
+## [3,]    4    5    6
+```
+
+
+```r
+pad_sequences(sequence, padding='post')
+```
+
+```
+##      [,1] [,2] [,3]
+## [1,]    1    0    0
+## [2,]    2    3    0
+## [3,]    4    5    6
+```
+
+
+```r
+pad_sequences(sequence, maxlen=2)
+```
+
+```
+##      [,1] [,2]
+## [1,]    0    1
+## [2,]    2    3
+## [3,]    5    6
 ```
 
 @returns
-    NumPy array with shape `(len(sequences), maxlen)`
+    Array with shape `(len(sequences), maxlen)`
 
 @param sequences
 List of sequences (each sequence is a list of integers).
@@ -79,3 +99,4 @@ Float or String, padding value. (Optional, defaults to 0.)
 @seealso
 + <https:/keras.io/keras_core/api/data_loading/timeseries#padsequences-function>
 + <https://www.tensorflow.org/api_docs/python/tf/keras/utils/pad_sequences>
+

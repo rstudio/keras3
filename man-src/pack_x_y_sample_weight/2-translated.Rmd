@@ -1,29 +1,26 @@
 ---
 knit: ({source(here::here("tools/knit.R")); knit_man_src})
 ---
-Packs user-provided data into a tuple.
+Packs user-provided data into a list.
 
 @description
-This is a convenience utility for packing data into the tuple formats
-that `Model.fit()` uses.
+This is a convenience utility for packing data into the list formats
+that `fit()` uses.
 
 # Usage
 Standalone usage:
 
-```python
-x = ops.ones((10, 1))
-data = pack_x_y_sample_weight(x)
-isinstance(data, ops.Tensor)
-# True
-y = ops.ones((10, 1))
-data = pack_x_y_sample_weight(x, y)
-isinstance(data, tuple)
-# True
-x, y = data
+```{r}
+x <- k_ones(c(10, 1))
+data <- pack_x_y_sample_weight(x)
+
+# TRUE
+y <- k_ones(c(10, 1))
+data <- pack_x_y_sample_weight(x, y)
 ```
 
 @returns
-    Tuple in the format used in `Model.fit()`.
+    List in the format used in `fit()`.
 
 @param x
 Features to pass to `Model`.
@@ -39,3 +36,4 @@ Sample weight for each element.
 @family utils
 @seealso
 + <https://www.tensorflow.org/api_docs/python/tf/keras/utils/pack_x_y_sample_weight>
+

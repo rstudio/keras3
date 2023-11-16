@@ -12,32 +12,40 @@ random_seed_generator(seed = NULL, ...)
 \item{...}{Passed on to the Python callable}
 }
 \description{
-In Keras, all RNG-using methods (such as \code{keras.random.normal()})
+In Keras, all RNG-using methods (such as \code{random_normal()})
 are stateless, meaning that if you pass an integer seed to them
-(such as \code{seed=42}), they will return the same values at each call.
+(such as \code{seed = 42}), they will return the same values at each call.
 In order to get different values at each call, you must use a
 \code{SeedGenerator} instead as the seed argument. The \code{SeedGenerator}
 object is stateful.
 }
 \section{Examples}{
-\if{html}{\out{<div class="sourceCode python">}}\preformatted{seed_gen = keras.random.SeedGenerator(seed=42)
-values = keras.random.normal(shape=(2, 3), seed=seed_gen)
-new_values = keras.random.normal(shape=(2, 3), seed=seed_gen)
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{seed_gen <- random_seed_generator(seed = 42)
+values <- random_normal(shape = c(2, 3), seed = seed_gen)
+new_values <- random_normal(shape = c(2, 3), seed = seed_gen)
 }\if{html}{\out{</div>}}
 
 Usage in a layer:
 
-\if{html}{\out{<div class="sourceCode python">}}\preformatted{class Dropout(keras.Layer):
-    def __init__(self, **kwargs):
-        super().__init__(**kwargs)
-        self.seed_generator = keras.random.SeedGenerator(1337)
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{layer_dropout2 <- new_layer_class(
+  "dropout2",
+  initialize = function(...) \{
+    super$initialize(...)
+    self$seed_generator <- random_seed_generator(seed = 1337)
+  \},
+  call = function(x, training = FALSE) \{
+    if (training) \{
+      return(random_dropout(x, rate = 0.5, seed = self$seed_generator))
+    \}
+    return(x)
+  \}
+)
 
-    def call(self, x, training=False):
-        if training:
-            return keras.random.dropout(
-                x, rate=0.5, seed=self.seed_generator
-            )
-        return x
+out <- layer_dropout(k_ones(10), rate = 0.8)
+out
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor([1. 1. 1. 1. 1. 1. 1. 1. 1. 1.], shape=(10), dtype=float32)
 }\if{html}{\out{</div>}}
 }
 

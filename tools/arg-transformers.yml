@@ -197,3 +197,6 @@ keras.metrics.OneHotIoU:
 
 keras.metrics.OneHotMeanIoU:
   num_classes: as_integer
+
+keras.utils.pad_sequences:
+  sequences: lapply(x, as.list)
