@@ -190,6 +190,19 @@ py_to_r_wrapper.keras.initializers.initializer.Initializer <- function(x) {
   })))
 }
 
+#' @importFrom reticulate py_to_r_wrapper
+#' @export
+py_to_r_wrapper.keras.losses.loss.Loss <- function(x) {
+  force(x)
+  as.function.default(c(formals(x), quote({
+    args <- capture_args2(list(y_true = as_py_array, y_pred = as_py_array))
+    do.call(x, args)
+  })))
+}
+
+#' @importFrom reticulate py_to_r_wrapper
+#' @export
+keras.metrics.metric.Metric <- py_to_r_wrapper.keras.losses.loss.Loss
 
 #  py_to_r_wrapper.keras.engine.base_layer.Layer <- function(x) {
 #    force(x)
