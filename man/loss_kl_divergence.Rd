@@ -21,7 +21,7 @@ loss_kl_divergence(
 
 \item{reduction}{Type of reduction to apply to the loss. In almost all cases
 this should be \code{"sum_over_batch_size"}.
-Supported options are \code{"sum"}, \code{"sum_over_batch_size"} or \code{None}.}
+Supported options are \code{"sum"}, \code{"sum_over_batch_size"} or \code{NULL}.}
 
 \item{name}{Optional name for the loss instance.}
 }
@@ -31,23 +31,17 @@ KL Divergence loss values with shape = \verb{[batch_size, d0, .. dN-1]}.
 \description{
 Formula:
 
-\if{html}{\out{<div class="sourceCode python">}}\preformatted{loss = y_true * log(y_true / y_pred)
-}\if{html}{\out{</div>}}
-
-Formula:
-
-\if{html}{\out{<div class="sourceCode python">}}\preformatted{loss = y_true * log(y_true / y_pred)
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{loss <- y_true * log(y_true / y_pred)
 }\if{html}{\out{</div>}}
 }
 \section{Examples}{
-\if{html}{\out{<div class="sourceCode python">}}\preformatted{y_true = np.random.randint(0, 2, size=(2, 3)).astype(np.float32)
-y_pred = np.random.random(size=(2, 3))
-loss = keras.losses.kl_divergence(y_true, y_pred)
-assert loss.shape == (2,)
-y_true = ops.clip(y_true, 1e-7, 1)
-y_pred = ops.clip(y_pred, 1e-7, 1)
-assert np.array_equal(
-    loss, np.sum(y_true * np.log(y_true / y_pred), axis=-1))
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{y_true <- random_uniform(c(2, 3), 0, 2)
+y_pred <- random_uniform(c(2,3))
+loss <- loss_kl_divergence(y_true, y_pred)
+loss
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor([3.5312676 0.2128672], shape=(2), dtype=float32)
 }\if{html}{\out{</div>}}
 }
 

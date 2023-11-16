@@ -24,7 +24,7 @@ quadratic to linear. Defaults to \code{1.0}.}
 \item{...}{Passed on to the Python callable}
 
 \item{reduction}{Type of reduction to apply to loss. Options are \code{"sum"},
-\code{"sum_over_batch_size"} or \code{None}. Defaults to
+\code{"sum_over_batch_size"} or \code{NULL}. Defaults to
 \code{"sum_over_batch_size"}.}
 
 \item{name}{Optional name for the instance.}
@@ -36,35 +36,22 @@ quadratic to linear. Defaults to \code{1.0}.}
 \description{
 Formula:
 
-\if{html}{\out{<div class="sourceCode python">}}\preformatted{for x in error:
-    if abs(x) <= delta:
-        loss.append(0.5 * x^2)
-    elif abs(x) > delta:
-        loss.append(delta * abs(x) - 0.5 * delta^2)
-
-loss = mean(loss, axis=-1)
-}\if{html}{\out{</div>}}
-
-See: \href{https://en.wikipedia.org/wiki/Huber_loss}{Huber loss}.
-
-Formula:
-
-\if{html}{\out{<div class="sourceCode python">}}\preformatted{for x in error:
-    if abs(x) <= delta:
-        loss.append(0.5 * x^2)
-    elif abs(x) > delta:
-        loss.append(delta * abs(x) - 0.5 * delta^2)
-
-loss = mean(loss, axis=-1)
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{for (x in error) \{
+  if (abs(x) <= delta)\{
+    loss <- c(loss, (0.5 * x^2))
+  \} else if (abs(x) > delta) \{
+    loss <- c(loss, (delta * abs(x) - 0.5 * delta^2))
+  \}
+\}
+loss <- mean(loss)
 }\if{html}{\out{</div>}}
 
 See: \href{https://en.wikipedia.org/wiki/Huber_loss}{Huber loss}.
 }
 \section{Examples}{
-\if{html}{\out{<div class="sourceCode python">}}\preformatted{y_true = [[0, 1], [0, 0]]
-y_pred = [[0.6, 0.4], [0.4, 0.6]]
-loss = keras.losses.huber(y_true, y_pred)
-# 0.155
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{y_true <- rbind(c(0, 1), c(0, 0))
+y_pred <- rbind(c(0.6, 0.4), c(0.4, 0.6))
+loss <- loss_huber(y_true, y_pred)
 }\if{html}{\out{</div>}}
 }
 

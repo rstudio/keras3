@@ -6,21 +6,15 @@ Computes the mean of squares of errors between labels and predictions.
 @description
 Formula:
 
-```python
-loss = mean(square(y_true - y_pred), axis=-1)
-```
-
-Formula:
-
-```python
-loss = mean(square(y_true - y_pred))
+```{r, eval=FALSE}
+loss <- mean(square(y_true - y_pred))
 ```
 
 # Examples
-```python
-y_true = np.random.randint(0, 2, size=(2, 3))
-y_pred = np.random.random(size=(2, 3))
-loss = keras.losses.mean_squared_error(y_true, y_pred)
+```{r}
+y_true <- random_uniform(c(2, 3), 0, 2)
+y_pred <- random_uniform(c(2, 3))
+loss <- loss_mean_squared_error(y_true, y_pred)
 ```
 
 @returns
@@ -29,7 +23,7 @@ loss = keras.losses.mean_squared_error(y_true, y_pred)
 @param reduction
 Type of reduction to apply to the loss. In almost all cases
 this should be `"sum_over_batch_size"`.
-Supported options are `"sum"`, `"sum_over_batch_size"` or `None`.
+Supported options are `"sum"`, `"sum_over_batch_size"` or `NULL`.
 
 @param name
 Optional name for the loss instance.
@@ -48,3 +42,4 @@ Passed on to the Python callable
 @seealso
 + <https:/keras.io/api/losses/regression_losses#meansquarederror-class>
 + <https://www.tensorflow.org/api_docs/python/tf/keras/losses/MeanSquaredError>
+

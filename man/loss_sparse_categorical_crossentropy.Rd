@@ -26,7 +26,7 @@ default, we assume that \code{y_pred} encodes a probability distribution.}
 \item{ignore_class}{Optional integer. The ID of a class to be ignored during
 loss computation. This is useful, for example, in segmentation
 problems featuring a "void" class (commonly -1 or 255) in
-segmentation maps. By default (\code{ignore_class=None}), all classes are
+segmentation maps. By default (\code{ignore_class=NULL}), all classes are
 considered.}
 
 \item{axis}{Defaults to \code{-1}. The dimension along which the entropy is
@@ -36,7 +36,7 @@ computed.}
 
 \item{reduction}{Type of reduction to apply to the loss. In almost all cases
 this should be \code{"sum_over_batch_size"}.
-Supported options are \code{"sum"}, \code{"sum_over_batch_size"} or \code{None}.}
+Supported options are \code{"sum"}, \code{"sum_over_batch_size"} or \code{NULL}.}
 
 \item{name}{Optional name for the loss instance.}
 }
@@ -57,45 +57,61 @@ In the snippet below, there is a single floating point value per example for
 is \verb{[batch_size, num_classes]}.
 }
 \section{Examples}{
-\if{html}{\out{<div class="sourceCode python">}}\preformatted{y_true = [1, 2]
-y_pred = [[0.05, 0.95, 0], [0.1, 0.8, 0.1]]
-loss = keras.losses.sparse_categorical_crossentropy(y_true, y_pred)
-assert loss.shape == (2,)
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{y_true <- c(1, 2)
+y_pred <- rbind(c(0.05, 0.95, 0), c(0.1, 0.8, 0.1))
+loss <- loss_sparse_categorical_crossentropy(y_true, y_pred)
 loss
-# array([0.0513, 2.303], dtype=float32)
 }\if{html}{\out{</div>}}
 
-\if{html}{\out{<div class="sourceCode python">}}\preformatted{y_true = [1, 2]
-y_pred = [[0.05, 0.95, 0], [0.1, 0.8, 0.1]]
+\if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor([0.05129339 2.30258509], shape=(2), dtype=float64)
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{y_true <- c(1, 2)
+y_pred <- rbind(c(0.05, 0.95, 0), c(0.1, 0.8, 0.1))
 # Using 'auto'/'sum_over_batch_size' reduction type.
-scce = keras.losses.SparseCategoricalCrossentropy()
-scce(y_true, y_pred)
-# 1.177
+scce <- loss_sparse_categorical_crossentropy()
+scce(k_array(y_true), k_array(y_pred))
 }\if{html}{\out{</div>}}
 
-\if{html}{\out{<div class="sourceCode python">}}\preformatted{# Calling with 'sample_weight'.
-scce(y_true, y_pred, sample_weight=np.array([0.3, 0.7]))
-# 0.814
+\if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor(1.1769392, shape=(), dtype=float32)
 }\if{html}{\out{</div>}}
 
-\if{html}{\out{<div class="sourceCode python">}}\preformatted{# Using 'sum' reduction type.
-scce = keras.losses.SparseCategoricalCrossentropy(
-    reduction="sum")
-scce(y_true, y_pred)
-# 2.354
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{# 1.177
 }\if{html}{\out{</div>}}
 
-\if{html}{\out{<div class="sourceCode python">}}\preformatted{# Using 'none' reduction type.
-scce = keras.losses.SparseCategoricalCrossentropy(
-    reduction=None)
-scce(y_true, y_pred)
-# array([0.0513, 2.303], dtype=float32)
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{# Calling with 'sample_weight'.
+scce(k_array(y_true), k_array(y_pred), sample_weight = k_array(c(0.3, 0.7)))
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor(0.8135988, shape=(), dtype=float32)
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{# Using 'sum' reduction type.
+scce <- loss_sparse_categorical_crossentropy(reduction="sum")
+scce(k_array(y_true), k_array(y_pred))
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor(2.3538785, shape=(), dtype=float32)
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{# 2.354
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{# Using 'none' reduction type.
+scce <- loss_sparse_categorical_crossentropy(reduction=NULL)
+scce(k_array(y_true), k_array(y_pred))
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor([0.05129344 2.3025851 ], shape=(2), dtype=float32)
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{# array([0.0513, 2.303], dtype=float32)
 }\if{html}{\out{</div>}}
 
 Usage with the \code{compile()} API:
 
-\if{html}{\out{<div class="sourceCode python">}}\preformatted{model.compile(optimizer='sgd',
-              loss=keras.losses.SparseCategoricalCrossentropy())
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{model \%>\% compile(optimizer = 'sgd',
+                  loss = loss_sparse_categorical_crossentropy())
 }\if{html}{\out{</div>}}
 }
 

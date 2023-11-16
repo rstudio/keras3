@@ -20,7 +20,7 @@ loss_log_cosh(
 \item{...}{Passed on to the Python callable}
 
 \item{reduction}{Type of reduction to apply to loss. Options are \code{"sum"},
-\code{"sum_over_batch_size"} or \code{None}. Defaults to
+\code{"sum_over_batch_size"} or \code{NULL}. Defaults to
 \code{"sum_over_batch_size"}.}
 
 \item{name}{Optional name for the instance.}
@@ -32,26 +32,18 @@ loss_log_cosh(
 \description{
 Formula:
 
-\if{html}{\out{<div class="sourceCode python">}}\preformatted{loss = mean(log(cosh(y_pred - y_true)), axis=-1)
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{loss <- mean(log(cosh(y_pred - y_true)), axis=-1)
 }\if{html}{\out{</div>}}
 
 Note that \code{log(cosh(x))} is approximately equal to \code{(x ** 2) / 2} for small
 \code{x} and to \code{abs(x) - log(2)} for large \code{x}. This means that 'logcosh' works
 mostly like the mean squared error, but will not be so strongly affected by
 the occasional wildly incorrect prediction.
-
-Formula:
-
-\if{html}{\out{<div class="sourceCode python">}}\preformatted{error = y_pred - y_true
-logcosh = mean(log((exp(error) + exp(-error))/2), axis=-1)`
-}\if{html}{\out{</div>}}
-
-where x is the error \code{y_pred - y_true}.
 }
 \section{Examples}{
-\if{html}{\out{<div class="sourceCode python">}}\preformatted{y_true = [[0., 1.], [0., 0.]]
-y_pred = [[1., 1.], [0., 0.]]
-loss = keras.losses.log_cosh(y_true, y_pred)
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{y_true <- rbind(c(0., 1.), c(0., 0.))
+y_pred <- rbind(c(1., 1.), c(0., 0.))
+loss <- loss_log_cosh(y_true, y_pred)
 # 0.108
 }\if{html}{\out{</div>}}
 }

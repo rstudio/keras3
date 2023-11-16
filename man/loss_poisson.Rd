@@ -21,7 +21,7 @@ loss_poisson(
 
 \item{reduction}{Type of reduction to apply to the loss. In almost all cases
 this should be \code{"sum_over_batch_size"}.
-Supported options are \code{"sum"}, \code{"sum_over_batch_size"} or \code{None}.}
+Supported options are \code{"sum"}, \code{"sum_over_batch_size"} or \code{NULL}.}
 
 \item{name}{Optional name for the loss instance.}
 }
@@ -31,23 +31,17 @@ Poisson loss values with shape = \verb{[batch_size, d0, .. dN-1]}.
 \description{
 Formula:
 
-\if{html}{\out{<div class="sourceCode python">}}\preformatted{loss = y_pred - y_true * log(y_pred)
-}\if{html}{\out{</div>}}
-
-Formula:
-
-\if{html}{\out{<div class="sourceCode python">}}\preformatted{loss = y_pred - y_true * log(y_pred)
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{loss <- y_pred - y_true * log(y_pred)
 }\if{html}{\out{</div>}}
 }
 \section{Examples}{
-\if{html}{\out{<div class="sourceCode python">}}\preformatted{y_true = np.random.randint(0, 2, size=(2, 3))
-y_pred = np.random.random(size=(2, 3))
-loss = keras.losses.poisson(y_true, y_pred)
-assert loss.shape == (2,)
-y_pred = y_pred + 1e-7
-assert np.allclose(
-    loss, np.mean(y_pred - y_true * np.log(y_pred), axis=-1),
-    atol=1e-5)
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{y_true <- random_uniform(c(2, 3), 0, 2)
+y_pred <- random_uniform(c(2, 3))
+loss <- loss_poisson(y_true, y_pred)
+loss
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor([2.5907533  0.66836613], shape=(2), dtype=float32)
 }\if{html}{\out{</div>}}
 }
 

@@ -21,32 +21,27 @@ loss_mean_absolute_percentage_error(
 
 \item{reduction}{Type of reduction to apply to the loss. In almost all cases
 this should be \code{"sum_over_batch_size"}.
-Supported options are \code{"sum"}, \code{"sum_over_batch_size"} or \code{None}.}
+Supported options are \code{"sum"}, \code{"sum_over_batch_size"} or \code{NULL}.}
 
 \item{name}{Optional name for the loss instance.}
 }
 \value{
-Mean absolute percentage error values with shape = \verb{[batch_size, d0, .. dN-1]}.
+Mean absolute percentage error values with shape = \verb{[batch_size, d0, ..dN-1]}.
 }
 \description{
 Formula:
 
-\if{html}{\out{<div class="sourceCode python">}}\preformatted{loss = 100 * mean(abs((y_true - y_pred) / y_true), axis=-1)
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{loss <- 100 * mean(abs((y_true - y_pred) / y_true), axis=-1)
 }\if{html}{\out{</div>}}
 
 Division by zero is prevented by dividing by \code{maximum(y_true, epsilon)}
 where \code{epsilon = keras.backend.epsilon()}
 (default to \code{1e-7}).
-
-Formula:
-
-\if{html}{\out{<div class="sourceCode python">}}\preformatted{loss = 100 * mean(abs((y_true - y_pred) / y_true))
-}\if{html}{\out{</div>}}
 }
 \section{Examples}{
-\if{html}{\out{<div class="sourceCode python">}}\preformatted{y_true = np.random.random(size=(2, 3))
-y_pred = np.random.random(size=(2, 3))
-loss = keras.losses.mean_absolute_percentage_error(y_true, y_pred)
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{y_true <- random_uniform(c(2, 3))
+y_pred <- random_uniform(c(2, 3))
+loss <- loss_mean_absolute_percentage_error(y_true, y_pred)
 }\if{html}{\out{</div>}}
 }
 
