@@ -13,14 +13,14 @@ learning_rate_schedule_exponential_decay(
 )
 }
 \arguments{
-\item{initial_learning_rate}{A Python float. The initial learning rate.}
+\item{initial_learning_rate}{A float. The initial learning rate.}
 
-\item{decay_steps}{A Python integer. Must be positive. See the decay
+\item{decay_steps}{A integer. Must be positive. See the decay
 computation above.}
 
-\item{decay_rate}{A Python float. The decay rate.}
+\item{decay_rate}{A float. The decay rate.}
 
-\item{staircase}{Boolean.  If \code{True} decay the learning rate at discrete
+\item{staircase}{Boolean.  If \code{TRUE} decay the learning rate at discrete
 intervals.}
 
 \item{name}{String.  Optional name of the operation.  Defaults to
@@ -41,38 +41,40 @@ rate when passed the current optimizer step. This can be useful for changing
 the learning rate value across different invocations of optimizer functions.
 It is computed as:
 
-\if{html}{\out{<div class="sourceCode python">}}\preformatted{def decayed_learning_rate(step):
-    return initial_learning_rate * decay_rate ^ (step / decay_steps)
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{decayed_learning_rate <- function(step) \{
+  initial_learning_rate * decay_rate ^ (step / decay_steps)
+\}
 }\if{html}{\out{</div>}}
 
-If the argument \code{staircase} is \code{True}, then \code{step / decay_steps} is
+If the argument \code{staircase} is \code{TRUE}, then \code{step / decay_steps} is
 an integer division and the decayed learning rate follows a
 staircase function.
 
-You can pass this schedule directly into a \code{keras.optimizers.Optimizer}
+You can pass this schedule directly into a \code{optimizer}
 as the learning rate.
 }
 \section{Examples}{
 When fitting a Keras model, decay every 100000 steps with a base
 of 0.96:
 
-\if{html}{\out{<div class="sourceCode python">}}\preformatted{initial_learning_rate = 0.1
-lr_schedule = keras.optimizers.schedules.ExponentialDecay(
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{initial_learning_rate <- 0.1
+lr_schedule <- learning_rate_schedule_exponential_decay(
     initial_learning_rate,
     decay_steps=100000,
     decay_rate=0.96,
-    staircase=True)
+    staircase=TRUE)
 
-model.compile(optimizer=keras.optimizers.SGD(learning_rate=lr_schedule),
-              loss='sparse_categorical_crossentropy',
-              metrics=['accuracy'])
+model \%>\% compile(
+  optimizer = optimizer_sgd(learning_rate = lr_schedule),
+  loss = 'sparse_categorical_crossentropy',
+  metrics = c('accuracy'))
 
-model.fit(data, labels, epochs=5)
+model \%>\% fit(data, labels, epochs=5)
 }\if{html}{\out{</div>}}
 
 The learning rate schedule is also serializable and deserializable using
-\code{keras.optimizers.schedules.serialize} and
-\code{keras.optimizers.schedules.deserialize}.
+\code{keras$optimizers$schedules$serialize} and
+\code{keras$optimizers$schedules$deserialize}.
 }
 
 \seealso{

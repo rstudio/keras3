@@ -14,17 +14,17 @@ learning_rate_schedule_cosine_decay_restarts(
 )
 }
 \arguments{
-\item{initial_learning_rate}{A Python float. The initial learning rate.}
+\item{initial_learning_rate}{A float. The initial learning rate.}
 
-\item{first_decay_steps}{A Python integer. Number of steps to decay over.}
+\item{first_decay_steps}{An integer. Number of steps to decay over.}
 
-\item{t_mul}{A Python float. Used to derive the number of iterations in
+\item{t_mul}{A float. Used to derive the number of iterations in
 the i-th period.}
 
-\item{m_mul}{A Python float. Used to derive the initial learning rate of
+\item{m_mul}{A float. Used to derive the initial learning rate of
 the i-th period.}
 
-\item{alpha}{A Python float. Minimum learning rate value as a fraction of
+\item{alpha}{A float. Minimum learning rate value as a fraction of
 the \code{initial_learning_rate}.}
 
 \item{name}{String. Optional name of the operation. Defaults to
@@ -56,17 +56,16 @@ steps and with \code{m_mul} times initial learning rate as the new learning rate
 
 Example usage:
 
-\if{html}{\out{<div class="sourceCode python">}}\preformatted{first_decay_steps = 1000
-lr_decayed_fn = (
-    keras.optimizers.schedules.CosineDecayRestarts(
-        initial_learning_rate,
-        first_decay_steps))
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{first_decay_steps <- 1000
+lr_decayed_fn <- learning_rate_schedule_cosine_decay_restarts(
+        0.001,
+        first_decay_steps)
 }\if{html}{\out{</div>}}
 
-You can pass this schedule directly into a \code{keras.optimizers.Optimizer}
+You can pass this schedule directly into a \code{optimizer}
 as the learning rate. The learning rate schedule is also serializable and
-deserializable using \code{keras.optimizers.schedules.serialize} and
-\code{keras.optimizers.schedules.deserialize}.
+deserializable using \code{keras$optimizers$schedules$serialize} and
+\code{keras$optimizers$schedules$deserialize}.
 }
 \seealso{
 \itemize{

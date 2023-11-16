@@ -14,23 +14,23 @@ learning_rate_schedule_cosine_decay(
 )
 }
 \arguments{
-\item{initial_learning_rate}{A Python float. The initial learning rate.}
+\item{initial_learning_rate}{A float. The initial learning rate.}
 
-\item{decay_steps}{A Python int. Number of steps to decay over.}
+\item{decay_steps}{A int. Number of steps to decay over.}
 
-\item{alpha}{A Python float. Minimum learning rate value for decay as a
+\item{alpha}{A float. Minimum learning rate value for decay as a
 fraction of \code{initial_learning_rate}.}
 
 \item{name}{String. Optional name of the operation.  Defaults to
 \code{"CosineDecay"}.}
 
-\item{warmup_target}{A Python float. The target learning rate for our
+\item{warmup_target}{A float. The target learning rate for our
 warmup phase. Will cast to the \code{initial_learning_rate} datatype.
-Setting to \code{None} will skip warmup and begins decay phase from
+Setting to \code{NULL} will skip warmup and begins decay phase from
 \code{initial_learning_rate}. Otherwise scheduler will warmup from
 \code{initial_learning_rate} to \code{warmup_target}.}
 
-\item{warmup_steps}{A Python int. Number of steps to warmup over.}
+\item{warmup_steps}{A int. Number of steps to warmup over.}
 }
 \value{
 A 1-arg callable learning rate schedule that takes the current optimizer
@@ -50,7 +50,7 @@ schedule applies a linear increase per optimizer step to our learning rate
 from \code{initial_learning_rate} to \code{warmup_target} for a duration of
 \code{warmup_steps}. Afterwards, it applies a cosine decay function taking our
 learning rate from \code{warmup_target} to \code{alpha} for a duration of
-\code{decay_steps}. If \code{warmup_target} is None we skip warmup and our decay
+\code{decay_steps}. If \code{warmup_target} is NULL we skip warmup and our decay
 will take our learning rate from \code{initial_learning_rate} to \code{alpha}.
 It requires a \code{step} value to  compute the learning rate. You can
 just pass a backend variable that you increment at each training step.
@@ -62,50 +62,53 @@ optimizer functions.
 
 Our warmup is computed as:
 
-\if{html}{\out{<div class="sourceCode python">}}\preformatted{def warmup_learning_rate(step):
-    completed_fraction = step / warmup_steps
-    total_delta = target_warmup - initial_learning_rate
-    return completed_fraction * total_delta
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{warmup_learning_rate <- function(step) \{
+  completed_fraction <- step / warmup_steps
+  total_delta <- target_warmup - initial_learning_rate
+  completed_fraction * total_delta
+\}
 }\if{html}{\out{</div>}}
 
 And our decay is computed as:
 
-\if{html}{\out{<div class="sourceCode python">}}\preformatted{if warmup_target is None:
-    initial_decay_lr = initial_learning_rate
-else:
-    initial_decay_lr = warmup_target
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{if (is.null(warmup_target)) \{
+  initial_decay_lr <- initial_learning_rate
+\} else \{
+  initial_decay_lr <- warmup_target
+\}
 
-def decayed_learning_rate(step):
-    step = min(step, decay_steps)
-    cosine_decay = 0.5 * (1 + cos(pi * step / decay_steps))
-    decayed = (1 - alpha) * cosine_decay + alpha
-    return initial_decay_lr * decayed
+decayed_learning_rate <- function(step) \{
+  step <- min(step, decay_steps)
+  cosine_decay <- 0.5 * (1 + cos(pi * step / decay_steps))
+  decayed <- (1 - alpha) * cosine_decay + alpha
+  initial_decay_lr * decayed
+\}
 }\if{html}{\out{</div>}}
 
 Example usage without warmup:
 
-\if{html}{\out{<div class="sourceCode python">}}\preformatted{decay_steps = 1000
-initial_learning_rate = 0.1
-lr_decayed_fn = keras.optimizers.schedules.CosineDecay(
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{decay_steps <- 1000
+initial_learning_rate <- 0.1
+lr_decayed_fn <- learning_rate_schedule_cosine_decay(
     initial_learning_rate, decay_steps)
 }\if{html}{\out{</div>}}
 
 Example usage with warmup:
 
-\if{html}{\out{<div class="sourceCode python">}}\preformatted{decay_steps = 1000
-initial_learning_rate = 0
-warmup_steps = 1000
-target_learning_rate = 0.1
-lr_warmup_decayed_fn = keras.optimizers.schedules.CosineDecay(
-    initial_learning_rate, decay_steps, warmup_target=target_learning_rate,
-    warmup_steps=warmup_steps
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{decay_steps <- 1000
+initial_learning_rate <- 0
+warmup_steps <- 1000
+target_learning_rate <- 0.1
+lr_warmup_decayed_fn <- learning_rate_schedule_cosine_decay(
+    initial_learning_rate, decay_steps, warmup_target = target_learning_rate,
+    warmup_steps = warmup_steps
 )
 }\if{html}{\out{</div>}}
 
-You can pass this schedule directly into a \code{keras.optimizers.Optimizer}
+You can pass this schedule directly into a \code{optimizer}
 as the learning rate. The learning rate schedule is also serializable and
-deserializable using \code{keras.optimizers.schedules.serialize} and
-\code{keras.optimizers.schedules.deserialize}.
+deserializable using \code{keras$optimizers$schedules$serialize} and
+\code{keras$optimizers$schedules$deserialize}.
 }
 \seealso{
 \itemize{
