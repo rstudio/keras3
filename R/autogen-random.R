@@ -23,6 +23,17 @@ function (inputs, rate, noise_shape = NULL, seed = NULL)
 }
 
 
+"man-src/random_gamma.Rmd" # |>file.edit() # or cmd+click to edit man page
+"man-src/random_gamma/0-upstream.md" # view the upstream doc
+#' @eval readLines("man-src/random_gamma/3-rendered.md")
+random_gamma <-
+function (shape, alpha, dtype = NULL, seed = NULL)
+{
+    args <- capture_args2(list(shape = normalize_shape, seed = as_integer))
+    do.call(keras$random$gamma, args)
+}
+
+
 "man-src/random_integer.Rmd" # |>file.edit() # or cmd+click to edit man page
 "man-src/random_integer/0-upstream.md" # view the upstream doc
 #' @eval readLines("man-src/random_integer/3-rendered.md")

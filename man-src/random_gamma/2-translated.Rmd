@@ -1,14 +1,10 @@
-Draw random samples from a normal (Gaussian) distribution.
+Draw random samples from the Gamma distribution.
 
 @param shape
 The shape of the random values to generate.
 
-@param mean
-Float, defaults to 0. Mean of the random values to generate.
-
-@param stddev
-Float, defaults to 1. Standard deviation of the random values
-to generate.
+@param alpha
+Float, the parameter of the distribution.
 
 @param dtype
 Optional dtype of the tensor. Only floating point types are
@@ -29,4 +25,4 @@ of `keras.random.SeedGenerator`.
 @export
 @family random
 @seealso
-+ <https://www.tensorflow.org/api_docs/python/tf/keras/random/normal>
++ <https://www.tensorflow.org/api_docs/python/tf/keras/random/gamma>

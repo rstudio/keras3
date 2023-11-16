@@ -32,6 +32,7 @@ Shuffle the elements of a tensor uniformly at random along an axis.
 Other random: 
 \code{\link{random_categorical}()},
 \code{\link{random_dropout}()},
+\code{\link{random_gamma}()},
 \code{\link{random_integer}()},
 \code{\link{random_normal}()},
 \code{\link{random_seed_generator}()},

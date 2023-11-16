@@ -4,10 +4,10 @@ Draw random samples from a normal (Gaussian) distribution.
 The shape of the random values to generate.
 
 @param mean
-Floats, defaults to 0. Mean of the random values to generate.
+Float, defaults to 0. Mean of the random values to generate.
 
 @param stddev
-Floats, defaults to 1. Standard deviation of the random values
+Float, defaults to 1. Standard deviation of the random values
 to generate.
 
 @param dtype

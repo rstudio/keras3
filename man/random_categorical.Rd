@@ -48,6 +48,7 @@ distribution.
 
 Other random: 
 \code{\link{random_dropout}()},
+\code{\link{random_gamma}()},
 \code{\link{random_integer}()},
 \code{\link{random_normal}()},
 \code{\link{random_seed_generator}()},

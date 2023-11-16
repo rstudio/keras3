@@ -18,7 +18,7 @@ k_average(data)
 ```
 
 ```
-## tf.Tensor(2.5, shape=(), dtype=float64)
+## tf.Tensor(2.5, shape=(), dtype=float32)
 ```
 
 ```r

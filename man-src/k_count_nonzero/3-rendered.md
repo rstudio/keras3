@@ -12,7 +12,7 @@ k_count_nonzero(x)
 ```
 
 ```
-## tf.Tensor(5, shape=(), dtype=int64)
+## tf.Tensor(5, shape=(), dtype=int32)
 ```
 
 ```r
@@ -20,7 +20,7 @@ k_count_nonzero(x, axis = 1)
 ```
 
 ```
-## tf.Tensor([1 1 2 1], shape=(4), dtype=int64)
+## tf.Tensor([1 1 2 1], shape=(4), dtype=int32)
 ```
 
 ```r
@@ -28,7 +28,7 @@ k_count_nonzero(x, axis = 2)
 ```
 
 ```
-## tf.Tensor([2 3], shape=(2), dtype=int64)
+## tf.Tensor([2 3], shape=(2), dtype=int32)
 ```
 
 @returns

@@ -12,8 +12,8 @@ Draw random samples from a normal (Gaussian) distribution.
 
 Args:
     shape: The shape of the random values to generate.
-    mean: Floats, defaults to 0. Mean of the random values to generate.
-    stddev: Floats, defaults to 1. Standard deviation of the random values
+    mean: Float, defaults to 0. Mean of the random values to generate.
+    stddev: Float, defaults to 1. Standard deviation of the random values
         to generate.
     dtype: Optional dtype of the tensor. Only floating point types are
         supported. If not specified, `keras.config.floatx()` is used,

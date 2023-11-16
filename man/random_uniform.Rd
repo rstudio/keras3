@@ -9,10 +9,10 @@ random_uniform(shape, minval = 0, maxval = 1, dtype = NULL, seed = NULL)
 \arguments{
 \item{shape}{The shape of the random values to generate.}
 
-\item{minval}{Floats, defaults to 0. Lower bound of the range of
+\item{minval}{Float, defaults to 0. Lower bound of the range of
 random values to generate (inclusive).}
 
-\item{maxval}{Floats, defaults to 1. Upper bound of the range of
+\item{maxval}{Float, defaults to 1. Upper bound of the range of
 random values to generate (exclusive).}
 
 \item{dtype}{Optional dtype of the tensor. Only floating point types are
@@ -44,6 +44,7 @@ while the upper bound \code{maxval} is excluded.
 Other random: 
 \code{\link{random_categorical}()},
 \code{\link{random_dropout}()},
+\code{\link{random_gamma}()},
 \code{\link{random_integer}()},
 \code{\link{random_normal}()},
 \code{\link{random_seed_generator}()},

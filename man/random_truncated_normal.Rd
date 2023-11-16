@@ -9,9 +9,9 @@ random_truncated_normal(shape, mean = 0, stddev = 1, dtype = NULL, seed = NULL)
 \arguments{
 \item{shape}{The shape of the random values to generate.}
 
-\item{mean}{Floats, defaults to 0. Mean of the random values to generate.}
+\item{mean}{Float, defaults to 0. Mean of the random values to generate.}
 
-\item{stddev}{Floats, defaults to 1. Standard deviation of the random values
+\item{stddev}{Float, defaults to 1. Standard deviation of the random values
 to generate.}
 
 \item{dtype}{Optional dtype of the tensor. Only floating point types are
@@ -41,6 +41,7 @@ than two standard deviations from the mean.
 Other random: 
 \code{\link{random_categorical}()},
 \code{\link{random_dropout}()},
+\code{\link{random_gamma}()},
 \code{\link{random_integer}()},
 \code{\link{random_normal}()},
 \code{\link{random_seed_generator}()},

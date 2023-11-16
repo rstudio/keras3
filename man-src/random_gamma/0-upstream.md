@@ -1,31 +1,21 @@
-keras.random.randint
+keras.random.gamma
 __signature__
 (
   shape,
-  minval,
-  maxval,
-  dtype='int32',
+  alpha,
+  dtype=None,
   seed=None
 )
 __doc__
-Draw random integers from a uniform distribution.
-
-The generated values follow a uniform distribution in the range
-`[minval, maxval)`. The lower bound `minval` is included in the range,
-while the upper bound `maxval` is excluded.
-
-`dtype` must be an integer type.
+Draw random samples from the Gamma distribution.
 
 Args:
     shape: The shape of the random values to generate.
-    minval: Float, defaults to 0. Lower bound of the range of
-        random values to generate (inclusive).
-    maxval: Float, defaults to 1. Upper bound of the range of
-        random values to generate (exclusive).
-    dtype: Optional dtype of the tensor. Only integer types are
+    alpha: Float, the parameter of the distribution.
+    dtype: Optional dtype of the tensor. Only floating point types are
         supported. If not specified, `keras.config.floatx()` is used,
         which defaults to `float32` unless you configured it otherwise (via
-        `keras.config.set_floatx(float_dtype)`)
+        `keras.config.set_floatx(float_dtype)`).
     seed: A Python integer or instance of
         `keras.random.SeedGenerator`.
         Used to make the behavior of the initializer

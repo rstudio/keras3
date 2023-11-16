@@ -18,9 +18,9 @@ while the upper bound `maxval` is excluded.
 
 Args:
     shape: The shape of the random values to generate.
-    minval: Floats, defaults to 0. Lower bound of the range of
+    minval: Float, defaults to 0. Lower bound of the range of
         random values to generate (inclusive).
-    maxval: Floats, defaults to 1. Upper bound of the range of
+    maxval: Float, defaults to 1. Upper bound of the range of
         random values to generate (exclusive).
     dtype: Optional dtype of the tensor. Only floating point types are
         supported. If not specified, `keras.config.floatx()` is used,

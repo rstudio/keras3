@@ -25,6 +25,7 @@ Randomly set some portion of values in the tensor to 0.
 
 Other random: 
 \code{\link{random_categorical}()},
+\code{\link{random_gamma}()},
 \code{\link{random_integer}()},
 \code{\link{random_normal}()},
 \code{\link{random_seed_generator}()},
