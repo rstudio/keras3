@@ -56,6 +56,7 @@ Total number of classes. If `NULL`, this would be inferred
 as `max(x) + 1`. Defaults to `NULL`.
 
 @export
+@family numerical utils
 @family utils
 @seealso
 + <https:/keras.io/api/utils/python_utils#tocategorical-function>

@@ -98,7 +98,6 @@ Base layer keyword arguments, such as `name` and `dtype`.
 Object to compose the layer with. A tensor, array, or sequential model.
 
 @export
-@family random preprocessing layers
 @family preprocessing layers
 @family layers
 @seealso

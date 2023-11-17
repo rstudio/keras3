@@ -92,7 +92,8 @@ String.  Optional name of the operation. Defaults to
 `"PolynomialDecay"`.
 
 @export
-@family optimizer learing rate schedules
+@family learning rate schedule optimizers
+@family schedule optimizers
 @seealso
 + <https:/keras.io/api/optimizers/learning_rate_schedules/polynomial_decay#polynomialdecay-class>
 + <https://www.tensorflow.org/api_docs/python/tf/keras/optimizers/schedules/PolynomialDecay>

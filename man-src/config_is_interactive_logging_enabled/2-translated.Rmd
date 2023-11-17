@@ -15,5 +15,6 @@ and `False` otherwise.
 @export
 @family io utils
 @family utils
+@family config
 @seealso
 + <https://www.tensorflow.org/api_docs/python/tf/keras/config/is_interactive_logging_enabled>

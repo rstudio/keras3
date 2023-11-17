@@ -30,7 +30,9 @@ Ground-truth targets to pass to `Model`.
 Sample weight for each element.
 
 @export
-@family dataset utils
+@family datum util adapter trainers
+@family datum adapter trainers
+@family trainers
 @family utils
 @seealso
 + <https://www.tensorflow.org/api_docs/python/tf/keras/utils/pack_x_y_sample_weight>

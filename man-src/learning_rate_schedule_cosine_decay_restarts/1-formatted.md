@@ -61,7 +61,8 @@ String. Optional name of the operation. Defaults to
 `"SGDRDecay"`.
 
 @export
-@family optimizer learing rate schedules
+@family learning rate schedule optimizers
+@family schedule optimizers
 @seealso
 + <https:/keras.io/api/optimizers/learning_rate_schedules/cosine_decay_restarts#cosinedecayrestarts-class>
 + <https://www.tensorflow.org/api_docs/python/tf/keras/optimizers/schedules/CosineDecayRestarts>

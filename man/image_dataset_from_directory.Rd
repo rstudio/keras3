@@ -159,22 +159,9 @@ Animated gifs are truncated to the first frame.
 
 Other dataset utils: 
 \code{\link{audio_dataset_from_directory}()},
-\code{\link{pack_x_y_sample_weight}()},
 \code{\link{split_dataset}()},
 \code{\link{text_dataset_from_directory}()},
-\code{\link{unpack_x_y_sample_weight}()}
-
-Other image utils: 
-\code{\link{image_array_save}()},
-\code{\link{image_from_array}()},
-\code{\link{image_load}()},
-\code{\link{image_smart_resize}()},
-\code{\link{image_to_array}()},
-\code{\link{k_image_affine_transform}()},
-\code{\link{k_image_extract_patches}()},
-\code{\link{k_image_map_coordinates}()},
-\code{\link{k_image_pad_images}()},
-\code{\link{k_image_resize}()}
+\code{\link{timeseries_dataset_from_array}()}
 
 Other utils: 
 \code{\link{audio_dataset_from_directory}()},
@@ -207,7 +194,13 @@ Other utils:
 \code{\link{timeseries_dataset_from_array}()},
 \code{\link{to_categorical}()},
 \code{\link{unpack_x_y_sample_weight}()}
+
+Other preprocessing: 
+\code{\link{image_smart_resize}()},
+\code{\link{text_dataset_from_directory}()},
+\code{\link{timeseries_dataset_from_array}()}
 }
 \concept{dataset utils}
-\concept{image utils}
+\concept{image dataset utils}
+\concept{preprocessing}
 \concept{utils}

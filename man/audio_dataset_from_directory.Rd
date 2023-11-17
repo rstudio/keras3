@@ -128,10 +128,9 @@ Only \code{.wav} files are supported at this time.
 
 Other dataset utils: 
 \code{\link{image_dataset_from_directory}()},
-\code{\link{pack_x_y_sample_weight}()},
 \code{\link{split_dataset}()},
 \code{\link{text_dataset_from_directory}()},
-\code{\link{unpack_x_y_sample_weight}()}
+\code{\link{timeseries_dataset_from_array}()}
 
 Other utils: 
 \code{\link{clear_session}()},

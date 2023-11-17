@@ -131,7 +131,10 @@ will not be used in the output sequences.
 This is useful to reserve part of the data for test or validation.
 
 @export
+@family dataset utils
+@family timesery dataset utils
 @family utils
+@family preprocessing
 @seealso
 + <https:/keras.io/api/data_loading/timeseries#timeseriesdatasetfromarray-function>
 + <https://www.tensorflow.org/api_docs/python/tf/keras/utils/timeseries_dataset_from_array>

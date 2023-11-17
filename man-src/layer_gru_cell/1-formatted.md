@@ -104,6 +104,7 @@ Random seed for dropout.
 Passed on to the Python callable
 
 @export
+@family gru rnn layers
 @family rnn layers
 @family layers
 @seealso

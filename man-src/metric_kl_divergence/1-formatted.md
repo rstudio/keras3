@@ -57,8 +57,9 @@ Tensor of predicted targets.
 Passed on to the Python callable
 
 @export
-@family probabilistic metrics
+@family losses
 @family metrics
+@family probabilistic metrics
 @seealso
 + <https:/keras.io/api/metrics/probabilistic_metrics#kldivergence-class>
 + <https://www.tensorflow.org/api_docs/python/tf/keras/metrics/KLDivergence>

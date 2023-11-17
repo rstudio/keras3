@@ -32,6 +32,7 @@ Passed on to the Python callable
 layers to combine
 
 @export
+@family minimum merging layers
 @family merging layers
 @family layers
 @seealso

@@ -142,8 +142,9 @@ otherwise either 'channel_last' or 'channel_first'.
 
 @export
 @family dataset utils
-@family image utils
+@family image dataset utils
 @family utils
+@family preprocessing
 @seealso
 + <https:/keras.io/api/data_loading/image#imagedatasetfromdirectory-function>
 + <https://www.tensorflow.org/api_docs/python/tf/keras/utils/image_dataset_from_directory>

@@ -79,7 +79,6 @@ Other image ops:
 
 Other image utils: 
 \code{\link{image_array_save}()},
-\code{\link{image_dataset_from_directory}()},
 \code{\link{image_from_array}()},
 \code{\link{image_load}()},
 \code{\link{image_smart_resize}()},

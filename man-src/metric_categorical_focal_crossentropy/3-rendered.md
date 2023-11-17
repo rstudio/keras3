@@ -52,6 +52,7 @@ computed.
 
 @export
 @family losses
+@family metrics
 @seealso
 + <https://www.tensorflow.org/api_docs/python/tf/keras/metrics/categorical_focal_crossentropy>
 

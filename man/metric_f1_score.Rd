@@ -74,23 +74,30 @@ result
 \item \url{https://www.tensorflow.org/api_docs/python/tf/keras/metrics/F1Score}
 }
 
+Other f score metrics: 
+\code{\link{metric_fbeta_score}()}
+
 Other metrics: 
 \code{\link{custom_metric}()},
 \code{\link{metric_auc}()},
 \code{\link{metric_binary_accuracy}()},
 \code{\link{metric_binary_crossentropy}()},
+\code{\link{metric_binary_focal_crossentropy}()},
 \code{\link{metric_binary_iou}()},
 \code{\link{metric_categorical_accuracy}()},
 \code{\link{metric_categorical_crossentropy}()},
+\code{\link{metric_categorical_focal_crossentropy}()},
 \code{\link{metric_categorical_hinge}()},
 \code{\link{metric_cosine_similarity}()},
 \code{\link{metric_false_negatives}()},
 \code{\link{metric_false_positives}()},
 \code{\link{metric_fbeta_score}()},
 \code{\link{metric_hinge}()},
+\code{\link{metric_huber}()},
 \code{\link{metric_iou}()},
 \code{\link{metric_kl_divergence}()},
 \code{\link{metric_log_cosh_error}()},
+\code{\link{metric_log_cosh}()},
 \code{\link{metric_mean_absolute_error}()},
 \code{\link{metric_mean_absolute_percentage_error}()},
 \code{\link{metric_mean_iou}()},
@@ -118,4 +125,5 @@ Other metrics:
 \code{\link{metric_true_negatives}()},
 \code{\link{metric_true_positives}()}
 }
+\concept{f score metrics}
 \concept{metrics}

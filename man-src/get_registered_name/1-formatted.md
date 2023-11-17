@@ -13,6 +13,7 @@ object is not registered.
 The object to look up.
 
 @export
+@family object registration saving
 @family saving
 @family utils
 @seealso

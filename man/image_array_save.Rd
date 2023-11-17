@@ -39,7 +39,6 @@ Saves an image stored as a NumPy array to a path or file object.
 }
 
 Other image utils: 
-\code{\link{image_dataset_from_directory}()},
 \code{\link{image_from_array}()},
 \code{\link{image_load}()},
 \code{\link{image_smart_resize}()},

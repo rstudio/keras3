@@ -25,6 +25,7 @@ string. `'channels_first'` or `'channels_last'`.
 @export
 @family config backend
 @family backend
+@family config
 @seealso
 + <https:/keras.io/keras_core/api/utils/config_utils#setimagedataformat-function>
 + <https://www.tensorflow.org/api_docs/python/tf/keras/config/set_image_data_format>

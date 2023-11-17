@@ -72,5 +72,6 @@ backend).
 @export
 @family image utils
 @family utils
+@family preprocessing
 @seealso
 + <https://www.tensorflow.org/api_docs/python/tf/keras/preprocessing/image/smart_resize>

@@ -35,12 +35,14 @@ c(x, y, sample_weight) \%<-\% unpack_x_y_sample_weight(data)
 \item \url{https://www.tensorflow.org/api_docs/python/tf/keras/utils/unpack_x_y_sample_weight}
 }
 
-Other dataset utils: 
-\code{\link{audio_dataset_from_directory}()},
-\code{\link{image_dataset_from_directory}()},
-\code{\link{pack_x_y_sample_weight}()},
-\code{\link{split_dataset}()},
-\code{\link{text_dataset_from_directory}()}
+Other datum util adapter trainers: 
+\code{\link{pack_x_y_sample_weight}()}
+
+Other datum adapter trainers: 
+\code{\link{pack_x_y_sample_weight}()}
+
+Other trainers: 
+\code{\link{pack_x_y_sample_weight}()}
 
 Other utils: 
 \code{\link{audio_dataset_from_directory}()},
@@ -74,5 +76,7 @@ Other utils:
 \code{\link{timeseries_dataset_from_array}()},
 \code{\link{to_categorical}()}
 }
-\concept{dataset utils}
+\concept{datum adapter trainers}
+\concept{datum util adapter trainers}
+\concept{trainers}
 \concept{utils}

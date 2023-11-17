@@ -23,6 +23,10 @@ for serialization/deserialization.
 \item \url{https://www.tensorflow.org/api_docs/python/tf/keras/utils/get_registered_name}
 }
 
+Other object registration saving: 
+\code{\link{get_custom_objects}()},
+\code{\link{get_registered_object}()}
+
 Other saving: 
 \code{\link{config_enable_unsafe_deserialization}()},
 \code{\link{get_custom_objects}()},
@@ -61,5 +65,6 @@ Other utils:
 \code{\link{to_categorical}()},
 \code{\link{unpack_x_y_sample_weight}()}
 }
+\concept{object registration saving}
 \concept{saving}
 \concept{utils}

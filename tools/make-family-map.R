@@ -127,11 +127,11 @@ df %<>% tidyr::unchop(family, keep_empty = TRUE)
 currently_exported_r_names <- list.files("man-src", pattern = "\\.Rmd$") %>%
   fs::path_ext_remove()
 
-df <- df %>%
-  filter(r_name %in% currently_exported_r_names)
+# df <- df %>%
 
 # pick the families we'll keep
 keeper_families <- df %>%
+  filter(r_name %in% currently_exported_r_names) %>%
   group_by(family) %>%
   summarise(
     r_names = list(r_name),
@@ -174,6 +174,7 @@ df <- df %>%
 # - restore 'random preprocessing layers'
 # - fix dups in 'learning rate schedule optimizers'
 # - remove 'metric_f1_score' single r_name family?
+# - metrics/losses should be in cross-referenced.
 
 family_to_r_names_map <- df %>%
   split(.$family) %>%
@@ -186,7 +187,7 @@ r_name_to_family_map <- df %>%
 dump(c("r_name_to_family_map", "family_to_r_names_map"), "tools/family-maps.R")
 file.edit("tools/family-maps.R")
 # after generating them, it's helpful to have RStudio reformat it w/ cmd+A, cmd+shift+a cmd+s
-stop()
+stop("DONE!  cmd+a  cmd+shift+a  cmd+s")
 
 dump("r_names_and_fams", "r_names_and_fams.R")
 

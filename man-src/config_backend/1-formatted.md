@@ -15,5 +15,6 @@ String, the name of the backend Keras is currently using. One of
 @export
 @family config backend
 @family backend
+@family config
 @seealso
 + <https://www.tensorflow.org/api_docs/python/tf/keras/config/backend>

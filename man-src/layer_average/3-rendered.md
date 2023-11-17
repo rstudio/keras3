@@ -42,6 +42,7 @@ Passed on to the Python callable
 layers to combine
 
 @export
+@family average merging layers
 @family merging layers
 @family layers
 @seealso

@@ -17,6 +17,7 @@ axis along which to normalize.
 Normalization order (e.g. `order=2` for L2 norm).
 
 @export
+@family numerical utils
 @family utils
 @seealso
 + <https:/keras.io/api/utils/python_utils#normalize-function>

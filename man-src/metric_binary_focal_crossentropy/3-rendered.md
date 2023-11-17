@@ -67,6 +67,7 @@ The axis along which the mean is computed. Defaults to `-1`.
 
 @export
 @family losses
+@family metrics
 @seealso
 + <https://www.tensorflow.org/api_docs/python/tf/keras/metrics/binary_focal_crossentropy>
 

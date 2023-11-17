@@ -15,6 +15,7 @@ get_custom_objects()['MyObject'] = MyObject
     Global dictionary mapping registered class names to classes.
 
 @export
+@family object registration saving
 @family saving
 @family utils
 @seealso

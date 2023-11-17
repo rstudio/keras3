@@ -57,6 +57,7 @@ than creating a new placeholder tensor.
 Shape, including the batch dim.
 
 @export
+@family input core layers
 @family core layers
 @family layers
 @seealso

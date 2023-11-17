@@ -27,6 +27,9 @@ If it's a backend tensor, a backend tensor will be returned.
 \item \url{https://www.tensorflow.org/api_docs/python/tf/keras/utils/normalize}
 }
 
+Other numerical utils: 
+\code{\link{to_categorical}()}
+
 Other utils: 
 \code{\link{audio_dataset_from_directory}()},
 \code{\link{clear_session}()},
@@ -59,4 +62,5 @@ Other utils:
 \code{\link{to_categorical}()},
 \code{\link{unpack_x_y_sample_weight}()}
 }
+\concept{numerical utils}
 \concept{utils}

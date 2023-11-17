@@ -138,6 +138,12 @@ to produce batches of timeseries inputs and targets.
 \item \url{https://www.tensorflow.org/api_docs/python/tf/keras/utils/timeseries_dataset_from_array}
 }
 
+Other dataset utils: 
+\code{\link{audio_dataset_from_directory}()},
+\code{\link{image_dataset_from_directory}()},
+\code{\link{split_dataset}()},
+\code{\link{text_dataset_from_directory}()}
+
 Other utils: 
 \code{\link{audio_dataset_from_directory}()},
 \code{\link{clear_session}()},
@@ -169,5 +175,13 @@ Other utils:
 \code{\link{text_dataset_from_directory}()},
 \code{\link{to_categorical}()},
 \code{\link{unpack_x_y_sample_weight}()}
+
+Other preprocessing: 
+\code{\link{image_dataset_from_directory}()},
+\code{\link{image_smart_resize}()},
+\code{\link{text_dataset_from_directory}()}
 }
+\concept{dataset utils}
+\concept{preprocessing}
+\concept{timesery dataset utils}
 \concept{utils}

@@ -71,8 +71,9 @@ The axis along which the mean is computed. Defaults to `-1`.
 Passed on to the Python callable
 
 @export
-@family probabilistic metrics
+@family losses
 @family metrics
+@family probabilistic metrics
 @seealso
 + <https:/keras.io/api/metrics/probabilistic_metrics#binarycrossentropy-class>
 + <https://www.tensorflow.org/api_docs/python/tf/keras/metrics/BinaryCrossentropy>

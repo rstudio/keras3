@@ -78,7 +78,6 @@ see description
 see description
 
 @export
-@family random preprocessing layers
 @family preprocessing layers
 @family layers
 @seealso

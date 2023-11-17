@@ -196,6 +196,9 @@ of zero-filled initial state tensors). Defaults to \code{NULL}.
 \item \url{https://www.tensorflow.org/api_docs/python/tf/keras/layers/GRU}
 }
 
+Other gru rnn layers: 
+\code{\link{layer_gru_cell}()}
+
 Other rnn layers: 
 \code{\link{bidirectional}()},
 \code{\link{layer_conv_lstm_1d}()},
@@ -308,6 +311,7 @@ Other layers:
 \code{\link{layer_text_vectorization}()},
 \code{\link{layer_tfsm}()},
 \code{\link{layer_time_distributed}()},
+\code{\link{layer_torch_module_wrapper}()},
 \code{\link{layer_unit_normalization}()},
 \code{\link{layer_upsampling_1d}()},
 \code{\link{layer_upsampling_2d}()},
@@ -316,5 +320,6 @@ Other layers:
 \code{\link{layer_zero_padding_2d}()},
 \code{\link{layer_zero_padding_3d}()}
 }
+\concept{gru rnn layers}
 \concept{layers}
 \concept{rnn layers}

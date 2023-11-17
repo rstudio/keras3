@@ -30,6 +30,7 @@ Generally, module_objects is provided by midlevel library
 implementers.
 
 @export
+@family object registration saving
 @family saving
 @family utils
 @seealso

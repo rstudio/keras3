@@ -106,11 +106,19 @@ The learning rate schedule is also serializable and deserializable using
 \item \url{https://www.tensorflow.org/api_docs/python/tf/keras/optimizers/schedules/PolynomialDecay}
 }
 
-Other optimizer learing rate schedules: 
+Other learning rate schedule optimizers: 
+\code{\link{learning_rate_schedule_cosine_decay_restarts}()},
+\code{\link{learning_rate_schedule_cosine_decay}()},
+\code{\link{learning_rate_schedule_exponential_decay}()},
+\code{\link{learning_rate_schedule_inverse_time_decay}()},
+\code{\link{learning_rate_schedule_piecewise_constant_decay}()}
+
+Other schedule optimizers: 
 \code{\link{learning_rate_schedule_cosine_decay_restarts}()},
 \code{\link{learning_rate_schedule_cosine_decay}()},
 \code{\link{learning_rate_schedule_exponential_decay}()},
 \code{\link{learning_rate_schedule_inverse_time_decay}()},
 \code{\link{learning_rate_schedule_piecewise_constant_decay}()}
 }
-\concept{optimizer learing rate schedules}
+\concept{learning rate schedule optimizers}
+\concept{schedule optimizers}

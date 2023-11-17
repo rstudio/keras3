@@ -63,8 +63,9 @@ The predicted values with shape = `[batch_size, d0, .. dN]`.
 Passed on to the Python callable
 
 @export
-@family regression metrics
+@family losses
 @family metrics
+@family regression metrics
 @seealso
 + <https:/keras.io/api/metrics/regression_metrics#meanabsolutepercentageerror-class>
 + <https://www.tensorflow.org/api_docs/python/tf/keras/metrics/MeanAbsolutePercentageError>

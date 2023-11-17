@@ -58,6 +58,9 @@ loss
 \item \url{https://www.tensorflow.org/api_docs/python/tf/keras/utils/to_categorical}
 }
 
+Other numerical utils: 
+\code{\link{normalize}()}
+
 Other utils: 
 \code{\link{audio_dataset_from_directory}()},
 \code{\link{clear_session}()},
@@ -90,4 +93,5 @@ Other utils:
 \code{\link{timeseries_dataset_from_array}()},
 \code{\link{unpack_x_y_sample_weight}()}
 }
+\concept{numerical utils}
 \concept{utils}

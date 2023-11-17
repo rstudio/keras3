@@ -8,5 +8,6 @@ way, such as running a training or inference job on a server.
 @export
 @family io utils
 @family utils
+@family config
 @seealso
 + <https://www.tensorflow.org/api_docs/python/tf/keras/config/disable_interactive_logging>

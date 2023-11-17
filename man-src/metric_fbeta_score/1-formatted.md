@@ -67,6 +67,7 @@ Optional. Data type of the metric result.
 Passed on to the Python callable
 
 @export
+@family f score metrics
 @family metrics
 @seealso
 + <https://www.tensorflow.org/api_docs/python/tf/keras/metrics/FBetaScore>

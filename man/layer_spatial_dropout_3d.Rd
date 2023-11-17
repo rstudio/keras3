@@ -72,6 +72,10 @@ Same as input.
 \item \url{https://www.tensorflow.org/api_docs/python/tf/keras/layers/SpatialDropout3D}
 }
 
+Other spatial dropout regularization layers: 
+\code{\link{layer_spatial_dropout_1d}()},
+\code{\link{layer_spatial_dropout_2d}()}
+
 Other regularization layers: 
 \code{\link{layer_activity_regularization}()},
 \code{\link{layer_dropout}()},
@@ -178,6 +182,7 @@ Other layers:
 \code{\link{layer_text_vectorization}()},
 \code{\link{layer_tfsm}()},
 \code{\link{layer_time_distributed}()},
+\code{\link{layer_torch_module_wrapper}()},
 \code{\link{layer_unit_normalization}()},
 \code{\link{layer_upsampling_1d}()},
 \code{\link{layer_upsampling_2d}()},
@@ -188,3 +193,4 @@ Other layers:
 }
 \concept{layers}
 \concept{regularization layers}
+\concept{spatial dropout regularization layers}

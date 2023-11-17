@@ -105,7 +105,9 @@ Defaults to `False`.
 
 @export
 @family dataset utils
+@family text dataset utils
 @family utils
+@family preprocessing
 @seealso
 + <https:/keras.io/api/data_loading/text#textdatasetfromdirectory-function>
 + <https://www.tensorflow.org/api_docs/python/tf/keras/utils/text_dataset_from_directory>

@@ -172,6 +172,7 @@ Other layers:
 \code{\link{layer_subtract}()},
 \code{\link{layer_text_vectorization}()},
 \code{\link{layer_time_distributed}()},
+\code{\link{layer_torch_module_wrapper}()},
 \code{\link{layer_unit_normalization}()},
 \code{\link{layer_upsampling_1d}()},
 \code{\link{layer_upsampling_2d}()},

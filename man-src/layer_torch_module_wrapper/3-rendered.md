@@ -76,5 +76,6 @@ Passed on to the Python callable
 
 @export
 @family utils
+@family layers
 @seealso
 + <https://www.tensorflow.org/api_docs/python/tf/keras/layers/TorchModuleWrapper>

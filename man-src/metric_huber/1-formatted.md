@@ -36,5 +36,6 @@ quadratic to linear. Defaults to `1.0`.
 
 @export
 @family losses
+@family metrics
 @seealso
 + <https://www.tensorflow.org/api_docs/python/tf/keras/metrics/huber>

@@ -83,7 +83,6 @@ we resize the \verb{(340, 340)} crop to \verb{(200, 200)}.
 
 Other image utils: 
 \code{\link{image_array_save}()},
-\code{\link{image_dataset_from_directory}()},
 \code{\link{image_from_array}()},
 \code{\link{image_load}()},
 \code{\link{image_to_array}()},
@@ -124,6 +123,12 @@ Other utils:
 \code{\link{timeseries_dataset_from_array}()},
 \code{\link{to_categorical}()},
 \code{\link{unpack_x_y_sample_weight}()}
+
+Other preprocessing: 
+\code{\link{image_dataset_from_directory}()},
+\code{\link{text_dataset_from_directory}()},
+\code{\link{timeseries_dataset_from_array}()}
 }
 \concept{image utils}
+\concept{preprocessing}
 \concept{utils}

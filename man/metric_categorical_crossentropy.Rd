@@ -92,19 +92,49 @@ Usage with \code{compile()} API:
 \item \url{https://www.tensorflow.org/api_docs/python/tf/keras/metrics/CategoricalCrossentropy}
 }
 
-Other probabilistic metrics: 
+Other losses: 
+\code{\link{loss_binary_crossentropy}()},
+\code{\link{loss_binary_focal_crossentropy}()},
+\code{\link{loss_categorical_crossentropy}()},
+\code{\link{loss_categorical_focal_crossentropy}()},
+\code{\link{loss_categorical_hinge}()},
+\code{\link{loss_cosine_similarity}()},
+\code{\link{loss_hinge}()},
+\code{\link{loss_huber}()},
+\code{\link{loss_kl_divergence}()},
+\code{\link{loss_log_cosh}()},
+\code{\link{loss_mean_absolute_error}()},
+\code{\link{loss_mean_absolute_percentage_error}()},
+\code{\link{loss_mean_squared_error}()},
+\code{\link{loss_mean_squared_logarithmic_error}()},
+\code{\link{loss_poisson}()},
+\code{\link{loss_sparse_categorical_crossentropy}()},
+\code{\link{loss_squared_hinge}()},
 \code{\link{metric_binary_crossentropy}()},
+\code{\link{metric_binary_focal_crossentropy}()},
+\code{\link{metric_categorical_focal_crossentropy}()},
+\code{\link{metric_categorical_hinge}()},
+\code{\link{metric_hinge}()},
+\code{\link{metric_huber}()},
 \code{\link{metric_kl_divergence}()},
+\code{\link{metric_log_cosh}()},
+\code{\link{metric_mean_absolute_error}()},
+\code{\link{metric_mean_absolute_percentage_error}()},
+\code{\link{metric_mean_squared_error}()},
+\code{\link{metric_mean_squared_logarithmic_error}()},
 \code{\link{metric_poisson}()},
-\code{\link{metric_sparse_categorical_crossentropy}()}
+\code{\link{metric_sparse_categorical_crossentropy}()},
+\code{\link{metric_squared_hinge}()}
 
 Other metrics: 
 \code{\link{custom_metric}()},
 \code{\link{metric_auc}()},
 \code{\link{metric_binary_accuracy}()},
 \code{\link{metric_binary_crossentropy}()},
+\code{\link{metric_binary_focal_crossentropy}()},
 \code{\link{metric_binary_iou}()},
 \code{\link{metric_categorical_accuracy}()},
+\code{\link{metric_categorical_focal_crossentropy}()},
 \code{\link{metric_categorical_hinge}()},
 \code{\link{metric_cosine_similarity}()},
 \code{\link{metric_f1_score}()},
@@ -112,9 +142,11 @@ Other metrics:
 \code{\link{metric_false_positives}()},
 \code{\link{metric_fbeta_score}()},
 \code{\link{metric_hinge}()},
+\code{\link{metric_huber}()},
 \code{\link{metric_iou}()},
 \code{\link{metric_kl_divergence}()},
 \code{\link{metric_log_cosh_error}()},
+\code{\link{metric_log_cosh}()},
 \code{\link{metric_mean_absolute_error}()},
 \code{\link{metric_mean_absolute_percentage_error}()},
 \code{\link{metric_mean_iou}()},
@@ -141,6 +173,13 @@ Other metrics:
 \code{\link{metric_top_k_categorical_accuracy}()},
 \code{\link{metric_true_negatives}()},
 \code{\link{metric_true_positives}()}
+
+Other probabilistic metrics: 
+\code{\link{metric_binary_crossentropy}()},
+\code{\link{metric_kl_divergence}()},
+\code{\link{metric_poisson}()},
+\code{\link{metric_sparse_categorical_crossentropy}()}
 }
+\concept{losses}
 \concept{metrics}
 \concept{probabilistic metrics}

@@ -51,6 +51,22 @@ Other utils:
 \code{\link{timeseries_dataset_from_array}()},
 \code{\link{to_categorical}()},
 \code{\link{unpack_x_y_sample_weight}()}
+
+Other config: 
+\code{\link{config_backend}()},
+\code{\link{config_disable_traceback_filtering}()},
+\code{\link{config_enable_interactive_logging}()},
+\code{\link{config_enable_traceback_filtering}()},
+\code{\link{config_enable_unsafe_deserialization}()},
+\code{\link{config_epsilon}()},
+\code{\link{config_floatx}()},
+\code{\link{config_image_data_format}()},
+\code{\link{config_is_interactive_logging_enabled}()},
+\code{\link{config_is_traceback_filtering_enabled}()},
+\code{\link{config_set_epsilon}()},
+\code{\link{config_set_floatx}()},
+\code{\link{config_set_image_data_format}()}
 }
+\concept{config}
 \concept{io utils}
 \concept{utils}

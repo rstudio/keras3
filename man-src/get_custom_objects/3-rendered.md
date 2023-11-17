@@ -16,6 +16,7 @@ get_custom_objects()$update(list(MyObject = MyObject))
     Global dictionary (named list) mapping registered class names to classes.
 
 @export
+@family object registration saving
 @family saving
 @family utils
 @seealso

@@ -104,7 +104,8 @@ Setting to `None` will skip warmup and begins decay phase from
 A Python int. Number of steps to warmup over.
 
 @export
-@family optimizer learing rate schedules
+@family learning rate schedule optimizers
+@family schedule optimizers
 @seealso
 + <https:/keras.io/api/optimizers/learning_rate_schedules/cosine_decay#cosinedecay-class>
 + <https://www.tensorflow.org/api_docs/python/tf/keras/optimizers/schedules/CosineDecay>

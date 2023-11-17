@@ -38,11 +38,13 @@ data <- pack_x_y_sample_weight(x, y)
 \item \url{https://www.tensorflow.org/api_docs/python/tf/keras/utils/pack_x_y_sample_weight}
 }
 
-Other dataset utils: 
-\code{\link{audio_dataset_from_directory}()},
-\code{\link{image_dataset_from_directory}()},
-\code{\link{split_dataset}()},
-\code{\link{text_dataset_from_directory}()},
+Other datum util adapter trainers: 
+\code{\link{unpack_x_y_sample_weight}()}
+
+Other datum adapter trainers: 
+\code{\link{unpack_x_y_sample_weight}()}
+
+Other trainers: 
 \code{\link{unpack_x_y_sample_weight}()}
 
 Other utils: 
@@ -77,5 +79,7 @@ Other utils:
 \code{\link{to_categorical}()},
 \code{\link{unpack_x_y_sample_weight}()}
 }
-\concept{dataset utils}
+\concept{datum adapter trainers}
+\concept{datum util adapter trainers}
+\concept{trainers}
 \concept{utils}
