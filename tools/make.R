@@ -1,4 +1,4 @@
-
+#!/usr/bin/env Rscript
 
 if(!"source:tools/utils.R" %in% search()) envir::attach_source("tools/utils.R")
 if(!"source:tools/translate-tools.R" %in% search()) envir::attach_source("tools/translate-tools.R")
