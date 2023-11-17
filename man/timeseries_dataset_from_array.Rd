@@ -18,15 +18,15 @@ timeseries_dataset_from_array(
 )
 }
 \arguments{
-\item{data}{Numpy array or eager tensor
+\item{data}{array or eager tensor
 containing consecutive data points (timesteps).
-Axis 0 is expected to be the time dimension.}
+The first dimension is expected to be the time dimension.}
 
 \item{targets}{Targets corresponding to timesteps in \code{data}.
 \code{targets[i]} should be the target
 corresponding to the window that starts at index \code{i}
 (see example 2 below).
-Pass \code{None} if you don't have target data (in this case the dataset
+Pass \code{NULL} if you don't have target data (in this case the dataset
 will only yield the input data).}
 
 \item{sequence_length}{Length of the output sequences
@@ -42,7 +42,7 @@ within sequences. For rate \code{r}, timesteps
 are used for creating a sample sequence.}
 
 \item{batch_size}{Number of timeseries samples in each batch
-(except maybe the last one). If \code{None}, the data will not be batched
+(except maybe the last one). If \code{NULL}, the data will not be batched
 (the dataset will yield individual samples).}
 
 \item{shuffle}{Whether to shuffle output samples,
@@ -60,15 +60,15 @@ will not be used in the output sequences.
 This is useful to reserve part of the data for test or validation.}
 }
 \value{
-A \code{tf.data.Dataset} instance. If \code{targets} was passed, the dataset yields
-tuple \verb{(batch_of_sequences, batch_of_targets)}. If not, the dataset yields
+A \code{tf$data$Dataset} instance. If \code{targets} was passed, the dataset yields
+list \verb{(batch_of_sequences, batch_of_targets)}. If not, the dataset yields
 only \code{batch_of_sequences}.
 
 Example 1:
 
 Consider indices \verb{[0, 1, ... 98]}.
 With \verb{sequence_length=10,  sampling_rate=2, sequence_stride=3},
-\code{shuffle=False}, the dataset will yield batches of sequences
+\code{shuffle=FALSE}, the dataset will yield batches of sequences
 composed of the following indices:
 
 \if{html}{\out{<div class="sourceCode">}}\preformatted{First sequence:  [0  2  4  6  8 10 12 14 16 18]
@@ -88,16 +88,20 @@ Consider an array \code{data} of scalar values, of shape \verb{(steps,)}.
 To generate a dataset that uses the past 10
 timesteps to predict the next timestep, you would use:
 
-\if{html}{\out{<div class="sourceCode python">}}\preformatted{input_data = data[:-10]
-targets = data[10:]
-dataset = timeseries_dataset_from_array(
-    input_data, targets, sequence_length=10)
-for batch in dataset:
-  inputs, targets = batch
-  assert np.array_equal(inputs[0], data[:10])  # First sequence: steps [0-9]
-  # Corresponding target: step 10
-  assert np.array_equal(targets[0], data[10])
-  break
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{data <- k_array(1:20)
+input_data <- data[1:10]
+targets <- data[11:20]
+dataset <- timeseries_dataset_from_array(
+  input_data, targets, sequence_length=10)
+iter <- reticulate::as_iterator(dataset)
+reticulate::iter_next(iter)
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode">}}\preformatted{## [[1]]
+## tf.Tensor([[ 1  2  3  4  5  6  7  8  9 10]], shape=(1, 10), dtype=int32)
+##
+## [[2]]
+## tf.Tensor([11], shape=(1), dtype=int32)
 }\if{html}{\out{</div>}}
 
 Example 3: Temporal regression for many-to-many architectures.
@@ -108,22 +112,18 @@ both of shape \verb{(100,)}. The resulting dataset should consist samples with
 To generate a dataset that uses the current timestamp
 to predict the corresponding target timestep, you would use:
 
-\if{html}{\out{<div class="sourceCode python">}}\preformatted{X = np.arange(100)
-Y = X*2
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{X <- k_array(1:100)
+Y <- X*2
 
-sample_length = 20
-input_dataset = timeseries_dataset_from_array(
-    X, None, sequence_length=sample_length, sequence_stride=sample_length)
-target_dataset = timeseries_dataset_from_array(
-    Y, None, sequence_length=sample_length, sequence_stride=sample_length)
+sample_length <- 20
+input_dataset <- timeseries_dataset_from_array(
+    X, NULL, sequence_length=sample_length, sequence_stride=sample_length)
+target_dataset <- timeseries_dataset_from_array(
+    Y, NULL, sequence_length=sample_length, sequence_stride=sample_length)
 
-for batch in zip(input_dataset, target_dataset):
-    inputs, targets = batch
-    assert np.array_equal(inputs[0], X[:sample_length])
 
-    # second sample equals output timestamps 20-40
-    assert np.array_equal(targets[1], Y[sample_length:2*sample_length])
-    break
+inputs <- reticulate::as_iterator(input_dataset) \%>\% reticulate::iter_next()
+targets <- reticulate::as_iterator(target_dataset) \%>\% reticulate::iter_next()
 }\if{html}{\out{</div>}}
 }
 \description{

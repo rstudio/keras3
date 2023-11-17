@@ -15,7 +15,7 @@ The L1 regularization penalty is computed as:
 
 L1 may be passed to a layer as a string identifier:
 
-\if{html}{\out{<div class="sourceCode python">}}\preformatted{dense = Dense(3, kernel_regularizer='l1')
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{dense <- layer_dense(units = 3, kernel_regularizer = 'l1')
 }\if{html}{\out{</div>}}
 
 In this case, the default value used is \code{l1=0.01}.

@@ -200,3 +200,7 @@ keras.metrics.OneHotMeanIoU:
 
 keras.utils.pad_sequences:
   sequences: lapply(x, as.list)
+
+keras.utils.split_dataset:
+  left_size: ifelse(x < 1, x, as_integer(x))
+  right_size: ifelse(x < 1, x, as_integer(x))

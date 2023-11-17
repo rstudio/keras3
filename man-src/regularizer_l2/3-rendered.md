@@ -6,8 +6,9 @@ The L2 regularization penalty is computed as:
 
 L2 may be passed to a layer as a string identifier:
 
-```python
-dense = Dense(3, kernel_regularizer='l2')
+
+```r
+dense <- layer_dense(units = 3, kernel_regularizer='l2')
 ```
 
 In this case, the default value used is `l2=0.01`.
@@ -20,3 +21,4 @@ float, L2 regularization factor.
 @seealso
 + <https:/keras.io/api/layers/regularizers#l2-class>
 + <https://www.tensorflow.org/api_docs/python/tf/keras/regularizers/L2>
+

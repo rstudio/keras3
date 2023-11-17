@@ -13,40 +13,46 @@ split_dataset(
 )
 }
 \arguments{
-\item{dataset}{A \code{tf.data.Dataset}, a \code{torch.utils.data.Dataset} object,
-or a list/tuple of arrays with the same length.}
+\item{dataset}{A \code{tf$data$Dataset}, a \code{torch$utils$data$Dataset} object,
+or a list of arrays with the same length.}
 
 \item{left_size}{If float (in the range \verb{[0, 1]}), it signifies
 the fraction of the data to pack in the left dataset. If integer, it
 signifies the number of samples to pack in the left dataset. If
-\code{None}, defaults to the complement to \code{right_size}.
-Defaults to \code{None}.}
+\code{NULL}, defaults to the complement to \code{right_size}.
+Defaults to \code{NULL}.}
 
 \item{right_size}{If float (in the range \verb{[0, 1]}), it signifies
 the fraction of the data to pack in the right dataset.
 If integer, it signifies the number of samples to pack
 in the right dataset.
-If \code{None}, defaults to the complement to \code{left_size}.
-Defaults to \code{None}.}
+If \code{NULL}, defaults to the complement to \code{left_size}.
+Defaults to \code{NULL}.}
 
 \item{shuffle}{Boolean, whether to shuffle the data before splitting it.}
 
 \item{seed}{A random seed for shuffling.}
 }
 \value{
-A tuple of two \code{tf.data.Dataset} objects:
+A list of two \code{tf$data$Dataset} objects:
 the left and right splits.
 }
 \description{
 Splits a dataset into a left half and a right half (e.g. train / test).
 }
 \section{Examples}{
-\if{html}{\out{<div class="sourceCode python">}}\preformatted{data = np.random.random(size=(1000, 4))
-left_ds, right_ds = keras.utils.split_dataset(data, left_size=0.8)
-int(left_ds.cardinality())
-# 800
-int(right_ds.cardinality())
-# 200
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{data <- random_uniform(c(1000, 4))
+c(left_ds, right_ds) \%<-\% split_dataset(list(data$numpy()), left_size = 0.8)
+left_ds$cardinality()
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor(800, shape=(), dtype=int64)
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{right_ds$cardinality()
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor(200, shape=(), dtype=int64)
 }\if{html}{\out{</div>}}
 }
 

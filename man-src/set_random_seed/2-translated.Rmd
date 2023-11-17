@@ -10,9 +10,9 @@ are involved (e.g. parameter server distribution), which creates additional
 sources of randomness, or when certain non-deterministic cuDNN ops are
 involved.
 
-Calling this utility is equivalent to the following:
+Calling this utility is equivalent to the following in Python:
 
-```python
+```
 import random
 import numpy as np
 from keras.utils.module_utils import tensorflow as tf
@@ -22,7 +22,7 @@ tf.random.set_seed(seed)
 ```
 
 Note that the TensorFlow seed is set even if you're not using TensorFlow
-as your backend framework, since many workflows leverage `tf.data`
+as your backend framework, since many workflows leverage `tf$data`
 pipelines (which feature random shuffling). Likewise many workflows
 might leverage NumPy APIs.
 
@@ -34,3 +34,4 @@ Integer, the random seed to use.
 @seealso
 + <https:/keras.io/api/utils/python_utils#setrandomseed-function>
 + <https://www.tensorflow.org/api_docs/python/tf/keras/utils/set_random_seed>
+

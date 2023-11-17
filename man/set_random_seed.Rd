@@ -16,9 +16,9 @@ are involved (e.g. parameter server distribution), which creates additional
 sources of randomness, or when certain non-deterministic cuDNN ops are
 involved.
 
-Calling this utility is equivalent to the following:
+Calling this utility is equivalent to the following in Python:
 
-\if{html}{\out{<div class="sourceCode python">}}\preformatted{import random
+\if{html}{\out{<div class="sourceCode">}}\preformatted{import random
 import numpy as np
 from keras.utils.module_utils import tensorflow as tf
 random.seed(seed)
@@ -27,7 +27,7 @@ tf.random.set_seed(seed)
 }\if{html}{\out{</div>}}
 
 Note that the TensorFlow seed is set even if you're not using TensorFlow
-as your backend framework, since many workflows leverage \code{tf.data}
+as your backend framework, since many workflows leverage \code{tf$data}
 pipelines (which feature random shuffling). Likewise many workflows
 might leverage NumPy APIs.
 }

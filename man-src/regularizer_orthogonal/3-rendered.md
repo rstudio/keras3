@@ -7,9 +7,10 @@ columns (`mode="columns"`). When applied to a `Dense` kernel of shape
 (i.e. the basis of the output space) orthogonal to each other.
 
 # Examples
-```python
-regularizer = OrthogonalRegularizer(factor=0.01)
-layer = Dense(units=4, kernel_regularizer=regularizer)
+
+```r
+regularizer <- regularizer_orthogonal(factor=0.01)
+layer <- layer_dense(units=4, kernel_regularizer=regularizer)
 ```
 
 @param factor
@@ -30,3 +31,4 @@ the columns of the input orthogonal to each other.
 @seealso
 + <https:/keras.io/api/layers/regularizers#orthogonalregularizer-class>
 + <https://www.tensorflow.org/api_docs/python/tf/keras/regularizers/OrthogonalRegularizer>
+

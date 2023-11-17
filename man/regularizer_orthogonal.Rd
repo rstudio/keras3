@@ -25,8 +25,8 @@ columns (\code{mode="columns"}). When applied to a \code{Dense} kernel of shape
 (i.e. the basis of the output space) orthogonal to each other.
 }
 \section{Examples}{
-\if{html}{\out{<div class="sourceCode python">}}\preformatted{regularizer = OrthogonalRegularizer(factor=0.01)
-layer = Dense(units=4, kernel_regularizer=regularizer)
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{regularizer <- regularizer_orthogonal(factor=0.01)
+layer <- layer_dense(units=4, kernel_regularizer=regularizer)
 }\if{html}{\out{</div>}}
 }
 

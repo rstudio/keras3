@@ -34,12 +34,12 @@ layer_dropout2 <- new_layer_class(
   }
 )
 
-out <- layer_dropout(k_ones(10), rate = 0.8)
-out
+out <- layer_dropout(rate = 0.8)
+out(k_ones(10), training = TRUE)
 ```
 
 ```
-## tf.Tensor([1. 1. 1. 1. 1. 1. 1. 1. 1. 1.], shape=(10), dtype=float32)
+## tf.Tensor([0. 5. 5. 0. 0. 0. 0. 0. 0. 0.], shape=(10), dtype=float32)
 ```
 
 @param seed

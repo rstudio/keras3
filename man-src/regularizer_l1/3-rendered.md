@@ -6,8 +6,9 @@ The L1 regularization penalty is computed as:
 
 L1 may be passed to a layer as a string identifier:
 
-```python
-dense = Dense(3, kernel_regularizer='l1')
+
+```r
+dense <- layer_dense(units = 3, kernel_regularizer = 'l1')
 ```
 
 In this case, the default value used is `l1=0.01`.
@@ -20,3 +21,4 @@ float, L1 regularization factor.
 @seealso
 + <https:/keras.io/api/layers/regularizers#l1-class>
 + <https://www.tensorflow.org/api_docs/python/tf/keras/regularizers/L1>
+

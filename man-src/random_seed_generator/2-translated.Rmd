@@ -35,8 +35,8 @@ layer_dropout2 <- new_layer_class(
   }
 )
 
-out <- layer_dropout(k_ones(10), rate = 0.8)
-out
+out <- layer_dropout(rate = 0.8)
+out(k_ones(10), training = TRUE)
 ```
 
 @param seed
