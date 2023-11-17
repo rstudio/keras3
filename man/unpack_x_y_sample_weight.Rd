@@ -2,33 +2,31 @@
 % Please edit documentation in R/autogen-utils.R
 \name{unpack_x_y_sample_weight}
 \alias{unpack_x_y_sample_weight}
-\title{Unpacks user-provided data tuple.}
+\title{Unpacks user-provided data list.}
 \usage{
 unpack_x_y_sample_weight(data)
 }
 \arguments{
-\item{data}{A tuple of the form \verb{(x,)}, \verb{(x, y)}, or \verb{(x, y, sample_weight)}.}
+\item{data}{A list of the form \verb{(x,)}, \verb{(x, y)}, or \verb{(x, y, sample_weight)}.}
 }
 \value{
-The unpacked tuple, with \code{None}s for \code{y} and \code{sample_weight} if they are
+The unpacked list, with \code{NULL}s for \code{y} and \code{sample_weight} if they are
 not provided.
 }
 \description{
 This is a convenience utility to be used when overriding
-\code{Model.train_step}, \code{Model.test_step}, or \code{Model.predict_step}.
+\verb{$train_step}, \verb{$test_step}, or \verb{$predict_step}.
 This utility makes it easy to support data of the form \verb{(x,)},
 \verb{(x, y)}, or \verb{(x, y, sample_weight)}.
 }
 \section{Usage}{
 Standalone usage:
 
-\if{html}{\out{<div class="sourceCode python">}}\preformatted{features_batch = ops.ones((10, 5))
-labels_batch = ops.zeros((10, 5))
-data = (features_batch, labels_batch)
-# `y` and `sample_weight` will default to `None` if not provided.
-x, y, sample_weight = unpack_x_y_sample_weight(data)
-sample_weight is None
-# True
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{features_batch <- k_ones(c(10, 5))
+labels_batch <- k_zeros(c(10, 5))
+data <- list(features_batch, labels_batch)
+# `y` and `sample_weight` will default to `NULL` if not provided.
+c(x, y, sample_weight) \%<-\% unpack_x_y_sample_weight(data)
 }\if{html}{\out{</div>}}
 }
 

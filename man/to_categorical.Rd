@@ -10,8 +10,8 @@ to_categorical(x, num_classes = NULL)
 \item{x}{Array-like with class values to be converted into a matrix
 (integers from 0 to \code{num_classes - 1}).}
 
-\item{num_classes}{Total number of classes. If \code{None}, this would be inferred
-as \code{max(x) + 1}. Defaults to \code{None}.}
+\item{num_classes}{Total number of classes. If \code{NULL}, this would be inferred
+as \code{max(x) + 1}. Defaults to \code{NULL}.}
 }
 \value{
 A binary matrix representation of the input as a NumPy array. The class
@@ -21,27 +21,34 @@ axis is placed last.
 E.g. for use with \code{categorical_crossentropy}.
 }
 \section{Examples}{
-\if{html}{\out{<div class="sourceCode python">}}\preformatted{a = keras.utils.to_categorical([0, 1, 2, 3], num_classes=4)
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{a <- to_categorical(c(0, 1, 2, 3), num_classes=4)
 print(a)
-# [[1. 0. 0. 0.]
-#  [0. 1. 0. 0.]
-#  [0. 0. 1. 0.]
-#  [0. 0. 0. 1.]]
 }\if{html}{\out{</div>}}
 
-\if{html}{\out{<div class="sourceCode python">}}\preformatted{b = np.array([.9, .04, .03, .03,
+\if{html}{\out{<div class="sourceCode">}}\preformatted{##      [,1] [,2] [,3] [,4]
+## [1,]    1    0    0    0
+## [2,]    0    1    0    0
+## [3,]    0    0    1    0
+## [4,]    0    0    0    1
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{b <- array(c(.9, .04, .03, .03,
               .3, .45, .15, .13,
               .04, .01, .94, .05,
-              .12, .21, .5, .17],
-              shape=[4, 4])
-loss = keras.backend.categorical_crossentropy(a, b)
-print(np.around(loss, 5))
-# [0.10536 0.82807 0.1011  1.77196]
+              .12, .21, .5, .17),
+              dim = c(4, 4))
+loss <- k_categorical_crossentropy(a, b)
+loss
 }\if{html}{\out{</div>}}
 
-\if{html}{\out{<div class="sourceCode python">}}\preformatted{loss = keras.backend.categorical_crossentropy(a, a)
-print(np.around(loss, 5))
-# [0. 0. 0. 0.]
+\if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor([0.41284522 0.45601739 0.54430155 0.80437282], shape=(4), dtype=float64)
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{loss <- k_categorical_crossentropy(a, a)
+loss
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor([1.00000005e-07 1.00000005e-07 1.00000005e-07 1.00000005e-07], shape=(4), dtype=float64)
 }\if{html}{\out{</div>}}
 }
 
