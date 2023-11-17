@@ -124,6 +124,12 @@ df$family <- pmap(df, make_families)
 
 df %<>% tidyr::unchop(family, keep_empty = TRUE)
 
+currently_exported_r_names <- list.files("man-src", pattern = "\\.Rmd$") %>%
+  fs::path_ext_remove()
+
+df <- df %>%
+  filter(r_name %in% currently_exported_r_names)
+
 # pick the families we'll keep
 keeper_families <- df %>%
   group_by(family) %>%
@@ -153,12 +159,21 @@ cat("Dropping families: (r symbols)"); df %>%
   }) %>%
   unname() %>%
   unlist(recursive = FALSE) %>%
+  as.list() %>%
   iwalk(\(r_names, family) {
     cat(sprintf("'%s': %s\n", family, str_flatten_comma(unlist(r_names))))
   })
 
 df <- df %>%
   filter(family %in% keeper_families & family != '')
+
+# TODO: add family tags
+# - 'image utils' to k_image_*
+# - `pack_x_y_sample_weight` and `unpack_x_y_sample_weight` to 'dataset utils'
+# - r_name grepl("_dataset_from_") -> 'dataset utils'
+# - restore 'random preprocessing layers'
+# - fix dups in 'learning rate schedule optimizers'
+# - remove 'metric_f1_score' single r_name family?
 
 family_to_r_names_map <- df %>%
   split(.$family) %>%
@@ -169,7 +184,8 @@ r_name_to_family_map <- df %>%
   map(\(x) x$family |> unlist() |> unique())
 
 dump(c("r_name_to_family_map", "family_to_r_names_map"), "tools/family-maps.R")
-# after generating them, it's helpful to have RStudio reformat it w/ cmd+A, cmd+shift+a
+file.edit("tools/family-maps.R")
+# after generating them, it's helpful to have RStudio reformat it w/ cmd+A, cmd+shift+a cmd+s
 stop()
 
 dump("r_names_and_fams", "r_names_and_fams.R")
