@@ -322,7 +322,7 @@ endpoints <- list_endpoints(skip = c(
 
   "keras.src"                  # internal
 )) %>%
-  c(list_endpoints("keras.applications", max_depth = 0)) %>%
+  c(list_endpoints("keras.applications", max_depth = 1)) %>%
   # filter out top level non module symbols for now
   grep("keras.([^.]+)$", ., value = TRUE, invert = TRUE) %>%
   unique()
