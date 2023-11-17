@@ -370,11 +370,6 @@ endpoints %<>% setdiff(c %(% {
 })
 
 
-update_families_allow_list <- FALSE
-if (update_families_allow_list) {
-  .keeper_families <<- NULL
-}
-
 exports <- endpoints |>
   purrr::set_names() |>
   lapply(mk_export)
@@ -388,75 +383,6 @@ df <- exports |>
   list_rbind() |>
   select(r_name, endpoint, type, module, everything())
 
-
-# curate @family tags
-if(!update_families_allow_list) local({
-  # make sure our family allow list is up-to-date
-  # (i.e., new families weren't augogenerated)
-  # maybe update allow list
-
-  df_families <- df %>%
-    rowwise() %>% mutate(family = list(tags$family)) %>% ungroup() %>%
-    select(endpoint, r_name, family) %>%
-    tidyr::unchop(family, keep_empty = TRUE)
-
-  if(anyNA(df_families$family)) {
-    warning("R exports without a @family:")
-    df_families %>% filter(is.na(family)) %>% print(n = Inf)
-  }
-
-  families <- df_families$family %>% unlist() %>% unique() %>% .[!is.na(.)]
-
-  if(!setequal(families, .keeper_families)) {
-    cat("added: ", str_flatten_comma(single_quote(setdiff(families, .keeper_families))))
-    cat("removed: ", str_flatten_comma(single_quote(setdiff(.keeper_families, families))))
-    cat(".keeper_families <- "); dput(families)
-    stop(glue::trim(
-      ".keeper_families definition in tools/utils.R needs to be updated.
-       Either update per the above, or rerun tools/make.R with
-       `update_families_allow_list <- TRUE` and inspect interactively."))
-  }
-}) else {
-  # update_families_allow_list == TRUE
-
-  df_families <- df %>%
-    rowwise() %>% mutate(family = list(tags$family)) %>% ungroup() %>%
-    select(endpoint, r_name, family) %>%
-    tidyr::unchop(family, keep_empty = TRUE)
-
-  ## Inspect
-  symbol_families <- df_families %>%
-    group_by(endpoint, r_name) %>%
-    summarise(
-      n = n(),
-      families_pretty = family |> single_quote() |> rev() |> str_flatten_comma(),
-      families = list(family)
-    ) %>%
-    arrange(families_pretty) |>
-    print(n = Inf)
-
-  family_symbols <- df_families %>%
-    group_by(family) %>%
-    summarise(
-      n = n(),
-      r_names_pretty = r_name |> single_quote() |> rev() |> str_flatten_comma(),
-      r_names = list(r_name)
-    ) %>%
-    arrange(n, family) |>
-    print(n = Inf)
-
-
-  min_size_for_family <- 4
-  exception_families <- "io utils"
-
-  keeper_famalies <- family_symbols %>%
-    filter(n >= min_size_for_family | family %in% exception_families) %>%
-    pull(family)
-
-  dput_cb(keeper_famalies)
-  stop("Update tools/utils.R $ keeper_families")
-
-}
 
 df <- df |>
   mutate(

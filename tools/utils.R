@@ -44,10 +44,9 @@ library(reticulate)
 library(assertthat, include.only = c("assert_that"))
 
 attach_eval({
-  `%error%` <-
-    function (x, y)
-      tryCatch(x, error = function(e) y)
+
   import_from(memoise, memoise)
+  import_from(reticulate, system2t)
 
   is_scalar <- function(x) identical(length(x), 1L)
 
@@ -60,7 +59,6 @@ attach_eval({
   }
 
   `%error%` <- rlang::zap_srcref(function(x, y)  tryCatch(x, error = function(e) y))
-
 
   py_is <- function(x, y) identical(py_id(x), py_id(y))
 
@@ -78,6 +76,36 @@ attach_eval({
     if(length(x) > 1)
       x <- str_flatten_lines(x)
     stringr::str_split_1(x, "\n")
+  }
+
+  str_flatten_and_compact_lines <- function(..., roxygen = FALSE) {
+    out <- str_split_lines(...) |>
+      str_trim("right") |>
+      str_flatten_lines() |>
+      str_replace_all("\n{4,}", "\n\n\n")
+    if(roxygen)
+      out <- out |> str_replace_all("\n(#'\n){3,}", "\n#'\n#'\n")
+    out
+  }
+
+  str_detect_non_ascii <- function(chr) {
+    map_lgl(chr, \(x) {
+      if (Encoding(x) == "unknown") {
+        Encoding(x) <- "UTF-8"
+      }
+      !isTRUE(Encoding(x) == "unknown")
+    })
+  }
+
+  str_remove_non_ascii <- function(chr) {
+    chr <- str_split_lines(chr)
+    i <- str_detect_non_ascii(chr)
+    if (any(i)) {
+      chr[i] <- chr[i] |> map_chr(\(x) {
+        iconv(x, to = "ASCII", sub = "")
+      })
+    }
+    chr
   }
 
   `append<-` <- function(x, after = length(x), value) {
@@ -98,43 +126,17 @@ attach_eval({
     return(FALSE)
   }
 
-  # use like msg(user = ...), assistant =
+  # use like:
+  # chat_messages(system = "optional",
+  #               user = "question",
+  #               assistant = "answer",
+  #               user = "question")
   chat_messages <- function(...) {
     x <- rlang::dots_list(..., .named = TRUE, .ignore_empty = "all")
     stopifnot(all(names(x) %in% c("system", "user", "assistant")))
     unname(imap(x, \(content, role)
                 list(role = role,
                      content = trim(str_flatten_lines(content)))))
-  }
-
-  str_detect_non_ascii <- function(chr) {
-    map_lgl(chr, \(x) {
-      if (Encoding(x) == "unknown") {
-        Encoding(x) <- "UTF-8"
-      }
-      !isTRUE(Encoding(x) == "unknown")
-    })
-  }
-
-  str_remove_non_ascii <- function(chr) {
-    chr <- str_split_lines(chr)
-    i <- str_detect_non_ascii(chr)
-    if (any(i)) {
-      chr[i] <- chr[i] |> map_chr(\(x) {
-          iconv(x, to = "ASCII", sub = "")
-      })
-    }
-    chr
-  }
-
-  str_flatten_and_compact_lines <- function(..., roxygen = FALSE) {
-    out <- str_split_lines(...) |>
-      str_trim("right") |>
-      str_flatten_lines() |>
-      str_replace_all("\n{4,}", "\n\n\n")
-    if(roxygen)
-      out <- out |> str_replace_all("\n(#'\n){3,}", "\n#'\n#'\n")
-    str_flatten_lines(out)
   }
 
   dput_cb <- function (x, echo = TRUE)  {
@@ -165,12 +167,34 @@ attach_eval({
     invisible(x)
   }
 
+  split_by <- function (.data, ..., .drop = FALSE, .sep = ".") {
+    if (!missing(...))
+      .data <- group_by(.data, ..., .add = FALSE)
+    if (is_grouped_df(.data)) {
+      idx <- group_indices(.data)
+      vars_chr <- group_vars(.data)
+      .data <- ungroup(.data)
+    }
+    else {
+      idx <- seq_len(nrow(.data))
+      vars_chr <- NULL
+    }
+    out <- split.data.frame(.data, idx)
+    if (!is.null(vars_chr)) {
+      names(out) <- vapply(out, function(df)
+        do.call(paste, c(unclass(as.data.frame(df[1L, vars_chr, drop = FALSE])),
+                         sep = .sep)), "")
+    }
+    if (isTRUE(.drop))
+      for (i in seq_along(out))
+        for (v in vars_chr)
+          out[[i]][[v]] <- NULL
+    out
+  }
+
   # ignore empty trailing arg
   c <- function(...)
     base::do.call(base::c, rlang::list2(...), quote = TRUE)
-
-  import_from(reticulate, system2t)
-
 
   .sprintf_transformer <- function(text, envir) {
     m <- regexpr(":.+$", text)
@@ -499,8 +523,7 @@ parse_params_section <- function(docstring_args_section, treat_as_dots = NULL) {
     docstring_args_section %<>% str_flatten("\n")
 
 
-  # if(str_detect(docstring_args_section, fixed("recall: A scalar value in range `[0,")))
-  #   browser()
+  # if(str_detect(docstring_args_section, fixed("recall: A scalar value in range `[0,"))) browser()
 
   x <- docstring_args_section |>
     c("") |> # append final new line to ensure glue::trim() still works when length(x) == 1
@@ -670,62 +693,18 @@ backtick_not_links <- function(d) {
 
 # ---- roxygen -----
 
+import_from("tools/family-maps.R", r_name_to_family_map)
+get_family <- function(endpoint, r_name = make_r_name(endpoint)) {
+  r_name_to_family_map[[r_name]]
+}
+
 make_roxygen_tags <- function(endpoint, py_obj = py_eval(endpoint), type) {
 
   out <- list()
   out$export <- ""
 
-  family <-
-    py_obj$`__module__` %>%
-    str_split_1("[._]") %>%
-    setdiff(c("keras", "src")) %>%
-    {
-      map_chr(seq_along(.), \(i) {
-        x <- .[1:i]
-        if (length(x) > 1) {
-          skip <- unique(c(1, which(x %in% c("schedules"))))
-          if (length(skip))
-            x[-skip] <- x[-skip] |>
-              str_replace("e?s$", "")
-        }
-        str_flatten(rev(x), " ")
-      })
-    } %>%
-    setdiff(c("numpy")) %>%
-    remap_families() %>%
-    unique() %>%
-    rev()
+  out$family <- get_family(endpoint)
 
-  if(!is.null(.keeper_families))
-    family %<>% intersect(.keeper_families)
-
-  if(endpoint |> startsWith("keras.utils."))
-    family %<>% c("utils") %>% unique()
-
-  if(endpoint |> startsWith('keras.optimizers.schedules.')) {
-    family %<>% setdiff("optimizers")
-  }
-
-  if("image ops" %in% family)
-    append(family, after = 1) <- "image utils"
-
-  if(endpoint == "keras.utils.get_source_inputs") {
-    family %<>% setdiff("ops")
-  }
-
-  if(any(str_detect(py_obj$`__module__`, c("data_adapters", "data_adapter_utils"))))
-    family %<>% c("dataset utils", .)
-
-  if(endpoint |> endsWith("_dataset_from_directory"))
-    family %<>% c("dataset utils", .)
-
-  if(endpoint == "keras.layers.TFSMLayer")
-    family %<>% c("saving", "layers", .)
-
-  # if(endpoint == "keras.utils.clear_session")
-  #   family %<>% c("utils")
-
-  out$family <- unique(family)
   links <- c(get_keras_doc_link(endpoint),
              get_tf_doc_link(endpoint))
   out$seealso <- str_flatten_lines("", glue("+ <{links}>"))
