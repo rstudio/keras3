@@ -21,7 +21,7 @@ beginning and end of the cropping dimension
 \item{...}{Passed on to the Python callable}
 }
 \description{
-It crops along the time dimension (axis 1).
+It crops along the time dimension (axis 2).
 }
 \section{Examples}{
 \if{html}{\out{<div class="sourceCode r">}}\preformatted{input_shape <- c(2, 3, 2)

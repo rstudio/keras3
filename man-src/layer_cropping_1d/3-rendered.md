@@ -1,7 +1,7 @@
 Cropping layer for 1D input (e.g. temporal sequence).
 
 @description
-It crops along the time dimension (axis 1).
+It crops along the time dimension (axis 2).
 
 # Examples
 
