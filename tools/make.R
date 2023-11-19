@@ -59,6 +59,8 @@ if(!"source:tools/translate-tools.R" %in% search()) envir::attach_source("tools/
 
 # TODO: add PR for purrr::rate_throttle("3 per minute")
 #
+# TODO: global search for "axis" in doc text, update to 1 based where appropriate.
+#
 # TODO: in reticulate: virtualenv_starter(): check for --enable-shared
 
 # TODO: fix py_func(), for r_to_py.R6ClassGenerator
@@ -382,7 +384,6 @@ df <- exports |>
   }) |>
   list_rbind() |>
   select(r_name, endpoint, type, module, everything())
-
 
 df <- df |>
   mutate(

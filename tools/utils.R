@@ -1751,6 +1751,16 @@ format_man_src_0 <- function(endpoint) {
   ))
 }
 
+get_endpoint_tether_doc <- function(endpoint) {
+  as_glue(str_flatten_lines(
+    endpoint,
+    "__doc__",
+    get_docstring(endpoint),
+    "__signature__",
+    format_py_signature(endpoint)
+  ))
+}
+
 # format_man_src_0("keras.Model")
 #
 # df %>%
