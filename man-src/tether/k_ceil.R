@@ -1,0 +1,22 @@
+#' Return the ceiling of the input, element-wise.
+#'
+#' @description
+#' The ceil of the scalar `x` is the smallest integer `i`, such that
+#' `i >= x`.
+#'
+#' @returns
+#'     The ceiling of each element in `x`, with float dtype.
+#'
+#' @param x
+#' Input tensor.
+#'
+#' @export
+#' @family numpy ops
+#' @family ops
+#' @seealso
+#' + <https:/keras.io/keras_core/api/ops/numpy#ceil-function>
+#' + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/ceil>
+k_ceil <-
+function (x)
+{
+}

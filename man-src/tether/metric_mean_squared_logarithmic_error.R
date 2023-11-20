@@ -1,0 +1,70 @@
+#' Computes mean squared logarithmic error between `y_true` and `y_pred`.
+#'
+#' @description
+#' Formula:
+#'
+#' ```python
+#' loss = mean(square(log(y_true + 1) - log(y_pred + 1)), axis=-1)
+#' ```
+#'
+#' Note that `y_pred` and `y_true` cannot be less or equal to 0. Negative
+#' values and 0 values will be replaced with `keras.backend.epsilon()`
+#' (default to `1e-7`).
+#'
+#' Formula:
+#'
+#' ```python
+#' loss = mean(square(log(y_true + 1) - log(y_pred + 1)))
+#' ```
+#'
+#' # Examples
+#' Standalone usage:
+#'
+#' ```python
+#' m = keras.metrics.MeanSquaredLogarithmicError()
+#' m.update_state([[0, 1], [0, 0]], [[1, 1], [0, 0]])
+#' m.result()
+#' # 0.12011322
+#' m.reset_state()
+#' m.update_state([[0, 1], [0, 0]], [[1, 1], [0, 0]],
+#'                sample_weight=[1, 0])
+#' m.result()
+#' # 0.24022643
+#' ```
+#'
+#' Usage with `compile()` API:
+#'
+#' ```python
+#' model.compile(
+#'     optimizer='sgd',
+#'     loss='mse',
+#'     metrics=[keras.metrics.MeanSquaredLogarithmicError()])
+#' ```
+#'
+#' @param name
+#' (Optional) string name of the metric instance.
+#'
+#' @param dtype
+#' (Optional) data type of the metric result.
+#'
+#' @param y_true
+#' Ground truth values with shape = `[batch_size, d0, .. dN]`.
+#'
+#' @param y_pred
+#' The predicted values with shape = `[batch_size, d0, .. dN]`.
+#'
+#' @param ...
+#' Passed on to the Python callable
+#'
+#' @export
+#' @family losses
+#' @family metrics
+#' @family regression metrics
+#' @seealso
+#' + <https:/keras.io/api/metrics/regression_metrics#meansquaredlogarithmicerror-class>
+#' + <https://www.tensorflow.org/api_docs/python/tf/keras/metrics/MeanSquaredLogarithmicError>
+metric_mean_squared_logarithmic_error <-
+function (y_true, y_pred, ..., name = "mean_squared_logarithmic_error",
+    dtype = NULL)
+{
+}

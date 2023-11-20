@@ -1,0 +1,21 @@
+#' First tensor elements raised to powers from second tensor, element-wise.
+#'
+#' @returns
+#'     Output tensor, the bases in `x1` raised to the exponents in `x2`.
+#'
+#' @param x1
+#' The bases.
+#'
+#' @param x2
+#' The exponents.
+#'
+#' @export
+#' @family numpy ops
+#' @family ops
+#' @seealso
+#' + <https:/keras.io/keras_core/api/ops/numpy#power-function>
+#' + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/power>
+k_power <-
+function (x1, x2)
+{
+}

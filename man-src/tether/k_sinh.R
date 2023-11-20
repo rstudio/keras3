@@ -1,0 +1,18 @@
+#' Hyperbolic sine, element-wise.
+#'
+#' @returns
+#'     Output tensor of same shape as `x`.
+#'
+#' @param x
+#' Input tensor.
+#'
+#' @export
+#' @family numpy ops
+#' @family ops
+#' @seealso
+#' + <https:/keras.io/keras_core/api/ops/numpy#sinh-function>
+#' + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/sinh>
+k_sinh <-
+function (x)
+{
+}

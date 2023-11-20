@@ -1,0 +1,21 @@
+#' Subtract arguments element-wise.
+#'
+#' @returns
+#'     Output tensor, element-wise difference of `x1` and `x2`.
+#'
+#' @param x1
+#' First input tensor.
+#'
+#' @param x2
+#' Second input tensor.
+#'
+#' @export
+#' @family numpy ops
+#' @family ops
+#' @seealso
+#' + <https:/keras.io/keras_core/api/ops/numpy#subtract-function>
+#' + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/subtract>
+k_subtract <-
+function (x1, x2)
+{
+}

@@ -1,0 +1,18 @@
+#' Test element-wise for positive or negative infinity.
+#'
+#' @returns
+#'     Output boolean tensor.
+#'
+#' @param x
+#' Input tensor.
+#'
+#' @export
+#' @family numpy ops
+#' @family ops
+#' @seealso
+#' + <https:/keras.io/keras_core/api/ops/numpy#isinf-function>
+#' + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/isinf>
+k_isinf <-
+function (x)
+{
+}

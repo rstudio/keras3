@@ -9,7 +9,7 @@ local({
     message("Registering @tether tag parser")
     registerS3method(genname = "roxy_tag_parse",
                      class =   "roxy_tag_tether",
-                     method = as.function(alist(x = , NULL), envir = baseenv()),
+                     method = identity, #as.function(alist(x = , x), envir = baseenv()),
                      envir = asNamespace("roxygen2"))
   }
   if(isNamespaceLoaded('roxygen2')) register_tether_tag_parser()

@@ -1,0 +1,64 @@
+#' Computes the mean absolute error between the labels and predictions.
+#'
+#' @description
+#' ```python
+#' loss = mean(abs(y_true - y_pred), axis=-1)
+#' ```
+#'
+#' Formula:
+#'
+#' ```python
+#' loss = mean(abs(y_true - y_pred))
+#' ```
+#'
+#' # Examples
+#' Standalone usage:
+#'
+#' ```python
+#' m = keras.metrics.MeanAbsoluteError()
+#' m.update_state([[0, 1], [0, 0]], [[1, 1], [0, 0]])
+#' m.result()
+#' # 0.25
+#' m.reset_state()
+#' m.update_state([[0, 1], [0, 0]], [[1, 1], [0, 0]],
+#'                sample_weight=[1, 0])
+#' m.result()
+#' # 0.5
+#' ```
+#'
+#' Usage with `compile()` API:
+#'
+#' ```python
+#' model.compile(
+#'     optimizer='sgd',
+#'     loss='mse',
+#'     metrics=[keras.metrics.MeanAbsoluteError()])
+#' ```
+#'
+#' @param name
+#' (Optional) string name of the metric instance.
+#'
+#' @param dtype
+#' (Optional) data type of the metric result.
+#'
+#' @param y_true
+#' Ground truth values with shape = `[batch_size, d0, .. dN]`.
+#'
+#' @param y_pred
+#' The predicted values with shape = `[batch_size, d0, .. dN]`.
+#'
+#' @param ...
+#' Passed on to the Python callable
+#'
+#' @export
+#' @family losses
+#' @family metrics
+#' @family regression metrics
+#' @seealso
+#' + <https:/keras.io/api/metrics/regression_metrics#meanabsoluteerror-class>
+#' + <https://www.tensorflow.org/api_docs/python/tf/keras/metrics/MeanAbsoluteError>
+metric_mean_absolute_error <-
+function (y_true, y_pred, ..., name = "mean_absolute_error",
+    dtype = NULL)
+{
+}

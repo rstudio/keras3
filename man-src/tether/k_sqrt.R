@@ -1,0 +1,18 @@
+#' Return the non-negative square root of a tensor, element-wise.
+#'
+#' @returns
+#'     Output tensor, the non-negative square root of `x`.
+#'
+#' @param x
+#' Input tensor.
+#'
+#' @export
+#' @family numpy ops
+#' @family ops
+#' @seealso
+#' + <https:/keras.io/keras_core/api/ops/numpy#sqrt-function>
+#' + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/sqrt>
+k_sqrt <-
+function (x)
+{
+}

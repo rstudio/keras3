@@ -3,6 +3,33 @@
 envir::attach_source("tools/utils.R")
 
 options(error = function(e) print(rlang::trace_back()))
+
+
+get_tether <- function(endpoint) {
+  message("parsing @tether ", endpoint)
+  export <- mk_export(endpoint)
+  roxy <- export$roxygen |> str_split_lines()
+  fn <- as.function(c(formals(export$r_fn), quote({})))
+
+  as_glue(str_flatten_lines(
+    str_c("#' ", roxy),
+    str_c(export$r_name, " <- "),
+    deparse(fn)
+  ))
+}
+
+# get_tether("keras.layers.Dense") |> cat()
+
+doctether::update_tethers(
+  tag_parser = get_tether,
+  resolve_tether_file = function(name) {
+    fs::path(glue("man-src/tether/{name}.R"))
+    # fs::path(glue("man-src/tether/{name}/1-formatted.md"))
+  })
+
+message("DONE!")
+
+
 if(FALSE) {
 
 
@@ -57,27 +84,5 @@ if(FALSE) {
   }
 
 }
-
-get_tether <- function(endpoint) {
-  message("parsing @tether ", endpoint)
-  export <- mk_export(endpoint)
-  roxy <- export$roxygen |> str_split_lines()
-  fn <- as.function(c(formals(export$r_fn), quote({})))
-
-  as_glue(str_flatten_lines(
-    str_c("#' ", roxy),
-    str_c(export$r_name, " <- "),
-    deparse(fn)
-  ))
-}
-
-# get_tether("keras.layers.Dense") |> cat()
-
-roxytether::update_tethers(tag_parser = get_tether,
-                           resolve_tether_file = function(name) {
-  fs::path(glue("man-src/{name}.Rmd"))
-})
-
-message("DONE!")
 
   # parse_env_setup = function(e) { }

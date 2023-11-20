@@ -1,0 +1,67 @@
+#' Computes the Poisson metric between `y_true` and `y_pred`.
+#'
+#' @description
+#' Formula:
+#'
+#' ```python
+#' loss = y_pred - y_true * log(y_pred)
+#' ```
+#'
+#' Formula:
+#'
+#' ```python
+#' metric = y_pred - y_true * log(y_pred)
+#' ```
+#'
+#' # Examples
+#' Standalone usage:
+#'
+#' ```python
+#' m = keras.metrics.Poisson()
+#' m.update_state([[0, 1], [0, 0]], [[1, 1], [0, 0]])
+#' m.result()
+#' # 0.49999997
+#' ```
+#'
+#' ```python
+#' m.reset_state()
+#' m.update_state([[0, 1], [0, 0]], [[1, 1], [0, 0]],
+#'                sample_weight=[1, 0])
+#' m.result()
+#' # 0.99999994
+#' ```
+#'
+#' Usage with `compile()` API:
+#'
+#' ```python
+#' model.compile(optimizer='sgd',
+#'               loss='mse',
+#'               metrics=[keras.metrics.Poisson()])
+#' ```
+#'
+#' @param name
+#' (Optional) string name of the metric instance.
+#'
+#' @param dtype
+#' (Optional) data type of the metric result.
+#'
+#' @param y_true
+#' Ground truth values. shape = `[batch_size, d0, .. dN]`.
+#'
+#' @param y_pred
+#' The predicted values. shape = `[batch_size, d0, .. dN]`.
+#'
+#' @param ...
+#' Passed on to the Python callable
+#'
+#' @export
+#' @family losses
+#' @family metrics
+#' @family probabilistic metrics
+#' @seealso
+#' + <https:/keras.io/api/metrics/probabilistic_metrics#poisson-class>
+#' + <https://www.tensorflow.org/api_docs/python/tf/keras/metrics/Poisson>
+metric_poisson <-
+function (y_true, y_pred, ..., name = "poisson", dtype = NULL)
+{
+}

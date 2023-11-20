@@ -1,0 +1,21 @@
+#' Evenly round to the given number of decimals.
+#'
+#' @returns
+#'     Output tensor.
+#'
+#' @param x
+#' Input tensor.
+#'
+#' @param decimals
+#' Number of decimal places to round to. Defaults to `0`.
+#'
+#' @export
+#' @family numpy ops
+#' @family ops
+#' @seealso
+#' + <https:/keras.io/keras_core/api/ops/numpy#round-function>
+#' + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/round>
+k_round <-
+function (x, decimals = 0L)
+{
+}

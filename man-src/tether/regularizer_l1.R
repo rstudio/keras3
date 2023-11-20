@@ -1,0 +1,26 @@
+#' A regularizer that applies a L1 regularization penalty.
+#'
+#' @description
+#' The L1 regularization penalty is computed as:
+#' `loss = l1 * reduce_sum(abs(x))`
+#'
+#' L1 may be passed to a layer as a string identifier:
+#'
+#' ```python
+#' dense = Dense(3, kernel_regularizer='l1')
+#' ```
+#'
+#' In this case, the default value used is `l1=0.01`.
+#'
+#' @param l1
+#' float, L1 regularization factor.
+#'
+#' @export
+#' @family regularizers
+#' @seealso
+#' + <https:/keras.io/api/layers/regularizers#l1-class>
+#' + <https://www.tensorflow.org/api_docs/python/tf/keras/regularizers/L1>
+regularizer_l1 <-
+function (l1 = 0.01)
+{
+}
