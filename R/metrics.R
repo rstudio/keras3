@@ -79,7 +79,7 @@
 #' ````
 #' The same `metric_binary_true_positives` could be built with `%py_class%` like
 #' this:
-#' ````
+#' ````r
 #' metric_binary_true_positives(keras$metrics$Metric) %py_class% {
 #'   initialize <- <same-as-above>,
 #'   update_state <- <same-as-above>,

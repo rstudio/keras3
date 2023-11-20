@@ -1355,7 +1355,7 @@ function (units, activation = "tanh", recurrent_activation = "sigmoid",
 #' - If `return_sequences`: 3D tensor with shape
 #' `(batch_size, timesteps, output_size)`.
 #'
-#' Masking:
+#' # Masking:
 #'
 #' This layer supports masking for input data with a variable number
 #' of timesteps. To introduce masks to your data,

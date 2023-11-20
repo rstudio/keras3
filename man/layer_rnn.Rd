@@ -110,9 +110,9 @@ be a high dimension tensor shape.
 \item If \code{return_sequences}: 3D tensor with shape
 \verb{(batch_size, timesteps, output_size)}.
 }
+}
 
-Masking:
-
+\section{Masking:}{
 This layer supports masking for input data with a variable number
 of timesteps. To introduce masks to your data,
 use a \code{layer_Embedding} layer with the \code{mask_zero} parameter

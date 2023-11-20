@@ -92,7 +92,7 @@ model \%>\% compile(..., metrics = list(metric_binary_true_positives()))
 The same \code{metric_binary_true_positives} could be built with \verb{\%py_class\%} like
 this:
 
-\if{html}{\out{<div class="sourceCode">}}\preformatted{metric_binary_true_positives(keras$metrics$Metric) \%py_class\% \{
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{metric_binary_true_positives(keras$metrics$Metric) \%py_class\% \{
   initialize <- <same-as-above>,
   update_state <- <same-as-above>,
   result <- <same-as-above>
