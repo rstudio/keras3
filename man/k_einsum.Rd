@@ -22,8 +22,7 @@ The calculation based on the Einstein summation convention.
 Evaluates the Einstein summation convention on the operands.
 }
 \section{Examples}{
-\if{html}{\out{<div class="sourceCode r">}}\preformatted{k_einsum <- keras:::k_einsum
-a <- k_arange(25) |> k_reshape(c(5, 5))
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{a <- k_arange(25) |> k_reshape(c(5, 5))
 b <- k_arange(5)
 c <- k_arange(6) |> k_reshape(c(2, 3))
 }\if{html}{\out{</div>}}

@@ -27,7 +27,7 @@ k_softsign(x)
 plot(x, k_softsign(x), ylim = c(-1, 1))
 }\if{html}{\out{</div>}}
 
-\if{html}{\figure{k_softsign-unnamed-chunk-2-1.svg}}
+\figure{k_softsign-plot-1.png}
 }
 
 \seealso{

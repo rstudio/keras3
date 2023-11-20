@@ -30,46 +30,85 @@ other objects are coerced via \code{as.integer()}.}
 \value{
 A list with a \code{"keras_shape"} class attribute. Each element of the
 list will be either
-\itemize{
-\item \code{NULL},
-\item an integer,
-\item A scalar integer tensor. (e.g., when supplied a TF tensor with
-a unspecified dimension in a function being traced).
-}Examples
-
-\if{html}{\out{<div class="sourceCode r">}}\preformatted{shape(1, 2, 3)
-#> shape(1, 2, 3)
-
-shape(NA,   2, 3)
-#> shape(NA, 2, 3)
-shape(NULL, 2, 3)
-#> shape(NA, 2, 3)
-shape(-1,   2, 3)
-#> shape(NA, 2, 3)
-
-layer_input(c(1, 2, 3))
-#> <KerasTensor shape=(None, 1, 2, 3), dtype=float32, sparse=None, name=keras_tensor>
-layer_input(shape(1, 2, 3))
-#> <KerasTensor shape=(None, 1, 2, 3), dtype=float32, sparse=None, name=keras_tensor_1>
-symbolic_tensor <- layer_input(shape(1, 2, 3))
-
-shape(symbolic_tensor)
-#> shape(NA, 1, 2, 3)
-shape(symbolic_tensor, 4)
-#> shape(NA, 1, 2, 3, 4)
-shape(5, symbolic_tensor, 4)
-#> shape(5, NA, 1, 2, 3, 4)
-
-eager_tensor <- k_ones(c(1,2,3))
-shape(eager_tensor)
-#> shape(1, 2, 3)
-k_shape(eager_tensor)
-#> shape(1, 2, 3)
-}\if{html}{\out{</div>}}
+a) \code{NULL},
+b) an integer or
+c) a scalar integer tensor (e.g., when supplied a TF tensor with a
+unspecified dimension in a function being traced).
 }
 \description{
 This function can be used to create or get the shape of an object.
 }
+\section{Examples}{
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{shape(1, 2, 3)
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode">}}\preformatted{## shape(1, 2, 3)
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{shape(NA,   2, 3)
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode">}}\preformatted{## shape(NA, 2, 3)
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{shape(NULL, 2, 3)
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode">}}\preformatted{## shape(NA, 2, 3)
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{shape(-1,   2, 3)
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode">}}\preformatted{## shape(NA, 2, 3)
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{layer_input(c(1, 2, 3))
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode">}}\preformatted{## <KerasTensor shape=(None, 1, 2, 3), dtype=float32, sparse=None, name=keras_tensor>
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{layer_input(shape(1, 2, 3))
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode">}}\preformatted{## <KerasTensor shape=(None, 1, 2, 3), dtype=float32, sparse=None, name=keras_tensor_1>
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{symbolic_tensor <- layer_input(shape(1, 2, 3))
+
+shape(symbolic_tensor)
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode">}}\preformatted{## shape(NA, 1, 2, 3)
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{shape(symbolic_tensor, 4)
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode">}}\preformatted{## shape(NA, 1, 2, 3, 4)
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{shape(5, symbolic_tensor, 4)
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode">}}\preformatted{## shape(5, NA, 1, 2, 3, 4)
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{eager_tensor <- k_ones(c(1,2,3))
+shape(eager_tensor)
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode">}}\preformatted{## shape(1, 2, 3)
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{k_shape(eager_tensor)
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode">}}\preformatted{## shape(1, 2, 3)
+}\if{html}{\out{</div>}}
+}
+
 \seealso{
 \code{\link[=k_shape]{k_shape()}}
 }

@@ -42,7 +42,7 @@ plot(x, k_gelu(x),
      panel.first = grid())
 }\if{html}{\out{</div>}}
 
-\if{html}{\figure{k_gelu-unnamed-chunk-2-1.svg}}
+\figure{k_gelu-plot-1.png}
 }
 
 \seealso{

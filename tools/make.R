@@ -407,7 +407,25 @@ if(!all(dir_exists(df$man_src_dir))) {
     })
 }
 
+if(FALSE) {
 
+df %>%
+  filter(r_name |> startsWith("constraint_")) %>%
+  rowwise() %>%
+  mutate(dump2 = str_flatten_lines(
+    str_c("# ", endpoint),
+    str_c("#' ", read_lines(path(man_src_dir, "2-translated.Rmd"))),
+    str_c("#' ", glue("@tether {endpoint}")),
+    str_c(r_name, " <-"),
+    deparse(r_fn)
+  )) %>%
+  ungroup() %>%
+  {
+    write_lines(str_flatten(.$dump2, "\n\n\n"),
+                'R/autogen2-constraints.R')
+  }
+
+}
 
 df <- df |>
   arrange(endpoint_sans_name, module, r_name) |>
@@ -423,6 +441,19 @@ df <- df |>
 
 unlink(Sys.glob("R/autogen-*.R"))
 
+
+get_translated_lines <- function(r_name) {
+  x <- readLines(fs::path("man-src", r_name, "2-translated.Rmd"))
+  if(x[1] == "---" && x[3] == '---')
+    x <- x[-(1:3)]
+  x <- str_trim(x, "right")
+}
+
+stop("Edit files in R/*.R directly and then cmd+shift+d / devtools::document() to regenerate
+R/*.R files. Docs/fns in R/*.R is the new source of truth, and tools/make.R is just for
+generating initial wrappers for new symbols")
+# https://roxygen2.r-lib.org/articles/rd-formatting.html#code-chunks
+# knit_print.python.builtin.object <- # strip env addressr
 df |>
   group_by(file) |>
   dplyr::group_walk(\(df, grp) {
@@ -430,9 +461,12 @@ df |>
     txt <- df |>
       rowwise() |>
       mutate(final_dump = str_flatten_lines(
-        glue(r"--("{fs::path('man-src', r_name, ext = 'Rmd')}" # |>file.edit() # or cmd+click to edit man page)--"),
-        glue(r"--("{fs::path(man_src_dir, "0-upstream.md")}" # view the upstream doc)--"),
-        glue(r"--(#' @eval readLines("{fs::path(man_src_dir, "3-rendered.md")}") )--"),
+        # glue(r"--("{fs::path('man-src', r_name, ext = 'Rmd')}" # |>file.edit() # or cmd+click to edit man page)--"),
+        # glue(r"--("{fs::path(man_src_dir, "0-upstream.md")}" # view the upstream doc)--"),
+        # glue(r"--(#' @eval readLines("{fs::path(man_src_dir, "3-rendered.md")}") )--"),
+
+        glue(r"--(#' {get_translated_lines(r_name)})--"),
+        glue(r"--(#' @tether {endpoint})--"),
         str_c(r_name, " <- "),
         deparse(r_fn),
         ""
@@ -533,7 +567,124 @@ man_src_pull_upstream_updates()
 devtools::load_all() # TODO: render should be w/ an installed package and in a fresh r session w/ only `library(keras)`
 man_src_render_translated()
 
-devtools::document(roclets = c('rd', 'namespace'))
+
+envir::import_from(knitr, knit_print)
+registerS3method("knit_print", "python.builtin.object", function(x, ...) {
+  # browser()
+  # utils::str(x)
+  x <- capture.output(print(x))
+  x <- trimws(x, "right")
+
+  # strip object addresses; no noisy diff
+  x <- sub(" at 0x[0-9A-Fa-f]{9}>$", ">", x, perl = TRUE)
+
+  # remove reticulate hint from exceptions
+  x <- x[!grepl(r"{## .*rstudio:run:reticulate::py_last_error\(\).*}", x)]
+  x <- x[!grepl(r"{## .*reticulate::py_last_error\(\).*}", x)]
+  writeLines(x)
+})
+
+process_chunk_output <- function(x, options) {
+  # TKutils::str_vars(knitr::opts_knit$get("out.format"))
+
+  message("process_chunk_output:")
+  str(x)
+  writeLines(x)
+  cat("---\n")
+  # utils::str(x)
+  x_in <- x
+  x <- x |> strsplit("\n") |> unlist() #|> trimws("right")
+  x <- trimws(x, "right")
+
+  # strip object addresses; no noisy diff
+  x <- sub(" at 0x[0-9A-Fa-f]{9}>$", ">", x, perl = TRUE)
+
+  # remove reticulate hint from exceptions
+  x <- x[!grepl(r"{## .*rstudio:run:reticulate::py_last_error\(\).*}", x)]
+  x <- x[!grepl(r"{## .*reticulate::py_last_error\(\).*}", x)]
+  x <- paste0(x, collapse = "\n")
+  if(x_in |> endsWith("\n") &&
+     !x |> endsWith("\n"))
+    x <- paste0(x, "\n")
+  x
+}
+
+# we delay setting the output hook `knit_hooks$set(output = )` because
+# if we set it too early, knitr doesn't set `render_markdown()` hooks.
+# so we set a chunk option, which triggers setting the output hook
+# one after knitr is already setup and knitting.
+knitr::opts_hooks$set(
+  keras.roxy.post_process_output = function(options) {
+    message("Running option hook")
+    str(options)
+
+    # this is a self destructing option, run once before the first
+    # chunk in a roxy block is evaluated
+    options$keras.roxy.post_process <- NULL
+    knitr::opts_chunk$set(keras.roxy.post_process = NULL)
+
+
+    # make output reproducible
+    # `evalenv` is created once per block, but knit() is called once per chunk
+    # so we use this to detect if we're in the first chunk of a block and run setup
+    if(is.null(roxygen2::roxy_meta_get("evalenv")$.__ran_block_init__)) {
+      keras$utils$clear_session()
+      set.seed(1L)
+      keras$utils$set_random_seed(1L)
+      assign(x = ".__ran_block_init__",
+             envir = roxygen2::roxy_meta_get("evalenv"),
+             value = TRUE)
+    }
+
+    local({
+
+      og_output_hook <- knitr::knit_hooks$get("output")
+      if(isTRUE(attr(og_output_hook, "keras.roxy.post_process", TRUE))) {
+        message("Bailing early, not setting output hook")
+        print(og_output_hook)
+        return()
+      }
+      message("Setting output hook")
+      knitr::knit_hooks$set(output = structure(function(x, options) {
+        x <- process_chunk_output(x, options)
+        og_output_hook(x, options)
+      }, "keras.roxy.post_process" = TRUE))
+    })
+    options
+  }
+)
+
+og_knit <- knitr::knit
+unlockBinding("knit", asNamespace("knitr"))
+knitr <- asNamespace("knitr")
+knitr$knit <- function(input, output = NULL, tangle = FALSE, text = NULL,
+                       quiet = FALSE, envir = parent.frame(), encoding = "UTF-8") {
+  message("~~~~")
+  message("Entering knit(), text = ")
+  writeLines(c(text))
+  ret <- og_knit(input, output, tangle, text,
+          quiet, envir, encoding)
+  message("Exiting knit(), ret =")
+  writeLines(ret)
+  message("_____")
+  ret
+}
+
+
+options(warn = 1)
+# trace(knitr::knit, quote())
+devtools::document(roclets = c('rd', 'namespace', "roxytether::tether_roclet"))
+
+# devtools::document(roclets = c('rd', 'namespace'))
+envir::attach_source("tools/utils.R")
+trimws_file("man/*.Rd")
+
+# ok, so knit() is called once per chunk
+# but the evalenv is created once per block
+#
+# we want to call clear_session() once per block
+# so we need a way to detect from a chunk if we're in a block
+
 # stop()
 if(interactive()) local({
   rx <- callr::r_bg(\() remotes::install_local(force = TRUE, upgrade =  "never"))

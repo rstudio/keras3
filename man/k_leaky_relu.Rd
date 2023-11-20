@@ -36,7 +36,7 @@ plot(x, k_leaky_relu(x),
      type = 'l', panel.first = grid())
 }\if{html}{\out{</div>}}
 
-\if{html}{\figure{k_leaky_relu-unnamed-chunk-2-1.svg}}
+\figure{k_leaky_relu-plot-1.png}
 }
 
 \seealso{

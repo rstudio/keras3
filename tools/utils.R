@@ -1806,6 +1806,23 @@ view_translation_diff <- function(r_name) {
 }
 
 
+trimws_file <- function(...) {
+  for(f in Sys.glob(c(...)))
+  # f |> readLines() |> trimws("right") |> writeLines(f)
+  f |> readLines() |>
+    (\(l) {
+      l <- replace_val(l, "## ", "##")
+      l[startsWith(l, "\\") & endsWith(l, ": ")] %<>% trimws("right")
+      l
+      # ifelse(l == "## ", "##", l)
+      })() |>
+                 # trimws(l, "right")))() |>
+    # (\(l) ifelse(grepl("^Other ", l),
+    #              l,
+    #              trimws(l, "right")))() |>
+    writeLines(f)
+}
+
 man_src_pull_upstream_updates <- function(directories = dir_ls("man-src/", type = "directory"),
                                           write_out_only_formatted = FALSE) {
   message(deparse1(sys.call()))

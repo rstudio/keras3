@@ -28,7 +28,7 @@ k_softplus(x)
 plot(x, k_softplus(x))
 }\if{html}{\out{</div>}}
 
-\if{html}{\figure{k_softplus-unnamed-chunk-2-1.svg}}
+\figure{k_softplus-plot-1.png}
 }
 
 \seealso{

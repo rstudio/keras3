@@ -73,7 +73,7 @@ output <- input |>
   layer_einsum_dense("ab,bc->ac",
                      output_shape = 64,
                      bias_axes = "c")
-output # shape: (NULL, 64)
+output # shape(NA, 64)
 }\if{html}{\out{</div>}}
 
 \if{html}{\out{<div class="sourceCode">}}\preformatted{## <KerasTensor shape=(None, 64), dtype=float32, sparse=False, name=keras_tensor_1>
@@ -92,7 +92,7 @@ output <- input |>
   layer_einsum_dense("abc,cd->abd",
                      output_shape = c(NA, 64),
                      bias_axes = "d")
-output  #shape (NA, 32, 64)
+output  # shape(NA, 32, 64)
 }\if{html}{\out{</div>}}
 
 \if{html}{\out{<div class="sourceCode">}}\preformatted{## <KerasTensor shape=(None, None, 64), dtype=float32, sparse=False, name=keras_tensor_3>
@@ -115,7 +115,7 @@ output <- input |>
                      output_shape = 64,
                      bias_axes = "y")
 
-output  #shape (NA, 32, 64)
+output  # shape(NA, 32, 64)
 }\if{html}{\out{</div>}}
 
 \if{html}{\out{<div class="sourceCode">}}\preformatted{## <KerasTensor shape=(None, 32, 64), dtype=float32, sparse=False, name=keras_tensor_5>

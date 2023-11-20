@@ -777,20 +777,6 @@ random_array <- function(..., gen = stats::runif) {
 #'
 #' This function can be used to create or get the shape of an object.
 #'
-#'
-#' @param ... A shape specification. Numerics, `NULL` and tensors are valid.
-#'   `NULL`, `NA`, and `-1L` can be used to specify an unspecified dim size.
-#'   Tensors are dispatched to `k_shape()` to extract the tensor shape. All
-#'   other objects are coerced via `as.integer()`.
-#'
-#' @return A list with a `"keras_shape"` class attribute. Each element of the
-#'   list will be either
-#'   - `NULL`,
-#'   - an integer,
-#'   - A scalar integer tensor. (e.g., when supplied a TF tensor with
-#'   a unspecified dimension in a function being traced).
-#'
-#'
 #' # Examples
 #' ```{r}
 #' shape(1, 2, 3)
@@ -811,6 +797,19 @@ random_array <- function(..., gen = stats::runif) {
 #' shape(eager_tensor)
 #' k_shape(eager_tensor)
 #' ```
+#'
+#' @param ... A shape specification. Numerics, `NULL` and tensors are valid.
+#'   `NULL`, `NA`, and `-1L` can be used to specify an unspecified dim size.
+#'   Tensors are dispatched to `k_shape()` to extract the tensor shape. All
+#'   other objects are coerced via `as.integer()`.
+#'
+#' @return A list with a `"keras_shape"` class attribute. Each element of the
+#'   list will be either
+#'   a) `NULL`,
+#'   b) an integer or
+#'   c) a scalar integer tensor (e.g., when supplied a TF tensor with a
+#'   unspecified dimension in a function being traced).
+#'
 #'
 #' @export
 #' @seealso [k_shape()]
@@ -879,3 +878,4 @@ r_to_py.keras_shape <- function(x, convert = FALSE) {
 as.integer.keras_shape <- function(x, ...) {
   vapply(x, function(el) el %||% NA_integer_, 1L)
 }
+

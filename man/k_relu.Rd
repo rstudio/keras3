@@ -27,7 +27,7 @@ k_relu(x1)
 plot(x, k_relu(x))
 }\if{html}{\out{</div>}}
 
-\if{html}{\figure{k_relu-unnamed-chunk-2-1.svg}}
+\figure{k_relu-plot-1.png}
 }
 
 \seealso{
