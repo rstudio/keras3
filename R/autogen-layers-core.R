@@ -11,8 +11,6 @@
 #' created by the layer, and `bias` is a bias vector created by the layer
 #' (only applicable if `use_bias` is `True`).
 #'
-#' `Dense` is the vanilla ice cream of deep learning.
-#'
 #' # Note
 #' If the input to the layer has a rank greater than 2, `Dense`
 #' computes the dot product between the `inputs` and the `kernel` along the
