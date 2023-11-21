@@ -1,11 +1,22 @@
-
+#!/usr/bin/env Rscript
 
 envir::attach_source("tools/utils.R")
 
 options(error = function(e) print(rlang::trace_back()))
 
+# files <- list.files("vignettes-src", pattern = "Rmd$", full.names = TRUE)
+# files <- files %>%
+#   set_names() %>%
+#   lapply(readLines)
+#
+# unlink("vignettes-src", recursive = TRUE)
+#
+# dir_create("vignettes-src")
+# iwalk(files, \(lines, name) writeLines(lines, name))
 
-get_tether <- function(endpoint) {
+
+
+resolve_roxy_tether <- function(endpoint) {
   message("parsing @tether ", endpoint)
   export <- mk_export(endpoint)
   roxy <- export$roxygen |> str_split_lines()
@@ -18,16 +29,47 @@ get_tether <- function(endpoint) {
   ))
 }
 
-# get_tether("keras.layers.Dense") |> cat()
+# resolve_roxy_tether("keras.layers.Dense") |> cat()
+# unlink(".tether/vignettes-src/", recursive = TRUE)
 
-doctether::update_tethers(
-  tag_parser = get_tether,
-  resolve_tether_file = function(name) {
-    fs::path(glue("man-src/tether/{name}.R"))
-    # fs::path(glue("man-src/tether/{name}/1-formatted.md"))
-  })
+# url <-  "https://raw.githubusercontent.com/keras-team/keras/master/guides/writing_your_own_callbacks.py"
+resolve_rmd_tether <- function(url) {
+  sub("https://raw.githubusercontent.com/keras-team/keras/master/",
+      "~/github/keras-team/keras/",
+      url,
+      fixed = TRUE) |>
+    tutobook_to_rmd(outfile = FALSE)
+}
+# options(error = browser)
+
+doctether::retether(
+  roxy_tag_eval = NULL,
+  # roxy_tag_eval = resolve_roxy_tether,
+  rmd_field_eval = resolve_rmd_tether
+)
+
 
 message("DONE!")
+stop("DONE")
+
+
+py_run_string("import keras")
+
+parse_tether_tag <- function(endpoint) {
+  py_obj <- py_eval(endpoint)
+  roxy <- py_obj$`__doc__` |> glue::trim()
+  fn <- function() {}
+  formals(fn) <- formals(py_obj)  # just the signature
+
+  paste0(collapse = "\n",
+    paste0("#' ", roxy),
+    deparse(fn)
+  )
+}
+
+# get_tether("keras.layers.Dense") |> cat()
+
+doctether::retether(tag_parser = parse_tether_tag)
 
 
 if(FALSE) {

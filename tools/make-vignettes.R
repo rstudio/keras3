@@ -3,78 +3,6 @@ attach_source("tools/utils.R")
 # attach_source("tools/common.R")
 
 
-munge_tutobook <- function(tutobook) {
-
-  # browser()
-
-  df <- tibble(
-    line = tutobook
-  )
-
-  df %>%
-    mutate(
-      is_delim = startsWith(line, '"""'),
-      section_id = cumsum(is_delim),
-      is_code = !(section_id %% 2) & !is_delim,
-      delim_header = if_else(is_delim, str_replace(line, '^"""', ""), NA)) %>%
-    group_by(section_id) %>%
-    mutate(section_type = zoo::na.locf0(delim_header)) %>%
-    ungroup() %>%
-    filter(!is_delim) %>%
-    group_by(section_id, is_code, section_type) %>%
-    dplyr::group_map(\(.x, .grp) {
-
-      if(.grp$section_id == 1) {
-        x <- str_split_fixed(.x$line, ": ", 2)
-        x[,1] %<>% snakecase::to_snake_case() %<>% str_replace_all("_", "-")
-        x <- rlang::set_names(nm = x[,1], as.list(x[,2]))
-        x$output <- "rmarkdown::html_vignette"
-        x$knit <- '({source(here::here("tools/knit.R")); knit_vignette)'
-        # # x$repo <- https://github.com/rstudio/keras
-
-        frontmatter <- yaml::as.yaml(x) |> str_trim("right")
-        out <- str_flatten_lines("---", frontmatter, "---")
-        return(out)
-      }
-
-      out <- .x$line |>
-        str_trim("right") |>
-        str_flatten_lines() |>
-        str_trim()
-
-      if(out == "")
-        return("")
-
-      if(.grp$is_code) {
-
-        type <- .grp$section_type
-        if(is.na(type) || type == "")
-          type <- "python"
-        out <- str_flatten_lines(sprintf("```%s", type), out, "```")
-
-      } else {
-
-        out <- str_compact_newlines(out)
-
-      }
-      out
-
-    }) %>%
-    keep(., . != "") %>%
-    str_flatten("\n\n")
-
-}
-
-str_compact_newlines <- function(x, max_consecutive_new_lines = 2) {
-  x <- x |> str_flatten_lines()
-  while (nchar(x) != nchar(x <- gsub(
-    strrep("\n", max_consecutive_new_lines + 1),
-    strrep("\n", max_consecutive_new_lines),
-    x, fixed = TRUE))) {}
-  x
-}
-
-
 fetch_tutobook_filepaths <- function(...) {
   c(...) %>%
     lapply(list.files, full.names = TRUE,
@@ -82,46 +10,9 @@ fetch_tutobook_filepaths <- function(...) {
     unlist() %>%
     .[!str_detect(., "/keras_(cv|nlp|tuner)/")] %>%
     .[!duplicated(basename(.))]
-
 }
-# tutobook = readLines(path_to_tutobook),
 
-tutobook_to_rmd <- function(path_to_tutobook, outfile = NULL, tutobook = NULL) {
-  if(is.null(tutobook))
-    tutobook <- readLines(path_to_tutobook)
-  if(is.null(outfile) && !missing(path_to_tutobook)) {
-    outfile <- path_ext_set(path_to_tutobook, "Rmd")
-  }
-  # tutobook <- readr::read_file(path_to_tutobook)
-  # name <- path_to_tutobook %>%
-  #   basename() %>% fs::path_ext_remove() %>%
-  #   stringr::str_to_title()
 
-  # vignette_header <- glue::glue(title = name)
-    tutobook <- try({
-        munge_tutobook(tutobook)
-    }, silent = TRUE)
-  if(inherits(tutobook, "try-error")) {
-    message("converting failed: ", path_to_tutobook)
-    return()
-  }
-
-  # new_filename <- basename(path_to_tutobook) %>% fs::path_ext_set(".Rmd")
-  # fs::dir_create(outdir)
-  if(is.null(outfile))
-    tutobook
-  else {
-    writeLines(tutobook, outfile)
-    invisible(outfile)
-  }
-
-}
-# (function(input, ...) {
-#   invisible(system(paste0('({source(here::here("tools/knit.R")); knit_vignette}) "', input, '" ', ''))) })(
-#     '/Users/tomasz/github/rstudio/keras/vignettes-src/writing_your_own_callbacks.Rmd',
-#     encoding = 'UTF-8',
-#     output_dir = '/var/folders/hn/ck2j_bjx0kjg65jxqtbcb91c0000gp/T/RtmpT5oKKf/preview-12663547e158b.dir'
-#   )
 
 make_guide <- function(guide) {
   # guide == path to tutobook from upstream
@@ -137,49 +28,6 @@ make_guide <- function(guide) {
   link <- path("vignettes-src", name, ext = "Rmd")
   if(!file_exists(link))
     link_create(path(name, "2-translated.Rmd"), link)
-}
-
-vignettes_src_pull_upstream_updates <- function() {
-  dir_ls("vignettes-src/", type = "directory") |>
-    walk(\(dir) {
-      # withr::local_dir(dir)
-      name <- path_file(dir)
-      upstream_filepath <- guides %>% .[path_ext_remove(path_file(.)) == name]
-      stopifnot(length(upstream_filepath) == 1)
-      # browser()
-      old_upstream <- read_file(dir / "0-tutobook.py")
-      new_upstream <- read_file(upstream_filepath)
-      if(old_upstream == new_upstream) return()
-
-      if (file.exists(dir / "2-translated.Rmd"))
-        git(
-          "diff -U1 --no-index",
-          "--diff-algorithm=minimal",
-          paste0("--output=", dir / "translate.patch"),
-          dir / "1-formatted.md",
-          dir / "2-translated.Rmd",
-          valid_exit_codes = c(0L, 1L)
-        )
-
-      write_lines(new_upstream, dir/"0-tutobook.py")
-      rmd <- munge_tutobook(str_split_lines(new_upstream))
-      # export <- mk_export(endpoint)
-      write_lines(rmd, dir/"1-formatted.md")
-      write_lines(rmd, dir/"2-translated.Rmd")
-
-      if (!file.exists(dir / "translate.patch") ||
-          !length(patch <- read_lines(dir / "translate.patch")))
-        return()
-
-      patch[c(1L, 3L)] %<>% str_replace(fixed("/1-formatted.md"), "/2-translated.Rmd")
-      # patch <- patch[-2] # drop index <hash>..<hash> line
-      write_lines(patch, dir / "translate.patch")
-
-      git("add", dir/"2-translated.Rmd")
-      git("apply --3way --recount --allow-empty", dir/"translate.patch",
-          valid_exit_codes = c(0L, 1L))
-
-    })
 }
 
 include("tools/knit.R")
@@ -213,6 +61,19 @@ examples <-
     "~/github/keras-team/keras/examples/"
     # "~/github/keras-team/keras-io/examples/"
   }
+
+
+f <- "~/github/rstudio/keras/vignettes-src/writing_your_own_callbacks.Rmd"
+list.files(
+    c("vignettes-src", "vignettes"),
+    pattern = "\\.[qQrR]?md$",
+    recursive = TRUE,
+    full.names = TRUE,
+    all.files = TRUE
+  )
+
+
+old_tether <- readLines(tether_file)
 
 
 
@@ -257,3 +118,49 @@ vignette: >
 )----'
   glue::glue(template, .open = "<<", .close = ">>")
 }
+
+
+
+vignettes_src_pull_upstream_updates <- function() {
+  dir_ls("vignettes-src/", type = "directory") |>
+    walk(\(dir) {
+      # withr::local_dir(dir)
+      name <- path_file(dir)
+      upstream_filepath <- guides %>% .[path_ext_remove(path_file(.)) == name]
+      stopifnot(length(upstream_filepath) == 1)
+      # browser()
+      old_upstream <- read_file(dir / "0-tutobook.py")
+      new_upstream <- read_file(upstream_filepath)
+      if(old_upstream == new_upstream) return()
+
+      if (file.exists(dir / "2-translated.Rmd"))
+        git(
+          "diff -U1 --no-index",
+          "--diff-algorithm=minimal",
+          paste0("--output=", dir / "translate.patch"),
+          dir / "1-formatted.md",
+          dir / "2-translated.Rmd",
+          valid_exit_codes = c(0L, 1L)
+        )
+
+      write_lines(new_upstream, dir/"0-tutobook.py")
+      rmd <- munge_tutobook(str_split_lines(new_upstream))
+      # export <- mk_export(endpoint)
+      write_lines(rmd, dir/"1-formatted.md")
+      write_lines(rmd, dir/"2-translated.Rmd")
+
+      if (!file.exists(dir / "translate.patch") ||
+          !length(patch <- read_lines(dir / "translate.patch")))
+        return()
+
+      patch[c(1L, 3L)] %<>% str_replace(fixed("/1-formatted.md"), "/2-translated.Rmd")
+      # patch <- patch[-2] # drop index <hash>..<hash> line
+      write_lines(patch, dir / "translate.patch")
+
+      git("add", dir/"2-translated.Rmd")
+      git("apply --3way --recount --allow-empty", dir/"translate.patch",
+          valid_exit_codes = c(0L, 1L))
+
+    })
+}
+

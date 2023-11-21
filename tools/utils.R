@@ -88,6 +88,15 @@ attach_eval({
     out
   }
 
+  # str_compact_newlines <- function(x, max_consecutive_new_lines = 2) {
+  #   x <- x |> str_flatten_lines()
+  #   while (nchar(x) != nchar(x <- gsub(
+  #     strrep("\n", max_consecutive_new_lines + 1),
+  #     strrep("\n", max_consecutive_new_lines),
+  #     x, fixed = TRUE))) {}
+  #   x
+  # }
+
   str_detect_non_ascii <- function(chr) {
     map_lgl(chr, \(x) {
       if (Encoding(x) == "unknown") {
@@ -107,6 +116,33 @@ attach_eval({
     }
     chr
   }
+
+  trimws_file <- function(...) {
+    for(f in Sys.glob(c(...))) {
+      txt <- f |> readLines() |> trimws("right")
+      length(txt) <- Position(nzchar, txt, right = TRUE)
+      writeLines(txt, f)
+    }
+  }
+
+  .trimws_file <- function(...) {
+    # temp utils for specific interactive man/*.Rd munging
+    for(f in Sys.glob(c(...)))
+      # f |> readLines() |> trimws("right") |> writeLines(f)
+      f |> readLines() |>
+      (\(l) {
+        l <- replace_val(l, "## ", "##")
+        l[startsWith(l, "\\") & endsWith(l, ": ")] %<>% trimws("right")
+        l
+        # ifelse(l == "## ", "##", l)
+      })() |>
+      # trimws(l, "right")))() |>
+      # (\(l) ifelse(grepl("^Other ", l),
+      #              l,
+      #              trimws(l, "right")))() |>
+      writeLines(f)
+  }
+
 
   `append<-` <- function(x, after = length(x), value) {
     append(x, value, after)
@@ -1806,23 +1842,6 @@ view_translation_diff <- function(r_name) {
 }
 
 
-trimws_file <- function(...) {
-  for(f in Sys.glob(c(...)))
-  # f |> readLines() |> trimws("right") |> writeLines(f)
-  f |> readLines() |>
-    (\(l) {
-      l <- replace_val(l, "## ", "##")
-      l[startsWith(l, "\\") & endsWith(l, ": ")] %<>% trimws("right")
-      l
-      # ifelse(l == "## ", "##", l)
-      })() |>
-                 # trimws(l, "right")))() |>
-    # (\(l) ifelse(grepl("^Other ", l),
-    #              l,
-    #              trimws(l, "right")))() |>
-    writeLines(f)
-}
-
 man_src_pull_upstream_updates <- function(directories = dir_ls("man-src/", type = "directory"),
                                           write_out_only_formatted = FALSE) {
   message(deparse1(sys.call()))
@@ -1948,6 +1967,103 @@ man_src_render_translated <- function(directories = dir_ls("man-src/", type = "d
     })
 
 }
+
+
+# ---- vignettes ----
+
+tutobook_to_rmd <- function(path_to_tutobook, outfile = NA, tutobook_text = NULL) {
+  if(is.null(tutobook_text))
+    tutobook_text <- readLines(path_to_tutobook)
+  stopifnot(isTRUE(is.na(outfile)) || is_string(outfile) || is.null(outfile) || isFALSE(outfile))
+  # NA == infer file path from tutobook path
+  # string == outfile path
+  # NULL/FALSE == return munged text, no outfile
+  if (isTRUE(is.na(outfile))) {
+    if (!missing(path_to_tutobook)) {
+      outfile <- path_ext_set(path_to_tutobook, "Rmd")
+    } else
+      outfile <- FALSE
+  }
+
+  rmd_text <- try({ .tutobook_to_rmd(tutobook_text) }, silent = TRUE)
+  if(inherits(rmd_text, "try-error")) {
+    message("converting failed: ", path_to_tutobook)
+    warning(rmd_text)
+    browser()
+    return()
+  }
+
+  # new_filename <- basename(path_to_tutobook) %>% fs::path_ext_set(".Rmd")
+
+  if(!is_string(outfile))
+    return(rmd_text)
+
+  fs::dir_create(dirname(outfile))
+  writeLines(rmd_text, outfile)
+  invisible(outfile)
+}
+
+.tutobook_to_rmd <- function(tutobook) {
+  stopifnot(is.character(tutobook))
+
+  df <- tibble(
+    line = str_split_lines(tutobook)
+  )
+
+  df %>%
+    mutate(
+      is_delim = startsWith(line, '"""'),
+      section_id = cumsum(is_delim),
+      is_code = !(section_id %% 2) & !is_delim,
+      delim_header = if_else(is_delim, str_replace(line, '^"""', ""), NA)) %>%
+    group_by(section_id) %>%
+    mutate(section_type = zoo::na.locf0(delim_header)) %>%
+    ungroup() %>%
+    filter(!is_delim) %>%
+    group_by(section_id, is_code, section_type) %>%
+    dplyr::group_map(\(.x, .grp) {
+
+      if(.grp$section_id == 1) {
+        x <- str_split_fixed(.x$line, ": ", 2)
+        x[,1] %<>% snakecase::to_snake_case() %<>% str_replace_all("_", "-")
+        x <- rlang::set_names(nm = x[,1], as.list(x[,2]))
+        x$output <- "rmarkdown::html_vignette"
+        x$knit <- '({source(here::here("tools/knit.R")); knit_vignette)'
+        # # x$repo <- https://github.com/rstudio/keras
+
+        frontmatter <- yaml::as.yaml(x) |> str_trim("right")
+        out <- str_flatten_lines("---", frontmatter, "---")
+        return(out)
+      }
+
+      out <- .x$line |>
+        str_trim("right") |>
+        str_flatten_lines() |>
+        str_trim()
+
+      if(out == "")
+        return("")
+
+      if(.grp$is_code) {
+
+        type <- .grp$section_type
+        if(is.na(type) || type == "")
+          type <- "python"
+        out <- str_flatten_lines(sprintf("```%s", type), out, "```")
+
+      } else {
+
+        out <- str_flatten_and_compact_lines(out)
+
+      }
+      out
+
+    }) %>%
+    keep(., . != "") %>%
+    str_flatten("\n\n")
+
+}
+
 
 
 # ---- misc utils ----
