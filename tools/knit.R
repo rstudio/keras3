@@ -66,49 +66,38 @@ knit_man_src <- function(input, ..., output_dir) {
 
 knit_vignette <- function(input, ..., output_dir) {
   # print(sys.call())
-  # stop()
-  # input <- normalizePath(input)
-  library(keras)
-  render_dir <- dirname(normalizePath(input))
-  if(getwd() != render_dir) {
-    message("Changing wd to ", render_dir)
-    owd <- setwd(render_dir)
-    on.exit(setwd(owd))
-  }
+  # cat("wd: ", getwd(), "\n") # ~/github/rstudio/keras/vignettes-src
 
-  # ~/github/rstudio/keras/vignettes/writing_your_own_callbacks.Rmd
-  name <- basename(render_dir)
-  output_file <- normalizePath(sprintf("../../vignettes/%s.Rmd", name),
-                               mustWork = FALSE)
-  message("output_file: ", output_file)
+  library(keras)
+  # input <- normalizePath(input, mustWork = TRUE, winslash = "/") |> fs::path_tidy()
+  input <- fs::path_real(input)
+  output <- sub("/vignettes-src/", "/vignettes/", input, fixed = TRUE)
+  output.md <- sub("\\.[qrR]md$", ".md", output)
+
+  filename <- basename(input)
+  name <- sub("\\.[qrR]md$", "", filename)
+
+  # render_dir <- normalizePath(tempfile(paste0(name, "-")), mustWork = FALSE, winslash = "/") |> fs::path_tidy()
+  render_dir <- fs::file_temp(paste0(name, "-"))
+  dir.create(render_dir)
+  message("Changing wd to ", render_dir)
+  owd <- setwd(render_dir)
+  on.exit({
+    setwd(owd)
+    unlink(render_dir, recursive = TRUE)
+  })
+
+  message("kniting: ", output.md)
 
   set.seed(1L)
-  keras$utils$set_random_seed(1L)
-  knitr::opts_chunk$set(
-    # collapse = TRUE,
-    comment = "##" #>
-  )
-  # rmarkdown::render(
-  #   input,
-  #   output_format = rmarkdown::github_document(preserve_yaml = TRUE),
-  #   # output_format = rmarkdown::md_document( preserve_yaml = TRUE, ext = "Rmd"), #
-  #   # output_format = rmarkdown::md_document(preserve_yaml = FALSE), # , ext = "Rmd"
-  #   output_file = output_file,
-  #   envir = new.env(parent = globalenv()),
-  #   ...
-  # )
-  knitr::knit(
-    "2-translated.Rmd",
-    # output_format = rmarkdown::github_document(preserve_yaml = TRUE),
-    # output_format = rmarkdown::md_document( preserve_yaml = TRUE, ext = "Rmd"), #
-    # output_format = rmarkdown::md_document(preserve_yaml = FALSE), # , ext = "Rmd"
-    output = output_file,
-    envir = new.env(parent = globalenv()),
-    ...
-  )
-  x <- readLines(output_file)
-  # if(length(grep("^knit: ({source(here::here("tools/knit.R")); knit_vignette})", x) -> i))
-  # x <- x[-i]
+  keras:::keras$utils$clear_session()
+  keras:::keras$utils$set_random_seed(1L)
+
+  knitr::knit(input, output.md, envir = new.env(parent = globalenv()))
+
+  x <- readLines(output.md)
+  unlink(output.md)
+
   end_fm_i <- which(x == "---")[2]
   x_fm <- x[2:(end_fm_i-1)]
   yaml.load <- getExportedValue("yaml", "yaml.load")
@@ -118,9 +107,20 @@ knit_vignette <- function(input, ..., output_dir) {
   fm$knit <- NULL
   fm$output <- "rmarkdown::html_vignette"
   fm$accelerator <- NULL
-  last_modified_date <- reticulate:::system2t("git", c("log -1 --pretty=format:'%ad'",
-                                                       "--date=format:'%Y-%m-%d'",
-                                                       "--", shQuote(input)), stdout = TRUE)
+  fm$tether <- NULL
+  package_dir <- strsplit(input, "/vignettes-src/", fixed = TRUE)[[1]][[1]]
+
+  withr::with_dir(package_dir, {
+    stopifnot(dir.exists(".git"))
+    last_modified_date <-
+      # reticulate:::system2t("git", c(
+      system2("git", c(
+        "log -1 --pretty=format:'%ad'",
+        "--date=format:'%Y-%m-%d'",
+        "--", shQuote(input)),
+        stdout = TRUE
+      )
+  })
   # message("Last modified: ", last_modified_date)
   fm$date <- sprintf("Last Modified: %s; Last Rendered: %s",
                      last_modified_date, format(Sys.Date()))
@@ -138,7 +138,9 @@ knit_vignette <- function(input, ..., output_dir) {
   fm <- paste0(fm, vignette)
 
   x <- c("---", fm, "---", x[-(1:end_fm_i)])
-  writeLines(x, output_file)
+  x <- paste0(x, collapse = "\n") |> strsplit("\n") |> _[[1L]] |> trimws("right")
+  message("postprocessed output file: ", output)
+  writeLines(x, output)
 }
 
 

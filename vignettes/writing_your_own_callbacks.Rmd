@@ -5,7 +5,7 @@ date-created: 2019/03/20
 last-modified: 2023/06/25
 description: Complete guide to writing new Keras callbacks.
 output: rmarkdown::html_vignette
-date: 'Last Modified: 2023-11-10; Last Rendered: 2023-11-10'
+date: 'Last Modified: 2023-11-21; Last Rendered: 2023-11-21'
 vignette: >
   %\VignetteIndexEntry{Writing your own callbacks}
   %\VignetteEngine{knitr::rmarkdown}
@@ -167,9 +167,9 @@ Let's try it out:
 model <- get_model()
 model |> fit(
   mnist$train$x, mnist$train$y,
-  batch_size = 128, 
-  epochs = 2, 
-  verbose = 0, 
+  batch_size = 128,
+  epochs = 2,
+  verbose = 0,
   validation_split = 0.5,
   callbacks = list(callback_custom())
 )
@@ -177,131 +177,131 @@ model |> fit(
 
 ```
 ## Starting training; got logs:  Named list()
-## 
+##
 ## Start epoch 0 of training; got logs:  Named list()
-## 
+##
 ## ...Training: start of batch 0; got logs:  Named list()
-## 
+##
 ## ...Training: end of batch 0; got logs: List of 2
 ##  $ loss               : num 25.9
 ##  $ mean_absolute_error: num 4.19
-## 
+##
 ## ...Training: start of batch 1; got logs:  Named list()
-## 
+##
 ## ...Training: end of batch 1; got logs: List of 2
 ##  $ loss               : num 433
 ##  $ mean_absolute_error: num 15.5
-## 
+##
 ## ...Training: start of batch 2; got logs:  Named list()
-## 
+##
 ## ...Training: end of batch 2; got logs: List of 2
 ##  $ loss               : num 297
 ##  $ mean_absolute_error: num 11.8
-## 
+##
 ## ...Training: start of batch 3; got logs:  Named list()
-## 
+##
 ## ...Training: end of batch 3; got logs: List of 2
 ##  $ loss               : num 226
 ##  $ mean_absolute_error: num 9.52
-## 
+##
 ## Start testing; got logs:  Named list()
-## 
+##
 ## ...Evaluating: start of batch 0; got logs:  Named list()
-## 
+##
 ## ...Evaluating: end of batch 0; got logs: List of 2
 ##  $ loss               : num 8.1
 ##  $ mean_absolute_error: num 2.3
-## 
+##
 ## ...Evaluating: start of batch 1; got logs:  Named list()
-## 
+##
 ## ...Evaluating: end of batch 1; got logs: List of 2
 ##  $ loss               : num 7.58
 ##  $ mean_absolute_error: num 2.23
-## 
+##
 ## ...Evaluating: start of batch 2; got logs:  Named list()
-## 
+##
 ## ...Evaluating: end of batch 2; got logs: List of 2
 ##  $ loss               : num 7.38
 ##  $ mean_absolute_error: num 2.21
-## 
+##
 ## ...Evaluating: start of batch 3; got logs:  Named list()
-## 
+##
 ## ...Evaluating: end of batch 3; got logs: List of 2
 ##  $ loss               : num 7.29
 ##  $ mean_absolute_error: num 2.21
-## 
+##
 ## Stop testing; got logs: List of 2
 ##  $ loss               : num 7.29
 ##  $ mean_absolute_error: num 2.21
-## 
+##
 ## End epoch 0 of training; got logs: List of 4
 ##  $ loss                   : num 226
 ##  $ mean_absolute_error    : num 9.52
 ##  $ val_loss               : num 7.29
 ##  $ val_mean_absolute_error: num 2.21
-## 
+##
 ## Start epoch 1 of training; got logs:  Named list()
-## 
+##
 ## ...Training: start of batch 0; got logs:  Named list()
-## 
+##
 ## ...Training: end of batch 0; got logs: List of 2
 ##  $ loss               : num 7.44
 ##  $ mean_absolute_error: num 2.27
-## 
+##
 ## ...Training: start of batch 1; got logs:  Named list()
-## 
+##
 ## ...Training: end of batch 1; got logs: List of 2
 ##  $ loss               : num 6.81
 ##  $ mean_absolute_error: num 2.16
-## 
+##
 ## ...Training: start of batch 2; got logs:  Named list()
-## 
+##
 ## ...Training: end of batch 2; got logs: List of 2
 ##  $ loss               : num 6.12
 ##  $ mean_absolute_error: num 2.06
-## 
+##
 ## ...Training: start of batch 3; got logs:  Named list()
-## 
+##
 ## ...Training: end of batch 3; got logs: List of 2
 ##  $ loss               : num 6.07
 ##  $ mean_absolute_error: num 2.03
-## 
+##
 ## Start testing; got logs:  Named list()
-## 
+##
 ## ...Evaluating: start of batch 0; got logs:  Named list()
-## 
+##
 ## ...Evaluating: end of batch 0; got logs: List of 2
 ##  $ loss               : num 5.54
 ##  $ mean_absolute_error: num 1.92
-## 
+##
 ## ...Evaluating: start of batch 1; got logs:  Named list()
-## 
+##
 ## ...Evaluating: end of batch 1; got logs: List of 2
 ##  $ loss               : num 5.31
 ##  $ mean_absolute_error: num 1.87
-## 
+##
 ## ...Evaluating: start of batch 2; got logs:  Named list()
-## 
+##
 ## ...Evaluating: end of batch 2; got logs: List of 2
 ##  $ loss               : num 5.11
 ##  $ mean_absolute_error: num 1.8
-## 
+##
 ## ...Evaluating: start of batch 3; got logs:  Named list()
-## 
+##
 ## ...Evaluating: end of batch 3; got logs: List of 2
 ##  $ loss               : num 5.15
 ##  $ mean_absolute_error: num 1.82
-## 
+##
 ## Stop testing; got logs: List of 2
 ##  $ loss               : num 5.15
 ##  $ mean_absolute_error: num 1.82
-## 
+##
 ## End epoch 1 of training; got logs: List of 4
 ##  $ loss                   : num 6.07
 ##  $ mean_absolute_error    : num 2.03
 ##  $ val_loss               : num 5.15
 ##  $ val_mean_absolute_error: num 1.82
-## 
+##
 ## Stop training; got logs: List of 4
 ##  $ loss                   : num 6.07
 ##  $ mean_absolute_error    : num 2.03
@@ -312,62 +312,62 @@ model |> fit(
 ```r
 res <- model |> evaluate(
   mnist$test$x, mnist$test$y,
-  batch_size = 128, verbose = 0, 
+  batch_size = 128, verbose = 0,
   callbacks = list(callback_custom())
 )
 ```
 
 ```
 ## Start testing; got logs:  Named list()
-## 
+##
 ## ...Evaluating: start of batch 0; got logs:  Named list()
-## 
+##
 ## ...Evaluating: end of batch 0; got logs: List of 2
 ##  $ loss               : num 5.2
 ##  $ mean_absolute_error: num 1.84
-## 
+##
 ## ...Evaluating: start of batch 1; got logs:  Named list()
-## 
+##
 ## ...Evaluating: end of batch 1; got logs: List of 2
 ##  $ loss               : num 4.62
 ##  $ mean_absolute_error: num 1.73
-## 
+##
 ## ...Evaluating: start of batch 2; got logs:  Named list()
-## 
+##
 ## ...Evaluating: end of batch 2; got logs: List of 2
 ##  $ loss               : num 4.61
 ##  $ mean_absolute_error: num 1.74
-## 
+##
 ## ...Evaluating: start of batch 3; got logs:  Named list()
-## 
+##
 ## ...Evaluating: end of batch 3; got logs: List of 2
 ##  $ loss               : num 4.65
 ##  $ mean_absolute_error: num 1.75
-## 
+##
 ## ...Evaluating: start of batch 4; got logs:  Named list()
-## 
+##
 ## ...Evaluating: end of batch 4; got logs: List of 2
 ##  $ loss               : num 4.84
 ##  $ mean_absolute_error: num 1.77
-## 
+##
 ## ...Evaluating: start of batch 5; got logs:  Named list()
-## 
+##
 ## ...Evaluating: end of batch 5; got logs: List of 2
 ##  $ loss               : num 4.76
 ##  $ mean_absolute_error: num 1.76
-## 
+##
 ## ...Evaluating: start of batch 6; got logs:  Named list()
-## 
+##
 ## ...Evaluating: end of batch 6; got logs: List of 2
 ##  $ loss               : num 4.74
 ##  $ mean_absolute_error: num 1.76
-## 
+##
 ## ...Evaluating: start of batch 7; got logs:  Named list()
-## 
+##
 ## ...Evaluating: end of batch 7; got logs: List of 2
 ##  $ loss               : num 4.66
 ##  $ mean_absolute_error: num 1.74
-## 
+##
 ## Stop testing; got logs: List of 2
 ##  $ loss               : num 4.66
 ##  $ mean_absolute_error: num 1.74
@@ -376,54 +376,54 @@ res <- model |> evaluate(
 ```r
 res <- model |> predict(
   mnist$test$x,
-  batch_size = 128, verbose = 0, 
+  batch_size = 128, verbose = 0,
   callbacks = list(callback_custom())
 )
 ```
 
 ```
 ## Start predicting; got logs:  Named list()
-## 
+##
 ## ...Predicting: start of batch 0; got logs:  Named list()
-## 
+##
 ## ...Predicting: end of batch 0; got logs: List of 1
 ##  $ outputs:<tf.Tensor: shape=(128, 1), dtype=float32, numpy=…>
-## 
+##
 ## ...Predicting: start of batch 1; got logs:  Named list()
-## 
+##
 ## ...Predicting: end of batch 1; got logs: List of 1
 ##  $ outputs:<tf.Tensor: shape=(128, 1), dtype=float32, numpy=…>
-## 
+##
 ## ...Predicting: start of batch 2; got logs:  Named list()
-## 
+##
 ## ...Predicting: end of batch 2; got logs: List of 1
 ##  $ outputs:<tf.Tensor: shape=(128, 1), dtype=float32, numpy=…>
-## 
+##
 ## ...Predicting: start of batch 3; got logs:  Named list()
-## 
+##
 ## ...Predicting: end of batch 3; got logs: List of 1
 ##  $ outputs:<tf.Tensor: shape=(128, 1), dtype=float32, numpy=…>
-## 
+##
 ## ...Predicting: start of batch 4; got logs:  Named list()
-## 
+##
 ## ...Predicting: end of batch 4; got logs: List of 1
 ##  $ outputs:<tf.Tensor: shape=(128, 1), dtype=float32, numpy=…>
-## 
+##
 ## ...Predicting: start of batch 5; got logs:  Named list()
-## 
+##
 ## ...Predicting: end of batch 5; got logs: List of 1
 ##  $ outputs:<tf.Tensor: shape=(128, 1), dtype=float32, numpy=…>
-## 
+##
 ## ...Predicting: start of batch 6; got logs:  Named list()
-## 
+##
 ## ...Predicting: end of batch 6; got logs: List of 1
 ##  $ outputs:<tf.Tensor: shape=(128, 1), dtype=float32, numpy=…>
-## 
+##
 ## ...Predicting: start of batch 7; got logs:  Named list()
-## 
+##
 ## ...Predicting: end of batch 7; got logs: List of 1
 ##  $ outputs:<tf.Tensor: shape=(104, 1), dtype=float32, numpy=…>
-## 
+##
 ## Stop predicting; got logs:  Named list()
 ```
 
@@ -727,7 +727,7 @@ model |> fit(
 ```
 
 ```
-## 
+##
 ## Epoch 000: Learning rate is 0.1000.
 ## Up to batch 0, the average loss is   29.36.
 ## Up to batch 1, the average loss is  513.95.
@@ -746,7 +746,7 @@ model |> fit(
 ## Up to batch 14, the average loss is   75.11.
 ## Up to batch 15, the average loss is   70.84.
 ## The average loss for epoch  0 is     70.84 and mean absolute error is    4.00.
-## 
+##
 ## Epoch 001: Learning rate is 0.1000.
 ## Up to batch 0, the average loss is    6.95.
 ## Up to batch 1, the average loss is    8.71.
@@ -765,7 +765,7 @@ model |> fit(
 ## Up to batch 14, the average loss is   31.05.
 ## Up to batch 15, the average loss is   31.11.
 ## The average loss for epoch  1 is     31.11 and mean absolute error is    4.78.
-## 
+##
 ## Epoch 002: Learning rate is 0.1000.
 ## Up to batch 0, the average loss is   40.40.
 ## Up to batch 1, the average loss is   43.50.
@@ -784,7 +784,7 @@ model |> fit(
 ## Up to batch 14, the average loss is   31.48.
 ## Up to batch 15, the average loss is   34.35.
 ## The average loss for epoch  2 is     34.35 and mean absolute error is    4.85.
-## 
+##
 ## Epoch 003: Learning rate is 0.0500.
 ## Up to batch 0, the average loss is   49.35.
 ## Up to batch 1, the average loss is   27.95.
@@ -803,7 +803,7 @@ model |> fit(
 ## Up to batch 14, the average loss is    7.88.
 ## Up to batch 15, the average loss is    8.13.
 ## The average loss for epoch  3 is      8.13 and mean absolute error is    2.14.
-## 
+##
 ## Epoch 004: Learning rate is 0.0500.
 ## Up to batch 0, the average loss is   12.88.
 ## Up to batch 1, the average loss is   10.48.
@@ -822,7 +822,7 @@ model |> fit(
 ## Up to batch 14, the average loss is   10.07.
 ## Up to batch 15, the average loss is   10.74.
 ## The average loss for epoch  4 is     10.74 and mean absolute error is    2.76.
-## 
+##
 ## Epoch 005: Learning rate is 0.0500.
 ## Up to batch 0, the average loss is   18.77.
 ## Up to batch 1, the average loss is   13.70.
@@ -841,7 +841,7 @@ model |> fit(
 ## Up to batch 14, the average loss is    8.82.
 ## Up to batch 15, the average loss is    9.77.
 ## The average loss for epoch  5 is      9.77 and mean absolute error is    2.56.
-## 
+##
 ## Epoch 006: Learning rate is 0.0100.
 ## Up to batch 0, the average loss is   19.83.
 ## Up to batch 1, the average loss is   16.63.
@@ -860,7 +860,7 @@ model |> fit(
 ## Up to batch 14, the average loss is    5.25.
 ## Up to batch 15, the average loss is    5.15.
 ## The average loss for epoch  6 is      5.15 and mean absolute error is    1.70.
-## 
+##
 ## Epoch 007: Learning rate is 0.0100.
 ## Up to batch 0, the average loss is    3.33.
 ## Up to batch 1, the average loss is    2.83.
@@ -879,7 +879,7 @@ model |> fit(
 ## Up to batch 14, the average loss is    2.86.
 ## Up to batch 15, the average loss is    2.92.
 ## The average loss for epoch  7 is      2.92 and mean absolute error is    1.31.
-## 
+##
 ## Epoch 008: Learning rate is 0.0100.
 ## Up to batch 0, the average loss is    3.13.
 ## Up to batch 1, the average loss is    2.73.
@@ -898,7 +898,7 @@ model |> fit(
 ## Up to batch 14, the average loss is    2.89.
 ## Up to batch 15, the average loss is    2.97.
 ## The average loss for epoch  8 is      2.97 and mean absolute error is    1.32.
-## 
+##
 ## Epoch 009: Learning rate is 0.0050.
 ## Up to batch 0, the average loss is    3.49.
 ## Up to batch 1, the average loss is    2.82.

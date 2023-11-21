@@ -94,11 +94,6 @@ get_model <- function() {
 }
 ```
 
-```{r}
-knitr::knit_exit()
-```
-
-
 Then, load the MNIST data for training and testing from Keras datasets API:
 
 ```{r}
