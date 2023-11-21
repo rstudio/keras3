@@ -1,0 +1,25 @@
+#' Take elements from a tensor along an axis.
+#'
+#' @returns
+#'     The corresponding tensor of values.
+#'
+#' @param x
+#' Source tensor.
+#'
+#' @param indices
+#' The indices of the values to extract.
+#'
+#' @param axis
+#' The axis over which to select values. By default, the
+#' flattened input tensor is used.
+#'
+#' @export
+#' @family numpy ops
+#' @family ops
+#' @seealso
+#' + <https:/keras.io/keras_core/api/ops/numpy#take-function>
+#' + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/take>
+k_take <-
+function (x, indices, axis = NULL)
+{
+}

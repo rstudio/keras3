@@ -1,0 +1,18 @@
+#' Return the number of elements in a tensor.
+#'
+#' @returns
+#'     Number of elements in `x`.
+#'
+#' @param x
+#' Input tensor.
+#'
+#' @export
+#' @family numpy ops
+#' @family ops
+#' @seealso
+#' + <https:/keras.io/keras_core/api/ops/numpy#size-function>
+#' + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/size>
+k_size <-
+function (x)
+{
+}
