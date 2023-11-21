@@ -7,7 +7,7 @@ description: Complete guide to writing low-level training & evaluation loops.
 accelerator: None
 output: rmarkdown::html_vignette
 knit: ({source(here::here("tools/knit.R")); knit_vignette})
-tether: https:/raw.githubusercontent.com/keras-team/keras-io/master/guides/writing_a_training_loop_from_scratch.py
+tether: https://raw.githubusercontent.com/keras-team/keras-io/master/guides/writing_a_training_loop_from_scratch.py
 ---
 
 ## Setup

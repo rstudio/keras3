@@ -18,20 +18,22 @@ resolve_roxy_tether <- function(endpoint) {
 }
 # resolve_roxy_tether("keras.layers.Dense") |> cat()
 
+# TODO: write out the raw docstring / sig and tutobook to .tether/raw/*, as a safeguard for bugs in the tether resolve functions
 
 # url <- "https://raw.githubusercontent.com/keras-team/keras/master/guides/writing_your_own_callbacks.py"
 resolve_rmd_tether <- function(url) {
-  sub("https://raw.githubusercontent.com/keras-team/keras/master/",
-      "~/github/keras-team/keras/",
-      url,
-      fixed = TRUE) |>
-    tutobook_to_rmd(outfile = FALSE)
+  path <- url
+  path <- sub("https://raw.githubusercontent.com/keras-team/keras/master/",
+              "~/github/keras-team/keras/", path, fixed = TRUE)
+  path <- sub("https://raw.githubusercontent.com/keras-team/keras-io/master/",
+              "~/github/keras-team/keras-io/", path, fixed = TRUE)
+  tutobook_to_rmd(path, outfile = FALSE)
 }
 # options(error = browser)
 
 doctether::retether(
-  roxy_tag_eval = NULL,
-  # roxy_tag_eval = resolve_roxy_tether,
+  # roxy_tag_eval = NULL,
+  roxy_tag_eval = resolve_roxy_tether,
   rmd_field_eval = resolve_rmd_tether
 )
 

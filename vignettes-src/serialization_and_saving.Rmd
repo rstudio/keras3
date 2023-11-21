@@ -7,7 +7,7 @@ description: Complete guide to saving, serializing, and exporting models.
 accelerator: None
 output: rmarkdown::html_vignette
 knit: ({source(here::here("tools/knit.R")); knit_vignette})
-tether: https:/raw.githubusercontent.com/keras-team/keras-io/master/guides/keras_core/serialization_and_saving.py
+tether: https://raw.githubusercontent.com/keras-team/keras-io/master/guides/keras_core/serialization_and_saving.py
 ---
 
 **Note: this guide assumes Keras >= 2.13**

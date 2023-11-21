@@ -7,7 +7,7 @@ description: Complete guide to writing new Keras callbacks.
 accelerator: GPU
 tether: https://raw.githubusercontent.com/keras-team/keras/master/guides/writing_your_own_callbacks.py
 knit: ({source(here::here("tools/knit.R")); knit_vignette})
-tether: https:/raw.githubusercontent.com/keras-team/keras/master/guides/writing_your_own_callbacks.py
+tether: https://raw.githubusercontent.com/keras-team/keras/master/guides/writing_your_own_callbacks.py
 ---
 
 ## Introduction

@@ -7,7 +7,7 @@ description: First contact with the new multi-backend Keras.
 accelerator: GPU
 output: rmarkdown::html_vignette
 knit: ({source(here::here("tools/knit.R")); knit_vignette})
-tether: https:/raw.githubusercontent.com/keras-team/keras-io/master/guides/keras_core/getting_started_with_keras_core.py
+tether: https://raw.githubusercontent.com/keras-team/keras-io/master/guides/keras_core/getting_started_with_keras_core.py
 ---
 
 ## Introduction
