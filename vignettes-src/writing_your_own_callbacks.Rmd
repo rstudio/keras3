@@ -7,6 +7,7 @@ description: Complete guide to writing new Keras callbacks.
 accelerator: GPU
 tether: https://raw.githubusercontent.com/keras-team/keras/master/guides/writing_your_own_callbacks.py
 knit: ({source(here::here("tools/knit.R")); knit_vignette})
+tether: https:/raw.githubusercontent.com/keras-team/keras/master/guides/writing_your_own_callbacks.py
 ---
 
 ## Introduction
@@ -164,22 +165,22 @@ Let's try it out:
 model <- get_model()
 model |> fit(
   mnist$train$x, mnist$train$y,
-  batch_size = 128, 
-  epochs = 2, 
-  verbose = 0, 
+  batch_size = 128,
+  epochs = 2,
+  verbose = 0,
   validation_split = 0.5,
   callbacks = list(callback_custom())
 )
 
 res <- model |> evaluate(
   mnist$test$x, mnist$test$y,
-  batch_size = 128, verbose = 0, 
+  batch_size = 128, verbose = 0,
   callbacks = list(callback_custom())
 )
 
 res <- model |> predict(
   mnist$test$x,
-  batch_size = 128, verbose = 0, 
+  batch_size = 128, verbose = 0,
   callbacks = list(callback_custom())
 )
 ```

@@ -4,18 +4,6 @@ envir::attach_source("tools/utils.R")
 
 options(error = function(e) print(rlang::trace_back()))
 
-# files <- list.files("vignettes-src", pattern = "Rmd$", full.names = TRUE)
-# files <- files %>%
-#   set_names() %>%
-#   lapply(readLines)
-#
-# unlink("vignettes-src", recursive = TRUE)
-#
-# dir_create("vignettes-src")
-# iwalk(files, \(lines, name) writeLines(lines, name))
-
-
-
 resolve_roxy_tether <- function(endpoint) {
   message("parsing @tether ", endpoint)
   export <- mk_export(endpoint)
@@ -28,11 +16,10 @@ resolve_roxy_tether <- function(endpoint) {
     deparse(fn)
   ))
 }
-
 # resolve_roxy_tether("keras.layers.Dense") |> cat()
-# unlink(".tether/vignettes-src/", recursive = TRUE)
 
-# url <-  "https://raw.githubusercontent.com/keras-team/keras/master/guides/writing_your_own_callbacks.py"
+
+# url <- "https://raw.githubusercontent.com/keras-team/keras/master/guides/writing_your_own_callbacks.py"
 resolve_rmd_tether <- function(url) {
   sub("https://raw.githubusercontent.com/keras-team/keras/master/",
       "~/github/keras-team/keras/",

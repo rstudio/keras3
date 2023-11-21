@@ -7,6 +7,7 @@ description: Writing low-level training & evaluation loops in TensorFlow.
 accelerator: None
 output: rmarkdown::html_vignette
 knit: ({source(here::here("tools/knit.R")); knit_vignette})
+tether: https:/raw.githubusercontent.com/keras-team/keras/master/guides/writing_a_custom_training_loop_in_tensorflow.py
 ---
 
 ## Setup

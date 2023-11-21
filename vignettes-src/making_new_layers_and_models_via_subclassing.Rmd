@@ -7,6 +7,7 @@ description: Complete guide to writing `Layer` and `Model` objects from scratch.
 accelerator: None
 output: rmarkdown::html_vignette
 knit: ({source(here::here("tools/knit.R")); knit_vignette})
+tether: https:/raw.githubusercontent.com/keras-team/keras/master/guides/making_new_layers_and_models_via_subclassing.py
 ---
 
 ## Introduction

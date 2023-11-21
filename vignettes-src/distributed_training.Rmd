@@ -7,6 +7,7 @@ description: Guide to multi-GPU & distributed training for Keras models.
 accelerator: GPU
 output: rmarkdown::html_vignette
 knit: ({source(here::here("tools/knit.R")); knit_vignette})
+tether: https:/raw.githubusercontent.com/keras-team/keras-io/master/guides/distributed_training.py
 ---
 
 ## Introduction

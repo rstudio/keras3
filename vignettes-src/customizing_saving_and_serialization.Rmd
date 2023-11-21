@@ -7,6 +7,7 @@ description: A more advanced guide on customizing saving for your layers and mod
 accelerator: None
 output: rmarkdown::html_vignette
 knit: ({source(here::here("tools/knit.R")); knit_vignette})
+tether: https:/raw.githubusercontent.com/keras-team/keras-io/master/guides/customizing_saving_and_serialization.py
 ---
 
 ## Introduction

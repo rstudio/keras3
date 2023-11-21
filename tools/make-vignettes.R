@@ -55,6 +55,38 @@ guides <-
     "~/github/keras-team/keras-io/guides/keras_core"
     "~/github/keras-team/keras-io/guides"
   }
+if(FALSE) {
+  # one time: add tether fields
+tibble(local_tutobook_path = guides) %>%
+  mutate(
+    name = basename(local_tutobook_path) |> fs::path_ext_remove(),
+    rmd_path = glue("vignettes-src/{name}.Rmd"),
+    rmd_exists = file.exists(rmd_path),
+
+    tether_url =
+      sub(
+        path.expand("~/github/keras-team/keras/"),
+        "https://raw.githubusercontent.com/keras-team/keras/master/",
+        local_tutobook_path,
+        fixed = TRUE
+      ) %>%
+      sub(
+        path.expand("~/github/keras-team/keras-io/"),
+        "https://raw.githubusercontent.com/keras-team/keras-io/master/",
+        .,
+        fixed = TRUE
+      ) %>% fs::path()
+  ) %>%
+  rowwise() %>%
+  mutate(write_tether_filed = {
+    lines <- readLines(rmd_path) |> trimws("right")
+    fm_end <- which(lines == "---")[2]
+    lines[fm_end] <- sprintf("tether: %s\n---", tether_url)
+    writeLines(lines, rmd_path)
+  })
+  relocate(tether_url) %>%
+  print(n = Inf)
+}
 
 examples <-
   fetch_tutobook_filepaths %(% {
