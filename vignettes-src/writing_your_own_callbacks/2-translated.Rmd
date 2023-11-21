@@ -5,6 +5,7 @@ date-created: 2019/03/20
 last-modified: 2023/06/25
 description: Complete guide to writing new Keras callbacks.
 accelerator: GPU
+tether: https://raw.githubusercontent.com/keras-team/keras/master/guides/writing_your_own_callbacks.py
 knit: ({source(here::here("tools/knit.R")); knit_vignette})
 ---
 
@@ -92,6 +93,11 @@ get_model <- function() {
   model
 }
 ```
+
+```{r}
+knitr::knit_exit()
+```
+
 
 Then, load the MNIST data for training and testing from Keras datasets API:
 
