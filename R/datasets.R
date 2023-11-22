@@ -80,7 +80,7 @@ dataset_cifar100 <- function(label_mode = c("fine", "coarse")) {
 #'
 #'   The `x` data includes integer sequences. If the `num_words` argument was
 #'   specific, the maximum possible index value is `num_words-1`. If the
-#'   `maxlen`` argument was specified, the largest possible sequence length is
+#'   `maxlen` argument was specified, the largest possible sequence length is
 #'   `maxlen`.
 #'
 #'   The `y` data includes a set of integer labels (0 or 1).
