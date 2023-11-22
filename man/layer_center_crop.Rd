@@ -22,7 +22,7 @@ while \code{"channels_first"} corresponds to inputs with shape
 \verb{~/.keras/keras.json}. If you never set it, then it will be
 \code{"channels_last"}.}
 
-\item{...}{Passed on to the Python callable}
+\item{...}{For forward/backward compatability.}
 }
 \description{
 This layers crops the central portion of the images to a target size. If an

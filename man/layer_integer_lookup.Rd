@@ -110,7 +110,7 @@ regardless of vocabulary size. Defaults to \code{FALSE}.}
 
 \item{name}{String, name for the object}
 
-\item{...}{Passed on to the Python callable}
+\item{...}{For forward/backward compatability.}
 }
 \description{
 This layer maps a set of arbitrary integer input tokens into indexed integer

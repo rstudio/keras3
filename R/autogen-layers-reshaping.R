@@ -34,7 +34,7 @@
 #' Object to compose the layer with. A tensor, array, or sequential model.
 #'
 #' @param ...
-#' Passed on to the Python callable
+#' For forward/backward compatability.
 #'
 #' @export
 #' @family reshaping layers
@@ -105,7 +105,7 @@ function (object, cropping = list(1L, 1L), ...)
 #' Object to compose the layer with. A tensor, array, or sequential model.
 #'
 #' @param ...
-#' Passed on to the Python callable
+#' For forward/backward compatability.
 #'
 #' @export
 #' @family reshaping layers
@@ -182,7 +182,7 @@ function (object, cropping = list(list(0L, 0L), list(0L, 0L)),
 #' Object to compose the layer with. A tensor, array, or sequential model.
 #'
 #' @param ...
-#' Passed on to the Python callable
+#' For forward/backward compatability.
 #'
 #' @export
 #' @family reshaping layers
@@ -232,7 +232,7 @@ function (object, cropping = list(list(1L, 1L), list(1L, 1L),
 #' Object to compose the layer with. A tensor, array, or sequential model.
 #'
 #' @param ...
-#' Passed on to the Python callable
+#' For forward/backward compatability.
 #'
 #' @export
 #' @family reshaping layers
@@ -280,7 +280,7 @@ function (object, data_format = NULL, ...)
 #' Object to compose the layer with. A tensor, array, or sequential model.
 #'
 #' @param ...
-#' Passed on to the Python callable
+#' For forward/backward compatability.
 #'
 #' @export
 #' @family reshaping layers
@@ -325,7 +325,7 @@ function (object, dims, ...)
 #' Object to compose the layer with. A tensor, array, or sequential model.
 #'
 #' @param ...
-#' Passed on to the Python callable
+#' For forward/backward compatability.
 #'
 #' @export
 #' @family reshaping layers
@@ -379,7 +379,7 @@ function (object, n, ...)
 #' Object to compose the layer with. A tensor, array, or sequential model.
 #'
 #' @param ...
-#' Passed on to the Python callable
+#' For forward/backward compatability.
 #'
 #' @export
 #' @family reshaping layers
@@ -431,7 +431,7 @@ function (object, target_shape, ...)
 #' Object to compose the layer with. A tensor, array, or sequential model.
 #'
 #' @param ...
-#' Passed on to the Python callable
+#' For forward/backward compatability.
 #'
 #' @export
 #' @family reshaping layers
@@ -506,7 +506,7 @@ function (object, size = 2L, ...)
 #' Object to compose the layer with. A tensor, array, or sequential model.
 #'
 #' @param ...
-#' Passed on to the Python callable
+#' For forward/backward compatability.
 #'
 #' @export
 #' @family reshaping layers
@@ -578,7 +578,7 @@ function (object, size = list(2L, 2L), data_format = NULL, interpolation = "near
 #' Object to compose the layer with. A tensor, array, or sequential model.
 #'
 #' @param ...
-#' Passed on to the Python callable
+#' For forward/backward compatability.
 #'
 #' @export
 #' @family reshaping layers
@@ -629,7 +629,7 @@ function (object, size = list(2L, 2L, 2L), data_format = NULL,
 #' Object to compose the layer with. A tensor, array, or sequential model.
 #'
 #' @param ...
-#' Passed on to the Python callable
+#' For forward/backward compatability.
 #'
 #' @export
 #' @family reshaping layers
@@ -702,7 +702,7 @@ function (object, padding = 1L, ...)
 #' Object to compose the layer with. A tensor, array, or sequential model.
 #'
 #' @param ...
-#' Passed on to the Python callable
+#' For forward/backward compatability.
 #'
 #' @export
 #' @family reshaping layers
@@ -781,7 +781,7 @@ function (object, padding = list(1L, 1L), data_format = NULL,
 #' Object to compose the layer with. A tensor, array, or sequential model.
 #'
 #' @param ...
-#' Passed on to the Python callable
+#' For forward/backward compatability.
 #'
 #' @export
 #' @family reshaping layers

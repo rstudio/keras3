@@ -11,7 +11,7 @@ metric_kl_divergence(y_true, y_pred, ..., name = "kl_divergence", dtype = NULL)
 
 \item{y_pred}{Tensor of predicted targets.}
 
-\item{...}{Passed on to the Python callable}
+\item{...}{For forward/backward compatability.}
 
 \item{name}{(Optional) string name of the metric instance.}
 

@@ -33,7 +33,7 @@ Defaults to \code{"channels_last"}.}
 \item{interpolation}{A string, one of \code{"bicubic"}, \code{"bilinear"}, \code{"lanczos3"},
 \code{"lanczos5"}, \code{"nearest"}.}
 
-\item{...}{Passed on to the Python callable}
+\item{...}{For forward/backward compatability.}
 }
 \description{
 The implementation uses interpolative resizing, given the resize method

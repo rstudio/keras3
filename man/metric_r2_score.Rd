@@ -13,7 +13,7 @@ metric_r2_score(
 )
 }
 \arguments{
-\item{...}{Passed on to the Python callable}
+\item{...}{For forward/backward compatability.}
 
 \item{class_aggregation}{Specifies how to aggregate scores corresponding to
 different output classes (or target dimensions),

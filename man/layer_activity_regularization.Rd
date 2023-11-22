@@ -13,7 +13,7 @@ layer_activity_regularization(object, l1 = 0, l2 = 0, ...)
 
 \item{l2}{L2 regularization factor (positive float).}
 
-\item{...}{Passed on to the Python callable}
+\item{...}{For forward/backward compatability.}
 }
 \description{
 Layer that applies an update to the cost function based input activity.

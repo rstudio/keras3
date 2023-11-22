@@ -32,7 +32,7 @@ considered.}
 \item{axis}{Defaults to \code{-1}. The dimension along which the entropy is
 computed.}
 
-\item{...}{Passed on to the Python callable}
+\item{...}{For forward/backward compatability.}
 
 \item{reduction}{Type of reduction to apply to the loss. In almost all cases
 this should be \code{"sum_over_batch_size"}.

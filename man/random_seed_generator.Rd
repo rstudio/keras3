@@ -9,7 +9,7 @@ random_seed_generator(seed = NULL, ...)
 \arguments{
 \item{seed}{Initial seed for the random number generator}
 
-\item{...}{Passed on to the Python callable}
+\item{...}{For forward/backward compatability.}
 }
 \description{
 In Keras, all RNG-using methods (such as \code{random_normal()})

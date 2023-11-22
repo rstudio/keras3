@@ -106,7 +106,7 @@
 #' The predicted values. shape = `[batch_size, d0, .. dN]`.
 #'
 #' @param ...
-#' Passed on to the Python callable
+#' For forward/backward compatability.
 #'
 #' @export
 #' @family losses
@@ -318,7 +318,7 @@ structure(function (y_true, y_pred, from_logits = FALSE, label_smoothing = 0,
 #' The predicted values, of shape `(batch_size, d0, .. dN)`.
 #'
 #' @param ...
-#' Passed on to the Python callable
+#' For forward/backward compatability.
 #'
 #' @export
 #' @family losses
@@ -428,7 +428,7 @@ structure(function (y_true, y_pred, apply_class_balancing = FALSE,
 #' Tensor of predicted targets.
 #'
 #' @param ...
-#' Passed on to the Python callable
+#' For forward/backward compatability.
 #'
 #' @export
 #' @family losses
@@ -585,7 +585,7 @@ structure(function (y_true, y_pred, from_logits = FALSE, label_smoothing = 0,
 #' Tensor of predicted targets.
 #'
 #' @param ...
-#' Passed on to the Python callable
+#' For forward/backward compatability.
 #'
 #' @export
 #' @family losses
@@ -650,7 +650,7 @@ structure(function (y_true, y_pred, alpha = 0.25, gamma = 2,
 #' The predicted values with shape = `[batch_size, d0, .. dN]`.
 #'
 #' @param ...
-#' Passed on to the Python callable
+#' For forward/backward compatability.
 #'
 #' @export
 #' @family losses
@@ -723,7 +723,7 @@ structure(function (y_true, y_pred, ..., reduction = "sum_over_batch_size",
 #' Tensor of predicted targets.
 #'
 #' @param ...
-#' Passed on to the Python callable
+#' For forward/backward compatability.
 #'
 #' @export
 #' @family losses
@@ -790,7 +790,7 @@ structure(function (y_true, y_pred, axis = -1L, ..., reduction = "sum_over_batch
 #' The predicted values with shape = `[batch_size, d0, .. dN]`.
 #'
 #' @param ...
-#' Passed on to the Python callable
+#' For forward/backward compatability.
 #'
 #' @export
 #' @family losses
@@ -862,7 +862,7 @@ structure(function (y_true, y_pred, ..., reduction = "sum_over_batch_size",
 #' tensor of predicted targets.
 #'
 #' @param ...
-#' Passed on to the Python callable
+#' For forward/backward compatability.
 #'
 #' @export
 #' @family losses
@@ -924,7 +924,7 @@ structure(function (y_true, y_pred, delta = 1, ..., reduction = "sum_over_batch_
 #' Tensor of predicted targets.
 #'
 #' @param ...
-#' Passed on to the Python callable
+#' For forward/backward compatability.
 #'
 #' @export
 #' @family losses
@@ -990,7 +990,7 @@ structure(function (y_true, y_pred, ..., reduction = "sum_over_batch_size",
 #' The predicted values with shape = `[batch_size, d0, .. dN]`.
 #'
 #' @param ...
-#' Passed on to the Python callable
+#' For forward/backward compatability.
 #'
 #' @export
 #' @family losses
@@ -1051,7 +1051,7 @@ structure(function (y_true, y_pred, ..., reduction = "sum_over_batch_size",
 #' The predicted values with shape = `[batch_size, d0, .. dN]`.
 #'
 #' @param ...
-#' Passed on to the Python callable
+#' For forward/backward compatability.
 #'
 #' @export
 #' @family losses
@@ -1116,7 +1116,7 @@ structure(function (y_true, y_pred, ..., reduction = "sum_over_batch_size",
 #' The predicted values with shape = `[batch_size, d0, .. dN]`.
 #'
 #' @param ...
-#' Passed on to the Python callable
+#' For forward/backward compatability.
 #'
 #' @export
 #' @family losses
@@ -1177,7 +1177,7 @@ structure(function (y_true, y_pred, ..., reduction = "sum_over_batch_size",
 #' The predicted values with shape = `[batch_size, d0, .. dN]`.
 #'
 #' @param ...
-#' Passed on to the Python callable
+#' For forward/backward compatability.
 #'
 #' @export
 #' @family losses
@@ -1242,7 +1242,7 @@ structure(function (y_true, y_pred, ..., reduction = "sum_over_batch_size",
 #' The predicted values with shape = `[batch_size, d0, .. dN]`.
 #'
 #' @param ...
-#' Passed on to the Python callable
+#' For forward/backward compatability.
 #'
 #' @export
 #' @family losses
@@ -1304,7 +1304,7 @@ structure(function (y_true, y_pred, ..., reduction = "sum_over_batch_size",
 #' The predicted values. shape = `[batch_size, d0, .. dN]`.
 #'
 #' @param ...
-#' Passed on to the Python callable
+#' For forward/backward compatability.
 #'
 #' @export
 #' @family losses
@@ -1421,7 +1421,7 @@ structure(function (y_true, y_pred, ..., reduction = "sum_over_batch_size",
 #' computed.
 #'
 #' @param ...
-#' Passed on to the Python callable
+#' For forward/backward compatability.
 #'
 #' @export
 #' @family losses
@@ -1487,7 +1487,7 @@ structure(function (y_true, y_pred, from_logits = FALSE, ignore_class = NULL,
 #' The predicted values with shape = `[batch_size, d0, .. dN]`.
 #'
 #' @param ...
-#' Passed on to the Python callable
+#' For forward/backward compatability.
 #'
 #' @export
 #' @family losses

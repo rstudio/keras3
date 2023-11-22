@@ -54,7 +54,7 @@ it should have the same values for \code{stateful}, \code{return_states},
 and \code{layer} should have different \code{go_backwards} argument values.
 A \code{ValueError} will be raised if these requirements are not met.}
 
-\item{...}{Passed on to the Python callable}
+\item{...}{For forward/backward compatability.}
 }
 \description{
 Bidirectional wrapper for RNNs.

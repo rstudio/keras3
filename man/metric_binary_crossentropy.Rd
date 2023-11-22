@@ -32,7 +32,7 @@ a value of 0.1 for label "0" and 0.9 for label "1".}
 
 \item{axis}{The axis along which the mean is computed. Defaults to \code{-1}.}
 
-\item{...}{Passed on to the Python callable}
+\item{...}{For forward/backward compatability.}
 
 \item{name}{(Optional) string name of the metric instance.}
 

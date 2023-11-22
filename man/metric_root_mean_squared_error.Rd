@@ -11,7 +11,7 @@ metric_root_mean_squared_error(
 )
 }
 \arguments{
-\item{...}{Passed on to the Python callable}
+\item{...}{For forward/backward compatability.}
 
 \item{name}{(Optional) string name of the metric instance.}
 

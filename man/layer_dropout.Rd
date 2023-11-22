@@ -20,7 +20,7 @@ you can use \verb{noise_shape=(batch_size, 1, features)}.}
 
 \item{seed}{A Python integer to use as random seed.}
 
-\item{...}{Passed on to the Python callable}
+\item{...}{For forward/backward compatability.}
 }
 \description{
 The \code{Dropout} layer randomly sets input units to 0 with a frequency of

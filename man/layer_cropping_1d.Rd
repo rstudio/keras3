@@ -18,7 +18,7 @@ beginning and end of the cropping dimension
 (\verb{(left_crop, right_crop)}).
 }}
 
-\item{...}{Passed on to the Python callable}
+\item{...}{For forward/backward compatability.}
 }
 \description{
 It crops along the time dimension (axis 2).

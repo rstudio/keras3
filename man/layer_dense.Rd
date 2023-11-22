@@ -47,7 +47,7 @@ the \code{kernel} weights matrix.}
 
 \item{bias_constraint}{Constraint function applied to the bias vector.}
 
-\item{...}{Passed on to the Python callable}
+\item{...}{For forward/backward compatability.}
 }
 \description{
 \code{Dense} implements the operation:

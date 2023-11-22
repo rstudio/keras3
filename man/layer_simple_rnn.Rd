@@ -105,7 +105,7 @@ Unrolling is only suitable for short sequences.}
 
 \item{seed}{Initial seed for the random number generator}
 
-\item{...}{Passed on to the Python callable}
+\item{...}{For forward/backward compatability.}
 }
 \description{
 Fully-connected RNN where the output is to be fed back as the new input.

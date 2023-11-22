@@ -3,41 +3,21 @@
 if(!"source:tools/utils.R" %in% search()) envir::attach_source("tools/utils.R")
 if(!"source:tools/translate-tools.R" %in% search()) envir::attach_source("tools/translate-tools.R")
 
-# Deferred:
+## Deferred:
 
 # TODO: k_fft() should really accept and return complex tensors too.
 # TODO: activation_resolve() or activation_get() as alias of keras.activation.get() ?
 # TODO: the 2-translated.Rmd should include a chunk w/ the function def (for easy seeing while editing)
 #       with chunk options (include = FALSE)
 
-# Processing:
 
-# TODO: train_on_batch and related methods should be autogen'd and exported. Or maybe we curate those,
-#       and don't export them? (I.e., have the few people that need them access methods via model$train_on_batch())
-
-# TODO: use @concept or @keywords tags derived from module - then use that to autogenerate _pkgdown.yml
-#
-# TODO:  self$model$stop_training <- TRUE should work. Need to avoid propogating `$<-` past first.
-#
-# TODO: new_callback_class() should wrap callables to make epoch/batch n 1 based,
-#       make logs persistent (e.g., wrap the user callable w/ `logs$update(<callback_return>`))
-#
-
-# TODO: in reticulate, change subclassed dict autoconversion back to off:
-#      so that keras$utils$get_custom_objects()$clear() works.
+## Rejected:
 
 # TODO: k_array() should take a 'shape' argument
 
-# TODO: remove k_amax() and friends, they're redundant w/ k_max(), which already
-#       takes an axis arg. Only there for numpy api compatability, which
-#       doesn't matter to us.
-
-# TODO: get_custom_objects() needs thinking
-
-# TODO: r_name autogen: move "set" to tail, so have config_floatx(), config_floatx_set()
+## Implemented but Questioning:
 
 # TODO: maybe move ops to `op_*` instead of `k_*` ?
-
 if(FALSE) {
   Sys.glob(c("R/autogen*.R", "vignettes-src/*.Rmd")) %>%
     walk(\(f) {
@@ -50,7 +30,44 @@ if(FALSE) {
   fs::file_move(f, f2)
 }
 
+## In progress
+
+
+## Waiting to be processed:
+
+
+# TODO: remove k_amax() and friends, they're redundant w/ k_max(), which already
+#       takes an axis arg. Only there for numpy api compatability, which
+#       doesn't matter to us.
+
+# TODO: train_on_batch and related methods should be autogen'd and exported. Or maybe we curate those,
+#       and don't export them? (I.e., have the few people that need them access methods via model$train_on_batch())
+
+# TODO: Clean up @family tags (partially autogen, derive from module - then use that to autogenerate _pkgdown.yml)
+
+# TODO:  self$model$stop_training <- TRUE should work. Need to avoid propogating `$<-` past first.
+
+# TODO: new_callback_class() should wrap callables to make epoch/batch n 1 based,
+#       make logs persistent (e.g., wrap the user callable w/ `logs$update(<callback_return>`))
+
+# TODO: in reticulate, change subclassed dict autoconversion back to off:
+#      so that keras$utils$get_custom_objects()$clear() works.
+
+# TODO: get_custom_objects() needs thinking
+
+# TODO: r_name autogen: move "set" to tail, so have config_floatx(), config_floatx_set()
+
 # TODO: @param ... Passed on to the Python callable - scrub this from formatted.md
+if(FALSE)
+Sys.glob(c("R/autogen*.R", "vignettes-src/*.Rmd")) %>%
+  walk(\(f) {
+    readLines(f) %>%
+      replace_val("#' Passed on to the Python callable", "#' For forward/backward compatability.") %>%
+      writeLines(f)
+  })
+#' Passed on to the Python callable
+#' For forward/backward compatability.
+
 
 # TODO: revisit history - also mentions in docs (e.g., in callback_model_checkpoint())
 

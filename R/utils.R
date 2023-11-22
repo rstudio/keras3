@@ -878,4 +878,3 @@ r_to_py.keras_shape <- function(x, convert = FALSE) {
 as.integer.keras_shape <- function(x, ...) {
   vapply(x, function(el) el %||% NA_integer_, 1L)
 }
-

@@ -21,7 +21,7 @@ metric_sparse_top_op_categorical_accuracy(
 \item{k}{(Optional) Number of top elements to look at for computing accuracy.
 Defaults to \code{5}.}
 
-\item{...}{Passed on to the Python callable}
+\item{...}{For forward/backward compatability.}
 
 \item{name}{(Optional) string name of the metric instance.}
 

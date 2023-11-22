@@ -42,7 +42,7 @@ will be \code{"channels_last"}.}
 
 \item{name}{String, name for the object}
 
-\item{...}{Passed on to the Python callable}
+\item{...}{For forward/backward compatability.}
 }
 \description{
 Downsamples the input along its spatial dimensions (depth, height, and

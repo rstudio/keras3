@@ -17,7 +17,7 @@ metric_sparse_categorical_accuracy(
 
 \item{y_pred}{Tensor of predicted targets.}
 
-\item{...}{Passed on to the Python callable}
+\item{...}{For forward/backward compatability.}
 
 \item{name}{(Optional) string name of the metric instance.}
 

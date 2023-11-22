@@ -316,7 +316,7 @@ function (y_true, y_pred)
 #' Tensor of predicted targets.
 #'
 #' @param ...
-#' Passed on to the Python callable
+#' For forward/backward compatability.
 #'
 #' @export
 #' @family accuracy metrics
@@ -402,7 +402,7 @@ structure(function (y_true, y_pred, threshold = 0.5, ..., name = "binary_accurac
 #' Tensor of predicted targets.
 #'
 #' @param ...
-#' Passed on to the Python callable
+#' For forward/backward compatability.
 #'
 #' @export
 #' @family accuracy metrics
@@ -485,7 +485,7 @@ structure(function (y_true, y_pred, ..., name = "categorical_accuracy",
 #' Tensor of predicted targets.
 #'
 #' @param ...
-#' Passed on to the Python callable
+#' For forward/backward compatability.
 #'
 #' @export
 #' @family accuracy metrics
@@ -564,7 +564,7 @@ structure(function (y_true, y_pred, ..., name = "sparse_categorical_accuracy",
 #' Tensor of predicted targets.
 #'
 #' @param ...
-#' Passed on to the Python callable
+#' For forward/backward compatability.
 #'
 #' @export
 #' @family accuracy metrics
@@ -642,7 +642,7 @@ structure(function (y_true, y_pred, k = 5L, ..., name = "sparse_top_op_categoric
 #' Tensor of predicted targets.
 #'
 #' @param ...
-#' Passed on to the Python callable
+#' For forward/backward compatability.
 #'
 #' @export
 #' @family accuracy metrics
@@ -813,7 +813,7 @@ structure(function (y_true, y_pred, k = 5L, ..., name = "top_op_categorical_accu
 #' loss should match the AUC `from_logits` constructor argument.
 #'
 #' @param ...
-#' Passed on to the Python callable
+#' For forward/backward compatability.
 #'
 #' @export
 #' @family confusion metrics
@@ -875,7 +875,7 @@ function (..., num_thresholds = 200L, curve = "ROC", summation_method = "interpo
 #' (Optional) data type of the metric result.
 #'
 #' @param ...
-#' Passed on to the Python callable
+#' For forward/backward compatability.
 #'
 #' @export
 #' @family confusion metrics
@@ -934,7 +934,7 @@ function (..., thresholds = NULL, name = NULL, dtype = NULL)
 #' (Optional) data type of the metric result.
 #'
 #' @param ...
-#' Passed on to the Python callable
+#' For forward/backward compatability.
 #'
 #' @export
 #' @family confusion metrics
@@ -1047,7 +1047,7 @@ function (..., thresholds = NULL, name = NULL, dtype = NULL)
 #' (Optional) data type of the metric result.
 #'
 #' @param ...
-#' Passed on to the Python callable
+#' For forward/backward compatability.
 #'
 #' @export
 #' @family confusion metrics
@@ -1127,7 +1127,7 @@ function (..., thresholds = NULL, top_k = NULL, class_id = NULL,
 #' (Optional) data type of the metric result.
 #'
 #' @param ...
-#' Passed on to the Python callable
+#' For forward/backward compatability.
 #'
 #' @export
 #' @family confusion metrics
@@ -1223,7 +1223,7 @@ function (..., recall, num_thresholds = 200L, class_id = NULL,
 #' (Optional) data type of the metric result.
 #'
 #' @param ...
-#' Passed on to the Python callable
+#' For forward/backward compatability.
 #'
 #' @export
 #' @family confusion metrics
@@ -1305,7 +1305,7 @@ function (..., thresholds = NULL, top_k = NULL, class_id = NULL,
 #' (Optional) data type of the metric result.
 #'
 #' @param ...
-#' Passed on to the Python callable
+#' For forward/backward compatability.
 #'
 #' @export
 #' @family confusion metrics
@@ -1393,7 +1393,7 @@ function (..., precision, num_thresholds = 200L, class_id = NULL,
 #' (Optional) data type of the metric result.
 #'
 #' @param ...
-#' Passed on to the Python callable
+#' For forward/backward compatability.
 #'
 #' @export
 #' @family confusion metrics
@@ -1481,7 +1481,7 @@ function (..., specificity, num_thresholds = 200L, class_id = NULL,
 #' (Optional) data type of the metric result.
 #'
 #' @param ...
-#' Passed on to the Python callable
+#' For forward/backward compatability.
 #'
 #' @export
 #' @family confusion metrics
@@ -1541,7 +1541,7 @@ function (..., sensitivity, num_thresholds = 200L, class_id = NULL,
 #' (Optional) data type of the metric result.
 #'
 #' @param ...
-#' Passed on to the Python callable
+#' For forward/backward compatability.
 #'
 #' @export
 #' @family confusion metrics
@@ -1600,7 +1600,7 @@ function (..., thresholds = NULL, name = NULL, dtype = NULL)
 #' (Optional) data type of the metric result.
 #'
 #' @param ...
-#' Passed on to the Python callable
+#' For forward/backward compatability.
 #'
 #' @export
 #' @family confusion metrics
@@ -1676,7 +1676,7 @@ function (..., thresholds = NULL, name = NULL, dtype = NULL)
 #' Optional. Data type of the metric result.
 #'
 #' @param ...
-#' Passed on to the Python callable
+#' For forward/backward compatability.
 #'
 #' @export
 #' @family f score metrics
@@ -1758,7 +1758,7 @@ function (..., average = NULL, threshold = NULL, name = "f1_score",
 #' Optional. Data type of the metric result.
 #'
 #' @param ...
-#' Passed on to the Python callable
+#' For forward/backward compatability.
 #'
 #' @export
 #' @family f score metrics
@@ -1818,7 +1818,7 @@ function (..., average = NULL, beta = 1, threshold = NULL, name = "fbeta_score",
 #' The predicted values with shape = `[batch_size, d0, .. dN]`.
 #'
 #' @param ...
-#' Passed on to the Python callable
+#' For forward/backward compatability.
 #'
 #' @export
 #' @family losses
@@ -1888,7 +1888,7 @@ structure(function (y_true, y_pred, ..., name = "categorical_hinge",
 #' The predicted values with shape = `[batch_size, d0, .. dN]`.
 #'
 #' @param ...
-#' Passed on to the Python callable
+#' For forward/backward compatability.
 #'
 #' @export
 #' @family losses
@@ -1957,7 +1957,7 @@ structure(function (y_true, y_pred, ..., name = "hinge", dtype = NULL)
 #' The predicted values with shape = `[batch_size, d0, .. dN]`.
 #'
 #' @param ...
-#' Passed on to the Python callable
+#' For forward/backward compatability.
 #'
 #' @export
 #' @family losses
@@ -2063,7 +2063,7 @@ structure(function (y_true, y_pred, ..., name = "squared_hinge",
 #' (Optional) data type of the metric result.
 #'
 #' @param ...
-#' Passed on to the Python callable
+#' For forward/backward compatability.
 #'
 #' @export
 #' @family iou metrics
@@ -2164,7 +2164,7 @@ function (..., target_class_ids = list(0L, 1L), threshold = 0.5,
 #' Defaults to `-1`.
 #'
 #' @param ...
-#' Passed on to the Python callable
+#' For forward/backward compatability.
 #'
 #' @export
 #' @family iou metrics
@@ -2265,7 +2265,7 @@ function (..., num_classes, target_class_ids, name = NULL, dtype = NULL,
 #' (Optional) The dimension containing the logits. Defaults to `-1`.
 #'
 #' @param ...
-#' Passed on to the Python callable
+#' For forward/backward compatability.
 #'
 #' @export
 #' @family iou metrics
@@ -2373,7 +2373,7 @@ function (..., num_classes, name = NULL, dtype = NULL, ignore_class = NULL,
 #' (Optional) The dimension containing the logits. Defaults to `-1`.
 #'
 #' @param ...
-#' Passed on to the Python callable
+#' For forward/backward compatability.
 #'
 #' @export
 #' @family iou metrics
@@ -2474,7 +2474,7 @@ function (..., num_classes, target_class_ids, name = NULL, dtype = NULL,
 #' (Optional) The dimension containing the logits. Defaults to `-1`.
 #'
 #' @param ...
-#' Passed on to the Python callable
+#' For forward/backward compatability.
 #'
 #' @export
 #' @family iou metrics
@@ -2552,7 +2552,7 @@ function (..., num_classes, name = NULL, dtype = NULL, ignore_class = NULL,
 #' The axis along which the mean is computed. Defaults to `-1`.
 #'
 #' @param ...
-#' Passed on to the Python callable
+#' For forward/backward compatability.
 #'
 #' @export
 #' @family losses
@@ -2654,7 +2654,7 @@ structure(function (y_true, y_pred, from_logits = FALSE, label_smoothing = 0,
 #' Tensor of predicted targets.
 #'
 #' @param ...
-#' Passed on to the Python callable
+#' For forward/backward compatability.
 #'
 #' @export
 #' @family losses
@@ -2730,7 +2730,7 @@ structure(function (y_true, y_pred, from_logits = FALSE, label_smoothing = 0,
 #' Tensor of predicted targets.
 #'
 #' @param ...
-#' Passed on to the Python callable
+#' For forward/backward compatability.
 #'
 #' @export
 #' @family losses
@@ -2808,7 +2808,7 @@ structure(function (y_true, y_pred, ..., name = "kl_divergence",
 #' The predicted values. shape = `[batch_size, d0, .. dN]`.
 #'
 #' @param ...
-#' Passed on to the Python callable
+#' For forward/backward compatability.
 #'
 #' @export
 #' @family losses
@@ -2904,7 +2904,7 @@ structure(function (y_true, y_pred, ..., name = "poisson", dtype = NULL)
 #' considered.
 #'
 #' @param ...
-#' Passed on to the Python callable
+#' For forward/backward compatability.
 #'
 #' @export
 #' @family losses
@@ -2964,7 +2964,7 @@ structure(function (y_true, y_pred, from_logits = FALSE, ignore_class = NULL,
 #' (Optional) data type of the metric result.
 #'
 #' @param ...
-#' Passed on to the Python callable
+#' For forward/backward compatability.
 #'
 #' @export
 #' @family reduction metrics
@@ -3058,7 +3058,7 @@ function (..., fn, name = NULL, dtype = NULL)
 #' (Optional) data type of the metric result.
 #'
 #' @param ...
-#' Passed on to the Python callable
+#' For forward/backward compatability.
 #'
 #' @export
 #' @family reduction metrics
@@ -3121,7 +3121,7 @@ function (..., name = "sum", dtype = NULL)
 #' similarity is computed.
 #'
 #' @param ...
-#' Passed on to the Python callable
+#' For forward/backward compatability.
 #'
 #' @export
 #' @family regression metrics
@@ -3178,7 +3178,7 @@ function (..., name = "cosine_similarity", dtype = NULL, axis = -1L)
 #' (Optional) data type of the metric result.
 #'
 #' @param ...
-#' Passed on to the Python callable
+#' For forward/backward compatability.
 #'
 #' @export
 #' @family regression metrics
@@ -3242,7 +3242,7 @@ function (..., name = "logcosh", dtype = NULL)
 #' The predicted values with shape = `[batch_size, d0, .. dN]`.
 #'
 #' @param ...
-#' Passed on to the Python callable
+#' For forward/backward compatability.
 #'
 #' @export
 #' @family losses
@@ -3320,7 +3320,7 @@ structure(function (y_true, y_pred, ..., name = "mean_absolute_error",
 #' The predicted values with shape = `[batch_size, d0, .. dN]`.
 #'
 #' @param ...
-#' Passed on to the Python callable
+#' For forward/backward compatability.
 #'
 #' @export
 #' @family losses
@@ -3379,7 +3379,7 @@ structure(function (y_true, y_pred, ..., name = "mean_absolute_percentage_error"
 #' The predicted values with shape = `[batch_size, d0, .. dN]`.
 #'
 #' @param ...
-#' Passed on to the Python callable
+#' For forward/backward compatability.
 #'
 #' @export
 #' @family losses
@@ -3457,7 +3457,7 @@ structure(function (y_true, y_pred, ..., name = "mean_squared_error",
 #' The predicted values with shape = `[batch_size, d0, .. dN]`.
 #'
 #' @param ...
-#' Passed on to the Python callable
+#' For forward/backward compatability.
 #'
 #' @export
 #' @family losses
@@ -3542,7 +3542,7 @@ structure(function (y_true, y_pred, ..., name = "mean_squared_logarithmic_error"
 #' Optional. data type of the metric result.
 #'
 #' @param ...
-#' Passed on to the Python callable
+#' For forward/backward compatability.
 #'
 #' @export
 #' @family regression metrics
@@ -3601,7 +3601,7 @@ function (..., class_aggregation = "uniform_average", num_regressors = 0L,
 #' (Optional) data type of the metric result.
 #'
 #' @param ...
-#' Passed on to the Python callable
+#' For forward/backward compatability.
 #'
 #' @export
 #' @family regression metrics

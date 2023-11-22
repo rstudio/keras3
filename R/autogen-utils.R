@@ -1226,7 +1226,7 @@ function (img, data_format = NULL, dtype = NULL)
 #' whether to display if a layer is trainable.
 #'
 #' @param ...
-#' Passed on to the Python callable
+#' For forward/backward compatability.
 #'
 #' @export
 #' @family utils

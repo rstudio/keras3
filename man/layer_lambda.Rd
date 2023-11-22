@@ -39,7 +39,7 @@ of what the input is.}
 \item{arguments}{Optional named list of arguments to be passed to the
 function.}
 
-\item{...}{Passed on to the Python callable}
+\item{...}{For forward/backward compatability.}
 }
 \description{
 The \code{layer_lambda()} layer exists so that arbitrary expressions can be used

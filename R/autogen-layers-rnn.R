@@ -81,7 +81,7 @@
 #' Object to compose the layer with. A tensor, array, or sequential model.
 #'
 #' @param ...
-#' Passed on to the Python callable
+#' For forward/backward compatability.
 #'
 #' @param weights
 #' see description
@@ -274,7 +274,7 @@ function (object, layer, merge_mode = "concat", weights = NULL,
 #' Object to compose the layer with. A tensor, array, or sequential model.
 #'
 #' @param ...
-#' Passed on to the Python callable
+#' For forward/backward compatability.
 #'
 #' @export
 #' @family rnn layers
@@ -473,7 +473,7 @@ function (object, filters, kernel_size, strides = 1L, padding = "valid",
 #' Object to compose the layer with. A tensor, array, or sequential model.
 #'
 #' @param ...
-#' Passed on to the Python callable
+#' For forward/backward compatability.
 #'
 #' @export
 #' @family rnn layers
@@ -671,7 +671,7 @@ function (object, filters, kernel_size, strides = 1L, padding = "valid",
 #' Object to compose the layer with. A tensor, array, or sequential model.
 #'
 #' @param ...
-#' Passed on to the Python callable
+#' For forward/backward compatability.
 #'
 #' @export
 #' @family rnn layers
@@ -866,7 +866,7 @@ function (object, filters, kernel_size, strides = 1L, padding = "valid",
 #' Object to compose the layer with. A tensor, array, or sequential model.
 #'
 #' @param ...
-#' Passed on to the Python callable
+#' For forward/backward compatability.
 #'
 #' @export
 #' @family gru rnn layers
@@ -992,7 +992,7 @@ function (object, units, activation = "tanh", recurrent_activation = "sigmoid",
 #' Random seed for dropout.
 #'
 #' @param ...
-#' Passed on to the Python callable
+#' For forward/backward compatability.
 #'
 #' @export
 #' @family gru rnn layers
@@ -1173,7 +1173,7 @@ function (units, activation = "tanh", recurrent_activation = "sigmoid",
 #' Object to compose the layer with. A tensor, array, or sequential model.
 #'
 #' @param ...
-#' Passed on to the Python callable
+#' For forward/backward compatability.
 #'
 #' @export
 #' @family lstm rnn layers
@@ -1302,7 +1302,7 @@ function (object, units, activation = "tanh", recurrent_activation = "sigmoid",
 #' Random seed for dropout.
 #'
 #' @param ...
-#' Passed on to the Python callable
+#' For forward/backward compatability.
 #'
 #' @export
 #' @family lstm rnn layers
@@ -1508,7 +1508,7 @@ function (units, activation = "tanh", recurrent_activation = "sigmoid",
 #' Object to compose the layer with. A tensor, array, or sequential model.
 #'
 #' @param ...
-#' Passed on to the Python callable
+#' For forward/backward compatability.
 #'
 #' @export
 #' @family rnn layers
@@ -1658,7 +1658,7 @@ function (object, cell, return_sequences = FALSE, return_state = FALSE,
 #' Initial seed for the random number generator
 #'
 #' @param ...
-#' Passed on to the Python callable
+#' For forward/backward compatability.
 #'
 #' @export
 #' @family simple rnn layers
@@ -1777,7 +1777,7 @@ function (object, units, activation = "tanh", use_bias = TRUE,
 #' Random seed for dropout.
 #'
 #' @param ...
-#' Passed on to the Python callable
+#' For forward/backward compatability.
 #'
 #' @export
 #' @family simple rnn layers
@@ -1826,7 +1826,7 @@ function (units, activation = "tanh", use_bias = TRUE, kernel_initializer = "glo
 #' List of RNN cell instances.
 #'
 #' @param ...
-#' Passed on to the Python callable
+#' For forward/backward compatability.
 #'
 #' @export
 #' @family rnn layers
@@ -1884,7 +1884,7 @@ function (cells, ...)
 #' Object to compose the layer with. A tensor, array, or sequential model.
 #'
 #' @param ...
-#' Passed on to the Python callable
+#' For forward/backward compatability.
 #'
 #' @export
 #' @family rnn layers

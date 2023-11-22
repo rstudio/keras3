@@ -11,7 +11,7 @@ layer_time_distributed(object, layer, ...)
 
 \item{layer}{a \code{layer_Layer} instance.}
 
-\item{...}{Passed on to the Python callable}
+\item{...}{For forward/backward compatability.}
 }
 \description{
 Every input should be at least 3D, and the dimension of index one of the

@@ -89,7 +89,7 @@
 #' Object to compose the layer with. A tensor, array, or sequential model.
 #'
 #' @param ...
-#' Passed on to the Python callable
+#' For forward/backward compatability.
 #'
 #' @export
 #' @family preprocessing layers
@@ -156,7 +156,7 @@ function (object, num_tokens = NULL, output_mode = "multi_hot",
 #' Object to compose the layer with. A tensor, array, or sequential model.
 #'
 #' @param ...
-#' Passed on to the Python callable
+#' For forward/backward compatability.
 #'
 #' @export
 #' @family preprocessing layers
@@ -839,7 +839,7 @@ function (object, num_bins, mask_value = NULL, salt = NULL, output_mode = "int",
 #' String, name for the object
 #'
 #' @param ...
-#' Passed on to the Python callable
+#' For forward/backward compatability.
 #'
 #' @export
 #' @family preprocessing layers
@@ -957,7 +957,7 @@ function (object, max_tokens = NULL, num_oov_indices = 1L, mask_token = NULL,
 #' Object to compose the layer with. A tensor, array, or sequential model.
 #'
 #' @param ...
-#' Passed on to the Python callable
+#' For forward/backward compatability.
 #'
 #' @export
 #' @family preprocessing layers
@@ -1039,7 +1039,7 @@ function (object, axis = -1L, mean = NULL, variance = NULL, invert = FALSE,
 #' Object to compose the layer with. A tensor, array, or sequential model.
 #'
 #' @param ...
-#' Passed on to the Python callable
+#' For forward/backward compatability.
 #'
 #' @export
 #' @family preprocessing layers
@@ -1102,7 +1102,7 @@ function (object, factor, value_range = list(0L, 255L), seed = NULL,
 #' Object to compose the layer with. A tensor, array, or sequential model.
 #'
 #' @param ...
-#' Passed on to the Python callable
+#' For forward/backward compatability.
 #'
 #' @export
 #' @family preprocessing layers
@@ -1315,7 +1315,7 @@ function (object, mode = "horizontal_and_vertical", seed = NULL,
 #' Object to compose the layer with. A tensor, array, or sequential model.
 #'
 #' @param ...
-#' Passed on to the Python callable
+#' For forward/backward compatability.
 #'
 #' @param value_range
 #' see description
@@ -2005,7 +2005,7 @@ function (object, height, width, interpolation = "bilinear",
 #' String, name for the object
 #'
 #' @param ...
-#' Passed on to the Python callable
+#' For forward/backward compatability.
 #'
 #' @export
 #' @family preprocessing layers
@@ -2252,7 +2252,7 @@ function (object, max_tokens = NULL, num_oov_indices = 1L, mask_token = NULL,
 #' String, name for the object
 #'
 #' @param ...
-#' Passed on to the Python callable
+#' For forward/backward compatability.
 #'
 #' @export
 #' @family preprocessing layers

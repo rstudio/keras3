@@ -41,7 +41,7 @@ while \code{"channels_first"} corresponds to inputs with shape
 
 \item{name}{String, name for the object}
 
-\item{...}{Passed on to the Python callable}
+\item{...}{For forward/backward compatability.}
 }
 \description{
 Downsamples the input along its spatial dimensions (height and width)

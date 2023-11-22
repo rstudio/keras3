@@ -62,7 +62,7 @@ the boundaries when \code{fill_mode="constant"}.}
 
 \item{data_format}{see description}
 
-\item{...}{Passed on to the Python callable}
+\item{...}{For forward/backward compatability.}
 }
 \description{
 This layer will apply random rotations to each image, filling empty space

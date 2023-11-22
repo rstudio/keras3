@@ -14,7 +14,7 @@ metric_specificity_at_sensitivity(
 )
 }
 \arguments{
-\item{...}{Passed on to the Python callable}
+\item{...}{For forward/backward compatability.}
 
 \item{sensitivity}{A scalar value in range \verb{[0, 1]}.}
 

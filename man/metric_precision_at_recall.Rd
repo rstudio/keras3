@@ -14,7 +14,7 @@ metric_precision_at_recall(
 )
 }
 \arguments{
-\item{...}{Passed on to the Python callable}
+\item{...}{For forward/backward compatability.}
 
 \item{recall}{A scalar value in range \verb{[0, 1]}.}
 

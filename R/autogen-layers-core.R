@@ -70,7 +70,7 @@
 #' Object to compose the layer with. A tensor, array, or sequential model.
 #'
 #' @param ...
-#' Passed on to the Python callable
+#' For forward/backward compatability.
 #'
 #' @export
 #' @family core layers
@@ -317,7 +317,7 @@ function (object, input_dim, output_dim, embeddings_initializer = "uniform",
 #' Object to compose the layer with. A tensor, array, or sequential model.
 #'
 #' @param ...
-#' Passed on to the Python callable
+#' For forward/backward compatability.
 #'
 #' @export
 #' @family core layers
@@ -459,7 +459,7 @@ function (shape = NULL, batch_size = NULL, dtype = NULL, sparse = NULL,
 #' Object to compose the layer with. A tensor, array, or sequential model.
 #'
 #' @param ...
-#' Passed on to the Python callable
+#' For forward/backward compatability.
 #'
 #' @export
 #' @family core layers
@@ -523,7 +523,7 @@ function (object, f, output_shape = NULL, mask = NULL, arguments = NULL,
 #' Object to compose the layer with. A tensor, array, or sequential model.
 #'
 #' @param ...
-#' Passed on to the Python callable
+#' For forward/backward compatability.
 #'
 #' @param mask_value
 #' see description

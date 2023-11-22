@@ -115,7 +115,7 @@ Unrolling is only suitable for short sequences.}
 before matrix multiplication). \code{FALSE} is \code{"before"},
 \code{TRUE} is \code{"after"} (default and cuDNN compatible).}
 
-\item{...}{Passed on to the Python callable}
+\item{...}{For forward/backward compatability.}
 }
 \description{
 Based on available runtime hardware and constraints, this layer

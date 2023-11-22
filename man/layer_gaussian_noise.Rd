@@ -13,7 +13,7 @@ layer_gaussian_noise(object, stddev, seed = NULL, ...)
 
 \item{seed}{Integer, optional random seed to enable deterministic behavior.}
 
-\item{...}{Passed on to the Python callable}
+\item{...}{For forward/backward compatability.}
 }
 \description{
 This is useful to mitigate overfitting

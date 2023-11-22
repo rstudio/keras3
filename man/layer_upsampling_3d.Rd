@@ -24,7 +24,7 @@ When unspecified, uses
 \verb{~/.keras/keras.json} (if exists) else \code{"channels_last"}.
 Defaults to \code{"channels_last"}.}
 
-\item{...}{Passed on to the Python callable}
+\item{...}{For forward/backward compatability.}
 }
 \description{
 Repeats the 1st, 2nd and 3rd dimensions

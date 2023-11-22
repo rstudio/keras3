@@ -48,7 +48,7 @@ layer_group_query_attention(
 
 \item{bias_constraint}{Constraint for dense layer kernels.}
 
-\item{...}{Passed on to the Python callable}
+\item{...}{For forward/backward compatability.}
 }
 \value{
 attention_output: Result of the computation, of shape

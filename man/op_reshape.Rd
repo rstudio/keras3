@@ -9,7 +9,7 @@ op_reshape(x, ..., new_shape = list(...))
 \arguments{
 \item{x}{Input tensor.}
 
-\item{...}{Passed on to the Python callable}
+\item{...}{For forward/backward compatability.}
 
 \item{new_shape}{The new shape should be compatible with the original shape.
 One shape dimension can be -1 in which case the value is

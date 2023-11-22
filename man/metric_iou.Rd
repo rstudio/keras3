@@ -17,7 +17,7 @@ metric_iou(
 )
 }
 \arguments{
-\item{...}{Passed on to the Python callable}
+\item{...}{For forward/backward compatability.}
 
 \item{num_classes}{The possible number of labels the prediction task can have.}
 

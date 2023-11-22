@@ -130,7 +130,7 @@ strings. Defaults to \code{"utf-8"}.}
 
 \item{name}{String, name for the object}
 
-\item{...}{Passed on to the Python callable}
+\item{...}{For forward/backward compatability.}
 
 \item{include_special_tokens}{If True, the returned vocabulary will include
 the padding and OOV tokens, and a term's index in the vocabulary will equal

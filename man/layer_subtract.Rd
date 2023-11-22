@@ -9,7 +9,7 @@ layer_subtract(inputs, ...)
 \arguments{
 \item{inputs}{layers to combine}
 
-\item{...}{Passed on to the Python callable}
+\item{...}{For forward/backward compatability.}
 }
 \description{
 It takes as input a list of tensors of size 2 both of the

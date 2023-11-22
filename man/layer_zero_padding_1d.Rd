@@ -17,7 +17,7 @@ the padding dimension (axis 1).
 end of the padding dimension (\verb{(left_pad, right_pad)}).
 }}
 
-\item{...}{Passed on to the Python callable}
+\item{...}{For forward/backward compatability.}
 }
 \description{
 Zero-padding layer for 1D input (e.g. temporal sequence).

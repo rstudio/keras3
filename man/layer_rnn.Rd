@@ -75,7 +75,7 @@ It can useful if you want to reuse the raw output sequence of
 the RNN without interference from the masked timesteps, e.g.,
 merging bidirectional RNNs.}
 
-\item{...}{Passed on to the Python callable}
+\item{...}{For forward/backward compatability.}
 }
 \description{
 Base class for recurrent layer_

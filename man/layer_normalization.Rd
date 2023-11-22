@@ -43,7 +43,7 @@ this layer's \code{build()} method is called.}
 to its inputs: it would turn a normalized input back into its
 original form.}
 
-\item{...}{Passed on to the Python callable}
+\item{...}{For forward/backward compatability.}
 }
 \description{
 This layer will shift and scale inputs into a distribution centered around

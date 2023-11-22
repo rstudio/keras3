@@ -126,7 +126,7 @@ reversed sequence.}
 for each sample at index i in a batch will be used as initial
 state for the sample of index i in the following batch.}
 
-\item{...}{Passed on to the Python callable}
+\item{...}{For forward/backward compatability.}
 
 \item{unroll}{Boolean (default: \code{False}).
 If \code{True}, the network will be unrolled,

@@ -43,7 +43,7 @@ have an \code{activation} property).}
 
 \item{show_trainable}{whether to display if a layer is trainable.}
 
-\item{...}{Passed on to the Python callable}
+\item{...}{For forward/backward compatability.}
 }
 \value{
 A \code{pydot.Dot} instance representing the Keras model or

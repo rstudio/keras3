@@ -21,7 +21,7 @@ loss_huber(
 \item{delta}{A float, the point where the Huber loss function changes from a
 quadratic to linear. Defaults to \code{1.0}.}
 
-\item{...}{Passed on to the Python callable}
+\item{...}{For forward/backward compatability.}
 
 \item{reduction}{Type of reduction to apply to loss. Options are \code{"sum"},
 \code{"sum_over_batch_size"} or \code{NULL}. Defaults to

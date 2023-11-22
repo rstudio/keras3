@@ -12,7 +12,7 @@ layer_reshape(object, target_shape, ...)
 \item{target_shape}{Target shape. List of integers, does not include the
 samples dimension (batch size).}
 
-\item{...}{Passed on to the Python callable}
+\item{...}{For forward/backward compatability.}
 }
 \description{
 Layer that reshapes inputs into the given shape.

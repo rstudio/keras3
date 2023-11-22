@@ -116,7 +116,7 @@ Unrolling can speed-up a RNN,
 although it tends to be more memory-intensive.
 Unrolling is only suitable for short sequences.}
 
-\item{...}{Passed on to the Python callable}
+\item{...}{For forward/backward compatability.}
 }
 \description{
 Based on available runtime hardware and constraints, this layer

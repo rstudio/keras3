@@ -9,7 +9,7 @@ layer_identity(object, ...)
 \arguments{
 \item{object}{Object to compose the layer with. A tensor, array, or sequential model.}
 
-\item{...}{Passed on to the Python callable}
+\item{...}{For forward/backward compatability.}
 }
 \description{
 This layer should be used as a placeholder when no operation is to be

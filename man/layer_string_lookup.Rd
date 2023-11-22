@@ -111,7 +111,7 @@ strings. Defaults to \code{"utf-8"}.}
 
 \item{name}{String, name for the object}
 
-\item{...}{Passed on to the Python callable}
+\item{...}{For forward/backward compatability.}
 
 \item{vocabulary_dtype}{The dtype of the vocabulary terms, for example
 \code{"int64"} or \code{"int32"}. Defaults to \code{"int64"}.}

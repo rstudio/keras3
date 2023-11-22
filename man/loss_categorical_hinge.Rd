@@ -19,7 +19,7 @@ shape <- \verb{[batch_size, d0, .. dN]}.}
 
 \item{y_pred}{The predicted values with shape = \verb{[batch_size, d0, .. dN]}.}
 
-\item{...}{Passed on to the Python callable}
+\item{...}{For forward/backward compatability.}
 
 \item{reduction}{Type of reduction to apply to the loss. In almost all cases
 this should be \code{"sum_over_batch_size"}.

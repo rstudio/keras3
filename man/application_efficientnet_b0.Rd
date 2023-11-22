@@ -58,7 +58,7 @@ Defaults to \code{'softmax'}.
 When loading pretrained weights, \code{classifier_activation} can only
 be \code{None} or \code{"softmax"}.}
 
-\item{...}{Passed on to the Python callable}
+\item{...}{For forward/backward compatability.}
 }
 \value{
 \if{html}{\out{<div class="sourceCode">}}\preformatted{A model instance.

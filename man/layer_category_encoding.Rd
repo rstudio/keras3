@@ -38,7 +38,7 @@ For all output modes, currently only output up to rank 2 is
 supported.
 Defaults to \code{"multi_hot"}.}
 
-\item{...}{Passed on to the Python callable}
+\item{...}{For forward/backward compatability.}
 }
 \description{
 This layer provides options for condensing data into a categorical encoding

@@ -21,7 +21,7 @@ metric_binary_accuracy(
 \item{threshold}{(Optional) Float representing the threshold for deciding
 whether prediction values are 1 or 0.}
 
-\item{...}{Passed on to the Python callable}
+\item{...}{For forward/backward compatability.}
 
 \item{name}{(Optional) string name of the metric instance.}
 

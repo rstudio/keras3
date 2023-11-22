@@ -5737,7 +5737,7 @@ function (x, repeats, axis = NULL)
 #' inferred from the length of the array and remaining dimensions.
 #'
 #' @param ...
-#' Passed on to the Python callable
+#' For forward/backward compatability.
 #'
 #' @export
 #' @family numpy ops

@@ -11,7 +11,7 @@ layer_masking(object, mask_value = 0, ...)
 
 \item{mask_value}{see description}
 
-\item{...}{Passed on to the Python callable}
+\item{...}{For forward/backward compatability.}
 }
 \description{
 For each timestep in the input tensor (dimension #1 in the tensor),

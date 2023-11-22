@@ -32,7 +32,7 @@
 #' ```
 #'
 #' @param ...
-#' Passed on to the Python callable
+#' For forward/backward compatability.
 #'
 #' @param inputs
 #' layers to combine
@@ -95,7 +95,7 @@ function (inputs, ...)
 #' ```
 #'
 #' @param ...
-#' Passed on to the Python callable
+#' For forward/backward compatability.
 #'
 #' @param inputs
 #' layers to combine
@@ -299,7 +299,7 @@ function (inputs, ..., axes, normalize = FALSE)
 #' ```
 #'
 #' @param ...
-#' Passed on to the Python callable
+#' For forward/backward compatability.
 #'
 #' @param inputs
 #' layers to combine
@@ -360,7 +360,7 @@ function (inputs, ...)
 #' ```
 #'
 #' @param ...
-#' Passed on to the Python callable
+#' For forward/backward compatability.
 #'
 #' @param inputs
 #' layers to combine
@@ -421,7 +421,7 @@ function (inputs, ...)
 #' ```
 #'
 #' @param ...
-#' Passed on to the Python callable
+#' For forward/backward compatability.
 #'
 #' @param inputs
 #' layers to combine
@@ -482,7 +482,7 @@ function (inputs, ...)
 #' ```
 #'
 #' @param ...
-#' Passed on to the Python callable
+#' For forward/backward compatability.
 #'
 #' @param inputs
 #' layers to combine

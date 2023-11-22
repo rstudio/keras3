@@ -60,7 +60,7 @@ None by default.}
 \item{gamma_constraint}{Optional constraint for the gamma weight. None by
 default.}
 
-\item{...}{Passed on to the Python callable}
+\item{...}{For forward/backward compatability.}
 }
 \description{
 Group Normalization divides the channels into groups and computes

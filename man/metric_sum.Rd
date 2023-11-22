@@ -7,7 +7,7 @@
 metric_sum(..., name = "sum", dtype = NULL)
 }
 \arguments{
-\item{...}{Passed on to the Python callable}
+\item{...}{For forward/backward compatability.}
 
 \item{name}{(Optional) string name of the metric instance.}
 

@@ -81,7 +81,7 @@ are not safe to use when doing asynchronous distributed training.}
 \item{bias_constraint}{Optional projection function to be applied to the
 bias after being updated by an \code{Optimizer}.}
 
-\item{...}{Passed on to the Python callable}
+\item{...}{For forward/backward compatability.}
 }
 \value{
 A 5D tensor representing \code{activation(conv3d(inputs, kernel) + bias)}.

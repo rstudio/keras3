@@ -2077,6 +2077,12 @@ endpoint_to_expr <- function(endpoint) {
   py_obj_expr
 }
 
+modify_roxy_blocks <- function(fn) {
+  # function that take blocklines as argument
+  .NotYetImplemented()
+
+}
+
 # rename2(list(a = "b", a = z))
 
 

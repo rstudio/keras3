@@ -19,7 +19,7 @@ metric_auc(
 )
 }
 \arguments{
-\item{...}{Passed on to the Python callable}
+\item{...}{For forward/backward compatability.}
 
 \item{num_thresholds}{(Optional) The number of thresholds to
 use when discretizing the roc curve. Values must be > 1.

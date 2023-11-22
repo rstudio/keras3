@@ -70,7 +70,7 @@ for the linear transformation of the recurrent state. Default: 0.}
 
 \item{seed}{Random seed for dropout.}
 
-\item{...}{Passed on to the Python callable}
+\item{...}{For forward/backward compatability.}
 }
 \description{
 This class processes one step within the whole time sequence input, whereas

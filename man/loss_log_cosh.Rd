@@ -17,7 +17,7 @@ loss_log_cosh(
 
 \item{y_pred}{The predicted values with shape = \verb{[batch_size, d0, .. dN]}.}
 
-\item{...}{Passed on to the Python callable}
+\item{...}{For forward/backward compatability.}
 
 \item{reduction}{Type of reduction to apply to loss. Options are \code{"sum"},
 \code{"sum_over_batch_size"} or \code{NULL}. Defaults to

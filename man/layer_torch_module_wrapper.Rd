@@ -16,7 +16,7 @@ it once).}
 
 \item{name}{The name of the layer (string).}
 
-\item{...}{Passed on to the Python callable}
+\item{...}{For forward/backward compatability.}
 }
 \description{
 \code{layer_torch_module_wrapper} is a wrapper class that can turn any

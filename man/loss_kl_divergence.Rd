@@ -17,7 +17,7 @@ loss_kl_divergence(
 
 \item{y_pred}{Tensor of predicted targets.}
 
-\item{...}{Passed on to the Python callable}
+\item{...}{For forward/backward compatability.}
 
 \item{reduction}{Type of reduction to apply to the loss. In almost all cases
 this should be \code{"sum_over_batch_size"}.

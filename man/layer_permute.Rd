@@ -14,7 +14,7 @@ batch dimension. Indexing starts at 1.
 For instance, \code{c(2, 1)} permutes the first and second dimensions
 of the input.}
 
-\item{...}{Passed on to the Python callable}
+\item{...}{For forward/backward compatability.}
 }
 \description{
 Useful e.g. connecting RNNs and convnets.

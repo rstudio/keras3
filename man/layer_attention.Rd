@@ -26,7 +26,7 @@ of the concatenation of the \code{query} and \code{key} vectors.}
 \item{dropout}{Float between 0 and 1. Fraction of the units to drop for the
 attention scores. Defaults to \code{0.0}.}
 
-\item{...}{Passed on to the Python callable}
+\item{...}{For forward/backward compatability.}
 }
 \description{
 Inputs are a list with 2 or 3 elements:

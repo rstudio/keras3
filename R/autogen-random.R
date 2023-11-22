@@ -381,7 +381,7 @@ function (shape, minval = 0, maxval = 1, dtype = NULL, seed = NULL)
 #' Initial seed for the random number generator
 #'
 #' @param ...
-#' Passed on to the Python callable
+#' For forward/backward compatability.
 #'
 #' @export
 #' @family random

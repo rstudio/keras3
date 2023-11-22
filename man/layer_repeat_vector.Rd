@@ -11,7 +11,7 @@ layer_repeat_vector(object, n, ...)
 
 \item{n}{Integer, repetition factor.}
 
-\item{...}{Passed on to the Python callable}
+\item{...}{For forward/backward compatability.}
 }
 \description{
 Repeats the input n times.

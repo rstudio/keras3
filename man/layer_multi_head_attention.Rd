@@ -57,7 +57,7 @@ attention over all axes, but batch, heads, and features.}
 
 \item{bias_constraint}{Constraint for dense layer kernels.}
 
-\item{...}{Passed on to the Python callable}
+\item{...}{For forward/backward compatability.}
 }
 \value{
 attention_output: The result of the computation, of shape \verb{(B, T, E)},

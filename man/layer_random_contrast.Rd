@@ -19,7 +19,7 @@ where \code{mean} is the mean value of the channel.}
 
 \item{seed}{Integer. Used to create a random seed.}
 
-\item{...}{Passed on to the Python callable}
+\item{...}{For forward/backward compatability.}
 }
 \description{
 This layer will randomly adjust the contrast of an image or images

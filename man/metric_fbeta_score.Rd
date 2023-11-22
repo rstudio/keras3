@@ -14,7 +14,7 @@ metric_fbeta_score(
 )
 }
 \arguments{
-\item{...}{Passed on to the Python callable}
+\item{...}{For forward/backward compatability.}
 
 \item{average}{Type of averaging to be performed across per-class results
 in the multi-class case.

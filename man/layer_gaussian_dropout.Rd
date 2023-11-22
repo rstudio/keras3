@@ -15,7 +15,7 @@ standard deviation \code{sqrt(rate / (1 - rate))}.}
 
 \item{seed}{Integer, optional random seed to enable deterministic behavior.}
 
-\item{...}{Passed on to the Python callable}
+\item{...}{For forward/backward compatability.}
 }
 \description{
 As it is a regularization layer, it is only active at training time.

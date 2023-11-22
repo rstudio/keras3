@@ -23,7 +23,7 @@ reduced for spatial dimensions. If \code{keepdims} is \code{TRUE}, the
 temporal dimension are retained with length 1.
 The behavior is the same as for \code{tf$reduce_mean()} or \code{op_mean()}.}
 
-\item{...}{Passed on to the Python callable}
+\item{...}{For forward/backward compatability.}
 }
 \description{
 Global max pooling operation for temporal data.

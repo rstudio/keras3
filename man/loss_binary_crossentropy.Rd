@@ -33,7 +33,7 @@ squeezes the labels towards 0.5. Larger values of
 \item{axis}{The axis along which to compute crossentropy (the features axis).
 Defaults to \code{-1}.}
 
-\item{...}{Passed on to the Python callable}
+\item{...}{For forward/backward compatability.}
 
 \item{reduction}{Type of reduction to apply to the loss. In almost all cases
 this should be \code{"sum_over_batch_size"}.

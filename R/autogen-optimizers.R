@@ -91,7 +91,7 @@
 #' automatically set a loss scale factor.
 #'
 #' @param ...
-#' Passed on to the Python callable
+#' For forward/backward compatability.
 #'
 #' @export
 #' @family optimizers
@@ -208,7 +208,7 @@ function (learning_rate = 0.001, rho = 0.95, epsilon = 1e-07,
 #' automatically set a loss scale factor.
 #'
 #' @param ...
-#' Passed on to the Python callable
+#' For forward/backward compatability.
 #'
 #' @export
 #' @family optimizers
@@ -312,7 +312,7 @@ function (learning_rate = 0.001, beta_2_decay = -0.8, epsilon_1 = 1e-30,
 #' automatically set a loss scale factor.
 #'
 #' @param ...
-#' Passed on to the Python callable
+#' For forward/backward compatability.
 #'
 #' @export
 #' @family optimizers
@@ -429,7 +429,7 @@ function (learning_rate = 0.001, initial_accumulator_value = 0.1,
 #' automatically set a loss scale factor.
 #'
 #' @param ...
-#' Passed on to the Python callable
+#' For forward/backward compatability.
 #'
 #' @export
 #' @family optimizers
@@ -555,7 +555,7 @@ function (learning_rate = 0.001, beta_1 = 0.9, beta_2 = 0.999,
 #' String, name for the object
 #'
 #' @param ...
-#' Passed on to the Python callable
+#' For forward/backward compatability.
 #'
 #' @export
 #' @family optimizers
@@ -682,7 +682,7 @@ function (learning_rate = 0.001, beta_1 = 0.9, beta_2 = 0.999,
 #' automatically set a loss scale factor.
 #'
 #' @param ...
-#' Passed on to the Python callable
+#' For forward/backward compatability.
 #'
 #' @export
 #' @family optimizers
@@ -839,7 +839,7 @@ function (learning_rate = 0.001, weight_decay = 0.004, beta_1 = 0.9,
 #' automatically set a loss scale factor.
 #'
 #' @param ...
-#' Passed on to the Python callable
+#' For forward/backward compatability.
 #'
 #' @export
 #' @family optimizers
@@ -954,7 +954,7 @@ function (learning_rate = 0.001, learning_rate_power = -0.5,
 #' automatically set a loss scale factor.
 #'
 #' @param ...
-#' Passed on to the Python callable
+#' For forward/backward compatability.
 #'
 #' @export
 #' @family optimizers
@@ -1060,7 +1060,7 @@ function (learning_rate = 0.001, beta_1 = 0.9, beta_2 = 0.99,
 #' automatically set a loss scale factor.
 #'
 #' @param ...
-#' Passed on to the Python callable
+#' For forward/backward compatability.
 #'
 #' @export
 #' @family optimizers
@@ -1168,7 +1168,7 @@ function (inner_optimizer, initial_scale = 32768, dynamic_growth_steps = 2000L,
 #' automatically set a loss scale factor.
 #'
 #' @param ...
-#' Passed on to the Python callable
+#' For forward/backward compatability.
 #'
 #' @export
 #' @family optimizers
@@ -1290,7 +1290,7 @@ function (learning_rate = 0.001, beta_1 = 0.9, beta_2 = 0.999,
 #' automatically set a loss scale factor.
 #'
 #' @param ...
-#' Passed on to the Python callable
+#' For forward/backward compatability.
 #'
 #' @export
 #' @family optimizers
@@ -1404,7 +1404,7 @@ function (learning_rate = 0.001, rho = 0.9, momentum = 0, epsilon = 1e-07,
 #' automatically set a loss scale factor.
 #'
 #' @param ...
-#' Passed on to the Python callable
+#' For forward/backward compatability.
 #'
 #' @export
 #' @family optimizers

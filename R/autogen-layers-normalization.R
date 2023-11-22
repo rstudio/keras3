@@ -240,7 +240,7 @@ function (object, axis = -1L, momentum = 0.99, epsilon = 0.001,
 #' Object to compose the layer with. A tensor, array, or sequential model.
 #'
 #' @param ...
-#' Passed on to the Python callable
+#' For forward/backward compatability.
 #'
 #' @export
 #' @family normalization layers
@@ -478,7 +478,7 @@ function (object, layer, power_iterations = 1L, ...)
 #' Object to compose the layer with. A tensor, array, or sequential model.
 #'
 #' @param ...
-#' Passed on to the Python callable
+#' For forward/backward compatability.
 #'
 #' @export
 #' @family normalization layers

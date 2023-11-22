@@ -13,7 +13,7 @@ metric_f1_score(
 )
 }
 \arguments{
-\item{...}{Passed on to the Python callable}
+\item{...}{For forward/backward compatability.}
 
 \item{average}{Type of averaging to be performed on data.
 Acceptable values are \code{NULL}, \code{"micro"}, \code{"macro"}

@@ -838,7 +838,7 @@ function (include_top = TRUE, weights = "imagenet", input_tensor = NULL,
 #' be `None` or `"softmax"`.
 #'
 #' @param ...
-#' Passed on to the Python callable
+#' For forward/backward compatability.
 #'
 #' @export
 #' @seealso
@@ -933,7 +933,7 @@ function (include_top = TRUE, weights = "imagenet", input_tensor = NULL,
 #' be `None` or `"softmax"`.
 #'
 #' @param ...
-#' Passed on to the Python callable
+#' For forward/backward compatability.
 #'
 #' @export
 #' @seealso
@@ -1028,7 +1028,7 @@ function (include_top = TRUE, weights = "imagenet", input_tensor = NULL,
 #' be `None` or `"softmax"`.
 #'
 #' @param ...
-#' Passed on to the Python callable
+#' For forward/backward compatability.
 #'
 #' @export
 #' @seealso
@@ -1123,7 +1123,7 @@ function (include_top = TRUE, weights = "imagenet", input_tensor = NULL,
 #' be `None` or `"softmax"`.
 #'
 #' @param ...
-#' Passed on to the Python callable
+#' For forward/backward compatability.
 #'
 #' @export
 #' @seealso
@@ -1218,7 +1218,7 @@ function (include_top = TRUE, weights = "imagenet", input_tensor = NULL,
 #' be `None` or `"softmax"`.
 #'
 #' @param ...
-#' Passed on to the Python callable
+#' For forward/backward compatability.
 #'
 #' @export
 #' @seealso
@@ -1313,7 +1313,7 @@ function (include_top = TRUE, weights = "imagenet", input_tensor = NULL,
 #' be `None` or `"softmax"`.
 #'
 #' @param ...
-#' Passed on to the Python callable
+#' For forward/backward compatability.
 #'
 #' @export
 #' @seealso
@@ -1408,7 +1408,7 @@ function (include_top = TRUE, weights = "imagenet", input_tensor = NULL,
 #' be `None` or `"softmax"`.
 #'
 #' @param ...
-#' Passed on to the Python callable
+#' For forward/backward compatability.
 #'
 #' @export
 #' @seealso
@@ -1503,7 +1503,7 @@ function (include_top = TRUE, weights = "imagenet", input_tensor = NULL,
 #' be `None` or `"softmax"`.
 #'
 #' @param ...
-#' Passed on to the Python callable
+#' For forward/backward compatability.
 #'
 #' @export
 #' @seealso

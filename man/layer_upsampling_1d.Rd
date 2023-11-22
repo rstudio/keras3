@@ -11,7 +11,7 @@ layer_upsampling_1d(object, size = 2L, ...)
 
 \item{size}{Integer. Upsampling factor.}
 
-\item{...}{Passed on to the Python callable}
+\item{...}{For forward/backward compatability.}
 }
 \description{
 Repeats each temporal step \code{size} times along the time axis.

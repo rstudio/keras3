@@ -37,7 +37,7 @@ If you never set it, then it will be \code{"channels_last"}.}
 
 \item{name}{String, name for the object}
 
-\item{...}{Passed on to the Python callable}
+\item{...}{For forward/backward compatability.}
 }
 \description{
 Downsamples the input representation by taking the maximum value over a

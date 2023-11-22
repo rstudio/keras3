@@ -34,7 +34,7 @@ output values will be clipped to this range.}
 
 \item{seed}{optional integer, for fixed RNG behavior.}
 
-\item{...}{Passed on to the Python callable}
+\item{...}{For forward/backward compatability.}
 }
 \description{
 This layer will randomly increase/reduce the brightness for the input RGB
