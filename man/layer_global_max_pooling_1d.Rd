@@ -21,7 +21,7 @@ If you never set it, then it will be \code{"channels_last"}.}
 If \code{keepdims} is \code{FALSE} (default), the rank of the tensor is
 reduced for spatial dimensions. If \code{keepdims} is \code{TRUE}, the
 temporal dimension are retained with length 1.
-The behavior is the same as for \code{tf$reduce_mean()} or \code{k_mean()}.}
+The behavior is the same as for \code{tf$reduce_mean()} or \code{op_mean()}.}
 
 \item{...}{Passed on to the Python callable}
 }

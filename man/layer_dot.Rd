@@ -39,8 +39,8 @@ inputs. e.g. with \code{axes = c(1, 2)}, the dot product of \code{x}, and \code{
 will result in a tensor with shape \verb{(2, 5, 10)}
 }
 \section{Examples}{
-\if{html}{\out{<div class="sourceCode r">}}\preformatted{x <- k_reshape(0:9,   c(1, 5, 2))
-y <- k_reshape(10:19, c(1, 2, 5))
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{x <- op_reshape(0:9,   c(1, 5, 2))
+y <- op_reshape(10:19, c(1, 2, 5))
 layer_dot(x, y, axes=c(2, 3))
 }\if{html}{\out{</div>}}
 
@@ -51,8 +51,8 @@ layer_dot(x, y, axes=c(2, 3))
 
 Usage in a Keras model:
 
-\if{html}{\out{<div class="sourceCode r">}}\preformatted{x1 <- k_reshape(0:9, c(5, 2)) |> layer_dense(8)
-x2 <- k_reshape(10:19, c(5, 2)) |> layer_dense(8)
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{x1 <- op_reshape(0:9, c(5, 2)) |> layer_dense(8)
+x2 <- op_reshape(10:19, c(5, 2)) |> layer_dense(8)
 shape(x1)
 }\if{html}{\out{</div>}}
 

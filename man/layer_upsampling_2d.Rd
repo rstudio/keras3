@@ -42,7 +42,7 @@ to repeat the rows and columns of the data.
 }
 \section{Examples}{
 \if{html}{\out{<div class="sourceCode r">}}\preformatted{input_shape <- c(2, 2, 1, 3)
-x <- k_reshape(seq_len(prod(input_shape)), input_shape)
+x <- op_reshape(seq_len(prod(input_shape)), input_shape)
 print(x)
 }\if{html}{\out{</div>}}
 

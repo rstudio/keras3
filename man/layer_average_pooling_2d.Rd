@@ -80,7 +80,7 @@ The resulting output shape when using the \code{"same"} padding option is:
 \section{Examples}{
 \verb{strides=(1, 1)} and \code{padding="valid"}:
 
-\if{html}{\out{<div class="sourceCode r">}}\preformatted{x <- k_array(1:9, "float32") |> k_reshape(c(1, 3, 3, 1))
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{x <- op_array(1:9, "float32") |> op_reshape(c(1, 3, 3, 1))
 output <- x |>
   layer_average_pooling_2d(pool_size = c(2, 2),
                            strides = c(1, 1),
@@ -98,7 +98,7 @@ output
 
 \verb{strides=(2, 2)} and \code{padding="valid"}:
 
-\if{html}{\out{<div class="sourceCode r">}}\preformatted{x <- k_array(1:12, "float32") |> k_reshape(c(1, 3, 4, 1))
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{x <- op_array(1:12, "float32") |> op_reshape(c(1, 3, 4, 1))
 output <- x |>
   layer_average_pooling_2d(pool_size = c(2, 2),
                            strides = c(2, 2),
@@ -113,7 +113,7 @@ output
 
 \verb{stride=(1, 1)} and \code{padding="same"}:
 
-\if{html}{\out{<div class="sourceCode r">}}\preformatted{x <- k_array(1:9, "float32") |> k_reshape(c(1, 3, 3, 1))
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{x <- op_array(1:9, "float32") |> op_reshape(c(1, 3, 3, 1))
 output <- x |>
   layer_average_pooling_2d(pool_size = c(2, 2),
                            strides = c(1, 1),

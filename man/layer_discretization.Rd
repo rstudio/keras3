@@ -88,7 +88,7 @@ Same as input shape.
 \section{Examples}{
 Discretize float values based on provided buckets.
 
-\if{html}{\out{<div class="sourceCode r">}}\preformatted{input <- k_array(rbind(c(-1.5, 1, 3.4, 0.5),
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{input <- op_array(rbind(c(-1.5, 1, 3.4, 0.5),
                        c(0, 3, 1.3, 0),
                        c(-.5, 0, .5, 1),
                        c(1.5, 2, 2.5, 3)))

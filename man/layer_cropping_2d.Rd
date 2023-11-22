@@ -42,7 +42,7 @@ It crops along spatial dimensions, i.e. height and width.
 }
 \section{Examples}{
 \if{html}{\out{<div class="sourceCode r">}}\preformatted{input_shape <- c(2, 28, 28, 3)
-x <- k_arange(prod(input_shape), dtype ='int32') |> k_reshape(input_shape)
+x <- op_arange(prod(input_shape), dtype ='int32') |> op_reshape(input_shape)
 y <- x |> layer_cropping_2d(cropping=list(c(2, 2), c(4, 4)))
 shape(y)
 }\if{html}{\out{</div>}}

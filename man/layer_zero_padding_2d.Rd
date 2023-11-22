@@ -37,7 +37,7 @@ right side of an image tensor.
 }
 \section{Examples}{
 \if{html}{\out{<div class="sourceCode r">}}\preformatted{input_shape <- c(1, 1, 2, 2)
-x <- k_reshape(seq_len(prod(input_shape)), input_shape)
+x <- op_reshape(seq_len(prod(input_shape)), input_shape)
 x
 }\if{html}{\out{</div>}}
 

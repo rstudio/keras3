@@ -42,7 +42,7 @@ Zero-padding layer for 3D data (spatial or spatio-temporal).
 }
 \section{Examples}{
 \if{html}{\out{<div class="sourceCode r">}}\preformatted{input_shape <- c(1, 1, 2, 2, 3)
-x <- k_reshape(seq_len(prod(input_shape)), input_shape)
+x <- op_reshape(seq_len(prod(input_shape)), input_shape)
 x
 }\if{html}{\out{</div>}}
 

@@ -82,7 +82,7 @@ The resulting output shape when using the \code{"same"} padding option is:
 
 \if{html}{\out{<div class="sourceCode r">}}\preformatted{x <- rbind(c(1., 2., 3.),
            c(4., 5., 6.),
-           c(7., 8., 9.)) |> k_reshape(c(1, 3, 3, 1))
+           c(7., 8., 9.)) |> op_reshape(c(1, 3, 3, 1))
 max_pool_2d <- layer_max_pooling_2d(pool_size = c(2, 2),
                                     strides = c(1, 1),
                                     padding = "valid")
@@ -101,7 +101,7 @@ max_pool_2d(x)
 
 \if{html}{\out{<div class="sourceCode r">}}\preformatted{x <- rbind(c(1., 2., 3., 4.),
            c(5., 6., 7., 8.),
-           c(9., 10., 11., 12.)) |> k_reshape(c(1, 3, 4, 1))
+           c(9., 10., 11., 12.)) |> op_reshape(c(1, 3, 4, 1))
 max_pool_2d <- layer_max_pooling_2d(pool_size = c(2, 2),
                                     strides = c(2, 2),
                                     padding = "valid")
@@ -117,7 +117,7 @@ max_pool_2d(x)
 
 \if{html}{\out{<div class="sourceCode r">}}\preformatted{x <- rbind(c(1., 2., 3.),
            c(4., 5., 6.),
-           c(7., 8., 9.)) |> k_reshape(c(1, 3, 3, 1))
+           c(7., 8., 9.)) |> op_reshape(c(1, 3, 3, 1))
 max_pool_2d <- layer_max_pooling_2d(pool_size = c(2, 2),
                                     strides = c(1, 1),
                                     padding = "same")

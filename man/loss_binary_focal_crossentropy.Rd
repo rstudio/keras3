@@ -118,8 +118,8 @@ With the \code{compile()} API:
 As a standalone function:
 
 \if{html}{\out{<div class="sourceCode r">}}\preformatted{# Example 1: (batch_size = 1, number of samples = 4)
-y_true <- k_array(c(0, 1, 0, 0))
-y_pred <- k_array(c(-18.6, 0.51, 2.94, -12.8))
+y_true <- op_array(c(0, 1, 0, 0))
+y_pred <- op_array(c(-18.6, 0.51, 2.94, -12.8))
 loss <- loss_binary_focal_crossentropy(gamma = 2, from_logits = TRUE)
 loss(y_true, y_pred)
 }\if{html}{\out{</div>}}

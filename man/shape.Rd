@@ -95,14 +95,14 @@ shape(symbolic_tensor)
 \if{html}{\out{<div class="sourceCode">}}\preformatted{## shape(5, NA, 1, 2, 3, 4)
 }\if{html}{\out{</div>}}
 
-\if{html}{\out{<div class="sourceCode r">}}\preformatted{eager_tensor <- k_ones(c(1,2,3))
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{eager_tensor <- op_ones(c(1,2,3))
 shape(eager_tensor)
 }\if{html}{\out{</div>}}
 
 \if{html}{\out{<div class="sourceCode">}}\preformatted{## shape(1, 2, 3)
 }\if{html}{\out{</div>}}
 
-\if{html}{\out{<div class="sourceCode r">}}\preformatted{k_shape(eager_tensor)
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{op_shape(eager_tensor)
 }\if{html}{\out{</div>}}
 
 \if{html}{\out{<div class="sourceCode">}}\preformatted{## shape(1, 2, 3)
@@ -110,5 +110,5 @@ shape(eager_tensor)
 }
 
 \seealso{
-\code{\link[=k_shape]{k_shape()}}
+\code{\link[=op_shape]{op_shape()}}
 }

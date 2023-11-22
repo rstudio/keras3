@@ -119,7 +119,7 @@ cce(y_true, y_pred)
 }\if{html}{\out{</div>}}
 
 \if{html}{\out{<div class="sourceCode r">}}\preformatted{# Calling with 'sample_weight'.
-cce(y_true, y_pred, sample_weight = k_array(c(0.3, 0.7)))
+cce(y_true, y_pred, sample_weight = op_array(c(0.3, 0.7)))
 }\if{html}{\out{</div>}}
 
 \if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor(0.16320053, shape=(), dtype=float32)

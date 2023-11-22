@@ -67,8 +67,8 @@ model <- keras_model_sequential() \%>\%
 model \%>\% compile(optimizer = optimizer_sgd(), loss = 'mse')
 
 tryCatch(\{
-  model \%>\% fit(x = k_ones(c(5, 20)),
-                y = k_zeros(5),
+  model \%>\% fit(x = op_ones(c(5, 20)),
+                y = op_zeros(5),
                 epochs = 10, batch_size = 1,
                 callbacks = list(callback, callback_interrupting()),
                 verbose = 0)
@@ -86,8 +86,8 @@ tryCatch(\{
 
 \if{html}{\out{<div class="sourceCode r">}}\preformatted{# model$history \%>\% keras:::to_keras_training_history() \%>\% as.data.frame() \%>\% print()
 
-history <- model \%>\% fit(x = k_ones(c(5, 20)),
-                         y = k_zeros(5),
+history <- model \%>\% fit(x = op_ones(c(5, 20)),
+                         y = op_zeros(5),
                          epochs = 10, batch_size = 1,
                          callbacks = list(callback),
                          verbose = 0)

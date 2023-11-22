@@ -100,7 +100,7 @@ For example:
 
 \if{html}{\out{<div class="sourceCode r">}}\preformatted{layer <- layer_layer_normalization(axis = c(2, 3, 4))
 
-layer(k_ones(c(5, 20, 30, 40))) |> invisible() # build()
+layer(op_ones(c(5, 20, 30, 40))) |> invisible() # build()
 shape(layer$beta)
 }\if{html}{\out{</div>}}
 

@@ -33,7 +33,7 @@ frequency is ultimately returned as \verb{categorical accuracy}: an idempotent
 operation that simply divides \code{total} by \code{count}.
 
 \code{y_pred} and \code{y_true} should be passed in as vectors of probabilities,
-rather than as labels. If necessary, use \code{k_one_hot} to expand \code{y_true} as
+rather than as labels. If necessary, use \code{op_one_hot} to expand \code{y_true} as
 a vector.
 
 If \code{sample_weight} is \code{NULL}, weights default to 1.
@@ -81,8 +81,8 @@ Usage with \code{compile()} API:
 Other accuracy metrics: 
 \code{\link{metric_binary_accuracy}()},
 \code{\link{metric_sparse_categorical_accuracy}()},
-\code{\link{metric_sparse_top_k_categorical_accuracy}()},
-\code{\link{metric_top_k_categorical_accuracy}()}
+\code{\link{metric_sparse_top_op_categorical_accuracy}()},
+\code{\link{metric_top_op_categorical_accuracy}()}
 
 Other metrics: 
 \code{\link{custom_metric}()},
@@ -124,11 +124,11 @@ Other metrics:
 \code{\link{metric_sensitivity_at_specificity}()},
 \code{\link{metric_sparse_categorical_accuracy}()},
 \code{\link{metric_sparse_categorical_crossentropy}()},
-\code{\link{metric_sparse_top_k_categorical_accuracy}()},
+\code{\link{metric_sparse_top_op_categorical_accuracy}()},
 \code{\link{metric_specificity_at_sensitivity}()},
 \code{\link{metric_squared_hinge}()},
 \code{\link{metric_sum}()},
-\code{\link{metric_top_k_categorical_accuracy}()},
+\code{\link{metric_top_op_categorical_accuracy}()},
 \code{\link{metric_true_negatives}()},
 \code{\link{metric_true_positives}()}
 }

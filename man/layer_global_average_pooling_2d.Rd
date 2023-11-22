@@ -27,7 +27,7 @@ while \code{"channels_first"} corresponds to inputs with shape
 If \code{keepdims} is \code{FALSE} (default), the rank of the tensor is
 reduced for spatial dimensions. If \code{keepdims} is \code{TRUE}, the
 spatial dimension are retained with length 1.
-The behavior is the same as for \code{tf$reduce_mean()} or \code{k_mean()}.}
+The behavior is the same as for \code{tf$reduce_mean()} or \code{op_mean()}.}
 
 \item{...}{Passed on to the Python callable}
 }

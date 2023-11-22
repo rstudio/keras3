@@ -22,8 +22,8 @@ This utility makes it easy to support data of the form \verb{(x,)},
 \section{Usage}{
 Standalone usage:
 
-\if{html}{\out{<div class="sourceCode r">}}\preformatted{features_batch <- k_ones(c(10, 5))
-labels_batch <- k_zeros(c(10, 5))
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{features_batch <- op_ones(c(10, 5))
+labels_batch <- op_zeros(c(10, 5))
 data <- list(features_batch, labels_batch)
 # `y` and `sample_weight` will default to `NULL` if not provided.
 c(x, y, sample_weight) \%<-\% unpack_x_y_sample_weight(data)

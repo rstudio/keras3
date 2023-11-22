@@ -23,8 +23,8 @@ for the concatenation axis, and returns a single tensor that is the
 concatenation of all inputs.
 }
 \section{Examples}{
-\if{html}{\out{<div class="sourceCode r">}}\preformatted{x <- k_arange(20) |> k_reshape(c(2, 2, 5))
-y <- k_arange(20, 40) |> k_reshape(c(2, 2, 5))
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{x <- op_arange(20) |> op_reshape(c(2, 2, 5))
+y <- op_arange(20, 40) |> op_reshape(c(2, 2, 5))
 layer_concatenate(x, y, axis = 2)
 }\if{html}{\out{</div>}}
 
@@ -42,8 +42,8 @@ layer_concatenate(x, y, axis = 2)
 
 Usage in a Keras model:
 
-\if{html}{\out{<div class="sourceCode r">}}\preformatted{x1 <- k_arange(10)     |> k_reshape(c(5, 2)) |> layer_dense(8)
-x2 <- k_arange(10, 20) |> k_reshape(c(5, 2)) |> layer_dense(8)
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{x1 <- op_arange(10)     |> op_reshape(c(5, 2)) |> layer_dense(8)
+x2 <- op_arange(10, 20) |> op_reshape(c(5, 2)) |> layer_dense(8)
 y <- layer_concatenate(x1, x2)
 }\if{html}{\out{</div>}}
 }

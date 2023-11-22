@@ -18,7 +18,7 @@ Repeats each temporal step \code{size} times along the time axis.
 }
 \section{Examples}{
 \if{html}{\out{<div class="sourceCode r">}}\preformatted{input_shape <- c(2, 2, 3)
-x <- seq_len(prod(input_shape)) \%>\% k_reshape(input_shape)
+x <- seq_len(prod(input_shape)) \%>\% op_reshape(input_shape)
 x
 }\if{html}{\out{</div>}}
 

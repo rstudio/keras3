@@ -52,11 +52,11 @@ Other image utils:
 \code{\link{image_from_array}()},
 \code{\link{image_load}()},
 \code{\link{image_smart_resize}()},
-\code{\link{k_image_affine_transform}()},
-\code{\link{k_image_extract_patches}()},
-\code{\link{k_image_map_coordinates}()},
-\code{\link{k_image_pad_images}()},
-\code{\link{k_image_resize}()}
+\code{\link{op_image_affine_transform}()},
+\code{\link{op_image_extract_patches}()},
+\code{\link{op_image_map_coordinates}()},
+\code{\link{op_image_pad_images}()},
+\code{\link{op_image_resize}()}
 
 Other utils: 
 \code{\link{audio_dataset_from_directory}()},

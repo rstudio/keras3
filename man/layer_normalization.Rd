@@ -59,8 +59,8 @@ be called before \code{fit()}, \code{evaluate()}, or \code{predict()}.
 \section{Examples}{
 Calculate a global mean and variance by analyzing the dataset in \code{adapt()}.
 
-\if{html}{\out{<div class="sourceCode r">}}\preformatted{adapt_data <- k_array(c(1., 2., 3., 4., 5.), dtype='float32')
-input_data <- k_array(c(1., 2., 3.), dtype='float32')
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{adapt_data <- op_array(c(1., 2., 3., 4., 5.), dtype='float32')
+input_data <- op_array(c(1., 2., 3.), dtype='float32')
 layer <- layer_normalization(axis = NULL)
 layer \%>\% adapt(adapt_data)
 layer(input_data)
@@ -71,11 +71,11 @@ layer(input_data)
 
 Calculate a mean and variance for each index on the last axis.
 
-\if{html}{\out{<div class="sourceCode r">}}\preformatted{adapt_data <- k_array(rbind(c(0., 7., 4.),
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{adapt_data <- op_array(rbind(c(0., 7., 4.),
                        c(2., 9., 6.),
                        c(0., 7., 4.),
                        c(2., 9., 6.)), dtype='float32')
-input_data <- k_array(matrix(c(0., 7., 4.), nrow = 1), dtype='float32')
+input_data <- op_array(matrix(c(0., 7., 4.), nrow = 1), dtype='float32')
 layer <- layer_normalization(axis=-1)
 layer \%>\% adapt(adapt_data)
 layer(input_data)
@@ -86,7 +86,7 @@ layer(input_data)
 
 Pass the mean and variance directly.
 
-\if{html}{\out{<div class="sourceCode r">}}\preformatted{input_data <- k_array(rbind(1, 2, 3), dtype='float32')
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{input_data <- op_array(rbind(1, 2, 3), dtype='float32')
 layer <- layer_normalization(mean=3., variance=2.)
 layer(input_data)
 }\if{html}{\out{</div>}}
@@ -99,11 +99,11 @@ layer(input_data)
 
 Use the layer to de-normalize inputs (after adapting the layer).
 
-\if{html}{\out{<div class="sourceCode r">}}\preformatted{adapt_data <- k_array(rbind(c(0., 7., 4.),
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{adapt_data <- op_array(rbind(c(0., 7., 4.),
                        c(2., 9., 6.),
                        c(0., 7., 4.),
                        c(2., 9., 6.)), dtype='float32')
-input_data <- k_array(c(1., 2., 3.), dtype='float32')
+input_data <- op_array(c(1., 2., 3.), dtype='float32')
 layer <- layer_normalization(axis=-1, invert=TRUE)
 layer \%>\% adapt(adapt_data)
 layer(input_data)

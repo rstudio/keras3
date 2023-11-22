@@ -49,7 +49,7 @@ e.g., when labels values are \code{c(2, 0, 1)}, then
 Standalone usage:
 
 \if{html}{\out{<div class="sourceCode r">}}\preformatted{# EPSILON = 1e-7, y = y_true, y` = y_pred
-# y` = clip_k_clip_by_value(output, EPSILON, 1. - EPSILON)
+# y` = clip_op_clip_by_value(output, EPSILON, 1. - EPSILON)
 # y` = rbind(c(0.05, 0.95, EPSILON), c(0.1, 0.8, 0.1))
 # xent = -sum(y * log(y'), axis = -1)
 #      = -((log 0.95), (log 0.1))
@@ -166,11 +166,11 @@ Other metrics:
 \code{\link{metric_sensitivity_at_specificity}()},
 \code{\link{metric_sparse_categorical_accuracy}()},
 \code{\link{metric_sparse_categorical_crossentropy}()},
-\code{\link{metric_sparse_top_k_categorical_accuracy}()},
+\code{\link{metric_sparse_top_op_categorical_accuracy}()},
 \code{\link{metric_specificity_at_sensitivity}()},
 \code{\link{metric_squared_hinge}()},
 \code{\link{metric_sum}()},
-\code{\link{metric_top_k_categorical_accuracy}()},
+\code{\link{metric_top_op_categorical_accuracy}()},
 \code{\link{metric_true_negatives}()},
 \code{\link{metric_true_positives}()}
 

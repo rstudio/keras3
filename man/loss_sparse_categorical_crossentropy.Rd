@@ -70,7 +70,7 @@ loss
 y_pred <- rbind(c(0.05, 0.95, 0), c(0.1, 0.8, 0.1))
 # Using 'auto'/'sum_over_batch_size' reduction type.
 scce <- loss_sparse_categorical_crossentropy()
-scce(k_array(y_true), k_array(y_pred))
+scce(op_array(y_true), op_array(y_pred))
 }\if{html}{\out{</div>}}
 
 \if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor(1.1769392, shape=(), dtype=float32)
@@ -80,7 +80,7 @@ scce(k_array(y_true), k_array(y_pred))
 }\if{html}{\out{</div>}}
 
 \if{html}{\out{<div class="sourceCode r">}}\preformatted{# Calling with 'sample_weight'.
-scce(k_array(y_true), k_array(y_pred), sample_weight = k_array(c(0.3, 0.7)))
+scce(op_array(y_true), op_array(y_pred), sample_weight = op_array(c(0.3, 0.7)))
 }\if{html}{\out{</div>}}
 
 \if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor(0.8135988, shape=(), dtype=float32)
@@ -88,7 +88,7 @@ scce(k_array(y_true), k_array(y_pred), sample_weight = k_array(c(0.3, 0.7)))
 
 \if{html}{\out{<div class="sourceCode r">}}\preformatted{# Using 'sum' reduction type.
 scce <- loss_sparse_categorical_crossentropy(reduction="sum")
-scce(k_array(y_true), k_array(y_pred))
+scce(op_array(y_true), op_array(y_pred))
 }\if{html}{\out{</div>}}
 
 \if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor(2.3538785, shape=(), dtype=float32)
@@ -99,7 +99,7 @@ scce(k_array(y_true), k_array(y_pred))
 
 \if{html}{\out{<div class="sourceCode r">}}\preformatted{# Using 'none' reduction type.
 scce <- loss_sparse_categorical_crossentropy(reduction=NULL)
-scce(k_array(y_true), k_array(y_pred))
+scce(op_array(y_true), op_array(y_pred))
 }\if{html}{\out{</div>}}
 
 \if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor([0.05129344 2.3025851 ], shape=(2), dtype=float32)

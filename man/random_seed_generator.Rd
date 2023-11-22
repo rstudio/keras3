@@ -42,7 +42,7 @@ Usage in a layer:
 )
 
 out <- layer_dropout(rate = 0.8)
-out(k_ones(10), training = TRUE)
+out(op_ones(10), training = TRUE)
 }\if{html}{\out{</div>}}
 
 \if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor([0. 5. 5. 0. 0. 0. 0. 0. 0. 0.], shape=(10), dtype=float32)

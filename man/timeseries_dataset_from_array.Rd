@@ -88,7 +88,7 @@ Consider an array \code{data} of scalar values, of shape \verb{(steps,)}.
 To generate a dataset that uses the past 10
 timesteps to predict the next timestep, you would use:
 
-\if{html}{\out{<div class="sourceCode r">}}\preformatted{data <- k_array(1:20)
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{data <- op_array(1:20)
 input_data <- data[1:10]
 targets <- data[11:20]
 dataset <- timeseries_dataset_from_array(
@@ -112,7 +112,7 @@ both of shape \verb{(100,)}. The resulting dataset should consist samples with
 To generate a dataset that uses the current timestamp
 to predict the corresponding target timestep, you would use:
 
-\if{html}{\out{<div class="sourceCode r">}}\preformatted{X <- k_array(1:100)
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{X <- op_array(1:100)
 Y <- X*2
 
 sample_length <- 20

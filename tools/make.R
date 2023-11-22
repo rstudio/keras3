@@ -38,6 +38,18 @@ if(!"source:tools/translate-tools.R" %in% search()) envir::attach_source("tools/
 
 # TODO: maybe move ops to `op_*` instead of `k_*` ?
 
+if(FALSE) {
+  Sys.glob(c("R/autogen*.R", "vignettes-src/*.Rmd")) %>%
+    walk(\(f) {
+      readLines(f) %>%
+        str_replace_all("(?<![a-zA-Z0-9])k_", "op_") %>%
+        writeLines(f)
+    })
+  f <- Sys.glob(".tether/man/k_*")
+  f2 <- sub("/k_", "/op_", f, fixed = TRUE)
+  fs::file_move(f, f2)
+}
+
 # TODO: @param ... Passed on to the Python callable - scrub this from formatted.md
 
 # TODO: revisit history - also mentions in docs (e.g., in callback_model_checkpoint())

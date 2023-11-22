@@ -27,7 +27,7 @@ f(x) = exp_x / sum(exp_x)
 }
 \section{Examples}{
 \if{html}{\out{<div class="sourceCode r">}}\preformatted{softmax_layer <- layer_activation_softmax()
-input <- k_array(c(1, 2, 1))
+input <- op_array(c(1, 2, 1))
 softmax_layer(input)
 }\if{html}{\out{</div>}}
 

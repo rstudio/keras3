@@ -54,7 +54,7 @@ use \code{layer_integer_lookup()} instead.
 \strong{One-hot encoding data}
 
 \if{html}{\out{<div class="sourceCode r">}}\preformatted{layer <- layer_category_encoding(num_tokens = 4, output_mode = "one_hot")
-x <- k_array(c(3, 2, 0, 1), "int32")
+x <- op_array(c(3, 2, 0, 1), "int32")
 layer(x)
 }\if{html}{\out{</div>}}
 
@@ -68,7 +68,7 @@ layer(x)
 \strong{Multi-hot encoding data}
 
 \if{html}{\out{<div class="sourceCode r">}}\preformatted{layer <- layer_category_encoding(num_tokens = 4, output_mode = "multi_hot")
-x <- k_array(rbind(c(0, 1),
+x <- op_array(rbind(c(0, 1),
                    c(0, 0),
                    c(1, 2),
                    c(3, 1)), "int32")
@@ -85,11 +85,11 @@ layer(x)
 \strong{Using weighted inputs in \code{"count"} mode}
 
 \if{html}{\out{<div class="sourceCode r">}}\preformatted{layer <- layer_category_encoding(num_tokens = 4, output_mode = "count")
-count_weights <- k_array(rbind(c(.1, .2),
+count_weights <- op_array(rbind(c(.1, .2),
                                c(.1, .1),
                                c(.2, .3),
                                c(.4, .2)))
-x <- k_array(rbind(c(0, 1),
+x <- op_array(rbind(c(0, 1),
                    c(0, 0),
                    c(1, 2),
                    c(3, 1)), "int32")

@@ -671,22 +671,22 @@ drop_nulls <- function(x, i = NULL) {
 
 #' @export
 as.array.keras.backend.common.variables.KerasVariable <- function(x, ...) {
-  as_r_value(k_convert_to_numpy(x))
+  as_r_value(keras$ops$convert_to_numpy(x))
 }
 
 #' @export
 as.numeric.keras.backend.common.variables.KerasVariable <- function(x, ...) {
-  as.numeric(as_r_value(k_convert_to_numpy(x)))
+  as.numeric(as_r_value(keras$ops$convert_to_numpy(x)))
 }
 
 #' @export
 as.double.keras.backend.common.variables.KerasVariable <- function(x, ...) {
-  as.double(as_r_value(k_convert_to_numpy(x)))
+  as.double(as_r_value(keras$ops$convert_to_numpy(x)))
 }
 
 #' @export
 as.integer.keras.backend.common.variables.KerasVariable <- function(x, ...) {
-  as.integer(as_r_value(k_convert_to_numpy(x)))
+  as.integer(as_r_value(keras$ops$convert_to_numpy(x)))
 }
 
 as_r_value <- function (x) {
@@ -793,9 +793,9 @@ random_array <- function(..., gen = stats::runif) {
 #' shape(symbolic_tensor, 4)
 #' shape(5, symbolic_tensor, 4)
 #'
-#' eager_tensor <- k_ones(c(1,2,3))
+#' eager_tensor <- op_ones(c(1,2,3))
 #' shape(eager_tensor)
-#' k_shape(eager_tensor)
+#' op_shape(eager_tensor)
 #' ```
 #'
 #' @param ... A shape specification. Numerics, `NULL` and tensors are valid.
@@ -812,7 +812,7 @@ random_array <- function(..., gen = stats::runif) {
 #'
 #'
 #' @export
-#' @seealso [k_shape()]
+#' @seealso [op_shape()]
 shape <- function(...) {
 
   fix <- function(x) {

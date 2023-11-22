@@ -159,7 +159,7 @@ to use this layer.
 This example creates a lookup layer with a pre-existing vocabulary.
 
 \if{html}{\out{<div class="sourceCode r">}}\preformatted{vocab <- c(12, 36, 1138, 42) |> as.integer()
-data <- k_array(rbind(c(12, 1138, 42),
+data <- op_array(rbind(c(12, 1138, 42),
                       c(42, 1000, 36)))  # Note OOV tokens
 out <- data |> layer_integer_lookup(vocabulary = vocab)
 out
@@ -175,7 +175,7 @@ out
 This example creates a lookup layer and generates the vocabulary by
 analyzing the dataset.
 
-\if{html}{\out{<div class="sourceCode r">}}\preformatted{data <- k_array(rbind(c(12, 1138, 42),
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{data <- op_array(rbind(c(12, 1138, 42),
                       c(42, 1000, 36)))  # Note OOV tokens
 layer <- layer_integer_lookup()
 layer |> adapt(data)
@@ -211,7 +211,7 @@ tokens are hashed into the number of OOV buckets, distributing OOV tokens in
 a deterministic fashion across the set.
 
 \if{html}{\out{<div class="sourceCode r">}}\preformatted{vocab <- c(12, 36, 1138, 42) |> as.integer()
-data <- k_array(rbind(c(12, 1138, 42),
+data <- op_array(rbind(c(12, 1138, 42),
                       c(37, 1000, 36)))  # Note OOV tokens
 out <- data |>
   layer_integer_lookup(vocabulary = vocab,
@@ -235,7 +235,7 @@ Configure the layer with \code{output_mode='one_hot'}. Note that the first
 \code{num_oov_indices} dimensions in the ont_hot encoding represent OOV values.
 
 \if{html}{\out{<div class="sourceCode r">}}\preformatted{vocab <- c(12, 36, 1138, 42) |> as.integer()
-data <- k_array(c(12, 36, 1138, 42, 7), 'int32')  # Note OOV tokens
+data <- op_array(c(12, 36, 1138, 42, 7), 'int32')  # Note OOV tokens
 layer <- layer_integer_lookup(vocabulary = vocab,
                               output_mode = 'one_hot')
 layer(data)
@@ -255,7 +255,7 @@ Configure the layer with \code{output_mode = 'multi_hot'}. Note that the first
 \code{num_oov_indices} dimensions in the multi_hot encoding represent OOV tokens
 
 \if{html}{\out{<div class="sourceCode r">}}\preformatted{vocab <- c(12, 36, 1138, 42) |> as.integer()
-data <- k_array(rbind(c(12, 1138, 42, 42),
+data <- op_array(rbind(c(12, 1138, 42, 42),
                       c(42,    7, 36,  7)), "int64")  # Note OOV tokens
 layer <- layer_integer_lookup(vocabulary = vocab,
                               output_mode = 'multi_hot')
@@ -274,7 +274,7 @@ the first \code{num_oov_indices} dimensions in the output represent OOV tokens.
 
 \if{html}{\out{<div class="sourceCode r">}}\preformatted{vocab <- c(12, 36, 1138, 42) |> as.integer()
 data <- rbind(c(12, 1138, 42, 42),
-              c(42,    7, 36,  7)) |> k_array("int64")
+              c(42,    7, 36,  7)) |> op_array("int64")
 layer <- layer_integer_lookup(vocabulary = vocab,
                               output_mode = 'count')
 layer(data)
@@ -298,7 +298,7 @@ tokens will default to the average of all idf weights passed in.
 \if{html}{\out{<div class="sourceCode r">}}\preformatted{vocab <- c(12, 36, 1138, 42) |> as.integer()
 idf_weights <- c(0.25, 0.75, 0.6, 0.4)
 data <- rbind(c(12, 1138, 42, 42),
-              c(42,    7, 36,  7)) |> k_array("int64")
+              c(42,    7, 36,  7)) |> op_array("int64")
 layer <- layer_integer_lookup(output_mode = 'tf_idf',
                               vocabulary = vocab,
                               idf_weights = idf_weights)
@@ -316,7 +316,7 @@ vocabularly including the leading oov token.
 \if{html}{\out{<div class="sourceCode r">}}\preformatted{vocab <- c(-1, 12, 36, 1138, 42) |> as.integer()
 idf_weights <- c(0.9, 0.25, 0.75, 0.6, 0.4)
 data <- rbind(c(12, 1138, 42, 42),
-              c(42,    7, 36,  7)) |> k_array("int64")
+              c(42,    7, 36,  7)) |> op_array("int64")
 layer <- layer_integer_lookup(output_mode = 'tf_idf',
                               vocabulary = vocab,
                               idf_weights = idf_weights)
@@ -340,8 +340,8 @@ This example demonstrates how to map indices to tokens using this layer.
 pass the vocab in this example.)
 
 \if{html}{\out{<div class="sourceCode r">}}\preformatted{vocab <- c(12, 36, 1138, 42) |> as.integer()
-data <- k_array(c(1, 3, 4,
-                  4, 0, 2)) |> k_reshape(c(2,-1)) |> k_cast("int32")
+data <- op_array(c(1, 3, 4,
+                  4, 0, 2)) |> op_reshape(c(2,-1)) |> op_cast("int32")
 layer <- layer_integer_lookup(vocabulary = vocab, invert = TRUE)
 layer(data)
 }\if{html}{\out{</div>}}
@@ -359,7 +359,7 @@ This example demonstrates how to use the vocabulary of a standard lookup
 layer to create an inverse lookup layer.
 
 \if{html}{\out{<div class="sourceCode r">}}\preformatted{vocab <- c(12, 36, 1138, 42) |> as.integer()
-data <- k_array(rbind(c(12, 1138, 42), c(42, 1000, 36)), "int32")
+data <- op_array(rbind(c(12, 1138, 42), c(42, 1000, 36)), "int32")
 layer <- layer_integer_lookup(vocabulary = vocab)
 i_layer <- layer_integer_lookup(vocabulary = get_vocabulary(layer),
                                 invert = TRUE)

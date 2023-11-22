@@ -37,14 +37,14 @@ print(a)
               .04, .01, .94, .05,
               .12, .21, .5, .17),
               dim = c(4, 4))
-loss <- k_categorical_crossentropy(a, b)
+loss <- op_categorical_crossentropy(a, b)
 loss
 }\if{html}{\out{</div>}}
 
 \if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor([0.41284522 0.45601739 0.54430155 0.80437282], shape=(4), dtype=float64)
 }\if{html}{\out{</div>}}
 
-\if{html}{\out{<div class="sourceCode r">}}\preformatted{loss <- k_categorical_crossentropy(a, a)
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{loss <- op_categorical_crossentropy(a, a)
 loss
 }\if{html}{\out{</div>}}
 

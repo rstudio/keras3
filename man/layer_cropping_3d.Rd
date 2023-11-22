@@ -42,7 +42,7 @@ Cropping layer for 3D data (e.g. spatial or spatio-temporal).
 }
 \section{Examples}{
 \if{html}{\out{<div class="sourceCode r">}}\preformatted{input_shape <- c(2, 28, 28, 10, 3)
-x <- input_shape \%>\% \{ k_reshape(seq(prod(.)), .) \}
+x <- input_shape \%>\% \{ op_reshape(seq(prod(.)), .) \}
 y <- x |> layer_cropping_3d(cropping = c(2, 4, 2))
 shape(y)
 }\if{html}{\out{</div>}}

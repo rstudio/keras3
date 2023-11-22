@@ -17,8 +17,8 @@ and returns a single tensor (also of the same shape).
 }
 \section{Examples}{
 \if{html}{\out{<div class="sourceCode r">}}\preformatted{input_shape <- c(1, 2, 3)
-x1 <- k_ones(input_shape)
-x2 <- k_zeros(input_shape)
+x1 <- op_ones(input_shape)
+x2 <- op_zeros(input_shape)
 layer_average(x1, x2)
 }\if{html}{\out{</div>}}
 

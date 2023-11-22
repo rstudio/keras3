@@ -24,11 +24,11 @@ that \code{fit()} uses.
 \section{Usage}{
 Standalone usage:
 
-\if{html}{\out{<div class="sourceCode r">}}\preformatted{x <- k_ones(c(10, 1))
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{x <- op_ones(c(10, 1))
 data <- pack_x_y_sample_weight(x)
 
 # TRUE
-y <- k_ones(c(10, 1))
+y <- op_ones(c(10, 1))
 data <- pack_x_y_sample_weight(x, y)
 }\if{html}{\out{</div>}}
 }

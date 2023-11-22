@@ -25,7 +25,7 @@ It crops along the time dimension (axis 2).
 }
 \section{Examples}{
 \if{html}{\out{<div class="sourceCode r">}}\preformatted{input_shape <- c(2, 3, 2)
-x <- k_arange(prod(input_shape)) |> k_reshape(input_shape)
+x <- op_arange(prod(input_shape)) |> op_reshape(input_shape)
 x
 }\if{html}{\out{</div>}}
 
