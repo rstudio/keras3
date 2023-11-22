@@ -9,7 +9,6 @@ if(!"source:tools/translate-tools.R" %in% search()) envir::attach_source("tools/
 # TODO: activation_resolve() or activation_get() as alias of keras.activation.get() ?
 # TODO: the 2-translated.Rmd should include a chunk w/ the function def (for easy seeing while editing)
 #       with chunk options (include = FALSE)
-
 # TODO: add PR for purrr::rate_throttle("3 per minute")
 
 
@@ -29,6 +28,11 @@ if(FALSE) {
     })
   f <- Sys.glob(".tether/man/k_*")
   f2 <- sub("/k_", "/op_", f, fixed = TRUE)
+  fs::file_move(f, f2)
+}
+if(FALSE){
+  f <- Sys.glob(c("R/autogen*.R"))
+  f2 <- sub("/autogen-", "/keras-", f, fixed = TRUE)
   fs::file_move(f, f2)
 }
 
@@ -76,6 +80,7 @@ if(FALSE) {
 #   can't use __signature__ anymore in keras_core...
 
 ## TODO: "keras.applications.convnext" is a module, filtered out has good stuff
+
 
 # TODO: initializer families:
 # <class 'keras.initializers.constant_initializers.Zeros'>
