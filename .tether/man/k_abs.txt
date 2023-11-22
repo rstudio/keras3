@@ -1,0 +1,13 @@
+#' Shorthand for `keras.ops.absolute`.
+#'
+#' @param x
+#' see description
+#'
+#' @export
+#' @family numpy ops
+#' @family ops
+#' @seealso
+#' + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/abs>
+k_abs <-
+__signature__
+keras.ops.abs(x)

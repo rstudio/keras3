@@ -1,0 +1,13 @@
+#' Exponential activation function.
+#'
+#' @param x
+#' Input tensor.
+#'
+#' @export
+#' @family activations
+#' @seealso
+#' + <https:/keras.io/api/layers/activations#exponential-function>
+#' + <https://www.tensorflow.org/api_docs/python/tf/keras/activations/exponential>
+activation_exponential <-
+__signature__
+keras.activations.exponential(x)

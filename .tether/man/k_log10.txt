@@ -1,0 +1,17 @@
+#' Return the base 10 logarithm of the input tensor, element-wise.
+#'
+#' @returns
+#'     Output tensor, element-wise base 10 logarithm of `x`.
+#'
+#' @param x
+#' Input tensor.
+#'
+#' @export
+#' @family numpy ops
+#' @family ops
+#' @seealso
+#' + <https:/keras.io/keras_core/api/ops/numpy#log10-function>
+#' + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/log10>
+k_log10 <-
+__signature__
+keras.ops.log10(x)

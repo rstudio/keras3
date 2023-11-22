@@ -1,0 +1,17 @@
+#' Stack tensors in sequence vertically (row wise).
+#'
+#' @returns
+#'     Tensor formed by stacking the given tensors.
+#'
+#' @param xs
+#' Sequence of tensors.
+#'
+#' @export
+#' @family numpy ops
+#' @family ops
+#' @seealso
+#' + <https:/keras.io/keras_core/api/ops/numpy#vstack-function>
+#' + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/vstack>
+k_vstack <-
+__signature__
+keras.ops.vstack(xs)

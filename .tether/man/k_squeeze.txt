@@ -1,0 +1,21 @@
+#' Remove axes of length one from `x`.
+#'
+#' @returns
+#' The input tensor with all or a subset of the dimensions of
+#' length 1 removed.
+#'
+#' @param x
+#' Input tensor.
+#'
+#' @param axis
+#' Select a subset of the entries of length one in the shape.
+#'
+#' @export
+#' @family numpy ops
+#' @family ops
+#' @seealso
+#' + <https:/keras.io/keras_core/api/ops/numpy#squeeze-function>
+#' + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/squeeze>
+k_squeeze <-
+__signature__
+keras.ops.squeeze(x, axis=None)

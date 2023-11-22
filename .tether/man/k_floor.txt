@@ -1,0 +1,20 @@
+#' Return the floor of the input, element-wise.
+#'
+#' @description
+#' The floor of the scalar `x` is the largest integer `i`, such that `i <= x`.
+#'
+#' @returns
+#'     Output tensor, element-wise floor of `x`.
+#'
+#' @param x
+#' Input tensor.
+#'
+#' @export
+#' @family numpy ops
+#' @family ops
+#' @seealso
+#' + <https:/keras.io/keras_core/api/ops/numpy#floor-function>
+#' + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/floor>
+k_floor <-
+__signature__
+keras.ops.floor(x)

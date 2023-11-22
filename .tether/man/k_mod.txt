@@ -1,0 +1,20 @@
+#' Returns the element-wise remainder of division.
+#'
+#' @returns
+#'     Output tensor, element-wise remainder of division.
+#'
+#' @param x1
+#' First tensor.
+#'
+#' @param x2
+#' Second tensor.
+#'
+#' @export
+#' @family numpy ops
+#' @family ops
+#' @seealso
+#' + <https:/keras.io/keras_core/api/ops/numpy#mod-function>
+#' + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/mod>
+k_mod <-
+__signature__
+keras.ops.mod(x1, x2)
