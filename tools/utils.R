@@ -2077,9 +2077,136 @@ endpoint_to_expr <- function(endpoint) {
   py_obj_expr
 }
 
-modify_roxy_blocks <- function(fn) {
+walk_roxy_blocks <- function(fn) {
   # function that take blocklines as argument
-  .NotYetImplemented()
+  withr::with_options(
+    list(keep.source.pkgs = TRUE, keep.parse.data.pkgs = TRUE), {
+    env <- roxygen2::env_package(".")
+  })
+  blocks <- roxygen2::parse_package(env = env)
+
+  walk(blocks, fn, .progress = TRUE)
+}
+
+file_lines_manager <- function() {
+
+  .files <- new.env(parent = emptyenv())
+  get_lines <- function(file, line_range) {
+    file_lines <- .files[[file]] %||% { .files[[file]] <- readLines(file) }
+    # check_line_range(line_range, max = length(file_lines))
+    file_lines[line_range[1]:line_range[2]]
+  }
+
+  set_lines <- function(file, line_range, new_lines) {
+    file_lines <- .files[[file]] %||% { .files[[file]] <- readLines(file) }
+    # check_line_range(line_range, max = length(file_lines))
+    file_lines[line_range[1]:line_range[2]] <- NA
+    file_lines[line_range[1]] <- str_flatten_and_compact_lines(new_lines)
+    .files[[file]] <- file_lines
+  }
+
+  write_out <- function() {
+    for(file in names(.files)) {
+      cli_alert_warning("Updating source file: {.file {file}}")
+      # message("Writing out: ", file)
+      file_lines <- .files[[file]]
+      writeLines(file_lines[!is.na(file_lines)], file)
+      rm(list = file, envir = .files)
+    }
+  }
+
+  environment()
+}
+
+move_roxy_blocks_to_mansrc <- function() {
+
+  .files <- new.env(parent = emptyenv())
+  get_file_lines <- function(file, line_range) {
+    file_lines <- .files[[file]] %||% { .files[[file]] <- readLines(file) }
+    # check_line_range(line_range, max = length(file_lines))
+    file_lines[line_range[1]:line_range[2]]
+  }
+
+  set_file_lines <- function(file, line_range, new_lines) {
+    file_lines <- .files[[file]] %||% { .files[[file]] <- readLines(file) }
+    # check_line_range(line_range, max = length(file_lines))
+    file_lines[line_range[1]:line_range[2]] <- NA
+    file_lines[line_range[1]] <- str_flatten_and_compact_lines(new_lines)
+    .files[[file]] <- file_lines
+  }
+
+  write_out_updated_files <- function() {
+    for(file in names(.files)) {
+      cli_alert_warning("Updating source file: {.file {file}}")
+      # message("Writing out: ", file)
+      file_lines <- .files[[file]]
+      writeLines(file_lines[!is.na(file_lines)], file)
+    }
+  }
+
+  get_block_line_range <- function(block, section = c("roxygen", "code")) {
+    ## Returns the line number pair c(<start_of_roxygen_block>, <end_of_fn_body>)
+
+    # this only contains the start line for each tag
+    roxy_line_range <- code_line_range <- NULL
+    if("roxygen" %in% section) {
+
+    roxy_line_range <- range(unlist(lapply(block$tags, \(tag) {
+      if (is.null(tag$raw)) NULL # skip '<generated>' tags that point to sourcecode
+      else tag$line
+    })))
+
+    }
+    if ("code" %in% section) {
+      call_start_line <- getSrcLocation(block$object$value, "parse") %||% -1L
+      call_end_line <- getSrcLocation(block$object$value, "parse", FALSE) %||% -1L
+      call_body_start_line <- tryCatch(
+        getSrcLocation(body(block$object$value), "line")[1],
+        warning = function(w) NULL,
+        error = function(e) NULL
+      ) %||% call_end_line
+
+      code_line_range <- range(c(call_start_line, call_end_line))
+      # signature_line_range <- c(call_start_line, call_body_start_line)
+    }
+
+    line_range <- range(c(roxy_line_range, code_line_range))
+    if(any(line_range == -1L)) NULL
+    else as.integer(line_range)
+  }
+
+
+  walk_roxy_blocks(function(block) {
+    roxy_line_range <- get_block_line_range(block, "roxygen") %||% return()
+    lines <- get_file_lines(block$file, line_range = roxy_line_range)
+    if(length(lines <= 4)) return()
+    name <- doctether:::get_block_name(block)
+    new_file <- fs::path("man-src", name, name, ext = "Rmd")
+    new_rendered_file <- new_file |> fs::path_ext_set("md")
+
+    if(file.exists(new_file))
+      return(warning("File seemingly already exists, skipping, ", new_file))
+
+    set_file_lines(block$file, roxy_line_range, c(
+      glue('#  "{new_file}"'),
+      glue("#' @eval readLines('{new_rendered_file}')")
+    ))
+
+    fs::dir_create(dirname(new_file))
+    writeLines(c(
+      "---",
+      'knit: ({source(here::here("tools/knit.R")); knit_man_src})',
+      "---",
+      "",
+      sub("^#' ?", "", lines)
+    ), new_file)
+  })
+
+  write_out_updated_files()
+
+}
+
+move_mansrc_to_roxy_blocks <- function() {
 
 }
 
