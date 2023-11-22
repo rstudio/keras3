@@ -28,7 +28,7 @@
 #' `strides=1` and `padding="valid"`:
 #'
 #' ```{r}
-#' x <- k_array(c(1., 2., 3., 4., 5.)) |> k_reshape(c(1, 5, 1))
+#' x <- op_array(c(1., 2., 3., 4., 5.)) |> op_reshape(c(1, 5, 1))
 #' output <- x |>
 #'   layer_average_pooling_1d(pool_size = 2,
 #'                            strides = 1,
@@ -39,7 +39,7 @@
 #' `strides=2` and `padding="valid"`:
 #'
 #' ```{r}
-#' x <- k_array(c(1., 2., 3., 4., 5.)) |> k_reshape(c(1, 5, 1))
+#' x <- op_array(c(1., 2., 3., 4., 5.)) |> op_reshape(c(1, 5, 1))
 #' output <- x |>
 #'   layer_average_pooling_1d(pool_size = 2,
 #'                            strides = 2,
@@ -50,7 +50,7 @@
 #' `strides=1` and `padding="same"`:
 #'
 #' ```{r}
-#' x <- k_array(c(1., 2., 3., 4., 5.)) |> k_reshape(c(1, 5, 1))
+#' x <- op_array(c(1., 2., 3., 4., 5.)) |> op_reshape(c(1, 5, 1))
 #' output <- x |>
 #'   layer_average_pooling_1d(pool_size = 2,
 #'                            strides = 1,
@@ -141,7 +141,7 @@ function (object, pool_size, strides = NULL, padding = "valid",
 #' `strides=(1, 1)` and `padding="valid"`:
 #'
 #' ```{r}
-#' x <- k_array(1:9, "float32") |> k_reshape(c(1, 3, 3, 1))
+#' x <- op_array(1:9, "float32") |> op_reshape(c(1, 3, 3, 1))
 #' output <- x |>
 #'   layer_average_pooling_2d(pool_size = c(2, 2),
 #'                            strides = c(1, 1),
@@ -152,7 +152,7 @@ function (object, pool_size, strides = NULL, padding = "valid",
 #' `strides=(2, 2)` and `padding="valid"`:
 #'
 #' ```{r}
-#' x <- k_array(1:12, "float32") |> k_reshape(c(1, 3, 4, 1))
+#' x <- op_array(1:12, "float32") |> op_reshape(c(1, 3, 4, 1))
 #' output <- x |>
 #'   layer_average_pooling_2d(pool_size = c(2, 2),
 #'                            strides = c(2, 2),
@@ -163,7 +163,7 @@ function (object, pool_size, strides = NULL, padding = "valid",
 #' `stride=(1, 1)` and `padding="same"`:
 #'
 #' ```{r}
-#' x <- k_array(1:9, "float32") |> k_reshape(c(1, 3, 3, 1))
+#' x <- op_array(1:9, "float32") |> op_reshape(c(1, 3, 3, 1))
 #' output <- x |>
 #'   layer_average_pooling_2d(pool_size = c(2, 2),
 #'                            strides = c(1, 1),
@@ -359,7 +359,7 @@ function (object, pool_size, strides = NULL, padding = "valid",
 #' If `keepdims` is `FALSE` (default), the rank of the tensor is
 #' reduced for spatial dimensions. If `keepdims` is `TRUE`, the
 #' temporal dimension are retained with length 1.
-#' The behavior is the same as for `tf$reduce_mean()` or `k_mean()`.
+#' The behavior is the same as for `tf$reduce_mean()` or `op_mean()`.
 #'
 #' @param object
 #' Object to compose the layer with. A tensor, array, or sequential model.
@@ -428,7 +428,7 @@ function (object, data_format = NULL, keepdims = FALSE, ...)
 #' If `keepdims` is `FALSE` (default), the rank of the tensor is
 #' reduced for spatial dimensions. If `keepdims` is `TRUE`, the
 #' spatial dimension are retained with length 1.
-#' The behavior is the same as for `tf$reduce_mean()` or `k_mean()`.
+#' The behavior is the same as for `tf$reduce_mean()` or `op_mean()`.
 #'
 #' @param object
 #' Object to compose the layer with. A tensor, array, or sequential model.
@@ -498,7 +498,7 @@ function (object, data_format = NULL, keepdims = FALSE, ...)
 #' If `keepdims` is `FALSE` (default), the rank of the tensor is
 #' reduced for spatial dimensions. If `keepdims` is `TRUE`, the
 #' spatial dimension are retained with length 1.
-#' The behavior is the same as for `tf$reduce_mean()` or `k_mean()`.
+#' The behavior is the same as for `tf$reduce_mean()` or `op_mean()`.
 #'
 #' @param object
 #' Object to compose the layer with. A tensor, array, or sequential model.
@@ -566,7 +566,7 @@ function (object, data_format = NULL, keepdims = FALSE, ...)
 #' If `keepdims` is `FALSE` (default), the rank of the tensor is
 #' reduced for spatial dimensions. If `keepdims` is `TRUE`, the
 #' temporal dimension are retained with length 1.
-#' The behavior is the same as for `tf$reduce_mean()` or `k_mean()`.
+#' The behavior is the same as for `tf$reduce_mean()` or `op_mean()`.
 #'
 #' @param object
 #' Object to compose the layer with. A tensor, array, or sequential model.
@@ -634,7 +634,7 @@ function (object, data_format = NULL, keepdims = FALSE, ...)
 #' If `keepdims` is `FALSE` (default), the rank of the tensor is
 #' reduced for spatial dimensions. If `keepdims` is `TRUE`, the
 #' spatial dimension are retained with length 1.
-#' The behavior is the same as for `tf$reduce_mean()` or `k_mean()`.
+#' The behavior is the same as for `tf$reduce_mean()` or `op_mean()`.
 #'
 #' @param object
 #' Object to compose the layer with. A tensor, array, or sequential model.
@@ -703,7 +703,7 @@ function (object, data_format = NULL, keepdims = FALSE, ...)
 #' If `keepdims` is `FALSE` (default), the rank of the tensor is
 #' reduced for spatial dimensions. If `keepdims` is `TRUE`, the
 #' spatial dimension are retained with length 1.
-#' The behavior is the same as for `tf$reduce_mean()` or `k_mean()`.
+#' The behavior is the same as for `tf$reduce_mean()` or `op_mean()`.
 #'
 #' @param object
 #' Object to compose the layer with. A tensor, array, or sequential model.
@@ -756,7 +756,7 @@ function (object, data_format = NULL, keepdims = FALSE, ...)
 #' `strides=1` and `padding="valid"`:
 #'
 #' ```{r}
-#' x <- k_reshape(c(1, 2, 3, 4, 5),
+#' x <- op_reshape(c(1, 2, 3, 4, 5),
 #'                c(1, 5, 1))
 #' max_pool_1d <- layer_max_pooling_1d(pool_size = 2,
 #'                                     strides = 1,
@@ -767,7 +767,7 @@ function (object, data_format = NULL, keepdims = FALSE, ...)
 #' `strides=2` and `padding="valid"`:
 #'
 #' ```{r}
-#' x <- k_reshape(c(1, 2, 3, 4, 5),
+#' x <- op_reshape(c(1, 2, 3, 4, 5),
 #'                c(1, 5, 1))
 #' max_pool_1d <- layer_max_pooling_1d(pool_size = 2,
 #'                                     strides = 2,
@@ -778,7 +778,7 @@ function (object, data_format = NULL, keepdims = FALSE, ...)
 #' `strides=1` and `padding="same"`:
 #'
 #' ```{r}
-#' x <- k_reshape(c(1, 2, 3, 4, 5),
+#' x <- op_reshape(c(1, 2, 3, 4, 5),
 #'                c(1, 5, 1))
 #' max_pool_1d <- layer_max_pooling_1d(pool_size = 2,
 #'                                     strides = 1,
@@ -871,7 +871,7 @@ function (object, pool_size = 2L, strides = NULL, padding = "valid",
 #' ```{r}
 #' x <- rbind(c(1., 2., 3.),
 #'            c(4., 5., 6.),
-#'            c(7., 8., 9.)) |> k_reshape(c(1, 3, 3, 1))
+#'            c(7., 8., 9.)) |> op_reshape(c(1, 3, 3, 1))
 #' max_pool_2d <- layer_max_pooling_2d(pool_size = c(2, 2),
 #'                                     strides = c(1, 1),
 #'                                     padding = "valid")
@@ -883,7 +883,7 @@ function (object, pool_size = 2L, strides = NULL, padding = "valid",
 #' ```{r}
 #' x <- rbind(c(1., 2., 3., 4.),
 #'            c(5., 6., 7., 8.),
-#'            c(9., 10., 11., 12.)) |> k_reshape(c(1, 3, 4, 1))
+#'            c(9., 10., 11., 12.)) |> op_reshape(c(1, 3, 4, 1))
 #' max_pool_2d <- layer_max_pooling_2d(pool_size = c(2, 2),
 #'                                     strides = c(2, 2),
 #'                                     padding = "valid")
@@ -895,7 +895,7 @@ function (object, pool_size = 2L, strides = NULL, padding = "valid",
 #' ```{r}
 #' x <- rbind(c(1., 2., 3.),
 #'            c(4., 5., 6.),
-#'            c(7., 8., 9.)) |> k_reshape(c(1, 3, 3, 1))
+#'            c(7., 8., 9.)) |> op_reshape(c(1, 3, 3, 1))
 #' max_pool_2d <- layer_max_pooling_2d(pool_size = c(2, 2),
 #'                                     strides = c(1, 1),
 #'                                     padding = "same")

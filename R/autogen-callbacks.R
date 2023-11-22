@@ -43,8 +43,8 @@
 #' model %>% compile(optimizer = optimizer_sgd(), loss = 'mse')
 #'
 #' tryCatch({
-#'   model %>% fit(x = k_ones(c(5, 20)),
-#'                 y = k_zeros(5),
+#'   model %>% fit(x = op_ones(c(5, 20)),
+#'                 y = op_zeros(5),
 #'                 epochs = 10, batch_size = 1,
 #'                 callbacks = list(callback, callback_interrupting()),
 #'                 verbose = 0)
@@ -53,8 +53,8 @@
 #' model$history$epoch
 #' # model$history %>% keras:::to_keras_training_history() %>% as.data.frame() %>% print()
 #'
-#' history <- model %>% fit(x = k_ones(c(5, 20)),
-#'                          y = k_zeros(5),
+#' history <- model %>% fit(x = op_ones(c(5, 20)),
+#'                          y = op_zeros(5),
 #'                          epochs = 10, batch_size = 1,
 #'                          callbacks = list(callback),
 #'                          verbose = 0)
@@ -158,8 +158,8 @@ function (filename, separator = ",", append = FALSE)
 #' model <- keras_model_sequential() %>%
 #'   layer_dense(10)
 #' model %>% compile(optimizer = optimizer_sgd(), loss = 'mse')
-#' history <- model %>% fit(x = k_ones(c(5, 20)),
-#'                          y = k_zeros(5),
+#' history <- model %>% fit(x = op_ones(c(5, 20)),
+#'                          y = op_zeros(5),
 #'                          epochs = 10, batch_size = 1,
 #'                          callbacks = list(callback),
 #'                          verbose = 0)

@@ -1421,8 +1421,8 @@ function (units, activation = "tanh", recurrent_activation = "sigmoid",
 #'
 #'   call <- function(inputs, states) {
 #'     prev_output <- states[[1]]
-#'     h <- k_matmul(inputs, self.kernel)
-#'     output <- h + k_matmul(prev_output, self$recurrent_kernel)
+#'     h <- op_matmul(inputs, self.kernel)
+#'     output <- h + op_matmul(prev_output, self$recurrent_kernel)
 #'     list(output, list(output))
 #'   }
 #'

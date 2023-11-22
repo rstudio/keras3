@@ -64,7 +64,7 @@ Linear <- new_layer_class(
     )
   },
   call = function(inputs) {
-    k_matmul(inputs, self$w) + self$b
+    op_matmul(inputs, self$w) + self$b
   }
 )
 ```
@@ -73,7 +73,7 @@ You would use a layer by calling it on some tensor input(s), much like an R
 function.
 
 ```{r}
-x <- k_ones(c(2, 2))
+x <- op_ones(c(2, 2))
 linear_layer <- Linear(units = 4L, input_dim = 2L)
 y <- linear_layer(x)
 print(y)
@@ -107,12 +107,12 @@ ComputeSum <- new_layer_class(
     )
   },
   call = function(inputs) {
-    self$total$assign_add(k_sum(inputs, axis = 1))
+    self$total$assign_add(op_sum(inputs, axis = 1))
     self$total
   }
 )
 
-x <- k_ones(c(2, 2))
+x <- op_ones(c(2, 2))
 my_sum <- ComputeSum(input_dim = 2)
 y <- my_sum(x)
 print(y$numpy())
@@ -155,7 +155,7 @@ Linear <- new_layer_class(
     )
   },
   call = function(inputs) {
-    k_matmul(inputs, self$w) + self$b
+    op_matmul(inputs, self$w) + self$b
   }
 )
 ```
@@ -187,7 +187,7 @@ Linear <- new_layer_class(
     )
   },
   call = function(inputs) {
-    k_matmul(inputs, self$w) + self$b
+    op_matmul(inputs, self$w) + self$b
   }
 )
 ```
@@ -234,7 +234,7 @@ MLPBlock <- new_layer_class(
 
 mlp = MLPBlock()
 # The first call to the `mlp` will create the weights
-y <- mlp(k_ones(shape = c(3, 64)))
+y <- mlp(op_ones(shape = c(3, 64)))
 
 cat("weights:", length(mlp$weights))
 cat("trainable weights:", length(mlp$trainable_weights))
@@ -243,7 +243,7 @@ cat("trainable weights:", length(mlp$trainable_weights))
 ## Backend-agnostic layers and backend-specific layers
 
 As long as a layer only uses APIs from the `ops` namespace (ie. using functions
-starting with `k_`),
+starting with `op_`),
 (or other Keras namespaces such as `activations_*`, `random_*`, or `layer_*`),
 then it can be used with any backend -- TensorFlow, JAX, or PyTorch.
 
@@ -251,8 +251,8 @@ All layers you've seen so far in this guide work with all Keras backends.
 
 The `ops` namespace gives you access to:
 
-- The NumPy API, e.g. `k_matmul`, `k_sum`, `k_reshape`, `k_stack`, etc.
-- Neural networks-specific APIs such as `k_softmax`, `k_conv`, `k_binary_crossentropy`, `k_relu`, etc.
+- The NumPy API, e.g. `op_matmul`, `op_sum`, `op_reshape`, `op_stack`, etc.
+- Neural networks-specific APIs such as `op_softmax`, `op_conv`, `op_binary_crossentropy`, `op_relu`, etc.
 
 You can also use backend-native APIs in your layers (such as `tf$nn` functions),
 but if you do this, then your layer will only be usable with the backend in question.
@@ -312,7 +312,7 @@ ActivityRegularizationLayer <- new_layer_class(
     super$initialize()
   },
   call = function(inputs) {
-    self$add_loss(self$rate * k_mean(inputs))
+    self$add_loss(self$rate * op_mean(inputs))
     inputs
   }
 )
@@ -339,11 +339,11 @@ OuterLayer <- new_layer_class(
 layer <- OuterLayer()
 cat("losses:", length(layer$losses))  # No losses yet since the layer has never been called
 
-x <- layer(k_zeros(c(1, 1)))
+x <- layer(op_zeros(c(1, 1)))
 cat("losses:", length(layer$losses))  # We created one loss value
 
 # `layer$losses` gets reset at the start of each call
-x <- layer(k_zeros(c(1, 1)))
+x <- layer(op_zeros(c(1, 1)))
 cat("losses:", length(layer$losses)) # This is the loss created during the call above
 ```
 
@@ -363,7 +363,7 @@ OuterLayerWithKernelRegularizer <- new_layer_class(
 )
 
 layer <- OuterLayerWithKernelRegularizer()
-x <- layer(k_zeros(c(1, 1)))
+x <- layer(op_zeros(c(1, 1)))
 
 # This is `1e-3 * sum(layer$dense$kernel ** 2)`,
 # created by the `kernel_regularizer` above.
@@ -417,7 +417,7 @@ Linear <- new_layer_class(
     )
   },
   call = function(inputs) {
-    k_matmul(inputs, self$w) + self$b
+    op_matmul(inputs, self$w) + self$b
   },
   get_config = function() {
     list(units = self$units)
@@ -456,7 +456,7 @@ Linear <- new_layer_class(
     )
   },
   call = function(inputs) {
-    k_matmul(inputs, self$w) + self$b
+    op_matmul(inputs, self$w) + self$b
   },
   get_config = function() {
     list(units = self$units)
@@ -609,10 +609,10 @@ Sampling <- new_layer_class(
   "Sampling",
   call = function(inputs) {
     c(z_mean, z_log_var) %<-% inputs
-    batch <- k_shape(z_mean)[[1]]
-    dim <- k_shape(z_mean)[[2]]
+    batch <- op_shape(z_mean)[[1]]
+    dim <- op_shape(z_mean)[[2]]
     epsilon <- random_normal(shape = c(batch, dim))
-    z_mean + k_exp(0.5 * z_log_var) * epsilon
+    z_mean + op_exp(0.5 * z_log_var) * epsilon
   }
 )
 
@@ -671,8 +671,8 @@ VariationalAutoEncoder <- new_model_class(
     c(z_mean, z_log_var, z) %<-% self$encoder(inputs)
     reconstructed <- self$decoder(z)
     # Add KL divergence regularization loss.
-    kl_loss <- -0.5 * k_mean(
-      z_log_var - k_square(z_mean) - k_exp(z_log_var) + 1
+    kl_loss <- -0.5 * op_mean(
+      z_log_var - op_square(z_mean) - op_exp(z_log_var) + 1
     )
     self$add_loss(kl_loss)
     reconstructed
@@ -686,9 +686,9 @@ Let's train it on MNIST using the `fit()` API:
 c(c(x_train, .), .) %<-% dataset_mnist()
 x_train <- x_train %>% 
   keras_array() %>% 
-  k_reshape(new_shape = c(60000, 784)) %>% 
-  k_cast("float32") %>% 
-  k_divide(255)
+  op_reshape(new_shape = c(60000, 784)) %>% 
+  op_cast("float32") %>% 
+  op_divide(255)
 
 original_dim <- 784
 vae <- VariationalAutoEncoder(

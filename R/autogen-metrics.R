@@ -356,7 +356,7 @@ structure(function (y_true, y_pred, threshold = 0.5, ..., name = "binary_accurac
 #' operation that simply divides `total` by `count`.
 #'
 #' `y_pred` and `y_true` should be passed in as vectors of probabilities,
-#' rather than as labels. If necessary, use `k_one_hot` to expand `y_true` as
+#' rather than as labels. If necessary, use `op_one_hot` to expand `y_true` as
 #' a vector.
 #'
 #' If `sample_weight` is `NULL`, weights default to 1.
@@ -521,10 +521,10 @@ structure(function (y_true, y_pred, ..., name = "sparse_categorical_accuracy",
 #' Standalone usage:
 #'
 #' ```{r}
-#' m <- metric_sparse_top_k_categorical_accuracy(k = 1L)
+#' m <- metric_sparse_top_op_categorical_accuracy(k = 1L)
 #' m$update_state(
 #'   rbind(2, 1),
-#'   k_array(rbind(c(0.1, 0.9, 0.8), c(0.05, 0.95, 0)), dtype = "float32")
+#'   op_array(rbind(c(0.1, 0.9, 0.8), c(0.05, 0.95, 0)), dtype = "float32")
 #' )
 #' m$result()
 #' ```
@@ -533,7 +533,7 @@ structure(function (y_true, y_pred, ..., name = "sparse_categorical_accuracy",
 #' m$reset_state()
 #' m$update_state(
 #'   rbind(2, 1),
-#'   k_array(rbind(c(0.1, 0.9, 0.8), c(0.05, 0.95, 0)), dtype = "float32"),
+#'   op_array(rbind(c(0.1, 0.9, 0.8), c(0.05, 0.95, 0)), dtype = "float32"),
 #'   sample_weight = c(0.7, 0.3)
 #' )
 #' m$result()
@@ -544,7 +544,7 @@ structure(function (y_true, y_pred, ..., name = "sparse_categorical_accuracy",
 #' ```{r, eval = FALSE}
 #' model %>% compile(optimizer = 'sgd',
 #'                   loss = 'sparse_categorical_crossentropy',
-#'                   metrics = list(metric_sparse_top_k_categorical_accuracy()))
+#'                   metrics = list(metric_sparse_top_op_categorical_accuracy()))
 #' ```
 #'
 #' @param k
@@ -574,8 +574,8 @@ structure(function (y_true, y_pred, ..., name = "sparse_categorical_accuracy",
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/metrics/SparseTopKCategoricalAccuracy>
 #'
 #' @tether keras.metrics.SparseTopKCategoricalAccuracy
-metric_sparse_top_k_categorical_accuracy <-
-structure(function (y_true, y_pred, k = 5L, ..., name = "sparse_top_k_categorical_accuracy",
+metric_sparse_top_op_categorical_accuracy <-
+structure(function (y_true, y_pred, k = 5L, ..., name = "sparse_top_op_categorical_accuracy",
     dtype = NULL)
 {
     args <- capture_args2(list(k = as_integer, y_true = function (x)
@@ -587,9 +587,9 @@ structure(function (y_true, y_pred, k = 5L, ..., name = "sparse_top_k_categorica
     else np_array(x)))
     callable <- if (missing(y_true) && missing(y_pred))
         keras$metrics$SparseTopKCategoricalAccuracy
-    else keras$metrics$sparse_top_k_categorical_accuracy
+    else keras$metrics$sparse_top_op_categorical_accuracy
     do.call(callable, args)
-}, py_function_name = "sparse_top_k_categorical_accuracy")
+}, py_function_name = "sparse_top_op_categorical_accuracy")
 
 
 #' Computes how often targets are in the top `K` predictions.
@@ -600,10 +600,10 @@ structure(function (y_true, y_pred, k = 5L, ..., name = "sparse_top_k_categorica
 #' Standalone usage:
 #'
 #' ```{r}
-#' m <- metric_top_k_categorical_accuracy(k = 1)
+#' m <- metric_top_op_categorical_accuracy(k = 1)
 #' m$update_state(
 #'   rbind(c(0, 0, 1), c(0, 1, 0)),
-#'   k_array(rbind(c(0.1, 0.9, 0.8), c(0.05, 0.95, 0)), dtype = "float32")
+#'   op_array(rbind(c(0.1, 0.9, 0.8), c(0.05, 0.95, 0)), dtype = "float32")
 #' )
 #' m$result()
 #' ```
@@ -612,7 +612,7 @@ structure(function (y_true, y_pred, k = 5L, ..., name = "sparse_top_k_categorica
 #' m$reset_state()
 #' m$update_state(
 #'   rbind(c(0, 0, 1), c(0, 1, 0)),
-#'   k_array(rbind(c(0.1, 0.9, 0.8), c(0.05, 0.95, 0)), dtype = "float32"),
+#'   op_array(rbind(c(0.1, 0.9, 0.8), c(0.05, 0.95, 0)), dtype = "float32"),
 #'   sample_weight = c(0.7, 0.3))
 #' m$result()
 #' ```
@@ -622,7 +622,7 @@ structure(function (y_true, y_pred, k = 5L, ..., name = "sparse_top_k_categorica
 #' ```{r, eval = FALSE}
 #' model.compile(optimizer = 'sgd',
 #'               loss = 'categorical_crossentropy',
-#'               metrics = list(metric_top_k_categorical_accuracy()))
+#'               metrics = list(metric_top_op_categorical_accuracy()))
 #' ```
 #'
 #' @param k
@@ -652,8 +652,8 @@ structure(function (y_true, y_pred, k = 5L, ..., name = "sparse_top_k_categorica
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/metrics/TopKCategoricalAccuracy>
 #'
 #' @tether keras.metrics.TopKCategoricalAccuracy
-metric_top_k_categorical_accuracy <-
-structure(function (y_true, y_pred, k = 5L, ..., name = "top_k_categorical_accuracy",
+metric_top_op_categorical_accuracy <-
+structure(function (y_true, y_pred, k = 5L, ..., name = "top_op_categorical_accuracy",
     dtype = NULL)
 {
     args <- capture_args2(list(k = as_integer, y_true = function (x)
@@ -665,9 +665,9 @@ structure(function (y_true, y_pred, k = 5L, ..., name = "top_k_categorical_accur
     else np_array(x)))
     callable <- if (missing(y_true) && missing(y_pred))
         keras$metrics$TopKCategoricalAccuracy
-    else keras$metrics$top_k_categorical_accuracy
+    else keras$metrics$top_op_categorical_accuracy
     do.call(callable, args)
-}, py_function_name = "top_k_categorical_accuracy")
+}, py_function_name = "top_op_categorical_accuracy")
 
 
 #' Approximates the AUC (Area under the curve) of the ROC or PR curves.
@@ -2595,7 +2595,7 @@ structure(function (y_true, y_pred, from_logits = FALSE, label_smoothing = 0,
 #'
 #' ```{r}
 #' # EPSILON = 1e-7, y = y_true, y` = y_pred
-#' # y` = clip_k_clip_by_value(output, EPSILON, 1. - EPSILON)
+#' # y` = clip_op_clip_by_value(output, EPSILON, 1. - EPSILON)
 #' # y` = rbind(c(0.05, 0.95, EPSILON), c(0.1, 0.8, 0.1))
 #' # xent = -sum(y * log(y'), axis = -1)
 #' #      = -((log 0.95), (log 0.1))

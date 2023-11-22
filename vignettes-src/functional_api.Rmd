@@ -598,7 +598,7 @@ custom_dense <- new_layer_class(
     )
   },
   call = function(inputs) {
-    k_matmul(inputs, self$w) + self$b
+    op_matmul(inputs, self$w) + self$b
   }
 )
 
@@ -631,7 +631,7 @@ custom_dense <- new_layer_class(
     )
   },
   call = function(inputs) {
-    k_matmul(inputs, self$w) + self$b
+    op_matmul(inputs, self$w) + self$b
   },
   get_config = function() {
     list(units = self$units)
@@ -713,7 +713,7 @@ MLP <- new_model_class(
 mlp = MLP()
 # Necessary to create the model's state.
 # The model doesn't have a state until it's called at least once.
-out <- mlp(k_zeros(c(1, 32)))
+out <- mlp(op_zeros(c(1, 32)))
 ```
 
 #### Model validation while defining its connectivity graph
@@ -795,7 +795,7 @@ custom_rnn <- new_layer_class(
   },
   call = function(inputs, ...) {
     outputs <- list()
-    state <- k_zeros(c(shape(inputs)[[1]], self$units))
+    state <- op_zeros(c(shape(inputs)[[1]], self$units))
     for (t in 1:(shape(inputs)[[2]])) {
       x <- inputs[, t, ]
       h <- self$projection_1(x)
@@ -803,13 +803,13 @@ custom_rnn <- new_layer_class(
       state <- y
       outputs[[t]] <- y
     }
-    features <- k_stack(outputs, axis = 2)
+    features <- op_stack(outputs, axis = 2)
     self$classifier(features)
   }
 )
 
 rnn_model <- custom_rnn()
-out <- rnn_model(k_zeros(c(1, timesteps, input_dim)))
+out <- rnn_model(op_zeros(c(1, timesteps, input_dim)))
 ```
 
 You can use any subclassed layer or model in the functional API
@@ -849,7 +849,7 @@ custom_rnn <- new_layer_class(
   },
   call = function(inputs, ...) {
     outputs <- list()
-    state <- k_zeros(c(shape(inputs)[[1]], self$units))
+    state <- op_zeros(c(shape(inputs)[[1]], self$units))
     for (t in 1:(shape(inputs)[[2]])) {
       x <- inputs[, t, ]
       h <- self$projection_1(x)
@@ -857,7 +857,7 @@ custom_rnn <- new_layer_class(
       state <- y
       outputs[[t]] <- y
     }
-    features <- k_stack(outputs, axis = 2)
+    features <- op_stack(outputs, axis = 2)
     self$classifier(features)
   }
 )
@@ -871,5 +871,5 @@ outputs <- inputs %>%
   custom_rnn()
 
 model <- keras_model(inputs, outputs)
-out <- model(k_zeros(c(1, 10, 32)))
+out <- model(op_zeros(c(1, 10, 32)))
 ```

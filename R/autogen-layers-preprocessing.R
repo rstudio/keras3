@@ -18,7 +18,7 @@
 #'
 #' ```{r}
 #' layer <- layer_category_encoding(num_tokens = 4, output_mode = "one_hot")
-#' x <- k_array(c(3, 2, 0, 1), "int32")
+#' x <- op_array(c(3, 2, 0, 1), "int32")
 #' layer(x)
 #' ```
 #'
@@ -26,7 +26,7 @@
 #'
 #' ```{r}
 #' layer <- layer_category_encoding(num_tokens = 4, output_mode = "multi_hot")
-#' x <- k_array(rbind(c(0, 1),
+#' x <- op_array(rbind(c(0, 1),
 #'                    c(0, 0),
 #'                    c(1, 2),
 #'                    c(3, 1)), "int32")
@@ -37,11 +37,11 @@
 #'
 #' ```{r, eval = FALSE}
 #' layer <- layer_category_encoding(num_tokens = 4, output_mode = "count")
-#' count_weights <- k_array(rbind(c(.1, .2),
+#' count_weights <- op_array(rbind(c(.1, .2),
 #'                                c(.1, .1),
 #'                                c(.2, .3),
 #'                                c(.4, .2)))
-#' x <- k_array(rbind(c(0, 1),
+#' x <- op_array(rbind(c(0, 1),
 #'                    c(0, 0),
 #'                    c(1, 2),
 #'                    c(3, 1)), "int32")
@@ -194,7 +194,7 @@ function (object, height, width, data_format = NULL, ...)
 #' # Examples
 #' Discretize float values based on provided buckets.
 #' ```{r}
-#' input <- k_array(rbind(c(-1.5, 1, 3.4, 0.5),
+#' input <- op_array(rbind(c(-1.5, 1, 3.4, 0.5),
 #'                        c(0, 3, 1.3, 0),
 #'                        c(-.5, 0, .5, 1),
 #'                        c(1.5, 2, 2.5, 3)))
@@ -572,7 +572,7 @@ function (object, num_bins, mask_value = NULL, salt = NULL, output_mode = "int",
 #'
 #' ```{r}
 #' vocab <- c(12, 36, 1138, 42) |> as.integer()
-#' data <- k_array(rbind(c(12, 1138, 42),
+#' data <- op_array(rbind(c(12, 1138, 42),
 #'                       c(42, 1000, 36)))  # Note OOV tokens
 #' out <- data |> layer_integer_lookup(vocabulary = vocab)
 #' out
@@ -584,7 +584,7 @@ function (object, num_bins, mask_value = NULL, salt = NULL, output_mode = "int",
 #' analyzing the dataset.
 #'
 #' ```{r}
-#' data <- k_array(rbind(c(12, 1138, 42),
+#' data <- op_array(rbind(c(12, 1138, 42),
 #'                       c(42, 1000, 36)))  # Note OOV tokens
 #' layer <- layer_integer_lookup()
 #' layer |> adapt(data)
@@ -608,7 +608,7 @@ function (object, num_bins, mask_value = NULL, salt = NULL, output_mode = "int",
 #'
 #' ```{r}
 #' vocab <- c(12, 36, 1138, 42) |> as.integer()
-#' data <- k_array(rbind(c(12, 1138, 42),
+#' data <- op_array(rbind(c(12, 1138, 42),
 #'                       c(37, 1000, 36)))  # Note OOV tokens
 #' out <- data |>
 #'   layer_integer_lookup(vocabulary = vocab,
@@ -628,7 +628,7 @@ function (object, num_bins, mask_value = NULL, salt = NULL, output_mode = "int",
 #'
 #' ```{r}
 #' vocab <- c(12, 36, 1138, 42) |> as.integer()
-#' data <- k_array(c(12, 36, 1138, 42, 7), 'int32')  # Note OOV tokens
+#' data <- op_array(c(12, 36, 1138, 42, 7), 'int32')  # Note OOV tokens
 #' layer <- layer_integer_lookup(vocabulary = vocab,
 #'                               output_mode = 'one_hot')
 #' layer(data)
@@ -641,7 +641,7 @@ function (object, num_bins, mask_value = NULL, salt = NULL, output_mode = "int",
 #'
 #' ```{r}
 #' vocab <- c(12, 36, 1138, 42) |> as.integer()
-#' data <- k_array(rbind(c(12, 1138, 42, 42),
+#' data <- op_array(rbind(c(12, 1138, 42, 42),
 #'                       c(42,    7, 36,  7)), "int64")  # Note OOV tokens
 #' layer <- layer_integer_lookup(vocabulary = vocab,
 #'                               output_mode = 'multi_hot')
@@ -656,7 +656,7 @@ function (object, num_bins, mask_value = NULL, salt = NULL, output_mode = "int",
 #' ```{r}
 #' vocab <- c(12, 36, 1138, 42) |> as.integer()
 #' data <- rbind(c(12, 1138, 42, 42),
-#'               c(42,    7, 36,  7)) |> k_array("int64")
+#'               c(42,    7, 36,  7)) |> op_array("int64")
 #' layer <- layer_integer_lookup(vocabulary = vocab,
 #'                               output_mode = 'count')
 #' layer(data)
@@ -676,7 +676,7 @@ function (object, num_bins, mask_value = NULL, salt = NULL, output_mode = "int",
 #' vocab <- c(12, 36, 1138, 42) |> as.integer()
 #' idf_weights <- c(0.25, 0.75, 0.6, 0.4)
 #' data <- rbind(c(12, 1138, 42, 42),
-#'               c(42,    7, 36,  7)) |> k_array("int64")
+#'               c(42,    7, 36,  7)) |> op_array("int64")
 #' layer <- layer_integer_lookup(output_mode = 'tf_idf',
 #'                               vocabulary = vocab,
 #'                               idf_weights = idf_weights)
@@ -690,7 +690,7 @@ function (object, num_bins, mask_value = NULL, salt = NULL, output_mode = "int",
 #' vocab <- c(-1, 12, 36, 1138, 42) |> as.integer()
 #' idf_weights <- c(0.9, 0.25, 0.75, 0.6, 0.4)
 #' data <- rbind(c(12, 1138, 42, 42),
-#'               c(42,    7, 36,  7)) |> k_array("int64")
+#'               c(42,    7, 36,  7)) |> op_array("int64")
 #' layer <- layer_integer_lookup(output_mode = 'tf_idf',
 #'                               vocabulary = vocab,
 #'                               idf_weights = idf_weights)
@@ -710,8 +710,8 @@ function (object, num_bins, mask_value = NULL, salt = NULL, output_mode = "int",
 #'
 #' ```{r}
 #' vocab <- c(12, 36, 1138, 42) |> as.integer()
-#' data <- k_array(c(1, 3, 4,
-#'                   4, 0, 2)) |> k_reshape(c(2,-1)) |> k_cast("int32")
+#' data <- op_array(c(1, 3, 4,
+#'                   4, 0, 2)) |> op_reshape(c(2,-1)) |> op_cast("int32")
 #' layer <- layer_integer_lookup(vocabulary = vocab, invert = TRUE)
 #' layer(data)
 #' ```
@@ -725,7 +725,7 @@ function (object, num_bins, mask_value = NULL, salt = NULL, output_mode = "int",
 #'
 #' ```{r}
 #' vocab <- c(12, 36, 1138, 42) |> as.integer()
-#' data <- k_array(rbind(c(12, 1138, 42), c(42, 1000, 36)), "int32")
+#' data <- op_array(rbind(c(12, 1138, 42), c(42, 1000, 36)), "int32")
 #' layer <- layer_integer_lookup(vocabulary = vocab)
 #' i_layer <- layer_integer_lookup(vocabulary = get_vocabulary(layer),
 #'                                 invert = TRUE)
@@ -881,8 +881,8 @@ function (object, max_tokens = NULL, num_oov_indices = 1L, mask_token = NULL,
 #' Calculate a global mean and variance by analyzing the dataset in `adapt()`.
 #'
 #' ```{r}
-#' adapt_data <- k_array(c(1., 2., 3., 4., 5.), dtype='float32')
-#' input_data <- k_array(c(1., 2., 3.), dtype='float32')
+#' adapt_data <- op_array(c(1., 2., 3., 4., 5.), dtype='float32')
+#' input_data <- op_array(c(1., 2., 3.), dtype='float32')
 #' layer <- layer_normalization(axis = NULL)
 #' layer %>% adapt(adapt_data)
 #' layer(input_data)
@@ -891,11 +891,11 @@ function (object, max_tokens = NULL, num_oov_indices = 1L, mask_token = NULL,
 #' Calculate a mean and variance for each index on the last axis.
 #'
 #' ```{r}
-#' adapt_data <- k_array(rbind(c(0., 7., 4.),
+#' adapt_data <- op_array(rbind(c(0., 7., 4.),
 #'                        c(2., 9., 6.),
 #'                        c(0., 7., 4.),
 #'                        c(2., 9., 6.)), dtype='float32')
-#' input_data <- k_array(matrix(c(0., 7., 4.), nrow = 1), dtype='float32')
+#' input_data <- op_array(matrix(c(0., 7., 4.), nrow = 1), dtype='float32')
 #' layer <- layer_normalization(axis=-1)
 #' layer %>% adapt(adapt_data)
 #' layer(input_data)
@@ -904,7 +904,7 @@ function (object, max_tokens = NULL, num_oov_indices = 1L, mask_token = NULL,
 #' Pass the mean and variance directly.
 #'
 #' ```{r}
-#' input_data <- k_array(rbind(1, 2, 3), dtype='float32')
+#' input_data <- op_array(rbind(1, 2, 3), dtype='float32')
 #' layer <- layer_normalization(mean=3., variance=2.)
 #' layer(input_data)
 #' ```
@@ -912,11 +912,11 @@ function (object, max_tokens = NULL, num_oov_indices = 1L, mask_token = NULL,
 #' Use the layer to de-normalize inputs (after adapting the layer).
 #'
 #' ```{r}
-#' adapt_data <- k_array(rbind(c(0., 7., 4.),
+#' adapt_data <- op_array(rbind(c(0., 7., 4.),
 #'                        c(2., 9., 6.),
 #'                        c(0., 7., 4.),
 #'                        c(2., 9., 6.)), dtype='float32')
-#' input_data <- k_array(c(1., 2., 3.), dtype='float32')
+#' input_data <- op_array(c(1., 2., 3.), dtype='float32')
 #' layer <- layer_normalization(axis=-1, invert=TRUE)
 #' layer %>% adapt(adapt_data)
 #' layer(input_data)

@@ -374,7 +374,7 @@ function (shape, minval = 0, maxval = 1, dtype = NULL, seed = NULL)
 #' )
 #'
 #' out <- layer_dropout(rate = 0.8)
-#' out(k_ones(10), training = TRUE)
+#' out(op_ones(10), training = TRUE)
 #' ```
 #'
 #' @param seed

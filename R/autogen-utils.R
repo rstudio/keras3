@@ -464,11 +464,11 @@ function (name, custom_objects = NULL, module_objects = NULL)
 #' Standalone usage:
 #'
 #' ```{r}
-#' x <- k_ones(c(10, 1))
+#' x <- op_ones(c(10, 1))
 #' data <- pack_x_y_sample_weight(x)
 #'
 #' # TRUE
-#' y <- k_ones(c(10, 1))
+#' y <- op_ones(c(10, 1))
 #' data <- pack_x_y_sample_weight(x, y)
 #' ```
 #'
@@ -513,8 +513,8 @@ function (x, y = NULL, sample_weight = NULL)
 #' Standalone usage:
 #'
 #' ```{r}
-#' features_batch <- k_ones(c(10, 5))
-#' labels_batch <- k_zeros(c(10, 5))
+#' features_batch <- op_ones(c(10, 5))
+#' labels_batch <- op_zeros(c(10, 5))
 #' data <- list(features_batch, labels_batch)
 #' # `y` and `sample_weight` will default to `NULL` if not provided.
 #' c(x, y, sample_weight) %<-% unpack_x_y_sample_weight(data)
@@ -1294,12 +1294,12 @@ function (x, axis = -1L, order = 2L)
 #'               .04, .01, .94, .05,
 #'               .12, .21, .5, .17),
 #'               dim = c(4, 4))
-#' loss <- k_categorical_crossentropy(a, b)
+#' loss <- op_categorical_crossentropy(a, b)
 #' loss
 #' ```
 #'
 #' ```{r}
-#' loss <- k_categorical_crossentropy(a, a)
+#' loss <- op_categorical_crossentropy(a, a)
 #' loss
 #' ```
 #'
@@ -1622,7 +1622,7 @@ function (directory, labels = "inferred", label_mode = "int",
 #' timesteps to predict the next timestep, you would use:
 #'
 #' ```{r}
-#' data <- k_array(1:20)
+#' data <- op_array(1:20)
 #' input_data <- data[1:10]
 #' targets <- data[11:20]
 #' dataset <- timeseries_dataset_from_array(
@@ -1640,7 +1640,7 @@ function (directory, labels = "inferred", label_mode = "int",
 #' to predict the corresponding target timestep, you would use:
 #'
 #' ```{r}
-#' X <- k_array(1:100)
+#' X <- op_array(1:100)
 #' Y <- X*2
 #'
 #' sample_length <- 20

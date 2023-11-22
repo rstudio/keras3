@@ -157,13 +157,13 @@ at custom layers first.
 
 If you're already familiar with writing custom layers in `tf.keras` -- well, nothing
 has changed. Except one thing: instead of using functions from the `tf` namespace, you should use functions
-from `keras::k_*`.
+from `keras::op_*`.
 
-The `k_*` namespace contains:
+The `op_*` namespace contains:
 
-- An implementation of the NumPy API, e.g. `k_stack` or `k_matmul`.
-- A set of neural network specific ops that are absent from NumPy, such as `k_conv`
-or `k_binary_crossentropy`.
+- An implementation of the NumPy API, e.g. `op_stack` or `op_matmul`.
+- A set of neural network specific ops that are absent from NumPy, such as `op_conv`
+or `op_binary_crossentropy`.
 
 Let's make a custom `Dense` layer that works with all backends:
 
@@ -195,7 +195,7 @@ layer_my_dense <- new_layer_class(
   },
 
   call = function(self, inputs) {
-    # Use k_* Ops to create backend-agnostic layers/metrics/etc.
+    # Use op_* Ops to create backend-agnostic layers/metrics/etc.
     x <- (inputs %*% self$w) + self$b
     self$activation(x)
   }
@@ -219,7 +219,7 @@ layer_my_dropout <- new_layer_class(
   },
 
   call = function(self, inputs) {
-    # Use `k_random` for random ops.
+    # Use `op_random` for random ops.
     random_dropout(inputs, self$rate, seed = self$seed_generator)
   }
 )

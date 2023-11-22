@@ -10,8 +10,8 @@
 #' # Examples
 #' ```{r}
 #' input_shape <- c(1, 2, 3)
-#' x1 <- k_ones(input_shape)
-#' x2 <- k_ones(input_shape)
+#' x1 <- op_ones(input_shape)
+#' x2 <- op_ones(input_shape)
 #' layer_add(x1, x2)
 #' ```
 #'
@@ -74,8 +74,8 @@ function (inputs, ...)
 #' # Examples
 #' ```{r}
 #' input_shape <- c(1, 2, 3)
-#' x1 <- k_ones(input_shape)
-#' x2 <- k_zeros(input_shape)
+#' x1 <- op_ones(input_shape)
+#' x2 <- op_zeros(input_shape)
 #' layer_average(x1, x2)
 #' ```
 #'
@@ -137,15 +137,15 @@ function (inputs, ...)
 #'
 #' # Examples
 #' ```{r}
-#' x <- k_arange(20) |> k_reshape(c(2, 2, 5))
-#' y <- k_arange(20, 40) |> k_reshape(c(2, 2, 5))
+#' x <- op_arange(20) |> op_reshape(c(2, 2, 5))
+#' y <- op_arange(20, 40) |> op_reshape(c(2, 2, 5))
 #' layer_concatenate(x, y, axis = 2)
 #' ```
 #' Usage in a Keras model:
 #'
 #' ```{r}
-#' x1 <- k_arange(10)     |> k_reshape(c(5, 2)) |> layer_dense(8)
-#' x2 <- k_arange(10, 20) |> k_reshape(c(5, 2)) |> layer_dense(8)
+#' x1 <- op_arange(10)     |> op_reshape(c(5, 2)) |> layer_dense(8)
+#' x2 <- op_arange(10, 20) |> op_reshape(c(5, 2)) |> layer_dense(8)
 #' y <- layer_concatenate(x1, x2)
 #' ```
 #'
@@ -205,16 +205,16 @@ function (inputs, ..., axis = -1L)
 #'
 #' # Examples
 #' ```{r}
-#' x <- k_reshape(0:9,   c(1, 5, 2))
-#' y <- k_reshape(10:19, c(1, 2, 5))
+#' x <- op_reshape(0:9,   c(1, 5, 2))
+#' y <- op_reshape(10:19, c(1, 2, 5))
 #' layer_dot(x, y, axes=c(2, 3))
 #' ```
 #'
 #' Usage in a Keras model:
 #'
 #' ```{r}
-#' x1 <- k_reshape(0:9, c(5, 2)) |> layer_dense(8)
-#' x2 <- k_reshape(10:19, c(5, 2)) |> layer_dense(8)
+#' x1 <- op_reshape(0:9, c(5, 2)) |> layer_dense(8)
+#' x2 <- op_reshape(10:19, c(5, 2)) |> layer_dense(8)
 #' shape(x1)
 #' shape(x2)
 #' y <- layer_dot(x1, x2, axes=2)

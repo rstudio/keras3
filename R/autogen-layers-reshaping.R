@@ -9,7 +9,7 @@
 #' # Examples
 #' ```{r}
 #' input_shape <- c(2, 3, 2)
-#' x <- k_arange(prod(input_shape)) |> k_reshape(input_shape)
+#' x <- op_arange(prod(input_shape)) |> op_reshape(input_shape)
 #' x
 #'
 #' y <- x |> layer_cropping_1d(cropping = 1)
@@ -61,7 +61,7 @@ function (object, cropping = list(1L, 1L), ...)
 #' # Examples
 #' ```{r}
 #' input_shape <- c(2, 28, 28, 3)
-#' x <- k_arange(prod(input_shape), dtype ='int32') |> k_reshape(input_shape)
+#' x <- op_arange(prod(input_shape), dtype ='int32') |> op_reshape(input_shape)
 #' y <- x |> layer_cropping_2d(cropping=list(c(2, 2), c(4, 4)))
 #' shape(y)
 #' ```
@@ -133,7 +133,7 @@ function (object, cropping = list(list(0L, 0L), list(0L, 0L)),
 #' # Examples
 #' ```{r}
 #' input_shape <- c(2, 28, 28, 10, 3)
-#' x <- input_shape %>% { k_reshape(seq(prod(.)), .) }
+#' x <- input_shape %>% { op_reshape(seq(prod(.)), .) }
 #' y <- x |> layer_cropping_3d(cropping = c(2, 4, 2))
 #' shape(y)
 #' ```
@@ -407,7 +407,7 @@ function (object, target_shape, ...)
 #' # Examples
 #' ```{r}
 #' input_shape <- c(2, 2, 3)
-#' x <- seq_len(prod(input_shape)) %>% k_reshape(input_shape)
+#' x <- seq_len(prod(input_shape)) %>% op_reshape(input_shape)
 #' x
 #' y <- layer_upsampling_1d(x, size = 2)
 #' y
@@ -461,7 +461,7 @@ function (object, size = 2L, ...)
 #' # Examples
 #' ```{r}
 #' input_shape <- c(2, 2, 1, 3)
-#' x <- k_reshape(seq_len(prod(input_shape)), input_shape)
+#' x <- op_reshape(seq_len(prod(input_shape)), input_shape)
 #' print(x)
 #' y <- layer_upsampling_2d(x, size = c(1, 2))
 #' print(y)
@@ -606,7 +606,7 @@ function (object, size = list(2L, 2L, 2L), data_format = NULL,
 #' # Examples
 #' ```{r}
 #' input_shape <- c(2, 2, 3)
-#' x <- k_reshape(seq_len(prod(input_shape)), input_shape)
+#' x <- op_reshape(seq_len(prod(input_shape)), input_shape)
 #' x
 #' y <- layer_zero_padding_1d(x, padding = 2)
 #' y
@@ -658,7 +658,7 @@ function (object, padding = 1L, ...)
 #' # Examples
 #' ```{r}
 #' input_shape <- c(1, 1, 2, 2)
-#' x <- k_reshape(seq_len(prod(input_shape)), input_shape)
+#' x <- op_reshape(seq_len(prod(input_shape)), input_shape)
 #' x
 #' y <- layer_zero_padding_2d(x, padding = 1)
 #' y
@@ -731,7 +731,7 @@ function (object, padding = list(1L, 1L), data_format = NULL,
 #' # Examples
 #' ```{r}
 #' input_shape <- c(1, 1, 2, 2, 3)
-#' x <- k_reshape(seq_len(prod(input_shape)), input_shape)
+#' x <- op_reshape(seq_len(prod(input_shape)), input_shape)
 #' x
 #' y <- layer_zero_padding_3d(x, padding = 2)
 #' shape(y)

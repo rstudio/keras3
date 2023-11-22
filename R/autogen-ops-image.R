@@ -8,28 +8,28 @@
 #' # Examples
 #' ```{r}
 #' x <- random_uniform(c(2, 64, 80, 3)) # batch of 2 RGB images
-#' transform <- k_array(rbind(c(1.5, 0, -20, 0, 1.5, -16, 0, 0),  # zoom
+#' transform <- op_array(rbind(c(1.5, 0, -20, 0, 1.5, -16, 0, 0),  # zoom
 #'                            c(1, 0, -20, 0, 1, -16, 0, 0)))  # translation))
-#' y <- k_image_affine_transform(x, transform)
+#' y <- op_image_affine_transform(x, transform)
 #' shape(y)
 #' # (2, 64, 80, 3)
 #' ```
 #'
 #' ```{r}
 #' x <- random_uniform(c(64, 80, 3)) # single RGB image
-#' transform <- k_array(c(1.0, 0.5, -20, 0.5, 1.0, -16, 0, 0))  # shear
-#' y <- k_image_affine_transform(x, transform)
+#' transform <- op_array(c(1.0, 0.5, -20, 0.5, 1.0, -16, 0, 0))  # shear
+#' y <- op_image_affine_transform(x, transform)
 #' shape(y)
 #' # (64, 80, 3)
 #' ```
 #'
 #' ```{r}
 #' x <- random_uniform(c(2, 3, 64, 80)) # batch of 2 RGB images
-#' transform <- k_array(rbind(
+#' transform <- op_array(rbind(
 #'   c(1.5, 0,-20, 0, 1.5,-16, 0, 0),  # zoom
 #'   c(1, 0,-20, 0, 1,-16, 0, 0)  # translation
 #' ))
-#' y <- k_image_affine_transform(x, transform, data_format = "channels_first")
+#' y <- op_image_affine_transform(x, transform, data_format = "channels_first")
 #' shape(y)
 #' # (2, 3, 64, 80)
 #' ```
@@ -95,7 +95,7 @@
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/image/affine_transform>
 #'
 #' @tether keras.ops.image.affine_transform
-k_image_affine_transform <-
+op_image_affine_transform <-
 function (image, transform, interpolation = "bilinear", fill_mode = "constant",
     fill_value = 0L, data_format = "channels_last")
 {
@@ -111,11 +111,11 @@ function (image, transform, interpolation = "bilinear", fill_mode = "constant",
 #' # Examples
 #' ```{r}
 #' image <- random_uniform(c(2, 20, 20, 3), dtype = "float32") # batch of 2 RGB images
-#' patches <- k_image_extract_patches(image, c(5, 5))
+#' patches <- op_image_extract_patches(image, c(5, 5))
 #' shape(patches)
 #' # (2, 4, 4, 75)
 #' image <- random_uniform(c(20, 20, 3), dtype = "float32") # 1 RGB image
-#' patches <- k_image_extract_patches(image, c(3, 3), c(1, 1))
+#' patches <- op_image_extract_patches(image, c(3, 3), c(1, 1))
 #' shape(patches)
 #' # (18, 18, 27)
 #' ```
@@ -161,7 +161,7 @@ function (image, transform, interpolation = "bilinear", fill_mode = "constant",
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/image/extract_patches>
 #'
 #' @tether keras.ops.image.extract_patches
-k_image_extract_patches <-
+op_image_extract_patches <-
 function (image, size, strides = NULL, dilation_rate = 1L, padding = "valid",
     data_format = "channels_last")
 {
@@ -221,7 +221,7 @@ function (image, size, strides = NULL, dilation_rate = 1L, padding = "valid",
 #' @seealso
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/image/map_coordinates>
 #' @tether keras.ops.image.map_coordinates
-k_image_map_coordinates <-
+op_image_map_coordinates <-
 function (input, coordinates, order, fill_mode = "constant",
     fill_value = 0L)
 {
@@ -237,7 +237,7 @@ function (input, coordinates, order, fill_mode = "constant",
 #' # Examples
 #' ```{r}
 #' images <- random_uniform(c(15, 25, 3))
-#' padded_images <- k_image_pad_images(
+#' padded_images <- op_image_pad_images(
 #'     images, 2, 3, target_height = 20, target_width = 30
 #' )
 #' shape(padded_images)
@@ -245,7 +245,7 @@ function (input, coordinates, order, fill_mode = "constant",
 #'
 #' ```{r}
 #' batch_images <- random_uniform(c(2, 15, 25, 3))
-#' padded_batch <- k_image_pad_images(batch_images, 2, 3,
+#' padded_batch <- op_image_pad_images(batch_images, 2, 3,
 #'                                    target_height = 20,
 #'                                    target_width = 30)
 #' shape(padded_batch)
@@ -287,7 +287,7 @@ function (input, coordinates, order, fill_mode = "constant",
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/image/pad_images>
 #'
 #' @tether keras.ops.image.pad_images
-k_image_pad_images <-
+op_image_pad_images <-
 function (images, top_padding = NULL, left_padding = NULL, target_height = NULL,
     target_width = NULL, bottom_padding = NULL, right_padding = NULL)
 {
@@ -307,19 +307,19 @@ function (images, top_padding = NULL, left_padding = NULL, target_height = NULL,
 #' # Examples
 #' ```{r}
 #' x <- random_uniform(c(2, 4, 4, 3)) # batch of 2 RGB images
-#' y <- k_image_resize(x, c(2, 2))
+#' y <- op_image_resize(x, c(2, 2))
 #' shape(y)
 #' ```
 #'
 #' ```{r}
 #' x <- random_uniform(c(4, 4, 3)) # single RGB image
-#' y <- k_image_resize(x, c(2, 2))
+#' y <- op_image_resize(x, c(2, 2))
 #' shape(y)
 #' ```
 #'
 #' ```{r}
 #' x <- random_uniform(c(2, 3, 4, 4)) # batch of 2 RGB images
-#' y <- k_image_resize(x, c(2, 2), data_format = "channels_first")
+#' y <- op_image_resize(x, c(2, 2), data_format = "channels_first")
 #' shape(y)
 #' ```
 #'
@@ -358,7 +358,7 @@ function (images, top_padding = NULL, left_padding = NULL, target_height = NULL,
 #' + <https:/keras.io/keras_core/api/ops/image#resize-function>
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/image/resize>
 #' @tether keras.ops.image.resize
-k_image_resize <-
+op_image_resize <-
 function (image, size, interpolation = "bilinear", antialias = FALSE,
     data_format = "channels_last")
 {

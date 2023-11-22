@@ -417,8 +417,8 @@ Let's test-drive it:
 # Prepare the dataset. We use both the training & test MNIST digits.
 batch_size <- 64
 c(c(x_train, .), c(x_test, .)) %<-% dataset_mnist()
-all_digits <- k_concatenate(list(x_train, x_test))
-all_digits <- k_reshape(all_digits, c(-1, 28, 28, 1))
+all_digits <- op_concatenate(list(x_train, x_test))
+all_digits <- op_reshape(all_digits, c(-1, 28, 28, 1))
 dataset <- all_digits %>%
   tfdatasets::tensor_slices_dataset() %>%
   tfdatasets::dataset_map(function(x) tf$cast(x, "float")/255) %>% 

@@ -12,7 +12,7 @@
 #' layer(x)
 #' layer <- layer_activation(activation = activation_relu)
 #' layer(x)
-#' layer <- layer_activation(activation = k_relu)
+#' layer <- layer_activation(activation = op_relu)
 #' layer(x)
 #' ```
 #'
@@ -249,7 +249,7 @@ function (object, max_value = NULL, negative_slope = 0, threshold = 0,
 #' # Examples
 #' ```{r}
 #' softmax_layer <- layer_activation_softmax()
-#' input <- k_array(c(1, 2, 1))
+#' input <- op_array(c(1, 2, 1))
 #' softmax_layer(input)
 #' ```
 #'

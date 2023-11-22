@@ -304,7 +304,7 @@ function (object, groups = 32L, axis = -1L, epsilon = 0.001,
 #' ```{r}
 #' layer <- layer_layer_normalization(axis = c(2, 3, 4))
 #'
-#' layer(k_ones(c(5, 20, 30, 40))) |> invisible() # build()
+#' layer(op_ones(c(5, 20, 30, 40))) |> invisible() # build()
 #' shape(layer$beta)
 #' shape(layer$gamma)
 #' ```
@@ -463,9 +463,9 @@ function (object, layer, power_iterations = 1L, ...)
 #'
 #' # Examples
 #' ```{r}
-#' data <- k_reshape(1:6, new_shape = c(2, 3))
+#' data <- op_reshape(1:6, new_shape = c(2, 3))
 #' normalized_data <- layer_unit_normalization(data)
-#' k_sum(normalized_data[1,]^2)
+#' op_sum(normalized_data[1,]^2)
 #' ```
 #'
 #' @param axis

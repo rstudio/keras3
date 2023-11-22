@@ -7,8 +7,8 @@
 #'
 #' # Examples
 #' ```{r}
-#' (x <- k_arange(4))
-#' k_cast(x, dtype = "float16")
+#' (x <- op_arange(4))
+#' op_cast(x, dtype = "float16")
 #' ```
 #'
 #' @returns
@@ -27,7 +27,7 @@
 #' + <https:/keras.io/keras_core/api/ops/core#cast-function>
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/cast>
 #' @tether keras.ops.cast
-k_cast <-
+op_cast <-
 function (x, dtype)
 keras$ops$cast(x, dtype)
 
@@ -52,7 +52,7 @@ keras$ops$cast(x, dtype)
 #' @seealso
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/cond>
 #' @tether keras.ops.cond
-k_cond <-
+op_cond <-
 function (pred, true_fn, false_fn)
 keras$ops$cond(pred, true_fn, false_fn)
 
@@ -72,7 +72,7 @@ keras$ops$cond(pred, true_fn, false_fn)
 #' + <https:/keras.io/keras_core/api/ops/core#converttonumpy-function>
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/convert_to_numpy>
 #' @tether keras.ops.convert_to_numpy
-k_convert_to_numpy <-
+op_convert_to_numpy <-
 function (x)
 keras$ops$convert_to_numpy(x)
 
@@ -84,7 +84,7 @@ keras$ops$convert_to_numpy(x)
 #' # Examples
 #' ```{r}
 #' x <- array(c(1, 2, 3))
-#' y <- k_convert_to_tensor(x)
+#' y <- op_convert_to_tensor(x)
 #' y
 #' ```
 #'
@@ -106,11 +106,11 @@ keras$ops$convert_to_numpy(x)
 #' @family core ops
 #' @family ops
 #' @seealso
-#' + [k_array()]
+#' + [op_array()]
 #' + <https:/keras.io/keras_core/api/ops/core#converttotensor-function>
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/convert_to_tensor>
 #' @tether keras.ops.convert_to_tensor
-k_convert_to_tensor <-
+op_convert_to_tensor <-
 function (x, dtype = NULL, sparse = NULL)
 keras$ops$convert_to_tensor(x, dtype, sparse)
 
@@ -125,7 +125,7 @@ keras$ops$convert_to_tensor(x, dtype, sparse)
 #' upper <- 10L
 #' body_fun <- function(i, state) state + i
 #' init_state <- 0L
-#' final_state <- k_fori_loop(lower, upper, body_fun, init_state)
+#' final_state <- op_fori_loop(lower, upper, body_fun, init_state)
 #' final_state
 #' ```
 #'
@@ -152,7 +152,7 @@ keras$ops$convert_to_tensor(x, dtype, sparse)
 #' @seealso
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/fori_loop>
 #' @tether keras.ops.fori_loop
-k_fori_loop <-
+op_fori_loop <-
 function (lower, upper, body_fun, init_val)
 keras$ops$fori_loop(lower, upper, body_fun, init_val)
 
@@ -177,7 +177,7 @@ keras$ops$fori_loop(lower, upper, body_fun, init_val)
 #' @seealso
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/is_tensor>
 #' @tether keras.ops.is_tensor
-k_is_tensor <-
+op_is_tensor <-
 function (x)
 keras$ops$is_tensor(x)
 
@@ -189,14 +189,14 @@ keras$ops$is_tensor(x)
 #' returns the output. It is equivalent to:
 #'
 #' ```{r, eval = FALSE}
-#' output <- k_scatter_update(k_zeros(shape), indices, values)
+#' output <- op_scatter_update(op_zeros(shape), indices, values)
 #' ```
 #'
 #' # Examples
 #' ```{r}
 #' indices <- rbind(c(1, 2), c(2, 2))
-#' values <- k_array(c(1, 1))
-#' k_scatter(indices, values, shape= c(2, 2))
+#' values <- op_array(c(1, 1))
+#' op_scatter(indices, values, shape= c(2, 2))
 #' ```
 #'
 #' @param indices
@@ -216,7 +216,7 @@ keras$ops$is_tensor(x)
 #' + <https:/keras.io/keras_core/api/ops/core#scatter-function>
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/scatter>
 #' @tether keras.ops.scatter
-k_scatter <-
+op_scatter <-
 function (indices, values, shape)
 {
     args <- capture_args2(list(indices = as_index, shape = normalize_shape))
@@ -233,31 +233,31 @@ function (indices, values, shape)
 #'
 #' 1. `indices` is a 2D tensor of shape `(num_updates, n)`, where `num_updates`
 #'     is the number of updates to perform, and `updates` is a 1D tensor of
-#'     shape `(num_updates)`. For example, if `inputs` is `k_zeros(c(4, 4, 4))`,
+#'     shape `(num_updates)`. For example, if `inputs` is `op_zeros(c(4, 4, 4))`,
 #'     and we want to update `inputs[2, 3, 4]` and `inputs[1, 2, 4]` as 1, then
 #'     we can use:
 #'
 #' ```{r}
-#' inputs <- k_zeros(c(4, 4, 4))
+#' inputs <- op_zeros(c(4, 4, 4))
 #' indices <- rbind(c(2, 3, 4), c(1, 2, 4))
-#' updates <- k_array(c(1, 1), "float32")
-#' k_scatter_update(inputs, indices, updates)
+#' updates <- op_array(c(1, 1), "float32")
+#' op_scatter_update(inputs, indices, updates)
 #' ```
 #'
 #' 2 `indices` is a 2D tensor of shape `(num_updates, k)`, where `num_updates`
 #'     is the number of updates to perform, and `k` (`k <= n`) is the size of
 #'     each index in `indices`. `updates` is a `n - k`-D tensor of shape
 #'     `(num_updates, inputs.shape[k:))`. For example, if
-#'     `inputs = k_zeros(c(4, 4, 4))`, and we want to update `inputs[1, 2, ]`
+#'     `inputs = op_zeros(c(4, 4, 4))`, and we want to update `inputs[1, 2, ]`
 #'     and `inputs[2, 3, ]` as `[1, 1, 1, 1]`, then `indices` would have shape
 #'     `(num_updates, 2)` (`k = 2`), and `updates` would have shape
 #'     `(num_updates, 4)` (`inputs.shape[2:] = 4`). See the code below:
 #'
 #' ```{r}
-#' inputs <- k_zeros(c(4, 4, 4))
+#' inputs <- op_zeros(c(4, 4, 4))
 #' indices <- rbind(c(2, 3), c(3, 4))
-#' updates <- k_array(rbind(c(1, 1, 1, 1), c(1, 1, 1, 1)), "float32")
-#' k_scatter_update(inputs, indices, updates)
+#' updates <- op_array(rbind(c(1, 1, 1, 1), c(1, 1, 1, 1)), "float32")
+#' op_scatter_update(inputs, indices, updates)
 #' ```
 #'
 #' @returns
@@ -281,7 +281,7 @@ function (indices, values, shape)
 #' + <https:/keras.io/keras_core/api/ops/core#scatterupdate-function>
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/scatter_update>
 #' @tether keras.ops.scatter_update
-k_scatter_update <-
+op_scatter_update <-
 function (inputs, indices, updates)
 {
     args <- capture_args2(list(indices = as_index))
@@ -300,8 +300,8 @@ function (inputs, indices, updates)
 #'
 #' # Examples
 #' ```{r}
-#' x <- k_zeros(c(8, 12))
-#' k_shape(x)
+#' x <- op_zeros(c(8, 12))
+#' op_shape(x)
 #' ```
 #'
 #' @returns
@@ -319,7 +319,7 @@ function (inputs, indices, updates)
 #' + <https:/keras.io/keras_core/api/ops/core#shape-function>
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/shape>
 #' @tether keras.ops.shape
-k_shape <-
+op_shape <-
 function (x)
 {
     out <- keras$ops$shape(x)
@@ -338,10 +338,10 @@ function (x)
 #' via other tensor operations.
 #'
 #' ```{r}
-#' (inputs <- k_arange(5*5) |> k_reshape(c(5, 5)))
+#' (inputs <- op_arange(5*5) |> op_reshape(c(5, 5)))
 #' start_indices <- c(3, 3)
 #' shape <- c(2, 2)
-#' k_slice(inputs, start_indices, shape)
+#' op_slice(inputs, start_indices, shape)
 #' ```
 #'
 #' @returns
@@ -365,7 +365,7 @@ function (x)
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/slice>
 #'
 #' @tether keras.ops.slice
-k_slice <-
+op_slice <-
 function (inputs, start_indices, shape)
 {
     args <- capture_args2(list(shape = normalize_shape, start_indices = as_index))
@@ -382,15 +382,15 @@ function (inputs, start_indices, shape)
 #' `start_indices` must be a list of n integers, specifying the starting
 #' indices. `updates` must have the same rank as `inputs`, and the size of each
 #' dim must not exceed `Di - start_indices[i]`. For example, if we have 2D
-#' inputs `inputs = k_zeros(c(5, 5))`, and we want to update the intersection
+#' inputs `inputs = op_zeros(c(5, 5))`, and we want to update the intersection
 #' of last 2 rows and last 2 columns as 1, i.e.,
-#' `inputs[4:5, 4:5] = k_ones(c(2, 2))`, then we can use the code below:
+#' `inputs[4:5, 4:5] = op_ones(c(2, 2))`, then we can use the code below:
 #'
 #' ```{r}
-#' inputs <- k_zeros(c(5, 5))
+#' inputs <- op_zeros(c(5, 5))
 #' start_indices <- c(3, 3)
-#' updates <- k_ones(c(2, 2))
-#' k_slice_update(inputs, start_indices, updates)
+#' updates <- op_ones(c(2, 2))
+#' op_slice_update(inputs, start_indices, updates)
 #' ```
 #'
 #' @returns
@@ -414,7 +414,7 @@ function (inputs, start_indices, shape)
 #' + <https:/keras.io/keras_core/api/ops/core#sliceupdate-function>
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/slice_update>
 #' @tether keras.ops.slice_update
-k_slice_update <-
+op_slice_update <-
 function (inputs, start_indices, updates)
 {
     args <- capture_args2(list(start_indices = as_index))
@@ -428,8 +428,8 @@ function (inputs, start_indices, updates)
 #'
 #' # Examples
 #' ```{r}
-#' var <- k_convert_to_tensor(c(1, 2, 3), dtype="float32")
-#' var <- k_stop_gradient(var)
+#' var <- op_convert_to_tensor(c(1, 2, 3), dtype="float32")
+#' var <- op_stop_gradient(var)
 #' ```
 #'
 #' @returns
@@ -447,7 +447,7 @@ function (inputs, start_indices, updates)
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/stop_gradient>
 #'
 #' @tether keras.ops.stop_gradient
-k_stop_gradient <-
+op_stop_gradient <-
 function (variable)
 keras$ops$stop_gradient(variable)
 
@@ -458,18 +458,18 @@ keras$ops$stop_gradient(variable)
 #'
 #' # Examples
 #' ```{r}
-#' x <- k_array(rbind(c(1, 2),
+#' x <- op_array(rbind(c(1, 2),
 #'                    c(3, 4)))
-#' k_unstack(x, axis=1)
-#' k_unstack(x, axis=2)
+#' op_unstack(x, axis=1)
+#' op_unstack(x, axis=2)
 #' ```
 #'
 #'
 #' ```{r}
-#' all.equal(k_unstack(x),
-#'           k_unstack(x, axis = 1))
-#' all.equal(k_unstack(x, axis = -1),
-#'           k_unstack(x, axis = 2))
+#' all.equal(op_unstack(x),
+#'           op_unstack(x, axis = 1))
+#' all.equal(op_unstack(x, axis = -1),
+#'           op_unstack(x, axis = 2))
 #' # [array([1, 2)), array([3, 4))]
 #' ```
 #'
@@ -493,7 +493,7 @@ keras$ops$stop_gradient(variable)
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/unstack>
 #'
 #' @tether keras.ops.unstack
-k_unstack <-
+op_unstack <-
 function (x, num = NULL, axis = 1L)
 {
     args <- capture_args2(list(axis = as_axis))
@@ -508,7 +508,7 @@ function (x, num = NULL, axis = 1L)
 #' in the case of a single tensor input `elements`:
 #'
 #' ```{r, eval = FALSE}
-#' k_vectorized_map <- function(elements, f) {
+#' op_vectorized_map <- function(elements, f) {
 #'   apply(elements, 1, f)
 #' }
 #' ```
@@ -517,13 +517,13 @@ function (x, num = NULL, axis = 1L)
 #' it implements the following:
 #'
 #' ```{r, eval = FALSE}
-#' k_vectorized_map <- function(elements, f) {
+#' op_vectorized_map <- function(elements, f) {
 #'     batch_size <- elements[[1]] |> shape() |> _[[1]]
 #'     outputs <- vector("list", batch_size)
 #'     outputs <- lapply(seq(batch_size), \(index) {
 #'         f(lapply(elements, \(e) e[index, all_dims()]))
 #'     }
-#'     k_stack(outputs)
+#'     op_stack(outputs)
 #' }
 #' ```
 #'
@@ -532,9 +532,9 @@ function (x, num = NULL, axis = 1L)
 #'
 #'
 #' ```{r}
-#' (x <- k_arange(4*4) |> k_reshape(c(4,4)))
-#' x |> k_vectorized_map(\(row) {row + 10})
-#' list(x, x, x) |> k_vectorized_map(\(rows) Reduce(`+`, rows))
+#' (x <- op_arange(4*4) |> op_reshape(c(4,4)))
+#' x |> op_vectorized_map(\(row) {row + 10})
+#' list(x, x, x) |> op_vectorized_map(\(rows) Reduce(`+`, rows))
 #' ```
 #'
 #' @param elements
@@ -549,7 +549,7 @@ function (x, num = NULL, axis = 1L)
 #' @seealso
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/vectorized_map>
 #' @tether keras.ops.vectorized_map
-k_vectorized_map <-
+op_vectorized_map <-
 function (elements, f)
 keras$ops$vectorized_map(f, elements)
 
@@ -570,7 +570,7 @@ keras$ops$vectorized_map(f, elements)
 #' # body must return same shape as loop_vars
 #' body <- function(i) list(i + 1L)
 #'
-#' k_while_loop(cond, body, loop_vars)
+#' op_while_loop(cond, body, loop_vars)
 #' ```
 #'
 #' @returns
@@ -602,7 +602,7 @@ keras$ops$vectorized_map(f, elements)
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/while_loop>
 #'
 #' @tether keras.ops.while_loop
-k_while_loop <-
+op_while_loop <-
 function (cond, body, loop_vars, maximum_iterations = NULL)
 keras$ops$while_loop(cond, body, loop_vars, maximum_iterations)
 
@@ -613,8 +613,8 @@ keras$ops$while_loop(cond, body, loop_vars, maximum_iterations)
 #'
 #' # Examples
 #' ```{r}
-#' x <- k_array(c(-3, -2, -1, 0, 1))
-#' k_erf(x)
+#' x <- op_array(c(-3, -2, -1, 0, 1))
+#' op_erf(x)
 #' # array([-0.99998 , -0.99532, -0.842701,  0.,  0.842701], dtype=float32)
 #' ```
 #'
@@ -630,7 +630,7 @@ keras$ops$while_loop(cond, body, loop_vars, maximum_iterations)
 #' @seealso
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/erf>
 #' @tether keras.ops.erf
-k_erf <-
+op_erf <-
 function (x)
 keras$ops$erf(x)
 
@@ -649,8 +649,8 @@ keras$ops$erf(x)
 #'
 #' # Examples
 #' ```{r}
-#' x <- k_convert_to_tensor(1:6)
-#' k_extract_sequences(x, 3, 2)
+#' x <- op_convert_to_tensor(1:6)
+#' op_extract_sequences(x, 3, 2)
 #' ```
 #'
 #' @returns
@@ -672,7 +672,7 @@ keras$ops$erf(x)
 #' + <https:/keras.io/keras_core/api/ops/core#extractsequences-function>
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/extract_sequences>
 #' @tether keras.ops.extract_sequences
-k_extract_sequences <-
+op_extract_sequences <-
 function (x, sequence_length, sequence_stride)
 {
     args <- capture_args2(list(sequence_length = as_integer,
@@ -687,9 +687,9 @@ function (x, sequence_length, sequence_stride)
 #'
 #' # Examples
 #' ```{r}
-#' x = c(k_array(c(1., 2.)),
-#'       k_array(c(0., 1.)))
-#' k_fft(x)
+#' x = c(op_array(c(1., 2.)),
+#'       op_array(c(0., 1.)))
+#' op_fft(x)
 #' ```
 #'
 #' @returns
@@ -707,7 +707,7 @@ function (x, sequence_length, sequence_stride)
 #' + <https:/keras.io/keras_core/api/ops/fft#fft-function>
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/fft>
 #' @tether keras.ops.fft
-k_fft <-
+op_fft <-
 function (x)
 keras$ops$fft(x)
 
@@ -718,11 +718,11 @@ keras$ops$fft(x)
 #'
 #' # Examples
 #' ```{r}
-#' x <- c(k_array(rbind(c(1, 2),
+#' x <- c(op_array(rbind(c(1, 2),
 #'                      c(2, 1))),
-#'        k_array(rbind(c(0, 1),
+#'        op_array(rbind(c(0, 1),
 #'                      c(1, 0))))
-#' k_fft2(x)
+#' op_fft2(x)
 #' ```
 #'
 #' @returns
@@ -740,7 +740,7 @@ keras$ops$fft(x)
 #' + <https:/keras.io/keras_core/api/ops/fft#fft2-function>
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/fft2>
 #' @tether keras.ops.fft2
-k_fft2 <-
+op_fft2 <-
 function (x)
 keras$ops$fft2(x)
 
@@ -751,13 +751,13 @@ keras$ops$fft2(x)
 #'
 #' # Examples
 #' ```{r}
-#' targets <- k_array(c(2, 5, 3), "int32")
-#' predictions <- k_array(dtype = "float32", rbind(
+#' targets <- op_array(c(2, 5, 3), "int32")
+#' predictions <- op_array(dtype = "float32", rbind(
 #'   c(0.1, 0.4, 0.6, 0.9, 0.5),
 #'   c(0.1, 0.7, 0.9, 0.8, 0.3),
 #'   c(0.1, 0.6, 0.9, 0.9, 0.5)
 #' ))
-#' k_in_top_k(targets, predictions, k = 3L)
+#' op_in_top_k(targets, predictions, k = 3L)
 #' ```
 #'
 #' @returns
@@ -780,7 +780,7 @@ keras$ops$fft2(x)
 #' + <https:/keras.io/keras_core/api/ops/core#intopk-function>
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/in_top_k>
 #' @tether keras.ops.in_top_k
-k_in_top_k <-
+op_in_top_k <-
 function (targets, predictions, k)
 {
     args <- capture_args2(list(k = as_integer))
@@ -807,14 +807,14 @@ function (targets, predictions, k)
 #'
 #' # Examples
 #' ```{r}
-#' real <- k_array(c(0, 1, 2, 3, 4))
-#' imag <- k_array(c(0, 1, 2, 3, 4))
-#' k_irfft(c(real, imag))
+#' real <- op_array(c(0, 1, 2, 3, 4))
+#' imag <- op_array(c(0, 1, 2, 3, 4))
+#' op_irfft(c(real, imag))
 #' # array([0.66666667, -0.9106836, 0.24401694))
 #' ```
 #'
 #' ```{r}
-#' k_irfft(k_rfft(real, 5), 5)
+#' op_irfft(op_rfft(real, 5), 5)
 #' ```
 #'
 #' @returns
@@ -837,7 +837,7 @@ function (targets, predictions, k)
 #' + <https:/keras.io/keras_core/api/ops/fft#irfft-function>
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/irfft>
 #' @tether keras.ops.irfft
-k_irfft <-
+op_irfft <-
 function (x, fft_length = NULL)
 {
     args <- capture_args2(list(fft_length = as_integer))
@@ -853,8 +853,8 @@ function (x, fft_length = NULL)
 #'
 #' # Examples
 #' ```{r}
-#' x <- k_convert_to_tensor(c(0, 1, 2, 3, 4))
-#' k_istft(k_stft(x, 1, 1, 1), 1, 1, 1)
+#' x <- op_convert_to_tensor(c(0, 1, 2, 3, 4))
+#' op_istft(op_stft(x, 1, 1, 1), 1, 1, 1)
 #' # array([0.0, 1.0, 2.0, 3.0, 4.0])
 #' ```
 #'
@@ -899,7 +899,7 @@ function (x, fft_length = NULL)
 #' + <https:/keras.io/keras_core/api/ops/fft#istft-function>
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/istft>
 #' @tether keras.ops.istft
-k_istft <-
+op_istft <-
 function (x, sequence_length, sequence_stride, fft_length, length = NULL,
     window = "hann", center = TRUE)
 {
@@ -916,8 +916,8 @@ function (x, sequence_length, sequence_stride, fft_length, length = NULL,
 #'
 #' # Examples
 #' ```{r}
-#' x <- k_convert_to_tensor(c(1, 2, 3))
-#' k_logsumexp(x)
+#' x <- op_convert_to_tensor(c(1, 2, 3))
+#' op_logsumexp(x)
 #' ```
 #'
 #' @returns
@@ -944,7 +944,7 @@ function (x, sequence_length, sequence_stride, fft_length, length = NULL,
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/logsumexp>
 #'
 #' @tether keras.ops.logsumexp
-k_logsumexp <-
+op_logsumexp <-
 function (x, axis = NULL, keepdims = FALSE)
 {
     args <- capture_args2(list(axis = as_axis))
@@ -958,8 +958,8 @@ function (x, axis = NULL, keepdims = FALSE)
 #'
 #' # Examples
 #' ```{r}
-#' x <- k_convert_to_tensor(rbind(c(1, 2), c(3, 4), c(5, 6)))
-#' c(q, r) %<-% k_qr(x)
+#' x <- op_convert_to_tensor(rbind(c(1, 2), c(3, 4), c(5, 6)))
+#' c(q, r) %<-% op_qr(x)
 #' q
 #' # array([[-0.16903079  0.897085]
 #' #        [-0.5070925   0.2760267 ]
@@ -986,7 +986,7 @@ function (x, axis = NULL, keepdims = FALSE)
 #' + <https:/keras.io/keras_core/api/ops/core#qr-function>
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/qr>
 #' @tether keras.ops.qr
-k_qr <-
+op_qr <-
 function (x, mode = "reduced")
 keras$ops$qr(x, mode)
 
@@ -1008,12 +1008,12 @@ keras$ops$qr(x, mode)
 #'
 #' # Examples
 #' ```{r}
-#' x <- k_convert_to_tensor(c(0, 1, 2, 3, 4))
-#' k_rfft(x)
+#' x <- op_convert_to_tensor(c(0, 1, 2, 3, 4))
+#' op_rfft(x)
 #' ```
 #'
 #' ```{r}
-#' k_rfft(x, 3)
+#' op_rfft(x, 3)
 #' ```
 #'
 #' @returns
@@ -1036,7 +1036,7 @@ keras$ops$qr(x, mode)
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/rfft>
 #'
 #' @tether keras.ops.rfft
-k_rfft <-
+op_rfft <-
 function (x, fft_length = NULL)
 {
     args <- capture_args2(list(fft_length = as_integer))
@@ -1050,8 +1050,8 @@ function (x, fft_length = NULL)
 #'
 #' # Examples
 #' ```{r}
-#' x <- k_convert_to_tensor(c(1, 10, 100))
-#' k_rsqrt(x)
+#' x <- op_convert_to_tensor(c(1, 10, 100))
+#' op_rsqrt(x)
 #' # array([1, 0.31622776, 0.1], dtype=float32)
 #' ```
 #'
@@ -1069,7 +1069,7 @@ function (x, fft_length = NULL)
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/rsqrt>
 #'
 #' @tether keras.ops.rsqrt
-k_rsqrt <-
+op_rsqrt <-
 function (x)
 keras$ops$rsqrt(x)
 
@@ -1080,10 +1080,10 @@ keras$ops$rsqrt(x)
 #'
 #' # Examples
 #' ```{r}
-#' data <- k_convert_to_tensor(c(1, 2, 10, 20, 100, 200))
-#' segment_ids <- k_array(c(1, 1, 2, 2, 3, 3), "int32")
+#' data <- op_convert_to_tensor(c(1, 2, 10, 20, 100, 200))
+#' segment_ids <- op_array(c(1, 1, 2, 2, 3, 3), "int32")
 #' num_segments <- 3
-#' k_segment_max(data, segment_ids, num_segments)
+#' op_segment_max(data, segment_ids, num_segments)
 #' # array([2, 20, 200], dtype=int32)
 #' ```
 #'
@@ -1114,7 +1114,7 @@ keras$ops$rsqrt(x)
 #' + <https:/keras.io/keras_core/api/ops/core#segmentmax-function>
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/segment_max>
 #' @tether keras.ops.segment_max
-k_segment_max <-
+op_segment_max <-
 function (data, segment_ids, num_segments = NULL, sorted = FALSE)
 {
     args <- capture_args2(list(segment_ids = as_index, num_segments = as_integer))
@@ -1128,10 +1128,10 @@ function (data, segment_ids, num_segments = NULL, sorted = FALSE)
 #'
 #' # Examples
 #' ```{r}
-#' data <- k_array(c(1, 2, 10, 20, 100, 200))
-#' segment_ids <- k_array(c(1, 1, 2, 2, 3, 3), "int32")
+#' data <- op_array(c(1, 2, 10, 20, 100, 200))
+#' segment_ids <- op_array(c(1, 1, 2, 2, 3, 3), "int32")
 #' num_segments <- 3
-#' k_segment_sum(data, segment_ids, num_segments)
+#' op_segment_sum(data, segment_ids, num_segments)
 #' ```
 #'
 #' @returns
@@ -1161,7 +1161,7 @@ function (data, segment_ids, num_segments = NULL, sorted = FALSE)
 #' + <https:/keras.io/keras_core/api/ops/core#segmentsum-function>
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/segment_sum>
 #' @tether keras.ops.segment_sum
-k_segment_sum <-
+op_segment_sum <-
 function (data, segment_ids, num_segments = NULL, sorted = FALSE)
 {
     args <- capture_args2(list(segment_ids = as_index, num_segments = as_integer))
@@ -1175,9 +1175,9 @@ function (data, segment_ids, num_segments = NULL, sorted = FALSE)
 #'
 #' # Examples
 #' ```{r}
-#' a <- k_array(c(1, 2, 4, 5), dtype="float32") |> k_reshape(c(2, 2))
-#' b <- k_array(c(2, 4, 8, 10), dtype="float32") |> k_reshape(c(2, 2))
-#' k_solve(a, b)
+#' a <- op_array(c(1, 2, 4, 5), dtype="float32") |> op_reshape(c(2, 2))
+#' b <- op_array(c(2, 4, 8, 10), dtype="float32") |> op_reshape(c(2, 2))
+#' op_solve(a, b)
 #' ```
 #'
 #' @returns
@@ -1196,7 +1196,7 @@ function (data, segment_ids, num_segments = NULL, sorted = FALSE)
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/solve>
 #'
 #' @tether keras.ops.solve
-k_solve <-
+op_solve <-
 function (a, b)
 keras$ops$solve(a, b)
 
@@ -1210,8 +1210,8 @@ keras$ops$solve(a, b)
 #'
 #' # Examples
 #' ```{r}
-#' x <- k_array(c(0, 1, 2, 3, 4))
-#' k_stft(x, 3, 2, 3)
+#' x <- op_array(c(0, 1, 2, 3, 4))
+#' op_stft(x, 3, 2, 3)
 #' ```
 #'
 #' @returns
@@ -1251,7 +1251,7 @@ keras$ops$solve(a, b)
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/stft>
 #'
 #' @tether keras.ops.stft
-k_stft <-
+op_stft <-
 function (x, sequence_length, sequence_stride, fft_length, window = "hann",
     center = TRUE)
 {
@@ -1267,12 +1267,12 @@ function (x, sequence_length, sequence_stride, fft_length, window = "hann",
 #'
 #' # Examples
 #' ```{r}
-#' x <- k_array(c(5, 2, 7, 1, 9, 3), "int32")
-#' k_top_k(x, k = 3)
+#' x <- op_array(c(5, 2, 7, 1, 9, 3), "int32")
+#' op_top_k(x, k = 3)
 #' ```
 #'
 #' ```{r}
-#' c(values, indices) %<-% k_top_k(x, k = 3)
+#' c(values, indices) %<-% op_top_k(x, k = 3)
 #' values
 #' indices
 #' ```
@@ -1299,7 +1299,7 @@ function (x, sequence_length, sequence_stride, fft_length, window = "hann",
 #' + <https:/keras.io/keras_core/api/ops/core#topk-function>
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/top_k>
 #' @tether keras.ops.top_k
-k_top_k <-
+op_top_k <-
 function (x, k, sorted = TRUE)
 {
     args <- capture_args2(list(k = as_integer))
@@ -1354,7 +1354,7 @@ function (x, k, sorted = TRUE)
 #' + <https:/keras.io/keras_core/api/ops/nn#averagepool-function>
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/average_pool>
 #' @tether keras.ops.average_pool
-k_average_pool <-
+op_average_pool <-
 function (inputs, pool_size, strides = NULL, padding = "valid",
     data_format = NULL)
 {
@@ -1373,9 +1373,9 @@ function (inputs, pool_size, strides = NULL, padding = "valid",
 #'
 #' # Examples
 #' ```{r}
-#' target <- k_array(c(0, 1, 1, 0))
-#' output <- k_array(c(0.1, 0.9, 0.8, 0.2))
-#' k_binary_crossentropy(target, output)
+#' target <- op_array(c(0, 1, 1, 0))
+#' output <- op_array(c(0.1, 0.9, 0.8, 0.2))
+#' op_binary_crossentropy(target, output)
 #' ```
 #'
 #' @returns
@@ -1405,7 +1405,7 @@ function (inputs, pool_size, strides = NULL, padding = "valid",
 #' + <https:/keras.io/keras_core/api/ops/nn#binarycrossentropy-function>
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/binary_crossentropy>
 #' @tether keras.ops.binary_crossentropy
-k_binary_crossentropy <-
+op_binary_crossentropy <-
 function (target, output, from_logits = FALSE)
 keras$ops$binary_crossentropy(target, output, from_logits)
 
@@ -1420,13 +1420,13 @@ keras$ops$binary_crossentropy(target, output, from_logits)
 #'
 #' # Examples
 #' ```{r}
-#' target <- k_array(rbind(c(1, 0, 0),
+#' target <- op_array(rbind(c(1, 0, 0),
 #'                         c(0, 1, 0),
 #'                         c(0, 0, 1)))
-#' output <- k_array(rbind(c(0.9, 0.05, 0.05),
+#' output <- op_array(rbind(c(0.9, 0.05, 0.05),
 #'                         c(0.1, 0.8, 0.1),
 #'                         c(0.2, 0.3, 0.5)))
-#' k_categorical_crossentropy(target, output)
+#' op_categorical_crossentropy(target, output)
 #' ```
 #'
 #' @returns
@@ -1463,7 +1463,7 @@ keras$ops$binary_crossentropy(target, output, from_logits)
 #' + <https:/keras.io/keras_core/api/ops/nn#categoricalcrossentropy-function>
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/categorical_crossentropy>
 #' @tether keras.ops.categorical_crossentropy
-k_categorical_crossentropy <-
+op_categorical_crossentropy <-
 function (target, output, from_logits = FALSE, axis = -1L)
 {
     args <- capture_args2(list(axis = as_axis))
@@ -1525,7 +1525,7 @@ function (target, output, from_logits = FALSE, axis = -1L)
 #' + <https:/keras.io/keras_core/api/ops/nn#conv-function>
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/conv>
 #' @tether keras.ops.conv
-k_conv <-
+op_conv <-
 function (inputs, kernel, strides = 1L, padding = "valid", data_format = NULL,
     dilation_rate = 1L)
 {
@@ -1597,7 +1597,7 @@ function (inputs, kernel, strides = 1L, padding = "valid", data_format = NULL,
 #' + <https:/keras.io/keras_core/api/ops/nn#convtranspose-function>
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/conv_transpose>
 #' @tether keras.ops.conv_transpose
-k_conv_transpose <-
+op_conv_transpose <-
 function (inputs, kernel, strides, padding = "valid", output_padding = NULL,
     data_format = NULL, dilation_rate = 1L)
 {
@@ -1661,7 +1661,7 @@ function (inputs, kernel, strides, padding = "valid", output_padding = NULL,
 #' + <https:/keras.io/keras_core/api/ops/nn#depthwiseconv-function>
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/depthwise_conv>
 #' @tether keras.ops.depthwise_conv
-k_depthwise_conv <-
+op_depthwise_conv <-
 function (inputs, kernel, strides = 1L, padding = "valid", data_format = NULL,
     dilation_rate = 1L)
 {
@@ -1679,8 +1679,8 @@ function (inputs, kernel, strides = 1L, padding = "valid", data_format = NULL,
 #'
 #' # Examples
 #' ```{r}
-#' x <- k_array(c(-1., 0., 1.))
-#' k_elu(x)
+#' x <- op_array(c(-1., 0., 1.))
+#' op_elu(x)
 #' ```
 #'
 #' @returns
@@ -1699,7 +1699,7 @@ function (inputs, kernel, strides = 1L, padding = "valid", data_format = NULL,
 #' + <https:/keras.io/keras_core/api/ops/nn#elu-function>
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/elu>
 #' @tether keras.ops.elu
-k_elu <-
+op_elu <-
 function (x, alpha = 1)
 keras$ops$elu(x, alpha)
 
@@ -1716,15 +1716,15 @@ keras$ops$elu(x, alpha)
 #'
 #' # Examples
 #' ```{r}
-#' x <- k_array(c(-1., 0., 1.))
-#' k_gelu(x)
-#' k_gelu(x, FALSE)
+#' x <- op_array(c(-1., 0., 1.))
+#' op_gelu(x)
+#' op_gelu(x, FALSE)
 #' ```
 #'
 #'
-#' ```{r k_gelu-plot}
+#' ```{r op_gelu-plot}
 #' x <- seq(-5, 5, .1)
-#' plot(x, k_gelu(x),
+#' plot(x, op_gelu(x),
 #'      type = "l", #, frame.plot = FALSE,
 #'      panel.first = grid())
 #' ```
@@ -1745,7 +1745,7 @@ keras$ops$elu(x, alpha)
 #' + <https:/keras.io/keras_core/api/ops/nn#gelu-function>
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/gelu>
 #' @tether keras.ops.gelu
-k_gelu <-
+op_gelu <-
 function (x, approximate = TRUE)
 keras$ops$gelu(x, approximate)
 
@@ -1760,13 +1760,13 @@ keras$ops$gelu(x, approximate)
 #'
 #' # Examples
 #' ```{r}
-#' x <- k_array(c(-1., 0., 1.))
-#' k_hard_sigmoid(x)
+#' x <- op_array(c(-1., 0., 1.))
+#' op_hard_sigmoid(x)
 #' ```
 #'
-#' ```{r k_hard_sigmoid-plot}
+#' ```{r op_hard_sigmoid-plot}
 #' x <- as.array(seq(-5, 5, .1))
-#' plot(x, k_hard_sigmoid(x),
+#' plot(x, op_hard_sigmoid(x),
 #'      type = 'l', panel.first = grid(), frame.plot = FALSE)
 #' ```
 #'
@@ -1783,7 +1783,7 @@ keras$ops$gelu(x, approximate)
 #' + <https:/keras.io/keras_core/api/ops/nn#hardsigmoid-function>
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/hard_sigmoid>
 #' @tether keras.ops.hard_sigmoid
-k_hard_sigmoid <-
+op_hard_sigmoid <-
 function (x)
 keras$ops$hard_sigmoid(x)
 
@@ -1797,13 +1797,13 @@ keras$ops$hard_sigmoid(x)
 #'
 #' # Examples
 #' ```{r}
-#' x <- k_array(c(-1., 0., 1.))
-#' k_leaky_relu(x)
+#' x <- op_array(c(-1., 0., 1.))
+#' op_leaky_relu(x)
 #' # array([-0.2,  0. ,  1. ], shape=(3,), dtype=float64)
 #' ```
-#' ```{r k_leaky_relu-plot}
+#' ```{r op_leaky_relu-plot}
 #' x <- seq(-5, 5, .1)
-#' plot(x, k_leaky_relu(x),
+#' plot(x, op_leaky_relu(x),
 #'      type = 'l', panel.first = grid())
 #' ```
 #'
@@ -1824,7 +1824,7 @@ keras$ops$hard_sigmoid(x)
 #' + <https:/keras.io/keras_core/api/ops/nn#leakyrelu-function>
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/leaky_relu>
 #' @tether keras.ops.leaky_relu
-k_leaky_relu <-
+op_leaky_relu <-
 function (x, negative_slope = 0.2)
 keras$ops$leaky_relu(x, negative_slope)
 
@@ -1836,8 +1836,8 @@ keras$ops$leaky_relu(x, negative_slope)
 #'
 #' # Examples
 #' ```{r}
-#' x <- k_convert_to_tensor(c(-0.541391, 0.0, 0.50, 5.0))
-#' k_log_sigmoid(x)
+#' x <- op_convert_to_tensor(c(-0.541391, 0.0, 0.50, 5.0))
+#' op_log_sigmoid(x)
 #' ```
 #'
 #' @returns
@@ -1854,7 +1854,7 @@ keras$ops$leaky_relu(x, negative_slope)
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/log_sigmoid>
 #'
 #' @tether keras.ops.log_sigmoid
-k_log_sigmoid <-
+op_log_sigmoid <-
 function (x)
 keras$ops$log_sigmoid(x)
 
@@ -1867,8 +1867,8 @@ keras$ops$log_sigmoid(x)
 #'
 #' # Examples
 #' ```{r}
-#' x <- k_array(c(-1., 0., 1.))
-#' k_log_softmax(x)
+#' x <- op_array(c(-1., 0., 1.))
+#' op_log_softmax(x)
 #' ```
 #'
 #' @returns
@@ -1889,7 +1889,7 @@ keras$ops$log_sigmoid(x)
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/log_softmax>
 #'
 #' @tether keras.ops.log_softmax
-k_log_softmax <-
+op_log_softmax <-
 function (x, axis = -1L)
 {
     args <- capture_args2(list(axis = as_axis))
@@ -1944,7 +1944,7 @@ function (x, axis = -1L)
 #' + <https:/keras.io/keras_core/api/ops/nn#maxpool-function>
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/max_pool>
 #' @tether keras.ops.max_pool
-k_max_pool <-
+op_max_pool <-
 function (inputs, pool_size, strides = NULL, padding = "valid",
     data_format = NULL)
 {
@@ -1962,8 +1962,8 @@ function (inputs, pool_size, strides = NULL, padding = "valid",
 #'
 #' # Examples
 #' ```{r}
-#' x <- k_convert_to_tensor(c(0, 1, 2, 3, 100), dtype = "float32")
-#' k_moments(x, axes = c(1))
+#' x <- op_convert_to_tensor(c(0, 1, 2, 3, 100), dtype = "float32")
+#' op_moments(x, axes = c(1))
 #' ```
 #'
 #' @returns
@@ -1993,7 +1993,7 @@ function (inputs, pool_size, strides = NULL, padding = "valid",
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/moments>
 #'
 #' @tether keras.ops.moments
-k_moments <-
+op_moments <-
 function (x, axes, keepdims = FALSE, synchronized = FALSE)
 {
     args <- capture_args2(list(axes = as_axis))
@@ -2009,8 +2009,8 @@ function (x, axes, keepdims = FALSE, synchronized = FALSE)
 #'
 #' # Examples
 #' ```{r}
-#' data <- k_convert_to_tensor(c(0, 4))
-#' k_multi_hot(data, num_tokens = 5)
+#' data <- op_convert_to_tensor(c(0, 4))
+#' op_multi_hot(data, num_tokens = 5)
 #' ```
 #'
 #' @returns
@@ -2037,7 +2037,7 @@ function (x, axes, keepdims = FALSE, synchronized = FALSE)
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/multi_hot>
 #'
 #' @tether keras.ops.multi_hot
-k_multi_hot <-
+op_multi_hot <-
 function (inputs, num_tokens, axis = -1L, dtype = NULL)
 {
     args <- capture_args2(list(inputs = as_integer, num_tokens = as_integer,
@@ -2056,8 +2056,8 @@ function (inputs, num_tokens, axis = -1L, dtype = NULL)
 #'
 #' # Examples
 #' ```{r}
-#' x <- k_array(c(1, 3, 2, 0), "int32")
-#' k_one_hot(x, num_classes = 4)
+#' x <- op_array(c(1, 3, 2, 0), "int32")
+#' op_one_hot(x, num_classes = 4)
 #' # array([[0. 1. 0. 0.]
 #' #        [0. 0. 0. 1.]
 #' #        [0. 0. 1. 0.]
@@ -2092,7 +2092,7 @@ function (inputs, num_tokens, axis = -1L, dtype = NULL)
 #' + <https:/keras.io/keras_core/api/ops/nn#onehot-function>
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/one_hot>
 #' @tether keras.ops.one_hot
-k_one_hot <-
+op_one_hot <-
 function (x, num_classes, axis = -1L, dtype = NULL)
 {
     args <- capture_args2(list(x = as_integer, axis = as_axis,
@@ -2108,13 +2108,13 @@ function (x, num_classes, axis = -1L, dtype = NULL)
 #'
 #' # Examples
 #' ```{r}
-#' x1 <- k_convert_to_tensor(c(-1, 0, 1, 0.2))
-#' k_relu(x1)
+#' x1 <- op_convert_to_tensor(c(-1, 0, 1, 0.2))
+#' op_relu(x1)
 #' ```
 #'
-#' ```{r k_relu-plot}
+#' ```{r op_relu-plot}
 #' x <- seq(-10, 10, .1)
-#' plot(x, k_relu(x))
+#' plot(x, op_relu(x))
 #' ```
 #' @returns
 #' A tensor with the same shape as `x`.
@@ -2130,7 +2130,7 @@ function (x, num_classes, axis = -1L, dtype = NULL)
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/relu>
 #'
 #' @tether keras.ops.relu
-k_relu <-
+op_relu <-
 function (x)
 keras$ops$relu(x)
 
@@ -2138,16 +2138,16 @@ keras$ops$relu(x)
 #' Rectified linear unit activation function with upper bound of 6.
 #'
 #' @description
-#' It is defined as `f(x) = k_clip(x, 0, 6)`.
+#' It is defined as `f(x) = op_clip(x, 0, 6)`.
 #'
 #' # Examples
 #' ```{r}
-#' x <- k_convert_to_tensor(c(-3, -2, 0.1, 0.2, 6, 8))
-#' k_relu6(x)
+#' x <- op_convert_to_tensor(c(-3, -2, 0.1, 0.2, 6, 8))
+#' op_relu6(x)
 #' ```
-#' ```{r k_relu6-plot}
+#' ```{r op_relu6-plot}
 #' x <- seq(-10, 10, .1)
-#' plot(x, k_relu6(x))
+#' plot(x, op_relu6(x))
 #' ```
 #'
 #'
@@ -2165,7 +2165,7 @@ keras$ops$relu(x)
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/relu6>
 #'
 #' @tether keras.ops.relu6
-k_relu6 <-
+op_relu6 <-
 function (x)
 keras$ops$relu6(x)
 
@@ -2180,8 +2180,8 @@ keras$ops$relu6(x)
 #'
 #' # Examples
 #' ```{r}
-#' x <- k_array(c(-1, 0, 1))
-#' k_selu(x)
+#' x <- op_array(c(-1, 0, 1))
+#' op_selu(x)
 #' ```
 #'
 #' @returns
@@ -2197,7 +2197,7 @@ keras$ops$relu6(x)
 #' + <https:/keras.io/keras_core/api/ops/nn#selu-function>
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/selu>
 #' @tether keras.ops.selu
-k_selu <-
+op_selu <-
 function (x)
 keras$ops$selu(x)
 
@@ -2262,7 +2262,7 @@ keras$ops$selu(x)
 #' + <https:/keras.io/keras_core/api/ops/nn#separableconv-function>
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/separable_conv>
 #' @tether keras.ops.separable_conv
-k_separable_conv <-
+op_separable_conv <-
 function (inputs, depthwise_kernel, pointwise_kernel, strides = 1L,
     padding = "valid", data_format = NULL, dilation_rate = 1L)
 {
@@ -2278,8 +2278,8 @@ function (inputs, depthwise_kernel, pointwise_kernel, strides = 1L,
 #'
 #' # Examples
 #' ```{r}
-#' x <- k_convert_to_tensor(c(-6, 1, 0, 1, 6))
-#' k_sigmoid(x)
+#' x <- op_convert_to_tensor(c(-6, 1, 0, 1, 6))
+#' op_sigmoid(x)
 #' ```
 #'
 #' @returns
@@ -2295,7 +2295,7 @@ function (inputs, depthwise_kernel, pointwise_kernel, strides = 1L,
 #' + <https:/keras.io/keras_core/api/ops/nn#sigmoid-function>
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/sigmoid>
 #' @tether keras.ops.sigmoid
-k_sigmoid <-
+op_sigmoid <-
 function (x)
 keras$ops$sigmoid(x)
 
@@ -2308,9 +2308,9 @@ keras$ops$sigmoid(x)
 #'
 #' # Examples
 #' ```{r}
-#' x <- k_convert_to_tensor(c(-6, 1, 0, 1, 6))
-#' k_sigmoid(x)
-#' k_silu(x)
+#' x <- op_convert_to_tensor(c(-6, 1, 0, 1, 6))
+#' op_sigmoid(x)
+#' op_silu(x)
 #' ```
 #'
 #' @returns
@@ -2326,7 +2326,7 @@ keras$ops$sigmoid(x)
 #' + <https:/keras.io/keras_core/api/ops/nn#silu-function>
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/silu>
 #' @tether keras.ops.silu
-k_silu <-
+op_silu <-
 function (x)
 keras$ops$silu(x)
 
@@ -2345,8 +2345,8 @@ keras$ops$silu(x)
 #'
 #' # Examples
 #' ```{r}
-#' x <- k_array(c(-1, 0, 1))
-#' k_softmax(x)
+#' x <- op_array(c(-1, 0, 1))
+#' op_softmax(x)
 #' ```
 #'
 #' @returns
@@ -2366,7 +2366,7 @@ keras$ops$silu(x)
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/softmax>
 #'
 #' @tether keras.ops.softmax
-k_softmax <-
+op_softmax <-
 function (x, axis = -1L)
 {
     args <- capture_args2(list(axis = as_axis))
@@ -2382,12 +2382,12 @@ function (x, axis = -1L)
 #'
 #' # Examples
 #' ```{r}
-#' x <- k_convert_to_tensor(c(-0.555, 0, 0.555))
-#' k_softplus(x)
+#' x <- op_convert_to_tensor(c(-0.555, 0, 0.555))
+#' op_softplus(x)
 #' ```
-#' ```{r k_softplus-plot}
+#' ```{r op_softplus-plot}
 #' x <- seq(-10, 10, .1)
-#' plot(x, k_softplus(x))
+#' plot(x, op_softplus(x))
 #' ```
 #' @returns
 #' A tensor with the same shape as `x`.
@@ -2403,7 +2403,7 @@ function (x, axis = -1L)
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/softplus>
 #'
 #' @tether keras.ops.softplus
-k_softplus <-
+op_softplus <-
 function (x)
 keras$ops$softplus(x)
 
@@ -2415,12 +2415,12 @@ keras$ops$softplus(x)
 #'
 #' # Examples
 #' ```{r}
-#' x <- k_convert_to_tensor(c(-0.100, -10.0, 1.0, 0.0, 100.0))
-#' k_softsign(x)
+#' x <- op_convert_to_tensor(c(-0.100, -10.0, 1.0, 0.0, 100.0))
+#' op_softsign(x)
 #' ```
-#' ```{r k_softsign-plot}
+#' ```{r op_softsign-plot}
 #' x <- seq(-10, 10, .1)
-#' plot(x, k_softsign(x), ylim = c(-1, 1))
+#' plot(x, op_softsign(x), ylim = c(-1, 1))
 #' ```
 #'
 #' @returns
@@ -2437,7 +2437,7 @@ keras$ops$softplus(x)
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/softsign>
 #'
 #' @tether keras.ops.softsign
-k_softsign <-
+op_softsign <-
 function (x)
 keras$ops$softsign(x)
 
@@ -2452,11 +2452,11 @@ keras$ops$softsign(x)
 #'
 #' # Examples
 #' ```{r}
-#' target <- k_array(c(0, 1, 2), dtype="int32")
-#' output <- k_array(rbind(c(0.9, 0.05, 0.05),
+#' target <- op_array(c(0, 1, 2), dtype="int32")
+#' output <- op_array(rbind(c(0.9, 0.05, 0.05),
 #'                         c(0.1, 0.8,  0.1),
 #'                         c(0.2, 0.3,  0.5)))
-#' k_sparse_categorical_crossentropy(target, output)
+#' op_sparse_categorical_crossentropy(target, output)
 #' ```
 #'
 #' @returns
@@ -2495,7 +2495,7 @@ keras$ops$softsign(x)
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/sparse_categorical_crossentropy>
 #'
 #' @tether keras.ops.sparse_categorical_crossentropy
-k_sparse_categorical_crossentropy <-
+op_sparse_categorical_crossentropy <-
 function (target, output, from_logits = FALSE, axis = -1L)
 {
     args <- capture_args2(list(axis = as_axis))
@@ -2514,7 +2514,7 @@ function (target, output, from_logits = FALSE, axis = -1L)
 #' @seealso
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/abs>
 #' @tether keras.ops.abs
-k_abs <-
+op_abs <-
 function (x)
 keras$ops$abs(x)
 
@@ -2525,18 +2525,18 @@ keras$ops$abs(x)
 #'
 #' # Examples
 #' ```{r}
-#' x1 <- k_convert_to_tensor(c(1, 4))
-#' x2 <- k_convert_to_tensor(c(5, 6))
-#' k_add(x1, x2)
+#' x1 <- op_convert_to_tensor(c(1, 4))
+#' x2 <- op_convert_to_tensor(c(5, 6))
+#' op_add(x1, x2)
 #' # alias for x1 + x2
 #' x1 + x2
 #' ```
 #'
-#' `k_add` also broadcasts shapes:
+#' `op_add` also broadcasts shapes:
 #' ```{r}
-#' x1 <- k_convert_to_tensor(array(c(5, 5, 4, 6), dim =c(2, 2)))
-#' x2 <- k_convert_to_tensor(c(5, 6))
-#' k_add(x1, x2)
+#' x1 <- op_convert_to_tensor(array(c(5, 5, 4, 6), dim =c(2, 2)))
+#' x2 <- op_convert_to_tensor(c(5, 6))
+#' op_add(x1, x2)
 #' ```
 #'
 #' @returns
@@ -2555,7 +2555,7 @@ keras$ops$abs(x)
 #' + <https:/keras.io/keras_core/api/ops/numpy#add-function>
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/add>
 #' @tether keras.ops.add
-k_add <-
+op_add <-
 function (x1, x2)
 keras$ops$add(x1, x2)
 
@@ -2566,18 +2566,18 @@ keras$ops$add(x1, x2)
 #'
 #' # Examples
 #' ```{r}
-#' x <- k_convert_to_tensor(c(TRUE, FALSE))
-#' k_all(x)
+#' x <- op_convert_to_tensor(c(TRUE, FALSE))
+#' op_all(x)
 #' ```
 #'
 #' ```{r}
-#' (x <- k_convert_to_tensor(array(c(TRUE, FALSE, TRUE, TRUE, TRUE, TRUE), dim = c(3, 2))))
-#' k_all(x, axis = 1)
+#' (x <- op_convert_to_tensor(array(c(TRUE, FALSE, TRUE, TRUE, TRUE, TRUE), dim = c(3, 2))))
+#' op_all(x, axis = 1)
 #' ```
 #'
 #' `keepdims = TRUE` outputs a tensor with dimensions reduced to one.
 #' ```{r}
-#' k_all(x, keepdims = TRUE)
+#' op_all(x, keepdims = TRUE)
 #' ```
 #'
 #' @returns
@@ -2605,7 +2605,7 @@ keras$ops$add(x1, x2)
 #' + <https:/keras.io/keras_core/api/ops/numpy#all-function>
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/all>
 #' @tether keras.ops.all
-k_all <-
+op_all <-
 function (x, axis = NULL, keepdims = FALSE)
 {
     args <- capture_args2(list(axis = as_axis))
@@ -2619,10 +2619,10 @@ function (x, axis = NULL, keepdims = FALSE)
 #'
 #' # Examples
 #' ```{r}
-#' (x <- k_convert_to_tensor(rbind(c(1, 3, 5), c(1, 5, 2))))
-#' k_amax(x)
-#' k_amax(x, axis = 1)
-#' k_amax(x, axis = 1, keepdims = TRUE)
+#' (x <- op_convert_to_tensor(rbind(c(1, 3, 5), c(1, 5, 2))))
+#' op_amax(x)
+#' op_amax(x, axis = 1)
+#' op_amax(x, axis = 1, keepdims = TRUE)
 #' ```
 #'
 #' @returns
@@ -2651,7 +2651,7 @@ function (x, axis = NULL, keepdims = FALSE)
 #' + <https:/keras.io/keras_core/api/ops/numpy#amax-function>
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/amax>
 #' @tether keras.ops.amax
-k_amax <-
+op_amax <-
 function (x, axis = NULL, keepdims = FALSE)
 {
     args <- capture_args2(list(axis = as_axis))
@@ -2665,10 +2665,10 @@ function (x, axis = NULL, keepdims = FALSE)
 #'
 #' # Examples
 #' ```{r}
-#' (x <- k_convert_to_tensor(rbind(c(1, 3, 5), c(1, 5, 2))))
-#' k_amin(x)
-#' k_amin(x, axis = 1)
-#' k_amin(x, axis = 1, keepdims = TRUE)
+#' (x <- op_convert_to_tensor(rbind(c(1, 3, 5), c(1, 5, 2))))
+#' op_amin(x)
+#' op_amin(x, axis = 1)
+#' op_amin(x, axis = 1, keepdims = TRUE)
 #' ```
 #'
 #' @returns
@@ -2697,7 +2697,7 @@ function (x, axis = NULL, keepdims = FALSE)
 #' + <https:/keras.io/keras_core/api/ops/numpy#amin-function>
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/amin>
 #' @tether keras.ops.amin
-k_amin <-
+op_amin <-
 function (x, axis = NULL, keepdims = FALSE)
 {
     args <- capture_args2(list(axis = as_axis))
@@ -2711,22 +2711,22 @@ function (x, axis = NULL, keepdims = FALSE)
 #'
 #' # Examples
 #' ```{r}
-#' x <- k_array(c(TRUE, FALSE))
-#' k_any(x)
+#' x <- op_array(c(TRUE, FALSE))
+#' op_any(x)
 #' ```
 #'
 #' ```{r}
-#' (x <- k_reshape(c(FALSE, FALSE, FALSE,
+#' (x <- op_reshape(c(FALSE, FALSE, FALSE,
 #'                   TRUE, FALSE, FALSE), c(2, 3)))
-#' k_any(x, axis = 1)
-#' k_any(x, axis = 2)
-#' k_any(x, axis = -1)
+#' op_any(x, axis = 1)
+#' op_any(x, axis = 2)
+#' op_any(x, axis = -1)
 #' ```
 #'
 #' `keepdims = TRUE` outputs a tensor with dimensions reduced to one.
 #' ```{r}
-#' k_any(x, keepdims = TRUE)
-#' k_any(x, 1, keepdims = TRUE)
+#' op_any(x, keepdims = TRUE)
+#' op_any(x, 1, keepdims = TRUE)
 #' ```
 #'
 #' @returns
@@ -2754,7 +2754,7 @@ function (x, axis = NULL, keepdims = FALSE)
 #' + <https:/keras.io/keras_core/api/ops/numpy#any-function>
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/any>
 #' @tether keras.ops.any
-k_any <-
+op_any <-
 function (x, axis = NULL, keepdims = FALSE)
 {
     args <- capture_args2(list(axis = as_axis))
@@ -2768,18 +2768,18 @@ function (x, axis = NULL, keepdims = FALSE)
 #'
 #' # Examples
 #' ```{r}
-#' x1 <- k_convert_to_tensor(c(1, 2, 3))
-#' x2 <- k_convert_to_tensor(rbind(c(4, 5, 6), c(7, 8, 9)))
-#' k_append(x1, x2)
+#' x1 <- op_convert_to_tensor(c(1, 2, 3))
+#' x2 <- op_convert_to_tensor(rbind(c(4, 5, 6), c(7, 8, 9)))
+#' op_append(x1, x2)
 #' ```
 #'
 #' When `axis` is specified, `x1` and `x2` must have compatible shapes.
 #' ```{r}
-#' x1 <- k_convert_to_tensor(rbind(c(1, 2, 3), c(4, 5, 6)))
-#' x2 <- k_convert_to_tensor(rbind(c(7, 8, 9)))
-#' k_append(x1, x2, axis = 1)
-#' x3 <- k_convert_to_tensor(c(7, 8, 9))
-#' try(k_append(x1, x3, axis = 1))
+#' x1 <- op_convert_to_tensor(rbind(c(1, 2, 3), c(4, 5, 6)))
+#' x2 <- op_convert_to_tensor(rbind(c(7, 8, 9)))
+#' op_append(x1, x2, axis = 1)
+#' x3 <- op_convert_to_tensor(c(7, 8, 9))
+#' try(op_append(x1, x3, axis = 1))
 #' ```
 #'
 #' @returns
@@ -2802,7 +2802,7 @@ function (x, axis = NULL, keepdims = FALSE)
 #' + <https:/keras.io/keras_core/api/ops/numpy#append-function>
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/append>
 #' @tether keras.ops.append
-k_append <-
+op_append <-
 function (x1, x2, axis = NULL)
 {
     args <- capture_args2(list(axis = as_axis))
@@ -2824,11 +2824,11 @@ function (x1, x2, axis = NULL)
 #'
 #' # Examples
 #' ```{r}
-#' k_arange(3L)
-#' k_arange(3) # float
-#' k_arange(3, dtype = 'int32') #int
-#' k_arange(3L, 7L)
-#' k_arange(3L, 7L, 2L)
+#' op_arange(3L)
+#' op_arange(3) # float
+#' op_arange(3, dtype = 'int32') #int
+#' op_arange(3L, 7L)
+#' op_arange(3L, 7L, 2L)
 #' ```
 #'
 #' @returns
@@ -2864,7 +2864,7 @@ function (x1, x2, axis = NULL)
 #' + <https:/keras.io/keras_core/api/ops/numpy#arange-function>
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/arange>
 #' @tether keras.ops.arange
-k_arange <-
+op_arange <-
 function (start, stop = NULL, step = 1L, dtype = NULL)
 {
     args <- capture_args2(list(start = function (x)
@@ -2882,8 +2882,8 @@ function (start, stop = NULL, step = 1L, dtype = NULL)
 #'
 #' # Examples
 #' ```{r}
-#' x <- k_convert_to_tensor(c(1, -1))
-#' k_arccos(x)
+#' x <- op_convert_to_tensor(c(1, -1))
+#' op_arccos(x)
 #' ```
 #'
 #' @returns
@@ -2900,7 +2900,7 @@ function (start, stop = NULL, step = 1L, dtype = NULL)
 #' + <https:/keras.io/keras_core/api/ops/numpy#arccos-function>
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/arccos>
 #' @tether keras.ops.arccos
-k_arccos <-
+op_arccos <-
 function (x)
 keras$ops$arccos(x)
 
@@ -2911,8 +2911,8 @@ keras$ops$arccos(x)
 #'
 #' # Examples
 #' ```{r}
-#' x <- k_convert_to_tensor(c(10, 100))
-#' k_arccosh(x)
+#' x <- op_convert_to_tensor(c(10, 100))
+#' op_arccosh(x)
 #' ```
 #'
 #' @returns
@@ -2927,7 +2927,7 @@ keras$ops$arccos(x)
 #' @seealso
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/arccosh>
 #' @tether keras.ops.arccosh
-k_arccosh <-
+op_arccosh <-
 function (x)
 keras$ops$arccosh(x)
 
@@ -2938,8 +2938,8 @@ keras$ops$arccosh(x)
 #'
 #' # Examples
 #' ```{r}
-#' x <- k_convert_to_tensor(c(1, -1, 0))
-#' k_arcsin(x)
+#' x <- op_convert_to_tensor(c(1, -1, 0))
+#' op_arcsin(x)
 #' ```
 #'
 #' @returns
@@ -2956,7 +2956,7 @@ keras$ops$arccosh(x)
 #' + <https:/keras.io/keras_core/api/ops/numpy#arcsin-function>
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/arcsin>
 #' @tether keras.ops.arcsin
-k_arcsin <-
+op_arcsin <-
 function (x)
 keras$ops$arcsin(x)
 
@@ -2967,8 +2967,8 @@ keras$ops$arcsin(x)
 #'
 #' # Examples
 #' ```{r}
-#' x <- k_convert_to_tensor(c(1, -1, 0))
-#' k_arcsinh(x)
+#' x <- op_convert_to_tensor(c(1, -1, 0))
+#' op_arcsinh(x)
 #' ```
 #'
 #' @returns
@@ -2984,7 +2984,7 @@ keras$ops$arcsin(x)
 #' + <https:/keras.io/keras_core/api/ops/numpy#arcsinh-function>
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/arcsinh>
 #' @tether keras.ops.arcsinh
-k_arcsinh <-
+op_arcsinh <-
 function (x)
 keras$ops$arcsinh(x)
 
@@ -2995,8 +2995,8 @@ keras$ops$arcsinh(x)
 #'
 #' # Examples
 #' ```{r}
-#' x <- k_convert_to_tensor(c(0, 1))
-#' k_arctan(x)
+#' x <- op_convert_to_tensor(c(0, 1))
+#' op_arctan(x)
 #' ```
 #'
 #' @returns
@@ -3013,7 +3013,7 @@ keras$ops$arcsinh(x)
 #' + <https:/keras.io/keras_core/api/ops/numpy#arctan-function>
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/arctan>
 #' @tether keras.ops.arctan
-k_arctan <-
+op_arctan <-
 function (x)
 keras$ops$arctan(x)
 
@@ -3032,21 +3032,21 @@ keras$ops$arctan(x)
 #' # Examples
 #' Consider four points in different quadrants:
 #' ```{r}
-#' x <- k_array(c(-1, 1, 1, -1))
-#' y <- k_array(c(-1, -1, 1, 1))
-#' k_arctan2(y, x) * 180 / pi
+#' x <- op_array(c(-1, 1, 1, -1))
+#' y <- op_array(c(-1, -1, 1, 1))
+#' op_arctan2(y, x) * 180 / pi
 #' ```
 #'
 #' Note the order of the parameters. `arctan2` is defined also when x2 = 0 and
 #' at several other points, obtaining values in the range `[-pi, pi]`:
 #' ```{r}
-#' k_arctan2(
-#'     k_array(c(1, -1)),
-#'     k_array(c(0, 0))
+#' op_arctan2(
+#'     op_array(c(1, -1)),
+#'     op_array(c(0, 0))
 #' )
-#' k_arctan2(
-#'     k_array(c(0, 0, Inf)),
-#'     k_array(c(+0, -0, Inf))
+#' op_arctan2(
+#'     op_array(c(0, 0, Inf)),
+#'     op_array(c(+0, -0, Inf))
 #' )
 #' ```
 #'
@@ -3066,7 +3066,7 @@ keras$ops$arctan(x)
 #' + <https:/keras.io/keras_core/api/ops/numpy#arctan2-function>
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/arctan2>
 #' @tether keras.ops.arctan2
-k_arctan2 <-
+op_arctan2 <-
 function (x1, x2)
 keras$ops$arctan2(x1, x2)
 
@@ -3086,7 +3086,7 @@ keras$ops$arctan2(x1, x2)
 #' + <https:/keras.io/keras_core/api/ops/numpy#arctanh-function>
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/arctanh>
 #' @tether keras.ops.arctanh
-k_arctanh <-
+op_arctanh <-
 function (x)
 keras$ops$arctanh(x)
 
@@ -3097,11 +3097,11 @@ keras$ops$arctanh(x)
 #'
 #' # Examples
 #' ```{r}
-#' x <- k_arange(6L) |> k_reshape(c(2, 3)) |> k_add(10)
+#' x <- op_arange(6L) |> op_reshape(c(2, 3)) |> op_add(10)
 #' x
-#' k_argmax(x)
-#' k_argmax(x, axis = 1)
-#' k_argmax(x, axis = 2)
+#' op_argmax(x)
+#' op_argmax(x, axis = 1)
+#' op_argmax(x, axis = 2)
 #' ```
 #'
 #' @returns
@@ -3122,7 +3122,7 @@ keras$ops$arctanh(x)
 #' + <https:/keras.io/keras_core/api/ops/numpy#argmax-function>
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/argmax>
 #' @tether keras.ops.argmax
-k_argmax <-
+op_argmax <-
 function (x, axis = NULL)
 {
     args <- capture_args2(list(axis = as_axis))
@@ -3136,11 +3136,11 @@ function (x, axis = NULL)
 #'
 #' # Examples
 #' ```{r}
-#' x <- k_arange(6L) |> k_reshape(c(2, 3)) |> k_add(10)
+#' x <- op_arange(6L) |> op_reshape(c(2, 3)) |> op_add(10)
 #' x
-#' k_argmin(x)
-#' k_argmin(x, axis = 1)
-#' k_argmin(x, axis = 2)
+#' op_argmin(x)
+#' op_argmin(x, axis = 1)
+#' op_argmin(x, axis = 2)
 #' ```
 #'
 #' @returns
@@ -3161,7 +3161,7 @@ function (x, axis = NULL)
 #' + <https:/keras.io/keras_core/api/ops/numpy#argmin-function>
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/argmin>
 #' @tether keras.ops.argmin
-k_argmin <-
+op_argmin <-
 function (x, axis = NULL)
 {
     args <- capture_args2(list(axis = as_axis))
@@ -3176,17 +3176,17 @@ function (x, axis = NULL)
 #' # Examples
 #' One dimensional array:
 #' ```{r}
-#' x <- k_array(c(3, 1, 2))
-#' k_argsort(x)
+#' x <- op_array(c(3, 1, 2))
+#' op_argsort(x)
 #' ```
 #'
 #' Two-dimensional array:
 #' ```{r}
-#' x <- k_array(rbind(c(0, 3),
+#' x <- op_array(rbind(c(0, 3),
 #'                    c(3, 2),
 #'                    c(4, 5)), dtype = "int32")
-#' k_argsort(x, axis = 1)
-#' k_argsort(x, axis = 2)
+#' op_argsort(x, axis = 1)
+#' op_argsort(x, axis = 2)
 #' ```
 #'
 #' @returns
@@ -3206,7 +3206,7 @@ function (x, axis = NULL)
 #' + <https:/keras.io/keras_core/api/ops/numpy#argsort-function>
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/argsort>
 #' @tether keras.ops.argsort
-k_argsort <-
+op_argsort <-
 function (x, axis = -1L)
 {
     args <- capture_args2(list(axis = as_axis))
@@ -3220,8 +3220,8 @@ function (x, axis = -1L)
 #'
 #' # Examples
 #' ```{r}
-#' k_array(c(1, 2, 3))
-#' k_array(c(1, 2, 3), dtype = "float32")
+#' op_array(c(1, 2, 3))
+#' op_array(c(1, 2, 3), dtype = "float32")
 #' ```
 #'
 #' @returns
@@ -3240,7 +3240,7 @@ function (x, axis = -1L)
 #' + <https:/keras.io/keras_core/api/ops/numpy#array-function>
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/array>
 #' @tether keras.ops.array
-k_array <-
+op_array <-
 function (x, dtype = NULL)
 {
     if (!is.null(dtype) && !inherits(x, "python.builtin.object"))
@@ -3255,27 +3255,27 @@ function (x, dtype = NULL)
 #'
 #' # Examples
 #' ```{r}
-#' data <- k_arange(1, 5, dtype = "int32")
+#' data <- op_arange(1, 5, dtype = "int32")
 #' data
-#' k_average(data)
+#' op_average(data)
 #'
-#' k_average(
-#'   k_arange(1, 11),
-#'   weights = k_arange(10, 0, -1)
+#' op_average(
+#'   op_arange(1, 11),
+#'   weights = op_arange(10, 0, -1)
 #' )
 #'
-#' data <- k_arange(6) |> k_reshape(c(3, 2))
+#' data <- op_arange(6) |> op_reshape(c(3, 2))
 #' data
 #'
-#' k_average(
+#' op_average(
 #'   data,
 #'   axis = 2,
-#'   weights = k_array(c(1/4, 3/4))
+#'   weights = op_array(c(1/4, 3/4))
 #' )
 #' # Error: Axis must be specified when shapes of a and weights differ.
-#' try(k_average(
+#' try(op_average(
 #'   data,
-#'   weights = k_array(c(1/4, 3/4))
+#'   weights = op_array(c(1/4, 3/4))
 #' ))
 #' ```
 #'
@@ -3308,7 +3308,7 @@ function (x, dtype = NULL)
 #' + <https:/keras.io/keras_core/api/ops/numpy#average-function>
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/average>
 #' @tether keras.ops.average
-k_average <-
+op_average <-
 function (x, axis = NULL, weights = NULL)
 {
     args <- capture_args2(list(axis = as_axis))
@@ -3322,14 +3322,14 @@ function (x, axis = NULL, weights = NULL)
 #'
 #' # Examples
 #' ```{r}
-#' (x <- k_array(c(1, 2, 2, 3), dtype = "uint8"))
-#' k_bincount(x)
+#' (x <- op_array(c(1, 2, 2, 3), dtype = "uint8"))
+#' op_bincount(x)
 #'
 #' (weights <- x / 2)
-#' k_bincount(x, weights = weights)
+#' op_bincount(x, weights = weights)
 #'
-#' minlength <- as.integer(k_max(x) + 1 + 2) # 6
-#' k_bincount(x, minlength = minlength)
+#' minlength <- as.integer(op_max(x) + 1 + 2) # 6
+#' op_bincount(x, minlength = minlength)
 #' ```
 #'
 #' @returns
@@ -3362,7 +3362,7 @@ function (x, axis = NULL, weights = NULL)
 #' + <https:/keras.io/keras_core/api/ops/numpy#bincount-function>
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/bincount>
 #' @tether keras.ops.bincount
-k_bincount <-
+op_bincount <-
 function (x, weights = NULL, minlength = 0L)
 {
     args <- capture_args2(list(x = as_integer, minlength = as_integer))
@@ -3376,8 +3376,8 @@ function (x, weights = NULL, minlength = 0L)
 #'
 #' # Examples
 #' ```{r}
-#' x <- k_array(c(1, 2, 3))
-#' k_broadcast_to(x, shape = c(3, 3))
+#' x <- op_array(c(1, 2, 3))
+#' op_broadcast_to(x, shape = c(3, 3))
 #' ```
 #'
 #' @returns
@@ -3396,7 +3396,7 @@ function (x, weights = NULL, minlength = 0L)
 #' + <https:/keras.io/keras_core/api/ops/numpy#broadcastto-function>
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/broadcast_to>
 #' @tether keras.ops.broadcast_to
-k_broadcast_to <-
+op_broadcast_to <-
 function (x, shape)
 {
     args <- capture_args2(list(shape = normalize_shape))
@@ -3423,7 +3423,7 @@ function (x, shape)
 #' + <https:/keras.io/keras_core/api/ops/numpy#ceil-function>
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/ceil>
 #' @tether keras.ops.ceil
-k_ceil <-
+op_ceil <-
 function (x)
 keras$ops$ceil(x)
 
@@ -3454,7 +3454,7 @@ keras$ops$ceil(x)
 #' + <https:/keras.io/keras_core/api/ops/numpy#clip-function>
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/clip>
 #' @tether keras.ops.clip
-k_clip <-
+op_clip <-
 function (x, x_min, x_max)
 keras$ops$clip(x, x_min, x_max)
 
@@ -3477,7 +3477,7 @@ keras$ops$clip(x, x_min, x_max)
 #' + <https:/keras.io/keras_core/api/ops/numpy#concatenate-function>
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/concatenate>
 #' @tether keras.ops.concatenate
-k_concatenate <-
+op_concatenate <-
 function (xs, axis = 1L)
 {
     args <- capture_args2(list(axis = as_axis))
@@ -3497,7 +3497,7 @@ function (xs, axis = 1L)
 #' + <https:/keras.io/keras_core/api/ops/numpy#conj-function>
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/conj>
 #' @tether keras.ops.conj
-k_conj <-
+op_conj <-
 function (x)
 keras$ops$conj(x)
 
@@ -3523,7 +3523,7 @@ keras$ops$conj(x)
 #' + <https:/keras.io/keras_core/api/ops/numpy#conjugate-function>
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/conjugate>
 #' @tether keras.ops.conjugate
-k_conjugate <-
+op_conjugate <-
 function (x)
 keras$ops$conjugate(x)
 
@@ -3543,7 +3543,7 @@ keras$ops$conjugate(x)
 #' + <https:/keras.io/keras_core/api/ops/numpy#copy-function>
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/copy>
 #' @tether keras.ops.copy
-k_copy <-
+op_copy <-
 function (x)
 keras$ops$copy(x)
 
@@ -3563,7 +3563,7 @@ keras$ops$copy(x)
 #' + <https:/keras.io/keras_core/api/ops/numpy#cos-function>
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/cos>
 #' @tether keras.ops.cos
-k_cos <-
+op_cos <-
 function (x)
 keras$ops$cos(x)
 
@@ -3583,7 +3583,7 @@ keras$ops$cos(x)
 #' + <https:/keras.io/keras_core/api/ops/numpy#cosh-function>
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/cosh>
 #' @tether keras.ops.cosh
-k_cosh <-
+op_cosh <-
 function (x)
 keras$ops$cosh(x)
 
@@ -3595,12 +3595,12 @@ keras$ops$cosh(x)
 #'
 #' # Examples
 #' ```{r}
-#' x <- k_array(rbind(c(0, 1, 7, 0),
+#' x <- op_array(rbind(c(0, 1, 7, 0),
 #'                    c(3, 0, 2, 19)))
-#' k_count_nonzero(x)
-#' k_count_nonzero(x, axis = 1)
+#' op_count_nonzero(x)
+#' op_count_nonzero(x, axis = 1)
 #'
-#' k_count_nonzero(x, axis = 2)
+#' op_count_nonzero(x, axis = 2)
 #' ```
 #'
 #' @returns
@@ -3620,7 +3620,7 @@ keras$ops$cosh(x)
 #' + <https:/keras.io/keras_core/api/ops/numpy#countnonzero-function>
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/count_nonzero>
 #' @tether keras.ops.count_nonzero
-k_count_nonzero <-
+op_count_nonzero <-
 function (x, axis = NULL)
 {
     args <- capture_args2(list(axis = as_axis))
@@ -3679,7 +3679,7 @@ function (x, axis = NULL)
 #' + <https:/keras.io/keras_core/api/ops/numpy#cross-function>
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/cross>
 #' @tether keras.ops.cross
-k_cross <-
+op_cross <-
 function (x1, x2, axisa = -1L, axisb = -1L, axisc = -1L, axis = NULL)
 {
     args <- capture_args2(list(axisa = as_integer, axisb = as_integer,
@@ -3707,7 +3707,7 @@ function (x1, x2, axisa = -1L, axisb = -1L, axisc = -1L, axis = NULL)
 #' + <https:/keras.io/keras_core/api/ops/numpy#cumprod-function>
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/cumprod>
 #' @tether keras.ops.cumprod
-k_cumprod <-
+op_cumprod <-
 function (x, axis = NULL)
 {
     args <- capture_args2(list(axis = as_axis))
@@ -3734,7 +3734,7 @@ function (x, axis = NULL)
 #' + <https:/keras.io/keras_core/api/ops/numpy#cumsum-function>
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/cumsum>
 #' @tether keras.ops.cumsum
-k_cumsum <-
+op_cumsum <-
 function (x, axis = NULL)
 {
     args <- capture_args2(list(axis = as_axis))
@@ -3748,12 +3748,12 @@ function (x, axis = NULL)
 #'
 #' # Examples
 #' ```{r}
-#' x <- k_arange(9L) |> k_reshape(c(3, 3))
+#' x <- op_arange(9L) |> op_reshape(c(3, 3))
 #' x
-#' k_diag(x)
-#' k_diag(x, k = 1)
-#' k_diag(x, k = -1)
-#' k_diag(k_diag(x))
+#' op_diag(x)
+#' op_diag(x, k = 1)
+#' op_diag(x, k = -1)
+#' op_diag(op_diag(x))
 #' ```
 #'
 #' @returns
@@ -3775,7 +3775,7 @@ function (x, axis = NULL)
 #' + <https:/keras.io/keras_core/api/ops/numpy#diag-function>
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/diag>
 #' @tether keras.ops.diag
-k_diag <-
+op_diag <-
 function (x, k = 0L)
 {
     args <- capture_args2(list(k = as_integer))
@@ -3799,16 +3799,16 @@ function (x, k = 0L)
 #'
 #' # Examples
 #' ```{r}
-#' x <- k_arange(4L) |> k_reshape(c(2, 2))
+#' x <- op_arange(4L) |> op_reshape(c(2, 2))
 #' x
-#' k_diagonal(x)
-#' k_diagonal(x, offset = 1)
+#' op_diagonal(x)
+#' op_diagonal(x, offset = 1)
 #'
-#' x <- k_array(1:8) |> k_reshape(c(2, 2, 2))
+#' x <- op_array(1:8) |> op_reshape(c(2, 2, 2))
 #' x
-#' x |> k_diagonal(0)
-#' x |> k_diagonal(0, 1, 2) # same as above, the default
-#' x |> k_diagonal(0, 2, 3)
+#' x |> op_diagonal(0)
+#' x |> op_diagonal(0, 1, 2) # same as above, the default
+#' x |> op_diagonal(0, 2, 3)
 #' ```
 #'
 #' @returns
@@ -3836,7 +3836,7 @@ function (x, k = 0L)
 #' + <https:/keras.io/keras_core/api/ops/numpy#diagonal-function>
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/diagonal>
 #' @tether keras.ops.diagonal
-k_diagonal <-
+op_diagonal <-
 function (x, offset = 0L, axis1 = 1L, axis2 = 2L)
 {
     args <- capture_args2(list(offset = as_integer, axis1 = as_axis,
@@ -3854,13 +3854,13 @@ function (x, offset = 0L, axis1 = 1L, axis2 = 2L)
 #'
 #' # Examples
 #' ```{r}
-#' x <- k_array(c(1, 2, 4, 7, 0))
-#' k_diff(x)
-#' k_diff(x, n = 2)
-#' x <- k_array(rbind(c(1, 3, 6, 10),
+#' x <- op_array(c(1, 2, 4, 7, 0))
+#' op_diff(x)
+#' op_diff(x, n = 2)
+#' x <- op_array(rbind(c(1, 3, 6, 10),
 #'                   c(0, 5, 6, 8)))
-#' k_diff(x)
-#' k_diff(x, axis = 1)
+#' op_diff(x)
+#' op_diff(x, axis = 1)
 #' ```
 #'
 #' @returns
@@ -3882,7 +3882,7 @@ function (x, offset = 0L, axis1 = 1L, axis2 = 2L)
 #' @seealso
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/diff>
 #' @tether keras.ops.diff
-k_diff <-
+op_diff <-
 function (a, n = 1L, axis = -1L)
 {
     args <- capture_args2(list(n = as_integer, axis = as_axis))
@@ -3896,9 +3896,9 @@ function (a, n = 1L, axis = -1L)
 #'
 #' # Examples
 #' ```{r}
-#' x <- k_array(c(0.0, 1.0, 3.0, 1.6))
+#' x <- op_array(c(0.0, 1.0, 3.0, 1.6))
 #' bins <- array(c(0.0, 3.0, 4.5, 7.0))
-#' k_digitize(x, bins)
+#' op_digitize(x, bins)
 #' # array([1, 1, 2, 1])
 #' ```
 #'
@@ -3919,7 +3919,7 @@ function (a, n = 1L, axis = -1L)
 #' + <https:/keras.io/keras_core/api/ops/numpy#digitize-function>
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/digitize>
 #' @tether keras.ops.digitize
-k_digitize <-
+op_digitize <-
 function (x, bins)
 {
     args <- capture_args2(list(bins = as.array))
@@ -3948,7 +3948,7 @@ function (x, bins)
 #' + <https:/keras.io/keras_core/api/ops/numpy#divide-function>
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/divide>
 #' @tether keras.ops.divide
-k_divide <-
+op_divide <-
 function (x1, x2)
 keras$ops$divide(x1, x2)
 
@@ -3985,7 +3985,7 @@ keras$ops$divide(x1, x2)
 #' + <https:/keras.io/keras_core/api/ops/numpy#dot-function>
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/dot>
 #' @tether keras.ops.dot
-k_dot <-
+op_dot <-
 function (x1, x2)
 keras$ops$dot(x1, x2)
 
@@ -3996,55 +3996,55 @@ keras$ops$dot(x1, x2)
 #'
 #' # Examples
 #' ```{r}
-#' a <- k_arange(25) |> k_reshape(c(5, 5))
-#' b <- k_arange(5)
-#' c <- k_arange(6) |> k_reshape(c(2, 3))
+#' a <- op_arange(25) |> op_reshape(c(5, 5))
+#' b <- op_arange(5)
+#' c <- op_arange(6) |> op_reshape(c(2, 3))
 #' ```
 #'
 #' Trace of a matrix:
 #'
 #' ```{r, results = 'hold'}
-#' k_einsum("ii", a)
-#' k_trace(a)
+#' op_einsum("ii", a)
+#' op_trace(a)
 #' ```
 #'
 #' Extract the diagonal:
 #'
 #' ```{r, results = 'hold'}
-#' k_einsum("ii -> i", a)
-#' k_diag(a)
+#' op_einsum("ii -> i", a)
+#' op_diag(a)
 #' ```
 #'
 #' Sum over an axis:
 #'
 #' ```{r, results = 'hold'}
-#' k_einsum("ij -> i", a)
-#' k_sum(a, axis = 2)
+#' op_einsum("ij -> i", a)
+#' op_sum(a, axis = 2)
 #' ```
 #'
 #' For higher dimensional tensors summing a single axis can be done
 #' with ellipsis:
 #'
 #' ```{r, results = 'hold'}
-#' k_einsum("...j -> ...", a)
-#' k_sum(a, axis = -1)
+#' op_einsum("...j -> ...", a)
+#' op_sum(a, axis = -1)
 #' ```
 #'
 #' Compute a matrix transpose or reorder any number of axes:
 #'
 #' ```{r, results = 'hold'}
-#' k_einsum("ji", c)
-#' k_einsum("ij -> ji", c)
-#' k_transpose(c)
+#' op_einsum("ji", c)
+#' op_einsum("ij -> ji", c)
+#' op_transpose(c)
 #' ```
 #'
 #' Matrix vector multiplication:
 #'
 #' ```{r, results = 'hold'}
-#' k_einsum("ij, j", a, b)
-#' k_einsum("...j, j", a, b)
+#' op_einsum("ij, j", a, b)
+#' op_einsum("...j, j", a, b)
 #' a %*% b
-#' k_matmul(a, b)
+#' op_matmul(a, b)
 #' ```
 #'
 #' @returns
@@ -4067,7 +4067,7 @@ keras$ops$dot(x1, x2)
 #' + <https:/keras.io/keras_core/api/ops/numpy#einsum-function>
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/einsum>
 #' @tether keras.ops.einsum
-k_einsum <-
+op_einsum <-
 function (subscripts, ...)
 keras$ops$einsum(subscripts, ...)
 
@@ -4090,7 +4090,7 @@ keras$ops$einsum(subscripts, ...)
 #' + <https:/keras.io/keras_core/api/ops/numpy#empty-function>
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/empty>
 #' @tether keras.ops.empty
-k_empty <-
+op_empty <-
 function (shape, dtype = NULL)
 {
     args <- capture_args2(list(shape = normalize_shape))
@@ -4116,7 +4116,7 @@ function (shape, dtype = NULL)
 #' + <https:/keras.io/keras_core/api/ops/numpy#equal-function>
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/equal>
 #' @tether keras.ops.equal
-k_equal <-
+op_equal <-
 function (x1, x2)
 keras$ops$equal(x1, x2)
 
@@ -4136,7 +4136,7 @@ keras$ops$equal(x1, x2)
 #' + <https:/keras.io/keras_core/api/ops/numpy#exp-function>
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/exp>
 #' @tether keras.ops.exp
-k_exp <-
+op_exp <-
 function (x)
 keras$ops$exp(x)
 
@@ -4163,7 +4163,7 @@ keras$ops$exp(x)
 #' + <https:/keras.io/keras_core/api/ops/numpy#expanddims-function>
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/expand_dims>
 #' @tether keras.ops.expand_dims
-k_expand_dims <-
+op_expand_dims <-
 function (x, axis)
 {
     args <- capture_args2(list(axis = as_axis))
@@ -4186,7 +4186,7 @@ function (x, axis)
 #' + <https:/keras.io/keras_core/api/ops/numpy#expm1-function>
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/expm1>
 #' @tether keras.ops.expm1
-k_expm1 <-
+op_expm1 <-
 function (x)
 keras$ops$expm1(x)
 
@@ -4217,7 +4217,7 @@ keras$ops$expm1(x)
 #' + <https:/keras.io/keras_core/api/ops/numpy#eye-function>
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/eye>
 #' @tether keras.ops.eye
-k_eye <-
+op_eye <-
 function (N, M = NULL, k = 0L, dtype = NULL)
 {
     args <- capture_args2(list(k = as_integer))
@@ -4247,7 +4247,7 @@ function (N, M = NULL, k = 0L, dtype = NULL)
 #' + <https:/keras.io/keras_core/api/ops/numpy#flip-function>
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/flip>
 #' @tether keras.ops.flip
-k_flip <-
+op_flip <-
 function (x, axis = NULL)
 {
     args <- capture_args2(list(axis = as_axis))
@@ -4273,7 +4273,7 @@ function (x, axis = NULL)
 #' + <https:/keras.io/keras_core/api/ops/numpy#floor-function>
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/floor>
 #' @tether keras.ops.floor
-k_floor <-
+op_floor <-
 function (x)
 keras$ops$floor(x)
 
@@ -4295,7 +4295,7 @@ keras$ops$floor(x)
 #' @seealso
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/floor_divide>
 #' @tether keras.ops.floor_divide
-k_floor_divide <-
+op_floor_divide <-
 function (x1, x2)
 keras$ops$floor_divide(x1, x2)
 
@@ -4321,7 +4321,7 @@ keras$ops$floor_divide(x1, x2)
 #' + <https:/keras.io/keras_core/api/ops/numpy#full-function>
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/full>
 #' @tether keras.ops.full
-k_full <-
+op_full <-
 function (shape, fill_value, dtype = NULL)
 {
     args <- capture_args2(list(shape = normalize_shape))
@@ -4350,7 +4350,7 @@ function (shape, fill_value, dtype = NULL)
 #' + <https:/keras.io/keras_core/api/ops/numpy#fulllike-function>
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/full_like>
 #' @tether keras.ops.full_like
-k_full_like <-
+op_full_like <-
 function (x, fill_value, dtype = NULL)
 keras$ops$full_like(x, fill_value, dtype)
 
@@ -4370,7 +4370,7 @@ keras$ops$full_like(x, fill_value, dtype)
 #' + <https:/keras.io/keras_core/api/ops/numpy#getitem-function>
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/get_item>
 #' @tether keras.ops.get_item
-k_get_item <-
+op_get_item <-
 function (x, key)
 keras$ops$get_item(x, key)
 
@@ -4393,7 +4393,7 @@ keras$ops$get_item(x, key)
 #' + <https:/keras.io/keras_core/api/ops/numpy#greater-function>
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/greater>
 #' @tether keras.ops.greater
-k_greater <-
+op_greater <-
 function (x1, x2)
 keras$ops$greater(x1, x2)
 
@@ -4416,7 +4416,7 @@ keras$ops$greater(x1, x2)
 #' + <https:/keras.io/keras_core/api/ops/numpy#greaterequal-function>
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/greater_equal>
 #' @tether keras.ops.greater_equal
-k_greater_equal <-
+op_greater_equal <-
 function (x1, x2)
 keras$ops$greater_equal(x1, x2)
 
@@ -4440,7 +4440,7 @@ keras$ops$greater_equal(x1, x2)
 #' + <https:/keras.io/keras_core/api/ops/numpy#hstack-function>
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/hstack>
 #' @tether keras.ops.hstack
-k_hstack <-
+op_hstack <-
 function (xs)
 keras$ops$hstack(xs)
 
@@ -4467,7 +4467,7 @@ keras$ops$hstack(xs)
 #' + <https:/keras.io/keras_core/api/ops/numpy#identity-function>
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/identity>
 #' @tether keras.ops.identity
-k_identity <-
+op_identity <-
 function (n, dtype = NULL)
 keras$ops$identity(n, dtype)
 
@@ -4487,7 +4487,7 @@ keras$ops$identity(n, dtype)
 #' + <https:/keras.io/keras_core/api/ops/numpy#imag-function>
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/imag>
 #' @tether keras.ops.imag
-k_imag <-
+op_imag <-
 function (x)
 keras$ops$imag(x)
 
@@ -4510,7 +4510,7 @@ keras$ops$imag(x)
 #' + <https:/keras.io/keras_core/api/ops/numpy#isclose-function>
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/isclose>
 #' @tether keras.ops.isclose
-k_isclose <-
+op_isclose <-
 function (x1, x2)
 keras$ops$isclose(x1, x2)
 
@@ -4535,7 +4535,7 @@ keras$ops$isclose(x1, x2)
 #' + <https:/keras.io/keras_core/api/ops/numpy#isfinite-function>
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/isfinite>
 #' @tether keras.ops.isfinite
-k_isfinite <-
+op_isfinite <-
 function (x)
 keras$ops$isfinite(x)
 
@@ -4555,7 +4555,7 @@ keras$ops$isfinite(x)
 #' + <https:/keras.io/keras_core/api/ops/numpy#isinf-function>
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/isinf>
 #' @tether keras.ops.isinf
-k_isinf <-
+op_isinf <-
 function (x)
 keras$ops$isinf(x)
 
@@ -4575,7 +4575,7 @@ keras$ops$isinf(x)
 #' + <https:/keras.io/keras_core/api/ops/numpy#isnan-function>
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/isnan>
 #' @tether keras.ops.isnan
-k_isnan <-
+op_isnan <-
 function (x)
 keras$ops$isnan(x)
 
@@ -4598,7 +4598,7 @@ keras$ops$isnan(x)
 #' + <https:/keras.io/keras_core/api/ops/numpy#less-function>
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/less>
 #' @tether keras.ops.less
-k_less <-
+op_less <-
 function (x1, x2)
 keras$ops$less(x1, x2)
 
@@ -4621,7 +4621,7 @@ keras$ops$less(x1, x2)
 #' + <https:/keras.io/keras_core/api/ops/numpy#lessequal-function>
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/less_equal>
 #' @tether keras.ops.less_equal
-k_less_equal <-
+op_less_equal <-
 function (x1, x2)
 keras$ops$less_equal(x1, x2)
 
@@ -4676,7 +4676,7 @@ keras$ops$less_equal(x1, x2)
 #' + <https:/keras.io/keras_core/api/ops/numpy#linspace-function>
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/linspace>
 #' @tether keras.ops.linspace
-k_linspace <-
+op_linspace <-
 function (start, stop, num = 50L, endpoint = TRUE, retstep = FALSE,
     dtype = NULL, axis = 1L)
 {
@@ -4700,7 +4700,7 @@ function (start, stop, num = 50L, endpoint = TRUE, retstep = FALSE,
 #' + <https:/keras.io/keras_core/api/ops/numpy#log-function>
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/log>
 #' @tether keras.ops.log
-k_log <-
+op_log <-
 function (x)
 keras$ops$log(x)
 
@@ -4720,7 +4720,7 @@ keras$ops$log(x)
 #' + <https:/keras.io/keras_core/api/ops/numpy#log10-function>
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/log10>
 #' @tether keras.ops.log10
-k_log10 <-
+op_log10 <-
 function (x)
 keras$ops$log10(x)
 
@@ -4743,7 +4743,7 @@ keras$ops$log10(x)
 #' + <https:/keras.io/keras_core/api/ops/numpy#log1p-function>
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/log1p>
 #' @tether keras.ops.log1p
-k_log1p <-
+op_log1p <-
 function (x)
 keras$ops$log1p(x)
 
@@ -4763,7 +4763,7 @@ keras$ops$log1p(x)
 #' + <https:/keras.io/keras_core/api/ops/numpy#log2-function>
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/log2>
 #' @tether keras.ops.log2
-k_log2 <-
+op_log2 <-
 function (x)
 keras$ops$log2(x)
 
@@ -4790,7 +4790,7 @@ keras$ops$log2(x)
 #' + <https:/keras.io/keras_core/api/ops/numpy#logaddexp-function>
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/logaddexp>
 #' @tether keras.ops.logaddexp
-k_logaddexp <-
+op_logaddexp <-
 function (x1, x2)
 keras$ops$logaddexp(x1, x2)
 
@@ -4816,7 +4816,7 @@ keras$ops$logaddexp(x1, x2)
 #' + <https:/keras.io/keras_core/api/ops/numpy#logicaland-function>
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/logical_and>
 #' @tether keras.ops.logical_and
-k_logical_and <-
+op_logical_and <-
 function (x1, x2)
 keras$ops$logical_and(x1, x2)
 
@@ -4839,7 +4839,7 @@ keras$ops$logical_and(x1, x2)
 #' + <https:/keras.io/keras_core/api/ops/numpy#logicalnot-function>
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/logical_not>
 #' @tether keras.ops.logical_not
-k_logical_not <-
+op_logical_not <-
 function (x)
 keras$ops$logical_not(x)
 
@@ -4865,7 +4865,7 @@ keras$ops$logical_not(x)
 #' + <https:/keras.io/keras_core/api/ops/numpy#logicalor-function>
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/logical_or>
 #' @tether keras.ops.logical_or
-k_logical_or <-
+op_logical_or <-
 function (x1, x2)
 keras$ops$logical_or(x1, x2)
 
@@ -4887,7 +4887,7 @@ keras$ops$logical_or(x1, x2)
 #' @seealso
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/logical_xor>
 #' @tether keras.ops.logical_xor
-k_logical_xor <-
+op_logical_xor <-
 function (x1, x2)
 keras$ops$logical_xor(x1, x2)
 
@@ -4937,7 +4937,7 @@ keras$ops$logical_xor(x1, x2)
 #' + <https:/keras.io/keras_core/api/ops/numpy#logspace-function>
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/logspace>
 #' @tether keras.ops.logspace
-k_logspace <-
+op_logspace <-
 function (start, stop, num = 50L, endpoint = TRUE, base = 10L,
     dtype = NULL, axis = 1L)
 {
@@ -4975,7 +4975,7 @@ function (start, stop, num = 50L, endpoint = TRUE, base = 10L,
 #' + <https:/keras.io/keras_core/api/ops/numpy#matmul-function>
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/matmul>
 #' @tether keras.ops.matmul
-k_matmul <-
+op_matmul <-
 function (x1, x2)
 keras$ops$matmul(x1, x2)
 
@@ -5006,7 +5006,7 @@ keras$ops$matmul(x1, x2)
 #' + <https:/keras.io/keras_core/api/ops/numpy#max-function>
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/max>
 #' @tether keras.ops.max
-k_max <-
+op_max <-
 function (x, axis = NULL, keepdims = FALSE, initial = NULL)
 {
     args <- capture_args2(list(axis = as_axis))
@@ -5032,7 +5032,7 @@ function (x, axis = NULL, keepdims = FALSE, initial = NULL)
 #' + <https:/keras.io/keras_core/api/ops/numpy#maximum-function>
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/maximum>
 #' @tether keras.ops.maximum
-k_maximum <-
+op_maximum <-
 function (x1, x2)
 keras$ops$maximum(x1, x2)
 
@@ -5060,7 +5060,7 @@ keras$ops$maximum(x1, x2)
 #' + <https:/keras.io/keras_core/api/ops/numpy#mean-function>
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/mean>
 #' @tether keras.ops.mean
-k_mean <-
+op_mean <-
 function (x, axis = NULL, keepdims = FALSE)
 {
     args <- capture_args2(list(axis = as_axis))
@@ -5091,7 +5091,7 @@ function (x, axis = NULL, keepdims = FALSE)
 #' @seealso
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/median>
 #' @tether keras.ops.median
-k_median <-
+op_median <-
 function (x, axis = NULL, keepdims = FALSE)
 {
     args <- capture_args2(list(axis = as_axis))
@@ -5109,12 +5109,12 @@ function (x, axis = NULL, keepdims = FALSE)
 #'
 #' # Examples
 #' ```{r}
-#' x <- k_array(c(1, 2, 3), "int32")
-#' y <- k_array(c(4, 5, 6), "int32")
+#' x <- op_array(c(1, 2, 3), "int32")
+#' y <- op_array(c(4, 5, 6), "int32")
 #' ```
 #'
 #' ```{r}
-#' c(grid_x, grid_y) %<-% k_meshgrid(x, y, indexing = "ij")
+#' c(grid_x, grid_y) %<-% op_meshgrid(x, y, indexing = "ij")
 #' grid_x
 #' # array([[1, 1, 1],
 #' #        [2, 2, 2],
@@ -5143,7 +5143,7 @@ function (x, axis = NULL, keepdims = FALSE)
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/meshgrid>
 #'
 #' @tether keras.ops.meshgrid
-k_meshgrid <-
+op_meshgrid <-
 function (..., indexing = "xy")
 {
     args <- lapply(list(...), function(x) {
@@ -5181,7 +5181,7 @@ function (..., indexing = "xy")
 #' + <https:/keras.io/keras_core/api/ops/numpy#min-function>
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/min>
 #' @tether keras.ops.min
-k_min <-
+op_min <-
 function (x, axis = NULL, keepdims = FALSE, initial = NULL)
 {
     args <- capture_args2(list(axis = as_axis))
@@ -5207,7 +5207,7 @@ function (x, axis = NULL, keepdims = FALSE, initial = NULL)
 #' + <https:/keras.io/keras_core/api/ops/numpy#minimum-function>
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/minimum>
 #' @tether keras.ops.minimum
-k_minimum <-
+op_minimum <-
 function (x1, x2)
 keras$ops$minimum(x1, x2)
 
@@ -5230,7 +5230,7 @@ keras$ops$minimum(x1, x2)
 #' + <https:/keras.io/keras_core/api/ops/numpy#mod-function>
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/mod>
 #' @tether keras.ops.mod
-k_mod <-
+op_mod <-
 function (x1, x2)
 keras$ops$mod(x1, x2)
 
@@ -5260,7 +5260,7 @@ keras$ops$mod(x1, x2)
 #' + <https:/keras.io/keras_core/api/ops/numpy#moveaxis-function>
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/moveaxis>
 #' @tether keras.ops.moveaxis
-k_moveaxis <-
+op_moveaxis <-
 function (x, source, destination)
 keras$ops$moveaxis(x, source, destination)
 
@@ -5283,7 +5283,7 @@ keras$ops$moveaxis(x, source, destination)
 #' + <https:/keras.io/keras_core/api/ops/numpy#multiply-function>
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/multiply>
 #' @tether keras.ops.multiply
-k_multiply <-
+op_multiply <-
 function (x1, x2)
 keras$ops$multiply(x1, x2)
 
@@ -5303,7 +5303,7 @@ keras$ops$multiply(x1, x2)
 #' + <https:/keras.io/keras_core/api/ops/numpy#nantonum-function>
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/nan_to_num>
 #' @tether keras.ops.nan_to_num
-k_nan_to_num <-
+op_nan_to_num <-
 function (x)
 keras$ops$nan_to_num(x)
 
@@ -5323,7 +5323,7 @@ keras$ops$nan_to_num(x)
 #' + <https:/keras.io/keras_core/api/ops/numpy#ndim-function>
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/ndim>
 #' @tether keras.ops.ndim
-k_ndim <-
+op_ndim <-
 function (x)
 keras$ops$ndim(x)
 
@@ -5343,7 +5343,7 @@ keras$ops$ndim(x)
 #' + <https:/keras.io/keras_core/api/ops/numpy#negative-function>
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/negative>
 #' @tether keras.ops.negative
-k_negative <-
+op_negative <-
 function (x)
 keras$ops$negative(x)
 
@@ -5363,7 +5363,7 @@ keras$ops$negative(x)
 #' + <https:/keras.io/keras_core/api/ops/numpy#nonzero-function>
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/nonzero>
 #' @tether keras.ops.nonzero
-k_nonzero <-
+op_nonzero <-
 function (x)
 keras$ops$nonzero(x)
 
@@ -5386,7 +5386,7 @@ keras$ops$nonzero(x)
 #' + <https:/keras.io/keras_core/api/ops/numpy#notequal-function>
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/not_equal>
 #' @tether keras.ops.not_equal
-k_not_equal <-
+op_not_equal <-
 function (x1, x2)
 keras$ops$not_equal(x1, x2)
 
@@ -5409,7 +5409,7 @@ keras$ops$not_equal(x1, x2)
 #' + <https:/keras.io/keras_core/api/ops/numpy#ones-function>
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/ones>
 #' @tether keras.ops.ones
-k_ones <-
+op_ones <-
 function (shape, dtype = NULL)
 {
     args <- capture_args2(list(shape = normalize_shape))
@@ -5435,7 +5435,7 @@ function (shape, dtype = NULL)
 #' + <https:/keras.io/keras_core/api/ops/numpy#oneslike-function>
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/ones_like>
 #' @tether keras.ops.ones_like
-k_ones_like <-
+op_ones_like <-
 function (x, dtype = NULL)
 keras$ops$ones_like(x, dtype)
 
@@ -5465,7 +5465,7 @@ keras$ops$ones_like(x, dtype)
 #' + <https:/keras.io/keras_core/api/ops/numpy#outer-function>
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/outer>
 #' @tether keras.ops.outer
-k_outer <-
+op_outer <-
 function (x1, x2)
 keras$ops$outer(x1, x2)
 
@@ -5511,7 +5511,7 @@ keras$ops$outer(x1, x2)
 #' + <https:/keras.io/keras_core/api/ops/numpy#pad-function>
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/pad>
 #' @tether keras.ops.pad
-k_pad <-
+op_pad <-
 function (x, pad_width, mode = "constant")
 {
     args <- capture_args2(list(pad_width = as_integer))
@@ -5537,7 +5537,7 @@ function (x, pad_width, mode = "constant")
 #' + <https:/keras.io/keras_core/api/ops/numpy#power-function>
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/power>
 #' @tether keras.ops.power
-k_power <-
+op_power <-
 function (x1, x2)
 keras$ops$power(x1, x2)
 
@@ -5569,7 +5569,7 @@ keras$ops$power(x1, x2)
 #' + <https:/keras.io/keras_core/api/ops/numpy#prod-function>
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/prod>
 #' @tether keras.ops.prod
-k_prod <-
+op_prod <-
 function (x, axis = NULL, keepdims = FALSE, dtype = NULL)
 {
     args <- capture_args2(list(axis = as_axis))
@@ -5619,7 +5619,7 @@ function (x, axis = NULL, keepdims = FALSE, dtype = NULL)
 #' @seealso
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/quantile>
 #' @tether keras.ops.quantile
-k_quantile <-
+op_quantile <-
 function (x, q, axis = NULL, method = "linear", keepdims = FALSE)
 {
     args <- capture_args2(list(axis = as_axis))
@@ -5645,7 +5645,7 @@ function (x, q, axis = NULL, method = "linear", keepdims = FALSE)
 #' + <https:/keras.io/keras_core/api/ops/numpy#ravel-function>
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/ravel>
 #' @tether keras.ops.ravel
-k_ravel <-
+op_ravel <-
 function (x)
 keras$ops$ravel(x)
 
@@ -5665,7 +5665,7 @@ keras$ops$ravel(x)
 #' + <https:/keras.io/keras_core/api/ops/numpy#real-function>
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/real>
 #' @tether keras.ops.real
-k_real <-
+op_real <-
 function (x)
 keras$ops$real(x)
 
@@ -5688,7 +5688,7 @@ keras$ops$real(x)
 #' + <https:/keras.io/keras_core/api/ops/numpy#reciprocal-function>
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/reciprocal>
 #' @tether keras.ops.reciprocal
-k_reciprocal <-
+op_reciprocal <-
 function (x)
 keras$ops$reciprocal(x)
 
@@ -5715,7 +5715,7 @@ keras$ops$reciprocal(x)
 #' + <https:/keras.io/keras_core/api/ops/numpy#repeat-function>
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/repeat>
 #' @tether keras.ops.repeat
-k_repeat <-
+op_repeat <-
 function (x, repeats, axis = NULL)
 {
     args <- capture_args2(list(axis = as_axis))
@@ -5746,7 +5746,7 @@ function (x, repeats, axis = NULL)
 #' + <https:/keras.io/keras_core/api/ops/numpy#reshape-function>
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/reshape>
 #' @tether keras.ops.reshape
-k_reshape <-
+op_reshape <-
 function (x, ..., new_shape = list(...))
 {
     keras$ops$reshape(x, tuple(lapply(shape(new_shape), function(d) d %||%
@@ -5780,7 +5780,7 @@ function (x, ..., new_shape = list(...))
 #' + <https:/keras.io/keras_core/api/ops/numpy#roll-function>
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/roll>
 #' @tether keras.ops.roll
-k_roll <-
+op_roll <-
 function (x, shift, axis = NULL)
 {
     args <- capture_args2(list(axis = as_axis))
@@ -5806,7 +5806,7 @@ function (x, shift, axis = NULL)
 #' + <https:/keras.io/keras_core/api/ops/numpy#round-function>
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/round>
 #' @tether keras.ops.round
-k_round <-
+op_round <-
 function (x, decimals = 0L)
 {
     args <- capture_args2(list(decimals = as_integer))
@@ -5829,7 +5829,7 @@ function (x, decimals = 0L)
 #' + <https:/keras.io/keras_core/api/ops/numpy#sign-function>
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/sign>
 #' @tether keras.ops.sign
-k_sign <-
+op_sign <-
 function (x)
 keras$ops$sign(x)
 
@@ -5849,7 +5849,7 @@ keras$ops$sign(x)
 #' + <https:/keras.io/keras_core/api/ops/numpy#sin-function>
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/sin>
 #' @tether keras.ops.sin
-k_sin <-
+op_sin <-
 function (x)
 keras$ops$sin(x)
 
@@ -5869,7 +5869,7 @@ keras$ops$sin(x)
 #' + <https:/keras.io/keras_core/api/ops/numpy#sinh-function>
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/sinh>
 #' @tether keras.ops.sinh
-k_sinh <-
+op_sinh <-
 function (x)
 keras$ops$sinh(x)
 
@@ -5889,7 +5889,7 @@ keras$ops$sinh(x)
 #' + <https:/keras.io/keras_core/api/ops/numpy#size-function>
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/size>
 #' @tether keras.ops.size
-k_size <-
+op_size <-
 function (x)
 keras$ops$size(x)
 
@@ -5913,7 +5913,7 @@ keras$ops$size(x)
 #' + <https:/keras.io/keras_core/api/ops/numpy#sort-function>
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/sort>
 #' @tether keras.ops.sort
-k_sort <-
+op_sort <-
 function (x, axis = -1L)
 {
     args <- capture_args2(list(axis = as_axis))
@@ -5954,7 +5954,7 @@ function (x, axis = -1L)
 #' + <https:/keras.io/keras_core/api/ops/numpy#split-function>
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/split>
 #' @tether keras.ops.split
-k_split <-
+op_split <-
 function (x, indices_or_sections, axis = 1L)
 {
     args <- capture_args2(list(indices_or_sections = as_integer,
@@ -5978,7 +5978,7 @@ function (x, indices_or_sections, axis = 1L)
 #' + <https:/keras.io/keras_core/api/ops/numpy#sqrt-function>
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/sqrt>
 #' @tether keras.ops.sqrt
-k_sqrt <-
+op_sqrt <-
 function (x)
 keras$ops$sqrt(x)
 
@@ -5998,7 +5998,7 @@ keras$ops$sqrt(x)
 #' + <https:/keras.io/keras_core/api/ops/numpy#square-function>
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/square>
 #' @tether keras.ops.square
-k_square <-
+op_square <-
 function (x)
 keras$ops$square(x)
 
@@ -6022,7 +6022,7 @@ keras$ops$square(x)
 #' + <https:/keras.io/keras_core/api/ops/numpy#squeeze-function>
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/squeeze>
 #' @tether keras.ops.squeeze
-k_squeeze <-
+op_squeeze <-
 function (x, axis = NULL)
 {
     args <- capture_args2(list(axis = as_axis))
@@ -6052,7 +6052,7 @@ function (x, axis = NULL)
 #' + <https:/keras.io/keras_core/api/ops/numpy#stack-function>
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/stack>
 #' @tether keras.ops.stack
-k_stack <-
+op_stack <-
 function (x, axis = 1L)
 {
     args <- capture_args2(list(axis = as_axis))
@@ -6084,7 +6084,7 @@ function (x, axis = 1L)
 #' + <https:/keras.io/keras_core/api/ops/numpy#std-function>
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/std>
 #' @tether keras.ops.std
-k_std <-
+op_std <-
 function (x, axis = NULL, keepdims = FALSE)
 {
     args <- capture_args2(list(axis = as_axis))
@@ -6110,7 +6110,7 @@ function (x, axis = NULL, keepdims = FALSE)
 #' + <https:/keras.io/keras_core/api/ops/numpy#subtract-function>
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/subtract>
 #' @tether keras.ops.subtract
-k_subtract <-
+op_subtract <-
 function (x1, x2)
 keras$ops$subtract(x1, x2)
 
@@ -6138,7 +6138,7 @@ keras$ops$subtract(x1, x2)
 #' + <https:/keras.io/keras_core/api/ops/numpy#sum-function>
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/sum>
 #' @tether keras.ops.sum
-k_sum <-
+op_sum <-
 function (x, axis = NULL, keepdims = FALSE)
 {
     args <- capture_args2(list(axis = as_axis))
@@ -6167,7 +6167,7 @@ function (x, axis = NULL, keepdims = FALSE)
 #' + <https:/keras.io/keras_core/api/ops/numpy#swapaxes-function>
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/swapaxes>
 #' @tether keras.ops.swapaxes
-k_swapaxes <-
+op_swapaxes <-
 function (x, axis1, axis2)
 keras$ops$swapaxes(x, axis1, axis2)
 
@@ -6194,7 +6194,7 @@ keras$ops$swapaxes(x, axis1, axis2)
 #' + <https:/keras.io/keras_core/api/ops/numpy#take-function>
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/take>
 #' @tether keras.ops.take
-k_take <-
+op_take <-
 function (x, indices, axis = NULL)
 {
     args <- capture_args2(list(indices = as_index, axis = as_axis))
@@ -6224,7 +6224,7 @@ function (x, indices, axis = NULL)
 #' + <https:/keras.io/keras_core/api/ops/numpy#takealongaxis-function>
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/take_along_axis>
 #' @tether keras.ops.take_along_axis
-k_take_along_axis <-
+op_take_along_axis <-
 function (x, indices, axis = NULL)
 {
     args <- capture_args2(list(indices = as_index, axis = as_axis))
@@ -6247,7 +6247,7 @@ function (x, indices, axis = NULL)
 #' + <https:/keras.io/keras_core/api/ops/numpy#tan-function>
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/tan>
 #' @tether keras.ops.tan
-k_tan <-
+op_tan <-
 function (x)
 keras$ops$tan(x)
 
@@ -6267,7 +6267,7 @@ keras$ops$tan(x)
 #' + <https:/keras.io/keras_core/api/ops/nn#tanh-function>
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/tanh>
 #' @tether keras.ops.tanh
-k_tanh <-
+op_tanh <-
 function (x)
 keras$ops$tanh(x)
 
@@ -6298,7 +6298,7 @@ keras$ops$tanh(x)
 #' + <https:/keras.io/keras_core/api/ops/numpy#tensordot-function>
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/tensordot>
 #' @tether keras.ops.tensordot
-k_tensordot <-
+op_tensordot <-
 function (x1, x2, axes = 3L)
 {
     args <- capture_args2(list(axes = as_axis))
@@ -6333,7 +6333,7 @@ function (x1, x2, axes = 3L)
 #' + <https:/keras.io/keras_core/api/ops/numpy#tile-function>
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/tile>
 #' @tether keras.ops.tile
-k_tile <-
+op_tile <-
 function (x, repeats)
 keras$ops$tile(x, repeats)
 
@@ -6378,7 +6378,7 @@ keras$ops$tile(x, repeats)
 #' + <https:/keras.io/keras_core/api/ops/numpy#trace-function>
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/trace>
 #' @tether keras.ops.trace
-k_trace <-
+op_trace <-
 function (x, offset = 0L, axis1 = 0L, axis2 = 1L)
 {
     args <- capture_args2(list(offset = as_integer, axis1 = as_integer,
@@ -6406,7 +6406,7 @@ function (x, offset = 0L, axis1 = 0L, axis2 = 1L)
 #' + <https:/keras.io/keras_core/api/ops/numpy#transpose-function>
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/transpose>
 #' @tether keras.ops.transpose
-k_transpose <-
+op_transpose <-
 function (x, axes = NULL)
 {
     args <- capture_args2(list(axes = as_axis))
@@ -6441,7 +6441,7 @@ function (x, axes = NULL)
 #' + <https:/keras.io/keras_core/api/ops/numpy#tri-function>
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/tri>
 #' @tether keras.ops.tri
-k_tri <-
+op_tri <-
 function (N, M = NULL, k = 0L, dtype = NULL)
 {
     args <- capture_args2(list(k = as_integer))
@@ -6472,7 +6472,7 @@ function (N, M = NULL, k = 0L, dtype = NULL)
 #' + <https:/keras.io/keras_core/api/ops/numpy#tril-function>
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/tril>
 #' @tether keras.ops.tril
-k_tril <-
+op_tril <-
 function (x, k = 0L)
 {
     args <- capture_args2(list(k = as_integer))
@@ -6503,7 +6503,7 @@ function (x, k = 0L)
 #' + <https:/keras.io/keras_core/api/ops/numpy#triu-function>
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/triu>
 #' @tether keras.ops.triu
-k_triu <-
+op_triu <-
 function (x, k = 0L)
 {
     args <- capture_args2(list(k = as_integer))
@@ -6526,7 +6526,7 @@ function (x, k = 0L)
 #' + <https:/keras.io/keras_core/api/ops/numpy#truedivide-function>
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/true_divide>
 #' @tether keras.ops.true_divide
-k_true_divide <-
+op_true_divide <-
 function (x1, x2)
 keras$ops$true_divide(x1, x2)
 
@@ -6554,7 +6554,7 @@ keras$ops$true_divide(x1, x2)
 #' + <https:/keras.io/keras_core/api/ops/numpy#var-function>
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/var>
 #' @tether keras.ops.var
-k_var <-
+op_var <-
 function (x, axis = NULL, keepdims = FALSE)
 {
     args <- capture_args2(list(axis = as_axis))
@@ -6587,7 +6587,7 @@ function (x, axis = NULL, keepdims = FALSE)
 #' + <https:/keras.io/keras_core/api/ops/numpy#vdot-function>
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/vdot>
 #' @tether keras.ops.vdot
-k_vdot <-
+op_vdot <-
 function (x1, x2)
 keras$ops$vdot(x1, x2)
 
@@ -6607,7 +6607,7 @@ keras$ops$vdot(x1, x2)
 #' + <https:/keras.io/keras_core/api/ops/numpy#vstack-function>
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/vstack>
 #' @tether keras.ops.vstack
-k_vstack <-
+op_vstack <-
 function (xs)
 keras$ops$vstack(xs)
 
@@ -6634,7 +6634,7 @@ keras$ops$vstack(xs)
 #' + <https:/keras.io/keras_core/api/ops/numpy#where-function>
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/where>
 #' @tether keras.ops.where
-k_where <-
+op_where <-
 function (condition, x1 = NULL, x2 = NULL)
 keras$ops$where(condition, x1, x2)
 
@@ -6657,7 +6657,7 @@ keras$ops$where(condition, x1, x2)
 #' + <https:/keras.io/keras_core/api/ops/numpy#zeros-function>
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/zeros>
 #' @tether keras.ops.zeros
-k_zeros <-
+op_zeros <-
 function (shape, dtype = NULL)
 {
     args <- capture_args2(list(shape = normalize_shape))
@@ -6683,6 +6683,6 @@ function (shape, dtype = NULL)
 #' + <https:/keras.io/keras_core/api/ops/numpy#zeroslike-function>
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/zeros_like>
 #' @tether keras.ops.zeros_like
-k_zeros_like <-
+op_zeros_like <-
 function (x, dtype = NULL)
 keras$ops$zeros_like(x, dtype)
