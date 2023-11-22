@@ -22,22 +22,16 @@ if(!"source:tools/translate-tools.R" %in% search()) envir::attach_source("tools/
 # TODO: new_callback_class() should wrap callables to make epoch/batch n 1 based,
 #       make logs persistent (e.g., wrap the user callable w/ `logs$update(<callback_return>`))
 #
-# TODO: list in arg not formatting correctly file:///Users/tomasz/github/rstudio/keras/website/reference/layer_random_zoom.html fill_modepkg
-#
-# TODO: refactor tools/make.R to use git apply --3way, stop on each symbol. Make a workflow that
-#       causes every symbol update to be a single commit. e.g., update_docs() - scans through man-src/*, on first
-#       dir that needs changes, it stops, give an opportunity for me to edit, stage, commit, then
-#       rerun `update_docs()`
 
 # TODO: in reticulate, change subclassed dict autoconversion back to off:
 #      so that keras$utils$get_custom_objects()$clear() works.
-#
+
 # TODO: k_array() should take a 'shape' argument
-#
+
 # TODO: remove k_amax() and friends, they're redundant w/ k_max(), which already
 #       takes an axis arg. Only there for numpy api compatability, which
 #       doesn't matter to us.
-#
+
 # TODO: get_custom_objects() needs thinking
 
 # TODO: r_name autogen: move "set" to tail, so have config_floatx(), config_floatx_set()
@@ -168,18 +162,6 @@ if(!"source:tools/translate-tools.R" %in% search()) envir::attach_source("tools/
 #
 # TODO: config_{enable,disable,is_enabled}_traceback_filtering have identical docstrings,
 # should all be the same page.
-#
-# TODO: the whole man-src/*/upstream+patch workflow can be encapsulated in a custom
-#       roclet. Something like: `#' @adaptedFrom docstring_and_signature("keras.layers.Dense")
-#       Where `docstring_and_signature()` is a function in the package namespace that
-#       returns a string we keep track of for updates from upstream.
-#       This all can live in it's own (new) R package, {roxytether} that maybe also contains the
-#       convenient system call wrappers adapters from guildai-r, (which we'll want for
-#       git()). Also, maybe a convenience function that will generate
-#       the first pass of translating the upstream to roxygen.
-#       Not sure if/how pre-rendering/render-caching could be also be encapsulated
-#       in an roclet. Ideally `@cacheRenders` would dump pre-renders to man-src,
-#       but that needs some thinking.
 #
 # TODO: @family tags should be manually managed, not dynamically generated.
 #       perhaps in a yml file
