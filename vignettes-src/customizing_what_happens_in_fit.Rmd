@@ -347,7 +347,7 @@ gan <- new_model_class(
     super$initialize(...)
     self$discriminator <- discriminator
     self$generator <- generator
-    self$latent_dim <- latent_dim
+    self$latent_dim <- as.integer(latent_dim)
     self$d_loss_tracker <- metric_mean(name="d_loss")
     self$g_loss_tracker = metric_mean(name="g_loss")
   },
@@ -421,7 +421,7 @@ all_digits <- k_concatenate(list(x_train, x_test))
 all_digits <- k_reshape(all_digits, c(-1, 28, 28, 1))
 dataset <- all_digits %>%
   tfdatasets::tensor_slices_dataset() %>%
-  tfdatasets::dataset_map(function(x) tf$cast(x, "float")/255)
+  tfdatasets::dataset_map(function(x) tf$cast(x, "float")/255) %>% 
   tfdatasets::dataset_shuffle(buffer_size = 1024) %>%
   tfdatasets::dataset_batch(batch_size = batch_size)
 
