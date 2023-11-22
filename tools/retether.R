@@ -2,10 +2,10 @@
 
 envir::attach_source("tools/utils.R")
 
-options(error = function(e) print(rlang::trace_back()))
+# options(error = function(e) print(rlang::trace_back()))
 
 resolve_roxy_tether <- function(endpoint) {
-  message("parsing @tether ", endpoint)
+  # message("parsing @tether ", endpoint)
   export <- mk_export(endpoint)
   roxy <- export$roxygen |> str_split_lines()
   fn <- as.function(c(formals(export$r_fn), quote({})))
@@ -13,7 +13,9 @@ resolve_roxy_tether <- function(endpoint) {
   as_glue(str_flatten_lines(
     str_c("#' ", roxy),
     str_c(export$r_name, " <- "),
-    deparse(fn)
+    "__signature__",
+    format_py_signature(export$py_obj, name = endpoint)
+    # deparse(fn)
   ))
 }
 # resolve_roxy_tether("keras.layers.Dense") |> cat()

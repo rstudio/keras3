@@ -1758,7 +1758,7 @@ get_fixed_docstring <- function(endpoint) {
 
 
 
-format_py_signature <- function(x) {
+format_py_signature <- function(x, name = NULL) {
   if (is_string(x)) # endpoint
     x <- py_eval(x)
   if (!inherits(x, "inspect.Signature"))
@@ -1770,6 +1770,8 @@ format_py_signature <- function(x) {
     str_sub(x, 1, 1) <- "(\n  "
     str_sub(x, -1, -1) <- "\n)"
   }
+
+  x <- str_flatten(c(name, x))
   as_glue(x)
 }
 
