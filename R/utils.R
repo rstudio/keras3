@@ -829,18 +829,25 @@ shape <- function(...) {
     if (!is.atomic(x) || length(x) > 1)
       lapply(x, fix)
     else if (is.null(x) ||
-             isTRUE(suppressWarnings(is.na(x))) ||
+             identical(x, NA_integer_) ||
+             identical(x, NA_real_) ||
+             identical(x, NA) ||
              (is.numeric(x) && isTRUE(suppressWarnings(x == -1L))))
       NA_integer_ # so we can safely unlist()
     else
       as.integer(x)
   }
 
-  shp <- unlist(fix(list(...)))
-  shp <- lapply(shp, function(x)
-    if (isTRUE(suppressWarnings(is.na(x)))) NULL else x)
+  shp <- unlist(fix(list(...)), use.names = FALSE)
+  shp <- lapply(shp, function(x) if (identical(x, NA_integer_)) NULL else x)
   class(shp) <- "keras_shape"
   shp
+}
+
+is_na <- function(x) {
+  identical(x, NA_integer_) ||
+    identical(x, NA_real_) ||
+    identical(x, NA)
 }
 
 

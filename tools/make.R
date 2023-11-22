@@ -10,6 +10,8 @@ if(!"source:tools/translate-tools.R" %in% search()) envir::attach_source("tools/
 # TODO: the 2-translated.Rmd should include a chunk w/ the function def (for easy seeing while editing)
 #       with chunk options (include = FALSE)
 
+# TODO: add PR for purrr::rate_throttle("3 per minute")
+
 
 ## Rejected:
 
@@ -62,14 +64,10 @@ if(FALSE) {
 # TODO: BackupAndRestore is broken, doesn't respect current epoch. file/fix upstream.
 #       ~/github/keras-team/keras/keras/callbacks/backup_and_restore_callback.py
 
-# TODO: swap arg order in k_vectorized_map
-
 # TODO: reticulate, support NO_COLOR (or similar) to disable the link wrapper around `py_last_error()` hint.
 
 # TODO: # fix `fit()` not returning `history` correctly
 
-# TODO: add PR for purrr::rate_throttle("3 per minute")
-#
 # TODO: global search for "axis" in doc text, update to 1 based where appropriate.
 #
 # TODO: in reticulate: virtualenv_starter(): check for --enable-shared
@@ -108,8 +106,6 @@ if(FALSE) {
 #     autoinject "see description" without needing it in the yml.
 #     yml is only for explicit overrides
 #
-# TODO: implement and export as_shape(), make k_shape() a little nicer (e.g, an integer w/ NA)
-#
 # TODO: implement dim() S3 generic.
 #
 # TODO: remove @import methods ??
@@ -123,8 +119,6 @@ if(FALSE) {
 # TODO: k_istft k_irfft example is wrong, investigate
 #
 # TODO: rename: k_image_pad_images -> k_image_pad
-#
-# TODO: shape accessor for x$shape?
 #
 # TODO: this should work: k_convert_to_tensor(c(1, 3, 2, 0), "int32")
 #
@@ -158,8 +152,6 @@ if(FALSE) {
 #
 # TODO: layer_lambda docs: bring back section on serialization and limitations after
 #       fixing serialization.
-#
-# TODO: write a .git_reset() helper that restores everything except tools/*
 #
 # TODO: a layer_hashed_crossing() instance should have a customized wrapper that
 #       splices in the args, so instead of layer(list(a, b)), you can do layer(a, b)
