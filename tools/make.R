@@ -57,18 +57,6 @@ if(FALSE) {
 
 # TODO: r_name autogen: move "set" to tail, so have config_floatx(), config_floatx_set()
 
-# TODO: @param ... Passed on to the Python callable - scrub this from formatted.md
-if(FALSE)
-Sys.glob(c("R/autogen*.R", "vignettes-src/*.Rmd")) %>%
-  walk(\(f) {
-    readLines(f) %>%
-      replace_val("#' Passed on to the Python callable", "#' For forward/backward compatability.") %>%
-      writeLines(f)
-  })
-#' Passed on to the Python callable
-#' For forward/backward compatability.
-
-
 # TODO: revisit history - also mentions in docs (e.g., in callback_model_checkpoint())
 
 # TODO: BackupAndRestore is broken, doesn't respect current epoch. file/fix upstream.
