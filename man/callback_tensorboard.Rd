@@ -62,7 +62,7 @@ By default, profiling is disabled.}
 \item{embeddings_freq}{frequency (in epochs) at which embedding layers will be
 visualized. If set to 0, embeddings won't be visualized.}
 
-\item{embeddings_metadata}{Dictionary which maps embedding layer names to the
+\item{embeddings_metadata}{Named list which maps embedding layer names to the
 filename of a file in which to save metadata for the embedding layer.
 In case the same metadata file is to be
 used for all embedding layers, a single filename can be passed.}

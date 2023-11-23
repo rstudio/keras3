@@ -25,8 +25,7 @@ when using this layer as the first layer in a model.
 }
 
 \section{Output Shape}{
-\if{html}{\out{<div class="sourceCode">}}\preformatted{Same shape as input.
-}\if{html}{\out{</div>}}
+Same shape as input.
 }
 
 \seealso{

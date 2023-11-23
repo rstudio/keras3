@@ -62,7 +62,7 @@ layer_feature_space(
 )
 }
 \arguments{
-\item{feature_names}{Dict mapping the names of your features to their
+\item{feature_names}{Named list mapping the names of your features to their
 type specification, e.g. \code{list(my_feature = "integer_categorical")}
 or \code{list(my_feature = feature_integer_categorical())}.
 For a complete list of all supported types, see
@@ -73,8 +73,8 @@ Defaults to \code{32}.}
 
 \item{output_mode}{One of \code{"concat"} or \code{"dict"}. In concat mode, all
 features get concatenated together into a single vector.
-In dict mode, the FeatureSpace returns a dict of individually
-encoded features (with the same keys as the input dict keys).}
+In dict mode, the FeatureSpace returns a named list of individually
+encoded features (with the same names as the input list names).}
 
 \item{name}{String, name for the object}
 
@@ -149,7 +149,7 @@ feature_string_hashed(num_bins, output_mode = "one_hot", name = NULL)
 }\if{html}{\out{</div>}}
 }
 \section{Examples}{
-\strong{Basic usage with a dict of input data:}
+\strong{Basic usage with a named list of input data:}
 
 \if{html}{\out{<div class="sourceCode r">}}\preformatted{raw_data <- list(
   float_values = c(0.0, 0.1, 0.2, 0.3),
@@ -233,7 +233,7 @@ model <- keras_model(inputs, outputs)
 )
 }\if{html}{\out{</div>}}
 
-\strong{Returning a dict of integer-encoded features:}
+\strong{Returning a dict (a named list) of integer-encoded features:}
 
 \if{html}{\out{<div class="sourceCode r">}}\preformatted{feature_space <- layer_feature_space(
   features = list(

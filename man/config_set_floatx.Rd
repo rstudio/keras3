@@ -40,8 +40,7 @@ config_set_floatx('float32')
 }
 
 \section{Raises}{
-\if{html}{\out{<div class="sourceCode">}}\preformatted{ValueError: In case of invalid value.
-}\if{html}{\out{</div>}}
+ValueError: In case of invalid value.
 }
 
 \seealso{

@@ -6,16 +6,17 @@
 \usage{
 k_floatx()
 }
+\value{
+String, the current default float type.
+}
 \description{
 E.g. \code{'float16'}, \code{'float32'}, \code{'float64'}.
 }
-\section{Returns}{
-String, the current default float type.
-}
-
 \section{Examples}{
-\if{html}{\out{<div class="sourceCode python">}}\preformatted{keras.config.floatx()
-# 'float32'
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{k_floatx()
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode">}}\preformatted{## [1] "float32"
 }\if{html}{\out{</div>}}
 }
 

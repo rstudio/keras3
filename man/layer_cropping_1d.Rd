@@ -55,8 +55,7 @@ y
 }
 
 \section{Output Shape}{
-\if{html}{\out{<div class="sourceCode">}}\preformatted{3D tensor with shape `(batch_size, cropped_axis, features)`
-}\if{html}{\out{</div>}}
+3D tensor with shape \verb{(batch_size, cropped_axis, features)}
 }
 
 \seealso{

@@ -2,18 +2,17 @@
 % Please edit documentation in R/keras-utils.R
 \name{get_custom_objects}
 \alias{get_custom_objects}
-\title{Retrieves a live reference to the global dictionary of custom objects.}
+\title{Retrieves a live reference to the global list of custom objects.}
 \usage{
 get_custom_objects()
 }
 \value{
-\if{html}{\out{<div class="sourceCode">}}\preformatted{Global dictionary (named list) mapping registered class names to classes.
-}\if{html}{\out{</div>}}
+A named list, the global dictionary mapping registered class names to classes.
 }
 \description{
 Custom objects set using using \code{custom_object_scope()} are not added to the
-global dictionary of custom objects, and will not appear in the returned
-dictionary.
+global list of custom objects, and will not appear in the returned
+list.
 }
 \section{Examples}{
 \if{html}{\out{<div class="sourceCode r">}}\preformatted{get_custom_objects()$clear()

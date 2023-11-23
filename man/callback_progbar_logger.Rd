@@ -15,8 +15,7 @@ count samples seen or steps (batches) seen.}
 Callback that prints metrics to stdout.
 }
 \section{Raises}{
-\if{html}{\out{<div class="sourceCode">}}\preformatted{ValueError: In case of invalid `count_mode`.
-}\if{html}{\out{</div>}}
+ValueError: In case of invalid \code{count_mode}.
 }
 
 \seealso{

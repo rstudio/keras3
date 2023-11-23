@@ -75,24 +75,25 @@ instance will not reuse the weights state of the RNN layer instance -- the
 }
 
 \section{Examples}{
-\if{html}{\out{<div class="sourceCode python">}}\preformatted{model = Sequential([
-    Input(shape=(5, 10)),
-    Bidirectional(LSTM(10, return_sequences=TRUE),
-    Bidirectional(LSTM(10)),
-    Dense(5, activation="softmax"),
-])
-model.compile(loss='categorical_crossentropy', optimizer='rmsprop')
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{model <- keras_model_sequential(input_shape = c(5, 10)) \%>\%
+  bidirectional(layer_lstm(units = 10, return_sequences = TRUE)) \%>\%
+  bidirectional(layer_lstm(units = 10)) \%>\%
+  layer_dense(5, activation = "softmax")
+
+model \%>\% compile(loss = "categorical_crossentropy",
+                  optimizer = "rmsprop")
 
 # With custom backward layer
-forward_layer = LSTM(10, return_sequences=TRUE)
-backward_layer = LSTM(10, activation='relu', return_sequences=TRUE,
-                      go_backwards=TRUE)
-model = Sequential([
-    Input(shape=(5, 10)),
-    Bidirectional(forward_layer, backward_layer=backward_layer),
-    Dense(5, activation="softmax"),
-])
-model.compile(loss='categorical_crossentropy', optimizer='rmsprop')
+forward_layer <- layer_lstm(units = 10, return_sequences = TRUE)
+backward_layer <- layer_lstm(units = 10, activation = "relu",
+                             return_sequences = TRUE, go_backwards = TRUE)
+
+model <- keras_model_sequential(input_shape = c(5, 10)) \%>\%
+  bidirectional(forward_layer, backward_layer = backward_layer) \%>\%
+  layer_dense(5, activation = "softmax")
+
+model \%>\% compile(loss = "categorical_crossentropy",
+                  optimizer = "rmsprop")
 }\if{html}{\out{</div>}}
 }
 
