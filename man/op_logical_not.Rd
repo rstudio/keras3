@@ -14,7 +14,7 @@ op_logical_not(x)
 }\if{html}{\out{</div>}}
 }
 \description{
-Zeros are treated as \code{False} and non-zeros are treated as \code{True}.
+Zeros are treated as \code{FALSE} and non-zeros are treated as \code{TRUE}.
 }
 \seealso{
 \itemize{

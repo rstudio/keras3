@@ -17,9 +17,9 @@ application_efficientnet_b2(
 }
 \arguments{
 \item{include_top}{Whether to include the fully-connected
-layer at the top of the network. Defaults to \code{True}.}
+layer at the top of the network. Defaults to \code{TRUE}.}
 
-\item{weights}{One of \code{None} (random initialization),
+\item{weights}{One of \code{NULL} (random initialization),
 \code{"imagenet"} (pre-training on ImageNet),
 or the path to the weights file to be loaded.
 Defaults to \code{"imagenet"}.}
@@ -29,13 +29,13 @@ Defaults to \code{"imagenet"}.}
 to use as image input for the model.}
 
 \item{input_shape}{Optional shape tuple, only to be specified
-if \code{include_top} is False.
+if \code{include_top} is \code{FALSE}.
 It should have exactly 3 inputs channels.}
 
 \item{pooling}{Optional pooling mode for feature extraction
-when \code{include_top} is \code{False}. Defaults to \code{None}.
+when \code{include_top} is \code{FALSE}. Defaults to \code{NULL}.
 \itemize{
-\item \code{None} means that the output of the model will be
+\item \code{NULL} means that the output of the model will be
 the 4D tensor output of the
 last convolutional layer.
 \item \code{avg} means that global average pooling
@@ -47,16 +47,16 @@ be applied.
 }}
 
 \item{classes}{Optional number of classes to classify images
-into, only to be specified if \code{include_top} is True, and
+into, only to be specified if \code{include_top} is TRUE, and
 if no \code{weights} argument is specified. 1000 is how many
 ImageNet classes there are. Defaults to \code{1000}.}
 
 \item{classifier_activation}{A \code{str} or callable. The activation function to use
-on the "top" layer. Ignored unless \code{include_top=True}. Set
-\code{classifier_activation=None} to return the logits of the "top" layer.
+on the "top" layer. Ignored unless \code{include_top=TRUE}. Set
+\code{classifier_activation=NULL} to return the logits of the "top" layer.
 Defaults to \code{'softmax'}.
 When loading pretrained weights, \code{classifier_activation} can only
-be \code{None} or \code{"softmax"}.}
+be \code{NULL} or \code{"softmax"}.}
 
 \item{...}{For forward/backward compatability.}
 }

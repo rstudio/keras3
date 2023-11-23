@@ -16,7 +16,7 @@ random_shuffle(x, axis = 1L, seed = NULL)
 \code{keras.random.SeedGenerator}.
 Used to make the behavior of the initializer
 deterministic. Note that an initializer seeded with an integer
-or None (unseeded) will produce the same random values
+or \code{NULL} (unseeded) will produce the same random values
 across multiple calls. To get different random values
 across multiple calls, use as seed an instance
 of \code{keras.random.SeedGenerator}.}

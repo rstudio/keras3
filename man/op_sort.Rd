@@ -9,7 +9,7 @@ op_sort(x, axis = -1L)
 \arguments{
 \item{x}{Input tensor.}
 
-\item{axis}{Axis along which to sort. If \code{None}, the tensor is flattened
+\item{axis}{Axis along which to sort. If \code{NULL}, the tensor is flattened
 before sorting. Defaults to \code{-1}; the last axis.}
 }
 \value{

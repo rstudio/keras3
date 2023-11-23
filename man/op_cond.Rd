@@ -9,9 +9,9 @@ op_cond(pred, true_fn, false_fn)
 \arguments{
 \item{pred}{Boolean scalar type}
 
-\item{true_fn}{Callable returning the output for the \code{pred == True} case.}
+\item{true_fn}{Callable returning the output for the \code{pred == TRUE} case.}
 
-\item{false_fn}{Callable returning the output for the \code{pred == False} case.}
+\item{false_fn}{Callable returning the output for the \code{pred == FALSE} case.}
 }
 \value{
 \if{html}{\out{<div class="sourceCode">}}\preformatted{The output of either `true_fn` or `false_fn` depending on pred.

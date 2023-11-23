@@ -17,15 +17,15 @@ op_logspace(
 \arguments{
 \item{start}{The starting value of the sequence.}
 
-\item{stop}{The final value of the sequence, unless \code{endpoint} is \code{False}.
+\item{stop}{The final value of the sequence, unless \code{endpoint} is \code{FALSE}.
 In that case, \code{num + 1} values are spaced over the interval in
 log-space, of which all but the last (a sequence of length \code{num})
 are returned.}
 
 \item{num}{Number of samples to generate. Defaults to \code{50}.}
 
-\item{endpoint}{If \code{True}, \code{stop} is the last sample. Otherwise, it is not
-included. Defaults to\code{True}.}
+\item{endpoint}{If \code{TRUE}, \code{stop} is the last sample. Otherwise, it is not
+included. Defaults to\code{TRUE}.}
 
 \item{base}{The base of the log space. Defaults to \code{10}.}
 

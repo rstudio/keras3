@@ -29,14 +29,14 @@ attribute (with the same semantics as for the \code{RNN} class).
 Note that the recommended way to create new RNN layers is to write a
 custom RNN cell and use it with \code{keras.layers.RNN}, instead of
 subclassing \code{keras.layers.Layer} directly.
-When \code{return_sequences} is \code{True}, the output of the masked
+When \code{return_sequences} is \code{TRUE}, the output of the masked
 timestep will be zero regardless of the layer's original
 \code{zero_output_for_mask} value.
 }}
 
 \item{merge_mode}{Mode by which outputs of the forward and backward RNNs
-will be combined. One of \verb{\{"sum", "mul", "concat", "ave", None\}}.
-If \code{None}, the outputs will not be combined,
+will be combined. One of \verb{\{"sum", "mul", "concat", "ave", NULL\}}.
+If \code{NULL}, the outputs will not be combined,
 they will be returned as a list. Defaults to \code{"concat"}.}
 
 \item{weights}{see description}
@@ -77,16 +77,16 @@ instance will not reuse the weights state of the RNN layer instance -- the
 \section{Examples}{
 \if{html}{\out{<div class="sourceCode python">}}\preformatted{model = Sequential([
     Input(shape=(5, 10)),
-    Bidirectional(LSTM(10, return_sequences=True),
+    Bidirectional(LSTM(10, return_sequences=TRUE),
     Bidirectional(LSTM(10)),
     Dense(5, activation="softmax"),
 ])
 model.compile(loss='categorical_crossentropy', optimizer='rmsprop')
 
 # With custom backward layer
-forward_layer = LSTM(10, return_sequences=True)
-backward_layer = LSTM(10, activation='relu', return_sequences=True,
-                      go_backwards=True)
+forward_layer = LSTM(10, return_sequences=TRUE)
+backward_layer = LSTM(10, activation='relu', return_sequences=TRUE,
+                      go_backwards=TRUE)
 model = Sequential([
     Input(shape=(5, 10)),
     Bidirectional(forward_layer, backward_layer=backward_layer),

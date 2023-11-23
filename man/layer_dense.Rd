@@ -55,7 +55,7 @@ the \code{kernel} weights matrix.}
 where \code{activation} is the element-wise activation function
 passed as the \code{activation} argument, \code{kernel} is a weights matrix
 created by the layer, and \code{bias} is a bias vector created by the layer
-(only applicable if \code{use_bias} is \code{True}).
+(only applicable if \code{use_bias} is \code{TRUE}).
 }
 \section{Note}{
 If the input to the layer has a rank greater than 2, \code{Dense}

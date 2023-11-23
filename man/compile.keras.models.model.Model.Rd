@@ -68,7 +68,7 @@ names (strings) to scalar coefficients.}
 
 \item{run_eagerly}{Bool. Defaults to \code{FALSE}. If \code{TRUE}, this Model's logic
 will not be wrapped in a \code{tf.function}. Recommended to leave this as \code{NULL}
-unless your Model cannot be run inside a \code{tf.function}. \code{run_eagerly=True}
+unless your Model cannot be run inside a \code{tf.function}. \code{run_eagerly=TRUE}
 is not supported when using
 \code{tf.distribute.experimental.ParameterServerStrategy}. If the model's logic
 uses tensors in R control flow expressions like \code{if} and \code{for}, the model

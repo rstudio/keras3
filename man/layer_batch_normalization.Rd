@@ -34,10 +34,10 @@ with \code{data_format="channels_first"}, use \code{axis=1}.}
 
 \item{epsilon}{Small float added to variance to avoid dividing by zero.}
 
-\item{center}{If \code{True}, add offset of \code{beta} to normalized tensor.
-If \code{False}, \code{beta} is ignored.}
+\item{center}{If \code{TRUE}, add offset of \code{beta} to normalized tensor.
+If \code{FALSE}, \code{beta} is ignored.}
 
-\item{scale}{If \code{True}, multiply by \code{gamma}. If \code{False}, \code{gamma} is not used.
+\item{scale}{If \code{TRUE}, multiply by \code{gamma}. If \code{FALSE}, \code{gamma} is not used.
 When the next layer is linear this can be disabled
 since the scaling will be done by the next layer.}
 
@@ -58,10 +58,10 @@ since the scaling will be done by the next layer.}
 \item{gamma_constraint}{Optional constraint for the gamma weight.}
 
 \item{synchronized}{Only applicable with the TensorFlow backend.
-If \code{True}, synchronizes the global batch statistics (mean and
+If \code{TRUE}, synchronizes the global batch statistics (mean and
 variance) for the layer across all devices at each training step
 in a distributed training strategy.
-If \code{False}, each replica uses its own local batch statistics.}
+If \code{FALSE}, each replica uses its own local batch statistics.}
 
 \item{...}{Base layer keyword arguments (e.g. \code{name} and \code{dtype}).}
 }
@@ -73,7 +73,7 @@ Importantly, batch normalization works differently during training and
 during inference.
 
 \strong{During training} (i.e. when using \code{fit()} or when calling the layer/model
-with the argument \code{training=True}), the layer normalizes its output using
+with the argument \code{training=TRUE}), the layer normalizes its output using
 the mean and standard deviation of the current batch of inputs. That is to
 say, for each channel being normalized, the layer returns
 \code{gamma * (batch - mean(batch)) / sqrt(var(batch) + epsilon) + beta}, where:
@@ -81,13 +81,13 @@ say, for each channel being normalized, the layer returns
 \item \code{epsilon} is small constant (configurable as part of the constructor
 arguments)
 \item \code{gamma} is a learned scaling factor (initialized as 1), which
-can be disabled by passing \code{scale=False} to the constructor.
+can be disabled by passing \code{scale=FALSE} to the constructor.
 \item \code{beta} is a learned offset factor (initialized as 0), which
-can be disabled by passing \code{center=False} to the constructor.
+can be disabled by passing \code{center=FALSE} to the constructor.
 }
 
 \strong{During inference} (i.e. when using \code{evaluate()} or \code{predict()} or when
-calling the layer/model with the argument \code{training=False} (which is the
+calling the layer/model with the argument \code{training=FALSE} (which is the
 default), the layer normalizes its output using a moving average of the
 mean and standard deviation of the batches it has seen during training. That
 is to say, it returns
@@ -104,9 +104,9 @@ As such, the layer will only normalize its inputs during inference
 \emph{after having been trained on data that has similar statistics as the
 inference data}.
 
-\strong{About setting \code{layer.trainable = False} on a \code{BatchNormalization} layer:}
+\strong{About setting \code{layer.trainable = FALSE} on a \code{BatchNormalization} layer:}
 
-The meaning of setting \code{layer.trainable = False} is to freeze the layer,
+The meaning of setting \code{layer.trainable = FALSE} is to freeze the layer,
 i.e. its internal state will not change during training:
 its trainable weights will not be updated
 during \code{fit()} or \code{train_on_batch()}, and its state updates will not be run.
@@ -117,7 +117,7 @@ be passed when calling a layer). "Frozen state" and "inference mode"
 are two separate concepts.
 
 However, in the case of the \code{BatchNormalization} layer, \strong{setting
-\code{trainable = False} on the layer means that the layer will be
+\code{trainable = FALSE} on the layer means that the layer will be
 subsequently run in inference mode} (meaning that it will use
 the moving mean and the moving variance to normalize the current batch,
 rather than using the mean and variance of the current batch).
@@ -137,9 +137,9 @@ until \code{compile()} is called again.
 \item \code{training}: Python boolean indicating whether the layer should behave in
 training mode or in inference mode.
 \itemize{
-\item \code{training=True}: The layer will normalize its inputs using
+\item \code{training=TRUE}: The layer will normalize its inputs using
 the mean and variance of the current batch of inputs.
-\item \code{training=False}: The layer will normalize its inputs using
+\item \code{training=FALSE}: The layer will normalize its inputs using
 the mean and variance of its moving statistics, learned during
 training.
 }

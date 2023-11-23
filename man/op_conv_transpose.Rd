@@ -41,7 +41,7 @@ specifying the amount of padding along the height and width of
 the output tensor. Can be a single integer to specify the same
 value for all spatial dimensions. The amount of output padding
 along a given dimension must be lower than the stride along that
-same dimension. If set to \code{None} (default), the output shape is
+same dimension. If set to \code{NULL} (default), the output shape is
 inferred.}
 
 \item{data_format}{A string, either \code{"channels_last"} or \code{"channels_first"}.

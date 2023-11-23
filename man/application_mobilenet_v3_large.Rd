@@ -51,9 +51,9 @@ While these models are less efficient on CPU, they
 are much more performant on GPU/DSP.}
 
 \item{include_top}{Boolean, whether to include the fully-connected
-layer at the top of the network. Defaults to \code{True}.}
+layer at the top of the network. Defaults to \code{TRUE}.}
 
-\item{weights}{String, one of \code{None} (random initialization),
+\item{weights}{String, one of \code{NULL} (random initialization),
 \code{"imagenet"} (pre-training on ImageNet),
 or the path to the weights file to be loaded.}
 
@@ -62,13 +62,13 @@ or the path to the weights file to be loaded.}
 to use as image input for the model.}
 
 \item{classes}{Integer, optional number of classes to classify images
-into, only to be specified if \code{include_top} is \code{True}, and
+into, only to be specified if \code{include_top} is \code{TRUE}, and
 if no \code{weights} argument is specified.}
 
 \item{pooling}{String, optional pooling mode for feature extraction
-when \code{include_top} is \code{False}.
+when \code{include_top} is \code{FALSE}.
 \itemize{
-\item \code{None} means that the output of the model
+\item \code{NULL} means that the output of the model
 will be the 4D tensor output of the
 last convolutional block.
 \item \code{avg} means that global average pooling
@@ -83,13 +83,13 @@ be applied.
 \item{dropout_rate}{fraction of the input units to drop on the last layer.}
 
 \item{classifier_activation}{A \code{str} or callable. The activation function to use
-on the "top" layer. Ignored unless \code{include_top=True}. Set
-\code{classifier_activation=None} to return the logits of the "top" layer.
+on the "top" layer. Ignored unless \code{include_top=TRUE}. Set
+\code{classifier_activation=NULL} to return the logits of the "top" layer.
 When loading pretrained weights, \code{classifier_activation} can only
-be \code{None} or \code{"softmax"}.}
+be \code{NULL} or \code{"softmax"}.}
 
 \item{include_preprocessing}{Boolean, whether to include the preprocessing
-layer (\code{Rescaling}) at the bottom of the network. Defaults to \code{True}.}
+layer (\code{Rescaling}) at the bottom of the network. Defaults to \code{TRUE}.}
 }
 \value{
 \if{html}{\out{<div class="sourceCode">}}\preformatted{A model instance.
@@ -131,7 +131,7 @@ model (as a \code{Rescaling} layer), and thus
 pass-through function. In this use case, MobileNetV3 models expect their
 inputs to be float tensors of pixels with values in the \verb{[0-255]} range.
 At the same time, preprocessing as a part of the model (i.e. \code{Rescaling}
-layer) can be disabled by setting \code{include_preprocessing} argument to \code{False}.
+layer) can be disabled by setting \code{include_preprocessing} argument to \code{FALSE}.
 With preprocessing disabled MobileNetV3 models expect their inputs to be float
 tensors of pixels with values in the \verb{[-1, 1]} range.
 }
@@ -140,7 +140,7 @@ tensors of pixels with values in the \verb{[-1, 1]} range.
 \itemize{
 \item \code{inputs}: A floating point \code{numpy.array} or backend-native tensor,
 4D with 3 color channels, with values in the range \verb{[0, 255]}
-if \code{include_preprocessing} is \code{True} and in the range \verb{[-1, 1]}
+if \code{include_preprocessing} is \code{TRUE} and in the range \verb{[-1, 1]}
 otherwise.
 }
 }

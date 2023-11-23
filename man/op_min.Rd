@@ -12,10 +12,10 @@ op_min(x, axis = NULL, keepdims = FALSE, initial = NULL)
 \item{axis}{Axis or axes along which to operate. By default, flattened input
 is used.}
 
-\item{keepdims}{If this is set to \code{True}, the axes which are reduced are left
-in the result as dimensions with size one. Defaults to\code{False}.}
+\item{keepdims}{If this is set to \code{TRUE}, the axes which are reduced are left
+in the result as dimensions with size one. Defaults to\code{FALSE}.}
 
-\item{initial}{The maximum value of an output element. Defaults to\code{None}.}
+\item{initial}{The maximum value of an output element. Defaults to\code{NULL}.}
 }
 \value{
 \if{html}{\out{<div class="sourceCode">}}\preformatted{Minimum of `x`.

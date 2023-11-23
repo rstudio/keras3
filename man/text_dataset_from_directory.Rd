@@ -26,7 +26,7 @@ Otherwise, the directory structure is ignored.}
 
 \item{labels}{Either \code{"inferred"}
 (labels are generated from the directory structure),
-\code{None} (no labels),
+\code{NULL} (no labels),
 or a list/tuple of integer labels of the same size as the number of
 text files found in the directory. Labels should be sorted according
 to the alphanumeric order of the text file paths
@@ -42,7 +42,7 @@ encoded as a categorical vector
 \item \code{"binary"} means that the labels (there can be only 2)
 are encoded as \code{float32} scalars with values 0 or 1
 (e.g. for \code{binary_crossentropy}).
-\item \code{None} (no labels).
+\item \code{NULL} (no labels).
 }}
 
 \item{class_names}{Only valid if \code{"labels"} is \code{"inferred"}.
@@ -51,14 +51,14 @@ This is the explicit list of class names
 of the classes (otherwise alphanumerical order is used).}
 
 \item{batch_size}{Size of the batches of data. Defaults to 32.
-If \code{None}, the data will not be batched
+If \code{NULL}, the data will not be batched
 (the dataset will yield individual samples).}
 
 \item{max_length}{Maximum size of a text string. Texts longer than this will
 be truncated to \code{max_length}.}
 
-\item{shuffle}{Whether to shuffle the data. Defaults to \code{True}.
-If set to \code{False}, sorts the data in alphanumeric order.}
+\item{shuffle}{Whether to shuffle the data. Defaults to \code{TRUE}.
+If set to \code{FALSE}, sorts the data in alphanumeric order.}
 
 \item{seed}{Optional random seed for shuffling and transformations.}
 
@@ -72,12 +72,12 @@ When \code{subset="both"}, the utility returns a tuple of two datasets
 (the training and validation datasets respectively).}
 
 \item{follow_links}{Whether to visits subdirectories pointed to by symlinks.
-Defaults to \code{False}.}
+Defaults to \code{FALSE}.}
 }
 \value{
 A \code{tf.data.Dataset} object.
 \itemize{
-\item If \code{label_mode} is \code{None}, it yields \code{string} tensors of shape
+\item If \code{label_mode} is \code{NULL}, it yields \code{string} tensors of shape
 \verb{(batch_size,)}, containing the contents of a batch of text files.
 \item Otherwise, it yields a tuple \verb{(texts, labels)}, where \code{texts}
 has shape \verb{(batch_size,)} and \code{labels} follows the format described

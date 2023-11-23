@@ -39,7 +39,7 @@ At inference time, and during training if an input image is smaller than the
 target size, the input will be resized and cropped so as to return the
 largest possible window in the image that matches the target aspect ratio.
 If you need to apply random cropping at inference time, set \code{training} to
-True when calling the layer.
+TRUE when calling the layer.
 
 Input pixel values can be of any range (e.g. \verb{[0., 1.)} or \verb{[0, 255]}) and
 of integer or floating point dtype. By default, the layer will output

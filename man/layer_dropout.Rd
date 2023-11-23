@@ -28,13 +28,13 @@ The \code{Dropout} layer randomly sets input units to 0 with a frequency of
 Inputs not set to 0 are scaled up by \code{1 / (1 - rate)} such that the sum over
 all inputs is unchanged.
 
-Note that the \code{Dropout} layer only applies when \code{training} is set to \code{True}
+Note that the \code{Dropout} layer only applies when \code{training} is set to \code{TRUE}
 in \code{call()}, such that no values are dropped during inference.
-When using \code{model.fit}, \code{training} will be appropriately set to \code{True}
+When using \code{model.fit}, \code{training} will be appropriately set to \code{TRUE}
 automatically. In other contexts, you can set the argument explicitly
-to \code{True} when calling the layer.
+to \code{TRUE} when calling the layer.
 
-(This is in contrast to setting \code{trainable=False} for a \code{Dropout} layer.
+(This is in contrast to setting \code{trainable=FALSE} for a \code{Dropout} layer.
 \code{trainable} does not affect the layer's behavior, as \code{Dropout} does
 not have any variables/weights that can be frozen during training.)
 }

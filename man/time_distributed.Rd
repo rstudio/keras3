@@ -30,7 +30,7 @@ of the 10 timesteps, independently:
 \if{html}{\out{<div class="sourceCode R">}}\preformatted{input <- layer_input(c(10, 128, 128, 3))
 conv_layer <- layer_conv_2d(filters = 64, kernel_size = c(3, 3))
 output <- input \%>\% time_distributed(conv_layer)
-output$shape # TensorShape([None, 10, 126, 126, 64])
+shape(output) # shape(NA, 10, 126, 126, 64)
 }\if{html}{\out{</div>}}
 
 Because \code{TimeDistributed} applies the same instance of \code{Conv2D} to each of the

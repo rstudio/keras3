@@ -7,15 +7,15 @@
 op_where(condition, x1 = NULL, x2 = NULL)
 }
 \arguments{
-\item{condition}{Where \code{True}, yield \code{x1}, otherwise yield \code{x2}.}
+\item{condition}{Where \code{TRUE}, yield \code{x1}, otherwise yield \code{x2}.}
 
-\item{x1}{Values from which to choose when \code{condition} is \code{True}.}
+\item{x1}{Values from which to choose when \code{condition} is \code{TRUE}.}
 
-\item{x2}{Values from which to choose when \code{condition} is \code{False}.}
+\item{x2}{Values from which to choose when \code{condition} is \code{FALSE}.}
 }
 \value{
-A tensor with elements from \code{x1} where \code{condition} is \code{True}, and
-elements from \code{x2} where \code{condition} is \code{False}.
+A tensor with elements from \code{x1} where \code{condition} is \code{TRUE}, and
+elements from \code{x2} where \code{condition} is \code{FALSE}.
 }
 \description{
 Return elements chosen from \code{x1} or \code{x2} depending on \code{condition}.

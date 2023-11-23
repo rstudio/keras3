@@ -30,7 +30,7 @@ Otherwise, the directory structure is ignored.}
 
 \item{labels}{Either \code{"inferred"}
 (labels are generated from the directory structure),
-\code{None} (no labels),
+\code{NULL} (no labels),
 or a list/tuple of integer labels of the same size as the number of
 image files found in the directory. Labels should be sorted
 according to the alphanumeric order of the image file paths
@@ -46,7 +46,7 @@ encoded as a categorical vector
 \item \code{"binary"} means that the labels (there can be only 2)
 are encoded as \code{float32} scalars with values 0 or 1
 (e.g. for \code{binary_crossentropy}).
-\item \code{None} (no labels).
+\item \code{NULL} (no labels).
 }}
 
 \item{class_names}{Only valid if \code{labels} is \code{"inferred"}.
@@ -59,7 +59,7 @@ Defaults to \code{"rgb"}. Whether the images will be converted to
 have 1, 3, or 4 channels.}
 
 \item{batch_size}{Size of the batches of data. Defaults to 32.
-If \code{None}, the data will not be batched
+If \code{NULL}, the data will not be batched
 (the dataset will yield individual samples).}
 
 \item{image_size}{Size to resize images to after they are read from disk,
@@ -67,8 +67,8 @@ specified as \verb{(height, width)}. Defaults to \verb{(256, 256)}.
 Since the pipeline processes batches of images that must all have
 the same size, this must be provided.}
 
-\item{shuffle}{Whether to shuffle the data. Defaults to \code{True}.
-If set to \code{False}, sorts the data in alphanumeric order.}
+\item{shuffle}{Whether to shuffle the data. Defaults to \code{TRUE}.
+If set to \code{FALSE}, sorts the data in alphanumeric order.}
 
 \item{seed}{Optional random seed for shuffling and transformations.}
 
@@ -87,23 +87,23 @@ Supports \code{"bilinear"}, \code{"nearest"}, \code{"bicubic"}, \code{"area"},
 \code{"lanczos3"}, \code{"lanczos5"}, \code{"gaussian"}, \code{"mitchellcubic"}.}
 
 \item{follow_links}{Whether to visit subdirectories pointed to by symlinks.
-Defaults to \code{False}.}
+Defaults to \code{FALSE}.}
 
-\item{crop_to_aspect_ratio}{If \code{True}, resize the images without aspect
+\item{crop_to_aspect_ratio}{If \code{TRUE}, resize the images without aspect
 ratio distortion. When the original aspect ratio differs from the
 target aspect ratio, the output image will be cropped so as to
 return the largest possible window in the image
 (of size \code{image_size}) that matches the target aspect ratio. By
-default (\code{crop_to_aspect_ratio = False}), aspect ratio may not be
+default (\code{crop_to_aspect_ratio = FALSE}), aspect ratio may not be
 preserved.}
 
-\item{data_format}{If None uses keras.config.image_data_format()
+\item{data_format}{If \code{NULL} uses keras.config.image_data_format()
 otherwise either 'channel_last' or 'channel_first'.}
 }
 \value{
 A \code{tf.data.Dataset} object.
 \itemize{
-\item If \code{label_mode} is \code{None}, it yields \code{float32} tensors of shape
+\item If \code{label_mode} is \code{NULL}, it yields \code{float32} tensors of shape
 \verb{(batch_size, image_size[0], image_size[1], num_channels)},
 encoding images (see below for rules regarding \code{num_channels}).
 \item Otherwise, it yields a tuple \verb{(images, labels)}, where \code{images} has

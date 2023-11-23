@@ -15,8 +15,8 @@ layer_activation_relu(
 \arguments{
 \item{object}{Object to compose the layer with. A tensor, array, or sequential model.}
 
-\item{max_value}{Float >= 0. Maximum activation value. None means unlimited.
-Defaults to \code{None}.}
+\item{max_value}{Float >= 0. Maximum activation value. \code{NULL} means unlimited.
+Defaults to \code{NULL}.}
 
 \item{negative_slope}{Float >= 0. Negative slope coefficient.
 Defaults to \code{0.0}.}

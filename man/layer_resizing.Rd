@@ -25,13 +25,13 @@ layer_resizing(
 Supports \code{"bilinear"}, \code{"nearest"}, \code{"bicubic"},
 \code{"lanczos3"}, \code{"lanczos5"}. Defaults to \code{"bilinear"}.}
 
-\item{crop_to_aspect_ratio}{If \code{True}, resize the images without aspect
+\item{crop_to_aspect_ratio}{If \code{TRUE}, resize the images without aspect
 ratio distortion. When the original aspect ratio differs
 from the target aspect ratio, the output image will be
 cropped so as to return the
 largest possible window in the image (of size \verb{(height, width)})
 that matches the target aspect ratio. By default
-(\code{crop_to_aspect_ratio=False}), aspect ratio may not be preserved.}
+(\code{crop_to_aspect_ratio=FALSE}), aspect ratio may not be preserved.}
 
 \item{data_format}{string, either \code{"channels_last"} or \code{"channels_first"}.
 The ordering of the dimensions in the inputs. \code{"channels_last"}

@@ -19,7 +19,7 @@ callback_remote_monitor(
 
 \item{field}{String; JSON field under which the data will be stored.
 The field is used only if the payload is sent within a form
-(i.e. send_as_json is set to False).}
+(i.e. send_as_json is set to \code{FALSE}).}
 
 \item{headers}{Dictionary; optional custom HTTP headers.}
 
@@ -31,7 +31,7 @@ Requires the \code{requests} library.
 Events are sent to \code{root + '/publish/epoch/end/'} by default. Calls are
 HTTP POST, with a \code{data} argument which is a
 JSON-encoded dictionary of event data.
-If \code{send_as_json = True}, the content type of the request will be
+If \code{send_as_json = TRUE}, the content type of the request will be
 \code{"application/json"}.
 Otherwise the serialized JSON will be sent within a form.
 }

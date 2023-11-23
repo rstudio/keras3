@@ -36,28 +36,28 @@ input. Defaults to \code{-1}.}
 \item{epsilon}{Small float added to variance to avoid dividing by zero.
 Defaults to 1e-3.}
 
-\item{center}{If \code{True}, add offset of \code{beta} to normalized tensor.
-If \code{False}, \code{beta} is ignored. Defaults to \code{True}.}
+\item{center}{If \code{TRUE}, add offset of \code{beta} to normalized tensor.
+If \code{FALSE}, \code{beta} is ignored. Defaults to \code{TRUE}.}
 
-\item{scale}{If \code{True}, multiply by \code{gamma}. If \code{False}, \code{gamma} is not used.
+\item{scale}{If \code{TRUE}, multiply by \code{gamma}. If \code{FALSE}, \code{gamma} is not used.
 When the next layer is linear (also e.g. \code{relu}), this can be
 disabled since the scaling will be done by the next layer.
-Defaults to \code{True}.}
+Defaults to \code{TRUE}.}
 
 \item{beta_initializer}{Initializer for the beta weight. Defaults to zeros.}
 
 \item{gamma_initializer}{Initializer for the gamma weight. Defaults to ones.}
 
-\item{beta_regularizer}{Optional regularizer for the beta weight. None by
+\item{beta_regularizer}{Optional regularizer for the beta weight. \code{NULL} by
 default.}
 
-\item{gamma_regularizer}{Optional regularizer for the gamma weight. None by
+\item{gamma_regularizer}{Optional regularizer for the gamma weight. \code{NULL} by
 default.}
 
 \item{beta_constraint}{Optional constraint for the beta weight.
-None by default.}
+\code{NULL} by default.}
 
-\item{gamma_constraint}{Optional constraint for the gamma weight. None by
+\item{gamma_constraint}{Optional constraint for the gamma weight. \code{NULL} by
 default.}
 
 \item{...}{For forward/backward compatability.}

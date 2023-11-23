@@ -9,7 +9,7 @@ op_eye(N, M = NULL, k = 0L, dtype = NULL)
 \arguments{
 \item{N}{Number of rows in the output.}
 
-\item{M}{Number of columns in the output. If \code{None}, defaults to \code{N}.}
+\item{M}{Number of columns in the output. If \code{NULL}, defaults to \code{N}.}
 
 \item{k}{Index of the diagonal: 0 (the default) refers to the main
 diagonal, a positive value refers to an upper diagonal,

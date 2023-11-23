@@ -10,15 +10,14 @@ op_is_tensor(x)
 \item{x}{A variable.}
 }
 \value{
-\if{html}{\out{<div class="sourceCode">}}\preformatted{`True` if `x` is a tensor, otherwise `False`.
-}\if{html}{\out{</div>}}
+\code{TRUE} if \code{x} is a tensor, otherwise \code{FALSE}.
 }
 \description{
 Check whether the given object is a tensor.
 }
 \section{Note}{
 This checks for backend specific tensors so passing a TensorFlow
-tensor would return \code{False} if your backend is PyTorch or JAX.
+tensor would return \code{FALSE} if your backend is PyTorch or JAX.
 }
 
 \seealso{

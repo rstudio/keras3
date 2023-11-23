@@ -48,7 +48,7 @@ have an \code{activation} property).}
 \value{
 A \code{pydot.Dot} instance representing the Keras model or
 a \code{pydot.Cluster} instance representing nested model if
-\code{subgraph=True}.
+\code{subgraph=TRUE}.
 }
 \description{
 Convert a Keras model to dot format.

@@ -15,7 +15,7 @@ layer_attention(
 \arguments{
 \item{object}{Object to compose the layer with. A tensor, array, or sequential model.}
 
-\item{use_scale}{If \code{True}, will create a scalar variable to scale the
+\item{use_scale}{If \code{TRUE}, will create a scalar variable to scale the
 attention scores.}
 
 \item{score_mode}{Function to use to compute attention scores, one of
@@ -61,19 +61,19 @@ the most common case.
 \itemize{
 \item \code{query_mask}: A boolean mask tensor of shape \verb{(batch_size, Tq)}.
 If given, the output will be zero at the positions where
-\code{mask==False}.
+\code{mask==FALSE}.
 \item \code{value_mask}: A boolean mask tensor of shape \verb{(batch_size, Tv)}.
 If given, will apply the mask such that values at positions
-where \code{mask==False} do not contribute to the result.
+where \code{mask==FALSE} do not contribute to the result.
 }
-\item \code{return_attention_scores}: bool, it \code{True}, returns the attention scores
+\item \code{return_attention_scores}: bool, it \code{TRUE}, returns the attention scores
 (after masking and softmax) as an additional output argument.
 \item \code{training}: Python boolean indicating whether the layer should behave in
 training mode (adding dropout) or in inference mode (no dropout).
-\item \code{use_causal_mask}: Boolean. Set to \code{True} for decoder self-attention. Adds
+\item \code{use_causal_mask}: Boolean. Set to \code{TRUE} for decoder self-attention. Adds
 a mask such that position \code{i} cannot attend to positions \code{j > i}.
 This prevents the flow of information from the future towards the
-past. Defaults to \code{False}.
+past. Defaults to \code{FALSE}.
 }
 }
 

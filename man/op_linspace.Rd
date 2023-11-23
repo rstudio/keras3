@@ -18,17 +18,17 @@ op_linspace(
 \item{start}{The starting value of the sequence.}
 
 \item{stop}{The end value of the sequence, unless \code{endpoint} is set to
-\code{False}. In that case, the sequence consists of all but the last
+\code{FALSE}. In that case, the sequence consists of all but the last
 of \code{num + 1} evenly spaced samples, so that \code{stop} is excluded.
-Note that the step size changes when \code{endpoint} is \code{False}.}
+Note that the step size changes when \code{endpoint} is \code{FALSE}.}
 
 \item{num}{Number of samples to generate. Defaults to \code{50}. Must be
 non-negative.}
 
-\item{endpoint}{If \code{True}, \code{stop} is the last sample. Otherwise, it is
-not included. Defaults to\code{True}.}
+\item{endpoint}{If \code{TRUE}, \code{stop} is the last sample. Otherwise, it is
+not included. Defaults to\code{TRUE}.}
 
-\item{retstep}{If \code{True}, return \verb{(samples, step)}, where \code{step} is the
+\item{retstep}{If \code{TRUE}, return \verb{(samples, step)}, where \code{step} is the
 spacing between samples.}
 
 \item{dtype}{The type of the output tensor.}
@@ -38,7 +38,7 @@ start or stop are array-like. Defaults to \code{0}.}
 }
 \value{
 A tensor of evenly spaced numbers.
-If \code{retstep} is \code{True}, returns \verb{(samples, step)}
+If \code{retstep} is \code{TRUE}, returns \verb{(samples, step)}
 }
 \description{
 Returns \code{num} evenly spaced samples, calculated over the interval

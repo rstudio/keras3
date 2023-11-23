@@ -20,11 +20,11 @@ application_convnext_large(
 \item{model_name}{String, name for the model.}
 
 \item{include_top}{Whether to include the fully-connected
-layer at the top of the network. Defaults to \code{True}.}
+layer at the top of the network. Defaults to \code{TRUE}.}
 
 \item{include_preprocessing}{Boolean, whether to include the preprocessing layer at the bottom of the network.}
 
-\item{weights}{One of \code{None} (random initialization),
+\item{weights}{One of \code{NULL} (random initialization),
 \code{"imagenet"} (pre-training on ImageNet-1k), or the path to the weights
 file to be loaded. Defaults to \code{"imagenet"}.}
 
@@ -33,13 +33,13 @@ file to be loaded. Defaults to \code{"imagenet"}.}
 to use as image input for the model.}
 
 \item{input_shape}{Optional shape tuple, only to be specified
-if \code{include_top} is \code{False}.
+if \code{include_top} is \code{FALSE}.
 It should have exactly 3 inputs channels.}
 
 \item{pooling}{Optional pooling mode for feature extraction
-when \code{include_top} is \code{False}. Defaults to None.
+when \code{include_top} is \code{FALSE}. Defaults to \code{NULL}.
 \itemize{
-\item \code{None} means that the output of the model will be
+\item \code{NULL} means that the output of the model will be
 the 4D tensor output of the last convolutional layer.
 \item \code{avg} means that global average pooling
 will be applied to the output of the
@@ -50,16 +50,16 @@ be applied.
 }}
 
 \item{classes}{Optional number of classes to classify images
-into, only to be specified if \code{include_top} is \code{True}, and
+into, only to be specified if \code{include_top} is \code{TRUE}, and
 if no \code{weights} argument is specified. Defaults to 1000 (number of
 ImageNet classes).}
 
 \item{classifier_activation}{A \code{str} or callable. The activation function to use
-on the "top" layer. Ignored unless \code{include_top=True}. Set
-\code{classifier_activation=None} to return the logits of the "top" layer.
+on the "top" layer. Ignored unless \code{include_top=TRUE}. Set
+\code{classifier_activation=NULL} to return the logits of the "top" layer.
 Defaults to \code{"softmax"}.
 When loading pretrained weights, \code{classifier_activation} can only
-be \code{None} or \code{"softmax"}.}
+be \code{NULL} or \code{"softmax"}.}
 }
 \value{
 \if{html}{\out{<div class="sourceCode">}}\preformatted{A model instance.
@@ -95,7 +95,7 @@ layer.  ConvNeXt models expect their inputs to be float or uint8 tensors of
 pixels with values in the \verb{[0-255]} range.
 
 When calling the \code{summary()} method after instantiating a ConvNeXt model,
-prefer setting the \code{expand_nested} argument \code{summary()} to \code{True} to better
+prefer setting the \code{expand_nested} argument \code{summary()} to \code{TRUE} to better
 investigate the instantiated model.
 }
 

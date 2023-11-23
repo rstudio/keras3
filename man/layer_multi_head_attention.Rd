@@ -40,7 +40,7 @@ layer_multi_head_attention(
 and sequence dims. If not specified, projects back to the query
 feature dim (the query input's last dimension).}
 
-\item{attention_axes}{axes over which the attention is applied. \code{None} means
+\item{attention_axes}{axes over which the attention is applied. \code{NULL} means
 attention over all axes, but batch, heads, and features.}
 
 \item{kernel_initializer}{Initializer for dense layer kernels.}
@@ -62,7 +62,7 @@ attention over all axes, but batch, heads, and features.}
 \value{
 attention_output: The result of the computation, of shape \verb{(B, T, E)},
 where \code{T} is for target sequence shapes and \code{E} is the query input
-last dimension if \code{output_shape} is \code{None}. Otherwise, the
+last dimension if \code{output_shape} is \code{NULL}. Otherwise, the
 multi-head outputs are projected to the shape specified by
 \code{output_shape}.
 attention_scores: (Optional) multi-head attention coefficients over
@@ -105,12 +105,12 @@ query elements can attend to which key elements, 1 indicates
 attention and 0 indicates no attention. Broadcasting can happen for
 the missing batch dimensions and the head dimension.
 \item \code{return_attention_scores}: A boolean to indicate whether the output should
-be \verb{(attention_output, attention_scores)} if \code{True}, or
-\code{attention_output} if \code{False}. Defaults to \code{False}.
+be \verb{(attention_output, attention_scores)} if \code{TRUE}, or
+\code{attention_output} if \code{FALSE}. Defaults to \code{FALSE}.
 \item \code{training}: Python boolean indicating whether the layer should behave in
 training mode (adding dropout) or in inference mode (no dropout).
 Will go with either using the training mode of the parent
-layer/model, or \code{False} (inference) if there is no parent layer.
+layer/model, or \code{FALSE} (inference) if there is no parent layer.
 \item \code{use_causal_mask}: A boolean to indicate whether to apply a causal mask to
 prevent tokens from attending to future tokens (e.g., used in a
 decoder Transformer).

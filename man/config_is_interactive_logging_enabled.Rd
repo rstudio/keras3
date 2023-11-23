@@ -7,8 +7,8 @@
 config_is_interactive_logging_enabled()
 }
 \value{
-Boolean, \code{True} if interactive logging is enabled,
-and \code{False} otherwise.
+Boolean, \code{TRUE} if interactive logging is enabled,
+and \code{FALSE} otherwise.
 }
 \description{
 To switch between writing logs to stdout and \code{absl.logging}, you may use

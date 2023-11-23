@@ -18,7 +18,7 @@ application_resnet50_v2(
 \item{include_top}{whether to include the fully-connected
 layer at the top of the network.}
 
-\item{weights}{one of \code{None} (random initialization),
+\item{weights}{one of \code{NULL} (random initialization),
 \code{"imagenet"} (pre-training on ImageNet), or the path to the weights
 file to be loaded.}
 
@@ -26,16 +26,16 @@ file to be loaded.}
 to use as image input for the model.}
 
 \item{input_shape}{optional shape tuple, only to be specified if \code{include_top}
-is \code{False} (otherwise the input shape has to be \verb{(224, 224, 3)}
+is \code{FALSE} (otherwise the input shape has to be \verb{(224, 224, 3)}
 (with \code{"channels_last"} data format) or \verb{(3, 224, 224)}
 (with \code{"channels_first"} data format). It should have exactly 3
 inputs channels, and width and height should be no smaller than 32.
 E.g. \verb{(200, 200, 3)} would be one valid value.}
 
 \item{pooling}{Optional pooling mode for feature extraction when \code{include_top}
-is \code{False}.
+is \code{FALSE}.
 \itemize{
-\item \code{None} means that the output of the model will be the 4D tensor
+\item \code{NULL} means that the output of the model will be the 4D tensor
 output of the last convolutional block.
 \item \code{avg} means that global average pooling will be applied to the output
 of the last convolutional block, and thus the output of the
@@ -44,14 +44,14 @@ model will be a 2D tensor.
 }}
 
 \item{classes}{optional number of classes to classify images into, only to be
-specified if \code{include_top} is \code{True}, and if no \code{weights} argument is
+specified if \code{include_top} is \code{TRUE}, and if no \code{weights} argument is
 specified.}
 
 \item{classifier_activation}{A \code{str} or callable. The activation function to
-use on the "top" layer. Ignored unless \code{include_top=True}. Set
-\code{classifier_activation=None} to return the logits of the "top" layer.
+use on the "top" layer. Ignored unless \code{include_top=TRUE}. Set
+\code{classifier_activation=NULL} to return the logits of the "top" layer.
 When loading pretrained weights, \code{classifier_activation} can only
-be \code{None} or \code{"softmax"}.}
+be \code{NULL} or \code{"softmax"}.}
 }
 \value{
 \if{html}{\out{<div class="sourceCode">}}\preformatted{A Model instance.

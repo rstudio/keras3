@@ -7,8 +7,8 @@
 config_is_traceback_filtering_enabled()
 }
 \value{
-Boolean, \code{True} if traceback filtering is enabled,
-and \code{False} otherwise.
+Boolean, \code{TRUE} if traceback filtering is enabled,
+and \code{FALSE} otherwise.
 }
 \description{
 Raw Keras tracebacks (also known as stack traces)

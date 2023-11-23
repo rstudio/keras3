@@ -27,7 +27,7 @@ each containing audio files for a class. Otherwise, the directory
 structure is ignored.}
 
 \item{labels}{Either "inferred" (labels are generated from the directory
-structure), \code{None} (no labels), or a list/tuple of integer labels
+structure), \code{NULL} (no labels), or a list/tuple of integer labels
 of the same size as the number of audio files found in
 the directory. Labels should be sorted according to the
 alphanumeric order of the audio file paths
@@ -42,7 +42,7 @@ vector (e.g. for \code{categorical_crossentropy} loss)
 \item \code{"binary"} means that the labels (there can be only 2)
 are encoded as \code{float32} scalars with values 0
 or 1 (e.g. for \code{binary_crossentropy}).
-\item \code{None} (no labels).
+\item \code{NULL} (no labels).
 }}
 
 \item{class_names}{Only valid if "labels" is \code{"inferred"}.
@@ -50,7 +50,7 @@ This is the explicit list of class names
 (must match names of subdirectories). Used to control the order
 of the classes (otherwise alphanumerical order is used).}
 
-\item{batch_size}{Size of the batches of data. Default: 32. If \code{None},
+\item{batch_size}{Size of the batches of data. Default: 32. If \code{NULL},
 the data will not be batched
 (the dataset will yield individual samples).}
 
@@ -58,15 +58,15 @@ the data will not be batched
 
 \item{output_sequence_length}{Maximum length of an audio sequence. Audio files
 longer than this will be truncated to \code{output_sequence_length}.
-If set to \code{None}, then all sequences in the same batch will
+If set to \code{NULL}, then all sequences in the same batch will
 be padded to the
 length of the longest sequence in the batch.}
 
 \item{ragged}{Whether to return a Ragged dataset (where each sequence has its
-own length). Defaults to \code{False}.}
+own length). Defaults to \code{FALSE}.}
 
-\item{shuffle}{Whether to shuffle the data. Defaults to \code{True}.
-If set to \code{False}, sorts the data in alphanumeric order.}
+\item{shuffle}{Whether to shuffle the data. Defaults to \code{TRUE}.
+If set to \code{FALSE}, sorts the data in alphanumeric order.}
 
 \item{seed}{Optional random seed for shuffling and transformations.}
 
@@ -77,12 +77,12 @@ reserve for validation.}
 \code{"validation"} or \code{"both"}. Only used if \code{validation_split} is set.}
 
 \item{follow_links}{Whether to visits subdirectories pointed to by symlinks.
-Defaults to \code{False}.}
+Defaults to \code{FALSE}.}
 }
 \value{
 A \code{tf.data.Dataset} object.
 \itemize{
-\item If \code{label_mode} is \code{None}, it yields \code{string} tensors of shape
+\item If \code{label_mode} is \code{NULL}, it yields \code{string} tensors of shape
 \verb{(batch_size,)}, containing the contents of a batch of audio files.
 \item Otherwise, it yields a tuple \verb{(audio, labels)}, where \code{audio}
 has shape \verb{(batch_size, sequence_length, num_channels)} and \code{labels}

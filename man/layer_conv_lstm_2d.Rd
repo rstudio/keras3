@@ -81,7 +81,7 @@ matrix, used for the linear transformation of the recurrent state.}
 
 \item{bias_initializer}{Initializer for the bias vector.}
 
-\item{unit_forget_bias}{Boolean. If \code{True}, add 1 to the bias of the forget
+\item{unit_forget_bias}{Boolean. If \code{TRUE}, add 1 to the bias of the forget
 gate at initialization.
 Use in combination with \code{bias_initializer="zeros"}.
 This is recommended in \href{http://www.jmlr.org/proceedings/papers/v37/jozefowicz15.pdf}{Jozefowicz et al., 2015}}
@@ -113,23 +113,23 @@ for the linear transformation of the recurrent state.}
 \item{seed}{Random seed for dropout.}
 
 \item{return_sequences}{Boolean. Whether to return the last output
-in the output sequence, or the full sequence. Default: \code{False}.}
+in the output sequence, or the full sequence. Default: \code{FALSE}.}
 
 \item{return_state}{Boolean. Whether to return the last state in addition
-to the output. Default: \code{False}.}
+to the output. Default: \code{FALSE}.}
 
-\item{go_backwards}{Boolean (default: \code{False}).
-If \code{True}, process the input sequence backwards and return the
+\item{go_backwards}{Boolean (default: \code{FALSE}).
+If \code{TRUE}, process the input sequence backwards and return the
 reversed sequence.}
 
-\item{stateful}{Boolean (default False). If \code{True}, the last state
+\item{stateful}{Boolean (default FALSE). If \code{TRUE}, the last state
 for each sample at index i in a batch will be used as initial
 state for the sample of index i in the following batch.}
 
 \item{...}{For forward/backward compatability.}
 
-\item{unroll}{Boolean (default: \code{False}).
-If \code{True}, the network will be unrolled,
+\item{unroll}{Boolean (default: \code{FALSE}).
+If \code{TRUE}, the network will be unrolled,
 else a symbolic loop will be used.
 Unrolling can speed-up a RNN,
 although it tends to be more memory-intensive.

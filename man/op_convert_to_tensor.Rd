@@ -11,8 +11,8 @@ op_convert_to_tensor(x, dtype = NULL, sparse = NULL)
 
 \item{dtype}{The target type.}
 
-\item{sparse}{Whether to keep sparse tensors. \code{False} will cause sparse
-tensors to be densified. The default value of \code{None} means that
+\item{sparse}{Whether to keep sparse tensors. \code{FALSE} will cause sparse
+tensors to be densified. The default value of \code{NULL} means that
 sparse tensors are kept only if the backend supports them.}
 }
 \value{

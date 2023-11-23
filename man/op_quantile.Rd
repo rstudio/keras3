@@ -13,7 +13,7 @@ op_quantile(x, q, axis = NULL, method = "linear", keepdims = FALSE)
 compute. Values must be between 0 and 1 inclusive.}
 
 \item{axis}{Axis or axes along which the quantiles are computed. Defaults to
-\code{axis=None} which is to compute the quantile(s) along a flattened
+\code{axis=NULL} which is to compute the quantile(s) along a flattened
 version of the array.}
 
 \item{method}{A string specifies the method to use for estimating the
@@ -29,11 +29,11 @@ fractional part of the index surrounded by \code{i} and \code{j}.
 \item \code{"nearest"}: \code{i} or \code{j}, whichever is nearest.
 }}
 
-\item{keepdims}{If this is set to \code{True}, the axes which are reduce
+\item{keepdims}{If this is set to \code{TRUE}, the axes which are reduce
 are left in the result as dimensions with size one.}
 }
 \value{
-The quantile(s). If \code{q} is a single probability and \code{axis=None}, then
+The quantile(s). If \code{q} is a single probability and \code{axis=NULL}, then
 the result is a scalar. If multiple probabilies levels are given, first
 axis of the result corresponds to the quantiles. The other axes are the
 axes that remain after the reduction of \code{x}.

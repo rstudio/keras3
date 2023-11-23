@@ -16,7 +16,7 @@ application_nasnetlarge(
 }
 \arguments{
 \item{input_shape}{Optional shape tuple, only to be specified
-if \code{include_top} is False (otherwise the input shape
+if \code{include_top} is \code{FALSE} (otherwise the input shape
 has to be \verb{(331, 331, 3)} for NASNetLarge.
 It should have exactly 3 inputs channels,
 and width and height should be no smaller than 32.
@@ -25,7 +25,7 @@ E.g. \verb{(224, 224, 3)} would be one valid value.}
 \item{include_top}{Whether to include the fully-connected
 layer at the top of the network.}
 
-\item{weights}{\code{None} (random initialization) or
+\item{weights}{\code{NULL} (random initialization) or
 \code{imagenet} (ImageNet weights).  For loading \code{imagenet} weights,
 \code{input_shape} should be (331, 331, 3)}
 
@@ -34,9 +34,9 @@ layer at the top of the network.}
 to use as image input for the model.}
 
 \item{pooling}{Optional pooling mode for feature extraction
-when \code{include_top} is \code{False}.
+when \code{include_top} is \code{FALSE}.
 \itemize{
-\item \code{None} means that the output of the model
+\item \code{NULL} means that the output of the model
 will be the 4D tensor output of the
 last convolutional layer.
 \item \code{avg} means that global average pooling
@@ -49,14 +49,14 @@ be applied.
 }}
 
 \item{classes}{Optional number of classes to classify images
-into, only to be specified if \code{include_top} is \code{True}, and
+into, only to be specified if \code{include_top} is \code{TRUE}, and
 if no \code{weights} argument is specified.}
 
 \item{classifier_activation}{A \code{str} or callable. The activation function to
-use on the "top" layer. Ignored unless \code{include_top=True}. Set
-\code{classifier_activation=None} to return the logits of the "top"
+use on the "top" layer. Ignored unless \code{include_top=TRUE}. Set
+\code{classifier_activation=NULL} to return the logits of the "top"
 layer.  When loading pretrained weights, \code{classifier_activation}
-can only be \code{None} or \code{"softmax"}.}
+can only be \code{NULL} or \code{"softmax"}.}
 }
 \value{
 \if{html}{\out{<div class="sourceCode">}}\preformatted{A Keras model instance.
