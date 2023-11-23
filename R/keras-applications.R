@@ -53,12 +53,12 @@
 #'
 #' @param input_shape
 #' Optional shape tuple, only to be specified
-#' if `include_top` is `False`.
+#' if `include_top` is `FALSE`.
 #' It should have exactly 3 inputs channels.
 #'
 #' @param pooling
 #' Optional pooling mode for feature extraction
-#' when `include_top` is `False`. Defaults to None.
+#' when `include_top` is `FALSE`. Defaults to None.
 #' - `None` means that the output of the model will be
 #' the 4D tensor output of the last convolutional layer.
 #' - `avg` means that global average pooling
@@ -155,12 +155,12 @@ function (model_name = "convnext_base", include_top = TRUE, include_preprocessin
 #'
 #' @param input_shape
 #' Optional shape tuple, only to be specified
-#' if `include_top` is `False`.
+#' if `include_top` is `FALSE`.
 #' It should have exactly 3 inputs channels.
 #'
 #' @param pooling
 #' Optional pooling mode for feature extraction
-#' when `include_top` is `False`. Defaults to None.
+#' when `include_top` is `FALSE`. Defaults to None.
 #' - `None` means that the output of the model will be
 #' the 4D tensor output of the last convolutional layer.
 #' - `avg` means that global average pooling
@@ -257,12 +257,12 @@ function (model_name = "convnext_large", include_top = TRUE,
 #'
 #' @param input_shape
 #' Optional shape tuple, only to be specified
-#' if `include_top` is `False`.
+#' if `include_top` is `FALSE`.
 #' It should have exactly 3 inputs channels.
 #'
 #' @param pooling
 #' Optional pooling mode for feature extraction
-#' when `include_top` is `False`. Defaults to None.
+#' when `include_top` is `FALSE`. Defaults to None.
 #' - `None` means that the output of the model will be
 #' the 4D tensor output of the last convolutional layer.
 #' - `avg` means that global average pooling
@@ -359,12 +359,12 @@ function (model_name = "convnext_small", include_top = TRUE,
 #'
 #' @param input_shape
 #' Optional shape tuple, only to be specified
-#' if `include_top` is `False`.
+#' if `include_top` is `FALSE`.
 #' It should have exactly 3 inputs channels.
 #'
 #' @param pooling
 #' Optional pooling mode for feature extraction
-#' when `include_top` is `False`. Defaults to None.
+#' when `include_top` is `FALSE`. Defaults to None.
 #' - `None` means that the output of the model will be
 #' the 4D tensor output of the last convolutional layer.
 #' - `avg` means that global average pooling
@@ -461,12 +461,12 @@ function (model_name = "convnext_tiny", include_top = TRUE, include_preprocessin
 #'
 #' @param input_shape
 #' Optional shape tuple, only to be specified
-#' if `include_top` is `False`.
+#' if `include_top` is `FALSE`.
 #' It should have exactly 3 inputs channels.
 #'
 #' @param pooling
 #' Optional pooling mode for feature extraction
-#' when `include_top` is `False`. Defaults to None.
+#' when `include_top` is `FALSE`. Defaults to None.
 #' - `None` means that the output of the model will be
 #' the 4D tensor output of the last convolutional layer.
 #' - `avg` means that global average pooling
@@ -547,7 +547,7 @@ function (model_name = "convnext_xlarge", include_top = TRUE,
 #'
 #' @param input_shape
 #' optional shape tuple, only to be specified
-#' if `include_top` is False (otherwise the input shape
+#' if `include_top` is `FALSE` (otherwise the input shape
 #' has to be `(224, 224, 3)` (with `'channels_last'` data format)
 #' or `(3, 224, 224)` (with `'channels_first'` data format).
 #' It should have exactly 3 inputs channels,
@@ -556,7 +556,7 @@ function (model_name = "convnext_xlarge", include_top = TRUE,
 #'
 #' @param pooling
 #' Optional pooling mode for feature extraction
-#' when `include_top` is `False`.
+#' when `include_top` is `FALSE`.
 #' - `None` means that the output of the model will be
 #'     the 4D tensor output of the
 #'     last convolutional block.
@@ -630,7 +630,7 @@ function (include_top = TRUE, weights = "imagenet", input_tensor = NULL,
 #'
 #' @param input_shape
 #' optional shape tuple, only to be specified
-#' if `include_top` is False (otherwise the input shape
+#' if `include_top` is `FALSE` (otherwise the input shape
 #' has to be `(224, 224, 3)` (with `'channels_last'` data format)
 #' or `(3, 224, 224)` (with `'channels_first'` data format).
 #' It should have exactly 3 inputs channels,
@@ -639,7 +639,7 @@ function (include_top = TRUE, weights = "imagenet", input_tensor = NULL,
 #'
 #' @param pooling
 #' Optional pooling mode for feature extraction
-#' when `include_top` is `False`.
+#' when `include_top` is `FALSE`.
 #' - `None` means that the output of the model will be
 #'     the 4D tensor output of the
 #'     last convolutional block.
@@ -713,7 +713,7 @@ function (include_top = TRUE, weights = "imagenet", input_tensor = NULL,
 #'
 #' @param input_shape
 #' optional shape tuple, only to be specified
-#' if `include_top` is False (otherwise the input shape
+#' if `include_top` is `FALSE` (otherwise the input shape
 #' has to be `(224, 224, 3)` (with `'channels_last'` data format)
 #' or `(3, 224, 224)` (with `'channels_first'` data format).
 #' It should have exactly 3 inputs channels,
@@ -722,7 +722,7 @@ function (include_top = TRUE, weights = "imagenet", input_tensor = NULL,
 #'
 #' @param pooling
 #' Optional pooling mode for feature extraction
-#' when `include_top` is `False`.
+#' when `include_top` is `FALSE`.
 #' - `None` means that the output of the model will be
 #'     the 4D tensor output of the
 #'     last convolutional block.
@@ -807,12 +807,12 @@ function (include_top = TRUE, weights = "imagenet", input_tensor = NULL,
 #'
 #' @param input_shape
 #' Optional shape tuple, only to be specified
-#' if `include_top` is False.
+#' if `include_top` is `FALSE`.
 #' It should have exactly 3 inputs channels.
 #'
 #' @param pooling
 #' Optional pooling mode for feature extraction
-#' when `include_top` is `False`. Defaults to `None`.
+#' when `include_top` is `FALSE`. Defaults to `None`.
 #' - `None` means that the output of the model will be
 #'     the 4D tensor output of the
 #'     last convolutional layer.
@@ -902,12 +902,12 @@ function (include_top = TRUE, weights = "imagenet", input_tensor = NULL,
 #'
 #' @param input_shape
 #' Optional shape tuple, only to be specified
-#' if `include_top` is False.
+#' if `include_top` is `FALSE`.
 #' It should have exactly 3 inputs channels.
 #'
 #' @param pooling
 #' Optional pooling mode for feature extraction
-#' when `include_top` is `False`. Defaults to `None`.
+#' when `include_top` is `FALSE`. Defaults to `None`.
 #' - `None` means that the output of the model will be
 #'     the 4D tensor output of the
 #'     last convolutional layer.
@@ -997,12 +997,12 @@ function (include_top = TRUE, weights = "imagenet", input_tensor = NULL,
 #'
 #' @param input_shape
 #' Optional shape tuple, only to be specified
-#' if `include_top` is False.
+#' if `include_top` is `FALSE`.
 #' It should have exactly 3 inputs channels.
 #'
 #' @param pooling
 #' Optional pooling mode for feature extraction
-#' when `include_top` is `False`. Defaults to `None`.
+#' when `include_top` is `FALSE`. Defaults to `None`.
 #' - `None` means that the output of the model will be
 #'     the 4D tensor output of the
 #'     last convolutional layer.
@@ -1092,12 +1092,12 @@ function (include_top = TRUE, weights = "imagenet", input_tensor = NULL,
 #'
 #' @param input_shape
 #' Optional shape tuple, only to be specified
-#' if `include_top` is False.
+#' if `include_top` is `FALSE`.
 #' It should have exactly 3 inputs channels.
 #'
 #' @param pooling
 #' Optional pooling mode for feature extraction
-#' when `include_top` is `False`. Defaults to `None`.
+#' when `include_top` is `FALSE`. Defaults to `None`.
 #' - `None` means that the output of the model will be
 #'     the 4D tensor output of the
 #'     last convolutional layer.
@@ -1187,12 +1187,12 @@ function (include_top = TRUE, weights = "imagenet", input_tensor = NULL,
 #'
 #' @param input_shape
 #' Optional shape tuple, only to be specified
-#' if `include_top` is False.
+#' if `include_top` is `FALSE`.
 #' It should have exactly 3 inputs channels.
 #'
 #' @param pooling
 #' Optional pooling mode for feature extraction
-#' when `include_top` is `False`. Defaults to `None`.
+#' when `include_top` is `FALSE`. Defaults to `None`.
 #' - `None` means that the output of the model will be
 #'     the 4D tensor output of the
 #'     last convolutional layer.
@@ -1282,12 +1282,12 @@ function (include_top = TRUE, weights = "imagenet", input_tensor = NULL,
 #'
 #' @param input_shape
 #' Optional shape tuple, only to be specified
-#' if `include_top` is False.
+#' if `include_top` is `FALSE`.
 #' It should have exactly 3 inputs channels.
 #'
 #' @param pooling
 #' Optional pooling mode for feature extraction
-#' when `include_top` is `False`. Defaults to `None`.
+#' when `include_top` is `FALSE`. Defaults to `None`.
 #' - `None` means that the output of the model will be
 #'     the 4D tensor output of the
 #'     last convolutional layer.
@@ -1377,12 +1377,12 @@ function (include_top = TRUE, weights = "imagenet", input_tensor = NULL,
 #'
 #' @param input_shape
 #' Optional shape tuple, only to be specified
-#' if `include_top` is False.
+#' if `include_top` is `FALSE`.
 #' It should have exactly 3 inputs channels.
 #'
 #' @param pooling
 #' Optional pooling mode for feature extraction
-#' when `include_top` is `False`. Defaults to `None`.
+#' when `include_top` is `FALSE`. Defaults to `None`.
 #' - `None` means that the output of the model will be
 #'     the 4D tensor output of the
 #'     last convolutional layer.
@@ -1472,12 +1472,12 @@ function (include_top = TRUE, weights = "imagenet", input_tensor = NULL,
 #'
 #' @param input_shape
 #' Optional shape tuple, only to be specified
-#' if `include_top` is False.
+#' if `include_top` is `FALSE`.
 #' It should have exactly 3 inputs channels.
 #'
 #' @param pooling
 #' Optional pooling mode for feature extraction
-#' when `include_top` is `False`. Defaults to `None`.
+#' when `include_top` is `FALSE`. Defaults to `None`.
 #' - `None` means that the output of the model will be
 #'     the 4D tensor output of the
 #'     last convolutional layer.
@@ -1547,7 +1547,7 @@ function (include_top = TRUE, weights = "imagenet", input_tensor = NULL,
 #' pass-through function. In this use case, EfficientNetV2 models expect their
 #' inputs to be float tensors of pixels with values in the `[0, 255]` range.
 #' At the same time, preprocessing as a part of the model (i.e. `Rescaling`
-#' layer) can be disabled by setting `include_preprocessing` argument to `False`.
+#' layer) can be disabled by setting `include_preprocessing` argument to `FALSE`.
 #' With preprocessing disabled EfficientNetV2 models expect their inputs to be
 #' float tensors of pixels with values in the `[-1, 1]` range.
 #'
@@ -1570,12 +1570,12 @@ function (include_top = TRUE, weights = "imagenet", input_tensor = NULL,
 #'
 #' @param input_shape
 #' Optional shape tuple, only to be specified
-#' if `include_top` is `False`.
+#' if `include_top` is `FALSE`.
 #' It should have exactly 3 inputs channels.
 #'
 #' @param pooling
 #' Optional pooling mode for feature extraction
-#' when `include_top` is `False`. Defaults to None.
+#' when `include_top` is `FALSE`. Defaults to None.
 #' - `None` means that the output of the model will be
 #'     the 4D tensor output of the
 #'     last convolutional layer.
@@ -1645,7 +1645,7 @@ function (include_top = TRUE, weights = "imagenet", input_tensor = NULL,
 #' pass-through function. In this use case, EfficientNetV2 models expect their
 #' inputs to be float tensors of pixels with values in the `[0, 255]` range.
 #' At the same time, preprocessing as a part of the model (i.e. `Rescaling`
-#' layer) can be disabled by setting `include_preprocessing` argument to `False`.
+#' layer) can be disabled by setting `include_preprocessing` argument to `FALSE`.
 #' With preprocessing disabled EfficientNetV2 models expect their inputs to be
 #' float tensors of pixels with values in the `[-1, 1]` range.
 #'
@@ -1668,12 +1668,12 @@ function (include_top = TRUE, weights = "imagenet", input_tensor = NULL,
 #'
 #' @param input_shape
 #' Optional shape tuple, only to be specified
-#' if `include_top` is `False`.
+#' if `include_top` is `FALSE`.
 #' It should have exactly 3 inputs channels.
 #'
 #' @param pooling
 #' Optional pooling mode for feature extraction
-#' when `include_top` is `False`. Defaults to None.
+#' when `include_top` is `FALSE`. Defaults to None.
 #' - `None` means that the output of the model will be
 #'     the 4D tensor output of the
 #'     last convolutional layer.
@@ -1743,7 +1743,7 @@ function (include_top = TRUE, weights = "imagenet", input_tensor = NULL,
 #' pass-through function. In this use case, EfficientNetV2 models expect their
 #' inputs to be float tensors of pixels with values in the `[0, 255]` range.
 #' At the same time, preprocessing as a part of the model (i.e. `Rescaling`
-#' layer) can be disabled by setting `include_preprocessing` argument to `False`.
+#' layer) can be disabled by setting `include_preprocessing` argument to `FALSE`.
 #' With preprocessing disabled EfficientNetV2 models expect their inputs to be
 #' float tensors of pixels with values in the `[-1, 1]` range.
 #'
@@ -1766,12 +1766,12 @@ function (include_top = TRUE, weights = "imagenet", input_tensor = NULL,
 #'
 #' @param input_shape
 #' Optional shape tuple, only to be specified
-#' if `include_top` is `False`.
+#' if `include_top` is `FALSE`.
 #' It should have exactly 3 inputs channels.
 #'
 #' @param pooling
 #' Optional pooling mode for feature extraction
-#' when `include_top` is `False`. Defaults to None.
+#' when `include_top` is `FALSE`. Defaults to None.
 #' - `None` means that the output of the model will be
 #'     the 4D tensor output of the
 #'     last convolutional layer.
@@ -1841,7 +1841,7 @@ function (include_top = TRUE, weights = "imagenet", input_tensor = NULL,
 #' pass-through function. In this use case, EfficientNetV2 models expect their
 #' inputs to be float tensors of pixels with values in the `[0, 255]` range.
 #' At the same time, preprocessing as a part of the model (i.e. `Rescaling`
-#' layer) can be disabled by setting `include_preprocessing` argument to `False`.
+#' layer) can be disabled by setting `include_preprocessing` argument to `FALSE`.
 #' With preprocessing disabled EfficientNetV2 models expect their inputs to be
 #' float tensors of pixels with values in the `[-1, 1]` range.
 #'
@@ -1864,12 +1864,12 @@ function (include_top = TRUE, weights = "imagenet", input_tensor = NULL,
 #'
 #' @param input_shape
 #' Optional shape tuple, only to be specified
-#' if `include_top` is `False`.
+#' if `include_top` is `FALSE`.
 #' It should have exactly 3 inputs channels.
 #'
 #' @param pooling
 #' Optional pooling mode for feature extraction
-#' when `include_top` is `False`. Defaults to None.
+#' when `include_top` is `FALSE`. Defaults to None.
 #' - `None` means that the output of the model will be
 #'     the 4D tensor output of the
 #'     last convolutional layer.
@@ -1939,7 +1939,7 @@ function (include_top = TRUE, weights = "imagenet", input_tensor = NULL,
 #' pass-through function. In this use case, EfficientNetV2 models expect their
 #' inputs to be float tensors of pixels with values in the `[0, 255]` range.
 #' At the same time, preprocessing as a part of the model (i.e. `Rescaling`
-#' layer) can be disabled by setting `include_preprocessing` argument to `False`.
+#' layer) can be disabled by setting `include_preprocessing` argument to `FALSE`.
 #' With preprocessing disabled EfficientNetV2 models expect their inputs to be
 #' float tensors of pixels with values in the `[-1, 1]` range.
 #'
@@ -1962,12 +1962,12 @@ function (include_top = TRUE, weights = "imagenet", input_tensor = NULL,
 #'
 #' @param input_shape
 #' Optional shape tuple, only to be specified
-#' if `include_top` is `False`.
+#' if `include_top` is `FALSE`.
 #' It should have exactly 3 inputs channels.
 #'
 #' @param pooling
 #' Optional pooling mode for feature extraction
-#' when `include_top` is `False`. Defaults to None.
+#' when `include_top` is `FALSE`. Defaults to None.
 #' - `None` means that the output of the model will be
 #'     the 4D tensor output of the
 #'     last convolutional layer.
@@ -2037,7 +2037,7 @@ function (include_top = TRUE, weights = "imagenet", input_tensor = NULL,
 #' pass-through function. In this use case, EfficientNetV2 models expect their
 #' inputs to be float tensors of pixels with values in the `[0, 255]` range.
 #' At the same time, preprocessing as a part of the model (i.e. `Rescaling`
-#' layer) can be disabled by setting `include_preprocessing` argument to `False`.
+#' layer) can be disabled by setting `include_preprocessing` argument to `FALSE`.
 #' With preprocessing disabled EfficientNetV2 models expect their inputs to be
 #' float tensors of pixels with values in the `[-1, 1]` range.
 #'
@@ -2060,12 +2060,12 @@ function (include_top = TRUE, weights = "imagenet", input_tensor = NULL,
 #'
 #' @param input_shape
 #' Optional shape tuple, only to be specified
-#' if `include_top` is `False`.
+#' if `include_top` is `FALSE`.
 #' It should have exactly 3 inputs channels.
 #'
 #' @param pooling
 #' Optional pooling mode for feature extraction
-#' when `include_top` is `False`. Defaults to None.
+#' when `include_top` is `FALSE`. Defaults to None.
 #' - `None` means that the output of the model will be
 #'     the 4D tensor output of the
 #'     last convolutional layer.
@@ -2135,7 +2135,7 @@ function (include_top = TRUE, weights = "imagenet", input_tensor = NULL,
 #' pass-through function. In this use case, EfficientNetV2 models expect their
 #' inputs to be float tensors of pixels with values in the `[0, 255]` range.
 #' At the same time, preprocessing as a part of the model (i.e. `Rescaling`
-#' layer) can be disabled by setting `include_preprocessing` argument to `False`.
+#' layer) can be disabled by setting `include_preprocessing` argument to `FALSE`.
 #' With preprocessing disabled EfficientNetV2 models expect their inputs to be
 #' float tensors of pixels with values in the `[-1, 1]` range.
 #'
@@ -2158,12 +2158,12 @@ function (include_top = TRUE, weights = "imagenet", input_tensor = NULL,
 #'
 #' @param input_shape
 #' Optional shape tuple, only to be specified
-#' if `include_top` is `False`.
+#' if `include_top` is `FALSE`.
 #' It should have exactly 3 inputs channels.
 #'
 #' @param pooling
 #' Optional pooling mode for feature extraction
-#' when `include_top` is `False`. Defaults to None.
+#' when `include_top` is `FALSE`. Defaults to None.
 #' - `None` means that the output of the model will be
 #'     the 4D tensor output of the
 #'     last convolutional layer.
@@ -2253,7 +2253,7 @@ function (include_top = TRUE, weights = "imagenet", input_tensor = NULL,
 #'
 #' @param input_shape
 #' optional shape tuple, only to be specified
-#' if `include_top` is `False` (otherwise the input shape
+#' if `include_top` is `FALSE` (otherwise the input shape
 #' has to be `(299, 299, 3)`
 #' (with `'channels_last'` data format)
 #' or `(3, 299, 299)` (with `'channels_first'` data format).
@@ -2263,7 +2263,7 @@ function (include_top = TRUE, weights = "imagenet", input_tensor = NULL,
 #'
 #' @param pooling
 #' Optional pooling mode for feature extraction
-#' when `include_top` is `False`.
+#' when `include_top` is `FALSE`.
 #' - `None` means that the output of the model will be
 #'     the 4D tensor output of the last convolutional block.
 #' - `'avg'` means that global average pooling
@@ -2347,7 +2347,7 @@ function (include_top = TRUE, weights = "imagenet", input_tensor = NULL,
 #'
 #' @param input_shape
 #' Optional shape tuple, only to be specified
-#' if `include_top` is False (otherwise the input shape
+#' if `include_top` is `FALSE` (otherwise the input shape
 #' has to be `(299, 299, 3)` (with `channels_last` data format)
 #' or `(3, 299, 299)` (with `channels_first` data format).
 #' It should have exactly 3 inputs channels,
@@ -2357,7 +2357,7 @@ function (include_top = TRUE, weights = "imagenet", input_tensor = NULL,
 #'
 #' @param pooling
 #' Optional pooling mode for feature extraction
-#' when `include_top` is `False`.
+#' when `include_top` is `FALSE`.
 #' - `None` (default) means that the output of the model will be
 #'     the 4D tensor output of the last convolutional block.
 #' - `avg` means that global average pooling
@@ -2423,7 +2423,7 @@ function (include_top = TRUE, weights = "imagenet", input_tensor = NULL,
 #'
 #' @param input_shape
 #' Optional shape tuple, only to be specified if `include_top`
-#' is `False` (otherwise the input shape has to be `(224, 224, 3)`
+#' is `FALSE` (otherwise the input shape has to be `(224, 224, 3)`
 #' (with `"channels_last"` data format) or `(3, 224, 224)`
 #' (with `"channels_first"` data format).
 #' It should have exactly 3 inputs channels, and width and
@@ -2466,7 +2466,7 @@ function (include_top = TRUE, weights = "imagenet", input_tensor = NULL,
 #'
 #' @param pooling
 #' Optional pooling mode for feature extraction when `include_top`
-#' is `False`.
+#' is `FALSE`.
 #' - `None` (default) means that the output of the model will be
 #'     the 4D tensor output of the last convolutional block.
 #' - `avg` means that global average pooling
@@ -2541,7 +2541,7 @@ function (input_shape = NULL, alpha = 1, depth_multiplier = 1L,
 #'
 #' @param input_shape
 #' Optional shape tuple, only to be specified if `include_top`
-#' is `False` (otherwise the input shape has to be `(224, 224, 3)`
+#' is `FALSE` (otherwise the input shape has to be `(224, 224, 3)`
 #' (with `"channels_last"` data format) or `(3, 224, 224)`
 #' (with `"channels_first"` data format).
 #' It should have exactly 3 inputs channels, and width and
@@ -2576,7 +2576,7 @@ function (input_shape = NULL, alpha = 1, depth_multiplier = 1L,
 #'
 #' @param pooling
 #' Optional pooling mode for feature extraction when `include_top`
-#' is `False`.
+#' is `FALSE`.
 #' - `None` (default) means that the output of the model will be
 #'     the 4D tensor output of the last convolutional block.
 #' - `avg` means that global average pooling
@@ -2649,7 +2649,7 @@ function (input_shape = NULL, alpha = 1, include_top = TRUE,
 #' pass-through function. In this use case, MobileNetV3 models expect their
 #' inputs to be float tensors of pixels with values in the `[0-255]` range.
 #' At the same time, preprocessing as a part of the model (i.e. `Rescaling`
-#' layer) can be disabled by setting `include_preprocessing` argument to `False`.
+#' layer) can be disabled by setting `include_preprocessing` argument to `FALSE`.
 #' With preprocessing disabled MobileNetV3 models expect their inputs to be float
 #' tensors of pixels with values in the `[-1, 1]` range.
 #'
@@ -2710,7 +2710,7 @@ function (input_shape = NULL, alpha = 1, include_top = TRUE,
 #'
 #' @param pooling
 #' String, optional pooling mode for feature extraction
-#' when `include_top` is `False`.
+#' when `include_top` is `FALSE`.
 #' - `None` means that the output of the model
 #'     will be the 4D tensor output of the
 #'     last convolutional block.
@@ -2794,7 +2794,7 @@ function (input_shape = NULL, alpha = 1, minimalistic = FALSE,
 #' pass-through function. In this use case, MobileNetV3 models expect their
 #' inputs to be float tensors of pixels with values in the `[0-255]` range.
 #' At the same time, preprocessing as a part of the model (i.e. `Rescaling`
-#' layer) can be disabled by setting `include_preprocessing` argument to `False`.
+#' layer) can be disabled by setting `include_preprocessing` argument to `FALSE`.
 #' With preprocessing disabled MobileNetV3 models expect their inputs to be float
 #' tensors of pixels with values in the `[-1, 1]` range.
 #'
@@ -2855,7 +2855,7 @@ function (input_shape = NULL, alpha = 1, minimalistic = FALSE,
 #'
 #' @param pooling
 #' String, optional pooling mode for feature extraction
-#' when `include_top` is `False`.
+#' when `include_top` is `FALSE`.
 #' - `None` means that the output of the model
 #'     will be the 4D tensor output of the
 #'     last convolutional block.
@@ -2924,7 +2924,7 @@ function (input_shape = NULL, alpha = 1, minimalistic = FALSE,
 #'
 #' @param input_shape
 #' Optional shape tuple, only to be specified
-#' if `include_top` is False (otherwise the input shape
+#' if `include_top` is `FALSE` (otherwise the input shape
 #' has to be `(331, 331, 3)` for NASNetLarge.
 #' It should have exactly 3 inputs channels,
 #' and width and height should be no smaller than 32.
@@ -2946,7 +2946,7 @@ function (input_shape = NULL, alpha = 1, minimalistic = FALSE,
 #'
 #' @param pooling
 #' Optional pooling mode for feature extraction
-#' when `include_top` is `False`.
+#' when `include_top` is `FALSE`.
 #' - `None` means that the output of the model
 #'     will be the 4D tensor output of the
 #'     last convolutional layer.
@@ -3006,7 +3006,7 @@ function (input_shape = NULL, include_top = TRUE, weights = "imagenet",
 #'
 #' @param input_shape
 #' Optional shape tuple, only to be specified
-#' if `include_top` is False (otherwise the input shape
+#' if `include_top` is `FALSE` (otherwise the input shape
 #' has to be `(224, 224, 3)` for NASNetMobile
 #' It should have exactly 3 inputs channels,
 #' and width and height should be no smaller than 32.
@@ -3028,7 +3028,7 @@ function (input_shape = NULL, include_top = TRUE, weights = "imagenet",
 #'
 #' @param pooling
 #' Optional pooling mode for feature extraction
-#' when `include_top` is `False`.
+#' when `include_top` is `FALSE`.
 #' - `None` means that the output of the model
 #'     will be the 4D tensor output of the
 #'     last convolutional layer.
@@ -3106,7 +3106,7 @@ function (input_shape = NULL, include_top = TRUE, weights = "imagenet",
 #'
 #' @param input_shape
 #' optional shape tuple, only to be specified if `include_top`
-#' is `False` (otherwise the input shape has to be `(224, 224, 3)`
+#' is `FALSE` (otherwise the input shape has to be `(224, 224, 3)`
 #' (with `"channels_last"` data format) or `(3, 224, 224)`
 #' (with `"channels_first"` data format). It should have exactly 3
 #' inputs channels, and width and height should be no smaller than 32.
@@ -3114,7 +3114,7 @@ function (input_shape = NULL, include_top = TRUE, weights = "imagenet",
 #'
 #' @param pooling
 #' Optional pooling mode for feature extraction when `include_top`
-#' is `False`.
+#' is `FALSE`.
 #' - `None` means that the output of the model will be the 4D tensor
 #'         output of the last convolutional block.
 #' - `avg` means that global average pooling will be applied to the output
@@ -3188,7 +3188,7 @@ function (include_top = TRUE, weights = "imagenet", input_tensor = NULL,
 #'
 #' @param input_shape
 #' optional shape tuple, only to be specified if `include_top`
-#' is `False` (otherwise the input shape has to be `(224, 224, 3)`
+#' is `FALSE` (otherwise the input shape has to be `(224, 224, 3)`
 #' (with `"channels_last"` data format) or `(3, 224, 224)`
 #' (with `"channels_first"` data format). It should have exactly 3
 #' inputs channels, and width and height should be no smaller than 32.
@@ -3196,7 +3196,7 @@ function (include_top = TRUE, weights = "imagenet", input_tensor = NULL,
 #'
 #' @param pooling
 #' Optional pooling mode for feature extraction when `include_top`
-#' is `False`.
+#' is `FALSE`.
 #' - `None` means that the output of the model will be the 4D tensor
 #'         output of the last convolutional block.
 #' - `avg` means that global average pooling will be applied to the output
@@ -3270,7 +3270,7 @@ function (include_top = TRUE, weights = "imagenet", input_tensor = NULL,
 #'
 #' @param input_shape
 #' optional shape tuple, only to be specified if `include_top`
-#' is `False` (otherwise the input shape has to be `(224, 224, 3)`
+#' is `FALSE` (otherwise the input shape has to be `(224, 224, 3)`
 #' (with `"channels_last"` data format) or `(3, 224, 224)`
 #' (with `"channels_first"` data format). It should have exactly 3
 #' inputs channels, and width and height should be no smaller than 32.
@@ -3278,7 +3278,7 @@ function (include_top = TRUE, weights = "imagenet", input_tensor = NULL,
 #'
 #' @param pooling
 #' Optional pooling mode for feature extraction when `include_top`
-#' is `False`.
+#' is `FALSE`.
 #' - `None` means that the output of the model will be the 4D tensor
 #'         output of the last convolutional block.
 #' - `avg` means that global average pooling will be applied to the output
@@ -3351,7 +3351,7 @@ function (include_top = TRUE, weights = "imagenet", input_tensor = NULL,
 #'
 #' @param input_shape
 #' optional shape tuple, only to be specified if `include_top`
-#' is `False` (otherwise the input shape has to be `(224, 224, 3)`
+#' is `FALSE` (otherwise the input shape has to be `(224, 224, 3)`
 #' (with `"channels_last"` data format) or `(3, 224, 224)`
 #' (with `"channels_first"` data format). It should have exactly 3
 #' inputs channels, and width and height should be no smaller than 32.
@@ -3359,7 +3359,7 @@ function (include_top = TRUE, weights = "imagenet", input_tensor = NULL,
 #'
 #' @param pooling
 #' Optional pooling mode for feature extraction when `include_top`
-#' is `False`.
+#' is `FALSE`.
 #' - `None` means that the output of the model will be the 4D tensor
 #'         output of the last convolutional block.
 #' - `avg` means that global average pooling will be applied to the output
@@ -3432,7 +3432,7 @@ function (include_top = TRUE, weights = "imagenet", input_tensor = NULL,
 #'
 #' @param input_shape
 #' optional shape tuple, only to be specified if `include_top`
-#' is `False` (otherwise the input shape has to be `(224, 224, 3)`
+#' is `FALSE` (otherwise the input shape has to be `(224, 224, 3)`
 #' (with `"channels_last"` data format) or `(3, 224, 224)`
 #' (with `"channels_first"` data format). It should have exactly 3
 #' inputs channels, and width and height should be no smaller than 32.
@@ -3440,7 +3440,7 @@ function (include_top = TRUE, weights = "imagenet", input_tensor = NULL,
 #'
 #' @param pooling
 #' Optional pooling mode for feature extraction when `include_top`
-#' is `False`.
+#' is `FALSE`.
 #' - `None` means that the output of the model will be the 4D tensor
 #'         output of the last convolutional block.
 #' - `avg` means that global average pooling will be applied to the output
@@ -3513,7 +3513,7 @@ function (include_top = TRUE, weights = "imagenet", input_tensor = NULL,
 #'
 #' @param input_shape
 #' optional shape tuple, only to be specified if `include_top`
-#' is `False` (otherwise the input shape has to be `(224, 224, 3)`
+#' is `FALSE` (otherwise the input shape has to be `(224, 224, 3)`
 #' (with `"channels_last"` data format) or `(3, 224, 224)`
 #' (with `"channels_first"` data format). It should have exactly 3
 #' inputs channels, and width and height should be no smaller than 32.
@@ -3521,7 +3521,7 @@ function (include_top = TRUE, weights = "imagenet", input_tensor = NULL,
 #'
 #' @param pooling
 #' Optional pooling mode for feature extraction when `include_top`
-#' is `False`.
+#' is `FALSE`.
 #' - `None` means that the output of the model will be the 4D tensor
 #'         output of the last convolutional block.
 #' - `avg` means that global average pooling will be applied to the output
@@ -3600,7 +3600,7 @@ function (include_top = TRUE, weights = "imagenet", input_tensor = NULL,
 #'
 #' @param input_shape
 #' optional shape tuple, only to be specified
-#' if `include_top` is `False` (otherwise the input shape
+#' if `include_top` is `FALSE` (otherwise the input shape
 #' has to be `(224, 224, 3)`
 #' (with `channels_last` data format) or
 #' `(3, 224, 224)` (with `"channels_first"` data format).
@@ -3610,7 +3610,7 @@ function (include_top = TRUE, weights = "imagenet", input_tensor = NULL,
 #'
 #' @param pooling
 #' Optional pooling mode for feature extraction
-#' when `include_top` is `False`.
+#' when `include_top` is `FALSE`.
 #' - `None` means that the output of the model will be
 #'     the 4D tensor output of the
 #'     last convolutional block.
@@ -3692,7 +3692,7 @@ function (include_top = TRUE, weights = "imagenet", input_tensor = NULL,
 #'
 #' @param input_shape
 #' optional shape tuple, only to be specified
-#' if `include_top` is `False` (otherwise the input shape
+#' if `include_top` is `FALSE` (otherwise the input shape
 #' has to be `(224, 224, 3)`
 #' (with `channels_last` data format) or
 #' `(3, 224, 224)` (with `"channels_first"` data format).
@@ -3702,7 +3702,7 @@ function (include_top = TRUE, weights = "imagenet", input_tensor = NULL,
 #'
 #' @param pooling
 #' Optional pooling mode for feature extraction
-#' when `include_top` is `False`.
+#' when `include_top` is `FALSE`.
 #' - `None` means that the output of the model will be
 #'     the 4D tensor output of the
 #'     last convolutional block.
@@ -3782,7 +3782,7 @@ function (include_top = TRUE, weights = "imagenet", input_tensor = NULL,
 #'
 #' @param input_shape
 #' optional shape tuple, only to be specified
-#' if `include_top` is `False` (otherwise the input shape
+#' if `include_top` is `FALSE` (otherwise the input shape
 #' has to be `(299, 299, 3)`.
 #' It should have exactly 3 inputs channels,
 #' and width and height should be no smaller than 71.
@@ -3790,7 +3790,7 @@ function (include_top = TRUE, weights = "imagenet", input_tensor = NULL,
 #'
 #' @param pooling
 #' Optional pooling mode for feature extraction
-#' when `include_top` is `False`.
+#' when `include_top` is `FALSE`.
 #' - `None` means that the output of the model will be
 #'     the 4D tensor output of the
 #'     last convolutional block.

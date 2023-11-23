@@ -245,24 +245,24 @@ function (object, layer, merge_mode = "concat", weights = NULL,
 #'
 #' @param return_sequences
 #' Boolean. Whether to return the last output
-#' in the output sequence, or the full sequence. Default: `False`.
+#' in the output sequence, or the full sequence. Default: `FALSE`.
 #'
 #' @param return_state
 #' Boolean. Whether to return the last state in addition
-#' to the output. Default: `False`.
+#' to the output. Default: `FALSE`.
 #'
 #' @param go_backwards
-#' Boolean (default: `False`).
+#' Boolean (default: `FALSE`).
 #' If `TRUE`, process the input sequence backwards and return the
 #' reversed sequence.
 #'
 #' @param stateful
-#' Boolean (default False). If `TRUE`, the last state
+#' Boolean (default `FALSE`). If `TRUE`, the last state
 #' for each sample at index i in a batch will be used as initial
 #' state for the sample of index i in the following batch.
 #'
 #' @param unroll
-#' Boolean (default: `False`).
+#' Boolean (default: `FALSE`).
 #' If `TRUE`, the network will be unrolled,
 #' else a symbolic loop will be used.
 #' Unrolling can speed-up a RNN,
@@ -444,24 +444,24 @@ function (object, filters, kernel_size, strides = 1L, padding = "valid",
 #'
 #' @param return_sequences
 #' Boolean. Whether to return the last output
-#' in the output sequence, or the full sequence. Default: `False`.
+#' in the output sequence, or the full sequence. Default: `FALSE`.
 #'
 #' @param return_state
 #' Boolean. Whether to return the last state in addition
-#' to the output. Default: `False`.
+#' to the output. Default: `FALSE`.
 #'
 #' @param go_backwards
-#' Boolean (default: `False`).
+#' Boolean (default: `FALSE`).
 #' If `TRUE`, process the input sequence backwards and return the
 #' reversed sequence.
 #'
 #' @param stateful
-#' Boolean (default False). If `TRUE`, the last state
+#' Boolean (default FALSE). If `TRUE`, the last state
 #' for each sample at index i in a batch will be used as initial
 #' state for the sample of index i in the following batch.
 #'
 #' @param unroll
-#' Boolean (default: `False`).
+#' Boolean (default: `FALSE`).
 #' If `TRUE`, the network will be unrolled,
 #' else a symbolic loop will be used.
 #' Unrolling can speed-up a RNN,
@@ -642,24 +642,24 @@ function (object, filters, kernel_size, strides = 1L, padding = "valid",
 #'
 #' @param return_sequences
 #' Boolean. Whether to return the last output
-#' in the output sequence, or the full sequence. Default: `False`.
+#' in the output sequence, or the full sequence. Default: `FALSE`.
 #'
 #' @param return_state
 #' Boolean. Whether to return the last state in addition
-#' to the output. Default: `False`.
+#' to the output. Default: `FALSE`.
 #'
 #' @param go_backwards
-#' Boolean (default: `False`).
+#' Boolean (default: `FALSE`).
 #' If `TRUE`, process the input sequence backwards and return the
 #' reversed sequence.
 #'
 #' @param stateful
-#' Boolean (default False). If `TRUE`, the last state
+#' Boolean (default `FALSE`). If `TRUE`, the last state
 #' for each sample at index i in a batch will be used as initial
 #' state for the sample of index i in the following batch.
 #'
 #' @param unroll
-#' Boolean (default: `False`).
+#' Boolean (default: `FALSE`).
 #' If `TRUE`, the network will be unrolled,
 #' else a symbolic loop will be used.
 #' Unrolling can speed-up a RNN,

@@ -309,7 +309,7 @@ function ()
 #'
 #' @returns
 #' Boolean, `TRUE` if interactive logging is enabled,
-#' and `False` otherwise.
+#' and `FALSE` otherwise.
 #'
 #' @export
 #' @family io utils
@@ -409,7 +409,7 @@ function ()
 #'
 #' @returns
 #' Boolean, `TRUE` if traceback filtering is enabled,
-#' and `False` otherwise.
+#' and `FALSE` otherwise.
 #'
 #' @export
 #' @family traceback utils

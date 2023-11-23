@@ -19,12 +19,12 @@
 #' - `epsilon` is small constant (configurable as part of the constructor
 #' arguments)
 #' - `gamma` is a learned scaling factor (initialized as 1), which
-#' can be disabled by passing `scale=False` to the constructor.
+#' can be disabled by passing `scale=FALSE` to the constructor.
 #' - `beta` is a learned offset factor (initialized as 0), which
-#' can be disabled by passing `center=False` to the constructor.
+#' can be disabled by passing `center=FALSE` to the constructor.
 #'
 #' **During inference** (i.e. when using `evaluate()` or `predict()` or when
-#' calling the layer/model with the argument `training=False` (which is the
+#' calling the layer/model with the argument `training=FALSE` (which is the
 #' default), the layer normalizes its output using a moving average of the
 #' mean and standard deviation of the batches it has seen during training. That
 #' is to say, it returns
@@ -40,9 +40,9 @@
 #' *after having been trained on data that has similar statistics as the
 #' inference data*.
 #'
-#' **About setting `layer.trainable = False` on a `BatchNormalization` layer:**
+#' **About setting `layer.trainable = FALSE` on a `BatchNormalization` layer:**
 #'
-#' The meaning of setting `layer.trainable = False` is to freeze the layer,
+#' The meaning of setting `layer.trainable = FALSE` is to freeze the layer,
 #' i.e. its internal state will not change during training:
 #' its trainable weights will not be updated
 #' during `fit()` or `train_on_batch()`, and its state updates will not be run.
@@ -53,7 +53,7 @@
 #' are two separate concepts.
 #'
 #' However, in the case of the `BatchNormalization` layer, **setting
-#' `trainable = False` on the layer means that the layer will be
+#' `trainable = FALSE` on the layer means that the layer will be
 #' subsequently run in inference mode** (meaning that it will use
 #' the moving mean and the moving variance to normalize the current batch,
 #' rather than using the mean and variance of the current batch).
@@ -72,7 +72,7 @@
 #'     training mode or in inference mode.
 #'     - `training=TRUE`: The layer will normalize its inputs using
 #'     the mean and variance of the current batch of inputs.
-#'     - `training=False`: The layer will normalize its inputs using
+#'     - `training=FALSE`: The layer will normalize its inputs using
 #'     the mean and variance of its moving statistics, learned during
 #'     training.
 #'
@@ -92,10 +92,10 @@
 #'
 #' @param center
 #' If `TRUE`, add offset of `beta` to normalized tensor.
-#' If `False`, `beta` is ignored.
+#' If `FALSE`, `beta` is ignored.
 #'
 #' @param scale
-#' If `TRUE`, multiply by `gamma`. If `False`, `gamma` is not used.
+#' If `TRUE`, multiply by `gamma`. If `FALSE`, `gamma` is not used.
 #' When the next layer is linear this can be disabled
 #' since the scaling will be done by the next layer.
 #'
@@ -128,7 +128,7 @@
 #' If `TRUE`, synchronizes the global batch statistics (mean and
 #' variance) for the layer across all devices at each training step
 #' in a distributed training strategy.
-#' If `False`, each replica uses its own local batch statistics.
+#' If `FALSE`, each replica uses its own local batch statistics.
 #'
 #' @param ...
 #' Base layer keyword arguments (e.g. `name` and `dtype`).
@@ -206,10 +206,10 @@ function (object, axis = -1L, momentum = 0.99, epsilon = 0.001,
 #'
 #' @param center
 #' If `TRUE`, add offset of `beta` to normalized tensor.
-#' If `False`, `beta` is ignored. Defaults to `TRUE`.
+#' If `FALSE`, `beta` is ignored. Defaults to `TRUE`.
 #'
 #' @param scale
-#' If `TRUE`, multiply by `gamma`. If `False`, `gamma` is not used.
+#' If `TRUE`, multiply by `gamma`. If `FALSE`, `gamma` is not used.
 #' When the next layer is linear (also e.g. `relu`), this can be
 #' disabled since the scaling will be done by the next layer.
 #' Defaults to `TRUE`.

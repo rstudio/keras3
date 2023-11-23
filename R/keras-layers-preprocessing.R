@@ -1662,7 +1662,7 @@ function (object, scale, offset = 0, ...)
 #' cropped so as to return the
 #' largest possible window in the image (of size `(height, width)`)
 #' that matches the target aspect ratio. By default
-#' (`crop_to_aspect_ratio=False`), aspect ratio may not be preserved.
+#' (`crop_to_aspect_ratio=FALSE`), aspect ratio may not be preserved.
 #'
 #' @param data_format
 #' string, either `"channels_last"` or `"channels_first"`.

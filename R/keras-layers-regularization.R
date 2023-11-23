@@ -56,7 +56,7 @@ function (object, l1 = 0, l2 = 0, ...)
 #' automatically. In other contexts, you can set the argument explicitly
 #' to `TRUE` when calling the layer.
 #'
-#' (This is in contrast to setting `trainable=False` for a `Dropout` layer.
+#' (This is in contrast to setting `trainable=FALSE` for a `Dropout` layer.
 #' `trainable` does not affect the layer's behavior, as `Dropout` does
 #' not have any variables/weights that can be frozen during training.)
 #'

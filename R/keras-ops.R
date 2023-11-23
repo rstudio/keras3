@@ -43,7 +43,7 @@ keras$ops$cast(x, dtype)
 #' Callable returning the output for the `pred == TRUE` case.
 #'
 #' @param false_fn
-#' Callable returning the output for the `pred == False` case.
+#' Callable returning the output for the `pred == FALSE` case.
 #'
 #' @export
 #' @family core ops
@@ -97,7 +97,7 @@ keras$ops$convert_to_numpy(x)
 #' The target type.
 #'
 #' @param sparse
-#' Whether to keep sparse tensors. `False` will cause sparse
+#' Whether to keep sparse tensors. `FALSE` will cause sparse
 #' tensors to be densified. The default value of `None` means that
 #' sparse tensors are kept only if the backend supports them.
 #'
@@ -162,10 +162,10 @@ keras$ops$fori_loop(lower, upper, body_fun, init_val)
 #'
 #' # Note
 #' This checks for backend specific tensors so passing a TensorFlow
-#' tensor would return `False` if your backend is PyTorch or JAX.
+#' tensor would return `FALSE` if your backend is PyTorch or JAX.
 #'
 #' @returns
-#' `TRUE` if `x` is a tensor, otherwise `False`.
+#' `TRUE` if `x` is a tensor, otherwise `FALSE`.
 #'
 #' @param x
 #' A variable.
@@ -4645,9 +4645,9 @@ keras$ops$less_equal(x1, x2)
 #'
 #' @param stop
 #' The end value of the sequence, unless `endpoint` is set to
-#' `False`. In that case, the sequence consists of all but the last
+#' `FALSE`. In that case, the sequence consists of all but the last
 #' of `num + 1` evenly spaced samples, so that `stop` is excluded.
-#' Note that the step size changes when `endpoint` is `False`.
+#' Note that the step size changes when `endpoint` is `FALSE`.
 #'
 #' @param num
 #' Number of samples to generate. Defaults to `50`. Must be
@@ -4797,7 +4797,7 @@ keras$ops$logaddexp(x1, x2)
 #' Computes the element-wise logical AND of the given input tensors.
 #'
 #' @description
-#' Zeros are treated as `False` and non-zeros are treated as `TRUE`.
+#' Zeros are treated as `FALSE` and non-zeros are treated as `TRUE`.
 #'
 #' @returns
 #'     Output tensor, element-wise logical AND of the inputs.
@@ -4823,7 +4823,7 @@ keras$ops$logical_and(x1, x2)
 #' Computes the element-wise NOT of the given input tensor.
 #'
 #' @description
-#' Zeros are treated as `False` and non-zeros are treated as `TRUE`.
+#' Zeros are treated as `FALSE` and non-zeros are treated as `TRUE`.
 #'
 #' @returns
 #'     Output tensor, element-wise logical NOT of the input.
@@ -4846,7 +4846,7 @@ keras$ops$logical_not(x)
 #' Computes the element-wise logical OR of the given input tensors.
 #'
 #' @description
-#' Zeros are treated as `False` and non-zeros are treated as `TRUE`.
+#' Zeros are treated as `FALSE` and non-zeros are treated as `TRUE`.
 #'
 #' @returns
 #'     Output tensor, element-wise logical OR of the inputs.
@@ -4907,7 +4907,7 @@ keras$ops$logical_xor(x1, x2)
 #' The starting value of the sequence.
 #'
 #' @param stop
-#' The final value of the sequence, unless `endpoint` is `False`.
+#' The final value of the sequence, unless `endpoint` is `FALSE`.
 #' In that case, `num + 1` values are spaced over the interval in
 #' log-space, of which all but the last (a sequence of length `num`)
 #' are returned.
@@ -4993,7 +4993,7 @@ keras$ops$matmul(x1, x2)
 #'
 #' @param keepdims
 #' If this is set to `TRUE`, the axes which are reduced are left
-#' in the result as dimensions with size one. Defaults to`False`.
+#' in the result as dimensions with size one. Defaults to`FALSE`.
 #'
 #' @param initial
 #' The minimum value of an output element. Defaults to`None`.
@@ -5168,7 +5168,7 @@ function (..., indexing = "xy")
 #'
 #' @param keepdims
 #' If this is set to `TRUE`, the axes which are reduced are left
-#' in the result as dimensions with size one. Defaults to`False`.
+#' in the result as dimensions with size one. Defaults to`FALSE`.
 #'
 #' @param initial
 #' The maximum value of an output element. Defaults to`None`.
@@ -6615,7 +6615,7 @@ keras$ops$vstack(xs)
 #'
 #' @returns
 #' A tensor with elements from `x1` where `condition` is `TRUE`, and
-#' elements from `x2` where `condition` is `False`.
+#' elements from `x2` where `condition` is `FALSE`.
 #'
 #' @param condition
 #' Where `TRUE`, yield `x1`, otherwise yield `x2`.
@@ -6624,7 +6624,7 @@ keras$ops$vstack(xs)
 #' Values from which to choose when `condition` is `TRUE`.
 #'
 #' @param x2
-#' Values from which to choose when `condition` is `False`.
+#' Values from which to choose when `condition` is `FALSE`.
 #'
 #' @export
 #' @family numpy ops

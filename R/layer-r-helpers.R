@@ -238,7 +238,7 @@ normalize_scale <- function(name, scale, dims) {
 
 #' @param include_special_tokens If TRUE, the returned vocabulary will include
 #'   the padding and OOV tokens, and a term's index in the vocabulary will equal
-#'   the term's index when calling the layer. If False, the returned vocabulary
+#'   the term's index when calling the layer. If FALSE, the returned vocabulary
 #'   will not include any padding or OOV tokens.
 #' @rdname layer_text_vectorization
 #' @export
@@ -414,7 +414,7 @@ fix_string <- local({
   # the python session, but it can do no more than can be done from the R
   # process already.
   # Can't use ast.literal_eval() because it fails the 'is' test. E.g.:
-  # bool('foo' is ast.literal_eval("'foo'")) == False
+  # bool('foo' is ast.literal_eval("'foo'")) == FALSE
   function(x) {
     if (is.character(x))
       py_call(py_reparse, as.character(x))

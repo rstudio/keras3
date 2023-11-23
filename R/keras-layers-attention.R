@@ -29,10 +29,10 @@
 #' - `mask`: List of the following tensors:
 #'     - `query_mask`: A boolean mask tensor of shape `(batch_size, Tq)`.
 #'         If given, the output will be zero at the positions where
-#'         `mask==False`.
+#'         `mask==FALSE`.
 #'     - `value_mask`: A boolean mask tensor of shape `(batch_size, Tv)`.
 #'         If given, will apply the mask such that values at positions
-#'          where `mask==False` do not contribute to the result.
+#'          where `mask==FALSE` do not contribute to the result.
 #' - `return_attention_scores`: bool, it `TRUE`, returns the attention scores
 #'     (after masking and softmax) as an additional output argument.
 #' - `training`: Python boolean indicating whether the layer should behave in
@@ -40,7 +40,7 @@
 #' - `use_causal_mask`: Boolean. Set to `TRUE` for decoder self-attention. Adds
 #'     a mask such that position `i` cannot attend to positions `j > i`.
 #'     This prevents the flow of information from the future towards the
-#'     past. Defaults to `False`.
+#'     past. Defaults to `FALSE`.
 #'
 #' # Output
 #' Attention outputs of shape `(batch_size, Tq, dim)`.
@@ -105,10 +105,10 @@ function (object, use_scale = TRUE, dropout = 0, ...)
 #' - `mask`: List of the following tensors:
 #'     - `query_mask`: A boolean mask tensor of shape `(batch_size, Tq)`.
 #'         If given, the output will be zero at the positions where
-#'         `mask==False`.
+#'         `mask==FALSE`.
 #'     - `value_mask`: A boolean mask tensor of shape `(batch_size, Tv)`.
 #'         If given, will apply the mask such that values at positions
-#'          where `mask==False` do not contribute to the result.
+#'          where `mask==FALSE` do not contribute to the result.
 #' - `return_attention_scores`: bool, it `TRUE`, returns the attention scores
 #'     (after masking and softmax) as an additional output argument.
 #' - `training`: Python boolean indicating whether the layer should behave in
@@ -116,7 +116,7 @@ function (object, use_scale = TRUE, dropout = 0, ...)
 #' - `use_causal_mask`: Boolean. Set to `TRUE` for decoder self-attention. Adds
 #'     a mask such that position `i` cannot attend to positions `j > i`.
 #'     This prevents the flow of information from the future towards the
-#'     past. Defaults to `False`.
+#'     past. Defaults to `FALSE`.
 #'
 #' # Output
 #' Attention outputs of shape `(batch_size, Tq, dim)`.
@@ -197,11 +197,11 @@ function (object, use_scale = FALSE, score_mode = "dot", dropout = 0,
 #'     the missing batch dimensions and the head dimension.
 #' - `return_attention_scores`: A boolean to indicate whether the output
 #'     should be `(attention_output, attention_scores)` if `TRUE`, or
-#'     `attention_output` if `False`. Defaults to `False`.
+#'     `attention_output` if `FALSE`. Defaults to `FALSE`.
 #' - `training`: Python boolean indicating whether the layer should behave in
 #'     training mode (adding dropout) or in inference mode (no dropout).
 #'     Will go with either using the training mode of the parent
-#'     layer/model or `False` (inference) if there is no parent layer.
+#'     layer/model or `FALSE` (inference) if there is no parent layer.
 #' - `use_causal_mask`: A boolean to indicate whether to apply a causal mask to
 #'     prevent tokens from attending to future tokens (e.g., used in a
 #'     decoder Transformer).
@@ -315,11 +315,11 @@ function (object, head_dim, num_query_heads, num_key_value_heads,
 #'     the missing batch dimensions and the head dimension.
 #' - `return_attention_scores`: A boolean to indicate whether the output should
 #'     be `(attention_output, attention_scores)` if `TRUE`, or
-#'     `attention_output` if `False`. Defaults to `False`.
+#'     `attention_output` if `FALSE`. Defaults to `FALSE`.
 #' - `training`: Python boolean indicating whether the layer should behave in
 #'     training mode (adding dropout) or in inference mode (no dropout).
 #'     Will go with either using the training mode of the parent
-#'     layer/model, or `False` (inference) if there is no parent layer.
+#'     layer/model, or `FALSE` (inference) if there is no parent layer.
 #' - `use_causal_mask`: A boolean to indicate whether to apply a causal mask to
 #'     prevent tokens from attending to future tokens (e.g., used in a
 #'     decoder Transformer).

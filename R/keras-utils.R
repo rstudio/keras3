@@ -635,11 +635,11 @@ function (data)
 #'
 #' @param ragged
 #' Whether to return a Ragged dataset (where each sequence has its
-#' own length). Defaults to `False`.
+#' own length). Defaults to `FALSE`.
 #'
 #' @param shuffle
 #' Whether to shuffle the data. Defaults to `TRUE`.
-#' If set to `False`, sorts the data in alphanumeric order.
+#' If set to `FALSE`, sorts the data in alphanumeric order.
 #'
 #' @param seed
 #' Optional random seed for shuffling and transformations.
@@ -654,7 +654,7 @@ function (data)
 #'
 #' @param follow_links
 #' Whether to visits subdirectories pointed to by symlinks.
-#' Defaults to `False`.
+#' Defaults to `FALSE`.
 #'
 #' @export
 #' @family dataset utils
@@ -930,7 +930,7 @@ function (fname = NULL, origin = NULL, untar = FALSE, md5_hash = NULL,
 #'
 #' @param shuffle
 #' Whether to shuffle the data. Defaults to `TRUE`.
-#' If set to `False`, sorts the data in alphanumeric order.
+#' If set to `FALSE`, sorts the data in alphanumeric order.
 #'
 #' @param seed
 #' Optional random seed for shuffling and transformations.
@@ -954,7 +954,7 @@ function (fname = NULL, origin = NULL, untar = FALSE, md5_hash = NULL,
 #'
 #' @param follow_links
 #' Whether to visit subdirectories pointed to by symlinks.
-#' Defaults to `False`.
+#' Defaults to `FALSE`.
 #'
 #' @param crop_to_aspect_ratio
 #' If `TRUE`, resize the images without aspect
@@ -962,7 +962,7 @@ function (fname = NULL, origin = NULL, untar = FALSE, md5_hash = NULL,
 #' target aspect ratio, the output image will be cropped so as to
 #' return the largest possible window in the image
 #' (of size `image_size`) that matches the target aspect ratio. By
-#' default (`crop_to_aspect_ratio = False`), aspect ratio may not be
+#' default (`crop_to_aspect_ratio = FALSE`), aspect ratio may not be
 #' preserved.
 #'
 #' @param data_format
@@ -1542,7 +1542,7 @@ function (sequences, maxlen = NULL, dtype = "int32", padding = "pre",
 #'
 #' @param shuffle
 #' Whether to shuffle the data. Defaults to `TRUE`.
-#' If set to `False`, sorts the data in alphanumeric order.
+#' If set to `FALSE`, sorts the data in alphanumeric order.
 #'
 #' @param seed
 #' Optional random seed for shuffling and transformations.
@@ -1560,7 +1560,7 @@ function (sequences, maxlen = NULL, dtype = "int32", padding = "pre",
 #'
 #' @param follow_links
 #' Whether to visits subdirectories pointed to by symlinks.
-#' Defaults to `False`.
+#' Defaults to `FALSE`.
 #'
 #' @export
 #' @family dataset utils
