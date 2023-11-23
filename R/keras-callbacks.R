@@ -529,7 +529,7 @@ function (filepath, monitor = "val_loss", verbose = 0L, save_best_only = FALSE,
 #' @description
 #'
 #' # Raises
-#'     ValueError: In case of invalid `count_mode`.
+#' ValueError: In case of invalid `count_mode`.
 #'
 #' @param count_mode
 #' One of `"steps"` or `"samples"`.

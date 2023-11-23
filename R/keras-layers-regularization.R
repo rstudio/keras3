@@ -10,7 +10,7 @@
 #' when using this layer as the first layer in a model.
 #'
 #' # Output Shape
-#'     Same shape as input.
+#' Same shape as input.
 #'
 #' @param l1
 #' L1 regularization factor (positive float).

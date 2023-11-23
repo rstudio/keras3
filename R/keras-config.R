@@ -180,7 +180,7 @@ function (value)
 #' ```
 #'
 #' # Raises
-#'     ValueError: In case of invalid value.
+#' ValueError: In case of invalid value.
 #'
 #' @param value
 #' String; `'float16'`, `'float32'`, or `'float64'`.

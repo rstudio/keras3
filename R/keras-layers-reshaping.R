@@ -19,7 +19,7 @@
 #' 3D tensor with shape `(batch_size, axis_to_crop, features)`
 #'
 #' # Output Shape
-#'     3D tensor with shape `(batch_size, cropped_axis, features)`
+#' 3D tensor with shape `(batch_size, cropped_axis, features)`
 #'
 #' @param cropping
 #' Int, or list of int (length 2).
@@ -315,7 +315,7 @@ function (object, dims, ...)
 #' 2D tensor with shape `(batch_size, features)`.
 #'
 #' # Output Shape
-#'     3D tensor with shape `(batch_size, n, features)`.
+#' 3D tensor with shape `(batch_size, n, features)`.
 #'
 #' @param n
 #' Integer, repetition factor.
@@ -421,7 +421,7 @@ function (object, target_shape, ...)
 #' 3D tensor with shape: `(batch_size, steps, features)`.
 #'
 #' # Output Shape
-#'     3D tensor with shape: `(batch_size, upsampled_steps, features)`.
+#' 3D tensor with shape: `(batch_size, upsampled_steps, features)`.
 #'
 #' @param size
 #' Integer. Upsampling factor.
@@ -615,7 +615,7 @@ function (object, size = list(2L, 2L, 2L), data_format = NULL,
 #' 3D tensor with shape `(batch_size, axis_to_pad, features)`
 #'
 #' # Output Shape
-#'     3D tensor with shape `(batch_size, padded_axis, features)`
+#' 3D tensor with shape `(batch_size, padded_axis, features)`
 #'
 #' @param padding
 #' Int, or list of int (length 2), or named listionary.
