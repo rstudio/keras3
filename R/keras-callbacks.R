@@ -25,7 +25,6 @@
 #'
 #' # Examples
 #'
-#'
 #' ```{r}
 #' callback_interrupting <- new_callback_class(
 #'   "InterruptingCallback",

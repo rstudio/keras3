@@ -7,6 +7,7 @@
 \alias{[.keras_shape}
 \alias{r_to_py.keras_shape}
 \alias{as.integer.keras_shape}
+\alias{as.list.keras_shape}
 \title{Tensor shape utility}
 \usage{
 shape(...)
@@ -20,20 +21,21 @@ shape(...)
 \method{r_to_py}{keras_shape}(x, convert = FALSE)
 
 \method{as.integer}{keras_shape}(x, ...)
+
+\method{as.list}{keras_shape}(x)
 }
 \arguments{
 \item{...}{A shape specification. Numerics, \code{NULL} and tensors are valid.
 \code{NULL}, \code{NA}, and \code{-1L} can be used to specify an unspecified dim size.
-Tensors are dispatched to \code{k_shape()} to extract the tensor shape. All
-other objects are coerced via \code{as.integer()}.}
+Tensors are dispatched to \code{k_shape()} to extract the tensor shape. Values
+wrapped in \code{I()} are used asis (see examples). All other objects are coerced
+via \code{as.integer()}.}
 }
 \value{
 A list with a \code{"keras_shape"} class attribute. Each element of the
-list will be either
-a) \code{NULL},
-b) an integer or
-c) a scalar integer tensor (e.g., when supplied a TF tensor with a
-unspecified dimension in a function being traced).
+list will be either a) \code{NULL}, b) an integer or c) a scalar integer tensor
+(e.g., when supplied a TF tensor with a unspecified dimension in a function
+being traced).
 }
 \description{
 This function can be used to create or get the shape of an object.
@@ -45,54 +47,35 @@ This function can be used to create or get the shape of an object.
 \if{html}{\out{<div class="sourceCode">}}\preformatted{## shape(1, 2, 3)
 }\if{html}{\out{</div>}}
 
+3 ways to specify an unknown dimension
+
 \if{html}{\out{<div class="sourceCode r">}}\preformatted{shape(NA,   2, 3)
+shape(NULL, 2, 3)
+shape(-1,   2, 3)
 }\if{html}{\out{</div>}}
 
 \if{html}{\out{<div class="sourceCode">}}\preformatted{## shape(NA, 2, 3)
+## shape(NA, 2, 3)
+## shape(NA, 2, 3)
 }\if{html}{\out{</div>}}
 
-\if{html}{\out{<div class="sourceCode r">}}\preformatted{shape(NULL, 2, 3)
-}\if{html}{\out{</div>}}
-
-\if{html}{\out{<div class="sourceCode">}}\preformatted{## shape(NA, 2, 3)
-}\if{html}{\out{</div>}}
-
-\if{html}{\out{<div class="sourceCode r">}}\preformatted{shape(-1,   2, 3)
-}\if{html}{\out{</div>}}
-
-\if{html}{\out{<div class="sourceCode">}}\preformatted{## shape(NA, 2, 3)
-}\if{html}{\out{</div>}}
+Most functions that take a 'shape' argument also coerce with \code{shape()}
 
 \if{html}{\out{<div class="sourceCode r">}}\preformatted{layer_input(c(1, 2, 3))
+layer_input(shape(1, 2, 3))
 }\if{html}{\out{</div>}}
 
 \if{html}{\out{<div class="sourceCode">}}\preformatted{## <KerasTensor shape=(None, 1, 2, 3), dtype=float32, sparse=None, name=keras_tensor>
+## <KerasTensor shape=(None, 1, 2, 3), dtype=float32, sparse=None, name=keras_tensor_1>
 }\if{html}{\out{</div>}}
 
-\if{html}{\out{<div class="sourceCode r">}}\preformatted{layer_input(shape(1, 2, 3))
-}\if{html}{\out{</div>}}
-
-\if{html}{\out{<div class="sourceCode">}}\preformatted{## <KerasTensor shape=(None, 1, 2, 3), dtype=float32, sparse=None, name=keras_tensor_1>
-}\if{html}{\out{</div>}}
+You can also use \code{shape()} to get the shape of a tensor
 
 \if{html}{\out{<div class="sourceCode r">}}\preformatted{symbolic_tensor <- layer_input(shape(1, 2, 3))
-
 shape(symbolic_tensor)
 }\if{html}{\out{</div>}}
 
 \if{html}{\out{<div class="sourceCode">}}\preformatted{## shape(NA, 1, 2, 3)
-}\if{html}{\out{</div>}}
-
-\if{html}{\out{<div class="sourceCode r">}}\preformatted{shape(symbolic_tensor, 4)
-}\if{html}{\out{</div>}}
-
-\if{html}{\out{<div class="sourceCode">}}\preformatted{## shape(NA, 1, 2, 3, 4)
-}\if{html}{\out{</div>}}
-
-\if{html}{\out{<div class="sourceCode r">}}\preformatted{shape(5, symbolic_tensor, 4)
-}\if{html}{\out{</div>}}
-
-\if{html}{\out{<div class="sourceCode">}}\preformatted{## shape(5, NA, 1, 2, 3, 4)
 }\if{html}{\out{</div>}}
 
 \if{html}{\out{<div class="sourceCode r">}}\preformatted{eager_tensor <- op_ones(c(1,2,3))
@@ -106,6 +89,89 @@ shape(eager_tensor)
 }\if{html}{\out{</div>}}
 
 \if{html}{\out{<div class="sourceCode">}}\preformatted{## shape(1, 2, 3)
+}\if{html}{\out{</div>}}
+
+Combine or expand shapes
+
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{shape(symbolic_tensor, 4)
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode">}}\preformatted{## shape(NA, 1, 2, 3, 4)
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{shape(5, symbolic_tensor, 4)
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode">}}\preformatted{## shape(5, NA, 1, 2, 3, 4)
+}\if{html}{\out{</div>}}
+
+In graph mode, a shape might contain a scalar integer tensor for unknown
+axes.
+
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{tfn <- tensorflow::tf_function(function(x) \{
+  print(shape(x))
+  x
+\},
+input_signature = list(tensorflow::tf$TensorSpec(shape(1, NA, 3))))
+invisible(tfn(op_ones(shape(1, 2, 3))))
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode">}}\preformatted{## shape(1, Tensor("strided_slice:0", shape=(), dtype=int32), 3)
+}\if{html}{\out{</div>}}
+
+A useful pattern is to unpack the \code{shape()} with \verb{\%<-\%}, like this:
+
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{c(batch_size, seq_len, channels) \%<-\% shape(x)
+}\if{html}{\out{</div>}}
+
+If you are unpacking \code{shape()} in graph mode, and then want to reassemble the
+axes with \code{shape()}, you'll have to wrap tensors with \code{I()} to use the tensor
+itself, rather than the shape of the tensor.
+
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{echo_print <- function(x) \{ message("> ", deparse(substitute(x))); print(x) \}
+tfn <- tensorflow::tf_function(function(x) \{
+  c(axis1, axis2, axis3) \%<-\% shape(x)
+  str(list(axis1 = axis1, axis2 = axis2, axis3 = axis3))
+
+  echo_print(shape(axis2))               # resolve axis2 tensor shape
+  echo_print(shape(axis1, axis2, axis3)) # resolve axis2 tensor shape
+
+  echo_print(shape(I(axis2)))               # use axis2 tensor as axis value
+  echo_print(shape(axis1, I(axis2), axis3)) # use axis2 tensor as axis value
+  x
+\},
+input_signature = list(tensorflow::tf$TensorSpec(shape(1, NA, 3))))
+invisible(tfn(op_ones(shape(1, 2, 3))))
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode">}}\preformatted{## List of 3
+##  $ axis1: int 1
+##  $ axis2:<tf.Tensor 'strided_slice:0' shape=() dtype=int32>
+##  $ axis3: int 3
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode">}}\preformatted{## > shape(axis2)
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode">}}\preformatted{## shape()
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode">}}\preformatted{## > shape(axis1, axis2, axis3)
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode">}}\preformatted{## shape(1, 3)
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode">}}\preformatted{## > shape(I(axis2))
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode">}}\preformatted{## shape(Tensor("strided_slice:0", shape=(), dtype=int32))
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode">}}\preformatted{## > shape(axis1, I(axis2), axis3)
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode">}}\preformatted{## shape(1, Tensor("strided_slice:0", shape=(), dtype=int32), 3)
 }\if{html}{\out{</div>}}
 }
 
