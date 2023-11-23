@@ -69,10 +69,10 @@
 #' current_variable_value`.
 #'
 #' @param ema_overwrite_frequency
-#' Int or None, defaults to None. Only used if
+#' Int or `NULL`, defaults to `NULL`. Only used if
 #' `use_ema=TRUE`. Every `ema_overwrite_frequency` steps of iterations,
 #' we overwrite the model variable by its moving average.
-#' If None, the optimizer
+#' If `NULL`, the optimizer
 #' does not overwrite model variables in the middle of training, and you
 #' need to explicitly overwrite the variables at the end of training
 #' by calling `optimizer.finalize_variable_values()`
@@ -82,7 +82,7 @@
 #' and you don't need to do anything.
 #'
 #' @param loss_scale_factor
-#' Float or `None`. If a float, the scale factor will
+#' Float or `NULL`. If a float, the scale factor will
 #' be multiplied the loss before computing gradients, and the inverse of
 #' the scale factor will be multiplied by the gradients before updating
 #' variables. Useful for preventing underflow during mixed precision
@@ -186,10 +186,10 @@ function (learning_rate = 0.001, rho = 0.95, epsilon = 1e-07,
 #' current_variable_value`.
 #'
 #' @param ema_overwrite_frequency
-#' Int or None, defaults to None. Only used if
+#' Int or `NULL`, defaults to `NULL`. Only used if
 #' `use_ema=TRUE`. Every `ema_overwrite_frequency` steps of iterations,
 #' we overwrite the model variable by its moving average.
-#' If None, the optimizer
+#' If `NULL`, the optimizer
 #' does not overwrite model variables in the middle of training, and you
 #' need to explicitly overwrite the variables at the end of training
 #' by calling `optimizer.finalize_variable_values()`
@@ -199,7 +199,7 @@ function (learning_rate = 0.001, rho = 0.95, epsilon = 1e-07,
 #' and you don't need to do anything.
 #'
 #' @param loss_scale_factor
-#' Float or `None`. If a float, the scale factor will
+#' Float or `NULL`. If a float, the scale factor will
 #' be multiplied the loss before computing gradients, and the inverse of
 #' the scale factor will be multiplied by the gradients before updating
 #' variables. Useful for preventing underflow during mixed precision
@@ -290,10 +290,10 @@ function (learning_rate = 0.001, beta_2_decay = -0.8, epsilon_1 = 1e-30,
 #' current_variable_value`.
 #'
 #' @param ema_overwrite_frequency
-#' Int or None, defaults to None. Only used if
+#' Int or `NULL`, defaults to `NULL`. Only used if
 #' `use_ema=TRUE`. Every `ema_overwrite_frequency` steps of iterations,
 #' we overwrite the model variable by its moving average.
-#' If None, the optimizer
+#' If `NULL`, the optimizer
 #' does not overwrite model variables in the middle of training, and you
 #' need to explicitly overwrite the variables at the end of training
 #' by calling `optimizer.finalize_variable_values()`
@@ -303,7 +303,7 @@ function (learning_rate = 0.001, beta_2_decay = -0.8, epsilon_1 = 1e-30,
 #' and you don't need to do anything.
 #'
 #' @param loss_scale_factor
-#' Float or `None`. If a float, the scale factor will
+#' Float or `NULL`. If a float, the scale factor will
 #' be multiplied the loss before computing gradients, and the inverse of
 #' the scale factor will be multiplied by the gradients before updating
 #' variables. Useful for preventing underflow during mixed precision
@@ -407,10 +407,10 @@ function (learning_rate = 0.001, initial_accumulator_value = 0.1,
 #' current_variable_value`.
 #'
 #' @param ema_overwrite_frequency
-#' Int or None, defaults to None. Only used if
+#' Int or `NULL`, defaults to `NULL`. Only used if
 #' `use_ema=TRUE`. Every `ema_overwrite_frequency` steps of iterations,
 #' we overwrite the model variable by its moving average.
-#' If None, the optimizer
+#' If `NULL`, the optimizer
 #' does not overwrite model variables in the middle of training, and you
 #' need to explicitly overwrite the variables at the end of training
 #' by calling `optimizer.finalize_variable_values()`
@@ -420,7 +420,7 @@ function (learning_rate = 0.001, initial_accumulator_value = 0.1,
 #' and you don't need to do anything.
 #'
 #' @param loss_scale_factor
-#' Float or `None`. If a float, the scale factor will
+#' Float or `NULL`. If a float, the scale factor will
 #' be multiplied the loss before computing gradients, and the inverse of
 #' the scale factor will be multiplied by the gradients before updating
 #' variables. Useful for preventing underflow during mixed precision
@@ -660,10 +660,10 @@ function (learning_rate = 0.001, beta_1 = 0.9, beta_2 = 0.999,
 #' current_variable_value`.
 #'
 #' @param ema_overwrite_frequency
-#' Int or None, defaults to None. Only used if
+#' Int or `NULL`, defaults to `NULL`. Only used if
 #' `use_ema=TRUE`. Every `ema_overwrite_frequency` steps of iterations,
 #' we overwrite the model variable by its moving average.
-#' If None, the optimizer
+#' If `NULL`, the optimizer
 #' does not overwrite model variables in the middle of training, and you
 #' need to explicitly overwrite the variables at the end of training
 #' by calling `optimizer.finalize_variable_values()`
@@ -673,7 +673,7 @@ function (learning_rate = 0.001, beta_1 = 0.9, beta_2 = 0.999,
 #' and you don't need to do anything.
 #'
 #' @param loss_scale_factor
-#' Float or `None`. If a float, the scale factor will
+#' Float or `NULL`. If a float, the scale factor will
 #' be multiplied the loss before computing gradients, and the inverse of
 #' the scale factor will be multiplied by the gradients before updating
 #' variables. Useful for preventing underflow during mixed precision
@@ -932,10 +932,10 @@ function (learning_rate = 0.001, learning_rate_power = -0.5,
 #' current_variable_value`.
 #'
 #' @param ema_overwrite_frequency
-#' Int or None, defaults to None. Only used if
+#' Int or `NULL`, defaults to `NULL`. Only used if
 #' `use_ema=TRUE`. Every `ema_overwrite_frequency` steps of iterations,
 #' we overwrite the model variable by its moving average.
-#' If None, the optimizer
+#' If `NULL`, the optimizer
 #' does not overwrite model variables in the middle of training, and you
 #' need to explicitly overwrite the variables at the end of training
 #' by calling `optimizer.finalize_variable_values()`
@@ -945,7 +945,7 @@ function (learning_rate = 0.001, learning_rate_power = -0.5,
 #' and you don't need to do anything.
 #'
 #' @param loss_scale_factor
-#' Float or `None`. If a float, the scale factor will
+#' Float or `NULL`. If a float, the scale factor will
 #' be multiplied the loss before computing gradients, and the inverse of
 #' the scale factor will be multiplied by the gradients before updating
 #' variables. Useful for preventing underflow during mixed precision
@@ -1038,10 +1038,10 @@ function (learning_rate = 0.001, beta_1 = 0.9, beta_2 = 0.99,
 #' current_variable_value`.
 #'
 #' @param ema_overwrite_frequency
-#' Int or None, defaults to None. Only used if
+#' Int or `NULL`, defaults to `NULL`. Only used if
 #' `use_ema=TRUE`. Every `ema_overwrite_frequency` steps of iterations,
 #' we overwrite the model variable by its moving average.
-#' If None, the optimizer
+#' If `NULL`, the optimizer
 #' does not overwrite model variables in the middle of training, and you
 #' need to explicitly overwrite the variables at the end of training
 #' by calling `optimizer.finalize_variable_values()`
@@ -1051,7 +1051,7 @@ function (learning_rate = 0.001, beta_1 = 0.9, beta_2 = 0.99,
 #' and you don't need to do anything.
 #'
 #' @param loss_scale_factor
-#' Float or `None`. If a float, the scale factor will
+#' Float or `NULL`. If a float, the scale factor will
 #' be multiplied the loss before computing gradients, and the inverse of
 #' the scale factor will be multiplied by the gradients before updating
 #' variables. Useful for preventing underflow during mixed precision
@@ -1146,10 +1146,10 @@ function (inner_optimizer, initial_scale = 32768, dynamic_growth_steps = 2000L,
 #' current_variable_value`.
 #'
 #' @param ema_overwrite_frequency
-#' Int or None, defaults to None. Only used if
+#' Int or `NULL`, defaults to `NULL`. Only used if
 #' `use_ema=TRUE`. Every `ema_overwrite_frequency` steps of iterations,
 #' we overwrite the model variable by its moving average.
-#' If None, the optimizer
+#' If `NULL`, the optimizer
 #' does not overwrite model variables in the middle of training, and you
 #' need to explicitly overwrite the variables at the end of training
 #' by calling `optimizer.finalize_variable_values()`
@@ -1159,7 +1159,7 @@ function (inner_optimizer, initial_scale = 32768, dynamic_growth_steps = 2000L,
 #' and you don't need to do anything.
 #'
 #' @param loss_scale_factor
-#' Float or `None`. If a float, the scale factor will
+#' Float or `NULL`. If a float, the scale factor will
 #' be multiplied the loss before computing gradients, and the inverse of
 #' the scale factor will be multiplied by the gradients before updating
 #' variables. Useful for preventing underflow during mixed precision

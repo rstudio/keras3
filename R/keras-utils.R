@@ -570,7 +570,7 @@ function (data)
 #' @returns
 #' A `tf.data.Dataset` object.
 #'
-#' - If `label_mode` is `None`, it yields `string` tensors of shape
+#' - If `label_mode` is `NULL`, it yields `string` tensors of shape
 #'   `(batch_size,)`, containing the contents of a batch of audio files.
 #' - Otherwise, it yields a tuple `(audio, labels)`, where `audio`
 #'   has shape `(batch_size, sequence_length, num_channels)` and `labels`
@@ -595,7 +595,7 @@ function (data)
 #'
 #' @param labels
 #' Either "inferred" (labels are generated from the directory
-#' structure), `None` (no labels), or a list/tuple of integer labels
+#' structure), `NULL` (no labels), or a list/tuple of integer labels
 #' of the same size as the number of audio files found in
 #' the directory. Labels should be sorted according to the
 #' alphanumeric order of the audio file paths
@@ -610,7 +610,7 @@ function (data)
 #' - `"binary"` means that the labels (there can be only 2)
 #'   are encoded as `float32` scalars with values 0
 #'   or 1 (e.g. for `binary_crossentropy`).
-#' - `None` (no labels).
+#' - `NULL` (no labels).
 #'
 #' @param class_names
 #' Only valid if "labels" is `"inferred"`.
@@ -619,7 +619,7 @@ function (data)
 #' of the classes (otherwise alphanumerical order is used).
 #'
 #' @param batch_size
-#' Size of the batches of data. Default: 32. If `None`,
+#' Size of the batches of data. Default: 32. If `NULL`,
 #' the data will not be batched
 #' (the dataset will yield individual samples).
 #'
@@ -629,7 +629,7 @@ function (data)
 #' @param output_sequence_length
 #' Maximum length of an audio sequence. Audio files
 #' longer than this will be truncated to `output_sequence_length`.
-#' If set to `None`, then all sequences in the same batch will
+#' If set to `NULL`, then all sequences in the same batch will
 #' be padded to the
 #' length of the longest sequence in the batch.
 #'
@@ -853,7 +853,7 @@ function (fname = NULL, origin = NULL, untar = FALSE, md5_hash = NULL,
 #' @returns
 #' A `tf.data.Dataset` object.
 #'
-#' - If `label_mode` is `None`, it yields `float32` tensors of shape
+#' - If `label_mode` is `NULL`, it yields `float32` tensors of shape
 #'     `(batch_size, image_size[0], image_size[1], num_channels)`,
 #'     encoding images (see below for rules regarding `num_channels`).
 #' - Otherwise, it yields a tuple `(images, labels)`, where `images` has
@@ -888,7 +888,7 @@ function (fname = NULL, origin = NULL, untar = FALSE, md5_hash = NULL,
 #' @param labels
 #' Either `"inferred"`
 #' (labels are generated from the directory structure),
-#' `None` (no labels),
+#' `NULL` (no labels),
 #' or a list/tuple of integer labels of the same size as the number of
 #' image files found in the directory. Labels should be sorted
 #' according to the alphanumeric order of the image file paths
@@ -904,7 +904,7 @@ function (fname = NULL, origin = NULL, untar = FALSE, md5_hash = NULL,
 #' - `"binary"` means that the labels (there can be only 2)
 #'     are encoded as `float32` scalars with values 0 or 1
 #'     (e.g. for `binary_crossentropy`).
-#' - `None` (no labels).
+#' - `NULL` (no labels).
 #'
 #' @param class_names
 #' Only valid if `labels` is `"inferred"`.
@@ -919,7 +919,7 @@ function (fname = NULL, origin = NULL, untar = FALSE, md5_hash = NULL,
 #'
 #' @param batch_size
 #' Size of the batches of data. Defaults to 32.
-#' If `None`, the data will not be batched
+#' If `NULL`, the data will not be batched
 #' (the dataset will yield individual samples).
 #'
 #' @param image_size
@@ -966,7 +966,7 @@ function (fname = NULL, origin = NULL, untar = FALSE, md5_hash = NULL,
 #' preserved.
 #'
 #' @param data_format
-#' If None uses keras.config.image_data_format()
+#' If `NULL` uses keras.config.image_data_format()
 #' otherwise either 'channel_last' or 'channel_first'.
 #'
 #' @export
@@ -1482,7 +1482,7 @@ function (sequences, maxlen = NULL, dtype = "int32", padding = "pre",
 #' @returns
 #' A `tf.data.Dataset` object.
 #'
-#' - If `label_mode` is `None`, it yields `string` tensors of shape
+#' - If `label_mode` is `NULL`, it yields `string` tensors of shape
 #'     `(batch_size,)`, containing the contents of a batch of text files.
 #' - Otherwise, it yields a tuple `(texts, labels)`, where `texts`
 #'     has shape `(batch_size,)` and `labels` follows the format described
@@ -1507,7 +1507,7 @@ function (sequences, maxlen = NULL, dtype = "int32", padding = "pre",
 #' @param labels
 #' Either `"inferred"`
 #' (labels are generated from the directory structure),
-#' `None` (no labels),
+#' `NULL` (no labels),
 #' or a list/tuple of integer labels of the same size as the number of
 #' text files found in the directory. Labels should be sorted according
 #' to the alphanumeric order of the text file paths
@@ -1523,7 +1523,7 @@ function (sequences, maxlen = NULL, dtype = "int32", padding = "pre",
 #' - `"binary"` means that the labels (there can be only 2)
 #'     are encoded as `float32` scalars with values 0 or 1
 #'     (e.g. for `binary_crossentropy`).
-#' - `None` (no labels).
+#' - `NULL` (no labels).
 #'
 #' @param class_names
 #' Only valid if `"labels"` is `"inferred"`.
@@ -1533,7 +1533,7 @@ function (sequences, maxlen = NULL, dtype = "int32", padding = "pre",
 #'
 #' @param batch_size
 #' Size of the batches of data. Defaults to 32.
-#' If `None`, the data will not be batched
+#' If `NULL`, the data will not be batched
 #' (the dataset will yield individual samples).
 #'
 #' @param max_length

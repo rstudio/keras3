@@ -327,7 +327,7 @@ function (object, head_dim, num_query_heads, num_key_value_heads,
 #' @returns
 #' attention_output: The result of the computation, of shape `(B, T, E)`,
 #'     where `T` is for target sequence shapes and `E` is the query input
-#'     last dimension if `output_shape` is `None`. Otherwise, the
+#'     last dimension if `output_shape` is `NULL`. Otherwise, the
 #'     multi-head outputs are projected to the shape specified by
 #'     `output_shape`.
 #' attention_scores: (Optional) multi-head attention coefficients over
@@ -354,7 +354,7 @@ function (object, head_dim, num_query_heads, num_key_value_heads,
 #' feature dim (the query input's last dimension).
 #'
 #' @param attention_axes
-#' axes over which the attention is applied. `None` means
+#' axes over which the attention is applied. `NULL` means
 #' attention over all axes, but batch, heads, and features.
 #'
 #' @param kernel_initializer

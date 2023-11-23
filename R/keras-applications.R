@@ -42,7 +42,7 @@
 #' layer at the top of the network. Defaults to `TRUE`.
 #'
 #' @param weights
-#' One of `None` (random initialization),
+#' One of `NULL` (random initialization),
 #' `"imagenet"` (pre-training on ImageNet-1k), or the path to the weights
 #' file to be loaded. Defaults to `"imagenet"`.
 #'
@@ -58,8 +58,8 @@
 #'
 #' @param pooling
 #' Optional pooling mode for feature extraction
-#' when `include_top` is `FALSE`. Defaults to None.
-#' - `None` means that the output of the model will be
+#' when `include_top` is `FALSE`. Defaults to `NULL`.
+#' - `NULL` means that the output of the model will be
 #' the 4D tensor output of the last convolutional layer.
 #' - `avg` means that global average pooling
 #' will be applied to the output of the
@@ -77,10 +77,10 @@
 #' @param classifier_activation
 #' A `str` or callable. The activation function to use
 #' on the "top" layer. Ignored unless `include_top=TRUE`. Set
-#' `classifier_activation=None` to return the logits of the "top" layer.
+#' `classifier_activation=NULL` to return the logits of the "top" layer.
 #' Defaults to `"softmax"`.
 #' When loading pretrained weights, `classifier_activation` can only
-#' be `None` or `"softmax"`.
+#' be `NULL` or `"softmax"`.
 #'
 #' @param include_preprocessing
 #' Boolean, whether to include the preprocessing layer at the bottom of the network.
@@ -144,7 +144,7 @@ function (model_name = "convnext_base", include_top = TRUE, include_preprocessin
 #' layer at the top of the network. Defaults to `TRUE`.
 #'
 #' @param weights
-#' One of `None` (random initialization),
+#' One of `NULL` (random initialization),
 #' `"imagenet"` (pre-training on ImageNet-1k), or the path to the weights
 #' file to be loaded. Defaults to `"imagenet"`.
 #'
@@ -160,8 +160,8 @@ function (model_name = "convnext_base", include_top = TRUE, include_preprocessin
 #'
 #' @param pooling
 #' Optional pooling mode for feature extraction
-#' when `include_top` is `FALSE`. Defaults to None.
-#' - `None` means that the output of the model will be
+#' when `include_top` is `FALSE`. Defaults to `NULL`.
+#' - `NULL` means that the output of the model will be
 #' the 4D tensor output of the last convolutional layer.
 #' - `avg` means that global average pooling
 #' will be applied to the output of the
@@ -179,10 +179,10 @@ function (model_name = "convnext_base", include_top = TRUE, include_preprocessin
 #' @param classifier_activation
 #' A `str` or callable. The activation function to use
 #' on the "top" layer. Ignored unless `include_top=TRUE`. Set
-#' `classifier_activation=None` to return the logits of the "top" layer.
+#' `classifier_activation=NULL` to return the logits of the "top" layer.
 #' Defaults to `"softmax"`.
 #' When loading pretrained weights, `classifier_activation` can only
-#' be `None` or `"softmax"`.
+#' be `NULL` or `"softmax"`.
 #'
 #' @param include_preprocessing
 #' Boolean, whether to include the preprocessing layer at the bottom of the network.
@@ -246,7 +246,7 @@ function (model_name = "convnext_large", include_top = TRUE,
 #' layer at the top of the network. Defaults to `TRUE`.
 #'
 #' @param weights
-#' One of `None` (random initialization),
+#' One of `NULL` (random initialization),
 #' `"imagenet"` (pre-training on ImageNet-1k), or the path to the weights
 #' file to be loaded. Defaults to `"imagenet"`.
 #'
@@ -262,8 +262,8 @@ function (model_name = "convnext_large", include_top = TRUE,
 #'
 #' @param pooling
 #' Optional pooling mode for feature extraction
-#' when `include_top` is `FALSE`. Defaults to None.
-#' - `None` means that the output of the model will be
+#' when `include_top` is `FALSE`. Defaults to `NULL`.
+#' - `NULL` means that the output of the model will be
 #' the 4D tensor output of the last convolutional layer.
 #' - `avg` means that global average pooling
 #' will be applied to the output of the
@@ -281,10 +281,10 @@ function (model_name = "convnext_large", include_top = TRUE,
 #' @param classifier_activation
 #' A `str` or callable. The activation function to use
 #' on the "top" layer. Ignored unless `include_top=TRUE`. Set
-#' `classifier_activation=None` to return the logits of the "top" layer.
+#' `classifier_activation=NULL` to return the logits of the "top" layer.
 #' Defaults to `"softmax"`.
 #' When loading pretrained weights, `classifier_activation` can only
-#' be `None` or `"softmax"`.
+#' be `NULL` or `"softmax"`.
 #'
 #' @param include_preprocessing
 #' Boolean, whether to include the preprocessing layer at the bottom of the network.
@@ -348,7 +348,7 @@ function (model_name = "convnext_small", include_top = TRUE,
 #' layer at the top of the network. Defaults to `TRUE`.
 #'
 #' @param weights
-#' One of `None` (random initialization),
+#' One of `NULL` (random initialization),
 #' `"imagenet"` (pre-training on ImageNet-1k), or the path to the weights
 #' file to be loaded. Defaults to `"imagenet"`.
 #'
@@ -364,8 +364,8 @@ function (model_name = "convnext_small", include_top = TRUE,
 #'
 #' @param pooling
 #' Optional pooling mode for feature extraction
-#' when `include_top` is `FALSE`. Defaults to None.
-#' - `None` means that the output of the model will be
+#' when `include_top` is `FALSE`. Defaults to `NULL`.
+#' - `NULL` means that the output of the model will be
 #' the 4D tensor output of the last convolutional layer.
 #' - `avg` means that global average pooling
 #' will be applied to the output of the
@@ -383,10 +383,10 @@ function (model_name = "convnext_small", include_top = TRUE,
 #' @param classifier_activation
 #' A `str` or callable. The activation function to use
 #' on the "top" layer. Ignored unless `include_top=TRUE`. Set
-#' `classifier_activation=None` to return the logits of the "top" layer.
+#' `classifier_activation=NULL` to return the logits of the "top" layer.
 #' Defaults to `"softmax"`.
 #' When loading pretrained weights, `classifier_activation` can only
-#' be `None` or `"softmax"`.
+#' be `NULL` or `"softmax"`.
 #'
 #' @param include_preprocessing
 #' Boolean, whether to include the preprocessing layer at the bottom of the network.
@@ -450,7 +450,7 @@ function (model_name = "convnext_tiny", include_top = TRUE, include_preprocessin
 #' layer at the top of the network. Defaults to `TRUE`.
 #'
 #' @param weights
-#' One of `None` (random initialization),
+#' One of `NULL` (random initialization),
 #' `"imagenet"` (pre-training on ImageNet-1k), or the path to the weights
 #' file to be loaded. Defaults to `"imagenet"`.
 #'
@@ -466,8 +466,8 @@ function (model_name = "convnext_tiny", include_top = TRUE, include_preprocessin
 #'
 #' @param pooling
 #' Optional pooling mode for feature extraction
-#' when `include_top` is `FALSE`. Defaults to None.
-#' - `None` means that the output of the model will be
+#' when `include_top` is `FALSE`. Defaults to `NULL`.
+#' - `NULL` means that the output of the model will be
 #' the 4D tensor output of the last convolutional layer.
 #' - `avg` means that global average pooling
 #' will be applied to the output of the
@@ -485,10 +485,10 @@ function (model_name = "convnext_tiny", include_top = TRUE, include_preprocessin
 #' @param classifier_activation
 #' A `str` or callable. The activation function to use
 #' on the "top" layer. Ignored unless `include_top=TRUE`. Set
-#' `classifier_activation=None` to return the logits of the "top" layer.
+#' `classifier_activation=NULL` to return the logits of the "top" layer.
 #' Defaults to `"softmax"`.
 #' When loading pretrained weights, `classifier_activation` can only
-#' be `None` or `"softmax"`.
+#' be `NULL` or `"softmax"`.
 #'
 #' @param include_preprocessing
 #' Boolean, whether to include the preprocessing layer at the bottom of the network.
@@ -536,7 +536,7 @@ function (model_name = "convnext_xlarge", include_top = TRUE,
 #' layer at the top of the network.
 #'
 #' @param weights
-#' one of `None` (random initialization),
+#' one of `NULL` (random initialization),
 #' `"imagenet"` (pre-training on ImageNet),
 #' or the path to the weights file to be loaded.
 #'
@@ -557,7 +557,7 @@ function (model_name = "convnext_xlarge", include_top = TRUE,
 #' @param pooling
 #' Optional pooling mode for feature extraction
 #' when `include_top` is `FALSE`.
-#' - `None` means that the output of the model will be
+#' - `NULL` means that the output of the model will be
 #'     the 4D tensor output of the
 #'     last convolutional block.
 #' - `avg` means that global average pooling
@@ -576,9 +576,9 @@ function (model_name = "convnext_xlarge", include_top = TRUE,
 #' A `str` or callable.
 #' The activation function to use
 #' on the "top" layer. Ignored unless `include_top=TRUE`. Set
-#' `classifier_activation=None` to return the logits
+#' `classifier_activation=NULL` to return the logits
 #' of the "top" layer. When loading pretrained weights,
-#' `classifier_activation` can only be `None` or `"softmax"`.
+#' `classifier_activation` can only be `NULL` or `"softmax"`.
 #'
 #' @export
 #' @seealso
@@ -619,7 +619,7 @@ function (include_top = TRUE, weights = "imagenet", input_tensor = NULL,
 #' layer at the top of the network.
 #'
 #' @param weights
-#' one of `None` (random initialization),
+#' one of `NULL` (random initialization),
 #' `"imagenet"` (pre-training on ImageNet),
 #' or the path to the weights file to be loaded.
 #'
@@ -640,7 +640,7 @@ function (include_top = TRUE, weights = "imagenet", input_tensor = NULL,
 #' @param pooling
 #' Optional pooling mode for feature extraction
 #' when `include_top` is `FALSE`.
-#' - `None` means that the output of the model will be
+#' - `NULL` means that the output of the model will be
 #'     the 4D tensor output of the
 #'     last convolutional block.
 #' - `avg` means that global average pooling
@@ -659,9 +659,9 @@ function (include_top = TRUE, weights = "imagenet", input_tensor = NULL,
 #' A `str` or callable.
 #' The activation function to use
 #' on the "top" layer. Ignored unless `include_top=TRUE`. Set
-#' `classifier_activation=None` to return the logits
+#' `classifier_activation=NULL` to return the logits
 #' of the "top" layer. When loading pretrained weights,
-#' `classifier_activation` can only be `None` or `"softmax"`.
+#' `classifier_activation` can only be `NULL` or `"softmax"`.
 #'
 #' @export
 #' @seealso
@@ -702,7 +702,7 @@ function (include_top = TRUE, weights = "imagenet", input_tensor = NULL,
 #' layer at the top of the network.
 #'
 #' @param weights
-#' one of `None` (random initialization),
+#' one of `NULL` (random initialization),
 #' `"imagenet"` (pre-training on ImageNet),
 #' or the path to the weights file to be loaded.
 #'
@@ -723,7 +723,7 @@ function (include_top = TRUE, weights = "imagenet", input_tensor = NULL,
 #' @param pooling
 #' Optional pooling mode for feature extraction
 #' when `include_top` is `FALSE`.
-#' - `None` means that the output of the model will be
+#' - `NULL` means that the output of the model will be
 #'     the 4D tensor output of the
 #'     last convolutional block.
 #' - `avg` means that global average pooling
@@ -742,9 +742,9 @@ function (include_top = TRUE, weights = "imagenet", input_tensor = NULL,
 #' A `str` or callable.
 #' The activation function to use
 #' on the "top" layer. Ignored unless `include_top=TRUE`. Set
-#' `classifier_activation=None` to return the logits
+#' `classifier_activation=NULL` to return the logits
 #' of the "top" layer. When loading pretrained weights,
-#' `classifier_activation` can only be `None` or `"softmax"`.
+#' `classifier_activation` can only be `NULL` or `"softmax"`.
 #'
 #' @export
 #' @seealso
@@ -795,7 +795,7 @@ function (include_top = TRUE, weights = "imagenet", input_tensor = NULL,
 #' layer at the top of the network. Defaults to `TRUE`.
 #'
 #' @param weights
-#' One of `None` (random initialization),
+#' One of `NULL` (random initialization),
 #' `"imagenet"` (pre-training on ImageNet),
 #' or the path to the weights file to be loaded.
 #' Defaults to `"imagenet"`.
@@ -812,8 +812,8 @@ function (include_top = TRUE, weights = "imagenet", input_tensor = NULL,
 #'
 #' @param pooling
 #' Optional pooling mode for feature extraction
-#' when `include_top` is `FALSE`. Defaults to `None`.
-#' - `None` means that the output of the model will be
+#' when `include_top` is `FALSE`. Defaults to `NULL`.
+#' - `NULL` means that the output of the model will be
 #'     the 4D tensor output of the
 #'     last convolutional layer.
 #' - `avg` means that global average pooling
@@ -832,10 +832,10 @@ function (include_top = TRUE, weights = "imagenet", input_tensor = NULL,
 #' @param classifier_activation
 #' A `str` or callable. The activation function to use
 #' on the "top" layer. Ignored unless `include_top=TRUE`. Set
-#' `classifier_activation=None` to return the logits of the "top" layer.
+#' `classifier_activation=NULL` to return the logits of the "top" layer.
 #' Defaults to `'softmax'`.
 #' When loading pretrained weights, `classifier_activation` can only
-#' be `None` or `"softmax"`.
+#' be `NULL` or `"softmax"`.
 #'
 #' @param ...
 #' For forward/backward compatability.
@@ -890,7 +890,7 @@ function (include_top = TRUE, weights = "imagenet", input_tensor = NULL,
 #' layer at the top of the network. Defaults to `TRUE`.
 #'
 #' @param weights
-#' One of `None` (random initialization),
+#' One of `NULL` (random initialization),
 #' `"imagenet"` (pre-training on ImageNet),
 #' or the path to the weights file to be loaded.
 #' Defaults to `"imagenet"`.
@@ -907,8 +907,8 @@ function (include_top = TRUE, weights = "imagenet", input_tensor = NULL,
 #'
 #' @param pooling
 #' Optional pooling mode for feature extraction
-#' when `include_top` is `FALSE`. Defaults to `None`.
-#' - `None` means that the output of the model will be
+#' when `include_top` is `FALSE`. Defaults to `NULL`.
+#' - `NULL` means that the output of the model will be
 #'     the 4D tensor output of the
 #'     last convolutional layer.
 #' - `avg` means that global average pooling
@@ -927,10 +927,10 @@ function (include_top = TRUE, weights = "imagenet", input_tensor = NULL,
 #' @param classifier_activation
 #' A `str` or callable. The activation function to use
 #' on the "top" layer. Ignored unless `include_top=TRUE`. Set
-#' `classifier_activation=None` to return the logits of the "top" layer.
+#' `classifier_activation=NULL` to return the logits of the "top" layer.
 #' Defaults to `'softmax'`.
 #' When loading pretrained weights, `classifier_activation` can only
-#' be `None` or `"softmax"`.
+#' be `NULL` or `"softmax"`.
 #'
 #' @param ...
 #' For forward/backward compatability.
@@ -985,7 +985,7 @@ function (include_top = TRUE, weights = "imagenet", input_tensor = NULL,
 #' layer at the top of the network. Defaults to `TRUE`.
 #'
 #' @param weights
-#' One of `None` (random initialization),
+#' One of `NULL` (random initialization),
 #' `"imagenet"` (pre-training on ImageNet),
 #' or the path to the weights file to be loaded.
 #' Defaults to `"imagenet"`.
@@ -1002,8 +1002,8 @@ function (include_top = TRUE, weights = "imagenet", input_tensor = NULL,
 #'
 #' @param pooling
 #' Optional pooling mode for feature extraction
-#' when `include_top` is `FALSE`. Defaults to `None`.
-#' - `None` means that the output of the model will be
+#' when `include_top` is `FALSE`. Defaults to `NULL`.
+#' - `NULL` means that the output of the model will be
 #'     the 4D tensor output of the
 #'     last convolutional layer.
 #' - `avg` means that global average pooling
@@ -1022,10 +1022,10 @@ function (include_top = TRUE, weights = "imagenet", input_tensor = NULL,
 #' @param classifier_activation
 #' A `str` or callable. The activation function to use
 #' on the "top" layer. Ignored unless `include_top=TRUE`. Set
-#' `classifier_activation=None` to return the logits of the "top" layer.
+#' `classifier_activation=NULL` to return the logits of the "top" layer.
 #' Defaults to `'softmax'`.
 #' When loading pretrained weights, `classifier_activation` can only
-#' be `None` or `"softmax"`.
+#' be `NULL` or `"softmax"`.
 #'
 #' @param ...
 #' For forward/backward compatability.
@@ -1080,7 +1080,7 @@ function (include_top = TRUE, weights = "imagenet", input_tensor = NULL,
 #' layer at the top of the network. Defaults to `TRUE`.
 #'
 #' @param weights
-#' One of `None` (random initialization),
+#' One of `NULL` (random initialization),
 #' `"imagenet"` (pre-training on ImageNet),
 #' or the path to the weights file to be loaded.
 #' Defaults to `"imagenet"`.
@@ -1097,8 +1097,8 @@ function (include_top = TRUE, weights = "imagenet", input_tensor = NULL,
 #'
 #' @param pooling
 #' Optional pooling mode for feature extraction
-#' when `include_top` is `FALSE`. Defaults to `None`.
-#' - `None` means that the output of the model will be
+#' when `include_top` is `FALSE`. Defaults to `NULL`.
+#' - `NULL` means that the output of the model will be
 #'     the 4D tensor output of the
 #'     last convolutional layer.
 #' - `avg` means that global average pooling
@@ -1117,10 +1117,10 @@ function (include_top = TRUE, weights = "imagenet", input_tensor = NULL,
 #' @param classifier_activation
 #' A `str` or callable. The activation function to use
 #' on the "top" layer. Ignored unless `include_top=TRUE`. Set
-#' `classifier_activation=None` to return the logits of the "top" layer.
+#' `classifier_activation=NULL` to return the logits of the "top" layer.
 #' Defaults to `'softmax'`.
 #' When loading pretrained weights, `classifier_activation` can only
-#' be `None` or `"softmax"`.
+#' be `NULL` or `"softmax"`.
 #'
 #' @param ...
 #' For forward/backward compatability.
@@ -1175,7 +1175,7 @@ function (include_top = TRUE, weights = "imagenet", input_tensor = NULL,
 #' layer at the top of the network. Defaults to `TRUE`.
 #'
 #' @param weights
-#' One of `None` (random initialization),
+#' One of `NULL` (random initialization),
 #' `"imagenet"` (pre-training on ImageNet),
 #' or the path to the weights file to be loaded.
 #' Defaults to `"imagenet"`.
@@ -1192,8 +1192,8 @@ function (include_top = TRUE, weights = "imagenet", input_tensor = NULL,
 #'
 #' @param pooling
 #' Optional pooling mode for feature extraction
-#' when `include_top` is `FALSE`. Defaults to `None`.
-#' - `None` means that the output of the model will be
+#' when `include_top` is `FALSE`. Defaults to `NULL`.
+#' - `NULL` means that the output of the model will be
 #'     the 4D tensor output of the
 #'     last convolutional layer.
 #' - `avg` means that global average pooling
@@ -1212,10 +1212,10 @@ function (include_top = TRUE, weights = "imagenet", input_tensor = NULL,
 #' @param classifier_activation
 #' A `str` or callable. The activation function to use
 #' on the "top" layer. Ignored unless `include_top=TRUE`. Set
-#' `classifier_activation=None` to return the logits of the "top" layer.
+#' `classifier_activation=NULL` to return the logits of the "top" layer.
 #' Defaults to `'softmax'`.
 #' When loading pretrained weights, `classifier_activation` can only
-#' be `None` or `"softmax"`.
+#' be `NULL` or `"softmax"`.
 #'
 #' @param ...
 #' For forward/backward compatability.
@@ -1270,7 +1270,7 @@ function (include_top = TRUE, weights = "imagenet", input_tensor = NULL,
 #' layer at the top of the network. Defaults to `TRUE`.
 #'
 #' @param weights
-#' One of `None` (random initialization),
+#' One of `NULL` (random initialization),
 #' `"imagenet"` (pre-training on ImageNet),
 #' or the path to the weights file to be loaded.
 #' Defaults to `"imagenet"`.
@@ -1287,8 +1287,8 @@ function (include_top = TRUE, weights = "imagenet", input_tensor = NULL,
 #'
 #' @param pooling
 #' Optional pooling mode for feature extraction
-#' when `include_top` is `FALSE`. Defaults to `None`.
-#' - `None` means that the output of the model will be
+#' when `include_top` is `FALSE`. Defaults to `NULL`.
+#' - `NULL` means that the output of the model will be
 #'     the 4D tensor output of the
 #'     last convolutional layer.
 #' - `avg` means that global average pooling
@@ -1307,10 +1307,10 @@ function (include_top = TRUE, weights = "imagenet", input_tensor = NULL,
 #' @param classifier_activation
 #' A `str` or callable. The activation function to use
 #' on the "top" layer. Ignored unless `include_top=TRUE`. Set
-#' `classifier_activation=None` to return the logits of the "top" layer.
+#' `classifier_activation=NULL` to return the logits of the "top" layer.
 #' Defaults to `'softmax'`.
 #' When loading pretrained weights, `classifier_activation` can only
-#' be `None` or `"softmax"`.
+#' be `NULL` or `"softmax"`.
 #'
 #' @param ...
 #' For forward/backward compatability.
@@ -1365,7 +1365,7 @@ function (include_top = TRUE, weights = "imagenet", input_tensor = NULL,
 #' layer at the top of the network. Defaults to `TRUE`.
 #'
 #' @param weights
-#' One of `None` (random initialization),
+#' One of `NULL` (random initialization),
 #' `"imagenet"` (pre-training on ImageNet),
 #' or the path to the weights file to be loaded.
 #' Defaults to `"imagenet"`.
@@ -1382,8 +1382,8 @@ function (include_top = TRUE, weights = "imagenet", input_tensor = NULL,
 #'
 #' @param pooling
 #' Optional pooling mode for feature extraction
-#' when `include_top` is `FALSE`. Defaults to `None`.
-#' - `None` means that the output of the model will be
+#' when `include_top` is `FALSE`. Defaults to `NULL`.
+#' - `NULL` means that the output of the model will be
 #'     the 4D tensor output of the
 #'     last convolutional layer.
 #' - `avg` means that global average pooling
@@ -1402,10 +1402,10 @@ function (include_top = TRUE, weights = "imagenet", input_tensor = NULL,
 #' @param classifier_activation
 #' A `str` or callable. The activation function to use
 #' on the "top" layer. Ignored unless `include_top=TRUE`. Set
-#' `classifier_activation=None` to return the logits of the "top" layer.
+#' `classifier_activation=NULL` to return the logits of the "top" layer.
 #' Defaults to `'softmax'`.
 #' When loading pretrained weights, `classifier_activation` can only
-#' be `None` or `"softmax"`.
+#' be `NULL` or `"softmax"`.
 #'
 #' @param ...
 #' For forward/backward compatability.
@@ -1460,7 +1460,7 @@ function (include_top = TRUE, weights = "imagenet", input_tensor = NULL,
 #' layer at the top of the network. Defaults to `TRUE`.
 #'
 #' @param weights
-#' One of `None` (random initialization),
+#' One of `NULL` (random initialization),
 #' `"imagenet"` (pre-training on ImageNet),
 #' or the path to the weights file to be loaded.
 #' Defaults to `"imagenet"`.
@@ -1477,8 +1477,8 @@ function (include_top = TRUE, weights = "imagenet", input_tensor = NULL,
 #'
 #' @param pooling
 #' Optional pooling mode for feature extraction
-#' when `include_top` is `FALSE`. Defaults to `None`.
-#' - `None` means that the output of the model will be
+#' when `include_top` is `FALSE`. Defaults to `NULL`.
+#' - `NULL` means that the output of the model will be
 #'     the 4D tensor output of the
 #'     last convolutional layer.
 #' - `avg` means that global average pooling
@@ -1497,10 +1497,10 @@ function (include_top = TRUE, weights = "imagenet", input_tensor = NULL,
 #' @param classifier_activation
 #' A `str` or callable. The activation function to use
 #' on the "top" layer. Ignored unless `include_top=TRUE`. Set
-#' `classifier_activation=None` to return the logits of the "top" layer.
+#' `classifier_activation=NULL` to return the logits of the "top" layer.
 #' Defaults to `'softmax'`.
 #' When loading pretrained weights, `classifier_activation` can only
-#' be `None` or `"softmax"`.
+#' be `NULL` or `"softmax"`.
 #'
 #' @param ...
 #' For forward/backward compatability.
@@ -1559,7 +1559,7 @@ function (include_top = TRUE, weights = "imagenet", input_tensor = NULL,
 #' layer at the top of the network. Defaults to `TRUE`.
 #'
 #' @param weights
-#' One of `None` (random initialization),
+#' One of `NULL` (random initialization),
 #' `"imagenet"` (pre-training on ImageNet),
 #' or the path to the weights file to be loaded. Defaults to `"imagenet"`.
 #'
@@ -1575,8 +1575,8 @@ function (include_top = TRUE, weights = "imagenet", input_tensor = NULL,
 #'
 #' @param pooling
 #' Optional pooling mode for feature extraction
-#' when `include_top` is `FALSE`. Defaults to None.
-#' - `None` means that the output of the model will be
+#' when `include_top` is `FALSE`. Defaults to NULL.
+#' - `NULL` means that the output of the model will be
 #'     the 4D tensor output of the
 #'     last convolutional layer.
 #' - `"avg"` means that global average pooling
@@ -1595,10 +1595,10 @@ function (include_top = TRUE, weights = "imagenet", input_tensor = NULL,
 #' @param classifier_activation
 #' A string or callable. The activation function to use
 #' on the "top" layer. Ignored unless `include_top=TRUE`. Set
-#' `classifier_activation=None` to return the logits of the "top" layer.
+#' `classifier_activation=NULL` to return the logits of the "top" layer.
 #' Defaults to `"softmax"`.
 #' When loading pretrained weights, `classifier_activation` can only
-#' be `None` or `"softmax"`.
+#' be `NULL` or `"softmax"`.
 #'
 #' @param include_preprocessing
 #' Boolean, whether to include the preprocessing layer at the bottom of the network.
@@ -1657,7 +1657,7 @@ function (include_top = TRUE, weights = "imagenet", input_tensor = NULL,
 #' layer at the top of the network. Defaults to `TRUE`.
 #'
 #' @param weights
-#' One of `None` (random initialization),
+#' One of `NULL` (random initialization),
 #' `"imagenet"` (pre-training on ImageNet),
 #' or the path to the weights file to be loaded. Defaults to `"imagenet"`.
 #'
@@ -1673,8 +1673,8 @@ function (include_top = TRUE, weights = "imagenet", input_tensor = NULL,
 #'
 #' @param pooling
 #' Optional pooling mode for feature extraction
-#' when `include_top` is `FALSE`. Defaults to None.
-#' - `None` means that the output of the model will be
+#' when `include_top` is `FALSE`. Defaults to NULL.
+#' - `NULL` means that the output of the model will be
 #'     the 4D tensor output of the
 #'     last convolutional layer.
 #' - `"avg"` means that global average pooling
@@ -1693,10 +1693,10 @@ function (include_top = TRUE, weights = "imagenet", input_tensor = NULL,
 #' @param classifier_activation
 #' A string or callable. The activation function to use
 #' on the "top" layer. Ignored unless `include_top=TRUE`. Set
-#' `classifier_activation=None` to return the logits of the "top" layer.
+#' `classifier_activation=NULL` to return the logits of the "top" layer.
 #' Defaults to `"softmax"`.
 #' When loading pretrained weights, `classifier_activation` can only
-#' be `None` or `"softmax"`.
+#' be `NULL` or `"softmax"`.
 #'
 #' @param include_preprocessing
 #' Boolean, whether to include the preprocessing layer at the bottom of the network.
@@ -1755,7 +1755,7 @@ function (include_top = TRUE, weights = "imagenet", input_tensor = NULL,
 #' layer at the top of the network. Defaults to `TRUE`.
 #'
 #' @param weights
-#' One of `None` (random initialization),
+#' One of `NULL` (random initialization),
 #' `"imagenet"` (pre-training on ImageNet),
 #' or the path to the weights file to be loaded. Defaults to `"imagenet"`.
 #'
@@ -1771,8 +1771,8 @@ function (include_top = TRUE, weights = "imagenet", input_tensor = NULL,
 #'
 #' @param pooling
 #' Optional pooling mode for feature extraction
-#' when `include_top` is `FALSE`. Defaults to None.
-#' - `None` means that the output of the model will be
+#' when `include_top` is `FALSE`. Defaults to NULL.
+#' - `NULL` means that the output of the model will be
 #'     the 4D tensor output of the
 #'     last convolutional layer.
 #' - `"avg"` means that global average pooling
@@ -1791,10 +1791,10 @@ function (include_top = TRUE, weights = "imagenet", input_tensor = NULL,
 #' @param classifier_activation
 #' A string or callable. The activation function to use
 #' on the "top" layer. Ignored unless `include_top=TRUE`. Set
-#' `classifier_activation=None` to return the logits of the "top" layer.
+#' `classifier_activation=NULL` to return the logits of the "top" layer.
 #' Defaults to `"softmax"`.
 #' When loading pretrained weights, `classifier_activation` can only
-#' be `None` or `"softmax"`.
+#' be `NULL` or `"softmax"`.
 #'
 #' @param include_preprocessing
 #' Boolean, whether to include the preprocessing layer at the bottom of the network.
@@ -1853,7 +1853,7 @@ function (include_top = TRUE, weights = "imagenet", input_tensor = NULL,
 #' layer at the top of the network. Defaults to `TRUE`.
 #'
 #' @param weights
-#' One of `None` (random initialization),
+#' One of `NULL` (random initialization),
 #' `"imagenet"` (pre-training on ImageNet),
 #' or the path to the weights file to be loaded. Defaults to `"imagenet"`.
 #'
@@ -1869,8 +1869,8 @@ function (include_top = TRUE, weights = "imagenet", input_tensor = NULL,
 #'
 #' @param pooling
 #' Optional pooling mode for feature extraction
-#' when `include_top` is `FALSE`. Defaults to None.
-#' - `None` means that the output of the model will be
+#' when `include_top` is `FALSE`. Defaults to `NULL`.
+#' - `NULL` means that the output of the model will be
 #'     the 4D tensor output of the
 #'     last convolutional layer.
 #' - `"avg"` means that global average pooling
@@ -1889,10 +1889,10 @@ function (include_top = TRUE, weights = "imagenet", input_tensor = NULL,
 #' @param classifier_activation
 #' A string or callable. The activation function to use
 #' on the "top" layer. Ignored unless `include_top=TRUE`. Set
-#' `classifier_activation=None` to return the logits of the "top" layer.
+#' `classifier_activation=NULL` to return the logits of the "top" layer.
 #' Defaults to `"softmax"`.
 #' When loading pretrained weights, `classifier_activation` can only
-#' be `None` or `"softmax"`.
+#' be `NULL` or `"softmax"`.
 #'
 #' @param include_preprocessing
 #' Boolean, whether to include the preprocessing layer at the bottom of the network.
@@ -1951,7 +1951,7 @@ function (include_top = TRUE, weights = "imagenet", input_tensor = NULL,
 #' layer at the top of the network. Defaults to `TRUE`.
 #'
 #' @param weights
-#' One of `None` (random initialization),
+#' One of `NULL` (random initialization),
 #' `"imagenet"` (pre-training on ImageNet),
 #' or the path to the weights file to be loaded. Defaults to `"imagenet"`.
 #'
@@ -1967,8 +1967,8 @@ function (include_top = TRUE, weights = "imagenet", input_tensor = NULL,
 #'
 #' @param pooling
 #' Optional pooling mode for feature extraction
-#' when `include_top` is `FALSE`. Defaults to None.
-#' - `None` means that the output of the model will be
+#' when `include_top` is `FALSE`. Defaults to `NULL`.
+#' - `NULL` means that the output of the model will be
 #'     the 4D tensor output of the
 #'     last convolutional layer.
 #' - `"avg"` means that global average pooling
@@ -1987,10 +1987,10 @@ function (include_top = TRUE, weights = "imagenet", input_tensor = NULL,
 #' @param classifier_activation
 #' A string or callable. The activation function to use
 #' on the "top" layer. Ignored unless `include_top=TRUE`. Set
-#' `classifier_activation=None` to return the logits of the "top" layer.
+#' `classifier_activation=NULL` to return the logits of the "top" layer.
 #' Defaults to `"softmax"`.
 #' When loading pretrained weights, `classifier_activation` can only
-#' be `None` or `"softmax"`.
+#' be `NULL` or `"softmax"`.
 #'
 #' @param include_preprocessing
 #' Boolean, whether to include the preprocessing layer at the bottom of the network.
@@ -2049,7 +2049,7 @@ function (include_top = TRUE, weights = "imagenet", input_tensor = NULL,
 #' layer at the top of the network. Defaults to `TRUE`.
 #'
 #' @param weights
-#' One of `None` (random initialization),
+#' One of `NULL` (random initialization),
 #' `"imagenet"` (pre-training on ImageNet),
 #' or the path to the weights file to be loaded. Defaults to `"imagenet"`.
 #'
@@ -2065,8 +2065,8 @@ function (include_top = TRUE, weights = "imagenet", input_tensor = NULL,
 #'
 #' @param pooling
 #' Optional pooling mode for feature extraction
-#' when `include_top` is `FALSE`. Defaults to None.
-#' - `None` means that the output of the model will be
+#' when `include_top` is `FALSE`. Defaults to `NULL`.
+#' - `NULL` means that the output of the model will be
 #'     the 4D tensor output of the
 #'     last convolutional layer.
 #' - `"avg"` means that global average pooling
@@ -2085,10 +2085,10 @@ function (include_top = TRUE, weights = "imagenet", input_tensor = NULL,
 #' @param classifier_activation
 #' A string or callable. The activation function to use
 #' on the "top" layer. Ignored unless `include_top=TRUE`. Set
-#' `classifier_activation=None` to return the logits of the "top" layer.
+#' `classifier_activation=NULL` to return the logits of the "top" layer.
 #' Defaults to `"softmax"`.
 #' When loading pretrained weights, `classifier_activation` can only
-#' be `None` or `"softmax"`.
+#' be `NULL` or `"softmax"`.
 #'
 #' @param include_preprocessing
 #' Boolean, whether to include the preprocessing layer at the bottom of the network.
@@ -2147,7 +2147,7 @@ function (include_top = TRUE, weights = "imagenet", input_tensor = NULL,
 #' layer at the top of the network. Defaults to `TRUE`.
 #'
 #' @param weights
-#' One of `None` (random initialization),
+#' One of `NULL` (random initialization),
 #' `"imagenet"` (pre-training on ImageNet),
 #' or the path to the weights file to be loaded. Defaults to `"imagenet"`.
 #'
@@ -2163,8 +2163,8 @@ function (include_top = TRUE, weights = "imagenet", input_tensor = NULL,
 #'
 #' @param pooling
 #' Optional pooling mode for feature extraction
-#' when `include_top` is `FALSE`. Defaults to None.
-#' - `None` means that the output of the model will be
+#' when `include_top` is `FALSE`. Defaults to `NULL`.
+#' - `NULL` means that the output of the model will be
 #'     the 4D tensor output of the
 #'     last convolutional layer.
 #' - `"avg"` means that global average pooling
@@ -2183,10 +2183,10 @@ function (include_top = TRUE, weights = "imagenet", input_tensor = NULL,
 #' @param classifier_activation
 #' A string or callable. The activation function to use
 #' on the "top" layer. Ignored unless `include_top=TRUE`. Set
-#' `classifier_activation=None` to return the logits of the "top" layer.
+#' `classifier_activation=NULL` to return the logits of the "top" layer.
 #' Defaults to `"softmax"`.
 #' When loading pretrained weights, `classifier_activation` can only
-#' be `None` or `"softmax"`.
+#' be `NULL` or `"softmax"`.
 #'
 #' @param include_preprocessing
 #' Boolean, whether to include the preprocessing layer at the bottom of the network.
@@ -2242,7 +2242,7 @@ function (include_top = TRUE, weights = "imagenet", input_tensor = NULL,
 #' layer at the top of the network.
 #'
 #' @param weights
-#' one of `None` (random initialization),
+#' one of `NULL` (random initialization),
 #' `"imagenet"` (pre-training on ImageNet),
 #' or the path to the weights file to be loaded.
 #'
@@ -2264,7 +2264,7 @@ function (include_top = TRUE, weights = "imagenet", input_tensor = NULL,
 #' @param pooling
 #' Optional pooling mode for feature extraction
 #' when `include_top` is `FALSE`.
-#' - `None` means that the output of the model will be
+#' - `NULL` means that the output of the model will be
 #'     the 4D tensor output of the last convolutional block.
 #' - `'avg'` means that global average pooling
 #'     will be applied to the output of the
@@ -2281,9 +2281,9 @@ function (include_top = TRUE, weights = "imagenet", input_tensor = NULL,
 #' A `str` or callable.
 #' The activation function to use on the "top" layer.
 #' Ignored unless `include_top=TRUE`.
-#' Set `classifier_activation=None` to return the logits
+#' Set `classifier_activation=NULL` to return the logits
 #' of the "top" layer. When loading pretrained weights,
-#' `classifier_activation` can only be `None` or `"softmax"`.
+#' `classifier_activation` can only be `NULL` or `"softmax"`.
 #'
 #' @export
 #' @seealso
@@ -2334,7 +2334,7 @@ function (include_top = TRUE, weights = "imagenet", input_tensor = NULL,
 #' Defaults to `TRUE`.
 #'
 #' @param weights
-#' One of `None` (random initialization),
+#' One of `NULL` (random initialization),
 #' `imagenet` (pre-training on ImageNet),
 #' or the path to the weights file to be loaded.
 #' Defaults to `"imagenet"`.
@@ -2343,7 +2343,7 @@ function (include_top = TRUE, weights = "imagenet", input_tensor = NULL,
 #' Optional Keras tensor (i.e. output of `layers.Input()`)
 #' to use as image input for the model. `input_tensor` is useful for
 #' sharing inputs between multiple different networks.
-#' Defaults to `None`.
+#' Defaults to `NULL`.
 #'
 #' @param input_shape
 #' Optional shape tuple, only to be specified
@@ -2358,7 +2358,7 @@ function (include_top = TRUE, weights = "imagenet", input_tensor = NULL,
 #' @param pooling
 #' Optional pooling mode for feature extraction
 #' when `include_top` is `FALSE`.
-#' - `None` (default) means that the output of the model will be
+#' - `NULL` (default) means that the output of the model will be
 #'     the 4D tensor output of the last convolutional block.
 #' - `avg` means that global average pooling
 #'     will be applied to the output of the
@@ -2374,9 +2374,9 @@ function (include_top = TRUE, weights = "imagenet", input_tensor = NULL,
 #' @param classifier_activation
 #' A `str` or callable. The activation function
 #' to use on the "top" layer. Ignored unless `include_top=TRUE`.
-#' Set `classifier_activation=None` to return the logits of the "top"
+#' Set `classifier_activation=NULL` to return the logits of the "top"
 #' layer. When loading pretrained weights, `classifier_activation`
-#' can only be `None` or `"softmax"`.
+#' can only be `NULL` or `"softmax"`.
 #'
 #' @export
 #' @seealso
@@ -2428,7 +2428,7 @@ function (include_top = TRUE, weights = "imagenet", input_tensor = NULL,
 #' (with `"channels_first"` data format).
 #' It should have exactly 3 inputs channels, and width and
 #' height should be no smaller than 32. E.g. `(200, 200, 3)` would
-#' be one valid value. Defaults to `None`.
+#' be one valid value. Defaults to `NULL`.
 #' `input_shape` will be ignored if the `input_tensor` is provided.
 #'
 #' @param alpha
@@ -2454,7 +2454,7 @@ function (include_top = TRUE, weights = "imagenet", input_tensor = NULL,
 #' at the top of the network. Defaults to `TRUE`.
 #'
 #' @param weights
-#' One of `None` (random initialization), `"imagenet"`
+#' One of `NULL` (random initialization), `"imagenet"`
 #' (pre-training on ImageNet), or the path to the weights file
 #' to be loaded. Defaults to `"imagenet"`.
 #'
@@ -2462,12 +2462,12 @@ function (include_top = TRUE, weights = "imagenet", input_tensor = NULL,
 #' Optional Keras tensor (i.e. output of `layers.Input()`)
 #' to use as image input for the model. `input_tensor` is useful
 #' for sharing inputs between multiple different networks.
-#' Defaults to `None`.
+#' Defaults to `NULL`.
 #'
 #' @param pooling
 #' Optional pooling mode for feature extraction when `include_top`
 #' is `FALSE`.
-#' - `None` (default) means that the output of the model will be
+#' - `NULL` (default) means that the output of the model will be
 #'     the 4D tensor output of the last convolutional block.
 #' - `avg` means that global average pooling
 #'     will be applied to the output of the
@@ -2483,9 +2483,9 @@ function (include_top = TRUE, weights = "imagenet", input_tensor = NULL,
 #' @param classifier_activation
 #' A `str` or callable. The activation function
 #' to use on the "top" layer. Ignored unless `include_top=TRUE`.
-#' Set `classifier_activation=None` to return the logits of the "top"
+#' Set `classifier_activation=NULL` to return the logits of the "top"
 #' layer. When loading pretrained weights, `classifier_activation`
-#' can only be `None` or `"softmax"`.
+#' can only be `NULL` or `"softmax"`.
 #'
 #' @export
 #' @seealso
@@ -2546,7 +2546,7 @@ function (input_shape = NULL, alpha = 1, depth_multiplier = 1L,
 #' (with `"channels_first"` data format).
 #' It should have exactly 3 inputs channels, and width and
 #' height should be no smaller than 32. E.g. `(200, 200, 3)` would
-#' be one valid value. Defaults to `None`.
+#' be one valid value. Defaults to `NULL`.
 #' `input_shape` will be ignored if the `input_tensor` is provided.
 #'
 #' @param alpha
@@ -2564,7 +2564,7 @@ function (input_shape = NULL, alpha = 1, depth_multiplier = 1L,
 #' at the top of the network. Defaults to `TRUE`.
 #'
 #' @param weights
-#' One of `None` (random initialization), `"imagenet"`
+#' One of `NULL` (random initialization), `"imagenet"`
 #' (pre-training on ImageNet), or the path to the weights file
 #' to be loaded. Defaults to `"imagenet"`.
 #'
@@ -2572,12 +2572,12 @@ function (input_shape = NULL, alpha = 1, depth_multiplier = 1L,
 #' Optional Keras tensor (i.e. output of `layers.Input()`)
 #' to use as image input for the model. `input_tensor` is useful
 #' for sharing inputs between multiple different networks.
-#' Defaults to `None`.
+#' Defaults to `NULL`.
 #'
 #' @param pooling
 #' Optional pooling mode for feature extraction when `include_top`
 #' is `FALSE`.
-#' - `None` (default) means that the output of the model will be
+#' - `NULL` (default) means that the output of the model will be
 #'     the 4D tensor output of the last convolutional block.
 #' - `avg` means that global average pooling
 #'     will be applied to the output of the
@@ -2593,9 +2593,9 @@ function (input_shape = NULL, alpha = 1, depth_multiplier = 1L,
 #' @param classifier_activation
 #' A `str` or callable. The activation function
 #' to use on the "top" layer. Ignored unless `include_top=TRUE`.
-#' Set `classifier_activation=None` to return the logits of the "top"
+#' Set `classifier_activation=NULL` to return the logits of the "top"
 #' layer. When loading pretrained weights, `classifier_activation`
-#' can only be `None` or `"softmax"`.
+#' can only be `NULL` or `"softmax"`.
 #'
 #' @export
 #' @seealso
@@ -2699,7 +2699,7 @@ function (input_shape = NULL, alpha = 1, include_top = TRUE,
 #' layer at the top of the network. Defaults to `TRUE`.
 #'
 #' @param weights
-#' String, one of `None` (random initialization),
+#' String, one of `NULL` (random initialization),
 #' `"imagenet"` (pre-training on ImageNet),
 #' or the path to the weights file to be loaded.
 #'
@@ -2711,7 +2711,7 @@ function (input_shape = NULL, alpha = 1, include_top = TRUE,
 #' @param pooling
 #' String, optional pooling mode for feature extraction
 #' when `include_top` is `FALSE`.
-#' - `None` means that the output of the model
+#' - `NULL` means that the output of the model
 #'     will be the 4D tensor output of the
 #'     last convolutional block.
 #' - `avg` means that global average pooling
@@ -2733,9 +2733,9 @@ function (input_shape = NULL, alpha = 1, include_top = TRUE,
 #' @param classifier_activation
 #' A `str` or callable. The activation function to use
 #' on the "top" layer. Ignored unless `include_top=TRUE`. Set
-#' `classifier_activation=None` to return the logits of the "top" layer.
+#' `classifier_activation=NULL` to return the logits of the "top" layer.
 #' When loading pretrained weights, `classifier_activation` can only
-#' be `None` or `"softmax"`.
+#' be `NULL` or `"softmax"`.
 #'
 #' @param include_preprocessing
 #' Boolean, whether to include the preprocessing
@@ -2844,7 +2844,7 @@ function (input_shape = NULL, alpha = 1, minimalistic = FALSE,
 #' layer at the top of the network. Defaults to `TRUE`.
 #'
 #' @param weights
-#' String, one of `None` (random initialization),
+#' String, one of `NULL` (random initialization),
 #' `"imagenet"` (pre-training on ImageNet),
 #' or the path to the weights file to be loaded.
 #'
@@ -2856,7 +2856,7 @@ function (input_shape = NULL, alpha = 1, minimalistic = FALSE,
 #' @param pooling
 #' String, optional pooling mode for feature extraction
 #' when `include_top` is `FALSE`.
-#' - `None` means that the output of the model
+#' - `NULL` means that the output of the model
 #'     will be the 4D tensor output of the
 #'     last convolutional block.
 #' - `avg` means that global average pooling
@@ -2878,9 +2878,9 @@ function (input_shape = NULL, alpha = 1, minimalistic = FALSE,
 #' @param classifier_activation
 #' A `str` or callable. The activation function to use
 #' on the "top" layer. Ignored unless `include_top=TRUE`. Set
-#' `classifier_activation=None` to return the logits of the "top" layer.
+#' `classifier_activation=NULL` to return the logits of the "top" layer.
 #' When loading pretrained weights, `classifier_activation` can only
-#' be `None` or `"softmax"`.
+#' be `NULL` or `"softmax"`.
 #'
 #' @param include_preprocessing
 #' Boolean, whether to include the preprocessing
@@ -2935,7 +2935,7 @@ function (input_shape = NULL, alpha = 1, minimalistic = FALSE,
 #' layer at the top of the network.
 #'
 #' @param weights
-#' `None` (random initialization) or
+#' `NULL` (random initialization) or
 #' `imagenet` (ImageNet weights).  For loading `imagenet` weights,
 #' `input_shape` should be (331, 331, 3)
 #'
@@ -2947,7 +2947,7 @@ function (input_shape = NULL, alpha = 1, minimalistic = FALSE,
 #' @param pooling
 #' Optional pooling mode for feature extraction
 #' when `include_top` is `FALSE`.
-#' - `None` means that the output of the model
+#' - `NULL` means that the output of the model
 #'     will be the 4D tensor output of the
 #'     last convolutional layer.
 #' - `avg` means that global average pooling
@@ -2966,9 +2966,9 @@ function (input_shape = NULL, alpha = 1, minimalistic = FALSE,
 #' @param classifier_activation
 #' A `str` or callable. The activation function to
 #' use on the "top" layer. Ignored unless `include_top=TRUE`. Set
-#' `classifier_activation=None` to return the logits of the "top"
+#' `classifier_activation=NULL` to return the logits of the "top"
 #' layer.  When loading pretrained weights, `classifier_activation`
-#' can only be `None` or `"softmax"`.
+#' can only be `NULL` or `"softmax"`.
 #'
 #' @export
 #' @seealso
@@ -3017,7 +3017,7 @@ function (input_shape = NULL, include_top = TRUE, weights = "imagenet",
 #' layer at the top of the network.
 #'
 #' @param weights
-#' `None` (random initialization) or
+#' `NULL` (random initialization) or
 #' `imagenet` (ImageNet weights). For loading `imagenet` weights,
 #' `input_shape` should be (224, 224, 3)
 #'
@@ -3029,7 +3029,7 @@ function (input_shape = NULL, include_top = TRUE, weights = "imagenet",
 #' @param pooling
 #' Optional pooling mode for feature extraction
 #' when `include_top` is `FALSE`.
-#' - `None` means that the output of the model
+#' - `NULL` means that the output of the model
 #'     will be the 4D tensor output of the
 #'     last convolutional layer.
 #' - `avg` means that global average pooling
@@ -3048,9 +3048,9 @@ function (input_shape = NULL, include_top = TRUE, weights = "imagenet",
 #' @param classifier_activation
 #' A `str` or callable. The activation function to
 #' use on the "top" layer. Ignored unless `include_top=TRUE`. Set
-#' `classifier_activation=None` to return the logits of the "top"
+#' `classifier_activation=NULL` to return the logits of the "top"
 #' layer.  When loading pretrained weights, `classifier_activation` can
-#' only be `None` or `"softmax"`.
+#' only be `NULL` or `"softmax"`.
 #'
 #' @export
 #' @seealso
@@ -3096,7 +3096,7 @@ function (input_shape = NULL, include_top = TRUE, weights = "imagenet",
 #' layer at the top of the network.
 #'
 #' @param weights
-#' one of `None` (random initialization),
+#' one of `NULL` (random initialization),
 #' `"imagenet"` (pre-training on ImageNet), or the path to the weights
 #' file to be loaded.
 #'
@@ -3115,7 +3115,7 @@ function (input_shape = NULL, include_top = TRUE, weights = "imagenet",
 #' @param pooling
 #' Optional pooling mode for feature extraction when `include_top`
 #' is `FALSE`.
-#' - `None` means that the output of the model will be the 4D tensor
+#' - `NULL` means that the output of the model will be the 4D tensor
 #'         output of the last convolutional block.
 #' - `avg` means that global average pooling will be applied to the output
 #'         of the last convolutional block, and thus the output of the
@@ -3130,9 +3130,9 @@ function (input_shape = NULL, include_top = TRUE, weights = "imagenet",
 #' @param classifier_activation
 #' A `str` or callable. The activation function to
 #' use on the "top" layer. Ignored unless `include_top=TRUE`. Set
-#' `classifier_activation=None` to return the logits of the "top" layer.
+#' `classifier_activation=NULL` to return the logits of the "top" layer.
 #' When loading pretrained weights, `classifier_activation` can only
-#' be `None` or `"softmax"`.
+#' be `NULL` or `"softmax"`.
 #'
 #' @export
 #' @seealso
@@ -3178,7 +3178,7 @@ function (include_top = TRUE, weights = "imagenet", input_tensor = NULL,
 #' layer at the top of the network.
 #'
 #' @param weights
-#' one of `None` (random initialization),
+#' one of `NULL` (random initialization),
 #' `"imagenet"` (pre-training on ImageNet), or the path to the weights
 #' file to be loaded.
 #'
@@ -3197,7 +3197,7 @@ function (include_top = TRUE, weights = "imagenet", input_tensor = NULL,
 #' @param pooling
 #' Optional pooling mode for feature extraction when `include_top`
 #' is `FALSE`.
-#' - `None` means that the output of the model will be the 4D tensor
+#' - `NULL` means that the output of the model will be the 4D tensor
 #'         output of the last convolutional block.
 #' - `avg` means that global average pooling will be applied to the output
 #'         of the last convolutional block, and thus the output of the
@@ -3212,9 +3212,9 @@ function (include_top = TRUE, weights = "imagenet", input_tensor = NULL,
 #' @param classifier_activation
 #' A `str` or callable. The activation function to
 #' use on the "top" layer. Ignored unless `include_top=TRUE`. Set
-#' `classifier_activation=None` to return the logits of the "top" layer.
+#' `classifier_activation=NULL` to return the logits of the "top" layer.
 #' When loading pretrained weights, `classifier_activation` can only
-#' be `None` or `"softmax"`.
+#' be `NULL` or `"softmax"`.
 #'
 #' @export
 #' @seealso
@@ -3260,7 +3260,7 @@ function (include_top = TRUE, weights = "imagenet", input_tensor = NULL,
 #' layer at the top of the network.
 #'
 #' @param weights
-#' one of `None` (random initialization),
+#' one of `NULL` (random initialization),
 #' `"imagenet"` (pre-training on ImageNet), or the path to the weights
 #' file to be loaded.
 #'
@@ -3279,7 +3279,7 @@ function (include_top = TRUE, weights = "imagenet", input_tensor = NULL,
 #' @param pooling
 #' Optional pooling mode for feature extraction when `include_top`
 #' is `FALSE`.
-#' - `None` means that the output of the model will be the 4D tensor
+#' - `NULL` means that the output of the model will be the 4D tensor
 #'         output of the last convolutional block.
 #' - `avg` means that global average pooling will be applied to the output
 #'         of the last convolutional block, and thus the output of the
@@ -3294,9 +3294,9 @@ function (include_top = TRUE, weights = "imagenet", input_tensor = NULL,
 #' @param classifier_activation
 #' A `str` or callable. The activation function to
 #' use on the "top" layer. Ignored unless `include_top=TRUE`. Set
-#' `classifier_activation=None` to return the logits of the "top" layer.
+#' `classifier_activation=NULL` to return the logits of the "top" layer.
 #' When loading pretrained weights, `classifier_activation` can only
-#' be `None` or `"softmax"`.
+#' be `NULL` or `"softmax"`.
 #'
 #' @export
 #' @seealso
@@ -3341,7 +3341,7 @@ function (include_top = TRUE, weights = "imagenet", input_tensor = NULL,
 #' layer at the top of the network.
 #'
 #' @param weights
-#' one of `None` (random initialization),
+#' one of `NULL` (random initialization),
 #' `"imagenet"` (pre-training on ImageNet), or the path to the weights
 #' file to be loaded.
 #'
@@ -3360,7 +3360,7 @@ function (include_top = TRUE, weights = "imagenet", input_tensor = NULL,
 #' @param pooling
 #' Optional pooling mode for feature extraction when `include_top`
 #' is `FALSE`.
-#' - `None` means that the output of the model will be the 4D tensor
+#' - `NULL` means that the output of the model will be the 4D tensor
 #'         output of the last convolutional block.
 #' - `avg` means that global average pooling will be applied to the output
 #'         of the last convolutional block, and thus the output of the
@@ -3375,9 +3375,9 @@ function (include_top = TRUE, weights = "imagenet", input_tensor = NULL,
 #' @param classifier_activation
 #' A `str` or callable. The activation function to
 #' use on the "top" layer. Ignored unless `include_top=TRUE`. Set
-#' `classifier_activation=None` to return the logits of the "top" layer.
+#' `classifier_activation=NULL` to return the logits of the "top" layer.
 #' When loading pretrained weights, `classifier_activation` can only
-#' be `None` or `"softmax"`.
+#' be `NULL` or `"softmax"`.
 #'
 #' @export
 #' @seealso
@@ -3422,7 +3422,7 @@ function (include_top = TRUE, weights = "imagenet", input_tensor = NULL,
 #' layer at the top of the network.
 #'
 #' @param weights
-#' one of `None` (random initialization),
+#' one of `NULL` (random initialization),
 #' `"imagenet"` (pre-training on ImageNet), or the path to the weights
 #' file to be loaded.
 #'
@@ -3441,7 +3441,7 @@ function (include_top = TRUE, weights = "imagenet", input_tensor = NULL,
 #' @param pooling
 #' Optional pooling mode for feature extraction when `include_top`
 #' is `FALSE`.
-#' - `None` means that the output of the model will be the 4D tensor
+#' - `NULL` means that the output of the model will be the 4D tensor
 #'         output of the last convolutional block.
 #' - `avg` means that global average pooling will be applied to the output
 #'         of the last convolutional block, and thus the output of the
@@ -3456,9 +3456,9 @@ function (include_top = TRUE, weights = "imagenet", input_tensor = NULL,
 #' @param classifier_activation
 #' A `str` or callable. The activation function to
 #' use on the "top" layer. Ignored unless `include_top=TRUE`. Set
-#' `classifier_activation=None` to return the logits of the "top" layer.
+#' `classifier_activation=NULL` to return the logits of the "top" layer.
 #' When loading pretrained weights, `classifier_activation` can only
-#' be `None` or `"softmax"`.
+#' be `NULL` or `"softmax"`.
 #'
 #' @export
 #' @seealso
@@ -3503,7 +3503,7 @@ function (include_top = TRUE, weights = "imagenet", input_tensor = NULL,
 #' layer at the top of the network.
 #'
 #' @param weights
-#' one of `None` (random initialization),
+#' one of `NULL` (random initialization),
 #' `"imagenet"` (pre-training on ImageNet), or the path to the weights
 #' file to be loaded.
 #'
@@ -3522,7 +3522,7 @@ function (include_top = TRUE, weights = "imagenet", input_tensor = NULL,
 #' @param pooling
 #' Optional pooling mode for feature extraction when `include_top`
 #' is `FALSE`.
-#' - `None` means that the output of the model will be the 4D tensor
+#' - `NULL` means that the output of the model will be the 4D tensor
 #'         output of the last convolutional block.
 #' - `avg` means that global average pooling will be applied to the output
 #'         of the last convolutional block, and thus the output of the
@@ -3537,9 +3537,9 @@ function (include_top = TRUE, weights = "imagenet", input_tensor = NULL,
 #' @param classifier_activation
 #' A `str` or callable. The activation function to
 #' use on the "top" layer. Ignored unless `include_top=TRUE`. Set
-#' `classifier_activation=None` to return the logits of the "top" layer.
+#' `classifier_activation=NULL` to return the logits of the "top" layer.
 #' When loading pretrained weights, `classifier_activation` can only
-#' be `None` or `"softmax"`.
+#' be `NULL` or `"softmax"`.
 #'
 #' @export
 #' @seealso
@@ -3589,7 +3589,7 @@ function (include_top = TRUE, weights = "imagenet", input_tensor = NULL,
 #' layers at the top of the network.
 #'
 #' @param weights
-#' one of `None` (random initialization),
+#' one of `NULL` (random initialization),
 #' `"imagenet"` (pre-training on ImageNet),
 #' or the path to the weights file to be loaded.
 #'
@@ -3611,7 +3611,7 @@ function (include_top = TRUE, weights = "imagenet", input_tensor = NULL,
 #' @param pooling
 #' Optional pooling mode for feature extraction
 #' when `include_top` is `FALSE`.
-#' - `None` means that the output of the model will be
+#' - `NULL` means that the output of the model will be
 #'     the 4D tensor output of the
 #'     last convolutional block.
 #' - `avg` means that global average pooling
@@ -3629,9 +3629,9 @@ function (include_top = TRUE, weights = "imagenet", input_tensor = NULL,
 #' @param classifier_activation
 #' A `str` or callable. The activation function to
 #' use on the "top" layer. Ignored unless `include_top=TRUE`. Set
-#' `classifier_activation=None` to return the logits of the "top"
+#' `classifier_activation=NULL` to return the logits of the "top"
 #' layer.  When loading pretrained weights, `classifier_activation`
-#' can only be `None` or `"softmax"`.
+#' can only be `NULL` or `"softmax"`.
 #'
 #' @export
 #' @seealso
@@ -3681,7 +3681,7 @@ function (include_top = TRUE, weights = "imagenet", input_tensor = NULL,
 #' layers at the top of the network.
 #'
 #' @param weights
-#' one of `None` (random initialization),
+#' one of `NULL` (random initialization),
 #' `"imagenet"` (pre-training on ImageNet),
 #' or the path to the weights file to be loaded.
 #'
@@ -3703,7 +3703,7 @@ function (include_top = TRUE, weights = "imagenet", input_tensor = NULL,
 #' @param pooling
 #' Optional pooling mode for feature extraction
 #' when `include_top` is `FALSE`.
-#' - `None` means that the output of the model will be
+#' - `NULL` means that the output of the model will be
 #'     the 4D tensor output of the
 #'     last convolutional block.
 #' - `avg` means that global average pooling
@@ -3721,9 +3721,9 @@ function (include_top = TRUE, weights = "imagenet", input_tensor = NULL,
 #' @param classifier_activation
 #' A `str` or callable. The activation function to
 #' use on the "top" layer. Ignored unless `include_top=TRUE`. Set
-#' `classifier_activation=None` to return the logits of the "top"
+#' `classifier_activation=NULL` to return the logits of the "top"
 #' layer.  When loading pretrained weights, `classifier_activation` can
-#' only be `None` or `"softmax"`.
+#' only be `NULL` or `"softmax"`.
 #'
 #' @export
 #' @seealso
@@ -3771,7 +3771,7 @@ function (include_top = TRUE, weights = "imagenet", input_tensor = NULL,
 #' layers at the top of the network.
 #'
 #' @param weights
-#' one of `None` (random initialization),
+#' one of `NULL` (random initialization),
 #' `"imagenet"` (pre-training on ImageNet),
 #' or the path to the weights file to be loaded.
 #'
@@ -3791,7 +3791,7 @@ function (include_top = TRUE, weights = "imagenet", input_tensor = NULL,
 #' @param pooling
 #' Optional pooling mode for feature extraction
 #' when `include_top` is `FALSE`.
-#' - `None` means that the output of the model will be
+#' - `NULL` means that the output of the model will be
 #'     the 4D tensor output of the
 #'     last convolutional block.
 #' - `avg` means that global average pooling
@@ -3809,9 +3809,9 @@ function (include_top = TRUE, weights = "imagenet", input_tensor = NULL,
 #' @param classifier_activation
 #' A `str` or callable. The activation function to
 #' use on the "top" layer. Ignored unless `include_top=TRUE`. Set
-#' `classifier_activation=None` to return the logits of the "top"
+#' `classifier_activation=NULL` to return the logits of the "top"
 #' layer.  When loading pretrained weights, `classifier_activation` can
-#' only be `None` or `"softmax"`.
+#' only be `NULL` or `"softmax"`.
 #'
 #' @export
 #' @seealso

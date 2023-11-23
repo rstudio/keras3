@@ -58,8 +58,8 @@
 #'
 #' @param merge_mode
 #' Mode by which outputs of the forward and backward RNNs
-#' will be combined. One of `{"sum", "mul", "concat", "ave", None}`.
-#' If `None`, the outputs will not be combined,
+#' will be combined. One of `{"sum", "mul", "concat", "ave", NULL}`.
+#' If `NULL`, the outputs will not be combined,
 #' they will be returned as a list. Defaults to `"concat"`.
 #'
 #' @param backward_layer

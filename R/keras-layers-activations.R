@@ -202,8 +202,8 @@ function (object, alpha_initializer = "Zeros", alpha_regularizer = NULL,
 #' ```
 #'
 #' @param max_value
-#' Float >= 0. Maximum activation value. None means unlimited.
-#' Defaults to `None`.
+#' Float >= 0. Maximum activation value. `NULL` means unlimited.
+#' Defaults to `NULL`.
 #'
 #' @param negative_slope
 #' Float >= 0. Negative slope coefficient.

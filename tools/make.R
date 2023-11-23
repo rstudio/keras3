@@ -66,6 +66,8 @@ fs::dir_walk("man-src", type = "directory", recurse = TRUE,
 #      so that keras$utils$get_custom_objects()$clear() works.
 
 # TODO: get_custom_objects() needs thinking
+#
+# TODO: many of the applications can share a man page, e.g., application_convnext_{large...}
 
 # TODO: r_name autogen: move "set" to tail, so have config_floatx(), config_floatx_set()
 

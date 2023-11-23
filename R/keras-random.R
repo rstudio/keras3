@@ -35,7 +35,7 @@
 #' `keras.random.SeedGenerator`.
 #' Used to make the behavior of the initializer
 #' deterministic. Note that an initializer seeded with an integer
-#' or None (unseeded) will produce the same random values
+#' or `NULL` (unseeded) will produce the same random values
 #' across multiple calls. To get different random values
 #' across multiple calls, use as seed an instance
 #' of `keras.random.SeedGenerator`.
@@ -102,7 +102,7 @@ function (inputs, rate, noise_shape = NULL, seed = NULL)
 #' `keras.random.SeedGenerator`.
 #' Used to make the behavior of the initializer
 #' deterministic. Note that an initializer seeded with an integer
-#' or None (unseeded) will produce the same random values
+#' or `NULL` (unseeded) will produce the same random values
 #' across multiple calls. To get different random values
 #' across multiple calls, use as seed an instance
 #' of `keras.random.SeedGenerator`.
@@ -151,7 +151,7 @@ function (shape, alpha, dtype = NULL, seed = NULL)
 #' `keras.random.SeedGenerator`.
 #' Used to make the behavior of the initializer
 #' deterministic. Note that an initializer seeded with an integer
-#' or None (unseeded) will produce the same random values
+#' or `NULL` (unseeded) will produce the same random values
 #' across multiple calls. To get different random values
 #' across multiple calls, use as seed an instance
 #' of `keras.random.SeedGenerator`.
@@ -194,7 +194,7 @@ function (shape, minval, maxval, dtype = "int32", seed = NULL)
 #' `keras.random.SeedGenerator`.
 #' Used to make the behavior of the initializer
 #' deterministic. Note that an initializer seeded with an integer
-#' or None (unseeded) will produce the same random values
+#' or `NULL` (unseeded) will produce the same random values
 #' across multiple calls. To get different random values
 #' across multiple calls, use as seed an instance
 #' of `keras.random.SeedGenerator`.
@@ -226,7 +226,7 @@ function (shape, mean = 0, stddev = 1, dtype = NULL, seed = NULL)
 #' `keras.random.SeedGenerator`.
 #' Used to make the behavior of the initializer
 #' deterministic. Note that an initializer seeded with an integer
-#' or None (unseeded) will produce the same random values
+#' or `NULL` (unseeded) will produce the same random values
 #' across multiple calls. To get different random values
 #' across multiple calls, use as seed an instance
 #' of `keras.random.SeedGenerator`.
@@ -272,7 +272,7 @@ function (x, axis = 1L, seed = NULL)
 #' `keras.random.SeedGenerator`.
 #' Used to make the behavior of the initializer
 #' deterministic. Note that an initializer seeded with an integer
-#' or None (unseeded) will produce the same random values
+#' or `NULL` (unseeded) will produce the same random values
 #' across multiple calls. To get different random values
 #' across multiple calls, use as seed an instance
 #' of `keras.random.SeedGenerator`.
@@ -321,7 +321,7 @@ function (shape, mean = 0, stddev = 1, dtype = NULL, seed = NULL)
 #' `keras.random.SeedGenerator`.
 #' Used to make the behavior of the initializer
 #' deterministic. Note that an initializer seeded with an integer
-#' or None (unseeded) will produce the same random values
+#' or `NULL` (unseeded) will produce the same random values
 #' across multiple calls. To get different random values
 #' across multiple calls, use as seed an instance
 #' of `keras.random.SeedGenerator`.

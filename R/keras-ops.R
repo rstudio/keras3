@@ -98,7 +98,7 @@ keras$ops$convert_to_numpy(x)
 #'
 #' @param sparse
 #' Whether to keep sparse tensors. `FALSE` will cause sparse
-#' tensors to be densified. The default value of `None` means that
+#' tensors to be densified. The default value of `NULL` means that
 #' sparse tensors are kept only if the backend supports them.
 #'
 #' @export
@@ -1572,7 +1572,7 @@ function (inputs, kernel, strides = 1L, padding = "valid", data_format = NULL,
 #' the output tensor. Can be a single integer to specify the same
 #' value for all spatial dimensions. The amount of output padding
 #' along a given dimension must be lower than the stride along that
-#' same dimension. If set to `None` (default), the output shape is
+#' same dimension. If set to `NULL` (default), the output shape is
 #' inferred.
 #'
 #' @param data_format
@@ -4199,7 +4199,7 @@ keras$ops$expm1(x)
 #' Number of rows in the output.
 #'
 #' @param M
-#' Number of columns in the output. If `None`, defaults to `N`.
+#' Number of columns in the output. If `NULL`, defaults to `N`.
 #'
 #' @param k
 #' Index of the diagonal: 0 (the default) refers to the main
@@ -4996,7 +4996,7 @@ keras$ops$matmul(x1, x2)
 #' in the result as dimensions with size one. Defaults to`FALSE`.
 #'
 #' @param initial
-#' The minimum value of an output element. Defaults to`None`.
+#' The minimum value of an output element. Defaults to`NULL`.
 #'
 #' @export
 #' @family numpy ops
@@ -5171,7 +5171,7 @@ function (..., indexing = "xy")
 #' in the result as dimensions with size one. Defaults to`FALSE`.
 #'
 #' @param initial
-#' The maximum value of an output element. Defaults to`None`.
+#' The maximum value of an output element. Defaults to`NULL`.
 #'
 #' @export
 #' @family numpy ops
@@ -5579,7 +5579,7 @@ function (x, axis = NULL, keepdims = FALSE, dtype = NULL)
 #' Compute the q-th quantile(s) of the data along the specified axis.
 #'
 #' @returns
-#' The quantile(s). If `q` is a single probability and `axis=None`, then
+#' The quantile(s). If `q` is a single probability and `axis=NULL`, then
 #' the result is a scalar. If multiple probabilies levels are given, first
 #' axis of the result corresponds to the quantiles. The other axes are the
 #' axes that remain after the reduction of `x`.
@@ -5593,7 +5593,7 @@ function (x, axis = NULL, keepdims = FALSE, dtype = NULL)
 #'
 #' @param axis
 #' Axis or axes along which the quantiles are computed. Defaults to
-#' `axis=None` which is to compute the quantile(s) along a flattened
+#' `axis=NULL` which is to compute the quantile(s) along a flattened
 #' version of the array.
 #'
 #' @param method
@@ -5902,7 +5902,7 @@ keras$ops$size(x)
 #' Input tensor.
 #'
 #' @param axis
-#' Axis along which to sort. If `None`, the tensor is flattened
+#' Axis along which to sort. If `NULL`, the tensor is flattened
 #' before sorting. Defaults to `-1`; the last axis.
 #'
 #' @export

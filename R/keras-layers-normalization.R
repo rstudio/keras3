@@ -221,19 +221,19 @@ function (object, axis = -1L, momentum = 0.99, epsilon = 0.001,
 #' Initializer for the gamma weight. Defaults to ones.
 #'
 #' @param beta_regularizer
-#' Optional regularizer for the beta weight. None by
+#' Optional regularizer for the beta weight. `NULL` by
 #' default.
 #'
 #' @param gamma_regularizer
-#' Optional regularizer for the gamma weight. None by
+#' Optional regularizer for the gamma weight. `NULL` by
 #' default.
 #'
 #' @param beta_constraint
 #' Optional constraint for the beta weight.
-#' None by default.
+#' `NULL` by default.
 #'
 #' @param gamma_constraint
-#' Optional constraint for the gamma weight. None by
+#' Optional constraint for the gamma weight. `NULL` by
 #' default.
 #'
 #' @param object
