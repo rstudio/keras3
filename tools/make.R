@@ -156,7 +156,7 @@ fs::dir_walk("man-src", type = "directory", recurse = TRUE,
 
 # TODO: get rid of this in params: @param ... Passed on to the Python callable
 
-# TODO: global doc search for None/True/False/[Tt]uple/[Dd]ict(ionary|\\b)
+# TODO: global doc search for None/True/False/[Tt]uple/[Dd]ict(ionary|\\b) (Almost DONE except for Tuples)
 #
 # TODO: layer_feature_space() needs many helpers for float_normalized() and friends
 #       output_mode = 'dict' should be 'named list' ?

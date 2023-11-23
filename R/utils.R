@@ -189,9 +189,8 @@ keras_array <- function(x, dtype = NULL) {
 #' E.g. `'float16'`, `'float32'`, `'float64'`.
 #'
 #' # Examples
-#' ```python
-#' keras.config.floatx()
-#' # 'float32'
+#' ```{r}
+#' k_floatx()
 #' ```
 #'
 #' @returns
