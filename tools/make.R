@@ -36,6 +36,12 @@ if(FALSE){
   fs::file_move(f, f2)
 }
 
+fs::dir_walk("man-src", type = "directory", recurse = TRUE,
+  function(d) {
+    if(!length(list.files(d, all.files = TRUE, no.. = TRUE))) # empty directory
+       unlink(d)
+  })
+
 ## In progress
 
 

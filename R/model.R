@@ -297,7 +297,7 @@ clone_model <- function(model, input_tensors = NULL, clone_function = NULL) {
 #'   `sample_weight` or `class_weight` during training and testing.
 #' @param run_eagerly Bool. Defaults to `FALSE`. If `TRUE`, this Model's logic
 #'   will not be wrapped in a `tf.function`. Recommended to leave this as `NULL`
-#'   unless your Model cannot be run inside a `tf.function`. `run_eagerly=True`
+#'   unless your Model cannot be run inside a `tf.function`. `run_eagerly=TRUE`
 #'   is not supported when using
 #'   `tf.distribute.experimental.ParameterServerStrategy`. If the model's logic
 #'   uses tensors in R control flow expressions like `if` and `for`, the model

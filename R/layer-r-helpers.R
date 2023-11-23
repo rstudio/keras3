@@ -236,7 +236,7 @@ normalize_scale <- function(name, scale, dims) {
 
 
 
-#' @param include_special_tokens If True, the returned vocabulary will include
+#' @param include_special_tokens If TRUE, the returned vocabulary will include
 #'   the padding and OOV tokens, and a term's index in the vocabulary will equal
 #'   the term's index when calling the layer. If False, the returned vocabulary
 #'   will not include any padding or OOV tokens.
