@@ -624,7 +624,7 @@ function (monitor = "val_loss", factor = 0.1, patience = 10L,
 #' Requires the `requests` library.
 #' Events are sent to `root + '/publish/epoch/end/'` by default. Calls are
 #' HTTP POST, with a `data` argument which is a
-#' JSON-encoded dictionary of event data.
+#' JSON-encoded named list of event data.
 #' If `send_as_json = TRUE`, the content type of the request will be
 #' `"application/json"`.
 #' Otherwise the serialized JSON will be sent within a form.
@@ -641,7 +641,7 @@ function (monitor = "val_loss", factor = 0.1, patience = 10L,
 #' (i.e. send_as_json is set to `FALSE`).
 #'
 #' @param headers
-#' Dictionary; optional custom HTTP headers.
+#' Named list; optional custom HTTP headers.
 #'
 #' @param send_as_json
 #' Boolean; whether the request should be
@@ -819,7 +819,7 @@ function (root = "http://localhost:9000", path = "/publish/epoch/end/",
 #' visualized. If set to 0, embeddings won't be visualized.
 #'
 #' @param embeddings_metadata
-#' Dictionary which maps embedding layer names to the
+#' Named list which maps embedding layer names to the
 #' filename of a file in which to save metadata for the embedding layer.
 #' In case the same metadata file is to be
 #' used for all embedding layers, a single filename can be passed.

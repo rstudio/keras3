@@ -126,7 +126,7 @@ function ()
 #' feature_string_hashed(num_bins, output_mode = "one_hot", name = NULL)
 #' ```
 #' # Examples
-#' **Basic usage with a dict of input data:**
+#' **Basic usage with a named list of input data:**
 #'
 #' ```{r}
 #' raw_data <- list(
@@ -197,7 +197,7 @@ function ()
 #' )
 #' ```
 #'
-#' **Returning a dict of integer-encoded features:**
+#' **Returning a dict (a named list) of integer-encoded features:**
 #'
 #' ```{r}
 #' feature_space <- layer_feature_space(
@@ -260,7 +260,7 @@ function ()
 #' ```
 #'
 #' @param feature_names
-#' Dict mapping the names of your features to their
+#' Named list mapping the names of your features to their
 #' type specification, e.g. `list(my_feature = "integer_categorical")`
 #' or `list(my_feature = feature_integer_categorical())`.
 #' For a complete list of all supported types, see
@@ -269,8 +269,8 @@ function ()
 #' @param output_mode
 #' One of `"concat"` or `"dict"`. In concat mode, all
 #' features get concatenated together into a single vector.
-#' In dict mode, the FeatureSpace returns a dict of individually
-#' encoded features (with the same keys as the input dict keys).
+#' In dict mode, the FeatureSpace returns a named list of individually
+#' encoded features (with the same names as the input list names).
 #'
 #' @param crosses
 #' List of features to be crossed together, e.g.
@@ -345,12 +345,12 @@ function (tensor)
 }
 
 
-#' Retrieves a live reference to the global dictionary of custom objects.
+#' Retrieves a live reference to the global list of custom objects.
 #'
 #' @description
 #' Custom objects set using using `custom_object_scope()` are not added to the
-#' global dictionary of custom objects, and will not appear in the returned
-#' dictionary.
+#' global list of custom objects, and will not appear in the returned
+#' list.
 #'
 #' # Examples
 #' ```{r, eval = FALSE}
@@ -359,7 +359,7 @@ function (tensor)
 #' ```
 #'
 #' @returns
-#'     Global dictionary (named list) mapping registered class names to classes.
+#' A named list, the global dictionary mapping registered class names to classes.
 #'
 #' @export
 #' @family object registration saving
