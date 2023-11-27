@@ -34,11 +34,6 @@ q
 ##  [-0.50709255  0.27602622]
 ##  [-0.84515425 -0.34503278]], shape=(3, 2), dtype=float64)
 }\if{html}{\out{</div>}}
-
-\if{html}{\out{<div class="sourceCode r">}}\preformatted{# array([[-0.16903079  0.897085]
-#        [-0.5070925   0.2760267 ]
-#        [-0.8451542  -0.34503305]], shape=(3, 2), dtype=float32)
-}\if{html}{\out{</div>}}
 }
 
 \seealso{

@@ -133,7 +133,7 @@ sequential_model_input_layer <- function(input_shape = NULL,
   # keras$layers$Input can't be used with a Sequential Model, have to use
   # keras$layers$LayerInput instead.
   args <- capture_args(match.call(),
-                       list(input_shape = as_shape,
+                       list(input_shape = normalize_shape,
                             batch_size = as_nullable_integer))
 
   if ("input_layer_name" %in% names(args)) {
