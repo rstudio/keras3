@@ -29,7 +29,7 @@
 #'   inherit = KerasConstraint,
 #'   public = list(
 #'     call = function(x) {
-#'        w * k_cast(k_greater_equal(w, 0), k_floatx())
+#'        w * op_cast(w >= 0, config_floatx())
 #'     }
 #'   )
 #' )
