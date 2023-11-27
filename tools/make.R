@@ -157,8 +157,6 @@ fs::dir_walk("man-src", type = "directory", recurse = TRUE,
 #
 # TODO: `axis` arg in merging layers has to wrong transformer, should be `as_axis()`, is `as_integer()`
 
-# TODO: get rid of this in params: @param ... Passed on to the Python callable
-
 # TODO: global doc search for None/True/False/[Tt]uple/[Dd]ict(ionary|\\b) (Almost DONE except for Tuples)
 #
 # TODO: layer_feature_space() needs many helpers for float_normalized() and friends
