@@ -1,7 +1,5 @@
 
-
 # this file get's evaled in baseenv()
-
 
 # register fake @tether tag parser for roxygen2
 local({
@@ -42,7 +40,7 @@ local({
   # we delay setting the output hook `knit_hooks$set(output = )` because
   # if we set it too early, knitr doesn't set `render_markdown()` hooks.
   # so we set a chunk option, which triggers setting the output hook
-  # one after knitr is already setup and knitting.
+  # after knitr is already setup and knitting.
   knitr_on_load <- function() {
 
     knitr::opts_hooks$set(
@@ -61,11 +59,9 @@ local({
           keras:::keras$utils$clear_session()
           set.seed(1L)
           keras:::keras$utils$set_random_seed(1L)
-          assign(
-            x = ".__ran_keras_block_init__",
-            envir = roxygen2::roxy_meta_get("evalenv"),
-            value = TRUE
-          )
+          assign(x = ".__ran_keras_block_init__",
+                 envir = roxygen2::roxy_meta_get("evalenv"),
+                 value = TRUE)
         }
 
         local({
@@ -96,7 +92,7 @@ local({
 list(
   markdown = TRUE,
   r6 = FALSE,
-  # roclets = c("namespace", "rd", "roxytether::tether_roclet"),
+  roclets = c("namespace", "rd"),
   knitr_chunk_options = list(
     comment = "##",
     collapse = FALSE,

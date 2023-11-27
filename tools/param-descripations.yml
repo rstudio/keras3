@@ -23,7 +23,7 @@
   name: String, name for the object
   seed: Initial seed for the random number generator
   dtype: datatype (e.g., `"float32"`).
-  "...": Passed on to the Python callable
+  "...": For forward/backward compatability.
 
 "keras.metrics.*":
   y_true: Tensor of true targets.
