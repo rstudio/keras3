@@ -5,21 +5,12 @@
 \alias{unserialize_model}
 \title{Serialize a model to an R object}
 \usage{
-serialize_model(model, include_optimizer = TRUE)
+serialize_model(model, ...)
 
 unserialize_model(model, custom_objects = NULL, compile = TRUE)
 }
 \arguments{
 \item{model}{Keras model or R "raw" object containing serialized Keras model.}
-
-\item{include_optimizer}{If \code{TRUE}, save optimizer's state.}
-
-\item{custom_objects}{Mapping class names (or function names) of custom
-(non-Keras) objects to class/functions (for example, custom metrics
-or custom loss functions). This mapping can be done with the dict()
-function of reticulate.}
-
-\item{compile}{Whether to compile the model after loading.}
 }
 \value{
 \code{serialize_model()} returns an R "raw" object containing an hdf5
@@ -32,16 +23,12 @@ and restored across R sessions. The \code{serialize_model()} and
 R objects for persistence within R data files.
 }
 \note{
-The \code{\link[=save_model_hdf5]{save_model_hdf5()}} function enables saving Keras models to
+The \code{\link[=save_model]{save_model()}} function enables saving Keras models to
 external hdf5 files.
 }
 \seealso{
 Other model persistence: 
 \code{\link{get_weights}()},
-\code{\link{model_to_json}()},
-\code{\link{model_to_yaml}()},
-\code{\link{save_model_hdf5}()},
-\code{\link{save_model_tf}()},
-\code{\link{save_model_weights_hdf5}()}
+\code{\link{model_to_json}()}
 }
 \concept{model persistence}

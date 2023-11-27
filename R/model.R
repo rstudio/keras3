@@ -1435,21 +1435,3 @@ have_requests <- function() {
 have_pillow <- function() {
   have_module("PIL") # aka Pillow
 }
-
-confirm_overwrite <- function(filepath, overwrite) {
-  if (overwrite)
-    TRUE
-  else {
-    if (file.exists(filepath)) {
-      if (interactive()) {
-        prompt <- readline(sprintf("[WARNING] %s already exists - overwrite? [y/n] ", filepath))
-        tolower(prompt) == 'y'
-      } else {
-        stop("File '", filepath, "' already exists (pass overwrite = TRUE to force save).",
-             call. = FALSE)
-      }
-    } else {
-      TRUE
-    }
-  }
-}

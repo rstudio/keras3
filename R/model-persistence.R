@@ -1,267 +1,221 @@
 
-#' Save/Load models using HDF5 files
+#' Saves a model as a `.keras` file.
 #'
-#' @param object Model object to save
-#' @param filepath File path
-#' @param compile Whether to compile the model after loading.
-#' @param overwrite Overwrite existing file if necessary
-#' @param include_optimizer If `TRUE`, save optimizer's state.
-#' @param custom_objects Mapping class names (or function names) of custom
-#'   (non-Keras) objects to class/functions (for example, custom metrics
-#'   or custom loss functions). This mapping can be done with the dict()
-#'   function of reticulate.
+#' @description
 #'
-#' @details The following components of the model are saved:
+#' # Examples
+#' ```{r}
+#' model <- keras_model_sequential(input_shape = c(3)) |>
+#'   layer_dense(5) |>
+#'   layer_activation_softmax()
 #'
-#'   - The model architecture, allowing to re-instantiate the model.
-#'   - The model weights.
-#'   - The state of the optimizer, allowing to resume training exactly where you
-#'     left off.
-#' This allows you to save the entirety of the state of a model
-#' in a single file.
+#' model |> save_model("model.keras")
+#' loaded_model <- load_model("model.keras")
 #'
-#' Saved models can be reinstantiated via `load_model_hdf5()`. The model returned by
-#' `load_model_hdf5()` is a compiled model ready to be used (unless the saved model
-#' was never compiled in the first place or `compile = FALSE` is specified).
+#' x <- random_uniform(c(10, 3))
+#' stopifnot(all.equal(
+#'   model |> predict(x),
+#'   loaded_model |> predict(x)
+#' ))
+#' ```
 #'
-#' As an alternative to providing the `custom_objects` argument, you can
-#' execute the definition and persistence of your model using the
-#' [with_custom_object_scope()] function.
+#' The saved `.keras` file contains:
 #'
-#' @note The [serialize_model()] function enables saving Keras models to
-#' R objects that can be persisted across R sessions.
+#' - The model's configuration (architecture)
+#' - The model's weights
+#' - The model's optimizer's state (if any)
 #'
-#' @family model persistence
+#' Thus models can be reinstantiated in the exact same state.
+#'
+#' ```{r}
+#' zip::zip_list("model.keras")[, "filename"]
+#' ```
+#'
+#' ```{r, include = FALSE}
+#' unlink("model.keras")
+#' ```
+#'
+#' @param filepath
+#' string,
+#' Path where to save the model. Must end in `.keras`.
+#'
+#' @param overwrite
+#' Whether we should overwrite any existing model
+#' at the target location, or instead ask the user
+#' via an interactive prompt.
+#'
+#' @param ...
+#' For forward/backward compatability.
 #'
 #' @export
-save_model_hdf5 <- function(object, filepath, overwrite = TRUE, include_optimizer = TRUE) {
-
-  if (!have_h5py())
-    stop("The h5py Python package is required to save and load models")
-
-  filepath <- normalize_path(filepath)
-
-  args <- list(
-    model = object,
-    filepath = filepath,
-    overwrite = overwrite,
-    include_optimizer = include_optimizer
-  )
-
-  if (tensorflow::tf_version() >= "1.14.0" && !is_backend("plaidml")) {
-    args[["save_format"]] <- "h5"
-  }
-
-  if (confirm_overwrite(filepath, overwrite)) {
-    do.call(keras$models$save_model, args)
-    invisible(TRUE)
-  } else {
-    invisible(FALSE)
-  }
+#' @tether keras.saving.save_model
+#' @seealso
+#' + <https://www.tensorflow.org/api_docs/python/tf/keras/models/Model/save>
+save_model <-
+function (model, filepath, overwrite = FALSE, ...)
+{
+  args <- capture_args2(NULL, ignore = "model")
+  args$overwrite <- confirm_overwrite(filepath, overwrite)
+  keras$saving$save_model(model, !!!args)
+  invisible(filepath)
 }
 
-#' Save/Load models using SavedModel format
-#'
-#' @inheritParams save_model_hdf5
-#' @param signatures Signatures to save with the SavedModel. Please see the signatures
-#'  argument in `tf$saved_model$save` for details.
-#' @param options Optional `tf$saved_model$SaveOptions` object that specifies options
-#'  for saving to SavedModel
-#'
-#' @family model persistence
-#'
-#' @export
-save_model_tf <- function(object, filepath, overwrite = TRUE, include_optimizer = TRUE,
-                          signatures = NULL, options = NULL) {
-
-  if (tensorflow::tf_version() < "2.0.0")
-    stop("save_model_tf only works with TF >= 2.0.0", call.=FALSE)
-
-  filepath <- normalize_path(filepath)
-
-  args <- list(
-    model = object,
-    filepath = filepath,
-    overwrite = overwrite,
-    include_optimizer = include_optimizer,
-    signatures = signatures,
-    options = options,
-    save_format = "tf"
-  )
 
 
-  if (confirm_overwrite(filepath, overwrite)) {
-    do.call(keras$models$save_model, args)
-    invisible(TRUE)
-  } else {
-    invisible(FALSE)
-  }
 
-}
+confirm_overwrite <- function(filepath, overwrite) {
+  if (isTRUE(overwrite))
+    return(TRUE)
 
-#' @rdname save_model_hdf5
-#' @export
-load_model_hdf5 <- function(filepath, custom_objects = NULL, compile = TRUE) {
+  if (!file.exists(filepath))
+    return(overwrite)
 
-  if (!have_h5py())
-    stop("The h5py Python package is required to save and load models")
-
-  load_model(filepath, custom_objects, compile)
-}
-
-#' @rdname save_model_tf
-#' @export
-load_model_tf <- function(filepath, custom_objects = NULL, compile = TRUE) {
-
-  if (tensorflow::tf_version() < "2.0.0")
-    stop("TensorFlow version >= 2.0.0 is requires to load models in the SavedModel format.",
+  if (interactive())
+    overwrite <-
+      askYesNo(sprintf("File '%s' already exists - overwrite?", filepath),
+               default = FALSE)
+  if (!isTRUE(overwrite))
+    stop("File '", filepath, "' already exists (pass overwrite = TRUE to force save).",
          call. = FALSE)
 
-  load_model(filepath, custom_objects, compile)
-}
-
-load_model <- function(filepath, custom_objects = NULL, compile = TRUE) {
-  # prepare custom objects
-  custom_objects <- objects_with_py_function_names(custom_objects)
-
-  # build args dynamically so we can only pass `compile` if it's supported
-  # (compile requires keras 2.0.4 / tensorflow 1.3)
-  args <- list(
-    filepath = normalize_path(filepath),
-    custom_objects = custom_objects
-  )
-  if (keras_version() >= "2.0.4")
-    args$compile <- compile
-
-  do.call(keras$models$load_model, args)
+  TRUE
 }
 
 
-#' Save/Load model weights using HDF5 files
+#' Loads a model saved via `model.save()`.
 #'
-#' @param object Model object to save/load
-#' @param filepath Path to the file
-#' @param overwrite Whether to silently overwrite any existing
-#'   file at the target location
-#' @param by_name Whether to load weights by name or by topological order.
-#' @param skip_mismatch Logical, whether to skip loading of layers
-#'   where there is a mismatch in the number of weights, or a mismatch in the
-#'   shape of the weight (only valid when `by_name = FALSE`).
-#' @param reshape Reshape weights to fit the layer when the correct number
-#'   of values are present but the shape does not match.
+#' @description
 #'
-#' @details The weight file has:
-#'   - `layer_names` (attribute), a list of strings (ordered names of model layers).
-#'   - For every layer, a `group` named `layer.name`
-#'   - For every such layer group, a group attribute `weight_names`, a list of strings
-#'     (ordered names of weights tensor of the layer).
-#'  - For every weight in the layer, a dataset storing the weight value, named after
-#'    the weight tensor.
+#' # Examples
+#' ```{r}
+#' model <- keras_model_sequential(input_shape = c(3)) |>
+#'   layer_dense(5) |>
+#'   layer_activation_softmax()
 #'
-#'   For `load_model_weights()`, if `by_name` is `FALSE` (default) weights are
-#'   loaded based on the network's topology, meaning the architecture should be
-#'   the same as when the weights were saved. Note that layers that don't have
-#'   weights are not taken into account in the topological ordering, so adding
-#'   or removing layers is fine as long as they don't have weights.
+#' model |> save_model("model.keras")
+#' loaded_model <- load_model("model.keras")
 #'
-#'   If `by_name` is `TRUE`, weights are loaded into layers only if they share
-#'   the same name. This is useful for fine-tuning or transfer-learning models
-#'   where some of the layers have changed.
+#' x <- random_uniform(c(10, 3))
+#' stopifnot(all.equal(
+#'   model |> predict(x),
+#'   loaded_model |> predict(x)
+#' ))
+#' ```
 #'
-
-#' @family model persistence
+#' ```{r, include = FALSE}
+#' unlink("model.keras")
+#' ```
+#'
+#' Note that the model variables may have different name values
+#' (`var$name` property, e.g. `"dense_1/kernel:0"`) after being reloaded.
+#' It is recommended that you use layer attributes to
+#' access specific variables, e.g. `model |> get_layer("dense_1") |> _$kernel`.
+#'
+#' @returns
+#' A Keras model instance. If the original model was compiled,
+#' and the argument `compile = TRUE` is set, then the returned model
+#' will be compiled. Otherwise, the model will be left uncompiled.
+#'
+#' @param filepath
+#' string, path to the saved model file.
+#'
+#' @param custom_objects
+#' Optional named list mapping names
+#' to custom classes or functions to be
+#' considered during deserialization.
+#'
+#' @param compile
+#' Boolean, whether to compile the model after loading.
+#'
+#' @param safe_mode
+#' Boolean, whether to disallow unsafe `lambda` deserialization.
+#' When `safe_mode=FALSE`, loading an object has the potential to
+#' trigger arbitrary code execution. This argument is only
+#' applicable to the Keras v3 model format. Defaults to `TRUE`.
 #'
 #' @export
-save_model_weights_hdf5 <- function(object, filepath, overwrite = TRUE) {
-
-  if (!have_h5py())
-    stop("The h5py Python package is required to save and load model weights")
-  filepath <- normalize_path(filepath)
-  if (confirm_overwrite(filepath, overwrite)) {
-    object$save_weights(filepath = filepath, overwrite = overwrite,
-                        save_format = "h5")
-    invisible(TRUE)
-  } else {
-    invisible(FALSE)
-  }
+#' @tether keras.saving.load_model
+#' @family saving
+#' @seealso
+#' + <https:/keras.io/keras_core/api/models/model_saving_apis/model_saving_and_loading#loadmodel-function>
+#' + <https://www.tensorflow.org/api_docs/python/tf/keras/saving/load_model>
+load_model <-
+function (filepath, custom_objects = NULL, compile = TRUE, safe_mode = TRUE)
+{
+  args <- capture_args2(list(custom_objects = objects_with_py_function_names))
+  do.call(keras$saving$load_model, args)
 }
 
-#' Save model weights in the SavedModel format
+
+#' Saves all layer weights to a `.weights.h5` file.
 #'
-#' @inheritParams save_model_weights_hdf5
+#' @param filepath
+#' string.
+#' Path where to save the model. Must end in `.weights.h5`.
 #'
-#' @details
-#' When saving in TensorFlow format, all objects referenced by the network
-#' are saved in the same format as `tf.train.Checkpoint`, including any Layer instances
-#' or Optimizer instances assigned to object attributes. For networks constructed from
-#' inputs and outputs using `tf.keras.Model(inputs, outputs)`, Layer instances used by
-#' the network are tracked/saved automatically. For user-defined classes which inherit
-#' from `tf.keras.Model`, Layer instances must be assigned to object attributes,
-#' typically in the constructor.
-#'
-#' See the documentation of `tf.train.Checkpoint` and `tf.keras.Model` for details.
+#' @param overwrite
+#' Whether we should overwrite any existing model
+#' at the target location, or instead ask the user
+#' via an interactive prompt.
 #'
 #' @export
-save_model_weights_tf <- function(object, filepath, overwrite = TRUE) {
-
-  if (!is_tensorflow_implementation())
-    stop("Save weights to the SavedModel format requires the TensorFlow implementation.")
-
-  if (!tensorflow::tf_version() >= "2.0")
-    stop("Save weights to the SavedModel format requires TensorFlow version >= 2.0")
-
-  filepath <- normalize_path(filepath)
-  if (confirm_overwrite(filepath, overwrite)) {
-    object$save_weights(filepath = filepath, overwrite = overwrite,
-                        save_format = "tf")
-    invisible(TRUE)
-  } else {
-    invisible(FALSE)
-  }
+#' @tether keras.Model.save_weights
+#' @seealso
+#' + <https:/keras.io/api/models/model_saving_apis/weights_saving_and_loading#saveweights-method>
+#' + <https://www.tensorflow.org/api_docs/python/tf/keras/Model/save_weights>
+save_model_weights <-
+function (self, filepath, overwrite = FALSE)
+{
+    args <- capture_args2(NULL)
+    args$overwrite <- confirm_overwrite(filepath, overwrite)
+    do.call(keras$Model$save_weights, args)
+    invisible(filepath)
 }
 
-#' @rdname save_model_weights_hdf5
+
+#' Load weights from a file saved via `save_model_weights()`.
+#'
+#' @description
+#' Weights are loaded based on the network's
+#' topology. This means the architecture should be the same as when the
+#' weights were saved. Note that layers that don't have weights are not
+#' taken into account in the topological ordering, so adding or removing
+#' layers is fine as long as they don't have weights.
+#'
+#' **Partial weight loading**
+#'
+#' If you have modified your model, for instance by adding a new layer
+#' (with weights) or by changing the shape of the weights of a layer,
+#' you can choose to ignore errors and continue loading
+#' by setting `skip_mismatch=TRUE`. In this case any layer with
+#' mismatching weights will be skipped. A warning will be displayed
+#' for each skipped layer.
+#'
+#' @param filepath
+#' String, path to the weights file to load.
+#' It can either be a `.weights.h5` file
+#' or a legacy `.h5` weights file.
+#'
+#' @param skip_mismatch
+#' Boolean, whether to skip loading of layers where
+#' there is a mismatch in the number of weights, or a mismatch in
+#' the shape of the weights.
+#'
+#' @param ...
+#' For forward/backward compatability.
+#'
 #' @export
-load_model_weights_hdf5 <- function(object, filepath, by_name = FALSE,
-                                    skip_mismatch = FALSE, reshape = FALSE) {
-  if (!have_h5py())
-    stop("The h5py Python package is required to save and load model weights")
-
-  args <- list(
-    filepath = normalize_path(filepath),
-    by_name = by_name
-  )
-
-  if (keras_version() >= "2.1.4" && !is_tensorflow_implementation()) {
-    args$skip_mismatch <- skip_mismatch
-    args$reshape <- reshape
-  }
-
-  do.call(object$load_weights, args)
-
-  invisible(object)
+#' @tether keras.Model.load_weights
+#' @seealso
+#' + <https:/keras.io/api/models/model_saving_apis/weights_saving_and_loading#loadweights-method>
+#' + <https://www.tensorflow.org/api_docs/python/tf/keras/Model/load_weights>
+load_model_weights <-
+function (self, filepath, skip_mismatch = FALSE, ...)
+{
+  args <- capture_args2(NULL)
+  do.call(keras$Model$load_weights, args)
 }
 
-#' @inheritParams load_model_weights_hdf5
-#' @rdname save_model_weights_tf
-#' @export
-load_model_weights_tf <- function(object, filepath, by_name = FALSE,
-                                    skip_mismatch = FALSE, reshape = FALSE) {
-
-  args <- list(
-    filepath = normalize_path(filepath),
-    by_name = by_name
-  )
-
-  if (keras_version() >= "2.1.4" && !is_tensorflow_implementation()) {
-    args$skip_mismatch <- skip_mismatch
-    args$reshape <- reshape
-  }
-
-  do.call(object$load_weights, args)
-
-  invisible(object)
-}
 
 
 #' Model configuration as JSON
@@ -289,38 +243,6 @@ model_from_json <- function(json, custom_objects = NULL) {
 }
 
 
-#' Model configuration as YAML
-#'
-#' Save and re-load models configurations as YAML Note that the representation
-#' does not include the weights, only the architecture.
-#
-#' @inheritParams model_to_json
-#'
-#' @param yaml YAML with model configuration
-#'
-#' @family model persistence
-#'
-#' @export
-model_to_yaml <- function(object) {
-  warning("The ability to serialize models to/from yaml was removed in Tensorflow due to security risk of arbitrary code execution. Please us `model_to_json()` instead.")
-
-  if (!have_pyyaml())
-    stop("The pyyaml Python package is required to save and load models as YAML")
-
-  object$to_yaml()
-}
-
-#' @rdname model_to_yaml
-#' @export
-model_from_yaml <- function(yaml, custom_objects = NULL) {
-  warning("The ability to serialize models to/from yaml was removed in Tensorflow due to security risk of arbitrary code execution. Please us `model_to_json()` instead.")
-
-  if (!have_pyyaml())
-    stop("The pyyaml Python package is required to save and load models as YAML")
-
-  keras$models$model_from_yaml(yaml, custom_objects)
-}
-
 #' Serialize a model to an R object
 #'
 #' Model objects are external references to Keras objects which cannot be saved
@@ -328,10 +250,9 @@ model_from_yaml <- function(yaml, custom_objects = NULL) {
 #' `unserialize_model()` functions provide facilities to convert Keras models to
 #' R objects for persistence within R data files.
 #'
-#' @note The [save_model_hdf5()] function enables saving Keras models to
+#' @note The [save_model()] function enables saving Keras models to
 #' external hdf5 files.
 #'
-#' @inheritParams save_model_hdf5
 #' @param model Keras model or R "raw" object containing serialized Keras model.
 #'
 #' @return `serialize_model()` returns an R "raw" object containing an hdf5
@@ -340,15 +261,14 @@ model_from_yaml <- function(yaml, custom_objects = NULL) {
 #' @family model persistence
 #'
 #' @export
-serialize_model <- function(model, include_optimizer = TRUE) {
+serialize_model <- function(model, ...) {
 
   if (!inherits(model, "keras.models.model.Model"))
-    stop("You must pass a Keras model object to serialize_model")
+    stop("You must pass a Keras model object to serialize_model()")
 
-  # write hdf5 file to temp file
-  tmp <- tempfile(pattern = "keras_model", fileext = ".h5")
-  on.exit(unlink(tmp), add = TRUE)
-  save_model_hdf5(model, tmp, include_optimizer = include_optimizer)
+  file <- tempfile(pattern = "keras_model-", fileext = ".keras")
+  on.exit(unlink(file), add = TRUE)
+  save_model(model, file, ...)
 
   # read it back into a raw vector
   readBin(tmp, what = "raw", n = file.size(tmp))
@@ -358,14 +278,14 @@ serialize_model <- function(model, include_optimizer = TRUE) {
 #' @export
 unserialize_model <- function(model, custom_objects = NULL, compile = TRUE) {
 
-  # write raw hdf5 bytes to temp file
-  tmp <- tempfile(pattern = "keras_model", fileext = ".h5")
-  on.exit(unlink(tmp), add = TRUE)
-  writeBin(model, tmp)
+  # write raw model '.keras' bytes to temp file
+  file <- tempfile(pattern = "keras_model-", fileext = ".keras")
+  on.exit(unlink(file), add = TRUE)
+  writeBin(model, file)
 
-  # read in from hdf5
-  load_model_hdf5(tmp, custom_objects = custom_objects, compile = compile)
+  load_model(file, custom_objects = custom_objects, compile = compile)
 }
+
 
 reload_model <- function(object) {
   old_config <- get_config(object)

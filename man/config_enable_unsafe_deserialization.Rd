@@ -18,7 +18,8 @@ Other saving:
 \code{\link{get_custom_objects}()},
 \code{\link{get_registered_name}()},
 \code{\link{get_registered_object}()},
-\code{\link{layer_tfsm}()}
+\code{\link{layer_tfsm}()},
+\code{\link{load_model}()}
 
 Other config: 
 \code{\link{config_disable_interactive_logging}()},

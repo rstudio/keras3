@@ -31,7 +31,8 @@ Other saving:
 \code{\link{config_enable_unsafe_deserialization}()},
 \code{\link{get_custom_objects}()},
 \code{\link{get_registered_object}()},
-\code{\link{layer_tfsm}()}
+\code{\link{layer_tfsm}()},
+\code{\link{load_model}()}
 
 Other utils: 
 \code{\link{audio_dataset_from_directory}()},

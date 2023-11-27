@@ -72,7 +72,8 @@ Other saving:
 \code{\link{config_enable_unsafe_deserialization}()},
 \code{\link{get_custom_objects}()},
 \code{\link{get_registered_name}()},
-\code{\link{get_registered_object}()}
+\code{\link{get_registered_object}()},
+\code{\link{load_model}()}
 
 Other layers: 
 \code{\link{bidirectional}()},
