@@ -87,6 +87,18 @@ function ()
 }
 
 
+#??
+function(x) {
+  # config_floatx?
+  if(missing(x))
+    keras$config$floatx()
+  else
+    keras$config$set_floatx(x)
+}
+
+
+
+
 #' Return the default image data format convention.
 #'
 #' @description

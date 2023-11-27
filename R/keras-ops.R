@@ -960,9 +960,6 @@ function (x, axis = NULL, keepdims = FALSE)
 #' x <- op_convert_to_tensor(rbind(c(1, 2), c(3, 4), c(5, 6)))
 #' c(q, r) %<-% op_qr(x)
 #' q
-#' # array([[-0.16903079  0.897085]
-#' #        [-0.5070925   0.2760267 ]
-#' #        [-0.8451542  -0.34503305]], shape=(3, 2), dtype=float32)
 #' ```
 #'
 #' @returns
@@ -988,6 +985,14 @@ function (x, axis = NULL, keepdims = FALSE)
 op_qr <-
 function (x, mode = "reduced")
 keras$ops$qr(x, mode)
+
+
+#' @export
+py_to_r.tensorflow.python.ops.gen_linalg_ops.Qr <- function(x) {
+  x <- py_eval("tuple")(x)
+  names(x) <- c("q", "r")
+  x
+}
 
 
 #' Real-valued Fast Fourier Transform along the last axis of the input.
@@ -1303,6 +1308,14 @@ function (x, k, sorted = TRUE)
 {
     args <- capture_args2(list(k = as_integer))
     do.call(keras$ops$top_k, args)
+}
+
+
+#' @export
+py_to_r.tensorflow.python.ops.gen_nn_ops.TopKV2 <- function(x) {
+  x <- py_eval("tuple")(x)
+  names(x) <- c("values", "indices")
+  x
 }
 
 

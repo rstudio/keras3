@@ -172,98 +172,6 @@ keras_array <- function(x, dtype = NULL) {
 }
 
 
-#' Return the default float type, as a string.
-#'
-#' @description
-#' E.g. `'float16'`, `'float32'`, `'float64'`.
-#'
-#' # Examples
-#' ```{r}
-#' k_floatx()
-#' ```
-#'
-#' @returns
-#' String, the current default float type.
-#'
-#' @export
-#' @seealso
-#' + <https://www.tensorflow.org/api_docs/python/tf/keras/config/floatx>
-k_floatx <- function() {
-  keras$config$floatx()
-}
-
-
-function(x) {
-  # k_config_floatx?
-  if(missing(x))
-    keras$config$floatx()
-  else
-    keras$config$set_floatx(x)
-}
-
-
-#' Check if Keras is Available
-#'
-#' Probe to see whether the Keras Python package is available in the current
-#' system environment.
-#'
-#' @param version Minimum required version of Keras (defaults to `NULL`, no
-#'   required version).
-#'
-#' @return Logical indicating whether Keras (or the specified minimum version of
-#'   Keras) is available.
-#'
-#' @examples
-#' \dontrun{
-#' # testthat utilty for skipping tests when Keras isn't available
-#' skip_if_no_keras <- function(version = NULL) {
-#'   if (!is_keras_available(version))
-#'     skip("Required keras version not available for testing")
-#' }
-#'
-#' # use the function within a test
-#' test_that("keras function works correctly", {
-#'   skip_if_no_keras()
-#'   # test code here
-#' })
-#' }
-#'
-#' @export
-is_keras_available <- function(version = NULL) {
-  implementation_module <- resolve_implementation_module()
-  if (reticulate::py_module_available(implementation_module)) {
-    if (!is.null(version))
-      keras_version() >= version
-    else
-      TRUE
-  } else {
-    FALSE
-  }
-}
-
-
-#' Keras implementation
-#'
-#' Obtain a reference to the Python module used for the implementation of Keras.
-#'
-#' These are the available Python modules which implement Keras:
-#'
-#' - keras
-#' - tensorflow.keras ("tensorflow")
-#' - keras_core ("core")
-#'
-#' This function returns a reference to the implementation being currently
-#' used by the keras package. The default implementation is "keras".
-#' You can override this by setting the `KERAS_IMPLEMENTATION` environment
-#' variable to "tensorflow".
-#'
-#' @return Reference to the Python module used for the implementation of Keras.
-#'
-#' @export
-implementation <- function() {
-  keras
-}
-
 
 is_backend <- function(name) {
   identical(keras$config$backend(), name)
@@ -650,26 +558,6 @@ drop_nulls <- function(x, i = NULL) {
   x[!drop]
 }
 
-#' @export
-as.array.keras.backend.common.variables.KerasVariable <- function(x, ...) {
-  as_r_value(keras$ops$convert_to_numpy(x))
-}
-
-#' @export
-as.numeric.keras.backend.common.variables.KerasVariable <- function(x, ...) {
-  as.numeric(as_r_value(keras$ops$convert_to_numpy(x)))
-}
-
-#' @export
-as.double.keras.backend.common.variables.KerasVariable <- function(x, ...) {
-  as.double(as_r_value(keras$ops$convert_to_numpy(x)))
-}
-
-#' @export
-as.integer.keras.backend.common.variables.KerasVariable <- function(x, ...) {
-  as.integer(as_r_value(keras$ops$convert_to_numpy(x)))
-}
-
 as_r_value <- function (x) {
   if (inherits(x, "python.builtin.object"))
     py_to_r(x)
@@ -709,214 +597,31 @@ named_list <- function(...)
             .homonyms = "error",
             .check_assign = FALSE)
 
-#' @export
-py_to_r.tensorflow.python.ops.gen_linalg_ops.Qr <- function(x) {
-  x <- py_eval("tuple")(x)
-  names(x) <- c("q", "r")
-  x
-}
-
-#' @export
-py_to_r.tensorflow.python.ops.gen_nn_ops.TopKV2 <- function(x) {
-  x <- py_eval("tuple")(x)
-  names(x) <- c("values", "indices")
-  x
-}
-
-# Generate a Random Array
-#
-# This function generates an array with random numbers.
-# The dimensions of the array are specified by the user.
-# The generation function for the random numbers can also be customized.
-#
-# @param ... Dimensions for the array as separate integers or as a single vector.
-# @param gen A function for generating random numbers, defaulting to `runif`.
-#
-# @return Returns an array with the specified dimensions filled with random numbers.
-#
-# @examples
-# # Create a 3x3 matrix with random numbers from uniform distribution
-# random_array(3, 3)
-#
-# # Create a 2x2x2 array with random numbers from normal distribution
-# random_array(2, 2, 2, gen = rnorm)
-#
-# # Create a 2x2 array with a sequence of integers.
-# random_array(2, 2, gen = seq)
-#
-# @export
+#' Generate a Random Array
+#'
+#' This function generates an R array with random numbers.
+#' The dimensions of the array are specified by the user.
+#' The generation function for the random numbers can also be customized.
+#'
+#' @param ... Dimensions for the array as separate integers or as a single vector.
+#' @param gen A function for generating random numbers, defaulting to `runif`.
+#'
+#' @return Returns an array with the specified dimensions filled with random numbers.
+#'
+#' @examples
+#' # Create a 3x3 matrix with random numbers from uniform distribution
+#' random_array(3, 3)
+#'
+#' # Create a 2x2x2 array with random numbers from normal distribution
+#' random_array(2, 2, 2, gen = rnorm)
+#'
+#' # Create a 2x2 array with a sequence of integers.
+#' random_array(2, 2, gen = seq)
+#'
+#' @keywords internal
 random_array <- function(..., gen = stats::runif) {
   dim <- unlist(c(...), use.names = FALSE)
   array(gen(prod(dim)), dim = dim)
 }
 
 
-
-
-
-#' Tensor shape utility
-#'
-#' This function can be used to create or get the shape of an object.
-#'
-#' # Examples
-#' ```{r}
-#' shape(1, 2, 3)
-#' ```
-#'
-#' 3 ways to specify an unknown dimension
-#' ```{r, results = "hold"}
-#' shape(NA,   2, 3)
-#' shape(NULL, 2, 3)
-#' shape(-1,   2, 3)
-#' ```
-#'
-#' Most functions that take a 'shape' argument also coerce with `shape()`
-#' ```{r, results = "hold"}
-#' layer_input(c(1, 2, 3))
-#' layer_input(shape(1, 2, 3))
-#' ```
-#'
-#' You can also use `shape()` to get the shape of a tensor
-#' ```{r}
-#' symbolic_tensor <- layer_input(shape(1, 2, 3))
-#' shape(symbolic_tensor)
-#'
-#' eager_tensor <- op_ones(c(1,2,3))
-#' shape(eager_tensor)
-#' op_shape(eager_tensor)
-#' ```
-#'
-#' Combine or expand shapes
-#' ```{r}
-#' shape(symbolic_tensor, 4)
-#' shape(5, symbolic_tensor, 4)
-#' ```
-#'
-#' In graph mode, a shape might contain a scalar integer tensor for unknown
-#' axes.
-#' ```{r}
-#' tfn <- tensorflow::tf_function(function(x) {
-#'   print(shape(x))
-#'   x
-#' },
-#' input_signature = list(tensorflow::tf$TensorSpec(shape(1, NA, 3))))
-#' invisible(tfn(op_ones(shape(1, 2, 3))))
-#' ```
-#'
-#' A useful pattern is to unpack the `shape()` with `%<-%`, like this:
-#' ```r
-#' c(batch_size, seq_len, channels) %<-% shape(x)
-#' ```
-#'
-#' If you are unpacking `shape()` in graph mode, and then want to reassemble the
-#' axes with `shape()`, you'll have to wrap tensors with `I()` to use the tensor
-#' itself, rather than the shape of the tensor.
-#' ```{r}
-#' echo_print <- function(x) { message("> ", deparse(substitute(x))); print(x) }
-#' tfn <- tensorflow::tf_function(function(x) {
-#'   c(axis1, axis2, axis3) %<-% shape(x)
-#'   str(list(axis1 = axis1, axis2 = axis2, axis3 = axis3))
-#'
-#'   echo_print(shape(axis2))               # resolve axis2 tensor shape
-#'   echo_print(shape(axis1, axis2, axis3)) # resolve axis2 tensor shape
-#'
-#'   echo_print(shape(I(axis2)))               # use axis2 tensor as axis value
-#'   echo_print(shape(axis1, I(axis2), axis3)) # use axis2 tensor as axis value
-#'   x
-#' },
-#' input_signature = list(tensorflow::tf$TensorSpec(shape(1, NA, 3))))
-#' invisible(tfn(op_ones(shape(1, 2, 3))))
-#' ```
-#'
-#' @param ... A shape specification. Numerics, `NULL` and tensors are valid.
-#'   `NULL`, `NA`, and `-1L` can be used to specify an unspecified dim size.
-#'   Tensors are dispatched to `k_shape()` to extract the tensor shape. Values
-#'   wrapped in `I()` are used asis (see examples). All other objects are coerced
-#'   via `as.integer()`.
-#'
-#' @return A list with a `"keras_shape"` class attribute. Each element of the
-#'   list will be either a) `NULL`, b) an integer or c) a scalar integer tensor
-#'   (e.g., when supplied a TF tensor with a unspecified dimension in a function
-#'   being traced).
-#'
-#'
-#' @export
-#' @seealso [op_shape()]
-shape <- function(...) {
-
-  fix <- function(x) {
-    if (inherits(x, "AsIs")) {
-      class(x) <- setdiff(class(x), "AsIs")
-      return(x)
-    }
-
-    if (inherits(x, 'python.builtin.object')) {
-      if (inherits(x, "tensorflow.python.framework.tensor_shape.TensorShape"))
-        return(as.integer(x))
-
-      tryCatch({
-        return(lapply(keras$ops$shape(x),
-                      function(d) as_r_value(d) %||% NA_integer_))
-      }, error = identity)
-    }
-
-    if (!is.atomic(x) || length(x) > 1)
-      lapply(x, fix)
-    else if (is.null(x) ||
-             identical(x, NA_integer_) ||
-             identical(x, NA_real_) ||
-             identical(x, NA) ||
-             (is.numeric(x) && isTRUE(suppressWarnings(x == -1L))))
-      NA_integer_ # so we can safely unlist()
-    else
-      as.integer(x)
-  }
-
-  shp <- unlist(fix(list(...)), use.names = FALSE)
-  shp <- lapply(shp, function(x) if (identical(x, NA_integer_)) NULL else x)
-  class(shp) <- "keras_shape"
-  shp
-}
-
-#' @export
-#' @rdname shape
-format.keras_shape <- function(x, ...) {
-  x <- vapply(x, function(d) format(d %||% "NA"), "")
-  x <- paste0(x, collapse = ", ")
-  paste0("shape(", x, ")")
-}
-
-#' @export
-#' @rdname shape
-print.keras_shape <- function(x, ...) {
-  writeLines(format(x, ...))
-  invisible(x)
-}
-
-#' @rdname shape
-#' @export
-`[.keras_shape` <- function(x, ...) {
-  out <- unclass(x)[...]
-  class(out) <- class(x)
-  out
-}
-
-#' @rdname shape
-#' @export
-r_to_py.keras_shape <- function(x, convert = FALSE) {
-  tuple(x)
-}
-
-#' @rdname shape
-#' @export
-as.integer.keras_shape <- function(x, ...) {
-  vapply(x, function(el) el %||% NA_integer_, 1L)
-}
-
-#' @importFrom zeallot destructure
-#' @export
-destructure.keras_shape <- function(x) unclass(x)
-
-#' @rdname shape
-#' @export
-as.list.keras_shape <- function(x) unclass(x)

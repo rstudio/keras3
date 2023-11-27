@@ -315,3 +315,68 @@ keras_version <- function() {
   ver <- gsub("[.-]+", ".", ver, perl = TRUE)
   package_version(ver)
 }
+
+
+
+#' Check if Keras is Available
+#'
+#' Probe to see whether the Keras Python package is available in the current
+#' system environment.
+#'
+#' @param version Minimum required version of Keras (defaults to `NULL`, no
+#'   required version).
+#'
+#' @return Logical indicating whether Keras (or the specified minimum version of
+#'   Keras) is available.
+#'
+#' @examples
+#' \dontrun{
+#' # testthat utilty for skipping tests when Keras isn't available
+#' skip_if_no_keras <- function(version = NULL) {
+#'   if (!is_keras_available(version))
+#'     skip("Required keras version not available for testing")
+#' }
+#'
+#' # use the function within a test
+#' test_that("keras function works correctly", {
+#'   skip_if_no_keras()
+#'   # test code here
+#' })
+#' }
+#'
+#' @export
+is_keras_available <- function(version = NULL) {
+  implementation_module <- resolve_implementation_module()
+  if (reticulate::py_module_available(implementation_module)) {
+    if (!is.null(version))
+      keras_version() >= version
+    else
+      TRUE
+  } else {
+    FALSE
+  }
+}
+
+
+#' Keras implementation
+#'
+#' Obtain a reference to the Python module used for the implementation of Keras.
+#'
+#' These are the available Python modules which implement Keras:
+#'
+#' - keras
+#' - tensorflow.keras ("tensorflow")
+#' - keras_core ("core")
+#'
+#' This function returns a reference to the implementation being currently
+#' used by the keras package. The default implementation is "keras".
+#' You can override this by setting the `KERAS_IMPLEMENTATION` environment
+#' variable to "tensorflow".
+#'
+#' @return Reference to the Python module used for the implementation of Keras.
+#'
+#' @export
+implementation <- function() {
+  keras
+}
+
