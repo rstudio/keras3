@@ -131,6 +131,9 @@ function (object, use_scale = TRUE, dropout = 0, ...)
 #' Float between 0 and 1. Fraction of the units to drop for the
 #' attention scores. Defaults to `0.0`.
 #'
+#' @param seed
+#' An integer to use as random seed incase of `dropout`.
+#'
 #' @param score_mode
 #' Function to use to compute attention scores, one of
 #' `{"dot", "concat"}`. `"dot"` refers to the dot product between the
@@ -152,7 +155,7 @@ function (object, use_scale = TRUE, dropout = 0, ...)
 #' @tether keras.layers.Attention
 layer_attention <-
 function (object, use_scale = FALSE, score_mode = "dot", dropout = 0,
-    ...)
+    seed = NULL, ...)
 {
     args <- capture_args2(list(input_shape = normalize_shape,
         batch_size = as_integer, batch_input_shape = normalize_shape),

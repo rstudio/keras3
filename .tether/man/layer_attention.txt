@@ -51,6 +51,9 @@
 #' Float between 0 and 1. Fraction of the units to drop for the
 #' attention scores. Defaults to `0.0`.
 #'
+#' @param seed
+#' A Python integer to use as random seed incase of `dropout`.
+#'
 #' @param score_mode
 #' Function to use to compute attention scores, one of
 #' `{"dot", "concat"}`. `"dot"` refers to the dot product between the
@@ -75,5 +78,6 @@ keras.layers.Attention(
   use_scale=False,
   score_mode='dot',
   dropout=0.0,
+  seed=None,
   **kwargs
 )
