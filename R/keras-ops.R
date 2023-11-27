@@ -3699,6 +3699,9 @@ function (x1, x2, axisa = -1L, axisb = -1L, axisc = -1L, axis = NULL)
 #' Axis along which the cumulative product is computed.
 #' By default the input is flattened.
 #'
+#' @param dtype
+#' dtype of returned tensor. Defaults to `x$dtype`.
+#'
 #' @export
 #' @family numpy ops
 #' @family ops
@@ -3707,7 +3710,7 @@ function (x1, x2, axisa = -1L, axisb = -1L, axisc = -1L, axis = NULL)
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/cumprod>
 #' @tether keras.ops.cumprod
 op_cumprod <-
-function (x, axis = NULL)
+function (x, axis = NULL, dtype = NULL)
 {
     args <- capture_args2(list(axis = as_axis))
     do.call(keras$ops$cumprod, args)
@@ -3726,6 +3729,9 @@ function (x, axis = NULL)
 #' Axis along which the cumulative sum is computed.
 #' By default the input is flattened.
 #'
+#' @param dtype
+#' dtype of returned tensor. Defaults to x.dtype.
+#'
 #' @export
 #' @family numpy ops
 #' @family ops
@@ -3734,7 +3740,7 @@ function (x, axis = NULL)
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/cumsum>
 #' @tether keras.ops.cumsum
 op_cumsum <-
-function (x, axis = NULL)
+function (x, axis = NULL, dtype = NULL)
 {
     args <- capture_args2(list(axis = as_axis))
     do.call(keras$ops$cumsum, args)
@@ -5503,6 +5509,11 @@ keras$ops$outer(x1, x2)
 #' `"reflect"`, `"symmetric"`, `"wrap"`, `"empty"`,
 #' `"circular"`. Defaults to`"constant"`.
 #'
+#' @param constant_values
+#' Value to pad with if `mode == "constant"`.
+#' Defaults to `0`. A `ValueError` is raised if not `NULL` and
+#' `mode != "constant"`.
+#'
 #' @export
 #' @family numpy ops
 #' @family ops
@@ -5511,7 +5522,7 @@ keras$ops$outer(x1, x2)
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/pad>
 #' @tether keras.ops.pad
 op_pad <-
-function (x, pad_width, mode = "constant")
+function (x, pad_width, mode = "constant", constant_values = NULL)
 {
     args <- capture_args2(list(pad_width = as_integer))
     do.call(keras$ops$pad, args)

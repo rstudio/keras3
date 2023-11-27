@@ -10,6 +10,9 @@
 #' Axis along which the cumulative sum is computed.
 #' By default the input is flattened.
 #'
+#' @param dtype
+#' dtype of returned tensor. Defaults to x.dtype.
+#'
 #' @export
 #' @family numpy ops
 #' @family ops
@@ -18,4 +21,4 @@
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/cumsum>
 k_cumsum <-
 __signature__
-keras.ops.cumsum(x, axis=None)
+keras.ops.cumsum(x, axis=None, dtype=None)
