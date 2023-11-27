@@ -1,0 +1,11 @@
+#'
+#'
+#' @param name
+#' String, name for the object
+#'
+#' @export
+#' @seealso
+#' + <https://www.tensorflow.org/api_docs/python/tf/keras/utils/FeatureSpace/integer_hashed>
+FeatureSpace_integer_hashed <-
+__signature__
+keras.utils.FeatureSpace.integer_hashed(num_bins, output_mode='one_hot', name=None)

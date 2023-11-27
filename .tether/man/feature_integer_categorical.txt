@@ -1,0 +1,16 @@
+#'
+#'
+#' @param name
+#' String, name for the object
+#'
+#' @export
+#' @seealso
+#' + <https://www.tensorflow.org/api_docs/python/tf/keras/utils/FeatureSpace/integer_categorical>
+FeatureSpace_integer_categorical <-
+__signature__
+keras.utils.FeatureSpace.integer_categorical(
+  max_tokens=None,
+  num_oov_indices=1,
+  output_mode='one_hot',
+  name=None
+)

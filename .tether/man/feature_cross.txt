@@ -1,0 +1,8 @@
+#'
+#'
+#' @export
+#' @seealso
+#' + <https://www.tensorflow.org/api_docs/python/tf/keras/utils/FeatureSpace/cross>
+FeatureSpace_cross <-
+__signature__
+keras.utils.FeatureSpace.cross(feature_names, crossing_dim, output_mode='one_hot')
