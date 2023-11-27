@@ -51,6 +51,9 @@ fs::dir_walk("man-src", type = "directory", recurse = TRUE,
 # TODO: remove k_amax() and friends, they're redundant w/ k_max(), which already
 #       takes an axis arg. Only there for numpy api compatability, which
 #       doesn't matter to us.
+#
+# TODO: layer_feature_space should take a formula, and dispatch to the features as required.
+#       ~ scale(foo) * bar
 
 # TODO: train_on_batch and related methods should be autogen'd and exported. Or maybe we curate those,
 #       and don't export them? (I.e., have the few people that need them access methods via model$train_on_batch())

@@ -1537,7 +1537,7 @@ mk_export <- memoise(.mk_export <- function(endpoint, quiet = FALSE) {
                  setdiff(names(formals(r_fn)),
                          unlist(strsplit(names(params) %||% character(), ","))))) {
         x <- list2("{endpoint}" := map(set_names(undocumented_params), ~"see description"))
-        writeLines(yaml::as.yaml(x))
+       ## writeLines(yaml::as.yaml(x))
         # message(endpoint, ":")
         # writeLines(paste("  ", undocumented_params, ":", "see description"))
       }
