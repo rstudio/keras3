@@ -12,12 +12,8 @@ tether: https://raw.githubusercontent.com/keras-team/keras/master/guides/transfe
 
 ## Setup
 
-```python
-import numpy as np
-import keras
-from keras import layers
-import tensorflow_datasets as tfds
-import matplotlib.pyplot as plt
+```{r}
+library(keras)
 ```
 
 ## Introduction
@@ -69,13 +65,13 @@ Layers & models have three weight attributes:
 
 **Example: the `Dense` layer has 2 trainable weights (kernel & bias)**
 
-```python
-layer = keras.layers.Dense(3)
-layer.build((None, 4))  # Create the weights
+```{r}
+layer <- layer_dense(units = 3)
+layer$build(shape(NULL, 4))  # Create the weights
 
-print("weights:", len(layer.weights))
-print("trainable_weights:", len(layer.trainable_weights))
-print("non_trainable_weights:", len(layer.non_trainable_weights))
+length(layer$weights)
+length(layer$trainable_weights)
+length(layer$non_trainable_weights)
 ```
 
 In general, all weights are trainable weights. The only built-in layer that has
@@ -87,64 +83,62 @@ To learn how to use non-trainable weights in your own custom layers, see the
 **Example: the `BatchNormalization` layer has 2 trainable weights and 2 non-trainable
  weights**
 
-```python
-layer = keras.layers.BatchNormalization()
-layer.build((None, 4))  # Create the weights
+```{r}
+layer <- layer_batch_normalization()
+layer$build(shape(NULL, 4))  # Create the weights
 
-print("weights:", len(layer.weights))
-print("trainable_weights:", len(layer.trainable_weights))
-print("non_trainable_weights:", len(layer.non_trainable_weights))
+length(layer$weights)
+length(layer$trainable_weights)
+length(layer$non_trainable_weights)
 ```
 
 Layers & models also feature a boolean attribute `trainable`. Its value can be changed.
-Setting `layer.trainable` to `False` moves all the layer's weights from trainable to
+Setting `layer$trainable` to `FALSE` moves all the layer's weights from trainable to
 non-trainable.  This is called "freezing" the layer: the state of a frozen layer won't
 be updated during training (either when training with `fit()` or when training with
  any custom loop that relies on `trainable_weights` to apply gradient updates).
 
 **Example: setting `trainable` to `False`**
 
-```python
-layer = keras.layers.Dense(3)
-layer.build((None, 4))  # Create the weights
-layer.trainable = False  # Freeze the layer
+```{r}
+layer <- layer_dense(units = 3)
+layer$build(shape(NULL, 4))  # Create the weights
+layer$trainable <- FALSE  # Freeze the layer
 
-print("weights:", len(layer.weights))
-print("trainable_weights:", len(layer.trainable_weights))
-print("non_trainable_weights:", len(layer.non_trainable_weights))
+length(layer$weights)
+length(layer$trainable_weights)
+length(layer$non_trainable_weights)
 ```
 
 When a trainable weight becomes non-trainable, its value is no longer updated during
  training.
 
-```python
+```{r}
 # Make a model with 2 layers
-layer1 = keras.layers.Dense(3, activation="relu")
-layer2 = keras.layers.Dense(3, activation="sigmoid")
-model = keras.Sequential([keras.Input(shape=(3,)), layer1, layer2])
+layer1 <- layer_dense(units = 3, activation="relu")
+layer2 <- layer_dense(units = 3, activation="sigmoid")
+model <- keras_model_sequential(input_shape = 3) %>% 
+  layer1() %>% 
+  layer2()
 
 # Freeze the first layer
-layer1.trainable = False
+layer1$trainable <- FALSE
 
 # Keep a copy of the weights of layer1 for later reference
-initial_layer1_weights_values = layer1.get_weights()
+initial_layer1_weights_values <- get_weights(layer1)
 
 # Train the model
-model.compile(optimizer="adam", loss="mse")
-model.fit(np.random.random((2, 3)), np.random.random((2, 3)))
+model %>% compile(optimizer="adam", loss="mse")
+model %>% fit(random_normal(c(2, 3)), random_normal(c(2, 3)), epochs = 1)
 
 # Check that the weights of layer1 have not changed during training
-final_layer1_weights_values = layer1.get_weights()
-np.testing.assert_allclose(
-    initial_layer1_weights_values[0], final_layer1_weights_values[0]
-)
-np.testing.assert_allclose(
-    initial_layer1_weights_values[1], final_layer1_weights_values[1]
-)
+final_layer1_weights_values <- get_weights(layer1)
+
+all.equal(initial_layer1_weights_values, final_layer1_weights_values)
 ```
 
-Do not confuse the `layer.trainable` attribute with the argument `training` in
-`layer.__call__()` (which controls whether the layer should run its forward pass in
+Do not confuse the `layer$trainable` attribute with the argument `training` in
+`layer$call` (which controls whether the layer should run its forward pass in
  inference mode or training mode). For more information, see the
 [Keras FAQ](
   https://keras.io/getting_started/faq/#whats-the-difference-between-the-training-argument-in-call-and-the-trainable-attribute).
@@ -156,29 +150,19 @@ all children layers become non-trainable as well.
 
 **Example:**
 
-```python
-inner_model = keras.Sequential(
-    [
-        keras.Input(shape=(3,)),
-        keras.layers.Dense(3, activation="relu"),
-        keras.layers.Dense(3, activation="relu"),
-    ]
-)
+```{r}
+inner_model <- keras_model_sequential(input_shape = 3) %>% 
+  layer_dense(units = 3, activation="relu") %>% 
+  layer_dense(units = 3, activation="relu")
 
-model = keras.Sequential(
-    [
-        keras.Input(shape=(3,)),
-        inner_model,
-        keras.layers.Dense(3, activation="sigmoid"),
-    ]
-)
+model <- keras_model_sequential(input_shape = 3) %>% 
+  inner_model %>% 
+  layer_dense(units = 3, activation="sigmoid")
 
-model.trainable = False  # Freeze the outer model
+model$trainable <- FALSE  # Freeze the outer model
 
-assert inner_model.trainable == False  # All layers in `model` are now frozen
-assert (
-    inner_model.layers[0].trainable == False
-)  # `trainable` is propagated recursively
+inner_model$trainable  # All layers in `model` are now frozen
+inner_model$layers[[1]]$trainable  # `trainable` is propagated recursively
 ```
 
 ## The typical transfer-learning workflow
@@ -212,41 +196,44 @@ Here's what the first workflow looks like in Keras:
 
 First, instantiate a base model with pre-trained weights.
 
-```python
-base_model = keras.applications.Xception(
+```{r}
+base_model <- application_xception(
     weights='imagenet',  # Load weights pre-trained on ImageNet.
-    input_shape=(150, 150, 3),
-    include_top=False)  # Do not include the ImageNet classifier at the top.
+    input_shape=c(150, 150, 3),
+    include_top=FALSE)  # Do not include the ImageNet classifier at the top.
 ```
 
 Then, freeze the base model.
 
-```python
-base_model.trainable = False
+```{r}
+base_model$trainable <- FALSE
 ```
 
 Create a new model on top.
 
-```python
-inputs = keras.Input(shape=(150, 150, 3))
+```{r}
+inputs <- layer_input(shape = c(150, 150, 3))
 # We make sure that the base_model is running in inference mode here,
 # by passing `training=False`. This is important for fine-tuning, as you will
 # learn in a few paragraphs.
-x = base_model(inputs, training=False)
-# Convert features of shape `base_model.output_shape[1:]` to vectors
-x = keras.layers.GlobalAveragePooling2D()(x)
-# A Dense classifier with a single unit (binary classification)
-outputs = keras.layers.Dense(1)(x)
-model = keras.Model(inputs, outputs)
+outputs <- inputs %>% 
+  base_model(training = FALSE) %>% 
+  # Convert features of shape `base_model.output_shape[1:]` to vectors
+  layer_global_average_pooling_2d() %>% 
+  # A Dense classifier with a single unit (binary classification)
+  layer_dense(1)
+model <- keras_model(inputs, outputs)
 ```
 
 Train the model on new data.
 
-```python
-model.compile(optimizer=keras.optimizers.Adam(),
-              loss=keras.losses.BinaryCrossentropy(from_logits=True),
-              metrics=[keras.metrics.BinaryAccuracy()])
-model.fit(new_dataset, epochs=20, callbacks=..., validation_data=...)
+```{r, eval = FALSE}
+model %>% compile(
+  optimizer = optimizer_adam(),
+  loss = loss_binary_crossentropy(from_logits = TRUE),
+  metrics = list(metric_binary_accuracy())
+)
+model %>% fit(new_dataset, epochs=20, callbacks=..., validation_data=...)
 ```
 
 ## Fine-tuning
@@ -271,19 +258,21 @@ As a result, you are at risk of overfitting very quickly if you apply large weig
 
 This is how to implement fine-tuning of the whole base model:
 
-```python
+```{r, eval = FALSE}
 # Unfreeze the base model
-base_model.trainable = True
+base_model$trainable <- TRUE
 
 # It's important to recompile your model after you make any changes
 # to the `trainable` attribute of any inner layer, so that your changes
 # are take into account
-model.compile(optimizer=keras.optimizers.Adam(1e-5),  # Very low learning rate
-              loss=keras.losses.BinaryCrossentropy(from_logits=True),
-              metrics=[keras.metrics.BinaryAccuracy()])
+model %>% compile(
+  optimizer = optimizer_adam(1e-5),  # Very low learning rate
+  loss = loss_binary_crossentropy(from_logits=TRUE),
+  metrics = list(metric_binary_accuracy())
+)
 
 # Train end-to-end. Be careful to stop before you overfit!
-model.fit(new_dataset, epochs=10, callbacks=..., validation_data=...)
+model %>% fit(new_dataset, epochs=10, callbacks=..., validation_data=...)
 ```
 
 **Important note about `compile()` and `trainable`**
@@ -334,31 +323,37 @@ Transfer learning is most useful when working with very small datasets. To keep 
 dataset small, we will use 40% of the original training data (25,000 images) for
  training, 10% for validation, and 10% for testing.
 
-```python
-tfds.disable_progress_bar()
+```{r}
+# reticulate::py_install("tensorflow-datasets")
+tfds <- reticulate::import("tensorflow_datasets")
+tfds$disable_progress_bar()
 
-train_ds, validation_ds, test_ds = tfds.load(
+c(train_ds, validation_ds, test_ds) %<-% tfds$load(
     "cats_vs_dogs",
     # Reserve 10% for validation and 10% for test
-    split=["train[:40%]", "train[40%:50%]", "train[50%:60%]"],
-    as_supervised=True,  # Include labels
+    split = c("train[:40%]", "train[40%:50%]", "train[50%:60%]"),
+    as_supervised=TRUE  # Include labels
 )
 
-print(f"Number of training samples: {train_ds.cardinality()}")
-print(f"Number of validation samples: {validation_ds.cardinality()}")
-print(f"Number of test samples: {test_ds.cardinality()}")
+length(train_ds)
 ```
 
 These are the first 9 images in the training dataset -- as you can see, they're all
 different sizes.
 
-```python
-plt.figure(figsize=(10, 10))
-for i, (image, label) in enumerate(train_ds.take(9)):
-    ax = plt.subplot(3, 3, i + 1)
-    plt.imshow(image)
-    plt.title(int(label))
-    plt.axis("off")
+```{r}
+library(tfdatasets)
+
+par(mfrow = c(3, 3), mar = c(1,0,1.5,0))
+train_ds %>%
+  dataset_take(9) %>%
+  as_array_iterator() %>%
+  iterate(function(batch) {
+    c(image, label) %<-% batch
+    plot(as.raster(image, max = 255))
+    title(sprintf("label: %s   size: %s",
+                  label, paste(dim(image), collapse = " x ")))
+  })
 ```
 
 We can also see that label 1 is "dog" and label 0 is "cat".
@@ -386,12 +381,13 @@ of the model, when we create it.
 
 Let's resize images to 150x150:
 
-```python
-resize_fn = keras.layers.Resizing(150, 150)
+```{r}
+resize_fn <- layer_resizing(width = 150, height = 150)
+resize_pair <- function(x, y) list(resize_fn(x), y)
 
-train_ds = train_ds.map(lambda x, y: (resize_fn(x), y))
-validation_ds = validation_ds.map(lambda x, y: (resize_fn(x), y))
-test_ds = test_ds.map(lambda x, y: (resize_fn(x), y))
+train_ds <- train_ds %>% dataset_map(resize_pair)
+validation_ds <- validation_ds %>% dataset_map(resize_pair)
+test_ds <- test_ds %>% dataset_map(resize_pair)
 ```
 
 ### Using random data augmentation
@@ -402,49 +398,64 @@ the training images, such as random horizontal flipping or small random rotation
 helps expose the model to different aspects of the training data while slowing down
 overfitting.
 
-```python
-augmentation_layers = [
-    layers.RandomFlip("horizontal"),
-    layers.RandomRotation(0.1),
-]
+```{r}
+data_augmentation <- keras_model_sequential() %>%
+  layer_random_flip("horizontal") %>%
+  layer_random_rotation(.1)
 
-
-def data_augmentation(x):
-    for layer in augmentation_layers:
-        x = layer(x)
-    return x
-
-
-train_ds = train_ds.map(lambda x, y: (data_augmentation(x), y))
+train_ds <- train_ds %>% 
+  dataset_map(function(x, y) list(data_augmentation(x), y))
 ```
 
 Let's batch the data and use prefetching to optimize loading speed.
 
-```python
-from tensorflow import data as tf_data
+```{r}
+library(tensorflow)
 
-batch_size = 64
+batch_size <- 64
 
-train_ds = train_ds.batch(batch_size).prefetch(tf_data.AUTOTUNE).cache()
-validation_ds = (
-    validation_ds.batch(batch_size).prefetch(tf_data.AUTOTUNE).cache()
-)
-test_ds = test_ds.batch(batch_size).prefetch(tf_data.AUTOTUNE).cache()
+train_ds <- train_ds %>% 
+  dataset_batch(batch_size) %>% 
+  dataset_prefetch(tf$data$AUTOTUNE) %>% 
+  dataset_cache()
+validation_ds <- validation_ds %>% 
+  dataset_batch(batch_size) %>% 
+  dataset_prefetch(tf$data$AUTOTUNE) %>% 
+  dataset_cache()
+test_ds <- test_ds %>% 
+  dataset_batch(batch_size) %>% 
+  dataset_prefetch(tf$data$AUTOTUNE) %>% 
+  dataset_cache()
 ```
 
 Let's visualize what the first image of the first batch looks like after various random
  transformations:
 
-```python
-for images, labels in train_ds.take(1):
-    plt.figure(figsize=(10, 10))
-    first_image = images[0]
-    for i in range(9):
-        ax = plt.subplot(3, 3, i + 1)
-        augmented_image = data_augmentation(np.expand_dims(first_image, 0))
-        plt.imshow(np.array(augmented_image[0]).astype("int32"))
-        plt.title(int(labels[0]))
-        plt.axis("off")
+```{r}
+batch <- train_ds %>%
+  dataset_take(1) %>%
+  as_iterator() %>% 
+  iter_next()
+
+c(images, labels) %<-% batch
+first_image <- images[1, all_dims(), drop = TRUE]
+augmented_image <- data_augmentation(first_image, training = TRUE)
+
+plot_image <- function(image, main = deparse1(substitute(image))) {
+  image %>%
+    as.array() %>%   # convert from tensor to R array
+    as.raster(max = 255) %>%
+    plot()
+
+  if(!is.null(main))
+    title(main)
+}
+
+par(mfrow = c(2, 2), mar = c(1, 1, 1.5, 1))
+plot_image(first_image)
+plot_image(augmented_image)
+plot_image(data_augmentation(first_image, training = TRUE), "augmented 2")
+plot_image(data_augmentation(first_image, training = TRUE), "augmented 3")
 ```
 
 ## Build a model
@@ -460,49 +471,50 @@ Note that:
 it runs in inference mode, so that batchnorm statistics don't get updated
 even after we unfreeze the base model for fine-tuning.
 
-```python
-base_model = keras.applications.Xception(
+```{r}
+base_model <- application_xception(
     weights="imagenet",  # Load weights pre-trained on ImageNet.
-    input_shape=(150, 150, 3),
-    include_top=False,
+    input_shape=c(150, 150, 3),
+    include_top=FALSE,
 )  # Do not include the ImageNet classifier at the top.
 
 # Freeze the base_model
-base_model.trainable = False
+base_model$trainable <- FALSE
 
 # Create new model on top
-inputs = keras.Input(shape=(150, 150, 3))
+inputs <- layer_input(shape=c(150, 150, 3))
 
 # Pre-trained Xception weights requires that input be scaled
 # from (0, 255) to a range of (-1., +1.), the rescaling layer
 # outputs: `(inputs * scale) + offset`
-scale_layer = keras.layers.Rescaling(scale=1 / 127.5, offset=-1)
-x = scale_layer(inputs)
+scale_layer <- layer_rescaling(scale=1 / 127.5, offset=-1)
+x <- scale_layer(inputs)
 
 # The base model contains batchnorm layers. We want to keep them in inference mode
 # when we unfreeze the base model for fine-tuning, so we make sure that the
 # base_model is running in inference mode here.
-x = base_model(x, training=False)
-x = keras.layers.GlobalAveragePooling2D()(x)
-x = keras.layers.Dropout(0.2)(x)  # Regularize with dropout
-outputs = keras.layers.Dense(1)(x)
-model = keras.Model(inputs, outputs)
+outputs <- x %>% 
+  base_model(training = FALSE) %>% 
+  layer_global_average_pooling_2d() %>%
+  layer_dropout(0.2) %>%
+  layer_dense(1)
 
-model.summary(show_trainable=True)
+model <- keras_model(inputs, outputs)
+
+summary(model, show_trainable=TRUE)
 ```
 
 ## Train the top layer
 
-```python
-model.compile(
-    optimizer=keras.optimizers.Adam(),
-    loss=keras.losses.BinaryCrossentropy(from_logits=True),
-    metrics=[keras.metrics.BinaryAccuracy()],
+```{r}
+model %>% compile(
+    optimizer = optimizer_adam(),
+    loss = loss_binary_crossentropy(from_logits = TRUE),
+    metrics = list(metric_binary_accuracy())
 )
 
-epochs = 2
-print("Fitting the top layer of the model")
-model.fit(train_ds, epochs=epochs, validation_data=validation_ds)
+epochs <- 1
+model %>% fit(train_ds, epochs=epochs, validation_data=validation_ds)
 ```
 
 ## Do a round of fine-tuning of the entire model
@@ -516,30 +528,28 @@ model. This means that the batch normalization layers inside won't update their 
 statistics. If they did, they would wreck havoc on the representations learned by the
  model so far.
 
-```python
+```{r}
 # Unfreeze the base_model. Note that it keeps running in inference mode
 # since we passed `training=False` when calling it. This means that
 # the batchnorm layers will not update their batch statistics.
 # This prevents the batchnorm layers from undoing all the training
 # we've done so far.
-base_model.trainable = True
-model.summary(show_trainable=True)
+base_model$trainable <- TRUE
+summary(model, show_trainable=TRUE)
 
-model.compile(
-    optimizer=keras.optimizers.Adam(1e-5),  # Low learning rate
-    loss=keras.losses.BinaryCrossentropy(from_logits=True),
-    metrics=[keras.metrics.BinaryAccuracy()],
+model %>% compile(
+  optimizer = optimizer_adam(1e-5),  # Low learning rate
+  loss = loss_binary_crossentropy(from_logits=TRUE),
+  metrics = list(metric_binary_accuracy())
 )
 
-epochs = 1
-print("Fitting the end-to-end model")
-model.fit(train_ds, epochs=epochs, validation_data=validation_ds)
+epochs <- 1
+model %>% fit(train_ds, epochs=epochs, validation_data=validation_ds)
 ```
 
 After 10 epochs, fine-tuning gains us a nice improvement here.
 Let's evaluate the model on the test dataset:
 
-```python
-print("Test dataset evaluation")
-model.evaluate(test_ds)
+```{r}
+model %>% evaluate(test_ds)
 ```
