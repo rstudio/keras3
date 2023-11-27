@@ -127,31 +127,17 @@ keras_array <- function(x, dtype = NULL) {
   if (inherits(x, "keras.utils.io_utils.HDF5Matrix"))
     return(x)
 
-  # reflect tensor for keras v2.2 or TF implementation >= 1.12
-  if (is_tensorflow_implementation()) {
-    if (
-      tf_version() >= "1.12" &&
-      (
-        is_keras_tensor(x) || is.list(x) && all(vapply(x, is_keras_tensor, logical(1)))
-      )
-    ) {
-      return(x)
-    }
-  } else {
-    if ((keras_version() >= "2.2.0") && is_keras_tensor(x)) {
-      return(x)
-    }
-  }
-
-  # error for data frames
-  if (is.data.frame(x)) {
-    x <- as.list(x)
-  }
+  # reflect tensors
+  if (keras$ops$is_tensor(x))
+    return(x)
 
   # allow passing things like pandas.Series(), for workarounds like
   # https://github.com/rstudio/keras/issues/1341
   if(inherits(x, "python.builtin.object"))
     return(x)
+
+  if (is.data.frame(x))
+    x <- as.list(x)
 
   # recurse for lists
   if (is.list(x))
@@ -163,7 +149,7 @@ keras_array <- function(x, dtype = NULL) {
     # establish the target datatype - if we are converting a double from R
     # into numpy then use the default floatx for the current backend
     if (is.null(dtype) && is.double(x))
-      dtype <- k_floatx()
+      dtype <- config_floatx()
 
     # convert non-array to array
     if (!is.array(x))
@@ -172,6 +158,9 @@ keras_array <- function(x, dtype = NULL) {
     # do the conversion (will result in Fortran column ordering)
     x <- r_to_py(x)
   }
+
+  if(!inherits(x, "numpy.ndarray"))
+    stop("Could not convert object to keras array.")
 
   # if we don't yet have a dtype then use the converted type
   if (is.null(dtype))
@@ -315,13 +304,6 @@ relative_to <- function(dir, file) {
 }
 
 
-is_keras_tensor <- function(x) {
-  if (is_tensorflow_implementation()) {
-    if (tensorflow::tf_version() >= "2.0") tensorflow::tf$is_tensor(x) else tensorflow::tf$contrib$framework$is_tensor(x)
-  } else {
-    k_is_tensor(x)
-  }
-}
 
 
 split_dots_named_unnamed <- function(dots) {
