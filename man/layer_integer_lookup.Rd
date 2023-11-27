@@ -386,10 +386,10 @@ either directly or via \code{adapt()} before calling \code{get_vocabulary()}.
 }
 
 Other preprocessing layers: 
-\code{\link{feature_cross}()},
 \code{\link{layer_category_encoding}()},
 \code{\link{layer_center_crop}()},
 \code{\link{layer_discretization}()},
+\code{\link{layer_feature_space}()},
 \code{\link{layer_hashed_crossing}()},
 \code{\link{layer_hashing}()},
 \code{\link{layer_normalization}()},
@@ -407,7 +407,6 @@ Other preprocessing layers:
 
 Other layers: 
 \code{\link{bidirectional}()},
-\code{\link{feature_cross}()},
 \code{\link{layer_activation_elu}()},
 \code{\link{layer_activation_leaky_relu}()},
 \code{\link{layer_activation_parametric_relu}()},
@@ -446,6 +445,7 @@ Other layers:
 \code{\link{layer_dropout}()},
 \code{\link{layer_einsum_dense}()},
 \code{\link{layer_embedding}()},
+\code{\link{layer_feature_space}()},
 \code{\link{layer_flatten}()},
 \code{\link{layer_gaussian_dropout}()},
 \code{\link{layer_gaussian_noise}()},

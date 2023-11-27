@@ -160,7 +160,6 @@ Other convolutional layers:
 
 Other layers: 
 \code{\link{bidirectional}()},
-\code{\link{feature_cross}()},
 \code{\link{layer_activation_elu}()},
 \code{\link{layer_activation_leaky_relu}()},
 \code{\link{layer_activation_parametric_relu}()},
@@ -199,6 +198,7 @@ Other layers:
 \code{\link{layer_dropout}()},
 \code{\link{layer_einsum_dense}()},
 \code{\link{layer_embedding}()},
+\code{\link{layer_feature_space}()},
 \code{\link{layer_flatten}()},
 \code{\link{layer_gaussian_dropout}()},
 \code{\link{layer_gaussian_noise}()},

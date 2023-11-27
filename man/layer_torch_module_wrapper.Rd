@@ -90,7 +90,6 @@ Other utils:
 \code{\link{config_enable_traceback_filtering}()},
 \code{\link{config_is_interactive_logging_enabled}()},
 \code{\link{config_is_traceback_filtering_enabled}()},
-\code{\link{feature_cross}()},
 \code{\link{get_custom_objects}()},
 \code{\link{get_file}()},
 \code{\link{get_registered_name}()},
@@ -102,6 +101,7 @@ Other utils:
 \code{\link{image_load}()},
 \code{\link{image_smart_resize}()},
 \code{\link{image_to_array}()},
+\code{\link{layer_feature_space}()},
 \code{\link{model_to_dot}()},
 \code{\link{normalize}()},
 \code{\link{pack_x_y_sample_weight}()},
@@ -115,7 +115,6 @@ Other utils:
 
 Other layers: 
 \code{\link{bidirectional}()},
-\code{\link{feature_cross}()},
 \code{\link{layer_activation_elu}()},
 \code{\link{layer_activation_leaky_relu}()},
 \code{\link{layer_activation_parametric_relu}()},
@@ -154,6 +153,7 @@ Other layers:
 \code{\link{layer_dropout}()},
 \code{\link{layer_einsum_dense}()},
 \code{\link{layer_embedding}()},
+\code{\link{layer_feature_space}()},
 \code{\link{layer_flatten}()},
 \code{\link{layer_gaussian_dropout}()},
 \code{\link{layer_gaussian_noise}()},
