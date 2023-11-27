@@ -40,11 +40,11 @@ of the convolution. \code{strides > 1} is incompatible with
 
 \item{padding}{string, \code{"valid"}, \code{"same"} or \code{"causal"}(case-insensitive).
 \code{"valid"} means no padding. \code{"same"} results in padding evenly to
-the left/right or up/down of the input such that output has the same
-height/width dimension as the input. \code{"causal"} results in causal
-(dilated) convolutions, e.g. \code{output[t]} does not depend on
-\verb{input[t+1:]}. Useful when modeling temporal data where the model
-should not violate the temporal order.
+the left/right or up/down of the input. When \code{padding="same"} and
+\code{strides=1}, the output has the same size as the input.
+\code{"causal"} results in causal (dilated) convolutions, e.g. \code{output[t]}
+does not depend on\code{tail(input, t+1)}. Useful when modeling temporal data
+where the model should not violate the temporal order.
 See \href{https://arxiv.org/abs/1609.03499}{WaveNet: A Generative Model for Raw Audio, section2.1}.}
 
 \item{data_format}{string, either \code{"channels_last"} or \code{"channels_first"}.

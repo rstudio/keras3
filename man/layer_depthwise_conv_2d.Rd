@@ -36,8 +36,8 @@ of the depthwise convolution. \code{strides > 1} is incompatible with
 
 \item{padding}{string, either \code{"valid"} or \code{"same"} (case-insensitive).
 \code{"valid"} means no padding. \code{"same"} results in padding evenly to
-the left/right or up/down of the input such that output has the same
-height/width dimension as the input.}
+the left/right or up/down of the input. When \code{padding="same"} and
+\code{strides=1}, the output has the same size as the input.}
 
 \item{depth_multiplier}{The number of depthwise convolution output channels
 for each input channel. The total number of depthwise convolution

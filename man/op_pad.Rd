@@ -4,7 +4,7 @@
 \alias{op_pad}
 \title{Pad a tensor.}
 \usage{
-op_pad(x, pad_width, mode = "constant")
+op_pad(x, pad_width, mode = "constant", constant_values = NULL)
 }
 \arguments{
 \item{x}{Tensor to pad.}
@@ -21,6 +21,10 @@ width for all axes.}
 \code{"maximum"}, \code{"mean"}, \code{"median"}, \code{"minimum"},
 \code{"reflect"}, \code{"symmetric"}, \code{"wrap"}, \code{"empty"},
 \code{"circular"}. Defaults to\code{"constant"}.}
+
+\item{constant_values}{Value to pad with if \code{mode == "constant"}.
+Defaults to \code{0}. A \code{ValueError} is raised if not \code{NULL} and
+\code{mode != "constant"}.}
 }
 \value{
 \if{html}{\out{<div class="sourceCode">}}\preformatted{Padded tensor.

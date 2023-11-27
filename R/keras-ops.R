@@ -3730,7 +3730,7 @@ function (x, axis = NULL, dtype = NULL)
 #' By default the input is flattened.
 #'
 #' @param dtype
-#' dtype of returned tensor. Defaults to x.dtype.
+#' dtype of returned tensor. Defaults to `x$dtype`.
 #'
 #' @export
 #' @family numpy ops

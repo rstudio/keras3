@@ -44,8 +44,8 @@ incompatible with \code{dilation_rate > 1}.}
 
 \item{padding}{string, either \code{"valid"} or \code{"same"} (case-insensitive).
 \code{"valid"} means no padding. \code{"same"} results in padding evenly to
-the left/right or up/down of the input such that output has the same
-height/width dimension as the input.}
+the left/right or up/down of the input. When \code{padding="same"} and
+\code{strides=1}, the output has the same size as the input.}
 
 \item{data_format}{string, either \code{"channels_last"} or \code{"channels_first"}.
 The ordering of the dimensions in the inputs. \code{"channels_last"}

@@ -4,13 +4,15 @@
 \alias{op_cumprod}
 \title{Return the cumulative product of elements along a given axis.}
 \usage{
-op_cumprod(x, axis = NULL)
+op_cumprod(x, axis = NULL, dtype = NULL)
 }
 \arguments{
 \item{x}{Input tensor.}
 
 \item{axis}{Axis along which the cumulative product is computed.
 By default the input is flattened.}
+
+\item{dtype}{dtype of returned tensor. Defaults to \code{x$dtype}.}
 }
 \value{
 \if{html}{\out{<div class="sourceCode">}}\preformatted{Output tensor.

@@ -4,13 +4,15 @@
 \alias{op_cumsum}
 \title{Returns the cumulative sum of elements along a given axis.}
 \usage{
-op_cumsum(x, axis = NULL)
+op_cumsum(x, axis = NULL, dtype = NULL)
 }
 \arguments{
 \item{x}{Input tensor.}
 
 \item{axis}{Axis along which the cumulative sum is computed.
 By default the input is flattened.}
+
+\item{dtype}{dtype of returned tensor. Defaults to \code{x$dtype}.}
 }
 \value{
 \if{html}{\out{<div class="sourceCode">}}\preformatted{Output tensor.
