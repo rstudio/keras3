@@ -224,3 +224,35 @@ if(tf_version() >= "2.6")
 #   grep("^metric_", ., value = TRUE) %>%
 #   sprintf("test_metric(%s)", .) %>%
 #   cat(sep = "\n")
+
+test_succeeds("custom metric that returns a keras variable in $result()", {
+
+  Test <- new_metric_class(
+    "Test",
+    initialize = function(name="test", ...) {
+      super$initialize(name=name, ...)
+      self$test <- self$add_variable(
+        shape=shape(), name="ctp", initializer="zeros"
+      )
+    },
+    update_state = function(y_true, y_pred, sample_weight=NULL) {
+      self$test$assign_add(1)
+    },
+    result = function() {
+      self$test
+    },
+    reset_state = function() {
+      self$test$assign(0.0)
+    }
+  )
+
+  define_model() %>%
+    compile(
+      loss='binary_crossentropy',
+      optimizer = optimizer_sgd(),
+      metrics=list(Test())
+    ) %>%
+    fit(x = matrix(0, ncol = 784, nrow = 100), y = matrix(0, ncol = 10, nrow = 100),
+        epochs = 1, verbose = 0)
+
+})
