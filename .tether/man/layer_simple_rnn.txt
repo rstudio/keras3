@@ -126,7 +126,7 @@
 #' Initial seed for the random number generator
 #'
 #' @param ...
-#' Passed on to the Python callable
+#' For forward/backward compatability.
 #'
 #' @export
 #' @family simple rnn layers

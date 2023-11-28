@@ -49,7 +49,7 @@
 #' Object to compose the layer with. A tensor, array, or sequential model.
 #'
 #' @param ...
-#' Passed on to the Python callable
+#' For forward/backward compatability.
 #'
 #' @export
 #' @family pooling layers

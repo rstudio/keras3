@@ -222,7 +222,7 @@
 #' String, name for the object
 #'
 #' @param ...
-#' Passed on to the Python callable
+#' For forward/backward compatability.
 #'
 #' @export
 #' @family preprocessing layers

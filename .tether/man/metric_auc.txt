@@ -141,7 +141,7 @@
 #' loss should match the AUC `from_logits` constructor argument.
 #'
 #' @param ...
-#' Passed on to the Python callable
+#' For forward/backward compatability.
 #'
 #' @export
 #' @family confusion metrics

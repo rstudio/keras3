@@ -76,7 +76,7 @@
 #' be `None` or `"softmax"`.
 #'
 #' @param ...
-#' Passed on to the Python callable
+#' For forward/backward compatability.
 #'
 #' @export
 #' @seealso

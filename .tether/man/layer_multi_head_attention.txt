@@ -101,7 +101,7 @@
 #' Constraint for dense layer kernels.
 #'
 #' @param ...
-#' Passed on to the Python callable
+#' For forward/backward compatability.
 #'
 #' @param inputs
 #' see description

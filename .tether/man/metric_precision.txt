@@ -97,7 +97,7 @@
 #' (Optional) data type of the metric result.
 #'
 #' @param ...
-#' Passed on to the Python callable
+#' For forward/backward compatability.
 #'
 #' @export
 #' @family confusion metrics

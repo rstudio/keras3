@@ -47,7 +47,7 @@
 #' Float. Lower bound on the learning rate.
 #'
 #' @param ...
-#' Passed on to the Python callable
+#' For forward/backward compatability.
 #'
 #' @export
 #' @family callbacks

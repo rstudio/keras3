@@ -1,0 +1,55 @@
+#' Loads a model saved via `model.save()`.
+#'
+#' @description
+#'
+#' # Examples
+#' ```python
+#' model = keras.Sequential([
+#'     keras.layers.Dense(5, input_shape=(3,)),
+#'     keras.layers.Softmax()])
+#' model.save("model.keras")
+#' loaded_model = keras.saving.load_model("model.keras")
+#' x = np.random.random((10, 3))
+#' assert np.allclose(model.predict(x), loaded_model.predict(x))
+#' ```
+#'
+#' Note that the model variables may have different name values
+#' (`var.name` property, e.g. `"dense_1/kernel:0"`) after being reloaded.
+#' It is recommended that you use layer attributes to
+#' access specific variables, e.g. `model.get_layer("dense_1").kernel`.
+#'
+#' @returns
+#' A Keras model instance. If the original model was compiled,
+#' and the argument `compile=True` is set, then the returned model
+#' will be compiled. Otherwise, the model will be left uncompiled.
+#'
+#' @param filepath
+#' `str` or `pathlib.Path` object, path to the saved model file.
+#'
+#' @param custom_objects
+#' Optional dictionary mapping names
+#' (strings) to custom classes or functions to be
+#' considered during deserialization.
+#'
+#' @param compile
+#' Boolean, whether to compile the model after loading.
+#'
+#' @param safe_mode
+#' Boolean, whether to disallow unsafe `lambda` deserialization.
+#' When `safe_mode=False`, loading an object has the potential to
+#' trigger arbitrary code execution. This argument is only
+#' applicable to the Keras v3 model format. Defaults to True.
+#'
+#' @export
+#' @family saving
+#' @seealso
+#' + <https:/keras.io/keras_core/api/models/model_saving_apis/model_saving_and_loading#loadmodel-function>
+#' + <https://www.tensorflow.org/api_docs/python/tf/keras/saving/load_model>
+saving_load_model <-
+__signature__
+keras.saving.load_model(
+  filepath,
+  custom_objects=None,
+  compile=True,
+  safe_mode=True
+)

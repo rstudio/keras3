@@ -101,7 +101,7 @@
 #' Random seed for dropout.
 #'
 #' @param ...
-#' Passed on to the Python callable
+#' For forward/backward compatability.
 #'
 #' @export
 #' @family gru rnn layers

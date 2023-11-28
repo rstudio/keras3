@@ -22,7 +22,7 @@
 #' List of RNN cell instances.
 #'
 #' @param ...
-#' Passed on to the Python callable
+#' For forward/backward compatability.
 #'
 #' @export
 #' @family rnn layers

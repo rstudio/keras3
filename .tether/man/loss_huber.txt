@@ -56,7 +56,7 @@
 #' tensor of predicted targets.
 #'
 #' @param ...
-#' Passed on to the Python callable
+#' For forward/backward compatability.
 #'
 #' @export
 #' @family losses

@@ -40,7 +40,7 @@
 #' The predicted values with shape = `[batch_size, d0, .. dN]`.
 #'
 #' @param ...
-#' Passed on to the Python callable
+#' For forward/backward compatability.
 #'
 #' @export
 #' @family losses

@@ -82,7 +82,7 @@
 #' (Optional) The dimension containing the logits. Defaults to `-1`.
 #'
 #' @param ...
-#' Passed on to the Python callable
+#' For forward/backward compatability.
 #'
 #' @export
 #' @family iou metrics

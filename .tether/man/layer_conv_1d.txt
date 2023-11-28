@@ -7,6 +7,8 @@
 #' outputs. Finally, if `activation` is not `None`, it is applied to the
 #' outputs as well.
 #'
+#' More explination.
+#'
 #' # Input Shape
 #' - If `data_format="channels_last"`:
 #'     A 3D tensor with shape: `(batch_shape, steps, channels)`
@@ -118,7 +120,7 @@
 #' Object to compose the layer with. A tensor, array, or sequential model.
 #'
 #' @param ...
-#' Passed on to the Python callable
+#' For forward/backward compatability.
 #'
 #' @export
 #' @family convolutional layers

@@ -59,7 +59,7 @@
 #' The axis along which the mean is computed. Defaults to `-1`.
 #'
 #' @param ...
-#' Passed on to the Python callable
+#' For forward/backward compatability.
 #'
 #' @export
 #' @family losses

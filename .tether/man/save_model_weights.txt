@@ -1,0 +1,18 @@
+#' Saves all layer weights to a `.weights.h5` file.
+#'
+#' @param filepath
+#' `str` or `pathlib.Path` object.
+#' Path where to save the model. Must end in `.weights.h5`.
+#'
+#' @param overwrite
+#' Whether we should overwrite any existing model
+#' at the target location, or instead ask the user
+#' via an interactive prompt.
+#'
+#' @export
+#' @seealso
+#' + <https:/keras.io/api/models/model_saving_apis/weights_saving_and_loading#saveweights-method>
+#' + <https://www.tensorflow.org/api_docs/python/tf/keras/Model/save_weights>
+Model_save_weights <-
+__signature__
+keras.Model.save_weights(self, filepath, overwrite=True)
