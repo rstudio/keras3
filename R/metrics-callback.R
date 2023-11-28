@@ -216,9 +216,10 @@ KerasMetricsCallbackV2 <- R6::R6Class(
 
     # convert keras history to metrics data frame suitable for plotting
     as_metrics_df = function(history) {
+
       # create metrics data frame
       metrics <- lapply(history$metrics, function(m) sapply(m, as.numeric))
-      df <- as.data.frame(history$metrics)
+      df <- as.data.frame(metrics)
 
       # pad to epochs if necessary
       pad <- history$params$epochs - nrow(df)
