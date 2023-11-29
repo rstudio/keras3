@@ -24,7 +24,7 @@ and the implementation native to TensorFlow) and supports multiple
 backends ("tensorflow", "cntk", "theano", and "plaidml"). These functions allow
 switching between the various implementations and backends.
 
-The functions should be called after \code{library(keras)} and before calling
+The functions should be called after \code{library(keras3)} and before calling
 other functions within the package (see below for an example).
 
 The default implementation and backend should be suitable for most
@@ -35,11 +35,11 @@ R package).
 \examples{
 \dontrun{
 # use the tensorflow implementation
-library(keras)
+library(keras3)
 use_implementation("tensorflow")
 
 # use the cntk backend
-library(keras)
+library(keras3)
 use_backend("theano")
 }
 

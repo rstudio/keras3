@@ -18,7 +18,7 @@ A model is a directed acyclic graph of layers.
 }
 \examples{
 \dontrun{
-library(keras)
+library(keras3)
 
 # input layer
 inputs <- layer_input(shape = c(784))

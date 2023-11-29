@@ -49,7 +49,7 @@ argument.
 \examples{
 \dontrun{
 
-library(keras)
+library(keras3)
 
 model <- keras_model_sequential()
 model \%>\%

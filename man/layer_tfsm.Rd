@@ -73,7 +73,8 @@ Other saving:
 \code{\link{get_custom_objects}()},
 \code{\link{get_registered_name}()},
 \code{\link{get_registered_object}()},
-\code{\link{load_keras_model}()}
+\code{\link{load_model}()},
+\code{\link{register_custom_object}()}
 
 Other layers: 
 \code{\link{bidirectional}()},

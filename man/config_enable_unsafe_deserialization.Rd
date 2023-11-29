@@ -19,7 +19,8 @@ Other saving:
 \code{\link{get_registered_name}()},
 \code{\link{get_registered_object}()},
 \code{\link{layer_tfsm}()},
-\code{\link{load_keras_model}()}
+\code{\link{load_model}()},
+\code{\link{register_custom_object}()}
 
 Other config: 
 \code{\link{config_disable_interactive_logging}()},

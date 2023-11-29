@@ -4,9 +4,11 @@
 \alias{save_model_weights}
 \title{Saves all layer weights to a \code{.weights.h5} file.}
 \usage{
-save_model_weights(self, filepath, overwrite = FALSE)
+save_model_weights(model, filepath, overwrite = FALSE)
 }
 \arguments{
+\item{model}{A keras Model object}
+
 \item{filepath}{string.
 Path where to save the model. Must end in \code{.weights.h5}.}
 

@@ -26,8 +26,7 @@ You can access the Layer/Model as \code{tf.Tensors} or \code{tf.Variables} at
 }
 \seealso{
 Other model persistence: 
-\code{\link{model_to_json}()},
-\code{\link{serialize_model}()}
+\code{\link{save_model_config}()}
 
 Other layer methods: 
 \code{\link{count_params}()},

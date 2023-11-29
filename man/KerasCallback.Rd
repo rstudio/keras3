@@ -49,7 +49,7 @@ it passes to its callbacks:
 
 \examples{
 \dontrun{
-library(keras)
+library(keras3)
 
 LossHistory <- R6::R6Class("LossHistory",
   inherit = KerasCallback,
