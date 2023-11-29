@@ -1,27 +1,18 @@
-#' Rectified linear unit activation function.
-#'
-#' @description
-#' It is defined as `f(x) = max(0, x)`.
-#'
-#' # Examples
-#' ```python
-#' x1 = keras.ops.convert_to_tensor([-1.0, 0.0, 1.0, 0.2])
-#' keras.ops.relu(x1)
-#' # array([0.0, 0.0, 1.0, 0.2], dtype=float32)
-#' ```
-#'
-#' @returns
-#' A tensor with the same shape as `x`.
-#'
-#' @param x
-#' Input tensor.
-#'
-#' @export
-#' @family nn ops
-#' @family ops
-#' @seealso
-#' + <https:/keras.io/keras_core/api/ops/nn#relu-function>
-#' + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/relu>
-k_relu <-
 __signature__
 keras.ops.relu(x)
+__doc__
+Rectified linear unit activation function.
+
+It is defined as `f(x) = max(0, x)`.
+
+Args:
+    x: Input tensor.
+
+Returns:
+    A tensor with the same shape as `x`.
+
+Example:
+
+>>> x1 = keras.ops.convert_to_tensor([-1.0, 0.0, 1.0, 0.2])
+>>> keras.ops.relu(x1)
+array([0.0, 0.0, 1.0, 0.2], dtype=float32)

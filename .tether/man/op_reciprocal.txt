@@ -1,20 +1,12 @@
-#' Return the reciprocal of the argument, element-wise.
-#'
-#' @description
-#' Calculates `1/x`.
-#'
-#' @returns
-#'     Output tensor, element-wise reciprocal of `x`.
-#'
-#' @param x
-#' Input tensor.
-#'
-#' @export
-#' @family numpy ops
-#' @family ops
-#' @seealso
-#' + <https:/keras.io/keras_core/api/ops/numpy#reciprocal-function>
-#' + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/reciprocal>
-k_reciprocal <-
 __signature__
 keras.ops.reciprocal(x)
+__doc__
+Return the reciprocal of the argument, element-wise.
+
+Calculates `1/x`.
+
+Args:
+    x: Input tensor.
+
+Returns:
+    Output tensor, element-wise reciprocal of `x`.

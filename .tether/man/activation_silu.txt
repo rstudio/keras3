@@ -1,23 +1,17 @@
-#' Swish (or Silu) activation function.
-#'
-#' @description
-#' It is defined as: `swish(x) = x * sigmoid(x)`.
-#'
-#' The Swish (or Silu) activation function is a smooth,
-#' non-monotonic function that is unbounded above and
-#' bounded below.
-#'
-#' # Reference
-#' - [Ramachandran et al., 2017](https://arxiv.org/abs/1710.05941)
-#'
-#' @param x
-#' Input tensor.
-#'
-#' @export
-#' @family activations
-#' @seealso
-#' + <https:/keras.io/keras_core/api/layers/activations#silu-function>
-#' + <https://www.tensorflow.org/api_docs/python/tf/keras/activations/silu>
-activation_silu <-
 __signature__
 keras.activations.silu(x)
+__doc__
+Swish (or Silu) activation function.
+
+It is defined as: `swish(x) = x * sigmoid(x)`.
+
+The Swish (or Silu) activation function is a smooth,
+non-monotonic function that is unbounded above and
+bounded below.
+
+Args:
+    x: Input tensor.
+
+Reference:
+
+- [Ramachandran et al., 2017](https://arxiv.org/abs/1710.05941)

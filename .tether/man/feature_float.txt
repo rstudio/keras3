@@ -1,11 +1,3 @@
-#'
-#'
-#' @param name
-#' String, name for the object
-#'
-#' @export
-#' @seealso
-#' + <https://www.tensorflow.org/api_docs/python/tf/keras/utils/FeatureSpace/float>
-FeatureSpace_float <-
-__signature__
-keras.utils.FeatureSpace.float(name=None)
+Help on method float in module keras.src.layers.preprocessing.feature_space:
+
+float(name=None) method of builtins.type instance

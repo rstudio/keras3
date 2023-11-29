@@ -1,63 +1,75 @@
-#' A preprocessing layer which crops images.
-#'
-#' @description
-#' This layers crops the central portion of the images to a target size. If an
-#' image is smaller than the target size, it will be resized and cropped
-#' so as to return the largest possible window in the image that matches
-#' the target aspect ratio.
-#'
-#' Input pixel values can be of any range (e.g. `[0., 1.)` or `[0, 255]`).
-#'
-#' # Input Shape
-#' 3D (unbatched) or 4D (batched) tensor with shape:
-#' `(..., height, width, channels)`, in `"channels_last"` format,
-#' or `(..., channels, height, width)`, in `"channels_first"` format.
-#'
-#' # Output Shape
-#' 3D (unbatched) or 4D (batched) tensor with shape:
-#'     `(..., target_height, target_width, channels)`,
-#'     or `(..., channels, target_height, target_width)`,
-#'     in `"channels_first"` format.
-#'
-#' If the input height/width is even and the target height/width is odd (or
-#' inversely), the input image is left-padded by 1 pixel.
-#'
-#' **Note:** This layer is safe to use inside a `tf.data` pipeline
-#' (independently of which backend you're using).
-#'
-#' @param height
-#' Integer, the height of the output shape.
-#'
-#' @param width
-#' Integer, the width of the output shape.
-#'
-#' @param data_format
-#' string, either `"channels_last"` or `"channels_first"`.
-#' The ordering of the dimensions in the inputs. `"channels_last"`
-#' corresponds to inputs with shape `(batch, height, width, channels)`
-#' while `"channels_first"` corresponds to inputs with shape
-#' `(batch, channels, height, width)`. It defaults to the
-#' `image_data_format` value found in your Keras config file at
-#' `~/.keras/keras.json`. If you never set it, then it will be
-#' `"channels_last"`.
-#'
-#' @param object
-#' Object to compose the layer with. A tensor, array, or sequential model.
-#'
-#' @param ...
-#' For forward/backward compatability.
-#'
-#' @export
-#' @family preprocessing layers
-#' @family layers
-#' @seealso
-#' + <https:/keras.io/api/layers/preprocessing_layers/image_preprocessing/center_crop#centercrop-class>
-#' + <https://www.tensorflow.org/api_docs/python/tf/keras/layers/CenterCrop>
-layer_center_crop <-
-__signature__
-keras.layers.CenterCrop(
-  height,
-  width,
-  data_format=None,
-  **kwargs
-)
+Help on class CenterCrop in module keras.src.layers.preprocessing.center_crop:
+
+class CenterCrop(keras.src.layers.preprocessing.tf_data_layer.TFDataLayer)
+ |  CenterCrop(height, width, data_format=None, **kwargs)
+ |
+ |  A preprocessing layer which crops images.
+ |
+ |  This layers crops the central portion of the images to a target size. If an
+ |  image is smaller than the target size, it will be resized and cropped
+ |  so as to return the largest possible window in the image that matches
+ |  the target aspect ratio.
+ |
+ |  Input pixel values can be of any range (e.g. `[0., 1.)` or `[0, 255]`).
+ |
+ |  Input shape:
+ |      3D (unbatched) or 4D (batched) tensor with shape:
+ |      `(..., height, width, channels)`, in `"channels_last"` format,
+ |      or `(..., channels, height, width)`, in `"channels_first"` format.
+ |
+ |  Output shape:
+ |      3D (unbatched) or 4D (batched) tensor with shape:
+ |      `(..., target_height, target_width, channels)`,
+ |      or `(..., channels, target_height, target_width)`,
+ |      in `"channels_first"` format.
+ |
+ |  If the input height/width is even and the target height/width is odd (or
+ |  inversely), the input image is left-padded by 1 pixel.
+ |
+ |  **Note:** This layer is safe to use inside a `tf.data` pipeline
+ |  (independently of which backend you're using).
+ |
+ |  Args:
+ |      height: Integer, the height of the output shape.
+ |      width: Integer, the width of the output shape.
+ |      data_format: string, either `"channels_last"` or `"channels_first"`.
+ |          The ordering of the dimensions in the inputs. `"channels_last"`
+ |          corresponds to inputs with shape `(batch, height, width, channels)`
+ |          while `"channels_first"` corresponds to inputs with shape
+ |          `(batch, channels, height, width)`. It defaults to the
+ |          `image_data_format` value found in your Keras config file at
+ |          `~/.keras/keras.json`. If you never set it, then it will be
+ |          `"channels_last"`.
+ |
+ |  Method resolution order:
+ |      CenterCrop
+ |      keras.src.layers.preprocessing.tf_data_layer.TFDataLayer
+ |      keras.src.layers.layer.Layer
+ |      keras.src.backend.tensorflow.layer.TFLayer
+ |      keras.src.backend.tensorflow.trackable.KerasAutoTrackable
+ |      tensorflow.python.trackable.autotrackable.AutoTrackable
+ |      tensorflow.python.trackable.base.Trackable
+ |      keras.src.ops.operation.Operation
+ |      builtins.object
+ |
+ |  Methods defined here:
+ |
+ |  __init__(
+ |    self,
+ |    height,
+ |    width,
+ |    data_format=None,
+ |    **kwargs
+ |  )
+ |      Initialize self.  See help(type(self)) for accurate signature.
+ |
+ |  call(self, inputs)
+ |
+ |  compute_output_shape(self, input_shape)
+ |
+ |  get_config(self)
+ |      Returns the config of the object.
+ |
+ |      An object config is a Python dictionary (serializable)
+ |      containing the information needed to re-instantiate it.
+ |

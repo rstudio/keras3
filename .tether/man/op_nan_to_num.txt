@@ -1,17 +1,10 @@
-#' Replace NaN with zero and infinity with large finite numbers.
-#'
-#' @returns
-#'     `x`, with non-finite values replaced.
-#'
-#' @param x
-#' Input data.
-#'
-#' @export
-#' @family numpy ops
-#' @family ops
-#' @seealso
-#' + <https:/keras.io/keras_core/api/ops/numpy#nantonum-function>
-#' + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/nan_to_num>
-k_nan_to_num <-
 __signature__
 keras.ops.nan_to_num(x)
+__doc__
+Replace NaN with zero and infinity with large finite numbers.
+
+Args:
+    x: Input data.
+
+Returns:
+    `x`, with non-finite values replaced.

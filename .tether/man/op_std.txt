@@ -1,26 +1,19 @@
-#' Compute the standard deviation along the specified axis.
-#'
-#' @returns
-#'     Output tensor containing the standard deviation values.
-#'
-#' @param x
-#' Input tensor.
-#'
-#' @param axis
-#' Axis along which to compute standard deviation.
-#' Default is to compute the standard deviation of the
-#' flattened tensor.
-#'
-#' @param keepdims
-#' If this is set to `True`, the axes which are reduced are left
-#' in the result as dimensions with size one.
-#'
-#' @export
-#' @family numpy ops
-#' @family ops
-#' @seealso
-#' + <https:/keras.io/keras_core/api/ops/numpy#std-function>
-#' + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/std>
-k_std <-
 __signature__
-keras.ops.std(x, axis=None, keepdims=False)
+keras.ops.std(
+  x,
+  axis=None,
+  keepdims=False
+)
+__doc__
+Compute the standard deviation along the specified axis.
+
+Args:
+    x: Input tensor.
+    axis: Axis along which to compute standard deviation.
+        Default is to compute the standard deviation of the
+        flattened tensor.
+    keepdims: If this is set to `True`, the axes which are reduced are left
+        in the result as dimensions with size one.
+
+Returns:
+    Output tensor containing the standard deviation values.

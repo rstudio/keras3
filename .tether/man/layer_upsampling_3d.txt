@@ -1,69 +1,79 @@
-#' Upsampling layer for 3D inputs.
-#'
-#' @description
-#' Repeats the 1st, 2nd and 3rd dimensions
-#' of the data by `size[0]`, `size[1]` and `size[2]` respectively.
-#'
-#' # Examples
-#' ```python
-#' input_shape = (2, 1, 2, 1, 3)
-#' x = np.ones(input_shape)
-#' y = keras.layers.UpSampling3D(size=(2, 2, 2))(x)
-#' y.shape
-#' # (2, 2, 4, 2, 3)
-#' ```
-#'
-#' # Input Shape
-#' 5D tensor with shape:
-#' - If `data_format` is `"channels_last"`:
-#'     `(batch_size, dim1, dim2, dim3, channels)`
-#' - If `data_format` is `"channels_first"`:
-#'     `(batch_size, channels, dim1, dim2, dim3)`
-#'
-#' # Output Shape
-#' 5D tensor with shape:
-#' - If `data_format` is `"channels_last"`:
-#'     `(batch_size, upsampled_dim1, upsampled_dim2, upsampled_dim3,
-#'     channels)`
-#' - If `data_format` is `"channels_first"`:
-#'     `(batch_size, channels, upsampled_dim1, upsampled_dim2,
-#'     upsampled_dim3)`
-#'
-#' @param size
-#' Int, or tuple of 3 integers.
-#' The upsampling factors for dim1, dim2 and dim3.
-#'
-#' @param data_format
-#' A string,
-#' one of `"channels_last"` (default) or `"channels_first"`.
-#' The ordering of the dimensions in the inputs.
-#' `"channels_last"` corresponds to inputs with shape
-#' `(batch_size, spatial_dim1, spatial_dim2, spatial_dim3, channels)`
-#' while `"channels_first"` corresponds to inputs with shape
-#' `(batch_size, channels, spatial_dim1, spatial_dim2, spatial_dim3)`.
-#' When unspecified, uses
-#' `image_data_format` value found in your Keras config file at
-#'  `~/.keras/keras.json` (if exists) else `"channels_last"`.
-#' Defaults to `"channels_last"`.
-#'
-#' @param object
-#' Object to compose the layer with. A tensor, array, or sequential model.
-#'
-#' @param ...
-#' For forward/backward compatability.
-#'
-#' @export
-#' @family reshaping layers
-#' @family layers
-#' @seealso
-#' + <https:/keras.io/api/layers/reshaping_layers/up_sampling3d#upsampling3d-class>
-#' + <https://www.tensorflow.org/api_docs/python/tf/keras/layers/UpSampling3D>
-layer_upsampling_3d <-
-__signature__
-keras.layers.UpSampling3D(
-  size=(2,
-  2,
-  2),
-  data_format=None,
-  **kwargs
-)
+Help on class UpSampling3D in module keras.src.layers.reshaping.up_sampling3d:
+
+class UpSampling3D(keras.src.layers.layer.Layer)
+ |  UpSampling3D(size=(2, 2, 2), data_format=None, **kwargs)
+ |
+ |  Upsampling layer for 3D inputs.
+ |
+ |  Repeats the 1st, 2nd and 3rd dimensions
+ |  of the data by `size[0]`, `size[1]` and `size[2]` respectively.
+ |
+ |  Example:
+ |
+ |  >>> input_shape = (2, 1, 2, 1, 3)
+ |  >>> x = np.ones(input_shape)
+ |  >>> y = keras.layers.UpSampling3D(size=(2, 2, 2))(x)
+ |  >>> y.shape
+ |  (2, 2, 4, 2, 3)
+ |
+ |  Args:
+ |      size: Int, or tuple of 3 integers.
+ |          The upsampling factors for dim1, dim2 and dim3.
+ |      data_format: A string,
+ |          one of `"channels_last"` (default) or `"channels_first"`.
+ |          The ordering of the dimensions in the inputs.
+ |          `"channels_last"` corresponds to inputs with shape
+ |          `(batch_size, spatial_dim1, spatial_dim2, spatial_dim3, channels)`
+ |          while `"channels_first"` corresponds to inputs with shape
+ |          `(batch_size, channels, spatial_dim1, spatial_dim2, spatial_dim3)`.
+ |          When unspecified, uses
+ |          `image_data_format` value found in your Keras config file at
+ |           `~/.keras/keras.json` (if exists) else `"channels_last"`.
+ |          Defaults to `"channels_last"`.
+ |
+ |  Input shape:
+ |      5D tensor with shape:
+ |      - If `data_format` is `"channels_last"`:
+ |          `(batch_size, dim1, dim2, dim3, channels)`
+ |      - If `data_format` is `"channels_first"`:
+ |          `(batch_size, channels, dim1, dim2, dim3)`
+ |
+ |  Output shape:
+ |      5D tensor with shape:
+ |      - If `data_format` is `"channels_last"`:
+ |          `(batch_size, upsampled_dim1, upsampled_dim2, upsampled_dim3,
+ |          channels)`
+ |      - If `data_format` is `"channels_first"`:
+ |          `(batch_size, channels, upsampled_dim1, upsampled_dim2,
+ |          upsampled_dim3)`
+ |
+ |  Method resolution order:
+ |      UpSampling3D
+ |      keras.src.layers.layer.Layer
+ |      keras.src.backend.tensorflow.layer.TFLayer
+ |      keras.src.backend.tensorflow.trackable.KerasAutoTrackable
+ |      tensorflow.python.trackable.autotrackable.AutoTrackable
+ |      tensorflow.python.trackable.base.Trackable
+ |      keras.src.ops.operation.Operation
+ |      builtins.object
+ |
+ |  Methods defined here:
+ |
+ |  __init__(
+ |    self,
+ |    size=(2, 2, 2),
+ |    data_format=None,
+ |    **kwargs
+ |  )
+ |      Initialize self.  See help(type(self)) for accurate signature.
+ |
+ |  call(self, inputs)
+ |
+ |  compute_output_shape(self, input_shape)
+ |
+ |  get_config(self)
+ |      Returns the config of the object.
+ |
+ |      An object config is a Python dictionary (serializable)
+ |      containing the information needed to re-instantiate it.
+ |

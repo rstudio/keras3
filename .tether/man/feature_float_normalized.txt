@@ -1,11 +1,3 @@
-#'
-#'
-#' @param name
-#' String, name for the object
-#'
-#' @export
-#' @seealso
-#' + <https://www.tensorflow.org/api_docs/python/tf/keras/utils/FeatureSpace/float_normalized>
-FeatureSpace_float_normalized <-
-__signature__
-keras.utils.FeatureSpace.float_normalized(name=None)
+Help on method float_normalized in module keras.src.layers.preprocessing.feature_space:
+
+float_normalized(name=None) method of builtins.type instance

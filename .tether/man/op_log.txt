@@ -1,17 +1,10 @@
-#' Natural logarithm, element-wise.
-#'
-#' @returns
-#'     Output tensor, element-wise natural logarithm of `x`.
-#'
-#' @param x
-#' Input tensor.
-#'
-#' @export
-#' @family numpy ops
-#' @family ops
-#' @seealso
-#' + <https:/keras.io/keras_core/api/ops/numpy#log-function>
-#' + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/log>
-k_log <-
 __signature__
 keras.ops.log(x)
+__doc__
+Natural logarithm, element-wise.
+
+Args:
+    x: Input tensor.
+
+Returns:
+    Output tensor, element-wise natural logarithm of `x`.

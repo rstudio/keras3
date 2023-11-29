@@ -1,31 +1,22 @@
-#' Scaled Exponential Linear Unit (SELU) activation function.
-#'
-#' @description
-#' It is defined as:
-#'
-#' `f(x) =  scale * alpha * (exp(x) - 1.) for x < 0`,
-#' `f(x) = scale * x for x >= 0`.
-#'
-#' # Examples
-#' ```python
-#' x = np.array([-1., 0., 1.])
-#' x_selu = keras.ops.selu(x)
-#' print(x_selu)
-#' # array([-1.11133055, 0., 1.05070098], shape=(3,), dtype=float64)
-#' ```
-#'
-#' @returns
-#' A tensor with the same shape as `x`.
-#'
-#' @param x
-#' Input tensor.
-#'
-#' @export
-#' @family nn ops
-#' @family ops
-#' @seealso
-#' + <https:/keras.io/keras_core/api/ops/nn#selu-function>
-#' + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/selu>
-k_selu <-
 __signature__
 keras.ops.selu(x)
+__doc__
+Scaled Exponential Linear Unit (SELU) activation function.
+
+It is defined as:
+
+`f(x) =  scale * alpha * (exp(x) - 1.) for x < 0`,
+`f(x) = scale * x for x >= 0`.
+
+Args:
+    x: Input tensor.
+
+Returns:
+    A tensor with the same shape as `x`.
+
+Example:
+
+>>> x = np.array([-1., 0., 1.])
+>>> x_selu = keras.ops.selu(x)
+>>> print(x_selu)
+array([-1.11133055, 0., 1.05070098], shape=(3,), dtype=float64)

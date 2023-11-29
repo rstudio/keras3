@@ -1,33 +1,23 @@
-#' Convert a NumPy array to a tensor.
-#'
-#' @description
-#'
-#' # Examples
-#' ```python
-#' x = np.array([1, 2, 3])
-#' y = keras.ops.convert_to_tensor(x)
-#' ```
-#'
-#' @returns
-#' A tensor of the specified `dtype`.
-#'
-#' @param x
-#' A NumPy array.
-#'
-#' @param dtype
-#' The target type.
-#'
-#' @param sparse
-#' Whether to keep sparse tensors. `False` will cause sparse
-#' tensors to be densified. The default value of `None` means that
-#' sparse tensors are kept only if the backend supports them.
-#'
-#' @export
-#' @family core ops
-#' @family ops
-#' @seealso
-#' + <https:/keras.io/keras_core/api/ops/core#converttotensor-function>
-#' + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/convert_to_tensor>
-k_convert_to_tensor <-
 __signature__
-keras.ops.convert_to_tensor(x, dtype=None, sparse=None)
+keras.ops.convert_to_tensor(
+  x,
+  dtype=None,
+  sparse=None
+)
+__doc__
+Convert a NumPy array to a tensor.
+
+Args:
+    x: A NumPy array.
+    dtype: The target type.
+    sparse: Whether to keep sparse tensors. `False` will cause sparse
+        tensors to be densified. The default value of `None` means that
+        sparse tensors are kept only if the backend supports them.
+
+Returns:
+    A tensor of the specified `dtype`.
+
+Example:
+
+>>> x = np.array([1, 2, 3])
+>>> y = keras.ops.convert_to_tensor(x)

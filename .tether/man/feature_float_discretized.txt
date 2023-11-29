@@ -1,16 +1,1 @@
-#'
-#'
-#' @param name
-#' String, name for the object
-#'
-#' @export
-#' @seealso
-#' + <https://www.tensorflow.org/api_docs/python/tf/keras/utils/FeatureSpace/float_discretized>
-FeatureSpace_float_discretized <-
-__signature__
-keras.utils.FeatureSpace.float_discretized(
-  num_bins,
-  bin_boundaries=None,
-  output_mode='one_hot',
-  name=None
-)
+

@@ -1,41 +1,62 @@
-#' Compute the (weighted) sum of the given values.
-#'
-#' @description
-#' For example, if `values` is `[1, 3, 5, 7]` then their sum is 16.
-#' If `sample_weight` was specified as `[1, 1, 0, 0]` then the sum would be 4.
-#'
-#' This metric creates one variable, `total`.
-#' This is ultimately returned as the sum value.
-#'
-#' # Examples
-#' ```python
-#' m = metrics.Sum()
-#' m.update_state([1, 3, 5, 7])
-#' m.result()
-#' # 16.0
-#' ```
-#'
-#' ```python
-#' m = metrics.Sum()
-#' m.update_state([1, 3, 5, 7], sample_weight=[1, 1, 0, 0])
-#' m.result()
-#' # 4.0
-#' ```
-#'
-#' @param name
-#' (Optional) string name of the metric instance.
-#'
-#' @param dtype
-#' (Optional) data type of the metric result.
-#'
-#' @param ...
-#' For forward/backward compatability.
-#'
-#' @export
-#' @family reduction metrics
-#' @family metrics
-#' @seealso
-#' + <https://www.tensorflow.org/api_docs/python/tf/keras/metrics/Sum>
-metric_sum <-
-__signature__
-keras.metrics.Sum(name='sum', dtype=None)
+Help on class Sum in module keras.src.metrics.reduction_metrics:
+
+class Sum(keras.src.metrics.metric.Metric)
+ |  Sum(name='sum', dtype=None)
+ |
+ |  Compute the (weighted) sum of the given values.
+ |
+ |  For example, if `values` is `[1, 3, 5, 7]` then their sum is 16.
+ |  If `sample_weight` was specified as `[1, 1, 0, 0]` then the sum would be 4.
+ |
+ |  This metric creates one variable, `total`.
+ |  This is ultimately returned as the sum value.
+ |
+ |  Args:
+ |      name: (Optional) string name of the metric instance.
+ |      dtype: (Optional) data type of the metric result.
+ |
+ |  Example:
+ |
+ |  >>> m = metrics.Sum()
+ |  >>> m.update_state([1, 3, 5, 7])
+ |  >>> m.result()
+ |  16.0
+ |
+ |  >>> m = metrics.Sum()
+ |  >>> m.update_state([1, 3, 5, 7], sample_weight=[1, 1, 0, 0])
+ |  >>> m.result()
+ |  4.0
+ |
+ |  Method resolution order:
+ |      Sum
+ |      keras.src.metrics.metric.Metric
+ |      builtins.object
+ |
+ |  Methods defined here:
+ |
+ |  __init__(
+ |    self,
+ |    name='sum',
+ |    dtype=None
+ |  )
+ |      Initialize self.  See help(type(self)) for accurate signature.
+ |
+ |  reset_state(self)
+ |      Reset all of the metric state variables.
+ |
+ |      This function is called between epochs/steps,
+ |      when a metric is evaluated during training.
+ |
+ |  result(self)
+ |      Compute the current metric value.
+ |
+ |      Returns:
+ |          A scalar tensor, or a dictionary of scalar tensors.
+ |
+ |  update_state(
+ |    self,
+ |    values,
+ |    sample_weight=None
+ |  )
+ |      Accumulate statistics for the metric.
+ |

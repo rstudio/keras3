@@ -1,16 +1,9 @@
-#' Softsign activation function.
-#'
-#' @description
-#' Softsign is defined as: `softsign(x) = x / (abs(x) + 1)`.
-#'
-#' @param x
-#' Input tensor.
-#'
-#' @export
-#' @family activations
-#' @seealso
-#' + <https:/keras.io/api/layers/activations#softsign-function>
-#' + <https://www.tensorflow.org/api_docs/python/tf/keras/activations/softsign>
-activation_softsign <-
 __signature__
 keras.activations.softsign(x)
+__doc__
+Softsign activation function.
+
+Softsign is defined as: `softsign(x) = x / (abs(x) + 1)`.
+
+Args:
+    x: Input tensor.

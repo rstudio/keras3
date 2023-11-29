@@ -1,22 +1,14 @@
-#' Return whether a tensor is finite, element-wise.
-#'
-#' @description
-#' Real values are finite when they are not NaN, not positive infinity, and
-#' not negative infinity. Complex values are finite when both their real
-#' and imaginary parts are finite.
-#'
-#' @returns
-#'     Output boolean tensor.
-#'
-#' @param x
-#' Input tensor.
-#'
-#' @export
-#' @family numpy ops
-#' @family ops
-#' @seealso
-#' + <https:/keras.io/keras_core/api/ops/numpy#isfinite-function>
-#' + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/isfinite>
-k_isfinite <-
 __signature__
 keras.ops.isfinite(x)
+__doc__
+Return whether a tensor is finite, element-wise.
+
+Real values are finite when they are not NaN, not positive infinity, and
+not negative infinity. Complex values are finite when both their real
+and imaginary parts are finite.
+
+Args:
+    x: Input tensor.
+
+Returns:
+    Output boolean tensor.

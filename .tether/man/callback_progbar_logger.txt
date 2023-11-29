@@ -1,20 +1,158 @@
-#' Callback that prints metrics to stdout.
-#'
-#' @description
-#'
-#' # Raises
-#'     ValueError: In case of invalid `count_mode`.
-#'
-#' @param count_mode
-#' One of `"steps"` or `"samples"`.
-#' Whether the progress bar should
-#' count samples seen or steps (batches) seen.
-#'
-#' @export
-#' @family callbacks
-#' @seealso
-#' + <https:/keras.io/api/callbacks/progbar_logger#progbarlogger-class>
-#' + <https://www.tensorflow.org/api_docs/python/tf/keras/callbacks/ProgbarLogger>
-callback_progbar_logger <-
-__signature__
-keras.callbacks.ProgbarLogger()
+Help on class ProgbarLogger in module keras.src.callbacks.progbar_logger:
+
+class ProgbarLogger(keras.src.callbacks.callback.Callback)
+ |  Callback that prints metrics to stdout.
+ |
+ |  Args:
+ |      count_mode: One of `"steps"` or `"samples"`.
+ |          Whether the progress bar should
+ |          count samples seen or steps (batches) seen.
+ |
+ |  Raises:
+ |      ValueError: In case of invalid `count_mode`.
+ |
+ |  Method resolution order:
+ |      ProgbarLogger
+ |      keras.src.callbacks.callback.Callback
+ |      builtins.object
+ |
+ |  Methods defined here:
+ |
+ |  __init__(self)
+ |      Initialize self.  See help(type(self)) for accurate signature.
+ |
+ |  on_epoch_begin(
+ |    self,
+ |    epoch,
+ |    logs=None
+ |  )
+ |      Called at the start of an epoch.
+ |
+ |      Subclasses should override for any actions to run. This function should
+ |      only be called during TRAIN mode.
+ |
+ |      Args:
+ |          epoch: Integer, index of epoch.
+ |          logs: Dict. Currently no data is passed to this argument for this
+ |            method but that may change in the future.
+ |
+ |  on_epoch_end(
+ |    self,
+ |    epoch,
+ |    logs=None
+ |  )
+ |      Called at the end of an epoch.
+ |
+ |      Subclasses should override for any actions to run. This function should
+ |      only be called during TRAIN mode.
+ |
+ |      Args:
+ |          epoch: Integer, index of epoch.
+ |          logs: Dict, metric results for this training epoch, and for the
+ |            validation epoch if validation is performed. Validation result
+ |            keys are prefixed with `val_`. For training epoch, the values of
+ |            the `Model`'s metrics are returned. Example:
+ |            `{'loss': 0.2, 'accuracy': 0.7}`.
+ |
+ |  on_predict_batch_end(
+ |    self,
+ |    batch,
+ |    logs=None
+ |  )
+ |      Called at the end of a batch in `predict` methods.
+ |
+ |      Subclasses should override for any actions to run.
+ |
+ |      Note that if the `steps_per_execution` argument to `compile` in
+ |      `Model` is set to `N`, this method will only be called every
+ |      `N` batches.
+ |
+ |      Args:
+ |          batch: Integer, index of batch within the current epoch.
+ |          logs: Dict. Aggregated metric results up until this batch.
+ |
+ |  on_predict_begin(self, logs=None)
+ |      Called at the beginning of prediction.
+ |
+ |      Subclasses should override for any actions to run.
+ |
+ |      Args:
+ |          logs: Dict. Currently no data is passed to this argument for this
+ |            method but that may change in the future.
+ |
+ |  on_predict_end(self, logs=None)
+ |      Called at the end of prediction.
+ |
+ |      Subclasses should override for any actions to run.
+ |
+ |      Args:
+ |          logs: Dict. Currently no data is passed to this argument for this
+ |            method but that may change in the future.
+ |
+ |  on_test_batch_end(
+ |    self,
+ |    batch,
+ |    logs=None
+ |  )
+ |      Called at the end of a batch in `evaluate` methods.
+ |
+ |      Also called at the end of a validation batch in the `fit`
+ |      methods, if validation data is provided.
+ |
+ |      Subclasses should override for any actions to run.
+ |
+ |      Note that if the `steps_per_execution` argument to `compile` in
+ |      `Model` is set to `N`, this method will only be called every
+ |      `N` batches.
+ |
+ |      Args:
+ |          batch: Integer, index of batch within the current epoch.
+ |          logs: Dict. Aggregated metric results up until this batch.
+ |
+ |  on_test_begin(self, logs=None)
+ |      Called at the beginning of evaluation or validation.
+ |
+ |      Subclasses should override for any actions to run.
+ |
+ |      Args:
+ |          logs: Dict. Currently no data is passed to this argument for this
+ |            method but that may change in the future.
+ |
+ |  on_test_end(self, logs=None)
+ |      Called at the end of evaluation or validation.
+ |
+ |      Subclasses should override for any actions to run.
+ |
+ |      Args:
+ |          logs: Dict. Currently the output of the last call to
+ |            `on_test_batch_end()` is passed to this argument for this method
+ |            but that may change in the future.
+ |
+ |  on_train_batch_end(
+ |    self,
+ |    batch,
+ |    logs=None
+ |  )
+ |      Called at the end of a training batch in `fit` methods.
+ |
+ |      Subclasses should override for any actions to run.
+ |
+ |      Note that if the `steps_per_execution` argument to `compile` in
+ |      `Model` is set to `N`, this method will only be called every
+ |      `N` batches.
+ |
+ |      Args:
+ |          batch: Integer, index of batch within the current epoch.
+ |          logs: Dict. Aggregated metric results up until this batch.
+ |
+ |  on_train_begin(self, logs=None)
+ |      Called at the beginning of training.
+ |
+ |      Subclasses should override for any actions to run.
+ |
+ |      Args:
+ |          logs: Dict. Currently no data is passed to this argument for this
+ |            method but that may change in the future.
+ |
+ |  set_params(self, params)
+ |

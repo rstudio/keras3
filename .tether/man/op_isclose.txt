@@ -1,20 +1,11 @@
-#' Return whether two tensors are element-wise almost equal.
-#'
-#' @returns
-#'     Output boolean tensor.
-#'
-#' @param x1
-#' First input tensor.
-#'
-#' @param x2
-#' Second input tensor.
-#'
-#' @export
-#' @family numpy ops
-#' @family ops
-#' @seealso
-#' + <https:/keras.io/keras_core/api/ops/numpy#isclose-function>
-#' + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/isclose>
-k_isclose <-
 __signature__
 keras.ops.isclose(x1, x2)
+__doc__
+Return whether two tensors are element-wise almost equal.
+
+Args:
+    x1: First input tensor.
+    x2: Second input tensor.
+
+Returns:
+    Output boolean tensor.

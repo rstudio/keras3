@@ -1,24 +1,17 @@
-#' Returns the cumulative sum of elements along a given axis.
-#'
-#' @returns
-#'     Output tensor.
-#'
-#' @param x
-#' Input tensor.
-#'
-#' @param axis
-#' Axis along which the cumulative sum is computed.
-#' By default the input is flattened.
-#'
-#' @param dtype
-#' dtype of returned tensor. Defaults to x.dtype.
-#'
-#' @export
-#' @family numpy ops
-#' @family ops
-#' @seealso
-#' + <https:/keras.io/keras_core/api/ops/numpy#cumsum-function>
-#' + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/cumsum>
-k_cumsum <-
 __signature__
-keras.ops.cumsum(x, axis=None, dtype=None)
+keras.ops.cumsum(
+  x,
+  axis=None,
+  dtype=None
+)
+__doc__
+Returns the cumulative sum of elements along a given axis.
+
+Args:
+    x: Input tensor.
+    axis: Axis along which the cumulative sum is computed.
+        By default the input is flattened.
+    dtype: dtype of returned tensor. Defaults to x.dtype.
+
+Returns:
+    Output tensor.

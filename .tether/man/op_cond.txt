@@ -1,22 +1,16 @@
-#' Conditionally applies `true_fn` or `false_fn`.
-#'
-#' @returns
-#'     The output of either `true_fn` or `false_fn` depending on pred.
-#'
-#' @param pred
-#' Boolean scalar type
-#'
-#' @param true_fn
-#' Callable returning the output for the `pred == True` case.
-#'
-#' @param false_fn
-#' Callable returning the output for the `pred == False` case.
-#'
-#' @export
-#' @family core ops
-#' @family ops
-#' @seealso
-#' + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/cond>
-k_cond <-
 __signature__
-keras.ops.cond(pred, true_fn, false_fn)
+keras.ops.cond(
+  pred,
+  true_fn,
+  false_fn
+)
+__doc__
+Conditionally applies `true_fn` or `false_fn`.
+
+Args:
+    pred: Boolean scalar type
+    true_fn: Callable returning the output for the `pred == True` case.
+    false_fn: Callable returning the output for the `pred == False` case.
+
+Returns:
+    The output of either `true_fn` or `false_fn` depending on pred.

@@ -1,33 +1,49 @@
-#' Layer that applies an update to the cost function based input activity.
-#'
-#' @description
-#'
-#' # Input Shape
-#' Arbitrary. Use the keyword argument `input_shape`
-#' (tuple of integers, does not include the samples axis)
-#' when using this layer as the first layer in a model.
-#'
-#' # Output Shape
-#'     Same shape as input.
-#'
-#' @param l1
-#' L1 regularization factor (positive float).
-#'
-#' @param l2
-#' L2 regularization factor (positive float).
-#'
-#' @param object
-#' Object to compose the layer with. A tensor, array, or sequential model.
-#'
-#' @param ...
-#' For forward/backward compatability.
-#'
-#' @export
-#' @family regularization layers
-#' @family layers
-#' @seealso
-#' + <https:/keras.io/api/layers/regularization_layers/activity_regularization#activityregularization-class>
-#' + <https://www.tensorflow.org/api_docs/python/tf/keras/layers/ActivityRegularization>
-layer_activity_regularization <-
-__signature__
-keras.layers.ActivityRegularization(l1=0.0, l2=0.0, **kwargs)
+Help on class ActivityRegularization in module keras.src.layers.regularization.activity_regularization:
+
+class ActivityRegularization(keras.src.layers.layer.Layer)
+ |  ActivityRegularization(l1=0.0, l2=0.0, **kwargs)
+ |
+ |  Layer that applies an update to the cost function based input activity.
+ |
+ |  Args:
+ |      l1: L1 regularization factor (positive float).
+ |      l2: L2 regularization factor (positive float).
+ |
+ |  Input shape:
+ |      Arbitrary. Use the keyword argument `input_shape`
+ |      (tuple of integers, does not include the samples axis)
+ |      when using this layer as the first layer in a model.
+ |
+ |  Output shape:
+ |      Same shape as input.
+ |
+ |  Method resolution order:
+ |      ActivityRegularization
+ |      keras.src.layers.layer.Layer
+ |      keras.src.backend.tensorflow.layer.TFLayer
+ |      keras.src.backend.tensorflow.trackable.KerasAutoTrackable
+ |      tensorflow.python.trackable.autotrackable.AutoTrackable
+ |      tensorflow.python.trackable.base.Trackable
+ |      keras.src.ops.operation.Operation
+ |      builtins.object
+ |
+ |  Methods defined here:
+ |
+ |  __init__(
+ |    self,
+ |    l1=0.0,
+ |    l2=0.0,
+ |    **kwargs
+ |  )
+ |      Initialize self.  See help(type(self)) for accurate signature.
+ |
+ |  call(self, inputs)
+ |
+ |  compute_output_shape(self, input_shape)
+ |
+ |  get_config(self)
+ |      Returns the config of the object.
+ |
+ |      An object config is a Python dictionary (serializable)
+ |      containing the information needed to re-instantiate it.
+ |

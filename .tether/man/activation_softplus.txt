@@ -1,16 +1,9 @@
-#' Softplus activation function.
-#'
-#' @description
-#' It is defined as: `softplus(x) = log(exp(x) + 1)`.
-#'
-#' @param x
-#' Input tensor.
-#'
-#' @export
-#' @family activations
-#' @seealso
-#' + <https:/keras.io/api/layers/activations#softplus-function>
-#' + <https://www.tensorflow.org/api_docs/python/tf/keras/activations/softplus>
-activation_softplus <-
 __signature__
 keras.activations.softplus(x)
+__doc__
+Softplus activation function.
+
+It is defined as: `softplus(x) = log(exp(x) + 1)`.
+
+Args:
+    x: Input tensor.

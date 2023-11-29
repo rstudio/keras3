@@ -1,25 +1,3 @@
-#' random dropout
-#'
-#' @description
-#' Randomly set some portion of values in the tensor to 0.
-#'
-#' @param seed
-#' Initial seed for the random number generator
-#'
-#' @param inputs
-#' see description
-#'
-#' @param rate
-#' see description
-#'
-#' @param noise_shape
-#' see description
-#'
-#' @export
-#' @family random
-#' @seealso
-#' + <https://www.tensorflow.org/api_docs/python/tf/keras/random/dropout>
-random_dropout <-
 __signature__
 keras.random.dropout(
   inputs,
@@ -27,3 +5,4 @@ keras.random.dropout(
   noise_shape=None,
   seed=None
 )
+__doc__

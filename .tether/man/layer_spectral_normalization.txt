@@ -1,50 +1,80 @@
-#' Performs spectral normalization on the weights of a target layer.
-#'
-#' @description
-#' This wrapper controls the Lipschitz constant of the weights of a layer by
-#' constraining their spectral norm, which can stabilize the training of GANs.
-#'
-#' # Examples
-#' Wrap `keras.layers.Conv2D`:
-#' ```python
-#' x = np.random.rand(1, 10, 10, 1)
-#' conv2d = SpectralNormalization(keras.layers.Conv2D(2, 2))
-#' y = conv2d(x)
-#' y.shape
-#' # (1, 9, 9, 2)
-#' ```
-#'
-#' Wrap `keras.layers.Dense`:
-#' ```python
-#' x = np.random.rand(1, 10, 10, 1)
-#' dense = SpectralNormalization(keras.layers.Dense(10))
-#' y = dense(x)
-#' y.shape
-#' # (1, 10, 10, 10)
-#' ```
-#'
-#' # Reference
-#' - [Spectral Normalization for GAN](https://arxiv.org/abs/1802.05957).
-#'
-#' @param layer
-#' A `keras.layers.Layer` instance that
-#' has either a `kernel` (e.g. `Conv2D`, `Dense`...)
-#' or an `embeddings` attribute (`Embedding` layer).
-#'
-#' @param power_iterations
-#' int, the number of iterations during normalization.
-#'
-#' @param ...
-#' Base wrapper keyword arguments.
-#'
-#' @param object
-#' Object to compose the layer with. A tensor, array, or sequential model.
-#'
-#' @export
-#' @family normalization layers
-#' @family layers
-#' @seealso
-#' + <https://www.tensorflow.org/api_docs/python/tf/keras/layers/SpectralNormalization>
-layer_spectral_normalization <-
-__signature__
-keras.layers.SpectralNormalization(layer, power_iterations=1, **kwargs)
+Help on class SpectralNormalization in module keras.src.layers.normalization.spectral_normalization:
+
+class SpectralNormalization(keras.src.layers.core.wrapper.Wrapper)
+ |  SpectralNormalization(layer, power_iterations=1, **kwargs)
+ |
+ |  Performs spectral normalization on the weights of a target layer.
+ |
+ |  This wrapper controls the Lipschitz constant of the weights of a layer by
+ |  constraining their spectral norm, which can stabilize the training of GANs.
+ |
+ |  Args:
+ |      layer: A `keras.layers.Layer` instance that
+ |          has either a `kernel` (e.g. `Conv2D`, `Dense`...)
+ |          or an `embeddings` attribute (`Embedding` layer).
+ |      power_iterations: int, the number of iterations during normalization.
+ |      **kwargs: Base wrapper keyword arguments.
+ |
+ |  Examples:
+ |
+ |  Wrap `keras.layers.Conv2D`:
+ |  >>> x = np.random.rand(1, 10, 10, 1)
+ |  >>> conv2d = SpectralNormalization(keras.layers.Conv2D(2, 2))
+ |  >>> y = conv2d(x)
+ |  >>> y.shape
+ |  (1, 9, 9, 2)
+ |
+ |  Wrap `keras.layers.Dense`:
+ |  >>> x = np.random.rand(1, 10, 10, 1)
+ |  >>> dense = SpectralNormalization(keras.layers.Dense(10))
+ |  >>> y = dense(x)
+ |  >>> y.shape
+ |  (1, 10, 10, 10)
+ |
+ |  Reference:
+ |
+ |  - [Spectral Normalization for GAN](https://arxiv.org/abs/1802.05957).
+ |
+ |  Method resolution order:
+ |      SpectralNormalization
+ |      keras.src.layers.core.wrapper.Wrapper
+ |      keras.src.layers.layer.Layer
+ |      keras.src.backend.tensorflow.layer.TFLayer
+ |      keras.src.backend.tensorflow.trackable.KerasAutoTrackable
+ |      tensorflow.python.trackable.autotrackable.AutoTrackable
+ |      tensorflow.python.trackable.base.Trackable
+ |      keras.src.ops.operation.Operation
+ |      builtins.object
+ |
+ |  Methods defined here:
+ |
+ |  __init__(
+ |    self,
+ |    layer,
+ |    power_iterations=1,
+ |    **kwargs
+ |  )
+ |      Initialize self.  See help(type(self)) for accurate signature.
+ |
+ |  build(self, input_shape)
+ |
+ |  call(
+ |    self,
+ |    inputs,
+ |    training=False
+ |  )
+ |
+ |  compute_output_shape(self, input_shape)
+ |
+ |  get_config(self)
+ |      Returns the config of the object.
+ |
+ |      An object config is a Python dictionary (serializable)
+ |      containing the information needed to re-instantiate it.
+ |
+ |  normalize_weights(self)
+ |      Generate spectral normalized weights.
+ |
+ |      This method will update the value of `self.kernel` with the
+ |      spectral normalized value, so that the layer is ready for `call()`.
+ |

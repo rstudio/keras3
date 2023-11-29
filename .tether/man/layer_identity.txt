@@ -1,20 +1,27 @@
-#' Identity layer.
-#'
-#' @description
-#' This layer should be used as a placeholder when no operation is to be
-#' performed. The layer just returns its `inputs` argument as output.
-#'
-#' @param object
-#' Object to compose the layer with. A tensor, array, or sequential model.
-#'
-#' @param ...
-#' For forward/backward compatability.
-#'
-#' @export
-#' @family core layers
-#' @family layers
-#' @seealso
-#' + <https://www.tensorflow.org/api_docs/python/tf/keras/layers/Identity>
-layer_identity <-
-__signature__
-keras.layers.Identity(**kwargs)
+Help on class Identity in module keras.src.layers.core.identity:
+
+class Identity(keras.src.layers.layer.Layer)
+ |  Identity(**kwargs)
+ |
+ |  Identity layer.
+ |
+ |  This layer should be used as a placeholder when no operation is to be
+ |  performed. The layer just returns its `inputs` argument as output.
+ |
+ |  Method resolution order:
+ |      Identity
+ |      keras.src.layers.layer.Layer
+ |      keras.src.backend.tensorflow.layer.TFLayer
+ |      keras.src.backend.tensorflow.trackable.KerasAutoTrackable
+ |      tensorflow.python.trackable.autotrackable.AutoTrackable
+ |      tensorflow.python.trackable.base.Trackable
+ |      keras.src.ops.operation.Operation
+ |      builtins.object
+ |
+ |  Methods defined here:
+ |
+ |  __init__(self, **kwargs)
+ |      Initialize self.  See help(type(self)) for accurate signature.
+ |
+ |  call(self, inputs)
+ |

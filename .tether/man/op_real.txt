@@ -1,17 +1,10 @@
-#' Return the real part of the complex argument.
-#'
-#' @returns
-#'     The real component of the complex argument.
-#'
-#' @param x
-#' Input tensor.
-#'
-#' @export
-#' @family numpy ops
-#' @family ops
-#' @seealso
-#' + <https:/keras.io/keras_core/api/ops/numpy#real-function>
-#' + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/real>
-k_real <-
 __signature__
 keras.ops.real(x)
+__doc__
+Return the real part of the complex argument.
+
+Args:
+    x: Input tensor.
+
+Returns:
+    The real component of the complex argument.

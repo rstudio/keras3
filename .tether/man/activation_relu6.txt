@@ -1,16 +1,9 @@
-#' Relu6 activation function.
-#'
-#' @description
-#' It's the ReLU function, but truncated to a maximum value of 6.
-#'
-#' @param x
-#' Input tensor.
-#'
-#' @export
-#' @family activations
-#' @seealso
-#' + <https:/keras.io/keras_core/api/layers/activations#relu6-function>
-#' + <https://www.tensorflow.org/api_docs/python/tf/keras/activations/relu6>
-activation_relu6 <-
 __signature__
 keras.activations.relu6(x)
+__doc__
+Relu6 activation function.
+
+It's the ReLU function, but truncated to a maximum value of 6.
+
+Args:
+    x: Input tensor.

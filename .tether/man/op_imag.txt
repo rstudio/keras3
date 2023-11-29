@@ -1,17 +1,10 @@
-#' Return the imaginary part of the complex argument.
-#'
-#' @returns
-#'     The imaginary component of the complex argument.
-#'
-#' @param x
-#' Input tensor.
-#'
-#' @export
-#' @family numpy ops
-#' @family ops
-#' @seealso
-#' + <https:/keras.io/keras_core/api/ops/numpy#imag-function>
-#' + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/imag>
-k_imag <-
 __signature__
 keras.ops.imag(x)
+__doc__
+Return the imaginary part of the complex argument.
+
+Args:
+    x: Input tensor.
+
+Returns:
+    The imaginary component of the complex argument.

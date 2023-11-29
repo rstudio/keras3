@@ -1,27 +1,38 @@
-#' Initializer that generates tensors initialized to 1.
-#'
-#' @description
-#' Also available via the shortcut function `ones`.
-#'
-#' # Examples
-#' ```python
-#' # Standalone usage:
-#' initializer = Ones()
-#' values = initializer(shape=(2, 2))
-#' ```
-#'
-#' ```python
-#' # Usage in a Keras layer:
-#' initializer = Ones()
-#' layer = Dense(3, kernel_initializer=initializer)
-#' ```
-#'
-#' @export
-#' @family constant initializers
-#' @family initializers
-#' @seealso
-#' + <https:/keras.io/api/layers/initializers#ones-class>
-#' + <https://www.tensorflow.org/api_docs/python/tf/keras/initializers/Ones>
-initializer_ones <-
-__signature__
-keras.initializers.Ones()
+Help on class Ones in module keras.src.initializers.constant_initializers:
+
+class Ones(keras.src.initializers.initializer.Initializer)
+ |  Initializer that generates tensors initialized to 1.
+ |
+ |  Also available via the shortcut function `ones`.
+ |
+ |  Examples:
+ |
+ |  >>> # Standalone usage:
+ |  >>> initializer = Ones()
+ |  >>> values = initializer(shape=(2, 2))
+ |
+ |  >>> # Usage in a Keras layer:
+ |  >>> initializer = Ones()
+ |  >>> layer = Dense(3, kernel_initializer=initializer)
+ |
+ |  Method resolution order:
+ |      Ones
+ |      keras.src.initializers.initializer.Initializer
+ |      builtins.object
+ |
+ |  Methods defined here:
+ |
+ |  __call__(
+ |    self,
+ |    shape,
+ |    dtype=None
+ |  )
+ |      Returns a tensor object initialized as specified by the initializer.
+ |
+ |      Args:
+ |          shape: Shape of the tensor.
+ |          dtype: Optional dtype of the tensor. Only numeric or boolean dtypes
+ |              are supported. If not specified, `keras.backend.floatx()`
+ |              is used, which default to `float32` unless you configured it
+ |              otherwise (via `keras.backend.set_floatx(float_dtype)`).
+ |

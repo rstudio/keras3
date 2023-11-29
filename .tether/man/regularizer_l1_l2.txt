@@ -1,31 +1,58 @@
-#' A regularizer that applies both L1 and L2 regularization penalties.
-#'
-#' @description
-#' The L1 regularization penalty is computed as:
-#' `loss = l1 * reduce_sum(abs(x))`
-#'
-#' The L2 regularization penalty is computed as
-#' `loss = l2 * reduce_sum(square(x))`
-#'
-#' L1L2 may be passed to a layer as a string identifier:
-#'
-#' ```python
-#' dense = Dense(3, kernel_regularizer='l1_l2')
-#' ```
-#'
-#' In this case, the default values used are `l1=0.01` and `l2=0.01`.
-#'
-#' @param l1
-#' float, L1 regularization factor.
-#'
-#' @param l2
-#' float, L2 regularization factor.
-#'
-#' @export
-#' @family regularizers
-#' @seealso
-#' + <https:/keras.io/api/layers/regularizers#l1l2-class>
-#' + <https://www.tensorflow.org/api_docs/python/tf/keras/regularizers/L1L2>
-regularizer_l1_l2 <-
-__signature__
-keras.regularizers.L1L2(l1=0.0, l2=0.0)
+Help on class L1L2 in module keras.src.regularizers.regularizers:
+
+class L1L2(Regularizer)
+ |  L1L2(l1=0.0, l2=0.0)
+ |
+ |  A regularizer that applies both L1 and L2 regularization penalties.
+ |
+ |  The L1 regularization penalty is computed as:
+ |  `loss = l1 * reduce_sum(abs(x))`
+ |
+ |  The L2 regularization penalty is computed as
+ |  `loss = l2 * reduce_sum(square(x))`
+ |
+ |  L1L2 may be passed to a layer as a string identifier:
+ |
+ |  >>> dense = Dense(3, kernel_regularizer='l1_l2')
+ |
+ |  In this case, the default values used are `l1=0.01` and `l2=0.01`.
+ |
+ |  Arguments:
+ |      l1: float, L1 regularization factor.
+ |      l2: float, L2 regularization factor.
+ |
+ |  Method resolution order:
+ |      L1L2
+ |      Regularizer
+ |      builtins.object
+ |
+ |  Methods defined here:
+ |
+ |  __call__(self, x)
+ |      Compute a regularization penalty from an input tensor.
+ |
+ |  __init__(
+ |    self,
+ |    l1=0.0,
+ |    l2=0.0
+ |  )
+ |      Initialize self.  See help(type(self)) for accurate signature.
+ |
+ |  get_config(self)
+ |      Returns the config of the regularizer.
+ |
+ |      An regularizer config is a Python dictionary (serializable)
+ |      containing all configuration parameters of the regularizer.
+ |      The same regularizer can be reinstantiated later
+ |      (without any saved state) from this configuration.
+ |
+ |      This method is optional if you are just training and executing models,
+ |      exporting to and from SavedModels, or using weight checkpoints.
+ |
+ |      This method is required for Keras `model_to_estimator`, saving and
+ |      loading models to HDF5 formats, Keras model cloning, some visualization
+ |      utilities, and exporting models to and from JSON.
+ |
+ |      Returns:
+ |          Python dictionary.
+ |

@@ -1,29 +1,46 @@
-#' Initializer that generates the identity matrix.
-#'
-#' @description
-#' Only usable for generating 2D matrices.
-#'
-#' # Examples
-#' ```python
-#' # Standalone usage:
-#' initializer = Identity()
-#' values = initializer(shape=(2, 2))
-#' ```
-#'
-#' ```python
-#' # Usage in a Keras layer:
-#' initializer = Identity()
-#' layer = Dense(3, kernel_initializer=initializer)
-#' ```
-#'
-#' @param gain
-#' Multiplicative factor to apply to the identity matrix.
-#'
-#' @export
-#' @family constant initializers
-#' @family initializers
-#' @seealso
-#' + <https://www.tensorflow.org/api_docs/python/tf/keras/initializers/IdentityInitializer>
-initializer_identity <-
-__signature__
-keras.initializers.IdentityInitializer(gain=1.0)
+Help on class Identity in module keras.src.initializers.constant_initializers:
+
+class Identity(keras.src.initializers.initializer.Initializer)
+ |  Identity(gain=1.0)
+ |
+ |  Initializer that generates the identity matrix.
+ |
+ |  Only usable for generating 2D matrices.
+ |
+ |  Examples:
+ |
+ |  >>> # Standalone usage:
+ |  >>> initializer = Identity()
+ |  >>> values = initializer(shape=(2, 2))
+ |
+ |  >>> # Usage in a Keras layer:
+ |  >>> initializer = Identity()
+ |  >>> layer = Dense(3, kernel_initializer=initializer)
+ |
+ |  Args:
+ |      gain: Multiplicative factor to apply to the identity matrix.
+ |
+ |  Method resolution order:
+ |      Identity
+ |      keras.src.initializers.initializer.Initializer
+ |      builtins.object
+ |
+ |  Methods defined here:
+ |
+ |  __call__(
+ |    self,
+ |    shape,
+ |    dtype=None
+ |  )
+ |      Returns a tensor object initialized as specified by the initializer.
+ |
+ |      Args:
+ |          shape: Shape of the tensor.
+ |          dtype: Optional dtype of the tensor. Only numeric or boolean dtypes
+ |              are supported. If not specified, `keras.backend.floatx()`
+ |              is used, which default to `float32` unless you configured it
+ |              otherwise (via `keras.backend.set_floatx(float_dtype)`).
+ |
+ |  __init__(self, gain=1.0)
+ |      Initialize self.  See help(type(self)) for accurate signature.
+ |
