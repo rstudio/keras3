@@ -32,7 +32,8 @@ resolve_rmd_tether <- function(url) {
 # options(warn = 2, error = browser)
 # unlink(".tether", recursive = TRUE)
 doctether::retether(
-  roxy_tag_eval = resolve_roxy_tether,
+  # roxy_tag_eval = resolve_roxy_tether,
+  roxy_tag_eval = NULL,
   rmd_field_eval = resolve_rmd_tether
 )
 
