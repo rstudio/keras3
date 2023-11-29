@@ -656,8 +656,7 @@ function (learning_rate = 0.001, beta_1 = 0.9, beta_2 = 0.999,
 #' Float, defaults to 0.99. Only used if `use_ema=TRUE`.
 #' This is the momentum to use when computing
 #' the EMA of the model's weights:
-#' `new_average = ema_momentum * old_average + (1 - ema_momentum) *
-#' current_variable_value`.
+#' `new_average = ema_momentum * old_average + (1 - ema_momentum) * current_variable_value`.
 #'
 #' @param ema_overwrite_frequency
 #' Int or `NULL`, defaults to `NULL`. Only used if
