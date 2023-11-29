@@ -11,9 +11,8 @@
 #' @export
 install_keras <- function(...,
                           envname = "r-keras",
-                          extra_packages = NULL,
+                          extra_packages = c("scipy", "pandas", "Pillow", "pydot", "ipython"),
                           python_version = "3.10",
-                          # devel = FALSE
                           backend = c("tensorflow", "jax", "pytorch")
                           ) {
 
