@@ -37,13 +37,10 @@ industry workflows.
 
 ## Setup
 
-```python
-import os
-
-os.environ["KERAS_BACKEND"] = "tensorflow"
-
-import tensorflow as tf
-import keras
+```{r}
+library(keras3)
+library(tensorflow)
+library(tfdatasets)
 ```
 
 ## Single-host, multi-device synchronous training
@@ -73,8 +70,7 @@ variable** object.
 **How to use it**
 
 To do single-host, multi-device synchronous training with a Keras model, you would use
-the [`tf.distribute.MirroredStrategy` API](
-    https://www.tensorflow.org/api_docs/python/tf/distribute/MirroredStrategy).
+the [`tf$distribute$MirroredStrategy` API](https://www.tensorflow.org/api_docs/python/tf/distribute/MirroredStrategy).
 Here's how it works:
 
 - Instantiate a `MirroredStrategy`, optionally configuring which specific devices you
@@ -90,86 +86,91 @@ in a multi-device or distributed workflow.
 
 Schematically, it looks like this:
 
-```python
+```{r, eval = FALSE}
 # Create a MirroredStrategy.
-strategy = tf.distribute.MirroredStrategy()
-print('Number of devices: {}'.format(strategy.num_replicas_in_sync))
+strategy <- tf$distribute$MirroredStrategy()
+cat(sprintf('Number of devices: %d', strategy$num_replicas_in_sync))
 
 # Open a strategy scope.
-with strategy.scope():
-    # Everything that creates variables should be under the strategy scope.
-    # In general this is only model construction & `compile()`.
-    model = Model(...)
-    model.compile(...)
-
-    # Train the model on all available devices.
-    model.fit(train_dataset, validation_data=val_dataset, ...)
-
-    # Test the model on all available devices.
-    model.evaluate(test_dataset)
+with(startegy$scope(), {
+  # Everything that creates variables should be under the strategy scope.
+  # In general this is only model construction & `compile()`.
+  model <- Model(...)
+  model %>% compile(...)
+  
+  # Train the model on all available devices.
+  model %>% fit(train_dataset, validation_data=val_dataset, ...)
+  
+  # Test the model on all available devices.
+  model %>% evaluate(test_dataset)
+})
 ```
 
 Here's a simple end-to-end runnable example:
 
-```python
-def get_compiled_model():
-    # Make a simple 2-layer densely-connected neural network.
-    inputs = keras.Input(shape=(784,))
-    x = keras.layers.Dense(256, activation="relu")(inputs)
-    x = keras.layers.Dense(256, activation="relu")(x)
-    outputs = keras.layers.Dense(10)(x)
-    model = keras.Model(inputs, outputs)
-    model.compile(
-        optimizer=keras.optimizers.Adam(),
-        loss=keras.losses.SparseCategoricalCrossentropy(from_logits=True),
-        metrics=[keras.metrics.SparseCategoricalAccuracy()],
-    )
-    return model
+```{r}
+get_compiled_model <- function() {
+  inputs <- layer_input(shape = 784)
+  outputs <- inputs %>%
+    layer_dense(units = 256, activation = "relu") %>%
+    layer_dense(units = 256, activation = "relu") %>%
+    layer_dense(units = 10)
+  model <- keras_model(inputs, outputs)
+  model %>% compile(
+    optimizer = optimizer_adam(),
+    loss = loss_sparse_categorical_crossentropy(from_logits=TRUE),
+    metrics=list(metric_sparse_categorical_accuracy())
+  )
+  model
+}
 
-
-def get_dataset():
-    batch_size = 32
-    num_val_samples = 10000
-
-    # Return the MNIST dataset in the form of a `tf.data.Dataset`.
-    (x_train, y_train), (x_test, y_test) = keras.datasets.mnist.load_data()
-
-    # Preprocess the data (these are Numpy arrays)
-    x_train = x_train.reshape(-1, 784).astype("float32") / 255
-    x_test = x_test.reshape(-1, 784).astype("float32") / 255
-    y_train = y_train.astype("float32")
-    y_test = y_test.astype("float32")
-
-    # Reserve num_val_samples samples for validation
-    x_val = x_train[-num_val_samples:]
-    y_val = y_train[-num_val_samples:]
-    x_train = x_train[:-num_val_samples]
-    y_train = y_train[:-num_val_samples]
-    return (
-        tf.data.Dataset.from_tensor_slices((x_train, y_train)).batch(
-            batch_size
-        ),
-        tf.data.Dataset.from_tensor_slices((x_val, y_val)).batch(batch_size),
-        tf.data.Dataset.from_tensor_slices((x_test, y_test)).batch(batch_size),
-    )
-
+get_dataset <- function() {
+  batch_size <- 64
+  c(c(x_train, y_train), c(x_test, y_test)) %<-% dataset_mnist()
+  x_train <- array_reshape(x_train, c(-1, 784))
+  x_test <- array_reshape(x_test, c(-1, 784))
+  
+  # Reserve 10,000 samples for validation.
+  x_val <- x_train[1:10000,]
+  y_val <- y_train[1:10000]
+  x_train = x_train[-c(1:10000),]
+  y_train = y_train[-c(1:10000)]
+  
+  # Prepare the training dataset.
+  train_dataset <- list(x_train, y_train) %>% 
+    tensor_slices_dataset() %>% 
+    dataset_batch(batch_size)
+  
+  # Prepare the validation dataset.
+  val_dataset <- list(x_val, y_val) %>% 
+    tensor_slices_dataset() %>% 
+    dataset_batch(batch_size)
+  
+  # Prepare the test dataset.
+  test_dataset <- list(x_test, y_test) %>% 
+    tensor_slices_dataset() %>% 
+    dataset_batch(batch_size)
+  
+  list(train_dataset, val_dataset, test_dataset)
+}
 
 # Create a MirroredStrategy.
-strategy = tf.distribute.MirroredStrategy()
-print("Number of devices: {}".format(strategy.num_replicas_in_sync))
+strategy <- tf$distribute$MirroredStrategy()
+cat(sprintf('Number of devices: %d', strategy$num_replicas_in_sync))
 
 # Open a strategy scope.
-with strategy.scope():
-    # Everything that creates variables should be under the strategy scope.
-    # In general this is only model construction & `compile()`.
-    model = get_compiled_model()
-
-    # Train the model on all available devices.
-    train_dataset, val_dataset, test_dataset = get_dataset()
-    model.fit(train_dataset, epochs=2, validation_data=val_dataset)
-
-    # Test the model on all available devices.
-    model.evaluate(test_dataset)
+with(strategy$scope(), {
+  # Everything that creates variables should be under the strategy scope.
+  # In general this is only model construction & `compile()`.
+  model <- get_compiled_model()
+  
+  # Train the model on all available devices.
+  c(train_dataset, val_dataset, test_dataset) %<-% get_dataset()
+  model %>% fit(train_dataset, epochs=2, validation_data=val_dataset)
+  
+  # Test the model on all available devices.
+  model %>% evaluate(test_dataset)
+})
 ```
 
 ## Using callbacks to ensure fault tolerance
@@ -182,52 +183,54 @@ training from your saved model.
 
 Here's a simple example:
 
-```python
+```{r}
 # Prepare a directory to store all the checkpoints.
-checkpoint_dir = "./ckpt"
-if not os.path.exists(checkpoint_dir):
-    os.makedirs(checkpoint_dir)
+checkpoint_dir <- "./ckpt"
+if (!dir.exists(checkpoint_dir)) {
+  dir.create(checkpoint_dir)
+}
+
+make_or_restore_model <- function() {
+  # Either restore the latest model, or create a fresh one
+  # if there is no checkpoint available.
+  checkpoints <- list.files(checkpoint_dir, full.names=TRUE)
+
+  if (length(checkpoints) > 0) {
+    latest_checkpoint <- tail(checkpoints, 1)
+    load_model(latest_checkpoint)
+  } else {
+    get_compiled_model()
+  }
+}
 
 
-def make_or_restore_model():
-    # Either restore the latest model, or create a fresh one
-    # if there is no checkpoint available.
-    checkpoints = [
-        checkpoint_dir + "/" + name for name in os.listdir(checkpoint_dir)
-    ]
-    if checkpoints:
-        latest_checkpoint = max(checkpoints, key=os.path.getctime)
-        print("Restoring from", latest_checkpoint)
-        return keras.models.load_model(latest_checkpoint)
-    print("Creating a new model")
-    return get_compiled_model()
-
-
-def run_training(epochs=1):
-    # Create a MirroredStrategy.
-    strategy = tf.distribute.MirroredStrategy()
-
-    # Open a strategy scope and create/restore the model
-    with strategy.scope():
-        model = make_or_restore_model()
-
-        callbacks = [
-            # This callback saves a SavedModel every epoch
-            # We include the current epoch in the folder name.
-            keras.callbacks.ModelCheckpoint(
-                filepath=checkpoint_dir + "/ckpt-{epoch}.keras",
-                save_freq="epoch",
-            )
-        ]
-        model.fit(
-            train_dataset,
-            epochs=epochs,
-            callbacks=callbacks,
-            validation_data=val_dataset,
-            verbose=2,
-        )
-
-
+run_training <- function(epochs=1) {
+  # Create a MirroredStrategy.
+  strategy <- tf$distribute$MirroredStrategy()
+  
+  # Open a strategy scope and create/restore the model
+  with(strategy$scope(), {
+    model <- make_or_restore_model()
+    
+    callbacks <- list(
+      # This callback saves a SavedModel every epoch
+      # We include the current epoch in the folder name.
+      callback_model_checkpoint(
+        filepath = paste0(checkpoint_dir, "/ckpt-{epoch}.keras"),
+        save_freq="epoch",  
+      )
+    )
+    
+    model %>% fit(
+      train_dataset,
+      epochs=epochs,
+      callbacks=callbacks,
+      validation_data=val_dataset,
+      verbose=2
+    )
+  })
+}
+    
 # Running the first time creates the model
 run_training(epochs=1)
 
@@ -235,10 +238,10 @@ run_training(epochs=1)
 run_training(epochs=1)
 ```
 
-## `tf.data` performance tips
+## `tf$data` performance tips
 
 When doing distributed training, the efficiency with which you load data can often become
-critical. Here are a few tips to make sure your `tf.data` pipelines
+critical. Here are a few tips to make sure your `tf$data` pipelines
 run as fast as possible.
 
 **Note about dataset batching**
@@ -247,9 +250,9 @@ When creating your dataset, make sure it is batched with the global batch size.
 For instance, if each of your 8 GPUs is capable of running a batch of 64 samples, you
 call use a global batch size of 512.
 
-**Calling `dataset.cache()`**
+**Calling `dataset_cache()`**
 
-If you call `.cache()` on a dataset, its data will be cached after running through the
+If you call `dataset_cache()` on a dataset, its data will be cached after running through the
 first iteration over the data. Every subsequent iteration will use the cached data. The
 cache can be in memory (default) or to a local file you specify.
 
@@ -260,9 +263,9 @@ This can improve performance when:
 - You are reading data from local disk, but your data would fit in memory and your
 workflow is significantly IO-bound (e.g. reading & decoding image files).
 
-**Calling `dataset.prefetch(buffer_size)`**
+**Calling `dataset_prefetch(buffer_size)`**
 
-You should almost always call `.prefetch(buffer_size)` after creating a dataset. It means
+You should almost always call `dataset_prefetch(buffer_size)` after creating a dataset. It means
 your data pipeline will run asynchronously from your model,
 with new samples being preprocessed and stored in a buffer while the current batch
 samples are used to train the model. The next batch will be prefetched in GPU memory by
