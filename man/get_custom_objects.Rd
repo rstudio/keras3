@@ -34,7 +34,7 @@ Other saving:
 \code{\link{get_registered_name}()},
 \code{\link{get_registered_object}()},
 \code{\link{layer_tfsm}()},
-\code{\link{load_model}()}
+\code{\link{load_keras_model}()}
 
 Other utils: 
 \code{\link{audio_dataset_from_directory}()},
