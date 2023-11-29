@@ -37,5 +37,9 @@ doctether::retether(
   rmd_field_eval = resolve_rmd_tether
 )
 
+# to retether just one vignette:
+# doctether:::retether_rmd("~/github/rstudio/keras/vignettes-src/serialization_and_saving.Rmd",
+#               eval_tether_field = resolve_rmd_tether)
+
 
 message("DONE!")
