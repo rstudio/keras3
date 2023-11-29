@@ -254,7 +254,8 @@ layer_feature_space <-
 #' @export
 #' @rdname layer_feature_space
 #' @tether keras.utils.FeatureSpace.cross
-feature_cross <- function(feature_names, crossing_dim, output_mode = "one_hot") {
+feature_cross <-
+function(feature_names, crossing_dim, output_mode = "one_hot") {
   args <- capture_args2(list(crossing_dim = as_integer))
   keras$utils$FeatureSpace$cross(!!!args)
 }
@@ -281,9 +282,7 @@ function(name = NULL) {
 #' @rdname layer_feature_space
 #' @tether keras.utils.FeatureSpace.float_rescaled
 feature_float_rescaled <-
-function(scale = 1.0,
-         offset = 0.0,
-         name = NULL) {
+function (scale = 1.0, offset = 0.0, name = NULL) {
   args <- capture_args2()
   keras$utils$FeatureSpace$float_rescaled(!!!args)
 }
@@ -301,10 +300,7 @@ function(name = NULL) {
 #' @rdname layer_feature_space
 #' @tether keras.utils.FeatureSpace.float_discretized
 feature_float_discretized <-
-function(num_bins,
-         bin_boundaries = NULL,
-         output_mode = "one_hot",
-         name = NULL) {
+function(num_bins, bin_boundaries = NULL, output_mode = "one_hot", name = NULL) {
   args <- capture_args2(list(num_bins = as_integer))
   keras$utils$FeatureSpace$float_discretized(!!!args)
 }

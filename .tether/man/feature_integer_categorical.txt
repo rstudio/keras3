@@ -1,1 +1,8 @@
-
+__signature__
+keras.utils.FeatureSpace.integer_categorical(
+  max_tokens=None,
+  num_oov_indices=1,
+  output_mode='one_hot',
+  name=None
+)
+__doc__

@@ -6,10 +6,10 @@ library(doctether)
 resolve_roxy_tether <- function(endpoint) {
   tether <- as_tether(py_eval(endpoint),
                       name = endpoint,
-                      include_roxified = FALSE)
+                      roxify = FALSE)
   export <- mk_export(endpoint)
   attr(tether, "roxified") <- str_flatten_lines(
-    str_c("#' ", export$roxygen),
+    str_c("#' ", str_split_lines(export$roxygen)),
     deparse(export$r_fn)
   )
   tether
