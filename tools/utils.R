@@ -854,50 +854,9 @@ make_r_name <- function(endpoint, module = py_eval(endpoint)$`__module__`) {
   prefix <- switch(prefix,
                    # "random" = "k_random",
                    # "config" = "k_config",
-                   "ops" = "k",
+                   # "ops" = "k",
                    prefix)
 
-  # if(endpoint == "keras.preprocessing.image_dataset_from_directory")
-  #   browser()
-  # if(endpoint |> startsWith("keras.ops."))
-  #   endpoint %<>% str_replace(fixed("keras.ops."), "keras.k.")
-  # if(endpoint |> startsWith("keras.preprocessing."))
-  #   endpoint %<>% str_replace(fixed(".preprocessing."), ".")
-
-
-  # if(endpoint == "keras.utils.FeatureSpace") return("layer_feature_space")
-  # # TODO: why is FeatureSpace not exported to keras.layers.FeatureSpace?
-  # # Does instantiation and composition in one call make sense, or
-  # # does the need for adapt() throw a wrench in the works (and mean that
-  # # using compose_layer() doesn't make sense)...
-  # # maybe this should have a name like "preprocess_feature_space()" or
-  # # layer_preprocess_feature_space()? or
-  # x <- endpoint |>
-  #   reticulate:::str_drop_prefix("keras.") |>
-  #   str_split_1(fixed("."))
-
-  # name <- x[length(x)] # __name__
-  # x <- x[-length(x)] # submodules
-  # x <- x[nzchar(x)]
-
-  # # "keras.optimizers.schedules.CosineDecay"
-  # # "optimizer_schedule_cosine_decay"
-  # # "learning_rate_schedule_cosine_decay"
-
-  # # if(length(x) >= 2)
-  # #   x <- x[-1] # drop "keras" from "keras.layers.Dense
-  # # if(!length(x))
-  # #   prefix <- x()
-
-  # if(type == "learning_rate_schedule")
-  #   prefix <- "learning_rate_schedule"
-  # else {
-  #   # x <-
-  #   # if(length(x) && !is_scalar(x))
-
-  #     # browser()
-  #   prefix <- x |> str_replace("e?s$", "") |> str_flatten("_")
-  # }
 
   name <- name |>
     str_replace("NaN", "Nan") |>
@@ -932,10 +891,6 @@ make_r_name <- function(endpoint, module = py_eval(endpoint)$`__module__`) {
 
     str_replace("f_1", "f1") |>
     str_replace("r_2", "r2") |>
-    # str_replace("log_2", "log2") |>
-    # str_replace("log_10", "log10") |>
-    # str_replace("log_1_p", "log1p") |>
-    # str_replace("relu_6", "relu6") |>
 
     str_replace_all("max_norm", "maxnorm") |>
     str_replace_all("non_neg", "nonneg") |>
@@ -952,16 +907,7 @@ make_r_name <- function(endpoint, module = py_eval(endpoint)$`__module__`) {
   if(str_detect(name, "nas_net_"))
     name %<>% str_replace_all("_", "")
 
-
-  # if (prefix != "k") {
-  #   name %<>%
-  #     str_replace(glue("_?{prefix}_?"), "_") %>%
-  #     str_replace("^_", "") %>%
-  #     str_replace_all("_+", "_") %>%
-  #     str_replace("_$", "")
-  # }
-  # if (length(prefix) && prefix != "")
-    name <- str_flatten(c(prefix, name), collapse = "_")
+  name <- str_flatten(c(prefix, name), collapse = "_")
 
   name %<>%
     str_split_1("_") %>%
@@ -990,7 +936,6 @@ make_r_name <- function(endpoint, module = py_eval(endpoint)$`__module__`) {
   name
 }
 
-#TODO: param parsing in AdamW borked
 #TODO: revisit application helpers like xception_preprocess_input()
 #TODO: KerasCallback and other R6 classes for subclassing...
 #TODO: implementation() - fix up docs / actual
@@ -1424,8 +1369,9 @@ mk_export <- memoise(.mk_export <- function(endpoint, quiet = FALSE) {
   # message(glue(".mk_export('{endpoint}', {quiet})"))
   # py parts
   py_obj <- py_eval(endpoint)
-  name <- py_obj$`__name__`
-  module <- py_obj$`__module__`
+  py_obj <<- py_obj
+  name <- py_obj$`__name__` %error% py_obj$fget$`__name__`
+  module <- py_obj$`__module__`  %error% py_obj$fget$`__module__`
   docstring <- get_fixed_docstring(endpoint)
   type <- keras_class_type(py_obj)
 

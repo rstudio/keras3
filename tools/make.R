@@ -128,6 +128,8 @@ fs::dir_walk("man-src", type = "directory", recurse = TRUE,
 #
 # TODO: add @import reticulate ??
 #
+# TODO: Layer() should not instantiate the underlying layer class py object on each call.
+#
 # TODO: remove any tensorflow imports / DESCRIPTION deps
 #
 # TODO: trimws @returns

@@ -1,7 +1,7 @@
 #!/usr/bin/env Rscript
 
 if(!"source:tools/utils.R" %in% search()) envir::attach_source("tools/utils.R")
-if(!"source:tools/translate-tools.R" %in% search()) envir::attach_source("tools/translate-tools.R")
+# if(!"source:tools/translate-tools.R" %in% search()) envir::attach_source("tools/translate-tools.R")
 
 ## Deferred:
 
@@ -380,7 +380,7 @@ endpoints %<>% setdiff(c %(% {
 
 endpoints <-
   unlist(list(
-    names(keras$Layer)
+    str_c("keras.Layer.", names(keras$Layer))
   ))
 
 exports <- endpoints |>
@@ -396,6 +396,10 @@ df <- exports |>
   list_rbind() |>
   select(r_name, endpoint, type, module, everything())
 
+
+df$dump %>%
+  str_flatten("\n\n") %>%
+  write_lines("R/keras-layers-layer-methods.R")
 df <- df |>
   mutate(
     man_src_dir = path("man-src", r_name),
