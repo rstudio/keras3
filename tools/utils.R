@@ -1830,6 +1830,7 @@ git <- function(..., retries = 4L, valid_exit_codes = 0L) {
 }
 
 git_restore <- function() {
+  git("restore R")
   git("restore man")
   git("restore man-src")
   git("restore --staged man-src")
