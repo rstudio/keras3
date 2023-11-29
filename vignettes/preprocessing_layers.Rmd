@@ -92,7 +92,7 @@ You set the state of a preprocessing layer by exposing it to training data, via 
 
 
 ```r
-library(keras)
+library(keras3)
 
 data <- rbind(
   c(0.1, 0.2, 0.3),

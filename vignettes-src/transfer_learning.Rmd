@@ -13,7 +13,7 @@ tether: https://raw.githubusercontent.com/keras-team/keras/master/guides/transfe
 ## Setup
 
 ```{r}
-library(keras)
+library(keras3)
 ```
 
 ## Introduction
@@ -117,8 +117,8 @@ When a trainable weight becomes non-trainable, its value is no longer updated du
 # Make a model with 2 layers
 layer1 <- layer_dense(units = 3, activation="relu")
 layer2 <- layer_dense(units = 3, activation="sigmoid")
-model <- keras_model_sequential(input_shape = 3) %>% 
-  layer1() %>% 
+model <- keras_model_sequential(input_shape = 3) %>%
+  layer1() %>%
   layer2()
 
 # Freeze the first layer
@@ -151,12 +151,12 @@ all children layers become non-trainable as well.
 **Example:**
 
 ```{r}
-inner_model <- keras_model_sequential(input_shape = 3) %>% 
-  layer_dense(units = 3, activation="relu") %>% 
+inner_model <- keras_model_sequential(input_shape = 3) %>%
+  layer_dense(units = 3, activation="relu") %>%
   layer_dense(units = 3, activation="relu")
 
-model <- keras_model_sequential(input_shape = 3) %>% 
-  inner_model %>% 
+model <- keras_model_sequential(input_shape = 3) %>%
+  inner_model %>%
   layer_dense(units = 3, activation="sigmoid")
 
 model$trainable <- FALSE  # Freeze the outer model
@@ -216,10 +216,10 @@ inputs <- layer_input(shape = c(150, 150, 3))
 # We make sure that the base_model is running in inference mode here,
 # by passing `training=False`. This is important for fine-tuning, as you will
 # learn in a few paragraphs.
-outputs <- inputs %>% 
-  base_model(training = FALSE) %>% 
+outputs <- inputs %>%
+  base_model(training = FALSE) %>%
   # Convert features of shape `base_model.output_shape[1:]` to vectors
-  layer_global_average_pooling_2d() %>% 
+  layer_global_average_pooling_2d() %>%
   # A Dense classifier with a single unit (binary classification)
   layer_dense(1)
 model <- keras_model(inputs, outputs)
@@ -403,7 +403,7 @@ data_augmentation <- keras_model_sequential() %>%
   layer_random_flip("horizontal") %>%
   layer_random_rotation(.1)
 
-train_ds <- train_ds %>% 
+train_ds <- train_ds %>%
   dataset_map(function(x, y) list(data_augmentation(x), y))
 ```
 
@@ -414,17 +414,17 @@ library(tensorflow)
 
 batch_size <- 64
 
-train_ds <- train_ds %>% 
-  dataset_batch(batch_size) %>% 
-  dataset_prefetch(tf$data$AUTOTUNE) %>% 
+train_ds <- train_ds %>%
+  dataset_batch(batch_size) %>%
+  dataset_prefetch(tf$data$AUTOTUNE) %>%
   dataset_cache()
-validation_ds <- validation_ds %>% 
-  dataset_batch(batch_size) %>% 
-  dataset_prefetch(tf$data$AUTOTUNE) %>% 
+validation_ds <- validation_ds %>%
+  dataset_batch(batch_size) %>%
+  dataset_prefetch(tf$data$AUTOTUNE) %>%
   dataset_cache()
-test_ds <- test_ds %>% 
-  dataset_batch(batch_size) %>% 
-  dataset_prefetch(tf$data$AUTOTUNE) %>% 
+test_ds <- test_ds %>%
+  dataset_batch(batch_size) %>%
+  dataset_prefetch(tf$data$AUTOTUNE) %>%
   dataset_cache()
 ```
 
@@ -434,7 +434,7 @@ Let's visualize what the first image of the first batch looks like after various
 ```{r}
 batch <- train_ds %>%
   dataset_take(1) %>%
-  as_iterator() %>% 
+  as_iterator() %>%
   iter_next()
 
 c(images, labels) %<-% batch
@@ -493,8 +493,8 @@ x <- scale_layer(inputs)
 # The base model contains batchnorm layers. We want to keep them in inference mode
 # when we unfreeze the base model for fine-tuning, so we make sure that the
 # base_model is running in inference mode here.
-outputs <- x %>% 
-  base_model(training = FALSE) %>% 
+outputs <- x %>%
+  base_model(training = FALSE) %>%
   layer_global_average_pooling_2d() %>%
   layer_dropout(0.2) %>%
   layer_dense(1)

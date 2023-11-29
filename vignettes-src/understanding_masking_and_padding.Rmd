@@ -13,7 +13,7 @@ tether: https://raw.githubusercontent.com/keras-team/keras/master/guides/underst
 ## Setup
 
 ```{r}
-library(keras)
+library(keras3)
 ```
 
 ## Introduction
@@ -129,7 +129,7 @@ For instance, in the following Sequential model, the `LSTM` layer will automatic
 receive a mask, which means it will ignore padded values:
 
 ```{r}
-model <- keras_model_sequential() %>% 
+model <- keras_model_sequential() %>%
   layer_embedding(input_dim=5000, output_dim=16, mask_zero=TRUE) %>%
   layer_lstm(units=32)
 ```
@@ -138,8 +138,8 @@ This is also the case for the following Functional API model:
 
 ```{r}
 inputs <- layer_input(shape = shape(NULL), dtype="int32")
-outputs <- inputs %>% 
-  layer_embedding(input_dim=5000, output_dim=16, mask_zero=TRUE) %>% 
+outputs <- inputs %>%
+  layer_embedding(input_dim=5000, output_dim=16, mask_zero=TRUE) %>%
   layer_lstm(units=32)
 
 model <- keras_model(inputs, outputs)
@@ -167,8 +167,8 @@ MyLayer <- new_layer_class(
     self$lstm <- layer_lstm(units=32)
   },
   call = function(inputs) {
-    inputs %>% 
-      self$embedding() %>% 
+    inputs %>%
+      self$embedding() %>%
       # Note that you could also prepare a `mask` tensor manually.
       # It only needs to be a boolean tensor
       # with the right shape, i.e. (batch_size, timesteps).
@@ -297,9 +297,9 @@ reaches the mask-consuming layer.
 
 ```{r}
 inputs <- layer_input(shape = shape(NULL), dtype="int32")
-outputs <- inputs %>% 
-  layer_embedding(input_dim=5000, output_dim=16, mask_zero=TRUE) %>% 
-  MyActivation() %>% 
+outputs <- inputs %>%
+  layer_embedding(input_dim=5000, output_dim=16, mask_zero=TRUE) %>%
+  MyActivation() %>%
   layer_lstm(units=32)
 
 model <- keras_model(inputs, outputs)
@@ -337,9 +337,9 @@ TemporalSoftmax <- new_layer_class(
 )
 
 inputs <- layer_input(shape = shape(NULL), dtype="int32")
-outputs <- inputs %>% 
-  layer_embedding(input_dim=10, output_dim=32, mask_zero=TRUE) %>% 
-  layer_dense(1) %>% 
+outputs <- inputs %>%
+  layer_embedding(input_dim=10, output_dim=32, mask_zero=TRUE) %>%
+  layer_dense(1) %>%
   TemporalSoftmax()
 
 model <- keras_model(inputs, outputs)

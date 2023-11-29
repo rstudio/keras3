@@ -27,7 +27,7 @@ started.
 
 
 ```r
-library(keras)
+library(keras3)
 `add<-` <- `+`
 envir::import_from(dplyr, last)
 ```

@@ -20,7 +20,7 @@ This notebook will walk you through key Keras Core workflows.
 
 
 ```r
-library(keras)
+library(keras3)
 ```
 
 First, let's install Keras Core:
@@ -414,13 +414,13 @@ library(tensorflow)
 ```
 
 ```
-## 
+##
 ## Attaching package: 'tensorflow'
 ```
 
 ```
 ## The following object is masked from 'package:keras':
-## 
+##
 ##     set_random_seed
 ```
 

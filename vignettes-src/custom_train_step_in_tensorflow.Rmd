@@ -43,7 +43,7 @@ Let's see how that works.
 
 ```{r}
 library(tensorflow)
-library(keras)
+library(keras3)
 library(reticulate)
 ```
 
@@ -77,19 +77,19 @@ CustomModel <- new_model_class(
   "CustomModel",
   train_step = function(data) {
     c(x, y, sample_weight) %<-% unpack_x_y_sample_weight(data)
-    
+
     with(tf$GradientTape() %as% tape, {
       y_pred <- self(x, training = TRUE)
       loss <- self$compute_loss(y = y, y_pred=y_pred, sample_weight = sample_weight)
     })
-    
+
     # Compute gradients
     trainable_vars <- self$trainable_variables
     gradients <- tape$gradient(loss, trainable_vars)
-    
+
     # Update weights
     self$optimizer$apply(gradients, trainable_vars)
-    
+
     # Update metrics (includes the metric that tracks the loss)
     for (metric in self$metrics) {
       if (metric$name == "loss")
@@ -97,7 +97,7 @@ CustomModel <- new_model_class(
       else
         metric$update_state(y, y_pred)
     }
-    
+
     # Return a dict mapping metric names to current value
     metrics <- lapply(self$metrics, function(m) m$result())
     metrics <- setNames(metrics, sapply(self$metrics, function(m) m$name))
@@ -150,23 +150,23 @@ CustomModel <- new_model_class(
   },
   train_step = function(data) {
     c(x, y, sample_weight) %<-% unpack_x_y_sample_weight(data)
-    
+
     with(tf$GradientTape() %as% tape, {
       y_pred <- self(x, training = TRUE)
       loss <- self$loss_fn(y, y_pred, sample_weight = sample_weight)
     })
-    
+
     # Compute gradients
     trainable_vars <- self$trainable_variables
     gradients <- tape$gradient(loss, trainable_vars)
-    
+
     # Update weights
     self$optimizer$apply(gradients, trainable_vars)
-    
+
     # Compute our own metrics
     self$loss_tracker$update_state(loss)
     self$mae_metric$update_state(y, y_pred)
-    
+
     # Return a dict mapping metric names to current value
     list(
       loss = self$loss_tracker$result(),
@@ -419,7 +419,7 @@ all_digits <- op_concatenate(list(x_train, x_test))
 all_digits <- op_reshape(all_digits, c(-1, 28, 28, 1))
 dataset <- all_digits %>%
   tfdatasets::tensor_slices_dataset() %>%
-  tfdatasets::dataset_map(function(x) tf$cast(x, "float")/255) %>% 
+  tfdatasets::dataset_map(function(x) tf$cast(x, "float")/255) %>%
   tfdatasets::dataset_shuffle(buffer_size = 1024) %>%
   tfdatasets::dataset_batch(batch_size = batch_size)
 
@@ -433,7 +433,7 @@ gan$compile(
 # To limit the execution time, we only train on 100 batches. You can train on
 # the entire dataset. You will need about 20 epochs to get nice results.
 gan %>% fit(
-  tfdatasets::dataset_take(dataset, 100), 
+  tfdatasets::dataset_take(dataset, 100),
   epochs = 1
 )
 ```

@@ -30,7 +30,7 @@ Let's dive in.
 ## Setup
 
 ```{r}
-library(keras)
+library(keras3)
 library(tensorflow)
 library(tfdatasets)
 ```
@@ -50,7 +50,7 @@ Linear <- new_layer_class(
   initialize = function(units = 32, input_dim = 32) {
     units <- as.integer(units)
     input_dim <- as.integer(input_dim)
-    
+
     super$initialize()
     self$w <- self$add_weight(
       shape = c(input_dim, units),
@@ -141,7 +141,7 @@ Linear <- new_layer_class(
   initialize = function(units = 32, input_dim = 32) {
     units <- as.integer(units)
     input_dim <- as.integer(input_dim)
-    
+
     super$initialize()
     self$w <- self$add_weight(
       shape = c(input_dim, units),
@@ -663,7 +663,7 @@ VariationalAutoEncoder <- new_model_class(
       intermediate_dim = intermediate_dim
     )
     self$decoder <- Decoder(
-      original_dim = original_dim, 
+      original_dim = original_dim,
       intermediate_dim = intermediate_dim
     )
   },
@@ -684,16 +684,16 @@ Let's train it on MNIST using the `fit()` API:
 
 ```{r}
 c(c(x_train, .), .) %<-% dataset_mnist()
-x_train <- x_train %>% 
-  keras_array() %>% 
-  op_reshape(new_shape = c(60000, 784)) %>% 
-  op_cast("float32") %>% 
+x_train <- x_train %>%
+  keras_array() %>%
+  op_reshape(new_shape = c(60000, 784)) %>%
+  op_cast("float32") %>%
   op_divide(255)
 
 original_dim <- 784
 vae <- VariationalAutoEncoder(
-  original_dim = 784, 
-  intermediate_dim = 64, 
+  original_dim = 784,
+  intermediate_dim = 64,
   latent_dim = 32
 )
 

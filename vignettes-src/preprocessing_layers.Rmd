@@ -89,7 +89,7 @@ You set the state of a preprocessing layer by exposing it to training data, via 
 `adapt()` method:
 
 ```{r}
-library(keras)
+library(keras3)
 
 data <- rbind(
   c(0.1, 0.2, 0.3),
@@ -164,7 +164,7 @@ all image preprocessing and data augmentation layers.
 batches of preprocessed data, like this:
 
 ```{r, eval = FALSE}
-dataset <- dataset %>% 
+dataset <- dataset %>%
   dataset_map(function(x, y) list(preprocessing_layer(x), y))
 ```
 
@@ -174,8 +174,8 @@ In addition, if you call `dataset.prefetch(tf.data.AUTOTUNE)` on your dataset,
 the preprocessing will happen efficiently in parallel with training:
 
 ```{r, eval = FALSE}
-dataset <- dataset %>% 
-  dataset_map(function(x, y) list(preprocessing_layer(x), y)) %>% 
+dataset <- dataset %>%
+  dataset_map(function(x, y) list(preprocessing_layer(x), y)) %>%
   dataset_prefetch(tf$data$AUTOTUNE)
 model %>% fit(dataset, ...)
 ```
@@ -251,7 +251,7 @@ the `Dropout` layer).
 
 ```{r}
 # Create a data augmentation stage with horizontal flipping, rotations, zooms
-data_augmentation <- keras_model_sequential() %>% 
+data_augmentation <- keras_model_sequential() %>%
   layer_random_flip("horizontal") %>%
   layer_random_rotation(0.1) %>%
   layer_random_zoom(0.1)
@@ -262,7 +262,7 @@ input_shape <- dim(x_train)[-1]
 classes <- 10
 
 # Create a tf.data pipeline of augmented images (and their labels)
-train_dataset <- tfdatasets::tensor_slices_dataset(list(x_train, y_train)) %>% 
+train_dataset <- tfdatasets::tensor_slices_dataset(list(x_train, y_train)) %>%
   tfdatasets::dataset_batch(16) %>%
   tfdatasets::dataset_map(function(x, y) list(data_augmentation(x), y))
 
@@ -398,21 +398,21 @@ text_vectorizer(rbind("The Brain is deeper than the sea"))
 
 # Create a simple model
 inputs <- layer_input(shape=shape(NULL), dtype="int64")
-outputs <- inputs %>% 
-  layer_embedding(input_dim=text_vectorizer$vocabulary_size(), output_dim=16) %>% 
-  layer_gru(units=8) %>% 
+outputs <- inputs %>%
+  layer_embedding(input_dim=text_vectorizer$vocabulary_size(), output_dim=16) %>%
+  layer_gru(units=8) %>%
   layer_dense(units=1)
 model <- keras_model(inputs, outputs)
 
 # Create a labeled dataset (which includes unknown tokens)
 train_dataset <- tfdatasets::tensor_slices_dataset(list(
-    rbind("The Brain is deeper than the sea", "for if they are held Blue to Blue"), 
+    rbind("The Brain is deeper than the sea", "for if they are held Blue to Blue"),
     c(1, 0)
 ))
 
 # Preprocess the string inputs, turning them into int sequences
-train_dataset <- train_dataset %>% 
-  tfdatasets::dataset_batch(2) %>% 
+train_dataset <- train_dataset %>%
+  tfdatasets::dataset_batch(2) %>%
   tfdatasets::dataset_map(function(x, y) list(text_vectorizer(x), y))
 
 # Train the model on the int sequences
@@ -467,13 +467,13 @@ model <- keras_model(inputs, outputs)
 
 # Create a labeled dataset (which includes unknown tokens)
 train_dataset <- tfdatasets::tensor_slices_dataset(list(
-    rbind("The Brain is deeper than the sea", "for if they are held Blue to Blue"), 
+    rbind("The Brain is deeper than the sea", "for if they are held Blue to Blue"),
     c(1, 0)
 ))
 
 # Preprocess the string inputs, turning them into int sequences
-train_dataset <- train_dataset %>% 
-  tfdatasets::dataset_batch(2) %>% 
+train_dataset <- train_dataset %>%
+  tfdatasets::dataset_batch(2) %>%
   tfdatasets::dataset_map(function(x,y) list(text_vectorizer(x), y))
 # Train the model on the int sequences
 model %>% compile(optimizer="rmsprop", loss="mse")
@@ -519,13 +519,13 @@ model <- keras_model(inputs, outputs)
 
 # Create a labeled dataset (which includes unknown tokens)
 train_dataset <- tfdatasets::tensor_slices_dataset(list(
-    rbind("The Brain is deeper than the sea", "for if they are held Blue to Blue"), 
+    rbind("The Brain is deeper than the sea", "for if they are held Blue to Blue"),
     c(1, 0)
 ))
 
 # Preprocess the string inputs, turning them into int sequences
-train_dataset <- train_dataset %>% 
-  tfdatasets::dataset_batch(2) %>% 
+train_dataset <- train_dataset %>%
+  tfdatasets::dataset_batch(2) %>%
   tfdatasets::dataset_map(function(x,y) list(text_vectorizer(x), y))
 
 # Train the model on the int sequences

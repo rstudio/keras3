@@ -53,7 +53,7 @@ library(tensorflow)
 ```
 
 ```r
-library(keras)
+library(keras3)
 ```
 
 ## A first example: A MNIST convnet

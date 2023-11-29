@@ -1,9 +1,9 @@
-Package: keras
+Package: keras3
 Type: Package
 Title: R Interface to 'Keras'
 Version: 2.13.0.9000
 Authors@R: c(
-  person("Tomasz", "Kalinowski", role = c("ctb", "cph", "cre"),
+  person("Tomasz", "Kalinowski", role = c("aut", "cph", "cre"),
          email = "tomasz@posit.co"),
   person("Daniel", "Falbel", role = c("ctb", "cph"), email = "daniel@rstudio.com"),
   person("JJ", "Allaire", role = c("aut", "cph")),

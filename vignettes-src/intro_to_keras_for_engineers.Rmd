@@ -8,7 +8,7 @@ accelerator: GPU
 output: rmarkdown::html_vignette
 knit: ({source(here::here("tools/knit.R")); knit_vignette})
 tether: https://raw.githubusercontent.com/keras-team/keras-io/master/guides/intro_to_keras_for_engineers.py
-editor_options: 
+editor_options:
   chunk_output_type: console
 ---
 
@@ -36,7 +36,7 @@ Sys.setenv(KERAS_BACKEND = "tensorflow")
 # has been configured. The backend cannot be changed once the
 # package is imported.
 library(tensorflow)
-library(keras)
+library(keras3)
 ```
 
 ## A first example: A MNIST convnet
@@ -225,12 +225,12 @@ MyModel <- new_model_class(
   "MyModel",
   initialize = function(num_classes) {
     super$initialize()
-    self$conv_base <- keras_model_sequential() %>% 
-      layer_conv_2d(64, kernel_size = c(3, 3), activation = "relu") %>% 
-      layer_conv_2d(64, kernel_size = c(3, 3), activation = "relu") %>% 
-      layer_max_pooling_2d(pool_size = c(2, 2)) %>% 
-      layer_conv_2d(128, kernel_size = c(3, 3), activation = "relu") %>% 
-      layer_conv_2d(128, kernel_size = c(3, 3), activation = "relu") %>% 
+    self$conv_base <- keras_model_sequential() %>%
+      layer_conv_2d(64, kernel_size = c(3, 3), activation = "relu") %>%
+      layer_conv_2d(64, kernel_size = c(3, 3), activation = "relu") %>%
+      layer_max_pooling_2d(pool_size = c(2, 2)) %>%
+      layer_conv_2d(128, kernel_size = c(3, 3), activation = "relu") %>%
+      layer_conv_2d(128, kernel_size = c(3, 3), activation = "relu") %>%
       layer_global_average_pooling_2d()
     self$dp <- MyDropout(rate = 0.5)
     self$dense <- MyDense(units = num_classes, activation = activation_softmax)
@@ -314,13 +314,13 @@ Let's try this out with `tf_dataset`:
 ```{r}
 library(tfdatasets)
 
-train_dataset <- list(x_train, y_train) %>% 
-  tensor_slices_dataset() %>% 
+train_dataset <- list(x_train, y_train) %>%
+  tensor_slices_dataset() %>%
   dataset_batch(batch_size) %>%
   dataset_prefetch(buffer_size=tf$data$AUTOTUNE)
 
-test_dataset <- list(x_test, y_test) %>% 
-  tensor_slices_dataset() %>% 
+test_dataset <- list(x_test, y_test) %>%
+  tensor_slices_dataset() %>%
   dataset_batch(batch_size) %>%
   dataset_prefetch(buffer_size=tf$data$AUTOTUNE)
 

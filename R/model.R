@@ -10,7 +10,7 @@
 #'
 #' @examples
 #' \dontrun{
-#' library(keras)
+#' library(keras3)
 #'
 #' # input layer
 #' inputs <- layer_input(shape = c(784))
@@ -58,7 +58,7 @@ keras_model <- function(inputs, outputs = NULL, ...) {
 #' @examples
 #' \dontrun{
 #'
-#' library(keras)
+#' library(keras3)
 #'
 #' model <- keras_model_sequential()
 #' model %>%

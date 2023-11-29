@@ -13,7 +13,7 @@ tether: https://raw.githubusercontent.com/keras-team/keras/master/guides/sequent
 ## Setup
 
 ```{r}
-library(keras)
+library(keras3)
 ```
 
 ## When to use a Sequential model
@@ -24,9 +24,9 @@ where each layer has **exactly one input tensor and one output tensor**.
 Schematically, the following `Sequential` model:
 
 ```{r}
-model <- keras_model_sequential() %>% 
-  layer_dense(units = 2, activation = "relu", name = "layer1") %>% 
-  layer_dense(units = 3, activation = "relu", name = "layer2") %>% 
+model <- keras_model_sequential() %>%
+  layer_dense(units = 2, activation = "relu", name = "layer1") %>%
+  layer_dense(units = 3, activation = "relu", name = "layer2") %>%
   layer_dense(units = 4, name = "layer3")
 
 # Call model on a test input
@@ -61,7 +61,7 @@ You can create a Sequential model by piping layers into the `keras_model_sequent
 object:
 
 ```{r}
-model <- keras_model_sequential() %>% 
+model <- keras_model_sequential() %>%
   layer_dense(units = 2, activation = "relu") %>%
   layer_dense(units = 3, activation = "relu") %>%
   layer_dense(units = 4)
@@ -139,7 +139,7 @@ Sequential model without an input shape, it isn't "built": it has no weights
 when the model first sees some input data:
 
 ```{r}
-model <- keras_model_sequential() %>% 
+model <- keras_model_sequential() %>%
   layer_dense(units = 2, activation = "relu") %>%
   layer_dense(units = 3, activation = "relu") %>%
   layer_dense(units = 4)
@@ -170,7 +170,7 @@ output shape. In this case, you should start your model by passing an `input_sha
 argument to your model, so that it knows its input shape from the start:
 
 ```{r}
-model <- keras_model_sequential(input_shape = 4) %>% 
+model <- keras_model_sequential(input_shape = 4) %>%
   layer_dense(units = 2, activation = "relu")
 summary(model)
 ```
@@ -193,21 +193,21 @@ enables you to monitor how a stack of `Conv2D` and `MaxPooling2D` layers is
 downsampling image feature maps:
 
 ```{r}
-model <- keras_model_sequential(input_shape = c(250, 250, 3)) %>% 
+model <- keras_model_sequential(input_shape = c(250, 250, 3)) %>%
   layer_conv_2d(filters = 32, kernel_size = 5, strides = 2, activation = "relu") %>%
   layer_conv_2d(filters = 32, kernel_size = 3, activation = "relu") %>%
   layer_max_pooling_2d(pool_size = c(3, 3))
-  
+
 # Can you guess what the current output shape is at this point? Probably not.
 # Let's just print it:
 summary(model)
 
 # The answer was: (40, 40, 32), so we can keep downsampling...
 
-model <- model %>% 
+model <- model %>%
   layer_conv_2d(filters = 32, kernel_size = 3, activation = "relu") %>%
   layer_conv_2d(filters = 32, kernel_size = 3, activation = "relu") %>%
-  layer_max_pooling_2d(pool_size = 3) %>% 
+  layer_max_pooling_2d(pool_size = 3) %>%
   layer_conv_2d(filters = 32, kernel_size = 3, activation = "relu") %>%
   layer_conv_2d(filters = 32, kernel_size = 3, activation = "relu") %>%
   layer_max_pooling_2d(pool_size = 2)
@@ -216,11 +216,11 @@ model <- model %>%
 summary(model)
 
 # Now that we have 4x4 feature maps, time to apply global max pooling.
-model <- model %>% 
+model <- model %>%
   layer_global_max_pooling_2d()
 
 # Finally, we add a classification layer.
-model <- model %>% 
+model <- model %>%
   layer_dense(units = 10, activation = "softmax")
 ```
 
@@ -251,7 +251,7 @@ creating a model that extracts the outputs of all intermediate layers in a
 Sequential model:
 
 ```{r}
-initial_model <- keras_model_sequential(input_shape = c(250, 250, 3)) %>% 
+initial_model <- keras_model_sequential(input_shape = c(250, 250, 3)) %>%
   layer_conv_2d(filters = 32, kernel_size = 5, strides = 2, activation = "relu") %>%
   layer_conv_2d(filters = 32, kernel_size = 3, activation = "relu") %>%
   layer_conv_2d(filters = 32, kernel_size = 3, activation = "relu")
@@ -270,7 +270,7 @@ features <- feature_extractor(x)
 Here's a similar example that only extract features from one layer:
 
 ```{r}
-initial_model <- keras_model_sequential(input_shape = c(250, 250, 3)) %>% 
+initial_model <- keras_model_sequential(input_shape = c(250, 250, 3)) %>%
   layer_conv_2d(filters = 32, kernel_size = 5, strides = 2, activation = "relu") %>%
   layer_conv_2d(filters = 32, kernel_size = 3, activation = "relu", name = "my_intermediate_layer") %>%
   layer_conv_2d(filters = 32, kernel_size = 3, activation = "relu")
@@ -298,7 +298,7 @@ layers except the last one. In this case, you would simply iterate over
 last one. Like this:
 
 ```{r, eval=FALSE}
-model <- keras_model_sequential(input_shape = 784) %>% 
+model <- keras_model_sequential(input_shape = 784) %>%
   layer_dense(units = 32, activation = "relu") %>%
   layer_dense(units = 32, activation = "relu") %>%
   layer_dense(units = 32, activation = "relu") %>%
@@ -331,8 +331,8 @@ base_model <- application_xception(
 base_model$trainable <- FALSE
 
 # Use a Sequential model to add a trainable classifier on top
-model <- keras_model_sequential() %>% 
-  base_model() %>% 
+model <- keras_model_sequential() %>%
+  base_model() %>%
   layer_dense(1000)
 ```
 

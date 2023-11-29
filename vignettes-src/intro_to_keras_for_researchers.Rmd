@@ -14,7 +14,7 @@ tether: https://raw.githubusercontent.com/keras-team/keras-io/master/guides/intr
 ## Setup
 
 ```{r}
-library(keras)
+library(keras3)
 library(tensorflow)
 ```
 
@@ -278,7 +278,7 @@ c(c(x_train, y_train), .) %<-% dataset_mnist()
 
 x_train <- array_reshape(x_train, c(60000, 784)) / 255
 
-dataset <- tfdatasets::tensor_slices_dataset(list(x_train, y_train)) %>% 
+dataset <- tfdatasets::tensor_slices_dataset(list(x_train, y_train)) %>%
   tfdatasets::dataset_shuffle(buffer_size=1024) %>%
   tfdatasets::dataset_batch(64)
 
@@ -383,8 +383,8 @@ Note that our manually-created MLP above is equivalent to the following
 built-in option:
 
 ```{r}
-mlp <- keras_model_sequential() %>% 
-  layer_dense(units = 32, activation = "relu") %>% 
+mlp <- keras_model_sequential() %>%
+  layer_dense(units = 32, activation = "relu") %>%
   layer_dense(units = 32, activation = "relu") %>%
   layer_dense(units = 10)
 ```
@@ -457,7 +457,7 @@ length(mlp$losses)  # No accumulation.
 c(c(x_train, y_train), .) %<-% dataset_mnist()
 x_train <- array_reshape(x_train, c(60000, 784)) / 255
 
-dataset <- tfdatasets::tensor_slices_dataset(list(x_train, y_train)) %>% 
+dataset <- tfdatasets::tensor_slices_dataset(list(x_train, y_train)) %>%
   tfdatasets::dataset_shuffle(buffer_size=1024) %>%
   tfdatasets::dataset_batch(64)
 
@@ -511,7 +511,7 @@ Here's a simple example:
 accuracy <- metric_sparse_categorical_accuracy()
 
 # Prepare our layer, loss, and optimizer.
-model <- keras_model_sequential() %>% 
+model <- keras_model_sequential() %>%
   layer_dense(units = 32, activation = "relu") %>%
   layer_dense(units = 32, activation = "relu") %>%
   layer_dense(units = 10)
@@ -532,11 +532,11 @@ for (epoch in seq_len(2)) {
 
     # Update the state of the `accuracy` metric.
     accuracy$update_state(y, logits)
-    
+
     # Update the weights of the model to minimize the loss value.
     gradients <- tape$gradient(loss_value, model$trainable_weights)
     optimizer$apply_gradients(zip_lists(gradients, model$trainable_weights))
-    
+
   })
   cat("Epoch:", epoch, "Accuracy:", as.numeric(accuracy$result()), "\n")
   accuracy$reset_state()
@@ -573,23 +573,23 @@ F1Score <- new_metric_class(
     y_pred <- tf$math$greater_equal(y_pred, self$threshold)
     y_true <- tf$cast(y_true, tf$bool)
     y_pred <- tf$cast(y_pred, tf$bool)
-    
+
     true_positives <- tf$cast(y_true & y_pred, self$dtype)
     false_positives <- tf$cast((!y_true) & y_pred, self$dtype)
     false_negatives <- tf$cast(y_true & (!y_pred), self$dtype)
-    
+
     if (!is.null(sample_weight)) {
       sample_weight <- tf$cast(sample_weight, self$dtype)
       true_positives <- true_positives * sample_weight
       false_positives <- false_positives * sample_weight
       false_negatives <- false_negatives * sample_weight
     }
-    
+
     self$true_positives$assign_add(tf$reduce_sum(true_positives))
     self$false_positives$assign_add(tf$reduce_sum(false_positives))
     self$false_negatives$assign_add(tf$reduce_sum(false_negatives))
   },
-  
+
   result = function() {
     precision <- self$true_positives / (self$true_positives + self$false_positives)
     recall <- self$true_positives / (self$true_positives + self$false_negatives)
@@ -625,7 +625,7 @@ decorator.
 
 ```{r}
 # Prepare our layer, loss, and optimizer.
-model <- keras_model_sequential() %>% 
+model <- keras_model_sequential() %>%
   layer_dense(units = 32, activation = "relu") %>%
   layer_dense(units = 32, activation = "relu") %>%
   layer_dense(units = 10)
@@ -651,7 +651,7 @@ train_on_batch <- tf_function(function(x, y) {
 c(c(x_train, y_train), .) %<-% dataset_mnist()
 x_train <- array_reshape(x_train, c(60000, 784)) / 255
 
-dataset <- tfdatasets::tensor_slices_dataset(list(x_train, y_train)) %>% 
+dataset <- tfdatasets::tensor_slices_dataset(list(x_train, y_train)) %>%
   tfdatasets::dataset_shuffle(buffer_size=1024) %>%
   tfdatasets::dataset_batch(64)
 
@@ -730,7 +730,7 @@ inputs <- layer_input(shape = 16, dtype = "float32")
 
 # We call layers on these "type" objects
 # and they return updated types (new shapes/dtypes).
-outputs <- inputs %>% 
+outputs <- inputs %>%
   Linear(units = 32) %>% # We are reusing the Linear layer we defined earlier.
   Dropout(rate = 0.5) %>% # We are reusing the Dropout layer we defined earlier.
   Linear(units = 10)
@@ -785,9 +785,9 @@ example above.
 
 ```{r}
 inputs <- layer_input(shape = 784, dtype="float32")
-outputs <- inputs %>% 
-  layer_dense(units = 32, activation = "relu") %>% 
-  layer_dense(units = 32, activation = "relu") %>% 
+outputs <- inputs %>%
+  layer_dense(units = 32, activation = "relu") %>%
+  layer_dense(units = 32, activation = "relu") %>%
   layer_dense(units = 10)
 model <- keras_model(inputs, outputs)
 
@@ -835,7 +835,7 @@ CustomModel <- new_model_class(
     self$optimizer$apply_gradients(
       zip_lists(gradients, self$trainable_variables)
     )
-    
+
     # Update metrics (includes the metric that tracks the loss)
     self$loss_tracker$update_state(loss)
     self$accuracy$update_state(y, y_pred, sample_weight=sample_weight)
@@ -851,9 +851,9 @@ CustomModel <- new_model_class(
 )
 
 inputs <- layer_input(shape = 784, dtype="float32")
-outputs <- inputs %>% 
-  layer_dense(units = 32, activation = "relu") %>% 
-  layer_dense(units = 32, activation = "relu") %>% 
+outputs <- inputs %>%
+  layer_dense(units = 32, activation = "relu") %>%
+  layer_dense(units = 32, activation = "relu") %>%
   layer_dense(units = 10)
 model <- CustomModel(inputs, outputs)
 model %>% compile()
@@ -951,7 +951,7 @@ VariationalAutoEncoder <- new_model_class(
       intermediate_dim = intermediate_dim
     )
     self$decoder <- Decoder(
-      original_dim = original_dim, 
+      original_dim = original_dim,
       intermediate_dim = intermediate_dim
     )
   },
@@ -974,8 +974,8 @@ compile into a super fast graph function.
 ```{r}
 # Our model.
 vae <- VariationalAutoEncoder(
-  original_dim = 784, 
-  intermediate_dim = 64, 
+  original_dim = 784,
+  intermediate_dim = 64,
   latent_dim = 32
 )
 
@@ -987,7 +987,7 @@ optimizer = optimizer_adam(learning_rate=1e-3)
 c(c(x_train, .), .) %<-% dataset_mnist()
 x_train <- array_reshape(x_train, c(60000, 784)) / 255
 
-dataset <- tfdatasets::tensor_slices_dataset(x_train) %>% 
+dataset <- tfdatasets::tensor_slices_dataset(x_train) %>%
   tfdatasets::dataset_shuffle(buffer_size=1024) %>%
   tfdatasets::dataset_batch(32)
 
@@ -1008,7 +1008,7 @@ training_step <- tf_function(function(x) {
 losses <- c()  # Keep track of the losses over time.
 coro::loop(for(data in dataset) {
   loss <- training_step(data)
-  
+
   # Logging.
   losses[length(losses) + 1] <- as.numeric(loss)
   if (length(losses) %% 100 == 0) {
@@ -1056,7 +1056,7 @@ main_network <- keras_model(inputs, outputs)
 num_weights_to_generate <- (classes * 64 + classes) + (64 * input_dim + 64)
 
 # This is the hypernetwork that generates the weights of the `main_network` above.
-hypernetwork <- keras_model_sequential() %>% 
+hypernetwork <- keras_model_sequential() %>%
   layer_dense(units=16, activation="relu") %>%
   layer_dense(units=num_weights_to_generate, activation="sigmoid")
 ```
@@ -1078,7 +1078,7 @@ optimizer <- optimizer_adam(learning_rate=1e-4)
 c(c(x_train, y_train), .) %<-% dataset_mnist()
 x_train <- array_reshape(x_train, c(60000, 784)) / 255
 
-dataset <- tfdatasets::tensor_slices_dataset(list(x_train, y_train)) %>% 
+dataset <- tfdatasets::tensor_slices_dataset(list(x_train, y_train)) %>%
   tfdatasets::dataset_shuffle(buffer_size=1024) %>%
   # We'll use a batch size of 1 for this experiment.
   tfdatasets::dataset_batch(1)
@@ -1086,7 +1086,7 @@ dataset <- tfdatasets::tensor_slices_dataset(list(x_train, y_train)) %>%
 train_step <- function(x, y) {
   with(tf$GradientTape() %as% tape, {
     weights_pred <- hypernetwork(x)
-    
+
     # Reshape them to the expected shapes for w and b for the outer model.
     # Layer 1 kernel.
     start_index <- 1
@@ -1094,36 +1094,36 @@ train_step <- function(x, y) {
     w1_coeffs <- weights_pred[, start_index:(start_index + prod(w1_shape) - 1)]
     w1 <- tf$reshape(w1_coeffs, as.integer(w1_shape))
     start_index <- start_index + prod(w1_shape)
-    
+
     # Layer 1 bias.
     b1_shape <- c(64)
     b1_coeffs <- weights_pred[, start_index:(start_index + prod(b1_shape) - 1)]
     b1 <- tf$reshape(b1_coeffs, as.integer(b1_shape))
     start_index <- start_index + prod(b1_shape)
-    
+
     # Layer 2 kernel.
     w2_shape <- c(64, classes)
     w2_coeffs <- weights_pred[, start_index:(start_index + prod(w2_shape) - 1)]
     w2 <- tf$reshape(w2_coeffs, as.integer(w2_shape))
     start_index <- start_index + prod(w2_shape)
-    
+
     # Layer 2 bias.
     b2_shape <- c(classes)
     b2_coeffs <- weights_pred[, start_index:(start_index + prod(b2_shape) - 1)]
     b2 <- tf$reshape(b2_coeffs, as.integer(b2_shape))
     start_index <- start_index + prod(b2_shape)
-    
+
     # Set the weight predictions as the weight variables on the outer model.
     dense1$kernel <- w1
     dense1$bias <- b1
     dense2$kernel <- w2
     dense2$bias <- b2
-    
+
     # Inference on the outer model.
     preds <- main_network(x)
     loss <- loss_fn(y, preds)
   })
-  
+
   grads <- tape$gradient(loss, hypernetwork$trainable_weights)
   optimizer$apply_gradients(zip_lists(grads, hypernetwork$trainable_weights))
   loss
@@ -1134,7 +1134,7 @@ coro::loop(for (data in dataset) {
   x <- data[[1]]
   y <- data[[2]]
   loss <- train_step(x, y)
-  
+
   # Logging.
   losses[length(losses) + 1] <- as.numeric(loss)
   if (length(losses) %% 100 == 0) {

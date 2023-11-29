@@ -13,7 +13,7 @@ tether: https://raw.githubusercontent.com/keras-team/keras/master/guides/trainin
 ## Setup
 
 ```{r}
-library(keras)
+library(keras3)
 ```
 
 ## Introduction
@@ -56,9 +56,9 @@ could be a Sequential model or a subclassed model as well):
 
 ```{r}
 inputs <- layer_input(shape = 784, name="digits")
-outputs <- inputs %>% 
-  layer_dense(units = 64, activation = "relu", name = "dense_1") %>% 
-  layer_dense(units = 64, activation = "relu", name = "dense_2") %>% 
+outputs <- inputs %>%
+  layer_dense(units = 64, activation = "relu", name = "dense_1") %>%
+  layer_dense(units = 64, activation = "relu", name = "dense_2") %>%
   layer_dense(units = 10, activation = "softmax", name = "predictions")
 model <- keras_model(inputs=inputs, outputs=outputs)
 ```
@@ -103,7 +103,7 @@ We call `fit()`, which will train the model by slicing the data into "batches" o
 
 ```{r}
 history <- model %>% fit(
-  x_train, 
+  x_train,
   y_train,
   batch_size = 64,
   epochs = 2,
@@ -174,13 +174,13 @@ call them several times across different examples in this guide.
 ```{r}
 get_uncompiled_model <- function() {
   inputs <- layer_input(shape = 784, name="digits")
-  outputs <- inputs %>% 
-    layer_dense(units = 64, activation = "relu", name = "dense_1") %>% 
-    layer_dense(units = 64, activation = "relu", name = "dense_2") %>% 
+  outputs <- inputs %>%
+    layer_dense(units = 64, activation = "relu", name = "dense_1") %>%
+    layer_dense(units = 64, activation = "relu", name = "dense_2") %>%
     layer_dense(units = 10, activation = "softmax", name = "predictions")
   keras_model(inputs=inputs, outputs=outputs)
 }
-    
+
 get_compiled_model <- function() {
   model <- get_uncompiled_model()
   model %>% compile(
@@ -230,7 +230,7 @@ error between the real data and the predictions:
 custom_mean_squared_error <- function(y_true, y_pred) {
   op_mean(op_square(y_true - y_pred), axis=-1)
 }
-    
+
 model <- get_uncompiled_model()
 model %>% compile(optimizer="adam", loss=custom_mean_squared_error)
 
@@ -353,10 +353,10 @@ ActivityRegularizationLayer <- new_layer_class(
 )
 
 inputs <- layer_input(shape = 784, name="digits")
-outputs <- inputs %>% 
-  layer_dense(units=32, activation="relu", name="dense_1") %>% 
-  ActivityRegularizationLayer() %>% 
-  layer_dense(units=64, activation = "relu", name="dense_2") %>% 
+outputs <- inputs %>%
+  layer_dense(units=32, activation="relu", name="dense_1") %>%
+  ActivityRegularizationLayer() %>%
+  layer_dense(units=64, activation = "relu", name="dense_2") %>%
   layer_dense(units=10, name="predictions")
 
 model <- keras_model(inputs=inputs, outputs=outputs)
@@ -467,13 +467,13 @@ model <- get_compiled_model()
 # For the sake of our example, we'll use the same MNIST data as before.
 train_dataset <- tensor_slices_dataset(list(x_train, y_train))
 # Shuffle and slice the dataset.
-train_dataset <- train_dataset %>% 
-  dataset_shuffle(buffer_size=1024) %>% 
+train_dataset <- train_dataset %>%
+  dataset_shuffle(buffer_size=1024) %>%
   dataset_batch(64)
 
 # Now we get a test dataset.
 test_dataset <- tensor_slices_dataset(list(x_test, y_test))
-test_dataset <- test_dataset %>% 
+test_dataset <- test_dataset %>%
   dataset_batch(64)
 
 # Since the dataset already takes care of batching,
@@ -497,8 +497,8 @@ model <- get_compiled_model()
 
 # Prepare the training dataset
 train_dataset <- tensor_slices_dataset(list(x_train, y_train))
-train_dataset <- train_dataset %>% 
-  dataset_shuffle(buffer_size=1024) %>% 
+train_dataset <- train_dataset %>%
+  dataset_shuffle(buffer_size=1024) %>%
   dataset_batch(64)
 
 # Only use the 100 batches per epoch (that's 64 * 100 samples)
@@ -512,8 +512,8 @@ model <- get_compiled_model()
 
 # Prepare the training dataset
 train_dataset <- tensor_slices_dataset(list(x_train, y_train))
-train_dataset <- train_dataset %>% 
-  dataset_shuffle(buffer_size=1024) %>% 
+train_dataset <- train_dataset %>%
+  dataset_shuffle(buffer_size=1024) %>%
   dataset_batch(64)
 
 # Prepare the validation dataset
@@ -536,8 +536,8 @@ model = get_compiled_model()
 
 # Prepare the training dataset
 train_dataset <- tensor_slices_dataset(list(x_train, y_train))
-train_dataset <- train_dataset %>% 
-  dataset_shuffle(buffer_size=1024) %>% 
+train_dataset <- train_dataset %>%
+  dataset_shuffle(buffer_size=1024) %>%
   dataset_batch(64)
 
 # Prepare the validation dataset
@@ -790,8 +790,8 @@ train_dataset <- tensor_slices_dataset(list(
 ))
 
 # Shuffle and slice the dataset.
-train_dataset <- train_dataset %>% 
-  dataset_shuffle(buffer_size=1024) %>% 
+train_dataset <- train_dataset %>%
+  dataset_shuffle(buffer_size=1024) %>%
   dataset_batch(64)
 
 model <- get_compiled_model()
@@ -814,12 +814,12 @@ distribution over five classes (of shape `(5,)`).
 image_input <- layer_input(shape=c(32, 32, 3), name="img_input")
 timeseries_input <- layer_input(shape=shape(NULL, 10), name="ts_input")
 
-x1 <- image_input %>% 
-  layer_conv_2d(filters=3, kernel_size=c(3, 3)) %>% 
+x1 <- image_input %>%
+  layer_conv_2d(filters=3, kernel_size=c(3, 3)) %>%
   layer_global_max_pooling_2d()
 
 x2 <- timeseries_input %>%
-  layer_conv_1d(filters=3, kernel_size=3) %>% 
+  layer_conv_1d(filters=3, kernel_size=3) %>%
   layer_global_max_pooling_1d()
 
 x <- layer_concatenate(list(x1, x2))
@@ -828,7 +828,7 @@ score_output <- layer_dense(x, 1, name="score_output")
 class_output <- layer_dense(x, 5, name="class_output")
 
 model <- keras_model(
-    inputs = list(image_input, timeseries_input), 
+    inputs = list(image_input, timeseries_input),
     outputs = list(score_output, class_output)
 )
 ```
@@ -958,16 +958,16 @@ class_targets <- random_normal(c(100, 5))
 
 # Fit on lists
 model %>% fit(
-    list(img_data, ts_data), 
-    list(score_targets, class_targets), 
-    batch_size=32, 
+    list(img_data, ts_data),
+    list(score_targets, class_targets),
+    batch_size=32,
     epochs=1
 )
 
 # Alternatively, fit on dicts
 model %>% fit(
-  list(img_input = img_data, ts_input = ts_data), 
-  list(score_output = score_targets, class_output = class_targets), 
+  list(img_input = img_data, ts_input = ts_data),
+  list(score_output = score_targets, class_output = class_targets),
   batch_size=32,
   epochs=1,
 )
@@ -981,8 +981,8 @@ train_dataset <- tensor_slices_dataset(list(
   list(img_input = img_data, ts_input = ts_data),
   list(score_output = score_targets, class_output = class_targets)
 ))
-train_dataset <- train_dataset %>% 
-  dataset_shuffle(buffer_size=1024) %>% 
+train_dataset <- train_dataset %>%
+  dataset_shuffle(buffer_size=1024) %>%
   dataset_batch(64)
 
 model %>% fit(train_dataset, epochs=1)
@@ -1116,7 +1116,7 @@ make_or_restore_model <- function() {
   # Either restore the latest model, or create a fresh one
   # if there is no checkpoint available.
   checkpoints <- list.files(checkpoint_dir, full.names=TRUE)
-  
+
   if (length(checkpoints) > 0) {
     latest_checkpoint <- tail(checkpoints, 1)
     load_model(latest_checkpoint)
@@ -1130,7 +1130,7 @@ callbacks <- list(
   # This callback saves the model every 100 batches.
   # We include the training loss in the saved model name.
   callback_model_checkpoint(
-    filepath = file.path(checkpoint_dir, "model-loss={loss:.2f}.keras"), 
+    filepath = file.path(checkpoint_dir, "model-loss={loss:.2f}.keras"),
     save_freq=100
   )
 )

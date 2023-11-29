@@ -47,7 +47,7 @@ Requires TensorFlow 2.8 or later.
 
 
 ```r
-library(keras)
+library(keras3)
 library(tensorflow)
 ```
 

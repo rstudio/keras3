@@ -13,7 +13,7 @@ tether: https://raw.githubusercontent.com/keras-team/keras/master/guides/functio
 ## Setup
 
 ```{r}
-library(keras)
+library(keras3)
 ```
 
 ## Introduction

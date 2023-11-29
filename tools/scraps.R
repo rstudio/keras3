@@ -654,7 +654,7 @@ make_new_man_src_dir <- function(ex) {
     write_rds(completion, "completion.rds")
     writeLines(completion, "2-translated.Rmd")
     tryCatch({
-      library(keras)
+      library(keras3)
       keras$utils$clear_session()
       knitr::knit("2-translated.Rmd", "roxygen.md",
                   quiet = TRUE, envir = new.env())

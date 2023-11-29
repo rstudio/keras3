@@ -33,7 +33,7 @@ Let's dive in.
 
 
 ```r
-library(keras)
+library(keras3)
 library(tensorflow)
 ```
 

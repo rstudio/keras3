@@ -48,7 +48,7 @@ test_that("R6 pyclasses respect convert=TRUE", {
 
 test_that("%py_class% can be lazy about initing python", {
   res <- callr::r(function() {
-    library(keras)
+    library(keras3)
     # pretend we're in a package
     options("topLevelEnvironment" = environment())
 

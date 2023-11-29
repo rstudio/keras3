@@ -378,6 +378,11 @@ endpoints %<>% setdiff(c %(% {
 })
 
 
+endpoints <-
+  unlist(list(
+    names(keras$Layer)
+  ))
+
 exports <- endpoints |>
   purrr::set_names() |>
   lapply(mk_export)

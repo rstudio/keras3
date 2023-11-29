@@ -2,7 +2,7 @@
 
 # TODO: move these out of the package namespace, we don't want a knitr dep on cran
 knit_man_src <- function(input, ..., output_dir) {
-  library(keras)
+  library(keras3)
   dir <- dirname(normalizePath(input))
   withr::local_dir(dir)
   message("knit_man_src(", glue::double_quote(input), ")")
@@ -68,7 +68,7 @@ knit_vignette <- function(input, ..., output_dir) {
   # print(sys.call())
   # cat("wd: ", getwd(), "\n") # ~/github/rstudio/keras/vignettes-src
 
-  library(keras)
+  library(keras3)
   # input <- normalizePath(input, mustWork = TRUE, winslash = "/") |> fs::path_tidy()
   input <- fs::path_real(input)
   output <- sub("/vignettes-src/", "/vignettes/", input, fixed = TRUE)
@@ -146,7 +146,7 @@ knit_vignette <- function(input, ..., output_dir) {
 
 # TODO: move these out of the package namespace, we don't want a knitr dep on cran
 # knit_man_src <- function(input, ..., output_dir) {
-#   library(keras)
+#   library(keras3)
 #   dir <- dirname(input)
 #   withr::local_dir(dir)
 #   message("rendering: ", dir)

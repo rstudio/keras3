@@ -16,7 +16,7 @@ vignette: >
 
 
 ```r
-library(keras)
+library(keras3)
 ```
 
 ## Introduction

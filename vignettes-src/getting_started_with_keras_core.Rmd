@@ -17,7 +17,7 @@ works with TensorFlow, JAX, and PyTorch interchangeably.
 This notebook will walk you through key Keras Core workflows.
 
 ```{r}
-library(keras)
+library(keras3)
 ```
 
 First, let's install Keras Core:

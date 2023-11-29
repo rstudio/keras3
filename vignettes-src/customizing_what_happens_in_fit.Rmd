@@ -44,7 +44,7 @@ Let's see how that works.
 Requires TensorFlow 2.8 or later.
 
 ```{r}
-library(keras)
+library(keras3)
 library(tensorflow)
 library(reticulate)
 ```
@@ -421,7 +421,7 @@ all_digits <- op_concatenate(list(x_train, x_test))
 all_digits <- op_reshape(all_digits, c(-1, 28, 28, 1))
 dataset <- all_digits %>%
   tfdatasets::tensor_slices_dataset() %>%
-  tfdatasets::dataset_map(function(x) tf$cast(x, "float")/255) %>% 
+  tfdatasets::dataset_map(function(x) tf$cast(x, "float")/255) %>%
   tfdatasets::dataset_shuffle(buffer_size = 1024) %>%
   tfdatasets::dataset_batch(batch_size = batch_size)
 
@@ -435,7 +435,7 @@ gan$compile(
 # To limit the execution time, we only train on 100 batches. You can train on
 # the entire dataset. You will need about 20 epochs to get nice results.
 gan %>% fit(
-  tfdatasets::dataset_take(dataset, 100), 
+  tfdatasets::dataset_take(dataset, 100),
   epochs = 1
 )
 ```

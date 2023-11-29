@@ -3,7 +3,7 @@ context("custom-models")
 
 
 # define model wrapper function
-library(keras)
+library(keras3)
 
 keras_model_simple_mlp <- function(num_classes,
                                    use_bn = FALSE, use_dp = FALSE,
