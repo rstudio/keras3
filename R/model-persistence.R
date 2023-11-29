@@ -9,9 +9,10 @@
 #'   layer_dense(5) |>
 #'   layer_activation_softmax()
 #'
-#' model |> save_model("model.keras")
-#' loaded_model <- load_model("model.keras")
-#'
+#' model |> save_keras_model("model.keras")
+#' loaded_model <- load_keras_model("model.keras")
+#' ```
+#' ```{r, results = 'hide'}
 #' x <- random_uniform(c(10, 3))
 #' stopifnot(all.equal(
 #'   model |> predict(x),
@@ -51,7 +52,7 @@
 #' @tether keras.saving.save_model
 #' @seealso
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/models/Model/save>
-save_model <-
+save_keras_model <-
 function (model, filepath, overwrite = FALSE, ...)
 {
   args <- capture_args2(NULL, ignore = "model")
@@ -92,16 +93,16 @@ confirm_overwrite <- function(filepath, overwrite) {
 #'   layer_dense(5) |>
 #'   layer_activation_softmax()
 #'
-#' model |> save_model("model.keras")
-#' loaded_model <- load_model("model.keras")
-#'
+#' model |> save_keras_model("model.keras")
+#' loaded_model <- load_keras_model("model.keras")
+#' ```
+#' ```{r, results = 'hide'}
 #' x <- random_uniform(c(10, 3))
 #' stopifnot(all.equal(
 #'   model |> predict(x),
 #'   loaded_model |> predict(x)
 #' ))
 #' ```
-#'
 #' ```{r, include = FALSE}
 #' unlink("model.keras")
 #' ```
@@ -139,7 +140,7 @@ confirm_overwrite <- function(filepath, overwrite) {
 #' @seealso
 #' + <https:/keras.io/keras_core/api/models/model_saving_apis/model_saving_and_loading#loadmodel-function>
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/saving/load_model>
-load_model <-
+load_keras_model <-
 function (filepath, custom_objects = NULL, compile = TRUE, safe_mode = TRUE)
 {
   args <- capture_args2(list(custom_objects = objects_with_py_function_names))
