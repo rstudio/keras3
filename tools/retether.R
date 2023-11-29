@@ -14,6 +14,9 @@ resolve_roxy_tether <- function(endpoint) {
   )
   tether
 }
+# x <- resolve_roxy_tether('keras.layers.Conv1D')
+# cat(x)
+# cat(attr(x, "roxified"))
 
 
 # url <- "https://raw.githubusercontent.com/keras-team/keras/master/guides/writing_your_own_callbacks.py"

@@ -12,10 +12,22 @@
 install_keras <- function(...,
                           envname = "r-keras",
                           extra_packages = NULL,
-                          python_version = "3.10"
+                          python_version = "3.10",
                           # devel = FALSE
-                          # backend = c("tensorflow", "jax", "pytorch")
+                          backend = c("tensorflow", "jax", "pytorch")
                           ) {
+
+  reticulate::virtualenv_create(
+    envname = envname,
+    version = python_version,
+    force = identical(envname, "r-keras"),
+    packages = NULL
+  )
+
+  reticulate::py_install(c("keras==3.0.*", "tf-nightly", extra_packages),
+                         envname = envname)
+  message("Done!")
+  return(invisible())
 
   python <- envname |>
     reticulate::virtualenv_create(version = python_version,
