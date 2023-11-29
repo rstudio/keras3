@@ -9,8 +9,6 @@ output: rmarkdown::html_vignette
 knit: ({source(here::here("tools/knit.R")); knit_vignette)
 ---
 
-**Note: this guide assumes Keras >= 2.13**
-
 ## Introduction
 
 A Keras model consists of multiple components:
@@ -56,8 +54,8 @@ Now, let's look at the details.
 
 ```python
 import numpy as np
-import keras_core as keras
-from keras_core import ops
+import keras
+from keras import ops
 ```
 
 ## Saving
@@ -75,7 +73,7 @@ where you left)
 You can save a model with `model.save()` or `keras.models.save_model()` (which is equivalent).
 You can load it back with `keras.models.load_model()`.
 
-The only supported format in Keras Core is the "Keras v3" format,
+The only supported format in Keras 3 is the "Keras v3" format,
 which uses the `.keras` extension.
 
 **Example:**
@@ -740,3 +738,4 @@ Note that the `class_name` key contains the original name of the class, allowing
 proper re-initialization in `from_config`.
 
 Additionally, note that the `module` key is `None` since this is a custom object.
+
