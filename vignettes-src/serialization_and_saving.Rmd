@@ -38,25 +38,26 @@ If you only have 10 seconds to read this guide, here's what you need to know.
 
 **Saving a Keras model:**
 
-```python
-model = ...  # Get model (Sequential, Functional Model, or Model subclass)
-model.save('path/to/location.keras')  # The file needs to end with the .keras extension
+```r
+# Get model (Sequential, Functional Model, or Model subclass)
+model <- ...
+
+# The filename needs to end with the .keras extension
+model |> save_model('path/to/location.keras')
 ```
 
 **Loading the model back:**
 
-```python
-model = keras.models.load_model('path/to/location.keras')
+```r
+model <- load_model('path/to/location.keras')
 ```
 
 Now, let's look at the details.
 
 ## Setup
 
-```python
-import numpy as np
-import keras
-from keras import ops
+```{r}
+library(keras3)
 ```
 
 ## Saving
@@ -71,41 +72,42 @@ where you left)
 
 #### APIs
 
-You can save a model with `model.save()` or `keras.models.save_model()` (which is equivalent).
-You can load it back with `keras.models.load_model()`.
+You can save a model with `save_model()`.
+You can load it back with `load_model()`.
 
 The only supported format in Keras 3 is the "Keras v3" format,
 which uses the `.keras` extension.
 
 **Example:**
 
-```python
-def get_model():
-    # Create a simple model.
-    inputs = keras.Input(shape=(32,))
-    outputs = keras.layers.Dense(1)(inputs)
-    model = keras.Model(inputs, outputs)
-    model.compile(optimizer=keras.optimizers.Adam(), loss="mean_squared_error")
-    return model
+```{r, results = 'hide'}
+get_model <- function() {
+  # Create a simple model.
+  inputs <- layer_input(shape(32))
+  outputs <- inputs |> layer_dense(1)
+  model <-  keras_model(inputs, outputs)
+  model |> compile(optimizer = optimizer_adam(), loss = "mean_squared_error")
+  model
+}
 
-
-model = get_model()
+model <- get_model()
 
 # Train the model.
-test_input = np.random.random((128, 32))
-test_target = np.random.random((128, 1))
-model.fit(test_input, test_target)
+test_input <- random_uniform(c(128, 32))
+test_target <- random_uniform(c(128, 1))
+model |> fit(test_input, test_target)
 
 # Calling `save('my_model.keras')` creates a zip archive `my_model.keras`.
-model.save("my_model.keras")
+model |> save_model("my_model.keras")
 
 # It can be used to reconstruct the model identically.
-reconstructed_model = keras.models.load_model("my_model.keras")
+reconstructed_model <- load_model("my_model.keras")
 
 # Let's check:
-np.testing.assert_allclose(
-    model.predict(test_input), reconstructed_model.predict(test_input)
-)
+stopifnot(all.equal(
+  model |> predict(test_input),
+  reconstructed_model |> predict(test_input)
+))
 ```
 
 ### Custom objects
@@ -115,34 +117,36 @@ models in Keras saving and reloading.
 
 When saving a model that includes custom objects, such as a subclassed Layer,
 you **must** define a `get_config()` method on the object class.
-If the arguments passed to the constructor (`__init__()` method) of the custom object
-aren't Python objects (anything other than base types like ints, strings,
+If the arguments passed to the constructor (`initialize()` method) of the custom object
+aren't simple objects (anything other than types like ints, strings,
 etc.), then you **must** also explicitly deserialize these arguments in the `from_config()`
 class method.
 
 Like this:
 
-```python
-class CustomLayer(keras.layers.Layer):
-    def __init__(self, sublayer, **kwargs):
-        super().__init__(**kwargs)
-        self.sublayer = layer
-
-    def call(self, x):
-        return self.sublayer(x)
-
-    def get_config(self):
-        base_config = super().get_config()
-        config = {
-            "sublayer": keras.saving.serialize_keras_object(self.sublayer),
-        }
-        return {**base_config, **config}
-
-    @classmethod
-    def from_config(cls, config):
-        sublayer_config = config.pop("sublayer")
-        sublayer = keras.saving.deserialize_keras_object(sublayer_config)
-        return cls(sublayer, **config)
+```{r}
+layer_custom <- Layer(
+  "CustomLayer",
+  initialize = function(sublayer, ...) {
+    super$initialize(...)
+    self$sublayer <- layer
+  },
+  call = function(x) {
+    self$sublayer(x)
+  },
+  get_config = function() {
+    base_config <- super$get_config()
+    config <- list(
+      sublayer = keras$saving$serialize_keras_object(self$sublayer)
+    )
+    c(base_config, config)
+  },
+  from_config = function(cls, config) {
+    sublayer_config <- config$sublayer
+    sublayer <- keras$saving$deserialize_keras_object(sublayer_config)
+    cls(sublayer, !!!config)
+  }
+)
 ```
 
 Please see the [Defining the config methods section](#config_methods) for more
@@ -161,8 +165,8 @@ Below are examples of each workflow:
 #### Registering custom objects (**preferred**)
 
 This is the preferred method, as custom object registration greatly simplifies saving and
-loading code. Adding the `@keras.saving.register_keras_serializable` decorator to the
-class definition of a custom object registers the object globally in a master list,
+loading code. Calling `register_custom_object()` on a custom object registers
+the object globally in a master list,
 allowing Keras to recognize the object when loading the model.
 
 Let's create a custom model involving both a custom layer and a custom activation
@@ -170,86 +174,96 @@ function to demonstrate this.
 
 **Example:**
 
-```python
+```{r}
 # Clear all previously registered custom objects
-keras.saving.get_custom_objects().clear()
+clear_registered_custom_objects()
 
+
+layer_custom <- Layer(
+  "CustomLayer",
+  initialize = function(self, factor) {
+    super$initialize()
+    self$factor = factor
+  },
+
+  call = function(self, x) {
+    x * self$factor
+  },
+
+  get_config = function(self) {
+    list(factor = self$factor)
+  }
+)
 
 # Upon registration, you can optionally specify a package or a name.
-# If left blank, the package defaults to `Custom` and the name defaults to
+# If left blank, the package defaults to "Custom" and the name defaults to
 # the class name.
-@keras.saving.register_keras_serializable(package="MyLayers")
-class CustomLayer(keras.layers.Layer):
-    def __init__(self, factor):
-        super().__init__()
-        self.factor = factor
+register_custom_object(layer_custom, package = "MyLayers")
 
-    def call(self, x):
-        return x * self.factor
+custom_fn <- keras3:::py_func2(function(x) x^2, name = "custom_fn", convert = TRUE)
 
-    def get_config(self):
-        return {"factor": self.factor}
-
-
-@keras.saving.register_keras_serializable(package="my_package", name="custom_fn")
-def custom_fn(x):
-    return x**2
+register_custom_object(custom_fn, name="custom_fn", package="my_package")
 
 
 # Create the model.
-def get_model():
-    inputs = keras.Input(shape=(4,))
-    mid = CustomLayer(0.5)(inputs)
-    outputs = keras.layers.Dense(1, activation=custom_fn)(mid)
-    model = keras.Model(inputs, outputs)
-    model.compile(optimizer="rmsprop", loss="mean_squared_error")
-    return model
+get_model <- function() {
+  inputs <- layer_input(shape(4))
+  mid <- inputs |> layer_custom(0.5)
+  outputs <- mid |> layer_dense(1, activation = custom_fn)
+  model <- keras_model(inputs, outputs)
+  model |> compile(optimizer = "rmsprop", loss = "mean_squared_error")
+  model
+}
 
 
 # Train the model.
-def train_model(model):
-    input = np.random.random((4, 4))
-    target = np.random.random((4, 1))
-    model.fit(input, target)
-    return model
+train_model <- function(model) {
+  input <- random_uniform(c(4, 4))
+  target <- random_uniform(c(4, 1))
+  model |> fit(input, target, verbose = FALSE, epochs = 1)
+  model
+}
 
+test_input <- random_uniform(c(4, 4))
+test_target <- random_uniform(c(4, 1))
 
-test_input = np.random.random((4, 4))
-test_target = np.random.random((4, 1))
-
-model = get_model()
-model = train_model(model)
-model.save("custom_model.keras")
+model <- get_model() |> train_model()
+model |> save_model("custom_model.keras", overwrite = TRUE)
 
 # Now, we can simply load without worrying about our custom objects.
-reconstructed_model = keras.models.load_model("custom_model.keras")
+reconstructed_model <- load_model("custom_model.keras")
+
+# model$get_config()$layers[[3]]$config$activation -> z
+# keras$saving$deserialize_keras_object(z)
 
 # Let's check:
-np.testing.assert_allclose(
-    model.predict(test_input), reconstructed_model.predict(test_input)
-)
+stopifnot(all.equal(
+  model |> predict(test_input, verbose = FALSE),
+  reconstructed_model |> predict(test_input, verbose = FALSE)
+))
 ```
 
 #### Passing custom objects to `load_model()`
 
-```python
-model = get_model()
-model = train_model(model)
+```{r}
+model <- get_model() |> train_model()
 
-# Calling `save('my_model.keras')` creates a zip archive `my_model.keras`.
-model.save("custom_model.keras")
+# Calling `save_model('my_model.keras')` creates a zip archive `my_model.keras`.
+model |> save_model("custom_model.keras", overwrite = TRUE)
 
-# Upon loading, pass a dict containing the custom objects used in the
-# `custom_objects` argument of `keras.models.load_model()`.
-reconstructed_model = keras.models.load_model(
-    "custom_model.keras",
-    custom_objects={"CustomLayer": CustomLayer, "custom_fn": custom_fn},
+# Upon loading, pass a named list containing the custom objects used in the
+# `custom_objects` argument of `load_model()`.
+reconstructed_model <-  load_model(
+  "custom_model.keras",
+  custom_objects = list(CustomLayer = layer_custom,
+                        custom_fn = custom_fn),
 )
 
 # Let's check:
-np.testing.assert_allclose(
-    model.predict(test_input), reconstructed_model.predict(test_input)
-)
+stopifnot(all.equal(
+  model |> predict(test_input, verbose = FALSE),
+  reconstructed_model |> predict(test_input, verbose = FALSE)
+))
 ```
 
 #### Using a custom object scope
@@ -260,22 +274,23 @@ the loading of our custom objects.
 
 **Example:**
 
-```python
-model = get_model()
-model = train_model(model)
-model.save("custom_model.keras")
+```{r}
+model <- get_model() |> train_model()
+model |> save_model("custom_model.keras", overwrite = TRUE)
 
 # Pass the custom objects dictionary to a custom object scope and place
 # the `keras.models.load_model()` call within the scope.
-custom_objects = {"CustomLayer": CustomLayer, "custom_fn": custom_fn}
+custom_objects <- list(CustomLayer = layer_custom, custom_fn = custom_fn)
 
-with keras.saving.custom_object_scope(custom_objects):
-    reconstructed_model = keras.models.load_model("custom_model.keras")
+with_custom_object_scope(custom_objects, {
+  reconstructed_model <- load_model("custom_model.keras")
+})
 
 # Let's check:
-np.testing.assert_allclose(
-    model.predict(test_input), reconstructed_model.predict(test_input)
-)
+stopifnot(all.equal(
+  model |> predict(test_input, verbose = FALSE),
+  reconstructed_model |> predict(test_input, verbose = FALSE)
+))
 ```
 
 ### Model serialization

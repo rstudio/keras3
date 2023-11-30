@@ -314,13 +314,18 @@ function (object, name = NULL, package = NULL)
     object <- py_func2(object, TRUE, name = name)
 
   if (is.null(package)) {
-    topenvname <- environmentName(topenv())
+    topenvname <- eval(quote(environmentName(topenv())), parent.frame())
     package <- if (topenvname %in% c("", "R_GlobalEnv"))
       "Custom" else topenvname
   }
 
   keras$saving$register_keras_serializable(package, name)(object)
   invisible(object_in)
+}
+
+#' @export
+clear_registered_custom_objects <- function() {
+  py_eval("lambda keras: keras.saving.get_custom_objects().clear()")(keras)
 }
 
 
@@ -350,8 +355,7 @@ function (object, name = NULL, package = NULL)
 get_custom_objects <-
 function ()
 {
-  args <- capture_args2(NULL)
-  do.call(keras$utils$get_custom_objects, args)
+  py_call(r_to_py(keras$utils$get_custom_objects))
 }
 
 
