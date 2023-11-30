@@ -102,7 +102,7 @@ skip_if_theano <- function() {
 }
 
 skip_if_tensorflow_implementation <- function() {
-  if (keras:::is_tensorflow_implementation())
+  if (keras3:::is_tensorflow_implementation())
     skip("Test not run for TensorFlow implementation")
 }
 

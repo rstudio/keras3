@@ -6,7 +6,7 @@ E.g. `'float16'`, `'float32'`, `'float64'`.
 # Examples
 
 ```r
-keras:::config_floatx()
+keras3:::config_floatx()
 ```
 
 ```

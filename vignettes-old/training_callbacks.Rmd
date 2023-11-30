@@ -18,7 +18,7 @@ aliases:
 ---
 
 ```{r setup, include = FALSE}
-library(keras)
+library(keras3)
 knitr::opts_chunk$set(comment = NA, eval = FALSE)
 ```
 
@@ -29,7 +29,7 @@ A callback is a set of functions to be applied at given stages of the training p
 For example:
 
 ```{r}
-library(keras)
+library(keras3)
 
 # generate dummy training data
 data <- matrix(rexp(1000*784), nrow = 1000, ncol = 784)
@@ -131,7 +131,7 @@ You can create a custom callback by creating a new [R6 class](https://CRAN.R-pro
 Here's a simple example saving a list of losses over each batch during training:
 
 ```{r}
-library(keras)
+library(keras3)
 
 # define custom callback class
 LossHistory <- R6::R6Class("LossHistory",

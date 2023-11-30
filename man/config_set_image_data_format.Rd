@@ -22,7 +22,7 @@ Set the value of the image data format convention.
 \if{html}{\out{<div class="sourceCode r">}}\preformatted{# 'channels_last'
 }\if{html}{\out{</div>}}
 
-\if{html}{\out{<div class="sourceCode r">}}\preformatted{keras::config_set_image_data_format('channels_first')
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{keras3::config_set_image_data_format('channels_first')
 config_image_data_format()
 }\if{html}{\out{</div>}}
 
@@ -30,7 +30,7 @@ config_image_data_format()
 }\if{html}{\out{</div>}}
 
 \if{html}{\out{<div class="sourceCode r">}}\preformatted{# Set it back to `'channels_last'`
-keras::config_set_image_data_format('channels_last')
+keras3::config_set_image_data_format('channels_last')
 }\if{html}{\out{</div>}}
 }
 

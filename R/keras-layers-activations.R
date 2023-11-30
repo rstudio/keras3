@@ -18,7 +18,7 @@
 #'
 #' @param activation
 #' Activation function. It could be a callable, or the name of
-#' an activation from the `keras::activation_*` namespace.
+#' an activation from the `keras3::activation_*` namespace.
 #'
 #' @param ...
 #' Base layer keyword arguments, such as `name` and `dtype`.

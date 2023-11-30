@@ -18,7 +18,7 @@ aliases:
 ---
 
 ```{r setup, include=FALSE}
-library(keras)
+library(keras3)
 knitr::opts_chunk$set(eval = FALSE)
 ```
 
@@ -29,7 +29,7 @@ The sequential model is a linear stack of layers.
 You create a sequential model by calling the `keras_model_sequential()` function then a series of `layer` functions:
 
 ```{r}
-library(keras)
+library(keras3)
 
 model <- keras_model_sequential() 
 model %>% 
@@ -215,7 +215,7 @@ Some additional examples are provided below.
 ### Multilayer Perceptron (MLP) for multi-class softmax classification
 
 ```{r}
-library(keras)
+library(keras3)
 
 # generate dummy data
 x_train <- matrix(runif(1000*20), nrow = 1000, ncol = 20)
@@ -260,7 +260,7 @@ score <- model %>% evaluate(x_test, y_test, batch_size = 128)
 ### MLP for binary classification
 
 ```{r}
-library(keras)
+library(keras3)
 
 # generate dummy data
 x_train <- matrix(runif(1000*20), nrow = 1000, ncol = 20)
@@ -295,7 +295,7 @@ score = model %>% evaluate(x_test, y_test, batch_size=128)
 ### VGG-like convnet
 
 ```{r}
-library(keras)
+library(keras3)
 
 # generate dummy data
 x_train <- array(runif(100 * 100 * 100 * 3), dim = c(100, 100, 100, 3))
@@ -400,7 +400,7 @@ the last step in its output sequence, thus dropping the temporal dimension
 
 
 ```{r}
-library(keras)
+library(keras3)
 
 # constants
 data_dim <- 16
@@ -442,7 +442,7 @@ A stateful recurrent model is one for which the internal states (memories) obtai
 [You can read more about stateful RNNs in the FAQ.](../faq#how-can-i-use-stateful-rnns)
 
 ```{r}
-library(keras)
+library(keras3)
 
 # constants
 data_dim <- 16

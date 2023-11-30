@@ -90,8 +90,8 @@ knit_vignette <- function(input, ..., output_dir) {
   message("kniting: ", output.md)
 
   set.seed(1L)
-  keras:::keras$utils$clear_session()
-  keras:::keras$utils$set_random_seed(1L)
+  keras3:::keras$utils$clear_session()
+  keras3:::keras$utils$set_random_seed(1L)
 
   knitr::knit(input, output.md, envir = new.env(parent = globalenv()))
 

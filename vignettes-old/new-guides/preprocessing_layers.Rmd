@@ -25,7 +25,7 @@ knitr::opts_chunk$set(comment = NA, eval = FALSE)
 
 ```{r}
 library(tensorflow)
-library(keras)
+library(keras3)
 ```
 
 ## Keras preprocessing
@@ -256,7 +256,7 @@ Note that image data augmentation layers are only active during training (simila
 the `layer_dropout()` layer).
 
 ```{r}
-library(keras)
+library(keras3)
 library(tfdatasets)
 
 # Create a data augmentation stage with horizontal flipping, rotations, zooms
@@ -302,7 +302,7 @@ You can see a similar setup in action in the example
 
 ```{r}
 library(tensorflow)
-library(keras)
+library(keras3)
 c(c(x_train, y_train), ...) %<-% dataset_cifar10()
 x_train <- x_train %>%
   array_reshape(c(dim(x_train)[1], -1L)) # flatten each case
@@ -412,7 +412,7 @@ This is how you should preprocess text to be passed to an `Embedding` layer.
 ```{r}
 library(tensorflow)
 library(tfdatasets)
-library(keras)
+library(keras3)
 
 # Define some text data to adapt the layer
 adapt_data <- as_tensor(c(

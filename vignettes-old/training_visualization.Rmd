@@ -18,7 +18,7 @@ aliases:
 ---
 
 ```{r setup, include = FALSE}
-library(keras)
+library(keras3)
 knitr::opts_chunk$set(comment = NA, eval = FALSE)
 ```
 

@@ -27,7 +27,7 @@ First, let's install Keras Core:
 
 
 ```r
-keras::install_keras()
+keras3::install_keras()
 ```
 
 ## Setup
@@ -239,7 +239,7 @@ at custom layers first.
 
 If you're already familiar with writing custom layers in `tf.keras` -- well, nothing
 has changed. Except one thing: instead of using functions from the `tf` namespace, you should use functions
-from `keras::k_*`.
+from `keras3::k_*`.
 
 The `k_*` namespace contains:
 

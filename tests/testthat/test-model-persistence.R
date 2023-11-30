@@ -5,7 +5,7 @@ context("model-persistence")
 
 test_succeeds("model can be saved and loaded", {
 
-  if (!keras:::have_h5py())
+  if (!keras3:::have_h5py())
     skip("h5py not available for testing")
 
   model <- define_and_compile_model()
@@ -17,7 +17,7 @@ test_succeeds("model can be saved and loaded", {
 
 test_succeeds("model with custom loss and metrics can be saved and loaded", {
 
-  if (!keras:::have_h5py())
+  if (!keras3:::have_h5py())
     skip("h5py not available for testing")
 
   model <- define_model()
@@ -131,7 +131,7 @@ test_succeeds("model load with unnamed custom_objects", {
 
 test_succeeds("model weights can be saved and loaded", {
 
-  if (!keras:::have_h5py())
+  if (!keras3:::have_h5py())
     skip("h5py not available for testing")
 
   model <- define_and_compile_model()
@@ -153,7 +153,7 @@ test_succeeds("model can be saved and loaded from json", {
 
 # test_succeeds("model can be saved and loaded from yaml", {
 #
-#   if (!keras:::have_pyyaml())
+#   if (!keras3:::have_pyyaml())
 #     skip("yaml not available for testing")
 #
 #   if(tf_version() >= "2.5.1")
@@ -167,7 +167,7 @@ test_succeeds("model can be saved and loaded from json", {
 
 test_succeeds("model can be saved and loaded from R 'raw' object", {
 
-  if (!keras:::have_h5py())
+  if (!keras3:::have_h5py())
     skip("h5py not available for testing")
 
   model <- define_and_compile_model()

@@ -5,7 +5,7 @@ Return the value of the fuzz factor used in numeric expressions.
 # Examples
 
 ```r
-keras::config_epsilon()
+keras3::config_epsilon()
 ```
 
 ```

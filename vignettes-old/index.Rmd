@@ -18,7 +18,7 @@ aliases:
 
 
 ```{r setup, include=FALSE}
-library(keras)
+library(keras3)
 knitr::opts_chunk$set(eval = FALSE)
 ```
 
@@ -72,7 +72,7 @@ The dataset also includes labels for each image, telling us which digit it is. F
 The MNIST dataset is included with Keras and can be accessed using the `dataset_mnist()` function. Here we load the dataset then create variables for our test and training data:
 
 ```{r}
-library(keras)
+library(keras3)
 mnist <- dataset_mnist()
 x_train <- mnist$train$x
 y_train <- mnist$train$y

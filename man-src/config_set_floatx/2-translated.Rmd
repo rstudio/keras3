@@ -10,7 +10,7 @@ It is not recommended to set this to `"float16"` for training,
 as this will likely cause numeric stability issues.
 Instead, mixed precision, which leverages
 a mix of `float16` and `float32`. It can be configured by calling
-`keras::keras$mixed_precision$set_dtype_policy('mixed_float16')`.
+`keras3::keras$mixed_precision$set_dtype_policy('mixed_float16')`.
 
 # Examples
 ```{r}

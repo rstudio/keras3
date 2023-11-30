@@ -84,7 +84,7 @@ tryCatch(\{
 \if{html}{\out{<div class="sourceCode">}}\preformatted{## [1] 0 1 2 3
 }\if{html}{\out{</div>}}
 
-\if{html}{\out{<div class="sourceCode r">}}\preformatted{# model$history \%>\% keras:::to_keras_training_history() \%>\% as.data.frame() \%>\% print()
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{# model$history \%>\% keras3:::to_keras_training_history() \%>\% as.data.frame() \%>\% print()
 
 history <- model \%>\% fit(x = op_ones(c(5, 20)),
                          y = op_zeros(5),

@@ -62,7 +62,7 @@ model$history$epoch
 ```
 
 ```r
-# model$history %>% keras:::to_keras_training_history() %>% as.data.frame() %>% print()
+# model$history %>% keras3:::to_keras_training_history() %>% as.data.frame() %>% print()
 
 history <- model %>% fit(x = k_ones(c(5, 20)),
                          y = k_zeros(5),

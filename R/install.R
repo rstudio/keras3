@@ -205,4 +205,4 @@ default_extra_packages <- function(tensorflow_version = "default") {
 #  @inherit tensorflow::install_tensorflow details
 # @inherit tensorflow::install_tensorflow params return references description details sections
 # ## everything except 'seealso' to avoid this warning
-# ## Warning: Link to unknown topic in inherited text: keras::install_keras
+# ## Warning: Link to unknown topic in inherited text: keras3::install_keras

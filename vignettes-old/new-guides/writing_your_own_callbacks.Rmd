@@ -27,7 +27,7 @@ knitr::opts_chunk$set(comment = NA, eval = FALSE)
 ## Setup
 ```{R}
 library(tensorflow)
-library(keras)
+library(keras3)
 envir::import_from(magrittr, `%<>%`)
 envir::import_from(dplyr, last)
 

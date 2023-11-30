@@ -381,7 +381,7 @@ TypeError: this __dict__ descriptor does not support '_DictWrapper' objects
  13. │ │       └─rlang::eval_bare(quo_get_expr(.quo), quo_get_env(.quo))
  14. │ └─model %>% predict(x)
  15. ├─stats::predict(., x)
- 16. └─keras:::predict.keras.models.model.Model(., x)
+ 16. └─keras3:::predict.keras.models.model.Model(., x)
  17.   ├─base::do.call(object$predict, args) at keras/R/model.R:889:3
  18.   └─reticulate (local) `<python.builtin.method>`(...)
  19.     └─reticulate:::py_call_impl(callable, call_args$unnamed, call_args$named)

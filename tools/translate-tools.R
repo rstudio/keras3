@@ -262,11 +262,11 @@ prompt_translate_roxygen_instructions_and_examples <- list %(% {
         i.e. maximum integer index + 1.
     @param output_dim Integer. Dimension of the dense embedding.
     @param embeddings_initializer Initializer for the `embeddings`
-        matrix (see `keras::initializer_*`).
+        matrix (see `keras3::initializer_*`).
     @param embeddings_regularizer Regularizer function applied to
-        the `embeddings` matrix (see `keras::regularizer_*`).
+        the `embeddings` matrix (see `keras3::regularizer_*`).
     @param embeddings_constraint Constraint function applied to
-        the `embeddings` matrix (see `keras::constraint_*`).
+        the `embeddings` matrix (see `keras3::constraint_*`).
     @param mask_zero Boolean, whether or not the input value 0 is a special
         "padding" value that should be masked out.
         This is useful when using recurrent layers which

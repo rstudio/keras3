@@ -260,15 +260,15 @@ function (object, equation, output_shape, activation = NULL,
 #'
 #' @param embeddings_initializer
 #' Initializer for the `embeddings`
-#' matrix (see `keras::initializer_*`).
+#' matrix (see `keras3::initializer_*`).
 #'
 #' @param embeddings_regularizer
 #' Regularizer function applied to
-#' the `embeddings` matrix (see `keras::regularizer_*`).
+#' the `embeddings` matrix (see `keras3::regularizer_*`).
 #'
 #' @param embeddings_constraint
 #' Constraint function applied to
-#' the `embeddings` matrix (see `keras::constraint_*`).
+#' the `embeddings` matrix (see `keras3::constraint_*`).
 #'
 #' @param mask_zero
 #' Boolean, whether or not the input value 0 is a special

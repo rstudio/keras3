@@ -11,7 +11,7 @@ Layer(
   call = NULL,
   compute_output_shape = NULL,
   ...,
-  inherit = keras::keras$layers$Layer
+  inherit = keras3::keras$layers$Layer
 )
 }
 \arguments{
@@ -42,7 +42,7 @@ arguments. They will be added to the layer class.}
 \item{inherit}{the Keras layer to inherit from.}
 }
 \value{
-A function that wraps \code{create_layer}, similar to \code{keras::layer_dense}.
+A function that wraps \code{create_layer}, similar to \code{keras3::layer_dense}.
 }
 \description{
 This function is maintained but deprecated. Please use \code{new_layer_class()} or

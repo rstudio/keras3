@@ -18,7 +18,7 @@ aliases:
 ---
 
 ```{r setup, include = FALSE}
-library(keras)
+library(keras3)
 knitr::opts_chunk$set(comment = NA, eval = FALSE)
 ```
 
@@ -36,7 +36,7 @@ To use the functional API, build your input and output layers and then pass them
 
 
 ```{r}
-library(keras)
+library(keras3)
 
 # input layer
 inputs <- layer_input(shape = c(784))
@@ -103,7 +103,7 @@ We'll include an
 
 
 ```{r}
-library(keras)
+library(keras3)
 
 main_input <- layer_input(shape = c(100), dtype = 'int32', name = 'main_input')
 
@@ -234,7 +234,7 @@ Let's build this with the functional API. We will take as input for a tweet a bi
 
 
 ```{r}
-library(keras)
+library(keras3)
 
 tweet_a <- layer_input(shape = c(280, 256))
 tweet_b <- layer_input(shape = c(280, 256))
@@ -343,7 +343,7 @@ Code examples are still the best way to get started, so here are a few more.
 For more information about the Inception architecture, see [Going Deeper with Convolutions](https://arxiv.org/abs/1409.4842).
 
 ```{r}
-library(keras)
+library(keras3)
 
 input_img <- layer_input(shape = c(256, 256, 3))
 

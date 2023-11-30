@@ -22,7 +22,7 @@
 #' @param ... Any other methods and/or attributes can be specified using named
 #'  arguments. They will be added to the layer class.
 #' @param inherit the Keras layer to inherit from.
-#' @return A function that wraps `create_layer`, similar to `keras::layer_dense`.
+#' @return A function that wraps `create_layer`, similar to `keras3::layer_dense`.
 #' @examples
 #' \dontrun{
 #'
@@ -64,7 +64,7 @@
 Layer <-
 function(classname, initialize, build = NULL, call = NULL,
          compute_output_shape = NULL, ...,
-         inherit = keras::keras$layers$Layer) {
+         inherit = keras3::keras$layers$Layer) {
 
   public <- capture_args(match.call(), ignore = c("classname", "inherit"))
   for(ignore_if_null in c("build", "call", "compute_output_shape"))

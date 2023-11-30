@@ -53,7 +53,7 @@ For custom models use:
 ## Setup
 
 ```{r}
-library(keras)
+library(keras3)
 ```
 
 ## Saving Sequential Models or Functional models

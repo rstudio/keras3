@@ -290,7 +290,7 @@ check_implementation_version <- function() {
     name <- "Keras"
     ver <- keras_version()
     required_ver <- "2.0.0"
-    update_with <- "keras::install_keras()"
+    update_with <- "keras3::install_keras()"
   }
 
   # check version if we can

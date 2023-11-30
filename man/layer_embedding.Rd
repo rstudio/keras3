@@ -24,13 +24,13 @@ i.e. maximum integer index + 1.}
 \item{output_dim}{Integer. Dimension of the dense embedding.}
 
 \item{embeddings_initializer}{Initializer for the \code{embeddings}
-matrix (see \verb{keras::initializer_*}).}
+matrix (see \verb{keras3::initializer_*}).}
 
 \item{embeddings_regularizer}{Regularizer function applied to
-the \code{embeddings} matrix (see \verb{keras::regularizer_*}).}
+the \code{embeddings} matrix (see \verb{keras3::regularizer_*}).}
 
 \item{embeddings_constraint}{Constraint function applied to
-the \code{embeddings} matrix (see \verb{keras::constraint_*}).}
+the \code{embeddings} matrix (see \verb{keras3::constraint_*}).}
 
 \item{mask_zero}{Boolean, whether or not the input value 0 is a special
 "padding" value that should be masked out.

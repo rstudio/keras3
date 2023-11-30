@@ -6,7 +6,7 @@ new_metric_class <-
 function(classname, ..., initialize, update_state, result) {
   members <- capture_args2(ignore = "classname")
   new_py_class(classname, members,
-              inherit = keras::keras$metrics$Metric,
+              inherit = keras3::keras$metrics$Metric,
               parent_env = parent.frame())
 }
 
@@ -17,7 +17,7 @@ function(classname, ..., call = NULL) {
   members <- capture_args2(ignore = "classname")
   members$call <- call
   new_py_class(classname, members,
-              inherit = keras::keras$losses$Loss,
+              inherit = keras3::keras$losses$Loss,
               parent_env = parent.frame())
 }
 
@@ -48,7 +48,7 @@ function(classname,
     names(which(vapply(formals(sys.function()), is.null, TRUE))))
 
   new_py_class(classname, members,
-              inherit = keras::keras$callbacks$Callback,
+              inherit = keras3::keras$callbacks$Callback,
               parent_env = parent.frame())
 }
 
@@ -65,7 +65,7 @@ function(classname, ...,
     names(which(vapply(formals(sys.function()), is.null, TRUE))))
 
   new_py_class(classname, members,
-              inherit = keras::keras$Model,
+              inherit = keras3::keras$Model,
               parent_env = parent.frame())
 }
 

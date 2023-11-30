@@ -29,7 +29,7 @@ editor_options:
 ------------------------------------------------------------------------
 
 ```{r setup, include = FALSE}
-library(keras)
+library(keras3)
 knitr::opts_chunk$set(
   eval = FALSE,
   collapse = TRUE,
@@ -65,7 +65,7 @@ Let's see how that works.
 ```{r}
 library(tensorflow)
 library(tfdatasets)
-library(keras)
+library(keras3)
 library(magrittr, include.only = "%<>%")
 
 # -- we start by defining some helpers we'll use later --

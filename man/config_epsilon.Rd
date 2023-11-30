@@ -13,7 +13,7 @@ A float.
 Return the value of the fuzz factor used in numeric expressions.
 }
 \section{Examples}{
-\if{html}{\out{<div class="sourceCode r">}}\preformatted{keras::config_epsilon()
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{keras3::config_epsilon()
 }\if{html}{\out{</div>}}
 
 \if{html}{\out{<div class="sourceCode">}}\preformatted{## [1] 1e-07

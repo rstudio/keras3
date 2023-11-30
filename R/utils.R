@@ -375,7 +375,7 @@ function(x,
   tryCatch(
     do.call(keras$utils$plot_model, args),
     error = function(e) {
-      message("See ?keras::plot.keras.models.model.Model for ",
+      message("See ?keras3::plot.keras.models.model.Model for ",
               " instructions on how to install graphviz and pydot")
       e$call <- sys.call(1)
       stop(e)

@@ -14,7 +14,7 @@ install.packages("remotes")
 remotes::install_github(sprintf("rstudio/%s", c("reticulate", "tensorflow", "keras")))
 if (is.null(reticulate::virtualenv_starter()))
   reticulate::install_python()
-keras::install_keras()
+keras3::install_keras()
 ```
 
 Test to see if installation was successful.

@@ -66,7 +66,7 @@ Here's the data:
 
 ```r
 # Load the data and split it between train and test sets
-c(c(x_train, y_train), c(x_test, y_test)) %<-% keras::dataset_mnist()
+c(c(x_train, y_train), c(x_test, y_test)) %<-% keras3::dataset_mnist()
 
 # Scale images to the [0, 1] range
 x_train <- x_train / 255

@@ -19,7 +19,7 @@ aliases:
 ---
 
 ```{r setup, include = FALSE}
-library(keras)
+library(keras3)
 knitr::opts_chunk$set(comment = NA, eval = FALSE)
 ```
 
@@ -37,7 +37,7 @@ The main data structure you'll work with is the `Layer`. A layer encapsulates bo
 
 ```{r}
 library(tensorflow)
-library(keras)
+library(keras3)
 
 layer_linear <- Layer(
   classname = "Linear", 

@@ -50,7 +50,7 @@
 #' }, python.builtin.RuntimeError = function(e) message("Interrupted!"))
 #'
 #' model$history$epoch
-#' # model$history %>% keras:::to_keras_training_history() %>% as.data.frame() %>% print()
+#' # model$history %>% keras3:::to_keras_training_history() %>% as.data.frame() %>% print()
 #'
 #' history <- model %>% fit(x = op_ones(c(5, 20)),
 #'                          y = op_zeros(5),

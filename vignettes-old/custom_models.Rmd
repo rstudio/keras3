@@ -19,7 +19,7 @@ aliases:
 ---
 
 ```{r setup, include = FALSE}
-library(keras)
+library(keras3)
 knitr::opts_chunk$set(comment = NA, eval = FALSE)
 ```
 
@@ -36,7 +36,7 @@ Typically, you'll wrap your call to `keras_model_custom()` in yet another functi
 This example demonstrates the implementation of a simple custom model that implements a multi-layer-perceptron with optional dropout and batch normalization:
 
 ```{r}
-library(keras)
+library(keras3)
 
 keras_model_simple_mlp <- function(num_classes, 
                                    use_bn = FALSE, use_dp = FALSE, 
@@ -77,7 +77,7 @@ In `call()`, you may specify custom losses by calling `self$add_loss()`. You can
 To use a custom model, just call your model's high-level wrapper function. For example:
 
 ```{r}
-library(keras)
+library(keras3)
 
 # create the model 
 model <- keras_model_simple_mlp(num_classes = 10, use_dp = TRUE)

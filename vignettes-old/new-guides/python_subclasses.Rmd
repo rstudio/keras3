@@ -30,7 +30,7 @@ knitr::opts_chunk$set(
 
 ```{r setup, include=FALSE}
 library(reticulate)
-library(keras)
+library(keras3)
 ```
 
 When using keras, a desire to create Python-based subclasses can arise in a number of ways.

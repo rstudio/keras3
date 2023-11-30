@@ -10,7 +10,7 @@ layer_activation(object, activation, ...)
 \item{object}{Object to compose the layer with. A tensor, array, or sequential model.}
 
 \item{activation}{Activation function. It could be a callable, or the name of
-an activation from the \verb{keras::activation_*} namespace.}
+an activation from the \verb{keras3::activation_*} namespace.}
 
 \item{...}{Base layer keyword arguments, such as \code{name} and \code{dtype}.}
 }

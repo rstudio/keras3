@@ -19,7 +19,7 @@ aliases:
 ---
 
 ```{r setup, include=FALSE}
-library(keras)
+library(keras3)
 knitr::opts_chunk$set(eval = FALSE)
 ```
 
@@ -56,7 +56,7 @@ If you are running on the Theano backend, you can set the `THEANO_FLAGS` environ
 ```r
 Sys.setenv(KERAS_BACKEND = "keras")
 Sys.setenv(THEANO_FLAGS = "device=gpu,floatX=float32")
-library(keras)
+library(keras3)
 ```
 
 The name 'gpu' might have to be changed depending on your device's identifier (e.g. `gpu0`, `gpu1`, etc).
@@ -515,14 +515,14 @@ First, build and install PlaidML as described on the [project website](https://g
 Then, to use Keras with the PlaidML backend you do the following:
 
 ```{r}
-library(keras)
+library(keras3)
 use_backend("plaidml")
 ```
 
 This should automatically discover and use the Python environment where `plaidml` and `plaidml-keras` were installed. If this doesn't work as expected you can also force the selection of a particular Python environment. For example, if you installed PlaidML in conda environment named "plaidml" you would do this:
 
 ```{r}
-library(keras)
+library(keras3)
 use_condaenv("plaidml")
 use_backend("plaidml")
 ```
@@ -556,7 +556,7 @@ You can pass the `version` argument to check for a specific version of Keras.
 
 Another consideration is gaining access to the underlying Keras Python module. You might need to do this if you require lower level access to Keras than is provided for by the Keras R package.
 
-Since the Keras R package can bind to multiple different implementations of Keras (either the original Keras or the TensorFlow implementation of Keras), you should use the `keras::implementation()` function to obtain access to the correct python module. You can use this function within the `.onLoad` function of a package to provide global access to the module within your package. For example:
+Since the Keras R package can bind to multiple different implementations of Keras (either the original Keras or the TensorFlow implementation of Keras), you should use the `keras3::implementation()` function to obtain access to the correct python module. You can use this function within the `.onLoad` function of a package to provide global access to the module within your package. For example:
 
 ```{r}
 # Keras Python module
@@ -564,7 +564,7 @@ keras <- NULL
 
 # Obtain a reference to the module from the keras R package
 .onLoad <- function(libname, pkgname) {
-  keras <<- keras::implementation()
+  keras <<- keras3::implementation()
 }
 ```
 
@@ -582,7 +582,7 @@ The `use_session_with_seed()` function establishes a common random seed for R, P
 To use the function, call it immediately after you load the keras package:
 
 ```{r}
-library(keras)
+library(keras3)
 use_session_with_seed(42)
 
 # ...rest of code follows...
@@ -594,7 +594,7 @@ This function takes all measures known to promote reproducible results from Kera
 Please note again that `use_session_with_seed()` disables GPU computations and CPU parallelization by default (as both can lead to non-deterministic computations) so should generally not be used when model training time is paramount. You can re-enable GPU computations and/or CPU parallelism using the `disable_gpu` and `disable_parallel_cpu` arguments. For example:
 
 ```{r}
-library(keras)
+library(keras3)
 use_session_with_seed(42, disable_gpu = FALSE, disable_parallel_cpu = FALSE)
 ```
 

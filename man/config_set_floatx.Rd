@@ -17,7 +17,7 @@ It is not recommended to set this to \code{"float16"} for training,
 as this will likely cause numeric stability issues.
 Instead, mixed precision, which leverages
 a mix of \code{float16} and \code{float32}. It can be configured by calling
-\code{keras::keras$mixed_precision$set_dtype_policy('mixed_float16')}.
+\code{keras3::keras$mixed_precision$set_dtype_policy('mixed_float16')}.
 }
 
 \section{Examples}{

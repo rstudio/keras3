@@ -21,7 +21,7 @@ knitr::opts_chunk$set(
 ## Setup
 ```{r}
 library(tensorflow)
-library(keras)
+library(keras3)
 printf <- function(...) writeLines(sprintf(...))
 ```
 

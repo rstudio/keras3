@@ -22,7 +22,7 @@ test_call_succeeds("hdf5_matrix", {
   if (tensorflow::tf_version() >= "2.4")
     skip("hdf5 matrix have been removed in tf >= 2.4")
 
-  if (!keras:::have_h5py())
+  if (!keras3:::have_h5py())
     skip("h5py not available for testing")
 
   X_train = hdf5_matrix('test.h5', 'my_data', start=0, end=150)
@@ -39,7 +39,7 @@ test_call_succeeds("normalize", {
 test_call_succeeds("with_custom_object_scope", {
 
   skip("save_model_hdf5()")
-  if (!keras:::have_h5py())
+  if (!keras3:::have_h5py())
     skip("h5py not available for testing")
 
 

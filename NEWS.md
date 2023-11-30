@@ -390,7 +390,7 @@ Breaking changes (Tensorflow 2.6):
 - Note: The following breaking changes are specific to Tensorflow version 2.6.0.
   However, the keras R package maintains compatibility with multiple versions of Tensorflow/Keras.
   You can upgrade the R package and still preserve the previous behavior by
-  installing a specific version of Tensorflow: `keras::install_keras(tensorflow="2.4.0")`
+  installing a specific version of Tensorflow: `keras3::install_keras(tensorflow="2.4.0")`
 
 - `predict_proba()` and `predict_classes()` were removed.
 - `model_to_yaml()` and `model_from_yaml()` were removed.

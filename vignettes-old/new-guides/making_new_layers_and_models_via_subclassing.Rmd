@@ -22,7 +22,7 @@ knitr::opts_chunk$set(comment = NA, eval = FALSE)
 library(magrittr)
 library(tensorflow)
 library(tfdatasets)
-library(keras)
+library(keras3)
 
 tf_version()
 ```

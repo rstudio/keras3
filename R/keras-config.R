@@ -7,7 +7,7 @@
 #'
 #' # Examples
 #' ```{r}
-#' keras::config_backend()
+#' keras3::config_backend()
 #' # 'tensorflow'
 #' ```
 #'
@@ -36,7 +36,7 @@ function ()
 #'
 #' # Examples
 #' ```{r}
-#' keras::config_epsilon()
+#' keras3::config_epsilon()
 #' ```
 #'
 #' @returns
@@ -65,7 +65,7 @@ function ()
 #'
 #' # Examples
 #' ```{r}
-#' keras:::config_floatx()
+#' keras3:::config_floatx()
 #' ```
 #'
 #' @returns
@@ -174,7 +174,7 @@ function (value)
 #' as this will likely cause numeric stability issues.
 #' Instead, mixed precision, which leverages
 #' a mix of `float16` and `float32`. It can be configured by calling
-#' `keras::keras$mixed_precision$set_dtype_policy('mixed_float16')`.
+#' `keras3::keras$mixed_precision$set_dtype_policy('mixed_float16')`.
 #'
 #' # Examples
 #' ```{r}
@@ -224,13 +224,13 @@ function (value)
 #' ```
 #'
 #' ```{r}
-#' keras::config_set_image_data_format('channels_first')
+#' keras3::config_set_image_data_format('channels_first')
 #' config_image_data_format()
 #' ```
 #'
 #' ```{r}
 #' # Set it back to `'channels_last'`
-#' keras::config_set_image_data_format('channels_last')
+#' keras3::config_set_image_data_format('channels_last')
 #' ```
 #'
 #' @param data_format

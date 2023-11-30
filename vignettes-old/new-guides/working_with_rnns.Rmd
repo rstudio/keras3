@@ -34,7 +34,7 @@ prototype different research ideas in a flexible way with minimal code.
 ## Setup
 ```{r}
 library(tensorflow)
-library(keras)
+library(keras3)
 ```
 
 
@@ -580,7 +580,7 @@ model %>% fit(input_data, target_data, batch_size=batch_size)
 
 
 
-With `keras::layer_rnn()`, you are only expected to define the math
+With `keras3::layer_rnn()`, you are only expected to define the math
 logic for an individual step within the sequence, and the `layer_rnn()`
 will handle the sequence iteration for you. It's an incredibly powerful way to quickly
 prototype new kinds of RNNs (e.g. a LSTM variant).

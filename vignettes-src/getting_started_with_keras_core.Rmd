@@ -23,7 +23,7 @@ library(keras3)
 First, let's install Keras Core:
 
 ```{r, eval = FALSE}
-keras::install_keras()
+keras3::install_keras()
 ```
 
 ## Setup
@@ -157,7 +157,7 @@ at custom layers first.
 
 If you're already familiar with writing custom layers in `tf.keras` -- well, nothing
 has changed. Except one thing: instead of using functions from the `tf` namespace, you should use functions
-from `keras::op_*`.
+from `keras3::op_*`.
 
 The `op_*` namespace contains:
 

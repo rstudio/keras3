@@ -18,7 +18,7 @@ config_image_data_format()
 
 
 ```r
-keras::config_set_image_data_format('channels_first')
+keras3::config_set_image_data_format('channels_first')
 config_image_data_format()
 ```
 
@@ -29,7 +29,7 @@ config_image_data_format()
 
 ```r
 # Set it back to `'channels_last'`
-keras::config_set_image_data_format('channels_last')
+keras3::config_set_image_data_format('channels_last')
 ```
 
 @param data_format
