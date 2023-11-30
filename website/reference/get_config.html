@@ -7,7 +7,7 @@ nor the class name (those are handled externally)."><title>Layer/Model configura
 configuration of a layer or model. The same layer or model can be
 reinstantiated later (without its trained weights) from this configuration
 using from_config(). The config does not include connectivity information,
-nor the class name (those are handled externally)."><meta property="og:image" content="https://keras.posit.co/logo.png"><!-- mathjax --><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js" integrity="sha256-nvJJv9wWKEm88qvoQl9ekL2J+k/RWIsaSScxxlsrv8k=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/config/TeX-AMS-MML_HTMLorMML.js" integrity="sha256-84DKXVJXs0/F8OTMzX4UR909+jtl4G7SPypPavF+GfA=" crossorigin="anonymous"></script><!--[if lt IE 9]>
+nor the class name (those are handled externally)."><!-- mathjax --><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js" integrity="sha256-nvJJv9wWKEm88qvoQl9ekL2J+k/RWIsaSScxxlsrv8k=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/config/TeX-AMS-MML_HTMLorMML.js" integrity="sha256-84DKXVJXs0/F8OTMzX4UR909+jtl4G7SPypPavF+GfA=" crossorigin="anonymous"></script><!--[if lt IE 9]>
 <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
 <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
 <![endif]--></head><body>
@@ -83,7 +83,7 @@ nor the class name (those are handled externally)."><meta property="og:image" co
 </nav><div class="container template-reference-topic">
 <div class="row">
   <main id="main" class="col-md-9"><div class="page-header">
-      <img src="../logo.png" class="logo" alt=""><h1>Layer/Model configuration</h1>
+      <img src="" class="logo" alt=""><h1>Layer/Model configuration</h1>
       <small class="dont-index">Source: <a href="https://github.com/rstudio/keras/blob/HEAD/R/layer-methods.R" class="external-link"><code>R/layer-methods.R</code></a></small>
       <div class="d-none name"><code>get_config.Rd</code></div>
     </div>
@@ -129,7 +129,7 @@ e.g., custom layers defined by <code><a href="new-classes.html">new_layer_class(
     <h2 id="note">Note<a class="anchor" aria-label="anchor" href="#note"></a></h2>
     <p>Objects returned from <code>get_config()</code> are not serializable. Therefore,
 if you want to save and restore a model across sessions, you can use the
-<code><a href="model_to_json.html">model_to_json()</a></code> function (for model configuration only, not weights) or
+<code>model_to_json()</code> function (for model configuration only, not weights) or
 the <code>save_model_tf()</code> function to save the model configuration and weights
 to the filesystem.</p>
     </div>

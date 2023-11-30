@@ -82,11 +82,9 @@ reference:
       - fit.keras.models.model.Model
       - predict.keras.models.model.Model
       - evaluate.keras.models.model.Model
-      - export_savedmodel.keras.models.model.Model
       - train_on_batch
       - get_layer
       - pop_layer
-      - serialize_model
       - clone_model
       - freeze_weights
 
@@ -179,14 +177,12 @@ reference:
     #title: "Serialization and Saving"
     contents:
       - has_concept("saving")
-      - serialize_model
       - get_weights
       - get_config
       - load_model_weights
-      - model_from_saved_model
-      - model_to_json
-      - save_keras_model
       - save_model_weights
+      - save_model
+      - save_model_config
 
   - title: "Datasets"
     contents:

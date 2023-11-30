@@ -2455,6 +2455,9 @@
     <loc>https://keras.posit.co/reference/load_keras_model.html</loc>
   </url>
   <url>
+    <loc>https://keras.posit.co/reference/load_model.html</loc>
+  </url>
+  <url>
     <loc>https://keras.posit.co/reference/load_model_weights.html</loc>
   </url>
   <url>
@@ -3415,6 +3418,9 @@
     <loc>https://keras.posit.co/reference/reexports.html</loc>
   </url>
   <url>
+    <loc>https://keras.posit.co/reference/register_custom_object.html</loc>
+  </url>
+  <url>
     <loc>https://keras.posit.co/reference/regularizer_l1.html</loc>
   </url>
   <url>
@@ -3431,6 +3437,12 @@
   </url>
   <url>
     <loc>https://keras.posit.co/reference/save_keras_model.html</loc>
+  </url>
+  <url>
+    <loc>https://keras.posit.co/reference/save_model.html</loc>
+  </url>
+  <url>
+    <loc>https://keras.posit.co/reference/save_model_config.html</loc>
   </url>
   <url>
     <loc>https://keras.posit.co/reference/save_model_hdf5.html</loc>

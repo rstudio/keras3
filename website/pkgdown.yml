@@ -67,6 +67,7 @@ articles:
   image_classification_with_vision_transformer: examples/image_classification_with_vision_transformer.html
   image_classifier: examples/image_classifier.html
   imbalanced_classification: examples/imbalanced_classification.html
+  index: examples/index.html
   integrated_gradients: examples/integrated_gradients.html
   intro_to_keras_for_engineers: guides/intro_to_keras_for_engineers.html
   intro_to_keras_for_engineers: intro_to_keras_for_engineers.html
@@ -154,7 +155,7 @@ articles:
   writing_your_own_callbacks: guides/writing_your_own_callbacks.html
   writing_your_own_callbacks: writing_your_own_callbacks.html
   zero_dce: examples/zero_dce.html
-last_built: 2023-11-30T18:40Z
+last_built: 2023-11-30T19:23Z
 urls:
   reference: https://keras.posit.co/reference
   article: https://keras.posit.co/articles
