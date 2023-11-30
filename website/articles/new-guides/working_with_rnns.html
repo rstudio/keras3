@@ -802,7 +802,7 @@ random data for demonstration.</p>
 <span class="va">target_data</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="va">target_1_data</span>, <span class="va">target_2_data</span><span class="op">)</span>
 
 <span class="va">model</span> <span class="op"><a href="../../reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://generics.r-lib.org/reference/fit.html" class="external-link">fit</a></span><span class="op">(</span><span class="va">input_data</span>, <span class="va">target_data</span>, batch_size<span class="op">=</span><span class="va">batch_size</span><span class="op">)</span></code></pre></div>
-<p>With <code><a href="../../reference/layer_rnn.html">keras::layer_rnn()</a></code>, you are only expected to define
+<p>With <code><a href="../../reference/layer_rnn.html">keras3::layer_rnn()</a></code>, you are only expected to define
 the math logic for an individual step within the sequence, and the
 <code><a href="../../reference/layer_rnn.html">layer_rnn()</a></code> will handle the sequence iteration for you.
 It’s an incredibly powerful way to quickly prototype new kinds of RNNs

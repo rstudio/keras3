@@ -1,16 +1,7 @@
-pandoc: 3.1.9
-pkgdown: 2.0.7
-pkgdown_sha: ~
+pandoc: 3.1.1
+pkgdown: 2.0.7.9000
+pkgdown_sha: 13d8d621105a3a527a05e46c6c805a6564c39791
 articles:
-  custom_train_step_in_jax: custom_train_step_in_jax.html
-  custom_train_step_in_tensorflow: custom_train_step_in_tensorflow.html
-  custom_train_step_in_torch: custom_train_step_in_torch.html
-  customizing_saving_and_serialization: customizing_saving_and_serialization.html
-  customizing_what_happens_in_fit: customizing_what_happens_in_fit.html
-  distributed_training: distributed_training.html
-  distributed_training_with_jax: distributed_training_with_jax.html
-  distributed_training_with_tensorflow: distributed_training_with_tensorflow.html
-  distributed_training_with_torch: distributed_training_with_torch.html
   actor_critic_cartpole: examples/actor_critic_cartpole.html
   addition_rnn: examples/addition_rnn.html
   antirectifier: examples/antirectifier.html
@@ -23,6 +14,16 @@ articles:
   collaborative_filtering_movielens: examples/collaborative_filtering_movielens.html
   conv_lstm: examples/conv_lstm.html
   convmixer: examples/convmixer.html
+  custom_train_step_in_jax: custom_train_step_in_jax.html
+  custom_train_step_in_jax: guides/custom_train_step_in_jax.html
+  custom_train_step_in_tensorflow: custom_train_step_in_tensorflow.html
+  custom_train_step_in_tensorflow: guides/custom_train_step_in_tensorflow.html
+  custom_train_step_in_torch: custom_train_step_in_torch.html
+  custom_train_step_in_torch: guides/custom_train_step_in_torch.html
+  customizing_saving_and_serialization: customizing_saving_and_serialization.html
+  customizing_saving_and_serialization: guides/customizing_saving_and_serialization.html
+  customizing_what_happens_in_fit: customizing_what_happens_in_fit.html
+  customizing_what_happens_in_fit: guides/customizing_what_happens_in_fit.html
   cutmix: examples/cutmix.html
   cyclegan: examples/cyclegan.html
   dcgan_overriding_train_step: examples/dcgan_overriding_train_step.html
@@ -41,11 +42,23 @@ articles:
   demo_mnist_convnet: examples/demo_mnist_convnet.html
   demo_subclass: examples/demo_subclass.html
   demo_torch_multi_gpu: examples/demo_torch_multi_gpu.html
+  distributed_training_with_jax: distributed_training_with_jax.html
+  distributed_training_with_jax: guides/distributed_training_with_jax.html
+  distributed_training_with_tensorflow: distributed_training_with_tensorflow.html
+  distributed_training_with_tensorflow: guides/distributed_training_with_tensorflow.html
+  distributed_training_with_torch: distributed_training_with_torch.html
+  distributed_training_with_torch: guides/distributed_training_with_torch.html
+  distributed_training: distributed_training.html
+  distributed_training: guides/distributed_training.html
   eanet: examples/eanet.html
   eeg_signal_classification: examples/eeg_signal_classification.html
   end_to_end_mlm_with_bert: examples/end_to_end_mlm_with_bert.html
   endpoint_layer_pattern: examples/endpoint_layer_pattern.html
   fixres: examples/fixres.html
+  functional_api: functional_api.html
+  functional_api: guides/functional_api.html
+  getting_started_with_keras_core: getting_started_with_keras_core.html
+  getting_started_with_keras_core: guides/getting_started_with_keras_core.html
   gpt2_text_generation_with_kerasnlp: examples/gpt2_text_generation_with_kerasnlp.html
   grad_cam: examples/grad_cam.html
   gradient_centralization: examples/gradient_centralization.html
@@ -55,6 +68,10 @@ articles:
   image_classifier: examples/image_classifier.html
   imbalanced_classification: examples/imbalanced_classification.html
   integrated_gradients: examples/integrated_gradients.html
+  intro_to_keras_for_engineers: guides/intro_to_keras_for_engineers.html
+  intro_to_keras_for_engineers: intro_to_keras_for_engineers.html
+  intro_to_keras_for_researchers: guides/intro_to_keras_for_researchers.html
+  intro_to_keras_for_researchers: intro_to_keras_for_researchers.html
   involution: examples/involution.html
   keypoint_detection: examples/keypoint_detection.html
   knowledge_distillation: examples/knowledge_distillation.html
@@ -62,6 +79,8 @@ articles:
   learnable_resizer: examples/learnable_resizer.html
   lstm_character_level_text_generation: examples/lstm_character_level_text_generation.html
   lstm_seq2seq: examples/lstm_seq2seq.html
+  making_new_layers_and_models_via_subclassing: guides/making_new_layers_and_models_via_subclassing.html
+  making_new_layers_and_models_via_subclassing: making_new_layers_and_models_via_subclassing.html
   metric_learning: examples/metric_learning.html
   mirnet: examples/mirnet.html
   mixup: examples/mixup.html
@@ -76,10 +95,16 @@ articles:
   oxford_pets_image_segmentation: examples/oxford_pets_image_segmentation.html
   perceiver_image_classification: examples/perceiver_image_classification.html
   pixelcnn: examples/pixelcnn.html
+  preprocessing_layers: guides/preprocessing_layers.html
+  preprocessing_layers: preprocessing_layers.html
   pretrained_word_embeddings: examples/pretrained_word_embeddings.html
   pretraining_BERT: examples/pretraining_BERT.html
   reptile: examples/reptile.html
   semisupervised_simclr: examples/semisupervised_simclr.html
+  sequential_model: guides/sequential_model.html
+  sequential_model: sequential_model.html
+  serialization_and_saving: guides/serialization_and_saving.html
+  serialization_and_saving: serialization_and_saving.html
   shiftvit: examples/shiftvit.html
   siamese_contrastive: examples/siamese_contrastive.html
   siamese_network: examples/siamese_network.html
@@ -105,56 +130,31 @@ articles:
   token_learner: examples/token_learner.html
   torchvision_keras: examples/torchvision_keras.html
   trainer_pattern: examples/trainer_pattern.html
+  training_with_built_in_methods: guides/training_with_built_in_methods.html
+  training_with_built_in_methods: training_with_built_in_methods.html
+  transfer_learning: guides/transfer_learning.html
+  transfer_learning: transfer_learning.html
   uk_ireland_accent_recognition: examples/uk_ireland_accent_recognition.html
+  understanding_masking_and_padding: guides/understanding_masking_and_padding.html
+  understanding_masking_and_padding: understanding_masking_and_padding.html
   vae: examples/vae.html
   video_transformers: examples/video_transformers.html
   visualizing_what_convnets_learn: examples/visualizing_what_convnets_learn.html
   wgan_gp: examples/wgan_gp.html
-  zero_dce: examples/zero_dce.html
-  functional_api: functional_api.html
-  getting_started_with_keras_core: getting_started_with_keras_core.html
-  custom_train_step_in_jax: guides/custom_train_step_in_jax.html
-  custom_train_step_in_tensorflow: guides/custom_train_step_in_tensorflow.html
-  custom_train_step_in_torch: guides/custom_train_step_in_torch.html
-  customizing_saving_and_serialization: guides/customizing_saving_and_serialization.html
-  customizing_what_happens_in_fit: guides/customizing_what_happens_in_fit.html
-  distributed_training: guides/distributed_training.html
-  distributed_training_with_jax: guides/distributed_training_with_jax.html
-  distributed_training_with_tensorflow: guides/distributed_training_with_tensorflow.html
-  distributed_training_with_torch: guides/distributed_training_with_torch.html
-  functional_api: guides/functional_api.html
-  getting_started_with_keras_core: guides/getting_started_with_keras_core.html
-  intro_to_keras_for_engineers: guides/intro_to_keras_for_engineers.html
-  intro_to_keras_for_researchers: guides/intro_to_keras_for_researchers.html
-  making_new_layers_and_models_via_subclassing: guides/making_new_layers_and_models_via_subclassing.html
-  preprocessing_layers: guides/preprocessing_layers.html
-  sequential_model: guides/sequential_model.html
-  serialization_and_saving: guides/serialization_and_saving.html
-  training_with_built_in_methods: guides/training_with_built_in_methods.html
-  transfer_learning: guides/transfer_learning.html
-  understanding_masking_and_padding: guides/understanding_masking_and_padding.html
   working_with_rnns: guides/working_with_rnns.html
-  writing_a_custom_training_loop_in_jax: guides/writing_a_custom_training_loop_in_jax.html
-  writing_a_custom_training_loop_in_tensorflow: guides/writing_a_custom_training_loop_in_tensorflow.html
-  writing_a_custom_training_loop_in_torch: guides/writing_a_custom_training_loop_in_torch.html
-  writing_a_training_loop_from_scratch: guides/writing_a_training_loop_from_scratch.html
-  writing_your_own_callbacks: guides/writing_your_own_callbacks.html
-  intro_to_keras_for_engineers: intro_to_keras_for_engineers.html
-  intro_to_keras_for_researchers: intro_to_keras_for_researchers.html
-  making_new_layers_and_models_via_subclassing: making_new_layers_and_models_via_subclassing.html
-  preprocessing_layers: preprocessing_layers.html
-  sequential_model: sequential_model.html
-  serialization_and_saving: serialization_and_saving.html
-  training_with_built_in_methods: training_with_built_in_methods.html
-  transfer_learning: transfer_learning.html
-  understanding_masking_and_padding: understanding_masking_and_padding.html
   working_with_rnns: working_with_rnns.html
+  writing_a_custom_training_loop_in_jax: guides/writing_a_custom_training_loop_in_jax.html
   writing_a_custom_training_loop_in_jax: writing_a_custom_training_loop_in_jax.html
+  writing_a_custom_training_loop_in_tensorflow: guides/writing_a_custom_training_loop_in_tensorflow.html
   writing_a_custom_training_loop_in_tensorflow: writing_a_custom_training_loop_in_tensorflow.html
+  writing_a_custom_training_loop_in_torch: guides/writing_a_custom_training_loop_in_torch.html
   writing_a_custom_training_loop_in_torch: writing_a_custom_training_loop_in_torch.html
+  writing_a_training_loop_from_scratch: guides/writing_a_training_loop_from_scratch.html
   writing_a_training_loop_from_scratch: writing_a_training_loop_from_scratch.html
+  writing_your_own_callbacks: guides/writing_your_own_callbacks.html
   writing_your_own_callbacks: writing_your_own_callbacks.html
-last_built: 2023-11-14T21:23Z
+  zero_dce: examples/zero_dce.html
+last_built: 2023-11-30T18:40Z
 urls:
   reference: https://keras.posit.co/reference
   article: https://keras.posit.co/articles

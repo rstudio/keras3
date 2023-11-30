@@ -4,21 +4,20 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Multi-GPU distributed training with TensorFlow • keras</title>
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="description" content="Guide to multi-GPU training for Keras models with TensorFlow.">
+<title>Multi-GPU distributed training with TensorFlow • keras3</title>
 <!-- favicons --><link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
 <link rel="icon" type="image/png" sizes="32x32" href="../favicon-32x32.png">
 <link rel="apple-touch-icon" type="image/png" sizes="180x180" href="../apple-touch-icon.png">
 <link rel="apple-touch-icon" type="image/png" sizes="120x120" href="../apple-touch-icon-120x120.png">
 <link rel="apple-touch-icon" type="image/png" sizes="76x76" href="../apple-touch-icon-76x76.png">
 <link rel="apple-touch-icon" type="image/png" sizes="60x60" href="../apple-touch-icon-60x60.png">
-<!-- jquery --><script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script><!-- Bootstrap --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/css/bootstrap.min.css" integrity="sha256-bZLfwXAP04zRMK2BjiO8iu9pf4FbLqX6zitd+tIvLhE=" crossorigin="anonymous">
-<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/js/bootstrap.min.js" integrity="sha256-nuL8/2cJ5NDSSwnKD8VqreErSWHtnEP9E7AySL+1ev4=" crossorigin="anonymous"></script><!-- bootstrap-toc --><link rel="stylesheet" href="../bootstrap-toc.css">
-<script src="../bootstrap-toc.js"></script><!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous">
+<script src="../deps/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<link href="../deps/bootstrap-5.3.1/bootstrap.min.css" rel="stylesheet">
+<script src="../deps/bootstrap-5.3.1/bootstrap.bundle.min.js"></script><!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/v4-shims.min.css" integrity="sha256-wZjR52fzng1pJHwx4aV2AO3yyTOXrcDW7jBpJtTwVxw=" crossorigin="anonymous">
-<!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><!-- headroom.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/headroom.min.js" integrity="sha256-AsUX4SJE1+yuDu5+mAVzJbuYNPHj/WroHuZ8Ir/CkE0=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script><!-- pkgdown --><link href="../pkgdown.css" rel="stylesheet">
-<script src="../pkgdown.js"></script><link href="../extra.css" rel="stylesheet">
-<script src="../extra.js"></script><meta property="og:title" content="Multi-GPU distributed training with TensorFlow">
+<!-- bootstrap-toc --><script src="https://cdn.jsdelivr.net/gh/afeld/bootstrap-toc@v1.0.1/dist/bootstrap-toc.min.js" integrity="sha256-4veVQbu7//Lk5TSmc7YV48MxtMy98e26cf5MrgZYnwo=" crossorigin="anonymous"></script><!-- headroom.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/headroom.min.js" integrity="sha256-AsUX4SJE1+yuDu5+mAVzJbuYNPHj/WroHuZ8Ir/CkE0=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script><!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><!-- search --><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- pkgdown --><script src="../pkgdown.js"></script><meta property="og:title" content="Multi-GPU distributed training with TensorFlow">
 <meta property="og:description" content="Guide to multi-GPU training for Keras models with TensorFlow.">
 <meta property="og:image" content="https://keras.posit.co/logo.png">
 <!-- mathjax --><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js" integrity="sha256-nvJJv9wWKEm88qvoQl9ekL2J+k/RWIsaSScxxlsrv8k=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/config/TeX-AMS-MML_HTMLorMML.js" integrity="sha256-84DKXVJXs0/F8OTMzX4UR909+jtl4G7SPypPavF+GfA=" crossorigin="anonymous"></script><!--[if lt IE 9]>
@@ -26,194 +25,96 @@
 <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
 <![endif]-->
 </head>
-<body data-spy="scroll" data-target="#toc">
+<body>
+    <a href="#main" class="visually-hidden-focusable">Skip to contents</a>
     
 
-    <div class="container template-article">
-      <header><div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
-  <div class="container">
-    <div class="navbar-header">
-      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false">
-        <span class="sr-only">Toggle navigation</span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-      </button>
-      <span class="navbar-brand">
-        <a class="navbar-link" href="../index.html">keras</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">2.13.0.9000</span>
-      </span>
-    </div>
+    <nav class="navbar fixed-top navbar-inverse navbar-expand-lg bg-primary"><div class="container">
+    
+    <a class="navbar-brand me-2" href="../index.html">keras3</a>
 
-    <div id="navbar" class="navbar-collapse collapse">
-      <ul class="nav navbar-nav">
-<li>
-  <a href="../index.html">Home</a>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">2.13.0.9000</small>
+
+    
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div id="navbar" class="collapse navbar-collapse ms-3">
+      <ul class="navbar-nav me-auto">
+<li class="nav-item">
+  <a class="nav-link" href="../index.html">Home</a>
 </li>
-<li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-    Tutorials
-     
-    <span class="caret"></span>
-  </a>
-  <ul class="dropdown-menu" role="menu">
-<li>
-      <a href="../articles/getting_started.html">Getting Started</a>
-    </li>
-    <li>
-      <a href="../articles/tutorial_basic_classification.html">Basic Classification</a>
-    </li>
-    <li>
-      <a href="../articles/tutorial_basic_text_classification.html">Text Classification</a>
-    </li>
-    <li>
-      <a href="../articles/tutorial_basic_regression.html">Basic Regression</a>
-    </li>
-    <li>
-      <a href="../articles/tutorial_overfit_underfit.html">Overfitting and Underfitting</a>
-    </li>
-    <li>
-      <a href="../articles/tutorial_save_and_restore.html">Save and Restore Models</a>
-    </li>
-  </ul>
-</li>
-<li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-    Guides
-     
-    <span class="caret"></span>
-  </a>
-  <ul class="dropdown-menu" role="menu">
-<li>
-      <a href="../articles/writing_your_own_callbacks.html">Writing Your Own Callbacks</a>
-    </li>
-  </ul>
-</li>
-<li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-    Articles
-     
-    <span class="caret"></span>
-  </a>
-  <ul class="dropdown-menu" role="menu">
-<li class="dropdown-header">Guides (New for TF 2.6)</li>
-    <li>
-      <a href="../articles/new-guides/python_subclasses.html">Python Subclasses</a>
-    </li>
-    <li>
-      <a href="../articles/new-guides/making_new_layers_and_models_via_subclassing.html">Making New Layers and Models via Subclassing</a>
-    </li>
-    <li>
-      <a href="../articles/new-guides/customizing_what_happens_in_fit.html">Customizing What Happens in Fit</a>
-    </li>
-    <li>
-      <a href="../articles/new-guides/writing_your_own_callbacks.html">Writing Your Own Callbacks</a>
-    </li>
-    <li>
-      <a href="../articles/new-guides/preprocessing_layers.html">Working with Preprocessing Layers</a>
-    </li>
-    <li>
-      <a href="../argicles/new-guides/working_with_rnns.html">Working with RNNs</a>
-    </li>
-    <li class="divider">
-    </li>
-<li class="dropdown-header">Using Keras</li>
-    <li>
-      <a href="../articles/guide_keras.html">Guide to Keras Basics</a>
-    </li>
-    <li>
-      <a href="../articles/sequential_model.html">Sequential Model in Depth</a>
-    </li>
-    <li>
-      <a href="../articles/functional_api.html">Functional API in Depth</a>
-    </li>
-    <li>
-      <a href="../articles/about_keras_models.html">About Keras Models</a>
-    </li>
-    <li>
-      <a href="../articles/about_keras_layers.html">About Keras Layers</a>
-    </li>
-    <li>
-      <a href="../articles/training_visualization.html">Training Visualization</a>
-    </li>
-    <li>
-      <a href="../articles/applications.html">Pre-Trained Models</a>
-    </li>
-    <li>
-      <a href="../articles/faq.html">Frequently Asked Questions</a>
-    </li>
-    <li>
-      <a href="../articles/why_use_keras.html">Why Use Keras?</a>
-    </li>
-    <li class="divider">
-    </li>
-<li class="dropdown-header">Advanced</li>
-    <li>
-      <a href="../articles/eager_guide.html">Eager Execution</a>
-    </li>
-    <li>
-      <a href="../articles/training_callbacks.html">Training Callbacks</a>
-    </li>
-    <li>
-      <a href="../articles/backend.html">Keras Backend</a>
-    </li>
-    <li>
-      <a href="../articles/custom_layers.html">Custom Layers</a>
-    </li>
-    <li>
-      <a href="../articles/custom_models.html">Custom Models</a>
-    </li>
-    <li>
-      <a href="../articles/saving_serializing.html">Saving and serializing</a>
-    </li>
-  </ul>
-</li>
-<li>
-  <a href="../articles/learn.html">Learn</a>
-</li>
-<li>
-  <a href="../articles/tools.html">Tools</a>
-</li>
-<li>
-  <a href="../articles/examples/index.html">Examples</a>
-</li>
-<li>
-  <a href="../reference/index.html">Reference</a>
-</li>
-<li>
-  <a href="../news/index.html">News</a>
-</li>
-      </ul>
-<ul class="nav navbar-nav navbar-right">
-<li>
-  <a href="https://github.com/rstudio/keras/" class="external-link">
-    <span class="fab fa-github fa-lg"></span>
-     
-  </a>
-</li>
-      </ul>
-</div>
-<!--/.nav-collapse -->
+<li class="nav-item dropdown">
+  <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true" id="dropdown-getting-started">Getting Started</a>
+  <div class="dropdown-menu" aria-labelledby="dropdown-getting-started">
+    <a class="dropdown-item" href="../articles/intro_to_keras_for_engineers.html">Introduction to Keras for engineers</a>
+    <h6 class="dropdown-header" data-toc-skip>Tutorials</h6>
+    <a class="dropdown-item" href="../articles/getting_started.html">Getting Started</a>
+    <a class="dropdown-item" href="../articles/tutorial_basic_classification.html">Basic Classification</a>
+    <a class="dropdown-item" href="../articles/tutorial_basic_text_classification.html">Text Classification</a>
+    <a class="dropdown-item" href="../articles/tutorial_basic_regression.html">Basic Regression</a>
+    <a class="dropdown-item" href="../articles/tutorial_overfit_underfit.html">Overfitting and Underfitting</a>
+    <a class="dropdown-item" href="../articles/tutorial_save_and_restore.html">Save and Restore Models</a>
   </div>
-<!--/.container -->
+</li>
+<li class="active nav-item dropdown">
+  <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true" id="dropdown-guides">Guides</a>
+  <div class="dropdown-menu" aria-labelledby="dropdown-guides">
+    <h6 class="dropdown-header" data-toc-skip>Model definition</h6>
+    <a class="dropdown-item" href="../articles/functional_api.html">Functional API</a>
+    <a class="dropdown-item" href="../articles/sequential_model.html">Sequential Model</a>
+    <h6 class="dropdown-header" data-toc-skip>Extending and customizing</h6>
+    <a class="dropdown-item" href="../articles/making_new_layers_and_models_via_subclassing.html">Making new layers and models via subclassing</a>
+    <a class="dropdown-item" href="../articles/training_with_built_in_methods.html">Training &amp; evaluation with the built-in methods</a>
+    <a class="dropdown-item" href="../articles/writing_a_custom_training_loop_in_tensorflow.html">Writing a training loop from scratch in TensorFlow</a>
+    <a class="dropdown-item" href="../articles/writing_your_own_callbacks.html">Writing Your Own Callbacks</a>
+    <h6 class="dropdown-header" data-toc-skip>Other topics</h6>
+    <a class="dropdown-item" href="../articles/transfer_learning.html">Transfer learning and fine tuning</a>
+    <a class="dropdown-item" href="../articles/distributed_training_with_tensorflow.html">Distributed training with TensorFlow</a>
+  </div>
+</li>
+<li class="nav-item">
+  <a class="nav-link" href="../articles/examples/index.html">Examples</a>
+</li>
+<li class="nav-item">
+  <a class="nav-link" href="../reference/index.html">Reference</a>
+</li>
+<li class="nav-item">
+  <a class="nav-link" href="../news/index.html">News</a>
+</li>
+      </ul>
+<form class="form-inline my-2 my-lg-0" role="search">
+        <input type="search" class="form-control me-sm-2" aria-label="Toggle navigation" name="search-input" data-search-index="../search.json" id="search-input" placeholder="Search for" autocomplete="off">
+</form>
+
+      <ul class="navbar-nav">
+<li class="nav-item">
+  <a class="external-link nav-link" href="https://github.com/rstudio/keras/" aria-label="github">
+    <span class="fab fa fab fa-github fa-lg"></span>
+     
+  </a>
+</li>
+      </ul>
 </div>
-<!--/.navbar -->
 
-      
+    
+  </div>
+</nav><div class="container template-article">
 
-      </header><div class="row">
-  <div class="col-md-9 contents">
-    <div class="page-header toc-ignore">
-      <h1 data-toc-skip>Multi-GPU distributed training with
-TensorFlow</h1>
+
+
+
+<div class="row">
+  <main id="main" class="col-md-9"><div class="page-header">
+      <img src="../logo.png" class="logo" alt=""><h1>Multi-GPU distributed training with TensorFlow</h1>
                         <h4 data-toc-skip class="author"><a href="https://twitter.com/fchollet" class="external-link">fchollet</a></h4>
             
-            <h4 data-toc-skip class="date">Last Modified: 2023-11-10;
-Last Rendered: 2023-11-10</h4>
+            <h4 data-toc-skip class="date">Last Modified: 2023-11-21;
+Last Rendered: 2023-11-29</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/rstudio/keras/blob/HEAD/vignettes/distributed_training_with_tensorflow.Rmd" class="external-link"><code>vignettes/distributed_training_with_tensorflow.Rmd</code></a></small>
-      <div class="hidden name"><code>distributed_training_with_tensorflow.Rmd</code></div>
-
+      <div class="d-none name"><code>distributed_training_with_tensorflow.Rmd</code></div>
     </div>
 
     
@@ -248,12 +149,21 @@ workflows.</p>
 <div class="section level2">
 <h2 id="setup">Setup<a class="anchor" aria-label="anchor" href="#setup"></a>
 </h2>
-<div class="sourceCode" id="cb1"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" tabindex="-1"></a><span class="im">import</span> os</span>
-<span id="cb1-2"><a href="#cb1-2" tabindex="-1"></a></span>
-<span id="cb1-3"><a href="#cb1-3" tabindex="-1"></a>os.environ[<span class="st">"KERAS_BACKEND"</span>] <span class="op">=</span> <span class="st">"tensorflow"</span></span>
-<span id="cb1-4"><a href="#cb1-4" tabindex="-1"></a></span>
-<span id="cb1-5"><a href="#cb1-5" tabindex="-1"></a><span class="im">import</span> tensorflow <span class="im">as</span> tf</span>
-<span id="cb1-6"><a href="#cb1-6" tabindex="-1"></a><span class="im">import</span> keras</span></code></pre></div>
+<div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://tensorflow.rstudio.com/" class="external-link">keras3</a></span><span class="op">)</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/rstudio/tensorflow" class="external-link">tensorflow</a></span><span class="op">)</span></span></code></pre></div>
+<pre><code><span><span class="co">##</span></span>
+<span><span class="co">## Attaching package: 'tensorflow'</span></span></code></pre>
+<pre><code><span><span class="co">## The following objects are masked from 'package:keras3':</span></span>
+<span><span class="co">##</span></span>
+<span><span class="co">##     set_random_seed, shape</span></span></code></pre>
+<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/rstudio/tfdatasets" class="external-link">tfdatasets</a></span><span class="op">)</span></span></code></pre></div>
+<pre><code><span><span class="co">##</span></span>
+<span><span class="co">## Attaching package: 'tfdatasets'</span></span></code></pre>
+<pre><code><span><span class="co">## The following object is masked from 'package:keras3':</span></span>
+<span><span class="co">##</span></span>
+<span><span class="co">##     shape</span></span></code></pre>
 </div>
 <div class="section level2">
 <h2 id="single-host-multi-device-synchronous-training">Single-host, multi-device synchronous training<a class="anchor" aria-label="anchor" href="#single-host-multi-device-synchronous-training"></a>
@@ -282,7 +192,7 @@ variable. This is done through a <strong>mirrored variable</strong>
 object.</p>
 <p><strong>How to use it</strong></p>
 <p>To do single-host, multi-device synchronous training with a Keras
-model, you would use the <a href="https://www.tensorflow.org/api_docs/python/tf/distribute/MirroredStrategy" class="external-link"><code>tf.distribute.MirroredStrategy</code>
+model, you would use the <a href="https://www.tensorflow.org/api_docs/python/tf/distribute/MirroredStrategy" class="external-link"><code>tf$distribute$MirroredStrategy</code>
 API</a>. Here’s how it works:</p>
 <ul>
 <li>Instantiate a <code>MirroredStrategy</code>, optionally configuring
@@ -299,81 +209,96 @@ your <code><a href="https://generics.r-lib.org/reference/fit.html" class="extern
 <p>Importantly, we recommend that you use <code>tf.data.Dataset</code>
 objects to load data in a multi-device or distributed workflow.</p>
 <p>Schematically, it looks like this:</p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" tabindex="-1"></a><span class="co"># Create a MirroredStrategy.</span></span>
-<span id="cb2-2"><a href="#cb2-2" tabindex="-1"></a>strategy <span class="op">=</span> tf.distribute.MirroredStrategy()</span>
-<span id="cb2-3"><a href="#cb2-3" tabindex="-1"></a><span class="bu">print</span>(<span class="st">'Number of devices: </span><span class="sc">{}</span><span class="st">'</span>.<span class="bu">format</span>(strategy.num_replicas_in_sync))</span>
-<span id="cb2-4"><a href="#cb2-4" tabindex="-1"></a></span>
-<span id="cb2-5"><a href="#cb2-5" tabindex="-1"></a><span class="co"># Open a strategy scope.</span></span>
-<span id="cb2-6"><a href="#cb2-6" tabindex="-1"></a><span class="cf">with</span> strategy.scope():</span>
-<span id="cb2-7"><a href="#cb2-7" tabindex="-1"></a>    <span class="co"># Everything that creates variables should be under the strategy scope.</span></span>
-<span id="cb2-8"><a href="#cb2-8" tabindex="-1"></a>    <span class="co"># In general this is only model construction &amp; `compile()`.</span></span>
-<span id="cb2-9"><a href="#cb2-9" tabindex="-1"></a>    model <span class="op">=</span> Model(...)</span>
-<span id="cb2-10"><a href="#cb2-10" tabindex="-1"></a>    model.<span class="bu">compile</span>(...)</span>
-<span id="cb2-11"><a href="#cb2-11" tabindex="-1"></a></span>
-<span id="cb2-12"><a href="#cb2-12" tabindex="-1"></a>    <span class="co"># Train the model on all available devices.</span></span>
-<span id="cb2-13"><a href="#cb2-13" tabindex="-1"></a>    model.fit(train_dataset, validation_data<span class="op">=</span>val_dataset, ...)</span>
-<span id="cb2-14"><a href="#cb2-14" tabindex="-1"></a></span>
-<span id="cb2-15"><a href="#cb2-15" tabindex="-1"></a>    <span class="co"># Test the model on all available devices.</span></span>
-<span id="cb2-16"><a href="#cb2-16" tabindex="-1"></a>    model.evaluate(test_dataset)</span></code></pre></div>
+<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># Create a MirroredStrategy.</span></span>
+<span><span class="va">strategy</span> <span class="op">&lt;-</span> <span class="va">tf</span><span class="op">$</span><span class="va">distribute</span><span class="op">$</span><span class="fu">MirroredStrategy</span><span class="op">(</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/cat.html" class="external-link">cat</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/sprintf.html" class="external-link">sprintf</a></span><span class="op">(</span><span class="st">'Number of devices: %d'</span>, <span class="va">strategy</span><span class="op">$</span><span class="va">num_replicas_in_sync</span><span class="op">)</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Open a strategy scope.</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/with.html" class="external-link">with</a></span><span class="op">(</span><span class="va">startegy</span><span class="op">$</span><span class="fu">scope</span><span class="op">(</span><span class="op">)</span>, <span class="op">{</span></span>
+<span>  <span class="co"># Everything that creates variables should be under the strategy scope.</span></span>
+<span>  <span class="co"># In general this is only model construction &amp; `compile()`.</span></span>
+<span>  <span class="va">model</span> <span class="op">&lt;-</span> <span class="fu">Model</span><span class="op">(</span><span class="va">...</span><span class="op">)</span></span>
+<span>  <span class="va">model</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://generics.r-lib.org/reference/compile.html" class="external-link">compile</a></span><span class="op">(</span><span class="va">...</span><span class="op">)</span></span>
+<span></span>
+<span>  <span class="co"># Train the model on all available devices.</span></span>
+<span>  <span class="va">model</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://generics.r-lib.org/reference/fit.html" class="external-link">fit</a></span><span class="op">(</span><span class="va">train_dataset</span>, validation_data<span class="op">=</span><span class="va">val_dataset</span>, <span class="va">...</span><span class="op">)</span></span>
+<span></span>
+<span>  <span class="co"># Test the model on all available devices.</span></span>
+<span>  <span class="va">model</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://rdrr.io/pkg/tensorflow/man/evaluate.html" class="external-link">evaluate</a></span><span class="op">(</span><span class="va">test_dataset</span><span class="op">)</span></span>
+<span><span class="op">}</span><span class="op">)</span></span></code></pre></div>
 <p>Here’s a simple end-to-end runnable example:</p>
-<div class="sourceCode" id="cb3"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" tabindex="-1"></a><span class="kw">def</span> get_compiled_model():</span>
-<span id="cb3-2"><a href="#cb3-2" tabindex="-1"></a>    <span class="co"># Make a simple 2-layer densely-connected neural network.</span></span>
-<span id="cb3-3"><a href="#cb3-3" tabindex="-1"></a>    inputs <span class="op">=</span> keras.Input(shape<span class="op">=</span>(<span class="dv">784</span>,))</span>
-<span id="cb3-4"><a href="#cb3-4" tabindex="-1"></a>    x <span class="op">=</span> keras.layers.Dense(<span class="dv">256</span>, activation<span class="op">=</span><span class="st">"relu"</span>)(inputs)</span>
-<span id="cb3-5"><a href="#cb3-5" tabindex="-1"></a>    x <span class="op">=</span> keras.layers.Dense(<span class="dv">256</span>, activation<span class="op">=</span><span class="st">"relu"</span>)(x)</span>
-<span id="cb3-6"><a href="#cb3-6" tabindex="-1"></a>    outputs <span class="op">=</span> keras.layers.Dense(<span class="dv">10</span>)(x)</span>
-<span id="cb3-7"><a href="#cb3-7" tabindex="-1"></a>    model <span class="op">=</span> keras.Model(inputs, outputs)</span>
-<span id="cb3-8"><a href="#cb3-8" tabindex="-1"></a>    model.<span class="bu">compile</span>(</span>
-<span id="cb3-9"><a href="#cb3-9" tabindex="-1"></a>        optimizer<span class="op">=</span>keras.optimizers.Adam(),</span>
-<span id="cb3-10"><a href="#cb3-10" tabindex="-1"></a>        loss<span class="op">=</span>keras.losses.SparseCategoricalCrossentropy(from_logits<span class="op">=</span><span class="va">True</span>),</span>
-<span id="cb3-11"><a href="#cb3-11" tabindex="-1"></a>        metrics<span class="op">=</span>[keras.metrics.SparseCategoricalAccuracy()],</span>
-<span id="cb3-12"><a href="#cb3-12" tabindex="-1"></a>    )</span>
-<span id="cb3-13"><a href="#cb3-13" tabindex="-1"></a>    <span class="cf">return</span> model</span>
-<span id="cb3-14"><a href="#cb3-14" tabindex="-1"></a></span>
-<span id="cb3-15"><a href="#cb3-15" tabindex="-1"></a></span>
-<span id="cb3-16"><a href="#cb3-16" tabindex="-1"></a><span class="kw">def</span> get_dataset():</span>
-<span id="cb3-17"><a href="#cb3-17" tabindex="-1"></a>    batch_size <span class="op">=</span> <span class="dv">32</span></span>
-<span id="cb3-18"><a href="#cb3-18" tabindex="-1"></a>    num_val_samples <span class="op">=</span> <span class="dv">10000</span></span>
-<span id="cb3-19"><a href="#cb3-19" tabindex="-1"></a></span>
-<span id="cb3-20"><a href="#cb3-20" tabindex="-1"></a>    <span class="co"># Return the MNIST dataset in the form of a `tf.data.Dataset`.</span></span>
-<span id="cb3-21"><a href="#cb3-21" tabindex="-1"></a>    (x_train, y_train), (x_test, y_test) <span class="op">=</span> keras.datasets.mnist.load_data()</span>
-<span id="cb3-22"><a href="#cb3-22" tabindex="-1"></a></span>
-<span id="cb3-23"><a href="#cb3-23" tabindex="-1"></a>    <span class="co"># Preprocess the data (these are Numpy arrays)</span></span>
-<span id="cb3-24"><a href="#cb3-24" tabindex="-1"></a>    x_train <span class="op">=</span> x_train.reshape(<span class="op">-</span><span class="dv">1</span>, <span class="dv">784</span>).astype(<span class="st">"float32"</span>) <span class="op">/</span> <span class="dv">255</span></span>
-<span id="cb3-25"><a href="#cb3-25" tabindex="-1"></a>    x_test <span class="op">=</span> x_test.reshape(<span class="op">-</span><span class="dv">1</span>, <span class="dv">784</span>).astype(<span class="st">"float32"</span>) <span class="op">/</span> <span class="dv">255</span></span>
-<span id="cb3-26"><a href="#cb3-26" tabindex="-1"></a>    y_train <span class="op">=</span> y_train.astype(<span class="st">"float32"</span>)</span>
-<span id="cb3-27"><a href="#cb3-27" tabindex="-1"></a>    y_test <span class="op">=</span> y_test.astype(<span class="st">"float32"</span>)</span>
-<span id="cb3-28"><a href="#cb3-28" tabindex="-1"></a></span>
-<span id="cb3-29"><a href="#cb3-29" tabindex="-1"></a>    <span class="co"># Reserve num_val_samples samples for validation</span></span>
-<span id="cb3-30"><a href="#cb3-30" tabindex="-1"></a>    x_val <span class="op">=</span> x_train[<span class="op">-</span>num_val_samples:]</span>
-<span id="cb3-31"><a href="#cb3-31" tabindex="-1"></a>    y_val <span class="op">=</span> y_train[<span class="op">-</span>num_val_samples:]</span>
-<span id="cb3-32"><a href="#cb3-32" tabindex="-1"></a>    x_train <span class="op">=</span> x_train[:<span class="op">-</span>num_val_samples]</span>
-<span id="cb3-33"><a href="#cb3-33" tabindex="-1"></a>    y_train <span class="op">=</span> y_train[:<span class="op">-</span>num_val_samples]</span>
-<span id="cb3-34"><a href="#cb3-34" tabindex="-1"></a>    <span class="cf">return</span> (</span>
-<span id="cb3-35"><a href="#cb3-35" tabindex="-1"></a>        tf.data.Dataset.from_tensor_slices((x_train, y_train)).batch(</span>
-<span id="cb3-36"><a href="#cb3-36" tabindex="-1"></a>            batch_size</span>
-<span id="cb3-37"><a href="#cb3-37" tabindex="-1"></a>        ),</span>
-<span id="cb3-38"><a href="#cb3-38" tabindex="-1"></a>        tf.data.Dataset.from_tensor_slices((x_val, y_val)).batch(batch_size),</span>
-<span id="cb3-39"><a href="#cb3-39" tabindex="-1"></a>        tf.data.Dataset.from_tensor_slices((x_test, y_test)).batch(batch_size),</span>
-<span id="cb3-40"><a href="#cb3-40" tabindex="-1"></a>    )</span>
-<span id="cb3-41"><a href="#cb3-41" tabindex="-1"></a></span>
-<span id="cb3-42"><a href="#cb3-42" tabindex="-1"></a></span>
-<span id="cb3-43"><a href="#cb3-43" tabindex="-1"></a><span class="co"># Create a MirroredStrategy.</span></span>
-<span id="cb3-44"><a href="#cb3-44" tabindex="-1"></a>strategy <span class="op">=</span> tf.distribute.MirroredStrategy()</span>
-<span id="cb3-45"><a href="#cb3-45" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Number of devices: </span><span class="sc">{}</span><span class="st">"</span>.<span class="bu">format</span>(strategy.num_replicas_in_sync))</span>
-<span id="cb3-46"><a href="#cb3-46" tabindex="-1"></a></span>
-<span id="cb3-47"><a href="#cb3-47" tabindex="-1"></a><span class="co"># Open a strategy scope.</span></span>
-<span id="cb3-48"><a href="#cb3-48" tabindex="-1"></a><span class="cf">with</span> strategy.scope():</span>
-<span id="cb3-49"><a href="#cb3-49" tabindex="-1"></a>    <span class="co"># Everything that creates variables should be under the strategy scope.</span></span>
-<span id="cb3-50"><a href="#cb3-50" tabindex="-1"></a>    <span class="co"># In general this is only model construction &amp; `compile()`.</span></span>
-<span id="cb3-51"><a href="#cb3-51" tabindex="-1"></a>    model <span class="op">=</span> get_compiled_model()</span>
-<span id="cb3-52"><a href="#cb3-52" tabindex="-1"></a></span>
-<span id="cb3-53"><a href="#cb3-53" tabindex="-1"></a>    <span class="co"># Train the model on all available devices.</span></span>
-<span id="cb3-54"><a href="#cb3-54" tabindex="-1"></a>    train_dataset, val_dataset, test_dataset <span class="op">=</span> get_dataset()</span>
-<span id="cb3-55"><a href="#cb3-55" tabindex="-1"></a>    model.fit(train_dataset, epochs<span class="op">=</span><span class="dv">2</span>, validation_data<span class="op">=</span>val_dataset)</span>
-<span id="cb3-56"><a href="#cb3-56" tabindex="-1"></a></span>
-<span id="cb3-57"><a href="#cb3-57" tabindex="-1"></a>    <span class="co"># Test the model on all available devices.</span></span>
-<span id="cb3-58"><a href="#cb3-58" tabindex="-1"></a>    model.evaluate(test_dataset)</span></code></pre></div>
+<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">get_compiled_model</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="op">)</span> <span class="op">{</span></span>
+<span>  <span class="va">inputs</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/layer_input.html">layer_input</a></span><span class="op">(</span>shape <span class="op">=</span> <span class="fl">784</span><span class="op">)</span></span>
+<span>  <span class="va">outputs</span> <span class="op">&lt;-</span> <span class="va">inputs</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span></span>
+<span>    <span class="fu"><a href="../reference/layer_dense.html">layer_dense</a></span><span class="op">(</span>units <span class="op">=</span> <span class="fl">256</span>, activation <span class="op">=</span> <span class="st">"relu"</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span></span>
+<span>    <span class="fu"><a href="../reference/layer_dense.html">layer_dense</a></span><span class="op">(</span>units <span class="op">=</span> <span class="fl">256</span>, activation <span class="op">=</span> <span class="st">"relu"</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span></span>
+<span>    <span class="fu"><a href="../reference/layer_dense.html">layer_dense</a></span><span class="op">(</span>units <span class="op">=</span> <span class="fl">10</span><span class="op">)</span></span>
+<span>  <span class="va">model</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/keras_model.html">keras_model</a></span><span class="op">(</span><span class="va">inputs</span>, <span class="va">outputs</span><span class="op">)</span></span>
+<span>  <span class="va">model</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://generics.r-lib.org/reference/compile.html" class="external-link">compile</a></span><span class="op">(</span></span>
+<span>    optimizer <span class="op">=</span> <span class="fu"><a href="../reference/optimizer_adam.html">optimizer_adam</a></span><span class="op">(</span><span class="op">)</span>,</span>
+<span>    loss <span class="op">=</span> <span class="fu"><a href="../reference/loss_sparse_categorical_crossentropy.html">loss_sparse_categorical_crossentropy</a></span><span class="op">(</span>from_logits<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span>,</span>
+<span>    metrics<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="fu"><a href="../reference/metric_sparse_categorical_accuracy.html">metric_sparse_categorical_accuracy</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span></span>
+<span>  <span class="op">)</span></span>
+<span>  <span class="va">model</span></span>
+<span><span class="op">}</span></span>
+<span></span>
+<span><span class="va">get_dataset</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="op">)</span> <span class="op">{</span></span>
+<span>  <span class="va">batch_size</span> <span class="op">&lt;-</span> <span class="fl">64</span></span>
+<span>  <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="va">x_train</span>, <span class="va">y_train</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="va">x_test</span>, <span class="va">y_test</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="../reference/multi-assign.html">%&lt;-%</a></span> <span class="fu"><a href="../reference/dataset_mnist.html">dataset_mnist</a></span><span class="op">(</span><span class="op">)</span></span>
+<span>  <span class="va">x_train</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rstudio.github.io/reticulate/reference/array_reshape.html" class="external-link">array_reshape</a></span><span class="op">(</span><span class="va">x_train</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="op">-</span><span class="fl">1</span>, <span class="fl">784</span><span class="op">)</span><span class="op">)</span></span>
+<span>  <span class="va">x_test</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rstudio.github.io/reticulate/reference/array_reshape.html" class="external-link">array_reshape</a></span><span class="op">(</span><span class="va">x_test</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="op">-</span><span class="fl">1</span>, <span class="fl">784</span><span class="op">)</span><span class="op">)</span></span>
+<span></span>
+<span>  <span class="co"># Reserve 10,000 samples for validation.</span></span>
+<span>  <span class="va">x_val</span> <span class="op">&lt;-</span> <span class="va">x_train</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">10000</span>,<span class="op">]</span></span>
+<span>  <span class="va">y_val</span> <span class="op">&lt;-</span> <span class="va">y_train</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">10000</span><span class="op">]</span></span>
+<span>  <span class="va">x_train</span> <span class="op">=</span> <span class="va">x_train</span><span class="op">[</span><span class="op">-</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fl">10000</span><span class="op">)</span>,<span class="op">]</span></span>
+<span>  <span class="va">y_train</span> <span class="op">=</span> <span class="va">y_train</span><span class="op">[</span><span class="op">-</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fl">10000</span><span class="op">)</span><span class="op">]</span></span>
+<span></span>
+<span>  <span class="co"># Prepare the training dataset.</span></span>
+<span>  <span class="va">train_dataset</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="va">x_train</span>, <span class="va">y_train</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span></span>
+<span>    <span class="fu"><a href="https://rdrr.io/pkg/tfdatasets/man/tensor_slices_dataset.html" class="external-link">tensor_slices_dataset</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span></span>
+<span>    <span class="fu"><a href="https://rdrr.io/pkg/tfdatasets/man/dataset_batch.html" class="external-link">dataset_batch</a></span><span class="op">(</span><span class="va">batch_size</span><span class="op">)</span></span>
+<span></span>
+<span>  <span class="co"># Prepare the validation dataset.</span></span>
+<span>  <span class="va">val_dataset</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="va">x_val</span>, <span class="va">y_val</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span></span>
+<span>    <span class="fu"><a href="https://rdrr.io/pkg/tfdatasets/man/tensor_slices_dataset.html" class="external-link">tensor_slices_dataset</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span></span>
+<span>    <span class="fu"><a href="https://rdrr.io/pkg/tfdatasets/man/dataset_batch.html" class="external-link">dataset_batch</a></span><span class="op">(</span><span class="va">batch_size</span><span class="op">)</span></span>
+<span></span>
+<span>  <span class="co"># Prepare the test dataset.</span></span>
+<span>  <span class="va">test_dataset</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="va">x_test</span>, <span class="va">y_test</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span></span>
+<span>    <span class="fu"><a href="https://rdrr.io/pkg/tfdatasets/man/tensor_slices_dataset.html" class="external-link">tensor_slices_dataset</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span></span>
+<span>    <span class="fu"><a href="https://rdrr.io/pkg/tfdatasets/man/dataset_batch.html" class="external-link">dataset_batch</a></span><span class="op">(</span><span class="va">batch_size</span><span class="op">)</span></span>
+<span></span>
+<span>  <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="va">train_dataset</span>, <span class="va">val_dataset</span>, <span class="va">test_dataset</span><span class="op">)</span></span>
+<span><span class="op">}</span></span>
+<span></span>
+<span><span class="co"># Create a MirroredStrategy.</span></span>
+<span><span class="va">strategy</span> <span class="op">&lt;-</span> <span class="va">tf</span><span class="op">$</span><span class="va">distribute</span><span class="op">$</span><span class="fu">MirroredStrategy</span><span class="op">(</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/cat.html" class="external-link">cat</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/sprintf.html" class="external-link">sprintf</a></span><span class="op">(</span><span class="st">'Number of devices: %d'</span>, <span class="va">strategy</span><span class="op">$</span><span class="va">num_replicas_in_sync</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
+<pre><code><span><span class="co">## Number of devices: 1</span></span></code></pre>
+<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># Open a strategy scope.</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/with.html" class="external-link">with</a></span><span class="op">(</span><span class="va">strategy</span><span class="op">$</span><span class="fu">scope</span><span class="op">(</span><span class="op">)</span>, <span class="op">{</span></span>
+<span>  <span class="co"># Everything that creates variables should be under the strategy scope.</span></span>
+<span>  <span class="co"># In general this is only model construction &amp; `compile()`.</span></span>
+<span>  <span class="va">model</span> <span class="op">&lt;-</span> <span class="fu">get_compiled_model</span><span class="op">(</span><span class="op">)</span></span>
+<span></span>
+<span>  <span class="co"># Train the model on all available devices.</span></span>
+<span>  <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="va">train_dataset</span>, <span class="va">val_dataset</span>, <span class="va">test_dataset</span><span class="op">)</span> <span class="op"><a href="../reference/multi-assign.html">%&lt;-%</a></span> <span class="fu">get_dataset</span><span class="op">(</span><span class="op">)</span></span>
+<span>  <span class="va">model</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://generics.r-lib.org/reference/fit.html" class="external-link">fit</a></span><span class="op">(</span><span class="va">train_dataset</span>, epochs<span class="op">=</span><span class="fl">2</span>, validation_data<span class="op">=</span><span class="va">val_dataset</span><span class="op">)</span></span>
+<span></span>
+<span>  <span class="co"># Test the model on all available devices.</span></span>
+<span>  <span class="va">model</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://rdrr.io/pkg/tensorflow/man/evaluate.html" class="external-link">evaluate</a></span><span class="op">(</span><span class="va">test_dataset</span><span class="op">)</span></span>
+<span><span class="op">}</span><span class="op">)</span></span></code></pre></div>
+<pre><code><span><span class="co">## Epoch 1/2</span></span>
+<span><span class="co">## 782/782 - 3s - 3ms/step - loss: 2.0840 - sparse_categorical_accuracy: 0.8817 - val_loss: 0.6871 - val_sparse_categorical_accuracy: 0.9126</span></span>
+<span><span class="co">## Epoch 2/2</span></span>
+<span><span class="co">## 782/782 - 2s - 3ms/step - loss: 0.4243 - sparse_categorical_accuracy: 0.9337 - val_loss: 0.4643 - val_sparse_categorical_accuracy: 0.9277</span></span>
+<span><span class="co">## 157/157 - 0s - 992us/step - loss: 0.4673 - sparse_categorical_accuracy: 0.9292</span></span></code></pre>
+<pre><code><span><span class="co">##            loss compile_metrics</span></span>
+<span><span class="co">##        0.467276        0.929200</span></span></code></pre>
 </div>
 <div class="section level2">
 <h2 id="using-callbacks-to-ensure-fault-tolerance">Using callbacks to ensure fault tolerance<a class="anchor" aria-label="anchor" href="#using-callbacks-to-ensure-fault-tolerance"></a>
@@ -385,71 +310,76 @@ to handle this is to pass <code>ModelCheckpoint</code> callback to
 100 batches or every epoch). You can then restart training from your
 saved model.</p>
 <p>Here’s a simple example:</p>
-<div class="sourceCode" id="cb4"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" tabindex="-1"></a><span class="co"># Prepare a directory to store all the checkpoints.</span></span>
-<span id="cb4-2"><a href="#cb4-2" tabindex="-1"></a>checkpoint_dir <span class="op">=</span> <span class="st">"./ckpt"</span></span>
-<span id="cb4-3"><a href="#cb4-3" tabindex="-1"></a><span class="cf">if</span> <span class="kw">not</span> os.path.exists(checkpoint_dir):</span>
-<span id="cb4-4"><a href="#cb4-4" tabindex="-1"></a>    os.makedirs(checkpoint_dir)</span>
-<span id="cb4-5"><a href="#cb4-5" tabindex="-1"></a></span>
-<span id="cb4-6"><a href="#cb4-6" tabindex="-1"></a></span>
-<span id="cb4-7"><a href="#cb4-7" tabindex="-1"></a><span class="kw">def</span> make_or_restore_model():</span>
-<span id="cb4-8"><a href="#cb4-8" tabindex="-1"></a>    <span class="co"># Either restore the latest model, or create a fresh one</span></span>
-<span id="cb4-9"><a href="#cb4-9" tabindex="-1"></a>    <span class="co"># if there is no checkpoint available.</span></span>
-<span id="cb4-10"><a href="#cb4-10" tabindex="-1"></a>    checkpoints <span class="op">=</span> [</span>
-<span id="cb4-11"><a href="#cb4-11" tabindex="-1"></a>        checkpoint_dir <span class="op">+</span> <span class="st">"/"</span> <span class="op">+</span> name <span class="cf">for</span> name <span class="kw">in</span> os.listdir(checkpoint_dir)</span>
-<span id="cb4-12"><a href="#cb4-12" tabindex="-1"></a>    ]</span>
-<span id="cb4-13"><a href="#cb4-13" tabindex="-1"></a>    <span class="cf">if</span> checkpoints:</span>
-<span id="cb4-14"><a href="#cb4-14" tabindex="-1"></a>        latest_checkpoint <span class="op">=</span> <span class="bu">max</span>(checkpoints, key<span class="op">=</span>os.path.getctime)</span>
-<span id="cb4-15"><a href="#cb4-15" tabindex="-1"></a>        <span class="bu">print</span>(<span class="st">"Restoring from"</span>, latest_checkpoint)</span>
-<span id="cb4-16"><a href="#cb4-16" tabindex="-1"></a>        <span class="cf">return</span> keras.models.load_model(latest_checkpoint)</span>
-<span id="cb4-17"><a href="#cb4-17" tabindex="-1"></a>    <span class="bu">print</span>(<span class="st">"Creating a new model"</span>)</span>
-<span id="cb4-18"><a href="#cb4-18" tabindex="-1"></a>    <span class="cf">return</span> get_compiled_model()</span>
-<span id="cb4-19"><a href="#cb4-19" tabindex="-1"></a></span>
-<span id="cb4-20"><a href="#cb4-20" tabindex="-1"></a></span>
-<span id="cb4-21"><a href="#cb4-21" tabindex="-1"></a><span class="kw">def</span> run_training(epochs<span class="op">=</span><span class="dv">1</span>):</span>
-<span id="cb4-22"><a href="#cb4-22" tabindex="-1"></a>    <span class="co"># Create a MirroredStrategy.</span></span>
-<span id="cb4-23"><a href="#cb4-23" tabindex="-1"></a>    strategy <span class="op">=</span> tf.distribute.MirroredStrategy()</span>
-<span id="cb4-24"><a href="#cb4-24" tabindex="-1"></a></span>
-<span id="cb4-25"><a href="#cb4-25" tabindex="-1"></a>    <span class="co"># Open a strategy scope and create/restore the model</span></span>
-<span id="cb4-26"><a href="#cb4-26" tabindex="-1"></a>    <span class="cf">with</span> strategy.scope():</span>
-<span id="cb4-27"><a href="#cb4-27" tabindex="-1"></a>        model <span class="op">=</span> make_or_restore_model()</span>
-<span id="cb4-28"><a href="#cb4-28" tabindex="-1"></a></span>
-<span id="cb4-29"><a href="#cb4-29" tabindex="-1"></a>        callbacks <span class="op">=</span> [</span>
-<span id="cb4-30"><a href="#cb4-30" tabindex="-1"></a>            <span class="co"># This callback saves a SavedModel every epoch</span></span>
-<span id="cb4-31"><a href="#cb4-31" tabindex="-1"></a>            <span class="co"># We include the current epoch in the folder name.</span></span>
-<span id="cb4-32"><a href="#cb4-32" tabindex="-1"></a>            keras.callbacks.ModelCheckpoint(</span>
-<span id="cb4-33"><a href="#cb4-33" tabindex="-1"></a>                filepath<span class="op">=</span>checkpoint_dir <span class="op">+</span> <span class="st">"/ckpt-</span><span class="sc">{epoch}</span><span class="st">.keras"</span>,</span>
-<span id="cb4-34"><a href="#cb4-34" tabindex="-1"></a>                save_freq<span class="op">=</span><span class="st">"epoch"</span>,</span>
-<span id="cb4-35"><a href="#cb4-35" tabindex="-1"></a>            )</span>
-<span id="cb4-36"><a href="#cb4-36" tabindex="-1"></a>        ]</span>
-<span id="cb4-37"><a href="#cb4-37" tabindex="-1"></a>        model.fit(</span>
-<span id="cb4-38"><a href="#cb4-38" tabindex="-1"></a>            train_dataset,</span>
-<span id="cb4-39"><a href="#cb4-39" tabindex="-1"></a>            epochs<span class="op">=</span>epochs,</span>
-<span id="cb4-40"><a href="#cb4-40" tabindex="-1"></a>            callbacks<span class="op">=</span>callbacks,</span>
-<span id="cb4-41"><a href="#cb4-41" tabindex="-1"></a>            validation_data<span class="op">=</span>val_dataset,</span>
-<span id="cb4-42"><a href="#cb4-42" tabindex="-1"></a>            verbose<span class="op">=</span><span class="dv">2</span>,</span>
-<span id="cb4-43"><a href="#cb4-43" tabindex="-1"></a>        )</span>
-<span id="cb4-44"><a href="#cb4-44" tabindex="-1"></a></span>
-<span id="cb4-45"><a href="#cb4-45" tabindex="-1"></a></span>
-<span id="cb4-46"><a href="#cb4-46" tabindex="-1"></a><span class="co"># Running the first time creates the model</span></span>
-<span id="cb4-47"><a href="#cb4-47" tabindex="-1"></a>run_training(epochs<span class="op">=</span><span class="dv">1</span>)</span>
-<span id="cb4-48"><a href="#cb4-48" tabindex="-1"></a></span>
-<span id="cb4-49"><a href="#cb4-49" tabindex="-1"></a><span class="co"># Calling the same function again will resume from where we left off</span></span>
-<span id="cb4-50"><a href="#cb4-50" tabindex="-1"></a>run_training(epochs<span class="op">=</span><span class="dv">1</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># Prepare a directory to store all the checkpoints.</span></span>
+<span><span class="va">checkpoint_dir</span> <span class="op">&lt;-</span> <span class="st">"./ckpt"</span></span>
+<span><span class="kw">if</span> <span class="op">(</span><span class="op">!</span><span class="fu"><a href="https://rdrr.io/r/base/files2.html" class="external-link">dir.exists</a></span><span class="op">(</span><span class="va">checkpoint_dir</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span></span>
+<span>  <span class="fu"><a href="https://rdrr.io/r/base/files2.html" class="external-link">dir.create</a></span><span class="op">(</span><span class="va">checkpoint_dir</span><span class="op">)</span></span>
+<span><span class="op">}</span></span>
+<span></span>
+<span><span class="va">make_or_restore_model</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="op">)</span> <span class="op">{</span></span>
+<span>  <span class="co"># Either restore the latest model, or create a fresh one</span></span>
+<span>  <span class="co"># if there is no checkpoint available.</span></span>
+<span>  <span class="va">checkpoints</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.files.html" class="external-link">list.files</a></span><span class="op">(</span><span class="va">checkpoint_dir</span>, full.names<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span></span>
+<span></span>
+<span>  <span class="kw">if</span> <span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/length.html" class="external-link">length</a></span><span class="op">(</span><span class="va">checkpoints</span><span class="op">)</span> <span class="op">&gt;</span> <span class="fl">0</span><span class="op">)</span> <span class="op">{</span></span>
+<span>    <span class="va">latest_checkpoint</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">tail</a></span><span class="op">(</span><span class="va">checkpoints</span>, <span class="fl">1</span><span class="op">)</span></span>
+<span>    <span class="fu">load_model</span><span class="op">(</span><span class="va">latest_checkpoint</span><span class="op">)</span></span>
+<span>  <span class="op">}</span> <span class="kw">else</span> <span class="op">{</span></span>
+<span>    <span class="fu">get_compiled_model</span><span class="op">(</span><span class="op">)</span></span>
+<span>  <span class="op">}</span></span>
+<span><span class="op">}</span></span>
+<span></span>
+<span></span>
+<span><span class="va">run_training</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">epochs</span><span class="op">=</span><span class="fl">1</span><span class="op">)</span> <span class="op">{</span></span>
+<span>  <span class="co"># Create a MirroredStrategy.</span></span>
+<span>  <span class="va">strategy</span> <span class="op">&lt;-</span> <span class="va">tf</span><span class="op">$</span><span class="va">distribute</span><span class="op">$</span><span class="fu">MirroredStrategy</span><span class="op">(</span><span class="op">)</span></span>
+<span></span>
+<span>  <span class="co"># Open a strategy scope and create/restore the model</span></span>
+<span>  <span class="fu"><a href="https://rdrr.io/r/base/with.html" class="external-link">with</a></span><span class="op">(</span><span class="va">strategy</span><span class="op">$</span><span class="fu">scope</span><span class="op">(</span><span class="op">)</span>, <span class="op">{</span></span>
+<span>    <span class="va">model</span> <span class="op">&lt;-</span> <span class="fu">make_or_restore_model</span><span class="op">(</span><span class="op">)</span></span>
+<span></span>
+<span>    <span class="va">callbacks</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span></span>
+<span>      <span class="co"># This callback saves a SavedModel every epoch</span></span>
+<span>      <span class="co"># We include the current epoch in the folder name.</span></span>
+<span>      <span class="fu"><a href="../reference/callback_model_checkpoint.html">callback_model_checkpoint</a></span><span class="op">(</span></span>
+<span>        filepath <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste0</a></span><span class="op">(</span><span class="va">checkpoint_dir</span>, <span class="st">"/ckpt-{epoch}.keras"</span><span class="op">)</span>,</span>
+<span>        save_freq<span class="op">=</span><span class="st">"epoch"</span>,</span>
+<span>      <span class="op">)</span></span>
+<span>    <span class="op">)</span></span>
+<span></span>
+<span>    <span class="va">model</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://generics.r-lib.org/reference/fit.html" class="external-link">fit</a></span><span class="op">(</span></span>
+<span>      <span class="va">train_dataset</span>,</span>
+<span>      epochs<span class="op">=</span><span class="va">epochs</span>,</span>
+<span>      callbacks<span class="op">=</span><span class="va">callbacks</span>,</span>
+<span>      validation_data<span class="op">=</span><span class="va">val_dataset</span>,</span>
+<span>      verbose<span class="op">=</span><span class="fl">2</span></span>
+<span>    <span class="op">)</span></span>
+<span>  <span class="op">}</span><span class="op">)</span></span>
+<span><span class="op">}</span></span>
+<span></span>
+<span><span class="co"># Running the first time creates the model</span></span>
+<span><span class="fu">run_training</span><span class="op">(</span>epochs<span class="op">=</span><span class="fl">1</span><span class="op">)</span></span></code></pre></div>
+<pre><code><span><span class="co">## Error in load_model(latest_checkpoint): could not find function "load_model"</span></span></code></pre>
+<div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># Calling the same function again will resume from where we left off</span></span>
+<span><span class="fu">run_training</span><span class="op">(</span>epochs<span class="op">=</span><span class="fl">1</span><span class="op">)</span></span></code></pre></div>
+<pre><code><span><span class="co">## Error in load_model(latest_checkpoint): could not find function "load_model"</span></span></code></pre>
 </div>
 <div class="section level2">
-<h2 id="tf-data-performance-tips">
-<code>tf.data</code> performance tips<a class="anchor" aria-label="anchor" href="#tf-data-performance-tips"></a>
+<h2 id="tfdata-performance-tips">
+<code>tf$data</code> performance tips<a class="anchor" aria-label="anchor" href="#tfdata-performance-tips"></a>
 </h2>
 <p>When doing distributed training, the efficiency with which you load
 data can often become critical. Here are a few tips to make sure your
-<code>tf.data</code> pipelines run as fast as possible.</p>
+<code>tf$data</code> pipelines run as fast as possible.</p>
 <p><strong>Note about dataset batching</strong></p>
 <p>When creating your dataset, make sure it is batched with the global
 batch size. For instance, if each of your 8 GPUs is capable of running a
 batch of 64 samples, you call use a global batch size of 512.</p>
-<p><strong>Calling <code>dataset.cache()</code></strong></p>
-<p>If you call <code>.cache()</code> on a dataset, its data will be
-cached after running through the first iteration over the data. Every
+<p><strong>Calling <code><a href="https://rdrr.io/pkg/tfdatasets/man/dataset_cache.html" class="external-link">dataset_cache()</a></code></strong></p>
+<p>If you call <code><a href="https://rdrr.io/pkg/tfdatasets/man/dataset_cache.html" class="external-link">dataset_cache()</a></code> on a dataset, its data will
+be cached after running through the first iteration over the data. Every
 subsequent iteration will use the cached data. The cache can be in
 memory (default) or to a local file you specify.</p>
 <p>This can improve performance when:</p>
@@ -461,42 +391,35 @@ memory and your workflow is significantly IO-bound (e.g. reading &amp;
 decoding image files).</li>
 </ul>
 <p><strong>Calling
-<code>dataset.prefetch(buffer_size)</code></strong></p>
-<p>You should almost always call <code>.prefetch(buffer_size)</code>
-after creating a dataset. It means your data pipeline will run
-asynchronously from your model, with new samples being preprocessed and
-stored in a buffer while the current batch samples are used to train the
-model. The next batch will be prefetched in GPU memory by the time the
-current batch is over.</p>
+<code>dataset_prefetch(buffer_size)</code></strong></p>
+<p>You should almost always call
+<code>dataset_prefetch(buffer_size)</code> after creating a dataset. It
+means your data pipeline will run asynchronously from your model, with
+new samples being preprocessed and stored in a buffer while the current
+batch samples are used to train the model. The next batch will be
+prefetched in GPU memory by the time the current batch is over.</p>
 <p>That’s it!</p>
 </div>
-  </div>
-
-  <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
-
-        <nav id="toc" data-toggle="toc"><h2 data-toc-skip>Contents</h2>
-    </nav>
-</div>
-
+  </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>
+    </nav></aside>
 </div>
 
 
 
-      <footer><div class="copyright">
+    <footer><div class="pkgdown-footer-left">
   <p></p>
 <p>Developed by Tomasz Kalinowski, JJ Allaire, François Chollet, RStudio, Google.</p>
 </div>
 
-<div class="pkgdown">
+<div class="pkgdown-footer-right">
   <p></p>
-<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.7.</p>
+<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.7.9000.</p>
 </div>
 
-      </footer>
+    </footer>
 </div>
 
   
-
 
   
 

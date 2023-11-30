@@ -4,21 +4,20 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Transfer learning &amp; fine-tuning • keras</title>
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="description" content="Complete guide to transfer learning &amp; fine-tuning in Keras.">
+<title>Transfer learning &amp; fine-tuning • keras3</title>
 <!-- favicons --><link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
 <link rel="icon" type="image/png" sizes="32x32" href="../favicon-32x32.png">
 <link rel="apple-touch-icon" type="image/png" sizes="180x180" href="../apple-touch-icon.png">
 <link rel="apple-touch-icon" type="image/png" sizes="120x120" href="../apple-touch-icon-120x120.png">
 <link rel="apple-touch-icon" type="image/png" sizes="76x76" href="../apple-touch-icon-76x76.png">
 <link rel="apple-touch-icon" type="image/png" sizes="60x60" href="../apple-touch-icon-60x60.png">
-<!-- jquery --><script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script><!-- Bootstrap --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/css/bootstrap.min.css" integrity="sha256-bZLfwXAP04zRMK2BjiO8iu9pf4FbLqX6zitd+tIvLhE=" crossorigin="anonymous">
-<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/js/bootstrap.min.js" integrity="sha256-nuL8/2cJ5NDSSwnKD8VqreErSWHtnEP9E7AySL+1ev4=" crossorigin="anonymous"></script><!-- bootstrap-toc --><link rel="stylesheet" href="../bootstrap-toc.css">
-<script src="../bootstrap-toc.js"></script><!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous">
+<script src="../deps/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<link href="../deps/bootstrap-5.3.1/bootstrap.min.css" rel="stylesheet">
+<script src="../deps/bootstrap-5.3.1/bootstrap.bundle.min.js"></script><!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/v4-shims.min.css" integrity="sha256-wZjR52fzng1pJHwx4aV2AO3yyTOXrcDW7jBpJtTwVxw=" crossorigin="anonymous">
-<!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><!-- headroom.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/headroom.min.js" integrity="sha256-AsUX4SJE1+yuDu5+mAVzJbuYNPHj/WroHuZ8Ir/CkE0=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script><!-- pkgdown --><link href="../pkgdown.css" rel="stylesheet">
-<script src="../pkgdown.js"></script><link href="../extra.css" rel="stylesheet">
-<script src="../extra.js"></script><meta property="og:title" content="Transfer learning &amp; fine-tuning">
+<!-- bootstrap-toc --><script src="https://cdn.jsdelivr.net/gh/afeld/bootstrap-toc@v1.0.1/dist/bootstrap-toc.min.js" integrity="sha256-4veVQbu7//Lk5TSmc7YV48MxtMy98e26cf5MrgZYnwo=" crossorigin="anonymous"></script><!-- headroom.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/headroom.min.js" integrity="sha256-AsUX4SJE1+yuDu5+mAVzJbuYNPHj/WroHuZ8Ir/CkE0=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script><!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><!-- search --><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- pkgdown --><script src="../pkgdown.js"></script><meta property="og:title" content="Transfer learning &amp; fine-tuning">
 <meta property="og:description" content="Complete guide to transfer learning &amp; fine-tuning in Keras.">
 <meta property="og:image" content="https://keras.posit.co/logo.png">
 <!-- mathjax --><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js" integrity="sha256-nvJJv9wWKEm88qvoQl9ekL2J+k/RWIsaSScxxlsrv8k=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/config/TeX-AMS-MML_HTMLorMML.js" integrity="sha256-84DKXVJXs0/F8OTMzX4UR909+jtl4G7SPypPavF+GfA=" crossorigin="anonymous"></script><!--[if lt IE 9]>
@@ -26,193 +25,96 @@
 <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
 <![endif]-->
 </head>
-<body data-spy="scroll" data-target="#toc">
+<body>
+    <a href="#main" class="visually-hidden-focusable">Skip to contents</a>
     
 
-    <div class="container template-article">
-      <header><div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
-  <div class="container">
-    <div class="navbar-header">
-      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false">
-        <span class="sr-only">Toggle navigation</span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-      </button>
-      <span class="navbar-brand">
-        <a class="navbar-link" href="../index.html">keras</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">2.13.0.9000</span>
-      </span>
-    </div>
+    <nav class="navbar fixed-top navbar-inverse navbar-expand-lg bg-primary"><div class="container">
+    
+    <a class="navbar-brand me-2" href="../index.html">keras3</a>
 
-    <div id="navbar" class="navbar-collapse collapse">
-      <ul class="nav navbar-nav">
-<li>
-  <a href="../index.html">Home</a>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">2.13.0.9000</small>
+
+    
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div id="navbar" class="collapse navbar-collapse ms-3">
+      <ul class="navbar-nav me-auto">
+<li class="nav-item">
+  <a class="nav-link" href="../index.html">Home</a>
 </li>
-<li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-    Tutorials
-     
-    <span class="caret"></span>
-  </a>
-  <ul class="dropdown-menu" role="menu">
-<li>
-      <a href="../articles/getting_started.html">Getting Started</a>
-    </li>
-    <li>
-      <a href="../articles/tutorial_basic_classification.html">Basic Classification</a>
-    </li>
-    <li>
-      <a href="../articles/tutorial_basic_text_classification.html">Text Classification</a>
-    </li>
-    <li>
-      <a href="../articles/tutorial_basic_regression.html">Basic Regression</a>
-    </li>
-    <li>
-      <a href="../articles/tutorial_overfit_underfit.html">Overfitting and Underfitting</a>
-    </li>
-    <li>
-      <a href="../articles/tutorial_save_and_restore.html">Save and Restore Models</a>
-    </li>
-  </ul>
-</li>
-<li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-    Guides
-     
-    <span class="caret"></span>
-  </a>
-  <ul class="dropdown-menu" role="menu">
-<li>
-      <a href="../articles/writing_your_own_callbacks.html">Writing Your Own Callbacks</a>
-    </li>
-  </ul>
-</li>
-<li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-    Articles
-     
-    <span class="caret"></span>
-  </a>
-  <ul class="dropdown-menu" role="menu">
-<li class="dropdown-header">Guides (New for TF 2.6)</li>
-    <li>
-      <a href="../articles/new-guides/python_subclasses.html">Python Subclasses</a>
-    </li>
-    <li>
-      <a href="../articles/new-guides/making_new_layers_and_models_via_subclassing.html">Making New Layers and Models via Subclassing</a>
-    </li>
-    <li>
-      <a href="../articles/new-guides/customizing_what_happens_in_fit.html">Customizing What Happens in Fit</a>
-    </li>
-    <li>
-      <a href="../articles/new-guides/writing_your_own_callbacks.html">Writing Your Own Callbacks</a>
-    </li>
-    <li>
-      <a href="../articles/new-guides/preprocessing_layers.html">Working with Preprocessing Layers</a>
-    </li>
-    <li>
-      <a href="../argicles/new-guides/working_with_rnns.html">Working with RNNs</a>
-    </li>
-    <li class="divider">
-    </li>
-<li class="dropdown-header">Using Keras</li>
-    <li>
-      <a href="../articles/guide_keras.html">Guide to Keras Basics</a>
-    </li>
-    <li>
-      <a href="../articles/sequential_model.html">Sequential Model in Depth</a>
-    </li>
-    <li>
-      <a href="../articles/functional_api.html">Functional API in Depth</a>
-    </li>
-    <li>
-      <a href="../articles/about_keras_models.html">About Keras Models</a>
-    </li>
-    <li>
-      <a href="../articles/about_keras_layers.html">About Keras Layers</a>
-    </li>
-    <li>
-      <a href="../articles/training_visualization.html">Training Visualization</a>
-    </li>
-    <li>
-      <a href="../articles/applications.html">Pre-Trained Models</a>
-    </li>
-    <li>
-      <a href="../articles/faq.html">Frequently Asked Questions</a>
-    </li>
-    <li>
-      <a href="../articles/why_use_keras.html">Why Use Keras?</a>
-    </li>
-    <li class="divider">
-    </li>
-<li class="dropdown-header">Advanced</li>
-    <li>
-      <a href="../articles/eager_guide.html">Eager Execution</a>
-    </li>
-    <li>
-      <a href="../articles/training_callbacks.html">Training Callbacks</a>
-    </li>
-    <li>
-      <a href="../articles/backend.html">Keras Backend</a>
-    </li>
-    <li>
-      <a href="../articles/custom_layers.html">Custom Layers</a>
-    </li>
-    <li>
-      <a href="../articles/custom_models.html">Custom Models</a>
-    </li>
-    <li>
-      <a href="../articles/saving_serializing.html">Saving and serializing</a>
-    </li>
-  </ul>
-</li>
-<li>
-  <a href="../articles/learn.html">Learn</a>
-</li>
-<li>
-  <a href="../articles/tools.html">Tools</a>
-</li>
-<li>
-  <a href="../articles/examples/index.html">Examples</a>
-</li>
-<li>
-  <a href="../reference/index.html">Reference</a>
-</li>
-<li>
-  <a href="../news/index.html">News</a>
-</li>
-      </ul>
-<ul class="nav navbar-nav navbar-right">
-<li>
-  <a href="https://github.com/rstudio/keras/" class="external-link">
-    <span class="fab fa-github fa-lg"></span>
-     
-  </a>
-</li>
-      </ul>
-</div>
-<!--/.nav-collapse -->
+<li class="nav-item dropdown">
+  <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true" id="dropdown-getting-started">Getting Started</a>
+  <div class="dropdown-menu" aria-labelledby="dropdown-getting-started">
+    <a class="dropdown-item" href="../articles/intro_to_keras_for_engineers.html">Introduction to Keras for engineers</a>
+    <h6 class="dropdown-header" data-toc-skip>Tutorials</h6>
+    <a class="dropdown-item" href="../articles/getting_started.html">Getting Started</a>
+    <a class="dropdown-item" href="../articles/tutorial_basic_classification.html">Basic Classification</a>
+    <a class="dropdown-item" href="../articles/tutorial_basic_text_classification.html">Text Classification</a>
+    <a class="dropdown-item" href="../articles/tutorial_basic_regression.html">Basic Regression</a>
+    <a class="dropdown-item" href="../articles/tutorial_overfit_underfit.html">Overfitting and Underfitting</a>
+    <a class="dropdown-item" href="../articles/tutorial_save_and_restore.html">Save and Restore Models</a>
   </div>
-<!--/.container -->
+</li>
+<li class="active nav-item dropdown">
+  <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true" id="dropdown-guides">Guides</a>
+  <div class="dropdown-menu" aria-labelledby="dropdown-guides">
+    <h6 class="dropdown-header" data-toc-skip>Model definition</h6>
+    <a class="dropdown-item" href="../articles/functional_api.html">Functional API</a>
+    <a class="dropdown-item" href="../articles/sequential_model.html">Sequential Model</a>
+    <h6 class="dropdown-header" data-toc-skip>Extending and customizing</h6>
+    <a class="dropdown-item" href="../articles/making_new_layers_and_models_via_subclassing.html">Making new layers and models via subclassing</a>
+    <a class="dropdown-item" href="../articles/training_with_built_in_methods.html">Training &amp; evaluation with the built-in methods</a>
+    <a class="dropdown-item" href="../articles/writing_a_custom_training_loop_in_tensorflow.html">Writing a training loop from scratch in TensorFlow</a>
+    <a class="dropdown-item" href="../articles/writing_your_own_callbacks.html">Writing Your Own Callbacks</a>
+    <h6 class="dropdown-header" data-toc-skip>Other topics</h6>
+    <a class="dropdown-item" href="../articles/transfer_learning.html">Transfer learning and fine tuning</a>
+    <a class="dropdown-item" href="../articles/distributed_training_with_tensorflow.html">Distributed training with TensorFlow</a>
+  </div>
+</li>
+<li class="nav-item">
+  <a class="nav-link" href="../articles/examples/index.html">Examples</a>
+</li>
+<li class="nav-item">
+  <a class="nav-link" href="../reference/index.html">Reference</a>
+</li>
+<li class="nav-item">
+  <a class="nav-link" href="../news/index.html">News</a>
+</li>
+      </ul>
+<form class="form-inline my-2 my-lg-0" role="search">
+        <input type="search" class="form-control me-sm-2" aria-label="Toggle navigation" name="search-input" data-search-index="../search.json" id="search-input" placeholder="Search for" autocomplete="off">
+</form>
+
+      <ul class="navbar-nav">
+<li class="nav-item">
+  <a class="external-link nav-link" href="https://github.com/rstudio/keras/" aria-label="github">
+    <span class="fab fa fab fa-github fa-lg"></span>
+     
+  </a>
+</li>
+      </ul>
 </div>
-<!--/.navbar -->
 
-      
+    
+  </div>
+</nav><div class="container template-article">
 
-      </header><div class="row">
-  <div class="col-md-9 contents">
-    <div class="page-header toc-ignore">
-      <h1 data-toc-skip>Transfer learning &amp; fine-tuning</h1>
+
+
+
+<div class="row">
+  <main id="main" class="col-md-9"><div class="page-header">
+      <img src="../logo.png" class="logo" alt=""><h1>Transfer learning &amp; fine-tuning</h1>
                         <h4 data-toc-skip class="author"><a href="https://twitter.com/fchollet" class="external-link">fchollet</a></h4>
             
-            <h4 data-toc-skip class="date">Last Modified: 2023-11-10;
-Last Rendered: 2023-11-10</h4>
+            <h4 data-toc-skip class="date">Last Modified: 2023-11-21;
+Last Rendered: 2023-11-27</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/rstudio/keras/blob/HEAD/vignettes/transfer_learning.Rmd" class="external-link"><code>vignettes/transfer_learning.Rmd</code></a></small>
-      <div class="hidden name"><code>transfer_learning.Rmd</code></div>
-
+      <div class="d-none name"><code>transfer_learning.Rmd</code></div>
     </div>
 
     
@@ -220,11 +122,8 @@ Last Rendered: 2023-11-10</h4>
 <div class="section level2">
 <h2 id="setup">Setup<a class="anchor" aria-label="anchor" href="#setup"></a>
 </h2>
-<div class="sourceCode" id="cb1"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
-<span id="cb1-2"><a href="#cb1-2" tabindex="-1"></a><span class="im">import</span> keras</span>
-<span id="cb1-3"><a href="#cb1-3" tabindex="-1"></a><span class="im">from</span> keras <span class="im">import</span> layers</span>
-<span id="cb1-4"><a href="#cb1-4" tabindex="-1"></a><span class="im">import</span> tensorflow_datasets <span class="im">as</span> tfds</span>
-<span id="cb1-5"><a href="#cb1-5" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span></code></pre></div>
+<div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://tensorflow.rstudio.com/" class="external-link">keras3</a></span><span class="op">)</span></span></code></pre></div>
 </div>
 <div class="section level2">
 <h2 id="introduction">Introduction<a class="anchor" aria-label="anchor" href="#introduction"></a>
@@ -281,12 +180,18 @@ forward pass.</li>
 </ul>
 <p><strong>Example: the <code>Dense</code> layer has 2 trainable weights
 (kernel &amp; bias)</strong></p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" tabindex="-1"></a>layer <span class="op">=</span> keras.layers.Dense(<span class="dv">3</span>)</span>
-<span id="cb2-2"><a href="#cb2-2" tabindex="-1"></a>layer.build((<span class="va">None</span>, <span class="dv">4</span>))  <span class="co"># Create the weights</span></span>
-<span id="cb2-3"><a href="#cb2-3" tabindex="-1"></a></span>
-<span id="cb2-4"><a href="#cb2-4" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"weights:"</span>, <span class="bu">len</span>(layer.weights))</span>
-<span id="cb2-5"><a href="#cb2-5" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"trainable_weights:"</span>, <span class="bu">len</span>(layer.trainable_weights))</span>
-<span id="cb2-6"><a href="#cb2-6" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"non_trainable_weights:"</span>, <span class="bu">len</span>(layer.non_trainable_weights))</span></code></pre></div>
+<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">layer</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/layer_dense.html">layer_dense</a></span><span class="op">(</span>units <span class="op">=</span> <span class="fl">3</span><span class="op">)</span></span>
+<span><span class="va">layer</span><span class="op">$</span><span class="fu">build</span><span class="op">(</span><span class="fu">shape</span><span class="op">(</span><span class="cn">NULL</span>, <span class="fl">4</span><span class="op">)</span><span class="op">)</span>  <span class="co"># Create the weights</span></span>
+<span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/length.html" class="external-link">length</a></span><span class="op">(</span><span class="va">layer</span><span class="op">$</span><span class="va">weights</span><span class="op">)</span></span></code></pre></div>
+<pre><code><span><span class="co">## [1] 2</span></span></code></pre>
+<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/length.html" class="external-link">length</a></span><span class="op">(</span><span class="va">layer</span><span class="op">$</span><span class="va">trainable_weights</span><span class="op">)</span></span></code></pre></div>
+<pre><code><span><span class="co">## [1] 2</span></span></code></pre>
+<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/length.html" class="external-link">length</a></span><span class="op">(</span><span class="va">layer</span><span class="op">$</span><span class="va">non_trainable_weights</span><span class="op">)</span></span></code></pre></div>
+<pre><code><span><span class="co">## [1] 0</span></span></code></pre>
 <p>In general, all weights are trainable weights. The only built-in
 layer that has non-trainable weights is the
 <code>BatchNormalization</code> layer. It uses non-trainable weights to
@@ -296,15 +201,21 @@ the <a href="https://keras.io/guides/making_new_layers_and_models_via_subclassin
 to writing new layers from scratch</a>.</p>
 <p><strong>Example: the <code>BatchNormalization</code> layer has 2
 trainable weights and 2 non-trainable weights</strong></p>
-<div class="sourceCode" id="cb3"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" tabindex="-1"></a>layer <span class="op">=</span> keras.layers.BatchNormalization()</span>
-<span id="cb3-2"><a href="#cb3-2" tabindex="-1"></a>layer.build((<span class="va">None</span>, <span class="dv">4</span>))  <span class="co"># Create the weights</span></span>
-<span id="cb3-3"><a href="#cb3-3" tabindex="-1"></a></span>
-<span id="cb3-4"><a href="#cb3-4" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"weights:"</span>, <span class="bu">len</span>(layer.weights))</span>
-<span id="cb3-5"><a href="#cb3-5" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"trainable_weights:"</span>, <span class="bu">len</span>(layer.trainable_weights))</span>
-<span id="cb3-6"><a href="#cb3-6" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"non_trainable_weights:"</span>, <span class="bu">len</span>(layer.non_trainable_weights))</span></code></pre></div>
+<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">layer</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/layer_batch_normalization.html">layer_batch_normalization</a></span><span class="op">(</span><span class="op">)</span></span>
+<span><span class="va">layer</span><span class="op">$</span><span class="fu">build</span><span class="op">(</span><span class="fu">shape</span><span class="op">(</span><span class="cn">NULL</span>, <span class="fl">4</span><span class="op">)</span><span class="op">)</span>  <span class="co"># Create the weights</span></span>
+<span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/length.html" class="external-link">length</a></span><span class="op">(</span><span class="va">layer</span><span class="op">$</span><span class="va">weights</span><span class="op">)</span></span></code></pre></div>
+<pre><code><span><span class="co">## [1] 4</span></span></code></pre>
+<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/length.html" class="external-link">length</a></span><span class="op">(</span><span class="va">layer</span><span class="op">$</span><span class="va">trainable_weights</span><span class="op">)</span></span></code></pre></div>
+<pre><code><span><span class="co">## [1] 2</span></span></code></pre>
+<div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/length.html" class="external-link">length</a></span><span class="op">(</span><span class="va">layer</span><span class="op">$</span><span class="va">non_trainable_weights</span><span class="op">)</span></span></code></pre></div>
+<pre><code><span><span class="co">## [1] 2</span></span></code></pre>
 <p>Layers &amp; models also feature a boolean attribute
 <code>trainable</code>. Its value can be changed. Setting
-<code>layer.trainable</code> to <code>False</code> moves all the layer’s
+<code>layer$trainable</code> to <code>FALSE</code> moves all the layer’s
 weights from trainable to non-trainable. This is called “freezing” the
 layer: the state of a frozen layer won’t be updated during training
 (either when training with <code><a href="https://generics.r-lib.org/reference/fit.html" class="external-link">fit()</a></code> or when training with any
@@ -312,40 +223,47 @@ custom loop that relies on <code>trainable_weights</code> to apply
 gradient updates).</p>
 <p><strong>Example: setting <code>trainable</code> to
 <code>False</code></strong></p>
-<div class="sourceCode" id="cb4"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" tabindex="-1"></a>layer <span class="op">=</span> keras.layers.Dense(<span class="dv">3</span>)</span>
-<span id="cb4-2"><a href="#cb4-2" tabindex="-1"></a>layer.build((<span class="va">None</span>, <span class="dv">4</span>))  <span class="co"># Create the weights</span></span>
-<span id="cb4-3"><a href="#cb4-3" tabindex="-1"></a>layer.trainable <span class="op">=</span> <span class="va">False</span>  <span class="co"># Freeze the layer</span></span>
-<span id="cb4-4"><a href="#cb4-4" tabindex="-1"></a></span>
-<span id="cb4-5"><a href="#cb4-5" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"weights:"</span>, <span class="bu">len</span>(layer.weights))</span>
-<span id="cb4-6"><a href="#cb4-6" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"trainable_weights:"</span>, <span class="bu">len</span>(layer.trainable_weights))</span>
-<span id="cb4-7"><a href="#cb4-7" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"non_trainable_weights:"</span>, <span class="bu">len</span>(layer.non_trainable_weights))</span></code></pre></div>
+<div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">layer</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/layer_dense.html">layer_dense</a></span><span class="op">(</span>units <span class="op">=</span> <span class="fl">3</span><span class="op">)</span></span>
+<span><span class="va">layer</span><span class="op">$</span><span class="fu">build</span><span class="op">(</span><span class="fu">shape</span><span class="op">(</span><span class="cn">NULL</span>, <span class="fl">4</span><span class="op">)</span><span class="op">)</span>  <span class="co"># Create the weights</span></span>
+<span><span class="va">layer</span><span class="op">$</span><span class="va">trainable</span> <span class="op">&lt;-</span> <span class="cn">FALSE</span>  <span class="co"># Freeze the layer</span></span>
+<span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/length.html" class="external-link">length</a></span><span class="op">(</span><span class="va">layer</span><span class="op">$</span><span class="va">weights</span><span class="op">)</span></span></code></pre></div>
+<pre><code><span><span class="co">## [1] 2</span></span></code></pre>
+<div class="sourceCode" id="cb16"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/length.html" class="external-link">length</a></span><span class="op">(</span><span class="va">layer</span><span class="op">$</span><span class="va">trainable_weights</span><span class="op">)</span></span></code></pre></div>
+<pre><code><span><span class="co">## [1] 0</span></span></code></pre>
+<div class="sourceCode" id="cb18"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/length.html" class="external-link">length</a></span><span class="op">(</span><span class="va">layer</span><span class="op">$</span><span class="va">non_trainable_weights</span><span class="op">)</span></span></code></pre></div>
+<pre><code><span><span class="co">## [1] 2</span></span></code></pre>
 <p>When a trainable weight becomes non-trainable, its value is no longer
 updated during training.</p>
-<div class="sourceCode" id="cb5"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" tabindex="-1"></a><span class="co"># Make a model with 2 layers</span></span>
-<span id="cb5-2"><a href="#cb5-2" tabindex="-1"></a>layer1 <span class="op">=</span> keras.layers.Dense(<span class="dv">3</span>, activation<span class="op">=</span><span class="st">"relu"</span>)</span>
-<span id="cb5-3"><a href="#cb5-3" tabindex="-1"></a>layer2 <span class="op">=</span> keras.layers.Dense(<span class="dv">3</span>, activation<span class="op">=</span><span class="st">"sigmoid"</span>)</span>
-<span id="cb5-4"><a href="#cb5-4" tabindex="-1"></a>model <span class="op">=</span> keras.Sequential([keras.Input(shape<span class="op">=</span>(<span class="dv">3</span>,)), layer1, layer2])</span>
-<span id="cb5-5"><a href="#cb5-5" tabindex="-1"></a></span>
-<span id="cb5-6"><a href="#cb5-6" tabindex="-1"></a><span class="co"># Freeze the first layer</span></span>
-<span id="cb5-7"><a href="#cb5-7" tabindex="-1"></a>layer1.trainable <span class="op">=</span> <span class="va">False</span></span>
-<span id="cb5-8"><a href="#cb5-8" tabindex="-1"></a></span>
-<span id="cb5-9"><a href="#cb5-9" tabindex="-1"></a><span class="co"># Keep a copy of the weights of layer1 for later reference</span></span>
-<span id="cb5-10"><a href="#cb5-10" tabindex="-1"></a>initial_layer1_weights_values <span class="op">=</span> layer1.get_weights()</span>
-<span id="cb5-11"><a href="#cb5-11" tabindex="-1"></a></span>
-<span id="cb5-12"><a href="#cb5-12" tabindex="-1"></a><span class="co"># Train the model</span></span>
-<span id="cb5-13"><a href="#cb5-13" tabindex="-1"></a>model.<span class="bu">compile</span>(optimizer<span class="op">=</span><span class="st">"adam"</span>, loss<span class="op">=</span><span class="st">"mse"</span>)</span>
-<span id="cb5-14"><a href="#cb5-14" tabindex="-1"></a>model.fit(np.random.random((<span class="dv">2</span>, <span class="dv">3</span>)), np.random.random((<span class="dv">2</span>, <span class="dv">3</span>)))</span>
-<span id="cb5-15"><a href="#cb5-15" tabindex="-1"></a></span>
-<span id="cb5-16"><a href="#cb5-16" tabindex="-1"></a><span class="co"># Check that the weights of layer1 have not changed during training</span></span>
-<span id="cb5-17"><a href="#cb5-17" tabindex="-1"></a>final_layer1_weights_values <span class="op">=</span> layer1.get_weights()</span>
-<span id="cb5-18"><a href="#cb5-18" tabindex="-1"></a>np.testing.assert_allclose(</span>
-<span id="cb5-19"><a href="#cb5-19" tabindex="-1"></a>    initial_layer1_weights_values[<span class="dv">0</span>], final_layer1_weights_values[<span class="dv">0</span>]</span>
-<span id="cb5-20"><a href="#cb5-20" tabindex="-1"></a>)</span>
-<span id="cb5-21"><a href="#cb5-21" tabindex="-1"></a>np.testing.assert_allclose(</span>
-<span id="cb5-22"><a href="#cb5-22" tabindex="-1"></a>    initial_layer1_weights_values[<span class="dv">1</span>], final_layer1_weights_values[<span class="dv">1</span>]</span>
-<span id="cb5-23"><a href="#cb5-23" tabindex="-1"></a>)</span></code></pre></div>
-<p>Do not confuse the <code>layer.trainable</code> attribute with the
-argument <code>training</code> in <code>layer.__call__()</code> (which
+<div class="sourceCode" id="cb20"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># Make a model with 2 layers</span></span>
+<span><span class="va">layer1</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/layer_dense.html">layer_dense</a></span><span class="op">(</span>units <span class="op">=</span> <span class="fl">3</span>, activation<span class="op">=</span><span class="st">"relu"</span><span class="op">)</span></span>
+<span><span class="va">layer2</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/layer_dense.html">layer_dense</a></span><span class="op">(</span>units <span class="op">=</span> <span class="fl">3</span>, activation<span class="op">=</span><span class="st">"sigmoid"</span><span class="op">)</span></span>
+<span><span class="va">model</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/keras_model_sequential.html">keras_model_sequential</a></span><span class="op">(</span>input_shape <span class="op">=</span> <span class="fl">3</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="fu">layer1</span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="fu">layer2</span><span class="op">(</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Freeze the first layer</span></span>
+<span><span class="va">layer1</span><span class="op">$</span><span class="va">trainable</span> <span class="op">&lt;-</span> <span class="cn">FALSE</span></span>
+<span></span>
+<span><span class="co"># Keep a copy of the weights of layer1 for later reference</span></span>
+<span><span class="va">initial_layer1_weights_values</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/get_weights.html">get_weights</a></span><span class="op">(</span><span class="va">layer1</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Train the model</span></span>
+<span><span class="va">model</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://generics.r-lib.org/reference/compile.html" class="external-link">compile</a></span><span class="op">(</span>optimizer<span class="op">=</span><span class="st">"adam"</span>, loss<span class="op">=</span><span class="st">"mse"</span><span class="op">)</span></span>
+<span><span class="va">model</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://generics.r-lib.org/reference/fit.html" class="external-link">fit</a></span><span class="op">(</span><span class="fu"><a href="../reference/random_normal.html">random_normal</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">2</span>, <span class="fl">3</span><span class="op">)</span><span class="op">)</span>, <span class="fu"><a href="../reference/random_normal.html">random_normal</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">2</span>, <span class="fl">3</span><span class="op">)</span><span class="op">)</span>, epochs <span class="op">=</span> <span class="fl">1</span><span class="op">)</span></span></code></pre></div>
+<pre><code><span><span class="co">## 1/1 - 0s - 295ms/step - loss: 2.1868</span></span></code></pre>
+<div class="sourceCode" id="cb22"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># Check that the weights of layer1 have not changed during training</span></span>
+<span><span class="va">final_layer1_weights_values</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/get_weights.html">get_weights</a></span><span class="op">(</span><span class="va">layer1</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/all.equal.html" class="external-link">all.equal</a></span><span class="op">(</span><span class="va">initial_layer1_weights_values</span>, <span class="va">final_layer1_weights_values</span><span class="op">)</span></span></code></pre></div>
+<pre><code><span><span class="co">## [1] TRUE</span></span></code></pre>
+<p>Do not confuse the <code>layer$trainable</code> attribute with the
+argument <code>training</code> in <code>layer$call</code> (which
 controls whether the layer should run its forward pass in inference mode
 or training mode). For more information, see the <a href="https://keras.io/getting_started/faq/#whats-the-difference-between-the-training-argument-in-call-and-the-trainable-attribute" class="external-link">Keras
 FAQ</a>.</p>
@@ -357,28 +275,22 @@ FAQ</a>.</p>
 that has sublayers, all children layers become non-trainable as
 well.</p>
 <p><strong>Example:</strong></p>
-<div class="sourceCode" id="cb6"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" tabindex="-1"></a>inner_model <span class="op">=</span> keras.Sequential(</span>
-<span id="cb6-2"><a href="#cb6-2" tabindex="-1"></a>    [</span>
-<span id="cb6-3"><a href="#cb6-3" tabindex="-1"></a>        keras.Input(shape<span class="op">=</span>(<span class="dv">3</span>,)),</span>
-<span id="cb6-4"><a href="#cb6-4" tabindex="-1"></a>        keras.layers.Dense(<span class="dv">3</span>, activation<span class="op">=</span><span class="st">"relu"</span>),</span>
-<span id="cb6-5"><a href="#cb6-5" tabindex="-1"></a>        keras.layers.Dense(<span class="dv">3</span>, activation<span class="op">=</span><span class="st">"relu"</span>),</span>
-<span id="cb6-6"><a href="#cb6-6" tabindex="-1"></a>    ]</span>
-<span id="cb6-7"><a href="#cb6-7" tabindex="-1"></a>)</span>
-<span id="cb6-8"><a href="#cb6-8" tabindex="-1"></a></span>
-<span id="cb6-9"><a href="#cb6-9" tabindex="-1"></a>model <span class="op">=</span> keras.Sequential(</span>
-<span id="cb6-10"><a href="#cb6-10" tabindex="-1"></a>    [</span>
-<span id="cb6-11"><a href="#cb6-11" tabindex="-1"></a>        keras.Input(shape<span class="op">=</span>(<span class="dv">3</span>,)),</span>
-<span id="cb6-12"><a href="#cb6-12" tabindex="-1"></a>        inner_model,</span>
-<span id="cb6-13"><a href="#cb6-13" tabindex="-1"></a>        keras.layers.Dense(<span class="dv">3</span>, activation<span class="op">=</span><span class="st">"sigmoid"</span>),</span>
-<span id="cb6-14"><a href="#cb6-14" tabindex="-1"></a>    ]</span>
-<span id="cb6-15"><a href="#cb6-15" tabindex="-1"></a>)</span>
-<span id="cb6-16"><a href="#cb6-16" tabindex="-1"></a></span>
-<span id="cb6-17"><a href="#cb6-17" tabindex="-1"></a>model.trainable <span class="op">=</span> <span class="va">False</span>  <span class="co"># Freeze the outer model</span></span>
-<span id="cb6-18"><a href="#cb6-18" tabindex="-1"></a></span>
-<span id="cb6-19"><a href="#cb6-19" tabindex="-1"></a><span class="cf">assert</span> inner_model.trainable <span class="op">==</span> <span class="va">False</span>  <span class="co"># All layers in `model` are now frozen</span></span>
-<span id="cb6-20"><a href="#cb6-20" tabindex="-1"></a><span class="cf">assert</span> (</span>
-<span id="cb6-21"><a href="#cb6-21" tabindex="-1"></a>    inner_model.layers[<span class="dv">0</span>].trainable <span class="op">==</span> <span class="va">False</span></span>
-<span id="cb6-22"><a href="#cb6-22" tabindex="-1"></a>)  <span class="co"># `trainable` is propagated recursively</span></span></code></pre></div>
+<div class="sourceCode" id="cb24"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">inner_model</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/keras_model_sequential.html">keras_model_sequential</a></span><span class="op">(</span>input_shape <span class="op">=</span> <span class="fl">3</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="../reference/layer_dense.html">layer_dense</a></span><span class="op">(</span>units <span class="op">=</span> <span class="fl">3</span>, activation<span class="op">=</span><span class="st">"relu"</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="../reference/layer_dense.html">layer_dense</a></span><span class="op">(</span>units <span class="op">=</span> <span class="fl">3</span>, activation<span class="op">=</span><span class="st">"relu"</span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">model</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/keras_model_sequential.html">keras_model_sequential</a></span><span class="op">(</span>input_shape <span class="op">=</span> <span class="fl">3</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="va">inner_model</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="../reference/layer_dense.html">layer_dense</a></span><span class="op">(</span>units <span class="op">=</span> <span class="fl">3</span>, activation<span class="op">=</span><span class="st">"sigmoid"</span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">model</span><span class="op">$</span><span class="va">trainable</span> <span class="op">&lt;-</span> <span class="cn">FALSE</span>  <span class="co"># Freeze the outer model</span></span>
+<span></span>
+<span><span class="va">inner_model</span><span class="op">$</span><span class="va">trainable</span>  <span class="co"># All layers in `model` are now frozen</span></span></code></pre></div>
+<pre><code><span><span class="co">## [1] FALSE</span></span></code></pre>
+<div class="sourceCode" id="cb26"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">inner_model</span><span class="op">$</span><span class="va">layers</span><span class="op">[[</span><span class="fl">1</span><span class="op">]</span><span class="op">]</span><span class="op">$</span><span class="va">trainable</span>  <span class="co"># `trainable` is propagated recursively</span></span></code></pre></div>
+<pre><code><span><span class="co">## [1] FALSE</span></span></code></pre>
 </div>
 <div class="section level2">
 <h2 id="the-typical-transfer-learning-workflow">The typical transfer-learning workflow<a class="anchor" aria-label="anchor" href="#the-typical-transfer-learning-workflow"></a>
@@ -414,28 +326,35 @@ scenarios data augmentation is very important. So in what follows, we
 will focus on the first workflow.</p>
 <p>Here’s what the first workflow looks like in Keras:</p>
 <p>First, instantiate a base model with pre-trained weights.</p>
-<div class="sourceCode" id="cb7"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" tabindex="-1"></a>base_model <span class="op">=</span> keras.applications.Xception(</span>
-<span id="cb7-2"><a href="#cb7-2" tabindex="-1"></a>    weights<span class="op">=</span><span class="st">'imagenet'</span>,  <span class="co"># Load weights pre-trained on ImageNet.</span></span>
-<span id="cb7-3"><a href="#cb7-3" tabindex="-1"></a>    input_shape<span class="op">=</span>(<span class="dv">150</span>, <span class="dv">150</span>, <span class="dv">3</span>),</span>
-<span id="cb7-4"><a href="#cb7-4" tabindex="-1"></a>    include_top<span class="op">=</span><span class="va">False</span>)  <span class="co"># Do not include the ImageNet classifier at the top.</span></span></code></pre></div>
+<div class="sourceCode" id="cb28"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">base_model</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/application_xception.html">application_xception</a></span><span class="op">(</span></span>
+<span>    weights<span class="op">=</span><span class="st">'imagenet'</span>,  <span class="co"># Load weights pre-trained on ImageNet.</span></span>
+<span>    input_shape<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">150</span>, <span class="fl">150</span>, <span class="fl">3</span><span class="op">)</span>,</span>
+<span>    include_top<span class="op">=</span><span class="cn">FALSE</span><span class="op">)</span>  <span class="co"># Do not include the ImageNet classifier at the top.</span></span></code></pre></div>
 <p>Then, freeze the base model.</p>
-<div class="sourceCode" id="cb8"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" tabindex="-1"></a>base_model.trainable <span class="op">=</span> <span class="va">False</span></span></code></pre></div>
+<div class="sourceCode" id="cb29"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">base_model</span><span class="op">$</span><span class="va">trainable</span> <span class="op">&lt;-</span> <span class="cn">FALSE</span></span></code></pre></div>
 <p>Create a new model on top.</p>
-<div class="sourceCode" id="cb9"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" tabindex="-1"></a>inputs <span class="op">=</span> keras.Input(shape<span class="op">=</span>(<span class="dv">150</span>, <span class="dv">150</span>, <span class="dv">3</span>))</span>
-<span id="cb9-2"><a href="#cb9-2" tabindex="-1"></a><span class="co"># We make sure that the base_model is running in inference mode here,</span></span>
-<span id="cb9-3"><a href="#cb9-3" tabindex="-1"></a><span class="co"># by passing `training=False`. This is important for fine-tuning, as you will</span></span>
-<span id="cb9-4"><a href="#cb9-4" tabindex="-1"></a><span class="co"># learn in a few paragraphs.</span></span>
-<span id="cb9-5"><a href="#cb9-5" tabindex="-1"></a>x <span class="op">=</span> base_model(inputs, training<span class="op">=</span><span class="va">False</span>)</span>
-<span id="cb9-6"><a href="#cb9-6" tabindex="-1"></a><span class="co"># Convert features of shape `base_model.output_shape[1:]` to vectors</span></span>
-<span id="cb9-7"><a href="#cb9-7" tabindex="-1"></a>x <span class="op">=</span> keras.layers.GlobalAveragePooling2D()(x)</span>
-<span id="cb9-8"><a href="#cb9-8" tabindex="-1"></a><span class="co"># A Dense classifier with a single unit (binary classification)</span></span>
-<span id="cb9-9"><a href="#cb9-9" tabindex="-1"></a>outputs <span class="op">=</span> keras.layers.Dense(<span class="dv">1</span>)(x)</span>
-<span id="cb9-10"><a href="#cb9-10" tabindex="-1"></a>model <span class="op">=</span> keras.Model(inputs, outputs)</span></code></pre></div>
+<div class="sourceCode" id="cb30"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">inputs</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/layer_input.html">layer_input</a></span><span class="op">(</span>shape <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">150</span>, <span class="fl">150</span>, <span class="fl">3</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="co"># We make sure that the base_model is running in inference mode here,</span></span>
+<span><span class="co"># by passing `training=False`. This is important for fine-tuning, as you will</span></span>
+<span><span class="co"># learn in a few paragraphs.</span></span>
+<span><span class="va">outputs</span> <span class="op">&lt;-</span> <span class="va">inputs</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="fu">base_model</span><span class="op">(</span>training <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="co"># Convert features of shape `base_model.output_shape[1:]` to vectors</span></span>
+<span>  <span class="fu"><a href="../reference/layer_global_average_pooling_2d.html">layer_global_average_pooling_2d</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="co"># A Dense classifier with a single unit (binary classification)</span></span>
+<span>  <span class="fu"><a href="../reference/layer_dense.html">layer_dense</a></span><span class="op">(</span><span class="fl">1</span><span class="op">)</span></span>
+<span><span class="va">model</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/keras_model.html">keras_model</a></span><span class="op">(</span><span class="va">inputs</span>, <span class="va">outputs</span><span class="op">)</span></span></code></pre></div>
 <p>Train the model on new data.</p>
-<div class="sourceCode" id="cb10"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" tabindex="-1"></a>model.<span class="bu">compile</span>(optimizer<span class="op">=</span>keras.optimizers.Adam(),</span>
-<span id="cb10-2"><a href="#cb10-2" tabindex="-1"></a>              loss<span class="op">=</span>keras.losses.BinaryCrossentropy(from_logits<span class="op">=</span><span class="va">True</span>),</span>
-<span id="cb10-3"><a href="#cb10-3" tabindex="-1"></a>              metrics<span class="op">=</span>[keras.metrics.BinaryAccuracy()])</span>
-<span id="cb10-4"><a href="#cb10-4" tabindex="-1"></a>model.fit(new_dataset, epochs<span class="op">=</span><span class="dv">20</span>, callbacks<span class="op">=</span>..., validation_data<span class="op">=</span>...)</span></code></pre></div>
+<div class="sourceCode" id="cb31"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">model</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://generics.r-lib.org/reference/compile.html" class="external-link">compile</a></span><span class="op">(</span></span>
+<span>  optimizer <span class="op">=</span> <span class="fu"><a href="../reference/optimizer_adam.html">optimizer_adam</a></span><span class="op">(</span><span class="op">)</span>,</span>
+<span>  loss <span class="op">=</span> <span class="fu"><a href="../reference/loss_binary_crossentropy.html">loss_binary_crossentropy</a></span><span class="op">(</span>from_logits <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>,</span>
+<span>  metrics <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="fu"><a href="../reference/metric_binary_accuracy.html">metric_binary_accuracy</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="op">)</span></span>
+<span><span class="va">model</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://generics.r-lib.org/reference/fit.html" class="external-link">fit</a></span><span class="op">(</span><span class="va">new_dataset</span>, epochs<span class="op">=</span><span class="fl">20</span>, callbacks<span class="op">=</span><span class="va">...</span>, validation_data<span class="op">=</span><span class="va">...</span><span class="op">)</span></span></code></pre></div>
 </div>
 <div class="section level2">
 <h2 id="fine-tuning">Fine-tuning<a class="anchor" aria-label="anchor" href="#fine-tuning"></a>
@@ -459,18 +378,21 @@ are at risk of overfitting very quickly if you apply large weight
 updates. Here, you only want to readapt the pretrained weights in an
 incremental way.</p>
 <p>This is how to implement fine-tuning of the whole base model:</p>
-<div class="sourceCode" id="cb11"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" tabindex="-1"></a><span class="co"># Unfreeze the base model</span></span>
-<span id="cb11-2"><a href="#cb11-2" tabindex="-1"></a>base_model.trainable <span class="op">=</span> <span class="va">True</span></span>
-<span id="cb11-3"><a href="#cb11-3" tabindex="-1"></a></span>
-<span id="cb11-4"><a href="#cb11-4" tabindex="-1"></a><span class="co"># It's important to recompile your model after you make any changes</span></span>
-<span id="cb11-5"><a href="#cb11-5" tabindex="-1"></a><span class="co"># to the `trainable` attribute of any inner layer, so that your changes</span></span>
-<span id="cb11-6"><a href="#cb11-6" tabindex="-1"></a><span class="co"># are take into account</span></span>
-<span id="cb11-7"><a href="#cb11-7" tabindex="-1"></a>model.<span class="bu">compile</span>(optimizer<span class="op">=</span>keras.optimizers.Adam(<span class="fl">1e-5</span>),  <span class="co"># Very low learning rate</span></span>
-<span id="cb11-8"><a href="#cb11-8" tabindex="-1"></a>              loss<span class="op">=</span>keras.losses.BinaryCrossentropy(from_logits<span class="op">=</span><span class="va">True</span>),</span>
-<span id="cb11-9"><a href="#cb11-9" tabindex="-1"></a>              metrics<span class="op">=</span>[keras.metrics.BinaryAccuracy()])</span>
-<span id="cb11-10"><a href="#cb11-10" tabindex="-1"></a></span>
-<span id="cb11-11"><a href="#cb11-11" tabindex="-1"></a><span class="co"># Train end-to-end. Be careful to stop before you overfit!</span></span>
-<span id="cb11-12"><a href="#cb11-12" tabindex="-1"></a>model.fit(new_dataset, epochs<span class="op">=</span><span class="dv">10</span>, callbacks<span class="op">=</span>..., validation_data<span class="op">=</span>...)</span></code></pre></div>
+<div class="sourceCode" id="cb32"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># Unfreeze the base model</span></span>
+<span><span class="va">base_model</span><span class="op">$</span><span class="va">trainable</span> <span class="op">&lt;-</span> <span class="cn">TRUE</span></span>
+<span></span>
+<span><span class="co"># It's important to recompile your model after you make any changes</span></span>
+<span><span class="co"># to the `trainable` attribute of any inner layer, so that your changes</span></span>
+<span><span class="co"># are take into account</span></span>
+<span><span class="va">model</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://generics.r-lib.org/reference/compile.html" class="external-link">compile</a></span><span class="op">(</span></span>
+<span>  optimizer <span class="op">=</span> <span class="fu"><a href="../reference/optimizer_adam.html">optimizer_adam</a></span><span class="op">(</span><span class="fl">1e-5</span><span class="op">)</span>,  <span class="co"># Very low learning rate</span></span>
+<span>  loss <span class="op">=</span> <span class="fu"><a href="../reference/loss_binary_crossentropy.html">loss_binary_crossentropy</a></span><span class="op">(</span>from_logits<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span>,</span>
+<span>  metrics <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="fu"><a href="../reference/metric_binary_accuracy.html">metric_binary_accuracy</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Train end-to-end. Be careful to stop before you overfit!</span></span>
+<span><span class="va">model</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://generics.r-lib.org/reference/fit.html" class="external-link">fit</a></span><span class="op">(</span><span class="va">new_dataset</span>, epochs<span class="op">=</span><span class="fl">10</span>, callbacks<span class="op">=</span><span class="va">...</span>, validation_data<span class="op">=</span><span class="va">...</span><span class="op">)</span></span></code></pre></div>
 <p><strong>Important note about <code><a href="https://generics.r-lib.org/reference/compile.html" class="external-link">compile()</a></code> and
 <code>trainable</code></strong></p>
 <p>Calling <code><a href="https://generics.r-lib.org/reference/compile.html" class="external-link">compile()</a></code> on a model is meant to “freeze” the
@@ -527,26 +449,43 @@ class-specific folders.</p>
 datasets. To keep our dataset small, we will use 40% of the original
 training data (25,000 images) for training, 10% for validation, and 10%
 for testing.</p>
-<div class="sourceCode" id="cb12"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" tabindex="-1"></a>tfds.disable_progress_bar()</span>
-<span id="cb12-2"><a href="#cb12-2" tabindex="-1"></a></span>
-<span id="cb12-3"><a href="#cb12-3" tabindex="-1"></a>train_ds, validation_ds, test_ds <span class="op">=</span> tfds.load(</span>
-<span id="cb12-4"><a href="#cb12-4" tabindex="-1"></a>    <span class="st">"cats_vs_dogs"</span>,</span>
-<span id="cb12-5"><a href="#cb12-5" tabindex="-1"></a>    <span class="co"># Reserve 10% for validation and 10% for test</span></span>
-<span id="cb12-6"><a href="#cb12-6" tabindex="-1"></a>    split<span class="op">=</span>[<span class="st">"train[:40%]"</span>, <span class="st">"train[40%:50%]"</span>, <span class="st">"train[50%:60%]"</span>],</span>
-<span id="cb12-7"><a href="#cb12-7" tabindex="-1"></a>    as_supervised<span class="op">=</span><span class="va">True</span>,  <span class="co"># Include labels</span></span>
-<span id="cb12-8"><a href="#cb12-8" tabindex="-1"></a>)</span>
-<span id="cb12-9"><a href="#cb12-9" tabindex="-1"></a></span>
-<span id="cb12-10"><a href="#cb12-10" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Number of training samples: </span><span class="sc">{</span>train_ds<span class="sc">.</span>cardinality()<span class="sc">}</span><span class="ss">"</span>)</span>
-<span id="cb12-11"><a href="#cb12-11" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Number of validation samples: </span><span class="sc">{</span>validation_ds<span class="sc">.</span>cardinality()<span class="sc">}</span><span class="ss">"</span>)</span>
-<span id="cb12-12"><a href="#cb12-12" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Number of test samples: </span><span class="sc">{</span>test_ds<span class="sc">.</span>cardinality()<span class="sc">}</span><span class="ss">"</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb33"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># reticulate::py_install("tensorflow-datasets")</span></span>
+<span><span class="va">tfds</span> <span class="op">&lt;-</span> <span class="fu">reticulate</span><span class="fu">::</span><span class="fu"><a href="https://rstudio.github.io/reticulate/reference/import.html" class="external-link">import</a></span><span class="op">(</span><span class="st">"tensorflow_datasets"</span><span class="op">)</span></span>
+<span><span class="va">tfds</span><span class="op">$</span><span class="fu">disable_progress_bar</span><span class="op">(</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="va">train_ds</span>, <span class="va">validation_ds</span>, <span class="va">test_ds</span><span class="op">)</span> <span class="op"><a href="../reference/multi-assign.html">%&lt;-%</a></span> <span class="va">tfds</span><span class="op">$</span><span class="fu">load</span><span class="op">(</span></span>
+<span>    <span class="st">"cats_vs_dogs"</span>,</span>
+<span>    <span class="co"># Reserve 10% for validation and 10% for test</span></span>
+<span>    split <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"train[:40%]"</span>, <span class="st">"train[40%:50%]"</span>, <span class="st">"train[50%:60%]"</span><span class="op">)</span>,</span>
+<span>    as_supervised<span class="op">=</span><span class="cn">TRUE</span>  <span class="co"># Include labels</span></span>
+<span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/length.html" class="external-link">length</a></span><span class="op">(</span><span class="va">train_ds</span><span class="op">)</span></span></code></pre></div>
+<pre><code><span><span class="co">## [1] 9305</span></span></code></pre>
 <p>These are the first 9 images in the training dataset – as you can
 see, they’re all different sizes.</p>
-<div class="sourceCode" id="cb13"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">10</span>, <span class="dv">10</span>))</span>
-<span id="cb13-2"><a href="#cb13-2" tabindex="-1"></a><span class="cf">for</span> i, (image, label) <span class="kw">in</span> <span class="bu">enumerate</span>(train_ds.take(<span class="dv">9</span>)):</span>
-<span id="cb13-3"><a href="#cb13-3" tabindex="-1"></a>    ax <span class="op">=</span> plt.subplot(<span class="dv">3</span>, <span class="dv">3</span>, i <span class="op">+</span> <span class="dv">1</span>)</span>
-<span id="cb13-4"><a href="#cb13-4" tabindex="-1"></a>    plt.imshow(image)</span>
-<span id="cb13-5"><a href="#cb13-5" tabindex="-1"></a>    plt.title(<span class="bu">int</span>(label))</span>
-<span id="cb13-6"><a href="#cb13-6" tabindex="-1"></a>    plt.axis(<span class="st">"off"</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb35"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/rstudio/tfdatasets" class="external-link">tfdatasets</a></span><span class="op">)</span></span></code></pre></div>
+<pre><code><span><span class="co">##</span></span>
+<span><span class="co">## Attaching package: 'tfdatasets'</span></span></code></pre>
+<pre><code><span><span class="co">## The following object is masked from 'package:keras':</span></span>
+<span><span class="co">##</span></span>
+<span><span class="co">##     shape</span></span></code></pre>
+<div class="sourceCode" id="cb38"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/graphics/par.html" class="external-link">par</a></span><span class="op">(</span>mfrow <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">3</span>, <span class="fl">3</span><span class="op">)</span>, mar <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1</span>,<span class="fl">0</span>,<span class="fl">1.5</span>,<span class="fl">0</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="va">train_ds</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="https://rdrr.io/pkg/tfdatasets/man/dataset_take.html" class="external-link">dataset_take</a></span><span class="op">(</span><span class="fl">9</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="https://rdrr.io/pkg/tfdatasets/man/as_array_iterator.html" class="external-link">as_array_iterator</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="https://rstudio.github.io/reticulate/reference/iterate.html" class="external-link">iterate</a></span><span class="op">(</span><span class="kw">function</span><span class="op">(</span><span class="va">batch</span><span class="op">)</span> <span class="op">{</span></span>
+<span>    <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="va">image</span>, <span class="va">label</span><span class="op">)</span> <span class="op"><a href="../reference/multi-assign.html">%&lt;-%</a></span> <span class="va">batch</span></span>
+<span>    <span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/grDevices/as.raster.html" class="external-link">as.raster</a></span><span class="op">(</span><span class="va">image</span>, max <span class="op">=</span> <span class="fl">255</span><span class="op">)</span><span class="op">)</span></span>
+<span>    <span class="fu"><a href="https://rdrr.io/r/graphics/title.html" class="external-link">title</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/sprintf.html" class="external-link">sprintf</a></span><span class="op">(</span><span class="st">"label: %s   size: %s"</span>,</span>
+<span>                  <span class="va">label</span>, <span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/dim.html" class="external-link">dim</a></span><span class="op">(</span><span class="va">image</span><span class="op">)</span>, collapse <span class="op">=</span> <span class="st">" x "</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span>
+<span>  <span class="op">}</span><span class="op">)</span></span></code></pre></div>
+<div class="float">
+<img src="figure/unnamed-chunk-13-1.png" alt="plot of chunk unnamed-chunk-13"><div class="figcaption">plot of chunk unnamed-chunk-13</div>
+</div>
 <p>We can also see that label 1 is “dog” and label 0 is “cat”.</p>
 </div>
 <div class="section level3">
@@ -572,11 +511,13 @@ amount of preprocessing before hitting the model.</p>
 neural network can only process contiguous batches of data), and we’ll
 do the input value scaling as part of the model, when we create it.</p>
 <p>Let’s resize images to 150x150:</p>
-<div class="sourceCode" id="cb14"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" tabindex="-1"></a>resize_fn <span class="op">=</span> keras.layers.Resizing(<span class="dv">150</span>, <span class="dv">150</span>)</span>
-<span id="cb14-2"><a href="#cb14-2" tabindex="-1"></a></span>
-<span id="cb14-3"><a href="#cb14-3" tabindex="-1"></a>train_ds <span class="op">=</span> train_ds.<span class="bu">map</span>(<span class="kw">lambda</span> x, y: (resize_fn(x), y))</span>
-<span id="cb14-4"><a href="#cb14-4" tabindex="-1"></a>validation_ds <span class="op">=</span> validation_ds.<span class="bu">map</span>(<span class="kw">lambda</span> x, y: (resize_fn(x), y))</span>
-<span id="cb14-5"><a href="#cb14-5" tabindex="-1"></a>test_ds <span class="op">=</span> test_ds.<span class="bu">map</span>(<span class="kw">lambda</span> x, y: (resize_fn(x), y))</span></code></pre></div>
+<div class="sourceCode" id="cb39"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">resize_fn</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/layer_resizing.html">layer_resizing</a></span><span class="op">(</span>width <span class="op">=</span> <span class="fl">150</span>, height <span class="op">=</span> <span class="fl">150</span><span class="op">)</span></span>
+<span><span class="va">resize_pair</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">x</span>, <span class="va">y</span><span class="op">)</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="fu">resize_fn</span><span class="op">(</span><span class="va">x</span><span class="op">)</span>, <span class="va">y</span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">train_ds</span> <span class="op">&lt;-</span> <span class="va">train_ds</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://rdrr.io/pkg/tfdatasets/man/dataset_map.html" class="external-link">dataset_map</a></span><span class="op">(</span><span class="va">resize_pair</span><span class="op">)</span></span>
+<span><span class="va">validation_ds</span> <span class="op">&lt;-</span> <span class="va">validation_ds</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://rdrr.io/pkg/tfdatasets/man/dataset_map.html" class="external-link">dataset_map</a></span><span class="op">(</span><span class="va">resize_pair</span><span class="op">)</span></span>
+<span><span class="va">test_ds</span> <span class="op">&lt;-</span> <span class="va">test_ds</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://rdrr.io/pkg/tfdatasets/man/dataset_map.html" class="external-link">dataset_map</a></span><span class="op">(</span><span class="va">resize_pair</span><span class="op">)</span></span></code></pre></div>
 </div>
 <div class="section level3">
 <h3 id="using-random-data-augmentation">Using random data augmentation<a class="anchor" aria-label="anchor" href="#using-random-data-augmentation"></a>
@@ -587,41 +528,67 @@ transformations to the training images, such as random horizontal
 flipping or small random rotations. This helps expose the model to
 different aspects of the training data while slowing down
 overfitting.</p>
-<div class="sourceCode" id="cb15"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" tabindex="-1"></a>augmentation_layers <span class="op">=</span> [</span>
-<span id="cb15-2"><a href="#cb15-2" tabindex="-1"></a>    layers.RandomFlip(<span class="st">"horizontal"</span>),</span>
-<span id="cb15-3"><a href="#cb15-3" tabindex="-1"></a>    layers.RandomRotation(<span class="fl">0.1</span>),</span>
-<span id="cb15-4"><a href="#cb15-4" tabindex="-1"></a>]</span>
-<span id="cb15-5"><a href="#cb15-5" tabindex="-1"></a></span>
-<span id="cb15-6"><a href="#cb15-6" tabindex="-1"></a></span>
-<span id="cb15-7"><a href="#cb15-7" tabindex="-1"></a><span class="kw">def</span> data_augmentation(x):</span>
-<span id="cb15-8"><a href="#cb15-8" tabindex="-1"></a>    <span class="cf">for</span> layer <span class="kw">in</span> augmentation_layers:</span>
-<span id="cb15-9"><a href="#cb15-9" tabindex="-1"></a>        x <span class="op">=</span> layer(x)</span>
-<span id="cb15-10"><a href="#cb15-10" tabindex="-1"></a>    <span class="cf">return</span> x</span>
-<span id="cb15-11"><a href="#cb15-11" tabindex="-1"></a></span>
-<span id="cb15-12"><a href="#cb15-12" tabindex="-1"></a></span>
-<span id="cb15-13"><a href="#cb15-13" tabindex="-1"></a>train_ds <span class="op">=</span> train_ds.<span class="bu">map</span>(<span class="kw">lambda</span> x, y: (data_augmentation(x), y))</span></code></pre></div>
+<div class="sourceCode" id="cb40"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">data_augmentation</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/keras_model_sequential.html">keras_model_sequential</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="../reference/layer_random_flip.html">layer_random_flip</a></span><span class="op">(</span><span class="st">"horizontal"</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="../reference/layer_random_rotation.html">layer_random_rotation</a></span><span class="op">(</span><span class="fl">.1</span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">train_ds</span> <span class="op">&lt;-</span> <span class="va">train_ds</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="https://rdrr.io/pkg/tfdatasets/man/dataset_map.html" class="external-link">dataset_map</a></span><span class="op">(</span><span class="kw">function</span><span class="op">(</span><span class="va">x</span>, <span class="va">y</span><span class="op">)</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="fu">data_augmentation</span><span class="op">(</span><span class="va">x</span><span class="op">)</span>, <span class="va">y</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <p>Let’s batch the data and use prefetching to optimize loading
 speed.</p>
-<div class="sourceCode" id="cb16"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" tabindex="-1"></a><span class="im">from</span> tensorflow <span class="im">import</span> data <span class="im">as</span> tf_data</span>
-<span id="cb16-2"><a href="#cb16-2" tabindex="-1"></a></span>
-<span id="cb16-3"><a href="#cb16-3" tabindex="-1"></a>batch_size <span class="op">=</span> <span class="dv">64</span></span>
-<span id="cb16-4"><a href="#cb16-4" tabindex="-1"></a></span>
-<span id="cb16-5"><a href="#cb16-5" tabindex="-1"></a>train_ds <span class="op">=</span> train_ds.batch(batch_size).prefetch(tf_data.AUTOTUNE).cache()</span>
-<span id="cb16-6"><a href="#cb16-6" tabindex="-1"></a>validation_ds <span class="op">=</span> (</span>
-<span id="cb16-7"><a href="#cb16-7" tabindex="-1"></a>    validation_ds.batch(batch_size).prefetch(tf_data.AUTOTUNE).cache()</span>
-<span id="cb16-8"><a href="#cb16-8" tabindex="-1"></a>)</span>
-<span id="cb16-9"><a href="#cb16-9" tabindex="-1"></a>test_ds <span class="op">=</span> test_ds.batch(batch_size).prefetch(tf_data.AUTOTUNE).cache()</span></code></pre></div>
+<div class="sourceCode" id="cb41"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/rstudio/tensorflow" class="external-link">tensorflow</a></span><span class="op">)</span></span></code></pre></div>
+<pre><code><span><span class="co">##</span></span>
+<span><span class="co">## Attaching package: 'tensorflow'</span></span></code></pre>
+<pre><code><span><span class="co">## The following objects are masked from 'package:keras':</span></span>
+<span><span class="co">##</span></span>
+<span><span class="co">##     set_random_seed, shape</span></span></code></pre>
+<div class="sourceCode" id="cb44"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">batch_size</span> <span class="op">&lt;-</span> <span class="fl">64</span></span>
+<span></span>
+<span><span class="va">train_ds</span> <span class="op">&lt;-</span> <span class="va">train_ds</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="https://rdrr.io/pkg/tfdatasets/man/dataset_batch.html" class="external-link">dataset_batch</a></span><span class="op">(</span><span class="va">batch_size</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="https://rdrr.io/pkg/tfdatasets/man/dataset_prefetch.html" class="external-link">dataset_prefetch</a></span><span class="op">(</span><span class="va">tf</span><span class="op">$</span><span class="va">data</span><span class="op">$</span><span class="va">AUTOTUNE</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="https://rdrr.io/pkg/tfdatasets/man/dataset_cache.html" class="external-link">dataset_cache</a></span><span class="op">(</span><span class="op">)</span></span>
+<span><span class="va">validation_ds</span> <span class="op">&lt;-</span> <span class="va">validation_ds</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="https://rdrr.io/pkg/tfdatasets/man/dataset_batch.html" class="external-link">dataset_batch</a></span><span class="op">(</span><span class="va">batch_size</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="https://rdrr.io/pkg/tfdatasets/man/dataset_prefetch.html" class="external-link">dataset_prefetch</a></span><span class="op">(</span><span class="va">tf</span><span class="op">$</span><span class="va">data</span><span class="op">$</span><span class="va">AUTOTUNE</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="https://rdrr.io/pkg/tfdatasets/man/dataset_cache.html" class="external-link">dataset_cache</a></span><span class="op">(</span><span class="op">)</span></span>
+<span><span class="va">test_ds</span> <span class="op">&lt;-</span> <span class="va">test_ds</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="https://rdrr.io/pkg/tfdatasets/man/dataset_batch.html" class="external-link">dataset_batch</a></span><span class="op">(</span><span class="va">batch_size</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="https://rdrr.io/pkg/tfdatasets/man/dataset_prefetch.html" class="external-link">dataset_prefetch</a></span><span class="op">(</span><span class="va">tf</span><span class="op">$</span><span class="va">data</span><span class="op">$</span><span class="va">AUTOTUNE</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="https://rdrr.io/pkg/tfdatasets/man/dataset_cache.html" class="external-link">dataset_cache</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
 <p>Let’s visualize what the first image of the first batch looks like
 after various random transformations:</p>
-<div class="sourceCode" id="cb17"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" tabindex="-1"></a><span class="cf">for</span> images, labels <span class="kw">in</span> train_ds.take(<span class="dv">1</span>):</span>
-<span id="cb17-2"><a href="#cb17-2" tabindex="-1"></a>    plt.figure(figsize<span class="op">=</span>(<span class="dv">10</span>, <span class="dv">10</span>))</span>
-<span id="cb17-3"><a href="#cb17-3" tabindex="-1"></a>    first_image <span class="op">=</span> images[<span class="dv">0</span>]</span>
-<span id="cb17-4"><a href="#cb17-4" tabindex="-1"></a>    <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">9</span>):</span>
-<span id="cb17-5"><a href="#cb17-5" tabindex="-1"></a>        ax <span class="op">=</span> plt.subplot(<span class="dv">3</span>, <span class="dv">3</span>, i <span class="op">+</span> <span class="dv">1</span>)</span>
-<span id="cb17-6"><a href="#cb17-6" tabindex="-1"></a>        augmented_image <span class="op">=</span> data_augmentation(np.expand_dims(first_image, <span class="dv">0</span>))</span>
-<span id="cb17-7"><a href="#cb17-7" tabindex="-1"></a>        plt.imshow(np.array(augmented_image[<span class="dv">0</span>]).astype(<span class="st">"int32"</span>))</span>
-<span id="cb17-8"><a href="#cb17-8" tabindex="-1"></a>        plt.title(<span class="bu">int</span>(labels[<span class="dv">0</span>]))</span>
-<span id="cb17-9"><a href="#cb17-9" tabindex="-1"></a>        plt.axis(<span class="st">"off"</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb45"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">batch</span> <span class="op">&lt;-</span> <span class="va">train_ds</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="https://rdrr.io/pkg/tfdatasets/man/dataset_take.html" class="external-link">dataset_take</a></span><span class="op">(</span><span class="fl">1</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="https://rstudio.github.io/reticulate/reference/iterate.html" class="external-link">as_iterator</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="https://rstudio.github.io/reticulate/reference/iterate.html" class="external-link">iter_next</a></span><span class="op">(</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="va">images</span>, <span class="va">labels</span><span class="op">)</span> <span class="op"><a href="../reference/multi-assign.html">%&lt;-%</a></span> <span class="va">batch</span></span>
+<span><span class="va">first_image</span> <span class="op">&lt;-</span> <span class="va">images</span><span class="op">[</span><span class="fl">1</span>, <span class="fu"><a href="https://rdrr.io/pkg/tensorflow/man/all_dims.html" class="external-link">all_dims</a></span><span class="op">(</span><span class="op">)</span>, drop <span class="op">=</span> <span class="cn">TRUE</span><span class="op">]</span></span>
+<span><span class="va">augmented_image</span> <span class="op">&lt;-</span> <span class="fu">data_augmentation</span><span class="op">(</span><span class="va">first_image</span>, training <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">plot_image</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">image</span>, <span class="va">main</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/deparse.html" class="external-link">deparse1</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/substitute.html" class="external-link">substitute</a></span><span class="op">(</span><span class="va">image</span><span class="op">)</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span></span>
+<span>  <span class="va">image</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span></span>
+<span>    <span class="fu"><a href="https://rdrr.io/r/base/array.html" class="external-link">as.array</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span>   <span class="co"># convert from tensor to R array</span></span>
+<span>    <span class="fu"><a href="https://rdrr.io/r/grDevices/as.raster.html" class="external-link">as.raster</a></span><span class="op">(</span>max <span class="op">=</span> <span class="fl">255</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span></span>
+<span>    <span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="op">)</span></span>
+<span></span>
+<span>  <span class="kw">if</span><span class="op">(</span><span class="op">!</span><span class="fu"><a href="https://rdrr.io/r/base/NULL.html" class="external-link">is.null</a></span><span class="op">(</span><span class="va">main</span><span class="op">)</span><span class="op">)</span></span>
+<span>    <span class="fu"><a href="https://rdrr.io/r/graphics/title.html" class="external-link">title</a></span><span class="op">(</span><span class="va">main</span><span class="op">)</span></span>
+<span><span class="op">}</span></span>
+<span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/par.html" class="external-link">par</a></span><span class="op">(</span>mfrow <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">2</span>, <span class="fl">2</span><span class="op">)</span>, mar <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">1</span>, <span class="fl">1.5</span>, <span class="fl">1</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="fu">plot_image</span><span class="op">(</span><span class="va">first_image</span><span class="op">)</span></span>
+<span><span class="fu">plot_image</span><span class="op">(</span><span class="va">augmented_image</span><span class="op">)</span></span>
+<span><span class="fu">plot_image</span><span class="op">(</span><span class="fu">data_augmentation</span><span class="op">(</span><span class="va">first_image</span>, training <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>, <span class="st">"augmented 2"</span><span class="op">)</span></span>
+<span><span class="fu">plot_image</span><span class="op">(</span><span class="fu">data_augmentation</span><span class="op">(</span><span class="va">first_image</span>, training <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>, <span class="st">"augmented 3"</span><span class="op">)</span></span></code></pre></div>
+<div class="float">
+<img src="figure/unnamed-chunk-17-1.png" alt="plot of chunk unnamed-chunk-17"><div class="figcaption">plot of chunk unnamed-chunk-17</div>
+</div>
 </div>
 </div>
 <div class="section level2">
@@ -641,47 +608,73 @@ base model, so that it runs in inference mode, so that batchnorm
 statistics don’t get updated even after we unfreeze the base model for
 fine-tuning.</li>
 </ul>
-<div class="sourceCode" id="cb18"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1" tabindex="-1"></a>base_model <span class="op">=</span> keras.applications.Xception(</span>
-<span id="cb18-2"><a href="#cb18-2" tabindex="-1"></a>    weights<span class="op">=</span><span class="st">"imagenet"</span>,  <span class="co"># Load weights pre-trained on ImageNet.</span></span>
-<span id="cb18-3"><a href="#cb18-3" tabindex="-1"></a>    input_shape<span class="op">=</span>(<span class="dv">150</span>, <span class="dv">150</span>, <span class="dv">3</span>),</span>
-<span id="cb18-4"><a href="#cb18-4" tabindex="-1"></a>    include_top<span class="op">=</span><span class="va">False</span>,</span>
-<span id="cb18-5"><a href="#cb18-5" tabindex="-1"></a>)  <span class="co"># Do not include the ImageNet classifier at the top.</span></span>
-<span id="cb18-6"><a href="#cb18-6" tabindex="-1"></a></span>
-<span id="cb18-7"><a href="#cb18-7" tabindex="-1"></a><span class="co"># Freeze the base_model</span></span>
-<span id="cb18-8"><a href="#cb18-8" tabindex="-1"></a>base_model.trainable <span class="op">=</span> <span class="va">False</span></span>
-<span id="cb18-9"><a href="#cb18-9" tabindex="-1"></a></span>
-<span id="cb18-10"><a href="#cb18-10" tabindex="-1"></a><span class="co"># Create new model on top</span></span>
-<span id="cb18-11"><a href="#cb18-11" tabindex="-1"></a>inputs <span class="op">=</span> keras.Input(shape<span class="op">=</span>(<span class="dv">150</span>, <span class="dv">150</span>, <span class="dv">3</span>))</span>
-<span id="cb18-12"><a href="#cb18-12" tabindex="-1"></a></span>
-<span id="cb18-13"><a href="#cb18-13" tabindex="-1"></a><span class="co"># Pre-trained Xception weights requires that input be scaled</span></span>
-<span id="cb18-14"><a href="#cb18-14" tabindex="-1"></a><span class="co"># from (0, 255) to a range of (-1., +1.), the rescaling layer</span></span>
-<span id="cb18-15"><a href="#cb18-15" tabindex="-1"></a><span class="co"># outputs: `(inputs * scale) + offset`</span></span>
-<span id="cb18-16"><a href="#cb18-16" tabindex="-1"></a>scale_layer <span class="op">=</span> keras.layers.Rescaling(scale<span class="op">=</span><span class="dv">1</span> <span class="op">/</span> <span class="fl">127.5</span>, offset<span class="op">=-</span><span class="dv">1</span>)</span>
-<span id="cb18-17"><a href="#cb18-17" tabindex="-1"></a>x <span class="op">=</span> scale_layer(inputs)</span>
-<span id="cb18-18"><a href="#cb18-18" tabindex="-1"></a></span>
-<span id="cb18-19"><a href="#cb18-19" tabindex="-1"></a><span class="co"># The base model contains batchnorm layers. We want to keep them in inference mode</span></span>
-<span id="cb18-20"><a href="#cb18-20" tabindex="-1"></a><span class="co"># when we unfreeze the base model for fine-tuning, so we make sure that the</span></span>
-<span id="cb18-21"><a href="#cb18-21" tabindex="-1"></a><span class="co"># base_model is running in inference mode here.</span></span>
-<span id="cb18-22"><a href="#cb18-22" tabindex="-1"></a>x <span class="op">=</span> base_model(x, training<span class="op">=</span><span class="va">False</span>)</span>
-<span id="cb18-23"><a href="#cb18-23" tabindex="-1"></a>x <span class="op">=</span> keras.layers.GlobalAveragePooling2D()(x)</span>
-<span id="cb18-24"><a href="#cb18-24" tabindex="-1"></a>x <span class="op">=</span> keras.layers.Dropout(<span class="fl">0.2</span>)(x)  <span class="co"># Regularize with dropout</span></span>
-<span id="cb18-25"><a href="#cb18-25" tabindex="-1"></a>outputs <span class="op">=</span> keras.layers.Dense(<span class="dv">1</span>)(x)</span>
-<span id="cb18-26"><a href="#cb18-26" tabindex="-1"></a>model <span class="op">=</span> keras.Model(inputs, outputs)</span>
-<span id="cb18-27"><a href="#cb18-27" tabindex="-1"></a></span>
-<span id="cb18-28"><a href="#cb18-28" tabindex="-1"></a>model.summary(show_trainable<span class="op">=</span><span class="va">True</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb46"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">base_model</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/application_xception.html">application_xception</a></span><span class="op">(</span></span>
+<span>    weights<span class="op">=</span><span class="st">"imagenet"</span>,  <span class="co"># Load weights pre-trained on ImageNet.</span></span>
+<span>    input_shape<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">150</span>, <span class="fl">150</span>, <span class="fl">3</span><span class="op">)</span>,</span>
+<span>    include_top<span class="op">=</span><span class="cn">FALSE</span>,</span>
+<span><span class="op">)</span>  <span class="co"># Do not include the ImageNet classifier at the top.</span></span>
+<span></span>
+<span><span class="co"># Freeze the base_model</span></span>
+<span><span class="va">base_model</span><span class="op">$</span><span class="va">trainable</span> <span class="op">&lt;-</span> <span class="cn">FALSE</span></span>
+<span></span>
+<span><span class="co"># Create new model on top</span></span>
+<span><span class="va">inputs</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/layer_input.html">layer_input</a></span><span class="op">(</span>shape<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">150</span>, <span class="fl">150</span>, <span class="fl">3</span><span class="op">)</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Pre-trained Xception weights requires that input be scaled</span></span>
+<span><span class="co"># from (0, 255) to a range of (-1., +1.), the rescaling layer</span></span>
+<span><span class="co"># outputs: `(inputs * scale) + offset`</span></span>
+<span><span class="va">scale_layer</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/layer_rescaling.html">layer_rescaling</a></span><span class="op">(</span>scale<span class="op">=</span><span class="fl">1</span> <span class="op">/</span> <span class="fl">127.5</span>, offset<span class="op">=</span><span class="op">-</span><span class="fl">1</span><span class="op">)</span></span>
+<span><span class="va">x</span> <span class="op">&lt;-</span> <span class="fu">scale_layer</span><span class="op">(</span><span class="va">inputs</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># The base model contains batchnorm layers. We want to keep them in inference mode</span></span>
+<span><span class="co"># when we unfreeze the base model for fine-tuning, so we make sure that the</span></span>
+<span><span class="co"># base_model is running in inference mode here.</span></span>
+<span><span class="va">outputs</span> <span class="op">&lt;-</span> <span class="va">x</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="fu">base_model</span><span class="op">(</span>training <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="../reference/layer_global_average_pooling_2d.html">layer_global_average_pooling_2d</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="../reference/layer_dropout.html">layer_dropout</a></span><span class="op">(</span><span class="fl">0.2</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="../reference/layer_dense.html">layer_dense</a></span><span class="op">(</span><span class="fl">1</span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">model</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/keras_model.html">keras_model</a></span><span class="op">(</span><span class="va">inputs</span>, <span class="va">outputs</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary</a></span><span class="op">(</span><span class="va">model</span>, show_trainable<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
+<pre><code><span><span class="co">## Model: "functional_10"</span></span>
+<span><span class="co">## ┏━━━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━┳━━━━━━┓</span></span>
+<span><span class="co">## ┃                          ┃                        ┃  Param ┃      ┃</span></span>
+<span><span class="co">## ┃ Layer (type)             ┃ Output Shape           ┃      # ┃ Tra… ┃</span></span>
+<span><span class="co">## ┡━━━━━━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━╇━━━━━━┩</span></span>
+<span><span class="co">## │ input_layer_7            │ (None, 150, 150, 3)    │      0 │  -   │</span></span>
+<span><span class="co">## │ (InputLayer)             │                        │        │      │</span></span>
+<span><span class="co">## ├──────────────────────────┼────────────────────────┼────────┼──────┤</span></span>
+<span><span class="co">## │ rescaling (Rescaling)    │ (None, 150, 150, 3)    │      0 │  -   │</span></span>
+<span><span class="co">## ├──────────────────────────┼────────────────────────┼────────┼──────┤</span></span>
+<span><span class="co">## │ xception (Functional)    │ (None, 5, 5, 2048)     │ 20,86… │  N   │</span></span>
+<span><span class="co">## ├──────────────────────────┼────────────────────────┼────────┼──────┤</span></span>
+<span><span class="co">## │ global_average_pooling2… │ (None, 2048)           │      0 │  -   │</span></span>
+<span><span class="co">## │ (GlobalAveragePooling2D) │                        │        │      │</span></span>
+<span><span class="co">## ├──────────────────────────┼────────────────────────┼────────┼──────┤</span></span>
+<span><span class="co">## │ dropout (Dropout)        │ (None, 2048)           │      0 │  -   │</span></span>
+<span><span class="co">## ├──────────────────────────┼────────────────────────┼────────┼──────┤</span></span>
+<span><span class="co">## │ dense_8 (Dense)          │ (None, 1)              │  2,049 │  Y   │</span></span>
+<span><span class="co">## └──────────────────────────┴────────────────────────┴────────┴──────┘</span></span>
+<span><span class="co">##  Total params: 20,863,529 (79.59 MB)</span></span>
+<span><span class="co">##  Trainable params: 2,049 (8.00 KB)</span></span>
+<span><span class="co">##  Non-trainable params: 20,861,480 (79.58 MB)</span></span></code></pre>
 </div>
 <div class="section level2">
 <h2 id="train-the-top-layer">Train the top layer<a class="anchor" aria-label="anchor" href="#train-the-top-layer"></a>
 </h2>
-<div class="sourceCode" id="cb19"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1" tabindex="-1"></a>model.<span class="bu">compile</span>(</span>
-<span id="cb19-2"><a href="#cb19-2" tabindex="-1"></a>    optimizer<span class="op">=</span>keras.optimizers.Adam(),</span>
-<span id="cb19-3"><a href="#cb19-3" tabindex="-1"></a>    loss<span class="op">=</span>keras.losses.BinaryCrossentropy(from_logits<span class="op">=</span><span class="va">True</span>),</span>
-<span id="cb19-4"><a href="#cb19-4" tabindex="-1"></a>    metrics<span class="op">=</span>[keras.metrics.BinaryAccuracy()],</span>
-<span id="cb19-5"><a href="#cb19-5" tabindex="-1"></a>)</span>
-<span id="cb19-6"><a href="#cb19-6" tabindex="-1"></a></span>
-<span id="cb19-7"><a href="#cb19-7" tabindex="-1"></a>epochs <span class="op">=</span> <span class="dv">2</span></span>
-<span id="cb19-8"><a href="#cb19-8" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Fitting the top layer of the model"</span>)</span>
-<span id="cb19-9"><a href="#cb19-9" tabindex="-1"></a>model.fit(train_ds, epochs<span class="op">=</span>epochs, validation_data<span class="op">=</span>validation_ds)</span></code></pre></div>
+<div class="sourceCode" id="cb48"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">model</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://generics.r-lib.org/reference/compile.html" class="external-link">compile</a></span><span class="op">(</span></span>
+<span>    optimizer <span class="op">=</span> <span class="fu"><a href="../reference/optimizer_adam.html">optimizer_adam</a></span><span class="op">(</span><span class="op">)</span>,</span>
+<span>    loss <span class="op">=</span> <span class="fu"><a href="../reference/loss_binary_crossentropy.html">loss_binary_crossentropy</a></span><span class="op">(</span>from_logits <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>,</span>
+<span>    metrics <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="fu"><a href="../reference/metric_binary_accuracy.html">metric_binary_accuracy</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">epochs</span> <span class="op">&lt;-</span> <span class="fl">1</span></span>
+<span><span class="va">model</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://generics.r-lib.org/reference/fit.html" class="external-link">fit</a></span><span class="op">(</span><span class="va">train_ds</span>, epochs<span class="op">=</span><span class="va">epochs</span>, validation_data<span class="op">=</span><span class="va">validation_ds</span><span class="op">)</span></span></code></pre></div>
+<pre><code><span><span class="co">## 146/146 - 108s - 742ms/step - binary_accuracy: 0.9125 - loss: 0.1910 - val_binary_accuracy: 0.9700 - val_loss: 0.0886</span></span></code></pre>
 </div>
 <div class="section level2">
 <h2 id="do-a-round-of-fine-tuning-of-the-entire-model">Do a round of fine-tuning of the entire model<a class="anchor" aria-label="anchor" href="#do-a-round-of-fine-tuning-of-the-entire-model"></a>
@@ -694,55 +687,75 @@ when calling it when we built the model. This means that the batch
 normalization layers inside won’t update their batch statistics. If they
 did, they would wreck havoc on the representations learned by the model
 so far.</p>
-<div class="sourceCode" id="cb20"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb20-1"><a href="#cb20-1" tabindex="-1"></a><span class="co"># Unfreeze the base_model. Note that it keeps running in inference mode</span></span>
-<span id="cb20-2"><a href="#cb20-2" tabindex="-1"></a><span class="co"># since we passed `training=False` when calling it. This means that</span></span>
-<span id="cb20-3"><a href="#cb20-3" tabindex="-1"></a><span class="co"># the batchnorm layers will not update their batch statistics.</span></span>
-<span id="cb20-4"><a href="#cb20-4" tabindex="-1"></a><span class="co"># This prevents the batchnorm layers from undoing all the training</span></span>
-<span id="cb20-5"><a href="#cb20-5" tabindex="-1"></a><span class="co"># we've done so far.</span></span>
-<span id="cb20-6"><a href="#cb20-6" tabindex="-1"></a>base_model.trainable <span class="op">=</span> <span class="va">True</span></span>
-<span id="cb20-7"><a href="#cb20-7" tabindex="-1"></a>model.summary(show_trainable<span class="op">=</span><span class="va">True</span>)</span>
-<span id="cb20-8"><a href="#cb20-8" tabindex="-1"></a></span>
-<span id="cb20-9"><a href="#cb20-9" tabindex="-1"></a>model.<span class="bu">compile</span>(</span>
-<span id="cb20-10"><a href="#cb20-10" tabindex="-1"></a>    optimizer<span class="op">=</span>keras.optimizers.Adam(<span class="fl">1e-5</span>),  <span class="co"># Low learning rate</span></span>
-<span id="cb20-11"><a href="#cb20-11" tabindex="-1"></a>    loss<span class="op">=</span>keras.losses.BinaryCrossentropy(from_logits<span class="op">=</span><span class="va">True</span>),</span>
-<span id="cb20-12"><a href="#cb20-12" tabindex="-1"></a>    metrics<span class="op">=</span>[keras.metrics.BinaryAccuracy()],</span>
-<span id="cb20-13"><a href="#cb20-13" tabindex="-1"></a>)</span>
-<span id="cb20-14"><a href="#cb20-14" tabindex="-1"></a></span>
-<span id="cb20-15"><a href="#cb20-15" tabindex="-1"></a>epochs <span class="op">=</span> <span class="dv">1</span></span>
-<span id="cb20-16"><a href="#cb20-16" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Fitting the end-to-end model"</span>)</span>
-<span id="cb20-17"><a href="#cb20-17" tabindex="-1"></a>model.fit(train_ds, epochs<span class="op">=</span>epochs, validation_data<span class="op">=</span>validation_ds)</span></code></pre></div>
+<div class="sourceCode" id="cb50"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># Unfreeze the base_model. Note that it keeps running in inference mode</span></span>
+<span><span class="co"># since we passed `training=False` when calling it. This means that</span></span>
+<span><span class="co"># the batchnorm layers will not update their batch statistics.</span></span>
+<span><span class="co"># This prevents the batchnorm layers from undoing all the training</span></span>
+<span><span class="co"># we've done so far.</span></span>
+<span><span class="va">base_model</span><span class="op">$</span><span class="va">trainable</span> <span class="op">&lt;-</span> <span class="cn">TRUE</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary</a></span><span class="op">(</span><span class="va">model</span>, show_trainable<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
+<pre><code><span><span class="co">## Model: "functional_10"</span></span>
+<span><span class="co">## ┏━━━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━┳━━━━━━┓</span></span>
+<span><span class="co">## ┃                          ┃                        ┃  Param ┃      ┃</span></span>
+<span><span class="co">## ┃ Layer (type)             ┃ Output Shape           ┃      # ┃ Tra… ┃</span></span>
+<span><span class="co">## ┡━━━━━━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━╇━━━━━━┩</span></span>
+<span><span class="co">## │ input_layer_7            │ (None, 150, 150, 3)    │      0 │  -   │</span></span>
+<span><span class="co">## │ (InputLayer)             │                        │        │      │</span></span>
+<span><span class="co">## ├──────────────────────────┼────────────────────────┼────────┼──────┤</span></span>
+<span><span class="co">## │ rescaling (Rescaling)    │ (None, 150, 150, 3)    │      0 │  -   │</span></span>
+<span><span class="co">## ├──────────────────────────┼────────────────────────┼────────┼──────┤</span></span>
+<span><span class="co">## │ xception (Functional)    │ (None, 5, 5, 2048)     │ 20,86… │  Y   │</span></span>
+<span><span class="co">## ├──────────────────────────┼────────────────────────┼────────┼──────┤</span></span>
+<span><span class="co">## │ global_average_pooling2… │ (None, 2048)           │      0 │  -   │</span></span>
+<span><span class="co">## │ (GlobalAveragePooling2D) │                        │        │      │</span></span>
+<span><span class="co">## ├──────────────────────────┼────────────────────────┼────────┼──────┤</span></span>
+<span><span class="co">## │ dropout (Dropout)        │ (None, 2048)           │      0 │  -   │</span></span>
+<span><span class="co">## ├──────────────────────────┼────────────────────────┼────────┼──────┤</span></span>
+<span><span class="co">## │ dense_8 (Dense)          │ (None, 1)              │  2,049 │  Y   │</span></span>
+<span><span class="co">## └──────────────────────────┴────────────────────────┴────────┴──────┘</span></span>
+<span><span class="co">##  Total params: 20,867,629 (79.60 MB)</span></span>
+<span><span class="co">##  Trainable params: 20,809,001 (79.38 MB)</span></span>
+<span><span class="co">##  Non-trainable params: 54,528 (213.00 KB)</span></span>
+<span><span class="co">##  Optimizer params: 4,100 (16.02 KB)</span></span></code></pre>
+<div class="sourceCode" id="cb52"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">model</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://generics.r-lib.org/reference/compile.html" class="external-link">compile</a></span><span class="op">(</span></span>
+<span>  optimizer <span class="op">=</span> <span class="fu"><a href="../reference/optimizer_adam.html">optimizer_adam</a></span><span class="op">(</span><span class="fl">1e-5</span><span class="op">)</span>,  <span class="co"># Low learning rate</span></span>
+<span>  loss <span class="op">=</span> <span class="fu"><a href="../reference/loss_binary_crossentropy.html">loss_binary_crossentropy</a></span><span class="op">(</span>from_logits<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span>,</span>
+<span>  metrics <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="fu"><a href="../reference/metric_binary_accuracy.html">metric_binary_accuracy</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">epochs</span> <span class="op">&lt;-</span> <span class="fl">1</span></span>
+<span><span class="va">model</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://generics.r-lib.org/reference/fit.html" class="external-link">fit</a></span><span class="op">(</span><span class="va">train_ds</span>, epochs<span class="op">=</span><span class="va">epochs</span>, validation_data<span class="op">=</span><span class="va">validation_ds</span><span class="op">)</span></span></code></pre></div>
+<pre><code><span><span class="co">## 146/146 - 447s - 3s/step - binary_accuracy: 0.8602 - loss: 0.3427 - val_binary_accuracy: 0.9456 - val_loss: 0.1240</span></span></code></pre>
 <p>After 10 epochs, fine-tuning gains us a nice improvement here. Let’s
 evaluate the model on the test dataset:</p>
-<div class="sourceCode" id="cb21"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb21-1"><a href="#cb21-1" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Test dataset evaluation"</span>)</span>
-<span id="cb21-2"><a href="#cb21-2" tabindex="-1"></a>model.evaluate(test_ds)</span></code></pre></div>
+<div class="sourceCode" id="cb54"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">model</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://rdrr.io/pkg/tensorflow/man/evaluate.html" class="external-link">evaluate</a></span><span class="op">(</span><span class="va">test_ds</span><span class="op">)</span></span></code></pre></div>
+<pre><code><span><span class="co">## 37/37 - 22s - 601ms/step - binary_accuracy: 0.9413 - loss: 0.1453</span></span></code></pre>
+<pre><code><span><span class="co">##            loss compile_metrics</span></span>
+<span><span class="co">##       0.1452871       0.9413007</span></span></code></pre>
 </div>
-  </div>
-
-  <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
-
-        <nav id="toc" data-toggle="toc"><h2 data-toc-skip>Contents</h2>
-    </nav>
-</div>
-
+  </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>
+    </nav></aside>
 </div>
 
 
 
-      <footer><div class="copyright">
+    <footer><div class="pkgdown-footer-left">
   <p></p>
 <p>Developed by Tomasz Kalinowski, JJ Allaire, François Chollet, RStudio, Google.</p>
 </div>
 
-<div class="pkgdown">
+<div class="pkgdown-footer-right">
   <p></p>
-<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.7.</p>
+<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.7.9000.</p>
 </div>
 
-      </footer>
+    </footer>
 </div>
 
   
-
 
   
 

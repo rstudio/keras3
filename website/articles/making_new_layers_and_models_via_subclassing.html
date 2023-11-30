@@ -4,21 +4,20 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Making new layers and models via subclassing • keras</title>
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="description" content="Complete guide to writing `Layer` and `Model` objects from scratch.">
+<title>Making new layers and models via subclassing • keras3</title>
 <!-- favicons --><link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
 <link rel="icon" type="image/png" sizes="32x32" href="../favicon-32x32.png">
 <link rel="apple-touch-icon" type="image/png" sizes="180x180" href="../apple-touch-icon.png">
 <link rel="apple-touch-icon" type="image/png" sizes="120x120" href="../apple-touch-icon-120x120.png">
 <link rel="apple-touch-icon" type="image/png" sizes="76x76" href="../apple-touch-icon-76x76.png">
 <link rel="apple-touch-icon" type="image/png" sizes="60x60" href="../apple-touch-icon-60x60.png">
-<!-- jquery --><script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script><!-- Bootstrap --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/css/bootstrap.min.css" integrity="sha256-bZLfwXAP04zRMK2BjiO8iu9pf4FbLqX6zitd+tIvLhE=" crossorigin="anonymous">
-<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/js/bootstrap.min.js" integrity="sha256-nuL8/2cJ5NDSSwnKD8VqreErSWHtnEP9E7AySL+1ev4=" crossorigin="anonymous"></script><!-- bootstrap-toc --><link rel="stylesheet" href="../bootstrap-toc.css">
-<script src="../bootstrap-toc.js"></script><!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous">
+<script src="../deps/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<link href="../deps/bootstrap-5.3.1/bootstrap.min.css" rel="stylesheet">
+<script src="../deps/bootstrap-5.3.1/bootstrap.bundle.min.js"></script><!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/v4-shims.min.css" integrity="sha256-wZjR52fzng1pJHwx4aV2AO3yyTOXrcDW7jBpJtTwVxw=" crossorigin="anonymous">
-<!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><!-- headroom.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/headroom.min.js" integrity="sha256-AsUX4SJE1+yuDu5+mAVzJbuYNPHj/WroHuZ8Ir/CkE0=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script><!-- pkgdown --><link href="../pkgdown.css" rel="stylesheet">
-<script src="../pkgdown.js"></script><link href="../extra.css" rel="stylesheet">
-<script src="../extra.js"></script><meta property="og:title" content="Making new layers and models via subclassing">
+<!-- bootstrap-toc --><script src="https://cdn.jsdelivr.net/gh/afeld/bootstrap-toc@v1.0.1/dist/bootstrap-toc.min.js" integrity="sha256-4veVQbu7//Lk5TSmc7YV48MxtMy98e26cf5MrgZYnwo=" crossorigin="anonymous"></script><!-- headroom.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/headroom.min.js" integrity="sha256-AsUX4SJE1+yuDu5+mAVzJbuYNPHj/WroHuZ8Ir/CkE0=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script><!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><!-- search --><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- pkgdown --><script src="../pkgdown.js"></script><meta property="og:title" content="Making new layers and models via subclassing">
 <meta property="og:description" content="Complete guide to writing `Layer` and `Model` objects from scratch.">
 <meta property="og:image" content="https://keras.posit.co/logo.png">
 <!-- mathjax --><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js" integrity="sha256-nvJJv9wWKEm88qvoQl9ekL2J+k/RWIsaSScxxlsrv8k=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/config/TeX-AMS-MML_HTMLorMML.js" integrity="sha256-84DKXVJXs0/F8OTMzX4UR909+jtl4G7SPypPavF+GfA=" crossorigin="anonymous"></script><!--[if lt IE 9]>
@@ -26,194 +25,96 @@
 <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
 <![endif]-->
 </head>
-<body data-spy="scroll" data-target="#toc">
+<body>
+    <a href="#main" class="visually-hidden-focusable">Skip to contents</a>
     
 
-    <div class="container template-article">
-      <header><div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
-  <div class="container">
-    <div class="navbar-header">
-      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false">
-        <span class="sr-only">Toggle navigation</span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-      </button>
-      <span class="navbar-brand">
-        <a class="navbar-link" href="../index.html">keras</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">2.13.0.9000</span>
-      </span>
-    </div>
+    <nav class="navbar fixed-top navbar-inverse navbar-expand-lg bg-primary"><div class="container">
+    
+    <a class="navbar-brand me-2" href="../index.html">keras3</a>
 
-    <div id="navbar" class="navbar-collapse collapse">
-      <ul class="nav navbar-nav">
-<li>
-  <a href="../index.html">Home</a>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">2.13.0.9000</small>
+
+    
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div id="navbar" class="collapse navbar-collapse ms-3">
+      <ul class="navbar-nav me-auto">
+<li class="nav-item">
+  <a class="nav-link" href="../index.html">Home</a>
 </li>
-<li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-    Tutorials
-     
-    <span class="caret"></span>
-  </a>
-  <ul class="dropdown-menu" role="menu">
-<li>
-      <a href="../articles/getting_started.html">Getting Started</a>
-    </li>
-    <li>
-      <a href="../articles/tutorial_basic_classification.html">Basic Classification</a>
-    </li>
-    <li>
-      <a href="../articles/tutorial_basic_text_classification.html">Text Classification</a>
-    </li>
-    <li>
-      <a href="../articles/tutorial_basic_regression.html">Basic Regression</a>
-    </li>
-    <li>
-      <a href="../articles/tutorial_overfit_underfit.html">Overfitting and Underfitting</a>
-    </li>
-    <li>
-      <a href="../articles/tutorial_save_and_restore.html">Save and Restore Models</a>
-    </li>
-  </ul>
-</li>
-<li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-    Guides
-     
-    <span class="caret"></span>
-  </a>
-  <ul class="dropdown-menu" role="menu">
-<li>
-      <a href="../articles/writing_your_own_callbacks.html">Writing Your Own Callbacks</a>
-    </li>
-  </ul>
-</li>
-<li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-    Articles
-     
-    <span class="caret"></span>
-  </a>
-  <ul class="dropdown-menu" role="menu">
-<li class="dropdown-header">Guides (New for TF 2.6)</li>
-    <li>
-      <a href="../articles/new-guides/python_subclasses.html">Python Subclasses</a>
-    </li>
-    <li>
-      <a href="../articles/new-guides/making_new_layers_and_models_via_subclassing.html">Making New Layers and Models via Subclassing</a>
-    </li>
-    <li>
-      <a href="../articles/new-guides/customizing_what_happens_in_fit.html">Customizing What Happens in Fit</a>
-    </li>
-    <li>
-      <a href="../articles/new-guides/writing_your_own_callbacks.html">Writing Your Own Callbacks</a>
-    </li>
-    <li>
-      <a href="../articles/new-guides/preprocessing_layers.html">Working with Preprocessing Layers</a>
-    </li>
-    <li>
-      <a href="../argicles/new-guides/working_with_rnns.html">Working with RNNs</a>
-    </li>
-    <li class="divider">
-    </li>
-<li class="dropdown-header">Using Keras</li>
-    <li>
-      <a href="../articles/guide_keras.html">Guide to Keras Basics</a>
-    </li>
-    <li>
-      <a href="../articles/sequential_model.html">Sequential Model in Depth</a>
-    </li>
-    <li>
-      <a href="../articles/functional_api.html">Functional API in Depth</a>
-    </li>
-    <li>
-      <a href="../articles/about_keras_models.html">About Keras Models</a>
-    </li>
-    <li>
-      <a href="../articles/about_keras_layers.html">About Keras Layers</a>
-    </li>
-    <li>
-      <a href="../articles/training_visualization.html">Training Visualization</a>
-    </li>
-    <li>
-      <a href="../articles/applications.html">Pre-Trained Models</a>
-    </li>
-    <li>
-      <a href="../articles/faq.html">Frequently Asked Questions</a>
-    </li>
-    <li>
-      <a href="../articles/why_use_keras.html">Why Use Keras?</a>
-    </li>
-    <li class="divider">
-    </li>
-<li class="dropdown-header">Advanced</li>
-    <li>
-      <a href="../articles/eager_guide.html">Eager Execution</a>
-    </li>
-    <li>
-      <a href="../articles/training_callbacks.html">Training Callbacks</a>
-    </li>
-    <li>
-      <a href="../articles/backend.html">Keras Backend</a>
-    </li>
-    <li>
-      <a href="../articles/custom_layers.html">Custom Layers</a>
-    </li>
-    <li>
-      <a href="../articles/custom_models.html">Custom Models</a>
-    </li>
-    <li>
-      <a href="../articles/saving_serializing.html">Saving and serializing</a>
-    </li>
-  </ul>
-</li>
-<li>
-  <a href="../articles/learn.html">Learn</a>
-</li>
-<li>
-  <a href="../articles/tools.html">Tools</a>
-</li>
-<li>
-  <a href="../articles/examples/index.html">Examples</a>
-</li>
-<li>
-  <a href="../reference/index.html">Reference</a>
-</li>
-<li>
-  <a href="../news/index.html">News</a>
-</li>
-      </ul>
-<ul class="nav navbar-nav navbar-right">
-<li>
-  <a href="https://github.com/rstudio/keras/" class="external-link">
-    <span class="fab fa-github fa-lg"></span>
-     
-  </a>
-</li>
-      </ul>
-</div>
-<!--/.nav-collapse -->
+<li class="nav-item dropdown">
+  <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true" id="dropdown-getting-started">Getting Started</a>
+  <div class="dropdown-menu" aria-labelledby="dropdown-getting-started">
+    <a class="dropdown-item" href="../articles/intro_to_keras_for_engineers.html">Introduction to Keras for engineers</a>
+    <h6 class="dropdown-header" data-toc-skip>Tutorials</h6>
+    <a class="dropdown-item" href="../articles/getting_started.html">Getting Started</a>
+    <a class="dropdown-item" href="../articles/tutorial_basic_classification.html">Basic Classification</a>
+    <a class="dropdown-item" href="../articles/tutorial_basic_text_classification.html">Text Classification</a>
+    <a class="dropdown-item" href="../articles/tutorial_basic_regression.html">Basic Regression</a>
+    <a class="dropdown-item" href="../articles/tutorial_overfit_underfit.html">Overfitting and Underfitting</a>
+    <a class="dropdown-item" href="../articles/tutorial_save_and_restore.html">Save and Restore Models</a>
   </div>
-<!--/.container -->
+</li>
+<li class="active nav-item dropdown">
+  <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true" id="dropdown-guides">Guides</a>
+  <div class="dropdown-menu" aria-labelledby="dropdown-guides">
+    <h6 class="dropdown-header" data-toc-skip>Model definition</h6>
+    <a class="dropdown-item" href="../articles/functional_api.html">Functional API</a>
+    <a class="dropdown-item" href="../articles/sequential_model.html">Sequential Model</a>
+    <h6 class="dropdown-header" data-toc-skip>Extending and customizing</h6>
+    <a class="dropdown-item" href="../articles/making_new_layers_and_models_via_subclassing.html">Making new layers and models via subclassing</a>
+    <a class="dropdown-item" href="../articles/training_with_built_in_methods.html">Training &amp; evaluation with the built-in methods</a>
+    <a class="dropdown-item" href="../articles/writing_a_custom_training_loop_in_tensorflow.html">Writing a training loop from scratch in TensorFlow</a>
+    <a class="dropdown-item" href="../articles/writing_your_own_callbacks.html">Writing Your Own Callbacks</a>
+    <h6 class="dropdown-header" data-toc-skip>Other topics</h6>
+    <a class="dropdown-item" href="../articles/transfer_learning.html">Transfer learning and fine tuning</a>
+    <a class="dropdown-item" href="../articles/distributed_training_with_tensorflow.html">Distributed training with TensorFlow</a>
+  </div>
+</li>
+<li class="nav-item">
+  <a class="nav-link" href="../articles/examples/index.html">Examples</a>
+</li>
+<li class="nav-item">
+  <a class="nav-link" href="../reference/index.html">Reference</a>
+</li>
+<li class="nav-item">
+  <a class="nav-link" href="../news/index.html">News</a>
+</li>
+      </ul>
+<form class="form-inline my-2 my-lg-0" role="search">
+        <input type="search" class="form-control me-sm-2" aria-label="Toggle navigation" name="search-input" data-search-index="../search.json" id="search-input" placeholder="Search for" autocomplete="off">
+</form>
+
+      <ul class="navbar-nav">
+<li class="nav-item">
+  <a class="external-link nav-link" href="https://github.com/rstudio/keras/" aria-label="github">
+    <span class="fab fa fab fa-github fa-lg"></span>
+     
+  </a>
+</li>
+      </ul>
 </div>
-<!--/.navbar -->
 
-      
+    
+  </div>
+</nav><div class="container template-article">
 
-      </header><div class="row">
-  <div class="col-md-9 contents">
-    <div class="page-header toc-ignore">
-      <h1 data-toc-skip>Making new layers and models via
-subclassing</h1>
+
+
+
+<div class="row">
+  <main id="main" class="col-md-9"><div class="page-header">
+      <img src="../logo.png" class="logo" alt=""><h1>Making new layers and models via subclassing</h1>
                         <h4 data-toc-skip class="author"><a href="https://twitter.com/fchollet" class="external-link">fchollet</a></h4>
             
-            <h4 data-toc-skip class="date">Last Modified: 2023-11-10;
-Last Rendered: 2023-11-10</h4>
+            <h4 data-toc-skip class="date">Last Modified: 2023-11-21;
+Last Rendered: 2023-11-21</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/rstudio/keras/blob/HEAD/vignettes/making_new_layers_and_models_via_subclassing.Rmd" class="external-link"><code>vignettes/making_new_layers_and_models_via_subclassing.Rmd</code></a></small>
-      <div class="hidden name"><code>making_new_layers_and_models_via_subclassing.Rmd</code></div>
-
+      <div class="d-none name"><code>making_new_layers_and_models_via_subclassing.Rmd</code></div>
     </div>
 
     
@@ -242,10 +143,21 @@ following features:</p>
 <div class="section level2">
 <h2 id="setup">Setup<a class="anchor" aria-label="anchor" href="#setup"></a>
 </h2>
-<div class="sourceCode" id="cb1"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
-<span id="cb1-2"><a href="#cb1-2" tabindex="-1"></a><span class="im">import</span> keras</span>
-<span id="cb1-3"><a href="#cb1-3" tabindex="-1"></a><span class="im">from</span> keras <span class="im">import</span> ops</span>
-<span id="cb1-4"><a href="#cb1-4" tabindex="-1"></a><span class="im">from</span> keras <span class="im">import</span> layers</span></code></pre></div>
+<div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://tensorflow.rstudio.com/" class="external-link">keras3</a></span><span class="op">)</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/rstudio/tensorflow" class="external-link">tensorflow</a></span><span class="op">)</span></span></code></pre></div>
+<pre><code><span><span class="co">##</span></span>
+<span><span class="co">## Attaching package: 'tensorflow'</span></span></code></pre>
+<pre><code><span><span class="co">## The following objects are masked from 'package:keras':</span></span>
+<span><span class="co">##</span></span>
+<span><span class="co">##     set_random_seed, shape</span></span></code></pre>
+<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/rstudio/tfdatasets" class="external-link">tfdatasets</a></span><span class="op">)</span></span></code></pre></div>
+<pre><code><span><span class="co">##</span></span>
+<span><span class="co">## Attaching package: 'tfdatasets'</span></span></code></pre>
+<pre><code><span><span class="co">## The following object is masked from 'package:keras':</span></span>
+<span><span class="co">##</span></span>
+<span><span class="co">##     shape</span></span></code></pre>
 </div>
 <div class="section level2">
 <h2 id="the-layer-class-the-combination-of-state-weights-and-some-computation">The <code>Layer</code> class: the combination of state (weights) and
@@ -257,30 +169,49 @@ transformation from inputs to outputs (a “call”, the layer’s forward
 pass).</p>
 <p>Here’s a densely-connected layer. It has two state variables: the
 variables <code>w</code> and <code>b</code>.</p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" tabindex="-1"></a><span class="kw">class</span> Linear(keras.layers.Layer):</span>
-<span id="cb2-2"><a href="#cb2-2" tabindex="-1"></a>    <span class="kw">def</span> <span class="fu">__init__</span>(<span class="va">self</span>, units<span class="op">=</span><span class="dv">32</span>, input_dim<span class="op">=</span><span class="dv">32</span>):</span>
-<span id="cb2-3"><a href="#cb2-3" tabindex="-1"></a>        <span class="bu">super</span>().<span class="fu">__init__</span>()</span>
-<span id="cb2-4"><a href="#cb2-4" tabindex="-1"></a>        <span class="va">self</span>.w <span class="op">=</span> <span class="va">self</span>.add_weight(</span>
-<span id="cb2-5"><a href="#cb2-5" tabindex="-1"></a>            shape<span class="op">=</span>(input_dim, units),</span>
-<span id="cb2-6"><a href="#cb2-6" tabindex="-1"></a>            initializer<span class="op">=</span><span class="st">"random_normal"</span>,</span>
-<span id="cb2-7"><a href="#cb2-7" tabindex="-1"></a>            trainable<span class="op">=</span><span class="va">True</span>,</span>
-<span id="cb2-8"><a href="#cb2-8" tabindex="-1"></a>        )</span>
-<span id="cb2-9"><a href="#cb2-9" tabindex="-1"></a>        <span class="va">self</span>.b <span class="op">=</span> <span class="va">self</span>.add_weight(</span>
-<span id="cb2-10"><a href="#cb2-10" tabindex="-1"></a>            shape<span class="op">=</span>(units,), initializer<span class="op">=</span><span class="st">"zeros"</span>, trainable<span class="op">=</span><span class="va">True</span></span>
-<span id="cb2-11"><a href="#cb2-11" tabindex="-1"></a>        )</span>
-<span id="cb2-12"><a href="#cb2-12" tabindex="-1"></a></span>
-<span id="cb2-13"><a href="#cb2-13" tabindex="-1"></a>    <span class="kw">def</span> call(<span class="va">self</span>, inputs):</span>
-<span id="cb2-14"><a href="#cb2-14" tabindex="-1"></a>        <span class="cf">return</span> ops.matmul(inputs, <span class="va">self</span>.w) <span class="op">+</span> <span class="va">self</span>.b</span></code></pre></div>
+<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">Linear</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/new-classes.html">new_layer_class</a></span><span class="op">(</span></span>
+<span>  <span class="st">"Linear"</span>,</span>
+<span>  initialize <span class="op">=</span> <span class="kw">function</span><span class="op">(</span><span class="va">units</span> <span class="op">=</span> <span class="fl">32</span>, <span class="va">input_dim</span> <span class="op">=</span> <span class="fl">32</span><span class="op">)</span> <span class="op">{</span></span>
+<span>    <span class="va">units</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/integer.html" class="external-link">as.integer</a></span><span class="op">(</span><span class="va">units</span><span class="op">)</span></span>
+<span>    <span class="va">input_dim</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/integer.html" class="external-link">as.integer</a></span><span class="op">(</span><span class="va">input_dim</span><span class="op">)</span></span>
+<span></span>
+<span>    <span class="va">super</span><span class="op">$</span><span class="fu">initialize</span><span class="op">(</span><span class="op">)</span></span>
+<span>    <span class="va">self</span><span class="op">$</span><span class="va">w</span> <span class="op">&lt;-</span> <span class="va">self</span><span class="op">$</span><span class="fu">add_weight</span><span class="op">(</span></span>
+<span>      shape <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="va">input_dim</span>, <span class="va">units</span><span class="op">)</span>,</span>
+<span>      initializer <span class="op">=</span> <span class="st">"random_normal"</span>,</span>
+<span>      trainable <span class="op">=</span> <span class="cn">TRUE</span></span>
+<span>    <span class="op">)</span></span>
+<span>    <span class="va">self</span><span class="op">$</span><span class="va">b</span> <span class="op">&lt;-</span> <span class="va">self</span><span class="op">$</span><span class="fu">add_weight</span><span class="op">(</span></span>
+<span>      shape <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="va">units</span><span class="op">)</span>,</span>
+<span>      initializer <span class="op">=</span> <span class="st">"zeros"</span>,</span>
+<span>      trainable <span class="op">=</span> <span class="cn">TRUE</span></span>
+<span>    <span class="op">)</span></span>
+<span>  <span class="op">}</span>,</span>
+<span>  call <span class="op">=</span> <span class="kw">function</span><span class="op">(</span><span class="va">inputs</span><span class="op">)</span> <span class="op">{</span></span>
+<span>    <span class="fu">k_matmul</span><span class="op">(</span><span class="va">inputs</span>, <span class="va">self</span><span class="op">$</span><span class="va">w</span><span class="op">)</span> <span class="op">+</span> <span class="va">self</span><span class="op">$</span><span class="va">b</span></span>
+<span>  <span class="op">}</span></span>
+<span><span class="op">)</span></span></code></pre></div>
 <p>You would use a layer by calling it on some tensor input(s), much
-like a Python function.</p>
-<div class="sourceCode" id="cb3"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" tabindex="-1"></a>x <span class="op">=</span> ops.ones((<span class="dv">2</span>, <span class="dv">2</span>))</span>
-<span id="cb3-2"><a href="#cb3-2" tabindex="-1"></a>linear_layer <span class="op">=</span> Linear(<span class="dv">4</span>, <span class="dv">2</span>)</span>
-<span id="cb3-3"><a href="#cb3-3" tabindex="-1"></a>y <span class="op">=</span> linear_layer(x)</span>
-<span id="cb3-4"><a href="#cb3-4" tabindex="-1"></a><span class="bu">print</span>(y)</span></code></pre></div>
+like an R function.</p>
+<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">x</span> <span class="op">&lt;-</span> <span class="fu">k_ones</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">2</span>, <span class="fl">2</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="va">linear_layer</span> <span class="op">&lt;-</span> <span class="fu">Linear</span><span class="op">(</span>units <span class="op">=</span> <span class="fl">4L</span>, input_dim <span class="op">=</span> <span class="fl">2L</span><span class="op">)</span></span>
+<span><span class="va">y</span> <span class="op">&lt;-</span> <span class="fu">linear_layer</span><span class="op">(</span><span class="va">x</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">y</span><span class="op">)</span></span></code></pre></div>
+<pre><code><span><span class="co">## tf.Tensor(</span></span>
+<span><span class="co">## [[0.02153057 0.15450525 0.0205495  0.04493225]</span></span>
+<span><span class="co">##  [0.02153057 0.15450525 0.0205495  0.04493225]], shape=(2, 4), dtype=float32)</span></span></code></pre>
 <p>Note that the weights <code>w</code> and <code>b</code> are
 automatically tracked by the layer upon being set as layer
 attributes:</p>
-<div class="sourceCode" id="cb4"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" tabindex="-1"></a><span class="cf">assert</span> linear_layer.weights <span class="op">==</span> [linear_layer.w, linear_layer.b]</span></code></pre></div>
+<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">linear_layer</span><span class="op">$</span><span class="va">weights</span></span></code></pre></div>
+<pre><code><span><span class="co">## [[1]]</span></span>
+<span><span class="co">## &lt;KerasVariable shape=(2, 4), dtype=float32, path=linear/variable&gt;</span></span>
+<span><span class="co">##</span></span>
+<span><span class="co">## [[2]]</span></span>
+<span><span class="co">## &lt;KerasVariable shape=(4), dtype=float32, path=linear/variable_1&gt;</span></span></code></pre>
 </div>
 <div class="section level2">
 <h2 id="layers-can-have-non-trainable-weights">Layers can have non-trainable weights<a class="anchor" aria-label="anchor" href="#layers-can-have-non-trainable-weights"></a>
@@ -289,31 +220,45 @@ attributes:</p>
 layer as well. Such weights are meant not to be taken into account
 during backpropagation, when you are training the layer.</p>
 <p>Here’s how to add and use a non-trainable weight:</p>
-<div class="sourceCode" id="cb5"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" tabindex="-1"></a><span class="kw">class</span> ComputeSum(keras.layers.Layer):</span>
-<span id="cb5-2"><a href="#cb5-2" tabindex="-1"></a>    <span class="kw">def</span> <span class="fu">__init__</span>(<span class="va">self</span>, input_dim):</span>
-<span id="cb5-3"><a href="#cb5-3" tabindex="-1"></a>        <span class="bu">super</span>().<span class="fu">__init__</span>()</span>
-<span id="cb5-4"><a href="#cb5-4" tabindex="-1"></a>        <span class="va">self</span>.total <span class="op">=</span> <span class="va">self</span>.add_weight(</span>
-<span id="cb5-5"><a href="#cb5-5" tabindex="-1"></a>            initializer<span class="op">=</span><span class="st">"zeros"</span>, shape<span class="op">=</span>(input_dim,), trainable<span class="op">=</span><span class="va">False</span></span>
-<span id="cb5-6"><a href="#cb5-6" tabindex="-1"></a>        )</span>
-<span id="cb5-7"><a href="#cb5-7" tabindex="-1"></a></span>
-<span id="cb5-8"><a href="#cb5-8" tabindex="-1"></a>    <span class="kw">def</span> call(<span class="va">self</span>, inputs):</span>
-<span id="cb5-9"><a href="#cb5-9" tabindex="-1"></a>        <span class="va">self</span>.total.assign_add(ops.<span class="bu">sum</span>(inputs, axis<span class="op">=</span><span class="dv">0</span>))</span>
-<span id="cb5-10"><a href="#cb5-10" tabindex="-1"></a>        <span class="cf">return</span> <span class="va">self</span>.total</span>
-<span id="cb5-11"><a href="#cb5-11" tabindex="-1"></a></span>
-<span id="cb5-12"><a href="#cb5-12" tabindex="-1"></a></span>
-<span id="cb5-13"><a href="#cb5-13" tabindex="-1"></a>x <span class="op">=</span> ops.ones((<span class="dv">2</span>, <span class="dv">2</span>))</span>
-<span id="cb5-14"><a href="#cb5-14" tabindex="-1"></a>my_sum <span class="op">=</span> ComputeSum(<span class="dv">2</span>)</span>
-<span id="cb5-15"><a href="#cb5-15" tabindex="-1"></a>y <span class="op">=</span> my_sum(x)</span>
-<span id="cb5-16"><a href="#cb5-16" tabindex="-1"></a><span class="bu">print</span>(y.numpy())</span>
-<span id="cb5-17"><a href="#cb5-17" tabindex="-1"></a>y <span class="op">=</span> my_sum(x)</span>
-<span id="cb5-18"><a href="#cb5-18" tabindex="-1"></a><span class="bu">print</span>(y.numpy())</span></code></pre></div>
-<p>It’s part of <code>layer.weights</code>, but it gets categorized as a
+<div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">ComputeSum</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/new-classes.html">new_layer_class</a></span><span class="op">(</span></span>
+<span>  <span class="st">"ComputeSum"</span>,</span>
+<span>  initialize <span class="op">=</span> <span class="kw">function</span><span class="op">(</span><span class="va">input_dim</span><span class="op">)</span> <span class="op">{</span></span>
+<span>    <span class="va">input_dim</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/integer.html" class="external-link">as.integer</a></span><span class="op">(</span><span class="va">input_dim</span><span class="op">)</span></span>
+<span>    <span class="va">super</span><span class="op">$</span><span class="fu">initialize</span><span class="op">(</span><span class="op">)</span></span>
+<span>    <span class="va">self</span><span class="op">$</span><span class="va">total</span> <span class="op">&lt;-</span> <span class="va">self</span><span class="op">$</span><span class="fu">add_weight</span><span class="op">(</span></span>
+<span>      initializer <span class="op">=</span> <span class="st">"zeros"</span>,</span>
+<span>      shape <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="va">input_dim</span><span class="op">)</span>,</span>
+<span>      trainable <span class="op">=</span> <span class="cn">FALSE</span></span>
+<span>    <span class="op">)</span></span>
+<span>  <span class="op">}</span>,</span>
+<span>  call <span class="op">=</span> <span class="kw">function</span><span class="op">(</span><span class="va">inputs</span><span class="op">)</span> <span class="op">{</span></span>
+<span>    <span class="va">self</span><span class="op">$</span><span class="va">total</span><span class="op">$</span><span class="fu">assign_add</span><span class="op">(</span><span class="fu">k_sum</span><span class="op">(</span><span class="va">inputs</span>, axis <span class="op">=</span> <span class="fl">1</span><span class="op">)</span><span class="op">)</span></span>
+<span>    <span class="va">self</span><span class="op">$</span><span class="va">total</span></span>
+<span>  <span class="op">}</span></span>
+<span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">x</span> <span class="op">&lt;-</span> <span class="fu">k_ones</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">2</span>, <span class="fl">2</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="va">my_sum</span> <span class="op">&lt;-</span> <span class="fu">ComputeSum</span><span class="op">(</span>input_dim <span class="op">=</span> <span class="fl">2</span><span class="op">)</span></span>
+<span><span class="va">y</span> <span class="op">&lt;-</span> <span class="fu">my_sum</span><span class="op">(</span><span class="va">x</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">y</span><span class="op">$</span><span class="fu">numpy</span><span class="op">(</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
+<pre><code><span><span class="co">## [1] 2 2</span></span></code></pre>
+<div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">y</span> <span class="op">&lt;-</span> <span class="fu">my_sum</span><span class="op">(</span><span class="va">x</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">y</span><span class="op">$</span><span class="fu">numpy</span><span class="op">(</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
+<pre><code><span><span class="co">## [1] 4 4</span></span></code></pre>
+<p>It’s part of <code>layer$weights</code>, but it gets categorized as a
 non-trainable weight:</p>
-<div class="sourceCode" id="cb6"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"weights:"</span>, <span class="bu">len</span>(my_sum.weights))</span>
-<span id="cb6-2"><a href="#cb6-2" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"non-trainable weights:"</span>, <span class="bu">len</span>(my_sum.non_trainable_weights))</span>
-<span id="cb6-3"><a href="#cb6-3" tabindex="-1"></a></span>
-<span id="cb6-4"><a href="#cb6-4" tabindex="-1"></a><span class="co"># It's not included in the trainable weights:</span></span>
-<span id="cb6-5"><a href="#cb6-5" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"trainable_weights:"</span>, my_sum.trainable_weights)</span></code></pre></div>
+<div class="sourceCode" id="cb16"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/cat.html" class="external-link">cat</a></span><span class="op">(</span><span class="st">"weights:"</span>, <span class="fu"><a href="https://rdrr.io/r/base/length.html" class="external-link">length</a></span><span class="op">(</span><span class="va">my_sum</span><span class="op">$</span><span class="va">weights</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
+<pre><code><span><span class="co">## weights: 1</span></span></code></pre>
+<div class="sourceCode" id="cb18"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/cat.html" class="external-link">cat</a></span><span class="op">(</span><span class="st">"non-trainable weights:"</span>, <span class="fu"><a href="https://rdrr.io/r/base/length.html" class="external-link">length</a></span><span class="op">(</span><span class="va">my_sum</span><span class="op">$</span><span class="va">non_trainable_weights</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
+<pre><code><span><span class="co">## non-trainable weights: 1</span></span></code></pre>
+<div class="sourceCode" id="cb20"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># It's not included in the trainable weights:</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/cat.html" class="external-link">cat</a></span><span class="op">(</span><span class="st">"trainable_weights:"</span>, <span class="fu"><a href="https://rdrr.io/r/base/length.html" class="external-link">length</a></span><span class="op">(</span><span class="va">my_sum</span><span class="op">$</span><span class="va">trainable_weights</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
+<pre><code><span><span class="co">## trainable_weights: 0</span></span></code></pre>
 </div>
 <div class="section level2">
 <h2 id="best-practice-deferring-weight-creation-until-the-shape-of-the-inputs-is-known">Best practice: deferring weight creation until the shape of the
@@ -321,52 +266,68 @@ inputs is known<a class="anchor" aria-label="anchor" href="#best-practice-deferr
 </h2>
 <p>Our <code>Linear</code> layer above took an <code>input_dim</code>
 argument that was used to compute the shape of the weights
-<code>w</code> and <code>b</code> in <code>__init__()</code>:</p>
-<div class="sourceCode" id="cb7"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" tabindex="-1"></a><span class="kw">class</span> Linear(keras.layers.Layer):</span>
-<span id="cb7-2"><a href="#cb7-2" tabindex="-1"></a>    <span class="kw">def</span> <span class="fu">__init__</span>(<span class="va">self</span>, units<span class="op">=</span><span class="dv">32</span>, input_dim<span class="op">=</span><span class="dv">32</span>):</span>
-<span id="cb7-3"><a href="#cb7-3" tabindex="-1"></a>        <span class="bu">super</span>().<span class="fu">__init__</span>()</span>
-<span id="cb7-4"><a href="#cb7-4" tabindex="-1"></a>        <span class="va">self</span>.w <span class="op">=</span> <span class="va">self</span>.add_weight(</span>
-<span id="cb7-5"><a href="#cb7-5" tabindex="-1"></a>            shape<span class="op">=</span>(input_dim, units),</span>
-<span id="cb7-6"><a href="#cb7-6" tabindex="-1"></a>            initializer<span class="op">=</span><span class="st">"random_normal"</span>,</span>
-<span id="cb7-7"><a href="#cb7-7" tabindex="-1"></a>            trainable<span class="op">=</span><span class="va">True</span>,</span>
-<span id="cb7-8"><a href="#cb7-8" tabindex="-1"></a>        )</span>
-<span id="cb7-9"><a href="#cb7-9" tabindex="-1"></a>        <span class="va">self</span>.b <span class="op">=</span> <span class="va">self</span>.add_weight(</span>
-<span id="cb7-10"><a href="#cb7-10" tabindex="-1"></a>            shape<span class="op">=</span>(units,), initializer<span class="op">=</span><span class="st">"zeros"</span>, trainable<span class="op">=</span><span class="va">True</span></span>
-<span id="cb7-11"><a href="#cb7-11" tabindex="-1"></a>        )</span>
-<span id="cb7-12"><a href="#cb7-12" tabindex="-1"></a></span>
-<span id="cb7-13"><a href="#cb7-13" tabindex="-1"></a>    <span class="kw">def</span> call(<span class="va">self</span>, inputs):</span>
-<span id="cb7-14"><a href="#cb7-14" tabindex="-1"></a>        <span class="cf">return</span> ops.matmul(inputs, <span class="va">self</span>.w) <span class="op">+</span> <span class="va">self</span>.b</span></code></pre></div>
+<code>w</code> and <code>b</code> in <code>initialize()</code>:</p>
+<div class="sourceCode" id="cb22"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">Linear</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/new-classes.html">new_layer_class</a></span><span class="op">(</span></span>
+<span>  <span class="st">"Linear"</span>,</span>
+<span>  initialize <span class="op">=</span> <span class="kw">function</span><span class="op">(</span><span class="va">units</span> <span class="op">=</span> <span class="fl">32</span>, <span class="va">input_dim</span> <span class="op">=</span> <span class="fl">32</span><span class="op">)</span> <span class="op">{</span></span>
+<span>    <span class="va">units</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/integer.html" class="external-link">as.integer</a></span><span class="op">(</span><span class="va">units</span><span class="op">)</span></span>
+<span>    <span class="va">input_dim</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/integer.html" class="external-link">as.integer</a></span><span class="op">(</span><span class="va">input_dim</span><span class="op">)</span></span>
+<span></span>
+<span>    <span class="va">super</span><span class="op">$</span><span class="fu">initialize</span><span class="op">(</span><span class="op">)</span></span>
+<span>    <span class="va">self</span><span class="op">$</span><span class="va">w</span> <span class="op">&lt;-</span> <span class="va">self</span><span class="op">$</span><span class="fu">add_weight</span><span class="op">(</span></span>
+<span>      shape <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="va">input_dim</span>, <span class="va">units</span><span class="op">)</span>,</span>
+<span>      initializer <span class="op">=</span> <span class="st">"random_normal"</span>,</span>
+<span>      trainable <span class="op">=</span> <span class="cn">TRUE</span></span>
+<span>    <span class="op">)</span></span>
+<span>    <span class="va">self</span><span class="op">$</span><span class="va">b</span> <span class="op">&lt;-</span> <span class="va">self</span><span class="op">$</span><span class="fu">add_weight</span><span class="op">(</span></span>
+<span>      shape <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="va">units</span><span class="op">)</span>,</span>
+<span>      initializer <span class="op">=</span> <span class="st">"zeros"</span>,</span>
+<span>      trainable <span class="op">=</span> <span class="cn">TRUE</span></span>
+<span>    <span class="op">)</span></span>
+<span>  <span class="op">}</span>,</span>
+<span>  call <span class="op">=</span> <span class="kw">function</span><span class="op">(</span><span class="va">inputs</span><span class="op">)</span> <span class="op">{</span></span>
+<span>    <span class="fu">k_matmul</span><span class="op">(</span><span class="va">inputs</span>, <span class="va">self</span><span class="op">$</span><span class="va">w</span><span class="op">)</span> <span class="op">+</span> <span class="va">self</span><span class="op">$</span><span class="va">b</span></span>
+<span>  <span class="op">}</span></span>
+<span><span class="op">)</span></span></code></pre></div>
 <p>In many cases, you may not know in advance the size of your inputs,
 and you would like to lazily create weights when that value becomes
 known, some time after instantiating the layer.</p>
 <p>In the Keras API, we recommend creating layer weights in the
 <code>build(self, inputs_shape)</code> method of your layer. Like
 this:</p>
-<div class="sourceCode" id="cb8"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" tabindex="-1"></a><span class="kw">class</span> Linear(keras.layers.Layer):</span>
-<span id="cb8-2"><a href="#cb8-2" tabindex="-1"></a>    <span class="kw">def</span> <span class="fu">__init__</span>(<span class="va">self</span>, units<span class="op">=</span><span class="dv">32</span>):</span>
-<span id="cb8-3"><a href="#cb8-3" tabindex="-1"></a>        <span class="bu">super</span>().<span class="fu">__init__</span>()</span>
-<span id="cb8-4"><a href="#cb8-4" tabindex="-1"></a>        <span class="va">self</span>.units <span class="op">=</span> units</span>
-<span id="cb8-5"><a href="#cb8-5" tabindex="-1"></a></span>
-<span id="cb8-6"><a href="#cb8-6" tabindex="-1"></a>    <span class="kw">def</span> build(<span class="va">self</span>, input_shape):</span>
-<span id="cb8-7"><a href="#cb8-7" tabindex="-1"></a>        <span class="va">self</span>.w <span class="op">=</span> <span class="va">self</span>.add_weight(</span>
-<span id="cb8-8"><a href="#cb8-8" tabindex="-1"></a>            shape<span class="op">=</span>(input_shape[<span class="op">-</span><span class="dv">1</span>], <span class="va">self</span>.units),</span>
-<span id="cb8-9"><a href="#cb8-9" tabindex="-1"></a>            initializer<span class="op">=</span><span class="st">"random_normal"</span>,</span>
-<span id="cb8-10"><a href="#cb8-10" tabindex="-1"></a>            trainable<span class="op">=</span><span class="va">True</span>,</span>
-<span id="cb8-11"><a href="#cb8-11" tabindex="-1"></a>        )</span>
-<span id="cb8-12"><a href="#cb8-12" tabindex="-1"></a>        <span class="va">self</span>.b <span class="op">=</span> <span class="va">self</span>.add_weight(</span>
-<span id="cb8-13"><a href="#cb8-13" tabindex="-1"></a>            shape<span class="op">=</span>(<span class="va">self</span>.units,), initializer<span class="op">=</span><span class="st">"random_normal"</span>, trainable<span class="op">=</span><span class="va">True</span></span>
-<span id="cb8-14"><a href="#cb8-14" tabindex="-1"></a>        )</span>
-<span id="cb8-15"><a href="#cb8-15" tabindex="-1"></a></span>
-<span id="cb8-16"><a href="#cb8-16" tabindex="-1"></a>    <span class="kw">def</span> call(<span class="va">self</span>, inputs):</span>
-<span id="cb8-17"><a href="#cb8-17" tabindex="-1"></a>        <span class="cf">return</span> ops.matmul(inputs, <span class="va">self</span>.w) <span class="op">+</span> <span class="va">self</span>.b</span></code></pre></div>
-<p>The <code>__call__()</code> method of your layer will automatically
-run build the first time it is called. You now have a layer that’s lazy
-and thus easier to use:</p>
-<div class="sourceCode" id="cb9"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" tabindex="-1"></a><span class="co"># At instantiation, we don't know on what inputs this is going to get called</span></span>
-<span id="cb9-2"><a href="#cb9-2" tabindex="-1"></a>linear_layer <span class="op">=</span> Linear(<span class="dv">32</span>)</span>
-<span id="cb9-3"><a href="#cb9-3" tabindex="-1"></a></span>
-<span id="cb9-4"><a href="#cb9-4" tabindex="-1"></a><span class="co"># The layer's weights are created dynamically the first time the layer is called</span></span>
-<span id="cb9-5"><a href="#cb9-5" tabindex="-1"></a>y <span class="op">=</span> linear_layer(x)</span></code></pre></div>
+<div class="sourceCode" id="cb23"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">Linear</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/new-classes.html">new_layer_class</a></span><span class="op">(</span></span>
+<span>  <span class="st">"Linear"</span>,</span>
+<span>  initialize <span class="op">=</span> <span class="kw">function</span><span class="op">(</span><span class="va">units</span> <span class="op">=</span> <span class="fl">32</span><span class="op">)</span> <span class="op">{</span></span>
+<span>    <span class="va">self</span><span class="op">$</span><span class="va">units</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/integer.html" class="external-link">as.integer</a></span><span class="op">(</span><span class="va">units</span><span class="op">)</span></span>
+<span>    <span class="va">super</span><span class="op">$</span><span class="fu">initialize</span><span class="op">(</span><span class="op">)</span></span>
+<span>  <span class="op">}</span>,</span>
+<span>  build <span class="op">=</span> <span class="kw">function</span><span class="op">(</span><span class="va">input_shape</span><span class="op">)</span> <span class="op">{</span></span>
+<span>    <span class="va">self</span><span class="op">$</span><span class="va">w</span> <span class="op">&lt;-</span> <span class="va">self</span><span class="op">$</span><span class="fu">add_weight</span><span class="op">(</span></span>
+<span>      shape <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">tail</a></span><span class="op">(</span><span class="va">input_shape</span>, <span class="fl">1</span><span class="op">)</span>, <span class="va">self</span><span class="op">$</span><span class="va">units</span><span class="op">)</span>,</span>
+<span>      initializer <span class="op">=</span> <span class="st">"random_normal"</span>,</span>
+<span>      trainable <span class="op">=</span> <span class="cn">TRUE</span></span>
+<span>    <span class="op">)</span></span>
+<span>    <span class="va">self</span><span class="op">$</span><span class="va">b</span> <span class="op">&lt;-</span> <span class="va">self</span><span class="op">$</span><span class="fu">add_weight</span><span class="op">(</span></span>
+<span>      shape <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="va">self</span><span class="op">$</span><span class="va">units</span><span class="op">)</span>,</span>
+<span>      initializer <span class="op">=</span> <span class="st">"zeros"</span>,</span>
+<span>      trainable <span class="op">=</span> <span class="cn">TRUE</span></span>
+<span>    <span class="op">)</span></span>
+<span>  <span class="op">}</span>,</span>
+<span>  call <span class="op">=</span> <span class="kw">function</span><span class="op">(</span><span class="va">inputs</span><span class="op">)</span> <span class="op">{</span></span>
+<span>    <span class="fu">k_matmul</span><span class="op">(</span><span class="va">inputs</span>, <span class="va">self</span><span class="op">$</span><span class="va">w</span><span class="op">)</span> <span class="op">+</span> <span class="va">self</span><span class="op">$</span><span class="va">b</span></span>
+<span>  <span class="op">}</span></span>
+<span><span class="op">)</span></span></code></pre></div>
+<p>The <code><a href="https://rdrr.io/r/base/call.html" class="external-link">call()</a></code> method of your layer will automatically run
+build the first time it is called. You now have a layer that’s lazy and
+thus easier to use:</p>
+<div class="sourceCode" id="cb24"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># At instantiation, we don't know on what inputs this is going to get called</span></span>
+<span><span class="va">linear_layer</span> <span class="op">&lt;-</span> <span class="fu">Linear</span><span class="op">(</span>units <span class="op">=</span> <span class="fl">32</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># The layer's weights are created dynamically the first time the layer is called</span></span>
+<span><span class="va">y</span> <span class="op">&lt;-</span> <span class="fu">linear_layer</span><span class="op">(</span><span class="va">x</span><span class="op">)</span></span></code></pre></div>
 <p>Implementing <code>build()</code> separately as shown above nicely
 separates creating weights only once from using weights in every
 call.</p>
@@ -377,76 +338,83 @@ call.</p>
 <p>If you assign a Layer instance as an attribute of another Layer, the
 outer layer will start tracking the weights created by the inner
 layer.</p>
-<p>We recommend creating such sublayers in the <code>__init__()</code>
-method and leave it to the first <code>__call__()</code> to trigger
-building their weights.</p>
-<div class="sourceCode" id="cb10"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" tabindex="-1"></a><span class="kw">class</span> MLPBlock(keras.layers.Layer):</span>
-<span id="cb10-2"><a href="#cb10-2" tabindex="-1"></a>    <span class="kw">def</span> <span class="fu">__init__</span>(<span class="va">self</span>):</span>
-<span id="cb10-3"><a href="#cb10-3" tabindex="-1"></a>        <span class="bu">super</span>().<span class="fu">__init__</span>()</span>
-<span id="cb10-4"><a href="#cb10-4" tabindex="-1"></a>        <span class="va">self</span>.linear_1 <span class="op">=</span> Linear(<span class="dv">32</span>)</span>
-<span id="cb10-5"><a href="#cb10-5" tabindex="-1"></a>        <span class="va">self</span>.linear_2 <span class="op">=</span> Linear(<span class="dv">32</span>)</span>
-<span id="cb10-6"><a href="#cb10-6" tabindex="-1"></a>        <span class="va">self</span>.linear_3 <span class="op">=</span> Linear(<span class="dv">1</span>)</span>
-<span id="cb10-7"><a href="#cb10-7" tabindex="-1"></a></span>
-<span id="cb10-8"><a href="#cb10-8" tabindex="-1"></a>    <span class="kw">def</span> call(<span class="va">self</span>, inputs):</span>
-<span id="cb10-9"><a href="#cb10-9" tabindex="-1"></a>        x <span class="op">=</span> <span class="va">self</span>.linear_1(inputs)</span>
-<span id="cb10-10"><a href="#cb10-10" tabindex="-1"></a>        x <span class="op">=</span> keras.activations.relu(x)</span>
-<span id="cb10-11"><a href="#cb10-11" tabindex="-1"></a>        x <span class="op">=</span> <span class="va">self</span>.linear_2(x)</span>
-<span id="cb10-12"><a href="#cb10-12" tabindex="-1"></a>        x <span class="op">=</span> keras.activations.relu(x)</span>
-<span id="cb10-13"><a href="#cb10-13" tabindex="-1"></a>        <span class="cf">return</span> <span class="va">self</span>.linear_3(x)</span>
-<span id="cb10-14"><a href="#cb10-14" tabindex="-1"></a></span>
-<span id="cb10-15"><a href="#cb10-15" tabindex="-1"></a></span>
-<span id="cb10-16"><a href="#cb10-16" tabindex="-1"></a>mlp <span class="op">=</span> MLPBlock()</span>
-<span id="cb10-17"><a href="#cb10-17" tabindex="-1"></a>y <span class="op">=</span> mlp(</span>
-<span id="cb10-18"><a href="#cb10-18" tabindex="-1"></a>    ops.ones(shape<span class="op">=</span>(<span class="dv">3</span>, <span class="dv">64</span>))</span>
-<span id="cb10-19"><a href="#cb10-19" tabindex="-1"></a>)  <span class="co"># The first call to the `mlp` will create the weights</span></span>
-<span id="cb10-20"><a href="#cb10-20" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"weights:"</span>, <span class="bu">len</span>(mlp.weights))</span>
-<span id="cb10-21"><a href="#cb10-21" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"trainable weights:"</span>, <span class="bu">len</span>(mlp.trainable_weights))</span></code></pre></div>
+<p>We recommend creating such sublayers in the <code>initialize()</code>
+method and leave it to the first <code><a href="https://rdrr.io/r/base/call.html" class="external-link">call()</a></code> to trigger building
+their weights.</p>
+<div class="sourceCode" id="cb25"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">MLPBlock</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/new-classes.html">new_layer_class</a></span><span class="op">(</span></span>
+<span>  <span class="st">"MLPBlock"</span>,</span>
+<span>  initialize <span class="op">=</span> <span class="kw">function</span><span class="op">(</span><span class="op">)</span> <span class="op">{</span></span>
+<span>    <span class="va">super</span><span class="op">$</span><span class="fu">initialize</span><span class="op">(</span><span class="op">)</span></span>
+<span>    <span class="va">self</span><span class="op">$</span><span class="va">linear_1</span> <span class="op">&lt;-</span> <span class="fu">Linear</span><span class="op">(</span>units <span class="op">=</span> <span class="fl">32</span><span class="op">)</span></span>
+<span>    <span class="va">self</span><span class="op">$</span><span class="va">linear_2</span> <span class="op">&lt;-</span> <span class="fu">Linear</span><span class="op">(</span>units <span class="op">=</span> <span class="fl">32</span><span class="op">)</span></span>
+<span>    <span class="va">self</span><span class="op">$</span><span class="va">linear_3</span> <span class="op">&lt;-</span> <span class="fu">Linear</span><span class="op">(</span>units <span class="op">=</span> <span class="fl">1</span><span class="op">)</span></span>
+<span>  <span class="op">}</span>,</span>
+<span>  call <span class="op">=</span> <span class="kw">function</span><span class="op">(</span><span class="va">inputs</span><span class="op">)</span> <span class="op">{</span></span>
+<span>    <span class="va">x</span> <span class="op">&lt;-</span> <span class="va">self</span><span class="op">$</span><span class="fu">linear_1</span><span class="op">(</span><span class="va">inputs</span><span class="op">)</span></span>
+<span>    <span class="va">x</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/activation_relu.html">activation_relu</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span></span>
+<span>    <span class="va">x</span> <span class="op">&lt;-</span> <span class="va">self</span><span class="op">$</span><span class="fu">linear_2</span><span class="op">(</span><span class="va">x</span><span class="op">)</span></span>
+<span>    <span class="va">x</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/activation_relu.html">activation_relu</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span></span>
+<span>    <span class="va">self</span><span class="op">$</span><span class="fu">linear_3</span><span class="op">(</span><span class="va">x</span><span class="op">)</span></span>
+<span>  <span class="op">}</span></span>
+<span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">mlp</span> <span class="op">=</span> <span class="fu">MLPBlock</span><span class="op">(</span><span class="op">)</span></span>
+<span><span class="co"># The first call to the `mlp` will create the weights</span></span>
+<span><span class="va">y</span> <span class="op">&lt;-</span> <span class="fu">mlp</span><span class="op">(</span><span class="fu">k_ones</span><span class="op">(</span>shape <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">3</span>, <span class="fl">64</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/cat.html" class="external-link">cat</a></span><span class="op">(</span><span class="st">"weights:"</span>, <span class="fu"><a href="https://rdrr.io/r/base/length.html" class="external-link">length</a></span><span class="op">(</span><span class="va">mlp</span><span class="op">$</span><span class="va">weights</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
+<pre><code><span><span class="co">## weights: 7</span></span></code></pre>
+<div class="sourceCode" id="cb27"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/cat.html" class="external-link">cat</a></span><span class="op">(</span><span class="st">"trainable weights:"</span>, <span class="fu"><a href="https://rdrr.io/r/base/length.html" class="external-link">length</a></span><span class="op">(</span><span class="va">mlp</span><span class="op">$</span><span class="va">trainable_weights</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
+<pre><code><span><span class="co">## trainable weights: 7</span></span></code></pre>
 </div>
 <div class="section level2">
 <h2 id="backend-agnostic-layers-and-backend-specific-layers">Backend-agnostic layers and backend-specific layers<a class="anchor" aria-label="anchor" href="#backend-agnostic-layers-and-backend-specific-layers"></a>
 </h2>
-<p>As long as a layer only uses APIs from the <code>keras.ops</code>
-namespace (or other Keras namespaces such as
-<code>keras.activations</code>, <code>keras.random</code>, or
-<code>keras.layers</code>), then it can be used with any backend –
+<p>As long as a layer only uses APIs from the <code>ops</code> namespace
+(ie. using functions starting with <code>k_</code>), (or other Keras
+namespaces such as <code>activations_*</code>, <code>random_*</code>, or
+<code>layer_*</code>), then it can be used with any backend –
 TensorFlow, JAX, or PyTorch.</p>
 <p>All layers you’ve seen so far in this guide work with all Keras
 backends.</p>
-<p>The <code>keras.ops</code> namespace gives you access to:</p>
+<p>The <code>ops</code> namespace gives you access to:</p>
 <ul>
-<li>The NumPy API, e.g. <code>ops.matmul</code>, <code>ops.sum</code>,
-<code>ops.reshape</code>, <code>ops.stack</code>, etc.</li>
-<li>Neural networks-specific APIs such as <code>ops.softmax</code>,
-<code>ops.conv</code>, <code>ops.binary_crossentropy</code>,
-<code>ops.relu</code>, etc.</li>
+<li>The NumPy API, e.g. <code>k_matmul</code>, <code>k_sum</code>,
+<code>k_reshape</code>, <code>k_stack</code>, etc.</li>
+<li>Neural networks-specific APIs such as <code>k_softmax</code>,
+<code>k_conv</code>, <code>k_binary_crossentropy</code>,
+<code>k_relu</code>, etc.</li>
 </ul>
 <p>You can also use backend-native APIs in your layers (such as
-<code>tf.nn</code> functions), but if you do this, then your layer will
+<code>tf$nn</code> functions), but if you do this, then your layer will
 only be usable with the backend in question. For instance, you could
-write the following JAX-specific layer using <code>jax.numpy</code>:</p>
-<div class="sourceCode" id="cb11"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" tabindex="-1"></a><span class="im">import</span> jax</span>
-<span id="cb11-2"><a href="#cb11-2" tabindex="-1"></a></span>
-<span id="cb11-3"><a href="#cb11-3" tabindex="-1"></a><span class="kw">class</span> Linear(keras.layers.Layer):</span>
-<span id="cb11-4"><a href="#cb11-4" tabindex="-1"></a>    ...</span>
-<span id="cb11-5"><a href="#cb11-5" tabindex="-1"></a></span>
-<span id="cb11-6"><a href="#cb11-6" tabindex="-1"></a>    <span class="kw">def</span> call(<span class="va">self</span>, inputs):</span>
-<span id="cb11-7"><a href="#cb11-7" tabindex="-1"></a>        <span class="cf">return</span> jax.numpy.matmul(inputs, <span class="va">self</span>.w) <span class="op">+</span> <span class="va">self</span>.b</span></code></pre></div>
+write the following JAX-specific layer using <code>jax$numpy</code>:</p>
+<div class="sourceCode" id="cb29"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" tabindex="-1"></a>jax <span class="ot">&lt;-</span> reticulate<span class="sc">::</span><span class="fu">import</span>(<span class="st">"jax"</span>)</span>
+<span id="cb29-2"><a href="#cb29-2" tabindex="-1"></a></span>
+<span id="cb29-3"><a href="#cb29-3" tabindex="-1"></a>Linear <span class="ot">&lt;-</span> <span class="fu">new_layer_class</span>(</span>
+<span id="cb29-4"><a href="#cb29-4" tabindex="-1"></a>  ...</span>
+<span id="cb29-5"><a href="#cb29-5" tabindex="-1"></a>  <span class="at">call =</span> <span class="cf">function</span>(inputs) {</span>
+<span id="cb29-6"><a href="#cb29-6" tabindex="-1"></a>    jax<span class="sc">$</span>numpy<span class="sc">$</span><span class="fu">matmul</span>(inputs, self<span class="sc">$</span>w) <span class="sc">+</span> self<span class="sc">$</span>b</span>
+<span id="cb29-7"><a href="#cb29-7" tabindex="-1"></a>  }</span>
+<span id="cb29-8"><a href="#cb29-8" tabindex="-1"></a>)</span></code></pre></div>
 <p>This would be the equivalent TensorFlow-specific layer:</p>
-<div class="sourceCode" id="cb12"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" tabindex="-1"></a><span class="im">import</span> tensorflow <span class="im">as</span> tf</span>
-<span id="cb12-2"><a href="#cb12-2" tabindex="-1"></a></span>
-<span id="cb12-3"><a href="#cb12-3" tabindex="-1"></a><span class="kw">class</span> Linear(keras.layers.Layer):</span>
-<span id="cb12-4"><a href="#cb12-4" tabindex="-1"></a>    ...</span>
-<span id="cb12-5"><a href="#cb12-5" tabindex="-1"></a></span>
-<span id="cb12-6"><a href="#cb12-6" tabindex="-1"></a>    <span class="kw">def</span> call(<span class="va">self</span>, inputs):</span>
-<span id="cb12-7"><a href="#cb12-7" tabindex="-1"></a>        <span class="cf">return</span> tf.matmul(inputs, <span class="va">self</span>.w) <span class="op">+</span> <span class="va">self</span>.b</span></code></pre></div>
+<div class="sourceCode" id="cb30"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1" tabindex="-1"></a>Linear <span class="ot">&lt;-</span> <span class="fu">new_layer_class</span>(</span>
+<span id="cb30-2"><a href="#cb30-2" tabindex="-1"></a>  ...</span>
+<span id="cb30-3"><a href="#cb30-3" tabindex="-1"></a>  <span class="at">call =</span> <span class="cf">function</span>(inputs) {</span>
+<span id="cb30-4"><a href="#cb30-4" tabindex="-1"></a>    tf<span class="sc">$</span><span class="fu">matmul</span>(inputs, self<span class="sc">$</span>w) <span class="sc">+</span> self<span class="sc">$</span>b</span>
+<span id="cb30-5"><a href="#cb30-5" tabindex="-1"></a>  }</span>
+<span id="cb30-6"><a href="#cb30-6" tabindex="-1"></a>)</span></code></pre></div>
 <p>And this would be the equivalent PyTorch-specific layer:</p>
-<div class="sourceCode" id="cb13"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" tabindex="-1"></a><span class="im">import</span> torch</span>
-<span id="cb13-2"><a href="#cb13-2" tabindex="-1"></a></span>
-<span id="cb13-3"><a href="#cb13-3" tabindex="-1"></a><span class="kw">class</span> Linear(keras.layers.Layer):</span>
-<span id="cb13-4"><a href="#cb13-4" tabindex="-1"></a>    ...</span>
-<span id="cb13-5"><a href="#cb13-5" tabindex="-1"></a></span>
-<span id="cb13-6"><a href="#cb13-6" tabindex="-1"></a>    <span class="kw">def</span> call(<span class="va">self</span>, inputs):</span>
-<span id="cb13-7"><a href="#cb13-7" tabindex="-1"></a>        <span class="cf">return</span> torch.matmul(inputs, <span class="va">self</span>.w) <span class="op">+</span> <span class="va">self</span>.b</span></code></pre></div>
+<div class="sourceCode" id="cb31"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1" tabindex="-1"></a>torch <span class="ot">&lt;-</span> reticulate<span class="sc">::</span><span class="fu">import</span>(<span class="st">"torch"</span>)</span>
+<span id="cb31-2"><a href="#cb31-2" tabindex="-1"></a></span>
+<span id="cb31-3"><a href="#cb31-3" tabindex="-1"></a>Linear <span class="ot">&lt;-</span> <span class="fu">new_layer_class</span>(</span>
+<span id="cb31-4"><a href="#cb31-4" tabindex="-1"></a>  ...</span>
+<span id="cb31-5"><a href="#cb31-5" tabindex="-1"></a>  <span class="at">call =</span> <span class="cf">function</span>(inputs) {</span>
+<span id="cb31-6"><a href="#cb31-6" tabindex="-1"></a>    torch<span class="sc">$</span><span class="fu">matmul</span>(inputs, self<span class="sc">$</span>w) <span class="sc">+</span> self<span class="sc">$</span>b</span>
+<span id="cb31-7"><a href="#cb31-7" tabindex="-1"></a>  }</span>
+<span id="cb31-8"><a href="#cb31-8" tabindex="-1"></a>)</span></code></pre></div>
 <p>Because cross-backend compatibility is a tremendously useful
 property, we strongly recommend that you seek to always make your layers
 backend-agnostic by leveraging only Keras APIs.</p>
@@ -457,150 +425,179 @@ backend-agnostic by leveraging only Keras APIs.</p>
 <p>When writing the <code><a href="https://rdrr.io/r/base/call.html" class="external-link">call()</a></code> method of a layer, you can
 create loss tensors that you will want to use later, when writing your
 training loop. This is doable by calling
-<code>self.add_loss(value)</code>:</p>
-<div class="sourceCode" id="cb14"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" tabindex="-1"></a><span class="co"># A layer that creates an activity regularization loss</span></span>
-<span id="cb14-2"><a href="#cb14-2" tabindex="-1"></a><span class="kw">class</span> ActivityRegularizationLayer(keras.layers.Layer):</span>
-<span id="cb14-3"><a href="#cb14-3" tabindex="-1"></a>    <span class="kw">def</span> <span class="fu">__init__</span>(<span class="va">self</span>, rate<span class="op">=</span><span class="fl">1e-2</span>):</span>
-<span id="cb14-4"><a href="#cb14-4" tabindex="-1"></a>        <span class="bu">super</span>().<span class="fu">__init__</span>()</span>
-<span id="cb14-5"><a href="#cb14-5" tabindex="-1"></a>        <span class="va">self</span>.rate <span class="op">=</span> rate</span>
-<span id="cb14-6"><a href="#cb14-6" tabindex="-1"></a></span>
-<span id="cb14-7"><a href="#cb14-7" tabindex="-1"></a>    <span class="kw">def</span> call(<span class="va">self</span>, inputs):</span>
-<span id="cb14-8"><a href="#cb14-8" tabindex="-1"></a>        <span class="va">self</span>.add_loss(<span class="va">self</span>.rate <span class="op">*</span> ops.mean(inputs))</span>
-<span id="cb14-9"><a href="#cb14-9" tabindex="-1"></a>        <span class="cf">return</span> inputs</span></code></pre></div>
+<code>self$add_loss(value)</code>:</p>
+<div class="sourceCode" id="cb32"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># A layer that creates an activity regularization loss</span></span>
+<span><span class="va">ActivityRegularizationLayer</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/new-classes.html">new_layer_class</a></span><span class="op">(</span></span>
+<span>  <span class="st">"ActivityRegularizationLayer"</span>,</span>
+<span>  initialize <span class="op">=</span> <span class="kw">function</span><span class="op">(</span><span class="va">rate</span> <span class="op">=</span> <span class="fl">1e-2</span><span class="op">)</span> <span class="op">{</span></span>
+<span>    <span class="va">self</span><span class="op">$</span><span class="va">rate</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/numeric.html" class="external-link">as.numeric</a></span><span class="op">(</span><span class="va">rate</span><span class="op">)</span></span>
+<span>    <span class="va">super</span><span class="op">$</span><span class="fu">initialize</span><span class="op">(</span><span class="op">)</span></span>
+<span>  <span class="op">}</span>,</span>
+<span>  call <span class="op">=</span> <span class="kw">function</span><span class="op">(</span><span class="va">inputs</span><span class="op">)</span> <span class="op">{</span></span>
+<span>    <span class="va">self</span><span class="op">$</span><span class="fu">add_loss</span><span class="op">(</span><span class="va">self</span><span class="op">$</span><span class="va">rate</span> <span class="op">*</span> <span class="fu">k_mean</span><span class="op">(</span><span class="va">inputs</span><span class="op">)</span><span class="op">)</span></span>
+<span>    <span class="va">inputs</span></span>
+<span>  <span class="op">}</span></span>
+<span><span class="op">)</span></span></code></pre></div>
 <p>These losses (including those created by any inner layer) can be
-retrieved via <code>layer.losses</code>. This property is reset at the
-start of every <code>__call__()</code> to the top-level layer, so that
-<code>layer.losses</code> always contains the loss values created during
+retrieved via <code>layer$losses</code>. This property is reset at the
+start of every <code>call</code> to the top-level layer, so that
+<code>layer$losses</code> always contains the loss values created during
 the last forward pass.</p>
-<div class="sourceCode" id="cb15"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" tabindex="-1"></a><span class="kw">class</span> OuterLayer(keras.layers.Layer):</span>
-<span id="cb15-2"><a href="#cb15-2" tabindex="-1"></a>    <span class="kw">def</span> <span class="fu">__init__</span>(<span class="va">self</span>):</span>
-<span id="cb15-3"><a href="#cb15-3" tabindex="-1"></a>        <span class="bu">super</span>().<span class="fu">__init__</span>()</span>
-<span id="cb15-4"><a href="#cb15-4" tabindex="-1"></a>        <span class="va">self</span>.activity_reg <span class="op">=</span> ActivityRegularizationLayer(<span class="fl">1e-2</span>)</span>
-<span id="cb15-5"><a href="#cb15-5" tabindex="-1"></a></span>
-<span id="cb15-6"><a href="#cb15-6" tabindex="-1"></a>    <span class="kw">def</span> call(<span class="va">self</span>, inputs):</span>
-<span id="cb15-7"><a href="#cb15-7" tabindex="-1"></a>        <span class="cf">return</span> <span class="va">self</span>.activity_reg(inputs)</span>
-<span id="cb15-8"><a href="#cb15-8" tabindex="-1"></a></span>
-<span id="cb15-9"><a href="#cb15-9" tabindex="-1"></a></span>
-<span id="cb15-10"><a href="#cb15-10" tabindex="-1"></a>layer <span class="op">=</span> OuterLayer()</span>
-<span id="cb15-11"><a href="#cb15-11" tabindex="-1"></a><span class="cf">assert</span> (</span>
-<span id="cb15-12"><a href="#cb15-12" tabindex="-1"></a>    <span class="bu">len</span>(layer.losses) <span class="op">==</span> <span class="dv">0</span></span>
-<span id="cb15-13"><a href="#cb15-13" tabindex="-1"></a>)  <span class="co"># No losses yet since the layer has never been called</span></span>
-<span id="cb15-14"><a href="#cb15-14" tabindex="-1"></a></span>
-<span id="cb15-15"><a href="#cb15-15" tabindex="-1"></a>_ <span class="op">=</span> layer(ops.zeros((<span class="dv">1</span>, <span class="dv">1</span>)))</span>
-<span id="cb15-16"><a href="#cb15-16" tabindex="-1"></a><span class="cf">assert</span> <span class="bu">len</span>(layer.losses) <span class="op">==</span> <span class="dv">1</span>  <span class="co"># We created one loss value</span></span>
-<span id="cb15-17"><a href="#cb15-17" tabindex="-1"></a></span>
-<span id="cb15-18"><a href="#cb15-18" tabindex="-1"></a><span class="co"># `layer.losses` gets reset at the start of each __call__</span></span>
-<span id="cb15-19"><a href="#cb15-19" tabindex="-1"></a>_ <span class="op">=</span> layer(ops.zeros((<span class="dv">1</span>, <span class="dv">1</span>)))</span>
-<span id="cb15-20"><a href="#cb15-20" tabindex="-1"></a><span class="cf">assert</span> <span class="bu">len</span>(layer.losses) <span class="op">==</span> <span class="dv">1</span>  <span class="co"># This is the loss created during the call above</span></span></code></pre></div>
+<div class="sourceCode" id="cb33"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">OuterLayer</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/new-classes.html">new_layer_class</a></span><span class="op">(</span></span>
+<span>  <span class="st">"OuterLayer"</span>,</span>
+<span>  initialize <span class="op">=</span> <span class="kw">function</span><span class="op">(</span><span class="op">)</span> <span class="op">{</span></span>
+<span>    <span class="va">super</span><span class="op">$</span><span class="fu">initialize</span><span class="op">(</span><span class="op">)</span></span>
+<span>    <span class="va">self</span><span class="op">$</span><span class="va">activity_reg</span> <span class="op">&lt;-</span> <span class="fu">ActivityRegularizationLayer</span><span class="op">(</span>rate <span class="op">=</span> <span class="fl">1e-2</span><span class="op">)</span></span>
+<span>  <span class="op">}</span>,</span>
+<span>  call <span class="op">=</span> <span class="kw">function</span><span class="op">(</span><span class="va">inputs</span><span class="op">)</span> <span class="op">{</span></span>
+<span>    <span class="va">self</span><span class="op">$</span><span class="fu">activity_reg</span><span class="op">(</span><span class="va">inputs</span><span class="op">)</span></span>
+<span>    <span class="va">inputs</span></span>
+<span>  <span class="op">}</span></span>
+<span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">layer</span> <span class="op">&lt;-</span> <span class="fu">OuterLayer</span><span class="op">(</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/cat.html" class="external-link">cat</a></span><span class="op">(</span><span class="st">"losses:"</span>, <span class="fu"><a href="https://rdrr.io/r/base/length.html" class="external-link">length</a></span><span class="op">(</span><span class="va">layer</span><span class="op">$</span><span class="va">losses</span><span class="op">)</span><span class="op">)</span>  <span class="co"># No losses yet since the layer has never been called</span></span></code></pre></div>
+<pre><code><span><span class="co">## losses: 0</span></span></code></pre>
+<div class="sourceCode" id="cb35"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">x</span> <span class="op">&lt;-</span> <span class="fu">layer</span><span class="op">(</span><span class="fu">k_zeros</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">1</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/cat.html" class="external-link">cat</a></span><span class="op">(</span><span class="st">"losses:"</span>, <span class="fu"><a href="https://rdrr.io/r/base/length.html" class="external-link">length</a></span><span class="op">(</span><span class="va">layer</span><span class="op">$</span><span class="va">losses</span><span class="op">)</span><span class="op">)</span>  <span class="co"># We created one loss value</span></span></code></pre></div>
+<pre><code><span><span class="co">## losses: 1</span></span></code></pre>
+<div class="sourceCode" id="cb37"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># `layer$losses` gets reset at the start of each call</span></span>
+<span><span class="va">x</span> <span class="op">&lt;-</span> <span class="fu">layer</span><span class="op">(</span><span class="fu">k_zeros</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">1</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/cat.html" class="external-link">cat</a></span><span class="op">(</span><span class="st">"losses:"</span>, <span class="fu"><a href="https://rdrr.io/r/base/length.html" class="external-link">length</a></span><span class="op">(</span><span class="va">layer</span><span class="op">$</span><span class="va">losses</span><span class="op">)</span><span class="op">)</span> <span class="co"># This is the loss created during the call above</span></span></code></pre></div>
+<pre><code><span><span class="co">## losses: 1</span></span></code></pre>
 <p>In addition, the <code>loss</code> property also contains
 regularization losses created for the weights of any inner layer:</p>
-<div class="sourceCode" id="cb16"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" tabindex="-1"></a><span class="kw">class</span> OuterLayerWithKernelRegularizer(keras.layers.Layer):</span>
-<span id="cb16-2"><a href="#cb16-2" tabindex="-1"></a>    <span class="kw">def</span> <span class="fu">__init__</span>(<span class="va">self</span>):</span>
-<span id="cb16-3"><a href="#cb16-3" tabindex="-1"></a>        <span class="bu">super</span>().<span class="fu">__init__</span>()</span>
-<span id="cb16-4"><a href="#cb16-4" tabindex="-1"></a>        <span class="va">self</span>.dense <span class="op">=</span> keras.layers.Dense(</span>
-<span id="cb16-5"><a href="#cb16-5" tabindex="-1"></a>            <span class="dv">32</span>, kernel_regularizer<span class="op">=</span>keras.regularizers.l2(<span class="fl">1e-3</span>)</span>
-<span id="cb16-6"><a href="#cb16-6" tabindex="-1"></a>        )</span>
-<span id="cb16-7"><a href="#cb16-7" tabindex="-1"></a></span>
-<span id="cb16-8"><a href="#cb16-8" tabindex="-1"></a>    <span class="kw">def</span> call(<span class="va">self</span>, inputs):</span>
-<span id="cb16-9"><a href="#cb16-9" tabindex="-1"></a>        <span class="cf">return</span> <span class="va">self</span>.dense(inputs)</span>
-<span id="cb16-10"><a href="#cb16-10" tabindex="-1"></a></span>
-<span id="cb16-11"><a href="#cb16-11" tabindex="-1"></a></span>
-<span id="cb16-12"><a href="#cb16-12" tabindex="-1"></a>layer <span class="op">=</span> OuterLayerWithKernelRegularizer()</span>
-<span id="cb16-13"><a href="#cb16-13" tabindex="-1"></a>_ <span class="op">=</span> layer(ops.zeros((<span class="dv">1</span>, <span class="dv">1</span>)))</span>
-<span id="cb16-14"><a href="#cb16-14" tabindex="-1"></a></span>
-<span id="cb16-15"><a href="#cb16-15" tabindex="-1"></a><span class="co"># This is `1e-3 * sum(layer.dense.kernel ** 2)`,</span></span>
-<span id="cb16-16"><a href="#cb16-16" tabindex="-1"></a><span class="co"># created by the `kernel_regularizer` above.</span></span>
-<span id="cb16-17"><a href="#cb16-17" tabindex="-1"></a><span class="bu">print</span>(layer.losses)</span></code></pre></div>
+<div class="sourceCode" id="cb39"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">OuterLayerWithKernelRegularizer</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/new-classes.html">new_layer_class</a></span><span class="op">(</span></span>
+<span>  <span class="st">"OuterLayerWithKernelRegularizer"</span>,</span>
+<span>  initialize <span class="op">=</span> <span class="kw">function</span><span class="op">(</span><span class="op">)</span> <span class="op">{</span></span>
+<span>    <span class="va">super</span><span class="op">$</span><span class="fu">initialize</span><span class="op">(</span><span class="op">)</span></span>
+<span>    <span class="va">self</span><span class="op">$</span><span class="va">dense</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/layer_dense.html">layer_dense</a></span><span class="op">(</span>units <span class="op">=</span> <span class="fl">32</span>, kernel_regularizer <span class="op">=</span> <span class="fu"><a href="../reference/regularizer_l2.html">regularizer_l2</a></span><span class="op">(</span><span class="fl">1e-3</span><span class="op">)</span><span class="op">)</span></span>
+<span>  <span class="op">}</span>,</span>
+<span>  call <span class="op">=</span> <span class="kw">function</span><span class="op">(</span><span class="va">inputs</span><span class="op">)</span> <span class="op">{</span></span>
+<span>    <span class="va">self</span><span class="op">$</span><span class="fu">dense</span><span class="op">(</span><span class="va">inputs</span><span class="op">)</span></span>
+<span>  <span class="op">}</span></span>
+<span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">layer</span> <span class="op">&lt;-</span> <span class="fu">OuterLayerWithKernelRegularizer</span><span class="op">(</span><span class="op">)</span></span>
+<span><span class="va">x</span> <span class="op">&lt;-</span> <span class="fu">layer</span><span class="op">(</span><span class="fu">k_zeros</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">1</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># This is `1e-3 * sum(layer$dense$kernel ** 2)`,</span></span>
+<span><span class="co"># created by the `kernel_regularizer` above.</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">layer</span><span class="op">$</span><span class="va">losses</span><span class="op">)</span></span></code></pre></div>
+<pre><code><span><span class="co">## [[1]]</span></span>
+<span><span class="co">## tf.Tensor(0.0017063234, shape=(), dtype=float32)</span></span></code></pre>
 <p>These losses are meant to be taken into account when writing custom
 training loops.</p>
 <p>They also work seamlessly with <code><a href="https://generics.r-lib.org/reference/fit.html" class="external-link">fit()</a></code> (they get
 automatically summed and added to the main loss, if any):</p>
-<div class="sourceCode" id="cb17"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" tabindex="-1"></a>inputs <span class="op">=</span> keras.Input(shape<span class="op">=</span>(<span class="dv">3</span>,))</span>
-<span id="cb17-2"><a href="#cb17-2" tabindex="-1"></a>outputs <span class="op">=</span> ActivityRegularizationLayer()(inputs)</span>
-<span id="cb17-3"><a href="#cb17-3" tabindex="-1"></a>model <span class="op">=</span> keras.Model(inputs, outputs)</span>
-<span id="cb17-4"><a href="#cb17-4" tabindex="-1"></a></span>
-<span id="cb17-5"><a href="#cb17-5" tabindex="-1"></a><span class="co"># If there is a loss passed in `compile`, the regularization</span></span>
-<span id="cb17-6"><a href="#cb17-6" tabindex="-1"></a><span class="co"># losses get added to it</span></span>
-<span id="cb17-7"><a href="#cb17-7" tabindex="-1"></a>model.<span class="bu">compile</span>(optimizer<span class="op">=</span><span class="st">"adam"</span>, loss<span class="op">=</span><span class="st">"mse"</span>)</span>
-<span id="cb17-8"><a href="#cb17-8" tabindex="-1"></a>model.fit(np.random.random((<span class="dv">2</span>, <span class="dv">3</span>)), np.random.random((<span class="dv">2</span>, <span class="dv">3</span>)))</span>
-<span id="cb17-9"><a href="#cb17-9" tabindex="-1"></a></span>
-<span id="cb17-10"><a href="#cb17-10" tabindex="-1"></a><span class="co"># It's also possible not to pass any loss in `compile`,</span></span>
-<span id="cb17-11"><a href="#cb17-11" tabindex="-1"></a><span class="co"># since the model already has a loss to minimize, via the `add_loss`</span></span>
-<span id="cb17-12"><a href="#cb17-12" tabindex="-1"></a><span class="co"># call during the forward pass!</span></span>
-<span id="cb17-13"><a href="#cb17-13" tabindex="-1"></a>model.<span class="bu">compile</span>(optimizer<span class="op">=</span><span class="st">"adam"</span>)</span>
-<span id="cb17-14"><a href="#cb17-14" tabindex="-1"></a>model.fit(np.random.random((<span class="dv">2</span>, <span class="dv">3</span>)), np.random.random((<span class="dv">2</span>, <span class="dv">3</span>)))</span></code></pre></div>
+<div class="sourceCode" id="cb41"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">inputs</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/layer_input.html">layer_input</a></span><span class="op">(</span>shape <span class="op">=</span> <span class="fl">3</span><span class="op">)</span></span>
+<span><span class="va">outputs</span> <span class="op">&lt;-</span> <span class="fu">ActivityRegularizationLayer</span><span class="op">(</span><span class="va">inputs</span><span class="op">)</span></span>
+<span><span class="va">model</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/keras_model.html">keras_model</a></span><span class="op">(</span><span class="va">inputs</span>, <span class="va">outputs</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># If there is a loss passed in `compile`, the regularization</span></span>
+<span><span class="co"># losses get added to it</span></span>
+<span><span class="va">model</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://generics.r-lib.org/reference/compile.html" class="external-link">compile</a></span><span class="op">(</span>optimizer<span class="op">=</span><span class="st">"adam"</span>, loss<span class="op">=</span><span class="st">"mse"</span><span class="op">)</span></span>
+<span><span class="va">model</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://generics.r-lib.org/reference/fit.html" class="external-link">fit</a></span><span class="op">(</span><span class="fu"><a href="../reference/random_normal.html">random_normal</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">2</span>, <span class="fl">3</span><span class="op">)</span><span class="op">)</span>, <span class="fu"><a href="../reference/random_normal.html">random_normal</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">2</span>, <span class="fl">3</span><span class="op">)</span><span class="op">)</span>, epochs <span class="op">=</span> <span class="fl">1</span><span class="op">)</span></span></code></pre></div>
+<pre><code><span><span class="co">## 1/1 - 0s - 42ms/step - loss: 3.3898</span></span></code></pre>
+<div class="sourceCode" id="cb43"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># It's also possible not to pass any loss in `compile`,</span></span>
+<span><span class="co"># since the model already has a loss to minimize, via the `add_loss`</span></span>
+<span><span class="co"># call during the forward pass!</span></span>
+<span><span class="va">model</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://generics.r-lib.org/reference/compile.html" class="external-link">compile</a></span><span class="op">(</span>optimizer<span class="op">=</span><span class="st">"adam"</span><span class="op">)</span></span>
+<span><span class="va">model</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://generics.r-lib.org/reference/fit.html" class="external-link">fit</a></span><span class="op">(</span><span class="fu"><a href="../reference/random_normal.html">random_normal</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">2</span>, <span class="fl">3</span><span class="op">)</span><span class="op">)</span>, <span class="fu"><a href="../reference/random_normal.html">random_normal</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">2</span>, <span class="fl">3</span><span class="op">)</span><span class="op">)</span>, epochs <span class="op">=</span> <span class="fl">1</span><span class="op">)</span></span></code></pre></div>
+<pre><code><span><span class="co">## 1/1 - 0s - 30ms/step - loss: -1.4923e-03</span></span></code></pre>
 </div>
 <div class="section level2">
 <h2 id="you-can-optionally-enable-serialization-on-your-layers">You can optionally enable serialization on your layers<a class="anchor" aria-label="anchor" href="#you-can-optionally-enable-serialization-on-your-layers"></a>
 </h2>
 <p>If you need your custom layers to be serializable as part of a <a href="/guides/functional_api/">Functional model</a>, you can optionally
 implement a <code><a href="../reference/get_config.html">get_config()</a></code> method:</p>
-<div class="sourceCode" id="cb18"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1" tabindex="-1"></a><span class="kw">class</span> Linear(keras.layers.Layer):</span>
-<span id="cb18-2"><a href="#cb18-2" tabindex="-1"></a>    <span class="kw">def</span> <span class="fu">__init__</span>(<span class="va">self</span>, units<span class="op">=</span><span class="dv">32</span>):</span>
-<span id="cb18-3"><a href="#cb18-3" tabindex="-1"></a>        <span class="bu">super</span>().<span class="fu">__init__</span>()</span>
-<span id="cb18-4"><a href="#cb18-4" tabindex="-1"></a>        <span class="va">self</span>.units <span class="op">=</span> units</span>
-<span id="cb18-5"><a href="#cb18-5" tabindex="-1"></a></span>
-<span id="cb18-6"><a href="#cb18-6" tabindex="-1"></a>    <span class="kw">def</span> build(<span class="va">self</span>, input_shape):</span>
-<span id="cb18-7"><a href="#cb18-7" tabindex="-1"></a>        <span class="va">self</span>.w <span class="op">=</span> <span class="va">self</span>.add_weight(</span>
-<span id="cb18-8"><a href="#cb18-8" tabindex="-1"></a>            shape<span class="op">=</span>(input_shape[<span class="op">-</span><span class="dv">1</span>], <span class="va">self</span>.units),</span>
-<span id="cb18-9"><a href="#cb18-9" tabindex="-1"></a>            initializer<span class="op">=</span><span class="st">"random_normal"</span>,</span>
-<span id="cb18-10"><a href="#cb18-10" tabindex="-1"></a>            trainable<span class="op">=</span><span class="va">True</span>,</span>
-<span id="cb18-11"><a href="#cb18-11" tabindex="-1"></a>        )</span>
-<span id="cb18-12"><a href="#cb18-12" tabindex="-1"></a>        <span class="va">self</span>.b <span class="op">=</span> <span class="va">self</span>.add_weight(</span>
-<span id="cb18-13"><a href="#cb18-13" tabindex="-1"></a>            shape<span class="op">=</span>(<span class="va">self</span>.units,), initializer<span class="op">=</span><span class="st">"random_normal"</span>, trainable<span class="op">=</span><span class="va">True</span></span>
-<span id="cb18-14"><a href="#cb18-14" tabindex="-1"></a>        )</span>
-<span id="cb18-15"><a href="#cb18-15" tabindex="-1"></a></span>
-<span id="cb18-16"><a href="#cb18-16" tabindex="-1"></a>    <span class="kw">def</span> call(<span class="va">self</span>, inputs):</span>
-<span id="cb18-17"><a href="#cb18-17" tabindex="-1"></a>        <span class="cf">return</span> ops.matmul(inputs, <span class="va">self</span>.w) <span class="op">+</span> <span class="va">self</span>.b</span>
-<span id="cb18-18"><a href="#cb18-18" tabindex="-1"></a></span>
-<span id="cb18-19"><a href="#cb18-19" tabindex="-1"></a>    <span class="kw">def</span> get_config(<span class="va">self</span>):</span>
-<span id="cb18-20"><a href="#cb18-20" tabindex="-1"></a>        <span class="cf">return</span> {<span class="st">"units"</span>: <span class="va">self</span>.units}</span>
-<span id="cb18-21"><a href="#cb18-21" tabindex="-1"></a></span>
-<span id="cb18-22"><a href="#cb18-22" tabindex="-1"></a></span>
-<span id="cb18-23"><a href="#cb18-23" tabindex="-1"></a><span class="co"># Now you can recreate the layer from its config:</span></span>
-<span id="cb18-24"><a href="#cb18-24" tabindex="-1"></a>layer <span class="op">=</span> Linear(<span class="dv">64</span>)</span>
-<span id="cb18-25"><a href="#cb18-25" tabindex="-1"></a>config <span class="op">=</span> layer.get_config()</span>
-<span id="cb18-26"><a href="#cb18-26" tabindex="-1"></a><span class="bu">print</span>(config)</span>
-<span id="cb18-27"><a href="#cb18-27" tabindex="-1"></a>new_layer <span class="op">=</span> Linear.from_config(config)</span></code></pre></div>
-<p>Note that the <code>__init__()</code> method of the base
+<div class="sourceCode" id="cb45"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">Linear</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/new-classes.html">new_layer_class</a></span><span class="op">(</span></span>
+<span>  <span class="st">"Linear"</span>,</span>
+<span>  initialize <span class="op">=</span> <span class="kw">function</span><span class="op">(</span><span class="va">units</span> <span class="op">=</span> <span class="fl">32</span><span class="op">)</span> <span class="op">{</span></span>
+<span>    <span class="va">self</span><span class="op">$</span><span class="va">units</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/integer.html" class="external-link">as.integer</a></span><span class="op">(</span><span class="va">units</span><span class="op">)</span></span>
+<span>    <span class="va">super</span><span class="op">$</span><span class="fu">initialize</span><span class="op">(</span><span class="op">)</span></span>
+<span>  <span class="op">}</span>,</span>
+<span>  build <span class="op">=</span> <span class="kw">function</span><span class="op">(</span><span class="va">input_shape</span><span class="op">)</span> <span class="op">{</span></span>
+<span>    <span class="va">self</span><span class="op">$</span><span class="va">w</span> <span class="op">&lt;-</span> <span class="va">self</span><span class="op">$</span><span class="fu">add_weight</span><span class="op">(</span></span>
+<span>      shape <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">tail</a></span><span class="op">(</span><span class="va">input_shape</span>, <span class="fl">1</span><span class="op">)</span>, <span class="va">self</span><span class="op">$</span><span class="va">units</span><span class="op">)</span>,</span>
+<span>      initializer <span class="op">=</span> <span class="st">"random_normal"</span>,</span>
+<span>      trainable <span class="op">=</span> <span class="cn">TRUE</span></span>
+<span>    <span class="op">)</span></span>
+<span>    <span class="va">self</span><span class="op">$</span><span class="va">b</span> <span class="op">&lt;-</span> <span class="va">self</span><span class="op">$</span><span class="fu">add_weight</span><span class="op">(</span></span>
+<span>      shape <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="va">self</span><span class="op">$</span><span class="va">units</span><span class="op">)</span>,</span>
+<span>      initializer <span class="op">=</span> <span class="st">"zeros"</span>,</span>
+<span>      trainable <span class="op">=</span> <span class="cn">TRUE</span></span>
+<span>    <span class="op">)</span></span>
+<span>  <span class="op">}</span>,</span>
+<span>  call <span class="op">=</span> <span class="kw">function</span><span class="op">(</span><span class="va">inputs</span><span class="op">)</span> <span class="op">{</span></span>
+<span>    <span class="fu">k_matmul</span><span class="op">(</span><span class="va">inputs</span>, <span class="va">self</span><span class="op">$</span><span class="va">w</span><span class="op">)</span> <span class="op">+</span> <span class="va">self</span><span class="op">$</span><span class="va">b</span></span>
+<span>  <span class="op">}</span>,</span>
+<span>  get_config <span class="op">=</span> <span class="kw">function</span><span class="op">(</span><span class="op">)</span> <span class="op">{</span></span>
+<span>    <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>units <span class="op">=</span> <span class="va">self</span><span class="op">$</span><span class="va">units</span><span class="op">)</span></span>
+<span>  <span class="op">}</span></span>
+<span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Now you can recreate the layer from its config:</span></span>
+<span><span class="va">layer</span> <span class="op">&lt;-</span> <span class="fu">Linear</span><span class="op">(</span>units <span class="op">=</span> <span class="fl">64</span><span class="op">)</span></span>
+<span><span class="va">config</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/get_config.html">get_config</a></span><span class="op">(</span><span class="va">layer</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">config</span><span class="op">)</span></span></code></pre></div>
+<pre><code><span><span class="co">## {'units': 64}</span></span></code></pre>
+<div class="sourceCode" id="cb47"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">new_layer</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/get_config.html">from_config</a></span><span class="op">(</span><span class="va">config</span><span class="op">)</span></span></code></pre></div>
+<p>Note that the <code>initialize()</code> method of the base
 <code>Layer</code> class takes some keyword arguments, in particular a
 <code>name</code> and a <code>dtype</code>. It’s good practice to pass
-these arguments to the parent class in <code>__init__()</code> and to
+these arguments to the parent class in <code>initialize()</code> and to
 include them in the layer config:</p>
-<div class="sourceCode" id="cb19"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1" tabindex="-1"></a><span class="kw">class</span> Linear(keras.layers.Layer):</span>
-<span id="cb19-2"><a href="#cb19-2" tabindex="-1"></a>    <span class="kw">def</span> <span class="fu">__init__</span>(<span class="va">self</span>, units<span class="op">=</span><span class="dv">32</span>, <span class="op">**</span>kwargs):</span>
-<span id="cb19-3"><a href="#cb19-3" tabindex="-1"></a>        <span class="bu">super</span>().<span class="fu">__init__</span>(<span class="op">**</span>kwargs)</span>
-<span id="cb19-4"><a href="#cb19-4" tabindex="-1"></a>        <span class="va">self</span>.units <span class="op">=</span> units</span>
-<span id="cb19-5"><a href="#cb19-5" tabindex="-1"></a></span>
-<span id="cb19-6"><a href="#cb19-6" tabindex="-1"></a>    <span class="kw">def</span> build(<span class="va">self</span>, input_shape):</span>
-<span id="cb19-7"><a href="#cb19-7" tabindex="-1"></a>        <span class="va">self</span>.w <span class="op">=</span> <span class="va">self</span>.add_weight(</span>
-<span id="cb19-8"><a href="#cb19-8" tabindex="-1"></a>            shape<span class="op">=</span>(input_shape[<span class="op">-</span><span class="dv">1</span>], <span class="va">self</span>.units),</span>
-<span id="cb19-9"><a href="#cb19-9" tabindex="-1"></a>            initializer<span class="op">=</span><span class="st">"random_normal"</span>,</span>
-<span id="cb19-10"><a href="#cb19-10" tabindex="-1"></a>            trainable<span class="op">=</span><span class="va">True</span>,</span>
-<span id="cb19-11"><a href="#cb19-11" tabindex="-1"></a>        )</span>
-<span id="cb19-12"><a href="#cb19-12" tabindex="-1"></a>        <span class="va">self</span>.b <span class="op">=</span> <span class="va">self</span>.add_weight(</span>
-<span id="cb19-13"><a href="#cb19-13" tabindex="-1"></a>            shape<span class="op">=</span>(<span class="va">self</span>.units,), initializer<span class="op">=</span><span class="st">"random_normal"</span>, trainable<span class="op">=</span><span class="va">True</span></span>
-<span id="cb19-14"><a href="#cb19-14" tabindex="-1"></a>        )</span>
-<span id="cb19-15"><a href="#cb19-15" tabindex="-1"></a></span>
-<span id="cb19-16"><a href="#cb19-16" tabindex="-1"></a>    <span class="kw">def</span> call(<span class="va">self</span>, inputs):</span>
-<span id="cb19-17"><a href="#cb19-17" tabindex="-1"></a>        <span class="cf">return</span> ops.matmul(inputs, <span class="va">self</span>.w) <span class="op">+</span> <span class="va">self</span>.b</span>
-<span id="cb19-18"><a href="#cb19-18" tabindex="-1"></a></span>
-<span id="cb19-19"><a href="#cb19-19" tabindex="-1"></a>    <span class="kw">def</span> get_config(<span class="va">self</span>):</span>
-<span id="cb19-20"><a href="#cb19-20" tabindex="-1"></a>        config <span class="op">=</span> <span class="bu">super</span>().get_config()</span>
-<span id="cb19-21"><a href="#cb19-21" tabindex="-1"></a>        config.update({<span class="st">"units"</span>: <span class="va">self</span>.units})</span>
-<span id="cb19-22"><a href="#cb19-22" tabindex="-1"></a>        <span class="cf">return</span> config</span>
-<span id="cb19-23"><a href="#cb19-23" tabindex="-1"></a></span>
-<span id="cb19-24"><a href="#cb19-24" tabindex="-1"></a></span>
-<span id="cb19-25"><a href="#cb19-25" tabindex="-1"></a>layer <span class="op">=</span> Linear(<span class="dv">64</span>)</span>
-<span id="cb19-26"><a href="#cb19-26" tabindex="-1"></a>config <span class="op">=</span> layer.get_config()</span>
-<span id="cb19-27"><a href="#cb19-27" tabindex="-1"></a><span class="bu">print</span>(config)</span>
-<span id="cb19-28"><a href="#cb19-28" tabindex="-1"></a>new_layer <span class="op">=</span> Linear.from_config(config)</span></code></pre></div>
+<div class="sourceCode" id="cb48"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">Linear</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/new-classes.html">new_layer_class</a></span><span class="op">(</span></span>
+<span>  <span class="st">"Linear"</span>,</span>
+<span>  initialize <span class="op">=</span> <span class="kw">function</span><span class="op">(</span><span class="va">units</span> <span class="op">=</span> <span class="fl">32</span>, <span class="va">...</span><span class="op">)</span> <span class="op">{</span></span>
+<span>    <span class="va">self</span><span class="op">$</span><span class="va">units</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/integer.html" class="external-link">as.integer</a></span><span class="op">(</span><span class="va">units</span><span class="op">)</span></span>
+<span>    <span class="va">super</span><span class="op">$</span><span class="fu">initialize</span><span class="op">(</span><span class="va">...</span><span class="op">)</span></span>
+<span>  <span class="op">}</span>,</span>
+<span>  build <span class="op">=</span> <span class="kw">function</span><span class="op">(</span><span class="va">input_shape</span><span class="op">)</span> <span class="op">{</span></span>
+<span>    <span class="va">self</span><span class="op">$</span><span class="va">w</span> <span class="op">&lt;-</span> <span class="va">self</span><span class="op">$</span><span class="fu">add_weight</span><span class="op">(</span></span>
+<span>      shape <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">tail</a></span><span class="op">(</span><span class="va">input_shape</span>, <span class="fl">1</span><span class="op">)</span>, <span class="va">self</span><span class="op">$</span><span class="va">units</span><span class="op">)</span>,</span>
+<span>      initializer <span class="op">=</span> <span class="st">"random_normal"</span>,</span>
+<span>      trainable <span class="op">=</span> <span class="cn">TRUE</span></span>
+<span>    <span class="op">)</span></span>
+<span>    <span class="va">self</span><span class="op">$</span><span class="va">b</span> <span class="op">&lt;-</span> <span class="va">self</span><span class="op">$</span><span class="fu">add_weight</span><span class="op">(</span></span>
+<span>      shape <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="va">self</span><span class="op">$</span><span class="va">units</span><span class="op">)</span>,</span>
+<span>      initializer <span class="op">=</span> <span class="st">"zeros"</span>,</span>
+<span>      trainable <span class="op">=</span> <span class="cn">TRUE</span></span>
+<span>    <span class="op">)</span></span>
+<span>  <span class="op">}</span>,</span>
+<span>  call <span class="op">=</span> <span class="kw">function</span><span class="op">(</span><span class="va">inputs</span><span class="op">)</span> <span class="op">{</span></span>
+<span>    <span class="fu">k_matmul</span><span class="op">(</span><span class="va">inputs</span>, <span class="va">self</span><span class="op">$</span><span class="va">w</span><span class="op">)</span> <span class="op">+</span> <span class="va">self</span><span class="op">$</span><span class="va">b</span></span>
+<span>  <span class="op">}</span>,</span>
+<span>  get_config <span class="op">=</span> <span class="kw">function</span><span class="op">(</span><span class="op">)</span> <span class="op">{</span></span>
+<span>    <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>units <span class="op">=</span> <span class="va">self</span><span class="op">$</span><span class="va">units</span><span class="op">)</span></span>
+<span>  <span class="op">}</span></span>
+<span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">layer</span> <span class="op">&lt;-</span> <span class="fu">Linear</span><span class="op">(</span>units <span class="op">=</span> <span class="fl">64</span><span class="op">)</span></span>
+<span><span class="va">config</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/get_config.html">get_config</a></span><span class="op">(</span><span class="va">layer</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">config</span><span class="op">)</span></span></code></pre></div>
+<pre><code><span><span class="co">## {'units': 64}</span></span></code></pre>
+<div class="sourceCode" id="cb50"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">new_layer</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/get_config.html">from_config</a></span><span class="op">(</span><span class="va">config</span><span class="op">)</span></span></code></pre></div>
 <p>If you need more flexibility when deserializing the layer from its
 config, you can also override the <code><a href="../reference/get_config.html">from_config()</a></code> class
 method. This is the base implementation of
 <code><a href="../reference/get_config.html">from_config()</a></code>:</p>
-<div class="sourceCode" id="cb20"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb20-1"><a href="#cb20-1" tabindex="-1"></a><span class="kw">def</span> from_config(cls, config):</span>
-<span id="cb20-2"><a href="#cb20-2" tabindex="-1"></a>    <span class="cf">return</span> cls(<span class="op">**</span>config)</span></code></pre></div>
+<div class="sourceCode" id="cb51"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">from_config</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">config</span><span class="op">)</span> <span class="op">{</span></span>
+<span>  <span class="fu"><a href="https://rdrr.io/r/base/do.call.html" class="external-link">do.call</a></span><span class="op">(</span><span class="va">cls</span>, <span class="va">config</span><span class="op">)</span></span>
+<span><span class="op">}</span></span></code></pre></div>
 <p>To learn more about serialization and saving, see the complete <a href="/guides/serialization_and_saving/">guide to saving and serializing
 models</a>.</p>
 </div>
@@ -616,15 +613,20 @@ expose a <code>training</code> (boolean) argument in the
 <p>By exposing this argument in <code><a href="https://rdrr.io/r/base/call.html" class="external-link">call()</a></code>, you enable the
 built-in training and evaluation loops (e.g. <code><a href="https://generics.r-lib.org/reference/fit.html" class="external-link">fit()</a></code>) to
 correctly use the layer in training and inference.</p>
-<div class="sourceCode" id="cb21"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb21-1"><a href="#cb21-1" tabindex="-1"></a><span class="kw">class</span> CustomDropout(keras.layers.Layer):</span>
-<span id="cb21-2"><a href="#cb21-2" tabindex="-1"></a>    <span class="kw">def</span> <span class="fu">__init__</span>(<span class="va">self</span>, rate, <span class="op">**</span>kwargs):</span>
-<span id="cb21-3"><a href="#cb21-3" tabindex="-1"></a>        <span class="bu">super</span>().<span class="fu">__init__</span>(<span class="op">**</span>kwargs)</span>
-<span id="cb21-4"><a href="#cb21-4" tabindex="-1"></a>        <span class="va">self</span>.rate <span class="op">=</span> rate</span>
-<span id="cb21-5"><a href="#cb21-5" tabindex="-1"></a></span>
-<span id="cb21-6"><a href="#cb21-6" tabindex="-1"></a>    <span class="kw">def</span> call(<span class="va">self</span>, inputs, training<span class="op">=</span><span class="va">None</span>):</span>
-<span id="cb21-7"><a href="#cb21-7" tabindex="-1"></a>        <span class="cf">if</span> training:</span>
-<span id="cb21-8"><a href="#cb21-8" tabindex="-1"></a>            <span class="cf">return</span> keras.random.dropout(inputs, rate<span class="op">=</span><span class="va">self</span>.rate)</span>
-<span id="cb21-9"><a href="#cb21-9" tabindex="-1"></a>        <span class="cf">return</span> inputs</span></code></pre></div>
+<div class="sourceCode" id="cb52"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">CustomDropout</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/new-classes.html">new_layer_class</a></span><span class="op">(</span></span>
+<span>  <span class="st">"CustomDropout"</span>,</span>
+<span>  initialize <span class="op">=</span> <span class="kw">function</span><span class="op">(</span><span class="va">rate</span>, <span class="va">...</span><span class="op">)</span> <span class="op">{</span></span>
+<span>    <span class="va">super</span><span class="op">$</span><span class="fu">initialize</span><span class="op">(</span><span class="va">...</span><span class="op">)</span></span>
+<span>    <span class="va">self</span><span class="op">$</span><span class="va">rate</span> <span class="op">&lt;-</span> <span class="va">rate</span></span>
+<span>  <span class="op">}</span>,</span>
+<span>  call <span class="op">=</span> <span class="kw">function</span><span class="op">(</span><span class="va">inputs</span>, <span class="va">training</span> <span class="op">=</span> <span class="cn">NULL</span><span class="op">)</span> <span class="op">{</span></span>
+<span>    <span class="kw">if</span> <span class="op">(</span><span class="op">!</span><span class="fu"><a href="https://rdrr.io/r/base/NULL.html" class="external-link">is.null</a></span><span class="op">(</span><span class="va">training</span><span class="op">)</span> <span class="op">&amp;&amp;</span> <span class="va">training</span><span class="op">)</span> <span class="op">{</span></span>
+<span>      <span class="kw"><a href="https://rdrr.io/r/base/function.html" class="external-link">return</a></span><span class="op">(</span><span class="fu"><a href="../reference/random_dropout.html">random_dropout</a></span><span class="op">(</span><span class="va">inputs</span>, rate <span class="op">=</span> <span class="va">self</span><span class="op">$</span><span class="va">rate</span><span class="op">)</span><span class="op">)</span></span>
+<span>    <span class="op">}</span></span>
+<span>    <span class="va">inputs</span></span>
+<span>  <span class="op">}</span></span>
+<span><span class="op">)</span></span></code></pre></div>
 </div>
 <div class="section level2">
 <h2 id="privileged-mask-argument-in-the-call-method">Privileged <code>mask</code> argument in the <code>call()</code>
@@ -636,10 +638,10 @@ method<a class="anchor" aria-label="anchor" href="#privileged-mask-argument-in-t
 (one boolean value per timestep in the input) used to skip certain input
 timesteps when processing timeseries data.</p>
 <p>Keras will automatically pass the correct <code>mask</code> argument
-to <code>__call__()</code> for layers that support it, when a mask is
+to <code><a href="https://rdrr.io/r/base/call.html" class="external-link">call()</a></code> for layers that support it, when a mask is
 generated by a prior layer. Mask-generating layers are the
 <code>Embedding</code> layer configured with
-<code>mask_zero=True</code>, and the <code>Masking</code> layer.</p>
+<code>mask_zero = TRUE</code>, and the <code>Masking</code> layer.</p>
 </div>
 <div class="section level2">
 <h2 id="the-model-class">The <code>Model</code> class<a class="anchor" aria-label="anchor" href="#the-model-class"></a>
@@ -654,10 +656,10 @@ encompassing the entire ResNet50 network.</p>
 with the following differences:</p>
 <ul>
 <li>It exposes built-in training, evaluation, and prediction loops
-(<code>model.fit()</code>, <code>model.evaluate()</code>,
-<code>model.predict()</code>).</li>
+(<code><a href="https://generics.r-lib.org/reference/fit.html" class="external-link">fit()</a></code>, <code><a href="https://rdrr.io/pkg/tensorflow/man/evaluate.html" class="external-link">evaluate()</a></code>,
+<code><a href="https://rdrr.io/r/stats/predict.html" class="external-link">predict()</a></code>).</li>
 <li>It exposes the list of its inner layers, via the
-<code>model.layers</code> property.</li>
+<code>model$layers</code> property.</li>
 <li>It exposes saving and serialization APIs (<code><a href="https://rdrr.io/r/base/save.html" class="external-link">save()</a></code>,
 <code>save_weights()</code>…)</li>
 </ul>
@@ -678,25 +680,28 @@ just a block in a bigger system, or because you are writing training
 to build a <code>Model</code> that we could train with
 <code><a href="https://generics.r-lib.org/reference/fit.html" class="external-link">fit()</a></code>, and that we could save with
 <code>save_weights()</code>:</p>
-<div class="sourceCode" id="cb22"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb22-1"><a href="#cb22-1" tabindex="-1"></a><span class="kw">class</span> ResNet(keras.Model):</span>
-<span id="cb22-2"><a href="#cb22-2" tabindex="-1"></a></span>
-<span id="cb22-3"><a href="#cb22-3" tabindex="-1"></a>    <span class="kw">def</span> <span class="fu">__init__</span>(<span class="va">self</span>, num_classes<span class="op">=</span><span class="dv">1000</span>):</span>
-<span id="cb22-4"><a href="#cb22-4" tabindex="-1"></a>        <span class="bu">super</span>().<span class="fu">__init__</span>()</span>
-<span id="cb22-5"><a href="#cb22-5" tabindex="-1"></a>        <span class="va">self</span>.block_1 <span class="op">=</span> ResNetBlock()</span>
-<span id="cb22-6"><a href="#cb22-6" tabindex="-1"></a>        <span class="va">self</span>.block_2 <span class="op">=</span> ResNetBlock()</span>
-<span id="cb22-7"><a href="#cb22-7" tabindex="-1"></a>        <span class="va">self</span>.global_pool <span class="op">=</span> layers.GlobalAveragePooling2D()</span>
-<span id="cb22-8"><a href="#cb22-8" tabindex="-1"></a>        <span class="va">self</span>.classifier <span class="op">=</span> Dense(num_classes)</span>
-<span id="cb22-9"><a href="#cb22-9" tabindex="-1"></a></span>
-<span id="cb22-10"><a href="#cb22-10" tabindex="-1"></a>    <span class="kw">def</span> call(<span class="va">self</span>, inputs):</span>
-<span id="cb22-11"><a href="#cb22-11" tabindex="-1"></a>        x <span class="op">=</span> <span class="va">self</span>.block_1(inputs)</span>
-<span id="cb22-12"><a href="#cb22-12" tabindex="-1"></a>        x <span class="op">=</span> <span class="va">self</span>.block_2(x)</span>
-<span id="cb22-13"><a href="#cb22-13" tabindex="-1"></a>        x <span class="op">=</span> <span class="va">self</span>.global_pool(x)</span>
-<span id="cb22-14"><a href="#cb22-14" tabindex="-1"></a>        <span class="cf">return</span> <span class="va">self</span>.classifier(x)</span>
-<span id="cb22-15"><a href="#cb22-15" tabindex="-1"></a></span>
-<span id="cb22-16"><a href="#cb22-16" tabindex="-1"></a>resnet <span class="op">=</span> ResNet()</span>
-<span id="cb22-17"><a href="#cb22-17" tabindex="-1"></a>dataset <span class="op">=</span> ...</span>
-<span id="cb22-18"><a href="#cb22-18" tabindex="-1"></a>resnet.fit(dataset, epochs<span class="op">=</span><span class="dv">10</span>)</span>
-<span id="cb22-19"><a href="#cb22-19" tabindex="-1"></a>resnet.save(filepath.keras)</span></code></pre></div>
+<div class="sourceCode" id="cb53"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">ResNet</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/new-classes.html">new_model_class</a></span><span class="op">(</span></span>
+<span>  <span class="st">"ResNet"</span>,</span>
+<span>  initialize <span class="op">=</span> <span class="kw">function</span><span class="op">(</span><span class="va">num_classes</span> <span class="op">=</span> <span class="fl">1000</span>, <span class="va">...</span><span class="op">)</span> <span class="op">{</span></span>
+<span>    <span class="va">super</span><span class="op">$</span><span class="fu">initialize</span><span class="op">(</span><span class="va">...</span><span class="op">)</span></span>
+<span>    <span class="va">self</span><span class="op">$</span><span class="va">block_1</span> <span class="op">&lt;-</span> <span class="fu">ResNetBlock</span><span class="op">(</span><span class="op">)</span></span>
+<span>    <span class="va">self</span><span class="op">$</span><span class="va">block_2</span> <span class="op">&lt;-</span> <span class="fu">ResNetBlock</span><span class="op">(</span><span class="op">)</span></span>
+<span>    <span class="va">self</span><span class="op">$</span><span class="va">global_pool</span> <span class="op">&lt;-</span> <span class="va">layers</span><span class="op">$</span><span class="fu">GlobalAveragePooling2D</span><span class="op">(</span><span class="op">)</span></span>
+<span>    <span class="va">self</span><span class="op">$</span><span class="va">classifier</span> <span class="op">&lt;-</span> <span class="va">layers</span><span class="op">$</span><span class="fu">Dense</span><span class="op">(</span><span class="va">num_classes</span><span class="op">)</span></span>
+<span>  <span class="op">}</span>,</span>
+<span>  call <span class="op">=</span> <span class="kw">function</span><span class="op">(</span><span class="va">inputs</span><span class="op">)</span> <span class="op">{</span></span>
+<span>    <span class="va">x</span> <span class="op">&lt;-</span> <span class="va">self</span><span class="op">$</span><span class="fu">block_1</span><span class="op">(</span><span class="va">inputs</span><span class="op">)</span></span>
+<span>    <span class="va">x</span> <span class="op">&lt;-</span> <span class="va">self</span><span class="op">$</span><span class="fu">block_2</span><span class="op">(</span><span class="va">x</span><span class="op">)</span></span>
+<span>    <span class="va">x</span> <span class="op">&lt;-</span> <span class="va">self</span><span class="op">$</span><span class="fu">global_pool</span><span class="op">(</span><span class="va">x</span><span class="op">)</span></span>
+<span>    <span class="va">self</span><span class="op">$</span><span class="fu">classifier</span><span class="op">(</span><span class="va">x</span><span class="op">)</span></span>
+<span>  <span class="op">}</span></span>
+<span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">resnet</span> <span class="op">&lt;-</span> <span class="fu">ResNet</span><span class="op">(</span><span class="op">)</span></span>
+<span><span class="va">dataset</span> <span class="op">=</span> <span class="va">...</span></span>
+<span><span class="va">resnet</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://generics.r-lib.org/reference/fit.html" class="external-link">fit</a></span><span class="op">(</span><span class="va">dataset</span>, epochs<span class="op">=</span><span class="fl">10</span><span class="op">)</span></span>
+<span><span class="va">resnet</span><span class="op">$</span><span class="fu">save</span><span class="op">(</span><span class="st">"filepath.keras"</span><span class="op">)</span></span></code></pre></div>
 </div>
 <div class="section level2">
 <h2 id="putting-it-all-together-an-end-to-end-example">Putting it all together: an end-to-end example<a class="anchor" aria-label="anchor" href="#putting-it-all-together-an-end-to-end-example"></a>
@@ -704,7 +709,7 @@ to build a <code>Model</code> that we could train with
 <p>Here’s what you’ve learned so far:</p>
 <ul>
 <li>A <code>Layer</code> encapsulate a state (created in
-<code>__init__()</code> or <code>build()</code>) and some computation
+<code>initialize()</code> or <code>build()</code>) and some computation
 (defined in <code><a href="https://rdrr.io/r/base/call.html" class="external-link">call()</a></code>).</li>
 <li>Layers can be recursively nested to create new, bigger computation
 blocks.</li>
@@ -726,118 +731,125 @@ JAX, and PyTorch. We’ll train it on MNIST digits.</p>
 <p>Our VAE will be a subclass of <code>Model</code>, built as a nested
 composition of layers that subclass <code>Layer</code>. It will feature
 a regularization loss (KL divergence).</p>
-<div class="sourceCode" id="cb23"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb23-1"><a href="#cb23-1" tabindex="-1"></a><span class="kw">class</span> Sampling(layers.Layer):</span>
-<span id="cb23-2"><a href="#cb23-2" tabindex="-1"></a>    <span class="co">"""Uses (z_mean, z_log_var) to sample z, the vector encoding a digit."""</span></span>
-<span id="cb23-3"><a href="#cb23-3" tabindex="-1"></a></span>
-<span id="cb23-4"><a href="#cb23-4" tabindex="-1"></a>    <span class="kw">def</span> call(<span class="va">self</span>, inputs):</span>
-<span id="cb23-5"><a href="#cb23-5" tabindex="-1"></a>        z_mean, z_log_var <span class="op">=</span> inputs</span>
-<span id="cb23-6"><a href="#cb23-6" tabindex="-1"></a>        batch <span class="op">=</span> ops.shape(z_mean)[<span class="dv">0</span>]</span>
-<span id="cb23-7"><a href="#cb23-7" tabindex="-1"></a>        dim <span class="op">=</span> ops.shape(z_mean)[<span class="dv">1</span>]</span>
-<span id="cb23-8"><a href="#cb23-8" tabindex="-1"></a>        epsilon <span class="op">=</span> keras.random.normal(shape<span class="op">=</span>(batch, dim))</span>
-<span id="cb23-9"><a href="#cb23-9" tabindex="-1"></a>        <span class="cf">return</span> z_mean <span class="op">+</span> ops.exp(<span class="fl">0.5</span> <span class="op">*</span> z_log_var) <span class="op">*</span> epsilon</span>
-<span id="cb23-10"><a href="#cb23-10" tabindex="-1"></a></span>
-<span id="cb23-11"><a href="#cb23-11" tabindex="-1"></a></span>
-<span id="cb23-12"><a href="#cb23-12" tabindex="-1"></a><span class="kw">class</span> Encoder(layers.Layer):</span>
-<span id="cb23-13"><a href="#cb23-13" tabindex="-1"></a>    <span class="co">"""Maps MNIST digits to a triplet (z_mean, z_log_var, z)."""</span></span>
-<span id="cb23-14"><a href="#cb23-14" tabindex="-1"></a></span>
-<span id="cb23-15"><a href="#cb23-15" tabindex="-1"></a>    <span class="kw">def</span> <span class="fu">__init__</span>(</span>
-<span id="cb23-16"><a href="#cb23-16" tabindex="-1"></a>        <span class="va">self</span>, latent_dim<span class="op">=</span><span class="dv">32</span>, intermediate_dim<span class="op">=</span><span class="dv">64</span>, name<span class="op">=</span><span class="st">"encoder"</span>, <span class="op">**</span>kwargs</span>
-<span id="cb23-17"><a href="#cb23-17" tabindex="-1"></a>    ):</span>
-<span id="cb23-18"><a href="#cb23-18" tabindex="-1"></a>        <span class="bu">super</span>().<span class="fu">__init__</span>(name<span class="op">=</span>name, <span class="op">**</span>kwargs)</span>
-<span id="cb23-19"><a href="#cb23-19" tabindex="-1"></a>        <span class="va">self</span>.dense_proj <span class="op">=</span> layers.Dense(intermediate_dim, activation<span class="op">=</span><span class="st">"relu"</span>)</span>
-<span id="cb23-20"><a href="#cb23-20" tabindex="-1"></a>        <span class="va">self</span>.dense_mean <span class="op">=</span> layers.Dense(latent_dim)</span>
-<span id="cb23-21"><a href="#cb23-21" tabindex="-1"></a>        <span class="va">self</span>.dense_log_var <span class="op">=</span> layers.Dense(latent_dim)</span>
-<span id="cb23-22"><a href="#cb23-22" tabindex="-1"></a>        <span class="va">self</span>.sampling <span class="op">=</span> Sampling()</span>
-<span id="cb23-23"><a href="#cb23-23" tabindex="-1"></a></span>
-<span id="cb23-24"><a href="#cb23-24" tabindex="-1"></a>    <span class="kw">def</span> call(<span class="va">self</span>, inputs):</span>
-<span id="cb23-25"><a href="#cb23-25" tabindex="-1"></a>        x <span class="op">=</span> <span class="va">self</span>.dense_proj(inputs)</span>
-<span id="cb23-26"><a href="#cb23-26" tabindex="-1"></a>        z_mean <span class="op">=</span> <span class="va">self</span>.dense_mean(x)</span>
-<span id="cb23-27"><a href="#cb23-27" tabindex="-1"></a>        z_log_var <span class="op">=</span> <span class="va">self</span>.dense_log_var(x)</span>
-<span id="cb23-28"><a href="#cb23-28" tabindex="-1"></a>        z <span class="op">=</span> <span class="va">self</span>.sampling((z_mean, z_log_var))</span>
-<span id="cb23-29"><a href="#cb23-29" tabindex="-1"></a>        <span class="cf">return</span> z_mean, z_log_var, z</span>
-<span id="cb23-30"><a href="#cb23-30" tabindex="-1"></a></span>
-<span id="cb23-31"><a href="#cb23-31" tabindex="-1"></a></span>
-<span id="cb23-32"><a href="#cb23-32" tabindex="-1"></a><span class="kw">class</span> Decoder(layers.Layer):</span>
-<span id="cb23-33"><a href="#cb23-33" tabindex="-1"></a>    <span class="co">"""Converts z, the encoded digit vector, back into a readable digit."""</span></span>
-<span id="cb23-34"><a href="#cb23-34" tabindex="-1"></a></span>
-<span id="cb23-35"><a href="#cb23-35" tabindex="-1"></a>    <span class="kw">def</span> <span class="fu">__init__</span>(</span>
-<span id="cb23-36"><a href="#cb23-36" tabindex="-1"></a>        <span class="va">self</span>, original_dim, intermediate_dim<span class="op">=</span><span class="dv">64</span>, name<span class="op">=</span><span class="st">"decoder"</span>, <span class="op">**</span>kwargs</span>
-<span id="cb23-37"><a href="#cb23-37" tabindex="-1"></a>    ):</span>
-<span id="cb23-38"><a href="#cb23-38" tabindex="-1"></a>        <span class="bu">super</span>().<span class="fu">__init__</span>(name<span class="op">=</span>name, <span class="op">**</span>kwargs)</span>
-<span id="cb23-39"><a href="#cb23-39" tabindex="-1"></a>        <span class="va">self</span>.dense_proj <span class="op">=</span> layers.Dense(intermediate_dim, activation<span class="op">=</span><span class="st">"relu"</span>)</span>
-<span id="cb23-40"><a href="#cb23-40" tabindex="-1"></a>        <span class="va">self</span>.dense_output <span class="op">=</span> layers.Dense(original_dim, activation<span class="op">=</span><span class="st">"sigmoid"</span>)</span>
-<span id="cb23-41"><a href="#cb23-41" tabindex="-1"></a></span>
-<span id="cb23-42"><a href="#cb23-42" tabindex="-1"></a>    <span class="kw">def</span> call(<span class="va">self</span>, inputs):</span>
-<span id="cb23-43"><a href="#cb23-43" tabindex="-1"></a>        x <span class="op">=</span> <span class="va">self</span>.dense_proj(inputs)</span>
-<span id="cb23-44"><a href="#cb23-44" tabindex="-1"></a>        <span class="cf">return</span> <span class="va">self</span>.dense_output(x)</span>
-<span id="cb23-45"><a href="#cb23-45" tabindex="-1"></a></span>
-<span id="cb23-46"><a href="#cb23-46" tabindex="-1"></a></span>
-<span id="cb23-47"><a href="#cb23-47" tabindex="-1"></a><span class="kw">class</span> VariationalAutoEncoder(keras.Model):</span>
-<span id="cb23-48"><a href="#cb23-48" tabindex="-1"></a>    <span class="co">"""Combines the encoder and decoder into an end-to-end model for training."""</span></span>
-<span id="cb23-49"><a href="#cb23-49" tabindex="-1"></a></span>
-<span id="cb23-50"><a href="#cb23-50" tabindex="-1"></a>    <span class="kw">def</span> <span class="fu">__init__</span>(</span>
-<span id="cb23-51"><a href="#cb23-51" tabindex="-1"></a>        <span class="va">self</span>,</span>
-<span id="cb23-52"><a href="#cb23-52" tabindex="-1"></a>        original_dim,</span>
-<span id="cb23-53"><a href="#cb23-53" tabindex="-1"></a>        intermediate_dim<span class="op">=</span><span class="dv">64</span>,</span>
-<span id="cb23-54"><a href="#cb23-54" tabindex="-1"></a>        latent_dim<span class="op">=</span><span class="dv">32</span>,</span>
-<span id="cb23-55"><a href="#cb23-55" tabindex="-1"></a>        name<span class="op">=</span><span class="st">"autoencoder"</span>,</span>
-<span id="cb23-56"><a href="#cb23-56" tabindex="-1"></a>        <span class="op">**</span>kwargs</span>
-<span id="cb23-57"><a href="#cb23-57" tabindex="-1"></a>    ):</span>
-<span id="cb23-58"><a href="#cb23-58" tabindex="-1"></a>        <span class="bu">super</span>().<span class="fu">__init__</span>(name<span class="op">=</span>name, <span class="op">**</span>kwargs)</span>
-<span id="cb23-59"><a href="#cb23-59" tabindex="-1"></a>        <span class="va">self</span>.original_dim <span class="op">=</span> original_dim</span>
-<span id="cb23-60"><a href="#cb23-60" tabindex="-1"></a>        <span class="va">self</span>.encoder <span class="op">=</span> Encoder(</span>
-<span id="cb23-61"><a href="#cb23-61" tabindex="-1"></a>            latent_dim<span class="op">=</span>latent_dim, intermediate_dim<span class="op">=</span>intermediate_dim</span>
-<span id="cb23-62"><a href="#cb23-62" tabindex="-1"></a>        )</span>
-<span id="cb23-63"><a href="#cb23-63" tabindex="-1"></a>        <span class="va">self</span>.decoder <span class="op">=</span> Decoder(original_dim, intermediate_dim<span class="op">=</span>intermediate_dim)</span>
-<span id="cb23-64"><a href="#cb23-64" tabindex="-1"></a></span>
-<span id="cb23-65"><a href="#cb23-65" tabindex="-1"></a>    <span class="kw">def</span> call(<span class="va">self</span>, inputs):</span>
-<span id="cb23-66"><a href="#cb23-66" tabindex="-1"></a>        z_mean, z_log_var, z <span class="op">=</span> <span class="va">self</span>.encoder(inputs)</span>
-<span id="cb23-67"><a href="#cb23-67" tabindex="-1"></a>        reconstructed <span class="op">=</span> <span class="va">self</span>.decoder(z)</span>
-<span id="cb23-68"><a href="#cb23-68" tabindex="-1"></a>        <span class="co"># Add KL divergence regularization loss.</span></span>
-<span id="cb23-69"><a href="#cb23-69" tabindex="-1"></a>        kl_loss <span class="op">=</span> <span class="op">-</span><span class="fl">0.5</span> <span class="op">*</span> ops.mean(</span>
-<span id="cb23-70"><a href="#cb23-70" tabindex="-1"></a>            z_log_var <span class="op">-</span> ops.square(z_mean) <span class="op">-</span> ops.exp(z_log_var) <span class="op">+</span> <span class="dv">1</span></span>
-<span id="cb23-71"><a href="#cb23-71" tabindex="-1"></a>        )</span>
-<span id="cb23-72"><a href="#cb23-72" tabindex="-1"></a>        <span class="va">self</span>.add_loss(kl_loss)</span>
-<span id="cb23-73"><a href="#cb23-73" tabindex="-1"></a>        <span class="cf">return</span> reconstructed</span></code></pre></div>
+<div class="sourceCode" id="cb54"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">Sampling</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/new-classes.html">new_layer_class</a></span><span class="op">(</span></span>
+<span>  <span class="st">"Sampling"</span>,</span>
+<span>  call <span class="op">=</span> <span class="kw">function</span><span class="op">(</span><span class="va">inputs</span><span class="op">)</span> <span class="op">{</span></span>
+<span>    <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="va">z_mean</span>, <span class="va">z_log_var</span><span class="op">)</span> <span class="op"><a href="../reference/multi-assign.html">%&lt;-%</a></span> <span class="va">inputs</span></span>
+<span>    <span class="va">batch</span> <span class="op">&lt;-</span> <span class="fu">k_shape</span><span class="op">(</span><span class="va">z_mean</span><span class="op">)</span><span class="op">[[</span><span class="fl">1</span><span class="op">]</span><span class="op">]</span></span>
+<span>    <span class="va">dim</span> <span class="op">&lt;-</span> <span class="fu">k_shape</span><span class="op">(</span><span class="va">z_mean</span><span class="op">)</span><span class="op">[[</span><span class="fl">2</span><span class="op">]</span><span class="op">]</span></span>
+<span>    <span class="va">epsilon</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/random_normal.html">random_normal</a></span><span class="op">(</span>shape <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="va">batch</span>, <span class="va">dim</span><span class="op">)</span><span class="op">)</span></span>
+<span>    <span class="va">z_mean</span> <span class="op">+</span> <span class="fu">k_exp</span><span class="op">(</span><span class="fl">0.5</span> <span class="op">*</span> <span class="va">z_log_var</span><span class="op">)</span> <span class="op">*</span> <span class="va">epsilon</span></span>
+<span>  <span class="op">}</span></span>
+<span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Maps MNIST digits to a triplet (z_mean, z_log_var, z).</span></span>
+<span><span class="va">Encoder</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/new-classes.html">new_layer_class</a></span><span class="op">(</span></span>
+<span>  <span class="st">"Encoder"</span>,</span>
+<span>  initialize <span class="op">=</span> <span class="kw">function</span><span class="op">(</span><span class="va">latent_dim</span> <span class="op">=</span> <span class="fl">32</span>, <span class="va">intermediate_dim</span> <span class="op">=</span> <span class="fl">64</span>, <span class="va">...</span><span class="op">)</span> <span class="op">{</span></span>
+<span>    <span class="va">super</span><span class="op">$</span><span class="fu">initialize</span><span class="op">(</span><span class="va">...</span><span class="op">)</span></span>
+<span>    <span class="va">self</span><span class="op">$</span><span class="va">dense_proj</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/layer_dense.html">layer_dense</a></span><span class="op">(</span>units <span class="op">=</span> <span class="va">intermediate_dim</span>, activation <span class="op">=</span> <span class="st">"relu"</span><span class="op">)</span></span>
+<span>    <span class="va">self</span><span class="op">$</span><span class="va">dense_mean</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/layer_dense.html">layer_dense</a></span><span class="op">(</span>units <span class="op">=</span> <span class="va">latent_dim</span><span class="op">)</span></span>
+<span>    <span class="va">self</span><span class="op">$</span><span class="va">dense_log_var</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/layer_dense.html">layer_dense</a></span><span class="op">(</span>units <span class="op">=</span> <span class="va">latent_dim</span><span class="op">)</span></span>
+<span>    <span class="va">self</span><span class="op">$</span><span class="va">sampling</span> <span class="op">&lt;-</span> <span class="fu">Sampling</span><span class="op">(</span><span class="op">)</span></span>
+<span>  <span class="op">}</span>,</span>
+<span>  call <span class="op">=</span> <span class="kw">function</span><span class="op">(</span><span class="va">inputs</span><span class="op">)</span> <span class="op">{</span></span>
+<span>    <span class="va">x</span> <span class="op">&lt;-</span> <span class="va">self</span><span class="op">$</span><span class="fu">dense_proj</span><span class="op">(</span><span class="va">inputs</span><span class="op">)</span></span>
+<span>    <span class="va">z_mean</span> <span class="op">&lt;-</span> <span class="va">self</span><span class="op">$</span><span class="fu">dense_mean</span><span class="op">(</span><span class="va">x</span><span class="op">)</span></span>
+<span>    <span class="va">z_log_var</span> <span class="op">&lt;-</span> <span class="va">self</span><span class="op">$</span><span class="fu">dense_log_var</span><span class="op">(</span><span class="va">x</span><span class="op">)</span></span>
+<span>    <span class="va">z</span> <span class="op">&lt;-</span> <span class="va">self</span><span class="op">$</span><span class="fu">sampling</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="va">z_mean</span>, <span class="va">z_log_var</span><span class="op">)</span><span class="op">)</span></span>
+<span>    <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="va">z_mean</span>, <span class="va">z_log_var</span>, <span class="va">z</span><span class="op">)</span></span>
+<span>  <span class="op">}</span></span>
+<span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Converts z, the encoded digit vector, back into a readable digit.</span></span>
+<span><span class="va">Decoder</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/new-classes.html">new_layer_class</a></span><span class="op">(</span></span>
+<span>  <span class="st">"Decoder"</span>,</span>
+<span>  initialize <span class="op">=</span> <span class="kw">function</span><span class="op">(</span><span class="va">original_dim</span>, <span class="va">intermediate_dim</span> <span class="op">=</span> <span class="fl">64</span>, <span class="va">...</span><span class="op">)</span> <span class="op">{</span></span>
+<span>    <span class="va">super</span><span class="op">$</span><span class="fu">initialize</span><span class="op">(</span><span class="va">...</span><span class="op">)</span></span>
+<span>    <span class="va">self</span><span class="op">$</span><span class="va">dense_proj</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/layer_dense.html">layer_dense</a></span><span class="op">(</span>units <span class="op">=</span> <span class="va">intermediate_dim</span>, activation <span class="op">=</span> <span class="st">"relu"</span><span class="op">)</span></span>
+<span>    <span class="va">self</span><span class="op">$</span><span class="va">dense_output</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/layer_dense.html">layer_dense</a></span><span class="op">(</span>units <span class="op">=</span> <span class="va">original_dim</span>, activation <span class="op">=</span> <span class="st">"sigmoid"</span><span class="op">)</span></span>
+<span>  <span class="op">}</span>,</span>
+<span>  call <span class="op">=</span> <span class="kw">function</span><span class="op">(</span><span class="va">inputs</span><span class="op">)</span> <span class="op">{</span></span>
+<span>    <span class="va">x</span> <span class="op">&lt;-</span> <span class="va">self</span><span class="op">$</span><span class="fu">dense_proj</span><span class="op">(</span><span class="va">inputs</span><span class="op">)</span></span>
+<span>    <span class="va">self</span><span class="op">$</span><span class="fu">dense_output</span><span class="op">(</span><span class="va">x</span><span class="op">)</span></span>
+<span>  <span class="op">}</span></span>
+<span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Combines the encoder and decoder into an end-to-end model for training.</span></span>
+<span><span class="va">VariationalAutoEncoder</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/new-classes.html">new_model_class</a></span><span class="op">(</span></span>
+<span>  <span class="st">"VariationalAutoEncoder"</span>,</span>
+<span>  initialize <span class="op">=</span> <span class="kw">function</span><span class="op">(</span><span class="va">original_dim</span>,</span>
+<span>        <span class="va">intermediate_dim</span><span class="op">=</span><span class="fl">64</span>,</span>
+<span>        <span class="va">latent_dim</span><span class="op">=</span><span class="fl">32</span>,</span>
+<span>        <span class="va">name</span><span class="op">=</span><span class="st">"autoencoder"</span>, <span class="va">...</span><span class="op">)</span> <span class="op">{</span></span>
+<span>    <span class="va">super</span><span class="op">$</span><span class="fu">initialize</span><span class="op">(</span>name <span class="op">=</span> <span class="va">name</span>, <span class="va">...</span><span class="op">)</span></span>
+<span>    <span class="va">self</span><span class="op">$</span><span class="va">original_dim</span> <span class="op">&lt;-</span> <span class="va">original_dim</span></span>
+<span>    <span class="va">self</span><span class="op">$</span><span class="va">encoder</span> <span class="op">&lt;-</span> <span class="fu">Encoder</span><span class="op">(</span></span>
+<span>      latent_dim <span class="op">=</span> <span class="va">latent_dim</span>,</span>
+<span>      intermediate_dim <span class="op">=</span> <span class="va">intermediate_dim</span></span>
+<span>    <span class="op">)</span></span>
+<span>    <span class="va">self</span><span class="op">$</span><span class="va">decoder</span> <span class="op">&lt;-</span> <span class="fu">Decoder</span><span class="op">(</span></span>
+<span>      original_dim <span class="op">=</span> <span class="va">original_dim</span>,</span>
+<span>      intermediate_dim <span class="op">=</span> <span class="va">intermediate_dim</span></span>
+<span>    <span class="op">)</span></span>
+<span>  <span class="op">}</span>,</span>
+<span>  call <span class="op">=</span> <span class="kw">function</span><span class="op">(</span><span class="va">inputs</span><span class="op">)</span> <span class="op">{</span></span>
+<span>    <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="va">z_mean</span>, <span class="va">z_log_var</span>, <span class="va">z</span><span class="op">)</span> <span class="op"><a href="../reference/multi-assign.html">%&lt;-%</a></span> <span class="va">self</span><span class="op">$</span><span class="fu">encoder</span><span class="op">(</span><span class="va">inputs</span><span class="op">)</span></span>
+<span>    <span class="va">reconstructed</span> <span class="op">&lt;-</span> <span class="va">self</span><span class="op">$</span><span class="fu">decoder</span><span class="op">(</span><span class="va">z</span><span class="op">)</span></span>
+<span>    <span class="co"># Add KL divergence regularization loss.</span></span>
+<span>    <span class="va">kl_loss</span> <span class="op">&lt;-</span> <span class="op">-</span><span class="fl">0.5</span> <span class="op">*</span> <span class="fu">k_mean</span><span class="op">(</span></span>
+<span>      <span class="va">z_log_var</span> <span class="op">-</span> <span class="fu">k_square</span><span class="op">(</span><span class="va">z_mean</span><span class="op">)</span> <span class="op">-</span> <span class="fu">k_exp</span><span class="op">(</span><span class="va">z_log_var</span><span class="op">)</span> <span class="op">+</span> <span class="fl">1</span></span>
+<span>    <span class="op">)</span></span>
+<span>    <span class="va">self</span><span class="op">$</span><span class="fu">add_loss</span><span class="op">(</span><span class="va">kl_loss</span><span class="op">)</span></span>
+<span>    <span class="va">reconstructed</span></span>
+<span>  <span class="op">}</span></span>
+<span><span class="op">)</span></span></code></pre></div>
 <p>Let’s train it on MNIST using the <code><a href="https://generics.r-lib.org/reference/fit.html" class="external-link">fit()</a></code> API:</p>
-<div class="sourceCode" id="cb24"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb24-1"><a href="#cb24-1" tabindex="-1"></a>(x_train, _), _ <span class="op">=</span> keras.datasets.mnist.load_data()</span>
-<span id="cb24-2"><a href="#cb24-2" tabindex="-1"></a>x_train <span class="op">=</span> x_train.reshape(<span class="dv">60000</span>, <span class="dv">784</span>).astype(<span class="st">"float32"</span>) <span class="op">/</span> <span class="dv">255</span></span>
-<span id="cb24-3"><a href="#cb24-3" tabindex="-1"></a></span>
-<span id="cb24-4"><a href="#cb24-4" tabindex="-1"></a>original_dim <span class="op">=</span> <span class="dv">784</span></span>
-<span id="cb24-5"><a href="#cb24-5" tabindex="-1"></a>vae <span class="op">=</span> VariationalAutoEncoder(<span class="dv">784</span>, <span class="dv">64</span>, <span class="dv">32</span>)</span>
-<span id="cb24-6"><a href="#cb24-6" tabindex="-1"></a></span>
-<span id="cb24-7"><a href="#cb24-7" tabindex="-1"></a>optimizer <span class="op">=</span> keras.optimizers.Adam(learning_rate<span class="op">=</span><span class="fl">1e-3</span>)</span>
-<span id="cb24-8"><a href="#cb24-8" tabindex="-1"></a>vae.<span class="bu">compile</span>(optimizer, loss<span class="op">=</span>keras.losses.MeanSquaredError())</span>
-<span id="cb24-9"><a href="#cb24-9" tabindex="-1"></a></span>
-<span id="cb24-10"><a href="#cb24-10" tabindex="-1"></a>vae.fit(x_train, x_train, epochs<span class="op">=</span><span class="dv">2</span>, batch_size<span class="op">=</span><span class="dv">64</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb55"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="va">x_train</span>, <span class="va">.</span><span class="op">)</span>, <span class="va">.</span><span class="op">)</span> <span class="op"><a href="../reference/multi-assign.html">%&lt;-%</a></span> <span class="fu"><a href="../reference/dataset_mnist.html">dataset_mnist</a></span><span class="op">(</span><span class="op">)</span></span>
+<span><span class="va">x_train</span> <span class="op">&lt;-</span> <span class="va">x_train</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="../reference/keras_array.html">keras_array</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="fu">k_reshape</span><span class="op">(</span>new_shape <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">60000</span>, <span class="fl">784</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="fu">k_cast</span><span class="op">(</span><span class="st">"float32"</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="fu">k_divide</span><span class="op">(</span><span class="fl">255</span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">original_dim</span> <span class="op">&lt;-</span> <span class="fl">784</span></span>
+<span><span class="va">vae</span> <span class="op">&lt;-</span> <span class="fu">VariationalAutoEncoder</span><span class="op">(</span></span>
+<span>  original_dim <span class="op">=</span> <span class="fl">784</span>,</span>
+<span>  intermediate_dim <span class="op">=</span> <span class="fl">64</span>,</span>
+<span>  latent_dim <span class="op">=</span> <span class="fl">32</span></span>
+<span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">optimizer</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/optimizer_adam.html">optimizer_adam</a></span><span class="op">(</span>learning_rate <span class="op">=</span> <span class="fl">1e-3</span><span class="op">)</span></span>
+<span><span class="va">vae</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://generics.r-lib.org/reference/compile.html" class="external-link">compile</a></span><span class="op">(</span><span class="va">optimizer</span>, loss <span class="op">=</span> <span class="fu"><a href="../reference/loss_mean_squared_error.html">loss_mean_squared_error</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">vae</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://generics.r-lib.org/reference/fit.html" class="external-link">fit</a></span><span class="op">(</span><span class="va">x_train</span>, <span class="va">x_train</span>, epochs<span class="op">=</span><span class="fl">2</span>, batch_size<span class="op">=</span><span class="fl">64</span><span class="op">)</span></span></code></pre></div>
+<pre><code><span><span class="co">## Epoch 1/2</span></span>
+<span><span class="co">## 938/938 - 2s - 2ms/step - loss: 0.0748</span></span>
+<span><span class="co">## Epoch 2/2</span></span>
+<span><span class="co">## 938/938 - 1s - 1ms/step - loss: 0.0676</span></span></code></pre>
 </div>
-  </div>
-
-  <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
-
-        <nav id="toc" data-toggle="toc"><h2 data-toc-skip>Contents</h2>
-    </nav>
-</div>
-
+  </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>
+    </nav></aside>
 </div>
 
 
 
-      <footer><div class="copyright">
+    <footer><div class="pkgdown-footer-left">
   <p></p>
 <p>Developed by Tomasz Kalinowski, JJ Allaire, François Chollet, RStudio, Google.</p>
 </div>
 
-<div class="pkgdown">
+<div class="pkgdown-footer-right">
   <p></p>
-<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.7.</p>
+<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.7.9000.</p>
 </div>
 
-      </footer>
+    </footer>
 </div>
 
   
-
 
   
 
