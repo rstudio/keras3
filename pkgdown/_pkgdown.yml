@@ -8,17 +8,26 @@ destination: website
 url: https://keras.posit.co
 
 template:
-  # bootstrap: 5
-  bootswatch: cosmo
+  bootstrap: 5
+  bslib:
+    primary: "#bf281b"
+    navbar-light-color: "white"
+    navbar-light-brand-color: "white"
+    navbar-light-brand-hover-color: "white"
 
 navbar:
   title: "Keras for R"
+  bg: primary
   type: inverse
   left:
     - text: "Home"
       href: index.html
-    - text: "Tutorials"
+
+    - text: "Getting Started"
       menu:
+        - text: "Introduction to Keras for engineers"
+          href: articles/intro_to_keras_for_engineers.html
+        - text: "Tutorials"
         - text: "Getting Started"
           href: articles/getting_started.html
         - text: "Basic Classification"
@@ -34,75 +43,32 @@ navbar:
 
     - text: "Guides"
       menu:
+        - text: "Model definition"
+        - text: "Functional API"
+          href: articles/functional_api.html
+        - text: "Sequential Model"
+          href: articles/sequential_model.html
+        - text: "Extending and customizing"
+        - text: "Making new layers and models via subclassing"
+          href: articles/making_new_layers_and_models_via_subclassing.html
+        - text: "Training & evaluation with the built-in methods"
+          href: articles/training_with_built_in_methods.html
+        - text: "Writing a training loop from scratch in TensorFlow"
+          href: articles/writing_a_custom_training_loop_in_tensorflow.html
         - text: "Writing Your Own Callbacks"
           href: articles/writing_your_own_callbacks.html
-          source: ../vignettes-src/writing_your_own_callbacks/2-translated.Rmd
+        - text: "Other topics"
+        - text: "Transfer learning and fine tuning"
+          href: articles/transfer_learning.html
+        - text: "Distributed training with TensorFlow"
+          href: articles/distributed_training_with_tensorflow.html
 
-    - text: "Articles"
-      menu:
-        - text: "Guides (New for TF 2.6)"
-
-        - text: "Python Subclasses"
-          href: articles/new-guides/python_subclasses.html
-
-        - text: "Making New Layers and Models via Subclassing"
-          href: articles/new-guides/making_new_layers_and_models_via_subclassing.html
-
-        - text: "Customizing What Happens in Fit"
-          href: articles/new-guides/customizing_what_happens_in_fit.html
-
-        - text: "Writing Your Own Callbacks"
-          href: articles/new-guides/writing_your_own_callbacks.html
-
-        - text: "Working with Preprocessing Layers"
-          href: articles/new-guides/preprocessing_layers.html
-
-        - text: "Working with RNNs"
-          href: argicles/new-guides/working_with_rnns.html
-
-        - text: "--------------------------"
-        - text: "Using Keras"
-        - text: "Guide to Keras Basics"
-          href: articles/guide_keras.html
-        - text: "Sequential Model in Depth"
-          href: articles/sequential_model.html
-        - text: "Functional API in Depth"
-          href: articles/functional_api.html
-        - text: "About Keras Models"
-          href: articles/about_keras_models.html
-        - text: "About Keras Layers"
-          href: articles/about_keras_layers.html
-        - text: "Training Visualization"
-          href: articles/training_visualization.html
-        - text: "Pre-Trained Models"
-          href: articles/applications.html
-        - text: "Frequently Asked Questions"
-          href: articles/faq.html
-        - text: "Why Use Keras?"
-          href: articles/why_use_keras.html
-        - text: "--------------------------"
-        - text: "Advanced"
-        - text: "Eager Execution"
-          href: articles/eager_guide.html
-        - text: "Training Callbacks"
-          href: articles/training_callbacks.html
-        - text: "Keras Backend"
-          href: articles/backend.html
-        - text: "Custom Layers"
-          href: articles/custom_layers.html
-        - text: "Custom Models"
-          href: articles/custom_models.html
-        - text: "Saving and serializing"
-          href: articles/saving_serializing.html
-
-    - text: Learn
-      href: articles/learn.html
-    - text: Tools
-      href: articles/tools.html
     - text: Examples
       href: articles/examples/index.html
+
     - text: "Reference"
       href: reference/index.html
+
     - text: "News"
       href: news/index.html
 
@@ -120,8 +86,6 @@ reference:
       - train_on_batch
       - get_layer
       - pop_layer
-      - save_model_hdf5
-      - load_model_hdf5
       - serialize_model
       - clone_model
       - freeze_weights
@@ -215,17 +179,14 @@ reference:
     #title: "Serialization and Saving"
     contents:
       - has_concept("saving")
-      - save_model_hdf5
-      - save_model_weights_hdf5
       - serialize_model
       - get_weights
       - get_config
-      - model_to_saved_model
+      - load_model_weights
       - model_from_saved_model
-      - save_model_tf
-      - save_model_weights_tf
       - model_to_json
-      - model_to_yaml
+      - save_keras_model
+      - save_model_weights
 
   - title: "Datasets"
     contents:
@@ -313,7 +274,6 @@ reference:
       - plot.keras.models.model.Model
       - zip_lists
       - mark_active
-      - timeseries_generator
       - to_categorical
       - normalize
       - with_custom_object_scope
@@ -323,10 +283,10 @@ reference:
       # - use_session_with_seed
       - install_keras
       - is_keras_available
-      - backend
       - implementation
       - use_implementation
       - use_backend
+      - shape
 
   - title: "Losses"
     contents:
