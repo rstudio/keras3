@@ -9,6 +9,7 @@ accelerator: None
 output: rmarkdown::html_vignette
 knit: ({source(here::here("tools/knit.R")); knit_vignette})
 tether: https://raw.githubusercontent.com/keras-team/keras-io/master/guides/intro_to_keras_for_researchers.py
+# seemingly deleted upstream when `keras-3` branch merged in keras-team/keras-io. Mistake? 
 ---
 
 ## Setup
