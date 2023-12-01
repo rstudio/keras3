@@ -13,11 +13,11 @@ function(classname, ..., initialize, update_state, result) {
 #' @rdname new-classes
 #' @export
 new_loss_class <-
-function(classname, ..., call = NULL) {
+function(classname, ..., call = NULL, inherit = keras::keras$losses$Loss) {
   members <- capture_args2(ignore = "classname")
   members$call <- call
   new_py_class(classname, members,
-              inherit = keras3::keras$losses$Loss,
+              inherit_expr = substitute(inherit),
               parent_env = parent.frame())
 }
 

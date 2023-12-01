@@ -32,8 +32,9 @@ get_config <- function(object) {
 
   # call using lower level reticulate functions to prevent conversion to list
   # (the object will remain a python dictionary for full fidelity)
-  get_fn <- py_get_attr(object, "get_config")
-  config <- py_call(get_fn)
+  # get_fn <- py_get_attr(object, "get_config")
+  # config <- py_call(get_fn)
+  config <- object$get_config()
 
   # set attribute indicating class
   attr(config, "config_class") <- object$`__class__`
@@ -55,8 +56,9 @@ py_to_r.keras.utils.generic_utils.SharedObjectConfig <- function(x) {
 
 #' @rdname get_config
 #' @export
-from_config <- function(config, custom_objects = NULL) {
-  class <- attr(config, "config_class") %||% keras$Model
+from_config <- function(config,
+                        custom_objects = NULL,
+                        class = attr(config, "config_class", TRUE) %||% keras$Model) {
   args <- list(config)
   if(length(custom_objects))
     args[[2L]] <- objects_with_py_function_names(custom_objects)

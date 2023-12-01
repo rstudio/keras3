@@ -25,3 +25,4 @@ revdep
 debug.py
 man-src/*/translate.patch
 *.keras
+**.weights.h5

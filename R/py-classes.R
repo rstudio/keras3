@@ -276,8 +276,7 @@ r_formals_to_py__signature__ <- function(fn) {
   for (nm in names(frmls)) {
     if(nm == "...") {
       params$extend(list(
-        Param("_R_dots_positional_args", Param$VAR_POSITIONAL),
-        Param("_R_dots_keyword_args", Param$VAR_KEYWORD)
+        Param("_R_dots_positional_args", Param$VAR_POSITIONAL)
       ))
       kind <- Param$KEYWORD_ONLY
       next
@@ -295,6 +294,14 @@ r_formals_to_py__signature__ <- function(fn) {
       inspect$Parameter(nm, kind, default=default)
     )
   }
+  if("..." %in% names(frmls))
+    # need to make sure that `**kwarg` is last in signature,
+    # in case there are args after R `...`, we need to reorder
+    # so the py sig looks like `(foo, *args, bar, **kwargs)`
+    params$extend(list(
+      Param("_R_dots_keyword_args", Param$VAR_KEYWORD)
+    ))
+
   inspect$Signature(params)
 }
 

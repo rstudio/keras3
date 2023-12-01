@@ -5,14 +5,12 @@ date-created: 2023/06/14
 last-modified: 2023/06/30
 description: Complete guide to saving, serializing, and exporting models.
 output: rmarkdown::html_vignette
-date: 'Last Modified: 2023-11-10; Last Rendered: 2023-11-10'
+date: 'Last Modified: 2023-11-29; Last Rendered: 2023-12-01'
 vignette: >
   %\VignetteIndexEntry{Save, serialize, and export models}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
-
-**Note: this guide assumes Keras >= 2.13**
 
 ## Introduction
 
@@ -42,25 +40,27 @@ If you only have 10 seconds to read this guide, here's what you need to know.
 
 **Saving a Keras model:**
 
-```python
-model = ...  # Get model (Sequential, Functional Model, or Model subclass)
-model.save('path/to/location.keras')  # The file needs to end with the .keras extension
+```r
+# Get model (Sequential, Functional Model, or Model subclass)
+model <- ...
+
+# The filename needs to end with the .keras extension
+model |> save_model('path/to/location.keras')
 ```
 
 **Loading the model back:**
 
-```python
-model = keras.models.load_model('path/to/location.keras')
+```r
+model <- load_model('path/to/location.keras')
 ```
 
 Now, let's look at the details.
 
 ## Setup
 
-```python
-import numpy as np
-import keras_core as keras
-from keras_core import ops
+
+```r
+library(keras3)
 ```
 
 ## Saving
@@ -75,41 +75,54 @@ where you left)
 
 #### APIs
 
-You can save a model with `model.save()` or `keras.models.save_model()` (which is equivalent).
-You can load it back with `keras.models.load_model()`.
+You can save a model with `save_model()`.
+You can load it back with `load_model()`.
 
-The only supported format in Keras Core is the "Keras v3" format,
+The only supported format in Keras 3 is the "Keras v3" format,
 which uses the `.keras` extension.
 
 **Example:**
 
-```python
-def get_model():
-    # Create a simple model.
-    inputs = keras.Input(shape=(32,))
-    outputs = keras.layers.Dense(1)(inputs)
-    model = keras.Model(inputs, outputs)
-    model.compile(optimizer=keras.optimizers.Adam(), loss="mean_squared_error")
-    return model
 
+```r
+get_model <- function() {
+  # Create a simple model.
+  inputs <- layer_input(shape(32))
+  outputs <- inputs |> layer_dense(1)
+  model <-  keras_model(inputs, outputs)
+  model |> compile(optimizer = optimizer_adam(), loss = "mean_squared_error")
+  model
+}
 
-model = get_model()
+model <- get_model()
 
 # Train the model.
-test_input = np.random.random((128, 32))
-test_target = np.random.random((128, 1))
-model.fit(test_input, test_target)
+test_input <- random_uniform(c(128, 32))
+test_target <- random_uniform(c(128, 1))
+model |> fit(test_input, test_target)
 
 # Calling `save('my_model.keras')` creates a zip archive `my_model.keras`.
-model.save("my_model.keras")
+model |> save_model("my_model.keras")
+```
 
+```
+## Error: File 'my_model.keras' already exists (pass overwrite = TRUE to force save).
+```
+
+```r
 # It can be used to reconstruct the model identically.
-reconstructed_model = keras.models.load_model("my_model.keras")
+reconstructed_model <- load_model("my_model.keras")
 
 # Let's check:
-np.testing.assert_allclose(
-    model.predict(test_input), reconstructed_model.predict(test_input)
-)
+stopifnot(all.equal(
+  model |> predict(test_input),
+  reconstructed_model |> predict(test_input)
+))
+```
+
+```
+## Error in eval(expr, envir, enclos): predict(model, test_input) and predict(reconstructed_model, test_input) are not equal:
+##   Mean relative difference: 1.580108
 ```
 
 ### Custom objects
@@ -119,34 +132,37 @@ models in Keras saving and reloading.
 
 When saving a model that includes custom objects, such as a subclassed Layer,
 you **must** define a `get_config()` method on the object class.
-If the arguments passed to the constructor (`__init__()` method) of the custom object
-aren't Python objects (anything other than base types like ints, strings,
+If the arguments passed to the constructor (`initialize()` method) of the custom object
+aren't simple objects (anything other than types like ints, strings,
 etc.), then you **must** also explicitly deserialize these arguments in the `from_config()`
 class method.
 
 Like this:
 
-```python
-class CustomLayer(keras.layers.Layer):
-    def __init__(self, sublayer, **kwargs):
-        super().__init__(**kwargs)
-        self.sublayer = layer
 
-    def call(self, x):
-        return self.sublayer(x)
-
-    def get_config(self):
-        base_config = super().get_config()
-        config = {
-            "sublayer": keras.saving.serialize_keras_object(self.sublayer),
-        }
-        return {**base_config, **config}
-
-    @classmethod
-    def from_config(cls, config):
-        sublayer_config = config.pop("sublayer")
-        sublayer = keras.saving.deserialize_keras_object(sublayer_config)
-        return cls(sublayer, **config)
+```r
+layer_custom <- Layer(
+  "CustomLayer",
+  initialize = function(sublayer, ...) {
+    super$initialize(...)
+    self$sublayer <- layer
+  },
+  call = function(x) {
+    self$sublayer(x)
+  },
+  get_config = function() {
+    base_config <- super$get_config()
+    config <- list(
+      sublayer = keras$saving$serialize_keras_object(self$sublayer)
+    )
+    c(base_config, config)
+  },
+  from_config = function(cls, config) {
+    sublayer_config <- config$sublayer
+    sublayer <- keras$saving$deserialize_keras_object(sublayer_config)
+    cls(sublayer, !!!config)
+  }
+)
 ```
 
 Please see the [Defining the config methods section](#config_methods) for more
@@ -165,8 +181,8 @@ Below are examples of each workflow:
 #### Registering custom objects (**preferred**)
 
 This is the preferred method, as custom object registration greatly simplifies saving and
-loading code. Adding the `@keras.saving.register_keras_serializable` decorator to the
-class definition of a custom object registers the object globally in a master list,
+loading code. Calling `register_custom_object()` on a custom object registers
+the object globally in a master list,
 allowing Keras to recognize the object when loading the model.
 
 Let's create a custom model involving both a custom layer and a custom activation
@@ -174,86 +190,149 @@ function to demonstrate this.
 
 **Example:**
 
-```python
-# Clear all previously registered custom objects
-keras.saving.get_custom_objects().clear()
 
+```r
+# Clear all previously registered custom objects
+clear_registered_custom_objects()
+```
+
+```
+## Error in clear_registered_custom_objects(): could not find function "clear_registered_custom_objects"
+```
+
+```r
+layer_custom <- Layer(
+  "CustomLayer",
+  initialize = function(self, factor) {
+    super$initialize()
+    self$factor = factor
+  },
+
+  call = function(self, x) {
+    x * self$factor
+  },
+
+  get_config = function(self) {
+    list(factor = self$factor)
+  }
+)
 
 # Upon registration, you can optionally specify a package or a name.
-# If left blank, the package defaults to `Custom` and the name defaults to
+# If left blank, the package defaults to "Custom" and the name defaults to
 # the class name.
-@keras.saving.register_keras_serializable(package="MyLayers")
-class CustomLayer(keras.layers.Layer):
-    def __init__(self, factor):
-        super().__init__()
-        self.factor = factor
+register_custom_object(layer_custom, package = "MyLayers")
+```
 
-    def call(self, x):
-        return x * self.factor
+```
+## Registered S3 methods overwritten by 'keras':
+##   method                                                     from
+##   $.py_R6ClassGenerator                                      keras3
+##   +.keras.backend.common.keras_tensor.KerasTensor            keras3
+##   ==.keras.backend.common.keras_tensor.KerasTensor           keras3
+##   [.keras_shape                                              keras3
+##   as.array.keras.backend.common.variables.KerasVariable      keras3
+##   as.data.frame.keras_training_history                       keras3
+##   as.double.keras.backend.common.variables.KerasVariable     keras3
+##   as.integer.keras.backend.common.variables.KerasVariable    keras3
+##   as.integer.keras_shape                                     keras3
+##   as.list.keras_shape                                        keras3
+##   as.numeric.keras.backend.common.variables.KerasVariable    keras3
+##   compile.keras.models.model.Model                           keras3
+##   destructure.keras_shape                                    keras3
+##   evaluate.keras.models.model.Model                          keras3
+##   fit.keras.models.model.Model                               keras3
+##   format.keras.models.model.Model                            keras3
+##   format.keras_shape                                         keras3
+##   plot.keras.models.model.Model                              keras3
+##   plot.keras_training_history                                keras3
+##   predict.keras.models.model.Model                           keras3
+##   print.keras.models.model.Model                             keras3
+##   print.keras_shape                                          keras3
+##   print.keras_training_history                               keras3
+##   print.kerastools.model.RModel                              keras3
+##   print.py_R6ClassGenerator                                  keras3
+##   py_str.keras.models.model.Model                            keras3
+##   py_to_r.keras.utils.generic_utils.SharedObjectConfig       keras3
+##   py_to_r.tensorflow.python.ops.gen_linalg_ops.Qr            keras3
+##   py_to_r.tensorflow.python.ops.gen_nn_ops.TopKV2            keras3
+##   py_to_r_wrapper.keras.initializers.initializer.Initializer keras3
+##   py_to_r_wrapper.keras.layers.layer.Layer                   keras3
+##   py_to_r_wrapper.keras.losses.loss.Loss                     keras3
+##   py_to_r_wrapper.keras.models.model.Model                   keras3
+##   py_to_r_wrapper.kerastools.model.RModel                    keras3
+##   r_to_py.R6ClassGenerator                                   keras3
+##   r_to_py.keras_layer_wrapper                                keras3
+##   r_to_py.keras_shape                                        keras3
+##   summary.keras.models.model.Model                           keras3
+##   summary.kerastools.model.RModel                            keras3
+```
 
-    def get_config(self):
-        return {"factor": self.factor}
+```r
+custom_fn <- keras3:::py_func2(function(x) x^2, name = "custom_fn", convert = TRUE)
 
-
-@keras.saving.register_keras_serializable(package="my_package", name="custom_fn")
-def custom_fn(x):
-    return x**2
+register_custom_object(custom_fn, name="custom_fn", package="my_package")
 
 
 # Create the model.
-def get_model():
-    inputs = keras.Input(shape=(4,))
-    mid = CustomLayer(0.5)(inputs)
-    outputs = keras.layers.Dense(1, activation=custom_fn)(mid)
-    model = keras.Model(inputs, outputs)
-    model.compile(optimizer="rmsprop", loss="mean_squared_error")
-    return model
+get_model <- function() {
+  inputs <- layer_input(shape(4))
+  mid <- inputs |> layer_custom(0.5)
+  outputs <- mid |> layer_dense(1, activation = custom_fn)
+  model <- keras_model(inputs, outputs)
+  model |> compile(optimizer = "rmsprop", loss = "mean_squared_error")
+  model
+}
 
 
 # Train the model.
-def train_model(model):
-    input = np.random.random((4, 4))
-    target = np.random.random((4, 1))
-    model.fit(input, target)
-    return model
+train_model <- function(model) {
+  input <- random_uniform(c(4, 4))
+  target <- random_uniform(c(4, 1))
+  model |> fit(input, target, verbose = FALSE, epochs = 1)
+  model
+}
 
+test_input <- random_uniform(c(4, 4))
+test_target <- random_uniform(c(4, 1))
 
-test_input = np.random.random((4, 4))
-test_target = np.random.random((4, 1))
-
-model = get_model()
-model = train_model(model)
-model.save("custom_model.keras")
+model <- get_model() |> train_model()
+model |> save_model("custom_model.keras", overwrite = TRUE)
 
 # Now, we can simply load without worrying about our custom objects.
-reconstructed_model = keras.models.load_model("custom_model.keras")
+reconstructed_model <- load_model("custom_model.keras")
+
+# model$get_config()$layers[[3]]$config$activation -> z
+# keras$saving$deserialize_keras_object(z)
 
 # Let's check:
-np.testing.assert_allclose(
-    model.predict(test_input), reconstructed_model.predict(test_input)
-)
+stopifnot(all.equal(
+  model |> predict(test_input, verbose = FALSE),
+  reconstructed_model |> predict(test_input, verbose = FALSE)
+))
 ```
 
 #### Passing custom objects to `load_model()`
 
-```python
-model = get_model()
-model = train_model(model)
 
-# Calling `save('my_model.keras')` creates a zip archive `my_model.keras`.
-model.save("custom_model.keras")
+```r
+model <- get_model() |> train_model()
 
-# Upon loading, pass a dict containing the custom objects used in the
-# `custom_objects` argument of `keras.models.load_model()`.
-reconstructed_model = keras.models.load_model(
-    "custom_model.keras",
-    custom_objects={"CustomLayer": CustomLayer, "custom_fn": custom_fn},
+# Calling `save_model('my_model.keras')` creates a zip archive `my_model.keras`.
+model |> save_model("custom_model.keras", overwrite = TRUE)
+
+# Upon loading, pass a named list containing the custom objects used in the
+# `custom_objects` argument of `load_model()`.
+reconstructed_model <-  load_model(
+  "custom_model.keras",
+  custom_objects = list(CustomLayer = layer_custom,
+                        custom_fn = custom_fn),
 )
 
 # Let's check:
-np.testing.assert_allclose(
-    model.predict(test_input), reconstructed_model.predict(test_input)
-)
+stopifnot(all.equal(
+  model |> predict(test_input, verbose = FALSE),
+  reconstructed_model |> predict(test_input, verbose = FALSE)
+))
 ```
 
 #### Using a custom object scope
@@ -264,22 +343,24 @@ the loading of our custom objects.
 
 **Example:**
 
-```python
-model = get_model()
-model = train_model(model)
-model.save("custom_model.keras")
+
+```r
+model <- get_model() |> train_model()
+model |> save_model("custom_model.keras", overwrite = TRUE)
 
 # Pass the custom objects dictionary to a custom object scope and place
 # the `keras.models.load_model()` call within the scope.
-custom_objects = {"CustomLayer": CustomLayer, "custom_fn": custom_fn}
+custom_objects <- list(CustomLayer = layer_custom, custom_fn = custom_fn)
 
-with keras.saving.custom_object_scope(custom_objects):
-    reconstructed_model = keras.models.load_model("custom_model.keras")
+with_custom_object_scope(custom_objects, {
+  reconstructed_model <- load_model("custom_model.keras")
+})
 
 # Let's check:
-np.testing.assert_allclose(
-    model.predict(test_input), reconstructed_model.predict(test_input)
-)
+stopifnot(all.equal(
+  model |> predict(test_input, verbose = FALSE),
+  reconstructed_model |> predict(test_input, verbose = FALSE)
+))
 ```
 
 ### Model serialization
@@ -294,7 +375,7 @@ information).
 
 The following serialization APIs are available:
 
-- `keras.models.clone_model(model)`: make a (randomly initialized) copy of a model.
+- `clone_model(model)`: make a (randomly initialized) copy of a model.
 - `get_config()` and `cls.from_config()`: retrieve the configuration of a layer or model, and recreate
 a model instance from its config, respectively.
 - `keras.models.model_to_json()` and `keras.models.model_from_json()`: similar, but as JSON strings.
@@ -303,83 +384,113 @@ a model instance from its config, respectively.
 
 #### In-memory model cloning
 
-You can do in-memory cloning of a model via `keras.models.clone_model()`.
+You can do in-memory cloning of a model via `clone_model()`.
 This is equivalent to getting the config then recreating the model from its config
 (so it does not preserve compilation information or layer weights values).
 
 **Example:**
 
-```python
-new_model = keras.models.clone_model(model)
+
+```r
+new_model <- clone_model(model)
 ```
 
 #### `get_config()` and `from_config()`
 
-Calling `model.get_config()` or `layer.get_config()` will return a Python dict containing
+Calling `get_config(model)` or `get_config(layer)` will return a named list containing
 the configuration of the model or layer, respectively. You should define `get_config()`
-to contain arguments needed for the `__init__()` method of the model or layer. At loading time,
-the `from_config(config)` method will then call `__init__()` with these arguments to
+to contain arguments needed for the `initialize()` method of the model or layer. At loading time,
+the `from_config(config)` method will then call `initialize()` with these arguments to
 reconstruct the model or layer.
 
 **Layer example:**
 
-```python
-layer = keras.layers.Dense(3, activation="relu")
-layer_config = layer.get_config()
-print(layer_config)
+
+```r
+layer <- layer_dense(, 3, activation="relu")
+layer_config <- get_config(layer)
+str(layer_config)
+```
+
+```
+## Dict (12 items)
 ```
 
 Now let's reconstruct the layer using the `from_config()` method:
 
-```python
-new_layer = keras.layers.Dense.from_config(layer_config)
+
+```r
+new_layer <- from_config(layer_config)
 ```
 
 **Sequential model example:**
 
-```python
-model = keras.Sequential([keras.Input((32,)), keras.layers.Dense(1)])
-config = model.get_config()
-new_model = keras.Sequential.from_config(config)
+
+```r
+model <- keras_model_sequential(input_shape = c(32)) |>
+  layer_dense(1)
+config <- get_config(model)
+new_model <- from_config(config)
 ```
 
 **Functional model example:**
 
-```python
-inputs = keras.Input((32,))
-outputs = keras.layers.Dense(1)(inputs)
-model = keras.Model(inputs, outputs)
-config = model.get_config()
-new_model = keras.Model.from_config(config)
+
+```r
+inputs <- layer_input(c(32))
+outputs <- inputs |> layer_dense(1)
+model <- keras_model(inputs, outputs)
+config <- get_config(model)
+new_model <- from_config(config)
 ```
 
-#### `to_json()` and `keras.models.model_from_json()`
+
+
+#### `save_model_config()` and `load_model_config()`
 
 This is similar to `get_config` / `from_config`, except it turns the model
-into a JSON string, which can then be loaded without the original model class.
+into a JSON file, which can then be loaded without the original model class.
 It is also specific to models, it isn't meant for layers.
 
 **Example:**
 
-```python
-model = keras.Sequential([keras.Input((32,)), keras.layers.Dense(1)])
-json_config = model.to_json()
-new_model = keras.models.model_from_json(json_config)
+
+```r
+model <- keras_model_sequential(input_shape = c(32)) |>
+  layer_dense(1)
+save_model_config(model, "model_config.json")
+new_model <- load_model_config("model_config.json")
+```
+
+```r
+unlink("model_config.json")
 ```
 
 #### Arbitrary object serialization and deserialization
 
-The `keras.saving.serialize_keras_object()` and `keras.saving.deserialize_keras_object()`
+The `serialize_keras_object()` and `deserialize_keras_object()`
 APIs are general-purpose APIs that can be used to serialize or deserialize any Keras
 object and any custom object. It is at the foundation of saving model architecture and is
 behind all `serialize()`/`deserialize()` calls in keras.
 
 **Example**:
 
-```python
-my_reg = keras.regularizers.L1(0.005)
-config = keras.saving.serialize_keras_object(my_reg)
-print(config)
+
+```r
+my_reg <- regularizer_l1(0.005)
+config <- serialize_keras_object(my_reg)
+```
+
+```
+## Error in serialize_keras_object(my_reg): could not find function "serialize_keras_object"
+```
+
+```r
+str(config)
+```
+
+```
+## {'name': 'functional_11', 'trainable': True, 'layers': [{'module': 'keras.src.layers.core.input_layer', 'class_name': 'InputLayer', 'config': {'batch_shape': (None, 32), 'dtype': 'float32', 'sparse': False, 'name': 'input_layer_5'}, 'registered_name': 'InputLayer', 'name': 'input_layer_5', 'inbound_nodes': []}, {'module': 'keras.src.layers.core.dense', 'class_name': 'Dense', 'config': {'name': 'dense_6', 'trainable': True, 'dtype': 'float32', 'units': 1, 'activation': 'linear', 'use_bias': True, 'kernel_initializer': {'module': 'keras.src.initializers.random_initializers', 'class_name': 'GlorotUniform', 'config': {'seed': None}, 'registered_name': 'GlorotUniform'}, 'bias_initializer': {'module': 'keras.src.initializers.constant_initializers', 'class_name': 'Zeros', 'config': {}, 'registered_name': 'Zeros'}, 'kernel_regularizer': None, 'bias_regularizer': None, 'kernel_constraint': None, 'bias_constraint': None}, 'registered_name': 'Dense', 'build_config': {'input_shape': (None, 32)}, 'name': 'dense_6', 'inbound_nodes': [{'args': ({'class_name': '__keras_tensor__', 'config': {'shape': (None, 32), 'dtype': 'float32', 'keras_history': ['input_layer_5', 0, 0]}},), 'kwargs': {}}]}], 'input_layers': [['input_layer_5', 0, 0]], 'output_layers': [['dense_6', 0, 0]]}
 ```
 
 Note the serialization format containing all the necessary information for proper
@@ -393,8 +504,21 @@ comes from
 
 Now we can reconstruct the regularizer.
 
-```python
-new_reg = keras.saving.deserialize_keras_object(config)
+
+```r
+new_reg <- deserialize_keras_object(config)
+```
+
+```
+## Error in deserialize_keras_object(config): could not find function "deserialize_keras_object"
+```
+
+```r
+new_reg
+```
+
+```
+## Error in eval(expr, envir, enclos): object 'new_reg' not found
 ```
 
 ### Model weights saving
@@ -412,68 +536,81 @@ information of the prior model.
 Weights can be copied between different objects by using `get_weights()`
 and `set_weights()`:
 
-* `keras.layers.Layer.get_weights()`: Returns a list of NumPy arrays of weight values.
-* `keras.layers.Layer.set_weights(weights)`: Sets the model weights to the values
-provided (as NumPy arrays).
+* `get_weights(<layer>)`: Returns a list of arrays of weight values.
+* `set_weights(<layer>weights)`: Sets the model/layer weights to the values
+provided (as arrays).
 
 Examples:
 
 ***Transfering weights from one layer to another, in memory***
 
-```python
-def create_layer():
-    layer = keras.layers.Dense(64, activation="relu", name="dense_2")
-    layer.build((None, 784))
-    return layer
 
+```r
+create_layer <- function() {
+  layer <- layer_dense(, 64, activation = "relu", name = "dense_2")
+  layer$build(shape(NA, 784))
+  layer
+}
 
-layer_1 = create_layer()
-layer_2 = create_layer()
+layer_1 <- create_layer()
+layer_2 <- create_layer()
 
 # Copy weights from layer 1 to layer 2
-layer_2.set_weights(layer_1.get_weights())
+layer_2 |> set_weights(get_weights(layer_1))
 ```
 
 ***Transfering weights from one model to another model with a compatible architecture, in memory***
 
-```python
-# Create a simple functional model
-inputs = keras.Input(shape=(784,), name="digits")
-x = keras.layers.Dense(64, activation="relu", name="dense_1")(inputs)
-x = keras.layers.Dense(64, activation="relu", name="dense_2")(x)
-outputs = keras.layers.Dense(10, name="predictions")(x)
-functional_model = keras.Model(inputs=inputs, outputs=outputs, name="3_layer_mlp")
 
+```r
+# Create a simple functional model
+inputs <- layer_input(shape=c(784), name="digits")
+outputs <- inputs |>
+  layer_dense(64, activation = "relu", name = "dense_1") |>
+  layer_dense(64, activation = "relu", name = "dense_2") |>
+  layer_dense(10, name = "predictions")
+functional_model <- keras_model(inputs = inputs, outputs = outputs,
+                               name = "3_layer_mlp")
 
 # Define a subclassed model with the same architecture
-class SubclassedModel(keras.Model):
-    def __init__(self, output_dim, name=None):
-        super().__init__(name=name)
-        self.output_dim = output_dim
-        self.dense_1 = keras.layers.Dense(64, activation="relu", name="dense_1")
-        self.dense_2 = keras.layers.Dense(64, activation="relu", name="dense_2")
-        self.dense_3 = keras.layers.Dense(output_dim, name="predictions")
+SubclassedModel <- new_model_class(
+  "SubclassedModel",
+  initialize = function(output_dim, name = NULL) {
+    super$initialize(name = name)
+    self$output_dim <- output_dim |> as.integer()
+    self$dense_1 <- layer_dense(, 64, activation = "relu",
+                                name = "dense_1")
+    self$dense_2 <- layer_dense(, 64, activation = "relu",
+                                name = "dense_2")
+    self$dense_3 <- layer_dense(, self$output_dim,
+                                name = "predictions")
+  },
 
-    def call(self, inputs):
-        x = self.dense_1(inputs)
-        x = self.dense_2(x)
-        x = self.dense_3(x)
-        return x
+  call = function(inputs) {
+    inputs |>
+      self$dense_1() |>
+      self$dense_2() |>
+      self$dense_3()
+  },
 
-    def get_config(self):
-        return {"output_dim": self.output_dim, "name": self.name}
+  get_config = function(self) {
+    list(output_dim = self$output_dim,
+         name = self$name)
+  }
+)
 
 
-subclassed_model = SubclassedModel(10)
+subclassed_model <- SubclassedModel(10)
 # Call the subclassed model once to create the weights.
-subclassed_model(np.ones((1, 784)))
+subclassed_model(op_ones(c(1, 784))) |> invisible()
 
 # Copy weights from functional_model to subclassed_model.
-subclassed_model.set_weights(functional_model.get_weights())
+set_weights(subclassed_model, get_weights(functional_model))
 
-assert len(functional_model.weights) == len(subclassed_model.weights)
-for a, b in zip(functional_model.weights, subclassed_model.weights):
-    np.testing.assert_allclose(a.numpy(), b.numpy())
+stopifnot(all.equal(
+  get_weights(functional_model),
+  get_weights(subclassed_model)
+))
 ```
 
 ***The case of stateless layers***
@@ -482,73 +619,53 @@ Because stateless layers do not change the order or number of weights,
 models can have compatible architectures even if there are extra/missing
 stateless layers.
 
-```python
-inputs = keras.Input(shape=(784,), name="digits")
-x = keras.layers.Dense(64, activation="relu", name="dense_1")(inputs)
-x = keras.layers.Dense(64, activation="relu", name="dense_2")(x)
-outputs = keras.layers.Dense(10, name="predictions")(x)
-functional_model = keras.Model(inputs=inputs, outputs=outputs, name="3_layer_mlp")
 
-inputs = keras.Input(shape=(784,), name="digits")
-x = keras.layers.Dense(64, activation="relu", name="dense_1")(inputs)
-x = keras.layers.Dense(64, activation="relu", name="dense_2")(x)
+```r
+input <- layer_input(shape = c(784), name = "digits")
+output <- input |>
+  layer_dense(64, activation = "relu", name = "dense_1") |>
+  layer_dense(64, activation = "relu", name = "dense_2") |>
+  layer_dense(10, name = "predictions")
+functional_model <- keras_model(inputs, outputs,
+                                name = "3_layer_mlp")
 
-# Add a dropout layer, which does not contain any weights.
-x = keras.layers.Dropout(0.5)(x)
-outputs = keras.layers.Dense(10, name="predictions")(x)
-functional_model_with_dropout = keras.Model(
-    inputs=inputs, outputs=outputs, name="3_layer_mlp"
-)
+input <- layer_input(shape = c(784), name = "digits")
+output <- input |>
+  layer_dense(64, activation = "relu", name = "dense_1") |>
+  layer_dense(64, activation = "relu", name = "dense_2") |>
+  # Add a dropout layer, which does not contain any weights.
+  layer_dropout(0.5) |>
+  layer_dense(10, name = "predictions")
 
-functional_model_with_dropout.set_weights(functional_model.get_weights())
+functional_model_with_dropout <-
+  keras_model(input, output, name = "3_layer_mlp")
+
+set_weights(functional_model_with_dropout,
+            get_weights(functional_model))
 ```
 
 #### APIs for saving weights to disk & loading them back
 
-Weights can be saved to disk by calling `model.save_weights(filepath)`.
+Weights can be saved to disk by calling `save_model_weights(filepath)`.
 The filename should end in `.weights.h5`.
 
 **Example:**
 
-```python
-# Runnable example
-sequential_model = keras.Sequential(
-    [
-        keras.Input(shape=(784,), name="digits"),
-        keras.layers.Dense(64, activation="relu", name="dense_1"),
-        keras.layers.Dense(64, activation="relu", name="dense_2"),
-        keras.layers.Dense(10, name="predictions"),
-    ]
-)
-sequential_model.save_weights("my_model.weights.h5")
-sequential_model.load_weights("my_model.weights.h5")
+
+```r
+sequential_model = keras_model_sequential(input_shape = c(784),
+                                          input_layer_name = "digits") |>
+  layer_dense(64, activation = "relu", name = "dense_1") |>
+  layer_dense(64, activation = "relu", name = "dense_2") |>
+  layer_dense(10, name = "predictions")
+sequential_model |> save_model_weights("my_model.weights.h5")
+sequential_model |> load_model_weights("my_model.weights.h5")
 ```
 
-Note that changing `layer.trainable` may result in a different
-`layer.weights` ordering when the model contains nested layers.
-
-```python
-class NestedDenseLayer(keras.layers.Layer):
-    def __init__(self, units, name=None):
-        super().__init__(name=name)
-        self.dense_1 = keras.layers.Dense(units, name="dense_1")
-        self.dense_2 = keras.layers.Dense(units, name="dense_2")
-
-    def call(self, inputs):
-        return self.dense_2(self.dense_1(inputs))
+Note that using `freeze_weights()` may result in a different
+output from `get_weights(layer)` ordering when the model contains nested layers.
 
 
-nested_model = keras.Sequential([keras.Input((784,)), NestedDenseLayer(10, "nested")])
-variable_names = [v.name for v in nested_model.weights]
-print("variables: {}".format(variable_names))
-
-print("\nChanging trainable status of one of the nested layers...")
-nested_model.get_layer("nested").dense_1.trainable = False
-
-variable_names_2 = [v.name for v in nested_model.weights]
-print("\nvariables: {}".format(variable_names_2))
-print("variable ordering changed:", variable_names != variable_names_2)
-```
 
 ##### **Transfer learning example**
 
@@ -558,164 +675,251 @@ the desired weights/layers into a new model.
 
 **Example:**
 
-```python
-def create_functional_model():
-    inputs = keras.Input(shape=(784,), name="digits")
-    x = keras.layers.Dense(64, activation="relu", name="dense_1")(inputs)
-    x = keras.layers.Dense(64, activation="relu", name="dense_2")(x)
-    outputs = keras.layers.Dense(10, name="predictions")(x)
-    return keras.Model(inputs=inputs, outputs=outputs, name="3_layer_mlp")
 
+```r
+create_functional_model <- function() {
+  inputs <- layer_input(shape = c(784), name = "digits")
+  outputs <- inputs |>
+    layer_dense(64, activation = "relu", name = "dense_1") |>
+    layer_dense(64, activation = "relu", name = "dense_2") |>
+    layer_dense(10, name = "predictions")
+  keras_model(inputs, outputs, name = "3_layer_mlp")
+}
 
-functional_model = create_functional_model()
-functional_model.save_weights("pretrained.weights.h5")
+functional_model <- create_functional_model()
+functional_model |> save_model_weights("pretrained.weights.h5")
+```
 
+```
+## Error: File 'pretrained.weights.h5' already exists (pass overwrite = TRUE to force save).
+```
+
+```r
 # In a separate program:
-pretrained_model = create_functional_model()
-pretrained_model.load_weights("pretrained.weights.h5")
+pretrained_model <- create_functional_model()
+pretrained_model |> load_model_weights("pretrained.weights.h5")
 
 # Create a new model by extracting layers from the original model:
-extracted_layers = pretrained_model.layers[:-1]
-extracted_layers.append(keras.layers.Dense(5, name="dense_3"))
-model = keras.Sequential(extracted_layers)
-model.summary()
+extracted_layers <- pretrained_model$layers |> head(-1)
+model <- keras_model_sequential(extracted_layers) |>
+  layer_dense(5, name = "dense_3")
+summary(model)
+```
+
+```
+## Model: "sequential_4"
+## ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━┓
+## ┃ Layer (type)                      ┃ Output Shape                ┃    Param # ┃
+## ┡━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━┩
+## │ dense_1 (Dense)                   │ (None, 64)                  │     50,240 │
+## ├───────────────────────────────────┼─────────────────────────────┼────────────┤
+## │ dense_2 (Dense)                   │ (None, 64)                  │      4,160 │
+## ├───────────────────────────────────┼─────────────────────────────┼────────────┤
+## │ dense_3 (Dense)                   │ (None, 5)                   │        325 │
+## └───────────────────────────────────┴─────────────────────────────┴────────────┘
+##  Total params: 54,725 (213.77 KB)
+##  Trainable params: 54,725 (213.77 KB)
+##  Non-trainable params: 0 (0.00 B)
 ```
 
 ### Appendix: Handling custom objects
 
-<a name="config_methods"></a>
+<!-- <a name="config_methods"></a> -->
 #### Defining the config methods
 
 Specifications:
 
-* `get_config()` should return a JSON-serializable dictionary in order to be
-compatible with the Keras architecture- and model-saving APIs.
-* `from_config(config)` (a `classmethod`) should return a new layer or model
+* `get_config()` should return a JSON-serializable named list in order to be
+compatible with the Keras architecture and model-saving APIs.
+* `from_config(config)` (a class method) should return a new layer or model
 object that is created from the config.
-The default implementation returns `cls(**config)`.
+The default implementation returns `do.call(cls, config)`.
 
 **NOTE**:  If all your constructor arguments are already serializable, e.g. strings and
-ints, or non-custom Keras objects, overriding `from_config` is not necessary. However,
-for more complex objects such as layers or models passed to `__init__`, deserialization
-must be handled explicitly either in `__init__` itself or overriding the `from_config()`
+ints, or non-custom Keras objects, overriding `from_config()` is not necessary. However,
+for more complex objects such as layers or models passed to `initialize()`, deserialization
+must be handled explicitly either in `initialize` itself or overriding the `from_config()`
 method.
 
 **Example:**
 
-```python
-@keras.saving.register_keras_serializable(package="MyLayers", name="KernelMult")
-class MyDense(keras.layers.Layer):
-    def __init__(
-        self,
-        units,
-        *,
-        kernel_regularizer=None,
-        kernel_initializer=None,
-        nested_model=None,
-        **kwargs
-    ):
-        super().__init__(**kwargs)
-        self.hidden_units = units
-        self.kernel_regularizer = kernel_regularizer
-        self.kernel_initializer = kernel_initializer
-        self.nested_model = nested_model
 
-    def get_config(self):
-        config = super().get_config()
-        # Update the config with the custom layer's parameters
-        config.update(
-            {
-                "units": self.hidden_units,
-                "kernel_regularizer": self.kernel_regularizer,
-                "kernel_initializer": self.kernel_initializer,
-                "nested_model": self.nested_model,
-            }
+```r
+layer_my_dense <- register_custom_object(
+  package = "MyLayers", name = "KernelMult",
+  object = Layer(
+    "MyDense",
+    initialize = function(units,
+                          ...,
+                          kernel_regularizer = NULL,
+                          kernel_initializer = NULL,
+                          nested_model = NULL) {
+      super$initialize(...)
+      self$hidden_units <- units
+      self$kernel_regularizer <- kernel_regularizer
+      self$kernel_initializer <- kernel_initializer
+      self$nested_model <- nested_model
+    },
+    get_config = function() {
+      config <- super$get_config()
+      # Update the config with the custom layer's parameters
+      config <- modifyList(
+        config,
+        list(
+          units = self$hidden_units,
+          kernel_regularizer = self$kernel_regularizer,
+          kernel_initializer = self$kernel_initializer,
+          nested_model = self$nested_model
         )
-        return config
+      )
+      config
+    },
+    build = function(input_shape) {
+      input_units <- tail(input_shape, 1)
+      self$kernel <- self$add_weight(
+        name = "kernel",
+        shape = shape(input_units, self$hidden_units),
+        regularizer = self$kernel_regularizer,
+        initializer = self$kernel_initializer,
+      )
+    },
+    call = function(inputs) {
+      op_matmul(inputs, self$kernel)
+    }
+  )
+)
+```
 
-    def build(self, input_shape):
-        input_units = input_shape[-1]
-        self.kernel = self.add_weight(
-            name="kernel",
-            shape=(input_units, self.hidden_units),
-            regularizer=self.kernel_regularizer,
-            initializer=self.kernel_initializer,
-        )
+```
+## wrong parameter order: variadic keyword parameter before keyword-only parameter
+```
 
-    def call(self, inputs):
-        return ops.matmul(inputs, self.kernel)
+```r
+layer <- layer_my_dense(units = 16,
+                        kernel_regularizer = "l1",
+                        kernel_initializer = "ones")
+```
 
+```
+## Error in layer_my_dense(units = 16, kernel_regularizer = "l1", kernel_initializer = "ones"): could not find function "layer_my_dense"
+```
 
-layer = MyDense(units=16, kernel_regularizer="l1", kernel_initializer="ones")
-layer3 = MyDense(units=64, nested_model=layer)
+```r
+layer3 <- layer_my_dense(units = 64, nested_model = layer)
+```
 
-config = keras.layers.serialize(layer3)
+```
+## Error in layer_my_dense(units = 64, nested_model = layer): could not find function "layer_my_dense"
+```
 
-print(config)
+```r
+config <- serialize_keras_object(layer3)
+```
 
-new_layer = keras.layers.deserialize(config)
+```
+## Error in serialize_keras_object(layer3): could not find function "serialize_keras_object"
+```
 
-print(new_layer)
+```r
+str(config)
+```
+
+```
+## {'name': 'functional_11', 'trainable': True, 'layers': [{'module': 'keras.src.layers.core.input_layer', 'class_name': 'InputLayer', 'config': {'batch_shape': (None, 32), 'dtype': 'float32', 'sparse': False, 'name': 'input_layer_5'}, 'registered_name': 'InputLayer', 'name': 'input_layer_5', 'inbound_nodes': []}, {'module': 'keras.src.layers.core.dense', 'class_name': 'Dense', 'config': {'name': 'dense_6', 'trainable': True, 'dtype': 'float32', 'units': 1, 'activation': 'linear', 'use_bias': True, 'kernel_initializer': {'module': 'keras.src.initializers.random_initializers', 'class_name': 'GlorotUniform', 'config': {'seed': None}, 'registered_name': 'GlorotUniform'}, 'bias_initializer': {'module': 'keras.src.initializers.constant_initializers', 'class_name': 'Zeros', 'config': {}, 'registered_name': 'Zeros'}, 'kernel_regularizer': None, 'bias_regularizer': None, 'kernel_constraint': None, 'bias_constraint': None}, 'registered_name': 'Dense', 'build_config': {'input_shape': (None, 32)}, 'name': 'dense_6', 'inbound_nodes': [{'args': ({'class_name': '__keras_tensor__', 'config': {'shape': (None, 32), 'dtype': 'float32', 'keras_history': ['input_layer_5', 0, 0]}},), 'kwargs': {}}]}], 'input_layers': [['input_layer_5', 0, 0]], 'output_layers': [['dense_6', 0, 0]]}
+```
+
+```r
+new_layer <- deserialize_keras_object()(config)
+```
+
+```
+## Error in deserialize_keras_object(): could not find function "deserialize_keras_object"
+```
+
+```r
+new_layer
+```
+
+```
+## <Dense name=dense_4, built=False>
 ```
 
 Note that overriding `from_config` is unnecessary above for `MyDense` because
 `hidden_units`, `kernel_initializer`, and `kernel_regularizer` are ints, strings, and a
 built-in Keras object, respectively. This means that the default `from_config`
-implementation of `cls(**config)` will work as intended.
+implementation of `cls(!!!config)` will work as intended.
 
-For more complex objects, such as layers and models passed to `__init__`, for
+For more complex objects, such as layers and models passed to `initialize()`, for
 example, you must explicitly deserialize these objects. Let's take a look at an example
 of a model where a `from_config` override is necessary.
 
 **Example:**
-<a name="registration_example"></a>
-
-```python
-@keras.saving.register_keras_serializable(package="ComplexModels")
-class CustomModel(keras.layers.Layer):
-    def __init__(self, first_layer, second_layer=None, **kwargs):
-        super().__init__(**kwargs)
-        self.first_layer = first_layer
-        if second_layer is not None:
-            self.second_layer = second_layer
-        else:
-            self.second_layer = keras.layers.Dense(8)
-
-    def get_config(self):
-        config = super().get_config()
-        config.update(
-            {
-                "first_layer": self.first_layer,
-                "second_layer": self.second_layer,
-            }
-        )
-        return config
-
-    @classmethod
-    def from_config(cls, config):
-        # Note that you can also use `keras.saving.deserialize_keras_object` here
-        config["first_layer"] = keras.layers.deserialize(config["first_layer"])
-        config["second_layer"] = keras.layers.deserialize(config["second_layer"])
-        return cls(**config)
-
-    def call(self, inputs):
-        return self.first_layer(self.second_layer(inputs))
+<!-- <a name="registration_example"></a> -->
 
 
-# Let's make our first layer the custom layer from the previous example (MyDense)
-inputs = keras.Input((32,))
-outputs = CustomModel(first_layer=layer)(inputs)
-model = keras.Model(inputs, outputs)
+```r
+layer_custom_model <- register_custom_object(
+  package = "ComplexModels",
+  object = Layer(
+    "CustomModel",
+    initialize = function(first_layer, second_layer = NULL, ...) {
+      super$initialize(...)
+      self$first_layer <- first_layer
+      self$second_layer <- second_layer %||% layer_dense(, 8)
+    },
 
-config = model.get_config()
-new_model = keras.Model.from_config(config)
+    get_config = function() {
+      config <- super$get_config()
+      config <- modifyList(config, list(
+        first_layer = self$first_layer,
+        second_layer = self$second_layer
+      ))
+      config
+    },
+
+    from_config = py_eval("classmethod")(function(cls, config) {
+      config$first_layer %<>% deserialize_keras_object()
+      config$second_layer %<>% deserialize_keras_object()
+      # note that the class is available in methods under the classname symbol,
+      # (`CustomModel` for this class), and also under the symbol `__class__`
+      cls(!!!config)
+      # CustomModel(!!!config)
+    }),
+    call = function(self, inputs) {
+      inputs |>
+        self$first_layer() |>
+        self$second_layer()
+    }
+  )
+)
 ```
 
-<a name="custom_object_serialization"></a>
+```
+## Error in py_eval("classmethod"): could not find function "py_eval"
+```
+
+```r
+# Let's make our first layer the custom layer from the previous example (MyDense)
+inputs <- layer_input(c(32))
+outputs <-  inputs |> layer_custom_model(first_layer=layer)
+```
+
+```
+## Error in layer_custom_model(inputs, first_layer = layer): could not find function "layer_custom_model"
+```
+
+```r
+model <- keras_model(inputs, outputs)
+
+config <- get_config(model)
+new_model <- from_config(config)
+```
+
+<!-- <a name="custom_object_serialization"></a> -->
 #### How custom objects are serialized
 
 The serialization format has a special key for custom objects registered via
-`@keras.saving.register_keras_serializable`. This `registered_name` key allows for easy
+`register_custom_object()`. This `registered_name` key allows for easy
 retrieval at loading/deserialization time while also allowing users to add custom naming.
 
 Let's take a look at the config from serializing the custom layer `MyDense` we defined
@@ -723,22 +927,41 @@ above.
 
 **Example**:
 
-```python
-layer = MyDense(
-    units=16,
-    kernel_regularizer=keras.regularizers.L1L2(l1=1e-5, l2=1e-4),
-    kernel_initializer="ones",
+
+```r
+layer <- layer_my_dense(
+  units = 16,
+  kernel_regularizer = regularizer_l1_l2(l1 = 1e-5, l2 = 1e-4),
+  kernel_initializer = "ones",
 )
-config = keras.layers.serialize(layer)
-print(config)
+```
+
+```
+## Error in layer_my_dense(units = 16, kernel_regularizer = regularizer_l1_l2(l1 = 1e-05, : could not find function "layer_my_dense"
+```
+
+```r
+config <- serialize_keras_object(layer)
+```
+
+```
+## Error in serialize_keras_object(layer): could not find function "serialize_keras_object"
+```
+
+```r
+str(config)
+```
+
+```
+## {'name': 'functional_21', 'trainable': True, 'layers': [{'module': 'keras.src.layers.core.input_layer', 'class_name': 'InputLayer', 'config': {'batch_shape': (None, 784), 'dtype': 'float32', 'sparse': False, 'name': 'digits'}, 'registered_name': 'InputLayer', 'name': 'digits', 'inbound_nodes': []}, {'module': 'keras.src.layers.core.dense', 'class_name': 'Dense', 'config': {'name': 'dense_1', 'trainable': True, 'dtype': 'float32', 'units': 64, 'activation': 'relu', 'use_bias': True, 'kernel_initializer': {'module': 'keras.src.initializers.random_initializers', 'class_name': 'GlorotUniform', 'config': {'seed': None}, 'registered_name': 'GlorotUniform'}, 'bias_initializer': {'module': 'keras.src.initializers.constant_initializers', 'class_name': 'Zeros', 'config': {}, 'registered_name': 'Zeros'}, 'kernel_regularizer': None, 'bias_regularizer': None, 'kernel_constraint': None, 'bias_constraint': None}, 'registered_name': 'Dense', 'build_config': {'input_shape': (None, 784)}, 'name': 'dense_1', 'inbound_nodes': [{'args': ({'class_name': '__keras_tensor__', 'config': {'shape': (None, 784), 'dtype': 'float32', 'keras_history': ['digits', 0, 0]}},), 'kwargs': {}}]}, {'module': 'keras.src.layers.core.dense', 'class_name': 'Dense', 'config': {'name': 'dense_2', 'trainable': True, 'dtype': 'float32', 'units': 64, 'activation': 'relu', 'use_bias': True, 'kernel_initializer': {'module': 'keras.src.initializers.random_initializers', 'class_name': 'GlorotUniform', 'config': {'seed': None}, 'registered_name': 'GlorotUniform'}, 'bias_initializer': {'module': 'keras.src.initializers.constant_initializers', 'class_name': 'Zeros', 'config': {}, 'registered_name': 'Zeros'}, 'kernel_regularizer': None, 'bias_regularizer': None, 'kernel_constraint': None, 'bias_constraint': None}, 'registered_name': 'Dense', 'build_config': {'input_shape': (None, 64)}, 'name': 'dense_2', 'inbound_nodes': [{'args': ({'class_name': '__keras_tensor__', 'config': {'shape': (None, 64), 'dtype': 'float32', 'keras_history': ['dense_1', 0, 0]}},), 'kwargs': {}}]}, {'module': 'keras.src.layers.core.input_layer', 'class_name': 'InputLayer', 'config': {'batch_shape': (None, 32), 'dtype': 'float32', 'sparse': False, 'name': 'input_layer_8'}, 'registered_name': 'InputLayer', 'name': 'input_layer_8', 'inbound_nodes': []}, {'module': 'keras.src.layers.core.dense', 'class_name': 'Dense', 'config': {'name': 'predictions', 'trainable': True, 'dtype': 'float32', 'units': 10, 'activation': 'linear', 'use_bias': True, 'kernel_initializer': {'module': 'keras.src.initializers.random_initializers', 'class_name': 'GlorotUniform', 'config': {'seed': None}, 'registered_name': 'GlorotUniform'}, 'bias_initializer': {'module': 'keras.src.initializers.constant_initializers', 'class_name': 'Zeros', 'config': {}, 'registered_name': 'Zeros'}, 'kernel_regularizer': None, 'bias_regularizer': None, 'kernel_constraint': None, 'bias_constraint': None}, 'registered_name': 'Dense', 'build_config': {'input_shape': (None, 64)}, 'name': 'predictions', 'inbound_nodes': [{'args': ({'class_name': '__keras_tensor__', 'config': {'shape': (None, 64), 'dtype': 'float32', 'keras_history': ['dense_2', 0, 0]}},), 'kwargs': {}}]}], 'input_layers': [['input_layer_8', 0, 0]], 'output_layers': [['predictions', 0, 0]]}
 ```
 
 As shown, the `registered_name` key contains the lookup information for the Keras master
-list, including the package `MyLayers` and the custom name `KernelMult` that we gave in
-the `@keras.saving.register_keras_serializable` decorator. Take a look again at the custom
+list, including the package `MyLayers` and the custom name `KernelMult` that we gave when calling
+`register_custom_objects()`. Take a look again at the custom
 class definition/registration [here](#registration_example).
 
 Note that the `class_name` key contains the original name of the class, allowing for
 proper re-initialization in `from_config`.
 
-Additionally, note that the `module` key is `None` since this is a custom object.
+Additionally, note that the `module` key is `NULL` since this is a custom object.
