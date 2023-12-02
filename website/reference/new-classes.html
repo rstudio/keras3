@@ -106,7 +106,7 @@ similarly to other callback functions, like
     <h2 id="ref-usage">Usage<a class="anchor" aria-label="anchor" href="#ref-usage"></a></h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">new_metric_class</span><span class="op">(</span><span class="va">classname</span>, <span class="va">...</span>, <span class="va">initialize</span>, <span class="va">update_state</span>, <span class="va">result</span><span class="op">)</span></span>
 <span></span>
-<span><span class="fu">new_loss_class</span><span class="op">(</span><span class="va">classname</span>, <span class="va">...</span>, call <span class="op">=</span> <span class="cn">NULL</span><span class="op">)</span></span>
+<span><span class="fu">new_loss_class</span><span class="op">(</span><span class="va">classname</span>, <span class="va">...</span>, call <span class="op">=</span> <span class="cn">NULL</span>, inherit <span class="op">=</span> <span class="fu">keras</span><span class="fu">::</span><span class="va"><a href="https://rdrr.io/pkg/keras/man/keras.html" class="external-link">keras</a></span><span class="op">$</span><span class="va">losses</span><span class="op">$</span><span class="va">Loss</span><span class="op">)</span></span>
 <span></span>
 <span><span class="fu">new_callback_class</span><span class="op">(</span></span>
 <span>  <span class="va">classname</span>,</span>
@@ -190,7 +190,7 @@ should become active properties of the class instances.</p>
 
 
     <footer><div class="pkgdown-footer-left">
-  <p></p><p>Developed by Tomasz Kalinowski, JJ Allaire, François Chollet, RStudio, Google.</p>
+  <p></p><p>Developed by Tomasz Kalinowski, JJ Allaire, François Chollet, Posit Software, PBC, Google.</p>
 </div>
 
 <div class="pkgdown-footer-right">

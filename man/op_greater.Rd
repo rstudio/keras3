@@ -12,8 +12,7 @@ op_greater(x1, x2)
 \item{x2}{Second input tensor.}
 }
 \value{
-\if{html}{\out{<div class="sourceCode">}}\preformatted{Output tensor, element-wise comparison of `x1` and `x2`.
-}\if{html}{\out{</div>}}
+Output tensor, element-wise comparison of \code{x1} and \code{x2}.
 }
 \description{
 Return the truth value of \code{x1 > x2} element-wise.

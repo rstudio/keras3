@@ -14,8 +14,7 @@ op_full(shape, fill_value, dtype = NULL)
 \item{dtype}{Desired data type of the tensor.}
 }
 \value{
-\if{html}{\out{<div class="sourceCode">}}\preformatted{Output tensor.
-}\if{html}{\out{</div>}}
+Output tensor.
 }
 \description{
 Return a new tensor of given shape and type, filled with \code{fill_value}.

@@ -1057,6 +1057,9 @@
     <loc>https://keras.posit.co/reference/dataset_reuters.html</loc>
   </url>
   <url>
+    <loc>https://keras.posit.co/reference/deserialize_keras_object.html</loc>
+  </url>
+  <url>
     <loc>https://keras.posit.co/reference/evaluate.keras.engine.training.Model.html</loc>
   </url>
   <url>
@@ -3421,6 +3424,9 @@
     <loc>https://keras.posit.co/reference/register_custom_object.html</loc>
   </url>
   <url>
+    <loc>https://keras.posit.co/reference/register_keras_serializable.html</loc>
+  </url>
+  <url>
     <loc>https://keras.posit.co/reference/regularizer_l1.html</loc>
   </url>
   <url>
@@ -3467,6 +3473,9 @@
   </url>
   <url>
     <loc>https://keras.posit.co/reference/sequential_model_input_layer.html</loc>
+  </url>
+  <url>
+    <loc>https://keras.posit.co/reference/serialize_keras_object.html</loc>
   </url>
   <url>
     <loc>https://keras.posit.co/reference/serialize_model.html</loc>

@@ -881,6 +881,11 @@
         <dd>Disables safe mode globally, allowing deserialization of lambdas.</dd>
       </dl><dl><dt>
           
+          <code><a href="deserialize_keras_object.html">deserialize_keras_object()</a></code> 
+        </dt>
+        <dd>Retrieve the object by deserializing the config dict.</dd>
+      </dl><dl><dt>
+          
           <code><a href="get_custom_objects.html">get_custom_objects()</a></code> 
         </dt>
         <dd>Retrieves a live reference to the global list of custom objects.</dd>
@@ -906,9 +911,14 @@
         <dd>Loads a model saved via <code>model.save()</code>.</dd>
       </dl><dl><dt>
           
-          <code><a href="register_custom_object.html">register_custom_object()</a></code> 
+          <code><a href="register_keras_serializable.html">register_keras_serializable()</a></code> 
         </dt>
         <dd>Registers an object with the Keras serialization framework.</dd>
+      </dl><dl><dt>
+          
+          <code><a href="serialize_keras_object.html">serialize_keras_object()</a></code> 
+        </dt>
+        <dd>Retrieve the config list by serializing the Keras object.</dd>
       </dl><dl><dt>
           
           <code><a href="get_weights.html">get_weights()</a></code> <code><a href="get_weights.html">set_weights()</a></code> 
@@ -1637,19 +1647,9 @@
         <dd>Check if traceback filtering is enabled.</dd>
       </dl><dl><dt>
           
-          <code><a href="get_custom_objects.html">get_custom_objects()</a></code> 
-        </dt>
-        <dd>Retrieves a live reference to the global list of custom objects.</dd>
-      </dl><dl><dt>
-          
           <code><a href="get_file.html">get_file()</a></code> 
         </dt>
         <dd>Downloads a file from a URL if it not already in the cache.</dd>
-      </dl><dl><dt>
-          
-          <code><a href="get_registered_name.html">get_registered_name()</a></code> 
-        </dt>
-        <dd>Returns the name registered to an object within the Keras framework.</dd>
       </dl><dl><dt>
           
           <code><a href="get_registered_object.html">get_registered_object()</a></code> 
@@ -4169,7 +4169,7 @@
 
 
     <footer><div class="pkgdown-footer-left">
-  <p></p><p>Developed by Tomasz Kalinowski, JJ Allaire, François Chollet, RStudio, Google.</p>
+  <p></p><p>Developed by Tomasz Kalinowski, JJ Allaire, François Chollet, Posit Software, PBC, Google.</p>
 </div>
 
 <div class="pkgdown-footer-right">

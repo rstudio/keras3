@@ -12,8 +12,7 @@ op_floor_divide(x1, x2)
 \item{x2}{Denominator.}
 }
 \value{
-\if{html}{\out{<div class="sourceCode">}}\preformatted{Output tensor, `y = floor(x1/x2)`
-}\if{html}{\out{</div>}}
+Output tensor, \code{y <- floor(x1/x2)}
 }
 \description{
 Returns the largest integer smaller or equal to the division of inputs.

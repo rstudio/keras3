@@ -31,7 +31,7 @@ See the package website at \url{https://keras.rstudio.com} for complete document
 \seealso{
 Useful links:
 \itemize{
-  \item \url{https://tensorflow.rstudio.com/}
+  \item \url{https:/keras.posit.co/}
   \item Report bugs at \url{https://github.com/rstudio/keras/issues}
 }
 
@@ -47,9 +47,9 @@ Authors:
 
 Other contributors:
 \itemize{
-  \item Daniel Falbel \email{daniel@rstudio.com} [contributor, copyright holder]
-  \item RStudio [contributor, copyright holder, funder]
-  \item Google [contributor, copyright holder, funder]
+  \item Daniel Falbel \email{daniel@posit.co} [contributor, copyright holder]
+  \item Posit Software, PBC [copyright holder, funder]
+  \item Google [copyright holder, funder]
   \item Yuan Tang \email{terrytangyuan@gmail.com} (\href{https://orcid.org/0000-0001-5243-233X}{ORCID}) [contributor, copyright holder]
   \item Wouter Van Der Bijl [contributor, copyright holder]
   \item Martin Studer [contributor, copyright holder]

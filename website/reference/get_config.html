@@ -100,7 +100,11 @@ nor the class name (those are handled externally).</p>
     <h2 id="ref-usage">Usage<a class="anchor" aria-label="anchor" href="#ref-usage"></a></h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">get_config</span><span class="op">(</span><span class="va">object</span><span class="op">)</span></span>
 <span></span>
-<span><span class="fu">from_config</span><span class="op">(</span><span class="va">config</span>, custom_objects <span class="op">=</span> <span class="cn">NULL</span><span class="op">)</span></span></code></pre></div>
+<span><span class="fu">from_config</span><span class="op">(</span></span>
+<span>  <span class="va">config</span>,</span>
+<span>  custom_objects <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  class <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/attr.html" class="external-link">attr</a></span><span class="op">(</span><span class="va">config</span>, <span class="st">"config_class"</span>, <span class="cn">TRUE</span><span class="op">)</span> <span class="op">%||%</span> <span class="va">keras</span><span class="op">$</span><span class="va">Model</span></span>
+<span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div class="section level2">
@@ -163,7 +167,7 @@ to the filesystem.</p>
 
 
     <footer><div class="pkgdown-footer-left">
-  <p></p><p>Developed by Tomasz Kalinowski, JJ Allaire, François Chollet, RStudio, Google.</p>
+  <p></p><p>Developed by Tomasz Kalinowski, JJ Allaire, François Chollet, Posit Software, PBC, Google.</p>
 </div>
 
 <div class="pkgdown-footer-right">

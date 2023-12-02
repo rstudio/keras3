@@ -108,8 +108,8 @@
   <main id="main" class="col-md-9"><div class="page-header">
       <img src="" class="logo" alt=""><h1>Save, serialize, and export models</h1>
             
-            <h4 data-toc-skip class="date">Last Modified: 2023-11-10;
-Last Rendered: 2023-11-10</h4>
+            <h4 data-toc-skip class="date">Last Modified: 2023-11-29;
+Last Rendered: 2023-12-01</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/rstudio/keras/blob/HEAD/vignettes/serialization_and_saving.Rmd" class="external-link"><code>vignettes/serialization_and_saving.Rmd</code></a></small>
       <div class="d-none name"><code>serialization_and_saving.Rmd</code></div>
@@ -117,7 +117,6 @@ Last Rendered: 2023-11-10</h4>
 
     
     
-<p><strong>Note: this guide assumes Keras &gt;= 2.13</strong></p>
 <div class="section level2">
 <h2 id="introduction">Introduction<a class="anchor" aria-label="anchor" href="#introduction"></a>
 </h2>
@@ -148,18 +147,22 @@ version.</li>
 <p>If you only have 10 seconds to read this guide, here’s what you need
 to know.</p>
 <p><strong>Saving a Keras model:</strong></p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" tabindex="-1"></a>model <span class="op">=</span> ...  <span class="co"># Get model (Sequential, Functional Model, or Model subclass)</span></span>
-<span id="cb1-2"><a href="#cb1-2" tabindex="-1"></a>model.save(<span class="st">'path/to/location.keras'</span>)  <span class="co"># The file needs to end with the .keras extension</span></span></code></pre></div>
+<div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># Get model (Sequential, Functional Model, or Model subclass)</span></span>
+<span><span class="va">model</span> <span class="op">&lt;-</span> <span class="va">...</span></span>
+<span></span>
+<span><span class="co"># The filename needs to end with the .keras extension</span></span>
+<span><span class="va">model</span> <span class="op">|&gt;</span> <span class="fu"><a href="../reference/save_model.html">save_model</a></span><span class="op">(</span><span class="st">'path/to/location.keras'</span><span class="op">)</span></span></code></pre></div>
 <p><strong>Loading the model back:</strong></p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" tabindex="-1"></a>model <span class="op">=</span> keras.models.load_model(<span class="st">'path/to/location.keras'</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">model</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/load_model.html">load_model</a></span><span class="op">(</span><span class="st">'path/to/location.keras'</span><span class="op">)</span></span></code></pre></div>
 <p>Now, let’s look at the details.</p>
 </div>
 <div class="section level2">
 <h2 id="setup">Setup<a class="anchor" aria-label="anchor" href="#setup"></a>
 </h2>
-<div class="sourceCode" id="cb3"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
-<span id="cb3-2"><a href="#cb3-2" tabindex="-1"></a><span class="im">import</span> keras_core <span class="im">as</span> keras</span>
-<span id="cb3-3"><a href="#cb3-3" tabindex="-1"></a><span class="im">from</span> keras_core <span class="im">import</span> ops</span></code></pre></div>
+<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https:/keras.posit.co/">keras3</a></span><span class="op">)</span></span></code></pre></div>
 </div>
 <div class="section level2">
 <h2 id="saving">Saving<a class="anchor" aria-label="anchor" href="#saving"></a>
@@ -177,38 +180,42 @@ training where you left)</li>
 <div class="section level4">
 <h4 id="apis">APIs<a class="anchor" aria-label="anchor" href="#apis"></a>
 </h4>
-<p>You can save a model with <code>model.save()</code> or
-<code>keras.models.save_model()</code> (which is equivalent). You can
-load it back with <code>keras.models.load_model()</code>.</p>
-<p>The only supported format in Keras Core is the “Keras v3” format,
-which uses the <code>.keras</code> extension.</p>
+<p>You can save a model with <code><a href="../reference/save_model.html">save_model()</a></code>. You can load it
+back with <code><a href="../reference/load_model.html">load_model()</a></code>.</p>
+<p>The only supported format in Keras 3 is the “Keras v3” format, which
+uses the <code>.keras</code> extension.</p>
 <p><strong>Example:</strong></p>
-<div class="sourceCode" id="cb4"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" tabindex="-1"></a><span class="kw">def</span> get_model():</span>
-<span id="cb4-2"><a href="#cb4-2" tabindex="-1"></a>    <span class="co"># Create a simple model.</span></span>
-<span id="cb4-3"><a href="#cb4-3" tabindex="-1"></a>    inputs <span class="op">=</span> keras.Input(shape<span class="op">=</span>(<span class="dv">32</span>,))</span>
-<span id="cb4-4"><a href="#cb4-4" tabindex="-1"></a>    outputs <span class="op">=</span> keras.layers.Dense(<span class="dv">1</span>)(inputs)</span>
-<span id="cb4-5"><a href="#cb4-5" tabindex="-1"></a>    model <span class="op">=</span> keras.Model(inputs, outputs)</span>
-<span id="cb4-6"><a href="#cb4-6" tabindex="-1"></a>    model.<span class="bu">compile</span>(optimizer<span class="op">=</span>keras.optimizers.Adam(), loss<span class="op">=</span><span class="st">"mean_squared_error"</span>)</span>
-<span id="cb4-7"><a href="#cb4-7" tabindex="-1"></a>    <span class="cf">return</span> model</span>
-<span id="cb4-8"><a href="#cb4-8" tabindex="-1"></a></span>
-<span id="cb4-9"><a href="#cb4-9" tabindex="-1"></a></span>
-<span id="cb4-10"><a href="#cb4-10" tabindex="-1"></a>model <span class="op">=</span> get_model()</span>
-<span id="cb4-11"><a href="#cb4-11" tabindex="-1"></a></span>
-<span id="cb4-12"><a href="#cb4-12" tabindex="-1"></a><span class="co"># Train the model.</span></span>
-<span id="cb4-13"><a href="#cb4-13" tabindex="-1"></a>test_input <span class="op">=</span> np.random.random((<span class="dv">128</span>, <span class="dv">32</span>))</span>
-<span id="cb4-14"><a href="#cb4-14" tabindex="-1"></a>test_target <span class="op">=</span> np.random.random((<span class="dv">128</span>, <span class="dv">1</span>))</span>
-<span id="cb4-15"><a href="#cb4-15" tabindex="-1"></a>model.fit(test_input, test_target)</span>
-<span id="cb4-16"><a href="#cb4-16" tabindex="-1"></a></span>
-<span id="cb4-17"><a href="#cb4-17" tabindex="-1"></a><span class="co"># Calling `save('my_model.keras')` creates a zip archive `my_model.keras`.</span></span>
-<span id="cb4-18"><a href="#cb4-18" tabindex="-1"></a>model.save(<span class="st">"my_model.keras"</span>)</span>
-<span id="cb4-19"><a href="#cb4-19" tabindex="-1"></a></span>
-<span id="cb4-20"><a href="#cb4-20" tabindex="-1"></a><span class="co"># It can be used to reconstruct the model identically.</span></span>
-<span id="cb4-21"><a href="#cb4-21" tabindex="-1"></a>reconstructed_model <span class="op">=</span> keras.models.load_model(<span class="st">"my_model.keras"</span>)</span>
-<span id="cb4-22"><a href="#cb4-22" tabindex="-1"></a></span>
-<span id="cb4-23"><a href="#cb4-23" tabindex="-1"></a><span class="co"># Let's check:</span></span>
-<span id="cb4-24"><a href="#cb4-24" tabindex="-1"></a>np.testing.assert_allclose(</span>
-<span id="cb4-25"><a href="#cb4-25" tabindex="-1"></a>    model.predict(test_input), reconstructed_model.predict(test_input)</span>
-<span id="cb4-26"><a href="#cb4-26" tabindex="-1"></a>)</span></code></pre></div>
+<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">get_model</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="op">)</span> <span class="op">{</span></span>
+<span>  <span class="co"># Create a simple model.</span></span>
+<span>  <span class="va">inputs</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/layer_input.html">layer_input</a></span><span class="op">(</span><span class="fu">shape</span><span class="op">(</span><span class="fl">32</span><span class="op">)</span><span class="op">)</span></span>
+<span>  <span class="va">outputs</span> <span class="op">&lt;-</span> <span class="va">inputs</span> <span class="op">|&gt;</span> <span class="fu"><a href="../reference/layer_dense.html">layer_dense</a></span><span class="op">(</span><span class="fl">1</span><span class="op">)</span></span>
+<span>  <span class="va">model</span> <span class="op">&lt;-</span>  <span class="fu"><a href="../reference/keras_model.html">keras_model</a></span><span class="op">(</span><span class="va">inputs</span>, <span class="va">outputs</span><span class="op">)</span></span>
+<span>  <span class="va">model</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://generics.r-lib.org/reference/compile.html" class="external-link">compile</a></span><span class="op">(</span>optimizer <span class="op">=</span> <span class="fu"><a href="../reference/optimizer_adam.html">optimizer_adam</a></span><span class="op">(</span><span class="op">)</span>, loss <span class="op">=</span> <span class="st">"mean_squared_error"</span><span class="op">)</span></span>
+<span>  <span class="va">model</span></span>
+<span><span class="op">}</span></span>
+<span></span>
+<span><span class="va">model</span> <span class="op">&lt;-</span> <span class="fu">get_model</span><span class="op">(</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Train the model.</span></span>
+<span><span class="va">test_input</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/random_uniform.html">random_uniform</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">128</span>, <span class="fl">32</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="va">test_target</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/random_uniform.html">random_uniform</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">128</span>, <span class="fl">1</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="va">model</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://generics.r-lib.org/reference/fit.html" class="external-link">fit</a></span><span class="op">(</span><span class="va">test_input</span>, <span class="va">test_target</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Calling `save('my_model.keras')` creates a zip archive `my_model.keras`.</span></span>
+<span><span class="va">model</span> <span class="op">|&gt;</span> <span class="fu"><a href="../reference/save_model.html">save_model</a></span><span class="op">(</span><span class="st">"my_model.keras"</span><span class="op">)</span></span></code></pre></div>
+<pre><code><span><span class="co">## Error: File 'my_model.keras' already exists (pass overwrite = TRUE to force save).</span></span></code></pre>
+<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># It can be used to reconstruct the model identically.</span></span>
+<span><span class="va">reconstructed_model</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/load_model.html">load_model</a></span><span class="op">(</span><span class="st">"my_model.keras"</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Let's check:</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/stopifnot.html" class="external-link">stopifnot</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/all.equal.html" class="external-link">all.equal</a></span><span class="op">(</span></span>
+<span>  <span class="va">model</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://rdrr.io/r/stats/predict.html" class="external-link">predict</a></span><span class="op">(</span><span class="va">test_input</span><span class="op">)</span>,</span>
+<span>  <span class="va">reconstructed_model</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://rdrr.io/r/stats/predict.html" class="external-link">predict</a></span><span class="op">(</span><span class="va">test_input</span><span class="op">)</span></span>
+<span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
+<pre><code><span><span class="co">## Error in eval(expr, envir, enclos): predict(model, test_input) and predict(reconstructed_model, test_input) are not equal:</span></span>
+<span><span class="co">##   Mean relative difference: 1.580108</span></span></code></pre>
 </div>
 <div class="section level3">
 <h3 id="custom-objects">Custom objects<a class="anchor" aria-label="anchor" href="#custom-objects"></a>
@@ -218,32 +225,35 @@ functions, and models in Keras saving and reloading.</p>
 <p>When saving a model that includes custom objects, such as a
 subclassed Layer, you <strong>must</strong> define a
 <code><a href="../reference/get_config.html">get_config()</a></code> method on the object class. If the arguments
-passed to the constructor (<code>__init__()</code> method) of the custom
-object aren’t Python objects (anything other than base types like ints,
-strings, etc.), then you <strong>must</strong> also explicitly
+passed to the constructor (<code>initialize()</code> method) of the
+custom object aren’t simple objects (anything other than types like
+ints, strings, etc.), then you <strong>must</strong> also explicitly
 deserialize these arguments in the <code><a href="../reference/get_config.html">from_config()</a></code> class
 method.</p>
 <p>Like this:</p>
-<div class="sourceCode" id="cb5"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" tabindex="-1"></a><span class="kw">class</span> CustomLayer(keras.layers.Layer):</span>
-<span id="cb5-2"><a href="#cb5-2" tabindex="-1"></a>    <span class="kw">def</span> <span class="fu">__init__</span>(<span class="va">self</span>, sublayer, <span class="op">**</span>kwargs):</span>
-<span id="cb5-3"><a href="#cb5-3" tabindex="-1"></a>        <span class="bu">super</span>().<span class="fu">__init__</span>(<span class="op">**</span>kwargs)</span>
-<span id="cb5-4"><a href="#cb5-4" tabindex="-1"></a>        <span class="va">self</span>.sublayer <span class="op">=</span> layer</span>
-<span id="cb5-5"><a href="#cb5-5" tabindex="-1"></a></span>
-<span id="cb5-6"><a href="#cb5-6" tabindex="-1"></a>    <span class="kw">def</span> call(<span class="va">self</span>, x):</span>
-<span id="cb5-7"><a href="#cb5-7" tabindex="-1"></a>        <span class="cf">return</span> <span class="va">self</span>.sublayer(x)</span>
-<span id="cb5-8"><a href="#cb5-8" tabindex="-1"></a></span>
-<span id="cb5-9"><a href="#cb5-9" tabindex="-1"></a>    <span class="kw">def</span> get_config(<span class="va">self</span>):</span>
-<span id="cb5-10"><a href="#cb5-10" tabindex="-1"></a>        base_config <span class="op">=</span> <span class="bu">super</span>().get_config()</span>
-<span id="cb5-11"><a href="#cb5-11" tabindex="-1"></a>        config <span class="op">=</span> {</span>
-<span id="cb5-12"><a href="#cb5-12" tabindex="-1"></a>            <span class="st">"sublayer"</span>: keras.saving.serialize_keras_object(<span class="va">self</span>.sublayer),</span>
-<span id="cb5-13"><a href="#cb5-13" tabindex="-1"></a>        }</span>
-<span id="cb5-14"><a href="#cb5-14" tabindex="-1"></a>        <span class="cf">return</span> {<span class="op">**</span>base_config, <span class="op">**</span>config}</span>
-<span id="cb5-15"><a href="#cb5-15" tabindex="-1"></a></span>
-<span id="cb5-16"><a href="#cb5-16" tabindex="-1"></a>    <span class="at">@classmethod</span></span>
-<span id="cb5-17"><a href="#cb5-17" tabindex="-1"></a>    <span class="kw">def</span> from_config(cls, config):</span>
-<span id="cb5-18"><a href="#cb5-18" tabindex="-1"></a>        sublayer_config <span class="op">=</span> config.pop(<span class="st">"sublayer"</span>)</span>
-<span id="cb5-19"><a href="#cb5-19" tabindex="-1"></a>        sublayer <span class="op">=</span> keras.saving.deserialize_keras_object(sublayer_config)</span>
-<span id="cb5-20"><a href="#cb5-20" tabindex="-1"></a>        <span class="cf">return</span> cls(sublayer, <span class="op">**</span>config)</span></code></pre></div>
+<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">layer_custom</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/Layer.html">Layer</a></span><span class="op">(</span></span>
+<span>  <span class="st">"CustomLayer"</span>,</span>
+<span>  initialize <span class="op">=</span> <span class="kw">function</span><span class="op">(</span><span class="va">sublayer</span>, <span class="va">...</span><span class="op">)</span> <span class="op">{</span></span>
+<span>    <span class="va">super</span><span class="op">$</span><span class="fu">initialize</span><span class="op">(</span><span class="va">...</span><span class="op">)</span></span>
+<span>    <span class="va">self</span><span class="op">$</span><span class="va">sublayer</span> <span class="op">&lt;-</span> <span class="va">layer</span></span>
+<span>  <span class="op">}</span>,</span>
+<span>  call <span class="op">=</span> <span class="kw">function</span><span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="op">{</span></span>
+<span>    <span class="va">self</span><span class="op">$</span><span class="fu">sublayer</span><span class="op">(</span><span class="va">x</span><span class="op">)</span></span>
+<span>  <span class="op">}</span>,</span>
+<span>  get_config <span class="op">=</span> <span class="kw">function</span><span class="op">(</span><span class="op">)</span> <span class="op">{</span></span>
+<span>    <span class="va">base_config</span> <span class="op">&lt;-</span> <span class="va">super</span><span class="op">$</span><span class="fu">get_config</span><span class="op">(</span><span class="op">)</span></span>
+<span>    <span class="va">config</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span></span>
+<span>      sublayer <span class="op">=</span> <span class="va">keras</span><span class="op">$</span><span class="va">saving</span><span class="op">$</span><span class="fu">serialize_keras_object</span><span class="op">(</span><span class="va">self</span><span class="op">$</span><span class="va">sublayer</span><span class="op">)</span></span>
+<span>    <span class="op">)</span></span>
+<span>    <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="va">base_config</span>, <span class="va">config</span><span class="op">)</span></span>
+<span>  <span class="op">}</span>,</span>
+<span>  from_config <span class="op">=</span> <span class="kw">function</span><span class="op">(</span><span class="va">cls</span>, <span class="va">config</span><span class="op">)</span> <span class="op">{</span></span>
+<span>    <span class="va">sublayer_config</span> <span class="op">&lt;-</span> <span class="va">config</span><span class="op">$</span><span class="va">sublayer</span></span>
+<span>    <span class="va">sublayer</span> <span class="op">&lt;-</span> <span class="va">keras</span><span class="op">$</span><span class="va">saving</span><span class="op">$</span><span class="fu">deserialize_keras_object</span><span class="op">(</span><span class="va">sublayer_config</span><span class="op">)</span></span>
+<span>    <span class="fu">cls</span><span class="op">(</span><span class="va">sublayer</span>, <span class="op">!</span><span class="op">!</span><span class="op">!</span><span class="va">config</span><span class="op">)</span></span>
+<span>  <span class="op">}</span></span>
+<span><span class="op">)</span></span></code></pre></div>
 <p>Please see the <a href="#config_methods">Defining the config methods
 section</a> for more details and examples.</p>
 <p>The saved <code>.keras</code> file is lightweight and does not store
@@ -260,92 +270,144 @@ objects used through one of the following methods:</p>
 <h4 id="registering-custom-objects-preferred">Registering custom objects (<strong>preferred</strong>)<a class="anchor" aria-label="anchor" href="#registering-custom-objects-preferred"></a>
 </h4>
 <p>This is the preferred method, as custom object registration greatly
-simplifies saving and loading code. Adding the
-<code>@keras.saving.register_keras_serializable</code> decorator to the
-class definition of a custom object registers the object globally in a
-master list, allowing Keras to recognize the object when loading the
-model.</p>
+simplifies saving and loading code. Calling
+<code>register_custom_object()</code> on a custom object registers the
+object globally in a master list, allowing Keras to recognize the object
+when loading the model.</p>
 <p>Let’s create a custom model involving both a custom layer and a
 custom activation function to demonstrate this.</p>
 <p><strong>Example:</strong></p>
-<div class="sourceCode" id="cb6"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" tabindex="-1"></a><span class="co"># Clear all previously registered custom objects</span></span>
-<span id="cb6-2"><a href="#cb6-2" tabindex="-1"></a>keras.saving.get_custom_objects().clear()</span>
-<span id="cb6-3"><a href="#cb6-3" tabindex="-1"></a></span>
-<span id="cb6-4"><a href="#cb6-4" tabindex="-1"></a></span>
-<span id="cb6-5"><a href="#cb6-5" tabindex="-1"></a><span class="co"># Upon registration, you can optionally specify a package or a name.</span></span>
-<span id="cb6-6"><a href="#cb6-6" tabindex="-1"></a><span class="co"># If left blank, the package defaults to `Custom` and the name defaults to</span></span>
-<span id="cb6-7"><a href="#cb6-7" tabindex="-1"></a><span class="co"># the class name.</span></span>
-<span id="cb6-8"><a href="#cb6-8" tabindex="-1"></a><span class="at">@keras.saving.register_keras_serializable</span>(package<span class="op">=</span><span class="st">"MyLayers"</span>)</span>
-<span id="cb6-9"><a href="#cb6-9" tabindex="-1"></a><span class="kw">class</span> CustomLayer(keras.layers.Layer):</span>
-<span id="cb6-10"><a href="#cb6-10" tabindex="-1"></a>    <span class="kw">def</span> <span class="fu">__init__</span>(<span class="va">self</span>, factor):</span>
-<span id="cb6-11"><a href="#cb6-11" tabindex="-1"></a>        <span class="bu">super</span>().<span class="fu">__init__</span>()</span>
-<span id="cb6-12"><a href="#cb6-12" tabindex="-1"></a>        <span class="va">self</span>.factor <span class="op">=</span> factor</span>
-<span id="cb6-13"><a href="#cb6-13" tabindex="-1"></a></span>
-<span id="cb6-14"><a href="#cb6-14" tabindex="-1"></a>    <span class="kw">def</span> call(<span class="va">self</span>, x):</span>
-<span id="cb6-15"><a href="#cb6-15" tabindex="-1"></a>        <span class="cf">return</span> x <span class="op">*</span> <span class="va">self</span>.factor</span>
-<span id="cb6-16"><a href="#cb6-16" tabindex="-1"></a></span>
-<span id="cb6-17"><a href="#cb6-17" tabindex="-1"></a>    <span class="kw">def</span> get_config(<span class="va">self</span>):</span>
-<span id="cb6-18"><a href="#cb6-18" tabindex="-1"></a>        <span class="cf">return</span> {<span class="st">"factor"</span>: <span class="va">self</span>.factor}</span>
-<span id="cb6-19"><a href="#cb6-19" tabindex="-1"></a></span>
-<span id="cb6-20"><a href="#cb6-20" tabindex="-1"></a></span>
-<span id="cb6-21"><a href="#cb6-21" tabindex="-1"></a><span class="at">@keras.saving.register_keras_serializable</span>(package<span class="op">=</span><span class="st">"my_package"</span>, name<span class="op">=</span><span class="st">"custom_fn"</span>)</span>
-<span id="cb6-22"><a href="#cb6-22" tabindex="-1"></a><span class="kw">def</span> custom_fn(x):</span>
-<span id="cb6-23"><a href="#cb6-23" tabindex="-1"></a>    <span class="cf">return</span> x<span class="op">**</span><span class="dv">2</span></span>
-<span id="cb6-24"><a href="#cb6-24" tabindex="-1"></a></span>
-<span id="cb6-25"><a href="#cb6-25" tabindex="-1"></a></span>
-<span id="cb6-26"><a href="#cb6-26" tabindex="-1"></a><span class="co"># Create the model.</span></span>
-<span id="cb6-27"><a href="#cb6-27" tabindex="-1"></a><span class="kw">def</span> get_model():</span>
-<span id="cb6-28"><a href="#cb6-28" tabindex="-1"></a>    inputs <span class="op">=</span> keras.Input(shape<span class="op">=</span>(<span class="dv">4</span>,))</span>
-<span id="cb6-29"><a href="#cb6-29" tabindex="-1"></a>    mid <span class="op">=</span> CustomLayer(<span class="fl">0.5</span>)(inputs)</span>
-<span id="cb6-30"><a href="#cb6-30" tabindex="-1"></a>    outputs <span class="op">=</span> keras.layers.Dense(<span class="dv">1</span>, activation<span class="op">=</span>custom_fn)(mid)</span>
-<span id="cb6-31"><a href="#cb6-31" tabindex="-1"></a>    model <span class="op">=</span> keras.Model(inputs, outputs)</span>
-<span id="cb6-32"><a href="#cb6-32" tabindex="-1"></a>    model.<span class="bu">compile</span>(optimizer<span class="op">=</span><span class="st">"rmsprop"</span>, loss<span class="op">=</span><span class="st">"mean_squared_error"</span>)</span>
-<span id="cb6-33"><a href="#cb6-33" tabindex="-1"></a>    <span class="cf">return</span> model</span>
-<span id="cb6-34"><a href="#cb6-34" tabindex="-1"></a></span>
-<span id="cb6-35"><a href="#cb6-35" tabindex="-1"></a></span>
-<span id="cb6-36"><a href="#cb6-36" tabindex="-1"></a><span class="co"># Train the model.</span></span>
-<span id="cb6-37"><a href="#cb6-37" tabindex="-1"></a><span class="kw">def</span> train_model(model):</span>
-<span id="cb6-38"><a href="#cb6-38" tabindex="-1"></a>    <span class="bu">input</span> <span class="op">=</span> np.random.random((<span class="dv">4</span>, <span class="dv">4</span>))</span>
-<span id="cb6-39"><a href="#cb6-39" tabindex="-1"></a>    target <span class="op">=</span> np.random.random((<span class="dv">4</span>, <span class="dv">1</span>))</span>
-<span id="cb6-40"><a href="#cb6-40" tabindex="-1"></a>    model.fit(<span class="bu">input</span>, target)</span>
-<span id="cb6-41"><a href="#cb6-41" tabindex="-1"></a>    <span class="cf">return</span> model</span>
-<span id="cb6-42"><a href="#cb6-42" tabindex="-1"></a></span>
-<span id="cb6-43"><a href="#cb6-43" tabindex="-1"></a></span>
-<span id="cb6-44"><a href="#cb6-44" tabindex="-1"></a>test_input <span class="op">=</span> np.random.random((<span class="dv">4</span>, <span class="dv">4</span>))</span>
-<span id="cb6-45"><a href="#cb6-45" tabindex="-1"></a>test_target <span class="op">=</span> np.random.random((<span class="dv">4</span>, <span class="dv">1</span>))</span>
-<span id="cb6-46"><a href="#cb6-46" tabindex="-1"></a></span>
-<span id="cb6-47"><a href="#cb6-47" tabindex="-1"></a>model <span class="op">=</span> get_model()</span>
-<span id="cb6-48"><a href="#cb6-48" tabindex="-1"></a>model <span class="op">=</span> train_model(model)</span>
-<span id="cb6-49"><a href="#cb6-49" tabindex="-1"></a>model.save(<span class="st">"custom_model.keras"</span>)</span>
-<span id="cb6-50"><a href="#cb6-50" tabindex="-1"></a></span>
-<span id="cb6-51"><a href="#cb6-51" tabindex="-1"></a><span class="co"># Now, we can simply load without worrying about our custom objects.</span></span>
-<span id="cb6-52"><a href="#cb6-52" tabindex="-1"></a>reconstructed_model <span class="op">=</span> keras.models.load_model(<span class="st">"custom_model.keras"</span>)</span>
-<span id="cb6-53"><a href="#cb6-53" tabindex="-1"></a></span>
-<span id="cb6-54"><a href="#cb6-54" tabindex="-1"></a><span class="co"># Let's check:</span></span>
-<span id="cb6-55"><a href="#cb6-55" tabindex="-1"></a>np.testing.assert_allclose(</span>
-<span id="cb6-56"><a href="#cb6-56" tabindex="-1"></a>    model.predict(test_input), reconstructed_model.predict(test_input)</span>
-<span id="cb6-57"><a href="#cb6-57" tabindex="-1"></a>)</span></code></pre></div>
+<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># Clear all previously registered custom objects</span></span>
+<span><span class="fu">clear_registered_custom_objects</span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
+<pre><code><span><span class="co">## Error in clear_registered_custom_objects(): could not find function "clear_registered_custom_objects"</span></span></code></pre>
+<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">layer_custom</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/Layer.html">Layer</a></span><span class="op">(</span></span>
+<span>  <span class="st">"CustomLayer"</span>,</span>
+<span>  initialize <span class="op">=</span> <span class="kw">function</span><span class="op">(</span><span class="va">self</span>, <span class="va">factor</span><span class="op">)</span> <span class="op">{</span></span>
+<span>    <span class="va">super</span><span class="op">$</span><span class="fu">initialize</span><span class="op">(</span><span class="op">)</span></span>
+<span>    <span class="va">self</span><span class="op">$</span><span class="va">factor</span> <span class="op">=</span> <span class="va">factor</span></span>
+<span>  <span class="op">}</span>,</span>
+<span></span>
+<span>  call <span class="op">=</span> <span class="kw">function</span><span class="op">(</span><span class="va">self</span>, <span class="va">x</span><span class="op">)</span> <span class="op">{</span></span>
+<span>    <span class="va">x</span> <span class="op">*</span> <span class="va">self</span><span class="op">$</span><span class="va">factor</span></span>
+<span>  <span class="op">}</span>,</span>
+<span></span>
+<span>  get_config <span class="op">=</span> <span class="kw">function</span><span class="op">(</span><span class="va">self</span><span class="op">)</span> <span class="op">{</span></span>
+<span>    <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>factor <span class="op">=</span> <span class="va">self</span><span class="op">$</span><span class="va">factor</span><span class="op">)</span></span>
+<span>  <span class="op">}</span></span>
+<span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Upon registration, you can optionally specify a package or a name.</span></span>
+<span><span class="co"># If left blank, the package defaults to "Custom" and the name defaults to</span></span>
+<span><span class="co"># the class name.</span></span>
+<span><span class="fu">register_custom_object</span><span class="op">(</span><span class="va">layer_custom</span>, package <span class="op">=</span> <span class="st">"MyLayers"</span><span class="op">)</span></span></code></pre></div>
+<pre><code><span><span class="co">## Registered S3 methods overwritten by 'keras':</span></span>
+<span><span class="co">##   method                                                     from</span></span>
+<span><span class="co">##   $.py_R6ClassGenerator                                      keras3</span></span>
+<span><span class="co">##   +.keras.backend.common.keras_tensor.KerasTensor            keras3</span></span>
+<span><span class="co">##   ==.keras.backend.common.keras_tensor.KerasTensor           keras3</span></span>
+<span><span class="co">##   [.keras_shape                                              keras3</span></span>
+<span><span class="co">##   as.array.keras.backend.common.variables.KerasVariable      keras3</span></span>
+<span><span class="co">##   as.data.frame.keras_training_history                       keras3</span></span>
+<span><span class="co">##   as.double.keras.backend.common.variables.KerasVariable     keras3</span></span>
+<span><span class="co">##   as.integer.keras.backend.common.variables.KerasVariable    keras3</span></span>
+<span><span class="co">##   as.integer.keras_shape                                     keras3</span></span>
+<span><span class="co">##   as.list.keras_shape                                        keras3</span></span>
+<span><span class="co">##   as.numeric.keras.backend.common.variables.KerasVariable    keras3</span></span>
+<span><span class="co">##   compile.keras.models.model.Model                           keras3</span></span>
+<span><span class="co">##   destructure.keras_shape                                    keras3</span></span>
+<span><span class="co">##   evaluate.keras.models.model.Model                          keras3</span></span>
+<span><span class="co">##   fit.keras.models.model.Model                               keras3</span></span>
+<span><span class="co">##   format.keras.models.model.Model                            keras3</span></span>
+<span><span class="co">##   format.keras_shape                                         keras3</span></span>
+<span><span class="co">##   plot.keras.models.model.Model                              keras3</span></span>
+<span><span class="co">##   plot.keras_training_history                                keras3</span></span>
+<span><span class="co">##   predict.keras.models.model.Model                           keras3</span></span>
+<span><span class="co">##   print.keras.models.model.Model                             keras3</span></span>
+<span><span class="co">##   print.keras_shape                                          keras3</span></span>
+<span><span class="co">##   print.keras_training_history                               keras3</span></span>
+<span><span class="co">##   print.kerastools.model.RModel                              keras3</span></span>
+<span><span class="co">##   print.py_R6ClassGenerator                                  keras3</span></span>
+<span><span class="co">##   py_str.keras.models.model.Model                            keras3</span></span>
+<span><span class="co">##   py_to_r.keras.utils.generic_utils.SharedObjectConfig       keras3</span></span>
+<span><span class="co">##   py_to_r.tensorflow.python.ops.gen_linalg_ops.Qr            keras3</span></span>
+<span><span class="co">##   py_to_r.tensorflow.python.ops.gen_nn_ops.TopKV2            keras3</span></span>
+<span><span class="co">##   py_to_r_wrapper.keras.initializers.initializer.Initializer keras3</span></span>
+<span><span class="co">##   py_to_r_wrapper.keras.layers.layer.Layer                   keras3</span></span>
+<span><span class="co">##   py_to_r_wrapper.keras.losses.loss.Loss                     keras3</span></span>
+<span><span class="co">##   py_to_r_wrapper.keras.models.model.Model                   keras3</span></span>
+<span><span class="co">##   py_to_r_wrapper.kerastools.model.RModel                    keras3</span></span>
+<span><span class="co">##   r_to_py.R6ClassGenerator                                   keras3</span></span>
+<span><span class="co">##   r_to_py.keras_layer_wrapper                                keras3</span></span>
+<span><span class="co">##   r_to_py.keras_shape                                        keras3</span></span>
+<span><span class="co">##   summary.keras.models.model.Model                           keras3</span></span>
+<span><span class="co">##   summary.kerastools.model.RModel                            keras3</span></span></code></pre>
+<div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">custom_fn</span> <span class="op">&lt;-</span> <span class="fu">keras3</span><span class="fu">:::</span><span class="fu">py_func2</span><span class="op">(</span><span class="kw">function</span><span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="va">x</span><span class="op">^</span><span class="fl">2</span>, name <span class="op">=</span> <span class="st">"custom_fn"</span>, convert <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu">register_custom_object</span><span class="op">(</span><span class="va">custom_fn</span>, name<span class="op">=</span><span class="st">"custom_fn"</span>, package<span class="op">=</span><span class="st">"my_package"</span><span class="op">)</span></span>
+<span></span>
+<span></span>
+<span><span class="co"># Create the model.</span></span>
+<span><span class="va">get_model</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="op">)</span> <span class="op">{</span></span>
+<span>  <span class="va">inputs</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/layer_input.html">layer_input</a></span><span class="op">(</span><span class="fu">shape</span><span class="op">(</span><span class="fl">4</span><span class="op">)</span><span class="op">)</span></span>
+<span>  <span class="va">mid</span> <span class="op">&lt;-</span> <span class="va">inputs</span> <span class="op">|&gt;</span> <span class="fu">layer_custom</span><span class="op">(</span><span class="fl">0.5</span><span class="op">)</span></span>
+<span>  <span class="va">outputs</span> <span class="op">&lt;-</span> <span class="va">mid</span> <span class="op">|&gt;</span> <span class="fu"><a href="../reference/layer_dense.html">layer_dense</a></span><span class="op">(</span><span class="fl">1</span>, activation <span class="op">=</span> <span class="va">custom_fn</span><span class="op">)</span></span>
+<span>  <span class="va">model</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/keras_model.html">keras_model</a></span><span class="op">(</span><span class="va">inputs</span>, <span class="va">outputs</span><span class="op">)</span></span>
+<span>  <span class="va">model</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://generics.r-lib.org/reference/compile.html" class="external-link">compile</a></span><span class="op">(</span>optimizer <span class="op">=</span> <span class="st">"rmsprop"</span>, loss <span class="op">=</span> <span class="st">"mean_squared_error"</span><span class="op">)</span></span>
+<span>  <span class="va">model</span></span>
+<span><span class="op">}</span></span>
+<span></span>
+<span></span>
+<span><span class="co"># Train the model.</span></span>
+<span><span class="va">train_model</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">model</span><span class="op">)</span> <span class="op">{</span></span>
+<span>  <span class="va">input</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/random_uniform.html">random_uniform</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">4</span>, <span class="fl">4</span><span class="op">)</span><span class="op">)</span></span>
+<span>  <span class="va">target</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/random_uniform.html">random_uniform</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">4</span>, <span class="fl">1</span><span class="op">)</span><span class="op">)</span></span>
+<span>  <span class="va">model</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://generics.r-lib.org/reference/fit.html" class="external-link">fit</a></span><span class="op">(</span><span class="va">input</span>, <span class="va">target</span>, verbose <span class="op">=</span> <span class="cn">FALSE</span>, epochs <span class="op">=</span> <span class="fl">1</span><span class="op">)</span></span>
+<span>  <span class="va">model</span></span>
+<span><span class="op">}</span></span>
+<span></span>
+<span><span class="va">test_input</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/random_uniform.html">random_uniform</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">4</span>, <span class="fl">4</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="va">test_target</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/random_uniform.html">random_uniform</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">4</span>, <span class="fl">1</span><span class="op">)</span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">model</span> <span class="op">&lt;-</span> <span class="fu">get_model</span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span> <span class="fu">train_model</span><span class="op">(</span><span class="op">)</span></span>
+<span><span class="va">model</span> <span class="op">|&gt;</span> <span class="fu"><a href="../reference/save_model.html">save_model</a></span><span class="op">(</span><span class="st">"custom_model.keras"</span>, overwrite <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Now, we can simply load without worrying about our custom objects.</span></span>
+<span><span class="va">reconstructed_model</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/load_model.html">load_model</a></span><span class="op">(</span><span class="st">"custom_model.keras"</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># model$get_config()$layers[[3]]$config$activation -&gt; z</span></span>
+<span><span class="co"># keras$saving$deserialize_keras_object(z)</span></span>
+<span></span>
+<span><span class="co"># Let's check:</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/stopifnot.html" class="external-link">stopifnot</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/all.equal.html" class="external-link">all.equal</a></span><span class="op">(</span></span>
+<span>  <span class="va">model</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://rdrr.io/r/stats/predict.html" class="external-link">predict</a></span><span class="op">(</span><span class="va">test_input</span>, verbose <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span>,</span>
+<span>  <span class="va">reconstructed_model</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://rdrr.io/r/stats/predict.html" class="external-link">predict</a></span><span class="op">(</span><span class="va">test_input</span>, verbose <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span>
+<span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 </div>
 <div class="section level4">
 <h4 id="passing-custom-objects-to-load_model">Passing custom objects to <code>load_model()</code><a class="anchor" aria-label="anchor" href="#passing-custom-objects-to-load_model"></a>
 </h4>
-<div class="sourceCode" id="cb7"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" tabindex="-1"></a>model <span class="op">=</span> get_model()</span>
-<span id="cb7-2"><a href="#cb7-2" tabindex="-1"></a>model <span class="op">=</span> train_model(model)</span>
-<span id="cb7-3"><a href="#cb7-3" tabindex="-1"></a></span>
-<span id="cb7-4"><a href="#cb7-4" tabindex="-1"></a><span class="co"># Calling `save('my_model.keras')` creates a zip archive `my_model.keras`.</span></span>
-<span id="cb7-5"><a href="#cb7-5" tabindex="-1"></a>model.save(<span class="st">"custom_model.keras"</span>)</span>
-<span id="cb7-6"><a href="#cb7-6" tabindex="-1"></a></span>
-<span id="cb7-7"><a href="#cb7-7" tabindex="-1"></a><span class="co"># Upon loading, pass a dict containing the custom objects used in the</span></span>
-<span id="cb7-8"><a href="#cb7-8" tabindex="-1"></a><span class="co"># `custom_objects` argument of `keras.models.load_model()`.</span></span>
-<span id="cb7-9"><a href="#cb7-9" tabindex="-1"></a>reconstructed_model <span class="op">=</span> keras.models.load_model(</span>
-<span id="cb7-10"><a href="#cb7-10" tabindex="-1"></a>    <span class="st">"custom_model.keras"</span>,</span>
-<span id="cb7-11"><a href="#cb7-11" tabindex="-1"></a>    custom_objects<span class="op">=</span>{<span class="st">"CustomLayer"</span>: CustomLayer, <span class="st">"custom_fn"</span>: custom_fn},</span>
-<span id="cb7-12"><a href="#cb7-12" tabindex="-1"></a>)</span>
-<span id="cb7-13"><a href="#cb7-13" tabindex="-1"></a></span>
-<span id="cb7-14"><a href="#cb7-14" tabindex="-1"></a><span class="co"># Let's check:</span></span>
-<span id="cb7-15"><a href="#cb7-15" tabindex="-1"></a>np.testing.assert_allclose(</span>
-<span id="cb7-16"><a href="#cb7-16" tabindex="-1"></a>    model.predict(test_input), reconstructed_model.predict(test_input)</span>
-<span id="cb7-17"><a href="#cb7-17" tabindex="-1"></a>)</span></code></pre></div>
+<div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">model</span> <span class="op">&lt;-</span> <span class="fu">get_model</span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span> <span class="fu">train_model</span><span class="op">(</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Calling `save_model('my_model.keras')` creates a zip archive `my_model.keras`.</span></span>
+<span><span class="va">model</span> <span class="op">|&gt;</span> <span class="fu"><a href="../reference/save_model.html">save_model</a></span><span class="op">(</span><span class="st">"custom_model.keras"</span>, overwrite <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Upon loading, pass a named list containing the custom objects used in the</span></span>
+<span><span class="co"># `custom_objects` argument of `load_model()`.</span></span>
+<span><span class="va">reconstructed_model</span> <span class="op">&lt;-</span>  <span class="fu"><a href="../reference/load_model.html">load_model</a></span><span class="op">(</span></span>
+<span>  <span class="st">"custom_model.keras"</span>,</span>
+<span>  custom_objects <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>CustomLayer <span class="op">=</span> <span class="va">layer_custom</span>,</span>
+<span>                        custom_fn <span class="op">=</span> <span class="va">custom_fn</span><span class="op">)</span>,</span>
+<span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Let's check:</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/stopifnot.html" class="external-link">stopifnot</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/all.equal.html" class="external-link">all.equal</a></span><span class="op">(</span></span>
+<span>  <span class="va">model</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://rdrr.io/r/stats/predict.html" class="external-link">predict</a></span><span class="op">(</span><span class="va">test_input</span>, verbose <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span>,</span>
+<span>  <span class="va">reconstructed_model</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://rdrr.io/r/stats/predict.html" class="external-link">predict</a></span><span class="op">(</span><span class="va">test_input</span>, verbose <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span>
+<span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 </div>
 <div class="section level4">
 <h4 id="using-a-custom-object-scope">Using a custom object scope<a class="anchor" aria-label="anchor" href="#using-a-custom-object-scope"></a>
@@ -354,21 +416,23 @@ custom activation function to demonstrate this.</p>
 custom objects passed to the scope argument. Therefore, loading the
 model within the scope will allow the loading of our custom objects.</p>
 <p><strong>Example:</strong></p>
-<div class="sourceCode" id="cb8"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" tabindex="-1"></a>model <span class="op">=</span> get_model()</span>
-<span id="cb8-2"><a href="#cb8-2" tabindex="-1"></a>model <span class="op">=</span> train_model(model)</span>
-<span id="cb8-3"><a href="#cb8-3" tabindex="-1"></a>model.save(<span class="st">"custom_model.keras"</span>)</span>
-<span id="cb8-4"><a href="#cb8-4" tabindex="-1"></a></span>
-<span id="cb8-5"><a href="#cb8-5" tabindex="-1"></a><span class="co"># Pass the custom objects dictionary to a custom object scope and place</span></span>
-<span id="cb8-6"><a href="#cb8-6" tabindex="-1"></a><span class="co"># the `keras.models.load_model()` call within the scope.</span></span>
-<span id="cb8-7"><a href="#cb8-7" tabindex="-1"></a>custom_objects <span class="op">=</span> {<span class="st">"CustomLayer"</span>: CustomLayer, <span class="st">"custom_fn"</span>: custom_fn}</span>
-<span id="cb8-8"><a href="#cb8-8" tabindex="-1"></a></span>
-<span id="cb8-9"><a href="#cb8-9" tabindex="-1"></a><span class="cf">with</span> keras.saving.custom_object_scope(custom_objects):</span>
-<span id="cb8-10"><a href="#cb8-10" tabindex="-1"></a>    reconstructed_model <span class="op">=</span> keras.models.load_model(<span class="st">"custom_model.keras"</span>)</span>
-<span id="cb8-11"><a href="#cb8-11" tabindex="-1"></a></span>
-<span id="cb8-12"><a href="#cb8-12" tabindex="-1"></a><span class="co"># Let's check:</span></span>
-<span id="cb8-13"><a href="#cb8-13" tabindex="-1"></a>np.testing.assert_allclose(</span>
-<span id="cb8-14"><a href="#cb8-14" tabindex="-1"></a>    model.predict(test_input), reconstructed_model.predict(test_input)</span>
-<span id="cb8-15"><a href="#cb8-15" tabindex="-1"></a>)</span></code></pre></div>
+<div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">model</span> <span class="op">&lt;-</span> <span class="fu">get_model</span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span> <span class="fu">train_model</span><span class="op">(</span><span class="op">)</span></span>
+<span><span class="va">model</span> <span class="op">|&gt;</span> <span class="fu"><a href="../reference/save_model.html">save_model</a></span><span class="op">(</span><span class="st">"custom_model.keras"</span>, overwrite <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Pass the custom objects dictionary to a custom object scope and place</span></span>
+<span><span class="co"># the `keras.models.load_model()` call within the scope.</span></span>
+<span><span class="va">custom_objects</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>CustomLayer <span class="op">=</span> <span class="va">layer_custom</span>, custom_fn <span class="op">=</span> <span class="va">custom_fn</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu"><a href="../reference/with_custom_object_scope.html">with_custom_object_scope</a></span><span class="op">(</span><span class="va">custom_objects</span>, <span class="op">{</span></span>
+<span>  <span class="va">reconstructed_model</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/load_model.html">load_model</a></span><span class="op">(</span><span class="st">"custom_model.keras"</span><span class="op">)</span></span>
+<span><span class="op">}</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Let's check:</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/stopifnot.html" class="external-link">stopifnot</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/all.equal.html" class="external-link">all.equal</a></span><span class="op">(</span></span>
+<span>  <span class="va">model</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://rdrr.io/r/stats/predict.html" class="external-link">predict</a></span><span class="op">(</span><span class="va">test_input</span>, verbose <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span>,</span>
+<span>  <span class="va">reconstructed_model</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://rdrr.io/r/stats/predict.html" class="external-link">predict</a></span><span class="op">(</span><span class="va">test_input</span>, verbose <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span>
+<span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 </div>
 </div>
 <div class="section level3">
@@ -385,8 +449,8 @@ freshly initialized state (no weights or compilation information).</p>
 <p>The following serialization APIs are available:</p>
 <ul>
 <li>
-<code>keras.models.clone_model(model)</code>: make a (randomly
-initialized) copy of a model.</li>
+<code>clone_model(model)</code>: make a (randomly initialized) copy
+of a model.</li>
 <li>
 <code><a href="../reference/get_config.html">get_config()</a></code> and <code>cls.from_config()</code>:
 retrieve the configuration of a layer or model, and recreate a model
@@ -407,69 +471,84 @@ object instance from its configuration.</li>
 <h4 id="in-memory-model-cloning">In-memory model cloning<a class="anchor" aria-label="anchor" href="#in-memory-model-cloning"></a>
 </h4>
 <p>You can do in-memory cloning of a model via
-<code>keras.models.clone_model()</code>. This is equivalent to getting
-the config then recreating the model from its config (so it does not
-preserve compilation information or layer weights values).</p>
+<code><a href="../reference/clone_model.html">clone_model()</a></code>. This is equivalent to getting the config
+then recreating the model from its config (so it does not preserve
+compilation information or layer weights values).</p>
 <p><strong>Example:</strong></p>
-<div class="sourceCode" id="cb9"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" tabindex="-1"></a>new_model <span class="op">=</span> keras.models.clone_model(model)</span></code></pre></div>
+<div class="sourceCode" id="cb16"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">new_model</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/clone_model.html">clone_model</a></span><span class="op">(</span><span class="va">model</span><span class="op">)</span></span></code></pre></div>
 </div>
 <div class="section level4">
 <h4 id="get_config-and-from_config">
 <code>get_config()</code> and <code>from_config()</code><a class="anchor" aria-label="anchor" href="#get_config-and-from_config"></a>
 </h4>
-<p>Calling <code>model.get_config()</code> or
-<code>layer.get_config()</code> will return a Python dict containing the
+<p>Calling <code>get_config(model)</code> or
+<code>get_config(layer)</code> will return a named list containing the
 configuration of the model or layer, respectively. You should define
 <code><a href="../reference/get_config.html">get_config()</a></code> to contain arguments needed for the
-<code>__init__()</code> method of the model or layer. At loading time,
+<code>initialize()</code> method of the model or layer. At loading time,
 the <code>from_config(config)</code> method will then call
-<code>__init__()</code> with these arguments to reconstruct the model or
-layer.</p>
+<code>initialize()</code> with these arguments to reconstruct the model
+or layer.</p>
 <p><strong>Layer example:</strong></p>
-<div class="sourceCode" id="cb10"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" tabindex="-1"></a>layer <span class="op">=</span> keras.layers.Dense(<span class="dv">3</span>, activation<span class="op">=</span><span class="st">"relu"</span>)</span>
-<span id="cb10-2"><a href="#cb10-2" tabindex="-1"></a>layer_config <span class="op">=</span> layer.get_config()</span>
-<span id="cb10-3"><a href="#cb10-3" tabindex="-1"></a><span class="bu">print</span>(layer_config)</span></code></pre></div>
+<div class="sourceCode" id="cb17"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">layer</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/layer_dense.html">layer_dense</a></span><span class="op">(</span>, <span class="fl">3</span>, activation<span class="op">=</span><span class="st">"relu"</span><span class="op">)</span></span>
+<span><span class="va">layer_config</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/get_config.html">get_config</a></span><span class="op">(</span><span class="va">layer</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/utils/str.html" class="external-link">str</a></span><span class="op">(</span><span class="va">layer_config</span><span class="op">)</span></span></code></pre></div>
+<pre><code><span><span class="co">## Dict (12 items)</span></span></code></pre>
 <p>Now let’s reconstruct the layer using the <code><a href="../reference/get_config.html">from_config()</a></code>
 method:</p>
-<div class="sourceCode" id="cb11"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" tabindex="-1"></a>new_layer <span class="op">=</span> keras.layers.Dense.from_config(layer_config)</span></code></pre></div>
+<div class="sourceCode" id="cb19"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">new_layer</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/get_config.html">from_config</a></span><span class="op">(</span><span class="va">layer_config</span><span class="op">)</span></span></code></pre></div>
 <p><strong>Sequential model example:</strong></p>
-<div class="sourceCode" id="cb12"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" tabindex="-1"></a>model <span class="op">=</span> keras.Sequential([keras.Input((<span class="dv">32</span>,)), keras.layers.Dense(<span class="dv">1</span>)])</span>
-<span id="cb12-2"><a href="#cb12-2" tabindex="-1"></a>config <span class="op">=</span> model.get_config()</span>
-<span id="cb12-3"><a href="#cb12-3" tabindex="-1"></a>new_model <span class="op">=</span> keras.Sequential.from_config(config)</span></code></pre></div>
+<div class="sourceCode" id="cb20"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">model</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/keras_model_sequential.html">keras_model_sequential</a></span><span class="op">(</span>input_shape <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">32</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu"><a href="../reference/layer_dense.html">layer_dense</a></span><span class="op">(</span><span class="fl">1</span><span class="op">)</span></span>
+<span><span class="va">config</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/get_config.html">get_config</a></span><span class="op">(</span><span class="va">model</span><span class="op">)</span></span>
+<span><span class="va">new_model</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/get_config.html">from_config</a></span><span class="op">(</span><span class="va">config</span><span class="op">)</span></span></code></pre></div>
 <p><strong>Functional model example:</strong></p>
-<div class="sourceCode" id="cb13"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" tabindex="-1"></a>inputs <span class="op">=</span> keras.Input((<span class="dv">32</span>,))</span>
-<span id="cb13-2"><a href="#cb13-2" tabindex="-1"></a>outputs <span class="op">=</span> keras.layers.Dense(<span class="dv">1</span>)(inputs)</span>
-<span id="cb13-3"><a href="#cb13-3" tabindex="-1"></a>model <span class="op">=</span> keras.Model(inputs, outputs)</span>
-<span id="cb13-4"><a href="#cb13-4" tabindex="-1"></a>config <span class="op">=</span> model.get_config()</span>
-<span id="cb13-5"><a href="#cb13-5" tabindex="-1"></a>new_model <span class="op">=</span> keras.Model.from_config(config)</span></code></pre></div>
+<div class="sourceCode" id="cb21"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">inputs</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/layer_input.html">layer_input</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">32</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="va">outputs</span> <span class="op">&lt;-</span> <span class="va">inputs</span> <span class="op">|&gt;</span> <span class="fu"><a href="../reference/layer_dense.html">layer_dense</a></span><span class="op">(</span><span class="fl">1</span><span class="op">)</span></span>
+<span><span class="va">model</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/keras_model.html">keras_model</a></span><span class="op">(</span><span class="va">inputs</span>, <span class="va">outputs</span><span class="op">)</span></span>
+<span><span class="va">config</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/get_config.html">get_config</a></span><span class="op">(</span><span class="va">model</span><span class="op">)</span></span>
+<span><span class="va">new_model</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/get_config.html">from_config</a></span><span class="op">(</span><span class="va">config</span><span class="op">)</span></span></code></pre></div>
 </div>
 <div class="section level4">
-<h4 id="to_json-and-keras-models-model_from_json">
-<code>to_json()</code> and
-<code>keras.models.model_from_json()</code><a class="anchor" aria-label="anchor" href="#to_json-and-keras-models-model_from_json"></a>
+<h4 id="save_model_config-and-load_model_config">
+<code>save_model_config()</code> and
+<code>load_model_config()</code><a class="anchor" aria-label="anchor" href="#save_model_config-and-load_model_config"></a>
 </h4>
 <p>This is similar to <code>get_config</code> /
-<code>from_config</code>, except it turns the model into a JSON string,
+<code>from_config</code>, except it turns the model into a JSON file,
 which can then be loaded without the original model class. It is also
 specific to models, it isn’t meant for layers.</p>
 <p><strong>Example:</strong></p>
-<div class="sourceCode" id="cb14"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" tabindex="-1"></a>model <span class="op">=</span> keras.Sequential([keras.Input((<span class="dv">32</span>,)), keras.layers.Dense(<span class="dv">1</span>)])</span>
-<span id="cb14-2"><a href="#cb14-2" tabindex="-1"></a>json_config <span class="op">=</span> model.to_json()</span>
-<span id="cb14-3"><a href="#cb14-3" tabindex="-1"></a>new_model <span class="op">=</span> keras.models.model_from_json(json_config)</span></code></pre></div>
+<div class="sourceCode" id="cb22"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">model</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/keras_model_sequential.html">keras_model_sequential</a></span><span class="op">(</span>input_shape <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">32</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu"><a href="../reference/layer_dense.html">layer_dense</a></span><span class="op">(</span><span class="fl">1</span><span class="op">)</span></span>
+<span><span class="fu"><a href="../reference/save_model_config.html">save_model_config</a></span><span class="op">(</span><span class="va">model</span>, <span class="st">"model_config.json"</span><span class="op">)</span></span>
+<span><span class="va">new_model</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/save_model_config.html">load_model_config</a></span><span class="op">(</span><span class="st">"model_config.json"</span><span class="op">)</span></span></code></pre></div>
+<div class="sourceCode" id="cb23"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/unlink.html" class="external-link">unlink</a></span><span class="op">(</span><span class="st">"model_config.json"</span><span class="op">)</span></span></code></pre></div>
 </div>
 <div class="section level4">
 <h4 id="arbitrary-object-serialization-and-deserialization">Arbitrary object serialization and deserialization<a class="anchor" aria-label="anchor" href="#arbitrary-object-serialization-and-deserialization"></a>
 </h4>
-<p>The <code>keras.saving.serialize_keras_object()</code> and
-<code>keras.saving.deserialize_keras_object()</code> APIs are
-general-purpose APIs that can be used to serialize or deserialize any
-Keras object and any custom object. It is at the foundation of saving
-model architecture and is behind all
-<code><a href="https://rdrr.io/r/base/serialize.html" class="external-link">serialize()</a></code>/<code>deserialize()</code> calls in keras.</p>
+<p>The <code><a href="../reference/serialize_keras_object.html">serialize_keras_object()</a></code> and
+<code><a href="../reference/deserialize_keras_object.html">deserialize_keras_object()</a></code> APIs are general-purpose APIs
+that can be used to serialize or deserialize any Keras object and any
+custom object. It is at the foundation of saving model architecture and
+is behind all <code><a href="https://rdrr.io/r/base/serialize.html" class="external-link">serialize()</a></code>/<code>deserialize()</code> calls
+in keras.</p>
 <p><strong>Example</strong>:</p>
-<div class="sourceCode" id="cb15"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" tabindex="-1"></a>my_reg <span class="op">=</span> keras.regularizers.L1(<span class="fl">0.005</span>)</span>
-<span id="cb15-2"><a href="#cb15-2" tabindex="-1"></a>config <span class="op">=</span> keras.saving.serialize_keras_object(my_reg)</span>
-<span id="cb15-3"><a href="#cb15-3" tabindex="-1"></a><span class="bu">print</span>(config)</span></code></pre></div>
+<div class="sourceCode" id="cb24"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">my_reg</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/regularizer_l1.html">regularizer_l1</a></span><span class="op">(</span><span class="fl">0.005</span><span class="op">)</span></span>
+<span><span class="va">config</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/serialize_keras_object.html">serialize_keras_object</a></span><span class="op">(</span><span class="va">my_reg</span><span class="op">)</span></span></code></pre></div>
+<pre><code><span><span class="co">## Error in serialize_keras_object(my_reg): could not find function "serialize_keras_object"</span></span></code></pre>
+<div class="sourceCode" id="cb26"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/str.html" class="external-link">str</a></span><span class="op">(</span><span class="va">config</span><span class="op">)</span></span></code></pre></div>
+<pre><code><span><span class="co">## {'name': 'functional_11', 'trainable': True, 'layers': [{'module': 'keras.src.layers.core.input_layer', 'class_name': 'InputLayer', 'config': {'batch_shape': (None, 32), 'dtype': 'float32', 'sparse': False, 'name': 'input_layer_5'}, 'registered_name': 'InputLayer', 'name': 'input_layer_5', 'inbound_nodes': []}, {'module': 'keras.src.layers.core.dense', 'class_name': 'Dense', 'config': {'name': 'dense_6', 'trainable': True, 'dtype': 'float32', 'units': 1, 'activation': 'linear', 'use_bias': True, 'kernel_initializer': {'module': 'keras.src.initializers.random_initializers', 'class_name': 'GlorotUniform', 'config': {'seed': None}, 'registered_name': 'GlorotUniform'}, 'bias_initializer': {'module': 'keras.src.initializers.constant_initializers', 'class_name': 'Zeros', 'config': {}, 'registered_name': 'Zeros'}, 'kernel_regularizer': None, 'bias_regularizer': None, 'kernel_constraint': None, 'bias_constraint': None}, 'registered_name': 'Dense', 'build_config': {'input_shape': (None, 32)}, 'name': 'dense_6', 'inbound_nodes': [{'args': ({'class_name': '__keras_tensor__', 'config': {'shape': (None, 32), 'dtype': 'float32', 'keras_history': ['input_layer_5', 0, 0]}},), 'kwargs': {}}]}], 'input_layers': [['input_layer_5', 0, 0]], 'output_layers': [['dense_6', 0, 0]]}</span></span></code></pre>
 <p>Note the serialization format containing all the necessary
 information for proper reconstruction:</p>
 <ul>
@@ -486,7 +565,12 @@ the object</li>
 <code>registered_name</code> for custom objects. See <a href="#custom_object_serialization">here</a>.</li>
 </ul>
 <p>Now we can reconstruct the regularizer.</p>
-<div class="sourceCode" id="cb16"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" tabindex="-1"></a>new_reg <span class="op">=</span> keras.saving.deserialize_keras_object(config)</span></code></pre></div>
+<div class="sourceCode" id="cb28"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">new_reg</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/deserialize_keras_object.html">deserialize_keras_object</a></span><span class="op">(</span><span class="va">config</span><span class="op">)</span></span></code></pre></div>
+<pre><code><span><span class="co">## Error in deserialize_keras_object(config): could not find function "deserialize_keras_object"</span></span></code></pre>
+<div class="sourceCode" id="cb30"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">new_reg</span></span></code></pre></div>
+<pre><code><span><span class="co">## Error in eval(expr, envir, enclos): object 'new_reg' not found</span></span></code></pre>
 </div>
 </div>
 <div class="section level3">
@@ -509,129 +593,123 @@ compilation information of the prior model.</li>
 <code><a href="../reference/get_weights.html">get_weights()</a></code> and <code><a href="../reference/get_weights.html">set_weights()</a></code>:</p>
 <ul>
 <li>
-<code>keras.layers.Layer.get_weights()</code>: Returns a list of
-NumPy arrays of weight values.</li>
+<code>get_weights(&lt;layer&gt;)</code>: Returns a list of arrays of
+weight values.</li>
 <li>
-<code>keras.layers.Layer.set_weights(weights)</code>: Sets the model
-weights to the values provided (as NumPy arrays).</li>
+<code>set_weights(&lt;layer&gt;weights)</code>: Sets the model/layer
+weights to the values provided (as arrays).</li>
 </ul>
 <p>Examples:</p>
 <p><strong><em>Transfering weights from one layer to another, in
 memory</em></strong></p>
-<div class="sourceCode" id="cb17"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" tabindex="-1"></a><span class="kw">def</span> create_layer():</span>
-<span id="cb17-2"><a href="#cb17-2" tabindex="-1"></a>    layer <span class="op">=</span> keras.layers.Dense(<span class="dv">64</span>, activation<span class="op">=</span><span class="st">"relu"</span>, name<span class="op">=</span><span class="st">"dense_2"</span>)</span>
-<span id="cb17-3"><a href="#cb17-3" tabindex="-1"></a>    layer.build((<span class="va">None</span>, <span class="dv">784</span>))</span>
-<span id="cb17-4"><a href="#cb17-4" tabindex="-1"></a>    <span class="cf">return</span> layer</span>
-<span id="cb17-5"><a href="#cb17-5" tabindex="-1"></a></span>
-<span id="cb17-6"><a href="#cb17-6" tabindex="-1"></a></span>
-<span id="cb17-7"><a href="#cb17-7" tabindex="-1"></a>layer_1 <span class="op">=</span> create_layer()</span>
-<span id="cb17-8"><a href="#cb17-8" tabindex="-1"></a>layer_2 <span class="op">=</span> create_layer()</span>
-<span id="cb17-9"><a href="#cb17-9" tabindex="-1"></a></span>
-<span id="cb17-10"><a href="#cb17-10" tabindex="-1"></a><span class="co"># Copy weights from layer 1 to layer 2</span></span>
-<span id="cb17-11"><a href="#cb17-11" tabindex="-1"></a>layer_2.set_weights(layer_1.get_weights())</span></code></pre></div>
+<div class="sourceCode" id="cb32"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">create_layer</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="op">)</span> <span class="op">{</span></span>
+<span>  <span class="va">layer</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/layer_dense.html">layer_dense</a></span><span class="op">(</span>, <span class="fl">64</span>, activation <span class="op">=</span> <span class="st">"relu"</span>, name <span class="op">=</span> <span class="st">"dense_2"</span><span class="op">)</span></span>
+<span>  <span class="va">layer</span><span class="op">$</span><span class="fu">build</span><span class="op">(</span><span class="fu">shape</span><span class="op">(</span><span class="cn">NA</span>, <span class="fl">784</span><span class="op">)</span><span class="op">)</span></span>
+<span>  <span class="va">layer</span></span>
+<span><span class="op">}</span></span>
+<span></span>
+<span><span class="va">layer_1</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/create_layer.html">create_layer</a></span><span class="op">(</span><span class="op">)</span></span>
+<span><span class="va">layer_2</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/create_layer.html">create_layer</a></span><span class="op">(</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Copy weights from layer 1 to layer 2</span></span>
+<span><span class="va">layer_2</span> <span class="op">|&gt;</span> <span class="fu"><a href="../reference/get_weights.html">set_weights</a></span><span class="op">(</span><span class="fu"><a href="../reference/get_weights.html">get_weights</a></span><span class="op">(</span><span class="va">layer_1</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <p><strong><em>Transfering weights from one model to another model with
 a compatible architecture, in memory</em></strong></p>
-<div class="sourceCode" id="cb18"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1" tabindex="-1"></a><span class="co"># Create a simple functional model</span></span>
-<span id="cb18-2"><a href="#cb18-2" tabindex="-1"></a>inputs <span class="op">=</span> keras.Input(shape<span class="op">=</span>(<span class="dv">784</span>,), name<span class="op">=</span><span class="st">"digits"</span>)</span>
-<span id="cb18-3"><a href="#cb18-3" tabindex="-1"></a>x <span class="op">=</span> keras.layers.Dense(<span class="dv">64</span>, activation<span class="op">=</span><span class="st">"relu"</span>, name<span class="op">=</span><span class="st">"dense_1"</span>)(inputs)</span>
-<span id="cb18-4"><a href="#cb18-4" tabindex="-1"></a>x <span class="op">=</span> keras.layers.Dense(<span class="dv">64</span>, activation<span class="op">=</span><span class="st">"relu"</span>, name<span class="op">=</span><span class="st">"dense_2"</span>)(x)</span>
-<span id="cb18-5"><a href="#cb18-5" tabindex="-1"></a>outputs <span class="op">=</span> keras.layers.Dense(<span class="dv">10</span>, name<span class="op">=</span><span class="st">"predictions"</span>)(x)</span>
-<span id="cb18-6"><a href="#cb18-6" tabindex="-1"></a>functional_model <span class="op">=</span> keras.Model(inputs<span class="op">=</span>inputs, outputs<span class="op">=</span>outputs, name<span class="op">=</span><span class="st">"3_layer_mlp"</span>)</span>
-<span id="cb18-7"><a href="#cb18-7" tabindex="-1"></a></span>
-<span id="cb18-8"><a href="#cb18-8" tabindex="-1"></a></span>
-<span id="cb18-9"><a href="#cb18-9" tabindex="-1"></a><span class="co"># Define a subclassed model with the same architecture</span></span>
-<span id="cb18-10"><a href="#cb18-10" tabindex="-1"></a><span class="kw">class</span> SubclassedModel(keras.Model):</span>
-<span id="cb18-11"><a href="#cb18-11" tabindex="-1"></a>    <span class="kw">def</span> <span class="fu">__init__</span>(<span class="va">self</span>, output_dim, name<span class="op">=</span><span class="va">None</span>):</span>
-<span id="cb18-12"><a href="#cb18-12" tabindex="-1"></a>        <span class="bu">super</span>().<span class="fu">__init__</span>(name<span class="op">=</span>name)</span>
-<span id="cb18-13"><a href="#cb18-13" tabindex="-1"></a>        <span class="va">self</span>.output_dim <span class="op">=</span> output_dim</span>
-<span id="cb18-14"><a href="#cb18-14" tabindex="-1"></a>        <span class="va">self</span>.dense_1 <span class="op">=</span> keras.layers.Dense(<span class="dv">64</span>, activation<span class="op">=</span><span class="st">"relu"</span>, name<span class="op">=</span><span class="st">"dense_1"</span>)</span>
-<span id="cb18-15"><a href="#cb18-15" tabindex="-1"></a>        <span class="va">self</span>.dense_2 <span class="op">=</span> keras.layers.Dense(<span class="dv">64</span>, activation<span class="op">=</span><span class="st">"relu"</span>, name<span class="op">=</span><span class="st">"dense_2"</span>)</span>
-<span id="cb18-16"><a href="#cb18-16" tabindex="-1"></a>        <span class="va">self</span>.dense_3 <span class="op">=</span> keras.layers.Dense(output_dim, name<span class="op">=</span><span class="st">"predictions"</span>)</span>
-<span id="cb18-17"><a href="#cb18-17" tabindex="-1"></a></span>
-<span id="cb18-18"><a href="#cb18-18" tabindex="-1"></a>    <span class="kw">def</span> call(<span class="va">self</span>, inputs):</span>
-<span id="cb18-19"><a href="#cb18-19" tabindex="-1"></a>        x <span class="op">=</span> <span class="va">self</span>.dense_1(inputs)</span>
-<span id="cb18-20"><a href="#cb18-20" tabindex="-1"></a>        x <span class="op">=</span> <span class="va">self</span>.dense_2(x)</span>
-<span id="cb18-21"><a href="#cb18-21" tabindex="-1"></a>        x <span class="op">=</span> <span class="va">self</span>.dense_3(x)</span>
-<span id="cb18-22"><a href="#cb18-22" tabindex="-1"></a>        <span class="cf">return</span> x</span>
-<span id="cb18-23"><a href="#cb18-23" tabindex="-1"></a></span>
-<span id="cb18-24"><a href="#cb18-24" tabindex="-1"></a>    <span class="kw">def</span> get_config(<span class="va">self</span>):</span>
-<span id="cb18-25"><a href="#cb18-25" tabindex="-1"></a>        <span class="cf">return</span> {<span class="st">"output_dim"</span>: <span class="va">self</span>.output_dim, <span class="st">"name"</span>: <span class="va">self</span>.name}</span>
-<span id="cb18-26"><a href="#cb18-26" tabindex="-1"></a></span>
-<span id="cb18-27"><a href="#cb18-27" tabindex="-1"></a></span>
-<span id="cb18-28"><a href="#cb18-28" tabindex="-1"></a>subclassed_model <span class="op">=</span> SubclassedModel(<span class="dv">10</span>)</span>
-<span id="cb18-29"><a href="#cb18-29" tabindex="-1"></a><span class="co"># Call the subclassed model once to create the weights.</span></span>
-<span id="cb18-30"><a href="#cb18-30" tabindex="-1"></a>subclassed_model(np.ones((<span class="dv">1</span>, <span class="dv">784</span>)))</span>
-<span id="cb18-31"><a href="#cb18-31" tabindex="-1"></a></span>
-<span id="cb18-32"><a href="#cb18-32" tabindex="-1"></a><span class="co"># Copy weights from functional_model to subclassed_model.</span></span>
-<span id="cb18-33"><a href="#cb18-33" tabindex="-1"></a>subclassed_model.set_weights(functional_model.get_weights())</span>
-<span id="cb18-34"><a href="#cb18-34" tabindex="-1"></a></span>
-<span id="cb18-35"><a href="#cb18-35" tabindex="-1"></a><span class="cf">assert</span> <span class="bu">len</span>(functional_model.weights) <span class="op">==</span> <span class="bu">len</span>(subclassed_model.weights)</span>
-<span id="cb18-36"><a href="#cb18-36" tabindex="-1"></a><span class="cf">for</span> a, b <span class="kw">in</span> <span class="bu">zip</span>(functional_model.weights, subclassed_model.weights):</span>
-<span id="cb18-37"><a href="#cb18-37" tabindex="-1"></a>    np.testing.assert_allclose(a.numpy(), b.numpy())</span></code></pre></div>
+<div class="sourceCode" id="cb33"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># Create a simple functional model</span></span>
+<span><span class="va">inputs</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/layer_input.html">layer_input</a></span><span class="op">(</span>shape<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">784</span><span class="op">)</span>, name<span class="op">=</span><span class="st">"digits"</span><span class="op">)</span></span>
+<span><span class="va">outputs</span> <span class="op">&lt;-</span> <span class="va">inputs</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu"><a href="../reference/layer_dense.html">layer_dense</a></span><span class="op">(</span><span class="fl">64</span>, activation <span class="op">=</span> <span class="st">"relu"</span>, name <span class="op">=</span> <span class="st">"dense_1"</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu"><a href="../reference/layer_dense.html">layer_dense</a></span><span class="op">(</span><span class="fl">64</span>, activation <span class="op">=</span> <span class="st">"relu"</span>, name <span class="op">=</span> <span class="st">"dense_2"</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu"><a href="../reference/layer_dense.html">layer_dense</a></span><span class="op">(</span><span class="fl">10</span>, name <span class="op">=</span> <span class="st">"predictions"</span><span class="op">)</span></span>
+<span><span class="va">functional_model</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/keras_model.html">keras_model</a></span><span class="op">(</span>inputs <span class="op">=</span> <span class="va">inputs</span>, outputs <span class="op">=</span> <span class="va">outputs</span>,</span>
+<span>                               name <span class="op">=</span> <span class="st">"3_layer_mlp"</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Define a subclassed model with the same architecture</span></span>
+<span><span class="va">SubclassedModel</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/new-classes.html">new_model_class</a></span><span class="op">(</span></span>
+<span>  <span class="st">"SubclassedModel"</span>,</span>
+<span>  initialize <span class="op">=</span> <span class="kw">function</span><span class="op">(</span><span class="va">output_dim</span>, <span class="va">name</span> <span class="op">=</span> <span class="cn">NULL</span><span class="op">)</span> <span class="op">{</span></span>
+<span>    <span class="va">super</span><span class="op">$</span><span class="fu">initialize</span><span class="op">(</span>name <span class="op">=</span> <span class="va">name</span><span class="op">)</span></span>
+<span>    <span class="va">self</span><span class="op">$</span><span class="va">output_dim</span> <span class="op">&lt;-</span> <span class="va">output_dim</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://rdrr.io/r/base/integer.html" class="external-link">as.integer</a></span><span class="op">(</span><span class="op">)</span></span>
+<span>    <span class="va">self</span><span class="op">$</span><span class="va">dense_1</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/layer_dense.html">layer_dense</a></span><span class="op">(</span>, <span class="fl">64</span>, activation <span class="op">=</span> <span class="st">"relu"</span>,</span>
+<span>                                name <span class="op">=</span> <span class="st">"dense_1"</span><span class="op">)</span></span>
+<span>    <span class="va">self</span><span class="op">$</span><span class="va">dense_2</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/layer_dense.html">layer_dense</a></span><span class="op">(</span>, <span class="fl">64</span>, activation <span class="op">=</span> <span class="st">"relu"</span>,</span>
+<span>                                name <span class="op">=</span> <span class="st">"dense_2"</span><span class="op">)</span></span>
+<span>    <span class="va">self</span><span class="op">$</span><span class="va">dense_3</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/layer_dense.html">layer_dense</a></span><span class="op">(</span>, <span class="va">self</span><span class="op">$</span><span class="va">output_dim</span>,</span>
+<span>                                name <span class="op">=</span> <span class="st">"predictions"</span><span class="op">)</span></span>
+<span>  <span class="op">}</span>,</span>
+<span></span>
+<span>  call <span class="op">=</span> <span class="kw">function</span><span class="op">(</span><span class="va">inputs</span><span class="op">)</span> <span class="op">{</span></span>
+<span>    <span class="va">inputs</span> <span class="op">|&gt;</span></span>
+<span>      <span class="va">self</span><span class="op">$</span><span class="fu">dense_1</span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>      <span class="va">self</span><span class="op">$</span><span class="fu">dense_2</span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>      <span class="va">self</span><span class="op">$</span><span class="fu">dense_3</span><span class="op">(</span><span class="op">)</span></span>
+<span>  <span class="op">}</span>,</span>
+<span></span>
+<span>  get_config <span class="op">=</span> <span class="kw">function</span><span class="op">(</span><span class="va">self</span><span class="op">)</span> <span class="op">{</span></span>
+<span>    <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>output_dim <span class="op">=</span> <span class="va">self</span><span class="op">$</span><span class="va">output_dim</span>,</span>
+<span>         name <span class="op">=</span> <span class="va">self</span><span class="op">$</span><span class="va">name</span><span class="op">)</span></span>
+<span>  <span class="op">}</span></span>
+<span><span class="op">)</span></span>
+<span></span>
+<span></span>
+<span><span class="va">subclassed_model</span> <span class="op">&lt;-</span> <span class="fu">SubclassedModel</span><span class="op">(</span><span class="fl">10</span><span class="op">)</span></span>
+<span><span class="co"># Call the subclassed model once to create the weights.</span></span>
+<span><span class="fu">subclassed_model</span><span class="op">(</span><span class="fu"><a href="../reference/op_ones.html">op_ones</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">784</span><span class="op">)</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://rdrr.io/r/base/invisible.html" class="external-link">invisible</a></span><span class="op">(</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Copy weights from functional_model to subclassed_model.</span></span>
+<span><span class="fu"><a href="../reference/get_weights.html">set_weights</a></span><span class="op">(</span><span class="va">subclassed_model</span>, <span class="fu"><a href="../reference/get_weights.html">get_weights</a></span><span class="op">(</span><span class="va">functional_model</span><span class="op">)</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/stopifnot.html" class="external-link">stopifnot</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/all.equal.html" class="external-link">all.equal</a></span><span class="op">(</span></span>
+<span>  <span class="fu"><a href="../reference/get_weights.html">get_weights</a></span><span class="op">(</span><span class="va">functional_model</span><span class="op">)</span>,</span>
+<span>  <span class="fu"><a href="../reference/get_weights.html">get_weights</a></span><span class="op">(</span><span class="va">subclassed_model</span><span class="op">)</span></span>
+<span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <p><strong><em>The case of stateless layers</em></strong></p>
 <p>Because stateless layers do not change the order or number of
 weights, models can have compatible architectures even if there are
 extra/missing stateless layers.</p>
-<div class="sourceCode" id="cb19"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1" tabindex="-1"></a>inputs <span class="op">=</span> keras.Input(shape<span class="op">=</span>(<span class="dv">784</span>,), name<span class="op">=</span><span class="st">"digits"</span>)</span>
-<span id="cb19-2"><a href="#cb19-2" tabindex="-1"></a>x <span class="op">=</span> keras.layers.Dense(<span class="dv">64</span>, activation<span class="op">=</span><span class="st">"relu"</span>, name<span class="op">=</span><span class="st">"dense_1"</span>)(inputs)</span>
-<span id="cb19-3"><a href="#cb19-3" tabindex="-1"></a>x <span class="op">=</span> keras.layers.Dense(<span class="dv">64</span>, activation<span class="op">=</span><span class="st">"relu"</span>, name<span class="op">=</span><span class="st">"dense_2"</span>)(x)</span>
-<span id="cb19-4"><a href="#cb19-4" tabindex="-1"></a>outputs <span class="op">=</span> keras.layers.Dense(<span class="dv">10</span>, name<span class="op">=</span><span class="st">"predictions"</span>)(x)</span>
-<span id="cb19-5"><a href="#cb19-5" tabindex="-1"></a>functional_model <span class="op">=</span> keras.Model(inputs<span class="op">=</span>inputs, outputs<span class="op">=</span>outputs, name<span class="op">=</span><span class="st">"3_layer_mlp"</span>)</span>
-<span id="cb19-6"><a href="#cb19-6" tabindex="-1"></a></span>
-<span id="cb19-7"><a href="#cb19-7" tabindex="-1"></a>inputs <span class="op">=</span> keras.Input(shape<span class="op">=</span>(<span class="dv">784</span>,), name<span class="op">=</span><span class="st">"digits"</span>)</span>
-<span id="cb19-8"><a href="#cb19-8" tabindex="-1"></a>x <span class="op">=</span> keras.layers.Dense(<span class="dv">64</span>, activation<span class="op">=</span><span class="st">"relu"</span>, name<span class="op">=</span><span class="st">"dense_1"</span>)(inputs)</span>
-<span id="cb19-9"><a href="#cb19-9" tabindex="-1"></a>x <span class="op">=</span> keras.layers.Dense(<span class="dv">64</span>, activation<span class="op">=</span><span class="st">"relu"</span>, name<span class="op">=</span><span class="st">"dense_2"</span>)(x)</span>
-<span id="cb19-10"><a href="#cb19-10" tabindex="-1"></a></span>
-<span id="cb19-11"><a href="#cb19-11" tabindex="-1"></a><span class="co"># Add a dropout layer, which does not contain any weights.</span></span>
-<span id="cb19-12"><a href="#cb19-12" tabindex="-1"></a>x <span class="op">=</span> keras.layers.Dropout(<span class="fl">0.5</span>)(x)</span>
-<span id="cb19-13"><a href="#cb19-13" tabindex="-1"></a>outputs <span class="op">=</span> keras.layers.Dense(<span class="dv">10</span>, name<span class="op">=</span><span class="st">"predictions"</span>)(x)</span>
-<span id="cb19-14"><a href="#cb19-14" tabindex="-1"></a>functional_model_with_dropout <span class="op">=</span> keras.Model(</span>
-<span id="cb19-15"><a href="#cb19-15" tabindex="-1"></a>    inputs<span class="op">=</span>inputs, outputs<span class="op">=</span>outputs, name<span class="op">=</span><span class="st">"3_layer_mlp"</span></span>
-<span id="cb19-16"><a href="#cb19-16" tabindex="-1"></a>)</span>
-<span id="cb19-17"><a href="#cb19-17" tabindex="-1"></a></span>
-<span id="cb19-18"><a href="#cb19-18" tabindex="-1"></a>functional_model_with_dropout.set_weights(functional_model.get_weights())</span></code></pre></div>
+<div class="sourceCode" id="cb34"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">input</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/layer_input.html">layer_input</a></span><span class="op">(</span>shape <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">784</span><span class="op">)</span>, name <span class="op">=</span> <span class="st">"digits"</span><span class="op">)</span></span>
+<span><span class="va">output</span> <span class="op">&lt;-</span> <span class="va">input</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu"><a href="../reference/layer_dense.html">layer_dense</a></span><span class="op">(</span><span class="fl">64</span>, activation <span class="op">=</span> <span class="st">"relu"</span>, name <span class="op">=</span> <span class="st">"dense_1"</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu"><a href="../reference/layer_dense.html">layer_dense</a></span><span class="op">(</span><span class="fl">64</span>, activation <span class="op">=</span> <span class="st">"relu"</span>, name <span class="op">=</span> <span class="st">"dense_2"</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu"><a href="../reference/layer_dense.html">layer_dense</a></span><span class="op">(</span><span class="fl">10</span>, name <span class="op">=</span> <span class="st">"predictions"</span><span class="op">)</span></span>
+<span><span class="va">functional_model</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/keras_model.html">keras_model</a></span><span class="op">(</span><span class="va">inputs</span>, <span class="va">outputs</span>,</span>
+<span>                                name <span class="op">=</span> <span class="st">"3_layer_mlp"</span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">input</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/layer_input.html">layer_input</a></span><span class="op">(</span>shape <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">784</span><span class="op">)</span>, name <span class="op">=</span> <span class="st">"digits"</span><span class="op">)</span></span>
+<span><span class="va">output</span> <span class="op">&lt;-</span> <span class="va">input</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu"><a href="../reference/layer_dense.html">layer_dense</a></span><span class="op">(</span><span class="fl">64</span>, activation <span class="op">=</span> <span class="st">"relu"</span>, name <span class="op">=</span> <span class="st">"dense_1"</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu"><a href="../reference/layer_dense.html">layer_dense</a></span><span class="op">(</span><span class="fl">64</span>, activation <span class="op">=</span> <span class="st">"relu"</span>, name <span class="op">=</span> <span class="st">"dense_2"</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>  <span class="co"># Add a dropout layer, which does not contain any weights.</span></span>
+<span>  <span class="fu"><a href="../reference/layer_dropout.html">layer_dropout</a></span><span class="op">(</span><span class="fl">0.5</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu"><a href="../reference/layer_dense.html">layer_dense</a></span><span class="op">(</span><span class="fl">10</span>, name <span class="op">=</span> <span class="st">"predictions"</span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">functional_model_with_dropout</span> <span class="op">&lt;-</span></span>
+<span>  <span class="fu"><a href="../reference/keras_model.html">keras_model</a></span><span class="op">(</span><span class="va">input</span>, <span class="va">output</span>, name <span class="op">=</span> <span class="st">"3_layer_mlp"</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu"><a href="../reference/get_weights.html">set_weights</a></span><span class="op">(</span><span class="va">functional_model_with_dropout</span>,</span>
+<span>            <span class="fu"><a href="../reference/get_weights.html">get_weights</a></span><span class="op">(</span><span class="va">functional_model</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 </div>
 <div class="section level4">
 <h4 id="apis-for-saving-weights-to-disk-loading-them-back">APIs for saving weights to disk &amp; loading them back<a class="anchor" aria-label="anchor" href="#apis-for-saving-weights-to-disk-loading-them-back"></a>
 </h4>
 <p>Weights can be saved to disk by calling
-<code>model.save_weights(filepath)</code>. The filename should end in
+<code>save_model_weights(filepath)</code>. The filename should end in
 <code>.weights.h5</code>.</p>
 <p><strong>Example:</strong></p>
-<div class="sourceCode" id="cb20"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb20-1"><a href="#cb20-1" tabindex="-1"></a><span class="co"># Runnable example</span></span>
-<span id="cb20-2"><a href="#cb20-2" tabindex="-1"></a>sequential_model <span class="op">=</span> keras.Sequential(</span>
-<span id="cb20-3"><a href="#cb20-3" tabindex="-1"></a>    [</span>
-<span id="cb20-4"><a href="#cb20-4" tabindex="-1"></a>        keras.Input(shape<span class="op">=</span>(<span class="dv">784</span>,), name<span class="op">=</span><span class="st">"digits"</span>),</span>
-<span id="cb20-5"><a href="#cb20-5" tabindex="-1"></a>        keras.layers.Dense(<span class="dv">64</span>, activation<span class="op">=</span><span class="st">"relu"</span>, name<span class="op">=</span><span class="st">"dense_1"</span>),</span>
-<span id="cb20-6"><a href="#cb20-6" tabindex="-1"></a>        keras.layers.Dense(<span class="dv">64</span>, activation<span class="op">=</span><span class="st">"relu"</span>, name<span class="op">=</span><span class="st">"dense_2"</span>),</span>
-<span id="cb20-7"><a href="#cb20-7" tabindex="-1"></a>        keras.layers.Dense(<span class="dv">10</span>, name<span class="op">=</span><span class="st">"predictions"</span>),</span>
-<span id="cb20-8"><a href="#cb20-8" tabindex="-1"></a>    ]</span>
-<span id="cb20-9"><a href="#cb20-9" tabindex="-1"></a>)</span>
-<span id="cb20-10"><a href="#cb20-10" tabindex="-1"></a>sequential_model.save_weights(<span class="st">"my_model.weights.h5"</span>)</span>
-<span id="cb20-11"><a href="#cb20-11" tabindex="-1"></a>sequential_model.load_weights(<span class="st">"my_model.weights.h5"</span>)</span></code></pre></div>
-<p>Note that changing <code>layer.trainable</code> may result in a
-different <code>layer.weights</code> ordering when the model contains
-nested layers.</p>
-<div class="sourceCode" id="cb21"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb21-1"><a href="#cb21-1" tabindex="-1"></a><span class="kw">class</span> NestedDenseLayer(keras.layers.Layer):</span>
-<span id="cb21-2"><a href="#cb21-2" tabindex="-1"></a>    <span class="kw">def</span> <span class="fu">__init__</span>(<span class="va">self</span>, units, name<span class="op">=</span><span class="va">None</span>):</span>
-<span id="cb21-3"><a href="#cb21-3" tabindex="-1"></a>        <span class="bu">super</span>().<span class="fu">__init__</span>(name<span class="op">=</span>name)</span>
-<span id="cb21-4"><a href="#cb21-4" tabindex="-1"></a>        <span class="va">self</span>.dense_1 <span class="op">=</span> keras.layers.Dense(units, name<span class="op">=</span><span class="st">"dense_1"</span>)</span>
-<span id="cb21-5"><a href="#cb21-5" tabindex="-1"></a>        <span class="va">self</span>.dense_2 <span class="op">=</span> keras.layers.Dense(units, name<span class="op">=</span><span class="st">"dense_2"</span>)</span>
-<span id="cb21-6"><a href="#cb21-6" tabindex="-1"></a></span>
-<span id="cb21-7"><a href="#cb21-7" tabindex="-1"></a>    <span class="kw">def</span> call(<span class="va">self</span>, inputs):</span>
-<span id="cb21-8"><a href="#cb21-8" tabindex="-1"></a>        <span class="cf">return</span> <span class="va">self</span>.dense_2(<span class="va">self</span>.dense_1(inputs))</span>
-<span id="cb21-9"><a href="#cb21-9" tabindex="-1"></a></span>
-<span id="cb21-10"><a href="#cb21-10" tabindex="-1"></a></span>
-<span id="cb21-11"><a href="#cb21-11" tabindex="-1"></a>nested_model <span class="op">=</span> keras.Sequential([keras.Input((<span class="dv">784</span>,)), NestedDenseLayer(<span class="dv">10</span>, <span class="st">"nested"</span>)])</span>
-<span id="cb21-12"><a href="#cb21-12" tabindex="-1"></a>variable_names <span class="op">=</span> [v.name <span class="cf">for</span> v <span class="kw">in</span> nested_model.weights]</span>
-<span id="cb21-13"><a href="#cb21-13" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"variables: </span><span class="sc">{}</span><span class="st">"</span>.<span class="bu">format</span>(variable_names))</span>
-<span id="cb21-14"><a href="#cb21-14" tabindex="-1"></a></span>
-<span id="cb21-15"><a href="#cb21-15" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"</span><span class="ch">\n</span><span class="st">Changing trainable status of one of the nested layers..."</span>)</span>
-<span id="cb21-16"><a href="#cb21-16" tabindex="-1"></a>nested_model.get_layer(<span class="st">"nested"</span>).dense_1.trainable <span class="op">=</span> <span class="va">False</span></span>
-<span id="cb21-17"><a href="#cb21-17" tabindex="-1"></a></span>
-<span id="cb21-18"><a href="#cb21-18" tabindex="-1"></a>variable_names_2 <span class="op">=</span> [v.name <span class="cf">for</span> v <span class="kw">in</span> nested_model.weights]</span>
-<span id="cb21-19"><a href="#cb21-19" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"</span><span class="ch">\n</span><span class="st">variables: </span><span class="sc">{}</span><span class="st">"</span>.<span class="bu">format</span>(variable_names_2))</span>
-<span id="cb21-20"><a href="#cb21-20" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"variable ordering changed:"</span>, variable_names <span class="op">!=</span> variable_names_2)</span></code></pre></div>
+<div class="sourceCode" id="cb35"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">sequential_model</span> <span class="op">=</span> <span class="fu"><a href="../reference/keras_model_sequential.html">keras_model_sequential</a></span><span class="op">(</span>input_shape <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">784</span><span class="op">)</span>,</span>
+<span>                                          input_layer_name <span class="op">=</span> <span class="st">"digits"</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu"><a href="../reference/layer_dense.html">layer_dense</a></span><span class="op">(</span><span class="fl">64</span>, activation <span class="op">=</span> <span class="st">"relu"</span>, name <span class="op">=</span> <span class="st">"dense_1"</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu"><a href="../reference/layer_dense.html">layer_dense</a></span><span class="op">(</span><span class="fl">64</span>, activation <span class="op">=</span> <span class="st">"relu"</span>, name <span class="op">=</span> <span class="st">"dense_2"</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu"><a href="../reference/layer_dense.html">layer_dense</a></span><span class="op">(</span><span class="fl">10</span>, name <span class="op">=</span> <span class="st">"predictions"</span><span class="op">)</span></span>
+<span><span class="va">sequential_model</span> <span class="op">|&gt;</span> <span class="fu"><a href="../reference/save_model_weights.html">save_model_weights</a></span><span class="op">(</span><span class="st">"my_model.weights.h5"</span><span class="op">)</span></span>
+<span><span class="va">sequential_model</span> <span class="op">|&gt;</span> <span class="fu"><a href="../reference/load_model_weights.html">load_model_weights</a></span><span class="op">(</span><span class="st">"my_model.weights.h5"</span><span class="op">)</span></span></code></pre></div>
+<p>Note that using <code><a href="../reference/freeze_weights.html">freeze_weights()</a></code> may result in a
+different output from <code>get_weights(layer)</code> ordering when the
+model contains nested layers.</p>
 <div class="section level5">
 <h5 id="transfer-learning-example">
 <strong>Transfer learning example</strong><a class="anchor" aria-label="anchor" href="#transfer-learning-example"></a>
@@ -640,182 +718,231 @@ nested layers.</p>
 recommended to load the weights into the original checkpointed model,
 and then extract the desired weights/layers into a new model.</p>
 <p><strong>Example:</strong></p>
-<div class="sourceCode" id="cb22"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb22-1"><a href="#cb22-1" tabindex="-1"></a><span class="kw">def</span> create_functional_model():</span>
-<span id="cb22-2"><a href="#cb22-2" tabindex="-1"></a>    inputs <span class="op">=</span> keras.Input(shape<span class="op">=</span>(<span class="dv">784</span>,), name<span class="op">=</span><span class="st">"digits"</span>)</span>
-<span id="cb22-3"><a href="#cb22-3" tabindex="-1"></a>    x <span class="op">=</span> keras.layers.Dense(<span class="dv">64</span>, activation<span class="op">=</span><span class="st">"relu"</span>, name<span class="op">=</span><span class="st">"dense_1"</span>)(inputs)</span>
-<span id="cb22-4"><a href="#cb22-4" tabindex="-1"></a>    x <span class="op">=</span> keras.layers.Dense(<span class="dv">64</span>, activation<span class="op">=</span><span class="st">"relu"</span>, name<span class="op">=</span><span class="st">"dense_2"</span>)(x)</span>
-<span id="cb22-5"><a href="#cb22-5" tabindex="-1"></a>    outputs <span class="op">=</span> keras.layers.Dense(<span class="dv">10</span>, name<span class="op">=</span><span class="st">"predictions"</span>)(x)</span>
-<span id="cb22-6"><a href="#cb22-6" tabindex="-1"></a>    <span class="cf">return</span> keras.Model(inputs<span class="op">=</span>inputs, outputs<span class="op">=</span>outputs, name<span class="op">=</span><span class="st">"3_layer_mlp"</span>)</span>
-<span id="cb22-7"><a href="#cb22-7" tabindex="-1"></a></span>
-<span id="cb22-8"><a href="#cb22-8" tabindex="-1"></a></span>
-<span id="cb22-9"><a href="#cb22-9" tabindex="-1"></a>functional_model <span class="op">=</span> create_functional_model()</span>
-<span id="cb22-10"><a href="#cb22-10" tabindex="-1"></a>functional_model.save_weights(<span class="st">"pretrained.weights.h5"</span>)</span>
-<span id="cb22-11"><a href="#cb22-11" tabindex="-1"></a></span>
-<span id="cb22-12"><a href="#cb22-12" tabindex="-1"></a><span class="co"># In a separate program:</span></span>
-<span id="cb22-13"><a href="#cb22-13" tabindex="-1"></a>pretrained_model <span class="op">=</span> create_functional_model()</span>
-<span id="cb22-14"><a href="#cb22-14" tabindex="-1"></a>pretrained_model.load_weights(<span class="st">"pretrained.weights.h5"</span>)</span>
-<span id="cb22-15"><a href="#cb22-15" tabindex="-1"></a></span>
-<span id="cb22-16"><a href="#cb22-16" tabindex="-1"></a><span class="co"># Create a new model by extracting layers from the original model:</span></span>
-<span id="cb22-17"><a href="#cb22-17" tabindex="-1"></a>extracted_layers <span class="op">=</span> pretrained_model.layers[:<span class="op">-</span><span class="dv">1</span>]</span>
-<span id="cb22-18"><a href="#cb22-18" tabindex="-1"></a>extracted_layers.append(keras.layers.Dense(<span class="dv">5</span>, name<span class="op">=</span><span class="st">"dense_3"</span>))</span>
-<span id="cb22-19"><a href="#cb22-19" tabindex="-1"></a>model <span class="op">=</span> keras.Sequential(extracted_layers)</span>
-<span id="cb22-20"><a href="#cb22-20" tabindex="-1"></a>model.summary()</span></code></pre></div>
+<div class="sourceCode" id="cb36"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">create_functional_model</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="op">)</span> <span class="op">{</span></span>
+<span>  <span class="va">inputs</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/layer_input.html">layer_input</a></span><span class="op">(</span>shape <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">784</span><span class="op">)</span>, name <span class="op">=</span> <span class="st">"digits"</span><span class="op">)</span></span>
+<span>  <span class="va">outputs</span> <span class="op">&lt;-</span> <span class="va">inputs</span> <span class="op">|&gt;</span></span>
+<span>    <span class="fu"><a href="../reference/layer_dense.html">layer_dense</a></span><span class="op">(</span><span class="fl">64</span>, activation <span class="op">=</span> <span class="st">"relu"</span>, name <span class="op">=</span> <span class="st">"dense_1"</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>    <span class="fu"><a href="../reference/layer_dense.html">layer_dense</a></span><span class="op">(</span><span class="fl">64</span>, activation <span class="op">=</span> <span class="st">"relu"</span>, name <span class="op">=</span> <span class="st">"dense_2"</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>    <span class="fu"><a href="../reference/layer_dense.html">layer_dense</a></span><span class="op">(</span><span class="fl">10</span>, name <span class="op">=</span> <span class="st">"predictions"</span><span class="op">)</span></span>
+<span>  <span class="fu"><a href="../reference/keras_model.html">keras_model</a></span><span class="op">(</span><span class="va">inputs</span>, <span class="va">outputs</span>, name <span class="op">=</span> <span class="st">"3_layer_mlp"</span><span class="op">)</span></span>
+<span><span class="op">}</span></span>
+<span></span>
+<span><span class="va">functional_model</span> <span class="op">&lt;-</span> <span class="fu">create_functional_model</span><span class="op">(</span><span class="op">)</span></span>
+<span><span class="va">functional_model</span> <span class="op">|&gt;</span> <span class="fu"><a href="../reference/save_model_weights.html">save_model_weights</a></span><span class="op">(</span><span class="st">"pretrained.weights.h5"</span><span class="op">)</span></span></code></pre></div>
+<pre><code><span><span class="co">## Error: File 'pretrained.weights.h5' already exists (pass overwrite = TRUE to force save).</span></span></code></pre>
+<div class="sourceCode" id="cb38"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># In a separate program:</span></span>
+<span><span class="va">pretrained_model</span> <span class="op">&lt;-</span> <span class="fu">create_functional_model</span><span class="op">(</span><span class="op">)</span></span>
+<span><span class="va">pretrained_model</span> <span class="op">|&gt;</span> <span class="fu"><a href="../reference/load_model_weights.html">load_model_weights</a></span><span class="op">(</span><span class="st">"pretrained.weights.h5"</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Create a new model by extracting layers from the original model:</span></span>
+<span><span class="va">extracted_layers</span> <span class="op">&lt;-</span> <span class="va">pretrained_model</span><span class="op">$</span><span class="va">layers</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="op">-</span><span class="fl">1</span><span class="op">)</span></span>
+<span><span class="va">model</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/keras_model_sequential.html">keras_model_sequential</a></span><span class="op">(</span><span class="va">extracted_layers</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu"><a href="../reference/layer_dense.html">layer_dense</a></span><span class="op">(</span><span class="fl">5</span>, name <span class="op">=</span> <span class="st">"dense_3"</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary</a></span><span class="op">(</span><span class="va">model</span><span class="op">)</span></span></code></pre></div>
+<pre><code><span><span class="co">## Model: "sequential_4"</span></span>
+<span><span class="co">## ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━┓</span></span>
+<span><span class="co">## ┃ Layer (type)                      ┃ Output Shape                ┃    Param # ┃</span></span>
+<span><span class="co">## ┡━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━┩</span></span>
+<span><span class="co">## │ dense_1 (Dense)                   │ (None, 64)                  │     50,240 │</span></span>
+<span><span class="co">## ├───────────────────────────────────┼─────────────────────────────┼────────────┤</span></span>
+<span><span class="co">## │ dense_2 (Dense)                   │ (None, 64)                  │      4,160 │</span></span>
+<span><span class="co">## ├───────────────────────────────────┼─────────────────────────────┼────────────┤</span></span>
+<span><span class="co">## │ dense_3 (Dense)                   │ (None, 5)                   │        325 │</span></span>
+<span><span class="co">## └───────────────────────────────────┴─────────────────────────────┴────────────┘</span></span>
+<span><span class="co">##  Total params: 54,725 (213.77 KB)</span></span>
+<span><span class="co">##  Trainable params: 54,725 (213.77 KB)</span></span>
+<span><span class="co">##  Non-trainable params: 0 (0.00 B)</span></span></code></pre>
 </div>
 </div>
 </div>
 <div class="section level3">
 <h3 id="appendix-handling-custom-objects">Appendix: Handling custom objects<a class="anchor" aria-label="anchor" href="#appendix-handling-custom-objects"></a>
 </h3>
-<p><a name="config_methods"></a> #### Defining the config methods</p>
+<!-- <a name="config_methods"></a> -->
+<div class="section level4">
+<h4 id="defining-the-config-methods">Defining the config methods<a class="anchor" aria-label="anchor" href="#defining-the-config-methods"></a>
+</h4>
 <p>Specifications:</p>
 <ul>
 <li>
-<code><a href="../reference/get_config.html">get_config()</a></code> should return a JSON-serializable
-dictionary in order to be compatible with the Keras architecture- and
+<code><a href="../reference/get_config.html">get_config()</a></code> should return a JSON-serializable named
+list in order to be compatible with the Keras architecture and
 model-saving APIs.</li>
 <li>
-<code>from_config(config)</code> (a <code>classmethod</code>) should
-return a new layer or model object that is created from the config. The
-default implementation returns <code>cls(**config)</code>.</li>
+<code>from_config(config)</code> (a class method) should return a
+new layer or model object that is created from the config. The default
+implementation returns <code>do.call(cls, config)</code>.</li>
 </ul>
 <p><strong>NOTE</strong>: If all your constructor arguments are already
 serializable, e.g. strings and ints, or non-custom Keras objects,
-overriding <code>from_config</code> is not necessary. However, for more
-complex objects such as layers or models passed to
-<code>__init__</code>, deserialization must be handled explicitly either
-in <code>__init__</code> itself or overriding the
+overriding <code><a href="../reference/get_config.html">from_config()</a></code> is not necessary. However, for
+more complex objects such as layers or models passed to
+<code>initialize()</code>, deserialization must be handled explicitly
+either in <code>initialize</code> itself or overriding the
 <code><a href="../reference/get_config.html">from_config()</a></code> method.</p>
 <p><strong>Example:</strong></p>
-<div class="sourceCode" id="cb23"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb23-1"><a href="#cb23-1" tabindex="-1"></a><span class="at">@keras.saving.register_keras_serializable</span>(package<span class="op">=</span><span class="st">"MyLayers"</span>, name<span class="op">=</span><span class="st">"KernelMult"</span>)</span>
-<span id="cb23-2"><a href="#cb23-2" tabindex="-1"></a><span class="kw">class</span> MyDense(keras.layers.Layer):</span>
-<span id="cb23-3"><a href="#cb23-3" tabindex="-1"></a>    <span class="kw">def</span> <span class="fu">__init__</span>(</span>
-<span id="cb23-4"><a href="#cb23-4" tabindex="-1"></a>        <span class="va">self</span>,</span>
-<span id="cb23-5"><a href="#cb23-5" tabindex="-1"></a>        units,</span>
-<span id="cb23-6"><a href="#cb23-6" tabindex="-1"></a>        <span class="op">*</span>,</span>
-<span id="cb23-7"><a href="#cb23-7" tabindex="-1"></a>        kernel_regularizer<span class="op">=</span><span class="va">None</span>,</span>
-<span id="cb23-8"><a href="#cb23-8" tabindex="-1"></a>        kernel_initializer<span class="op">=</span><span class="va">None</span>,</span>
-<span id="cb23-9"><a href="#cb23-9" tabindex="-1"></a>        nested_model<span class="op">=</span><span class="va">None</span>,</span>
-<span id="cb23-10"><a href="#cb23-10" tabindex="-1"></a>        <span class="op">**</span>kwargs</span>
-<span id="cb23-11"><a href="#cb23-11" tabindex="-1"></a>    ):</span>
-<span id="cb23-12"><a href="#cb23-12" tabindex="-1"></a>        <span class="bu">super</span>().<span class="fu">__init__</span>(<span class="op">**</span>kwargs)</span>
-<span id="cb23-13"><a href="#cb23-13" tabindex="-1"></a>        <span class="va">self</span>.hidden_units <span class="op">=</span> units</span>
-<span id="cb23-14"><a href="#cb23-14" tabindex="-1"></a>        <span class="va">self</span>.kernel_regularizer <span class="op">=</span> kernel_regularizer</span>
-<span id="cb23-15"><a href="#cb23-15" tabindex="-1"></a>        <span class="va">self</span>.kernel_initializer <span class="op">=</span> kernel_initializer</span>
-<span id="cb23-16"><a href="#cb23-16" tabindex="-1"></a>        <span class="va">self</span>.nested_model <span class="op">=</span> nested_model</span>
-<span id="cb23-17"><a href="#cb23-17" tabindex="-1"></a></span>
-<span id="cb23-18"><a href="#cb23-18" tabindex="-1"></a>    <span class="kw">def</span> get_config(<span class="va">self</span>):</span>
-<span id="cb23-19"><a href="#cb23-19" tabindex="-1"></a>        config <span class="op">=</span> <span class="bu">super</span>().get_config()</span>
-<span id="cb23-20"><a href="#cb23-20" tabindex="-1"></a>        <span class="co"># Update the config with the custom layer's parameters</span></span>
-<span id="cb23-21"><a href="#cb23-21" tabindex="-1"></a>        config.update(</span>
-<span id="cb23-22"><a href="#cb23-22" tabindex="-1"></a>            {</span>
-<span id="cb23-23"><a href="#cb23-23" tabindex="-1"></a>                <span class="st">"units"</span>: <span class="va">self</span>.hidden_units,</span>
-<span id="cb23-24"><a href="#cb23-24" tabindex="-1"></a>                <span class="st">"kernel_regularizer"</span>: <span class="va">self</span>.kernel_regularizer,</span>
-<span id="cb23-25"><a href="#cb23-25" tabindex="-1"></a>                <span class="st">"kernel_initializer"</span>: <span class="va">self</span>.kernel_initializer,</span>
-<span id="cb23-26"><a href="#cb23-26" tabindex="-1"></a>                <span class="st">"nested_model"</span>: <span class="va">self</span>.nested_model,</span>
-<span id="cb23-27"><a href="#cb23-27" tabindex="-1"></a>            }</span>
-<span id="cb23-28"><a href="#cb23-28" tabindex="-1"></a>        )</span>
-<span id="cb23-29"><a href="#cb23-29" tabindex="-1"></a>        <span class="cf">return</span> config</span>
-<span id="cb23-30"><a href="#cb23-30" tabindex="-1"></a></span>
-<span id="cb23-31"><a href="#cb23-31" tabindex="-1"></a>    <span class="kw">def</span> build(<span class="va">self</span>, input_shape):</span>
-<span id="cb23-32"><a href="#cb23-32" tabindex="-1"></a>        input_units <span class="op">=</span> input_shape[<span class="op">-</span><span class="dv">1</span>]</span>
-<span id="cb23-33"><a href="#cb23-33" tabindex="-1"></a>        <span class="va">self</span>.kernel <span class="op">=</span> <span class="va">self</span>.add_weight(</span>
-<span id="cb23-34"><a href="#cb23-34" tabindex="-1"></a>            name<span class="op">=</span><span class="st">"kernel"</span>,</span>
-<span id="cb23-35"><a href="#cb23-35" tabindex="-1"></a>            shape<span class="op">=</span>(input_units, <span class="va">self</span>.hidden_units),</span>
-<span id="cb23-36"><a href="#cb23-36" tabindex="-1"></a>            regularizer<span class="op">=</span><span class="va">self</span>.kernel_regularizer,</span>
-<span id="cb23-37"><a href="#cb23-37" tabindex="-1"></a>            initializer<span class="op">=</span><span class="va">self</span>.kernel_initializer,</span>
-<span id="cb23-38"><a href="#cb23-38" tabindex="-1"></a>        )</span>
-<span id="cb23-39"><a href="#cb23-39" tabindex="-1"></a></span>
-<span id="cb23-40"><a href="#cb23-40" tabindex="-1"></a>    <span class="kw">def</span> call(<span class="va">self</span>, inputs):</span>
-<span id="cb23-41"><a href="#cb23-41" tabindex="-1"></a>        <span class="cf">return</span> ops.matmul(inputs, <span class="va">self</span>.kernel)</span>
-<span id="cb23-42"><a href="#cb23-42" tabindex="-1"></a></span>
-<span id="cb23-43"><a href="#cb23-43" tabindex="-1"></a></span>
-<span id="cb23-44"><a href="#cb23-44" tabindex="-1"></a>layer <span class="op">=</span> MyDense(units<span class="op">=</span><span class="dv">16</span>, kernel_regularizer<span class="op">=</span><span class="st">"l1"</span>, kernel_initializer<span class="op">=</span><span class="st">"ones"</span>)</span>
-<span id="cb23-45"><a href="#cb23-45" tabindex="-1"></a>layer3 <span class="op">=</span> MyDense(units<span class="op">=</span><span class="dv">64</span>, nested_model<span class="op">=</span>layer)</span>
-<span id="cb23-46"><a href="#cb23-46" tabindex="-1"></a></span>
-<span id="cb23-47"><a href="#cb23-47" tabindex="-1"></a>config <span class="op">=</span> keras.layers.serialize(layer3)</span>
-<span id="cb23-48"><a href="#cb23-48" tabindex="-1"></a></span>
-<span id="cb23-49"><a href="#cb23-49" tabindex="-1"></a><span class="bu">print</span>(config)</span>
-<span id="cb23-50"><a href="#cb23-50" tabindex="-1"></a></span>
-<span id="cb23-51"><a href="#cb23-51" tabindex="-1"></a>new_layer <span class="op">=</span> keras.layers.deserialize(config)</span>
-<span id="cb23-52"><a href="#cb23-52" tabindex="-1"></a></span>
-<span id="cb23-53"><a href="#cb23-53" tabindex="-1"></a><span class="bu">print</span>(new_layer)</span></code></pre></div>
+<div class="sourceCode" id="cb40"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">layer_my_dense</span> <span class="op">&lt;-</span> <span class="fu">register_custom_object</span><span class="op">(</span></span>
+<span>  package <span class="op">=</span> <span class="st">"MyLayers"</span>, name <span class="op">=</span> <span class="st">"KernelMult"</span>,</span>
+<span>  object <span class="op">=</span> <span class="fu"><a href="../reference/Layer.html">Layer</a></span><span class="op">(</span></span>
+<span>    <span class="st">"MyDense"</span>,</span>
+<span>    initialize <span class="op">=</span> <span class="kw">function</span><span class="op">(</span><span class="va">units</span>,</span>
+<span>                          <span class="va">...</span>,</span>
+<span>                          <span class="va">kernel_regularizer</span> <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>                          <span class="va">kernel_initializer</span> <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>                          <span class="va">nested_model</span> <span class="op">=</span> <span class="cn">NULL</span><span class="op">)</span> <span class="op">{</span></span>
+<span>      <span class="va">super</span><span class="op">$</span><span class="fu">initialize</span><span class="op">(</span><span class="va">...</span><span class="op">)</span></span>
+<span>      <span class="va">self</span><span class="op">$</span><span class="va">hidden_units</span> <span class="op">&lt;-</span> <span class="va">units</span></span>
+<span>      <span class="va">self</span><span class="op">$</span><span class="va">kernel_regularizer</span> <span class="op">&lt;-</span> <span class="va">kernel_regularizer</span></span>
+<span>      <span class="va">self</span><span class="op">$</span><span class="va">kernel_initializer</span> <span class="op">&lt;-</span> <span class="va">kernel_initializer</span></span>
+<span>      <span class="va">self</span><span class="op">$</span><span class="va">nested_model</span> <span class="op">&lt;-</span> <span class="va">nested_model</span></span>
+<span>    <span class="op">}</span>,</span>
+<span>    get_config <span class="op">=</span> <span class="kw">function</span><span class="op">(</span><span class="op">)</span> <span class="op">{</span></span>
+<span>      <span class="va">config</span> <span class="op">&lt;-</span> <span class="va">super</span><span class="op">$</span><span class="fu">get_config</span><span class="op">(</span><span class="op">)</span></span>
+<span>      <span class="co"># Update the config with the custom layer's parameters</span></span>
+<span>      <span class="va">config</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/utils/modifyList.html" class="external-link">modifyList</a></span><span class="op">(</span></span>
+<span>        <span class="va">config</span>,</span>
+<span>        <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span></span>
+<span>          units <span class="op">=</span> <span class="va">self</span><span class="op">$</span><span class="va">hidden_units</span>,</span>
+<span>          kernel_regularizer <span class="op">=</span> <span class="va">self</span><span class="op">$</span><span class="va">kernel_regularizer</span>,</span>
+<span>          kernel_initializer <span class="op">=</span> <span class="va">self</span><span class="op">$</span><span class="va">kernel_initializer</span>,</span>
+<span>          nested_model <span class="op">=</span> <span class="va">self</span><span class="op">$</span><span class="va">nested_model</span></span>
+<span>        <span class="op">)</span></span>
+<span>      <span class="op">)</span></span>
+<span>      <span class="va">config</span></span>
+<span>    <span class="op">}</span>,</span>
+<span>    build <span class="op">=</span> <span class="kw">function</span><span class="op">(</span><span class="va">input_shape</span><span class="op">)</span> <span class="op">{</span></span>
+<span>      <span class="va">input_units</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">tail</a></span><span class="op">(</span><span class="va">input_shape</span>, <span class="fl">1</span><span class="op">)</span></span>
+<span>      <span class="va">self</span><span class="op">$</span><span class="va">kernel</span> <span class="op">&lt;-</span> <span class="va">self</span><span class="op">$</span><span class="fu">add_weight</span><span class="op">(</span></span>
+<span>        name <span class="op">=</span> <span class="st">"kernel"</span>,</span>
+<span>        shape <span class="op">=</span> <span class="fu">shape</span><span class="op">(</span><span class="va">input_units</span>, <span class="va">self</span><span class="op">$</span><span class="va">hidden_units</span><span class="op">)</span>,</span>
+<span>        regularizer <span class="op">=</span> <span class="va">self</span><span class="op">$</span><span class="va">kernel_regularizer</span>,</span>
+<span>        initializer <span class="op">=</span> <span class="va">self</span><span class="op">$</span><span class="va">kernel_initializer</span>,</span>
+<span>      <span class="op">)</span></span>
+<span>    <span class="op">}</span>,</span>
+<span>    call <span class="op">=</span> <span class="kw">function</span><span class="op">(</span><span class="va">inputs</span><span class="op">)</span> <span class="op">{</span></span>
+<span>      <span class="fu"><a href="../reference/op_matmul.html">op_matmul</a></span><span class="op">(</span><span class="va">inputs</span>, <span class="va">self</span><span class="op">$</span><span class="va">kernel</span><span class="op">)</span></span>
+<span>    <span class="op">}</span></span>
+<span>  <span class="op">)</span></span>
+<span><span class="op">)</span></span></code></pre></div>
+<pre><code><span><span class="co">## wrong parameter order: variadic keyword parameter before keyword-only parameter</span></span></code></pre>
+<div class="sourceCode" id="cb42"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">layer</span> <span class="op">&lt;-</span> <span class="fu">layer_my_dense</span><span class="op">(</span>units <span class="op">=</span> <span class="fl">16</span>,</span>
+<span>                        kernel_regularizer <span class="op">=</span> <span class="st">"l1"</span>,</span>
+<span>                        kernel_initializer <span class="op">=</span> <span class="st">"ones"</span><span class="op">)</span></span></code></pre></div>
+<pre><code><span><span class="co">## Error in layer_my_dense(units = 16, kernel_regularizer = "l1", kernel_initializer = "ones"): could not find function "layer_my_dense"</span></span></code></pre>
+<div class="sourceCode" id="cb44"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">layer3</span> <span class="op">&lt;-</span> <span class="fu">layer_my_dense</span><span class="op">(</span>units <span class="op">=</span> <span class="fl">64</span>, nested_model <span class="op">=</span> <span class="va">layer</span><span class="op">)</span></span></code></pre></div>
+<pre><code><span><span class="co">## Error in layer_my_dense(units = 64, nested_model = layer): could not find function "layer_my_dense"</span></span></code></pre>
+<div class="sourceCode" id="cb46"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">config</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/serialize_keras_object.html">serialize_keras_object</a></span><span class="op">(</span><span class="va">layer3</span><span class="op">)</span></span></code></pre></div>
+<pre><code><span><span class="co">## Error in serialize_keras_object(layer3): could not find function "serialize_keras_object"</span></span></code></pre>
+<div class="sourceCode" id="cb48"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/str.html" class="external-link">str</a></span><span class="op">(</span><span class="va">config</span><span class="op">)</span></span></code></pre></div>
+<pre><code><span><span class="co">## {'name': 'functional_11', 'trainable': True, 'layers': [{'module': 'keras.src.layers.core.input_layer', 'class_name': 'InputLayer', 'config': {'batch_shape': (None, 32), 'dtype': 'float32', 'sparse': False, 'name': 'input_layer_5'}, 'registered_name': 'InputLayer', 'name': 'input_layer_5', 'inbound_nodes': []}, {'module': 'keras.src.layers.core.dense', 'class_name': 'Dense', 'config': {'name': 'dense_6', 'trainable': True, 'dtype': 'float32', 'units': 1, 'activation': 'linear', 'use_bias': True, 'kernel_initializer': {'module': 'keras.src.initializers.random_initializers', 'class_name': 'GlorotUniform', 'config': {'seed': None}, 'registered_name': 'GlorotUniform'}, 'bias_initializer': {'module': 'keras.src.initializers.constant_initializers', 'class_name': 'Zeros', 'config': {}, 'registered_name': 'Zeros'}, 'kernel_regularizer': None, 'bias_regularizer': None, 'kernel_constraint': None, 'bias_constraint': None}, 'registered_name': 'Dense', 'build_config': {'input_shape': (None, 32)}, 'name': 'dense_6', 'inbound_nodes': [{'args': ({'class_name': '__keras_tensor__', 'config': {'shape': (None, 32), 'dtype': 'float32', 'keras_history': ['input_layer_5', 0, 0]}},), 'kwargs': {}}]}], 'input_layers': [['input_layer_5', 0, 0]], 'output_layers': [['dense_6', 0, 0]]}</span></span></code></pre>
+<div class="sourceCode" id="cb50"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">new_layer</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/deserialize_keras_object.html">deserialize_keras_object</a></span><span class="op">(</span><span class="op">)</span><span class="op">(</span><span class="va">config</span><span class="op">)</span></span></code></pre></div>
+<pre><code><span><span class="co">## Error in deserialize_keras_object(): could not find function "deserialize_keras_object"</span></span></code></pre>
+<div class="sourceCode" id="cb52"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">new_layer</span></span></code></pre></div>
+<pre><code><span><span class="co">## &lt;Dense name=dense_4, built=False&gt;</span></span></code></pre>
 <p>Note that overriding <code>from_config</code> is unnecessary above
 for <code>MyDense</code> because <code>hidden_units</code>,
 <code>kernel_initializer</code>, and <code>kernel_regularizer</code> are
 ints, strings, and a built-in Keras object, respectively. This means
 that the default <code>from_config</code> implementation of
-<code>cls(**config)</code> will work as intended.</p>
+<code>cls(!!!config)</code> will work as intended.</p>
 <p>For more complex objects, such as layers and models passed to
-<code>__init__</code>, for example, you must explicitly deserialize
+<code>initialize()</code>, for example, you must explicitly deserialize
 these objects. Let’s take a look at an example of a model where a
 <code>from_config</code> override is necessary.</p>
-<p><strong>Example:</strong> <a name="registration_example"></a></p>
-<div class="sourceCode" id="cb24"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb24-1"><a href="#cb24-1" tabindex="-1"></a><span class="at">@keras.saving.register_keras_serializable</span>(package<span class="op">=</span><span class="st">"ComplexModels"</span>)</span>
-<span id="cb24-2"><a href="#cb24-2" tabindex="-1"></a><span class="kw">class</span> CustomModel(keras.layers.Layer):</span>
-<span id="cb24-3"><a href="#cb24-3" tabindex="-1"></a>    <span class="kw">def</span> <span class="fu">__init__</span>(<span class="va">self</span>, first_layer, second_layer<span class="op">=</span><span class="va">None</span>, <span class="op">**</span>kwargs):</span>
-<span id="cb24-4"><a href="#cb24-4" tabindex="-1"></a>        <span class="bu">super</span>().<span class="fu">__init__</span>(<span class="op">**</span>kwargs)</span>
-<span id="cb24-5"><a href="#cb24-5" tabindex="-1"></a>        <span class="va">self</span>.first_layer <span class="op">=</span> first_layer</span>
-<span id="cb24-6"><a href="#cb24-6" tabindex="-1"></a>        <span class="cf">if</span> second_layer <span class="kw">is</span> <span class="kw">not</span> <span class="va">None</span>:</span>
-<span id="cb24-7"><a href="#cb24-7" tabindex="-1"></a>            <span class="va">self</span>.second_layer <span class="op">=</span> second_layer</span>
-<span id="cb24-8"><a href="#cb24-8" tabindex="-1"></a>        <span class="cf">else</span>:</span>
-<span id="cb24-9"><a href="#cb24-9" tabindex="-1"></a>            <span class="va">self</span>.second_layer <span class="op">=</span> keras.layers.Dense(<span class="dv">8</span>)</span>
-<span id="cb24-10"><a href="#cb24-10" tabindex="-1"></a></span>
-<span id="cb24-11"><a href="#cb24-11" tabindex="-1"></a>    <span class="kw">def</span> get_config(<span class="va">self</span>):</span>
-<span id="cb24-12"><a href="#cb24-12" tabindex="-1"></a>        config <span class="op">=</span> <span class="bu">super</span>().get_config()</span>
-<span id="cb24-13"><a href="#cb24-13" tabindex="-1"></a>        config.update(</span>
-<span id="cb24-14"><a href="#cb24-14" tabindex="-1"></a>            {</span>
-<span id="cb24-15"><a href="#cb24-15" tabindex="-1"></a>                <span class="st">"first_layer"</span>: <span class="va">self</span>.first_layer,</span>
-<span id="cb24-16"><a href="#cb24-16" tabindex="-1"></a>                <span class="st">"second_layer"</span>: <span class="va">self</span>.second_layer,</span>
-<span id="cb24-17"><a href="#cb24-17" tabindex="-1"></a>            }</span>
-<span id="cb24-18"><a href="#cb24-18" tabindex="-1"></a>        )</span>
-<span id="cb24-19"><a href="#cb24-19" tabindex="-1"></a>        <span class="cf">return</span> config</span>
-<span id="cb24-20"><a href="#cb24-20" tabindex="-1"></a></span>
-<span id="cb24-21"><a href="#cb24-21" tabindex="-1"></a>    <span class="at">@classmethod</span></span>
-<span id="cb24-22"><a href="#cb24-22" tabindex="-1"></a>    <span class="kw">def</span> from_config(cls, config):</span>
-<span id="cb24-23"><a href="#cb24-23" tabindex="-1"></a>        <span class="co"># Note that you can also use `keras.saving.deserialize_keras_object` here</span></span>
-<span id="cb24-24"><a href="#cb24-24" tabindex="-1"></a>        config[<span class="st">"first_layer"</span>] <span class="op">=</span> keras.layers.deserialize(config[<span class="st">"first_layer"</span>])</span>
-<span id="cb24-25"><a href="#cb24-25" tabindex="-1"></a>        config[<span class="st">"second_layer"</span>] <span class="op">=</span> keras.layers.deserialize(config[<span class="st">"second_layer"</span>])</span>
-<span id="cb24-26"><a href="#cb24-26" tabindex="-1"></a>        <span class="cf">return</span> cls(<span class="op">**</span>config)</span>
-<span id="cb24-27"><a href="#cb24-27" tabindex="-1"></a></span>
-<span id="cb24-28"><a href="#cb24-28" tabindex="-1"></a>    <span class="kw">def</span> call(<span class="va">self</span>, inputs):</span>
-<span id="cb24-29"><a href="#cb24-29" tabindex="-1"></a>        <span class="cf">return</span> <span class="va">self</span>.first_layer(<span class="va">self</span>.second_layer(inputs))</span>
-<span id="cb24-30"><a href="#cb24-30" tabindex="-1"></a></span>
-<span id="cb24-31"><a href="#cb24-31" tabindex="-1"></a></span>
-<span id="cb24-32"><a href="#cb24-32" tabindex="-1"></a><span class="co"># Let's make our first layer the custom layer from the previous example (MyDense)</span></span>
-<span id="cb24-33"><a href="#cb24-33" tabindex="-1"></a>inputs <span class="op">=</span> keras.Input((<span class="dv">32</span>,))</span>
-<span id="cb24-34"><a href="#cb24-34" tabindex="-1"></a>outputs <span class="op">=</span> CustomModel(first_layer<span class="op">=</span>layer)(inputs)</span>
-<span id="cb24-35"><a href="#cb24-35" tabindex="-1"></a>model <span class="op">=</span> keras.Model(inputs, outputs)</span>
-<span id="cb24-36"><a href="#cb24-36" tabindex="-1"></a></span>
-<span id="cb24-37"><a href="#cb24-37" tabindex="-1"></a>config <span class="op">=</span> model.get_config()</span>
-<span id="cb24-38"><a href="#cb24-38" tabindex="-1"></a>new_model <span class="op">=</span> keras.Model.from_config(config)</span></code></pre></div>
-<p><a name="custom_object_serialization"></a> #### How custom objects
-are serialized</p>
+<p><strong>Example:</strong>
+<!-- <a name="registration_example"></a> --></p>
+<div class="sourceCode" id="cb54"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">layer_custom_model</span> <span class="op">&lt;-</span> <span class="fu">register_custom_object</span><span class="op">(</span></span>
+<span>  package <span class="op">=</span> <span class="st">"ComplexModels"</span>,</span>
+<span>  object <span class="op">=</span> <span class="fu"><a href="../reference/Layer.html">Layer</a></span><span class="op">(</span></span>
+<span>    <span class="st">"CustomModel"</span>,</span>
+<span>    initialize <span class="op">=</span> <span class="kw">function</span><span class="op">(</span><span class="va">first_layer</span>, <span class="va">second_layer</span> <span class="op">=</span> <span class="cn">NULL</span>, <span class="va">...</span><span class="op">)</span> <span class="op">{</span></span>
+<span>      <span class="va">super</span><span class="op">$</span><span class="fu">initialize</span><span class="op">(</span><span class="va">...</span><span class="op">)</span></span>
+<span>      <span class="va">self</span><span class="op">$</span><span class="va">first_layer</span> <span class="op">&lt;-</span> <span class="va">first_layer</span></span>
+<span>      <span class="va">self</span><span class="op">$</span><span class="va">second_layer</span> <span class="op">&lt;-</span> <span class="va">second_layer</span> <span class="op">%||%</span> <span class="fu"><a href="../reference/layer_dense.html">layer_dense</a></span><span class="op">(</span>, <span class="fl">8</span><span class="op">)</span></span>
+<span>    <span class="op">}</span>,</span>
+<span></span>
+<span>    get_config <span class="op">=</span> <span class="kw">function</span><span class="op">(</span><span class="op">)</span> <span class="op">{</span></span>
+<span>      <span class="va">config</span> <span class="op">&lt;-</span> <span class="va">super</span><span class="op">$</span><span class="fu">get_config</span><span class="op">(</span><span class="op">)</span></span>
+<span>      <span class="va">config</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/utils/modifyList.html" class="external-link">modifyList</a></span><span class="op">(</span><span class="va">config</span>, <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span></span>
+<span>        first_layer <span class="op">=</span> <span class="va">self</span><span class="op">$</span><span class="va">first_layer</span>,</span>
+<span>        second_layer <span class="op">=</span> <span class="va">self</span><span class="op">$</span><span class="va">second_layer</span></span>
+<span>      <span class="op">)</span><span class="op">)</span></span>
+<span>      <span class="va">config</span></span>
+<span>    <span class="op">}</span>,</span>
+<span></span>
+<span>    from_config <span class="op">=</span> <span class="fu"><a href="https://rstudio.github.io/reticulate/reference/py_eval.html" class="external-link">py_eval</a></span><span class="op">(</span><span class="st">"classmethod"</span><span class="op">)</span><span class="op">(</span><span class="kw">function</span><span class="op">(</span><span class="va">cls</span>, <span class="va">config</span><span class="op">)</span> <span class="op">{</span></span>
+<span>      <span class="va">config</span><span class="op">$</span><span class="va">first_layer</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/compound.html" class="external-link">%&lt;&gt;%</a></span> <span class="fu"><a href="../reference/deserialize_keras_object.html">deserialize_keras_object</a></span><span class="op">(</span><span class="op">)</span></span>
+<span>      <span class="va">config</span><span class="op">$</span><span class="va">second_layer</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/compound.html" class="external-link">%&lt;&gt;%</a></span> <span class="fu"><a href="../reference/deserialize_keras_object.html">deserialize_keras_object</a></span><span class="op">(</span><span class="op">)</span></span>
+<span>      <span class="co"># note that the class is available in methods under the classname symbol,</span></span>
+<span>      <span class="co"># (`CustomModel` for this class), and also under the symbol `__class__`</span></span>
+<span>      <span class="fu">cls</span><span class="op">(</span><span class="op">!</span><span class="op">!</span><span class="op">!</span><span class="va">config</span><span class="op">)</span></span>
+<span>      <span class="co"># CustomModel(!!!config)</span></span>
+<span>    <span class="op">}</span><span class="op">)</span>,</span>
+<span>    call <span class="op">=</span> <span class="kw">function</span><span class="op">(</span><span class="va">self</span>, <span class="va">inputs</span><span class="op">)</span> <span class="op">{</span></span>
+<span>      <span class="va">inputs</span> <span class="op">|&gt;</span></span>
+<span>        <span class="va">self</span><span class="op">$</span><span class="fu">first_layer</span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>        <span class="va">self</span><span class="op">$</span><span class="fu">second_layer</span><span class="op">(</span><span class="op">)</span></span>
+<span>    <span class="op">}</span></span>
+<span>  <span class="op">)</span></span>
+<span><span class="op">)</span></span></code></pre></div>
+<pre><code><span><span class="co">## Error in py_eval("classmethod"): could not find function "py_eval"</span></span></code></pre>
+<div class="sourceCode" id="cb56"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># Let's make our first layer the custom layer from the previous example (MyDense)</span></span>
+<span><span class="va">inputs</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/layer_input.html">layer_input</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">32</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="va">outputs</span> <span class="op">&lt;-</span>  <span class="va">inputs</span> <span class="op">|&gt;</span> <span class="fu">layer_custom_model</span><span class="op">(</span>first_layer<span class="op">=</span><span class="va">layer</span><span class="op">)</span></span></code></pre></div>
+<pre><code><span><span class="co">## Error in layer_custom_model(inputs, first_layer = layer): could not find function "layer_custom_model"</span></span></code></pre>
+<div class="sourceCode" id="cb58"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">model</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/keras_model.html">keras_model</a></span><span class="op">(</span><span class="va">inputs</span>, <span class="va">outputs</span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">config</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/get_config.html">get_config</a></span><span class="op">(</span><span class="va">model</span><span class="op">)</span></span>
+<span><span class="va">new_model</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/get_config.html">from_config</a></span><span class="op">(</span><span class="va">config</span><span class="op">)</span></span></code></pre></div>
+<!-- <a name="custom_object_serialization"></a> -->
+</div>
+<div class="section level4">
+<h4 id="how-custom-objects-are-serialized">How custom objects are serialized<a class="anchor" aria-label="anchor" href="#how-custom-objects-are-serialized"></a>
+</h4>
 <p>The serialization format has a special key for custom objects
-registered via <code>@keras.saving.register_keras_serializable</code>.
-This <code>registered_name</code> key allows for easy retrieval at
+registered via <code>register_custom_object()</code>. This
+<code>registered_name</code> key allows for easy retrieval at
 loading/deserialization time while also allowing users to add custom
 naming.</p>
 <p>Let’s take a look at the config from serializing the custom layer
 <code>MyDense</code> we defined above.</p>
 <p><strong>Example</strong>:</p>
-<div class="sourceCode" id="cb25"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb25-1"><a href="#cb25-1" tabindex="-1"></a>layer <span class="op">=</span> MyDense(</span>
-<span id="cb25-2"><a href="#cb25-2" tabindex="-1"></a>    units<span class="op">=</span><span class="dv">16</span>,</span>
-<span id="cb25-3"><a href="#cb25-3" tabindex="-1"></a>    kernel_regularizer<span class="op">=</span>keras.regularizers.L1L2(l1<span class="op">=</span><span class="fl">1e-5</span>, l2<span class="op">=</span><span class="fl">1e-4</span>),</span>
-<span id="cb25-4"><a href="#cb25-4" tabindex="-1"></a>    kernel_initializer<span class="op">=</span><span class="st">"ones"</span>,</span>
-<span id="cb25-5"><a href="#cb25-5" tabindex="-1"></a>)</span>
-<span id="cb25-6"><a href="#cb25-6" tabindex="-1"></a>config <span class="op">=</span> keras.layers.serialize(layer)</span>
-<span id="cb25-7"><a href="#cb25-7" tabindex="-1"></a><span class="bu">print</span>(config)</span></code></pre></div>
+<div class="sourceCode" id="cb59"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">layer</span> <span class="op">&lt;-</span> <span class="fu">layer_my_dense</span><span class="op">(</span></span>
+<span>  units <span class="op">=</span> <span class="fl">16</span>,</span>
+<span>  kernel_regularizer <span class="op">=</span> <span class="fu"><a href="../reference/regularizer_l1_l2.html">regularizer_l1_l2</a></span><span class="op">(</span>l1 <span class="op">=</span> <span class="fl">1e-5</span>, l2 <span class="op">=</span> <span class="fl">1e-4</span><span class="op">)</span>,</span>
+<span>  kernel_initializer <span class="op">=</span> <span class="st">"ones"</span>,</span>
+<span><span class="op">)</span></span></code></pre></div>
+<pre><code><span><span class="co">## Error in layer_my_dense(units = 16, kernel_regularizer = regularizer_l1_l2(l1 = 1e-05, : could not find function "layer_my_dense"</span></span></code></pre>
+<div class="sourceCode" id="cb61"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">config</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/serialize_keras_object.html">serialize_keras_object</a></span><span class="op">(</span><span class="va">layer</span><span class="op">)</span></span></code></pre></div>
+<pre><code><span><span class="co">## Error in serialize_keras_object(layer): could not find function "serialize_keras_object"</span></span></code></pre>
+<div class="sourceCode" id="cb63"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/str.html" class="external-link">str</a></span><span class="op">(</span><span class="va">config</span><span class="op">)</span></span></code></pre></div>
+<pre><code><span><span class="co">## {'name': 'functional_21', 'trainable': True, 'layers': [{'module': 'keras.src.layers.core.input_layer', 'class_name': 'InputLayer', 'config': {'batch_shape': (None, 784), 'dtype': 'float32', 'sparse': False, 'name': 'digits'}, 'registered_name': 'InputLayer', 'name': 'digits', 'inbound_nodes': []}, {'module': 'keras.src.layers.core.dense', 'class_name': 'Dense', 'config': {'name': 'dense_1', 'trainable': True, 'dtype': 'float32', 'units': 64, 'activation': 'relu', 'use_bias': True, 'kernel_initializer': {'module': 'keras.src.initializers.random_initializers', 'class_name': 'GlorotUniform', 'config': {'seed': None}, 'registered_name': 'GlorotUniform'}, 'bias_initializer': {'module': 'keras.src.initializers.constant_initializers', 'class_name': 'Zeros', 'config': {}, 'registered_name': 'Zeros'}, 'kernel_regularizer': None, 'bias_regularizer': None, 'kernel_constraint': None, 'bias_constraint': None}, 'registered_name': 'Dense', 'build_config': {'input_shape': (None, 784)}, 'name': 'dense_1', 'inbound_nodes': [{'args': ({'class_name': '__keras_tensor__', 'config': {'shape': (None, 784), 'dtype': 'float32', 'keras_history': ['digits', 0, 0]}},), 'kwargs': {}}]}, {'module': 'keras.src.layers.core.dense', 'class_name': 'Dense', 'config': {'name': 'dense_2', 'trainable': True, 'dtype': 'float32', 'units': 64, 'activation': 'relu', 'use_bias': True, 'kernel_initializer': {'module': 'keras.src.initializers.random_initializers', 'class_name': 'GlorotUniform', 'config': {'seed': None}, 'registered_name': 'GlorotUniform'}, 'bias_initializer': {'module': 'keras.src.initializers.constant_initializers', 'class_name': 'Zeros', 'config': {}, 'registered_name': 'Zeros'}, 'kernel_regularizer': None, 'bias_regularizer': None, 'kernel_constraint': None, 'bias_constraint': None}, 'registered_name': 'Dense', 'build_config': {'input_shape': (None, 64)}, 'name': 'dense_2', 'inbound_nodes': [{'args': ({'class_name': '__keras_tensor__', 'config': {'shape': (None, 64), 'dtype': 'float32', 'keras_history': ['dense_1', 0, 0]}},), 'kwargs': {}}]}, {'module': 'keras.src.layers.core.input_layer', 'class_name': 'InputLayer', 'config': {'batch_shape': (None, 32), 'dtype': 'float32', 'sparse': False, 'name': 'input_layer_8'}, 'registered_name': 'InputLayer', 'name': 'input_layer_8', 'inbound_nodes': []}, {'module': 'keras.src.layers.core.dense', 'class_name': 'Dense', 'config': {'name': 'predictions', 'trainable': True, 'dtype': 'float32', 'units': 10, 'activation': 'linear', 'use_bias': True, 'kernel_initializer': {'module': 'keras.src.initializers.random_initializers', 'class_name': 'GlorotUniform', 'config': {'seed': None}, 'registered_name': 'GlorotUniform'}, 'bias_initializer': {'module': 'keras.src.initializers.constant_initializers', 'class_name': 'Zeros', 'config': {}, 'registered_name': 'Zeros'}, 'kernel_regularizer': None, 'bias_regularizer': None, 'kernel_constraint': None, 'bias_constraint': None}, 'registered_name': 'Dense', 'build_config': {'input_shape': (None, 64)}, 'name': 'predictions', 'inbound_nodes': [{'args': ({'class_name': '__keras_tensor__', 'config': {'shape': (None, 64), 'dtype': 'float32', 'keras_history': ['dense_2', 0, 0]}},), 'kwargs': {}}]}], 'input_layers': [['input_layer_8', 0, 0]], 'output_layers': [['predictions', 0, 0]]}</span></span></code></pre>
 <p>As shown, the <code>registered_name</code> key contains the lookup
 information for the Keras master list, including the package
 <code>MyLayers</code> and the custom name <code>KernelMult</code> that
-we gave in the <code>@keras.saving.register_keras_serializable</code>
-decorator. Take a look again at the custom class definition/registration
-<a href="#registration_example">here</a>.</p>
+we gave when calling <code>register_custom_objects()</code>. Take a look
+again at the custom class definition/registration <a href="#registration_example">here</a>.</p>
 <p>Note that the <code>class_name</code> key contains the original name
 of the class, allowing for proper re-initialization in
 <code>from_config</code>.</p>
 <p>Additionally, note that the <code>module</code> key is
-<code>None</code> since this is a custom object.</p>
+<code>NULL</code> since this is a custom object.</p>
+</div>
 </div>
 </div>
   </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>
@@ -826,7 +953,7 @@ of the class, allowing for proper re-initialization in
 
     <footer><div class="pkgdown-footer-left">
   <p></p>
-<p>Developed by Tomasz Kalinowski, JJ Allaire, François Chollet, RStudio, Google.</p>
+<p>Developed by Tomasz Kalinowski, JJ Allaire, François Chollet, Posit Software, PBC, Google.</p>
 </div>
 
 <div class="pkgdown-footer-right">
