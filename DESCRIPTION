@@ -5,11 +5,11 @@ Version: 2.13.0.9000
 Authors@R: c(
   person("Tomasz", "Kalinowski", role = c("aut", "cph", "cre"),
          email = "tomasz@posit.co"),
-  person("Daniel", "Falbel", role = c("ctb", "cph"), email = "daniel@rstudio.com"),
+  person("Daniel", "Falbel", role = c("ctb", "cph"), email = "daniel@posit.co"),
   person("JJ", "Allaire", role = c("aut", "cph")),
   person("François", "Chollet", role = c("aut", "cph")),
-  person("RStudio", role = c("ctb", "cph", "fnd")),
-  person("Google", role = c("ctb", "cph", "fnd")),
+  person("Posit Software, PBC", role = c("cph", "fnd")),
+  person("Google", role = c("cph", "fnd")),
   person("Yuan", "Tang", role = c("ctb", "cph"),
          email = "terrytangyuan@gmail.com",
          comment = c(ORCID = "0000-0001-5243-233X")),
@@ -23,7 +23,7 @@ Description: Interface to 'Keras' <https://keras.io>, a high-level neural
   combinations of the two), and runs seamlessly on both 'CPU' and 'GPU' devices.
 Encoding: UTF-8
 License: MIT + file LICENSE
-URL: https://tensorflow.rstudio.com/
+URL: https:/keras.posit.co/
 BugReports: https://github.com/rstudio/keras/issues
 Depends:
     R (>= 3.6)
