@@ -11,7 +11,7 @@
 \usage{
 new_metric_class(classname, ..., initialize, update_state, result)
 
-new_loss_class(classname, ..., call = NULL)
+new_loss_class(classname, ..., call = NULL, inherit = keras::keras$losses$Loss)
 
 new_callback_class(
   classname,

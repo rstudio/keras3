@@ -5,7 +5,7 @@
 \alias{load_model_config}
 \title{Save Model configuration as JSON}
 \usage{
-save_model_config(model, filepath, overwrite = FALSE, ...)
+save_model_config(model, filepath = NULL, overwrite = FALSE, ...)
 
 load_model_config(filepath, custom_objects = NULL)
 }

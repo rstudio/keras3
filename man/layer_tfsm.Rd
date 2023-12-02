@@ -70,11 +70,13 @@ to the \code{layer_tfsm} via the \code{call_training_endpoint} argument.
 
 Other saving: 
 \code{\link{config_enable_unsafe_deserialization}()},
+\code{\link{deserialize_keras_object}()},
 \code{\link{get_custom_objects}()},
 \code{\link{get_registered_name}()},
 \code{\link{get_registered_object}()},
 \code{\link{load_model}()},
-\code{\link{register_custom_object}()}
+\code{\link{register_keras_serializable}()},
+\code{\link{serialize_keras_object}()}
 
 Other layers: 
 \code{\link{bidirectional}()},

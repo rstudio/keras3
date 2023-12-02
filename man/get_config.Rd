@@ -7,7 +7,11 @@
 \usage{
 get_config(object)
 
-from_config(config, custom_objects = NULL)
+from_config(
+  config,
+  custom_objects = NULL,
+  class = attr(config, "config_class", TRUE) \%||\% keras$Model
+)
 }
 \arguments{
 \item{object}{Layer or model object}

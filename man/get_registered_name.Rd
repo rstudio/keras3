@@ -26,48 +26,17 @@ for serialization/deserialization.
 Other object registration saving: 
 \code{\link{get_custom_objects}()},
 \code{\link{get_registered_object}()},
-\code{\link{register_custom_object}()}
+\code{\link{register_keras_serializable}()}
 
 Other saving: 
 \code{\link{config_enable_unsafe_deserialization}()},
+\code{\link{deserialize_keras_object}()},
 \code{\link{get_custom_objects}()},
 \code{\link{get_registered_object}()},
 \code{\link{layer_tfsm}()},
 \code{\link{load_model}()},
-\code{\link{register_custom_object}()}
-
-Other utils: 
-\code{\link{audio_dataset_from_directory}()},
-\code{\link{clear_session}()},
-\code{\link{config_disable_interactive_logging}()},
-\code{\link{config_disable_traceback_filtering}()},
-\code{\link{config_enable_interactive_logging}()},
-\code{\link{config_enable_traceback_filtering}()},
-\code{\link{config_is_interactive_logging_enabled}()},
-\code{\link{config_is_traceback_filtering_enabled}()},
-\code{\link{get_custom_objects}()},
-\code{\link{get_file}()},
-\code{\link{get_registered_object}()},
-\code{\link{get_source_inputs}()},
-\code{\link{image_array_save}()},
-\code{\link{image_dataset_from_directory}()},
-\code{\link{image_from_array}()},
-\code{\link{image_load}()},
-\code{\link{image_smart_resize}()},
-\code{\link{image_to_array}()},
-\code{\link{layer_feature_space}()},
-\code{\link{layer_torch_module_wrapper}()},
-\code{\link{model_to_dot}()},
-\code{\link{normalize}()},
-\code{\link{pack_x_y_sample_weight}()},
-\code{\link{pad_sequences}()},
-\code{\link{set_random_seed}()},
-\code{\link{split_dataset}()},
-\code{\link{text_dataset_from_directory}()},
-\code{\link{timeseries_dataset_from_array}()},
-\code{\link{to_categorical}()},
-\code{\link{unpack_x_y_sample_weight}()}
+\code{\link{register_keras_serializable}()},
+\code{\link{serialize_keras_object}()}
 }
 \concept{object registration saving}
 \concept{saving}
-\concept{utils}

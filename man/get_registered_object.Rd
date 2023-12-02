@@ -44,15 +44,17 @@ serialization/deserialization.
 Other object registration saving: 
 \code{\link{get_custom_objects}()},
 \code{\link{get_registered_name}()},
-\code{\link{register_custom_object}()}
+\code{\link{register_keras_serializable}()}
 
 Other saving: 
 \code{\link{config_enable_unsafe_deserialization}()},
+\code{\link{deserialize_keras_object}()},
 \code{\link{get_custom_objects}()},
 \code{\link{get_registered_name}()},
 \code{\link{layer_tfsm}()},
 \code{\link{load_model}()},
-\code{\link{register_custom_object}()}
+\code{\link{register_keras_serializable}()},
+\code{\link{serialize_keras_object}()}
 
 Other utils: 
 \code{\link{audio_dataset_from_directory}()},
@@ -63,9 +65,7 @@ Other utils:
 \code{\link{config_enable_traceback_filtering}()},
 \code{\link{config_is_interactive_logging_enabled}()},
 \code{\link{config_is_traceback_filtering_enabled}()},
-\code{\link{get_custom_objects}()},
 \code{\link{get_file}()},
-\code{\link{get_registered_name}()},
 \code{\link{get_source_inputs}()},
 \code{\link{image_array_save}()},
 \code{\link{image_dataset_from_directory}()},

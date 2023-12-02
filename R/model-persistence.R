@@ -235,12 +235,8 @@ function (self, filepath, skip_mismatch = FALSE, ...)
 #' @export
 save_model_config <- function(model, filepath = NULL, overwrite = FALSE, ...)
 {
-  json <- model$to_json()
-  if(is.null(filepath)) {
-    return(json)
-  }
   confirm_overwrite(filepath, overwrite)
-  writeLines(json, filepath)
+  writeLines(model$to_json(), filepath)
   invisible(model)
 }
 
@@ -258,7 +254,7 @@ load_model_config <- function(filepath, custom_objects = NULL)
 #' Registers an object with the Keras serialization framework.
 #'
 #' @description
-#' This decorator injects the decorated class or function into the Keras custom
+#' This function registers a custom class or function with the Keras custom
 #' object registry, so that it can be serialized and deserialized without
 #' needing an entry in the user-provided `custom_objects` argument. It also injects a
 #' function that Keras will call to get the object's serializable string key.
@@ -274,7 +270,7 @@ load_model_config <- function(filepath, custom_objects = NULL)
 #' # Note that `'my_package'` is used as the `package` argument here, and since
 #' # the `name` argument is not provided, `'MyDense'` is used as the `name`.
 #' layer_my_dense <- Layer("MyDense")
-#' register_custom_object(layer_my_dense, package = "my_package")
+#' register_keras_serializable(layer_my_dense, package = "my_package")
 #'
 #' MyDense <- environment(layer_my_dense)$Layer # the python class obj
 #' stopifnot(exprs = {
@@ -295,7 +291,7 @@ load_model_config <- function(filepath, custom_objects = NULL)
 #' @family object registration saving
 #' @family saving
 #' @tether keras.saving.register_keras_serializable
-register_custom_object <-
+register_keras_serializable <-
 function (object, name = NULL, package = NULL, clear = FALSE)
 {
   if (clear) {
@@ -511,7 +507,6 @@ function (obj)
 #'     amsgrad = FALSE,
 #'     beta_1 = 0.8999999761581421,
 #'     beta_2 = 0.9990000128746033,
-#'     decay = 0.0,
 #'     epsilon = 1e-07,
 #'     learning_rate = 0.0010000000474974513,
 #'     name = "Adam"
@@ -548,7 +543,7 @@ function (obj)
 #'   "ModifiedMeanSquaredError",
 #'   inherit = keras$losses$MeanSquaredError)
 #'
-#' register_custom_object(loss_modified_mse, package='my_package')
+#' register_keras_serializable(loss_modified_mse, package='my_package')
 #'
 #' config <- list(
 #'   class_name = "ModifiedMeanSquaredError",

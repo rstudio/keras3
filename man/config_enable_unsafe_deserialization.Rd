@@ -15,12 +15,14 @@ Disables safe mode globally, allowing deserialization of lambdas.
 }
 
 Other saving: 
+\code{\link{deserialize_keras_object}()},
 \code{\link{get_custom_objects}()},
 \code{\link{get_registered_name}()},
 \code{\link{get_registered_object}()},
 \code{\link{layer_tfsm}()},
 \code{\link{load_model}()},
-\code{\link{register_custom_object}()}
+\code{\link{register_keras_serializable}()},
+\code{\link{serialize_keras_object}()}
 
 Other config: 
 \code{\link{config_disable_interactive_logging}()},
