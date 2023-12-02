@@ -4299,7 +4299,7 @@ keras$ops$floor(x)
 #' Returns the largest integer smaller or equal to the division of inputs.
 #'
 #' @returns
-#'     Output tensor, `y = floor(x1/x2)`
+#' Output tensor, `y <- floor(x1/x2)`
 #'
 #' @param x1
 #' Numerator.
@@ -4321,7 +4321,7 @@ keras$ops$floor_divide(x1, x2)
 #' Return a new tensor of given shape and type, filled with `fill_value`.
 #'
 #' @returns
-#'     Output tensor.
+#' Output tensor.
 #'
 #' @param shape
 #' Shape of the new tensor.
@@ -4396,7 +4396,7 @@ keras$ops$get_item(x, key)
 #' Return the truth value of `x1 > x2` element-wise.
 #'
 #' @returns
-#'     Output tensor, element-wise comparison of `x1` and `x2`.
+#' Output tensor, element-wise comparison of `x1` and `x2`.
 #'
 #' @param x1
 #' First input tensor.

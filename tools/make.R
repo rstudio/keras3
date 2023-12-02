@@ -128,6 +128,8 @@ fs::dir_walk("man-src", type = "directory", recurse = TRUE,
 #
 # TODO: add @import reticulate ??
 #
+# TODO: op_true_divide -- remove?
+#
 # TODO: Layer() should not instantiate the underlying layer class py object on each call.
 #
 # TODO: rename layer_input() to keras_input()? change layer_input() to call InputLayer()?
