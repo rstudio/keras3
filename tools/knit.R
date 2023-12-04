@@ -66,7 +66,7 @@ knit_man_src <- function(input, ..., output_dir) {
 
 knit_vignette <- function(input, ..., output_dir) {
   # print(sys.call())
-  # cat("wd: ", getwd(), "\n") # ~/github/rstudio/keras/vignettes-src
+  cat("wd: ", getwd(), "\n") # ~/github/rstudio/keras/vignettes-src
 
   library(keras3)
   # input <- normalizePath(input, mustWork = TRUE, winslash = "/") |> fs::path_tidy()
@@ -76,6 +76,13 @@ knit_vignette <- function(input, ..., output_dir) {
 
   filename <- basename(input)
   name <- sub("\\.[qrR]md$", "", filename)
+
+  knitr::opts_chunk$set(
+    fig.path = paste0(
+      fs::path_real(here::here("man/figures/")), "/",
+      fs::path_ext_remove(fs::path_file(input)), "/"
+    )
+  )
 
   # render_dir <- normalizePath(tempfile(paste0(name, "-")), mustWork = FALSE, winslash = "/") |> fs::path_tidy()
   render_dir <- fs::file_temp(paste0(name, "-"))

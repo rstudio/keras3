@@ -1,0 +1,148 @@
+---
+title: Convolutional autoencoder for image denoising
+author: '[Santiago L. Valdarrama](https://twitter.com/svpino)'
+date-created: 2021/03/01
+last-modified: 2021/03/01
+description: How to train a deep convolutional autoencoder for image denoising.
+accelerator: GPU
+output: rmarkdown::html_vignette
+knit: ({source(here::here("tools/knit.R")); knit_vignette})
+tether: https://raw.githubusercontent.com/keras-team/keras/master/guides/distributed_training_with_jax.py
+---
+
+## Introduction
+
+This example demonstrates how to implement a deep convolutional autoencoder
+for image denoising, mapping noisy digits images from the MNIST dataset to
+clean digits images. This implementation is based on an original blog post
+titled [Building Autoencoders in Keras](https://blog.keras.io/building-autoencoders-in-keras.html)
+by [François Chollet](https://twitter.com/fchollet).
+
+## Setup
+
+```{r}
+library(keras3)
+
+# Normalizes the supplied array and reshapes it.
+preprocess <- function(array) {
+  array_reshape(array/255, c(dim(array)[1], 28, 28, 1))
+}
+  
+# Adds random noise to each image in the supplied array.
+noise <- function(array) {
+  noise_factor <- 0.4
+  noisy_array <- array + noise_factor * random_normal(dim(array))
+  op_clip(noisy_array, 0.0, 1.0)
+}
+
+display <- function(array1, array2) {
+  n <- 2
+  indices <- sample.int(dim(array1)[1], n)
+  images1 <- as.array(array1)[indices,,,]
+  images2 <- as.array(array2)[indices,,,]
+  
+  par(mfrow = c(2, n), mar = c(0,0,0,0))
+  for (i in seq_len(n)) {
+    plot(as.raster(images1[i,,]))
+    plot(as.raster(images2[i,, ]))
+  }
+}
+```
+
+## Prepare the data
+
+```{r}
+# Since we only need images from the dataset to encode and decode, we
+# won't use the labels.
+c(c(train_data, .), c(test_data, .)) %<-% dataset_mnist()
+
+# Normalize and reshape the data
+train_data <- preprocess(train_data)
+test_data <- preprocess(test_data)
+
+# Create a copy of the data with added noise
+noisy_train_data <- noise(train_data)
+noisy_test_data <- noise(test_data)
+
+# Display the train data and a version of it with added noise
+display(train_data, noisy_train_data)
+```
+
+## Build the autoencoder
+
+We are going to use the Functional API to build our convolutional autoencoder.
+
+```{r}
+input <- layer_input(shape=c(28, 28, 1))
+
+# Encoder
+enc <- input %>%
+  layer_conv_2d(filters=32, kernel_size=c(3, 3), activation="relu", padding="same") %>%
+  layer_max_pooling_2d(pool_size=c(2, 2), padding="same") %>%
+  layer_conv_2d(filters=32, kernel_size=c(3, 3), activation="relu", padding="same") %>%
+  layer_max_pooling_2d(pool_size=c(2, 2), padding="same")
+
+# Decoder
+dec <- enc %>%
+  layer_conv_2d_transpose(
+    filters=32, kernel_size=c(3, 3), strides = 2, activation="relu", padding="same") %>%
+  layer_conv_2d_transpose(
+    filters=32, kernel_size=c(3, 3), strides = 2, activation="relu", padding="same") %>%
+  layer_conv_2d(filters=1, kernel_size=c(3, 3), activation="sigmoid", padding="same")
+
+# Autoencoder
+autoencoder <- keras_model(input, dec)
+autoencoder %>% compile(optimizer="adam", loss="binary_crossentropy")
+autoencoder %>% summary()
+```
+
+Now we can train our autoencoder using `train_data` as both our input data
+and target. Notice we are setting up the validation data using the same
+format.
+
+```{r}
+autoencoder %>% fit(
+    x=train_data,
+    y=train_data,
+    epochs=50,
+    batch_size=128,
+    shuffle=TRUE,
+    validation_data=list(test_data, test_data),
+)
+```
+
+Let's predict on our test dataset and display the original image together with
+the prediction from our autoencoder.
+
+Notice how the predictions are pretty close to the original images, although
+not quite the same.
+
+```{r}
+predictions <- autoencoder %>% predict(test_data)
+display(test_data, predictions)
+```
+
+Now that we know that our autoencoder works, let's retrain it using the noisy
+data as our input and the clean data as our target. We want our autoencoder to
+learn how to denoise the images.
+
+```{r}
+autoencoder %>% fit(
+    x=noisy_train_data,
+    y=train_data,
+    epochs=100,
+    batch_size=128,
+    shuffle=TRUE,
+    validation_data=list(noisy_test_data, test_data),
+)
+```
+
+Let's now predict on the noisy data and display the results of our autoencoder.
+
+Notice how the autoencoder does an amazing job at removing the noise from the
+input images.
+
+```{r}
+predictions <- autoencoder %>% predict(noisy_test_data)
+display(noisy_test_data, predictions)
+```

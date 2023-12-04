@@ -196,14 +196,14 @@ will be used for validation.</li>
 <span id="cb4-3"><a href="#cb4-3" tabindex="-1"></a>    <span class="st">"/content/swagaf-master/data/train.csv"</span>, index_col<span class="op">=</span><span class="dv">0</span></span>
 <span id="cb4-4"><a href="#cb4-4" tabindex="-1"></a>)  <span class="co"># Read CSV file into a DataFrame</span></span>
 <span id="cb4-5"><a href="#cb4-5" tabindex="-1"></a>train_df <span class="op">=</span> train_df.sample(frac<span class="op">=</span><span class="fl">0.02</span>)</span>
-<span id="cb4-6"><a href="#cb4-6" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"# Train Data: </span><span class="sc">{:,}</span><span class="st">"</span>.<span class="bu">format</span>(<span class="bu">len</span>(train_df)))</span>
+<span id="cb4-6"><a href="#cb4-6" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"# Train Data: {:,}"</span>.<span class="bu">format</span>(<span class="bu">len</span>(train_df)))</span>
 <span id="cb4-7"><a href="#cb4-7" tabindex="-1"></a></span>
 <span id="cb4-8"><a href="#cb4-8" tabindex="-1"></a><span class="co"># Valid data</span></span>
 <span id="cb4-9"><a href="#cb4-9" tabindex="-1"></a>valid_df <span class="op">=</span> pd.read_csv(</span>
 <span id="cb4-10"><a href="#cb4-10" tabindex="-1"></a>    <span class="st">"/content/swagaf-master/data/val.csv"</span>, index_col<span class="op">=</span><span class="dv">0</span></span>
 <span id="cb4-11"><a href="#cb4-11" tabindex="-1"></a>)  <span class="co"># Read CSV file into a DataFrame</span></span>
 <span id="cb4-12"><a href="#cb4-12" tabindex="-1"></a>valid_df <span class="op">=</span> valid_df.sample(frac<span class="op">=</span><span class="fl">0.02</span>)</span>
-<span id="cb4-13"><a href="#cb4-13" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"# Valid Data: </span><span class="sc">{:,}</span><span class="st">"</span>.<span class="bu">format</span>(<span class="bu">len</span>(valid_df)))</span></code></pre></div>
+<span id="cb4-13"><a href="#cb4-13" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"# Valid Data: {:,}"</span>.<span class="bu">format</span>(<span class="bu">len</span>(valid_df)))</span></code></pre></div>
 </div>
 <div class="section level2">
 <h2 id="contextualize-options">Contextualize Options<a class="anchor" aria-label="anchor" href="#contextualize-options"></a>
