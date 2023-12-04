@@ -528,3 +528,21 @@ random_array <- function(..., gen = stats::runif) {
   dim <- unlist(c(...), use.names = FALSE)
   array(gen(prod(dim)), dim = dim)
 }
+
+
+`append1<-` <- function(x, value) {
+  x[[length(x) + 1L]] <- value
+  x
+}
+
+`append<-` <- function(x, value)  {
+  c(x, value)
+}
+
+replace_val <- function(x, old, new) {
+  if (!is_scalar(new))
+    stop("Unexpected length of replacement value in replace_val().\n",
+         "`new` must be length 1, not ", length(new))
+  x[x %in% old] <- new
+  x
+}
