@@ -184,14 +184,14 @@ attach_eval({
     invisible(x)
   }
 
-  cat_cb <- function(x, echo = TRUE, trunc_echo = TRUE) {
-    obj_nm <- deparse(substitute(x))
+  cat_cb <- function(x, echo = TRUE, trunc_echo = TRUE, obj_nm = deparse(substitute(x))) {
+    force(obj_nm)
     catted <- capture.output(cat(x))
     tryCatch({
       out <- clipr::write_clip(catted)
       if (echo) {
         width <- if (trunc_echo) 160 else Inf
-        cat("output of 'cat(", obj_nm, ")' is now in clipboard:\n",
+        message("output of 'cat(", obj_nm, ")' is now in clipboard:\n",
             glue::glue_collapse(out, sep = "\n", width = width), "\n")
       }
     }, error = function(e) {
@@ -2155,6 +2155,23 @@ move_roxy_blocks_to_mansrc <- function() {
 
 move_mansrc_to_roxy_blocks <- function() {
 
+}
+
+str_prefix <- function(x, prefix, ...) str_c(prefix, x, ...)
+
+py_help_roxified <- function(object) {
+  obj_nm <- deparse1(call("roxify", call("py_help", substitute(object))))
+  if(is_string(object))
+    object <- py_eval(object)
+  help <- py_capture_output(import_builtins()$help(object), type = "stdout")
+  help <- help |>
+    str_split_lines() |>
+    str_replace("^ \\| ", "  ") |>
+    str_prefix("#' ") |>
+    str_trim("right") |>
+    str_flatten_lines()
+  cat_cb(help, obj_nm = obj_nm)
+  invisible(help)
 }
 
 # rename2(list(a = "b", a = z))

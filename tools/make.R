@@ -47,6 +47,7 @@ fs::dir_walk("man-src", type = "directory", recurse = TRUE,
 
 ## Waiting to be processed:
 
+# TODO: "keras.layers.InputSpec" - needs to be exported or somehow processed in `Layer()`
 
 # TODO: remove k_amax() and friends, they're redundant w/ k_max(), which already
 #       takes an axis arg. Only there for numpy api compatability, which
