@@ -82,7 +82,7 @@
 #' Variables set as attributes of a layer are tracked as weights
 #' of the layers (in `layer$weights`).
 #'
-#' ```r
+#' ```{r}
 #' library(keras3)
 #' layer_simple_dense <- Layer(
 #'   "SimpleDense",
@@ -129,7 +129,7 @@
 #' be updated manually during `call()`. Here's a example layer that computes
 #' the running sum of its inputs:
 #'
-#' ```r
+#' ```{r}
 #' layer_compute_sum <- Layer("ComputeSum",
 #'
 #'    initialize = function(input_dim){
@@ -273,9 +273,9 @@
 #' * ```
 #'   get_build_config()
 #'   ```
-#'   Returns a dictionary with the layer's input shape.
+#'   Returns a named list with the layer's input shape.
 #'
-#'   This method returns a config dict that can be used by
+#'   This method returns a config (named list) that can be used by
 #'   `build_from_config(config)` to create all states (e.g. Variables and
 #'   Lookup tables) needed by the layer.
 #'
