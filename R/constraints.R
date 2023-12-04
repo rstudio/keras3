@@ -58,7 +58,7 @@ as_constraint <- function(constraint) {
   create_constraint <- function(call, get_config = NULL) {
     if (is.null(get_config))
       get_config <- function() dict()
-    python_path <- system.file("python", package = "keras")
+    python_path <- system.file("python", package = "keras3")
     tools <- import_from_path("kerastools", path = python_path)
     tools$constraint$RConstraint(call, get_config)
   }

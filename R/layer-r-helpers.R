@@ -134,7 +134,7 @@ normalize_scale <- function(name, scale, dims) {
 #' @export
 get_vocabulary <- function(object, include_special_tokens=TRUE) {
   if (tensorflow::tf_version() < "2.3") {
-    python_path <- system.file("python", package = "keras")
+    python_path <- system.file("python", package = "keras3")
     tools <- import_from_path("kerastools", path = python_path)
     tools$get_vocabulary$get_vocabulary(object)
   } else {

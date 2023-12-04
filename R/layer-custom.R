@@ -108,7 +108,7 @@ compat_custom_KerasLayer_handler <- function(layer_class, args) {
     r6_layer <- do.call(layer_class$new, args)
 
     # create the python wrapper (passing the extracted py_wrapper_args)
-    python_path <- system.file("python", package = "keras")
+    python_path <- system.file("python", package = "keras3")
     tools <- import_from_path("kerastools", path = python_path)
     py_wrapper_args$r_build <- r6_layer$build
     py_wrapper_args$r_call <-  reticulate::py_func(r6_layer$call)

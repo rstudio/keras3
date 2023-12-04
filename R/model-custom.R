@@ -21,7 +21,7 @@ keras_model_custom <- function(model_fn, name = NULL) {
     stop("Custom models require Keras v2.2 or higher")
 
   # create the python subclass
-  python_path <- system.file("python", package = "keras")
+  python_path <- system.file("python", package = "keras3")
   tools <- import_from_path("kerastools", path = python_path)
   model <- tools$model$RModel(name = name)
 

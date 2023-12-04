@@ -197,7 +197,7 @@ normalize_callbacks <- function(callbacks) {
     callbacks <- list(callbacks)
 
   # import callback utility module
-  python_path <- system.file("python", package = "keras")
+  python_path <- system.file("python", package = "keras3")
   tools <- import_from_path("kerastools", path = python_path)
 
   # convert R callbacks to Python and check whether the user

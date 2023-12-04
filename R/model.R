@@ -1158,7 +1158,7 @@ as_generator.tensorflow.python.data.ops.dataset_ops.DatasetV2 <- function(x) {
 }
 
 as_generator.function <- function(x) {
-  python_path <- system.file("python", package = "keras")
+  python_path <- system.file("python", package = "keras3")
   tools <- reticulate::import_from_path("kerastools", path = python_path)
   iterator <- reticulate::py_iterator(function() {
     elem <- keras_array(x())
