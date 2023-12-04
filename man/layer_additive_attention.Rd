@@ -85,6 +85,7 @@ Other attention layers:
 \code{\link{layer_multi_head_attention}()}
 
 Other layers: 
+\code{\link{Layer}()},
 \code{\link{bidirectional}()},
 \code{\link{layer_activation_elu}()},
 \code{\link{layer_activation_leaky_relu}()},

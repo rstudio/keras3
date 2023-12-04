@@ -79,6 +79,7 @@ Other saving:
 \code{\link{serialize_keras_object}()}
 
 Other layers: 
+\code{\link{Layer}()},
 \code{\link{bidirectional}()},
 \code{\link{layer_activation_elu}()},
 \code{\link{layer_activation_leaky_relu}()},

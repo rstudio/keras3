@@ -118,6 +118,7 @@ Other rnn layers:
 \code{\link{layer_time_distributed}()}
 
 Other layers: 
+\code{\link{Layer}()},
 \code{\link{layer_activation_elu}()},
 \code{\link{layer_activation_leaky_relu}()},
 \code{\link{layer_activation_parametric_relu}()},

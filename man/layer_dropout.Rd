@@ -61,6 +61,7 @@ Other regularization layers:
 \code{\link{layer_spatial_dropout_3d}()}
 
 Other layers: 
+\code{\link{Layer}()},
 \code{\link{bidirectional}()},
 \code{\link{layer_activation_elu}()},
 \code{\link{layer_activation_leaky_relu}()},

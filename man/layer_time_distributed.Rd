@@ -70,6 +70,7 @@ Other rnn layers:
 \code{\link{layer_stacked_rnn_cells}()}
 
 Other layers: 
+\code{\link{Layer}()},
 \code{\link{bidirectional}()},
 \code{\link{layer_activation_elu}()},
 \code{\link{layer_activation_leaky_relu}()},

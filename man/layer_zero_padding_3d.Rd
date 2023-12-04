@@ -103,6 +103,7 @@ Other reshaping layers:
 \code{\link{layer_zero_padding_2d}()}
 
 Other layers: 
+\code{\link{Layer}()},
 \code{\link{bidirectional}()},
 \code{\link{layer_activation_elu}()},
 \code{\link{layer_activation_leaky_relu}()},
