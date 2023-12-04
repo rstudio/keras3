@@ -319,9 +319,8 @@ function (object, name = NULL, package = NULL, clear = FALSE)
     object <- py_func2(object, TRUE, name = name)
 
   if (is.null(package)) {
-    topenvname <- eval(quote(environmentName(topenv())), parent.frame())
-    package <- if (topenvname %in% c("", "R_GlobalEnv"))
-      "Custom" else topenvname
+    package <- environmentName(topenv(parent.frame())) |>
+      replace_val(c("", "R_GlobalEnv"), "Custom")
   }
 
   keras$saving$register_keras_serializable(package, name)(object)
