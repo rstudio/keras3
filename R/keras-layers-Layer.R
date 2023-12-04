@@ -520,6 +520,32 @@
 #' @seealso
 #' + <https:/keras.io/api/layers/base_layer#layer-class>
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/layers/Layer>
-Layer <- function(...) {
-  .NotYetImplemented()
-}
+Layer <-
+  function(classname, initialize, build = NULL, call = NULL,
+           compute_output_shape = NULL, ...,
+           inherit = keras3::keras$layers$Layer) {
+
+    public <- capture_args(match.call(), ignore = c("classname", "inherit"))
+    for(ignore_if_null in c("build", "call", "compute_output_shape"))
+      public[[ignore_if_null]] <- public[[ignore_if_null]]
+
+    inherit <- substitute(inherit)
+    parent_env <- parent.frame()
+
+    # R6Class() calls substitute() on inherit;
+    r_cls <- eval(as.call(list(
+      quote(R6::R6Class),
+      classname = classname,
+      public = public,
+      active = NULL,
+      inherit = inherit,
+      cloneable = FALSE,
+      parent_env = parent_env
+    )))
+
+    create_layer_wrapper(r_cls)
+  }
+
+
+
+
