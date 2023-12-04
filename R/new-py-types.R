@@ -13,12 +13,12 @@ function(classname, ..., initialize, update_state, result) {
 #' @rdname new-classes
 #' @export
 new_loss_class <-
-function(classname, ..., call = NULL, inherit = keras::keras$losses$Loss) {
+function(classname, ..., call = NULL, inherit = keras3::keras$losses$Loss) {
   members <- capture_args2(ignore = "classname")
   members$call <- call
   new_py_class(classname, members,
-              inherit_expr = substitute(inherit),
-              parent_env = parent.frame())
+               inherit_expr = substitute(inherit),
+               parent_env = parent.frame())
 }
 
 #' @rdname new-classes
@@ -102,7 +102,7 @@ function(classname, ...,
     names(which(vapply(formals(sys.function()), is.null, TRUE))))
 
   type <- new_py_class(classname, members,
-                      inherit = keras$layers$Layer,
+                      inherit = keras3::keras$layers$Layer,
                       parent_env = parent.frame())
 
   create_layer_wrapper(type)
