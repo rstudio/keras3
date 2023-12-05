@@ -1317,7 +1317,6 @@ pop_layer <- function(object) {
 #'   provided, defaults to `FALSE`.
 #' @param compact Whether to remove white-space only lines from the model
 #'   summary. (Default `TRUE`)
-#' @param width the column width to use for printing.
 #' @param ... for `summary()` and `print()`, passed on to `format()`. For
 #'   `format()`, passed on to `model$summary()`.
 #'
@@ -1333,6 +1332,30 @@ summary.keras.models.model.Model <- function(object, ...) {
   invisible(f)
 }
 
+with_rich_config <- function(expr) {
+  os <- reticulate::import("os")
+
+  # set the number of columns to the current width.
+  if (is.null(os$environ$get("COLUMNS"))) {
+    os$environ["COLUMNS"] = as.character(getOption("width"))
+    on.exit({
+      os$environ$pop("COLUMNS")
+    }, add = TRUE)
+  }
+
+  # allow colored output if the terminal supports it
+  if (cli::num_ansi_colors() >= 256 && is.null(os$environ$get("FORCE_COLOR"))) {
+    os$environ["FORCE_COLOR"] = "yes"
+    os$environ["COLORTERM"] = "truecolor"
+    on.exit({
+      os$environ$pop("FORCE_COLOR")
+      os$environ$pop("COLORTERM")
+    }, add = TRUE)
+  }
+
+  force(expr)
+}
+
 #' @rdname summary.keras.models.model.Model
 #' @export
 format.keras.models.model.Model <-
@@ -1342,24 +1365,16 @@ function(x,
          expand_nested = FALSE,
          show_trainable = x$built && as.logical(length(x$non_trainable_weights)),
          ...,
-         compact = TRUE,
-         width = getOption("width")) {
+         compact = TRUE) {
 
   if (py_is_null_xptr(x))
     return("<pointer: 0x0>")
 
-  args <- capture_args(match.call(), ignore = c("x", "compact", "width"))
+  args <- capture_args(match.call(), ignore = c("x", "compact"))
 
-  # ensure `line_length` and other args captured, even if not passed by user
-  args$line_length <- as_nullable_integer(line_length)
-  if(tf_version() >= "2.8")
-    args$show_trainable <- show_trainable
-
-  out <- if (x$built)
-    trimws(py_capture_output(do.call(x$summary, args),
-                             type = "stdout"))
-   else
-    "Model: <no summary available, model was not built>"
+  with_rich_config(
+    out <- trimws(py_capture_output(do.call(x$summary, args)))
+  )
 
   if(compact) {
     # strip empty lines
@@ -1367,6 +1382,7 @@ function(x,
     if(expand_nested)
       out <- gsub("\\n\\|\\s+\\|\\n", "\n", out)
   }
+
   out
 }
 
