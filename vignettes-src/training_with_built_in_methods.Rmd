@@ -61,6 +61,7 @@ outputs <- inputs %>%
   layer_dense(units = 64, activation = "relu", name = "dense_2") %>%
   layer_dense(units = 10, activation = "softmax", name = "predictions")
 model <- keras_model(inputs=inputs, outputs=outputs)
+summary(model)
 ```
 
 Here's what the typical end-to-end workflow looks like, consisting of:
