@@ -15,7 +15,8 @@
 <link rel="apple-touch-icon" type="image/png" sizes="60x60" href="../apple-touch-icon-60x60.png">
 <script src="../deps/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link href="../deps/bootstrap-5.3.1/bootstrap.min.css" rel="stylesheet">
-<script src="../deps/bootstrap-5.3.1/bootstrap.bundle.min.js"></script><!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous">
+<script src="../deps/bootstrap-5.3.1/bootstrap.bundle.min.js"></script><link href="../deps/JetBrains_Mono-0.4.7/font.css" rel="stylesheet">
+<!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/v4-shims.min.css" integrity="sha256-wZjR52fzng1pJHwx4aV2AO3yyTOXrcDW7jBpJtTwVxw=" crossorigin="anonymous">
 <!-- bootstrap-toc --><script src="https://cdn.jsdelivr.net/gh/afeld/bootstrap-toc@v1.0.1/dist/bootstrap-toc.min.js" integrity="sha256-4veVQbu7//Lk5TSmc7YV48MxtMy98e26cf5MrgZYnwo=" crossorigin="anonymous"></script><!-- headroom.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/headroom.min.js" integrity="sha256-AsUX4SJE1+yuDu5+mAVzJbuYNPHj/WroHuZ8Ir/CkE0=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script><!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><!-- search --><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- pkgdown --><script src="../pkgdown.js"></script><meta property="og:title" content="Introduction to Keras for engineers">
 <meta property="og:description" content="First contact with Keras 3.">
@@ -109,8 +110,8 @@
       <img src="" class="logo" alt=""><h1>Introduction to Keras for engineers</h1>
                         <h4 data-toc-skip class="author"><a href="https://twitter.com/fchollet" class="external-link">fchollet</a></h4>
             
-            <h4 data-toc-skip class="date">Last Modified: 2023-11-23;
-Last Rendered: 2023-11-29</h4>
+            <h4 data-toc-skip class="date">Last Modified: 2023-11-30;
+Last Rendered: 2023-12-05</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/rstudio/keras/blob/HEAD/vignettes/intro_to_keras_for_engineers.Rmd" class="external-link"><code>vignettes/intro_to_keras_for_engineers.Rmd</code></a></small>
       <div class="d-none name"><code>intro_to_keras_for_engineers.Rmd</code></div>
@@ -143,7 +144,7 @@ This entire guide is backend-agnostic.</p>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/rstudio/tensorflow" class="external-link">tensorflow</a></span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">##</span></span>
 <span><span class="co">## Attaching package: 'tensorflow'</span></span></code></pre>
-<pre><code><span><span class="co">## The following objects are masked from 'package:keras':</span></span>
+<pre><code><span><span class="co">## The following objects are masked from 'package:keras3':</span></span>
 <span><span class="co">##</span></span>
 <span><span class="co">##     set_random_seed, shape</span></span></code></pre>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
@@ -204,26 +205,26 @@ cases)</li>
 <div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary</a></span><span class="op">(</span><span class="va">model</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">## Model: "sequential"</span></span>
-<span><span class="co">## ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━┓</span></span>
-<span><span class="co">## ┃ Layer (type)                      ┃ Output Shape                ┃    Param # ┃</span></span>
-<span><span class="co">## ┡━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━┩</span></span>
-<span><span class="co">## │ conv2d_3 (Conv2D)                 │ (None, 26, 26, 64)          │        640 │</span></span>
-<span><span class="co">## ├───────────────────────────────────┼─────────────────────────────┼────────────┤</span></span>
-<span><span class="co">## │ conv2d_2 (Conv2D)                 │ (None, 24, 24, 64)          │     36,928 │</span></span>
-<span><span class="co">## ├───────────────────────────────────┼─────────────────────────────┼────────────┤</span></span>
-<span><span class="co">## │ max_pooling2d (MaxPooling2D)      │ (None, 12, 12, 64)          │          0 │</span></span>
-<span><span class="co">## ├───────────────────────────────────┼─────────────────────────────┼────────────┤</span></span>
-<span><span class="co">## │ conv2d_1 (Conv2D)                 │ (None, 10, 10, 128)         │     73,856 │</span></span>
-<span><span class="co">## ├───────────────────────────────────┼─────────────────────────────┼────────────┤</span></span>
-<span><span class="co">## │ conv2d (Conv2D)                   │ (None, 8, 8, 128)           │    147,584 │</span></span>
-<span><span class="co">## ├───────────────────────────────────┼─────────────────────────────┼────────────┤</span></span>
-<span><span class="co">## │ global_average_pooling2d          │ (None, 128)                 │          0 │</span></span>
-<span><span class="co">## │ (GlobalAveragePooling2D)          │                             │            │</span></span>
-<span><span class="co">## ├───────────────────────────────────┼─────────────────────────────┼────────────┤</span></span>
-<span><span class="co">## │ dropout (Dropout)                 │ (None, 128)                 │          0 │</span></span>
-<span><span class="co">## ├───────────────────────────────────┼─────────────────────────────┼────────────┤</span></span>
-<span><span class="co">## │ dense (Dense)                     │ (None, 10)                  │      1,290 │</span></span>
-<span><span class="co">## └───────────────────────────────────┴─────────────────────────────┴────────────┘</span></span>
+<span><span class="co">## ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━┓</span></span>
+<span><span class="co">## ┃ Layer (type)                    ┃ Output Shape              ┃    Param # ┃</span></span>
+<span><span class="co">## ┡━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━┩</span></span>
+<span><span class="co">## │ conv2d_3 (Conv2D)               │ (None, 26, 26, 64)        │        640 │</span></span>
+<span><span class="co">## ├─────────────────────────────────┼───────────────────────────┼────────────┤</span></span>
+<span><span class="co">## │ conv2d_2 (Conv2D)               │ (None, 24, 24, 64)        │     36,928 │</span></span>
+<span><span class="co">## ├─────────────────────────────────┼───────────────────────────┼────────────┤</span></span>
+<span><span class="co">## │ max_pooling2d (MaxPooling2D)    │ (None, 12, 12, 64)        │          0 │</span></span>
+<span><span class="co">## ├─────────────────────────────────┼───────────────────────────┼────────────┤</span></span>
+<span><span class="co">## │ conv2d_1 (Conv2D)               │ (None, 10, 10, 128)       │     73,856 │</span></span>
+<span><span class="co">## ├─────────────────────────────────┼───────────────────────────┼────────────┤</span></span>
+<span><span class="co">## │ conv2d (Conv2D)                 │ (None, 8, 8, 128)         │    147,584 │</span></span>
+<span><span class="co">## ├─────────────────────────────────┼───────────────────────────┼────────────┤</span></span>
+<span><span class="co">## │ global_average_pooling2d        │ (None, 128)               │          0 │</span></span>
+<span><span class="co">## │ (GlobalAveragePooling2D)        │                           │            │</span></span>
+<span><span class="co">## ├─────────────────────────────────┼───────────────────────────┼────────────┤</span></span>
+<span><span class="co">## │ dropout (Dropout)               │ (None, 128)               │          0 │</span></span>
+<span><span class="co">## ├─────────────────────────────────┼───────────────────────────┼────────────┤</span></span>
+<span><span class="co">## │ dense (Dense)                   │ (None, 10)                │      1,290 │</span></span>
+<span><span class="co">## └─────────────────────────────────┴───────────────────────────┴────────────┘</span></span>
 <span><span class="co">##  Total params: 260,298 (1016.79 KB)</span></span>
 <span><span class="co">##  Trainable params: 260,298 (1016.79 KB)</span></span>
 <span><span class="co">##  Non-trainable params: 0 (0.00 B)</span></span></code></pre>
@@ -258,7 +259,7 @@ unseen data.</p>
 <span>    validation_split<span class="op">=</span><span class="fl">0.15</span>,</span>
 <span>    callbacks<span class="op">=</span><span class="va">callbacks</span></span>
 <span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">## 399/399 - 39s - 97ms/step - acc: 0.7463 - loss: 0.7500 - val_acc: 0.9627 - val_loss: 0.1317</span></span></code></pre>
+<pre><code><span><span class="co">## 399/399 - 40s - 101ms/step - acc: 0.7463 - loss: 0.7500 - val_acc: 0.9627 - val_loss: 0.1317</span></span></code></pre>
 <div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">score</span> <span class="op">&lt;-</span> <span class="va">model</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://rdrr.io/pkg/tensorflow/man/evaluate.html" class="external-link">evaluate</a></span><span class="op">(</span><span class="va">x_test</span>, <span class="va">y_test</span>, verbose<span class="op">=</span><span class="fl">0</span><span class="op">)</span></span></code></pre></div>
 <p>During training, we were saving a model at the end of each epoch. You
@@ -272,7 +273,7 @@ can also save the model in its latest state like this:</p>
 <code><a href="https://rdrr.io/r/stats/predict.html" class="external-link">predict()</a></code>:</p>
 <div class="sourceCode" id="cb18"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">predictions</span> <span class="op">&lt;-</span> <span class="va">model</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://rdrr.io/r/stats/predict.html" class="external-link">predict</a></span><span class="op">(</span><span class="va">x_test</span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">## 313/313 - 3s - 9ms/step</span></span></code></pre>
+<pre><code><span><span class="co">## 313/313 - 3s - 10ms/step</span></span></code></pre>
 <div class="sourceCode" id="cb20"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/dim.html" class="external-link">dim</a></span><span class="op">(</span><span class="va">predictions</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">## [1] 10000    10</span></span></code></pre>
@@ -432,7 +433,7 @@ your Keras backend.</p>
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/rstudio/tfdatasets" class="external-link">tfdatasets</a></span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">##</span></span>
 <span><span class="co">## Attaching package: 'tfdatasets'</span></span></code></pre>
-<pre><code><span><span class="co">## The following object is masked from 'package:keras':</span></span>
+<pre><code><span><span class="co">## The following object is masked from 'package:keras3':</span></span>
 <span><span class="co">##</span></span>
 <span><span class="co">##     shape</span></span></code></pre>
 <div class="sourceCode" id="cb30"><pre class="downlit sourceCode r">
@@ -455,7 +456,7 @@ your Keras backend.</p>
 <span>  <span class="op">)</span></span>
 <span><span class="op">)</span></span>
 <span><span class="va">model</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://generics.r-lib.org/reference/fit.html" class="external-link">fit</a></span><span class="op">(</span><span class="va">train_dataset</span>, epochs<span class="op">=</span><span class="fl">1</span>, validation_data<span class="op">=</span><span class="va">test_dataset</span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">## 469/469 - 45s - 95ms/step - acc: 0.7552 - loss: 0.7242 - val_acc: 0.9199 - val_loss: 0.2651</span></span></code></pre>
+<pre><code><span><span class="co">## 469/469 - 46s - 97ms/step - acc: 0.7552 - loss: 0.7242 - val_acc: 0.9199 - val_loss: 0.2651</span></span></code></pre>
 </div>
 <div class="section level2">
 <h2 id="further-reading">Further reading<a class="anchor" aria-label="anchor" href="#further-reading"></a>
