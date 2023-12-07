@@ -14,7 +14,7 @@ template:
     navbar-light-color: "white"
     navbar-light-brand-color: "white"
     navbar-light-brand-hover-color: "white"
-    code_font: {google: "JetBrains Mono"}
+    code_font: {google: {family: "Fira Code", wght: "400;600;700"}}
 
 navbar:
   title: "Keras for R"
