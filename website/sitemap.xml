@@ -241,6 +241,9 @@
     <loc>https://keras.posit.co/articles/examples/knowledge_distillation.html</loc>
   </url>
   <url>
+    <loc>https://keras.posit.co/articles/examples/lala.html</loc>
+  </url>
+  <url>
     <loc>https://keras.posit.co/articles/examples/latent_walk.html</loc>
   </url>
   <url>
@@ -596,6 +599,9 @@
   </url>
   <url>
     <loc>https://keras.posit.co/articles/making_new_layers_and_models_via_subclassing.html</loc>
+  </url>
+  <url>
+    <loc>https://keras.posit.co/articles/mnist_convnet.html</loc>
   </url>
   <url>
     <loc>https://keras.posit.co/articles/new-guides/customizing_what_happens_in_fit.html</loc>
