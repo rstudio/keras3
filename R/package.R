@@ -128,13 +128,6 @@ keras <- NULL
       # check version
       check_implementation_version()
 
-      # patch progress bar for interactive/tty sessions
-      if ((interactive() || isatty(stdout())) && keras_version() >= "2.0.9") {
-        python_path <- system.file("python", package = "keras3")
-        tools <- import_from_path("kerastools", path = python_path)
-        tools$progbar$apply_patch()
-      }
-
       # if(implementation_module != "keras_core") {
       if(!py_has_attr(keras, "ops"))
         reticulate::py_set_attr(keras, "ops",  keras$backend)
