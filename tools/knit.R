@@ -100,7 +100,9 @@ knit_vignette <- function(input, ..., output_dir) {
   keras3:::keras$utils$clear_session()
   keras3:::keras$utils$set_random_seed(1L)
 
-  knitr::knit(input, output.md, envir = new.env(parent = globalenv()))
+  withr::with_options(c(cli.num_colors = 256L), {
+    knitr::knit(input, output.md, envir = new.env(parent = globalenv()) )
+  })
 
   x <- readLines(output.md)
   unlink(output.md)
