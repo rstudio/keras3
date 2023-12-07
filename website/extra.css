@@ -1,3 +1,13 @@
+@font-face {
+  font-family: 'Fira Code';
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: url(uU9eCBsR6Z2vfE9aq3bL0fxyUs4tcw4W_D1sFVQ.woff) format('woff');
+}
+
+
+/*
 
 h4.date,
 h4.author {
@@ -153,7 +163,6 @@ a:hover {
 }
 
 
-/*
 code a, pre a {
   color: rgba(195,0,4,0.8);
 }
@@ -165,9 +174,9 @@ pre span a {
 pre span a:hover {
   color: #375f84;
 }
-*/
-
 
 .navbar-brand .label {
   display: none;
 }
+
+*/
