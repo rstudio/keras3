@@ -6,7 +6,6 @@ if(!"source:tools/translate-tools.R" %in% search()) envir::attach_source("tools/
 
 
 # Daniel in process:
-# TODO: Dark mode for interactive metrics viewer
 # TODO: application_preprocess_input("<app_name>" or <app_instance>, ...)
 #       application_decode_output("<app_name>" or <app_instance>, ...)
 #       # tentative fn names, feel free to pick different names if makes sense
@@ -165,7 +164,9 @@ fs::dir_walk("man-src", type = "directory", recurse = TRUE,
 #    - make it 1 based, not for bare integers, only for factors?
 #    - also update op_one_hot() w/ same semantics.
 #    - update fit() to special case factors, so they're offset correctly.
-#      convert factor()s to: as.integer(factor)-1L
+#      convert factor()s to: as.integer(factor)-1
+##     the compile('sparse_categorical') case makes it difficult to apply 1 based
+##     globally, also, makes it more tricky to translate from python
 
 #
 # TODO: remove @import methods ??

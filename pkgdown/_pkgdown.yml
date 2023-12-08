@@ -15,6 +15,7 @@ template:
     navbar-light-brand-color: "white"
     navbar-light-brand-hover-color: "white"
     code_font: {google: {family: "Fira Mono", wght: "400;600;700"}}
+    # https://fonts.google.com/?classification=Monospace&stylecount=5
 
 navbar:
   title: "Keras for R"
@@ -88,11 +89,6 @@ reference:
       - pop_layer
       - clone_model
       - freeze_weights
-
-
-
-      # - has_concept("layers")
-
 
   - title: "Layers"
 
