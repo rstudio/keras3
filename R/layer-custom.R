@@ -183,7 +183,7 @@ py_formals <- function(py_obj) {
 #' @return An R function that behaves similarly to the builtin keras `layer_*`
 #'   functions. When called, it will create the class instance, and also
 #'   optionally call it on a supplied argument `object` if it is present. This
-#'   enables keras layers to compose nicely with the pipe (`%>%`).
+#'   enables keras layers to compose nicely with the pipe (`|>`).
 #'
 #'   The R function will arguments taken from the `initialize` (or `__init__`)
 #'   method of the Layer.
@@ -256,5 +256,5 @@ as_tf_shape <- function (x) {
   if (inherits(x, "tensorflow.python.framework.tensor_shape.TensorShape"))
     x
   else
-    shape(dims = x)
+    tensorflow::shape(dims = x)
 }
