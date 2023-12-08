@@ -165,7 +165,7 @@ test_succeeds("custom callbacks, new-style", {
     inherit = keras$callbacks$Callback,
     public = list(
       on_epoch_end = function(epoch, logs = NULL) {
-        skip("callbacks can't modify `logs` in place yet")
+        # skip("callbacks can't modify `logs` in place yet")
         expect_true("my_epoch" %in% names(logs))
         logs[['my_epoch2']] <- epoch
         logs
@@ -181,6 +181,38 @@ test_succeeds("custom callbacks, new-style", {
 
   expect_is(hist$metrics$my_epoch, "numeric")
   expect_equal(hist$metrics$my_epoch, 0L)
+  expect_false("my_epoch2" %in% names(hist$metrics))
+
+})
+
+
+test_succeeds("custom callbacks, new-new-style", {
+
+  callback_custom_metric <- Callback(
+    "CustomMetric",
+    on_epoch_end = function(epoch, logs = NULL) {
+      logs[["my_epoch"]] <- epoch
+      logs
+    }
+  )
+
+
+  callback_custom_metric2 <- Callback(
+    "CustomMetric2",
+    on_epoch_end = function(epoch, logs = NULL) {
+      expect_true("my_epoch" %in% names(logs))
+      logs[['my_epoch2']] <- epoch
+      logs
+    }
+  )
+
+  cm <- callback_custom_metric()
+  cm2 <- callback_custom_metric2()
+
+  hist <- define_compile_and_fit(callbacks = list(cm, cm2))
+
+  expect_is(hist$metrics$my_epoch, "numeric")
+  expect_equal(hist$metrics$my_epoch, 1L)
   expect_false("my_epoch2" %in% names(hist$metrics))
 
 })
