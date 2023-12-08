@@ -100,7 +100,10 @@ at the end of every epoch, or after a fixed number of training batches.
 }
 }
 \section{Examples}{
-\if{html}{\out{<div class="sourceCode r">}}\preformatted{model \%>\% compile(loss = ..., optimizer = ..., metrics = c('accuracy'))
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{model <- keras_model_sequential(input_shape = c(10)) |>
+  layer_dense(1, activation = "sigmoid") |>
+  compile(loss = "binary_crossentropy", optimizer = "adam",
+          metrics = c('accuracy'))
 
 EPOCHS <- 10
 checkpoint_filepath <- tempfile('checkpoint-model-', fileext = ".keras")
@@ -112,12 +115,50 @@ model_checkpoint_callback <- callback_model_checkpoint(
 )
 
 # Model is saved at the end of every epoch, if it's the best seen so far.
-model |> fit(epochs = EPOCHS, callbacks = list(model_checkpoint_callback))
+model |> fit(x = random_uniform(c(2, 10)), y = op_ones(2, 1),
+             epochs = EPOCHS, validation_split = .5,
+             callbacks = list(model_checkpoint_callback))
+}\if{html}{\out{</div>}}
 
-# The model (that are considered the best) can be loaded as -
-load_model_tf(checkpoint_filepath)
+\if{html}{\out{<div class="sourceCode">}}\preformatted{## Epoch 1/10
+## 1/1 - 0s - 232ms/step - accuracy: 0.0000e+00 - loss: 1.1157 - val_accuracy: 0.0000e+00 - val_loss: 1.1480
+## Epoch 2/10
+## 1/1 - 0s - 21ms/step - accuracy: 0.0000e+00 - loss: 1.1116 - val_accuracy: 0.0000e+00 - val_loss: 1.1435
+## Epoch 3/10
+## 1/1 - 0s - 20ms/step - accuracy: 0.0000e+00 - loss: 1.1075 - val_accuracy: 0.0000e+00 - val_loss: 1.1389
+## Epoch 4/10
+## 1/1 - 0s - 20ms/step - accuracy: 0.0000e+00 - loss: 1.1035 - val_accuracy: 0.0000e+00 - val_loss: 1.1344
+## Epoch 5/10
+## 1/1 - 0s - 21ms/step - accuracy: 0.0000e+00 - loss: 1.0994 - val_accuracy: 0.0000e+00 - val_loss: 1.1300
+## Epoch 6/10
+## 1/1 - 0s - 20ms/step - accuracy: 0.0000e+00 - loss: 1.0954 - val_accuracy: 0.0000e+00 - val_loss: 1.1255
+## Epoch 7/10
+## 1/1 - 0s - 20ms/step - accuracy: 0.0000e+00 - loss: 1.0913 - val_accuracy: 0.0000e+00 - val_loss: 1.1210
+## Epoch 8/10
+## 1/1 - 0s - 21ms/step - accuracy: 0.0000e+00 - loss: 1.0873 - val_accuracy: 0.0000e+00 - val_loss: 1.1165
+## Epoch 9/10
+## 1/1 - 0s - 20ms/step - accuracy: 0.0000e+00 - loss: 1.0833 - val_accuracy: 0.0000e+00 - val_loss: 1.1121
+## Epoch 10/10
+## 1/1 - 0s - 21ms/step - accuracy: 0.0000e+00 - loss: 1.0793 - val_accuracy: 0.0000e+00 - val_loss: 1.1077
+}\if{html}{\out{</div>}}
 
-# Alternatively, one could checkpoint just the model weights as -
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{# The model (that are considered the best) can be loaded as -
+load_model(checkpoint_filepath)
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode">}}\preformatted{## Model: "sequential"
+## ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━┓
+## ┃ Layer (type)                    ┃ Output Shape              ┃    Param # ┃
+## ┡━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━┩
+## │ dense (Dense)                   │ (None, 1)                 │         11 │
+## └─────────────────────────────────┴───────────────────────────┴────────────┘
+##  Total params: 35 (144.00 B)
+##  Trainable params: 11 (44.00 B)
+##  Non-trainable params: 0 (0.00 B)
+##  Optimizer params: 24 (100.00 B)
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{# Alternatively, one could checkpoint just the model weights as -
 checkpoint_filepath <- tempfile('checkpoint-', fileext = ".weights.h5")
 model_checkpoint_callback <- callback_model_checkpoint(
   filepath = checkpoint_filepath,
@@ -129,10 +170,36 @@ model_checkpoint_callback <- callback_model_checkpoint(
 
 # Model weights are saved at the end of every epoch, if it's the best seen
 # so far.
-model |> fit(epochs = EPOCHS, callbacks = list(model_checkpoint_callback))
+# same as above
+model |> fit(x = random_uniform(c(2, 10)), y = op_ones(2, 1),
+             epochs = EPOCHS, validation_split = .5,
+             callbacks = list(model_checkpoint_callback))
+}\if{html}{\out{</div>}}
 
-# The model weights (that are considered the best) can be loaded as -
-model$load_weights(checkpoint_filepath)
+\if{html}{\out{<div class="sourceCode">}}\preformatted{## Epoch 1/10
+## 1/1 - 0s - 33ms/step - accuracy: 0.0000e+00 - loss: 1.3930 - val_accuracy: 0.0000e+00 - val_loss: 1.1387
+## Epoch 2/10
+## 1/1 - 0s - 20ms/step - accuracy: 0.0000e+00 - loss: 1.3871 - val_accuracy: 0.0000e+00 - val_loss: 1.1343
+## Epoch 3/10
+## 1/1 - 0s - 20ms/step - accuracy: 0.0000e+00 - loss: 1.3813 - val_accuracy: 0.0000e+00 - val_loss: 1.1298
+## Epoch 4/10
+## 1/1 - 0s - 20ms/step - accuracy: 0.0000e+00 - loss: 1.3753 - val_accuracy: 0.0000e+00 - val_loss: 1.1253
+## Epoch 5/10
+## 1/1 - 0s - 20ms/step - accuracy: 0.0000e+00 - loss: 1.3694 - val_accuracy: 0.0000e+00 - val_loss: 1.1207
+## Epoch 6/10
+## 1/1 - 0s - 20ms/step - accuracy: 0.0000e+00 - loss: 1.3633 - val_accuracy: 0.0000e+00 - val_loss: 1.1162
+## Epoch 7/10
+## 1/1 - 0s - 20ms/step - accuracy: 0.0000e+00 - loss: 1.3573 - val_accuracy: 0.0000e+00 - val_loss: 1.1116
+## Epoch 8/10
+## 1/1 - 0s - 20ms/step - accuracy: 0.0000e+00 - loss: 1.3513 - val_accuracy: 0.0000e+00 - val_loss: 1.1070
+## Epoch 9/10
+## 1/1 - 0s - 20ms/step - accuracy: 0.0000e+00 - loss: 1.3452 - val_accuracy: 0.0000e+00 - val_loss: 1.1024
+## Epoch 10/10
+## 1/1 - 0s - 21ms/step - accuracy: 0.0000e+00 - loss: 1.3392 - val_accuracy: 0.0000e+00 - val_loss: 1.0979
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{# The model weights (that are considered the best) can be loaded as -
+model |> load_model_weights(checkpoint_filepath)
 }\if{html}{\out{</div>}}
 }
 
@@ -143,6 +210,7 @@ model$load_weights(checkpoint_filepath)
 }
 
 Other callbacks: 
+\code{\link{Callback}()},
 \code{\link{callback_backup_and_restore}()},
 \code{\link{callback_csv_logger}()},
 \code{\link{callback_early_stopping}()},

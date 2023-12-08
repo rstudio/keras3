@@ -31,6 +31,7 @@ model \%>\% fit(X_train, Y_train, callbacks = list(csv_logger))
 }
 
 Other callbacks: 
+\code{\link{Callback}()},
 \code{\link{callback_backup_and_restore}()},
 \code{\link{callback_early_stopping}()},
 \code{\link{callback_lambda}()},

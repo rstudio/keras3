@@ -55,6 +55,7 @@ model$optimizer$learning_rate |> as.array() |> round(5)
 }
 
 Other callbacks: 
+\code{\link{Callback}()},
 \code{\link{callback_backup_and_restore}()},
 \code{\link{callback_csv_logger}()},
 \code{\link{callback_early_stopping}()},

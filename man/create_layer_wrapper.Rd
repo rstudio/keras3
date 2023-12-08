@@ -23,7 +23,7 @@ See guide 'making_new_layers_and_models_via_subclassing.Rmd' for example usage.}
 An R function that behaves similarly to the builtin keras \verb{layer_*}
 functions. When called, it will create the class instance, and also
 optionally call it on a supplied argument \code{object} if it is present. This
-enables keras layers to compose nicely with the pipe (\verb{\%>\%}).
+enables keras layers to compose nicely with the pipe (\verb{|>}).
 
 The R function will arguments taken from the \code{initialize} (or \verb{__init__})
 method of the Layer.

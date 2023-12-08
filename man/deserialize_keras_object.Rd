@@ -109,7 +109,7 @@ config <- list(
 deserialize_keras_object(config)
 }\if{html}{\out{</div>}}
 
-\if{html}{\out{<div class="sourceCode">}}\preformatted{## <R6type.ModifiedMeanSquaredError object>
+\if{html}{\out{<div class="sourceCode">}}\preformatted{## <<r-namespace:keras3>.ModifiedMeanSquaredError object>
 }\if{html}{\out{</div>}}
 }
 \seealso{

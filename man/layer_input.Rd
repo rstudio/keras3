@@ -2,9 +2,20 @@
 % Please edit documentation in R/keras-layers-core.R
 \name{layer_input}
 \alias{layer_input}
+\alias{keras_input}
 \title{Used to instantiate a Keras tensor.}
 \usage{
 layer_input(
+  shape = NULL,
+  batch_size = NULL,
+  dtype = NULL,
+  sparse = NULL,
+  batch_shape = NULL,
+  name = NULL,
+  tensor = NULL
+)
+
+keras_input(
   shape = NULL,
   batch_size = NULL,
   dtype = NULL,

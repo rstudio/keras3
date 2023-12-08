@@ -2,17 +2,49 @@
 % Please edit documentation in R/keras-layers-Layer.R
 \name{Layer}
 \alias{Layer}
-\title{This is the class from which all layers inherit.}
+\alias{new_layer_class}
+\title{Define a custom Layer.}
 \usage{
 Layer(
   classname,
-  initialize,
+  initialize = NULL,
+  call = NULL,
+  build = NULL,
+  get_config = NULL,
+  ...,
+  .private = list(),
+  .inherit = keras$layers$Layer,
+  .parent_env = parent.frame()
+)
+
+new_layer_class(
+  classname,
+  ...,
+  initialize = NULL,
   build = NULL,
   call = NULL,
-  compute_output_shape = NULL,
-  ...,
-  inherit = keras3::keras$layers$Layer
+  get_config = NULL
 )
+}
+\arguments{
+\item{classname}{String, the name of the custom class. (Conventionally, CamelCase).}
+
+\item{initialize, call, build, get_config}{Recommended methods to implement. See
+description section.}
+
+\item{...}{Additional methods or public members of the custom class.}
+
+\item{.private}{Named list of R objects (typically, functions) to include in
+instance private environments. \code{private} will be a symbol in scope in all
+class methods, resolving to an R environment populated with the list
+provided. Each instance will have it's own \code{private} environment. All
+methods (functions) in \code{private} will have in scope \code{self} and \verb{__class__}
+symbols. Any objects in \code{private} will be invisible from the Keras
+framework and the Python runtime.}
+
+\item{.inherit}{What the new layer will subclass. By default, the base keras \code{Layer} class.}
+
+\item{.parent_env}{The environment that all class methods will have as a grandparent.}
 }
 \description{
 A layer is a callable object that takes as input one or more tensors and
@@ -33,12 +65,13 @@ created by the inner layer. Nested layers should be instantiated in the
 
 Users will just instantiate a layer and then treat it as a callable.
 
-All R function custom methods will have the following symbols in scope:
+All R function custom methods (public and private) will have the
+following symbols in scope:
 \itemize{
 \item \code{self}: the \code{Layer} instance.
-\item \code{super}: the \code{Layer} superclass
+\item \code{super}: the \code{Layer} superclass.
 \item \code{private}: An R environment specific to the class instance.
-Any objects defined here will be invisible to the keras framework.
+Any objects defined here will be invisible to the Keras framework.
 \item \verb{__class__} the current class type object. This will also be available as
 an alias symbol, the value supplied to \code{Layer(classname = )}
 }
@@ -103,8 +136,7 @@ It shows how to implement \code{build()} and \code{call()}.
 Variables set as attributes of a layer are tracked as weights
 of the layers (in \code{layer$weights}).
 
-\if{html}{\out{<div class="sourceCode r">}}\preformatted{library(keras3)
-layer_simple_dense <- Layer(
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{layer_simple_dense <- Layer(
   "SimpleDense",
   initialize = function(units = 32) \{
     super$initialize()
@@ -134,9 +166,12 @@ layer_simple_dense <- Layer(
 )
 
 # Instantiates the layer.
+# Supply missing `object` arg to skip invoking `call()` and instead return
+# the Layer instance
 linear_layer <- layer_simple_dense(, 4)
 
-# This will also call `build(input_shape)` and create the weights.
+# This will call `build(input_shape)` and create the weights,
+# and then invoke `call()`.
 y <- linear_layer(op_ones(c(2, 2)))
 stopifnot(length(linear_layer$weights) == 2)
 
