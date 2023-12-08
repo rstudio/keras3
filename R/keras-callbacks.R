@@ -419,7 +419,7 @@ function (schedule, verbose = 0L)
 #'
 #' # Model is saved at the end of every epoch, if it's the best seen so far.
 #' model |> fit(x = random_uniform(c(2, 10)), y = op_ones(2, 1),
-#'              epochs = EPOCHS, validation_split = .5,
+#'              epochs = EPOCHS, validation_split = .5, verbose = 0,
 #'              callbacks = list(model_checkpoint_callback))
 #'
 #' # The model (that are considered the best) can be loaded as -
@@ -439,7 +439,7 @@ function (schedule, verbose = 0L)
 #' # so far.
 #' # same as above
 #' model |> fit(x = random_uniform(c(2, 10)), y = op_ones(2, 1),
-#'              epochs = EPOCHS, validation_split = .5,
+#'              epochs = EPOCHS, validation_split = .5, verbose = 0,
 #'              callbacks = list(model_checkpoint_callback))
 #'
 #' # The model weights (that are considered the best) can be loaded as -
