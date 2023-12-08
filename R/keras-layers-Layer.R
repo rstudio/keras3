@@ -1,4 +1,4 @@
-#' This is the class from which all layers inherit.
+#' Define a custom Layer.
 #'
 #' @description
 #' A layer is a callable object that takes as input one or more tensors and
@@ -18,11 +18,12 @@
 #'
 #' Users will just instantiate a layer and then treat it as a callable.
 #'
-#' All R function custom methods will have the following symbols in scope:
+#' All R function custom methods (public and private) will have the
+#' following symbols in scope:
 #' * `self`: the `Layer` instance.
-#' * `super`: the `Layer` superclass
+#' * `super`: the `Layer` superclass.
 #' * `private`: An R environment specific to the class instance.
-#'     Any objects defined here will be invisible to the keras framework.
+#'     Any objects defined here will be invisible to the Keras framework.
 #' * `__class__` the current class type object. This will also be available as
 #'     an alias symbol, the value supplied to `Layer(classname = )`
 #'
@@ -83,7 +84,6 @@
 #' of the layers (in `layer$weights`).
 #'
 #' ```{r}
-#' library(keras3)
 #' layer_simple_dense <- Layer(
 #'   "SimpleDense",
 #'   initialize = function(units = 32) {
@@ -114,9 +114,12 @@
 #' )
 #'
 #' # Instantiates the layer.
+#' # Supply missing `object` arg to skip invoking `call()` and instead return
+#' # the Layer instance
 #' linear_layer <- layer_simple_dense(, 4)
 #'
-#' # This will also call `build(input_shape)` and create the weights.
+#' # This will call `build(input_shape)` and create the weights,
+#' # and then invoke `call()`.
 #' y <- linear_layer(op_ones(c(2, 2)))
 #' stopifnot(length(linear_layer$weights) == 2)
 #'
@@ -513,6 +516,19 @@
 #' * `trainable`
 #'    Settable boolean, whether this layer should be trainable or not.
 #'
+#' @param classname String, the name of the custom class. (Conventionally, CamelCase).
+#' @param initialize,call,build,get_config Recommended methods to implement. See
+#'   description section.
+#' @param ... Additional methods or public members of the custom class.
+#' @param .private Named list of R objects (typically, functions) to include in
+#'   instance private environments. `private` will be a symbol in scope in all
+#'   class methods, resolving to an R environment populated with the list
+#'   provided. Each instance will have it's own `private` environment. All
+#'   methods (functions) in `private` will have in scope `self` and `__class__`
+#'   symbols. Any objects in `private` will be invisible from the Keras
+#'   framework and the Python runtime.
+#' @param .parent_env The environment that all class methods will have as a grandparent.
+#' @param .inherit What the new layer will subclass. By default, the base keras `Layer` class.
 #'
 #' @tether keras.layers.Layer
 #' @export
@@ -521,31 +537,35 @@
 #' + <https:/keras.io/api/layers/base_layer#layer-class>
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/layers/Layer>
 Layer <-
-  function(classname, initialize, build = NULL, call = NULL,
-           compute_output_shape = NULL, ...,
-           inherit = keras3::keras$layers$Layer) {
+function(classname,
+         initialize = NULL,
+         call = NULL,
+         build = NULL,
+         get_config = NULL,
+         ...,
+         .private = list(),
+         .inherit = keras$layers$Layer,
+         .parent_env = parent.frame()) {
 
-    public <- capture_args(match.call(), ignore = c("classname", "inherit"))
-    for(ignore_if_null in c("build", "call", "compute_output_shape"))
-      public[[ignore_if_null]] <- public[[ignore_if_null]]
+  members <- capture_args2(
+    list(from_config = function(x) decorate_method(x, "classmethod")),
+    ignore = c("classname", ".private", ".parent_env", ".inherit")
+  )
+  members <- drop_null_defaults(members)
 
-    inherit <- substitute(inherit)
-    parent_env <- parent.frame()
+  cls <- new_py_type(
+    classname = classname,
+    members = members,
+    inherit = .inherit,
+    parent_env = .parent_env,
+    private = .private
+  )
 
-    # R6Class() calls substitute() on inherit;
-    r_cls <- eval(as.call(list(
-      quote(R6::R6Class),
-      classname = classname,
-      public = public,
-      active = NULL,
-      inherit = inherit,
-      cloneable = FALSE,
-      parent_env = parent_env
-    )))
+  create_layer_wrapper(cls)
+}
 
-    create_layer_wrapper(r_cls)
-  }
+#' @export
+#' @rdname Layer
+new_layer_class <- Layer
 
-
-
-
+# ' @param .composing Bare Keras Layers (`layer_*` functions) conventionally have `object` as the first argument, which allows users to instantiate (`initialize`) and `call` one motion.
