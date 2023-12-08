@@ -3,6 +3,19 @@
 if(!"source:tools/utils.R" %in% search()) envir::attach_source("tools/utils.R")
 if(!"source:tools/translate-tools.R" %in% search()) envir::attach_source("tools/translate-tools.R")
 
+
+
+# Daniel in process:
+# TODO: Dark mode for interactive metrics viewer
+# TODO: application_preprocess_input("<app_name>" or <app_instance>, ...)
+#       application_decode_output("<app_name>" or <app_instance>, ...)
+#       # tentative fn names, feel free to pick different names if makes sense
+# TODO: (maybe, not expected but if bandwidth available) fix `history` from fit()
+#
+#
+# history - also mentions in docs (e.g., in callback_model_checkpoint())
+
+
 ## Deferred:
 
 # TODO: k_fft() should really accept and return complex tensors too.
@@ -10,11 +23,15 @@ if(!"source:tools/translate-tools.R" %in% search()) envir::attach_source("tools/
 # TODO: the 2-translated.Rmd should include a chunk w/ the function def (for easy seeing while editing)
 #       with chunk options (include = FALSE)
 # TODO: add PR for purrr::rate_throttle("3 per minute")
-
+# TODO: layer_feature_space should take a formula, and dispatch to the features as required.
+#       ~ scale(foo) * bar
+# TODO: layer_feature_space() needs massaging.
 
 ## Rejected:
 
 # TODO: k_array() should take a 'shape' argument
+# TODO: r_name autogen: move "set" to tail, so have config_floatx(), config_floatx_set()
+# TODO: implement dim() S3 generic. (will use shape() instead)
 
 ## Implemented but Questioning:
 
@@ -47,21 +64,43 @@ fs::dir_walk("man-src", type = "directory", recurse = TRUE,
 
 ## Waiting to be processed:
 
+# TODO: change shape() semantics. Discussion conclusion:
+##    - instead of protecting with I(),
+##      keep shape() as an accessor, but
+##      special case scalar integer tensors only to
+##      treat them as an axis value.
+##    keep I() as escape hatch for just that one special case.
+## Aleternative discused:
+##   - use op_shape as the accessor (maybe even offer alias of get_shape();
+##       get_shape <- op_shape
+##   - Stop using `shape()` as accessor for tensor shapes
+##       so to combine shape in graph and eager mode, users would do
+##      shape(1, op_shape(tensor), 1)
+##      rejected because less ergonomic
+##      also, for the edge case where user truly wants shape, and is
+##      in an advanced context (tracing mode) where the edge case is hit,
+##      they can reach for `op_shape()` for more stable output.
+##      c(axis1, axis2, axis3) %<-% op_shape(x)
+##      ...  n_heads <- 4
+##      shape(axis1, axis2, n_head, axis3/n_heads)
+
+# TODO: c.keras_shape <- function(...){}
+
 # TODO: "keras.layers.InputSpec" - needs to be exported or somehow processed in `Layer()`
 
 # TODO: remove k_amax() and friends, they're redundant w/ k_max(), which already
 #       takes an axis arg. Only there for numpy api compatability, which
 #       doesn't matter to us.
 #
-# TODO: layer_feature_space should take a formula, and dispatch to the features as required.
-#       ~ scale(foo) * bar
+
+# TODO: ??? .onLoad(...) if(!interactive()) config_disable_interactive_logging()
 
 # TODO: train_on_batch and related methods should be autogen'd and exported. Or maybe we curate those,
 #       and don't export them? (I.e., have the few people that need them access methods via model$train_on_batch())
 
 # TODO: Clean up @family tags (partially autogen, derive from module - then use that to autogenerate _pkgdown.yml)
 
-# TODO:  self$model$stop_training <- TRUE should work. Need to avoid propogating `$<-` past first.
+# TODO: self$model$stop_training <- TRUE should work. Need to avoid propogating `$<-` past first.
 
 # TODO: new_callback_class() should wrap callables to make epoch/batch n 1 based,
 #       make logs persistent (e.g., wrap the user callable w/ `logs$update(<callback_return>`))
@@ -70,12 +109,12 @@ fs::dir_walk("man-src", type = "directory", recurse = TRUE,
 #      so that keras$utils$get_custom_objects()$clear() works.
 
 # TODO: get_custom_objects() needs thinking
-#
+
 # TODO: many of the applications can share a man page, e.g., application_convnext_{large...}
 
-# TODO: r_name autogen: move "set" to tail, so have config_floatx(), config_floatx_set()
 
-# TODO: revisit history - also mentions in docs (e.g., in callback_model_checkpoint())
+
+# TODO: "keras.applications.convnext" is a module, filtered out has good stuff
 
 # TODO: BackupAndRestore is broken, doesn't respect current epoch. file/fix upstream.
 #       ~/github/keras-team/keras/keras/callbacks/backup_and_restore_callback.py
@@ -91,7 +130,6 @@ fs::dir_walk("man-src", type = "directory", recurse = TRUE,
 # TODO: fix py_func(), for r_to_py.R6ClassGenerator
 #   can't use __signature__ anymore in keras_core...
 
-## TODO: "keras.applications.convnext" is a module, filtered out has good stuff
 
 
 # TODO: initializer families:
@@ -102,28 +140,33 @@ fs::dir_walk("man-src", type = "directory", recurse = TRUE,
 #
 # TODO: global search replace in man-src/*.Rmd "([^ ])=([^ ])" "\\1 = \\2"
 
+# Daniels votes YES to rename to layer_bidirectional, etc.
 # TODO: bidirectional, time_distributed -- need special caseing
-#
+
 # TODO: note in docs for k_logical_and (and friends) that these are dispatched
 #       to from & != and so on.
-#
+
 # TODO: k_arange: should it default to produce floats?
 
 # TODO: keras.Function ?? keras.Variable ?? keras.name_scope ??
+# Daniel votes:
+#   Yes to `keras_function()` (keras$Function)
+#   Yes to `keras_tensor()` (keras$KerasTensor)
+#   Yes to `keras_input()`  (keras$Input)
+#   Document on same page for less confsion:
+#      keras_input() adds batch dim to shape, keras_tensor() doesn't.
+#   NO to keras$Variable()
 #
-# TODO: remove k_random_binomial() ??
-#
-# TODO: layer_feature_space() needs massaging.
-#
+
+
+
 # TODO: to_categorical():
 #    - handle factor/character https://github.com/rstudio/keras/issues/1055
-#    - make it 1 based?
-#
-# TODO: param descriptions - make it more robust to changes upstream
-#     autoinject "see description" without needing it in the yml.
-#     yml is only for explicit overrides
-#
-# TODO: implement dim() S3 generic.
+#    - make it 1 based, not for bare integers, only for factors?
+#    - also update op_one_hot() w/ same semantics.
+#    - update fit() to special case factors, so they're offset correctly.
+#      convert factor()s to: as.integer(factor)-1L
+
 #
 # TODO: remove @import methods ??
 #
