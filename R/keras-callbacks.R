@@ -402,8 +402,11 @@ function (schedule, verbose = 0L)
 #' - Whether only weights are saved, or the whole model is saved.
 #'
 #' # Examples
-#' ```{r, eval = FALSE}
-#' model %>% compile(loss = ..., optimizer = ..., metrics = c('accuracy'))
+#' ```{r}
+#' model <- keras_model_sequential(input_shape = c(10)) |>
+#'   layer_dense(1, activation = "sigmoid") |>
+#'   compile(loss = "binary_crossentropy", optimizer = "adam",
+#'           metrics = c('accuracy'))
 #'
 #' EPOCHS <- 10
 #' checkpoint_filepath <- tempfile('checkpoint-model-', fileext = ".keras")
@@ -415,10 +418,12 @@ function (schedule, verbose = 0L)
 #' )
 #'
 #' # Model is saved at the end of every epoch, if it's the best seen so far.
-#' model |> fit(epochs = EPOCHS, callbacks = list(model_checkpoint_callback))
+#' model |> fit(x = random_uniform(c(2, 10)), y = op_ones(2, 1),
+#'              epochs = EPOCHS, validation_split = .5,
+#'              callbacks = list(model_checkpoint_callback))
 #'
 #' # The model (that are considered the best) can be loaded as -
-#' load_model_tf(checkpoint_filepath)
+#' load_model(checkpoint_filepath)
 #'
 #' # Alternatively, one could checkpoint just the model weights as -
 #' checkpoint_filepath <- tempfile('checkpoint-', fileext = ".weights.h5")
@@ -432,10 +437,13 @@ function (schedule, verbose = 0L)
 #'
 #' # Model weights are saved at the end of every epoch, if it's the best seen
 #' # so far.
-#' model |> fit(epochs = EPOCHS, callbacks = list(model_checkpoint_callback))
+#' # same as above
+#' model |> fit(x = random_uniform(c(2, 10)), y = op_ones(2, 1),
+#'              epochs = EPOCHS, validation_split = .5,
+#'              callbacks = list(model_checkpoint_callback))
 #'
 #' # The model weights (that are considered the best) can be loaded as -
-#' model$load_weights(checkpoint_filepath)
+#' model |> load_model_weights(checkpoint_filepath)
 #' ```
 #'
 #' @param filepath
