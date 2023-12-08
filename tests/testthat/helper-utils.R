@@ -12,10 +12,18 @@ reticulate:::py_register_load_hook("keras", function() {
   # print(keras$`__path__`)
   # print(keras)
 
-  reticulate::py_run_string(glue::trim(r"(
+  reticulate::py_run_string(glue::trim(r"---(
     import keras
     keras.config.disable_traceback_filtering()
-    )"))
+    )---"))
+
+  reticulate::py_run_string(local = TRUE, glue::trim(r"---(
+    from importlib import import_module
+    import tensorflow as tf
+
+    m = import_module(tf.function.__module__)
+    m.FREQUENT_TRACING_WARNING_THRESHOLD = float("inf")
+    )---"))
 
   # py_main <- reticulate::import("__main__")
   # keras$layers # force load
