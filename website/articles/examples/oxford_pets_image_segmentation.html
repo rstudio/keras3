@@ -120,254 +120,620 @@
 <div class="section level2">
 <h2 id="download-the-data">Download the data<a class="anchor" aria-label="anchor" href="#download-the-data"></a>
 </h2>
-<p>!wget <a href="https://www.robots.ox.ac.uk/~vgg/data/pets/data/images.tar.gz" class="external-link uri">https://www.robots.ox.ac.uk/~vgg/data/pets/data/images.tar.gz</a>
-!wget <a href="https://www.robots.ox.ac.uk/~vgg/data/pets/data/annotations.tar.gz" class="external-link uri">https://www.robots.ox.ac.uk/~vgg/data/pets/data/annotations.tar.gz</a></p>
-<p>curl -O <a href="https://thor.robots.ox.ac.uk/datasets/pets/images.tar.gz" class="external-link uri">https://thor.robots.ox.ac.uk/datasets/pets/images.tar.gz</a>
-curl -O <a href="https://thor.robots.ox.ac.uk/datasets/pets/annotations.tar.gz" class="external-link uri">https://thor.robots.ox.ac.uk/datasets/pets/annotations.tar.gz</a></p>
-<p>tar -xf images.tar.gz tar -xf annotations.tar.gz</p>
+<div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/options.html" class="external-link">options</a></span><span class="op">(</span>timeout <span class="op">=</span> <span class="fl">5000</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/utils/download.file.html" class="external-link">download.file</a></span><span class="op">(</span></span>
+<span>  <span class="st">"https://www.robots.ox.ac.uk/~vgg/data/pets/data/images.tar.gz"</span>,</span>
+<span>  <span class="st">"datasets/images.tar.gz"</span></span>
+<span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/utils/download.file.html" class="external-link">download.file</a></span><span class="op">(</span></span>
+<span>  <span class="st">"https://www.robots.ox.ac.uk/~vgg/data/pets/data/annotations.tar.gz"</span>,</span>
+<span>  <span class="st">"datasets/annotations.tar.gz"</span></span>
+<span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/utils/untar.html" class="external-link">untar</a></span><span class="op">(</span><span class="st">"datasets/images.tar.gz"</span>, exdir <span class="op">=</span> <span class="st">"datasets"</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/utils/untar.html" class="external-link">untar</a></span><span class="op">(</span><span class="st">"datasets/annotations.tar.gz"</span>, exdir <span class="op">=</span> <span class="st">"datasets"</span><span class="op">)</span></span></code></pre></div>
 </div>
 <div class="section level2">
 <h2 id="prepare-paths-of-input-images-and-target-segmentation-masks">Prepare paths of input images and target segmentation masks<a class="anchor" aria-label="anchor" href="#prepare-paths-of-input-images-and-target-segmentation-masks"></a>
 </h2>
-<div class="sourceCode" id="cb1"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" tabindex="-1"></a><span class="im">import</span> os</span>
-<span id="cb1-2"><a href="#cb1-2" tabindex="-1"></a></span>
-<span id="cb1-3"><a href="#cb1-3" tabindex="-1"></a>input_dir <span class="op">=</span> <span class="st">"images/"</span></span>
-<span id="cb1-4"><a href="#cb1-4" tabindex="-1"></a>target_dir <span class="op">=</span> <span class="st">"annotations/trimaps/"</span></span>
-<span id="cb1-5"><a href="#cb1-5" tabindex="-1"></a>img_size <span class="op">=</span> (<span class="dv">160</span>, <span class="dv">160</span>)</span>
-<span id="cb1-6"><a href="#cb1-6" tabindex="-1"></a>num_classes <span class="op">=</span> <span class="dv">3</span></span>
-<span id="cb1-7"><a href="#cb1-7" tabindex="-1"></a>batch_size <span class="op">=</span> <span class="dv">32</span></span>
-<span id="cb1-8"><a href="#cb1-8" tabindex="-1"></a></span>
-<span id="cb1-9"><a href="#cb1-9" tabindex="-1"></a>input_img_paths <span class="op">=</span> <span class="bu">sorted</span>(</span>
-<span id="cb1-10"><a href="#cb1-10" tabindex="-1"></a>    [</span>
-<span id="cb1-11"><a href="#cb1-11" tabindex="-1"></a>        os.path.join(input_dir, fname)</span>
-<span id="cb1-12"><a href="#cb1-12" tabindex="-1"></a>        <span class="cf">for</span> fname <span class="kw">in</span> os.listdir(input_dir)</span>
-<span id="cb1-13"><a href="#cb1-13" tabindex="-1"></a>        <span class="cf">if</span> fname.endswith(<span class="st">".jpg"</span>)</span>
-<span id="cb1-14"><a href="#cb1-14" tabindex="-1"></a>    ]</span>
-<span id="cb1-15"><a href="#cb1-15" tabindex="-1"></a>)</span>
-<span id="cb1-16"><a href="#cb1-16" tabindex="-1"></a>target_img_paths <span class="op">=</span> <span class="bu">sorted</span>(</span>
-<span id="cb1-17"><a href="#cb1-17" tabindex="-1"></a>    [</span>
-<span id="cb1-18"><a href="#cb1-18" tabindex="-1"></a>        os.path.join(target_dir, fname)</span>
-<span id="cb1-19"><a href="#cb1-19" tabindex="-1"></a>        <span class="cf">for</span> fname <span class="kw">in</span> os.listdir(target_dir)</span>
-<span id="cb1-20"><a href="#cb1-20" tabindex="-1"></a>        <span class="cf">if</span> fname.endswith(<span class="st">".png"</span>) <span class="kw">and</span> <span class="kw">not</span> fname.startswith(<span class="st">"."</span>)</span>
-<span id="cb1-21"><a href="#cb1-21" tabindex="-1"></a>    ]</span>
-<span id="cb1-22"><a href="#cb1-22" tabindex="-1"></a>)</span>
-<span id="cb1-23"><a href="#cb1-23" tabindex="-1"></a></span>
-<span id="cb1-24"><a href="#cb1-24" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Number of samples:"</span>, <span class="bu">len</span>(input_img_paths))</span>
-<span id="cb1-25"><a href="#cb1-25" tabindex="-1"></a></span>
-<span id="cb1-26"><a href="#cb1-26" tabindex="-1"></a><span class="cf">for</span> input_path, target_path <span class="kw">in</span> <span class="bu">zip</span>(input_img_paths[:<span class="dv">10</span>], target_img_paths[:<span class="dv">10</span>]):</span>
-<span id="cb1-27"><a href="#cb1-27" tabindex="-1"></a>    <span class="bu">print</span>(input_path, <span class="st">"|"</span>, target_path)</span></code></pre></div>
+<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https:/keras.posit.co/">keras3</a></span><span class="op">)</span></span>
+<span><span class="va">input_dir</span> <span class="op">&lt;-</span> <span class="st">"datasets/images/"</span></span>
+<span><span class="va">target_dir</span> <span class="op">&lt;-</span> <span class="st">"datasets/annotations/trimaps/"</span></span>
+<span><span class="va">img_size</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">160</span>, <span class="fl">160</span><span class="op">)</span></span>
+<span><span class="va">num_classes</span> <span class="op">&lt;-</span> <span class="fl">3</span></span>
+<span><span class="va">batch_size</span> <span class="op">&lt;-</span> <span class="fl">32</span></span>
+<span></span>
+<span><span class="va">input_img_paths</span> <span class="op">&lt;-</span> <span class="fu">fs</span><span class="fu">::</span><span class="fu"><a href="https://fs.r-lib.org/reference/dir_ls.html" class="external-link">dir_ls</a></span><span class="op">(</span><span class="va">input_dir</span>, glob <span class="op">=</span> <span class="st">"*.jpg"</span><span class="op">)</span> <span class="op"><a href="../../reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://rdrr.io/r/base/sort.html" class="external-link">sort</a></span><span class="op">(</span><span class="op">)</span></span>
+<span><span class="va">target_img_paths</span> <span class="op">&lt;-</span> <span class="fu">fs</span><span class="fu">::</span><span class="fu"><a href="https://fs.r-lib.org/reference/dir_ls.html" class="external-link">dir_ls</a></span><span class="op">(</span><span class="va">target_dir</span>, glob <span class="op">=</span> <span class="st">"*.png"</span><span class="op">)</span> <span class="op"><a href="../../reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://rdrr.io/r/base/sort.html" class="external-link">sort</a></span><span class="op">(</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/cat.html" class="external-link">cat</a></span><span class="op">(</span><span class="st">"Number of samples:"</span>, <span class="fu"><a href="https://rdrr.io/r/base/length.html" class="external-link">length</a></span><span class="op">(</span><span class="va">input_img_paths</span><span class="op">)</span>, <span class="st">"\n"</span><span class="op">)</span></span></code></pre></div>
+<pre><code><span><span class="co">## Number of samples: 7390</span></span></code></pre>
+<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="kw">for</span> <span class="op">(</span><span class="va">i</span> <span class="kw">in</span> <span class="fl">1</span><span class="op">:</span><span class="fl">10</span><span class="op">)</span> <span class="op">{</span></span>
+<span>  <span class="fu"><a href="https://rdrr.io/r/base/cat.html" class="external-link">cat</a></span><span class="op">(</span><span class="va">input_img_paths</span><span class="op">[</span><span class="va">i</span><span class="op">]</span>, <span class="st">"|"</span>, <span class="va">target_img_paths</span><span class="op">[</span><span class="va">i</span><span class="op">]</span>, <span class="st">"\n"</span><span class="op">)</span></span>
+<span><span class="op">}</span></span></code></pre></div>
+<pre><code><span><span class="co">## datasets/images/Abyssinian_1.jpg | datasets/annotations/trimaps/Abyssinian_1.png</span></span>
+<span><span class="co">## datasets/images/Abyssinian_10.jpg | datasets/annotations/trimaps/Abyssinian_10.png</span></span>
+<span><span class="co">## datasets/images/Abyssinian_100.jpg | datasets/annotations/trimaps/Abyssinian_100.png</span></span>
+<span><span class="co">## datasets/images/Abyssinian_101.jpg | datasets/annotations/trimaps/Abyssinian_101.png</span></span>
+<span><span class="co">## datasets/images/Abyssinian_102.jpg | datasets/annotations/trimaps/Abyssinian_102.png</span></span>
+<span><span class="co">## datasets/images/Abyssinian_103.jpg | datasets/annotations/trimaps/Abyssinian_103.png</span></span>
+<span><span class="co">## datasets/images/Abyssinian_104.jpg | datasets/annotations/trimaps/Abyssinian_104.png</span></span>
+<span><span class="co">## datasets/images/Abyssinian_105.jpg | datasets/annotations/trimaps/Abyssinian_105.png</span></span>
+<span><span class="co">## datasets/images/Abyssinian_106.jpg | datasets/annotations/trimaps/Abyssinian_106.png</span></span>
+<span><span class="co">## datasets/images/Abyssinian_107.jpg | datasets/annotations/trimaps/Abyssinian_107.png</span></span></code></pre>
 </div>
 <div class="section level2">
 <h2 id="what-does-one-input-image-and-corresponding-segmentation-mask-look-like">What does one input image and corresponding segmentation mask look
 like?<a class="anchor" aria-label="anchor" href="#what-does-one-input-image-and-corresponding-segmentation-mask-look-like"></a>
 </h2>
-<div class="sourceCode" id="cb2"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" tabindex="-1"></a><span class="im">from</span> IPython.display <span class="im">import</span> Image, display</span>
-<span id="cb2-2"><a href="#cb2-2" tabindex="-1"></a><span class="im">from</span> keras.utils <span class="im">import</span> load_img</span>
-<span id="cb2-3"><a href="#cb2-3" tabindex="-1"></a><span class="im">from</span> PIL <span class="im">import</span> ImageOps</span>
-<span id="cb2-4"><a href="#cb2-4" tabindex="-1"></a></span>
-<span id="cb2-5"><a href="#cb2-5" tabindex="-1"></a><span class="co"># Display input image #7</span></span>
-<span id="cb2-6"><a href="#cb2-6" tabindex="-1"></a>display(Image(filename<span class="op">=</span>input_img_paths[<span class="dv">9</span>]))</span>
-<span id="cb2-7"><a href="#cb2-7" tabindex="-1"></a></span>
-<span id="cb2-8"><a href="#cb2-8" tabindex="-1"></a><span class="co"># Display auto-contrast version of corresponding target (per-pixel categories)</span></span>
-<span id="cb2-9"><a href="#cb2-9" tabindex="-1"></a>img <span class="op">=</span> ImageOps.autocontrast(load_img(target_img_paths[<span class="dv">9</span>]))</span>
-<span id="cb2-10"><a href="#cb2-10" tabindex="-1"></a>display(img)</span></code></pre></div>
+<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># Display input image #10</span></span>
+<span><span class="va">input_img_paths</span><span class="op">[</span><span class="fl">10</span><span class="op">]</span> <span class="op"><a href="../../reference/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="fu">jpeg</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/jpeg/man/readJPEG.html" class="external-link">readJPEG</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="../../reference/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="https://rdrr.io/r/grDevices/as.raster.html" class="external-link">as.raster</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="../../reference/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
+<div class="float">
+<img src="../../reference/figures/oxford_pets_image_segmentation/unnamed-chunk-4-1.png" alt="plot of chunk unnamed-chunk-4"><div class="figcaption">plot of chunk unnamed-chunk-4</div>
+</div>
+<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">target_img_paths</span><span class="op">[</span><span class="fl">10</span><span class="op">]</span> <span class="op"><a href="../../reference/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="fu">png</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/png/man/readPNG.html" class="external-link">readPNG</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="../../reference/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="fu">magrittr</span><span class="fu">::</span><span class="fu"><a href="https://magrittr.tidyverse.org/reference/aliases.html" class="external-link">multiply_by</a></span><span class="op">(</span><span class="fl">255</span><span class="op">)</span> <span class="op"><a href="../../reference/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="https://rdrr.io/r/grDevices/as.raster.html" class="external-link">as.raster</a></span><span class="op">(</span>max <span class="op">=</span> <span class="fl">3</span><span class="op">)</span> <span class="op"><a href="../../reference/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
+<div class="float">
+<img src="../../reference/figures/oxford_pets_image_segmentation/unnamed-chunk-4-2.png" alt="plot of chunk unnamed-chunk-4"><div class="figcaption">plot of chunk unnamed-chunk-4</div>
+</div>
 </div>
 <div class="section level2">
 <h2 id="prepare-dataset-to-load-vectorize-batches-of-data">Prepare dataset to load &amp; vectorize batches of data<a class="anchor" aria-label="anchor" href="#prepare-dataset-to-load-vectorize-batches-of-data"></a>
 </h2>
-<div class="sourceCode" id="cb3"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" tabindex="-1"></a><span class="im">import</span> keras <span class="im">as</span> keras</span>
-<span id="cb3-2"><a href="#cb3-2" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
-<span id="cb3-3"><a href="#cb3-3" tabindex="-1"></a><span class="im">from</span> tensorflow <span class="im">import</span> data <span class="im">as</span> tf_data</span>
-<span id="cb3-4"><a href="#cb3-4" tabindex="-1"></a><span class="im">from</span> tensorflow <span class="im">import</span> image <span class="im">as</span> tf_image</span>
-<span id="cb3-5"><a href="#cb3-5" tabindex="-1"></a><span class="im">from</span> tensorflow <span class="im">import</span> io <span class="im">as</span> tf_io</span>
-<span id="cb3-6"><a href="#cb3-6" tabindex="-1"></a></span>
-<span id="cb3-7"><a href="#cb3-7" tabindex="-1"></a></span>
-<span id="cb3-8"><a href="#cb3-8" tabindex="-1"></a><span class="kw">def</span> get_dataset(</span>
-<span id="cb3-9"><a href="#cb3-9" tabindex="-1"></a>    batch_size,</span>
-<span id="cb3-10"><a href="#cb3-10" tabindex="-1"></a>    img_size,</span>
-<span id="cb3-11"><a href="#cb3-11" tabindex="-1"></a>    input_img_paths,</span>
-<span id="cb3-12"><a href="#cb3-12" tabindex="-1"></a>    target_img_paths,</span>
-<span id="cb3-13"><a href="#cb3-13" tabindex="-1"></a>    max_dataset_len<span class="op">=</span><span class="va">None</span>,</span>
-<span id="cb3-14"><a href="#cb3-14" tabindex="-1"></a>):</span>
-<span id="cb3-15"><a href="#cb3-15" tabindex="-1"></a>    <span class="co">"""Returns a TF Dataset."""</span></span>
-<span id="cb3-16"><a href="#cb3-16" tabindex="-1"></a></span>
-<span id="cb3-17"><a href="#cb3-17" tabindex="-1"></a>    <span class="kw">def</span> load_img_masks(input_img_path, target_img_path):</span>
-<span id="cb3-18"><a href="#cb3-18" tabindex="-1"></a>        input_img <span class="op">=</span> tf_io.read_file(input_img_path)</span>
-<span id="cb3-19"><a href="#cb3-19" tabindex="-1"></a>        input_img <span class="op">=</span> tf_io.decode_png(input_img, channels<span class="op">=</span><span class="dv">3</span>)</span>
-<span id="cb3-20"><a href="#cb3-20" tabindex="-1"></a>        input_img <span class="op">=</span> tf_image.resize(input_img, img_size)</span>
-<span id="cb3-21"><a href="#cb3-21" tabindex="-1"></a>        input_img <span class="op">=</span> tf_image.convert_image_dtype(input_img, <span class="st">"float32"</span>)</span>
-<span id="cb3-22"><a href="#cb3-22" tabindex="-1"></a></span>
-<span id="cb3-23"><a href="#cb3-23" tabindex="-1"></a>        target_img <span class="op">=</span> tf_io.read_file(target_img_path)</span>
-<span id="cb3-24"><a href="#cb3-24" tabindex="-1"></a>        target_img <span class="op">=</span> tf_io.decode_png(target_img, channels<span class="op">=</span><span class="dv">1</span>)</span>
-<span id="cb3-25"><a href="#cb3-25" tabindex="-1"></a>        target_img <span class="op">=</span> tf_image.resize(target_img, img_size, method<span class="op">=</span><span class="st">"nearest"</span>)</span>
-<span id="cb3-26"><a href="#cb3-26" tabindex="-1"></a>        target_img <span class="op">=</span> tf_image.convert_image_dtype(target_img, <span class="st">"uint8"</span>)</span>
-<span id="cb3-27"><a href="#cb3-27" tabindex="-1"></a></span>
-<span id="cb3-28"><a href="#cb3-28" tabindex="-1"></a>        <span class="co"># Ground truth labels are 1, 2, 3. Subtract one to make them 0, 1, 2:</span></span>
-<span id="cb3-29"><a href="#cb3-29" tabindex="-1"></a>        target_img <span class="op">-=</span> <span class="dv">1</span></span>
-<span id="cb3-30"><a href="#cb3-30" tabindex="-1"></a>        <span class="cf">return</span> input_img, target_img</span>
-<span id="cb3-31"><a href="#cb3-31" tabindex="-1"></a></span>
-<span id="cb3-32"><a href="#cb3-32" tabindex="-1"></a>    <span class="co"># For faster debugging, limit the size of data</span></span>
-<span id="cb3-33"><a href="#cb3-33" tabindex="-1"></a>    <span class="cf">if</span> max_dataset_len:</span>
-<span id="cb3-34"><a href="#cb3-34" tabindex="-1"></a>        input_img_paths <span class="op">=</span> input_img_paths[:max_dataset_len]</span>
-<span id="cb3-35"><a href="#cb3-35" tabindex="-1"></a>        target_img_paths <span class="op">=</span> target_img_paths[:max_dataset_len]</span>
-<span id="cb3-36"><a href="#cb3-36" tabindex="-1"></a>    dataset <span class="op">=</span> tf_data.Dataset.from_tensor_slices(</span>
-<span id="cb3-37"><a href="#cb3-37" tabindex="-1"></a>        (input_img_paths, target_img_paths)</span>
-<span id="cb3-38"><a href="#cb3-38" tabindex="-1"></a>    )</span>
-<span id="cb3-39"><a href="#cb3-39" tabindex="-1"></a>    dataset <span class="op">=</span> dataset.<span class="bu">map</span>(load_img_masks, num_parallel_calls<span class="op">=</span>tf_data.AUTOTUNE)</span>
-<span id="cb3-40"><a href="#cb3-40" tabindex="-1"></a>    <span class="cf">return</span> dataset.batch(batch_size)</span></code></pre></div>
+<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/rstudio/tensorflow" class="external-link">tensorflow</a></span><span class="op">)</span></span></code></pre></div>
+<pre><code><span><span class="co">##</span></span>
+<span><span class="co">## Attaching package: 'tensorflow'</span></span></code></pre>
+<pre><code><span><span class="co">## The following objects are masked from 'package:keras3':</span></span>
+<span><span class="co">##</span></span>
+<span><span class="co">##     set_random_seed, shape</span></span></code></pre>
+<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/rstudio/tfdatasets" class="external-link">tfdatasets</a></span><span class="op">)</span></span></code></pre></div>
+<pre><code><span><span class="co">##</span></span>
+<span><span class="co">## Attaching package: 'tfdatasets'</span></span></code></pre>
+<pre><code><span><span class="co">## The following object is masked from 'package:keras3':</span></span>
+<span><span class="co">##</span></span>
+<span><span class="co">##     shape</span></span></code></pre>
+<div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># Returns a tf_dataset</span></span>
+<span><span class="va">get_dataset</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">batch_size</span>, <span class="va">img_size</span>, <span class="va">input_img_paths</span>, <span class="va">target_img_paths</span>,</span>
+<span>                        <span class="va">max_dataset_len</span> <span class="op">=</span> <span class="cn">NULL</span><span class="op">)</span> <span class="op">{</span></span>
+<span></span>
+<span>  <span class="va">img_size</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/integer.html" class="external-link">as.integer</a></span><span class="op">(</span><span class="va">img_size</span><span class="op">)</span></span>
+<span></span>
+<span>  <span class="va">load_img_masks</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">input_img_path</span>, <span class="va">target_img_path</span><span class="op">)</span> <span class="op">{</span></span>
+<span>    <span class="va">input_img</span> <span class="op">&lt;-</span> <span class="va">input_img_path</span> <span class="op"><a href="../../reference/pipe.html">%&gt;%</a></span></span>
+<span>      <span class="va">tf</span><span class="op">$</span><span class="va">io</span><span class="op">$</span><span class="fu">read_file</span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="../../reference/pipe.html">%&gt;%</a></span></span>
+<span>      <span class="va">tf</span><span class="op">$</span><span class="va">io</span><span class="op">$</span><span class="fu">decode_jpeg</span><span class="op">(</span>channels <span class="op">=</span> <span class="fl">3</span><span class="op">)</span> <span class="op"><a href="../../reference/pipe.html">%&gt;%</a></span></span>
+<span>      <span class="va">tf</span><span class="op">$</span><span class="va">image</span><span class="op">$</span><span class="fu">resize</span><span class="op">(</span><span class="va">img_size</span><span class="op">)</span> <span class="op"><a href="../../reference/pipe.html">%&gt;%</a></span></span>
+<span>      <span class="va">tf</span><span class="op">$</span><span class="va">image</span><span class="op">$</span><span class="fu">convert_image_dtype</span><span class="op">(</span><span class="st">"float32"</span><span class="op">)</span></span>
+<span></span>
+<span>    <span class="va">target_img</span> <span class="op">&lt;-</span> <span class="va">target_img_path</span> <span class="op"><a href="../../reference/pipe.html">%&gt;%</a></span></span>
+<span>      <span class="va">tf</span><span class="op">$</span><span class="va">io</span><span class="op">$</span><span class="fu">read_file</span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="../../reference/pipe.html">%&gt;%</a></span></span>
+<span>      <span class="va">tf</span><span class="op">$</span><span class="va">io</span><span class="op">$</span><span class="fu">decode_png</span><span class="op">(</span>channels <span class="op">=</span> <span class="fl">1</span><span class="op">)</span> <span class="op"><a href="../../reference/pipe.html">%&gt;%</a></span></span>
+<span>      <span class="va">tf</span><span class="op">$</span><span class="va">image</span><span class="op">$</span><span class="fu">resize</span><span class="op">(</span><span class="va">img_size</span>, method <span class="op">=</span> <span class="st">"nearest"</span><span class="op">)</span> <span class="op"><a href="../../reference/pipe.html">%&gt;%</a></span></span>
+<span>      <span class="va">tf</span><span class="op">$</span><span class="va">image</span><span class="op">$</span><span class="fu">convert_image_dtype</span><span class="op">(</span><span class="st">"uint8"</span><span class="op">)</span></span>
+<span></span>
+<span>    <span class="co"># Ground truth labels are 1, 2, 3. Subtract one to make them 0, 1, 2:</span></span>
+<span>    <span class="va">target_img</span> <span class="op">&lt;-</span> <span class="va">target_img</span> <span class="op">-</span> <span class="fl">1L</span></span>
+<span></span>
+<span>    <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="va">input_img</span>, <span class="va">target_img</span><span class="op">)</span></span>
+<span>  <span class="op">}</span></span>
+<span></span>
+<span>  <span class="kw">if</span> <span class="op">(</span><span class="op">!</span><span class="fu"><a href="https://rdrr.io/r/base/NULL.html" class="external-link">is.null</a></span><span class="op">(</span><span class="va">max_dataset_len</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span></span>
+<span>    <span class="va">input_img_paths</span> <span class="op">&lt;-</span> <span class="va">input_img_paths</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="va">max_dataset_len</span><span class="op">]</span></span>
+<span>    <span class="va">target_img_paths</span> <span class="op">&lt;-</span> <span class="va">target_img_paths</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="va">max_dataset_len</span><span class="op">]</span></span>
+<span>  <span class="op">}</span></span>
+<span></span>
+<span>  <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="va">input_img_paths</span>, <span class="va">target_img_paths</span><span class="op">)</span> <span class="op"><a href="../../reference/pipe.html">%&gt;%</a></span></span>
+<span>    <span class="fu"><a href="https://rdrr.io/pkg/tfdatasets/man/tensor_slices_dataset.html" class="external-link">tensor_slices_dataset</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="../../reference/pipe.html">%&gt;%</a></span></span>
+<span>    <span class="fu"><a href="https://rdrr.io/pkg/tfdatasets/man/dataset_map.html" class="external-link">dataset_map</a></span><span class="op">(</span><span class="va">load_img_masks</span>, num_parallel_calls <span class="op">=</span> <span class="va">tf</span><span class="op">$</span><span class="va">data</span><span class="op">$</span><span class="va">AUTOTUNE</span><span class="op">)</span> <span class="op"><a href="../../reference/pipe.html">%&gt;%</a></span></span>
+<span>    <span class="fu"><a href="https://rdrr.io/pkg/tfdatasets/man/dataset_batch.html" class="external-link">dataset_batch</a></span><span class="op">(</span><span class="va">batch_size</span><span class="op">)</span></span>
+<span><span class="op">}</span></span></code></pre></div>
 </div>
 <div class="section level2">
 <h2 id="prepare-u-net-xception-style-model">Prepare U-Net Xception-style model<a class="anchor" aria-label="anchor" href="#prepare-u-net-xception-style-model"></a>
 </h2>
-<div class="sourceCode" id="cb4"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" tabindex="-1"></a><span class="im">from</span> keras <span class="im">import</span> layers</span>
-<span id="cb4-2"><a href="#cb4-2" tabindex="-1"></a></span>
-<span id="cb4-3"><a href="#cb4-3" tabindex="-1"></a></span>
-<span id="cb4-4"><a href="#cb4-4" tabindex="-1"></a><span class="kw">def</span> get_model(img_size, num_classes):</span>
-<span id="cb4-5"><a href="#cb4-5" tabindex="-1"></a>    inputs <span class="op">=</span> keras.Input(shape<span class="op">=</span>img_size <span class="op">+</span> (<span class="dv">3</span>,))</span>
-<span id="cb4-6"><a href="#cb4-6" tabindex="-1"></a></span>
-<span id="cb4-7"><a href="#cb4-7" tabindex="-1"></a>    <span class="co">### [First half of the network: downsampling inputs] </span><span class="al">###</span></span>
-<span id="cb4-8"><a href="#cb4-8" tabindex="-1"></a></span>
-<span id="cb4-9"><a href="#cb4-9" tabindex="-1"></a>    <span class="co"># Entry block</span></span>
-<span id="cb4-10"><a href="#cb4-10" tabindex="-1"></a>    x <span class="op">=</span> layers.Conv2D(<span class="dv">32</span>, <span class="dv">3</span>, strides<span class="op">=</span><span class="dv">2</span>, padding<span class="op">=</span><span class="st">"same"</span>)(inputs)</span>
-<span id="cb4-11"><a href="#cb4-11" tabindex="-1"></a>    x <span class="op">=</span> layers.BatchNormalization()(x)</span>
-<span id="cb4-12"><a href="#cb4-12" tabindex="-1"></a>    x <span class="op">=</span> layers.Activation(<span class="st">"relu"</span>)(x)</span>
-<span id="cb4-13"><a href="#cb4-13" tabindex="-1"></a></span>
-<span id="cb4-14"><a href="#cb4-14" tabindex="-1"></a>    previous_block_activation <span class="op">=</span> x  <span class="co"># Set aside residual</span></span>
-<span id="cb4-15"><a href="#cb4-15" tabindex="-1"></a></span>
-<span id="cb4-16"><a href="#cb4-16" tabindex="-1"></a>    <span class="co"># Blocks 1, 2, 3 are identical apart from the feature depth.</span></span>
-<span id="cb4-17"><a href="#cb4-17" tabindex="-1"></a>    <span class="cf">for</span> filters <span class="kw">in</span> [<span class="dv">64</span>, <span class="dv">128</span>, <span class="dv">256</span>]:</span>
-<span id="cb4-18"><a href="#cb4-18" tabindex="-1"></a>        x <span class="op">=</span> layers.Activation(<span class="st">"relu"</span>)(x)</span>
-<span id="cb4-19"><a href="#cb4-19" tabindex="-1"></a>        x <span class="op">=</span> layers.SeparableConv2D(filters, <span class="dv">3</span>, padding<span class="op">=</span><span class="st">"same"</span>)(x)</span>
-<span id="cb4-20"><a href="#cb4-20" tabindex="-1"></a>        x <span class="op">=</span> layers.BatchNormalization()(x)</span>
-<span id="cb4-21"><a href="#cb4-21" tabindex="-1"></a></span>
-<span id="cb4-22"><a href="#cb4-22" tabindex="-1"></a>        x <span class="op">=</span> layers.Activation(<span class="st">"relu"</span>)(x)</span>
-<span id="cb4-23"><a href="#cb4-23" tabindex="-1"></a>        x <span class="op">=</span> layers.SeparableConv2D(filters, <span class="dv">3</span>, padding<span class="op">=</span><span class="st">"same"</span>)(x)</span>
-<span id="cb4-24"><a href="#cb4-24" tabindex="-1"></a>        x <span class="op">=</span> layers.BatchNormalization()(x)</span>
-<span id="cb4-25"><a href="#cb4-25" tabindex="-1"></a></span>
-<span id="cb4-26"><a href="#cb4-26" tabindex="-1"></a>        x <span class="op">=</span> layers.MaxPooling2D(<span class="dv">3</span>, strides<span class="op">=</span><span class="dv">2</span>, padding<span class="op">=</span><span class="st">"same"</span>)(x)</span>
-<span id="cb4-27"><a href="#cb4-27" tabindex="-1"></a></span>
-<span id="cb4-28"><a href="#cb4-28" tabindex="-1"></a>        <span class="co"># Project residual</span></span>
-<span id="cb4-29"><a href="#cb4-29" tabindex="-1"></a>        residual <span class="op">=</span> layers.Conv2D(filters, <span class="dv">1</span>, strides<span class="op">=</span><span class="dv">2</span>, padding<span class="op">=</span><span class="st">"same"</span>)(</span>
-<span id="cb4-30"><a href="#cb4-30" tabindex="-1"></a>            previous_block_activation</span>
-<span id="cb4-31"><a href="#cb4-31" tabindex="-1"></a>        )</span>
-<span id="cb4-32"><a href="#cb4-32" tabindex="-1"></a>        x <span class="op">=</span> layers.add([x, residual])  <span class="co"># Add back residual</span></span>
-<span id="cb4-33"><a href="#cb4-33" tabindex="-1"></a>        previous_block_activation <span class="op">=</span> x  <span class="co"># Set aside next residual</span></span>
-<span id="cb4-34"><a href="#cb4-34" tabindex="-1"></a></span>
-<span id="cb4-35"><a href="#cb4-35" tabindex="-1"></a>    <span class="co">### [Second half of the network: upsampling inputs] </span><span class="al">###</span></span>
-<span id="cb4-36"><a href="#cb4-36" tabindex="-1"></a></span>
-<span id="cb4-37"><a href="#cb4-37" tabindex="-1"></a>    <span class="cf">for</span> filters <span class="kw">in</span> [<span class="dv">256</span>, <span class="dv">128</span>, <span class="dv">64</span>, <span class="dv">32</span>]:</span>
-<span id="cb4-38"><a href="#cb4-38" tabindex="-1"></a>        x <span class="op">=</span> layers.Activation(<span class="st">"relu"</span>)(x)</span>
-<span id="cb4-39"><a href="#cb4-39" tabindex="-1"></a>        x <span class="op">=</span> layers.Conv2DTranspose(filters, <span class="dv">3</span>, padding<span class="op">=</span><span class="st">"same"</span>)(x)</span>
-<span id="cb4-40"><a href="#cb4-40" tabindex="-1"></a>        x <span class="op">=</span> layers.BatchNormalization()(x)</span>
-<span id="cb4-41"><a href="#cb4-41" tabindex="-1"></a></span>
-<span id="cb4-42"><a href="#cb4-42" tabindex="-1"></a>        x <span class="op">=</span> layers.Activation(<span class="st">"relu"</span>)(x)</span>
-<span id="cb4-43"><a href="#cb4-43" tabindex="-1"></a>        x <span class="op">=</span> layers.Conv2DTranspose(filters, <span class="dv">3</span>, padding<span class="op">=</span><span class="st">"same"</span>)(x)</span>
-<span id="cb4-44"><a href="#cb4-44" tabindex="-1"></a>        x <span class="op">=</span> layers.BatchNormalization()(x)</span>
-<span id="cb4-45"><a href="#cb4-45" tabindex="-1"></a></span>
-<span id="cb4-46"><a href="#cb4-46" tabindex="-1"></a>        x <span class="op">=</span> layers.UpSampling2D(<span class="dv">2</span>)(x)</span>
-<span id="cb4-47"><a href="#cb4-47" tabindex="-1"></a></span>
-<span id="cb4-48"><a href="#cb4-48" tabindex="-1"></a>        <span class="co"># Project residual</span></span>
-<span id="cb4-49"><a href="#cb4-49" tabindex="-1"></a>        residual <span class="op">=</span> layers.UpSampling2D(<span class="dv">2</span>)(previous_block_activation)</span>
-<span id="cb4-50"><a href="#cb4-50" tabindex="-1"></a>        residual <span class="op">=</span> layers.Conv2D(filters, <span class="dv">1</span>, padding<span class="op">=</span><span class="st">"same"</span>)(residual)</span>
-<span id="cb4-51"><a href="#cb4-51" tabindex="-1"></a>        x <span class="op">=</span> layers.add([x, residual])  <span class="co"># Add back residual</span></span>
-<span id="cb4-52"><a href="#cb4-52" tabindex="-1"></a>        previous_block_activation <span class="op">=</span> x  <span class="co"># Set aside next residual</span></span>
-<span id="cb4-53"><a href="#cb4-53" tabindex="-1"></a></span>
-<span id="cb4-54"><a href="#cb4-54" tabindex="-1"></a>    <span class="co"># Add a per-pixel classification layer</span></span>
-<span id="cb4-55"><a href="#cb4-55" tabindex="-1"></a>    outputs <span class="op">=</span> layers.Conv2D(</span>
-<span id="cb4-56"><a href="#cb4-56" tabindex="-1"></a>        num_classes, <span class="dv">3</span>, activation<span class="op">=</span><span class="st">"softmax"</span>, padding<span class="op">=</span><span class="st">"same"</span></span>
-<span id="cb4-57"><a href="#cb4-57" tabindex="-1"></a>    )(x)</span>
-<span id="cb4-58"><a href="#cb4-58" tabindex="-1"></a></span>
-<span id="cb4-59"><a href="#cb4-59" tabindex="-1"></a>    <span class="co"># Define the model</span></span>
-<span id="cb4-60"><a href="#cb4-60" tabindex="-1"></a>    model <span class="op">=</span> keras.Model(inputs, outputs)</span>
-<span id="cb4-61"><a href="#cb4-61" tabindex="-1"></a>    <span class="cf">return</span> model</span>
-<span id="cb4-62"><a href="#cb4-62" tabindex="-1"></a></span>
-<span id="cb4-63"><a href="#cb4-63" tabindex="-1"></a></span>
-<span id="cb4-64"><a href="#cb4-64" tabindex="-1"></a><span class="co"># Build model</span></span>
-<span id="cb4-65"><a href="#cb4-65" tabindex="-1"></a>model <span class="op">=</span> get_model(img_size, num_classes)</span>
-<span id="cb4-66"><a href="#cb4-66" tabindex="-1"></a>model.summary()</span></code></pre></div>
+<div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">get_model</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">img_size</span>, <span class="va">num_classes</span><span class="op">)</span> <span class="op">{</span></span>
+<span></span>
+<span>  <span class="va">inputs</span> <span class="op">&lt;-</span> <span class="fu"><a href="../../reference/layer_input.html">layer_input</a></span><span class="op">(</span>shape <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="va">img_size</span>, <span class="fl">3</span><span class="op">)</span><span class="op">)</span></span>
+<span></span>
+<span>  <span class="co">### [First half of the network: downsampling inputs] ###</span></span>
+<span></span>
+<span>  <span class="co"># Entry block</span></span>
+<span>  <span class="va">x</span> <span class="op">&lt;-</span> <span class="va">inputs</span> <span class="op"><a href="../../reference/pipe.html">%&gt;%</a></span></span>
+<span>    <span class="fu"><a href="../../reference/layer_conv_2d.html">layer_conv_2d</a></span><span class="op">(</span>filters <span class="op">=</span> <span class="fl">32</span>, kernel_size <span class="op">=</span> <span class="fl">3</span>, strides <span class="op">=</span> <span class="fl">2</span>, padding <span class="op">=</span> <span class="st">"same"</span><span class="op">)</span> <span class="op"><a href="../../reference/pipe.html">%&gt;%</a></span></span>
+<span>    <span class="fu"><a href="../../reference/layer_batch_normalization.html">layer_batch_normalization</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="../../reference/pipe.html">%&gt;%</a></span></span>
+<span>    <span class="fu"><a href="../../reference/layer_activation.html">layer_activation</a></span><span class="op">(</span><span class="st">"relu"</span><span class="op">)</span></span>
+<span></span>
+<span>  <span class="va">previous_block_activation</span> <span class="op">&lt;-</span> <span class="va">x</span>  <span class="co"># Set aside residual</span></span>
+<span></span>
+<span>  <span class="kw">for</span> <span class="op">(</span><span class="va">filters</span> <span class="kw">in</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">64</span>, <span class="fl">128</span>, <span class="fl">256</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span></span>
+<span>    <span class="va">x</span> <span class="op">&lt;-</span> <span class="va">x</span> <span class="op"><a href="../../reference/pipe.html">%&gt;%</a></span></span>
+<span>      <span class="fu"><a href="../../reference/layer_activation.html">layer_activation</a></span><span class="op">(</span><span class="st">"relu"</span><span class="op">)</span> <span class="op"><a href="../../reference/pipe.html">%&gt;%</a></span></span>
+<span>      <span class="fu"><a href="../../reference/layer_separable_conv_2d.html">layer_separable_conv_2d</a></span><span class="op">(</span>filters <span class="op">=</span> <span class="va">filters</span>, kernel_size <span class="op">=</span> <span class="fl">3</span>, padding <span class="op">=</span> <span class="st">"same"</span><span class="op">)</span> <span class="op"><a href="../../reference/pipe.html">%&gt;%</a></span></span>
+<span>      <span class="fu"><a href="../../reference/layer_batch_normalization.html">layer_batch_normalization</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="../../reference/pipe.html">%&gt;%</a></span></span>
+<span></span>
+<span>      <span class="fu"><a href="../../reference/layer_activation.html">layer_activation</a></span><span class="op">(</span><span class="st">"relu"</span><span class="op">)</span> <span class="op"><a href="../../reference/pipe.html">%&gt;%</a></span></span>
+<span>      <span class="fu"><a href="../../reference/layer_separable_conv_2d.html">layer_separable_conv_2d</a></span><span class="op">(</span>filters <span class="op">=</span> <span class="va">filters</span>, kernel_size <span class="op">=</span> <span class="fl">3</span>, padding <span class="op">=</span> <span class="st">"same"</span><span class="op">)</span> <span class="op"><a href="../../reference/pipe.html">%&gt;%</a></span></span>
+<span>      <span class="fu"><a href="../../reference/layer_batch_normalization.html">layer_batch_normalization</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="../../reference/pipe.html">%&gt;%</a></span></span>
+<span></span>
+<span>      <span class="fu"><a href="../../reference/layer_max_pooling_2d.html">layer_max_pooling_2d</a></span><span class="op">(</span>pool_size <span class="op">=</span> <span class="fl">3</span>, strides <span class="op">=</span> <span class="fl">2</span>, padding <span class="op">=</span> <span class="st">"same"</span><span class="op">)</span></span>
+<span></span>
+<span>    <span class="va">residual</span> <span class="op">&lt;-</span> <span class="va">previous_block_activation</span> <span class="op"><a href="../../reference/pipe.html">%&gt;%</a></span></span>
+<span>      <span class="fu"><a href="../../reference/layer_conv_2d.html">layer_conv_2d</a></span><span class="op">(</span>filters <span class="op">=</span> <span class="va">filters</span>, kernel_size <span class="op">=</span> <span class="fl">1</span>, strides <span class="op">=</span> <span class="fl">2</span>, padding <span class="op">=</span> <span class="st">"same"</span><span class="op">)</span></span>
+<span></span>
+<span>    <span class="va">x</span> <span class="op">&lt;-</span> <span class="fu"><a href="../../reference/layer_add.html">layer_add</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="va">x</span>, <span class="va">residual</span><span class="op">)</span><span class="op">)</span>  <span class="co"># Add back residual</span></span>
+<span>    <span class="va">previous_block_activation</span> <span class="op">&lt;-</span> <span class="va">x</span>  <span class="co"># Set aside next residual</span></span>
+<span>  <span class="op">}</span></span>
+<span></span>
+<span>  <span class="co">### [Second half of the network: upsampling inputs] ###</span></span>
+<span></span>
+<span>  <span class="kw">for</span> <span class="op">(</span><span class="va">filters</span> <span class="kw">in</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">256</span>, <span class="fl">128</span>, <span class="fl">64</span>, <span class="fl">32</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span></span>
+<span>    <span class="va">x</span> <span class="op">&lt;-</span> <span class="va">x</span> <span class="op"><a href="../../reference/pipe.html">%&gt;%</a></span></span>
+<span>      <span class="fu"><a href="../../reference/layer_activation.html">layer_activation</a></span><span class="op">(</span><span class="st">"relu"</span><span class="op">)</span> <span class="op"><a href="../../reference/pipe.html">%&gt;%</a></span></span>
+<span>      <span class="fu"><a href="../../reference/layer_conv_2d_transpose.html">layer_conv_2d_transpose</a></span><span class="op">(</span>filters <span class="op">=</span> <span class="va">filters</span>, kernel_size <span class="op">=</span> <span class="fl">3</span>, padding <span class="op">=</span> <span class="st">"same"</span><span class="op">)</span> <span class="op"><a href="../../reference/pipe.html">%&gt;%</a></span></span>
+<span>      <span class="fu"><a href="../../reference/layer_batch_normalization.html">layer_batch_normalization</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="../../reference/pipe.html">%&gt;%</a></span></span>
+<span></span>
+<span>      <span class="fu"><a href="../../reference/layer_activation.html">layer_activation</a></span><span class="op">(</span><span class="st">"relu"</span><span class="op">)</span> <span class="op"><a href="../../reference/pipe.html">%&gt;%</a></span></span>
+<span>      <span class="fu"><a href="../../reference/layer_conv_2d_transpose.html">layer_conv_2d_transpose</a></span><span class="op">(</span>filters <span class="op">=</span> <span class="va">filters</span>, kernel_size <span class="op">=</span> <span class="fl">3</span>, padding <span class="op">=</span> <span class="st">"same"</span><span class="op">)</span> <span class="op"><a href="../../reference/pipe.html">%&gt;%</a></span></span>
+<span>      <span class="fu"><a href="../../reference/layer_batch_normalization.html">layer_batch_normalization</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="../../reference/pipe.html">%&gt;%</a></span></span>
+<span></span>
+<span>      <span class="fu"><a href="../../reference/layer_upsampling_2d.html">layer_upsampling_2d</a></span><span class="op">(</span>size <span class="op">=</span> <span class="fl">2</span><span class="op">)</span></span>
+<span></span>
+<span>    <span class="co"># Project residual</span></span>
+<span>    <span class="va">residual</span> <span class="op">&lt;-</span> <span class="va">previous_block_activation</span> <span class="op"><a href="../../reference/pipe.html">%&gt;%</a></span></span>
+<span>      <span class="fu"><a href="../../reference/layer_upsampling_2d.html">layer_upsampling_2d</a></span><span class="op">(</span>size <span class="op">=</span> <span class="fl">2</span><span class="op">)</span> <span class="op"><a href="../../reference/pipe.html">%&gt;%</a></span></span>
+<span>      <span class="fu"><a href="../../reference/layer_conv_2d.html">layer_conv_2d</a></span><span class="op">(</span>filters <span class="op">=</span> <span class="va">filters</span>, kernel_size <span class="op">=</span> <span class="fl">1</span>, padding <span class="op">=</span> <span class="st">"same"</span><span class="op">)</span></span>
+<span></span>
+<span>    <span class="va">x</span> <span class="op">&lt;-</span> <span class="fu"><a href="../../reference/layer_add.html">layer_add</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="va">x</span>, <span class="va">residual</span><span class="op">)</span><span class="op">)</span>  <span class="co"># Add back residual</span></span>
+<span>    <span class="va">previous_block_activation</span> <span class="op">&lt;-</span> <span class="va">x</span>  <span class="co"># Set aside next residual</span></span>
+<span>  <span class="op">}</span></span>
+<span></span>
+<span>  <span class="co"># Add a per-pixel classification layer</span></span>
+<span>  <span class="va">outputs</span> <span class="op">&lt;-</span> <span class="va">x</span> <span class="op"><a href="../../reference/pipe.html">%&gt;%</a></span></span>
+<span>    <span class="fu"><a href="../../reference/layer_conv_2d.html">layer_conv_2d</a></span><span class="op">(</span><span class="va">num_classes</span>, <span class="fl">3</span>, activation<span class="op">=</span><span class="st">"softmax"</span>, padding<span class="op">=</span><span class="st">"same"</span><span class="op">)</span></span>
+<span></span>
+<span>  <span class="co"># Define the model</span></span>
+<span>  <span class="fu"><a href="../../reference/keras_model.html">keras_model</a></span><span class="op">(</span><span class="va">inputs</span>, <span class="va">outputs</span><span class="op">)</span></span>
+<span><span class="op">}</span></span>
+<span></span>
+<span><span class="co"># Build model</span></span>
+<span><span class="va">model</span> <span class="op">&lt;-</span> <span class="fu">get_model</span><span class="op">(</span><span class="va">img_size</span>, <span class="va">num_classes</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary</a></span><span class="op">(</span><span class="va">model</span><span class="op">)</span></span></code></pre></div>
+<pre><code><span><span class="co">## <span style="font-weight: bold;">Model: "functional_1"</span></span></span>
+<span><span class="co">## ┏━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━━┓</span></span>
+<span><span class="co">## ┃<span style="font-weight: bold;"> Layer (type)        </span>┃<span style="font-weight: bold;"> Output Shape      </span>┃<span style="font-weight: bold;"> Param # </span>┃<span style="font-weight: bold;"> Connected to         </span>┃</span></span>
+<span><span class="co">## ┡━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━╇━━━━━━━━━━━━━━━━━━━━━━┩</span></span>
+<span><span class="co">## │ input_layer         │ (<span style="color: #00D7FF;">None</span>, <span style="color: #00AF00;">160</span>, <span style="color: #00AF00;">160</span>,  │       <span style="color: #00AF00;">0</span> │ -                    │</span></span>
+<span><span class="co">## │ (<span style="color: #0087FF;">InputLayer</span>)        │ <span style="color: #00AF00;">3</span>)                │         │                      │</span></span>
+<span><span class="co">## ├─────────────────────┼───────────────────┼─────────┼──────────────────────┤</span></span>
+<span><span class="co">## │ conv2d (<span style="color: #0087FF;">Conv2D</span>)     │ (<span style="color: #00D7FF;">None</span>, <span style="color: #00AF00;">80</span>, <span style="color: #00AF00;">80</span>,    │     <span style="color: #00AF00;">896</span> │ input_layer[<span style="color: #00AF00;">0</span>][<span style="color: #00AF00;">0</span>]    │</span></span>
+<span><span class="co">## │                     │ <span style="color: #00AF00;">32</span>)               │         │                      │</span></span>
+<span><span class="co">## ├─────────────────────┼───────────────────┼─────────┼──────────────────────┤</span></span>
+<span><span class="co">## │ batch_normalization │ (<span style="color: #00D7FF;">None</span>, <span style="color: #00AF00;">80</span>, <span style="color: #00AF00;">80</span>,    │     <span style="color: #00AF00;">128</span> │ conv2d[<span style="color: #00AF00;">0</span>][<span style="color: #00AF00;">0</span>]         │</span></span>
+<span><span class="co">## │ (<span style="color: #0087FF;">BatchNormalizatio…</span> │ <span style="color: #00AF00;">32</span>)               │         │                      │</span></span>
+<span><span class="co">## ├─────────────────────┼───────────────────┼─────────┼──────────────────────┤</span></span>
+<span><span class="co">## │ activation          │ (<span style="color: #00D7FF;">None</span>, <span style="color: #00AF00;">80</span>, <span style="color: #00AF00;">80</span>,    │       <span style="color: #00AF00;">0</span> │ batch_normalization… │</span></span>
+<span><span class="co">## │ (<span style="color: #0087FF;">Activation</span>)        │ <span style="color: #00AF00;">32</span>)               │         │                      │</span></span>
+<span><span class="co">## ├─────────────────────┼───────────────────┼─────────┼──────────────────────┤</span></span>
+<span><span class="co">## │ activation_2        │ (<span style="color: #00D7FF;">None</span>, <span style="color: #00AF00;">80</span>, <span style="color: #00AF00;">80</span>,    │       <span style="color: #00AF00;">0</span> │ activation[<span style="color: #00AF00;">0</span>][<span style="color: #00AF00;">0</span>]     │</span></span>
+<span><span class="co">## │ (<span style="color: #0087FF;">Activation</span>)        │ <span style="color: #00AF00;">32</span>)               │         │                      │</span></span>
+<span><span class="co">## ├─────────────────────┼───────────────────┼─────────┼──────────────────────┤</span></span>
+<span><span class="co">## │ separable_conv2d_1  │ (<span style="color: #00D7FF;">None</span>, <span style="color: #00AF00;">80</span>, <span style="color: #00AF00;">80</span>,    │   <span style="color: #00AF00;">2,400</span> │ activation_2[<span style="color: #00AF00;">0</span>][<span style="color: #00AF00;">0</span>]   │</span></span>
+<span><span class="co">## │ (<span style="color: #0087FF;">SeparableConv2D</span>)   │ <span style="color: #00AF00;">64</span>)               │         │                      │</span></span>
+<span><span class="co">## ├─────────────────────┼───────────────────┼─────────┼──────────────────────┤</span></span>
+<span><span class="co">## │ batch_normalizatio… │ (<span style="color: #00D7FF;">None</span>, <span style="color: #00AF00;">80</span>, <span style="color: #00AF00;">80</span>,    │     <span style="color: #00AF00;">256</span> │ separable_conv2d_1[<span style="color: #00AF00;">…</span> │</span></span>
+<span><span class="co">## │ (<span style="color: #0087FF;">BatchNormalizatio…</span> │ <span style="color: #00AF00;">64</span>)               │         │                      │</span></span>
+<span><span class="co">## ├─────────────────────┼───────────────────┼─────────┼──────────────────────┤</span></span>
+<span><span class="co">## │ activation_1        │ (<span style="color: #00D7FF;">None</span>, <span style="color: #00AF00;">80</span>, <span style="color: #00AF00;">80</span>,    │       <span style="color: #00AF00;">0</span> │ batch_normalization… │</span></span>
+<span><span class="co">## │ (<span style="color: #0087FF;">Activation</span>)        │ <span style="color: #00AF00;">64</span>)               │         │                      │</span></span>
+<span><span class="co">## ├─────────────────────┼───────────────────┼─────────┼──────────────────────┤</span></span>
+<span><span class="co">## │ separable_conv2d    │ (<span style="color: #00D7FF;">None</span>, <span style="color: #00AF00;">80</span>, <span style="color: #00AF00;">80</span>,    │   <span style="color: #00AF00;">4,736</span> │ activation_1[<span style="color: #00AF00;">0</span>][<span style="color: #00AF00;">0</span>]   │</span></span>
+<span><span class="co">## │ (<span style="color: #0087FF;">SeparableConv2D</span>)   │ <span style="color: #00AF00;">64</span>)               │         │                      │</span></span>
+<span><span class="co">## ├─────────────────────┼───────────────────┼─────────┼──────────────────────┤</span></span>
+<span><span class="co">## │ batch_normalizatio… │ (<span style="color: #00D7FF;">None</span>, <span style="color: #00AF00;">80</span>, <span style="color: #00AF00;">80</span>,    │     <span style="color: #00AF00;">256</span> │ separable_conv2d[<span style="color: #00AF00;">0</span>]… │</span></span>
+<span><span class="co">## │ (<span style="color: #0087FF;">BatchNormalizatio…</span> │ <span style="color: #00AF00;">64</span>)               │         │                      │</span></span>
+<span><span class="co">## ├─────────────────────┼───────────────────┼─────────┼──────────────────────┤</span></span>
+<span><span class="co">## │ max_pooling2d       │ (<span style="color: #00D7FF;">None</span>, <span style="color: #00AF00;">40</span>, <span style="color: #00AF00;">40</span>,    │       <span style="color: #00AF00;">0</span> │ batch_normalization… │</span></span>
+<span><span class="co">## │ (<span style="color: #0087FF;">MaxPooling2D</span>)      │ <span style="color: #00AF00;">64</span>)               │         │                      │</span></span>
+<span><span class="co">## ├─────────────────────┼───────────────────┼─────────┼──────────────────────┤</span></span>
+<span><span class="co">## │ conv2d_1 (<span style="color: #0087FF;">Conv2D</span>)   │ (<span style="color: #00D7FF;">None</span>, <span style="color: #00AF00;">40</span>, <span style="color: #00AF00;">40</span>,    │   <span style="color: #00AF00;">2,112</span> │ activation[<span style="color: #00AF00;">0</span>][<span style="color: #00AF00;">0</span>]     │</span></span>
+<span><span class="co">## │                     │ <span style="color: #00AF00;">64</span>)               │         │                      │</span></span>
+<span><span class="co">## ├─────────────────────┼───────────────────┼─────────┼──────────────────────┤</span></span>
+<span><span class="co">## │ add (<span style="color: #0087FF;">Add</span>)           │ (<span style="color: #00D7FF;">None</span>, <span style="color: #00AF00;">40</span>, <span style="color: #00AF00;">40</span>,    │       <span style="color: #00AF00;">0</span> │ max_pooling2d[<span style="color: #00AF00;">0</span>][<span style="color: #00AF00;">0</span>], │</span></span>
+<span><span class="co">## │                     │ <span style="color: #00AF00;">64</span>)               │         │ conv2d_1[<span style="color: #00AF00;">0</span>][<span style="color: #00AF00;">0</span>]       │</span></span>
+<span><span class="co">## ├─────────────────────┼───────────────────┼─────────┼──────────────────────┤</span></span>
+<span><span class="co">## │ activation_4        │ (<span style="color: #00D7FF;">None</span>, <span style="color: #00AF00;">40</span>, <span style="color: #00AF00;">40</span>,    │       <span style="color: #00AF00;">0</span> │ add[<span style="color: #00AF00;">0</span>][<span style="color: #00AF00;">0</span>]            │</span></span>
+<span><span class="co">## │ (<span style="color: #0087FF;">Activation</span>)        │ <span style="color: #00AF00;">64</span>)               │         │                      │</span></span>
+<span><span class="co">## ├─────────────────────┼───────────────────┼─────────┼──────────────────────┤</span></span>
+<span><span class="co">## │ separable_conv2d_3  │ (<span style="color: #00D7FF;">None</span>, <span style="color: #00AF00;">40</span>, <span style="color: #00AF00;">40</span>,    │   <span style="color: #00AF00;">8,896</span> │ activation_4[<span style="color: #00AF00;">0</span>][<span style="color: #00AF00;">0</span>]   │</span></span>
+<span><span class="co">## │ (<span style="color: #0087FF;">SeparableConv2D</span>)   │ <span style="color: #00AF00;">128</span>)              │         │                      │</span></span>
+<span><span class="co">## ├─────────────────────┼───────────────────┼─────────┼──────────────────────┤</span></span>
+<span><span class="co">## │ batch_normalizatio… │ (<span style="color: #00D7FF;">None</span>, <span style="color: #00AF00;">40</span>, <span style="color: #00AF00;">40</span>,    │     <span style="color: #00AF00;">512</span> │ separable_conv2d_3[<span style="color: #00AF00;">…</span> │</span></span>
+<span><span class="co">## │ (<span style="color: #0087FF;">BatchNormalizatio…</span> │ <span style="color: #00AF00;">128</span>)              │         │                      │</span></span>
+<span><span class="co">## ├─────────────────────┼───────────────────┼─────────┼──────────────────────┤</span></span>
+<span><span class="co">## │ activation_3        │ (<span style="color: #00D7FF;">None</span>, <span style="color: #00AF00;">40</span>, <span style="color: #00AF00;">40</span>,    │       <span style="color: #00AF00;">0</span> │ batch_normalization… │</span></span>
+<span><span class="co">## │ (<span style="color: #0087FF;">Activation</span>)        │ <span style="color: #00AF00;">128</span>)              │         │                      │</span></span>
+<span><span class="co">## ├─────────────────────┼───────────────────┼─────────┼──────────────────────┤</span></span>
+<span><span class="co">## │ separable_conv2d_2  │ (<span style="color: #00D7FF;">None</span>, <span style="color: #00AF00;">40</span>, <span style="color: #00AF00;">40</span>,    │  <span style="color: #00AF00;">17,664</span> │ activation_3[<span style="color: #00AF00;">0</span>][<span style="color: #00AF00;">0</span>]   │</span></span>
+<span><span class="co">## │ (<span style="color: #0087FF;">SeparableConv2D</span>)   │ <span style="color: #00AF00;">128</span>)              │         │                      │</span></span>
+<span><span class="co">## ├─────────────────────┼───────────────────┼─────────┼──────────────────────┤</span></span>
+<span><span class="co">## │ batch_normalizatio… │ (<span style="color: #00D7FF;">None</span>, <span style="color: #00AF00;">40</span>, <span style="color: #00AF00;">40</span>,    │     <span style="color: #00AF00;">512</span> │ separable_conv2d_2[<span style="color: #00AF00;">…</span> │</span></span>
+<span><span class="co">## │ (<span style="color: #0087FF;">BatchNormalizatio…</span> │ <span style="color: #00AF00;">128</span>)              │         │                      │</span></span>
+<span><span class="co">## ├─────────────────────┼───────────────────┼─────────┼──────────────────────┤</span></span>
+<span><span class="co">## │ max_pooling2d_1     │ (<span style="color: #00D7FF;">None</span>, <span style="color: #00AF00;">20</span>, <span style="color: #00AF00;">20</span>,    │       <span style="color: #00AF00;">0</span> │ batch_normalization… │</span></span>
+<span><span class="co">## │ (<span style="color: #0087FF;">MaxPooling2D</span>)      │ <span style="color: #00AF00;">128</span>)              │         │                      │</span></span>
+<span><span class="co">## ├─────────────────────┼───────────────────┼─────────┼──────────────────────┤</span></span>
+<span><span class="co">## │ conv2d_2 (<span style="color: #0087FF;">Conv2D</span>)   │ (<span style="color: #00D7FF;">None</span>, <span style="color: #00AF00;">20</span>, <span style="color: #00AF00;">20</span>,    │   <span style="color: #00AF00;">8,320</span> │ add[<span style="color: #00AF00;">0</span>][<span style="color: #00AF00;">0</span>]            │</span></span>
+<span><span class="co">## │                     │ <span style="color: #00AF00;">128</span>)              │         │                      │</span></span>
+<span><span class="co">## ├─────────────────────┼───────────────────┼─────────┼──────────────────────┤</span></span>
+<span><span class="co">## │ add_1 (<span style="color: #0087FF;">Add</span>)         │ (<span style="color: #00D7FF;">None</span>, <span style="color: #00AF00;">20</span>, <span style="color: #00AF00;">20</span>,    │       <span style="color: #00AF00;">0</span> │ max_pooling2d_1[<span style="color: #00AF00;">0</span>][<span style="color: #00AF00;">…</span> │</span></span>
+<span><span class="co">## │                     │ <span style="color: #00AF00;">128</span>)              │         │ conv2d_2[<span style="color: #00AF00;">0</span>][<span style="color: #00AF00;">0</span>]       │</span></span>
+<span><span class="co">## ├─────────────────────┼───────────────────┼─────────┼──────────────────────┤</span></span>
+<span><span class="co">## │ activation_6        │ (<span style="color: #00D7FF;">None</span>, <span style="color: #00AF00;">20</span>, <span style="color: #00AF00;">20</span>,    │       <span style="color: #00AF00;">0</span> │ add_1[<span style="color: #00AF00;">0</span>][<span style="color: #00AF00;">0</span>]          │</span></span>
+<span><span class="co">## │ (<span style="color: #0087FF;">Activation</span>)        │ <span style="color: #00AF00;">128</span>)              │         │                      │</span></span>
+<span><span class="co">## ├─────────────────────┼───────────────────┼─────────┼──────────────────────┤</span></span>
+<span><span class="co">## │ separable_conv2d_5  │ (<span style="color: #00D7FF;">None</span>, <span style="color: #00AF00;">20</span>, <span style="color: #00AF00;">20</span>,    │  <span style="color: #00AF00;">34,176</span> │ activation_6[<span style="color: #00AF00;">0</span>][<span style="color: #00AF00;">0</span>]   │</span></span>
+<span><span class="co">## │ (<span style="color: #0087FF;">SeparableConv2D</span>)   │ <span style="color: #00AF00;">256</span>)              │         │                      │</span></span>
+<span><span class="co">## ├─────────────────────┼───────────────────┼─────────┼──────────────────────┤</span></span>
+<span><span class="co">## │ batch_normalizatio… │ (<span style="color: #00D7FF;">None</span>, <span style="color: #00AF00;">20</span>, <span style="color: #00AF00;">20</span>,    │   <span style="color: #00AF00;">1,024</span> │ separable_conv2d_5[<span style="color: #00AF00;">…</span> │</span></span>
+<span><span class="co">## │ (<span style="color: #0087FF;">BatchNormalizatio…</span> │ <span style="color: #00AF00;">256</span>)              │         │                      │</span></span>
+<span><span class="co">## ├─────────────────────┼───────────────────┼─────────┼──────────────────────┤</span></span>
+<span><span class="co">## │ activation_5        │ (<span style="color: #00D7FF;">None</span>, <span style="color: #00AF00;">20</span>, <span style="color: #00AF00;">20</span>,    │       <span style="color: #00AF00;">0</span> │ batch_normalization… │</span></span>
+<span><span class="co">## │ (<span style="color: #0087FF;">Activation</span>)        │ <span style="color: #00AF00;">256</span>)              │         │                      │</span></span>
+<span><span class="co">## ├─────────────────────┼───────────────────┼─────────┼──────────────────────┤</span></span>
+<span><span class="co">## │ separable_conv2d_4  │ (<span style="color: #00D7FF;">None</span>, <span style="color: #00AF00;">20</span>, <span style="color: #00AF00;">20</span>,    │  <span style="color: #00AF00;">68,096</span> │ activation_5[<span style="color: #00AF00;">0</span>][<span style="color: #00AF00;">0</span>]   │</span></span>
+<span><span class="co">## │ (<span style="color: #0087FF;">SeparableConv2D</span>)   │ <span style="color: #00AF00;">256</span>)              │         │                      │</span></span>
+<span><span class="co">## ├─────────────────────┼───────────────────┼─────────┼──────────────────────┤</span></span>
+<span><span class="co">## │ batch_normalizatio… │ (<span style="color: #00D7FF;">None</span>, <span style="color: #00AF00;">20</span>, <span style="color: #00AF00;">20</span>,    │   <span style="color: #00AF00;">1,024</span> │ separable_conv2d_4[<span style="color: #00AF00;">…</span> │</span></span>
+<span><span class="co">## │ (<span style="color: #0087FF;">BatchNormalizatio…</span> │ <span style="color: #00AF00;">256</span>)              │         │                      │</span></span>
+<span><span class="co">## ├─────────────────────┼───────────────────┼─────────┼──────────────────────┤</span></span>
+<span><span class="co">## │ max_pooling2d_2     │ (<span style="color: #00D7FF;">None</span>, <span style="color: #00AF00;">10</span>, <span style="color: #00AF00;">10</span>,    │       <span style="color: #00AF00;">0</span> │ batch_normalization… │</span></span>
+<span><span class="co">## │ (<span style="color: #0087FF;">MaxPooling2D</span>)      │ <span style="color: #00AF00;">256</span>)              │         │                      │</span></span>
+<span><span class="co">## ├─────────────────────┼───────────────────┼─────────┼──────────────────────┤</span></span>
+<span><span class="co">## │ conv2d_3 (<span style="color: #0087FF;">Conv2D</span>)   │ (<span style="color: #00D7FF;">None</span>, <span style="color: #00AF00;">10</span>, <span style="color: #00AF00;">10</span>,    │  <span style="color: #00AF00;">33,024</span> │ add_1[<span style="color: #00AF00;">0</span>][<span style="color: #00AF00;">0</span>]          │</span></span>
+<span><span class="co">## │                     │ <span style="color: #00AF00;">256</span>)              │         │                      │</span></span>
+<span><span class="co">## ├─────────────────────┼───────────────────┼─────────┼──────────────────────┤</span></span>
+<span><span class="co">## │ add_2 (<span style="color: #0087FF;">Add</span>)         │ (<span style="color: #00D7FF;">None</span>, <span style="color: #00AF00;">10</span>, <span style="color: #00AF00;">10</span>,    │       <span style="color: #00AF00;">0</span> │ max_pooling2d_2[<span style="color: #00AF00;">0</span>][<span style="color: #00AF00;">…</span> │</span></span>
+<span><span class="co">## │                     │ <span style="color: #00AF00;">256</span>)              │         │ conv2d_3[<span style="color: #00AF00;">0</span>][<span style="color: #00AF00;">0</span>]       │</span></span>
+<span><span class="co">## ├─────────────────────┼───────────────────┼─────────┼──────────────────────┤</span></span>
+<span><span class="co">## │ activation_8        │ (<span style="color: #00D7FF;">None</span>, <span style="color: #00AF00;">10</span>, <span style="color: #00AF00;">10</span>,    │       <span style="color: #00AF00;">0</span> │ add_2[<span style="color: #00AF00;">0</span>][<span style="color: #00AF00;">0</span>]          │</span></span>
+<span><span class="co">## │ (<span style="color: #0087FF;">Activation</span>)        │ <span style="color: #00AF00;">256</span>)              │         │                      │</span></span>
+<span><span class="co">## ├─────────────────────┼───────────────────┼─────────┼──────────────────────┤</span></span>
+<span><span class="co">## │ conv2d_transpose_1  │ (<span style="color: #00D7FF;">None</span>, <span style="color: #00AF00;">10</span>, <span style="color: #00AF00;">10</span>,    │ <span style="color: #00AF00;">590,080</span> │ activation_8[<span style="color: #00AF00;">0</span>][<span style="color: #00AF00;">0</span>]   │</span></span>
+<span><span class="co">## │ (<span style="color: #0087FF;">Conv2DTranspose</span>)   │ <span style="color: #00AF00;">256</span>)              │         │                      │</span></span>
+<span><span class="co">## ├─────────────────────┼───────────────────┼─────────┼──────────────────────┤</span></span>
+<span><span class="co">## │ batch_normalizatio… │ (<span style="color: #00D7FF;">None</span>, <span style="color: #00AF00;">10</span>, <span style="color: #00AF00;">10</span>,    │   <span style="color: #00AF00;">1,024</span> │ conv2d_transpose_1[<span style="color: #00AF00;">…</span> │</span></span>
+<span><span class="co">## │ (<span style="color: #0087FF;">BatchNormalizatio…</span> │ <span style="color: #00AF00;">256</span>)              │         │                      │</span></span>
+<span><span class="co">## ├─────────────────────┼───────────────────┼─────────┼──────────────────────┤</span></span>
+<span><span class="co">## │ activation_7        │ (<span style="color: #00D7FF;">None</span>, <span style="color: #00AF00;">10</span>, <span style="color: #00AF00;">10</span>,    │       <span style="color: #00AF00;">0</span> │ batch_normalization… │</span></span>
+<span><span class="co">## │ (<span style="color: #0087FF;">Activation</span>)        │ <span style="color: #00AF00;">256</span>)              │         │                      │</span></span>
+<span><span class="co">## ├─────────────────────┼───────────────────┼─────────┼──────────────────────┤</span></span>
+<span><span class="co">## │ conv2d_transpose    │ (<span style="color: #00D7FF;">None</span>, <span style="color: #00AF00;">10</span>, <span style="color: #00AF00;">10</span>,    │ <span style="color: #00AF00;">590,080</span> │ activation_7[<span style="color: #00AF00;">0</span>][<span style="color: #00AF00;">0</span>]   │</span></span>
+<span><span class="co">## │ (<span style="color: #0087FF;">Conv2DTranspose</span>)   │ <span style="color: #00AF00;">256</span>)              │         │                      │</span></span>
+<span><span class="co">## ├─────────────────────┼───────────────────┼─────────┼──────────────────────┤</span></span>
+<span><span class="co">## │ batch_normalizatio… │ (<span style="color: #00D7FF;">None</span>, <span style="color: #00AF00;">10</span>, <span style="color: #00AF00;">10</span>,    │   <span style="color: #00AF00;">1,024</span> │ conv2d_transpose[<span style="color: #00AF00;">0</span>]… │</span></span>
+<span><span class="co">## │ (<span style="color: #0087FF;">BatchNormalizatio…</span> │ <span style="color: #00AF00;">256</span>)              │         │                      │</span></span>
+<span><span class="co">## ├─────────────────────┼───────────────────┼─────────┼──────────────────────┤</span></span>
+<span><span class="co">## │ up_sampling2d_1     │ (<span style="color: #00D7FF;">None</span>, <span style="color: #00AF00;">20</span>, <span style="color: #00AF00;">20</span>,    │       <span style="color: #00AF00;">0</span> │ add_2[<span style="color: #00AF00;">0</span>][<span style="color: #00AF00;">0</span>]          │</span></span>
+<span><span class="co">## │ (<span style="color: #0087FF;">UpSampling2D</span>)      │ <span style="color: #00AF00;">256</span>)              │         │                      │</span></span>
+<span><span class="co">## ├─────────────────────┼───────────────────┼─────────┼──────────────────────┤</span></span>
+<span><span class="co">## │ up_sampling2d       │ (<span style="color: #00D7FF;">None</span>, <span style="color: #00AF00;">20</span>, <span style="color: #00AF00;">20</span>,    │       <span style="color: #00AF00;">0</span> │ batch_normalization… │</span></span>
+<span><span class="co">## │ (<span style="color: #0087FF;">UpSampling2D</span>)      │ <span style="color: #00AF00;">256</span>)              │         │                      │</span></span>
+<span><span class="co">## ├─────────────────────┼───────────────────┼─────────┼──────────────────────┤</span></span>
+<span><span class="co">## │ conv2d_4 (<span style="color: #0087FF;">Conv2D</span>)   │ (<span style="color: #00D7FF;">None</span>, <span style="color: #00AF00;">20</span>, <span style="color: #00AF00;">20</span>,    │  <span style="color: #00AF00;">65,792</span> │ up_sampling2d_1[<span style="color: #00AF00;">0</span>][<span style="color: #00AF00;">…</span> │</span></span>
+<span><span class="co">## │                     │ <span style="color: #00AF00;">256</span>)              │         │                      │</span></span>
+<span><span class="co">## ├─────────────────────┼───────────────────┼─────────┼──────────────────────┤</span></span>
+<span><span class="co">## │ add_3 (<span style="color: #0087FF;">Add</span>)         │ (<span style="color: #00D7FF;">None</span>, <span style="color: #00AF00;">20</span>, <span style="color: #00AF00;">20</span>,    │       <span style="color: #00AF00;">0</span> │ up_sampling2d[<span style="color: #00AF00;">0</span>][<span style="color: #00AF00;">0</span>], │</span></span>
+<span><span class="co">## │                     │ <span style="color: #00AF00;">256</span>)              │         │ conv2d_4[<span style="color: #00AF00;">0</span>][<span style="color: #00AF00;">0</span>]       │</span></span>
+<span><span class="co">## ├─────────────────────┼───────────────────┼─────────┼──────────────────────┤</span></span>
+<span><span class="co">## │ activation_10       │ (<span style="color: #00D7FF;">None</span>, <span style="color: #00AF00;">20</span>, <span style="color: #00AF00;">20</span>,    │       <span style="color: #00AF00;">0</span> │ add_3[<span style="color: #00AF00;">0</span>][<span style="color: #00AF00;">0</span>]          │</span></span>
+<span><span class="co">## │ (<span style="color: #0087FF;">Activation</span>)        │ <span style="color: #00AF00;">256</span>)              │         │                      │</span></span>
+<span><span class="co">## ├─────────────────────┼───────────────────┼─────────┼──────────────────────┤</span></span>
+<span><span class="co">## │ conv2d_transpose_3  │ (<span style="color: #00D7FF;">None</span>, <span style="color: #00AF00;">20</span>, <span style="color: #00AF00;">20</span>,    │ <span style="color: #00AF00;">295,040</span> │ activation_10[<span style="color: #00AF00;">0</span>][<span style="color: #00AF00;">0</span>]  │</span></span>
+<span><span class="co">## │ (<span style="color: #0087FF;">Conv2DTranspose</span>)   │ <span style="color: #00AF00;">128</span>)              │         │                      │</span></span>
+<span><span class="co">## ├─────────────────────┼───────────────────┼─────────┼──────────────────────┤</span></span>
+<span><span class="co">## │ batch_normalizatio… │ (<span style="color: #00D7FF;">None</span>, <span style="color: #00AF00;">20</span>, <span style="color: #00AF00;">20</span>,    │     <span style="color: #00AF00;">512</span> │ conv2d_transpose_3[<span style="color: #00AF00;">…</span> │</span></span>
+<span><span class="co">## │ (<span style="color: #0087FF;">BatchNormalizatio…</span> │ <span style="color: #00AF00;">128</span>)              │         │                      │</span></span>
+<span><span class="co">## ├─────────────────────┼───────────────────┼─────────┼──────────────────────┤</span></span>
+<span><span class="co">## │ activation_9        │ (<span style="color: #00D7FF;">None</span>, <span style="color: #00AF00;">20</span>, <span style="color: #00AF00;">20</span>,    │       <span style="color: #00AF00;">0</span> │ batch_normalization… │</span></span>
+<span><span class="co">## │ (<span style="color: #0087FF;">Activation</span>)        │ <span style="color: #00AF00;">128</span>)              │         │                      │</span></span>
+<span><span class="co">## ├─────────────────────┼───────────────────┼─────────┼──────────────────────┤</span></span>
+<span><span class="co">## │ conv2d_transpose_2  │ (<span style="color: #00D7FF;">None</span>, <span style="color: #00AF00;">20</span>, <span style="color: #00AF00;">20</span>,    │ <span style="color: #00AF00;">147,584</span> │ activation_9[<span style="color: #00AF00;">0</span>][<span style="color: #00AF00;">0</span>]   │</span></span>
+<span><span class="co">## │ (<span style="color: #0087FF;">Conv2DTranspose</span>)   │ <span style="color: #00AF00;">128</span>)              │         │                      │</span></span>
+<span><span class="co">## ├─────────────────────┼───────────────────┼─────────┼──────────────────────┤</span></span>
+<span><span class="co">## │ batch_normalizatio… │ (<span style="color: #00D7FF;">None</span>, <span style="color: #00AF00;">20</span>, <span style="color: #00AF00;">20</span>,    │     <span style="color: #00AF00;">512</span> │ conv2d_transpose_2[<span style="color: #00AF00;">…</span> │</span></span>
+<span><span class="co">## │ (<span style="color: #0087FF;">BatchNormalizatio…</span> │ <span style="color: #00AF00;">128</span>)              │         │                      │</span></span>
+<span><span class="co">## ├─────────────────────┼───────────────────┼─────────┼──────────────────────┤</span></span>
+<span><span class="co">## │ up_sampling2d_3     │ (<span style="color: #00D7FF;">None</span>, <span style="color: #00AF00;">40</span>, <span style="color: #00AF00;">40</span>,    │       <span style="color: #00AF00;">0</span> │ add_3[<span style="color: #00AF00;">0</span>][<span style="color: #00AF00;">0</span>]          │</span></span>
+<span><span class="co">## │ (<span style="color: #0087FF;">UpSampling2D</span>)      │ <span style="color: #00AF00;">256</span>)              │         │                      │</span></span>
+<span><span class="co">## ├─────────────────────┼───────────────────┼─────────┼──────────────────────┤</span></span>
+<span><span class="co">## │ up_sampling2d_2     │ (<span style="color: #00D7FF;">None</span>, <span style="color: #00AF00;">40</span>, <span style="color: #00AF00;">40</span>,    │       <span style="color: #00AF00;">0</span> │ batch_normalization… │</span></span>
+<span><span class="co">## │ (<span style="color: #0087FF;">UpSampling2D</span>)      │ <span style="color: #00AF00;">128</span>)              │         │                      │</span></span>
+<span><span class="co">## ├─────────────────────┼───────────────────┼─────────┼──────────────────────┤</span></span>
+<span><span class="co">## │ conv2d_5 (<span style="color: #0087FF;">Conv2D</span>)   │ (<span style="color: #00D7FF;">None</span>, <span style="color: #00AF00;">40</span>, <span style="color: #00AF00;">40</span>,    │  <span style="color: #00AF00;">32,896</span> │ up_sampling2d_3[<span style="color: #00AF00;">0</span>][<span style="color: #00AF00;">…</span> │</span></span>
+<span><span class="co">## │                     │ <span style="color: #00AF00;">128</span>)              │         │                      │</span></span>
+<span><span class="co">## ├─────────────────────┼───────────────────┼─────────┼──────────────────────┤</span></span>
+<span><span class="co">## │ add_4 (<span style="color: #0087FF;">Add</span>)         │ (<span style="color: #00D7FF;">None</span>, <span style="color: #00AF00;">40</span>, <span style="color: #00AF00;">40</span>,    │       <span style="color: #00AF00;">0</span> │ up_sampling2d_2[<span style="color: #00AF00;">0</span>][<span style="color: #00AF00;">…</span> │</span></span>
+<span><span class="co">## │                     │ <span style="color: #00AF00;">128</span>)              │         │ conv2d_5[<span style="color: #00AF00;">0</span>][<span style="color: #00AF00;">0</span>]       │</span></span>
+<span><span class="co">## ├─────────────────────┼───────────────────┼─────────┼──────────────────────┤</span></span>
+<span><span class="co">## │ activation_12       │ (<span style="color: #00D7FF;">None</span>, <span style="color: #00AF00;">40</span>, <span style="color: #00AF00;">40</span>,    │       <span style="color: #00AF00;">0</span> │ add_4[<span style="color: #00AF00;">0</span>][<span style="color: #00AF00;">0</span>]          │</span></span>
+<span><span class="co">## │ (<span style="color: #0087FF;">Activation</span>)        │ <span style="color: #00AF00;">128</span>)              │         │                      │</span></span>
+<span><span class="co">## ├─────────────────────┼───────────────────┼─────────┼──────────────────────┤</span></span>
+<span><span class="co">## │ conv2d_transpose_5  │ (<span style="color: #00D7FF;">None</span>, <span style="color: #00AF00;">40</span>, <span style="color: #00AF00;">40</span>,    │  <span style="color: #00AF00;">73,792</span> │ activation_12[<span style="color: #00AF00;">0</span>][<span style="color: #00AF00;">0</span>]  │</span></span>
+<span><span class="co">## │ (<span style="color: #0087FF;">Conv2DTranspose</span>)   │ <span style="color: #00AF00;">64</span>)               │         │                      │</span></span>
+<span><span class="co">## ├─────────────────────┼───────────────────┼─────────┼──────────────────────┤</span></span>
+<span><span class="co">## │ batch_normalizatio… │ (<span style="color: #00D7FF;">None</span>, <span style="color: #00AF00;">40</span>, <span style="color: #00AF00;">40</span>,    │     <span style="color: #00AF00;">256</span> │ conv2d_transpose_5[<span style="color: #00AF00;">…</span> │</span></span>
+<span><span class="co">## │ (<span style="color: #0087FF;">BatchNormalizatio…</span> │ <span style="color: #00AF00;">64</span>)               │         │                      │</span></span>
+<span><span class="co">## ├─────────────────────┼───────────────────┼─────────┼──────────────────────┤</span></span>
+<span><span class="co">## │ activation_11       │ (<span style="color: #00D7FF;">None</span>, <span style="color: #00AF00;">40</span>, <span style="color: #00AF00;">40</span>,    │       <span style="color: #00AF00;">0</span> │ batch_normalization… │</span></span>
+<span><span class="co">## │ (<span style="color: #0087FF;">Activation</span>)        │ <span style="color: #00AF00;">64</span>)               │         │                      │</span></span>
+<span><span class="co">## ├─────────────────────┼───────────────────┼─────────┼──────────────────────┤</span></span>
+<span><span class="co">## │ conv2d_transpose_4  │ (<span style="color: #00D7FF;">None</span>, <span style="color: #00AF00;">40</span>, <span style="color: #00AF00;">40</span>,    │  <span style="color: #00AF00;">36,928</span> │ activation_11[<span style="color: #00AF00;">0</span>][<span style="color: #00AF00;">0</span>]  │</span></span>
+<span><span class="co">## │ (<span style="color: #0087FF;">Conv2DTranspose</span>)   │ <span style="color: #00AF00;">64</span>)               │         │                      │</span></span>
+<span><span class="co">## ├─────────────────────┼───────────────────┼─────────┼──────────────────────┤</span></span>
+<span><span class="co">## │ batch_normalizatio… │ (<span style="color: #00D7FF;">None</span>, <span style="color: #00AF00;">40</span>, <span style="color: #00AF00;">40</span>,    │     <span style="color: #00AF00;">256</span> │ conv2d_transpose_4[<span style="color: #00AF00;">…</span> │</span></span>
+<span><span class="co">## │ (<span style="color: #0087FF;">BatchNormalizatio…</span> │ <span style="color: #00AF00;">64</span>)               │         │                      │</span></span>
+<span><span class="co">## ├─────────────────────┼───────────────────┼─────────┼──────────────────────┤</span></span>
+<span><span class="co">## │ up_sampling2d_5     │ (<span style="color: #00D7FF;">None</span>, <span style="color: #00AF00;">80</span>, <span style="color: #00AF00;">80</span>,    │       <span style="color: #00AF00;">0</span> │ add_4[<span style="color: #00AF00;">0</span>][<span style="color: #00AF00;">0</span>]          │</span></span>
+<span><span class="co">## │ (<span style="color: #0087FF;">UpSampling2D</span>)      │ <span style="color: #00AF00;">128</span>)              │         │                      │</span></span>
+<span><span class="co">## ├─────────────────────┼───────────────────┼─────────┼──────────────────────┤</span></span>
+<span><span class="co">## │ up_sampling2d_4     │ (<span style="color: #00D7FF;">None</span>, <span style="color: #00AF00;">80</span>, <span style="color: #00AF00;">80</span>,    │       <span style="color: #00AF00;">0</span> │ batch_normalization… │</span></span>
+<span><span class="co">## │ (<span style="color: #0087FF;">UpSampling2D</span>)      │ <span style="color: #00AF00;">64</span>)               │         │                      │</span></span>
+<span><span class="co">## ├─────────────────────┼───────────────────┼─────────┼──────────────────────┤</span></span>
+<span><span class="co">## │ conv2d_6 (<span style="color: #0087FF;">Conv2D</span>)   │ (<span style="color: #00D7FF;">None</span>, <span style="color: #00AF00;">80</span>, <span style="color: #00AF00;">80</span>,    │   <span style="color: #00AF00;">8,256</span> │ up_sampling2d_5[<span style="color: #00AF00;">0</span>][<span style="color: #00AF00;">…</span> │</span></span>
+<span><span class="co">## │                     │ <span style="color: #00AF00;">64</span>)               │         │                      │</span></span>
+<span><span class="co">## ├─────────────────────┼───────────────────┼─────────┼──────────────────────┤</span></span>
+<span><span class="co">## │ add_5 (<span style="color: #0087FF;">Add</span>)         │ (<span style="color: #00D7FF;">None</span>, <span style="color: #00AF00;">80</span>, <span style="color: #00AF00;">80</span>,    │       <span style="color: #00AF00;">0</span> │ up_sampling2d_4[<span style="color: #00AF00;">0</span>][<span style="color: #00AF00;">…</span> │</span></span>
+<span><span class="co">## │                     │ <span style="color: #00AF00;">64</span>)               │         │ conv2d_6[<span style="color: #00AF00;">0</span>][<span style="color: #00AF00;">0</span>]       │</span></span>
+<span><span class="co">## ├─────────────────────┼───────────────────┼─────────┼──────────────────────┤</span></span>
+<span><span class="co">## │ activation_14       │ (<span style="color: #00D7FF;">None</span>, <span style="color: #00AF00;">80</span>, <span style="color: #00AF00;">80</span>,    │       <span style="color: #00AF00;">0</span> │ add_5[<span style="color: #00AF00;">0</span>][<span style="color: #00AF00;">0</span>]          │</span></span>
+<span><span class="co">## │ (<span style="color: #0087FF;">Activation</span>)        │ <span style="color: #00AF00;">64</span>)               │         │                      │</span></span>
+<span><span class="co">## ├─────────────────────┼───────────────────┼─────────┼──────────────────────┤</span></span>
+<span><span class="co">## │ conv2d_transpose_7  │ (<span style="color: #00D7FF;">None</span>, <span style="color: #00AF00;">80</span>, <span style="color: #00AF00;">80</span>,    │  <span style="color: #00AF00;">18,464</span> │ activation_14[<span style="color: #00AF00;">0</span>][<span style="color: #00AF00;">0</span>]  │</span></span>
+<span><span class="co">## │ (<span style="color: #0087FF;">Conv2DTranspose</span>)   │ <span style="color: #00AF00;">32</span>)               │         │                      │</span></span>
+<span><span class="co">## ├─────────────────────┼───────────────────┼─────────┼──────────────────────┤</span></span>
+<span><span class="co">## │ batch_normalizatio… │ (<span style="color: #00D7FF;">None</span>, <span style="color: #00AF00;">80</span>, <span style="color: #00AF00;">80</span>,    │     <span style="color: #00AF00;">128</span> │ conv2d_transpose_7[<span style="color: #00AF00;">…</span> │</span></span>
+<span><span class="co">## │ (<span style="color: #0087FF;">BatchNormalizatio…</span> │ <span style="color: #00AF00;">32</span>)               │         │                      │</span></span>
+<span><span class="co">## ├─────────────────────┼───────────────────┼─────────┼──────────────────────┤</span></span>
+<span><span class="co">## │ activation_13       │ (<span style="color: #00D7FF;">None</span>, <span style="color: #00AF00;">80</span>, <span style="color: #00AF00;">80</span>,    │       <span style="color: #00AF00;">0</span> │ batch_normalization… │</span></span>
+<span><span class="co">## │ (<span style="color: #0087FF;">Activation</span>)        │ <span style="color: #00AF00;">32</span>)               │         │                      │</span></span>
+<span><span class="co">## ├─────────────────────┼───────────────────┼─────────┼──────────────────────┤</span></span>
+<span><span class="co">## │ conv2d_transpose_6  │ (<span style="color: #00D7FF;">None</span>, <span style="color: #00AF00;">80</span>, <span style="color: #00AF00;">80</span>,    │   <span style="color: #00AF00;">9,248</span> │ activation_13[<span style="color: #00AF00;">0</span>][<span style="color: #00AF00;">0</span>]  │</span></span>
+<span><span class="co">## │ (<span style="color: #0087FF;">Conv2DTranspose</span>)   │ <span style="color: #00AF00;">32</span>)               │         │                      │</span></span>
+<span><span class="co">## ├─────────────────────┼───────────────────┼─────────┼──────────────────────┤</span></span>
+<span><span class="co">## │ batch_normalizatio… │ (<span style="color: #00D7FF;">None</span>, <span style="color: #00AF00;">80</span>, <span style="color: #00AF00;">80</span>,    │     <span style="color: #00AF00;">128</span> │ conv2d_transpose_6[<span style="color: #00AF00;">…</span> │</span></span>
+<span><span class="co">## │ (<span style="color: #0087FF;">BatchNormalizatio…</span> │ <span style="color: #00AF00;">32</span>)               │         │                      │</span></span>
+<span><span class="co">## ├─────────────────────┼───────────────────┼─────────┼──────────────────────┤</span></span>
+<span><span class="co">## │ up_sampling2d_7     │ (<span style="color: #00D7FF;">None</span>, <span style="color: #00AF00;">160</span>, <span style="color: #00AF00;">160</span>,  │       <span style="color: #00AF00;">0</span> │ add_5[<span style="color: #00AF00;">0</span>][<span style="color: #00AF00;">0</span>]          │</span></span>
+<span><span class="co">## │ (<span style="color: #0087FF;">UpSampling2D</span>)      │ <span style="color: #00AF00;">64</span>)               │         │                      │</span></span>
+<span><span class="co">## ├─────────────────────┼───────────────────┼─────────┼──────────────────────┤</span></span>
+<span><span class="co">## │ up_sampling2d_6     │ (<span style="color: #00D7FF;">None</span>, <span style="color: #00AF00;">160</span>, <span style="color: #00AF00;">160</span>,  │       <span style="color: #00AF00;">0</span> │ batch_normalization… │</span></span>
+<span><span class="co">## │ (<span style="color: #0087FF;">UpSampling2D</span>)      │ <span style="color: #00AF00;">32</span>)               │         │                      │</span></span>
+<span><span class="co">## ├─────────────────────┼───────────────────┼─────────┼──────────────────────┤</span></span>
+<span><span class="co">## │ conv2d_7 (<span style="color: #0087FF;">Conv2D</span>)   │ (<span style="color: #00D7FF;">None</span>, <span style="color: #00AF00;">160</span>, <span style="color: #00AF00;">160</span>,  │   <span style="color: #00AF00;">2,080</span> │ up_sampling2d_7[<span style="color: #00AF00;">0</span>][<span style="color: #00AF00;">…</span> │</span></span>
+<span><span class="co">## │                     │ <span style="color: #00AF00;">32</span>)               │         │                      │</span></span>
+<span><span class="co">## ├─────────────────────┼───────────────────┼─────────┼──────────────────────┤</span></span>
+<span><span class="co">## │ add_6 (<span style="color: #0087FF;">Add</span>)         │ (<span style="color: #00D7FF;">None</span>, <span style="color: #00AF00;">160</span>, <span style="color: #00AF00;">160</span>,  │       <span style="color: #00AF00;">0</span> │ up_sampling2d_6[<span style="color: #00AF00;">0</span>][<span style="color: #00AF00;">…</span> │</span></span>
+<span><span class="co">## │                     │ <span style="color: #00AF00;">32</span>)               │         │ conv2d_7[<span style="color: #00AF00;">0</span>][<span style="color: #00AF00;">0</span>]       │</span></span>
+<span><span class="co">## ├─────────────────────┼───────────────────┼─────────┼──────────────────────┤</span></span>
+<span><span class="co">## │ conv2d_8 (<span style="color: #0087FF;">Conv2D</span>)   │ (<span style="color: #00D7FF;">None</span>, <span style="color: #00AF00;">160</span>, <span style="color: #00AF00;">160</span>,  │     <span style="color: #00AF00;">867</span> │ add_6[<span style="color: #00AF00;">0</span>][<span style="color: #00AF00;">0</span>]          │</span></span>
+<span><span class="co">## │                     │ <span style="color: #00AF00;">3</span>)                │         │                      │</span></span>
+<span><span class="co">## └─────────────────────┴───────────────────┴─────────┴──────────────────────┘</span></span>
+<span><span class="co">## <span style="font-weight: bold;"> Total params: </span><span style="color: #00AF00;">2,058,979</span> (7.85 MB)</span></span>
+<span><span class="co">## <span style="font-weight: bold;"> Trainable params: </span><span style="color: #00AF00;">2,055,203</span> (7.84 MB)</span></span>
+<span><span class="co">## <span style="font-weight: bold;"> Non-trainable params: </span><span style="color: #00AF00;">3,776</span> (14.75 KB)</span></span></code></pre>
 </div>
 <div class="section level2">
 <h2 id="set-aside-a-validation-split">Set aside a validation split<a class="anchor" aria-label="anchor" href="#set-aside-a-validation-split"></a>
 </h2>
-<div class="sourceCode" id="cb5"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" tabindex="-1"></a><span class="im">import</span> random</span>
-<span id="cb5-2"><a href="#cb5-2" tabindex="-1"></a></span>
-<span id="cb5-3"><a href="#cb5-3" tabindex="-1"></a><span class="co"># Split our img paths into a training and a validation set</span></span>
-<span id="cb5-4"><a href="#cb5-4" tabindex="-1"></a>val_samples <span class="op">=</span> <span class="dv">1000</span></span>
-<span id="cb5-5"><a href="#cb5-5" tabindex="-1"></a>random.Random(<span class="dv">1337</span>).shuffle(input_img_paths)</span>
-<span id="cb5-6"><a href="#cb5-6" tabindex="-1"></a>random.Random(<span class="dv">1337</span>).shuffle(target_img_paths)</span>
-<span id="cb5-7"><a href="#cb5-7" tabindex="-1"></a>train_input_img_paths <span class="op">=</span> input_img_paths[:<span class="op">-</span>val_samples]</span>
-<span id="cb5-8"><a href="#cb5-8" tabindex="-1"></a>train_target_img_paths <span class="op">=</span> target_img_paths[:<span class="op">-</span>val_samples]</span>
-<span id="cb5-9"><a href="#cb5-9" tabindex="-1"></a>val_input_img_paths <span class="op">=</span> input_img_paths[<span class="op">-</span>val_samples:]</span>
-<span id="cb5-10"><a href="#cb5-10" tabindex="-1"></a>val_target_img_paths <span class="op">=</span> target_img_paths[<span class="op">-</span>val_samples:]</span>
-<span id="cb5-11"><a href="#cb5-11" tabindex="-1"></a></span>
-<span id="cb5-12"><a href="#cb5-12" tabindex="-1"></a><span class="co"># Instantiate dataset for each split</span></span>
-<span id="cb5-13"><a href="#cb5-13" tabindex="-1"></a><span class="co"># Limit input files in `max_dataset_len` for faster epoch training time.</span></span>
-<span id="cb5-14"><a href="#cb5-14" tabindex="-1"></a><span class="co"># Remove the `max_dataset_len` arg when running with full dataset.</span></span>
-<span id="cb5-15"><a href="#cb5-15" tabindex="-1"></a>train_dataset <span class="op">=</span> get_dataset(</span>
-<span id="cb5-16"><a href="#cb5-16" tabindex="-1"></a>    batch_size,</span>
-<span id="cb5-17"><a href="#cb5-17" tabindex="-1"></a>    img_size,</span>
-<span id="cb5-18"><a href="#cb5-18" tabindex="-1"></a>    train_input_img_paths,</span>
-<span id="cb5-19"><a href="#cb5-19" tabindex="-1"></a>    train_target_img_paths,</span>
-<span id="cb5-20"><a href="#cb5-20" tabindex="-1"></a>    max_dataset_len<span class="op">=</span><span class="dv">1000</span>,</span>
-<span id="cb5-21"><a href="#cb5-21" tabindex="-1"></a>)</span>
-<span id="cb5-22"><a href="#cb5-22" tabindex="-1"></a>valid_dataset <span class="op">=</span> get_dataset(</span>
-<span id="cb5-23"><a href="#cb5-23" tabindex="-1"></a>    batch_size, img_size, val_input_img_paths, val_target_img_paths</span>
-<span id="cb5-24"><a href="#cb5-24" tabindex="-1"></a>)</span></code></pre></div>
+<div class="sourceCode" id="cb17"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># Split our img paths into a training and a validation set</span></span>
+<span><span class="va">val_samples</span> <span class="op">&lt;-</span> <span class="fl">1000</span></span>
+<span><span class="va">val_samples</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/sample.html" class="external-link">sample.int</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/length.html" class="external-link">length</a></span><span class="op">(</span><span class="va">input_img_paths</span><span class="op">)</span>, <span class="va">val_samples</span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">train_input_img_paths</span> <span class="op">&lt;-</span> <span class="va">input_img_paths</span><span class="op">[</span><span class="op">-</span><span class="va">val_samples</span><span class="op">]</span></span>
+<span><span class="va">train_target_img_paths</span> <span class="op">&lt;-</span> <span class="va">target_img_paths</span><span class="op">[</span><span class="op">-</span><span class="va">val_samples</span><span class="op">]</span></span>
+<span></span>
+<span><span class="va">val_input_img_paths</span> <span class="op">&lt;-</span> <span class="va">input_img_paths</span><span class="op">[</span><span class="va">val_samples</span><span class="op">]</span></span>
+<span><span class="va">val_target_img_paths</span> <span class="op">&lt;-</span> <span class="va">target_img_paths</span><span class="op">[</span><span class="va">val_samples</span><span class="op">]</span></span>
+<span></span>
+<span><span class="co"># Instantiate dataset for each split</span></span>
+<span><span class="co"># Limit input files in `max_dataset_len` for faster epoch training time.</span></span>
+<span><span class="co"># Remove the `max_dataset_len` arg when running with full dataset.</span></span>
+<span><span class="va">train_dataset</span> <span class="op">&lt;-</span> <span class="fu">get_dataset</span><span class="op">(</span></span>
+<span>    <span class="va">batch_size</span>,</span>
+<span>    <span class="va">img_size</span>,</span>
+<span>    <span class="va">train_input_img_paths</span>,</span>
+<span>    <span class="va">train_target_img_paths</span>,</span>
+<span>    max_dataset_len<span class="op">=</span><span class="fl">1000</span></span>
+<span><span class="op">)</span></span>
+<span><span class="va">valid_dataset</span> <span class="op">&lt;-</span> <span class="fu">get_dataset</span><span class="op">(</span></span>
+<span>    <span class="va">batch_size</span>, <span class="va">img_size</span>, <span class="va">val_input_img_paths</span>, <span class="va">val_target_img_paths</span></span>
+<span><span class="op">)</span></span></code></pre></div>
 </div>
 <div class="section level2">
 <h2 id="train-the-model">Train the model<a class="anchor" aria-label="anchor" href="#train-the-model"></a>
 </h2>
-<div class="sourceCode" id="cb6"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" tabindex="-1"></a><span class="co"># Configure the model for training.</span></span>
-<span id="cb6-2"><a href="#cb6-2" tabindex="-1"></a><span class="co"># We use the "sparse" version of categorical_crossentropy</span></span>
-<span id="cb6-3"><a href="#cb6-3" tabindex="-1"></a><span class="co"># because our target data is integers.</span></span>
-<span id="cb6-4"><a href="#cb6-4" tabindex="-1"></a>model.<span class="bu">compile</span>(optimizer<span class="op">=</span><span class="st">"rmsprop"</span>, loss<span class="op">=</span><span class="st">"sparse_categorical_crossentropy"</span>)</span>
-<span id="cb6-5"><a href="#cb6-5" tabindex="-1"></a></span>
-<span id="cb6-6"><a href="#cb6-6" tabindex="-1"></a>callbacks <span class="op">=</span> [</span>
-<span id="cb6-7"><a href="#cb6-7" tabindex="-1"></a>    keras.callbacks.ModelCheckpoint(</span>
-<span id="cb6-8"><a href="#cb6-8" tabindex="-1"></a>        <span class="st">"oxford_segmentation.keras"</span>, save_best_only<span class="op">=</span><span class="va">True</span></span>
-<span id="cb6-9"><a href="#cb6-9" tabindex="-1"></a>    )</span>
-<span id="cb6-10"><a href="#cb6-10" tabindex="-1"></a>]</span>
-<span id="cb6-11"><a href="#cb6-11" tabindex="-1"></a></span>
-<span id="cb6-12"><a href="#cb6-12" tabindex="-1"></a><span class="co"># Train the model, doing validation at the end of each epoch.</span></span>
-<span id="cb6-13"><a href="#cb6-13" tabindex="-1"></a>epochs <span class="op">=</span> <span class="dv">15</span></span>
-<span id="cb6-14"><a href="#cb6-14" tabindex="-1"></a>model.fit(</span>
-<span id="cb6-15"><a href="#cb6-15" tabindex="-1"></a>    train_dataset,</span>
-<span id="cb6-16"><a href="#cb6-16" tabindex="-1"></a>    epochs<span class="op">=</span>epochs,</span>
-<span id="cb6-17"><a href="#cb6-17" tabindex="-1"></a>    validation_data<span class="op">=</span>valid_dataset,</span>
-<span id="cb6-18"><a href="#cb6-18" tabindex="-1"></a>    callbacks<span class="op">=</span>callbacks,</span>
-<span id="cb6-19"><a href="#cb6-19" tabindex="-1"></a>)</span></code></pre></div>
+<div class="sourceCode" id="cb18"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># Configure the model for training.</span></span>
+<span><span class="co"># We use the "sparse" version of categorical_crossentropy</span></span>
+<span><span class="co"># because our target data is integers.</span></span>
+<span><span class="va">model</span> <span class="op"><a href="../../reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://generics.r-lib.org/reference/compile.html" class="external-link">compile</a></span><span class="op">(</span></span>
+<span>  optimizer <span class="op">=</span> <span class="fu"><a href="../../reference/optimizer_adam.html">optimizer_adam</a></span><span class="op">(</span><span class="fl">1e-4</span><span class="op">)</span>,</span>
+<span>  loss<span class="op">=</span><span class="st">"sparse_categorical_crossentropy"</span></span>
+<span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">callbacks</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span></span>
+<span>    <span class="fu"><a href="../../reference/callback_model_checkpoint.html">callback_model_checkpoint</a></span><span class="op">(</span><span class="st">"models/oxford_segmentation.keras"</span>, save_best_only<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span></span>
+<span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Train the model, doing validation at the end of each epoch.</span></span>
+<span><span class="va">epochs</span> <span class="op">&lt;-</span> <span class="fl">50</span></span>
+<span><span class="va">model</span> <span class="op"><a href="../../reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://generics.r-lib.org/reference/fit.html" class="external-link">fit</a></span><span class="op">(</span></span>
+<span>    <span class="va">train_dataset</span>,</span>
+<span>    epochs<span class="op">=</span><span class="va">epochs</span>,</span>
+<span>    validation_data<span class="op">=</span><span class="va">valid_dataset</span>,</span>
+<span>    callbacks<span class="op">=</span><span class="va">callbacks</span>,</span>
+<span>    verbose<span class="op">=</span><span class="fl">2</span></span>
+<span><span class="op">)</span></span></code></pre></div>
+<pre><code><span><span class="co">## Epoch 1/50</span></span>
+<span><span class="co">## 32/32 - 48s - 2s/step - loss: 1.3455 - val_loss: 1.7105</span></span>
+<span><span class="co">## Epoch 2/50</span></span>
+<span><span class="co">## 32/32 - 42s - 1s/step - loss: 0.9089 - val_loss: 1.9919</span></span>
+<span><span class="co">## Epoch 3/50</span></span>
+<span><span class="co">## 32/32 - 42s - 1s/step - loss: 0.7865 - val_loss: 2.1189</span></span>
+<span><span class="co">## Epoch 4/50</span></span>
+<span><span class="co">## 32/32 - 42s - 1s/step - loss: 0.7201 - val_loss: 2.3125</span></span>
+<span><span class="co">## Epoch 5/50</span></span>
+<span><span class="co">## 32/32 - 43s - 1s/step - loss: 0.6854 - val_loss: 2.4161</span></span>
+<span><span class="co">## Epoch 6/50</span></span>
+<span><span class="co">## 32/32 - 41s - 1s/step - loss: 0.6598 - val_loss: 2.5891</span></span>
+<span><span class="co">## Epoch 7/50</span></span>
+<span><span class="co">## 32/32 - 41s - 1s/step - loss: 0.6390 - val_loss: 2.7069</span></span>
+<span><span class="co">## Epoch 8/50</span></span>
+<span><span class="co">## 32/32 - 41s - 1s/step - loss: 0.6174 - val_loss: 2.8991</span></span>
+<span><span class="co">## Epoch 9/50</span></span>
+<span><span class="co">## 32/32 - 41s - 1s/step - loss: 0.5979 - val_loss: 3.0073</span></span>
+<span><span class="co">## Epoch 10/50</span></span>
+<span><span class="co">## 32/32 - 41s - 1s/step - loss: 0.5797 - val_loss: 3.1945</span></span>
+<span><span class="co">## Epoch 11/50</span></span>
+<span><span class="co">## 32/32 - 40s - 1s/step - loss: 0.5626 - val_loss: 3.2092</span></span>
+<span><span class="co">## Epoch 12/50</span></span>
+<span><span class="co">## 32/32 - 41s - 1s/step - loss: 0.5456 - val_loss: 3.3397</span></span>
+<span><span class="co">## Epoch 13/50</span></span>
+<span><span class="co">## 32/32 - 42s - 1s/step - loss: 0.5286 - val_loss: 3.1881</span></span>
+<span><span class="co">## Epoch 14/50</span></span>
+<span><span class="co">## 32/32 - 42s - 1s/step - loss: 0.5109 - val_loss: 3.1979</span></span>
+<span><span class="co">## Epoch 15/50</span></span>
+<span><span class="co">## 32/32 - 42s - 1s/step - loss: 0.4918 - val_loss: 2.8694</span></span>
+<span><span class="co">## Epoch 16/50</span></span>
+<span><span class="co">## 32/32 - 42s - 1s/step - loss: 0.4714 - val_loss: 2.6890</span></span>
+<span><span class="co">## Epoch 17/50</span></span>
+<span><span class="co">## 32/32 - 42s - 1s/step - loss: 0.4494 - val_loss: 2.3180</span></span>
+<span><span class="co">## Epoch 18/50</span></span>
+<span><span class="co">## 32/32 - 42s - 1s/step - loss: 0.4258 - val_loss: 1.9738</span></span>
+<span><span class="co">## Epoch 19/50</span></span>
+<span><span class="co">## 32/32 - 43s - 1s/step - loss: 0.4018 - val_loss: 1.5957</span></span>
+<span><span class="co">## Epoch 20/50</span></span>
+<span><span class="co">## 32/32 - 43s - 1s/step - loss: 0.3778 - val_loss: 1.3536</span></span>
+<span><span class="co">## Epoch 21/50</span></span>
+<span><span class="co">## 32/32 - 42s - 1s/step - loss: 0.3540 - val_loss: 1.1855</span></span>
+<span><span class="co">## Epoch 22/50</span></span>
+<span><span class="co">## 32/32 - 41s - 1s/step - loss: 0.3314 - val_loss: 1.1029</span></span>
+<span><span class="co">## Epoch 23/50</span></span>
+<span><span class="co">## 32/32 - 42s - 1s/step - loss: 0.3106 - val_loss: 1.0832</span></span>
+<span><span class="co">## Epoch 24/50</span></span>
+<span><span class="co">## 32/32 - 41s - 1s/step - loss: 0.2917 - val_loss: 1.0801</span></span>
+<span><span class="co">## Epoch 25/50</span></span>
+<span><span class="co">## 32/32 - 43s - 1s/step - loss: 0.2757 - val_loss: 1.1009</span></span>
+<span><span class="co">## Epoch 26/50</span></span>
+<span><span class="co">## 32/32 - 42s - 1s/step - loss: 0.2624 - val_loss: 1.1736</span></span>
+<span><span class="co">## Epoch 27/50</span></span>
+<span><span class="co">## 32/32 - 43s - 1s/step - loss: 0.2551 - val_loss: 1.1818</span></span>
+<span><span class="co">## Epoch 28/50</span></span>
+<span><span class="co">## 32/32 - 43s - 1s/step - loss: 0.2840 - val_loss: 1.2634</span></span>
+<span><span class="co">## Epoch 29/50</span></span>
+<span><span class="co">## 32/32 - 42s - 1s/step - loss: 0.3318 - val_loss: 1.4185</span></span>
+<span><span class="co">## Epoch 30/50</span></span>
+<span><span class="co">## 32/32 - 43s - 1s/step - loss: 0.3176 - val_loss: 1.2149</span></span>
+<span><span class="co">## Epoch 31/50</span></span>
+<span><span class="co">## 32/32 - 42s - 1s/step - loss: 0.2980 - val_loss: 1.5469</span></span>
+<span><span class="co">## Epoch 32/50</span></span>
+<span><span class="co">## 32/32 - 42s - 1s/step - loss: 0.2940 - val_loss: 1.6380</span></span>
+<span><span class="co">## Epoch 33/50</span></span>
+<span><span class="co">## 32/32 - 45s - 1s/step - loss: 0.2892 - val_loss: 2.1326</span></span>
+<span><span class="co">## Epoch 34/50</span></span>
+<span><span class="co">## 32/32 - 43s - 1s/step - loss: 0.3018 - val_loss: 2.2094</span></span>
+<span><span class="co">## Epoch 35/50</span></span>
+<span><span class="co">## 32/32 - 43s - 1s/step - loss: 0.3028 - val_loss: 2.7867</span></span>
+<span><span class="co">## Epoch 36/50</span></span>
+<span><span class="co">## 32/32 - 44s - 1s/step - loss: 0.3162 - val_loss: 1.8726</span></span>
+<span><span class="co">## Epoch 37/50</span></span>
+<span><span class="co">## 32/32 - 43s - 1s/step - loss: 0.3106 - val_loss: 1.9691</span></span>
+<span><span class="co">## Epoch 38/50</span></span>
+<span><span class="co">## 32/32 - 43s - 1s/step - loss: 0.3025 - val_loss: 3.3606</span></span>
+<span><span class="co">## Epoch 39/50</span></span>
+<span><span class="co">## 32/32 - 44s - 1s/step - loss: 0.2930 - val_loss: 3.9138</span></span>
+<span><span class="co">## Epoch 40/50</span></span>
+<span><span class="co">## 32/32 - 43s - 1s/step - loss: 0.2809 - val_loss: 3.0231</span></span>
+<span><span class="co">## Epoch 41/50</span></span>
+<span><span class="co">## 32/32 - 42s - 1s/step - loss: 0.2726 - val_loss: 2.3985</span></span>
+<span><span class="co">## Epoch 42/50</span></span>
+<span><span class="co">## 32/32 - 42s - 1s/step - loss: 0.2627 - val_loss: 2.7177</span></span>
+<span><span class="co">## Epoch 43/50</span></span>
+<span><span class="co">## 32/32 - 42s - 1s/step - loss: 0.2572 - val_loss: 2.0692</span></span>
+<span><span class="co">## Epoch 44/50</span></span>
+<span><span class="co">## 32/32 - 42s - 1s/step - loss: 0.2507 - val_loss: 1.7416</span></span>
+<span><span class="co">## Epoch 45/50</span></span>
+<span><span class="co">## 32/32 - 43s - 1s/step - loss: 0.2526 - val_loss: 6.5888</span></span>
+<span><span class="co">## Epoch 46/50</span></span>
+<span><span class="co">## 32/32 - 42s - 1s/step - loss: 0.2545 - val_loss: 4.9365</span></span>
+<span><span class="co">## Epoch 47/50</span></span>
+<span><span class="co">## 32/32 - 42s - 1s/step - loss: 0.2538 - val_loss: 3.5521</span></span>
+<span><span class="co">## Epoch 48/50</span></span>
+<span><span class="co">## 32/32 - 41s - 1s/step - loss: 0.2459 - val_loss: 8.8581</span></span>
+<span><span class="co">## Epoch 49/50</span></span>
+<span><span class="co">## 32/32 - 42s - 1s/step - loss: 0.2424 - val_loss: 10.6086</span></span>
+<span><span class="co">## Epoch 50/50</span></span>
+<span><span class="co">## 32/32 - 42s - 1s/step - loss: 0.2353 - val_loss: 12.4796</span></span></code></pre>
 </div>
 <div class="section level2">
 <h2 id="visualize-predictions">Visualize predictions<a class="anchor" aria-label="anchor" href="#visualize-predictions"></a>
 </h2>
-<div class="sourceCode" id="cb7"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" tabindex="-1"></a><span class="co"># Generate predictions for all images in the validation set</span></span>
-<span id="cb7-2"><a href="#cb7-2" tabindex="-1"></a></span>
-<span id="cb7-3"><a href="#cb7-3" tabindex="-1"></a>val_dataset <span class="op">=</span> get_dataset(</span>
-<span id="cb7-4"><a href="#cb7-4" tabindex="-1"></a>    batch_size, img_size, val_input_img_paths, val_target_img_paths</span>
-<span id="cb7-5"><a href="#cb7-5" tabindex="-1"></a>)</span>
-<span id="cb7-6"><a href="#cb7-6" tabindex="-1"></a>val_preds <span class="op">=</span> model.predict(val_dataset)</span>
-<span id="cb7-7"><a href="#cb7-7" tabindex="-1"></a></span>
-<span id="cb7-8"><a href="#cb7-8" tabindex="-1"></a></span>
-<span id="cb7-9"><a href="#cb7-9" tabindex="-1"></a><span class="kw">def</span> display_mask(i):</span>
-<span id="cb7-10"><a href="#cb7-10" tabindex="-1"></a>    <span class="co">"""Quick utility to display a model's prediction."""</span></span>
-<span id="cb7-11"><a href="#cb7-11" tabindex="-1"></a>    mask <span class="op">=</span> np.argmax(val_preds[i], axis<span class="op">=-</span><span class="dv">1</span>)</span>
-<span id="cb7-12"><a href="#cb7-12" tabindex="-1"></a>    mask <span class="op">=</span> np.expand_dims(mask, axis<span class="op">=-</span><span class="dv">1</span>)</span>
-<span id="cb7-13"><a href="#cb7-13" tabindex="-1"></a>    img <span class="op">=</span> ImageOps.autocontrast(keras.utils.array_to_img(mask))</span>
-<span id="cb7-14"><a href="#cb7-14" tabindex="-1"></a>    display(img)</span>
-<span id="cb7-15"><a href="#cb7-15" tabindex="-1"></a></span>
-<span id="cb7-16"><a href="#cb7-16" tabindex="-1"></a></span>
-<span id="cb7-17"><a href="#cb7-17" tabindex="-1"></a><span class="co"># Display results for validation image #10</span></span>
-<span id="cb7-18"><a href="#cb7-18" tabindex="-1"></a>i <span class="op">=</span> <span class="dv">10</span></span>
-<span id="cb7-19"><a href="#cb7-19" tabindex="-1"></a></span>
-<span id="cb7-20"><a href="#cb7-20" tabindex="-1"></a><span class="co"># Display input image</span></span>
-<span id="cb7-21"><a href="#cb7-21" tabindex="-1"></a>display(Image(filename<span class="op">=</span>val_input_img_paths[i]))</span>
-<span id="cb7-22"><a href="#cb7-22" tabindex="-1"></a></span>
-<span id="cb7-23"><a href="#cb7-23" tabindex="-1"></a><span class="co"># Display ground-truth target mask</span></span>
-<span id="cb7-24"><a href="#cb7-24" tabindex="-1"></a>img <span class="op">=</span> ImageOps.autocontrast(load_img(val_target_img_paths[i]))</span>
-<span id="cb7-25"><a href="#cb7-25" tabindex="-1"></a>display(img)</span>
-<span id="cb7-26"><a href="#cb7-26" tabindex="-1"></a></span>
-<span id="cb7-27"><a href="#cb7-27" tabindex="-1"></a><span class="co"># Display mask predicted by our model</span></span>
-<span id="cb7-28"><a href="#cb7-28" tabindex="-1"></a>display_mask(i)  <span class="co"># Note that the model only sees inputs at 150x150.</span></span></code></pre></div>
+<div class="sourceCode" id="cb20"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">model</span> <span class="op">&lt;-</span> <span class="fu"><a href="../../reference/load_model.html">load_model</a></span><span class="op">(</span><span class="st">"models/oxford_segmentation.keras"</span><span class="op">)</span></span>
+<span><span class="co"># Generate predictions for all images in the validation set</span></span>
+<span><span class="va">val_dataset</span> <span class="op">&lt;-</span> <span class="fu">get_dataset</span><span class="op">(</span></span>
+<span>    <span class="va">batch_size</span>, <span class="va">img_size</span>, <span class="va">val_input_img_paths</span>, <span class="va">val_target_img_paths</span></span>
+<span><span class="op">)</span></span>
+<span><span class="va">val_preds</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/predict.html" class="external-link">predict</a></span><span class="op">(</span><span class="va">model</span>, <span class="va">val_dataset</span><span class="op">)</span></span></code></pre></div>
+<pre><code><span><span class="co">## 32/32 - 12s - 367ms/step</span></span></code></pre>
+<div class="sourceCode" id="cb22"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">display_mask</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">i</span><span class="op">)</span> <span class="op">{</span></span>
+<span>  <span class="co"># Quick utility to display a model's prediction.</span></span>
+<span>  <span class="va">mask</span> <span class="op">&lt;-</span> <span class="va">val_preds</span><span class="op">[</span><span class="va">i</span>,,,<span class="op">]</span> <span class="op"><a href="../../reference/pipe.html">%&gt;%</a></span></span>
+<span>    <span class="fu"><a href="https://rdrr.io/r/base/apply.html" class="external-link">apply</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1</span>,<span class="fl">2</span><span class="op">)</span>, <span class="va">which.max</span><span class="op">)</span> <span class="op"><a href="../../reference/pipe.html">%&gt;%</a></span></span>
+<span>    <span class="fu"><a href="https://rstudio.github.io/reticulate/reference/array_reshape.html" class="external-link">array_reshape</a></span><span class="op">(</span>dim <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="va">img_size</span>, <span class="fl">1</span><span class="op">)</span><span class="op">)</span></span>
+<span>  <span class="va">mask</span> <span class="op">&lt;-</span> <span class="fu">abind</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/abind/man/abind.html" class="external-link">abind</a></span><span class="op">(</span><span class="va">mask</span>, <span class="va">mask</span>, <span class="va">mask</span>, along <span class="op">=</span> <span class="fl">3</span><span class="op">)</span></span>
+<span>  <span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/grDevices/as.raster.html" class="external-link">as.raster</a></span><span class="op">(</span><span class="va">mask</span>, max <span class="op">=</span> <span class="fl">3</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="op">}</span></span>
+<span></span>
+<span><span class="co"># Display results for validation image #10</span></span>
+<span><span class="va">i</span> <span class="op">&lt;-</span> <span class="fl">10</span></span>
+<span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/par.html" class="external-link">par</a></span><span class="op">(</span>mfrow <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">3</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="co"># Display input image</span></span>
+<span><span class="va">input_img_paths</span><span class="op">[</span><span class="va">i</span><span class="op">]</span> <span class="op"><a href="../../reference/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="fu">jpeg</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/jpeg/man/readJPEG.html" class="external-link">readJPEG</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="../../reference/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="https://rdrr.io/r/grDevices/as.raster.html" class="external-link">as.raster</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="../../reference/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Display ground-truth target mask</span></span>
+<span><span class="va">target_img_paths</span><span class="op">[</span><span class="va">i</span><span class="op">]</span> <span class="op"><a href="../../reference/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="fu">png</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/png/man/readPNG.html" class="external-link">readPNG</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="../../reference/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="fu">magrittr</span><span class="fu">::</span><span class="fu"><a href="https://magrittr.tidyverse.org/reference/aliases.html" class="external-link">multiply_by</a></span><span class="op">(</span><span class="fl">255</span><span class="op">)</span> <span class="op"><a href="../../reference/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="https://rdrr.io/r/grDevices/as.raster.html" class="external-link">as.raster</a></span><span class="op">(</span>max <span class="op">=</span> <span class="fl">3</span><span class="op">)</span> <span class="op"><a href="../../reference/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Display mask predicted by our model</span></span>
+<span><span class="fu">display_mask</span><span class="op">(</span><span class="va">i</span><span class="op">)</span>  <span class="co"># Note that the model only sees inputs at 150x150.</span></span></code></pre></div>
+<div class="float">
+<img src="../../reference/figures/oxford_pets_image_segmentation/unnamed-chunk-9-1.png" alt="plot of chunk unnamed-chunk-9"><div class="figcaption">plot of chunk unnamed-chunk-9</div>
+</div>
 </div>
   </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>
     </nav></aside>

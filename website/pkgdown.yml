@@ -11,9 +11,107 @@ articles:
   distributed_training_with_jax: distributed_training_with_jax.html
   distributed_training_with_tensorflow: distributed_training_with_tensorflow.html
   distributed_training_with_torch: distributed_training_with_torch.html
+  actor_critic_cartpole: examples/actor_critic_cartpole.html
+  addition_rnn: examples/addition_rnn.html
+  antirectifier: examples/antirectifier.html
+  attention_mil_classification: examples/attention_mil_classification.html
   autoencoder: examples/autoencoder.html
+  bidirectional_lstm_imdb: examples/bidirectional_lstm_imdb.html
+  bit: examples/bit.html
+  captcha_ocr: examples/captcha_ocr.html
+  cct: examples/cct.html
+  collaborative_filtering_movielens: examples/collaborative_filtering_movielens.html
+  conv_lstm: examples/conv_lstm.html
+  convmixer: examples/convmixer.html
+  cutmix: examples/cutmix.html
+  cyclegan: examples/cyclegan.html
+  dcgan_overriding_train_step: examples/dcgan_overriding_train_step.html
+  ddim: examples/ddim.html
+  ddpm: examples/ddpm.html
+  deep_dream: examples/deep_dream.html
+  deep_neural_decision_forests: examples/deep_neural_decision_forests.html
+  deeplabv3_plus: examples/deeplabv3_plus.html
+  deit: examples/deit.html
+  demo_custom_jax_workflow: examples/demo_custom_jax_workflow.html
+  demo_custom_layer_backend_agnostic: examples/demo_custom_layer_backend_agnostic.html
+  demo_custom_tf_workflow: examples/demo_custom_tf_workflow.html
+  demo_custom_torch_workflow: examples/demo_custom_torch_workflow.html
+  demo_functional: examples/demo_functional.html
+  demo_jax_distributed: examples/demo_jax_distributed.html
+  demo_mnist_convnet: examples/demo_mnist_convnet.html
+  demo_subclass: examples/demo_subclass.html
+  demo_torch_multi_gpu: examples/demo_torch_multi_gpu.html
+  eanet: examples/eanet.html
+  eeg_signal_classification: examples/eeg_signal_classification.html
+  end_to_end_mlm_with_bert: examples/end_to_end_mlm_with_bert.html
+  endpoint_layer_pattern: examples/endpoint_layer_pattern.html
+  fixres: examples/fixres.html
+  gpt2_text_generation_with_kerasnlp: examples/gpt2_text_generation_with_kerasnlp.html
+  grad_cam: examples/grad_cam.html
+  gradient_centralization: examples/gradient_centralization.html
+  image_captioning: examples/image_captioning.html
+  image_classification_from_scratch: examples/image_classification_from_scratch.html
+  image_classification_with_vision_transformer: examples/image_classification_with_vision_transformer.html
+  image_classifier: examples/image_classifier.html
+  imbalanced_classification: examples/imbalanced_classification.html
   index: examples/index.html
+  integrated_gradients: examples/integrated_gradients.html
+  involution: examples/involution.html
+  keypoint_detection: examples/keypoint_detection.html
+  knowledge_distillation: examples/knowledge_distillation.html
+  latent_walk: examples/latent_walk.html
+  learnable_resizer: examples/learnable_resizer.html
+  lstm_character_level_text_generation: examples/lstm_character_level_text_generation.html
+  lstm_seq2seq: examples/lstm_seq2seq.html
+  metric_learning: examples/metric_learning.html
+  mirnet: examples/mirnet.html
+  mixup: examples/mixup.html
+  mlp_image_classification: examples/mlp_image_classification.html
   mnist_convnet: examples/mnist_convnet.html
+  multiple_choice_task_with_transfer_learning: examples/multiple_choice_task_with_transfer_learning.html
+  ner_transformers: examples/ner_transformers.html
+  neural_machine_translation_with_keras_nlp: examples/neural_machine_translation_with_keras_nlp.html
+  neural_machine_translation_with_transformer: examples/neural_machine_translation_with_transformer.html
+  neural_style_transfer: examples/neural_style_transfer.html
+  object_detection_using_vision_transformer: examples/object_detection_using_vision_transformer.html
+  oxford_pets_image_segmentation: examples/oxford_pets_image_segmentation.html
+  perceiver_image_classification: examples/perceiver_image_classification.html
+  pixelcnn: examples/pixelcnn.html
+  pretrained_word_embeddings: examples/pretrained_word_embeddings.html
+  pretraining_BERT: examples/pretraining_BERT.html
+  reptile: examples/reptile.html
+  semisupervised_simclr: examples/semisupervised_simclr.html
+  shiftvit: examples/shiftvit.html
+  siamese_contrastive: examples/siamese_contrastive.html
+  siamese_network: examples/siamese_network.html
+  simsiam: examples/simsiam.html
+  speaker_recognition_using_cnn: examples/speaker_recognition_using_cnn.html
+  structured_data_classification_from_scratch: examples/structured_data_classification_from_scratch.html
+  structured_data_classification_with_feature_space: examples/structured_data_classification_with_feature_space.html
+  subclassing_conv_layers: examples/subclassing_conv_layers.html
+  super_resolution_sub_pixel: examples/super_resolution_sub_pixel.html
+  supervised_contrastive_learning: examples/supervised_contrastive_learning.html
+  swim_transformers: examples/swim_transformers.html
+  tabtransformer: examples/tabtransformer.html
+  tensorflow_numpy_models: examples/tensorflow_numpy_models.html
+  text_classification_from_scratch: examples/text_classification_from_scratch.html
+  text_generation_gpt: examples/text_generation_gpt.html
+  text_generation_with_miniature_gpt: examples/text_generation_with_miniature_gpt.html
+  tf_serving: examples/tf_serving.html
+  timeseries_anomaly_detection: examples/timeseries_anomaly_detection.html
+  timeseries_classification_from_scratch: examples/timeseries_classification_from_scratch.html
+  timeseries_classification_transformer: examples/timeseries_classification_transformer.html
+  timeseries_traffic_forecasting: examples/timeseries_traffic_forecasting.html
+  timeseries_weather_forecasting: examples/timeseries_weather_forecasting.html
+  token_learner: examples/token_learner.html
+  torchvision_keras: examples/torchvision_keras.html
+  trainer_pattern: examples/trainer_pattern.html
+  uk_ireland_accent_recognition: examples/uk_ireland_accent_recognition.html
+  vae: examples/vae.html
+  video_transformers: examples/video_transformers.html
+  visualizing_what_convnets_learn: examples/visualizing_what_convnets_learn.html
+  wgan_gp: examples/wgan_gp.html
+  zero_dce: examples/zero_dce.html
   functional_api: functional_api.html
   getting_started_with_keras_core: getting_started_with_keras_core.html
   custom_train_step_in_jax: guides/custom_train_step_in_jax.html
@@ -45,7 +143,6 @@ articles:
   intro_to_keras_for_engineers: intro_to_keras_for_engineers.html
   intro_to_keras_for_researchers: intro_to_keras_for_researchers.html
   making_new_layers_and_models_via_subclassing: making_new_layers_and_models_via_subclassing.html
-  mnist_convnet: mnist_convnet.html
   preprocessing_layers: preprocessing_layers.html
   sequential_model: sequential_model.html
   serialization_and_saving: serialization_and_saving.html
@@ -58,7 +155,7 @@ articles:
   writing_a_custom_training_loop_in_torch: writing_a_custom_training_loop_in_torch.html
   writing_a_training_loop_from_scratch: writing_a_training_loop_from_scratch.html
   writing_your_own_callbacks: writing_your_own_callbacks.html
-last_built: 2023-12-07T16:26Z
+last_built: 2023-12-08T18:41Z
 urls:
   reference: https://keras.posit.co/reference
   article: https://keras.posit.co/articles
