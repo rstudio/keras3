@@ -190,8 +190,6 @@ keras <- NULL
   setHook("tensorflow.on_before_use_session", tensorflow_on_before_use_session)
   setHook("tensorflow.on_use_session", tensorflow_on_use_session)
 
-  registerS3method("[[", "python_class_super", active_extract2)
-  registerS3method("$", "python_class_super", active_extract2)
 
   # TODO: remove this requireNamespace()
   # temporarily here to enable passing of tests -
@@ -204,15 +202,6 @@ keras <- NULL
 keras_not_found_message <- function(error_message) {
   message(error_message)
   message("Use the install_keras() function to install the core Keras library")
-}
-
-active_extract2 <- function(x, name) {
-  name <- switch(name,
-                 "initialize" = "__init__",
-                 "finalize" = "__del__",
-                 name)
-  cl <- substitute(x()$name,  list(x = substitute(x), name = as.symbol(name)))
-  eval.parent(cl)
 }
 
 

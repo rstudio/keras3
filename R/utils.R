@@ -572,6 +572,11 @@ map2 <- function(.x, .y, .f, ...) {
   out
 }
 
+map_lgl <- function(.x, .f, ...) {
+  out <- vapply(X = .x, FUN = .f, FUN.VALUE = TRUE, ..., USE.NAMES = FALSE)
+  names(out) <- names(.x)
+  out
+}
 
 if (getRversion() < "4.0")
   activeBindingFunction <- function(nm, env) {
