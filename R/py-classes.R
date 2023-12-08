@@ -68,14 +68,37 @@ function(classname,
   }
 
   super <- eval(envir = mask_env, quote(function() {
-    convert <- get("convert", envir = as.environment(object))
+    # for some reason, active bindings have the global env as the
+    # parent.frame(), so can't just call `parent.frame()$self`. Also, `super`
+    # might be being accessed from a locally user defined closure. Scan
+    # backwards until we find a frame that's the eval env of a R function thats
+    # a class method (i.e., a frame that has the mask_env as a parent), then we
+    # can expect to find `self` there.
+    n <- -1L
+    mask_env <- parent.env(environment())
+    while (!identical(mask_env, parent.env(frame <- sys.frame(n))))
+      n <- n + 1L
+
+    self <- frame[["self"]]
+    convert <- get("convert", envir = as.environment(self))
     py_super <- reticulate::import_builtins(convert)$super
-    reticulate::py_call(py_super, `__class__`, parent.frame()[["self"]])
+    reticulate::py_call(py_super, `__class__`, self)
   }))
   makeActiveBinding(quote(super), super, mask_env)
 
+  # locally scope S3 methods for nice access like `super$initialize()`
+  mask_env$`$.python.builtin.super`  <- `$.python.builtin.super`
+  mask_env$`[[.python.builtin.super` <- `$.python.builtin.super`
+
   py_class
 }
+
+`$.python.builtin.super` <- function(x, name) {
+  name <- switch(name, "initialize" = "__init__", "finalize" = "__del__", name)
+  NextMethod()
+}
+
+`[[.python.builtin.super` <- `$.python.builtin.super`
 
 
 #' @importFrom reticulate r_to_py import_builtins py_eval py_dict py_call
