@@ -248,6 +248,18 @@ capture_args2 <- function(modifiers = NULL, ignore = NULL, force = NULL) {
 
   fn_arg_nms <- names(formals(fn))
   known_args <- intersect(names(cl), fn_arg_nms)
+  if (length(ignore) && !is.character(ignore)) {
+    # e.g., ignore = c("object", \(nms) startsWith(nms, "."))
+    ignore <- as.character(unlist(lapply(ignore, function(x) {
+      if (is.character(x))
+        return(x)
+      stopifnot(is.function(x))
+      x <- x(known_args) # fn can return either lgl or int for [
+      if (!is.character(x))
+        x <- known_args[x]
+      x
+    }), use.names = FALSE))
+  }
   known_args <- setdiff(known_args, ignore)
   known_args <- union(known_args, force)
   names(known_args) <- known_args
@@ -546,3 +558,22 @@ replace_val <- function(x, old, new) {
   x[x %in% old] <- new
   x
 }
+
+imap <- function(.x, .f, ...) {
+  out <- .mapply(.f, list(.x, names(.x) %||% seq_along(.x)), list(...))
+  names(out) <- names(.x)
+  out
+}
+
+map2 <- function(.x, .y, .f, ...) {
+  out <- .mapply(.f, list(.x, .y), list(...))
+  if(length(.x) == length(out))
+    names(out) <- names(.x)
+  out
+}
+
+
+if (getRversion() < "4.0")
+  activeBindingFunction <- function(nm, env) {
+    as.list.environment(env, all.names = TRUE)[[nm]]
+  }
