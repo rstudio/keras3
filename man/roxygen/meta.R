@@ -14,6 +14,31 @@ local({
   else setHook(packageEvent("roxygen2", "onLoad"), register_tether_tag_parser)
 })
 
+# silence useless warnings from tensorflow
+local({
+
+  on_py_init <- function() {
+    reticulate:::py_register_load_hook("tensorflow", function() {
+      reticulate::py_run_string(local = TRUE, glue::trim(r"---(
+        from importlib import import_module
+        import tensorflow as tf
+
+        m = import_module(tf.function.__module__)
+        m.FREQUENT_TRACING_WARNING_THRESHOLD = float("inf")
+        )---"
+      ))
+    })
+  }
+
+  on_reticulate_load <- function(...) {
+    if(reticulate::py_available()) on_py_init() else
+    setHook("reticulate.onPyInit", on_py_init)
+  }
+
+  if(isNamespaceLoaded('reticulate')) on_reticulate_load()
+  else setHook(packageEvent("reticulate", "onLoad"), on_reticulate_load)
+})
+
 # setup knitr hooks for roxygen rendering block example chunks
 local({
 
