@@ -1,5 +1,30 @@
 from keras.callbacks import Callback
 
+from functools import wraps
+
+
+def wrap_sig_idx_logs(fn):
+    # print("Calling wrap_sig_idx_logs")
+    @wraps(fn)
+    def wrapper(self, idx, logs=None):
+        # print(f"In wrapper {idx=}  {logs=}")
+        res = fn(self, idx+1, logs)
+        # print(f"{res=}")
+        if isinstance(res, dict):
+            # print("updating logs")
+            logs.update(res)
+    return wrapper
+
+
+def wrap_sig_logs(fn):
+    @wraps(fn)
+    def wrapper(self, logs=None):
+        res = fn(self, logs)
+        if isinstance(res, dict):
+            logs.update(res)
+    return wrapper
+
+
 
 class RCallback(Callback):
     def __init__(

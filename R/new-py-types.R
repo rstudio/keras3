@@ -21,36 +21,6 @@ function(classname, ..., call = NULL, inherit = keras3::keras$losses$Loss) {
                parent_env = parent.frame())
 }
 
-#' @rdname new-classes
-#' @export
-new_callback_class <-
-function(classname,
-         ...,
-         on_epoch_begin = NULL,
-         on_epoch_end = NULL,
-         on_train_begin = NULL,
-         on_train_end = NULL,
-         on_batch_begin = NULL,
-         on_batch_end = NULL,
-         on_predict_batch_begin = NULL,
-         on_predict_batch_end = NULL,
-         on_predict_begin = NULL,
-         on_predict_end = NULL,
-         on_test_batch_begin = NULL,
-         on_test_batch_end = NULL,
-         on_test_begin = NULL,
-         on_test_end = NULL,
-         on_train_batch_begin = NULL,
-         on_train_batch_end = NULL) {
-
-  members <- capture_args2(ignore = "classname")
-  members <- drop_nulls(members,
-    names(which(vapply(formals(sys.function()), is.null, TRUE))))
-
-  new_py_class(classname, members,
-              inherit = keras3::keras$callbacks$Callback,
-              parent_env = parent.frame())
-}
 
 
 #' @rdname new-classes
