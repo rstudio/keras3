@@ -3,7 +3,7 @@
 
 # register fake @tether tag parser for roxygen2
 local({
-  register_tether_tag_parser <- function() {
+  register_tether_tag_parser <- function(...) {
     # message("Registering @tether tag parser")
     registerS3method(genname = "roxy_tag_parse",
                      class =   "roxy_tag_tether",
@@ -121,7 +121,8 @@ list(
   knitr_chunk_options = list(
     comment = "##",
     collapse = FALSE,
-    # eval = FALSE, # uncomment this for a faster interactive workflow
+    # eval = !interactive(),  # uncomment this for a faster interactive workflow
+    # eval = FALSE,  # uncomment this for a faster interactive workflow
     keras.roxy.post_process_output = TRUE
   )
 )
