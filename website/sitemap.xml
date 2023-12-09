@@ -700,6 +700,9 @@
     <loc>https://keras.posit.co/news/index.html</loc>
   </url>
   <url>
+    <loc>https://keras.posit.co/reference/Callback.html</loc>
+  </url>
+  <url>
     <loc>https://keras.posit.co/reference/KerasCallback.html</loc>
   </url>
   <url>
@@ -767,6 +770,9 @@
   </url>
   <url>
     <loc>https://keras.posit.co/reference/activation_tanh.html</loc>
+  </url>
+  <url>
+    <loc>https://keras.posit.co/reference/active_property.html</loc>
   </url>
   <url>
     <loc>https://keras.posit.co/reference/adapt.html</loc>

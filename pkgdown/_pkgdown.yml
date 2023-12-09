@@ -291,6 +291,7 @@ reference:
       - Metric
       - starts_with("metric_")
       - custom_metric
+      - new_metric_class
 
   - title: "Regularizers"
     contents:

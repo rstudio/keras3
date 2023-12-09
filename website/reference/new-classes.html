@@ -5,7 +5,7 @@ constructor, an object that behaves like other layer functions such as
 layer_dense(). new_callback_class() will return an object that behaves
 similarly to other callback functions, like
 callback_reduce_lr_on_plateau(), and so on. All arguments with a default
-NULL value are optional methods that can be provided."><title>Define new keras types — new_metric_class • keras3</title><!-- favicons --><link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png"><link rel="icon" type="image/png" sizes="32x32" href="../favicon-32x32.png"><link rel="apple-touch-icon" type="image/png" sizes="180x180" href="../apple-touch-icon.png"><link rel="apple-touch-icon" type="image/png" sizes="120x120" href="../apple-touch-icon-120x120.png"><link rel="apple-touch-icon" type="image/png" sizes="76x76" href="../apple-touch-icon-76x76.png"><link rel="apple-touch-icon" type="image/png" sizes="60x60" href="../apple-touch-icon-60x60.png"><script src="../deps/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"><link href="../deps/bootstrap-5.3.1/bootstrap.min.css" rel="stylesheet"><script src="../deps/bootstrap-5.3.1/bootstrap.bundle.min.js"></script><link href="../deps/Fira_Mono-0.4.7/font.css" rel="stylesheet"><!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous"><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/v4-shims.min.css" integrity="sha256-wZjR52fzng1pJHwx4aV2AO3yyTOXrcDW7jBpJtTwVxw=" crossorigin="anonymous"><!-- bootstrap-toc --><script src="https://cdn.jsdelivr.net/gh/afeld/bootstrap-toc@v1.0.1/dist/bootstrap-toc.min.js" integrity="sha256-4veVQbu7//Lk5TSmc7YV48MxtMy98e26cf5MrgZYnwo=" crossorigin="anonymous"></script><!-- headroom.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/headroom.min.js" integrity="sha256-AsUX4SJE1+yuDu5+mAVzJbuYNPHj/WroHuZ8Ir/CkE0=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script><!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><!-- search --><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- pkgdown --><script src="../pkgdown.js"></script><meta property="og:title" content="Define new keras types — new_metric_class"><meta property="og:description" content="These functions can be used to make custom objects that fit in the family of
+NULL value are optional methods that can be provided."><title>Define new keras types — new_metric_class • keras3</title><!-- favicons --><link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png"><link rel="icon" type="image/png" sizes="32x32" href="../favicon-32x32.png"><link rel="apple-touch-icon" type="image/png" sizes="180x180" href="../apple-touch-icon.png"><link rel="apple-touch-icon" type="image/png" sizes="120x120" href="../apple-touch-icon-120x120.png"><link rel="apple-touch-icon" type="image/png" sizes="76x76" href="../apple-touch-icon-76x76.png"><link rel="apple-touch-icon" type="image/png" sizes="60x60" href="../apple-touch-icon-60x60.png"><script src="../deps/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"><link href="../deps/bootstrap-5.3.1/bootstrap.min.css" rel="stylesheet"><script src="../deps/bootstrap-5.3.1/bootstrap.bundle.min.js"></script><link href="../deps/Fira_Mono-0.4.8/font.css" rel="stylesheet"><!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous"><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/v4-shims.min.css" integrity="sha256-wZjR52fzng1pJHwx4aV2AO3yyTOXrcDW7jBpJtTwVxw=" crossorigin="anonymous"><!-- bootstrap-toc --><script src="https://cdn.jsdelivr.net/gh/afeld/bootstrap-toc@v1.0.1/dist/bootstrap-toc.min.js" integrity="sha256-4veVQbu7//Lk5TSmc7YV48MxtMy98e26cf5MrgZYnwo=" crossorigin="anonymous"></script><!-- headroom.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/headroom.min.js" integrity="sha256-AsUX4SJE1+yuDu5+mAVzJbuYNPHj/WroHuZ8Ir/CkE0=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script><!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><!-- search --><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- pkgdown --><script src="../pkgdown.js"></script><meta property="og:title" content="Define new keras types — new_metric_class"><meta property="og:description" content="These functions can be used to make custom objects that fit in the family of
 existing keras types. For example, new_layer_class() will return a class
 constructor, an object that behaves like other layer functions such as
 layer_dense(). new_callback_class() will return an object that behaves
@@ -88,15 +88,15 @@ NULL value are optional methods that can be provided."><!-- mathjax --><script s
 <div class="row">
   <main id="main" class="col-md-9"><div class="page-header">
       <img src="" class="logo" alt=""><h1>Define new keras types</h1>
-      <small class="dont-index">Source: <a href="https://github.com/rstudio/keras/blob/HEAD/R/new-py-types.R" class="external-link"><code>R/new-py-types.R</code></a>, <a href="https://github.com/rstudio/keras/blob/HEAD/R/py-classes.R" class="external-link"><code>R/py-classes.R</code></a></small>
+      <small class="dont-index">Source: <a href="https://github.com/rstudio/keras/blob/HEAD/R/new-py-types.R" class="external-link"><code>R/new-py-types.R</code></a></small>
       <div class="d-none name"><code>new-classes.Rd</code></div>
     </div>
 
     <div class="ref-description section level2">
     <p>These functions can be used to make custom objects that fit in the family of
-existing keras types. For example, <code>new_layer_class()</code> will return a class
+existing keras types. For example, <code><a href="https://rdrr.io/pkg/keras3/man/Layer.html" class="external-link">new_layer_class()</a></code> will return a class
 constructor, an object that behaves like other layer functions such as
-<code><a href="layer_dense.html">layer_dense()</a></code>. <code>new_callback_class()</code> will return an object that behaves
+<code><a href="layer_dense.html">layer_dense()</a></code>. <code><a href="Callback.html">new_callback_class()</a></code> will return an object that behaves
 similarly to other callback functions, like
 <code><a href="callback_reduce_lr_on_plateau.html">callback_reduce_lr_on_plateau()</a></code>, and so on. All arguments with a default
 <code>NULL</code> value are optional methods that can be provided.</p>
@@ -113,27 +113,6 @@ similarly to other callback functions, like
 <span>  inherit <span class="op">=</span> <span class="fu">keras3</span><span class="fu">::</span><span class="va"><a href="keras.html">keras</a></span><span class="op">$</span><span class="va">losses</span><span class="op">$</span><span class="va">Loss</span></span>
 <span><span class="op">)</span></span>
 <span></span>
-<span><span class="fu">new_callback_class</span><span class="op">(</span></span>
-<span>  <span class="va">classname</span>,</span>
-<span>  <span class="va">...</span>,</span>
-<span>  on_epoch_begin <span class="op">=</span> <span class="cn">NULL</span>,</span>
-<span>  on_epoch_end <span class="op">=</span> <span class="cn">NULL</span>,</span>
-<span>  on_train_begin <span class="op">=</span> <span class="cn">NULL</span>,</span>
-<span>  on_train_end <span class="op">=</span> <span class="cn">NULL</span>,</span>
-<span>  on_batch_begin <span class="op">=</span> <span class="cn">NULL</span>,</span>
-<span>  on_batch_end <span class="op">=</span> <span class="cn">NULL</span>,</span>
-<span>  on_predict_batch_begin <span class="op">=</span> <span class="cn">NULL</span>,</span>
-<span>  on_predict_batch_end <span class="op">=</span> <span class="cn">NULL</span>,</span>
-<span>  on_predict_begin <span class="op">=</span> <span class="cn">NULL</span>,</span>
-<span>  on_predict_end <span class="op">=</span> <span class="cn">NULL</span>,</span>
-<span>  on_test_batch_begin <span class="op">=</span> <span class="cn">NULL</span>,</span>
-<span>  on_test_batch_end <span class="op">=</span> <span class="cn">NULL</span>,</span>
-<span>  on_test_begin <span class="op">=</span> <span class="cn">NULL</span>,</span>
-<span>  on_test_end <span class="op">=</span> <span class="cn">NULL</span>,</span>
-<span>  on_train_batch_begin <span class="op">=</span> <span class="cn">NULL</span>,</span>
-<span>  on_train_batch_end <span class="op">=</span> <span class="cn">NULL</span></span>
-<span><span class="op">)</span></span>
-<span></span>
 <span><span class="fu">new_model_class</span><span class="op">(</span></span>
 <span>  <span class="va">classname</span>,</span>
 <span>  <span class="va">...</span>,</span>
@@ -146,16 +125,14 @@ similarly to other callback functions, like
 <span>  compute_metrics <span class="op">=</span> <span class="cn">NULL</span></span>
 <span><span class="op">)</span></span>
 <span></span>
-<span><span class="fu">new_layer_class</span><span class="op">(</span></span>
+<span><span class="fu"><a href="https://rdrr.io/pkg/keras3/man/Layer.html" class="external-link">new_layer_class</a></span><span class="op">(</span></span>
 <span>  <span class="va">classname</span>,</span>
 <span>  <span class="va">...</span>,</span>
 <span>  initialize <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  build <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  call <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  get_config <span class="op">=</span> <span class="cn">NULL</span></span>
-<span><span class="op">)</span></span>
-<span></span>
-<span><span class="fu">mark_active</span><span class="op">(</span><span class="va">x</span><span class="op">)</span></span></code></pre></div>
+<span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div class="section level2">
@@ -186,7 +163,7 @@ base class.</p>
     </div>
     <div class="section level2">
     <h2 id="details">Details<a class="anchor" aria-label="anchor" href="#details"></a></h2>
-    <p><code>mark_active()</code> is a decorator that can be used to indicate functions that
+    <p><code><a href="active_property.html">mark_active()</a></code> is a decorator that can be used to indicate functions that
 should become active properties of the class instances.</p>
     </div>
 

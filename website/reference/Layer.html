@@ -14,15 +14,16 @@ attribute of another Layer, the outer layer will start tracking the weights
 created by the inner layer. Nested layers should be instantiated in the
 initialize() method or build() method.
 Users will just instantiate a layer and then treat it as a callable.
-All R function custom methods will have the following symbols in scope:
+All R function custom methods (public and private) will have the
+following symbols in scope:
 self: the Layer instance.
-super: the Layer superclass
+super: the Layer superclass.
 private: An R environment specific to the class instance.
-Any objects defined here will be invisible to the keras framework.
+Any objects defined here will be invisible to the Keras framework.
 __class__ the current class type object. This will also be available as
 an alias symbol, the value supplied to Layer(classname = )
 
-"><title>This is the class from which all layers inherit. — Layer • keras3</title><!-- favicons --><link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png"><link rel="icon" type="image/png" sizes="32x32" href="../favicon-32x32.png"><link rel="apple-touch-icon" type="image/png" sizes="180x180" href="../apple-touch-icon.png"><link rel="apple-touch-icon" type="image/png" sizes="120x120" href="../apple-touch-icon-120x120.png"><link rel="apple-touch-icon" type="image/png" sizes="76x76" href="../apple-touch-icon-76x76.png"><link rel="apple-touch-icon" type="image/png" sizes="60x60" href="../apple-touch-icon-60x60.png"><script src="../deps/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"><link href="../deps/bootstrap-5.3.1/bootstrap.min.css" rel="stylesheet"><script src="../deps/bootstrap-5.3.1/bootstrap.bundle.min.js"></script><link href="../deps/Fira_Mono-0.4.7/font.css" rel="stylesheet"><!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous"><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/v4-shims.min.css" integrity="sha256-wZjR52fzng1pJHwx4aV2AO3yyTOXrcDW7jBpJtTwVxw=" crossorigin="anonymous"><!-- bootstrap-toc --><script src="https://cdn.jsdelivr.net/gh/afeld/bootstrap-toc@v1.0.1/dist/bootstrap-toc.min.js" integrity="sha256-4veVQbu7//Lk5TSmc7YV48MxtMy98e26cf5MrgZYnwo=" crossorigin="anonymous"></script><!-- headroom.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/headroom.min.js" integrity="sha256-AsUX4SJE1+yuDu5+mAVzJbuYNPHj/WroHuZ8Ir/CkE0=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script><!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><!-- search --><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- pkgdown --><script src="../pkgdown.js"></script><meta property="og:title" content="This is the class from which all layers inherit. — Layer"><meta property="og:description" content="A layer is a callable object that takes as input one or more tensors and
+"><title>Define a custom Layer. — Layer • keras3</title><!-- favicons --><link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png"><link rel="icon" type="image/png" sizes="32x32" href="../favicon-32x32.png"><link rel="apple-touch-icon" type="image/png" sizes="180x180" href="../apple-touch-icon.png"><link rel="apple-touch-icon" type="image/png" sizes="120x120" href="../apple-touch-icon-120x120.png"><link rel="apple-touch-icon" type="image/png" sizes="76x76" href="../apple-touch-icon-76x76.png"><link rel="apple-touch-icon" type="image/png" sizes="60x60" href="../apple-touch-icon-60x60.png"><script src="../deps/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"><link href="../deps/bootstrap-5.3.1/bootstrap.min.css" rel="stylesheet"><script src="../deps/bootstrap-5.3.1/bootstrap.bundle.min.js"></script><link href="../deps/Fira_Mono-0.4.8/font.css" rel="stylesheet"><!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous"><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/v4-shims.min.css" integrity="sha256-wZjR52fzng1pJHwx4aV2AO3yyTOXrcDW7jBpJtTwVxw=" crossorigin="anonymous"><!-- bootstrap-toc --><script src="https://cdn.jsdelivr.net/gh/afeld/bootstrap-toc@v1.0.1/dist/bootstrap-toc.min.js" integrity="sha256-4veVQbu7//Lk5TSmc7YV48MxtMy98e26cf5MrgZYnwo=" crossorigin="anonymous"></script><!-- headroom.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/headroom.min.js" integrity="sha256-AsUX4SJE1+yuDu5+mAVzJbuYNPHj/WroHuZ8Ir/CkE0=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script><!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><!-- search --><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- pkgdown --><script src="../pkgdown.js"></script><meta property="og:title" content="Define a custom Layer. — Layer"><meta property="og:description" content="A layer is a callable object that takes as input one or more tensors and
 that outputs one or more tensors. It involves computation, defined
 in the call() method, and a state (weight variables). State can be
 created:
@@ -37,11 +38,12 @@ attribute of another Layer, the outer layer will start tracking the weights
 created by the inner layer. Nested layers should be instantiated in the
 initialize() method or build() method.
 Users will just instantiate a layer and then treat it as a callable.
-All R function custom methods will have the following symbols in scope:
+All R function custom methods (public and private) will have the
+following symbols in scope:
 self: the Layer instance.
-super: the Layer superclass
+super: the Layer superclass.
 private: An R environment specific to the class instance.
-Any objects defined here will be invisible to the keras framework.
+Any objects defined here will be invisible to the Keras framework.
 __class__ the current class type object. This will also be available as
 an alias symbol, the value supplied to Layer(classname = )
 
@@ -121,7 +123,7 @@ an alias symbol, the value supplied to Layer(classname = )
 </nav><div class="container template-reference-topic">
 <div class="row">
   <main id="main" class="col-md-9"><div class="page-header">
-      <img src="" class="logo" alt=""><h1>This is the class from which all layers inherit.</h1>
+      <img src="" class="logo" alt=""><h1>Define a custom Layer.</h1>
       <small class="dont-index">Source: <a href="https://github.com/rstudio/keras/blob/HEAD/R/keras-layers-Layer.R" class="external-link"><code>R/keras-layers-Layer.R</code></a></small>
       <div class="d-none name"><code>Layer.Rd</code></div>
     </div>
@@ -139,10 +141,11 @@ attribute of another Layer, the outer layer will start tracking the weights
 created by the inner layer. Nested layers should be instantiated in the
 <code>initialize()</code> method or <code>build()</code> method.</p>
 <p>Users will just instantiate a layer and then treat it as a callable.</p>
-<p>All R function custom methods will have the following symbols in scope:</p><ul><li><p><code>self</code>: the <code>Layer</code> instance.</p></li>
-<li><p><code>super</code>: the <code>Layer</code> superclass</p></li>
+<p>All R function custom methods (public and private) will have the
+following symbols in scope:</p><ul><li><p><code>self</code>: the <code>Layer</code> instance.</p></li>
+<li><p><code>super</code>: the <code>Layer</code> superclass.</p></li>
 <li><p><code>private</code>: An R environment specific to the class instance.
-Any objects defined here will be invisible to the keras framework.</p></li>
+Any objects defined here will be invisible to the Keras framework.</p></li>
 <li><p><code>__class__</code> the current class type object. This will also be available as
 an alias symbol, the value supplied to <code>Layer(classname = )</code></p></li>
 </ul></div>
@@ -151,15 +154,59 @@ an alias symbol, the value supplied to <code>Layer(classname = )</code></p></li>
     <h2 id="ref-usage">Usage<a class="anchor" aria-label="anchor" href="#ref-usage"></a></h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">Layer</span><span class="op">(</span></span>
 <span>  <span class="va">classname</span>,</span>
-<span>  <span class="va">initialize</span>,</span>
+<span>  initialize <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  call <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  build <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  get_config <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  <span class="va">...</span>,</span>
+<span>  .private <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="op">)</span>,</span>
+<span>  .inherit <span class="op">=</span> <span class="va">keras</span><span class="op">$</span><span class="va">layers</span><span class="op">$</span><span class="va">Layer</span>,</span>
+<span>  .parent_env <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/sys.parent.html" class="external-link">parent.frame</a></span><span class="op">(</span><span class="op">)</span></span>
+<span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu"><a href="https://rdrr.io/pkg/keras3/man/Layer.html" class="external-link">new_layer_class</a></span><span class="op">(</span></span>
+<span>  <span class="va">classname</span>,</span>
+<span>  <span class="va">...</span>,</span>
+<span>  initialize <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  build <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  call <span class="op">=</span> <span class="cn">NULL</span>,</span>
-<span>  compute_output_shape <span class="op">=</span> <span class="cn">NULL</span>,</span>
-<span>  <span class="va">...</span>,</span>
-<span>  inherit <span class="op">=</span> <span class="fu">keras3</span><span class="fu">::</span><span class="va"><a href="keras.html">keras</a></span><span class="op">$</span><span class="va">layers</span><span class="op">$</span><span class="va">Layer</span></span>
+<span>  get_config <span class="op">=</span> <span class="cn">NULL</span></span>
 <span><span class="op">)</span></span></code></pre></div>
     </div>
 
+    <div class="section level2">
+    <h2 id="arguments">Arguments<a class="anchor" aria-label="anchor" href="#arguments"></a></h2>
+    <dl><dt>classname</dt>
+<dd><p>String, the name of the custom class. (Conventionally, CamelCase).</p></dd>
+
+
+<dt>initialize, call, build, get_config</dt>
+<dd><p>Recommended methods to implement. See
+description section.</p></dd>
+
+
+<dt>...</dt>
+<dd><p>Additional methods or public members of the custom class.</p></dd>
+
+
+<dt>.private</dt>
+<dd><p>Named list of R objects (typically, functions) to include in
+instance private environments. <code>private</code> will be a symbol in scope in all
+class methods, resolving to an R environment populated with the list
+provided. Each instance will have it's own <code>private</code> environment. All
+methods (functions) in <code>private</code> will have in scope <code>self</code> and <code>__class__</code>
+symbols. Any objects in <code>private</code> will be invisible from the Keras
+framework and the Python runtime.</p></dd>
+
+
+<dt>.inherit</dt>
+<dd><p>What the new layer will subclass. By default, the base keras <code>Layer</code> class.</p></dd>
+
+
+<dt>.parent_env</dt>
+<dd><p>The environment that all class methods will have as a grandparent.</p></dd>
+
+</dl></div>
     <div class="section level2">
     <h2 id="attributes">Attributes<a class="anchor" aria-label="anchor" href="#attributes"></a></h2>
     
@@ -211,8 +258,7 @@ that returns <code>y &lt;- (w %*% x) + b</code>.
 It shows how to implement <code>build()</code> and <code><a href="https://rdrr.io/r/base/call.html" class="external-link">call()</a></code>.
 Variables set as attributes of a layer are tracked as weights
 of the layers (in <code>layer$weights</code>).</p>
-<p></p><div class="sourceCode r"><pre><code><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https:/keras.posit.co/">keras3</a></span><span class="op">)</span></span>
-<span><span class="va">layer_simple_dense</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/Layer.html">Layer</a></span><span class="op">(</span></span>
+<p></p><div class="sourceCode r"><pre><code><span><span class="va">layer_simple_dense</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/Layer.html">Layer</a></span><span class="op">(</span></span>
 <span>  <span class="st">"SimpleDense"</span>,</span>
 <span>  initialize <span class="op">=</span> <span class="kw">function</span><span class="op">(</span><span class="va">units</span> <span class="op">=</span> <span class="fl">32</span><span class="op">)</span> <span class="op">{</span></span>
 <span>    <span class="va">super</span><span class="op">$</span><span class="fu">initialize</span><span class="op">(</span><span class="op">)</span></span>
@@ -242,9 +288,12 @@ of the layers (in <code>layer$weights</code>).</p>
 <span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># Instantiates the layer.</span></span>
+<span><span class="co"># Supply missing `object` arg to skip invoking `call()` and instead return</span></span>
+<span><span class="co"># the Layer instance</span></span>
 <span><span class="va">linear_layer</span> <span class="op">&lt;-</span> <span class="fu">layer_simple_dense</span><span class="op">(</span>, <span class="fl">4</span><span class="op">)</span></span>
 <span></span>
-<span><span class="co"># This will also call `build(input_shape)` and create the weights.</span></span>
+<span><span class="co"># This will call `build(input_shape)` and create the weights,</span></span>
+<span><span class="co"># and then invoke `call()`.</span></span>
 <span><span class="va">y</span> <span class="op">&lt;-</span> <span class="fu">linear_layer</span><span class="op">(</span><span class="fu"><a href="../reference/op_ones.html">op_ones</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">2</span>, <span class="fl">2</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/stopifnot.html" class="external-link">stopifnot</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/length.html" class="external-link">length</a></span><span class="op">(</span><span class="va">linear_layer</span><span class="op">$</span><span class="va">weights</span><span class="op">)</span> <span class="op">==</span> <span class="fl">2</span><span class="op">)</span></span>
 <span></span>
