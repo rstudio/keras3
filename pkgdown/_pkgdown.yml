@@ -266,7 +266,7 @@ reference:
       - plot.keras_training_history
       - plot.keras.models.model.Model
       - zip_lists
-      - mark_active
+      - active_property
       - to_categorical
       - normalize
       - with_custom_object_scope

@@ -734,6 +734,23 @@ ensure_first_arg_is <- function(fn, ...) {
 }
 
 
+
+#' Create an active property class method
+#'
+#' @param fn An R function
+#'
+#' @description
+#'
+#' # Example
+#' ```r
+#' layer_foo <- Model("Foo", ...,
+#'   metrics = active_property(function() {
+#'     list(self$d_loss_metric,
+#'          self$g_loss_metric)
+#'   }))
+#' ```
+#'
+#' `mark_active()` is a backwards compatible alias for `active_property()`.
 #' @export
 active_property <- function(fn) {
   if(!is.function(fn))
@@ -743,6 +760,7 @@ active_property <- function(fn) {
 }
 
 #' @export
+#' @rdname active_property
 mark_active <- active_property
 
 decorate_method <- function(fn, decorator) {
