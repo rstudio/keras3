@@ -77,7 +77,7 @@ function(classname,
     n <- -1L
     mask_env <- parent.env(environment())
     while (!identical(mask_env, parent.env(frame <- sys.frame(n))))
-      n <- n + 1L
+      n <- n - 1L
 
     self <- frame[["self"]]
     convert <- get("convert", envir = as.environment(self))
@@ -94,7 +94,7 @@ function(classname,
 }
 
 `$.python.builtin.super` <- function(x, name) {
-  name <- switch(name, "initialize" = "__init__", "finalize" = "__del__", name)
+  name <- switch(name, initialize = "__init__", finalize = "__del__", name)
   NextMethod()
 }
 
