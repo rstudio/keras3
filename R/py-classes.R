@@ -79,7 +79,7 @@ function(classname,
     while (!identical(mask_env, parent.env(frame <- sys.frame(n))))
       n <- n - 1L
 
-    self <- frame[["self"]]
+    self <- frame[["self"]] # can be NULL for classmethods or staticmethods
     convert <- get("convert", envir = as.environment(self))
     py_super <- reticulate::import_builtins(convert)$super
     reticulate::py_call(py_super, `__class__`, self)
