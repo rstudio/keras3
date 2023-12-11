@@ -63,6 +63,11 @@ fs::dir_walk("man-src", type = "directory", recurse = TRUE,
 
 ## Waiting to be processed:
 
+# TODO: For apps, tether encode+decode along w/ constructor:
+# #'  @tether application.foo,
+# #'   application.foo.preprocess_input,
+# #'   application.foo.decode_predictions,
+
 # TODO: change shape() semantics. Discussion conclusion:
 ##    - instead of protecting with I(),
 ##      keep shape() as an accessor, but
