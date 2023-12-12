@@ -5,24 +5,27 @@
 \title{Install Keras}
 \usage{
 install_keras(
-  ...,
   envname = "r-keras",
+  ...,
   extra_packages = c("scipy", "pandas", "Pillow", "pydot", "ipython"),
-  python_version = "3.10",
-  backend = c("tensorflow", "jax", "pytorch")
+  python_version = ">=3.9,<=3.11",
+  backend = "tf-nightly",
+  restart_session = TRUE
 )
 }
 \arguments{
+\item{envname}{Name of or path to a Python virtual environment}
+
 \item{...}{reserved for future compatability.}
 
-\item{envname}{name of or path to a python virtual environment}
+\item{extra_packages}{Additional Python packages to install alongside Keras}
 
-\item{extra_packages}{additional python packages to install alongside keras}
+\item{python_version}{Passed on to \code{reticulate::virtualenv_starter()}}
 
-\item{python_version}{passed on to \code{reticulate::virtualenv_starter()}}
+\item{backend}{Which backend. Accepted values include  \code{"tensorflow"}, \code{"jax"} and \code{"pytorch"}}
 }
 \description{
-This function will install Keras, including all Python dependencies.
+This function will install Keras along with a selected backend, including all Python dependencies.
 }
 \seealso{
 \code{\link[tensorflow:install_tensorflow]{tensorflow::install_tensorflow()}}
