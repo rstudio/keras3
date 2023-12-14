@@ -396,7 +396,7 @@ function (object, export_dir_base, ...)
 #' ```
 #'
 #' @returns
-#' A named list, the global dictionary mapping registered class names to classes.
+#' A Python dictionary, the global dictionary mapping registered class names to classes.
 #'
 #' @export
 #' @family object registration saving
