@@ -6,6 +6,7 @@
 #' @param extra_packages Additional Python packages to install alongside Keras
 #' @param python_version Passed on to `reticulate::virtualenv_starter()`
 #' @param backend Which backend. Accepted values include  `"tensorflow"`, `"jax"` and `"pytorch"`
+#' @param gpu whether to install a GPU capable version of the backend.
 #' @param ... reserved for future compatability.
 #'
 #' @seealso [`tensorflow::install_tensorflow()`]
@@ -14,18 +15,53 @@ install_keras <- function(
     envname = "r-keras", ...,
     extra_packages = c("scipy", "pandas", "Pillow", "pydot", "ipython"),
     python_version = ">=3.9,<=3.11",
-    backend = "tf-nightly",
-    # cuda = NA # infer GPU, customize backend like "tensorflow[and-cuda]" or "jax[cuda]"
+    backend = c("tensorflow", "jax"),
+    gpu = NA,
     restart_session = TRUE) {
+
+  if(is.na(gpu)) {
+
+    has_nvidia_gpu <- function()
+      tryCatch(as.logical(length(system("lspci | grep -i nvidia", intern = TRUE))),
+               warning = function(w) FALSE)
+    gpu <- (is_linux() && has_nvidia_gpu()) ||
+            is_mac_arm64()
+  }
+
+  if (isTRUE(gpu)) {
+    if (is_mac_arm64()) {
+      jax <- c("jax-metal", "ml-dtypes==0.2.*")
+      tensorflow <- c("tensorflow", "tensorflow-metal")
+    } else if (is_linux()) {
+      jax <- c("jax[cuda12_pip]", "-f",
+         "https://storage.googleapis.com/jax-releases/jax_cuda_releases.html")
+      tensorflow <- "tensorflow[and-cuda]"
+    }
+  } else {
+    jax <- "jax[cpu]"
+    tensorflow <- "tensorflow-cpu"
+  }
+
+  if("jax" %in% backend && !is.null(extra_packages))
+    # undeclared dependancy, import fails otherwise
+    append(extra_packages) <- "packaging"
+
+  backend <- unlist(lapply(backend, function(name)
+    switch(name, tensorflow = tensorflow, jax = jax, name)))
 
   reticulate::virtualenv_create(
     envname = envname,
     version = python_version,
     force = identical(envname, "r-keras"),
-    packages = backend
+    packages = NULL
   )
 
-  reticulate::py_install(extra_packages, envname = envname)
+  if (length(extra_packages))
+    reticulate::py_install(unique(extra_packages), envname = envname)
+
+  if (length(backend))
+    reticulate::py_install(backend, envname = envname)
+
   reticulate::py_install("keras==3.0.*", envname = envname)
 
   message("Finished installing Keras!")
@@ -35,6 +71,10 @@ install_keras <- function(
   }
 
   invisible(NULL)
+}
+
+is_linux <- function() {
+  unname(Sys.info()[["sysname"]] == "Linux")
 }
 
 #' @export
