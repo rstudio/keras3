@@ -333,7 +333,56 @@ clear_registered_custom_objects <- function() {
 }
 
 
-#' Retrieves a live reference to the global list of custom objects.
+#' `[TF backend only]*` Create a TF SavedModel artifact for inference
+#'
+#' @description
+#' (e.g. via TF-Serving).
+#'
+#' **Note:** This can currently only be used with the TF backend.
+#'
+#' This method lets you export a model to a lightweight SavedModel artifact
+#' that contains the model's forward pass only (its `call()` method)
+#' and can be served via e.g. TF-Serving. The forward pass is registered
+#' under the name `serve()` (see example below).
+#'
+#' The original code of the model (including any custom layers you may
+#' have used) is *no longer* necessary to reload the artifact -- it is
+#' entirely standalone.
+#'
+#' # Examples
+#' ```r
+#' # Create the artifact
+#' model |> tensorflow::export_savedmodel("path/to/location")
+#'
+#' # Later, in a different process / environment...
+#' reloaded_artifact <- tensorflow::tf$saved_model$load("path/to/location")
+#' predictions <- reloaded_artifact$serve(input_data)
+#'
+#' # see tfdeploy::serve_savedmodel() for serving a model over a local web api.
+#' ```
+#'
+# If you would like to customize your serving endpoints, you can
+# use the lower-level `import("keras").export.ExportArchive` class. The
+# `export()` method relies on `ExportArchive` internally.
+#'
+#' @param filepath
+#' string, path where to save
+#' the artifact.
+#'
+#' @param ...
+#' For forward/backward compatability.
+#'
+#' @exportS3Method tensorflow::export_savedmodel
+#' @tether keras.Model.export
+#' @seealso
+#' + <https://www.tensorflow.org/api_docs/python/tf/keras/Model/export>
+export_savedmodel.keras.models.model.Model <-
+function (object, export_dir_base, ...)
+{
+  object$export(export_dir_base, ...)
+}
+
+#' Retrieves a live reference to the global list of custom objects (a Python dictionary).
 #'
 #' @description
 #' Custom objects set using using `custom_object_scope()` are not added to the
