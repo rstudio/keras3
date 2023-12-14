@@ -569,3 +569,17 @@ function(classname,
 new_layer_class <- Layer
 
 # ' @param .composing Bare Keras Layers (`layer_*` functions) conventionally have `object` as the first argument, which allows users to instantiate (`initialize`) and `call` one motion.
+
+
+
+# This is used for ALL layers (custom, and builtin)
+#' @export
+py_to_r_wrapper.keras.layers.layer.Layer <- function(x) {
+  force(x)
+  function(object, ...) {
+    if(missing(object))
+      x(...)
+    else
+      compose_layer(object, x, ...)
+  }
+}

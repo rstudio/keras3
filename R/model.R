@@ -167,41 +167,6 @@ py_to_r_wrapper.kerastools.model.RModel <- function(x) {
 }
 
 
-#' @export
-py_to_r_wrapper.keras.layers.layer.Layer <- function(x) {
-  force(x)
-  function(object, ...) {
-    if(missing(object))
-      x(...)
-    else
-      compose_layer(object, x, ...)
-  }
-}
-
-#' @export
-py_to_r_wrapper.keras.initializers.initializer.Initializer <- function(x) {
-  force(x)
-  as.function.default(c(formals(x), quote({
-    args <- capture_args2(list(shape = normalize_shape))
-    do.call(x, args)
-  })))
-}
-
-as_py_array <- function(x) if(inherits(x, "python.builtin.object")) x else np_array(x)
-
-#' @importFrom reticulate py_to_r_wrapper
-#' @export
-py_to_r_wrapper.keras.losses.loss.Loss <- function(x) {
-  force(x)
-  as.function.default(c(formals(x), quote({
-    args <- capture_args2(list(y_true = as_py_array, y_pred = as_py_array))
-    do.call(x, args)
-  })))
-}
-
-#' @importFrom reticulate py_to_r_wrapper
-#' @export
-keras.metrics.metric.Metric <- py_to_r_wrapper.keras.losses.loss.Loss
 
 #  py_to_r_wrapper.keras.engine.base_layer.Layer <- function(x) {
 #    force(x)

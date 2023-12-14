@@ -3616,3 +3616,9 @@ function (..., name = "root_mean_squared_error", dtype = NULL)
     args <- capture_args2(NULL)
     do.call(keras$metrics$RootMeanSquaredError, args)
 }
+
+
+
+#' @importFrom reticulate py_to_r_wrapper
+#' @export
+keras.metrics.metric.Metric <- py_to_r_wrapper.keras.losses.loss.Loss

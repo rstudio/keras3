@@ -1511,3 +1511,15 @@ structure(function (y_true, y_pred, ..., reduction = "sum_over_batch_size",
     else keras$losses$squared_hinge
     do.call(callable, args)
 }, py_function_name = "squared_hinge")
+
+
+
+#' @importFrom reticulate py_to_r_wrapper
+#' @export
+py_to_r_wrapper.keras.losses.loss.Loss <- function(x) {
+  force(x)
+  as.function.default(c(formals(x), quote({
+    args <- capture_args2(list(y_true = as_py_array, y_pred = as_py_array))
+    do.call(x, args)
+  })))
+}

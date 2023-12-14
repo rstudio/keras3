@@ -701,3 +701,14 @@ function (scale = 1, mode = "fan_in", distribution = "truncated_normal",
     args <- capture_args2(list(seed = as_integer))
     do.call(keras$initializers$VarianceScaling, args)
 }
+
+
+
+#' @export
+py_to_r_wrapper.keras.initializers.initializer.Initializer <- function(x) {
+    force(x)
+    as.function.default(c(formals(x), quote({
+        args <- capture_args2(list(shape = normalize_shape))
+        do.call(x, args)
+    })))
+}

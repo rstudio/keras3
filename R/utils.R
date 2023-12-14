@@ -582,3 +582,48 @@ if (getRversion() < "4.0")
   activeBindingFunction <- function(nm, env) {
     as.list.environment(env, all.names = TRUE)[[nm]]
   }
+
+
+
+# don't dispatch to as.list(), just wrap in list()
+wrap_as_list <- function(x) if(is.null(x) || is.list(x)) x else list(x)
+
+#' @importFrom glue trim
+NULL
+
+
+as_array <- function(x)
+  if(is.null(x) || is.array(x) || inherits(x, "python.builtin.object"))
+    x else as.array(x)
+
+as_py_array <- function(x) if(inherits(x, "python.builtin.object")) x else np_array(x)
+
+check_bool <- function(x) {
+  if (identical(x, TRUE) || identical(x, FALSE))
+    x
+  else
+    stop(sprintf("`%s` arg must be `TRUE` or `FALSE`",
+                 deparse1(substitute(x))))
+}
+
+#drop_nulls <-
+function(x, ...) {
+  nms <- c(...)
+  nms <- if (length(nms))
+    intersect(names(x), nms)
+  else
+    names(args)
+
+  for (nm in nms)
+    x[[nm]] <- x[[nm]]
+  x
+}
+
+
+as_py_name <- function(x) {
+  if(is.language(x))
+    x <- deparse(x, width.cutoff = 500L)[1]
+  x <- make.names(as.character(x))
+  x <- gsub(".", "_", x, fixed = TRUE)
+  x
+}
