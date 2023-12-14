@@ -15,7 +15,7 @@ install_keras <- function(
     envname = "r-keras", ...,
     extra_packages = c("scipy", "pandas", "Pillow", "pydot", "ipython"),
     python_version = ">=3.9,<=3.11",
-    backend = c("tensorflow", "jax"),
+    backend = "tf-nightly", # c("tensorflow", "jax"),
     gpu = NA,
     restart_session = TRUE) {
 
