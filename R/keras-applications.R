@@ -3880,7 +3880,7 @@ function (include_top = TRUE, weights = "imagenet", input_tensor = NULL,
 #' - A list of decoded predictions in case of `application_decode_predictions()`.
 #' - A batch of preprocessed inputs in case of `application_preprocess_inputs()`.
 #'
-#' @examples \dontrun {
+#' @examples \dontrun{
 #' model <- application_convnext_tiny()
 #'
 #' inputs <- random_normal(c(32, 224, 224, 3))
