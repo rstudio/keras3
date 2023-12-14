@@ -58,17 +58,9 @@ tensorflow::use_session_with_seed
 #' @export
 tensorflow::tensorboard
 
-#' @importFrom tensorflow evaluate
-#' @export
-tensorflow::evaluate
-
 #' @importFrom tensorflow export_savedmodel
 #' @export
 tensorflow::export_savedmodel
-
-#' @importFrom tensorflow shape
-#' @export
-tensorflow::shape
 
 #' @importFrom tensorflow as_tensor
 #' @export
@@ -109,3 +101,7 @@ generics::fit
 #' @importFrom generics compile
 #' @export
 generics::compile
+
+#' @importFrom generics evaluate
+#' @export
+generics::evaluate
