@@ -41,7 +41,7 @@ inputs and outputs of Keras applications.
 
 }}
 \examples{
-\dontrun {
+\dontrun{
 model <- application_convnext_tiny()
 
 inputs <- random_normal(c(32, 224, 224, 3))

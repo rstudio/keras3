@@ -10,6 +10,7 @@ install_keras(
   extra_packages = c("scipy", "pandas", "Pillow", "pydot", "ipython"),
   python_version = ">=3.9,<=3.11",
   backend = "tf-nightly",
+  gpu = NA,
   restart_session = TRUE
 )
 }
@@ -23,6 +24,8 @@ install_keras(
 \item{python_version}{Passed on to \code{reticulate::virtualenv_starter()}}
 
 \item{backend}{Which backend. Accepted values include  \code{"tensorflow"}, \code{"jax"} and \code{"pytorch"}}
+
+\item{gpu}{whether to install a GPU capable version of the backend.}
 }
 \description{
 This function will install Keras along with a selected backend, including all Python dependencies.

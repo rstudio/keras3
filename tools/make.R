@@ -67,6 +67,39 @@ fs::dir_walk("man-src", type = "directory", recurse = TRUE,
 # #'  @tether application.foo,
 # #'   application.foo.preprocess_input,
 # #'   application.foo.decode_predictions,
+#
+# TODO: WORKON_HOME should reflect an abolute path, not relative path, incase
+#      WORKON_HOME=~/..
+# TODO: reexport tuple() from keras3, tfdatasets
+
+# TODO: fit() / evaluate() / predict() : accept R generator functions.
+#
+# TODO: mention / document getOption(keras.*) #i.e., .fit_verbose, .verbose, etc.
+#
+# TODO: fit/predict/eval/fit_on_batch... coerce `x` R arrays to float32? model input$dtype?
+#
+#
+# TODO: Model.get_compile_config() / Model.get_build_config() ?
+#       Model.get_metrics_result() / Model.reset_metrics() /
+#       Model.metrics / Model.metrics_names ?
+#       Model.losses ?
+#       Model.run_eagerly?
+#       Model.stateless_call() ? Model.symbolic_call() ?
+#
+# TODO: fit()/ + friends, fix sample_weight / as_sample_weight,
+#      - 1 based
+#      - additional arg `sample_names`, to allow usage like
+#        fit(..., class_weight = list(category_name_1 = .5, category_name_2 = .6),
+#                 class_names = c("category_name_1", "category_name_2"))
+#
+#
+# TODO: make sure tfdeploy::serve_savedmodel() works with the new
+#       export_savedmodel() S3 method for keras3 models.
+#       update example in export_savedmodel.keras.models.model.Model S3 method
+#
+# TODO: update application_preprocess_inputs man page: list the models for
+#       which it's a "no-op" or "identity" function because the preprocessing
+#       step is on the graph already.
 
 # TODO: change shape() semantics. Discussion conclusion:
 ##    - instead of protecting with I(),
@@ -88,7 +121,12 @@ fs::dir_walk("man-src", type = "directory", recurse = TRUE,
 ##      ...  n_heads <- 4
 ##      shape(axis1, axis2, n_head, axis3/n_heads)
 
+# TODO: custom keras.Model wrapper that patches add_weight(), build(), etc
+#      with proper shape() coercion
+
 # TODO: c.keras_shape <- function(...){}
+#
+# TODO: custom_metric() / custom_loss() / Loss() / Metric(). remove custom_metric()?
 
 # TODO: "keras.layers.InputSpec" - needs to be exported or somehow processed in `Layer()`
 

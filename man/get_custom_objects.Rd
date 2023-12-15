@@ -2,12 +2,12 @@
 % Please edit documentation in R/model-persistence.R
 \name{get_custom_objects}
 \alias{get_custom_objects}
-\title{Retrieves a live reference to the global list of custom objects.}
+\title{Retrieves a live reference to the global list of custom objects (a Python dictionary).}
 \usage{
 get_custom_objects()
 }
 \value{
-A named list, the global dictionary mapping registered class names to classes.
+A Python dictionary, the global dictionary mapping registered class names to classes.
 }
 \description{
 Custom objects set using using \code{custom_object_scope()} are not added to the

@@ -14,20 +14,10 @@ Remove the last layer in a model
 }
 \seealso{
 Other model functions: 
-\code{\link{compile.keras.models.model.Model}()},
-\code{\link{evaluate.keras.models.model.Model}()},
-\code{\link{evaluate_generator}()},
-\code{\link{fit.keras.models.model.Model}()},
-\code{\link{fit_generator}()},
 \code{\link{get_config}()},
 \code{\link{get_layer}()},
 \code{\link{keras_model_sequential}()},
 \code{\link{keras_model}()},
-\code{\link{predict.keras.models.model.Model}()},
-\code{\link{predict_generator}()},
-\code{\link{predict_on_batch}()},
-\code{\link{predict_proba}()},
-\code{\link{summary.keras.models.model.Model}()},
-\code{\link{train_on_batch}()}
+\code{\link{summary.keras.models.model.Model}()}
 }
 \concept{model functions}

@@ -380,7 +380,7 @@ endpoints %<>% setdiff(c %(% {
 
 endpoints <-
   unlist(list(
-    str_c("keras.Layer.", names(keras$Layer))
+    str_c("keras.Model.", names(keras$Model))
   ))
 
 exports <- endpoints |>
@@ -399,7 +399,8 @@ df <- exports |>
 
 df$dump %>%
   str_flatten("\n\n") %>%
-  write_lines("R/keras-layers-layer-methods.R")
+  write_lines("R/keras-Model-methods.R")
+
 df <- df |>
   mutate(
     man_src_dir = path("man-src", r_name),
