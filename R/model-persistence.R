@@ -333,7 +333,7 @@ clear_registered_custom_objects <- function() {
 }
 
 
-#' `[TF backend only]*` Create a TF SavedModel artifact for inference
+#' [TF backend only] Create a TF SavedModel artifact for inference
 #'
 #' @description
 #' (e.g. via TF-Serving).
@@ -365,8 +365,8 @@ clear_registered_custom_objects <- function() {
 # use the lower-level `import("keras").export.ExportArchive` class. The
 # `export()` method relies on `ExportArchive` internally.
 #'
-#' @param filepath
-#' string, path where to save
+#' @param export_dir_base
+#' string, file path where to save
 #' the artifact.
 #'
 #' @param ...
@@ -376,9 +376,7 @@ clear_registered_custom_objects <- function() {
 #' @tether keras.Model.export
 #' @seealso
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/Model/export>
-export_savedmodel.keras.models.model.Model <-
-function (object, export_dir_base, ...)
-{
+export_savedmodel.keras.models.model.Model <- function (object, export_dir_base, ...) {
   object$export(export_dir_base, ...)
 }
 
