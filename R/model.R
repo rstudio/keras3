@@ -270,103 +270,6 @@ pop_layer <- function(object) {
 }
 
 
-#' Print a summary of a Keras model
-#'
-#' @param object,x Keras model instance
-#' @param line_length Total length of printed lines
-#' @param positions Relative or absolute positions of log elements in each line.
-#'   If not provided, defaults to `c(0.33, 0.55, 0.67, 1.0)`.
-#' @param expand_nested Whether to expand the nested models. If not provided,
-#'   defaults to `FALSE`.
-#' @param show_trainable Whether to show if a layer is trainable. If not
-#'   provided, defaults to `FALSE`.
-#' @param compact Whether to remove white-space only lines from the model
-#'   summary. (Default `TRUE`)
-#' @param ... for `summary()` and `print()`, passed on to `format()`. For
-#'   `format()`, passed on to `model$summary()`.
-#'
-#' @family model functions
-#'
-#' @return `format()` returns a length 1 character vector. `print()` returns the
-#'   model object invisibly. `summary()` returns the output of `format()`
-#'   invisibly after printing it.
-#'
-#' @export
-summary.keras.models.model.Model <- function(object, ...) {
-  writeLines(f <- format.keras.models.model.Model(object, ...))
-  invisible(f)
-}
-
-with_rich_config <- function(expr) {
-  os <- reticulate::import("os")
-
-  # set the number of columns to the current width.
-  if (is.null(os$environ$get("COLUMNS"))) {
-    os$environ["COLUMNS"] = as.character(getOption("width"))
-    on.exit({
-      os$environ$pop("COLUMNS")
-    }, add = TRUE)
-  }
-
-  # allow colored output if the terminal supports it
-  if (cli::num_ansi_colors() >= 256 && is.null(os$environ$get("FORCE_COLOR"))) {
-    os$environ["FORCE_COLOR"] = "yes"
-    os$environ["COLORTERM"] = "truecolor"
-    on.exit({
-      os$environ$pop("FORCE_COLOR")
-      os$environ$pop("COLORTERM")
-    }, add = TRUE)
-  }
-
-  force(expr)
-}
-
-#' @rdname summary.keras.models.model.Model
-#' @export
-format.keras.models.model.Model <-
-function(x,
-         line_length = width - (11L * show_trainable),
-         positions = NULL,
-         expand_nested = FALSE,
-         show_trainable = x$built && as.logical(length(x$non_trainable_weights)),
-         ...,
-         compact = TRUE) {
-
-  if (py_is_null_xptr(x))
-    return("<pointer: 0x0>")
-
-  args <- capture_args(match.call(), ignore = c("x", "compact"))
-
-  with_rich_config(
-    out <- trimws(py_capture_output(do.call(x$summary, args)))
-  )
-
-  if(compact) {
-    # strip empty lines
-    out <- gsub("(\\n\\s*\\n)", "\n", out, perl = TRUE)
-    if(expand_nested)
-      out <- gsub("\\n\\|\\s+\\|\\n", "\n", out)
-  }
-
-  out
-}
-
-#
-#' @rdname summary.keras.models.model.Model
-#' @export
-print.keras.models.model.Model <- function(x, ...) {
-  writeLines(format.keras.models.model.Model(x, ...))
-  invisible(x)
-}
-
-#' @importFrom reticulate py_str
-#' @export
-py_str.keras.models.model.Model <- function(object, line_length = getOption("width"), positions = NULL, ...) {
-  # still invoked by utils::str()
-  # warning("`py_str()` generic is deprecated")
-  format.keras.models.model.Model(object, line_length = line_length, positions = positions, ...)
-}
-
 
 # determine whether to view metrics or not
 resolve_view_metrics <- function(verbose, epochs, metrics) {
@@ -384,7 +287,7 @@ write_history_metadata <- function(history) {
 }
 
 
-as_class_weight <- function(class_weight) {
+as_class_weight <- function(class_weight, class_names = NULL) {
   # convert class weights to python dict
   if (!is.null(class_weight)) {
     if (is.list(class_weight))
