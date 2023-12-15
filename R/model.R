@@ -30,6 +30,8 @@
 #' )
 #' }
 #' @export
+#' @family model creation
+#' @tether keras.Model
 keras_model <- function(inputs, outputs = NULL, ...) {
   keras$models$Model(inputs = inputs, outputs = outputs, ...)
 }
@@ -79,6 +81,8 @@ keras_model <- function(inputs, outputs = NULL, ...) {
 #'
 #' }
 #' @export
+#' @family model creation
+#' @tether keras.Sequential
 keras_model_sequential <- function(layers = NULL, name = NULL, ...) {
 
   if (length(list(...)))
