@@ -268,13 +268,13 @@ of the layers (in <code>layer$weights</code>).</p>
 <span>  <span class="co"># Create the state of the layer (weights)</span></span>
 <span>  build <span class="op">=</span> <span class="kw">function</span><span class="op">(</span><span class="va">input_shape</span><span class="op">)</span> <span class="op">{</span></span>
 <span>    <span class="va">self</span><span class="op">$</span><span class="va">kernel</span> <span class="op">&lt;-</span> <span class="va">self</span><span class="op">$</span><span class="fu">add_weight</span><span class="op">(</span></span>
-<span>      shape <span class="op">=</span> <span class="fu">shape</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">tail</a></span><span class="op">(</span><span class="va">input_shape</span>, <span class="fl">1</span><span class="op">)</span>, <span class="va">self</span><span class="op">$</span><span class="va">units</span><span class="op">)</span>,</span>
+<span>      shape <span class="op">=</span> <span class="fu"><a href="../reference/shape.html">shape</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">tail</a></span><span class="op">(</span><span class="va">input_shape</span>, <span class="fl">1</span><span class="op">)</span>, <span class="va">self</span><span class="op">$</span><span class="va">units</span><span class="op">)</span>,</span>
 <span>      initializer <span class="op">=</span> <span class="st">"glorot_uniform"</span>,</span>
 <span>      trainable <span class="op">=</span> <span class="cn">TRUE</span>,</span>
 <span>      name <span class="op">=</span> <span class="st">"kernel"</span></span>
 <span>    <span class="op">)</span></span>
 <span>    <span class="va">self</span><span class="op">$</span><span class="va">bias</span> <span class="op">=</span> <span class="va">self</span><span class="op">$</span><span class="fu">add_weight</span><span class="op">(</span></span>
-<span>      shape <span class="op">=</span> <span class="fu">shape</span><span class="op">(</span><span class="va">self</span><span class="op">$</span><span class="va">units</span><span class="op">)</span>,</span>
+<span>      shape <span class="op">=</span> <span class="fu"><a href="../reference/shape.html">shape</a></span><span class="op">(</span><span class="va">self</span><span class="op">$</span><span class="va">units</span><span class="op">)</span>,</span>
 <span>      initializer <span class="op">=</span> <span class="st">"zeros"</span>,</span>
 <span>      trainable <span class="op">=</span> <span class="cn">TRUE</span>,</span>
 <span>      name <span class="op">=</span> <span class="st">"bias"</span></span>
@@ -310,7 +310,7 @@ the running sum of its inputs:</p>
 <span>      <span class="va">super</span><span class="op">$</span><span class="fu">initialize</span><span class="op">(</span><span class="op">)</span></span>
 <span>      <span class="co"># Create a non-trainable weight.</span></span>
 <span>      <span class="va">self</span><span class="op">$</span><span class="va">total</span> <span class="op">=</span> <span class="va">self</span><span class="op">$</span><span class="fu">add_weight</span><span class="op">(</span></span>
-<span>        shape<span class="op">=</span><span class="fu">shape</span><span class="op">(</span><span class="op">)</span>,</span>
+<span>        shape<span class="op">=</span><span class="fu"><a href="../reference/shape.html">shape</a></span><span class="op">(</span><span class="op">)</span>,</span>
 <span>        initializer<span class="op">=</span><span class="st">"zeros"</span>,</span>
 <span>        trainable<span class="op">=</span><span class="cn">FALSE</span>,</span>
 <span>        name<span class="op">=</span><span class="st">"total"</span></span>
@@ -362,7 +362,7 @@ the running sum of its inputs:</p>
 <span id="cb1-6"><a href="#cb1-6" tabindex="-1"></a>           <span class="at">constraint =</span> <span class="cn">NULL</span>,</span>
 <span id="cb1-7"><a href="#cb1-7" tabindex="-1"></a>           <span class="at">name =</span> <span class="cn">NULL</span>)</span></code></pre><p></p></div>
 <p>Add a weight variable to the layer.</p>
-<p>Args:</p><ul><li><p><code>shape</code>: shape for the variable (as defined by <code>keras3::shape()</code>)
+<p>Args:</p><ul><li><p><code>shape</code>: shape for the variable (as defined by <code><a href="shape.html">keras3::shape()</a></code>)
 Must be fully-defined (no <code>NA</code>/<code>NULL</code> entries).
 Defaults to <code>()</code> (scalar) if unspecified.</p></li>
 <li><p><code>initializer</code>: Initializer object to use to

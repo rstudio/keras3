@@ -505,8 +505,9 @@ To handle this, we’ll use <strong>slicing</strong>. This means we’ll
 separate the features of each option, like <span class="math inline">\(feature_{(Q + A)}\)</span> and <span class="math inline">\(feature_{(Q + B)}\)</span>, and give them one by
 one to the NLP classifier. After we get the prediction scores <span class="math inline">\(logits_{(Q + A)}\)</span> and <span class="math inline">\(logits_{(Q + B)}\)</span> for all the options,
 we’ll use the Softmax function, like <span class="math inline">\(\operatorname{Softmax}([logits_{(Q + A)},
-logits_{(Q + B)}])\)</span>, to combine them. This final step helps us
-make the ultimate decision or choice.</p>
+logits_{(Q +
+B)}])\)</span>, to combine them. This final step helps us make the
+ultimate decision or choice.</p>
 <blockquote>
 <p>Note that in the classifier, we set <code>num_classes=1</code>
 instead of <code>5</code>. This is because the classifier produces a

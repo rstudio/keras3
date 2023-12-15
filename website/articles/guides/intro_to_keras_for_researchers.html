@@ -796,7 +796,7 @@ networks should be defined as Layer subclasses instead.</p>
 mix-and-matching OO models and Functional models.</p>
 <p>Note that the <code>Model</code> class also features built-in
 training &amp; evaluation loops: <code><a href="https://generics.r-lib.org/reference/fit.html" class="external-link">fit()</a></code>,
-<code><a href="https://rdrr.io/r/stats/predict.html" class="external-link">predict()</a></code> and <code><a href="https://rdrr.io/pkg/tensorflow/man/evaluate.html" class="external-link">evaluate()</a></code> (configured via the
+<code><a href="https://rdrr.io/r/stats/predict.html" class="external-link">predict()</a></code> and <code><a href="https://generics.r-lib.org/reference/evaluate.html" class="external-link">evaluate()</a></code> (configured via the
 <code><a href="https://generics.r-lib.org/reference/compile.html" class="external-link">compile()</a></code> method). These built-in functions give you access
 to the following built-in training infrastructure features:</p>
 <ul>
@@ -845,7 +845,7 @@ built-in training loops for your OO models. Just override the
 infrastructure features outlined above – callbacks, zero-code
 distribution support, and step fusing support. You may also override
 <code>test_step()</code> to customize what happens in
-<code><a href="https://rdrr.io/pkg/tensorflow/man/evaluate.html" class="external-link">evaluate()</a></code>, and override <code>predict_step()</code> to
+<code><a href="https://generics.r-lib.org/reference/evaluate.html" class="external-link">evaluate()</a></code>, and override <code>predict_step()</code> to
 customize what happens in <code><a href="https://rdrr.io/r/stats/predict.html" class="external-link">predict()</a></code>. For more information,
 please refer to <a href="https://keras.io/guides/customizing_what_happens_in_fit/" class="external-link">this
 guide</a>.</p>

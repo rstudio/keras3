@@ -225,7 +225,7 @@ objects to load data in a multi-device or distributed workflow.</p>
 <span>  <span class="va">model</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://generics.r-lib.org/reference/fit.html" class="external-link">fit</a></span><span class="op">(</span><span class="va">train_dataset</span>, validation_data<span class="op">=</span><span class="va">val_dataset</span>, <span class="va">...</span><span class="op">)</span></span>
 <span></span>
 <span>  <span class="co"># Test the model on all available devices.</span></span>
-<span>  <span class="va">model</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://rdrr.io/pkg/tensorflow/man/evaluate.html" class="external-link">evaluate</a></span><span class="op">(</span><span class="va">test_dataset</span><span class="op">)</span></span>
+<span>  <span class="va">model</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://generics.r-lib.org/reference/evaluate.html" class="external-link">evaluate</a></span><span class="op">(</span><span class="va">test_dataset</span><span class="op">)</span></span>
 <span><span class="op">}</span><span class="op">)</span></span></code></pre></div>
 <p>Here’s a simple end-to-end runnable example:</p>
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
@@ -290,7 +290,7 @@ objects to load data in a multi-device or distributed workflow.</p>
 <span>  <span class="va">model</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://generics.r-lib.org/reference/fit.html" class="external-link">fit</a></span><span class="op">(</span><span class="va">train_dataset</span>, epochs<span class="op">=</span><span class="fl">2</span>, validation_data<span class="op">=</span><span class="va">val_dataset</span><span class="op">)</span></span>
 <span></span>
 <span>  <span class="co"># Test the model on all available devices.</span></span>
-<span>  <span class="va">model</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://rdrr.io/pkg/tensorflow/man/evaluate.html" class="external-link">evaluate</a></span><span class="op">(</span><span class="va">test_dataset</span><span class="op">)</span></span>
+<span>  <span class="va">model</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://generics.r-lib.org/reference/evaluate.html" class="external-link">evaluate</a></span><span class="op">(</span><span class="va">test_dataset</span><span class="op">)</span></span>
 <span><span class="op">}</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">## Epoch 1/2</span></span>
 <span><span class="co">## 782/782 - 3s - 3ms/step - loss: 2.0840 - sparse_categorical_accuracy: 0.8817 - val_loss: 0.6871 - val_sparse_categorical_accuracy: 0.9126</span></span>

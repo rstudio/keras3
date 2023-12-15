@@ -439,7 +439,7 @@ layer.</p>
 <h2 id="evaluate-the-model-on-the-test-set">Evaluate the model on the test set<a class="anchor" aria-label="anchor" href="#evaluate-the-model-on-the-test-set"></a>
 </h2>
 <div class="sourceCode" id="cb41"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">model</span> <span class="op"><a href="../../reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://rdrr.io/pkg/tensorflow/man/evaluate.html" class="external-link">evaluate</a></span><span class="op">(</span><span class="va">test_ds</span><span class="op">)</span></span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">model</span> <span class="op"><a href="../../reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://generics.r-lib.org/reference/evaluate.html" class="external-link">evaluate</a></span><span class="op">(</span><span class="va">test_ds</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">## 782/782 - 6s - 7ms/step - accuracy: 0.8633 - loss: 0.3975</span></span></code></pre>
 <pre><code><span><span class="co">##            loss compile_metrics</span></span>
 <span><span class="co">##       0.3974522       0.8632513</span></span></code></pre>
@@ -466,7 +466,7 @@ can simply create a new model (using the weights we just trained):</p>
 <span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># Test it with `raw_test_ds`, which yields raw strings</span></span>
-<span><span class="va">end_to_end_model</span> <span class="op"><a href="../../reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://rdrr.io/pkg/tensorflow/man/evaluate.html" class="external-link">evaluate</a></span><span class="op">(</span><span class="va">raw_test_ds</span><span class="op">)</span></span></code></pre></div>
+<span><span class="va">end_to_end_model</span> <span class="op"><a href="../../reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://generics.r-lib.org/reference/evaluate.html" class="external-link">evaluate</a></span><span class="op">(</span><span class="va">raw_test_ds</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">## 782/782 - 6s - 8ms/step - accuracy: 0.8633 - loss: 0.3978</span></span></code></pre>
 <pre><code><span><span class="co">##            loss compile_metrics</span></span>
 <span><span class="co">##       0.3977900       0.8632513</span></span></code></pre>

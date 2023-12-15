@@ -197,12 +197,12 @@ the Tensor.</p>
 <p>A common way to create constant tensors is via <code>tf$ones</code>
 and <code>tf$zeros</code>:</p>
 <div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">tf</span><span class="op">$</span><span class="fu">ones</span><span class="op">(</span>shape<span class="op">=</span><span class="fu">shape</span><span class="op">(</span><span class="fl">2</span>, <span class="fl">1</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">tf</span><span class="op">$</span><span class="fu">ones</span><span class="op">(</span>shape<span class="op">=</span><span class="fu"><a href="../reference/shape.html">shape</a></span><span class="op">(</span><span class="fl">2</span>, <span class="fl">1</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">## tf.Tensor(</span></span>
 <span><span class="co">## [[1.]</span></span>
 <span><span class="co">##  [1.]], shape=(2, 1), dtype=float32)</span></span></code></pre>
 <div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">tf</span><span class="op">$</span><span class="fu">zeros</span><span class="op">(</span>shape<span class="op">=</span><span class="fu">shape</span><span class="op">(</span><span class="fl">2</span>, <span class="fl">1</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">tf</span><span class="op">$</span><span class="fu">zeros</span><span class="op">(</span>shape<span class="op">=</span><span class="fu"><a href="../reference/shape.html">shape</a></span><span class="op">(</span><span class="fl">2</span>, <span class="fl">1</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">## tf.Tensor(</span></span>
 <span><span class="co">## [[0.]</span></span>
 <span><span class="co">##  [0.]], shape=(2, 1), dtype=float32)</span></span></code></pre>
@@ -326,12 +326,12 @@ method gives you a shortcut for creating weights:</p>
 <span>  initialize <span class="op">=</span> <span class="kw">function</span><span class="op">(</span><span class="va">units</span> <span class="op">=</span> <span class="fl">32</span>, <span class="va">input_dim</span> <span class="op">=</span> <span class="fl">32</span><span class="op">)</span> <span class="op">{</span></span>
 <span>    <span class="va">super</span><span class="op">$</span><span class="fu">initialize</span><span class="op">(</span><span class="op">)</span></span>
 <span>    <span class="va">self</span><span class="op">$</span><span class="va">w</span> <span class="op">&lt;-</span> <span class="va">self</span><span class="op">$</span><span class="fu">add_weight</span><span class="op">(</span></span>
-<span>      shape <span class="op">=</span> <span class="fu">shape</span><span class="op">(</span><span class="va">input_dim</span>, <span class="va">units</span><span class="op">)</span>,</span>
+<span>      shape <span class="op">=</span> <span class="fu"><a href="../reference/shape.html">shape</a></span><span class="op">(</span><span class="va">input_dim</span>, <span class="va">units</span><span class="op">)</span>,</span>
 <span>      initializer <span class="op">=</span> <span class="st">"random_normal"</span>,</span>
 <span>      trainable <span class="op">=</span> <span class="cn">TRUE</span></span>
 <span>    <span class="op">)</span></span>
 <span>    <span class="va">self</span><span class="op">$</span><span class="va">b</span> <span class="op">&lt;-</span> <span class="va">self</span><span class="op">$</span><span class="fu">add_weight</span><span class="op">(</span></span>
-<span>      shape <span class="op">=</span> <span class="fu">shape</span><span class="op">(</span><span class="va">units</span><span class="op">)</span>,</span>
+<span>      shape <span class="op">=</span> <span class="fu"><a href="../reference/shape.html">shape</a></span><span class="op">(</span><span class="va">units</span><span class="op">)</span>,</span>
 <span>      initializer <span class="op">=</span> <span class="st">"zeros"</span>,</span>
 <span>      trainable <span class="op">=</span> <span class="cn">TRUE</span></span>
 <span>    <span class="op">)</span></span>
@@ -348,7 +348,7 @@ function:</p>
 <span></span>
 <span><span class="co"># The layer can be treated as a function.</span></span>
 <span><span class="co"># Here we call it on some data.</span></span>
-<span><span class="va">y</span> <span class="op">&lt;-</span> <span class="fu">linear_layer</span><span class="op">(</span><span class="va">tf</span><span class="op">$</span><span class="fu">ones</span><span class="op">(</span><span class="fu">shape</span><span class="op">(</span><span class="fl">2</span>, <span class="fl">2</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
+<span><span class="va">y</span> <span class="op">&lt;-</span> <span class="fu">linear_layer</span><span class="op">(</span><span class="va">tf</span><span class="op">$</span><span class="fu">ones</span><span class="op">(</span><span class="fu"><a href="../reference/shape.html">shape</a></span><span class="op">(</span><span class="fl">2</span>, <span class="fl">2</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <p>The weight variables (created in <code>initialize</code>) are
 automatically tracked under the <code>weights</code> property:</p>
 <div class="sourceCode" id="cb32"><pre class="downlit sourceCode r">
@@ -378,12 +378,12 @@ dim/shape at layer construction time:</p>
 <span>  <span class="op">}</span>,</span>
 <span>  build <span class="op">=</span> <span class="kw">function</span><span class="op">(</span><span class="va">input_shape</span><span class="op">)</span> <span class="op">{</span></span>
 <span>    <span class="va">self</span><span class="op">$</span><span class="va">w</span> <span class="op">&lt;-</span> <span class="va">self</span><span class="op">$</span><span class="fu">add_weight</span><span class="op">(</span></span>
-<span>      shape <span class="op">=</span> <span class="fu">shape</span><span class="op">(</span><span class="va">input_shape</span><span class="op">[</span><span class="op">-</span><span class="fl">1</span><span class="op">]</span>, <span class="va">self</span><span class="op">$</span><span class="va">units</span><span class="op">)</span>,</span>
+<span>      shape <span class="op">=</span> <span class="fu"><a href="../reference/shape.html">shape</a></span><span class="op">(</span><span class="va">input_shape</span><span class="op">[</span><span class="op">-</span><span class="fl">1</span><span class="op">]</span>, <span class="va">self</span><span class="op">$</span><span class="va">units</span><span class="op">)</span>,</span>
 <span>      initializer <span class="op">=</span> <span class="st">"random_normal"</span>,</span>
 <span>      trainable <span class="op">=</span> <span class="cn">TRUE</span></span>
 <span>    <span class="op">)</span></span>
 <span>    <span class="va">self</span><span class="op">$</span><span class="va">b</span> <span class="op">&lt;-</span> <span class="va">self</span><span class="op">$</span><span class="fu">add_weight</span><span class="op">(</span></span>
-<span>      shape <span class="op">=</span> <span class="fu">shape</span><span class="op">(</span><span class="va">self</span><span class="op">$</span><span class="va">units</span><span class="op">)</span>,</span>
+<span>      shape <span class="op">=</span> <span class="fu"><a href="../reference/shape.html">shape</a></span><span class="op">(</span><span class="va">self</span><span class="op">$</span><span class="va">units</span><span class="op">)</span>,</span>
 <span>      initializer <span class="op">=</span> <span class="st">"zeros"</span>,</span>
 <span>      trainable <span class="op">=</span> <span class="cn">TRUE</span></span>
 <span>    <span class="op">)</span></span>
@@ -397,7 +397,7 @@ dim/shape at layer construction time:</p>
 <span><span class="va">linear_layer</span> <span class="op">&lt;-</span> <span class="fu">Linear</span><span class="op">(</span>units <span class="op">=</span> <span class="fl">4</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># This will also call `build(input_shape)` and create the weights.</span></span>
-<span><span class="va">y</span> <span class="op">&lt;-</span> <span class="fu">linear_layer</span><span class="op">(</span><span class="va">tf</span><span class="op">$</span><span class="fu">ones</span><span class="op">(</span><span class="fu">shape</span><span class="op">(</span><span class="fl">2</span>, <span class="fl">2</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
+<span><span class="va">y</span> <span class="op">&lt;-</span> <span class="fu">linear_layer</span><span class="op">(</span><span class="va">tf</span><span class="op">$</span><span class="fu">ones</span><span class="op">(</span><span class="fu"><a href="../reference/shape.html">shape</a></span><span class="op">(</span><span class="fl">2</span>, <span class="fl">2</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 </div>
 <div class="section level2">
 <h2 id="layer-gradients">Layer gradients<a class="anchor" aria-label="anchor" href="#layer-gradients"></a>
@@ -461,7 +461,7 @@ non-trainable weight:</p>
 <span>    <span class="co"># Create a non-trainable weight.</span></span>
 <span>    <span class="va">self</span><span class="op">$</span><span class="va">total</span> <span class="op">&lt;-</span> <span class="va">self</span><span class="op">$</span><span class="fu">add_weight</span><span class="op">(</span></span>
 <span>      initializer <span class="op">=</span> <span class="st">"zeros"</span>,</span>
-<span>      shape <span class="op">=</span> <span class="fu">shape</span><span class="op">(</span><span class="va">input_dim</span><span class="op">)</span>,</span>
+<span>      shape <span class="op">=</span> <span class="fu"><a href="../reference/shape.html">shape</a></span><span class="op">(</span><span class="va">input_dim</span><span class="op">)</span>,</span>
 <span>      trainable <span class="op">=</span> <span class="cn">FALSE</span></span>
 <span>    <span class="op">)</span></span>
 <span>  <span class="op">}</span>,</span>
@@ -472,7 +472,7 @@ non-trainable weight:</p>
 <span><span class="op">)</span></span>
 <span></span>
 <span><span class="va">my_sum</span> <span class="op">&lt;-</span> <span class="fu">ComputeSum</span><span class="op">(</span>input_dim <span class="op">=</span> <span class="fl">2</span><span class="op">)</span></span>
-<span><span class="va">x</span> <span class="op">&lt;-</span> <span class="va">tf</span><span class="op">$</span><span class="fu">ones</span><span class="op">(</span><span class="fu">shape</span><span class="op">(</span><span class="fl">2</span>, <span class="fl">2</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="va">x</span> <span class="op">&lt;-</span> <span class="va">tf</span><span class="op">$</span><span class="fu">ones</span><span class="op">(</span><span class="fu"><a href="../reference/shape.html">shape</a></span><span class="op">(</span><span class="fl">2</span>, <span class="fl">2</span><span class="op">)</span><span class="op">)</span></span>
 <span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/array.html" class="external-link">as.array</a></span><span class="op">(</span><span class="fu">my_sum</span><span class="op">(</span><span class="va">x</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">## [1] 2 2</span></span></code></pre>
@@ -513,7 +513,7 @@ non-trainable).</p>
 <span><span class="va">mlp</span> <span class="op">&lt;-</span> <span class="fu">MLP</span><span class="op">(</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># The first call to the `mlp` object will create the weights.</span></span>
-<span><span class="va">y</span> <span class="op">&lt;-</span> <span class="fu">mlp</span><span class="op">(</span><span class="va">tf</span><span class="op">$</span><span class="fu">ones</span><span class="op">(</span>shape<span class="op">=</span><span class="fu">shape</span><span class="op">(</span><span class="fl">3</span>, <span class="fl">64</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="va">y</span> <span class="op">&lt;-</span> <span class="fu">mlp</span><span class="op">(</span><span class="va">tf</span><span class="op">$</span><span class="fu">ones</span><span class="op">(</span>shape<span class="op">=</span><span class="fu"><a href="../reference/shape.html">shape</a></span><span class="op">(</span><span class="fl">3</span>, <span class="fl">64</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># Weights are recursively tracked.</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/length.html" class="external-link">length</a></span><span class="op">(</span><span class="va">mlp</span><span class="op">$</span><span class="va">weights</span><span class="op">)</span></span></code></pre></div>
@@ -568,7 +568,7 @@ loss:</p>
 <span><span class="op">)</span></span>
 <span></span>
 <span><span class="va">mlp</span> <span class="op">&lt;-</span> <span class="fu">SparseMLP</span><span class="op">(</span><span class="op">)</span></span>
-<span><span class="va">y</span> <span class="op">&lt;-</span> <span class="fu">mlp</span><span class="op">(</span><span class="va">tf</span><span class="op">$</span><span class="fu">ones</span><span class="op">(</span><span class="fu">shape</span><span class="op">(</span><span class="fl">10</span>, <span class="fl">10</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="va">y</span> <span class="op">&lt;-</span> <span class="fu">mlp</span><span class="op">(</span><span class="va">tf</span><span class="op">$</span><span class="fu">ones</span><span class="op">(</span><span class="fu"><a href="../reference/shape.html">shape</a></span><span class="op">(</span><span class="fl">10</span>, <span class="fl">10</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span>
 <span></span>
 <span><span class="va">mlp</span><span class="op">$</span><span class="va">losses</span>  <span class="co"># List containing one float32 scalar</span></span></code></pre></div>
 <pre><code><span><span class="co">## [[1]]</span></span>
@@ -581,7 +581,7 @@ gradients when writing a training loop.</p>
 <div class="sourceCode" id="cb49"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Losses correspond to the *last* forward pass.</span></span>
 <span><span class="va">mlp</span> <span class="op">&lt;-</span> <span class="fu">SparseMLP</span><span class="op">(</span><span class="op">)</span></span>
-<span><span class="fu">mlp</span><span class="op">(</span><span class="va">tf</span><span class="op">$</span><span class="fu">ones</span><span class="op">(</span><span class="fu">shape</span><span class="op">(</span><span class="fl">10</span>, <span class="fl">10</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
+<span><span class="fu">mlp</span><span class="op">(</span><span class="va">tf</span><span class="op">$</span><span class="fu">ones</span><span class="op">(</span><span class="fu"><a href="../reference/shape.html">shape</a></span><span class="op">(</span><span class="fl">10</span>, <span class="fl">10</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">## tf.Tensor(</span></span>
 <span><span class="co">## [[ 0.0388482  -0.03920118  0.01624807 -0.01361975 -0.013549    0.07107338</span></span>
 <span><span class="co">##   -0.01077365  0.05688906 -0.02838149 -0.0408462 ]</span></span>
@@ -607,7 +607,7 @@ gradients when writing a training loop.</p>
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/length.html" class="external-link">length</a></span><span class="op">(</span><span class="va">mlp</span><span class="op">$</span><span class="va">losses</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">## [1] 1</span></span></code></pre>
 <div class="sourceCode" id="cb53"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu">mlp</span><span class="op">(</span><span class="va">tf</span><span class="op">$</span><span class="fu">ones</span><span class="op">(</span><span class="fu">shape</span><span class="op">(</span><span class="fl">10</span>, <span class="fl">10</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu">mlp</span><span class="op">(</span><span class="va">tf</span><span class="op">$</span><span class="fu">ones</span><span class="op">(</span><span class="fu"><a href="../reference/shape.html">shape</a></span><span class="op">(</span><span class="fl">10</span>, <span class="fl">10</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">## tf.Tensor(</span></span>
 <span><span class="co">## [[ 0.0388482  -0.03920118  0.01624807 -0.01361975 -0.013549    0.07107338</span></span>
 <span><span class="co">##   -0.01077365  0.05688906 -0.02838149 -0.0408462 ]</span></span>
@@ -902,8 +902,8 @@ layer in training and inference modes.</p>
 <span><span class="op">)</span></span>
 <span></span>
 <span><span class="va">mlp</span> <span class="op">&lt;-</span> <span class="fu">MLPWithDropout</span><span class="op">(</span><span class="op">)</span></span>
-<span><span class="va">y_train</span> <span class="op">&lt;-</span> <span class="fu">mlp</span><span class="op">(</span><span class="va">tf</span><span class="op">$</span><span class="fu">ones</span><span class="op">(</span><span class="fu">shape</span><span class="op">(</span><span class="fl">2</span>, <span class="fl">2</span><span class="op">)</span><span class="op">)</span>, training<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span></span>
-<span><span class="va">y_test</span> <span class="op">&lt;-</span> <span class="fu">mlp</span><span class="op">(</span><span class="va">tf</span><span class="op">$</span><span class="fu">ones</span><span class="op">(</span><span class="fu">shape</span><span class="op">(</span><span class="fl">2</span>, <span class="fl">2</span><span class="op">)</span><span class="op">)</span>, training<span class="op">=</span><span class="cn">FALSE</span><span class="op">)</span></span></code></pre></div>
+<span><span class="va">y_train</span> <span class="op">&lt;-</span> <span class="fu">mlp</span><span class="op">(</span><span class="va">tf</span><span class="op">$</span><span class="fu">ones</span><span class="op">(</span><span class="fu"><a href="../reference/shape.html">shape</a></span><span class="op">(</span><span class="fl">2</span>, <span class="fl">2</span><span class="op">)</span><span class="op">)</span>, training<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span></span>
+<span><span class="va">y_test</span> <span class="op">&lt;-</span> <span class="fu">mlp</span><span class="op">(</span><span class="va">tf</span><span class="op">$</span><span class="fu">ones</span><span class="op">(</span><span class="fu"><a href="../reference/shape.html">shape</a></span><span class="op">(</span><span class="fl">2</span>, <span class="fl">2</span><span class="op">)</span><span class="op">)</span>, training<span class="op">=</span><span class="cn">FALSE</span><span class="op">)</span></span></code></pre></div>
 </div>
 <div class="section level2">
 <h2 id="the-functional-api-for-model-building">The Functional API for model-building<a class="anchor" aria-label="anchor" href="#the-functional-api-for-model-building"></a>
@@ -937,13 +937,13 @@ composed functionally, like this (we call it the “Functional API”):</p>
 <pre><code><span><span class="co">## [1] 4</span></span></code></pre>
 <div class="sourceCode" id="cb70"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Let's call our model on some data, for fun.</span></span>
-<span><span class="va">y</span> <span class="op">&lt;-</span> <span class="fu">model</span><span class="op">(</span><span class="va">tf</span><span class="op">$</span><span class="fu">ones</span><span class="op">(</span><span class="fu">shape</span><span class="op">(</span><span class="fl">2</span>, <span class="fl">16</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="va">y</span> <span class="op">&lt;-</span> <span class="fu">model</span><span class="op">(</span><span class="va">tf</span><span class="op">$</span><span class="fu">ones</span><span class="op">(</span><span class="fu"><a href="../reference/shape.html">shape</a></span><span class="op">(</span><span class="fl">2</span>, <span class="fl">16</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="va">y</span><span class="op">$</span><span class="va">shape</span></span></code></pre></div>
 <pre><code><span><span class="co">## TensorShape([2, 10])</span></span></code></pre>
 <div class="sourceCode" id="cb72"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># You can pass a `training` argument in `__call__`</span></span>
 <span><span class="co"># (it will get passed down to the Dropout layer).</span></span>
-<span><span class="va">y</span> <span class="op">&lt;-</span> <span class="fu">model</span><span class="op">(</span><span class="va">tf</span><span class="op">$</span><span class="fu">ones</span><span class="op">(</span><span class="fu">shape</span><span class="op">(</span><span class="fl">2</span>, <span class="fl">16</span><span class="op">)</span><span class="op">)</span>, training<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
+<span><span class="va">y</span> <span class="op">&lt;-</span> <span class="fu">model</span><span class="op">(</span><span class="va">tf</span><span class="op">$</span><span class="fu">ones</span><span class="op">(</span><span class="fu"><a href="../reference/shape.html">shape</a></span><span class="op">(</span><span class="fl">2</span>, <span class="fl">16</span><span class="op">)</span><span class="op">)</span>, training<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
 <p>The Functional API tends to be more concise than subclassing, and
 provides a few other advantages (generally the same advantages that
 functional, typed languages provide over untyped OO development).
@@ -954,7 +954,7 @@ networks should be defined as Layer subclasses instead.</p>
 mix-and-matching OO models and Functional models.</p>
 <p>Note that the <code>Model</code> class also features built-in
 training &amp; evaluation loops: <code><a href="https://generics.r-lib.org/reference/fit.html" class="external-link">fit()</a></code>,
-<code><a href="https://rdrr.io/r/stats/predict.html" class="external-link">predict()</a></code> and <code><a href="https://rdrr.io/pkg/tensorflow/man/evaluate.html" class="external-link">evaluate()</a></code> (configured via the
+<code><a href="https://rdrr.io/r/stats/predict.html" class="external-link">predict()</a></code> and <code><a href="https://generics.r-lib.org/reference/evaluate.html" class="external-link">evaluate()</a></code> (configured via the
 <code><a href="https://generics.r-lib.org/reference/compile.html" class="external-link">compile()</a></code> method). These built-in functions give you access
 to the following built-in training infrastructure features:</p>
 <ul>
@@ -1003,7 +1003,7 @@ the MNIST example above.</p>
 <code class="sourceCode R"><span><span class="va">predictions</span> <span class="op">&lt;-</span> <span class="va">model</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://rdrr.io/r/stats/predict.html" class="external-link">predict</a></span><span class="op">(</span><span class="va">dataset</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">## 938/938 - 0s - 378us/step</span></span></code></pre>
 <div class="sourceCode" id="cb77"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">model</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://rdrr.io/pkg/tensorflow/man/evaluate.html" class="external-link">evaluate</a></span><span class="op">(</span><span class="va">dataset</span><span class="op">)</span></span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">model</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://generics.r-lib.org/reference/evaluate.html" class="external-link">evaluate</a></span><span class="op">(</span><span class="va">dataset</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">## 938/938 - 0s - 367us/step - loss: 0.1763 - sparse_categorical_accuracy: 0.9454</span></span></code></pre>
 <pre><code><span><span class="co">##            loss compile_metrics</span></span>
 <span><span class="co">##       0.1763445       0.9454167</span></span></code></pre>
@@ -1015,7 +1015,7 @@ built-in training loops for your OO models. Just override the
 infrastructure features outlined above – callbacks, zero-code
 distribution support, and step fusing support. You may also override
 <code>test_step()</code> to customize what happens in
-<code><a href="https://rdrr.io/pkg/tensorflow/man/evaluate.html" class="external-link">evaluate()</a></code>, and override <code>predict_step()</code> to
+<code><a href="https://generics.r-lib.org/reference/evaluate.html" class="external-link">evaluate()</a></code>, and override <code>predict_step()</code> to
 customize what happens in <code><a href="https://rdrr.io/r/stats/predict.html" class="external-link">predict()</a></code>. For more information,
 please refer to <a href="https://keras.io/guides/customizing_what_happens_in_fit/" class="external-link">this
 guide</a>.</p>

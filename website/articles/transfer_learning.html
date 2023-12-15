@@ -182,7 +182,7 @@ forward pass.</li>
 (kernel &amp; bias)</strong></p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">layer</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/layer_dense.html">layer_dense</a></span><span class="op">(</span>units <span class="op">=</span> <span class="fl">3</span><span class="op">)</span></span>
-<span><span class="va">layer</span><span class="op">$</span><span class="fu">build</span><span class="op">(</span><span class="fu">shape</span><span class="op">(</span><span class="cn">NULL</span>, <span class="fl">4</span><span class="op">)</span><span class="op">)</span>  <span class="co"># Create the weights</span></span>
+<span><span class="va">layer</span><span class="op">$</span><span class="fu">build</span><span class="op">(</span><span class="fu"><a href="../reference/shape.html">shape</a></span><span class="op">(</span><span class="cn">NULL</span>, <span class="fl">4</span><span class="op">)</span><span class="op">)</span>  <span class="co"># Create the weights</span></span>
 <span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/length.html" class="external-link">length</a></span><span class="op">(</span><span class="va">layer</span><span class="op">$</span><span class="va">weights</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">## [1] 2</span></span></code></pre>
@@ -203,7 +203,7 @@ to writing new layers from scratch</a>.</p>
 trainable weights and 2 non-trainable weights</strong></p>
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">layer</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/layer_batch_normalization.html">layer_batch_normalization</a></span><span class="op">(</span><span class="op">)</span></span>
-<span><span class="va">layer</span><span class="op">$</span><span class="fu">build</span><span class="op">(</span><span class="fu">shape</span><span class="op">(</span><span class="cn">NULL</span>, <span class="fl">4</span><span class="op">)</span><span class="op">)</span>  <span class="co"># Create the weights</span></span>
+<span><span class="va">layer</span><span class="op">$</span><span class="fu">build</span><span class="op">(</span><span class="fu"><a href="../reference/shape.html">shape</a></span><span class="op">(</span><span class="cn">NULL</span>, <span class="fl">4</span><span class="op">)</span><span class="op">)</span>  <span class="co"># Create the weights</span></span>
 <span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/length.html" class="external-link">length</a></span><span class="op">(</span><span class="va">layer</span><span class="op">$</span><span class="va">weights</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">## [1] 4</span></span></code></pre>
@@ -225,7 +225,7 @@ gradient updates).</p>
 <code>False</code></strong></p>
 <div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">layer</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/layer_dense.html">layer_dense</a></span><span class="op">(</span>units <span class="op">=</span> <span class="fl">3</span><span class="op">)</span></span>
-<span><span class="va">layer</span><span class="op">$</span><span class="fu">build</span><span class="op">(</span><span class="fu">shape</span><span class="op">(</span><span class="cn">NULL</span>, <span class="fl">4</span><span class="op">)</span><span class="op">)</span>  <span class="co"># Create the weights</span></span>
+<span><span class="va">layer</span><span class="op">$</span><span class="fu">build</span><span class="op">(</span><span class="fu"><a href="../reference/shape.html">shape</a></span><span class="op">(</span><span class="cn">NULL</span>, <span class="fl">4</span><span class="op">)</span><span class="op">)</span>  <span class="co"># Create the weights</span></span>
 <span><span class="va">layer</span><span class="op">$</span><span class="va">trainable</span> <span class="op">&lt;-</span> <span class="cn">FALSE</span>  <span class="co"># Freeze the layer</span></span>
 <span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/length.html" class="external-link">length</a></span><span class="op">(</span><span class="va">layer</span><span class="op">$</span><span class="va">weights</span><span class="op">)</span></span></code></pre></div>
@@ -731,7 +731,7 @@ so far.</p>
 <p>After 10 epochs, fine-tuning gains us a nice improvement here. Let’s
 evaluate the model on the test dataset:</p>
 <div class="sourceCode" id="cb54"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">model</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://rdrr.io/pkg/tensorflow/man/evaluate.html" class="external-link">evaluate</a></span><span class="op">(</span><span class="va">test_ds</span><span class="op">)</span></span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">model</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://generics.r-lib.org/reference/evaluate.html" class="external-link">evaluate</a></span><span class="op">(</span><span class="va">test_ds</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">## 37/37 - 20s - 546ms/step - binary_accuracy: 0.9413 - loss: 0.1453</span></span></code></pre>
 <pre><code><span><span class="co">##            loss compile_metrics</span></span>
 <span><span class="co">##       0.1452871       0.9413007</span></span></code></pre>

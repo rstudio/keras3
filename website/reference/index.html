@@ -84,6 +84,12 @@
       
 
       
+    </div><div class="section level2">
+      
+      <h3 id="create-models">Create Models<a class="anchor" aria-label="anchor" href="#create-models"></a></h3>
+      
+
+      
     </div><div id="" class="section level2">
       
       
@@ -91,44 +97,96 @@
 
       <dl><dt>
           
-          <code><a href="keras_model.html">keras_model()</a></code> 
-        </dt>
-        <dd>Keras Model</dd>
-      </dl><dl><dt>
-          
           <code><a href="keras_model_sequential.html">keras_model_sequential()</a></code> 
         </dt>
         <dd>Keras Model composed of a linear stack of layers</dd>
       </dl><dl><dt>
           
-          <code><a href="summary.keras.models.model.Model.html">summary(<i>&lt;keras.models.model.Model&gt;</i>)</a></code> <code><a href="summary.keras.models.model.Model.html">format(<i>&lt;keras.models.model.Model&gt;</i>)</a></code> <code><a href="summary.keras.models.model.Model.html">print(<i>&lt;keras.models.model.Model&gt;</i>)</a></code> 
+          <code><a href="keras_model.html">keras_model()</a></code> 
         </dt>
-        <dd>Print a summary of a Keras model</dd>
+        <dd>Keras Model</dd>
       </dl><dl><dt>
+          
+          <code><a href="clone_model.html">clone_model()</a></code> 
+        </dt>
+        <dd>Clone a model instance.</dd>
+      </dl></div><div class="section level2">
+      
+      <h3 id="train-models">Train Models<a class="anchor" aria-label="anchor" href="#train-models"></a></h3>
+      
+
+      
+    </div><div id="" class="section level2">
+      
+      
+      
+
+      <dl><dt>
           
           <code><a href="compile.keras.models.model.Model.html">compile(<i>&lt;keras.models.model.Model&gt;</i>)</a></code> 
         </dt>
-        <dd>Configure a Keras model for training</dd>
+        <dd>Configure a model for training.</dd>
       </dl><dl><dt>
           
           <code><a href="fit.keras.models.model.Model.html">fit(<i>&lt;keras.models.model.Model&gt;</i>)</a></code> 
         </dt>
-        <dd>Train a Keras model</dd>
+        <dd>Train a model for a fixed number of epochs (dataset iterations).</dd>
       </dl><dl><dt>
           
           <code><a href="predict.keras.models.model.Model.html">predict(<i>&lt;keras.models.model.Model&gt;</i>)</a></code> 
         </dt>
-        <dd>Generate predictions from a Keras model</dd>
+        <dd>Generates output predictions for the input samples.</dd>
       </dl><dl><dt>
           
           <code><a href="evaluate.keras.models.model.Model.html">evaluate(<i>&lt;keras.models.model.Model&gt;</i>)</a></code> 
         </dt>
-        <dd>Evaluate a Keras model</dd>
+        <dd>Evaluate a Keras Model</dd>
       </dl><dl><dt>
           
-          <code><a href="train_on_batch.html">train_on_batch()</a></code> <code><a href="train_on_batch.html">test_on_batch()</a></code> 
+          <code><a href="train_on_batch.html">train_on_batch()</a></code> 
         </dt>
-        <dd>Single gradient update or model evaluation over one batch of samples.</dd>
+        <dd>Runs a single gradient update on a single batch of data.</dd>
+      </dl><dl><dt>
+          
+          <code><a href="predict_on_batch.html">predict_on_batch()</a></code> 
+        </dt>
+        <dd>Returns predictions for a single batch of samples.</dd>
+      </dl><dl><dt>
+          
+          <code><a href="test_on_batch.html">test_on_batch()</a></code> 
+        </dt>
+        <dd>Test the model on a single batch of samples.</dd>
+      </dl><dl><dt>
+          
+          <code><a href="freeze_weights.html">freeze_weights()</a></code> <code><a href="freeze_weights.html">unfreeze_weights()</a></code> 
+        </dt>
+        <dd>Freeze and unfreeze weights</dd>
+      </dl></div><div class="section level2">
+      
+      <h3 id="inspect-models">Inspect Models<a class="anchor" aria-label="anchor" href="#inspect-models"></a></h3>
+      
+
+      
+    </div><div id="" class="section level2">
+      
+      
+      
+
+      <dl><dt>
+          
+          <code><a href="summary.keras.models.model.Model.html">summary(<i>&lt;keras.models.model.Model&gt;</i>)</a></code> <code><a href="summary.keras.models.model.Model.html">format(<i>&lt;keras.models.model.Model&gt;</i>)</a></code> <code><a href="summary.keras.models.model.Model.html">print(<i>&lt;keras.models.model.Model&gt;</i>)</a></code> 
+        </dt>
+        <dd>Print a summary of a Keras Model</dd>
+      </dl><dl><dt>
+          
+          <code><a href="get_config.html">get_config()</a></code> <code><a href="get_config.html">from_config()</a></code> 
+        </dt>
+        <dd>Layer/Model configuration</dd>
+      </dl><dl><dt>
+          
+          <code><a href="get_weights.html">get_weights()</a></code> <code><a href="get_weights.html">set_weights()</a></code> 
+        </dt>
+        <dd>Layer/Model weights as R arrays</dd>
       </dl><dl><dt>
           
           <code><a href="get_layer.html">get_layer()</a></code> 
@@ -139,16 +197,87 @@
           <code><a href="pop_layer.html">pop_layer()</a></code> 
         </dt>
         <dd>Remove the last layer in a model</dd>
+      </dl></div><div class="section level2">
+      
+      <h3 id="save-load-models">Save &amp; Load Models<a class="anchor" aria-label="anchor" href="#save-load-models"></a></h3>
+      
+
+      
+    </div><div id="" class="section level2">
+      
+      
+      
+
+      <dl><dt>
+          
+          <code><a href="save_model.html">save_model()</a></code> 
+        </dt>
+        <dd>Saves a model as a <code>.keras</code> file.</dd>
       </dl><dl><dt>
           
-          <code><a href="clone_model.html">clone_model()</a></code> 
+          <code><a href="export_savedmodel.keras.models.model.Model.html">export_savedmodel(<i>&lt;keras.models.model.Model&gt;</i>)</a></code> 
         </dt>
-        <dd>Clone a model instance.</dd>
+        <dd>TF backend only Create a TF SavedModel artifact for inference</dd>
       </dl><dl><dt>
           
-          <code><a href="freeze_weights.html">freeze_weights()</a></code> <code><a href="freeze_weights.html">unfreeze_weights()</a></code> 
+          <code><a href="save_model_weights.html">save_model_weights()</a></code> 
         </dt>
-        <dd>Freeze and unfreeze weights</dd>
+        <dd>Saves all layer weights to a <code>.weights.h5</code> file.</dd>
+      </dl><dl><dt>
+          
+          <code><a href="save_model_config.html">save_model_config()</a></code> <code><a href="save_model_config.html">load_model_config()</a></code> 
+        </dt>
+        <dd>Save Model configuration as JSON</dd>
+      </dl><dl><dt>
+          
+          <code><a href="load_model_weights.html">load_model_weights()</a></code> 
+        </dt>
+        <dd>Load weights from a file saved via <code><a href="../reference/save_model_weights.html">save_model_weights()</a></code>.</dd>
+      </dl><dl><dt>
+          
+          <code><a href="config_enable_unsafe_deserialization.html">config_enable_unsafe_deserialization()</a></code> 
+        </dt>
+        <dd>Disables safe mode globally, allowing deserialization of lambdas.</dd>
+      </dl><dl><dt>
+          
+          <code><a href="deserialize_keras_object.html">deserialize_keras_object()</a></code> 
+        </dt>
+        <dd>Retrieve the object by deserializing the config dict.</dd>
+      </dl><dl><dt>
+          
+          <code><a href="get_custom_objects.html">get_custom_objects()</a></code> 
+        </dt>
+        <dd>Retrieves a live reference to the global list of custom objects (a Python dictionary).</dd>
+      </dl><dl><dt>
+          
+          <code><a href="get_registered_name.html">get_registered_name()</a></code> 
+        </dt>
+        <dd>Returns the name registered to an object within the Keras framework.</dd>
+      </dl><dl><dt>
+          
+          <code><a href="get_registered_object.html">get_registered_object()</a></code> 
+        </dt>
+        <dd>Returns the class associated with <code>name</code> if it is registered with Keras.</dd>
+      </dl><dl><dt>
+          
+          <code><a href="layer_tfsm.html">layer_tfsm()</a></code> 
+        </dt>
+        <dd>Reload a Keras model/layer that was saved via SavedModel / ExportArchive.</dd>
+      </dl><dl><dt>
+          
+          <code><a href="load_model.html">load_model()</a></code> 
+        </dt>
+        <dd>Loads a model saved via <code>model.save()</code>.</dd>
+      </dl><dl><dt>
+          
+          <code><a href="register_keras_serializable.html">register_keras_serializable()</a></code> 
+        </dt>
+        <dd>Registers an object with the Keras serialization framework.</dd>
+      </dl><dl><dt>
+          
+          <code><a href="serialize_keras_object.html">serialize_keras_object()</a></code> 
+        </dt>
+        <dd>Retrieve the config list by serializing the Keras object.</dd>
       </dl></div><div class="section level2">
       <h2 id="layers">Layers<a class="anchor" aria-label="anchor" href="#layers"></a></h2>
       
@@ -864,92 +993,6 @@
         </dt>
         <dd>Create a Keras Layer</dd>
       </dl></div><div class="section level2">
-      <h2 id="model-persistence">Model Persistence<a class="anchor" aria-label="anchor" href="#model-persistence"></a></h2>
-      
-      
-
-      
-    </div><div id="" class="section level2">
-      
-      
-      
-
-      <dl><dt>
-          
-          <code><a href="config_enable_unsafe_deserialization.html">config_enable_unsafe_deserialization()</a></code> 
-        </dt>
-        <dd>Disables safe mode globally, allowing deserialization of lambdas.</dd>
-      </dl><dl><dt>
-          
-          <code><a href="deserialize_keras_object.html">deserialize_keras_object()</a></code> 
-        </dt>
-        <dd>Retrieve the object by deserializing the config dict.</dd>
-      </dl><dl><dt>
-          
-          <code><a href="get_custom_objects.html">get_custom_objects()</a></code> 
-        </dt>
-        <dd>Retrieves a live reference to the global list of custom objects.</dd>
-      </dl><dl><dt>
-          
-          <code><a href="get_registered_name.html">get_registered_name()</a></code> 
-        </dt>
-        <dd>Returns the name registered to an object within the Keras framework.</dd>
-      </dl><dl><dt>
-          
-          <code><a href="get_registered_object.html">get_registered_object()</a></code> 
-        </dt>
-        <dd>Returns the class associated with <code>name</code> if it is registered with Keras.</dd>
-      </dl><dl><dt>
-          
-          <code><a href="layer_tfsm.html">layer_tfsm()</a></code> 
-        </dt>
-        <dd>Reload a Keras model/layer that was saved via SavedModel / ExportArchive.</dd>
-      </dl><dl><dt>
-          
-          <code><a href="load_model.html">load_model()</a></code> 
-        </dt>
-        <dd>Loads a model saved via <code>model.save()</code>.</dd>
-      </dl><dl><dt>
-          
-          <code><a href="register_keras_serializable.html">register_keras_serializable()</a></code> 
-        </dt>
-        <dd>Registers an object with the Keras serialization framework.</dd>
-      </dl><dl><dt>
-          
-          <code><a href="serialize_keras_object.html">serialize_keras_object()</a></code> 
-        </dt>
-        <dd>Retrieve the config list by serializing the Keras object.</dd>
-      </dl><dl><dt>
-          
-          <code><a href="get_weights.html">get_weights()</a></code> <code><a href="get_weights.html">set_weights()</a></code> 
-        </dt>
-        <dd>Layer/Model weights as R arrays</dd>
-      </dl><dl><dt>
-          
-          <code><a href="get_config.html">get_config()</a></code> <code><a href="get_config.html">from_config()</a></code> 
-        </dt>
-        <dd>Layer/Model configuration</dd>
-      </dl><dl><dt>
-          
-          <code><a href="load_model_weights.html">load_model_weights()</a></code> 
-        </dt>
-        <dd>Load weights from a file saved via <code><a href="../reference/save_model_weights.html">save_model_weights()</a></code>.</dd>
-      </dl><dl><dt>
-          
-          <code><a href="save_model_weights.html">save_model_weights()</a></code> 
-        </dt>
-        <dd>Saves all layer weights to a <code>.weights.h5</code> file.</dd>
-      </dl><dl><dt>
-          
-          <code><a href="save_model.html">save_model()</a></code> 
-        </dt>
-        <dd>Saves a model as a <code>.keras</code> file.</dd>
-      </dl><dl><dt>
-          
-          <code><a href="save_model_config.html">save_model_config()</a></code> <code><a href="save_model_config.html">load_model_config()</a></code> 
-        </dt>
-        <dd>Save Model configuration as JSON</dd>
-      </dl></div><div class="section level2">
       <h2 id="datasets">Datasets<a class="anchor" aria-label="anchor" href="#datasets"></a></h2>
       
       
@@ -1206,6 +1249,11 @@
           <code><a href="application_xception.html">application_xception()</a></code> 
         </dt>
         <dd>Instantiates the Xception architecture.</dd>
+      </dl><dl><dt>
+          
+          <code><a href="process_utils.html">application_preprocess_inputs()</a></code> <code><a href="process_utils.html">application_decode_predictions()</a></code> 
+        </dt>
+        <dd>Preprocessing and postprocessing utilities</dd>
       </dl></div><div class="section level2">
       <h2 id="sequence-preprocessing">Sequence Preprocessing<a class="anchor" aria-label="anchor" href="#sequence-preprocessing"></a></h2>
       
@@ -4170,9 +4218,9 @@ training from the state saved.</dd>
         <dd>Bidirectional wrapper for RNNs.</dd>
       </dl><dl><dt>
           
-          <code><a href="keras3-package.html">keras3-package</a></code> <code><a href="keras3-package.html">_PACKAGE</a></code> <code><a href="keras3-package.html">keras-package</a></code> 
+          <code><a href="keras3-package.html">keras3</a></code> <code><a href="keras3-package.html">keras3-package</a></code> <code><a href="keras3-package.html">_PACKAGE</a></code> <code><a href="keras3-package.html">keras-package</a></code> 
         </dt>
-        <dd>R interface to Keras</dd>
+        <dd>keras3: R Interface to 'Keras'</dd>
       </dl><dl><dt>
           
           <code><a href="time_distributed.html">time_distributed()</a></code> 

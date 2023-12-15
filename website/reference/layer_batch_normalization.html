@@ -201,7 +201,7 @@ arguments)</p></li>
 can be disabled by passing <code>scale=FALSE</code> to the constructor.</p></li>
 <li><p><code>beta</code> is a learned offset factor (initialized as 0), which
 can be disabled by passing <code>center=FALSE</code> to the constructor.</p></li>
-</ul><p><strong>During inference</strong> (i.e. when using <code><a href="https://rdrr.io/pkg/tensorflow/man/evaluate.html" class="external-link">evaluate()</a></code> or <code><a href="https://rdrr.io/r/stats/predict.html" class="external-link">predict()</a></code> or when
+</ul><p><strong>During inference</strong> (i.e. when using <code><a href="https://generics.r-lib.org/reference/evaluate.html" class="external-link">evaluate()</a></code> or <code><a href="https://rdrr.io/r/stats/predict.html" class="external-link">predict()</a></code> or when
 calling the layer/model with the argument <code>training=FALSE</code> (which is the
 default), the layer normalizes its output using a moving average of the
 mean and standard deviation of the batches it has seen during training. That

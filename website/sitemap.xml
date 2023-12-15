@@ -3397,6 +3397,9 @@
     <loc>https://keras.posit.co/reference/predict_proba.html</loc>
   </url>
   <url>
+    <loc>https://keras.posit.co/reference/process_utils.html</loc>
+  </url>
+  <url>
     <loc>https://keras.posit.co/reference/random_array.html</loc>
   </url>
   <url>
@@ -3509,6 +3512,9 @@
   </url>
   <url>
     <loc>https://keras.posit.co/reference/summary.keras.models.model.Model.html</loc>
+  </url>
+  <url>
+    <loc>https://keras.posit.co/reference/test_on_batch.html</loc>
   </url>
   <url>
     <loc>https://keras.posit.co/reference/text_dataset_from_directory.html</loc>

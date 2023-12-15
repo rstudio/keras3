@@ -119,7 +119,7 @@ flattening adds an extra channel dimension and output shape is <code>(batch, 1)<
     <h2 id="examples">Examples<a class="anchor" aria-label="anchor" href="#examples"></a></h2>
     <p></p><div class="sourceCode r"><pre><code><span><span class="va">x</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/layer_input.html">layer_input</a></span><span class="op">(</span>shape<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">10</span>, <span class="fl">64</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="va">y</span> <span class="op">&lt;-</span> <span class="va">x</span> <span class="op">|&gt;</span> <span class="fu"><a href="../reference/layer_flatten.html">layer_flatten</a></span><span class="op">(</span><span class="op">)</span></span>
-<span><span class="fu"><a href="https://rdrr.io/pkg/tensorflow/man/shape.html" class="external-link">shape</a></span><span class="op">(</span><span class="va">y</span><span class="op">)</span></span></code></pre><p></p></div>
+<span><span class="fu"><a href="../reference/shape.html">shape</a></span><span class="op">(</span><span class="va">y</span><span class="op">)</span></span></code></pre><p></p></div>
 <p></p><div class="sourceCode"><pre><code><span id="cb1-1"><a href="#cb1-1" tabindex="-1"></a><span class="do">## shape(NA, 640)</span></span></code></pre><p></p></div>
     </div>
     <div class="section level2">

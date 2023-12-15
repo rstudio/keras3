@@ -76,19 +76,41 @@ navbar:
 
 reference:
   - title: "Keras Models"
+
+  - subtitle: "Create Models"
     contents:
-      - keras_model
       - keras_model_sequential
-      - summary.keras.models.model.Model
+      - keras_model
+      - clone_model
+
+  - subtitle: "Train Models"
+    contents:
       - compile.keras.models.model.Model
       - fit.keras.models.model.Model
       - predict.keras.models.model.Model
       - evaluate.keras.models.model.Model
       - train_on_batch
+      - predict_on_batch
+      - test_on_batch
+      - freeze_weights
+
+  - subtitle: "Inspect Models"
+    contents:
+      - summary.keras.models.model.Model
+      - get_config
+      - get_weights
       - get_layer
       - pop_layer
-      - clone_model
-      - freeze_weights
+
+  - subtitle: "Save & Load Models"
+    contents:
+      - save_model
+      - export_savedmodel.keras.models.model.Model
+      - save_model_weights
+      - save_model_config
+      - load_model_weights
+      - has_concept("saving")
+
 
   - title: "Layers"
 
@@ -169,17 +191,6 @@ reference:
       - create_layer_wrapper
       - create_layer
 
-
-  - title: "Model Persistence"
-    #title: "Serialization and Saving"
-    contents:
-      - has_concept("saving")
-      - get_weights
-      - get_config
-      - load_model_weights
-      - save_model_weights
-      - save_model
-      - save_model_config
 
   - title: "Datasets"
     contents:

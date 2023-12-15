@@ -266,7 +266,7 @@ work with per-epoch averages. Thankfully, the framework can do that for
 us: just list any metric you want to reset in the <code>metrics</code>
 property of the model. The model will call <code><a href="../reference/reset_states.html">reset_states()</a></code>
 on any object listed here at the beginning of each <code><a href="https://generics.r-lib.org/reference/fit.html" class="external-link">fit()</a></code>
-epoch or at the beginning of a call to <code><a href="https://rdrr.io/pkg/tensorflow/man/evaluate.html" class="external-link">evaluate()</a></code>.</li>
+epoch or at the beginning of a call to <code><a href="https://generics.r-lib.org/reference/evaluate.html" class="external-link">evaluate()</a></code>.</li>
 </ul>
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">CustomModel</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/new-classes.html">new_model_class</a></span><span class="op">(</span></span>
@@ -439,7 +439,7 @@ like:</p>
 <span><span class="co"># Evaluate with our custom test_step</span></span>
 <span><span class="va">x</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/random_normal.html">random_normal</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1000</span>, <span class="fl">32</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="va">y</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/random_normal.html">random_normal</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1000</span>, <span class="fl">1</span><span class="op">)</span><span class="op">)</span></span>
-<span><span class="va">model</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://rdrr.io/pkg/tensorflow/man/evaluate.html" class="external-link">evaluate</a></span><span class="op">(</span><span class="va">x</span>, <span class="va">y</span><span class="op">)</span></span></code></pre></div>
+<span><span class="va">model</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://generics.r-lib.org/reference/evaluate.html" class="external-link">evaluate</a></span><span class="op">(</span><span class="va">x</span>, <span class="va">y</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">## 32/32 - 0s - 2ms/step - loss: 0.0000e+00 - mae: 1.3947</span></span></code></pre>
 <pre><code><span><span class="co">##            loss compile_metrics</span></span>
 <span><span class="co">##        0.000000        1.394695</span></span></code></pre>

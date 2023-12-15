@@ -228,7 +228,7 @@ iterating over the entire dataset for a given number of
 values and metric values during training:</p>
 <div class="sourceCode" id="cb6"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" tabindex="-1"></a>history.history</span></code></pre></div>
 <p>We evaluate the model on the test data via
-<code><a href="https://rdrr.io/pkg/tensorflow/man/evaluate.html" class="external-link">evaluate()</a></code>:</p>
+<code><a href="https://generics.r-lib.org/reference/evaluate.html" class="external-link">evaluate()</a></code>:</p>
 <div class="sourceCode" id="cb7"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" tabindex="-1"></a><span class="co"># Evaluate the model on the test data using `evaluate`</span></span>
 <span id="cb7-2"><a href="#cb7-2" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Evaluate on test data"</span>)</span>
 <span id="cb7-3"><a href="#cb7-3" tabindex="-1"></a>results <span class="op">=</span> model.evaluate(x_test, y_test, batch_size<span class="op">=</span><span class="dv">128</span>)</span>
@@ -554,7 +554,7 @@ documentation</a>.</p>
 <p><strong>You can use <code>tf.data</code> to train your Keras models
 regardless of the backend you’re using – whether it’s JAX, PyTorch, or
 TensorFlow.</strong> You can pass a <code>Dataset</code> instance
-directly to the methods <code><a href="https://generics.r-lib.org/reference/fit.html" class="external-link">fit()</a></code>, <code><a href="https://rdrr.io/pkg/tensorflow/man/evaluate.html" class="external-link">evaluate()</a></code>, and
+directly to the methods <code><a href="https://generics.r-lib.org/reference/fit.html" class="external-link">fit()</a></code>, <code><a href="https://generics.r-lib.org/reference/evaluate.html" class="external-link">evaluate()</a></code>, and
 <code><a href="https://rdrr.io/r/stats/predict.html" class="external-link">predict()</a></code>:</p>
 <div class="sourceCode" id="cb18"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1" tabindex="-1"></a>model <span class="op">=</span> get_compiled_model()</span>
 <span id="cb18-2"><a href="#cb18-2" tabindex="-1"></a></span>

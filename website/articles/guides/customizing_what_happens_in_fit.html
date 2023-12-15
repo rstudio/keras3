@@ -246,7 +246,7 @@ work with per-epoch averages. Thankfully, the framework can do that for
 us: just list any metric you want to reset in the <code>metrics</code>
 property of the model. The model will call <code><a href="../../reference/reset_states.html">reset_states()</a></code>
 on any object listed here at the beginning of each <code><a href="https://generics.r-lib.org/reference/fit.html" class="external-link">fit()</a></code>
-epoch or at the beginning of a call to <code><a href="https://rdrr.io/pkg/tensorflow/man/evaluate.html" class="external-link">evaluate()</a></code>.</li>
+epoch or at the beginning of a call to <code><a href="https://generics.r-lib.org/reference/evaluate.html" class="external-link">evaluate()</a></code>.</li>
 </ul>
 <div class="sourceCode" id="cb4"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" tabindex="-1"></a><span class="kw">class</span> CustomModel(keras.Model):</span>
 <span id="cb4-2"><a href="#cb4-2" tabindex="-1"></a>    <span class="kw">def</span> <span class="fu">__init__</span>(<span class="va">self</span>, <span class="op">*</span>args, <span class="op">**</span>kwargs):</span>

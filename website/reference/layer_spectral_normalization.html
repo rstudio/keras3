@@ -120,13 +120,13 @@ or an <code>embeddings</code> attribute (<code>Embedding</code> layer).</p></dd>
 <span>  layer <span class="op">=</span> <span class="fu"><a href="../reference/layer_conv_2d.html">layer_conv_2d</a></span><span class="op">(</span>filters <span class="op">=</span> <span class="fl">2</span>, kernel_size <span class="op">=</span> <span class="fl">2</span><span class="op">)</span></span>
 <span><span class="op">)</span></span>
 <span><span class="va">y</span> <span class="op">&lt;-</span> <span class="fu">conv2d</span><span class="op">(</span><span class="va">x</span><span class="op">)</span></span>
-<span><span class="fu"><a href="https://rdrr.io/pkg/tensorflow/man/shape.html" class="external-link">shape</a></span><span class="op">(</span><span class="va">y</span><span class="op">)</span></span></code></pre><p></p></div>
+<span><span class="fu"><a href="../reference/shape.html">shape</a></span><span class="op">(</span><span class="va">y</span><span class="op">)</span></span></code></pre><p></p></div>
 <p></p><div class="sourceCode"><pre><code><span id="cb1-1"><a href="#cb1-1" tabindex="-1"></a><span class="do">## shape(1, 9, 9, 2)</span></span></code></pre><p></p></div>
 <p>Wrap <code>layer_Dense</code>:</p>
 <p></p><div class="sourceCode r"><pre><code><span><span class="va">x</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/random_uniform.html">random_uniform</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">10</span>, <span class="fl">10</span>, <span class="fl">1</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="va">dense</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/layer_spectral_normalization.html">layer_spectral_normalization</a></span><span class="op">(</span>layer <span class="op">=</span> <span class="fu"><a href="../reference/layer_dense.html">layer_dense</a></span><span class="op">(</span>units <span class="op">=</span> <span class="fl">10</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="va">y</span> <span class="op">&lt;-</span> <span class="fu">dense</span><span class="op">(</span><span class="va">x</span><span class="op">)</span></span>
-<span><span class="fu"><a href="https://rdrr.io/pkg/tensorflow/man/shape.html" class="external-link">shape</a></span><span class="op">(</span><span class="va">y</span><span class="op">)</span></span></code></pre><p></p></div>
+<span><span class="fu"><a href="../reference/shape.html">shape</a></span><span class="op">(</span><span class="va">y</span><span class="op">)</span></span></code></pre><p></p></div>
 <p></p><div class="sourceCode"><pre><code><span id="cb1-1"><a href="#cb1-1" tabindex="-1"></a><span class="do">## shape(1, 10, 10, 10)</span></span></code></pre><p></p></div>
     </div>
     <div class="section level2">
