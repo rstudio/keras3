@@ -41,19 +41,6 @@ get_config <- function(object) {
   config
 }
 
-# model$get_config() returns a nested object of list/dicts, but the contract
-# is that the object is serializable to json, which means that once
-# reticulate conversion rules are redone, the config will be guaranteed to be safe
-# to convert to R and back.
-
-# this py_to_r method is so that model$get_config() can return a pure R object.
-# A keras SharedObjectConfig is a keras dictionary
-#' @export
-py_to_r.keras.utils.generic_utils.SharedObjectConfig <- function(x) {
-  import_builtins()$dict(x)
-}
-
-
 #' @rdname get_config
 #' @export
 from_config <- function(config,
