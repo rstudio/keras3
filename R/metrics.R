@@ -153,6 +153,12 @@ custom_metric <- function(name, metric_fn) {
   metric_fn
 }
 
+# can be used w/ activations, regularizers, metrics, loss, anything else
+# where it helps to have a name
+custom_fn <- function(name, fn) {
+  py_func2(fn, TRUE, name)
+}
+
 
 
 #   cat("@inheritParams Metric")
