@@ -539,7 +539,7 @@ on_load_make_as_activation <- function() {
         h
       }))
 
-      function(x) gethash(h, x) %||% .as_activation(x, x_expr)
+      function(x) gethash(h, x) %||% .as_activation(x)
     })
   }
 }
