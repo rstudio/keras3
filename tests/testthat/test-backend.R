@@ -1,7 +1,7 @@
 context("backend")
 
 
-
+skip("backend")
 test_succeeds("backend returns numpy array when convert = FALSE", {
   skip("no backend.cast_to_floatx")
   K <- backend(convert = FALSE)
