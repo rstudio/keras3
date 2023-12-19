@@ -146,7 +146,7 @@ test_succeeds("custom callbacks", {
 
 
 test_succeeds("custom callbacks, new-style", {
-
+  skip("creating R6 classes with convert = FALSE no longer needed to modify logs dict")
   CustomMetric <- R6::R6Class(
     "CustomMetric",
     inherit = keras$callbacks$Callback,
@@ -211,9 +211,11 @@ test_succeeds("custom callbacks, new-new-style", {
 
   hist <- define_compile_and_fit(callbacks = list(cm, cm2))
 
-  expect_is(hist$metrics$my_epoch, "numeric")
+  expect_type(hist$metrics$my_epoch, "integer")
   expect_equal(hist$metrics$my_epoch, 1L)
-  expect_false("my_epoch2" %in% names(hist$metrics))
+  expect_contains(names(hist$metrics), "my_epoch2")
+  expect_identical(hist$metrics$my_epoch,
+                   hist$metrics$my_epoch2)
 
 })
 
@@ -224,9 +226,6 @@ expect_warns_and_out <- function(warns, out) {
 }
 
 test_succeeds("on predict/evaluation callbacks", {
-
-  if (tensorflow::tf_version() <= "2.1")
-    skip("don't work in tf2.1")
 
   CustomCallback <- R6::R6Class(
     "CustomCallback",
