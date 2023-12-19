@@ -621,9 +621,25 @@ function(x, ...) {
 
 
 as_py_name <- function(x) {
+  # sanitize a deparsed R expression into valid python symbol string
   if(is.language(x))
     x <- deparse(x, width.cutoff = 500L)[1]
   x <- make.names(as.character(x))
   x <- gsub(".", "_", x, fixed = TRUE)
   x
+}
+
+
+as_py_function <- function(fn, default_name = "r_func") {
+  name <-
+    attr(fn, "py_function_name", TRUE) %||%
+    attr(fn, "__name__", TRUE) %||%
+    attr(fn, "name", TRUE) %||%
+    default_name
+
+  # TODO: try to generate a pretty name using deparse(substitute(x)) would need
+  # to update capture_args2() to construct calls to transformers so that
+  # substitute will work here.
+  # if(is.null(name)) { name <- as_py_name(deparse1(substitute(x)))}
+  py_func2(x, convert = TRUE, name = name)
 }

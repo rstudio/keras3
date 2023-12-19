@@ -515,3 +515,51 @@ structure(function (x)
     args <- capture_args2(NULL)
     do.call(keras$activations$tanh, args)
 }, py_function_name = "tanh")
+
+
+as_activation <- NULL
+
+on_load_make_as_activation <- function() {
+  if (getRversion() < "4.2") {
+    as_activation <<- .as_activation
+  } else {
+    as_activation <<- local({
+      # make a hashtab to do reverse look ups, converting exported closures like
+      # `activation_elu` to a builtin activation name string "elu". The
+      # motivation is to avoid needlessly popping out to an R closure if we're
+      # using a bultin. We have to do this at runtime since the hastab
+      # needs the closure object address.
+      delayedAssign("h", local({
+        nms <- grep("^activation_", getNamespaceExports("keras3"), value = TRUE)
+        h <- hashtab("address", length(nms))
+        ns <- asNamespace("keras3")
+        for (name in nms)
+          sethash(h, getExportedValue(ns, name),
+                  substr(name, 12L, 999L))
+        h
+      }))
+
+      function(x) gethash(h, x) %||% .as_activation(x, x_expr)
+    })
+  }
+}
+
+.as_activation <- function(x) {
+  if (is.null(x) || inherits(x, "python.builtin.object"))
+    return(x)
+
+  name <- attr(x, "py_function_name", TRUE)
+  if (is_string(name) && identical(x, get0(
+    paste0("activation_", name),
+    envir = environment(sys.function()),
+    inherits = FALSE
+  )))
+    # it's a builtin; the name string will be resolved upstream via
+    # keras.activations.get(name)
+    return(name)
+
+  if (is.function(x))
+    return(as_py_function(x, default_name = "custom_activation"))
+  x
+}
+

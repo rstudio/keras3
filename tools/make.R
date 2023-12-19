@@ -67,6 +67,14 @@ fs::dir_walk("man-src", type = "directory", recurse = TRUE,
 # #'  @tether application.foo,
 # #'   application.foo.preprocess_input,
 # #'   application.foo.decode_predictions,
+
+# TODO: activations - do we need `py_function_name` attr
+#      (in other places? or here still?). Maybe
+#      we should consistently attach a `endpoint` attr?
+#
+# TODO: use `as_activation` attr in all layers.
+#
+#
 #
 # TODO: WORKON_HOME should reflect an abolute path, not relative path, incase
 #      WORKON_HOME=~/..
