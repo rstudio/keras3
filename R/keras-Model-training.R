@@ -279,18 +279,8 @@ function (object, x = NULL, y = NULL, ..., batch_size = NULL,
 #' a length-one `tuple()`, effectively treating everything as `x`. When
 #' yielding named lists, they should still adhere to the top-level tuple
 #' structure,
-#' e.g. `({"x0": x0, "x1": x1}, y)`. Keras will not attempt to separate
+#' e.g. `tuple(list(x0 = x0, x = x1), y)`. Keras will not attempt to separate
 #' features, targets, and weights from the keys of a single dict.
-#' A notable unsupported data type is the `namedtuple`. The reason is
-#' that it behaves like both an ordered datatype (tuple) and a mapping
-#' datatype (dict). So given a namedtuple of the form:
-#' `namedtuple("example_tuple", ["y", "x"])`
-#' it is ambiguous whether to reverse the order of the elements when
-#' interpreting the value. Even worse is a tuple of the form:
-#' `namedtuple("other_tuple", ["x", "y", "z"])`
-#' where it is unclear if the tuple was intended to be unpacked
-#' into `x`, `y`, and `sample_weight` or passed through
-#' as a single element to `x`.
 #'
 #' @returns
 #' A `History` object. Its `History.history` attribute is
@@ -500,6 +490,7 @@ function(object,
             x = normalize_input_data,
             y =  normalize_input_data,
             sample_weight = normalize_input_data,
+            validation_data = normalize_input_data,
 
             batch_size = as_integer,
             validation_batch_size = as_integer,
@@ -507,6 +498,7 @@ function(object,
             initial_epoch = as_index,
             steps_per_epoch = as_integer,
             validation_freq = as_integer,
+            validation_steps = as_integer,
             sample_weight = as_array,
             class_weight = as_class_weight,
             verbose = as_model_verbose_arg
@@ -515,7 +507,10 @@ function(object,
     )
 
     if (identical(view_metrics, "auto"))
-      view_metrics <- resolve_view_metrics(args$verbose, args$epochs, object$metrics)
+      view_metrics <- resolve_view_metrics(
+        args$verbose %||% as_model_verbose_arg(verbose),
+        args$epochs %||% epochs,
+        object$metrics)
 
     args$callbacks <- normalize_callbacks_with_metrics(
       view_metrics,
@@ -920,6 +915,11 @@ with_rich_config <- function(expr) {
 # ---- internal utils ----
 
 
+py_generator <- function(fn, completed = NULL, prefetch = 0L, convert = FALSE) {
+  iterator2generator <- py_eval("lambda iterator: (yield from iterator)",
+                                convert = convert)
+  py_call(iterator2generator, py_iterator(fn, completed, prefetch))
+}
 
 
 as_data_generator <- function(fn, dtype = NULL) {
@@ -929,35 +929,10 @@ as_data_generator <- function(fn, dtype = NULL) {
 
   py_generator(function() {
     x <- keras_array(fn(), dtype = dtype)
-    if(is.list(x))
-      tuple(x)
+    if (is.null(x))
+      NULL
     else
-      x
+      tuple(x)
   }, completed = NULL, prefetch = 1L)
 
-#   py_generator <- function(x, dtype) {
-#     iterator <- reticulate::py_iterator(function() {
-#       elem <- py_iterator(x())
-#
-#       if(!is.list(elem))
-#         elem <- list(elem)
-#       # deals with the case where the generator is used for prediction and only
-#       # yields x's values.
-#       # if (length(elem) == 1)
-#       #   elem[[2]] <- list()
-#
-#       reticulate::tuple(elem)
-#     }, prefetch = 1L)
-#
-#     tools$generator$iterator_to_generator(iterator)
-#   }
-
-}
-
-
-
-py_generator <- function(fn, completed = NULL, prefetch = 0L) {
-  py_eval("lambda iterator: (yield from iterator)")(
-    py_iterator(fn, completed, prefetch = 1L)
-  )
 }
