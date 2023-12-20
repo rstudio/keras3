@@ -302,15 +302,20 @@ function (object, name = NULL, package = NULL, clear = FALSE)
   }
   object_in <- object
 
-  # maybe unwrap `object` to get the pyobj, resolve `name` if needed
-  if (inherits(object, "keras_layer_wrapper"))
-    object <- environment(object)$Layer
-  else if (inherits(object, "R6ClassGenerator"))
+  if (inherits(object, "R6ClassGenerator"))
     object <- r_to_py.R6ClassGenerator(object)
+
+  # maybe unwrap `object` from a Layer() wrapper, resolve `name` if needed
+  if (!inherits(object, "python.builtin.object"))
+    if (identical(parent.env(environment()), parent.env(environment(object))))
+      if (inherits(Layer <- environment(object)$Layer, "python.builtin.object"))
+        object <- Layer
 
   name <- name %||%
     as_r_value(py_get_attr(object, "__name__", TRUE)) %||%
     attr(object, "py_function_name", TRUE) %||%
+    attr(object, "__name__", TRUE) %||%
+    attr(object, "name", TRUE) %||%
     deparse1(substitute(object))
 
   if (!inherits(object, "python.builtin.object") &&
