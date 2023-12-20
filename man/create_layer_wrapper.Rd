@@ -14,8 +14,7 @@ create_layer_wrapper(Layer, modifiers = NULL, convert = TRUE)
 arguments before they are passed on to the class constructor. (e.g.,
 \code{list(units = as.integer)})}
 
-\item{convert}{Boolean, whether the Python class and its methods should by
-default convert python objects to R objects.
+\item{convert}{ignored.
 
 See guide 'making_new_layers_and_models_via_subclassing.Rmd' for example usage.}
 }

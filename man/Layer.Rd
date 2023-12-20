@@ -12,9 +12,10 @@ Layer(
   build = NULL,
   get_config = NULL,
   ...,
-  .private = list(),
-  .inherit = keras$layers$Layer,
-  .parent_env = parent.frame()
+  public = list(),
+  private = list(),
+  inherit = keras$layers$Layer,
+  parent_env = parent.frame()
 )
 
 new_layer_class(
@@ -32,9 +33,12 @@ new_layer_class(
 \item{initialize, call, build, get_config}{Recommended methods to implement. See
 description section.}
 
-\item{...}{Additional methods or public members of the custom class.}
+\item{..., public}{Additional methods or public members of the custom class.
+Recommended methods \code{initialize}, \code{call} can optionally be
+provided as elements of \code{public}, and will take precedence over the value
+supplied to the argument.}
 
-\item{.private}{Named list of R objects (typically, functions) to include in
+\item{private}{Named list of R objects (typically, functions) to include in
 instance private environments. \code{private} will be a symbol in scope in all
 class methods, resolving to an R environment populated with the list
 provided. Each instance will have it's own \code{private} environment. All
@@ -42,9 +46,9 @@ methods (functions) in \code{private} will have in scope \code{self} and \verb{_
 symbols. Any objects in \code{private} will be invisible from the Keras
 framework and the Python runtime.}
 
-\item{.inherit}{What the new layer will subclass. By default, the base keras \code{Layer} class.}
+\item{inherit}{What the new layer will subclass. By default, the base keras \code{Layer} class.}
 
-\item{.parent_env}{The environment that all class methods will have as a grandparent.}
+\item{parent_env}{The R environment that all class methods will have as a grandparent.}
 }
 \description{
 A layer is a callable object that takes as input one or more tensors and

@@ -519,16 +519,19 @@
 #' @param classname String, the name of the custom class. (Conventionally, CamelCase).
 #' @param initialize,call,build,get_config Recommended methods to implement. See
 #'   description section.
-#' @param ... Additional methods or public members of the custom class.
-#' @param .private Named list of R objects (typically, functions) to include in
+#' @param ...,public Additional methods or public members of the custom class.
+#'   Recommended methods `initialize`, `call` can optionally be
+#'   provided as elements of `public`, and will take precedence over the value
+#'   supplied to the argument.
+#' @param private Named list of R objects (typically, functions) to include in
 #'   instance private environments. `private` will be a symbol in scope in all
 #'   class methods, resolving to an R environment populated with the list
 #'   provided. Each instance will have it's own `private` environment. All
 #'   methods (functions) in `private` will have in scope `self` and `__class__`
 #'   symbols. Any objects in `private` will be invisible from the Keras
 #'   framework and the Python runtime.
-#' @param .parent_env The environment that all class methods will have as a grandparent.
-#' @param .inherit What the new layer will subclass. By default, the base keras `Layer` class.
+#' @param parent_env The R environment that all class methods will have as a grandparent.
+#' @param inherit What the new layer will subclass. By default, the base keras `Layer` class.
 #'
 #' @tether keras.layers.Layer
 #' @export
@@ -543,25 +546,42 @@ function(classname,
          build = NULL,
          get_config = NULL,
          ...,
-         .private = list(),
-         .inherit = keras$layers$Layer,
-         .parent_env = parent.frame()) {
+         public = list(),
+         private = list(),
+         inherit = keras$layers$Layer,
+         parent_env = parent.frame()) {
 
-  members <- capture_args2(
-    list(from_config = function(x) decorate_method(x, "classmethod")),
-    ignore = c("classname", ".private", ".parent_env", ".inherit")
-  )
-  members <- drop_null_defaults(members)
+  members <- modifyList(
+    list(...), named_list(initialize, call, build, get_config),
+    keep.null = FALSE)
+
+  members <- modifyList(members, public, keep.null = TRUE)
+
+  members <- modify_intersection(members, list(
+    from_config = function(x) decorate_method(x, "classmethod")
+  ))
+
+  inherit <- as_Layer(inherit)
 
   cls <- new_py_type(
     classname = classname,
     members = members,
-    inherit = .inherit,
-    parent_env = .parent_env,
-    private = .private
+    inherit = inherit,
+    parent_env = parent_env,
+    private = private
   )
 
-  create_layer_wrapper(cls)
+  modifiers <- modifyList(
+    drop_nulls(lapply(formals(cls),
+        function(arg_default) if (is.integer(arg_default)) quote(as_integer))),
+    alist(
+      input_shape = shape,
+      batch_input_shape = shape,
+      batch_size = as_integer,
+      activity_regularizer = as_regularizer)
+  )
+
+  create_layer_wrapper(cls, modifiers)
 }
 
 #' @export
@@ -569,7 +589,6 @@ function(classname,
 new_layer_class <- Layer
 
 # ' @param .composing Bare Keras Layers (`layer_*` functions) conventionally have `object` as the first argument, which allows users to instantiate (`initialize`) and `call` one motion.
-
 
 
 # This is used for ALL layers (custom, and builtin)
@@ -583,3 +602,59 @@ py_to_r_wrapper.keras.layers.layer.Layer <- function(x) {
       compose_layer(object, x, ...)
   }
 }
+
+# used to resolve `inherit` arg in Layer()
+as_Layer <- function(x) {
+
+  if(is.null(x) || inherits(x, "python.builtin.type"))
+    return(x)
+
+  if(identical(environment(x), parent.env(environment()))) {
+    # it's a package exported layer wrapper, like layer_dense()
+    Layer_expr <- NULL
+    find_layer_call <- function(x) {
+      for(el in as.list(x)) {
+        if(!is.call(el)) return()
+        if(identical(el[[1L]], quote(create_layer))) {
+          Layer_expr <<- el[[2L]]
+          return()
+        }
+        find_layer_call(el)
+      }
+    }
+    find_layer_call(x)
+    return(Layer_expr)
+  }
+
+  py_issubclass <- import_builtins()$issubclass
+
+  if (inherits(x, "R6ClassGenerator"))
+    x <- r_to_py(x, TRUE)
+
+  is_Layer <- function(x) {
+    inherits(x, "python.builtin.type") &&
+      py_issubclass(x, keras$layers$Layer)
+  }
+
+  # unwrap wrapper from create_layer_wrapper()
+  if(!is_Layer(x))
+    if(is_Layer(Layer <- environment(x)$Layer))
+      return(Layer)
+
+  # otherwise pass-through (and probably error)
+  x
+}
+
+
+
+#' @export
+r_to_py.keras_layer_wrapper <- function(x, convert = FALSE) {
+  layer <- attr(x, "Layer", TRUE)
+  if (!inherits(layer, "python.builtin.type"))
+    layer <- r_to_py(layer, convert)
+  layer
+}
+
+
+# TODO: unwrap r pkg exported wrappers
+as_regularizer <- identity

@@ -175,8 +175,7 @@ py_formals <- function(py_obj) {
 #' @param modifiers A named list of functions to modify to user-supplied
 #'   arguments before they are passed on to the class constructor. (e.g.,
 #'   `list(units = as.integer)`)
-#' @param convert Boolean, whether the Python class and its methods should by
-#'   default convert python objects to R objects.
+#' @param convert ignored.
 #'
 #' See guide 'making_new_layers_and_models_via_subclassing.Rmd' for example usage.
 #'
@@ -195,66 +194,18 @@ py_formals <- function(py_obj) {
 #' @importFrom rlang %||%
 create_layer_wrapper <- function(Layer, modifiers = NULL, convert = TRUE) {
 
-  force(Layer)
-  modifiers <- utils::modifyList(
-    list(
-      # include helpers for standard layer args by default,
-      # but leave an escape hatch allowing users to override/opt-out.
-      input_shape = as_tf_shape,
-      batch_input_shape = as_tf_shape,
-      batch_size = as.integer
-    ),
-    as.list(modifiers)
+  if(!isTRUE(convert))
+    warning("convert argument is ignored")
+
+  as.function.default(
+    c(alist(object = ), formals(Layer),
+      bquote({
+        args <- capture_args2(.(modifiers), ignore = "object")
+        create_layer(Layer, object, args)
+      })),
+    envir = list2env(list(Layer = Layer),
+                     parent = parent.env(environment()))
+
   )
 
-  wrapper <- function(object) {
-    args <- capture_args(match.call(), modifiers, ignore = "object")
-    create_layer(Layer, object, args)
-  }
-
-  formals(wrapper) <- local({
-
-    if(inherits(Layer, "py_R6ClassGenerator"))
-      Layer <- attr(Layer, "r6_class")
-
-    if (inherits(Layer, "python.builtin.type")) {
-      f <- py_formals(Layer)
-    } else if (inherits(Layer, "R6ClassGenerator")) {
-      m <- Layer$public_methods
-      init <- m$initialize %||% m$`__init__` %||% function(){}
-      f <- formals(init)
-    } else
-      stop('Unrecognized type passed `create_layer_wrapper()`.',
-           ' class() must be an "R6ClassGenerator" or a "python.builtin.type"')
-    f$self <- NULL
-    c(formals(wrapper), f)
-  })
-
-  class(wrapper) <- c("keras_layer_wrapper", "function")
-  attr(wrapper, "Layer") <- Layer
-
-  # create_layer() will call r_to_py() as needed, but we create a promise here
-  # to avoid creating the class constructor from scratch every time a class
-  # instance is created.
-  if (!inherits(Layer, "python.builtin.type"))
-    delayedAssign("Layer", r_to_py(attr(wrapper, "Layer", TRUE), convert))
-
-  wrapper
-}
-
-
-#' @export
-r_to_py.keras_layer_wrapper <- function(x, convert = FALSE) {
-  layer <- attr(x, "Layer", TRUE)
-  if (!inherits(layer, "python.builtin.type"))
-    layer <- r_to_py(layer, convert)
-  layer
-}
-
-
-as_tf_shape <- function (x) {
-  if (inherits(x, "tensorflow.python.framework.tensor_shape.TensorShape"))
-    x
-  else
-    tensorflow::shape(dims = x)
 }

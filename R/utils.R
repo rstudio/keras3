@@ -647,3 +647,11 @@ as_py_function <- function(fn, default_name = "r_func") {
   # if(is.null(name)) { name <- as_py_name(deparse1(substitute(x)))}
   py_func2(x, convert = TRUE, name = name)
 }
+
+
+modify_intersection <- function(x, modifiers) {
+  for (name in intersect(names(x), names(modifiers))) {
+    x[[name]] <- modifiers[[name]](x[[name]])
+  }
+  x
+}

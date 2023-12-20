@@ -67,36 +67,43 @@ function(classname,
       new_get_private(private, shared_mask_env = mask_env)
   }
 
-  super <- eval(envir = mask_env, quote(function() {
-    # for some reason, active bindings have the global env as the
-    # parent.frame(), so can't just call `parent.frame()$self`. Also, `super`
-    # might be being accessed from a locally user defined closure. Scan
-    # backwards until we find a frame that's the eval env of a R function thats
-    # a class method (i.e., a frame that has the mask_env as a parent), then we
-    # can expect to find `self` there.
-    n <- -1L
-    mask_env <- parent.env(environment())
-    while (!identical(mask_env, parent.env(frame <- sys.frame(n))))
-      n <- n - 1L
-
-    self <- frame[["self"]] # can be NULL for classmethods or staticmethods
-    convert <- get("convert", envir = as.environment(self))
-    py_super <- reticulate::import_builtins(convert)$super
-    reticulate::py_call(py_super, `__class__`, self)
+  eval(envir = mask_env, quote({
+    super <- function(
+      type = `__class__`,
+      object_or_type = base::get("self", envir = base::parent.frame()))
+      {
+        convert <- base::get("convert", envir = base::as.environment(object_or_type))
+        py_builtins <- reticulate::import_builtins(convert)
+        reticulate::py_call(py_builtins$super, type, object_or_type)
+      }
+    class(super) <- "python_builtin_super_getter"
   }))
-  makeActiveBinding(quote(super), super, mask_env)
 
-  # locally scope S3 methods for nice access like `super$initialize()`
-  mask_env$`$.python.builtin.super`  <- extract2.python.builtin.super
-  mask_env$`[[.python.builtin.super` <- extract2.python.builtin.super
 
   py_class
 }
 
-# roxygen wants this exported if it's named `$.python.builtin.super`
-`extract2.python.builtin.super` <- function(x, name) {
+# S3 methods for nice access from class methods like
+# - super$initialize()
+# - super()$initialize()
+# - super(Classname, self)$initialize()
+#' @export
+`$.python_builtin_super_getter` <- function(x, name) {
+  super <- do.call(x, list(), envir = parent.frame()) # get (call) super()
   name <- switch(name, initialize = "__init__", finalize = "__del__", name)
-  NextMethod()
+  out <- py_get_attr(super, name)
+  convert <- get0("convert", as.environment(out), inherits = FALSE,
+                  ifnotfound = TRUE)
+  if (convert) py_to_r(out) else out
+}
+
+#' @export
+`[[.python_builtin_super_getter` <- `$.python_builtin_super_getter`
+
+#' @export
+.DollarNames.python_builtin_super_getter <- function(x, pattern) {
+  super <- do.call(x, list(), envir = parent.frame())
+  .DollarNames(super, pattern)
 }
 
 
