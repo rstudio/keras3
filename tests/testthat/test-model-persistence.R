@@ -36,25 +36,25 @@ test_succeeds("model with custom loss and metrics can be saved and loaded", {
     metrics = metric_mean_pred
   )
 
-  tmp <- tempfile("model", fileext = ".hdf5")
-  skip("save_model_hdf5")
-  save_model_hdf5(model, tmp)
-  model <- load_model_hdf5(tmp, custom_objects = c(mean_pred = metric_mean_pred,
-                                                   custom_loss = custom_loss))
-
-  # https://github.com/tensorflow/tensorflow/issues/45903#issuecomment-804973541
-  # broken in tf 2.4 and 2.5, fixed in nightly already
-  if (tf_version() == "2.5")
-    model$compile(optimizer=model$optimizer,
-                  loss = custom_loss,
-                  metrics = metric_mean_pred)
+  tmp <- tempfile("model", fileext = ".keras")
+  save_model(model, tmp)
+  restored_model <- load_model(tmp, custom_objects = c(mean_pred = metric_mean_pred,
+                                              custom_loss = custom_loss))
 
   # generate dummy training data
   data <- matrix(rexp(1000*784), nrow = 1000, ncol = 784)
   labels <- matrix(round(runif(1000*10, min = 0, max = 9)), nrow = 1000, ncol = 10)
 
+  expect_equal(
+    model |> predict(data, verbose = 0),
+    restored_model |> predict(data, verbose = 0)
+  )
+
 
   model %>% fit(data, labels, epochs = 2, verbose = 0)
+  expect_no_error({
+    restored_model %>% fit(data, labels, epochs = 2, verbose = 0)
+  })
 
 })
 
