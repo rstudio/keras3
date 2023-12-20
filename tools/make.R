@@ -76,7 +76,9 @@ fs::dir_walk("man-src", type = "directory", recurse = TRUE,
 #
 # TODO: use `as_activation` attr in all layers.
 #
-#
+# TODO: `backend()` used to have a `convert=FALSE` option, and all k_* would
+#       return numpy arrays. We should check preserve np_array convert status in all
+#       op_* functions, and return numpy arrays if we received a numpy array.
 #
 # TODO: WORKON_HOME should reflect an abolute path, not relative path, incase
 #      WORKON_HOME=~/..
@@ -88,7 +90,7 @@ fs::dir_walk("man-src", type = "directory", recurse = TRUE,
 #
 # TODO: fit/predict/eval/fit_on_batch... coerce `x` R arrays to float32? model input$dtype?
 #
-#
+# TODO: what happened to is_keras_tensor() ??
 # TODO: Model.get_compile_config() / Model.get_build_config() ?
 #       Model.get_metrics_result() / Model.reset_metrics() /
 #       Model.metrics / Model.metrics_names ?

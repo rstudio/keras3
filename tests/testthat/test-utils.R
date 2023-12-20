@@ -44,7 +44,7 @@ test_call_succeeds("with_custom_object_scope", {
 
 
   metric_mean_pred <- custom_metric("mean_pred", function(y_true, y_pred) {
-    k_mean(y_pred)
+    op_mean(y_pred)
   })
 
   with_custom_object_scope(c(mean_pred = metric_mean_pred), {

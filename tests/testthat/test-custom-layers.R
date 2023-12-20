@@ -30,7 +30,7 @@ CustomLayer <- R6::R6Class("CustomLayer",
 
     call = function(x, mask = NULL) {
       self$add_loss(list(k_constant(5)))
-      k_dot(x, self$kernel)
+      op_dot(x, self$kernel)
     },
 
     compute_output_shape = function(input_shape) {
@@ -86,7 +86,7 @@ test_succeeds("Custom layer with time distributed layer", {
       },
 
       call = function(x, mask = NULL) {
-        k_dot(x, self$kernel)
+        op_dot(x, self$kernel)
       },
 
       compute_output_shape = function(input_shape) {
@@ -139,7 +139,7 @@ test_succeeds("R6 Custom layers can inherit from a python type", {
 
       call = function(x, mask = NULL) {
         self$add_loss(list(k_constant(5)))
-        k_dot(x, self$kernel)
+        op_dot(x, self$kernel)
       },
 
       compute_output_shape = function(input_shape) {

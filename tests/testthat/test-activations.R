@@ -12,7 +12,7 @@ test_activation <- function(name, required_version = NULL, required_tf_version=t
         layer_dense(32) %>%
         layer_activation(activation = activation_fn)
     })
-    tensor <- k_constant(matrix(runif(100), nrow = 10, ncol = 10), shape = c(10, 10))
+    tensor <- op_array(matrix(runif(100), nrow = 10, ncol = 10))
     activation_fn(tensor)
   })
 }

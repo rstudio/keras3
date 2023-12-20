@@ -21,7 +21,8 @@ test_constraint("constraint_unitnorm")
 test_succeeds("R custom constraints", {
 
   nonneg_constraint <- function(w) {
-    w * k_cast(k_greater_equal(w, 0), k_floatx())
+    # >= dispatches to op_greater_equal()
+    w * op_cast(w >= 0, config_floatx())
   }
 
   CustomNonNegConstraint <- R6::R6Class(

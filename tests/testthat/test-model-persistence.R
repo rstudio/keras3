@@ -23,7 +23,7 @@ test_succeeds("model with custom loss and metrics can be saved and loaded", {
   model <- define_model()
 
   metric_mean_pred <- custom_metric("mean_pred", function(y_true, y_pred) {
-    k_mean(y_pred)
+    op_mean(y_pred)
   })
 
   custom_loss <- function(y_pred, y_true) {
@@ -98,7 +98,7 @@ test_succeeds("model load with unnamed custom_objects", {
 
 
   metric_mean_pred <- custom_metric("mean_pred", function(y_true, y_pred) {
-    k_mean(y_pred)
+    op_mean(y_pred)
   })
 
   custom_loss <- function(y_pred, y_true) {

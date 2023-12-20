@@ -120,7 +120,6 @@ test_succeeds("Can use self$add_weight", {
 
 test_succeeds("Can inherit from an R custom layer", {
 
-  skip_if_not_tensorflow_version("2.0")
 
   layer_base <- Layer(
     classname = "base",
@@ -199,8 +198,7 @@ test_succeeds("create_layer_wrapper", {
   layer_sampler <- new_layer_class(
     classname = "Sampler",
     call = function(z_mean, z_log_var) {
-      # epsilon <-  k_random_normal(shape = k_shape(z_mean))
-      epsilon <-  random_normal(shape = k_shape(z_mean))
+      epsilon <-  random_normal(shape = shape(z_mean))
       z_mean + exp(0.5 * z_log_var) * epsilon
     }
   )
