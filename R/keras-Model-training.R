@@ -238,7 +238,7 @@ function (object, optimizer = "rmsprop", loss = NULL, metrics = NULL,
 #'
 #' @param object Keras model object
 #'
-#' @exportS3Method generics::evaluate
+#' @export
 #' @tether keras.Model.evaluate
 #' @family model training
 #' @seealso
@@ -259,9 +259,6 @@ function (object, x = NULL, y = NULL, ..., batch_size = NULL,
     args[["return_dict"]] <- TRUE
     do.call(object$evaluate, args)
 }
-
-#' @exportS3Method tensorflow::evaluate
-evaluate.keras.models.model.Model <- evaluate.keras.models.model.Model
 
 
 # ---- fit ----

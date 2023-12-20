@@ -355,7 +355,8 @@ clear_registered_custom_objects <- function() {
 #' model |> tensorflow::export_savedmodel("path/to/location")
 #'
 #' # Later, in a different process / environment...
-#' reloaded_artifact <- tensorflow::tf$saved_model$load("path/to/location")
+#' library(tensorflow)
+#' reloaded_artifact <- tf$saved_model$load("path/to/location")
 #' predictions <- reloaded_artifact$serve(input_data)
 #'
 #' # see tfdeploy::serve_savedmodel() for serving a model over a local web api.

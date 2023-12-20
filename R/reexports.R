@@ -102,6 +102,16 @@ generics::fit
 #' @export
 generics::compile
 
-#' @importFrom generics evaluate
+# ' @importFrom generics evaluate
+# ' @export
+# generics::evaluate
+## generics::evaluate() has a different signature from tensorflow::evaluate()
+## evaluate(x, ...) vs evaluate(object, ...)
+## We obviously can't dispatch on `x` in the evaluate() method keras uses, since
+## thats a named argument for the dataset. Meaning we can't use
+## generics::evaluate(). To drop the tensorflow dep, Seems like we'll have to
+## eventually export a `keras3::evaluate()` generic.
+
+#' @importFrom tensorflow evaluate
 #' @export
-generics::evaluate
+tensorflow::evaluate
