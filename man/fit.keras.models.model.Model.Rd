@@ -205,18 +205,8 @@ Any other type provided will be wrapped in
 a length-one \code{tuple()}, effectively treating everything as \code{x}. When
 yielding named lists, they should still adhere to the top-level tuple
 structure,
-e.g. \verb{(\{"x0": x0, "x1": x1\}, y)}. Keras will not attempt to separate
+e.g. \code{tuple(list(x0 = x0, x = x1), y)}. Keras will not attempt to separate
 features, targets, and weights from the keys of a single dict.
-A notable unsupported data type is the \code{namedtuple}. The reason is
-that it behaves like both an ordered datatype (tuple) and a mapping
-datatype (dict). So given a namedtuple of the form:
-\verb{namedtuple("example_tuple", ["y", "x"])}
-it is ambiguous whether to reverse the order of the elements when
-interpreting the value. Even worse is a tuple of the form:
-\verb{namedtuple("other_tuple", ["x", "y", "z"])}
-where it is unclear if the tuple was intended to be unpacked
-into \code{x}, \code{y}, and \code{sample_weight} or passed through
-as a single element to \code{x}.
 }
 \seealso{
 \itemize{
