@@ -655,3 +655,11 @@ modify_intersection <- function(x, modifiers) {
   }
   x
 }
+
+is_r_function <- function(x) {
+  if (inherits(x, "python.builtin.object"))
+    return(FALSE)
+  is.function(x)
+}
+
+
