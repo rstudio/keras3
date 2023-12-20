@@ -109,7 +109,6 @@ test_succeeds("R function can be used as custom generator", {
 
   # Train the model, iterating on the data in batches of 32 samples
 
-  expect_warning_if(tensorflow::tf_version() >= "2.1", {
     model %>%
       fit(sampling_generator(X_train, Y_train, batch_size = 32),
           steps_per_epoch = 10, epochs = 2, verbose = 1,
@@ -117,14 +116,13 @@ test_succeeds("R function can be used as custom generator", {
 
     # Evaluate the model
     model %>%
-      evaluate_generator(sampling_generator(X_test, Y_test, batch_size = 32),
+      evaluate(sampling_generator(X_test, Y_test, batch_size = 32),
                          steps = 10)
 
     # generate predictions
     model %>%
-      predict_generator(sampling_generator(X_test, batch_size = 32),
+      predict(sampling_generator(X_test, batch_size = 32),
                         steps = 10)
-  })
 
 
 })
@@ -151,11 +149,9 @@ test_succeeds("R function can be used as custom generator with multiple inputs",
   # and tree.map_structure() / tf.next.flatten() are picky too.
 
   model %>% compile(loss = "mse", optimizer = "sgd")
-  expect_warning_if(tensorflow::tf_version() > "2.1", {
-    model %>% fit_generator(generator, steps_per_epoch = 10,
-                            validation_data = generator, validation_steps = 2,
-                            verbose = 1)
-  })
+  model %>% fit(generator, steps_per_epoch = 10,
+                validation_data = generator, validation_steps = 2,
+                verbose = 1)
 
 })
 
@@ -186,12 +182,10 @@ test_succeeds("Fixed validation_data instead of generator with fit_generator", {
 
   model %>% compile(loss = "mse", optimizer = "sgd")
 
-  expect_warning_if(tensorflow::tf_version() >= "2.1", {
-    model %>% fit_generator(
-      generator, steps_per_epoch = 2,
-      validation_data = list(list(1, 2), 3),
-      verbose = 0)
-  })
+  model %>% fit(
+    generator, steps_per_epoch = 2,
+    validation_data = list(list(1, 2), 3),
+    verbose = 0)
 
 })
 
