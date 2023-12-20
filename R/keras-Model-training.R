@@ -127,18 +127,24 @@ function (object, optimizer = "rmsprop", loss = NULL, metrics = NULL,
 
     args <- capture_args2(list(
         steps_per_execution = as_integer,
-        loss = function(x) {
-            if(is.null(x) || is_string(x)) return(x)
+        loss = function(loss) {
+            if(is.null(loss) || is_string(loss)) return(loss)
             if(inherits(loss, "python.builtin.type")) # Loss()
-                loss <- loss()
+              return(loss())
+            if(is_r_function(loss)) {
+              return(py_func2(loss, TRUE, name = "custom_loss"))
+            }
+            # TODO: as_loss(), guardrail too strict, disabled for now
             # this guardrail is here to make sure that an anonymous R function
             # doesn't passed through - all losses must have a meaningful name.
-            if(!inherits(loss, "python.builtin.object"))
-                stop(trim("`loss must one of:
-                       - a string,
-                       - a `Loss` instance, as returned by calling one of
-                         the loss_* family of functions, or
-                       - a custom Loss, as defined Loss() or custom_loss()"))
+            # if(!inherits(loss, "python.builtin.object"))
+            #     stop(trim("`loss must one of:
+            #            - a string,
+            #            - a `Loss` instance, as returned by calling one of
+            #              the loss_* family of functions, or
+            #            - a custom Loss, as defined Loss() or custom_loss()"),
+            #          call. = FALSE)
+            loss
         },
         metrics = function(x) {
             if(is.character(x)) as.list(x)
