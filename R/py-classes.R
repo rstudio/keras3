@@ -113,11 +113,11 @@ r_to_py.R6ClassGenerator <- function(x, convert = TRUE) {
   new_py_type(
     classname = x$classname,
     inherit = x$get_inherit(),
-    members = c(
-      x$public_methods,
-      lapply(x$active, active_property)
-    ),
-    private = x$private,
+    members = c(x$public_fields,
+                x$public_methods,
+                lapply(x$active, active_property)),
+    private = c(x$private_fields,
+                x$private_methods),
     parent_env = x$parent_env
   )
 }
@@ -573,26 +573,24 @@ def wrap_fn(_fn):
       public[[nm]] <- env[[nm]]
   }
 
+  # TODO: re-enable delayed pyclasses.
+  # if (delay_load)
+  #   py_class <- delayed_r_to_py_R6ClassGenerator(r6_class, convert)
+  # else
+  #   py_class <- r_to_py.R6ClassGenerator(r6_class, convert)
 
-  # R6Class() calls substitute() on inherit;
-  r6_class <- eval(as.call(list(
-    quote(R6::R6Class),
+  inherit <- eval(inherit, parent_env)
+  active <- lapply(active, active_property)
+
+  py_class <-  new_py_type(
     classname = classname,
-    public = public,
-    private = private,
-    active = active,
     inherit = inherit,
-    cloneable = FALSE,
+    members = c(public, active),
+    private = private,
     parent_env = parent_env
-  )))
+  )
 
-
-  if (delay_load)
-    py_class <- delayed_r_to_py_R6ClassGenerator(r6_class, convert)
-  else
-    py_class <- r_to_py.R6ClassGenerator(r6_class, convert)
-
-  attr(py_class, "r6_class") <- r6_class
+  # attr(py_class, "r6_class") <- r6_class
 
   assign(classname, py_class, envir = parent_env)
   invisible(py_class)
