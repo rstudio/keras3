@@ -47,7 +47,7 @@ Suggests:
     withr,
     png,
     jpeg
-RoxygenNote: 7.2.3
+RoxygenNote: 7.2.3.9000
 VignetteBuilder: knitr
 Remotes:
     rstudio/tensorflow,

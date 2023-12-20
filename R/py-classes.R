@@ -87,18 +87,17 @@ function(classname,
   makeActiveBinding(quote(super), super, mask_env)
 
   # locally scope S3 methods for nice access like `super$initialize()`
-  mask_env$`$.python.builtin.super`  <- `$.python.builtin.super`
-  mask_env$`[[.python.builtin.super` <- `$.python.builtin.super`
+  mask_env$`$.python.builtin.super`  <- extract2.python.builtin.super
+  mask_env$`[[.python.builtin.super` <- extract2.python.builtin.super
 
   py_class
 }
 
-`$.python.builtin.super` <- function(x, name) {
+# roxygen wants this exported if it's named `$.python.builtin.super`
+`extract2.python.builtin.super` <- function(x, name) {
   name <- switch(name, initialize = "__init__", finalize = "__del__", name)
   NextMethod()
 }
-
-`[[.python.builtin.super` <- `$.python.builtin.super`
 
 
 #' @importFrom reticulate r_to_py import_builtins py_eval py_dict py_call

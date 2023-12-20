@@ -63,6 +63,8 @@ fs::dir_walk("man-src", type = "directory", recurse = TRUE,
 
 ## Waiting to be processed:
 
+# TODO: compose_layer S3 method - don't export, convert to standalone fn.
+
 # TODO: For apps, tether encode+decode along w/ constructor:
 # #'  @tether application.foo,
 # #'   application.foo.preprocess_input,

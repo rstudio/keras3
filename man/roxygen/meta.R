@@ -121,8 +121,8 @@ list(
   knitr_chunk_options = list(
     comment = "##",
     collapse = FALSE,
-    # eval = !interactive(),  # uncomment this for a faster interactive workflow
-    # eval = FALSE,  # uncomment this for a faster interactive workflow
+    eval = !interactive(), # for faster interactive workflow
+    # eval = FALSE, # uncomment this for a faster workflow
     keras.roxy.post_process_output = TRUE
   )
 )

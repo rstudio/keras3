@@ -2,9 +2,7 @@
 % Please edit documentation in R/keras3-package.R, R/package.R
 \docType{package}
 \name{keras3-package}
-\alias{keras3}
 \alias{keras3-package}
-\alias{_PACKAGE}
 \alias{keras-package}
 \title{keras3: R Interface to 'Keras'}
 \description{
