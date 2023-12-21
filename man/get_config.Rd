@@ -10,7 +10,7 @@ get_config(object)
 from_config(
   config,
   custom_objects = NULL,
-  class = attr(config, "config_class", TRUE) \%||\% keras$Model
+  class = attr(config, "__class__", TRUE) \%||\% keras$Model
 )
 }
 \arguments{

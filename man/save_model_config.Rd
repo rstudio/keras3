@@ -21,6 +21,32 @@ functions to be considered during deserialization.}
 Save and re-load models configurations as JSON. Note that the representation
 does not include the weights, only the architecture.
 }
+\details{
+Note: \code{save_model_config()} serializes the model to JSON using
+\code{serialize_keras_object()}, not \code{get_config()}. \code{serialize_keras_object()}
+returns a superset of \code{get_config()}, with additional information needed to
+create the class object needed to restore the model. See example for how to
+extract the \code{get_config()} value from a saved model.
+
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{model <- keras_model_sequential(input_shape = 10) |> layer_dense(10)
+file <- tempfile("model-config-", fileext = ".json")
+save_model_config(model, file)
+
+# load a new model instance with the same architecture but different weights
+model2 <- load_model_config(file)
+
+stopifnot(exprs = \{
+  all.equal(get_config(model), get_config(model2))
+
+  # To extract the `get_config()` value from a saved model config:
+  all.equal(
+      get_config(model),
+      structure(jsonlite::read_json(file)$config,
+                "__class__" = keras_model_sequential()$`__class__`)
+  )
+\})
+}\if{html}{\out{</div>}}
+}
 \seealso{
 Other model persistence: 
 \code{\link{get_weights}()}
