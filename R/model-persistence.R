@@ -218,12 +218,36 @@ function (self, filepath, skip_mismatch = FALSE, ...)
   do.call(keras$Model$load_weights, args)
 }
 
-
-
 #' Save Model configuration as JSON
 #'
 #' Save and re-load models configurations as JSON. Note that the representation
 #' does not include the weights, only the architecture.
+#'
+#' Note: `save_model_config()` serializes the model to JSON using
+#' `serialize_keras_object()`, not `get_config()`. `serialize_keras_object()`
+#' returns a superset of `get_config()`, with additional information needed to
+#' create the class object needed to restore the model. See example for how to
+#' extract the `get_config()` value from a saved model.
+#'
+#' ```{r}
+#' model <- keras_model_sequential(input_shape = 10) |> layer_dense(10)
+#' file <- tempfile("model-config-", fileext = ".json")
+#' save_model_config(model, file)
+#'
+#' # load a new model instance with the same architecture but different weights
+#' model2 <- load_model_config(file)
+#'
+#' stopifnot(exprs = {
+#'   all.equal(get_config(model), get_config(model2))
+#'
+#'   # To extract the `get_config()` value from a saved model config:
+#'   all.equal(
+#'       get_config(model),
+#'       structure(jsonlite::read_json(file)$config,
+#'                 "__class__" = keras_model_sequential()$`__class__`)
+#'   )
+#' })
+#' ```
 #'
 #' @param model Model object to save
 #' @param custom_objects Optional named list mapping names to custom classes or
@@ -783,6 +807,23 @@ objects_with_py_function_names <- function(objects) {
   names(objects) <- object_names
   objects
 }
+
+
+get_keras_class <- function(x) {
+  # get_keras_class(keras_model_sequential())
+  if (is.null(x)) return(x)
+
+  if (is_py_object(x)) {
+    # reflect objects that are already classes
+    if (inherits(x, "python.builtin.type")) return(x)
+
+    if (!is.null(cls <- py_get_attr(x, "__class__", TRUE)))
+      return(py_to_r(cls)) # TODO: copy over reticulate:::py_maybe_convert()?
+  }
+  NULL
+}
+
+
 
 
 confirm_overwrite <- function(filepath, overwrite) {

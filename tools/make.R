@@ -69,6 +69,8 @@ fs::dir_walk("man-src", type = "directory", recurse = TRUE,
 #   Add arg Layer(composing = TRUE)?
 #   get_layer_class() (could handle instances, builtin wrappers like layer_dense, and
 #   custom layers like Layer, return the pyclass. ?
+#   get_keras_class(), or just get_class()
+#   pull it through to get_config()/from_config()
 # TODO: compose_layer S3 method - don't export, convert to standalone fn.
 
 # TODO: For apps, tether encode+decode along w/ constructor:

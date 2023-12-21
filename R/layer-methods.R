@@ -37,7 +37,7 @@ get_config <- function(object) {
   config <- object$get_config()
 
   # set attribute indicating class
-  attr(config, "config_class") <- object$`__class__`
+  attr(config, "__class__") <- object$`__class__`
   config
 }
 
@@ -45,7 +45,9 @@ get_config <- function(object) {
 #' @export
 from_config <- function(config,
                         custom_objects = NULL,
-                        class = attr(config, "config_class", TRUE) %||% keras$Model) {
+                        class = attr(config, "__class__", TRUE) %||% keras$Model) {
+  if (missing(class) && c("config" %in% names(config)))
+    return(deserialize_keras_object(config, custom_objects = custom_objects))
   args <- list(config)
   if(length(custom_objects))
     args[[2L]] <- objects_with_py_function_names(custom_objects)
@@ -113,9 +115,3 @@ reset_states <- function(object) {
   object$reset_states()
   invisible(object)
 }
-
-
-as_node_index <- function(node_index) {
-  as.integer(node_index-1)
-}
-

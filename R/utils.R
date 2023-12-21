@@ -662,4 +662,9 @@ is_r_function <- function(x) {
   is.function(x)
 }
 
+is_py_object <- function(x) inherits(x, "python.builtin.object")
 
+
+as_node_index <- function(node_index) {
+  as.integer(node_index-1)
+}

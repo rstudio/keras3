@@ -154,9 +154,22 @@ test_succeeds("model weights can be saved and loaded", {
 
 test_succeeds("model can be saved and loaded from json", {
   model <- define_model()
-  json <- model_to_json(model)
-  model_from <- model_from_json(json)
-  expect_equal(json, model_to_json(model_from))
+
+  json_file <- tempfile("config-", fileext = ".json")
+  save_model_config(model, json_file)
+
+  model2 <- load_model_config(json_file)
+
+  json_file2 <- tempfile("config-2-", fileext = ".json")
+  save_model_config(model2, json_file2)
+
+  expect_identical(jsonlite::read_json(json_file),
+                   jsonlite::read_json(json_file2))
+
+  config <- get_config(model)
+  attributes(config) <- attributes(config)['names']
+  expect_identical(jsonlite::read_json(json_file)$config,
+                   config)
 })
 
 ## patch releases removed ability to serialize to/from yaml in all the version
