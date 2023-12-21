@@ -63,6 +63,14 @@ fs::dir_walk("man-src", type = "directory", recurse = TRUE,
 
 ## Waiting to be processed:
 
+# Line wrapping for warnings is sorta broken, but can't seem to reprex.
+# neither of these seem to reproduce the no-wrapping behavior for me...
+# py_run_string(r"---(import os; os.system("for i in {1..1000}; do printf 'word '; done"))---")
+# import warnings
+# >>> warnings.warn("word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word")
+#
+# Maybe there is some funky interaction w/ absl logging?
+
 # TODO: fix links to chunk plots in rendered vignettes - should be relative to
 #   package for R CMD build/pkgdown
 
