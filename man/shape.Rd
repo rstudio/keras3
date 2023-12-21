@@ -22,7 +22,7 @@ shape(...)
 
 \method{as.integer}{keras_shape}(x, ...)
 
-\method{as.list}{keras_shape}(x)
+\method{as.list}{keras_shape}(x, ...)
 }
 \arguments{
 \item{...}{A shape specification. Numerics, \code{NULL} and tensors are valid.

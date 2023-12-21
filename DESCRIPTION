@@ -46,6 +46,7 @@ Suggests:
     tfdatasets,
     withr,
     png,
+    jsonlite,
     jpeg
 RoxygenNote: 7.2.3.9000
 VignetteBuilder: knitr

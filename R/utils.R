@@ -518,6 +518,7 @@ named_list <- function(...)
 #' @param gen A function for generating random numbers, defaulting to `runif`.
 #'
 #' @return Returns an array with the specified dimensions filled with random numbers.
+#' @noRd
 #'
 #' @examples
 #' # Create a 3x3 matrix with random numbers from uniform distribution

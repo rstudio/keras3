@@ -100,7 +100,7 @@ function(classname,
 #' @export
 `[[.python_builtin_super_getter` <- `$.python_builtin_super_getter`
 
-#' @export
+#' @exportS3Method utils::.DollarNames
 .DollarNames.python_builtin_super_getter <- function(x, pattern) {
   super <- do.call(x, list(), envir = parent.frame())
   .DollarNames(super, pattern)

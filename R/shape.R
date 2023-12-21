@@ -164,4 +164,4 @@ destructure.keras_shape <- function(x) unclass(x)
 
 #' @rdname shape
 #' @export
-as.list.keras_shape <- function(x) unclass(x)
+as.list.keras_shape <- function(x, ...) unclass(x)
