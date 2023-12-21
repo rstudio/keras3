@@ -373,16 +373,6 @@ function(x,
     on.exit(unlink(args$to_file), add = TRUE)
   }
 
-  if(is_windows() && identical(.Platform$GUI, "RStudio")) {
-    # need to patch subprocess.Popen to avoid an OSError exception.
-    # https://github.com/rstudio/keras/issues/1337
-    # https://stackoverflow.com/questions/43593348/winerror-6-the-handle-is-invalid-from-python-check-output-spawn-in-electron-app/43606682#43606682
-    .patched_subprocess_Popen <-
-      import("kerastools.utils")$`_patched_subprocess_Popen`()
-    .patched_subprocess_Popen$`__enter__`()
-    on.exit(.patched_subprocess_Popen$`__exit__`(NULL, NULL, NULL),
-            add = TRUE)
-  }
 
   tryCatch(
     do.call(keras$utils$plot_model, args),
