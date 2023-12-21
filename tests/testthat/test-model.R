@@ -259,12 +259,15 @@ test_succeeds("can use functional api with dicts", {
   #   input_tensor_3 = layer_input(c(3), name = "input_tensor_3_name")
   # )
 
+  clear_session()
   inputs <- list(
     input_tensor_1 = layer_input(c(1), name = "input_tensor_1"),
     input_tensor_2 = layer_input(c(2), name = "input_tensor_2"),
     input_tensor_3 = layer_input(c(3), name = "input_tensor_3")
   )
 
+  # with keras3, the 'name' argument here doesn't change the neame of the output tensor,
+  # only the layer name
   outputs <- list(
     output_tensor_1 = inputs$input_tensor_1 %>% layer_dense(4, name = "output_tensor_1"),
     output_tensor_2 = inputs$input_tensor_2 %>% layer_dense(5, name = "output_tensor_2"),
@@ -292,7 +295,6 @@ test_succeeds("can use functional api with dicts", {
 
     model <- keras_model(inputs, outputs) %>%
       compile(loss = lapply(outputs, \(o) loss_mean_squared_error()),
-      # TODO: loss no longer recycled across outputs?? #loss_mean_squared_error(),
               optimizer = optimizer_adam())
 
     .chk <- vector("list", 4L)
@@ -318,11 +320,11 @@ test_succeeds("can use functional api with dicts", {
     })
 
     .chk$evaluate({
-      model %>% evaluate(x, y, epochs = 1, verbose = FALSE)
+      model %>% evaluate(x, y, verbose = FALSE)
     })
 
     .chk$predict({
-      res <- model %>% predict(x)
+      res <- model %>% predict(x, verbose = FALSE)
       expect_identical(names(res), names(outputs))
     })
   }
@@ -332,7 +334,99 @@ test_succeeds("can use functional api with dicts", {
   ## bug upstream in TF w/ Python < 3.12, types.Protocol instance checking
   ## properly backported to Python < 3.12, and errors on tf internal _DictWrapper()
   ## Keras 3 (via deps tf-nightly / torch) can't install on Python 3.12 yet.
-  r"---(
+
+  # everything unnamed
+  chk(unname(inputs), unname(outputs), unname(x), unname(y))
+  chk(unname(inputs), unname(outputs), unname(x)[c(3,1,2)], unname(y)[c(2, 3, 1)], error = TRUE)
+  chk(unname(inputs), unname(outputs), unname(x), unname(y)[c(2, 3, 1)], error = c("fit", "evaluate"))
+  chk(unname(inputs), unname(outputs), unname(x)[c(3,1,2)], unname(y), error = TRUE)
+
+
+  # everything named
+  # skip("bug upstream in tf._DictWrapper and trace.SupportsTracingProtocol")
+  chk(inputs, outputs, x, y)
+  # chk(inputs, outputs, x[c(3,1,2)], y[c(2, 3, 1)])
+
+
+  # model constructed with named outputs,
+  # passed unnamed x, named y
+  # chk(inputs, outputs, unname(x), y)
+  chk(inputs, outputs, unname(x)[c(2,1,3)], y, error = TRUE)
+
+
+  # model constructed with unnamed outputs,
+  # passed names that don't match to output_tensor.name's
+
+  # skip("names mismatch for fit() enforced elsewhere now, different rules")
+  chk(unname(inputs), unname(outputs), x, y) #, error = TRUE)
+
+  # model constructed with unnamed outputs,
+  # passed names that do not match to output_tensor.name's
+  chk(unname(inputs), unname(outputs),
+      x = rlang::set_names(x, ~ paste0(.x, "_name")),
+      y = rlang::set_names(y, ~ paste0(.x, "_name")),
+      error = TRUE)
+
+  # model constructed with named outputs,
+  # passed names that match to output_tensor.name's, not output names
+  chk(inputs, outputs,
+      x = rlang::set_names(x, ~ paste0(.x, "_name")),
+      y = rlang::set_names(y, ~ paste0(.x, "_name")),
+      error = TRUE)
+
+
+  # model constructed with named outputs
+  # passed unnamed(y) (x can still match positionally)
+  chk(inputs, outputs, unname(x), unname(y)) #, error = c("fit", "evaluate"))
+  chk(inputs, outputs,        x , unname(y)) #, error = c("fit", "evaluate"))
+
+  # model constructed with named outputs
+  # passed unname x, but in wrong order so positional mathcing wrong
+  chk(inputs, outputs, unname(x)[c(3,1,2)], unname(y), error = TRUE)
+
+})
+
+
+
+test_succeeds("can pass pandas.Series() to fit()", {
+  #https://github.com/rstudio/keras/issues/1341
+  skip_if(tf_version() >= "2.13")
+  n <- 30
+  p <- 10
+
+  w <- runif(n)
+  y <- runif(n)
+  X <- matrix(runif(n * p), ncol = p)
+
+  make_nn <- function() {
+    input <- layer_input(p)
+    output <- input %>%
+      layer_dense(2 * p, activation = "tanh") %>%
+      layer_dense(1)
+    keras_model(inputs = input, outputs = output)
+  }
+
+  nn <- make_nn()
+
+  pd <- reticulate::import("pandas", convert = FALSE)
+  w <- pd$Series(w)
+
+  nn %>%
+    compile(optimizer = optimizer_adam(0.02), loss = "mse",
+            weighted_metrics = list()) %>% # silence warning
+    fit(
+      x = X,
+      y = y,
+      sample_weight = w,
+      weighted_metrics = list(),
+      epochs = 2,
+      validation_split = 0.2,
+      verbose = 0
+    )
+})
+
+
+r"---(
 context=<tensorflow.core.function.trace_type.trace_type_builder.InternalTracingContext object at 0x2f6019210>
 value=DictWrapper({'output_tensor_1': <tf.Tensor 'Identity:0' shape=(10, 4) dtype=float32>, 'output_tensor_2': <tf.Tensor 'Identity_1:0' shape=(10, 5) dtype=float32>, 'output_tensor_3': <tf.Tensor 'Identity_2:0' shape=(10, 6) dtype=float32>})
 trace.SupportsTracingProtocol=<class 'tensorflow.python.types.trace.SupportsTracingProtocol'>
@@ -385,94 +479,3 @@ TypeError: this __dict__ descriptor does not support '_DictWrapper' objects
  18.   └─reticulate (local) `<python.builtin.method>`(...)
  19.     └─reticulate:::py_call_impl(callable, call_args$unnamed, call_args$named)
   )---"
-
-  # everything unnamed
-  chk(unname(inputs), unname(outputs), unname(x), unname(y))
-  chk(unname(inputs), unname(outputs), unname(x)[c(3,1,2)], unname(y)[c(2, 3, 1)], error = TRUE)
-  chk(unname(inputs), unname(outputs), unname(x), unname(y)[c(2, 3, 1)], error = c("fit", "evaluate"))
-  chk(unname(inputs), unname(outputs), unname(x)[c(3,1,2)], unname(y), error = TRUE)
-
-
-  # everything named
-  skip("bug upstream in tf._DictWrapper and trace.SupportsTracingProtocol")
-  chk(inputs, outputs, x, y)
-  chk(inputs, outputs, x[c(3,1,2)], y[c(2, 3, 1)])
-
-
-  # model constructed with named outputs,
-  # passed unnamed x, named y
-  chk(inputs, outputs, unname(x), y)
-  chk(inputs, outputs, unname(x)[c(2,1,3)], y, error = TRUE)
-
-
-  # model constructed with unnamed outputs,
-  # passed names that don't match to output_tensor.name's
-
-
-
-    skip("names mismatch for fit() enforced elsewhere now, different rules")
-  chk(unname(inputs), unname(outputs), x, y, error = TRUE)
-
-  # model constructed with unnamed outputs,
-  # passed names that do match to output_tensor.name's
-  chk(unname(inputs), unname(outputs),
-      x = rlang::set_names(x, ~ paste0(.x, "_name")),
-      y = rlang::set_names(y, ~ paste0(.x, "_name")))
-
-  # model constructed with named outputs,
-  # passed names that match to output_tensor.name's, not output names
-  chk(inputs, outputs,
-      x = rlang::set_names(x, ~ paste0(.x, "_name")),
-      y = rlang::set_names(y, ~ paste0(.x, "_name")),
-      error = TRUE)
-
-
-  # model constructed with named outputs
-  # passed unnamed(y) (x can still match positionally)
-  chk(inputs, outputs, unname(x), unname(y), error = c("fit", "evaluate"))
-  chk(inputs, outputs,        x , unname(y), error = c("fit", "evaluate"))
-
-  # model constructed with named outputs
-  # passed unname x, but in wrong order so positional mathcing wrong
-  chk(inputs, outputs, unname(x)[c(3,1,2)], unname(y), error = TRUE)
-
-})
-
-
-
-test_succeeds("can pass pandas.Series() to fit()", {
-  #https://github.com/rstudio/keras/issues/1341
-  skip_if(tf_version() >= "2.13")
-  n <- 30
-  p <- 10
-
-  w <- runif(n)
-  y <- runif(n)
-  X <- matrix(runif(n * p), ncol = p)
-
-  make_nn <- function() {
-    input <- layer_input(p)
-    output <- input %>%
-      layer_dense(2 * p, activation = "tanh") %>%
-      layer_dense(1)
-    keras_model(inputs = input, outputs = output)
-  }
-
-  nn <- make_nn()
-
-  pd <- reticulate::import("pandas", convert = FALSE)
-  w <- pd$Series(w)
-
-  nn %>%
-    compile(optimizer = optimizer_adam(0.02), loss = "mse",
-            weighted_metrics = list()) %>% # silence warning
-    fit(
-      x = X,
-      y = y,
-      sample_weight = w,
-      weighted_metrics = list(),
-      epochs = 2,
-      validation_split = 0.2,
-      verbose = 0
-    )
-})
