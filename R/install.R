@@ -13,7 +13,7 @@
 #' @export
 install_keras <- function(
     envname = "r-keras", ...,
-    extra_packages = c("scipy", "pandas", "Pillow", "pydot", "ipython"),
+    extra_packages = c("scipy", "pandas", "Pillow", "pydot", "ipython", "tensorflow_datasets"),
     python_version = ">=3.9,<=3.11",
     backend = "tf-nightly", # c("tensorflow", "jax"),
     gpu = NA,
