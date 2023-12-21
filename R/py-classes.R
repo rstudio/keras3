@@ -296,10 +296,9 @@ as_py_method <- function(fn, name, env, convert, label) {
     if (!"private" %in% names(formals(fn)) &&
         "private" %in% all.names(body(fn))) {
       body(fn) <- substitute({
-        delayedAssign("private", attr(env, "get_private", TRUE)(self))
-        # private <- attr(env, "get_private", TRUE)(self)
+        delayedAssign("private", attr(parent.env(environment()), "get_private", TRUE)(self))
         body
-      }, list(body = body(fn), env = env))
+      }, list(body = body(fn)))
     }
 
     # python tensorflow does quite a bit of introspection on user-supplied

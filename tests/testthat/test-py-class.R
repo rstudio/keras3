@@ -126,15 +126,12 @@ test_that("R6 privates", {
         private$o <- private$o + 1
         NULL
       }
-    )
-    # ,
-    # private = list(
-    #   o = NULL
-    # )
+    ),
+    private = list( o = NULL )
   )
 
   # inst <- aClass$new()
-  # inst$set_private_o(o)
+  # inst$increment_private_o(o)
   # inst$get_private_o()
 
   py_aClass <- r_to_py(aClass, convert = TRUE)
