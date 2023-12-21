@@ -63,6 +63,9 @@ fs::dir_walk("man-src", type = "directory", recurse = TRUE,
 
 ## Waiting to be processed:
 
+# TODO: fix links to chunk plots in rendered vignettes - should be relative to
+#   package for R CMD build/pkgdown
+
 # TODO: keras_Layer_wrapper - standardize approach to unwrapping Layer, use
 #   consistently across code base.
 # TODO: rename create_layer_wrapper? (clashes w/ upstream "Wrapper".

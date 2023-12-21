@@ -163,9 +163,9 @@ loss, and metrics can be specified via string identifiers as a shortcut:
 
 ```{r}
 model %>% compile(
-    optimizer = "rmsprop",
-    loss = "sparse_categorical_crossentropy",
-    metrics = c("sparse_categorical_accuracy")
+  optimizer = "rmsprop",
+  loss = "sparse_categorical_crossentropy",
+  metrics = c("sparse_categorical_accuracy")
 )
 ```
 
@@ -174,12 +174,12 @@ call them several times across different examples in this guide.
 
 ```{r}
 get_uncompiled_model <- function() {
-  inputs <- layer_input(shape = 784, name="digits")
+  inputs <- layer_input(shape = 784, name = "digits")
   outputs <- inputs %>%
     layer_dense(units = 64, activation = "relu", name = "dense_1") %>%
     layer_dense(units = 64, activation = "relu", name = "dense_2") %>%
     layer_dense(units = 10, activation = "softmax", name = "predictions")
-  keras_model(inputs=inputs, outputs=outputs)
+  keras_model(inputs = inputs, outputs = outputs)
 }
 
 get_compiled_model <- function() {
@@ -256,21 +256,21 @@ reduce overfitting (we won't know if it works until we try!).
 Here's how you would do it:
 
 ```{r}
-CustomMSE <- new_loss_class(
+loss_custom_mse <- new_loss_class(
   "CustomMSE",
   initialize = function(regularization_factor = 0.1, name = "custom_mse") {
     super$initialize(name = name)
     self$regularization_factor <- regularization_factor
   },
   call = function(y_true, y_pred) {
-    mse <- op_mean(op_square(y_true - y_pred), axis=-1)
-    reg <- op_mean(op_square(0.5 - y_pred), axis=-1)
+    mse <- op_mean(op_square(y_true - y_pred), axis = -1)
+    reg <- op_mean(op_square(0.5 - y_pred), axis = -1)
     mse + reg * self$regularization_factor
   }
 )
 
 model <- get_uncompiled_model()
-model %>% compile(optimizer="adam", loss=CustomMSE())
+model %>% compile(optimizer="adam", loss = loss_custom_mse())
 
 y_train_one_hot <- op_one_hot(y_train, num_classes=10)
 model %>% fit(x_train, y_train_one_hot, batch_size=64, epochs=1)
@@ -296,16 +296,16 @@ Here's a simple example showing how to implement a `CategoricalTruePositives` me
 that counts how many samples were correctly classified as belonging to a given class:
 
 ```{r}
-CategoricalTruePositives <- new_metric_class(
+metric_categorical_true_positives <- new_metric_class(
   "CategoricalTruePositives",
-  initialize = function(name="categorical_true_positives", ...) {
-    super$initialize(name=name, ...)
-    self$true_positives <- self$add_variable(
-      shape=shape(), name="ctp", initializer="zeros"
-    )
+  initialize = function(name = "categorical_true_positives", ...) {
+    super$initialize(name = name, ...)
+    self$true_positives <- self$add_variable(shape = shape(),
+                                             name = "ctp",
+                                             initializer = "zeros")
   },
-  update_state = function(y_true, y_pred, sample_weight=NULL) {
-    y_pred <- op_reshape(op_argmax(y_pred, axis=2), shape(-1, 1))
+  update_state = function(y_true, y_pred, sample_weight = NULL) {
+    y_pred <- op_reshape(op_argmax(y_pred, axis = 2), shape(-1, 1))
     values <- op_cast(y_true, "int32") == op_cast(y_pred, "int32")
     values <- op_cast(values, "float32")
     if (!is.null(sample_weight)) {
@@ -324,11 +324,11 @@ CategoricalTruePositives <- new_metric_class(
 
 model <- get_uncompiled_model()
 model %>% compile(
-    optimizer = optimizer_rmsprop(learning_rate=1e-3),
-    loss = loss_sparse_categorical_crossentropy(),
-    metrics = list(CategoricalTruePositives())
+  optimizer = optimizer_rmsprop(learning_rate = 1e-3),
+  loss = loss_sparse_categorical_crossentropy(),
+  metrics = list(metric_categorical_true_positives())
 )
-history <- model %>% fit(x_train, y_train, batch_size=64, epochs=3)
+history <- model %>% fit(x_train, y_train, batch_size = 64, epochs = 3)
 ```
 
 ### Handling losses and metrics that don't fit the standard signature
@@ -345,8 +345,8 @@ regularization (note that activity regularization is built-in in all Keras layer
 this layer is just for the sake of providing a concrete example):
 
 ```{r}
-ActivityRegularizationLayer <- new_layer_class(
-  "ActivityRegularizationLayer",
+layer_custom_activity_regularizer <- Layer(
+  "ActivityRegularization",
   call = function(inputs) {
     self$add_loss(op_sum(inputs) * 0.1)
     inputs  # Pass-through layer.
@@ -356,7 +356,7 @@ ActivityRegularizationLayer <- new_layer_class(
 inputs <- layer_input(shape = 784, name="digits")
 outputs <- inputs %>%
   layer_dense(units=32, activation="relu", name="dense_1") %>%
-  ActivityRegularizationLayer() %>%
+  layer_custom_activity_regularizer() %>%
   layer_dense(units=64, activation = "relu", name="dense_2") %>%
   layer_dense(units=10, name="predictions")
 
@@ -378,19 +378,19 @@ Consider the following `LogisticEndpoint` layer: it takes as inputs
 targets & logits, and it tracks a crossentropy loss via `add_loss()`.
 
 ```{r}
-LogisticEndpoint <- new_layer_class(
+layer_logistic_endpoint <- Layer(
   "LogisticEndpoint",
-  initialize = function(name=NULL) {
-    super$initialize(name=name)
-    self$loss_fn <- loss_binary_crossentropy(from_logits=TRUE)
+  initialize = function(name = NULL) {
+    super$initialize(name = name)
+    self$loss_fn <- loss_binary_crossentropy(from_logits = TRUE)
   },
-  call = function(targets, logits, sample_weights=NULL) {
+  call = function(targets, logits, sample_weights = NULL) {
     # Compute the training-time loss value and add it
     # to the layer using `self.add_loss()`.
     loss <- self$loss_fn(targets, logits, sample_weights)
     self$add_loss(loss)
 
-    # Return the inference-time prediction tensor (for `.predict()`).
+    # Return the inference-time prediction tensor (for `predict()`).
     op_softmax(logits)
   }
 )
@@ -402,11 +402,13 @@ You can use it in a model with two inputs (input data & targets), compiled witho
 ```{r}
 inputs <- layer_input(shape = 3, name="inputs")
 targets <- layer_input(shape = 10, name="targets")
-logits <- layer_dense(inputs, 10)
-predictions <- LogisticEndpoint(name="predictions")(targets, logits)
 
-model <- keras_model(inputs = list(inputs, targets), outputs=predictions)
-model %>% compile(optimizer="adam")  # No loss argument!
+logits <- inputs |> layer_dense(10)
+predictions <- layer_logistic_endpoint(name = "predictions")(targets, logits)
+
+model <- keras_model(inputs = list(inputs, targets), 
+                     outputs = predictions)
+model %>% compile(optimizer = "adam")  # No loss argument!
 
 data <- list(
   inputs = random_normal(c(3, 3)),
@@ -438,7 +440,9 @@ Note that you can only use `validation_split` when training with NumPy data.
 
 ```{r}
 model <- get_compiled_model()
-model %>% fit(x_train, y_train, batch_size=64, validation_split=0.2, epochs=1)
+model |> fit(x_train, y_train, 
+             batch_size = 64, 
+             validation_split = 0.2, epochs = 1)
 ```
 
 ## Training & evaluation using `tf_dataset` objects
@@ -838,7 +842,7 @@ Let's plot this model, so you can clearly see what we're doing here (note that t
 shapes shown in the plot are batch shapes, rather than per-sample shapes).
 
 ```{r}
-plot(model, show_shapes=TRUE)
+plot(model, show_shapes = TRUE)
 ```
 
 At compilation time, we can specify different losses to different outputs, by passing

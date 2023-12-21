@@ -261,7 +261,8 @@ function (object, x = NULL, y = NULL, ..., batch_size = NULL,
                                sample_weight = normalize_input_data,
                                batch_size = as_integer, steps = as_integer,
                                verbose = as_model_verbose_arg),
-                          ignore = "object")
+                          ignore = "object",
+                          force = "verbose")
     args[["return_dict"]] <- TRUE
 
     if(inherits(args$x, "tensorflow.python.data.ops.dataset_ops.DatasetV2") &&
@@ -514,7 +515,8 @@ function(object,
             class_weight = as_class_weight,
             verbose = as_model_verbose_arg
         ),
-        ignore = c("object", "class_names", "view_metrics")
+        ignore = c("object", "class_names", "view_metrics"),
+        force = "verbose"
     )
 
     if (identical(view_metrics, "auto"))
@@ -654,7 +656,8 @@ function (object, x, ..., batch_size = NULL,
     args <- capture_args2(list(x = normalize_input_data,
                                batch_size = as_integer, steps = as_integer,
                                verbose = as_model_verbose_arg),
-                          ignore = "object")
+                          ignore = "object",
+                          force = "verbose")
 
     if(inherits(args$x, "tensorflow.python.data.ops.dataset_ops.DatasetV2") &&
        !is.null(args$batch_size))
