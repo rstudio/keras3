@@ -236,7 +236,7 @@ test_succeeds("regression test for https://github.com/rstudio/keras/issues/1201"
     list(1, 2)
   }
 
-  model %>% fit(generator, steps_per_epoch = 1, epochs = 5, verbose = FALSE
+  model %>% fit(generator, steps_per_epoch = 1, epochs = 5, verbose = FALSE,
                 validation_data = generator, validation_steps = 1)
 
 })
