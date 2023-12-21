@@ -197,7 +197,7 @@ create_layer_wrapper <- function(Layer, modifiers = NULL, convert = TRUE) {
   if(!isTRUE(convert))
     warning("convert argument is ignored")
 
-  as.function.default(
+  out <- as.function.default(
     c(alist(object = ), formals(Layer),
       bquote({
         args <- capture_args2(.(modifiers), ignore = "object")
@@ -208,4 +208,8 @@ create_layer_wrapper <- function(Layer, modifiers = NULL, convert = TRUE) {
 
   )
 
+  class(out) <- c("keras_Layer_wrapper",
+                  "keras_layer_wrapper",
+                  "function")
+  out
 }

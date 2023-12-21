@@ -487,7 +487,10 @@ function (obj)
 get_registered_object <-
 function (name, custom_objects = NULL, module_objects = NULL)
 {
-  args <- capture_args2(NULL)
+  args <- capture_args2(list(
+    custom_objects = objects_with_py_function_names,
+    module_objects = objects_with_py_function_names
+  ))
   obj <- do.call(keras$saving$get_registered_object, args)
   # if(inherits(obj, keras$layers$Layer))
     # obj <- create_layer_wrapper(obj)
@@ -751,7 +754,7 @@ objects_with_py_function_names <- function(objects) {
 
     if (name == "") {
       if (inherits(o, "keras_layer_wrapper"))
-        o <- attr(o, "Layer")
+        objects[[i]] <- o <- environment(o)$Layer
 
       if (inherits(o, "python.builtin.object"))
         name <- o$`__name__`

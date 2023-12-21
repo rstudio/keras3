@@ -62,7 +62,6 @@ test_succeeds("model load with unnamed custom_objects", {
 
   layer_my_dense <-  new_layer_class(
     "MyDense",
-
     initialize = function(units, ...) {
       super$initialize(...)
       private$units <- units
@@ -104,6 +103,11 @@ test_succeeds("model load with unnamed custom_objects", {
   custom_loss <- function(y_pred, y_true) {
     loss_categorical_crossentropy(y_pred, y_true)
   }
+  # TODO:
+  # attr(custom_loss, "name") <- "custom_loss"
+  # custom_loss <- py_func2(function(y_pred, y_true) {
+  #     loss_categorical_crossentropy(y_pred, y_true)
+  #   }, TRUE, name = "custom_loss")
 
   model %>% compile(
     loss = custom_loss,
@@ -112,20 +116,27 @@ test_succeeds("model load with unnamed custom_objects", {
   )
 
   # generate dummy training data
-  data <- random_array(10, 32)
+  data <- x <- random_normal(c(10, 32))
+  # y <- to_categorical(sample(0:9, 10, replace = TRUE))
+  y <- to_categorical(random_integer(10, 0, 10), 10)
+
+  model |> fit(x, y, verbose = FALSE)
 
   res1 <- as.array(model(data))
 
   tmp <- tempfile("model", fileext = ".keras")
-  skip("save_model_tf")
-  save_model_tf(model, tmp)
-  model2 <- load_model_tf(tmp,
-                          custom_objects = list(metric_mean_pred,
-                                                layer_my_dense,
-                                                custom_loss = custom_loss))
+  save_model(model, tmp)
+  model2 <- load_model(tmp, custom_objects = list(
+    metric_mean_pred,
+    layer_my_dense,
+    custom_loss = custom_loss)
+  )
   res2 <- as.array(model2(data))
 
   expect_identical(res1, res2)
+  expect_no_error({
+    model2 |> fit(x, y, verbose = 0)
+  })
 })
 
 

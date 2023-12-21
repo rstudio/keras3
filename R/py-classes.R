@@ -151,16 +151,22 @@ normalize_py_type_members <- function(members, env, convert, classname) {
 new_get_private <- function(members, shared_mask_env) {
   force(members); force(shared_mask_env)
 
-  delayedAssign("class_privates", dict())
+  # python should never see privates.
+  # also, avoid invoking __hash__ on the py obj, which
+  # might error or return non-unique values.
+  delayedAssign("class_privates", fastmap::fastmap())
 
   new_instance_private <- function(self) {
     private <- new.env(parent = emptyenv())
-    class_privates[[self]] <- private
+    class_privates$set(py_id(self), private)
 
     import("weakref")$finalize(
       self, del_instance_private, self)
 
     instance_mask_env <- new.env(parent = shared_mask_env)
+    # TODO: is this `self` assignment a circular reference that prevents the
+    # object from being collected? should it be a weakref?
+    # add tests to make sure that the object is collected when it should be.
     instance_mask_env$self <- self
     instance_mask_env$private <- private
     members <- lapply(members, function(member) {
@@ -177,12 +183,12 @@ new_get_private <- function(members, shared_mask_env) {
   }
 
   del_instance_private <- function(self) {
-    class_privates[[self]] <- NULL
+    class_privates$remove(py_id(self))
   }
 
   function(self) {
-    as_r_value(py_get_item(class_privates, self, TRUE)) %||%
-      new_instance_private(self, key)
+    class_privates$get(py_id(self)) %||%
+      new_instance_private(self)
   }
 }
 

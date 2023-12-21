@@ -63,6 +63,12 @@ fs::dir_walk("man-src", type = "directory", recurse = TRUE,
 
 ## Waiting to be processed:
 
+# TODO: keras_Layer_wrapper - standardize approach to unwrapping Layer, use
+#   consistently across code base.
+# TODO: rename create_layer_wrapper? (clashes w/ upstream "Wrapper".
+#   Add arg Layer(composing = TRUE)?
+#   get_layer_class() (could handle instances, builtin wrappers like layer_dense, and
+#   custom layers like Layer, return the pyclass. ?
 # TODO: compose_layer S3 method - don't export, convert to standalone fn.
 
 # TODO: For apps, tether encode+decode along w/ constructor:
