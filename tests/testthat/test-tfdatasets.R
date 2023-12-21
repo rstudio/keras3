@@ -24,8 +24,8 @@ test_that("Error when specifying batch_size with tfdatasets", {
   # if (!is_tensorflow_implementation())
   #   skip("Datasets need TensorFlow implementation.")
 
-  model <- keras_model_sequential() %>%
-    layer_dense(units = 1, input_shape = 1)
+  model <- keras_model_sequential(input_shape = 1) %>%
+    layer_dense(units = 1)
   model %>% compile(loss='mse', optimizer='sgd')
 
   dataset <- tfdatasets::tensors_dataset(reticulate::tuple(list(1), list(1))) %>%

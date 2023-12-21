@@ -263,6 +263,11 @@ function (object, x = NULL, y = NULL, ..., batch_size = NULL,
                                verbose = as_model_verbose_arg),
                           ignore = "object")
     args[["return_dict"]] <- TRUE
+
+    if(inherits(args$x, "tensorflow.python.data.ops.dataset_ops.DatasetV2") &&
+       !is.null(args$batch_size))
+      stop("batch_size can not be specified with a TF Dataset")
+
     do.call(object$evaluate, args)
 }
 
@@ -524,6 +529,11 @@ function(object,
       args$callbacks
     )
 
+    # nameOfClass(tensorflow::tf$data$Dataset)
+    if(inherits(args$x, "tensorflow.python.data.ops.dataset_ops.DatasetV2") &&
+       !is.null(args$batch_size))
+      stop("batch_size can not be specified with a TF Dataset")
+
     history <- do.call(object$fit, args)
 
     # convert to a keras_training history object
@@ -645,6 +655,11 @@ function (object, x, ..., batch_size = NULL,
                                batch_size = as_integer, steps = as_integer,
                                verbose = as_model_verbose_arg),
                           ignore = "object")
+
+    if(inherits(args$x, "tensorflow.python.data.ops.dataset_ops.DatasetV2") &&
+       !is.null(args$batch_size))
+      stop("batch_size can not be specified with a TF Dataset")
+
     do.call(object$predict, args)
 }
 
