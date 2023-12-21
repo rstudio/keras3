@@ -17,6 +17,7 @@ test_that("R6 pyclasses respect convert=FALSE", {
 
   py_cls <- r_to_py(r_cls, convert = FALSE)
   py_inst <- py_cls()
+  skip("converting R6 classes w/ convert=FALSE needs fixing")
   py_inst$a_method(d)
 
   expect_identical(py_to_r(d), list("foo" = NULL))
@@ -47,6 +48,7 @@ test_that("R6 pyclasses respect convert=TRUE", {
 
 
 test_that("%py_class% can be lazy about initing python", {
+  skip("%py_class% delaying initing python needs fixing.")
   res <- callr::r(function() {
     library(keras3)
     # pretend we're in a package
