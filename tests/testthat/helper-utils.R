@@ -172,8 +172,8 @@ expect_tensor <- function(x, shape=NULL, shaped_as=NULL) {
 
 expect_same_pyobj <- function(x, y) {
   eval.parent(bquote(expect_identical(
-    get("pyobj", as.environment(.(x))),
-    get("pyobj", as.environment(.(y)))
+    get0("pyobj", as.environment(.(x))),
+    get0("pyobj", as.environment(.(y)))
   )))
 }
 
