@@ -181,16 +181,15 @@ test_succeeds("can pass name argument to 'keras_model'", {
 
 test_succeeds("can print a sequential model that is not built", {
 
-  model <- keras_model_sequential()
+  model <- keras_model_sequential() |> layer_dense(10)
 
-  expect_error(
-    print(model),
-    regexp = NA
+  expect_no_error(
+    print(model)
   )
 
   expect_output(
     print(model),
-    regexp = "no summary available"
+    regexp = "unbuilt"
   )
 
 })
