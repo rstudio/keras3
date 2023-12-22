@@ -31,6 +31,7 @@ if(!"source:tools/translate-tools.R" %in% search()) envir::attach_source("tools/
 # TODO: k_array() should take a 'shape' argument
 # TODO: r_name autogen: move "set" to tail, so have config_floatx(), config_floatx_set()
 # TODO: implement dim() S3 generic. (will use shape() instead)
+#
 
 ## Implemented but Questioning:
 
@@ -70,6 +71,8 @@ fs::dir_walk("man-src", type = "directory", recurse = TRUE,
 # >>> warnings.warn("word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word")
 #
 # Maybe there is some funky interaction w/ absl logging?
+#
+# TODO: document options(keras.verbose) and other R global options.
 
 # TODO: fix links to chunk plots in rendered vignettes - should be relative to
 #   package for R CMD build/pkgdown
@@ -95,6 +98,7 @@ fs::dir_walk("man-src", type = "directory", recurse = TRUE,
 #
 # TODO: use `as_activation` attr in all layers.
 #
+# TODO: tether application process_utils
 # TODO: `backend()` used to have a `convert=FALSE` option, and all k_* would
 #       return numpy arrays. We should check preserve np_array convert status in all
 #       op_* functions, and return numpy arrays if we received a numpy array.
