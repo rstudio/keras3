@@ -872,12 +872,12 @@ summary.keras.models.model.Model <- function(object, ...) {
 #' @export
 format.keras.models.model.Model <-
 function(x,
-         line_length = width - (12L * show_trainable),
+         line_length = getOption("width"), # width - (12L * show_trainable),
          positions = NULL,
          expand_nested = FALSE,
          show_trainable = x$built && as.logical(length(x$non_trainable_weights)),
          ...,
-         width = getOption("width"),
+         # width = getOption("width"),
          # rich = TRUE, ??
          # print_fn = NULL,
          layer_range = NULL,
@@ -914,11 +914,8 @@ print.keras.models.model.Model <- function(x, ...) {
 
 #' @importFrom reticulate py_str
 #' @export
-py_str.keras.models.model.Model <- function(object, line_length = getOption("width"), positions = NULL, ...) {
-    # object$`__str__`() ??
-    # still invoked by utils::str()
-    # warning("`py_str()` generic is deprecated")
-    format.keras.models.model.Model(object, line_length = line_length, positions = positions, ...)
+py_str.keras.models.model.Model <- function(object, ...) {
+    format.keras.models.model.Model(object, ...)
 }
 
 
