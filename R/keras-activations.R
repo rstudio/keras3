@@ -531,15 +531,15 @@ on_load_make_as_activation <- function() {
       # needs the closure object address.
       delayedAssign("h", local({
         nms <- grep("^activation_", getNamespaceExports("keras3"), value = TRUE)
-        h <- hashtab("address", length(nms))
+        h <- utils::hashtab("address", length(nms))
         ns <- asNamespace("keras3")
         for (name in nms)
-          sethash(h, getExportedValue(ns, name),
-                  substr(name, 12L, 999L))
+          utils::sethash(h, getExportedValue(ns, name),
+                         substr(name, 12L, 999L))
         h
       }))
 
-      function(x) gethash(h, x) %||% .as_activation(x)
+      function(x) utils::gethash(h, x) %||% .as_activation(x)
     })
   }
 }

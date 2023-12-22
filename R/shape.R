@@ -125,6 +125,7 @@ shape <- function(...) {
 
 #' @export
 #' @rdname shape
+#' @param x A 'keras_shape' object
 format.keras_shape <- function(x, ...) {
   x <- vapply(x, function(d) format(d %||% "NA"), "")
   x <- paste0(x, collapse = ", ")
@@ -146,7 +147,6 @@ print.keras_shape <- function(x, ...) {
   out
 }
 
-#' @rdname shape
 #' @export
 r_to_py.keras_shape <- function(x, convert = FALSE) {
   tuple(x)

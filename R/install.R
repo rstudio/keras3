@@ -7,6 +7,7 @@
 #' @param python_version Passed on to `reticulate::virtualenv_starter()`
 #' @param backend Which backend. Accepted values include  `"tensorflow"`, `"jax"` and `"pytorch"`
 #' @param gpu whether to install a GPU capable version of the backend.
+#' @param restart_session Whether to restart the R session after installing (note this will only occur within RStudio).
 #' @param ... reserved for future compatability.
 #'
 #' @seealso [`tensorflow::install_tensorflow()`]

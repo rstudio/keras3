@@ -34,8 +34,10 @@ Imports:
     tfruns (>= 1.0),
     magrittr,
     zeallot,
+    fastmap,
     glue,
     R6,
+    cli,
     rlang
 Suggests:
     ggplot2,
@@ -47,6 +49,8 @@ Suggests:
     withr,
     png,
     jsonlite,
+    purrr,
+    rstudioapi,
     jpeg
 RoxygenNote: 7.2.3.9000
 VignetteBuilder: knitr

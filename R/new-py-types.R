@@ -11,6 +11,7 @@ function(classname, ..., initialize, update_state, result) {
 }
 
 #' @rdname new-classes
+#' @param inherit class to inherit from.
 #' @export
 new_loss_class <-
 function(classname, ..., call = NULL, inherit = keras3::keras$losses$Loss) {
@@ -58,22 +59,12 @@ function(classname, ...,
 #' @param classname The classname as a string. Convention is for the classname
 #'   to be a CamelCase version of the constructor.
 #' @param ... Additional fields and methods for the new type.
-#' @param initialize,build,call,get_config,on_epoch_begin,on_epoch_end,on_train_begin,on_train_end,on_batch_begin,on_batch_end,on_predict_batch_begin,on_predict_batch_end,on_predict_begin,on_predict_end,on_test_batch_begin,on_test_batch_end,on_test_begin,on_test_end,on_train_batch_begin,on_train_batch_end,update_state,result,train_step,predict_step,test_step,compute_loss,compute_metrics Optional methods that can be overridden.
-#' @param x A function that should be converted to an active property of the class type.
+#' @param initialize,update_state,result,call,train_step,predict_step,test_step,compute_loss,compute_metrics
+#' Optional methods that can be overridden.
+#'
+# ' @param x A function that should be converted to an active property of the class type.
 #'
 #' @return A new class generator object that inherits from the appropriate Keras
 #'   base class.
-#' @export
-new_layer_class <-
-function(classname, ...,
-         initialize = NULL, build = NULL, call = NULL, get_config = NULL) {
-  members <- capture_args2(ignore = "classname")
-  members <- drop_nulls(members,
-    names(which(vapply(formals(sys.function()), is.null, TRUE))))
-
-  type <- new_py_class(classname, members,
-                      inherit = keras3::keras$layers$Layer,
-                      parent_env = parent.frame())
-
-  create_layer_wrapper(type)
-}
+#' @name new-classes
+NULL

@@ -198,10 +198,12 @@
 #' "Available feature types" paragraph below.
 #'
 #' @param output_mode
-#' One of `"concat"` or `"dict"`. In concat mode, all
+#' A string.
+#' - For `layer_feature_space()`, one of `"concat"` or `"dict"`. In concat mode, all
 #' features get concatenated together into a single vector.
-#' In dict mode, the FeatureSpace returns a named list of individually
+#' In dict mode, the `FeatureSpace` returns a named list of individually
 #' encoded features (with the same names as the input list names).
+#' - For the `feature_*` functions, one of: `"int"` `"one_hot"` or `"float"`.
 #'
 #' @param crosses
 #' List of features to be crossed together, e.g.
@@ -262,6 +264,8 @@ function(feature_names, crossing_dim, output_mode = "one_hot") {
 
 #' @export
 #' @rdname layer_feature_space
+#' @param dtype string, the output dtype of the feature. E.g., "float32".
+#' @param preprocessor A callable.
 #' @tether keras.utils.FeatureSpace.feature
 feature_custom <-
 function(dtype, preprocessor, output_mode) {
@@ -280,6 +284,7 @@ function(name = NULL) {
 
 #' @export
 #' @rdname layer_feature_space
+#' @param scale,offset Passed on to [`layer_rescaling()`]
 #' @tether keras.utils.FeatureSpace.float_rescaled
 feature_float_rescaled <-
 function (scale = 1.0, offset = 0.0, name = NULL) {
@@ -298,6 +303,7 @@ function(name = NULL) {
 
 #' @export
 #' @rdname layer_feature_space
+#' @param num_bins,bin_boundaries Passed on to [`layer_discretization()`]
 #' @tether keras.utils.FeatureSpace.float_discretized
 feature_float_discretized <-
 function(num_bins, bin_boundaries = NULL, output_mode = "one_hot", name = NULL) {
@@ -307,6 +313,7 @@ function(num_bins, bin_boundaries = NULL, output_mode = "one_hot", name = NULL) 
 
 #' @export
 #' @rdname layer_feature_space
+#' @param max_tokens,num_oov_indices Passed on to [`layer_integer_lookup()`] by `feature_integer_categorical()` or to [`layer_string_lookup()`] by `feature_string_categorical()`.
 #' @tether keras.utils.FeatureSpace.integer_categorical
 feature_integer_categorical <-
 function(max_tokens = NULL,

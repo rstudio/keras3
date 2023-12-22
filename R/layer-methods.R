@@ -42,6 +42,7 @@ get_config <- function(object) {
 }
 
 #' @rdname get_config
+#' @param class The keras class to restore.
 #' @export
 from_config <- function(config,
                         custom_objects = NULL,

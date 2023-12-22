@@ -536,6 +536,7 @@
 #' @tether keras.layers.Layer
 #' @export
 #' @family layers
+#' @importFrom utils modifyList
 #' @seealso
 #' + <https:/keras.io/api/layers/base_layer#layer-class>
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/layers/Layer>

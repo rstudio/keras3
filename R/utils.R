@@ -269,7 +269,7 @@ capture_args2 <- function(modifiers = NULL, ignore = NULL, force = NULL) {
   known_args <- union(known_args, force)
   names(known_args) <- known_args
 
-  if("..." %in% fn_arg_nms && !"..." %in% ignore) {
+  if ("..." %in% fn_arg_nms && !"..." %in% ignore) {
     assert_all_dots_named(envir, cl)
     # match.call already drops missing args that match to known args, but it
     # doesn't protect from missing args that matched into ...
@@ -642,7 +642,7 @@ as_py_function <- function(fn, default_name = "r_func") {
   # to update capture_args2() to construct calls to transformers so that
   # substitute will work here.
   # if(is.null(name)) { name <- as_py_name(deparse1(substitute(x)))}
-  py_func2(x, convert = TRUE, name = name)
+  py_func2(fn, convert = TRUE, name = name)
 }
 
 

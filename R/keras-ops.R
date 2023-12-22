@@ -805,15 +805,13 @@ function (targets, predictions, k)
 #' larger, the dimension is padded with zeros.
 #'
 #' # Examples
-#' ```{r}
+#'
+#' ```{r, comment = "#>"}
 #' real <- op_array(c(0, 1, 2, 3, 4))
 #' imag <- op_array(c(0, 1, 2, 3, 4))
 #' op_irfft(c(real, imag))
-#' # array([0.66666667, -0.9106836, 0.24401694))
-#' ```
 #'
-#' ```{r}
-#' op_irfft(op_rfft(real, 5), 5)
+#' all.equal(op_irfft(op_rfft(real, 5), 5), real)
 #' ```
 #'
 #' @returns

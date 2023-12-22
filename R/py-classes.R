@@ -100,7 +100,8 @@ function(classname,
 #' @export
 `[[.python_builtin_super_getter` <- `$.python_builtin_super_getter`
 
-#' @exportS3Method utils::.DollarNames
+#' @importFrom utils .DollarNames
+#' @export
 .DollarNames.python_builtin_super_getter <- function(x, pattern) {
   super <- do.call(x, list(), envir = parent.frame())
   .DollarNames(super, pattern)
@@ -135,7 +136,7 @@ normalize_py_type_members <- function(members, env, convert, classname) {
     replace_val("initialize", "__init__") |>
     replace_val("finalize", "__del__")
 
-  members <- purrr::imap(members, function(x, name) {
+  members <- imap(members, function(x, name) {
     if (!is.function(x))
       return(x)
     as_py_method(x, name, env, convert,

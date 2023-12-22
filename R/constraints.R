@@ -21,7 +21,7 @@
 #' @note
 #' Models which use custom constraints cannot be serialized using
 #' [save_model()]. Rather, the weights of the model should be saved
-#' and restored using [save_model_weights_hdf5()].
+#' and restored using [save_model_weights()].
 #'
 #' @examples \dontrun{
 #' CustomNonNegConstraint <- R6::R6Class(

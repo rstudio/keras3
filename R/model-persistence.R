@@ -36,6 +36,8 @@
 #' unlink("model.keras")
 #' ```
 #'
+#' @param model a keras model.
+#'
 #' @param filepath
 #' string,
 #' Path where to save the model. Must end in `.keras`.
@@ -47,6 +49,8 @@
 #'
 #' @param ...
 #' For forward/backward compatability.
+#'
+#' @param model A keras model.
 #'
 #' @export
 #' @tether keras.saving.save_model
@@ -206,16 +210,18 @@ function (model, filepath, overwrite = FALSE)
 #' @param ...
 #' For forward/backward compatability.
 #'
+#' @param model A keras model.
+#'
 #' @export
 #' @tether keras.Model.load_weights
 #' @seealso
 #' + <https:/keras.io/api/models/model_saving_apis/weights_saving_and_loading#loadweights-method>
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/Model/load_weights>
 load_model_weights <-
-function (self, filepath, skip_mismatch = FALSE, ...)
+function (model, filepath, skip_mismatch = FALSE, ...)
 {
-  args <- capture_args2(NULL)
-  do.call(keras$Model$load_weights, args)
+  args <- capture_args2(ignore = "model")
+  do.call(model$load_weights, args)
 }
 
 #' Save Model configuration as JSON
@@ -253,11 +259,15 @@ function (self, filepath, skip_mismatch = FALSE, ...)
 #' @param custom_objects Optional named list mapping names to custom classes or
 #'   functions to be considered during deserialization.
 #' @param filepath path to json file with the model config.
+#' @param overwrite
+#' Whether we should overwrite any existing model configuration json
+#' at `filepath`, or instead ask the user
+#' via an interactive prompt.
 #'
 #' @family model persistence
 #' @tether keras.Model.to_json
 #' @export
-save_model_config <- function(model, filepath = NULL, overwrite = FALSE, ...)
+save_model_config <- function(model, filepath = NULL, overwrite = FALSE)
 {
   confirm_overwrite(filepath, overwrite)
   writeLines(model$to_json(), filepath)
@@ -311,19 +321,25 @@ load_model_config <- function(filepath, custom_objects = NULL)
 #' @param name
 #' The name to serialize this class under in this package.
 #'
+#' @param object
+#' A keras object.
+#'
+# ' @param clear If `TRUE` all registered custom objects are cleared from the
+# '   global registry.
+#'
 #' @export
 #' @family object registration saving
 #' @family saving
 #' @tether keras.saving.register_keras_serializable
 register_keras_serializable <-
-function (object, name = NULL, package = NULL, clear = FALSE)
+function (object, name = NULL, package = NULL) #, clear = FALSE)
 {
-  if (clear) {
-    if (!missing(object))
-      stop("`clear` must be FALSE if `object` is provided")
-    py_eval("lambda keras: keras.saving.get_custom_objects().clear()")(keras)
-    return(invisible())
-  }
+  # if (clear) {
+  #   if (!missing(object))
+  #     stop("`clear` must be FALSE if `object` is provided")
+  #   py_eval("lambda keras: keras.saving.get_custom_objects().clear()")(keras)
+  #   return(invisible())
+  # }
   object_in <- object
 
   if (inherits(object, "R6ClassGenerator"))
@@ -357,12 +373,13 @@ function (object, name = NULL, package = NULL, clear = FALSE)
 }
 
 #' @export
+#' @rdname get_custom_objects
 clear_registered_custom_objects <- function() {
   py_eval("lambda keras: keras.saving.get_custom_objects().clear()")(keras)
 }
 
 
-#' [TF backend only] Create a TF SavedModel artifact for inference
+#' \[TF backend only] Create a TF SavedModel artifact for inference
 #'
 #' @description
 #' (e.g. via TF-Serving).
@@ -399,14 +416,15 @@ clear_registered_custom_objects <- function() {
 #' string, file path where to save
 #' the artifact.
 #'
-#' @param ...
-#' For forward/backward compatability.
+#' @param ... For forward/backward compatability.
+#'
+#' @param object A keras model.
 #'
 #' @exportS3Method tensorflow::export_savedmodel
 #' @tether keras.Model.export
 #' @seealso
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/Model/export>
-export_savedmodel.keras.models.model.Model <- function (object, export_dir_base, ...) {
+export_savedmodel.keras.models.model.Model <- function(object, export_dir_base, ...) {
   object$export(export_dir_base, ...)
 }
 
@@ -750,12 +768,12 @@ normalize_custom_objects <- function(objects) {
     if (name == "") {
       if (inherits(object, "python.builtin.object"))
         name <- object$`__name__`
-      else if (is.character(name <- attr(o, "py_function_name", TRUE))) {}
+      else if (is.character(name <- attr(object, "py_function_name", TRUE))) {}
       else
         stop("object name could not be infered; please supply a named list",
              call. = FALSE)
     }
-    setNames(list(object), name)
+    stats::setNames(list(object), name)
   }, list(objects, rlang::names2(objects)), NULL))
 
   objects
@@ -834,9 +852,9 @@ confirm_overwrite <- function(filepath, overwrite) {
     return(overwrite)
 
   if (interactive())
-    overwrite <-
-      askYesNo(sprintf("File '%s' already exists - overwrite?", filepath),
-               default = FALSE)
+    overwrite <- utils::askYesNo(
+      sprintf("File '%s' already exists - overwrite?", filepath),
+      default = FALSE)
   if (!isTRUE(overwrite))
     stop("File '", filepath, "' already exists (pass overwrite = TRUE to force save).",
          call. = FALSE)

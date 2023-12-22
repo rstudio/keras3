@@ -469,6 +469,14 @@ function (object, x = NULL, y = NULL, ..., batch_size = NULL,
 #'
 #' @param object Keras model object
 #'
+#' @param view_metrics View realtime plot of training metrics (by epoch). The
+#'   default (`"auto"`) will display the plot when running within RStudio,
+#'   `metrics` were specified during model [compile()], `epochs > 1` and
+#'   `verbose > 0`. Use the global `keras.view_metrics` option to establish a
+#'   different default.
+#'
+#' @param ... Additional arguments passed on to the model `fit()` method.
+#'
 #' @export
 #' @tether keras.Model.fit
 #' @seealso
@@ -639,6 +647,7 @@ input_data_normalizer <- function(model) {
 #' List of callbacks to apply during prediction.
 #'
 #' @param object Keras model object
+#' @param ... For forward/backward compatability.
 #'
 #' @export
 #' @importFrom stats predict
@@ -717,6 +726,7 @@ function(object, x)
 # they are returned as a list.
 #'
 #' @param object Keras model object
+#' @param ... for forward/backward compatability
 #'
 #' @export
 #' @tether keras.Model.test_on_batch
@@ -806,11 +816,11 @@ function (object, x, y = NULL, sample_weight = NULL, class_weight = NULL)
 #' in each line. If not provided, becomes
 #' `c(0.3, 0.6, 0.7, 1)`. Defaults to `NULL`.
 #'
-#' @param print_fn
-#' Print function to use. By default, prints to `stdout`.
-#' It will be called on each line of the summary.
-#' You can set it to a custom function
-#' in order to capture the string summary.
+# ' @param print_fn
+# ' Print function to use. By default, prints to `stdout`.
+# ' It will be called on each line of the summary.
+# ' You can set it to a custom function
+# ' in order to capture the string summary.
 #'
 #' @param expand_nested
 #' Whether to expand the nested models.

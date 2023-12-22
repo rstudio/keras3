@@ -3621,4 +3621,5 @@ function (..., name = "root_mean_squared_error", dtype = NULL)
 
 #' @importFrom reticulate py_to_r_wrapper
 #' @export
-keras.metrics.metric.Metric <- py_to_r_wrapper.keras.losses.loss.Loss
+#' @keywords internal
+py_to_r_wrapper.keras.metrics.metric.Metric <- py_to_r_wrapper.keras.losses.loss.Loss
