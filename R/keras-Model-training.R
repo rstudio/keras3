@@ -110,6 +110,7 @@
 #' scale the loss to prevent underflow.
 #'
 #' @param object Keras model object
+#' @param ... Additional arguments passed on to the `compile()` model method.
 #' @export
 #' @tether keras.Model.compile
 #' @family model training
@@ -269,7 +270,11 @@ function (object, x = NULL, y = NULL, ..., batch_size = NULL,
        !is.null(args$batch_size))
       stop("batch_size can not be specified with a TF Dataset")
 
-    do.call(object$evaluate, args)
+    result <- do.call(object$evaluate, args)
+
+    tfruns::write_run_metadata("evaluation", unlist(result))
+
+    result
 }
 
 
