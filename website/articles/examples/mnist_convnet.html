@@ -243,7 +243,7 @@
 <h2 id="evaluate-the-trained-model">Evaluate the trained model<a class="anchor" aria-label="anchor" href="#evaluate-the-trained-model"></a>
 </h2>
 <div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">score</span> <span class="op">&lt;-</span> <span class="va">model</span> <span class="op"><a href="../../reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://generics.r-lib.org/reference/evaluate.html" class="external-link">evaluate</a></span><span class="op">(</span><span class="va">x_test</span>, <span class="va">y_test</span>, verbose<span class="op">=</span><span class="fl">0</span><span class="op">)</span></span>
+<code class="sourceCode R"><span><span class="va">score</span> <span class="op">&lt;-</span> <span class="va">model</span> <span class="op"><a href="../../reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://rdrr.io/pkg/tensorflow/man/evaluate.html" class="external-link">evaluate</a></span><span class="op">(</span><span class="va">x_test</span>, <span class="va">y_test</span>, verbose<span class="op">=</span><span class="fl">0</span><span class="op">)</span></span>
 <span><span class="va">score</span></span></code></pre></div>
 <pre><code><span><span class="co">##            loss compile_metrics</span></span>
 <span><span class="co">##      0.02563373      0.99190003</span></span></code></pre>

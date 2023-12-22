@@ -291,10 +291,12 @@ argument values are used.</p>
 
 
 <dt>output_mode</dt>
-<dd><p>One of <code>"concat"</code> or <code>"dict"</code>. In concat mode, all
+<dd><p>A string.</p><ul><li><p>For <code>layer_feature_space()</code>, one of <code>"concat"</code> or <code>"dict"</code>. In concat mode, all
 features get concatenated together into a single vector.
-In dict mode, the FeatureSpace returns a named list of individually
-encoded features (with the same names as the input list names).</p></dd>
+In dict mode, the <code>FeatureSpace</code> returns a named list of individually
+encoded features (with the same names as the input list names).</p></li>
+<li><p>For the <code>feature_*</code> functions, one of: <code>"int"</code> <code>"one_hot"</code> or <code>"float"</code>.</p></li>
+</ul></dd>
 
 
 <dt>crosses</dt>
@@ -330,6 +332,26 @@ type specification, e.g. <code>list(my_feature = "integer_categorical")</code>
 or <code>list(my_feature = feature_integer_categorical())</code>.
 For a complete list of all supported types, see
 "Available feature types" paragraph below.</p></dd>
+
+
+<dt>dtype</dt>
+<dd><p>string, the output dtype of the feature. E.g., "float32".</p></dd>
+
+
+<dt>preprocessor</dt>
+<dd><p>A callable.</p></dd>
+
+
+<dt>scale, offset</dt>
+<dd><p>Passed on to <code><a href="layer_rescaling.html">layer_rescaling()</a></code></p></dd>
+
+
+<dt>num_bins, bin_boundaries</dt>
+<dd><p>Passed on to <code><a href="layer_discretization.html">layer_discretization()</a></code></p></dd>
+
+
+<dt>max_tokens, num_oov_indices</dt>
+<dd><p>Passed on to <code><a href="layer_integer_lookup.html">layer_integer_lookup()</a></code> by <code>feature_integer_categorical()</code> or to <code><a href="layer_string_lookup.html">layer_string_lookup()</a></code> by <code>feature_string_categorical()</code>.</p></dd>
 
 </dl></div>
     <div class="section level2">

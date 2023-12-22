@@ -618,7 +618,7 @@ more information</a>.</p>
 generating predictions on new data<a class="anchor" aria-label="anchor" href="#after-fit-evaluating-test-performance-generating-predictions-on-new-data"></a>
 </h3>
 <p>Once you have a trained model, you can evaluate its loss and metrics
-on new data via <code><a href="https://generics.r-lib.org/reference/evaluate.html" class="external-link">evaluate()</a></code>:</p>
+on new data via <code><a href="https://rdrr.io/pkg/tensorflow/man/evaluate.html" class="external-link">evaluate()</a></code>:</p>
 <div class="sourceCode" id="cb26"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb26-1"><a href="#cb26-1" tabindex="-1"></a>loss, acc <span class="op">=</span> model.evaluate(val_dataset)  <span class="co"># returns loss and metrics</span></span>
 <span id="cb26-2"><a href="#cb26-2" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"loss: </span><span class="sc">%.2f</span><span class="st">"</span> <span class="op">%</span> loss)</span>
 <span id="cb26-3"><a href="#cb26-3" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"acc: </span><span class="sc">%.2f</span><span class="st">"</span> <span class="op">%</span> acc)</span></code></pre></div>
@@ -713,7 +713,7 @@ on all of them by:</p>
 <ul>
 <li>Creating a <code>tf.distribute.MirroredStrategy</code> object</li>
 <li>Building &amp; compiling your model inside the strategy’s scope</li>
-<li>Calling <code><a href="https://generics.r-lib.org/reference/fit.html" class="external-link">fit()</a></code> and <code><a href="https://generics.r-lib.org/reference/evaluate.html" class="external-link">evaluate()</a></code> on a dataset
+<li>Calling <code><a href="https://generics.r-lib.org/reference/fit.html" class="external-link">fit()</a></code> and <code><a href="https://rdrr.io/pkg/tensorflow/man/evaluate.html" class="external-link">evaluate()</a></code> on a dataset
 as usual</li>
 </ul>
 <div class="sourceCode" id="cb30"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb30-1"><a href="#cb30-1" tabindex="-1"></a><span class="co"># Create a MirroredStrategy.</span></span>

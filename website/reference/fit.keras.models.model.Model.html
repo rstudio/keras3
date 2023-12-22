@@ -138,6 +138,10 @@ If <code>x</code> is a TF Dataset or generator,
 not be specified (since targets will be obtained from <code>x</code>).</p></dd>
 
 
+<dt>...</dt>
+<dd><p>Additional arguments passed on to the model <code><a href="https://generics.r-lib.org/reference/fit.html" class="external-link">fit()</a></code> method.</p></dd>
+
+
 <dt>batch_size</dt>
 <dd><p>Integer or <code>NULL</code>.
 Number of samples per gradient update.
@@ -295,6 +299,14 @@ particularly useful when logged to a file,
 so <code>verbose=2</code> is recommended when not running interactively
 (e.g., in a production environment). Defaults to <code>"auto"</code>.</p></dd>
 
+
+<dt>view_metrics</dt>
+<dd><p>View realtime plot of training metrics (by epoch). The
+default (<code>"auto"</code>) will display the plot when running within RStudio,
+<code>metrics</code> were specified during model <code><a href="https://generics.r-lib.org/reference/compile.html" class="external-link">compile()</a></code>, <code>epochs &gt; 1</code> and
+<code>verbose &gt; 0</code>. Use the global <code>keras.view_metrics</code> option to establish a
+different default.</p></dd>
+
 </dl></div>
     <div class="section level2">
     <h2 id="value">Value<a class="anchor" aria-label="anchor" href="#value"></a></h2>
@@ -320,18 +332,8 @@ Any other type provided will be wrapped in
 a length-one <code><a href="https://rstudio.github.io/reticulate/reference/tuple.html" class="external-link">tuple()</a></code>, effectively treating everything as <code>x</code>. When
 yielding named lists, they should still adhere to the top-level tuple
 structure,
-e.g. <code>({"x0": x0, "x1": x1}, y)</code>. Keras will not attempt to separate
-features, targets, and weights from the keys of a single dict.
-A notable unsupported data type is the <code>namedtuple</code>. The reason is
-that it behaves like both an ordered datatype (tuple) and a mapping
-datatype (dict). So given a namedtuple of the form:
-<code>namedtuple("example_tuple", ["y", "x"])</code>
-it is ambiguous whether to reverse the order of the elements when
-interpreting the value. Even worse is a tuple of the form:
-<code>namedtuple("other_tuple", ["x", "y", "z"])</code>
-where it is unclear if the tuple was intended to be unpacked
-into <code>x</code>, <code>y</code>, and <code>sample_weight</code> or passed through
-as a single element to <code>x</code>.</p>
+e.g. <code>tuple(list(x0 = x0, x = x1), y)</code>. Keras will not attempt to separate
+features, targets, and weights from the keys of a single dict.</p>
     </div>
     <div class="section level2">
     <h2 id="see-also">See also<a class="anchor" aria-label="anchor" href="#see-also"></a></h2>

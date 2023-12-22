@@ -321,7 +321,7 @@ A <code>Layer</code> encapsulates a state (weights) and some computation
 <p>A simple layer looks like this. The <code>self$add_weight()</code>
 method gives you a shortcut for creating weights:</p>
 <div class="sourceCode" id="cb30"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">Linear</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/keras3/man/Layer.html" class="external-link">new_layer_class</a></span><span class="op">(</span></span>
+<code class="sourceCode R"><span><span class="va">Linear</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/Layer.html">new_layer_class</a></span><span class="op">(</span></span>
 <span>  <span class="st">"Linear"</span>,</span>
 <span>  initialize <span class="op">=</span> <span class="kw">function</span><span class="op">(</span><span class="va">units</span> <span class="op">=</span> <span class="fl">32</span>, <span class="va">input_dim</span> <span class="op">=</span> <span class="fl">32</span><span class="op">)</span> <span class="op">{</span></span>
 <span>    <span class="va">super</span><span class="op">$</span><span class="fu">initialize</span><span class="op">(</span><span class="op">)</span></span>
@@ -370,7 +370,7 @@ reusing built-in functionality.</p>
 <code>build()</code> method, so that you don’t need to specify the input
 dim/shape at layer construction time:</p>
 <div class="sourceCode" id="cb34"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">Linear</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/keras3/man/Layer.html" class="external-link">new_layer_class</a></span><span class="op">(</span></span>
+<code class="sourceCode R"><span><span class="va">Linear</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/Layer.html">new_layer_class</a></span><span class="op">(</span></span>
 <span>  <span class="st">"Linear"</span>,</span>
 <span>  initialize <span class="op">=</span> <span class="kw">function</span><span class="op">(</span><span class="va">units</span> <span class="op">=</span> <span class="fl">32</span><span class="op">)</span> <span class="op">{</span></span>
 <span>    <span class="va">super</span><span class="op">$</span><span class="fu">initialize</span><span class="op">(</span><span class="op">)</span></span>
@@ -454,7 +454,7 @@ They’re exposed in <code>trainable_weights</code> and
 <code>non_trainable_weights</code> respectively. Here’s a layer with a
 non-trainable weight:</p>
 <div class="sourceCode" id="cb37"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">ComputeSum</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/keras3/man/Layer.html" class="external-link">new_layer_class</a></span><span class="op">(</span></span>
+<code class="sourceCode R"><span><span class="va">ComputeSum</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/Layer.html">new_layer_class</a></span><span class="op">(</span></span>
 <span>  <span class="st">"ComputeSum"</span>,</span>
 <span>  initialize <span class="op">=</span> <span class="kw">function</span><span class="op">(</span><span class="va">input_dim</span><span class="op">)</span> <span class="op">{</span></span>
 <span>    <span class="va">super</span><span class="op">$</span><span class="fu">initialize</span><span class="op">(</span><span class="op">)</span></span>
@@ -493,7 +493,7 @@ non-trainable).</p>
 <code class="sourceCode R"><span><span class="co"># Let's reuse the Linear class</span></span>
 <span><span class="co"># with a `build` method that we defined above.</span></span>
 <span></span>
-<span><span class="va">MLP</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/keras3/man/Layer.html" class="external-link">new_layer_class</a></span><span class="op">(</span></span>
+<span><span class="va">MLP</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/Layer.html">new_layer_class</a></span><span class="op">(</span></span>
 <span>  <span class="st">"MLP"</span>,</span>
 <span>  initialize <span class="op">=</span> <span class="kw">function</span><span class="op">(</span><span class="op">)</span> <span class="op">{</span></span>
 <span>    <span class="va">super</span><span class="op">$</span><span class="fu">initialize</span><span class="op">(</span><span class="op">)</span></span>
@@ -536,7 +536,7 @@ tracked by the parent layers.</p>
 <p>Here’s a layer that creates an activity regularization loss:</p>
 <div class="sourceCode" id="cb46"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># A layer that creates an activity sparsity regularization loss</span></span>
-<span><span class="va">ActivityRegularization</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/keras3/man/Layer.html" class="external-link">new_layer_class</a></span><span class="op">(</span></span>
+<span><span class="va">ActivityRegularization</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/Layer.html">new_layer_class</a></span><span class="op">(</span></span>
 <span>  <span class="st">"ActivityRegularization"</span>,</span>
 <span>  initialize <span class="op">=</span> <span class="kw">function</span><span class="op">(</span><span class="va">rate</span><span class="op">=</span><span class="fl">1e-2</span><span class="op">)</span> <span class="op">{</span></span>
 <span>    <span class="va">super</span><span class="op">$</span><span class="fu">initialize</span><span class="op">(</span><span class="op">)</span></span>
@@ -551,7 +551,7 @@ tracked by the parent layers.</p>
 loss:</p>
 <div class="sourceCode" id="cb47"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Let's use the loss layer in a MLP block.</span></span>
-<span><span class="va">SparseMLP</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/keras3/man/Layer.html" class="external-link">new_layer_class</a></span><span class="op">(</span></span>
+<span><span class="va">SparseMLP</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/Layer.html">new_layer_class</a></span><span class="op">(</span></span>
 <span>  <span class="st">"SparseMLP"</span>,</span>
 <span>  initialize <span class="op">=</span> <span class="kw">function</span><span class="op">(</span><span class="op">)</span> <span class="op">{</span></span>
 <span>    <span class="va">super</span><span class="op">$</span><span class="fu">initialize</span><span class="op">(</span><span class="op">)</span></span>
@@ -871,7 +871,7 @@ expose a <code>training</code> (boolean) argument in the
 built-in training and evaluation loops (e.g. fit) to correctly use the
 layer in training and inference modes.</p>
 <div class="sourceCode" id="cb67"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">Dropout</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/keras3/man/Layer.html" class="external-link">new_layer_class</a></span><span class="op">(</span></span>
+<code class="sourceCode R"><span><span class="va">Dropout</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/Layer.html">new_layer_class</a></span><span class="op">(</span></span>
 <span>  <span class="st">"Dropout"</span>,</span>
 <span>  initialize <span class="op">=</span> <span class="kw">function</span><span class="op">(</span><span class="va">rate</span><span class="op">)</span> <span class="op">{</span></span>
 <span>    <span class="va">super</span><span class="op">$</span><span class="fu">initialize</span><span class="op">(</span><span class="op">)</span></span>
@@ -885,7 +885,7 @@ layer in training and inference modes.</p>
 <span>  <span class="op">}</span></span>
 <span><span class="op">)</span></span>
 <span></span>
-<span><span class="va">MLPWithDropout</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/keras3/man/Layer.html" class="external-link">new_layer_class</a></span><span class="op">(</span></span>
+<span><span class="va">MLPWithDropout</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/Layer.html">new_layer_class</a></span><span class="op">(</span></span>
 <span>  <span class="st">"MLPWithDropout"</span>,</span>
 <span>  initialize <span class="op">=</span> <span class="kw">function</span><span class="op">(</span><span class="op">)</span> <span class="op">{</span></span>
 <span>    <span class="va">super</span><span class="op">$</span><span class="fu">initialize</span><span class="op">(</span><span class="op">)</span></span>
@@ -954,7 +954,7 @@ networks should be defined as Layer subclasses instead.</p>
 mix-and-matching OO models and Functional models.</p>
 <p>Note that the <code>Model</code> class also features built-in
 training &amp; evaluation loops: <code><a href="https://generics.r-lib.org/reference/fit.html" class="external-link">fit()</a></code>,
-<code><a href="https://rdrr.io/r/stats/predict.html" class="external-link">predict()</a></code> and <code><a href="https://generics.r-lib.org/reference/evaluate.html" class="external-link">evaluate()</a></code> (configured via the
+<code><a href="https://rdrr.io/r/stats/predict.html" class="external-link">predict()</a></code> and <code><a href="https://rdrr.io/pkg/tensorflow/man/evaluate.html" class="external-link">evaluate()</a></code> (configured via the
 <code><a href="https://generics.r-lib.org/reference/compile.html" class="external-link">compile()</a></code> method). These built-in functions give you access
 to the following built-in training infrastructure features:</p>
 <ul>
@@ -1003,7 +1003,7 @@ the MNIST example above.</p>
 <code class="sourceCode R"><span><span class="va">predictions</span> <span class="op">&lt;-</span> <span class="va">model</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://rdrr.io/r/stats/predict.html" class="external-link">predict</a></span><span class="op">(</span><span class="va">dataset</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">## 938/938 - 0s - 378us/step</span></span></code></pre>
 <div class="sourceCode" id="cb77"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">model</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://generics.r-lib.org/reference/evaluate.html" class="external-link">evaluate</a></span><span class="op">(</span><span class="va">dataset</span><span class="op">)</span></span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">model</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://rdrr.io/pkg/tensorflow/man/evaluate.html" class="external-link">evaluate</a></span><span class="op">(</span><span class="va">dataset</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">## 938/938 - 0s - 367us/step - loss: 0.1763 - sparse_categorical_accuracy: 0.9454</span></span></code></pre>
 <pre><code><span><span class="co">##            loss compile_metrics</span></span>
 <span><span class="co">##       0.1763445       0.9454167</span></span></code></pre>
@@ -1015,7 +1015,7 @@ built-in training loops for your OO models. Just override the
 infrastructure features outlined above – callbacks, zero-code
 distribution support, and step fusing support. You may also override
 <code>test_step()</code> to customize what happens in
-<code><a href="https://generics.r-lib.org/reference/evaluate.html" class="external-link">evaluate()</a></code>, and override <code>predict_step()</code> to
+<code><a href="https://rdrr.io/pkg/tensorflow/man/evaluate.html" class="external-link">evaluate()</a></code>, and override <code>predict_step()</code> to
 customize what happens in <code><a href="https://rdrr.io/r/stats/predict.html" class="external-link">predict()</a></code>. For more information,
 please refer to <a href="https://keras.io/guides/customizing_what_happens_in_fit/" class="external-link">this
 guide</a>.</p>
@@ -1096,7 +1096,7 @@ a regularization loss (KL divergence).</p>
 <code>Sampling</code> layer to map a MNIST digit to a latent-space
 triplet <code>(z_mean, z_log_var, z)</code>.</p>
 <div class="sourceCode" id="cb82"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">Sampling</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/keras3/man/Layer.html" class="external-link">new_layer_class</a></span><span class="op">(</span></span>
+<code class="sourceCode R"><span><span class="va">Sampling</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/Layer.html">new_layer_class</a></span><span class="op">(</span></span>
 <span>  <span class="st">"Sampling"</span>,</span>
 <span>  call <span class="op">=</span> <span class="kw">function</span><span class="op">(</span><span class="va">inputs</span><span class="op">)</span> <span class="op">{</span></span>
 <span>    <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="va">z_mean</span>, <span class="va">z_log_var</span><span class="op">)</span> <span class="op"><a href="../reference/multi-assign.html">%&lt;-%</a></span> <span class="va">inputs</span></span>
@@ -1107,7 +1107,7 @@ triplet <code>(z_mean, z_log_var, z)</code>.</p>
 <span>  <span class="op">}</span></span>
 <span><span class="op">)</span></span>
 <span></span>
-<span><span class="va">Encoder</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/keras3/man/Layer.html" class="external-link">new_layer_class</a></span><span class="op">(</span></span>
+<span><span class="va">Encoder</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/Layer.html">new_layer_class</a></span><span class="op">(</span></span>
 <span>  <span class="st">"Encoder"</span>,</span>
 <span>  initialize <span class="op">=</span> <span class="kw">function</span><span class="op">(</span><span class="va">latent_dim</span> <span class="op">=</span> <span class="fl">32</span>, <span class="va">intermediate_dim</span> <span class="op">=</span> <span class="fl">64</span>, <span class="va">...</span><span class="op">)</span> <span class="op">{</span></span>
 <span>    <span class="va">super</span><span class="op">$</span><span class="fu">initialize</span><span class="op">(</span><span class="va">...</span><span class="op">)</span></span>
@@ -1127,7 +1127,7 @@ triplet <code>(z_mean, z_log_var, z)</code>.</p>
 <p>Next, we have a <code>Decoder</code> class, which maps the
 probabilistic latent space coordinates back to a MNIST digit.</p>
 <div class="sourceCode" id="cb83"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">Decoder</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/keras3/man/Layer.html" class="external-link">new_layer_class</a></span><span class="op">(</span></span>
+<code class="sourceCode R"><span><span class="va">Decoder</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/Layer.html">new_layer_class</a></span><span class="op">(</span></span>
 <span>  <span class="st">"Decoder"</span>,</span>
 <span>  initialize <span class="op">=</span> <span class="kw">function</span><span class="op">(</span><span class="va">original_dim</span>, <span class="va">intermediate_dim</span> <span class="op">=</span> <span class="fl">64</span>, <span class="va">...</span><span class="op">)</span> <span class="op">{</span></span>
 <span>    <span class="va">super</span><span class="op">$</span><span class="fu">initialize</span><span class="op">(</span><span class="va">...</span><span class="op">)</span></span>

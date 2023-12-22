@@ -170,7 +170,7 @@ pass).</p>
 <p>Here’s a densely-connected layer. It has two state variables: the
 variables <code>w</code> and <code>b</code>.</p>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">Linear</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/keras3/man/Layer.html" class="external-link">new_layer_class</a></span><span class="op">(</span></span>
+<code class="sourceCode R"><span><span class="va">Linear</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/Layer.html">new_layer_class</a></span><span class="op">(</span></span>
 <span>  <span class="st">"Linear"</span>,</span>
 <span>  initialize <span class="op">=</span> <span class="kw">function</span><span class="op">(</span><span class="va">units</span> <span class="op">=</span> <span class="fl">32</span>, <span class="va">input_dim</span> <span class="op">=</span> <span class="fl">32</span><span class="op">)</span> <span class="op">{</span></span>
 <span>    <span class="va">units</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/integer.html" class="external-link">as.integer</a></span><span class="op">(</span><span class="va">units</span><span class="op">)</span></span>
@@ -221,7 +221,7 @@ layer as well. Such weights are meant not to be taken into account
 during backpropagation, when you are training the layer.</p>
 <p>Here’s how to add and use a non-trainable weight:</p>
 <div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">ComputeSum</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/keras3/man/Layer.html" class="external-link">new_layer_class</a></span><span class="op">(</span></span>
+<code class="sourceCode R"><span><span class="va">ComputeSum</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/Layer.html">new_layer_class</a></span><span class="op">(</span></span>
 <span>  <span class="st">"ComputeSum"</span>,</span>
 <span>  initialize <span class="op">=</span> <span class="kw">function</span><span class="op">(</span><span class="va">input_dim</span><span class="op">)</span> <span class="op">{</span></span>
 <span>    <span class="va">input_dim</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/integer.html" class="external-link">as.integer</a></span><span class="op">(</span><span class="va">input_dim</span><span class="op">)</span></span>
@@ -268,7 +268,7 @@ inputs is known<a class="anchor" aria-label="anchor" href="#best-practice-deferr
 argument that was used to compute the shape of the weights
 <code>w</code> and <code>b</code> in <code>initialize()</code>:</p>
 <div class="sourceCode" id="cb22"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">Linear</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/keras3/man/Layer.html" class="external-link">new_layer_class</a></span><span class="op">(</span></span>
+<code class="sourceCode R"><span><span class="va">Linear</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/Layer.html">new_layer_class</a></span><span class="op">(</span></span>
 <span>  <span class="st">"Linear"</span>,</span>
 <span>  initialize <span class="op">=</span> <span class="kw">function</span><span class="op">(</span><span class="va">units</span> <span class="op">=</span> <span class="fl">32</span>, <span class="va">input_dim</span> <span class="op">=</span> <span class="fl">32</span><span class="op">)</span> <span class="op">{</span></span>
 <span>    <span class="va">units</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/integer.html" class="external-link">as.integer</a></span><span class="op">(</span><span class="va">units</span><span class="op">)</span></span>
@@ -297,7 +297,7 @@ known, some time after instantiating the layer.</p>
 <code>build(self, inputs_shape)</code> method of your layer. Like
 this:</p>
 <div class="sourceCode" id="cb23"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">Linear</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/keras3/man/Layer.html" class="external-link">new_layer_class</a></span><span class="op">(</span></span>
+<code class="sourceCode R"><span><span class="va">Linear</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/Layer.html">new_layer_class</a></span><span class="op">(</span></span>
 <span>  <span class="st">"Linear"</span>,</span>
 <span>  initialize <span class="op">=</span> <span class="kw">function</span><span class="op">(</span><span class="va">units</span> <span class="op">=</span> <span class="fl">32</span><span class="op">)</span> <span class="op">{</span></span>
 <span>    <span class="va">self</span><span class="op">$</span><span class="va">units</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/integer.html" class="external-link">as.integer</a></span><span class="op">(</span><span class="va">units</span><span class="op">)</span></span>
@@ -342,7 +342,7 @@ layer.</p>
 method and leave it to the first <code><a href="https://rdrr.io/r/base/call.html" class="external-link">call()</a></code> to trigger building
 their weights.</p>
 <div class="sourceCode" id="cb25"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">MLPBlock</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/keras3/man/Layer.html" class="external-link">new_layer_class</a></span><span class="op">(</span></span>
+<code class="sourceCode R"><span><span class="va">MLPBlock</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/Layer.html">new_layer_class</a></span><span class="op">(</span></span>
 <span>  <span class="st">"MLPBlock"</span>,</span>
 <span>  initialize <span class="op">=</span> <span class="kw">function</span><span class="op">(</span><span class="op">)</span> <span class="op">{</span></span>
 <span>    <span class="va">super</span><span class="op">$</span><span class="fu">initialize</span><span class="op">(</span><span class="op">)</span></span>
@@ -428,7 +428,7 @@ training loop. This is doable by calling
 <code>self$add_loss(value)</code>:</p>
 <div class="sourceCode" id="cb32"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># A layer that creates an activity regularization loss</span></span>
-<span><span class="va">ActivityRegularizationLayer</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/keras3/man/Layer.html" class="external-link">new_layer_class</a></span><span class="op">(</span></span>
+<span><span class="va">ActivityRegularizationLayer</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/Layer.html">new_layer_class</a></span><span class="op">(</span></span>
 <span>  <span class="st">"ActivityRegularizationLayer"</span>,</span>
 <span>  initialize <span class="op">=</span> <span class="kw">function</span><span class="op">(</span><span class="va">rate</span> <span class="op">=</span> <span class="fl">1e-2</span><span class="op">)</span> <span class="op">{</span></span>
 <span>    <span class="va">self</span><span class="op">$</span><span class="va">rate</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/numeric.html" class="external-link">as.numeric</a></span><span class="op">(</span><span class="va">rate</span><span class="op">)</span></span>
@@ -445,7 +445,7 @@ start of every <code>call</code> to the top-level layer, so that
 <code>layer$losses</code> always contains the loss values created during
 the last forward pass.</p>
 <div class="sourceCode" id="cb33"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">OuterLayer</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/keras3/man/Layer.html" class="external-link">new_layer_class</a></span><span class="op">(</span></span>
+<code class="sourceCode R"><span><span class="va">OuterLayer</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/Layer.html">new_layer_class</a></span><span class="op">(</span></span>
 <span>  <span class="st">"OuterLayer"</span>,</span>
 <span>  initialize <span class="op">=</span> <span class="kw">function</span><span class="op">(</span><span class="op">)</span> <span class="op">{</span></span>
 <span>    <span class="va">super</span><span class="op">$</span><span class="fu">initialize</span><span class="op">(</span><span class="op">)</span></span>
@@ -472,7 +472,7 @@ the last forward pass.</p>
 <p>In addition, the <code>loss</code> property also contains
 regularization losses created for the weights of any inner layer:</p>
 <div class="sourceCode" id="cb39"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">OuterLayerWithKernelRegularizer</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/keras3/man/Layer.html" class="external-link">new_layer_class</a></span><span class="op">(</span></span>
+<code class="sourceCode R"><span><span class="va">OuterLayerWithKernelRegularizer</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/Layer.html">new_layer_class</a></span><span class="op">(</span></span>
 <span>  <span class="st">"OuterLayerWithKernelRegularizer"</span>,</span>
 <span>  initialize <span class="op">=</span> <span class="kw">function</span><span class="op">(</span><span class="op">)</span> <span class="op">{</span></span>
 <span>    <span class="va">super</span><span class="op">$</span><span class="fu">initialize</span><span class="op">(</span><span class="op">)</span></span>
@@ -519,7 +519,7 @@ automatically summed and added to the main loss, if any):</p>
 <p>If you need your custom layers to be serializable as part of a <a href="/guides/functional_api/">Functional model</a>, you can optionally
 implement a <code><a href="../reference/get_config.html">get_config()</a></code> method:</p>
 <div class="sourceCode" id="cb45"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">Linear</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/keras3/man/Layer.html" class="external-link">new_layer_class</a></span><span class="op">(</span></span>
+<code class="sourceCode R"><span><span class="va">Linear</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/Layer.html">new_layer_class</a></span><span class="op">(</span></span>
 <span>  <span class="st">"Linear"</span>,</span>
 <span>  initialize <span class="op">=</span> <span class="kw">function</span><span class="op">(</span><span class="va">units</span> <span class="op">=</span> <span class="fl">32</span><span class="op">)</span> <span class="op">{</span></span>
 <span>    <span class="va">self</span><span class="op">$</span><span class="va">units</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/integer.html" class="external-link">as.integer</a></span><span class="op">(</span><span class="va">units</span><span class="op">)</span></span>
@@ -558,7 +558,7 @@ implement a <code><a href="../reference/get_config.html">get_config()</a></code>
 these arguments to the parent class in <code>initialize()</code> and to
 include them in the layer config:</p>
 <div class="sourceCode" id="cb48"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">Linear</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/keras3/man/Layer.html" class="external-link">new_layer_class</a></span><span class="op">(</span></span>
+<code class="sourceCode R"><span><span class="va">Linear</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/Layer.html">new_layer_class</a></span><span class="op">(</span></span>
 <span>  <span class="st">"Linear"</span>,</span>
 <span>  initialize <span class="op">=</span> <span class="kw">function</span><span class="op">(</span><span class="va">units</span> <span class="op">=</span> <span class="fl">32</span>, <span class="va">...</span><span class="op">)</span> <span class="op">{</span></span>
 <span>    <span class="va">self</span><span class="op">$</span><span class="va">units</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/integer.html" class="external-link">as.integer</a></span><span class="op">(</span><span class="va">units</span><span class="op">)</span></span>
@@ -614,7 +614,7 @@ expose a <code>training</code> (boolean) argument in the
 built-in training and evaluation loops (e.g. <code><a href="https://generics.r-lib.org/reference/fit.html" class="external-link">fit()</a></code>) to
 correctly use the layer in training and inference.</p>
 <div class="sourceCode" id="cb52"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">CustomDropout</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/keras3/man/Layer.html" class="external-link">new_layer_class</a></span><span class="op">(</span></span>
+<code class="sourceCode R"><span><span class="va">CustomDropout</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/Layer.html">new_layer_class</a></span><span class="op">(</span></span>
 <span>  <span class="st">"CustomDropout"</span>,</span>
 <span>  initialize <span class="op">=</span> <span class="kw">function</span><span class="op">(</span><span class="va">rate</span>, <span class="va">...</span><span class="op">)</span> <span class="op">{</span></span>
 <span>    <span class="va">super</span><span class="op">$</span><span class="fu">initialize</span><span class="op">(</span><span class="va">...</span><span class="op">)</span></span>
@@ -656,7 +656,7 @@ encompassing the entire ResNet50 network.</p>
 with the following differences:</p>
 <ul>
 <li>It exposes built-in training, evaluation, and prediction loops
-(<code><a href="https://generics.r-lib.org/reference/fit.html" class="external-link">fit()</a></code>, <code><a href="https://generics.r-lib.org/reference/evaluate.html" class="external-link">evaluate()</a></code>,
+(<code><a href="https://generics.r-lib.org/reference/fit.html" class="external-link">fit()</a></code>, <code><a href="https://rdrr.io/pkg/tensorflow/man/evaluate.html" class="external-link">evaluate()</a></code>,
 <code><a href="https://rdrr.io/r/stats/predict.html" class="external-link">predict()</a></code>).</li>
 <li>It exposes the list of its inner layers, via the
 <code>model$layers</code> property.</li>
@@ -732,7 +732,7 @@ JAX, and PyTorch. We’ll train it on MNIST digits.</p>
 composition of layers that subclass <code>Layer</code>. It will feature
 a regularization loss (KL divergence).</p>
 <div class="sourceCode" id="cb54"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">Sampling</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/keras3/man/Layer.html" class="external-link">new_layer_class</a></span><span class="op">(</span></span>
+<code class="sourceCode R"><span><span class="va">Sampling</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/Layer.html">new_layer_class</a></span><span class="op">(</span></span>
 <span>  <span class="st">"Sampling"</span>,</span>
 <span>  call <span class="op">=</span> <span class="kw">function</span><span class="op">(</span><span class="va">inputs</span><span class="op">)</span> <span class="op">{</span></span>
 <span>    <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="va">z_mean</span>, <span class="va">z_log_var</span><span class="op">)</span> <span class="op"><a href="../reference/multi-assign.html">%&lt;-%</a></span> <span class="va">inputs</span></span>
@@ -744,7 +744,7 @@ a regularization loss (KL divergence).</p>
 <span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># Maps MNIST digits to a triplet (z_mean, z_log_var, z).</span></span>
-<span><span class="va">Encoder</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/keras3/man/Layer.html" class="external-link">new_layer_class</a></span><span class="op">(</span></span>
+<span><span class="va">Encoder</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/Layer.html">new_layer_class</a></span><span class="op">(</span></span>
 <span>  <span class="st">"Encoder"</span>,</span>
 <span>  initialize <span class="op">=</span> <span class="kw">function</span><span class="op">(</span><span class="va">latent_dim</span> <span class="op">=</span> <span class="fl">32</span>, <span class="va">intermediate_dim</span> <span class="op">=</span> <span class="fl">64</span>, <span class="va">...</span><span class="op">)</span> <span class="op">{</span></span>
 <span>    <span class="va">super</span><span class="op">$</span><span class="fu">initialize</span><span class="op">(</span><span class="va">...</span><span class="op">)</span></span>
@@ -763,7 +763,7 @@ a regularization loss (KL divergence).</p>
 <span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># Converts z, the encoded digit vector, back into a readable digit.</span></span>
-<span><span class="va">Decoder</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/keras3/man/Layer.html" class="external-link">new_layer_class</a></span><span class="op">(</span></span>
+<span><span class="va">Decoder</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/Layer.html">new_layer_class</a></span><span class="op">(</span></span>
 <span>  <span class="st">"Decoder"</span>,</span>
 <span>  initialize <span class="op">=</span> <span class="kw">function</span><span class="op">(</span><span class="va">original_dim</span>, <span class="va">intermediate_dim</span> <span class="op">=</span> <span class="fl">64</span>, <span class="va">...</span><span class="op">)</span> <span class="op">{</span></span>
 <span>    <span class="va">super</span><span class="op">$</span><span class="fu">initialize</span><span class="op">(</span><span class="va">...</span><span class="op">)</span></span>

@@ -180,7 +180,6 @@ reference:
     contents:
       - get_config
       - get_weights
-      - get_input_at
       - count_params
       - reset_states
 
@@ -199,17 +198,10 @@ reference:
   - title: "Applications"
     contents:
       - starts_with("application_")
-      # - imagenet_preprocess_input
-      # - imagenet_decode_predictions
-      # - mobilenet_preprocess_input
-      # - mobilenet_decode_predictions
-
 
   - title: "Sequence Preprocessing"
     contents:
       - pad_sequences
-      # - skipgrams
-      # - make_sampling_table
       - timeseries_dataset_from_array
 
 

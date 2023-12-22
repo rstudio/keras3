@@ -98,13 +98,10 @@ print(x, ...)
 [(x, ...)
 
 # S3 method for keras_shape
-r_to_py(x, convert = FALSE)
-
-# S3 method for keras_shape
 as.integer(x, ...)
 
 # S3 method for keras_shape
-as.list(x)</code></pre></div>
+as.list(x, ...)</code></pre></div>
     </div>
 
     <div class="section level2">
@@ -115,6 +112,10 @@ as.list(x)</code></pre></div>
 Tensors are dispatched to <code>k_shape()</code> to extract the tensor shape. Values
 wrapped in <code><a href="https://rdrr.io/r/base/AsIs.html" class="external-link">I()</a></code> are used asis (see examples). All other objects are coerced
 via <code><a href="https://rdrr.io/r/base/integer.html" class="external-link">as.integer()</a></code>.</p></dd>
+
+
+<dt>x</dt>
+<dd><p>A 'keras_shape' object</p></dd>
 
 </dl></div>
     <div class="section level2">

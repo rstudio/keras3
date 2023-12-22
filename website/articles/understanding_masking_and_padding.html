@@ -276,7 +276,7 @@ you can call.</p>
 method of a mask-producing layer to the <code>call</code> method of a
 mask-consuming layer, like this:</p>
 <div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">MyLayer</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/keras3/man/Layer.html" class="external-link">new_layer_class</a></span><span class="op">(</span></span>
+<code class="sourceCode R"><span><span class="va">MyLayer</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/Layer.html">new_layer_class</a></span><span class="op">(</span></span>
 <span>  <span class="st">"MyLayer"</span>,</span>
 <span>  initialize <span class="op">=</span> <span class="kw">function</span><span class="op">(</span><span class="va">...</span><span class="op">)</span> <span class="op">{</span></span>
 <span>    <span class="va">super</span><span class="op">$</span><span class="fu">initialize</span><span class="op">(</span><span class="va">...</span><span class="op">)</span></span>
@@ -330,7 +330,7 @@ given the input and the current mask.</p>
 <p>Here is an example of a <code>TemporalSplit</code> layer that needs
 to modify the current mask.</p>
 <div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">TemporalSplit</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/keras3/man/Layer.html" class="external-link">new_layer_class</a></span><span class="op">(</span></span>
+<code class="sourceCode R"><span><span class="va">TemporalSplit</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/Layer.html">new_layer_class</a></span><span class="op">(</span></span>
 <span>  <span class="st">"TemporalSplit"</span>,</span>
 <span>  call <span class="op">=</span> <span class="kw">function</span><span class="op">(</span><span class="va">inputs</span><span class="op">)</span> <span class="op">{</span></span>
 <span>    <span class="co"># Expect the input to be 3D and mask to be 2D, split the input tensor into 2</span></span>
@@ -362,7 +362,7 @@ to modify the current mask.</p>
 <p>Here is another example of a <code>CustomEmbedding</code> layer that
 is capable of generating a mask from input values:</p>
 <div class="sourceCode" id="cb18"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">CustomEmbedding</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/keras3/man/Layer.html" class="external-link">new_layer_class</a></span><span class="op">(</span></span>
+<code class="sourceCode R"><span><span class="va">CustomEmbedding</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/Layer.html">new_layer_class</a></span><span class="op">(</span></span>
 <span>  <span class="st">"CustomEmbedding"</span>,</span>
 <span>  initialize <span class="op">=</span> <span class="kw">function</span><span class="op">(</span><span class="va">input_dim</span>, <span class="va">output_dim</span>, <span class="va">mask_zero</span><span class="op">=</span><span class="cn">FALSE</span>, <span class="va">...</span><span class="op">)</span> <span class="op">{</span></span>
 <span>    <span class="va">super</span><span class="op">$</span><span class="fu">initialize</span><span class="op">(</span><span class="va">...</span><span class="op">)</span></span>
@@ -423,7 +423,7 @@ through.</p>
 <p>Here’s an example of a layer that is whitelisted for mask
 propagation:</p>
 <div class="sourceCode" id="cb20"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">MyActivation</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/keras3/man/Layer.html" class="external-link">new_layer_class</a></span><span class="op">(</span></span>
+<code class="sourceCode R"><span><span class="va">MyActivation</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/Layer.html">new_layer_class</a></span><span class="op">(</span></span>
 <span>  <span class="st">"MyActivation"</span>,</span>
 <span>  initialize <span class="op">=</span> <span class="kw">function</span><span class="op">(</span><span class="va">...</span><span class="op">)</span> <span class="op">{</span></span>
 <span>    <span class="va">super</span><span class="op">$</span><span class="fu">initialize</span><span class="op">(</span><span class="va">...</span><span class="op">)</span></span>
@@ -460,7 +460,7 @@ the inputs will be passed to your layer whenever it is available.</p>
 the time dimension (axis 1) of an input sequence, while discarding
 masked timesteps.</p>
 <div class="sourceCode" id="cb22"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">TemporalSoftmax</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/keras3/man/Layer.html" class="external-link">new_layer_class</a></span><span class="op">(</span></span>
+<code class="sourceCode R"><span><span class="va">TemporalSoftmax</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/Layer.html">new_layer_class</a></span><span class="op">(</span></span>
 <span>  <span class="st">"TemporalSoftmax"</span>,</span>
 <span>  initialize <span class="op">=</span> <span class="kw">function</span><span class="op">(</span><span class="va">...</span><span class="op">)</span> <span class="op">{</span></span>
 <span>    <span class="va">super</span><span class="op">$</span><span class="fu">initialize</span><span class="op">(</span><span class="va">...</span><span class="op">)</span></span>

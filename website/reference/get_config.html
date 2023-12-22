@@ -103,7 +103,7 @@ nor the class name (those are handled externally).</p>
 <span><span class="fu">from_config</span><span class="op">(</span></span>
 <span>  <span class="va">config</span>,</span>
 <span>  custom_objects <span class="op">=</span> <span class="cn">NULL</span>,</span>
-<span>  class <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/attr.html" class="external-link">attr</a></span><span class="op">(</span><span class="va">config</span>, <span class="st">"config_class"</span>, <span class="cn">TRUE</span><span class="op">)</span> <span class="op">%||%</span> <span class="va">keras</span><span class="op">$</span><span class="va">Model</span></span>
+<span>  class <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/attr.html" class="external-link">attr</a></span><span class="op">(</span><span class="va">config</span>, <span class="st">"__class__"</span>, <span class="cn">TRUE</span><span class="op">)</span> <span class="op">%||%</span> <span class="va">keras</span><span class="op">$</span><span class="va">Model</span></span>
 <span><span class="op">)</span></span></code></pre></div>
     </div>
 
@@ -119,7 +119,11 @@ nor the class name (those are handled externally).</p>
 
 <dt>custom_objects</dt>
 <dd><p>list of custom objects needed to instantiate the layer,
-e.g., custom layers defined by <code><a href="https://rdrr.io/pkg/keras3/man/Layer.html" class="external-link">new_layer_class()</a></code> or similar.</p></dd>
+e.g., custom layers defined by <code><a href="Layer.html">new_layer_class()</a></code> or similar.</p></dd>
+
+
+<dt>class</dt>
+<dd><p>The keras class to restore.</p></dd>
 
 </dl></div>
     <div class="section level2">
@@ -147,7 +151,6 @@ to the filesystem.</p>
 <code><a href="summary.keras.models.model.Model.html">summary.keras.models.model.Model</a>()</code></p>
 <p>Other layer methods: 
 <code><a href="count_params.html">count_params</a>()</code>,
-<code><a href="get_input_at.html">get_input_at</a>()</code>,
 <code><a href="get_weights.html">get_weights</a>()</code>,
 <code><a href="reset_states.html">reset_states</a>()</code></p></div>
     </div>

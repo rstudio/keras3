@@ -89,7 +89,7 @@ override the method associated with the stage of interest."><!-- mathjax --><scr
     </div>
 
     <div class="ref-description section level2">
-    <p>Callbacks can be passed to keras methods such as <code><a href="https://generics.r-lib.org/reference/fit.html" class="external-link">fit()</a></code>, <code><a href="https://generics.r-lib.org/reference/evaluate.html" class="external-link">evaluate()</a></code>, and
+    <p>Callbacks can be passed to keras methods such as <code><a href="https://generics.r-lib.org/reference/fit.html" class="external-link">fit()</a></code>, <code><a href="https://rdrr.io/pkg/tensorflow/man/evaluate.html" class="external-link">evaluate()</a></code>, and
 <code><a href="https://rdrr.io/r/stats/predict.html" class="external-link">predict()</a></code> in order to hook into the various stages of the model training,
 evaluation, and inference lifecycle.</p>
 <p>To create a custom callback, call <code>Callback()</code> and
@@ -100,7 +100,6 @@ override the method associated with the stage of interest.</p>
     <h2 id="ref-usage">Usage<a class="anchor" aria-label="anchor" href="#ref-usage"></a></h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">Callback</span><span class="op">(</span></span>
 <span>  <span class="va">classname</span>,</span>
-<span>  <span class="va">...</span>,</span>
 <span>  on_epoch_begin <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  on_epoch_end <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  on_train_begin <span class="op">=</span> <span class="cn">NULL</span>,</span>
@@ -115,14 +114,15 @@ override the method associated with the stage of interest.</p>
 <span>  on_predict_end <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  on_predict_batch_begin <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  on_predict_batch_end <span class="op">=</span> <span class="cn">NULL</span>,</span>
-<span>  .private <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="op">)</span>,</span>
-<span>  .inherit <span class="op">=</span> <span class="va">keras</span><span class="op">$</span><span class="va">callbacks</span><span class="op">$</span><span class="va">Callback</span>,</span>
-<span>  .parent_env <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/sys.parent.html" class="external-link">parent.frame</a></span><span class="op">(</span><span class="op">)</span></span>
+<span>  <span class="va">...</span>,</span>
+<span>  public <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="op">)</span>,</span>
+<span>  private <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="op">)</span>,</span>
+<span>  inherit <span class="op">=</span> <span class="va">keras</span><span class="op">$</span><span class="va">callbacks</span><span class="op">$</span><span class="va">Callback</span>,</span>
+<span>  parent_env <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/sys.parent.html" class="external-link">parent.frame</a></span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="op">)</span></span>
 <span></span>
 <span><span class="fu">new_callback_class</span><span class="op">(</span></span>
 <span>  <span class="va">classname</span>,</span>
-<span>  <span class="va">...</span>,</span>
 <span>  on_epoch_begin <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  on_epoch_end <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  on_train_begin <span class="op">=</span> <span class="cn">NULL</span>,</span>
@@ -137,15 +137,21 @@ override the method associated with the stage of interest.</p>
 <span>  on_predict_end <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  on_predict_batch_begin <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  on_predict_batch_end <span class="op">=</span> <span class="cn">NULL</span>,</span>
-<span>  .private <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="op">)</span>,</span>
-<span>  .inherit <span class="op">=</span> <span class="va">keras</span><span class="op">$</span><span class="va">callbacks</span><span class="op">$</span><span class="va">Callback</span>,</span>
-<span>  .parent_env <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/sys.parent.html" class="external-link">parent.frame</a></span><span class="op">(</span><span class="op">)</span></span>
+<span>  <span class="va">...</span>,</span>
+<span>  public <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="op">)</span>,</span>
+<span>  private <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="op">)</span>,</span>
+<span>  inherit <span class="op">=</span> <span class="va">keras</span><span class="op">$</span><span class="va">callbacks</span><span class="op">$</span><span class="va">Callback</span>,</span>
+<span>  parent_env <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/sys.parent.html" class="external-link">parent.frame</a></span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div class="section level2">
     <h2 id="arguments">Arguments<a class="anchor" aria-label="anchor" href="#arguments"></a></h2>
-    <dl><dt>on_epoch_begin</dt>
+    <dl><dt>classname</dt>
+<dd><p>The name of the callback class. CamelCase by convention.</p></dd>
+
+
+<dt>on_epoch_begin</dt>
 <dd><p></p><div class="sourceCode r"><pre><code>\(epoch, logs = NULL)
 </code></pre><p></p></div>
 <p>Called at the start of an epoch.</p>
@@ -240,7 +246,7 @@ but that may change in the future.</p></li>
 <dt>on_test_batch_begin</dt>
 <dd><p></p><div class="sourceCode r"><pre><code>\(batch, logs = NULL)
 </code></pre><p></p></div>
-<p>Called at the beginning of a batch in <code><a href="https://generics.r-lib.org/reference/evaluate.html" class="external-link">evaluate()</a></code> methods.</p>
+<p>Called at the beginning of a batch in <code><a href="https://rdrr.io/pkg/tensorflow/man/evaluate.html" class="external-link">evaluate()</a></code> methods.</p>
 <p>Also called at the beginning of a validation batch in the <code><a href="https://generics.r-lib.org/reference/fit.html" class="external-link">fit()</a></code>
 methods, if validation data is provided.</p>
 <p>Subclasses should override for any actions to run.</p>
@@ -256,7 +262,7 @@ method but that may change in the future.</p></li>
 <dt>on_test_batch_end</dt>
 <dd><p></p><div class="sourceCode r"><pre><code>\(batch, logs = NULL)
 </code></pre><p></p></div>
-<p>Called at the end of a batch in <code><a href="https://generics.r-lib.org/reference/evaluate.html" class="external-link">evaluate()</a></code> methods.</p>
+<p>Called at the end of a batch in <code><a href="https://rdrr.io/pkg/tensorflow/man/evaluate.html" class="external-link">evaluate()</a></code> methods.</p>
 <p>Also called at the end of a validation batch in the <code><a href="https://generics.r-lib.org/reference/fit.html" class="external-link">fit()</a></code>
 methods, if validation data is provided.</p>
 <p>Subclasses should override for any actions to run.</p>
@@ -315,7 +321,11 @@ method but that may change in the future.</p></li>
 </ul></dd>
 
 
-<dt>.private</dt>
+<dt>..., public</dt>
+<dd><p>Additional methods or public members of the custom class.</p></dd>
+
+
+<dt>private</dt>
 <dd><p>Named list of R objects (typically, functions) to include in
 instance private environments. <code>private</code> will be a symbol in scope in all
 class methods, resolving to an R environment populated with the list
@@ -325,7 +335,11 @@ symbols. Any objects in <code>private</code> will be invisible from the Keras
 framework and the Python runtime.</p></dd>
 
 
-<dt>.parent_env</dt>
+<dt>inherit</dt>
+<dd><p>The Callback class to inherit from. By default, the base <code>Callback</code>.</p></dd>
+
+
+<dt>parent_env</dt>
 <dd><p>The environment that all class methods will have as a grandparent.</p></dd>
 
 </dl></div>

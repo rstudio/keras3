@@ -119,12 +119,16 @@ for each skipped layer.</p>
 
     <div class="section level2">
     <h2 id="ref-usage">Usage<a class="anchor" aria-label="anchor" href="#ref-usage"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">load_model_weights</span><span class="op">(</span><span class="va">self</span>, <span class="va">filepath</span>, skip_mismatch <span class="op">=</span> <span class="cn">FALSE</span>, <span class="va">...</span><span class="op">)</span></span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">load_model_weights</span><span class="op">(</span><span class="va">model</span>, <span class="va">filepath</span>, skip_mismatch <span class="op">=</span> <span class="cn">FALSE</span>, <span class="va">...</span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div class="section level2">
     <h2 id="arguments">Arguments<a class="anchor" aria-label="anchor" href="#arguments"></a></h2>
-    <dl><dt>filepath</dt>
+    <dl><dt>model</dt>
+<dd><p>A keras model.</p></dd>
+
+
+<dt>filepath</dt>
 <dd><p>String, path to the weights file to load.
 It can either be a <code>.weights.h5</code> file
 or a legacy <code>.h5</code> weights file.</p></dd>

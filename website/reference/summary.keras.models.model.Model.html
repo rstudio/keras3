@@ -92,7 +92,7 @@
 <span><span class="co"># S3 method for keras.models.model.Model</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/format.html" class="external-link">format</a></span><span class="op">(</span></span>
 <span>  <span class="va">x</span>,</span>
-<span>  line_length <span class="op">=</span> <span class="va">width</span> <span class="op">-</span> <span class="op">(</span><span class="fl">11L</span> <span class="op">*</span> <span class="va">show_trainable</span><span class="op">)</span>,</span>
+<span>  line_length <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/options.html" class="external-link">getOption</a></span><span class="op">(</span><span class="st">"width"</span><span class="op">)</span>,</span>
 <span>  positions <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  expand_nested <span class="op">=</span> <span class="cn">FALSE</span>,</span>
 <span>  show_trainable <span class="op">=</span> <span class="va">x</span><span class="op">$</span><span class="va">built</span> <span class="op">&amp;&amp;</span> <span class="fu"><a href="https://rdrr.io/r/base/logical.html" class="external-link">as.logical</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/length.html" class="external-link">length</a></span><span class="op">(</span><span class="va">x</span><span class="op">$</span><span class="va">non_trainable_weights</span><span class="op">)</span><span class="op">)</span>,</span>
@@ -149,13 +149,6 @@ By default <code>NULL</code> which considers all layers of model.</p></dd>
 <dt>compact</dt>
 <dd><p>Whether to remove white-space only lines from the model
 summary. (Default <code>TRUE</code>)</p></dd>
-
-
-<dt>print_fn</dt>
-<dd><p>Print function to use. By default, prints to <code>stdout</code>.
-It will be called on each line of the summary.
-You can set it to a custom function
-in order to capture the string summary.</p></dd>
 
 </dl></div>
     <div class="section level2">

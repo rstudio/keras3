@@ -89,9 +89,9 @@ inputs and outputs of Keras applications.</p>
 
     <div class="section level2">
     <h2 id="ref-usage">Usage<a class="anchor" aria-label="anchor" href="#ref-usage"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">application_preprocess_inputs</span><span class="op">(</span><span class="va">model</span>, <span class="va">x</span>, <span class="va">...</span><span class="op">)</span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">application_preprocess_inputs</span><span class="op">(</span><span class="va">model</span>, <span class="va">x</span>, <span class="va">...</span>, data_format <span class="op">=</span> <span class="cn">NULL</span><span class="op">)</span></span>
 <span></span>
-<span><span class="fu">application_decode_predictions</span><span class="op">(</span><span class="va">model</span>, <span class="va">preds</span>, <span class="va">...</span><span class="op">)</span></span></code></pre></div>
+<span><span class="fu">application_decode_predictions</span><span class="op">(</span><span class="va">model</span>, <span class="va">preds</span>, top <span class="op">=</span> <span class="fl">5L</span>, <span class="va">...</span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div class="section level2">
@@ -108,16 +108,20 @@ inputs and outputs of Keras applications.</p>
 <dd><p>Additional arguments passed to the preprocessing or decoding function.</p></dd>
 
 
+<dt>data_format</dt>
+<dd><p>Optional data format of the image tensor/array.
+<code>NULL</code> means the global setting
+<code><a href="config_image_data_format.html">config_image_data_format()</a></code> is used
+(unless you changed it, it uses <code>"channels_last"</code>).
+Defaults to <code>NULL</code>.</p></dd>
+
+
 <dt>preds</dt>
 <dd><p>A batch of outputs from the model.</p></dd>
 
 
 <dt>top</dt>
 <dd><p>The number of top predictions to return.</p></dd>
-
-
-<dt>data_format</dt>
-<dd><p>Optional data format of the image tensor/array.</p></dd>
 
 </dl></div>
     <div class="section level2">
@@ -146,7 +150,6 @@ inputs and outputs of Keras applications.</p>
 <span class="r-in"><span><span class="va">decoded_preds</span> <span class="op">&lt;-</span> <span class="fu">application_decode_predictions</span><span class="op">(</span><span class="va">model</span>, <span class="va">preds</span><span class="op">)</span></span></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="op">}</span></span></span>
-<span class="r-in"><span></span></span>
 </code></pre></div>
     </div>
   </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>

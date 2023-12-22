@@ -159,18 +159,23 @@ an alias symbol, the value supplied to <code>Layer(classname = )</code></p></li>
 <span>  build <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  get_config <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  <span class="va">...</span>,</span>
-<span>  .private <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="op">)</span>,</span>
-<span>  .inherit <span class="op">=</span> <span class="va">keras</span><span class="op">$</span><span class="va">layers</span><span class="op">$</span><span class="va">Layer</span>,</span>
-<span>  .parent_env <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/sys.parent.html" class="external-link">parent.frame</a></span><span class="op">(</span><span class="op">)</span></span>
+<span>  public <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="op">)</span>,</span>
+<span>  private <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="op">)</span>,</span>
+<span>  inherit <span class="op">=</span> <span class="va">keras</span><span class="op">$</span><span class="va">layers</span><span class="op">$</span><span class="va">Layer</span>,</span>
+<span>  parent_env <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/sys.parent.html" class="external-link">parent.frame</a></span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="op">)</span></span>
 <span></span>
-<span><span class="fu"><a href="https://rdrr.io/pkg/keras3/man/Layer.html" class="external-link">new_layer_class</a></span><span class="op">(</span></span>
+<span><span class="fu">new_layer_class</span><span class="op">(</span></span>
 <span>  <span class="va">classname</span>,</span>
-<span>  <span class="va">...</span>,</span>
 <span>  initialize <span class="op">=</span> <span class="cn">NULL</span>,</span>
-<span>  build <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  call <span class="op">=</span> <span class="cn">NULL</span>,</span>
-<span>  get_config <span class="op">=</span> <span class="cn">NULL</span></span>
+<span>  build <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  get_config <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  <span class="va">...</span>,</span>
+<span>  public <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="op">)</span>,</span>
+<span>  private <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="op">)</span>,</span>
+<span>  inherit <span class="op">=</span> <span class="va">keras</span><span class="op">$</span><span class="va">layers</span><span class="op">$</span><span class="va">Layer</span>,</span>
+<span>  parent_env <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/sys.parent.html" class="external-link">parent.frame</a></span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="op">)</span></span></code></pre></div>
     </div>
 
@@ -185,11 +190,14 @@ an alias symbol, the value supplied to <code>Layer(classname = )</code></p></li>
 description section.</p></dd>
 
 
-<dt>...</dt>
-<dd><p>Additional methods or public members of the custom class.</p></dd>
+<dt>..., public</dt>
+<dd><p>Additional methods or public members of the custom class.
+Recommended methods <code>initialize</code>, <code>call</code> can optionally be
+provided as elements of <code>public</code>, and will take precedence over the value
+supplied to the argument.</p></dd>
 
 
-<dt>.private</dt>
+<dt>private</dt>
 <dd><p>Named list of R objects (typically, functions) to include in
 instance private environments. <code>private</code> will be a symbol in scope in all
 class methods, resolving to an R environment populated with the list
@@ -199,12 +207,12 @@ symbols. Any objects in <code>private</code> will be invisible from the Keras
 framework and the Python runtime.</p></dd>
 
 
-<dt>.inherit</dt>
+<dt>inherit</dt>
 <dd><p>What the new layer will subclass. By default, the base keras <code>Layer</code> class.</p></dd>
 
 
-<dt>.parent_env</dt>
-<dd><p>The environment that all class methods will have as a grandparent.</p></dd>
+<dt>parent_env</dt>
+<dd><p>The R environment that all class methods will have as a grandparent.</p></dd>
 
 </dl></div>
     <div class="section level2">

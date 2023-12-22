@@ -94,7 +94,7 @@ NULL value are optional methods that can be provided."><!-- mathjax --><script s
 
     <div class="ref-description section level2">
     <p>These functions can be used to make custom objects that fit in the family of
-existing keras types. For example, <code><a href="https://rdrr.io/pkg/keras3/man/Layer.html" class="external-link">new_layer_class()</a></code> will return a class
+existing keras types. For example, <code><a href="Layer.html">new_layer_class()</a></code> will return a class
 constructor, an object that behaves like other layer functions such as
 <code><a href="layer_dense.html">layer_dense()</a></code>. <code><a href="Callback.html">new_callback_class()</a></code> will return an object that behaves
 similarly to other callback functions, like
@@ -123,15 +123,6 @@ similarly to other callback functions, like
 <span>  test_step <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  compute_loss <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  compute_metrics <span class="op">=</span> <span class="cn">NULL</span></span>
-<span><span class="op">)</span></span>
-<span></span>
-<span><span class="fu"><a href="https://rdrr.io/pkg/keras3/man/Layer.html" class="external-link">new_layer_class</a></span><span class="op">(</span></span>
-<span>  <span class="va">classname</span>,</span>
-<span>  <span class="va">...</span>,</span>
-<span>  initialize <span class="op">=</span> <span class="cn">NULL</span>,</span>
-<span>  build <span class="op">=</span> <span class="cn">NULL</span>,</span>
-<span>  call <span class="op">=</span> <span class="cn">NULL</span>,</span>
-<span>  get_config <span class="op">=</span> <span class="cn">NULL</span></span>
 <span><span class="op">)</span></span></code></pre></div>
     </div>
 
@@ -146,12 +137,12 @@ to be a CamelCase version of the constructor.</p></dd>
 <dd><p>Additional fields and methods for the new type.</p></dd>
 
 
-<dt>initialize, build, call, get_config, on_epoch_begin, on_epoch_end, on_train_begin, on_train_end, on_batch_begin, on_batch_end, on_predict_batch_begin, on_predict_batch_end, on_predict_begin, on_predict_end, on_test_batch_begin, on_test_batch_end, on_test_begin, on_test_end, on_train_batch_begin, on_train_batch_end, update_state, result, train_step, predict_step, test_step, compute_loss, compute_metrics</dt>
+<dt>initialize, update_state, result, call, train_step, predict_step, test_step, compute_loss, compute_metrics</dt>
 <dd><p>Optional methods that can be overridden.</p></dd>
 
 
-<dt>x</dt>
-<dd><p>A function that should be converted to an active property of the class type.</p></dd>
+<dt>inherit</dt>
+<dd><p>class to inherit from.</p></dd>
 
 </dl></div>
     <div class="section level2">

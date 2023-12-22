@@ -142,7 +142,7 @@ Last Rendered: 2023-11-29</h4>
 <h2 id="introduction">Introduction<a class="anchor" aria-label="anchor" href="#introduction"></a>
 </h2>
 <p>Keras provides default training and evaluation loops,
-<code><a href="https://generics.r-lib.org/reference/fit.html" class="external-link">fit()</a></code> and <code><a href="https://generics.r-lib.org/reference/evaluate.html" class="external-link">evaluate()</a></code>. Their usage is covered
+<code><a href="https://generics.r-lib.org/reference/fit.html" class="external-link">fit()</a></code> and <code><a href="https://rdrr.io/pkg/tensorflow/man/evaluate.html" class="external-link">evaluate()</a></code>. Their usage is covered
 in the guide <a href="https://keras.io/guides/training_with_built_in_methods/" class="external-link">Training
 &amp; evaluation with the built-in methods</a>.</p>
 <p>If you want to customize the learning algorithm of your model while
@@ -470,7 +470,7 @@ and add them to the main loss in your training step.</p>
 <p>Consider this layer, that creates an activity regularization
 loss:</p>
 <div class="sourceCode" id="cb22"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">ActivityRegularizationLayer</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/keras3/man/Layer.html" class="external-link">new_layer_class</a></span><span class="op">(</span></span>
+<code class="sourceCode R"><span><span class="va">ActivityRegularizationLayer</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/Layer.html">new_layer_class</a></span><span class="op">(</span></span>
 <span>  <span class="st">"ActivityRegularizationLayer"</span>,</span>
 <span>  call <span class="op">=</span> <span class="kw">function</span><span class="op">(</span><span class="va">inputs</span><span class="op">)</span> <span class="op">{</span></span>
 <span>    <span class="va">self</span><span class="op">$</span><span class="fu">add_loss</span><span class="op">(</span><span class="fl">0.1</span> <span class="op">*</span> <span class="va">tf</span><span class="op">$</span><span class="fu">reduce_mean</span><span class="op">(</span><span class="va">inputs</span><span class="op">)</span><span class="op">)</span></span>
