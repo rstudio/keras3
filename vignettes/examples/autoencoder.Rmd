@@ -74,7 +74,7 @@ noisy_test_data <- noise(test_data)
 display(train_data, noisy_train_data)
 ```
 
-![plot of chunk unnamed-chunk-2](/Users/dfalbel/Documents/posit/keras/man/figures/autoencoder/unnamed-chunk-2-1.png)
+![plot of chunk unnamed-chunk-2](man/figures/autoencoder/unnamed-chunk-2-1.png)
 
 ## Build the autoencoder
 
@@ -271,7 +271,7 @@ predictions <- autoencoder %>% predict(test_data)
 display(test_data, predictions)
 ```
 
-![plot of chunk unnamed-chunk-5](/Users/dfalbel/Documents/posit/keras/man/figures/autoencoder/unnamed-chunk-5-1.png)
+![plot of chunk unnamed-chunk-5](../..//man/figures/autoencoder/unnamed-chunk-5-1.png)
 
 Now that we know that our autoencoder works, let's retrain it using the noisy
 data as our input and the clean data as our target. We want our autoencoder to
@@ -510,4 +510,4 @@ predictions <- autoencoder %>% predict(noisy_test_data)
 display(noisy_test_data, predictions)
 ```
 
-![plot of chunk unnamed-chunk-7](/Users/dfalbel/Documents/posit/keras/man/figures/autoencoder/unnamed-chunk-7-1.png)
+![plot of chunk unnamed-chunk-7](../..//man/figures/autoencoder/unnamed-chunk-7-1.png)

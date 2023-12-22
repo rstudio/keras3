@@ -86,7 +86,7 @@ input_img_paths[10] %>%
   plot()
 ```
 
-![plot of chunk unnamed-chunk-4](/Users/dfalbel/Documents/posit/keras/man/figures/oxford_pets_image_segmentation/unnamed-chunk-4-1.png)
+![plot of chunk unnamed-chunk-4](../..//man/figures/oxford_pets_image_segmentation/unnamed-chunk-4-1.png)
 
 ```r
 target_img_paths[10] %>%
@@ -96,7 +96,7 @@ target_img_paths[10] %>%
   plot()
 ```
 
-![plot of chunk unnamed-chunk-4](/Users/dfalbel/Documents/posit/keras/man/figures/oxford_pets_image_segmentation/unnamed-chunk-4-2.png)
+![plot of chunk unnamed-chunk-4](../..//man/figures/oxford_pets_image_segmentation/unnamed-chunk-4-2.png)
 
 ## Prepare dataset to load & vectorize batches of data
 
@@ -674,4 +674,4 @@ target_img_paths[i] %>%
 display_mask(i)  # Note that the model only sees inputs at 150x150.
 ```
 
-![plot of chunk unnamed-chunk-9](/Users/dfalbel/Documents/posit/keras/man/figures/oxford_pets_image_segmentation/unnamed-chunk-9-1.png)
+![plot of chunk unnamed-chunk-9](../..//man/figures/oxford_pets_image_segmentation/unnamed-chunk-9-1.png)
