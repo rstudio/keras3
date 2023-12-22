@@ -302,15 +302,17 @@
 #' final_logs <- ...
 #' callbacks$on_train_end(final_logs)
 #' ```
-#'
-#' @param .private Named list of R objects (typically, functions) to include in
+#' @param ...,public Additional methods or public members of the custom class.
+#' @param classname The name of the callback class. CamelCase by convention.
+#' @param private Named list of R objects (typically, functions) to include in
 #'   instance private environments. `private` will be a symbol in scope in all
 #'   class methods, resolving to an R environment populated with the list
 #'   provided. Each instance will have it's own `private` environment. All
 #'   methods (functions) in `private` will have in scope `self` and `__class__`
 #'   symbols. Any objects in `private` will be invisible from the Keras
 #'   framework and the Python runtime.
-#' @param .parent_env The environment that all class methods will have as a grandparent.
+#' @param parent_env The environment that all class methods will have as a grandparent.
+#' @param inherit The Callback class to inherit from. By default, the base `Callback`.
 #'
 #' @export
 #' @tether keras.callbacks.Callback
@@ -320,7 +322,6 @@
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/callbacks/Callback>
 Callback <-
 function(classname,
-         ...,
          on_epoch_begin = NULL,
          on_epoch_end = NULL,
          on_train_begin = NULL,
@@ -335,16 +336,31 @@ function(classname,
          on_predict_end = NULL,
          on_predict_batch_begin = NULL,
          on_predict_batch_end = NULL,
-         .private = list(),
-         .inherit = keras$callbacks$Callback,
-         .parent_env = parent.frame())
+         ...,
+         public = list(),
+         private = list(),
+         inherit = keras$callbacks$Callback,
+         parent_env = parent.frame())
 {
+
+  members <- modifyList(list(...), named_list(
+    on_epoch_begin, on_epoch_end,
+    on_train_begin, on_train_end,
+    on_train_batch_begin, on_train_batch_end,
+    on_test_begin, on_test_end,
+    on_test_batch_begin, on_test_batch_end,
+    on_predict_begin, on_predict_end,
+    on_predict_batch_begin, on_predict_batch_end
+  ), keep.null = FALSE)
+
+  members <- modifyList(members, public, keep.null = TRUE)
+
   python_path <- system.file("python", package = "keras3")
   tools <- import_from_path("kerastools.callback", path = python_path)
   wrap_sig_idx_logs <- tools$wrap_sig_idx_logs
   wrap_sig_logs <- tools$wrap_sig_logs
 
-  members <- capture_args2(list(
+  members <- modify_intersection(members, list(
     from_config =            \(x) decorate_method(x, "classmethod"),
     on_epoch_begin =         \(x) decorate_method(x, wrap_sig_idx_logs),
     on_epoch_end =           \(x) decorate_method(x, wrap_sig_idx_logs),
@@ -360,17 +376,14 @@ function(classname,
     on_predict_end =         \(x) decorate_method(x, wrap_sig_logs),
     on_predict_batch_begin = \(x) decorate_method(x, wrap_sig_idx_logs),
     on_predict_batch_end =   \(x) decorate_method(x, wrap_sig_idx_logs)
-  ),
-  ignore = c("classname", ".private", ".parent_env", ".inherit")
-  )
-  members <- drop_null_defaults(members)
+  ))
 
   new_py_type(
     classname = classname,
     members = members,
-    inherit = .inherit,
-    parent_env = .parent_env,
-    private = .private
+    inherit = inherit,
+    parent_env = parent_env,
+    private = private
   )
 }
 
