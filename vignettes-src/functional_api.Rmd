@@ -321,41 +321,42 @@ You can build this model in a few lines with the functional API:
 
 ```{r}
 num_tags <- 12  # Number of unique issue tags
-num_words <- 10000  # Size of vocabulary obtained when preprocessing text data
+num_words <-
+  10000  # Size of vocabulary obtained when preprocessing text data
 num_departments <- 4  # Number of departments for predictions
 
-title_input <- layer_input(
-  shape = shape(NULL), name="title"
-)  # Variable-length sequence of ints
-body_input <- layer_input(
-    shape = shape(NULL), name="body"
-)  # Variable-length sequence of ints
-tags_input <- layer_input(
-    shape = num_tags, name="tags"
-)  # Binary vectors of size `num_tags`
+title_input <- # Variable-length sequence of ints
+  layer_input(shape(NA), name = "title")  
+body_input <-  # Variable-length sequence of ints
+  layer_input(shape(NA), name = "body") 
+tags_input <-  # Binary vectors of size `num_tags`
+  layer_input(shape = num_tags, name = "tags")  
 
 # Embed each word in the title into a 64-dimensional vector
 title_features <- layer_embedding(title_input, num_words, 64)
 # Embed each word in the text into a 64-dimensional vector
 body_features <- layer_embedding(body_input, num_words, 64)
 
-# Reduce sequence of embedded words in the title into a single 128-dimensional vector
+# Reduce sequence of embedded words in the title 
+# into a single 128-dimensional vector
 title_features <- layer_lstm(title_features, 128)
-# Reduce sequence of embedded words in the body into a single 32-dimensional vector
+# Reduce sequence of embedded words in the body 
+# into a single 32-dimensional vector
 body_features <- layer_lstm(body_features, 32)
 
 # Merge all available features into a single large vector via concatenation
-x <- layer_concatenate(list(title_features, body_features, tags_input))
+x <- layer_concatenate(title_features, body_features, tags_input)
 
 # Stick a logistic regression for priority prediction on top of the features
-priority_pred <- layer_dense(x, 1, name="priority")
+priority_pred <- layer_dense(x, 1, name = "priority")
+
 # Stick a department classifier on top of the features
-department_pred <- layer_dense(x, num_departments, name="department")
+department_pred <- layer_dense(x, num_departments, name = "department")
 
 # Instantiate an end-to-end model predicting both priority and department
 model <- keras_model(
-    inputs = list(title_input, body_input, tags_input),
-    outputs = list(priority = priority_pred, department = department_pred)
+  inputs = list(title_input, body_input, tags_input),
+  outputs = list(priority = priority_pred, department = department_pred)
 )
 ```
 
@@ -478,8 +479,9 @@ model %>% compile(
     loss = loss_sparse_categorical_crossentropy(from_logits = TRUE),
     metrics = "acc"
 )
-# We restrict the data to the first 1000 samples so as to limit execution time
-# on Colab. Try to train on the entire dataset until convergence!
+# We restrict the data to the first 1000 samples so as to limit the 
+# guide render time.
+# Try to train on the entire dataset until convergence!
 model %>% fit(
     x_train[1:1000,,,],
     y_train[1:1000,],
