@@ -862,11 +862,12 @@ summary.keras.models.model.Model <- function(object, ...) {
 #' @export
 format.keras.models.model.Model <-
 function(x,
-         line_length = width - (11L * show_trainable),
+         line_length = width - (12L * show_trainable),
          positions = NULL,
          expand_nested = FALSE,
          show_trainable = x$built && as.logical(length(x$non_trainable_weights)),
          ...,
+         width = getOption("width"),
          # rich = TRUE, ??
          # print_fn = NULL,
          layer_range = NULL,
@@ -875,11 +876,12 @@ function(x,
     if (py_is_null_xptr(x))
         return("<pointer: 0x0>")
 
-    args <- capture_args(match.call(), ignore = c("x", "compact"))
+    args <- capture_args2(ignore = c("x", "compact", "width"),
+                          force = c("show_trainable", "line_length"))
 
     # Do we need to check for model$built before calling summary?
     with_rich_config(
-        out <- trimws(py_capture_output(do.call(x$summary, args)))
+      out <- trimws(py_capture_output(do.call(x$summary, args)))
     )
 
     if(compact) {
