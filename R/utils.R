@@ -236,14 +236,20 @@ capture_args <- function(cl, modifiers = NULL, ignore = NULL,
 }
 
 
-#' @importFrom rlang quos eval_tidy
+#' @importFrom rlang list2
 capture_args2 <- function(modifiers = NULL, ignore = NULL, force = NULL) {
   cl <- sys.call(-1L)
   envir <- parent.frame(1L)
   fn <- sys.function(-1L)
 
-  if (identical(cl[length(cl)], as.call(list(quote(expr = )))))
-    cl[[length(cl)]] <- NULL
+  # match.call() automatically omits missing() args in the returned call. These
+  # user calls all standardize to the same thing:
+  # - layer_dense(, 10)
+  # - layer_dense(object = , 10)
+  # - layer_dense(object = , 10, )
+  # - layer_dense(, 10, )
+  # all standardize to:
+  # - layer_dense(units = 10)
   cl <- match.call(fn, cl, expand.dots = TRUE, envir = parent.frame(2))
 
   fn_arg_nms <- names(formals(fn))
@@ -251,8 +257,7 @@ capture_args2 <- function(modifiers = NULL, ignore = NULL, force = NULL) {
   if (length(ignore) && !is.character(ignore)) {
     # e.g., ignore = c("object", \(nms) startsWith(nms, "."))
     ignore <- as.character(unlist(lapply(ignore, function(x) {
-      if (is.character(x))
-        return(x)
+      if (is.character(x)) return(x)
       stopifnot(is.function(x))
       x <- x(known_args) # fn can return either lgl or int for [
       if (!is.character(x))
@@ -263,34 +268,35 @@ capture_args2 <- function(modifiers = NULL, ignore = NULL, force = NULL) {
   known_args <- setdiff(known_args, ignore)
   known_args <- union(known_args, force)
   names(known_args) <- known_args
-  cl2 <- c(quote(list), lapply(known_args, as.symbol))
 
   if("..." %in% fn_arg_nms && !"..." %in% ignore) {
     assert_all_dots_named(envir, cl)
-    # this might reorder args by assuming ... are last, but it doesn't matter
-    # since everything is supplied as a keyword arg to the Python side anyway
-    cl2 <- c(cl2, quote(...))
-    # use list2 to accept trailing empty `,`
-    cl2[[1]] <- quote(rlang::list2)
-  }
+    # match.call already drops missing args that match to known args, but it
+    # doesn't protect from missing args that matched into ...
+    # use list2() to allow dropping a trailing missing arg in ... also
+    dots <- quote(...)
+    list <- list2
+  } else
+    dots <- NULL
 
-  args <- eval(as.call(cl2), envir)
+  # this might reorder args by assuming ... are last, but it doesn't matter
+  # since everything is supplied as a keyword arg to the Python side anyway
+  cl <- as.call(c(list, lapply(known_args, as.symbol), dots))
+  args <- eval(cl, envir)
 
-  # filter out args to ignore
-  for(ig in intersect(names(cl), ignore))
-    cl[[ig]] <- NULL
+  # filter out ignore again, in case any were in ...
+  # we could probably enhance the `cl` constructed above to use, e.g.,
+  # ..1, ..2, ..4, to skip ignores, and avoid forcing them.
+  if (length(ignores_in_dots <- intersect(names(cl), ignore)))
+    args[ignores_in_dots] <- NULL
 
-  # apply modifier functions. e.g., as_nullable_integer
-  nms_to_modify <- intersect(names(args), names(modifiers))
-  for (nm in nms_to_modify) {
+  # apply modifier functions. e.g., as_nullable_integer()
 
-    # escape hatch: user supplied python objects pass through untransformed
-    # if (inherits(args[[nm]] -> val, "python.builtin.object")) next
-
-    # list() so if modifier returns NULL, don't remove the arg
-    args[nm] <- list(modifiers[[nm]](args[[nm]]))
-    # args[nm] <- list(modifiers[[nm]](val))
-  }
+  if (length(names_to_modify <-
+             intersect(names(args), names(modifiers))))
+    args[names_to_modify] <- lapply(names_to_modify, function(name) {
+      modifiers[[name]](args[[name]])
+    })
 
   args
 }
