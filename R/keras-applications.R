@@ -3874,7 +3874,12 @@ function (include_top = TRUE, weights = "imagenet", input_tensor = NULL,
 #' @param preds A batch of outputs from the model.
 #' @param ... Additional arguments passed to the preprocessing or decoding function.
 #' @param top The number of top predictions to return.
-#' @param data_format Optional data format of the image tensor/array.
+#' @param data_format
+#' Optional data format of the image tensor/array.
+#' `NULL` means the global setting
+#' `config_image_data_format()` is used
+#' (unless you changed it, it uses `"channels_last"`).
+#' Defaults to `NULL`.
 #'
 #' @return
 #' - A list of decoded predictions in case of `application_decode_predictions()`.
@@ -3890,24 +3895,23 @@ function (include_top = TRUE, weights = "imagenet", input_tensor = NULL,
 #' decoded_preds <- application_decode_predictions(model, preds)
 #'
 #' }
-#'
 #' @name process_utils
 NULL
 
 #' @describeIn process_utils Pre-process inputs to be used in the model
 #' @export
-application_preprocess_inputs <- function(model, x, ...) {
+application_preprocess_inputs <- function(model, x, ..., data_format = NULL) {
   preprocess_input <- attr(model, "preprocess_input")
   if (is.null(preprocess_input)) not_found_errors()
-  preprocess_input(x, ...)
+  preprocess_input(x, data_format = data_format, ...)
 }
 
 #' @describeIn process_utils Decode predictions from the model
 #' @export
-application_decode_predictions <- function(model, preds, ...) {
+application_decode_predictions <- function(model, preds, top = 5L, ...) {
   decode_predictions <- attr(model, "decode_predictions")
   if (is.null(decode_predictions)) not_found_errors()
-  decode_predictions(preds, ...)
+  decode_predictions(preds, top = as_integer(top), ...)
 }
 
 not_found_errors <- function(model) {
