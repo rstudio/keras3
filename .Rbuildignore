@@ -47,3 +47,5 @@
 ^CRAN-SUBMISSION$
 ^revdep$
 ^debug.py$
+^\.tether$
+^-logo.png$
