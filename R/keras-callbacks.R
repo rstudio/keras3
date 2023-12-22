@@ -442,7 +442,7 @@ function (schedule, verbose = 0L)
 #'              epochs = EPOCHS, validation_split = .5, verbose = 0,
 #'              callbacks = list(model_checkpoint_callback))
 #'
-#' # The model weights (that are considered the best) can be loaded as -
+#' # The model weights (that are considered the best) can be loaded
 #' model |> load_model_weights(checkpoint_filepath)
 #' ```
 #'
