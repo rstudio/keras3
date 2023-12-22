@@ -100,7 +100,7 @@ For a complete list of all supported types, see
 
 \item{dtype}{string, the output dtype of the feature. E.g., "float32".}
 
-\item{preprocessor}{A callable}
+\item{preprocessor}{A callable.}
 
 \item{scale, offset}{Passed on to \code{\link[=layer_rescaling]{layer_rescaling()}}}
 
