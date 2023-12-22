@@ -81,6 +81,7 @@ local({
         # `evalenv` is created once per block, but knit() is called once per chunk
         # so we use this to detect if we're in the first chunk of a block and run setup
         if (is.null(roxygen2::roxy_meta_get("evalenv")$.__ran_keras_block_init__)) {
+          options(width = 76)
           keras3:::keras$utils$clear_session()
           set.seed(1L)
           keras3:::keras$utils$set_random_seed(1L)
