@@ -56,9 +56,9 @@ install_keras <- function(
     force = identical(envname, "r-keras"),
     packages = NULL
   )
-
+  extra_packages <- unique(extra_packages)
   if (length(extra_packages))
-    reticulate::py_install(unique(extra_packages), envname = envname)
+    reticulate::py_install(extra_packages, envname = envname)
 
   if (length(backend))
     reticulate::py_install(backend, envname = envname)
