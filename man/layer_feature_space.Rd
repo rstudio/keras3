@@ -66,10 +66,14 @@ feature_integer_hashed(num_bins, output_mode = "one_hot", name = NULL)
 
 \item{features}{see description}
 
-\item{output_mode}{One of \code{"concat"} or \code{"dict"}. In concat mode, all
+\item{output_mode}{A string.
+\itemize{
+\item For \code{layer_feature_space()}, one of \code{"concat"} or \code{"dict"}. In concat mode, all
 features get concatenated together into a single vector.
-In dict mode, the FeatureSpace returns a named list of individually
-encoded features (with the same names as the input list names).}
+In dict mode, the \code{FeatureSpace} returns a named list of individually
+encoded features (with the same names as the input list names).
+\item For the \verb{feature_*} functions, one of: \code{"int"} \code{"one_hot"} or \code{"float"}.
+}}
 
 \item{crosses}{List of features to be crossed together, e.g.
 \code{crosses=list(c("feature_1", "feature_2"))}. The features will be
@@ -93,6 +97,16 @@ type specification, e.g. \code{list(my_feature = "integer_categorical")}
 or \code{list(my_feature = feature_integer_categorical())}.
 For a complete list of all supported types, see
 "Available feature types" paragraph below.}
+
+\item{dtype}{string, the output dtype of the feature. E.g., "float32".}
+
+\item{preprocessor}{A callable}
+
+\item{scale, offset}{Passed on to \code{\link[=layer_rescaling]{layer_rescaling()}}}
+
+\item{num_bins, bin_boundaries}{Passed on to \code{\link[=layer_discretization]{layer_discretization()}}}
+
+\item{max_tokens, num_oov_indices}{Passed on to \code{\link[=layer_integer_lookup]{layer_integer_lookup()}} by \code{feature_integer_categorical()} or to \code{\link[=layer_string_lookup]{layer_string_lookup()}} by \code{feature_string_categorical()}.}
 }
 \description{
 \strong{Available feature types:}

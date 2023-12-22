@@ -20,6 +20,8 @@ from_config(
 
 \item{custom_objects}{list of custom objects needed to instantiate the layer,
 e.g., custom layers defined by \code{new_layer_class()} or similar.}
+
+\item{class}{The keras class to restore.}
 }
 \value{
 \code{get_config()} returns an object with the configuration,

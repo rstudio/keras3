@@ -60,6 +60,8 @@ The metrics passed here are evaluated without sample weighting;
 if you would like sample weighting to apply, you can specify
 your metrics via the \code{weighted_metrics} argument instead.}
 
+\item{...}{Additional arguments passed on to the \code{compile()} model method.}
+
 \item{loss_weights}{Optional list (named or unnamed) specifying scalar
 coefficients (R numerics) to weight the loss contributions of
 different model outputs. The loss value that will be minimized

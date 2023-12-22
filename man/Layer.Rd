@@ -20,11 +20,15 @@ Layer(
 
 new_layer_class(
   classname,
-  ...,
   initialize = NULL,
-  build = NULL,
   call = NULL,
-  get_config = NULL
+  build = NULL,
+  get_config = NULL,
+  ...,
+  public = list(),
+  private = list(),
+  inherit = keras$layers$Layer,
+  parent_env = parent.frame()
 )
 }
 \arguments{

@@ -39,23 +39,16 @@ imag <- op_array(c(0, 1, 2, 3, 4))
 op_irfft(c(real, imag))
 }\if{html}{\out{</div>}}
 
-\if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor(
-## [ 2.         -2.0606601   0.5        -0.35355338  0.          0.06066012
-##  -0.5         0.35355338], shape=(8), dtype=float32)
+\if{html}{\out{<div class="sourceCode">}}\preformatted{#> tf.Tensor(
+#> [ 2.         -2.0606601   0.5        -0.35355338  0.          0.06066012
+#>  -0.5         0.35355338], shape=(8), dtype=float32)
 }\if{html}{\out{</div>}}
 
-\if{html}{\out{<div class="sourceCode r">}}\preformatted{# array([0.66666667, -0.9106836, 0.24401694))
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{all.equal(op_irfft(op_rfft(real, 5), 5), real)
 }\if{html}{\out{</div>}}
 
-\if{html}{\out{<div class="sourceCode r">}}\preformatted{op_irfft(op_rfft(real, 5), 5)
+\if{html}{\out{<div class="sourceCode">}}\preformatted{#> [1] TRUE
 }\if{html}{\out{</div>}}
-
-\if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor([0.         0.99999994 2.         3.         4.        ], shape=(5), dtype=float32)
-}\if{html}{\out{</div>}}
-
-[ 2.         -2.0606601   0.5        -0.35355338  0.          0.06066012
-\subsection{-0.5         0.35355338]: R:\%202.\%20\%20\%20\%20\%20\%20\%20\%20\%20-2.0606601\%20\%20\%200.5\%20\%20\%20\%20\%20\%20\%20\%20-0.35355338\%20\%200.\%20\%20\%20\%20\%20\%20\%20\%20\%20\%200.06066012\%0A##\%20\%20-0.5\%20\%20\%20\%20\%20\%20\%20\%20\%200.35355338}{
-}
 }
 
 \seealso{

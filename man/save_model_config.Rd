@@ -5,7 +5,7 @@
 \alias{load_model_config}
 \title{Save Model configuration as JSON}
 \usage{
-save_model_config(model, filepath = NULL, overwrite = FALSE, ...)
+save_model_config(model, filepath = NULL, overwrite = FALSE)
 
 load_model_config(filepath, custom_objects = NULL)
 }
@@ -13,6 +13,10 @@ load_model_config(filepath, custom_objects = NULL)
 \item{model}{Model object to save}
 
 \item{filepath}{path to json file with the model config.}
+
+\item{overwrite}{Whether we should overwrite any existing model configuration json
+at \code{filepath}, or instead ask the user
+via an interactive prompt.}
 
 \item{custom_objects}{Optional named list mapping names to custom classes or
 functions to be considered during deserialization.}

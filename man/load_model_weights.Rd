@@ -4,9 +4,11 @@
 \alias{load_model_weights}
 \title{Load weights from a file saved via \code{save_model_weights()}.}
 \usage{
-load_model_weights(self, filepath, skip_mismatch = FALSE, ...)
+load_model_weights(model, filepath, skip_mismatch = FALSE, ...)
 }
 \arguments{
+\item{model}{A keras model.}
+
 \item{filepath}{String, path to the weights file to load.
 It can either be a \code{.weights.h5} file
 or a legacy \code{.h5} weights file.}

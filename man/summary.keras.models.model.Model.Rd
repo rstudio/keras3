@@ -10,7 +10,7 @@
 
 \method{format}{keras.models.model.Model}(
   x,
-  line_length = width - (11L * show_trainable),
+  line_length = getOption("width"),
   positions = NULL,
   expand_nested = FALSE,
   show_trainable = x$built && as.logical(length(x$non_trainable_weights)),
@@ -49,11 +49,6 @@ By default \code{NULL} which considers all layers of model.}
 
 \item{compact}{Whether to remove white-space only lines from the model
 summary. (Default \code{TRUE})}
-
-\item{print_fn}{Print function to use. By default, prints to \code{stdout}.
-It will be called on each line of the summary.
-You can set it to a custom function
-in order to capture the string summary.}
 }
 \value{
 \code{format()} returns a length 1 character vector. \code{print()} returns the

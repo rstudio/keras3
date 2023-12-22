@@ -2,11 +2,13 @@
 % Please edit documentation in R/model-persistence.R
 \name{export_savedmodel.keras.models.model.Model}
 \alias{export_savedmodel.keras.models.model.Model}
-\title{\link{TF backend only} Create a TF SavedModel artifact for inference}
+\title{[TF backend only] Create a TF SavedModel artifact for inference}
 \usage{
 \method{export_savedmodel}{keras.models.model.Model}(object, export_dir_base, ...)
 }
 \arguments{
+\item{object}{A keras model.}
+
 \item{export_dir_base}{string, file path where to save
 the artifact.}
 

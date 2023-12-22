@@ -7,6 +7,8 @@
 save_model(model, filepath = NULL, overwrite = FALSE, ...)
 }
 \arguments{
+\item{model}{A keras model.}
+
 \item{filepath}{string,
 Path where to save the model. Must end in \code{.keras}.}
 

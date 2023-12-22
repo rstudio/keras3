@@ -7,7 +7,6 @@
 \usage{
 Callback(
   classname,
-  ...,
   on_epoch_begin = NULL,
   on_epoch_end = NULL,
   on_train_begin = NULL,
@@ -22,14 +21,15 @@ Callback(
   on_predict_end = NULL,
   on_predict_batch_begin = NULL,
   on_predict_batch_end = NULL,
-  .private = list(),
-  .inherit = keras$callbacks$Callback,
-  .parent_env = parent.frame()
+  ...,
+  public = list(),
+  private = list(),
+  inherit = keras$callbacks$Callback,
+  parent_env = parent.frame()
 )
 
 new_callback_class(
   classname,
-  ...,
   on_epoch_begin = NULL,
   on_epoch_end = NULL,
   on_train_begin = NULL,
@@ -44,12 +44,16 @@ new_callback_class(
   on_predict_end = NULL,
   on_predict_batch_begin = NULL,
   on_predict_batch_end = NULL,
-  .private = list(),
-  .inherit = keras$callbacks$Callback,
-  .parent_env = parent.frame()
+  ...,
+  public = list(),
+  private = list(),
+  inherit = keras$callbacks$Callback,
+  parent_env = parent.frame()
 )
 }
 \arguments{
+\item{classname}{The name of the callback class. CamelCase by convention.}
+
 \item{on_epoch_begin}{\if{html}{\out{<div class="sourceCode r">}}\preformatted{\\(epoch, logs = NULL)
 }\if{html}{\out{</div>}}
 
@@ -274,7 +278,9 @@ Args:
 \item \code{logs}: Named list. Aggregated metric results up until this batch.
 }}
 
-\item{.private}{Named list of R objects (typically, functions) to include in
+\item{..., public}{Additional methods or public members of the custom class.}
+
+\item{private}{Named list of R objects (typically, functions) to include in
 instance private environments. \code{private} will be a symbol in scope in all
 class methods, resolving to an R environment populated with the list
 provided. Each instance will have it's own \code{private} environment. All
@@ -282,7 +288,9 @@ methods (functions) in \code{private} will have in scope \code{self} and \verb{_
 symbols. Any objects in \code{private} will be invisible from the Keras
 framework and the Python runtime.}
 
-\item{.parent_env}{The environment that all class methods will have as a grandparent.}
+\item{inherit}{The Callback class to inherit from. By default, the base \code{Callback}.}
+
+\item{parent_env}{The environment that all class methods will have as a grandparent.}
 }
 \description{
 Callbacks can be passed to keras methods such as \code{fit()}, \code{evaluate()}, and

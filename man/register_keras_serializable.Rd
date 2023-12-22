@@ -4,9 +4,11 @@
 \alias{register_keras_serializable}
 \title{Registers an object with the Keras serialization framework.}
 \usage{
-register_keras_serializable(object, name = NULL, package = NULL, clear = FALSE)
+register_keras_serializable(object, name = NULL, package = NULL)
 }
 \arguments{
+\item{object}{A keras object.}
+
 \item{name}{The name to serialize this class under in this package.}
 
 \item{package}{The package that this class belongs to. This is used for the
@@ -41,14 +43,14 @@ stopifnot(exprs = \{
 
 \seealso{
 Other object registration saving: 
-\code{\link{get_custom_objects}()},
+\code{\link{clear_registered_custom_objects}()},
 \code{\link{get_registered_name}()},
 \code{\link{get_registered_object}()}
 
 Other saving: 
+\code{\link{clear_registered_custom_objects}()},
 \code{\link{config_enable_unsafe_deserialization}()},
 \code{\link{deserialize_keras_object}()},
-\code{\link{get_custom_objects}()},
 \code{\link{get_registered_name}()},
 \code{\link{get_registered_object}()},
 \code{\link{layer_tfsm}()},

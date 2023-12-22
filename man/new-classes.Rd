@@ -4,7 +4,7 @@
 \alias{new_metric_class}
 \alias{new_loss_class}
 \alias{new_model_class}
-\alias{new_layer_class}
+\alias{new-classes}
 \title{Define new keras types}
 \usage{
 new_metric_class(classname, ..., initialize, update_state, result)
@@ -27,15 +27,6 @@ new_model_class(
   compute_loss = NULL,
   compute_metrics = NULL
 )
-
-new_layer_class(
-  classname,
-  ...,
-  initialize = NULL,
-  build = NULL,
-  call = NULL,
-  get_config = NULL
-)
 }
 \arguments{
 \item{classname}{The classname as a string. Convention is for the classname
@@ -43,9 +34,9 @@ to be a CamelCase version of the constructor.}
 
 \item{...}{Additional fields and methods for the new type.}
 
-\item{initialize, build, call, get_config, on_epoch_begin, on_epoch_end, on_train_begin, on_train_end, on_batch_begin, on_batch_end, on_predict_batch_begin, on_predict_batch_end, on_predict_begin, on_predict_end, on_test_batch_begin, on_test_batch_end, on_test_begin, on_test_end, on_train_batch_begin, on_train_batch_end, update_state, result, train_step, predict_step, test_step, compute_loss, compute_metrics}{Optional methods that can be overridden.}
+\item{initialize, update_state, result, call, train_step, predict_step, test_step, compute_loss, compute_metrics}{Optional methods that can be overridden.}
 
-\item{x}{A function that should be converted to an active property of the class type.}
+\item{inherit}{class to inherit from.}
 }
 \value{
 A new class generator object that inherits from the appropriate Keras

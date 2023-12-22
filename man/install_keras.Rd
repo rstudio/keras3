@@ -27,6 +27,8 @@ install_keras(
 \item{backend}{Which backend. Accepted values include  \code{"tensorflow"}, \code{"jax"} and \code{"pytorch"}}
 
 \item{gpu}{whether to install a GPU capable version of the backend.}
+
+\item{restart_session}{Whether to restart the R session after installing (note this will only occur within RStudio).}
 }
 \description{
 This function will install Keras along with a selected backend, including all Python dependencies.

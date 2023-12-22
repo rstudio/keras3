@@ -18,6 +18,8 @@ weights to apply to the model's loss for each sample.
 In the case of temporal data, you can pass a 2D array
 with shape \verb{(samples, sequence_length)}, to apply a different
 weight to every timestep of every sample.}
+
+\item{...}{for forward/backward compatability}
 }
 \value{
 A scalar loss value (when no metrics),

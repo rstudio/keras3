@@ -29,9 +29,9 @@ information about the config format.
 }
 
 Other saving: 
+\code{\link{clear_registered_custom_objects}()},
 \code{\link{config_enable_unsafe_deserialization}()},
 \code{\link{deserialize_keras_object}()},
-\code{\link{get_custom_objects}()},
 \code{\link{get_registered_name}()},
 \code{\link{get_registered_object}()},
 \code{\link{layer_tfsm}()},

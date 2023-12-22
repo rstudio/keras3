@@ -5,7 +5,6 @@
 \alias{format.keras_shape}
 \alias{print.keras_shape}
 \alias{[.keras_shape}
-\alias{r_to_py.keras_shape}
 \alias{as.integer.keras_shape}
 \alias{as.list.keras_shape}
 \title{Tensor shape utility}
@@ -18,8 +17,6 @@ shape(...)
 
 \method{[}{keras_shape}(x, ...)
 
-\method{r_to_py}{keras_shape}(x, convert = FALSE)
-
 \method{as.integer}{keras_shape}(x, ...)
 
 \method{as.list}{keras_shape}(x, ...)
@@ -30,6 +27,8 @@ shape(...)
 Tensors are dispatched to \code{k_shape()} to extract the tensor shape. Values
 wrapped in \code{I()} are used asis (see examples). All other objects are coerced
 via \code{as.integer()}.}
+
+\item{x}{A 'keras_shape' object}
 }
 \value{
 A list with a \code{"keras_shape"} class attribute. Each element of the

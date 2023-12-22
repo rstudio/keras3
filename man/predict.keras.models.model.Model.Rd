@@ -26,6 +26,8 @@
 \item A TF Dataset.
 }}
 
+\item{...}{For forward/backward compatability.}
+
 \item{batch_size}{Integer or \code{NULL}.
 Number of samples per batch.
 If unspecified, \code{batch_size} will default to \code{32}.

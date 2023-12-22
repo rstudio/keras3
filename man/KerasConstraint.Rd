@@ -19,7 +19,7 @@ an R6 class that derives from \code{KerasConstraint} and implements a
 \note{
 Models which use custom constraints cannot be serialized using
 \code{\link[=save_model]{save_model()}}. Rather, the weights of the model should be saved
-and restored using \code{\link[=save_model_weights_hdf5]{save_model_weights_hdf5()}}.
+and restored using \code{\link[=save_model_weights]{save_model_weights()}}.
 }
 \section{Methods}{
 

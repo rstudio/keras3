@@ -49,6 +49,8 @@ If \code{x} is a TF Dataset or generator,
 \code{y} should
 not be specified (since targets will be obtained from \code{x}).}
 
+\item{...}{Additional arguments passed on to the model \code{fit()} method.}
+
 \item{batch_size}{Integer or \code{NULL}.
 Number of samples per gradient update.
 If unspecified, \code{batch_size} will default to \code{32}.
@@ -180,6 +182,12 @@ Note that the progress bar is not
 particularly useful when logged to a file,
 so \code{verbose=2} is recommended when not running interactively
 (e.g., in a production environment). Defaults to \code{"auto"}.}
+
+\item{view_metrics}{View realtime plot of training metrics (by epoch). The
+default (\code{"auto"}) will display the plot when running within RStudio,
+\code{metrics} were specified during model \code{\link[=compile]{compile()}}, \code{epochs > 1} and
+\code{verbose > 0}. Use the global \code{keras.view_metrics} option to establish a
+different default.}
 }
 \value{
 A \code{History} object. Its \code{History.history} attribute is

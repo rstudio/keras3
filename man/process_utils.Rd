@@ -6,9 +6,9 @@
 \alias{application_decode_predictions}
 \title{Preprocessing and postprocessing utilities}
 \usage{
-application_preprocess_inputs(model, x, ...)
+application_preprocess_inputs(model, x, ..., data_format = NULL)
 
-application_decode_predictions(model, preds, ...)
+application_decode_predictions(model, preds, top = 5L, ...)
 }
 \arguments{
 \item{model}{A Keras model initialized using any \code{application_} function.}
@@ -17,11 +17,15 @@ application_decode_predictions(model, preds, ...)
 
 \item{...}{Additional arguments passed to the preprocessing or decoding function.}
 
+\item{data_format}{Optional data format of the image tensor/array.
+\code{NULL} means the global setting
+\code{config_image_data_format()} is used
+(unless you changed it, it uses \code{"channels_last"}).
+Defaults to \code{NULL}.}
+
 \item{preds}{A batch of outputs from the model.}
 
 \item{top}{The number of top predictions to return.}
-
-\item{data_format}{Optional data format of the image tensor/array.}
 }
 \value{
 \itemize{
@@ -51,5 +55,4 @@ preds <- random_normal(c(32, 1000))
 decoded_preds <- application_decode_predictions(model, preds)
 
 }
-
 }
