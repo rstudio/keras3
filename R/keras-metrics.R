@@ -520,7 +520,7 @@ structure(function (y_true, y_pred, ..., name = "sparse_categorical_accuracy",
 #' Standalone usage:
 #'
 #' ```{r}
-#' m <- metric_sparse_top_op_categorical_accuracy(k = 1L)
+#' m <- metric_sparse_top_k_categorical_accuracy(k = 1L)
 #' m$update_state(
 #'   rbind(2, 1),
 #'   op_array(rbind(c(0.1, 0.9, 0.8), c(0.05, 0.95, 0)), dtype = "float32")
@@ -543,7 +543,7 @@ structure(function (y_true, y_pred, ..., name = "sparse_categorical_accuracy",
 #' ```{r, eval = FALSE}
 #' model %>% compile(optimizer = 'sgd',
 #'                   loss = 'sparse_categorical_crossentropy',
-#'                   metrics = list(metric_sparse_top_op_categorical_accuracy()))
+#'                   metrics = list(metric_sparse_top_k_categorical_accuracy()))
 #' ```
 #'
 #' @param k
@@ -573,8 +573,8 @@ structure(function (y_true, y_pred, ..., name = "sparse_categorical_accuracy",
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/metrics/SparseTopKCategoricalAccuracy>
 #'
 #' @tether keras.metrics.SparseTopKCategoricalAccuracy
-metric_sparse_top_op_categorical_accuracy <-
-structure(function (y_true, y_pred, k = 5L, ..., name = "sparse_top_op_categorical_accuracy",
+metric_sparse_top_k_categorical_accuracy <-
+structure(function (y_true, y_pred, k = 5L, ..., name = "sparse_top_k_categorical_accuracy",
     dtype = NULL)
 {
     args <- capture_args2(list(k = as_integer, y_true = function (x)
@@ -586,9 +586,9 @@ structure(function (y_true, y_pred, k = 5L, ..., name = "sparse_top_op_categoric
     else np_array(x)))
     callable <- if (missing(y_true) && missing(y_pred))
         keras$metrics$SparseTopKCategoricalAccuracy
-    else keras$metrics$sparse_top_op_categorical_accuracy
+    else keras$metrics$sparse_top_k_categorical_accuracy
     do.call(callable, args)
-}, py_function_name = "sparse_top_op_categorical_accuracy")
+}, py_function_name = "sparse_top_k_categorical_accuracy")
 
 
 #' Computes how often targets are in the top `K` predictions.
@@ -599,7 +599,7 @@ structure(function (y_true, y_pred, k = 5L, ..., name = "sparse_top_op_categoric
 #' Standalone usage:
 #'
 #' ```{r}
-#' m <- metric_top_op_categorical_accuracy(k = 1)
+#' m <- metric_top_k_categorical_accuracy(k = 1)
 #' m$update_state(
 #'   rbind(c(0, 0, 1), c(0, 1, 0)),
 #'   op_array(rbind(c(0.1, 0.9, 0.8), c(0.05, 0.95, 0)), dtype = "float32")
@@ -621,7 +621,7 @@ structure(function (y_true, y_pred, k = 5L, ..., name = "sparse_top_op_categoric
 #' ```{r, eval = FALSE}
 #' model.compile(optimizer = 'sgd',
 #'               loss = 'categorical_crossentropy',
-#'               metrics = list(metric_top_op_categorical_accuracy()))
+#'               metrics = list(metric_top_k_categorical_accuracy()))
 #' ```
 #'
 #' @param k
@@ -651,22 +651,22 @@ structure(function (y_true, y_pred, k = 5L, ..., name = "sparse_top_op_categoric
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/metrics/TopKCategoricalAccuracy>
 #'
 #' @tether keras.metrics.TopKCategoricalAccuracy
-metric_top_op_categorical_accuracy <-
-structure(function (y_true, y_pred, k = 5L, ..., name = "top_op_categorical_accuracy",
+metric_top_k_categorical_accuracy <-
+structure(function (y_true, y_pred, k = 5L, ..., name = "top_k_categorical_accuracy",
     dtype = NULL)
 {
-    args <- capture_args2(list(k = as_integer, y_true = function (x)
-    if (inherits(x, "python.builtin.object"))
-        x
-    else np_array(x), y_pred = function (x)
-    if (inherits(x, "python.builtin.object"))
-        x
-    else np_array(x)))
+    args <- capture_args2(list(
+        k = as_integer,
+        y_true = function(x)
+            if (inherits(x, "python.builtin.object")) x else np_array(x),
+        y_pred = function(x)
+            if (inherits(x, "python.builtin.object")) x else np_array(x)
+    ))
     callable <- if (missing(y_true) && missing(y_pred))
         keras$metrics$TopKCategoricalAccuracy
-    else keras$metrics$top_op_categorical_accuracy
+    else keras$metrics$top_k_categorical_accuracy
     do.call(callable, args)
-}, py_function_name = "top_op_categorical_accuracy")
+}, py_function_name = "top_k_categorical_accuracy")
 
 
 #' Approximates the AUC (Area under the curve) of the ROC or PR curves.

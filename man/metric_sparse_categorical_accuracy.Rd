@@ -75,8 +75,8 @@ Usage with \code{compile()} API:
 Other accuracy metrics: 
 \code{\link{metric_binary_accuracy}()},
 \code{\link{metric_categorical_accuracy}()},
-\code{\link{metric_sparse_top_op_categorical_accuracy}()},
-\code{\link{metric_top_op_categorical_accuracy}()}
+\code{\link{metric_sparse_top_k_categorical_accuracy}()},
+\code{\link{metric_top_k_categorical_accuracy}()}
 
 Other metrics: 
 \code{\link{custom_metric}()},
@@ -118,11 +118,11 @@ Other metrics:
 \code{\link{metric_root_mean_squared_error}()},
 \code{\link{metric_sensitivity_at_specificity}()},
 \code{\link{metric_sparse_categorical_crossentropy}()},
-\code{\link{metric_sparse_top_op_categorical_accuracy}()},
+\code{\link{metric_sparse_top_k_categorical_accuracy}()},
 \code{\link{metric_specificity_at_sensitivity}()},
 \code{\link{metric_squared_hinge}()},
 \code{\link{metric_sum}()},
-\code{\link{metric_top_op_categorical_accuracy}()},
+\code{\link{metric_top_k_categorical_accuracy}()},
 \code{\link{metric_true_negatives}()},
 \code{\link{metric_true_positives}()}
 }
