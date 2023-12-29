@@ -203,6 +203,8 @@ fs::dir_walk("man-src", type = "directory", recurse = TRUE,
 
 # TODO: # fix `fit()` not returning `history` correctly
 
+# TODO: model_from_saved_model() and model_to_saved_model(), provide guidance for users updating to 3.
+
 # TODO: global search for "axis" in doc text, update to 1 based where appropriate.
 #
 # TODO: in reticulate: virtualenv_starter(): check for --enable-shared
