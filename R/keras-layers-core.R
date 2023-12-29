@@ -410,9 +410,6 @@ function (shape = NULL, batch_size = NULL, dtype = NULL, sparse = NULL,
     do.call(keras$layers$Input, args)
 }
 
-#' @export
-#' @rdname layer_input
-keras_input <- layer_input
 
 
 #' Wraps arbitrary expressions as a `Layer` object.
