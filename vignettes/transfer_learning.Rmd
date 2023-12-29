@@ -470,7 +470,7 @@ train_ds %>%
   })
 ```
 
-![plot of chunk unnamed-chunk-13](/Users/tomasz/github/rstudio/keras/man/figures/transfer_learning/unnamed-chunk-13-1.png)
+![plot of chunk unnamed-chunk-13](../../man/figures/transfer_learning/unnamed-chunk-13-1.png)
 
 We can also see that label 1 is "dog" and label 0 is "cat".
 
@@ -591,7 +591,7 @@ plot_image(data_augmentation(first_image, training = TRUE), "augmented 2")
 plot_image(data_augmentation(first_image, training = TRUE), "augmented 3")
 ```
 
-![plot of chunk unnamed-chunk-17](/Users/tomasz/github/rstudio/keras/man/figures/transfer_learning/unnamed-chunk-17-1.png)
+![plot of chunk unnamed-chunk-17](../../man/figures/transfer_learning/unnamed-chunk-17-1.png)
 
 ## Build a model
 

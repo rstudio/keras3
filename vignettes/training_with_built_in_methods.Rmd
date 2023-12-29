@@ -1033,7 +1033,7 @@ shapes shown in the plot are batch shapes, rather than per-sample shapes).
 plot(model, show_shapes = TRUE)
 ```
 
-![plot of chunk unnamed-chunk-26](/Users/tomasz/github/rstudio/keras/man/figures/training_with_built_in_methods/unnamed-chunk-26-1.png)
+![plot of chunk unnamed-chunk-26](../../man/figures/training_with_built_in_methods/unnamed-chunk-26-1.png)
 
 At compilation time, we can specify different losses to different outputs, by passing
 the loss functions as a list:

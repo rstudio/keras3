@@ -151,7 +151,7 @@ You can also plot the model as a graph:
 plot(model)
 ```
 
-![plot of chunk unnamed-chunk-10](/Users/tomasz/github/rstudio/keras/man/figures/functional_api/unnamed-chunk-10-1.png)
+![plot of chunk unnamed-chunk-10](../../man/figures/functional_api/unnamed-chunk-10-1.png)
 
 And, optionally, display the input and output shapes of each layer
 in the plotted graph:
@@ -161,7 +161,7 @@ in the plotted graph:
 plot(model, show_shapes = TRUE)
 ```
 
-![plot of chunk unnamed-chunk-11](/Users/tomasz/github/rstudio/keras/man/figures/functional_api/unnamed-chunk-11-1.png)
+![plot of chunk unnamed-chunk-11](../../man/figures/functional_api/unnamed-chunk-11-1.png)
 
 This figure and the code are almost identical. In the code version,
 the connection arrows are replaced by the call operation.
@@ -592,7 +592,7 @@ Now plot the model:
 plot(model, show_shapes = TRUE)
 ```
 
-![plot of chunk unnamed-chunk-18](/Users/tomasz/github/rstudio/keras/man/figures/functional_api/unnamed-chunk-18-1.png)
+![plot of chunk unnamed-chunk-18](../../man/figures/functional_api/unnamed-chunk-18-1.png)
 
 When compiling this model, you can assign different losses to each output.
 You can even assign different weights to each loss -- to modulate
@@ -752,7 +752,7 @@ Plot the model:
 plot(model, show_shapes = TRUE)
 ```
 
-![plot of chunk unnamed-chunk-23](/Users/tomasz/github/rstudio/keras/man/figures/functional_api/unnamed-chunk-23-1.png)
+![plot of chunk unnamed-chunk-23](../../man/figures/functional_api/unnamed-chunk-23-1.png)
 
 Now train the model:
 
