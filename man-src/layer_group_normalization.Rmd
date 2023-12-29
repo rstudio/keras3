@@ -1,1 +1,0 @@
-./layer_group_normalization/2-translated.Rmd

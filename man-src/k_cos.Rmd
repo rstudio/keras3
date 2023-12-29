@@ -1,1 +1,0 @@
-./k_cos/2-translated.Rmd

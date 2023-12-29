@@ -1,1 +1,0 @@
-./regularizer_l2/2-translated.Rmd

@@ -1,1 +1,0 @@
-./k_outer/2-translated.Rmd

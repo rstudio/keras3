@@ -1,1 +1,0 @@
-./layer_zero_padding_1d/2-translated.Rmd

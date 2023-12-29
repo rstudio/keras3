@@ -1,1 +1,0 @@
-./optimizer_nadam/2-translated.Rmd

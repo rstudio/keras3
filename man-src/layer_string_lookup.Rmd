@@ -1,1 +1,0 @@
-./layer_string_lookup/2-translated.Rmd

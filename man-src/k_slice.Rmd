@@ -1,1 +1,0 @@
-./k_slice/2-translated.Rmd

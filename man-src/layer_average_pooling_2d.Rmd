@@ -1,1 +1,0 @@
-./layer_average_pooling_2d/2-translated.Rmd

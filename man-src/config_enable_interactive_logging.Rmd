@@ -1,1 +1,0 @@
-./config_enable_interactive_logging/2-translated.Rmd

@@ -1,1 +1,0 @@
-./k_convert_to_numpy/2-translated.Rmd

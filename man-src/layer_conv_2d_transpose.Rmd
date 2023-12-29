@@ -1,1 +1,0 @@
-./layer_conv_2d_transpose/2-translated.Rmd

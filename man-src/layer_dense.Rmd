@@ -1,1 +1,0 @@
-./layer_dense/2-translated.Rmd

@@ -1,1 +1,0 @@
-./metric_sparse_categorical_crossentropy/2-translated.Rmd

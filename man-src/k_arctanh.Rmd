@@ -1,1 +1,0 @@
-./k_arctanh/2-translated.Rmd

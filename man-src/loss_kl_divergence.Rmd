@@ -1,1 +1,0 @@
-./loss_kl_divergence/2-translated.Rmd

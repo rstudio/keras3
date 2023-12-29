@@ -1,1 +1,0 @@
-./k_take/2-translated.Rmd

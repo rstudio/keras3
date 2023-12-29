@@ -1,1 +1,0 @@
-./layer_input/2-translated.Rmd

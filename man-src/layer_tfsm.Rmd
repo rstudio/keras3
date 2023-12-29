@@ -1,1 +1,0 @@
-./layer_tfsm/2-translated.Rmd

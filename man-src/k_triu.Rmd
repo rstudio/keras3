@@ -1,1 +1,0 @@
-./k_triu/2-translated.Rmd

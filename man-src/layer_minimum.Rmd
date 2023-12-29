@@ -1,1 +1,0 @@
-./layer_minimum/2-translated.Rmd

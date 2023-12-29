@@ -1,1 +1,0 @@
-./k_eye/2-translated.Rmd

@@ -1,1 +1,0 @@
-./layer_max_pooling_3d/2-translated.Rmd

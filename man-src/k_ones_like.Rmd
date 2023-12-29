@@ -1,1 +1,0 @@
-./k_ones_like/2-translated.Rmd

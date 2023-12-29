@@ -1,1 +1,0 @@
-./activation_selu/2-translated.Rmd

@@ -1,1 +1,0 @@
-./k_ndim/2-translated.Rmd

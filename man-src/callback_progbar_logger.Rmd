@@ -1,1 +1,0 @@
-./callback_progbar_logger/2-translated.Rmd

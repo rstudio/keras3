@@ -1,1 +1,0 @@
-./layer_text_vectorization/2-translated.Rmd

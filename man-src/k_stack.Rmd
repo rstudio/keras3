@@ -1,1 +1,0 @@
-./k_stack/2-translated.Rmd

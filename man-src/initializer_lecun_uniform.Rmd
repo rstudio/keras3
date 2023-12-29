@@ -1,1 +1,0 @@
-./initializer_lecun_uniform/2-translated.Rmd

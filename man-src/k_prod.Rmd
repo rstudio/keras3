@@ -1,1 +1,0 @@
-./k_prod/2-translated.Rmd

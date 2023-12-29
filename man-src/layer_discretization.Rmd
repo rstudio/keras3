@@ -1,1 +1,0 @@
-./layer_discretization/2-translated.Rmd

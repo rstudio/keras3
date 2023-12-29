@@ -1,1 +1,0 @@
-./k_amax/2-translated.Rmd

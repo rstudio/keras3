@@ -1,1 +1,0 @@
-./k_softsign/2-translated.Rmd

@@ -1,1 +1,0 @@
-./loss_mean_squared_logarithmic_error/2-translated.Rmd

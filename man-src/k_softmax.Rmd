@@ -1,1 +1,0 @@
-./k_softmax/2-translated.Rmd

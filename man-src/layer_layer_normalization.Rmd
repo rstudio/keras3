@@ -1,1 +1,0 @@
-./layer_layer_normalization/2-translated.Rmd

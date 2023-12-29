@@ -1,1 +1,0 @@
-./k_conjugate/2-translated.Rmd

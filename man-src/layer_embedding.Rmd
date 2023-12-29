@@ -1,1 +1,0 @@
-./layer_embedding/2-translated.Rmd

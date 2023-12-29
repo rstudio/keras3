@@ -1,1 +1,0 @@
-./activation_softmax/2-translated.Rmd

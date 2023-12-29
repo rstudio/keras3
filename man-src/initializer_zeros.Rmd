@@ -1,1 +1,0 @@
-./initializer_zeros/2-translated.Rmd

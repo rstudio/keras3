@@ -1,1 +1,0 @@
-./image_from_array/2-translated.Rmd

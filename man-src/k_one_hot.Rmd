@@ -1,1 +1,0 @@
-./k_one_hot/2-translated.Rmd

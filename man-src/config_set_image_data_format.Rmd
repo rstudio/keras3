@@ -1,1 +1,0 @@
-./config_set_image_data_format/2-translated.Rmd

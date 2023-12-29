@@ -1,1 +1,0 @@
-./k_reciprocal/2-translated.Rmd

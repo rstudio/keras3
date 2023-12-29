@@ -1,1 +1,0 @@
-./k_floor_divide/2-translated.Rmd

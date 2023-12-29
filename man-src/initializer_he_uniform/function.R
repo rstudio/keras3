@@ -1,6 +1,0 @@
-initializer_he_uniform <-
-function (seed = NULL) 
-{
-    args <- capture_args2(list(seed = as_integer))
-    do.call(keras$initializers$HeUniform, args)
-}

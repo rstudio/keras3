@@ -1,1 +1,0 @@
-./k_nan_to_num/2-translated.Rmd

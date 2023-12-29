@@ -1,1 +1,0 @@
-./k_log10/2-translated.Rmd

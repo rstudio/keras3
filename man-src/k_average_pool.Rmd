@@ -1,1 +1,0 @@
-./k_average_pool/2-translated.Rmd

@@ -1,1 +1,0 @@
-./k_vdot/2-translated.Rmd

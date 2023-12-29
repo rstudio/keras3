@@ -1,1 +1,0 @@
-./layer_lstm/2-translated.Rmd

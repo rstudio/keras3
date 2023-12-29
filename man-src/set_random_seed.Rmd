@@ -1,1 +1,0 @@
-./set_random_seed/2-translated.Rmd

@@ -1,1 +1,0 @@
-./metric_categorical_hinge/2-translated.Rmd

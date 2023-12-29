@@ -1,1 +1,0 @@
-./k_arccos/2-translated.Rmd

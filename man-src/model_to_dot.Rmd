@@ -1,1 +1,0 @@
-./model_to_dot/2-translated.Rmd

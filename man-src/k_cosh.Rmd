@@ -1,1 +1,0 @@
-./k_cosh/2-translated.Rmd

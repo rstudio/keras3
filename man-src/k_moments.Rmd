@@ -1,1 +1,0 @@
-./k_moments/2-translated.Rmd

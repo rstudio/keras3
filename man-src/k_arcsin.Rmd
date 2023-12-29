@@ -1,1 +1,0 @@
-./k_arcsin/2-translated.Rmd

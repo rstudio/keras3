@@ -1,1 +1,0 @@
-./activation_gelu/2-translated.Rmd

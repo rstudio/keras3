@@ -1,1 +1,0 @@
-./metric_log_cosh/2-translated.Rmd

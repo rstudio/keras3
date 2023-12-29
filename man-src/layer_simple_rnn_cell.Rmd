@@ -1,1 +1,0 @@
-./layer_simple_rnn_cell/2-translated.Rmd

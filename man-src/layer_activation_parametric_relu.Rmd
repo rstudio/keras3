@@ -1,1 +1,0 @@
-./layer_activation_parametric_relu/2-translated.Rmd

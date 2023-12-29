@@ -1,1 +1,0 @@
-./k_log_sigmoid/2-translated.Rmd

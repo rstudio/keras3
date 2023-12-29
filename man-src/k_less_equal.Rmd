@@ -1,1 +1,0 @@
-./k_less_equal/2-translated.Rmd

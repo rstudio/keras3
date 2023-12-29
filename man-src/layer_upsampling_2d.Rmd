@@ -1,1 +1,0 @@
-./layer_upsampling_2d/2-translated.Rmd

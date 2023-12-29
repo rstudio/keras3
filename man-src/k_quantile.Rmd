@@ -1,1 +1,0 @@
-./k_quantile/2-translated.Rmd

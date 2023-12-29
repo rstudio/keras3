@@ -1,1 +1,0 @@
-./k_isclose/2-translated.Rmd

@@ -1,1 +1,0 @@
-./optimizer_adam_w/2-translated.Rmd

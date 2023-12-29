@@ -1,1 +1,0 @@
-./layer_gaussian_noise/2-translated.Rmd

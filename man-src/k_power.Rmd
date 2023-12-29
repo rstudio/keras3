@@ -1,1 +1,0 @@
-./k_power/2-translated.Rmd

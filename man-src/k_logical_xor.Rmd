@@ -1,1 +1,0 @@
-./k_logical_xor/2-translated.Rmd

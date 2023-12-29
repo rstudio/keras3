@@ -1,1 +1,0 @@
-./metric_squared_hinge/2-translated.Rmd

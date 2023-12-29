@@ -1,1 +1,0 @@
-./layer_gru/2-translated.Rmd

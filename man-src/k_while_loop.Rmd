@@ -1,1 +1,0 @@
-./k_while_loop/2-translated.Rmd

@@ -1,1 +1,0 @@
-./metric_r2_score/2-translated.Rmd

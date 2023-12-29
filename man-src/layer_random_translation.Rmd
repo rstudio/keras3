@@ -1,1 +1,0 @@
-./layer_random_translation/2-translated.Rmd

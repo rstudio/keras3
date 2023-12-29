@@ -1,1 +1,0 @@
-./layer_cropping_2d/2-translated.Rmd

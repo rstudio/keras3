@@ -1,1 +1,0 @@
-./k_qr/2-translated.Rmd

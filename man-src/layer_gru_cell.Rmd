@@ -1,1 +1,0 @@
-./layer_gru_cell/2-translated.Rmd

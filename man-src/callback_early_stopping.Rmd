@@ -1,1 +1,0 @@
-./callback_early_stopping/2-translated.Rmd

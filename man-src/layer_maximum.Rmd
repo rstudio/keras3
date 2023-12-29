@@ -1,1 +1,0 @@
-./layer_maximum/2-translated.Rmd

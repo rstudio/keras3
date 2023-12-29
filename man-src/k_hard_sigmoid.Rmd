@@ -1,1 +1,0 @@
-./k_hard_sigmoid/2-translated.Rmd

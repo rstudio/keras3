@@ -1,1 +1,0 @@
-./k_conv_transpose/2-translated.Rmd

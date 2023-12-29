@@ -1,1 +1,0 @@
-./k_scatter/2-translated.Rmd

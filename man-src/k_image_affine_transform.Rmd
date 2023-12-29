@@ -1,1 +1,0 @@
-./k_image_affine_transform/2-translated.Rmd

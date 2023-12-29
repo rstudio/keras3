@@ -1,1 +1,0 @@
-./layer_activation/2-translated.Rmd

@@ -1,1 +1,0 @@
-./image_smart_resize/2-translated.Rmd

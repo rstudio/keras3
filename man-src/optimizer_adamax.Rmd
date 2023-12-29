@@ -1,1 +1,0 @@
-./optimizer_adamax/2-translated.Rmd

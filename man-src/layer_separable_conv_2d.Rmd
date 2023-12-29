@@ -1,1 +1,0 @@
-./layer_separable_conv_2d/2-translated.Rmd
