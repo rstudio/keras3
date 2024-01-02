@@ -2035,6 +2035,15 @@ walk_roxy_blocks <- function(fn) {
   walk(blocks, fn, .progress = TRUE)
 }
 
+combine_files <- function(out, ..., sep = "\n") {
+  con <- file(out, open = "at")
+  on.exit(close(con))
+  for (path in list(...))
+    if(file.exists(path))
+      writeLines(c(sep, readLines(path)), con = con)
+  invisible(out)
+}
+
 file_lines_manager <- function() {
 
   .files <- new.env(parent = emptyenv())
