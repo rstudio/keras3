@@ -28,9 +28,9 @@
 #' default), the layer normalizes its output using a moving average of the
 #' mean and standard deviation of the batches it has seen during training. That
 #' is to say, it returns
-#' `gamma * (batch - self.moving_mean) / sqrt(self.moving_var+epsilon) + beta`.
+#' `gamma * (batch - self$moving_mean) / sqrt(self$moving_var+epsilon) + beta`.
 #'
-#' `self.moving_mean` and `self.moving_var` are non-trainable variables that
+#' `self$moving_mean` and `self$moving_var` are non-trainable variables that
 #' are updated each time the layer in called in training mode, as such:
 #'
 #' - `moving_mean = moving_mean * momentum + mean(batch) * (1 - momentum)`
