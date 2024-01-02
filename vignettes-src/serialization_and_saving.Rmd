@@ -783,3 +783,8 @@ Note that the `class_name` key contains the original name of the class, allowing
 proper re-initialization in `from_config`.
 
 Additionally, note that the `module` key is `NULL` since this is a custom object.
+
+```{r, echo=FALSE}
+unlink(c("my_model.keras", "custom_model.keras", 
+         "my_model.weights.h5", "pretrained.weights.h5"))
+```
