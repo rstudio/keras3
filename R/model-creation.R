@@ -162,14 +162,6 @@ py_to_r_wrapper.keras.models.model.Model <- function(x) {
   }
 }
 
-#' @export
-py_to_r_wrapper.kerastools.model.RModel <- function(x) {
-  force(x)
-  function(...) {
-    x$call(...)
-  }
-}
-
 
 
 #  py_to_r_wrapper.keras.engine.base_layer.Layer <- function(x) {
