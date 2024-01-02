@@ -61,29 +61,21 @@ create_layer <- function(layer_class, object, args = list()) {
 
 
 # Helper function to compose a layer with an object of type Model or Layer
-
 compose_layer <- function(object, layer, ...) {
-  UseMethod("compose_layer")
-}
+  if(missing(object) || is.null(object))
+    return(layer(...))
 
-#' @export
-compose_layer.default <- function(object, layer, ...) {
+  # if the first arg is a Sequential model, call `model$add()`
+  if (inherits(object, "keras.src.models.sequential.Sequential")) {
+    if(length(list(...)) > 0) warning("arguments passed via ellipsis will be ignored")
+
+    object$add(layer)
+    return(object)
+  }
+
+  # otherwise, invoke `layer$__call__()`
   layer(object, ...)
 }
-
-#' @export
-compose_layer.keras.models.Sequential <- function(object, layer, ...) {
-  if(length(list(...)) > 0) warning("arguments passed via ellipsis will be ignored")
-
-  object$add(layer)
-  object
-}
-
-compose_layer.keras.engine.sequential.Sequential <- compose_layer.keras.models.Sequential
-compose_layer.keras.models.sequential.Sequential <- compose_layer.keras.models.Sequential
-
-# compose_layer.keras.src.engine.sequential.Sequential <- compose_layer.keras.models.Sequential
-
 
 
 # ---- convolutional ----
