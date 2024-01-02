@@ -1,41 +1,69 @@
+#!source envir::attach_source(.file)
 
 
-# TODO: move these out of the package namespace, we don't want a knitr dep on cran
-knit_man_src <- function(input, ..., output_dir) {
+knit_keras_init <- function() {
   library(keras3)
-  dir <- dirname(normalizePath(input))
+  options(width = 76)
+  keras3:::keras$utils$clear_session()
+  set.seed(1L)
+  keras3:::keras$utils$set_random_seed(1L)
+}
+
+knit_man <- function(input, ..., output_dir) {
+
+  cli::cli_alert('knit_man_src("{.file {input}}")')
+  # message("knit_man_src(", glue::double_quote(input), ")")
+  library(keras3)
+  input <- normalizePath(input)
+  dir <- dirname(input)
   withr::local_dir(dir)
-  message("knit_man_src(", glue::double_quote(input), ")")
+  input <- basename(input)
 
   fig.path <- paste0(basename(dir), "-")
   unlink(Sys.glob(paste0("../../man/figures/", fig.path, "*.svg")))
-  unlink(Sys.glob(paste0(fig.path, "*.svg")))
+  unlink(Sys.glob(paste0("../../man/figures/", fig.path, "*.png")))
+  # unlink(Sys.glob(paste0(fig.path, "*.svg")))
+  unlink(Sys.glob("*.svg"))
 
   og_knitr_chunks <- knitr::opts_chunk$get()
   on.exit(do.call(knitr::opts_chunk$set, og_knitr_chunks), add = TRUE)
+
+  knitr::render_markdown()
   knitr::opts_chunk$set(
-    error = FALSE,
-    fig.path = fig.path,
+    # error = FALSE,
+    # fig.path = fig.path,
     fig.width = 7, fig.height = 7,
     dev = "svg"
   )
 
-  keras$utils$clear_session()
-  set.seed(1L)
-  keras$utils$set_random_seed(1L)
+  # og_output_hook <- knitr::knit_hooks$get("output")
+  # output <- function(x, options) {
+  #   x <- .keras_knit_process_chunk_output(x, options)
+  #   og_output_hook(x, options)
+  # }
 
-  knitr::knit("2-translated.Rmd", "3-rendered.md",
-              quiet = TRUE, envir = new.env(parent = globalenv()))
+  output <- input |> fs::path_ext_set("md")
 
-  figs <- Sys.glob(paste0(fig.path, "*.svg"))
+  # knitr::render_markdown()
+  # on.exit(knitr::knit_hooks$restore())
+
+  knit_keras_init()
+
+  knitr::knit(input, output, quiet = TRUE,
+              envir = new.env(parent = globalenv()))
+
+  # figs <- Sys.glob(paste0(fig.path, "*.svg"))
+  figs <- Sys.glob("*.svg")
 
   if (length(figs)) {
     link_path <- fs::path("../../man/figures", basename(figs))
     link_target <- fs::path_rel(figs, dirname(link_path))
     fs::link_create(link_target, link_path)
+    message("creating link ", link_path, " -> ", link_target)
   }
 
-  x <- readLines("3-rendered.md")
+  # x <- readLines("3-rendered.md")
+  x <- readLines(output)
   x <- trimws(x, "right")
 
   if(x[1] == "---") {
@@ -44,8 +72,18 @@ knit_man_src <- function(input, ..., output_dir) {
     while(x[1] == "") x <- x[-1]
   }
 
-  # TODO: these filters should be confined to chunk outputs only,
-  # probably as a knitr hook
+  # x <- process_chunk_output(x)
+
+  writeLines(x, output)
+
+}
+
+
+knit_keras_process_chunk_output <- function(x, options) {
+  # this hook get called with each chunk output.
+  # x is a single string of collapsed lines, terminated with a final \n
+  final_new_line <- endsWith(x[length(x)], "\n")
+  x <- x |> strsplit("\n") |> unlist() |> trimws("right")
 
   # strip object addresses; no noisy diff
   x <- sub(" at 0x[0-9A-Fa-f]{9}>$", ">", x, perl = TRUE)
@@ -54,14 +92,11 @@ knit_man_src <- function(input, ..., output_dir) {
   x <- x[!grepl(r"{## .*rstudio:run:reticulate::py_last_error\(\).*}", x)]
   x <- x[!grepl(r"{## .*reticulate::py_last_error\(\).*}", x)]
 
-  writeLines(x, "3-rendered.md")
-
-  # message("Done!    file.edit('", file.path(dir, "3-rendered.md"), "')")
+  x <- paste0(x, collapse = "\n")
+  if(final_new_line && !endsWith(x, "\n"))
+    x <- paste0(x, "\n")
+  x
 }
-
-evalq({
-  .Last <- function() { message("Finished!") }
-}, .GlobalEnv)
 
 
 knit_vignette <- function(input, ..., output_dir) {
@@ -77,14 +112,23 @@ knit_vignette <- function(input, ..., output_dir) {
   filename <- basename(input)
   name <- sub("\\.[qrR]md$", "", filename)
 
-  # knitr::knit_hooks$restore()
-  knitr::opts_chunk$set(
-    error = FALSE,
-    fig.path = paste0(
-      fs::path_real(here::here("man/figures/")), "/",
-      fs::path_ext_remove(fs::path_file(input)), "/"
-    )
-  )
+  pkg_dir <- dirname(input)
+  while(!file.exists(fs::path(pkg_dir, "keras.Rproj"))) {
+    pkg_dir <- dirname(pkg_dir)
+    if(pkg_dir == "/") stop("Can't find pkg dir")
+  }
+
+  # fig.path
+  fig.path <- fs::path_real(fs::path(
+    here::here("man/figures/"),
+    fs::path_ext_remove(fs::path_file(input))
+  ))
+  # fig.path <- paste0(fig.path, "/")
+
+  message("fig.path: ", fig.path)
+  unlink(fig.path, recursive = TRUE)
+  dir.create(fig.path)
+
 
   # render_dir <- normalizePath(tempfile(paste0(name, "-")), mustWork = FALSE, winslash = "/") |> fs::path_tidy()
   render_dir <- fs::file_temp(paste0(name, "-"))
@@ -98,16 +142,32 @@ knit_vignette <- function(input, ..., output_dir) {
 
   message("kniting: ", output.md)
 
-  set.seed(1L)
-  keras3:::keras$utils$clear_session()
-  keras3:::keras$utils$set_random_seed(1L)
+  knitr::render_markdown()
+  # knitr::knit_hooks$restore()
+  knitr::opts_chunk$set(
+    error = FALSE,
+    fig.path = paste0(fig.path, "/")
+  )
+
+
+  og_output_hook <- knitr::knit_hooks$get("output")
+  knitr::knit_hooks$set(output = function(x, options) {
+    x <- knit_keras_process_chunk_output(x, options)
+    og_output_hook(x, options)
+  })
+
+  knit_keras_init()
 
   withr::with_options(c(cli.num_colors = 256L), {
-    knitr::knit(input, output.md, envir = new.env(parent = globalenv()) )
+    knitr::knit(input, output.md,
+                envir = new.env(parent = globalenv()))
   })
 
   x <- readLines(output.md)
   unlink(output.md)
+
+  # update absolute figure links so they're relative links
+  x <- sub(pkg_dir, "../..", x, fixed = TRUE)
 
   end_fm_i <- which(x == "---")[2]
   x_fm <- x[2:(end_fm_i-1)]
@@ -154,6 +214,13 @@ knit_vignette <- function(input, ..., output_dir) {
   message("postprocessed output file: ", output)
   writeLines(x, output)
 }
+
+
+evalq({
+  .Last <- function() { message("Finished!") }
+}, .GlobalEnv)
+
+
 
 
 # TODO: move these out of the package namespace, we don't want a knitr dep on cran

@@ -284,6 +284,9 @@ fs::dir_walk("man-src", type = "directory", recurse = TRUE,
 #
 # TODO: layer_category_encoding()(count_weights) call arg example not working
 #
+# TODO: backout usage of `return_dict=TRUE` in evaluate() and friends - the output order is not stable.
+#       use `setNames(as.list())`
+#
 # TODO: revisit k_vectorized_map() man page
 # The source of truth for the current translation should be...?
 #    - the autogened file R/autogen-*.R, or
