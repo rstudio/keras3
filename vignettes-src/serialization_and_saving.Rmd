@@ -137,13 +137,13 @@ layer_custom <- Layer(
   get_config = function() {
     base_config <- super$get_config()
     config <- list(
-      sublayer = keras$saving$serialize_keras_object(self$sublayer)
+      sublayer = serialize_keras_object(self$sublayer)
     )
     c(base_config, config)
   },
   from_config = function(cls, config) {
     sublayer_config <- config$sublayer
-    sublayer <- keras$saving$deserialize_keras_object(sublayer_config)
+    sublayer <- deserialize_keras_object(sublayer_config)
     cls(sublayer, !!!config)
   }
 )
@@ -165,7 +165,7 @@ Below are examples of each workflow:
 #### Registering custom objects (**preferred**)
 
 This is the preferred method, as custom object registration greatly simplifies saving and
-loading code. Calling `register_custom_object()` on a custom object registers
+loading code. Calling `register_keras_serializable()` on a custom object registers
 the object globally in a master list,
 allowing Keras to recognize the object when loading the model.
 
@@ -198,11 +198,11 @@ layer_custom <- Layer(
 # Upon registration, you can optionally specify a package or a name.
 # If left blank, the package defaults to "Custom" and the name defaults to
 # the class name.
-register_custom_object(layer_custom, package = "MyLayers")
+register_keras_serializable(layer_custom, package = "MyLayers")
 
 custom_fn <- keras3:::py_func2(function(x) x^2, name = "custom_fn", convert = TRUE)
 
-register_custom_object(custom_fn, name="custom_fn", package="my_package")
+register_keras_serializable(custom_fn, name="custom_fn", package="my_package")
 
 
 # Create the model.
@@ -232,9 +232,6 @@ model |> save_model("custom_model.keras", overwrite = TRUE)
 
 # Now, we can simply load without worrying about our custom objects.
 reconstructed_model <- load_model("custom_model.keras")
-
-# model$get_config()$layers[[3]]$config$activation -> z
-# keras$saving$deserialize_keras_object(z)
 
 # Let's check:
 stopifnot(all.equal(
@@ -640,7 +637,7 @@ method.
 **Example:**
 
 ```{r}
-layer_my_dense <- register_custom_object(
+layer_my_dense <- register_keras_serializable(
   package = "MyLayers", name = "KernelMult",  
   object = Layer(
     "MyDense",
@@ -693,7 +690,7 @@ layer3 <- layer_my_dense(units = 64, nested_model = layer)
 config <- serialize_keras_object(layer3)
 str(config)
 
-new_layer <- deserialize_keras_object()(config)
+new_layer <- deserialize_keras_object(config)
 new_layer
 ```
 
@@ -710,7 +707,8 @@ of a model where a `from_config` override is necessary.
 <!-- <a name="registration_example"></a> -->
 
 ```{r}
-layer_custom_model <- register_custom_object(
+`%||%` <- \(x, y) if(is.null(x)) y else x
+layer_custom_model <- register_keras_serializable(
   package = "ComplexModels",
   object = Layer(
     "CustomModel",
@@ -729,14 +727,14 @@ layer_custom_model <- register_custom_object(
       config
     }, 
     
-    from_config = py_eval("classmethod")(function(cls, config) {
+    from_config = function(config) {
       config$first_layer %<>% deserialize_keras_object()
       config$second_layer %<>% deserialize_keras_object()
       # note that the class is available in methods under the classname symbol, 
       # (`CustomModel` for this class), and also under the symbol `__class__`
       cls(!!!config)
       # CustomModel(!!!config)
-    }),
+    },
     call = function(self, inputs) {
       inputs |>
         self$first_layer() |>
@@ -758,7 +756,7 @@ new_model <- from_config(config)
 #### How custom objects are serialized
 
 The serialization format has a special key for custom objects registered via
-`register_custom_object()`. This `registered_name` key allows for easy
+`register_keras_serializable()`. This `registered_name` key allows for easy
 retrieval at loading/deserialization time while also allowing users to add custom naming.
 
 Let's take a look at the config from serializing the custom layer `MyDense` we defined
@@ -778,7 +776,7 @@ str(config)
 
 As shown, the `registered_name` key contains the lookup information for the Keras master
 list, including the package `MyLayers` and the custom name `KernelMult` that we gave when calling
-`register_custom_objects()`. Take a look again at the custom
+`register_keras_serializables()`. Take a look again at the custom
 class definition/registration [here](#registration_example).
 
 Note that the `class_name` key contains the original name of the class, allowing for

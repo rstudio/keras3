@@ -5,7 +5,7 @@ date-created: 2023/06/14
 last-modified: 2023/06/30
 description: Complete guide to saving, serializing, and exporting models.
 output: rmarkdown::html_vignette
-date: 'Last Modified: 2023-11-29; Last Rendered: 2023-12-01'
+date: 'Last Modified: 2023-12-01; Last Rendered: 2024-01-02'
 vignette: >
   %\VignetteIndexEntry{Save, serialize, and export models}
   %\VignetteEngine{knitr::rmarkdown}
@@ -103,13 +103,7 @@ model |> fit(test_input, test_target)
 
 # Calling `save('my_model.keras')` creates a zip archive `my_model.keras`.
 model |> save_model("my_model.keras")
-```
 
-```
-## Error: File 'my_model.keras' already exists (pass overwrite = TRUE to force save).
-```
-
-```r
 # It can be used to reconstruct the model identically.
 reconstructed_model <- load_model("my_model.keras")
 
@@ -118,11 +112,6 @@ stopifnot(all.equal(
   model |> predict(test_input),
   reconstructed_model |> predict(test_input)
 ))
-```
-
-```
-## Error in eval(expr, envir, enclos): predict(model, test_input) and predict(reconstructed_model, test_input) are not equal:
-##   Mean relative difference: 1.580108
 ```
 
 ### Custom objects
@@ -153,13 +142,13 @@ layer_custom <- Layer(
   get_config = function() {
     base_config <- super$get_config()
     config <- list(
-      sublayer = keras$saving$serialize_keras_object(self$sublayer)
+      sublayer = serialize_keras_object(self$sublayer)
     )
     c(base_config, config)
   },
   from_config = function(cls, config) {
     sublayer_config <- config$sublayer
-    sublayer <- keras$saving$deserialize_keras_object(sublayer_config)
+    sublayer <- deserialize_keras_object(sublayer_config)
     cls(sublayer, !!!config)
   }
 )
@@ -181,7 +170,7 @@ Below are examples of each workflow:
 #### Registering custom objects (**preferred**)
 
 This is the preferred method, as custom object registration greatly simplifies saving and
-loading code. Calling `register_custom_object()` on a custom object registers
+loading code. Calling `register_keras_serializable()` on a custom object registers
 the object globally in a master list,
 allowing Keras to recognize the object when loading the model.
 
@@ -194,13 +183,8 @@ function to demonstrate this.
 ```r
 # Clear all previously registered custom objects
 clear_registered_custom_objects()
-```
 
-```
-## Error in clear_registered_custom_objects(): could not find function "clear_registered_custom_objects"
-```
 
-```r
 layer_custom <- Layer(
   "CustomLayer",
   initialize = function(self, factor) {
@@ -220,57 +204,11 @@ layer_custom <- Layer(
 # Upon registration, you can optionally specify a package or a name.
 # If left blank, the package defaults to "Custom" and the name defaults to
 # the class name.
-register_custom_object(layer_custom, package = "MyLayers")
-```
+register_keras_serializable(layer_custom, package = "MyLayers")
 
-```
-## Registered S3 methods overwritten by 'keras':
-##   method                                                     from
-##   $.py_R6ClassGenerator                                      keras3
-##   +.keras.backend.common.keras_tensor.KerasTensor            keras3
-##   ==.keras.backend.common.keras_tensor.KerasTensor           keras3
-##   [.keras_shape                                              keras3
-##   as.array.keras.backend.common.variables.KerasVariable      keras3
-##   as.data.frame.keras_training_history                       keras3
-##   as.double.keras.backend.common.variables.KerasVariable     keras3
-##   as.integer.keras.backend.common.variables.KerasVariable    keras3
-##   as.integer.keras_shape                                     keras3
-##   as.list.keras_shape                                        keras3
-##   as.numeric.keras.backend.common.variables.KerasVariable    keras3
-##   compile.keras.models.model.Model                           keras3
-##   destructure.keras_shape                                    keras3
-##   evaluate.keras.models.model.Model                          keras3
-##   fit.keras.models.model.Model                               keras3
-##   format.keras.models.model.Model                            keras3
-##   format.keras_shape                                         keras3
-##   plot.keras.models.model.Model                              keras3
-##   plot.keras_training_history                                keras3
-##   predict.keras.models.model.Model                           keras3
-##   print.keras.models.model.Model                             keras3
-##   print.keras_shape                                          keras3
-##   print.keras_training_history                               keras3
-##   print.kerastools.model.RModel                              keras3
-##   print.py_R6ClassGenerator                                  keras3
-##   py_str.keras.models.model.Model                            keras3
-##   py_to_r.keras.utils.generic_utils.SharedObjectConfig       keras3
-##   py_to_r.tensorflow.python.ops.gen_linalg_ops.Qr            keras3
-##   py_to_r.tensorflow.python.ops.gen_nn_ops.TopKV2            keras3
-##   py_to_r_wrapper.keras.initializers.initializer.Initializer keras3
-##   py_to_r_wrapper.keras.layers.layer.Layer                   keras3
-##   py_to_r_wrapper.keras.losses.loss.Loss                     keras3
-##   py_to_r_wrapper.keras.models.model.Model                   keras3
-##   py_to_r_wrapper.kerastools.model.RModel                    keras3
-##   r_to_py.R6ClassGenerator                                   keras3
-##   r_to_py.keras_layer_wrapper                                keras3
-##   r_to_py.keras_shape                                        keras3
-##   summary.keras.models.model.Model                           keras3
-##   summary.kerastools.model.RModel                            keras3
-```
-
-```r
 custom_fn <- keras3:::py_func2(function(x) x^2, name = "custom_fn", convert = TRUE)
 
-register_custom_object(custom_fn, name="custom_fn", package="my_package")
+register_keras_serializable(custom_fn, name="custom_fn", package="my_package")
 
 
 # Create the model.
@@ -300,9 +238,6 @@ model |> save_model("custom_model.keras", overwrite = TRUE)
 
 # Now, we can simply load without worrying about our custom objects.
 reconstructed_model <- load_model("custom_model.keras")
-
-# model$get_config()$layers[[3]]$config$activation -> z
-# keras$saving$deserialize_keras_object(z)
 
 # Let's check:
 stopifnot(all.equal(
@@ -413,7 +348,29 @@ str(layer_config)
 ```
 
 ```
-## Dict (12 items)
+## List of 12
+##  $ name              : chr "dense_4"
+##  $ trainable         : logi TRUE
+##  $ dtype             : chr "float32"
+##  $ units             : int 3
+##  $ activation        : chr "relu"
+##  $ use_bias          : logi TRUE
+##  $ kernel_initializer:List of 4
+##   ..$ module         : chr "keras.src.initializers.random_initializers"
+##   ..$ class_name     : chr "GlorotUniform"
+##   ..$ config         :List of 1
+##   .. ..$ seed: NULL
+##   ..$ registered_name: chr "GlorotUniform"
+##  $ bias_initializer  :List of 4
+##   ..$ module         : chr "keras.src.initializers.constant_initializers"
+##   ..$ class_name     : chr "Zeros"
+##   ..$ config         : Named list()
+##   ..$ registered_name: chr "Zeros"
+##  $ kernel_regularizer: NULL
+##  $ bias_regularizer  : NULL
+##  $ kernel_constraint : NULL
+##  $ bias_constraint   : NULL
+##  - attr(*, "__class__")=<class 'keras.src.layers.core.dense.Dense'>
 ```
 
 Now let's reconstruct the layer using the `from_config()` method:
@@ -479,18 +436,16 @@ behind all `serialize()`/`deserialize()` calls in keras.
 ```r
 my_reg <- regularizer_l1(0.005)
 config <- serialize_keras_object(my_reg)
-```
-
-```
-## Error in serialize_keras_object(my_reg): could not find function "serialize_keras_object"
-```
-
-```r
 str(config)
 ```
 
 ```
-## {'name': 'functional_11', 'trainable': True, 'layers': [{'module': 'keras.src.layers.core.input_layer', 'class_name': 'InputLayer', 'config': {'batch_shape': (None, 32), 'dtype': 'float32', 'sparse': False, 'name': 'input_layer_5'}, 'registered_name': 'InputLayer', 'name': 'input_layer_5', 'inbound_nodes': []}, {'module': 'keras.src.layers.core.dense', 'class_name': 'Dense', 'config': {'name': 'dense_6', 'trainable': True, 'dtype': 'float32', 'units': 1, 'activation': 'linear', 'use_bias': True, 'kernel_initializer': {'module': 'keras.src.initializers.random_initializers', 'class_name': 'GlorotUniform', 'config': {'seed': None}, 'registered_name': 'GlorotUniform'}, 'bias_initializer': {'module': 'keras.src.initializers.constant_initializers', 'class_name': 'Zeros', 'config': {}, 'registered_name': 'Zeros'}, 'kernel_regularizer': None, 'bias_regularizer': None, 'kernel_constraint': None, 'bias_constraint': None}, 'registered_name': 'Dense', 'build_config': {'input_shape': (None, 32)}, 'name': 'dense_6', 'inbound_nodes': [{'args': ({'class_name': '__keras_tensor__', 'config': {'shape': (None, 32), 'dtype': 'float32', 'keras_history': ['input_layer_5', 0, 0]}},), 'kwargs': {}}]}], 'input_layers': [['input_layer_5', 0, 0]], 'output_layers': [['dense_6', 0, 0]]}
+## List of 4
+##  $ module         : chr "keras.src.regularizers.regularizers"
+##  $ class_name     : chr "L1"
+##  $ config         :List of 1
+##   ..$ l1: num 0.005
+##  $ registered_name: chr "L1"
 ```
 
 Note the serialization format containing all the necessary information for proper
@@ -507,18 +462,11 @@ Now we can reconstruct the regularizer.
 
 ```r
 new_reg <- deserialize_keras_object(config)
-```
-
-```
-## Error in deserialize_keras_object(config): could not find function "deserialize_keras_object"
-```
-
-```r
 new_reg
 ```
 
 ```
-## Error in eval(expr, envir, enclos): object 'new_reg' not found
+## <keras.src.regularizers.regularizers.L1 object at 0x2d58d2fd0>
 ```
 
 ### Model weights saving
@@ -688,13 +636,7 @@ create_functional_model <- function() {
 
 functional_model <- create_functional_model()
 functional_model |> save_model_weights("pretrained.weights.h5")
-```
 
-```
-## Error: File 'pretrained.weights.h5' already exists (pass overwrite = TRUE to force save).
-```
-
-```r
 # In a separate program:
 pretrained_model <- create_functional_model()
 pretrained_model |> load_model_weights("pretrained.weights.h5")
@@ -707,19 +649,19 @@ summary(model)
 ```
 
 ```
-## Model: "sequential_4"
+## [1mModel: "sequential_4"[0m
 ## ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━┓
-## ┃ Layer (type)                      ┃ Output Shape                ┃    Param # ┃
+## ┃[1m [0m[1mLayer (type)                     [0m[1m [0m┃[1m [0m[1mOutput Shape               [0m[1m [0m┃[1m [0m[1m   Param #[0m[1m [0m┃
 ## ┡━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━┩
-## │ dense_1 (Dense)                   │ (None, 64)                  │     50,240 │
+## │ dense_1 ([38;5;33mDense[0m)                   │ ([38;5;45mNone[0m, [38;5;34m64[0m)                  │     [38;5;34m50,240[0m │
 ## ├───────────────────────────────────┼─────────────────────────────┼────────────┤
-## │ dense_2 (Dense)                   │ (None, 64)                  │      4,160 │
+## │ dense_2 ([38;5;33mDense[0m)                   │ ([38;5;45mNone[0m, [38;5;34m64[0m)                  │      [38;5;34m4,160[0m │
 ## ├───────────────────────────────────┼─────────────────────────────┼────────────┤
-## │ dense_3 (Dense)                   │ (None, 5)                   │        325 │
+## │ dense_3 ([38;5;33mDense[0m)                   │ ([38;5;45mNone[0m, [38;5;34m5[0m)                   │        [38;5;34m325[0m │
 ## └───────────────────────────────────┴─────────────────────────────┴────────────┘
-##  Total params: 54,725 (213.77 KB)
-##  Trainable params: 54,725 (213.77 KB)
-##  Non-trainable params: 0 (0.00 B)
+## [1m Total params: [0m[38;5;34m54,725[0m (213.77 KB)
+## [1m Trainable params: [0m[38;5;34m54,725[0m (213.77 KB)
+## [1m Non-trainable params: [0m[38;5;34m0[0m (0.00 B)
 ```
 
 ### Appendix: Handling custom objects
@@ -745,7 +687,7 @@ method.
 
 
 ```r
-layer_my_dense <- register_custom_object(
+layer_my_dense <- register_keras_serializable(
   package = "MyLayers", name = "KernelMult",
   object = Layer(
     "MyDense",
@@ -788,60 +730,47 @@ layer_my_dense <- register_custom_object(
     }
   )
 )
-```
 
-```
-## wrong parameter order: variadic keyword parameter before keyword-only parameter
-```
 
-```r
 layer <- layer_my_dense(units = 16,
                         kernel_regularizer = "l1",
                         kernel_initializer = "ones")
-```
-
-```
-## Error in layer_my_dense(units = 16, kernel_regularizer = "l1", kernel_initializer = "ones"): could not find function "layer_my_dense"
-```
-
-```r
 layer3 <- layer_my_dense(units = 64, nested_model = layer)
-```
 
-```
-## Error in layer_my_dense(units = 64, nested_model = layer): could not find function "layer_my_dense"
-```
-
-```r
 config <- serialize_keras_object(layer3)
-```
-
-```
-## Error in serialize_keras_object(layer3): could not find function "serialize_keras_object"
-```
-
-```r
 str(config)
 ```
 
 ```
-## {'name': 'functional_11', 'trainable': True, 'layers': [{'module': 'keras.src.layers.core.input_layer', 'class_name': 'InputLayer', 'config': {'batch_shape': (None, 32), 'dtype': 'float32', 'sparse': False, 'name': 'input_layer_5'}, 'registered_name': 'InputLayer', 'name': 'input_layer_5', 'inbound_nodes': []}, {'module': 'keras.src.layers.core.dense', 'class_name': 'Dense', 'config': {'name': 'dense_6', 'trainable': True, 'dtype': 'float32', 'units': 1, 'activation': 'linear', 'use_bias': True, 'kernel_initializer': {'module': 'keras.src.initializers.random_initializers', 'class_name': 'GlorotUniform', 'config': {'seed': None}, 'registered_name': 'GlorotUniform'}, 'bias_initializer': {'module': 'keras.src.initializers.constant_initializers', 'class_name': 'Zeros', 'config': {}, 'registered_name': 'Zeros'}, 'kernel_regularizer': None, 'bias_regularizer': None, 'kernel_constraint': None, 'bias_constraint': None}, 'registered_name': 'Dense', 'build_config': {'input_shape': (None, 32)}, 'name': 'dense_6', 'inbound_nodes': [{'args': ({'class_name': '__keras_tensor__', 'config': {'shape': (None, 32), 'dtype': 'float32', 'keras_history': ['input_layer_5', 0, 0]}},), 'kwargs': {}}]}], 'input_layers': [['input_layer_5', 0, 0]], 'output_layers': [['dense_6', 0, 0]]}
+## List of 4
+##  $ module         : chr "<r-globalenv>"
+##  $ class_name     : chr "MyDense"
+##  $ config         :List of 5
+##   ..$ name        : chr "my_dense_1"
+##   ..$ trainable   : logi TRUE
+##   ..$ dtype       : chr "float32"
+##   ..$ units       : num 64
+##   ..$ nested_model:List of 4
+##   .. ..$ module         : chr "<r-globalenv>"
+##   .. ..$ class_name     : chr "MyDense"
+##   .. ..$ config         :List of 6
+##   .. .. ..$ name              : chr "my_dense"
+##   .. .. ..$ trainable         : logi TRUE
+##   .. .. ..$ dtype             : chr "float32"
+##   .. .. ..$ units             : num 16
+##   .. .. ..$ kernel_regularizer: chr "l1"
+##   .. .. ..$ kernel_initializer: chr "ones"
+##   .. ..$ registered_name: chr "MyLayers>KernelMult"
+##  $ registered_name: chr "MyLayers>KernelMult"
 ```
 
 ```r
-new_layer <- deserialize_keras_object()(config)
-```
-
-```
-## Error in deserialize_keras_object(): could not find function "deserialize_keras_object"
-```
-
-```r
+new_layer <- deserialize_keras_object(config)
 new_layer
 ```
 
 ```
-## <Dense name=dense_4, built=False>
+## <MyDense name=my_dense_1, built=False>
 ```
 
 Note that overriding `from_config` is unnecessary above for `MyDense` because
@@ -858,7 +787,8 @@ of a model where a `from_config` override is necessary.
 
 
 ```r
-layer_custom_model <- register_custom_object(
+`%||%` <- \(x, y) if(is.null(x)) y else x
+layer_custom_model <- register_keras_serializable(
   package = "ComplexModels",
   object = Layer(
     "CustomModel",
@@ -877,14 +807,14 @@ layer_custom_model <- register_custom_object(
       config
     },
 
-    from_config = py_eval("classmethod")(function(cls, config) {
+    from_config = function(config) {
       config$first_layer %<>% deserialize_keras_object()
       config$second_layer %<>% deserialize_keras_object()
       # note that the class is available in methods under the classname symbol,
       # (`CustomModel` for this class), and also under the symbol `__class__`
       cls(!!!config)
       # CustomModel(!!!config)
-    }),
+    },
     call = function(self, inputs) {
       inputs |>
         self$first_layer() |>
@@ -892,23 +822,10 @@ layer_custom_model <- register_custom_object(
     }
   )
 )
-```
 
-```
-## Error in py_eval("classmethod"): could not find function "py_eval"
-```
-
-```r
 # Let's make our first layer the custom layer from the previous example (MyDense)
 inputs <- layer_input(c(32))
 outputs <-  inputs |> layer_custom_model(first_layer=layer)
-```
-
-```
-## Error in layer_custom_model(inputs, first_layer = layer): could not find function "layer_custom_model"
-```
-
-```r
 model <- keras_model(inputs, outputs)
 
 config <- get_config(model)
@@ -919,7 +836,7 @@ new_model <- from_config(config)
 #### How custom objects are serialized
 
 The serialization format has a special key for custom objects registered via
-`register_custom_object()`. This `registered_name` key allows for easy
+`register_keras_serializable()`. This `registered_name` key allows for easy
 retrieval at loading/deserialization time while also allowing users to add custom naming.
 
 Let's take a look at the config from serializing the custom layer `MyDense` we defined
@@ -934,31 +851,33 @@ layer <- layer_my_dense(
   kernel_regularizer = regularizer_l1_l2(l1 = 1e-5, l2 = 1e-4),
   kernel_initializer = "ones",
 )
-```
-
-```
-## Error in layer_my_dense(units = 16, kernel_regularizer = regularizer_l1_l2(l1 = 1e-05, : could not find function "layer_my_dense"
-```
-
-```r
 config <- serialize_keras_object(layer)
-```
-
-```
-## Error in serialize_keras_object(layer): could not find function "serialize_keras_object"
-```
-
-```r
 str(config)
 ```
 
 ```
-## {'name': 'functional_21', 'trainable': True, 'layers': [{'module': 'keras.src.layers.core.input_layer', 'class_name': 'InputLayer', 'config': {'batch_shape': (None, 784), 'dtype': 'float32', 'sparse': False, 'name': 'digits'}, 'registered_name': 'InputLayer', 'name': 'digits', 'inbound_nodes': []}, {'module': 'keras.src.layers.core.dense', 'class_name': 'Dense', 'config': {'name': 'dense_1', 'trainable': True, 'dtype': 'float32', 'units': 64, 'activation': 'relu', 'use_bias': True, 'kernel_initializer': {'module': 'keras.src.initializers.random_initializers', 'class_name': 'GlorotUniform', 'config': {'seed': None}, 'registered_name': 'GlorotUniform'}, 'bias_initializer': {'module': 'keras.src.initializers.constant_initializers', 'class_name': 'Zeros', 'config': {}, 'registered_name': 'Zeros'}, 'kernel_regularizer': None, 'bias_regularizer': None, 'kernel_constraint': None, 'bias_constraint': None}, 'registered_name': 'Dense', 'build_config': {'input_shape': (None, 784)}, 'name': 'dense_1', 'inbound_nodes': [{'args': ({'class_name': '__keras_tensor__', 'config': {'shape': (None, 784), 'dtype': 'float32', 'keras_history': ['digits', 0, 0]}},), 'kwargs': {}}]}, {'module': 'keras.src.layers.core.dense', 'class_name': 'Dense', 'config': {'name': 'dense_2', 'trainable': True, 'dtype': 'float32', 'units': 64, 'activation': 'relu', 'use_bias': True, 'kernel_initializer': {'module': 'keras.src.initializers.random_initializers', 'class_name': 'GlorotUniform', 'config': {'seed': None}, 'registered_name': 'GlorotUniform'}, 'bias_initializer': {'module': 'keras.src.initializers.constant_initializers', 'class_name': 'Zeros', 'config': {}, 'registered_name': 'Zeros'}, 'kernel_regularizer': None, 'bias_regularizer': None, 'kernel_constraint': None, 'bias_constraint': None}, 'registered_name': 'Dense', 'build_config': {'input_shape': (None, 64)}, 'name': 'dense_2', 'inbound_nodes': [{'args': ({'class_name': '__keras_tensor__', 'config': {'shape': (None, 64), 'dtype': 'float32', 'keras_history': ['dense_1', 0, 0]}},), 'kwargs': {}}]}, {'module': 'keras.src.layers.core.input_layer', 'class_name': 'InputLayer', 'config': {'batch_shape': (None, 32), 'dtype': 'float32', 'sparse': False, 'name': 'input_layer_8'}, 'registered_name': 'InputLayer', 'name': 'input_layer_8', 'inbound_nodes': []}, {'module': 'keras.src.layers.core.dense', 'class_name': 'Dense', 'config': {'name': 'predictions', 'trainable': True, 'dtype': 'float32', 'units': 10, 'activation': 'linear', 'use_bias': True, 'kernel_initializer': {'module': 'keras.src.initializers.random_initializers', 'class_name': 'GlorotUniform', 'config': {'seed': None}, 'registered_name': 'GlorotUniform'}, 'bias_initializer': {'module': 'keras.src.initializers.constant_initializers', 'class_name': 'Zeros', 'config': {}, 'registered_name': 'Zeros'}, 'kernel_regularizer': None, 'bias_regularizer': None, 'kernel_constraint': None, 'bias_constraint': None}, 'registered_name': 'Dense', 'build_config': {'input_shape': (None, 64)}, 'name': 'predictions', 'inbound_nodes': [{'args': ({'class_name': '__keras_tensor__', 'config': {'shape': (None, 64), 'dtype': 'float32', 'keras_history': ['dense_2', 0, 0]}},), 'kwargs': {}}]}], 'input_layers': [['input_layer_8', 0, 0]], 'output_layers': [['predictions', 0, 0]]}
+## List of 4
+##  $ module         : chr "<r-globalenv>"
+##  $ class_name     : chr "MyDense"
+##  $ config         :List of 6
+##   ..$ name              : chr "my_dense_2"
+##   ..$ trainable         : logi TRUE
+##   ..$ dtype             : chr "float32"
+##   ..$ units             : num 16
+##   ..$ kernel_regularizer:List of 4
+##   .. ..$ module         : chr "keras.src.regularizers.regularizers"
+##   .. ..$ class_name     : chr "L1L2"
+##   .. ..$ config         :List of 2
+##   .. .. ..$ l1: num 1e-05
+##   .. .. ..$ l2: num 1e-04
+##   .. ..$ registered_name: chr "L1L2"
+##   ..$ kernel_initializer: chr "ones"
+##  $ registered_name: chr "MyLayers>KernelMult"
 ```
 
 As shown, the `registered_name` key contains the lookup information for the Keras master
 list, including the package `MyLayers` and the custom name `KernelMult` that we gave when calling
-`register_custom_objects()`. Take a look again at the custom
+`register_keras_serializables()`. Take a look again at the custom
 class definition/registration [here](#registration_example).
 
 Note that the `class_name` key contains the original name of the class, allowing for
