@@ -76,7 +76,7 @@
 <div class="row">
   <main id="main" class="col-md-9"><div class="page-header">
       <img src="" class="logo" alt=""><h1>Base class for recurrent layer_</h1>
-      <small class="dont-index">Source: <a href="https://github.com/rstudio/keras/blob/HEAD/R/keras-layers-rnn.R" class="external-link"><code>R/keras-layers-rnn.R</code></a></small>
+      <small class="dont-index">Source: <a href="https://github.com/rstudio/keras/blob/HEAD/R/layers-rnn.R" class="external-link"><code>R/layers-rnn.R</code></a></small>
       <div class="d-none name"><code>layer_rnn.Rd</code></div>
     </div>
 
@@ -264,7 +264,7 @@ the initial state of the RNN layer.</p>
 <span></span>
 <span>  <span class="va">call</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">inputs</span>, <span class="va">states</span><span class="op">)</span> <span class="op">{</span></span>
 <span>    <span class="va">prev_output</span> <span class="op">&lt;-</span> <span class="va">states</span><span class="op">[[</span><span class="fl">1</span><span class="op">]</span><span class="op">]</span></span>
-<span>    <span class="va">h</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/op_matmul.html">op_matmul</a></span><span class="op">(</span><span class="va">inputs</span>, <span class="va">self.kernel</span><span class="op">)</span></span>
+<span>    <span class="va">h</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/op_matmul.html">op_matmul</a></span><span class="op">(</span><span class="va">inputs</span>, <span class="va">self</span><span class="op">$</span><span class="va">kernel</span><span class="op">)</span></span>
 <span>    <span class="va">output</span> <span class="op">&lt;-</span> <span class="va">h</span> <span class="op">+</span> <span class="fu"><a href="../reference/op_matmul.html">op_matmul</a></span><span class="op">(</span><span class="va">prev_output</span>, <span class="va">self</span><span class="op">$</span><span class="va">recurrent_kernel</span><span class="op">)</span></span>
 <span>    <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="va">output</span>, <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="va">output</span><span class="op">)</span><span class="op">)</span></span>
 <span>  <span class="op">}</span></span>
@@ -306,6 +306,7 @@ the initial state of the RNN layer.</p>
 <p>Other layers: 
 <code><a href="Layer.html">Layer</a>()</code>,
 <code><a href="bidirectional.html">bidirectional</a>()</code>,
+<code><a href="layer_text_vectorization.html">get_vocabulary</a>()</code>,
 <code><a href="layer_activation_elu.html">layer_activation_elu</a>()</code>,
 <code><a href="layer_activation_leaky_relu.html">layer_activation_leaky_relu</a>()</code>,
 <code><a href="layer_activation_parametric_relu.html">layer_activation_parametric_relu</a>()</code>,
@@ -399,7 +400,6 @@ the initial state of the RNN layer.</p>
 <code><a href="layer_stacked_rnn_cells.html">layer_stacked_rnn_cells</a>()</code>,
 <code><a href="layer_string_lookup.html">layer_string_lookup</a>()</code>,
 <code><a href="layer_subtract.html">layer_subtract</a>()</code>,
-<code><a href="layer_text_vectorization.html">layer_text_vectorization</a>()</code>,
 <code><a href="layer_tfsm.html">layer_tfsm</a>()</code>,
 <code><a href="layer_time_distributed.html">layer_time_distributed</a>()</code>,
 <code><a href="layer_torch_module_wrapper.html">layer_torch_module_wrapper</a>()</code>,

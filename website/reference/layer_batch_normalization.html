@@ -21,8 +21,8 @@ calling the layer/model with the argument training=FALSE (which is the
 default), the layer normalizes its output using a moving average of the
 mean and standard deviation of the batches it has seen during training. That
 is to say, it returns
-gamma * (batch - self.moving_mean) / sqrt(self.moving_var+epsilon) + beta.
-self.moving_mean and self.moving_var are non-trainable variables that
+gamma * (batch - self$moving_mean) / sqrt(self$moving_var+epsilon) + beta.
+self$moving_mean and self$moving_var are non-trainable variables that
 are updated each time the layer in called in training mode, as such:
 moving_mean = moving_mean * momentum + mean(batch) * (1 - momentum)
 moving_var = moving_var * momentum + var(batch) * (1 - momentum)
@@ -74,8 +74,8 @@ calling the layer/model with the argument training=FALSE (which is the
 default), the layer normalizes its output using a moving average of the
 mean and standard deviation of the batches it has seen during training. That
 is to say, it returns
-gamma * (batch - self.moving_mean) / sqrt(self.moving_var+epsilon) + beta.
-self.moving_mean and self.moving_var are non-trainable variables that
+gamma * (batch - self$moving_mean) / sqrt(self$moving_var+epsilon) + beta.
+self$moving_mean and self$moving_var are non-trainable variables that
 are updated each time the layer in called in training mode, as such:
 moving_mean = moving_mean * momentum + mean(batch) * (1 - momentum)
 moving_var = moving_var * momentum + var(batch) * (1 - momentum)
@@ -182,7 +182,7 @@ until compile() is called again.
 <div class="row">
   <main id="main" class="col-md-9"><div class="page-header">
       <img src="" class="logo" alt=""><h1>Layer that normalizes its inputs.</h1>
-      <small class="dont-index">Source: <a href="https://github.com/rstudio/keras/blob/HEAD/R/keras-layers-normalization.R" class="external-link"><code>R/keras-layers-normalization.R</code></a></small>
+      <small class="dont-index">Source: <a href="https://github.com/rstudio/keras/blob/HEAD/R/layers-normalization.R" class="external-link"><code>R/layers-normalization.R</code></a></small>
       <div class="d-none name"><code>layer_batch_normalization.Rd</code></div>
     </div>
 
@@ -206,8 +206,8 @@ calling the layer/model with the argument <code>training=FALSE</code> (which is 
 default), the layer normalizes its output using a moving average of the
 mean and standard deviation of the batches it has seen during training. That
 is to say, it returns
-<code>gamma * (batch - self.moving_mean) / sqrt(self.moving_var+epsilon) + beta</code>.</p>
-<p><code>self.moving_mean</code> and <code>self.moving_var</code> are non-trainable variables that
+<code>gamma * (batch - self$moving_mean) / sqrt(self$moving_var+epsilon) + beta</code>.</p>
+<p><code>self$moving_mean</code> and <code>self$moving_var</code> are non-trainable variables that
 are updated each time the layer in called in training mode, as such:</p><ul><li><p><code>moving_mean = moving_mean * momentum + mean(batch) * (1 - momentum)</code></p></li>
 <li><p><code>moving_var = moving_var * momentum + var(batch) * (1 - momentum)</code></p></li>
 </ul><p>As such, the layer will only normalize its inputs during inference
@@ -361,6 +361,7 @@ training.</p></li>
 <p>Other layers: 
 <code><a href="Layer.html">Layer</a>()</code>,
 <code><a href="bidirectional.html">bidirectional</a>()</code>,
+<code><a href="layer_text_vectorization.html">get_vocabulary</a>()</code>,
 <code><a href="layer_activation_elu.html">layer_activation_elu</a>()</code>,
 <code><a href="layer_activation_leaky_relu.html">layer_activation_leaky_relu</a>()</code>,
 <code><a href="layer_activation_parametric_relu.html">layer_activation_parametric_relu</a>()</code>,
@@ -454,7 +455,6 @@ training.</p></li>
 <code><a href="layer_stacked_rnn_cells.html">layer_stacked_rnn_cells</a>()</code>,
 <code><a href="layer_string_lookup.html">layer_string_lookup</a>()</code>,
 <code><a href="layer_subtract.html">layer_subtract</a>()</code>,
-<code><a href="layer_text_vectorization.html">layer_text_vectorization</a>()</code>,
 <code><a href="layer_tfsm.html">layer_tfsm</a>()</code>,
 <code><a href="layer_time_distributed.html">layer_time_distributed</a>()</code>,
 <code><a href="layer_torch_module_wrapper.html">layer_torch_module_wrapper</a>()</code>,
