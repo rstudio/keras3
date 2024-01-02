@@ -218,26 +218,6 @@ clone_model <- function(model, input_tensors = NULL, clone_function = NULL) {
 
 
 
-
-resolve_callbacks <- function(args, callbacks) {
-  args <- append(args, list(callbacks = normalize_callbacks(callbacks)))
-  args
-}
-
-as_model_verbose_arg <- function(x) {
-  if(!identical(x, "auto"))
-    return(as.integer(x))
-  # x == auto
-  if(isTRUE(getOption('knitr.in.progress')))
-    return(2L)
-  x # "auto"
-}
-
-
-
-
-
-
 #' Retrieves a layer based on either its name (unique) or index.
 #'
 #' Indices are based on order of horizontal graph traversal (bottom-up) and are
@@ -273,50 +253,3 @@ pop_layer <- function(object) {
   object$pop()
 }
 
-
-
-# determine whether to view metrics or not
-resolve_view_metrics <- function(verbose, epochs, metrics) {
-  (epochs > 1)          &&            # more than 1 epoch
-  (verbose > 0) &&                    # verbose mode is on
-  !is.null(getOption("viewer")) &&    # have an internal viewer available
-  nzchar(Sys.getenv("RSTUDIO"))       # running under RStudio
-}
-
-
-write_history_metadata <- function(history) {
-  properties <- list()
-  properties$validation_samples <- history$params$validation_samples
-  tfruns::write_run_metadata("properties", properties)
-}
-
-
-as_class_weight <- function(class_weight, class_names = NULL) {
-  # convert class weights to python dict
-  if (!is.null(class_weight)) {
-    if (is.list(class_weight))
-      class_weight <- dict(class_weight)
-    else
-      stop("class_weight must be a named list of weights")
-  }
-}
-
-have_module <- function(module) {
-  tryCatch({ import(module); TRUE; }, error = function(e) FALSE)
-}
-
-have_h5py <- function() {
-  have_module("h5py")
-}
-
-have_pyyaml <- function() {
-  have_module("yaml")
-}
-
-have_requests <- function() {
-  have_module("requests")
-}
-
-have_pillow <- function() {
-  have_module("PIL") # aka Pillow
-}

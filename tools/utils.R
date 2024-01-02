@@ -2044,6 +2044,16 @@ combine_files <- function(out, ..., sep = "\n") {
   invisible(out)
 }
 
+delete_empty_files <- function(...) {
+  for(f in list.files(..., full.names = TRUE)) {
+    x <- trimws(readLines(f))
+    if(!any(nzchar(x))) {
+      message("deleting: ", f)
+      unlink(f)
+    }
+  }
+}
+
 file_lines_manager <- function() {
 
   .files <- new.env(parent = emptyenv())

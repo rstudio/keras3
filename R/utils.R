@@ -1131,3 +1131,25 @@ is_py_object <- function(x) inherits(x, "python.builtin.object")
 as_node_index <- function(node_index) {
   as.integer(node_index-1)
 }
+
+
+
+have_module <- function(module) {
+  tryCatch({ import(module); TRUE; }, error = function(e) FALSE)
+}
+
+have_h5py <- function() {
+  have_module("h5py")
+}
+
+have_pyyaml <- function() {
+  have_module("yaml")
+}
+
+have_requests <- function() {
+  have_module("requests")
+}
+
+have_pillow <- function() {
+  have_module("PIL") # aka Pillow
+}

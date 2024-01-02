@@ -953,6 +953,51 @@ with_rich_config <- function(expr) {
 # ---- internal utils ----
 
 
+
+resolve_callbacks <- function(args, callbacks) {
+  args <- append(args, list(callbacks = normalize_callbacks(callbacks)))
+  args
+}
+
+as_model_verbose_arg <- function(x) {
+  if(!identical(x, "auto"))
+    return(as.integer(x))
+  # x == auto
+  if(isTRUE(getOption('knitr.in.progress')))
+    return(2L)
+  x # "auto"
+}
+
+
+as_class_weight <- function(class_weight, class_names = NULL) {
+  # convert class weights to python dict
+  if (!is.null(class_weight)) {
+    if (is.list(class_weight))
+      class_weight <- dict(class_weight)
+    else
+      stop("class_weight must be a named list of weights")
+  }
+}
+
+
+
+# determine whether to view metrics or not
+resolve_view_metrics <- function(verbose, epochs, metrics) {
+  (epochs > 1)          &&            # more than 1 epoch
+    (verbose > 0) &&                    # verbose mode is on
+    !is.null(getOption("viewer")) &&    # have an internal viewer available
+    nzchar(Sys.getenv("RSTUDIO"))       # running under RStudio
+}
+
+
+write_history_metadata <- function(history) {
+  properties <- list()
+  properties$validation_samples <- history$params$validation_samples
+  tfruns::write_run_metadata("properties", properties)
+}
+
+
+
 py_generator <- function(fn, completed = NULL, prefetch = 0L, convert = FALSE) {
   iterator2generator <- py_eval("lambda iterator: (yield from iterator)",
                                 convert = convert)
