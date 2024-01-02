@@ -59,9 +59,9 @@ knit_man_src <- function(input, ..., output_dir) {
   # message("Done!    file.edit('", file.path(dir, "3-rendered.md"), "')")
 }
 
-.GlobalEnv$.Last <- function() {
-  message("Finished!")
-}
+evalq({
+  .Last <- function() { message("Finished!") }
+}, .GlobalEnv)
 
 
 knit_vignette <- function(input, ..., output_dir) {
@@ -77,7 +77,9 @@ knit_vignette <- function(input, ..., output_dir) {
   filename <- basename(input)
   name <- sub("\\.[qrR]md$", "", filename)
 
+  # knitr::knit_hooks$restore()
   knitr::opts_chunk$set(
+    error = FALSE,
     fig.path = paste0(
       fs::path_real(here::here("man/figures/")), "/",
       fs::path_ext_remove(fs::path_file(input)), "/"
@@ -117,6 +119,7 @@ knit_vignette <- function(input, ..., output_dir) {
   fm$output <- "rmarkdown::html_vignette"
   fm$accelerator <- NULL
   fm$tether <- NULL
+  fm$author <- NULL # commented till pkgdown rendering fix
   package_dir <- strsplit(input, "/vignettes-src/", fixed = TRUE)[[1]][[1]]
 
   withr::with_dir(package_dir, {
