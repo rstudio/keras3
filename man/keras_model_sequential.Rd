@@ -79,7 +79,7 @@ Other model functions:
 \code{\link{get_layer}()},
 \code{\link{keras_model}()},
 \code{\link{pop_layer}()},
-\code{\link{summary.keras.models.model.Model}()}
+\code{\link{summary.keras.src.models.model.Model}()}
 
 Other model creation: 
 \code{\link{keras_model}()}

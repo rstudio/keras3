@@ -873,7 +873,7 @@ summary.keras.src.models.model.Model <- function(object, ...) {
 }
 
 
-#' @rdname summary.keras.models.model.Model
+#' @rdname summary.keras.src.models.model.Model
 #' @export
 format.keras.src.models.model.Model <-
 function(x,
@@ -910,7 +910,7 @@ function(x,
 }
 
 #
-#' @rdname summary.keras.models.model.Model
+#' @rdname summary.keras.src.models.model.Model
 #' @export
 print.keras.src.models.model.Model <- function(x, ...) {
     writeLines(format.keras.src.models.model.Model(x, ...))

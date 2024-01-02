@@ -18,6 +18,6 @@ Other model functions:
 \code{\link{get_layer}()},
 \code{\link{keras_model_sequential}()},
 \code{\link{keras_model}()},
-\code{\link{summary.keras.models.model.Model}()}
+\code{\link{summary.keras.src.models.model.Model}()}
 }
 \concept{model functions}

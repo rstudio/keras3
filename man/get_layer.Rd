@@ -28,6 +28,6 @@ Other model functions:
 \code{\link{keras_model_sequential}()},
 \code{\link{keras_model}()},
 \code{\link{pop_layer}()},
-\code{\link{summary.keras.models.model.Model}()}
+\code{\link{summary.keras.src.models.model.Model}()}
 }
 \concept{model functions}

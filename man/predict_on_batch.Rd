@@ -24,9 +24,9 @@ Returns predictions for a single batch of samples.
 }
 
 Other model training: 
-\code{\link{compile.keras.models.model.Model}()},
-\code{\link{evaluate.keras.models.model.Model}()},
-\code{\link{predict.keras.models.model.Model}()},
+\code{\link{compile.keras.src.models.model.Model}()},
+\code{\link{evaluate.keras.src.models.model.Model}()},
+\code{\link{predict.keras.src.models.model.Model}()},
 \code{\link{test_on_batch}()},
 \code{\link{train_on_batch}()}
 }
