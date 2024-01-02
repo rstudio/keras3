@@ -158,8 +158,8 @@ history <- model %>% fit(
 )
 
 test_scores <- model %>% evaluate(x_test, y_test, verbose=2)
-cat("Test loss:", test_scores["loss"])
-cat("Test accuracy:", test_scores["compile_metrics"])
+cat("Test loss:", test_scores$loss)
+cat("Test accuracy:", test_scores$compile_metrics)
 ```
 
 For further reading, see the [training and evaluation](/guides/training_with_built_in_methods/) guide.
@@ -614,12 +614,13 @@ For serialization support in your custom layer, define a `get_config()`
 method that returns the constructor arguments of the layer instance:
 
 ```{r}
-custom_dense <- new_layer_class(
-  "CustomDense",
+custom_dense <- Layer("CustomDense",
+                      
   initialize = function(units = 32, ...) {
     super$initialize()
     self$units <- as.integer(units)
   },
+  
   build = function(input_shape) {
     self$w <- self$add_weight(
       shape = shape(input_shape[[2]], self$units),
@@ -632,9 +633,11 @@ custom_dense <- new_layer_class(
       trainable = TRUE
     )
   },
+  
   call = function(inputs) {
     op_matmul(inputs, self$w) + self$b
   },
+  
   get_config = function() {
     list(units = self$units)
   }
@@ -873,5 +876,5 @@ outputs <- inputs %>%
   custom_rnn()
 
 model <- keras_model(inputs, outputs)
-out <- model(op_zeros(c(1, 10, 32)))
+out <- model(op_zeros(c(1, 10, 5)))
 ```

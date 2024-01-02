@@ -119,10 +119,10 @@ knit_vignette <- function(input, ..., output_dir) {
   }
 
   # fig.path
-  fig.path <- fs::path_real(fs::path(
+  fig.path <- normalizePath(fs::path(
     here::here("man/figures/"),
     fs::path_ext_remove(fs::path_file(input))
-  ))
+  ), mustWork = FALSE)
   # fig.path <- paste0(fig.path, "/")
 
   message("fig.path: ", fig.path)

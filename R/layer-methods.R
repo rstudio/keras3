@@ -50,8 +50,7 @@ from_config <- function(config,
   if (missing(class) && c("config" %in% names(config)))
     return(deserialize_keras_object(config, custom_objects = custom_objects))
   args <- list(config)
-  if(length(custom_objects))
-    args[[2L]] <- objects_with_py_function_names(custom_objects)
+  args$custom_objects <- objects_with_py_function_names(custom_objects)
   do.call(class$from_config, args)
 }
 

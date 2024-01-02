@@ -794,10 +794,10 @@ objects_with_py_function_names <- function(objects) {
     name <- object_names[[i]]
     o <- objects[[i]]
 
-    if (name == "") {
-      if (inherits(o, "keras_layer_wrapper"))
-        objects[[i]] <- o <- environment(o)$Layer
+    if (inherits(o, "keras_layer_wrapper"))
+      objects[[i]] <- o <- environment(o)$Layer
 
+    if (name == "") {
       if (inherits(o, "python.builtin.object"))
         name <- o$`__name__`
       else if (inherits(o, "R6ClassGenerator"))
