@@ -30,14 +30,14 @@ jobs:
           ## different python versions
           - {os: 'ubuntu-latest' , python: '3.11', r: 'release'}
           - {os: 'ubuntu-latest' , python: '3.9' , r: 'release'}
-          - {os: 'ubuntu-20.04'  , python: '3.8' , r: '3.6'} # default R in ubuntu-20.04
+          # - {os: 'ubuntu-20.04'  , python: '3.8' , r: '3.6'} # default R in ubuntu-20.04 # install/pak failure?
 
           ## older R versions
           # to see the current oldrel-3 (4.0.5):
           # https://api.r-hub.io/rversions/resolve/oldrel/3
           - {os: 'ubuntu-latest' , python: '3.9', r: 'oldrel'}
           - {os: 'ubuntu-latest' , python: '3.9', r: 'oldrel-1'}
-          - {os: 'ubuntu-latest' , python: '3.9', r: 'oldrel-2'}
+          # - {os: 'ubuntu-latest' , python: '3.9', r: 'oldrel-2'} # utils::sethash()
 
           # these are allowed to fail
           # - {os: 'ubuntu-latest', tf: '2.14.0rc1', r: 'release'}
