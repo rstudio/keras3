@@ -105,32 +105,29 @@ keras <- NULL
 
 .onLoad <- function(libname, pkgname) {
 
-  # resolve the implementation module (might be keras proper or might be tensorflow)
-  implementation_module <- resolve_implementation_module()
-
   # if KERAS_PYTHON is defined then forward it to RETICULATE_PYTHON
   keras_python <- get_keras_python()
   if (!is.null(keras_python))
     Sys.setenv(RETICULATE_PYTHON = keras_python)
 
   # delay load keras
-  try(keras <<- import(implementation_module, delay_load = list(
+  try(keras <<- import("keras", delay_load = list(
 
     priority = 10, # tensorflow priority == 5
 
     environment = "r-keras",
 
-    get_module = function() {
-      resolve_implementation_module()
-    },
+    # get_module = function() {
+    #   resolve_implementation_module()
+    # },
 
     on_load = function() {
       # check version
       check_implementation_version()
 
       # if(implementation_module != "keras_core") {
-      if(!py_has_attr(keras, "ops"))
-        reticulate::py_set_attr(keras, "ops",  keras$backend)
+      # if(!py_has_attr(keras, "ops"))
+      #   reticulate::py_set_attr(keras, "ops",  keras$backend)
 
       tryCatch(
         import("tensorflow")$experimental$numpy$experimental_enable_numpy_behavior(),
@@ -153,38 +150,28 @@ keras <- NULL
     }
   )))
 
-  # pkg_ns <- environment(sys.function())
-  # delayedAssign("keras_ops", {
-  #   cat("forcing keras_ops")
-  #   if (keras$`__name__` == "keras_core")
-  #     keras$ops
-  #   else
-  #     keras$backend
-  # }, pkg_ns, pkg_ns)
-
-
   # register class filter to alias classes to 'keras'
-  reticulate::register_class_filter(function(classes) {
-
-    module <- resolve_implementation_module()
-
-    if (identical(module, "tensorflow.keras"))
-      module <- "tensorflow.python.keras"
-
-    # replace "tensorflow.python.keras.*" with "keras.*"
-    classes <- sub(paste0("^", module), "keras", classes)
-
-    # All python symbols moved in v2.13 under .src
-    classes <- sub("^keras\\.src\\.", "keras.", classes)
-
-    # let KerasTensor inherit all the S3 methods of tf.Tensor, but
-    # KerasTensor methods take precedence.
-    if(any("keras.engine.keras_tensor.KerasTensor" %in% classes))
-      classes <- unique(c("keras.engine.keras_tensor.KerasTensor",
-                          "tensorflow.tensor",
-                          classes))
-    classes
-  })
+  # reticulate::register_class_filter(function(classes) {
+  #
+  #   module <- resolve_implementation_module()
+  #
+  #   if (identical(module, "tensorflow.keras"))
+  #     module <- "tensorflow.python.keras"
+  #
+  #   # replace "tensorflow.python.keras.*" with "keras.*"
+  #   classes <- sub(paste0("^", module), "keras", classes)
+  #
+  #   # All python symbols moved in v2.13 under .src
+  #   classes <- sub("^keras\\.src\\.", "keras.", classes)
+  #
+  #   # let KerasTensor inherit all the S3 methods of tf.Tensor, but
+  #   # KerasTensor methods take precedence.
+  #   if(any("keras.engine.keras_tensor.KerasTensor" %in% classes))
+  #     classes <- unique(c("keras.engine.keras_tensor.KerasTensor",
+  #                         "tensorflow.tensor",
+  #                         classes))
+  #   classes
+  # })
 
   # tensorflow use_session hooks
   setHook("tensorflow.on_before_use_session", tensorflow_on_before_use_session)

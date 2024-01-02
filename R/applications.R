@@ -3915,7 +3915,7 @@ application_decode_predictions <- function(model, preds, top = 5L, ...) {
 }
 
 not_found_errors <- function(model) {
-  if (!inherits(model, "keras.models.model.Model")) {
+  if (!inherits(model, "keras.src.models.model.Model")) {
     cli::cli_abort(c(
       x = "The {.arg model} argument must be a Keras model, got {.cls {head(class(model))}}"
     ))

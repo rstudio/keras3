@@ -117,7 +117,7 @@
 #' @seealso
 #' + <https:/keras.io/api/models/model_training_apis#compile-method>
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/Model/compile>
-compile.keras.models.model.Model <-
+compile.keras.src.models.model.Model <-
 function (object, optimizer = "rmsprop", loss = NULL, metrics = NULL,
           ..., loss_weights = NULL, weighted_metrics = NULL,
           run_eagerly = FALSE,
@@ -251,7 +251,7 @@ function (object, optimizer = "rmsprop", loss = NULL, metrics = NULL,
 #' @seealso
 #' + <https:/keras.io/api/models/model_training_apis#evaluate-method>
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/Model/evaluate>
-evaluate.keras.models.model.Model <-
+evaluate.keras.src.models.model.Model <-
 function (object, x = NULL, y = NULL, ..., batch_size = NULL,
           verbose = getOption("keras.verbose", default = "auto"),
           sample_weight = NULL, steps = NULL, callbacks = NULL)
@@ -487,7 +487,7 @@ function (object, x = NULL, y = NULL, ..., batch_size = NULL,
 #' @seealso
 #' + <https:/keras.io/api/models/model_training_apis#fit-method>
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/Model/fit>
-fit.keras.models.model.Model <-
+fit.keras.src.models.model.Model <-
 function(object,
          x = NULL,
          y = NULL,
@@ -661,7 +661,7 @@ input_data_normalizer <- function(model) {
 #' @seealso
 #' + <https:/keras.io/api/models/model_training_apis#predict-method>
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/Model/predict>
-predict.keras.models.model.Model <-
+predict.keras.src.models.model.Model <-
 function (object, x, ..., batch_size = NULL,
           verbose = getOption("keras.verbose", default = "auto"), steps = NULL,
           callbacks = NULL)
@@ -867,15 +867,15 @@ function (object, x, y = NULL, sample_weight = NULL, class_weight = NULL)
 #'   invisibly after printing it.
 #'
 #' @export
-summary.keras.models.model.Model <- function(object, ...) {
-    writeLines(f <- format.keras.models.model.Model(object, ...))
+summary.keras.src.models.model.Model <- function(object, ...) {
+    writeLines(f <- format.keras.src.models.model.Model(object, ...))
     invisible(f)
 }
 
 
 #' @rdname summary.keras.models.model.Model
 #' @export
-format.keras.models.model.Model <-
+format.keras.src.models.model.Model <-
 function(x,
          line_length = getOption("width"), # width - (12L * show_trainable),
          positions = NULL,
@@ -912,15 +912,15 @@ function(x,
 #
 #' @rdname summary.keras.models.model.Model
 #' @export
-print.keras.models.model.Model <- function(x, ...) {
-    writeLines(format.keras.models.model.Model(x, ...))
+print.keras.src.models.model.Model <- function(x, ...) {
+    writeLines(format.keras.src.models.model.Model(x, ...))
     invisible(x)
 }
 
 #' @importFrom reticulate py_str
 #' @export
-py_str.keras.models.model.Model <- function(object, ...) {
-    format.keras.models.model.Model(object, ...)
+py_str.keras.src.models.model.Model <- function(object, ...) {
+    format.keras.src.models.model.Model(object, ...)
 }
 
 

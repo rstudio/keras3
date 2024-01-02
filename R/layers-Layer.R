@@ -594,7 +594,7 @@ new_layer_class <- Layer
 
 # This is used for ALL layers (custom, and builtin)
 #' @export
-py_to_r_wrapper.keras.layers.layer.Layer <- function(x) {
+py_to_r_wrapper.keras.src.layers.layer.Layer <- function(x) {
   force(x)
   function(object, ...) {
     if(missing(object))

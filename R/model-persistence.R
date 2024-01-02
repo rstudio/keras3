@@ -424,7 +424,7 @@ clear_registered_custom_objects <- function() {
 #' @tether keras.Model.export
 #' @seealso
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/Model/export>
-export_savedmodel.keras.models.model.Model <- function(object, export_dir_base, ...) {
+export_savedmodel.keras.src.models.model.Model <- function(object, export_dir_base, ...) {
   object$export(export_dir_base, ...)
 }
 

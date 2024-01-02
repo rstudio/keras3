@@ -155,7 +155,7 @@ sequential_model_input_layer <- function(input_shape = NULL,
 
 #' @importFrom reticulate py_to_r_wrapper
 #' @export
-py_to_r_wrapper.keras.models.model.Model <- function(x) {
+py_to_r_wrapper.keras.src.models.model.Model <- function(x) {
   force(x)
   function(object, ...) {
     compose_layer(object, x, ...)

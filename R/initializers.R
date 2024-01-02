@@ -705,7 +705,7 @@ function (scale = 1, mode = "fan_in", distribution = "truncated_normal",
 
 
 #' @export
-py_to_r_wrapper.keras.initializers.initializer.Initializer <- function(x) {
+py_to_r_wrapper.keras.src.initializers.initializer.Initializer <- function(x) {
     force(x)
     as.function.default(c(formals(x), quote({
         args <- capture_args2(list(shape = normalize_shape))

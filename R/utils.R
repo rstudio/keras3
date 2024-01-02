@@ -825,7 +825,7 @@ is_mac_arm64 <- function() {
 #'   <https://graphviz.gitlab.io/download/>
 #'
 #' @export
-plot.keras.models.model.Model <-
+plot.keras.src.models.model.Model <-
 function(x,
          show_shapes = FALSE,
          show_dtype = FALSE,
@@ -849,7 +849,7 @@ function(x,
   tryCatch(
     do.call(keras$utils$plot_model, args),
     error = function(e) {
-      message("See ?keras3::plot.keras.models.model.Model for ",
+      message("See ?keras3::plot.keras.src.models.model.Model for ",
               " instructions on how to install graphviz and pydot")
       e$call <- sys.call(1)
       stop(e)
