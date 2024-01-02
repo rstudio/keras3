@@ -24,8 +24,6 @@ started.
 
 ```{r}
 library(keras3)
-`add<-` <- `+`
-envir::import_from(dplyr, last)
 ```
 
 ## Keras callbacks overview
@@ -132,7 +130,7 @@ show <- function(msg, logs) {
   str(logs); cat("\n")
 }
 
-callback_custom <- new_callback_class(
+callback_custom <- Callback(
   "CustomCallback",
   on_train_begin         = function(logs = NULL) show("Starting training", logs),
   on_epoch_begin         = function(epoch, logs = NULL) show("Start epoch {epoch} of training", logs),
@@ -183,7 +181,7 @@ res <- model |> predict(
 The `logs` named list contains the loss value, and all the metrics at the end of a batch or
 epoch. Example includes the loss and mean absolute error.
 ```{r}
-callback_print_loss_and_mae <- new_callback_class(
+callback_print_loss_and_mae <- Callback(
   "LossAndErrorPrintingCallback",
 
   on_train_batch_end = function(batch, logs = NULL)
@@ -250,7 +248,7 @@ epochs we should wait before stopping after having reached a local minimum.
 `callback_early_stopping()` provides a more complete and general implementation.
 
 ```{r}
-callback_early_stopping_at_min_loss <- new_callback_class(
+callback_early_stopping_at_min_loss <- Callback(
   "EarlyStoppingAtMinLoss",
   `__doc__` =
     "Stop training when the loss is at its min, i.e. the loss stops decreasing.
@@ -299,6 +297,7 @@ callback_early_stopping_at_min_loss <- new_callback_class(
     if (self$stopped_epoch > 0)
       cat(sprintf("Epoch %05d: early stopping\n", self$stopped_epoch + 1))
 )
+`add<-` <- `+`
 
 
 model <- get_model()
@@ -322,7 +321,7 @@ learning rate of the optimizer during the course of training.
 See `keras$callbacks$LearningRateScheduler` for a more general implementations (in RStudio, press F1 while the cursor is over `LearningRateScheduler` and a browser will open to [this page](https://www.tensorflow.org/versions/r2.5/api_docs/python/tf/keras/callbacks/LearningRateScheduler)).
 
 ```{r}
-callback_custom_learning_rate_scheduler <- new_callback_class(
+callback_custom_learning_rate_scheduler <- Callback(
   "CustomLearningRateScheduler",
   `__doc__` =
   "Learning rate scheduler which sets the learning rate according to schedule.
@@ -367,6 +366,7 @@ LR_SCHEDULE <- tibble::tribble(
             12,          0.001,
   )
 
+last <- function(x) x[length(x)]
 lr_schedule <- function(epoch, learning_rate) {
   "Helper function to retrieve the scheduled learning rate based on epoch."
   with(LR_SCHEDULE, learning_rate[last(which(epoch >= start_epoch))])
@@ -376,6 +376,7 @@ model <- get_model()
 model |> fit(
   mnist$train$x,
   mnist$train$y,
+  epochs = 14,
   batch_size = 64,
   verbose = 0,
   callbacks = list(

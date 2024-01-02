@@ -343,7 +343,7 @@ function(classname,
          parent_env = parent.frame())
 {
 
-  members <- modifyList(list(...), named_list(
+  members <- drop_nulls(named_list(
     on_epoch_begin, on_epoch_end,
     on_train_begin, on_train_end,
     on_train_batch_begin, on_train_batch_end,
@@ -351,8 +351,8 @@ function(classname,
     on_test_batch_begin, on_test_batch_end,
     on_predict_begin, on_predict_end,
     on_predict_batch_begin, on_predict_batch_end
-  ), keep.null = FALSE)
-
+  ))
+  members <- modifyList(members, list2(...), keep.null = FALSE)
   members <- modifyList(members, public, keep.null = TRUE)
 
   python_path <- system.file("python", package = "keras3")

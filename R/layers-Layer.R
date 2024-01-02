@@ -552,10 +552,8 @@ function(classname,
          inherit = keras$layers$Layer,
          parent_env = parent.frame()) {
 
-  members <- modifyList(
-    list(...), named_list(initialize, call, build, get_config),
-    keep.null = FALSE)
-
+  members <- drop_nulls(named_list(initialize, call, build, get_config))
+  members <- modifyList(members, list2(...), keep.null = FALSE)
   members <- modifyList(members, public, keep.null = TRUE)
 
   members <- modify_intersection(members, list(
