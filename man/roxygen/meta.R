@@ -1,5 +1,6 @@
 
 # this file get's evaled in baseenv()
+# Sys.setenv(CUDA_VISIBLE_DEVICES = "")
 
 # register fake @tether tag parser for roxygen2
 local({
@@ -50,7 +51,7 @@ local({
     x <- x |> strsplit("\n") |> unlist() |> trimws("right")
 
     # strip object addresses; no noisy diff
-    x <- sub(" at 0x[0-9A-Fa-f]{9}>$", ">", x, perl = TRUE)
+    x <- sub(" at 0[xX][0-9A-Fa-f]{9,16}>$", ">", x, perl = TRUE)
 
     # remove reticulate hint from exceptions
     x <- x[!grepl(r"{## .*rstudio:run:reticulate::py_last_error\(\).*}", x)]
