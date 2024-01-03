@@ -14,22 +14,27 @@
 #' @export
 install_keras <- function(
     envname = "r-keras", ...,
-    extra_packages = c("scipy", "pandas", "Pillow", "pydot", "ipython", "tensorflow_datasets"),
+    extra_packages = c("scipy",
+                       "pandas",
+                       "Pillow",
+                       "pydot",
+                       "ipython",
+                       "tensorflow_datasets"),
     python_version = ">=3.9,<=3.11",
-    backend = "tf-nightly", # c("tensorflow", "jax"),
+    # backend = c("tensorflow", "jax"),
+    backend = "tf-nightly",
     gpu = NA,
     restart_session = TRUE) {
 
-  if(is.na(gpu)) {
-
+  if (is.na(gpu)) {
     has_nvidia_gpu <- function()
       tryCatch(as.logical(length(system("lspci | grep -i nvidia", intern = TRUE))),
                warning = function(w) FALSE)
-    gpu <- (is_linux() && has_nvidia_gpu()) ||
-            is_mac_arm64()
+    gpu <- (is_linux() && has_nvidia_gpu()) || is_mac_arm64()
   }
 
   if (isTRUE(gpu)) {
+    message("Installing GPU components")
     if (is_mac_arm64()) {
       jax <- c("jax-metal", "ml-dtypes==0.2.*")
       tensorflow <- c("tensorflow", "tensorflow-metal")
@@ -48,7 +53,16 @@ install_keras <- function(
     append(extra_packages) <- "packaging"
 
   backend <- unlist(lapply(backend, function(name)
-    switch(name, tensorflow = tensorflow, jax = jax, name)))
+    switch(name,
+           jax = jax,
+           tensorflow = tensorflow,
+           "tf-nightly" = {
+             tensorflow |>
+               sub("tensorflow", "tf-nightly", x = _, fixed = TRUE) |>
+               replace_val("tf-nightly-metal", "tensorflow-metal")
+           },
+           name)
+    ))
 
   reticulate::virtualenv_create(
     envname = envname,
@@ -64,6 +78,7 @@ install_keras <- function(
     reticulate::py_install(backend, envname = envname)
 
   reticulate::py_install("keras==3.0.*", envname = envname)
+                         #, pip_ignore_installed = TRUE)
 
   message("Finished installing Keras!")
   if (restart_session && requireNamespace("rstudioapi", quietly = TRUE) &&
