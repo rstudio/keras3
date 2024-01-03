@@ -54,7 +54,7 @@ Suggests:
     jpeg
 RoxygenNote: 7.2.3.9000
 VignetteBuilder: knitr
-Remotes: 
+Remotes:
     rstudio/tensorflow,
     rstudio/reticulate,
     rstudio/tfruns
