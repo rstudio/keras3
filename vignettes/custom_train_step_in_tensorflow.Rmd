@@ -1,11 +1,10 @@
 ---
 title: Customizing what happens in `fit()` with TensorFlow
-author: '[fchollet](https://twitter.com/fchollet)'
 date-created: 2020/04/15
 last-modified: 2023/06/27
 description: Overriding the training step of the Model class with TensorFlow.
 output: rmarkdown::html_vignette
-date: 'Last Modified: 2023-11-21; Last Rendered: 2023-11-22'
+date: 'Last Modified: 2023-11-29; Last Rendered: 2024-01-03'
 vignette: >
   %\VignetteIndexEntry{Customizing what happens in `fit()` with TensorFlow}
   %\VignetteEngine{knitr::rmarkdown}
@@ -46,20 +45,6 @@ Let's see how that works.
 
 ```r
 library(tensorflow)
-```
-
-```
-##
-## Attaching package: 'tensorflow'
-```
-
-```
-## The following objects are masked from 'package:keras':
-##
-##     set_random_seed, shape
-```
-
-```r
 library(keras3)
 library(reticulate)
 ```
@@ -142,11 +127,11 @@ model %>% fit(x, y, epochs=3)
 
 ```
 ## Epoch 1/3
-## 32/32 - 0s - 8ms/step - loss: 2.9118 - mae: 1.3597
+## 32/32 - 0s - 10ms/step - loss: 2.9118 - mae: 1.3597
 ## Epoch 2/3
 ## 32/32 - 0s - 1ms/step - loss: 2.6026 - mae: 1.2856
 ## Epoch 3/3
-## 32/32 - 0s - 763us/step - loss: 2.3378 - mae: 1.2193
+## 32/32 - 0s - 769us/step - loss: 2.3378 - mae: 1.2193
 ```
 
 ## Going lower-level
@@ -227,11 +212,11 @@ model %>% fit(x, y, epochs=3)
 
 ```
 ## Epoch 1/3
-## 32/32 - 0s - 5ms/step - loss: 2.6540 - mae: 1.2901
+## 32/32 - 0s - 7ms/step - loss: 2.6540 - mae: 1.2901
 ## Epoch 2/3
-## 32/32 - 0s - 754us/step - loss: 2.4139 - mae: 1.2303
+## 32/32 - 0s - 579us/step - loss: 2.4139 - mae: 1.2303
 ## Epoch 3/3
-## 32/32 - 0s - 746us/step - loss: 2.2080 - mae: 1.1761
+## 32/32 - 0s - 581us/step - loss: 2.2080 - mae: 1.1761
 ```
 
 ## Supporting `sample_weight` & `class_weight`
@@ -296,11 +281,11 @@ model %>% fit(x, y, sample_weight=sw, epochs=3)
 
 ```
 ## Epoch 1/3
-## 32/32 - 0s - 6ms/step - loss: 0.1607 - mae: 1.3018
+## 32/32 - 0s - 8ms/step - loss: 0.1607 - mae: 1.3018
 ## Epoch 2/3
-## 32/32 - 0s - 747us/step - loss: 0.1452 - mae: 1.2999
+## 32/32 - 0s - 594us/step - loss: 0.1452 - mae: 1.2999
 ## Epoch 3/3
-## 32/32 - 0s - 743us/step - loss: 0.1335 - mae: 1.2986
+## 32/32 - 0s - 574us/step - loss: 0.1335 - mae: 1.2986
 ```
 
 ## Providing your own evaluation step
@@ -346,12 +331,15 @@ model %>% evaluate(x, y)
 ```
 
 ```
-## 32/32 - 0s - 2ms/step - loss: 0.0000e+00 - mae: 1.3947
+## 32/32 - 0s - 3ms/step - loss: 0.0000e+00 - mae: 1.3947
 ```
 
 ```
-##            loss compile_metrics
-##        0.000000        1.394695
+## $loss
+## [1] 0
+##
+## $mae
+## [1] 1.394695
 ```
 
 ## Wrapping up: an end-to-end GAN example
@@ -475,8 +463,8 @@ Let's test-drive it:
 ```r
 batch_size <- 64
 c(c(x_train, .), c(x_test, .)) %<-% dataset_mnist()
-all_digits <- k_concatenate(list(x_train, x_test))
-all_digits <- k_reshape(all_digits, c(-1, 28, 28, 1))
+all_digits <- op_concatenate(list(x_train, x_test))
+all_digits <- op_reshape(all_digits, c(-1, 28, 28, 1))
 dataset <- all_digits %>%
   tfdatasets::tensor_slices_dataset() %>%
   tfdatasets::dataset_map(function(x) tf$cast(x, "float")/255) %>%
@@ -492,7 +480,7 @@ gan$compile(
 ```
 
 ```
-## <keras.src.losses.losses.BinaryCrossentropy object at 0x2d12cf310>
+## <keras.src.losses.losses.BinaryCrossentropy object>
 ```
 
 ```r
@@ -505,7 +493,7 @@ gan %>% fit(
 ```
 
 ```
-## 100/100 - 21s - 209ms/step - d_loss: 0.0000e+00 - g_loss: 0.0000e+00
+## 100/100 - 21s - 211ms/step - d_loss: 0.0000e+00 - g_loss: 0.0000e+00
 ```
 
 The ideas behind deep learning are simple, so why should their implementation be painful?

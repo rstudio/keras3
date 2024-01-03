@@ -46,6 +46,8 @@ get_model <- function() {
     layer_dense(units = 10, name = "predictions")
   model <- keras_model(inputs=inputs, outputs=outputs)
 }
+
+model <- get_model()
 ```
 
 Let's train it using mini-batch gradient with a custom training loop.

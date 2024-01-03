@@ -9,6 +9,9 @@ knit_keras_init <- function() {
   keras3:::keras$utils$set_random_seed(1L)
 }
 
+yaml.load <- getExportedValue("yaml", "yaml.load")
+as.yaml <- getExportedValue("yaml", "as.yaml")
+
 knit_man <- function(input, ..., output_dir) {
 
   cli::cli_alert('knit_man_src("{.file {input}}")')
@@ -100,38 +103,30 @@ knit_keras_process_chunk_output <- function(x, options) {
 
 
 knit_vignette <- function(input, ..., output_dir) {
-  # print(sys.call())
-  cat("wd: ", getwd(), "\n") # ~/github/rstudio/keras/vignettes-src
+  # print(sys.call()); cat("wd: ", getwd(), "\n")
 
-  library(keras3)
   # input <- normalizePath(input, mustWork = TRUE, winslash = "/") |> fs::path_tidy()
-  input <- fs::path_real(input)
-  output <- sub("/vignettes-src/", "/vignettes/", input, fixed = TRUE)
-  output.md <- sub("\\.[qrR]md$", ".md", output)
+  input.Rmd <- fs::path_real(input)
+  output.Rmd <- sub("/vignettes-src/", "/vignettes/", input.Rmd, fixed = TRUE)
+  output.md <- sub("\\.[qrR]md$", ".md", output.Rmd)
 
-  filename <- basename(input)
-  name <- sub("\\.[qrR]md$", "", filename)
+  filename.Rmd <- basename(input.Rmd)
+  filename <- fs::path_ext_remove(filename.Rmd)
 
-  pkg_dir <- dirname(input)
-  while(!file.exists(fs::path(pkg_dir, "keras.Rproj"))) {
-    pkg_dir <- dirname(pkg_dir)
-    if(pkg_dir == "/") stop("Can't find pkg dir")
-  }
+  pkg_dir <- strsplit(input.Rmd, "/vignettes-src/", fixed = TRUE)[[1]][[1]]
+  # pkg_dir <- dirname(input.Rmd)
+  # while(!file.exists(fs::path(pkg_dir, "keras.Rproj"))) {
+  #   pkg_dir <- dirname(pkg_dir)
+  #   if(pkg_dir == "/") stop("Can't find pkg dir")
+  # }
 
-  # fig.path
-  fig.path <- normalizePath(fs::path(
-    here::here("man/figures/"),
-    fs::path_ext_remove(fs::path_file(input))
-  ), mustWork = FALSE)
-  # fig.path <- paste0(fig.path, "/")
-
-  message("fig.path: ", fig.path)
+  fig.path <- normalizePath(fs::path(pkg_dir, "man/figures/", filename),
+                            mustWork = FALSE)
   unlink(fig.path, recursive = TRUE)
   dir.create(fig.path)
+  # message("fig.path: ", fig.path)
 
-
-  # render_dir <- normalizePath(tempfile(paste0(name, "-")), mustWork = FALSE, winslash = "/") |> fs::path_tidy()
-  render_dir <- fs::file_temp(paste0(name, "-"))
+  render_dir <- fs::file_temp(paste0(filename, "-"))
   dir.create(render_dir)
   message("Changing wd to ", render_dir)
   owd <- setwd(render_dir)
@@ -142,37 +137,37 @@ knit_vignette <- function(input, ..., output_dir) {
 
   message("kniting: ", output.md)
 
+  og_hooks <- knitr::knit_hooks$get()
+  on.exit(knitr::knit_hooks$set(og_hooks), add = TRUE)
+
   knitr::render_markdown()
-  # knitr::knit_hooks$restore()
-  knitr::opts_chunk$set(
-    error = FALSE,
-    fig.path = paste0(fig.path, "/")
-  )
-
-
   og_output_hook <- knitr::knit_hooks$get("output")
   knitr::knit_hooks$set(output = function(x, options) {
     x <- knit_keras_process_chunk_output(x, options)
     og_output_hook(x, options)
   })
 
+  knitr::opts_chunk$set(
+    error = FALSE,
+    fig.path = paste0(fig.path, "/")
+  )
+
   knit_keras_init()
 
   withr::with_options(c(cli.num_colors = 256L), {
-    knitr::knit(input, output.md,
+    knitr::knit(input.Rmd, output.md,
                 envir = new.env(parent = globalenv()))
   })
 
-  x <- readLines(output.md)
+  lines <- readLines(output.md)
   unlink(output.md)
 
   # update absolute figure links so they're relative links
-  x <- sub(pkg_dir, "../..", x, fixed = TRUE)
+  lines <- sub(paste0("](", pkg_dir), "](../..", lines, fixed = TRUE)
 
-  end_fm_i <- which(x == "---")[2]
-  x_fm <- x[2:(end_fm_i-1)]
-  yaml.load <- getExportedValue("yaml", "yaml.load")
-  as.yaml <- getExportedValue("yaml", "as.yaml")
+  # fix frontmatter
+  end_fm_i <- which(lines == "---")[2]
+  x_fm <- lines[2:(end_fm_i-1)]
   fm <- yaml.load(x_fm)
 
   fm$knit <- NULL
@@ -180,39 +175,39 @@ knit_vignette <- function(input, ..., output_dir) {
   fm$accelerator <- NULL
   fm$tether <- NULL
   fm$author <- NULL # commented till pkgdown rendering fix
-  package_dir <- strsplit(input, "/vignettes-src/", fixed = TRUE)[[1]][[1]]
 
-  withr::with_dir(package_dir, {
+  withr::with_dir(pkg_dir, {
     stopifnot(dir.exists(".git"))
     last_modified_date <-
       # reticulate:::system2t("git", c(
       system2("git", c(
         "log -1 --pretty=format:'%ad'",
         "--date=format:'%Y-%m-%d'",
-        "--", shQuote(input)),
+        "--", shQuote(input.Rmd)),
         stdout = TRUE
       )
   })
   # message("Last modified: ", last_modified_date)
   fm$date <- sprintf("Last Modified: %s; Last Rendered: %s",
                      last_modified_date, format(Sys.Date()))
-  # TODO: fm$date <- Last compiled on `r format(Sys.time(), '%d %B, %Y')`, last updated on `r system(git `
   # fm$date <- format(Sys.Date())
-  vignette <- glue::glue_data(list(title = fm$title), .trim = FALSE,
-                              .open = "<<", .close = ">>",
-                              "vignette: >
-  %\\VignetteIndexEntry{<<title>>}
-  %\\VignetteEngine{knitr::rmarkdown}
-  %\\VignetteEncoding{UTF-8}")
+  vignette <- glue::glue_data(
+    list(title = fm$title),
+    .open = "<<", .close = ">>", r"---(
+    vignette: >
+      %\VignetteIndexEntry{<<title>>}
+      %\VignetteEngine{knitr::rmarkdown}
+      %\VignetteEncoding{UTF-8}
+      )---")
 
   # dumping vignette via as.yaml breaks downstream, the rd entry needs to be a block
   fm <- as.yaml(fm) # has a trailing \n
   fm <- paste0(fm, vignette)
 
-  x <- c("---", fm, "---", x[-(1:end_fm_i)])
-  x <- paste0(x, collapse = "\n") |> strsplit("\n") |> _[[1L]] |> trimws("right")
-  message("postprocessed output file: ", output)
-  writeLines(x, output)
+  lines <- c("---", fm, "---", lines[-(1:end_fm_i)])
+  lines <- paste0(lines, collapse = "\n") |> strsplit("\n") |> _[[1L]] |> trimws("right")
+  message("postprocessed output file: ", output.Rmd)
+  writeLines(lines, output.Rmd)
 }
 
 

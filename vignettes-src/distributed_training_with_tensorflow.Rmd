@@ -38,9 +38,9 @@ industry workflows.
 ## Setup
 
 ```{r}
-library(keras3)
-library(tensorflow)
 library(tfdatasets)
+library(tensorflow)
+library(keras3)
 ```
 
 ## Single-host, multi-device synchronous training

@@ -1,11 +1,10 @@
 ---
 title: Training & evaluation with the built-in methods
-author: '[fchollet](https://twitter.com/fchollet)'
 date-created: 2019/03/01
 last-modified: 2023/03/25
 description: Complete guide to training & evaluation with `fit()` and `evaluate()`.
 output: rmarkdown::html_vignette
-date: 'Last Modified: 2023-12-05; Last Rendered: 2023-12-21'
+date: 'Last Modified: 2023-12-21; Last Rendered: 2024-01-03'
 vignette: >
   %\VignetteIndexEntry{Training & evaluation with the built-in methods}
   %\VignetteEngine{knitr::rmarkdown}
@@ -144,7 +143,7 @@ history <- model %>% fit(
 ## Epoch 1/2
 ## 782/782 - 1s - 1ms/step - loss: 0.3481 - sparse_categorical_accuracy: 0.9004 - val_loss: 0.1968 - val_sparse_categorical_accuracy: 0.9444
 ## Epoch 2/2
-## 782/782 - 1s - 839us/step - loss: 0.1651 - sparse_categorical_accuracy: 0.9519 - val_loss: 0.1387 - val_sparse_categorical_accuracy: 0.9602
+## 782/782 - 1s - 748us/step - loss: 0.1651 - sparse_categorical_accuracy: 0.9519 - val_loss: 0.1387 - val_sparse_categorical_accuracy: 0.9602
 ```
 The returned `history` object holds a record of the loss values and metric values
 during training:
@@ -172,7 +171,7 @@ results <- model %>% evaluate(x_test, y_test, batch_size=128)
 ```
 
 ```
-## 79/79 - 0s - 560us/step - loss: 0.1347 - sparse_categorical_accuracy: 0.9591
+## 79/79 - 0s - 514us/step - loss: 0.1347 - sparse_categorical_accuracy: 0.9591
 ```
 
 ```r
@@ -194,7 +193,7 @@ predictions <- model %>% predict(x_test[1:2,])
 ```
 
 ```
-## 1/1 - 0s - 22ms/step
+## 1/1 - 0s - 20ms/step
 ```
 
 ```r
@@ -418,11 +417,11 @@ history <- model %>% fit(x_train, y_train, batch_size = 64, epochs = 3)
 
 ```
 ## Epoch 1/3
-## 782/782 - 1s - 871us/step - categorical_true_positives: 360544.0000 - loss: 0.3421
+## 782/782 - 1s - 1ms/step - categorical_true_positives: 360544.0000 - loss: 0.3421
 ## Epoch 2/3
-## 782/782 - 1s - 692us/step - categorical_true_positives: 362643.0000 - loss: 0.1622
+## 782/782 - 1s - 649us/step - categorical_true_positives: 362643.0000 - loss: 0.1622
 ## Epoch 3/3
-## 782/782 - 1s - 688us/step - categorical_true_positives: 363298.0000 - loss: 0.1178
+## 782/782 - 1s - 654us/step - categorical_true_positives: 363298.0000 - loss: 0.1178
 ```
 
 ### Handling losses and metrics that don't fit the standard signature
@@ -467,7 +466,7 @@ model %>% fit(x_train, y_train, batch_size=64, epochs=1)
 ```
 
 ```
-## 782/782 - 1s - 845us/step - loss: 2.3949
+## 782/782 - 1s - 864us/step - loss: 2.3949
 ```
 
 Note that when you pass losses via `add_loss()`, it becomes possible to call
@@ -519,7 +518,7 @@ model %>% fit(data, epochs = 1)
 ```
 
 ```
-## 1/1 - 0s - 185ms/step - loss: 1.0566
+## 1/1 - 0s - 219ms/step - loss: 1.0566
 ```
 
 For more information about training multi-input models, see the section **Passing data
@@ -577,20 +576,6 @@ You can pass a `Dataset` instance directly to the methods `fit()`, `evaluate()`,
 
 ```r
 library(tfdatasets)
-```
-
-```
-##
-## Attaching package: 'tfdatasets'
-```
-
-```
-## The following object is masked from 'package:keras3':
-##
-##     shape
-```
-
-```r
 model <- get_compiled_model()
 
 # First, let's create a training Dataset instance.
@@ -613,11 +598,11 @@ model %>% fit(train_dataset, epochs=3)
 
 ```
 ## Epoch 1/3
-## 782/782 - 1s - 967us/step - loss: 0.3417 - sparse_categorical_accuracy: 0.9033
+## 782/782 - 1s - 1ms/step - loss: 0.3417 - sparse_categorical_accuracy: 0.9033
 ## Epoch 2/3
-## 782/782 - 1s - 676us/step - loss: 0.1602 - sparse_categorical_accuracy: 0.9524
+## 782/782 - 1s - 670us/step - loss: 0.1602 - sparse_categorical_accuracy: 0.9524
 ## Epoch 3/3
-## 782/782 - 1s - 656us/step - loss: 0.1162 - sparse_categorical_accuracy: 0.9654
+## 782/782 - 1s - 641us/step - loss: 0.1162 - sparse_categorical_accuracy: 0.9654
 ```
 
 ```r
@@ -626,7 +611,7 @@ result <- model %>% evaluate(test_dataset)
 ```
 
 ```
-## 157/157 - 0s - 685us/step - loss: 0.1145 - sparse_categorical_accuracy: 0.9631
+## 157/157 - 0s - 751us/step - loss: 0.1145 - sparse_categorical_accuracy: 0.9631
 ```
 
 ```r
@@ -664,11 +649,11 @@ model %>% fit(train_dataset, epochs=3, steps_per_epoch=100)
 
 ```
 ## Epoch 1/3
-## 100/100 - 0s - 3ms/step - loss: 0.8506 - sparse_categorical_accuracy: 0.7683
+## 100/100 - 0s - 4ms/step - loss: 0.8506 - sparse_categorical_accuracy: 0.7683
 ## Epoch 2/3
-## 100/100 - 0s - 666us/step - loss: 0.3705 - sparse_categorical_accuracy: 0.8947
+## 100/100 - 0s - 722us/step - loss: 0.3705 - sparse_categorical_accuracy: 0.8947
 ## Epoch 3/3
-## 100/100 - 0s - 648us/step - loss: 0.3060 - sparse_categorical_accuracy: 0.9130
+## 100/100 - 0s - 731us/step - loss: 0.3060 - sparse_categorical_accuracy: 0.9130
 ```
 
 You can also pass a `Dataset` instance as the `validation_data` argument in `fit()`:
@@ -926,7 +911,7 @@ model %>% fit(x_train, y_train, class_weight=class_weight, batch_size=64, epochs
 ```
 
 ```
-## 782/782 - 1s - 942us/step - loss: 0.3687 - sparse_categorical_accuracy: 0.9026
+## 782/782 - 1s - 1ms/step - loss: 0.3687 - sparse_categorical_accuracy: 0.9026
 ```
 
 ### Sample weights
@@ -960,7 +945,7 @@ model %>% fit(
 ```
 
 ```
-## 782/782 - 1s - 916us/step - loss: 0.3685 - sparse_categorical_accuracy: 0.9024
+## 782/782 - 1s - 998us/step - loss: 0.3685 - sparse_categorical_accuracy: 0.9024
 ```
 
 Here's a matching `Dataset` example:
@@ -1167,7 +1152,7 @@ model %>% fit(
 ```
 
 ```
-## 4/4 - 0s - 89ms/step - loss: 0.5888
+## 4/4 - 0s - 109ms/step - loss: 0.5888
 ```
 
 ```r
@@ -1181,7 +1166,7 @@ model %>% fit(
 ```
 
 ```
-## 4/4 - 0s - 51ms/step - loss: -1.3254e+00
+## 4/4 - 0s - 58ms/step - loss: -1.3254e+00
 ```
 
 Here's the `Dataset` use case: similarly as what we did for NumPy arrays, the `Dataset`
@@ -1201,7 +1186,7 @@ model %>% fit(train_dataset, epochs=1)
 ```
 
 ```
-## 2/2 - 0s - 4ms/step - loss: 1.7666
+## 2/2 - 0s - 6ms/step - loss: 1.7666
 ```
 
 ## Using callbacks
@@ -1251,23 +1236,23 @@ model %>% fit(
 ## Epoch 1/20
 ## 625/625 - 1s - 1ms/step - loss: 0.3727 - sparse_categorical_accuracy: 0.8946 - val_loss: 0.1909 - val_sparse_categorical_accuracy: 0.9440
 ## Epoch 2/20
-## 625/625 - 1s - 847us/step - loss: 0.1740 - sparse_categorical_accuracy: 0.9485 - val_loss: 0.1441 - val_sparse_categorical_accuracy: 0.9572
+## 625/625 - 0s - 765us/step - loss: 0.1740 - sparse_categorical_accuracy: 0.9485 - val_loss: 0.1441 - val_sparse_categorical_accuracy: 0.9572
 ## Epoch 3/20
-## 625/625 - 1s - 809us/step - loss: 0.1252 - sparse_categorical_accuracy: 0.9626 - val_loss: 0.1289 - val_sparse_categorical_accuracy: 0.9623
+## 625/625 - 0s - 763us/step - loss: 0.1252 - sparse_categorical_accuracy: 0.9626 - val_loss: 0.1289 - val_sparse_categorical_accuracy: 0.9623
 ## Epoch 4/20
-## 625/625 - 0s - 788us/step - loss: 0.0983 - sparse_categorical_accuracy: 0.9710 - val_loss: 0.1205 - val_sparse_categorical_accuracy: 0.9651
+## 625/625 - 0s - 759us/step - loss: 0.0983 - sparse_categorical_accuracy: 0.9710 - val_loss: 0.1205 - val_sparse_categorical_accuracy: 0.9651
 ## Epoch 5/20
-## 625/625 - 1s - 819us/step - loss: 0.0808 - sparse_categorical_accuracy: 0.9765 - val_loss: 0.1157 - val_sparse_categorical_accuracy: 0.9659
+## 625/625 - 0s - 763us/step - loss: 0.0808 - sparse_categorical_accuracy: 0.9765 - val_loss: 0.1157 - val_sparse_categorical_accuracy: 0.9659
 ## Epoch 6/20
-## 625/625 - 1s - 844us/step - loss: 0.0679 - sparse_categorical_accuracy: 0.9801 - val_loss: 0.1145 - val_sparse_categorical_accuracy: 0.9684
+## 625/625 - 0s - 754us/step - loss: 0.0679 - sparse_categorical_accuracy: 0.9801 - val_loss: 0.1145 - val_sparse_categorical_accuracy: 0.9684
 ## Epoch 7/20
-## 625/625 - 0s - 788us/step - loss: 0.0574 - sparse_categorical_accuracy: 0.9840 - val_loss: 0.1140 - val_sparse_categorical_accuracy: 0.9701
+## 625/625 - 0s - 760us/step - loss: 0.0574 - sparse_categorical_accuracy: 0.9840 - val_loss: 0.1140 - val_sparse_categorical_accuracy: 0.9701
 ## Epoch 8/20
-## 625/625 - 1s - 837us/step - loss: 0.0492 - sparse_categorical_accuracy: 0.9864 - val_loss: 0.1134 - val_sparse_categorical_accuracy: 0.9710
+## 625/625 - 0s - 768us/step - loss: 0.0492 - sparse_categorical_accuracy: 0.9864 - val_loss: 0.1134 - val_sparse_categorical_accuracy: 0.9710
 ## Epoch 9/20
-## 625/625 - 0s - 794us/step - loss: 0.0427 - sparse_categorical_accuracy: 0.9882 - val_loss: 0.1156 - val_sparse_categorical_accuracy: 0.9717
+## 625/625 - 0s - 748us/step - loss: 0.0427 - sparse_categorical_accuracy: 0.9882 - val_loss: 0.1156 - val_sparse_categorical_accuracy: 0.9717
 ## Epoch 10/20
-## 625/625 - 1s - 856us/step - loss: 0.0372 - sparse_categorical_accuracy: 0.9898 - val_loss: 0.1186 - val_sparse_categorical_accuracy: 0.9725
+## 625/625 - 0s - 752us/step - loss: 0.0372 - sparse_categorical_accuracy: 0.9898 - val_loss: 0.1186 - val_sparse_categorical_accuracy: 0.9725
 ## Epoch 10: early stopping
 ```
 
@@ -1352,7 +1337,7 @@ model %>% fit(
 ## Epoch 2/2
 ##
 ## Epoch 2: val_loss improved from 0.19317 to 0.14907, saving model to mymodel_2.keras
-## 625/625 - 1s - 851us/step - loss: 0.1797 - sparse_categorical_accuracy: 0.9468 - val_loss: 0.1491 - val_sparse_categorical_accuracy: 0.9572
+## 625/625 - 0s - 775us/step - loss: 0.1797 - sparse_categorical_accuracy: 0.9468 - val_loss: 0.1491 - val_sparse_categorical_accuracy: 0.9572
 ```
 
 The `ModelCheckpoint` callback can be used to implement fault-tolerance:
@@ -1393,7 +1378,7 @@ model %>% fit(x_train, y_train, epochs=1, callbacks=callbacks)
 ```
 
 ```
-## 1563/1563 - 1s - 766us/step - loss: 0.2470 - sparse_categorical_accuracy: 0.9270
+## 1563/1563 - 1s - 781us/step - loss: 0.2470 - sparse_categorical_accuracy: 0.9270
 ```
 
 You call also write your own callback for saving and restoring models.

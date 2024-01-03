@@ -30,9 +30,9 @@ Let's dive in.
 ## Setup
 
 ```{r}
-library(keras3)
-library(tensorflow)
 library(tfdatasets)
+library(tensorflow)
+library(keras3)
 ```
 
 ## The `Layer` class: the combination of state (weights) and some computation
@@ -45,24 +45,22 @@ Here's a densely-connected layer. It has two state variables:
 the variables `w` and `b`.
 
 ```{r}
-Linear <- new_layer_class(
-  "Linear",
-  initialize = function(units = 32, input_dim = 32) {
-    units <- as.integer(units)
-    input_dim <- as.integer(input_dim)
+layer_linear <- Layer("Linear",
 
+  initialize = function(units = 32, input_dim = 32) {
     super$initialize()
     self$w <- self$add_weight(
-      shape = c(input_dim, units),
+      shape = shape(input_dim, units),
       initializer = "random_normal",
       trainable = TRUE
     )
     self$b <- self$add_weight(
-      shape = c(units),
+      shape = shape(units),
       initializer = "zeros",
       trainable = TRUE
     )
   },
+  
   call = function(inputs) {
     op_matmul(inputs, self$w) + self$b
   }
@@ -74,7 +72,7 @@ function.
 
 ```{r}
 x <- op_ones(c(2, 2))
-linear_layer <- Linear(units = 4L, input_dim = 2L)
+linear_layer <- layer_linear(units = 4L, input_dim = 2L)
 y <- linear_layer(x)
 print(y)
 ```
@@ -95,14 +93,13 @@ backpropagation, when you are training the layer.
 Here's how to add and use a non-trainable weight:
 
 ```{r}
-ComputeSum <- new_layer_class(
+layer_compute_sum <- Layer(
   "ComputeSum",
   initialize = function(input_dim) {
-    input_dim <- as.integer(input_dim)
     super$initialize()
     self$total <- self$add_weight(
       initializer = "zeros",
-      shape = c(input_dim),
+      shape = shape(input_dim),
       trainable = FALSE
     )
   },
@@ -113,11 +110,11 @@ ComputeSum <- new_layer_class(
 )
 
 x <- op_ones(c(2, 2))
-my_sum <- ComputeSum(input_dim = 2)
+my_sum <- layer_compute_sum(input_dim = 2)
 y <- my_sum(x)
-print(y$numpy())
+print(as.array(y))
 y <- my_sum(x)
-print(y$numpy())
+print(as.array(y))
 ```
 
 It's part of `layer$weights`, but it gets categorized as a non-trainable weight:
@@ -176,12 +173,12 @@ Linear <- new_layer_class(
   },
   build = function(input_shape) {
     self$w <- self$add_weight(
-      shape = c(tail(input_shape, 1), self$units),
+      shape = shape(tail(input_shape, 1), self$units),
       initializer = "random_normal",
       trainable = TRUE
     )
     self$b <- self$add_weight(
-      shape = c(self$units),
+      shape = shape(self$units),
       initializer = "zeros",
       trainable = TRUE
     )
@@ -224,11 +221,12 @@ MLPBlock <- new_layer_class(
     self$linear_3 <- Linear(units = 1)
   },
   call = function(inputs) {
-    x <- self$linear_1(inputs)
-    x <- activation_relu(x)
-    x <- self$linear_2(x)
-    x <- activation_relu(x)
-    self$linear_3(x)
+    inputs |> 
+      self$linear_1() |>
+      activation_relu() |>
+      self$linear_2() |>
+      activation_relu() |>
+      self$linear_3()
   }
 )
 

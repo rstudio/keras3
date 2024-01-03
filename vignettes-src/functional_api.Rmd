@@ -158,8 +158,12 @@ history <- model %>% fit(
 )
 
 test_scores <- model %>% evaluate(x_test, y_test, verbose=2)
-cat("Test loss:", test_scores$loss)
-cat("Test accuracy:", test_scores$compile_metrics)
+```
+
+
+```{r, results = 'hold'}
+cat("Test loss:", test_scores$loss, "\n")
+cat("Test accuracy:", test_scores$accuracy, "\n")
 ```
 
 For further reading, see the [training and evaluation](/guides/training_with_built_in_methods/) guide.
@@ -179,11 +183,16 @@ This saved file includes the:
 - optimizer and its state, if any (to restart training where you left off)
 
 ```{r}
-model$save("my_model.keras")
+model |> save_model("my_model.keras")
 rm(model)
 # Recreate the exact same model purely from the file:
-model <- keras$models$load_model("my_model.keras")
+model <- load_model("my_model.keras")
 ```
+
+```{r, echo = FALSE}
+unlink("my_model.keras")
+```
+
 
 For details, read the model [serialization & saving](/guides/serialization_and_saving/) guide.
 
@@ -267,7 +276,8 @@ summary(decoder)
 autoencoder_input <- layer_input(shape = c(28, 28, 1), name = "img")
 encoded_img <- encoder(autoencoder_input)
 decoded_img <- decoder(encoded_img)
-autoencoder = keras_model(autoencoder_input, decoded_img, name="autoencoder")
+autoencoder <- keras_model(autoencoder_input, decoded_img,
+                           name = "autoencoder")
 summary(autoencoder)
 ```
 
@@ -280,7 +290,7 @@ that averages their predictions:
 ```{r}
 get_model <- function() {
   inputs <- layer_input(shape = 128)
-  outputs <- layer_dense(inputs, 1)
+  outputs <- inputs |> layer_dense(1)
   keras_model(inputs, outputs)
 }
 
@@ -326,21 +336,21 @@ num_words <-
 num_departments <- 4  # Number of departments for predictions
 
 title_input <- # Variable-length sequence of ints
-  layer_input(shape(NA), name = "title")  
+  layer_input(shape(NA), name = "title")
 body_input <-  # Variable-length sequence of ints
-  layer_input(shape(NA), name = "body") 
+  layer_input(shape(NA), name = "body")
 tags_input <-  # Binary vectors of size `num_tags`
-  layer_input(shape = num_tags, name = "tags")  
+  layer_input(shape = num_tags, name = "tags")
 
 # Embed each word in the title into a 64-dimensional vector
 title_features <- layer_embedding(title_input, num_words, 64)
 # Embed each word in the text into a 64-dimensional vector
 body_features <- layer_embedding(body_input, num_words, 64)
 
-# Reduce sequence of embedded words in the title 
+# Reduce sequence of embedded words in the title
 # into a single 128-dimensional vector
 title_features <- layer_lstm(title_features, 128)
-# Reduce sequence of embedded words in the body 
+# Reduce sequence of embedded words in the body
 # into a single 32-dimensional vector
 body_features <- layer_lstm(body_features, 32)
 
@@ -479,7 +489,7 @@ model %>% compile(
     loss = loss_sparse_categorical_crossentropy(from_logits = TRUE),
     metrics = "acc"
 )
-# We restrict the data to the first 1000 samples so as to limit the 
+# We restrict the data to the first 1000 samples so as to limit the
 # guide render time.
 # Try to train on the entire dataset until convergence!
 model %>% fit(
@@ -578,10 +588,10 @@ convention since you can create weights in `initialize`, as well).
 To learn more about creating layers from scratch, read
 [custom layers and models](/guides/making_new_layers_and_models_via_subclassing) guide.
 
-The following is a basic implementation of `keras.layers.Dense`:
+The following is a basic implementation of `layer_dense()`:
 
 ```{r}
-custom_dense <- new_layer_class(
+custom_dense <- Layer(
   "CustomDense",
   initialize = function(units = 32) {
     super$initialize()
@@ -605,7 +615,7 @@ custom_dense <- new_layer_class(
 )
 
 inputs <- layer_input(c(4))
-outputs = custom_dense(inputs, 10)
+outputs <- custom_dense(inputs, 10)
 
 model <- keras_model(inputs, outputs)
 ```
@@ -615,12 +625,12 @@ method that returns the constructor arguments of the layer instance:
 
 ```{r}
 custom_dense <- Layer("CustomDense",
-                      
+
   initialize = function(units = 32, ...) {
     super$initialize()
     self$units <- as.integer(units)
   },
-  
+
   build = function(input_shape) {
     self$w <- self$add_weight(
       shape = shape(input_shape[[2]], self$units),
@@ -633,18 +643,18 @@ custom_dense <- Layer("CustomDense",
       trainable = TRUE
     )
   },
-  
+
   call = function(inputs) {
     op_matmul(inputs, self$w) + self$b
   },
-  
+
   get_config = function() {
     list(units = self$units)
   }
 )
 
 inputs <- layer_input(c(4))
-outputs = custom_dense(inputs, 10)
+outputs <- custom_dense(inputs, 10)
 
 model <- keras_model(inputs, outputs)
 config <- get_config(model)
@@ -682,7 +692,7 @@ model subclassing, read
 
 The following properties are also true for Sequential models
 (which are also data structures), but are not true for subclassed models
-(which are Python bytecode, not data structures).
+(which are R and Python (byte)code, not data structures).
 
 #### Less verbose
 
@@ -715,7 +725,7 @@ MLP <- new_model_class(
 )
 
 # Instantiate the model.
-mlp = MLP()
+mlp <- MLP()
 # Necessary to create the model's state.
 # The model doesn't have a state until it's called at least once.
 out <- mlp(op_zeros(c(1, 32)))
@@ -843,7 +853,7 @@ timesteps <- 10
 input_dim <- 5
 batch_size <- 16
 
-custom_rnn <- new_layer_class(
+custom_rnn <- Layer(
   "custom_rnn",
   initialize = function(...) {
     super$initialize(...)
@@ -870,7 +880,7 @@ custom_rnn <- new_layer_class(
 # Note that you specify a static batch size for the inputs with the `batch_shape`
 # arg, because the inner computation of `custom_rnn` requires a static batch size
 # (when you create the `state` zeros tensor).
-inputs <- layer_input(batch_shape = as.integer(c(batch_size, timesteps, input_dim)))
+inputs <- layer_input(batch_shape = shape(batch_size, timesteps, input_dim))
 outputs <- inputs %>%
   layer_conv_1d(filters = 32, kernel_size = 3) %>%
   custom_rnn()

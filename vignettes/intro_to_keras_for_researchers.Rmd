@@ -1,12 +1,11 @@
 ---
 title: Introduction to Keras for Researchers
-author: '[fchollet](https://twitter.com/fchollet)'
 date-created: 2020/04/01
 last-modified: 2020/10/02
 description: Everything you need to know to use Keras & TensorFlow for deep learning
   research.
 output: rmarkdown::html_vignette
-date: 'Last Modified: 2023-11-21; Last Rendered: 2023-11-24'
+date: 'Last Modified: 2023-12-01; Last Rendered: 2024-01-03'
 vignette: >
   %\VignetteIndexEntry{Introduction to Keras for Researchers}
   %\VignetteEngine{knitr::rmarkdown}
@@ -19,17 +18,6 @@ vignette: >
 ```r
 library(keras3)
 library(tensorflow)
-```
-
-```
-##
-## Attaching package: 'tensorflow'
-```
-
-```
-## The following objects are masked from 'package:keras':
-##
-##     set_random_seed, shape
 ```
 
 ## Introduction
@@ -1068,9 +1056,9 @@ model %>% fit(dataset, epochs=2)
 
 ```
 ## Epoch 1/2
-## 938/938 - 1s - 846us/step - loss: 0.3958 - sparse_categorical_accuracy: 0.8866
+## 938/938 - 1s - 1ms/step - loss: 0.3958 - sparse_categorical_accuracy: 0.8866
 ## Epoch 2/2
-## 938/938 - 1s - 602us/step - loss: 0.1888 - sparse_categorical_accuracy: 0.9443
+## 938/938 - 1s - 591us/step - loss: 0.1888 - sparse_categorical_accuracy: 0.9443
 ```
 
 ```r
@@ -1078,7 +1066,7 @@ predictions <- model %>% predict(dataset)
 ```
 
 ```
-## 938/938 - 0s - 378us/step
+## 938/938 - 0s - 413us/step
 ```
 
 ```r
@@ -1086,12 +1074,15 @@ model %>% evaluate(dataset)
 ```
 
 ```
-## 938/938 - 0s - 367us/step - loss: 0.1763 - sparse_categorical_accuracy: 0.9454
+## 938/938 - 0s - 402us/step - loss: 0.1763 - sparse_categorical_accuracy: 0.9454
 ```
 
 ```
-##            loss compile_metrics
-##       0.1763445       0.9454167
+## $loss
+## [1] 0.1763445
+##
+## $sparse_categorical_accuracy
+## [1] 0.9454167
 ```
 
 You can always subclass the `Model` class (it works exactly like subclassing
@@ -1153,9 +1144,9 @@ model %>% fit(dataset, epochs=2)
 
 ```
 ## Epoch 1/2
-## 938/938 - 1s - 780us/step - loss: 0.3869 - sparse_categorical_accuracy: 0.8924
+## 938/938 - 1s - 923us/step - loss: 0.3869 - sparse_categorical_accuracy: 0.8924
 ## Epoch 2/2
-## 938/938 - 1s - 603us/step - loss: 0.2163 - sparse_categorical_accuracy: 0.9370
+## 938/938 - 1s - 567us/step - loss: 0.2163 - sparse_categorical_accuracy: 0.9370
 ```
 
 ## End-to-end experiment example 1: variational autoencoders.

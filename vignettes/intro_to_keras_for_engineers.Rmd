@@ -1,13 +1,12 @@
 ---
 title: Introduction to Keras for engineers
-author: '[fchollet](https://twitter.com/fchollet)'
 date-created: 2023/07/10
 last-modified: 2023/07/10
 description: First contact with Keras 3.
 output: rmarkdown::html_vignette
 editor_options:
   chunk_output_type: console
-date: 'Last Modified: 2023-11-30; Last Rendered: 2023-12-06'
+date: 'Last Modified: 2023-11-30; Last Rendered: 2024-01-03'
 vignette: >
   %\VignetteIndexEntry{Introduction to Keras for engineers}
   %\VignetteEngine{knitr::rmarkdown}
@@ -39,20 +38,6 @@ Sys.setenv(KERAS_BACKEND = "tensorflow")
 # has been configured. The backend cannot be changed once the
 # package is imported.
 library(tensorflow)
-```
-
-```
-##
-## Attaching package: 'tensorflow'
-```
-
-```
-## The following objects are masked from 'package:keras3':
-##
-##     set_random_seed, shape
-```
-
-```r
 library(keras3)
 ```
 
@@ -189,7 +174,7 @@ model %>% fit(
 ```
 
 ```
-## 399/399 - 36s - 91ms/step - acc: 0.7463 - loss: 0.7500 - val_acc: 0.9627 - val_loss: 0.1317
+## 399/399 - 38s - 95ms/step - acc: 0.7463 - loss: 0.7500 - val_acc: 0.9627 - val_loss: 0.1317
 ```
 
 ```r
@@ -350,7 +335,7 @@ model %>% fit(
 ```
 
 ```
-## 399/399 - 37s - 92ms/step - acc: 0.7325 - loss: 0.7821 - val_acc: 0.9253 - val_loss: 0.2463
+## 399/399 - 38s - 95ms/step - acc: 0.7325 - loss: 0.7821 - val_acc: 0.9253 - val_loss: 0.2463
 ```
 
 ## Training models on arbitrary data sources
@@ -403,20 +388,7 @@ Let's try this out with `tf_dataset`:
 
 ```r
 library(tfdatasets)
-```
 
-```
-##
-## Attaching package: 'tfdatasets'
-```
-
-```
-## The following object is masked from 'package:keras3':
-##
-##     shape
-```
-
-```r
 train_dataset <- list(x_train, y_train) %>%
   tensor_slices_dataset() %>%
   dataset_batch(batch_size) %>%
@@ -439,7 +411,7 @@ model %>% fit(train_dataset, epochs=1, validation_data=test_dataset)
 ```
 
 ```
-## 469/469 - 44s - 94ms/step - acc: 0.7552 - loss: 0.7242 - val_acc: 0.9199 - val_loss: 0.2651
+## 469/469 - 45s - 95ms/step - acc: 0.7552 - loss: 0.7242 - val_acc: 0.9199 - val_loss: 0.2651
 ```
 
 ## Further reading

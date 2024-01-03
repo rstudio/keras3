@@ -5,7 +5,7 @@ date-created: 2019/07/16
 last-modified: 2023/06/25
 description: Complete guide to using mask-aware sequence layers in Keras.
 output: rmarkdown::html_vignette
-date: 'Last Modified: 2023-11-21; Last Rendered: 2023-11-27'
+date: 'Last Modified: 2023-11-29; Last Rendered: 2024-01-03'
 vignette: >
   %\VignetteIndexEntry{Understanding masking & padding}
   %\VignetteEngine{knitr::rmarkdown}

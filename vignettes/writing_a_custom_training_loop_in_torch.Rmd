@@ -1,11 +1,10 @@
 ---
 title: Writing a training loop from scratch in PyTorch
-author: '[fchollet](https://twitter.com/fchollet)'
 date-created: 2023/06/25
 last-modified: 2023/06/25
 description: Writing low-level training & evaluation loops in PyTorch.
 output: rmarkdown::html_vignette
-date: 'Last Modified: 2023-11-10; Last Rendered: 2023-11-10'
+date: 'Last Modified: 2023-11-21; Last Rendered: 2024-01-03'
 vignette: >
   %\VignetteIndexEntry{Writing a training loop from scratch in PyTorch}
   %\VignetteEngine{knitr::rmarkdown}

@@ -1,11 +1,10 @@
 ---
 title: Transfer learning & fine-tuning
-author: '[fchollet](https://twitter.com/fchollet)'
 date-created: 2020/04/15
 last-modified: 2023/06/25
 description: Complete guide to transfer learning & fine-tuning in Keras.
 output: rmarkdown::html_vignette
-date: 'Last Modified: 2023-11-29; Last Rendered: 2023-12-21'
+date: 'Last Modified: 2023-11-29; Last Rendered: 2024-01-03'
 vignette: >
   %\VignetteIndexEntry{Transfer learning & fine-tuning}
   %\VignetteEngine{knitr::rmarkdown}
@@ -194,7 +193,7 @@ model %>% fit(random_normal(c(2, 3)), random_normal(c(2, 3)), epochs = 1)
 ```
 
 ```
-## 1/1 - 0s - 294ms/step - loss: 2.1868
+## 1/1 - 0s - 206ms/step - loss: 2.1868
 ```
 
 ```r
@@ -423,14 +422,7 @@ c(train_ds, validation_ds, test_ds) %<-% tfds$load(
     split = c("train[:40%]", "train[40%:50%]", "train[50%:60%]"),
     as_supervised=TRUE  # Include labels
 )
-```
 
-```
-## Downloading and preparing dataset 786.67 MiB (download: 786.67 MiB, generated: 1.04 GiB, total: 1.81 GiB) to /Users/tomasz/tensorflow_datasets/cats_vs_dogs/4.0.1...
-## Dataset cats_vs_dogs downloaded and prepared to /Users/tomasz/tensorflow_datasets/cats_vs_dogs/4.0.1. Subsequent calls will reuse this data.
-```
-
-```r
 length(train_ds)
 ```
 
@@ -444,20 +436,7 @@ different sizes.
 
 ```r
 library(tfdatasets)
-```
 
-```
-##
-## Attaching package: 'tfdatasets'
-```
-
-```
-## The following object is masked from 'package:keras3':
-##
-##     shape
-```
-
-```r
 par(mfrow = c(3, 3), mar = c(1,0,1.5,0))
 train_ds %>%
   dataset_take(9) %>%
@@ -530,20 +509,7 @@ Let's batch the data and use prefetching to optimize loading speed.
 
 ```r
 library(tensorflow)
-```
 
-```
-##
-## Attaching package: 'tensorflow'
-```
-
-```
-## The following objects are masked from 'package:keras3':
-##
-##     set_random_seed, shape
-```
-
-```r
 batch_size <- 64
 
 train_ds <- train_ds %>%
@@ -678,7 +644,7 @@ model %>% fit(train_ds, epochs=epochs, validation_data=validation_ds)
 ```
 
 ```
-## 146/146 - 120s - 825ms/step - binary_accuracy: 0.9239 - loss: 0.1776 - val_binary_accuracy: 0.9650 - val_loss: 0.0886
+## 146/146 - 103s - 703ms/step - binary_accuracy: 0.9118 - loss: 0.1923 - val_binary_accuracy: 0.9662 - val_loss: 0.0916
 ```
 
 ## Do a round of fine-tuning of the entire model
@@ -739,7 +705,7 @@ model %>% fit(train_ds, epochs=epochs, validation_data=validation_ds)
 ```
 
 ```
-## 146/146 - 496s - 3s/step - binary_accuracy: 0.8600 - loss: 0.3399 - val_binary_accuracy: 0.9515 - val_loss: 0.1133
+## 146/146 - 429s - 3s/step - binary_accuracy: 0.8590 - loss: 0.3430 - val_binary_accuracy: 0.9456 - val_loss: 0.1265
 ```
 
 After 10 epochs, fine-tuning gains us a nice improvement here.
@@ -751,13 +717,13 @@ model %>% evaluate(test_ds)
 ```
 
 ```
-## 37/37 - 22s - 592ms/step - binary_accuracy: 0.9421 - loss: 0.1391
+## 37/37 - 23s - 630ms/step - binary_accuracy: 0.9388 - loss: 0.1463
 ```
 
 ```
 ## $binary_accuracy
-## [1] 0.9421453
+## [1] 0.9387669
 ##
 ## $loss
-## [1] 0.1390722
+## [1] 0.1462643
 ```

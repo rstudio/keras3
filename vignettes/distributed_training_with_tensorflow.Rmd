@@ -1,11 +1,10 @@
 ---
 title: Multi-GPU distributed training with TensorFlow
-author: '[fchollet](https://twitter.com/fchollet)'
 date-created: 2020/04/28
 last-modified: 2023/06/29
 description: Guide to multi-GPU training for Keras models with TensorFlow.
 output: rmarkdown::html_vignette
-date: 'Last Modified: 2023-11-21; Last Rendered: 2023-11-29'
+date: 'Last Modified: 2023-11-29; Last Rendered: 2024-01-03'
 vignette: >
   %\VignetteIndexEntry{Multi-GPU distributed training with TensorFlow}
   %\VignetteEngine{knitr::rmarkdown}
@@ -41,34 +40,9 @@ industry workflows.
 
 
 ```r
-library(keras3)
-library(tensorflow)
-```
-
-```
-##
-## Attaching package: 'tensorflow'
-```
-
-```
-## The following objects are masked from 'package:keras3':
-##
-##     set_random_seed, shape
-```
-
-```r
 library(tfdatasets)
-```
-
-```
-##
-## Attaching package: 'tfdatasets'
-```
-
-```
-## The following object is masked from 'package:keras3':
-##
-##     shape
+library(tensorflow)
+library(keras3)
 ```
 
 ## Single-host, multi-device synchronous training
@@ -211,15 +185,18 @@ with(strategy$scope(), {
 
 ```
 ## Epoch 1/2
-## 782/782 - 3s - 3ms/step - loss: 2.0840 - sparse_categorical_accuracy: 0.8817 - val_loss: 0.6871 - val_sparse_categorical_accuracy: 0.9126
+## 782/782 - 3s - 4ms/step - loss: 2.0840 - sparse_categorical_accuracy: 0.8817 - val_loss: 0.6871 - val_sparse_categorical_accuracy: 0.9126
 ## Epoch 2/2
-## 782/782 - 2s - 3ms/step - loss: 0.4243 - sparse_categorical_accuracy: 0.9337 - val_loss: 0.4643 - val_sparse_categorical_accuracy: 0.9277
-## 157/157 - 0s - 992us/step - loss: 0.4673 - sparse_categorical_accuracy: 0.9292
+## 782/782 - 3s - 3ms/step - loss: 0.4243 - sparse_categorical_accuracy: 0.9337 - val_loss: 0.4643 - val_sparse_categorical_accuracy: 0.9277
+## 157/157 - 0s - 1ms/step - loss: 0.4673 - sparse_categorical_accuracy: 0.9292
 ```
 
 ```
-##            loss compile_metrics
-##        0.467276        0.929200
+## $loss
+## [1] 0.467276
+##
+## $sparse_categorical_accuracy
+## [1] 0.9292
 ```
 
 ## Using callbacks to ensure fault tolerance
@@ -286,7 +263,7 @@ run_training(epochs=1)
 ```
 
 ```
-## Error in load_model(latest_checkpoint): could not find function "load_model"
+## 782/782 - 1s - 2ms/step - loss: 7.9164 - sparse_categorical_accuracy: 0.8906 - val_loss: 1.3026 - val_sparse_categorical_accuracy: 0.8787
 ```
 
 ```r
@@ -295,7 +272,7 @@ run_training(epochs=1)
 ```
 
 ```
-## Error in load_model(latest_checkpoint): could not find function "load_model"
+## 782/782 - 1s - 1ms/step - loss: 7.9164 - sparse_categorical_accuracy: 0.8906 - val_loss: 1.3026 - val_sparse_categorical_accuracy: 0.8787
 ```
 
 ## `tf$data` performance tips
