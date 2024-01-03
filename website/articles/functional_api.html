@@ -108,10 +108,9 @@
 <div class="row">
   <main id="main" class="col-md-9"><div class="page-header">
       <img src="" class="logo" alt=""><h1>The Functional API</h1>
-                        <h4 data-toc-skip class="author"><a href="https://twitter.com/fchollet" class="external-link">fchollet</a></h4>
             
-            <h4 data-toc-skip class="date">Last Modified: 2023-11-29;
-Last Rendered: 2023-12-22</h4>
+            <h4 data-toc-skip class="date">Last Modified: 2024-01-02;
+Last Rendered: 2024-01-03</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/rstudio/keras/blob/HEAD/vignettes/functional_api.Rmd" class="external-link"><code>vignettes/functional_api.Rmd</code></a></small>
       <div class="d-none name"><code>functional_api.Rmd</code></div>
@@ -190,17 +189,17 @@ inputs and outputs in the graph of layers:</p>
 <div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary</a></span><span class="op">(</span><span class="va">model</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">## <span style="font-weight: bold;">Model: "mnist_model"</span></span></span>
-<span><span class="co">## ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━┓</span></span>
-<span><span class="co">## ┃<span style="font-weight: bold;"> Layer (type)                      </span>┃<span style="font-weight: bold;"> Output Shape                </span>┃<span style="font-weight: bold;">    Param # </span>┃</span></span>
-<span><span class="co">## ┡━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━┩</span></span>
-<span><span class="co">## │ input_layer (<span style="color: #0087FF;">InputLayer</span>)          │ (<span style="color: #00D7FF;">None</span>, <span style="color: #00AF00;">784</span>)                 │          <span style="color: #00AF00;">0</span> │</span></span>
-<span><span class="co">## ├───────────────────────────────────┼─────────────────────────────┼────────────┤</span></span>
-<span><span class="co">## │ dense (<span style="color: #0087FF;">Dense</span>)                     │ (<span style="color: #00D7FF;">None</span>, <span style="color: #00AF00;">64</span>)                  │     <span style="color: #00AF00;">50,240</span> │</span></span>
-<span><span class="co">## ├───────────────────────────────────┼─────────────────────────────┼────────────┤</span></span>
-<span><span class="co">## │ dense_2 (<span style="color: #0087FF;">Dense</span>)                   │ (<span style="color: #00D7FF;">None</span>, <span style="color: #00AF00;">64</span>)                  │      <span style="color: #00AF00;">4,160</span> │</span></span>
-<span><span class="co">## ├───────────────────────────────────┼─────────────────────────────┼────────────┤</span></span>
-<span><span class="co">## │ dense_1 (<span style="color: #0087FF;">Dense</span>)                   │ (<span style="color: #00D7FF;">None</span>, <span style="color: #00AF00;">10</span>)                  │        <span style="color: #00AF00;">650</span> │</span></span>
-<span><span class="co">## └───────────────────────────────────┴─────────────────────────────┴────────────┘</span></span>
+<span><span class="co">## ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━┓</span></span>
+<span><span class="co">## ┃<span style="font-weight: bold;"> Layer (type)                    </span>┃<span style="font-weight: bold;"> Output Shape              </span>┃<span style="font-weight: bold;">    Param # </span>┃</span></span>
+<span><span class="co">## ┡━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━┩</span></span>
+<span><span class="co">## │ input_layer (<span style="color: #0087FF;">InputLayer</span>)        │ (<span style="color: #00D7FF;">None</span>, <span style="color: #00AF00;">784</span>)               │          <span style="color: #00AF00;">0</span> │</span></span>
+<span><span class="co">## ├─────────────────────────────────┼───────────────────────────┼────────────┤</span></span>
+<span><span class="co">## │ dense (<span style="color: #0087FF;">Dense</span>)                   │ (<span style="color: #00D7FF;">None</span>, <span style="color: #00AF00;">64</span>)                │     <span style="color: #00AF00;">50,240</span> │</span></span>
+<span><span class="co">## ├─────────────────────────────────┼───────────────────────────┼────────────┤</span></span>
+<span><span class="co">## │ dense_2 (<span style="color: #0087FF;">Dense</span>)                 │ (<span style="color: #00D7FF;">None</span>, <span style="color: #00AF00;">64</span>)                │      <span style="color: #00AF00;">4,160</span> │</span></span>
+<span><span class="co">## ├─────────────────────────────────┼───────────────────────────┼────────────┤</span></span>
+<span><span class="co">## │ dense_1 (<span style="color: #0087FF;">Dense</span>)                 │ (<span style="color: #00D7FF;">None</span>, <span style="color: #00AF00;">10</span>)                │        <span style="color: #00AF00;">650</span> │</span></span>
+<span><span class="co">## └─────────────────────────────────┴───────────────────────────┴────────────┘</span></span>
 <span><span class="co">## <span style="font-weight: bold;"> Total params: </span><span style="color: #00AF00;">55,050</span> (215.04 KB)</span></span>
 <span><span class="co">## <span style="font-weight: bold;"> Trainable params: </span><span style="color: #00AF00;">55,050</span> (215.04 KB)</span></span>
 <span><span class="co">## <span style="font-weight: bold;"> Non-trainable params: </span><span style="color: #00AF00;">0</span> (0.00 B)</span></span></code></pre>
@@ -255,18 +254,15 @@ then evaluate the model on the test data:</p>
 <pre><code><span><span class="co">## Epoch 1/2</span></span>
 <span><span class="co">## 750/750 - 1s - 1ms/step - accuracy: 0.9015 - loss: 0.3513 - val_accuracy: 0.9442 - val_loss: 0.1921</span></span>
 <span><span class="co">## Epoch 2/2</span></span>
-<span><span class="co">## 750/750 - 1s - 839us/step - accuracy: 0.9508 - loss: 0.1643 - val_accuracy: 0.9581 - val_loss: 0.1423</span></span></code></pre>
+<span><span class="co">## 750/750 - 1s - 865us/step - accuracy: 0.9508 - loss: 0.1643 - val_accuracy: 0.9581 - val_loss: 0.1423</span></span></code></pre>
 <div class="sourceCode" id="cb18"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">test_scores</span> <span class="op">&lt;-</span> <span class="va">model</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://rdrr.io/pkg/tensorflow/man/evaluate.html" class="external-link">evaluate</a></span><span class="op">(</span><span class="va">x_test</span>, <span class="va">y_test</span>, verbose<span class="op">=</span><span class="fl">2</span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">## 313/313 - 0s - 355us/step - accuracy: 0.9578 - loss: 0.1338</span></span></code></pre>
+<pre><code><span><span class="co">## 313/313 - 0s - 336us/step - accuracy: 0.9578 - loss: 0.1338</span></span></code></pre>
 <div class="sourceCode" id="cb20"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/cat.html" class="external-link">cat</a></span><span class="op">(</span><span class="st">"Test loss:"</span>, <span class="va">test_scores</span><span class="op">[</span><span class="st">"loss"</span><span class="op">]</span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">## Test loss:</span></span></code></pre>
-<pre><code><span><span class="co">## Error in cat("Test loss:", test_scores["loss"]): argument 2 (type 'list') cannot be handled by 'cat'</span></span></code></pre>
-<div class="sourceCode" id="cb23"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/cat.html" class="external-link">cat</a></span><span class="op">(</span><span class="st">"Test accuracy:"</span>, <span class="va">test_scores</span><span class="op">[</span><span class="st">"compile_metrics"</span><span class="op">]</span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">## Test accuracy:</span></span></code></pre>
-<pre><code><span><span class="co">## Error in cat("Test accuracy:", test_scores["compile_metrics"]): argument 2 (type 'list') cannot be handled by 'cat'</span></span></code></pre>
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/cat.html" class="external-link">cat</a></span><span class="op">(</span><span class="st">"Test loss:"</span>, <span class="va">test_scores</span><span class="op">$</span><span class="va">loss</span>, <span class="st">"\n"</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/cat.html" class="external-link">cat</a></span><span class="op">(</span><span class="st">"Test accuracy:"</span>, <span class="va">test_scores</span><span class="op">$</span><span class="va">accuracy</span>, <span class="st">"\n"</span><span class="op">)</span></span></code></pre></div>
+<pre><code><span><span class="co">## Test loss: 0.1337984</span></span>
+<span><span class="co">## Test accuracy: 0.9578</span></span></code></pre>
 <p>For further reading, see the <a href="/guides/training_with_built_in_methods/">training and
 evaluation</a> guide.</p>
 </div>
@@ -283,11 +279,11 @@ built the model is no longer available.</p>
 values (that were learned during training) - model training config, if
 any (as passed to <code><a href="https://generics.r-lib.org/reference/compile.html" class="external-link">compile()</a></code>) - optimizer and its state, if
 any (to restart training where you left off)</p>
-<div class="sourceCode" id="cb26"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">model</span><span class="op">$</span><span class="fu">save</span><span class="op">(</span><span class="st">"my_model.keras"</span><span class="op">)</span></span>
+<div class="sourceCode" id="cb22"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">model</span> <span class="op">|&gt;</span> <span class="fu"><a href="../reference/save_model.html">save_model</a></span><span class="op">(</span><span class="st">"my_model.keras"</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/rm.html" class="external-link">rm</a></span><span class="op">(</span><span class="va">model</span><span class="op">)</span></span>
 <span><span class="co"># Recreate the exact same model purely from the file:</span></span>
-<span><span class="va">model</span> <span class="op">&lt;-</span> <span class="va">keras</span><span class="op">$</span><span class="va">models</span><span class="op">$</span><span class="fu">load_model</span><span class="op">(</span><span class="st">"my_model.keras"</span><span class="op">)</span></span></code></pre></div>
+<span><span class="va">model</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/load_model.html">load_model</a></span><span class="op">(</span><span class="st">"my_model.keras"</span><span class="op">)</span></span></code></pre></div>
 <p>For details, read the model <a href="/guides/serialization_and_saving/">serialization &amp; saving</a>
 guide.</p>
 </div>
@@ -301,7 +297,7 @@ layers can be used to generate multiple models.</p>
 two models: an <code>encoder</code> model that turns image inputs into
 16-dimensional vectors, and an end-to-end <code>autoencoder</code> model
 for training.</p>
-<div class="sourceCode" id="cb27"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb23"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">encoder_input</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/layer_input.html">layer_input</a></span><span class="op">(</span>shape <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">28</span>, <span class="fl">28</span>, <span class="fl">1</span><span class="op">)</span>, name<span class="op">=</span><span class="st">"img"</span><span class="op">)</span></span>
 <span><span class="va">encoder_output</span> <span class="op">&lt;-</span> <span class="va">encoder_input</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span></span>
 <span>  <span class="fu"><a href="../reference/layer_conv_2d.html">layer_conv_2d</a></span><span class="op">(</span><span class="fl">16</span>, <span class="fl">3</span>, activation <span class="op">=</span> <span class="st">"relu"</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span></span>
@@ -314,28 +310,28 @@ for training.</p>
 <span><span class="va">encoder</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/keras_model.html">keras_model</a></span><span class="op">(</span><span class="va">encoder_input</span>, <span class="va">encoder_output</span>, name<span class="op">=</span><span class="st">"encoder"</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary</a></span><span class="op">(</span><span class="va">encoder</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">## <span style="font-weight: bold;">Model: "encoder"</span></span></span>
-<span><span class="co">## ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━┓</span></span>
-<span><span class="co">## ┃<span style="font-weight: bold;"> Layer (type)                      </span>┃<span style="font-weight: bold;"> Output Shape                </span>┃<span style="font-weight: bold;">    Param # </span>┃</span></span>
-<span><span class="co">## ┡━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━┩</span></span>
-<span><span class="co">## │ img (<span style="color: #0087FF;">InputLayer</span>)                  │ (<span style="color: #00D7FF;">None</span>, <span style="color: #00AF00;">28</span>, <span style="color: #00AF00;">28</span>, <span style="color: #00AF00;">1</span>)           │          <span style="color: #00AF00;">0</span> │</span></span>
-<span><span class="co">## ├───────────────────────────────────┼─────────────────────────────┼────────────┤</span></span>
-<span><span class="co">## │ conv2d_3 (<span style="color: #0087FF;">Conv2D</span>)                 │ (<span style="color: #00D7FF;">None</span>, <span style="color: #00AF00;">26</span>, <span style="color: #00AF00;">26</span>, <span style="color: #00AF00;">16</span>)          │        <span style="color: #00AF00;">160</span> │</span></span>
-<span><span class="co">## ├───────────────────────────────────┼─────────────────────────────┼────────────┤</span></span>
-<span><span class="co">## │ conv2d_2 (<span style="color: #0087FF;">Conv2D</span>)                 │ (<span style="color: #00D7FF;">None</span>, <span style="color: #00AF00;">24</span>, <span style="color: #00AF00;">24</span>, <span style="color: #00AF00;">32</span>)          │      <span style="color: #00AF00;">4,640</span> │</span></span>
-<span><span class="co">## ├───────────────────────────────────┼─────────────────────────────┼────────────┤</span></span>
-<span><span class="co">## │ max_pooling2d (<span style="color: #0087FF;">MaxPooling2D</span>)      │ (<span style="color: #00D7FF;">None</span>, <span style="color: #00AF00;">8</span>, <span style="color: #00AF00;">8</span>, <span style="color: #00AF00;">32</span>)            │          <span style="color: #00AF00;">0</span> │</span></span>
-<span><span class="co">## ├───────────────────────────────────┼─────────────────────────────┼────────────┤</span></span>
-<span><span class="co">## │ conv2d_1 (<span style="color: #0087FF;">Conv2D</span>)                 │ (<span style="color: #00D7FF;">None</span>, <span style="color: #00AF00;">6</span>, <span style="color: #00AF00;">6</span>, <span style="color: #00AF00;">32</span>)            │      <span style="color: #00AF00;">9,248</span> │</span></span>
-<span><span class="co">## ├───────────────────────────────────┼─────────────────────────────┼────────────┤</span></span>
-<span><span class="co">## │ conv2d (<span style="color: #0087FF;">Conv2D</span>)                   │ (<span style="color: #00D7FF;">None</span>, <span style="color: #00AF00;">4</span>, <span style="color: #00AF00;">4</span>, <span style="color: #00AF00;">16</span>)            │      <span style="color: #00AF00;">4,624</span> │</span></span>
-<span><span class="co">## ├───────────────────────────────────┼─────────────────────────────┼────────────┤</span></span>
-<span><span class="co">## │ global_max_pooling2d              │ (<span style="color: #00D7FF;">None</span>, <span style="color: #00AF00;">16</span>)                  │          <span style="color: #00AF00;">0</span> │</span></span>
-<span><span class="co">## │ (<span style="color: #0087FF;">GlobalMaxPooling2D</span>)              │                             │            │</span></span>
-<span><span class="co">## └───────────────────────────────────┴─────────────────────────────┴────────────┘</span></span>
+<span><span class="co">## ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━┓</span></span>
+<span><span class="co">## ┃<span style="font-weight: bold;"> Layer (type)                    </span>┃<span style="font-weight: bold;"> Output Shape              </span>┃<span style="font-weight: bold;">    Param # </span>┃</span></span>
+<span><span class="co">## ┡━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━┩</span></span>
+<span><span class="co">## │ img (<span style="color: #0087FF;">InputLayer</span>)                │ (<span style="color: #00D7FF;">None</span>, <span style="color: #00AF00;">28</span>, <span style="color: #00AF00;">28</span>, <span style="color: #00AF00;">1</span>)         │          <span style="color: #00AF00;">0</span> │</span></span>
+<span><span class="co">## ├─────────────────────────────────┼───────────────────────────┼────────────┤</span></span>
+<span><span class="co">## │ conv2d_3 (<span style="color: #0087FF;">Conv2D</span>)               │ (<span style="color: #00D7FF;">None</span>, <span style="color: #00AF00;">26</span>, <span style="color: #00AF00;">26</span>, <span style="color: #00AF00;">16</span>)        │        <span style="color: #00AF00;">160</span> │</span></span>
+<span><span class="co">## ├─────────────────────────────────┼───────────────────────────┼────────────┤</span></span>
+<span><span class="co">## │ conv2d_2 (<span style="color: #0087FF;">Conv2D</span>)               │ (<span style="color: #00D7FF;">None</span>, <span style="color: #00AF00;">24</span>, <span style="color: #00AF00;">24</span>, <span style="color: #00AF00;">32</span>)        │      <span style="color: #00AF00;">4,640</span> │</span></span>
+<span><span class="co">## ├─────────────────────────────────┼───────────────────────────┼────────────┤</span></span>
+<span><span class="co">## │ max_pooling2d (<span style="color: #0087FF;">MaxPooling2D</span>)    │ (<span style="color: #00D7FF;">None</span>, <span style="color: #00AF00;">8</span>, <span style="color: #00AF00;">8</span>, <span style="color: #00AF00;">32</span>)          │          <span style="color: #00AF00;">0</span> │</span></span>
+<span><span class="co">## ├─────────────────────────────────┼───────────────────────────┼────────────┤</span></span>
+<span><span class="co">## │ conv2d_1 (<span style="color: #0087FF;">Conv2D</span>)               │ (<span style="color: #00D7FF;">None</span>, <span style="color: #00AF00;">6</span>, <span style="color: #00AF00;">6</span>, <span style="color: #00AF00;">32</span>)          │      <span style="color: #00AF00;">9,248</span> │</span></span>
+<span><span class="co">## ├─────────────────────────────────┼───────────────────────────┼────────────┤</span></span>
+<span><span class="co">## │ conv2d (<span style="color: #0087FF;">Conv2D</span>)                 │ (<span style="color: #00D7FF;">None</span>, <span style="color: #00AF00;">4</span>, <span style="color: #00AF00;">4</span>, <span style="color: #00AF00;">16</span>)          │      <span style="color: #00AF00;">4,624</span> │</span></span>
+<span><span class="co">## ├─────────────────────────────────┼───────────────────────────┼────────────┤</span></span>
+<span><span class="co">## │ global_max_pooling2d            │ (<span style="color: #00D7FF;">None</span>, <span style="color: #00AF00;">16</span>)                │          <span style="color: #00AF00;">0</span> │</span></span>
+<span><span class="co">## │ (<span style="color: #0087FF;">GlobalMaxPooling2D</span>)            │                           │            │</span></span>
+<span><span class="co">## └─────────────────────────────────┴───────────────────────────┴────────────┘</span></span>
 <span><span class="co">## <span style="font-weight: bold;"> Total params: </span><span style="color: #00AF00;">18,672</span> (72.94 KB)</span></span>
 <span><span class="co">## <span style="font-weight: bold;"> Trainable params: </span><span style="color: #00AF00;">18,672</span> (72.94 KB)</span></span>
 <span><span class="co">## <span style="font-weight: bold;"> Non-trainable params: </span><span style="color: #00AF00;">0</span> (0.00 B)</span></span></code></pre>
-<div class="sourceCode" id="cb29"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb25"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">decoder_output</span> <span class="op">&lt;-</span> <span class="va">encoder_output</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span></span>
 <span>  <span class="fu"><a href="../reference/layer_reshape.html">layer_reshape</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">4</span>, <span class="fl">4</span>, <span class="fl">1</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span></span>
 <span>  <span class="fu"><a href="../reference/layer_conv_2d_transpose.html">layer_conv_2d_transpose</a></span><span class="op">(</span><span class="fl">16</span>, <span class="fl">3</span>, activation <span class="op">=</span> <span class="st">"relu"</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span></span>
@@ -347,40 +343,40 @@ for training.</p>
 <span><span class="va">autoencoder</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/keras_model.html">keras_model</a></span><span class="op">(</span><span class="va">encoder_input</span>, <span class="va">decoder_output</span>, name<span class="op">=</span><span class="st">"autoencoder"</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary</a></span><span class="op">(</span><span class="va">autoencoder</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">## <span style="font-weight: bold;">Model: "autoencoder"</span></span></span>
-<span><span class="co">## ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━┓</span></span>
-<span><span class="co">## ┃<span style="font-weight: bold;"> Layer (type)                      </span>┃<span style="font-weight: bold;"> Output Shape                </span>┃<span style="font-weight: bold;">    Param # </span>┃</span></span>
-<span><span class="co">## ┡━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━┩</span></span>
-<span><span class="co">## │ img (<span style="color: #0087FF;">InputLayer</span>)                  │ (<span style="color: #00D7FF;">None</span>, <span style="color: #00AF00;">28</span>, <span style="color: #00AF00;">28</span>, <span style="color: #00AF00;">1</span>)           │          <span style="color: #00AF00;">0</span> │</span></span>
-<span><span class="co">## ├───────────────────────────────────┼─────────────────────────────┼────────────┤</span></span>
-<span><span class="co">## │ conv2d_3 (<span style="color: #0087FF;">Conv2D</span>)                 │ (<span style="color: #00D7FF;">None</span>, <span style="color: #00AF00;">26</span>, <span style="color: #00AF00;">26</span>, <span style="color: #00AF00;">16</span>)          │        <span style="color: #00AF00;">160</span> │</span></span>
-<span><span class="co">## ├───────────────────────────────────┼─────────────────────────────┼────────────┤</span></span>
-<span><span class="co">## │ conv2d_2 (<span style="color: #0087FF;">Conv2D</span>)                 │ (<span style="color: #00D7FF;">None</span>, <span style="color: #00AF00;">24</span>, <span style="color: #00AF00;">24</span>, <span style="color: #00AF00;">32</span>)          │      <span style="color: #00AF00;">4,640</span> │</span></span>
-<span><span class="co">## ├───────────────────────────────────┼─────────────────────────────┼────────────┤</span></span>
-<span><span class="co">## │ max_pooling2d (<span style="color: #0087FF;">MaxPooling2D</span>)      │ (<span style="color: #00D7FF;">None</span>, <span style="color: #00AF00;">8</span>, <span style="color: #00AF00;">8</span>, <span style="color: #00AF00;">32</span>)            │          <span style="color: #00AF00;">0</span> │</span></span>
-<span><span class="co">## ├───────────────────────────────────┼─────────────────────────────┼────────────┤</span></span>
-<span><span class="co">## │ conv2d_1 (<span style="color: #0087FF;">Conv2D</span>)                 │ (<span style="color: #00D7FF;">None</span>, <span style="color: #00AF00;">6</span>, <span style="color: #00AF00;">6</span>, <span style="color: #00AF00;">32</span>)            │      <span style="color: #00AF00;">9,248</span> │</span></span>
-<span><span class="co">## ├───────────────────────────────────┼─────────────────────────────┼────────────┤</span></span>
-<span><span class="co">## │ conv2d (<span style="color: #0087FF;">Conv2D</span>)                   │ (<span style="color: #00D7FF;">None</span>, <span style="color: #00AF00;">4</span>, <span style="color: #00AF00;">4</span>, <span style="color: #00AF00;">16</span>)            │      <span style="color: #00AF00;">4,624</span> │</span></span>
-<span><span class="co">## ├───────────────────────────────────┼─────────────────────────────┼────────────┤</span></span>
-<span><span class="co">## │ global_max_pooling2d              │ (<span style="color: #00D7FF;">None</span>, <span style="color: #00AF00;">16</span>)                  │          <span style="color: #00AF00;">0</span> │</span></span>
-<span><span class="co">## │ (<span style="color: #0087FF;">GlobalMaxPooling2D</span>)              │                             │            │</span></span>
-<span><span class="co">## ├───────────────────────────────────┼─────────────────────────────┼────────────┤</span></span>
-<span><span class="co">## │ reshape (<span style="color: #0087FF;">Reshape</span>)                 │ (<span style="color: #00D7FF;">None</span>, <span style="color: #00AF00;">4</span>, <span style="color: #00AF00;">4</span>, <span style="color: #00AF00;">1</span>)             │          <span style="color: #00AF00;">0</span> │</span></span>
-<span><span class="co">## ├───────────────────────────────────┼─────────────────────────────┼────────────┤</span></span>
-<span><span class="co">## │ conv2d_transpose_3                │ (<span style="color: #00D7FF;">None</span>, <span style="color: #00AF00;">6</span>, <span style="color: #00AF00;">6</span>, <span style="color: #00AF00;">16</span>)            │        <span style="color: #00AF00;">160</span> │</span></span>
-<span><span class="co">## │ (<span style="color: #0087FF;">Conv2DTranspose</span>)                 │                             │            │</span></span>
-<span><span class="co">## ├───────────────────────────────────┼─────────────────────────────┼────────────┤</span></span>
-<span><span class="co">## │ conv2d_transpose_2                │ (<span style="color: #00D7FF;">None</span>, <span style="color: #00AF00;">8</span>, <span style="color: #00AF00;">8</span>, <span style="color: #00AF00;">32</span>)            │      <span style="color: #00AF00;">4,640</span> │</span></span>
-<span><span class="co">## │ (<span style="color: #0087FF;">Conv2DTranspose</span>)                 │                             │            │</span></span>
-<span><span class="co">## ├───────────────────────────────────┼─────────────────────────────┼────────────┤</span></span>
-<span><span class="co">## │ up_sampling2d (<span style="color: #0087FF;">UpSampling2D</span>)      │ (<span style="color: #00D7FF;">None</span>, <span style="color: #00AF00;">24</span>, <span style="color: #00AF00;">24</span>, <span style="color: #00AF00;">32</span>)          │          <span style="color: #00AF00;">0</span> │</span></span>
-<span><span class="co">## ├───────────────────────────────────┼─────────────────────────────┼────────────┤</span></span>
-<span><span class="co">## │ conv2d_transpose_1                │ (<span style="color: #00D7FF;">None</span>, <span style="color: #00AF00;">26</span>, <span style="color: #00AF00;">26</span>, <span style="color: #00AF00;">16</span>)          │      <span style="color: #00AF00;">4,624</span> │</span></span>
-<span><span class="co">## │ (<span style="color: #0087FF;">Conv2DTranspose</span>)                 │                             │            │</span></span>
-<span><span class="co">## ├───────────────────────────────────┼─────────────────────────────┼────────────┤</span></span>
-<span><span class="co">## │ conv2d_transpose                  │ (<span style="color: #00D7FF;">None</span>, <span style="color: #00AF00;">28</span>, <span style="color: #00AF00;">28</span>, <span style="color: #00AF00;">1</span>)           │        <span style="color: #00AF00;">145</span> │</span></span>
-<span><span class="co">## │ (<span style="color: #0087FF;">Conv2DTranspose</span>)                 │                             │            │</span></span>
-<span><span class="co">## └───────────────────────────────────┴─────────────────────────────┴────────────┘</span></span>
+<span><span class="co">## ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━┓</span></span>
+<span><span class="co">## ┃<span style="font-weight: bold;"> Layer (type)                    </span>┃<span style="font-weight: bold;"> Output Shape              </span>┃<span style="font-weight: bold;">    Param # </span>┃</span></span>
+<span><span class="co">## ┡━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━┩</span></span>
+<span><span class="co">## │ img (<span style="color: #0087FF;">InputLayer</span>)                │ (<span style="color: #00D7FF;">None</span>, <span style="color: #00AF00;">28</span>, <span style="color: #00AF00;">28</span>, <span style="color: #00AF00;">1</span>)         │          <span style="color: #00AF00;">0</span> │</span></span>
+<span><span class="co">## ├─────────────────────────────────┼───────────────────────────┼────────────┤</span></span>
+<span><span class="co">## │ conv2d_3 (<span style="color: #0087FF;">Conv2D</span>)               │ (<span style="color: #00D7FF;">None</span>, <span style="color: #00AF00;">26</span>, <span style="color: #00AF00;">26</span>, <span style="color: #00AF00;">16</span>)        │        <span style="color: #00AF00;">160</span> │</span></span>
+<span><span class="co">## ├─────────────────────────────────┼───────────────────────────┼────────────┤</span></span>
+<span><span class="co">## │ conv2d_2 (<span style="color: #0087FF;">Conv2D</span>)               │ (<span style="color: #00D7FF;">None</span>, <span style="color: #00AF00;">24</span>, <span style="color: #00AF00;">24</span>, <span style="color: #00AF00;">32</span>)        │      <span style="color: #00AF00;">4,640</span> │</span></span>
+<span><span class="co">## ├─────────────────────────────────┼───────────────────────────┼────────────┤</span></span>
+<span><span class="co">## │ max_pooling2d (<span style="color: #0087FF;">MaxPooling2D</span>)    │ (<span style="color: #00D7FF;">None</span>, <span style="color: #00AF00;">8</span>, <span style="color: #00AF00;">8</span>, <span style="color: #00AF00;">32</span>)          │          <span style="color: #00AF00;">0</span> │</span></span>
+<span><span class="co">## ├─────────────────────────────────┼───────────────────────────┼────────────┤</span></span>
+<span><span class="co">## │ conv2d_1 (<span style="color: #0087FF;">Conv2D</span>)               │ (<span style="color: #00D7FF;">None</span>, <span style="color: #00AF00;">6</span>, <span style="color: #00AF00;">6</span>, <span style="color: #00AF00;">32</span>)          │      <span style="color: #00AF00;">9,248</span> │</span></span>
+<span><span class="co">## ├─────────────────────────────────┼───────────────────────────┼────────────┤</span></span>
+<span><span class="co">## │ conv2d (<span style="color: #0087FF;">Conv2D</span>)                 │ (<span style="color: #00D7FF;">None</span>, <span style="color: #00AF00;">4</span>, <span style="color: #00AF00;">4</span>, <span style="color: #00AF00;">16</span>)          │      <span style="color: #00AF00;">4,624</span> │</span></span>
+<span><span class="co">## ├─────────────────────────────────┼───────────────────────────┼────────────┤</span></span>
+<span><span class="co">## │ global_max_pooling2d            │ (<span style="color: #00D7FF;">None</span>, <span style="color: #00AF00;">16</span>)                │          <span style="color: #00AF00;">0</span> │</span></span>
+<span><span class="co">## │ (<span style="color: #0087FF;">GlobalMaxPooling2D</span>)            │                           │            │</span></span>
+<span><span class="co">## ├─────────────────────────────────┼───────────────────────────┼────────────┤</span></span>
+<span><span class="co">## │ reshape (<span style="color: #0087FF;">Reshape</span>)               │ (<span style="color: #00D7FF;">None</span>, <span style="color: #00AF00;">4</span>, <span style="color: #00AF00;">4</span>, <span style="color: #00AF00;">1</span>)           │          <span style="color: #00AF00;">0</span> │</span></span>
+<span><span class="co">## ├─────────────────────────────────┼───────────────────────────┼────────────┤</span></span>
+<span><span class="co">## │ conv2d_transpose_3              │ (<span style="color: #00D7FF;">None</span>, <span style="color: #00AF00;">6</span>, <span style="color: #00AF00;">6</span>, <span style="color: #00AF00;">16</span>)          │        <span style="color: #00AF00;">160</span> │</span></span>
+<span><span class="co">## │ (<span style="color: #0087FF;">Conv2DTranspose</span>)               │                           │            │</span></span>
+<span><span class="co">## ├─────────────────────────────────┼───────────────────────────┼────────────┤</span></span>
+<span><span class="co">## │ conv2d_transpose_2              │ (<span style="color: #00D7FF;">None</span>, <span style="color: #00AF00;">8</span>, <span style="color: #00AF00;">8</span>, <span style="color: #00AF00;">32</span>)          │      <span style="color: #00AF00;">4,640</span> │</span></span>
+<span><span class="co">## │ (<span style="color: #0087FF;">Conv2DTranspose</span>)               │                           │            │</span></span>
+<span><span class="co">## ├─────────────────────────────────┼───────────────────────────┼────────────┤</span></span>
+<span><span class="co">## │ up_sampling2d (<span style="color: #0087FF;">UpSampling2D</span>)    │ (<span style="color: #00D7FF;">None</span>, <span style="color: #00AF00;">24</span>, <span style="color: #00AF00;">24</span>, <span style="color: #00AF00;">32</span>)        │          <span style="color: #00AF00;">0</span> │</span></span>
+<span><span class="co">## ├─────────────────────────────────┼───────────────────────────┼────────────┤</span></span>
+<span><span class="co">## │ conv2d_transpose_1              │ (<span style="color: #00D7FF;">None</span>, <span style="color: #00AF00;">26</span>, <span style="color: #00AF00;">26</span>, <span style="color: #00AF00;">16</span>)        │      <span style="color: #00AF00;">4,624</span> │</span></span>
+<span><span class="co">## │ (<span style="color: #0087FF;">Conv2DTranspose</span>)               │                           │            │</span></span>
+<span><span class="co">## ├─────────────────────────────────┼───────────────────────────┼────────────┤</span></span>
+<span><span class="co">## │ conv2d_transpose                │ (<span style="color: #00D7FF;">None</span>, <span style="color: #00AF00;">28</span>, <span style="color: #00AF00;">28</span>, <span style="color: #00AF00;">1</span>)         │        <span style="color: #00AF00;">145</span> │</span></span>
+<span><span class="co">## │ (<span style="color: #0087FF;">Conv2DTranspose</span>)               │                           │            │</span></span>
+<span><span class="co">## └─────────────────────────────────┴───────────────────────────┴────────────┘</span></span>
 <span><span class="co">## <span style="font-weight: bold;"> Total params: </span><span style="color: #00AF00;">28,241</span> (110.32 KB)</span></span>
 <span><span class="co">## <span style="font-weight: bold;"> Trainable params: </span><span style="color: #00AF00;">28,241</span> (110.32 KB)</span></span>
 <span><span class="co">## <span style="font-weight: bold;"> Non-trainable params: </span><span style="color: #00AF00;">0</span> (0.00 B)</span></span></code></pre>
@@ -402,7 +398,7 @@ reusing its weights.</p>
 <p>To see this in action, here’s a different take on the autoencoder
 example that creates an encoder model, a decoder model, and chains them
 in two calls to obtain the autoencoder model:</p>
-<div class="sourceCode" id="cb31"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb27"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">encoder_input</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/layer_input.html">layer_input</a></span><span class="op">(</span>shape <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">28</span>, <span class="fl">28</span>, <span class="fl">1</span><span class="op">)</span>, name<span class="op">=</span><span class="st">"img"</span><span class="op">)</span></span>
 <span><span class="va">encoder_output</span> <span class="op">&lt;-</span> <span class="va">encoder_input</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span></span>
 <span>  <span class="fu"><a href="../reference/layer_conv_2d.html">layer_conv_2d</a></span><span class="op">(</span><span class="fl">16</span>, <span class="fl">3</span>, activation <span class="op">=</span> <span class="st">"relu"</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span></span>
@@ -415,28 +411,28 @@ in two calls to obtain the autoencoder model:</p>
 <span><span class="va">encoder</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/keras_model.html">keras_model</a></span><span class="op">(</span><span class="va">encoder_input</span>, <span class="va">encoder_output</span>, name<span class="op">=</span><span class="st">"encoder"</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary</a></span><span class="op">(</span><span class="va">encoder</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">## <span style="font-weight: bold;">Model: "encoder"</span></span></span>
-<span><span class="co">## ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━┓</span></span>
-<span><span class="co">## ┃<span style="font-weight: bold;"> Layer (type)                      </span>┃<span style="font-weight: bold;"> Output Shape                </span>┃<span style="font-weight: bold;">    Param # </span>┃</span></span>
-<span><span class="co">## ┡━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━┩</span></span>
-<span><span class="co">## │ img (<span style="color: #0087FF;">InputLayer</span>)                  │ (<span style="color: #00D7FF;">None</span>, <span style="color: #00AF00;">28</span>, <span style="color: #00AF00;">28</span>, <span style="color: #00AF00;">1</span>)           │          <span style="color: #00AF00;">0</span> │</span></span>
-<span><span class="co">## ├───────────────────────────────────┼─────────────────────────────┼────────────┤</span></span>
-<span><span class="co">## │ conv2d_7 (<span style="color: #0087FF;">Conv2D</span>)                 │ (<span style="color: #00D7FF;">None</span>, <span style="color: #00AF00;">26</span>, <span style="color: #00AF00;">26</span>, <span style="color: #00AF00;">16</span>)          │        <span style="color: #00AF00;">160</span> │</span></span>
-<span><span class="co">## ├───────────────────────────────────┼─────────────────────────────┼────────────┤</span></span>
-<span><span class="co">## │ conv2d_6 (<span style="color: #0087FF;">Conv2D</span>)                 │ (<span style="color: #00D7FF;">None</span>, <span style="color: #00AF00;">24</span>, <span style="color: #00AF00;">24</span>, <span style="color: #00AF00;">32</span>)          │      <span style="color: #00AF00;">4,640</span> │</span></span>
-<span><span class="co">## ├───────────────────────────────────┼─────────────────────────────┼────────────┤</span></span>
-<span><span class="co">## │ max_pooling2d_1 (<span style="color: #0087FF;">MaxPooling2D</span>)    │ (<span style="color: #00D7FF;">None</span>, <span style="color: #00AF00;">8</span>, <span style="color: #00AF00;">8</span>, <span style="color: #00AF00;">32</span>)            │          <span style="color: #00AF00;">0</span> │</span></span>
-<span><span class="co">## ├───────────────────────────────────┼─────────────────────────────┼────────────┤</span></span>
-<span><span class="co">## │ conv2d_5 (<span style="color: #0087FF;">Conv2D</span>)                 │ (<span style="color: #00D7FF;">None</span>, <span style="color: #00AF00;">6</span>, <span style="color: #00AF00;">6</span>, <span style="color: #00AF00;">32</span>)            │      <span style="color: #00AF00;">9,248</span> │</span></span>
-<span><span class="co">## ├───────────────────────────────────┼─────────────────────────────┼────────────┤</span></span>
-<span><span class="co">## │ conv2d_4 (<span style="color: #0087FF;">Conv2D</span>)                 │ (<span style="color: #00D7FF;">None</span>, <span style="color: #00AF00;">4</span>, <span style="color: #00AF00;">4</span>, <span style="color: #00AF00;">16</span>)            │      <span style="color: #00AF00;">4,624</span> │</span></span>
-<span><span class="co">## ├───────────────────────────────────┼─────────────────────────────┼────────────┤</span></span>
-<span><span class="co">## │ global_max_pooling2d_1            │ (<span style="color: #00D7FF;">None</span>, <span style="color: #00AF00;">16</span>)                  │          <span style="color: #00AF00;">0</span> │</span></span>
-<span><span class="co">## │ (<span style="color: #0087FF;">GlobalMaxPooling2D</span>)              │                             │            │</span></span>
-<span><span class="co">## └───────────────────────────────────┴─────────────────────────────┴────────────┘</span></span>
+<span><span class="co">## ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━┓</span></span>
+<span><span class="co">## ┃<span style="font-weight: bold;"> Layer (type)                    </span>┃<span style="font-weight: bold;"> Output Shape              </span>┃<span style="font-weight: bold;">    Param # </span>┃</span></span>
+<span><span class="co">## ┡━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━┩</span></span>
+<span><span class="co">## │ img (<span style="color: #0087FF;">InputLayer</span>)                │ (<span style="color: #00D7FF;">None</span>, <span style="color: #00AF00;">28</span>, <span style="color: #00AF00;">28</span>, <span style="color: #00AF00;">1</span>)         │          <span style="color: #00AF00;">0</span> │</span></span>
+<span><span class="co">## ├─────────────────────────────────┼───────────────────────────┼────────────┤</span></span>
+<span><span class="co">## │ conv2d_7 (<span style="color: #0087FF;">Conv2D</span>)               │ (<span style="color: #00D7FF;">None</span>, <span style="color: #00AF00;">26</span>, <span style="color: #00AF00;">26</span>, <span style="color: #00AF00;">16</span>)        │        <span style="color: #00AF00;">160</span> │</span></span>
+<span><span class="co">## ├─────────────────────────────────┼───────────────────────────┼────────────┤</span></span>
+<span><span class="co">## │ conv2d_6 (<span style="color: #0087FF;">Conv2D</span>)               │ (<span style="color: #00D7FF;">None</span>, <span style="color: #00AF00;">24</span>, <span style="color: #00AF00;">24</span>, <span style="color: #00AF00;">32</span>)        │      <span style="color: #00AF00;">4,640</span> │</span></span>
+<span><span class="co">## ├─────────────────────────────────┼───────────────────────────┼────────────┤</span></span>
+<span><span class="co">## │ max_pooling2d_1 (<span style="color: #0087FF;">MaxPooling2D</span>)  │ (<span style="color: #00D7FF;">None</span>, <span style="color: #00AF00;">8</span>, <span style="color: #00AF00;">8</span>, <span style="color: #00AF00;">32</span>)          │          <span style="color: #00AF00;">0</span> │</span></span>
+<span><span class="co">## ├─────────────────────────────────┼───────────────────────────┼────────────┤</span></span>
+<span><span class="co">## │ conv2d_5 (<span style="color: #0087FF;">Conv2D</span>)               │ (<span style="color: #00D7FF;">None</span>, <span style="color: #00AF00;">6</span>, <span style="color: #00AF00;">6</span>, <span style="color: #00AF00;">32</span>)          │      <span style="color: #00AF00;">9,248</span> │</span></span>
+<span><span class="co">## ├─────────────────────────────────┼───────────────────────────┼────────────┤</span></span>
+<span><span class="co">## │ conv2d_4 (<span style="color: #0087FF;">Conv2D</span>)               │ (<span style="color: #00D7FF;">None</span>, <span style="color: #00AF00;">4</span>, <span style="color: #00AF00;">4</span>, <span style="color: #00AF00;">16</span>)          │      <span style="color: #00AF00;">4,624</span> │</span></span>
+<span><span class="co">## ├─────────────────────────────────┼───────────────────────────┼────────────┤</span></span>
+<span><span class="co">## │ global_max_pooling2d_1          │ (<span style="color: #00D7FF;">None</span>, <span style="color: #00AF00;">16</span>)                │          <span style="color: #00AF00;">0</span> │</span></span>
+<span><span class="co">## │ (<span style="color: #0087FF;">GlobalMaxPooling2D</span>)            │                           │            │</span></span>
+<span><span class="co">## └─────────────────────────────────┴───────────────────────────┴────────────┘</span></span>
 <span><span class="co">## <span style="font-weight: bold;"> Total params: </span><span style="color: #00AF00;">18,672</span> (72.94 KB)</span></span>
 <span><span class="co">## <span style="font-weight: bold;"> Trainable params: </span><span style="color: #00AF00;">18,672</span> (72.94 KB)</span></span>
 <span><span class="co">## <span style="font-weight: bold;"> Non-trainable params: </span><span style="color: #00AF00;">0</span> (0.00 B)</span></span></code></pre>
-<div class="sourceCode" id="cb33"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb29"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">decoder_input</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/layer_input.html">layer_input</a></span><span class="op">(</span>shape <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">16</span><span class="op">)</span>, name <span class="op">=</span> <span class="st">"encoded_img"</span><span class="op">)</span></span>
 <span><span class="va">decoder_output</span> <span class="op">&lt;-</span> <span class="va">decoder_input</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span></span>
 <span>  <span class="fu"><a href="../reference/layer_reshape.html">layer_reshape</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">4</span>, <span class="fl">4</span>, <span class="fl">1</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span></span>
@@ -449,46 +445,47 @@ in two calls to obtain the autoencoder model:</p>
 <span><span class="va">decoder</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/keras_model.html">keras_model</a></span><span class="op">(</span><span class="va">decoder_input</span>, <span class="va">decoder_output</span>, name <span class="op">=</span> <span class="st">"decoder"</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary</a></span><span class="op">(</span><span class="va">decoder</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">## <span style="font-weight: bold;">Model: "decoder"</span></span></span>
-<span><span class="co">## ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━┓</span></span>
-<span><span class="co">## ┃<span style="font-weight: bold;"> Layer (type)                      </span>┃<span style="font-weight: bold;"> Output Shape                </span>┃<span style="font-weight: bold;">    Param # </span>┃</span></span>
-<span><span class="co">## ┡━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━┩</span></span>
-<span><span class="co">## │ encoded_img (<span style="color: #0087FF;">InputLayer</span>)          │ (<span style="color: #00D7FF;">None</span>, <span style="color: #00AF00;">16</span>)                  │          <span style="color: #00AF00;">0</span> │</span></span>
-<span><span class="co">## ├───────────────────────────────────┼─────────────────────────────┼────────────┤</span></span>
-<span><span class="co">## │ reshape_1 (<span style="color: #0087FF;">Reshape</span>)               │ (<span style="color: #00D7FF;">None</span>, <span style="color: #00AF00;">4</span>, <span style="color: #00AF00;">4</span>, <span style="color: #00AF00;">1</span>)             │          <span style="color: #00AF00;">0</span> │</span></span>
-<span><span class="co">## ├───────────────────────────────────┼─────────────────────────────┼────────────┤</span></span>
-<span><span class="co">## │ conv2d_transpose_7                │ (<span style="color: #00D7FF;">None</span>, <span style="color: #00AF00;">6</span>, <span style="color: #00AF00;">6</span>, <span style="color: #00AF00;">16</span>)            │        <span style="color: #00AF00;">160</span> │</span></span>
-<span><span class="co">## │ (<span style="color: #0087FF;">Conv2DTranspose</span>)                 │                             │            │</span></span>
-<span><span class="co">## ├───────────────────────────────────┼─────────────────────────────┼────────────┤</span></span>
-<span><span class="co">## │ conv2d_transpose_6                │ (<span style="color: #00D7FF;">None</span>, <span style="color: #00AF00;">8</span>, <span style="color: #00AF00;">8</span>, <span style="color: #00AF00;">32</span>)            │      <span style="color: #00AF00;">4,640</span> │</span></span>
-<span><span class="co">## │ (<span style="color: #0087FF;">Conv2DTranspose</span>)                 │                             │            │</span></span>
-<span><span class="co">## ├───────────────────────────────────┼─────────────────────────────┼────────────┤</span></span>
-<span><span class="co">## │ up_sampling2d_1 (<span style="color: #0087FF;">UpSampling2D</span>)    │ (<span style="color: #00D7FF;">None</span>, <span style="color: #00AF00;">24</span>, <span style="color: #00AF00;">24</span>, <span style="color: #00AF00;">32</span>)          │          <span style="color: #00AF00;">0</span> │</span></span>
-<span><span class="co">## ├───────────────────────────────────┼─────────────────────────────┼────────────┤</span></span>
-<span><span class="co">## │ conv2d_transpose_5                │ (<span style="color: #00D7FF;">None</span>, <span style="color: #00AF00;">26</span>, <span style="color: #00AF00;">26</span>, <span style="color: #00AF00;">16</span>)          │      <span style="color: #00AF00;">4,624</span> │</span></span>
-<span><span class="co">## │ (<span style="color: #0087FF;">Conv2DTranspose</span>)                 │                             │            │</span></span>
-<span><span class="co">## ├───────────────────────────────────┼─────────────────────────────┼────────────┤</span></span>
-<span><span class="co">## │ conv2d_transpose_4                │ (<span style="color: #00D7FF;">None</span>, <span style="color: #00AF00;">28</span>, <span style="color: #00AF00;">28</span>, <span style="color: #00AF00;">1</span>)           │        <span style="color: #00AF00;">145</span> │</span></span>
-<span><span class="co">## │ (<span style="color: #0087FF;">Conv2DTranspose</span>)                 │                             │            │</span></span>
-<span><span class="co">## └───────────────────────────────────┴─────────────────────────────┴────────────┘</span></span>
+<span><span class="co">## ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━┓</span></span>
+<span><span class="co">## ┃<span style="font-weight: bold;"> Layer (type)                    </span>┃<span style="font-weight: bold;"> Output Shape              </span>┃<span style="font-weight: bold;">    Param # </span>┃</span></span>
+<span><span class="co">## ┡━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━┩</span></span>
+<span><span class="co">## │ encoded_img (<span style="color: #0087FF;">InputLayer</span>)        │ (<span style="color: #00D7FF;">None</span>, <span style="color: #00AF00;">16</span>)                │          <span style="color: #00AF00;">0</span> │</span></span>
+<span><span class="co">## ├─────────────────────────────────┼───────────────────────────┼────────────┤</span></span>
+<span><span class="co">## │ reshape_1 (<span style="color: #0087FF;">Reshape</span>)             │ (<span style="color: #00D7FF;">None</span>, <span style="color: #00AF00;">4</span>, <span style="color: #00AF00;">4</span>, <span style="color: #00AF00;">1</span>)           │          <span style="color: #00AF00;">0</span> │</span></span>
+<span><span class="co">## ├─────────────────────────────────┼───────────────────────────┼────────────┤</span></span>
+<span><span class="co">## │ conv2d_transpose_7              │ (<span style="color: #00D7FF;">None</span>, <span style="color: #00AF00;">6</span>, <span style="color: #00AF00;">6</span>, <span style="color: #00AF00;">16</span>)          │        <span style="color: #00AF00;">160</span> │</span></span>
+<span><span class="co">## │ (<span style="color: #0087FF;">Conv2DTranspose</span>)               │                           │            │</span></span>
+<span><span class="co">## ├─────────────────────────────────┼───────────────────────────┼────────────┤</span></span>
+<span><span class="co">## │ conv2d_transpose_6              │ (<span style="color: #00D7FF;">None</span>, <span style="color: #00AF00;">8</span>, <span style="color: #00AF00;">8</span>, <span style="color: #00AF00;">32</span>)          │      <span style="color: #00AF00;">4,640</span> │</span></span>
+<span><span class="co">## │ (<span style="color: #0087FF;">Conv2DTranspose</span>)               │                           │            │</span></span>
+<span><span class="co">## ├─────────────────────────────────┼───────────────────────────┼────────────┤</span></span>
+<span><span class="co">## │ up_sampling2d_1 (<span style="color: #0087FF;">UpSampling2D</span>)  │ (<span style="color: #00D7FF;">None</span>, <span style="color: #00AF00;">24</span>, <span style="color: #00AF00;">24</span>, <span style="color: #00AF00;">32</span>)        │          <span style="color: #00AF00;">0</span> │</span></span>
+<span><span class="co">## ├─────────────────────────────────┼───────────────────────────┼────────────┤</span></span>
+<span><span class="co">## │ conv2d_transpose_5              │ (<span style="color: #00D7FF;">None</span>, <span style="color: #00AF00;">26</span>, <span style="color: #00AF00;">26</span>, <span style="color: #00AF00;">16</span>)        │      <span style="color: #00AF00;">4,624</span> │</span></span>
+<span><span class="co">## │ (<span style="color: #0087FF;">Conv2DTranspose</span>)               │                           │            │</span></span>
+<span><span class="co">## ├─────────────────────────────────┼───────────────────────────┼────────────┤</span></span>
+<span><span class="co">## │ conv2d_transpose_4              │ (<span style="color: #00D7FF;">None</span>, <span style="color: #00AF00;">28</span>, <span style="color: #00AF00;">28</span>, <span style="color: #00AF00;">1</span>)         │        <span style="color: #00AF00;">145</span> │</span></span>
+<span><span class="co">## │ (<span style="color: #0087FF;">Conv2DTranspose</span>)               │                           │            │</span></span>
+<span><span class="co">## └─────────────────────────────────┴───────────────────────────┴────────────┘</span></span>
 <span><span class="co">## <span style="font-weight: bold;"> Total params: </span><span style="color: #00AF00;">9,569</span> (37.38 KB)</span></span>
 <span><span class="co">## <span style="font-weight: bold;"> Trainable params: </span><span style="color: #00AF00;">9,569</span> (37.38 KB)</span></span>
 <span><span class="co">## <span style="font-weight: bold;"> Non-trainable params: </span><span style="color: #00AF00;">0</span> (0.00 B)</span></span></code></pre>
-<div class="sourceCode" id="cb35"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb31"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">autoencoder_input</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/layer_input.html">layer_input</a></span><span class="op">(</span>shape <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">28</span>, <span class="fl">28</span>, <span class="fl">1</span><span class="op">)</span>, name <span class="op">=</span> <span class="st">"img"</span><span class="op">)</span></span>
 <span><span class="va">encoded_img</span> <span class="op">&lt;-</span> <span class="fu">encoder</span><span class="op">(</span><span class="va">autoencoder_input</span><span class="op">)</span></span>
 <span><span class="va">decoded_img</span> <span class="op">&lt;-</span> <span class="fu">decoder</span><span class="op">(</span><span class="va">encoded_img</span><span class="op">)</span></span>
-<span><span class="va">autoencoder</span> <span class="op">=</span> <span class="fu"><a href="../reference/keras_model.html">keras_model</a></span><span class="op">(</span><span class="va">autoencoder_input</span>, <span class="va">decoded_img</span>, name<span class="op">=</span><span class="st">"autoencoder"</span><span class="op">)</span></span>
+<span><span class="va">autoencoder</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/keras_model.html">keras_model</a></span><span class="op">(</span><span class="va">autoencoder_input</span>, <span class="va">decoded_img</span>,</span>
+<span>                           name <span class="op">=</span> <span class="st">"autoencoder"</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary</a></span><span class="op">(</span><span class="va">autoencoder</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">## <span style="font-weight: bold;">Model: "autoencoder"</span></span></span>
-<span><span class="co">## ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━┓</span></span>
-<span><span class="co">## ┃<span style="font-weight: bold;"> Layer (type)                      </span>┃<span style="font-weight: bold;"> Output Shape                </span>┃<span style="font-weight: bold;">    Param # </span>┃</span></span>
-<span><span class="co">## ┡━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━┩</span></span>
-<span><span class="co">## │ img (<span style="color: #0087FF;">InputLayer</span>)                  │ (<span style="color: #00D7FF;">None</span>, <span style="color: #00AF00;">28</span>, <span style="color: #00AF00;">28</span>, <span style="color: #00AF00;">1</span>)           │          <span style="color: #00AF00;">0</span> │</span></span>
-<span><span class="co">## ├───────────────────────────────────┼─────────────────────────────┼────────────┤</span></span>
-<span><span class="co">## │ encoder (<span style="color: #0087FF;">Functional</span>)              │ (<span style="color: #00D7FF;">None</span>, <span style="color: #00AF00;">16</span>)                  │     <span style="color: #00AF00;">18,672</span> │</span></span>
-<span><span class="co">## ├───────────────────────────────────┼─────────────────────────────┼────────────┤</span></span>
-<span><span class="co">## │ decoder (<span style="color: #0087FF;">Functional</span>)              │ (<span style="color: #00D7FF;">None</span>, <span style="color: #00AF00;">28</span>, <span style="color: #00AF00;">28</span>, <span style="color: #00AF00;">1</span>)           │      <span style="color: #00AF00;">9,569</span> │</span></span>
-<span><span class="co">## └───────────────────────────────────┴─────────────────────────────┴────────────┘</span></span>
+<span><span class="co">## ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━┓</span></span>
+<span><span class="co">## ┃<span style="font-weight: bold;"> Layer (type)                    </span>┃<span style="font-weight: bold;"> Output Shape              </span>┃<span style="font-weight: bold;">    Param # </span>┃</span></span>
+<span><span class="co">## ┡━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━┩</span></span>
+<span><span class="co">## │ img (<span style="color: #0087FF;">InputLayer</span>)                │ (<span style="color: #00D7FF;">None</span>, <span style="color: #00AF00;">28</span>, <span style="color: #00AF00;">28</span>, <span style="color: #00AF00;">1</span>)         │          <span style="color: #00AF00;">0</span> │</span></span>
+<span><span class="co">## ├─────────────────────────────────┼───────────────────────────┼────────────┤</span></span>
+<span><span class="co">## │ encoder (<span style="color: #0087FF;">Functional</span>)            │ (<span style="color: #00D7FF;">None</span>, <span style="color: #00AF00;">16</span>)                │     <span style="color: #00AF00;">18,672</span> │</span></span>
+<span><span class="co">## ├─────────────────────────────────┼───────────────────────────┼────────────┤</span></span>
+<span><span class="co">## │ decoder (<span style="color: #0087FF;">Functional</span>)            │ (<span style="color: #00D7FF;">None</span>, <span style="color: #00AF00;">28</span>, <span style="color: #00AF00;">28</span>, <span style="color: #00AF00;">1</span>)         │      <span style="color: #00AF00;">9,569</span> │</span></span>
+<span><span class="co">## └─────────────────────────────────┴───────────────────────────┴────────────┘</span></span>
 <span><span class="co">## <span style="font-weight: bold;"> Total params: </span><span style="color: #00AF00;">28,241</span> (110.32 KB)</span></span>
 <span><span class="co">## <span style="font-weight: bold;"> Trainable params: </span><span style="color: #00AF00;">28,241</span> (110.32 KB)</span></span>
 <span><span class="co">## <span style="font-weight: bold;"> Non-trainable params: </span><span style="color: #00AF00;">0</span> (0.00 B)</span></span></code></pre>
@@ -497,10 +494,10 @@ sub-models (since a model is just like a layer). A common use case for
 model nesting is <em>ensembling</em>. For example, here’s how to
 ensemble a set of models into a single model that averages their
 predictions:</p>
-<div class="sourceCode" id="cb37"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb33"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">get_model</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="op">)</span> <span class="op">{</span></span>
 <span>  <span class="va">inputs</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/layer_input.html">layer_input</a></span><span class="op">(</span>shape <span class="op">=</span> <span class="fl">128</span><span class="op">)</span></span>
-<span>  <span class="va">outputs</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/layer_dense.html">layer_dense</a></span><span class="op">(</span><span class="va">inputs</span>, <span class="fl">1</span><span class="op">)</span></span>
+<span>  <span class="va">outputs</span> <span class="op">&lt;-</span> <span class="va">inputs</span> <span class="op">|&gt;</span> <span class="fu"><a href="../reference/layer_dense.html">layer_dense</a></span><span class="op">(</span><span class="fl">1</span><span class="op">)</span></span>
 <span>  <span class="fu"><a href="../reference/keras_model.html">keras_model</a></span><span class="op">(</span><span class="va">inputs</span>, <span class="va">outputs</span><span class="op">)</span></span>
 <span><span class="op">}</span></span>
 <span></span>
@@ -539,7 +536,7 @@ model will have three inputs:</p>
 the set of departments).</li>
 </ul>
 <p>You can build this model in a few lines with the functional API:</p>
-<div class="sourceCode" id="cb38"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb34"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">num_tags</span> <span class="op">&lt;-</span> <span class="fl">12</span>  <span class="co"># Number of unique issue tags</span></span>
 <span><span class="va">num_words</span> <span class="op">&lt;-</span></span>
 <span>  <span class="fl">10000</span>  <span class="co"># Size of vocabulary obtained when preprocessing text data</span></span>
@@ -579,15 +576,15 @@ the set of departments).</li>
 <span>  outputs <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>priority <span class="op">=</span> <span class="va">priority_pred</span>, department <span class="op">=</span> <span class="va">department_pred</span><span class="op">)</span></span>
 <span><span class="op">)</span></span></code></pre></div>
 <p>Now plot the model:</p>
-<div class="sourceCode" id="cb39"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb35"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">model</span>, show_shapes <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
 <div class="float">
-<img src="../../reference/figures/functional_api/unnamed-chunk-18-1.png" alt="plot of chunk unnamed-chunk-18"><div class="figcaption">plot of chunk unnamed-chunk-18</div>
+<img src="../../reference/figures/functional_api/unnamed-chunk-20-1.png" alt="plot of chunk unnamed-chunk-20"><div class="figcaption">plot of chunk unnamed-chunk-20</div>
 </div>
 <p>When compiling this model, you can assign different losses to each
 output. You can even assign different weights to each loss – to modulate
 their contribution to the total training loss.</p>
-<div class="sourceCode" id="cb40"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb36"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">model</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://generics.r-lib.org/reference/compile.html" class="external-link">compile</a></span><span class="op">(</span></span>
 <span>    optimizer <span class="op">=</span> <span class="fu"><a href="../reference/optimizer_rmsprop.html">optimizer_rmsprop</a></span><span class="op">(</span><span class="fl">1e-3</span><span class="op">)</span>,</span>
 <span>    loss <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span></span>
@@ -598,7 +595,7 @@ their contribution to the total training loss.</p>
 <span><span class="op">)</span></span></code></pre></div>
 <p>Since the output layers have different names, you could also specify
 the losses and loss weights with the corresponding layer names:</p>
-<div class="sourceCode" id="cb41"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb37"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">model</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://generics.r-lib.org/reference/compile.html" class="external-link">compile</a></span><span class="op">(</span></span>
 <span>    optimizer <span class="op">=</span> <span class="fu"><a href="../reference/optimizer_rmsprop.html">optimizer_rmsprop</a></span><span class="op">(</span><span class="fl">1e-3</span><span class="op">)</span>,</span>
 <span>    loss <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span></span>
@@ -609,7 +606,7 @@ the losses and loss weights with the corresponding layer names:</p>
 <span><span class="op">)</span></span></code></pre></div>
 <p>Train the model by passing lists of NumPy arrays of inputs and
 targets:</p>
-<div class="sourceCode" id="cb42"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb38"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Dummy input data</span></span>
 <span><span class="va">title_data</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/random_integer.html">random_integer</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1280</span>, <span class="fl">10</span><span class="op">)</span>, <span class="fl">0</span>, <span class="va">num_words</span><span class="op">)</span></span>
 <span><span class="va">body_data</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/random_integer.html">random_integer</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1280</span>, <span class="fl">100</span><span class="op">)</span>, <span class="fl">0</span>, <span class="va">num_words</span><span class="op">)</span></span>
@@ -626,9 +623,9 @@ targets:</p>
 <span>    batch_size<span class="op">=</span><span class="fl">32</span>,</span>
 <span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">## Epoch 1/2</span></span>
-<span><span class="co">## 40/40 - 2s - 58ms/step - loss: 0.3948</span></span>
+<span><span class="co">## 40/40 - 2s - 55ms/step - loss: 0.3948</span></span>
 <span><span class="co">## Epoch 2/2</span></span>
-<span><span class="co">## 40/40 - 1s - 16ms/step - loss: 0.1971</span></span></code></pre>
+<span><span class="co">## 40/40 - 1s - 17ms/step - loss: 0.1971</span></span></code></pre>
 <p>When calling fit with a <code>Dataset</code> object, it should yield
 either a list of lists like
 <code>list(list(title_data, body_data, tags_data), list(priority_targets, dept_targets))</code>
@@ -646,7 +643,7 @@ topologies – these are models with layers that are not connected
 sequentially, which the <code>Sequential</code> API cannot handle.</p>
 <p>A common use case for this is residual connections. Let’s build a toy
 ResNet model for CIFAR10 to demonstrate this:</p>
-<div class="sourceCode" id="cb44"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb40"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">inputs</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/layer_input.html">layer_input</a></span><span class="op">(</span>shape <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">32</span>, <span class="fl">32</span>, <span class="fl">3</span><span class="op">)</span>, name<span class="op">=</span><span class="st">"img"</span><span class="op">)</span></span>
 <span><span class="va">block_1_output</span> <span class="op">&lt;-</span> <span class="va">inputs</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span></span>
 <span>  <span class="fu"><a href="../reference/layer_conv_2d.html">layer_conv_2d</a></span><span class="op">(</span>filters <span class="op">=</span> <span class="fl">32</span>, kernel_size <span class="op">=</span> <span class="fl">3</span>, activation <span class="op">=</span> <span class="st">"relu"</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span></span>
@@ -673,56 +670,56 @@ ResNet model for CIFAR10 to demonstrate this:</p>
 <span><span class="va">model</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/keras_model.html">keras_model</a></span><span class="op">(</span><span class="va">inputs</span>, <span class="va">outputs</span>, name<span class="op">=</span><span class="st">"toy_resnet"</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary</a></span><span class="op">(</span><span class="va">model</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">## <span style="font-weight: bold;">Model: "toy_resnet"</span></span></span>
-<span><span class="co">## ┏━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━━━┓</span></span>
-<span><span class="co">## ┃<span style="font-weight: bold;"> Layer (type)          </span>┃<span style="font-weight: bold;"> Output Shape      </span>┃<span style="font-weight: bold;">  Param # </span>┃<span style="font-weight: bold;"> Connected to          </span>┃</span></span>
-<span><span class="co">## ┡━━━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━╇━━━━━━━━━━━━━━━━━━━━━━━┩</span></span>
-<span><span class="co">## │ img (<span style="color: #0087FF;">InputLayer</span>)      │ (<span style="color: #00D7FF;">None</span>, <span style="color: #00AF00;">32</span>, <span style="color: #00AF00;">32</span>, <span style="color: #00AF00;">3</span>) │        <span style="color: #00AF00;">0</span> │ -                     │</span></span>
-<span><span class="co">## ├───────────────────────┼───────────────────┼──────────┼───────────────────────┤</span></span>
-<span><span class="co">## │ conv2d_9 (<span style="color: #0087FF;">Conv2D</span>)     │ (<span style="color: #00D7FF;">None</span>, <span style="color: #00AF00;">30</span>, <span style="color: #00AF00;">30</span>,    │      <span style="color: #00AF00;">896</span> │ img[<span style="color: #00AF00;">0</span>][<span style="color: #00AF00;">0</span>]             │</span></span>
-<span><span class="co">## │                       │ <span style="color: #00AF00;">32</span>)               │          │                       │</span></span>
-<span><span class="co">## ├───────────────────────┼───────────────────┼──────────┼───────────────────────┤</span></span>
-<span><span class="co">## │ conv2d_8 (<span style="color: #0087FF;">Conv2D</span>)     │ (<span style="color: #00D7FF;">None</span>, <span style="color: #00AF00;">28</span>, <span style="color: #00AF00;">28</span>,    │   <span style="color: #00AF00;">18,496</span> │ conv2d_9[<span style="color: #00AF00;">0</span>][<span style="color: #00AF00;">0</span>]        │</span></span>
-<span><span class="co">## │                       │ <span style="color: #00AF00;">64</span>)               │          │                       │</span></span>
-<span><span class="co">## ├───────────────────────┼───────────────────┼──────────┼───────────────────────┤</span></span>
-<span><span class="co">## │ max_pooling2d_2       │ (<span style="color: #00D7FF;">None</span>, <span style="color: #00AF00;">9</span>, <span style="color: #00AF00;">9</span>, <span style="color: #00AF00;">64</span>)  │        <span style="color: #00AF00;">0</span> │ conv2d_8[<span style="color: #00AF00;">0</span>][<span style="color: #00AF00;">0</span>]        │</span></span>
-<span><span class="co">## │ (<span style="color: #0087FF;">MaxPooling2D</span>)        │                   │          │                       │</span></span>
-<span><span class="co">## ├───────────────────────┼───────────────────┼──────────┼───────────────────────┤</span></span>
-<span><span class="co">## │ conv2d_11 (<span style="color: #0087FF;">Conv2D</span>)    │ (<span style="color: #00D7FF;">None</span>, <span style="color: #00AF00;">9</span>, <span style="color: #00AF00;">9</span>, <span style="color: #00AF00;">32</span>)  │   <span style="color: #00AF00;">18,464</span> │ max_pooling2d_2[<span style="color: #00AF00;">0</span>][<span style="color: #00AF00;">0</span>] │</span></span>
-<span><span class="co">## ├───────────────────────┼───────────────────┼──────────┼───────────────────────┤</span></span>
-<span><span class="co">## │ conv2d_10 (<span style="color: #0087FF;">Conv2D</span>)    │ (<span style="color: #00D7FF;">None</span>, <span style="color: #00AF00;">9</span>, <span style="color: #00AF00;">9</span>, <span style="color: #00AF00;">64</span>)  │   <span style="color: #00AF00;">18,496</span> │ conv2d_11[<span style="color: #00AF00;">0</span>][<span style="color: #00AF00;">0</span>]       │</span></span>
-<span><span class="co">## ├───────────────────────┼───────────────────┼──────────┼───────────────────────┤</span></span>
-<span><span class="co">## │ add (<span style="color: #0087FF;">Add</span>)             │ (<span style="color: #00D7FF;">None</span>, <span style="color: #00AF00;">9</span>, <span style="color: #00AF00;">9</span>, <span style="color: #00AF00;">64</span>)  │        <span style="color: #00AF00;">0</span> │ conv2d_10[<span style="color: #00AF00;">0</span>][<span style="color: #00AF00;">0</span>],      │</span></span>
-<span><span class="co">## │                       │                   │          │ max_pooling2d_2[<span style="color: #00AF00;">0</span>][<span style="color: #00AF00;">0</span>] │</span></span>
-<span><span class="co">## ├───────────────────────┼───────────────────┼──────────┼───────────────────────┤</span></span>
-<span><span class="co">## │ conv2d_13 (<span style="color: #0087FF;">Conv2D</span>)    │ (<span style="color: #00D7FF;">None</span>, <span style="color: #00AF00;">9</span>, <span style="color: #00AF00;">9</span>, <span style="color: #00AF00;">64</span>)  │   <span style="color: #00AF00;">36,928</span> │ add[<span style="color: #00AF00;">0</span>][<span style="color: #00AF00;">0</span>]             │</span></span>
-<span><span class="co">## ├───────────────────────┼───────────────────┼──────────┼───────────────────────┤</span></span>
-<span><span class="co">## │ conv2d_12 (<span style="color: #0087FF;">Conv2D</span>)    │ (<span style="color: #00D7FF;">None</span>, <span style="color: #00AF00;">9</span>, <span style="color: #00AF00;">9</span>, <span style="color: #00AF00;">64</span>)  │   <span style="color: #00AF00;">36,928</span> │ conv2d_13[<span style="color: #00AF00;">0</span>][<span style="color: #00AF00;">0</span>]       │</span></span>
-<span><span class="co">## ├───────────────────────┼───────────────────┼──────────┼───────────────────────┤</span></span>
-<span><span class="co">## │ add_1 (<span style="color: #0087FF;">Add</span>)           │ (<span style="color: #00D7FF;">None</span>, <span style="color: #00AF00;">9</span>, <span style="color: #00AF00;">9</span>, <span style="color: #00AF00;">64</span>)  │        <span style="color: #00AF00;">0</span> │ conv2d_12[<span style="color: #00AF00;">0</span>][<span style="color: #00AF00;">0</span>],      │</span></span>
-<span><span class="co">## │                       │                   │          │ add[<span style="color: #00AF00;">0</span>][<span style="color: #00AF00;">0</span>]             │</span></span>
-<span><span class="co">## ├───────────────────────┼───────────────────┼──────────┼───────────────────────┤</span></span>
-<span><span class="co">## │ conv2d_14 (<span style="color: #0087FF;">Conv2D</span>)    │ (<span style="color: #00D7FF;">None</span>, <span style="color: #00AF00;">7</span>, <span style="color: #00AF00;">7</span>, <span style="color: #00AF00;">64</span>)  │   <span style="color: #00AF00;">36,928</span> │ add_1[<span style="color: #00AF00;">0</span>][<span style="color: #00AF00;">0</span>]           │</span></span>
-<span><span class="co">## ├───────────────────────┼───────────────────┼──────────┼───────────────────────┤</span></span>
-<span><span class="co">## │ global_average_pooli… │ (<span style="color: #00D7FF;">None</span>, <span style="color: #00AF00;">64</span>)        │        <span style="color: #00AF00;">0</span> │ conv2d_14[<span style="color: #00AF00;">0</span>][<span style="color: #00AF00;">0</span>]       │</span></span>
-<span><span class="co">## │ (<span style="color: #0087FF;">GlobalAveragePoolin…</span> │                   │          │                       │</span></span>
-<span><span class="co">## ├───────────────────────┼───────────────────┼──────────┼───────────────────────┤</span></span>
-<span><span class="co">## │ dense_7 (<span style="color: #0087FF;">Dense</span>)       │ (<span style="color: #00D7FF;">None</span>, <span style="color: #00AF00;">256</span>)       │   <span style="color: #00AF00;">16,640</span> │ global_average_pooli… │</span></span>
-<span><span class="co">## ├───────────────────────┼───────────────────┼──────────┼───────────────────────┤</span></span>
-<span><span class="co">## │ dropout (<span style="color: #0087FF;">Dropout</span>)     │ (<span style="color: #00D7FF;">None</span>, <span style="color: #00AF00;">256</span>)       │        <span style="color: #00AF00;">0</span> │ dense_7[<span style="color: #00AF00;">0</span>][<span style="color: #00AF00;">0</span>]         │</span></span>
-<span><span class="co">## ├───────────────────────┼───────────────────┼──────────┼───────────────────────┤</span></span>
-<span><span class="co">## │ dense_6 (<span style="color: #0087FF;">Dense</span>)       │ (<span style="color: #00D7FF;">None</span>, <span style="color: #00AF00;">10</span>)        │    <span style="color: #00AF00;">2,570</span> │ dropout[<span style="color: #00AF00;">0</span>][<span style="color: #00AF00;">0</span>]         │</span></span>
-<span><span class="co">## └───────────────────────┴───────────────────┴──────────┴───────────────────────┘</span></span>
+<span><span class="co">## ┏━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━━┓</span></span>
+<span><span class="co">## ┃<span style="font-weight: bold;"> Layer (type)        </span>┃<span style="font-weight: bold;"> Output Shape      </span>┃<span style="font-weight: bold;"> Param # </span>┃<span style="font-weight: bold;"> Connected to         </span>┃</span></span>
+<span><span class="co">## ┡━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━╇━━━━━━━━━━━━━━━━━━━━━━┩</span></span>
+<span><span class="co">## │ img (<span style="color: #0087FF;">InputLayer</span>)    │ (<span style="color: #00D7FF;">None</span>, <span style="color: #00AF00;">32</span>, <span style="color: #00AF00;">32</span>, <span style="color: #00AF00;">3</span>) │       <span style="color: #00AF00;">0</span> │ -                    │</span></span>
+<span><span class="co">## ├─────────────────────┼───────────────────┼─────────┼──────────────────────┤</span></span>
+<span><span class="co">## │ conv2d_9 (<span style="color: #0087FF;">Conv2D</span>)   │ (<span style="color: #00D7FF;">None</span>, <span style="color: #00AF00;">30</span>, <span style="color: #00AF00;">30</span>,    │     <span style="color: #00AF00;">896</span> │ img[<span style="color: #00AF00;">0</span>][<span style="color: #00AF00;">0</span>]            │</span></span>
+<span><span class="co">## │                     │ <span style="color: #00AF00;">32</span>)               │         │                      │</span></span>
+<span><span class="co">## ├─────────────────────┼───────────────────┼─────────┼──────────────────────┤</span></span>
+<span><span class="co">## │ conv2d_8 (<span style="color: #0087FF;">Conv2D</span>)   │ (<span style="color: #00D7FF;">None</span>, <span style="color: #00AF00;">28</span>, <span style="color: #00AF00;">28</span>,    │  <span style="color: #00AF00;">18,496</span> │ conv2d_9[<span style="color: #00AF00;">0</span>][<span style="color: #00AF00;">0</span>]       │</span></span>
+<span><span class="co">## │                     │ <span style="color: #00AF00;">64</span>)               │         │                      │</span></span>
+<span><span class="co">## ├─────────────────────┼───────────────────┼─────────┼──────────────────────┤</span></span>
+<span><span class="co">## │ max_pooling2d_2     │ (<span style="color: #00D7FF;">None</span>, <span style="color: #00AF00;">9</span>, <span style="color: #00AF00;">9</span>, <span style="color: #00AF00;">64</span>)  │       <span style="color: #00AF00;">0</span> │ conv2d_8[<span style="color: #00AF00;">0</span>][<span style="color: #00AF00;">0</span>]       │</span></span>
+<span><span class="co">## │ (<span style="color: #0087FF;">MaxPooling2D</span>)      │                   │         │                      │</span></span>
+<span><span class="co">## ├─────────────────────┼───────────────────┼─────────┼──────────────────────┤</span></span>
+<span><span class="co">## │ conv2d_11 (<span style="color: #0087FF;">Conv2D</span>)  │ (<span style="color: #00D7FF;">None</span>, <span style="color: #00AF00;">9</span>, <span style="color: #00AF00;">9</span>, <span style="color: #00AF00;">32</span>)  │  <span style="color: #00AF00;">18,464</span> │ max_pooling2d_2[<span style="color: #00AF00;">0</span>][<span style="color: #00AF00;">…</span> │</span></span>
+<span><span class="co">## ├─────────────────────┼───────────────────┼─────────┼──────────────────────┤</span></span>
+<span><span class="co">## │ conv2d_10 (<span style="color: #0087FF;">Conv2D</span>)  │ (<span style="color: #00D7FF;">None</span>, <span style="color: #00AF00;">9</span>, <span style="color: #00AF00;">9</span>, <span style="color: #00AF00;">64</span>)  │  <span style="color: #00AF00;">18,496</span> │ conv2d_11[<span style="color: #00AF00;">0</span>][<span style="color: #00AF00;">0</span>]      │</span></span>
+<span><span class="co">## ├─────────────────────┼───────────────────┼─────────┼──────────────────────┤</span></span>
+<span><span class="co">## │ add (<span style="color: #0087FF;">Add</span>)           │ (<span style="color: #00D7FF;">None</span>, <span style="color: #00AF00;">9</span>, <span style="color: #00AF00;">9</span>, <span style="color: #00AF00;">64</span>)  │       <span style="color: #00AF00;">0</span> │ conv2d_10[<span style="color: #00AF00;">0</span>][<span style="color: #00AF00;">0</span>],     │</span></span>
+<span><span class="co">## │                     │                   │         │ max_pooling2d_2[<span style="color: #00AF00;">0</span>][<span style="color: #00AF00;">…</span> │</span></span>
+<span><span class="co">## ├─────────────────────┼───────────────────┼─────────┼──────────────────────┤</span></span>
+<span><span class="co">## │ conv2d_13 (<span style="color: #0087FF;">Conv2D</span>)  │ (<span style="color: #00D7FF;">None</span>, <span style="color: #00AF00;">9</span>, <span style="color: #00AF00;">9</span>, <span style="color: #00AF00;">64</span>)  │  <span style="color: #00AF00;">36,928</span> │ add[<span style="color: #00AF00;">0</span>][<span style="color: #00AF00;">0</span>]            │</span></span>
+<span><span class="co">## ├─────────────────────┼───────────────────┼─────────┼──────────────────────┤</span></span>
+<span><span class="co">## │ conv2d_12 (<span style="color: #0087FF;">Conv2D</span>)  │ (<span style="color: #00D7FF;">None</span>, <span style="color: #00AF00;">9</span>, <span style="color: #00AF00;">9</span>, <span style="color: #00AF00;">64</span>)  │  <span style="color: #00AF00;">36,928</span> │ conv2d_13[<span style="color: #00AF00;">0</span>][<span style="color: #00AF00;">0</span>]      │</span></span>
+<span><span class="co">## ├─────────────────────┼───────────────────┼─────────┼──────────────────────┤</span></span>
+<span><span class="co">## │ add_1 (<span style="color: #0087FF;">Add</span>)         │ (<span style="color: #00D7FF;">None</span>, <span style="color: #00AF00;">9</span>, <span style="color: #00AF00;">9</span>, <span style="color: #00AF00;">64</span>)  │       <span style="color: #00AF00;">0</span> │ conv2d_12[<span style="color: #00AF00;">0</span>][<span style="color: #00AF00;">0</span>],     │</span></span>
+<span><span class="co">## │                     │                   │         │ add[<span style="color: #00AF00;">0</span>][<span style="color: #00AF00;">0</span>]            │</span></span>
+<span><span class="co">## ├─────────────────────┼───────────────────┼─────────┼──────────────────────┤</span></span>
+<span><span class="co">## │ conv2d_14 (<span style="color: #0087FF;">Conv2D</span>)  │ (<span style="color: #00D7FF;">None</span>, <span style="color: #00AF00;">7</span>, <span style="color: #00AF00;">7</span>, <span style="color: #00AF00;">64</span>)  │  <span style="color: #00AF00;">36,928</span> │ add_1[<span style="color: #00AF00;">0</span>][<span style="color: #00AF00;">0</span>]          │</span></span>
+<span><span class="co">## ├─────────────────────┼───────────────────┼─────────┼──────────────────────┤</span></span>
+<span><span class="co">## │ global_average_poo… │ (<span style="color: #00D7FF;">None</span>, <span style="color: #00AF00;">64</span>)        │       <span style="color: #00AF00;">0</span> │ conv2d_14[<span style="color: #00AF00;">0</span>][<span style="color: #00AF00;">0</span>]      │</span></span>
+<span><span class="co">## │ (<span style="color: #0087FF;">GlobalAveragePool…</span> │                   │         │                      │</span></span>
+<span><span class="co">## ├─────────────────────┼───────────────────┼─────────┼──────────────────────┤</span></span>
+<span><span class="co">## │ dense_7 (<span style="color: #0087FF;">Dense</span>)     │ (<span style="color: #00D7FF;">None</span>, <span style="color: #00AF00;">256</span>)       │  <span style="color: #00AF00;">16,640</span> │ global_average_pool… │</span></span>
+<span><span class="co">## ├─────────────────────┼───────────────────┼─────────┼──────────────────────┤</span></span>
+<span><span class="co">## │ dropout (<span style="color: #0087FF;">Dropout</span>)   │ (<span style="color: #00D7FF;">None</span>, <span style="color: #00AF00;">256</span>)       │       <span style="color: #00AF00;">0</span> │ dense_7[<span style="color: #00AF00;">0</span>][<span style="color: #00AF00;">0</span>]        │</span></span>
+<span><span class="co">## ├─────────────────────┼───────────────────┼─────────┼──────────────────────┤</span></span>
+<span><span class="co">## │ dense_6 (<span style="color: #0087FF;">Dense</span>)     │ (<span style="color: #00D7FF;">None</span>, <span style="color: #00AF00;">10</span>)        │   <span style="color: #00AF00;">2,570</span> │ dropout[<span style="color: #00AF00;">0</span>][<span style="color: #00AF00;">0</span>]        │</span></span>
+<span><span class="co">## └─────────────────────┴───────────────────┴─────────┴──────────────────────┘</span></span>
 <span><span class="co">## <span style="font-weight: bold;"> Total params: </span><span style="color: #00AF00;">186,346</span> (727.91 KB)</span></span>
 <span><span class="co">## <span style="font-weight: bold;"> Trainable params: </span><span style="color: #00AF00;">186,346</span> (727.91 KB)</span></span>
 <span><span class="co">## <span style="font-weight: bold;"> Non-trainable params: </span><span style="color: #00AF00;">0</span> (0.00 B)</span></span></code></pre>
 <p>Plot the model:</p>
-<div class="sourceCode" id="cb46"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb42"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">model</span>, show_shapes <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
 <div class="float">
-<img src="../../reference/figures/functional_api/unnamed-chunk-23-1.png" alt="plot of chunk unnamed-chunk-23"><div class="figcaption">plot of chunk unnamed-chunk-23</div>
+<img src="../../reference/figures/functional_api/unnamed-chunk-25-1.png" alt="plot of chunk unnamed-chunk-25"><div class="figcaption">plot of chunk unnamed-chunk-25</div>
 </div>
 <p>Now train the model:</p>
-<div class="sourceCode" id="cb47"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb43"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="va">x_train</span>, <span class="va">y_train</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="va">x_test</span>, <span class="va">y_test</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="../reference/multi-assign.html">%&lt;-%</a></span> <span class="fu"><a href="../reference/dataset_cifar10.html">dataset_cifar10</a></span><span class="op">(</span><span class="op">)</span></span>
 <span></span>
 <span><span class="va">x_train</span> <span class="op">&lt;-</span> <span class="va">x_train</span> <span class="op">/</span> <span class="fl">255.0</span></span>
@@ -743,7 +740,7 @@ ResNet model for CIFAR10 to demonstrate this:</p>
 <span>    epochs<span class="op">=</span><span class="fl">1</span>,</span>
 <span>    validation_split<span class="op">=</span><span class="fl">0.2</span></span>
 <span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">## 13/13 - 2s - 119ms/step - acc: 0.1200 - loss: 2.3110 - val_acc: 0.1150 - val_loss: 2.3192</span></span></code></pre>
+<pre><code><span><span class="co">## 13/13 - 1s - 109ms/step - acc: 0.1200 - loss: 2.3110 - val_acc: 0.1150 - val_loss: 2.3192</span></span></code></pre>
 </div>
 </div>
 <div class="section level2">
@@ -762,7 +759,7 @@ all inputs that pass through the shared layer.</p>
 <p>To share a layer in the functional API, call the same layer instance
 multiple times. For instance, here’s an <code>Embedding</code> layer
 shared across two different text inputs:</p>
-<div class="sourceCode" id="cb49"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb45"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Embedding for 1000 unique words mapped to 128-dimensional vectors</span></span>
 <span><span class="va">shared_embedding</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/layer_embedding.html">layer_embedding</a></span><span class="op">(</span>input_dim <span class="op">=</span> <span class="fl">1000</span>, output_dim <span class="op">=</span> <span class="fl">128</span><span class="op">)</span></span>
 <span></span>
@@ -787,15 +784,15 @@ layers (“nodes” in the graph) and reuse them elsewhere – which is very
 useful for something like feature extraction.</p>
 <p>Let’s look at an example. This is a VGG19 model with weights
 pretrained on ImageNet:</p>
-<div class="sourceCode" id="cb50"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb46"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">vgg19</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/application_vgg19.html">application_vgg19</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
 <p>And these are the intermediate activations of the model, obtained by
 querying the graph data structure:</p>
-<div class="sourceCode" id="cb51"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb47"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">features_list</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/lapply.html" class="external-link">lapply</a></span><span class="op">(</span><span class="va">vgg19</span><span class="op">$</span><span class="va">layers</span>, <span class="kw">function</span><span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="va">x</span><span class="op">$</span><span class="va">output</span><span class="op">)</span></span></code></pre></div>
 <p>Use these features to create a new feature-extraction model that
 returns the values of the intermediate layer activations:</p>
-<div class="sourceCode" id="cb52"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb48"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">feat_extraction_model</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/keras_model.html">keras_model</a></span><span class="op">(</span>inputs <span class="op">=</span> <span class="va">vgg19</span><span class="op">$</span><span class="va">input</span>, outputs <span class="op">=</span> <span class="va">features_list</span><span class="op">)</span></span>
 <span></span>
 <span><span class="va">img</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/random_normal.html">random_normal</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">224</span>, <span class="fl">224</span>, <span class="fl">3</span><span class="op">)</span><span class="op">)</span></span>
@@ -838,9 +835,9 @@ layer.</li>
 <p>To learn more about creating layers from scratch, read <a href="/guides/making_new_layers_and_models_via_subclassing">custom
 layers and models</a> guide.</p>
 <p>The following is a basic implementation of
-<code>keras.layers.Dense</code>:</p>
-<div class="sourceCode" id="cb53"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">custom_dense</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/Layer.html">new_layer_class</a></span><span class="op">(</span></span>
+<code><a href="../reference/layer_dense.html">layer_dense()</a></code>:</p>
+<div class="sourceCode" id="cb49"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">custom_dense</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/Layer.html">Layer</a></span><span class="op">(</span></span>
 <span>  <span class="st">"CustomDense"</span>,</span>
 <span>  initialize <span class="op">=</span> <span class="kw">function</span><span class="op">(</span><span class="va">units</span> <span class="op">=</span> <span class="fl">32</span><span class="op">)</span> <span class="op">{</span></span>
 <span>    <span class="va">super</span><span class="op">$</span><span class="fu">initialize</span><span class="op">(</span><span class="op">)</span></span>
@@ -864,19 +861,20 @@ layers and models</a> guide.</p>
 <span><span class="op">)</span></span>
 <span></span>
 <span><span class="va">inputs</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/layer_input.html">layer_input</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">4</span><span class="op">)</span><span class="op">)</span></span>
-<span><span class="va">outputs</span> <span class="op">=</span> <span class="fu">custom_dense</span><span class="op">(</span><span class="va">inputs</span>, <span class="fl">10</span><span class="op">)</span></span>
+<span><span class="va">outputs</span> <span class="op">&lt;-</span> <span class="fu">custom_dense</span><span class="op">(</span><span class="va">inputs</span>, <span class="fl">10</span><span class="op">)</span></span>
 <span></span>
 <span><span class="va">model</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/keras_model.html">keras_model</a></span><span class="op">(</span><span class="va">inputs</span>, <span class="va">outputs</span><span class="op">)</span></span></code></pre></div>
 <p>For serialization support in your custom layer, define a
 <code><a href="../reference/get_config.html">get_config()</a></code> method that returns the constructor arguments
 of the layer instance:</p>
-<div class="sourceCode" id="cb54"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">custom_dense</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/Layer.html">new_layer_class</a></span><span class="op">(</span></span>
-<span>  <span class="st">"CustomDense"</span>,</span>
+<div class="sourceCode" id="cb50"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">custom_dense</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/Layer.html">Layer</a></span><span class="op">(</span><span class="st">"CustomDense"</span>,</span>
+<span></span>
 <span>  initialize <span class="op">=</span> <span class="kw">function</span><span class="op">(</span><span class="va">units</span> <span class="op">=</span> <span class="fl">32</span>, <span class="va">...</span><span class="op">)</span> <span class="op">{</span></span>
 <span>    <span class="va">super</span><span class="op">$</span><span class="fu">initialize</span><span class="op">(</span><span class="op">)</span></span>
 <span>    <span class="va">self</span><span class="op">$</span><span class="va">units</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/integer.html" class="external-link">as.integer</a></span><span class="op">(</span><span class="va">units</span><span class="op">)</span></span>
 <span>  <span class="op">}</span>,</span>
+<span></span>
 <span>  build <span class="op">=</span> <span class="kw">function</span><span class="op">(</span><span class="va">input_shape</span><span class="op">)</span> <span class="op">{</span></span>
 <span>    <span class="va">self</span><span class="op">$</span><span class="va">w</span> <span class="op">&lt;-</span> <span class="va">self</span><span class="op">$</span><span class="fu">add_weight</span><span class="op">(</span></span>
 <span>      shape <span class="op">=</span> <span class="fu"><a href="../reference/shape.html">shape</a></span><span class="op">(</span><span class="va">input_shape</span><span class="op">[[</span><span class="fl">2</span><span class="op">]</span><span class="op">]</span>, <span class="va">self</span><span class="op">$</span><span class="va">units</span><span class="op">)</span>,</span>
@@ -889,33 +887,28 @@ of the layer instance:</p>
 <span>      trainable <span class="op">=</span> <span class="cn">TRUE</span></span>
 <span>    <span class="op">)</span></span>
 <span>  <span class="op">}</span>,</span>
+<span></span>
 <span>  call <span class="op">=</span> <span class="kw">function</span><span class="op">(</span><span class="va">inputs</span><span class="op">)</span> <span class="op">{</span></span>
 <span>    <span class="fu"><a href="../reference/op_matmul.html">op_matmul</a></span><span class="op">(</span><span class="va">inputs</span>, <span class="va">self</span><span class="op">$</span><span class="va">w</span><span class="op">)</span> <span class="op">+</span> <span class="va">self</span><span class="op">$</span><span class="va">b</span></span>
 <span>  <span class="op">}</span>,</span>
+<span></span>
 <span>  get_config <span class="op">=</span> <span class="kw">function</span><span class="op">(</span><span class="op">)</span> <span class="op">{</span></span>
 <span>    <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>units <span class="op">=</span> <span class="va">self</span><span class="op">$</span><span class="va">units</span><span class="op">)</span></span>
 <span>  <span class="op">}</span></span>
 <span><span class="op">)</span></span>
 <span></span>
 <span><span class="va">inputs</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/layer_input.html">layer_input</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">4</span><span class="op">)</span><span class="op">)</span></span>
-<span><span class="va">outputs</span> <span class="op">=</span> <span class="fu">custom_dense</span><span class="op">(</span><span class="va">inputs</span>, <span class="fl">10</span><span class="op">)</span></span>
+<span><span class="va">outputs</span> <span class="op">&lt;-</span> <span class="fu">custom_dense</span><span class="op">(</span><span class="va">inputs</span>, <span class="fl">10</span><span class="op">)</span></span>
 <span></span>
 <span><span class="va">model</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/keras_model.html">keras_model</a></span><span class="op">(</span><span class="va">inputs</span>, <span class="va">outputs</span><span class="op">)</span></span>
 <span><span class="va">config</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/get_config.html">get_config</a></span><span class="op">(</span><span class="va">model</span><span class="op">)</span></span>
 <span></span>
 <span><span class="va">new_model</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/get_config.html">from_config</a></span><span class="op">(</span><span class="va">config</span>, custom_objects<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>CustomDense<span class="op">=</span><span class="va">custom_dense</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">## Could not deserialize class 'CustomDense' because its parent module</span></span>
-<span><span class="co">## &lt;r-globalenv&gt; cannot be imported. Full object config: {'module':</span></span>
-<span><span class="co">## '&lt;r-globalenv&gt;', 'class_name': 'CustomDense', 'config': {'units': 10},</span></span>
-<span><span class="co">## 'registered_name': 'CustomDense', 'build_config': {'input_shape': [None, 4]},</span></span>
-<span><span class="co">## 'name': 'custom_dense_1', 'inbound_nodes': [{'args': [{'class_name':</span></span>
-<span><span class="co">## '__keras_tensor__', 'config': {'shape': [None, 4], 'dtype': 'float32',</span></span>
-<span><span class="co">## 'keras_history': ['input_layer_10', 0, 0]}}], 'kwargs': {}}]}</span></span></code></pre>
 <p>Optionally, implement the class method
 <code>from_config(cls, config)</code> which is used when recreating a
 layer instance given its config dictionary. The default implementation
 of <code>from_config</code> is:</p>
-<div class="sourceCode" id="cb56"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb51"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">from_config</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">cls</span>, <span class="va">config</span><span class="op">)</span> <span class="op">{</span></span>
 <span>  <span class="fu"><a href="https://rdrr.io/r/base/do.call.html" class="external-link">do.call</a></span><span class="op">(</span><span class="va">cls</span>, <span class="va">config</span><span class="op">)</span></span>
 <span><span class="op">}</span></span></code></pre></div>
@@ -940,21 +933,21 @@ are Symbolic and Imperative APIs in TensorFlow 2.0?</a>.</p>
 </h3>
 <p>The following properties are also true for Sequential models (which
 are also data structures), but are not true for subclassed models (which
-are Python bytecode, not data structures).</p>
+are R and Python (byte)code, not data structures).</p>
 <div class="section level4">
 <h4 id="less-verbose">Less verbose<a class="anchor" aria-label="anchor" href="#less-verbose"></a>
 </h4>
 <p>There is no <code>super$initialize(...)</code>, no
 <code>call = function(self, ...):</code>, etc.</p>
 <p>Compare:</p>
-<div class="sourceCode" id="cb57"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb52"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">inputs</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/layer_input.html">layer_input</a></span><span class="op">(</span>shape<span class="op">=</span><span class="fu"><a href="../reference/shape.html">shape</a></span><span class="op">(</span><span class="fl">32</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="va">outputs</span> <span class="op">&lt;-</span> <span class="va">inputs</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span></span>
 <span>  <span class="fu"><a href="../reference/layer_dense.html">layer_dense</a></span><span class="op">(</span><span class="fl">64</span>, activation <span class="op">=</span> <span class="st">"relu"</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span></span>
 <span>  <span class="fu"><a href="../reference/layer_dense.html">layer_dense</a></span><span class="op">(</span><span class="fl">10</span><span class="op">)</span></span>
 <span><span class="va">mlp</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/keras_model.html">keras_model</a></span><span class="op">(</span><span class="va">inputs</span>, <span class="va">outputs</span><span class="op">)</span></span></code></pre></div>
 <p>With the subclassed version:</p>
-<div class="sourceCode" id="cb58"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb53"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">MLP</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/new-classes.html">new_model_class</a></span><span class="op">(</span></span>
 <span>  <span class="st">"MLP"</span>,</span>
 <span>  initialize <span class="op">=</span> <span class="kw">function</span><span class="op">(</span><span class="va">...</span><span class="op">)</span> <span class="op">{</span></span>
@@ -969,7 +962,7 @@ are Python bytecode, not data structures).</p>
 <span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># Instantiate the model.</span></span>
-<span><span class="va">mlp</span> <span class="op">=</span> <span class="fu">MLP</span><span class="op">(</span><span class="op">)</span></span>
+<span><span class="va">mlp</span> <span class="op">&lt;-</span> <span class="fu">MLP</span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="co"># Necessary to create the model's state.</span></span>
 <span><span class="co"># The model doesn't have a state until it's called at least once.</span></span>
 <span><span class="va">out</span> <span class="op">&lt;-</span> <span class="fu">mlp</span><span class="op">(</span><span class="fu"><a href="../reference/op_zeros.html">op_zeros</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">32</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
@@ -992,7 +985,7 @@ time. This is similar to type checking in a compiler.</p>
 <p>You can plot the model as a graph, and you can easily access
 intermediate nodes in this graph. For example, to extract and reuse the
 activations of intermediate layers (as seen in a previous example):</p>
-<div class="sourceCode" id="cb59"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb54"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">features_list</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/lapply.html" class="external-link">lapply</a></span><span class="op">(</span><span class="va">vgg19</span><span class="op">$</span><span class="va">layers</span>, <span class="kw">function</span><span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="va">x</span><span class="op">$</span><span class="va">output</span><span class="op">)</span></span>
 <span><span class="va">feat_extraction_model</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/keras_model.html">keras_model</a></span><span class="op">(</span>inputs <span class="op">=</span> <span class="va">vgg19</span><span class="op">$</span><span class="va">input</span>, outputs <span class="op">=</span> <span class="va">features_list</span><span class="op">)</span></span></code></pre></div>
 </div>
@@ -1032,7 +1025,7 @@ whether they’re <code>Sequential</code> models, functional models, or
 subclassed models that are written from scratch.</p>
 <p>You can always use a functional model or <code>Sequential</code>
 model as part of a subclassed model or layer:</p>
-<div class="sourceCode" id="cb60"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb55"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">units</span> <span class="op">&lt;-</span> <span class="fl">32</span></span>
 <span><span class="va">timesteps</span> <span class="op">&lt;-</span> <span class="fl">10</span></span>
 <span><span class="va">input_dim</span> <span class="op">&lt;-</span> <span class="fl">5</span></span>
@@ -1097,13 +1090,13 @@ your custom Layer or model, the functional models you create will still
 be serializable and cloneable.</p>
 <p>Here’s a quick example of a custom RNN, written from scratch, being
 used in a functional model:</p>
-<div class="sourceCode" id="cb61"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb56"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">units</span> <span class="op">&lt;-</span> <span class="fl">32</span></span>
 <span><span class="va">timesteps</span> <span class="op">&lt;-</span> <span class="fl">10</span></span>
 <span><span class="va">input_dim</span> <span class="op">&lt;-</span> <span class="fl">5</span></span>
 <span><span class="va">batch_size</span> <span class="op">&lt;-</span> <span class="fl">16</span></span>
 <span></span>
-<span><span class="va">custom_rnn</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/Layer.html">new_layer_class</a></span><span class="op">(</span></span>
+<span><span class="va">custom_rnn</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/Layer.html">Layer</a></span><span class="op">(</span></span>
 <span>  <span class="st">"custom_rnn"</span>,</span>
 <span>  initialize <span class="op">=</span> <span class="kw">function</span><span class="op">(</span><span class="va">...</span><span class="op">)</span> <span class="op">{</span></span>
 <span>    <span class="va">super</span><span class="op">$</span><span class="fu">initialize</span><span class="op">(</span><span class="va">...</span><span class="op">)</span></span>
@@ -1130,15 +1123,13 @@ used in a functional model:</p>
 <span><span class="co"># Note that you specify a static batch size for the inputs with the `batch_shape`</span></span>
 <span><span class="co"># arg, because the inner computation of `custom_rnn` requires a static batch size</span></span>
 <span><span class="co"># (when you create the `state` zeros tensor).</span></span>
-<span><span class="va">inputs</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/layer_input.html">layer_input</a></span><span class="op">(</span>batch_shape <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/integer.html" class="external-link">as.integer</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="va">batch_size</span>, <span class="va">timesteps</span>, <span class="va">input_dim</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="va">inputs</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/layer_input.html">layer_input</a></span><span class="op">(</span>batch_shape <span class="op">=</span> <span class="fu"><a href="../reference/shape.html">shape</a></span><span class="op">(</span><span class="va">batch_size</span>, <span class="va">timesteps</span>, <span class="va">input_dim</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="va">outputs</span> <span class="op">&lt;-</span> <span class="va">inputs</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span></span>
 <span>  <span class="fu"><a href="../reference/layer_conv_1d.html">layer_conv_1d</a></span><span class="op">(</span>filters <span class="op">=</span> <span class="fl">32</span>, kernel_size <span class="op">=</span> <span class="fl">3</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span></span>
 <span>  <span class="fu">custom_rnn</span><span class="op">(</span><span class="op">)</span></span>
 <span></span>
 <span><span class="va">model</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/keras_model.html">keras_model</a></span><span class="op">(</span><span class="va">inputs</span>, <span class="va">outputs</span><span class="op">)</span></span>
-<span><span class="va">out</span> <span class="op">&lt;-</span> <span class="fu">model</span><span class="op">(</span><span class="fu"><a href="../reference/op_zeros.html">op_zeros</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">10</span>, <span class="fl">32</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">## Input 0 of layer "functional_23" is incompatible with the layer: expected</span></span>
-<span><span class="co">## shape=(None, 10, 5), found shape=(1, 10, 32)</span></span></code></pre>
+<span><span class="va">out</span> <span class="op">&lt;-</span> <span class="fu">model</span><span class="op">(</span><span class="fu"><a href="../reference/op_zeros.html">op_zeros</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">10</span>, <span class="fl">5</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 </div>
   </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>
     </nav></aside>

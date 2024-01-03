@@ -973,6 +973,9 @@
     <loc>https://keras.posit.co/reference/compile.keras.models.model.Model.html</loc>
   </url>
   <url>
+    <loc>https://keras.posit.co/reference/compile.keras.src.models.model.Model.html</loc>
+  </url>
+  <url>
     <loc>https://keras.posit.co/reference/config_backend.html</loc>
   </url>
   <url>
@@ -1075,6 +1078,9 @@
     <loc>https://keras.posit.co/reference/evaluate.keras.models.model.Model.html</loc>
   </url>
   <url>
+    <loc>https://keras.posit.co/reference/evaluate.keras.src.models.model.Model.html</loc>
+  </url>
+  <url>
     <loc>https://keras.posit.co/reference/evaluate_generator.html</loc>
   </url>
   <url>
@@ -1084,10 +1090,16 @@
     <loc>https://keras.posit.co/reference/export_savedmodel.keras.models.model.Model.html</loc>
   </url>
   <url>
+    <loc>https://keras.posit.co/reference/export_savedmodel.keras.src.models.model.Model.html</loc>
+  </url>
+  <url>
     <loc>https://keras.posit.co/reference/fit.keras.engine.training.Model.html</loc>
   </url>
   <url>
     <loc>https://keras.posit.co/reference/fit.keras.models.model.Model.html</loc>
+  </url>
+  <url>
+    <loc>https://keras.posit.co/reference/fit.keras.src.models.model.Model.html</loc>
   </url>
   <url>
     <loc>https://keras.posit.co/reference/fit_generator.html</loc>
@@ -3376,6 +3388,9 @@
     <loc>https://keras.posit.co/reference/plot.keras.models.model.Model.html</loc>
   </url>
   <url>
+    <loc>https://keras.posit.co/reference/plot.keras.src.models.model.Model.html</loc>
+  </url>
+  <url>
     <loc>https://keras.posit.co/reference/plot.keras_training_history.html</loc>
   </url>
   <url>
@@ -3386,6 +3401,9 @@
   </url>
   <url>
     <loc>https://keras.posit.co/reference/predict.keras.models.model.Model.html</loc>
+  </url>
+  <url>
+    <loc>https://keras.posit.co/reference/predict.keras.src.models.model.Model.html</loc>
   </url>
   <url>
     <loc>https://keras.posit.co/reference/predict_generator.html</loc>
@@ -3512,6 +3530,9 @@
   </url>
   <url>
     <loc>https://keras.posit.co/reference/summary.keras.models.model.Model.html</loc>
+  </url>
+  <url>
+    <loc>https://keras.posit.co/reference/summary.keras.src.models.model.Model.html</loc>
   </url>
   <url>
     <loc>https://keras.posit.co/reference/test_on_batch.html</loc>

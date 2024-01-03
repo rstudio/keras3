@@ -108,10 +108,9 @@
 <div class="row">
   <main id="main" class="col-md-9"><div class="page-header">
       <img src="" class="logo" alt=""><h1>Introduction to Keras for engineers</h1>
-                        <h4 data-toc-skip class="author"><a href="https://twitter.com/fchollet" class="external-link">fchollet</a></h4>
             
             <h4 data-toc-skip class="date">Last Modified: 2023-11-30;
-Last Rendered: 2023-12-06</h4>
+Last Rendered: 2024-01-03</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/rstudio/keras/blob/HEAD/vignettes/intro_to_keras_for_engineers.Rmd" class="external-link"><code>vignettes/intro_to_keras_for_engineers.Rmd</code></a></small>
       <div class="d-none name"><code>intro_to_keras_for_engineers.Rmd</code></div>
@@ -141,14 +140,8 @@ This entire guide is backend-agnostic.</p>
 <span><span class="co"># Note that Keras should only be loaded after the backend</span></span>
 <span><span class="co"># has been configured. The backend cannot be changed once the</span></span>
 <span><span class="co"># package is imported.</span></span>
-<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/rstudio/tensorflow" class="external-link">tensorflow</a></span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">##</span></span>
-<span><span class="co">## Attaching package: 'tensorflow'</span></span></code></pre>
-<pre><code><span><span class="co">## The following objects are masked from 'package:keras3':</span></span>
-<span><span class="co">##</span></span>
-<span><span class="co">##     set_random_seed, shape</span></span></code></pre>
-<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https:/keras.posit.co/">keras3</a></span><span class="op">)</span></span></code></pre></div>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/rstudio/tensorflow" class="external-link">tensorflow</a></span><span class="op">)</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https:/keras.posit.co/">keras3</a></span><span class="op">)</span></span></code></pre></div>
 </div>
 <div class="section level2">
 <h2 id="a-first-example-a-mnist-convnet">A first example: A MNIST convnet<a class="anchor" aria-label="anchor" href="#a-first-example-a-mnist-convnet"></a>
@@ -156,7 +149,7 @@ This entire guide is backend-agnostic.</p>
 <p>Let’s start with the Hello World of ML: training a convnet to
 classify MNIST digits.</p>
 <p>Here’s the data:</p>
-<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Load the data and split it between train and test sets</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="va">x_train</span>, <span class="va">y_train</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="va">x_test</span>, <span class="va">y_test</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="../reference/multi-assign.html">%&lt;-%</a></span> <span class="fu">keras3</span><span class="fu">::</span><span class="fu"><a href="../reference/dataset_mnist.html">dataset_mnist</a></span><span class="op">(</span><span class="op">)</span></span>
 <span></span>
@@ -169,7 +162,7 @@ classify MNIST digits.</p>
 <span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/dim.html" class="external-link">dim</a></span><span class="op">(</span><span class="va">x_train</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">## [1] 60000    28    28     1</span></span></code></pre>
-<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/dim.html" class="external-link">dim</a></span><span class="op">(</span><span class="va">x_test</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">## [1] 10000    28    28     1</span></span></code></pre>
 <p>Here’s our model.</p>
@@ -186,7 +179,7 @@ API</a> (most typical)</li>
 your own models yourself via subclassing</a> (for advanced use
 cases)</li>
 </ul>
-<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Model parameters</span></span>
 <span><span class="va">num_classes</span> <span class="op">&lt;-</span> <span class="fl">10</span></span>
 <span><span class="va">input_shape</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">28</span>, <span class="fl">28</span>, <span class="fl">1</span><span class="op">)</span></span>
@@ -202,7 +195,7 @@ cases)</li>
 <span>  <span class="fu"><a href="../reference/layer_dropout.html">layer_dropout</a></span><span class="op">(</span>rate <span class="op">=</span> <span class="fl">0.5</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span></span>
 <span>  <span class="fu"><a href="../reference/layer_dense.html">layer_dense</a></span><span class="op">(</span>units <span class="op">=</span> <span class="va">num_classes</span>, activation <span class="op">=</span> <span class="st">"softmax"</span><span class="op">)</span></span></code></pre></div>
 <p>Here’s our model summary:</p>
-<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary</a></span><span class="op">(</span><span class="va">model</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">## <span style="font-weight: bold;">Model: "sequential"</span></span></span>
 <span><span class="co">## ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━┓</span></span>
@@ -231,7 +224,7 @@ cases)</li>
 <p>We use the <code><a href="https://generics.r-lib.org/reference/compile.html" class="external-link">compile()</a></code> method to specify the optimizer,
 loss function, and the metrics to monitor. Note that with the JAX and
 TensorFlow backends, XLA compilation is turned on by default.</p>
-<div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">model</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://generics.r-lib.org/reference/compile.html" class="external-link">compile</a></span><span class="op">(</span></span>
 <span>  optimizer <span class="op">=</span> <span class="st">"adam"</span>,</span>
 <span>  loss <span class="op">=</span> <span class="st">"sparse_categorical_crossentropy"</span>,</span>
@@ -242,7 +235,7 @@ TensorFlow backends, XLA compilation is turned on by default.</p>
 <p>Let’s train and evaluate the model. We’ll set aside a validation
 split of 15% of the data during training to monitor generalization on
 unseen data.</p>
-<div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">batch_size</span> <span class="op">&lt;-</span> <span class="fl">128</span></span>
 <span><span class="va">epochs</span> <span class="op">&lt;-</span> <span class="fl">1</span></span>
 <span></span>
@@ -259,22 +252,22 @@ unseen data.</p>
 <span>    validation_split<span class="op">=</span><span class="fl">0.15</span>,</span>
 <span>    callbacks<span class="op">=</span><span class="va">callbacks</span></span>
 <span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">## 399/399 - 36s - 91ms/step - acc: 0.7463 - loss: 0.7500 - val_acc: 0.9627 - val_loss: 0.1317</span></span></code></pre>
-<div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
+<pre><code><span><span class="co">## 399/399 - 38s - 95ms/step - acc: 0.7463 - loss: 0.7500 - val_acc: 0.9627 - val_loss: 0.1317</span></span></code></pre>
+<div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">score</span> <span class="op">&lt;-</span> <span class="va">model</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://rdrr.io/pkg/tensorflow/man/evaluate.html" class="external-link">evaluate</a></span><span class="op">(</span><span class="va">x_test</span>, <span class="va">y_test</span>, verbose<span class="op">=</span><span class="fl">0</span><span class="op">)</span></span></code></pre></div>
 <p>During training, we were saving a model at the end of each epoch. You
 can also save the model in its latest state like this:</p>
-<div class="sourceCode" id="cb16"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/save_model.html">save_model</a></span><span class="op">(</span><span class="va">model</span>, <span class="st">"final_model.keras"</span>, overwrite<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
 <p>And reload it like this:</p>
-<div class="sourceCode" id="cb17"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">model</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/load_model.html">load_model</a></span><span class="op">(</span><span class="st">"final_model.keras"</span><span class="op">)</span></span></code></pre></div>
 <p>Next, you can query predictions of class probabilities with
 <code><a href="https://rdrr.io/r/stats/predict.html" class="external-link">predict()</a></code>:</p>
-<div class="sourceCode" id="cb18"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">predictions</span> <span class="op">&lt;-</span> <span class="va">model</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://rdrr.io/r/stats/predict.html" class="external-link">predict</a></span><span class="op">(</span><span class="va">x_test</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">## 313/313 - 3s - 9ms/step</span></span></code></pre>
-<div class="sourceCode" id="cb20"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb17"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/dim.html" class="external-link">dim</a></span><span class="op">(</span><span class="va">predictions</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">## [1] 10000    10</span></span></code></pre>
 <p>That’s it for the basics!</p>
@@ -295,7 +288,7 @@ such as <code>op_conv</code> or
 </ul>
 <p>Let’s make a custom <code>Dense</code> layer that works with all
 backends:</p>
-<div class="sourceCode" id="cb22"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb19"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">MyDense</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/Layer.html">new_layer_class</a></span><span class="op">(</span></span>
 <span>  <span class="st">"MyDense"</span>,</span>
 <span>  initialize <span class="op">=</span> <span class="kw">function</span><span class="op">(</span><span class="va">units</span>, <span class="va">activation</span> <span class="op">=</span> <span class="cn">NULL</span>, <span class="va">name</span> <span class="op">=</span> <span class="cn">NULL</span><span class="op">)</span> <span class="op">{</span></span>
@@ -327,7 +320,7 @@ backends:</p>
 <span><span class="op">)</span></span></code></pre></div>
 <p>Next, let’s make a custom <code>Dropout</code> layer that relies on
 the <code>keras.random</code> namespace:</p>
-<div class="sourceCode" id="cb23"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb20"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">MyDropout</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/Layer.html">new_layer_class</a></span><span class="op">(</span></span>
 <span>  <span class="st">"MyDropout"</span>,</span>
 <span>  initialize <span class="op">=</span> <span class="kw">function</span><span class="op">(</span><span class="va">rate</span>, <span class="va">name</span> <span class="op">=</span> <span class="cn">NULL</span><span class="op">)</span> <span class="op">{</span></span>
@@ -345,7 +338,7 @@ the <code>keras.random</code> namespace:</p>
 <span><span class="op">)</span></span></code></pre></div>
 <p>Next, let’s write a custom subclassed model that uses our two custom
 layers:</p>
-<div class="sourceCode" id="cb24"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb21"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">MyModel</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/new-classes.html">new_model_class</a></span><span class="op">(</span></span>
 <span>  <span class="st">"MyModel"</span>,</span>
 <span>  initialize <span class="op">=</span> <span class="kw">function</span><span class="op">(</span><span class="va">num_classes</span><span class="op">)</span> <span class="op">{</span></span>
@@ -367,7 +360,7 @@ layers:</p>
 <span>  <span class="op">}</span></span>
 <span><span class="op">)</span></span></code></pre></div>
 <p>Let’s compile it and fit it:</p>
-<div class="sourceCode" id="cb25"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb22"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">model</span> <span class="op">&lt;-</span> <span class="fu">MyModel</span><span class="op">(</span>num_classes<span class="op">=</span><span class="fl">10</span><span class="op">)</span></span>
 <span><span class="va">model</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://generics.r-lib.org/reference/compile.html" class="external-link">compile</a></span><span class="op">(</span></span>
 <span>  loss<span class="op">=</span><span class="fu"><a href="../reference/loss_sparse_categorical_crossentropy.html">loss_sparse_categorical_crossentropy</a></span><span class="op">(</span><span class="op">)</span>,</span>
@@ -384,7 +377,7 @@ layers:</p>
 <span>    epochs<span class="op">=</span><span class="fl">1</span>,  <span class="co"># For speed</span></span>
 <span>    validation_split<span class="op">=</span><span class="fl">0.15</span>,</span>
 <span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">## 399/399 - 37s - 92ms/step - acc: 0.7325 - loss: 0.7821 - val_acc: 0.9253 - val_loss: 0.2463</span></span></code></pre>
+<pre><code><span><span class="co">## 399/399 - 38s - 95ms/step - acc: 0.7325 - loss: 0.7821 - val_acc: 0.9253 - val_loss: 0.2463</span></span></code></pre>
 </div>
 <div class="section level2">
 <h2 id="training-models-on-arbitrary-data-sources">Training models on arbitrary data sources<a class="anchor" aria-label="anchor" href="#training-models-on-arbitrary-data-sources"></a>
@@ -429,15 +422,10 @@ your Keras backend.</p>
 <!-- model.fit(train_dataloader, epochs=1, validation_data=val_dataloader) -->
 <!-- ``` -->
 <p>Let’s try this out with <code>tf_dataset</code>:</p>
-<div class="sourceCode" id="cb27"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/rstudio/tfdatasets" class="external-link">tfdatasets</a></span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">##</span></span>
-<span><span class="co">## Attaching package: 'tfdatasets'</span></span></code></pre>
-<pre><code><span><span class="co">## The following object is masked from 'package:keras3':</span></span>
-<span><span class="co">##</span></span>
-<span><span class="co">##     shape</span></span></code></pre>
-<div class="sourceCode" id="cb30"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">train_dataset</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="va">x_train</span>, <span class="va">y_train</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span></span>
+<div class="sourceCode" id="cb24"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/rstudio/tfdatasets" class="external-link">tfdatasets</a></span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">train_dataset</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="va">x_train</span>, <span class="va">y_train</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span></span>
 <span>  <span class="fu"><a href="https://rdrr.io/pkg/tfdatasets/man/tensor_slices_dataset.html" class="external-link">tensor_slices_dataset</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span></span>
 <span>  <span class="fu"><a href="https://rdrr.io/pkg/tfdatasets/man/dataset_batch.html" class="external-link">dataset_batch</a></span><span class="op">(</span><span class="va">batch_size</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span></span>
 <span>  <span class="fu"><a href="https://rdrr.io/pkg/tfdatasets/man/dataset_prefetch.html" class="external-link">dataset_prefetch</a></span><span class="op">(</span>buffer_size<span class="op">=</span><span class="va">tf</span><span class="op">$</span><span class="va">data</span><span class="op">$</span><span class="va">AUTOTUNE</span><span class="op">)</span></span>
@@ -456,7 +444,7 @@ your Keras backend.</p>
 <span>  <span class="op">)</span></span>
 <span><span class="op">)</span></span>
 <span><span class="va">model</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://generics.r-lib.org/reference/fit.html" class="external-link">fit</a></span><span class="op">(</span><span class="va">train_dataset</span>, epochs<span class="op">=</span><span class="fl">1</span>, validation_data<span class="op">=</span><span class="va">test_dataset</span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">## 469/469 - 44s - 94ms/step - acc: 0.7552 - loss: 0.7242 - val_acc: 0.9199 - val_loss: 0.2651</span></span></code></pre>
+<pre><code><span><span class="co">## 469/469 - 45s - 95ms/step - acc: 0.7552 - loss: 0.7242 - val_acc: 0.9199 - val_loss: 0.2651</span></span></code></pre>
 </div>
 <div class="section level2">
 <h2 id="further-reading">Further reading<a class="anchor" aria-label="anchor" href="#further-reading"></a>

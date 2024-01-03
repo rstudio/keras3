@@ -85,10 +85,10 @@ reference:
 
   - subtitle: "Train Models"
     contents:
-      - compile.keras.models.model.Model
-      - fit.keras.models.model.Model
-      - predict.keras.models.model.Model
-      - evaluate.keras.models.model.Model
+      - compile.keras.src.models.model.Model
+      - fit.keras.src.models.model.Model
+      - predict.keras.src.models.model.Model
+      - evaluate.keras.src.models.model.Model
       - train_on_batch
       - predict_on_batch
       - test_on_batch
@@ -96,7 +96,7 @@ reference:
 
   - subtitle: "Inspect Models"
     contents:
-      - summary.keras.models.model.Model
+      - summary.keras.src.models.model.Model
       - get_config
       - get_weights
       - get_layer
@@ -105,7 +105,7 @@ reference:
   - subtitle: "Save & Load Models"
     contents:
       - save_model
-      - export_savedmodel.keras.models.model.Model
+      - export_savedmodel.keras.src.models.model.Model
       - save_model_weights
       - save_model_config
       - load_model_weights
@@ -267,7 +267,7 @@ reference:
 
       - has_concept("utils")
       - plot.keras_training_history
-      - plot.keras.models.model.Model
+      - plot.keras.src.models.model.Model
       - zip_lists
       - active_property
       - to_categorical

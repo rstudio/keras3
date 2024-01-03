@@ -108,10 +108,9 @@
 <div class="row">
   <main id="main" class="col-md-9"><div class="page-header">
       <img src="" class="logo" alt=""><h1>Writing a training loop from scratch in TensorFlow</h1>
-                        <h4 data-toc-skip class="author"><a href="https://twitter.com/fchollet" class="external-link">fchollet</a></h4>
             
-            <h4 data-toc-skip class="date">Last Modified: 2023-11-21;
-Last Rendered: 2023-11-29</h4>
+            <h4 data-toc-skip class="date">Last Modified: 2023-11-29;
+Last Rendered: 2024-01-03</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/rstudio/keras/blob/HEAD/vignettes/writing_a_custom_training_loop_in_tensorflow.Rmd" class="external-link"><code>vignettes/writing_a_custom_training_loop_in_tensorflow.Rmd</code></a></small>
       <div class="d-none name"><code>writing_a_custom_training_loop_in_tensorflow.Rmd</code></div>
@@ -123,20 +122,9 @@ Last Rendered: 2023-11-29</h4>
 <h2 id="setup">Setup<a class="anchor" aria-label="anchor" href="#setup"></a>
 </h2>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/rstudio/tensorflow" class="external-link">tensorflow</a></span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">##</span></span>
-<span><span class="co">## Attaching package: 'tensorflow'</span></span></code></pre>
-<pre><code><span><span class="co">## The following objects are masked from 'package:keras3':</span></span>
-<span><span class="co">##</span></span>
-<span><span class="co">##     set_random_seed, shape</span></span></code></pre>
-<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https:/keras.posit.co/">keras3</a></span><span class="op">)</span></span>
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/rstudio/tensorflow" class="external-link">tensorflow</a></span><span class="op">)</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https:/keras.posit.co/">keras3</a></span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/rstudio/tfdatasets" class="external-link">tfdatasets</a></span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">##</span></span>
-<span><span class="co">## Attaching package: 'tfdatasets'</span></span></code></pre>
-<pre><code><span><span class="co">## The following object is masked from 'package:keras3':</span></span>
-<span><span class="co">##</span></span>
-<span><span class="co">##     shape</span></span></code></pre>
 </div>
 <div class="section level2">
 <h2 id="introduction">Introduction<a class="anchor" aria-label="anchor" href="#introduction"></a>
@@ -159,7 +147,7 @@ from scratch. This is what this guide is about.</p>
 <h2 id="a-first-end-to-end-example">A first end-to-end example<a class="anchor" aria-label="anchor" href="#a-first-end-to-end-example"></a>
 </h2>
 <p>Let’s consider a simple MNIST model:</p>
-<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">get_model</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="op">)</span> <span class="op">{</span></span>
 <span>  <span class="va">inputs</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/layer_input.html">layer_input</a></span><span class="op">(</span>shape <span class="op">=</span> <span class="fl">784</span>, name<span class="op">=</span><span class="st">"digits"</span><span class="op">)</span></span>
 <span>  <span class="va">outputs</span> <span class="op">&lt;-</span> <span class="va">inputs</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span></span>
@@ -167,12 +155,14 @@ from scratch. This is what this guide is about.</p>
 <span>    <span class="fu"><a href="../reference/layer_dense.html">layer_dense</a></span><span class="op">(</span>units <span class="op">=</span> <span class="fl">64</span>, activation <span class="op">=</span> <span class="st">"relu"</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span></span>
 <span>    <span class="fu"><a href="../reference/layer_dense.html">layer_dense</a></span><span class="op">(</span>units <span class="op">=</span> <span class="fl">10</span>, name <span class="op">=</span> <span class="st">"predictions"</span><span class="op">)</span></span>
 <span>  <span class="va">model</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/keras_model.html">keras_model</a></span><span class="op">(</span>inputs<span class="op">=</span><span class="va">inputs</span>, outputs<span class="op">=</span><span class="va">outputs</span><span class="op">)</span></span>
-<span><span class="op">}</span></span></code></pre></div>
+<span><span class="op">}</span></span>
+<span></span>
+<span><span class="va">model</span> <span class="op">&lt;-</span> <span class="fu">get_model</span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
 <p>Let’s train it using mini-batch gradient with a custom training
 loop.</p>
 <p>First, we’re going to need an optimizer, a loss function, and a
 dataset:</p>
-<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Instantiate an optimizer.</span></span>
 <span><span class="va">optimizer</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/optimizer_sgd.html">optimizer_sgd</a></span><span class="op">(</span>learning_rate<span class="op">=</span><span class="fl">1e-3</span><span class="op">)</span></span>
 <span><span class="co"># Instantiate a loss function.</span></span>
@@ -218,7 +208,7 @@ model with regard to the loss</li>
 <li>Finally, we use the optimizer to update the weights of the model
 based on the gradients</li>
 </ul>
-<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">epochs</span> <span class="op">&lt;-</span> <span class="fl">2</span></span>
 <span></span>
 <span><span class="kw">for</span> <span class="op">(</span><span class="va">epoch</span> <span class="kw">in</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html" class="external-link">seq_len</a></span><span class="op">(</span><span class="va">epochs</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span></span>
@@ -257,8 +247,20 @@ based on the gradients</li>
 <span>    <span class="op">}</span></span>
 <span>  <span class="op">}</span><span class="op">)</span></span>
 <span><span class="op">}</span></span></code></pre></div>
-<pre><code><span><span class="co">## Start of epoch  1</span></span></code></pre>
-<pre><code><span><span class="co">## Error in model(data[[1]], training = TRUE): could not find function "model"</span></span></code></pre>
+<pre><code><span><span class="co">## Start of epoch  1</span></span>
+<span><span class="co">## Training loss (for one batch) at step 200: 1.6825</span></span>
+<span><span class="co">## Seen so far: 12800 samples</span></span>
+<span><span class="co">## Training loss (for one batch) at step 400: 0.8280</span></span>
+<span><span class="co">## Seen so far: 25600 samples</span></span>
+<span><span class="co">## Training loss (for one batch) at step 600: 0.6472</span></span>
+<span><span class="co">## Seen so far: 38400 samples</span></span>
+<span><span class="co">## Start of epoch  2</span></span>
+<span><span class="co">## Training loss (for one batch) at step 200: 0.7153</span></span>
+<span><span class="co">## Seen so far: 12800 samples</span></span>
+<span><span class="co">## Training loss (for one batch) at step 400: 0.6430</span></span>
+<span><span class="co">## Seen so far: 25600 samples</span></span>
+<span><span class="co">## Training loss (for one batch) at step 600: 0.4325</span></span>
+<span><span class="co">## Seen so far: 38400 samples</span></span></code></pre>
 </div>
 <div class="section level2">
 <h2 id="low-level-handling-of-metrics">Low-level handling of metrics<a class="anchor" aria-label="anchor" href="#low-level-handling-of-metrics"></a>
@@ -277,7 +279,7 @@ state of the metric (typically at the end of an epoch)</li>
 <p>Let’s use this knowledge to compute
 <code>SparseCategoricalAccuracy</code> on training and validation data
 at the end of each epoch:</p>
-<div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Get a fresh model</span></span>
 <span><span class="va">model</span> <span class="op">&lt;-</span> <span class="fu">get_model</span><span class="op">(</span><span class="op">)</span></span>
 <span></span>
@@ -290,7 +292,7 @@ at the end of each epoch:</p>
 <span><span class="va">train_acc_metric</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/metric_sparse_categorical_accuracy.html">metric_sparse_categorical_accuracy</a></span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="va">val_acc_metric</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/metric_sparse_categorical_accuracy.html">metric_sparse_categorical_accuracy</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
 <p>Here’s our training &amp; evaluation loop:</p>
-<div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">epochs</span> <span class="op">&lt;-</span> <span class="fl">2</span></span>
 <span><span class="va">time</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/Sys.time.html" class="external-link">Sys.time</a></span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="kw">for</span> <span class="op">(</span><span class="va">epoch</span> <span class="kw">in</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html" class="external-link">seq_len</a></span><span class="op">(</span><span class="va">epochs</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span></span>
@@ -335,26 +337,26 @@ at the end of each epoch:</p>
 <span>  <span class="fu"><a href="https://rdrr.io/r/base/cat.html" class="external-link">cat</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/sprintf.html" class="external-link">sprintf</a></span><span class="op">(</span><span class="st">"Validation acc: %.4f\n"</span>, <span class="va">val_acc</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="op">}</span></span></code></pre></div>
 <pre><code><span><span class="co">## Start of epoch  1</span></span>
-<span><span class="co">## Training loss (for one batch) at step 200: 1.0514</span></span>
+<span><span class="co">## Training loss (for one batch) at step 200: 1.0199</span></span>
 <span><span class="co">## Seen so far: 12800 samples</span></span>
-<span><span class="co">## Training loss (for one batch) at step 400: 1.0502</span></span>
+<span><span class="co">## Training loss (for one batch) at step 400: 0.7246</span></span>
 <span><span class="co">## Seen so far: 25600 samples</span></span>
-<span><span class="co">## Training loss (for one batch) at step 600: 0.6835</span></span>
+<span><span class="co">## Training loss (for one batch) at step 600: 0.7681</span></span>
 <span><span class="co">## Seen so far: 38400 samples</span></span>
-<span><span class="co">## Training acc over epoch: 0.6316</span></span>
-<span><span class="co">## Validation acc: 0.7797</span></span>
+<span><span class="co">## Training acc over epoch: 0.6977</span></span>
+<span><span class="co">## Validation acc: 0.7766</span></span>
 <span><span class="co">## Start of epoch  2</span></span>
-<span><span class="co">## Training loss (for one batch) at step 200: 0.6663</span></span>
+<span><span class="co">## Training loss (for one batch) at step 200: 0.7923</span></span>
 <span><span class="co">## Seen so far: 12800 samples</span></span>
-<span><span class="co">## Training loss (for one batch) at step 400: 0.5877</span></span>
+<span><span class="co">## Training loss (for one batch) at step 400: 0.6582</span></span>
 <span><span class="co">## Seen so far: 25600 samples</span></span>
-<span><span class="co">## Training loss (for one batch) at step 600: 0.6235</span></span>
+<span><span class="co">## Training loss (for one batch) at step 600: 0.5754</span></span>
 <span><span class="co">## Seen so far: 38400 samples</span></span>
-<span><span class="co">## Training acc over epoch: 0.8011</span></span>
-<span><span class="co">## Validation acc: 0.8365</span></span></code></pre>
-<div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
+<span><span class="co">## Training acc over epoch: 0.8043</span></span>
+<span><span class="co">## Validation acc: 0.8180</span></span></code></pre>
+<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/Sys.time.html" class="external-link">Sys.time</a></span><span class="op">(</span><span class="op">)</span> <span class="op">-</span> <span class="va">time</span></span></code></pre></div>
-<pre><code><span><span class="co">## Time difference of 15.73774 secs</span></span></code></pre>
+<pre><code><span><span class="co">## Time difference of 11.19489 secs</span></span></code></pre>
 </div>
 <div class="section level2">
 <h2 id="speeding-up-your-training-step-with-tf-function">Speeding-up your training step with <code>tf.function</code><a class="anchor" aria-label="anchor" href="#speeding-up-your-training-step-with-tf-function"></a>
@@ -369,7 +371,7 @@ operation after another, with no knowledge of what comes next.</p>
 <p>You can compile into a static graph any function that takes tensors
 as input. Just add a <code>@tf.function</code> decorator on it, like
 this:</p>
-<div class="sourceCode" id="cb17"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">train_step</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/tensorflow/man/tf_function.html" class="external-link">tf_function</a></span><span class="op">(</span><span class="kw">function</span><span class="op">(</span><span class="va">x</span>, <span class="va">y</span><span class="op">)</span> <span class="op">{</span></span>
 <span>  <span class="fu"><a href="https://rdrr.io/r/base/with.html" class="external-link">with</a></span><span class="op">(</span><span class="va">tf</span><span class="op">$</span><span class="fu">GradientTape</span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="https://rstudio.github.io/reticulate/reference/with-as-operator.html" class="external-link">%as%</a></span> <span class="va">tape</span>, <span class="op">{</span></span>
 <span>    <span class="va">logits</span> <span class="op">&lt;-</span> <span class="fu">model</span><span class="op">(</span><span class="va">x</span>, training <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
@@ -380,14 +382,14 @@ this:</p>
 <span>  <span class="va">train_acc_metric</span><span class="op">$</span><span class="fu">update_state</span><span class="op">(</span><span class="va">y</span>, <span class="va">logits</span><span class="op">)</span></span>
 <span><span class="op">}</span><span class="op">)</span></span></code></pre></div>
 <p>Let’s do the same with the evaluation step:</p>
-<div class="sourceCode" id="cb18"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">test_step</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/tensorflow/man/tf_function.html" class="external-link">tf_function</a></span><span class="op">(</span><span class="kw">function</span><span class="op">(</span><span class="va">x</span>, <span class="va">y</span><span class="op">)</span> <span class="op">{</span></span>
 <span>  <span class="va">val_logits</span> <span class="op">&lt;-</span> <span class="fu">model</span><span class="op">(</span><span class="va">x</span>, training<span class="op">=</span><span class="cn">FALSE</span><span class="op">)</span></span>
 <span>  <span class="va">val_acc_metric</span><span class="op">$</span><span class="fu">update_state</span><span class="op">(</span><span class="va">y</span>, <span class="va">val_logits</span><span class="op">)</span></span>
 <span><span class="op">}</span><span class="op">)</span></span></code></pre></div>
 <p>Now, let’s re-run our training loop with this compiled training
 step:</p>
-<div class="sourceCode" id="cb19"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">epochs</span> <span class="op">&lt;-</span> <span class="fl">2</span></span>
 <span><span class="va">time</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/Sys.time.html" class="external-link">Sys.time</a></span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="kw">for</span> <span class="op">(</span><span class="va">epoch</span> <span class="kw">in</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html" class="external-link">seq_len</a></span><span class="op">(</span><span class="va">epochs</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span></span>
@@ -420,26 +422,26 @@ step:</p>
 <span>  <span class="fu"><a href="https://rdrr.io/r/base/cat.html" class="external-link">cat</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/sprintf.html" class="external-link">sprintf</a></span><span class="op">(</span><span class="st">"Validation acc: %.4f\n"</span>, <span class="va">val_acc</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="op">}</span></span></code></pre></div>
 <pre><code><span><span class="co">## Start of epoch  1</span></span>
-<span><span class="co">## Training loss (for one batch) at step 200: 0.2641</span></span>
+<span><span class="co">## Training loss (for one batch) at step 200: 0.9200</span></span>
 <span><span class="co">## Seen so far: 12800 samples</span></span>
-<span><span class="co">## Training loss (for one batch) at step 400: 0.2641</span></span>
+<span><span class="co">## Training loss (for one batch) at step 400: 0.9200</span></span>
 <span><span class="co">## Seen so far: 25600 samples</span></span>
-<span><span class="co">## Training loss (for one batch) at step 600: 0.2641</span></span>
+<span><span class="co">## Training loss (for one batch) at step 600: 0.9200</span></span>
 <span><span class="co">## Seen so far: 38400 samples</span></span>
-<span><span class="co">## Training acc over epoch: 0.8412</span></span>
-<span><span class="co">## Validation acc: 0.8604</span></span>
+<span><span class="co">## Training acc over epoch: 0.8450</span></span>
+<span><span class="co">## Validation acc: 0.8472</span></span>
 <span><span class="co">## Start of epoch  2</span></span>
-<span><span class="co">## Training loss (for one batch) at step 200: 0.2641</span></span>
+<span><span class="co">## Training loss (for one batch) at step 200: 0.9200</span></span>
 <span><span class="co">## Seen so far: 12800 samples</span></span>
-<span><span class="co">## Training loss (for one batch) at step 400: 0.2641</span></span>
+<span><span class="co">## Training loss (for one batch) at step 400: 0.9200</span></span>
 <span><span class="co">## Seen so far: 25600 samples</span></span>
-<span><span class="co">## Training loss (for one batch) at step 600: 0.2641</span></span>
+<span><span class="co">## Training loss (for one batch) at step 600: 0.9200</span></span>
 <span><span class="co">## Seen so far: 38400 samples</span></span>
-<span><span class="co">## Training acc over epoch: 0.8622</span></span>
-<span><span class="co">## Validation acc: 0.8715</span></span></code></pre>
-<div class="sourceCode" id="cb21"><pre class="downlit sourceCode r">
+<span><span class="co">## Training acc over epoch: 0.8676</span></span>
+<span><span class="co">## Validation acc: 0.8698</span></span></code></pre>
+<div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/Sys.time.html" class="external-link">Sys.time</a></span><span class="op">(</span><span class="op">)</span> <span class="op">-</span> <span class="va">time</span></span></code></pre></div>
-<pre><code><span><span class="co">## Time difference of 1.89366 secs</span></span></code></pre>
+<pre><code><span><span class="co">## Time difference of 1.42442 secs</span></span></code></pre>
 <p>Much faster, isn’t it?</p>
 </div>
 <div class="section level2">
@@ -453,7 +455,7 @@ resulting list of scalar loss values are available via the property
 and add them to the main loss in your training step.</p>
 <p>Consider this layer, that creates an activity regularization
 loss:</p>
-<div class="sourceCode" id="cb23"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb17"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">ActivityRegularizationLayer</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/Layer.html">new_layer_class</a></span><span class="op">(</span></span>
 <span>  <span class="st">"ActivityRegularizationLayer"</span>,</span>
 <span>  call <span class="op">=</span> <span class="kw">function</span><span class="op">(</span><span class="va">inputs</span><span class="op">)</span> <span class="op">{</span></span>
@@ -462,7 +464,7 @@ loss:</p>
 <span>  <span class="op">}</span></span>
 <span><span class="op">)</span></span></code></pre></div>
 <p>Let’s build a really simple model that uses it:</p>
-<div class="sourceCode" id="cb24"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb18"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">inputs</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/layer_input.html">layer_input</a></span><span class="op">(</span>shape <span class="op">=</span> <span class="fl">784</span>, name<span class="op">=</span><span class="st">"digits"</span><span class="op">)</span></span>
 <span><span class="va">outputs</span> <span class="op">&lt;-</span> <span class="va">inputs</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span></span>
 <span>  <span class="fu"><a href="../reference/layer_dense.html">layer_dense</a></span><span class="op">(</span>units <span class="op">=</span> <span class="fl">64</span>, activation <span class="op">=</span> <span class="st">"relu"</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span></span>
@@ -471,7 +473,7 @@ loss:</p>
 <span>  <span class="fu"><a href="../reference/layer_dense.html">layer_dense</a></span><span class="op">(</span>units <span class="op">=</span> <span class="fl">10</span>, name <span class="op">=</span> <span class="st">"predictions"</span><span class="op">)</span></span>
 <span><span class="va">model</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/keras_model.html">keras_model</a></span><span class="op">(</span>inputs <span class="op">=</span> <span class="va">inputs</span>, outputs <span class="op">=</span> <span class="va">outputs</span><span class="op">)</span></span></code></pre></div>
 <p>Here’s what our training step should look like now:</p>
-<div class="sourceCode" id="cb25"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb19"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">train_step</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/tensorflow/man/tf_function.html" class="external-link">tf_function</a></span><span class="op">(</span><span class="kw">function</span><span class="op">(</span><span class="va">x</span>, <span class="va">y</span><span class="op">)</span> <span class="op">{</span></span>
 <span>  <span class="fu"><a href="https://rdrr.io/r/base/with.html" class="external-link">with</a></span><span class="op">(</span><span class="va">tf</span><span class="op">$</span><span class="fu">GradientTape</span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="https://rstudio.github.io/reticulate/reference/with-as-operator.html" class="external-link">%as%</a></span> <span class="va">tape</span>, <span class="op">{</span></span>
 <span>    <span class="va">logits</span> <span class="op">&lt;-</span> <span class="fu">model</span><span class="op">(</span><span class="va">x</span>, training <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
@@ -531,7 +533,7 @@ the fake images as real.</li>
 Learning with Python</a>.</p>
 <p>Let’s implement this training loop. First, create the discriminator
 meant to classify fake vs real digits:</p>
-<div class="sourceCode" id="cb26"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb20"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Create the discriminator</span></span>
 <span><span class="va">discriminator</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/keras_model_sequential.html">keras_model_sequential</a></span><span class="op">(</span>name <span class="op">=</span> <span class="st">"discriminator"</span>, input_shape <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">28</span>, <span class="fl">28</span>, <span class="fl">1</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span></span>
 <span>  <span class="fu"><a href="../reference/layer_conv_2d.html">layer_conv_2d</a></span><span class="op">(</span>filters <span class="op">=</span> <span class="fl">64</span>, kernel_size <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">3</span>, <span class="fl">3</span><span class="op">)</span>, strides <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">2</span>, <span class="fl">2</span><span class="op">)</span>, padding <span class="op">=</span> <span class="st">"same"</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span></span>
@@ -541,30 +543,30 @@ meant to classify fake vs real digits:</p>
 <span>  <span class="fu"><a href="../reference/layer_global_max_pooling_2d.html">layer_global_max_pooling_2d</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span></span>
 <span>  <span class="fu"><a href="../reference/layer_dense.html">layer_dense</a></span><span class="op">(</span>units <span class="op">=</span> <span class="fl">1</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary</a></span><span class="op">(</span><span class="va">discriminator</span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">## Model: "discriminator"</span></span>
-<span><span class="co">## ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━┓</span></span>
-<span><span class="co">## ┃ Layer (type)                      ┃ Output Shape                ┃    Param # ┃</span></span>
-<span><span class="co">## ┡━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━┩</span></span>
-<span><span class="co">## │ conv2d_1 (Conv2D)                 │ (None, 14, 14, 64)          │        640 │</span></span>
-<span><span class="co">## ├───────────────────────────────────┼─────────────────────────────┼────────────┤</span></span>
-<span><span class="co">## │ leaky_re_lu_1 (LeakyReLU)         │ (None, 14, 14, 64)          │          0 │</span></span>
-<span><span class="co">## ├───────────────────────────────────┼─────────────────────────────┼────────────┤</span></span>
-<span><span class="co">## │ conv2d (Conv2D)                   │ (None, 7, 7, 128)           │     73,856 │</span></span>
-<span><span class="co">## ├───────────────────────────────────┼─────────────────────────────┼────────────┤</span></span>
-<span><span class="co">## │ leaky_re_lu (LeakyReLU)           │ (None, 7, 7, 128)           │          0 │</span></span>
-<span><span class="co">## ├───────────────────────────────────┼─────────────────────────────┼────────────┤</span></span>
-<span><span class="co">## │ global_max_pooling2d              │ (None, 128)                 │          0 │</span></span>
-<span><span class="co">## │ (GlobalMaxPooling2D)              │                             │            │</span></span>
-<span><span class="co">## ├───────────────────────────────────┼─────────────────────────────┼────────────┤</span></span>
-<span><span class="co">## │ dense_4 (Dense)                   │ (None, 1)                   │        129 │</span></span>
-<span><span class="co">## └───────────────────────────────────┴─────────────────────────────┴────────────┘</span></span>
-<span><span class="co">##  Total params: 74,625 (291.50 KB)</span></span>
-<span><span class="co">##  Trainable params: 74,625 (291.50 KB)</span></span>
-<span><span class="co">##  Non-trainable params: 0 (0.00 B)</span></span></code></pre>
+<pre><code><span><span class="co">## <span style="font-weight: bold;">Model: "discriminator"</span></span></span>
+<span><span class="co">## ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━┓</span></span>
+<span><span class="co">## ┃<span style="font-weight: bold;"> Layer (type)                    </span>┃<span style="font-weight: bold;"> Output Shape              </span>┃<span style="font-weight: bold;">    Param # </span>┃</span></span>
+<span><span class="co">## ┡━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━┩</span></span>
+<span><span class="co">## │ conv2d_1 (<span style="color: #0087FF;">Conv2D</span>)               │ (<span style="color: #00D7FF;">None</span>, <span style="color: #00AF00;">14</span>, <span style="color: #00AF00;">14</span>, <span style="color: #00AF00;">64</span>)        │        <span style="color: #00AF00;">640</span> │</span></span>
+<span><span class="co">## ├─────────────────────────────────┼───────────────────────────┼────────────┤</span></span>
+<span><span class="co">## │ leaky_re_lu_1 (<span style="color: #0087FF;">LeakyReLU</span>)       │ (<span style="color: #00D7FF;">None</span>, <span style="color: #00AF00;">14</span>, <span style="color: #00AF00;">14</span>, <span style="color: #00AF00;">64</span>)        │          <span style="color: #00AF00;">0</span> │</span></span>
+<span><span class="co">## ├─────────────────────────────────┼───────────────────────────┼────────────┤</span></span>
+<span><span class="co">## │ conv2d (<span style="color: #0087FF;">Conv2D</span>)                 │ (<span style="color: #00D7FF;">None</span>, <span style="color: #00AF00;">7</span>, <span style="color: #00AF00;">7</span>, <span style="color: #00AF00;">128</span>)         │     <span style="color: #00AF00;">73,856</span> │</span></span>
+<span><span class="co">## ├─────────────────────────────────┼───────────────────────────┼────────────┤</span></span>
+<span><span class="co">## │ leaky_re_lu (<span style="color: #0087FF;">LeakyReLU</span>)         │ (<span style="color: #00D7FF;">None</span>, <span style="color: #00AF00;">7</span>, <span style="color: #00AF00;">7</span>, <span style="color: #00AF00;">128</span>)         │          <span style="color: #00AF00;">0</span> │</span></span>
+<span><span class="co">## ├─────────────────────────────────┼───────────────────────────┼────────────┤</span></span>
+<span><span class="co">## │ global_max_pooling2d            │ (<span style="color: #00D7FF;">None</span>, <span style="color: #00AF00;">128</span>)               │          <span style="color: #00AF00;">0</span> │</span></span>
+<span><span class="co">## │ (<span style="color: #0087FF;">GlobalMaxPooling2D</span>)            │                           │            │</span></span>
+<span><span class="co">## ├─────────────────────────────────┼───────────────────────────┼────────────┤</span></span>
+<span><span class="co">## │ dense_6 (<span style="color: #0087FF;">Dense</span>)                 │ (<span style="color: #00D7FF;">None</span>, <span style="color: #00AF00;">1</span>)                 │        <span style="color: #00AF00;">129</span> │</span></span>
+<span><span class="co">## └─────────────────────────────────┴───────────────────────────┴────────────┘</span></span>
+<span><span class="co">## <span style="font-weight: bold;"> Total params: </span><span style="color: #00AF00;">74,625</span> (291.50 KB)</span></span>
+<span><span class="co">## <span style="font-weight: bold;"> Trainable params: </span><span style="color: #00AF00;">74,625</span> (291.50 KB)</span></span>
+<span><span class="co">## <span style="font-weight: bold;"> Non-trainable params: </span><span style="color: #00AF00;">0</span> (0.00 B)</span></span></code></pre>
 <p>Then let’s create a generator network, that turns latent vectors into
 outputs of shape <code>(28, 28, 1)</code> (representing MNIST
 digits):</p>
-<div class="sourceCode" id="cb28"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb22"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">latent_dim</span> <span class="op">&lt;-</span> <span class="fl">128L</span></span>
 <span></span>
 <span><span class="va">generator</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/keras_model_sequential.html">keras_model_sequential</a></span><span class="op">(</span>name <span class="op">=</span> <span class="st">"generator"</span>, input_shape <span class="op">=</span> <span class="va">latent_dim</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span></span>
@@ -577,34 +579,34 @@ digits):</p>
 <span>  <span class="fu"><a href="../reference/layer_activation_leaky_relu.html">layer_activation_leaky_relu</a></span><span class="op">(</span>negative_slope <span class="op">=</span> <span class="fl">0.2</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span></span>
 <span>  <span class="fu"><a href="../reference/layer_conv_2d.html">layer_conv_2d</a></span><span class="op">(</span>filters <span class="op">=</span> <span class="fl">1</span>, kernel_size <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">7</span>, <span class="fl">7</span><span class="op">)</span>, padding <span class="op">=</span> <span class="st">"same"</span>, activation <span class="op">=</span> <span class="st">"sigmoid"</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary</a></span><span class="op">(</span><span class="va">generator</span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">## Model: "generator"</span></span>
-<span><span class="co">## ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━┓</span></span>
-<span><span class="co">## ┃ Layer (type)                      ┃ Output Shape                ┃    Param # ┃</span></span>
-<span><span class="co">## ┡━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━┩</span></span>
-<span><span class="co">## │ dense_5 (Dense)                   │ (None, 6272)                │    809,088 │</span></span>
-<span><span class="co">## ├───────────────────────────────────┼─────────────────────────────┼────────────┤</span></span>
-<span><span class="co">## │ leaky_re_lu_4 (LeakyReLU)         │ (None, 6272)                │          0 │</span></span>
-<span><span class="co">## ├───────────────────────────────────┼─────────────────────────────┼────────────┤</span></span>
-<span><span class="co">## │ reshape (Reshape)                 │ (None, 7, 7, 128)           │          0 │</span></span>
-<span><span class="co">## ├───────────────────────────────────┼─────────────────────────────┼────────────┤</span></span>
-<span><span class="co">## │ conv2d_transpose_1                │ (None, 14, 14, 128)         │    262,272 │</span></span>
-<span><span class="co">## │ (Conv2DTranspose)                 │                             │            │</span></span>
-<span><span class="co">## ├───────────────────────────────────┼─────────────────────────────┼────────────┤</span></span>
-<span><span class="co">## │ leaky_re_lu_3 (LeakyReLU)         │ (None, 14, 14, 128)         │          0 │</span></span>
-<span><span class="co">## ├───────────────────────────────────┼─────────────────────────────┼────────────┤</span></span>
-<span><span class="co">## │ conv2d_transpose                  │ (None, 28, 28, 128)         │    262,272 │</span></span>
-<span><span class="co">## │ (Conv2DTranspose)                 │                             │            │</span></span>
-<span><span class="co">## ├───────────────────────────────────┼─────────────────────────────┼────────────┤</span></span>
-<span><span class="co">## │ leaky_re_lu_2 (LeakyReLU)         │ (None, 28, 28, 128)         │          0 │</span></span>
-<span><span class="co">## ├───────────────────────────────────┼─────────────────────────────┼────────────┤</span></span>
-<span><span class="co">## │ conv2d_2 (Conv2D)                 │ (None, 28, 28, 1)           │      6,273 │</span></span>
-<span><span class="co">## └───────────────────────────────────┴─────────────────────────────┴────────────┘</span></span>
-<span><span class="co">##  Total params: 1,339,905 (5.11 MB)</span></span>
-<span><span class="co">##  Trainable params: 1,339,905 (5.11 MB)</span></span>
-<span><span class="co">##  Non-trainable params: 0 (0.00 B)</span></span></code></pre>
+<pre><code><span><span class="co">## <span style="font-weight: bold;">Model: "generator"</span></span></span>
+<span><span class="co">## ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━┓</span></span>
+<span><span class="co">## ┃<span style="font-weight: bold;"> Layer (type)                    </span>┃<span style="font-weight: bold;"> Output Shape              </span>┃<span style="font-weight: bold;">    Param # </span>┃</span></span>
+<span><span class="co">## ┡━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━┩</span></span>
+<span><span class="co">## │ dense_7 (<span style="color: #0087FF;">Dense</span>)                 │ (<span style="color: #00D7FF;">None</span>, <span style="color: #00AF00;">6272</span>)              │    <span style="color: #00AF00;">809,088</span> │</span></span>
+<span><span class="co">## ├─────────────────────────────────┼───────────────────────────┼────────────┤</span></span>
+<span><span class="co">## │ leaky_re_lu_4 (<span style="color: #0087FF;">LeakyReLU</span>)       │ (<span style="color: #00D7FF;">None</span>, <span style="color: #00AF00;">6272</span>)              │          <span style="color: #00AF00;">0</span> │</span></span>
+<span><span class="co">## ├─────────────────────────────────┼───────────────────────────┼────────────┤</span></span>
+<span><span class="co">## │ reshape (<span style="color: #0087FF;">Reshape</span>)               │ (<span style="color: #00D7FF;">None</span>, <span style="color: #00AF00;">7</span>, <span style="color: #00AF00;">7</span>, <span style="color: #00AF00;">128</span>)         │          <span style="color: #00AF00;">0</span> │</span></span>
+<span><span class="co">## ├─────────────────────────────────┼───────────────────────────┼────────────┤</span></span>
+<span><span class="co">## │ conv2d_transpose_1              │ (<span style="color: #00D7FF;">None</span>, <span style="color: #00AF00;">14</span>, <span style="color: #00AF00;">14</span>, <span style="color: #00AF00;">128</span>)       │    <span style="color: #00AF00;">262,272</span> │</span></span>
+<span><span class="co">## │ (<span style="color: #0087FF;">Conv2DTranspose</span>)               │                           │            │</span></span>
+<span><span class="co">## ├─────────────────────────────────┼───────────────────────────┼────────────┤</span></span>
+<span><span class="co">## │ leaky_re_lu_3 (<span style="color: #0087FF;">LeakyReLU</span>)       │ (<span style="color: #00D7FF;">None</span>, <span style="color: #00AF00;">14</span>, <span style="color: #00AF00;">14</span>, <span style="color: #00AF00;">128</span>)       │          <span style="color: #00AF00;">0</span> │</span></span>
+<span><span class="co">## ├─────────────────────────────────┼───────────────────────────┼────────────┤</span></span>
+<span><span class="co">## │ conv2d_transpose                │ (<span style="color: #00D7FF;">None</span>, <span style="color: #00AF00;">28</span>, <span style="color: #00AF00;">28</span>, <span style="color: #00AF00;">128</span>)       │    <span style="color: #00AF00;">262,272</span> │</span></span>
+<span><span class="co">## │ (<span style="color: #0087FF;">Conv2DTranspose</span>)               │                           │            │</span></span>
+<span><span class="co">## ├─────────────────────────────────┼───────────────────────────┼────────────┤</span></span>
+<span><span class="co">## │ leaky_re_lu_2 (<span style="color: #0087FF;">LeakyReLU</span>)       │ (<span style="color: #00D7FF;">None</span>, <span style="color: #00AF00;">28</span>, <span style="color: #00AF00;">28</span>, <span style="color: #00AF00;">128</span>)       │          <span style="color: #00AF00;">0</span> │</span></span>
+<span><span class="co">## ├─────────────────────────────────┼───────────────────────────┼────────────┤</span></span>
+<span><span class="co">## │ conv2d_2 (<span style="color: #0087FF;">Conv2D</span>)               │ (<span style="color: #00D7FF;">None</span>, <span style="color: #00AF00;">28</span>, <span style="color: #00AF00;">28</span>, <span style="color: #00AF00;">1</span>)         │      <span style="color: #00AF00;">6,273</span> │</span></span>
+<span><span class="co">## └─────────────────────────────────┴───────────────────────────┴────────────┘</span></span>
+<span><span class="co">## <span style="font-weight: bold;"> Total params: </span><span style="color: #00AF00;">1,339,905</span> (5.11 MB)</span></span>
+<span><span class="co">## <span style="font-weight: bold;"> Trainable params: </span><span style="color: #00AF00;">1,339,905</span> (5.11 MB)</span></span>
+<span><span class="co">## <span style="font-weight: bold;"> Non-trainable params: </span><span style="color: #00AF00;">0</span> (0.00 B)</span></span></code></pre>
 <p>Here’s the key bit: the training loop. As you can see it is quite
 straightforward. The training step function only takes 17 lines.</p>
-<div class="sourceCode" id="cb30"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb24"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Instantiate one optimizer for the discriminator and another for the generator.</span></span>
 <span><span class="va">d_optimizer</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/optimizer_adam.html">optimizer_adam</a></span><span class="op">(</span>learning_rate<span class="op">=</span><span class="fl">0.0003</span><span class="op">)</span></span>
 <span><span class="va">g_optimizer</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/optimizer_adam.html">optimizer_adam</a></span><span class="op">(</span>learning_rate<span class="op">=</span><span class="fl">0.0004</span><span class="op">)</span></span>
@@ -669,7 +671,7 @@ straightforward. The training step function only takes 17 lines.</p>
 batches of images.</p>
 <p>Since our discriminator and generator are convnets, you’re going to
 want to run this code on a GPU.</p>
-<div class="sourceCode" id="cb31"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb25"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Prepare the dataset. We use both the training &amp; test MNIST digits.</span></span>
 <span><span class="va">batch_size</span> <span class="op">&lt;-</span> <span class="fl">64</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="va">x_train</span>, <span class="va">.</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="va">x_test</span>, <span class="va">.</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="../reference/multi-assign.html">%&lt;-%</a></span> <span class="fu"><a href="../reference/dataset_mnist.html">dataset_mnist</a></span><span class="op">(</span><span class="op">)</span></span>

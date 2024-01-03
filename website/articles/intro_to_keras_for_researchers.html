@@ -108,10 +108,9 @@
 <div class="row">
   <main id="main" class="col-md-9"><div class="page-header">
       <img src="" class="logo" alt=""><h1>Introduction to Keras for Researchers</h1>
-                        <h4 data-toc-skip class="author"><a href="https://twitter.com/fchollet" class="external-link">fchollet</a></h4>
             
-            <h4 data-toc-skip class="date">Last Modified: 2023-11-21;
-Last Rendered: 2023-11-24</h4>
+            <h4 data-toc-skip class="date">Last Modified: 2023-12-01;
+Last Rendered: 2024-01-03</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/rstudio/keras/blob/HEAD/vignettes/intro_to_keras_for_researchers.Rmd" class="external-link"><code>vignettes/intro_to_keras_for_researchers.Rmd</code></a></small>
       <div class="d-none name"><code>intro_to_keras_for_researchers.Rmd</code></div>
@@ -125,11 +124,6 @@ Last Rendered: 2023-11-24</h4>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https:/keras.posit.co/">keras3</a></span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/rstudio/tensorflow" class="external-link">tensorflow</a></span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">##</span></span>
-<span><span class="co">## Attaching package: 'tensorflow'</span></span></code></pre>
-<pre><code><span><span class="co">## The following objects are masked from 'package:keras':</span></span>
-<span><span class="co">##</span></span>
-<span><span class="co">##     set_random_seed, shape</span></span></code></pre>
 </div>
 <div class="section level2">
 <h2 id="introduction">Introduction<a class="anchor" aria-label="anchor" href="#introduction"></a>
@@ -173,7 +167,7 @@ with multiple devices each).</li>
 <p>Let’s take a look at the object that is at the core of TensorFlow:
 the Tensor.</p>
 <p>Here’s a constant tensor:</p>
-<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">x</span> <span class="op">&lt;-</span> <span class="va">tf</span><span class="op">$</span><span class="fu">constant</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/cbind.html" class="external-link">rbind</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">5</span>, <span class="fl">2</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">3</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">## tf.Tensor(</span></span>
@@ -181,33 +175,33 @@ the Tensor.</p>
 <span><span class="co">##  [1. 3.]], shape=(2, 2), dtype=float64)</span></span></code></pre>
 <p>You can get its value as a R array by calling
 <code><a href="https://rdrr.io/r/base/array.html" class="external-link">as.array()</a></code>:</p>
-<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/array.html" class="external-link">as.array</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">##      [,1] [,2]</span></span>
 <span><span class="co">## [1,]    5    2</span></span>
 <span><span class="co">## [2,]    1    3</span></span></code></pre>
 <p>It features the attributes <code>dtype</code> and
 <code>shape</code>:</p>
-<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">x</span><span class="op">$</span><span class="va">dtype</span></span></code></pre></div>
 <pre><code><span><span class="co">## tf.float64</span></span></code></pre>
-<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">x</span><span class="op">$</span><span class="va">shape</span></span></code></pre></div>
 <pre><code><span><span class="co">## TensorShape([2, 2])</span></span></code></pre>
 <p>A common way to create constant tensors is via <code>tf$ones</code>
 and <code>tf$zeros</code>:</p>
-<div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">tf</span><span class="op">$</span><span class="fu">ones</span><span class="op">(</span>shape<span class="op">=</span><span class="fu"><a href="../reference/shape.html">shape</a></span><span class="op">(</span><span class="fl">2</span>, <span class="fl">1</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">## tf.Tensor(</span></span>
 <span><span class="co">## [[1.]</span></span>
 <span><span class="co">##  [1.]], shape=(2, 1), dtype=float32)</span></span></code></pre>
-<div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">tf</span><span class="op">$</span><span class="fu">zeros</span><span class="op">(</span>shape<span class="op">=</span><span class="fu"><a href="../reference/shape.html">shape</a></span><span class="op">(</span><span class="fl">2</span>, <span class="fl">1</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">## tf.Tensor(</span></span>
 <span><span class="co">## [[0.]</span></span>
 <span><span class="co">##  [0.]], shape=(2, 1), dtype=float32)</span></span></code></pre>
 <p>You can also create random constant tensors:</p>
-<div class="sourceCode" id="cb16"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">x</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/random_normal.html">random_normal</a></span><span class="op">(</span>shape<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">2</span>, <span class="fl">2</span><span class="op">)</span>, mean<span class="op">=</span><span class="fl">0.0</span>, stddev<span class="op">=</span><span class="fl">1.0</span><span class="op">)</span></span>
 <span></span>
 <span><span class="va">x</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/random_uniform.html">random_uniform</a></span><span class="op">(</span>shape<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">2</span>, <span class="fl">2</span><span class="op">)</span>, minval<span class="op">=</span><span class="fl">0</span>, maxval<span class="op">=</span><span class="fl">10</span><span class="op">)</span></span></code></pre></div>
@@ -218,7 +212,7 @@ and <code>tf$zeros</code>:</p>
 <p>Variables are special tensors used to store mutable state (such as
 the weights of a neural network). You create a <code>Variable</code>
 using some initial value:</p>
-<div class="sourceCode" id="cb17"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">initial_value</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/random_normal.html">random_normal</a></span><span class="op">(</span>shape<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">2</span>, <span class="fl">2</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="va">a</span> <span class="op">&lt;-</span> <span class="va">tf</span><span class="op">$</span><span class="fu">Variable</span><span class="op">(</span><span class="va">initial_value</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">a</span><span class="op">)</span></span></code></pre></div>
@@ -228,13 +222,13 @@ using some initial value:</p>
 <p>You update the value of a <code>Variable</code> by using the methods
 <code>$assign(value)</code>, <code>$assign_add(increment)</code>, or
 <code>$assign_sub(decrement)</code>:</p>
-<div class="sourceCode" id="cb19"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb17"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">new_value</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/random_normal.html">random_normal</a></span><span class="op">(</span>shape<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">2</span>, <span class="fl">2</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="va">a</span><span class="op">$</span><span class="fu">assign</span><span class="op">(</span><span class="va">new_value</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">## &lt;tf.Variable 'UnreadVariable' shape=(2, 2) dtype=float32, numpy=</span></span>
 <span><span class="co">## array([[-0.3405368 , -2.1463926 ],</span></span>
 <span><span class="co">##        [ 1.2602988 ,  0.12241419]], dtype=float32)&gt;</span></span></code></pre>
-<div class="sourceCode" id="cb21"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb19"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">added_value</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/random_normal.html">random_normal</a></span><span class="op">(</span>shape<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">2</span>, <span class="fl">2</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="va">a</span><span class="op">$</span><span class="fu">assign_add</span><span class="op">(</span><span class="va">added_value</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">## &lt;tf.Variable 'UnreadVariable' shape=(2, 2) dtype=float32, numpy=</span></span>
@@ -247,7 +241,7 @@ using some initial value:</p>
 <p>If you’ve used NumPy, doing math in TensorFlow will look very
 familiar. The main difference is that your TensorFlow code can run on
 GPU and TPU.</p>
-<div class="sourceCode" id="cb23"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb21"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">a</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/random_normal.html">random_normal</a></span><span class="op">(</span>shape<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">2</span>, <span class="fl">2</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="va">b</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/random_normal.html">random_normal</a></span><span class="op">(</span>shape<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">2</span>, <span class="fl">2</span><span class="op">)</span><span class="op">)</span></span>
 <span></span>
@@ -263,7 +257,7 @@ the gradient of any differentiable expression.</p>
 <p>Just open a <code>GradientTape</code>, start “watching” a tensor via
 <code>tape$watch()</code>, and compose a differentiable expression using
 this tensor as input:</p>
-<div class="sourceCode" id="cb24"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb22"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">a</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/random_normal.html">random_normal</a></span><span class="op">(</span>shape<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">2</span>, <span class="fl">2</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="va">b</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/random_normal.html">random_normal</a></span><span class="op">(</span>shape<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">2</span>, <span class="fl">2</span><span class="op">)</span><span class="op">)</span></span>
 <span></span>
@@ -279,7 +273,7 @@ this tensor as input:</p>
 <span><span class="co">##  [ 0.23378514  0.9625516 ]], shape=(2, 2), dtype=float32)</span></span></code></pre>
 <p>By default, variables are watched automatically, so you don’t need to
 manually <code>watch</code> them:</p>
-<div class="sourceCode" id="cb26"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb24"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">a</span> <span class="op">&lt;-</span> <span class="va">tf</span><span class="op">$</span><span class="fu">Variable</span><span class="op">(</span><span class="va">a</span><span class="op">)</span></span>
 <span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/with.html" class="external-link">with</a></span><span class="op">(</span><span class="va">tf</span><span class="op">$</span><span class="fu">GradientTape</span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="https://rstudio.github.io/reticulate/reference/with-as-operator.html" class="external-link">%as%</a></span> <span class="va">tape</span>, <span class="op">{</span></span>
@@ -292,7 +286,7 @@ manually <code>watch</code> them:</p>
 <span><span class="co">##  [ 0.23378514  0.9625516 ]], shape=(2, 2), dtype=float32)</span></span></code></pre>
 <p>Note that you can compute higher-order derivatives by nesting
 tapes:</p>
-<div class="sourceCode" id="cb28"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb26"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/with.html" class="external-link">with</a></span><span class="op">(</span><span class="va">tf</span><span class="op">$</span><span class="fu">GradientTape</span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="https://rstudio.github.io/reticulate/reference/with-as-operator.html" class="external-link">%as%</a></span> <span class="va">outer_tape</span>, <span class="op">{</span></span>
 <span>  <span class="fu"><a href="https://rdrr.io/r/base/with.html" class="external-link">with</a></span><span class="op">(</span><span class="va">tf</span><span class="op">$</span><span class="fu">GradientTape</span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="https://rstudio.github.io/reticulate/reference/with-as-operator.html" class="external-link">%as%</a></span> <span class="va">tape</span>, <span class="op">{</span></span>
 <span>    <span class="va">c</span> <span class="op">&lt;-</span> <span class="va">tf</span><span class="op">$</span><span class="fu">sqrt</span><span class="op">(</span><span class="va">tf</span><span class="op">$</span><span class="fu">square</span><span class="op">(</span><span class="va">a</span><span class="op">)</span> <span class="op">+</span> <span class="va">tf</span><span class="op">$</span><span class="fu">square</span><span class="op">(</span><span class="va">b</span><span class="op">)</span><span class="op">)</span></span>
@@ -320,7 +314,7 @@ A <code>Layer</code> encapsulates a state (weights) and some computation
 (defined in the call method).</p>
 <p>A simple layer looks like this. The <code>self$add_weight()</code>
 method gives you a shortcut for creating weights:</p>
-<div class="sourceCode" id="cb30"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb28"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">Linear</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/Layer.html">new_layer_class</a></span><span class="op">(</span></span>
 <span>  <span class="st">"Linear"</span>,</span>
 <span>  initialize <span class="op">=</span> <span class="kw">function</span><span class="op">(</span><span class="va">units</span> <span class="op">=</span> <span class="fl">32</span>, <span class="va">input_dim</span> <span class="op">=</span> <span class="fl">32</span><span class="op">)</span> <span class="op">{</span></span>
@@ -342,7 +336,7 @@ method gives you a shortcut for creating weights:</p>
 <span><span class="op">)</span></span></code></pre></div>
 <p>You would use a <code>Layer</code> instance much like a R
 function:</p>
-<div class="sourceCode" id="cb31"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb29"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Instantiate our layer.</span></span>
 <span><span class="va">linear_layer</span> <span class="op">&lt;-</span> <span class="fu">Linear</span><span class="op">(</span>units<span class="op">=</span><span class="fl">4</span>, input_dim<span class="op">=</span><span class="fl">2</span><span class="op">)</span></span>
 <span></span>
@@ -351,7 +345,7 @@ function:</p>
 <span><span class="va">y</span> <span class="op">&lt;-</span> <span class="fu">linear_layer</span><span class="op">(</span><span class="va">tf</span><span class="op">$</span><span class="fu">ones</span><span class="op">(</span><span class="fu"><a href="../reference/shape.html">shape</a></span><span class="op">(</span><span class="fl">2</span>, <span class="fl">2</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <p>The weight variables (created in <code>initialize</code>) are
 automatically tracked under the <code>weights</code> property:</p>
-<div class="sourceCode" id="cb32"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb30"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">linear_layer</span><span class="op">$</span><span class="va">weights</span></span></code></pre></div>
 <pre><code><span><span class="co">## [[1]]</span></span>
 <span><span class="co">## &lt;KerasVariable shape=(2, 4), dtype=float32, path=linear/variable&gt;</span></span>
@@ -369,7 +363,7 @@ reusing built-in functionality.</p>
 <p>It’s often a good idea to defer weight creation to the
 <code>build()</code> method, so that you don’t need to specify the input
 dim/shape at layer construction time:</p>
-<div class="sourceCode" id="cb34"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb32"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">Linear</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/Layer.html">new_layer_class</a></span><span class="op">(</span></span>
 <span>  <span class="st">"Linear"</span>,</span>
 <span>  initialize <span class="op">=</span> <span class="kw">function</span><span class="op">(</span><span class="va">units</span> <span class="op">=</span> <span class="fl">32</span><span class="op">)</span> <span class="op">{</span></span>
@@ -407,7 +401,7 @@ layer by calling it inside a <code>GradientTape</code>. Using these
 gradients, you can update the weights of the layer, either manually, or
 using an optimizer object. Of course, you can modify the gradients
 before using them, if you need to.</p>
-<div class="sourceCode" id="cb35"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb33"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Prepare a dataset.</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="va">x_train</span>, <span class="va">y_train</span><span class="op">)</span>, <span class="va">.</span><span class="op">)</span> <span class="op"><a href="../reference/multi-assign.html">%&lt;-%</a></span> <span class="fu"><a href="../reference/dataset_mnist.html">dataset_mnist</a></span><span class="op">(</span><span class="op">)</span></span>
 <span></span>
@@ -453,7 +447,7 @@ before using them, if you need to.</p>
 They’re exposed in <code>trainable_weights</code> and
 <code>non_trainable_weights</code> respectively. Here’s a layer with a
 non-trainable weight:</p>
-<div class="sourceCode" id="cb37"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb35"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">ComputeSum</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/Layer.html">new_layer_class</a></span><span class="op">(</span></span>
 <span>  <span class="st">"ComputeSum"</span>,</span>
 <span>  initialize <span class="op">=</span> <span class="kw">function</span><span class="op">(</span><span class="va">input_dim</span><span class="op">)</span> <span class="op">{</span></span>
@@ -476,10 +470,10 @@ non-trainable weight:</p>
 <span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/array.html" class="external-link">as.array</a></span><span class="op">(</span><span class="fu">my_sum</span><span class="op">(</span><span class="va">x</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">## [1] 2 2</span></span></code></pre>
-<div class="sourceCode" id="cb39"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb37"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/array.html" class="external-link">as.array</a></span><span class="op">(</span><span class="fu">my_sum</span><span class="op">(</span><span class="va">x</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">## [1] 4 4</span></span></code></pre>
-<div class="sourceCode" id="cb41"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb39"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">my_sum</span><span class="op">$</span><span class="va">trainable_weights</span></span></code></pre></div>
 <pre><code><span><span class="co">## list()</span></span></code></pre>
 </div>
@@ -489,7 +483,7 @@ non-trainable weight:</p>
 <p>Layers can be recursively nested to create bigger computation blocks.
 Each layer will track the weights of its sublayers (both trainable and
 non-trainable).</p>
-<div class="sourceCode" id="cb43"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb41"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Let's reuse the Linear class</span></span>
 <span><span class="co"># with a `build` method that we defined above.</span></span>
 <span></span>
@@ -520,7 +514,7 @@ non-trainable).</p>
 <pre><code><span><span class="co">## [1] 6</span></span></code></pre>
 <p>Note that our manually-created MLP above is equivalent to the
 following built-in option:</p>
-<div class="sourceCode" id="cb45"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb43"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">mlp</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/keras_model_sequential.html">keras_model_sequential</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span></span>
 <span>  <span class="fu"><a href="../reference/layer_dense.html">layer_dense</a></span><span class="op">(</span>units <span class="op">=</span> <span class="fl">32</span>, activation <span class="op">=</span> <span class="st">"relu"</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span></span>
 <span>  <span class="fu"><a href="../reference/layer_dense.html">layer_dense</a></span><span class="op">(</span>units <span class="op">=</span> <span class="fl">32</span>, activation <span class="op">=</span> <span class="st">"relu"</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span></span>
@@ -534,7 +528,7 @@ following built-in option:</p>
 regularization losses. The losses created by sublayers are recursively
 tracked by the parent layers.</p>
 <p>Here’s a layer that creates an activity regularization loss:</p>
-<div class="sourceCode" id="cb46"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb44"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># A layer that creates an activity sparsity regularization loss</span></span>
 <span><span class="va">ActivityRegularization</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/Layer.html">new_layer_class</a></span><span class="op">(</span></span>
 <span>  <span class="st">"ActivityRegularization"</span>,</span>
@@ -549,7 +543,7 @@ tracked by the parent layers.</p>
 <span><span class="op">)</span></span></code></pre></div>
 <p>Any model incorporating this layer will track this regularization
 loss:</p>
-<div class="sourceCode" id="cb47"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb45"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Let's use the loss layer in a MLP block.</span></span>
 <span><span class="va">SparseMLP</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/Layer.html">new_layer_class</a></span><span class="op">(</span></span>
 <span>  <span class="st">"SparseMLP"</span>,</span>
@@ -578,7 +572,7 @@ forward pass – they don’t accumulate. <code>layer.losses</code> always
 contains only the losses created during the last forward pass. You would
 typically use these losses by summing them before computing your
 gradients when writing a training loop.</p>
-<div class="sourceCode" id="cb49"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb47"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Losses correspond to the *last* forward pass.</span></span>
 <span><span class="va">mlp</span> <span class="op">&lt;-</span> <span class="fu">SparseMLP</span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="fu">mlp</span><span class="op">(</span><span class="va">tf</span><span class="op">$</span><span class="fu">ones</span><span class="op">(</span><span class="fu"><a href="../reference/shape.html">shape</a></span><span class="op">(</span><span class="fl">10</span>, <span class="fl">10</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
@@ -603,10 +597,10 @@ gradients when writing a training loop.</p>
 <span><span class="co">##   -0.01077365  0.05688906 -0.02838149 -0.0408462 ]</span></span>
 <span><span class="co">##  [ 0.0388482  -0.03920118  0.01624807 -0.01361975 -0.013549    0.07107338</span></span>
 <span><span class="co">##   -0.01077365  0.05688906 -0.02838149 -0.0408462 ]], shape=(10, 10), dtype=float32)</span></span></code></pre>
-<div class="sourceCode" id="cb51"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb49"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/length.html" class="external-link">length</a></span><span class="op">(</span><span class="va">mlp</span><span class="op">$</span><span class="va">losses</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">## [1] 1</span></span></code></pre>
-<div class="sourceCode" id="cb53"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb51"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu">mlp</span><span class="op">(</span><span class="va">tf</span><span class="op">$</span><span class="fu">ones</span><span class="op">(</span><span class="fu"><a href="../reference/shape.html">shape</a></span><span class="op">(</span><span class="fl">10</span>, <span class="fl">10</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">## tf.Tensor(</span></span>
 <span><span class="co">## [[ 0.0388482  -0.03920118  0.01624807 -0.01361975 -0.013549    0.07107338</span></span>
@@ -629,10 +623,10 @@ gradients when writing a training loop.</p>
 <span><span class="co">##   -0.01077365  0.05688906 -0.02838149 -0.0408462 ]</span></span>
 <span><span class="co">##  [ 0.0388482  -0.03920118  0.01624807 -0.01361975 -0.013549    0.07107338</span></span>
 <span><span class="co">##   -0.01077365  0.05688906 -0.02838149 -0.0408462 ]], shape=(10, 10), dtype=float32)</span></span></code></pre>
-<div class="sourceCode" id="cb55"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb53"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/length.html" class="external-link">length</a></span><span class="op">(</span><span class="va">mlp</span><span class="op">$</span><span class="va">losses</span><span class="op">)</span>  <span class="co"># No accumulation.</span></span></code></pre></div>
 <pre><code><span><span class="co">## [1] 1</span></span></code></pre>
-<div class="sourceCode" id="cb57"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb55"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Let's demonstrate how to use these losses in a training loop.</span></span>
 <span></span>
 <span><span class="co"># Prepare a dataset.</span></span>
@@ -691,7 +685,7 @@ an evaluation via <code>metric$reset_state()</code>
 </li>
 </ul>
 <p>Here’s a simple example:</p>
-<div class="sourceCode" id="cb58"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb56"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Instantiate a metric object</span></span>
 <span><span class="va">accuracy</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/metric_sparse_categorical_accuracy.html">metric_sparse_categorical_accuracy</a></span><span class="op">(</span><span class="op">)</span></span>
 <span></span>
@@ -740,7 +734,7 @@ initial state.</li>
 </ul>
 <p>Here is an example where we implement the F1-score metric (with
 support for sample weighting).</p>
-<div class="sourceCode" id="cb60"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb58"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">F1Score</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/new-classes.html">new_metric_class</a></span><span class="op">(</span></span>
 <span>  <span class="st">"F1Score"</span>,</span>
 <span>  initialize <span class="op">=</span> <span class="kw">function</span><span class="op">(</span><span class="va">self</span>, <span class="va">name</span><span class="op">=</span><span class="st">"f1_score"</span>, <span class="va">dtype</span><span class="op">=</span><span class="st">"float32"</span>, <span class="va">threshold</span><span class="op">=</span><span class="fl">0.5</span>, <span class="va">...</span><span class="op">)</span> <span class="op">{</span></span>
@@ -791,12 +785,12 @@ support for sample weighting).</p>
 <span>  <span class="op">}</span></span>
 <span><span class="op">)</span></span></code></pre></div>
 <p>Let’s test-drive it:</p>
-<div class="sourceCode" id="cb61"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb59"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">m</span> <span class="op">&lt;-</span> <span class="fu">F1Score</span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="va">m</span><span class="op">$</span><span class="fu">update_state</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">1</span>, <span class="fl">0</span>, <span class="fl">0</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0.3</span>, <span class="fl">0.5</span>, <span class="fl">0.8</span>, <span class="fl">0.9</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/cat.html" class="external-link">cat</a></span><span class="op">(</span><span class="st">"Intermediate result:"</span>, <span class="fu"><a href="https://rdrr.io/r/base/numeric.html" class="external-link">as.numeric</a></span><span class="op">(</span><span class="va">m</span><span class="op">$</span><span class="fu">result</span><span class="op">(</span><span class="op">)</span><span class="op">)</span>, <span class="st">"\n"</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">## Intermediate result: 0.5</span></span></code></pre>
-<div class="sourceCode" id="cb63"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb61"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">m</span><span class="op">$</span><span class="fu">update_state</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">1</span>, <span class="fl">1</span>, <span class="fl">1</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0.1</span>, <span class="fl">0.7</span>, <span class="fl">0.6</span>, <span class="fl">0.0</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/cat.html" class="external-link">cat</a></span><span class="op">(</span><span class="st">"Final result:"</span>, <span class="fu"><a href="https://rdrr.io/r/base/numeric.html" class="external-link">as.numeric</a></span><span class="op">(</span><span class="va">m</span><span class="op">$</span><span class="fu">result</span><span class="op">(</span><span class="op">)</span><span class="op">)</span>, <span class="st">"\n"</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">## Final result: 0.6</span></span></code></pre>
@@ -808,7 +802,7 @@ support for sample weighting).</p>
 performance by compiling your computation into static graphs. Static
 graphs are a researcher’s best friends. You can compile any function by
 wrapping it in a <code>tf.function</code> decorator.</p>
-<div class="sourceCode" id="cb65"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb63"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Prepare our layer, loss, and optimizer.</span></span>
 <span><span class="va">model</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/keras_model_sequential.html">keras_model_sequential</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span></span>
 <span>  <span class="fu"><a href="../reference/layer_dense.html">layer_dense</a></span><span class="op">(</span>units <span class="op">=</span> <span class="fl">32</span>, activation <span class="op">=</span> <span class="st">"relu"</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span></span>
@@ -870,7 +864,7 @@ expose a <code>training</code> (boolean) argument in the
 <p>By exposing this argument in <code>call</code>, you enable the
 built-in training and evaluation loops (e.g. fit) to correctly use the
 layer in training and inference modes.</p>
-<div class="sourceCode" id="cb67"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb65"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">Dropout</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/Layer.html">new_layer_class</a></span><span class="op">(</span></span>
 <span>  <span class="st">"Dropout"</span>,</span>
 <span>  initialize <span class="op">=</span> <span class="kw">function</span><span class="op">(</span><span class="va">rate</span><span class="op">)</span> <span class="op">{</span></span>
@@ -911,7 +905,7 @@ layer in training and inference modes.</p>
 <p>To build deep learning models, you don’t have to use object-oriented
 programming all the time. All layers we’ve seen so far can also be
 composed functionally, like this (we call it the “Functional API”):</p>
-<div class="sourceCode" id="cb68"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb66"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># We use an `Input` object to describe the shape and dtype of the inputs.</span></span>
 <span><span class="co"># This is the deep learning equivalent of *declaring a type*.</span></span>
 <span><span class="co"># The shape argument is per-sample; it does not include the batch size.</span></span>
@@ -935,12 +929,12 @@ composed functionally, like this (we call it the “Functional API”):</p>
 <span><span class="co"># That's because we defined its input shape in advance (in `Input`).</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/length.html" class="external-link">length</a></span><span class="op">(</span><span class="va">model</span><span class="op">$</span><span class="va">weights</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">## [1] 4</span></span></code></pre>
-<div class="sourceCode" id="cb70"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb68"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Let's call our model on some data, for fun.</span></span>
 <span><span class="va">y</span> <span class="op">&lt;-</span> <span class="fu">model</span><span class="op">(</span><span class="va">tf</span><span class="op">$</span><span class="fu">ones</span><span class="op">(</span><span class="fu"><a href="../reference/shape.html">shape</a></span><span class="op">(</span><span class="fl">2</span>, <span class="fl">16</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="va">y</span><span class="op">$</span><span class="va">shape</span></span></code></pre></div>
 <pre><code><span><span class="co">## TensorShape([2, 10])</span></span></code></pre>
-<div class="sourceCode" id="cb72"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb70"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># You can pass a `training` argument in `__call__`</span></span>
 <span><span class="co"># (it will get passed down to the Dropout layer).</span></span>
 <span><span class="va">y</span> <span class="op">&lt;-</span> <span class="fu">model</span><span class="op">(</span><span class="va">tf</span><span class="op">$</span><span class="fu">ones</span><span class="op">(</span><span class="fu"><a href="../reference/shape.html">shape</a></span><span class="op">(</span><span class="fl">2</span>, <span class="fl">16</span><span class="op">)</span><span class="op">)</span>, training<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
@@ -978,7 +972,7 @@ utilization on TPUs.</li>
 <p>We won’t go into the details, but we provide a simple code example
 below. It leverages the built-in training infrastructure to implement
 the MNIST example above.</p>
-<div class="sourceCode" id="cb73"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb71"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">inputs</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/layer_input.html">layer_input</a></span><span class="op">(</span>shape <span class="op">=</span> <span class="fl">784</span>, dtype<span class="op">=</span><span class="st">"float32"</span><span class="op">)</span></span>
 <span><span class="va">outputs</span> <span class="op">&lt;-</span> <span class="va">inputs</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span></span>
 <span>  <span class="fu"><a href="../reference/layer_dense.html">layer_dense</a></span><span class="op">(</span>units <span class="op">=</span> <span class="fl">32</span>, activation <span class="op">=</span> <span class="st">"relu"</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span></span>
@@ -996,17 +990,20 @@ the MNIST example above.</p>
 <span><span class="co"># Train the model with the dataset for 2 epochs.</span></span>
 <span><span class="va">model</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://generics.r-lib.org/reference/fit.html" class="external-link">fit</a></span><span class="op">(</span><span class="va">dataset</span>, epochs<span class="op">=</span><span class="fl">2</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">## Epoch 1/2</span></span>
-<span><span class="co">## 938/938 - 1s - 846us/step - loss: 0.3958 - sparse_categorical_accuracy: 0.8866</span></span>
+<span><span class="co">## 938/938 - 1s - 1ms/step - loss: 0.3958 - sparse_categorical_accuracy: 0.8866</span></span>
 <span><span class="co">## Epoch 2/2</span></span>
-<span><span class="co">## 938/938 - 1s - 602us/step - loss: 0.1888 - sparse_categorical_accuracy: 0.9443</span></span></code></pre>
-<div class="sourceCode" id="cb75"><pre class="downlit sourceCode r">
+<span><span class="co">## 938/938 - 1s - 591us/step - loss: 0.1888 - sparse_categorical_accuracy: 0.9443</span></span></code></pre>
+<div class="sourceCode" id="cb73"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">predictions</span> <span class="op">&lt;-</span> <span class="va">model</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://rdrr.io/r/stats/predict.html" class="external-link">predict</a></span><span class="op">(</span><span class="va">dataset</span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">## 938/938 - 0s - 378us/step</span></span></code></pre>
-<div class="sourceCode" id="cb77"><pre class="downlit sourceCode r">
+<pre><code><span><span class="co">## 938/938 - 0s - 413us/step</span></span></code></pre>
+<div class="sourceCode" id="cb75"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">model</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://rdrr.io/pkg/tensorflow/man/evaluate.html" class="external-link">evaluate</a></span><span class="op">(</span><span class="va">dataset</span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">## 938/938 - 0s - 367us/step - loss: 0.1763 - sparse_categorical_accuracy: 0.9454</span></span></code></pre>
-<pre><code><span><span class="co">##            loss compile_metrics</span></span>
-<span><span class="co">##       0.1763445       0.9454167</span></span></code></pre>
+<pre><code><span><span class="co">## 938/938 - 0s - 402us/step - loss: 0.1763 - sparse_categorical_accuracy: 0.9454</span></span></code></pre>
+<pre><code><span><span class="co">## $loss</span></span>
+<span><span class="co">## [1] 0.1763445</span></span>
+<span><span class="co">##</span></span>
+<span><span class="co">## $sparse_categorical_accuracy</span></span>
+<span><span class="co">## [1] 0.9454167</span></span></code></pre>
 <p>You can always subclass the <code>Model</code> class (it works
 exactly like subclassing <code>Layer</code>) if you want to leverage
 built-in training loops for your OO models. Just override the
@@ -1019,7 +1016,7 @@ distribution support, and step fusing support. You may also override
 customize what happens in <code><a href="https://rdrr.io/r/stats/predict.html" class="external-link">predict()</a></code>. For more information,
 please refer to <a href="https://keras.io/guides/customizing_what_happens_in_fit/" class="external-link">this
 guide</a>.</p>
-<div class="sourceCode" id="cb80"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb78"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">CustomModel</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/new-classes.html">new_model_class</a></span><span class="op">(</span></span>
 <span>  <span class="st">"CustomModel"</span>,</span>
 <span>  initialize <span class="op">=</span> <span class="kw">function</span><span class="op">(</span><span class="va">...</span><span class="op">)</span> <span class="op">{</span></span>
@@ -1063,9 +1060,9 @@ guide</a>.</p>
 <span><span class="va">model</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://generics.r-lib.org/reference/compile.html" class="external-link">compile</a></span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="va">model</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://generics.r-lib.org/reference/fit.html" class="external-link">fit</a></span><span class="op">(</span><span class="va">dataset</span>, epochs<span class="op">=</span><span class="fl">2</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">## Epoch 1/2</span></span>
-<span><span class="co">## 938/938 - 1s - 780us/step - loss: 0.3869 - sparse_categorical_accuracy: 0.8924</span></span>
+<span><span class="co">## 938/938 - 1s - 923us/step - loss: 0.3869 - sparse_categorical_accuracy: 0.8924</span></span>
 <span><span class="co">## Epoch 2/2</span></span>
-<span><span class="co">## 938/938 - 1s - 603us/step - loss: 0.2163 - sparse_categorical_accuracy: 0.9370</span></span></code></pre>
+<span><span class="co">## 938/938 - 1s - 567us/step - loss: 0.2163 - sparse_categorical_accuracy: 0.9370</span></span></code></pre>
 </div>
 <div class="section level2">
 <h2 id="end-to-end-experiment-example-1-variational-autoencoders-">End-to-end experiment example 1: variational autoencoders.<a class="anchor" aria-label="anchor" href="#end-to-end-experiment-example-1-variational-autoencoders-"></a>
@@ -1095,7 +1092,7 @@ a regularization loss (KL divergence).</p>
 <p>First, we have an <code>Encoder</code> class, which uses a
 <code>Sampling</code> layer to map a MNIST digit to a latent-space
 triplet <code>(z_mean, z_log_var, z)</code>.</p>
-<div class="sourceCode" id="cb82"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb80"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">Sampling</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/Layer.html">new_layer_class</a></span><span class="op">(</span></span>
 <span>  <span class="st">"Sampling"</span>,</span>
 <span>  call <span class="op">=</span> <span class="kw">function</span><span class="op">(</span><span class="va">inputs</span><span class="op">)</span> <span class="op">{</span></span>
@@ -1126,7 +1123,7 @@ triplet <code>(z_mean, z_log_var, z)</code>.</p>
 <span><span class="op">)</span></span></code></pre></div>
 <p>Next, we have a <code>Decoder</code> class, which maps the
 probabilistic latent space coordinates back to a MNIST digit.</p>
-<div class="sourceCode" id="cb83"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb81"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">Decoder</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/Layer.html">new_layer_class</a></span><span class="op">(</span></span>
 <span>  <span class="st">"Decoder"</span>,</span>
 <span>  initialize <span class="op">=</span> <span class="kw">function</span><span class="op">(</span><span class="va">original_dim</span>, <span class="va">intermediate_dim</span> <span class="op">=</span> <span class="fl">64</span>, <span class="va">...</span><span class="op">)</span> <span class="op">{</span></span>
@@ -1142,7 +1139,7 @@ probabilistic latent space coordinates back to a MNIST digit.</p>
 <p>Finally, our <code>VariationalAutoEncoder</code> composes together an
 encoder and a decoder, and creates a KL divergence regularization loss
 via <code>add_loss()</code>.</p>
-<div class="sourceCode" id="cb84"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb82"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">VariationalAutoEncoder</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/new-classes.html">new_model_class</a></span><span class="op">(</span></span>
 <span>  <span class="st">"VariationalAutoEncoder"</span>,</span>
 <span>  initialize <span class="op">=</span> <span class="kw">function</span><span class="op">(</span><span class="va">original_dim</span>,</span>
@@ -1174,7 +1171,7 @@ via <code>add_loss()</code>.</p>
 <p>Now, let’s write a training loop. Our training step is decorated with
 a <code>@tf.function</code> to compile into a super fast graph
 function.</p>
-<div class="sourceCode" id="cb85"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb83"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Our model.</span></span>
 <span><span class="va">vae</span> <span class="op">&lt;-</span> <span class="fu">VariationalAutoEncoder</span><span class="op">(</span></span>
 <span>  original_dim <span class="op">=</span> <span class="fl">784</span>,</span>
@@ -1246,7 +1243,7 @@ hypernetworks.</p>
 generate the weights for a larger network (the main network).</p>
 <p>Let’s implement a really trivial hypernetwork: we’ll use a small
 2-layer network to generate the weights of a larger 3-layer network.</p>
-<div class="sourceCode" id="cb87"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb85"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">input_dim</span> <span class="op">&lt;-</span> <span class="fl">784</span></span>
 <span><span class="va">classes</span> <span class="op">&lt;-</span> <span class="fl">10</span></span>
 <span></span>
@@ -1282,7 +1279,7 @@ the actual MNIST predictions</li>
 <li>We run backprop through the weights of the <code>hypernetwork</code>
 to minimize the final classification loss</li>
 </ul>
-<div class="sourceCode" id="cb88"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb86"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Loss and optimizer.</span></span>
 <span><span class="va">loss_fn</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/loss_sparse_categorical_crossentropy.html">loss_sparse_categorical_crossentropy</a></span><span class="op">(</span>from_logits <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
 <span><span class="va">optimizer</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/optimizer_adam.html">optimizer_adam</a></span><span class="op">(</span>learning_rate<span class="op">=</span><span class="fl">1e-4</span><span class="op">)</span></span>

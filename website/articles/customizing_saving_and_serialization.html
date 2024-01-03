@@ -108,11 +108,9 @@
 <div class="row">
   <main id="main" class="col-md-9"><div class="page-header">
       <img src="" class="logo" alt=""><h1>Customizing Saving and Serialization</h1>
-                        <h4 data-toc-skip class="author">Neel
-Kovelamudi</h4>
             
-            <h4 data-toc-skip class="date">Last Modified: 2023-11-10;
-Last Rendered: 2023-11-10</h4>
+            <h4 data-toc-skip class="date">Last Modified: 2023-11-29;
+Last Rendered: 2024-01-03</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/rstudio/keras/blob/HEAD/vignettes/customizing_saving_and_serialization.Rmd" class="external-link"><code>vignettes/customizing_saving_and_serialization.Rmd</code></a></small>
       <div class="d-none name"><code>customizing_saving_and_serialization.Rmd</code></div>
@@ -162,8 +160,7 @@ order:</p>
 </h2>
 <div class="sourceCode" id="cb1"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" tabindex="-1"></a><span class="im">import</span> os</span>
 <span id="cb1-2"><a href="#cb1-2" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
-<span id="cb1-3"><a href="#cb1-3" tabindex="-1"></a><span class="im">import</span> tensorflow <span class="im">as</span> tf</span>
-<span id="cb1-4"><a href="#cb1-4" tabindex="-1"></a><span class="im">import</span> keras</span></code></pre></div>
+<span id="cb1-3"><a href="#cb1-3" tabindex="-1"></a><span class="im">import</span> keras</span></code></pre></div>
 </div>
 <div class="section level2">
 <h2 id="state-saving-customization">State saving customization<a class="anchor" aria-label="anchor" href="#state-saving-customization"></a>
@@ -190,21 +187,21 @@ with the layer variables. Let’s take a look at an example customizing
 this.</p>
 <p><strong>Example:</strong></p>
 <div class="sourceCode" id="cb3"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" tabindex="-1"></a><span class="at">@keras.utils.register_keras_serializable</span>(package<span class="op">=</span><span class="st">"my_custom_package"</span>)</span>
-<span id="cb3-2"><a href="#cb3-2" tabindex="-1"></a><span class="kw">class</span> LayerWithCustomVariables(keras.layers.Dense):</span>
+<span id="cb3-2"><a href="#cb3-2" tabindex="-1"></a><span class="kw">class</span> LayerWithCustomVariable(keras.layers.Dense):</span>
 <span id="cb3-3"><a href="#cb3-3" tabindex="-1"></a>    <span class="kw">def</span> <span class="fu">__init__</span>(<span class="va">self</span>, units, <span class="op">**</span>kwargs):</span>
 <span id="cb3-4"><a href="#cb3-4" tabindex="-1"></a>        <span class="bu">super</span>().<span class="fu">__init__</span>(units, <span class="op">**</span>kwargs)</span>
-<span id="cb3-5"><a href="#cb3-5" tabindex="-1"></a>        <span class="va">self</span>.stored_variables <span class="op">=</span> tf.Variable(</span>
-<span id="cb3-6"><a href="#cb3-6" tabindex="-1"></a>            np.random.random((<span class="dv">10</span>,)), name<span class="op">=</span><span class="st">"special_arr"</span>, dtype<span class="op">=</span>tf.float32</span>
+<span id="cb3-5"><a href="#cb3-5" tabindex="-1"></a>        <span class="va">self</span>.my_variable <span class="op">=</span> keras.Variable(</span>
+<span id="cb3-6"><a href="#cb3-6" tabindex="-1"></a>            np.random.random((units,)), name<span class="op">=</span><span class="st">"my_variable"</span>, dtype<span class="op">=</span><span class="st">"float32"</span></span>
 <span id="cb3-7"><a href="#cb3-7" tabindex="-1"></a>        )</span>
 <span id="cb3-8"><a href="#cb3-8" tabindex="-1"></a></span>
 <span id="cb3-9"><a href="#cb3-9" tabindex="-1"></a>    <span class="kw">def</span> save_own_variables(<span class="va">self</span>, store):</span>
 <span id="cb3-10"><a href="#cb3-10" tabindex="-1"></a>        <span class="bu">super</span>().save_own_variables(store)</span>
-<span id="cb3-11"><a href="#cb3-11" tabindex="-1"></a>        <span class="co"># Stores the value of the `tf.Variable` upon saving</span></span>
-<span id="cb3-12"><a href="#cb3-12" tabindex="-1"></a>        store[<span class="st">"variables"</span>] <span class="op">=</span> <span class="va">self</span>.stored_variables.numpy()</span>
+<span id="cb3-11"><a href="#cb3-11" tabindex="-1"></a>        <span class="co"># Stores the value of the variable upon saving</span></span>
+<span id="cb3-12"><a href="#cb3-12" tabindex="-1"></a>        store[<span class="st">"variables"</span>] <span class="op">=</span> <span class="va">self</span>.my_variable.numpy()</span>
 <span id="cb3-13"><a href="#cb3-13" tabindex="-1"></a></span>
 <span id="cb3-14"><a href="#cb3-14" tabindex="-1"></a>    <span class="kw">def</span> load_own_variables(<span class="va">self</span>, store):</span>
-<span id="cb3-15"><a href="#cb3-15" tabindex="-1"></a>        <span class="co"># Assigns the value of the `tf.Variable` upon loading</span></span>
-<span id="cb3-16"><a href="#cb3-16" tabindex="-1"></a>        <span class="va">self</span>.stored_variables.assign(store[<span class="st">"variables"</span>])</span>
+<span id="cb3-15"><a href="#cb3-15" tabindex="-1"></a>        <span class="co"># Assigns the value of the variable upon loading</span></span>
+<span id="cb3-16"><a href="#cb3-16" tabindex="-1"></a>        <span class="va">self</span>.my_variable.assign(store[<span class="st">"variables"</span>])</span>
 <span id="cb3-17"><a href="#cb3-17" tabindex="-1"></a>        <span class="co"># Load the remaining weights</span></span>
 <span id="cb3-18"><a href="#cb3-18" tabindex="-1"></a>        <span class="cf">for</span> i, v <span class="kw">in</span> <span class="bu">enumerate</span>(<span class="va">self</span>.weights):</span>
 <span id="cb3-19"><a href="#cb3-19" tabindex="-1"></a>            v.assign(store[<span class="ss">f"</span><span class="sc">{</span>i<span class="sc">}</span><span class="ss">"</span>])</span>
@@ -212,23 +209,24 @@ this.</p>
 <span id="cb3-21"><a href="#cb3-21" tabindex="-1"></a>        <span class="co"># are loaded in `load_own_variables.`</span></span>
 <span id="cb3-22"><a href="#cb3-22" tabindex="-1"></a></span>
 <span id="cb3-23"><a href="#cb3-23" tabindex="-1"></a>    <span class="kw">def</span> call(<span class="va">self</span>, inputs):</span>
-<span id="cb3-24"><a href="#cb3-24" tabindex="-1"></a>        <span class="cf">return</span> <span class="bu">super</span>().call(inputs) <span class="op">*</span> <span class="va">self</span>.stored_variables</span>
-<span id="cb3-25"><a href="#cb3-25" tabindex="-1"></a></span>
+<span id="cb3-24"><a href="#cb3-24" tabindex="-1"></a>        dense_out <span class="op">=</span> <span class="bu">super</span>().call(inputs)</span>
+<span id="cb3-25"><a href="#cb3-25" tabindex="-1"></a>        <span class="cf">return</span> dense_out <span class="op">+</span> <span class="va">self</span>.my_variable</span>
 <span id="cb3-26"><a href="#cb3-26" tabindex="-1"></a></span>
-<span id="cb3-27"><a href="#cb3-27" tabindex="-1"></a>model <span class="op">=</span> keras.Sequential([LayerWithCustomVariables(<span class="dv">1</span>)])</span>
-<span id="cb3-28"><a href="#cb3-28" tabindex="-1"></a></span>
-<span id="cb3-29"><a href="#cb3-29" tabindex="-1"></a>ref_input <span class="op">=</span> np.random.random((<span class="dv">8</span>, <span class="dv">10</span>))</span>
-<span id="cb3-30"><a href="#cb3-30" tabindex="-1"></a>ref_output <span class="op">=</span> np.random.random((<span class="dv">8</span>,))</span>
-<span id="cb3-31"><a href="#cb3-31" tabindex="-1"></a>model.<span class="bu">compile</span>(optimizer<span class="op">=</span><span class="st">"adam"</span>, loss<span class="op">=</span><span class="st">"mean_squared_error"</span>)</span>
-<span id="cb3-32"><a href="#cb3-32" tabindex="-1"></a>model.fit(ref_input, ref_output)</span>
-<span id="cb3-33"><a href="#cb3-33" tabindex="-1"></a></span>
-<span id="cb3-34"><a href="#cb3-34" tabindex="-1"></a>model.save(<span class="st">"custom_vars_model.keras"</span>)</span>
-<span id="cb3-35"><a href="#cb3-35" tabindex="-1"></a>restored_model <span class="op">=</span> keras.models.load_model(<span class="st">"custom_vars_model.keras"</span>)</span>
-<span id="cb3-36"><a href="#cb3-36" tabindex="-1"></a></span>
-<span id="cb3-37"><a href="#cb3-37" tabindex="-1"></a>np.testing.assert_allclose(</span>
-<span id="cb3-38"><a href="#cb3-38" tabindex="-1"></a>    model.layers[<span class="dv">0</span>].stored_variables.numpy(),</span>
-<span id="cb3-39"><a href="#cb3-39" tabindex="-1"></a>    restored_model.layers[<span class="dv">0</span>].stored_variables.numpy(),</span>
-<span id="cb3-40"><a href="#cb3-40" tabindex="-1"></a>)</span></code></pre></div>
+<span id="cb3-27"><a href="#cb3-27" tabindex="-1"></a></span>
+<span id="cb3-28"><a href="#cb3-28" tabindex="-1"></a>model <span class="op">=</span> keras.Sequential([LayerWithCustomVariable(<span class="dv">1</span>)])</span>
+<span id="cb3-29"><a href="#cb3-29" tabindex="-1"></a></span>
+<span id="cb3-30"><a href="#cb3-30" tabindex="-1"></a>ref_input <span class="op">=</span> np.random.random((<span class="dv">8</span>, <span class="dv">10</span>))</span>
+<span id="cb3-31"><a href="#cb3-31" tabindex="-1"></a>ref_output <span class="op">=</span> np.random.random((<span class="dv">8</span>, <span class="dv">10</span>))</span>
+<span id="cb3-32"><a href="#cb3-32" tabindex="-1"></a>model.<span class="bu">compile</span>(optimizer<span class="op">=</span><span class="st">"adam"</span>, loss<span class="op">=</span><span class="st">"mean_squared_error"</span>)</span>
+<span id="cb3-33"><a href="#cb3-33" tabindex="-1"></a>model.fit(ref_input, ref_output)</span>
+<span id="cb3-34"><a href="#cb3-34" tabindex="-1"></a></span>
+<span id="cb3-35"><a href="#cb3-35" tabindex="-1"></a>model.save(<span class="st">"custom_vars_model.keras"</span>)</span>
+<span id="cb3-36"><a href="#cb3-36" tabindex="-1"></a>restored_model <span class="op">=</span> keras.models.load_model(<span class="st">"custom_vars_model.keras"</span>)</span>
+<span id="cb3-37"><a href="#cb3-37" tabindex="-1"></a></span>
+<span id="cb3-38"><a href="#cb3-38" tabindex="-1"></a>np.testing.assert_allclose(</span>
+<span id="cb3-39"><a href="#cb3-39" tabindex="-1"></a>    model.layers[<span class="dv">0</span>].my_variable.numpy(),</span>
+<span id="cb3-40"><a href="#cb3-40" tabindex="-1"></a>    restored_model.layers[<span class="dv">0</span>].my_variable.numpy(),</span>
+<span id="cb3-41"><a href="#cb3-41" tabindex="-1"></a>)</span></code></pre></div>
 </div>
 <div class="section level3">
 <h3 id="save_assets-and-load_assets">
@@ -299,58 +297,59 @@ your built model.</p>
 <span id="cb5-5"><a href="#cb5-5" tabindex="-1"></a>        <span class="va">self</span>.units <span class="op">=</span> units</span>
 <span id="cb5-6"><a href="#cb5-6" tabindex="-1"></a></span>
 <span id="cb5-7"><a href="#cb5-7" tabindex="-1"></a>    <span class="kw">def</span> call(<span class="va">self</span>, inputs):</span>
-<span id="cb5-8"><a href="#cb5-8" tabindex="-1"></a>        <span class="cf">return</span> tf.matmul(inputs, <span class="va">self</span>.w) <span class="op">+</span> <span class="va">self</span>.b</span>
+<span id="cb5-8"><a href="#cb5-8" tabindex="-1"></a>        <span class="cf">return</span> keras.ops.matmul(inputs, <span class="va">self</span>.w) <span class="op">+</span> <span class="va">self</span>.b</span>
 <span id="cb5-9"><a href="#cb5-9" tabindex="-1"></a></span>
 <span id="cb5-10"><a href="#cb5-10" tabindex="-1"></a>    <span class="kw">def</span> get_config(<span class="va">self</span>):</span>
 <span id="cb5-11"><a href="#cb5-11" tabindex="-1"></a>        <span class="cf">return</span> <span class="bu">dict</span>(units<span class="op">=</span><span class="va">self</span>.units, <span class="op">**</span><span class="bu">super</span>().get_config())</span>
 <span id="cb5-12"><a href="#cb5-12" tabindex="-1"></a></span>
 <span id="cb5-13"><a href="#cb5-13" tabindex="-1"></a>    <span class="kw">def</span> build(<span class="va">self</span>, input_shape, layer_init):</span>
-<span id="cb5-14"><a href="#cb5-14" tabindex="-1"></a>        <span class="co"># Note the customization in overriding `build()` adds an extra argument.</span></span>
+<span id="cb5-14"><a href="#cb5-14" tabindex="-1"></a>        <span class="co"># Note the overriding of `build()` to add an extra argument.</span></span>
 <span id="cb5-15"><a href="#cb5-15" tabindex="-1"></a>        <span class="co"># Therefore, we will need to manually call build with `layer_init` argument</span></span>
 <span id="cb5-16"><a href="#cb5-16" tabindex="-1"></a>        <span class="co"># before the first execution of `call()`.</span></span>
 <span id="cb5-17"><a href="#cb5-17" tabindex="-1"></a>        <span class="bu">super</span>().build(input_shape)</span>
-<span id="cb5-18"><a href="#cb5-18" tabindex="-1"></a>        <span class="va">self</span>.w <span class="op">=</span> <span class="va">self</span>.add_weight(</span>
-<span id="cb5-19"><a href="#cb5-19" tabindex="-1"></a>            shape<span class="op">=</span>(input_shape[<span class="op">-</span><span class="dv">1</span>], <span class="va">self</span>.units),</span>
-<span id="cb5-20"><a href="#cb5-20" tabindex="-1"></a>            initializer<span class="op">=</span>layer_init,</span>
-<span id="cb5-21"><a href="#cb5-21" tabindex="-1"></a>            trainable<span class="op">=</span><span class="va">True</span>,</span>
-<span id="cb5-22"><a href="#cb5-22" tabindex="-1"></a>        )</span>
-<span id="cb5-23"><a href="#cb5-23" tabindex="-1"></a>        <span class="va">self</span>.b <span class="op">=</span> <span class="va">self</span>.add_weight(</span>
-<span id="cb5-24"><a href="#cb5-24" tabindex="-1"></a>            shape<span class="op">=</span>(<span class="va">self</span>.units,),</span>
-<span id="cb5-25"><a href="#cb5-25" tabindex="-1"></a>            initializer<span class="op">=</span>layer_init,</span>
-<span id="cb5-26"><a href="#cb5-26" tabindex="-1"></a>            trainable<span class="op">=</span><span class="va">True</span>,</span>
-<span id="cb5-27"><a href="#cb5-27" tabindex="-1"></a>        )</span>
-<span id="cb5-28"><a href="#cb5-28" tabindex="-1"></a>        <span class="va">self</span>.layer_init <span class="op">=</span> layer_init</span>
-<span id="cb5-29"><a href="#cb5-29" tabindex="-1"></a></span>
-<span id="cb5-30"><a href="#cb5-30" tabindex="-1"></a>    <span class="kw">def</span> get_build_config(<span class="va">self</span>):</span>
-<span id="cb5-31"><a href="#cb5-31" tabindex="-1"></a>        build_config <span class="op">=</span> <span class="bu">super</span>().get_build_config()  <span class="co"># only gives `input_shape`</span></span>
-<span id="cb5-32"><a href="#cb5-32" tabindex="-1"></a>        build_config.update(</span>
-<span id="cb5-33"><a href="#cb5-33" tabindex="-1"></a>            {<span class="st">"layer_init"</span>: <span class="va">self</span>.layer_init}  <span class="co"># Stores our initializer for `build()`</span></span>
-<span id="cb5-34"><a href="#cb5-34" tabindex="-1"></a>        )</span>
-<span id="cb5-35"><a href="#cb5-35" tabindex="-1"></a>        <span class="cf">return</span> build_config</span>
-<span id="cb5-36"><a href="#cb5-36" tabindex="-1"></a></span>
-<span id="cb5-37"><a href="#cb5-37" tabindex="-1"></a>    <span class="kw">def</span> build_from_config(<span class="va">self</span>, config):</span>
-<span id="cb5-38"><a href="#cb5-38" tabindex="-1"></a>        <span class="co"># Calls `build()` with the parameters at loading time</span></span>
-<span id="cb5-39"><a href="#cb5-39" tabindex="-1"></a>        <span class="va">self</span>.build(config[<span class="st">"input_shape"</span>], config[<span class="st">"layer_init"</span>])</span>
-<span id="cb5-40"><a href="#cb5-40" tabindex="-1"></a></span>
+<span id="cb5-18"><a href="#cb5-18" tabindex="-1"></a>        <span class="va">self</span>._input_shape <span class="op">=</span> input_shape</span>
+<span id="cb5-19"><a href="#cb5-19" tabindex="-1"></a>        <span class="va">self</span>.w <span class="op">=</span> <span class="va">self</span>.add_weight(</span>
+<span id="cb5-20"><a href="#cb5-20" tabindex="-1"></a>            shape<span class="op">=</span>(input_shape[<span class="op">-</span><span class="dv">1</span>], <span class="va">self</span>.units),</span>
+<span id="cb5-21"><a href="#cb5-21" tabindex="-1"></a>            initializer<span class="op">=</span>layer_init,</span>
+<span id="cb5-22"><a href="#cb5-22" tabindex="-1"></a>            trainable<span class="op">=</span><span class="va">True</span>,</span>
+<span id="cb5-23"><a href="#cb5-23" tabindex="-1"></a>        )</span>
+<span id="cb5-24"><a href="#cb5-24" tabindex="-1"></a>        <span class="va">self</span>.b <span class="op">=</span> <span class="va">self</span>.add_weight(</span>
+<span id="cb5-25"><a href="#cb5-25" tabindex="-1"></a>            shape<span class="op">=</span>(<span class="va">self</span>.units,),</span>
+<span id="cb5-26"><a href="#cb5-26" tabindex="-1"></a>            initializer<span class="op">=</span>layer_init,</span>
+<span id="cb5-27"><a href="#cb5-27" tabindex="-1"></a>            trainable<span class="op">=</span><span class="va">True</span>,</span>
+<span id="cb5-28"><a href="#cb5-28" tabindex="-1"></a>        )</span>
+<span id="cb5-29"><a href="#cb5-29" tabindex="-1"></a>        <span class="va">self</span>.layer_init <span class="op">=</span> layer_init</span>
+<span id="cb5-30"><a href="#cb5-30" tabindex="-1"></a></span>
+<span id="cb5-31"><a href="#cb5-31" tabindex="-1"></a>    <span class="kw">def</span> get_build_config(<span class="va">self</span>):</span>
+<span id="cb5-32"><a href="#cb5-32" tabindex="-1"></a>        build_config <span class="op">=</span> {</span>
+<span id="cb5-33"><a href="#cb5-33" tabindex="-1"></a>            <span class="st">"layer_init"</span>: <span class="va">self</span>.layer_init,</span>
+<span id="cb5-34"><a href="#cb5-34" tabindex="-1"></a>            <span class="st">"input_shape"</span>: <span class="va">self</span>._input_shape,</span>
+<span id="cb5-35"><a href="#cb5-35" tabindex="-1"></a>        }  <span class="co"># Stores our initializer for `build()`</span></span>
+<span id="cb5-36"><a href="#cb5-36" tabindex="-1"></a>        <span class="cf">return</span> build_config</span>
+<span id="cb5-37"><a href="#cb5-37" tabindex="-1"></a></span>
+<span id="cb5-38"><a href="#cb5-38" tabindex="-1"></a>    <span class="kw">def</span> build_from_config(<span class="va">self</span>, config):</span>
+<span id="cb5-39"><a href="#cb5-39" tabindex="-1"></a>        <span class="co"># Calls `build()` with the parameters at loading time</span></span>
+<span id="cb5-40"><a href="#cb5-40" tabindex="-1"></a>        <span class="va">self</span>.build(config[<span class="st">"input_shape"</span>], config[<span class="st">"layer_init"</span>])</span>
 <span id="cb5-41"><a href="#cb5-41" tabindex="-1"></a></span>
-<span id="cb5-42"><a href="#cb5-42" tabindex="-1"></a>custom_layer <span class="op">=</span> LayerWithCustomBuild(units<span class="op">=</span><span class="dv">16</span>)</span>
-<span id="cb5-43"><a href="#cb5-43" tabindex="-1"></a>custom_layer.build(input_shape<span class="op">=</span>(<span class="dv">8</span>,), layer_init<span class="op">=</span><span class="st">"random_normal"</span>)</span>
-<span id="cb5-44"><a href="#cb5-44" tabindex="-1"></a></span>
-<span id="cb5-45"><a href="#cb5-45" tabindex="-1"></a>model <span class="op">=</span> keras.Sequential(</span>
-<span id="cb5-46"><a href="#cb5-46" tabindex="-1"></a>    [</span>
-<span id="cb5-47"><a href="#cb5-47" tabindex="-1"></a>        custom_layer,</span>
-<span id="cb5-48"><a href="#cb5-48" tabindex="-1"></a>        keras.layers.Dense(<span class="dv">1</span>, activation<span class="op">=</span><span class="st">"sigmoid"</span>),</span>
-<span id="cb5-49"><a href="#cb5-49" tabindex="-1"></a>    ]</span>
-<span id="cb5-50"><a href="#cb5-50" tabindex="-1"></a>)</span>
-<span id="cb5-51"><a href="#cb5-51" tabindex="-1"></a></span>
-<span id="cb5-52"><a href="#cb5-52" tabindex="-1"></a>x <span class="op">=</span> np.random.random((<span class="dv">16</span>, <span class="dv">8</span>))</span>
-<span id="cb5-53"><a href="#cb5-53" tabindex="-1"></a>y <span class="op">=</span> model(x)</span>
-<span id="cb5-54"><a href="#cb5-54" tabindex="-1"></a></span>
-<span id="cb5-55"><a href="#cb5-55" tabindex="-1"></a>model.save(<span class="st">"custom_build_model.keras"</span>)</span>
-<span id="cb5-56"><a href="#cb5-56" tabindex="-1"></a>restored_model <span class="op">=</span> keras.models.load_model(<span class="st">"custom_build_model.keras"</span>)</span>
-<span id="cb5-57"><a href="#cb5-57" tabindex="-1"></a></span>
-<span id="cb5-58"><a href="#cb5-58" tabindex="-1"></a>np.testing.assert_equal(restored_model.layers[<span class="dv">0</span>].layer_init, <span class="st">"random_normal"</span>)</span>
-<span id="cb5-59"><a href="#cb5-59" tabindex="-1"></a>np.testing.assert_equal(restored_model.built, <span class="va">True</span>)</span></code></pre></div>
+<span id="cb5-42"><a href="#cb5-42" tabindex="-1"></a></span>
+<span id="cb5-43"><a href="#cb5-43" tabindex="-1"></a>custom_layer <span class="op">=</span> LayerWithCustomBuild(units<span class="op">=</span><span class="dv">16</span>)</span>
+<span id="cb5-44"><a href="#cb5-44" tabindex="-1"></a>custom_layer.build(input_shape<span class="op">=</span>(<span class="dv">8</span>,), layer_init<span class="op">=</span><span class="st">"random_normal"</span>)</span>
+<span id="cb5-45"><a href="#cb5-45" tabindex="-1"></a></span>
+<span id="cb5-46"><a href="#cb5-46" tabindex="-1"></a>model <span class="op">=</span> keras.Sequential(</span>
+<span id="cb5-47"><a href="#cb5-47" tabindex="-1"></a>    [</span>
+<span id="cb5-48"><a href="#cb5-48" tabindex="-1"></a>        custom_layer,</span>
+<span id="cb5-49"><a href="#cb5-49" tabindex="-1"></a>        keras.layers.Dense(<span class="dv">1</span>, activation<span class="op">=</span><span class="st">"sigmoid"</span>),</span>
+<span id="cb5-50"><a href="#cb5-50" tabindex="-1"></a>    ]</span>
+<span id="cb5-51"><a href="#cb5-51" tabindex="-1"></a>)</span>
+<span id="cb5-52"><a href="#cb5-52" tabindex="-1"></a></span>
+<span id="cb5-53"><a href="#cb5-53" tabindex="-1"></a>x <span class="op">=</span> np.random.random((<span class="dv">16</span>, <span class="dv">8</span>))</span>
+<span id="cb5-54"><a href="#cb5-54" tabindex="-1"></a>y <span class="op">=</span> model(x)</span>
+<span id="cb5-55"><a href="#cb5-55" tabindex="-1"></a></span>
+<span id="cb5-56"><a href="#cb5-56" tabindex="-1"></a>model.save(<span class="st">"custom_build_model.keras"</span>)</span>
+<span id="cb5-57"><a href="#cb5-57" tabindex="-1"></a>restored_model <span class="op">=</span> keras.models.load_model(<span class="st">"custom_build_model.keras"</span>)</span>
+<span id="cb5-58"><a href="#cb5-58" tabindex="-1"></a></span>
+<span id="cb5-59"><a href="#cb5-59" tabindex="-1"></a>np.testing.assert_equal(restored_model.layers[<span class="dv">0</span>].layer_init, <span class="st">"random_normal"</span>)</span>
+<span id="cb5-60"><a href="#cb5-60" tabindex="-1"></a>np.testing.assert_equal(restored_model.built, <span class="va">True</span>)</span></code></pre></div>
 </div>
 <div class="section level3">
 <h3 id="get_compile_config-and-compile_from_config">
@@ -368,21 +367,21 @@ be deserialized prior to calling <code>model.compile</code> in
 <p><strong>Example:</strong></p>
 <div class="sourceCode" id="cb6"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" tabindex="-1"></a><span class="at">@keras.saving.register_keras_serializable</span>(package<span class="op">=</span><span class="st">"my_custom_package"</span>)</span>
 <span id="cb6-2"><a href="#cb6-2" tabindex="-1"></a><span class="kw">def</span> small_square_sum_loss(y_true, y_pred):</span>
-<span id="cb6-3"><a href="#cb6-3" tabindex="-1"></a>    loss <span class="op">=</span> tf.math.squared_difference(y_pred, y_true)</span>
+<span id="cb6-3"><a href="#cb6-3" tabindex="-1"></a>    loss <span class="op">=</span> keras.ops.square(y_pred <span class="op">-</span> y_true)</span>
 <span id="cb6-4"><a href="#cb6-4" tabindex="-1"></a>    loss <span class="op">=</span> loss <span class="op">/</span> <span class="fl">10.0</span></span>
-<span id="cb6-5"><a href="#cb6-5" tabindex="-1"></a>    loss <span class="op">=</span> tf.reduce_sum(loss, axis<span class="op">=</span><span class="dv">1</span>)</span>
+<span id="cb6-5"><a href="#cb6-5" tabindex="-1"></a>    loss <span class="op">=</span> keras.ops.<span class="bu">sum</span>(loss, axis<span class="op">=</span><span class="dv">1</span>)</span>
 <span id="cb6-6"><a href="#cb6-6" tabindex="-1"></a>    <span class="cf">return</span> loss</span>
 <span id="cb6-7"><a href="#cb6-7" tabindex="-1"></a></span>
 <span id="cb6-8"><a href="#cb6-8" tabindex="-1"></a></span>
 <span id="cb6-9"><a href="#cb6-9" tabindex="-1"></a><span class="at">@keras.saving.register_keras_serializable</span>(package<span class="op">=</span><span class="st">"my_custom_package"</span>)</span>
 <span id="cb6-10"><a href="#cb6-10" tabindex="-1"></a><span class="kw">def</span> mean_pred(y_true, y_pred):</span>
-<span id="cb6-11"><a href="#cb6-11" tabindex="-1"></a>    <span class="cf">return</span> tf.reduce_mean(y_pred)</span>
+<span id="cb6-11"><a href="#cb6-11" tabindex="-1"></a>    <span class="cf">return</span> keras.ops.mean(y_pred)</span>
 <span id="cb6-12"><a href="#cb6-12" tabindex="-1"></a></span>
 <span id="cb6-13"><a href="#cb6-13" tabindex="-1"></a></span>
 <span id="cb6-14"><a href="#cb6-14" tabindex="-1"></a><span class="at">@keras.saving.register_keras_serializable</span>(package<span class="op">=</span><span class="st">"my_custom_package"</span>)</span>
 <span id="cb6-15"><a href="#cb6-15" tabindex="-1"></a><span class="kw">class</span> ModelWithCustomCompile(keras.Model):</span>
-<span id="cb6-16"><a href="#cb6-16" tabindex="-1"></a>    <span class="kw">def</span> <span class="fu">__init__</span>(<span class="va">self</span>):</span>
-<span id="cb6-17"><a href="#cb6-17" tabindex="-1"></a>        <span class="bu">super</span>().<span class="fu">__init__</span>()</span>
+<span id="cb6-16"><a href="#cb6-16" tabindex="-1"></a>    <span class="kw">def</span> <span class="fu">__init__</span>(<span class="va">self</span>, <span class="op">**</span>kwargs):</span>
+<span id="cb6-17"><a href="#cb6-17" tabindex="-1"></a>        <span class="bu">super</span>().<span class="fu">__init__</span>(<span class="op">**</span>kwargs)</span>
 <span id="cb6-18"><a href="#cb6-18" tabindex="-1"></a>        <span class="va">self</span>.dense1 <span class="op">=</span> keras.layers.Dense(<span class="dv">8</span>, activation<span class="op">=</span><span class="st">"relu"</span>)</span>
 <span id="cb6-19"><a href="#cb6-19" tabindex="-1"></a>        <span class="va">self</span>.dense2 <span class="op">=</span> keras.layers.Dense(<span class="dv">4</span>, activation<span class="op">=</span><span class="st">"softmax"</span>)</span>
 <span id="cb6-20"><a href="#cb6-20" tabindex="-1"></a></span>

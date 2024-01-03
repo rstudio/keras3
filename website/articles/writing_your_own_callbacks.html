@@ -109,8 +109,8 @@
   <main id="main" class="col-md-9"><div class="page-header">
       <img src="" class="logo" alt=""><h1>Writing your own callbacks</h1>
             
-            <h4 data-toc-skip class="date">Last Modified: 2023-11-29;
-Last Rendered: 2023-12-07</h4>
+            <h4 data-toc-skip class="date">Last Modified: 2024-01-02;
+Last Rendered: 2024-01-03</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/rstudio/keras/blob/HEAD/vignettes/writing_your_own_callbacks.Rmd" class="external-link"><code>vignettes/writing_your_own_callbacks.Rmd</code></a></small>
       <div class="d-none name"><code>writing_your_own_callbacks.Rmd</code></div>
@@ -135,9 +135,7 @@ callback applications to get you started.</p>
 <h2 id="setup">Setup<a class="anchor" aria-label="anchor" href="#setup"></a>
 </h2>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https:/keras.posit.co/">keras3</a></span><span class="op">)</span></span>
-<span><span class="va">`add&lt;-`</span> <span class="op">&lt;-</span> <span class="va">`+`</span></span>
-<span><span class="fu">envir</span><span class="fu">::</span><span class="fu"><a href="https://t-kalinowski.github.io/envir/reference/import_from.html" class="external-link">import_from</a></span><span class="op">(</span><span class="va">dplyr</span>, <span class="va">last</span><span class="op">)</span></span></code></pre></div>
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https:/keras.posit.co/">keras3</a></span><span class="op">)</span></span></code></pre></div>
 </div>
 <div class="section level2">
 <h2 id="keras-callbacks-overview">Keras callbacks overview<a class="anchor" aria-label="anchor" href="#keras-callbacks-overview"></a>
@@ -265,7 +263,7 @@ starts &amp; ends</li>
 <span>  <span class="fu"><a href="https://rdrr.io/r/utils/str.html" class="external-link">str</a></span><span class="op">(</span><span class="va">logs</span><span class="op">)</span>; <span class="fu"><a href="https://rdrr.io/r/base/cat.html" class="external-link">cat</a></span><span class="op">(</span><span class="st">"\n"</span><span class="op">)</span></span>
 <span><span class="op">}</span></span>
 <span></span>
-<span><span class="va">callback_custom</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/Callback.html">new_callback_class</a></span><span class="op">(</span></span>
+<span><span class="va">callback_custom</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/Callback.html">Callback</a></span><span class="op">(</span></span>
 <span>  <span class="st">"CustomCallback"</span>,</span>
 <span>  on_train_begin         <span class="op">=</span> <span class="kw">function</span><span class="op">(</span><span class="va">logs</span> <span class="op">=</span> <span class="cn">NULL</span><span class="op">)</span> <span class="fu">show</span><span class="op">(</span><span class="st">"Starting training"</span>, <span class="va">logs</span><span class="op">)</span>,</span>
 <span>  on_epoch_begin         <span class="op">=</span> <span class="kw">function</span><span class="op">(</span><span class="va">epoch</span>, <span class="va">logs</span> <span class="op">=</span> <span class="cn">NULL</span><span class="op">)</span> <span class="fu">show</span><span class="op">(</span><span class="st">"Start epoch {epoch} of training"</span>, <span class="va">logs</span><span class="op">)</span>,</span>
@@ -542,7 +540,7 @@ starts &amp; ends</li>
 metrics at the end of a batch or epoch. Example includes the loss and
 mean absolute error.</p>
 <div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">callback_print_loss_and_mae</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/Callback.html">new_callback_class</a></span><span class="op">(</span></span>
+<code class="sourceCode R"><span><span class="va">callback_print_loss_and_mae</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/Callback.html">Callback</a></span><span class="op">(</span></span>
 <span>  <span class="st">"LossAndErrorPrintingCallback"</span>,</span>
 <span></span>
 <span>  on_train_batch_end <span class="op">=</span> <span class="kw">function</span><span class="op">(</span><span class="va">batch</span>, <span class="va">logs</span> <span class="op">=</span> <span class="cn">NULL</span><span class="op">)</span></span>
@@ -642,7 +640,7 @@ minimum.</p>
 <p><code><a href="../reference/callback_early_stopping.html">callback_early_stopping()</a></code> provides a more complete and
 general implementation.</p>
 <div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">callback_early_stopping_at_min_loss</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/Callback.html">new_callback_class</a></span><span class="op">(</span></span>
+<code class="sourceCode R"><span><span class="va">callback_early_stopping_at_min_loss</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/Callback.html">Callback</a></span><span class="op">(</span></span>
 <span>  <span class="st">"EarlyStoppingAtMinLoss"</span>,</span>
 <span>  `__doc__` <span class="op">=</span></span>
 <span>    <span class="st">"Stop training when the loss is at its min, i.e. the loss stops decreasing.</span></span>
@@ -691,6 +689,7 @@ general implementation.</p>
 <span>    <span class="kw">if</span> <span class="op">(</span><span class="va">self</span><span class="op">$</span><span class="va">stopped_epoch</span> <span class="op">&gt;</span> <span class="fl">0</span><span class="op">)</span></span>
 <span>      <span class="fu"><a href="https://rdrr.io/r/base/cat.html" class="external-link">cat</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/sprintf.html" class="external-link">sprintf</a></span><span class="op">(</span><span class="st">"Epoch %05d: early stopping\n"</span>, <span class="va">self</span><span class="op">$</span><span class="va">stopped_epoch</span> <span class="op">+</span> <span class="fl">1</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="op">)</span></span>
+<span><span class="va">`add&lt;-`</span> <span class="op">&lt;-</span> <span class="va">`+`</span></span>
 <span></span>
 <span></span>
 <span><span class="va">model</span> <span class="op">&lt;-</span> <span class="fu">get_model</span><span class="op">(</span><span class="op">)</span></span>
@@ -768,7 +767,7 @@ general implementations (in RStudio, press F1 while the cursor is over
 <code>LearningRateScheduler</code> and a browser will open to <a href="https://www.tensorflow.org/versions/r2.5/api_docs/python/tf/keras/callbacks/LearningRateScheduler" class="external-link">this
 page</a>).</p>
 <div class="sourceCode" id="cb17"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">callback_custom_learning_rate_scheduler</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/Callback.html">new_callback_class</a></span><span class="op">(</span></span>
+<code class="sourceCode R"><span><span class="va">callback_custom_learning_rate_scheduler</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/Callback.html">Callback</a></span><span class="op">(</span></span>
 <span>  <span class="st">"CustomLearningRateScheduler"</span>,</span>
 <span>  `__doc__` <span class="op">=</span></span>
 <span>  <span class="st">"Learning rate scheduler which sets the learning rate according to schedule.</span></span>
@@ -813,6 +812,7 @@ page</a>).</p>
 <span>            <span class="fl">12</span>,          <span class="fl">0.001</span>,</span>
 <span>  <span class="op">)</span></span>
 <span></span>
+<span><span class="va">last</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="va">x</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/length.html" class="external-link">length</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span><span class="op">]</span></span>
 <span><span class="va">lr_schedule</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">epoch</span>, <span class="va">learning_rate</span><span class="op">)</span> <span class="op">{</span></span>
 <span>  <span class="st">"Helper function to retrieve the scheduled learning rate based on epoch."</span></span>
 <span>  <span class="fu"><a href="https://rdrr.io/r/base/with.html" class="external-link">with</a></span><span class="op">(</span><span class="va">LR_SCHEDULE</span>, <span class="va">learning_rate</span><span class="op">[</span><span class="fu">last</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/which.html" class="external-link">which</a></span><span class="op">(</span><span class="va">epoch</span> <span class="op">&gt;=</span> <span class="va">start_epoch</span><span class="op">)</span><span class="op">)</span><span class="op">]</span><span class="op">)</span></span>
@@ -822,6 +822,7 @@ page</a>).</p>
 <span><span class="va">model</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://generics.r-lib.org/reference/fit.html" class="external-link">fit</a></span><span class="op">(</span></span>
 <span>  <span class="va">mnist</span><span class="op">$</span><span class="va">train</span><span class="op">$</span><span class="va">x</span>,</span>
 <span>  <span class="va">mnist</span><span class="op">$</span><span class="va">train</span><span class="op">$</span><span class="va">y</span>,</span>
+<span>  epochs <span class="op">=</span> <span class="fl">14</span>,</span>
 <span>  batch_size <span class="op">=</span> <span class="fl">64</span>,</span>
 <span>  verbose <span class="op">=</span> <span class="fl">0</span>,</span>
 <span>  callbacks <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span></span>
@@ -1018,7 +1019,83 @@ page</a>).</p>
 <span><span class="co">## Up to batch 14, the average loss is    2.77.</span></span>
 <span><span class="co">## Up to batch 15, the average loss is    2.77.</span></span>
 <span><span class="co">## Up to batch 16, the average loss is    2.82.</span></span>
-<span><span class="co">## The average loss for epoch 10 is      2.82 and mean absolute error is    1.28.</span></span></code></pre>
+<span><span class="co">## The average loss for epoch 10 is      2.82 and mean absolute error is    1.28.</span></span>
+<span><span class="co">##</span></span>
+<span><span class="co">## Epoch 011: Learning rate is 0.0050.</span></span>
+<span><span class="co">## Up to batch 1, the average loss is    3.01.</span></span>
+<span><span class="co">## Up to batch 2, the average loss is    2.69.</span></span>
+<span><span class="co">## Up to batch 3, the average loss is    2.58.</span></span>
+<span><span class="co">## Up to batch 4, the average loss is    2.56.</span></span>
+<span><span class="co">## Up to batch 5, the average loss is    2.63.</span></span>
+<span><span class="co">## Up to batch 6, the average loss is    2.58.</span></span>
+<span><span class="co">## Up to batch 7, the average loss is    2.47.</span></span>
+<span><span class="co">## Up to batch 8, the average loss is    2.70.</span></span>
+<span><span class="co">## Up to batch 9, the average loss is    2.72.</span></span>
+<span><span class="co">## Up to batch 10, the average loss is    2.69.</span></span>
+<span><span class="co">## Up to batch 11, the average loss is    2.71.</span></span>
+<span><span class="co">## Up to batch 12, the average loss is    2.72.</span></span>
+<span><span class="co">## Up to batch 13, the average loss is    2.71.</span></span>
+<span><span class="co">## Up to batch 14, the average loss is    2.75.</span></span>
+<span><span class="co">## Up to batch 15, the average loss is    2.74.</span></span>
+<span><span class="co">## Up to batch 16, the average loss is    2.79.</span></span>
+<span><span class="co">## The average loss for epoch 11 is      2.79 and mean absolute error is    1.27.</span></span>
+<span><span class="co">##</span></span>
+<span><span class="co">## Epoch 012: Learning rate is 0.0010.</span></span>
+<span><span class="co">## Up to batch 1, the average loss is    2.96.</span></span>
+<span><span class="co">## Up to batch 2, the average loss is    2.53.</span></span>
+<span><span class="co">## Up to batch 3, the average loss is    2.47.</span></span>
+<span><span class="co">## Up to batch 4, the average loss is    2.46.</span></span>
+<span><span class="co">## Up to batch 5, the average loss is    2.54.</span></span>
+<span><span class="co">## Up to batch 6, the average loss is    2.48.</span></span>
+<span><span class="co">## Up to batch 7, the average loss is    2.39.</span></span>
+<span><span class="co">## Up to batch 8, the average loss is    2.60.</span></span>
+<span><span class="co">## Up to batch 9, the average loss is    2.62.</span></span>
+<span><span class="co">## Up to batch 10, the average loss is    2.59.</span></span>
+<span><span class="co">## Up to batch 11, the average loss is    2.61.</span></span>
+<span><span class="co">## Up to batch 12, the average loss is    2.62.</span></span>
+<span><span class="co">## Up to batch 13, the average loss is    2.60.</span></span>
+<span><span class="co">## Up to batch 14, the average loss is    2.64.</span></span>
+<span><span class="co">## Up to batch 15, the average loss is    2.62.</span></span>
+<span><span class="co">## Up to batch 16, the average loss is    2.66.</span></span>
+<span><span class="co">## The average loss for epoch 12 is      2.66 and mean absolute error is    1.24.</span></span>
+<span><span class="co">##</span></span>
+<span><span class="co">## Epoch 013: Learning rate is 0.0010.</span></span>
+<span><span class="co">## Up to batch 1, the average loss is    2.82.</span></span>
+<span><span class="co">## Up to batch 2, the average loss is    2.46.</span></span>
+<span><span class="co">## Up to batch 3, the average loss is    2.42.</span></span>
+<span><span class="co">## Up to batch 4, the average loss is    2.42.</span></span>
+<span><span class="co">## Up to batch 5, the average loss is    2.50.</span></span>
+<span><span class="co">## Up to batch 6, the average loss is    2.45.</span></span>
+<span><span class="co">## Up to batch 7, the average loss is    2.36.</span></span>
+<span><span class="co">## Up to batch 8, the average loss is    2.57.</span></span>
+<span><span class="co">## Up to batch 9, the average loss is    2.59.</span></span>
+<span><span class="co">## Up to batch 10, the average loss is    2.57.</span></span>
+<span><span class="co">## Up to batch 11, the average loss is    2.59.</span></span>
+<span><span class="co">## Up to batch 12, the average loss is    2.60.</span></span>
+<span><span class="co">## Up to batch 13, the average loss is    2.59.</span></span>
+<span><span class="co">## Up to batch 14, the average loss is    2.62.</span></span>
+<span><span class="co">## Up to batch 15, the average loss is    2.61.</span></span>
+<span><span class="co">## Up to batch 16, the average loss is    2.64.</span></span>
+<span><span class="co">## The average loss for epoch 13 is      2.64 and mean absolute error is    1.23.</span></span>
+<span><span class="co">##</span></span>
+<span><span class="co">## Epoch 014: Learning rate is 0.0010.</span></span>
+<span><span class="co">## Up to batch 1, the average loss is    2.79.</span></span>
+<span><span class="co">## Up to batch 2, the average loss is    2.44.</span></span>
+<span><span class="co">## Up to batch 3, the average loss is    2.40.</span></span>
+<span><span class="co">## Up to batch 4, the average loss is    2.41.</span></span>
+<span><span class="co">## Up to batch 5, the average loss is    2.49.</span></span>
+<span><span class="co">## Up to batch 6, the average loss is    2.44.</span></span>
+<span><span class="co">## Up to batch 7, the average loss is    2.34.</span></span>
+<span><span class="co">## Up to batch 8, the average loss is    2.56.</span></span>
+<span><span class="co">## Up to batch 9, the average loss is    2.58.</span></span>
+<span><span class="co">## Up to batch 10, the average loss is    2.56.</span></span>
+<span><span class="co">## Up to batch 11, the average loss is    2.58.</span></span>
+<span><span class="co">## Up to batch 12, the average loss is    2.59.</span></span>
+<span><span class="co">## Up to batch 13, the average loss is    2.58.</span></span>
+<span><span class="co">## Up to batch 14, the average loss is    2.61.</span></span>
+<span><span class="co">## Up to batch 15, the average loss is    2.60.</span></span>
+<span><span class="co">## Up to batch 16, the average loss is    2.64.</span></span>
+<span><span class="co">## The average loss for epoch 14 is      2.64 and mean absolute error is    1.23.</span></span></code></pre>
 </div>
 <div class="section level3">
 <h3 id="built-in-keras-callbacks">Built-in Keras callbacks<a class="anchor" aria-label="anchor" href="#built-in-keras-callbacks"></a>
