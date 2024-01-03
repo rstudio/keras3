@@ -540,7 +540,7 @@ function(object,
 
     args$callbacks <- normalize_callbacks_with_metrics(
       view_metrics,
-      args$initial_epoch %||% initial_epoch,
+      (args$initial_epoch %||% initial_epoch) - 1,
       args$callbacks
     )
 

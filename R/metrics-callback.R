@@ -1,4 +1,5 @@
 KerasMetricsCallback <- R6::R6Class(
+  # used if tensorflow::tf_version() < "2.2.0"
   "KerasMetricsCallback",
 
   inherit = KerasCallback,
@@ -225,10 +226,7 @@ KerasMetricsCallbackV2 <- R6::R6Class(
       pad <- history$params$epochs - nrow(df)
       pad_data <- list()
 
-      if (tensorflow::tf_version() < "2.2")
-        metric_names <- history$params$metrics
-      else
-        metric_names <- names(history$metrics)
+      metric_names <- names(history$metrics)
 
       for (metric in metric_names)
         pad_data[[metric]] <- rep_len(NA, pad)

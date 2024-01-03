@@ -1008,10 +1008,7 @@ normalize_callbacks_with_metrics <- function(view_metrics, initial_epoch, callba
     callbacks <- list(callbacks)
 
   # always include the metrics callback
-  if (tensorflow::tf_version() >= "2.2.0")
-    metrics_callback <- KerasMetricsCallbackV2$new(view_metrics, initial_epoch)
-  else
-    metrics_callback <- KerasMetricsCallback$new(view_metrics)
+  metrics_callback <- KerasMetricsCallbackV2$new(view_metrics, initial_epoch)
 
   callbacks <- append(callbacks, metrics_callback)
 
