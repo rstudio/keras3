@@ -12,7 +12,7 @@
   ...,
   rankdir = "TB",
   expand_nested = FALSE,
-  dpi = 96,
+  dpi = 200,
   layer_range = NULL,
   show_layer_activations = FALSE,
   to_file = NULL
