@@ -109,14 +109,14 @@ summary(model)
 
 You can also plot the model as a graph:
 
-```{r}
+```{r, fig.height=7}
 plot(model)
 ```
 
 And, optionally, display the input and output shapes of each layer
 in the plotted graph:
 
-```{r}
+```{r, fig.height=9}
 plot(model, show_shapes = TRUE)
 ```
 
@@ -372,7 +372,7 @@ model <- keras_model(
 
 Now plot the model:
 
-```{r}
+```{r, fig.height=13}
 plot(model, show_shapes = TRUE)
 ```
 
@@ -472,7 +472,7 @@ summary(model)
 
 Plot the model:
 
-```{r}
+```{r, fig.height=20}
 plot(model, show_shapes = TRUE)
 ```
 
