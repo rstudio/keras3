@@ -39,58 +39,6 @@
 .globals <- new.env(parent = emptyenv())
 
 
-#' Select a Keras implementation and backend
-#'
-#' @param implementation One of "keras" or "tensorflow" (defaults to "keras").
-#' @param backend One of "tensorflow", "cntk", or "theano" (defaults
-#'   to "tensorflow")
-#'
-#' @details
-#' Keras has multiple implementations (the original keras implementation
-#' and the implementation native to TensorFlow) and supports multiple
-#' backends ("tensorflow", "cntk", "theano", and "plaidml"). These functions allow
-#' switching between the various implementations and backends.
-#'
-#' The functions should be called after `library(keras3)` and before calling
-#' other functions within the package (see below for an example).
-#'
-#' The default implementation and backend should be suitable for most
-#' use cases. The "tensorflow" implementation is useful when using Keras
-#' in conjunction with TensorFlow Estimators (the \pkg{tfestimators}
-#' R package).
-#'
-#' @examples \dontrun{
-#' # use the tensorflow implementation
-#' library(keras3)
-#' use_implementation("tensorflow")
-#'
-#' # use the cntk backend
-#' library(keras3)
-#' use_backend("theano")
-#' }
-#'
-#' @export
-use_implementation <- function(implementation = c("keras", "tensorflow")) {
-  Sys.setenv(KERAS_IMPLEMENTATION = match.arg(implementation))
-}
-
-
-#' @rdname use_implementation
-#' @export
-use_backend <- function(backend = c("tensorflow", "cntk", "theano", "plaidml")) {
-  backend <- match.arg(backend)
-  if (backend == "plaidml") {
-    pml_keras <- import("plaidml.keras", delay_load = list(
-      priority = 20
-    ))
-    pml_keras$install_backend()
-  } else {
-    Sys.setenv(KERAS_BACKEND = match.arg(backend))
-  }
-  if (backend != "tensorflow") use_implementation("keras")
-}
-
-
 
 #' Main Keras module
 #'

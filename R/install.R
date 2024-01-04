@@ -5,7 +5,7 @@
 #' @param envname Name of or path to a Python virtual environment
 #' @param extra_packages Additional Python packages to install alongside Keras
 #' @param python_version Passed on to `reticulate::virtualenv_starter()`
-#' @param backend Which backend. Accepted values include  `"tensorflow"`, `"jax"` and `"pytorch"`
+#' @param backend Which backend(s) to install. Accepted values include  `"tensorflow"`, `"jax"` and `"pytorch"`
 #' @param gpu whether to install a GPU capable version of the backend.
 #' @param restart_session Whether to restart the R session after installing (note this will only occur within RStudio).
 #' @param ... reserved for future compatability.
@@ -93,10 +93,22 @@ is_linux <- function() {
   unname(Sys.info()[["sysname"]] == "Linux")
 }
 
+#' Configure a Keras backend
+#'
+#' @param backend string, one of `"tensorflow"`, `"jax"`, or `"torch"`. Defaults to `"tensorflow"`.
+#'
+#' @details
+#' These functions allow configuring which backend keras will use.
+#' Note that only one backend can be configured per R session.
+#'
+#' The function should be called after `library(keras3)` and before calling
+#' other functions within the package (see below for an example).
+#' ```r
+#' library(keras3)
+#' use_backend("tensorflow")
+#' ```
 #' @export
-#' @rdname config_backend
-#' @param value string, one of `"tensorflow"`, `"jax"`, or `"torch"`.
-config_set_backend <- function(value = c("tensorflow", "jax", "torch")) {
+use_backend <- function(value = c("tensorflow", "jax", "torch")) {
   value <- match.arg(value)
   py_inited <- reticulate::py_available()
 
@@ -104,14 +116,12 @@ config_set_backend <- function(value = c("tensorflow", "jax", "torch")) {
   # removes 'module' from the lazy_loaded PyObjectRef module env
   keras_module_resolved <- !exists("module", envir = keras)
 
-  if(py_inited && keras_module_resolved) {
-    if(config_backend() == value)
-      return(invisible(value))
-    else
+  if (py_inited && keras_module_resolved) {
+    if (config_backend() != value)
       stop("The keras backend must be set before keras has inititialized. Please restart the R session.")
   }
   Sys.setenv(KERAS_BACKEND = value)
-  if(py_inited)
+  if (py_inited)
     reticulate::import("os")$environ$update(list(KERAS_BACKEND = value))
   invisible(value)
 }

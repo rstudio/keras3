@@ -20,6 +20,7 @@
 #' @family backend
 #' @family config
 #' @seealso
+#' [use_backend()]
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/config/backend>
 #' @tether keras.config.backend
 config_backend <-
