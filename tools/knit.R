@@ -113,13 +113,8 @@ knit_vignette <- function(input, ..., output_dir) {
   filename <- fs::path_ext_remove(filename.Rmd)
 
   pkg_dir <- strsplit(input.Rmd, "/vignettes-src/", fixed = TRUE)[[1]][[1]]
-  # pkg_dir <- dirname(input.Rmd)
-  # while(!file.exists(fs::path(pkg_dir, "keras.Rproj"))) {
-  #   pkg_dir <- dirname(pkg_dir)
-  #   if(pkg_dir == "/") stop("Can't find pkg dir")
-  # }
 
-  fig.path <- normalizePath(fs::path(pkg_dir, "man/figures/", filename),
+  fig.path <- normalizePath(fs::path(pkg_dir, "vignettes", filename),
                             mustWork = FALSE)
   unlink(fig.path, recursive = TRUE)
   dir.create(fig.path)
@@ -161,8 +156,8 @@ knit_vignette <- function(input, ..., output_dir) {
   lines <- readLines(output.md)
   unlink(output.md)
 
-  # update absolute figure links so they're relative links
-  lines <- sub(paste0("](", pkg_dir), "](../..", lines, fixed = TRUE)
+  # update absolute figure links so they're relative links to the vignettes dir
+  lines <- sub(paste0("](", pkg_dir, "/vignettes/"), "](", lines, fixed = TRUE)
 
   # fix frontmatter
   end_fm_i <- which(lines == "---")[2]
