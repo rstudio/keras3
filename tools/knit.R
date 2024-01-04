@@ -114,8 +114,10 @@ knit_vignette <- function(input, ..., output_dir) {
 
   pkg_dir <- strsplit(input.Rmd, "/vignettes-src/", fixed = TRUE)[[1]][[1]]
 
-  fig.path <- normalizePath(fs::path(pkg_dir, "vignettes", filename),
-                            mustWork = FALSE)
+  fig.path <- output.Rmd |>
+    fs::path_ext_remove() |>
+    normalizePath(mustWork = FALSE)
+
   unlink(fig.path, recursive = TRUE)
   # dir.create(fig.path)
   # message("fig.path: ", fig.path)
