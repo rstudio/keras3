@@ -10,6 +10,9 @@ files <- list.files("vignettes-src/examples",
                     pattern = "^[^_.].+\\.[RrQq]md",
                     full.names = TRUE)
 
+# render index last
+files <- unique(c(files, grep("index", files, value = TRUE)), fromLast = TRUE)
+
 for (f in files) {
   knit_vignette(f)
 }
