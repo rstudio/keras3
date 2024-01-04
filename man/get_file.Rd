@@ -7,8 +7,7 @@
 get_file(
   fname = NULL,
   origin = NULL,
-  untar = FALSE,
-  md5_hash = NULL,
+  ...,
   file_hash = NULL,
   cache_subdir = "datasets",
   hash_algorithm = "auto",
@@ -24,11 +23,7 @@ If \code{NULL}, the name of the file at \code{origin} will be used.}
 
 \item{origin}{Original URL of the file.}
 
-\item{untar}{Deprecated in favor of \code{extract} argument.
-boolean, whether the file should be decompressed}
-
-\item{md5_hash}{Deprecated in favor of \code{file_hash} argument.
-md5 hash of the file for verification}
+\item{...}{For forward/backward compatability.}
 
 \item{file_hash}{The expected hash string of the file after download.
 The sha256 and md5 hash algorithms are both supported.}
@@ -50,7 +45,7 @@ The default \code{"auto"} corresponds to \code{c("tar", "zip")}.
 \code{NULL} or an empty list will return no matches found.}
 
 \item{cache_dir}{Location to store cached files, when \code{NULL} it
-defaults to \code{Sys.getenv("KERAS_HOME", '~/.keras/')}.}
+defaults to \code{Sys.getenv("KERAS_HOME", "~/.keras/")}.}
 }
 \value{
 Path to the downloaded file.

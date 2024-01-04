@@ -24,7 +24,7 @@ install_keras(
 
 \item{python_version}{Passed on to \code{reticulate::virtualenv_starter()}}
 
-\item{backend}{Which backend. Accepted values include  \code{"tensorflow"}, \code{"jax"} and \code{"pytorch"}}
+\item{backend}{Which backend(s) to install. Accepted values include  \code{"tensorflow"}, \code{"jax"} and \code{"pytorch"}}
 
 \item{gpu}{whether to install a GPU capable version of the backend.}
 
