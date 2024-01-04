@@ -375,10 +375,10 @@ function (x, num_classes = NULL)
 set_random_seed <-
 function (seed)
 {
-    args <- capture_args2(list(seed = as_integer))
-    set.seed(args$seed)
-    reticulate::py_set_seed(args$seed)
-    do.call(keras$utils$set_random_seed, args)
+    seed <- as_integer(seed)
+    set.seed(seed)
+    reticulate::py_set_seed(seed)
+    keras$utils$set_random_seed(seed)
 }
 
 
