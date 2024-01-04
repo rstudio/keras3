@@ -835,7 +835,7 @@ function(x,
          ...,
          rankdir = "TB",
          expand_nested = FALSE,
-         dpi = 96,
+         dpi = 200,
          layer_range = NULL,
          show_layer_activations = FALSE,
          to_file = NULL) {
@@ -843,7 +843,7 @@ function(x,
   args$model <- x
   if (is.null(to_file)) {
     args$to_file <-
-      tempfile(paste0("keras_", x$name), fileext = ".png")
+      tempfile(paste0("keras_", x$name), fileext = ".png") # svg? render dot directly using grViz?
     on.exit(unlink(args$to_file), add = TRUE)
   }
 
