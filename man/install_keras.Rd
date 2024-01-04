@@ -10,7 +10,7 @@ install_keras(
   extra_packages = c("scipy", "pandas", "Pillow", "pydot", "ipython",
     "tensorflow_datasets"),
   python_version = ">=3.9,<=3.11",
-  backend = "tf-nightly",
+  backend = "tensorflow",
   gpu = NA,
   restart_session = TRUE
 )
@@ -24,7 +24,7 @@ install_keras(
 
 \item{python_version}{Passed on to \code{reticulate::virtualenv_starter()}}
 
-\item{backend}{Which backend(s) to install. Accepted values include  \code{"tensorflow"}, \code{"jax"} and \code{"pytorch"}}
+\item{backend}{Which backend(s) to install. Accepted values include \code{"tensorflow"}, \code{"jax"} and \code{"pytorch"}}
 
 \item{gpu}{whether to install a GPU capable version of the backend.}
 

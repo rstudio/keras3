@@ -1,6 +1,6 @@
 
 # this file get's evaled in baseenv()
-# Sys.setenv(CUDA_VISIBLE_DEVICES = "")
+Sys.setenv(CUDA_VISIBLE_DEVICES = "")
 
 # register fake @tether tag parser for roxygen2
 local({
