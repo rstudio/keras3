@@ -135,13 +135,13 @@ function (tensor)
 #' @param origin
 #' Original URL of the file.
 #'
-#' @param untar
-#' Deprecated in favor of `extract` argument.
-#' boolean, whether the file should be decompressed
+#  @param untar
+#  Deprecated in favor of `extract` argument.
+#  boolean, whether the file should be decompressed
 #'
-#' @param md5_hash
-#' Deprecated in favor of `file_hash` argument.
-#' md5 hash of the file for verification
+#  @param md5_hash
+#  Deprecated in favor of `file_hash` argument.
+#  md5 hash of the file for verification
 #'
 #' @param file_hash
 #' The expected hash string of the file after download.
@@ -169,7 +169,9 @@ function (tensor)
 #'
 #' @param cache_dir
 #' Location to store cached files, when `NULL` it
-#' defaults to `Sys.getenv("KERAS_HOME", '~/.keras/')`.
+#' defaults to `Sys.getenv("KERAS_HOME", "~/.keras/")`.
+#'
+#' @param ... For forward/backward compatability.
 #'
 #' @export
 #' @family utils
@@ -178,7 +180,7 @@ function (tensor)
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/utils/get_file>
 #' @tether keras.utils.get_file
 get_file <-
-function (fname = NULL, origin = NULL, untar = FALSE, md5_hash = NULL,
+function (fname = NULL, origin = NULL, ...,
     file_hash = NULL, cache_subdir = "datasets", hash_algorithm = "auto",
     extract = FALSE, archive_format = "auto", cache_dir = NULL)
 {
