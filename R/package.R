@@ -225,7 +225,7 @@ check_implementation_version <- function() {
 # Current version of Keras
 keras_version <- function() {
   if(keras$`__name__` == "keras_core")
-    return(package_version("3.0"))
+    return(package_version("3.0.0"))
   ver <-
     as_r_value(py_get_attr(keras, "__version__", TRUE)) %||%
     tensorflow::tf_config()$version_str
@@ -275,25 +275,3 @@ is_keras_available <- function(version = NULL) {
   }
 }
 
-
-#' Keras implementation
-#'
-#' Obtain a reference to the Python module used for the implementation of Keras.
-#'
-#' These are the available Python modules which implement Keras:
-#'
-#' - keras
-#' - tensorflow.keras ("tensorflow")
-#' - keras_core ("core")
-#'
-#' This function returns a reference to the implementation being currently
-#' used by the keras package. The default implementation is "keras".
-#' You can override this by setting the `KERAS_IMPLEMENTATION` environment
-#' variable to "tensorflow".
-#'
-#' @return Reference to the Python module used for the implementation of Keras.
-#'
-#' @export
-implementation <- function() {
-  keras
-}

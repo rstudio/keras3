@@ -279,8 +279,6 @@ reference:
       # - use_session_with_seed
       - install_keras
       - is_keras_available
-      - implementation
-      - use_implementation
       - use_backend
       - shape
 
