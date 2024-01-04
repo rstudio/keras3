@@ -2,11 +2,10 @@
 
 
 knit_keras_init <- function() {
-  library(keras3)
+  # reticulate::use_virtualenv("r-keras")
   options(width = 76)
-  keras3:::keras$utils$clear_session()
-  set.seed(1L)
-  keras3:::keras$utils$set_random_seed(1L)
+  keras3::clear_session()
+  keras3::set_random_seed(1)
 }
 
 yaml.load <- getExportedValue("yaml", "yaml.load")

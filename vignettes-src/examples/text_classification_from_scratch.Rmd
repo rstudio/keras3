@@ -22,9 +22,16 @@ classification dataset (unprocessed version). We use the `TextVectorization` lay
 ## Setup
 
 ```{r}
-library(keras3)
-library(tfdatasets)
+options(conflicts.policy = "strict")
 library(tensorflow)
+library(tfdatasets)
+library(keras3, mask.ok = c("shape", "set_random_seed"))
+```
+
+
+```{r}
+tf_config()
+str(tf$config$list_physical_devices())
 ```
 
 ## Load the data: IMDB movie review sentiment classification
@@ -44,15 +51,6 @@ if (!dir.exists("datasets/aclImdb")) {
 ```
   
 
-```{r, eval = FALSE}
-if (!dir.exists("datasets")) dir.create("datasets")
-download.file(
-  "https://ai.stanford.edu/~amaas/data/sentiment/aclImdb_v1.tar.gz",
-  "datasets/aclImdb_v1.tar.gz"
-)
-untar("datasets/aclImdb_v1.tar.gz", exdir = "datasets")
-```
-
 The `aclImdb` folder contains a `train` and `test` subfolder:
 
 ```{r}
@@ -63,7 +61,7 @@ head(list.files("datasets/aclImdb/train"))
 The `aclImdb/train/pos` and `aclImdb/train/neg` folders contain text files, each of
  which represents one review (either positive or negative):
 
-```{r}
+```{r, warning=FALSE}
 cat(readLines("datasets/aclImdb/train/pos/6248_7.txt"))
 ```
 
@@ -89,28 +87,29 @@ Before putting the model out into the real world however, it should be retrained
 available training data (without creating a validation dataset), so its performance is maximized.
 
 When using the `validation_split` & `subset` arguments, make sure to either specify a
-random seed, or to pass `shuffle=False`, so that the validation & training splits you
+random seed, or to pass `shuffle=FALSE`, so that the validation & training splits you
 get have no overlap.
 
 ```{r}
 batch_size <- 32
 
 raw_train_ds <- text_dataset_from_directory(
-    "datasets/aclImdb/train",
-    batch_size=batch_size,
-    validation_split=0.2,
-    subset="training",
-    seed=1337,
+  "datasets/aclImdb/train",
+  batch_size = batch_size,
+  validation_split = 0.2,
+  subset = "training",
+  seed = 1337
 )
 raw_val_ds <- text_dataset_from_directory(
-    "datasets/aclImdb/train",
-    batch_size=batch_size,
-    validation_split=0.2,
-    subset="validation",
-    seed=1337,
+  "datasets/aclImdb/train",
+  batch_size = batch_size,
+  validation_split = 0.2,
+  subset = "validation",
+  seed = 1337
 )
 raw_test_ds <- text_dataset_from_directory(
-    "datasets/aclImdb/test", batch_size=batch_size
+  "datasets/aclImdb/test",
+  batch_size = batch_size
 )
 
 length(raw_train_ds)

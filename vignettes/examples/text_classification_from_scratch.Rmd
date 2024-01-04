@@ -7,7 +7,7 @@ description: Text sentiment classification starting from raw text files.
 domain: text
 category: basic
 output: rmarkdown::html_vignette
-date: []
+date: 'Last Modified: 2023-12-07; Last Rendered: 2024-01-04'
 vignette: >
   %\VignetteIndexEntry{Text classification from scratch}
   %\VignetteEngine{knitr::rmarkdown}
@@ -25,34 +25,31 @@ classification dataset (unprocessed version). We use the `TextVectorization` lay
 
 
 ```r
-library(keras3)
+options(conflicts.policy = "strict")
+library(tensorflow)
 library(tfdatasets)
+library(keras3, mask.ok = c("shape", "set_random_seed"))
+```
+
+
+
+```r
+tf_config()
 ```
 
 ```
-##
-## Attaching package: 'tfdatasets'
-```
-
-```
-## The following object is masked from 'package:keras3':
-##
-##     shape
+## TensorFlow v2.15.0 (~/.virtualenvs/r-keras/lib/python3.11/site-packages/keras)
+## Python v3.11 (~/.virtualenvs/r-keras/bin/python)
 ```
 
 ```r
-library(tensorflow)
+str(tf$config$list_physical_devices())
 ```
 
 ```
-##
-## Attaching package: 'tensorflow'
-```
-
-```
-## The following objects are masked from 'package:keras3':
-##
-##     set_random_seed, shape
+## List of 2
+##  $ :PhysicalDevice(name='/physical_device:CPU:0', device_type='CPU')
+##  $ :PhysicalDevice(name='/physical_device:GPU:0', device_type='GPU')
 ```
 
 ## Load the data: IMDB movie review sentiment classification
@@ -72,16 +69,6 @@ if (!dir.exists("datasets/aclImdb")) {
 }
 ```
 
-
-
-```r
-if (!dir.exists("datasets")) dir.create("datasets")
-download.file(
-  "https://ai.stanford.edu/~amaas/data/sentiment/aclImdb_v1.tar.gz",
-  "datasets/aclImdb_v1.tar.gz"
-)
-untar("datasets/aclImdb_v1.tar.gz", exdir = "datasets")
-```
 
 The `aclImdb` folder contains a `train` and `test` subfolder:
 
@@ -113,11 +100,6 @@ cat(readLines("datasets/aclImdb/train/pos/6248_7.txt"))
 ```
 
 ```
-## Warning in readLines("datasets/aclImdb/train/pos/6248_7.txt"): incomplete final
-## line found on 'datasets/aclImdb/train/pos/6248_7.txt'
-```
-
-```
 ## Being an Austrian myself this has been a straight knock in my face. Fortunately I don't live nowhere near the place where this movie takes place but unfortunately it portrays everything that the rest of Austria hates about Viennese people (or people close to that region). And it is very easy to read that this is exactly the directors intention: to let your head sink into your hands and say "Oh my god, how can THAT be possible!". No, not with me, the (in my opinion) totally exaggerated uncensored swinger club scene is not necessary, I watch porn, sure, but in this context I was rather disgusted than put in the right context.<br /><br />This movie tells a story about how misled people who suffer from lack of education or bad company try to survive and live in a world of redundancy and boring horizons. A girl who is treated like a whore by her super-jealous boyfriend (and still keeps coming back), a female teacher who discovers her masochism by putting the life of her super-cruel "lover" on the line, an old couple who has an almost mathematical daily cycle (she is the "official replacement" of his ex wife), a couple that has just divorced and has the ex husband suffer under the acts of his former wife obviously having a relationship with her masseuse and finally a crazy hitchhiker who asks her drivers the most unusual questions and stretches their nerves by just being super-annoying.<br /><br />After having seen it you feel almost nothing. You're not even shocked, sad, depressed or feel like doing anything... Maybe that's why I gave it 7 points, it made me react in a way I never reacted before. If that's good or bad is up to you!
 ```
 
@@ -144,7 +126,7 @@ Before putting the model out into the real world however, it should be retrained
 available training data (without creating a validation dataset), so its performance is maximized.
 
 When using the `validation_split` & `subset` arguments, make sure to either specify a
-random seed, or to pass `shuffle=False`, so that the validation & training splits you
+random seed, or to pass `shuffle=FALSE`, so that the validation & training splits you
 get have no overlap.
 
 
@@ -152,11 +134,11 @@ get have no overlap.
 batch_size <- 32
 
 raw_train_ds <- text_dataset_from_directory(
-    "datasets/aclImdb/train",
-    batch_size=batch_size,
-    validation_split=0.2,
-    subset="training",
-    seed=1337,
+  "datasets/aclImdb/train",
+  batch_size = batch_size,
+  validation_split = 0.2,
+  subset = "training",
+  seed = 1337
 )
 ```
 
@@ -167,11 +149,11 @@ raw_train_ds <- text_dataset_from_directory(
 
 ```r
 raw_val_ds <- text_dataset_from_directory(
-    "datasets/aclImdb/train",
-    batch_size=batch_size,
-    validation_split=0.2,
-    subset="validation",
-    seed=1337,
+  "datasets/aclImdb/train",
+  batch_size = batch_size,
+  validation_split = 0.2,
+  subset = "validation",
+  seed = 1337
 )
 ```
 
@@ -182,7 +164,8 @@ raw_val_ds <- text_dataset_from_directory(
 
 ```r
 raw_test_ds <- text_dataset_from_directory(
-    "datasets/aclImdb/test", batch_size=batch_size
+  "datasets/aclImdb/test",
+  batch_size = batch_size
 )
 ```
 
@@ -430,11 +413,11 @@ model %>% fit(train_ds, validation_data = val_ds, epochs = epochs)
 
 ```
 ## Epoch 1/3
-## 625/625 - 15s - 24ms/step - accuracy: 0.7258 - loss: 0.4922 - val_accuracy: 0.8668 - val_loss: 0.3134
+## 625/625 - 7s - 11ms/step - accuracy: 0.7304 - loss: 0.4899 - val_accuracy: 0.8682 - val_loss: 0.3082
 ## Epoch 2/3
-## 625/625 - 14s - 22ms/step - accuracy: 0.9089 - loss: 0.2278 - val_accuracy: 0.8814 - val_loss: 0.3005
+## 625/625 - 2s - 3ms/step - accuracy: 0.9107 - loss: 0.2215 - val_accuracy: 0.8766 - val_loss: 0.3124
 ## Epoch 3/3
-## 625/625 - 14s - 23ms/step - accuracy: 0.9550 - loss: 0.1226 - val_accuracy: 0.8774 - val_loss: 0.3681
+## 625/625 - 2s - 3ms/step - accuracy: 0.9564 - loss: 0.1152 - val_accuracy: 0.8629 - val_loss: 0.4118
 ```
 
 ## Evaluate the model on the test set
@@ -445,12 +428,15 @@ model %>% evaluate(test_ds)
 ```
 
 ```
-## 782/782 - 6s - 7ms/step - accuracy: 0.8633 - loss: 0.3975
+## 782/782 - 1s - 2ms/step - accuracy: 0.8509 - loss: 0.4448
 ```
 
 ```
-##            loss compile_metrics
-##       0.3974522       0.8632513
+## $accuracy
+## [1] 0.8509032
+##
+## $loss
+## [1] 0.4448362
 ```
 
 ## Make an end-to-end model
@@ -480,10 +466,13 @@ end_to_end_model %>% evaluate(raw_test_ds)
 ```
 
 ```
-## 782/782 - 6s - 8ms/step - accuracy: 0.8633 - loss: 0.3978
+## 782/782 - 4s - 5ms/step - accuracy: 0.8509 - loss: 0.4442
 ```
 
 ```
-##            loss compile_metrics
-##       0.3977900       0.8632513
+## $accuracy
+## [1] 0.8509032
+##
+## $loss
+## [1] 0.4442128
 ```
