@@ -4,7 +4,7 @@ date-created: 2020/04/28
 last-modified: 2023/06/29
 description: Guide to multi-GPU training for Keras models with TensorFlow.
 output: rmarkdown::html_vignette
-date: 'Last Modified: 2023-11-29; Last Rendered: 2024-01-03'
+date: 'Last Modified: 2024-01-03; Last Rendered: 2024-01-04'
 vignette: >
   %\VignetteIndexEntry{Multi-GPU distributed training with TensorFlow}
   %\VignetteEngine{knitr::rmarkdown}
@@ -185,18 +185,18 @@ with(strategy$scope(), {
 
 ```
 ## Epoch 1/2
-## 782/782 - 3s - 4ms/step - loss: 2.0840 - sparse_categorical_accuracy: 0.8817 - val_loss: 0.6871 - val_sparse_categorical_accuracy: 0.9126
+## 782/782 - 11s - 14ms/step - loss: 2.0992 - sparse_categorical_accuracy: 0.8818 - val_loss: 0.7898 - val_sparse_categorical_accuracy: 0.9102
 ## Epoch 2/2
-## 782/782 - 3s - 3ms/step - loss: 0.4243 - sparse_categorical_accuracy: 0.9337 - val_loss: 0.4643 - val_sparse_categorical_accuracy: 0.9277
-## 157/157 - 0s - 1ms/step - loss: 0.4673 - sparse_categorical_accuracy: 0.9292
+## 782/782 - 2s - 2ms/step - loss: 0.4195 - sparse_categorical_accuracy: 0.9375 - val_loss: 0.4124 - val_sparse_categorical_accuracy: 0.9377
+## 157/157 - 0s - 2ms/step - loss: 0.3756 - sparse_categorical_accuracy: 0.9402
 ```
 
 ```
 ## $loss
-## [1] 0.467276
+## [1] 0.3755631
 ##
 ## $sparse_categorical_accuracy
-## [1] 0.9292
+## [1] 0.9402
 ```
 
 ## Using callbacks to ensure fault tolerance
@@ -263,7 +263,7 @@ run_training(epochs=1)
 ```
 
 ```
-## 782/782 - 1s - 2ms/step - loss: 7.9164 - sparse_categorical_accuracy: 0.8906 - val_loss: 1.3026 - val_sparse_categorical_accuracy: 0.8787
+## 782/782 - 4s - 5ms/step - loss: 0.3152 - sparse_categorical_accuracy: 0.9496 - val_loss: 0.4040 - val_sparse_categorical_accuracy: 0.9428
 ```
 
 ```r
@@ -272,7 +272,7 @@ run_training(epochs=1)
 ```
 
 ```
-## 782/782 - 1s - 1ms/step - loss: 7.9164 - sparse_categorical_accuracy: 0.8906 - val_loss: 1.3026 - val_sparse_categorical_accuracy: 0.8787
+## 782/782 - 4s - 5ms/step - loss: 0.3152 - sparse_categorical_accuracy: 0.9496 - val_loss: 0.4040 - val_sparse_categorical_accuracy: 0.9428
 ```
 
 ## `tf$data` performance tips

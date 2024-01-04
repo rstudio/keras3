@@ -5,7 +5,7 @@ date-created: 2023/06/14
 last-modified: 2023/06/30
 description: Complete guide to saving, serializing, and exporting models.
 output: rmarkdown::html_vignette
-date: 'Last Modified: 2024-01-02; Last Rendered: 2024-01-03'
+date: 'Last Modified: 2024-01-02; Last Rendered: 2024-01-04'
 vignette: >
   %\VignetteIndexEntry{Save, serialize, and export models}
   %\VignetteEngine{knitr::rmarkdown}
@@ -356,16 +356,16 @@ str(layer_config)
 ##  $ activation        : chr "relu"
 ##  $ use_bias          : logi TRUE
 ##  $ kernel_initializer:List of 4
-##   ..$ module         : chr "keras.src.initializers.random_initializers"
+##   ..$ module         : chr "keras.initializers"
 ##   ..$ class_name     : chr "GlorotUniform"
 ##   ..$ config         :List of 1
 ##   .. ..$ seed: NULL
-##   ..$ registered_name: chr "GlorotUniform"
+##   ..$ registered_name: NULL
 ##  $ bias_initializer  :List of 4
-##   ..$ module         : chr "keras.src.initializers.constant_initializers"
+##   ..$ module         : chr "keras.initializers"
 ##   ..$ class_name     : chr "Zeros"
 ##   ..$ config         : Named list()
-##   ..$ registered_name: chr "Zeros"
+##   ..$ registered_name: NULL
 ##  $ kernel_regularizer: NULL
 ##  $ bias_regularizer  : NULL
 ##  $ kernel_constraint : NULL
@@ -441,11 +441,11 @@ str(config)
 
 ```
 ## List of 4
-##  $ module         : chr "keras.src.regularizers.regularizers"
+##  $ module         : chr "keras.regularizers"
 ##  $ class_name     : chr "L1"
 ##  $ config         :List of 1
 ##   ..$ l1: num 0.005
-##  $ registered_name: chr "L1"
+##  $ registered_name: NULL
 ```
 
 Note the serialization format containing all the necessary information for proper
@@ -466,7 +466,7 @@ new_reg
 ```
 
 ```
-## <keras.src.regularizers.regularizers.L1 object>
+## <keras.src.regularizers.regularizers.L1 object at 0x7fe50ed7d410>
 ```
 
 ### Model weights saving
@@ -865,12 +865,12 @@ str(config)
 ##   ..$ dtype             : chr "float32"
 ##   ..$ units             : num 16
 ##   ..$ kernel_regularizer:List of 4
-##   .. ..$ module         : chr "keras.src.regularizers.regularizers"
+##   .. ..$ module         : chr "keras.regularizers"
 ##   .. ..$ class_name     : chr "L1L2"
 ##   .. ..$ config         :List of 2
 ##   .. .. ..$ l1: num 1e-05
 ##   .. .. ..$ l2: num 1e-04
-##   .. ..$ registered_name: chr "L1L2"
+##   .. ..$ registered_name: NULL
 ##   ..$ kernel_initializer: chr "ones"
 ##  $ registered_name: chr "MyLayers>KernelMult"
 ```

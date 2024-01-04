@@ -4,7 +4,7 @@ date-created: 2019/03/01
 last-modified: 2023/07/10
 description: Complete guide to writing low-level training & evaluation loops.
 output: rmarkdown::html_vignette
-date: 'Last Modified: 2023-12-01; Last Rendered: 2024-01-03'
+date: 'Last Modified: 2023-12-01; Last Rendered: 2024-01-04'
 vignette: >
   %\VignetteIndexEntry{Writing a training loop from scratch}
   %\VignetteEngine{knitr::rmarkdown}
@@ -145,18 +145,18 @@ for (epoch in seq_len(epochs)) {
 
 ```
 ## Start of epoch  1
-## Training loss (for one batch) at step 200: 1.6825
+## Training loss (for one batch) at step 200: 1.6731
 ## Seen so far: 12800 samples
-## Training loss (for one batch) at step 400: 0.8280
+## Training loss (for one batch) at step 400: 0.8859
 ## Seen so far: 25600 samples
-## Training loss (for one batch) at step 600: 0.6472
+## Training loss (for one batch) at step 600: 0.7074
 ## Seen so far: 38400 samples
 ## Start of epoch  2
-## Training loss (for one batch) at step 200: 0.7153
+## Training loss (for one batch) at step 200: 0.8335
 ## Seen so far: 12800 samples
-## Training loss (for one batch) at step 400: 0.6430
+## Training loss (for one batch) at step 400: 0.8314
 ## Seen so far: 25600 samples
-## Training loss (for one batch) at step 600: 0.4325
+## Training loss (for one batch) at step 600: 0.4169
 ## Seen so far: 38400 samples
 ```
 
@@ -247,23 +247,23 @@ for (epoch in seq_len(epochs)) {
 
 ```
 ## Start of epoch  1
-## Training loss (for one batch) at step 200: 1.0199
+## Training loss (for one batch) at step 200: 1.4448
 ## Seen so far: 12800 samples
-## Training loss (for one batch) at step 400: 0.7246
+## Training loss (for one batch) at step 400: 0.7797
 ## Seen so far: 25600 samples
-## Training loss (for one batch) at step 600: 0.7681
+## Training loss (for one batch) at step 600: 0.7271
 ## Seen so far: 38400 samples
-## Training acc over epoch: 0.6977
-## Validation acc: 0.7766
+## Training acc over epoch: 0.7030
+## Validation acc: 0.7874
 ## Start of epoch  2
-## Training loss (for one batch) at step 200: 0.7923
+## Training loss (for one batch) at step 200: 0.8021
 ## Seen so far: 12800 samples
-## Training loss (for one batch) at step 400: 0.6582
+## Training loss (for one batch) at step 400: 0.5809
 ## Seen so far: 25600 samples
-## Training loss (for one batch) at step 600: 0.5754
+## Training loss (for one batch) at step 600: 0.6895
 ## Seen so far: 38400 samples
-## Training acc over epoch: 0.8043
-## Validation acc: 0.8180
+## Training acc over epoch: 0.8185
+## Validation acc: 0.8365
 ```
 
 ```r
@@ -271,7 +271,7 @@ Sys.time() - time
 ```
 
 ```
-## Time difference of 11.07521 secs
+## Time difference of 21.98486 secs
 ```
 
 ## Speeding-up your training step with `tf_function`
@@ -351,23 +351,23 @@ for (epoch in seq_len(epochs)) {
 
 ```
 ## Start of epoch  1
-## Training loss (for one batch) at step 200: 0.9200
+## Training loss (for one batch) at step 200: 0.9179
 ## Seen so far: 12800 samples
-## Training loss (for one batch) at step 400: 0.9200
+## Training loss (for one batch) at step 400: 0.9179
 ## Seen so far: 25600 samples
-## Training loss (for one batch) at step 600: 0.9200
+## Training loss (for one batch) at step 600: 0.9179
 ## Seen so far: 38400 samples
-## Training acc over epoch: 0.8450
-## Validation acc: 0.8472
+## Training acc over epoch: 0.8616
+## Validation acc: 0.8673
 ## Start of epoch  2
-## Training loss (for one batch) at step 200: 0.9200
+## Training loss (for one batch) at step 200: 0.9179
 ## Seen so far: 12800 samples
-## Training loss (for one batch) at step 400: 0.9200
+## Training loss (for one batch) at step 400: 0.9179
 ## Seen so far: 25600 samples
-## Training loss (for one batch) at step 600: 0.9200
+## Training loss (for one batch) at step 600: 0.9179
 ## Seen so far: 38400 samples
-## Training acc over epoch: 0.8676
-## Validation acc: 0.8698
+## Training acc over epoch: 0.8828
+## Validation acc: 0.8819
 ```
 
 ```r
@@ -375,7 +375,7 @@ Sys.time() - time
 ```
 
 ```
-## Time difference of 1.479356 secs
+## Time difference of 2.493958 secs
 ```
 
 Much faster, isn't it?

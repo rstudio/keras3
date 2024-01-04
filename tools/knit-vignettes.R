@@ -6,11 +6,30 @@ library(tfdatasets, exclude = c("shape"))
 library(tensorflow, exclude = c("shape", "set_random_seed"))
 library(keras3)
 
+
 files <- list.files("vignettes-src",
                     pattern = "^[^_.].+\\.[RrQq]md",
                     full.names = TRUE)
 
+
+# for (f in files) {
+#   cli::cli_h1(f)
+#   callr::r(function(f) {
+#     envir::attach_source("tools/knit.R")
+
+#     library(tfdatasets, exclude = c("shape"))
+#     library(tensorflow, exclude = c("shape", "set_random_seed"))
+#     library(keras3)
+
+#     knit_vignette(f)
+
+#   }, args = list(f), stdout = "|", stderr = "|")
+#   cat("\n")
+# }
+
+
 for (f in files) {
+  cli::cli_h1(f)
   knit_vignette(f)
 }
 

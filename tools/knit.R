@@ -117,7 +117,7 @@ knit_vignette <- function(input, ..., output_dir) {
   fig.path <- normalizePath(fs::path(pkg_dir, "vignettes", filename),
                             mustWork = FALSE)
   unlink(fig.path, recursive = TRUE)
-  dir.create(fig.path)
+  # dir.create(fig.path)
   # message("fig.path: ", fig.path)
 
   render_dir <- fs::file_temp(paste0(filename, "-"))

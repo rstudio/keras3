@@ -4,7 +4,7 @@ date-created: 2020/04/15
 last-modified: 2023/06/25
 description: Complete guide to transfer learning & fine-tuning in Keras.
 output: rmarkdown::html_vignette
-date: 'Last Modified: 2023-11-29; Last Rendered: 2024-01-03'
+date: 'Last Modified: 2023-11-29; Last Rendered: 2024-01-04'
 vignette: >
   %\VignetteIndexEntry{Transfer learning & fine-tuning}
   %\VignetteEngine{knitr::rmarkdown}
@@ -193,7 +193,7 @@ model %>% fit(random_normal(c(2, 3)), random_normal(c(2, 3)), epochs = 1)
 ```
 
 ```
-## 1/1 - 0s - 206ms/step - loss: 2.1868
+## 1/1 - 1s - 548ms/step - loss: 2.1868
 ```
 
 ```r
@@ -449,7 +449,7 @@ train_ds %>%
   })
 ```
 
-![plot of chunk unnamed-chunk-13](../../man/figures/transfer_learning/unnamed-chunk-13-1.png)
+![plot of chunk unnamed-chunk-13](transfer_learning/unnamed-chunk-13-1.png)
 
 We can also see that label 1 is "dog" and label 0 is "cat".
 
@@ -557,7 +557,7 @@ plot_image(data_augmentation(first_image, training = TRUE), "augmented 2")
 plot_image(data_augmentation(first_image, training = TRUE), "augmented 3")
 ```
 
-![plot of chunk unnamed-chunk-17](../../man/figures/transfer_learning/unnamed-chunk-17-1.png)
+![plot of chunk unnamed-chunk-17](transfer_learning/unnamed-chunk-17-1.png)
 
 ## Build a model
 
@@ -644,7 +644,7 @@ model %>% fit(train_ds, epochs=epochs, validation_data=validation_ds)
 ```
 
 ```
-## 146/146 - 103s - 703ms/step - binary_accuracy: 0.9118 - loss: 0.1923 - val_binary_accuracy: 0.9662 - val_loss: 0.0916
+## 146/146 - 55s - 374ms/step - binary_accuracy: 0.9106 - loss: 0.1951 - val_binary_accuracy: 0.9679 - val_loss: 0.0913
 ```
 
 ## Do a round of fine-tuning of the entire model
@@ -705,7 +705,7 @@ model %>% fit(train_ds, epochs=epochs, validation_data=validation_ds)
 ```
 
 ```
-## 146/146 - 429s - 3s/step - binary_accuracy: 0.8590 - loss: 0.3430 - val_binary_accuracy: 0.9456 - val_loss: 0.1265
+## 146/146 - 80s - 545ms/step - binary_accuracy: 0.8583 - loss: 0.3436 - val_binary_accuracy: 0.9443 - val_loss: 0.1300
 ```
 
 After 10 epochs, fine-tuning gains us a nice improvement here.
@@ -717,13 +717,13 @@ model %>% evaluate(test_ds)
 ```
 
 ```
-## 37/37 - 23s - 630ms/step - binary_accuracy: 0.9388 - loss: 0.1463
+## 37/37 - 1s - 39ms/step - binary_accuracy: 0.9367 - loss: 0.1493
 ```
 
 ```
 ## $binary_accuracy
-## [1] 0.9387669
+## [1] 0.9366554
 ##
 ## $loss
-## [1] 0.1462643
+## [1] 0.1492725
 ```

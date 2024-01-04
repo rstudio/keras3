@@ -1,0 +1,478 @@
+---
+title: Text classification from scratch
+authors: Mark Omernick, Francois Chollet
+date-created: 2019/11/06
+last-modified: 2020/05/17
+description: Text sentiment classification starting from raw text files.
+domain: text
+category: basic
+output: rmarkdown::html_vignette
+date: 'Last Modified: 2024-01-04; Last Rendered: 2024-01-04'
+vignette: >
+  %\VignetteIndexEntry{Text classification from scratch}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+## Introduction
+
+This example shows how to do text classification starting from raw text (as
+a set of text files on disk). We demonstrate the workflow on the IMDB sentiment
+classification dataset (unprocessed version). We use the `TextVectorization` layer for
+ word splitting & indexing.
+
+## Setup
+
+
+```r
+options(conflicts.policy = "strict")
+library(tensorflow)
+library(tfdatasets)
+library(keras3, mask.ok = c("shape", "set_random_seed"))
+```
+
+
+
+```r
+tf_config()
+```
+
+```
+## TensorFlow v2.15.0 (~/.virtualenvs/r-keras/lib/python3.11/site-packages/keras)
+## Python v3.11 (~/.virtualenvs/r-keras/bin/python)
+```
+
+```r
+str(tf$config$list_physical_devices())
+```
+
+```
+## List of 2
+##  $ :PhysicalDevice(name='/physical_device:CPU:0', device_type='CPU')
+##  $ :PhysicalDevice(name='/physical_device:GPU:0', device_type='GPU')
+```
+
+## Load the data: IMDB movie review sentiment classification
+
+Let's download the data and inspect its structure.
+
+
+```r
+if (!dir.exists("datasets/aclImdb")) {
+  dir.create("datasets")
+  download.file(
+    "https://ai.stanford.edu/~amaas/data/sentiment/aclImdb_v1.tar.gz",
+    "datasets/aclImdb_v1.tar.gz"
+  )
+  untar("datasets/aclImdb_v1.tar.gz", exdir = "datasets")
+  unlink("datasets/aclImdb/train/unsup", recursive = TRUE)
+}
+```
+
+
+The `aclImdb` folder contains a `train` and `test` subfolder:
+
+
+```r
+head(list.files("datasets/aclImdb/test"))
+```
+
+```
+## [1] "labeledBow.feat" "neg"             "pos"             "urls_neg.txt"
+## [5] "urls_pos.txt"
+```
+
+```r
+head(list.files("datasets/aclImdb/train"))
+```
+
+```
+## [1] "labeledBow.feat" "neg"             "pos"             "unsupBow.feat"
+## [5] "urls_neg.txt"    "urls_pos.txt"
+```
+
+The `aclImdb/train/pos` and `aclImdb/train/neg` folders contain text files, each of
+ which represents one review (either positive or negative):
+
+
+```r
+cat(readLines("datasets/aclImdb/train/pos/6248_7.txt"))
+```
+
+```
+## Being an Austrian myself this has been a straight knock in my face. Fortunately I don't live nowhere near the place where this movie takes place but unfortunately it portrays everything that the rest of Austria hates about Viennese people (or people close to that region). And it is very easy to read that this is exactly the directors intention: to let your head sink into your hands and say "Oh my god, how can THAT be possible!". No, not with me, the (in my opinion) totally exaggerated uncensored swinger club scene is not necessary, I watch porn, sure, but in this context I was rather disgusted than put in the right context.<br /><br />This movie tells a story about how misled people who suffer from lack of education or bad company try to survive and live in a world of redundancy and boring horizons. A girl who is treated like a whore by her super-jealous boyfriend (and still keeps coming back), a female teacher who discovers her masochism by putting the life of her super-cruel "lover" on the line, an old couple who has an almost mathematical daily cycle (she is the "official replacement" of his ex wife), a couple that has just divorced and has the ex husband suffer under the acts of his former wife obviously having a relationship with her masseuse and finally a crazy hitchhiker who asks her drivers the most unusual questions and stretches their nerves by just being super-annoying.<br /><br />After having seen it you feel almost nothing. You're not even shocked, sad, depressed or feel like doing anything... Maybe that's why I gave it 7 points, it made me react in a way I never reacted before. If that's good or bad is up to you!
+```
+
+We are only interested in the `pos` and `neg` subfolders, so let's delete the other subfolder that has text files in it:
+
+
+```r
+unlink("datasets/aclImdb/train/unsup", recursive = TRUE)
+```
+
+You can use the utility `text_dataset_from_directory` to
+generate a labeled `tf_dataset` object from a set of text files on disk filed
+ into class-specific folders.
+
+Let's use it to generate the training, validation, and test datasets. The validation
+and training datasets are generated from two subsets of the `train` directory, with 20%
+of samples going to the validation dataset and 80% going to the training dataset.
+
+Having a validation dataset in addition to the test dataset is useful for tuning
+hyperparameters, such as the model architecture, for which the test dataset should not
+be used.
+
+Before putting the model out into the real world however, it should be retrained using all
+available training data (without creating a validation dataset), so its performance is maximized.
+
+When using the `validation_split` & `subset` arguments, make sure to either specify a
+random seed, or to pass `shuffle=FALSE`, so that the validation & training splits you
+get have no overlap.
+
+
+```r
+batch_size <- 32
+
+raw_train_ds <- text_dataset_from_directory(
+  "datasets/aclImdb/train",
+  batch_size = batch_size,
+  validation_split = 0.2,
+  subset = "training",
+  seed = 1337
+)
+```
+
+```
+## Found 25000 files belonging to 2 classes.
+## Using 20000 files for training.
+```
+
+```r
+raw_val_ds <- text_dataset_from_directory(
+  "datasets/aclImdb/train",
+  batch_size = batch_size,
+  validation_split = 0.2,
+  subset = "validation",
+  seed = 1337
+)
+```
+
+```
+## Found 25000 files belonging to 2 classes.
+## Using 5000 files for validation.
+```
+
+```r
+raw_test_ds <- text_dataset_from_directory(
+  "datasets/aclImdb/test",
+  batch_size = batch_size
+)
+```
+
+```
+## Found 25000 files belonging to 2 classes.
+```
+
+```r
+length(raw_train_ds)
+```
+
+```
+## [1] 625
+```
+
+```r
+length(raw_val_ds)
+```
+
+```
+## [1] 157
+```
+
+```r
+length(raw_test_ds)
+```
+
+```
+## [1] 782
+```
+
+Let's preview a few samples:
+
+
+```r
+# It's important to take a look at your raw data to ensure your normalization
+# and tokenization will work as expected. We can do that by taking a few
+# examples from the training set and looking at them.
+# This is one of the places where eager execution shines:
+# we can just evaluate these tensors using .numpy()
+# instead of needing to evaluate them in a Session/Graph context.
+batch <- iter_next(as_iterator(raw_train_ds))
+str(batch)
+```
+
+```
+## List of 2
+##  $ :<tf.Tensor: shape=(32), dtype=string, numpy=…>
+##  $ :<tf.Tensor: shape=(32), dtype=int32, numpy=…>
+```
+
+```r
+c(text_batch, label_batch) %<-% batch
+for (i in 1:3) {
+  print(text_batch[i])
+  print(label_batch[i])
+}
+```
+
+```
+## tf.Tensor(b"I have read the novel Reaper of Ben Mezrich a fews years ago and last night I accidentally came to see this adaption.<br /><br />Although it's been years since I read the story the first time, the differences between the novel and the movie are humongous. Very important elements, which made the whole thing plausible are just written out or changed to bad.<br /><br />If the plot sounds interesting to you: go and get the novel. Its much, much, much better.<br /><br />Still 4 out of 10 since it was hard to stop watching because of the great basic plot by Ben Mezrich.", shape=(), dtype=string)
+## tf.Tensor(0, shape=(), dtype=int32)
+## tf.Tensor(b'After seeing all the Jesse James, Quantrill, jayhawkers,etc films in the fifties, it is quite a thrill to see this film with a new perspective by director Ang Lee. The scene of the attack of Lawrence, Kansas is awesome. The romantic relationship between Jewel and Toby Mcguire turns out to be one of the best parts and Jonathan Rhys-Meyers is outstanding as the bad guy. All the time this film makes you feel the horror of war, and the desperate situation of the main characters who do not know if they are going to survive the next hours. Definitely worth seeing.', shape=(), dtype=string)
+## tf.Tensor(1, shape=(), dtype=int32)
+## tf.Tensor(b'AG was an excellent presentation of drama, suspense and thriller that is so rare to American TV. Sheriff Lucas gave many a viewer the willies. We rooted for Caleb as he strove to resist the overtures of Sheriff Lucas. We became engrossed and fearful upon learning of the unthinkable connection between these two characters. The manipulations which weekly gave cause to fear what Lucas would do next were truly surprising. This show lived up to the "Gothic" moniker in ways American entertainment has so seldom attempted, much less mastered. The suits definitely made a big mistake in not supporting this show. This show puts shame to the current glut of "reality" shows- which are so less than satisfying viewing.The call for a DVD box set is well based. This show is quality viewing for a discerning market hungry for quality viewing. A public that is tiring of over-saturation of mind-numbing reality fare will welcome this gem of real storytelling. Bring on the DVD box set!!', shape=(), dtype=string)
+## tf.Tensor(1, shape=(), dtype=int32)
+```
+
+## Prepare the data
+
+In particular, we remove `<br />` tags.
+
+
+```r
+# Having looked at our data above, we see that the raw text contains HTML break
+# tags of the form '<br />'. These tags will not be removed by the default
+# standardizer (which doesn't strip HTML). Because of this, we will need to
+# create a custom standardization function.
+custom_standardization_fn <- function(string_tensor) {
+  string_tensor %>%
+    tf$strings$lower() %>% # convert to all lowercase
+    tf$strings$regex_replace("<br />", " ") %>% # remove '<br />' HTML tag
+    tf$strings$regex_replace("[[:punct:]]", "") # remove punctuation
+}
+
+
+# Model constants.
+max_features <- 20000
+embedding_dim <- 128
+sequence_length <- 500
+
+# Now that we have our custom standardization, we can instantiate our text
+# vectorization layer. We are using this layer to normalize, split, and map
+# strings to integers, so we set our 'output_mode' to 'int'.
+# Note that we're using the default split function,
+# and the custom standardization defined above.
+# We also set an explicit maximum sequence length, since the CNNs later in our
+# model won't support ragged sequences.
+vectorize_layer <- layer_text_vectorization(
+    standardize = custom_standardization_fn,
+    max_tokens = max_features,
+    output_mode = "int",
+    output_sequence_length = sequence_length,
+)
+
+# Now that the vectorize_layer has been created, call `adapt` on a text-only
+# dataset to create the vocabulary. You don't have to batch, but for very large
+# datasets this means you're not keeping spare copies of the dataset in memory.
+
+# Let's make a text-only dataset (no labels):
+text_ds <- raw_train_ds %>%
+  dataset_map(function(x, y) x)
+# Let's call `adapt`:
+vectorize_layer %>% adapt(text_ds)
+```
+
+## Two options to vectorize the data
+
+There are 2 ways we can use our text vectorization layer:
+
+**Option 1: Make it part of the model**, so as to obtain a model that processes raw
+ strings, like this:
+
+
+```r
+x <- layer_input(shape = c(1L), dtype = "string", name = 'text') %>%
+  vectorize_layer() %>%
+  layer_embedding(max_features + 1, embedding_dim)
+```
+
+**Option 2: Apply it to the text dataset** to obtain a dataset of word indices, then
+ feed it into a model that expects integer sequences as inputs.
+
+An important difference between the two is that option 2 enables you to do
+**asynchronous CPU processing and buffering** of your data when training on GPU.
+So if you're training the model on GPU, you probably want to go with this option to get
+ the best performance. This is what we will do below.
+
+If we were to export our model to production, we'd ship a model that accepts raw
+strings as input, like in the code snippet for option 1 above. This can be done after
+ training. We do this in the last section.
+
+
+```r
+vectorize_text <- function(text, label) {
+  text <- text %>%
+    tf$expand_dims(-1L) %>%
+    vectorize_layer()
+  list(text, label)
+}
+
+# Vectorize the data.
+train_ds <- raw_train_ds %>% dataset_map(vectorize_text)
+val_ds   <- raw_val_ds   %>% dataset_map(vectorize_text)
+test_ds  <- raw_test_ds  %>% dataset_map(vectorize_text)
+
+# Do async prefetching / buffering of the data for best performance on GPU.
+train_ds <- train_ds %>%
+  dataset_cache() %>%
+  dataset_prefetch(buffer_size = 10)
+val_ds <- val_ds %>%
+  dataset_cache() %>%
+  dataset_prefetch(buffer_size = 10)
+test_ds <- test_ds %>%
+  dataset_cache() %>%
+  dataset_prefetch(buffer_size = 10)
+```
+
+## Build a model
+
+We choose a simple 1D convnet starting with an `Embedding` layer.
+
+
+```r
+# A integer input for vocab indices.
+inputs <- layer_input(shape = list(NULL), dtype = "int64")
+
+predictions <- inputs %>%
+  # Next, we add a layer to map those vocab indices into a space of dimensionality
+  # 'embedding_dim'.
+  layer_embedding(max_features, embedding_dim) %>%
+  layer_dropout(0.5) %>%
+  # Conv1D + global max pooling
+  layer_conv_1d(128, 7, padding = "valid", activation = "relu", strides = 3) %>%
+  layer_conv_1d(128, 7, padding = "valid", activation = "relu", strides = 3) %>%
+  layer_global_max_pooling_1d() %>%
+  # We add a vanilla hidden layer:
+  layer_dense(128, activation = "relu") %>%
+  layer_dropout(0.5) %>%
+  # We project onto a single unit output layer, and squash it with a sigmoid:
+  layer_dense(1, activation = "sigmoid", name = "predictions")
+
+model <- keras_model(inputs, predictions)
+
+summary(model)
+```
+
+```
+## [1mModel: "functional_1"[0m
+## ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━┓
+## ┃[1m [0m[1mLayer (type)                   [0m[1m [0m┃[1m [0m[1mOutput Shape             [0m[1m [0m┃[1m [0m[1m   Param #[0m[1m [0m┃
+## ┡━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━┩
+## │ input_layer ([38;5;33mInputLayer[0m)        │ ([38;5;45mNone[0m, [38;5;45mNone[0m)              │          [38;5;34m0[0m │
+## ├─────────────────────────────────┼───────────────────────────┼────────────┤
+## │ embedding_1 ([38;5;33mEmbedding[0m)         │ ([38;5;45mNone[0m, [38;5;45mNone[0m, [38;5;34m128[0m)         │  [38;5;34m2,560,000[0m │
+## ├─────────────────────────────────┼───────────────────────────┼────────────┤
+## │ dropout_1 ([38;5;33mDropout[0m)             │ ([38;5;45mNone[0m, [38;5;45mNone[0m, [38;5;34m128[0m)         │          [38;5;34m0[0m │
+## ├─────────────────────────────────┼───────────────────────────┼────────────┤
+## │ conv1d_1 ([38;5;33mConv1D[0m)               │ ([38;5;45mNone[0m, [38;5;45mNone[0m, [38;5;34m128[0m)         │    [38;5;34m114,816[0m │
+## ├─────────────────────────────────┼───────────────────────────┼────────────┤
+## │ conv1d ([38;5;33mConv1D[0m)                 │ ([38;5;45mNone[0m, [38;5;45mNone[0m, [38;5;34m128[0m)         │    [38;5;34m114,816[0m │
+## ├─────────────────────────────────┼───────────────────────────┼────────────┤
+## │ global_max_pooling1d            │ ([38;5;45mNone[0m, [38;5;34m128[0m)               │          [38;5;34m0[0m │
+## │ ([38;5;33mGlobalMaxPooling1D[0m)            │                           │            │
+## ├─────────────────────────────────┼───────────────────────────┼────────────┤
+## │ dense ([38;5;33mDense[0m)                   │ ([38;5;45mNone[0m, [38;5;34m128[0m)               │     [38;5;34m16,512[0m │
+## ├─────────────────────────────────┼───────────────────────────┼────────────┤
+## │ dropout ([38;5;33mDropout[0m)               │ ([38;5;45mNone[0m, [38;5;34m128[0m)               │          [38;5;34m0[0m │
+## ├─────────────────────────────────┼───────────────────────────┼────────────┤
+## │ predictions ([38;5;33mDense[0m)             │ ([38;5;45mNone[0m, [38;5;34m1[0m)                 │        [38;5;34m129[0m │
+## └─────────────────────────────────┴───────────────────────────┴────────────┘
+## [1m Total params: [0m[38;5;34m2,806,273[0m (10.71 MB)
+## [1m Trainable params: [0m[38;5;34m2,806,273[0m (10.71 MB)
+## [1m Non-trainable params: [0m[38;5;34m0[0m (0.00 B)
+```
+
+```r
+# Compile the model with binary crossentropy loss and an adam optimizer.
+model %>% compile(
+  loss = "binary_crossentropy",
+  optimizer = "adam",
+  metrics = "accuracy"
+)
+```
+
+## Train the model
+
+
+```r
+epochs <- 3
+
+# Fit the model using the train and test datasets.
+model %>% fit(train_ds, validation_data = val_ds, epochs = epochs)
+```
+
+```
+## Epoch 1/3
+## 625/625 - 6s - 10ms/step - accuracy: 0.7346 - loss: 0.4837 - val_accuracy: 0.8722 - val_loss: 0.3107
+## Epoch 2/3
+## 625/625 - 2s - 3ms/step - accuracy: 0.9133 - loss: 0.2168 - val_accuracy: 0.8730 - val_loss: 0.3129
+## Epoch 3/3
+## 625/625 - 2s - 3ms/step - accuracy: 0.9585 - loss: 0.1120 - val_accuracy: 0.8573 - val_loss: 0.4290
+```
+
+## Evaluate the model on the test set
+
+
+```r
+model %>% evaluate(test_ds)
+```
+
+```
+## 782/782 - 1s - 2ms/step - accuracy: 0.8495 - loss: 0.4625
+```
+
+```
+## $accuracy
+## [1] 0.8495445
+##
+## $loss
+## [1] 0.4624794
+```
+
+## Make an end-to-end model
+
+If you want to obtain a model capable of processing raw strings, you can simply
+create a new model (using the weights we just trained):
+
+
+```r
+# A string input
+inputs <- layer_input(shape = c(1), dtype = "string")
+# Turn strings into vocab indices
+indices <- vectorize_layer(inputs)
+# Turn vocab indices into predictions
+outputs <- model(indices)
+
+# Our end to end model
+end_to_end_model <- keras_model(inputs, outputs)
+end_to_end_model %>% compile(
+    loss = "binary_crossentropy",
+    optimizer = "adam",
+    metrics = c("accuracy")
+)
+
+# Test it with `raw_test_ds`, which yields raw strings
+end_to_end_model %>% evaluate(raw_test_ds)
+```
+
+```
+## 782/782 - 4s - 5ms/step - accuracy: 0.8495 - loss: 0.4623
+```
+
+```
+## $accuracy
+## [1] 0.8495445
+##
+## $loss
+## [1] 0.4622861
+```

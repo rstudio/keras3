@@ -6,7 +6,7 @@ description: First contact with Keras 3.
 output: rmarkdown::html_vignette
 editor_options:
   chunk_output_type: console
-date: 'Last Modified: 2023-11-30; Last Rendered: 2024-01-03'
+date: 'Last Modified: 2023-11-30; Last Rendered: 2024-01-04'
 vignette: >
   %\VignetteIndexEntry{Introduction to Keras for engineers}
   %\VignetteEngine{knitr::rmarkdown}
@@ -174,7 +174,7 @@ model %>% fit(
 ```
 
 ```
-## 399/399 - 38s - 95ms/step - acc: 0.7463 - loss: 0.7500 - val_acc: 0.9627 - val_loss: 0.1317
+## 399/399 - 8s - 21ms/step - acc: 0.7357 - loss: 0.7770 - val_acc: 0.9614 - val_loss: 0.1363
 ```
 
 ```r
@@ -204,7 +204,7 @@ predictions <- model %>% predict(x_test)
 ```
 
 ```
-## 313/313 - 3s - 9ms/step
+## 313/313 - 1s - 2ms/step
 ```
 
 ```r
@@ -335,7 +335,7 @@ model %>% fit(
 ```
 
 ```
-## 399/399 - 38s - 95ms/step - acc: 0.7325 - loss: 0.7821 - val_acc: 0.9253 - val_loss: 0.2463
+## 399/399 - 8s - 19ms/step - acc: 0.7504 - loss: 0.7399 - val_acc: 0.9342 - val_loss: 0.2232
 ```
 
 ## Training models on arbitrary data sources
@@ -411,7 +411,7 @@ model %>% fit(train_dataset, epochs=1, validation_data=test_dataset)
 ```
 
 ```
-## 469/469 - 45s - 95ms/step - acc: 0.7552 - loss: 0.7242 - val_acc: 0.9199 - val_loss: 0.2651
+## 469/469 - 9s - 18ms/step - acc: 0.7568 - loss: 0.7218 - val_acc: 0.9048 - val_loss: 0.3000
 ```
 
 ## Further reading

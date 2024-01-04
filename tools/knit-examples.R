@@ -16,5 +16,3 @@ files <- unique(c(files, grep("index", files, value = TRUE)), fromLast = TRUE)
 for (f in files) {
   knit_vignette(f)
 }
-
-
