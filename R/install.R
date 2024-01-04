@@ -108,8 +108,8 @@ is_linux <- function() {
 #' use_backend("tensorflow")
 #' ```
 #' @export
-use_backend <- function(value = c("tensorflow", "jax", "torch")) {
-  value <- match.arg(value)
+use_backend <- function(backend = c("tensorflow", "jax", "torch")) {
+  backend <- match.arg(backend)
   py_inited <- reticulate::py_available()
 
   # is the keras module already imported? reticulate:::py_module_proxy_import()
@@ -117,11 +117,11 @@ use_backend <- function(value = c("tensorflow", "jax", "torch")) {
   keras_module_resolved <- !exists("module", envir = keras)
 
   if (py_inited && keras_module_resolved) {
-    if (config_backend() != value)
+    if (config_backend() != backend)
       stop("The keras backend must be set before keras has inititialized. Please restart the R session.")
   }
-  Sys.setenv(KERAS_BACKEND = value)
+  Sys.setenv(KERAS_BACKEND = backend)
   if (py_inited)
-    reticulate::import("os")$environ$update(list(KERAS_BACKEND = value))
-  invisible(value)
+    reticulate::import("os")$environ$update(list(KERAS_BACKEND = backend))
+  invisible(backend)
 }

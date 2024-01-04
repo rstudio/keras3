@@ -4,7 +4,7 @@
 \alias{use_backend}
 \title{Configure a Keras backend}
 \usage{
-use_backend(value = c("tensorflow", "jax", "torch"))
+use_backend(backend = c("tensorflow", "jax", "torch"))
 }
 \arguments{
 \item{backend}{string, one of \code{"tensorflow"}, \code{"jax"}, or \code{"torch"}. Defaults to \code{"tensorflow"}.}
