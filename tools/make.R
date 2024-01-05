@@ -287,6 +287,11 @@ fs::dir_walk("man-src", type = "directory", recurse = TRUE,
 # TODO: backout usage of `return_dict=TRUE` in evaluate() and friends - the output order is not stable.
 #       use `setNames(as.list())`
 #
+# TODO: update doc page for `get_config()`, details are stale.
+# TODO: remove `class` arg from get_config(), not a user facing detail.
+#
+# TODO: get_weights(), `trainable` arg doc cut-off
+#
 # TODO: revisit k_vectorized_map() man page
 # The source of truth for the current translation should be...?
 #    - the autogened file R/autogen-*.R, or
