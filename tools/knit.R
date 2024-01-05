@@ -88,7 +88,7 @@ knit_keras_process_chunk_output <- function(x, options) {
   x <- x |> strsplit("\n") |> unlist() |> trimws("right")
 
   # strip object addresses; no noisy diff
-  x <- sub(" at 0x[0-9A-Fa-f]{9}>$", ">", x, perl = TRUE)
+  x <- sub(" at 0[xX][0-9A-Fa-f]{9,16}>$", ">", x, perl = TRUE)
 
   # remove reticulate hint from exceptions
   x <- x[!grepl(r"{## .*rstudio:run:reticulate::py_last_error\(\).*}", x)]
@@ -158,8 +158,8 @@ knit_vignette <- function(input, ..., output_dir) {
   lines <- readLines(output.md)
   unlink(output.md)
 
-  # update absolute figure links so they're relative links to the vignettes dir
-  lines <- sub(paste0("](", pkg_dir, "/vignettes/"), "](", lines, fixed = TRUE)
+  # update absolute figure links so they're relative links to the vignette dir
+  lines <- sub(paste0("](", dirname(fig.path), "/"), "](", lines, fixed = TRUE)
 
   # fix frontmatter
   end_fm_i <- which(lines == "---")[2]
