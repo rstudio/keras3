@@ -109,6 +109,8 @@
   <main id="main" class="col-md-9"><div class="page-header">
       <img src="" class="logo" alt=""><h1>Text classification from scratch</h1>
             
+            <h4 data-toc-skip class="date">Last Modified: 2024-01-04;
+Last Rendered: 2024-01-04</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/rstudio/keras/blob/HEAD/vignettes/examples/text_classification_from_scratch.Rmd" class="external-link"><code>vignettes/examples/text_classification_from_scratch.Rmd</code></a></small>
       <div class="d-none name"><code>text_classification_from_scratch.Rmd</code></div>
@@ -129,26 +131,25 @@ indexing.</p>
 <h2 id="setup">Setup<a class="anchor" aria-label="anchor" href="#setup"></a>
 </h2>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https:/keras.posit.co/">keras3</a></span><span class="op">)</span></span>
-<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/rstudio/tfdatasets" class="external-link">tfdatasets</a></span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">##</span></span>
-<span><span class="co">## Attaching package: 'tfdatasets'</span></span></code></pre>
-<pre><code><span><span class="co">## The following object is masked from 'package:keras3':</span></span>
-<span><span class="co">##</span></span>
-<span><span class="co">##     shape</span></span></code></pre>
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/options.html" class="external-link">options</a></span><span class="op">(</span>conflicts.policy <span class="op">=</span> <span class="st">"strict"</span><span class="op">)</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/rstudio/tensorflow" class="external-link">tensorflow</a></span><span class="op">)</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/rstudio/tfdatasets" class="external-link">tfdatasets</a></span><span class="op">)</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https:/keras.posit.co/">keras3</a></span>, mask.ok <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"shape"</span>, <span class="st">"set_random_seed"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
+<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/pkg/tensorflow/man/tf_config.html" class="external-link">tf_config</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
+<pre><code><span><span class="co">## TensorFlow v2.15.0 (~/.virtualenvs/r-keras/lib/python3.11/site-packages/keras)</span></span>
+<span><span class="co">## Python v3.11 (~/.virtualenvs/r-keras/bin/python)</span></span></code></pre>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/rstudio/tensorflow" class="external-link">tensorflow</a></span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">##</span></span>
-<span><span class="co">## Attaching package: 'tensorflow'</span></span></code></pre>
-<pre><code><span><span class="co">## The following objects are masked from 'package:keras3':</span></span>
-<span><span class="co">##</span></span>
-<span><span class="co">##     set_random_seed, shape</span></span></code></pre>
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/str.html" class="external-link">str</a></span><span class="op">(</span><span class="va">tf</span><span class="op">$</span><span class="va">config</span><span class="op">$</span><span class="fu">list_physical_devices</span><span class="op">(</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
+<pre><code><span><span class="co">## List of 2</span></span>
+<span><span class="co">##  $ :PhysicalDevice(name='/physical_device:CPU:0', device_type='CPU')</span></span>
+<span><span class="co">##  $ :PhysicalDevice(name='/physical_device:GPU:0', device_type='GPU')</span></span></code></pre>
 </div>
 <div class="section level2">
 <h2 id="load-the-data-imdb-movie-review-sentiment-classification">Load the data: IMDB movie review sentiment classification<a class="anchor" aria-label="anchor" href="#load-the-data-imdb-movie-review-sentiment-classification"></a>
 </h2>
 <p>Let’s download the data and inspect its structure.</p>
-<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw">if</span> <span class="op">(</span><span class="op">!</span><span class="fu"><a href="https://rdrr.io/r/base/files2.html" class="external-link">dir.exists</a></span><span class="op">(</span><span class="st">"datasets/aclImdb"</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span></span>
 <span>  <span class="fu"><a href="https://rdrr.io/r/base/files2.html" class="external-link">dir.create</a></span><span class="op">(</span><span class="st">"datasets"</span><span class="op">)</span></span>
 <span>  <span class="fu"><a href="https://rdrr.io/r/utils/download.file.html" class="external-link">download.file</a></span><span class="op">(</span></span>
@@ -158,35 +159,26 @@ indexing.</p>
 <span>  <span class="fu"><a href="https://rdrr.io/r/utils/untar.html" class="external-link">untar</a></span><span class="op">(</span><span class="st">"datasets/aclImdb_v1.tar.gz"</span>, exdir <span class="op">=</span> <span class="st">"datasets"</span><span class="op">)</span></span>
 <span>  <span class="fu"><a href="https://rdrr.io/r/base/unlink.html" class="external-link">unlink</a></span><span class="op">(</span><span class="st">"datasets/aclImdb/train/unsup"</span>, recursive <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
 <span><span class="op">}</span></span></code></pre></div>
-<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="kw">if</span> <span class="op">(</span><span class="op">!</span><span class="fu"><a href="https://rdrr.io/r/base/files2.html" class="external-link">dir.exists</a></span><span class="op">(</span><span class="st">"datasets"</span><span class="op">)</span><span class="op">)</span> <span class="fu"><a href="https://rdrr.io/r/base/files2.html" class="external-link">dir.create</a></span><span class="op">(</span><span class="st">"datasets"</span><span class="op">)</span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/utils/download.file.html" class="external-link">download.file</a></span><span class="op">(</span></span>
-<span>  <span class="st">"https://ai.stanford.edu/~amaas/data/sentiment/aclImdb_v1.tar.gz"</span>,</span>
-<span>  <span class="st">"datasets/aclImdb_v1.tar.gz"</span></span>
-<span><span class="op">)</span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/utils/untar.html" class="external-link">untar</a></span><span class="op">(</span><span class="st">"datasets/aclImdb_v1.tar.gz"</span>, exdir <span class="op">=</span> <span class="st">"datasets"</span><span class="op">)</span></span></code></pre></div>
 <p>The <code>aclImdb</code> folder contains a <code>train</code> and
 <code>test</code> subfolder:</p>
-<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/list.files.html" class="external-link">list.files</a></span><span class="op">(</span><span class="st">"datasets/aclImdb/test"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">## [1] "labeledBow.feat" "neg"             "pos"             "urls_neg.txt"</span></span>
 <span><span class="co">## [5] "urls_pos.txt"</span></span></code></pre>
-<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/list.files.html" class="external-link">list.files</a></span><span class="op">(</span><span class="st">"datasets/aclImdb/train"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">## [1] "labeledBow.feat" "neg"             "pos"             "unsupBow.feat"</span></span>
 <span><span class="co">## [5] "urls_neg.txt"    "urls_pos.txt"</span></span></code></pre>
 <p>The <code>aclImdb/train/pos</code> and <code>aclImdb/train/neg</code>
 folders contain text files, each of which represents one review (either
 positive or negative):</p>
-<div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/cat.html" class="external-link">cat</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/readLines.html" class="external-link">readLines</a></span><span class="op">(</span><span class="st">"datasets/aclImdb/train/pos/6248_7.txt"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">## Warning in readLines("datasets/aclImdb/train/pos/6248_7.txt"): incomplete final</span></span>
-<span><span class="co">## line found on 'datasets/aclImdb/train/pos/6248_7.txt'</span></span></code></pre>
 <pre><code><span><span class="co">## Being an Austrian myself this has been a straight knock in my face. Fortunately I don't live nowhere near the place where this movie takes place but unfortunately it portrays everything that the rest of Austria hates about Viennese people (or people close to that region). And it is very easy to read that this is exactly the directors intention: to let your head sink into your hands and say "Oh my god, how can THAT be possible!". No, not with me, the (in my opinion) totally exaggerated uncensored swinger club scene is not necessary, I watch porn, sure, but in this context I was rather disgusted than put in the right context.&lt;br /&gt;&lt;br /&gt;This movie tells a story about how misled people who suffer from lack of education or bad company try to survive and live in a world of redundancy and boring horizons. A girl who is treated like a whore by her super-jealous boyfriend (and still keeps coming back), a female teacher who discovers her masochism by putting the life of her super-cruel "lover" on the line, an old couple who has an almost mathematical daily cycle (she is the "official replacement" of his ex wife), a couple that has just divorced and has the ex husband suffer under the acts of his former wife obviously having a relationship with her masseuse and finally a crazy hitchhiker who asks her drivers the most unusual questions and stretches their nerves by just being super-annoying.&lt;br /&gt;&lt;br /&gt;After having seen it you feel almost nothing. You're not even shocked, sad, depressed or feel like doing anything... Maybe that's why I gave it 7 points, it made me react in a way I never reacted before. If that's good or bad is up to you!</span></span></code></pre>
 <p>We are only interested in the <code>pos</code> and <code>neg</code>
 subfolders, so let’s delete the other subfolder that has text files in
 it:</p>
-<div class="sourceCode" id="cb16"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/unlink.html" class="external-link">unlink</a></span><span class="op">(</span><span class="st">"datasets/aclImdb/train/unsup"</span>, recursive <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
 <p>You can use the utility <code>text_dataset_from_directory</code> to
 generate a labeled <code>tf_dataset</code> object from a set of text
@@ -203,46 +195,47 @@ be retrained using all available training data (without creating a
 validation dataset), so its performance is maximized.</p>
 <p>When using the <code>validation_split</code> &amp;
 <code>subset</code> arguments, make sure to either specify a random
-seed, or to pass <code>shuffle=False</code>, so that the validation
+seed, or to pass <code>shuffle=FALSE</code>, so that the validation
 &amp; training splits you get have no overlap.</p>
-<div class="sourceCode" id="cb17"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">batch_size</span> <span class="op">&lt;-</span> <span class="fl">32</span></span>
 <span></span>
 <span><span class="va">raw_train_ds</span> <span class="op">&lt;-</span> <span class="fu"><a href="../../reference/text_dataset_from_directory.html">text_dataset_from_directory</a></span><span class="op">(</span></span>
-<span>    <span class="st">"datasets/aclImdb/train"</span>,</span>
-<span>    batch_size<span class="op">=</span><span class="va">batch_size</span>,</span>
-<span>    validation_split<span class="op">=</span><span class="fl">0.2</span>,</span>
-<span>    subset<span class="op">=</span><span class="st">"training"</span>,</span>
-<span>    seed<span class="op">=</span><span class="fl">1337</span>,</span>
+<span>  <span class="st">"datasets/aclImdb/train"</span>,</span>
+<span>  batch_size <span class="op">=</span> <span class="va">batch_size</span>,</span>
+<span>  validation_split <span class="op">=</span> <span class="fl">0.2</span>,</span>
+<span>  subset <span class="op">=</span> <span class="st">"training"</span>,</span>
+<span>  seed <span class="op">=</span> <span class="fl">1337</span></span>
 <span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">## Found 25000 files belonging to 2 classes.</span></span>
 <span><span class="co">## Using 20000 files for training.</span></span></code></pre>
-<div class="sourceCode" id="cb19"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb16"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">raw_val_ds</span> <span class="op">&lt;-</span> <span class="fu"><a href="../../reference/text_dataset_from_directory.html">text_dataset_from_directory</a></span><span class="op">(</span></span>
-<span>    <span class="st">"datasets/aclImdb/train"</span>,</span>
-<span>    batch_size<span class="op">=</span><span class="va">batch_size</span>,</span>
-<span>    validation_split<span class="op">=</span><span class="fl">0.2</span>,</span>
-<span>    subset<span class="op">=</span><span class="st">"validation"</span>,</span>
-<span>    seed<span class="op">=</span><span class="fl">1337</span>,</span>
+<span>  <span class="st">"datasets/aclImdb/train"</span>,</span>
+<span>  batch_size <span class="op">=</span> <span class="va">batch_size</span>,</span>
+<span>  validation_split <span class="op">=</span> <span class="fl">0.2</span>,</span>
+<span>  subset <span class="op">=</span> <span class="st">"validation"</span>,</span>
+<span>  seed <span class="op">=</span> <span class="fl">1337</span></span>
 <span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">## Found 25000 files belonging to 2 classes.</span></span>
 <span><span class="co">## Using 5000 files for validation.</span></span></code></pre>
-<div class="sourceCode" id="cb21"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb18"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">raw_test_ds</span> <span class="op">&lt;-</span> <span class="fu"><a href="../../reference/text_dataset_from_directory.html">text_dataset_from_directory</a></span><span class="op">(</span></span>
-<span>    <span class="st">"datasets/aclImdb/test"</span>, batch_size<span class="op">=</span><span class="va">batch_size</span></span>
+<span>  <span class="st">"datasets/aclImdb/test"</span>,</span>
+<span>  batch_size <span class="op">=</span> <span class="va">batch_size</span></span>
 <span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">## Found 25000 files belonging to 2 classes.</span></span></code></pre>
-<div class="sourceCode" id="cb23"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb20"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/length.html" class="external-link">length</a></span><span class="op">(</span><span class="va">raw_train_ds</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">## [1] 625</span></span></code></pre>
-<div class="sourceCode" id="cb25"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb22"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/length.html" class="external-link">length</a></span><span class="op">(</span><span class="va">raw_val_ds</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">## [1] 157</span></span></code></pre>
-<div class="sourceCode" id="cb27"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb24"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/length.html" class="external-link">length</a></span><span class="op">(</span><span class="va">raw_test_ds</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">## [1] 782</span></span></code></pre>
 <p>Let’s preview a few samples:</p>
-<div class="sourceCode" id="cb29"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb26"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># It's important to take a look at your raw data to ensure your normalization</span></span>
 <span><span class="co"># and tokenization will work as expected. We can do that by taking a few</span></span>
 <span><span class="co"># examples from the training set and looking at them.</span></span>
@@ -254,7 +247,7 @@ seed, or to pass <code>shuffle=False</code>, so that the validation
 <pre><code><span><span class="co">## List of 2</span></span>
 <span><span class="co">##  $ :&lt;tf.Tensor: shape=(32), dtype=string, numpy=…&gt;</span></span>
 <span><span class="co">##  $ :&lt;tf.Tensor: shape=(32), dtype=int32, numpy=…&gt;</span></span></code></pre>
-<div class="sourceCode" id="cb31"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb28"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="va">text_batch</span>, <span class="va">label_batch</span><span class="op">)</span> <span class="op"><a href="../../reference/multi-assign.html">%&lt;-%</a></span> <span class="va">batch</span></span>
 <span><span class="kw">for</span> <span class="op">(</span><span class="va">i</span> <span class="kw">in</span> <span class="fl">1</span><span class="op">:</span><span class="fl">3</span><span class="op">)</span> <span class="op">{</span></span>
 <span>  <span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">text_batch</span><span class="op">[</span><span class="va">i</span><span class="op">]</span><span class="op">)</span></span>
@@ -271,7 +264,7 @@ seed, or to pass <code>shuffle=False</code>, so that the validation
 <h2 id="prepare-the-data">Prepare the data<a class="anchor" aria-label="anchor" href="#prepare-the-data"></a>
 </h2>
 <p>In particular, we remove <code>&lt;br /&gt;</code> tags.</p>
-<div class="sourceCode" id="cb33"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb30"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Having looked at our data above, we see that the raw text contains HTML break</span></span>
 <span><span class="co"># tags of the form '&lt;br /&gt;'. These tags will not be removed by the default</span></span>
 <span><span class="co"># standardizer (which doesn't strip HTML). Because of this, we will need to</span></span>
@@ -319,7 +312,7 @@ seed, or to pass <code>shuffle=False</code>, so that the validation
 <p>There are 2 ways we can use our text vectorization layer:</p>
 <p><strong>Option 1: Make it part of the model</strong>, so as to obtain
 a model that processes raw strings, like this:</p>
-<div class="sourceCode" id="cb34"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb31"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">x</span> <span class="op">&lt;-</span> <span class="fu"><a href="../../reference/layer_input.html">layer_input</a></span><span class="op">(</span>shape <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1L</span><span class="op">)</span>, dtype <span class="op">=</span> <span class="st">"string"</span>, name <span class="op">=</span> <span class="st">'text'</span><span class="op">)</span> <span class="op"><a href="../../reference/pipe.html">%&gt;%</a></span></span>
 <span>  <span class="fu">vectorize_layer</span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="../../reference/pipe.html">%&gt;%</a></span></span>
 <span>  <span class="fu"><a href="../../reference/layer_embedding.html">layer_embedding</a></span><span class="op">(</span><span class="va">max_features</span> <span class="op">+</span> <span class="fl">1</span>, <span class="va">embedding_dim</span><span class="op">)</span></span></code></pre></div>
@@ -335,7 +328,7 @@ is what we will do below.</p>
 accepts raw strings as input, like in the code snippet for option 1
 above. This can be done after training. We do this in the last
 section.</p>
-<div class="sourceCode" id="cb35"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb32"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">vectorize_text</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">text</span>, <span class="va">label</span><span class="op">)</span> <span class="op">{</span></span>
 <span>  <span class="va">text</span> <span class="op">&lt;-</span> <span class="va">text</span> <span class="op"><a href="../../reference/pipe.html">%&gt;%</a></span></span>
 <span>    <span class="va">tf</span><span class="op">$</span><span class="fu">expand_dims</span><span class="op">(</span><span class="op">-</span><span class="fl">1L</span><span class="op">)</span> <span class="op"><a href="../../reference/pipe.html">%&gt;%</a></span></span>
@@ -364,7 +357,7 @@ section.</p>
 </h2>
 <p>We choose a simple 1D convnet starting with an <code>Embedding</code>
 layer.</p>
-<div class="sourceCode" id="cb36"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb33"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># A integer input for vocab indices.</span></span>
 <span><span class="va">inputs</span> <span class="op">&lt;-</span> <span class="fu"><a href="../../reference/layer_input.html">layer_input</a></span><span class="op">(</span>shape <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="cn">NULL</span><span class="op">)</span>, dtype <span class="op">=</span> <span class="st">"int64"</span><span class="op">)</span></span>
 <span></span>
@@ -412,7 +405,7 @@ layer.</p>
 <span><span class="co">## <span style="font-weight: bold;"> Total params: </span><span style="color: #00AF00;">2,806,273</span> (10.71 MB)</span></span>
 <span><span class="co">## <span style="font-weight: bold;"> Trainable params: </span><span style="color: #00AF00;">2,806,273</span> (10.71 MB)</span></span>
 <span><span class="co">## <span style="font-weight: bold;"> Non-trainable params: </span><span style="color: #00AF00;">0</span> (0.00 B)</span></span></code></pre>
-<div class="sourceCode" id="cb38"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb35"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Compile the model with binary crossentropy loss and an adam optimizer.</span></span>
 <span><span class="va">model</span> <span class="op"><a href="../../reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://generics.r-lib.org/reference/compile.html" class="external-link">compile</a></span><span class="op">(</span></span>
 <span>  loss <span class="op">=</span> <span class="st">"binary_crossentropy"</span>,</span>
@@ -423,33 +416,36 @@ layer.</p>
 <div class="section level2">
 <h2 id="train-the-model">Train the model<a class="anchor" aria-label="anchor" href="#train-the-model"></a>
 </h2>
-<div class="sourceCode" id="cb39"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb36"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">epochs</span> <span class="op">&lt;-</span> <span class="fl">3</span></span>
 <span></span>
 <span><span class="co"># Fit the model using the train and test datasets.</span></span>
 <span><span class="va">model</span> <span class="op"><a href="../../reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://generics.r-lib.org/reference/fit.html" class="external-link">fit</a></span><span class="op">(</span><span class="va">train_ds</span>, validation_data <span class="op">=</span> <span class="va">val_ds</span>, epochs <span class="op">=</span> <span class="va">epochs</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">## Epoch 1/3</span></span>
-<span><span class="co">## 625/625 - 15s - 24ms/step - accuracy: 0.7258 - loss: 0.4922 - val_accuracy: 0.8668 - val_loss: 0.3134</span></span>
+<span><span class="co">## 625/625 - 6s - 10ms/step - accuracy: 0.7311 - loss: 0.4921 - val_accuracy: 0.8658 - val_loss: 0.3169</span></span>
 <span><span class="co">## Epoch 2/3</span></span>
-<span><span class="co">## 625/625 - 14s - 22ms/step - accuracy: 0.9089 - loss: 0.2278 - val_accuracy: 0.8814 - val_loss: 0.3005</span></span>
+<span><span class="co">## 625/625 - 2s - 3ms/step - accuracy: 0.9120 - loss: 0.2221 - val_accuracy: 0.8750 - val_loss: 0.3089</span></span>
 <span><span class="co">## Epoch 3/3</span></span>
-<span><span class="co">## 625/625 - 14s - 23ms/step - accuracy: 0.9550 - loss: 0.1226 - val_accuracy: 0.8774 - val_loss: 0.3681</span></span></code></pre>
+<span><span class="co">## 625/625 - 2s - 3ms/step - accuracy: 0.9579 - loss: 0.1153 - val_accuracy: 0.8730 - val_loss: 0.3478</span></span></code></pre>
 </div>
 <div class="section level2">
 <h2 id="evaluate-the-model-on-the-test-set">Evaluate the model on the test set<a class="anchor" aria-label="anchor" href="#evaluate-the-model-on-the-test-set"></a>
 </h2>
-<div class="sourceCode" id="cb41"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb38"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">model</span> <span class="op"><a href="../../reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://rdrr.io/pkg/tensorflow/man/evaluate.html" class="external-link">evaluate</a></span><span class="op">(</span><span class="va">test_ds</span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">## 782/782 - 6s - 7ms/step - accuracy: 0.8633 - loss: 0.3975</span></span></code></pre>
-<pre><code><span><span class="co">##            loss compile_metrics</span></span>
-<span><span class="co">##       0.3974522       0.8632513</span></span></code></pre>
+<pre><code><span><span class="co">## 782/782 - 1s - 2ms/step - accuracy: 0.8637 - loss: 0.3675</span></span></code></pre>
+<pre><code><span><span class="co">## $accuracy</span></span>
+<span><span class="co">## [1] 0.8636909</span></span>
+<span><span class="co">##</span></span>
+<span><span class="co">## $loss</span></span>
+<span><span class="co">## [1] 0.3674554</span></span></code></pre>
 </div>
 <div class="section level2">
 <h2 id="make-an-end-to-end-model">Make an end-to-end model<a class="anchor" aria-label="anchor" href="#make-an-end-to-end-model"></a>
 </h2>
 <p>If you want to obtain a model capable of processing raw strings, you
 can simply create a new model (using the weights we just trained):</p>
-<div class="sourceCode" id="cb44"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb41"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># A string input</span></span>
 <span><span class="va">inputs</span> <span class="op">&lt;-</span> <span class="fu"><a href="../../reference/layer_input.html">layer_input</a></span><span class="op">(</span>shape <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1</span><span class="op">)</span>, dtype <span class="op">=</span> <span class="st">"string"</span><span class="op">)</span></span>
 <span><span class="co"># Turn strings into vocab indices</span></span>
@@ -467,9 +463,12 @@ can simply create a new model (using the weights we just trained):</p>
 <span></span>
 <span><span class="co"># Test it with `raw_test_ds`, which yields raw strings</span></span>
 <span><span class="va">end_to_end_model</span> <span class="op"><a href="../../reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://rdrr.io/pkg/tensorflow/man/evaluate.html" class="external-link">evaluate</a></span><span class="op">(</span><span class="va">raw_test_ds</span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">## 782/782 - 6s - 8ms/step - accuracy: 0.8633 - loss: 0.3978</span></span></code></pre>
-<pre><code><span><span class="co">##            loss compile_metrics</span></span>
-<span><span class="co">##       0.3977900       0.8632513</span></span></code></pre>
+<pre><code><span><span class="co">## 782/782 - 4s - 5ms/step - accuracy: 0.8637 - loss: 0.3675</span></span></code></pre>
+<pre><code><span><span class="co">## $accuracy</span></span>
+<span><span class="co">## [1] 0.8636909</span></span>
+<span><span class="co">##</span></span>
+<span><span class="co">## $loss</span></span>
+<span><span class="co">## [1] 0.367548</span></span></code></pre>
 </div>
   </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>
     </nav></aside>

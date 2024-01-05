@@ -110,7 +110,7 @@
       <img src="" class="logo" alt=""><h1>Save, serialize, and export models</h1>
             
             <h4 data-toc-skip class="date">Last Modified: 2024-01-02;
-Last Rendered: 2024-01-03</h4>
+Last Rendered: 2024-01-04</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/rstudio/keras/blob/HEAD/vignettes/serialization_and_saving.Rmd" class="external-link"><code>vignettes/serialization_and_saving.Rmd</code></a></small>
       <div class="d-none name"><code>serialization_and_saving.Rmd</code></div>
@@ -457,16 +457,16 @@ or layer.</p>
 <span><span class="co">##  $ activation        : chr "relu"</span></span>
 <span><span class="co">##  $ use_bias          : logi TRUE</span></span>
 <span><span class="co">##  $ kernel_initializer:List of 4</span></span>
-<span><span class="co">##   ..$ module         : chr "keras.src.initializers.random_initializers"</span></span>
+<span><span class="co">##   ..$ module         : chr "keras.initializers"</span></span>
 <span><span class="co">##   ..$ class_name     : chr "GlorotUniform"</span></span>
 <span><span class="co">##   ..$ config         :List of 1</span></span>
 <span><span class="co">##   .. ..$ seed: NULL</span></span>
-<span><span class="co">##   ..$ registered_name: chr "GlorotUniform"</span></span>
+<span><span class="co">##   ..$ registered_name: NULL</span></span>
 <span><span class="co">##  $ bias_initializer  :List of 4</span></span>
-<span><span class="co">##   ..$ module         : chr "keras.src.initializers.constant_initializers"</span></span>
+<span><span class="co">##   ..$ module         : chr "keras.initializers"</span></span>
 <span><span class="co">##   ..$ class_name     : chr "Zeros"</span></span>
 <span><span class="co">##   ..$ config         : Named list()</span></span>
-<span><span class="co">##   ..$ registered_name: chr "Zeros"</span></span>
+<span><span class="co">##   ..$ registered_name: NULL</span></span>
 <span><span class="co">##  $ kernel_regularizer: NULL</span></span>
 <span><span class="co">##  $ bias_regularizer  : NULL</span></span>
 <span><span class="co">##  $ kernel_constraint : NULL</span></span>
@@ -523,11 +523,11 @@ in keras.</p>
 <span><span class="va">config</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/serialize_keras_object.html">serialize_keras_object</a></span><span class="op">(</span><span class="va">my_reg</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/utils/str.html" class="external-link">str</a></span><span class="op">(</span><span class="va">config</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">## List of 4</span></span>
-<span><span class="co">##  $ module         : chr "keras.src.regularizers.regularizers"</span></span>
+<span><span class="co">##  $ module         : chr "keras.regularizers"</span></span>
 <span><span class="co">##  $ class_name     : chr "L1"</span></span>
 <span><span class="co">##  $ config         :List of 1</span></span>
 <span><span class="co">##   ..$ l1: num 0.005</span></span>
-<span><span class="co">##  $ registered_name: chr "L1"</span></span></code></pre>
+<span><span class="co">##  $ registered_name: NULL</span></span></code></pre>
 <p>Note the serialization format containing all the necessary
 information for proper reconstruction:</p>
 <ul>
@@ -922,12 +922,12 @@ naming.</p>
 <span><span class="co">##   ..$ dtype             : chr "float32"</span></span>
 <span><span class="co">##   ..$ units             : num 16</span></span>
 <span><span class="co">##   ..$ kernel_regularizer:List of 4</span></span>
-<span><span class="co">##   .. ..$ module         : chr "keras.src.regularizers.regularizers"</span></span>
+<span><span class="co">##   .. ..$ module         : chr "keras.regularizers"</span></span>
 <span><span class="co">##   .. ..$ class_name     : chr "L1L2"</span></span>
 <span><span class="co">##   .. ..$ config         :List of 2</span></span>
 <span><span class="co">##   .. .. ..$ l1: num 1e-05</span></span>
 <span><span class="co">##   .. .. ..$ l2: num 1e-04</span></span>
-<span><span class="co">##   .. ..$ registered_name: chr "L1L2"</span></span>
+<span><span class="co">##   .. ..$ registered_name: NULL</span></span>
 <span><span class="co">##   ..$ kernel_initializer: chr "ones"</span></span>
 <span><span class="co">##  $ registered_name: chr "MyLayers&gt;KernelMult"</span></span></code></pre>
 <p>As shown, the <code>registered_name</code> key contains the lookup

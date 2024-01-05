@@ -269,7 +269,7 @@ Sys.time() - time
 ```
 
 ```
-## Time difference of 21.85002 secs
+## Time difference of 21.9564 secs
 ```
 
 ## Speeding-up your training step with `tf.function`
@@ -372,7 +372,7 @@ Sys.time() - time
 ```
 
 ```
-## Time difference of 2.404738 secs
+## Time difference of 2.415772 secs
 ```
 
 Much faster, isn't it?

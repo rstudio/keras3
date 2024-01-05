@@ -466,7 +466,7 @@ new_reg
 ```
 
 ```
-## <keras.src.regularizers.regularizers.L1 object at 0x7fe50ed7d410>
+## <keras.src.regularizers.regularizers.L1 object>
 ```
 
 ### Model weights saving

@@ -109,8 +109,8 @@
   <main id="main" class="col-md-9"><div class="page-header">
       <img src="" class="logo" alt=""><h1>The Functional API</h1>
             
-            <h4 data-toc-skip class="date">Last Modified: 2024-01-02;
-Last Rendered: 2024-01-03</h4>
+            <h4 data-toc-skip class="date">Last Modified: 2024-01-04;
+Last Rendered: 2024-01-04</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/rstudio/keras/blob/HEAD/vignettes/functional_api.Rmd" class="external-link"><code>vignettes/functional_api.Rmd</code></a></small>
       <div class="d-none name"><code>functional_api.Rmd</code></div>
@@ -207,14 +207,14 @@ inputs and outputs in the graph of layers:</p>
 <div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">model</span><span class="op">)</span></span></code></pre></div>
 <div class="float">
-<img src="../../reference/figures/functional_api/unnamed-chunk-10-1.png" alt="plot of chunk unnamed-chunk-10"><div class="figcaption">plot of chunk unnamed-chunk-10</div>
+<img src="functional_api/unnamed-chunk-10-1.png" alt="plot of chunk unnamed-chunk-10"><div class="figcaption">plot of chunk unnamed-chunk-10</div>
 </div>
 <p>And, optionally, display the input and output shapes of each layer in
 the plotted graph:</p>
 <div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">model</span>, show_shapes <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
 <div class="float">
-<img src="../../reference/figures/functional_api/unnamed-chunk-11-1.png" alt="plot of chunk unnamed-chunk-11"><div class="figcaption">plot of chunk unnamed-chunk-11</div>
+<img src="functional_api/unnamed-chunk-11-1.png" alt="plot of chunk unnamed-chunk-11"><div class="figcaption">plot of chunk unnamed-chunk-11</div>
 </div>
 <p>This figure and the code are almost identical. In the code version,
 the connection arrows are replaced by the call operation.</p>
@@ -252,12 +252,12 @@ then evaluate the model on the test data:</p>
 <span>    <span class="va">x_train</span>, <span class="va">y_train</span>, batch_size <span class="op">=</span> <span class="fl">64</span>, epochs <span class="op">=</span> <span class="fl">2</span>, validation_split <span class="op">=</span> <span class="fl">0.2</span></span>
 <span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">## Epoch 1/2</span></span>
-<span><span class="co">## 750/750 - 1s - 1ms/step - accuracy: 0.9015 - loss: 0.3513 - val_accuracy: 0.9442 - val_loss: 0.1921</span></span>
+<span><span class="co">## 750/750 - 2s - 3ms/step - accuracy: 0.9015 - loss: 0.3513 - val_accuracy: 0.9442 - val_loss: 0.1921</span></span>
 <span><span class="co">## Epoch 2/2</span></span>
-<span><span class="co">## 750/750 - 1s - 865us/step - accuracy: 0.9508 - loss: 0.1643 - val_accuracy: 0.9581 - val_loss: 0.1423</span></span></code></pre>
+<span><span class="co">## 750/750 - 1s - 1ms/step - accuracy: 0.9508 - loss: 0.1643 - val_accuracy: 0.9581 - val_loss: 0.1423</span></span></code></pre>
 <div class="sourceCode" id="cb18"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">test_scores</span> <span class="op">&lt;-</span> <span class="va">model</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://rdrr.io/pkg/tensorflow/man/evaluate.html" class="external-link">evaluate</a></span><span class="op">(</span><span class="va">x_test</span>, <span class="va">y_test</span>, verbose<span class="op">=</span><span class="fl">2</span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">## 313/313 - 0s - 336us/step - accuracy: 0.9578 - loss: 0.1338</span></span></code></pre>
+<pre><code><span><span class="co">## 313/313 - 0s - 1ms/step - accuracy: 0.9578 - loss: 0.1338</span></span></code></pre>
 <div class="sourceCode" id="cb20"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/cat.html" class="external-link">cat</a></span><span class="op">(</span><span class="st">"Test loss:"</span>, <span class="va">test_scores</span><span class="op">$</span><span class="va">loss</span>, <span class="st">"\n"</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/cat.html" class="external-link">cat</a></span><span class="op">(</span><span class="st">"Test accuracy:"</span>, <span class="va">test_scores</span><span class="op">$</span><span class="va">accuracy</span>, <span class="st">"\n"</span><span class="op">)</span></span></code></pre></div>
@@ -579,7 +579,7 @@ the set of departments).</li>
 <div class="sourceCode" id="cb35"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">model</span>, show_shapes <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
 <div class="float">
-<img src="../../reference/figures/functional_api/unnamed-chunk-20-1.png" alt="plot of chunk unnamed-chunk-20"><div class="figcaption">plot of chunk unnamed-chunk-20</div>
+<img src="functional_api/unnamed-chunk-20-1.png" alt="plot of chunk unnamed-chunk-20"><div class="figcaption">plot of chunk unnamed-chunk-20</div>
 </div>
 <p>When compiling this model, you can assign different losses to each
 output. You can even assign different weights to each loss – to modulate
@@ -623,9 +623,9 @@ targets:</p>
 <span>    batch_size<span class="op">=</span><span class="fl">32</span>,</span>
 <span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">## Epoch 1/2</span></span>
-<span><span class="co">## 40/40 - 2s - 55ms/step - loss: 0.3948</span></span>
+<span><span class="co">## 40/40 - 3s - 68ms/step - loss: 0.3948</span></span>
 <span><span class="co">## Epoch 2/2</span></span>
-<span><span class="co">## 40/40 - 1s - 17ms/step - loss: 0.1971</span></span></code></pre>
+<span><span class="co">## 40/40 - 0s - 6ms/step - loss: 0.1971</span></span></code></pre>
 <p>When calling fit with a <code>Dataset</code> object, it should yield
 either a list of lists like
 <code>list(list(title_data, body_data, tags_data), list(priority_targets, dept_targets))</code>
@@ -716,7 +716,7 @@ ResNet model for CIFAR10 to demonstrate this:</p>
 <div class="sourceCode" id="cb42"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">model</span>, show_shapes <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
 <div class="float">
-<img src="../../reference/figures/functional_api/unnamed-chunk-25-1.png" alt="plot of chunk unnamed-chunk-25"><div class="figcaption">plot of chunk unnamed-chunk-25</div>
+<img src="functional_api/unnamed-chunk-25-1.png" alt="plot of chunk unnamed-chunk-25"><div class="figcaption">plot of chunk unnamed-chunk-25</div>
 </div>
 <p>Now train the model:</p>
 <div class="sourceCode" id="cb43"><pre class="downlit sourceCode r">
@@ -740,7 +740,7 @@ ResNet model for CIFAR10 to demonstrate this:</p>
 <span>    epochs<span class="op">=</span><span class="fl">1</span>,</span>
 <span>    validation_split<span class="op">=</span><span class="fl">0.2</span></span>
 <span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">## 13/13 - 1s - 109ms/step - acc: 0.1200 - loss: 2.3110 - val_acc: 0.1150 - val_loss: 2.3192</span></span></code></pre>
+<pre><code><span><span class="co">## 13/13 - 7s - 524ms/step - acc: 0.1325 - loss: 2.3034 - val_acc: 0.1150 - val_loss: 2.3080</span></span></code></pre>
 </div>
 </div>
 <div class="section level2">

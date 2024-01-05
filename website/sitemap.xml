@@ -7,15 +7,6 @@
     <loc>https://keras.posit.co/LICENSE-text.html</loc>
   </url>
   <url>
-    <loc>https://keras.posit.co/articles/applications.html</loc>
-  </url>
-  <url>
-    <loc>https://keras.posit.co/articles/custom_layers.html</loc>
-  </url>
-  <url>
-    <loc>https://keras.posit.co/articles/custom_models.html</loc>
-  </url>
-  <url>
     <loc>https://keras.posit.co/articles/custom_train_step_in_jax.html</loc>
   </url>
   <url>
@@ -28,12 +19,6 @@
     <loc>https://keras.posit.co/articles/customizing_saving_and_serialization.html</loc>
   </url>
   <url>
-    <loc>https://keras.posit.co/articles/customizing_what_happens_in_fit.html</loc>
-  </url>
-  <url>
-    <loc>https://keras.posit.co/articles/distributed_training.html</loc>
-  </url>
-  <url>
     <loc>https://keras.posit.co/articles/distributed_training_with_jax.html</loc>
   </url>
   <url>
@@ -43,544 +28,22 @@
     <loc>https://keras.posit.co/articles/distributed_training_with_torch.html</loc>
   </url>
   <url>
-    <loc>https://keras.posit.co/articles/examples/actor_critic_cartpole.html</loc>
-  </url>
-  <url>
-    <loc>https://keras.posit.co/articles/examples/addition_rnn.html</loc>
-  </url>
-  <url>
-    <loc>https://keras.posit.co/articles/examples/antirectifier.html</loc>
-  </url>
-  <url>
-    <loc>https://keras.posit.co/articles/examples/attention_mil_classification.html</loc>
-  </url>
-  <url>
     <loc>https://keras.posit.co/articles/examples/autoencoder.html</loc>
-  </url>
-  <url>
-    <loc>https://keras.posit.co/articles/examples/babi_memnn.html</loc>
-  </url>
-  <url>
-    <loc>https://keras.posit.co/articles/examples/babi_rnn.html</loc>
-  </url>
-  <url>
-    <loc>https://keras.posit.co/articles/examples/bidirectional_lstm_imdb.html</loc>
-  </url>
-  <url>
-    <loc>https://keras.posit.co/articles/examples/bit.html</loc>
-  </url>
-  <url>
-    <loc>https://keras.posit.co/articles/examples/captcha_ocr.html</loc>
-  </url>
-  <url>
-    <loc>https://keras.posit.co/articles/examples/cct.html</loc>
-  </url>
-  <url>
-    <loc>https://keras.posit.co/articles/examples/cifar10_cnn.html</loc>
-  </url>
-  <url>
-    <loc>https://keras.posit.co/articles/examples/cifar10_densenet.html</loc>
-  </url>
-  <url>
-    <loc>https://keras.posit.co/articles/examples/cifar10_resnet.html</loc>
-  </url>
-  <url>
-    <loc>https://keras.posit.co/articles/examples/collaborative_filtering_movielens.html</loc>
-  </url>
-  <url>
-    <loc>https://keras.posit.co/articles/examples/conv_filter_visualization.html</loc>
-  </url>
-  <url>
-    <loc>https://keras.posit.co/articles/examples/conv_lstm.html</loc>
-  </url>
-  <url>
-    <loc>https://keras.posit.co/articles/examples/convmixer.html</loc>
-  </url>
-  <url>
-    <loc>https://keras.posit.co/articles/examples/cutmix.html</loc>
-  </url>
-  <url>
-    <loc>https://keras.posit.co/articles/examples/cyclegan.html</loc>
-  </url>
-  <url>
-    <loc>https://keras.posit.co/articles/examples/dcgan_overriding_train_step.html</loc>
-  </url>
-  <url>
-    <loc>https://keras.posit.co/articles/examples/ddim.html</loc>
-  </url>
-  <url>
-    <loc>https://keras.posit.co/articles/examples/ddpm.html</loc>
-  </url>
-  <url>
-    <loc>https://keras.posit.co/articles/examples/deep_dream.html</loc>
-  </url>
-  <url>
-    <loc>https://keras.posit.co/articles/examples/deep_neural_decision_forests.html</loc>
-  </url>
-  <url>
-    <loc>https://keras.posit.co/articles/examples/deeplabv3_plus.html</loc>
-  </url>
-  <url>
-    <loc>https://keras.posit.co/articles/examples/deit.html</loc>
-  </url>
-  <url>
-    <loc>https://keras.posit.co/articles/examples/demo_custom_jax_workflow.html</loc>
-  </url>
-  <url>
-    <loc>https://keras.posit.co/articles/examples/demo_custom_layer_backend_agnostic.html</loc>
-  </url>
-  <url>
-    <loc>https://keras.posit.co/articles/examples/demo_custom_tf_workflow.html</loc>
-  </url>
-  <url>
-    <loc>https://keras.posit.co/articles/examples/demo_custom_torch_workflow.html</loc>
-  </url>
-  <url>
-    <loc>https://keras.posit.co/articles/examples/demo_functional.html</loc>
-  </url>
-  <url>
-    <loc>https://keras.posit.co/articles/examples/demo_jax_distributed.html</loc>
-  </url>
-  <url>
-    <loc>https://keras.posit.co/articles/examples/demo_mnist_convnet.html</loc>
-  </url>
-  <url>
-    <loc>https://keras.posit.co/articles/examples/demo_subclass.html</loc>
-  </url>
-  <url>
-    <loc>https://keras.posit.co/articles/examples/demo_torch_multi_gpu.html</loc>
-  </url>
-  <url>
-    <loc>https://keras.posit.co/articles/examples/eager_cvae.html</loc>
-  </url>
-  <url>
-    <loc>https://keras.posit.co/articles/examples/eager_dcgan.html</loc>
-  </url>
-  <url>
-    <loc>https://keras.posit.co/articles/examples/eager_image_captioning.html</loc>
-  </url>
-  <url>
-    <loc>https://keras.posit.co/articles/examples/eager_pix2pix.html</loc>
-  </url>
-  <url>
-    <loc>https://keras.posit.co/articles/examples/eager_styletransfer.html</loc>
-  </url>
-  <url>
-    <loc>https://keras.posit.co/articles/examples/eanet.html</loc>
-  </url>
-  <url>
-    <loc>https://keras.posit.co/articles/examples/eeg_signal_classification.html</loc>
-  </url>
-  <url>
-    <loc>https://keras.posit.co/articles/examples/end_to_end_mlm_with_bert.html</loc>
-  </url>
-  <url>
-    <loc>https://keras.posit.co/articles/examples/endpoint_layer_pattern.html</loc>
-  </url>
-  <url>
-    <loc>https://keras.posit.co/articles/examples/fine_tuning.html</loc>
-  </url>
-  <url>
-    <loc>https://keras.posit.co/articles/examples/fixres.html</loc>
-  </url>
-  <url>
-    <loc>https://keras.posit.co/articles/examples/gpt2_text_generation_with_kerasnlp.html</loc>
-  </url>
-  <url>
-    <loc>https://keras.posit.co/articles/examples/grad_cam.html</loc>
-  </url>
-  <url>
-    <loc>https://keras.posit.co/articles/examples/gradient_centralization.html</loc>
-  </url>
-  <url>
-    <loc>https://keras.posit.co/articles/examples/image_captioning.html</loc>
-  </url>
-  <url>
-    <loc>https://keras.posit.co/articles/examples/image_classification_from_scratch.html</loc>
-  </url>
-  <url>
-    <loc>https://keras.posit.co/articles/examples/image_classification_with_vision_transformer.html</loc>
-  </url>
-  <url>
-    <loc>https://keras.posit.co/articles/examples/image_classifier.html</loc>
-  </url>
-  <url>
-    <loc>https://keras.posit.co/articles/examples/image_ocr.html</loc>
-  </url>
-  <url>
-    <loc>https://keras.posit.co/articles/examples/imbalanced_classification.html</loc>
-  </url>
-  <url>
-    <loc>https://keras.posit.co/articles/examples/imdb_bidirectional_lstm.html</loc>
-  </url>
-  <url>
-    <loc>https://keras.posit.co/articles/examples/imdb_cnn.html</loc>
-  </url>
-  <url>
-    <loc>https://keras.posit.co/articles/examples/imdb_cnn_lstm.html</loc>
-  </url>
-  <url>
-    <loc>https://keras.posit.co/articles/examples/imdb_fasttext.html</loc>
-  </url>
-  <url>
-    <loc>https://keras.posit.co/articles/examples/imdb_lstm.html</loc>
   </url>
   <url>
     <loc>https://keras.posit.co/articles/examples/index.html</loc>
   </url>
   <url>
-    <loc>https://keras.posit.co/articles/examples/integrated_gradients.html</loc>
-  </url>
-  <url>
-    <loc>https://keras.posit.co/articles/examples/involution.html</loc>
-  </url>
-  <url>
-    <loc>https://keras.posit.co/articles/examples/keypoint_detection.html</loc>
-  </url>
-  <url>
-    <loc>https://keras.posit.co/articles/examples/knowledge_distillation.html</loc>
-  </url>
-  <url>
-    <loc>https://keras.posit.co/articles/examples/latent_walk.html</loc>
-  </url>
-  <url>
-    <loc>https://keras.posit.co/articles/examples/learnable_resizer.html</loc>
-  </url>
-  <url>
-    <loc>https://keras.posit.co/articles/examples/lstm_benchmark.html</loc>
-  </url>
-  <url>
-    <loc>https://keras.posit.co/articles/examples/lstm_character_level_text_generation.html</loc>
-  </url>
-  <url>
-    <loc>https://keras.posit.co/articles/examples/lstm_seq2seq.html</loc>
-  </url>
-  <url>
-    <loc>https://keras.posit.co/articles/examples/lstm_stateful.html</loc>
-  </url>
-  <url>
-    <loc>https://keras.posit.co/articles/examples/lstm_text_generation.html</loc>
-  </url>
-  <url>
-    <loc>https://keras.posit.co/articles/examples/metric_learning.html</loc>
-  </url>
-  <url>
-    <loc>https://keras.posit.co/articles/examples/mirnet.html</loc>
-  </url>
-  <url>
-    <loc>https://keras.posit.co/articles/examples/mixup.html</loc>
-  </url>
-  <url>
-    <loc>https://keras.posit.co/articles/examples/mlp_image_classification.html</loc>
-  </url>
-  <url>
-    <loc>https://keras.posit.co/articles/examples/mmd_cvae.html</loc>
-  </url>
-  <url>
-    <loc>https://keras.posit.co/articles/examples/mnist_acgan.html</loc>
-  </url>
-  <url>
-    <loc>https://keras.posit.co/articles/examples/mnist_antirectifier.html</loc>
-  </url>
-  <url>
-    <loc>https://keras.posit.co/articles/examples/mnist_cnn.html</loc>
-  </url>
-  <url>
-    <loc>https://keras.posit.co/articles/examples/mnist_cnn_embeddings.html</loc>
-  </url>
-  <url>
     <loc>https://keras.posit.co/articles/examples/mnist_convnet.html</loc>
-  </url>
-  <url>
-    <loc>https://keras.posit.co/articles/examples/mnist_dataset_api.html</loc>
-  </url>
-  <url>
-    <loc>https://keras.posit.co/articles/examples/mnist_hierarchical_rnn.html</loc>
-  </url>
-  <url>
-    <loc>https://keras.posit.co/articles/examples/mnist_irnn.html</loc>
-  </url>
-  <url>
-    <loc>https://keras.posit.co/articles/examples/mnist_mlp.html</loc>
-  </url>
-  <url>
-    <loc>https://keras.posit.co/articles/examples/mnist_net2net.html</loc>
-  </url>
-  <url>
-    <loc>https://keras.posit.co/articles/examples/mnist_siamese_graph.html</loc>
-  </url>
-  <url>
-    <loc>https://keras.posit.co/articles/examples/mnist_swwae.html</loc>
-  </url>
-  <url>
-    <loc>https://keras.posit.co/articles/examples/mnist_tfrecord.html</loc>
-  </url>
-  <url>
-    <loc>https://keras.posit.co/articles/examples/mnist_transfer_cnn.html</loc>
-  </url>
-  <url>
-    <loc>https://keras.posit.co/articles/examples/multiple_choice_task_with_transfer_learning.html</loc>
-  </url>
-  <url>
-    <loc>https://keras.posit.co/articles/examples/ner_transformers.html</loc>
-  </url>
-  <url>
-    <loc>https://keras.posit.co/articles/examples/neural_machine_translation_with_keras_nlp.html</loc>
-  </url>
-  <url>
-    <loc>https://keras.posit.co/articles/examples/neural_machine_translation_with_transformer.html</loc>
-  </url>
-  <url>
-    <loc>https://keras.posit.co/articles/examples/neural_style_transfer.html</loc>
-  </url>
-  <url>
-    <loc>https://keras.posit.co/articles/examples/nmt_attention.html</loc>
-  </url>
-  <url>
-    <loc>https://keras.posit.co/articles/examples/nueral_doodle.html</loc>
-  </url>
-  <url>
-    <loc>https://keras.posit.co/articles/examples/object_detection_using_vision_transformer.html</loc>
   </url>
   <url>
     <loc>https://keras.posit.co/articles/examples/oxford_pets_image_segmentation.html</loc>
   </url>
   <url>
-    <loc>https://keras.posit.co/articles/examples/perceiver_image_classification.html</loc>
-  </url>
-  <url>
-    <loc>https://keras.posit.co/articles/examples/pixelcnn.html</loc>
-  </url>
-  <url>
-    <loc>https://keras.posit.co/articles/examples/pretrained_word_embeddings.html</loc>
-  </url>
-  <url>
-    <loc>https://keras.posit.co/articles/examples/pretraining_BERT.html</loc>
-  </url>
-  <url>
-    <loc>https://keras.posit.co/articles/examples/quora_siamese_lstm.html</loc>
-  </url>
-  <url>
-    <loc>https://keras.posit.co/articles/examples/reptile.html</loc>
-  </url>
-  <url>
-    <loc>https://keras.posit.co/articles/examples/reuters_mlp.html</loc>
-  </url>
-  <url>
-    <loc>https://keras.posit.co/articles/examples/reuters_mlp_relu_vs_selu.html</loc>
-  </url>
-  <url>
-    <loc>https://keras.posit.co/articles/examples/semisupervised_simclr.html</loc>
-  </url>
-  <url>
-    <loc>https://keras.posit.co/articles/examples/shiftvit.html</loc>
-  </url>
-  <url>
-    <loc>https://keras.posit.co/articles/examples/siamese_contrastive.html</loc>
-  </url>
-  <url>
-    <loc>https://keras.posit.co/articles/examples/siamese_network.html</loc>
-  </url>
-  <url>
-    <loc>https://keras.posit.co/articles/examples/simsiam.html</loc>
-  </url>
-  <url>
-    <loc>https://keras.posit.co/articles/examples/speaker_recognition_using_cnn.html</loc>
-  </url>
-  <url>
-    <loc>https://keras.posit.co/articles/examples/stateful_lstm.html</loc>
-  </url>
-  <url>
-    <loc>https://keras.posit.co/articles/examples/structured_data_classification_from_scratch.html</loc>
-  </url>
-  <url>
-    <loc>https://keras.posit.co/articles/examples/structured_data_classification_with_feature_space.html</loc>
-  </url>
-  <url>
-    <loc>https://keras.posit.co/articles/examples/subclassing_conv_layers.html</loc>
-  </url>
-  <url>
-    <loc>https://keras.posit.co/articles/examples/super_resolution_sub_pixel.html</loc>
-  </url>
-  <url>
-    <loc>https://keras.posit.co/articles/examples/supervised_contrastive_learning.html</loc>
-  </url>
-  <url>
-    <loc>https://keras.posit.co/articles/examples/swim_transformers.html</loc>
-  </url>
-  <url>
-    <loc>https://keras.posit.co/articles/examples/tabtransformer.html</loc>
-  </url>
-  <url>
-    <loc>https://keras.posit.co/articles/examples/tensorflow_numpy_models.html</loc>
-  </url>
-  <url>
     <loc>https://keras.posit.co/articles/examples/text_classification_from_scratch.html</loc>
   </url>
   <url>
-    <loc>https://keras.posit.co/articles/examples/text_explanation_lime.html</loc>
-  </url>
-  <url>
-    <loc>https://keras.posit.co/articles/examples/text_generation_gpt.html</loc>
-  </url>
-  <url>
-    <loc>https://keras.posit.co/articles/examples/text_generation_with_miniature_gpt.html</loc>
-  </url>
-  <url>
-    <loc>https://keras.posit.co/articles/examples/tf_serving.html</loc>
-  </url>
-  <url>
-    <loc>https://keras.posit.co/articles/examples/tfprob_vae.html</loc>
-  </url>
-  <url>
-    <loc>https://keras.posit.co/articles/examples/timeseries_anomaly_detection.html</loc>
-  </url>
-  <url>
-    <loc>https://keras.posit.co/articles/examples/timeseries_classification_from_scratch.html</loc>
-  </url>
-  <url>
-    <loc>https://keras.posit.co/articles/examples/timeseries_classification_transformer.html</loc>
-  </url>
-  <url>
-    <loc>https://keras.posit.co/articles/examples/timeseries_traffic_forecasting.html</loc>
-  </url>
-  <url>
-    <loc>https://keras.posit.co/articles/examples/timeseries_weather_forecasting.html</loc>
-  </url>
-  <url>
-    <loc>https://keras.posit.co/articles/examples/token_learner.html</loc>
-  </url>
-  <url>
-    <loc>https://keras.posit.co/articles/examples/torchvision_keras.html</loc>
-  </url>
-  <url>
-    <loc>https://keras.posit.co/articles/examples/trainer_pattern.html</loc>
-  </url>
-  <url>
-    <loc>https://keras.posit.co/articles/examples/uk_ireland_accent_recognition.html</loc>
-  </url>
-  <url>
-    <loc>https://keras.posit.co/articles/examples/unet.html</loc>
-  </url>
-  <url>
-    <loc>https://keras.posit.co/articles/examples/unet_linux.html</loc>
-  </url>
-  <url>
-    <loc>https://keras.posit.co/articles/examples/vae.html</loc>
-  </url>
-  <url>
-    <loc>https://keras.posit.co/articles/examples/variational_autoencoder.html</loc>
-  </url>
-  <url>
-    <loc>https://keras.posit.co/articles/examples/variational_autoencoder_deconv.html</loc>
-  </url>
-  <url>
-    <loc>https://keras.posit.co/articles/examples/video_transformers.html</loc>
-  </url>
-  <url>
-    <loc>https://keras.posit.co/articles/examples/visualizing_what_convnets_learn.html</loc>
-  </url>
-  <url>
-    <loc>https://keras.posit.co/articles/examples/vq_vae.html</loc>
-  </url>
-  <url>
-    <loc>https://keras.posit.co/articles/examples/wgan_gp.html</loc>
-  </url>
-  <url>
-    <loc>https://keras.posit.co/articles/examples/zero_dce.html</loc>
-  </url>
-  <url>
-    <loc>https://keras.posit.co/articles/faq.html</loc>
-  </url>
-  <url>
     <loc>https://keras.posit.co/articles/functional_api.html</loc>
-  </url>
-  <url>
-    <loc>https://keras.posit.co/articles/getting_started.html</loc>
-  </url>
-  <url>
-    <loc>https://keras.posit.co/articles/getting_started_with_keras_core.html</loc>
-  </url>
-  <url>
-    <loc>https://keras.posit.co/articles/guide_keras.html</loc>
-  </url>
-  <url>
-    <loc>https://keras.posit.co/articles/guides/custom_train_step_in_jax.html</loc>
-  </url>
-  <url>
-    <loc>https://keras.posit.co/articles/guides/custom_train_step_in_tensorflow.html</loc>
-  </url>
-  <url>
-    <loc>https://keras.posit.co/articles/guides/custom_train_step_in_torch.html</loc>
-  </url>
-  <url>
-    <loc>https://keras.posit.co/articles/guides/customizing_saving_and_serialization.html</loc>
-  </url>
-  <url>
-    <loc>https://keras.posit.co/articles/guides/customizing_what_happens_in_fit.html</loc>
-  </url>
-  <url>
-    <loc>https://keras.posit.co/articles/guides/distributed_training.html</loc>
-  </url>
-  <url>
-    <loc>https://keras.posit.co/articles/guides/distributed_training_with_jax.html</loc>
-  </url>
-  <url>
-    <loc>https://keras.posit.co/articles/guides/distributed_training_with_tensorflow.html</loc>
-  </url>
-  <url>
-    <loc>https://keras.posit.co/articles/guides/distributed_training_with_torch.html</loc>
-  </url>
-  <url>
-    <loc>https://keras.posit.co/articles/guides/functional_api.html</loc>
-  </url>
-  <url>
-    <loc>https://keras.posit.co/articles/guides/getting_started_with_keras_core.html</loc>
-  </url>
-  <url>
-    <loc>https://keras.posit.co/articles/guides/intro_to_keras_for_engineers.html</loc>
-  </url>
-  <url>
-    <loc>https://keras.posit.co/articles/guides/intro_to_keras_for_researchers.html</loc>
-  </url>
-  <url>
-    <loc>https://keras.posit.co/articles/guides/making_new_layers_and_models_via_subclassing.html</loc>
-  </url>
-  <url>
-    <loc>https://keras.posit.co/articles/guides/preprocessing_layers.html</loc>
-  </url>
-  <url>
-    <loc>https://keras.posit.co/articles/guides/sequential_model.html</loc>
-  </url>
-  <url>
-    <loc>https://keras.posit.co/articles/guides/serialization_and_saving.html</loc>
-  </url>
-  <url>
-    <loc>https://keras.posit.co/articles/guides/training_with_built_in_methods.html</loc>
-  </url>
-  <url>
-    <loc>https://keras.posit.co/articles/guides/transfer_learning.html</loc>
-  </url>
-  <url>
-    <loc>https://keras.posit.co/articles/guides/understanding_masking_and_padding.html</loc>
-  </url>
-  <url>
-    <loc>https://keras.posit.co/articles/guides/working_with_rnns.html</loc>
-  </url>
-  <url>
-    <loc>https://keras.posit.co/articles/guides/writing_a_custom_training_loop_in_jax.html</loc>
-  </url>
-  <url>
-    <loc>https://keras.posit.co/articles/guides/writing_a_custom_training_loop_in_tensorflow.html</loc>
-  </url>
-  <url>
-    <loc>https://keras.posit.co/articles/guides/writing_a_custom_training_loop_in_torch.html</loc>
-  </url>
-  <url>
-    <loc>https://keras.posit.co/articles/guides/writing_a_training_loop_from_scratch.html</loc>
-  </url>
-  <url>
-    <loc>https://keras.posit.co/articles/guides/writing_your_own_callbacks.html</loc>
   </url>
   <url>
     <loc>https://keras.posit.co/articles/index.html</loc>
@@ -592,43 +55,7 @@
     <loc>https://keras.posit.co/articles/intro_to_keras_for_researchers.html</loc>
   </url>
   <url>
-    <loc>https://keras.posit.co/articles/learn.html</loc>
-  </url>
-  <url>
     <loc>https://keras.posit.co/articles/making_new_layers_and_models_via_subclassing.html</loc>
-  </url>
-  <url>
-    <loc>https://keras.posit.co/articles/mnist_convnet.html</loc>
-  </url>
-  <url>
-    <loc>https://keras.posit.co/articles/new-guides/customizing_what_happens_in_fit.html</loc>
-  </url>
-  <url>
-    <loc>https://keras.posit.co/articles/new-guides/making_new_layers_and_models_via_subclassing.html</loc>
-  </url>
-  <url>
-    <loc>https://keras.posit.co/articles/new-guides/preprocessing_layers.html</loc>
-  </url>
-  <url>
-    <loc>https://keras.posit.co/articles/new-guides/python_subclasses.html</loc>
-  </url>
-  <url>
-    <loc>https://keras.posit.co/articles/new-guides/transfer_learning.html</loc>
-  </url>
-  <url>
-    <loc>https://keras.posit.co/articles/new-guides/working_with_rnns.html</loc>
-  </url>
-  <url>
-    <loc>https://keras.posit.co/articles/new-guides/writing_your_own_callbacks.html</loc>
-  </url>
-  <url>
-    <loc>https://keras.posit.co/articles/preprocessing_layers.html</loc>
-  </url>
-  <url>
-    <loc>https://keras.posit.co/articles/python_subclasses.html</loc>
-  </url>
-  <url>
-    <loc>https://keras.posit.co/articles/saving_serializing.html</loc>
   </url>
   <url>
     <loc>https://keras.posit.co/articles/sequential_model.html</loc>
@@ -637,43 +64,13 @@
     <loc>https://keras.posit.co/articles/serialization_and_saving.html</loc>
   </url>
   <url>
-    <loc>https://keras.posit.co/articles/subclasses.html</loc>
-  </url>
-  <url>
-    <loc>https://keras.posit.co/articles/tools.html</loc>
-  </url>
-  <url>
-    <loc>https://keras.posit.co/articles/training_callbacks.html</loc>
-  </url>
-  <url>
-    <loc>https://keras.posit.co/articles/training_visualization.html</loc>
-  </url>
-  <url>
     <loc>https://keras.posit.co/articles/training_with_built_in_methods.html</loc>
   </url>
   <url>
     <loc>https://keras.posit.co/articles/transfer_learning.html</loc>
   </url>
   <url>
-    <loc>https://keras.posit.co/articles/tutorial_basic_classification.html</loc>
-  </url>
-  <url>
-    <loc>https://keras.posit.co/articles/tutorial_basic_regression.html</loc>
-  </url>
-  <url>
-    <loc>https://keras.posit.co/articles/tutorial_basic_text_classification.html</loc>
-  </url>
-  <url>
-    <loc>https://keras.posit.co/articles/tutorial_overfit_underfit.html</loc>
-  </url>
-  <url>
-    <loc>https://keras.posit.co/articles/tutorial_save_and_restore.html</loc>
-  </url>
-  <url>
     <loc>https://keras.posit.co/articles/understanding_masking_and_padding.html</loc>
-  </url>
-  <url>
-    <loc>https://keras.posit.co/articles/working_with_rnns.html</loc>
   </url>
   <url>
     <loc>https://keras.posit.co/articles/writing_a_custom_training_loop_in_jax.html</loc>
@@ -710,9 +107,6 @@
   </url>
   <url>
     <loc>https://keras.posit.co/reference/KerasLayer.html</loc>
-  </url>
-  <url>
-    <loc>https://keras.posit.co/reference/KerasWrapper.html</loc>
   </url>
   <url>
     <loc>https://keras.posit.co/reference/Layer.html</loc>
@@ -793,9 +187,6 @@
     <loc>https://keras.posit.co/reference/application_convnext_xlarge.html</loc>
   </url>
   <url>
-    <loc>https://keras.posit.co/reference/application_densenet.html</loc>
-  </url>
-  <url>
     <loc>https://keras.posit.co/reference/application_densenet121.html</loc>
   </url>
   <url>
@@ -803,9 +194,6 @@
   </url>
   <url>
     <loc>https://keras.posit.co/reference/application_densenet201.html</loc>
-  </url>
-  <url>
-    <loc>https://keras.posit.co/reference/application_efficientnet.html</loc>
   </url>
   <url>
     <loc>https://keras.posit.co/reference/application_efficientnet_b0.html</loc>
@@ -865,25 +253,16 @@
     <loc>https://keras.posit.co/reference/application_mobilenet_v2.html</loc>
   </url>
   <url>
-    <loc>https://keras.posit.co/reference/application_mobilenet_v3.html</loc>
-  </url>
-  <url>
     <loc>https://keras.posit.co/reference/application_mobilenet_v3_large.html</loc>
   </url>
   <url>
     <loc>https://keras.posit.co/reference/application_mobilenet_v3_small.html</loc>
   </url>
   <url>
-    <loc>https://keras.posit.co/reference/application_nasnet.html</loc>
-  </url>
-  <url>
     <loc>https://keras.posit.co/reference/application_nasnetlarge.html</loc>
   </url>
   <url>
     <loc>https://keras.posit.co/reference/application_nasnetmobile.html</loc>
-  </url>
-  <url>
-    <loc>https://keras.posit.co/reference/application_resnet.html</loc>
   </url>
   <url>
     <loc>https://keras.posit.co/reference/application_resnet101.html</loc>
@@ -904,9 +283,6 @@
     <loc>https://keras.posit.co/reference/application_resnet50_v2.html</loc>
   </url>
   <url>
-    <loc>https://keras.posit.co/reference/application_vgg.html</loc>
-  </url>
-  <url>
     <loc>https://keras.posit.co/reference/application_vgg16.html</loc>
   </url>
   <url>
@@ -917,9 +293,6 @@
   </url>
   <url>
     <loc>https://keras.posit.co/reference/audio_dataset_from_directory.html</loc>
-  </url>
-  <url>
-    <loc>https://keras.posit.co/reference/backend.html</loc>
   </url>
   <url>
     <loc>https://keras.posit.co/reference/bidirectional.html</loc>
@@ -955,9 +328,6 @@
     <loc>https://keras.posit.co/reference/callback_tensorboard.html</loc>
   </url>
   <url>
-    <loc>https://keras.posit.co/reference/callback_terminate_on_naan.html</loc>
-  </url>
-  <url>
     <loc>https://keras.posit.co/reference/callback_terminate_on_nan.html</loc>
   </url>
   <url>
@@ -965,12 +335,6 @@
   </url>
   <url>
     <loc>https://keras.posit.co/reference/clone_model.html</loc>
-  </url>
-  <url>
-    <loc>https://keras.posit.co/reference/compile.keras.engine.training.Model.html</loc>
-  </url>
-  <url>
-    <loc>https://keras.posit.co/reference/compile.keras.models.model.Model.html</loc>
   </url>
   <url>
     <loc>https://keras.posit.co/reference/compile.keras.src.models.model.Model.html</loc>
@@ -1030,9 +394,6 @@
     <loc>https://keras.posit.co/reference/constraint_unitnorm.html</loc>
   </url>
   <url>
-    <loc>https://keras.posit.co/reference/constraints.html</loc>
-  </url>
-  <url>
     <loc>https://keras.posit.co/reference/count_params.html</loc>
   </url>
   <url>
@@ -1040,9 +401,6 @@
   </url>
   <url>
     <loc>https://keras.posit.co/reference/create_layer_wrapper.html</loc>
-  </url>
-  <url>
-    <loc>https://keras.posit.co/reference/create_wrapper.html</loc>
   </url>
   <url>
     <loc>https://keras.posit.co/reference/custom_metric.html</loc>
@@ -1072,58 +430,16 @@
     <loc>https://keras.posit.co/reference/deserialize_keras_object.html</loc>
   </url>
   <url>
-    <loc>https://keras.posit.co/reference/evaluate.keras.engine.training.Model.html</loc>
-  </url>
-  <url>
-    <loc>https://keras.posit.co/reference/evaluate.keras.models.model.Model.html</loc>
-  </url>
-  <url>
     <loc>https://keras.posit.co/reference/evaluate.keras.src.models.model.Model.html</loc>
-  </url>
-  <url>
-    <loc>https://keras.posit.co/reference/evaluate_generator.html</loc>
-  </url>
-  <url>
-    <loc>https://keras.posit.co/reference/export_savedmodel.keras.engine.training.Model.html</loc>
-  </url>
-  <url>
-    <loc>https://keras.posit.co/reference/export_savedmodel.keras.models.model.Model.html</loc>
   </url>
   <url>
     <loc>https://keras.posit.co/reference/export_savedmodel.keras.src.models.model.Model.html</loc>
   </url>
   <url>
-    <loc>https://keras.posit.co/reference/fit.keras.engine.training.Model.html</loc>
-  </url>
-  <url>
-    <loc>https://keras.posit.co/reference/fit.keras.models.model.Model.html</loc>
-  </url>
-  <url>
     <loc>https://keras.posit.co/reference/fit.keras.src.models.model.Model.html</loc>
   </url>
   <url>
-    <loc>https://keras.posit.co/reference/fit_generator.html</loc>
-  </url>
-  <url>
-    <loc>https://keras.posit.co/reference/fit_image_data_generator.html</loc>
-  </url>
-  <url>
-    <loc>https://keras.posit.co/reference/fit_text_tokenizer.html</loc>
-  </url>
-  <url>
-    <loc>https://keras.posit.co/reference/flow_images_from_data.html</loc>
-  </url>
-  <url>
-    <loc>https://keras.posit.co/reference/flow_images_from_dataframe.html</loc>
-  </url>
-  <url>
-    <loc>https://keras.posit.co/reference/flow_images_from_directory.html</loc>
-  </url>
-  <url>
     <loc>https://keras.posit.co/reference/freeze_weights.html</loc>
-  </url>
-  <url>
-    <loc>https://keras.posit.co/reference/generator_next.html</loc>
   </url>
   <url>
     <loc>https://keras.posit.co/reference/get_config.html</loc>
@@ -1133,9 +449,6 @@
   </url>
   <url>
     <loc>https://keras.posit.co/reference/get_file.html</loc>
-  </url>
-  <url>
-    <loc>https://keras.posit.co/reference/get_input_at.html</loc>
   </url>
   <url>
     <loc>https://keras.posit.co/reference/get_layer.html</loc>
@@ -1150,9 +463,6 @@
     <loc>https://keras.posit.co/reference/get_source_inputs.html</loc>
   </url>
   <url>
-    <loc>https://keras.posit.co/reference/get_vocabulary.html</loc>
-  </url>
-  <url>
     <loc>https://keras.posit.co/reference/get_weights.html</loc>
   </url>
   <url>
@@ -1162,13 +472,7 @@
     <loc>https://keras.posit.co/reference/grapes-set-active-grapes.html</loc>
   </url>
   <url>
-    <loc>https://keras.posit.co/reference/hdf5_matrix.html</loc>
-  </url>
-  <url>
     <loc>https://keras.posit.co/reference/image_array_save.html</loc>
-  </url>
-  <url>
-    <loc>https://keras.posit.co/reference/image_data_generator.html</loc>
   </url>
   <url>
     <loc>https://keras.posit.co/reference/image_dataset_from_directory.html</loc>
@@ -1184,15 +488,6 @@
   </url>
   <url>
     <loc>https://keras.posit.co/reference/image_to_array.html</loc>
-  </url>
-  <url>
-    <loc>https://keras.posit.co/reference/imagenet_decode_predictions.html</loc>
-  </url>
-  <url>
-    <loc>https://keras.posit.co/reference/imagenet_preprocess_input.html</loc>
-  </url>
-  <url>
-    <loc>https://keras.posit.co/reference/implementation.html</loc>
   </url>
   <url>
     <loc>https://keras.posit.co/reference/index.html</loc>
@@ -1249,849 +544,6 @@
     <loc>https://keras.posit.co/reference/is_keras_available.html</loc>
   </url>
   <url>
-    <loc>https://keras.posit.co/reference/k_abs.html</loc>
-  </url>
-  <url>
-    <loc>https://keras.posit.co/reference/k_add.html</loc>
-  </url>
-  <url>
-    <loc>https://keras.posit.co/reference/k_all.html</loc>
-  </url>
-  <url>
-    <loc>https://keras.posit.co/reference/k_amax.html</loc>
-  </url>
-  <url>
-    <loc>https://keras.posit.co/reference/k_amin.html</loc>
-  </url>
-  <url>
-    <loc>https://keras.posit.co/reference/k_any.html</loc>
-  </url>
-  <url>
-    <loc>https://keras.posit.co/reference/k_append.html</loc>
-  </url>
-  <url>
-    <loc>https://keras.posit.co/reference/k_arange.html</loc>
-  </url>
-  <url>
-    <loc>https://keras.posit.co/reference/k_arccos.html</loc>
-  </url>
-  <url>
-    <loc>https://keras.posit.co/reference/k_arccosh.html</loc>
-  </url>
-  <url>
-    <loc>https://keras.posit.co/reference/k_arcsin.html</loc>
-  </url>
-  <url>
-    <loc>https://keras.posit.co/reference/k_arcsinh.html</loc>
-  </url>
-  <url>
-    <loc>https://keras.posit.co/reference/k_arctan.html</loc>
-  </url>
-  <url>
-    <loc>https://keras.posit.co/reference/k_arctan2.html</loc>
-  </url>
-  <url>
-    <loc>https://keras.posit.co/reference/k_arctanh.html</loc>
-  </url>
-  <url>
-    <loc>https://keras.posit.co/reference/k_argmax.html</loc>
-  </url>
-  <url>
-    <loc>https://keras.posit.co/reference/k_argmin.html</loc>
-  </url>
-  <url>
-    <loc>https://keras.posit.co/reference/k_argsort.html</loc>
-  </url>
-  <url>
-    <loc>https://keras.posit.co/reference/k_array.html</loc>
-  </url>
-  <url>
-    <loc>https://keras.posit.co/reference/k_average.html</loc>
-  </url>
-  <url>
-    <loc>https://keras.posit.co/reference/k_average_pool.html</loc>
-  </url>
-  <url>
-    <loc>https://keras.posit.co/reference/k_backend.html</loc>
-  </url>
-  <url>
-    <loc>https://keras.posit.co/reference/k_batch_dot.html</loc>
-  </url>
-  <url>
-    <loc>https://keras.posit.co/reference/k_batch_flatten.html</loc>
-  </url>
-  <url>
-    <loc>https://keras.posit.co/reference/k_batch_get_value.html</loc>
-  </url>
-  <url>
-    <loc>https://keras.posit.co/reference/k_batch_normalization.html</loc>
-  </url>
-  <url>
-    <loc>https://keras.posit.co/reference/k_batch_set_value.html</loc>
-  </url>
-  <url>
-    <loc>https://keras.posit.co/reference/k_bias_add.html</loc>
-  </url>
-  <url>
-    <loc>https://keras.posit.co/reference/k_binary_crossentropy.html</loc>
-  </url>
-  <url>
-    <loc>https://keras.posit.co/reference/k_bincount.html</loc>
-  </url>
-  <url>
-    <loc>https://keras.posit.co/reference/k_broadcast_to.html</loc>
-  </url>
-  <url>
-    <loc>https://keras.posit.co/reference/k_cast.html</loc>
-  </url>
-  <url>
-    <loc>https://keras.posit.co/reference/k_cast_to_floatx.html</loc>
-  </url>
-  <url>
-    <loc>https://keras.posit.co/reference/k_categorical_crossentropy.html</loc>
-  </url>
-  <url>
-    <loc>https://keras.posit.co/reference/k_ceil.html</loc>
-  </url>
-  <url>
-    <loc>https://keras.posit.co/reference/k_clear_session.html</loc>
-  </url>
-  <url>
-    <loc>https://keras.posit.co/reference/k_clip.html</loc>
-  </url>
-  <url>
-    <loc>https://keras.posit.co/reference/k_concatenate.html</loc>
-  </url>
-  <url>
-    <loc>https://keras.posit.co/reference/k_cond.html</loc>
-  </url>
-  <url>
-    <loc>https://keras.posit.co/reference/k_conj.html</loc>
-  </url>
-  <url>
-    <loc>https://keras.posit.co/reference/k_conjugate.html</loc>
-  </url>
-  <url>
-    <loc>https://keras.posit.co/reference/k_constant.html</loc>
-  </url>
-  <url>
-    <loc>https://keras.posit.co/reference/k_conv.html</loc>
-  </url>
-  <url>
-    <loc>https://keras.posit.co/reference/k_conv1d.html</loc>
-  </url>
-  <url>
-    <loc>https://keras.posit.co/reference/k_conv2d.html</loc>
-  </url>
-  <url>
-    <loc>https://keras.posit.co/reference/k_conv2d_transpose.html</loc>
-  </url>
-  <url>
-    <loc>https://keras.posit.co/reference/k_conv3d.html</loc>
-  </url>
-  <url>
-    <loc>https://keras.posit.co/reference/k_conv3d_transpose.html</loc>
-  </url>
-  <url>
-    <loc>https://keras.posit.co/reference/k_conv_transpose.html</loc>
-  </url>
-  <url>
-    <loc>https://keras.posit.co/reference/k_convert_to_numpy.html</loc>
-  </url>
-  <url>
-    <loc>https://keras.posit.co/reference/k_convert_to_tensor.html</loc>
-  </url>
-  <url>
-    <loc>https://keras.posit.co/reference/k_copy.html</loc>
-  </url>
-  <url>
-    <loc>https://keras.posit.co/reference/k_cos.html</loc>
-  </url>
-  <url>
-    <loc>https://keras.posit.co/reference/k_cosh.html</loc>
-  </url>
-  <url>
-    <loc>https://keras.posit.co/reference/k_count_nonzero.html</loc>
-  </url>
-  <url>
-    <loc>https://keras.posit.co/reference/k_count_params.html</loc>
-  </url>
-  <url>
-    <loc>https://keras.posit.co/reference/k_cross.html</loc>
-  </url>
-  <url>
-    <loc>https://keras.posit.co/reference/k_ctc_batch_cost.html</loc>
-  </url>
-  <url>
-    <loc>https://keras.posit.co/reference/k_ctc_decode.html</loc>
-  </url>
-  <url>
-    <loc>https://keras.posit.co/reference/k_ctc_label_dense_to_sparse.html</loc>
-  </url>
-  <url>
-    <loc>https://keras.posit.co/reference/k_cumprod.html</loc>
-  </url>
-  <url>
-    <loc>https://keras.posit.co/reference/k_cumsum.html</loc>
-  </url>
-  <url>
-    <loc>https://keras.posit.co/reference/k_depthwise_conv.html</loc>
-  </url>
-  <url>
-    <loc>https://keras.posit.co/reference/k_depthwise_conv2d.html</loc>
-  </url>
-  <url>
-    <loc>https://keras.posit.co/reference/k_diag.html</loc>
-  </url>
-  <url>
-    <loc>https://keras.posit.co/reference/k_diagonal.html</loc>
-  </url>
-  <url>
-    <loc>https://keras.posit.co/reference/k_diff.html</loc>
-  </url>
-  <url>
-    <loc>https://keras.posit.co/reference/k_digitize.html</loc>
-  </url>
-  <url>
-    <loc>https://keras.posit.co/reference/k_divide.html</loc>
-  </url>
-  <url>
-    <loc>https://keras.posit.co/reference/k_dot.html</loc>
-  </url>
-  <url>
-    <loc>https://keras.posit.co/reference/k_dropout.html</loc>
-  </url>
-  <url>
-    <loc>https://keras.posit.co/reference/k_dtype.html</loc>
-  </url>
-  <url>
-    <loc>https://keras.posit.co/reference/k_einsum.html</loc>
-  </url>
-  <url>
-    <loc>https://keras.posit.co/reference/k_elu.html</loc>
-  </url>
-  <url>
-    <loc>https://keras.posit.co/reference/k_empty.html</loc>
-  </url>
-  <url>
-    <loc>https://keras.posit.co/reference/k_epsilon.html</loc>
-  </url>
-  <url>
-    <loc>https://keras.posit.co/reference/k_equal.html</loc>
-  </url>
-  <url>
-    <loc>https://keras.posit.co/reference/k_erf.html</loc>
-  </url>
-  <url>
-    <loc>https://keras.posit.co/reference/k_eval.html</loc>
-  </url>
-  <url>
-    <loc>https://keras.posit.co/reference/k_exp.html</loc>
-  </url>
-  <url>
-    <loc>https://keras.posit.co/reference/k_expand_dims.html</loc>
-  </url>
-  <url>
-    <loc>https://keras.posit.co/reference/k_expm1.html</loc>
-  </url>
-  <url>
-    <loc>https://keras.posit.co/reference/k_extract_sequences.html</loc>
-  </url>
-  <url>
-    <loc>https://keras.posit.co/reference/k_eye.html</loc>
-  </url>
-  <url>
-    <loc>https://keras.posit.co/reference/k_fft.html</loc>
-  </url>
-  <url>
-    <loc>https://keras.posit.co/reference/k_fft2.html</loc>
-  </url>
-  <url>
-    <loc>https://keras.posit.co/reference/k_flatten.html</loc>
-  </url>
-  <url>
-    <loc>https://keras.posit.co/reference/k_flip.html</loc>
-  </url>
-  <url>
-    <loc>https://keras.posit.co/reference/k_floatx.html</loc>
-  </url>
-  <url>
-    <loc>https://keras.posit.co/reference/k_floor.html</loc>
-  </url>
-  <url>
-    <loc>https://keras.posit.co/reference/k_floor_divide.html</loc>
-  </url>
-  <url>
-    <loc>https://keras.posit.co/reference/k_foldl.html</loc>
-  </url>
-  <url>
-    <loc>https://keras.posit.co/reference/k_foldr.html</loc>
-  </url>
-  <url>
-    <loc>https://keras.posit.co/reference/k_fori_loop.html</loc>
-  </url>
-  <url>
-    <loc>https://keras.posit.co/reference/k_full.html</loc>
-  </url>
-  <url>
-    <loc>https://keras.posit.co/reference/k_full_like.html</loc>
-  </url>
-  <url>
-    <loc>https://keras.posit.co/reference/k_function.html</loc>
-  </url>
-  <url>
-    <loc>https://keras.posit.co/reference/k_gather.html</loc>
-  </url>
-  <url>
-    <loc>https://keras.posit.co/reference/k_gelu.html</loc>
-  </url>
-  <url>
-    <loc>https://keras.posit.co/reference/k_get_item.html</loc>
-  </url>
-  <url>
-    <loc>https://keras.posit.co/reference/k_get_session.html</loc>
-  </url>
-  <url>
-    <loc>https://keras.posit.co/reference/k_get_uid.html</loc>
-  </url>
-  <url>
-    <loc>https://keras.posit.co/reference/k_get_value.html</loc>
-  </url>
-  <url>
-    <loc>https://keras.posit.co/reference/k_get_variable_shape.html</loc>
-  </url>
-  <url>
-    <loc>https://keras.posit.co/reference/k_gradients.html</loc>
-  </url>
-  <url>
-    <loc>https://keras.posit.co/reference/k_greater.html</loc>
-  </url>
-  <url>
-    <loc>https://keras.posit.co/reference/k_greater_equal.html</loc>
-  </url>
-  <url>
-    <loc>https://keras.posit.co/reference/k_hard_sigmoid.html</loc>
-  </url>
-  <url>
-    <loc>https://keras.posit.co/reference/k_hstack.html</loc>
-  </url>
-  <url>
-    <loc>https://keras.posit.co/reference/k_identity.html</loc>
-  </url>
-  <url>
-    <loc>https://keras.posit.co/reference/k_imag.html</loc>
-  </url>
-  <url>
-    <loc>https://keras.posit.co/reference/k_image_affine_transform.html</loc>
-  </url>
-  <url>
-    <loc>https://keras.posit.co/reference/k_image_data_format.html</loc>
-  </url>
-  <url>
-    <loc>https://keras.posit.co/reference/k_image_extract_patches.html</loc>
-  </url>
-  <url>
-    <loc>https://keras.posit.co/reference/k_image_map_coordinates.html</loc>
-  </url>
-  <url>
-    <loc>https://keras.posit.co/reference/k_image_pad_images.html</loc>
-  </url>
-  <url>
-    <loc>https://keras.posit.co/reference/k_image_resize.html</loc>
-  </url>
-  <url>
-    <loc>https://keras.posit.co/reference/k_in_test_phase.html</loc>
-  </url>
-  <url>
-    <loc>https://keras.posit.co/reference/k_in_top_k.html</loc>
-  </url>
-  <url>
-    <loc>https://keras.posit.co/reference/k_in_train_phase.html</loc>
-  </url>
-  <url>
-    <loc>https://keras.posit.co/reference/k_int_shape.html</loc>
-  </url>
-  <url>
-    <loc>https://keras.posit.co/reference/k_irfft.html</loc>
-  </url>
-  <url>
-    <loc>https://keras.posit.co/reference/k_is_keras_tensor.html</loc>
-  </url>
-  <url>
-    <loc>https://keras.posit.co/reference/k_is_placeholder.html</loc>
-  </url>
-  <url>
-    <loc>https://keras.posit.co/reference/k_is_sparse.html</loc>
-  </url>
-  <url>
-    <loc>https://keras.posit.co/reference/k_is_tensor.html</loc>
-  </url>
-  <url>
-    <loc>https://keras.posit.co/reference/k_isclose.html</loc>
-  </url>
-  <url>
-    <loc>https://keras.posit.co/reference/k_isfinite.html</loc>
-  </url>
-  <url>
-    <loc>https://keras.posit.co/reference/k_isinf.html</loc>
-  </url>
-  <url>
-    <loc>https://keras.posit.co/reference/k_isnan.html</loc>
-  </url>
-  <url>
-    <loc>https://keras.posit.co/reference/k_istft.html</loc>
-  </url>
-  <url>
-    <loc>https://keras.posit.co/reference/k_l2_normalize.html</loc>
-  </url>
-  <url>
-    <loc>https://keras.posit.co/reference/k_leaky_relu.html</loc>
-  </url>
-  <url>
-    <loc>https://keras.posit.co/reference/k_learning_phase.html</loc>
-  </url>
-  <url>
-    <loc>https://keras.posit.co/reference/k_less.html</loc>
-  </url>
-  <url>
-    <loc>https://keras.posit.co/reference/k_less_equal.html</loc>
-  </url>
-  <url>
-    <loc>https://keras.posit.co/reference/k_linspace.html</loc>
-  </url>
-  <url>
-    <loc>https://keras.posit.co/reference/k_local_conv1d.html</loc>
-  </url>
-  <url>
-    <loc>https://keras.posit.co/reference/k_local_conv2d.html</loc>
-  </url>
-  <url>
-    <loc>https://keras.posit.co/reference/k_log.html</loc>
-  </url>
-  <url>
-    <loc>https://keras.posit.co/reference/k_log10.html</loc>
-  </url>
-  <url>
-    <loc>https://keras.posit.co/reference/k_log1p.html</loc>
-  </url>
-  <url>
-    <loc>https://keras.posit.co/reference/k_log2.html</loc>
-  </url>
-  <url>
-    <loc>https://keras.posit.co/reference/k_log_sigmoid.html</loc>
-  </url>
-  <url>
-    <loc>https://keras.posit.co/reference/k_log_softmax.html</loc>
-  </url>
-  <url>
-    <loc>https://keras.posit.co/reference/k_logaddexp.html</loc>
-  </url>
-  <url>
-    <loc>https://keras.posit.co/reference/k_logical_and.html</loc>
-  </url>
-  <url>
-    <loc>https://keras.posit.co/reference/k_logical_not.html</loc>
-  </url>
-  <url>
-    <loc>https://keras.posit.co/reference/k_logical_or.html</loc>
-  </url>
-  <url>
-    <loc>https://keras.posit.co/reference/k_logical_xor.html</loc>
-  </url>
-  <url>
-    <loc>https://keras.posit.co/reference/k_logspace.html</loc>
-  </url>
-  <url>
-    <loc>https://keras.posit.co/reference/k_logsumexp.html</loc>
-  </url>
-  <url>
-    <loc>https://keras.posit.co/reference/k_manual_variable_initialization.html</loc>
-  </url>
-  <url>
-    <loc>https://keras.posit.co/reference/k_map_fn.html</loc>
-  </url>
-  <url>
-    <loc>https://keras.posit.co/reference/k_matmul.html</loc>
-  </url>
-  <url>
-    <loc>https://keras.posit.co/reference/k_max.html</loc>
-  </url>
-  <url>
-    <loc>https://keras.posit.co/reference/k_max_pool.html</loc>
-  </url>
-  <url>
-    <loc>https://keras.posit.co/reference/k_maximum.html</loc>
-  </url>
-  <url>
-    <loc>https://keras.posit.co/reference/k_mean.html</loc>
-  </url>
-  <url>
-    <loc>https://keras.posit.co/reference/k_median.html</loc>
-  </url>
-  <url>
-    <loc>https://keras.posit.co/reference/k_meshgrid.html</loc>
-  </url>
-  <url>
-    <loc>https://keras.posit.co/reference/k_min.html</loc>
-  </url>
-  <url>
-    <loc>https://keras.posit.co/reference/k_minimum.html</loc>
-  </url>
-  <url>
-    <loc>https://keras.posit.co/reference/k_mod.html</loc>
-  </url>
-  <url>
-    <loc>https://keras.posit.co/reference/k_moments.html</loc>
-  </url>
-  <url>
-    <loc>https://keras.posit.co/reference/k_moveaxis.html</loc>
-  </url>
-  <url>
-    <loc>https://keras.posit.co/reference/k_moving_average_update.html</loc>
-  </url>
-  <url>
-    <loc>https://keras.posit.co/reference/k_multi_hot.html</loc>
-  </url>
-  <url>
-    <loc>https://keras.posit.co/reference/k_multiply.html</loc>
-  </url>
-  <url>
-    <loc>https://keras.posit.co/reference/k_nan_to_num.html</loc>
-  </url>
-  <url>
-    <loc>https://keras.posit.co/reference/k_ndim.html</loc>
-  </url>
-  <url>
-    <loc>https://keras.posit.co/reference/k_negative.html</loc>
-  </url>
-  <url>
-    <loc>https://keras.posit.co/reference/k_nonzero.html</loc>
-  </url>
-  <url>
-    <loc>https://keras.posit.co/reference/k_normalize_batch_in_training.html</loc>
-  </url>
-  <url>
-    <loc>https://keras.posit.co/reference/k_not_equal.html</loc>
-  </url>
-  <url>
-    <loc>https://keras.posit.co/reference/k_one_hot.html</loc>
-  </url>
-  <url>
-    <loc>https://keras.posit.co/reference/k_ones.html</loc>
-  </url>
-  <url>
-    <loc>https://keras.posit.co/reference/k_ones_like.html</loc>
-  </url>
-  <url>
-    <loc>https://keras.posit.co/reference/k_outer.html</loc>
-  </url>
-  <url>
-    <loc>https://keras.posit.co/reference/k_pad.html</loc>
-  </url>
-  <url>
-    <loc>https://keras.posit.co/reference/k_permute_dimensions.html</loc>
-  </url>
-  <url>
-    <loc>https://keras.posit.co/reference/k_placeholder.html</loc>
-  </url>
-  <url>
-    <loc>https://keras.posit.co/reference/k_pool2d.html</loc>
-  </url>
-  <url>
-    <loc>https://keras.posit.co/reference/k_pool3d.html</loc>
-  </url>
-  <url>
-    <loc>https://keras.posit.co/reference/k_pow.html</loc>
-  </url>
-  <url>
-    <loc>https://keras.posit.co/reference/k_power.html</loc>
-  </url>
-  <url>
-    <loc>https://keras.posit.co/reference/k_print_tensor.html</loc>
-  </url>
-  <url>
-    <loc>https://keras.posit.co/reference/k_prod.html</loc>
-  </url>
-  <url>
-    <loc>https://keras.posit.co/reference/k_qr.html</loc>
-  </url>
-  <url>
-    <loc>https://keras.posit.co/reference/k_quantile.html</loc>
-  </url>
-  <url>
-    <loc>https://keras.posit.co/reference/k_random_bernoulli.html</loc>
-  </url>
-  <url>
-    <loc>https://keras.posit.co/reference/k_random_binomial.html</loc>
-  </url>
-  <url>
-    <loc>https://keras.posit.co/reference/k_random_normal.html</loc>
-  </url>
-  <url>
-    <loc>https://keras.posit.co/reference/k_random_normal_variable.html</loc>
-  </url>
-  <url>
-    <loc>https://keras.posit.co/reference/k_random_uniform.html</loc>
-  </url>
-  <url>
-    <loc>https://keras.posit.co/reference/k_random_uniform_variable.html</loc>
-  </url>
-  <url>
-    <loc>https://keras.posit.co/reference/k_ravel.html</loc>
-  </url>
-  <url>
-    <loc>https://keras.posit.co/reference/k_real.html</loc>
-  </url>
-  <url>
-    <loc>https://keras.posit.co/reference/k_reciprocal.html</loc>
-  </url>
-  <url>
-    <loc>https://keras.posit.co/reference/k_relu.html</loc>
-  </url>
-  <url>
-    <loc>https://keras.posit.co/reference/k_relu6.html</loc>
-  </url>
-  <url>
-    <loc>https://keras.posit.co/reference/k_repeat.html</loc>
-  </url>
-  <url>
-    <loc>https://keras.posit.co/reference/k_repeat_elements.html</loc>
-  </url>
-  <url>
-    <loc>https://keras.posit.co/reference/k_reset_uids.html</loc>
-  </url>
-  <url>
-    <loc>https://keras.posit.co/reference/k_reshape.html</loc>
-  </url>
-  <url>
-    <loc>https://keras.posit.co/reference/k_resize_images.html</loc>
-  </url>
-  <url>
-    <loc>https://keras.posit.co/reference/k_resize_volumes.html</loc>
-  </url>
-  <url>
-    <loc>https://keras.posit.co/reference/k_reverse.html</loc>
-  </url>
-  <url>
-    <loc>https://keras.posit.co/reference/k_rfft.html</loc>
-  </url>
-  <url>
-    <loc>https://keras.posit.co/reference/k_rnn.html</loc>
-  </url>
-  <url>
-    <loc>https://keras.posit.co/reference/k_roll.html</loc>
-  </url>
-  <url>
-    <loc>https://keras.posit.co/reference/k_round.html</loc>
-  </url>
-  <url>
-    <loc>https://keras.posit.co/reference/k_rsqrt.html</loc>
-  </url>
-  <url>
-    <loc>https://keras.posit.co/reference/k_scatter.html</loc>
-  </url>
-  <url>
-    <loc>https://keras.posit.co/reference/k_scatter_update.html</loc>
-  </url>
-  <url>
-    <loc>https://keras.posit.co/reference/k_segment_max.html</loc>
-  </url>
-  <url>
-    <loc>https://keras.posit.co/reference/k_segment_sum.html</loc>
-  </url>
-  <url>
-    <loc>https://keras.posit.co/reference/k_selu.html</loc>
-  </url>
-  <url>
-    <loc>https://keras.posit.co/reference/k_separable_conv.html</loc>
-  </url>
-  <url>
-    <loc>https://keras.posit.co/reference/k_separable_conv2d.html</loc>
-  </url>
-  <url>
-    <loc>https://keras.posit.co/reference/k_set_learning_phase.html</loc>
-  </url>
-  <url>
-    <loc>https://keras.posit.co/reference/k_set_value.html</loc>
-  </url>
-  <url>
-    <loc>https://keras.posit.co/reference/k_shape.html</loc>
-  </url>
-  <url>
-    <loc>https://keras.posit.co/reference/k_sigmoid.html</loc>
-  </url>
-  <url>
-    <loc>https://keras.posit.co/reference/k_sign.html</loc>
-  </url>
-  <url>
-    <loc>https://keras.posit.co/reference/k_silu.html</loc>
-  </url>
-  <url>
-    <loc>https://keras.posit.co/reference/k_sin.html</loc>
-  </url>
-  <url>
-    <loc>https://keras.posit.co/reference/k_sinh.html</loc>
-  </url>
-  <url>
-    <loc>https://keras.posit.co/reference/k_size.html</loc>
-  </url>
-  <url>
-    <loc>https://keras.posit.co/reference/k_slice.html</loc>
-  </url>
-  <url>
-    <loc>https://keras.posit.co/reference/k_slice_update.html</loc>
-  </url>
-  <url>
-    <loc>https://keras.posit.co/reference/k_softmax.html</loc>
-  </url>
-  <url>
-    <loc>https://keras.posit.co/reference/k_softplus.html</loc>
-  </url>
-  <url>
-    <loc>https://keras.posit.co/reference/k_softsign.html</loc>
-  </url>
-  <url>
-    <loc>https://keras.posit.co/reference/k_solve.html</loc>
-  </url>
-  <url>
-    <loc>https://keras.posit.co/reference/k_sort.html</loc>
-  </url>
-  <url>
-    <loc>https://keras.posit.co/reference/k_sparse_categorical_crossentropy.html</loc>
-  </url>
-  <url>
-    <loc>https://keras.posit.co/reference/k_spatial_2d_padding.html</loc>
-  </url>
-  <url>
-    <loc>https://keras.posit.co/reference/k_spatial_3d_padding.html</loc>
-  </url>
-  <url>
-    <loc>https://keras.posit.co/reference/k_split.html</loc>
-  </url>
-  <url>
-    <loc>https://keras.posit.co/reference/k_sqrt.html</loc>
-  </url>
-  <url>
-    <loc>https://keras.posit.co/reference/k_square.html</loc>
-  </url>
-  <url>
-    <loc>https://keras.posit.co/reference/k_squeeze.html</loc>
-  </url>
-  <url>
-    <loc>https://keras.posit.co/reference/k_stack.html</loc>
-  </url>
-  <url>
-    <loc>https://keras.posit.co/reference/k_std.html</loc>
-  </url>
-  <url>
-    <loc>https://keras.posit.co/reference/k_stft.html</loc>
-  </url>
-  <url>
-    <loc>https://keras.posit.co/reference/k_stop_gradient.html</loc>
-  </url>
-  <url>
-    <loc>https://keras.posit.co/reference/k_subtract.html</loc>
-  </url>
-  <url>
-    <loc>https://keras.posit.co/reference/k_sum.html</loc>
-  </url>
-  <url>
-    <loc>https://keras.posit.co/reference/k_swapaxes.html</loc>
-  </url>
-  <url>
-    <loc>https://keras.posit.co/reference/k_switch.html</loc>
-  </url>
-  <url>
-    <loc>https://keras.posit.co/reference/k_take.html</loc>
-  </url>
-  <url>
-    <loc>https://keras.posit.co/reference/k_take_along_axis.html</loc>
-  </url>
-  <url>
-    <loc>https://keras.posit.co/reference/k_tan.html</loc>
-  </url>
-  <url>
-    <loc>https://keras.posit.co/reference/k_tanh.html</loc>
-  </url>
-  <url>
-    <loc>https://keras.posit.co/reference/k_temporal_padding.html</loc>
-  </url>
-  <url>
-    <loc>https://keras.posit.co/reference/k_tensordot.html</loc>
-  </url>
-  <url>
-    <loc>https://keras.posit.co/reference/k_tile.html</loc>
-  </url>
-  <url>
-    <loc>https://keras.posit.co/reference/k_to_dense.html</loc>
-  </url>
-  <url>
-    <loc>https://keras.posit.co/reference/k_top_k.html</loc>
-  </url>
-  <url>
-    <loc>https://keras.posit.co/reference/k_trace.html</loc>
-  </url>
-  <url>
-    <loc>https://keras.posit.co/reference/k_transpose.html</loc>
-  </url>
-  <url>
-    <loc>https://keras.posit.co/reference/k_tri.html</loc>
-  </url>
-  <url>
-    <loc>https://keras.posit.co/reference/k_tril.html</loc>
-  </url>
-  <url>
-    <loc>https://keras.posit.co/reference/k_triu.html</loc>
-  </url>
-  <url>
-    <loc>https://keras.posit.co/reference/k_true_divide.html</loc>
-  </url>
-  <url>
-    <loc>https://keras.posit.co/reference/k_truncated_normal.html</loc>
-  </url>
-  <url>
-    <loc>https://keras.posit.co/reference/k_unstack.html</loc>
-  </url>
-  <url>
-    <loc>https://keras.posit.co/reference/k_update.html</loc>
-  </url>
-  <url>
-    <loc>https://keras.posit.co/reference/k_update_add.html</loc>
-  </url>
-  <url>
-    <loc>https://keras.posit.co/reference/k_update_sub.html</loc>
-  </url>
-  <url>
-    <loc>https://keras.posit.co/reference/k_var.html</loc>
-  </url>
-  <url>
-    <loc>https://keras.posit.co/reference/k_variable.html</loc>
-  </url>
-  <url>
-    <loc>https://keras.posit.co/reference/k_vdot.html</loc>
-  </url>
-  <url>
-    <loc>https://keras.posit.co/reference/k_vectorized_map.html</loc>
-  </url>
-  <url>
-    <loc>https://keras.posit.co/reference/k_vstack.html</loc>
-  </url>
-  <url>
-    <loc>https://keras.posit.co/reference/k_where.html</loc>
-  </url>
-  <url>
-    <loc>https://keras.posit.co/reference/k_while_loop.html</loc>
-  </url>
-  <url>
-    <loc>https://keras.posit.co/reference/k_zeros.html</loc>
-  </url>
-  <url>
-    <loc>https://keras.posit.co/reference/k_zeros_like.html</loc>
-  </url>
-  <url>
-    <loc>https://keras.posit.co/reference/keras-package.html</loc>
-  </url>
-  <url>
     <loc>https://keras.posit.co/reference/keras.html</loc>
   </url>
   <url>
@@ -2102,9 +554,6 @@
   </url>
   <url>
     <loc>https://keras.posit.co/reference/keras_model.html</loc>
-  </url>
-  <url>
-    <loc>https://keras.posit.co/reference/keras_model_custom.html</loc>
   </url>
   <url>
     <loc>https://keras.posit.co/reference/keras_model_sequential.html</loc>
@@ -2125,13 +574,7 @@
     <loc>https://keras.posit.co/reference/layer_activation_relu.html</loc>
   </url>
   <url>
-    <loc>https://keras.posit.co/reference/layer_activation_selu.html</loc>
-  </url>
-  <url>
     <loc>https://keras.posit.co/reference/layer_activation_softmax.html</loc>
-  </url>
-  <url>
-    <loc>https://keras.posit.co/reference/layer_activation_thresholded_relu.html</loc>
   </url>
   <url>
     <loc>https://keras.posit.co/reference/layer_activity_regularization.html</loc>
@@ -2141,9 +584,6 @@
   </url>
   <url>
     <loc>https://keras.posit.co/reference/layer_additive_attention.html</loc>
-  </url>
-  <url>
-    <loc>https://keras.posit.co/reference/layer_alpha_dropout.html</loc>
   </url>
   <url>
     <loc>https://keras.posit.co/reference/layer_attention.html</loc>
@@ -2162,9 +602,6 @@
   </url>
   <url>
     <loc>https://keras.posit.co/reference/layer_batch_normalization.html</loc>
-  </url>
-  <url>
-    <loc>https://keras.posit.co/reference/layer_bidirectional.html</loc>
   </url>
   <url>
     <loc>https://keras.posit.co/reference/layer_category_encoding.html</loc>
@@ -2212,16 +649,7 @@
     <loc>https://keras.posit.co/reference/layer_cropping_3d.html</loc>
   </url>
   <url>
-    <loc>https://keras.posit.co/reference/layer_cudnn_gru.html</loc>
-  </url>
-  <url>
-    <loc>https://keras.posit.co/reference/layer_cudnn_lstm.html</loc>
-  </url>
-  <url>
     <loc>https://keras.posit.co/reference/layer_dense.html</loc>
-  </url>
-  <url>
-    <loc>https://keras.posit.co/reference/layer_dense_features.html</loc>
   </url>
   <url>
     <loc>https://keras.posit.co/reference/layer_depthwise_conv_1d.html</loc>
@@ -2308,12 +736,6 @@
     <loc>https://keras.posit.co/reference/layer_layer_normalization.html</loc>
   </url>
   <url>
-    <loc>https://keras.posit.co/reference/layer_locally_connected_1d.html</loc>
-  </url>
-  <url>
-    <loc>https://keras.posit.co/reference/layer_locally_connected_2d.html</loc>
-  </url>
-  <url>
     <loc>https://keras.posit.co/reference/layer_lstm.html</loc>
   </url>
   <url>
@@ -2362,16 +784,10 @@
     <loc>https://keras.posit.co/reference/layer_random_flip.html</loc>
   </url>
   <url>
-    <loc>https://keras.posit.co/reference/layer_random_height.html</loc>
-  </url>
-  <url>
     <loc>https://keras.posit.co/reference/layer_random_rotation.html</loc>
   </url>
   <url>
     <loc>https://keras.posit.co/reference/layer_random_translation.html</loc>
-  </url>
-  <url>
-    <loc>https://keras.posit.co/reference/layer_random_width.html</loc>
   </url>
   <url>
     <loc>https://keras.posit.co/reference/layer_random_zoom.html</loc>
@@ -2476,16 +892,10 @@
     <loc>https://keras.posit.co/reference/learning_rate_schedule_polynomial_decay.html</loc>
   </url>
   <url>
-    <loc>https://keras.posit.co/reference/load_keras_model.html</loc>
-  </url>
-  <url>
     <loc>https://keras.posit.co/reference/load_model.html</loc>
   </url>
   <url>
     <loc>https://keras.posit.co/reference/load_model_weights.html</loc>
-  </url>
-  <url>
-    <loc>https://keras.posit.co/reference/loss-functions.html</loc>
   </url>
   <url>
     <loc>https://keras.posit.co/reference/loss_binary_crossentropy.html</loc>
@@ -2501,9 +911,6 @@
   </url>
   <url>
     <loc>https://keras.posit.co/reference/loss_categorical_hinge.html</loc>
-  </url>
-  <url>
-    <loc>https://keras.posit.co/reference/loss_cosine_proximity.html</loc>
   </url>
   <url>
     <loc>https://keras.posit.co/reference/loss_cosine_similarity.html</loc>
@@ -2542,13 +949,7 @@
     <loc>https://keras.posit.co/reference/loss_squared_hinge.html</loc>
   </url>
   <url>
-    <loc>https://keras.posit.co/reference/make_sampling_table.html</loc>
-  </url>
-  <url>
     <loc>https://keras.posit.co/reference/metric-or-Metric.html</loc>
-  </url>
-  <url>
-    <loc>https://keras.posit.co/reference/metric_accuracy.html</loc>
   </url>
   <url>
     <loc>https://keras.posit.co/reference/metric_auc.html</loc>
@@ -2578,9 +979,6 @@
     <loc>https://keras.posit.co/reference/metric_categorical_hinge.html</loc>
   </url>
   <url>
-    <loc>https://keras.posit.co/reference/metric_cosine_proximity.html</loc>
-  </url>
-  <url>
     <loc>https://keras.posit.co/reference/metric_cosine_similarity.html</loc>
   </url>
   <url>
@@ -2608,16 +1006,10 @@
     <loc>https://keras.posit.co/reference/metric_kl_divergence.html</loc>
   </url>
   <url>
-    <loc>https://keras.posit.co/reference/metric_kullback_leibler_divergence.html</loc>
-  </url>
-  <url>
     <loc>https://keras.posit.co/reference/metric_log_cosh.html</loc>
   </url>
   <url>
     <loc>https://keras.posit.co/reference/metric_log_cosh_error.html</loc>
-  </url>
-  <url>
-    <loc>https://keras.posit.co/reference/metric_logcosh_error.html</loc>
   </url>
   <url>
     <loc>https://keras.posit.co/reference/metric_mean.html</loc>
@@ -2632,16 +1024,10 @@
     <loc>https://keras.posit.co/reference/metric_mean_iou.html</loc>
   </url>
   <url>
-    <loc>https://keras.posit.co/reference/metric_mean_relative_error.html</loc>
-  </url>
-  <url>
     <loc>https://keras.posit.co/reference/metric_mean_squared_error.html</loc>
   </url>
   <url>
     <loc>https://keras.posit.co/reference/metric_mean_squared_logarithmic_error.html</loc>
-  </url>
-  <url>
-    <loc>https://keras.posit.co/reference/metric_mean_tensor.html</loc>
   </url>
   <url>
     <loc>https://keras.posit.co/reference/metric_mean_wrapper.html</loc>
@@ -2686,9 +1072,6 @@
     <loc>https://keras.posit.co/reference/metric_sparse_top_k_categorical_accuracy.html</loc>
   </url>
   <url>
-    <loc>https://keras.posit.co/reference/metric_sparse_top_op_categorical_accuracy.html</loc>
-  </url>
-  <url>
     <loc>https://keras.posit.co/reference/metric_specificity_at_sensitivity.html</loc>
   </url>
   <url>
@@ -2701,34 +1084,16 @@
     <loc>https://keras.posit.co/reference/metric_top_k_categorical_accuracy.html</loc>
   </url>
   <url>
-    <loc>https://keras.posit.co/reference/metric_top_op_categorical_accuracy.html</loc>
-  </url>
-  <url>
     <loc>https://keras.posit.co/reference/metric_true_negatives.html</loc>
   </url>
   <url>
     <loc>https://keras.posit.co/reference/metric_true_positives.html</loc>
   </url>
   <url>
-    <loc>https://keras.posit.co/reference/model_from_saved_model.html</loc>
-  </url>
-  <url>
     <loc>https://keras.posit.co/reference/model_to_dot.html</loc>
   </url>
   <url>
-    <loc>https://keras.posit.co/reference/model_to_json.html</loc>
-  </url>
-  <url>
-    <loc>https://keras.posit.co/reference/model_to_saved_model.html</loc>
-  </url>
-  <url>
-    <loc>https://keras.posit.co/reference/model_to_yaml.html</loc>
-  </url>
-  <url>
     <loc>https://keras.posit.co/reference/multi-assign.html</loc>
-  </url>
-  <url>
-    <loc>https://keras.posit.co/reference/multi_gpu_model.html</loc>
   </url>
   <url>
     <loc>https://keras.posit.co/reference/new-classes.html</loc>
@@ -3382,12 +1747,6 @@
     <loc>https://keras.posit.co/reference/pipe.html</loc>
   </url>
   <url>
-    <loc>https://keras.posit.co/reference/plot.keras.engine.training.Model.html</loc>
-  </url>
-  <url>
-    <loc>https://keras.posit.co/reference/plot.keras.models.model.Model.html</loc>
-  </url>
-  <url>
     <loc>https://keras.posit.co/reference/plot.keras.src.models.model.Model.html</loc>
   </url>
   <url>
@@ -3397,28 +1756,13 @@
     <loc>https://keras.posit.co/reference/pop_layer.html</loc>
   </url>
   <url>
-    <loc>https://keras.posit.co/reference/predict.keras.engine.training.Model.html</loc>
-  </url>
-  <url>
-    <loc>https://keras.posit.co/reference/predict.keras.models.model.Model.html</loc>
-  </url>
-  <url>
     <loc>https://keras.posit.co/reference/predict.keras.src.models.model.Model.html</loc>
-  </url>
-  <url>
-    <loc>https://keras.posit.co/reference/predict_generator.html</loc>
   </url>
   <url>
     <loc>https://keras.posit.co/reference/predict_on_batch.html</loc>
   </url>
   <url>
-    <loc>https://keras.posit.co/reference/predict_proba.html</loc>
-  </url>
-  <url>
     <loc>https://keras.posit.co/reference/process_utils.html</loc>
-  </url>
-  <url>
-    <loc>https://keras.posit.co/reference/random_array.html</loc>
   </url>
   <url>
     <loc>https://keras.posit.co/reference/random_categorical.html</loc>
@@ -3451,9 +1795,6 @@
     <loc>https://keras.posit.co/reference/reexports.html</loc>
   </url>
   <url>
-    <loc>https://keras.posit.co/reference/register_custom_object.html</loc>
-  </url>
-  <url>
     <loc>https://keras.posit.co/reference/register_keras_serializable.html</loc>
   </url>
   <url>
@@ -3472,34 +1813,13 @@
     <loc>https://keras.posit.co/reference/reset_states.html</loc>
   </url>
   <url>
-    <loc>https://keras.posit.co/reference/save_keras_model.html</loc>
-  </url>
-  <url>
     <loc>https://keras.posit.co/reference/save_model.html</loc>
   </url>
   <url>
     <loc>https://keras.posit.co/reference/save_model_config.html</loc>
   </url>
   <url>
-    <loc>https://keras.posit.co/reference/save_model_hdf5.html</loc>
-  </url>
-  <url>
-    <loc>https://keras.posit.co/reference/save_model_tf.html</loc>
-  </url>
-  <url>
     <loc>https://keras.posit.co/reference/save_model_weights.html</loc>
-  </url>
-  <url>
-    <loc>https://keras.posit.co/reference/save_model_weights_hdf5.html</loc>
-  </url>
-  <url>
-    <loc>https://keras.posit.co/reference/save_model_weights_tf.html</loc>
-  </url>
-  <url>
-    <loc>https://keras.posit.co/reference/save_text_tokenizer.html</loc>
-  </url>
-  <url>
-    <loc>https://keras.posit.co/reference/sequences_to_matrix.html</loc>
   </url>
   <url>
     <loc>https://keras.posit.co/reference/sequential_model_input_layer.html</loc>
@@ -3508,28 +1828,13 @@
     <loc>https://keras.posit.co/reference/serialize_keras_object.html</loc>
   </url>
   <url>
-    <loc>https://keras.posit.co/reference/serialize_model.html</loc>
-  </url>
-  <url>
     <loc>https://keras.posit.co/reference/set_random_seed.html</loc>
-  </url>
-  <url>
-    <loc>https://keras.posit.co/reference/set_vocabulary.html</loc>
   </url>
   <url>
     <loc>https://keras.posit.co/reference/shape.html</loc>
   </url>
   <url>
-    <loc>https://keras.posit.co/reference/skipgrams.html</loc>
-  </url>
-  <url>
     <loc>https://keras.posit.co/reference/split_dataset.html</loc>
-  </url>
-  <url>
-    <loc>https://keras.posit.co/reference/summary.keras.engine.training.Model.html</loc>
-  </url>
-  <url>
-    <loc>https://keras.posit.co/reference/summary.keras.models.model.Model.html</loc>
   </url>
   <url>
     <loc>https://keras.posit.co/reference/summary.keras.src.models.model.Model.html</loc>
@@ -3541,34 +1846,10 @@
     <loc>https://keras.posit.co/reference/text_dataset_from_directory.html</loc>
   </url>
   <url>
-    <loc>https://keras.posit.co/reference/text_hashing_trick.html</loc>
-  </url>
-  <url>
-    <loc>https://keras.posit.co/reference/text_one_hot.html</loc>
-  </url>
-  <url>
-    <loc>https://keras.posit.co/reference/text_to_word_sequence.html</loc>
-  </url>
-  <url>
-    <loc>https://keras.posit.co/reference/text_tokenizer.html</loc>
-  </url>
-  <url>
-    <loc>https://keras.posit.co/reference/texts_to_matrix.html</loc>
-  </url>
-  <url>
-    <loc>https://keras.posit.co/reference/texts_to_sequences.html</loc>
-  </url>
-  <url>
-    <loc>https://keras.posit.co/reference/texts_to_sequences_generator.html</loc>
-  </url>
-  <url>
     <loc>https://keras.posit.co/reference/time_distributed.html</loc>
   </url>
   <url>
     <loc>https://keras.posit.co/reference/timeseries_dataset_from_array.html</loc>
-  </url>
-  <url>
-    <loc>https://keras.posit.co/reference/timeseries_generator.html</loc>
   </url>
   <url>
     <loc>https://keras.posit.co/reference/to_categorical.html</loc>
@@ -3580,7 +1861,7 @@
     <loc>https://keras.posit.co/reference/unpack_x_y_sample_weight.html</loc>
   </url>
   <url>
-    <loc>https://keras.posit.co/reference/use_implementation.html</loc>
+    <loc>https://keras.posit.co/reference/use_backend.html</loc>
   </url>
   <url>
     <loc>https://keras.posit.co/reference/with_custom_object_scope.html</loc>

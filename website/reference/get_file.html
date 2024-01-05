@@ -110,8 +110,7 @@ programs <code>shasum</code> and <code>sha256sum</code> can compute the hash.</p
     <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">get_file</span><span class="op">(</span></span>
 <span>  fname <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  origin <span class="op">=</span> <span class="cn">NULL</span>,</span>
-<span>  untar <span class="op">=</span> <span class="cn">FALSE</span>,</span>
-<span>  md5_hash <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  <span class="va">...</span>,</span>
 <span>  file_hash <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  cache_subdir <span class="op">=</span> <span class="st">"datasets"</span>,</span>
 <span>  hash_algorithm <span class="op">=</span> <span class="st">"auto"</span>,</span>
@@ -133,14 +132,8 @@ If <code>NULL</code>, the name of the file at <code>origin</code> will be used.<
 <dd><p>Original URL of the file.</p></dd>
 
 
-<dt>untar</dt>
-<dd><p>Deprecated in favor of <code>extract</code> argument.
-boolean, whether the file should be decompressed</p></dd>
-
-
-<dt>md5_hash</dt>
-<dd><p>Deprecated in favor of <code>file_hash</code> argument.
-md5 hash of the file for verification</p></dd>
+<dt>...</dt>
+<dd><p>For forward/backward compatability.</p></dd>
 
 
 <dt>file_hash</dt>
@@ -174,7 +167,7 @@ The default <code>"auto"</code> corresponds to <code>c("tar", "zip")</code>.
 
 <dt>cache_dir</dt>
 <dd><p>Location to store cached files, when <code>NULL</code> it
-defaults to <code>Sys.getenv("KERAS_HOME", '~/.keras/')</code>.</p></dd>
+defaults to <code>Sys.getenv("KERAS_HOME", "~/.keras/")</code>.</p></dd>
 
 </dl></div>
     <div class="section level2">

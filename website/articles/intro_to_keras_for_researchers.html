@@ -110,7 +110,7 @@
       <img src="" class="logo" alt=""><h1>Introduction to Keras for Researchers</h1>
             
             <h4 data-toc-skip class="date">Last Modified: 2023-12-01;
-Last Rendered: 2024-01-03</h4>
+Last Rendered: 2024-01-04</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/rstudio/keras/blob/HEAD/vignettes/intro_to_keras_for_researchers.Rmd" class="external-link"><code>vignettes/intro_to_keras_for_researchers.Rmd</code></a></small>
       <div class="d-none name"><code>intro_to_keras_for_researchers.Rmd</code></div>
@@ -217,8 +217,8 @@ using some initial value:</p>
 <span><span class="va">a</span> <span class="op">&lt;-</span> <span class="va">tf</span><span class="op">$</span><span class="fu">Variable</span><span class="op">(</span><span class="va">initial_value</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">a</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">## &lt;tf.Variable 'Variable:0' shape=(2, 2) dtype=float32, numpy=</span></span>
-<span><span class="co">## array([[ 0.90574193,  0.7916686 ],</span></span>
-<span><span class="co">##        [ 0.28754202, -0.5408821 ]], dtype=float32)&gt;</span></span></code></pre>
+<span><span class="co">## array([[ 0.9057419 ,  0.7916686 ],</span></span>
+<span><span class="co">##        [ 0.28754202, -0.5408822 ]], dtype=float32)&gt;</span></span></code></pre>
 <p>You update the value of a <code>Variable</code> by using the methods
 <code>$assign(value)</code>, <code>$assign_add(increment)</code>, or
 <code>$assign_sub(decrement)</code>:</p>
@@ -269,8 +269,8 @@ this tensor as input:</p>
 <span>  <span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">dc_da</span><span class="op">)</span></span>
 <span><span class="op">}</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">## tf.Tensor(</span></span>
-<span><span class="co">## [[ 0.9969011  -0.77071446]</span></span>
-<span><span class="co">##  [ 0.23378514  0.9625516 ]], shape=(2, 2), dtype=float32)</span></span></code></pre>
+<span><span class="co">## [[ 0.9969011  -0.7707146 ]</span></span>
+<span><span class="co">##  [ 0.23378514  0.96255165]], shape=(2, 2), dtype=float32)</span></span></code></pre>
 <p>By default, variables are watched automatically, so you don’t need to
 manually <code>watch</code> them:</p>
 <div class="sourceCode" id="cb24"><pre class="downlit sourceCode r">
@@ -282,8 +282,8 @@ manually <code>watch</code> them:</p>
 <span>  <span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">dc_da</span><span class="op">)</span></span>
 <span><span class="op">}</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">## tf.Tensor(</span></span>
-<span><span class="co">## [[ 0.9969011  -0.77071446]</span></span>
-<span><span class="co">##  [ 0.23378514  0.9625516 ]], shape=(2, 2), dtype=float32)</span></span></code></pre>
+<span><span class="co">## [[ 0.9969011  -0.7707146 ]</span></span>
+<span><span class="co">##  [ 0.23378514  0.96255165]], shape=(2, 2), dtype=float32)</span></span></code></pre>
 <p>Note that you can compute higher-order derivatives by nesting
 tapes:</p>
 <div class="sourceCode" id="cb26"><pre class="downlit sourceCode r">
@@ -296,8 +296,8 @@ tapes:</p>
 <span>  <span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">d2c_da2</span><span class="op">)</span></span>
 <span><span class="op">}</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">## tf.Tensor(</span></span>
-<span><span class="co">## [[3.3447742e-03 7.1282017e-01]</span></span>
-<span><span class="co">##  [5.7464113e+00 5.5013239e-02]], shape=(2, 2), dtype=float32)</span></span></code></pre>
+<span><span class="co">## [[3.3447742e-03 7.1282005e-01]</span></span>
+<span><span class="co">##  [5.7464113e+00 5.5013180e-02]], shape=(2, 2), dtype=float32)</span></span></code></pre>
 </div>
 <div class="section level2">
 <h2 id="keras-layers">Keras layers<a class="anchor" aria-label="anchor" href="#keras-layers"></a>
@@ -438,7 +438,7 @@ before using them, if you need to.</p>
 <span>  <span class="va">optimizer</span><span class="op">$</span><span class="fu">apply_gradients</span><span class="op">(</span><span class="fu"><a href="../reference/zip_lists.html">zip_lists</a></span><span class="op">(</span><span class="va">gradients</span>, <span class="va">linear_layer</span><span class="op">$</span><span class="va">trainable_weights</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="op">}</span><span class="op">)</span></span>
 <span><span class="va">loss_value</span></span></code></pre></div>
-<pre><code><span><span class="co">## tf.Tensor(1.281973, shape=(), dtype=float32)</span></span></code></pre>
+<pre><code><span><span class="co">## tf.Tensor(1.2819729, shape=(), dtype=float32)</span></span></code></pre>
 </div>
 <div class="section level2">
 <h2 id="trainable-and-non-trainable-weights">Trainable and non-trainable weights<a class="anchor" aria-label="anchor" href="#trainable-and-non-trainable-weights"></a>
@@ -577,52 +577,52 @@ gradients when writing a training loop.</p>
 <span><span class="va">mlp</span> <span class="op">&lt;-</span> <span class="fu">SparseMLP</span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="fu">mlp</span><span class="op">(</span><span class="va">tf</span><span class="op">$</span><span class="fu">ones</span><span class="op">(</span><span class="fu"><a href="../reference/shape.html">shape</a></span><span class="op">(</span><span class="fl">10</span>, <span class="fl">10</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">## tf.Tensor(</span></span>
-<span><span class="co">## [[ 0.0388482  -0.03920118  0.01624807 -0.01361975 -0.013549    0.07107338</span></span>
-<span><span class="co">##   -0.01077365  0.05688906 -0.02838149 -0.0408462 ]</span></span>
-<span><span class="co">##  [ 0.0388482  -0.03920118  0.01624807 -0.01361975 -0.013549    0.07107338</span></span>
-<span><span class="co">##   -0.01077365  0.05688906 -0.02838149 -0.0408462 ]</span></span>
-<span><span class="co">##  [ 0.0388482  -0.03920118  0.01624807 -0.01361975 -0.013549    0.07107338</span></span>
-<span><span class="co">##   -0.01077365  0.05688906 -0.02838149 -0.0408462 ]</span></span>
-<span><span class="co">##  [ 0.0388482  -0.03920118  0.01624807 -0.01361975 -0.013549    0.07107338</span></span>
-<span><span class="co">##   -0.01077365  0.05688906 -0.02838149 -0.0408462 ]</span></span>
-<span><span class="co">##  [ 0.0388482  -0.03920118  0.01624807 -0.01361975 -0.013549    0.07107338</span></span>
-<span><span class="co">##   -0.01077365  0.05688906 -0.02838149 -0.0408462 ]</span></span>
-<span><span class="co">##  [ 0.0388482  -0.03920118  0.01624807 -0.01361975 -0.013549    0.07107338</span></span>
-<span><span class="co">##   -0.01077365  0.05688906 -0.02838149 -0.0408462 ]</span></span>
-<span><span class="co">##  [ 0.0388482  -0.03920118  0.01624807 -0.01361975 -0.013549    0.07107338</span></span>
-<span><span class="co">##   -0.01077365  0.05688906 -0.02838149 -0.0408462 ]</span></span>
-<span><span class="co">##  [ 0.0388482  -0.03920118  0.01624807 -0.01361975 -0.013549    0.07107338</span></span>
-<span><span class="co">##   -0.01077365  0.05688906 -0.02838149 -0.0408462 ]</span></span>
-<span><span class="co">##  [ 0.0388482  -0.03920118  0.01624807 -0.01361975 -0.013549    0.07107338</span></span>
-<span><span class="co">##   -0.01077365  0.05688906 -0.02838149 -0.0408462 ]</span></span>
-<span><span class="co">##  [ 0.0388482  -0.03920118  0.01624807 -0.01361975 -0.013549    0.07107338</span></span>
-<span><span class="co">##   -0.01077365  0.05688906 -0.02838149 -0.0408462 ]], shape=(10, 10), dtype=float32)</span></span></code></pre>
+<span><span class="co">## [[ 0.0388482  -0.03920118  0.01624808 -0.01361975 -0.01354899  0.07107338</span></span>
+<span><span class="co">##   -0.01077365  0.05688906 -0.02838149 -0.04084621]</span></span>
+<span><span class="co">##  [ 0.0388482  -0.03920118  0.01624808 -0.01361975 -0.01354899  0.07107338</span></span>
+<span><span class="co">##   -0.01077365  0.05688906 -0.02838149 -0.04084621]</span></span>
+<span><span class="co">##  [ 0.0388482  -0.03920118  0.01624808 -0.01361975 -0.01354899  0.07107338</span></span>
+<span><span class="co">##   -0.01077365  0.05688906 -0.02838149 -0.04084621]</span></span>
+<span><span class="co">##  [ 0.0388482  -0.03920118  0.01624808 -0.01361975 -0.01354899  0.07107338</span></span>
+<span><span class="co">##   -0.01077365  0.05688906 -0.02838149 -0.04084621]</span></span>
+<span><span class="co">##  [ 0.0388482  -0.03920118  0.01624808 -0.01361975 -0.01354899  0.07107338</span></span>
+<span><span class="co">##   -0.01077365  0.05688906 -0.02838149 -0.04084621]</span></span>
+<span><span class="co">##  [ 0.0388482  -0.03920118  0.01624808 -0.01361975 -0.01354899  0.07107338</span></span>
+<span><span class="co">##   -0.01077365  0.05688906 -0.02838149 -0.04084621]</span></span>
+<span><span class="co">##  [ 0.0388482  -0.03920118  0.01624808 -0.01361975 -0.01354899  0.07107338</span></span>
+<span><span class="co">##   -0.01077365  0.05688906 -0.02838149 -0.04084621]</span></span>
+<span><span class="co">##  [ 0.0388482  -0.03920118  0.01624808 -0.01361975 -0.01354899  0.07107338</span></span>
+<span><span class="co">##   -0.01077365  0.05688906 -0.02838149 -0.04084621]</span></span>
+<span><span class="co">##  [ 0.0388482  -0.03920118  0.01624808 -0.01361975 -0.01354899  0.07107338</span></span>
+<span><span class="co">##   -0.01077365  0.05688906 -0.02838149 -0.04084621]</span></span>
+<span><span class="co">##  [ 0.0388482  -0.03920118  0.01624808 -0.01361975 -0.01354899  0.07107338</span></span>
+<span><span class="co">##   -0.01077365  0.05688906 -0.02838149 -0.04084621]], shape=(10, 10), dtype=float32)</span></span></code></pre>
 <div class="sourceCode" id="cb49"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/length.html" class="external-link">length</a></span><span class="op">(</span><span class="va">mlp</span><span class="op">$</span><span class="va">losses</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">## [1] 1</span></span></code></pre>
 <div class="sourceCode" id="cb51"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu">mlp</span><span class="op">(</span><span class="va">tf</span><span class="op">$</span><span class="fu">ones</span><span class="op">(</span><span class="fu"><a href="../reference/shape.html">shape</a></span><span class="op">(</span><span class="fl">10</span>, <span class="fl">10</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">## tf.Tensor(</span></span>
-<span><span class="co">## [[ 0.0388482  -0.03920118  0.01624807 -0.01361975 -0.013549    0.07107338</span></span>
-<span><span class="co">##   -0.01077365  0.05688906 -0.02838149 -0.0408462 ]</span></span>
-<span><span class="co">##  [ 0.0388482  -0.03920118  0.01624807 -0.01361975 -0.013549    0.07107338</span></span>
-<span><span class="co">##   -0.01077365  0.05688906 -0.02838149 -0.0408462 ]</span></span>
-<span><span class="co">##  [ 0.0388482  -0.03920118  0.01624807 -0.01361975 -0.013549    0.07107338</span></span>
-<span><span class="co">##   -0.01077365  0.05688906 -0.02838149 -0.0408462 ]</span></span>
-<span><span class="co">##  [ 0.0388482  -0.03920118  0.01624807 -0.01361975 -0.013549    0.07107338</span></span>
-<span><span class="co">##   -0.01077365  0.05688906 -0.02838149 -0.0408462 ]</span></span>
-<span><span class="co">##  [ 0.0388482  -0.03920118  0.01624807 -0.01361975 -0.013549    0.07107338</span></span>
-<span><span class="co">##   -0.01077365  0.05688906 -0.02838149 -0.0408462 ]</span></span>
-<span><span class="co">##  [ 0.0388482  -0.03920118  0.01624807 -0.01361975 -0.013549    0.07107338</span></span>
-<span><span class="co">##   -0.01077365  0.05688906 -0.02838149 -0.0408462 ]</span></span>
-<span><span class="co">##  [ 0.0388482  -0.03920118  0.01624807 -0.01361975 -0.013549    0.07107338</span></span>
-<span><span class="co">##   -0.01077365  0.05688906 -0.02838149 -0.0408462 ]</span></span>
-<span><span class="co">##  [ 0.0388482  -0.03920118  0.01624807 -0.01361975 -0.013549    0.07107338</span></span>
-<span><span class="co">##   -0.01077365  0.05688906 -0.02838149 -0.0408462 ]</span></span>
-<span><span class="co">##  [ 0.0388482  -0.03920118  0.01624807 -0.01361975 -0.013549    0.07107338</span></span>
-<span><span class="co">##   -0.01077365  0.05688906 -0.02838149 -0.0408462 ]</span></span>
-<span><span class="co">##  [ 0.0388482  -0.03920118  0.01624807 -0.01361975 -0.013549    0.07107338</span></span>
-<span><span class="co">##   -0.01077365  0.05688906 -0.02838149 -0.0408462 ]], shape=(10, 10), dtype=float32)</span></span></code></pre>
+<span><span class="co">## [[ 0.0388482  -0.03920118  0.01624808 -0.01361975 -0.01354899  0.07107338</span></span>
+<span><span class="co">##   -0.01077365  0.05688906 -0.02838149 -0.04084621]</span></span>
+<span><span class="co">##  [ 0.0388482  -0.03920118  0.01624808 -0.01361975 -0.01354899  0.07107338</span></span>
+<span><span class="co">##   -0.01077365  0.05688906 -0.02838149 -0.04084621]</span></span>
+<span><span class="co">##  [ 0.0388482  -0.03920118  0.01624808 -0.01361975 -0.01354899  0.07107338</span></span>
+<span><span class="co">##   -0.01077365  0.05688906 -0.02838149 -0.04084621]</span></span>
+<span><span class="co">##  [ 0.0388482  -0.03920118  0.01624808 -0.01361975 -0.01354899  0.07107338</span></span>
+<span><span class="co">##   -0.01077365  0.05688906 -0.02838149 -0.04084621]</span></span>
+<span><span class="co">##  [ 0.0388482  -0.03920118  0.01624808 -0.01361975 -0.01354899  0.07107338</span></span>
+<span><span class="co">##   -0.01077365  0.05688906 -0.02838149 -0.04084621]</span></span>
+<span><span class="co">##  [ 0.0388482  -0.03920118  0.01624808 -0.01361975 -0.01354899  0.07107338</span></span>
+<span><span class="co">##   -0.01077365  0.05688906 -0.02838149 -0.04084621]</span></span>
+<span><span class="co">##  [ 0.0388482  -0.03920118  0.01624808 -0.01361975 -0.01354899  0.07107338</span></span>
+<span><span class="co">##   -0.01077365  0.05688906 -0.02838149 -0.04084621]</span></span>
+<span><span class="co">##  [ 0.0388482  -0.03920118  0.01624808 -0.01361975 -0.01354899  0.07107338</span></span>
+<span><span class="co">##   -0.01077365  0.05688906 -0.02838149 -0.04084621]</span></span>
+<span><span class="co">##  [ 0.0388482  -0.03920118  0.01624808 -0.01361975 -0.01354899  0.07107338</span></span>
+<span><span class="co">##   -0.01077365  0.05688906 -0.02838149 -0.04084621]</span></span>
+<span><span class="co">##  [ 0.0388482  -0.03920118  0.01624808 -0.01361975 -0.01354899  0.07107338</span></span>
+<span><span class="co">##   -0.01077365  0.05688906 -0.02838149 -0.04084621]], shape=(10, 10), dtype=float32)</span></span></code></pre>
 <div class="sourceCode" id="cb53"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/length.html" class="external-link">length</a></span><span class="op">(</span><span class="va">mlp</span><span class="op">$</span><span class="va">losses</span><span class="op">)</span>  <span class="co"># No accumulation.</span></span></code></pre></div>
 <pre><code><span><span class="co">## [1] 1</span></span></code></pre>
@@ -844,14 +844,14 @@ wrapping it in a <code>tf.function</code> decorator.</p>
 <span>    <span class="fu"><a href="https://rdrr.io/r/base/cat.html" class="external-link">cat</a></span><span class="op">(</span><span class="st">"Loss:"</span>, <span class="fu"><a href="https://rdrr.io/r/base/numeric.html" class="external-link">as.numeric</a></span><span class="op">(</span><span class="va">loss</span><span class="op">)</span>, <span class="st">"\n"</span><span class="op">)</span></span>
 <span><span class="op">}</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">## Loss: 0.551749</span></span>
-<span><span class="co">## Loss: 0.2131136</span></span>
+<span><span class="co">## Loss: 0.2131135</span></span>
 <span><span class="co">## Loss: 0.2765952</span></span>
 <span><span class="co">## Loss: 0.1296219</span></span>
 <span><span class="co">## Loss: 0.2657076</span></span>
 <span><span class="co">## Loss: 0.2683381</span></span>
 <span><span class="co">## Loss: 0.1570166</span></span>
 <span><span class="co">## Loss: 0.3139241</span></span>
-<span><span class="co">## Loss: 0.0898185</span></span></code></pre>
+<span><span class="co">## Loss: 0.08981849</span></span></code></pre>
 </div>
 <div class="section level2">
 <h2 id="training-mode-inference-mode">Training mode &amp; inference mode<a class="anchor" aria-label="anchor" href="#training-mode-inference-mode"></a>
@@ -990,20 +990,20 @@ the MNIST example above.</p>
 <span><span class="co"># Train the model with the dataset for 2 epochs.</span></span>
 <span><span class="va">model</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://generics.r-lib.org/reference/fit.html" class="external-link">fit</a></span><span class="op">(</span><span class="va">dataset</span>, epochs<span class="op">=</span><span class="fl">2</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">## Epoch 1/2</span></span>
-<span><span class="co">## 938/938 - 1s - 1ms/step - loss: 0.3958 - sparse_categorical_accuracy: 0.8866</span></span>
+<span><span class="co">## 938/938 - 3s - 3ms/step - loss: 0.3960 - sparse_categorical_accuracy: 0.8866</span></span>
 <span><span class="co">## Epoch 2/2</span></span>
-<span><span class="co">## 938/938 - 1s - 591us/step - loss: 0.1888 - sparse_categorical_accuracy: 0.9443</span></span></code></pre>
+<span><span class="co">## 938/938 - 1s - 988us/step - loss: 0.1886 - sparse_categorical_accuracy: 0.9444</span></span></code></pre>
 <div class="sourceCode" id="cb73"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">predictions</span> <span class="op">&lt;-</span> <span class="va">model</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://rdrr.io/r/stats/predict.html" class="external-link">predict</a></span><span class="op">(</span><span class="va">dataset</span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">## 938/938 - 0s - 413us/step</span></span></code></pre>
+<pre><code><span><span class="co">## 938/938 - 1s - 963us/step</span></span></code></pre>
 <div class="sourceCode" id="cb75"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">model</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://rdrr.io/pkg/tensorflow/man/evaluate.html" class="external-link">evaluate</a></span><span class="op">(</span><span class="va">dataset</span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">## 938/938 - 0s - 402us/step - loss: 0.1763 - sparse_categorical_accuracy: 0.9454</span></span></code></pre>
+<pre><code><span><span class="co">## 938/938 - 1s - 1ms/step - loss: 0.1764 - sparse_categorical_accuracy: 0.9452</span></span></code></pre>
 <pre><code><span><span class="co">## $loss</span></span>
-<span><span class="co">## [1] 0.1763445</span></span>
+<span><span class="co">## [1] 0.1764244</span></span>
 <span><span class="co">##</span></span>
 <span><span class="co">## $sparse_categorical_accuracy</span></span>
-<span><span class="co">## [1] 0.9454167</span></span></code></pre>
+<span><span class="co">## [1] 0.94515</span></span></code></pre>
 <p>You can always subclass the <code>Model</code> class (it works
 exactly like subclassing <code>Layer</code>) if you want to leverage
 built-in training loops for your OO models. Just override the
@@ -1060,9 +1060,9 @@ guide</a>.</p>
 <span><span class="va">model</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://generics.r-lib.org/reference/compile.html" class="external-link">compile</a></span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="va">model</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://generics.r-lib.org/reference/fit.html" class="external-link">fit</a></span><span class="op">(</span><span class="va">dataset</span>, epochs<span class="op">=</span><span class="fl">2</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">## Epoch 1/2</span></span>
-<span><span class="co">## 938/938 - 1s - 923us/step - loss: 0.3869 - sparse_categorical_accuracy: 0.8924</span></span>
+<span><span class="co">## 938/938 - 2s - 2ms/step - loss: 0.3869 - sparse_categorical_accuracy: 0.8924</span></span>
 <span><span class="co">## Epoch 2/2</span></span>
-<span><span class="co">## 938/938 - 1s - 567us/step - loss: 0.2163 - sparse_categorical_accuracy: 0.9370</span></span></code></pre>
+<span><span class="co">## 938/938 - 1s - 946us/step - loss: 0.2163 - sparse_categorical_accuracy: 0.9370</span></span></code></pre>
 </div>
 <div class="section level2">
 <h2 id="end-to-end-experiment-example-1-variational-autoencoders-">End-to-end experiment example 1: variational autoencoders.<a class="anchor" aria-label="anchor" href="#end-to-end-experiment-example-1-variational-autoencoders-"></a>
@@ -1227,10 +1227,10 @@ function.</p>
 <span><span class="co">## Step: 400 Loss: 0.08493649</span></span>
 <span><span class="co">## Step: 500 Loss: 0.08171404</span></span>
 <span><span class="co">## Step: 600 Loss: 0.07926706</span></span>
-<span><span class="co">## Step: 700 Loss: 0.07790598</span></span>
-<span><span class="co">## Step: 800 Loss: 0.07670418</span></span>
+<span><span class="co">## Step: 700 Loss: 0.07790599</span></span>
+<span><span class="co">## Step: 800 Loss: 0.07670419</span></span>
 <span><span class="co">## Step: 900 Loss: 0.07570736</span></span>
-<span><span class="co">## Step: 1000 Loss: 0.07476592</span></span></code></pre>
+<span><span class="co">## Step: 1000 Loss: 0.07476593</span></span></code></pre>
 <p>As you can see, building and training this type of model in Keras is
 quick and painless.</p>
 </div>
@@ -1357,16 +1357,16 @@ to minimize the final classification loss</li>
 <span>    <span class="kw">break</span></span>
 <span>  <span class="op">}</span></span>
 <span><span class="op">}</span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">## Step: 100 Loss: 2.536758</span></span>
-<span><span class="co">## Step: 200 Loss: 2.236468</span></span>
-<span><span class="co">## Step: 300 Loss: 2.119413</span></span>
-<span><span class="co">## Step: 400 Loss: 2.040315</span></span>
-<span><span class="co">## Step: 500 Loss: 1.949096</span></span>
-<span><span class="co">## Step: 600 Loss: 1.859365</span></span>
-<span><span class="co">## Step: 700 Loss: 1.845711</span></span>
-<span><span class="co">## Step: 800 Loss: 1.820584</span></span>
-<span><span class="co">## Step: 900 Loss: 1.771324</span></span>
-<span><span class="co">## Step: 1000 Loss: 1.730642</span></span></code></pre>
+<pre><code><span><span class="co">## Step: 100 Loss: 2.536778</span></span>
+<span><span class="co">## Step: 200 Loss: 2.236472</span></span>
+<span><span class="co">## Step: 300 Loss: 2.119417</span></span>
+<span><span class="co">## Step: 400 Loss: 2.040341</span></span>
+<span><span class="co">## Step: 500 Loss: 1.949125</span></span>
+<span><span class="co">## Step: 600 Loss: 1.859384</span></span>
+<span><span class="co">## Step: 700 Loss: 1.845726</span></span>
+<span><span class="co">## Step: 800 Loss: 1.820594</span></span>
+<span><span class="co">## Step: 900 Loss: 1.771334</span></span>
+<span><span class="co">## Step: 1000 Loss: 1.730648</span></span></code></pre>
 <p>Implementing arbitrary research ideas with Keras is straightforward
 and highly productive. Imagine trying out 25 ideas per day (20 minutes
 per experiment on average)!</p>

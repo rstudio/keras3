@@ -476,7 +476,7 @@ model %>% fit(random_normal(c(2, 3)), random_normal(c(2, 3)), epochs = 1)
 ```
 
 ```
-## 1/1 - 0s - 143ms/step - loss: 1.8971
+## 1/1 - 0s - 130ms/step - loss: 1.8971
 ```
 
 ```r
@@ -488,7 +488,7 @@ model %>% fit(random_normal(c(2, 3)), random_normal(c(2, 3)), epochs = 1)
 ```
 
 ```
-## 1/1 - 0s - 100ms/step - loss: -3.3344e-03
+## 1/1 - 0s - 105ms/step - loss: -3.3344e-03
 ```
 
 ## You can optionally enable serialization on your layers
