@@ -22,26 +22,26 @@ navbar:
   bg: primary
   type: inverse
   left:
-    - text: "Home"
-      href: index.html
-
     - text: "Getting Started"
-      menu:
-        - text: "Introduction to Keras for engineers"
-          href: articles/intro_to_keras_for_engineers.html
-        - text: "Tutorials"
-        - text: "Getting Started"
-          href: articles/getting_started.html
-        - text: "Basic Classification"
-          href: articles/tutorial_basic_classification.html
-        - text: "Text Classification"
-          href: articles/tutorial_basic_text_classification.html
-        - text: "Basic Regression"
-          href: articles/tutorial_basic_regression.html
-        - text: "Overfitting and Underfitting"
-          href: articles/tutorial_overfit_underfit.html
-        - text: "Save and Restore Models"
-          href: articles/tutorial_save_and_restore.html
+      href: articles/getting_started.html
+
+    # - text: "Getting Started"
+    #   menu:
+    #     - text: "Introduction to Keras for engineers"
+    #       href: articles/intro_to_keras_for_engineers.html
+    #     - text: "Tutorials"
+    #     - text: "Getting Started"
+    #       href: articles/getting_started.html
+    #     - text: "Basic Classification"
+    #       href: articles/tutorial_basic_classification.html
+    #     - text: "Text Classification"
+    #       href: articles/tutorial_basic_text_classification.html
+    #     - text: "Basic Regression"
+    #       href: articles/tutorial_basic_regression.html
+    #     - text: "Overfitting and Underfitting"
+    #       href: articles/tutorial_overfit_underfit.html
+    #     - text: "Save and Restore Models"
+    #       href: articles/tutorial_save_and_restore.html
 
     - text: "Guides"
       menu:
