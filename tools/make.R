@@ -99,6 +99,8 @@ fs::dir_walk("man-src", type = "directory", recurse = TRUE,
 #      (in other places? or here still?). Maybe
 #      we should consistently attach a `endpoint` attr?
 #
+# TODO: op_argmax() - returns a 0-based index. convert to 1-based?
+#
 # TODO: use `as_activation` attr in all layers.
 #
 # TODO: tether application process_utils

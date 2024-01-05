@@ -186,6 +186,8 @@ knit_vignette <- function(input, ..., output_dir) {
   # message("Last modified: ", last_modified_date)
   fm$date <- sprintf("Last Modified: %s; Last Rendered: %s",
                      last_modified_date, format(Sys.Date()))
+  if(!length(fm$date))
+    fm$date <- NULL
   # fm$date <- format(Sys.Date())
   vignette <- glue::glue_data(
     list(title = fm$title),
