@@ -786,7 +786,7 @@ is_mac_arm64 <- function() {
 #' @param show_shapes whether to display shape information.
 #' @param show_dtype whether to display layer dtypes.
 #' @param show_layer_names whether to display layer names.
-#' @param ... passed on to `keras$utils$plot_model()`. Used for forward and
+#' @param ... passed on to Python `keras.utils.model_to_dot()`. Used for forward and
 #'   backward compatibility.
 #' @param rankdir a string specifying the format of the plot: `'TB'` creates a
 #'   vertical plot; `'LR'` creates a horizontal plot. (argument passed to PyDot)
@@ -806,41 +806,53 @@ is_mac_arm64 <- function() {
 #'
 #' @return Nothing, called for it's side effects.
 #'
-#' @section Raises: ValueError: if `plot_model` is called before the model is
+#' @section Raises: ValueError: if `plot(model)` is called before the model is
 #'   built, unless a `input_shape = ` argument was supplied to
 #'   `keras_model_sequential()`.
 #'
 #' @section Requirements:
 #'   This function requires pydot and graphviz.
 #'   `pydot` is by default installed by `install_keras()`, but if you installed
-#'   keras by other means, you can install pydot directly with :
-#'   ````
+#'   keras by other means, you can install `pydot` directly with :
+#'   ````r
 #'   reticulate::py_install("pydot", pip = TRUE)
 #'   ````
-#'   In a conda environment, you can install graphviz with:
+#'   You can install graphviz directly from here:
+#'   <https://graphviz.gitlab.io/download/>
+#'
+#'   On most Linux platforms, can install graphviz via the package manager.
+#'   For example, on Ubuntu/Debian you can install with
+#'   ```sh
+#'   sudo apt install graphviz
 #'   ```
+#'   In a conda environment, you can install graphviz with:
+#'   ```r
 #'   reticulate::conda_install(packages = "graphviz")
 #'   # Restart the R session after install.
 #'   ```
-#'   Otherwise you can install graphviz from here:
-#'   <https://graphviz.gitlab.io/download/>
 #'
 #' @export
 plot.keras.src.models.model.Model <-
 function(x,
          show_shapes = FALSE,
          show_dtype = FALSE,
-         show_layer_names = TRUE,
+         show_layer_names = FALSE,
          ...,
          rankdir = "TB",
          expand_nested = FALSE,
          dpi = 200,
          layer_range = NULL,
          show_layer_activations = FALSE,
+         show_trainable = NA,
          to_file = NULL) {
 
-  args <- capture_args2(ignore = c("x", "to_file"))
+  args <- capture_args2(ignore = c("x", "to_file", "show_trainable"),
+                        force = c("show_layer_names"))
   args$model <- x
+
+  if(is.na(show_trainable))
+    show_trainable <- x$built && as.logical(length(x$non_trainable_weights))
+  args$show_trainable <- show_trainable
 
   if (is.null(to_file)) {
 

@@ -8,13 +8,14 @@
   x,
   show_shapes = FALSE,
   show_dtype = FALSE,
-  show_layer_names = TRUE,
+  show_layer_names = FALSE,
   ...,
   rankdir = "TB",
   expand_nested = FALSE,
   dpi = 200,
   layer_range = NULL,
   show_layer_activations = FALSE,
+  show_trainable = NA,
   to_file = NULL
 )
 }
@@ -27,7 +28,7 @@
 
 \item{show_layer_names}{whether to display layer names.}
 
-\item{...}{passed on to \code{keras$utils$plot_model()}. Used for forward and
+\item{...}{passed on to Python \code{keras.utils.model_to_dot()}. Used for forward and
 backward compatibility.}
 
 \item{rankdir}{a string specifying the format of the plot: \code{'TB'} creates a
@@ -60,7 +61,7 @@ Nothing, called for it's side effects.
 Plot a Keras model
 }
 \section{Raises}{
- ValueError: if \code{plot_model} is called before the model is
+ ValueError: if \code{plot(model)} is called before the model is
 built, unless a \verb{input_shape = } argument was supplied to
 \code{keras_model_sequential()}.
 }
@@ -69,18 +70,24 @@ built, unless a \verb{input_shape = } argument was supplied to
 
 This function requires pydot and graphviz.
 \code{pydot} is by default installed by \code{install_keras()}, but if you installed
-keras by other means, you can install pydot directly with :
+keras by other means, you can install \code{pydot} directly with :
 
-\if{html}{\out{<div class="sourceCode">}}\preformatted{reticulate::py_install("pydot", pip = TRUE)
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{reticulate::py_install("pydot", pip = TRUE)
+}\if{html}{\out{</div>}}
+
+You can install graphviz directly from here:
+\url{https://graphviz.gitlab.io/download/}
+
+On most Linux platforms, can install graphviz via the package manager.
+For example, on Ubuntu/Debian you can install with
+
+\if{html}{\out{<div class="sourceCode sh">}}\preformatted{sudo apt install graphviz
 }\if{html}{\out{</div>}}
 
 In a conda environment, you can install graphviz with:
 
-\if{html}{\out{<div class="sourceCode">}}\preformatted{reticulate::conda_install(packages = "graphviz")
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{reticulate::conda_install(packages = "graphviz")
 # Restart the R session after install.
 }\if{html}{\out{</div>}}
-
-Otherwise you can install graphviz from here:
-\url{https://graphviz.gitlab.io/download/}
 }
 
