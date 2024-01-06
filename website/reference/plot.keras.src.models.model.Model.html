@@ -78,13 +78,14 @@
 <span>  <span class="va">x</span>,</span>
 <span>  show_shapes <span class="op">=</span> <span class="cn">FALSE</span>,</span>
 <span>  show_dtype <span class="op">=</span> <span class="cn">FALSE</span>,</span>
-<span>  show_layer_names <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>  show_layer_names <span class="op">=</span> <span class="cn">FALSE</span>,</span>
 <span>  <span class="va">...</span>,</span>
 <span>  rankdir <span class="op">=</span> <span class="st">"TB"</span>,</span>
 <span>  expand_nested <span class="op">=</span> <span class="cn">FALSE</span>,</span>
 <span>  dpi <span class="op">=</span> <span class="fl">200</span>,</span>
 <span>  layer_range <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  show_layer_activations <span class="op">=</span> <span class="cn">FALSE</span>,</span>
+<span>  show_trainable <span class="op">=</span> <span class="cn">NA</span>,</span>
 <span>  to_file <span class="op">=</span> <span class="cn">NULL</span></span>
 <span><span class="op">)</span></span></code></pre></div>
     </div>
@@ -108,7 +109,7 @@
 
 
 <dt>...</dt>
-<dd><p>passed on to <code>keras$utils$plot_model()</code>. Used for forward and
+<dd><p>passed on to Python <code>keras.utils.model_to_dot()</code>. Used for forward and
 backward compatibility.</p></dd>
 
 
@@ -155,7 +156,7 @@ model is drawn on the default graphics device. Otherwise, a file is saved.</p></
     </div>
     <div class="section level2">
     <h2 id="raises">Raises<a class="anchor" aria-label="anchor" href="#raises"></a></h2>
-    <p>ValueError: if <code>plot_model</code> is called before the model is
+    <p>ValueError: if <code>plot(model)</code> is called before the model is
 built, unless a <code>input_shape = </code> argument was supplied to
 <code><a href="keras_model_sequential.html">keras_model_sequential()</a></code>.</p>
     </div>
@@ -165,13 +166,16 @@ built, unless a <code>input_shape = </code> argument was supplied to
 
 <p>This function requires pydot and graphviz.
 <code>pydot</code> is by default installed by <code><a href="install_keras.html">install_keras()</a></code>, but if you installed
-tensorflow by other means, you can install pydot directly with :</p>
-<p></p><div class="sourceCode"><pre><code><span id="cb1-1"><a href="#cb1-1" tabindex="-1"></a>reticulate<span class="sc">::</span><span class="fu">py_install</span>(<span class="st">"pydot"</span>, <span class="at">pip =</span> <span class="cn">TRUE</span>)</span></code></pre><p></p></div>
-<p>In a conda environment, you can install graphviz with:</p>
-<p></p><div class="sourceCode"><pre><code><span id="cb1-1"><a href="#cb1-1" tabindex="-1"></a>reticulate<span class="sc">::</span><span class="fu">conda_install</span>(<span class="at">packages =</span> <span class="st">"graphviz"</span>)</span>
-<span id="cb1-2"><a href="#cb1-2" tabindex="-1"></a><span class="co"># Restart the R session after install.</span></span></code></pre><p></p></div>
-<p>Otherwise you can install graphviz from here:
+keras by other means, you can install <code>pydot</code> directly with :</p>
+<p></p><div class="sourceCode r"><pre><code><span><span class="fu">reticulate</span><span class="fu">::</span><span class="fu"><a href="https://rstudio.github.io/reticulate/reference/py_install.html" class="external-link">py_install</a></span><span class="op">(</span><span class="st">"pydot"</span>, pip <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code></pre><p></p></div>
+<p>You can install graphviz directly from here:
 <a href="https://graphviz.gitlab.io/download/" class="external-link">https://graphviz.gitlab.io/download/</a></p>
+<p>On most Linux platforms, can install graphviz via the package manager.
+For example, on Ubuntu/Debian you can install with</p>
+<p></p><div class="sourceCode sh"><pre><code><span id="cb1-1"><a href="#cb1-1" tabindex="-1"></a><span class="fu">sudo</span> apt install graphviz</span></code></pre><p></p></div>
+<p>In a conda environment, you can install graphviz with:</p>
+<p></p><div class="sourceCode r"><pre><code><span><span class="fu">reticulate</span><span class="fu">::</span><span class="fu"><a href="https://rstudio.github.io/reticulate/reference/conda-tools.html" class="external-link">conda_install</a></span><span class="op">(</span>packages <span class="op">=</span> <span class="st">"graphviz"</span><span class="op">)</span></span>
+<span><span class="co"># Restart the R session after install.</span></span></code></pre><p></p></div>
     </div>
 
   </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>

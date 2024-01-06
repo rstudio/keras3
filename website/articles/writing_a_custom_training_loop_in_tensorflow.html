@@ -96,8 +96,6 @@
   <main id="main" class="col-md-9"><div class="page-header">
       <img src="" class="logo" alt=""><h1>Writing a training loop from scratch in TensorFlow</h1>
             
-            <h4 data-toc-skip class="date">Last Modified: 2024-01-03;
-Last Rendered: 2024-01-04</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/rstudio/keras/blob/HEAD/vignettes/writing_a_custom_training_loop_in_tensorflow.Rmd" class="external-link"><code>vignettes/writing_a_custom_training_loop_in_tensorflow.Rmd</code></a></small>
       <div class="d-none name"><code>writing_a_custom_training_loop_in_tensorflow.Rmd</code></div>
@@ -343,7 +341,7 @@ at the end of each epoch:</p>
 <span><span class="co">## Validation acc: 0.8365</span></span></code></pre>
 <div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/Sys.time.html" class="external-link">Sys.time</a></span><span class="op">(</span><span class="op">)</span> <span class="op">-</span> <span class="va">time</span></span></code></pre></div>
-<pre><code><span><span class="co">## Time difference of 21.9564 secs</span></span></code></pre>
+<pre><code><span><span class="co">## Time difference of 22.96507 secs</span></span></code></pre>
 </div>
 <div class="section level2">
 <h2 id="speeding-up-your-training-step-with-tf-function">Speeding-up your training step with <code>tf.function</code><a class="anchor" aria-label="anchor" href="#speeding-up-your-training-step-with-tf-function"></a>
@@ -428,7 +426,7 @@ step:</p>
 <span><span class="co">## Validation acc: 0.8819</span></span></code></pre>
 <div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/Sys.time.html" class="external-link">Sys.time</a></span><span class="op">(</span><span class="op">)</span> <span class="op">-</span> <span class="va">time</span></span></code></pre></div>
-<pre><code><span><span class="co">## Time difference of 2.415772 secs</span></span></code></pre>
+<pre><code><span><span class="co">## Time difference of 2.510704 secs</span></span></code></pre>
 <p>Much faster, isn’t it?</p>
 </div>
 <div class="section level2">

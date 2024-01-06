@@ -247,9 +247,9 @@ model:</p>
 <span><span class="co">## <span style="font-weight: bold;"> Non-trainable params: </span><span style="color: #00AF00;">0</span> (0.00 B)</span></span></code></pre>
 <div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">model</span><span class="op">)</span></span></code></pre></div>
-<p><img src="getting_started/unnamed-chunk-8-1.png"></p>
-<p>Next, compile the model with appropriate loss function, optimizer,
-and metrics:</p>
+<p><img src="getting_started/unnamed-chunk-8-1.png" width="145" style="display: block; margin: auto;">
+Next, compile the model with appropriate loss function, optimizer, and
+metrics:</p>
 <div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">model</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://generics.r-lib.org/reference/compile.html" class="external-link">compile</a></span><span class="op">(</span></span>
 <span>  loss <span class="op">=</span> <span class="st">'categorical_crossentropy'</span>,</span>
@@ -278,19 +278,19 @@ includes loss and accuracy metrics which we can plot:</p>
 <p>Evaluate the model’s performance on the test data:</p>
 <div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">model</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://rdrr.io/pkg/tensorflow/man/evaluate.html" class="external-link">evaluate</a></span><span class="op">(</span><span class="va">x_test</span>, <span class="va">y_test</span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">## 313/313 - 0s - 685us/step - accuracy: 0.9823 - loss: 0.0924</span></span></code></pre>
+<pre><code><span><span class="co">## 313/313 - 1s - 2ms/step - accuracy: 0.9826 - loss: 0.0938</span></span></code></pre>
 <pre><code><span><span class="co">## $accuracy</span></span>
-<span><span class="co">## [1] 0.9823</span></span>
+<span><span class="co">## [1] 0.9826</span></span>
 <span><span class="co">##</span></span>
 <span><span class="co">## $loss</span></span>
-<span><span class="co">## [1] 0.09239902</span></span></code></pre>
+<span><span class="co">## [1] 0.09379555</span></span></code></pre>
 <p>Generate predictions on new data:</p>
 <div class="sourceCode" id="cb16"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">probs</span> <span class="op">&lt;-</span> <span class="va">model</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://rdrr.io/r/stats/predict.html" class="external-link">predict</a></span><span class="op">(</span><span class="va">x_test</span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">## 313/313 - 0s - 777us/step</span></span></code></pre>
+<pre><code><span><span class="co">## 313/313 - 0s - 1ms/step</span></span></code></pre>
 <div class="sourceCode" id="cb18"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/maxCol.html" class="external-link">max.col</a></span><span class="op">(</span><span class="va">probs</span><span class="op">)</span> <span class="op">-</span> <span class="fl">1L</span></span></code></pre></div>
-<pre><code><span><span class="co">##   [1] 7 2 1 0 4 1 4 9 6 9 0 6 9 0 1 5 9 7 3 4 9 6 6 5 4 0 7 4 0 1 3 1 3 4 7</span></span>
+<pre><code><span><span class="co">##   [1] 7 2 1 0 4 1 4 9 5 9 0 6 9 0 1 5 9 7 3 4 9 6 6 5 4 0 7 4 0 1 3 1 3 4 7</span></span>
 <span><span class="co">##  [36] 2 7 1 2 1 1 7 4 2 3 5 1 2 4 4 6 3 5 5 6 0 4 1 9 5 7 8 9 3 7 4 6 4 3 0</span></span>
 <span><span class="co">##  [71] 7 0 2 9 1 7 3 2 9 7 7 6 2 7 8 4 7 3 6 1 3 6 9 3 1 4 1 7 6 9</span></span>
 <span><span class="co">##  [ reached getOption("max.print") -- omitted 9900 entries ]</span></span></code></pre>
