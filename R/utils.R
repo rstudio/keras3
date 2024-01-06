@@ -694,12 +694,9 @@ capture_args3 <-
 
   # apply modifier functions. e.g., as_nullable_integer
   nms_to_modify <- intersect(names(args), names(modifiers))
-  for (nm in nms_to_modify) {
-
-
+  for (name in nms_to_modify)
     # list() so if modifier returns NULL, don't remove the arg
-    args[nm] <- list(modifiers[[nm]](val))
-  }
+    args[name] <- list(modifiers[[name]](args[[name]]))
 
   args
 }

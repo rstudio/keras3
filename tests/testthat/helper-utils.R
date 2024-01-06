@@ -82,8 +82,9 @@ test_succeeds <- function(desc, expr, required_version = NULL) {
     local_output_sink(nullfile())
   }
 
-  eval_tidy(rlang::expr(test_that({{desc}}, expect_no_error( {{expr}} ))),
-            env = parent.frame())
+  rlang::eval_tidy(
+    rlang::expr(test_that({{desc}}, expect_no_error( {{expr}} ))),
+    env = parent.frame())
 
 }
 
