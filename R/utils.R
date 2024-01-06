@@ -814,7 +814,7 @@ is_mac_arm64 <- function() {
 #' @section Requirements:
 #'   This function requires pydot and graphviz.
 #'   `pydot` is by default installed by `install_keras()`, but if you installed
-#'   tensorflow by other means, you can install pydot directly with :
+#'   keras by other means, you can install pydot directly with :
 #'   ````
 #'   reticulate::py_install("pydot", pip = TRUE)
 #'   ````
@@ -839,32 +839,60 @@ function(x,
          layer_range = NULL,
          show_layer_activations = FALSE,
          to_file = NULL) {
-  args <- capture_args(match.call(), ignore = "x")
+
+  args <- capture_args2(ignore = c("x", "to_file"))
   args$model <- x
+
   if (is.null(to_file)) {
-    args$to_file <-
-      tempfile(paste0("keras_", x$name), fileext = ".png") # svg? render dot directly using grViz?
-    on.exit(unlink(args$to_file), add = TRUE)
+
+    if (isTRUE(getOption('knitr.in.progress'))) {
+
+      options <- knitr::opts_current$get()
+      plot_counter <- asNamespace("knitr")$plot_counter
+      number <- plot_counter()
+
+      file <- knitr::fig_path(
+        suffix  = options$dev %||% ".png",
+        options = options,
+        number  = number
+      )
+
+      dir.create(dirname(file), recursive = TRUE, showWarnings = FALSE)
+      # args$dpi <- args$dpi %||% options$dpi
+
+    } else {
+
+      file <- tempfile(paste0("keras_", x$name), fileext = ".png")
+      on.exit(unlink(file), add = TRUE)
+
+    }
+  } else {
+    file <- to_file
   }
 
-
-  tryCatch(
-    do.call(keras$utils$plot_model, args),
+  tryCatch({
+    dot <- do.call(keras$utils$model_to_dot, args)
+    dot$write(file, format = tools::file_ext(file))
+    },
     error = function(e) {
-      message("See ?keras3::plot.keras.src.models.model.Model for ",
-              " instructions on how to install graphviz and pydot")
+      message("See ?keras3::plot.keras.src.models.model.Model for",
+              " instructions on how to install graphviz and pydot.")
       e$call <- sys.call(1)
       stop(e)
     }
   )
-  if(!is.null(to_file))
+
+  if (!is.null(to_file))
     return(invisible())
 
-  img <- png::readPNG(args$to_file, native = TRUE)
+  if (isTRUE(getOption('knitr.in.progress')))
+    return(knitr::include_graphics(file, dpi = dpi))
+
+  img <- png::readPNG(file, native = TRUE)
   graphics::plot.new()
   graphics::plot.window(xlim = c(0, ncol(img)), ylim = c(0, nrow(img)),
                         asp = 1, yaxs = "i", xaxs = "i")
-  graphics::rasterImage(img, 0, 0, ncol(img), nrow(img), interpolate = FALSE)
+  graphics::rasterImage(img, 0, 0, ncol(img), nrow(img), interpolate = TRUE)
   invisible()
 }
 
