@@ -46,6 +46,9 @@
     <loc>https://keras.posit.co/articles/functional_api.html</loc>
   </url>
   <url>
+    <loc>https://keras.posit.co/articles/getting_started.html</loc>
+  </url>
+  <url>
     <loc>https://keras.posit.co/articles/index.html</loc>
   </url>
   <url>
@@ -53,6 +56,12 @@
   </url>
   <url>
     <loc>https://keras.posit.co/articles/intro_to_keras_for_researchers.html</loc>
+  </url>
+  <url>
+    <loc>https://keras.posit.co/articles/keras.html</loc>
+  </url>
+  <url>
+    <loc>https://keras.posit.co/articles/keras3.html</loc>
   </url>
   <url>
     <loc>https://keras.posit.co/articles/making_new_layers_and_models_via_subclassing.html</loc>

@@ -15,6 +15,7 @@ articles:
   oxford_pets_image_segmentation: examples/oxford_pets_image_segmentation.html
   text_classification_from_scratch: examples/text_classification_from_scratch.html
   functional_api: functional_api.html
+  getting_started: getting_started.html
   intro_to_keras_for_engineers: intro_to_keras_for_engineers.html
   intro_to_keras_for_researchers: intro_to_keras_for_researchers.html
   making_new_layers_and_models_via_subclassing: making_new_layers_and_models_via_subclassing.html
@@ -28,7 +29,7 @@ articles:
   writing_a_custom_training_loop_in_torch: writing_a_custom_training_loop_in_torch.html
   writing_a_training_loop_from_scratch: writing_a_training_loop_from_scratch.html
   writing_your_own_callbacks: writing_your_own_callbacks.html
-last_built: 2024-01-04T23:45Z
+last_built: 2024-01-05T23:52Z
 urls:
   reference: https://keras.posit.co/reference
   article: https://keras.posit.co/articles
