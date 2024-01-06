@@ -6,7 +6,7 @@ menu:
     name: "Overview"
     identifier: "keras-keras-overview"
     parent: "keras-getting-started-top"
-    weight: 5 
+    weight: 5
 aliases:
   - /keras/
   - /keras/articles/why_use_keras.html
@@ -106,8 +106,8 @@ The core data structure of Keras is a model, a way to organize layers. The simpl
 We begin by creating a sequential model and then adding layers using the pipe (`|>`) operator:
 
 ```{r}
-model <- keras_model_sequential(input_shape = c(784)) 
-model %>% 
+model <- keras_model_sequential(input_shape = c(784))
+model %>%
   layer_dense(units = 256, activation = 'relu') |>
   layer_dropout(rate = 0.4) |>
   layer_dense(units = 128, activation = 'relu') |>
@@ -123,10 +123,9 @@ Use the `summary()` function to print the details of the model:
 summary(model)
 ```
 
-```{r, fig.cap=""}
+```{r, fig.cap="", fig.align="center"}
 plot(model)
 ```
-
 Next, compile the model with appropriate loss function, optimizer, and metrics:
 
 ```{r}
@@ -143,8 +142,8 @@ Use the `fit()` function to train the model for 30 epochs using batches of 128 i
 
 ```{r, results='hide'}
 history <- model |> fit(
-  x_train, y_train, 
-  epochs = 30, batch_size = 128, 
+  x_train, y_train,
+  epochs = 30, batch_size = 128,
   validation_split = 0.2
 )
 ```
@@ -168,13 +167,13 @@ probs <- model |> predict(x_test)
 max.col(probs) - 1L
 ```
 
-Keras provides a vocabulary for building deep learning models that is simple, elegant, and intuitive. Building a question answering system, an image classification model, a neural Turing machine, or any other model is just as straightforward. 
+Keras provides a vocabulary for building deep learning models that is simple, elegant, and intuitive. Building a question answering system, an image classification model, a neural Turing machine, or any other model is just as straightforward.
 
 ### Deep Learning with R Book
 
 If you want a more comprehensive introduction to both Keras and the concepts and practice of deep learning, we recommend the [Deep Learning with R, 2nd Edition](http://rstd.io/dlwr-2e) book from Manning. This book is a collaboration between François Chollet, the creator of (Python) Keras, J.J. Allaire, who wrote the original R interface to Keras, and Tomasz Kalinowski, the maintainer of the R interface to Keras.
 
-The book presumes no significant knowledge of machine learning and deep learning, and goes all the way from basic theory to advanced practical applications, all using the R interface to Keras. 
+The book presumes no significant knowledge of machine learning and deep learning, and goes all the way from basic theory to advanced practical applications, all using the R interface to Keras.
 
 <div style="clear: both;"></div>
 
