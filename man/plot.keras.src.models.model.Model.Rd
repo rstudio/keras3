@@ -69,7 +69,7 @@ built, unless a \verb{input_shape = } argument was supplied to
 
 This function requires pydot and graphviz.
 \code{pydot} is by default installed by \code{install_keras()}, but if you installed
-tensorflow by other means, you can install pydot directly with :
+keras by other means, you can install pydot directly with :
 
 \if{html}{\out{<div class="sourceCode">}}\preformatted{reticulate::py_install("pydot", pip = TRUE)
 }\if{html}{\out{</div>}}

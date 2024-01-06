@@ -7,13 +7,13 @@
 create_layer(layer_class, object, args = list())
 }
 \arguments{
-\item{layer_class}{Python layer class or R6 class of type KerasLayer}
+\item{layer_class}{A Python Layer class}
 
 \item{object}{Object to compose layer with. This is either a
 \code{\link[=keras_model_sequential]{keras_model_sequential()}} to add the layer to, or another Layer which
 this layer will call.}
 
-\item{args}{List of arguments to layer constructor function}
+\item{args}{List of arguments to the layer initialize function.}
 }
 \value{
 A Keras layer
