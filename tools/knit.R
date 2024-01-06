@@ -200,10 +200,12 @@ knit_vignette <- function(input, ..., output_dir) {
   writeLines(lines, output.Rmd)
 
   # figures dir
-  new_path <- sub("/vignettes-src/", "/vignettes/",
-                  as.character(fs::path_real(fig.path)))
-  unlink(new_path, recursive = TRUE)
-  fs::file_move(fig.path, new_path)
+  if(dir.exists(fig.path)) {
+    new_path <- sub("/vignettes-src/", "/vignettes/",
+                    as.character(fs::path_real(fig.path)))
+    unlink(new_path, recursive = TRUE)
+    fs::file_move(fig.path, new_path)
+  }
 }
 
 
