@@ -4,7 +4,6 @@ date-created: 2019/03/01
 last-modified: 2020/04/12
 description: Complete guide to the functional API.
 output: rmarkdown::html_vignette
-date: 'Last Modified: 2024-01-04; Last Rendered: 2024-01-04'
 vignette: >
   %\VignetteIndexEntry{The Functional API}
   %\VignetteEngine{knitr::rmarkdown}
@@ -150,7 +149,7 @@ You can also plot the model as a graph:
 plot(model)
 ```
 
-![plot of chunk unnamed-chunk-10](functional_api/unnamed-chunk-10-1.png)
+<img src="functional_api/unnamed-chunk-10-1.png" width="176" />
 
 And, optionally, display the input and output shapes of each layer
 in the plotted graph:
@@ -160,7 +159,7 @@ in the plotted graph:
 plot(model, show_shapes = TRUE)
 ```
 
-![plot of chunk unnamed-chunk-11](functional_api/unnamed-chunk-11-1.png)
+<img src="functional_api/unnamed-chunk-11-1.png" width="311" />
 
 This figure and the code are almost identical. In the code version,
 the connection arrows are replaced by the call operation.
@@ -583,7 +582,7 @@ Now plot the model:
 plot(model, show_shapes = TRUE)
 ```
 
-![plot of chunk unnamed-chunk-20](functional_api/unnamed-chunk-20-1.png)
+<img src="functional_api/unnamed-chunk-20-1.png" width="1008" />
 
 When compiling this model, you can assign different losses to each output.
 You can even assign different weights to each loss -- to modulate
@@ -639,7 +638,7 @@ model %>% fit(
 
 ```
 ## Epoch 1/2
-## 40/40 - 3s - 68ms/step - loss: 0.3948
+## 40/40 - 3s - 82ms/step - loss: 0.3948
 ## Epoch 2/2
 ## 40/40 - 0s - 6ms/step - loss: 0.1971
 ```
@@ -743,7 +742,7 @@ Plot the model:
 plot(model, show_shapes = TRUE)
 ```
 
-![plot of chunk unnamed-chunk-25](functional_api/unnamed-chunk-25-1.png)
+<img src="functional_api/unnamed-chunk-25-1.png" width="468" />
 
 Now train the model:
 
@@ -772,7 +771,7 @@ model %>% fit(
 ```
 
 ```
-## 13/13 - 7s - 524ms/step - acc: 0.1325 - loss: 2.3034 - val_acc: 0.1150 - val_loss: 2.3080
+## 13/13 - 7s - 533ms/step - acc: 0.1338 - loss: 2.3036 - val_acc: 0.1150 - val_loss: 2.3068
 ```
 
 ## Shared layers

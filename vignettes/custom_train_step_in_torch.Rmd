@@ -4,7 +4,6 @@ date-created: 2023/06/27
 last-modified: 2023/06/27
 description: Overriding the training step of the Model class with PyTorch.
 output: rmarkdown::html_vignette
-date: 'Last Modified: 2023-11-21; Last Rendered: 2024-01-04'
 vignette: >
   %\VignetteIndexEntry{Customizing what happens in `fit()` with PyTorch}
   %\VignetteEngine{knitr::rmarkdown}

@@ -4,7 +4,6 @@ date-created: 2020/04/28
 last-modified: 2023/06/29
 description: Guide to multi-GPU training for Keras models with TensorFlow.
 output: rmarkdown::html_vignette
-date: 'Last Modified: 2024-01-03; Last Rendered: 2024-01-04'
 vignette: >
   %\VignetteIndexEntry{Multi-GPU distributed training with TensorFlow}
   %\VignetteEngine{knitr::rmarkdown}
@@ -185,7 +184,7 @@ with(strategy$scope(), {
 
 ```
 ## Epoch 1/2
-## 782/782 - 11s - 14ms/step - loss: 2.1336 - sparse_categorical_accuracy: 0.8802 - val_loss: 0.6575 - val_sparse_categorical_accuracy: 0.9136
+## 782/782 - 11s - 15ms/step - loss: 2.1336 - sparse_categorical_accuracy: 0.8802 - val_loss: 0.6575 - val_sparse_categorical_accuracy: 0.9136
 ## Epoch 2/2
 ## 782/782 - 2s - 2ms/step - loss: 0.4353 - sparse_categorical_accuracy: 0.9364 - val_loss: 0.4580 - val_sparse_categorical_accuracy: 0.9270
 ## 157/157 - 0s - 2ms/step - loss: 0.4841 - sparse_categorical_accuracy: 0.9273
@@ -263,7 +262,7 @@ run_training(epochs=1)
 ```
 
 ```
-## 782/782 - 4s - 5ms/step - loss: 0.3249 - sparse_categorical_accuracy: 0.9483 - val_loss: 0.3404 - val_sparse_categorical_accuracy: 0.9457
+## 782/782 - 4s - 5ms/step - loss: 0.3173 - sparse_categorical_accuracy: 0.9481 - val_loss: 0.4627 - val_sparse_categorical_accuracy: 0.9386
 ```
 
 ```r
@@ -272,7 +271,7 @@ run_training(epochs=1)
 ```
 
 ```
-## 782/782 - 4s - 5ms/step - loss: 0.3249 - sparse_categorical_accuracy: 0.9483 - val_loss: 0.3404 - val_sparse_categorical_accuracy: 0.9457
+## 782/782 - 4s - 5ms/step - loss: 0.3173 - sparse_categorical_accuracy: 0.9481 - val_loss: 0.4627 - val_sparse_categorical_accuracy: 0.9386
 ```
 
 ## `tf$data` performance tips

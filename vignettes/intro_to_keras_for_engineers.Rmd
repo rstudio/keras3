@@ -6,7 +6,6 @@ description: First contact with Keras 3.
 output: rmarkdown::html_vignette
 editor_options:
   chunk_output_type: console
-date: 'Last Modified: 2023-11-30; Last Rendered: 2024-01-04'
 vignette: >
   %\VignetteIndexEntry{Introduction to Keras for engineers}
   %\VignetteEngine{knitr::rmarkdown}
@@ -174,7 +173,7 @@ model %>% fit(
 ```
 
 ```
-## 399/399 - 8s - 21ms/step - acc: 0.7358 - loss: 0.7748 - val_acc: 0.9604 - val_loss: 0.1383
+## 399/399 - 9s - 22ms/step - acc: 0.7369 - loss: 0.7726 - val_acc: 0.9607 - val_loss: 0.1352
 ```
 
 ```r
@@ -335,7 +334,7 @@ model %>% fit(
 ```
 
 ```
-## 399/399 - 8s - 19ms/step - acc: 0.7505 - loss: 0.7378 - val_acc: 0.9326 - val_loss: 0.2285
+## 399/399 - 8s - 20ms/step - acc: 0.7500 - loss: 0.7383 - val_acc: 0.9324 - val_loss: 0.2285
 ```
 
 ## Training models on arbitrary data sources
@@ -411,7 +410,7 @@ model %>% fit(train_dataset, epochs=1, validation_data=test_dataset)
 ```
 
 ```
-## 469/469 - 9s - 18ms/step - acc: 0.7552 - loss: 0.7257 - val_acc: 0.8988 - val_loss: 0.3156
+## 469/469 - 9s - 19ms/step - acc: 0.7554 - loss: 0.7253 - val_acc: 0.8975 - val_loss: 0.3169
 ```
 
 ## Further reading
