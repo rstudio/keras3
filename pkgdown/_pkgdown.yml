@@ -362,7 +362,6 @@ reference:
 
   - title: "Deprecated"
     contents:
-      - KerasLayer
       - adapt
       - bidirectional
       - keras-package

@@ -5,11 +5,11 @@
 
 #' Create a Keras Layer
 #'
-#' @param layer_class Python layer class or R6 class of type KerasLayer
+#' @param layer_class A Python Layer class
 #' @param object Object to compose layer with. This is either a
 #' [keras_model_sequential()] to add the layer to, or another Layer which
 #' this layer will call.
-#' @param args List of arguments to layer constructor function
+#' @param args List of arguments to the layer initialize function.
 #'
 #' @return A Keras layer
 #'
@@ -19,35 +19,14 @@
 #' @export
 create_layer <- function(layer_class, object, args = list()) {
 
-  safe_to_drop_nulls <- c(
-    "input_shape",
-    "batch_input_shape",
-    "batch_size",
-    "dtype",
-    "name",
-    "trainable",
-    "weights"
-  )
-  for (nm in safe_to_drop_nulls)
-    args[[nm]] <- args[[nm]]
-
   # convert custom constraints
   constraint_args <- grepl("^.*_constraint$", names(args))
   constraint_args <- names(args)[constraint_args]
   for (arg in constraint_args)
     args[[arg]] <- as_constraint(args[[arg]])
 
-  if (inherits(layer_class, "R6ClassGenerator")) {
-
-    if (identical(layer_class$get_inherit(), KerasLayer)) {
-      # old-style custom class, inherits KerasLayer
-      c(layer, args) %<-% compat_custom_KerasLayer_handler(layer_class, args)
-      layer_class <- function(...) layer
-    } else {
-      # new-style custom class, inherits anything else, typically keras$layers$Layer
-      layer_class <- r_to_py(layer_class, convert = TRUE)
-    }
-  }
+  if (!inherits(layer_class, "python.builtin.object"))
+    layer_class <- r_to_py(layer_class)
 
   # create layer from class
   layer <- do.call(layer_class, args)

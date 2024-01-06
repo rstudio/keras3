@@ -102,6 +102,9 @@ fs::dir_walk("man-src", type = "directory", recurse = TRUE,
 # TODO: op_argmax() - returns a 0-based index. convert to 1-based?
 #
 # TODO: use `as_activation` attr in all layers.
+
+# TODO: unexport create_layer(), update guidance on wrappers
+#         (maybe add a `auto_composing = TRUE` arg to `Layer()`)
 #
 # TODO: tether application process_utils
 # TODO: `backend()` used to have a `convert=FALSE` option, and all k_* would
