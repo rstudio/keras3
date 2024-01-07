@@ -16,6 +16,7 @@ Constrains the weights to be non-negative.
 }
 
 Other constraints: 
+\code{\link{Constraint}()},
 \code{\link{constraint_maxnorm}()},
 \code{\link{constraint_minmaxnorm}()},
 \code{\link{constraint_unitnorm}()}

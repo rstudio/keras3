@@ -82,8 +82,8 @@ Constraint <- function(classname, call = NULL, get_config = NULL,
     members = members,
     inherit = inherit,
     parent_env = parent_env,
-    private = private,
-    delayed = TRUE
+    private = private
+    # delayed = TRUE
   )
 }
 

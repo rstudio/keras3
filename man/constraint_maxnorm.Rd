@@ -34,6 +34,7 @@ Also available via the shortcut function \code{keras.constraints.max_norm}.
 }
 
 Other constraints: 
+\code{\link{Constraint}()},
 \code{\link{constraint_minmaxnorm}()},
 \code{\link{constraint_nonneg}()},
 \code{\link{constraint_unitnorm}()}

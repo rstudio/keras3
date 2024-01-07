@@ -260,7 +260,6 @@ reference:
     contents:
       # - has_concept("constraint")
       - has_concept("constraints")
-      - KerasConstraint
       - Constraint
 
   - title: "Utils"
