@@ -661,47 +661,6 @@ capture_args <- function(cl, modifiers = NULL, ignore = NULL,
 }
 
 
-capture_args3 <-
-  function(modifiers = NULL, ignore = NULL) {
-    # currently unused
-    # like capture_args2(), but will also unpack `!!!args`
-    # e.g.,
-    # constraints <- list(kernel_constraint = constraint_unitnorm(),
-    #                     bias_constraint = constraint_unitnorm())
-    # layer_dense(units = 2, !!!constraints)
-  cl0 <- cl <- sys.call(-1L)
-  envir <- parent.frame(2L)
-  fn <- sys.function(-1L)
-
-  # first defuse rlang !!! and := in calls
-  cl[[1L]] <- rlang::quos
-  cl_exprs <- eval(cl, envir)
-
-  # build up a call to base::list() using the exprs
-  cl <- as.call(c(list, cl_exprs))
-
-  # match.call()
-  cl <- match.call(fn, cl,
-                   expand.dots = !"..." %in% ignore,
-                   envir = envir)
-
-  # filter out args to ignore
-  for(ig in intersect(names(cl), ignore))
-    cl[[ig]] <- NULL
-
-  # eval and capture args
-  args <- rlang::eval_tidy(cl, env = envir)
-
-  # apply modifier functions. e.g., as_nullable_integer
-  nms_to_modify <- intersect(names(args), names(modifiers))
-  for (name in nms_to_modify)
-    # list() so if modifier returns NULL, don't remove the arg
-    args[name] <- list(modifiers[[name]](args[[name]]))
-
-  args
-}
-
-
 #' @importFrom rlang list2
 capture_args2 <- function(modifiers = NULL, ignore = NULL, force = NULL) {
   cl <- sys.call(-1L)
@@ -767,6 +726,49 @@ capture_args2 <- function(modifiers = NULL, ignore = NULL, force = NULL) {
 
   args
 }
+
+
+capture_args3 <-
+  function(modifiers = NULL, ignore = NULL) {
+    # currently unused
+    # like capture_args2(), but will also unpack `!!!args`
+    # e.g.,
+    # constraints <- list(kernel_constraint = constraint_unitnorm(),
+    #                     bias_constraint = constraint_unitnorm())
+    # layer_dense(units = 2, !!!constraints)
+    cl0 <- cl <- sys.call(-1L)
+    envir <- parent.frame(2L)
+    fn <- sys.function(-1L)
+
+    # first defuse rlang !!! and := in calls
+    cl[[1L]] <- rlang::quos
+    cl_exprs <- eval(cl, envir)
+
+    # build up a call to base::list() using the exprs
+    cl <- as.call(c(list, cl_exprs))
+
+    # match.call()
+    cl <- match.call(fn, cl,
+                     expand.dots = !"..." %in% ignore,
+                     envir = envir)
+
+    # filter out args to ignore
+    for(ig in intersect(names(cl), ignore))
+      cl[[ig]] <- NULL
+
+    # eval and capture args
+    args <- rlang::eval_tidy(cl, env = envir)
+
+    # apply modifier functions. e.g., as_nullable_integer
+    nms_to_modify <- intersect(names(args), names(modifiers))
+    for (name in nms_to_modify)
+      # list() so if modifier returns NULL, don't remove the arg
+      args[name] <- list(modifiers[[name]](args[[name]]))
+
+    args
+  }
+
+
 
 
 is_scalar <- function(x) identical(length(x), 1L)
@@ -1115,6 +1117,20 @@ check_bool <- function(x) {
     stop(sprintf("`%s` arg must be `TRUE` or `FALSE`",
                  deparse1(substitute(x))))
 }
+
+
+rename <- function(x, ...) {
+  dots <- list(...)
+  nms <- names(x)
+  for(i in seq_along(dots)) {
+    newname <- names(dots)[[i]]
+    oldname <- dots[[i]]
+    nms[match(oldname, nms)] <- newname
+  }
+  names(x) <- nms
+  x
+}
+
 
 #drop_nulls <-
 function(x, ...) {

@@ -740,6 +740,7 @@ make_roxygen_tags <- function(endpoint, py_obj = py_eval(endpoint), type) {
   out$export <- ""
 
   out$family <- get_family(endpoint)
+  out$tether <- endpoint
 
   links <- c(get_keras_doc_link(endpoint),
              get_tf_doc_link(endpoint))

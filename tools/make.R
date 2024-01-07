@@ -197,7 +197,9 @@ fs::dir_walk("man-src", type = "directory", recurse = TRUE,
 
 # TODO: many of the applications can share a man page, e.g., application_convnext_{large...}
 
-
+# TODO: op_convert_to_numpy() -> rename to op_convert_to_array() or op_convert_to_r_array()
+#       or just as.array()? remove it?
+#       ?? rename op_array() to ... as_tensor() ?? ... or remove op_array()?
 
 # TODO: "keras.applications.convnext" is a module, filtered out has good stuff
 
