@@ -51,6 +51,8 @@ resultant subgraph must be complete.}
 \item{show_layer_activations}{Display layer activations (only for layers that
 have an \code{activation} property).}
 
+\item{show_trainable}{whether to display if a layer is trainable.}
+
 \item{to_file}{File name of the plot image. If \code{NULL} (the default), the
 model is drawn on the default graphics device. Otherwise, a file is saved.}
 }

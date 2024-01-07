@@ -803,6 +803,8 @@ is_mac_arm64 <- function() {
 #'   resultant subgraph must be complete.
 #' @param show_layer_activations Display layer activations (only for layers that
 #'   have an `activation` property).
+#' @param show_trainable
+#' whether to display if a layer is trainable.
 #'
 #' @return Nothing, called for it's side effects.
 #'
@@ -830,7 +832,7 @@ is_mac_arm64 <- function() {
 #'   reticulate::conda_install(packages = "graphviz")
 #'   # Restart the R session after install.
 #'   ```
-#'
+#' @tether keras.utils.model_to_dot
 #' @export
 plot.keras.src.models.model.Model <-
 function(x,
