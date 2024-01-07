@@ -389,6 +389,12 @@ function(classname,
 
 
 
+
+#' New Callback Class
+#'
+#' `new_callback_class()` is an alias for [`Callback()`].
+#'
+#' @inheritParams Callback
 #' @export
-#' @rdname Callback
+#' @keywords internal
 new_callback_class <- Callback
