@@ -7,6 +7,7 @@
 
 
 reticulate:::py_register_load_hook("keras", function() {
+  # browser()
   print(reticulate::py_config())
   # print(keras$`__version__`)
   # print(keras$`__path__`)
@@ -17,13 +18,16 @@ reticulate:::py_register_load_hook("keras", function() {
     keras.config.disable_traceback_filtering()
     )---"))
 
-  reticulate::py_run_string(local = TRUE, glue::trim(r"---(
+  try(reticulate::py_run_string(local = TRUE, glue::trim(r"---(
     from importlib import import_module
     import tensorflow as tf
 
+    tf.function(lambda x: x + x)(1)
+
     m = import_module(tf.function.__module__)
     m.FREQUENT_TRACING_WARNING_THRESHOLD = float("inf")
-    )---"))
+
+    )---")))
 
   # py_main <- reticulate::import("__main__")
   # keras$layers # force load
@@ -32,12 +36,12 @@ reticulate:::py_register_load_hook("keras", function() {
 })
 
 
-if (reticulate::py_module_available("tensorflow")) {
-  # force verbose tf init messages early
-  tensorflow::tf$`function`(function(x) tensorflow::tf$abs(x))(-1)
-
-} else
-  message("TensorFlow not available for testing")
+# if (reticulate::py_module_available("tensorflow")) {
+#   # force verbose tf init messages early
+#   tensorflow::tf$`function`(function(x) tensorflow::tf$abs(x))(-1)
+#
+# } else
+#   message("TensorFlow not available for testing")
 
 tf_version <- tensorflow::tf_version
 
