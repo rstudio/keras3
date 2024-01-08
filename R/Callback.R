@@ -355,13 +355,16 @@ function(classname,
   members <- modifyList(members, list2(...), keep.null = FALSE)
   members <- modifyList(members, public, keep.null = TRUE)
 
-  delayedAssign(
-    "tools",
-    import_from_path(
-      "kerastools.callback",
-      path = system.file("python", package = "keras3")))
-  wrap_sig_idx_logs <- function(fn) tools$wrap_sig_idx_logs(fn)
-  wrap_sig_logs <-  function(fn) tools$wrap_sig_logs(fn)
+  # delayedAssign(
+  #   "tools",
+  #   import_from_path(
+  #     "kerastools.callback",
+  #     path = system.file("python", package = "keras3")))
+  # wrap_sig_idx_logs <- function(fn) tools$wrap_sig_idx_logs(fn)
+  # wrap_sig_logs <-  function(fn) tools$wrap_sig_logs(fn)
+
+  wrap_sig_idx_logs <- callback_method_wrapper_sig_idx_logs
+  wrap_sig_logs <- callback_method_wrapper_sig_idx_logs
 
   members <- modify_intersection(members, list(
     from_config =            \(x) decorate_method(x, "classmethod"),
@@ -394,7 +397,36 @@ function(classname,
 }
 
 
-# TODO: wrap_sig_idx_logs() should be internal namespace functions
+callback_method_wrapper_sig_idx_logs <- function(fn) {
+  tools <- import_from_path(
+    "kerastools.callback",
+    path = system.file("python", package = "keras3"))
+  tools$wrap_sig_idx_logs(fn)
+}
+
+
+callback_method_wrapper_sig_logs <- function(fn) {
+  tools <- import_from_path(
+    "kerastools.callback",
+    path = system.file("python", package = "keras3"))
+  tools$wrap_sig_logs(fn)
+}
+
+# callback_method_wrapper_sig_idx_logs <- NULL
+# callback_method_wrapper_sig_logs <- NULL
+#
+# local({
+#
+#   delayedAssign("tools",
+#     import_from_path("kerastools.callback",
+#       path = system.file("python", package = "keras3")))
+#
+#   callback_method_wrapper_sig_idx_logs <<-
+#     function(fn) tools$wrap_sig_idx_logs(fn)
+#   callback_method_wrapper_sig_logs <<-
+#     function(fn) tools$wrap_sig_logs(fn)
+# })
+
 
 #' New Callback Class
 #'

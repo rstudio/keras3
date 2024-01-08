@@ -4,7 +4,7 @@
 #' Callback to back up and restore the training state.
 #'
 #' @description
-#' `callback_backup_and_restore` callback is intended to recover training from an
+#' `callback_backup_and_restore()` callback is intended to recover training from an
 #' interruption that has happened in the middle of a `fit` execution, by
 #' backing up the training states in a temporary checkpoint file, at the end of
 #' each epoch. Each backup overwrites the previously written checkpoint file,
@@ -308,10 +308,10 @@ function (monitor = "val_loss", min_delta = 0L, patience = 0L,
 #' called at the end of every train batch.
 #'
 #' @param ...
-#' Any function in `Callback` that you want to override by
+#' Any function in [`Callback()`] that you want to override by
 #' passing `function_name = function`. For example,
 #' `callback_lambda(.., on_train_end = train_end_fn)`. The custom function
-#' needs to have same arguments as the ones defined in `Callback`.
+#' needs to have same arguments as the ones defined in [`Callback()`].
 #'
 #' @export
 #' @family callbacks
@@ -324,7 +324,22 @@ function (on_epoch_begin = NULL, on_epoch_end = NULL, on_train_begin = NULL,
     on_train_end = NULL, on_train_batch_begin = NULL, on_train_batch_end = NULL,
     ...)
 {
-    args <- capture_args2(NULL)
+    args <- capture_args2(list(
+      on_epoch_begin =         callback_method_wrapper_sig_idx_logs,
+      on_epoch_end =           callback_method_wrapper_sig_idx_logs,
+      on_train_begin =         callback_method_wrapper_sig_logs,
+      on_train_end =           callback_method_wrapper_sig_logs,
+      on_train_batch_begin =   callback_method_wrapper_sig_idx_logs,
+      on_train_batch_end =     callback_method_wrapper_sig_idx_logs,
+      on_test_begin =          callback_method_wrapper_sig_logs,
+      on_test_end =            callback_method_wrapper_sig_logs,
+      on_test_batch_begin =    callback_method_wrapper_sig_idx_logs,
+      on_test_batch_end =      callback_method_wrapper_sig_idx_logs,
+      on_predict_begin =       callback_method_wrapper_sig_logs,
+      on_predict_end =         callback_method_wrapper_sig_logs,
+      on_predict_batch_begin = callback_method_wrapper_sig_idx_logs,
+      on_predict_batch_end =   callback_method_wrapper_sig_idx_logs,
+    ))
     do.call(keras$callbacks$LambdaCallback, args)
 }
 
