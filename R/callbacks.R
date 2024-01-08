@@ -1007,10 +1007,9 @@ normalize_callbacks_with_metrics <- function(view_metrics, initial_epoch, callba
   if (!is.null(callbacks) && !is.list(callbacks))
     callbacks <- list(callbacks)
 
-  # always include the metrics callback
-  metrics_callback <- KerasMetricsCallbackV2$new(view_metrics, initial_epoch)
-
-  callbacks <- append(callbacks, metrics_callback)
+  # include the metrics callback if needed
+  if (view_metrics || tfruns::is_run_active())
+    append(callbacks) <- callback_view_metrics(view_metrics, initial_epoch)
 
   normalize_callbacks(callbacks)
 }
