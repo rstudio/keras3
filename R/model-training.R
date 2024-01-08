@@ -132,7 +132,9 @@ function (object, optimizer = "rmsprop", loss = NULL, metrics = NULL,
             if(is.null(loss) || is_string(loss)) return(loss)
             if(inherits(loss, "python.builtin.type")) # Loss()
               return(loss())
-            if(is_r_function(loss)) {
+            if(is_bare_r_function(loss)) {
+              # TODO: use resolve_py_obj() here once it can correctly
+              # resolve losses.
               return(py_func2(loss, TRUE, name = "custom_loss"))
             }
             # TODO: as_loss(), guardrail too strict, disabled for now

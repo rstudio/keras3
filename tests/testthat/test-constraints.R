@@ -25,31 +25,26 @@ test_succeeds("R custom constraints", {
     w * op_cast(w >= 0, config_floatx())
   }
 
-  CustomNonNegConstraint <- R6::R6Class(
+  constraint_custom_nonneg <- Constraint(
     "CustomNonNegConstraint",
-    inherit = KerasConstraint,
     public = list(
       call = nonneg_constraint
     )
   )
 
-  model <- keras_model_sequential() %>%
-    layer_dense(32, input_shape = c(784),
-                kernel_constraint = CustomNonNegConstraint$new(),
+
+  model <- keras_model_sequential(input_shape = c(784)) %>%
+    layer_dense(32,
+                kernel_constraint = constraint_custom_nonneg(),
                 bias_constraint = nonneg_constraint) %>%
     layer_dense(10, activation = 'softmax') %>%
-    compile(
-      loss='binary_crossentropy',
-      optimizer = optimizer_sgd(),
-      metrics='accuracy'
-    )
+    compile(loss = 'binary_crossentropy',
+            optimizer = optimizer_sgd(),
+            metrics = 'accuracy')
 
-    if (!is_backend("theano")) {
-      data <- matrix(rexp(1000*784), nrow = 1000, ncol = 784)
-      labels <- matrix(round(runif(1000*10, min = 0, max = 9)), nrow = 1000, ncol = 10)
 
-      model %>% fit(
-        data, labels, verbose = 0, epochs = 2
-      )
-    }
+  data <- matrix(rexp(1000 * 784), nrow = 1000, ncol = 784)
+  labels <- matrix(round(runif(1000 * 10, min = 0, max = 9)), nrow = 1000, ncol = 10)
+
+  model %>% fit(data, labels, verbose = 0, epochs = 2)
 })

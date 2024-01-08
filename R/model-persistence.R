@@ -794,16 +794,16 @@ objects_with_py_function_names <- function(objects) {
     name <- object_names[[i]]
     o <- objects[[i]]
 
-    if (inherits(o, "keras_layer_wrapper"))
-      objects[[i]] <- o <- environment(o)$Layer
+    if(is_bare_r_function(o))
+      objects[[i]] <- o <- resolve_py_obj(o)
 
     if (name == "") {
       if (inherits(o, "python.builtin.object"))
         name <- o$`__name__`
       else if (inherits(o, "R6ClassGenerator"))
         name <- o$classname
-      else if (is.character(attr(o, "py_function_name", TRUE)))
-        name <- attr(o, "py_function_name", TRUE)
+      # else if (is.character(attr(o, "py_function_name", TRUE)))
+      #   name <- attr(o, "py_function_name", TRUE)
       else
         stop("object name could not be infered; please supply a named list",
              call. = FALSE)

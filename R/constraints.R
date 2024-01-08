@@ -138,13 +138,14 @@ function (axis = 1L)
 as_constraint <- function(constraint) {
 
 
-  if (inherits(constraint, "keras.constraints.Constraint")) {
-    constraint
-  } else if (is.function(constraint)) {
-    Constraint("CustomConstraint", call = constraint)
-  } else {
-    constraint
-  }
+  # if (inherits(constraint, "keras.constraints.Constraint")) {
+  #   constraint
+  # } else if (is.function(constraint)) {
+  #   Constraint("CustomConstraint", call = constraint)()
+  # } else {
+    # constraint
+  # }
+  constraint
 }
 
 
