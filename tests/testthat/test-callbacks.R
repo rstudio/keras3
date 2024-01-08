@@ -53,7 +53,7 @@ test_callback("terminate_on_nan", callback_terminate_on_nan())
 test_callback("reduce_lr_on_plateau", callback_reduce_lr_on_plateau(monitor = "loss"))
 
 test_callback("csv_logger", callback_csv_logger(tempfile(fileext = ".csv")))
-test_callback("lambd", callback_lambda(
+test_callback("lambda", callback_lambda(
   on_epoch_begin = function(epoch, logs) {
     cat("Epoch Begin\n")
   },
@@ -111,7 +111,7 @@ test_succeeds("lambda callbacks other args", {
 
 
 test_succeeds("custom callbacks", {
-
+  KerasCallback <- keras$callbacks$Callback
   CustomCallback <- R6::R6Class("CustomCallback",
     inherit = KerasCallback,
     public = list(
@@ -135,8 +135,8 @@ test_succeeds("custom callbacks", {
 
     ))
 
-  cc <- CustomCallback$new()
-  lh <- LossHistory$new()
+  cc <- r_to_py(CustomCallback)()
+  lh <- r_to_py(LossHistory)()
 
   define_compile_and_fit(callbacks = list(cc, lh))
 

@@ -325,22 +325,32 @@ function (on_epoch_begin = NULL, on_epoch_end = NULL, on_train_begin = NULL,
     ...)
 {
     args <- capture_args2(list(
-      on_epoch_begin =         callback_method_wrapper_sig_idx_logs,
-      on_epoch_end =           callback_method_wrapper_sig_idx_logs,
-      on_train_begin =         callback_method_wrapper_sig_logs,
-      on_train_end =           callback_method_wrapper_sig_logs,
-      on_train_batch_begin =   callback_method_wrapper_sig_idx_logs,
-      on_train_batch_end =     callback_method_wrapper_sig_idx_logs,
-      on_test_begin =          callback_method_wrapper_sig_logs,
-      on_test_end =            callback_method_wrapper_sig_logs,
-      on_test_batch_begin =    callback_method_wrapper_sig_idx_logs,
-      on_test_batch_end =      callback_method_wrapper_sig_idx_logs,
-      on_predict_begin =       callback_method_wrapper_sig_logs,
-      on_predict_end =         callback_method_wrapper_sig_logs,
-      on_predict_batch_begin = callback_method_wrapper_sig_idx_logs,
-      on_predict_batch_end =   callback_method_wrapper_sig_idx_logs,
+      on_epoch_begin         = as_callback_lambda_fn_sig_idx_logs,
+      on_epoch_end           = as_callback_lambda_fn_sig_idx_logs,
+      on_train_begin         = as_callback_lambda_fn_sig_logs,
+      on_train_end           = as_callback_lambda_fn_sig_logs,
+      on_train_batch_begin   = as_callback_lambda_fn_sig_idx_logs,
+      on_train_batch_end     = as_callback_lambda_fn_sig_idx_logs,
+      on_test_begin          = as_callback_lambda_fn_sig_logs,
+      on_test_end            = as_callback_lambda_fn_sig_logs,
+      on_test_batch_begin    = as_callback_lambda_fn_sig_idx_logs,
+      on_test_batch_end      = as_callback_lambda_fn_sig_idx_logs,
+      on_predict_begin       = as_callback_lambda_fn_sig_logs,
+      on_predict_end         = as_callback_lambda_fn_sig_logs,
+      on_predict_batch_begin = as_callback_lambda_fn_sig_idx_logs,
+      on_predict_batch_end   = as_callback_lambda_fn_sig_idx_logs
     ))
     do.call(keras$callbacks$LambdaCallback, args)
+}
+
+as_callback_lambda_fn_sig_idx_logs <- function(fn) {
+  tools <- import_callback_tools()
+  tools$wrap_sig_idx_logs(fn)
+}
+
+as_callback_lambda_fn_sig_logs <- function(fn) {
+  tools <- import_callback_tools()
+  tools$wrap_sig_logs(fn)
 }
 
 

@@ -363,25 +363,30 @@ function(classname,
   # wrap_sig_idx_logs <- function(fn) tools$wrap_sig_idx_logs(fn)
   # wrap_sig_logs <-  function(fn) tools$wrap_sig_logs(fn)
 
-  wrap_sig_idx_logs <- callback_method_wrapper_sig_idx_logs
-  wrap_sig_logs <- callback_method_wrapper_sig_idx_logs
+  # wrap_sig_idx_logs <- function(x)
+  #   decorate_method(x, callback_method_wrapper_sig_idx_logs)
+  # wrap_sig_logs <- function(x)
+  #   decorate_method(x, callback_method_wrapper_sig_logs)
+
+  # wrap_sig_idx_logs <- decorate_callback_method_sig_idx_logs
+  # wrap_sig_logs <- decorate_callback_method_sig_logs
 
   members <- modify_intersection(members, list(
-    from_config =            \(x) decorate_method(x, "classmethod"),
-    on_epoch_begin =         \(x) decorate_method(x, wrap_sig_idx_logs),
-    on_epoch_end =           \(x) decorate_method(x, wrap_sig_idx_logs),
-    on_train_begin =         \(x) decorate_method(x, wrap_sig_logs),
-    on_train_end =           \(x) decorate_method(x, wrap_sig_logs),
-    on_train_batch_begin =   \(x) decorate_method(x, wrap_sig_idx_logs),
-    on_train_batch_end =     \(x) decorate_method(x, wrap_sig_idx_logs),
-    on_test_begin =          \(x) decorate_method(x, wrap_sig_logs),
-    on_test_end =            \(x) decorate_method(x, wrap_sig_logs),
-    on_test_batch_begin =    \(x) decorate_method(x, wrap_sig_idx_logs),
-    on_test_batch_end =      \(x) decorate_method(x, wrap_sig_idx_logs),
-    on_predict_begin =       \(x) decorate_method(x, wrap_sig_logs),
-    on_predict_end =         \(x) decorate_method(x, wrap_sig_logs),
-    on_predict_batch_begin = \(x) decorate_method(x, wrap_sig_idx_logs),
-    on_predict_batch_end =   \(x) decorate_method(x, wrap_sig_idx_logs)
+    from_config             = \(x) decorate_method(x, "classmethod"),
+    on_epoch_begin          = decorate_callback_method_sig_idx_logs,
+    on_epoch_end            = decorate_callback_method_sig_idx_logs,
+    on_train_begin          = decorate_callback_method_sig_logs,
+    on_train_end            = decorate_callback_method_sig_logs,
+    on_train_batch_begin    = decorate_callback_method_sig_idx_logs,
+    on_train_batch_end      = decorate_callback_method_sig_idx_logs,
+    on_test_begin           = decorate_callback_method_sig_logs,
+    on_test_end             = decorate_callback_method_sig_logs,
+    on_test_batch_begin     = decorate_callback_method_sig_idx_logs,
+    on_test_batch_end       = decorate_callback_method_sig_idx_logs,
+    on_predict_begin        = decorate_callback_method_sig_logs,
+    on_predict_end          = decorate_callback_method_sig_logs,
+    on_predict_batch_begin  = decorate_callback_method_sig_idx_logs,
+    on_predict_batch_end    = decorate_callback_method_sig_idx_logs
   ))
 
   inherit <- substitute(inherit) %||%
@@ -397,19 +402,30 @@ function(classname,
 }
 
 
-callback_method_wrapper_sig_idx_logs <- function(fn) {
-  tools <- import_from_path(
-    "kerastools.callback",
-    path = system.file("python", package = "keras3"))
-  tools$wrap_sig_idx_logs(fn)
+decorate_callback_method_sig_idx_logs <- function(fn) {
+  decorate_method(fn, wrap_callback_method_sig_idx_logs)
+}
+
+decorate_callback_method_sig_logs <- function(fn) {
+  decorate_method(fn, wrap_callback_method_sig_logs)
+}
+
+wrap_callback_method_sig_idx_logs <- function(fn) {
+  tools <- import_callback_tools()
+  tools$wrap_sig_self_idx_logs(fn)
+}
+
+wrap_callback_method_sig_logs <- function(fn) {
+  tools <- import_callback_tools()
+  tools$wrap_sig_self_logs(fn)
 }
 
 
-callback_method_wrapper_sig_logs <- function(fn) {
-  tools <- import_from_path(
+
+import_callback_tools <- function() {
+  import_from_path(
     "kerastools.callback",
     path = system.file("python", package = "keras3"))
-  tools$wrap_sig_logs(fn)
 }
 
 # callback_method_wrapper_sig_idx_logs <- NULL
