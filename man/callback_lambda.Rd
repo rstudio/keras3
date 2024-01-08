@@ -27,10 +27,10 @@ callback_lambda(
 
 \item{on_train_batch_end}{called at the end of every train batch.}
 
-\item{...}{Any function in \code{Callback} that you want to override by
+\item{...}{Any function in \code{\link[=Callback]{Callback()}} that you want to override by
 passing \verb{function_name = function}. For example,
 \code{callback_lambda(.., on_train_end = train_end_fn)}. The custom function
-needs to have same arguments as the ones defined in \code{Callback}.}
+needs to have same arguments as the ones defined in \code{\link[=Callback]{Callback()}}.}
 }
 \description{
 This callback is constructed with anonymous functions that will be called

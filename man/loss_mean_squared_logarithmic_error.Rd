@@ -52,6 +52,7 @@ loss <- loss_mean_squared_logarithmic_error(y_true, y_pred)
 }
 
 Other losses: 
+\code{\link{Loss}()},
 \code{\link{loss_binary_crossentropy}()},
 \code{\link{loss_binary_focal_crossentropy}()},
 \code{\link{loss_categorical_crossentropy}()},

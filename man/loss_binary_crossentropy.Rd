@@ -145,6 +145,7 @@ y_pred <- c(0.6, 0.3, 0.2, 0.8) # OR [[0.6, 0.3], [0.2, 0.8]]
 }
 
 Other losses: 
+\code{\link{Loss}()},
 \code{\link{loss_binary_focal_crossentropy}()},
 \code{\link{loss_categorical_crossentropy}()},
 \code{\link{loss_categorical_focal_crossentropy}()},

@@ -31,7 +31,7 @@ training is finished. Use \code{FALSE} if you'd like to keep the checkpoint
 for future usage.}
 }
 \description{
-\code{callback_backup_and_restore} callback is intended to recover training from an
+\code{callback_backup_and_restore()} callback is intended to recover training from an
 interruption that has happened in the middle of a \code{fit} execution, by
 backing up the training states in a temporary checkpoint file, at the end of
 each epoch. Each backup overwrites the previously written checkpoint file,

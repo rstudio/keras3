@@ -2,19 +2,11 @@
 % Please edit documentation in R/new-py-types.R
 \name{new_metric_class}
 \alias{new_metric_class}
-\alias{new_loss_class}
 \alias{new_model_class}
 \alias{new-classes}
 \title{Define new keras types}
 \usage{
 new_metric_class(classname, ..., initialize, update_state, result)
-
-new_loss_class(
-  classname,
-  ...,
-  call = NULL,
-  inherit = keras3::keras$losses$Loss
-)
 
 new_model_class(
   classname,
@@ -35,8 +27,6 @@ to be a CamelCase version of the constructor.}
 \item{...}{Additional fields and methods for the new type.}
 
 \item{initialize, update_state, result, call, train_step, predict_step, test_step, compute_loss, compute_metrics}{Optional methods that can be overridden.}
-
-\item{inherit}{class to inherit from.}
 }
 \value{
 A new class generator object that inherits from the appropriate Keras

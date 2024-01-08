@@ -56,6 +56,7 @@ m$result()
 }
 
 Other losses: 
+\code{\link{Loss}()},
 \code{\link{loss_binary_crossentropy}()},
 \code{\link{loss_binary_focal_crossentropy}()},
 \code{\link{loss_categorical_crossentropy}()},

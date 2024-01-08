@@ -10,7 +10,7 @@ get_registered_name(obj)
 \item{obj}{The object to look up.}
 }
 \value{
-The name associated with the object, or the default Python name if the
+The name associated with the object, or the default name if the
 object is not registered.
 }
 \description{

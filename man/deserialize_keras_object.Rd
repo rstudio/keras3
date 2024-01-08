@@ -87,29 +87,62 @@ deserialize_keras_object(config)
 And the following config represents a user-customized \code{MeanSquaredError}
 loss:
 
-\if{html}{\out{<div class="sourceCode r">}}\preformatted{loss_modified_mse <- new_loss_class(
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{# setup for example
+o_registered <- get_custom_objects()$copy()
+clear_registered_custom_objects()
+
+# define a custom object
+loss_modified_mse <- Loss(
   "ModifiedMeanSquaredError",
-  inherit = keras$losses$MeanSquaredError)
+  inherit = loss_mean_squared_error)
 
-register_keras_serializable(loss_modified_mse, package='my_package')
+# register the custom object
+register_keras_serializable(loss_modified_mse)
 
-config <- list(
-  class_name = "ModifiedMeanSquaredError",
-  config = list(
-    # These arguments will be passed to
-    # `loss_modified_mse$initialize()` when
-    # deserializing the object.
-    name = "modified_mean_squared_error",
-    reduction = "sum_over_batch_size"
-  ),
-  registered_name = "my_package>ModifiedMeanSquaredError"
-)
+# confirm object is registered
+get_custom_objects()
+}\if{html}{\out{</div>}}
 
-# Returns the `ModifiedMeanSquaredError` object
-deserialize_keras_object(config)
+\if{html}{\out{<div class="sourceCode">}}\preformatted{## \{'keras3>ModifiedMeanSquaredError': <class '<r-namespace:keras3>.ModifiedMeanSquaredError'>\}
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{get_registered_name(loss_modified_mse)
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode">}}\preformatted{## [1] "keras3>ModifiedMeanSquaredError"
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{# now custom object instances can be serialized
+full_config <- serialize_keras_object(loss_modified_mse())
+
+# the `config` arguments will be passed to loss_modified_mse()
+str(full_config)
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode">}}\preformatted{## List of 4
+##  $ module         : chr "<r-namespace:keras3>"
+##  $ class_name     : chr "ModifiedMeanSquaredError"
+##  $ config         :List of 2
+##   ..$ name     : chr "mean_squared_error"
+##   ..$ reduction: chr "sum_over_batch_size"
+##  $ registered_name: chr "keras3>ModifiedMeanSquaredError"
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{# and custom object instances can be deserialized
+deserialize_keras_object(full_config)
 }\if{html}{\out{</div>}}
 
 \if{html}{\out{<div class="sourceCode">}}\preformatted{## <<r-namespace:keras3>.ModifiedMeanSquaredError object>
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{# Returns the `ModifiedMeanSquaredError` object
+
+# cleanup from example
+clear_registered_custom_objects() # cleanup
+get_custom_objects()$update(o_registered)
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode">}}\preformatted{## None
 }\if{html}{\out{</div>}}
 }
 \seealso{

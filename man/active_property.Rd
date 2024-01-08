@@ -2,12 +2,9 @@
 % Please edit documentation in R/py-classes.R
 \name{active_property}
 \alias{active_property}
-\alias{mark_active}
 \title{Create an active property class method}
 \usage{
 active_property(fn)
-
-mark_active(fn)
 }
 \arguments{
 \item{fn}{An R function}
