@@ -238,7 +238,7 @@ inputs is known<a class="anchor" aria-label="anchor" href="#best-practice-deferr
 argument that was used to compute the shape of the weights
 <code>w</code> and <code>b</code> in <code>initialize()</code>:</p>
 <div class="sourceCode" id="cb17"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">Linear</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/Layer.html">new_layer_class</a></span><span class="op">(</span></span>
+<code class="sourceCode R"><span><span class="va">Linear</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/new_layer_class.html">new_layer_class</a></span><span class="op">(</span></span>
 <span>  <span class="st">"Linear"</span>,</span>
 <span>  initialize <span class="op">=</span> <span class="kw">function</span><span class="op">(</span><span class="va">units</span> <span class="op">=</span> <span class="fl">32</span>, <span class="va">input_dim</span> <span class="op">=</span> <span class="fl">32</span><span class="op">)</span> <span class="op">{</span></span>
 <span>    <span class="va">units</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/integer.html" class="external-link">as.integer</a></span><span class="op">(</span><span class="va">units</span><span class="op">)</span></span>
@@ -267,7 +267,7 @@ known, some time after instantiating the layer.</p>
 <code>build(self, inputs_shape)</code> method of your layer. Like
 this:</p>
 <div class="sourceCode" id="cb18"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">Linear</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/Layer.html">new_layer_class</a></span><span class="op">(</span></span>
+<code class="sourceCode R"><span><span class="va">Linear</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/new_layer_class.html">new_layer_class</a></span><span class="op">(</span></span>
 <span>  <span class="st">"Linear"</span>,</span>
 <span>  initialize <span class="op">=</span> <span class="kw">function</span><span class="op">(</span><span class="va">units</span> <span class="op">=</span> <span class="fl">32</span><span class="op">)</span> <span class="op">{</span></span>
 <span>    <span class="va">self</span><span class="op">$</span><span class="va">units</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/integer.html" class="external-link">as.integer</a></span><span class="op">(</span><span class="va">units</span><span class="op">)</span></span>
@@ -312,7 +312,7 @@ layer.</p>
 method and leave it to the first <code><a href="https://rdrr.io/r/base/call.html" class="external-link">call()</a></code> to trigger building
 their weights.</p>
 <div class="sourceCode" id="cb20"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">MLPBlock</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/Layer.html">new_layer_class</a></span><span class="op">(</span></span>
+<code class="sourceCode R"><span><span class="va">MLPBlock</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/new_layer_class.html">new_layer_class</a></span><span class="op">(</span></span>
 <span>  <span class="st">"MLPBlock"</span>,</span>
 <span>  initialize <span class="op">=</span> <span class="kw">function</span><span class="op">(</span><span class="op">)</span> <span class="op">{</span></span>
 <span>    <span class="va">super</span><span class="op">$</span><span class="fu">initialize</span><span class="op">(</span><span class="op">)</span></span>
@@ -399,7 +399,7 @@ training loop. This is doable by calling
 <code>self$add_loss(value)</code>:</p>
 <div class="sourceCode" id="cb27"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># A layer that creates an activity regularization loss</span></span>
-<span><span class="va">ActivityRegularizationLayer</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/Layer.html">new_layer_class</a></span><span class="op">(</span></span>
+<span><span class="va">ActivityRegularizationLayer</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/new_layer_class.html">new_layer_class</a></span><span class="op">(</span></span>
 <span>  <span class="st">"ActivityRegularizationLayer"</span>,</span>
 <span>  initialize <span class="op">=</span> <span class="kw">function</span><span class="op">(</span><span class="va">rate</span> <span class="op">=</span> <span class="fl">1e-2</span><span class="op">)</span> <span class="op">{</span></span>
 <span>    <span class="va">self</span><span class="op">$</span><span class="va">rate</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/numeric.html" class="external-link">as.numeric</a></span><span class="op">(</span><span class="va">rate</span><span class="op">)</span></span>
@@ -416,7 +416,7 @@ start of every <code>call</code> to the top-level layer, so that
 <code>layer$losses</code> always contains the loss values created during
 the last forward pass.</p>
 <div class="sourceCode" id="cb28"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">OuterLayer</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/Layer.html">new_layer_class</a></span><span class="op">(</span></span>
+<code class="sourceCode R"><span><span class="va">OuterLayer</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/new_layer_class.html">new_layer_class</a></span><span class="op">(</span></span>
 <span>  <span class="st">"OuterLayer"</span>,</span>
 <span>  initialize <span class="op">=</span> <span class="kw">function</span><span class="op">(</span><span class="op">)</span> <span class="op">{</span></span>
 <span>    <span class="va">super</span><span class="op">$</span><span class="fu">initialize</span><span class="op">(</span><span class="op">)</span></span>
@@ -443,7 +443,7 @@ the last forward pass.</p>
 <p>In addition, the <code>loss</code> property also contains
 regularization losses created for the weights of any inner layer:</p>
 <div class="sourceCode" id="cb34"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">OuterLayerWithKernelRegularizer</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/Layer.html">new_layer_class</a></span><span class="op">(</span></span>
+<code class="sourceCode R"><span><span class="va">OuterLayerWithKernelRegularizer</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/new_layer_class.html">new_layer_class</a></span><span class="op">(</span></span>
 <span>  <span class="st">"OuterLayerWithKernelRegularizer"</span>,</span>
 <span>  initialize <span class="op">=</span> <span class="kw">function</span><span class="op">(</span><span class="op">)</span> <span class="op">{</span></span>
 <span>    <span class="va">super</span><span class="op">$</span><span class="fu">initialize</span><span class="op">(</span><span class="op">)</span></span>
@@ -490,7 +490,7 @@ automatically summed and added to the main loss, if any):</p>
 <p>If you need your custom layers to be serializable as part of a <a href="/guides/functional_api/">Functional model</a>, you can optionally
 implement a <code><a href="../reference/get_config.html">get_config()</a></code> method:</p>
 <div class="sourceCode" id="cb40"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">Linear</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/Layer.html">new_layer_class</a></span><span class="op">(</span></span>
+<code class="sourceCode R"><span><span class="va">Linear</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/new_layer_class.html">new_layer_class</a></span><span class="op">(</span></span>
 <span>  <span class="st">"Linear"</span>,</span>
 <span>  initialize <span class="op">=</span> <span class="kw">function</span><span class="op">(</span><span class="va">units</span> <span class="op">=</span> <span class="fl">32</span><span class="op">)</span> <span class="op">{</span></span>
 <span>    <span class="va">self</span><span class="op">$</span><span class="va">units</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/integer.html" class="external-link">as.integer</a></span><span class="op">(</span><span class="va">units</span><span class="op">)</span></span>
@@ -533,7 +533,7 @@ implement a <code><a href="../reference/get_config.html">get_config()</a></code>
 these arguments to the parent class in <code>initialize()</code> and to
 include them in the layer config:</p>
 <div class="sourceCode" id="cb43"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">Linear</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/Layer.html">new_layer_class</a></span><span class="op">(</span></span>
+<code class="sourceCode R"><span><span class="va">Linear</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/new_layer_class.html">new_layer_class</a></span><span class="op">(</span></span>
 <span>  <span class="st">"Linear"</span>,</span>
 <span>  initialize <span class="op">=</span> <span class="kw">function</span><span class="op">(</span><span class="va">units</span> <span class="op">=</span> <span class="fl">32</span>, <span class="va">...</span><span class="op">)</span> <span class="op">{</span></span>
 <span>    <span class="va">self</span><span class="op">$</span><span class="va">units</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/integer.html" class="external-link">as.integer</a></span><span class="op">(</span><span class="va">units</span><span class="op">)</span></span>
@@ -593,7 +593,7 @@ expose a <code>training</code> (boolean) argument in the
 built-in training and evaluation loops (e.g. <code><a href="https://generics.r-lib.org/reference/fit.html" class="external-link">fit()</a></code>) to
 correctly use the layer in training and inference.</p>
 <div class="sourceCode" id="cb47"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">CustomDropout</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/Layer.html">new_layer_class</a></span><span class="op">(</span></span>
+<code class="sourceCode R"><span><span class="va">CustomDropout</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/new_layer_class.html">new_layer_class</a></span><span class="op">(</span></span>
 <span>  <span class="st">"CustomDropout"</span>,</span>
 <span>  initialize <span class="op">=</span> <span class="kw">function</span><span class="op">(</span><span class="va">rate</span>, <span class="va">...</span><span class="op">)</span> <span class="op">{</span></span>
 <span>    <span class="va">super</span><span class="op">$</span><span class="fu">initialize</span><span class="op">(</span><span class="va">...</span><span class="op">)</span></span>
@@ -711,7 +711,7 @@ JAX, and PyTorch. We’ll train it on MNIST digits.</p>
 composition of layers that subclass <code>Layer</code>. It will feature
 a regularization loss (KL divergence).</p>
 <div class="sourceCode" id="cb49"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">Sampling</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/Layer.html">new_layer_class</a></span><span class="op">(</span></span>
+<code class="sourceCode R"><span><span class="va">Sampling</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/new_layer_class.html">new_layer_class</a></span><span class="op">(</span></span>
 <span>  <span class="st">"Sampling"</span>,</span>
 <span>  call <span class="op">=</span> <span class="kw">function</span><span class="op">(</span><span class="va">inputs</span><span class="op">)</span> <span class="op">{</span></span>
 <span>    <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="va">z_mean</span>, <span class="va">z_log_var</span><span class="op">)</span> <span class="op"><a href="../reference/multi-assign.html">%&lt;-%</a></span> <span class="va">inputs</span></span>
@@ -723,7 +723,7 @@ a regularization loss (KL divergence).</p>
 <span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># Maps MNIST digits to a triplet (z_mean, z_log_var, z).</span></span>
-<span><span class="va">Encoder</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/Layer.html">new_layer_class</a></span><span class="op">(</span></span>
+<span><span class="va">Encoder</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/new_layer_class.html">new_layer_class</a></span><span class="op">(</span></span>
 <span>  <span class="st">"Encoder"</span>,</span>
 <span>  initialize <span class="op">=</span> <span class="kw">function</span><span class="op">(</span><span class="va">latent_dim</span> <span class="op">=</span> <span class="fl">32</span>, <span class="va">intermediate_dim</span> <span class="op">=</span> <span class="fl">64</span>, <span class="va">...</span><span class="op">)</span> <span class="op">{</span></span>
 <span>    <span class="va">super</span><span class="op">$</span><span class="fu">initialize</span><span class="op">(</span><span class="va">...</span><span class="op">)</span></span>
@@ -742,7 +742,7 @@ a regularization loss (KL divergence).</p>
 <span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># Converts z, the encoded digit vector, back into a readable digit.</span></span>
-<span><span class="va">Decoder</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/Layer.html">new_layer_class</a></span><span class="op">(</span></span>
+<span><span class="va">Decoder</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/new_layer_class.html">new_layer_class</a></span><span class="op">(</span></span>
 <span>  <span class="st">"Decoder"</span>,</span>
 <span>  initialize <span class="op">=</span> <span class="kw">function</span><span class="op">(</span><span class="va">original_dim</span>, <span class="va">intermediate_dim</span> <span class="op">=</span> <span class="fl">64</span>, <span class="va">...</span><span class="op">)</span> <span class="op">{</span></span>
 <span>    <span class="va">super</span><span class="op">$</span><span class="fu">initialize</span><span class="op">(</span><span class="va">...</span><span class="op">)</span></span>

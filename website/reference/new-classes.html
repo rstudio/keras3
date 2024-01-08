@@ -81,9 +81,9 @@ NULL value are optional methods that can be provided."><!-- mathjax --><script s
 
     <div class="ref-description section level2">
     <p>These functions can be used to make custom objects that fit in the family of
-existing keras types. For example, <code><a href="Layer.html">new_layer_class()</a></code> will return a class
+existing keras types. For example, <code><a href="new_layer_class.html">new_layer_class()</a></code> will return a class
 constructor, an object that behaves like other layer functions such as
-<code><a href="layer_dense.html">layer_dense()</a></code>. <code><a href="Callback.html">new_callback_class()</a></code> will return an object that behaves
+<code><a href="layer_dense.html">layer_dense()</a></code>. <code><a href="new_callback_class.html">new_callback_class()</a></code> will return an object that behaves
 similarly to other callback functions, like
 <code><a href="callback_reduce_lr_on_plateau.html">callback_reduce_lr_on_plateau()</a></code>, and so on. All arguments with a default
 <code>NULL</code> value are optional methods that can be provided.</p>
@@ -92,13 +92,6 @@ similarly to other callback functions, like
     <div class="section level2">
     <h2 id="ref-usage">Usage<a class="anchor" aria-label="anchor" href="#ref-usage"></a></h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">new_metric_class</span><span class="op">(</span><span class="va">classname</span>, <span class="va">...</span>, <span class="va">initialize</span>, <span class="va">update_state</span>, <span class="va">result</span><span class="op">)</span></span>
-<span></span>
-<span><span class="fu">new_loss_class</span><span class="op">(</span></span>
-<span>  <span class="va">classname</span>,</span>
-<span>  <span class="va">...</span>,</span>
-<span>  call <span class="op">=</span> <span class="cn">NULL</span>,</span>
-<span>  inherit <span class="op">=</span> <span class="fu">keras3</span><span class="fu">::</span><span class="va"><a href="keras.html">keras</a></span><span class="op">$</span><span class="va">losses</span><span class="op">$</span><span class="va">Loss</span></span>
-<span><span class="op">)</span></span>
 <span></span>
 <span><span class="fu">new_model_class</span><span class="op">(</span></span>
 <span>  <span class="va">classname</span>,</span>
@@ -127,10 +120,6 @@ to be a CamelCase version of the constructor.</p></dd>
 <dt>initialize, update_state, result, call, train_step, predict_step, test_step, compute_loss, compute_metrics</dt>
 <dd><p>Optional methods that can be overridden.</p></dd>
 
-
-<dt>inherit</dt>
-<dd><p>class to inherit from.</p></dd>
-
 </dl></div>
     <div class="section level2">
     <h2 id="value">Value<a class="anchor" aria-label="anchor" href="#value"></a></h2>
@@ -141,7 +130,7 @@ base class.</p>
     </div>
     <div class="section level2">
     <h2 id="details">Details<a class="anchor" aria-label="anchor" href="#details"></a></h2>
-    <p><code><a href="active_property.html">mark_active()</a></code> is a decorator that can be used to indicate functions that
+    <p><code><a href="mark_active.html">mark_active()</a></code> is a decorator that can be used to indicate functions that
 should become active properties of the class instances.</p>
     </div>
 

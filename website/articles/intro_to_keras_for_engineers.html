@@ -274,7 +274,7 @@ such as <code>op_conv</code> or
 <p>Let’s make a custom <code>Dense</code> layer that works with all
 backends:</p>
 <div class="sourceCode" id="cb19"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">MyDense</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/Layer.html">new_layer_class</a></span><span class="op">(</span></span>
+<code class="sourceCode R"><span><span class="va">MyDense</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/new_layer_class.html">new_layer_class</a></span><span class="op">(</span></span>
 <span>  <span class="st">"MyDense"</span>,</span>
 <span>  initialize <span class="op">=</span> <span class="kw">function</span><span class="op">(</span><span class="va">units</span>, <span class="va">activation</span> <span class="op">=</span> <span class="cn">NULL</span>, <span class="va">name</span> <span class="op">=</span> <span class="cn">NULL</span><span class="op">)</span> <span class="op">{</span></span>
 <span>    <span class="va">super</span><span class="op">$</span><span class="fu">initialize</span><span class="op">(</span>name <span class="op">=</span> <span class="va">name</span><span class="op">)</span></span>
@@ -306,7 +306,7 @@ backends:</p>
 <p>Next, let’s make a custom <code>Dropout</code> layer that relies on
 the <code>keras.random</code> namespace:</p>
 <div class="sourceCode" id="cb20"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">MyDropout</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/Layer.html">new_layer_class</a></span><span class="op">(</span></span>
+<code class="sourceCode R"><span><span class="va">MyDropout</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/new_layer_class.html">new_layer_class</a></span><span class="op">(</span></span>
 <span>  <span class="st">"MyDropout"</span>,</span>
 <span>  initialize <span class="op">=</span> <span class="kw">function</span><span class="op">(</span><span class="va">rate</span>, <span class="va">name</span> <span class="op">=</span> <span class="cn">NULL</span><span class="op">)</span> <span class="op">{</span></span>
 <span>    <span class="va">super</span><span class="op">$</span><span class="fu">initialize</span><span class="op">(</span>name <span class="op">=</span> <span class="va">name</span><span class="op">)</span></span>

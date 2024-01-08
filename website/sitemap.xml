@@ -103,6 +103,9 @@
     <loc>https://keras.posit.co/reference/Callback.html</loc>
   </url>
   <url>
+    <loc>https://keras.posit.co/reference/Constraint.html</loc>
+  </url>
+  <url>
     <loc>https://keras.posit.co/reference/KerasCallback.html</loc>
   </url>
   <url>
@@ -110,6 +113,9 @@
   </url>
   <url>
     <loc>https://keras.posit.co/reference/Layer.html</loc>
+  </url>
+  <url>
+    <loc>https://keras.posit.co/reference/Loss.html</loc>
   </url>
   <url>
     <loc>https://keras.posit.co/reference/Metric.html</loc>
@@ -949,6 +955,9 @@
     <loc>https://keras.posit.co/reference/loss_squared_hinge.html</loc>
   </url>
   <url>
+    <loc>https://keras.posit.co/reference/mark_active.html</loc>
+  </url>
+  <url>
     <loc>https://keras.posit.co/reference/metric-or-Metric.html</loc>
   </url>
   <url>
@@ -1099,7 +1108,16 @@
     <loc>https://keras.posit.co/reference/new-classes.html</loc>
   </url>
   <url>
+    <loc>https://keras.posit.co/reference/new_callback_class.html</loc>
+  </url>
+  <url>
+    <loc>https://keras.posit.co/reference/new_layer_class.html</loc>
+  </url>
+  <url>
     <loc>https://keras.posit.co/reference/new_learning_rate_schedule_class.html</loc>
+  </url>
+  <url>
+    <loc>https://keras.posit.co/reference/new_loss_class.html</loc>
   </url>
   <url>
     <loc>https://keras.posit.co/reference/normalize.html</loc>

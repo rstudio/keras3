@@ -280,7 +280,7 @@ epoch or at the beginning of a call to <code><a href="https://rdrr.io/pkg/tensor
 <span>      mae <span class="op">=</span> <span class="va">self</span><span class="op">$</span><span class="va">mae_metric</span><span class="op">$</span><span class="fu">result</span><span class="op">(</span><span class="op">)</span></span>
 <span>    <span class="op">)</span></span>
 <span>  <span class="op">}</span>,</span>
-<span>  metrics <span class="op">=</span> <span class="fu"><a href="../reference/active_property.html">mark_active</a></span><span class="op">(</span><span class="kw">function</span><span class="op">(</span><span class="op">)</span> <span class="op">{</span></span>
+<span>  metrics <span class="op">=</span> <span class="fu"><a href="../reference/mark_active.html">mark_active</a></span><span class="op">(</span><span class="kw">function</span><span class="op">(</span><span class="op">)</span> <span class="op">{</span></span>
 <span>    <span class="co"># We list our `Metric` objects here so that `reset_states()` can be</span></span>
 <span>    <span class="co"># called automatically at the start of each epoch</span></span>
 <span>    <span class="co"># or at the start of `evaluate()`.</span></span>
@@ -480,7 +480,7 @@ entire GAN algorithm in 17 lines in <code>train_step</code>:</p>
 <span>    <span class="va">self</span><span class="op">$</span><span class="va">g_optimizer</span> <span class="op">&lt;-</span> <span class="va">g_optimizer</span></span>
 <span>    <span class="va">self</span><span class="op">$</span><span class="va">loss_fn</span> <span class="op">&lt;-</span> <span class="va">loss_fn</span></span>
 <span>  <span class="op">}</span>,</span>
-<span>  metrics <span class="op">=</span> <span class="fu"><a href="../reference/active_property.html">mark_active</a></span><span class="op">(</span><span class="kw">function</span><span class="op">(</span><span class="op">)</span> <span class="op">{</span></span>
+<span>  metrics <span class="op">=</span> <span class="fu"><a href="../reference/mark_active.html">mark_active</a></span><span class="op">(</span><span class="kw">function</span><span class="op">(</span><span class="op">)</span> <span class="op">{</span></span>
 <span>    <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="va">self</span><span class="op">$</span><span class="va">d_loss_tracker</span>, <span class="va">self</span><span class="op">$</span><span class="va">g_loss_tracker</span><span class="op">)</span></span>
 <span>  <span class="op">}</span><span class="op">)</span>,</span>
 <span>  train_step <span class="op">=</span> <span class="kw">function</span><span class="op">(</span><span class="va">real_images</span><span class="op">)</span> <span class="op">{</span></span>

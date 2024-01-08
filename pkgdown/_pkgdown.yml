@@ -248,7 +248,6 @@ reference:
   - title: "Callbacks"
     contents:
       # - starts_with("callback_")
-      - KerasCallback
       - has_concept("callbacks")
 
   - title: "Initializers"
@@ -286,6 +285,7 @@ reference:
     contents:
       - loss_mean_squared_error
       - starts_with("loss_")
+      - Loss
 
   - title: "Metrics"
     contents:
