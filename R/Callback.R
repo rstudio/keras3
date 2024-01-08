@@ -355,10 +355,13 @@ function(classname,
   members <- modifyList(members, list2(...), keep.null = FALSE)
   members <- modifyList(members, public, keep.null = TRUE)
 
-  python_path <- system.file("python", package = "keras3")
-  tools <- import_from_path("kerastools.callback", path = python_path)
-  wrap_sig_idx_logs <- tools$wrap_sig_idx_logs
-  wrap_sig_logs <- tools$wrap_sig_logs
+  delayedAssign(
+    "tools",
+    import_from_path(
+      "kerastools.callback",
+      path = system.file("python", package = "keras3")))
+  wrap_sig_idx_logs <- function(fn) tools$wrap_sig_idx_logs(fn)
+  wrap_sig_logs <-  function(fn) tools$wrap_sig_logs(fn)
 
   members <- modify_intersection(members, list(
     from_config =            \(x) decorate_method(x, "classmethod"),
@@ -378,7 +381,8 @@ function(classname,
     on_predict_batch_end =   \(x) decorate_method(x, wrap_sig_idx_logs)
   ))
 
-  inherit <- substitute(inherit) %||% quote(keras3:::keras$callbacks$Callback)
+  inherit <- substitute(inherit) %||%
+    quote(base::asNamespace("keras3")$keras$callbacks$Callback)
 
   new_wrapped_py_class(
     classname = classname,
@@ -390,7 +394,7 @@ function(classname,
 }
 
 
-
+# TODO: wrap_sig_idx_logs() should be internal namespace functions
 
 #' New Callback Class
 #'

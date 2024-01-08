@@ -560,7 +560,8 @@ function(classname,
     from_config = function(x) decorate_method(x, "classmethod")
   ))
 
-  inherit <- substitute(inherit) %||% quote(keras3:::keras$Layer)
+  inherit <- substitute(inherit) %||%
+    quote(base::asNamespace("keras3")$keras$Layer)
 
   out <- new_wrapped_py_class(
     classname = classname,

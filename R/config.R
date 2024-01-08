@@ -66,7 +66,7 @@ function ()
 #'
 #' # Examples
 #' ```{r}
-#' keras3:::config_floatx()
+#' keras3::config_floatx()
 #' ```
 #'
 #' @returns

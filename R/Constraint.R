@@ -78,7 +78,7 @@ Constraint <- function(classname, call = NULL, get_config = NULL,
   ))
 
   inherit <- substitute(inherit) %||%
-    quote(keras3:::keras$constraints$Constraint)
+    quote(base::asNamespace("keras3")$keras$constraints$Constraint)
 
   new_wrapped_py_class(
     classname = classname,
