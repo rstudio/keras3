@@ -69,9 +69,8 @@ Constraint <- function(classname, call = NULL, get_config = NULL,
                          list2(...),
                          public))
 
-  if(!"__call__" %in% names(members) &&
-     "call" %in% names(members))
-    members <- rename(members, "__call__" = "call")
+  members <- rename(members, "__call__" = "call",
+                    .skip_existing = TRUE)
 
   members <- modify_intersection(members, list(
     from_config = function(x) decorate_method(x, "classmethod")

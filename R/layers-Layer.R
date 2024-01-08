@@ -18,14 +18,15 @@
 #'
 #' Users will just instantiate a layer and then treat it as a callable.
 #'
+#' # Symbols in scope
+#'
 #' All R function custom methods (public and private) will have the
 #' following symbols in scope:
-#' * `self`: the `Layer` instance.
-#' * `super`: the `Layer` superclass.
+#' * `self`: The custom class instance.
+#' * `super`: The custom class superclass.
 #' * `private`: An R environment specific to the class instance.
-#'     Any objects defined here will be invisible to the Keras framework.
-#' * `__class__` the current class type object. This will also be available as
-#'     an alias symbol, the value supplied to `Layer(classname = )`
+#'     Any objects assigned here are invisible to the Keras framework.
+#' * `__class__` and `as.symbol(classname)`: the custom class type object.
 #'
 #' # Attributes
 #'
@@ -531,7 +532,7 @@
 #'   symbols. Any objects in `private` will be invisible from the Keras
 #'   framework and the Python runtime.
 #' @param parent_env The R environment that all class methods will have as a grandparent.
-#' @param inherit What the new layer will subclass. By default, the base keras `Layer` class.
+#' @param inherit What the custom class will subclass. By default, the base keras class.
 #'
 #' @tether keras.layers.Layer
 #' @export
@@ -570,7 +571,6 @@ function(classname,
     parent_env = parent_env,
     private = private
   )
-
 
   modifiers <- modifyList(
     drop_nulls(lapply(formals(out),

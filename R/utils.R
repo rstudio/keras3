@@ -1123,12 +1123,14 @@ check_bool <- function(x) {
 }
 
 
-rename <- function(x, ...) {
+rename <- function(x, ..., .skip_existing = TRUE) {
   dots <- list(...)
   nms <- names(x)
   for(i in seq_along(dots)) {
     newname <- names(dots)[[i]]
     oldname <- dots[[i]]
+    if(.skip_existing && newname %in% nms)
+      next
     nms[match(oldname, nms)] <- newname
   }
   names(x) <- nms
