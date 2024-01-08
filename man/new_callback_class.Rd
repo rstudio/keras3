@@ -23,7 +23,7 @@ new_callback_class(
   ...,
   public = list(),
   private = list(),
-  inherit = keras$callbacks$Callback,
+  inherit = NULL,
   parent_env = parent.frame()
 )
 }

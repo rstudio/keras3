@@ -14,7 +14,7 @@ Layer(
   ...,
   public = list(),
   private = list(),
-  inherit = keras$layers$Layer,
+  inherit = NULL,
   parent_env = parent.frame()
 )
 
@@ -27,7 +27,7 @@ new_layer_class(
   ...,
   public = list(),
   private = list(),
-  inherit = keras$layers$Layer,
+  inherit = NULL,
   parent_env = parent.frame()
 )
 }

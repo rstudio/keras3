@@ -11,7 +11,7 @@ Constraint(
   ...,
   public = list(),
   private = list(),
-  inherit = keras$constraints$Constraint,
+  inherit = NULL,
   parent_env = parent.frame()
 )
 }
