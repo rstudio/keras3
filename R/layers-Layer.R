@@ -614,7 +614,7 @@ py_to_r_wrapper.keras.src.layers.layer.Layer <- function(x) {
 }
 
 
-resolve_wrapper_py_obj_expr <- function(x) {
+resolve_wrapper_py_obj_expr <- function(x, prefer_class = TRUE) {
 
   if (!identical(class(x), "function"))
     return()
@@ -632,7 +632,15 @@ resolve_wrapper_py_obj_expr <- function(x) {
   if (is.call(last_cl) &&
       (identical(last_cl[[1L]], quote(do.call)) ||
        identical(last_cl[[1L]], quote(create_layer)))) {
-    return(last_cl[[2L]])
+    expr <- last_cl[[2L]]
+    if(identical(expr, quote(callable))) {
+      # loss_ or metric_ wrapper
+      if(prefer_class)
+        expr <- second_last(body(x))[[c(3, 3)]]
+      else
+        expr <- second_last(body(x))[[c(3, 4)]]
+    }
+    return(expr)
   }
 
   # application wrapper
@@ -666,19 +674,31 @@ resolve_wrapper_py_obj_expr <- function(x) {
 # if(FALSE) {
 #   # TODO: use this to generate a static list for populating
 #   # a reverse lookup hashtable
-#   x <- lapply(asNamespace("keras3"), resolve_wrapper_py_obj_expr) |>
-#     purrr::map_chr(\(expr) if(is.null(expr)) "" else deparse1(expr))
-#   df <- tibble::enframe(x, value = "expr")
-#   df <- df[order(df$name),]
-#   success <- df$expr == ""
-#
-#
-#   df[success, ] |> print(n = Inf)
-#   df[!success, ] |> print(n = Inf)
+  # x <- lapply(asNamespace("keras3"), resolve_wrapper_py_obj_expr) |>
+  #   purrr::map_chr(\(expr) if(is.null(expr)) "" else deparse1(expr))
+  # df <- tibble::enframe(x, value = "expr")
+  # df <- df[order(df$name),]
+  # success <- df$expr != ""
+  #
+  #
+  # df[success, ] |> print(n = Inf)
+  # df[!success, ] |> print(n = Inf)
+  #
+  # # prefer_class = FALSE
+  # x <- lapply(asNamespace("keras3"), resolve_wrapper_py_obj_expr,
+  #             prefer_class = FALSE) |>
+  #   purrr::map_chr(\(expr) if(is.null(expr)) "" else deparse1(expr))
+  # df <- tibble::enframe(x, value = "expr")
+  # df <- df[order(df$name),]
+  # success <- df$expr != ""
+  # df[success, ] |> print(n = Inf)
+  # df[!success, ] |> print(n = Inf)
 # }
 
 
-resolve_py_obj <- function(x, env) {
+resolve_py_obj <- function(x, default_name = "anonymous_R_function",
+                           env = asNamespace("keras3"),
+                           prefer_class = TRUE) {
   if (is.language(x))
     x <- eval(x, env)
 
@@ -687,7 +707,7 @@ resolve_py_obj <- function(x, env) {
 
   if (is_bare_r_function(x)) {
 
-    py_obj_expr <- resolve_wrapper_py_obj_expr(x)
+    py_obj_expr <- resolve_wrapper_py_obj_expr(x, prefer_class = prefer_class)
     if (!is.null(py_obj_expr)) {
       py_obj <- tryCatch(eval(py_obj_expr, environment(x)),
                          error = function(e) NULL)
@@ -696,7 +716,7 @@ resolve_py_obj <- function(x, env) {
         return(py_obj)
     }
 
-    return(as_py_function(x))
+    return(as_py_function(x, default_name = default_name))
   }
 
   r_to_py(x)

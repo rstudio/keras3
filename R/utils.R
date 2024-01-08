@@ -1194,6 +1194,7 @@ as_node_index <- function(node_index) {
 }
 
 last <- function(x) x[[length(x)]]
+second_last <- function(x) x[[length(x)-1L]]
 
 have_module <- function(module) {
   tryCatch({ import(module); TRUE; }, error = function(e) FALSE)

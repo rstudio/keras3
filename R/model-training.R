@@ -125,46 +125,55 @@ function (object, optimizer = "rmsprop", loss = NULL, metrics = NULL,
           jit_compile = "auto",
           auto_scale_loss = TRUE)
 {
+  args <- capture_args2(list(
+    steps_per_execution = as_integer,
+    loss = as_loss,
+    metrics = function(x) {
+      if (is.null(x))
+        return(x)
+      if (is.character(x))
+        return(as.list(x))
+      if(!is.list(x))
+        x <- list(x)
+      lapply(x, as_loss, default_name = "custom_metric")
+    },
+    weighted_metrics = function(x) {
+      if (is.null(x) || is.list(x))
+        x
+      else
+        list(x)
+    },
+    loss_weights = as.list
+  ),
+  ignore = "object")
 
-    args <- capture_args2(list(
-        steps_per_execution = as_integer,
-        loss = function(loss) {
-            if(is.null(loss) || is_string(loss)) return(loss)
-            if(inherits(loss, "python.builtin.type")) # Loss()
-              return(loss())
-            if(is_bare_r_function(loss)) {
-              # TODO: use resolve_py_obj() here once it can correctly
-              # resolve losses.
-              return(py_func2(loss, TRUE, name = "custom_loss"))
-            }
-            # TODO: as_loss(), guardrail too strict, disabled for now
-            # this guardrail is here to make sure that an anonymous R function
-            # doesn't passed through - all losses must have a meaningful name.
-            # if(!inherits(loss, "python.builtin.object"))
-            #     stop(trim("`loss must one of:
-            #            - a string,
-            #            - a `Loss` instance, as returned by calling one of
-            #              the loss_* family of functions, or
-            #            - a custom Loss, as defined Loss() or custom_loss()"),
-            #          call. = FALSE)
-            loss
-        },
-        metrics = function(x) {
-            if(is.character(x)) as.list(x)
-            else wrap_as_list(x)
-        },
-        weighted_metrics = wrap_as_list,
-        loss_weights = as.list
-        ),
-        ignore = "object")
+  do.call(object$compile, args)
 
-
-    do.call(object$compile, args)
-
-    # return model invisible (convenience for chaining)
-    invisible(object)
+  # return model invisible (convenience for chaining)
+  invisible(object)
 }
 
+as_loss <- function(x, default_name = "custom_loss") {
+  if (is.null(x) || is_string(x))
+    return(x)
+  x <- resolve_py_obj(x, default_name = default_name,
+                      prefer_class = FALSE)
+  # if (inherits(x, "python.builtin.type")) # Loss()
+  #   return(x())
+  x
+}
+
+
+# TODO: as_loss(), guardrail too strict, disabled for now
+# this guardrail is here to make sure that an anonymous R function
+# doesn't passed through - all losses must have a meaningful name.
+# if(!inherits(loss, "python.builtin.object"))
+#     stop(trim("`loss must one of:
+#            - a string,
+#            - a `Loss` instance, as returned by calling one of
+#              the loss_* family of functions, or
+#            - a custom Loss, as defined Loss() or custom_loss()"),
+#          call. = FALSE)
 
 # ---- evaluate ----
 
