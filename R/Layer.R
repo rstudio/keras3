@@ -588,7 +588,7 @@ function(classname,
     create_layer(.(as.symbol(classname)), object, args)
   })
 
-  delayedAssign("__class__", get(classname), environment(out), environment(out))
+  # delayedAssign("__class__", get(classname), environment(out), environment(out))
   delayedAssign("Layer",     get(classname), environment(out), environment(out))
 
   out
@@ -612,6 +612,30 @@ py_to_r_wrapper.keras.src.layers.layer.Layer <- function(x) {
 }
 
 
+# if(FALSE) {
+#   # TODO: use this to generate a static list for populating
+#   # a reverse lookup hashtable
+# x <- lapply(asNamespace("keras3"), resolve_wrapper_py_obj_expr) |>
+#   purrr::map_chr(\(expr) if(is.null(expr)) "" else deparse1(expr))
+# df <- tibble::enframe(x, value = "expr")
+# df <- df[order(df$name),]
+# success <- df$expr != ""
+#
+#
+# df[success, ] |> print(n = Inf)
+# df[!success, ] |> print(n = Inf)
+#
+# # prefer_class = FALSE
+# x <- lapply(asNamespace("keras3"), resolve_wrapper_py_obj_expr,
+#             prefer_class = FALSE) |>
+#   purrr::map_chr(\(expr) if(is.null(expr)) "" else deparse1(expr))
+# df <- tibble::enframe(x, value = "expr")
+# df <- df[order(df$name),]
+# success <- df$expr != ""
+# df[success, ] |> print(n = Inf)
+# df[!success, ] |> print(n = Inf)
+# }
+
 resolve_wrapper_py_obj_expr <- function(x, prefer_class = TRUE) {
 
   if (!identical(class(x), "function"))
@@ -620,8 +644,17 @@ resolve_wrapper_py_obj_expr <- function(x, prefer_class = TRUE) {
   ns <- environment(sys.function()) # keras3 namespace
   xe <- environment(x)
 
+  if(identical(xe, emptyenv()))
+    return()
+
   # only inspect pkg functions, or pkg wrapped functions
-  if(!(identical(xe, ns) || identical(parent.env(xe), ns)))
+
+  ## is wrapper, like Layer()
+  if(identical(parent.env(xe), ns))
+    return(quote(`__class__`))
+
+  ## is a pkg exported function
+  if(!(identical(xe, ns))) # || identical(parent.env(xe), ns)))
     return()
 
   # standard builtin wrapper, like layer_dense, or custom wrapper, like Layer()
@@ -668,31 +701,6 @@ resolve_wrapper_py_obj_expr <- function(x, prefer_class = TRUE) {
 
   NULL
 }
-
-# if(FALSE) {
-#   # TODO: use this to generate a static list for populating
-#   # a reverse lookup hashtable
-  # x <- lapply(asNamespace("keras3"), resolve_wrapper_py_obj_expr) |>
-  #   purrr::map_chr(\(expr) if(is.null(expr)) "" else deparse1(expr))
-  # df <- tibble::enframe(x, value = "expr")
-  # df <- df[order(df$name),]
-  # success <- df$expr != ""
-  #
-  #
-  # df[success, ] |> print(n = Inf)
-  # df[!success, ] |> print(n = Inf)
-  #
-  # # prefer_class = FALSE
-  # x <- lapply(asNamespace("keras3"), resolve_wrapper_py_obj_expr,
-  #             prefer_class = FALSE) |>
-  #   purrr::map_chr(\(expr) if(is.null(expr)) "" else deparse1(expr))
-  # df <- tibble::enframe(x, value = "expr")
-  # df <- df[order(df$name),]
-  # success <- df$expr != ""
-  # df[success, ] |> print(n = Inf)
-  # df[!success, ] |> print(n = Inf)
-# }
-
 
 resolve_py_obj <- function(x, default_name = "anonymous_R_function",
                            env = asNamespace("keras3"),

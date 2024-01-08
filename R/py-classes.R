@@ -45,6 +45,7 @@ new_wrapped_py_class <- function(classname,
                 parent_env = parent_env,
                 private = private)
   })
+  delayedAssign("__class__", get(classname))
 
   if(reticulate::py_available()) {
     # force promise, get actual frmls

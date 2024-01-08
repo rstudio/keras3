@@ -340,36 +340,18 @@ function (object, name = NULL, package = NULL) #, clear = FALSE)
   #   py_eval("lambda keras: keras.saving.get_custom_objects().clear()")(keras)
   #   return(invisible())
   # }
-  object_in <- object
 
-  if (inherits(object, "R6ClassGenerator"))
-    object <- r_to_py.R6ClassGenerator(object)
+  py_object <- resolve_py_obj(
+    object,
+    default_name = name %||% deparse1(substitute(object))
+  )
 
-  # maybe unwrap `object` from a Layer() wrapper, resolve `name` if needed
-  if (!inherits(object, "python.builtin.object"))
-    if (identical(parent.env(environment()), parent.env(environment(object))))
-      if (inherits(Layer <- environment(object)$Layer, "python.builtin.object"))
-        object <- Layer
+  package <- package %||%
+    replace_val(environmentName(topenv(parent.frame())),
+                c("", "base"), "Custom")
 
-  name <- name %||%
-    as_r_value(py_get_attr(object, "__name__", TRUE)) %||%
-    attr(object, "py_function_name", TRUE) %||%
-    attr(object, "__name__", TRUE) %||%
-    attr(object, "name", TRUE) %||%
-    deparse1(substitute(object))
-
-  if (!inherits(object, "python.builtin.object") &&
-      is.function(object) &&
-      is.null(attr(object, "py_function_name", TRUE)))
-    object <- py_func2(object, TRUE, name = name)
-
-  if (is.null(package)) {
-    package <- environmentName(topenv(parent.frame())) |>
-      replace_val(c("", "R_GlobalEnv"), "Custom")
-  }
-
-  keras$saving$register_keras_serializable(package, name)(object)
-  invisible(object_in)
+  keras$saving$register_keras_serializable(package, name)(py_object)
+  invisible(object)
 }
 
 #' @export
@@ -465,7 +447,7 @@ function ()
 #' for serialization/deserialization.
 #'
 #' @returns
-#' The name associated with the object, or the default Python name if the
+#' The name associated with the object, or the default name if the
 #' object is not registered.
 #'
 #' @param obj
@@ -480,8 +462,8 @@ function ()
 get_registered_name <-
 function (obj)
 {
-  args <- capture_args2(NULL)
-  do.call(keras$saving$get_registered_name, args)
+  py_obj <- resolve_py_obj(obj, default_name = stop("Object must have a `name` attribute"))
+  keras$saving$get_registered_name(py_obj)
 }
 
 
@@ -636,26 +618,35 @@ function (obj)
 #' loss:
 #'
 #' ```{r}
-#' loss_modified_mse <- new_loss_class(
+#' # setup for example
+#' o_registered <- get_custom_objects()$copy()
+#' clear_registered_custom_objects()
+#'
+#' # define a custom object
+#' loss_modified_mse <- Loss(
 #'   "ModifiedMeanSquaredError",
-#'   inherit = keras$losses$MeanSquaredError)
+#'   inherit = loss_mean_squared_error)
 #'
-#' register_keras_serializable(loss_modified_mse, package='my_package')
+#' # register the custom object
+#' register_keras_serializable(loss_modified_mse)
 #'
-#' config <- list(
-#'   class_name = "ModifiedMeanSquaredError",
-#'   config = list(
-#'     # These arguments will be passed to
-#'     # `loss_modified_mse$initialize()` when
-#'     # deserializing the object.
-#'     name = "modified_mean_squared_error",
-#'     reduction = "sum_over_batch_size"
-#'   ),
-#'   registered_name = "my_package>ModifiedMeanSquaredError"
-#' )
+#' # confirm object is registered
+#' get_custom_objects()
+#' get_registered_name(loss_modified_mse)
 #'
+#' # now custom object instances can be serialized
+#' full_config <- serialize_keras_object(loss_modified_mse())
+#'
+#' # the `config` arguments will be passed to loss_modified_mse()
+#' str(full_config)
+#'
+#' # and custom object instances can be deserialized
+#' deserialize_keras_object(full_config)
 #' # Returns the `ModifiedMeanSquaredError` object
-#' deserialize_keras_object(config)
+#'
+#' # cleanup from example
+#' clear_registered_custom_objects() # cleanup
+#' get_custom_objects()$update(o_registered)
 #' ```
 #'
 #' @returns
