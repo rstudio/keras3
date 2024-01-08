@@ -10,15 +10,13 @@ generate_module_name <- function(env) {
   sprintf("<r-%s>", name)
 }
 
-new_py_class <-   function(
-  classname,
-  members = list(),
-  inherit = NULL,
-  parent_env = parent.frame(),
-  inherit_expr,
-  convert = TRUE
-) {
-  if(!missing(inherit_expr))
+new_py_class <- function(classname,
+                         members = list(),
+                         inherit = NULL,
+                         parent_env = parent.frame(),
+                         inherit_expr,
+                         convert = TRUE) {
+  if (!missing(inherit_expr))
     inherit <- eval(inherit_expr, parent_env)
   new_py_type(
     classname,
@@ -695,8 +693,9 @@ delayed_r_to_py_R6ClassGenerator <- function(r6_class, convert) {
   fn
 }
 
-#' @export
-print.py_R6ClassGenerator <- function(x, ...) {
+# @export
+# print.py_R6ClassGenerator <-
+function(x, ...) {
   r6_class <- attr(x, "r6_class")
   if (isTRUE(get0("delayed", attr(x, "py_object"))))
     cat(sprintf("<R6type.%s> (delayed)\n", r6_class$classname))
@@ -706,16 +705,18 @@ print.py_R6ClassGenerator <- function(x, ...) {
   print(r6_class)
 }
 
-#' @export
-`$.py_R6ClassGenerator` <- function(x, name) {
+# @export
+# `$.py_R6ClassGenerator` <-
+function(x, name) {
   if (identical(name, "new"))
     return(x)
   NextMethod()
 }
 
 # @exportS3Method pillar::type_sum
-#' @rawNamespace S3method(pillar::type_sum,py_R6ClassGenerator)
-type_sum.py_R6ClassGenerator <- function(x) {
+# @rawNamespace S3method(pillar::type_sum,py_R6ClassGenerator)
+# type_sum.py_R6ClassGenerator <-
+function(x) {
   cl <- class(x)[[1L]]
   if(startsWith(cl, "R6type."))
     cl <- substr(cl, 8L, 2147483647L)
