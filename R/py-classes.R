@@ -39,7 +39,7 @@ new_wrapped_py_class <- function(classname,
   delayedAssign(classname, {
     new_py_type(classname = classname,
                 members = members,
-                inherit = resolve_py_obj(inherit, parent_env),
+                inherit = resolve_py_obj(inherit, env = parent_env),
                 parent_env = parent_env,
                 private = private)
   })
