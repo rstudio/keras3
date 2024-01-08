@@ -801,10 +801,6 @@ active_property <- function(fn) {
   fn
 }
 
-#' @export
-#' @rdname active_property
-mark_active <- active_property
-
 decorate_method <- function(fn, decorator) {
   append1(attr(fn, "py_decorators")) <- decorator
   fn

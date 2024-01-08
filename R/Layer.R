@@ -594,9 +594,7 @@ function(classname,
   out
 }
 
-#' @export
-#' @rdname Layer
-new_layer_class <- Layer
+
 
 # ' @param .composing Bare Keras Layers (`layer_*` functions) conventionally have `object` as the first argument, which allows users to instantiate (`initialize`) and `call` one motion.
 

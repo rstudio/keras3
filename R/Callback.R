@@ -428,11 +428,5 @@ callback_method_wrapper_sig_logs <- function(fn) {
 # })
 
 
-#' New Callback Class
-#'
-#' `new_callback_class()` is an alias for [`Callback()`].
-#'
-#' @inheritParams Callback
-#' @export
-#' @keywords internal
-new_callback_class <- Callback
+
+

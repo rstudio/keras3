@@ -10,17 +10,6 @@ function(classname, ..., initialize, update_state, result) {
               parent_env = parent.frame())
 }
 
-#' @rdname new-classes
-#' @param inherit class to inherit from.
-#' @export
-new_loss_class <-
-function(classname, ..., call = NULL, inherit = keras3::keras$losses$Loss) {
-  members <- capture_args2(ignore = "classname")
-  members$call <- call
-  new_py_class(classname, members,
-               inherit_expr = substitute(inherit),
-               parent_env = parent.frame())
-}
 
 
 
