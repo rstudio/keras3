@@ -549,7 +549,7 @@ function(classname,
          ...,
          public = list(),
          private = list(),
-         inherit = keras$layers$Layer,
+         inherit = NULL,
          parent_env = parent.frame()) {
 
   members <- drop_nulls(named_list(initialize, call, build, get_config))
@@ -560,9 +560,9 @@ function(classname,
     from_config = function(x) decorate_method(x, "classmethod")
   ))
 
-  inherit <- as_Layer(inherit)
+  inherit <- substitute(inherit) %||% quote(keras3:::keras$Layer)
 
-  cls <- new_py_type(
+  out <- new_wrapped_py_class(
     classname = classname,
     members = members,
     inherit = inherit,
@@ -570,8 +570,9 @@ function(classname,
     private = private
   )
 
+
   modifiers <- modifyList(
-    drop_nulls(lapply(formals(cls),
+    drop_nulls(lapply(formals(out),
         function(arg_default) if (is.integer(arg_default)) quote(as_integer))),
     alist(
       input_shape = shape,
@@ -580,7 +581,16 @@ function(classname,
       activity_regularizer = as_regularizer)
   )
 
-  create_layer_wrapper(cls, modifiers)
+  prepend(formals(out)) <- alist(object = )
+  body(out) <-  bquote({
+    args <- capture_args2(.(modifiers), ignore = "object")
+    create_layer(.(as.symbol(classname)), object, args)
+  })
+
+  delayedAssign("__class__", get(classname), environment(out), environment(out))
+  delayedAssign("Layer",     get(classname), environment(out), environment(out))
+
+  out
 }
 
 #' @export
@@ -601,6 +611,97 @@ py_to_r_wrapper.keras.src.layers.layer.Layer <- function(x) {
       compose_layer(object, x, ...)
   }
 }
+
+
+resolve_wrapper_py_obj_expr <- function(x) {
+
+  if (!identical(class(x), "function"))
+    return()
+
+  ns <- environment(sys.function()) # keras3 namespace
+  xe <- environment(x)
+
+  # only inspect pkg functions, or pkg wrapped functions
+  if(!(identical(xe, ns) || identical(parent.env(xe), ns)))
+    return()
+
+  # standard builtin wrapper, like layer_dense, or custom wrapper, like Layer()
+  # TODO: this fails to resolve Metric / Loss wrappers
+  last_cl <- last(body(x))
+  if (is.call(last_cl) &&
+      (identical(last_cl[[1L]], quote(do.call)) ||
+       identical(last_cl[[1L]], quote(create_layer)))) {
+    return(last_cl[[2L]])
+  }
+
+  # application wrapper
+  if (is.call(last_cl) &&
+      identical(last_cl[[1L]], quote(set_preprocessing_attributes)) &&
+      is.call(last_cl2 <- as.list(body(x))[[length(body(x)) - 1L]]) &&
+      (identical(last_cl2[[c(3L, 1L)]], quote(do.call))))
+    return(last_cl2[[c(3L, 2L)]])
+
+  # bare builtin op_wrapper, like
+  # op_add <- function(x1, x2) keras$ops$add(x1, x2)
+  if (is.call(cl <- body(x)) &&
+      (is.call(cl0 <- cl1 <- cl[[1L]]) ||
+       (
+         identical(cl0, quote(`{`)) &&
+         length(cl1 <- as.list(cl[-1])) == 1 &&
+         is.call(cl <- cl1[[1L]]) &&
+         is.call(cl0 <- cl1 <- cl[[1L]])
+       )))
+  {
+    while (is.call(cl0) && identical(cl0[[1L]], quote(`$`)))
+      cl0 <- cl0[[2L]]
+
+    if (identical(cl0, quote(keras)))
+      return(cl1)
+  }
+
+  NULL
+}
+
+# if(FALSE) {
+#   # TODO: use this to generate a static list for populating
+#   # a reverse lookup hashtable
+#   x <- lapply(asNamespace("keras3"), resolve_wrapper_py_obj_expr) |>
+#     purrr::map_chr(\(expr) if(is.null(expr)) "" else deparse1(expr))
+#   df <- tibble::enframe(x, value = "expr")
+#   df <- df[order(df$name),]
+#   success <- df$expr == ""
+#
+#
+#   df[success, ] |> print(n = Inf)
+#   df[!success, ] |> print(n = Inf)
+# }
+
+
+resolve_py_obj <- function(x, env) {
+  if (is.language(x))
+    x <- eval(x, env)
+
+  if (is.null(x) || inherits(x, "python.builtin.object"))
+    return(x)
+
+  if (is_bare_r_function(x)) {
+
+    py_obj_expr <- resolve_wrapper_py_obj_expr(x)
+    if (!is.null(py_obj_expr)) {
+      py_obj <- tryCatch(eval(py_obj_expr, environment(x)),
+                         error = function(e) NULL)
+
+      if (inherits(py_obj, "python.builtin.object"))
+        return(py_obj)
+    }
+
+    return(as_py_function(x))
+  }
+
+  r_to_py(x)
+}
+
+
 
 # used to resolve `inherit` arg in Layer()
 as_Layer <- function(x) {

@@ -61,7 +61,7 @@ Constraint <- function(classname, call = NULL, get_config = NULL,
                        ...,
                        public = list(),
                        private = list(),
-                       inherit = keras$constraints$Constraint,
+                       inherit = NULL,
                        parent_env = parent.frame()) {
 
   members <- Reduce(function(x, y) modifyList(x, y, keep.null = TRUE),
@@ -77,15 +77,15 @@ Constraint <- function(classname, call = NULL, get_config = NULL,
     from_config = function(x) decorate_method(x, "classmethod")
   ))
 
-  new_py_type(
+  inherit <- substitute(inherit) %||%
+    quote(keras3:::keras$constraints$Constraint)
+
+  new_wrapped_py_class(
     classname = classname,
     members = members,
     inherit = inherit,
     parent_env = parent_env,
     private = private
-    # delayed = TRUE
   )
 }
-
-
 

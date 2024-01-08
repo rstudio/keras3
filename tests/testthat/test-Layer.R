@@ -264,3 +264,44 @@ test_succeeds("custom layers can accept standard layer args like input_shape", {
 })
 
 # TODO: document change: inputs to the keras api being tensors/arrays now strictly enforced
+
+test_that("calling Layer() doesn't initialize Python", {
+  expect_no_error(callr::r(function() {
+    Sys.setenv(CUDA_VISIBLE_DEVICES="")
+    options("topLevelEnvironment" = environment())
+    # pretend we're in a package
+
+    layer_multiply_by_x <- keras3::Layer(
+      classname = "MultiplyByX",
+
+      initialize = function(x) {
+        super$initialize()
+        self$x <- op_convert_to_tensor(x)
+      },
+
+      call =  function(inputs, ...) {
+        inputs * self$x
+      },
+
+      get_config = function() {
+        list(x = as.numeric(self$x))
+      }
+    )
+
+    if (reticulate:::is_python_initialized())
+      stop("python initialized")
+
+    library(keras3)
+    layer <- layer_multiply_by_x(x = 2)
+    input <- op_convert_to_tensor(2)
+    output <- layer(input)
+    stopifnot(as.array(output) == as.array(input*2))
+
+    input <- layer_input(shape())
+    output <- input |> layer_multiply_by_x(2)
+    model <- keras_model(input, output)
+    x <- as.array(2)
+    pred <- model |> predict(x, verbose = 0)
+    stopifnot(all.equal(pred, as.array(4)))
+  }))
+})

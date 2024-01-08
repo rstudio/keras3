@@ -1063,6 +1063,10 @@ random_array <- function(..., gen = stats::runif) {
   c(x, value)
 }
 
+`prepend<-` <- function(x, value) {
+  c(x[integer()], value, x)
+}
+
 replace_val <- function(x, old, new) {
   if (!is_scalar(new))
     stop("Unexpected length of replacement value in replace_val().\n",
@@ -1178,10 +1182,8 @@ modify_intersection <- function(x, modifiers) {
   x
 }
 
-is_r_function <- function(x) {
-  if (inherits(x, "python.builtin.object"))
-    return(FALSE)
-  is.function(x)
+is_bare_r_function <- function(x) {
+  identical(class(x), "function")
 }
 
 is_py_object <- function(x) inherits(x, "python.builtin.object")
@@ -1191,7 +1193,7 @@ as_node_index <- function(node_index) {
   as.integer(node_index-1)
 }
 
-
+last <- function(x) x[[length(x)]]
 
 have_module <- function(module) {
   tryCatch({ import(module); TRUE; }, error = function(e) FALSE)

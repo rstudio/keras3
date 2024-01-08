@@ -28,6 +28,42 @@ new_py_class <-   function(
   )
 }
 
+
+new_wrapped_py_class <- function(classname,
+                                 members = list(),
+                                 inherit = NULL,
+                                 parent_env = parent.frame(),
+                                 private = list()) {
+
+  # force all args
+  classname; members; inherit; parent_env; private
+
+  delayedAssign(classname, {
+    new_py_type(classname = classname,
+                members = members,
+                inherit = resolve_py_obj(inherit, parent_env),
+                parent_env = parent_env,
+                private = private)
+  })
+
+  if(reticulate::py_available()) {
+    # force promise, get actual frmls
+    frmls <- formals(get(classname, inherits = FALSE))
+  } else {
+    # try to infer frmls
+    frmls <- formals(members$`__init__ ` %||% members$initialize %||% \(...){})
+  }
+
+  frmls$self <- NULL
+
+  bdy <- bquote({
+    args <- capture_args2()
+    do.call(.(as.name(classname)), args)
+  })
+
+  as.function.default(c(frmls, bdy))
+}
+
 new_py_type <-
 function(classname,
          members = list(),
@@ -35,6 +71,10 @@ function(classname,
          parent_env = parent.frame(),
          private = list())
 {
+
+  if (is.language(inherit))
+    inherit <- eval(inherit, parent_env)
+
   convert <- TRUE
   inherit <- resolve_py_type_inherits(inherit, convert)
   mask_env <- new.env(parent = parent_env)
@@ -225,9 +265,6 @@ resolve_py_type_inherits <- function(inherit, convert=FALSE) {
   names(bases) <- NULL
 
   bases <- lapply(bases, function(cls) {
-    if (inherits(cls, "R6ClassGenerator"))
-      return(r_to_py.R6ClassGenerator(cls, convert))
-
     if (!inherits(cls, "python.builtin.object"))
       tryCatch(
         cls <- r_to_py(cls),
@@ -235,13 +272,8 @@ resolve_py_type_inherits <- function(inherit, convert=FALSE) {
           stop(e, "Supplied superclasses must be python objects, not: ",
                paste(class(cls), collapse = ", "))
       )
-
-    if(inherits(cls, "python.builtin.type") && is.function(cls))
-      force(environment(cls)$callable)
-
     cls
   })
-
   bases <- do.call(tuple, bases)
 
   list(bases = bases, keywords = keywords)

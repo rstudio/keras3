@@ -339,7 +339,7 @@ function(classname,
          ...,
          public = list(),
          private = list(),
-         inherit = keras$callbacks$Callback,
+         inherit = NULL,
          parent_env = parent.frame())
 {
 
@@ -378,7 +378,9 @@ function(classname,
     on_predict_batch_end =   \(x) decorate_method(x, wrap_sig_idx_logs)
   ))
 
-  new_py_type(
+  inherit <- substitute(inherit) %||% quote(keras3:::keras$callbacks$Callback)
+
+  new_wrapped_py_class(
     classname = classname,
     members = members,
     inherit = inherit,
