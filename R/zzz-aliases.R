@@ -5,7 +5,7 @@
     {name}
 
     `{backcompat_name}()` is an alias for [`{name}()`].
-    See [`?{name}()`] for the full documentation.
+    See `?`[`{name}()`] for the full documentation.
 
     @inheritParams {name}
     @keywords internal
