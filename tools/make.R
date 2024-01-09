@@ -177,6 +177,7 @@ fs::dir_walk("man-src", type = "directory", recurse = TRUE,
 #       takes an axis arg. Only there for numpy api compatability, which
 #       doesn't matter to us.
 #
+# TODO: op_arange() returns a 0-based tensor
 
 # TODO: ??? .onLoad(...) if(!interactive()) config_disable_interactive_logging()
 

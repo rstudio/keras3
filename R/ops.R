@@ -5770,8 +5770,8 @@ function (x, repeats, axis = NULL)
 op_reshape <-
 function (x, ..., new_shape = list(...))
 {
-    keras$ops$reshape(x, tuple(lapply(shape(new_shape), function(d) d %||%
-        -1L)))
+    keras$ops$reshape(x, tuple(lapply(shape(new_shape),
+                                      function(d) d %||% -1L)))
 }
 
 
@@ -5781,7 +5781,7 @@ function (x, ..., new_shape = list(...))
 #' Elements that roll beyond the last position are re-introduced at the first.
 #'
 #' @returns
-#'     Output tensor.
+#' Output tensor.
 #'
 #' @param x
 #' Input tensor.
@@ -5804,7 +5804,7 @@ function (x, ..., new_shape = list(...))
 op_roll <-
 function (x, shift, axis = NULL)
 {
-    args <- capture_args2(list(axis = as_axis))
+    args <- capture_args2(list(shift = as_integer, axis = as_axis))
     do.call(keras$ops$roll, args)
 }
 

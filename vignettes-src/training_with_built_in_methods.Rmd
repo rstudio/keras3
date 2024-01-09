@@ -19,8 +19,8 @@ library(keras3)
 ## Introduction
 
 This guide covers training, evaluation, and prediction (inference) models
-when using built-in APIs for training & validation (such as `Model$fit()`,
-`Model$evaluate()` and `Model$predict()`).
+when using built-in APIs for training & validation (such as `fit()`,
+`evaluate()` and `predict()`).
 
 If you are interested in leveraging `fit()` while specifying your
 own training step function, see the
@@ -43,7 +43,6 @@ This guide doesn't cover distributed training, which is covered in our
 When passing data to the built-in training loops of a model, you should either use:
 
 - Arrays (if your data is small and fits in memory)
-- Subclasses of `keras$utils$PyDataset`
 - `tf_dataset` objects
 - PyTorch `DataLoader` instances
 
@@ -89,7 +88,7 @@ y_train <- y_train[-c(1:10000)]
 We specify the training configuration (optimizer, loss, metrics):
 
 ```{r}
-model %>% compile(
+model |> compile(
     optimizer = optimizer_rmsprop(),  # Optimizer
     # Loss function to minimize
     loss = loss_sparse_categorical_crossentropy(),
@@ -103,9 +102,8 @@ We call `fit()`, which will train the model by slicing the data into "batches" o
 `epochs`.
 
 ```{r}
-history <- model %>% fit(
-  x_train,
-  y_train,
+history <- model |> fit(
+  x_train, y_train,
   batch_size = 64,
   epochs = 2,
   # We pass some validation for

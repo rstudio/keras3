@@ -28,9 +28,26 @@
 #' # Standalone usage
 #' mse <- loss_custom_mse(name = "my_custom_mse_instance")
 #'
-#' y_true <- op_ones(c(5, 5))
-#' y_pred <- y_true - .5
-#' mse(y_true, y_pred)
+#' y_true <- op_arange(20) |> op_reshape(4, 5)
+#' y_pred <- op_arange(20) |> op_reshape(4, 5) * 2
+#' (loss <- mse(y_true, y_pred))
+#'
+#' loss2 <- (y_pred - y_true)^2 |>
+#'   op_mean(axis = -1) |>
+#'   op_mean()
+#'
+#' stopifnot(all.equal(as.array(loss), as.array(loss2)))
+#'
+#' sample_weight <-array(c(.25, .25, 1, 1))
+#' (weighted_loss <- mse(y_true, y_pred, sample_weight = sample_weight))
+#'
+#' weighted_loss2 <- (y_true - y_pred)^2 |>
+#'   op_mean(axis = -1) |>
+#'   op_multiply(sample_weight) |>
+#'   op_mean()
+#'
+#' stopifnot(all.equal(as.array(weighted_loss),
+#'                     as.array(weighted_loss2)))
 #' ```
 #
 #' # Methods defined by base `Loss` class:
@@ -38,6 +55,11 @@
 #' * ```r
 #'   initialize(name=NULL, reduction="sum_over_batch_size", dtype=NULL)
 #'   ```
+#'
+#' * ```
+#'   __call__(y_true, y_pred, sample_weight=NULL)
+#'   ```
+#'   Call the loss instance as a function, optionally with `sample_weight`
 #'
 #' * ```r
 #'   get_config()
@@ -60,15 +82,12 @@ function(classname, call = NULL,
   members <- modifyList(members, list2(...), keep.null = TRUE)
   members <- modifyList(members, public, keep.null = TRUE)
 
-  members <- rename(members, "__call__" = "call",
-                    .skip_existing = TRUE)
-
   members <- modify_intersection(members, list(
     from_config = function(x) decorate_method(x, "classmethod")
   ))
 
   inherit <- substitute(inherit) %||%
-    quote(base::asNamespace("keras3")$keras$losses$Loss)
+    quote(base::asNamespace("keras3")$keras$Loss)
 
   new_wrapped_py_class(
     classname = classname,
