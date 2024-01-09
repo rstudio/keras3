@@ -19,6 +19,6 @@ Count the total number of scalars composing the weights.
 Other layer methods: 
 \code{\link{get_config}()},
 \code{\link{get_weights}()},
-\code{\link{reset_states}()}
+\code{\link{reset_state}()}
 }
 \concept{layer methods}

@@ -104,14 +104,18 @@ count_params <- function(object) {
 
 
 
-#' Reset the states for a layer
+#' Reset the state for a model, layer or metric.
 #'
-#' @param object Model or layer object
+#' @param object Model, Layer, or Metric instance
+#'
+#' Not all Layers have resettable state (E.g., `adapt()`-able preprocessing
+#' layers and rnn layers have resettable state, but a `layer_dense()` does not).
+#' Calling this on a Layer instance without any resettable-state will error.
 #'
 #' @family layer methods
 #'
 #' @export
-reset_states <- function(object) {
-  object$reset_states()
+reset_state <- function(object) {
+  object$reset_state()
   invisible(object)
 }

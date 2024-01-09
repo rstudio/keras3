@@ -1326,7 +1326,7 @@ function (units, activation = "tanh", recurrent_activation = "sigmoid",
 }
 
 
-#' Base class for recurrent layer_
+#' Base class for recurrent layers
 #'
 #' @description
 #'
@@ -1382,7 +1382,7 @@ function (units, activation = "tanh", recurrent_activation = "sigmoid",
 #' It should be a list of integers, e.g. `(32, 10, 100)`.
 #' - Specify `shuffle=FALSE` when calling `fit()`.
 #'
-#' To reset the states of your model, call `.reset_states()` on either
+#' To reset the states of your model, call [`reset_state()`] on either
 #' a specific layer, or on your entire model.
 #'
 #' Note on specifying the initial state of RNNs:
@@ -1392,10 +1392,6 @@ function (units, activation = "tanh", recurrent_activation = "sigmoid",
 #' `initial_state` should be a tensor or list of tensors representing
 #' the initial state of the RNN layer.
 #'
-#' You can specify the initial state of RNN layers numerically by
-#' calling `reset_states` with the keyword argument `states`. The value of
-#' `states` should be a numpy array or list of numpy arrays representing
-#' the initial state of the RNN layer.
 #'
 #' # Examples
 #' ```{r}

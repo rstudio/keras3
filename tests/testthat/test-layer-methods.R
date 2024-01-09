@@ -88,6 +88,5 @@ test_succeeds("layer state can be reset", {
     layer_dense(units = 16, activation = 'softmax')
 
   layer <- model$layers[[1]]
-  reset_states(layer)
-  # TODO: reset_states -> renamed to -> reset_state?
+  reset_state(layer)
 })

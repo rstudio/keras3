@@ -254,8 +254,8 @@ Add a weight variable to the layer.
 
 Args:
 \itemize{
-\item \code{shape}: shape for the variable (as defined by \code{keras3::shape()})
-Must be fully-defined (no \code{NA}/\code{NULL} entries).
+\item \code{shape}: shape for the variable (as defined by \code{\link[=shape]{shape()}})
+Must be fully-defined (no \code{NA}/\code{NULL}/\code{-1} entries).
 Defaults to \verb{()} (scalar) if unspecified.
 \item \code{initializer}: Initializer object to use to
 populate the initial variable value,

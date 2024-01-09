@@ -31,7 +31,7 @@ Other model persistence:
 Other layer methods: 
 \code{\link{count_params}()},
 \code{\link{get_config}()},
-\code{\link{reset_states}()}
+\code{\link{reset_state}()}
 }
 \concept{layer methods}
 \concept{model persistence}
