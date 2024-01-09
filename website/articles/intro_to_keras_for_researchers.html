@@ -33,7 +33,7 @@
     
     <a class="navbar-brand me-2" href="../index.html">keras3</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">2.13.0.9000</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.0.0.9000</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -714,13 +714,13 @@ functions called above:</p>
 <li>Override <code>update_state()</code> to update the statistic
 values.</li>
 <li>Override <code>result()</code> to return the metric value.</li>
-<li>Override <code>reset_state()</code> to reset the metric to its
+<li>Override <code><a href="../reference/reset_state.html">reset_state()</a></code> to reset the metric to its
 initial state.</li>
 </ul>
 <p>Here is an example where we implement the F1-score metric (with
 support for sample weighting).</p>
 <div class="sourceCode" id="cb58"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">F1Score</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/new-classes.html">new_metric_class</a></span><span class="op">(</span></span>
+<code class="sourceCode R"><span><span class="va">F1Score</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/new_metric_class.html">new_metric_class</a></span><span class="op">(</span></span>
 <span>  <span class="st">"F1Score"</span>,</span>
 <span>  initialize <span class="op">=</span> <span class="kw">function</span><span class="op">(</span><span class="va">self</span>, <span class="va">name</span><span class="op">=</span><span class="st">"f1_score"</span>, <span class="va">dtype</span><span class="op">=</span><span class="st">"float32"</span>, <span class="va">threshold</span><span class="op">=</span><span class="fl">0.5</span>, <span class="va">...</span><span class="op">)</span> <span class="op">{</span></span>
 <span>    <span class="va">super</span><span class="op">$</span><span class="fu">initialize</span><span class="op">(</span>name<span class="op">=</span><span class="va">name</span>, dtype<span class="op">=</span><span class="va">dtype</span>, <span class="va">...</span><span class="op">)</span></span>
@@ -977,10 +977,10 @@ the MNIST example above.</p>
 <pre><code><span><span class="co">## Epoch 1/2</span></span>
 <span><span class="co">## 938/938 - 3s - 3ms/step - loss: 0.3960 - sparse_categorical_accuracy: 0.8866</span></span>
 <span><span class="co">## Epoch 2/2</span></span>
-<span><span class="co">## 938/938 - 1s - 930us/step - loss: 0.1886 - sparse_categorical_accuracy: 0.9444</span></span></code></pre>
+<span><span class="co">## 938/938 - 1s - 1ms/step - loss: 0.1886 - sparse_categorical_accuracy: 0.9444</span></span></code></pre>
 <div class="sourceCode" id="cb73"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">predictions</span> <span class="op">&lt;-</span> <span class="va">model</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://rdrr.io/r/stats/predict.html" class="external-link">predict</a></span><span class="op">(</span><span class="va">dataset</span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">## 938/938 - 1s - 994us/step</span></span></code></pre>
+<pre><code><span><span class="co">## 938/938 - 1s - 1ms/step</span></span></code></pre>
 <div class="sourceCode" id="cb75"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">model</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://rdrr.io/pkg/tensorflow/man/evaluate.html" class="external-link">evaluate</a></span><span class="op">(</span><span class="va">dataset</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">## 938/938 - 1s - 1ms/step - loss: 0.1764 - sparse_categorical_accuracy: 0.9452</span></span></code></pre>
@@ -1047,7 +1047,7 @@ guide</a>.</p>
 <pre><code><span><span class="co">## Epoch 1/2</span></span>
 <span><span class="co">## 938/938 - 2s - 2ms/step - loss: 0.3869 - sparse_categorical_accuracy: 0.8924</span></span>
 <span><span class="co">## Epoch 2/2</span></span>
-<span><span class="co">## 938/938 - 1s - 940us/step - loss: 0.2163 - sparse_categorical_accuracy: 0.9370</span></span></code></pre>
+<span><span class="co">## 938/938 - 1s - 927us/step - loss: 0.2163 - sparse_categorical_accuracy: 0.9370</span></span></code></pre>
 </div>
 <div class="section level2">
 <h2 id="end-to-end-experiment-example-1-variational-autoencoders-">End-to-end experiment example 1: variational autoencoders.<a class="anchor" aria-label="anchor" href="#end-to-end-experiment-example-1-variational-autoencoders-"></a>

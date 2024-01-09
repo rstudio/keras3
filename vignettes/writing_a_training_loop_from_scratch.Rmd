@@ -169,7 +169,7 @@ loops written from scratch. Here's the flow:
 - Instantiate the metric at the start of the loop
 - Call `metric$update_state()` after each batch
 - Call `metric$result()` when you need to display the current value of the metric
-- Call `metric$reset_states()` when you need to clear the state of the metric
+- Call `metric$reset_state()` when you need to clear the state of the metric
 (typically at the end of an epoch)
 
 Let's use this knowledge to compute `SparseCategoricalAccuracy` on validation data at
@@ -270,7 +270,7 @@ Sys.time() - time
 ```
 
 ```
-## Time difference of 23.91771 secs
+## Time difference of 24.91728 secs
 ```
 
 ## Speeding-up your training step with `tf_function`
@@ -374,7 +374,7 @@ Sys.time() - time
 ```
 
 ```
-## Time difference of 2.654166 secs
+## Time difference of 2.607724 secs
 ```
 
 Much faster, isn't it?

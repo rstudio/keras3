@@ -33,7 +33,7 @@
     
     <a class="navbar-brand me-2" href="../index.html">keras3</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">2.13.0.9000</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.0.0.9000</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -239,12 +239,12 @@ state of these metrics (by calling <code>update_state()</code> on them),
 then query them (via <code>result()</code>) to return their current
 average value, to be displayed by the progress bar and to be pass to any
 callback.</li>
-<li>Note that we would need to call <code><a href="../reference/reset_states.html">reset_states()</a></code> on our
+<li>Note that we would need to call <code>reset_states()</code> on our
 metrics between each epoch! Otherwise calling <code>result()</code>
 would return an average since the start of training, whereas we usually
 work with per-epoch averages. Thankfully, the framework can do that for
 us: just list any metric you want to reset in the <code>metrics</code>
-property of the model. The model will call <code><a href="../reference/reset_states.html">reset_states()</a></code>
+property of the model. The model will call <code>reset_states()</code>
 on any object listed here at the beginning of each <code><a href="https://generics.r-lib.org/reference/fit.html" class="external-link">fit()</a></code>
 epoch or at the beginning of a call to <code><a href="https://rdrr.io/pkg/tensorflow/man/evaluate.html" class="external-link">evaluate()</a></code>.</li>
 </ul>

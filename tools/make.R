@@ -111,8 +111,9 @@ fs::dir_walk("man-src", type = "directory", recurse = TRUE,
 #       return numpy arrays. We should check preserve np_array convert status in all
 #       op_* functions, and return numpy arrays if we received a numpy array.
 #
-# TODO: WORKON_HOME should reflect an abolute path, not relative path, incase
+# TODO: WORKON_HOME should reflect an absolute path, not relative path, incase
 #      WORKON_HOME=~/..
+#
 # TODO: reexport tuple() from keras3, tfdatasets
 
 # TODO: fit() / evaluate() / predict() : accept R generator functions.
@@ -122,6 +123,7 @@ fs::dir_walk("man-src", type = "directory", recurse = TRUE,
 # TODO: fit/predict/eval/fit_on_batch... coerce `x` R arrays to float32? model input$dtype?
 #
 # TODO: what happened to is_keras_tensor() ??
+#
 # TODO: Model.get_compile_config() / Model.get_build_config() ?
 #       Model.get_metrics_result() / Model.reset_metrics() /
 #       Model.metrics / Model.metrics_names ?
@@ -135,6 +137,7 @@ fs::dir_walk("man-src", type = "directory", recurse = TRUE,
 #        fit(..., class_weight = list(category_name_1 = .5, category_name_2 = .6),
 #                 class_names = c("category_name_1", "category_name_2"))
 #
+# TODO: bump tfruns ver, update dep
 #
 # TODO: make sure tfdeploy::serve_savedmodel() works with the new
 #       export_savedmodel() S3 method for keras3 models.

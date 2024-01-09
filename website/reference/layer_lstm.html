@@ -76,15 +76,15 @@ shape(final_carry_state)
 <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
 <![endif]--></head><body>
     <a href="#main" class="visually-hidden-focusable">Skip to contents</a>
-
+    
 
     <nav class="navbar fixed-top navbar-inverse navbar-expand-lg bg-primary"><div class="container">
-
+    
     <a class="navbar-brand me-2" href="../index.html">keras3</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">2.13.0.9000</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.0.0.9000</small>
 
-
+    
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
@@ -124,12 +124,12 @@ shape(final_carry_state)
       <ul class="navbar-nav"><li class="nav-item">
   <a class="external-link nav-link" href="https://github.com/rstudio/keras/" aria-label="github">
     <span class="fab fa fab fa-github fa-lg"></span>
-
+     
   </a>
 </li>
       </ul></div>
 
-
+    
   </div>
 </nav><div class="container template-reference-topic">
 <div class="row">
@@ -338,7 +338,7 @@ Unrolling is only suitable for short sequences.</p></dd>
 </dl></div>
     <div class="section level2">
     <h2 id="call-arguments">Call Arguments<a class="anchor" aria-label="anchor" href="#call-arguments"></a></h2>
-
+    
 <ul><li><p><code>inputs</code>: A 3D tensor, with shape <code>(batch, timesteps, feature)</code>.</p></li>
 <li><p><code>mask</code>: Binary tensor of shape <code>(samples, timesteps)</code> indicating whether
 a given timestep should be masked  (optional).
@@ -358,22 +358,22 @@ of zero-filled initial state tensors). Defaults to <code>NULL</code>.</p></li>
     <div class="dont-index">
 <ul><li><p><a href="https:/keras.io/api/layers/recurrent_layers/lstm#lstm-class">https:/keras.io/api/layers/recurrent_layers/lstm#lstm-class</a></p></li>
 <li><p><a href="https://www.tensorflow.org/api_docs/python/tf/keras/layers/LSTM" class="external-link">https://www.tensorflow.org/api_docs/python/tf/keras/layers/LSTM</a></p></li>
-</ul><p>Other lstm rnn layers:
+</ul><p>Other lstm rnn layers: 
 <code><a href="rnn_cell_lstm.html">rnn_cell_lstm</a>()</code></p>
-<p>Other rnn layers:
+<p>Other rnn layers: 
 <code><a href="bidirectional.html">bidirectional</a>()</code>,
 <code><a href="layer_conv_lstm_1d.html">layer_conv_lstm_1d</a>()</code>,
 <code><a href="layer_conv_lstm_2d.html">layer_conv_lstm_2d</a>()</code>,
 <code><a href="layer_conv_lstm_3d.html">layer_conv_lstm_3d</a>()</code>,
-<code><a href="rnn_cell_gru.html">rnn_cell_gru</a>()</code>,
 <code><a href="layer_gru.html">layer_gru</a>()</code>,
-<code><a href="rnn_cell_lstm.html">rnn_cell_lstm</a>()</code>,
 <code><a href="layer_rnn.html">layer_rnn</a>()</code>,
-<code><a href="rnn_cell_simple.html">rnn_cell_simple</a>()</code>,
 <code><a href="layer_simple_rnn.html">layer_simple_rnn</a>()</code>,
-<code><a href="rnn_cells_stack.html">rnn_cells_stack</a>()</code>,
-<code><a href="layer_time_distributed.html">layer_time_distributed</a>()</code></p>
-<p>Other layers:
+<code><a href="layer_time_distributed.html">layer_time_distributed</a>()</code>,
+<code><a href="rnn_cell_gru.html">rnn_cell_gru</a>()</code>,
+<code><a href="rnn_cell_lstm.html">rnn_cell_lstm</a>()</code>,
+<code><a href="rnn_cell_simple.html">rnn_cell_simple</a>()</code>,
+<code><a href="rnn_cells_stack.html">rnn_cells_stack</a>()</code></p>
+<p>Other layers: 
 <code><a href="Layer.html">Layer</a>()</code>,
 <code><a href="bidirectional.html">bidirectional</a>()</code>,
 <code><a href="layer_text_vectorization.html">get_vocabulary</a>()</code>,
@@ -427,7 +427,6 @@ of zero-filled initial state tensors). Defaults to <code>NULL</code>.</p></li>
 <code><a href="layer_global_max_pooling_3d.html">layer_global_max_pooling_3d</a>()</code>,
 <code><a href="layer_group_normalization.html">layer_group_normalization</a>()</code>,
 <code><a href="layer_group_query_attention.html">layer_group_query_attention</a>()</code>,
-<code><a href="rnn_cell_gru.html">rnn_cell_gru</a>()</code>,
 <code><a href="layer_gru.html">layer_gru</a>()</code>,
 <code><a href="layer_hashed_crossing.html">layer_hashed_crossing</a>()</code>,
 <code><a href="layer_hashing.html">layer_hashing</a>()</code>,
@@ -436,7 +435,6 @@ of zero-filled initial state tensors). Defaults to <code>NULL</code>.</p></li>
 <code><a href="layer_integer_lookup.html">layer_integer_lookup</a>()</code>,
 <code><a href="layer_lambda.html">layer_lambda</a>()</code>,
 <code><a href="layer_layer_normalization.html">layer_layer_normalization</a>()</code>,
-<code><a href="rnn_cell_lstm.html">rnn_cell_lstm</a>()</code>,
 <code><a href="layer_masking.html">layer_masking</a>()</code>,
 <code><a href="layer_max_pooling_1d.html">layer_max_pooling_1d</a>()</code>,
 <code><a href="layer_max_pooling_2d.html">layer_max_pooling_2d</a>()</code>,
@@ -461,13 +459,11 @@ of zero-filled initial state tensors). Defaults to <code>NULL</code>.</p></li>
 <code><a href="layer_rnn.html">layer_rnn</a>()</code>,
 <code><a href="layer_separable_conv_1d.html">layer_separable_conv_1d</a>()</code>,
 <code><a href="layer_separable_conv_2d.html">layer_separable_conv_2d</a>()</code>,
-<code><a href="rnn_cell_simple.html">rnn_cell_simple</a>()</code>,
 <code><a href="layer_simple_rnn.html">layer_simple_rnn</a>()</code>,
 <code><a href="layer_spatial_dropout_1d.html">layer_spatial_dropout_1d</a>()</code>,
 <code><a href="layer_spatial_dropout_2d.html">layer_spatial_dropout_2d</a>()</code>,
 <code><a href="layer_spatial_dropout_3d.html">layer_spatial_dropout_3d</a>()</code>,
 <code><a href="layer_spectral_normalization.html">layer_spectral_normalization</a>()</code>,
-<code><a href="rnn_cells_stack.html">rnn_cells_stack</a>()</code>,
 <code><a href="layer_string_lookup.html">layer_string_lookup</a>()</code>,
 <code><a href="layer_subtract.html">layer_subtract</a>()</code>,
 <code><a href="layer_tfsm.html">layer_tfsm</a>()</code>,
@@ -479,7 +475,11 @@ of zero-filled initial state tensors). Defaults to <code>NULL</code>.</p></li>
 <code><a href="layer_upsampling_3d.html">layer_upsampling_3d</a>()</code>,
 <code><a href="layer_zero_padding_1d.html">layer_zero_padding_1d</a>()</code>,
 <code><a href="layer_zero_padding_2d.html">layer_zero_padding_2d</a>()</code>,
-<code><a href="layer_zero_padding_3d.html">layer_zero_padding_3d</a>()</code></p></div>
+<code><a href="layer_zero_padding_3d.html">layer_zero_padding_3d</a>()</code>,
+<code><a href="rnn_cell_gru.html">rnn_cell_gru</a>()</code>,
+<code><a href="rnn_cell_lstm.html">rnn_cell_lstm</a>()</code>,
+<code><a href="rnn_cell_simple.html">rnn_cell_simple</a>()</code>,
+<code><a href="rnn_cells_stack.html">rnn_cells_stack</a>()</code></p></div>
     </div>
 
   </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>
@@ -496,9 +496,9 @@ of zero-filled initial state tensors). Defaults to <code>NULL</code>.</p></li>
 
     </footer></div>
 
+  
 
-
-
+  
 
   </body></html>
 

@@ -33,7 +33,7 @@
     
     <a class="navbar-brand me-2" href="../index.html">keras3</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">2.13.0.9000</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.0.0.9000</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -266,15 +266,15 @@ objects to load data in a multi-device or distributed workflow.</p>
 <span>  <span class="va">model</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://rdrr.io/pkg/tensorflow/man/evaluate.html" class="external-link">evaluate</a></span><span class="op">(</span><span class="va">test_dataset</span><span class="op">)</span></span>
 <span><span class="op">}</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">## Epoch 1/2</span></span>
-<span><span class="co">## 782/782 - 14s - 18ms/step - loss: 2.0995 - sparse_categorical_accuracy: 0.8812 - val_loss: 0.7119 - val_sparse_categorical_accuracy: 0.9134</span></span>
+<span><span class="co">## 782/782 - 12s - 15ms/step - loss: 2.0889 - sparse_categorical_accuracy: 0.8825 - val_loss: 0.6290 - val_sparse_categorical_accuracy: 0.9241</span></span>
 <span><span class="co">## Epoch 2/2</span></span>
-<span><span class="co">## 782/782 - 2s - 3ms/step - loss: 0.4031 - sparse_categorical_accuracy: 0.9374 - val_loss: 0.3691 - val_sparse_categorical_accuracy: 0.9363</span></span>
-<span><span class="co">## 157/157 - 0s - 2ms/step - loss: 0.3562 - sparse_categorical_accuracy: 0.9378</span></span></code></pre>
+<span><span class="co">## 782/782 - 2s - 2ms/step - loss: 0.4398 - sparse_categorical_accuracy: 0.9359 - val_loss: 0.4271 - val_sparse_categorical_accuracy: 0.9347</span></span>
+<span><span class="co">## 157/157 - 0s - 2ms/step - loss: 0.4168 - sparse_categorical_accuracy: 0.9343</span></span></code></pre>
 <pre><code><span><span class="co">## $loss</span></span>
-<span><span class="co">## [1] 0.356189</span></span>
+<span><span class="co">## [1] 0.4167985</span></span>
 <span><span class="co">##</span></span>
 <span><span class="co">## $sparse_categorical_accuracy</span></span>
-<span><span class="co">## [1] 0.9378</span></span></code></pre>
+<span><span class="co">## [1] 0.9343</span></span></code></pre>
 </div>
 <div class="section level2">
 <h2 id="using-callbacks-to-ensure-fault-tolerance">Using callbacks to ensure fault tolerance<a class="anchor" aria-label="anchor" href="#using-callbacks-to-ensure-fault-tolerance"></a>
@@ -336,11 +336,11 @@ saved model.</p>
 <span></span>
 <span><span class="co"># Running the first time creates the model</span></span>
 <span><span class="fu">run_training</span><span class="op">(</span>epochs<span class="op">=</span><span class="fl">1</span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">## 782/782 - 5s - 6ms/step - loss: 0.3163 - sparse_categorical_accuracy: 0.9489 - val_loss: 0.4947 - val_sparse_categorical_accuracy: 0.9308</span></span></code></pre>
+<pre><code><span><span class="co">## 782/782 - 4s - 5ms/step - loss: 0.3084 - sparse_categorical_accuracy: 0.9491 - val_loss: 0.4077 - val_sparse_categorical_accuracy: 0.9372</span></span></code></pre>
 <div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Calling the same function again will resume from where we left off</span></span>
 <span><span class="fu">run_training</span><span class="op">(</span>epochs<span class="op">=</span><span class="fl">1</span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">## 782/782 - 5s - 6ms/step - loss: 0.3163 - sparse_categorical_accuracy: 0.9489 - val_loss: 0.4947 - val_sparse_categorical_accuracy: 0.9308</span></span></code></pre>
+<pre><code><span><span class="co">## 782/782 - 4s - 5ms/step - loss: 0.3084 - sparse_categorical_accuracy: 0.9491 - val_loss: 0.4077 - val_sparse_categorical_accuracy: 0.9372</span></span></code></pre>
 </div>
 <div class="section level2">
 <h2 id="tfdata-performance-tips">

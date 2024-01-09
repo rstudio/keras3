@@ -718,7 +718,7 @@
     <loc>https://keras.posit.co/reference/layer_gru.html</loc>
   </url>
   <url>
-    <loc>https://keras.posit.co/reference/rnn_cell_gru.html</loc>
+    <loc>https://keras.posit.co/reference/layer_gru_cell.html</loc>
   </url>
   <url>
     <loc>https://keras.posit.co/reference/layer_hashed_crossing.html</loc>
@@ -745,7 +745,7 @@
     <loc>https://keras.posit.co/reference/layer_lstm.html</loc>
   </url>
   <url>
-    <loc>https://keras.posit.co/reference/rnn_cell_lstm.html</loc>
+    <loc>https://keras.posit.co/reference/layer_lstm_cell.html</loc>
   </url>
   <url>
     <loc>https://keras.posit.co/reference/layer_masking.html</loc>
@@ -823,7 +823,7 @@
     <loc>https://keras.posit.co/reference/layer_simple_rnn.html</loc>
   </url>
   <url>
-    <loc>https://keras.posit.co/reference/rnn_cell_simple.html</loc>
+    <loc>https://keras.posit.co/reference/layer_simple_rnn_cell.html</loc>
   </url>
   <url>
     <loc>https://keras.posit.co/reference/layer_spatial_dropout_1d.html</loc>
@@ -838,7 +838,7 @@
     <loc>https://keras.posit.co/reference/layer_spectral_normalization.html</loc>
   </url>
   <url>
-    <loc>https://keras.posit.co/reference/rnn_cells_stack.html</loc>
+    <loc>https://keras.posit.co/reference/layer_stacked_rnn_cells.html</loc>
   </url>
   <url>
     <loc>https://keras.posit.co/reference/layer_string_lookup.html</loc>
@@ -1121,6 +1121,9 @@
   </url>
   <url>
     <loc>https://keras.posit.co/reference/new_loss_class.html</loc>
+  </url>
+  <url>
+    <loc>https://keras.posit.co/reference/new_metric_class.html</loc>
   </url>
   <url>
     <loc>https://keras.posit.co/reference/normalize.html</loc>
@@ -1831,7 +1834,22 @@
     <loc>https://keras.posit.co/reference/regularizer_orthogonal.html</loc>
   </url>
   <url>
+    <loc>https://keras.posit.co/reference/reset_state.html</loc>
+  </url>
+  <url>
     <loc>https://keras.posit.co/reference/reset_states.html</loc>
+  </url>
+  <url>
+    <loc>https://keras.posit.co/reference/rnn_cell_gru.html</loc>
+  </url>
+  <url>
+    <loc>https://keras.posit.co/reference/rnn_cell_lstm.html</loc>
+  </url>
+  <url>
+    <loc>https://keras.posit.co/reference/rnn_cell_simple.html</loc>
+  </url>
+  <url>
+    <loc>https://keras.posit.co/reference/rnn_cells_stack.html</loc>
   </url>
   <url>
     <loc>https://keras.posit.co/reference/save_model.html</loc>

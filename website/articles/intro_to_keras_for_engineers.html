@@ -33,7 +33,7 @@
     
     <a class="navbar-brand me-2" href="../index.html">keras3</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">2.13.0.9000</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.0.0.9000</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -237,7 +237,7 @@ unseen data.</p>
 <span>    validation_split<span class="op">=</span><span class="fl">0.15</span>,</span>
 <span>    callbacks<span class="op">=</span><span class="va">callbacks</span></span>
 <span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">## 399/399 - 9s - 22ms/step - acc: 0.7354 - loss: 0.7782 - val_acc: 0.9607 - val_loss: 0.1380</span></span></code></pre>
+<pre><code><span><span class="co">## 399/399 - 9s - 22ms/step - acc: 0.7356 - loss: 0.7774 - val_acc: 0.9603 - val_loss: 0.1381</span></span></code></pre>
 <div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">score</span> <span class="op">&lt;-</span> <span class="va">model</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://rdrr.io/pkg/tensorflow/man/evaluate.html" class="external-link">evaluate</a></span><span class="op">(</span><span class="va">x_test</span>, <span class="va">y_test</span>, verbose<span class="op">=</span><span class="fl">0</span><span class="op">)</span></span></code></pre></div>
 <p>During training, we were saving a model at the end of each epoch. You
@@ -362,7 +362,7 @@ layers:</p>
 <span>    epochs<span class="op">=</span><span class="fl">1</span>,  <span class="co"># For speed</span></span>
 <span>    validation_split<span class="op">=</span><span class="fl">0.15</span>,</span>
 <span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">## 399/399 - 8s - 20ms/step - acc: 0.7510 - loss: 0.7375 - val_acc: 0.9321 - val_loss: 0.2274</span></span></code></pre>
+<pre><code><span><span class="co">## 399/399 - 9s - 21ms/step - acc: 0.7511 - loss: 0.7372 - val_acc: 0.9324 - val_loss: 0.2250</span></span></code></pre>
 </div>
 <div class="section level2">
 <h2 id="training-models-on-arbitrary-data-sources">Training models on arbitrary data sources<a class="anchor" aria-label="anchor" href="#training-models-on-arbitrary-data-sources"></a>
@@ -429,7 +429,7 @@ your Keras backend.</p>
 <span>  <span class="op">)</span></span>
 <span><span class="op">)</span></span>
 <span><span class="va">model</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://generics.r-lib.org/reference/fit.html" class="external-link">fit</a></span><span class="op">(</span><span class="va">train_dataset</span>, epochs<span class="op">=</span><span class="fl">1</span>, validation_data<span class="op">=</span><span class="va">test_dataset</span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">## 469/469 - 9s - 20ms/step - acc: 0.7546 - loss: 0.7277 - val_acc: 0.8968 - val_loss: 0.3212</span></span></code></pre>
+<pre><code><span><span class="co">## 469/469 - 9s - 20ms/step - acc: 0.7546 - loss: 0.7274 - val_acc: 0.8933 - val_loss: 0.3316</span></span></code></pre>
 </div>
 <div class="section level2">
 <h2 id="further-reading">Further reading<a class="anchor" aria-label="anchor" href="#further-reading"></a>

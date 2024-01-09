@@ -12,15 +12,15 @@ connectivity pattern that is compatible with said convolution."><!-- mathjax -->
 <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
 <![endif]--></head><body>
     <a href="#main" class="visually-hidden-focusable">Skip to contents</a>
-
+    
 
     <nav class="navbar fixed-top navbar-inverse navbar-expand-lg bg-primary"><div class="container">
-
+    
     <a class="navbar-brand me-2" href="../index.html">keras3</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">2.13.0.9000</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.0.0.9000</small>
 
-
+    
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
@@ -60,12 +60,12 @@ connectivity pattern that is compatible with said convolution."><!-- mathjax -->
       <ul class="navbar-nav"><li class="nav-item">
   <a class="external-link nav-link" href="https://github.com/rstudio/keras/" aria-label="github">
     <span class="fab fa fab fa-github fa-lg"></span>
-
+     
   </a>
 </li>
       </ul></div>
 
-
+    
   </div>
 </nav><div class="container template-reference-topic">
 <div class="row">
@@ -200,14 +200,14 @@ bias after being updated by an <code>Optimizer</code>.</p></dd>
 </dl></div>
     <div class="section level2">
     <h2 id="value">Value<a class="anchor" aria-label="anchor" href="#value"></a></h2>
-
+    
 
 <p>A 3D tensor representing
 <code>activation(conv1d_transpose(inputs, kernel) + bias)</code>.</p>
     </div>
     <div class="section level2">
     <h2 id="input-shape">Input Shape<a class="anchor" aria-label="anchor" href="#input-shape"></a></h2>
-
+    
 <ul><li><p>If <code>data_format="channels_last"</code>:
 A 3D tensor with shape: <code>(batch_shape, steps, channels)</code></p></li>
 <li><p>If <code>data_format="channels_first"</code>:
@@ -215,7 +215,7 @@ A 3D tensor with shape: <code>(batch_shape, channels, steps)</code></p></li>
 </ul></div>
     <div class="section level2">
     <h2 id="output-shape">Output Shape<a class="anchor" aria-label="anchor" href="#output-shape"></a></h2>
-
+    
 <ul><li><p>If <code>data_format="channels_last"</code>:
 A 3D tensor with shape: <code>(batch_shape, new_steps, filters)</code></p></li>
 <li><p>If <code>data_format="channels_first"</code>:
@@ -227,7 +227,7 @@ A 3D tensor with shape: <code>(batch_shape, filters, new_steps)</code></p></li>
     </div>
     <div class="section level2">
     <h2 id="references">References<a class="anchor" aria-label="anchor" href="#references"></a></h2>
-
+    
 <ul><li><p><a href="https://arxiv.org/abs/1603.07285v1" class="external-link">A guide to convolution arithmetic for deep learning</a></p></li>
 <li><p><a href="https://www.matthewzeiler.com/mattzeiler/deconvolutionalnetworks.pdf" class="external-link">Deconvolutional Networks</a></p></li>
 </ul></div>
@@ -243,7 +243,7 @@ A 3D tensor with shape: <code>(batch_shape, filters, new_steps)</code></p></li>
     <div class="dont-index">
 <ul><li><p><a href="https:/keras.io/api/layers/convolution_layers/convolution1d_transpose#conv1dtranspose-class">https:/keras.io/api/layers/convolution_layers/convolution1d_transpose#conv1dtranspose-class</a></p></li>
 <li><p><a href="https://www.tensorflow.org/api_docs/python/tf/keras/layers/Conv1DTranspose" class="external-link">https://www.tensorflow.org/api_docs/python/tf/keras/layers/Conv1DTranspose</a></p></li>
-</ul><p>Other convolutional layers:
+</ul><p>Other convolutional layers: 
 <code><a href="layer_conv_1d.html">layer_conv_1d</a>()</code>,
 <code><a href="layer_conv_2d_transpose.html">layer_conv_2d_transpose</a>()</code>,
 <code><a href="layer_conv_2d.html">layer_conv_2d</a>()</code>,
@@ -253,7 +253,7 @@ A 3D tensor with shape: <code>(batch_shape, filters, new_steps)</code></p></li>
 <code><a href="layer_depthwise_conv_2d.html">layer_depthwise_conv_2d</a>()</code>,
 <code><a href="layer_separable_conv_1d.html">layer_separable_conv_1d</a>()</code>,
 <code><a href="layer_separable_conv_2d.html">layer_separable_conv_2d</a>()</code></p>
-<p>Other layers:
+<p>Other layers: 
 <code><a href="Layer.html">Layer</a>()</code>,
 <code><a href="bidirectional.html">bidirectional</a>()</code>,
 <code><a href="layer_text_vectorization.html">get_vocabulary</a>()</code>,
@@ -306,7 +306,6 @@ A 3D tensor with shape: <code>(batch_shape, filters, new_steps)</code></p></li>
 <code><a href="layer_global_max_pooling_3d.html">layer_global_max_pooling_3d</a>()</code>,
 <code><a href="layer_group_normalization.html">layer_group_normalization</a>()</code>,
 <code><a href="layer_group_query_attention.html">layer_group_query_attention</a>()</code>,
-<code><a href="rnn_cell_gru.html">rnn_cell_gru</a>()</code>,
 <code><a href="layer_gru.html">layer_gru</a>()</code>,
 <code><a href="layer_hashed_crossing.html">layer_hashed_crossing</a>()</code>,
 <code><a href="layer_hashing.html">layer_hashing</a>()</code>,
@@ -315,7 +314,6 @@ A 3D tensor with shape: <code>(batch_shape, filters, new_steps)</code></p></li>
 <code><a href="layer_integer_lookup.html">layer_integer_lookup</a>()</code>,
 <code><a href="layer_lambda.html">layer_lambda</a>()</code>,
 <code><a href="layer_layer_normalization.html">layer_layer_normalization</a>()</code>,
-<code><a href="rnn_cell_lstm.html">rnn_cell_lstm</a>()</code>,
 <code><a href="layer_lstm.html">layer_lstm</a>()</code>,
 <code><a href="layer_masking.html">layer_masking</a>()</code>,
 <code><a href="layer_max_pooling_1d.html">layer_max_pooling_1d</a>()</code>,
@@ -341,13 +339,11 @@ A 3D tensor with shape: <code>(batch_shape, filters, new_steps)</code></p></li>
 <code><a href="layer_rnn.html">layer_rnn</a>()</code>,
 <code><a href="layer_separable_conv_1d.html">layer_separable_conv_1d</a>()</code>,
 <code><a href="layer_separable_conv_2d.html">layer_separable_conv_2d</a>()</code>,
-<code><a href="rnn_cell_simple.html">rnn_cell_simple</a>()</code>,
 <code><a href="layer_simple_rnn.html">layer_simple_rnn</a>()</code>,
 <code><a href="layer_spatial_dropout_1d.html">layer_spatial_dropout_1d</a>()</code>,
 <code><a href="layer_spatial_dropout_2d.html">layer_spatial_dropout_2d</a>()</code>,
 <code><a href="layer_spatial_dropout_3d.html">layer_spatial_dropout_3d</a>()</code>,
 <code><a href="layer_spectral_normalization.html">layer_spectral_normalization</a>()</code>,
-<code><a href="rnn_cells_stack.html">rnn_cells_stack</a>()</code>,
 <code><a href="layer_string_lookup.html">layer_string_lookup</a>()</code>,
 <code><a href="layer_subtract.html">layer_subtract</a>()</code>,
 <code><a href="layer_tfsm.html">layer_tfsm</a>()</code>,
@@ -359,7 +355,11 @@ A 3D tensor with shape: <code>(batch_shape, filters, new_steps)</code></p></li>
 <code><a href="layer_upsampling_3d.html">layer_upsampling_3d</a>()</code>,
 <code><a href="layer_zero_padding_1d.html">layer_zero_padding_1d</a>()</code>,
 <code><a href="layer_zero_padding_2d.html">layer_zero_padding_2d</a>()</code>,
-<code><a href="layer_zero_padding_3d.html">layer_zero_padding_3d</a>()</code></p></div>
+<code><a href="layer_zero_padding_3d.html">layer_zero_padding_3d</a>()</code>,
+<code><a href="rnn_cell_gru.html">rnn_cell_gru</a>()</code>,
+<code><a href="rnn_cell_lstm.html">rnn_cell_lstm</a>()</code>,
+<code><a href="rnn_cell_simple.html">rnn_cell_simple</a>()</code>,
+<code><a href="rnn_cells_stack.html">rnn_cells_stack</a>()</code></p></div>
     </div>
 
   </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>
@@ -376,9 +376,9 @@ A 3D tensor with shape: <code>(batch_shape, filters, new_steps)</code></p></li>
 
     </footer></div>
 
+  
 
-
-
+  
 
   </body></html>
 

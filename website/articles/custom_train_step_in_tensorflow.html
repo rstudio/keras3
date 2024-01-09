@@ -33,7 +33,7 @@
     
     <a class="navbar-brand me-2" href="../index.html">keras3</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">2.13.0.9000</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.0.0.9000</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -215,7 +215,7 @@ value.</p>
 <span><span class="va">y</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/random_normal.html">random_normal</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1000</span>, <span class="fl">1</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="va">model</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://generics.r-lib.org/reference/fit.html" class="external-link">fit</a></span><span class="op">(</span><span class="va">x</span>, <span class="va">y</span>, epochs<span class="op">=</span><span class="fl">3</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">## Epoch 1/3</span></span>
-<span><span class="co">## 32/32 - 1s - 37ms/step - loss: 2.9118 - mae: 1.3597</span></span>
+<span><span class="co">## 32/32 - 1s - 34ms/step - loss: 2.9118 - mae: 1.3597</span></span>
 <span><span class="co">## Epoch 2/3</span></span>
 <span><span class="co">## 32/32 - 0s - 1ms/step - loss: 2.6026 - mae: 1.2856</span></span>
 <span><span class="co">## Epoch 3/3</span></span>
@@ -237,12 +237,12 @@ state of these metrics (by calling <code>update_state()</code> on them),
 then query them (via <code>result()</code>) to return their current
 average value, to be displayed by the progress bar and to be pass to any
 callback.</li>
-<li>Note that we would need to call <code><a href="../reference/reset_states.html">reset_states()</a></code> on our
+<li>Note that we would need to call <code>reset_states()</code> on our
 metrics between each epoch! Otherwise calling <code>result()</code>
 would return an average since the start of training, whereas we usually
 work with per-epoch averages. Thankfully, the framework can do that for
 us: just list any metric you want to reset in the <code>metrics</code>
-property of the model. The model will call <code><a href="../reference/reset_states.html">reset_states()</a></code>
+property of the model. The model will call <code>reset_states()</code>
 on any object listed here at the beginning of each <code><a href="https://generics.r-lib.org/reference/fit.html" class="external-link">fit()</a></code>
 epoch or at the beginning of a call to <code><a href="https://rdrr.io/pkg/tensorflow/man/evaluate.html" class="external-link">evaluate()</a></code>.</li>
 </ul>
@@ -302,7 +302,7 @@ epoch or at the beginning of a call to <code><a href="https://rdrr.io/pkg/tensor
 <span><span class="va">y</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/random_normal.html">random_normal</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1000</span>, <span class="fl">1</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="va">model</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://generics.r-lib.org/reference/fit.html" class="external-link">fit</a></span><span class="op">(</span><span class="va">x</span>, <span class="va">y</span>, epochs<span class="op">=</span><span class="fl">3</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">## Epoch 1/3</span></span>
-<span><span class="co">## 32/32 - 1s - 24ms/step - loss: 2.6540 - mae: 1.2901</span></span>
+<span><span class="co">## 32/32 - 1s - 25ms/step - loss: 2.6540 - mae: 1.2901</span></span>
 <span><span class="co">## Epoch 2/3</span></span>
 <span><span class="co">## 32/32 - 0s - 1ms/step - loss: 2.4139 - mae: 1.2303</span></span>
 <span><span class="co">## Epoch 3/3</span></span>
@@ -371,7 +371,7 @@ argument</li>
 <span><span class="va">sw</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/random_normal.html">random_normal</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1000</span>, <span class="fl">1</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="va">model</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://generics.r-lib.org/reference/fit.html" class="external-link">fit</a></span><span class="op">(</span><span class="va">x</span>, <span class="va">y</span>, sample_weight<span class="op">=</span><span class="va">sw</span>, epochs<span class="op">=</span><span class="fl">3</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">## Epoch 1/3</span></span>
-<span><span class="co">## 32/32 - 1s - 26ms/step - loss: 0.1607 - mae: 1.3018</span></span>
+<span><span class="co">## 32/32 - 1s - 27ms/step - loss: 0.1607 - mae: 1.3018</span></span>
 <span><span class="co">## Epoch 2/3</span></span>
 <span><span class="co">## 32/32 - 0s - 1ms/step - loss: 0.1452 - mae: 1.2999</span></span>
 <span><span class="co">## Epoch 3/3</span></span>
@@ -561,7 +561,7 @@ entire GAN algorithm in 17 lines in <code>train_step</code>:</p>
 <span>  <span class="fu">tfdatasets</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/tfdatasets/man/dataset_take.html" class="external-link">dataset_take</a></span><span class="op">(</span><span class="va">dataset</span>, <span class="fl">100</span><span class="op">)</span>,</span>
 <span>  epochs <span class="op">=</span> <span class="fl">1</span></span>
 <span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">## 100/100 - 8s - 77ms/step - d_loss: 0.0000e+00 - g_loss: 0.0000e+00</span></span></code></pre>
+<pre><code><span><span class="co">## 100/100 - 7s - 69ms/step - d_loss: 0.0000e+00 - g_loss: 0.0000e+00</span></span></code></pre>
 <p>The ideas behind deep learning are simple, so why should their
 implementation be painful?</p>
 </div>

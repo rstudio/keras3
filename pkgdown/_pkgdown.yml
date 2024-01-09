@@ -181,7 +181,7 @@ reference:
       - get_config
       - get_weights
       - count_params
-      - reset_states
+      - reset_state
 
   - title: "Custom Layers"
     contents:
@@ -366,6 +366,7 @@ reference:
       - bidirectional
       - keras-package
       - time_distributed
+      - new_model_class
       # - KerasWrapper
       # - create_wrapper
       # - loss_cosine_proximity

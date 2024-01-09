@@ -412,11 +412,11 @@ model %>% fit(train_ds, validation_data = val_ds, epochs = epochs)
 
 ```
 ## Epoch 1/3
-## 625/625 - 6s - 10ms/step - accuracy: 0.7313 - loss: 0.4881 - val_accuracy: 0.8668 - val_loss: 0.3192
+## 625/625 - 6s - 10ms/step - accuracy: 0.7334 - loss: 0.4861 - val_accuracy: 0.8710 - val_loss: 0.3117
 ## Epoch 2/3
-## 625/625 - 2s - 3ms/step - accuracy: 0.9116 - loss: 0.2226 - val_accuracy: 0.8718 - val_loss: 0.3081
+## 625/625 - 2s - 3ms/step - accuracy: 0.9126 - loss: 0.2230 - val_accuracy: 0.8756 - val_loss: 0.3145
 ## Epoch 3/3
-## 625/625 - 2s - 3ms/step - accuracy: 0.9562 - loss: 0.1168 - val_accuracy: 0.8686 - val_loss: 0.3591
+## 625/625 - 2s - 3ms/step - accuracy: 0.9571 - loss: 0.1124 - val_accuracy: 0.8577 - val_loss: 0.3883
 ```
 
 ## Evaluate the model on the test set
@@ -427,15 +427,15 @@ model %>% evaluate(test_ds)
 ```
 
 ```
-## 782/782 - 1s - 2ms/step - accuracy: 0.8534 - loss: 0.3959
+## 782/782 - 1s - 2ms/step - accuracy: 0.8448 - loss: 0.4225
 ```
 
 ```
 ## $accuracy
-## [1] 0.8533807
+## [1] 0.844829
 ##
 ## $loss
-## [1] 0.3959248
+## [1] 0.42248
 ```
 
 ## Make an end-to-end model
@@ -465,13 +465,13 @@ end_to_end_model %>% evaluate(raw_test_ds)
 ```
 
 ```
-## 782/782 - 4s - 5ms/step - accuracy: 0.8534 - loss: 0.3952
+## 782/782 - 4s - 5ms/step - accuracy: 0.8449 - loss: 0.4219
 ```
 
 ```
 ## $accuracy
-## [1] 0.8533807
+## [1] 0.8449488
 ##
 ## $loss
-## [1] 0.3951821
+## [1] 0.4219378
 ```

@@ -32,15 +32,15 @@ Users will just instantiate a layer and then treat it as a callable."><!-- mathj
 <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
 <![endif]--></head><body>
     <a href="#main" class="visually-hidden-focusable">Skip to contents</a>
-
+    
 
     <nav class="navbar fixed-top navbar-inverse navbar-expand-lg bg-primary"><div class="container">
-
+    
     <a class="navbar-brand me-2" href="../index.html">keras3</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">2.13.0.9000</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.0.0.9000</small>
 
-
+    
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
@@ -80,12 +80,12 @@ Users will just instantiate a layer and then treat it as a callable."><!-- mathj
       <ul class="navbar-nav"><li class="nav-item">
   <a class="external-link nav-link" href="https://github.com/rstudio/keras/" aria-label="github">
     <span class="fab fa fab fa-github fa-lg"></span>
-
+     
   </a>
 </li>
       </ul></div>
 
-
+    
   </div>
 </nav><div class="container template-reference-topic">
 <div class="row">
@@ -173,7 +173,7 @@ Any objects assigned here are invisible to the Keras framework.</p></li>
 </ul></div>
     <div class="section level2">
     <h2 id="attributes">Attributes<a class="anchor" aria-label="anchor" href="#attributes"></a></h2>
-
+    
 <ul><li><p><code>name</code>: The name of the layer (string).</p></li>
 <li><p><code>dtype</code>: Dtype of the layer's weights. Alias of <code>layer$variable_dtype</code>.</p></li>
 <li><p><code>variable_dtype</code>: Dtype of the layer's weights.</p></li>
@@ -273,22 +273,21 @@ the running sum of its inputs:</p>
 <span></span>
 <span>      <span class="va">super</span><span class="op">$</span><span class="fu">initialize</span><span class="op">(</span><span class="op">)</span></span>
 <span>      <span class="co"># Create a non-trainable weight.</span></span>
-<span>      <span class="va">self</span><span class="op">$</span><span class="va">total</span> <span class="op">=</span> <span class="va">self</span><span class="op">$</span><span class="fu">add_weight</span><span class="op">(</span></span>
-<span>        shape<span class="op">=</span><span class="fu"><a href="../reference/shape.html">shape</a></span><span class="op">(</span><span class="op">)</span>,</span>
-<span>        initializer<span class="op">=</span><span class="st">"zeros"</span>,</span>
-<span>        trainable<span class="op">=</span><span class="cn">FALSE</span>,</span>
-<span>        name<span class="op">=</span><span class="st">"total"</span></span>
+<span>      <span class="va">self</span><span class="op">$</span><span class="va">total</span> <span class="op">&lt;-</span> <span class="va">self</span><span class="op">$</span><span class="fu">add_weight</span><span class="op">(</span></span>
+<span>        shape <span class="op">=</span> <span class="fu"><a href="../reference/shape.html">shape</a></span><span class="op">(</span><span class="op">)</span>,</span>
+<span>        initializer <span class="op">=</span> <span class="st">"zeros"</span>,</span>
+<span>        trainable <span class="op">=</span> <span class="cn">FALSE</span>,</span>
+<span>        name <span class="op">=</span> <span class="st">"total"</span></span>
 <span>      <span class="op">)</span></span>
 <span>   <span class="op">}</span>,</span>
 <span></span>
 <span>   call <span class="op">=</span> <span class="kw">function</span><span class="op">(</span><span class="va">inputs</span><span class="op">)</span><span class="op">{</span></span>
-<span>     <span class="co"># TODO: where is assign() documented?</span></span>
 <span>      <span class="va">self</span><span class="op">$</span><span class="va">total</span><span class="op">$</span><span class="fu">assign</span><span class="op">(</span><span class="va">self</span><span class="op">$</span><span class="va">total</span> <span class="op">+</span> <span class="fu"><a href="../reference/op_sum.html">op_sum</a></span><span class="op">(</span><span class="va">inputs</span><span class="op">)</span><span class="op">)</span></span>
 <span>      <span class="va">self</span><span class="op">$</span><span class="va">total</span></span>
 <span>   <span class="op">}</span></span>
 <span><span class="op">)</span></span>
 <span></span>
-<span><span class="va">my_sum</span> <span class="op">&lt;-</span> <span class="fu">layer_compute_sum</span><span class="op">(</span>,<span class="fl">2</span><span class="op">)</span></span>
+<span><span class="va">my_sum</span> <span class="op">&lt;-</span> <span class="fu">layer_compute_sum</span><span class="op">(</span>, <span class="fl">2</span><span class="op">)</span></span>
 <span><span class="va">x</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/op_ones.html">op_ones</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">2</span>, <span class="fl">2</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="va">y</span> <span class="op">&lt;-</span> <span class="fu">my_sum</span><span class="op">(</span><span class="va">x</span><span class="op">)</span></span>
 <span></span>
@@ -300,7 +299,7 @@ the running sum of its inputs:</p>
     </div>
     <div class="section level2">
     <h2 id="methods-available">Methods available<a class="anchor" aria-label="anchor" href="#methods-available"></a></h2>
-
+    
 <ul><li><p></p>
 <p></p><div class="sourceCode"><pre><code><span id="cb1-1"><a href="#cb1-1" tabindex="-1"></a><span class="fu">add_loss</span>(loss)</span></code></pre><p></p></div>
 <p>Can be called inside of the <code><a href="https://rdrr.io/r/base/call.html" class="external-link">call()</a></code> method to add a scalar loss.</p>
@@ -326,8 +325,8 @@ the running sum of its inputs:</p>
 <span id="cb1-6"><a href="#cb1-6" tabindex="-1"></a>           <span class="at">constraint =</span> <span class="cn">NULL</span>,</span>
 <span id="cb1-7"><a href="#cb1-7" tabindex="-1"></a>           <span class="at">name =</span> <span class="cn">NULL</span>)</span></code></pre><p></p></div>
 <p>Add a weight variable to the layer.</p>
-<p>Args:</p><ul><li><p><code>shape</code>: shape for the variable (as defined by <code><a href="shape.html">keras3::shape()</a></code>)
-Must be fully-defined (no <code>NA</code>/<code>NULL</code> entries).
+<p>Args:</p><ul><li><p><code>shape</code>: shape for the variable (as defined by <code><a href="shape.html">shape()</a></code>)
+Must be fully-defined (no <code>NA</code>/<code>NULL</code>/<code>-1</code> entries).
 Defaults to <code>()</code> (scalar) if unspecified.</p></li>
 <li><p><code>initializer</code>: Initializer object to use to
 populate the initial variable value,
@@ -349,6 +348,18 @@ variable after any optimizer update,
 or string name of a built-in constraint.</p></li>
 <li><p><code>name</code>: String name of the variable. Useful
 for debugging purposes.</p></li>
+</ul><p>Returns:</p>
+<p>A backend tensor, wrapped in a <code>KerasVariable</code> class.
+The <code>KerasVariable</code> class has</p>
+<p>Methods:</p><ul><li><p><code>assign(value)</code></p></li>
+<li><p><code>assign_add(value)</code></p></li>
+<li><p><code>assign_sub(value)</code></p></li>
+<li><p><code>numpy()</code> (calling <code>as.array(&lt;variable&gt;)</code> is preferred)</p></li>
+</ul><p>Properties/Attributes:</p><ul><li><p><code>value</code></p></li>
+<li><p><code>dtype</code></p></li>
+<li><p><code>ndim</code></p></li>
+<li><p><code>shape</code> (calling <code>shape(&lt;variable&gt;)</code> is preferred)</p></li>
+<li><p><code>trainable</code></p></li>
 </ul></li>
 <li><p></p>
 <p></p><div class="sourceCode"><pre><code><span id="cb1-1"><a href="#cb1-1" tabindex="-1"></a><span class="fu">build</span>(input_shape)</span></code></pre><p></p></div></li>
@@ -489,7 +500,7 @@ Example:</p>
     </div>
     <div class="section level2">
     <h2 id="readonly-properties-">Readonly properties:<a class="anchor" aria-label="anchor" href="#readonly-properties-"></a></h2>
-
+    
 <ul><li><p><code>compute_dtype</code>
 The dtype of the computations performed by the layer.</p></li>
 <li><p><code>dtype</code>
@@ -541,7 +552,7 @@ Output tensor or list of output tensors.</p></li>
 </ul></div>
     <div class="section level2">
     <h2 id="data-descriptors-attributes-">Data descriptors (Attributes):<a class="anchor" aria-label="anchor" href="#data-descriptors-attributes-"></a></h2>
-
+    
 <ul><li><p><code>input_spec</code></p></li>
 <li><p><code>supports_masking</code>
 Whether this layer supports computing a mask using <code>compute_mask</code>.</p></li>
@@ -553,7 +564,7 @@ Settable boolean, whether this layer should be trainable or not.</p></li>
     <div class="dont-index">
 <ul><li><p><a href="https:/keras.io/api/layers/base_layer#layer-class">https:/keras.io/api/layers/base_layer#layer-class</a></p></li>
 <li><p><a href="https://www.tensorflow.org/api_docs/python/tf/keras/layers/Layer" class="external-link">https://www.tensorflow.org/api_docs/python/tf/keras/layers/Layer</a></p></li>
-</ul><p>Other layers:
+</ul><p>Other layers: 
 <code><a href="bidirectional.html">bidirectional</a>()</code>,
 <code><a href="layer_text_vectorization.html">get_vocabulary</a>()</code>,
 <code><a href="layer_activation_elu.html">layer_activation_elu</a>()</code>,
@@ -606,7 +617,6 @@ Settable boolean, whether this layer should be trainable or not.</p></li>
 <code><a href="layer_global_max_pooling_3d.html">layer_global_max_pooling_3d</a>()</code>,
 <code><a href="layer_group_normalization.html">layer_group_normalization</a>()</code>,
 <code><a href="layer_group_query_attention.html">layer_group_query_attention</a>()</code>,
-<code><a href="rnn_cell_gru.html">rnn_cell_gru</a>()</code>,
 <code><a href="layer_gru.html">layer_gru</a>()</code>,
 <code><a href="layer_hashed_crossing.html">layer_hashed_crossing</a>()</code>,
 <code><a href="layer_hashing.html">layer_hashing</a>()</code>,
@@ -615,7 +625,6 @@ Settable boolean, whether this layer should be trainable or not.</p></li>
 <code><a href="layer_integer_lookup.html">layer_integer_lookup</a>()</code>,
 <code><a href="layer_lambda.html">layer_lambda</a>()</code>,
 <code><a href="layer_layer_normalization.html">layer_layer_normalization</a>()</code>,
-<code><a href="rnn_cell_lstm.html">rnn_cell_lstm</a>()</code>,
 <code><a href="layer_lstm.html">layer_lstm</a>()</code>,
 <code><a href="layer_masking.html">layer_masking</a>()</code>,
 <code><a href="layer_max_pooling_1d.html">layer_max_pooling_1d</a>()</code>,
@@ -641,13 +650,11 @@ Settable boolean, whether this layer should be trainable or not.</p></li>
 <code><a href="layer_rnn.html">layer_rnn</a>()</code>,
 <code><a href="layer_separable_conv_1d.html">layer_separable_conv_1d</a>()</code>,
 <code><a href="layer_separable_conv_2d.html">layer_separable_conv_2d</a>()</code>,
-<code><a href="rnn_cell_simple.html">rnn_cell_simple</a>()</code>,
 <code><a href="layer_simple_rnn.html">layer_simple_rnn</a>()</code>,
 <code><a href="layer_spatial_dropout_1d.html">layer_spatial_dropout_1d</a>()</code>,
 <code><a href="layer_spatial_dropout_2d.html">layer_spatial_dropout_2d</a>()</code>,
 <code><a href="layer_spatial_dropout_3d.html">layer_spatial_dropout_3d</a>()</code>,
 <code><a href="layer_spectral_normalization.html">layer_spectral_normalization</a>()</code>,
-<code><a href="rnn_cells_stack.html">rnn_cells_stack</a>()</code>,
 <code><a href="layer_string_lookup.html">layer_string_lookup</a>()</code>,
 <code><a href="layer_subtract.html">layer_subtract</a>()</code>,
 <code><a href="layer_tfsm.html">layer_tfsm</a>()</code>,
@@ -659,7 +666,11 @@ Settable boolean, whether this layer should be trainable or not.</p></li>
 <code><a href="layer_upsampling_3d.html">layer_upsampling_3d</a>()</code>,
 <code><a href="layer_zero_padding_1d.html">layer_zero_padding_1d</a>()</code>,
 <code><a href="layer_zero_padding_2d.html">layer_zero_padding_2d</a>()</code>,
-<code><a href="layer_zero_padding_3d.html">layer_zero_padding_3d</a>()</code></p></div>
+<code><a href="layer_zero_padding_3d.html">layer_zero_padding_3d</a>()</code>,
+<code><a href="rnn_cell_gru.html">rnn_cell_gru</a>()</code>,
+<code><a href="rnn_cell_lstm.html">rnn_cell_lstm</a>()</code>,
+<code><a href="rnn_cell_simple.html">rnn_cell_simple</a>()</code>,
+<code><a href="rnn_cells_stack.html">rnn_cells_stack</a>()</code></p></div>
     </div>
 
   </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>
@@ -676,9 +687,9 @@ Settable boolean, whether this layer should be trainable or not.</p></li>
 
     </footer></div>
 
+  
 
-
-
+  
 
   </body></html>
 
