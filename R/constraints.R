@@ -147,6 +147,3 @@ as_constraint <- function(constraint) {
   # }
   constraint
 }
-
-
-# TODO: generate @family constraints, not @family constraint

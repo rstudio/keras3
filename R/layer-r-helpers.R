@@ -257,34 +257,6 @@ require_tf_version <- function(ver, msg = "this function.") {
 }
 
 
-# in python keras, sometimes strings are compared with `is`, which is too strict
-# https://github.com/keras-team/keras/blob/db3fa5d40ed19cdf89fc295e8d0e317fb64480d4/keras/layers/preprocessing/text_vectorization.py#L524
-# # there was already 1 PR submitted to fix this:
-# https://github.com/tensorflow/tensorflow/pull/34420
-# This is a hack around that: deparse and reparse the string in python. This
-# gives the python interpreter a chance to recycle the address for the identical
-# string that's already in it's string pool, which then passes the `is`
-# comparison.
-#TODO: delete this
-fix_string <- local({
-  py_reparse <- NULL # R CMD check: no visible binding
-  delayedAssign("py_reparse",
-    py_eval("lambda x: eval(repr(x), {'__builtins__':{}}, {})",
-            convert = FALSE))
-  # Note, the globals dict {'__builtins__':{}} is a guardrail, not a security
-  # door. A well crafted string can still break out to execute arbitrary code in
-  # the python session, but it can do no more than can be done from the R
-  # process already.
-  # Can't use ast.literal_eval() because it fails the 'is' test. E.g.:
-  # bool('foo' is ast.literal_eval("'foo'")) == FALSE
-  function(x) {
-    if (is.character(x))
-      py_call(py_reparse, as.character(x))
-    else
-      x
-  }
-})
-
 
 # ---- wrappers ----
 
