@@ -675,7 +675,6 @@ resolve_wrapper_py_obj_expr <- function(x, prefer_class = TRUE) {
     return()
 
   # standard builtin wrapper, like layer_dense, or custom wrapper, like Layer()
-  # TODO: this fails to resolve Metric / Loss wrappers
   last_cl <- last(body(x))
   if (is.call(last_cl) &&
       (identical(last_cl[[1L]], quote(do.call)) ||
