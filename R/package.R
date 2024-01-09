@@ -18,7 +18,6 @@
 #'
 #' See the package website at <https://keras.rstudio.com> for complete documentation.
 #'
-#' @import R6
 #' @importFrom reticulate
 #'   import import_from_path py_install
 #'   dict tuple
@@ -43,7 +42,7 @@
 #' Main Keras module
 #'
 #' The `keras` module object is the equivalent of
-#' `retirculate::import("keras")` and provided mainly as a convenience.
+#' `reticulate::import("keras")` and provided mainly as a convenience.
 #'
 #' @return the keras Python module
 #' @export

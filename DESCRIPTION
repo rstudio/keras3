@@ -36,7 +36,6 @@ Imports:
     zeallot,
     fastmap,
     glue,
-    R6,
     cli,
     rlang
 Suggests:
@@ -51,6 +50,7 @@ Suggests:
     jsonlite,
     purrr,
     rstudioapi,
+    R6,
     jpeg
 RoxygenNote: 7.2.3.9000
 VignetteBuilder: knitr

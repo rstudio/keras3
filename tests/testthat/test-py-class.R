@@ -6,7 +6,7 @@ test_that("R6 pyclasses respect convert=FALSE", {
 
   d <- py_eval("{}", FALSE)
 
-  r_cls <- R6Class(
+  r_cls <- R6::R6Class(
     "r_class",
     public = list(
       a_method = function(x = NULL) {
@@ -28,7 +28,7 @@ test_that("R6 pyclasses respect convert=TRUE", {
 
   d <- py_eval("{}", FALSE)
 
-  r_cls <- R6Class(
+  r_cls <- R6::R6Class(
     "r_class",
     public = list(
       a_method = function(x = NULL) {
@@ -115,7 +115,7 @@ test_that("R6 privates", {
 
   expect_error(r_to_py(o), "object not convertable")
 
-  aClass <- R6Class(
+  aClass <- R6::R6Class(
     "aClass",
     public = list(
       initialize = function() {
