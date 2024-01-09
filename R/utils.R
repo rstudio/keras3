@@ -1163,6 +1163,9 @@ as_py_name <- function(x) {
 
 
 as_py_function <- function(fn, default_name = "r_func") {
+  if(inherits(fn, "python.builtin.object"))
+    return(fn)
+
   name <-
     attr(fn, "py_function_name", TRUE) %||%
     attr(fn, "__name__", TRUE) %||%

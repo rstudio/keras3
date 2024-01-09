@@ -3024,7 +3024,15 @@ function (..., name = "mean", dtype = NULL)
 metric_mean_wrapper <-
 function (..., fn, name = NULL, dtype = NULL)
 {
-    args <- capture_args2(NULL)
+    args <- capture_args2(list(fn = function(x) as_py_function(
+      x, default_name =
+        if (is.null(name)) {
+          if (is.symbol(fn_expr <- substitute(fn)))
+            deparse(fn_expr)
+          else
+            "custom_metric"
+        } else
+        paste0(name, "_fn"))))
     do.call(keras$metrics$MeanMetricWrapper, args)
 }
 
