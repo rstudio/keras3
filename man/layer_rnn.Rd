@@ -2,7 +2,7 @@
 % Please edit documentation in R/layers-rnn.R
 \name{layer_rnn}
 \alias{layer_rnn}
-\title{Base class for recurrent layer_}
+\title{Base class for recurrent layers}
 \usage{
 layer_rnn(
   object,
@@ -78,7 +78,7 @@ merging bidirectional RNNs.}
 \item{...}{For forward/backward compatability.}
 }
 \description{
-Base class for recurrent layer_
+Base class for recurrent layers
 }
 \section{Call Arguments}{
 \itemize{
@@ -139,7 +139,7 @@ It should be a list of integers, e.g. \verb{(32, 10, 100)}.
 \item Specify \code{shuffle=FALSE} when calling \code{fit()}.
 }
 
-To reset the states of your model, call \code{.reset_states()} on either
+To reset the states of your model, call \code{\link[=reset_state]{reset_state()}} on either
 a specific layer, or on your entire model.
 
 Note on specifying the initial state of RNNs:
@@ -147,11 +147,6 @@ Note on specifying the initial state of RNNs:
 You can specify the initial state of RNN layers symbolically by
 calling them with the keyword argument \code{initial_state}. The value of
 \code{initial_state} should be a tensor or list of tensors representing
-the initial state of the RNN layer.
-
-You can specify the initial state of RNN layers numerically by
-calling \code{reset_states} with the keyword argument \code{states}. The value of
-\code{states} should be a numpy array or list of numpy arrays representing
 the initial state of the RNN layer.
 }
 
@@ -207,21 +202,21 @@ y <- layer(x)
 \item \url{https://www.tensorflow.org/api_docs/python/tf/keras/layers/RNN}
 }
 
-Other rnn layers:
+Other rnn layers: 
 \code{\link{bidirectional}()},
 \code{\link{layer_conv_lstm_1d}()},
 \code{\link{layer_conv_lstm_2d}()},
 \code{\link{layer_conv_lstm_3d}()},
-\code{\link{rnn_cell_gru}()},
 \code{\link{layer_gru}()},
-\code{\link{rnn_cell_lstm}()},
 \code{\link{layer_lstm}()},
-\code{\link{rnn_cell_simple}()},
 \code{\link{layer_simple_rnn}()},
-\code{\link{rnn_cells_stack}()},
-\code{\link{layer_time_distributed}()}
+\code{\link{layer_time_distributed}()},
+\code{\link{rnn_cell_gru}()},
+\code{\link{rnn_cell_lstm}()},
+\code{\link{rnn_cell_simple}()},
+\code{\link{rnn_cells_stack}()}
 
-Other layers:
+Other layers: 
 \code{\link{Layer}()},
 \code{\link{bidirectional}()},
 \code{\link{get_vocabulary}()},
@@ -275,7 +270,6 @@ Other layers:
 \code{\link{layer_global_max_pooling_3d}()},
 \code{\link{layer_group_normalization}()},
 \code{\link{layer_group_query_attention}()},
-\code{\link{rnn_cell_gru}()},
 \code{\link{layer_gru}()},
 \code{\link{layer_hashed_crossing}()},
 \code{\link{layer_hashing}()},
@@ -284,7 +278,6 @@ Other layers:
 \code{\link{layer_integer_lookup}()},
 \code{\link{layer_lambda}()},
 \code{\link{layer_layer_normalization}()},
-\code{\link{rnn_cell_lstm}()},
 \code{\link{layer_lstm}()},
 \code{\link{layer_masking}()},
 \code{\link{layer_max_pooling_1d}()},
@@ -309,13 +302,11 @@ Other layers:
 \code{\link{layer_resizing}()},
 \code{\link{layer_separable_conv_1d}()},
 \code{\link{layer_separable_conv_2d}()},
-\code{\link{rnn_cell_simple}()},
 \code{\link{layer_simple_rnn}()},
 \code{\link{layer_spatial_dropout_1d}()},
 \code{\link{layer_spatial_dropout_2d}()},
 \code{\link{layer_spatial_dropout_3d}()},
 \code{\link{layer_spectral_normalization}()},
-\code{\link{rnn_cells_stack}()},
 \code{\link{layer_string_lookup}()},
 \code{\link{layer_subtract}()},
 \code{\link{layer_tfsm}()},
@@ -327,7 +318,11 @@ Other layers:
 \code{\link{layer_upsampling_3d}()},
 \code{\link{layer_zero_padding_1d}()},
 \code{\link{layer_zero_padding_2d}()},
-\code{\link{layer_zero_padding_3d}()}
+\code{\link{layer_zero_padding_3d}()},
+\code{\link{rnn_cell_gru}()},
+\code{\link{rnn_cell_lstm}()},
+\code{\link{rnn_cell_simple}()},
+\code{\link{rnn_cells_stack}()}
 }
 \concept{layers}
 \concept{rnn layers}
