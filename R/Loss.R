@@ -55,11 +55,15 @@
 #' * ```r
 #'   initialize(name=NULL, reduction="sum_over_batch_size", dtype=NULL)
 #'   ```
+#'   Args:
+#'   * `name`
+#'   * `reduction`: Valid values are one of `{"sum_over_batch_size", "sum", NULL, "none"}`
+#'   * `dtype`
 #'
 #' * ```
 #'   __call__(y_true, y_pred, sample_weight=NULL)
 #'   ```
-#'   Call the loss instance as a function, optionally with `sample_weight`
+#'   Call the loss instance as a function, optionally with `sample_weight`.
 #'
 #' * ```r
 #'   get_config()
