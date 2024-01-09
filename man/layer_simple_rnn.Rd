@@ -160,7 +160,7 @@ Other rnn layers:
 \code{\link{layer_lstm}()},
 \code{\link{layer_rnn}()},
 \code{\link{rnn_cell_simple}()},
-\code{\link{layer_stacked_rnn_cells}()},
+\code{\link{rnn_cells_stack}()},
 \code{\link{layer_time_distributed}()}
 
 Other layers:
@@ -257,7 +257,7 @@ Other layers:
 \code{\link{layer_spatial_dropout_2d}()},
 \code{\link{layer_spatial_dropout_3d}()},
 \code{\link{layer_spectral_normalization}()},
-\code{\link{layer_stacked_rnn_cells}()},
+\code{\link{rnn_cells_stack}()},
 \code{\link{layer_string_lookup}()},
 \code{\link{layer_subtract}()},
 \code{\link{layer_tfsm}()},

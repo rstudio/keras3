@@ -903,7 +903,7 @@ r_name_to_family_map <-
     ),
     layer_spectral_normalization = c("normalization layers",
                                      "layers"),
-    layer_stacked_rnn_cells = c("rnn layers", "layers"),
+    rnn_cells_stack = c("rnn layers", "layers"),
     layer_string_lookup = c("preprocessing layers", "layers"),
     layer_subtract = c("subtract merging layers", "merging layers",
                        "layers"),
@@ -1515,7 +1515,7 @@ family_to_r_names_map <-
       "layer_spatial_dropout_2d",
       "layer_spatial_dropout_3d",
       "layer_spectral_normalization",
-      "layer_stacked_rnn_cells",
+      "rnn_cells_stack",
       "layer_string_lookup",
       "layer_subtract",
       "layer_text_vectorization",
@@ -2543,7 +2543,7 @@ family_to_r_names_map <-
       "layer_rnn",
       "layer_simple_rnn",
       "rnn_cell_simple",
-      "layer_stacked_rnn_cells",
+      "rnn_cells_stack",
       "layer_time_distributed"
     ),
     saving = c(

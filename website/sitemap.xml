@@ -838,7 +838,7 @@
     <loc>https://keras.posit.co/reference/layer_spectral_normalization.html</loc>
   </url>
   <url>
-    <loc>https://keras.posit.co/reference/layer_stacked_rnn_cells.html</loc>
+    <loc>https://keras.posit.co/reference/rnn_cells_stack.html</loc>
   </url>
   <url>
     <loc>https://keras.posit.co/reference/layer_string_lookup.html</loc>

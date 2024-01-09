@@ -237,7 +237,7 @@
     - `rnn_cell_gru()`
     - `rnn_cell_lstm()`
     - `rnn_cell_simple()`
-    - `layer_stacked_rnn_cells()`
+    - `rnn_cells_stack()`
   To learn more, including how to make a custom cell layer, see the new vignette:
   "Working with RNNs".
 

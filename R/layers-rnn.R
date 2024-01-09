@@ -1812,7 +1812,7 @@ function (units, activation = "tanh", use_bias = TRUE, kernel_initializer = "glo
 #' x <- array(1:30, dim = new_shape)
 #'
 #' rnn_cells <- lapply(1:2, function(x) rnn_cell_lstm(units = 128))
-#' stacked_lstm <- layer_stacked_rnn_cells(rnn_cells)
+#' stacked_lstm <- rnn_cells_stack(rnn_cells)
 #' lstm_layer <- layer_rnn(cell = stacked_lstm)
 #'
 #' result <- lstm_layer(x)
@@ -1831,7 +1831,7 @@ function (units, activation = "tanh", use_bias = TRUE, kernel_initializer = "glo
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/layers/StackedRNNCells>
 #'
 #' @tether keras.layers.StackedRNNCells
-layer_stacked_rnn_cells <-
+rnn_cells_stack <-
 function (cells, ...)
 {
     args <- capture_args2(list(input_shape = normalize_shape,
