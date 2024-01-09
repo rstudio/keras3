@@ -125,7 +125,7 @@ max_pool_1d(x)
 \item \url{https://www.tensorflow.org/api_docs/python/tf/keras/layers/MaxPooling1D}
 }
 
-Other pooling layers: 
+Other pooling layers:
 \code{\link{layer_average_pooling_1d}()},
 \code{\link{layer_average_pooling_2d}()},
 \code{\link{layer_average_pooling_3d}()},
@@ -138,7 +138,7 @@ Other pooling layers:
 \code{\link{layer_max_pooling_2d}()},
 \code{\link{layer_max_pooling_3d}()}
 
-Other layers: 
+Other layers:
 \code{\link{Layer}()},
 \code{\link{bidirectional}()},
 \code{\link{get_vocabulary}()},
@@ -192,7 +192,7 @@ Other layers:
 \code{\link{layer_global_max_pooling_3d}()},
 \code{\link{layer_group_normalization}()},
 \code{\link{layer_group_query_attention}()},
-\code{\link{layer_gru_cell}()},
+\code{\link{rnn_cell_gru}()},
 \code{\link{layer_gru}()},
 \code{\link{layer_hashed_crossing}()},
 \code{\link{layer_hashing}()},
@@ -201,7 +201,7 @@ Other layers:
 \code{\link{layer_integer_lookup}()},
 \code{\link{layer_lambda}()},
 \code{\link{layer_layer_normalization}()},
-\code{\link{layer_lstm_cell}()},
+\code{\link{rnn_cell_lstm}()},
 \code{\link{layer_lstm}()},
 \code{\link{layer_masking}()},
 \code{\link{layer_max_pooling_2d}()},
@@ -226,7 +226,7 @@ Other layers:
 \code{\link{layer_rnn}()},
 \code{\link{layer_separable_conv_1d}()},
 \code{\link{layer_separable_conv_2d}()},
-\code{\link{layer_simple_rnn_cell}()},
+\code{\link{rnn_cell_simple}()},
 \code{\link{layer_simple_rnn}()},
 \code{\link{layer_spatial_dropout_1d}()},
 \code{\link{layer_spatial_dropout_2d}()},

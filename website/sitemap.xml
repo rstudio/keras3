@@ -718,7 +718,7 @@
     <loc>https://keras.posit.co/reference/layer_gru.html</loc>
   </url>
   <url>
-    <loc>https://keras.posit.co/reference/layer_gru_cell.html</loc>
+    <loc>https://keras.posit.co/reference/rnn_cell_gru.html</loc>
   </url>
   <url>
     <loc>https://keras.posit.co/reference/layer_hashed_crossing.html</loc>
@@ -745,7 +745,7 @@
     <loc>https://keras.posit.co/reference/layer_lstm.html</loc>
   </url>
   <url>
-    <loc>https://keras.posit.co/reference/layer_lstm_cell.html</loc>
+    <loc>https://keras.posit.co/reference/rnn_cell_lstm.html</loc>
   </url>
   <url>
     <loc>https://keras.posit.co/reference/layer_masking.html</loc>
@@ -823,7 +823,7 @@
     <loc>https://keras.posit.co/reference/layer_simple_rnn.html</loc>
   </url>
   <url>
-    <loc>https://keras.posit.co/reference/layer_simple_rnn_cell.html</loc>
+    <loc>https://keras.posit.co/reference/rnn_cell_simple.html</loc>
   </url>
   <url>
     <loc>https://keras.posit.co/reference/layer_spatial_dropout_1d.html</loc>

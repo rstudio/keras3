@@ -213,7 +213,7 @@ stopifnot(exprs = \{
 
 \section{Methods available}{
 \itemize{
-\item 
+\item
 
 \if{html}{\out{<div class="sourceCode">}}\preformatted{add_loss(loss)
 }\if{html}{\out{</div>}}
@@ -229,17 +229,17 @@ Example:
     x
   \}
 }\if{html}{\out{</div>}}
-\item 
+\item
 
 \if{html}{\out{<div class="sourceCode">}}\preformatted{add_metric()
 }\if{html}{\out{</div>}}
-\item 
+\item
 
 \if{html}{\out{<div class="sourceCode">}}\preformatted{add_variable(...)
 }\if{html}{\out{</div>}}
 
 Alias of \code{add_weight()}.
-\item 
+\item
 
 \if{html}{\out{<div class="sourceCode">}}\preformatted{add_weight(shape = NULL,
            initializer = NULL,
@@ -300,11 +300,11 @@ Properties/Attributes:
 \item \code{shape} (calling \verb{shape(<variable>)} is preferred)
 \item \code{trainable}
 }
-\item 
+\item
 
 \if{html}{\out{<div class="sourceCode">}}\preformatted{build(input_shape)
 }\if{html}{\out{</div>}}
-\item 
+\item
 
 \if{html}{\out{<div class="sourceCode">}}\preformatted{build_from_config(config)
 }\if{html}{\out{</div>}}
@@ -320,25 +320,25 @@ Args:
 \itemize{
 \item \code{config}: Named list containing the input shape associated with this layer.
 }
-\item 
+\item
 
 \if{html}{\out{<div class="sourceCode">}}\preformatted{call(...)
 }\if{html}{\out{</div>}}
 
 See description above
-\item 
+\item
 
 \if{html}{\out{<div class="sourceCode">}}\preformatted{compute_mask(inputs, previous_mask)
 }\if{html}{\out{</div>}}
-\item 
+\item
 
 \if{html}{\out{<div class="sourceCode">}}\preformatted{compute_output_shape(...)
 }\if{html}{\out{</div>}}
-\item 
+\item
 
 \if{html}{\out{<div class="sourceCode">}}\preformatted{compute_output_spec(...)
 }\if{html}{\out{</div>}}
-\item 
+\item
 
 \if{html}{\out{<div class="sourceCode">}}\preformatted{count_params()
 }\if{html}{\out{</div>}}
@@ -350,7 +350,7 @@ An integer count.
 
 \if{html}{\out{<div class="sourceCode">}}\preformatted{
 }\if{html}{\out{</div>}}
-\item 
+\item
 
 \if{html}{\out{<div class="sourceCode">}}\preformatted{get_build_config()
 }\if{html}{\out{</div>}}
@@ -369,7 +369,7 @@ loading.
 
 Returns:
 A named list containing the input shape associated with the layer.
-\item 
+\item
 
 \if{html}{\out{<div class="sourceCode">}}\preformatted{get_config()
 }\if{html}{\out{</div>}}
@@ -381,13 +381,13 @@ containing the information needed to re-instantiate it.
 The config is expected to be serializable to JSON, and is expected
 to consist of a (potentially complex, nested) structure of names lists
 consisting of simple objects like strings, ints.
-\item 
+\item
 
 \if{html}{\out{<div class="sourceCode">}}\preformatted{get_weights()
 }\if{html}{\out{</div>}}
 
 Return the values of \code{layer$weights} as a list of R or NumPy arrays.
-\item 
+\item
 
 \if{html}{\out{<div class="sourceCode">}}\preformatted{load_own_variables(store)
 }\if{html}{\out{</div>}}
@@ -401,7 +401,7 @@ Args:
 \itemize{
 \item \code{store}: Named list from which the state of the model will be loaded.
 }
-\item 
+\item
 
 \if{html}{\out{<div class="sourceCode">}}\preformatted{save_own_variables(store)
 }\if{html}{\out{</div>}}
@@ -415,13 +415,13 @@ Args:
 \itemize{
 \item \code{store}: Named list where the state of the model will be saved.
 }
-\item 
+\item
 
 \if{html}{\out{<div class="sourceCode">}}\preformatted{set_weights(weights)
 }\if{html}{\out{</div>}}
 
 Sets the values of \code{weights} from a list of R or NumPy arrays.
-\item 
+\item
 
 \if{html}{\out{<div class="sourceCode">}}\preformatted{stateless_call(trainable_variables, non_trainable_variables,
                ..., return_losses = FALSE)
@@ -468,11 +468,11 @@ purrr::walk2(
   model$non_trainable_variables, non_trainable_variables,
   \\(variable, value) variable$assign(value))
 }\if{html}{\out{</div>}}
-\item 
+\item
 
 \if{html}{\out{<div class="sourceCode">}}\preformatted{symbolic_call(...)
 }\if{html}{\out{</div>}}
-\item 
+\item
 
 \if{html}{\out{<div class="sourceCode">}}\preformatted{from_config(config)
 }\if{html}{\out{</div>}}
@@ -604,7 +604,7 @@ Settable boolean, whether this layer should be trainable or not.
 \item \url{https://www.tensorflow.org/api_docs/python/tf/keras/layers/Layer}
 }
 
-Other layers: 
+Other layers:
 \code{\link{bidirectional}()},
 \code{\link{get_vocabulary}()},
 \code{\link{layer_activation_elu}()},
@@ -657,7 +657,7 @@ Other layers:
 \code{\link{layer_global_max_pooling_3d}()},
 \code{\link{layer_group_normalization}()},
 \code{\link{layer_group_query_attention}()},
-\code{\link{layer_gru_cell}()},
+\code{\link{rnn_cell_gru}()},
 \code{\link{layer_gru}()},
 \code{\link{layer_hashed_crossing}()},
 \code{\link{layer_hashing}()},
@@ -666,7 +666,7 @@ Other layers:
 \code{\link{layer_integer_lookup}()},
 \code{\link{layer_lambda}()},
 \code{\link{layer_layer_normalization}()},
-\code{\link{layer_lstm_cell}()},
+\code{\link{rnn_cell_lstm}()},
 \code{\link{layer_lstm}()},
 \code{\link{layer_masking}()},
 \code{\link{layer_max_pooling_1d}()},
@@ -692,7 +692,7 @@ Other layers:
 \code{\link{layer_rnn}()},
 \code{\link{layer_separable_conv_1d}()},
 \code{\link{layer_separable_conv_2d}()},
-\code{\link{layer_simple_rnn_cell}()},
+\code{\link{rnn_cell_simple}()},
 \code{\link{layer_simple_rnn}()},
 \code{\link{layer_spatial_dropout_1d}()},
 \code{\link{layer_spatial_dropout_2d}()},

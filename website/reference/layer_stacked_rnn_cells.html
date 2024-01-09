@@ -4,15 +4,15 @@
 <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
 <![endif]--></head><body>
     <a href="#main" class="visually-hidden-focusable">Skip to contents</a>
-    
+
 
     <nav class="navbar fixed-top navbar-inverse navbar-expand-lg bg-primary"><div class="container">
-    
+
     <a class="navbar-brand me-2" href="../index.html">keras3</a>
 
     <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">2.13.0.9000</small>
 
-    
+
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
@@ -52,12 +52,12 @@
       <ul class="navbar-nav"><li class="nav-item">
   <a class="external-link nav-link" href="https://github.com/rstudio/keras/" aria-label="github">
     <span class="fab fa fab fa-github fa-lg"></span>
-     
+
   </a>
 </li>
       </ul></div>
 
-    
+
   </div>
 </nav><div class="container template-reference-topic">
 <div class="row">
@@ -94,7 +94,7 @@
 <span><span class="va">new_shape</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="va">batch_size</span>, <span class="va">sentence_length</span>, <span class="va">num_features</span><span class="op">)</span></span>
 <span><span class="va">x</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/array.html" class="external-link">array</a></span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fl">30</span>, dim <span class="op">=</span> <span class="va">new_shape</span><span class="op">)</span></span>
 <span></span>
-<span><span class="va">rnn_cells</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/lapply.html" class="external-link">lapply</a></span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fl">2</span>, <span class="kw">function</span><span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="fu"><a href="../reference/layer_lstm_cell.html">layer_lstm_cell</a></span><span class="op">(</span>units <span class="op">=</span> <span class="fl">128</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="va">rnn_cells</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/lapply.html" class="external-link">lapply</a></span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fl">2</span>, <span class="kw">function</span><span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="fu"><a href="../reference/rnn_cell_lstm.html">rnn_cell_lstm</a></span><span class="op">(</span>units <span class="op">=</span> <span class="fl">128</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="va">stacked_lstm</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/layer_stacked_rnn_cells.html">layer_stacked_rnn_cells</a></span><span class="op">(</span><span class="va">rnn_cells</span><span class="op">)</span></span>
 <span><span class="va">lstm_layer</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/layer_rnn.html">layer_rnn</a></span><span class="op">(</span>cell <span class="op">=</span> <span class="va">stacked_lstm</span><span class="op">)</span></span>
 <span></span>
@@ -104,20 +104,20 @@
     <h2 id="see-also">See also<a class="anchor" aria-label="anchor" href="#see-also"></a></h2>
     <div class="dont-index">
 <ul><li><p><a href="https://www.tensorflow.org/api_docs/python/tf/keras/layers/StackedRNNCells" class="external-link">https://www.tensorflow.org/api_docs/python/tf/keras/layers/StackedRNNCells</a></p></li>
-</ul><p>Other rnn layers: 
+</ul><p>Other rnn layers:
 <code><a href="bidirectional.html">bidirectional</a>()</code>,
 <code><a href="layer_conv_lstm_1d.html">layer_conv_lstm_1d</a>()</code>,
 <code><a href="layer_conv_lstm_2d.html">layer_conv_lstm_2d</a>()</code>,
 <code><a href="layer_conv_lstm_3d.html">layer_conv_lstm_3d</a>()</code>,
-<code><a href="layer_gru_cell.html">layer_gru_cell</a>()</code>,
+<code><a href="rnn_cell_gru.html">rnn_cell_gru</a>()</code>,
 <code><a href="layer_gru.html">layer_gru</a>()</code>,
-<code><a href="layer_lstm_cell.html">layer_lstm_cell</a>()</code>,
+<code><a href="rnn_cell_lstm.html">rnn_cell_lstm</a>()</code>,
 <code><a href="layer_lstm.html">layer_lstm</a>()</code>,
 <code><a href="layer_rnn.html">layer_rnn</a>()</code>,
-<code><a href="layer_simple_rnn_cell.html">layer_simple_rnn_cell</a>()</code>,
+<code><a href="rnn_cell_simple.html">rnn_cell_simple</a>()</code>,
 <code><a href="layer_simple_rnn.html">layer_simple_rnn</a>()</code>,
 <code><a href="layer_time_distributed.html">layer_time_distributed</a>()</code></p>
-<p>Other layers: 
+<p>Other layers:
 <code><a href="Layer.html">Layer</a>()</code>,
 <code><a href="bidirectional.html">bidirectional</a>()</code>,
 <code><a href="layer_text_vectorization.html">get_vocabulary</a>()</code>,
@@ -171,7 +171,7 @@
 <code><a href="layer_global_max_pooling_3d.html">layer_global_max_pooling_3d</a>()</code>,
 <code><a href="layer_group_normalization.html">layer_group_normalization</a>()</code>,
 <code><a href="layer_group_query_attention.html">layer_group_query_attention</a>()</code>,
-<code><a href="layer_gru_cell.html">layer_gru_cell</a>()</code>,
+<code><a href="rnn_cell_gru.html">rnn_cell_gru</a>()</code>,
 <code><a href="layer_gru.html">layer_gru</a>()</code>,
 <code><a href="layer_hashed_crossing.html">layer_hashed_crossing</a>()</code>,
 <code><a href="layer_hashing.html">layer_hashing</a>()</code>,
@@ -180,7 +180,7 @@
 <code><a href="layer_integer_lookup.html">layer_integer_lookup</a>()</code>,
 <code><a href="layer_lambda.html">layer_lambda</a>()</code>,
 <code><a href="layer_layer_normalization.html">layer_layer_normalization</a>()</code>,
-<code><a href="layer_lstm_cell.html">layer_lstm_cell</a>()</code>,
+<code><a href="rnn_cell_lstm.html">rnn_cell_lstm</a>()</code>,
 <code><a href="layer_lstm.html">layer_lstm</a>()</code>,
 <code><a href="layer_masking.html">layer_masking</a>()</code>,
 <code><a href="layer_max_pooling_1d.html">layer_max_pooling_1d</a>()</code>,
@@ -206,7 +206,7 @@
 <code><a href="layer_rnn.html">layer_rnn</a>()</code>,
 <code><a href="layer_separable_conv_1d.html">layer_separable_conv_1d</a>()</code>,
 <code><a href="layer_separable_conv_2d.html">layer_separable_conv_2d</a>()</code>,
-<code><a href="layer_simple_rnn_cell.html">layer_simple_rnn_cell</a>()</code>,
+<code><a href="rnn_cell_simple.html">rnn_cell_simple</a>()</code>,
 <code><a href="layer_simple_rnn.html">layer_simple_rnn</a>()</code>,
 <code><a href="layer_spatial_dropout_1d.html">layer_spatial_dropout_1d</a>()</code>,
 <code><a href="layer_spatial_dropout_2d.html">layer_spatial_dropout_2d</a>()</code>,
@@ -240,9 +240,9 @@
 
     </footer></div>
 
-  
 
-  
+
+
 
   </body></html>
 

@@ -2,15 +2,15 @@
 context("rnn api")
 
 
-test_succeeds("layer_lstm_cell", {
+test_succeeds("rnn_cell_lstm", {
   # LSTMCell
   inputs <- random_normal(c(32, 10, 8))
-  rnn <- layer_rnn(cell = layer_lstm_cell(units = 4))
+  rnn <- layer_rnn(cell = rnn_cell_lstm(units = 4))
   output <- rnn(inputs)
   expect_equal(dim(output),  c(32, 4))
 
   rnn <- layer_rnn(
-    cell = layer_lstm_cell(units = 4),
+    cell = rnn_cell_lstm(units = 4),
     return_sequences = TRUE,
     return_state = TRUE
   )
@@ -21,13 +21,13 @@ test_succeeds("layer_lstm_cell", {
   expect_equal(dim(final_carry_state) , c(32, 4))
 })
 
-test_succeeds("layer_gru_cell", {
+test_succeeds("rnn_cell_gru", {
   # GRUCell
  inputs <- random_uniform(c(32, 10, 8))
- output <- inputs %>% layer_rnn(layer_gru_cell(4))
+ output <- inputs %>% layer_rnn(rnn_cell_gru(4))
  expect_true(output$shape == shape(32, 4))
 
- rnn <- layer_rnn(cell = layer_gru_cell(4),
+ rnn <- layer_rnn(cell = rnn_cell_gru(4),
                   return_sequences = TRUE,
                   return_state = TRUE)
  c(whole_sequence_output, final_state) %<-% rnn(inputs)
@@ -49,13 +49,13 @@ test_succeeds("layer_rnn", {
   build_model <- function(allow_cudnn_kernel = TRUE) {
     # CuDNN is only available at the layer level, and not at the cell level.
     # This means `layer_lstm(units=units)` will use the CuDNN kernel,
-    # while layer_rnn(layer_lstm_cell(units)) will run on non-CuDNN kernel.
+    # while layer_rnn(rnn_cell_lstm(units)) will run on non-CuDNN kernel.
     if (allow_cudnn_kernel)
       # The LSTM layer with default options uses CuDNN.
       lstm_layer <- layer_lstm(units = units)
     else
       # Wrapping a LSTMCell in a RNN layer will not use CuDNN.
-      lstm_layer <- layer_rnn(cell = layer_lstm_cell(units = units))
+      lstm_layer <- layer_rnn(cell = rnn_cell_lstm(units = units))
 
     model <-
       keras_model_sequential(input_shape = shape(NULL, input_dim)) %>%

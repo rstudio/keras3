@@ -910,10 +910,10 @@ function (object, units, activation = "tanh", recurrent_activation = "sigmoid",
 #' # Examples
 #' ```{r}
 #' inputs <- random_uniform(c(32, 10, 8))
-#' outputs <- inputs |> layer_rnn(layer_gru_cell(4))
+#' outputs <- inputs |> layer_rnn(rnn_cell_gru(4))
 #' shape(outputs)
 #' rnn <- layer_rnn(
-#'    cell = layer_gru_cell(4),
+#'    cell = rnn_cell_gru(4),
 #'    return_sequences=TRUE,
 #'    return_state=TRUE)
 #' c(whole_sequence_output, final_state) %<-% rnn(inputs)
@@ -1001,7 +1001,7 @@ function (object, units, activation = "tanh", recurrent_activation = "sigmoid",
 #' @seealso
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/layers/GRUCell>
 #' @tether keras.layers.GRUCell
-layer_gru_cell <-
+rnn_cell_gru <-
 function (units, activation = "tanh", recurrent_activation = "sigmoid",
     use_bias = TRUE, kernel_initializer = "glorot_uniform", recurrent_initializer = "orthogonal",
     bias_initializer = "zeros", kernel_regularizer = NULL, recurrent_regularizer = NULL,
@@ -1218,10 +1218,10 @@ function (object, units, activation = "tanh", recurrent_activation = "sigmoid",
 #' ```{r}
 #' inputs <- random_uniform(c(32, 10, 8))
 #' output <- inputs |>
-#'   layer_rnn(cell = layer_lstm_cell(4))
+#'   layer_rnn(cell = rnn_cell_lstm(4))
 #' shape(output)
 #'
-#' rnn <- layer_rnn(cell = layer_lstm_cell(4),
+#' rnn <- layer_rnn(cell = rnn_cell_lstm(4),
 #'                  return_sequences = T,
 #'                  return_state = T)
 #' c(whole_sequence_output, ...final_state) %<-% rnn(inputs)
@@ -1311,7 +1311,7 @@ function (object, units, activation = "tanh", recurrent_activation = "sigmoid",
 #' @seealso
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/layers/LSTMCell>
 #' @tether keras.layers.LSTMCell
-layer_lstm_cell <-
+rnn_cell_lstm <-
 function (units, activation = "tanh", recurrent_activation = "sigmoid",
     use_bias = TRUE, kernel_initializer = "glorot_uniform", recurrent_initializer = "orthogonal",
     bias_initializer = "zeros", unit_forget_bias = TRUE, kernel_regularizer = NULL,
@@ -1699,10 +1699,10 @@ function (object, units, activation = "tanh", use_bias = TRUE,
 #' # Examples
 #' ```{r}
 #' inputs <- random_uniform(c(32, 10, 8))
-#' rnn <- layer_rnn(cell = layer_simple_rnn_cell(units = 4))
+#' rnn <- layer_rnn(cell = rnn_cell_simple(units = 4))
 #' output <- rnn(inputs)  # The output has shape `(32, 4)`.
 #' rnn <- layer_rnn(
-#'     cell = layer_simple_rnn_cell(units = 4),
+#'     cell = rnn_cell_simple(units = 4),
 #'     return_sequences=TRUE,
 #'     return_state=TRUE
 #' )
@@ -1783,7 +1783,7 @@ function (object, units, activation = "tanh", use_bias = TRUE,
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/layers/SimpleRNNCell>
 #'
 #' @tether keras.layers.SimpleRNNCell
-layer_simple_rnn_cell <-
+rnn_cell_simple <-
 function (units, activation = "tanh", use_bias = TRUE, kernel_initializer = "glorot_uniform",
     recurrent_initializer = "orthogonal", bias_initializer = "zeros",
     kernel_regularizer = NULL, recurrent_regularizer = NULL,
@@ -1811,7 +1811,7 @@ function (units, activation = "tanh", use_bias = TRUE, kernel_initializer = "glo
 #' new_shape <- c(batch_size, sentence_length, num_features)
 #' x <- array(1:30, dim = new_shape)
 #'
-#' rnn_cells <- lapply(1:2, function(x) layer_lstm_cell(units = 128))
+#' rnn_cells <- lapply(1:2, function(x) rnn_cell_lstm(units = 128))
 #' stacked_lstm <- layer_stacked_rnn_cells(rnn_cells)
 #' lstm_layer <- layer_rnn(cell = stacked_lstm)
 #'

@@ -1267,7 +1267,7 @@ make_r_fn.layer <- function(endpoint, py_obj, transformers) {
 
   } else if (grepl(".rnn.", py_obj$`__module__`, fixed = TRUE) &&
              grepl("Cells?$", py_obj$`__name__`)) {
-    # layer_gru_cell() and friends don't compose w/ `object`
+    # rnn_cell_gru() and friends don't compose w/ `object`
     # TODO: consider renaming these in keras 3, maybe something like
     # rnn_cell_{gru,simple,stacked,lstm}()
     fn_body <- bquote({
