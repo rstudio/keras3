@@ -18,22 +18,21 @@
 #' @eval .alias_roxygen("new_callback_class", "Callback")
 new_callback_class <- Callback
 
-
 #' @eval .alias_roxygen("new_layer_class", "Layer")
 new_layer_class <- Layer
 
 #' @eval .alias_roxygen("new_loss_class", "Loss")
 new_loss_class <- Loss
 
-r"---(
-
-# @eval .alias_roxygen("new_metric_class", "Metric")
+#' @eval .alias_roxygen("new_metric_class", "Metric")
 new_metric_class <- Metric
+
+r"---(
 
 # @eval .alias_roxygen("new_learning_rate_schedule_class", "LearningRateSchedule")
 new_learning_rate_schedule_class <- LearningRateSchedule
 
-# @eval .alias_roxygen("new_layer_class", "Model")
+# @eval .alias_roxygen("new_model_class", "Model")
 new_model_class <- Model
 
 )---"

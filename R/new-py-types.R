@@ -1,17 +1,5 @@
 
 
-#' @rdname new-classes
-#' @export
-new_metric_class <-
-function(classname, ..., initialize, update_state, result) {
-  members <- capture_args2(ignore = "classname")
-  new_py_class(classname, members,
-              inherit = keras3::keras$metrics$Metric,
-              parent_env = parent.frame())
-}
-
-
-
 
 #' @rdname new-classes
 #' @export
