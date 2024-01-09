@@ -167,6 +167,8 @@
 #'
 #' @inheritSection Layer Symbols in scope
 #' @inheritParams Layer
+#' @param initialize,update_state,result
+#' Recommended methods to implement. See description section.
 #' @export
 #' @family metrics
 #' @tether keras.metrics.Metric

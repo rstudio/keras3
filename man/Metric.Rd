@@ -19,6 +19,8 @@ Metric(
 \arguments{
 \item{classname}{String, the name of the custom class. (Conventionally, CamelCase).}
 
+\item{initialize, update_state, result}{Recommended methods to implement. See description section.}
+
 \item{..., public}{Additional methods or public members of the custom class.
 Recommended methods \code{initialize}, \code{call} can optionally be
 provided as elements of \code{public}, and will take precedence over the value
