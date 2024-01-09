@@ -7,7 +7,6 @@ description: Text sentiment classification starting from raw text files.
 domain: text
 category: basic
 output: rmarkdown::html_vignette
-date: 'Last Modified: 2024-01-04; Last Rendered: 2024-01-04'
 vignette: >
   %\VignetteIndexEntry{Text classification from scratch}
   %\VignetteEngine{knitr::rmarkdown}
@@ -413,11 +412,11 @@ model %>% fit(train_ds, validation_data = val_ds, epochs = epochs)
 
 ```
 ## Epoch 1/3
-## 625/625 - 6s - 10ms/step - accuracy: 0.7311 - loss: 0.4921 - val_accuracy: 0.8658 - val_loss: 0.3169
+## 625/625 - 6s - 10ms/step - accuracy: 0.7278 - loss: 0.4958 - val_accuracy: 0.8662 - val_loss: 0.3110
 ## Epoch 2/3
-## 625/625 - 2s - 3ms/step - accuracy: 0.9120 - loss: 0.2221 - val_accuracy: 0.8750 - val_loss: 0.3089
+## 625/625 - 2s - 3ms/step - accuracy: 0.9115 - loss: 0.2252 - val_accuracy: 0.8732 - val_loss: 0.3126
 ## Epoch 3/3
-## 625/625 - 2s - 3ms/step - accuracy: 0.9579 - loss: 0.1153 - val_accuracy: 0.8730 - val_loss: 0.3478
+## 625/625 - 2s - 3ms/step - accuracy: 0.9592 - loss: 0.1142 - val_accuracy: 0.8726 - val_loss: 0.3805
 ```
 
 ## Evaluate the model on the test set
@@ -428,15 +427,15 @@ model %>% evaluate(test_ds)
 ```
 
 ```
-## 782/782 - 1s - 2ms/step - accuracy: 0.8637 - loss: 0.3675
+## 782/782 - 1s - 2ms/step - accuracy: 0.8656 - loss: 0.3931
 ```
 
 ```
 ## $accuracy
-## [1] 0.8636909
+## [1] 0.865609
 ##
 ## $loss
-## [1] 0.3674554
+## [1] 0.393098
 ```
 
 ## Make an end-to-end model
@@ -466,13 +465,13 @@ end_to_end_model %>% evaluate(raw_test_ds)
 ```
 
 ```
-## 782/782 - 4s - 5ms/step - accuracy: 0.8637 - loss: 0.3675
+## 782/782 - 4s - 5ms/step - accuracy: 0.8657 - loss: 0.3922
 ```
 
 ```
 ## $accuracy
-## [1] 0.8636909
+## [1] 0.8657289
 ##
 ## $loss
-## [1] 0.367548
+## [1] 0.3922187
 ```

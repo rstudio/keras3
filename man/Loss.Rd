@@ -61,12 +61,34 @@ model |> compile(loss = loss_custom_mse())
 # Standalone usage
 mse <- loss_custom_mse(name = "my_custom_mse_instance")
 
-y_true <- op_ones(c(5, 5))
-y_pred <- y_true - .5
-mse(y_true, y_pred)
+y_true <- op_arange(20) |> op_reshape(4, 5)
+y_pred <- op_arange(20) |> op_reshape(4, 5) * 2
+(loss <- mse(y_true, y_pred))
 }\if{html}{\out{</div>}}
 
-\if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor([0.25 0.25 0.25 0.25 0.25], shape=(5), dtype=float32)
+\if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor(123.5, shape=(), dtype=float32)
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{loss2 <- (y_pred - y_true)^2 |>
+  op_mean(axis = -1) |>
+  op_mean()
+
+stopifnot(all.equal(as.array(loss), as.array(loss2)))
+
+sample_weight <-array(c(.25, .25, 1, 1))
+(weighted_loss <- mse(y_true, y_pred, sample_weight = sample_weight))
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor(112.8125, shape=(), dtype=float32)
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{weighted_loss2 <- (y_true - y_pred)^2 |>
+  op_mean(axis = -1) |>
+  op_multiply(sample_weight) |>
+  op_mean()
+
+stopifnot(all.equal(as.array(weighted_loss),
+                    as.array(weighted_loss2)))
 }\if{html}{\out{</div>}}
 }
 \section{Methods defined by base \code{Loss} class:}{
@@ -75,6 +97,12 @@ mse(y_true, y_pred)
 
 \if{html}{\out{<div class="sourceCode r">}}\preformatted{initialize(name=NULL, reduction="sum_over_batch_size", dtype=NULL)
 }\if{html}{\out{</div>}}
+\item 
+
+\if{html}{\out{<div class="sourceCode">}}\preformatted{__call__(y_true, y_pred, sample_weight=NULL)
+}\if{html}{\out{</div>}}
+
+Call the loss instance as a function, optionally with \code{sample_weight}
 \item 
 
 \if{html}{\out{<div class="sourceCode r">}}\preformatted{get_config()

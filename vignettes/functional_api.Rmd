@@ -638,7 +638,7 @@ model %>% fit(
 
 ```
 ## Epoch 1/2
-## 40/40 - 3s - 82ms/step - loss: 0.3948
+## 40/40 - 3s - 70ms/step - loss: 0.3948
 ## Epoch 2/2
 ## 40/40 - 0s - 6ms/step - loss: 0.1971
 ```
@@ -771,7 +771,7 @@ model %>% fit(
 ```
 
 ```
-## 13/13 - 7s - 533ms/step - acc: 0.1338 - loss: 2.3036 - val_acc: 0.1150 - val_loss: 2.3068
+## 13/13 - 7s - 538ms/step - acc: 0.1338 - loss: 2.3036 - val_acc: 0.1100 - val_loss: 2.3071
 ```
 
 ## Shared layers

@@ -16,8 +16,7 @@ array is flattened before shifting, after which the original
 shape is restored.}
 }
 \value{
-\if{html}{\out{<div class="sourceCode">}}\preformatted{Output tensor.
-}\if{html}{\out{</div>}}
+Output tensor.
 }
 \description{
 Elements that roll beyond the last position are re-introduced at the first.

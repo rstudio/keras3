@@ -1,7 +1,7 @@
 ---
 title: Keras examples
 output: rmarkdown::html_vignette
-date: 'Last Modified: 2024-01-03; Last Rendered: 2024-01-04'
+date: 'Last Modified: 2023-11-30; Last Rendered: 2024-01-08'
 vignette: >
   %\VignetteIndexEntry{Keras examples}
   %\VignetteEngine{knitr::rmarkdown}

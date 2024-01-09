@@ -237,7 +237,7 @@ unseen data.</p>
 <span>    validation_split<span class="op">=</span><span class="fl">0.15</span>,</span>
 <span>    callbacks<span class="op">=</span><span class="va">callbacks</span></span>
 <span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">## 399/399 - 9s - 22ms/step - acc: 0.7369 - loss: 0.7726 - val_acc: 0.9607 - val_loss: 0.1352</span></span></code></pre>
+<pre><code><span><span class="co">## 399/399 - 9s - 21ms/step - acc: 0.7359 - loss: 0.7750 - val_acc: 0.9607 - val_loss: 0.1367</span></span></code></pre>
 <div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">score</span> <span class="op">&lt;-</span> <span class="va">model</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://rdrr.io/pkg/tensorflow/man/evaluate.html" class="external-link">evaluate</a></span><span class="op">(</span><span class="va">x_test</span>, <span class="va">y_test</span>, verbose<span class="op">=</span><span class="fl">0</span><span class="op">)</span></span></code></pre></div>
 <p>During training, we were saving a model at the end of each epoch. You
@@ -362,7 +362,7 @@ layers:</p>
 <span>    epochs<span class="op">=</span><span class="fl">1</span>,  <span class="co"># For speed</span></span>
 <span>    validation_split<span class="op">=</span><span class="fl">0.15</span>,</span>
 <span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">## 399/399 - 8s - 20ms/step - acc: 0.7500 - loss: 0.7383 - val_acc: 0.9324 - val_loss: 0.2285</span></span></code></pre>
+<pre><code><span><span class="co">## 399/399 - 8s - 19ms/step - acc: 0.7509 - loss: 0.7377 - val_acc: 0.9329 - val_loss: 0.2254</span></span></code></pre>
 </div>
 <div class="section level2">
 <h2 id="training-models-on-arbitrary-data-sources">Training models on arbitrary data sources<a class="anchor" aria-label="anchor" href="#training-models-on-arbitrary-data-sources"></a>
@@ -429,7 +429,7 @@ your Keras backend.</p>
 <span>  <span class="op">)</span></span>
 <span><span class="op">)</span></span>
 <span><span class="va">model</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://generics.r-lib.org/reference/fit.html" class="external-link">fit</a></span><span class="op">(</span><span class="va">train_dataset</span>, epochs<span class="op">=</span><span class="fl">1</span>, validation_data<span class="op">=</span><span class="va">test_dataset</span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">## 469/469 - 9s - 19ms/step - acc: 0.7554 - loss: 0.7253 - val_acc: 0.8975 - val_loss: 0.3169</span></span></code></pre>
+<pre><code><span><span class="co">## 469/469 - 9s - 19ms/step - acc: 0.7557 - loss: 0.7244 - val_acc: 0.8981 - val_loss: 0.3176</span></span></code></pre>
 </div>
 <div class="section level2">
 <h2 id="further-reading">Further reading<a class="anchor" aria-label="anchor" href="#further-reading"></a>

@@ -149,7 +149,11 @@ layers via the <code>kernel_constraint</code> or <code>bias_constraint</code> ar
 
     <div class="section level2">
     <h2 id="arguments">Arguments<a class="anchor" aria-label="anchor" href="#arguments"></a></h2>
-    <dl><dt>call</dt>
+    <dl><dt>classname</dt>
+<dd><p>String, the name of the custom class. (Conventionally, CamelCase).</p></dd>
+
+
+<dt>call</dt>
 <dd><p></p><div class="sourceCode r"><pre><code>\(w)
 </code></pre><p></p></div>
 <p>Applies the constraint to the input weight variable.</p>
@@ -169,7 +173,41 @@ Projected variable (by default, returns unmodified inputs).</p></dd>
 be used to reinstantiate the same object
 (via <code>do.call(&lt;constraint_class&gt;, &lt;config&gt;)</code>).</p></dd>
 
+
+<dt>..., public</dt>
+<dd><p>Additional methods or public members of the custom class.
+Recommended methods <code>initialize</code>, <code>call</code> can optionally be
+provided as elements of <code>public</code>, and will take precedence over the value
+supplied to the argument.</p></dd>
+
+
+<dt>private</dt>
+<dd><p>Named list of R objects (typically, functions) to include in
+instance private environments. <code>private</code> will be a symbol in scope in all
+class methods, resolving to an R environment populated with the list
+provided. Each instance will have it's own <code>private</code> environment. All
+methods (functions) in <code>private</code> will have in scope <code>self</code> and <code>__class__</code>
+symbols. Any objects in <code>private</code> will be invisible from the Keras
+framework and the Python runtime.</p></dd>
+
+
+<dt>inherit</dt>
+<dd><p>What the custom class will subclass. By default, the base keras class.</p></dd>
+
+
+<dt>parent_env</dt>
+<dd><p>The R environment that all class methods will have as a grandparent.</p></dd>
+
 </dl></div>
+    <div class="section level2">
+    <h2 id="symbols-in-scope">Symbols in scope<a class="anchor" aria-label="anchor" href="#symbols-in-scope"></a></h2>
+    <p>All R function custom methods (public and private) will have the
+following symbols in scope:</p><ul><li><p><code>self</code>: The custom class instance.</p></li>
+<li><p><code>super</code>: The custom class superclass.</p></li>
+<li><p><code>private</code>: An R environment specific to the class instance.
+Any objects assigned here are invisible to the Keras framework.</p></li>
+<li><p><code>__class__</code> and <code>as.symbol(classname)</code>: the custom class type object.</p></li>
+</ul></div>
     <div class="section level2">
     <h2 id="see-also">See also<a class="anchor" aria-label="anchor" href="#see-also"></a></h2>
     <div class="dont-index"><p>Other constraints: 
