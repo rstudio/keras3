@@ -1816,13 +1816,15 @@ function (units, activation = "tanh", use_bias = TRUE, kernel_initializer = "glo
 #' lstm_layer <- layer_rnn(cell = stacked_lstm)
 #'
 #' result <- lstm_layer(x)
+#' str(result)
 #' ```
 #'
 #' @param cells
 #' List of RNN cell instances.
 #'
 #' @param ...
-#' For forward/backward compatability.
+#' Unnamed arguments are treated as additional `cells`.
+#' Named arguments are passed on to the underlying layer.
 #'
 #' @export
 #' @family rnn layers
@@ -1834,9 +1836,20 @@ function (units, activation = "tanh", use_bias = TRUE, kernel_initializer = "glo
 rnn_cells_stack <-
 function (cells, ...)
 {
-    args <- capture_args2(list(input_shape = normalize_shape,
-        batch_size = as_integer, batch_input_shape = normalize_shape))
-    do.call(keras$layers$StackedRNNCells, args)
+  args <- capture_args2(
+    list(
+      input_shape = normalize_shape,
+      batch_size = as_integer,
+      batch_input_shape = normalize_shape
+    ),
+    ignore = c("...", "cells")
+  )
+  dots <- split_dots_named_unnamed(list2(...))
+  if (missing(cells))
+    cells <- NULL
+  args$cells <- c(cells, dots$unnamed)
+  args <- c(args, dots$named)
+  do.call(keras$layers$StackedRNNCells, args)
 }
 
 
