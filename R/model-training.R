@@ -965,11 +965,6 @@ with_rich_config <- function(expr) {
 
 
 
-resolve_callbacks <- function(args, callbacks) {
-  args <- append(args, list(callbacks = normalize_callbacks(callbacks)))
-  args
-}
-
 as_model_verbose_arg <- function(x) {
   if(!identical(x, "auto"))
     return(as.integer(x))

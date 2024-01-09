@@ -895,10 +895,6 @@ function ()
 
 normalize_callbacks_with_metrics <- function(view_metrics, initial_epoch, callbacks) {
 
-  # if callbacks isn't a list then make it one
-  if (!is.null(callbacks) && !is.list(callbacks))
-    callbacks <- list(callbacks)
-
   # include the metrics callback if needed
   if (view_metrics || tfruns::is_run_active())
     append(callbacks) <- callback_view_metrics(view_metrics, initial_epoch)

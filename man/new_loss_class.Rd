@@ -43,6 +43,6 @@ framework and the Python runtime.}
 }
 \description{
 \code{new_loss_class()} is an alias for \code{\link[=Loss]{Loss()}}.
-See \code{\link[=?Loss]{?Loss()}} for the full documentation.
+See \verb{?}\code{\link[=Loss]{Loss()}} for the full documentation.
 }
 \keyword{internal}

@@ -11,6 +11,6 @@ mark_active(fn)
 }
 \description{
 \code{mark_active()} is an alias for \code{\link[=active_property]{active_property()}}.
-See \code{\link[=?active_property]{?active_property()}} for the full documentation.
+See \verb{?}\code{\link[=active_property]{active_property()}} for the full documentation.
 }
 \keyword{internal}

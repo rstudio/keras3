@@ -42,6 +42,6 @@ framework and the Python runtime.}
 }
 \description{
 \code{new_layer_class()} is an alias for \code{\link[=Layer]{Layer()}}.
-See \code{\link[=?Layer]{?Layer()}} for the full documentation.
+See \verb{?}\code{\link[=Layer]{Layer()}} for the full documentation.
 }
 \keyword{internal}

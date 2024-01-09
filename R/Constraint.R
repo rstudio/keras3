@@ -55,8 +55,10 @@
 #' (via `do.call(<constraint_class>, <config>)`).
 #'
 #' @tether keras.constraints.Constraint
-#' @export
+#' @inheritSection Layer Symbols in scope
+#' @inheritParams Layer
 #' @family constraints
+#' @export
 Constraint <- function(classname, call = NULL, get_config = NULL,
                        ...,
                        public = list(),

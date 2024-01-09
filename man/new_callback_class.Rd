@@ -270,6 +270,6 @@ framework and the Python runtime.}
 }
 \description{
 \code{new_callback_class()} is an alias for \code{\link[=Callback]{Callback()}}.
-See \code{\link[=?Callback]{?Callback()}} for the full documentation.
+See \verb{?}\code{\link[=Callback]{Callback()}} for the full documentation.
 }
 \keyword{internal}

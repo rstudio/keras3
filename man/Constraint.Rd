@@ -16,6 +16,8 @@ Constraint(
 )
 }
 \arguments{
+\item{classname}{String, the name of the custom class. (Conventionally, CamelCase).}
+
 \item{call}{\if{html}{\out{<div class="sourceCode r">}}\preformatted{\\(w)
 }\if{html}{\out{</div>}}
 
@@ -41,6 +43,23 @@ Function that returns a named list of the object config.
 A constraint config is a named list (JSON-serializable) that can
 be used to reinstantiate the same object
 (via \verb{do.call(<constraint_class>, <config>)}).}
+
+\item{..., public}{Additional methods or public members of the custom class.
+Recommended methods \code{initialize}, \code{call} can optionally be
+provided as elements of \code{public}, and will take precedence over the value
+supplied to the argument.}
+
+\item{private}{Named list of R objects (typically, functions) to include in
+instance private environments. \code{private} will be a symbol in scope in all
+class methods, resolving to an R environment populated with the list
+provided. Each instance will have it's own \code{private} environment. All
+methods (functions) in \code{private} will have in scope \code{self} and \verb{__class__}
+symbols. Any objects in \code{private} will be invisible from the Keras
+framework and the Python runtime.}
+
+\item{inherit}{What the custom class will subclass. By default, the base keras class.}
+
+\item{parent_env}{The R environment that all class methods will have as a grandparent.}
 }
 \description{
 Base class for weight constraints.
@@ -74,6 +93,18 @@ Usage in a layer:
 \if{html}{\out{<div class="sourceCode">}}\preformatted{## <Dense name=dense, built=False>
 }\if{html}{\out{</div>}}
 }
+\section{Symbols in scope}{
+All R function custom methods (public and private) will have the
+following symbols in scope:
+\itemize{
+\item \code{self}: The custom class instance.
+\item \code{super}: The custom class superclass.
+\item \code{private}: An R environment specific to the class instance.
+Any objects assigned here are invisible to the Keras framework.
+\item \verb{__class__} and \code{as.symbol(classname)}: the custom class type object.
+}
+}
+
 \seealso{
 Other constraints: 
 \code{\link{constraint_maxnorm}()},
