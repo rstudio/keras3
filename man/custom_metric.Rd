@@ -9,7 +9,8 @@ custom_metric(name, metric_fn)
 \arguments{
 \item{name}{name used to show training progress output}
 
-\item{metric_fn}{An R function with signature \code{function(y_true, y_pred){}} that accepts tensors.}
+\item{metric_fn}{An R function with signature \verb{function(y_true, y_pred)}
+that accepts tensors.}
 }
 \description{
 Custom metric function
@@ -24,25 +25,24 @@ Note that a name ('mean_pred') is provided for the custom metric
 function: this name is used within training progress output.
 
 If you want to save and load a model with custom metrics, you should
-also specify the metric in the call the \code{\link[=load_model]{load_model()}}. For example:
+also call \code{\link[=register_keras_serializable]{register_keras_serializable()}}, or
+specify the metric in the call the \code{\link[=load_model]{load_model()}}. For example:
 \code{load_model("my_model.keras", c('mean_pred' = metric_mean_pred))}.
 
 Alternatively, you can wrap all of your code in a call to
 \code{\link[=with_custom_object_scope]{with_custom_object_scope()}} which will allow you to refer to the
 metric by name just like you do with built in keras metrics.
 
-Documentation on the available backend tensor functions can be
-found at \url{https://tensorflow.rstudio.com/reference/keras/#backend}.
-
 Alternative ways of supplying custom metrics:
 \itemize{
 \item \verb{custom_metric():} Arbitrary R function.
 \item \code{\link[=metric_mean_wrapper]{metric_mean_wrapper()}}: Wrap an arbitrary R function in a \code{Metric} instance.
-\item subclass \code{keras$metrics$Metric}: see \code{?Metric} for example.
+\item Create a custom \code{\link[=Metric]{Metric()}} subclass.
 }
 }
 \seealso{
 Other metrics: 
+\code{\link{Metric}()},
 \code{\link{metric_auc}()},
 \code{\link{metric_binary_accuracy}()},
 \code{\link{metric_binary_crossentropy}()},

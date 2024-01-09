@@ -83,6 +83,7 @@ Other accuracy metrics:
 \code{\link{metric_top_k_categorical_accuracy}()}
 
 Other metrics: 
+\code{\link{Metric}()},
 \code{\link{custom_metric}()},
 \code{\link{metric_auc}()},
 \code{\link{metric_binary_crossentropy}()},

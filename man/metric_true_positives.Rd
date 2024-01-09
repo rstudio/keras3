@@ -68,6 +68,7 @@ Other confusion metrics:
 \code{\link{metric_true_negatives}()}
 
 Other metrics: 
+\code{\link{Metric}()},
 \code{\link{custom_metric}()},
 \code{\link{metric_auc}()},
 \code{\link{metric_binary_accuracy}()},

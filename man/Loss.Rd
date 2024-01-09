@@ -97,12 +97,19 @@ stopifnot(all.equal(as.array(weighted_loss),
 
 \if{html}{\out{<div class="sourceCode r">}}\preformatted{initialize(name=NULL, reduction="sum_over_batch_size", dtype=NULL)
 }\if{html}{\out{</div>}}
+
+Args:
+\itemize{
+\item \code{name}
+\item \code{reduction}: Valid values are one of \verb{\{"sum_over_batch_size", "sum", NULL, "none"\}}
+\item \code{dtype}
+}
 \item 
 
 \if{html}{\out{<div class="sourceCode">}}\preformatted{__call__(y_true, y_pred, sample_weight=NULL)
 }\if{html}{\out{</div>}}
 
-Call the loss instance as a function, optionally with \code{sample_weight}
+Call the loss instance as a function, optionally with \code{sample_weight}.
 \item 
 
 \if{html}{\out{<div class="sourceCode r">}}\preformatted{get_config()

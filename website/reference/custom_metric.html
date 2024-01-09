@@ -83,7 +83,8 @@
 
 
 <dt>metric_fn</dt>
-<dd><p>An R function with signature <code>function(y_true, y_pred){}</code> that accepts tensors.</p></dd>
+<dd><p>An R function with signature <code>function(y_true, y_pred)</code>
+that accepts tensors.</p></dd>
 
 </dl></div>
     <div class="section level2">
@@ -95,20 +96,20 @@ them should use backend tensor functions.</p>
 Note that a name ('mean_pred') is provided for the custom metric
 function: this name is used within training progress output.</p>
 <p>If you want to save and load a model with custom metrics, you should
-also specify the metric in the call the <code><a href="load_model.html">load_model()</a></code>. For example:
+also call <code><a href="register_keras_serializable.html">register_keras_serializable()</a></code>, or
+specify the metric in the call the <code><a href="load_model.html">load_model()</a></code>. For example:
 <code>load_model("my_model.keras", c('mean_pred' = metric_mean_pred))</code>.</p>
 <p>Alternatively, you can wrap all of your code in a call to
 <code><a href="with_custom_object_scope.html">with_custom_object_scope()</a></code> which will allow you to refer to the
 metric by name just like you do with built in keras metrics.</p>
-<p>Documentation on the available backend tensor functions can be
-found at <a href="https://tensorflow.rstudio.com/reference/keras/#backend" class="external-link">https://tensorflow.rstudio.com/reference/keras/#backend</a>.</p>
 <p>Alternative ways of supplying custom metrics:</p><ul><li><p><code>custom_metric():</code> Arbitrary R function.</p></li>
 <li><p><code><a href="metric_mean_wrapper.html">metric_mean_wrapper()</a></code>: Wrap an arbitrary R function in a <code>Metric</code> instance.</p></li>
-<li><p>subclass <code>keras$metrics$Metric</code>: see <code><a href="Metric.html">?Metric</a></code> for example.</p></li>
+<li><p>Create a custom <code><a href="Metric.html">Metric()</a></code> subclass.</p></li>
 </ul></div>
     <div class="section level2">
     <h2 id="see-also">See also<a class="anchor" aria-label="anchor" href="#see-also"></a></h2>
     <div class="dont-index"><p>Other metrics: 
+<code><a href="Metric.html">Metric</a>()</code>,
 <code><a href="metric_auc.html">metric_auc</a>()</code>,
 <code><a href="metric_binary_accuracy.html">metric_binary_accuracy</a>()</code>,
 <code><a href="metric_binary_crossentropy.html">metric_binary_crossentropy</a>()</code>,

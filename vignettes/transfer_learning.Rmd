@@ -192,7 +192,7 @@ model %>% fit(random_normal(c(2, 3)), random_normal(c(2, 3)), epochs = 1)
 ```
 
 ```
-## 1/1 - 1s - 569ms/step - loss: 2.1868
+## 1/1 - 1s - 547ms/step - loss: 2.1868
 ```
 
 ```r
@@ -643,7 +643,7 @@ model %>% fit(train_ds, epochs=epochs, validation_data=validation_ds)
 ```
 
 ```
-## 146/146 - 55s - 376ms/step - binary_accuracy: 0.9106 - loss: 0.1951 - val_binary_accuracy: 0.9679 - val_loss: 0.0913
+## 146/146 - 57s - 388ms/step - binary_accuracy: 0.9106 - loss: 0.1951 - val_binary_accuracy: 0.9679 - val_loss: 0.0913
 ```
 
 ## Do a round of fine-tuning of the entire model
@@ -704,7 +704,7 @@ model %>% fit(train_ds, epochs=epochs, validation_data=validation_ds)
 ```
 
 ```
-## 146/146 - 81s - 556ms/step - binary_accuracy: 0.8582 - loss: 0.3436 - val_binary_accuracy: 0.9443 - val_loss: 0.1300
+## 146/146 - 86s - 589ms/step - binary_accuracy: 0.8583 - loss: 0.3436 - val_binary_accuracy: 0.9443 - val_loss: 0.1299
 ```
 
 After 10 epochs, fine-tuning gains us a nice improvement here.
@@ -716,13 +716,13 @@ model %>% evaluate(test_ds)
 ```
 
 ```
-## 37/37 - 1s - 40ms/step - binary_accuracy: 0.9371 - loss: 0.1492
+## 37/37 - 2s - 43ms/step - binary_accuracy: 0.9367 - loss: 0.1492
 ```
 
 ```
 ## $binary_accuracy
-## [1] 0.9370777
+## [1] 0.9366554
 ##
 ## $loss
-## [1] 0.1492098
+## [1] 0.1492137
 ```

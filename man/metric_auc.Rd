@@ -177,6 +177,7 @@ Other confusion metrics:
 \code{\link{metric_true_positives}()}
 
 Other metrics: 
+\code{\link{Metric}()},
 \code{\link{custom_metric}()},
 \code{\link{metric_binary_accuracy}()},
 \code{\link{metric_binary_crossentropy}()},

@@ -110,6 +110,7 @@ Other iou metrics:
 \code{\link{metric_one_hot_mean_iou}()}
 
 Other metrics: 
+\code{\link{Metric}()},
 \code{\link{custom_metric}()},
 \code{\link{metric_auc}()},
 \code{\link{metric_binary_accuracy}()},

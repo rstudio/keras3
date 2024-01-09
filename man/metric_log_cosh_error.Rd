@@ -64,6 +64,7 @@ Other regression metrics:
 \code{\link{metric_root_mean_squared_error}()}
 
 Other metrics: 
+\code{\link{Metric}()},
 \code{\link{custom_metric}()},
 \code{\link{metric_auc}()},
 \code{\link{metric_binary_accuracy}()},

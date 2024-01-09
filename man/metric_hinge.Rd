@@ -91,6 +91,7 @@ Other losses:
 \code{\link{metric_squared_hinge}()}
 
 Other metrics: 
+\code{\link{Metric}()},
 \code{\link{custom_metric}()},
 \code{\link{metric_auc}()},
 \code{\link{metric_binary_accuracy}()},

@@ -173,7 +173,7 @@ model %>% fit(
 ```
 
 ```
-## 399/399 - 9s - 21ms/step - acc: 0.7359 - loss: 0.7750 - val_acc: 0.9607 - val_loss: 0.1367
+## 399/399 - 9s - 22ms/step - acc: 0.7354 - loss: 0.7782 - val_acc: 0.9607 - val_loss: 0.1380
 ```
 
 ```r
@@ -334,7 +334,7 @@ model %>% fit(
 ```
 
 ```
-## 399/399 - 8s - 19ms/step - acc: 0.7509 - loss: 0.7377 - val_acc: 0.9329 - val_loss: 0.2254
+## 399/399 - 8s - 20ms/step - acc: 0.7510 - loss: 0.7375 - val_acc: 0.9321 - val_loss: 0.2274
 ```
 
 ## Training models on arbitrary data sources
@@ -410,7 +410,7 @@ model %>% fit(train_dataset, epochs=1, validation_data=test_dataset)
 ```
 
 ```
-## 469/469 - 9s - 19ms/step - acc: 0.7557 - loss: 0.7244 - val_acc: 0.8981 - val_loss: 0.3176
+## 469/469 - 9s - 20ms/step - acc: 0.7546 - loss: 0.7277 - val_acc: 0.8968 - val_loss: 0.3212
 ```
 
 ## Further reading
