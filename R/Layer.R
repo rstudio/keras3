@@ -140,22 +140,21 @@
 #'
 #'       super$initialize()
 #'       # Create a non-trainable weight.
-#'       self$total = self$add_weight(
-#'         shape=shape(),
-#'         initializer="zeros",
-#'         trainable=FALSE,
-#'         name="total"
+#'       self$total <- self$add_weight(
+#'         shape = shape(),
+#'         initializer = "zeros",
+#'         trainable = FALSE,
+#'         name = "total"
 #'       )
 #'    },
 #'
 #'    call = function(inputs){
-#'      # TODO: where is assign() documented?
 #'       self$total$assign(self$total + op_sum(inputs))
 #'       self$total
 #'    }
 #' )
 #'
-#' my_sum <- layer_compute_sum(,2)
+#' my_sum <- layer_compute_sum(, 2)
 #' x <- op_ones(c(2, 2))
 #' y <- my_sum(x)
 #'
@@ -207,8 +206,8 @@
 #'   Add a weight variable to the layer.
 #'
 #'   Args:
-#'   * `shape`: shape for the variable (as defined by `keras3::shape()`)
-#'       Must be fully-defined (no `NA`/`NULL` entries).
+#'   * `shape`: shape for the variable (as defined by [`shape()`])
+#'       Must be fully-defined (no `NA`/`NULL`/`-1` entries).
 #'       Defaults to `()` (scalar) if unspecified.
 #'   * `initializer`: Initializer object to use to
 #'       populate the initial variable value,
@@ -230,6 +229,24 @@
 #'       or string name of a built-in constraint.
 #'   * `name`: String name of the variable. Useful
 #'          for debugging purposes.
+#'
+#'   Returns:
+#'
+#'   A backend tensor, wrapped in a `KerasVariable` class.
+#'   The `KerasVariable` class has
+#'
+#'     Methods:
+#'     - `assign(value)`
+#'     - `assign_add(value)`
+#'     - `assign_sub(value)`
+#'     - `numpy()` (calling `as.array(<variable>)` is preferred)
+#'
+#'     Properties/Attributes:
+#'     - `value`
+#'     - `dtype`
+#'     - `ndim`
+#'     - `shape` (calling `shape(<variable>)` is preferred)
+#'     - `trainable`
 #'
 #' * ```
 #'   build(input_shape)

@@ -13,7 +13,7 @@
 #' model |> compile(
 #'   optimizer = 'sgd',
 #'   loss = 'mse',
-#'   metrics = list(metric_SOME_METRIC(), metric_SOME_OTHER_METRIC())
+#'   metrics = c(metric_SOME_METRIC(), metric_SOME_OTHER_METRIC())
 #' )
 #' ```
 #'

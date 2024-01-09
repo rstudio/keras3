@@ -50,7 +50,7 @@ returned by custom metrics defined with \code{Metric()}.
 \if{html}{\out{<div class="sourceCode r">}}\preformatted{model |> compile(
   optimizer = 'sgd',
   loss = 'mse',
-  metrics = list(metric_SOME_METRIC(), metric_SOME_OTHER_METRIC())
+  metrics = c(metric_SOME_METRIC(), metric_SOME_OTHER_METRIC())
 )
 }\if{html}{\out{</div>}}
 }

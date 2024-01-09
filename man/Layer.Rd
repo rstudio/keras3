@@ -185,22 +185,21 @@ the running sum of its inputs:
 
       super$initialize()
       # Create a non-trainable weight.
-      self$total = self$add_weight(
-        shape=shape(),
-        initializer="zeros",
-        trainable=FALSE,
-        name="total"
+      self$total <- self$add_weight(
+        shape = shape(),
+        initializer = "zeros",
+        trainable = FALSE,
+        name = "total"
       )
    \},
 
    call = function(inputs)\{
-     # TODO: where is assign() documented?
       self$total$assign(self$total + op_sum(inputs))
       self$total
    \}
 )
 
-my_sum <- layer_compute_sum(,2)
+my_sum <- layer_compute_sum(, 2)
 x <- op_ones(c(2, 2))
 y <- my_sum(x)
 
@@ -278,6 +277,28 @@ variable after any optimizer update,
 or string name of a built-in constraint.
 \item \code{name}: String name of the variable. Useful
 for debugging purposes.
+}
+
+Returns:
+
+A backend tensor, wrapped in a \code{KerasVariable} class.
+The \code{KerasVariable} class has
+
+Methods:
+\itemize{
+\item \code{assign(value)}
+\item \code{assign_add(value)}
+\item \code{assign_sub(value)}
+\item \code{numpy()} (calling \verb{as.array(<variable>)} is preferred)
+}
+
+Properties/Attributes:
+\itemize{
+\item \code{value}
+\item \code{dtype}
+\item \code{ndim}
+\item \code{shape} (calling \verb{shape(<variable>)} is preferred)
+\item \code{trainable}
 }
 \item 
 
