@@ -27,13 +27,13 @@ new_loss_class <- Loss
 #' @eval .alias_roxygen("new_metric_class", "Metric")
 new_metric_class <- Metric
 
+#' @eval .alias_roxygen("new_model_class", "Model")
+new_model_class <- Model
+
 r"---(
 
 # @eval .alias_roxygen("new_learning_rate_schedule_class", "LearningRateSchedule")
 new_learning_rate_schedule_class <- LearningRateSchedule
-
-# @eval .alias_roxygen("new_model_class", "Model")
-new_model_class <- Model
 
 )---"
 

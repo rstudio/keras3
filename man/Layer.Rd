@@ -40,6 +40,27 @@ framework and the Python runtime.}
 
 \item{parent_env}{The R environment that all class methods will have as a grandparent.}
 }
+\value{
+A composing layer constructor, with similar behavior to other layer
+functions like \code{layer_dense()}. The first argument of the returned function
+will be \code{object}, enabling \code{initialize()}ing and \code{call()} the layer in one
+step while composing the layer with the pipe, like
+
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{layer_foo <- Layer("Foo", ....)
+output <- input |> layer_foo()
+}\if{html}{\out{</div>}}
+
+To only \code{initialize()} a layer instance and not \code{call()} it, pass a missing
+or \code{NULL} value to \code{object}, or pass all arguments to \code{initialize()} by name.
+
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{layer <- layer_foo(units = 2, activation = "relu")
+layer <- layer_foo(NULL, 2, activation = "relu")
+layer <- layer_foo(, 2, activation = "relu")
+
+# then you can call() the layer in a separate step
+outputs <- input |> layer()
+}\if{html}{\out{</div>}}
+}
 \description{
 A layer is a callable object that takes as input one or more tensors and
 that outputs one or more tensors. It involves \emph{computation}, defined

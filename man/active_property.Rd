@@ -19,7 +19,5 @@ Create an active property class method
          self$g_loss_metric)
   \}))
 }\if{html}{\out{</div>}}
-
-\code{mark_active()} is a backwards compatible alias for \code{active_property()}.
 }
 

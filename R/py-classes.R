@@ -835,7 +835,6 @@ ensure_first_arg_is <- function(fn, ...) {
 #'   }))
 #' ```
 #'
-#' `mark_active()` is a backwards compatible alias for `active_property()`.
 #' @export
 active_property <- function(fn) {
   if(!is.function(fn))

@@ -497,17 +497,17 @@ endpoints %<>% setdiff(c %(% {
   "keras.layers.Layer"             # only for subclassing  DONE
   "keras.callbacks.Callback"       # only for subclassing  DONE
   "keras.constraints.Constraint"   # only for subclassing  DONE
+  "keras.losses.Loss"              # only for subclassing  DONE
+  "keras.metrics.Metric"           # only for subclassing  DONE
   "keras.optimizers.Optimizer"     # only for subclassing
   "keras.regularizers.Regularizer" # only for subclassing
   "keras.initializers.Initializer" # only for subclassing
-  "keras.losses.Loss"              # only for subclassing
-  "keras.metrics.Metric"           # only for subclassing
   "keras.optimizers.schedules.LearningRateSchedule"  # only for subclassing
 
   "keras.utils.PyDataset"      # parallel processing in R not possible this way
   "keras.utils.Sequence"       # tfdatasets is ~100x better anyway.
 
-  "keras.utils.plot_model"        # S3 method plot()
+  "keras.utils.plot_model"        # S3 method plot()  DONE
 
   # TODO: revisit custom_object_scope()
   "keras.utils.custom_object_scope"  # need custom work to resolve py_names -
