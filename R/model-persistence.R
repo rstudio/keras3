@@ -306,7 +306,7 @@ load_model_config <- function(filepath, custom_objects = NULL)
 #' layer_my_dense <- Layer("MyDense")
 #' register_keras_serializable(layer_my_dense, package = "my_package")
 #'
-#' MyDense <- environment(layer_my_dense)$Layer # the python class obj
+#' MyDense <- environment(layer_my_dense)$`__class__` # the python class obj
 #' stopifnot(exprs = {
 #'   get_registered_object('my_package>MyDense') == MyDense
 #'   get_registered_name(MyDense) == 'my_package>MyDense'

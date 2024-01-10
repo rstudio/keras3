@@ -551,6 +551,25 @@
 #' @param parent_env The R environment that all class methods will have as a grandparent.
 #' @param inherit What the custom class will subclass. By default, the base keras class.
 #'
+#' @returns A composing layer constructor, with similar behavior to other layer
+#' functions like `layer_dense()`. The first argument of the returned function
+#' will be `object`, enabling `initialize()`ing and `call()` the layer in one
+#' step while composing the layer with the pipe, like
+#' ```r
+#' layer_foo <- Layer("Foo", ....)
+#' output <- input |> layer_foo()
+#' ```
+#' To only `initialize()` a layer instance and not `call()` it, pass a missing
+#' or `NULL` value to `object`, or pass all arguments to `initialize()` by name.
+#' ```r
+#' layer <- layer_foo(units = 2, activation = "relu")
+#' layer <- layer_foo(NULL, 2, activation = "relu")
+#' layer <- layer_foo(, 2, activation = "relu")
+#'
+#' # then you can call() the layer in a separate step
+#' outputs <- input |> layer()
+#' ```
+#'
 #' @tether keras.layers.Layer
 #' @export
 #' @family layers
@@ -589,24 +608,27 @@ function(classname,
     private = private
   )
 
-  modifiers <- modifyList(
-    drop_nulls(lapply(formals(out),
-        function(arg_default) if (is.integer(arg_default)) quote(as_integer))),
-    alist(
-      input_shape = shape,
-      batch_input_shape = shape,
-      batch_size = as_integer,
-      activity_regularizer = as_regularizer)
-  )
+  # modifiers <- modifyList(
+  #   drop_nulls(lapply(formals(out), function(arg_default)
+  #       if (is.integer(arg_default)) quote(as_integer))),
+  #   alist(
+  #     input_shape = shape,
+  #     batch_input_shape = shape,
+  #     batch_size = as_integer
+  #   )
+  # )
 
-  prepend(formals(out)) <- alist(object = )
-  body(out) <-  bquote({
-    args <- capture_args2(.(modifiers), ignore = "object")
-    create_layer(.(as.symbol(classname)), object, args)
-  })
+  # if(composing) {
+    prepend(formals(out)) <- alist(object = )
+    body(out) <-  bquote({
+      args <- capture_args2(ignore = "object")
+      create_layer(.(as.symbol(classname)), object, args)
+    })
+  # }
 
-  # delayedAssign("__class__", get(classname), environment(out), environment(out))
-  delayedAssign("Layer",     get(classname), environment(out), environment(out))
+  # delayedAssign("Layer",     get(classname), environment(out), environment(out))
+  # delayedAssign("create_layer", asNamespace("keras3")$create_layer, environment(out), environment(out))
+  # delayedAssign("capture_args2", asNamespace("keras3")$capture_args2, environment(out), environment(out))
 
   out
 }
