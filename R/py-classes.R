@@ -135,7 +135,7 @@ function(classname,
 # - super(Classname, self)$initialize()
 #' @export
 `$.python_builtin_super_getter` <- function(x, name) {
-  super <- do.call(x, list(), envir = parent.frame()) # get (call) super()
+  super <- do.call(x, list(), envir = parent.frame()) # call super()
   name <- switch(name, initialize = "__init__", finalize = "__del__", name)
   out <- py_get_attr(super, name)
   convert <- get0("convert", as.environment(out), inherits = FALSE,
@@ -146,12 +146,46 @@ function(classname,
 #' @export
 `[[.python_builtin_super_getter` <- `$.python_builtin_super_getter`
 
-#' @importFrom utils .DollarNames
-#' @export
-.DollarNames.python_builtin_super_getter <- function(x, pattern) {
-  super <- do.call(x, list(), envir = parent.frame())
-  .DollarNames(super, pattern)
-}
+# @importFrom utils .DollarNames
+# @export
+# .DollarNames.python_builtin_super_getter <- function(x, pattern) {
+# ## commended out because the python.builtin.super object doesn't
+# ## have populated attributes itself, only a dynamic `__getattr__` method
+# ## that resolves dynamically.
+#   for(envir in rev(sys.frames()))
+#     if(identical(parent.env(envir), environment(x)))
+#       break
+# ## not the user frame. So we can't (reliably) resolve `self` by looking at the stack.
+#   super <- do.call(x, list(), envir = envir) # call super()
+#
+#   # dispatches to reticulate:::.DollarNames.python.builtin.object()
+#   names <- .DollarNames(super, pattern)
+#   types <- attr(names, "types", TRUE) %||% integer()
+#
+#   py_attr_names <- py_list_attributes(super)
+#   if("__init__" %in% py_attr_names) {
+#     append(names) <- "initialize"
+#     append(types) <- 6L
+#   }
+#   if("__del__" %in% py_attr_names) {
+#     append(names) <- "finalize"
+#     append(types) <- 6L
+#   }
+#
+#   idx <- grepl(pattern, names)
+#   names <- names[idx]
+#   types <- types[idx]
+#
+#   if (length(names) > 0) {
+#     # set types
+#     oidx <- order(names)
+#     names <- names[oidx]
+#     attr(names, "types") <- types[oidx]
+#     attr(names, "helpHandler") <- "reticulate:::help_handler"
+#   }
+#
+#   names
+# }
 
 
 #' @importFrom reticulate r_to_py import_builtins py_eval py_dict py_call
