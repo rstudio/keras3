@@ -1521,7 +1521,9 @@ structure(function (y_true, y_pred, ..., reduction = "sum_over_batch_size",
 py_to_r_wrapper.keras.src.losses.loss.Loss <- function(x) {
   force(x)
   as.function.default(c(formals(x), quote({
-    args <- capture_args2(list(y_true = as_py_array, y_pred = as_py_array))
+    args <- capture_args2(list(y_true = as_py_array,
+                               y_pred = as_py_array,
+                               sample_weight = as_py_array))
     do.call(x, args)
   })))
 }

@@ -1108,7 +1108,8 @@ as_array <- function(x)
   if(is.null(x) || is.array(x) || inherits(x, "python.builtin.object"))
     x else as.array(x)
 
-as_py_array <- function(x) if(inherits(x, "python.builtin.object")) x else np_array(x)
+as_py_array <- function(x)
+  if(is.null(x) || inherits(x, "python.builtin.object")) x else np_array(x)
 
 check_bool <- function(x) {
   if (identical(x, TRUE) || identical(x, FALSE))
