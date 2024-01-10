@@ -720,7 +720,8 @@ resolve_wrapper_py_obj_expr <- function(x, prefer_class = TRUE) {
 
 resolve_py_obj <- function(x, default_name = "anonymous_R_function",
                            env = asNamespace("keras3"),
-                           prefer_class = TRUE) {
+                           prefer_class = TRUE,
+                           convert = TRUE) {
   if (is.language(x))
     x <- eval(x, env)
 
@@ -741,6 +742,6 @@ resolve_py_obj <- function(x, default_name = "anonymous_R_function",
     return(as_py_function(x, default_name = default_name))
   }
 
-  r_to_py(x)
+  if (convert) x else r_to_py(x)
 }
 

@@ -16,16 +16,13 @@
 #' @note The `object` parameter can be missing, in which case the
 #' layer is created without a connection to an existing graph.
 #'
-#' @export
+#' @keywords internal
+#' @noRd
 create_layer <- function(layer_class, object, args = list()) {
 
-  # convert custom constraints
-  constraint_args <- grepl("^.*_constraint$", names(args))
-  constraint_args <- names(args)[constraint_args]
-  for (arg in constraint_args)
-    args[[arg]] <- as_constraint(args[[arg]])
+  args <- lapply(args, resolve_py_obj)
 
-  if (!inherits(layer_class, "python.builtin.object"))
+  if (!inherits(layer_class, "python.builtin.object")) # e.g., R6ClassGenerator
     layer_class <- r_to_py(layer_class)
 
   # create layer from class
