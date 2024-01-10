@@ -199,6 +199,7 @@ function(classname,
     members = members,
     inherit = inherit,
     parent_env = parent_env,
-    private = private
+    private = private,
+    default_formals = \(dtype=NULL, name=NULL){}
   )
 }

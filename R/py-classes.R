@@ -27,38 +27,45 @@ new_py_class <- function(classname,
 }
 
 
-new_wrapped_py_class <- function(classname,
-                                 members = list(),
-                                 inherit = NULL,
-                                 parent_env = parent.frame(),
-                                 private = list()) {
+new_wrapped_py_class <-
+function(classname,
+         members = list(),
+         inherit = NULL,
+         parent_env = parent.frame(),
+         private = list(),
+         modifiers = quote(expr =),
+         default_formals = \(...) {})
+{
+  # force all new_py_type() args
+  classname; members; inherit; parent_env; private;
 
-  # force all args
-  classname; members; inherit; parent_env; private
-
-  delayedAssign(classname, {
-    new_py_type(classname = classname,
-                members = members,
-                inherit = resolve_py_obj(inherit, env = parent_env),
-                parent_env = parent_env,
-                private = private)
-  })
+  delayedAssign(classname,
+    new_py_type(
+      classname = classname,
+      members = members,
+      inherit = resolve_py_obj(inherit, env = parent_env),
+      parent_env = parent_env,
+      private = private
+    )
+  )
   delayedAssign("__class__", get(classname))
 
-  if(reticulate::py_available()) {
+  if (reticulate::py_available()) {
     # force promise, get actual frmls
-    frmls <- formals(get(classname, inherits = FALSE))
+    frmls <- formals(`__class__`)
   } else {
     # try to infer frmls
-    frmls <- formals(members$`__init__ ` %||% members$initialize %||% \(...){})
+    frmls <- formals(members$`__init__ ` %||%
+                     members$initialize %||%
+                     default_formals)
   }
-
   frmls$self <- NULL
 
   bdy <- bquote({
-    args <- capture_args2()
+    args <- capture_args2(.(modifiers))
     do.call(.(as.name(classname)), args)
   })
+  rm(modifiers, default_formals) # free memory
 
   as.function.default(c(frmls, bdy))
 }

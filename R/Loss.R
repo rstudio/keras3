@@ -98,6 +98,7 @@ function(classname, call = NULL,
     members = members,
     inherit = inherit,
     parent_env = parent_env,
-    private = private
+    private = private,
+    default_formals = \(name=NULL, reduction="sum_over_batch_size", dtype=NULL) {}
   )
 }
