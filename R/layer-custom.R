@@ -67,7 +67,7 @@ py_formals <- function(py_obj) {
 #'   session, so it is safe to use in an R package.
 #'
 #' @keywords internal
-#' @noRD
+#' @noRd
 #' @importFrom rlang %||%
 create_layer_wrapper <- function(Layer, modifiers = NULL, convert = TRUE) {
 

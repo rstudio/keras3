@@ -32,7 +32,6 @@
 #' @aliases keras-package
 "_PACKAGE"
 
-# @import methods
 
 # package level global state
 .globals <- new.env(parent = emptyenv())

@@ -2055,6 +2055,20 @@ delete_empty_files <- function(...) {
   }
 }
 
+delete_empty_directories <- function(path = ".", ...) {
+  for(p in c(path, ...)) {
+    for (d in rev(list.dirs(p, all.files = TRUE, recursive = TRUE)))
+      if(!length(list.files(d, all.files = TRUE, no.. = TRUE))) # empty directory
+        unlink(d)
+  }
+}
+fs::dir_walk("man-src", type = "directory", recurse = TRUE,
+             function(d) {
+               if(!length(list.files(d, all.files = TRUE, no.. = TRUE))) # empty directory
+                 unlink(d)
+             })
+
+
 file_lines_manager <- function() {
 
   .files <- new.env(parent = emptyenv())

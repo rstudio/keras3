@@ -5,16 +5,6 @@ if(!"source:tools/translate-tools.R" %in% search()) envir::attach_source("tools/
 
 
 
-# Daniel in process:
-# TODO: application_preprocess_input("<app_name>" or <app_instance>, ...)
-#       application_decode_output("<app_name>" or <app_instance>, ...)
-#       # tentative fn names, feel free to pick different names if makes sense
-# TODO: (maybe, not expected but if bandwidth available) fix `history` from fit()
-#
-#
-# history - also mentions in docs (e.g., in callback_model_checkpoint())
-
-
 ## Deferred:
 
 # TODO: k_fft() should really accept and return complex tensors too.
@@ -25,39 +15,20 @@ if(!"source:tools/translate-tools.R" %in% search()) envir::attach_source("tools/
 # TODO: layer_feature_space should take a formula, and dispatch to the features as required.
 #       ~ scale(foo) * bar
 # TODO: layer_feature_space() needs massaging.
+# TODO: Add arg Layer(composing = TRUE)?
+# TODO: custom keras.Model wrapper that patches add_weight(), build(), etc
+#      with proper shape() coercion
+
+
 
 ## Rejected:
-
 # TODO: k_array() should take a 'shape' argument
 # TODO: r_name autogen: move "set" to tail, so have config_floatx(), config_floatx_set()
 # TODO: implement dim() S3 generic. (will use shape() instead)
-#
+
 
 ## Implemented but Questioning:
 
-# TODO: maybe move ops to `op_*` instead of `k_*` ?
-if(FALSE) {
-  Sys.glob(c("R/autogen*.R", "vignettes-src/*.Rmd")) %>%
-    walk(\(f) {
-      readLines(f) %>%
-        str_replace_all("(?<![a-zA-Z0-9])k_", "op_") %>%
-        writeLines(f)
-    })
-  f <- Sys.glob(".tether/man/k_*")
-  f2 <- sub("/k_", "/op_", f, fixed = TRUE)
-  fs::file_move(f, f2)
-}
-if(FALSE){
-  f <- Sys.glob(c("R/autogen*.R"))
-  f2 <- sub("/autogen-", "/keras-", f, fixed = TRUE)
-  fs::file_move(f, f2)
-}
-
-fs::dir_walk("man-src", type = "directory", recurse = TRUE,
-  function(d) {
-    if(!length(list.files(d, all.files = TRUE, no.. = TRUE))) # empty directory
-       unlink(d)
-  })
 
 ## In progress
 
@@ -76,37 +47,29 @@ fs::dir_walk("man-src", type = "directory", recurse = TRUE,
 # Maybe there is some funky interaction w/ absl logging?
 #
 # TODO: document options(keras.verbose) and other R global options.
+#
+# TODO: add tests for keras_history `history` from fit().
+#   history - also mentions in docs (e.g., in callback_model_checkpoint())
 
 # TODO: fix links to chunk plots in rendered vignettes - should be relative to
 #   package for R CMD build/pkgdown
 
-# TODO: keras_Layer_wrapper - standardize approach to unwrapping Layer, use
-#   consistently across code base.
-# TODO: rename create_layer_wrapper? (clashes w/ upstream "Wrapper".
-#   Add arg Layer(composing = TRUE)?
-#   get_layer_class() (could handle instances, builtin wrappers like layer_dense, and
-#   custom layers like Layer, return the pyclass. ?
-#   get_keras_class(), or just get_class()
-#   pull it through to get_config()/from_config()
-# TODO: compose_layer S3 method - don't export, convert to standalone fn.
+# TODO: revisit get_config()/from_config() after resolve_py_object()
 
 # TODO: For apps, tether encode+decode along w/ constructor:
 # #'  @tether application.foo,
 # #'   application.foo.preprocess_input,
 # #'   application.foo.decode_predictions,
 
-# TODO: activations - do we need `py_function_name` attr
-#      (in other places? or here still?). Maybe
-#      we should consistently attach a `endpoint` attr?
-#
 # TODO: op_argmax() - returns a 0-based index. convert to 1-based?
 #
 # TODO: use `as_activation` attr in all layers.
-
-# TODO: unexport create_layer(), update guidance on wrappers
-#         (maybe add a `auto_composing = TRUE` arg to `Layer()`)
+# TODO: layer wrappers that by pass `create_layer()` and call do.call() directly,
+#       need to apply `resolve_py_object()` to unwrap, e.g., activations.
+#
 #
 # TODO: tether application process_utils
+#
 # TODO: `backend()` used to have a `convert=FALSE` option, and all k_* would
 #       return numpy arrays. We should check preserve np_array convert status in all
 #       op_* functions, and return numpy arrays if we received a numpy array.
@@ -116,11 +79,10 @@ fs::dir_walk("man-src", type = "directory", recurse = TRUE,
 #
 # TODO: reexport tuple() from keras3, tfdatasets
 
-# TODO: fit() / evaluate() / predict() : accept R generator functions.
+# TODO: add tests for R generator functions in fit()/evaluate()/predict().
+# TODO: fit/predict/eval/fit_on_batch... coerce `x` R arrays to float32? model input$dtype?
 #
 # TODO: mention / document getOption(keras.*) #i.e., .fit_verbose, .verbose, etc.
-#
-# TODO: fit/predict/eval/fit_on_batch... coerce `x` R arrays to float32? model input$dtype?
 #
 # TODO: what happened to is_keras_tensor() ??
 #
@@ -147,17 +109,13 @@ fs::dir_walk("man-src", type = "directory", recurse = TRUE,
 #       which it's a "no-op" or "identity" function because the preprocessing
 #       step is on the graph already.
 
-
-# TODO: custom keras.Model wrapper that patches add_weight(), build(), etc
-#      with proper shape() coercion
-
 # TODO: c.keras_shape <- function(...){}
 #
 # TODO: custom_metric() / custom_loss() / Loss() / Metric(). remove custom_metric()?
 
 # TODO: "keras.layers.InputSpec" - needs to be exported or somehow processed in `Layer()`
 
-# TODO: remove k_amax() and friends, they're redundant w/ k_max(), which already
+# TODO: remove op_amax() and friends, they're redundant w/ op_max(), which already
 #       takes an axis arg. Only there for numpy api compatability, which
 #       doesn't matter to us.
 #
@@ -171,9 +129,6 @@ fs::dir_walk("man-src", type = "directory", recurse = TRUE,
 # TODO: Clean up @family tags (partially autogen, derive from module - then use that to autogenerate _pkgdown.yml)
 
 # TODO: self$model$stop_training <- TRUE should work. Need to avoid propogating `$<-` past first.
-
-# TODO: new_callback_class() should wrap callables to make epoch/batch n 1 based,
-#       make logs persistent (e.g., wrap the user callable w/ `logs$update(<callback_return>`))
 
 # TODO: in reticulate, change subclassed dict autoconversion back to off:
 #      so that keras$utils$get_custom_objects()$clear() works.
@@ -193,8 +148,6 @@ fs::dir_walk("man-src", type = "directory", recurse = TRUE,
 
 # TODO: reticulate, support NO_COLOR (or similar) to disable the link wrapper around `py_last_error()` hint.
 
-# TODO: # fix `fit()` not returning `history` correctly
-
 # TODO: model_from_saved_model() and model_to_saved_model(), provide guidance for users updating to 3.
 
 # TODO: global search for "axis" in doc text, update to 1 based where appropriate.
@@ -205,22 +158,19 @@ fs::dir_walk("man-src", type = "directory", recurse = TRUE,
 #   can't use __signature__ anymore in keras_core...
 
 
-
 # TODO: initializer families:
 # <class 'keras.initializers.constant_initializers.Zeros'>
 # <class 'keras.initializers.random_initializers.RandomUniform'>
 
-# TODO: next: losses, metrics, saving, guides/vignettes
-#
 # TODO: global search replace in man-src/*.Rmd "([^ ])=([^ ])" "\\1 = \\2"
 
 # Daniels votes YES to rename to layer_bidirectional, etc.
 # TODO: bidirectional, time_distributed -- need special caseing
 
-# TODO: note in docs for k_logical_and (and friends) that these are dispatched
+# TODO: note in docs for op_logical_and (and friends) that these are dispatched
 #       to from & != and so on.
 
-# TODO: k_arange: should it default to produce floats?
+# TODO: op_arange: should it default to produce floats?
 
 # TODO: keras.Function ?? keras.Variable ?? keras.name_scope ??
 # Daniel votes:
@@ -230,8 +180,8 @@ fs::dir_walk("man-src", type = "directory", recurse = TRUE,
 #   Document on same page for less confsion:
 #      keras_input() adds batch dim to shape, keras_tensor() doesn't.
 #   NO to keras$Variable()
-#
-
+# alias layer_input() with keras_input()?
+# change layer_input() to call InputLayer()?
 
 
 # TODO: to_categorical():
@@ -244,35 +194,29 @@ fs::dir_walk("man-src", type = "directory", recurse = TRUE,
 ##     globally, also, makes it more tricky to translate from python
 
 #
-# TODO: remove @import methods ??
-#
 # TODO: add @import reticulate ??
 #
 # TODO: op_true_divide -- remove?
-#
-# TODO: Layer() should not instantiate the underlying layer class py object on each call.
-#
-# TODO: rename layer_input() to keras_input()? change layer_input() to call InputLayer()?
 #
 # TODO: remove any tensorflow imports / DESCRIPTION deps
 #
 # TODO: trimws @returns
 #
-# TODO: k_istft k_irfft example is wrong, investigate
+# TODO: op_istft op_irfft example is wrong, investigate
 #
-# TODO: rename: k_image_pad_images -> k_image_pad
+# TODO: rename: op_image_pad_images -> op_image_pad
 #
-# TODO: this should work: k_convert_to_tensor(c(1, 3, 2, 0), "int32")
+# TODO: this should work: op_convert_to_tensor(c(1, 3, 2, 0), "int32")
 #
 # TODO: as_0_based_index() utility: as_integer(x + 1)
 #
-# TODO: k_array(<r_array>) should default to float32, not float64
+# TODO: op_array(<r_array>) should default to float32, not float64
 #
-# TODO: k_array(<r_int>) why int64, and not int32?
+# TODO: op_array(<r_int>) why int64, and not int32?
 #
-# TODO: revisit docs for k_scatter_update and k_scatter, remove python sliceisms
+# TODO: revisit docs for op_scatter_update and op_scatter, remove python sliceisms
 
-# TODO: fix k_vectorized_map() arg rename kludge
+# TODO: fix op_vectorized_map() arg rename kludge
 #
 # TODO: layer_category_encoding()(count_weights) call arg example not working
 #
@@ -287,16 +231,13 @@ fs::dir_walk("man-src", type = "directory", recurse = TRUE,
 # TODO: get_weights(), `trainable` arg doc cut-off
 #
 # TODO: revisit k_vectorized_map() man page
-# The source of truth for the current translation should be...?
-#    - the autogened file R/autogen-*.R, or
-#    - man-src/*/2-translated.Rmd
 #
 # TODO: `axis` arg in merging layers has to wrong transformer, should be `as_axis()`, is `as_integer()`
 
 # TODO: global doc search for None/True/False/[Tt]uple/[Dd]ict(ionary|\\b) (Almost DONE except for Tuples)
 #
 # TODO: layer_feature_space() needs many helpers for float_normalized() and friends
-#       output_mode = 'dict' should be 'named list' ?
+#       output_mode = 'dict' should be 'named list'?
 #
 # TODO: feature_space saving errors
 #
@@ -317,7 +258,7 @@ fs::dir_walk("man-src", type = "directory", recurse = TRUE,
 # )
 # }
 #
-# TODO: layer_torch_module_wrapper raises an error - aybe incompatible torch version?a
+# TODO: layer_torch_module_wrapper raises an error - maybe incompatible torch version?a
 #
 # TODO: config_{enable,disable,is_enabled}_traceback_filtering have identical docstrings,
 # should all be the same page.

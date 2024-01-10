@@ -116,7 +116,7 @@ lapply(guides, make_guide)
 
 vignette_src_render_translated()
 
-# TODO: I should be using knitr::knit() directly, not rmarkdown::render()
+# TODO: This should be using knitr::knit() directly, not rmarkdown::render()
 # to avoid reflowing/rewrapping prose lines.
 
 # TODO: there is an extra new line before ```{r} blocks in the translated rmd.
