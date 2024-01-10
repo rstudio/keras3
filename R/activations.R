@@ -34,11 +34,11 @@
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/activations/elu>
 #' @tether keras.activations.elu
 activation_elu <-
-structure(function (x, alpha = 1)
+function (x, alpha = 1)
 {
     args <- capture_args2(NULL)
     do.call(keras$activations$elu, args)
-}, py_function_name = "elu")
+}
 
 
 #' Exponential activation function.
@@ -53,11 +53,11 @@ structure(function (x, alpha = 1)
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/activations/exponential>
 #' @tether keras.activations.exponential
 activation_exponential <-
-structure(function (x)
+function (x)
 {
     args <- capture_args2(NULL)
     do.call(keras$activations$exponential, args)
-}, py_function_name = "exponential")
+}
 
 
 #' Gaussian error linear unit (GELU) activation function.
@@ -87,11 +87,11 @@ structure(function (x)
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/activations/gelu>
 #' @tether keras.activations.gelu
 activation_gelu <-
-structure(function (x, approximate = FALSE)
+function (x, approximate = FALSE)
 {
     args <- capture_args2(NULL)
     do.call(keras$activations$gelu, args)
-}, py_function_name = "gelu")
+}
 
 
 #' Hard sigmoid activation function.
@@ -119,11 +119,11 @@ structure(function (x, approximate = FALSE)
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/activations/hard_sigmoid>
 #' @tether keras.activations.hard_sigmoid
 activation_hard_sigmoid <-
-structure(function (x)
+function (x)
 {
     args <- capture_args2(NULL)
     do.call(keras$activations$hard_sigmoid, args)
-}, py_function_name = "hard_sigmoid")
+}
 
 
 #' Leaky relu activation function.
@@ -142,11 +142,11 @@ structure(function (x)
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/activations/leaky_relu>
 #' @tether keras.activations.leaky_relu
 activation_leaky_relu <-
-structure(function (x, negative_slope = 0.2)
+function (x, negative_slope = 0.2)
 {
     args <- capture_args2(NULL)
     do.call(keras$activations$leaky_relu, args)
-}, py_function_name = "leaky_relu")
+}
 
 
 #' Linear activation function (pass-through).
@@ -165,11 +165,11 @@ structure(function (x, negative_slope = 0.2)
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/activations/linear>
 #' @tether keras.activations.linear
 activation_linear <-
-structure(function (x)
+function (x)
 {
     args <- capture_args2(NULL)
     do.call(keras$activations$linear, args)
-}, py_function_name = "linear")
+}
 
 
 #' Log-Softmax activation function.
@@ -192,11 +192,11 @@ structure(function (x)
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/activations/log_softmax>
 #' @tether keras.activations.log_softmax
 activation_log_softmax <-
-structure(function (x, axis = -1L)
+function (x, axis = -1L)
 {
     args <- capture_args2(list(axis = as_axis))
     do.call(keras$activations$log_softmax, args)
-}, py_function_name = "log_softmax")
+}
 
 
 #' Mish activation function.
@@ -223,11 +223,11 @@ structure(function (x, axis = -1L)
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/activations/mish>
 #' @tether keras.activations.mish
 activation_mish <-
-structure(function (x)
+function (x)
 {
     args <- capture_args2(NULL)
     do.call(keras$activations$mish, args)
-}, py_function_name = "mish")
+}
 
 
 #' Applies the rectified linear unit activation function.
@@ -274,12 +274,12 @@ structure(function (x)
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/activations/relu>
 #' @tether keras.activations.relu
 activation_relu <-
-structure(function (x, negative_slope = 0, max_value = NULL,
+function (x, negative_slope = 0, max_value = NULL,
     threshold = 0)
 {
     args <- capture_args2(NULL)
     do.call(keras$activations$relu, args)
-}, py_function_name = "relu")
+}
 
 
 #' Relu6 activation function.
@@ -297,11 +297,11 @@ structure(function (x, negative_slope = 0, max_value = NULL,
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/activations/relu6>
 #' @tether keras.activations.relu6
 activation_relu6 <-
-structure(function (x)
+function (x)
 {
     args <- capture_args2(NULL)
     do.call(keras$activations$relu6, args)
-}, py_function_name = "relu6")
+}
 
 
 #' Scaled Exponential Linear Unit (SELU).
@@ -345,11 +345,11 @@ structure(function (x)
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/activations/selu>
 #' @tether keras.activations.selu
 activation_selu <-
-structure(function (x)
+function (x)
 {
     args <- capture_args2(NULL)
     do.call(keras$activations$selu, args)
-}, py_function_name = "selu")
+}
 
 
 #' Sigmoid activation function.
@@ -375,11 +375,11 @@ structure(function (x)
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/activations/sigmoid>
 #' @tether keras.activations.sigmoid
 activation_sigmoid <-
-structure(function (x)
+function (x)
 {
     args <- capture_args2(NULL)
     do.call(keras$activations$sigmoid, args)
-}, py_function_name = "sigmoid")
+}
 
 
 #' Swish (or Silu) activation function.
@@ -404,11 +404,11 @@ structure(function (x)
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/activations/silu>
 #' @tether keras.activations.silu
 activation_silu <-
-structure(function (x)
+function (x)
 {
     args <- capture_args2(NULL)
     do.call(keras$activations$silu, args)
-}, py_function_name = "silu")
+}
 
 
 #' Softmax converts a vector of values to a probability distribution.
@@ -442,11 +442,11 @@ structure(function (x)
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/activations/softmax>
 #' @tether keras.activations.softmax
 activation_softmax <-
-structure(function (x, axis = -1L)
+function (x, axis = -1L)
 {
     args <- capture_args2(list(axis = as_axis))
     do.call(keras$activations$softmax, args)
-}, py_function_name = "softmax")
+}
 
 
 #' Softplus activation function.
@@ -464,11 +464,11 @@ structure(function (x, axis = -1L)
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/activations/softplus>
 #' @tether keras.activations.softplus
 activation_softplus <-
-structure(function (x)
+function (x)
 {
     args <- capture_args2(NULL)
     do.call(keras$activations$softplus, args)
-}, py_function_name = "softplus")
+}
 
 
 #' Softsign activation function.
@@ -486,11 +486,11 @@ structure(function (x)
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/activations/softsign>
 #' @tether keras.activations.softsign
 activation_softsign <-
-structure(function (x)
+function (x)
 {
     args <- capture_args2(NULL)
     do.call(keras$activations$softsign, args)
-}, py_function_name = "softsign")
+}
 
 
 #' Hyperbolic tangent activation function.
@@ -510,56 +510,56 @@ structure(function (x)
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/activations/tanh>
 #' @tether keras.activations.tanh
 activation_tanh <-
-structure(function (x)
+function (x)
 {
     args <- capture_args2(NULL)
     do.call(keras$activations$tanh, args)
-}, py_function_name = "tanh")
-
-
-as_activation <- NULL
-
-on_load_make_as_activation <- function() {
-  if (getRversion() < "4.2") {
-    as_activation <<- .as_activation
-  } else {
-    as_activation <<- local({
-      # make a hashtab to do reverse look ups, converting exported closures like
-      # `activation_elu` to a builtin activation name string "elu". The
-      # motivation is to avoid needlessly popping out to an R closure if we're
-      # using a bultin. We have to do this at runtime since the hastab
-      # needs the closure object address.
-      delayedAssign("h", local({
-        nms <- grep("^activation_", getNamespaceExports("keras3"), value = TRUE)
-        h <- utils::hashtab("address", length(nms))
-        ns <- asNamespace("keras3")
-        for (name in nms)
-          utils::sethash(h, getExportedValue(ns, name),
-                         substr(name, 12L, 999L))
-        h
-      }))
-
-      function(x) utils::gethash(h, x) %||% .as_activation(x)
-    })
-  }
 }
 
-.as_activation <- function(x) {
-  if (is.null(x) || inherits(x, "python.builtin.object"))
-    return(x)
 
-  name <- attr(x, "py_function_name", TRUE)
-  if (is_string(name) && identical(x, get0(
-    paste0("activation_", name),
-    envir = environment(sys.function()),
-    inherits = FALSE
-  )))
-    # it's a builtin; the name string will be resolved upstream via
-    # keras.activations.get(name)
-    return(name)
-
-  if (is.function(x))
-    return(as_py_function(x, default_name = "custom_activation"))
-  x
-}
-
+# as_activation <- NULL
+#
+# on_load_make_as_activation <- function() {
+#   if (getRversion() < "4.2") {
+#     as_activation <<- .as_activation
+#   } else {
+#     as_activation <<- local({
+#       # make a hashtab to do reverse look ups, converting exported closures like
+#       # `activation_elu` to a builtin activation name string "elu". The
+#       # motivation is to avoid needlessly popping out to an R closure if we're
+#       # using a bultin. We have to do this at runtime since the hastab
+#       # needs the closure object address.
+#       delayedAssign("h", local({
+#         nms <- grep("^activation_", getNamespaceExports("keras3"), value = TRUE)
+#         h <- utils::hashtab("address", length(nms))
+#         ns <- asNamespace("keras3")
+#         for (name in nms)
+#           utils::sethash(h, getExportedValue(ns, name),
+#                          substr(name, 12L, 999L))
+#         h
+#       }))
+#
+#       function(x) utils::gethash(h, x) %||% .as_activation(x)
+#     })
+#   }
+# }
+#
+# .as_activation <- function(x) {
+#   if (is.null(x) || inherits(x, "python.builtin.object"))
+#     return(x)
+#
+#   name <- attr(x, "py_function_name", TRUE)
+#   if (is_string(name) && identical(x, get0(
+#     paste0("activation_", name),
+#     envir = environment(sys.function()),
+#     inherits = FALSE
+#   )))
+#     # it's a builtin; the name string will be resolved upstream via
+#     # keras.activations.get(name)
+#     return(name)
+#
+#   if (is.function(x))
+#     return(as_py_function(x, default_name = "custom_activation"))
+#   x
+# }
+#

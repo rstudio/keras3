@@ -12,7 +12,6 @@
 #' to customize training behavior (besides calling `self$add_loss()` in the
 #' `call()` method), prefer [`Layer()`].
 #'
-#' @details
 #' @inheritSection Layer Symbols in scope
 #'
 #' @param

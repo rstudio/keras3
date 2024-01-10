@@ -124,7 +124,7 @@ keras <- NULL
   setHook("tensorflow.on_before_use_session", tensorflow_on_before_use_session)
   setHook("tensorflow.on_use_session", tensorflow_on_use_session)
 
-  on_load_make_as_activation()
+  # on_load_make_as_activation()
 
   # TODO: remove this requireNamespace()
   # temporarily here to enable passing of tests -
