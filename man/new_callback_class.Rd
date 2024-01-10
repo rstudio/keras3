@@ -28,7 +28,7 @@ new_callback_class(
 )
 }
 \arguments{
-\item{classname}{The name of the callback class. CamelCase by convention.}
+\item{classname}{String, the name of the custom class. (Conventionally, CamelCase).}
 
 \item{on_epoch_begin}{\if{html}{\out{<div class="sourceCode r">}}\preformatted{\\(epoch, logs = NULL)
 }\if{html}{\out{</div>}}
@@ -257,16 +257,15 @@ Args:
 \item{..., public}{Additional methods or public members of the custom class.}
 
 \item{private}{Named list of R objects (typically, functions) to include in
-instance private environments. \code{private} will be a symbol in scope in all
-class methods, resolving to an R environment populated with the list
-provided. Each instance will have it's own \code{private} environment. All
-methods (functions) in \code{private} will have in scope \code{self} and \verb{__class__}
-symbols. Any objects in \code{private} will be invisible from the Keras
-framework and the Python runtime.}
+instance private environments. \code{private} methods will have all the same
+symbols in scope as public methods (See section "Symbols in Scope"). Each
+instance will have it's own \code{private} environment. Any objects
+in \code{private} will be invisible from the Keras framework and the Python
+runtime.}
 
-\item{inherit}{The Callback class to inherit from. By default, the base \code{Callback}.}
+\item{inherit}{What the custom class will subclass. By default, the base keras class.}
 
-\item{parent_env}{The environment that all class methods will have as a grandparent.}
+\item{parent_env}{The R environment that all class methods will have as a grandparent.}
 }
 \description{
 \code{new_callback_class()} is an alias for \code{\link[=Callback]{Callback()}}.

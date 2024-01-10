@@ -302,18 +302,8 @@
 #' final_logs <- ...
 #' callbacks$on_train_end(final_logs)
 #' ```
-#' @param ...,public Additional methods or public members of the custom class.
-#' @param classname The name of the callback class. CamelCase by convention.
-#' @param private Named list of R objects (typically, functions) to include in
-#'   instance private environments. `private` will be a symbol in scope in all
-#'   class methods, resolving to an R environment populated with the list
-#'   provided. Each instance will have it's own `private` environment. All
-#'   methods (functions) in `private` will have in scope `self` and `__class__`
-#'   symbols. Any objects in `private` will be invisible from the Keras
-#'   framework and the Python runtime.
-#' @param parent_env The environment that all class methods will have as a grandparent.
-#' @param inherit The Callback class to inherit from. By default, the base `Callback`.
-#'
+#' @inheritSection Layer Symbols in scope
+#' @inheritParams Layer
 #' @export
 #' @tether keras.callbacks.Callback
 #' @family callbacks

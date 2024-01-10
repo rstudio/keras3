@@ -23,18 +23,14 @@ new_model_class(
 \arguments{
 \item{classname}{String, the name of the custom class. (Conventionally, CamelCase).}
 
-\item{..., public}{Additional methods or public members of the custom class.
-Recommended methods \code{initialize}, \code{call} can optionally be
-provided as elements of \code{public}, and will take precedence over the value
-supplied to the argument.}
+\item{..., public}{Additional methods or public members of the custom class.}
 
 \item{private}{Named list of R objects (typically, functions) to include in
-instance private environments. \code{private} will be a symbol in scope in all
-class methods, resolving to an R environment populated with the list
-provided. Each instance will have it's own \code{private} environment. All
-methods (functions) in \code{private} will have in scope \code{self} and \verb{__class__}
-symbols. Any objects in \code{private} will be invisible from the Keras
-framework and the Python runtime.}
+instance private environments. \code{private} methods will have all the same
+symbols in scope as public methods (See section "Symbols in Scope"). Each
+instance will have it's own \code{private} environment. Any objects
+in \code{private} will be invisible from the Keras framework and the Python
+runtime.}
 
 \item{inherit}{What the custom class will subclass. By default, the base keras class.}
 

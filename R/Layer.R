@@ -538,16 +538,12 @@
 #' @param initialize,call,build,get_config Recommended methods to implement. See
 #'   description section.
 #' @param ...,public Additional methods or public members of the custom class.
-#'   Recommended methods `initialize`, `call` can optionally be
-#'   provided as elements of `public`, and will take precedence over the value
-#'   supplied to the argument.
 #' @param private Named list of R objects (typically, functions) to include in
-#'   instance private environments. `private` will be a symbol in scope in all
-#'   class methods, resolving to an R environment populated with the list
-#'   provided. Each instance will have it's own `private` environment. All
-#'   methods (functions) in `private` will have in scope `self` and `__class__`
-#'   symbols. Any objects in `private` will be invisible from the Keras
-#'   framework and the Python runtime.
+#'   instance private environments. `private` methods will have all the same
+#'   symbols in scope as public methods (See section "Symbols in Scope"). Each
+#'   instance will have it's own `private` environment. Any objects
+#'   in `private` will be invisible from the Keras framework and the Python
+#'   runtime.
 #' @param parent_env The R environment that all class methods will have as a grandparent.
 #' @param inherit What the custom class will subclass. By default, the base keras class.
 #'
