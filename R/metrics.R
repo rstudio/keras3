@@ -327,7 +327,7 @@ function (y_true, y_pred)
 #'
 #' @tether keras.metrics.BinaryAccuracy
 metric_binary_accuracy <-
-structure(function (y_true, y_pred, threshold = 0.5, ..., name = "binary_accuracy",
+function (y_true, y_pred, threshold = 0.5, ..., name = "binary_accuracy",
     dtype = NULL)
 {
     args <- capture_args2(list(y_true = function (x)
@@ -341,7 +341,7 @@ structure(function (y_true, y_pred, threshold = 0.5, ..., name = "binary_accurac
         keras$metrics$BinaryAccuracy
     else keras$metrics$binary_accuracy
     do.call(callable, args)
-}, py_function_name = "binary_accuracy")
+}
 
 
 #' Calculates how often predictions match one-hot labels.
@@ -413,7 +413,7 @@ structure(function (y_true, y_pred, threshold = 0.5, ..., name = "binary_accurac
 #'
 #' @tether keras.metrics.CategoricalAccuracy
 metric_categorical_accuracy <-
-structure(function (y_true, y_pred, ..., name = "categorical_accuracy",
+function (y_true, y_pred, ..., name = "categorical_accuracy",
     dtype = NULL)
 {
     args <- capture_args2(list(y_true = function (x)
@@ -427,7 +427,7 @@ structure(function (y_true, y_pred, ..., name = "categorical_accuracy",
         keras$metrics$CategoricalAccuracy
     else keras$metrics$categorical_accuracy
     do.call(callable, args)
-}, py_function_name = "categorical_accuracy")
+}
 
 
 #' Calculates how often predictions match integer labels.
@@ -496,7 +496,7 @@ structure(function (y_true, y_pred, ..., name = "categorical_accuracy",
 #'
 #' @tether keras.metrics.SparseCategoricalAccuracy
 metric_sparse_categorical_accuracy <-
-structure(function (y_true, y_pred, ..., name = "sparse_categorical_accuracy",
+function (y_true, y_pred, ..., name = "sparse_categorical_accuracy",
     dtype = NULL)
 {
     args <- capture_args2(list(y_true = function (x)
@@ -510,7 +510,7 @@ structure(function (y_true, y_pred, ..., name = "sparse_categorical_accuracy",
         keras$metrics$SparseCategoricalAccuracy
     else keras$metrics$sparse_categorical_accuracy
     do.call(callable, args)
-}, py_function_name = "sparse_categorical_accuracy")
+}
 
 
 #' Computes how often integer targets are in the top `K` predictions.
@@ -575,7 +575,7 @@ structure(function (y_true, y_pred, ..., name = "sparse_categorical_accuracy",
 #'
 #' @tether keras.metrics.SparseTopKCategoricalAccuracy
 metric_sparse_top_k_categorical_accuracy <-
-structure(function (y_true, y_pred, k = 5L, ..., name = "sparse_top_k_categorical_accuracy",
+function (y_true, y_pred, k = 5L, ..., name = "sparse_top_k_categorical_accuracy",
     dtype = NULL)
 {
     args <- capture_args2(list(k = as_integer, y_true = function (x)
@@ -589,7 +589,7 @@ structure(function (y_true, y_pred, k = 5L, ..., name = "sparse_top_k_categorica
         keras$metrics$SparseTopKCategoricalAccuracy
     else keras$metrics$sparse_top_k_categorical_accuracy
     do.call(callable, args)
-}, py_function_name = "sparse_top_k_categorical_accuracy")
+}
 
 
 #' Computes how often targets are in the top `K` predictions.
@@ -653,7 +653,7 @@ structure(function (y_true, y_pred, k = 5L, ..., name = "sparse_top_k_categorica
 #'
 #' @tether keras.metrics.TopKCategoricalAccuracy
 metric_top_k_categorical_accuracy <-
-structure(function (y_true, y_pred, k = 5L, ..., name = "top_k_categorical_accuracy",
+function (y_true, y_pred, k = 5L, ..., name = "top_k_categorical_accuracy",
     dtype = NULL)
 {
     args <- capture_args2(list(
@@ -667,7 +667,7 @@ structure(function (y_true, y_pred, k = 5L, ..., name = "top_k_categorical_accur
         keras$metrics$TopKCategoricalAccuracy
     else keras$metrics$top_k_categorical_accuracy
     do.call(callable, args)
-}, py_function_name = "top_k_categorical_accuracy")
+}
 
 
 #' Approximates the AUC (Area under the curve) of the ROC or PR curves.
@@ -1830,7 +1830,7 @@ function (..., average = NULL, beta = 1, threshold = NULL, name = "fbeta_score",
 #'
 #' @tether keras.metrics.CategoricalHinge
 metric_categorical_hinge <-
-structure(function (y_true, y_pred, ..., name = "categorical_hinge",
+function (y_true, y_pred, ..., name = "categorical_hinge",
     dtype = NULL)
 {
     args <- capture_args2(list(y_true = function (x)
@@ -1844,7 +1844,7 @@ structure(function (y_true, y_pred, ..., name = "categorical_hinge",
         keras$metrics$CategoricalHinge
     else keras$metrics$categorical_hinge
     do.call(callable, args)
-}, py_function_name = "categorical_hinge")
+}
 
 
 #' Computes the hinge metric between `y_true` and `y_pred`.
@@ -1900,7 +1900,7 @@ structure(function (y_true, y_pred, ..., name = "categorical_hinge",
 #'
 #' @tether keras.metrics.Hinge
 metric_hinge <-
-structure(function (y_true, y_pred, ..., name = "hinge", dtype = NULL)
+function (y_true, y_pred, ..., name = "hinge", dtype = NULL)
 {
     args <- capture_args2(list(y_true = function (x)
     if (inherits(x, "python.builtin.object"))
@@ -1913,7 +1913,7 @@ structure(function (y_true, y_pred, ..., name = "hinge", dtype = NULL)
         keras$metrics$Hinge
     else keras$metrics$hinge
     do.call(callable, args)
-}, py_function_name = "hinge")
+}
 
 
 #' Computes the hinge metric between `y_true` and `y_pred`.
@@ -1969,7 +1969,7 @@ structure(function (y_true, y_pred, ..., name = "hinge", dtype = NULL)
 #'
 #' @tether keras.metrics.SquaredHinge
 metric_squared_hinge <-
-structure(function (y_true, y_pred, ..., name = "squared_hinge",
+function (y_true, y_pred, ..., name = "squared_hinge",
     dtype = NULL)
 {
     args <- capture_args2(list(y_true = function (x)
@@ -1983,7 +1983,7 @@ structure(function (y_true, y_pred, ..., name = "squared_hinge",
         keras$metrics$SquaredHinge
     else keras$metrics$squared_hinge
     do.call(callable, args)
-}, py_function_name = "squared_hinge")
+}
 
 
 #' Computes the Intersection-Over-Union metric for class 0 and/or 1.
@@ -2564,7 +2564,7 @@ function (..., num_classes, name = NULL, dtype = NULL, ignore_class = NULL,
 #'
 #' @tether keras.metrics.BinaryCrossentropy
 metric_binary_crossentropy <-
-structure(function (y_true, y_pred, from_logits = FALSE, label_smoothing = 0,
+function (y_true, y_pred, from_logits = FALSE, label_smoothing = 0,
     axis = -1L, ..., name = "binary_crossentropy", dtype = NULL)
 {
     args <- capture_args2(list(label_smoothing = as_integer,
@@ -2579,7 +2579,7 @@ structure(function (y_true, y_pred, from_logits = FALSE, label_smoothing = 0,
         keras$metrics$BinaryCrossentropy
     else keras$metrics$binary_crossentropy
     do.call(callable, args)
-}, py_function_name = "binary_crossentropy")
+}
 
 
 #' Computes the crossentropy metric between the labels and predictions.
@@ -2666,7 +2666,7 @@ structure(function (y_true, y_pred, from_logits = FALSE, label_smoothing = 0,
 #'
 #' @tether keras.metrics.CategoricalCrossentropy
 metric_categorical_crossentropy <-
-structure(function (y_true, y_pred, from_logits = FALSE, label_smoothing = 0,
+function (y_true, y_pred, from_logits = FALSE, label_smoothing = 0,
     axis = -1L, ..., name = "categorical_crossentropy", dtype = NULL)
 {
     args <- capture_args2(list(label_smoothing = as_integer,
@@ -2681,7 +2681,7 @@ structure(function (y_true, y_pred, from_logits = FALSE, label_smoothing = 0,
         keras$metrics$CategoricalCrossentropy
     else keras$metrics$categorical_crossentropy
     do.call(callable, args)
-}, py_function_name = "categorical_crossentropy")
+}
 
 
 #' Computes Kullback-Leibler divergence metric between `y_true` and
@@ -2742,7 +2742,7 @@ structure(function (y_true, y_pred, from_logits = FALSE, label_smoothing = 0,
 #'
 #' @tether keras.metrics.KLDivergence
 metric_kl_divergence <-
-structure(function (y_true, y_pred, ..., name = "kl_divergence",
+function (y_true, y_pred, ..., name = "kl_divergence",
     dtype = NULL)
 {
     args <- capture_args2(list(y_true = function (x)
@@ -2756,7 +2756,7 @@ structure(function (y_true, y_pred, ..., name = "kl_divergence",
         keras$metrics$KLDivergence
     else keras$metrics$kl_divergence
     do.call(callable, args)
-}, py_function_name = "kl_divergence")
+}
 
 
 #' Computes the Poisson metric between `y_true` and `y_pred`.
@@ -2820,7 +2820,7 @@ structure(function (y_true, y_pred, ..., name = "kl_divergence",
 #'
 #' @tether keras.metrics.Poisson
 metric_poisson <-
-structure(function (y_true, y_pred, ..., name = "poisson", dtype = NULL)
+function (y_true, y_pred, ..., name = "poisson", dtype = NULL)
 {
     args <- capture_args2(list(y_true = function (x)
     if (inherits(x, "python.builtin.object"))
@@ -2833,7 +2833,7 @@ structure(function (y_true, y_pred, ..., name = "poisson", dtype = NULL)
         keras$metrics$Poisson
     else keras$metrics$poisson
     do.call(callable, args)
-}, py_function_name = "poisson")
+}
 
 
 #' Computes the crossentropy metric between the labels and predictions.
@@ -2916,7 +2916,7 @@ structure(function (y_true, y_pred, ..., name = "poisson", dtype = NULL)
 #'
 #' @tether keras.metrics.SparseCategoricalCrossentropy
 metric_sparse_categorical_crossentropy <-
-structure(function (y_true, y_pred, from_logits = FALSE, ignore_class = NULL,
+function (y_true, y_pred, from_logits = FALSE, ignore_class = NULL,
     axis = -1L, ..., name = "sparse_categorical_crossentropy",
     dtype = NULL)
 {
@@ -2931,7 +2931,7 @@ structure(function (y_true, y_pred, from_logits = FALSE, ignore_class = NULL,
         keras$metrics$SparseCategoricalCrossentropy
     else keras$metrics$sparse_categorical_crossentropy
     do.call(callable, args)
-}, py_function_name = "sparse_categorical_crossentropy")
+}
 
 
 #' Compute the (weighted) mean of the given values.
@@ -3262,7 +3262,7 @@ function (..., name = "logcosh", dtype = NULL)
 #'
 #' @tether keras.metrics.MeanAbsoluteError
 metric_mean_absolute_error <-
-structure(function (y_true, y_pred, ..., name = "mean_absolute_error",
+function (y_true, y_pred, ..., name = "mean_absolute_error",
     dtype = NULL)
 {
     args <- capture_args2(list(y_true = function (x)
@@ -3276,7 +3276,7 @@ structure(function (y_true, y_pred, ..., name = "mean_absolute_error",
         keras$metrics$MeanAbsoluteError
     else keras$metrics$mean_absolute_error
     do.call(callable, args)
-}, py_function_name = "mean_absolute_error")
+}
 
 
 #' Computes mean absolute percentage error between `y_true` and `y_pred`.
@@ -3340,7 +3340,7 @@ structure(function (y_true, y_pred, ..., name = "mean_absolute_error",
 #'
 #' @tether keras.metrics.MeanAbsolutePercentageError
 metric_mean_absolute_percentage_error <-
-structure(function (y_true, y_pred, ..., name = "mean_absolute_percentage_error",
+function (y_true, y_pred, ..., name = "mean_absolute_percentage_error",
     dtype = NULL)
 {
     args <- capture_args2(list(y_true = function (x)
@@ -3354,7 +3354,7 @@ structure(function (y_true, y_pred, ..., name = "mean_absolute_percentage_error"
         keras$metrics$MeanAbsolutePercentageError
     else keras$metrics$mean_absolute_percentage_error
     do.call(callable, args)
-}, py_function_name = "mean_absolute_percentage_error")
+}
 
 
 #' Computes the mean squared error between `y_true` and `y_pred`.
@@ -3399,7 +3399,7 @@ structure(function (y_true, y_pred, ..., name = "mean_absolute_percentage_error"
 #'
 #' @tether keras.metrics.MeanSquaredError
 metric_mean_squared_error <-
-structure(function (y_true, y_pred, ..., name = "mean_squared_error",
+function (y_true, y_pred, ..., name = "mean_squared_error",
     dtype = NULL)
 {
     args <- capture_args2(list(y_true = function (x)
@@ -3413,7 +3413,7 @@ structure(function (y_true, y_pred, ..., name = "mean_squared_error",
         keras$metrics$MeanSquaredError
     else keras$metrics$mean_squared_error
     do.call(callable, args)
-}, py_function_name = "mean_squared_error")
+}
 
 
 #' Computes mean squared logarithmic error between `y_true` and `y_pred`.
@@ -3477,7 +3477,7 @@ structure(function (y_true, y_pred, ..., name = "mean_squared_error",
 #'
 #' @tether keras.metrics.MeanSquaredLogarithmicError
 metric_mean_squared_logarithmic_error <-
-structure(function (y_true, y_pred, ..., name = "mean_squared_logarithmic_error",
+function (y_true, y_pred, ..., name = "mean_squared_logarithmic_error",
     dtype = NULL)
 {
     args <- capture_args2(list(y_true = function (x)
@@ -3491,7 +3491,7 @@ structure(function (y_true, y_pred, ..., name = "mean_squared_logarithmic_error"
         keras$metrics$MeanSquaredLogarithmicError
     else keras$metrics$mean_squared_logarithmic_error
     do.call(callable, args)
-}, py_function_name = "mean_squared_logarithmic_error")
+}
 
 
 #' Computes R2 score.
