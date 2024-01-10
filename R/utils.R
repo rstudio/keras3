@@ -658,7 +658,8 @@ capture_args <- function(cl, modifiers = NULL, ignore = NULL,
 
 
 #' @importFrom rlang list2
-capture_args2 <- function(modifiers = NULL, ignore = NULL, force = NULL) {
+capture_args2 <- function(modifiers = NULL, ignore = NULL, force = NULL,
+                          enforce_all_dots_named = TRUE) {
   cl <- sys.call(-1L)
   envir <- parent.frame(1L)
   fn <- sys.function(-1L)
@@ -691,7 +692,8 @@ capture_args2 <- function(modifiers = NULL, ignore = NULL, force = NULL) {
   names(known_args) <- known_args
 
   if ("..." %in% fn_arg_nms && !"..." %in% ignore) {
-    assert_all_dots_named(envir, cl)
+    if(enforce_all_dots_named)
+      assert_all_dots_named(envir, cl)
     # match.call already drops missing args that match to known args, but it
     # doesn't protect from missing args that matched into ...
     # use list2() to allow dropping a trailing missing arg in ... also
