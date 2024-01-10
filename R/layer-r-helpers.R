@@ -53,6 +53,19 @@ compose_layer <- function(object, layer, ...) {
   layer(object, ...)
 }
 
+# TODO: use formals(x) in py_to_r_wrapper() to construct a better wrapper fn
+# This is used for ALL layers (custom, and builtin)
+#' @export
+py_to_r_wrapper.keras.src.layers.layer.Layer <- function(x) {
+  force(x)
+  function(object, ...) {
+    if(missing(object))
+      x(...)
+    else
+      compose_layer(object = object, layer = x, ...)
+  }
+}
+
 
 # ---- convolutional ----
 normalize_padding <- function(padding, dims) {

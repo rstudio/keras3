@@ -65,10 +65,15 @@
 #'
 #'   echo_print(shape(axis2))               # use axis2 tensor as axis value
 #'   echo_print(shape(axis1, axis2, axis3)) # use axis2 tensor as axis value
+#'
+#'   # use shape() to compose a new shape, e.g., in multihead attention
+#'   n_heads <- 4
+#'   echo_print(shape(axis1, axis2, n_heads, axis3/n_heads))
+#'
 #'   x
 #' },
-#' input_signature = list(tensorflow::tf$TensorSpec(shape(1, NA, 3))))
-#' invisible(tfn(op_ones(shape(1, 2, 3))))
+#' input_signature = list(tensorflow::tf$TensorSpec(shape(NA, 4, 16))))
+#' invisible(tfn(op_ones(shape(2, 4, 16))))
 #' ```
 #'
 #' If you want to resolve the shape of a tensor that can potentially be

@@ -66,7 +66,8 @@ py_formals <- function(py_obj) {
 #'   If Layer is an R6 object, this will delay initializing the python
 #'   session, so it is safe to use in an R package.
 #'
-#' @export
+#' @keywords internal
+#' @noRD
 #' @importFrom rlang %||%
 create_layer_wrapper <- function(Layer, modifiers = NULL, convert = TRUE) {
 
