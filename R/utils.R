@@ -1090,6 +1090,12 @@ map_lgl <- function(.x, .f, ...) {
   out
 }
 
+map_int <- function(.x, .f, ...) {
+  out <- vapply(X = .x, FUN = .f, FUN.VALUE = 0L, ..., USE.NAMES = FALSE)
+  names(out) <- names(.x)
+  out
+}
+
 if (getRversion() < "4.0")
   activeBindingFunction <- function(nm, env) {
     as.list.environment(env, all.names = TRUE)[[nm]]

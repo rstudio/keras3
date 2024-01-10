@@ -22,6 +22,7 @@
 #' ```
 #'
 #' You can also use `shape()` to get the shape of a tensor
+#' (excepting scalar integer tensors).
 #' ```{r}
 #' symbolic_tensor <- layer_input(shape(1, 2, 3))
 #' shape(symbolic_tensor)
@@ -37,11 +38,12 @@
 #' shape(5, symbolic_tensor, 4)
 #' ```
 #'
-#' In graph mode, a shape might contain a scalar integer tensor for unknown
-#' axes.
+#' Scalar integer tensors are treated as axis values. These are most commonly
+#' encountered when tracing a function in graph mode, where an axis size might
+#' be unknown.
 #' ```{r}
 #' tfn <- tensorflow::tf_function(function(x) {
-#'   print(shape(x))
+#'   print(op_shape(x))
 #'   x
 #' },
 #' input_signature = list(tensorflow::tf$TensorSpec(shape(1, NA, 3))))
@@ -53,29 +55,39 @@
 #' c(batch_size, seq_len, channels) %<-% shape(x)
 #' ```
 #'
-#' If you are unpacking `shape()` in graph mode, and then want to reassemble the
-#' axes with `shape()`, you'll have to wrap tensors with `I()` to use the tensor
-#' itself, rather than the shape of the tensor.
 #' ```{r}
-#' echo_print <- function(x) { message("> ", deparse(substitute(x))); print(x) }
+#' echo_print <- function(x) {
+#'   message("> ", deparse(substitute(x))); print(x)
+#' }
 #' tfn <- tensorflow::tf_function(function(x) {
 #'   c(axis1, axis2, axis3) %<-% shape(x)
 #'   str(list(axis1 = axis1, axis2 = axis2, axis3 = axis3))
 #'
-#'   echo_print(shape(axis2))               # resolve axis2 tensor shape
-#'   echo_print(shape(axis1, axis2, axis3)) # resolve axis2 tensor shape
-#'
-#'   echo_print(shape(I(axis2)))               # use axis2 tensor as axis value
-#'   echo_print(shape(axis1, I(axis2), axis3)) # use axis2 tensor as axis value
+#'   echo_print(shape(axis2))               # use axis2 tensor as axis value
+#'   echo_print(shape(axis1, axis2, axis3)) # use axis2 tensor as axis value
 #'   x
 #' },
 #' input_signature = list(tensorflow::tf$TensorSpec(shape(1, NA, 3))))
 #' invisible(tfn(op_ones(shape(1, 2, 3))))
 #' ```
 #'
+#' If you want to resolve the shape of a tensor that can potentially be
+#' a scalar integer, you can wrap the tensor in `I()`, or use [`op_shape()`].
+#' ```{r}
+#' (x <- op_convert_to_tensor(2L))
+#'
+#' # by default, shape() treats scalar integer tensors as axis values
+#' shape(x)
+#'
+#' # to access the shape of a scalar integer,
+#' # call `op_shape()`, or protect with `I()`
+#' op_shape(x)
+#' shape(I(x))
+#' ```
+#'
 #' @param ... A shape specification. Numerics, `NULL` and tensors are valid.
 #'   `NULL`, `NA`, and `-1L` can be used to specify an unspecified dim size.
-#'   Tensors are dispatched to `k_shape()` to extract the tensor shape. Values
+#'   Tensors are dispatched to `op_shape()` to extract the tensor shape. Values
 #'   wrapped in `I()` are used asis (see examples). All other objects are coerced
 #'   via `as.integer()`.
 #'
@@ -84,25 +96,29 @@
 #'   (e.g., when supplied a TF tensor with a unspecified dimension in a function
 #'   being traced).
 #'
-#'
 #' @export
 #' @seealso [op_shape()]
 shape <- function(...) {
 
   fix <- function(x) {
-    if (inherits(x, "AsIs")) {
-      class(x) <- setdiff(class(x), "AsIs")
-      return(x)
-    }
 
     if (inherits(x, 'python.builtin.object')) {
       if (inherits(x, "tensorflow.python.framework.tensor_shape.TensorShape"))
-        return(as.integer(x))
+        return(map_int(as.list(as_r_value(x$as_list())),
+                       function(e) e %||% NA_integer_))
 
-      tryCatch({
-        return(lapply(keras$ops$shape(x),
-                      function(d) as_r_value(d) %||% NA_integer_))
-      }, error = identity)
+      shp <- keras$ops$shape(x)
+
+      # scalar integer tensors, unprotected with I(), are treated as an axis value
+      if (identical(shp, list()) && keras$backend$is_int_dtype(x$dtype)) {
+        if (inherits(x, "AsIs"))
+          class(x) <- setdiff(class(x), "AsIs")
+        else
+          return(x)
+      }
+
+      # otherwise, (most common path) shape() is a tensor shape accessor
+      return(lapply(shp, function(d) d %||% NA_integer_))
     }
 
     if (!is.atomic(x) || length(x) > 1)

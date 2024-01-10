@@ -147,25 +147,6 @@ fs::dir_walk("man-src", type = "directory", recurse = TRUE,
 #       which it's a "no-op" or "identity" function because the preprocessing
 #       step is on the graph already.
 
-# TODO: change shape() semantics. Discussion conclusion:
-##    - instead of protecting with I(),
-##      keep shape() as an accessor, but
-##      special case scalar integer tensors only to
-##      treat them as an axis value.
-##    keep I() as escape hatch for just that one special case.
-## Aleternative discused:
-##   - use op_shape as the accessor (maybe even offer alias of get_shape();
-##       get_shape <- op_shape
-##   - Stop using `shape()` as accessor for tensor shapes
-##       so to combine shape in graph and eager mode, users would do
-##      shape(1, op_shape(tensor), 1)
-##      rejected because less ergonomic
-##      also, for the edge case where user truly wants shape, and is
-##      in an advanced context (tracing mode) where the edge case is hit,
-##      they can reach for `op_shape()` for more stable output.
-##      c(axis1, axis2, axis3) %<-% op_shape(x)
-##      ...  n_heads <- 4
-##      shape(axis1, axis2, n_head, axis3/n_heads)
 
 # TODO: custom keras.Model wrapper that patches add_weight(), build(), etc
 #      with proper shape() coercion
