@@ -109,8 +109,7 @@
 #' A int. Number of steps to warmup over.
 #'
 #' @export
-#' @family learning rate schedule optimizers
-#' @family schedule optimizers
+#' @family optimizer learning rate schedules
 #' @seealso
 #' + <https:/keras.io/api/optimizers/learning_rate_schedules/cosine_decay#cosinedecay-class>
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/optimizers/schedules/CosineDecay>
@@ -187,8 +186,7 @@ function (initial_learning_rate, decay_steps, alpha = 0, name = "CosineDecay",
 #' `"SGDRDecay"`.
 #'
 #' @export
-#' @family learning rate schedule optimizers
-#' @family schedule optimizers
+#' @family optimizer learning rate schedules
 #' @seealso
 #' + <https:/keras.io/api/optimizers/learning_rate_schedules/cosine_decay_restarts#cosinedecayrestarts-class>
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/optimizers/schedules/CosineDecayRestarts>
@@ -276,8 +274,7 @@ function (initial_learning_rate, first_decay_steps, t_mul = 2,
 #' `"ExponentialDecay`".
 #'
 #' @export
-#' @family learning rate schedule optimizers
-#' @family schedule optimizers
+#' @family optimizer learning rate schedules
 #' @seealso
 #' + <https:/keras.io/api/optimizers/learning_rate_schedules/exponential_decay#exponentialdecay-class>
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/optimizers/schedules/ExponentialDecay>
@@ -367,8 +364,7 @@ function (initial_learning_rate, decay_steps, decay_rate, staircase = FALSE,
 #' `"InverseTimeDecay"`.
 #'
 #' @export
-#' @family learning rate schedule optimizers
-#' @family schedule optimizers
+#' @family optimizer learning rate schedules
 #' @seealso
 #' + <https:/keras.io/api/optimizers/learning_rate_schedules/inverse_time_decay#inversetimedecay-class>
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/optimizers/schedules/InverseTimeDecay>
@@ -440,8 +436,7 @@ function (initial_learning_rate, decay_steps, decay_rate, staircase = FALSE,
 #' `"PiecewiseConstant"`.
 #'
 #' @export
-#' @family learning rate schedule optimizers
-#' @family schedule optimizers
+#' @family optimizer learning rate schedules
 #' @seealso
 #' + <https:/keras.io/api/optimizers/learning_rate_schedules/piecewise_constant_decay#piecewiseconstantdecay-class>
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/optimizers/schedules/PiecewiseConstantDecay>
@@ -553,8 +548,7 @@ function (boundaries, values, name = "PiecewiseConstant")
 #' `"PolynomialDecay"`.
 #'
 #' @export
-#' @family learning rate schedule optimizers
-#' @family schedule optimizers
+#' @family optimizer learning rate schedules
 #' @seealso
 #' + <https:/keras.io/api/optimizers/learning_rate_schedules/polynomial_decay#polynomialdecay-class>
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/optimizers/schedules/PolynomialDecay>

@@ -124,4 +124,13 @@ Any objects assigned here are invisible to the Keras framework.
 }
 }
 
-\concept{learning rate schedules}
+\seealso{
+Other optimizer learning rate schedules: 
+\code{\link{learning_rate_schedule_cosine_decay_restarts}()},
+\code{\link{learning_rate_schedule_cosine_decay}()},
+\code{\link{learning_rate_schedule_exponential_decay}()},
+\code{\link{learning_rate_schedule_inverse_time_decay}()},
+\code{\link{learning_rate_schedule_piecewise_constant_decay}()},
+\code{\link{learning_rate_schedule_polynomial_decay}()}
+}
+\concept{optimizer learning rate schedules}

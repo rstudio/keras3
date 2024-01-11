@@ -84,19 +84,12 @@ model \%>\% fit(data, labels, epochs=5)
 \item \url{https://www.tensorflow.org/api_docs/python/tf/keras/optimizers/schedules/InverseTimeDecay}
 }
 
-Other learning rate schedule optimizers: 
-\code{\link{learning_rate_schedule_cosine_decay_restarts}()},
-\code{\link{learning_rate_schedule_cosine_decay}()},
-\code{\link{learning_rate_schedule_exponential_decay}()},
-\code{\link{learning_rate_schedule_piecewise_constant_decay}()},
-\code{\link{learning_rate_schedule_polynomial_decay}()}
-
-Other schedule optimizers: 
+Other optimizer learning rate schedules: 
+\code{\link{LearningRateSchedule}()},
 \code{\link{learning_rate_schedule_cosine_decay_restarts}()},
 \code{\link{learning_rate_schedule_cosine_decay}()},
 \code{\link{learning_rate_schedule_exponential_decay}()},
 \code{\link{learning_rate_schedule_piecewise_constant_decay}()},
 \code{\link{learning_rate_schedule_polynomial_decay}()}
 }
-\concept{learning rate schedule optimizers}
-\concept{schedule optimizers}
+\concept{optimizer learning rate schedules}

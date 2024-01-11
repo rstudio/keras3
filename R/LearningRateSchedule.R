@@ -77,7 +77,7 @@
 #' @tether keras.optimizers.schedules.LearningRateSchedule
 #' @inheritSection Layer Symbols in scope
 #' @inheritParams Layer
-#' @family learning rate schedules
+#' @family optimizer learning rate schedules
 LearningRateSchedule <- function(classname,
                                  call = NULL,
                                  initialize = NULL,
@@ -112,3 +112,4 @@ LearningRateSchedule <- function(classname,
 
 }
 
+# TODO: should all optimizer accept a plain R function to `learning_rate`?

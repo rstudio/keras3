@@ -73,19 +73,12 @@ deserializable using \code{keras$optimizers$schedules$serialize} and
 \item \url{https://www.tensorflow.org/api_docs/python/tf/keras/optimizers/schedules/CosineDecayRestarts}
 }
 
-Other learning rate schedule optimizers: 
-\code{\link{learning_rate_schedule_cosine_decay}()},
-\code{\link{learning_rate_schedule_exponential_decay}()},
-\code{\link{learning_rate_schedule_inverse_time_decay}()},
-\code{\link{learning_rate_schedule_piecewise_constant_decay}()},
-\code{\link{learning_rate_schedule_polynomial_decay}()}
-
-Other schedule optimizers: 
+Other optimizer learning rate schedules: 
+\code{\link{LearningRateSchedule}()},
 \code{\link{learning_rate_schedule_cosine_decay}()},
 \code{\link{learning_rate_schedule_exponential_decay}()},
 \code{\link{learning_rate_schedule_inverse_time_decay}()},
 \code{\link{learning_rate_schedule_piecewise_constant_decay}()},
 \code{\link{learning_rate_schedule_polynomial_decay}()}
 }
-\concept{learning rate schedule optimizers}
-\concept{schedule optimizers}
+\concept{optimizer learning rate schedules}
