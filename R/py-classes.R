@@ -63,7 +63,7 @@ function(classname,
   frmls$self <- NULL
 
   bdy <- bquote({
-    args <- capture_args2(.(modifiers), enforce_all_dots_named = FALSE)
+    args <- capture_args(.(modifiers), enforce_all_dots_named = FALSE)
     do.call(.(as.name(classname)), args)
   })
   rm(modifiers, default_formals) # free memory

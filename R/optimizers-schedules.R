@@ -120,7 +120,7 @@ learning_rate_schedule_cosine_decay <-
 function (initial_learning_rate, decay_steps, alpha = 0, name = "CosineDecay",
     warmup_target = NULL, warmup_steps = 0L)
 {
-    args <- capture_args2(list(decay_steps = as_integer, warmup_steps = as_integer))
+    args <- capture_args(list(decay_steps = as_integer, warmup_steps = as_integer))
     do.call(keras$optimizers$schedules$CosineDecay, args)
 }
 
@@ -198,7 +198,7 @@ learning_rate_schedule_cosine_decay_restarts <-
 function (initial_learning_rate, first_decay_steps, t_mul = 2,
     m_mul = 1, alpha = 0, name = "SGDRDecay")
 {
-    args <- capture_args2(list(first_decay_steps = as_integer))
+    args <- capture_args(list(first_decay_steps = as_integer))
     do.call(keras$optimizers$schedules$CosineDecayRestarts, args)
 }
 
@@ -287,7 +287,7 @@ learning_rate_schedule_exponential_decay <-
 function (initial_learning_rate, decay_steps, decay_rate, staircase = FALSE,
     name = "ExponentialDecay")
 {
-    args <- capture_args2(list(decay_steps = as_integer))
+    args <- capture_args(list(decay_steps = as_integer))
     do.call(keras$optimizers$schedules$ExponentialDecay, args)
 }
 
@@ -378,7 +378,7 @@ learning_rate_schedule_inverse_time_decay <-
 function (initial_learning_rate, decay_steps, decay_rate, staircase = FALSE,
     name = "InverseTimeDecay")
 {
-    args <- capture_args2(NULL)
+    args <- capture_args()
     do.call(keras$optimizers$schedules$InverseTimeDecay, args)
 }
 
@@ -450,7 +450,7 @@ function (initial_learning_rate, decay_steps, decay_rate, staircase = FALSE,
 learning_rate_schedule_piecewise_constant_decay <-
 function (boundaries, values, name = "PiecewiseConstant")
 {
-    args <- capture_args2(NULL)
+    args <- capture_args()
     do.call(keras$optimizers$schedules$PiecewiseConstantDecay,
         args)
 }
@@ -564,6 +564,6 @@ learning_rate_schedule_polynomial_decay <-
 function (initial_learning_rate, decay_steps, end_learning_rate = 1e-04,
     power = 1, cycle = FALSE, name = "PolynomialDecay")
 {
-    args <- capture_args2(list(decay_steps = as_integer))
+    args <- capture_args(list(decay_steps = as_integer))
     do.call(keras$optimizers$schedules$PolynomialDecay, args)
 }

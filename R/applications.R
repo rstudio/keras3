@@ -95,7 +95,7 @@ function (model_name = "convnext_base", include_top = TRUE, include_preprocessin
     weights = "imagenet", input_tensor = NULL, input_shape = NULL,
     pooling = NULL, classes = 1000L, classifier_activation = "softmax")
 {
-    args <- capture_args2(list(classes = as_integer, input_shape = normalize_shape))
+    args <- capture_args(list(classes = as_integer, input_shape = normalize_shape))
     model <- do.call(keras$applications$ConvNeXtBase, args)
     set_preprocessing_attributes(model, keras$applications$convnext)
 }
@@ -198,7 +198,7 @@ function (model_name = "convnext_large", include_top = TRUE,
     include_preprocessing = TRUE, weights = "imagenet", input_tensor = NULL,
     input_shape = NULL, pooling = NULL, classes = 1000L, classifier_activation = "softmax")
 {
-    args <- capture_args2(list(classes = as_integer, input_shape = normalize_shape))
+    args <- capture_args(list(classes = as_integer, input_shape = normalize_shape))
     model <- do.call(keras$applications$ConvNeXtLarge, args)
     set_preprocessing_attributes(model, keras$applications$convnext)
 }
@@ -301,7 +301,7 @@ function (model_name = "convnext_small", include_top = TRUE,
     include_preprocessing = TRUE, weights = "imagenet", input_tensor = NULL,
     input_shape = NULL, pooling = NULL, classes = 1000L, classifier_activation = "softmax")
 {
-    args <- capture_args2(list(classes = as_integer, input_shape = normalize_shape))
+    args <- capture_args(list(classes = as_integer, input_shape = normalize_shape))
     model <- do.call(keras$applications$ConvNeXtSmall, args)
     set_preprocessing_attributes(model, keras$applications$convnext)
 }
@@ -404,7 +404,7 @@ function (model_name = "convnext_tiny", include_top = TRUE, include_preprocessin
     weights = "imagenet", input_tensor = NULL, input_shape = NULL,
     pooling = NULL, classes = 1000L, classifier_activation = "softmax")
 {
-    args <- capture_args2(list(classes = as_integer, input_shape = normalize_shape))
+    args <- capture_args(list(classes = as_integer, input_shape = normalize_shape))
     model <- do.call(keras$applications$ConvNeXtTiny, args)
     set_preprocessing_attributes(model, keras$applications$convnext)
 }
@@ -507,7 +507,7 @@ function (model_name = "convnext_xlarge", include_top = TRUE,
     include_preprocessing = TRUE, weights = "imagenet", input_tensor = NULL,
     input_shape = NULL, pooling = NULL, classes = 1000L, classifier_activation = "softmax")
 {
-    args <- capture_args2(list(classes = as_integer, input_shape = normalize_shape))
+    args <- capture_args(list(classes = as_integer, input_shape = normalize_shape))
     model <- do.call(keras$applications$ConvNeXtXLarge, args)
     set_preprocessing_attributes(model, keras$applications$convnext)
 }
@@ -591,7 +591,7 @@ application_densenet121 <-
 function (include_top = TRUE, weights = "imagenet", input_tensor = NULL,
     input_shape = NULL, pooling = NULL, classes = 1000L, classifier_activation = "softmax")
 {
-    args <- capture_args2(list(classes = as_integer, input_shape = normalize_shape))
+    args <- capture_args(list(classes = as_integer, input_shape = normalize_shape))
     model <- do.call(keras$applications$DenseNet121, args)
     set_preprocessing_attributes(model, keras$applications$densenet)
 }
@@ -675,7 +675,7 @@ application_densenet169 <-
 function (include_top = TRUE, weights = "imagenet", input_tensor = NULL,
     input_shape = NULL, pooling = NULL, classes = 1000L, classifier_activation = "softmax")
 {
-    args <- capture_args2(list(classes = as_integer, input_shape = normalize_shape))
+    args <- capture_args(list(classes = as_integer, input_shape = normalize_shape))
     model <- do.call(keras$applications$DenseNet169, args)
     set_preprocessing_attributes(model, keras$applications$densenet)
 }
@@ -759,7 +759,7 @@ application_densenet201 <-
 function (include_top = TRUE, weights = "imagenet", input_tensor = NULL,
     input_shape = NULL, pooling = NULL, classes = 1000L, classifier_activation = "softmax")
 {
-    args <- capture_args2(list(classes = as_integer, input_shape = normalize_shape))
+    args <- capture_args(list(classes = as_integer, input_shape = normalize_shape))
     model <- do.call(keras$applications$DenseNet201, args)
     set_preprocessing_attributes(model, keras$applications$densenet)
 }
@@ -855,7 +855,7 @@ function (include_top = TRUE, weights = "imagenet", input_tensor = NULL,
     input_shape = NULL, pooling = NULL, classes = 1000L, classifier_activation = "softmax",
     ...)
 {
-    args <- capture_args2(list(classes = as_integer, input_shape = normalize_shape))
+    args <- capture_args(list(classes = as_integer, input_shape = normalize_shape))
     model <- do.call(keras$applications$EfficientNetB0, args)
     set_preprocessing_attributes(model, keras$applications$efficientnet)
 }
@@ -951,7 +951,7 @@ function (include_top = TRUE, weights = "imagenet", input_tensor = NULL,
     input_shape = NULL, pooling = NULL, classes = 1000L, classifier_activation = "softmax",
     ...)
 {
-    args <- capture_args2(list(classes = as_integer, input_shape = normalize_shape))
+    args <- capture_args(list(classes = as_integer, input_shape = normalize_shape))
     model <- do.call(keras$applications$EfficientNetB1, args)
     set_preprocessing_attributes(model, keras$applications$efficientnet)
 }
@@ -1047,7 +1047,7 @@ function (include_top = TRUE, weights = "imagenet", input_tensor = NULL,
     input_shape = NULL, pooling = NULL, classes = 1000L, classifier_activation = "softmax",
     ...)
 {
-    args <- capture_args2(list(classes = as_integer, input_shape = normalize_shape))
+    args <- capture_args(list(classes = as_integer, input_shape = normalize_shape))
     model <- do.call(keras$applications$EfficientNetB2, args)
     set_preprocessing_attributes(model, keras$applications$efficientnet)
 }
@@ -1143,7 +1143,7 @@ function (include_top = TRUE, weights = "imagenet", input_tensor = NULL,
     input_shape = NULL, pooling = NULL, classes = 1000L, classifier_activation = "softmax",
     ...)
 {
-    args <- capture_args2(list(classes = as_integer, input_shape = normalize_shape))
+    args <- capture_args(list(classes = as_integer, input_shape = normalize_shape))
     model <- do.call(keras$applications$EfficientNetB3, args)
     set_preprocessing_attributes(model, keras$applications$efficientnet)
 }
@@ -1239,7 +1239,7 @@ function (include_top = TRUE, weights = "imagenet", input_tensor = NULL,
     input_shape = NULL, pooling = NULL, classes = 1000L, classifier_activation = "softmax",
     ...)
 {
-    args <- capture_args2(list(classes = as_integer, input_shape = normalize_shape))
+    args <- capture_args(list(classes = as_integer, input_shape = normalize_shape))
     model <- do.call(keras$applications$EfficientNetB4, args)
     set_preprocessing_attributes(model, keras$applications$efficientnet)
 }
@@ -1335,7 +1335,7 @@ function (include_top = TRUE, weights = "imagenet", input_tensor = NULL,
     input_shape = NULL, pooling = NULL, classes = 1000L, classifier_activation = "softmax",
     ...)
 {
-    args <- capture_args2(list(classes = as_integer, input_shape = normalize_shape))
+    args <- capture_args(list(classes = as_integer, input_shape = normalize_shape))
     model <- do.call(keras$applications$EfficientNetB5, args)
     set_preprocessing_attributes(model, keras$applications$efficientnet)
 }
@@ -1431,7 +1431,7 @@ function (include_top = TRUE, weights = "imagenet", input_tensor = NULL,
     input_shape = NULL, pooling = NULL, classes = 1000L, classifier_activation = "softmax",
     ...)
 {
-    args <- capture_args2(list(classes = as_integer, input_shape = normalize_shape))
+    args <- capture_args(list(classes = as_integer, input_shape = normalize_shape))
     model <- do.call(keras$applications$EfficientNetB6, args)
     set_preprocessing_attributes(model, keras$applications$efficientnet)
 }
@@ -1527,7 +1527,7 @@ function (include_top = TRUE, weights = "imagenet", input_tensor = NULL,
     input_shape = NULL, pooling = NULL, classes = 1000L, classifier_activation = "softmax",
     ...)
 {
-    args <- capture_args2(list(classes = as_integer, input_shape = normalize_shape))
+    args <- capture_args(list(classes = as_integer, input_shape = normalize_shape))
     model <- do.call(keras$applications$EfficientNetB7, args)
     set_preprocessing_attributes(model, keras$applications$efficientnet)
 }
@@ -1626,7 +1626,7 @@ function (include_top = TRUE, weights = "imagenet", input_tensor = NULL,
     input_shape = NULL, pooling = NULL, classes = 1000L, classifier_activation = "softmax",
     include_preprocessing = TRUE)
 {
-    args <- capture_args2(list(classes = as_integer, input_shape = normalize_shape))
+    args <- capture_args(list(classes = as_integer, input_shape = normalize_shape))
     model <- do.call(keras$applications$EfficientNetV2B0, args)
     set_preprocessing_attributes(model, keras$applications$efficientnet_v2)
 }
@@ -1725,7 +1725,7 @@ function (include_top = TRUE, weights = "imagenet", input_tensor = NULL,
     input_shape = NULL, pooling = NULL, classes = 1000L, classifier_activation = "softmax",
     include_preprocessing = TRUE)
 {
-    args <- capture_args2(list(classes = as_integer, input_shape = normalize_shape))
+    args <- capture_args(list(classes = as_integer, input_shape = normalize_shape))
     model <- do.call(keras$applications$EfficientNetV2B1, args)
     set_preprocessing_attributes(model, keras$applications$efficientnet_v2)
 }
@@ -1824,7 +1824,7 @@ function (include_top = TRUE, weights = "imagenet", input_tensor = NULL,
     input_shape = NULL, pooling = NULL, classes = 1000L, classifier_activation = "softmax",
     include_preprocessing = TRUE)
 {
-    args <- capture_args2(list(classes = as_integer, input_shape = normalize_shape))
+    args <- capture_args(list(classes = as_integer, input_shape = normalize_shape))
     model <- do.call(keras$applications$EfficientNetV2B2, args)
     set_preprocessing_attributes(model, keras$applications$efficientnet_v2)
 }
@@ -1923,7 +1923,7 @@ function (include_top = TRUE, weights = "imagenet", input_tensor = NULL,
     input_shape = NULL, pooling = NULL, classes = 1000L, classifier_activation = "softmax",
     include_preprocessing = TRUE)
 {
-    args <- capture_args2(list(classes = as_integer, input_shape = normalize_shape))
+    args <- capture_args(list(classes = as_integer, input_shape = normalize_shape))
     model <- do.call(keras$applications$EfficientNetV2B3, args)
     set_preprocessing_attributes(model, keras$applications$efficientnet_v2)
 }
@@ -2022,7 +2022,7 @@ function (include_top = TRUE, weights = "imagenet", input_tensor = NULL,
     input_shape = NULL, pooling = NULL, classes = 1000L, classifier_activation = "softmax",
     include_preprocessing = TRUE)
 {
-    args <- capture_args2(list(classes = as_integer, input_shape = normalize_shape))
+    args <- capture_args(list(classes = as_integer, input_shape = normalize_shape))
     model <- do.call(keras$applications$EfficientNetV2L, args)
     set_preprocessing_attributes(model, keras$applications$efficientnet_v2)
 }
@@ -2121,7 +2121,7 @@ function (include_top = TRUE, weights = "imagenet", input_tensor = NULL,
     input_shape = NULL, pooling = NULL, classes = 1000L, classifier_activation = "softmax",
     include_preprocessing = TRUE)
 {
-    args <- capture_args2(list(classes = as_integer, input_shape = normalize_shape))
+    args <- capture_args(list(classes = as_integer, input_shape = normalize_shape))
     model <- do.call(keras$applications$EfficientNetV2M, args)
     set_preprocessing_attributes(model, keras$applications$efficientnet_v2)
 }
@@ -2220,7 +2220,7 @@ function (include_top = TRUE, weights = "imagenet", input_tensor = NULL,
     input_shape = NULL, pooling = NULL, classes = 1000L, classifier_activation = "softmax",
     include_preprocessing = TRUE)
 {
-    args <- capture_args2(list(classes = as_integer, input_shape = normalize_shape))
+    args <- capture_args(list(classes = as_integer, input_shape = normalize_shape))
     model <- do.call(keras$applications$EfficientNetV2S, args)
     set_preprocessing_attributes(model, keras$applications$efficientnet_v2)
 }
@@ -2314,7 +2314,7 @@ application_inception_resnet_v2 <-
 function (include_top = TRUE, weights = "imagenet", input_tensor = NULL,
     input_shape = NULL, pooling = NULL, classes = 1000L, classifier_activation = "softmax")
 {
-    args <- capture_args2(list(classes = as_integer, input_shape = normalize_shape))
+    args <- capture_args(list(classes = as_integer, input_shape = normalize_shape))
     model <- do.call(keras$applications$InceptionResNetV2, args)
     set_preprocessing_attributes(model, keras$applications$inception_resnet_v2)
 }
@@ -2408,7 +2408,7 @@ application_inception_v3 <-
 function (include_top = TRUE, weights = "imagenet", input_tensor = NULL,
     input_shape = NULL, pooling = NULL, classes = 1000L, classifier_activation = "softmax")
 {
-    args <- capture_args2(list(classes = as_integer, input_shape = normalize_shape))
+    args <- capture_args(list(classes = as_integer, input_shape = normalize_shape))
     model <- do.call(keras$applications$InceptionV3, args)
     set_preprocessing_attributes(model, keras$applications$inception_v3)
 }
@@ -2519,7 +2519,7 @@ function (input_shape = NULL, alpha = 1, depth_multiplier = 1L,
     dropout = 0.001, include_top = TRUE, weights = "imagenet",
     input_tensor = NULL, pooling = NULL, classes = 1000L, classifier_activation = "softmax")
 {
-    args <- capture_args2(list(depth_multiplier = as_integer,
+    args <- capture_args(list(depth_multiplier = as_integer,
         classes = as_integer, input_shape = normalize_shape))
     model <- do.call(keras$applications$MobileNet, args)
     set_preprocessing_attributes(model, keras$applications$mobilenet)
@@ -2630,7 +2630,7 @@ function (input_shape = NULL, alpha = 1, include_top = TRUE,
     weights = "imagenet", input_tensor = NULL, pooling = NULL,
     classes = 1000L, classifier_activation = "softmax")
 {
-    args <- capture_args2(list(classes = as_integer, input_shape = normalize_shape))
+    args <- capture_args(list(classes = as_integer, input_shape = normalize_shape))
     model <- do.call(keras$applications$MobileNetV2, args)
     set_preprocessing_attributes(model, keras$applications$mobilenet_v2)
 }
@@ -2776,7 +2776,7 @@ function (input_shape = NULL, alpha = 1, minimalistic = FALSE,
     classes = 1000L, pooling = NULL, dropout_rate = 0.2, classifier_activation = "softmax",
     include_preprocessing = TRUE)
 {
-    args <- capture_args2(list(classes = as_integer, input_shape = normalize_shape))
+    args <- capture_args(list(classes = as_integer, input_shape = normalize_shape))
     model <- do.call(keras$applications$MobileNetV3Large, args)
     set_preprocessing_attributes(model, keras$applications$mobilenet_v3)
 }
@@ -2922,7 +2922,7 @@ function (input_shape = NULL, alpha = 1, minimalistic = FALSE,
     classes = 1000L, pooling = NULL, dropout_rate = 0.2, classifier_activation = "softmax",
     include_preprocessing = TRUE)
 {
-    args <- capture_args2(list(classes = as_integer, input_shape = normalize_shape))
+    args <- capture_args(list(classes = as_integer, input_shape = normalize_shape))
     model <- do.call(keras$applications$MobileNetV3Small, args)
     set_preprocessing_attributes(model, keras$applications$mobilenet_v3)
 }
@@ -3005,7 +3005,7 @@ application_nasnetlarge <-
 function (input_shape = NULL, include_top = TRUE, weights = "imagenet",
     input_tensor = NULL, pooling = NULL, classes = 1000L, classifier_activation = "softmax")
 {
-    args <- capture_args2(list(classes = as_integer, input_shape = normalize_shape))
+    args <- capture_args(list(classes = as_integer, input_shape = normalize_shape))
     model <- do.call(keras$applications$NASNetLarge, args)
     set_preprocessing_attributes(model, keras$applications$nasnet)
 }
@@ -3088,7 +3088,7 @@ application_nasnetmobile <-
 function (input_shape = NULL, include_top = TRUE, weights = "imagenet",
     input_tensor = NULL, pooling = NULL, classes = 1000L, classifier_activation = "softmax")
 {
-    args <- capture_args2(list(classes = as_integer))
+    args <- capture_args(list(classes = as_integer))
     model <- do.call(keras$applications$NASNetMobile, args)
     set_preprocessing_attributes(model, keras$applications$nasnet)
 }
@@ -3171,7 +3171,7 @@ application_resnet101 <-
 function (include_top = TRUE, weights = "imagenet", input_tensor = NULL,
     input_shape = NULL, pooling = NULL, classes = 1000L, classifier_activation = "softmax")
 {
-    args <- capture_args2(list(classes = as_integer, input_shape = normalize_shape))
+    args <- capture_args(list(classes = as_integer, input_shape = normalize_shape))
     model <- do.call(keras$applications$ResNet101, args)
     set_preprocessing_attributes(model, keras$applications$resnet)
 }
@@ -3254,7 +3254,7 @@ application_resnet152 <-
 function (include_top = TRUE, weights = "imagenet", input_tensor = NULL,
     input_shape = NULL, pooling = NULL, classes = 1000L, classifier_activation = "softmax")
 {
-    args <- capture_args2(list(classes = as_integer, input_shape = normalize_shape))
+    args <- capture_args(list(classes = as_integer, input_shape = normalize_shape))
     model <- do.call(keras$applications$ResNet152, args)
     set_preprocessing_attributes(model, keras$applications$resnet)
 }
@@ -3337,7 +3337,7 @@ application_resnet50 <-
 function (include_top = TRUE, weights = "imagenet", input_tensor = NULL,
     input_shape = NULL, pooling = NULL, classes = 1000L, classifier_activation = "softmax")
 {
-    args <- capture_args2(list(classes = as_integer, input_shape = normalize_shape))
+    args <- capture_args(list(classes = as_integer, input_shape = normalize_shape))
     model <- do.call(keras$applications$ResNet50, args)
     set_preprocessing_attributes(model, keras$applications$resnet)
 }
@@ -3419,7 +3419,7 @@ application_resnet101_v2 <-
 function (include_top = TRUE, weights = "imagenet", input_tensor = NULL,
     input_shape = NULL, pooling = NULL, classes = 1000L, classifier_activation = "softmax")
 {
-    args <- capture_args2(list(classes = as_integer, input_shape = normalize_shape))
+    args <- capture_args(list(classes = as_integer, input_shape = normalize_shape))
     model <- do.call(keras$applications$ResNet101V2, args)
     set_preprocessing_attributes(model, keras$applications$resnet_v2)
 }
@@ -3501,7 +3501,7 @@ application_resnet152_v2 <-
 function (include_top = TRUE, weights = "imagenet", input_tensor = NULL,
     input_shape = NULL, pooling = NULL, classes = 1000L, classifier_activation = "softmax")
 {
-    args <- capture_args2(list(classes = as_integer, input_shape = normalize_shape))
+    args <- capture_args(list(classes = as_integer, input_shape = normalize_shape))
     model <- do.call(keras$applications$ResNet152V2, args)
     set_preprocessing_attributes(model, keras$applications$resnet_v2)
 }
@@ -3583,7 +3583,7 @@ application_resnet50_v2 <-
 function (include_top = TRUE, weights = "imagenet", input_tensor = NULL,
     input_shape = NULL, pooling = NULL, classes = 1000L, classifier_activation = "softmax")
 {
-    args <- capture_args2(list(classes = as_integer, input_shape = normalize_shape))
+    args <- capture_args(list(classes = as_integer, input_shape = normalize_shape))
     model <- do.call(keras$applications$ResNet50V2, args)
     set_preprocessing_attributes(model, keras$applications$resnet_v2)
 }
@@ -3676,7 +3676,7 @@ application_vgg16 <-
 function (include_top = TRUE, weights = "imagenet", input_tensor = NULL,
     input_shape = NULL, pooling = NULL, classes = 1000L, classifier_activation = "softmax")
 {
-    args <- capture_args2(list(classes = as_integer, input_shape = normalize_shape))
+    args <- capture_args(list(classes = as_integer, input_shape = normalize_shape))
     model <- do.call(keras$applications$VGG16, args)
     set_preprocessing_attributes(model, keras$applications$vgg16)
 }
@@ -3769,7 +3769,7 @@ application_vgg19 <-
 function (include_top = TRUE, weights = "imagenet", input_tensor = NULL,
     input_shape = NULL, pooling = NULL, classes = 1000L, classifier_activation = "softmax")
 {
-    args <- capture_args2(list(classes = as_integer))
+    args <- capture_args(list(classes = as_integer))
     model <- do.call(keras$applications$VGG19, args)
     set_preprocessing_attributes(model, keras$applications$vgg19)
 }
@@ -3858,7 +3858,7 @@ application_xception <-
 function (include_top = TRUE, weights = "imagenet", input_tensor = NULL,
     input_shape = NULL, pooling = NULL, classes = 1000L, classifier_activation = "softmax")
 {
-    args <- capture_args2(list(classes = as_integer, input_shape = normalize_shape))
+    args <- capture_args(list(classes = as_integer, input_shape = normalize_shape))
     model <- do.call(keras$applications$Xception, args)
     set_preprocessing_attributes(model, keras$applications$xception)
 }

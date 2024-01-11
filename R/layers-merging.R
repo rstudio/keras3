@@ -48,7 +48,7 @@
 layer_add <-
 function (inputs, ...)
 {
-    args <- capture_args2(list(input_shape = normalize_shape,
+    args <- capture_args(list(input_shape = normalize_shape,
         batch_size = as_integer, batch_input_shape = normalize_shape),
         ignore = c("...", "inputs"))
     dots <- split_dots_named_unnamed(list(...))
@@ -111,7 +111,7 @@ function (inputs, ...)
 layer_average <-
 function (inputs, ...)
 {
-    args <- capture_args2(list(input_shape = normalize_shape,
+    args <- capture_args(list(input_shape = normalize_shape,
         batch_size = as_integer, batch_input_shape = normalize_shape),
         ignore = c("...", "inputs"))
     dots <- split_dots_named_unnamed(list(...))
@@ -172,7 +172,7 @@ function (inputs, ...)
 layer_concatenate <-
 function (inputs, ..., axis = -1L)
 {
-    args <- capture_args2(list(axis = as_axis, input_shape = normalize_shape,
+    args <- capture_args(list(axis = as_axis, input_shape = normalize_shape,
         batch_size = as_integer, batch_input_shape = normalize_shape),
         ignore = c("...", "inputs"))
     dots <- split_dots_named_unnamed(list(...))
@@ -254,7 +254,7 @@ function (inputs, ..., axis = -1L)
 layer_dot <-
 function (inputs, ..., axes, normalize = FALSE)
 {
-    args <- capture_args2(list(axes = as_axis, input_shape = normalize_shape,
+    args <- capture_args(list(axes = as_axis, input_shape = normalize_shape,
         batch_size = as_integer, batch_input_shape = normalize_shape),
         ignore = c("...", "inputs"))
     dots <- split_dots_named_unnamed(list(...))
@@ -315,7 +315,7 @@ function (inputs, ..., axes, normalize = FALSE)
 layer_maximum <-
 function (inputs, ...)
 {
-    args <- capture_args2(list(input_shape = normalize_shape,
+    args <- capture_args(list(input_shape = normalize_shape,
         batch_size = as_integer, batch_input_shape = normalize_shape),
         ignore = c("...", "inputs"))
     dots <- split_dots_named_unnamed(list(...))
@@ -376,7 +376,7 @@ function (inputs, ...)
 layer_minimum <-
 function (inputs, ...)
 {
-    args <- capture_args2(list(input_shape = normalize_shape,
+    args <- capture_args(list(input_shape = normalize_shape,
         batch_size = as_integer, batch_input_shape = normalize_shape),
         ignore = c("...", "inputs"))
     dots <- split_dots_named_unnamed(list(...))
@@ -437,7 +437,7 @@ function (inputs, ...)
 layer_multiply <-
 function (inputs, ...)
 {
-    args <- capture_args2(list(input_shape = normalize_shape,
+    args <- capture_args(list(input_shape = normalize_shape,
         batch_size = as_integer, batch_input_shape = normalize_shape),
         ignore = c("...", "inputs"))
     dots <- split_dots_named_unnamed(list(...))
@@ -499,7 +499,7 @@ function (inputs, ...)
 layer_subtract <-
 function (inputs, ...)
 {
-    args <- capture_args2(list(input_shape = normalize_shape,
+    args <- capture_args(list(input_shape = normalize_shape,
         batch_size = as_integer, batch_input_shape = normalize_shape),
         ignore = c("...", "inputs"))
     dots <- split_dots_named_unnamed(list(...))

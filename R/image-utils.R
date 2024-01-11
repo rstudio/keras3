@@ -33,7 +33,7 @@ image_array_save <-
   function (x, path, data_format = NULL, file_format = NULL, scale = TRUE,
             ...)
   {
-    args <- capture_args2(NULL)
+    args <- capture_args()
     do.call(keras$utils$save_img, args)
   }
 
@@ -79,7 +79,7 @@ image_array_save <-
 image_from_array <-
   function (x, data_format = NULL, scale = TRUE, dtype = NULL)
   {
-    args <- capture_args2(NULL)
+    args <- capture_args()
     do.call(keras$utils$array_to_img, args)
   }
 
@@ -142,7 +142,7 @@ image_load <-
   function (path, color_mode = "rgb", target_size = NULL, interpolation = "nearest",
             keep_aspect_ratio = FALSE)
   {
-    args <- capture_args2(NULL)
+    args <- capture_args()
     do.call(keras$utils$load_img, args)
   }
 
@@ -187,6 +187,6 @@ image_load <-
 image_to_array <-
   function (img, data_format = NULL, dtype = NULL)
   {
-    args <- capture_args2(NULL)
+    args <- capture_args()
     do.call(keras$utils$img_to_array, args)
   }

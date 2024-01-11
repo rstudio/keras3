@@ -34,7 +34,7 @@
 constraint_maxnorm <-
 function (max_value = 2L, axis = 1L)
 {
-    args <- capture_args2(list(max_value = as_integer, axis = as_axis))
+    args <- capture_args(list(max_value = as_integer, axis = as_axis))
     do.call(keras$constraints$MaxNorm, args)
 }
 
@@ -82,7 +82,7 @@ function (max_value = 2L, axis = 1L)
 constraint_minmaxnorm <-
 function (min_value = 0, max_value = 1, rate = 1, axis = 1L)
 {
-    args <- capture_args2(list(axis = as_axis))
+    args <- capture_args(list(axis = as_axis))
     do.call(keras$constraints$MinMaxNorm, args)
 }
 
@@ -98,7 +98,7 @@ function (min_value = 0, max_value = 1, rate = 1, axis = 1L)
 constraint_nonneg <-
 function ()
 {
-    args <- capture_args2(NULL)
+    args <- capture_args()
     do.call(keras$constraints$NonNeg, args)
 }
 
@@ -127,7 +127,7 @@ function ()
 constraint_unitnorm <-
 function (axis = 1L)
 {
-    args <- capture_args2(list(axis = as_axis))
+    args <- capture_args(list(axis = as_axis))
     do.call(keras$constraints$UnitNorm, args)
 }
 

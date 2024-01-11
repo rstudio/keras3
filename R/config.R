@@ -26,7 +26,7 @@
 config_backend <-
 function ()
 {
-    args <- capture_args2(NULL)
+    args <- capture_args()
     do.call(keras$config$backend, args)
 }
 
@@ -54,7 +54,7 @@ function ()
 config_epsilon <-
 function ()
 {
-    args <- capture_args2(NULL)
+    args <- capture_args()
     do.call(keras$config$epsilon, args)
 }
 
@@ -122,7 +122,7 @@ function(x) {
 config_image_data_format <-
 function ()
 {
-    args <- capture_args2(NULL)
+    args <- capture_args()
     do.call(keras$config$image_data_format, args)
 }
 
@@ -160,7 +160,7 @@ function ()
 config_set_epsilon <-
 function (value)
 {
-    args <- capture_args2(NULL)
+    args <- capture_args()
     do.call(keras$config$set_epsilon, args)
 }
 
@@ -208,7 +208,7 @@ function (value)
 config_set_floatx <-
 function (value)
 {
-    args <- capture_args2(NULL)
+    args <- capture_args()
     do.call(keras$config$set_floatx, args)
 }
 
@@ -247,7 +247,7 @@ function (value)
 config_set_image_data_format <-
 function (data_format)
 {
-    args <- capture_args2(NULL)
+    args <- capture_args()
     do.call(keras$config$set_image_data_format, args)
 }
 
@@ -263,7 +263,7 @@ function (data_format)
 config_enable_unsafe_deserialization <-
 function ()
 {
-    args <- capture_args2(NULL)
+    args <- capture_args()
     do.call(keras$config$enable_unsafe_deserialization, args)
 }
 
@@ -285,7 +285,7 @@ function ()
 config_disable_interactive_logging <-
 function ()
 {
-    args <- capture_args2(NULL)
+    args <- capture_args()
     do.call(keras$config$disable_interactive_logging, args)
 }
 
@@ -307,7 +307,7 @@ function ()
 config_enable_interactive_logging <-
 function ()
 {
-    args <- capture_args2(NULL)
+    args <- capture_args()
     do.call(keras$config$enable_interactive_logging, args)
 }
 
@@ -333,7 +333,7 @@ function ()
 config_is_interactive_logging_enabled <-
 function ()
 {
-    args <- capture_args2(NULL)
+    args <- capture_args()
     do.call(keras$config$is_interactive_logging_enabled, args)
 }
 
@@ -365,7 +365,7 @@ function ()
 config_disable_traceback_filtering <-
 function ()
 {
-    args <- capture_args2(NULL)
+    args <- capture_args()
     do.call(keras$config$disable_traceback_filtering, args)
 }
 
@@ -397,7 +397,7 @@ function ()
 config_enable_traceback_filtering <-
 function ()
 {
-    args <- capture_args2(NULL)
+    args <- capture_args()
     do.call(keras$config$enable_traceback_filtering, args)
 }
 
@@ -433,6 +433,6 @@ function ()
 config_is_traceback_filtering_enabled <-
 function ()
 {
-    args <- capture_args2(NULL)
+    args <- capture_args()
     do.call(keras$config$is_traceback_filtering_enabled, args)
 }

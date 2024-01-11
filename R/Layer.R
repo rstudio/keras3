@@ -609,7 +609,7 @@ function(classname,
   # convert wrapper into a composing layer rapper
   prepend(formals(wrapper)) <- alist(object = )
   body(wrapper) <-  bquote({
-    args <- capture_args2(ignore = "object",
+    args <- capture_args(ignore = "object",
                           enforce_all_dots_named = FALSE)
     create_layer(.(as.symbol(classname)), object, args)
   })

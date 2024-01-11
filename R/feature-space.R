@@ -246,7 +246,7 @@ function (object, features, output_mode = "concat", crosses = NULL,
           crossing_dim = 32L, hashing_dim = 32L, num_discretization_bins = 32L,
           name = NULL, feature_names = NULL)
 {
-  args <- capture_args2(list(crossing_dim = as_integer, hashing_dim = as_integer,
+  args <- capture_args(list(crossing_dim = as_integer, hashing_dim = as_integer,
                              num_discretization_bins = as_integer, features = as.list),
                         ignore = "object")
   create_layer(keras$utils$FeatureSpace, object, args)
@@ -258,7 +258,7 @@ function (object, features, output_mode = "concat", crosses = NULL,
 #' @tether keras.utils.FeatureSpace.cross
 feature_cross <-
 function(feature_names, crossing_dim, output_mode = "one_hot") {
-  args <- capture_args2(list(crossing_dim = as_integer))
+  args <- capture_args(list(crossing_dim = as_integer))
   keras$utils$FeatureSpace$cross(!!!args)
 }
 
@@ -269,7 +269,7 @@ function(feature_names, crossing_dim, output_mode = "one_hot") {
 #' @tether keras.utils.FeatureSpace.feature
 feature_custom <-
 function(dtype, preprocessor, output_mode) {
-  args <- capture_args2()
+  args <- capture_args()
   keras$utils$FeatureSpace$feature(!!!args)
 }
 
@@ -278,7 +278,7 @@ function(dtype, preprocessor, output_mode) {
 #' @tether keras.utils.FeatureSpace.float
 feature_float <-
 function(name = NULL) {
-  args <- capture_args2()
+  args <- capture_args()
   keras$utils$FeatureSpace$float(!!!args)
 }
 
@@ -288,7 +288,7 @@ function(name = NULL) {
 #' @tether keras.utils.FeatureSpace.float_rescaled
 feature_float_rescaled <-
 function (scale = 1.0, offset = 0.0, name = NULL) {
-  args <- capture_args2()
+  args <- capture_args()
   keras$utils$FeatureSpace$float_rescaled(!!!args)
 }
 
@@ -297,7 +297,7 @@ function (scale = 1.0, offset = 0.0, name = NULL) {
 #' @tether keras.utils.FeatureSpace.float_normalized
 feature_float_normalized <-
 function(name = NULL) {
-  args <- capture_args2()
+  args <- capture_args()
   keras$utils$FeatureSpace$float_normalized(!!!args)
 }
 
@@ -307,7 +307,7 @@ function(name = NULL) {
 #' @tether keras.utils.FeatureSpace.float_discretized
 feature_float_discretized <-
 function(num_bins, bin_boundaries = NULL, output_mode = "one_hot", name = NULL) {
-  args <- capture_args2(list(num_bins = as_integer))
+  args <- capture_args(list(num_bins = as_integer))
   keras$utils$FeatureSpace$float_discretized(!!!args)
 }
 
@@ -320,7 +320,7 @@ function(max_tokens = NULL,
          num_oov_indices = 1,
          output_mode = "one_hot",
          name = NULL) {
-  args <- capture_args2(list(max_tokens = as_integer, num_oov_indices = as_integer))
+  args <- capture_args(list(max_tokens = as_integer, num_oov_indices = as_integer))
   keras$utils$FeatureSpace$integer_categorical(!!!args)
 }
 
@@ -332,7 +332,7 @@ function(max_tokens = NULL,
          num_oov_indices = 1,
          output_mode = "one_hot",
          name = NULL) {
-  args <- capture_args2(list(max_tokens = as_integer, num_oov_indices = as_integer))
+  args <- capture_args(list(max_tokens = as_integer, num_oov_indices = as_integer))
   keras$utils$FeatureSpace$string_categorical(!!!args)
 }
 
@@ -343,7 +343,7 @@ feature_string_hashed <-
 function(num_bins,
          output_mode = "one_hot",
          name = NULL) {
-  args <- capture_args2(list(num_bins = as_integer))
+  args <- capture_args(list(num_bins = as_integer))
   keras$utils$FeatureSpace$string_hashed(!!!args)
 }
 
@@ -354,6 +354,6 @@ feature_integer_hashed <-
 function(num_bins,
          output_mode = "one_hot",
          name = NULL) {
-  args <- capture_args2(list(num_bins = as_integer))
+  args <- capture_args(list(num_bins = as_integer))
   keras$utils$FeatureSpace$integer_hashed(!!!args)
 }

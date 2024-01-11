@@ -444,7 +444,7 @@ as_py_function <- function(fn, default_name = "r_func") {
     default_name
 
   # TODO: try to generate a pretty name using deparse(substitute(x)) would need
-  # to update capture_args2() to construct calls to transformers so that
+  # to update capture_args() to construct calls to transformers so that
   # substitute will work here.
   # if(is.null(name)) { name <- as_py_name(deparse1(substitute(x)))}
   py_func2(fn, convert = TRUE, name = name)
@@ -453,18 +453,19 @@ as_py_function <- function(fn, default_name = "r_func") {
 
 
 # ---- capture_args ----
-capture_args <- function(cl, modifiers = NULL, ignore = NULL,
-                         envir = parent.frame(), fn = sys.function(-1)) {
+# capture_args_v1 <-
+function(cl, modifiers = NULL, ignore = NULL,
+         envir = parent.frame(), fn = sys.function(-1)) {
 
   ## bug: match.call() resolves incorrectly if dots are from not the default sys.parent()
   ## e.g, this fails if dots originate from the callers caller:
   #    cl <- eval(quote(match.call()), parent.frame())
   ## workaround: caller must call match.call() from the correct frame
 
-  ## note: capture_args() must always be called at the top level of the intended function body.
+  ## note: capture_args_v1() must always be called at the top level of the intended function body.
   ## sys.function(-1) resolves to the incorrect function if the  capture_args()
   ## call is itself a promise in another call. E.g.,:
-  ##   do.call(foo, capture_args(match.call())) fails because fn resolves to do.call()
+  ##  do.call(foo, capture_args_v1(match.call())) fails because fn resolves to do.call()
 
   fn_arg_nms <- names(formals(fn))
   known_args <- intersect(names(cl), fn_arg_nms)
@@ -495,8 +496,8 @@ capture_args <- function(cl, modifiers = NULL, ignore = NULL,
 
 
 #' @importFrom rlang list2
-capture_args2 <- function(modifiers = NULL, ignore = NULL, force = NULL,
-                          enforce_all_dots_named = TRUE) {
+capture_args <- function(modifiers = NULL, ignore = NULL, force = NULL,
+                         enforce_all_dots_named = TRUE) {
   cl <- sys.call(-1L)
   envir <- parent.frame(1L)
   fn <- sys.function(-1L)
@@ -529,7 +530,7 @@ capture_args2 <- function(modifiers = NULL, ignore = NULL, force = NULL,
   names(known_args) <- known_args
 
   if ("..." %in% fn_arg_nms && !"..." %in% ignore) {
-    if(enforce_all_dots_named)
+    if (enforce_all_dots_named)
       assert_all_dots_named(envir, cl)
     # match.call already drops missing args that match to known args, but it
     # doesn't protect from missing args that matched into ...
@@ -566,7 +567,7 @@ capture_args2 <- function(modifiers = NULL, ignore = NULL, force = NULL,
 capture_args3 <-
   function(modifiers = NULL, ignore = NULL) {
     # currently unused
-    # like capture_args2(), but will also unpack `!!!args`
+    # like capture_args(), but will also unpack `!!!args`
     # e.g.,
     # constraints <- list(kernel_constraint = constraint_unitnorm(),
     #                     bias_constraint = constraint_unitnorm())

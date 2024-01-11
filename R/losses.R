@@ -118,7 +118,7 @@ loss_binary_crossentropy <-
 function (y_true, y_pred, from_logits = FALSE, label_smoothing = 0,
     axis = -1L, ..., reduction = "sum_over_batch_size", name = "binary_crossentropy")
 {
-    args <- capture_args2(list(axis = as_axis, y_true = function (x)
+    args <- capture_args(list(axis = as_axis, y_true = function (x)
     if (inherits(x, "python.builtin.object"))
         x
     else np_array(x), y_pred = function (x)
@@ -330,7 +330,7 @@ function (y_true, y_pred, apply_class_balancing = FALSE,
     alpha = 0.25, gamma = 2, from_logits = FALSE, label_smoothing = 0,
     axis = -1L, ..., reduction = "sum_over_batch_size", name = "binary_focal_crossentropy")
 {
-    args <- capture_args2(list(axis = as_axis, y_true = function (x)
+    args <- capture_args(list(axis = as_axis, y_true = function (x)
     if (inherits(x, "python.builtin.object"))
         x
     else np_array(x), y_pred = function (x)
@@ -440,7 +440,7 @@ loss_categorical_crossentropy <-
 function (y_true, y_pred, from_logits = FALSE, label_smoothing = 0,
     axis = -1L, ..., reduction = "sum_over_batch_size", name = "categorical_crossentropy")
 {
-    args <- capture_args2(list(axis = as_axis, y_true = function (x)
+    args <- capture_args(list(axis = as_axis, y_true = function (x)
     if (inherits(x, "python.builtin.object"))
         x
     else np_array(x), y_pred = function (x)
@@ -597,7 +597,7 @@ function (y_true, y_pred, alpha = 0.25, gamma = 2,
     from_logits = FALSE, label_smoothing = 0, axis = -1L, ...,
     reduction = "sum_over_batch_size", name = "categorical_focal_crossentropy")
 {
-    args <- capture_args2(list(axis = as_axis, y_true = function (x)
+    args <- capture_args(list(axis = as_axis, y_true = function (x)
     if (inherits(x, "python.builtin.object"))
         x
     else np_array(x), y_pred = function (x)
@@ -662,7 +662,7 @@ loss_categorical_hinge <-
 function (y_true, y_pred, ..., reduction = "sum_over_batch_size",
     name = "categorical_hinge")
 {
-    args <- capture_args2(list(y_true = function (x)
+    args <- capture_args(list(y_true = function (x)
     if (inherits(x, "python.builtin.object"))
         x
     else np_array(x), y_pred = function (x)
@@ -735,7 +735,7 @@ loss_cosine_similarity <-
 function (y_true, y_pred, axis = -1L, ..., reduction = "sum_over_batch_size",
     name = "cosine_similarity")
 {
-    args <- capture_args2(list(axis = as_axis, y_true = function (x)
+    args <- capture_args(list(axis = as_axis, y_true = function (x)
     if (inherits(x, "python.builtin.object"))
         x
     else np_array(x), y_pred = function (x)
@@ -802,7 +802,7 @@ loss_hinge <-
 function (y_true, y_pred, ..., reduction = "sum_over_batch_size",
     name = "hinge")
 {
-    args <- capture_args2(list(y_true = function (x)
+    args <- capture_args(list(y_true = function (x)
     if (inherits(x, "python.builtin.object"))
         x
     else np_array(x), y_pred = function (x)
@@ -874,7 +874,7 @@ loss_huber <-
 function (y_true, y_pred, delta = 1, ..., reduction = "sum_over_batch_size",
     name = "huber_loss")
 {
-    args <- capture_args2(list(y_true = function (x)
+    args <- capture_args(list(y_true = function (x)
     if (inherits(x, "python.builtin.object"))
         x
     else np_array(x), y_pred = function (x)
@@ -936,7 +936,7 @@ loss_kl_divergence <-
 function (y_true, y_pred, ..., reduction = "sum_over_batch_size",
     name = "kl_divergence")
 {
-    args <- capture_args2(list(y_true = function (x)
+    args <- capture_args(list(y_true = function (x)
     if (inherits(x, "python.builtin.object"))
         x
     else np_array(x), y_pred = function (x)
@@ -1002,7 +1002,7 @@ loss_log_cosh <-
 function (y_true, y_pred, ..., reduction = "sum_over_batch_size",
     name = "log_cosh")
 {
-    args <- capture_args2(list(y_true = function (x)
+    args <- capture_args(list(y_true = function (x)
     if (inherits(x, "python.builtin.object"))
         x
     else np_array(x), y_pred = function (x)
@@ -1063,7 +1063,7 @@ loss_mean_absolute_error <-
 function (y_true, y_pred, ..., reduction = "sum_over_batch_size",
     name = "mean_absolute_error")
 {
-    args <- capture_args2(list(y_true = function (x)
+    args <- capture_args(list(y_true = function (x)
     if (inherits(x, "python.builtin.object"))
         x
     else np_array(x), y_pred = function (x)
@@ -1128,7 +1128,7 @@ loss_mean_absolute_percentage_error <-
 function (y_true, y_pred, ..., reduction = "sum_over_batch_size",
     name = "mean_absolute_percentage_error")
 {
-    args <- capture_args2(list(y_true = function (x)
+    args <- capture_args(list(y_true = function (x)
     if (inherits(x, "python.builtin.object"))
         x
     else np_array(x), y_pred = function (x)
@@ -1189,7 +1189,7 @@ loss_mean_squared_error <-
 function (y_true, y_pred, ..., reduction = "sum_over_batch_size",
     name = "mean_squared_error")
 {
-    args <- capture_args2(list(y_true = function (x)
+    args <- capture_args(list(y_true = function (x)
     if (inherits(x, "python.builtin.object"))
         x
     else np_array(x), y_pred = function (x)
@@ -1254,7 +1254,7 @@ loss_mean_squared_logarithmic_error <-
 function (y_true, y_pred, ..., reduction = "sum_over_batch_size",
     name = "mean_squared_logarithmic_error")
 {
-    args <- capture_args2(list(y_true = function (x)
+    args <- capture_args(list(y_true = function (x)
     if (inherits(x, "python.builtin.object"))
         x
     else np_array(x), y_pred = function (x)
@@ -1316,7 +1316,7 @@ loss_poisson <-
 function (y_true, y_pred, ..., reduction = "sum_over_batch_size",
     name = "poisson")
 {
-    args <- capture_args2(list(y_true = function (x)
+    args <- capture_args(list(y_true = function (x)
     if (inherits(x, "python.builtin.object"))
         x
     else np_array(x), y_pred = function (x)
@@ -1433,7 +1433,7 @@ loss_sparse_categorical_crossentropy <-
 function (y_true, y_pred, from_logits = FALSE, ignore_class = NULL,
     axis = -1L, ..., reduction = "sum_over_batch_size", name = "sparse_categorical_crossentropy")
 {
-    args <- capture_args2(list(ignore_class = as_integer, y_true = function (x)
+    args <- capture_args(list(ignore_class = as_integer, y_true = function (x)
     if (inherits(x, "python.builtin.object"))
         x
     else np_array(x), y_pred = function (x)
@@ -1499,7 +1499,7 @@ loss_squared_hinge <-
 function (y_true, y_pred, ..., reduction = "sum_over_batch_size",
     name = "squared_hinge")
 {
-    args <- capture_args2(list(y_true = function (x)
+    args <- capture_args(list(y_true = function (x)
     if (inherits(x, "python.builtin.object"))
         x
     else np_array(x), y_pred = function (x)
@@ -1521,7 +1521,7 @@ function (y_true, y_pred, ..., reduction = "sum_over_batch_size",
 py_to_r_wrapper.keras.src.losses.loss.Loss <- function(x) {
   force(x)
   as.function.default(c(formals(x), quote({
-    args <- capture_args2(list(y_true = as_py_array,
+    args <- capture_args(list(y_true = as_py_array,
                                y_pred = as_py_array,
                                sample_weight = as_py_array))
     do.call(x, args)

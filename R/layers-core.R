@@ -85,7 +85,7 @@ function (object, units, activation = NULL, use_bias = TRUE,
     kernel_regularizer = NULL, bias_regularizer = NULL, activity_regularizer = NULL,
     kernel_constraint = NULL, bias_constraint = NULL, ...)
 {
-    args <- capture_args2(list(units = as_integer, input_shape = normalize_shape,
+    args <- capture_args(list(units = as_integer, input_shape = normalize_shape,
         batch_size = as_integer, batch_input_shape = normalize_shape),
         ignore = "object")
     create_layer(keras$layers$Dense, object, args)
@@ -214,7 +214,7 @@ function (object, equation, output_shape, activation = NULL,
     bias_initializer = "zeros", kernel_regularizer = NULL, bias_regularizer = NULL,
     kernel_constraint = NULL, bias_constraint = NULL, ...)
 {
-    args <- capture_args2(list(input_shape = normalize_shape,
+    args <- capture_args(list(input_shape = normalize_shape,
         batch_size = as_integer, batch_input_shape = normalize_shape,
         output_shape = normalize_shape), ignore = "object")
     create_layer(keras$layers$EinsumDense, object, args)
@@ -299,7 +299,7 @@ function (object, input_dim, output_dim, embeddings_initializer = "uniform",
     embeddings_regularizer = NULL, embeddings_constraint = NULL,
     mask_zero = FALSE, ...)
 {
-    args <- capture_args2(list(input_dim = as_integer, output_dim = as_integer,
+    args <- capture_args(list(input_dim = as_integer, output_dim = as_integer,
         input_shape = normalize_shape, batch_size = as_integer,
         batch_input_shape = normalize_shape, input_length = as_integer),
         ignore = "object")
@@ -328,7 +328,7 @@ function (object, input_dim, output_dim, embeddings_initializer = "uniform",
 layer_identity <-
 function (object, ...)
 {
-    args <- capture_args2(list(input_shape = normalize_shape,
+    args <- capture_args(list(input_shape = normalize_shape,
         batch_size = as_integer, batch_input_shape = normalize_shape),
         ignore = "object")
     create_layer(keras$layers$Identity, object, args)
@@ -404,7 +404,7 @@ layer_input <-
 function (shape = NULL, batch_size = NULL, dtype = NULL, sparse = NULL,
     batch_shape = NULL, name = NULL, tensor = NULL)
 {
-    args <- capture_args2(list(shape = normalize_shape, batch_size = as_integer,
+    args <- capture_args(list(shape = normalize_shape, batch_size = as_integer,
         input_shape = normalize_shape, batch_input_shape = normalize_shape,
         batch_shape = normalize_shape))
     do.call(keras$layers$Input, args)
@@ -474,7 +474,7 @@ layer_lambda <-
 function (object, f, output_shape = NULL, mask = NULL, arguments = NULL,
     ...)
 {
-    args <- capture_args2(list(input_shape = normalize_shape,
+    args <- capture_args(list(input_shape = normalize_shape,
         batch_size = as_integer, batch_input_shape = normalize_shape,
         output_shape = normalize_shape), ignore = "object")
     names(args)[match("f", names(args))] <- "function"
@@ -539,7 +539,7 @@ function (object, f, output_shape = NULL, mask = NULL, arguments = NULL,
 layer_masking <-
 function (object, mask_value = 0, ...)
 {
-    args <- capture_args2(list(input_shape = normalize_shape,
+    args <- capture_args(list(input_shape = normalize_shape,
         batch_size = as_integer, batch_input_shape = normalize_shape),
         ignore = "object")
     create_layer(keras$layers$Masking, object, args)

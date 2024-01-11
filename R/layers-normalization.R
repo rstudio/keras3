@@ -151,7 +151,7 @@ function (object, axis = -1L, momentum = 0.99, epsilon = 0.001,
     gamma_regularizer = NULL, beta_constraint = NULL, gamma_constraint = NULL,
     synchronized = FALSE, ...)
 {
-    args <- capture_args2(list(axis = as_axis, input_shape = normalize_shape,
+    args <- capture_args(list(axis = as_axis, input_shape = normalize_shape,
         batch_size = as_integer, batch_input_shape = normalize_shape),
         ignore = "object")
     create_layer(keras$layers$BatchNormalization, object, args)
@@ -255,7 +255,7 @@ function (object, groups = 32L, axis = -1L, epsilon = 0.001,
     gamma_initializer = "ones", beta_regularizer = NULL, gamma_regularizer = NULL,
     beta_constraint = NULL, gamma_constraint = NULL, ...)
 {
-    args <- capture_args2(list(groups = as_integer, axis = as_axis,
+    args <- capture_args(list(groups = as_integer, axis = as_axis,
         input_shape = normalize_shape, batch_size = as_integer,
         batch_input_shape = normalize_shape), ignore = "object")
     create_layer(keras$layers$GroupNormalization, object, args)
@@ -388,7 +388,7 @@ function (object, axis = -1L, epsilon = 0.001, center = TRUE,
     gamma_initializer = "ones", beta_regularizer = NULL, gamma_regularizer = NULL,
     beta_constraint = NULL, gamma_constraint = NULL, ...)
 {
-    args <- capture_args2(list(axis = as_axis, input_shape = normalize_shape,
+    args <- capture_args(list(axis = as_axis, input_shape = normalize_shape,
         batch_size = as_integer, batch_input_shape = normalize_shape),
         ignore = "object")
     create_layer(keras$layers$LayerNormalization, object, args)
@@ -447,7 +447,7 @@ function (object, axis = -1L, epsilon = 0.001, center = TRUE,
 layer_spectral_normalization <-
 function (object, layer, power_iterations = 1L, ...)
 {
-    args <- capture_args2(list(power_iterations = as_integer,
+    args <- capture_args(list(power_iterations = as_integer,
         input_shape = normalize_shape, batch_size = as_integer,
         batch_input_shape = normalize_shape), ignore = "object")
     create_layer(keras$layers$SpectralNormalization, object,
@@ -491,7 +491,7 @@ function (object, layer, power_iterations = 1L, ...)
 layer_unit_normalization <-
 function (object, axis = -1L, ...)
 {
-    args <- capture_args2(list(axis = as_axis, input_shape = normalize_shape,
+    args <- capture_args(list(axis = as_axis, input_shape = normalize_shape,
         batch_size = as_integer, batch_input_shape = normalize_shape),
         ignore = "object")
     create_layer(keras$layers$UnitNormalization, object, args)

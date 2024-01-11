@@ -34,7 +34,7 @@
 layer_activity_regularization <-
 function (object, l1 = 0, l2 = 0, ...)
 {
-    args <- capture_args2(list(input_shape = normalize_shape,
+    args <- capture_args(list(input_shape = normalize_shape,
         batch_size = as_integer, batch_input_shape = normalize_shape),
         ignore = "object")
     create_layer(keras$layers$ActivityRegularization, object,
@@ -95,7 +95,7 @@ function (object, l1 = 0, l2 = 0, ...)
 layer_dropout <-
 function (object, rate, noise_shape = NULL, seed = NULL, ...)
 {
-    args <- capture_args2(list(noise_shape = as_integer, seed = as_integer,
+    args <- capture_args(list(noise_shape = as_integer, seed = as_integer,
         input_shape = normalize_shape, batch_size = as_integer,
         batch_input_shape = normalize_shape), ignore = "object")
     create_layer(keras$layers$Dropout, object, args)
@@ -136,7 +136,7 @@ function (object, rate, noise_shape = NULL, seed = NULL, ...)
 layer_gaussian_dropout <-
 function (object, rate, seed = NULL, ...)
 {
-    args <- capture_args2(list(seed = as_integer, input_shape = normalize_shape,
+    args <- capture_args(list(seed = as_integer, input_shape = normalize_shape,
         batch_size = as_integer, batch_input_shape = normalize_shape),
         ignore = "object")
     create_layer(keras$layers$GaussianDropout, object, args)
@@ -180,7 +180,7 @@ function (object, rate, seed = NULL, ...)
 layer_gaussian_noise <-
 function (object, stddev, seed = NULL, ...)
 {
-    args <- capture_args2(list(seed = as_integer, input_shape = normalize_shape,
+    args <- capture_args(list(seed = as_integer, input_shape = normalize_shape,
         batch_size = as_integer, batch_input_shape = normalize_shape),
         ignore = "object")
     create_layer(keras$layers$GaussianNoise, object, args)
@@ -239,7 +239,7 @@ function (object, stddev, seed = NULL, ...)
 layer_spatial_dropout_1d <-
 function (object, rate, seed = NULL, name = NULL, dtype = NULL)
 {
-    args <- capture_args2(list(seed = as_integer, input_shape = normalize_shape,
+    args <- capture_args(list(seed = as_integer, input_shape = normalize_shape,
         batch_size = as_integer, batch_input_shape = normalize_shape),
         ignore = "object")
     create_layer(keras$layers$SpatialDropout1D, object, args)
@@ -310,7 +310,7 @@ layer_spatial_dropout_2d <-
 function (object, rate, data_format = NULL, seed = NULL, name = NULL,
     dtype = NULL)
 {
-    args <- capture_args2(list(seed = as_integer, input_shape = normalize_shape,
+    args <- capture_args(list(seed = as_integer, input_shape = normalize_shape,
         batch_size = as_integer, batch_input_shape = normalize_shape),
         ignore = "object")
     create_layer(keras$layers$SpatialDropout2D, object, args)
@@ -381,7 +381,7 @@ layer_spatial_dropout_3d <-
 function (object, rate, data_format = NULL, seed = NULL, name = NULL,
     dtype = NULL)
 {
-    args <- capture_args2(list(seed = as_integer, input_shape = normalize_shape,
+    args <- capture_args(list(seed = as_integer, input_shape = normalize_shape,
         batch_size = as_integer, batch_input_shape = normalize_shape),
         ignore = "object")
     create_layer(keras$layers$SpatialDropout3D, object, args)

@@ -218,7 +218,7 @@ keras$ops$is_tensor(x)
 op_scatter <-
 function (indices, values, shape)
 {
-    args <- capture_args2(list(indices = as_index, shape = normalize_shape))
+    args <- capture_args(list(indices = as_index, shape = normalize_shape))
     do.call(keras$ops$scatter, args)
 }
 
@@ -283,7 +283,7 @@ function (indices, values, shape)
 op_scatter_update <-
 function (inputs, indices, updates)
 {
-    args <- capture_args2(list(indices = as_index))
+    args <- capture_args(list(indices = as_index))
     do.call(keras$ops$scatter_update, args)
 }
 
@@ -367,7 +367,7 @@ function (x)
 op_slice <-
 function (inputs, start_indices, shape)
 {
-    args <- capture_args2(list(shape = normalize_shape, start_indices = as_index))
+    args <- capture_args(list(shape = normalize_shape, start_indices = as_index))
     do.call(keras$ops$slice, args)
 }
 
@@ -416,7 +416,7 @@ function (inputs, start_indices, shape)
 op_slice_update <-
 function (inputs, start_indices, updates)
 {
-    args <- capture_args2(list(start_indices = as_index))
+    args <- capture_args(list(start_indices = as_index))
     do.call(keras$ops$slice_update, args)
 }
 
@@ -495,7 +495,7 @@ keras$ops$stop_gradient(variable)
 op_unstack <-
 function (x, num = NULL, axis = 1L)
 {
-    args <- capture_args2(list(axis = as_axis))
+    args <- capture_args(list(axis = as_axis))
     do.call(keras$ops$unstack, args)
 }
 
@@ -674,7 +674,7 @@ keras$ops$erf(x)
 op_extract_sequences <-
 function (x, sequence_length, sequence_stride)
 {
-    args <- capture_args2(list(sequence_length = as_integer,
+    args <- capture_args(list(sequence_length = as_integer,
         sequence_stride = as_integer))
     do.call(keras$ops$extract_sequences, args)
 }
@@ -782,7 +782,7 @@ keras$ops$fft2(x)
 op_in_top_k <-
 function (targets, predictions, k)
 {
-    args <- capture_args2(list(k = as_integer))
+    args <- capture_args(list(k = as_integer))
     do.call(keras$ops$in_top_k, args)
 }
 
@@ -837,7 +837,7 @@ function (targets, predictions, k)
 op_irfft <-
 function (x, fft_length = NULL)
 {
-    args <- capture_args2(list(fft_length = as_integer))
+    args <- capture_args(list(fft_length = as_integer))
     do.call(keras$ops$irfft, args)
 }
 
@@ -900,7 +900,7 @@ op_istft <-
 function (x, sequence_length, sequence_stride, fft_length, length = NULL,
     window = "hann", center = TRUE)
 {
-    args <- capture_args2(list(sequence_length = as_integer,
+    args <- capture_args(list(sequence_length = as_integer,
         sequence_stride = as_integer, fft_length = as_integer,
         length = as_integer, x = tuple))
     do.call(keras$ops$istft, args)
@@ -944,7 +944,7 @@ function (x, sequence_length, sequence_stride, fft_length, length = NULL,
 op_logsumexp <-
 function (x, axis = NULL, keepdims = FALSE)
 {
-    args <- capture_args2(list(axis = as_axis))
+    args <- capture_args(list(axis = as_axis))
     do.call(keras$ops$logsumexp, args)
 }
 
@@ -1041,7 +1041,7 @@ py_to_r.tensorflow.python.ops.gen_linalg_ops.Qr <- function(x) {
 op_rfft <-
 function (x, fft_length = NULL)
 {
-    args <- capture_args2(list(fft_length = as_integer))
+    args <- capture_args(list(fft_length = as_integer))
     do.call(keras$ops$rfft, args)
 }
 
@@ -1119,7 +1119,7 @@ keras$ops$rsqrt(x)
 op_segment_max <-
 function (data, segment_ids, num_segments = NULL, sorted = FALSE)
 {
-    args <- capture_args2(list(segment_ids = as_index, num_segments = as_integer))
+    args <- capture_args(list(segment_ids = as_index, num_segments = as_integer))
     do.call(keras$ops$segment_max, args)
 }
 
@@ -1166,7 +1166,7 @@ function (data, segment_ids, num_segments = NULL, sorted = FALSE)
 op_segment_sum <-
 function (data, segment_ids, num_segments = NULL, sorted = FALSE)
 {
-    args <- capture_args2(list(segment_ids = as_index, num_segments = as_integer))
+    args <- capture_args(list(segment_ids = as_index, num_segments = as_integer))
     do.call(keras$ops$segment_sum, args)
 }
 
@@ -1257,7 +1257,7 @@ op_stft <-
 function (x, sequence_length, sequence_stride, fft_length, window = "hann",
     center = TRUE)
 {
-    args <- capture_args2(list(sequence_length = as_integer,
+    args <- capture_args(list(sequence_length = as_integer,
         sequence_stride = as_integer, fft_length = as_integer))
     do.call(keras$ops$stft, args)
 }
@@ -1304,7 +1304,7 @@ function (x, sequence_length, sequence_stride, fft_length, window = "hann",
 op_top_k <-
 function (x, k, sorted = TRUE)
 {
-    args <- capture_args2(list(k = as_integer))
+    args <- capture_args(list(k = as_integer))
     do.call(keras$ops$top_k, args)
 }
 
@@ -1368,7 +1368,7 @@ op_average_pool <-
 function (inputs, pool_size, strides = NULL, padding = "valid",
     data_format = NULL)
 {
-    args <- capture_args2(list(pool_size = as_integer, strides = as_integer))
+    args <- capture_args(list(pool_size = as_integer, strides = as_integer))
     do.call(keras$ops$average_pool, args)
 }
 
@@ -1476,7 +1476,7 @@ keras$ops$binary_crossentropy(target, output, from_logits)
 op_categorical_crossentropy <-
 function (target, output, from_logits = FALSE, axis = -1L)
 {
-    args <- capture_args2(list(axis = as_axis))
+    args <- capture_args(list(axis = as_axis))
     do.call(keras$ops$categorical_crossentropy, args)
 }
 
@@ -1539,7 +1539,7 @@ op_conv <-
 function (inputs, kernel, strides = 1L, padding = "valid", data_format = NULL,
     dilation_rate = 1L)
 {
-    args <- capture_args2(list(strides = as_integer, dilation_rate = as_integer))
+    args <- capture_args(list(strides = as_integer, dilation_rate = as_integer))
     do.call(keras$ops$conv, args)
 }
 
@@ -1611,7 +1611,7 @@ op_conv_transpose <-
 function (inputs, kernel, strides, padding = "valid", output_padding = NULL,
     data_format = NULL, dilation_rate = 1L)
 {
-    args <- capture_args2(list(strides = as_integer, output_padding = as_integer,
+    args <- capture_args(list(strides = as_integer, output_padding = as_integer,
         dilation_rate = as_integer))
     do.call(keras$ops$conv_transpose, args)
 }
@@ -1675,7 +1675,7 @@ op_depthwise_conv <-
 function (inputs, kernel, strides = 1L, padding = "valid", data_format = NULL,
     dilation_rate = 1L)
 {
-    args <- capture_args2(list(strides = as_integer, dilation_rate = as_integer))
+    args <- capture_args(list(strides = as_integer, dilation_rate = as_integer))
     do.call(keras$ops$depthwise_conv, args)
 }
 
@@ -1902,7 +1902,7 @@ keras$ops$log_sigmoid(x)
 op_log_softmax <-
 function (x, axis = -1L)
 {
-    args <- capture_args2(list(axis = as_axis))
+    args <- capture_args(list(axis = as_axis))
     do.call(keras$ops$log_softmax, args)
 }
 
@@ -1958,7 +1958,7 @@ op_max_pool <-
 function (inputs, pool_size, strides = NULL, padding = "valid",
     data_format = NULL)
 {
-    args <- capture_args2(list(pool_size = as_integer, strides = as_integer))
+    args <- capture_args(list(pool_size = as_integer, strides = as_integer))
     do.call(keras$ops$max_pool, args)
 }
 
@@ -2006,7 +2006,7 @@ function (inputs, pool_size, strides = NULL, padding = "valid",
 op_moments <-
 function (x, axes, keepdims = FALSE, synchronized = FALSE)
 {
-    args <- capture_args2(list(axes = as_axis))
+    args <- capture_args(list(axes = as_axis))
     do.call(keras$ops$moments, args)
 }
 
@@ -2050,7 +2050,7 @@ function (x, axes, keepdims = FALSE, synchronized = FALSE)
 op_multi_hot <-
 function (inputs, num_tokens, axis = -1L, dtype = NULL)
 {
-    args <- capture_args2(list(inputs = as_integer, num_tokens = as_integer,
+    args <- capture_args(list(inputs = as_integer, num_tokens = as_integer,
         axis = as_axis))
     do.call(keras$ops$multi_hot, args)
 }
@@ -2105,7 +2105,7 @@ function (inputs, num_tokens, axis = -1L, dtype = NULL)
 op_one_hot <-
 function (x, num_classes, axis = -1L, dtype = NULL)
 {
-    args <- capture_args2(list(x = as_integer, axis = as_axis,
+    args <- capture_args(list(x = as_integer, axis = as_axis,
         num_classes = as_integer))
     do.call(keras$ops$one_hot, args)
 }
@@ -2276,7 +2276,7 @@ op_separable_conv <-
 function (inputs, depthwise_kernel, pointwise_kernel, strides = 1L,
     padding = "valid", data_format = NULL, dilation_rate = 1L)
 {
-    args <- capture_args2(list(strides = as_integer, dilation_rate = as_integer))
+    args <- capture_args(list(strides = as_integer, dilation_rate = as_integer))
     do.call(keras$ops$separable_conv, args)
 }
 
@@ -2379,7 +2379,7 @@ keras$ops$silu(x)
 op_softmax <-
 function (x, axis = -1L)
 {
-    args <- capture_args2(list(axis = as_axis))
+    args <- capture_args(list(axis = as_axis))
     do.call(keras$ops$softmax, args)
 }
 
@@ -2508,7 +2508,7 @@ keras$ops$softsign(x)
 op_sparse_categorical_crossentropy <-
 function (target, output, from_logits = FALSE, axis = -1L)
 {
-    args <- capture_args2(list(axis = as_axis))
+    args <- capture_args(list(axis = as_axis))
     do.call(keras$ops$sparse_categorical_crossentropy, args)
 }
 
@@ -2618,7 +2618,7 @@ keras$ops$add(x1, x2)
 op_all <-
 function (x, axis = NULL, keepdims = FALSE)
 {
-    args <- capture_args2(list(axis = as_axis))
+    args <- capture_args(list(axis = as_axis))
     do.call(keras$ops$all, args)
 }
 
@@ -2664,7 +2664,7 @@ function (x, axis = NULL, keepdims = FALSE)
 op_amax <-
 function (x, axis = NULL, keepdims = FALSE)
 {
-    args <- capture_args2(list(axis = as_axis))
+    args <- capture_args(list(axis = as_axis))
     do.call(keras$ops$amax, args)
 }
 
@@ -2710,7 +2710,7 @@ function (x, axis = NULL, keepdims = FALSE)
 op_amin <-
 function (x, axis = NULL, keepdims = FALSE)
 {
-    args <- capture_args2(list(axis = as_axis))
+    args <- capture_args(list(axis = as_axis))
     do.call(keras$ops$amin, args)
 }
 
@@ -2767,7 +2767,7 @@ function (x, axis = NULL, keepdims = FALSE)
 op_any <-
 function (x, axis = NULL, keepdims = FALSE)
 {
-    args <- capture_args2(list(axis = as_axis))
+    args <- capture_args(list(axis = as_axis))
     do.call(keras$ops$any, args)
 }
 
@@ -2815,7 +2815,7 @@ function (x, axis = NULL, keepdims = FALSE)
 op_append <-
 function (x1, x2, axis = NULL)
 {
-    args <- capture_args2(list(axis = as_axis))
+    args <- capture_args(list(axis = as_axis))
     do.call(keras$ops$append, args)
 }
 
@@ -2877,7 +2877,7 @@ function (x1, x2, axis = NULL)
 op_arange <-
 function (start, stop = NULL, step = 1L, dtype = NULL)
 {
-    args <- capture_args2(list(start = function (x)
+    args <- capture_args(list(start = function (x)
     np_array(x, dtype), stop = function (x)
     np_array(x, dtype), step = function (x)
     np_array(x, dtype)))
@@ -3135,7 +3135,7 @@ keras$ops$arctanh(x)
 op_argmax <-
 function (x, axis = NULL)
 {
-    args <- capture_args2(list(axis = as_axis))
+    args <- capture_args(list(axis = as_axis))
     do.call(keras$ops$argmax, args)
 }
 
@@ -3174,7 +3174,7 @@ function (x, axis = NULL)
 op_argmin <-
 function (x, axis = NULL)
 {
-    args <- capture_args2(list(axis = as_axis))
+    args <- capture_args(list(axis = as_axis))
     do.call(keras$ops$argmin, args)
 }
 
@@ -3219,7 +3219,7 @@ function (x, axis = NULL)
 op_argsort <-
 function (x, axis = -1L)
 {
-    args <- capture_args2(list(axis = as_axis))
+    args <- capture_args(list(axis = as_axis))
     do.call(keras$ops$argsort, args)
 }
 
@@ -3321,7 +3321,7 @@ function (x, dtype = NULL)
 op_average <-
 function (x, axis = NULL, weights = NULL)
 {
-    args <- capture_args2(list(axis = as_axis))
+    args <- capture_args(list(axis = as_axis))
     do.call(keras$ops$average, args)
 }
 
@@ -3375,7 +3375,7 @@ function (x, axis = NULL, weights = NULL)
 op_bincount <-
 function (x, weights = NULL, minlength = 0L)
 {
-    args <- capture_args2(list(x = as_integer, minlength = as_integer))
+    args <- capture_args(list(x = as_integer, minlength = as_integer))
     do.call(keras$ops$bincount, args)
 }
 
@@ -3409,7 +3409,7 @@ function (x, weights = NULL, minlength = 0L)
 op_broadcast_to <-
 function (x, shape)
 {
-    args <- capture_args2(list(shape = normalize_shape))
+    args <- capture_args(list(shape = normalize_shape))
     do.call(keras$ops$broadcast_to, args)
 }
 
@@ -3490,7 +3490,7 @@ keras$ops$clip(x, x_min, x_max)
 op_concatenate <-
 function (xs, axis = 1L)
 {
-    args <- capture_args2(list(axis = as_axis))
+    args <- capture_args(list(axis = as_axis))
     do.call(keras$ops$concatenate, args)
 }
 
@@ -3633,7 +3633,7 @@ keras$ops$cosh(x)
 op_count_nonzero <-
 function (x, axis = NULL)
 {
-    args <- capture_args2(list(axis = as_axis))
+    args <- capture_args(list(axis = as_axis))
     do.call(keras$ops$count_nonzero, args)
 }
 
@@ -3692,7 +3692,7 @@ function (x, axis = NULL)
 op_cross <-
 function (x1, x2, axisa = -1L, axisb = -1L, axisc = -1L, axis = NULL)
 {
-    args <- capture_args2(list(axisa = as_integer, axisb = as_integer,
+    args <- capture_args(list(axisa = as_integer, axisb = as_integer,
         axisc = as_integer, axis = as_axis))
     do.call(keras$ops$cross, args)
 }
@@ -3723,7 +3723,7 @@ function (x1, x2, axisa = -1L, axisb = -1L, axisc = -1L, axis = NULL)
 op_cumprod <-
 function (x, axis = NULL, dtype = NULL)
 {
-    args <- capture_args2(list(axis = as_axis))
+    args <- capture_args(list(axis = as_axis))
     do.call(keras$ops$cumprod, args)
 }
 
@@ -3753,7 +3753,7 @@ function (x, axis = NULL, dtype = NULL)
 op_cumsum <-
 function (x, axis = NULL, dtype = NULL)
 {
-    args <- capture_args2(list(axis = as_axis))
+    args <- capture_args(list(axis = as_axis))
     do.call(keras$ops$cumsum, args)
 }
 
@@ -3794,7 +3794,7 @@ function (x, axis = NULL, dtype = NULL)
 op_diag <-
 function (x, k = 0L)
 {
-    args <- capture_args2(list(k = as_integer))
+    args <- capture_args(list(k = as_integer))
     do.call(keras$ops$diag, args)
 }
 
@@ -3855,7 +3855,7 @@ function (x, k = 0L)
 op_diagonal <-
 function (x, offset = 0L, axis1 = 1L, axis2 = 2L)
 {
-    args <- capture_args2(list(offset = as_integer, axis1 = as_axis,
+    args <- capture_args(list(offset = as_integer, axis1 = as_axis,
         axis2 = as_axis))
     do.call(keras$ops$diagonal, args)
 }
@@ -3901,7 +3901,7 @@ function (x, offset = 0L, axis1 = 1L, axis2 = 2L)
 op_diff <-
 function (a, n = 1L, axis = -1L)
 {
-    args <- capture_args2(list(n = as_integer, axis = as_axis))
+    args <- capture_args(list(n = as_integer, axis = as_axis))
     do.call(keras$ops$diff, args)
 }
 
@@ -3938,7 +3938,7 @@ function (a, n = 1L, axis = -1L)
 op_digitize <-
 function (x, bins)
 {
-    args <- capture_args2(list(bins = as.array))
+    args <- capture_args(list(bins = as.array))
     do.call(keras$ops$digitize, args)
 }
 
@@ -4109,7 +4109,7 @@ keras$ops$einsum(subscripts, ...)
 op_empty <-
 function (shape, dtype = NULL)
 {
-    args <- capture_args2(list(shape = normalize_shape))
+    args <- capture_args(list(shape = normalize_shape))
     do.call(keras$ops$empty, args)
 }
 
@@ -4182,7 +4182,7 @@ keras$ops$exp(x)
 op_expand_dims <-
 function (x, axis)
 {
-    args <- capture_args2(list(axis = as_axis))
+    args <- capture_args(list(axis = as_axis))
     do.call(keras$ops$expand_dims, args)
 }
 
@@ -4236,7 +4236,7 @@ keras$ops$expm1(x)
 op_eye <-
 function (N, M = NULL, k = 0L, dtype = NULL)
 {
-    args <- capture_args2(list(k = as_integer))
+    args <- capture_args(list(k = as_integer))
     do.call(keras$ops$eye, args)
 }
 
@@ -4266,7 +4266,7 @@ function (N, M = NULL, k = 0L, dtype = NULL)
 op_flip <-
 function (x, axis = NULL)
 {
-    args <- capture_args2(list(axis = as_axis))
+    args <- capture_args(list(axis = as_axis))
     do.call(keras$ops$flip, args)
 }
 
@@ -4340,7 +4340,7 @@ keras$ops$floor_divide(x1, x2)
 op_full <-
 function (shape, fill_value, dtype = NULL)
 {
-    args <- capture_args2(list(shape = normalize_shape))
+    args <- capture_args(list(shape = normalize_shape))
     do.call(keras$ops$full, args)
 }
 
@@ -4696,7 +4696,7 @@ op_linspace <-
 function (start, stop, num = 50L, endpoint = TRUE, retstep = FALSE,
     dtype = NULL, axis = 1L)
 {
-    args <- capture_args2(list(num = as_integer, axis = as_axis))
+    args <- capture_args(list(num = as_integer, axis = as_axis))
     do.call(keras$ops$linspace, args)
 }
 
@@ -4957,7 +4957,7 @@ op_logspace <-
 function (start, stop, num = 50L, endpoint = TRUE, base = 10L,
     dtype = NULL, axis = 1L)
 {
-    args <- capture_args2(list(num = as_integer, base = as_integer,
+    args <- capture_args(list(num = as_integer, base = as_integer,
         axis = as_axis))
     do.call(keras$ops$logspace, args)
 }
@@ -5025,7 +5025,7 @@ keras$ops$matmul(x1, x2)
 op_max <-
 function (x, axis = NULL, keepdims = FALSE, initial = NULL)
 {
-    args <- capture_args2(list(axis = as_axis))
+    args <- capture_args(list(axis = as_axis))
     do.call(keras$ops$max, args)
 }
 
@@ -5079,7 +5079,7 @@ keras$ops$maximum(x1, x2)
 op_mean <-
 function (x, axis = NULL, keepdims = FALSE)
 {
-    args <- capture_args2(list(axis = as_axis))
+    args <- capture_args(list(axis = as_axis))
     do.call(keras$ops$mean, args)
 }
 
@@ -5110,7 +5110,7 @@ function (x, axis = NULL, keepdims = FALSE)
 op_median <-
 function (x, axis = NULL, keepdims = FALSE)
 {
-    args <- capture_args2(list(axis = as_axis))
+    args <- capture_args(list(axis = as_axis))
     do.call(keras$ops$median, args)
 }
 
@@ -5200,7 +5200,7 @@ function (..., indexing = "xy")
 op_min <-
 function (x, axis = NULL, keepdims = FALSE, initial = NULL)
 {
-    args <- capture_args2(list(axis = as_axis))
+    args <- capture_args(list(axis = as_axis))
     do.call(keras$ops$min, args)
 }
 
@@ -5428,7 +5428,7 @@ keras$ops$not_equal(x1, x2)
 op_ones <-
 function (shape, dtype = NULL)
 {
-    args <- capture_args2(list(shape = normalize_shape))
+    args <- capture_args(list(shape = normalize_shape))
     do.call(keras$ops$ones, args)
 }
 
@@ -5535,7 +5535,7 @@ keras$ops$outer(x1, x2)
 op_pad <-
 function (x, pad_width, mode = "constant", constant_values = NULL)
 {
-    args <- capture_args2(list(pad_width = as_integer))
+    args <- capture_args(list(pad_width = as_integer))
     do.call(keras$ops$pad, args)
 }
 
@@ -5593,7 +5593,7 @@ keras$ops$power(x1, x2)
 op_prod <-
 function (x, axis = NULL, keepdims = FALSE, dtype = NULL)
 {
-    args <- capture_args2(list(axis = as_axis))
+    args <- capture_args(list(axis = as_axis))
     do.call(keras$ops$prod, args)
 }
 
@@ -5643,7 +5643,7 @@ function (x, axis = NULL, keepdims = FALSE, dtype = NULL)
 op_quantile <-
 function (x, q, axis = NULL, method = "linear", keepdims = FALSE)
 {
-    args <- capture_args2(list(axis = as_axis))
+    args <- capture_args(list(axis = as_axis))
     do.call(keras$ops$quantile, args)
 }
 
@@ -5739,7 +5739,7 @@ keras$ops$reciprocal(x)
 op_repeat <-
 function (x, repeats, axis = NULL)
 {
-    args <- capture_args2(list(axis = as_axis))
+    args <- capture_args(list(axis = as_axis))
     do.call(keras$ops$`repeat`, args)
 }
 
@@ -5804,7 +5804,7 @@ function (x, ..., new_shape = list(...))
 op_roll <-
 function (x, shift, axis = NULL)
 {
-    args <- capture_args2(list(shift = as_integer, axis = as_axis))
+    args <- capture_args(list(shift = as_integer, axis = as_axis))
     do.call(keras$ops$roll, args)
 }
 
@@ -5830,7 +5830,7 @@ function (x, shift, axis = NULL)
 op_round <-
 function (x, decimals = 0L)
 {
-    args <- capture_args2(list(decimals = as_integer))
+    args <- capture_args(list(decimals = as_integer))
     do.call(keras$ops$round, args)
 }
 
@@ -5937,7 +5937,7 @@ keras$ops$size(x)
 op_sort <-
 function (x, axis = -1L)
 {
-    args <- capture_args2(list(axis = as_axis))
+    args <- capture_args(list(axis = as_axis))
     do.call(keras$ops$sort, args)
 }
 
@@ -5978,7 +5978,7 @@ function (x, axis = -1L)
 op_split <-
 function (x, indices_or_sections, axis = 1L)
 {
-    args <- capture_args2(list(indices_or_sections = as_integer,
+    args <- capture_args(list(indices_or_sections = as_integer,
         axis = as_axis))
     do.call(keras$ops$split, args)
 }
@@ -6046,7 +6046,7 @@ keras$ops$square(x)
 op_squeeze <-
 function (x, axis = NULL)
 {
-    args <- capture_args2(list(axis = as_axis))
+    args <- capture_args(list(axis = as_axis))
     do.call(keras$ops$squeeze, args)
 }
 
@@ -6076,7 +6076,7 @@ function (x, axis = NULL)
 op_stack <-
 function (x, axis = 1L)
 {
-    args <- capture_args2(list(axis = as_axis))
+    args <- capture_args(list(axis = as_axis))
     do.call(keras$ops$stack, args)
 }
 
@@ -6108,7 +6108,7 @@ function (x, axis = 1L)
 op_std <-
 function (x, axis = NULL, keepdims = FALSE)
 {
-    args <- capture_args2(list(axis = as_axis))
+    args <- capture_args(list(axis = as_axis))
     do.call(keras$ops$std, args)
 }
 
@@ -6162,7 +6162,7 @@ keras$ops$subtract(x1, x2)
 op_sum <-
 function (x, axis = NULL, keepdims = FALSE)
 {
-    args <- capture_args2(list(axis = as_axis))
+    args <- capture_args(list(axis = as_axis))
     do.call(keras$ops$sum, args)
 }
 
@@ -6218,7 +6218,7 @@ keras$ops$swapaxes(x, axis1, axis2)
 op_take <-
 function (x, indices, axis = NULL)
 {
-    args <- capture_args2(list(indices = as_index, axis = as_axis))
+    args <- capture_args(list(indices = as_index, axis = as_axis))
     do.call(keras$ops$take, args)
 }
 
@@ -6248,7 +6248,7 @@ function (x, indices, axis = NULL)
 op_take_along_axis <-
 function (x, indices, axis = NULL)
 {
-    args <- capture_args2(list(indices = as_index, axis = as_axis))
+    args <- capture_args(list(indices = as_index, axis = as_axis))
     do.call(keras$ops$take_along_axis, args)
 }
 
@@ -6322,7 +6322,7 @@ keras$ops$tanh(x)
 op_tensordot <-
 function (x1, x2, axes = 3L)
 {
-    args <- capture_args2(list(axes = as_axis))
+    args <- capture_args(list(axes = as_axis))
     do.call(keras$ops$tensordot, args)
 }
 
@@ -6402,7 +6402,7 @@ keras$ops$tile(x, repeats)
 op_trace <-
 function (x, offset = 0L, axis1 = 0L, axis2 = 1L)
 {
-    args <- capture_args2(list(offset = as_integer, axis1 = as_integer,
+    args <- capture_args(list(offset = as_integer, axis1 = as_integer,
         axis2 = as_integer))
     do.call(keras$ops$trace, args)
 }
@@ -6430,7 +6430,7 @@ function (x, offset = 0L, axis1 = 0L, axis2 = 1L)
 op_transpose <-
 function (x, axes = NULL)
 {
-    args <- capture_args2(list(axes = as_axis))
+    args <- capture_args(list(axes = as_axis))
     do.call(keras$ops$transpose, args)
 }
 
@@ -6465,7 +6465,7 @@ function (x, axes = NULL)
 op_tri <-
 function (N, M = NULL, k = 0L, dtype = NULL)
 {
-    args <- capture_args2(list(k = as_integer))
+    args <- capture_args(list(k = as_integer))
     do.call(keras$ops$tri, args)
 }
 
@@ -6496,7 +6496,7 @@ function (N, M = NULL, k = 0L, dtype = NULL)
 op_tril <-
 function (x, k = 0L)
 {
-    args <- capture_args2(list(k = as_integer))
+    args <- capture_args(list(k = as_integer))
     do.call(keras$ops$tril, args)
 }
 
@@ -6527,7 +6527,7 @@ function (x, k = 0L)
 op_triu <-
 function (x, k = 0L)
 {
-    args <- capture_args2(list(k = as_integer))
+    args <- capture_args(list(k = as_integer))
     do.call(keras$ops$triu, args)
 }
 
@@ -6578,7 +6578,7 @@ keras$ops$true_divide(x1, x2)
 op_var <-
 function (x, axis = NULL, keepdims = FALSE)
 {
-    args <- capture_args2(list(axis = as_axis))
+    args <- capture_args(list(axis = as_axis))
     do.call(keras$ops$var, args)
 }
 
@@ -6681,7 +6681,7 @@ keras$ops$where(condition, x1, x2)
 op_zeros <-
 function (shape, dtype = NULL)
 {
-    args <- capture_args2(list(shape = normalize_shape))
+    args <- capture_args(list(shape = normalize_shape))
     do.call(keras$ops$zeros, args)
 }
 

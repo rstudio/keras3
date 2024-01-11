@@ -97,7 +97,7 @@ bidirectional <-
 function (object, layer, merge_mode = "concat", weights = NULL,
     backward_layer = NULL, ...)
 {
-    args <- capture_args2(list(input_shape = normalize_shape,
+    args <- capture_args(list(input_shape = normalize_shape,
         batch_size = as_integer, batch_input_shape = normalize_shape),
         ignore = "object")
     create_layer(keras$layers$Bidirectional, object, args)
@@ -295,7 +295,7 @@ function (object, filters, kernel_size, strides = 1L, padding = "valid",
     return_state = FALSE, go_backwards = FALSE, stateful = FALSE,
     ..., unroll = NULL)
 {
-    args <- capture_args2(list(filters = as_integer, kernel_size = as_integer_tuple,
+    args <- capture_args(list(filters = as_integer, kernel_size = as_integer_tuple,
         strides = as_integer_tuple, dilation_rate = as_integer_tuple,
         seed = as_integer, input_shape = normalize_shape, batch_size = as_integer,
         batch_input_shape = normalize_shape), ignore = "object")
@@ -494,7 +494,7 @@ function (object, filters, kernel_size, strides = 1L, padding = "valid",
     return_state = FALSE, go_backwards = FALSE, stateful = FALSE,
     ..., unroll = NULL)
 {
-    args <- capture_args2(list(filters = as_integer, kernel_size = as_integer_tuple,
+    args <- capture_args(list(filters = as_integer, kernel_size = as_integer_tuple,
         strides = as_integer_tuple, dilation_rate = as_integer_tuple,
         seed = as_integer, input_shape = normalize_shape, batch_size = as_integer,
         batch_input_shape = normalize_shape), ignore = "object")
@@ -692,7 +692,7 @@ function (object, filters, kernel_size, strides = 1L, padding = "valid",
     return_state = FALSE, go_backwards = FALSE, stateful = FALSE,
     ..., unroll = NULL)
 {
-    args <- capture_args2(list(filters = as_integer, kernel_size = as_integer_tuple,
+    args <- capture_args(list(filters = as_integer, kernel_size = as_integer_tuple,
         strides = as_integer_tuple, dilation_rate = as_integer_tuple,
         seed = as_integer, input_shape = normalize_shape, batch_size = as_integer,
         batch_input_shape = normalize_shape), ignore = "object")
@@ -886,7 +886,7 @@ function (object, units, activation = "tanh", recurrent_activation = "sigmoid",
     return_state = FALSE, go_backwards = FALSE, stateful = FALSE,
     unroll = FALSE, reset_after = TRUE, ...)
 {
-    args <- capture_args2(list(units = as_integer, seed = as_integer,
+    args <- capture_args(list(units = as_integer, seed = as_integer,
         input_shape = normalize_shape, batch_size = as_integer,
         batch_input_shape = normalize_shape), ignore = "object")
     create_layer(keras$layers$GRU, object, args)
@@ -1009,7 +1009,7 @@ function (units, activation = "tanh", recurrent_activation = "sigmoid",
     bias_constraint = NULL, dropout = 0, recurrent_dropout = 0,
     reset_after = TRUE, seed = NULL, ...)
 {
-    args <- capture_args2(list(units = as_integer, seed = as_integer,
+    args <- capture_args(list(units = as_integer, seed = as_integer,
         input_shape = normalize_shape, batch_size = as_integer,
         batch_input_shape = normalize_shape))
     do.call(keras$layers$GRUCell, args)
@@ -1193,7 +1193,7 @@ function (object, units, activation = "tanh", recurrent_activation = "sigmoid",
     return_state = FALSE, go_backwards = FALSE, stateful = FALSE,
     unroll = FALSE, ...)
 {
-    args <- capture_args2(list(units = as_integer, seed = as_integer,
+    args <- capture_args(list(units = as_integer, seed = as_integer,
         input_shape = normalize_shape, batch_size = as_integer,
         batch_input_shape = normalize_shape), ignore = "object")
     create_layer(keras$layers$LSTM, object, args)
@@ -1319,7 +1319,7 @@ function (units, activation = "tanh", recurrent_activation = "sigmoid",
     recurrent_constraint = NULL, bias_constraint = NULL, dropout = 0,
     recurrent_dropout = 0, seed = NULL, ...)
 {
-    args <- capture_args2(list(units = as_integer, seed = as_integer,
+    args <- capture_args(list(units = as_integer, seed = as_integer,
         input_shape = normalize_shape, batch_size = as_integer,
         batch_input_shape = normalize_shape))
     do.call(keras$layers$LSTMCell, args)
@@ -1519,7 +1519,7 @@ function (object, cell, return_sequences = FALSE, return_state = FALSE,
     go_backwards = FALSE, stateful = FALSE, unroll = FALSE, zero_output_for_mask = FALSE,
     ...)
 {
-    args <- capture_args2(list(cell = as_integer, input_shape = normalize_shape,
+    args <- capture_args(list(cell = as_integer, input_shape = normalize_shape,
         batch_size = as_integer, batch_input_shape = normalize_shape),
         ignore = "object")
     create_layer(keras$layers$RNN, object, args)
@@ -1675,7 +1675,7 @@ function (object, units, activation = "tanh", use_bias = TRUE,
     go_backwards = FALSE, stateful = FALSE, unroll = FALSE, seed = NULL,
     ...)
 {
-    args <- capture_args2(list(units = as_integer, seed = as_integer,
+    args <- capture_args(list(units = as_integer, seed = as_integer,
         input_shape = normalize_shape, batch_size = as_integer,
         batch_input_shape = normalize_shape), ignore = "object")
     create_layer(keras$layers$SimpleRNN, object, args)
@@ -1791,7 +1791,7 @@ function (units, activation = "tanh", use_bias = TRUE, kernel_initializer = "glo
     bias_constraint = NULL, dropout = 0, recurrent_dropout = 0,
     seed = NULL, ...)
 {
-    args <- capture_args2(list(units = as_integer, seed = as_integer,
+    args <- capture_args(list(units = as_integer, seed = as_integer,
         input_shape = normalize_shape, batch_size = as_integer,
         batch_input_shape = normalize_shape))
     do.call(keras$layers$SimpleRNNCell, args)
@@ -1836,7 +1836,7 @@ function (units, activation = "tanh", use_bias = TRUE, kernel_initializer = "glo
 rnn_cells_stack <-
 function (cells, ...)
 {
-  args <- capture_args2(
+  args <- capture_args(
     list(
       input_shape = normalize_shape,
       batch_size = as_integer,
@@ -1906,7 +1906,7 @@ function (cells, ...)
 layer_time_distributed <-
 function (object, layer, ...)
 {
-    args <- capture_args2(list(input_shape = normalize_shape,
+    args <- capture_args(list(input_shape = normalize_shape,
         batch_size = as_integer, batch_input_shape = normalize_shape),
         ignore = "object")
     create_layer(keras$layers$TimeDistributed, object, args)

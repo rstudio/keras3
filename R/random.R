@@ -48,7 +48,7 @@
 random_categorical <-
 function (logits, num_samples, dtype = "int32", seed = NULL)
 {
-    args <- capture_args2(list(num_samples = as_integer, seed = as_integer))
+    args <- capture_args(list(num_samples = as_integer, seed = as_integer))
     do.call(keras$random$categorical, args)
 }
 
@@ -78,7 +78,7 @@ function (logits, num_samples, dtype = "int32", seed = NULL)
 random_dropout <-
 function (inputs, rate, noise_shape = NULL, seed = NULL)
 {
-    args <- capture_args2(list(seed = as_integer, noise_shape = normalize_shape))
+    args <- capture_args(list(seed = as_integer, noise_shape = normalize_shape))
     do.call(keras$random$dropout, args)
 }
 
@@ -115,7 +115,7 @@ function (inputs, rate, noise_shape = NULL, seed = NULL)
 random_gamma <-
 function (shape, alpha, dtype = NULL, seed = NULL)
 {
-    args <- capture_args2(list(shape = normalize_shape, seed = as_integer))
+    args <- capture_args(list(shape = normalize_shape, seed = as_integer))
     do.call(keras$random$gamma, args)
 }
 
@@ -164,7 +164,7 @@ function (shape, alpha, dtype = NULL, seed = NULL)
 random_integer <-
 function (shape, minval, maxval, dtype = "int32", seed = NULL)
 {
-    args <- capture_args2(list(shape = normalize_shape, seed = as_integer,
+    args <- capture_args(list(shape = normalize_shape, seed = as_integer,
         maxval = function (x)
         as_integer(ceiling(x)), minval = as_integer))
     do.call(keras$random$randint, args)
@@ -207,7 +207,7 @@ function (shape, minval, maxval, dtype = "int32", seed = NULL)
 random_normal <-
 function (shape, mean = 0, stddev = 1, dtype = NULL, seed = NULL)
 {
-    args <- capture_args2(list(shape = normalize_shape, seed = as_integer))
+    args <- capture_args(list(shape = normalize_shape, seed = as_integer))
     do.call(keras$random$normal, args)
 }
 
@@ -239,7 +239,7 @@ function (shape, mean = 0, stddev = 1, dtype = NULL, seed = NULL)
 random_shuffle <-
 function (x, axis = 1L, seed = NULL)
 {
-    args <- capture_args2(list(axis = as_axis, seed = as_integer))
+    args <- capture_args(list(axis = as_axis, seed = as_integer))
     do.call(keras$random$shuffle, args)
 }
 
@@ -285,7 +285,7 @@ function (x, axis = 1L, seed = NULL)
 random_truncated_normal <-
 function (shape, mean = 0, stddev = 1, dtype = NULL, seed = NULL)
 {
-    args <- capture_args2(list(shape = normalize_shape, seed = as_integer))
+    args <- capture_args(list(shape = normalize_shape, seed = as_integer))
     do.call(keras$random$truncated_normal, args)
 }
 
@@ -334,7 +334,7 @@ function (shape, mean = 0, stddev = 1, dtype = NULL, seed = NULL)
 random_uniform <-
 function (shape, minval = 0, maxval = 1, dtype = NULL, seed = NULL)
 {
-    args <- capture_args2(list(shape = normalize_shape, seed = as_integer))
+    args <- capture_args(list(shape = normalize_shape, seed = as_integer))
     do.call(keras$random$uniform, args)
 }
 
@@ -392,6 +392,6 @@ function (shape, minval = 0, maxval = 1, dtype = NULL, seed = NULL)
 random_seed_generator <-
 function (seed = NULL, ...)
 {
-    args <- capture_args2(list(seed = as_integer))
+    args <- capture_args(list(seed = as_integer))
     do.call(keras$random$SeedGenerator, args)
 }

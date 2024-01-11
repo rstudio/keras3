@@ -133,7 +133,7 @@ sequential_model_input_layer <- function(input_shape = NULL,
                                          input_layer_name = NULL) {
   # keras$layers$Input can't be used with a Sequential Model, have to use
   # keras$layers$LayerInput instead.
-  args <- capture_args2(list(input_shape = normalize_shape,
+  args <- capture_args(list(input_shape = normalize_shape,
                              batch_size = as_nullable_integer))
 
   if ("input_layer_name" %in% names(args)) {
@@ -176,7 +176,7 @@ sequential_model_input_layer <- function(input_shape = NULL,
 #'
 #' @export
 clone_model <- function(model, input_tensors = NULL, clone_function = NULL) {
-  args <- capture_args2()
+  args <- capture_args()
   do.call(keras$models$clone_model, args)
 }
 

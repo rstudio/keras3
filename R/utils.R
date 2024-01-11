@@ -64,7 +64,7 @@
 clear_session <-
 function ()
 {
-    args <- capture_args2(NULL)
+    args <- capture_args()
     do.call(keras$utils$clear_session, args)
 }
 
@@ -90,7 +90,7 @@ function ()
 get_source_inputs <-
 function (tensor)
 {
-    args <- capture_args2(NULL)
+    args <- capture_args()
     do.call(keras$utils$get_source_inputs, args)
 }
 
@@ -184,7 +184,7 @@ function (fname = NULL, origin = NULL, ...,
     file_hash = NULL, cache_subdir = "datasets", hash_algorithm = "auto",
     extract = FALSE, archive_format = "auto", cache_dir = NULL)
 {
-    args <- capture_args2(NULL)
+    args <- capture_args()
     do.call(keras$utils$get_file, args)
 }
 
@@ -245,7 +245,7 @@ function (model, show_shapes = FALSE, show_dtype = FALSE, show_layer_names = TRU
     rankdir = "TB", expand_nested = FALSE, dpi = 200L, subgraph = FALSE,
     show_layer_activations = FALSE, show_trainable = FALSE, ...)
 {
-    args <- capture_args2(list(dpi = as_integer))
+    args <- capture_args(list(dpi = as_integer))
     do.call(keras$utils$model_to_dot, args)
 }
 
@@ -278,7 +278,7 @@ function (model, show_shapes = FALSE, show_dtype = FALSE, show_layer_names = TRU
 normalize <-
 function (x, axis = -1L, order = 2L)
 {
-    args <- capture_args2(list(axis = as_axis, order = as_integer))
+    args <- capture_args(list(axis = as_axis, order = as_integer))
     do.call(keras$utils$normalize, args)
 }
 
@@ -332,7 +332,7 @@ function (x, axis = -1L, order = 2L)
 to_categorical <-
 function (x, num_classes = NULL)
 {
-    args <- capture_args2(list(x = as_integer_array, num_classes = as_integer))
+    args <- capture_args(list(x = as_integer_array, num_classes = as_integer))
     do.call(keras$utils$to_categorical, args)
 }
 
@@ -457,7 +457,7 @@ pad_sequences <-
 function (sequences, maxlen = NULL, dtype = "int32", padding = "pre",
     truncating = "pre", value = 0)
 {
-    args <- capture_args2(list(maxlen = as_integer, sequences = function (x)
+    args <- capture_args(list(maxlen = as_integer, sequences = function (x)
     lapply(x, as.list)))
     do.call(keras$utils$pad_sequences, args)
 }
@@ -622,7 +622,7 @@ function(x,
          show_trainable = NA,
          to_file = NULL) {
 
-  args <- capture_args2(ignore = c("x", "to_file", "show_trainable"),
+  args <- capture_args(ignore = c("x", "to_file", "show_trainable"),
                         force = c("show_layer_names"))
   args$model <- x
 

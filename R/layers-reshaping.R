@@ -45,7 +45,7 @@
 layer_cropping_1d <-
 function (object, cropping = list(1L, 1L), ...)
 {
-    args <- capture_args2(list(cropping = as_integer, input_shape = normalize_shape,
+    args <- capture_args(list(cropping = as_integer, input_shape = normalize_shape,
         batch_size = as_integer, batch_input_shape = normalize_shape),
         ignore = "object")
     create_layer(keras$layers$Cropping1D, object, args)
@@ -117,7 +117,7 @@ layer_cropping_2d <-
 function (object, cropping = list(list(0L, 0L), list(0L, 0L)),
     data_format = NULL, ...)
 {
-    args <- capture_args2(list(cropping = function (x)
+    args <- capture_args(list(cropping = function (x)
     normalize_cropping(x, 2L), input_shape = normalize_shape,
         batch_size = as_integer, batch_input_shape = normalize_shape),
         ignore = "object")
@@ -194,7 +194,7 @@ layer_cropping_3d <-
 function (object, cropping = list(list(1L, 1L), list(1L, 1L),
     list(1L, 1L)), data_format = NULL, ...)
 {
-    args <- capture_args2(list(cropping = function (x)
+    args <- capture_args(list(cropping = function (x)
     normalize_cropping(x, 3L), input_shape = normalize_shape,
         batch_size = as_integer, batch_input_shape = normalize_shape),
         ignore = "object")
@@ -243,7 +243,7 @@ function (object, cropping = list(list(1L, 1L), list(1L, 1L),
 layer_flatten <-
 function (object, data_format = NULL, ...)
 {
-    args <- capture_args2(list(input_shape = normalize_shape,
+    args <- capture_args(list(input_shape = normalize_shape,
         batch_size = as_integer, batch_input_shape = normalize_shape),
         ignore = "object")
     create_layer(keras$layers$Flatten, object, args)
@@ -292,7 +292,7 @@ function (object, data_format = NULL, ...)
 layer_permute <-
 function (object, dims, ...)
 {
-    args <- capture_args2(list(input_shape = normalize_shape,
+    args <- capture_args(list(input_shape = normalize_shape,
         batch_size = as_integer, batch_input_shape = normalize_shape,
         dims = function (x)
         tuple(lapply(x, as_integer))), ignore = "object")
@@ -337,7 +337,7 @@ function (object, dims, ...)
 layer_repeat_vector <-
 function (object, n, ...)
 {
-    args <- capture_args2(list(n = as_integer, input_shape = normalize_shape,
+    args <- capture_args(list(n = as_integer, input_shape = normalize_shape,
         batch_size = as_integer, batch_input_shape = normalize_shape),
         ignore = "object")
     create_layer(keras$layers$RepeatVector, object, args)
@@ -391,7 +391,7 @@ function (object, n, ...)
 layer_reshape <-
 function (object, target_shape, ...)
 {
-    args <- capture_args2(list(input_shape = normalize_shape,
+    args <- capture_args(list(input_shape = normalize_shape,
         batch_size = as_integer, batch_input_shape = normalize_shape,
         target_shape = as_integer), ignore = "object")
     create_layer(keras$layers$Reshape, object, args)
@@ -443,7 +443,7 @@ function (object, target_shape, ...)
 layer_upsampling_1d <-
 function (object, size = 2L, ...)
 {
-    args <- capture_args2(list(size = as_integer, input_shape = normalize_shape,
+    args <- capture_args(list(size = as_integer, input_shape = normalize_shape,
         batch_size = as_integer, batch_input_shape = normalize_shape),
         ignore = "object")
     create_layer(keras$layers$UpSampling1D, object, args)
@@ -519,7 +519,7 @@ layer_upsampling_2d <-
 function (object, size = list(2L, 2L), data_format = NULL, interpolation = "nearest",
     ...)
 {
-    args <- capture_args2(list(size = as_integer, input_shape = normalize_shape,
+    args <- capture_args(list(size = as_integer, input_shape = normalize_shape,
         batch_size = as_integer, batch_input_shape = normalize_shape),
         ignore = "object")
     create_layer(keras$layers$UpSampling2D, object, args)
@@ -591,7 +591,7 @@ layer_upsampling_3d <-
 function (object, size = list(2L, 2L, 2L), data_format = NULL,
     ...)
 {
-    args <- capture_args2(list(size = as_integer, input_shape = normalize_shape,
+    args <- capture_args(list(size = as_integer, input_shape = normalize_shape,
         batch_size = as_integer, batch_input_shape = normalize_shape),
         ignore = "object")
     create_layer(keras$layers$UpSampling3D, object, args)
@@ -641,7 +641,7 @@ function (object, size = list(2L, 2L, 2L), data_format = NULL,
 layer_zero_padding_1d <-
 function (object, padding = 1L, ...)
 {
-    args <- capture_args2(list(padding = as_integer, input_shape = normalize_shape,
+    args <- capture_args(list(padding = as_integer, input_shape = normalize_shape,
         batch_size = as_integer, batch_input_shape = normalize_shape),
         ignore = "object")
     create_layer(keras$layers$ZeroPadding1D, object, args)
@@ -715,7 +715,7 @@ layer_zero_padding_2d <-
 function (object, padding = list(1L, 1L), data_format = NULL,
     ...)
 {
-    args <- capture_args2(list(padding = function (x)
+    args <- capture_args(list(padding = function (x)
     normalize_padding(x, 2L), input_shape = normalize_shape,
         batch_size = as_integer, batch_input_shape = normalize_shape),
         ignore = "object")
@@ -794,7 +794,7 @@ layer_zero_padding_3d <-
 function (object, padding = list(list(1L, 1L), list(1L, 1L),
     list(1L, 1L)), data_format = NULL, ...)
 {
-    args <- capture_args2(list(padding = function (x)
+    args <- capture_args(list(padding = function (x)
     normalize_padding(x, 3L), input_shape = normalize_shape,
         batch_size = as_integer, batch_input_shape = normalize_shape),
         ignore = "object")

@@ -152,7 +152,7 @@ get_vocabulary <- function(object, include_special_tokens=TRUE) {
     tools <- import_from_path("kerastools", path = python_path)
     tools$get_vocabulary$get_vocabulary(object)
   } else {
-    args <- capture_args2(ignore = "object")
+    args <- capture_args(ignore = "object")
     do.call(object$get_vocabulary, args)
   }
 }
@@ -163,7 +163,7 @@ get_vocabulary <- function(object, include_special_tokens=TRUE) {
 #'   output_mode is "tf_idf". Should not be set otherwise.
 #' @export
 set_vocabulary <- function(object, vocabulary, idf_weights=NULL, ...) {
-  args <- capture_args2(ignore = "object")
+  args <- capture_args(ignore = "object")
 
   if (tf_version() < "2.6") {
     # required arg renamed when promoted out of experimental in 2.6:
@@ -266,7 +266,7 @@ adapt <- function(object, data, ..., batch_size=NULL, steps=NULL) {
     data <- keras_array(data)
   # TODO: use as_tensor() here
 
-  args <- capture_args2(list(batch_size = as_nullable_integer,
+  args <- capture_args(list(batch_size = as_nullable_integer,
                              step = as_nullable_integer),
                         ignore = c("object", "data"))
   # `data` named to `dataset` in keras3 keras.utils.FeatureSpace
@@ -284,7 +284,7 @@ adapt <- function(object, data, ..., batch_size=NULL, steps=NULL) {
 ## actually useful to export
 #compile.keras.engine.base_preprocessing_layer.PreprocessingLayer <-
 function(object, run_eagerly = NULL, steps_per_execution = NULL, ...) {
-  args <- capture_args2(ignore="object")
+  args <- capture_args(ignore="object")
   do.call(object$compile, args)
 }
 
@@ -336,7 +336,7 @@ require_tf_version <- function(ver, msg = "this function.") {
 time_distributed <-
 function(object, layer, ...)
 {
-  args <- capture_args2(list(input_shape = normalize_shape,
+  args <- capture_args(list(input_shape = normalize_shape,
                              batch_input_shape = normalize_shape,
                              batch_size = as_nullable_integer),
                         ignore = "object")
@@ -398,7 +398,7 @@ function(object, layer, ...)
 function(object, layer, merge_mode = "concat",
          weights = NULL, backward_layer = NULL, ...)
 {
-  args <- capture_args2(
+  args <- capture_args(
     modifiers = list(
       input_shape = normalize_shape,
       batch_input_shape = normalize_shape,

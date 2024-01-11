@@ -125,7 +125,7 @@ function (object, optimizer = "rmsprop", loss = NULL, metrics = NULL,
           jit_compile = "auto",
           auto_scale_loss = TRUE)
 {
-  args <- capture_args2(list(
+  args <- capture_args(list(
     steps_per_execution = as_integer,
     loss = as_loss,
     metrics = function(x) {
@@ -268,7 +268,7 @@ function (object, x = NULL, y = NULL, ..., batch_size = NULL,
           sample_weight = NULL, steps = NULL, callbacks = NULL)
 {
     normalize_input_data <- input_data_normalizer(object)
-    args <- capture_args2(list(x = normalize_input_data,
+    args <- capture_args(list(x = normalize_input_data,
                                y = normalize_input_data,
                                sample_weight = normalize_input_data,
                                batch_size = as_integer, steps = as_integer,
@@ -521,7 +521,7 @@ function(object,
          view_metrics = getOption("keras.view_metrics", default = "auto"))
 {
   normalize_input_data <- input_data_normalizer(object)
-    args <- capture_args2(
+    args <- capture_args(
         list(
             x = normalize_input_data,
             y =  normalize_input_data,
@@ -678,7 +678,7 @@ function (object, x, ..., batch_size = NULL,
           callbacks = NULL)
 {
     normalize_input_data <- input_data_normalizer(object)
-    args <- capture_args2(list(x = normalize_input_data,
+    args <- capture_args(list(x = normalize_input_data,
                                batch_size = as_integer, steps = as_integer,
                                verbose = as_model_verbose_arg),
                           ignore = "object",
@@ -902,7 +902,7 @@ function(x,
     if (py_is_null_xptr(x))
         return("<pointer: 0x0>")
 
-    args <- capture_args2(ignore = c("x", "compact", "width"),
+    args <- capture_args(ignore = c("x", "compact", "width"),
                           force = c("show_trainable", "line_length"))
 
     # Do we need to check for model$built before calling summary?

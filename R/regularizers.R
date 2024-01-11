@@ -28,7 +28,7 @@
 regularizer_l1 <-
 function (l1 = 0.01)
 {
-    args <- capture_args2(NULL)
+    args <- capture_args()
     do.call(keras$regularizers$L1, args)
 }
 
@@ -66,7 +66,7 @@ function (l1 = 0.01)
 regularizer_l1_l2 <-
 function (l1 = 0, l2 = 0)
 {
-    args <- capture_args2(NULL)
+    args <- capture_args()
     do.call(keras$regularizers$L1L2, args)
 }
 
@@ -98,7 +98,7 @@ function (l1 = 0, l2 = 0)
 regularizer_l2 <-
 function (l2 = 0.01)
 {
-    args <- capture_args2(NULL)
+    args <- capture_args()
     do.call(keras$regularizers$L2, args)
 }
 
@@ -140,6 +140,6 @@ function (l2 = 0.01)
 regularizer_orthogonal <-
 function (factor = 0.01, mode = "rows")
 {
-    args <- capture_args2(NULL)
+    args <- capture_args()
     do.call(keras$regularizers$OrthogonalRegularizer, args)
 }

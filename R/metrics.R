@@ -73,7 +73,7 @@ metric_binary_focal_crossentropy <-
 function (y_true, y_pred, apply_class_balancing = FALSE, alpha = 0.25,
     gamma = 2, from_logits = FALSE, label_smoothing = 0, axis = -1L)
 {
-    args <- capture_args2(list(
+    args <- capture_args(list(
       y_true = function (x)
         if (inherits(x, "python.builtin.object")) x
       else np_array(x),
@@ -143,7 +143,7 @@ metric_categorical_focal_crossentropy <-
 function (y_true, y_pred, alpha = 0.25, gamma = 2, from_logits = FALSE,
     label_smoothing = 0, axis = -1L)
 {
-    args <- capture_args2(list(y_true = function (x)
+    args <- capture_args(list(y_true = function (x)
     if (inherits(x, "python.builtin.object"))
         x
     else np_array(x), y_pred = function (x)
@@ -200,7 +200,7 @@ function (y_true, y_pred, alpha = 0.25, gamma = 2, from_logits = FALSE,
 metric_huber <-
 function (y_true, y_pred, delta = 1)
 {
-    args <- capture_args2(list(y_true = function (x)
+    args <- capture_args(list(y_true = function (x)
     if (inherits(x, "python.builtin.object"))
         x
     else np_array(x), y_pred = function (x)
@@ -251,7 +251,7 @@ function (y_true, y_pred, delta = 1)
 metric_log_cosh <-
 function (y_true, y_pred)
 {
-    args <- capture_args2(list(y_true = function (x)
+    args <- capture_args(list(y_true = function (x)
     if (inherits(x, "python.builtin.object"))
         x
     else np_array(x), y_pred = function (x)
@@ -330,7 +330,7 @@ metric_binary_accuracy <-
 function (y_true, y_pred, threshold = 0.5, ..., name = "binary_accuracy",
     dtype = NULL)
 {
-    args <- capture_args2(list(y_true = function (x)
+    args <- capture_args(list(y_true = function (x)
     if (inherits(x, "python.builtin.object"))
         x
     else np_array(x), y_pred = function (x)
@@ -416,7 +416,7 @@ metric_categorical_accuracy <-
 function (y_true, y_pred, ..., name = "categorical_accuracy",
     dtype = NULL)
 {
-    args <- capture_args2(list(y_true = function (x)
+    args <- capture_args(list(y_true = function (x)
     if (inherits(x, "python.builtin.object"))
         x
     else np_array(x), y_pred = function (x)
@@ -499,7 +499,7 @@ metric_sparse_categorical_accuracy <-
 function (y_true, y_pred, ..., name = "sparse_categorical_accuracy",
     dtype = NULL)
 {
-    args <- capture_args2(list(y_true = function (x)
+    args <- capture_args(list(y_true = function (x)
     if (inherits(x, "python.builtin.object"))
         x
     else np_array(x), y_pred = function (x)
@@ -578,7 +578,7 @@ metric_sparse_top_k_categorical_accuracy <-
 function (y_true, y_pred, k = 5L, ..., name = "sparse_top_k_categorical_accuracy",
     dtype = NULL)
 {
-    args <- capture_args2(list(k = as_integer, y_true = function (x)
+    args <- capture_args(list(k = as_integer, y_true = function (x)
     if (inherits(x, "python.builtin.object"))
         x
     else np_array(x), y_pred = function (x)
@@ -656,7 +656,7 @@ metric_top_k_categorical_accuracy <-
 function (y_true, y_pred, k = 5L, ..., name = "top_k_categorical_accuracy",
     dtype = NULL)
 {
-    args <- capture_args2(list(
+    args <- capture_args(list(
         k = as_integer,
         y_true = function(x)
             if (inherits(x, "python.builtin.object")) x else np_array(x),
@@ -828,7 +828,7 @@ function (..., num_thresholds = 200L, curve = "ROC", summation_method = "interpo
     name = NULL, dtype = NULL, thresholds = NULL, multi_label = FALSE,
     num_labels = NULL, label_weights = NULL, from_logits = FALSE)
 {
-    args <- capture_args2(list(num_thresholds = as_integer))
+    args <- capture_args(list(num_thresholds = as_integer))
     do.call(keras$metrics$AUC, args)
 }
 
@@ -888,7 +888,7 @@ function (..., num_thresholds = 200L, curve = "ROC", summation_method = "interpo
 metric_false_negatives <-
 function (..., thresholds = NULL, name = NULL, dtype = NULL)
 {
-    args <- capture_args2(NULL)
+    args <- capture_args()
     do.call(keras$metrics$FalseNegatives, args)
 }
 
@@ -947,7 +947,7 @@ function (..., thresholds = NULL, name = NULL, dtype = NULL)
 metric_false_positives <-
 function (..., thresholds = NULL, name = NULL, dtype = NULL)
 {
-    args <- capture_args2(NULL)
+    args <- capture_args()
     do.call(keras$metrics$FalsePositives, args)
 }
 
@@ -1061,7 +1061,7 @@ metric_precision <-
 function (..., thresholds = NULL, top_k = NULL, class_id = NULL,
     name = NULL, dtype = NULL)
 {
-    args <- capture_args2(list(top_k = as_integer, class_id = as_integer))
+    args <- capture_args(list(top_k = as_integer, class_id = as_integer))
     do.call(keras$metrics$Precision, args)
 }
 
@@ -1141,7 +1141,7 @@ metric_precision_at_recall <-
 function (..., recall, num_thresholds = 200L, class_id = NULL,
     name = NULL, dtype = NULL)
 {
-    args <- capture_args2(list(num_thresholds = as_integer, class_id = as_integer))
+    args <- capture_args(list(num_thresholds = as_integer, class_id = as_integer))
     do.call(keras$metrics$PrecisionAtRecall, args)
 }
 
@@ -1237,7 +1237,7 @@ metric_recall <-
 function (..., thresholds = NULL, top_k = NULL, class_id = NULL,
     name = NULL, dtype = NULL)
 {
-    args <- capture_args2(list(top_k = as_integer, class_id = as_integer))
+    args <- capture_args(list(top_k = as_integer, class_id = as_integer))
     do.call(keras$metrics$Recall, args)
 }
 
@@ -1318,7 +1318,7 @@ metric_recall_at_precision <-
 function (..., precision, num_thresholds = 200L, class_id = NULL,
     name = NULL, dtype = NULL)
 {
-    args <- capture_args2(list(num_thresholds = as_integer, class_id = as_integer))
+    args <- capture_args(list(num_thresholds = as_integer, class_id = as_integer))
     do.call(keras$metrics$RecallAtPrecision, args)
 }
 
@@ -1407,7 +1407,7 @@ metric_sensitivity_at_specificity <-
 function (..., specificity, num_thresholds = 200L, class_id = NULL,
     name = NULL, dtype = NULL)
 {
-    args <- capture_args2(list(num_thresholds = as_integer, class_id = as_integer))
+    args <- capture_args(list(num_thresholds = as_integer, class_id = as_integer))
     do.call(keras$metrics$SensitivityAtSpecificity, args)
 }
 
@@ -1495,7 +1495,7 @@ metric_specificity_at_sensitivity <-
 function (..., sensitivity, num_thresholds = 200L, class_id = NULL,
     name = NULL, dtype = NULL)
 {
-    args <- capture_args2(list(num_thresholds = as_integer, class_id = as_integer))
+    args <- capture_args(list(num_thresholds = as_integer, class_id = as_integer))
     do.call(keras$metrics$SpecificityAtSensitivity, args)
 }
 
@@ -1554,7 +1554,7 @@ function (..., sensitivity, num_thresholds = 200L, class_id = NULL,
 metric_true_negatives <-
 function (..., thresholds = NULL, name = NULL, dtype = NULL)
 {
-    args <- capture_args2(NULL)
+    args <- capture_args()
     do.call(keras$metrics$TrueNegatives, args)
 }
 
@@ -1613,7 +1613,7 @@ function (..., thresholds = NULL, name = NULL, dtype = NULL)
 metric_true_positives <-
 function (..., thresholds = NULL, name = NULL, dtype = NULL)
 {
-    args <- capture_args2(NULL)
+    args <- capture_args()
     do.call(keras$metrics$TruePositives, args)
 }
 
@@ -1689,7 +1689,7 @@ metric_f1_score <-
 function (..., average = NULL, threshold = NULL, name = "f1_score",
     dtype = NULL)
 {
-    args <- capture_args2(NULL)
+    args <- capture_args()
     do.call(keras$metrics$F1Score, args)
 }
 
@@ -1771,7 +1771,7 @@ metric_fbeta_score <-
 function (..., average = NULL, beta = 1, threshold = NULL, name = "fbeta_score",
     dtype = NULL)
 {
-    args <- capture_args2(NULL)
+    args <- capture_args()
     do.call(keras$metrics$FBetaScore, args)
 }
 
@@ -1833,7 +1833,7 @@ metric_categorical_hinge <-
 function (y_true, y_pred, ..., name = "categorical_hinge",
     dtype = NULL)
 {
-    args <- capture_args2(list(y_true = function (x)
+    args <- capture_args(list(y_true = function (x)
     if (inherits(x, "python.builtin.object"))
         x
     else np_array(x), y_pred = function (x)
@@ -1902,7 +1902,7 @@ function (y_true, y_pred, ..., name = "categorical_hinge",
 metric_hinge <-
 function (y_true, y_pred, ..., name = "hinge", dtype = NULL)
 {
-    args <- capture_args2(list(y_true = function (x)
+    args <- capture_args(list(y_true = function (x)
     if (inherits(x, "python.builtin.object"))
         x
     else np_array(x), y_pred = function (x)
@@ -1972,7 +1972,7 @@ metric_squared_hinge <-
 function (y_true, y_pred, ..., name = "squared_hinge",
     dtype = NULL)
 {
-    args <- capture_args2(list(y_true = function (x)
+    args <- capture_args(list(y_true = function (x)
     if (inherits(x, "python.builtin.object"))
         x
     else np_array(x), y_pred = function (x)
@@ -2076,7 +2076,7 @@ metric_binary_iou <-
 function (..., target_class_ids = list(0L, 1L), threshold = 0.5,
     name = NULL, dtype = NULL)
 {
-    args <- capture_args2(NULL)
+    args <- capture_args()
     do.call(keras$metrics$BinaryIoU, args)
 }
 
@@ -2178,7 +2178,7 @@ function (..., num_classes, target_class_ids, name = NULL, dtype = NULL,
     ignore_class = NULL, sparse_y_true = TRUE, sparse_y_pred = TRUE,
     axis = -1L)
 {
-    args <- capture_args2(list(ignore_class = as_integer, axis = as_axis))
+    args <- capture_args(list(ignore_class = as_integer, axis = as_axis))
     do.call(keras$metrics$IoU, args)
 }
 
@@ -2279,7 +2279,7 @@ metric_mean_iou <-
 function (..., num_classes, name = NULL, dtype = NULL, ignore_class = NULL,
     sparse_y_true = TRUE, sparse_y_pred = TRUE, axis = -1L)
 {
-    args <- capture_args2(list(ignore_class = as_integer, axis = as_axis,
+    args <- capture_args(list(ignore_class = as_integer, axis = as_axis,
         num_classes = as_integer))
     do.call(keras$metrics$MeanIoU, args)
 }
@@ -2386,7 +2386,7 @@ metric_one_hot_iou <-
 function (..., num_classes, target_class_ids, name = NULL, dtype = NULL,
     ignore_class = NULL, sparse_y_pred = FALSE, axis = -1L)
 {
-    args <- capture_args2(list(ignore_class = as_integer, axis = as_axis,
+    args <- capture_args(list(ignore_class = as_integer, axis = as_axis,
         num_classes = as_integer, target_class_ids = function (x)
         lapply(x, as_integer)))
     do.call(keras$metrics$OneHotIoU, args)
@@ -2487,7 +2487,7 @@ metric_one_hot_mean_iou <-
 function (..., num_classes, name = NULL, dtype = NULL, ignore_class = NULL,
     sparse_y_pred = FALSE, axis = -1L)
 {
-    args <- capture_args2(list(ignore_class = as_integer, axis = as_axis,
+    args <- capture_args(list(ignore_class = as_integer, axis = as_axis,
         num_classes = as_integer))
     do.call(keras$metrics$OneHotMeanIoU, args)
 }
@@ -2567,7 +2567,7 @@ metric_binary_crossentropy <-
 function (y_true, y_pred, from_logits = FALSE, label_smoothing = 0,
     axis = -1L, ..., name = "binary_crossentropy", dtype = NULL)
 {
-    args <- capture_args2(list(label_smoothing = as_integer,
+    args <- capture_args(list(label_smoothing = as_integer,
         y_true = function (x)
         if (inherits(x, "python.builtin.object"))
             x
@@ -2669,7 +2669,7 @@ metric_categorical_crossentropy <-
 function (y_true, y_pred, from_logits = FALSE, label_smoothing = 0,
     axis = -1L, ..., name = "categorical_crossentropy", dtype = NULL)
 {
-    args <- capture_args2(list(label_smoothing = as_integer,
+    args <- capture_args(list(label_smoothing = as_integer,
         axis = as_axis, y_true = function (x)
         if (inherits(x, "python.builtin.object"))
             x
@@ -2745,7 +2745,7 @@ metric_kl_divergence <-
 function (y_true, y_pred, ..., name = "kl_divergence",
     dtype = NULL)
 {
-    args <- capture_args2(list(y_true = function (x)
+    args <- capture_args(list(y_true = function (x)
     if (inherits(x, "python.builtin.object"))
         x
     else np_array(x), y_pred = function (x)
@@ -2822,7 +2822,7 @@ function (y_true, y_pred, ..., name = "kl_divergence",
 metric_poisson <-
 function (y_true, y_pred, ..., name = "poisson", dtype = NULL)
 {
-    args <- capture_args2(list(y_true = function (x)
+    args <- capture_args(list(y_true = function (x)
     if (inherits(x, "python.builtin.object"))
         x
     else np_array(x), y_pred = function (x)
@@ -2920,7 +2920,7 @@ function (y_true, y_pred, from_logits = FALSE, ignore_class = NULL,
     axis = -1L, ..., name = "sparse_categorical_crossentropy",
     dtype = NULL)
 {
-    args <- capture_args2(list(axis = as_axis, y_true = function (x)
+    args <- capture_args(list(axis = as_axis, y_true = function (x)
     if (inherits(x, "python.builtin.object"))
         x
     else np_array(x), y_pred = function (x)
@@ -2976,7 +2976,7 @@ function (y_true, y_pred, from_logits = FALSE, ignore_class = NULL,
 metric_mean <-
 function (..., name = "mean", dtype = NULL)
 {
-    args <- capture_args2(NULL)
+    args <- capture_args()
     do.call(keras$metrics$Mean, args)
 }
 
@@ -3024,7 +3024,7 @@ function (..., name = "mean", dtype = NULL)
 metric_mean_wrapper <-
 function (..., fn, name = NULL, dtype = NULL)
 {
-    args <- capture_args2(list(fn = function(x) as_py_function(
+    args <- capture_args(list(fn = function(x) as_py_function(
       x, default_name =
         if (is.null(name)) {
           if (is.symbol(fn_expr <- substitute(fn)))
@@ -3078,7 +3078,7 @@ function (..., fn, name = NULL, dtype = NULL)
 metric_sum <-
 function (..., name = "sum", dtype = NULL)
 {
-    args <- capture_args2(NULL)
+    args <- capture_args()
     do.call(keras$metrics$Sum, args)
 }
 
@@ -3142,7 +3142,7 @@ function (..., name = "sum", dtype = NULL)
 metric_cosine_similarity <-
 function (..., name = "cosine_similarity", dtype = NULL, axis = -1L)
 {
-    args <- capture_args2(list(axis = as_axis))
+    args <- capture_args(list(axis = as_axis))
     do.call(keras$metrics$CosineSimilarity, args)
 }
 
@@ -3199,7 +3199,7 @@ function (..., name = "cosine_similarity", dtype = NULL, axis = -1L)
 metric_log_cosh_error <-
 function (..., name = "logcosh", dtype = NULL)
 {
-    args <- capture_args2(NULL)
+    args <- capture_args()
     do.call(keras$metrics$LogCoshError, args)
 }
 
@@ -3265,7 +3265,7 @@ metric_mean_absolute_error <-
 function (y_true, y_pred, ..., name = "mean_absolute_error",
     dtype = NULL)
 {
-    args <- capture_args2(list(y_true = function (x)
+    args <- capture_args(list(y_true = function (x)
     if (inherits(x, "python.builtin.object"))
         x
     else np_array(x), y_pred = function (x)
@@ -3343,7 +3343,7 @@ metric_mean_absolute_percentage_error <-
 function (y_true, y_pred, ..., name = "mean_absolute_percentage_error",
     dtype = NULL)
 {
-    args <- capture_args2(list(y_true = function (x)
+    args <- capture_args(list(y_true = function (x)
     if (inherits(x, "python.builtin.object"))
         x
     else np_array(x), y_pred = function (x)
@@ -3402,7 +3402,7 @@ metric_mean_squared_error <-
 function (y_true, y_pred, ..., name = "mean_squared_error",
     dtype = NULL)
 {
-    args <- capture_args2(list(y_true = function (x)
+    args <- capture_args(list(y_true = function (x)
     if (inherits(x, "python.builtin.object"))
         x
     else np_array(x), y_pred = function (x)
@@ -3480,7 +3480,7 @@ metric_mean_squared_logarithmic_error <-
 function (y_true, y_pred, ..., name = "mean_squared_logarithmic_error",
     dtype = NULL)
 {
-    args <- capture_args2(list(y_true = function (x)
+    args <- capture_args(list(y_true = function (x)
     if (inherits(x, "python.builtin.object"))
         x
     else np_array(x), y_pred = function (x)
@@ -3563,7 +3563,7 @@ metric_r2_score <-
 function (..., class_aggregation = "uniform_average", num_regressors = 0L,
     name = "r2_score", dtype = NULL)
 {
-    args <- capture_args2(list(num_regressors = as_integer))
+    args <- capture_args(list(num_regressors = as_integer))
     do.call(keras$metrics$R2Score, args)
 }
 
@@ -3622,7 +3622,7 @@ function (..., class_aggregation = "uniform_average", num_regressors = 0L,
 metric_root_mean_squared_error <-
 function (..., name = "root_mean_squared_error", dtype = NULL)
 {
-    args <- capture_args2(NULL)
+    args <- capture_args()
     do.call(keras$metrics$RootMeanSquaredError, args)
 }
 

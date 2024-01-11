@@ -102,7 +102,7 @@ layer_category_encoding <-
 function (object, num_tokens = NULL, output_mode = "multi_hot",
     ...)
 {
-    args <- capture_args2(list(output_mode = as_integer, input_shape = normalize_shape,
+    args <- capture_args(list(output_mode = as_integer, input_shape = normalize_shape,
         batch_size = as_integer, batch_input_shape = normalize_shape,
         num_tokens = as_integer), ignore = "object")
     create_layer(keras$layers$CategoryEncoding, object, args)
@@ -168,7 +168,7 @@ function (object, num_tokens = NULL, output_mode = "multi_hot",
 layer_center_crop <-
 function (object, height, width, data_format = NULL, ...)
 {
-    args <- capture_args2(list(height = as_integer, width = as_integer,
+    args <- capture_args(list(height = as_integer, width = as_integer,
         input_shape = normalize_shape, batch_size = as_integer,
         batch_input_shape = normalize_shape), ignore = "object")
     create_layer(keras$layers$CenterCrop, object, args)
@@ -280,7 +280,7 @@ layer_discretization <-
 function (object, bin_boundaries = NULL, num_bins = NULL, epsilon = 0.01,
     output_mode = "int", sparse = FALSE, dtype = NULL, name = NULL)
 {
-    args <- capture_args2(list(num_bins = as_integer, output_mode = as_integer,
+    args <- capture_args(list(num_bins = as_integer, output_mode = as_integer,
         input_shape = normalize_shape, batch_size = as_integer,
         batch_input_shape = normalize_shape), ignore = "object")
     create_layer(keras$layers$Discretization, object, args)
@@ -370,7 +370,7 @@ layer_hashed_crossing <-
 function (object, num_bins, output_mode = "int", sparse = FALSE,
     name = NULL, dtype = NULL, ...)
 {
-    args <- capture_args2(list(output_mode = as_integer, input_shape = normalize_shape,
+    args <- capture_args(list(output_mode = as_integer, input_shape = normalize_shape,
         batch_size = as_integer, batch_input_shape = normalize_shape,
         num_bins = as_integer), ignore = "object")
     create_layer(keras$layers$HashedCrossing, object, args)
@@ -514,7 +514,7 @@ layer_hashing <-
 function (object, num_bins, mask_value = NULL, salt = NULL, output_mode = "int",
     sparse = FALSE, ...)
 {
-    args <- capture_args2(list(salt = as_integer, output_mode = as_integer,
+    args <- capture_args(list(salt = as_integer, output_mode = as_integer,
         input_shape = normalize_shape, batch_size = as_integer,
         batch_input_shape = normalize_shape, num_bins = as_integer),
         ignore = "object")
@@ -855,7 +855,7 @@ function (object, max_tokens = NULL, num_oov_indices = 1L, mask_token = NULL,
     idf_weights = NULL, invert = FALSE, output_mode = "int",
     sparse = FALSE, pad_to_max_tokens = FALSE, name = NULL, ...)
 {
-    args <- capture_args2(list(num_oov_indices = as_integer,
+    args <- capture_args(list(num_oov_indices = as_integer,
         mask_token = as_integer, oov_token = as_integer, vocabulary = as_integer,
         invert = as_integer, output_mode = as_integer, input_shape = normalize_shape,
         batch_size = as_integer, batch_input_shape = normalize_shape),
@@ -971,7 +971,7 @@ layer_normalization <-
 function (object, axis = -1L, mean = NULL, variance = NULL, invert = FALSE,
     ...)
 {
-    args <- capture_args2(list(axis = as_axis, input_shape = normalize_shape,
+    args <- capture_args(list(axis = as_axis, input_shape = normalize_shape,
         batch_size = as_integer, batch_input_shape = normalize_shape),
         ignore = "object")
     create_layer(keras$layers$Normalization, object, args)
@@ -1053,7 +1053,7 @@ layer_random_brightness <-
 function (object, factor, value_range = list(0L, 255L), seed = NULL,
     ...)
 {
-    args <- capture_args2(list(seed = as_integer, input_shape = normalize_shape,
+    args <- capture_args(list(seed = as_integer, input_shape = normalize_shape,
         batch_size = as_integer, batch_input_shape = normalize_shape),
         ignore = "object")
     create_layer(keras$layers$RandomBrightness, object, args)
@@ -1114,7 +1114,7 @@ function (object, factor, value_range = list(0L, 255L), seed = NULL,
 layer_random_contrast <-
 function (object, factor, seed = NULL, ...)
 {
-    args <- capture_args2(list(seed = as_integer, input_shape = normalize_shape,
+    args <- capture_args(list(seed = as_integer, input_shape = normalize_shape,
         batch_size = as_integer, batch_input_shape = normalize_shape),
         ignore = "object")
     create_layer(keras$layers$RandomContrast, object, args)
@@ -1182,7 +1182,7 @@ layer_random_crop <-
 function (object, height, width, seed = NULL, data_format = NULL,
     name = NULL, ...)
 {
-    args <- capture_args2(list(height = as_integer, width = as_integer,
+    args <- capture_args(list(height = as_integer, width = as_integer,
         seed = as_integer, input_shape = normalize_shape, batch_size = as_integer,
         batch_input_shape = normalize_shape), ignore = "object")
     create_layer(keras$layers$RandomCrop, object, args)
@@ -1237,7 +1237,7 @@ layer_random_flip <-
 function (object, mode = "horizontal_and_vertical", seed = NULL,
     ...)
 {
-    args <- capture_args2(list(seed = as_integer, input_shape = normalize_shape,
+    args <- capture_args(list(seed = as_integer, input_shape = normalize_shape,
         batch_size = as_integer, batch_input_shape = normalize_shape),
         ignore = "object")
     create_layer(keras$layers$RandomFlip, object, args)
@@ -1335,7 +1335,7 @@ function (object, factor, fill_mode = "reflect", interpolation = "bilinear",
     seed = NULL, fill_value = 0, value_range = list(0L, 255L),
     data_format = NULL, ...)
 {
-    args <- capture_args2(list(seed = as_integer, input_shape = normalize_shape,
+    args <- capture_args(list(seed = as_integer, input_shape = normalize_shape,
         batch_size = as_integer, batch_input_shape = normalize_shape),
         ignore = "object")
     create_layer(keras$layers$RandomRotation, object, args)
@@ -1446,7 +1446,7 @@ function (object, height_factor, width_factor, fill_mode = "reflect",
     interpolation = "bilinear", seed = NULL, fill_value = 0,
     data_format = NULL, ...)
 {
-    args <- capture_args2(list(seed = as_integer, input_shape = normalize_shape,
+    args <- capture_args(list(seed = as_integer, input_shape = normalize_shape,
         batch_size = as_integer, batch_input_shape = normalize_shape),
         ignore = "object")
     create_layer(keras$layers$RandomTranslation, object, args)
@@ -1565,7 +1565,7 @@ function (object, height_factor, width_factor = NULL, fill_mode = "reflect",
     interpolation = "bilinear", seed = NULL, fill_value = 0,
     data_format = NULL, ...)
 {
-    args <- capture_args2(list(seed = as_integer, input_shape = normalize_shape,
+    args <- capture_args(list(seed = as_integer, input_shape = normalize_shape,
         batch_size = as_integer, batch_input_shape = normalize_shape),
         ignore = "object")
     create_layer(keras$layers$RandomZoom, object, args)
@@ -1615,7 +1615,7 @@ function (object, height_factor, width_factor = NULL, fill_mode = "reflect",
 layer_rescaling <-
 function (object, scale, offset = 0, ...)
 {
-    args <- capture_args2(list(input_shape = normalize_shape,
+    args <- capture_args(list(input_shape = normalize_shape,
         batch_size = as_integer, batch_input_shape = normalize_shape),
         ignore = "object")
     create_layer(keras$layers$Rescaling, object, args)
@@ -1691,7 +1691,7 @@ layer_resizing <-
 function (object, height, width, interpolation = "bilinear",
     crop_to_aspect_ratio = FALSE, data_format = NULL, ...)
 {
-    args <- capture_args2(list(height = as_integer, width = as_integer,
+    args <- capture_args(list(height = as_integer, width = as_integer,
         input_shape = normalize_shape, batch_size = as_integer,
         batch_input_shape = normalize_shape), ignore = "object")
     create_layer(keras$layers$Resizing, object, args)
@@ -2021,7 +2021,7 @@ function (object, max_tokens = NULL, num_oov_indices = 1L, mask_token = NULL,
     invert = FALSE, output_mode = "int", pad_to_max_tokens = FALSE,
     sparse = FALSE, encoding = "utf-8", name = NULL, ..., vocabulary_dtype = NULL)
 {
-    args <- capture_args2(list(num_oov_indices = as_integer,
+    args <- capture_args(list(num_oov_indices = as_integer,
         mask_token = as_integer, vocabulary = as_integer, invert = as_integer,
         output_mode = as_integer, input_shape = normalize_shape,
         batch_size = as_integer, batch_input_shape = normalize_shape),
@@ -2269,7 +2269,7 @@ function (object, max_tokens = NULL, standardize = "lower_and_strip_punctuation"
     vocabulary = NULL, idf_weights = NULL, sparse = FALSE, ragged = FALSE,
     encoding = "utf-8", name = NULL, ...)
 {
-    args <- capture_args2(list(max_tokens = as_integer, ngrams = function (x)
+    args <- capture_args(list(max_tokens = as_integer, ngrams = function (x)
     if (length(x) > 1)
         as_integer_tuple(x)
     else as_integer(x), output_mode = as_integer, output_sequence_length = as_integer,

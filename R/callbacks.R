@@ -94,7 +94,7 @@
 callback_backup_and_restore <-
 function (backup_dir, save_freq = "epoch", delete_checkpoint = TRUE)
 {
-    args <- capture_args2(list(save_freq = as_integer))
+    args <- capture_args(list(save_freq = as_integer))
     do.call(keras$callbacks$BackupAndRestore, args)
 }
 
@@ -130,7 +130,7 @@ function (backup_dir, save_freq = "epoch", delete_checkpoint = TRUE)
 callback_csv_logger <-
 function (filename, separator = ",", append = FALSE)
 {
-    args <- capture_args2(NULL)
+    args <- capture_args()
     do.call(keras$callbacks$CSVLogger, args)
 }
 
@@ -219,7 +219,7 @@ function (monitor = "val_loss", min_delta = 0L, patience = 0L,
     verbose = 0L, mode = "auto", baseline = NULL, restore_best_weights = FALSE,
     start_from_epoch = 0L)
 {
-    args <- capture_args2(list(min_delta = as_integer, patience = as_integer,
+    args <- capture_args(list(min_delta = as_integer, patience = as_integer,
         verbose = as_integer, start_from_epoch = as_integer))
     do.call(keras$callbacks$EarlyStopping, args)
 }
@@ -324,7 +324,7 @@ function (on_epoch_begin = NULL, on_epoch_end = NULL, on_train_begin = NULL,
     on_train_end = NULL, on_train_batch_begin = NULL, on_train_batch_end = NULL,
     ...)
 {
-    args <- capture_args2(list(
+    args <- capture_args(list(
       on_epoch_begin         = as_callback_lambda_fn_sig_idx_logs,
       on_epoch_end           = as_callback_lambda_fn_sig_idx_logs,
       on_train_begin         = as_callback_lambda_fn_sig_logs,
@@ -403,7 +403,7 @@ as_callback_lambda_fn_sig_logs <- function(fn) {
 callback_learning_rate_scheduler <-
 function (schedule, verbose = 0L)
 {
-    args <- capture_args2(list(schedule = as_integer, verbose = as_integer))
+    args <- capture_args(list(schedule = as_integer, verbose = as_integer))
     do.call(keras$callbacks$LearningRateScheduler, args)
 }
 
@@ -551,7 +551,7 @@ function (filepath, monitor = "val_loss", verbose = 0L, save_best_only = FALSE,
     save_weights_only = FALSE, mode = "auto", save_freq = "epoch",
     initial_value_threshold = NULL)
 {
-    args <- capture_args2(list(verbose = as_integer, save_freq = as_integer))
+    args <- capture_args(list(verbose = as_integer, save_freq = as_integer))
     do.call(keras$callbacks$ModelCheckpoint, args)
 }
 
@@ -577,7 +577,7 @@ function (filepath, monitor = "val_loss", verbose = 0L, save_best_only = FALSE,
 callback_progbar_logger <-
 function (count_mode = NULL)
 {
-    args <- capture_args2(NULL)
+    args <- capture_args()
     do.call(keras$callbacks$ProgbarLogger, args)
 }
 
@@ -644,7 +644,7 @@ function (monitor = "val_loss", factor = 0.1, patience = 10L,
     verbose = 0L, mode = "auto", min_delta = 1e-04, cooldown = 0L,
     min_lr = 0L, ...)
 {
-    args <- capture_args2(list(patience = as_integer, verbose = as_integer,
+    args <- capture_args(list(patience = as_integer, verbose = as_integer,
         cooldown = as_integer, min_lr = as_integer))
     do.call(keras$callbacks$ReduceLROnPlateau, args)
 }
@@ -689,7 +689,7 @@ callback_remote_monitor <-
 function (root = "http://localhost:9000", path = "/publish/epoch/end/",
     field = "data", headers = NULL, send_as_json = FALSE)
 {
-    args <- capture_args2(NULL)
+    args <- capture_args()
     do.call(keras$callbacks$RemoteMonitor, args)
 }
 
@@ -867,7 +867,7 @@ function (log_dir = "logs", histogram_freq = 0L, write_graph = TRUE,
     write_images = FALSE, write_steps_per_second = FALSE, update_freq = "epoch",
     profile_batch = 0L, embeddings_freq = 0L, embeddings_metadata = NULL)
 {
-    args <- capture_args2(list(histogram_freq = as_integer, update_freq = as_integer,
+    args <- capture_args(list(histogram_freq = as_integer, update_freq = as_integer,
         profile_batch = as_integer, embeddings_freq = as_integer))
     do.call(keras$callbacks$TensorBoard, args)
 }
@@ -884,7 +884,7 @@ function (log_dir = "logs", histogram_freq = 0L, write_graph = TRUE,
 callback_terminate_on_nan <-
 function ()
 {
-    args <- capture_args2(NULL)
+    args <- capture_args()
     do.call(keras$callbacks$TerminateOnNaN, args)
 }
 

@@ -42,7 +42,7 @@
 pack_x_y_sample_weight <-
 function (x, y = NULL, sample_weight = NULL)
 {
-  args <- capture_args2(NULL)
+  args <- capture_args()
   do.call(keras$utils$pack_x_y_sample_weight, args)
 }
 
@@ -85,7 +85,7 @@ function (x, y = NULL, sample_weight = NULL)
 unpack_x_y_sample_weight <-
 function (data)
 {
-  args <- capture_args2(NULL)
+  args <- capture_args()
   do.call(keras$utils$unpack_x_y_sample_weight, args)
 }
 
@@ -215,7 +215,7 @@ function (directory, labels = "inferred", label_mode = "int",
           output_sequence_length = NULL, ragged = FALSE, shuffle = TRUE,
           seed = NULL, validation_split = NULL, subset = NULL, follow_links = FALSE)
 {
-  args <- capture_args2(list(labels = as_integer, label_mode = as_integer,
+  args <- capture_args(list(labels = as_integer, label_mode = as_integer,
                              batch_size = as_integer, seed = as_integer))
   do.call(keras$utils$audio_dataset_from_directory, args)
 }
@@ -274,7 +274,7 @@ split_dataset <-
 function (dataset, left_size = NULL, right_size = NULL, shuffle = FALSE,
           seed = NULL)
 {
-  args <- capture_args2(list(left_size = function (x)
+  args <- capture_args(list(left_size = function (x)
     ifelse(x < 1, x, as_integer(x)), right_size = function (x)
       ifelse(x < 1, x, as_integer(x)), seed = as_integer))
   do.call(keras$utils$split_dataset, args)
@@ -440,7 +440,7 @@ function (directory, labels = "inferred", label_mode = "int",
           validation_split = NULL, subset = NULL, interpolation = "bilinear",
           follow_links = FALSE, crop_to_aspect_ratio = FALSE, data_format = NULL)
 {
-  args <- capture_args2(list(labels = as_integer, label_mode = as_integer,
+  args <- capture_args(list(labels = as_integer, label_mode = as_integer,
                              batch_size = as_integer, seed = as_integer))
   do.call(keras$utils$image_dataset_from_directory, args)
 }
@@ -567,7 +567,7 @@ function (directory, labels = "inferred", label_mode = "int",
     shuffle = TRUE, seed = NULL, validation_split = NULL, subset = NULL,
     follow_links = FALSE)
 {
-    args <- capture_args2(list(labels = as_integer, label_mode = as_integer,
+    args <- capture_args(list(labels = as_integer, label_mode = as_integer,
         batch_size = as_integer, seed = as_integer))
     do.call(keras$utils$text_dataset_from_directory, args)
 }
@@ -710,7 +710,7 @@ function (data, targets, sequence_length, sequence_stride = 1L,
     sampling_rate = 1L, batch_size = 128L, shuffle = FALSE, seed = NULL,
     start_index = NULL, end_index = NULL)
 {
-    args <- capture_args2(list(sequence_stride = as_integer,
+    args <- capture_args(list(sequence_stride = as_integer,
         sampling_rate = as_integer, batch_size = as_integer,
         seed = as_integer, start_index = as_integer, end_index = as_integer))
     do.call(keras$utils$timeseries_dataset_from_array, args)

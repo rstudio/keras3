@@ -1024,7 +1024,7 @@ make_r_fn <- function(endpoint,
   #   frmls$minval <- 0L
   #   frmls$maxval <- 1L
   #   return(as.function.default(, quote({
-  #     args <- capture_args2(list(shape = normalize_shape, seed = as_integer))
+  #     args <- capture_args(list(shape = normalize_shape, seed = as_integer))
   #     do.call(keras$random$randint, args)
   #   }))
   # }
@@ -1080,14 +1080,14 @@ make_r_fn.default <- function(endpoint, py_obj, transformers) {
   frmls <- formals(py_obj)
 
   body <- bquote({
-    args <- capture_args2(.(transformers))
+    args <- capture_args(.(transformers))
     do.call(.(py_obj_expr), args)
   })
 
 
   if(endpoint == "keras.utils.set_random_seed") {
     body <- bquote({
-      args <- capture_args2(.(transformers))
+      args <- capture_args(.(transformers))
       set.seed(args$seed)
       # set Python/NumPy random seed
       reticulate::py_set_seed(args$seed)
@@ -1213,7 +1213,7 @@ make_r_fn.loss <- function(endpoint, py_obj, transformers) {
   stopifnot(names(frmls)[1:2] == c("y_true", "y_pred"))
 
   body <- bquote({
-    args <- capture_args2(.(transformers))
+    args <- capture_args(.(transformers))
     callable <- if (missing(y_true) && missing(y_pred))
       .(py_obj_expr) else .(py_obj_expr_fn)
     do.call(callable, args)
@@ -1248,7 +1248,7 @@ make_r_fn.layer <- function(endpoint, py_obj, transformers) {
     frmls <- frmls[unique(names(frmls))] # remove dup `...` if present
 
     fn_body <- bquote({
-      args <- capture_args2(.(transformers), ignore = c("...", "inputs"))
+      args <- capture_args(.(transformers), ignore = c("...", "inputs"))
       dots <- split_dots_named_unnamed(list(...))
       if (missing(inputs))
         inputs <- NULL
@@ -1271,7 +1271,7 @@ make_r_fn.layer <- function(endpoint, py_obj, transformers) {
     # TODO: consider renaming these in keras 3, maybe something like
     # rnn_cell_{gru,simple,stacked,lstm}()
     fn_body <- bquote({
-      args <- capture_args2(.(transformers))
+      args <- capture_args(.(transformers))
       do.call(.(py_obj_expr), args)
     })
 
@@ -1281,7 +1281,7 @@ make_r_fn.layer <- function(endpoint, py_obj, transformers) {
     #    alist(query, key = query, value = key, ..., call_args = list())
     frmls <- c(alist(inputs = ), frmls)
     fn_body <- bquote({
-      args <- capture_args2(.(transformers), ignore = "inputs")
+      args <- capture_args(.(transformers), ignore = "inputs")
       layer <- do.call(.(py_obj_expr), args)
       if (missing(inputs) || is.null(inputs))
         return(layer)
@@ -1296,7 +1296,7 @@ make_r_fn.layer <- function(endpoint, py_obj, transformers) {
     names(frmls) %<>% replace_val("function", "f")
     frmls <- c(alist(object = ), frmls)
     fn_body <- bquote({
-      args <- capture_args2(.(transformers), ignore = "object")
+      args <- capture_args(.(transformers), ignore = "object")
       names(args)[match("f", names(args))] <- "function"
       create_layer(.(py_obj_expr), object, args)
     })
@@ -1307,7 +1307,7 @@ make_r_fn.layer <- function(endpoint, py_obj, transformers) {
   #   # if you have an R parser reserved word as an arg name
   #   names(frmls) %<>% replace_val("function", "f")
   #   fn_body <- bquote({
-  #     args <- capture_args2(.(transformers), ignore = "object")
+  #     args <- capture_args(.(transformers), ignore = "object")
   #     names(args)[match("f", names(args))] <- "function"
   #     create_layer(.(py_obj_expr), object, args)
   #   })
@@ -1318,7 +1318,7 @@ make_r_fn.layer <- function(endpoint, py_obj, transformers) {
 
     frmls <- c(alist(object = ), frmls)
     fn_body <- bquote({
-      args <- capture_args2(.(transformers), ignore = "object")
+      args <- capture_args(.(transformers), ignore = "object")
       create_layer(.(py_obj_expr), object, args)
     })
 

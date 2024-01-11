@@ -82,6 +82,6 @@ image_smart_resize <-
 function (x, size, interpolation = "bilinear", data_format = "channels_last",
     backend_module = NULL)
 {
-    args <- capture_args2(list(size = as_integer))
+    args <- capture_args(list(size = as_integer))
     do.call(keras$preprocessing$image$smart_resize, args)
 }

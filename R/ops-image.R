@@ -98,7 +98,7 @@ op_image_affine_transform <-
 function (image, transform, interpolation = "bilinear", fill_mode = "constant",
     fill_value = 0L, data_format = "channels_last")
 {
-    args <- capture_args2(list(fill_value = as_integer))
+    args <- capture_args(list(fill_value = as_integer))
     do.call(keras$ops$image$affine_transform, args)
 }
 
@@ -164,7 +164,7 @@ op_image_extract_patches <-
 function (image, size, strides = NULL, dilation_rate = 1L, padding = "valid",
     data_format = "channels_last")
 {
-    args <- capture_args2(list(size = as_integer, dilation_rate = as_integer))
+    args <- capture_args(list(size = as_integer, dilation_rate = as_integer))
     do.call(keras$ops$image$extract_patches, args)
 }
 
@@ -224,7 +224,7 @@ op_image_map_coordinates <-
 function (input, coordinates, order, fill_mode = "constant",
     fill_value = 0L)
 {
-    args <- capture_args2(list(fill_value = as_integer))
+    args <- capture_args(list(fill_value = as_integer))
     do.call(keras$ops$image$map_coordinates, args)
 }
 
@@ -290,7 +290,7 @@ op_image_pad_images <-
 function (images, top_padding = NULL, left_padding = NULL, target_height = NULL,
     target_width = NULL, bottom_padding = NULL, right_padding = NULL)
 {
-    args <- capture_args2(list(images = as_integer, top_padding = as_integer,
+    args <- capture_args(list(images = as_integer, top_padding = as_integer,
         bottom_padding = as_integer, left_padding = as_integer,
         right_padding = as_integer, target_height = as_integer,
         target_width = as_integer))
@@ -361,6 +361,6 @@ op_image_resize <-
 function (image, size, interpolation = "bilinear", antialias = FALSE,
     data_format = "channels_last")
 {
-    args <- capture_args2(list(size = as_integer))
+    args <- capture_args(list(size = as_integer))
     do.call(keras$ops$image$resize, args)
 }

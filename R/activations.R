@@ -36,7 +36,7 @@
 activation_elu <-
 function (x, alpha = 1)
 {
-    args <- capture_args2(NULL)
+    args <- capture_args()
     do.call(keras$activations$elu, args)
 }
 
@@ -55,7 +55,7 @@ function (x, alpha = 1)
 activation_exponential <-
 function (x)
 {
-    args <- capture_args2(NULL)
+    args <- capture_args()
     do.call(keras$activations$exponential, args)
 }
 
@@ -89,7 +89,7 @@ function (x)
 activation_gelu <-
 function (x, approximate = FALSE)
 {
-    args <- capture_args2(NULL)
+    args <- capture_args()
     do.call(keras$activations$gelu, args)
 }
 
@@ -121,7 +121,7 @@ function (x, approximate = FALSE)
 activation_hard_sigmoid <-
 function (x)
 {
-    args <- capture_args2(NULL)
+    args <- capture_args()
     do.call(keras$activations$hard_sigmoid, args)
 }
 
@@ -144,7 +144,7 @@ function (x)
 activation_leaky_relu <-
 function (x, negative_slope = 0.2)
 {
-    args <- capture_args2(NULL)
+    args <- capture_args()
     do.call(keras$activations$leaky_relu, args)
 }
 
@@ -167,7 +167,7 @@ function (x, negative_slope = 0.2)
 activation_linear <-
 function (x)
 {
-    args <- capture_args2(NULL)
+    args <- capture_args()
     do.call(keras$activations$linear, args)
 }
 
@@ -194,7 +194,7 @@ function (x)
 activation_log_softmax <-
 function (x, axis = -1L)
 {
-    args <- capture_args2(list(axis = as_axis))
+    args <- capture_args(list(axis = as_axis))
     do.call(keras$activations$log_softmax, args)
 }
 
@@ -225,7 +225,7 @@ function (x, axis = -1L)
 activation_mish <-
 function (x)
 {
-    args <- capture_args2(NULL)
+    args <- capture_args()
     do.call(keras$activations$mish, args)
 }
 
@@ -277,7 +277,7 @@ activation_relu <-
 function (x, negative_slope = 0, max_value = NULL,
     threshold = 0)
 {
-    args <- capture_args2(NULL)
+    args <- capture_args()
     do.call(keras$activations$relu, args)
 }
 
@@ -299,7 +299,7 @@ function (x, negative_slope = 0, max_value = NULL,
 activation_relu6 <-
 function (x)
 {
-    args <- capture_args2(NULL)
+    args <- capture_args()
     do.call(keras$activations$relu6, args)
 }
 
@@ -347,7 +347,7 @@ function (x)
 activation_selu <-
 function (x)
 {
-    args <- capture_args2(NULL)
+    args <- capture_args()
     do.call(keras$activations$selu, args)
 }
 
@@ -377,7 +377,7 @@ function (x)
 activation_sigmoid <-
 function (x)
 {
-    args <- capture_args2(NULL)
+    args <- capture_args()
     do.call(keras$activations$sigmoid, args)
 }
 
@@ -406,7 +406,7 @@ function (x)
 activation_silu <-
 function (x)
 {
-    args <- capture_args2(NULL)
+    args <- capture_args()
     do.call(keras$activations$silu, args)
 }
 
@@ -444,7 +444,7 @@ function (x)
 activation_softmax <-
 function (x, axis = -1L)
 {
-    args <- capture_args2(list(axis = as_axis))
+    args <- capture_args(list(axis = as_axis))
     do.call(keras$activations$softmax, args)
 }
 
@@ -466,7 +466,7 @@ function (x, axis = -1L)
 activation_softplus <-
 function (x)
 {
-    args <- capture_args2(NULL)
+    args <- capture_args()
     do.call(keras$activations$softplus, args)
 }
 
@@ -488,7 +488,7 @@ function (x)
 activation_softsign <-
 function (x)
 {
-    args <- capture_args2(NULL)
+    args <- capture_args()
     do.call(keras$activations$softsign, args)
 }
 
@@ -512,7 +512,7 @@ function (x)
 activation_tanh <-
 function (x)
 {
-    args <- capture_args2(NULL)
+    args <- capture_args()
     do.call(keras$activations$tanh, args)
 }
 

@@ -71,7 +71,7 @@
 layer_additive_attention <-
 function (object, use_scale = TRUE, dropout = 0, ...)
 {
-    args <- capture_args2(list(input_shape = normalize_shape,
+    args <- capture_args(list(input_shape = normalize_shape,
         batch_size = as_integer, batch_input_shape = normalize_shape),
         ignore = "object")
     create_layer(keras$layers$AdditiveAttention, object, args)
@@ -157,7 +157,7 @@ layer_attention <-
 function (object, use_scale = FALSE, score_mode = "dot", dropout = 0,
     seed = NULL, ...)
 {
-    args <- capture_args2(list(input_shape = normalize_shape,
+    args <- capture_args(list(input_shape = normalize_shape,
         batch_size = as_integer, batch_input_shape = normalize_shape),
         ignore = "object")
     create_layer(keras$layers$Attention, object, args)
@@ -272,7 +272,7 @@ function (object, head_dim, num_query_heads, num_key_value_heads,
     activity_regularizer = NULL, kernel_constraint = NULL, bias_constraint = NULL,
     ...)
 {
-    args <- capture_args2(list(input_shape = normalize_shape,
+    args <- capture_args(list(input_shape = normalize_shape,
         batch_size = as_integer, batch_input_shape = normalize_shape),
         ignore = "object")
     create_layer(keras$layers$GroupQueryAttention, object, args)
@@ -401,7 +401,7 @@ function (inputs, num_heads, key_dim, value_dim = NULL, dropout = 0,
     kernel_regularizer = NULL, bias_regularizer = NULL, activity_regularizer = NULL,
     kernel_constraint = NULL, bias_constraint = NULL, ...)
 {
-    args <- capture_args2(list(input_shape = normalize_shape,
+    args <- capture_args(list(input_shape = normalize_shape,
         batch_size = as_integer, batch_input_shape = normalize_shape,
         num_heads = as_integer, key_dim = as_integer, value_dim = as_integer,
         attention_axes = as_integer), ignore = "inputs")

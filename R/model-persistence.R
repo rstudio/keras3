@@ -138,7 +138,7 @@ function (model, filepath = NULL, overwrite = FALSE, ...)
 load_model <-
 function (model, custom_objects = NULL, compile = TRUE, safe_mode = TRUE)
 {
-  args <- capture_args2(list(custom_objects = objects_with_py_function_names),
+  args <- capture_args(list(custom_objects = objects_with_py_function_names),
                         ignore = "model")
   if (is.raw(model)) {
     serialized_model <- model
@@ -220,7 +220,7 @@ function (model, filepath, overwrite = FALSE)
 load_model_weights <-
 function (model, filepath, skip_mismatch = FALSE, ...)
 {
-  args <- capture_args2(ignore = "model")
+  args <- capture_args(ignore = "model")
   do.call(model$load_weights, args)
 }
 
@@ -511,7 +511,7 @@ function (obj)
 get_registered_object <-
 function (name, custom_objects = NULL, module_objects = NULL)
 {
-  args <- capture_args2(list(
+  args <- capture_args(list(
     custom_objects = objects_with_py_function_names,
     module_objects = objects_with_py_function_names
   ))
@@ -676,7 +676,7 @@ function (obj)
 deserialize_keras_object <-
 function (config, custom_objects = NULL, safe_mode = TRUE, ...)
 {
-    args <- capture_args2(NULL)
+    args <- capture_args()
     do.call(keras$saving$deserialize_keras_object, args)
 }
 

@@ -36,7 +36,7 @@
 layer_activation <-
 function (object, activation, ...)
 {
-    args <- capture_args2(list(input_shape = normalize_shape,
+    args <- capture_args(list(input_shape = normalize_shape,
         batch_size = as_integer, batch_input_shape = normalize_shape),
         ignore = "object")
     create_layer(keras$layers$Activation, object, args)
@@ -72,7 +72,7 @@ function (object, activation, ...)
 layer_activation_elu <-
 function (object, alpha = 1, ...)
 {
-    args <- capture_args2(list(input_shape = normalize_shape,
+    args <- capture_args(list(input_shape = normalize_shape,
         batch_size = as_integer, batch_input_shape = normalize_shape),
         ignore = "object")
     create_layer(keras$layers$ELU, object, args)
@@ -120,7 +120,7 @@ function (object, alpha = 1, ...)
 layer_activation_leaky_relu <-
 function (object, negative_slope = 0.3, ...)
 {
-    args <- capture_args2(list(input_shape = normalize_shape,
+    args <- capture_args(list(input_shape = normalize_shape,
         batch_size = as_integer, batch_input_shape = normalize_shape),
         ignore = "object")
     create_layer(keras$layers$LeakyReLU, object, args)
@@ -171,7 +171,7 @@ layer_activation_parametric_relu <-
 function (object, alpha_initializer = "Zeros", alpha_regularizer = NULL,
     alpha_constraint = NULL, shared_axes = NULL, ...)
 {
-    args <- capture_args2(list(input_shape = normalize_shape,
+    args <- capture_args(list(input_shape = normalize_shape,
         batch_size = as_integer, batch_input_shape = normalize_shape,
         shared_axes = as_axis), ignore = "object")
     create_layer(keras$layers$PReLU, object, args)
@@ -230,7 +230,7 @@ layer_activation_relu <-
 function (object, max_value = NULL, negative_slope = 0, threshold = 0,
     ...)
 {
-    args <- capture_args2(list(input_shape = normalize_shape,
+    args <- capture_args(list(input_shape = normalize_shape,
         batch_size = as_integer, batch_input_shape = normalize_shape),
         ignore = "object")
     create_layer(keras$layers$ReLU, object, args)
@@ -281,7 +281,7 @@ function (object, max_value = NULL, negative_slope = 0, threshold = 0,
 layer_activation_softmax <-
 function (object, axis = -1L, ...)
 {
-    args <- capture_args2(list(axis = as_axis, input_shape = normalize_shape,
+    args <- capture_args(list(axis = as_axis, input_shape = normalize_shape,
         batch_size = as_integer, batch_input_shape = normalize_shape),
         ignore = "object")
     create_layer(keras$layers$Softmax, object, args)

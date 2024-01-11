@@ -136,7 +136,7 @@ function (object, filters, kernel_size, strides = 1L, padding = "valid",
     kernel_regularizer = NULL, bias_regularizer = NULL, activity_regularizer = NULL,
     kernel_constraint = NULL, bias_constraint = NULL, ...)
 {
-    args <- capture_args2(list(filters = as_integer, kernel_size = as_integer_tuple,
+    args <- capture_args(list(filters = as_integer, kernel_size = as_integer_tuple,
         strides = as_integer_tuple, dilation_rate = as_integer_tuple,
         groups = as_integer, input_shape = normalize_shape, batch_size = as_integer,
         batch_input_shape = normalize_shape), ignore = "object")
@@ -272,7 +272,7 @@ function (object, filters, kernel_size, strides = 1L, padding = "valid",
     kernel_regularizer = NULL, bias_regularizer = NULL, activity_regularizer = NULL,
     kernel_constraint = NULL, bias_constraint = NULL, ...)
 {
-    args <- capture_args2(list(filters = as_integer, kernel_size = as_integer_tuple,
+    args <- capture_args(list(filters = as_integer, kernel_size = as_integer_tuple,
         strides = as_integer_tuple, dilation_rate = as_integer_tuple,
         input_shape = normalize_shape, batch_size = as_integer,
         batch_input_shape = normalize_shape), ignore = "object")
@@ -411,7 +411,7 @@ function (object, filters, kernel_size, strides = list(1L, 1L),
     kernel_regularizer = NULL, bias_regularizer = NULL, activity_regularizer = NULL,
     kernel_constraint = NULL, bias_constraint = NULL, ...)
 {
-    args <- capture_args2(list(filters = as_integer, kernel_size = as_integer_tuple,
+    args <- capture_args(list(filters = as_integer, kernel_size = as_integer_tuple,
         strides = as_integer_tuple, dilation_rate = as_integer_tuple,
         groups = as_integer, input_shape = normalize_shape, batch_size = as_integer,
         batch_input_shape = normalize_shape), ignore = "object")
@@ -551,7 +551,7 @@ function (object, filters, kernel_size, strides = list(1L, 1L),
     activity_regularizer = NULL, kernel_constraint = NULL, bias_constraint = NULL,
     ...)
 {
-    args <- capture_args2(list(filters = as_integer, kernel_size = as_integer_tuple,
+    args <- capture_args(list(filters = as_integer, kernel_size = as_integer_tuple,
         strides = as_integer_tuple, dilation_rate = as_integer_tuple,
         input_shape = normalize_shape, batch_size = as_integer,
         batch_input_shape = normalize_shape), ignore = "object")
@@ -696,7 +696,7 @@ function (object, filters, kernel_size, strides = list(1L, 1L,
     kernel_regularizer = NULL, bias_regularizer = NULL, activity_regularizer = NULL,
     kernel_constraint = NULL, bias_constraint = NULL, ...)
 {
-    args <- capture_args2(list(filters = as_integer, kernel_size = as_integer_tuple,
+    args <- capture_args(list(filters = as_integer, kernel_size = as_integer_tuple,
         strides = as_integer_tuple, dilation_rate = as_integer_tuple,
         groups = as_integer, input_shape = normalize_shape, batch_size = as_integer,
         batch_input_shape = normalize_shape), ignore = "object")
@@ -840,7 +840,7 @@ function (object, filters, kernel_size, strides = list(1L, 1L,
     activity_regularizer = NULL, kernel_constraint = NULL, bias_constraint = NULL,
     ...)
 {
-    args <- capture_args2(list(filters = as_integer, kernel_size = as_integer_tuple,
+    args <- capture_args(list(filters = as_integer, kernel_size = as_integer_tuple,
         strides = as_integer_tuple, dilation_rate = as_integer_tuple,
         input_shape = normalize_shape, batch_size = as_integer,
         batch_input_shape = normalize_shape), ignore = "object")
@@ -991,7 +991,7 @@ function (object, kernel_size, strides = 1L, padding = "valid",
     bias_regularizer = NULL, activity_regularizer = NULL, depthwise_constraint = NULL,
     bias_constraint = NULL, ...)
 {
-    args <- capture_args2(list(kernel_size = as_integer, strides = as_integer,
+    args <- capture_args(list(kernel_size = as_integer, strides = as_integer,
         depth_multiplier = as_integer, dilation_rate = as_integer,
         input_shape = normalize_shape, batch_size = as_integer,
         batch_input_shape = normalize_shape), ignore = "object")
@@ -1139,7 +1139,7 @@ function (object, kernel_size, strides = list(1L, 1L), padding = "valid",
     bias_regularizer = NULL, activity_regularizer = NULL, depthwise_constraint = NULL,
     bias_constraint = NULL, ...)
 {
-    args <- capture_args2(list(kernel_size = as_integer, strides = as_integer,
+    args <- capture_args(list(kernel_size = as_integer, strides = as_integer,
         depth_multiplier = as_integer, dilation_rate = as_integer,
         input_shape = normalize_shape, batch_size = as_integer,
         batch_input_shape = normalize_shape), ignore = "object")
@@ -1290,7 +1290,7 @@ function (object, filters, kernel_size, strides = 1L, padding = "valid",
     bias_regularizer = NULL, activity_regularizer = NULL, depthwise_constraint = NULL,
     pointwise_constraint = NULL, bias_constraint = NULL, ...)
 {
-    args <- capture_args2(list(filters = as_integer, kernel_size = as_integer,
+    args <- capture_args(list(filters = as_integer, kernel_size = as_integer,
         strides = as_integer, dilation_rate = as_integer, depth_multiplier = as_integer,
         input_shape = normalize_shape, batch_size = as_integer,
         batch_input_shape = normalize_shape), ignore = "object")
@@ -1441,7 +1441,7 @@ function (object, filters, kernel_size, strides = list(1L, 1L),
     depthwise_constraint = NULL, pointwise_constraint = NULL,
     bias_constraint = NULL, ...)
 {
-    args <- capture_args2(list(filters = as_integer, kernel_size = as_integer,
+    args <- capture_args(list(filters = as_integer, kernel_size = as_integer,
         strides = as_integer, dilation_rate = as_integer, depth_multiplier = as_integer,
         input_shape = normalize_shape, batch_size = as_integer,
         batch_input_shape = normalize_shape), ignore = "object")

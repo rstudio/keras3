@@ -19,7 +19,7 @@
 #' @export
 new_learning_rate_schedule_class <-
 function(classname, ..., initialize = NULL, call, get_config = NULL) {
-  members <- capture_args2(ignore = "classname")
+  members <- capture_args(ignore = "classname")
   members <- drop_nulls(members)
   members <- rename_to_dunder(members, "call")
   if (!is.null(members[["call"]])) {

@@ -34,7 +34,7 @@
 initializer_constant <-
 function (value = 0)
 {
-    args <- capture_args2(NULL)
+    args <- capture_args()
     do.call(keras$initializers$Constant, args)
 }
 
@@ -69,7 +69,7 @@ function (value = 0)
 initializer_identity <-
 function (gain = 1)
 {
-    args <- capture_args2(NULL)
+    args <- capture_args()
     do.call(keras$initializers$IdentityInitializer, args)
 }
 
@@ -102,7 +102,7 @@ function (gain = 1)
 initializer_ones <-
 function ()
 {
-    args <- capture_args2(NULL)
+    args <- capture_args()
     do.call(keras$initializers$Ones, args)
 }
 
@@ -134,7 +134,7 @@ function ()
 initializer_zeros <-
 function ()
 {
-    args <- capture_args2(NULL)
+    args <- capture_args()
     do.call(keras$initializers$Zeros, args)
 }
 
@@ -183,7 +183,7 @@ function ()
 initializer_glorot_normal <-
 function (seed = NULL)
 {
-    args <- capture_args2(list(seed = as_integer))
+    args <- capture_args(list(seed = as_integer))
     do.call(keras$initializers$GlorotNormal, args)
 }
 
@@ -231,7 +231,7 @@ function (seed = NULL)
 initializer_glorot_uniform <-
 function (seed = NULL)
 {
-    args <- capture_args2(list(seed = as_integer))
+    args <- capture_args(list(seed = as_integer))
     do.call(keras$initializers$GlorotUniform, args)
 }
 
@@ -279,7 +279,7 @@ function (seed = NULL)
 initializer_he_normal <-
 function (seed = NULL)
 {
-    args <- capture_args2(list(seed = as_integer))
+    args <- capture_args(list(seed = as_integer))
     do.call(keras$initializers$HeNormal, args)
 }
 
@@ -327,7 +327,7 @@ function (seed = NULL)
 initializer_he_uniform <-
 function (seed = NULL)
 {
-    args <- capture_args2(list(seed = as_integer))
+    args <- capture_args(list(seed = as_integer))
     do.call(keras$initializers$HeUniform, args)
 }
 
@@ -378,7 +378,7 @@ function (seed = NULL)
 initializer_lecun_normal <-
 function (seed = NULL)
 {
-    args <- capture_args2(list(seed = as_integer))
+    args <- capture_args(list(seed = as_integer))
     do.call(keras$initializers$LecunNormal, args)
 }
 
@@ -425,7 +425,7 @@ function (seed = NULL)
 initializer_lecun_uniform <-
 function (seed = NULL)
 {
-    args <- capture_args2(list(seed = as_integer))
+    args <- capture_args(list(seed = as_integer))
     do.call(keras$initializers$LecunUniform, args)
 }
 
@@ -476,7 +476,7 @@ function (seed = NULL)
 initializer_orthogonal <-
 function (gain = 1, seed = NULL)
 {
-    args <- capture_args2(list(seed = as_integer))
+    args <- capture_args(list(seed = as_integer))
     do.call(keras$initializers$OrthogonalInitializer, args)
 }
 
@@ -527,7 +527,7 @@ function (gain = 1, seed = NULL)
 initializer_random_normal <-
 function (mean = 0, stddev = 0.05, seed = NULL)
 {
-    args <- capture_args2(list(seed = as_integer))
+    args <- capture_args(list(seed = as_integer))
     do.call(keras$initializers$RandomNormal, args)
 }
 
@@ -578,7 +578,7 @@ function (mean = 0, stddev = 0.05, seed = NULL)
 initializer_random_uniform <-
 function (minval = -0.05, maxval = 0.05, seed = NULL)
 {
-    args <- capture_args2(list(seed = as_integer))
+    args <- capture_args(list(seed = as_integer))
     do.call(keras$initializers$RandomUniform, args)
 }
 
@@ -632,7 +632,7 @@ function (minval = -0.05, maxval = 0.05, seed = NULL)
 initializer_truncated_normal <-
 function (mean = 0, stddev = 0.05, seed = NULL)
 {
-    args <- capture_args2(list(seed = as_integer))
+    args <- capture_args(list(seed = as_integer))
     do.call(keras$initializers$TruncatedNormal, args)
 }
 
@@ -698,7 +698,7 @@ initializer_variance_scaling <-
 function (scale = 1, mode = "fan_in", distribution = "truncated_normal",
     seed = NULL)
 {
-    args <- capture_args2(list(seed = as_integer))
+    args <- capture_args(list(seed = as_integer))
     do.call(keras$initializers$VarianceScaling, args)
 }
 
@@ -708,7 +708,7 @@ function (scale = 1, mode = "fan_in", distribution = "truncated_normal",
 py_to_r_wrapper.keras.src.initializers.initializer.Initializer <- function(x) {
     force(x)
     as.function.default(c(formals(x), quote({
-        args <- capture_args2(list(shape = normalize_shape))
+        args <- capture_args(list(shape = normalize_shape))
         do.call(x, args)
     })))
 }

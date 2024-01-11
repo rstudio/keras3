@@ -104,7 +104,7 @@ function (learning_rate = 0.001, rho = 0.95, epsilon = 1e-07,
     use_ema = FALSE, ema_momentum = 0.99, ema_overwrite_frequency = NULL,
     name = "adadelta", ..., loss_scale_factor = NULL)
 {
-    args <- capture_args2(list(ema_overwrite_frequency = as_integer))
+    args <- capture_args(list(ema_overwrite_frequency = as_integer))
     do.call(keras$optimizers$Adadelta, args)
 }
 
@@ -222,7 +222,7 @@ function (learning_rate = 0.001, beta_2_decay = -0.8, epsilon_1 = 1e-30,
     use_ema = FALSE, ema_momentum = 0.99, ema_overwrite_frequency = NULL,
     name = "adafactor", ..., loss_scale_factor = NULL)
 {
-    args <- capture_args2(list(ema_overwrite_frequency = as_integer))
+    args <- capture_args(list(ema_overwrite_frequency = as_integer))
     do.call(keras$optimizers$Adafactor, args)
 }
 
@@ -325,7 +325,7 @@ function (learning_rate = 0.001, initial_accumulator_value = 0.1,
     global_clipnorm = NULL, use_ema = FALSE, ema_momentum = 0.99,
     ema_overwrite_frequency = NULL, name = "adagrad", ..., loss_scale_factor = NULL)
 {
-    args <- capture_args2(list(ema_overwrite_frequency = as_integer))
+    args <- capture_args(list(ema_overwrite_frequency = as_integer))
     do.call(keras$optimizers$Adagrad, args)
 }
 
@@ -443,7 +443,7 @@ function (learning_rate = 0.001, beta_1 = 0.9, beta_2 = 0.999,
     ema_momentum = 0.99, ema_overwrite_frequency = NULL, name = "adam",
     ..., loss_scale_factor = NULL)
 {
-    args <- capture_args2(list(ema_overwrite_frequency = as_integer))
+    args <- capture_args(list(ema_overwrite_frequency = as_integer))
     do.call(keras$optimizers$Adam, args)
 }
 
@@ -569,7 +569,7 @@ function (learning_rate = 0.001, beta_1 = 0.9, beta_2 = 0.999,
     global_clipnorm = NULL, use_ema = FALSE, ema_momentum = 0.99,
     ema_overwrite_frequency = NULL, name = "adamax", ..., loss_scale_factor = NULL)
 {
-    args <- capture_args2(list(ema_overwrite_frequency = as_integer))
+    args <- capture_args(list(ema_overwrite_frequency = as_integer))
     do.call(keras$optimizers$Adamax, args)
 }
 
@@ -695,7 +695,7 @@ function (learning_rate = 0.001, weight_decay = 0.004, beta_1 = 0.9,
     ema_momentum = 0.99, ema_overwrite_frequency = NULL, name = "adamw",
     ..., loss_scale_factor = NULL)
 {
-    args <- capture_args2(list(ema_overwrite_frequency = as_integer))
+    args <- capture_args(list(ema_overwrite_frequency = as_integer))
     do.call(keras$optimizers$AdamW, args)
 }
 
@@ -854,7 +854,7 @@ function (learning_rate = 0.001, learning_rate_power = -0.5,
     global_clipnorm = NULL, use_ema = FALSE, ema_momentum = 0.99,
     ema_overwrite_frequency = NULL, name = "ftrl", ..., loss_scale_factor = NULL)
 {
-    args <- capture_args2(list(ema_overwrite_frequency = as_integer))
+    args <- capture_args(list(ema_overwrite_frequency = as_integer))
     do.call(keras$optimizers$Ftrl, args)
 }
 
@@ -965,7 +965,7 @@ function (learning_rate = 0.001, beta_1 = 0.9, beta_2 = 0.99,
     use_ema = FALSE, ema_momentum = 0.99, ema_overwrite_frequency = NULL,
     name = "lion", ..., loss_scale_factor = NULL)
 {
-    args <- capture_args2(list(ema_overwrite_frequency = as_integer))
+    args <- capture_args(list(ema_overwrite_frequency = as_integer))
     do.call(keras$optimizers$Lion, args)
 }
 
@@ -1071,7 +1071,7 @@ function (inner_optimizer, initial_scale = 32768, dynamic_growth_steps = 2000L,
     global_clipnorm = NULL, use_ema = NULL, ema_momentum = NULL,
     ema_overwrite_frequency = NULL, loss_scale_factor = NULL)
 {
-    args <- capture_args2(list(dynamic_growth_steps = as_integer,
+    args <- capture_args(list(dynamic_growth_steps = as_integer,
         ema_overwrite_frequency = as_integer))
     do.call(keras$optimizers$LossScaleOptimizer, args)
 }
@@ -1180,7 +1180,7 @@ function (learning_rate = 0.001, beta_1 = 0.9, beta_2 = 0.999,
     global_clipnorm = NULL, use_ema = FALSE, ema_momentum = 0.99,
     ema_overwrite_frequency = NULL, name = "nadam", ..., loss_scale_factor = NULL)
 {
-    args <- capture_args2(list(ema_overwrite_frequency = as_integer))
+    args <- capture_args(list(ema_overwrite_frequency = as_integer))
     do.call(keras$optimizers$Nadam, args)
 }
 
@@ -1303,7 +1303,7 @@ function (learning_rate = 0.001, rho = 0.9, momentum = 0, epsilon = 1e-07,
     global_clipnorm = NULL, use_ema = FALSE, ema_momentum = 0.99,
     ema_overwrite_frequency = 100L, name = "rmsprop", ..., loss_scale_factor = NULL)
 {
-    args <- capture_args2(list(ema_overwrite_frequency = as_integer))
+    args <- capture_args(list(ema_overwrite_frequency = as_integer))
     do.call(keras$optimizers$RMSprop, args)
 }
 
@@ -1417,6 +1417,6 @@ function (learning_rate = 0.01, momentum = 0, nesterov = FALSE,
     use_ema = FALSE, ema_momentum = 0.99, ema_overwrite_frequency = NULL,
     name = "SGD", ..., loss_scale_factor = NULL)
 {
-    args <- capture_args2(list(ema_overwrite_frequency = as_integer))
+    args <- capture_args(list(ema_overwrite_frequency = as_integer))
     do.call(keras$optimizers$SGD, args)
 }

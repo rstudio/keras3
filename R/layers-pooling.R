@@ -100,7 +100,7 @@ layer_average_pooling_1d <-
 function (object, pool_size, strides = NULL, padding = "valid",
     data_format = NULL, name = NULL, ...)
 {
-    args <- capture_args2(list(pool_size = as_integer, strides = as_integer,
+    args <- capture_args(list(pool_size = as_integer, strides = as_integer,
         input_shape = normalize_shape, batch_size = as_integer,
         batch_input_shape = normalize_shape), ignore = "object")
     create_layer(keras$layers$AveragePooling1D, object, args)
@@ -217,7 +217,7 @@ layer_average_pooling_2d <-
 function (object, pool_size, strides = NULL, padding = "valid",
     data_format = "channels_last", name = NULL, ...)
 {
-    args <- capture_args2(list(pool_size = as_integer, strides = as_integer,
+    args <- capture_args(list(pool_size = as_integer, strides = as_integer,
         input_shape = normalize_shape, batch_size = as_integer,
         batch_input_shape = normalize_shape), ignore = "object")
     create_layer(keras$layers$AveragePooling2D, object, args)
@@ -305,7 +305,7 @@ layer_average_pooling_3d <-
 function (object, pool_size, strides = NULL, padding = "valid",
     data_format = "channels_last", name = NULL, ...)
 {
-    args <- capture_args2(list(pool_size = as_integer, strides = as_integer,
+    args <- capture_args(list(pool_size = as_integer, strides = as_integer,
         input_shape = normalize_shape, batch_size = as_integer,
         batch_input_shape = normalize_shape), ignore = "object")
     create_layer(keras$layers$AveragePooling3D, object, args)
@@ -377,7 +377,7 @@ function (object, pool_size, strides = NULL, padding = "valid",
 layer_global_average_pooling_1d <-
 function (object, data_format = NULL, keepdims = FALSE, ...)
 {
-    args <- capture_args2(list(input_shape = normalize_shape,
+    args <- capture_args(list(input_shape = normalize_shape,
         batch_size = as_integer, batch_input_shape = normalize_shape),
         ignore = "object")
     create_layer(keras$layers$GlobalAveragePooling1D, object,
@@ -446,7 +446,7 @@ function (object, data_format = NULL, keepdims = FALSE, ...)
 layer_global_average_pooling_2d <-
 function (object, data_format = NULL, keepdims = FALSE, ...)
 {
-    args <- capture_args2(list(input_shape = normalize_shape,
+    args <- capture_args(list(input_shape = normalize_shape,
         batch_size = as_integer, batch_input_shape = normalize_shape),
         ignore = "object")
     create_layer(keras$layers$GlobalAveragePooling2D, object,
@@ -516,7 +516,7 @@ function (object, data_format = NULL, keepdims = FALSE, ...)
 layer_global_average_pooling_3d <-
 function (object, data_format = NULL, keepdims = FALSE, ...)
 {
-    args <- capture_args2(list(input_shape = normalize_shape,
+    args <- capture_args(list(input_shape = normalize_shape,
         batch_size = as_integer, batch_input_shape = normalize_shape),
         ignore = "object")
     create_layer(keras$layers$GlobalAveragePooling3D, object,
@@ -584,7 +584,7 @@ function (object, data_format = NULL, keepdims = FALSE, ...)
 layer_global_max_pooling_1d <-
 function (object, data_format = NULL, keepdims = FALSE, ...)
 {
-    args <- capture_args2(list(input_shape = normalize_shape,
+    args <- capture_args(list(input_shape = normalize_shape,
         batch_size = as_integer, batch_input_shape = normalize_shape),
         ignore = "object")
     create_layer(keras$layers$GlobalMaxPooling1D, object, args)
@@ -652,7 +652,7 @@ function (object, data_format = NULL, keepdims = FALSE, ...)
 layer_global_max_pooling_2d <-
 function (object, data_format = NULL, keepdims = FALSE, ...)
 {
-    args <- capture_args2(list(input_shape = normalize_shape,
+    args <- capture_args(list(input_shape = normalize_shape,
         batch_size = as_integer, batch_input_shape = normalize_shape),
         ignore = "object")
     create_layer(keras$layers$GlobalMaxPooling2D, object, args)
@@ -721,7 +721,7 @@ function (object, data_format = NULL, keepdims = FALSE, ...)
 layer_global_max_pooling_3d <-
 function (object, data_format = NULL, keepdims = FALSE, ...)
 {
-    args <- capture_args2(list(input_shape = normalize_shape,
+    args <- capture_args(list(input_shape = normalize_shape,
         batch_size = as_integer, batch_input_shape = normalize_shape),
         ignore = "object")
     create_layer(keras$layers$GlobalMaxPooling3D, object, args)
@@ -828,7 +828,7 @@ layer_max_pooling_1d <-
 function (object, pool_size = 2L, strides = NULL, padding = "valid",
     data_format = NULL, name = NULL, ...)
 {
-    args <- capture_args2(list(pool_size = as_integer, strides = as_integer,
+    args <- capture_args(list(pool_size = as_integer, strides = as_integer,
         input_shape = normalize_shape, batch_size = as_integer,
         batch_input_shape = normalize_shape), ignore = "object")
     create_layer(keras$layers$MaxPooling1D, object, args)
@@ -948,7 +948,7 @@ layer_max_pooling_2d <-
 function (object, pool_size = list(2L, 2L), strides = NULL, padding = "valid",
     data_format = NULL, name = NULL, ...)
 {
-    args <- capture_args2(list(pool_size = as_integer, strides = as_integer,
+    args <- capture_args(list(pool_size = as_integer, strides = as_integer,
         input_shape = normalize_shape, batch_size = as_integer,
         batch_input_shape = normalize_shape), ignore = "object")
     create_layer(keras$layers$MaxPooling2D, object, args)
@@ -1039,7 +1039,7 @@ layer_max_pooling_3d <-
 function (object, pool_size = list(2L, 2L, 2L), strides = NULL,
     padding = "valid", data_format = NULL, name = NULL, ...)
 {
-    args <- capture_args2(list(pool_size = as_integer, strides = as_integer,
+    args <- capture_args(list(pool_size = as_integer, strides = as_integer,
         input_shape = normalize_shape, batch_size = as_integer,
         batch_input_shape = normalize_shape), ignore = "object")
     create_layer(keras$layers$MaxPooling3D, object, args)

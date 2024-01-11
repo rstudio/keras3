@@ -77,7 +77,7 @@ create_layer_wrapper <- function(Layer, modifiers = NULL, convert = TRUE) {
   out <- as.function.default(
     c(alist(object = ), formals(Layer),
       bquote({
-        args <- capture_args2(.(modifiers), ignore = "object")
+        args <- capture_args(.(modifiers), ignore = "object")
         create_layer(Layer, object, args)
       })),
     envir = list2env(list(Layer = Layer),
