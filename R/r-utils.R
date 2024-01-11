@@ -271,6 +271,25 @@ as_index <- function(x) {
 }
 
 
+# Sketch for an alternative approach to offsetting indexes,
+# so that they are 1 based in the R runtime, but convert into python
+#  as 0 based. Alternative implementaiton for Callback() epochs,
+#  LearningRateSchedule(), and similar.
+#
+# as_r_index <- function(x) {
+#   if(is.double(x))
+#     x <- as.integer(x)
+#   class(x) <- c("r_index", class(x))
+#   x
+# }
+#
+# r_to_py.r_index <- function(x) {
+#   if (x > 0L) x - 1L else x
+# }
+#
+# zero_to_one_index <- function(x) x + 1L
+
+
 # ---- resolve_py_obj ----
 
 
