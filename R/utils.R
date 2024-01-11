@@ -489,7 +489,8 @@ function (sequences, maxlen = NULL, dtype = "int32", padding = "pre",
 #' @return NumPy array with the specified `dtype` (or list of NumPy arrays if a
 #'   list was passed for `x`).
 #'
-#' @export
+#' @keywords internal
+#' @noRd
 keras_array <- function(x, dtype = NULL) {
 
   # reflect NULL

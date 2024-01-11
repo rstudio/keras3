@@ -683,7 +683,6 @@ Let's train it on MNIST using the `fit()` API:
 ```{r}
 c(c(x_train, .), .) %<-% dataset_mnist()
 x_train <- x_train %>%
-  keras_array() %>%
   op_reshape(new_shape = c(60000, 784)) %>%
   op_cast("float32") %>%
   op_divide(255)
