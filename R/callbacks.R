@@ -904,7 +904,7 @@ normalize_callbacks_with_metrics <- function(view_metrics, initial_epoch, callba
 
     have_tensorboard_callback <- FALSE
     for (callback in callbacks)
-      if (inherits(callback, "keras.callbacks.TensorBoard")) {
+      if (inherits(callback, "keras.src.callbacks.tensorboard.TensorBoard")) {
         have_tensorboard_callback <- TRUE
         break
       }

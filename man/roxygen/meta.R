@@ -1,5 +1,5 @@
 
-# this file get's evaled in baseenv()
+# this file is evaluated in baseenv()
 Sys.setenv(CUDA_VISIBLE_DEVICES = "")
 
 # register fake @tether tag parser for roxygen2
@@ -70,11 +70,12 @@ local({
   knitr_on_load <- function() {
 
     knitr::opts_hooks$set(
+
       keras.roxy.post_process_output = function(options) {
         # this is a self destructing option, run once before the first
         # chunk in a roxy block is evaluated. Though, with the way roxygen2
         # evaluates blocks currently, this serves no real purpose,
-        # since each chunk is an independent knit(), with opts_chunk reset.
+        # since each chunk is an independent knit() call with opts_chunk reset.
         options$keras.roxy.post_process <- NULL
         knitr::opts_chunk$set(keras.roxy.post_process = NULL)
 
@@ -94,16 +95,19 @@ local({
         local({
           # set the output hook
           og_output_hook <- knitr::knit_hooks$get("output")
-          if (isTRUE(attr(og_output_hook, "keras.roxy.post_process_output", TRUE))) {
+          if (identical(attr(og_output_hook, "name", TRUE),
+                        "keras.roxy.post_process_output")) {
             # the hook is already set (should never happen,
             # since roxygen calls knit() once per chunk)
             return()
           }
 
-          knitr::knit_hooks$set(output = structure(function(x, options) {
-            x <- process_chunk_output(x, options)
-            og_output_hook(x, options)
-          }, "keras.roxy.post_process_output" = TRUE))
+          knitr::knit_hooks$set(output = structure(
+            name = "keras.roxy.post_process_output",
+            function(x, options) {
+              x <- process_chunk_output(x, options)
+              og_output_hook(x, options)
+            }))
         })
 
         options

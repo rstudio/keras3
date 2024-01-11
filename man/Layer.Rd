@@ -43,18 +43,18 @@ will be \code{object}, enabling \code{initialize()}ing and \code{call()} the lay
 step while composing the layer with the pipe, like
 
 \if{html}{\out{<div class="sourceCode r">}}\preformatted{layer_foo <- Layer("Foo", ....)
-output <- input |> layer_foo()
+output <- inputs |> layer_foo()
 }\if{html}{\out{</div>}}
 
 To only \code{initialize()} a layer instance and not \code{call()} it, pass a missing
 or \code{NULL} value to \code{object}, or pass all arguments to \code{initialize()} by name.
 
-\if{html}{\out{<div class="sourceCode r">}}\preformatted{layer <- layer_foo(units = 2, activation = "relu")
-layer <- layer_foo(NULL, 2, activation = "relu")
-layer <- layer_foo(, 2, activation = "relu")
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{layer <- layer_dense(units = 2, activation = "relu")
+layer <- layer_dense(NULL, 2, activation = "relu")
+layer <- layer_dense(, 2, activation = "relu")
 
 # then you can call() the layer in a separate step
-outputs <- input |> layer()
+outputs <- inputs |> layer()
 }\if{html}{\out{</div>}}
 }
 \description{

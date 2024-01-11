@@ -151,33 +151,6 @@ sequential_model_input_layer <- function(input_shape = NULL,
   do.call(keras$layers$InputLayer, args)
 }
 
-
-#' @importFrom reticulate py_to_r_wrapper
-#' @export
-py_to_r_wrapper.keras.src.models.model.Model <- function(x) {
-  force(x)
-  function(object, ...) {
-    compose_layer(object, x, ...)
-  }
-}
-
-
-
-#  py_to_r_wrapper.keras.engine.base_layer.Layer <- function(x) {
-#    force(x)
-#    function(...) {
-#      if(!missing(..1) && inherits(..1, "keras.engine.sequential.Sequential")) {
-#        if(length(list(...)) > 1)
-#          warning("Other arguments to ... are ignored because layer instance already created")
-#        model <- ..1
-#        model$add(x)
-#        model
-#      } else
-#        x(...)
-#    }
-#  }
-
-
 #' Clone a model instance.
 #'
 #' Model cloning is similar to calling a model on new inputs, except that it

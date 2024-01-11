@@ -551,19 +551,21 @@
 #' functions like `layer_dense()`. The first argument of the returned function
 #' will be `object`, enabling `initialize()`ing and `call()` the layer in one
 #' step while composing the layer with the pipe, like
+#'
 #' ```r
 #' layer_foo <- Layer("Foo", ....)
-#' output <- input |> layer_foo()
+#' output <- inputs |> layer_foo()
 #' ```
 #' To only `initialize()` a layer instance and not `call()` it, pass a missing
 #' or `NULL` value to `object`, or pass all arguments to `initialize()` by name.
+#'
 #' ```r
-#' layer <- layer_foo(units = 2, activation = "relu")
-#' layer <- layer_foo(NULL, 2, activation = "relu")
-#' layer <- layer_foo(, 2, activation = "relu")
+#' layer <- layer_dense(units = 2, activation = "relu")
+#' layer <- layer_dense(NULL, 2, activation = "relu")
+#' layer <- layer_dense(, 2, activation = "relu")
 #'
 #' # then you can call() the layer in a separate step
-#' outputs <- input |> layer()
+#' outputs <- inputs |> layer()
 #' ```
 #'
 #' @tether keras.layers.Layer
@@ -596,7 +598,7 @@ function(classname,
   inherit <- substitute(inherit) %||%
     quote(base::asNamespace("keras3")$keras$Layer)
 
-  out <- new_wrapped_py_class(
+  wrapper <- new_wrapped_py_class(
     classname = classname,
     members = members,
     inherit = inherit,
@@ -604,150 +606,21 @@ function(classname,
     private = private
   )
 
-  # modifiers <- modifyList(
-  #   drop_nulls(lapply(formals(out), function(arg_default)
-  #       if (is.integer(arg_default)) quote(as_integer))),
-  #   alist(
-  #     input_shape = shape,
-  #     batch_input_shape = shape,
-  #     batch_size = as_integer
-  #   )
-  # )
+  # convert wrapper into a composing layer rapper
+  prepend(formals(wrapper)) <- alist(object = )
+  body(wrapper) <-  bquote({
+    args <- capture_args2(ignore = "object",
+                          enforce_all_dots_named = FALSE)
+    create_layer(.(as.symbol(classname)), object, args)
+  })
 
-  # if(composing) {
-    prepend(formals(out)) <- alist(object = )
-    body(out) <-  bquote({
-      args <- capture_args2(ignore = "object")
-      create_layer(.(as.symbol(classname)), object, args)
-    })
-  # }
-
-  # delayedAssign("Layer",     get(classname), environment(out), environment(out))
-  # delayedAssign("create_layer", asNamespace("keras3")$create_layer, environment(out), environment(out))
-  # delayedAssign("capture_args2", asNamespace("keras3")$capture_args2, environment(out), environment(out))
-
-  out
+  wrapper
 }
 
 
 
-# ' @param .composing Bare Keras Layers (`layer_*` functions) conventionally have `object` as the first argument, which allows users to instantiate (`initialize`) and `call` one motion.
+# ' @param .composing Bare Keras Layers (`layer_*` functions) conventionally
+# have `object` as the first argument, which allows users to instantiate
+# (`initialize`) and `call` one motion.
 
-
-
-# if(FALSE) {
-#   # TODO: use this to generate a static list for populating
-#   # a reverse lookup hashtable
-# x <- lapply(asNamespace("keras3"), resolve_wrapper_py_obj_expr) |>
-#   purrr::map_chr(\(expr) if(is.null(expr)) "" else deparse1(expr))
-# df <- tibble::enframe(x, value = "expr")
-# df <- df[order(df$name),]
-# success <- df$expr != ""
-#
-#
-# df[success, ] |> print(n = Inf)
-# df[!success, ] |> print(n = Inf)
-#
-# # prefer_class = FALSE
-# x <- lapply(asNamespace("keras3"), resolve_wrapper_py_obj_expr,
-#             prefer_class = FALSE) |>
-#   purrr::map_chr(\(expr) if(is.null(expr)) "" else deparse1(expr))
-# df <- tibble::enframe(x, value = "expr")
-# df <- df[order(df$name),]
-# success <- df$expr != ""
-# df[success, ] |> print(n = Inf)
-# df[!success, ] |> print(n = Inf)
-# }
-
-resolve_wrapper_py_obj_expr <- function(x, prefer_class = TRUE) {
-
-  if (!identical(class(x), "function"))
-    return()
-
-  ns <- environment(sys.function()) # keras3 namespace
-  xe <- environment(x)
-
-  if(identical(xe, emptyenv()))
-    return()
-
-  # only inspect pkg functions, or pkg wrapped functions
-
-  ## is wrapper, like Layer()
-  if(identical(parent.env(xe), ns))
-    return(quote(`__class__`))
-
-  ## is a pkg exported function
-  if(!(identical(xe, ns))) # || identical(parent.env(xe), ns)))
-    return()
-
-  # standard builtin wrapper, like layer_dense, or custom wrapper, like Layer()
-  last_cl <- last(body(x))
-  if (is.call(last_cl) &&
-      (identical(last_cl[[1L]], quote(do.call)) ||
-       identical(last_cl[[1L]], quote(create_layer)))) {
-    expr <- last_cl[[2L]]
-    if(identical(expr, quote(callable))) {
-      # loss_ or metric_ wrapper
-      if(prefer_class)
-        expr <- second_last(body(x))[[c(3, 3)]]
-      else
-        expr <- second_last(body(x))[[c(3, 4)]]
-    }
-    return(expr)
-  }
-
-  # application wrapper
-  if (is.call(last_cl) &&
-      identical(last_cl[[1L]], quote(set_preprocessing_attributes)) &&
-      is.call(last_cl2 <- as.list(body(x))[[length(body(x)) - 1L]]) &&
-      (identical(last_cl2[[c(3L, 1L)]], quote(do.call))))
-    return(last_cl2[[c(3L, 2L)]])
-
-  # bare builtin op_wrapper, like
-  # op_add <- function(x1, x2) keras$ops$add(x1, x2)
-  if (is.call(cl <- body(x)) &&
-      (is.call(cl0 <- cl1 <- cl[[1L]]) ||
-       (
-         identical(cl0, quote(`{`)) &&
-         length(cl1 <- as.list(cl[-1])) == 1 &&
-         is.call(cl <- cl1[[1L]]) &&
-         is.call(cl0 <- cl1 <- cl[[1L]])
-       )))
-  {
-    while (is.call(cl0) && identical(cl0[[1L]], quote(`$`)))
-      cl0 <- cl0[[2L]]
-
-    if (identical(cl0, quote(keras)))
-      return(cl1)
-  }
-
-  NULL
-}
-
-resolve_py_obj <- function(x, default_name = "anonymous_R_function",
-                           env = asNamespace("keras3"),
-                           prefer_class = TRUE,
-                           convert = TRUE) {
-  if (is.language(x))
-    x <- eval(x, env)
-
-  if (is.null(x) || inherits(x, "python.builtin.object"))
-    return(x)
-
-  if (is_bare_r_function(x)) {
-
-    py_obj_expr <- resolve_wrapper_py_obj_expr(x, prefer_class = prefer_class)
-    if (!is.null(py_obj_expr)) {
-      py_obj <- tryCatch(eval(py_obj_expr, environment(x)),
-                         error = function(e) NULL)
-
-      if (inherits(py_obj, "python.builtin.object"))
-        return(py_obj)
-    }
-
-    return(as_py_function(x, default_name = default_name))
-  }
-
-  if (convert) x else r_to_py(x)
-}
 

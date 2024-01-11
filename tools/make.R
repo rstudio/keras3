@@ -62,6 +62,8 @@ if(!"source:tools/translate-tools.R" %in% search()) envir::attach_source("tools/
 # #'  @tether application.foo,
 # #'   application.foo.preprocess_input,
 # #'   application.foo.decode_predictions,
+#
+# TODO: how to pass layer call args through a wrapper that uses compose_layer()?
 
 # TODO: op_argmax() - returns a 0-based index. convert to 1-based?
 #

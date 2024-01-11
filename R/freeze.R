@@ -229,3 +229,8 @@ apply_which_trainable <- function(object, which, trainable) {
 
   return(invisible(object))
 }
+
+
+is_layer <- function(object) {
+  inherits(object, "keras.src.layers.layer.Layer")
+}

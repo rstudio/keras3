@@ -1,5 +1,6 @@
 
 
+# TODO: use this in register_keras_serializable()?
 generate_module_name <- function(env) {
   while((name <- environmentName(env)) == "")
     env <- parent.env(env)

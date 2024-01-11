@@ -729,7 +729,12 @@ with_custom_object_scope <- function(objects, expr) {
   with(keras$saving$CustomObjectScope(objects), expr)
 }
 
-
+# TODO: normalize_custom_objects() needs to be revisited after resolve_py_object()
+#  - better error message if no name supplied
+#    (e.g., py_func2(object, TRUE, stop("Name could not be found...)))
+# TODO: consolidate duplicate purpose functions:
+#  - normalize_custom_objects() / objects_with_py_function_names()
+#  - get_keras_class() / resolve_py_object()
 normalize_custom_objects <- function(objects) {
   if(is.null(objects))
     return(NULL)

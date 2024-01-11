@@ -25,11 +25,11 @@ callback_view_metrics <- Callback(
         # logs is a dict/named list
         private$metrics <- lapply(logs, function(x) logical())
 
-        sleep <- 0.5
+        sleep <- 0.25 # 0.5
 
       } else {
 
-        sleep <- 0.1
+        sleep <- 0.05 # 0.1
 
       }
 
@@ -47,13 +47,7 @@ callback_view_metrics <- Callback(
       for (metric in names(metrics)) {
         # guard against metrics not yet available by using NA
         # when a named metrics isn't passed in 'logs'
-        value <- logs[[metric]]
-        if (is.null(value))
-          value <- NA
-        else
-          value <- mean(value)
-
-        metrics[[metric]] <- c(metrics[[metric]], value)
+        append(metrics[[metric]]) <- mean(logs[[metric]] %||% NA)
       }
       private$metrics <- metrics
 
@@ -103,11 +97,12 @@ callback_view_metrics <- Callback(
     },
 
     write_params = function(params) {
-      properties <- list()
-      properties$samples <- params$samples
-      properties$validation_samples <- params$validation_samples
-      properties$epochs <- params$epochs
-      properties$batch_size <- params$batch_size
+      properties <- list(
+        samples            = params$samples,
+        validation_samples = params$validation_samples,
+        epochs             = params$epochs,
+        batch_size         = params$batch_size
+      )
       tfruns::write_run_metadata("properties", properties)
     },
 

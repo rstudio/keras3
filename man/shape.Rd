@@ -133,8 +133,8 @@ tfn <- tensorflow::tf_function(function(x) \{
   c(axis1, axis2, axis3) \%<-\% shape(x)
   echo_print(str(list(axis1 = axis1, axis2 = axis2, axis3 = axis3)))
 
-  echo_print(shape(axis1))               # use axis2 tensor as axis value
-  echo_print(shape(axis1, axis2, axis3)) # use axis2 tensor as axis value
+  echo_print(shape(axis1))               # use axis1 tensor as axis value
+  echo_print(shape(axis1, axis2, axis3)) # use axis1 tensor as axis value
 
   # use shape() to compose a new shape, e.g., in multihead attention
   n_heads <- 4

@@ -58,13 +58,44 @@ compose_layer <- function(object, layer, ...) {
 #' @export
 py_to_r_wrapper.keras.src.layers.layer.Layer <- function(x) {
   force(x)
-  function(object, ...) {
-    if(missing(object))
-      x(...)
-    else
-      compose_layer(object = object, layer = x, ...)
-  }
+  function(object, ...) compose_layer(object = object, layer = x, ...)
+  # function(object, ...) {
+    # if(missing(object))
+    #   x(...)
+    # else
+    #  compose_layer(object = object, layer = x, ...)
+  #}
 }
+
+
+# models are layers, the layer wrapper should suffice...
+# TODO: delete this after confirming not breaking
+# ' @importFrom reticulate py_to_r_wrapper
+# ' @export
+# py_to_r_wrapper.keras.src.models.model.Model <- function(x) {
+#   force(x)
+#   function(object, ...) {
+#     compose_layer(object, x, ...)
+#   }
+# }
+
+
+
+#  py_to_r_wrapper.keras.engine.base_layer.Layer <- function(x) {
+#    force(x)
+#    function(...) {
+#      if(!missing(..1) && inherits(..1, "keras.src..."   "keras.engine.sequential.Sequential")) {
+#        if(length(list(...)) > 1)
+#          warning("Other arguments to ... are ignored because layer instance already created")
+#        model <- ..1
+#        model$add(x)
+#        model
+#      } else
+#        x(...)
+#    }
+#  }
+
+
 
 
 # ---- convolutional ----
