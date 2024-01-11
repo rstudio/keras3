@@ -51,7 +51,7 @@ function(classname,
   )
   delayedAssign("__class__", get(classname))
 
-  if (reticulate::py_available()) {
+  if (is_keras_loaded()) {
     # force promise, get actual frmls
     frmls <- formals(`__class__`)
   } else {

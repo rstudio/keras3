@@ -5,7 +5,7 @@ callback_view_metrics <- Callback(
 
   public = list(
 
-    initialize = function(view_metrics = FALSE, initial_epoch = 0) {
+    initialize = function(view_metrics = FALSE, initial_epoch = 1) {
       private$view_metrics <- view_metrics
       private$initial_epoch <- initial_epoch
     },

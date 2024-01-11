@@ -106,18 +106,28 @@ is_linux <- function() {
 #' @export
 use_backend <- function(backend = c("tensorflow", "jax", "torch")) {
   backend <- match.arg(backend)
-  py_inited <- reticulate::py_available()
 
-  # is the keras module already imported? reticulate:::py_module_proxy_import()
-  # removes 'module' from the lazy_loaded PyObjectRef module env
-  keras_module_resolved <- !exists("module", envir = keras)
-
-  if (py_inited && keras_module_resolved) {
+  if (is_keras_loaded()) {
     if (config_backend() != backend)
       stop("The keras backend must be set before keras has inititialized. Please restart the R session.")
   }
   Sys.setenv(KERAS_BACKEND = backend)
-  if (py_inited)
+
+  if (reticulate::py_available())
     reticulate::import("os")$environ$update(list(KERAS_BACKEND = backend))
   invisible(backend)
+}
+
+
+is_keras_loaded <- function() {
+  # package .onLoad() has run
+  !is.null(keras) &&
+
+  # python is initialized
+  reticulate::py_available() &&
+
+  # the keras module proxy has been resolved
+  # (reticulate:::py_module_proxy_import()
+  #  removes 'module' from the lazy_loaded PyObjectRef module env)
+  !exists("module", envir = keras)
 }
