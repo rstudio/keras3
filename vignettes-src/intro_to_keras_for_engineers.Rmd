@@ -30,13 +30,14 @@ edit the string below to `"jax"` or `"torch"` and hit
 This entire guide is backend-agnostic.
 
 ```{r}
-Sys.setenv(KERAS_BACKEND = "tensorflow")
-
-# Note that Keras should only be loaded after the backend
-# has been configured. The backend cannot be changed once the
-# package is imported.
 library(tensorflow)
 library(keras3)
+
+# Note that you must configure the backend
+# before calling any other keras functions.
+# The backend cannot be changed once the
+# package is imported.
+use_backend("tensorflow")
 ```
 
 ## A first example: A MNIST convnet
@@ -111,7 +112,7 @@ of the data during training to monitor generalization on unseen data.
 
 ```{r}
 batch_size <- 128
-epochs <- 1
+epochs <- 10
 
 callbacks <- list(
   callback_model_checkpoint(filepath="model_at_epoch_{epoch}.keras"),
