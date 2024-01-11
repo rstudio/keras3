@@ -77,7 +77,7 @@ function ()
 #' (potentially with 1 element).
 #'
 #' @returns
-#'     List of input tensors.
+#' List of input tensors.
 #'
 #' @param tensor
 #' The tensor to start from.
@@ -257,7 +257,7 @@ function (model, show_shapes = FALSE, show_dtype = FALSE, show_layer_names = TRU
 #' If it's a backend tensor, a backend tensor will be returned.
 #'
 #' @returns
-#'     A normalized copy of the array.
+#' A normalized copy of the array.
 #'
 #' @param x
 #' Array to normalize.
@@ -420,7 +420,7 @@ function (seed)
 #' ```
 #'
 #' @returns
-#'     Array with shape `(len(sequences), maxlen)`
+#' Array with shape `(len(sequences), maxlen)`
 #'
 #' @param sequences
 #' List of sequences (each sequence is a list of integers).

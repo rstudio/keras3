@@ -259,7 +259,7 @@ function (object, max_value = NULL, negative_slope = 0, threshold = 0,
 #'     specifies 1 to keep and 0 to mask. Defaults to `NULL`.
 #'
 #' @returns
-#'     Softmaxed output with the same shape as `inputs`.
+#' Softmaxed output with the same shape as `inputs`.
 #'
 #' @param axis
 #' Integer, or list of Integers, axis along which the softmax

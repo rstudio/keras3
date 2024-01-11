@@ -177,7 +177,7 @@ function (image, size, strides = NULL, dilation_rate = 1L, padding = "valid",
 #' [scipy/issues/2640](https://github.com/scipy/scipy/issues/2640).
 #'
 #' @returns
-#'     Output image or batch of images.
+#' Output image or batch of images.
 #'
 #' @param input
 #' The input array.

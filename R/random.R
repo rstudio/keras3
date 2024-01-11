@@ -15,7 +15,7 @@
 #' distribution.
 #'
 #' @returns
-#'     A 2-D tensor with (batch_size, num_samples).
+#' A 2-D tensor with (batch_size, num_samples).
 #'
 #' @param logits
 #' 2-D Tensor with shape (batch_size, num_classes). Each row

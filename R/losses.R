@@ -840,7 +840,7 @@ function (y_true, y_pred, ..., reduction = "sum_over_batch_size",
 #' ```
 #'
 #' @returns
-#'     Tensor with one scalar loss entry per sample.
+#' Tensor with one scalar loss entry per sample.
 #'
 #' @param delta
 #' A float, the point where the Huber loss function changes from a
@@ -972,7 +972,7 @@ function (y_true, y_pred, ..., reduction = "sum_over_batch_size",
 #' ```
 #'
 #' @returns
-#'     Logcosh error values with shape = `[batch_size, d0, .. dN-1]`.
+#' Logcosh error values with shape = `[batch_size, d0, .. dN-1]`.
 #'
 #' @param reduction
 #' Type of reduction to apply to loss. Options are `"sum"`,
@@ -1159,7 +1159,7 @@ function (y_true, y_pred, ..., reduction = "sum_over_batch_size",
 #' ```
 #'
 #' @returns
-#'     Mean squared error values with shape = `[batch_size, d0, .. dN-1]`.
+#' Mean squared error values with shape = `[batch_size, d0, .. dN-1]`.
 #'
 #' @param reduction
 #' Type of reduction to apply to the loss. In almost all cases

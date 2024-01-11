@@ -178,7 +178,7 @@ function (y_true, y_pred, alpha = 0.25, gamma = 2, from_logits = FALSE,
 #' ```
 #'
 #' @returns
-#'     Tensor with one scalar loss entry per sample.
+#' Tensor with one scalar loss entry per sample.
 #'
 #' @param y_true
 #' tensor of true targets.
@@ -233,7 +233,7 @@ function (y_true, y_pred, delta = 1)
 #' ```
 #'
 #' @returns
-#'     Logcosh error values with shape = `[batch_size, d0, .. dN-1]`.
+#' Logcosh error values with shape = `[batch_size, d0, .. dN-1]`.
 #'
 #' @param y_true
 #' Ground truth values with shape = `[batch_size, d0, .. dN]`.

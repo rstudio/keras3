@@ -30,12 +30,12 @@
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/utils/save_img>
 #' @tether keras.utils.save_img
 image_array_save <-
-  function (x, path, data_format = NULL, file_format = NULL, scale = TRUE,
-            ...)
-  {
-    args <- capture_args()
-    do.call(keras$utils$save_img, args)
-  }
+function (x, path, data_format = NULL, file_format = NULL, scale = TRUE,
+          ...)
+{
+  args <- capture_args()
+  do.call(keras$utils$save_img, args)
+}
 
 
 #' Converts a 3D array to a PIL Image instance.
@@ -50,7 +50,7 @@ image_array_save <-
 #' ```
 #'
 #' @returns
-#'     A PIL Image instance.
+#' A PIL Image instance.
 #'
 #' @param x
 #' Input data, in any form that can be converted to an array.
@@ -77,11 +77,11 @@ image_array_save <-
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/utils/array_to_img>
 #' @tether keras.utils.array_to_img
 image_from_array <-
-  function (x, data_format = NULL, scale = TRUE, dtype = NULL)
-  {
-    args <- capture_args()
-    do.call(keras$utils$array_to_img, args)
-  }
+function (x, data_format = NULL, scale = TRUE, dtype = NULL)
+{
+  args <- capture_args()
+  do.call(keras$utils$array_to_img, args)
+}
 
 
 #' Loads an image into PIL format.
@@ -104,7 +104,7 @@ image_from_array <-
 #' ```
 #'
 #' @returns
-#'     A PIL Image instance.
+#' A PIL Image instance.
 #'
 #' @param path
 #' Path to image file.
@@ -139,12 +139,12 @@ image_from_array <-
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/utils/load_img>
 #' @tether keras.utils.load_img
 image_load <-
-  function (path, color_mode = "rgb", target_size = NULL, interpolation = "nearest",
-            keep_aspect_ratio = FALSE)
-  {
-    args <- capture_args()
-    do.call(keras$utils$load_img, args)
-  }
+function (path, color_mode = "rgb", target_size = NULL, interpolation = "nearest",
+          keep_aspect_ratio = FALSE)
+{
+  args <- capture_args()
+  do.call(keras$utils$load_img, args)
+}
 
 
 #' Converts a PIL Image instance to a matrix.
@@ -161,7 +161,7 @@ image_load <-
 #' ```
 #'
 #' @returns
-#'     A 3D array.
+#' A 3D array.
 #'
 #' @param img
 #' Input PIL Image instance.
@@ -185,8 +185,8 @@ image_load <-
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/utils/img_to_array>
 #' @tether keras.utils.img_to_array
 image_to_array <-
-  function (img, data_format = NULL, dtype = NULL)
-  {
-    args <- capture_args()
-    do.call(keras$utils$img_to_array, args)
-  }
+function (img, data_format = NULL, dtype = NULL)
+{
+  args <- capture_args()
+  do.call(keras$utils$img_to_array, args)
+}

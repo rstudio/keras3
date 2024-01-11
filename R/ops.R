@@ -34,7 +34,7 @@ keras$ops$cast(x, dtype)
 #' Conditionally applies `true_fn` or `false_fn`.
 #'
 #' @returns
-#'     The output of either `true_fn` or `false_fn` depending on pred.
+#' The output of either `true_fn` or `false_fn` depending on pred.
 #'
 #' @param pred
 #' Boolean scalar type
@@ -59,7 +59,7 @@ keras$ops$cond(pred, true_fn, false_fn)
 #' Convert a tensor to a NumPy array.
 #'
 #' @returns
-#'     A NumPy array.
+#' A NumPy array.
 #'
 #' @param x
 #' A tensor.
@@ -260,7 +260,7 @@ function (indices, values, shape)
 #' ```
 #'
 #' @returns
-#'     A tensor, has the same shape and dtype as `inputs`.
+#' A tensor, has the same shape and dtype as `inputs`.
 #'
 #' @param inputs
 #' A tensor, the tensor to be updated.
@@ -393,7 +393,7 @@ function (inputs, start_indices, shape)
 #' ```
 #'
 #' @returns
-#'     A tensor, has the same shape and dtype as `inputs`.
+#' A tensor, has the same shape and dtype as `inputs`.
 #'
 #' @param inputs
 #' A tensor, the tensor to be updated.
@@ -1320,7 +1320,7 @@ py_to_r.tensorflow.python.ops.gen_nn_ops.TopKV2 <- function(x) {
 #' Average pooling operation.
 #'
 #' @returns
-#'     A tensor of rank N+2, the result of the average pooling operation.
+#' A tensor of rank N+2, the result of the average pooling operation.
 #'
 #' @param inputs
 #' Tensor of rank N+2. `inputs` has shape
@@ -1487,7 +1487,7 @@ function (target, output, from_logits = FALSE, axis = -1L)
 #' This ops supports 1D, 2D and 3D convolution.
 #'
 #' @returns
-#'     A tensor of rank N+2, the result of the conv operation.
+#' A tensor of rank N+2, the result of the conv operation.
 #'
 #' @param inputs
 #' Tensor of rank N+2. `inputs` has shape
@@ -1550,7 +1550,7 @@ function (inputs, kernel, strides = 1L, padding = "valid", data_format = NULL,
 #' Also known as de-convolution. This ops supports 1D, 2D and 3D convolution.
 #'
 #' @returns
-#'     A tensor of rank N+2, the result of the conv operation.
+#' A tensor of rank N+2, the result of the conv operation.
 #'
 #' @param inputs
 #' Tensor of rank N+2. `inputs` has shape
@@ -1623,7 +1623,7 @@ function (inputs, kernel, strides, padding = "valid", output_padding = NULL,
 #' This ops supports 1D and 2D depthwise convolution.
 #'
 #' @returns
-#'     A tensor of rank N+2, the result of the depthwise conv operation.
+#' A tensor of rank N+2, the result of the depthwise conv operation.
 #'
 #' @param inputs
 #' Tensor of rank N+2. `inputs` has shape
@@ -1910,7 +1910,7 @@ function (x, axis = -1L)
 #' Max pooling operation.
 #'
 #' @returns
-#'     A tensor of rank N+2, the result of the max pooling operation.
+#' A tensor of rank N+2, the result of the max pooling operation.
 #'
 #' @param inputs
 #' Tensor of rank N+2. `inputs` has shape
@@ -2219,7 +2219,7 @@ keras$ops$selu(x)
 #' a depthwise conv followed by a pointwise conv.
 #'
 #' @returns
-#'     A tensor of rank N+2, the result of the depthwise conv operation.
+#' A tensor of rank N+2, the result of the depthwise conv operation.
 #'
 #' @param inputs
 #' Tensor of rank N+2. `inputs` has shape
@@ -3084,7 +3084,7 @@ keras$ops$arctan2(x1, x2)
 #' Inverse hyperbolic tangent, element-wise.
 #'
 #' @returns
-#'     Output tensor of same shape as `x`.
+#' Output tensor of same shape as `x`.
 #'
 #' @param x
 #' Input tensor.
@@ -3421,7 +3421,7 @@ function (x, shape)
 #' `i >= x`.
 #'
 #' @returns
-#'     The ceiling of each element in `x`, with float dtype.
+#' The ceiling of each element in `x`, with float dtype.
 #'
 #' @param x
 #' Input tensor.
@@ -3446,7 +3446,7 @@ keras$ops$ceil(x)
 #' values smaller than 0 become 0, and values larger than 1 become 1.
 #'
 #' @returns
-#'     The clipped tensor.
+#' The clipped tensor.
 #'
 #' @param x
 #' Input tensor.
@@ -3472,7 +3472,7 @@ keras$ops$clip(x, x_min, x_max)
 #' Join a sequence of tensors along an existing axis.
 #'
 #' @returns
-#'     The concatenated tensor.
+#' The concatenated tensor.
 #'
 #' @param xs
 #' The sequence of tensors to concatenate.
@@ -3521,7 +3521,7 @@ keras$ops$conj(x)
 #' `keras.ops.conj` is a shorthand for this function.
 #'
 #' @returns
-#'     The complex conjugate of each element in `x`.
+#' The complex conjugate of each element in `x`.
 #'
 #' @param x
 #' Input tensor.
@@ -3541,7 +3541,7 @@ keras$ops$conjugate(x)
 #' Returns a copy of `x`.
 #'
 #' @returns
-#'     A copy of `x`.
+#' A copy of `x`.
 #'
 #' @param x
 #' Input tensor.
@@ -3561,7 +3561,7 @@ keras$ops$copy(x)
 #' Cosine, element-wise.
 #'
 #' @returns
-#'     The corresponding cosine values.
+#' The corresponding cosine values.
 #'
 #' @param x
 #' Input tensor.
@@ -3581,7 +3581,7 @@ keras$ops$cos(x)
 #' Hyperbolic cosine, element-wise.
 #'
 #' @returns
-#'     Output tensor of same shape as `x`.
+#' Output tensor of same shape as `x`.
 #'
 #' @param x
 #' Input tensor.
@@ -3658,7 +3658,7 @@ function (x, axis = NULL)
 #' arguments `axisa`, `axisb` and `axisc`. Use `axis` instead.
 #'
 #' @returns
-#'     Vector cross product(s).
+#' Vector cross product(s).
 #'
 #' @param x1
 #' Components of the first vector(s).
@@ -3701,7 +3701,7 @@ function (x1, x2, axisa = -1L, axisb = -1L, axisc = -1L, axis = NULL)
 #' Return the cumulative product of elements along a given axis.
 #'
 #' @returns
-#'     Output tensor.
+#' Output tensor.
 #'
 #' @param x
 #' Input tensor.
@@ -3731,7 +3731,7 @@ function (x, axis = NULL, dtype = NULL)
 #' Returns the cumulative sum of elements along a given axis.
 #'
 #' @returns
-#'     Output tensor.
+#' Output tensor.
 #'
 #' @param x
 #' Input tensor.
@@ -3949,7 +3949,7 @@ function (x, bins)
 #' `keras.ops.true_divide` is an alias for this function.
 #'
 #' @returns
-#'     Output tensor, the quotient `x1/x2`, element-wise.
+#' Output tensor, the quotient `x1/x2`, element-wise.
 #'
 #' @param x1
 #' First input tensor.
@@ -3986,7 +3986,7 @@ keras$ops$divide(x1, x2)
 #' Torch backend does not accept 0-D tensors as arguments.
 #'
 #' @returns
-#'     Dot product of `x1` and `x2`.
+#' Dot product of `x1` and `x2`.
 #'
 #' @param x1
 #' First argument.
@@ -4091,7 +4091,7 @@ keras$ops$einsum(subscripts, ...)
 #' Return a tensor of given shape and type filled with uninitialized data.
 #'
 #' @returns
-#'     The empty tensor.
+#' The empty tensor.
 #'
 #' @param shape
 #' Shape of the empty tensor.
@@ -4117,7 +4117,7 @@ function (shape, dtype = NULL)
 #' Returns `(x1 == x2)` element-wise.
 #'
 #' @returns
-#'     Output tensor, element-wise comparison of `x1` and `x2`.
+#' Output tensor, element-wise comparison of `x1` and `x2`.
 #'
 #' @param x1
 #' Tensor to compare.
@@ -4140,7 +4140,7 @@ keras$ops$equal(x1, x2)
 #' Calculate the exponential of all elements in the input tensor.
 #'
 #' @returns
-#'     Output tensor, element-wise exponential of `x`.
+#' Output tensor, element-wise exponential of `x`.
 #'
 #' @param x
 #' Input tensor.
@@ -4163,7 +4163,7 @@ keras$ops$exp(x)
 #' Insert a new axis at the `axis` position in the expanded tensor shape.
 #'
 #' @returns
-#'     Output tensor with the number of dimensions increased.
+#' Output tensor with the number of dimensions increased.
 #'
 #' @param x
 #' Input tensor.
@@ -4190,7 +4190,7 @@ function (x, axis)
 #' Calculate `exp(x) - 1` for all elements in the tensor.
 #'
 #' @returns
-#'     Output tensor, element-wise exponential minus one.
+#' Output tensor, element-wise exponential minus one.
 #'
 #' @param x
 #' Input values.
@@ -4210,7 +4210,7 @@ keras$ops$expm1(x)
 #' Return a 2-D tensor with ones on the diagonal and zeros elsewhere.
 #'
 #' @returns
-#'     Tensor with ones on the k-th diagonal and zeros elsewhere.
+#' Tensor with ones on the k-th diagonal and zeros elsewhere.
 #'
 #' @param N
 #' Number of rows in the output.
@@ -4247,7 +4247,7 @@ function (N, M = NULL, k = 0L, dtype = NULL)
 #' The shape of the tensor is preserved, but the elements are reordered.
 #'
 #' @returns
-#'     Output tensor with entries of `axis` reversed.
+#' Output tensor with entries of `axis` reversed.
 #'
 #' @param x
 #' Input tensor.
@@ -4277,7 +4277,7 @@ function (x, axis = NULL)
 #' The floor of the scalar `x` is the largest integer `i`, such that `i <= x`.
 #'
 #' @returns
-#'     Output tensor, element-wise floor of `x`.
+#' Output tensor, element-wise floor of `x`.
 #'
 #' @param x
 #' Input tensor.
@@ -4348,7 +4348,7 @@ function (shape, fill_value, dtype = NULL)
 #' Return a full tensor with the same shape and type as the given tensor.
 #'
 #' @returns
-#'     Tensor of `fill_value` with the same shape and type as `x`.
+#' Tensor of `fill_value` with the same shape and type as `x`.
 #'
 #' @param x
 #' Input tensor.
@@ -4417,7 +4417,7 @@ keras$ops$greater(x1, x2)
 #' Return the truth value of `x1 >= x2` element-wise.
 #'
 #' @returns
-#'     Output tensor, element-wise comparison of `x1` and `x2`.
+#' Output tensor, element-wise comparison of `x1` and `x2`.
 #'
 #' @param x1
 #' First input tensor.
@@ -4444,7 +4444,7 @@ keras$ops$greater_equal(x1, x2)
 #' and along the second axis for all other tensors.
 #'
 #' @returns
-#'     The tensor formed by stacking the given tensors.
+#' The tensor formed by stacking the given tensors.
 #'
 #' @param xs
 #' Sequence of tensors.
@@ -4468,7 +4468,7 @@ keras$ops$hstack(xs)
 #' zeros elsewhere.
 #'
 #' @returns
-#'     The identity tensor.
+#' The identity tensor.
 #'
 #' @param n
 #' Number of rows (and columns) in the `n x n` output tensor.
@@ -4491,7 +4491,7 @@ keras$ops$identity(n, dtype)
 #' Return the imaginary part of the complex argument.
 #'
 #' @returns
-#'     The imaginary component of the complex argument.
+#' The imaginary component of the complex argument.
 #'
 #' @param x
 #' Input tensor.
@@ -4511,7 +4511,7 @@ keras$ops$imag(x)
 #' Return whether two tensors are element-wise almost equal.
 #'
 #' @returns
-#'     Output boolean tensor.
+#' Output boolean tensor.
 #'
 #' @param x1
 #' First input tensor.
@@ -4539,7 +4539,7 @@ keras$ops$isclose(x1, x2)
 #' and imaginary parts are finite.
 #'
 #' @returns
-#'     Output boolean tensor.
+#' Output boolean tensor.
 #'
 #' @param x
 #' Input tensor.
@@ -4559,7 +4559,7 @@ keras$ops$isfinite(x)
 #' Test element-wise for positive or negative infinity.
 #'
 #' @returns
-#'     Output boolean tensor.
+#' Output boolean tensor.
 #'
 #' @param x
 #' Input tensor.
@@ -4579,7 +4579,7 @@ keras$ops$isinf(x)
 #' Test element-wise for NaN and return result as a boolean tensor.
 #'
 #' @returns
-#'     Output boolean tensor.
+#' Output boolean tensor.
 #'
 #' @param x
 #' Input tensor.
@@ -4599,7 +4599,7 @@ keras$ops$isnan(x)
 #' Return the truth value of `x1 < x2` element-wise.
 #'
 #' @returns
-#'     Output tensor, element-wise comparison of `x1` and `x2`.
+#' Output tensor, element-wise comparison of `x1` and `x2`.
 #'
 #' @param x1
 #' First input tensor.
@@ -4622,7 +4622,7 @@ keras$ops$less(x1, x2)
 #' Return the truth value of `x1 <= x2` element-wise.
 #'
 #' @returns
-#'     Output tensor, element-wise comparison of `x1` and `x2`.
+#' Output tensor, element-wise comparison of `x1` and `x2`.
 #'
 #' @param x1
 #' First input tensor.
@@ -4704,7 +4704,7 @@ function (start, stop, num = 50L, endpoint = TRUE, retstep = FALSE,
 #' Natural logarithm, element-wise.
 #'
 #' @returns
-#'     Output tensor, element-wise natural logarithm of `x`.
+#' Output tensor, element-wise natural logarithm of `x`.
 #'
 #' @param x
 #' Input tensor.
@@ -4724,7 +4724,7 @@ keras$ops$log(x)
 #' Return the base 10 logarithm of the input tensor, element-wise.
 #'
 #' @returns
-#'     Output tensor, element-wise base 10 logarithm of `x`.
+#' Output tensor, element-wise base 10 logarithm of `x`.
 #'
 #' @param x
 #' Input tensor.
@@ -4747,7 +4747,7 @@ keras$ops$log10(x)
 #' Calculates `log(1 + x)`.
 #'
 #' @returns
-#'     Output tensor, element-wise natural logarithm of `1 + x`.
+#' Output tensor, element-wise natural logarithm of `1 + x`.
 #'
 #' @param x
 #' Input tensor.
@@ -4767,7 +4767,7 @@ keras$ops$log1p(x)
 #' Base-2 logarithm of `x`, element-wise.
 #'
 #' @returns
-#'     Output tensor, element-wise base-2 logarithm of `x`.
+#' Output tensor, element-wise base-2 logarithm of `x`.
 #'
 #' @param x
 #' Input tensor.
@@ -4817,7 +4817,7 @@ keras$ops$logaddexp(x1, x2)
 #' Zeros are treated as `FALSE` and non-zeros are treated as `TRUE`.
 #'
 #' @returns
-#'     Output tensor, element-wise logical AND of the inputs.
+#' Output tensor, element-wise logical AND of the inputs.
 #'
 #' @param x1
 #' Input tensor.
@@ -4843,7 +4843,7 @@ keras$ops$logical_and(x1, x2)
 #' Zeros are treated as `FALSE` and non-zeros are treated as `TRUE`.
 #'
 #' @returns
-#'     Output tensor, element-wise logical NOT of the input.
+#' Output tensor, element-wise logical NOT of the input.
 #'
 #' @param x
 #' Input tensor.
@@ -4866,7 +4866,7 @@ keras$ops$logical_not(x)
 #' Zeros are treated as `FALSE` and non-zeros are treated as `TRUE`.
 #'
 #' @returns
-#'     Output tensor, element-wise logical OR of the inputs.
+#' Output tensor, element-wise logical OR of the inputs.
 #'
 #' @param x1
 #' Input tensor.
@@ -4889,7 +4889,7 @@ keras$ops$logical_or(x1, x2)
 #' Compute the truth value of `x1 XOR x2`, element-wise.
 #'
 #' @returns
-#'     Output boolean tensor.
+#' Output boolean tensor.
 #'
 #' @param x1
 #' First input tensor.
@@ -4918,7 +4918,7 @@ keras$ops$logical_xor(x1, x2)
 #' Torch backend does not support `axis` argument.
 #'
 #' @returns
-#'     A tensor of evenly spaced samples on a log scale.
+#' A tensor of evenly spaced samples on a log scale.
 #'
 #' @param start
 #' The starting value of the sequence.
@@ -4976,7 +4976,7 @@ function (start, stop, num = 50L, endpoint = TRUE, base = 10L,
 #'   to its dimensions. After matrix multiplication the appended 1 is removed.
 #'
 #' @returns
-#'     Output tensor, matrix product of the inputs.
+#' Output tensor, matrix product of the inputs.
 #'
 #' @param x1
 #' First tensor.
@@ -4999,7 +4999,7 @@ keras$ops$matmul(x1, x2)
 #' Return the maximum of a tensor or maximum along an axis.
 #'
 #' @returns
-#'     Maximum of `x`.
+#' Maximum of `x`.
 #'
 #' @param x
 #' Input tensor.
@@ -5033,7 +5033,7 @@ function (x, axis = NULL, keepdims = FALSE, initial = NULL)
 #' Element-wise maximum of `x1` and `x2`.
 #'
 #' @returns
-#'     Output tensor, element-wise maximum of `x1` and `x2`.
+#' Output tensor, element-wise maximum of `x1` and `x2`.
 #'
 #' @param x1
 #' First tensor.
@@ -5056,7 +5056,7 @@ keras$ops$maximum(x1, x2)
 #' Compute the arithmetic mean along the specified axes.
 #'
 #' @returns
-#'     Output tensor containing the mean values.
+#' Output tensor containing the mean values.
 #'
 #' @param x
 #' Input tensor.
@@ -5087,7 +5087,7 @@ function (x, axis = NULL, keepdims = FALSE)
 #' Compute the median along the specified axis.
 #'
 #' @returns
-#'     The output tensor.
+#' The output tensor.
 #'
 #' @param x
 #' Input tensor.
@@ -5174,7 +5174,7 @@ function (..., indexing = "xy")
 #' Return the minimum of a tensor or minimum along an axis.
 #'
 #' @returns
-#'     Minimum of `x`.
+#' Minimum of `x`.
 #'
 #' @param x
 #' Input tensor.
@@ -5208,7 +5208,7 @@ function (x, axis = NULL, keepdims = FALSE, initial = NULL)
 #' Element-wise minimum of `x1` and `x2`.
 #'
 #' @returns
-#'     Output tensor, element-wise minimum of `x1` and `x2`.
+#' Output tensor, element-wise minimum of `x1` and `x2`.
 #'
 #' @param x1
 #' First tensor.
@@ -5231,7 +5231,7 @@ keras$ops$minimum(x1, x2)
 #' Returns the element-wise remainder of division.
 #'
 #' @returns
-#'     Output tensor, element-wise remainder of division.
+#' Output tensor, element-wise remainder of division.
 #'
 #' @param x1
 #' First tensor.
@@ -5257,7 +5257,7 @@ keras$ops$mod(x1, x2)
 #' Other axes remain in their original order.
 #'
 #' @returns
-#'     Tensor with moved axes.
+#' Tensor with moved axes.
 #'
 #' @param x
 #' Tensor whose axes should be reordered.
@@ -5284,7 +5284,7 @@ keras$ops$moveaxis(x, source, destination)
 #' Multiply arguments element-wise.
 #'
 #' @returns
-#'     Output tensor, element-wise product of `x1` and `x2`.
+#' Output tensor, element-wise product of `x1` and `x2`.
 #'
 #' @param x1
 #' First input tensor.
@@ -5307,7 +5307,7 @@ keras$ops$multiply(x1, x2)
 #' Replace NaN with zero and infinity with large finite numbers.
 #'
 #' @returns
-#'     `x`, with non-finite values replaced.
+#' `x`, with non-finite values replaced.
 #'
 #' @param x
 #' Input data.
@@ -5327,7 +5327,7 @@ keras$ops$nan_to_num(x)
 #' Return the number of dimensions of a tensor.
 #'
 #' @returns
-#'     The number of dimensions in `x`.
+#' The number of dimensions in `x`.
 #'
 #' @param x
 #' Input tensor.
@@ -5347,7 +5347,7 @@ keras$ops$ndim(x)
 #' Numerical negative, element-wise.
 #'
 #' @returns
-#'     Output tensor, `y = -x`.
+#' Output tensor, `y = -x`.
 #'
 #' @param x
 #' Input tensor.
@@ -5367,7 +5367,7 @@ keras$ops$negative(x)
 #' Return the indices of the elements that are non-zero.
 #'
 #' @returns
-#'     Indices of elements that are non-zero.
+#' Indices of elements that are non-zero.
 #'
 #' @param x
 #' Input tensor.
@@ -5387,7 +5387,7 @@ keras$ops$nonzero(x)
 #' Return `(x1 != x2)` element-wise.
 #'
 #' @returns
-#'     Output tensor, element-wise comparsion of `x1` and `x2`.
+#' Output tensor, element-wise comparsion of `x1` and `x2`.
 #'
 #' @param x1
 #' First input tensor.
@@ -5410,7 +5410,7 @@ keras$ops$not_equal(x1, x2)
 #' Return a new tensor of given shape and type, filled with ones.
 #'
 #' @returns
-#'     Tensor of ones with the given shape and dtype.
+#' Tensor of ones with the given shape and dtype.
 #'
 #' @param shape
 #' Shape of the new tensor.
@@ -5436,7 +5436,7 @@ function (shape, dtype = NULL)
 #' Return a tensor of ones with the same shape and type of `x`.
 #'
 #' @returns
-#'     A tensor of ones with the same shape and type as `x`.
+#' A tensor of ones with the same shape and type as `x`.
 #'
 #' @param x
 #' Input tensor.
@@ -5466,7 +5466,7 @@ keras$ops$ones_like(x, dtype)
 #' ```
 #'
 #' @returns
-#'     Outer product of `x1` and `x2`.
+#' Outer product of `x1` and `x2`.
 #'
 #' @param x1
 #' First input tensor.
@@ -5500,7 +5500,7 @@ keras$ops$outer(x1, x2)
 #'     and `"symmetric"`.
 #'
 #' @returns
-#'     Padded tensor.
+#' Padded tensor.
 #'
 #' @param x
 #' Tensor to pad.
@@ -5543,7 +5543,7 @@ function (x, pad_width, mode = "constant", constant_values = NULL)
 #' First tensor elements raised to powers from second tensor, element-wise.
 #'
 #' @returns
-#'     Output tensor, the bases in `x1` raised to the exponents in `x2`.
+#' Output tensor, the bases in `x1` raised to the exponents in `x2`.
 #'
 #' @param x1
 #' The bases.
@@ -5566,7 +5566,7 @@ keras$ops$power(x1, x2)
 #' Return the product of tensor elements over a given axis.
 #'
 #' @returns
-#'     Product of elements of `x` over the given axis or axes.
+#' Product of elements of `x` over the given axis or axes.
 #'
 #' @param x
 #' Input tensor.
@@ -5654,7 +5654,7 @@ function (x, q, axis = NULL, method = "linear", keepdims = FALSE)
 #' A 1-D tensor, containing the elements of the input, is returned.
 #'
 #' @returns
-#'     Output tensor.
+#' Output tensor.
 #'
 #' @param x
 #' Input tensor.
@@ -5674,7 +5674,7 @@ keras$ops$ravel(x)
 #' Return the real part of the complex argument.
 #'
 #' @returns
-#'     The real component of the complex argument.
+#' The real component of the complex argument.
 #'
 #' @param x
 #' Input tensor.
@@ -5697,7 +5697,7 @@ keras$ops$real(x)
 #' Calculates `1/x`.
 #'
 #' @returns
-#'     Output tensor, element-wise reciprocal of `x`.
+#' Output tensor, element-wise reciprocal of `x`.
 #'
 #' @param x
 #' Input tensor.
@@ -5717,7 +5717,7 @@ keras$ops$reciprocal(x)
 #' Repeat each element of a tensor after themselves.
 #'
 #' @returns
-#'     Output tensor.
+#' Output tensor.
 #'
 #' @param x
 #' Input tensor.
@@ -5747,7 +5747,7 @@ function (x, repeats, axis = NULL)
 #' Gives a new shape to a tensor without changing its data.
 #'
 #' @returns
-#'     The reshaped tensor.
+#' The reshaped tensor.
 #'
 #' @param x
 #' Input tensor.
@@ -5812,7 +5812,7 @@ function (x, shift, axis = NULL)
 #' Evenly round to the given number of decimals.
 #'
 #' @returns
-#'     Output tensor.
+#' Output tensor.
 #'
 #' @param x
 #' Input tensor.
@@ -5838,7 +5838,7 @@ function (x, decimals = 0L)
 #' Returns a tensor with the signs of the elements of `x`.
 #'
 #' @returns
-#'     Output tensor of same shape as `x`.
+#' Output tensor of same shape as `x`.
 #'
 #' @param x
 #' Input tensor.
@@ -5858,7 +5858,7 @@ keras$ops$sign(x)
 #' Trigonomeric sine, element-wise.
 #'
 #' @returns
-#'     Output tensor of same shape as `x`.
+#' Output tensor of same shape as `x`.
 #'
 #' @param x
 #' Input tensor.
@@ -5878,7 +5878,7 @@ keras$ops$sin(x)
 #' Hyperbolic sine, element-wise.
 #'
 #' @returns
-#'     Output tensor of same shape as `x`.
+#' Output tensor of same shape as `x`.
 #'
 #' @param x
 #' Input tensor.
@@ -5898,7 +5898,7 @@ keras$ops$sinh(x)
 #' Return the number of elements in a tensor.
 #'
 #' @returns
-#'     Number of elements in `x`.
+#' Number of elements in `x`.
 #'
 #' @param x
 #' Input tensor.
@@ -5918,7 +5918,7 @@ keras$ops$size(x)
 #' Sorts the elements of `x` along a given axis in ascending order.
 #'
 #' @returns
-#'     Sorted tensor.
+#' Sorted tensor.
 #'
 #' @param x
 #' Input tensor.
@@ -5951,7 +5951,7 @@ function (x, axis = -1L)
 #' Torch backend.
 #'
 #' @returns
-#'     A list of tensors.
+#' A list of tensors.
 #'
 #' @param x
 #' Input tensor.
@@ -5987,7 +5987,7 @@ function (x, indices_or_sections, axis = 1L)
 #' Return the non-negative square root of a tensor, element-wise.
 #'
 #' @returns
-#'     Output tensor, the non-negative square root of `x`.
+#' Output tensor, the non-negative square root of `x`.
 #'
 #' @param x
 #' Input tensor.
@@ -6007,7 +6007,7 @@ keras$ops$sqrt(x)
 #' Return the element-wise square of the input.
 #'
 #' @returns
-#'     Output tensor, the square of `x`.
+#' Output tensor, the square of `x`.
 #'
 #' @param x
 #' Input tensor.
@@ -6058,7 +6058,7 @@ function (x, axis = NULL)
 #' dimensions of the result.
 #'
 #' @returns
-#'     The stacked tensor.
+#' The stacked tensor.
 #'
 #' @param x
 #' A sequence of tensors.
@@ -6084,7 +6084,7 @@ function (x, axis = 1L)
 #' Compute the standard deviation along the specified axis.
 #'
 #' @returns
-#'     Output tensor containing the standard deviation values.
+#' Output tensor containing the standard deviation values.
 #'
 #' @param x
 #' Input tensor.
@@ -6116,7 +6116,7 @@ function (x, axis = NULL, keepdims = FALSE)
 #' Subtract arguments element-wise.
 #'
 #' @returns
-#'     Output tensor, element-wise difference of `x1` and `x2`.
+#' Output tensor, element-wise difference of `x1` and `x2`.
 #'
 #' @param x1
 #' First input tensor.
@@ -6139,7 +6139,7 @@ keras$ops$subtract(x1, x2)
 #' Sum of a tensor over the given axes.
 #'
 #' @returns
-#'     Output tensor containing the sum.
+#' Output tensor containing the sum.
 #'
 #' @param x
 #' Input tensor.
@@ -6170,7 +6170,7 @@ function (x, axis = NULL, keepdims = FALSE)
 #' Interchange two axes of a tensor.
 #'
 #' @returns
-#'     A tensor with the axes swapped.
+#' A tensor with the axes swapped.
 #'
 #' @param x
 #' Input tensor.
@@ -6196,7 +6196,7 @@ keras$ops$swapaxes(x, axis1, axis2)
 #' Take elements from a tensor along an axis.
 #'
 #' @returns
-#'     The corresponding tensor of values.
+#' The corresponding tensor of values.
 #'
 #' @param x
 #' Source tensor.
@@ -6226,7 +6226,7 @@ function (x, indices, axis = NULL)
 #' Select values from `x` at the 1-D `indices` along the given axis.
 #'
 #' @returns
-#'     The corresponding tensor of values.
+#' The corresponding tensor of values.
 #'
 #' @param x
 #' Source tensor.
@@ -6256,7 +6256,7 @@ function (x, indices, axis = NULL)
 #' Compute tangent, element-wise.
 #'
 #' @returns
-#'     Output tensor of same shape as `x`.
+#' Output tensor of same shape as `x`.
 #'
 #' @param x
 #' Input tensor.
@@ -6276,7 +6276,7 @@ keras$ops$tan(x)
 #' Hyperbolic tangent, element-wise.
 #'
 #' @returns
-#'     Output tensor of same shape as `x`.
+#' Output tensor of same shape as `x`.
 #'
 #' @param x
 #' Input tensor.
@@ -6296,7 +6296,7 @@ keras$ops$tanh(x)
 #' Compute the tensor dot product along specified axes.
 #'
 #' @returns
-#'     The tensor dot product of the inputs.
+#' The tensor dot product of the inputs.
 #'
 #' @param x1
 #' First tensor.
@@ -6339,7 +6339,7 @@ function (x1, x2, axes = 3L)
 #' If `x.ndim > d`, `repeats` is promoted to `x.ndim` by prepending 1's to it.
 #'
 #' @returns
-#'     The tiled output tensor.
+#' The tiled output tensor.
 #'
 #' @param x
 #' Input tensor.
@@ -6477,7 +6477,7 @@ function (N, M = NULL, k = 0L, dtype = NULL)
 #' final two axes.
 #'
 #' @returns
-#'     Lower triangle of `x`, of same shape and data type as `x`.
+#' Lower triangle of `x`, of same shape and data type as `x`.
 #'
 #' @param x
 #' Input tensor.
@@ -6508,7 +6508,7 @@ function (x, k = 0L)
 #' final two axes.
 #'
 #' @returns
-#'     Upper triangle of `x`, of same shape and data type as `x`.
+#' Upper triangle of `x`, of same shape and data type as `x`.
 #'
 #' @param x
 #' Input tensor.
@@ -6555,7 +6555,7 @@ keras$ops$true_divide(x1, x2)
 #' Compute the variance along the specified axes.
 #'
 #' @returns
-#'     Output tensor containing the variance.
+#' Output tensor containing the variance.
 #'
 #' @param x
 #' Input tensor.
@@ -6592,7 +6592,7 @@ function (x, axis = NULL, keepdims = FALSE)
 #' Multidimensional tensors are flattened before the dot product is taken.
 #'
 #' @returns
-#'     Output tensor.
+#' Output tensor.
 #'
 #' @param x1
 #' First input tensor. If complex, its complex conjugate is taken
@@ -6616,7 +6616,7 @@ keras$ops$vdot(x1, x2)
 #' Stack tensors in sequence vertically (row wise).
 #'
 #' @returns
-#'     Tensor formed by stacking the given tensors.
+#' Tensor formed by stacking the given tensors.
 #'
 #' @param xs
 #' Sequence of tensors.
@@ -6663,7 +6663,7 @@ keras$ops$where(condition, x1, x2)
 #' Return a new tensor of given shape and type, filled with zeros.
 #'
 #' @returns
-#'     Tensor of zeros with the given shape and dtype.
+#' Tensor of zeros with the given shape and dtype.
 #'
 #' @param shape
 #' Shape of the new tensor.
@@ -6689,7 +6689,7 @@ function (shape, dtype = NULL)
 #' Return a tensor of zeros with the same shape and type as `x`.
 #'
 #' @returns
-#'     A tensor of zeros with the same shape and type as `x`.
+#' A tensor of zeros with the same shape and type as `x`.
 #'
 #' @param x
 #' Input tensor.

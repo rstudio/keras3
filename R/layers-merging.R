@@ -150,7 +150,7 @@ function (inputs, ...)
 #' ```
 #'
 #' @returns
-#'     A tensor, the concatenation of the inputs alongside axis `axis`.
+#' A tensor, the concatenation of the inputs alongside axis `axis`.
 #'
 #' @param axis
 #' Axis along which to concatenate.
@@ -222,7 +222,7 @@ function (inputs, ..., axis = -1L)
 #' ```
 #'
 #' @returns
-#'     A tensor, the dot product of the samples from the inputs.
+#' A tensor, the dot product of the samples from the inputs.
 #'
 #' @param axes
 #' Integer or list of integers, axis or axes along which to

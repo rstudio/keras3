@@ -19,7 +19,7 @@
 #' ```
 #'
 #' @returns
-#'     List in the format used in `fit()`.
+#' List in the format used in `fit()`.
 #'
 #' @param x
 #' Features to pass to `Model`.

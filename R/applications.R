@@ -32,7 +32,7 @@
 #' investigate the instantiated model.
 #'
 #' @returns
-#'     A model instance.
+#' A model instance.
 #'
 #' @param include_top
 #' Whether to include the fully-connected
@@ -135,7 +135,7 @@ function (model_name = "convnext_base", include_top = TRUE, include_preprocessin
 #' investigate the instantiated model.
 #'
 #' @returns
-#'     A model instance.
+#' A model instance.
 #'
 #' @param include_top
 #' Whether to include the fully-connected
@@ -238,7 +238,7 @@ function (model_name = "convnext_large", include_top = TRUE,
 #' investigate the instantiated model.
 #'
 #' @returns
-#'     A model instance.
+#' A model instance.
 #'
 #' @param include_top
 #' Whether to include the fully-connected
@@ -341,7 +341,7 @@ function (model_name = "convnext_small", include_top = TRUE,
 #' investigate the instantiated model.
 #'
 #' @returns
-#'     A model instance.
+#' A model instance.
 #'
 #' @param include_top
 #' Whether to include the fully-connected
@@ -444,7 +444,7 @@ function (model_name = "convnext_tiny", include_top = TRUE, include_preprocessin
 #' investigate the instantiated model.
 #'
 #' @returns
-#'     A model instance.
+#' A model instance.
 #'
 #' @param include_top
 #' Whether to include the fully-connected
@@ -531,7 +531,7 @@ function (model_name = "convnext_xlarge", include_top = TRUE,
 #' on your inputs before passing them to the model.
 #'
 #' @returns
-#'     A Keras model instance.
+#' A Keras model instance.
 #'
 #' @param include_top
 #' whether to include the fully-connected
@@ -615,7 +615,7 @@ function (include_top = TRUE, weights = "imagenet", input_tensor = NULL,
 #' on your inputs before passing them to the model.
 #'
 #' @returns
-#'     A Keras model instance.
+#' A Keras model instance.
 #'
 #' @param include_top
 #' whether to include the fully-connected
@@ -699,7 +699,7 @@ function (include_top = TRUE, weights = "imagenet", input_tensor = NULL,
 #' on your inputs before passing them to the model.
 #'
 #' @returns
-#'     A Keras model instance.
+#' A Keras model instance.
 #'
 #' @param include_top
 #' whether to include the fully-connected
@@ -793,7 +793,7 @@ function (include_top = TRUE, weights = "imagenet", input_tensor = NULL,
 #' tensors of pixels with values in the `[0-255]` range.
 #'
 #' @returns
-#'     A model instance.
+#' A model instance.
 #'
 #' @param include_top
 #' Whether to include the fully-connected
@@ -889,7 +889,7 @@ function (include_top = TRUE, weights = "imagenet", input_tensor = NULL,
 #' tensors of pixels with values in the `[0-255]` range.
 #'
 #' @returns
-#'     A model instance.
+#' A model instance.
 #'
 #' @param include_top
 #' Whether to include the fully-connected
@@ -985,7 +985,7 @@ function (include_top = TRUE, weights = "imagenet", input_tensor = NULL,
 #' tensors of pixels with values in the `[0-255]` range.
 #'
 #' @returns
-#'     A model instance.
+#' A model instance.
 #'
 #' @param include_top
 #' Whether to include the fully-connected
@@ -1081,7 +1081,7 @@ function (include_top = TRUE, weights = "imagenet", input_tensor = NULL,
 #' tensors of pixels with values in the `[0-255]` range.
 #'
 #' @returns
-#'     A model instance.
+#' A model instance.
 #'
 #' @param include_top
 #' Whether to include the fully-connected
@@ -1177,7 +1177,7 @@ function (include_top = TRUE, weights = "imagenet", input_tensor = NULL,
 #' tensors of pixels with values in the `[0-255]` range.
 #'
 #' @returns
-#'     A model instance.
+#' A model instance.
 #'
 #' @param include_top
 #' Whether to include the fully-connected
@@ -1273,7 +1273,7 @@ function (include_top = TRUE, weights = "imagenet", input_tensor = NULL,
 #' tensors of pixels with values in the `[0-255]` range.
 #'
 #' @returns
-#'     A model instance.
+#' A model instance.
 #'
 #' @param include_top
 #' Whether to include the fully-connected
@@ -1369,7 +1369,7 @@ function (include_top = TRUE, weights = "imagenet", input_tensor = NULL,
 #' tensors of pixels with values in the `[0-255]` range.
 #'
 #' @returns
-#'     A model instance.
+#' A model instance.
 #'
 #' @param include_top
 #' Whether to include the fully-connected
@@ -1465,7 +1465,7 @@ function (include_top = TRUE, weights = "imagenet", input_tensor = NULL,
 #' tensors of pixels with values in the `[0-255]` range.
 #'
 #' @returns
-#'     A model instance.
+#' A model instance.
 #'
 #' @param include_top
 #' Whether to include the fully-connected
@@ -1565,7 +1565,7 @@ function (include_top = TRUE, weights = "imagenet", input_tensor = NULL,
 #' float tensors of pixels with values in the `[-1, 1]` range.
 #'
 #' @returns
-#'     A model instance.
+#' A model instance.
 #'
 #' @param include_top
 #' Boolean, whether to include the fully-connected
@@ -1664,7 +1664,7 @@ function (include_top = TRUE, weights = "imagenet", input_tensor = NULL,
 #' float tensors of pixels with values in the `[-1, 1]` range.
 #'
 #' @returns
-#'     A model instance.
+#' A model instance.
 #'
 #' @param include_top
 #' Boolean, whether to include the fully-connected
@@ -1763,7 +1763,7 @@ function (include_top = TRUE, weights = "imagenet", input_tensor = NULL,
 #' float tensors of pixels with values in the `[-1, 1]` range.
 #'
 #' @returns
-#'     A model instance.
+#' A model instance.
 #'
 #' @param include_top
 #' Boolean, whether to include the fully-connected
@@ -1862,7 +1862,7 @@ function (include_top = TRUE, weights = "imagenet", input_tensor = NULL,
 #' float tensors of pixels with values in the `[-1, 1]` range.
 #'
 #' @returns
-#'     A model instance.
+#' A model instance.
 #'
 #' @param include_top
 #' Boolean, whether to include the fully-connected
@@ -1961,7 +1961,7 @@ function (include_top = TRUE, weights = "imagenet", input_tensor = NULL,
 #' float tensors of pixels with values in the `[-1, 1]` range.
 #'
 #' @returns
-#'     A model instance.
+#' A model instance.
 #'
 #' @param include_top
 #' Boolean, whether to include the fully-connected
@@ -2060,7 +2060,7 @@ function (include_top = TRUE, weights = "imagenet", input_tensor = NULL,
 #' float tensors of pixels with values in the `[-1, 1]` range.
 #'
 #' @returns
-#'     A model instance.
+#' A model instance.
 #'
 #' @param include_top
 #' Boolean, whether to include the fully-connected
@@ -2159,7 +2159,7 @@ function (include_top = TRUE, weights = "imagenet", input_tensor = NULL,
 #' float tensors of pixels with values in the `[-1, 1]` range.
 #'
 #' @returns
-#'     A model instance.
+#' A model instance.
 #'
 #' @param include_top
 #' Boolean, whether to include the fully-connected
@@ -2255,7 +2255,7 @@ function (include_top = TRUE, weights = "imagenet", input_tensor = NULL,
 #' will scale input pixels between -1 and 1.
 #'
 #' @returns
-#'     A model instance.
+#' A model instance.
 #'
 #' @param include_top
 #' whether to include the fully-connected
@@ -2347,7 +2347,7 @@ function (include_top = TRUE, weights = "imagenet", input_tensor = NULL,
 #' `inception_v3.preprocess_input` will scale input pixels between -1 and 1.
 #'
 #' @returns
-#'     A model instance.
+#' A model instance.
 #'
 #' @param include_top
 #' Boolean, whether to include the fully-connected
@@ -2441,7 +2441,7 @@ function (include_top = TRUE, weights = "imagenet", input_tensor = NULL,
 #' `mobilenet.preprocess_input` will scale input pixels between -1 and 1.
 #'
 #' @returns
-#'     A model instance.
+#' A model instance.
 #'
 #' @param input_shape
 #' Optional shape tuple, only to be specified if `include_top`
@@ -2560,7 +2560,7 @@ function (input_shape = NULL, alpha = 1, depth_multiplier = 1L,
 #' `mobilenet_v2.preprocess_input` will scale input pixels between -1 and 1.
 #'
 #' @returns
-#'     A model instance.
+#' A model instance.
 #'
 #' @param input_shape
 #' Optional shape tuple, only to be specified if `include_top`
@@ -2684,7 +2684,7 @@ function (input_shape = NULL, alpha = 1, include_top = TRUE,
 #' otherwise.
 #'
 #' @returns
-#'     A model instance.
+#' A model instance.
 #'
 #' @param input_shape
 #' Optional shape tuple, to be specified if you would
@@ -2830,7 +2830,7 @@ function (input_shape = NULL, alpha = 1, minimalistic = FALSE,
 #' otherwise.
 #'
 #' @returns
-#'     A model instance.
+#' A model instance.
 #'
 #' @param input_shape
 #' Optional shape tuple, to be specified if you would
@@ -2946,7 +2946,7 @@ function (input_shape = NULL, alpha = 1, minimalistic = FALSE,
 #' inputs before passing them to the model.
 #'
 #' @returns
-#'     A Keras model instance.
+#' A Keras model instance.
 #'
 #' @param input_shape
 #' Optional shape tuple, only to be specified
@@ -3029,7 +3029,7 @@ function (input_shape = NULL, include_top = TRUE, weights = "imagenet",
 #' inputs before passing them to the model.
 #'
 #' @returns
-#'     A Keras model instance.
+#' A Keras model instance.
 #'
 #' @param input_shape
 #' Optional shape tuple, only to be specified
@@ -3117,7 +3117,7 @@ function (input_shape = NULL, include_top = TRUE, weights = "imagenet",
 #' respect to the ImageNet dataset, without scaling.
 #'
 #' @returns
-#'     A Model instance.
+#' A Model instance.
 #'
 #' @param include_top
 #' whether to include the fully-connected
@@ -3200,7 +3200,7 @@ function (include_top = TRUE, weights = "imagenet", input_tensor = NULL,
 #' respect to the ImageNet dataset, without scaling.
 #'
 #' @returns
-#'     A Model instance.
+#' A Model instance.
 #'
 #' @param include_top
 #' whether to include the fully-connected
@@ -3284,7 +3284,7 @@ function (include_top = TRUE, weights = "imagenet", input_tensor = NULL,
 #' respect to the ImageNet dataset, without scaling.
 #'
 #' @returns
-#'     A Model instance.
+#' A Model instance.
 #'
 #' @param include_top
 #' whether to include the fully-connected
@@ -3366,7 +3366,7 @@ function (include_top = TRUE, weights = "imagenet", input_tensor = NULL,
 #' scale input pixels between -1 and 1.
 #'
 #' @returns
-#'     A Model instance.
+#' A Model instance.
 #'
 #' @param include_top
 #' whether to include the fully-connected
@@ -3448,7 +3448,7 @@ function (include_top = TRUE, weights = "imagenet", input_tensor = NULL,
 #' scale input pixels between -1 and 1.
 #'
 #' @returns
-#'     A Model instance.
+#' A Model instance.
 #'
 #' @param include_top
 #' whether to include the fully-connected
@@ -3530,7 +3530,7 @@ function (include_top = TRUE, weights = "imagenet", input_tensor = NULL,
 #' scale input pixels between -1 and 1.
 #'
 #' @returns
-#'     A Model instance.
+#' A Model instance.
 #'
 #' @param include_top
 #' whether to include the fully-connected
@@ -3617,7 +3617,7 @@ function (include_top = TRUE, weights = "imagenet", input_tensor = NULL,
 #' dataset, without scaling.
 #'
 #' @returns
-#'     A model instance.
+#' A model instance.
 #'
 #' @param include_top
 #' whether to include the 3 fully-connected
@@ -3710,7 +3710,7 @@ function (include_top = TRUE, weights = "imagenet", input_tensor = NULL,
 #' dataset, without scaling.
 #'
 #' @returns
-#'     A model instance.
+#' A model instance.
 #'
 #' @param include_top
 #' whether to include the 3 fully-connected
@@ -3801,7 +3801,7 @@ function (include_top = TRUE, weights = "imagenet", input_tensor = NULL,
 #' `xception.preprocess_input` will scale input pixels between -1 and 1.
 #'
 #' @returns
-#'     A model instance.
+#' A model instance.
 #'
 #' @param include_top
 #' whether to include the 3 fully-connected

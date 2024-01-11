@@ -250,7 +250,7 @@ function (x)
 #' ```
 #'
 #' @returns
-#'     A tensor with the same shape and dtype as input `x`.
+#' A tensor with the same shape and dtype as input `x`.
 #'
 #' @param x
 #' Input tensor.
