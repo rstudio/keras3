@@ -32,13 +32,13 @@
 #'
 #' @param seed
 #' A Python integer or instance of
-#' `keras.random.SeedGenerator`.
+#' [`random_seed_generator()`].
 #' Used to make the behavior of the initializer
 #' deterministic. Note that an initializer seeded with an integer
 #' or `NULL` (unseeded) will produce the same random values
 #' across multiple calls. To get different random values
 #' across multiple calls, use as seed an instance
-#' of `keras.random.SeedGenerator`.
+#' of [`random_seed_generator()`].
 #'
 #' @export
 #' @family random
@@ -95,17 +95,17 @@ function (inputs, rate, noise_shape = NULL, seed = NULL)
 #' Optional dtype of the tensor. Only floating point types are
 #' supported. If not specified, `keras.config.floatx()` is used,
 #' which defaults to `float32` unless you configured it otherwise (via
-#' `keras.config.set_floatx(float_dtype)`).
+#' `config_set_floatx(float_dtype)`).
 #'
 #' @param seed
 #' A Python integer or instance of
-#' `keras.random.SeedGenerator`.
+#' [`random_seed_generator()`].
 #' Used to make the behavior of the initializer
 #' deterministic. Note that an initializer seeded with an integer
 #' or `NULL` (unseeded) will produce the same random values
 #' across multiple calls. To get different random values
 #' across multiple calls, use as seed an instance
-#' of `keras.random.SeedGenerator`.
+#' of [`random_seed_generator()`].
 #'
 #' @export
 #' @family random
@@ -144,17 +144,17 @@ function (shape, alpha, dtype = NULL, seed = NULL)
 #' Optional dtype of the tensor. Only integer types are
 #' supported. If not specified, `keras.config.floatx()` is used,
 #' which defaults to `float32` unless you configured it otherwise (via
-#' `keras.config.set_floatx(float_dtype)`)
+#' `config_set_floatx(float_dtype)`)
 #'
 #' @param seed
 #' A Python integer or instance of
-#' `keras.random.SeedGenerator`.
+#' [`random_seed_generator()`].
 #' Used to make the behavior of the initializer
 #' deterministic. Note that an initializer seeded with an integer
 #' or `NULL` (unseeded) will produce the same random values
 #' across multiple calls. To get different random values
 #' across multiple calls, use as seed an instance
-#' of `keras.random.SeedGenerator`.
+#' of [`random_seed_generator()`].
 #'
 #' @export
 #' @family random
@@ -187,17 +187,17 @@ function (shape, minval, maxval, dtype = "int32", seed = NULL)
 #' Optional dtype of the tensor. Only floating point types are
 #' supported. If not specified, `keras.config.floatx()` is used,
 #' which defaults to `float32` unless you configured it otherwise (via
-#' `keras.config.set_floatx(float_dtype)`).
+#' `config_set_floatx(float_dtype)`).
 #'
 #' @param seed
 #' A Python integer or instance of
-#' `keras.random.SeedGenerator`.
+#' [`random_seed_generator()`].
 #' Used to make the behavior of the initializer
 #' deterministic. Note that an initializer seeded with an integer
 #' or `NULL` (unseeded) will produce the same random values
 #' across multiple calls. To get different random values
 #' across multiple calls, use as seed an instance
-#' of `keras.random.SeedGenerator`.
+#' of [`random_seed_generator()`].
 #'
 #' @export
 #' @family random
@@ -223,13 +223,13 @@ function (shape, mean = 0, stddev = 1, dtype = NULL, seed = NULL)
 #'
 #' @param seed
 #' A Python integer or instance of
-#' `keras.random.SeedGenerator`.
+#' [`random_seed_generator()`].
 #' Used to make the behavior of the initializer
 #' deterministic. Note that an initializer seeded with an integer
 #' or `NULL` (unseeded) will produce the same random values
 #' across multiple calls. To get different random values
 #' across multiple calls, use as seed an instance
-#' of `keras.random.SeedGenerator`.
+#' of [`random_seed_generator()`].
 #'
 #' @export
 #' @family random
@@ -265,17 +265,17 @@ function (x, axis = 1L, seed = NULL)
 #' Optional dtype of the tensor. Only floating point types are
 #' supported. If not specified, `keras.config.floatx()` is used,
 #' which defaults to `float32` unless you configured it otherwise (via
-#' `keras.config.set_floatx(float_dtype)`)
+#' `config_set_floatx(float_dtype)`)
 #'
 #' @param seed
 #' A Python integer or instance of
-#' `keras.random.SeedGenerator`.
+#' [`random_seed_generator()`].
 #' Used to make the behavior of the initializer
 #' deterministic. Note that an initializer seeded with an integer
 #' or `NULL` (unseeded) will produce the same random values
 #' across multiple calls. To get different random values
 #' across multiple calls, use as seed an instance
-#' of `keras.random.SeedGenerator`.
+#' of [`random_seed_generator()`].
 #'
 #' @export
 #' @family random
@@ -314,17 +314,17 @@ function (shape, mean = 0, stddev = 1, dtype = NULL, seed = NULL)
 #' Optional dtype of the tensor. Only floating point types are
 #' supported. If not specified, `keras.config.floatx()` is used,
 #' which defaults to `float32` unless you configured it otherwise (via
-#' `keras.config.set_floatx(float_dtype)`)
+#' `config_set_floatx(float_dtype)`)
 #'
 #' @param seed
 #' A Python integer or instance of
-#' `keras.random.SeedGenerator`.
+#' [`random_seed_generator()`].
 #' Used to make the behavior of the initializer
 #' deterministic. Note that an initializer seeded with an integer
 #' or `NULL` (unseeded) will produce the same random values
 #' across multiple calls. To get different random values
 #' across multiple calls, use as seed an instance
-#' of `keras.random.SeedGenerator`.
+#' of [`random_seed_generator()`].
 #'
 #' @export
 #' @family random

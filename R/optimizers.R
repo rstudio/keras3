@@ -21,7 +21,7 @@
 #'
 #' @param learning_rate
 #' A float, a
-#' `keras.optimizers.schedules.LearningRateSchedule` instance, or
+#' [`LearningRateSchedule()]` instance, or
 #' a callable that takes no arguments and returns the actual value to
 #' use. The learning rate. Defaults to `0.001`. Note that `Adadelta`
 #' tends to benefit from higher initial learning rate values compared
@@ -125,7 +125,7 @@ function (learning_rate = 0.001, rho = 0.95, epsilon = 1e-07,
 #'
 #' @param learning_rate
 #' A float, a
-#' `keras.optimizers.schedules.LearningRateSchedule` instance, or
+#' [`LearningRateSchedule()`] instance, or
 #' a callable that takes no arguments and returns the actual value to
 #' use. The learning rate. Defaults to `0.001`.
 #'
@@ -241,7 +241,7 @@ function (learning_rate = 0.001, beta_2_decay = -0.8, epsilon_1 = 1e-30,
 #'
 #' @param learning_rate
 #' A float, a
-#' `keras.optimizers.schedules.LearningRateSchedule` instance, or
+#' [`LearningRateSchedule()`] instance, or
 #' a callable that takes no arguments and returns the actual value to
 #' use. The learning rate. Defaults to `0.001`. Note that `Adagrad`
 #' tends to benefit from higher initial learning rate values compared
@@ -345,7 +345,7 @@ function (learning_rate = 0.001, initial_accumulator_value = 0.1,
 #'
 #' @param learning_rate
 #' A float, a
-#' `keras.optimizers.schedules.LearningRateSchedule` instance, or
+#' [`LearningRateSchedule()`] instance, or
 #' a callable that takes no arguments and returns the actual value to
 #' use. The learning rate. Defaults to `0.001`.
 #'
@@ -482,7 +482,7 @@ function (learning_rate = 0.001, beta_1 = 0.9, beta_2 = 0.999,
 #'
 #' @param learning_rate
 #' A float, a
-#' `keras.optimizers.schedules.LearningRateSchedule` instance, or
+#' [`LearningRateSchedule()`] instance, or
 #' a callable that takes no arguments and returns the actual value to
 #' use. The learning rate. Defaults to `0.001`.
 #'
@@ -598,7 +598,7 @@ function (learning_rate = 0.001, beta_1 = 0.9, beta_2 = 0.999,
 #'
 #' @param learning_rate
 #' A float, a
-#' `keras.optimizers.schedules.LearningRateSchedule` instance, or
+#' [`LearningRateSchedule()`] instance, or
 #' a callable that takes no arguments and returns the actual value to
 #' use. The learning rate. Defaults to `0.001`.
 #'
@@ -749,7 +749,7 @@ function (learning_rate = 0.001, weight_decay = 0.004, beta_1 = 0.9,
 #'
 #' @param learning_rate
 #' A float, a
-#' `keras.optimizers.schedules.LearningRateSchedule` instance, or
+#' [`LearningRateSchedule()`] instance, or
 #' a callable that takes no arguments and returns the actual value to
 #' use. The learning rate. Defaults to `0.001`.
 #'
@@ -880,7 +880,7 @@ function (learning_rate = 0.001, learning_rate_power = -0.5,
 #'
 #' @param learning_rate
 #' A float, a
-#' `keras.optimizers.schedules.LearningRateSchedule` instance, or
+#' [`LearningRateSchedule()`] instance, or
 #' a callable that takes no arguments and returns the actual value to
 #' use. The learning rate. Defaults to `0.001`.
 #'
@@ -1088,7 +1088,7 @@ function (inner_optimizer, initial_scale = 32768, dynamic_growth_steps = 2000L,
 #'
 #' @param learning_rate
 #' A float, a
-#' `keras.optimizers.schedules.LearningRateSchedule` instance, or
+#' [`LearningRateSchedule()`] instance, or
 #' a callable that takes no arguments and returns the actual value to
 #' use. The learning rate. Defaults to `0.001`.
 #'

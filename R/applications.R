@@ -3277,6 +3277,7 @@ function (include_top = TRUE, weights = "imagenet", input_tensor = NULL,
 #'
 #' # Note
 #' each Keras Application expects a specific kind of input preprocessing.
+#' TODO
 #' For ResNet, call `keras.applications.resnet.preprocess_input` on your
 #' inputs before passing them to the model. `resnet.preprocess_input` will convert
 #' the input images from RGB to BGR, then will zero-center each color channel with
