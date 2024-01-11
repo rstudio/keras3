@@ -14,8 +14,7 @@
 #'
 #' @inheritSection Layer Symbols in scope
 #'
-#' @param
-#' initialize,update_state,result,call,train_step,predict_step,test_step,compute_loss,compute_metrics
+#' @param initialize,call,train_step,predict_step,test_step,compute_loss,compute_metrics
 #' Optional methods that can be overridden.
 #' @inheritParams Layer
 #'

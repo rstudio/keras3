@@ -20,7 +20,7 @@ Return whether two tensors are element-wise almost equal.
 }
 \seealso{
 \itemize{
-\item \url{https:/keras.io/keras_core/api/ops/numpy#isclose-function}
+\item \url{https:/keras.io/api/ops/numpy#isclose-function}
 \item \url{https://www.tensorflow.org/api_docs/python/tf/keras/ops/isclose}
 }
 

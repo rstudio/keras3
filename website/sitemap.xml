@@ -121,6 +121,9 @@
     <loc>https://keras.posit.co/reference/Metric.html</loc>
   </url>
   <url>
+    <loc>https://keras.posit.co/reference/Model.html</loc>
+  </url>
+  <url>
     <loc>https://keras.posit.co/reference/activation_elu.html</loc>
   </url>
   <url>
@@ -1124,6 +1127,9 @@
   </url>
   <url>
     <loc>https://keras.posit.co/reference/new_metric_class.html</loc>
+  </url>
+  <url>
+    <loc>https://keras.posit.co/reference/new_model_class.html</loc>
   </url>
   <url>
     <loc>https://keras.posit.co/reference/normalize.html</loc>

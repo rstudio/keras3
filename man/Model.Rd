@@ -23,7 +23,7 @@ Model(
 \arguments{
 \item{classname}{String, the name of the custom class. (Conventionally, CamelCase).}
 
-\item{initialize, update_state, result, call, train_step, predict_step, test_step, compute_loss, compute_metrics}{Optional methods that can be overridden.}
+\item{initialize, call, train_step, predict_step, test_step, compute_loss, compute_metrics}{Optional methods that can be overridden.}
 
 \item{..., public}{Additional methods or public members of the custom class.}
 

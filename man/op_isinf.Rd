@@ -18,7 +18,7 @@ Test element-wise for positive or negative infinity.
 }
 \seealso{
 \itemize{
-\item \url{https:/keras.io/keras_core/api/ops/numpy#isinf-function}
+\item \url{https:/keras.io/api/ops/numpy#isinf-function}
 \item \url{https://www.tensorflow.org/api_docs/python/tf/keras/ops/isinf}
 }
 

@@ -56,6 +56,8 @@ if(!"source:tools/translate-tools.R" %in% search()) envir::attach_source("tools/
 
 # TODO: revisit get_config()/from_config() after resolve_py_object()
 
+# TODO: revisit Model() signature, do we need update_state() and result() methods?
+
 # TODO: For apps, tether encode+decode along w/ constructor:
 # #'  @tether application.foo,
 # #'   application.foo.preprocess_input,

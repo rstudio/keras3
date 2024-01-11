@@ -65,7 +65,7 @@ Also known as de-convolution. This ops supports 1D, 2D and 3D convolution.
 }
 \seealso{
 \itemize{
-\item \url{https:/keras.io/keras_core/api/ops/nn#convtranspose-function}
+\item \url{https:/keras.io/api/ops/nn#convtranspose-function}
 \item \url{https://www.tensorflow.org/api_docs/python/tf/keras/ops/conv_transpose}
 }
 

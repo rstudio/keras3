@@ -58,7 +58,7 @@
 #' @family backend
 #' @family utils
 #' @seealso
-#' + <https:/keras.io/keras_core/api/utils/config_utils#clearsession-function>
+#' + <https:/keras.io/api/utils/config_utils#clearsession-function>
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/utils/clear_session>
 #' @tether keras.utils.clear_session
 clear_session <-
@@ -449,7 +449,7 @@ function (seed)
 #' @export
 #' @family utils
 #' @seealso
-#' + <https:/keras.io/keras_core/api/data_loading/timeseries#padsequences-function>
+#' + <https:/keras.io/api/data_loading/timeseries#padsequences-function>
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/utils/pad_sequences>
 #'
 #' @tether keras.utils.pad_sequences

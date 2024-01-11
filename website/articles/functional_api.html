@@ -233,7 +233,7 @@ then evaluate the model on the test data:</p>
 <span>    <span class="va">x_train</span>, <span class="va">y_train</span>, batch_size <span class="op">=</span> <span class="fl">64</span>, epochs <span class="op">=</span> <span class="fl">2</span>, validation_split <span class="op">=</span> <span class="fl">0.2</span></span>
 <span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">## Epoch 1/2</span></span>
-<span><span class="co">## 750/750 - 3s - 3ms/step - accuracy: 0.9015 - loss: 0.3513 - val_accuracy: 0.9442 - val_loss: 0.1921</span></span>
+<span><span class="co">## 750/750 - 2s - 3ms/step - accuracy: 0.9015 - loss: 0.3513 - val_accuracy: 0.9442 - val_loss: 0.1921</span></span>
 <span><span class="co">## Epoch 2/2</span></span>
 <span><span class="co">## 750/750 - 1s - 1ms/step - accuracy: 0.9508 - loss: 0.1643 - val_accuracy: 0.9581 - val_loss: 0.1423</span></span></code></pre>
 <div class="sourceCode" id="cb18"><pre class="downlit sourceCode r">
@@ -602,9 +602,9 @@ targets:</p>
 <span>    batch_size<span class="op">=</span><span class="fl">32</span>,</span>
 <span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">## Epoch 1/2</span></span>
-<span><span class="co">## 40/40 - 3s - 73ms/step - loss: 0.3948</span></span>
+<span><span class="co">## 40/40 - 3s - 67ms/step - loss: 0.3948</span></span>
 <span><span class="co">## Epoch 2/2</span></span>
-<span><span class="co">## 40/40 - 0s - 5ms/step - loss: 0.1971</span></span></code></pre>
+<span><span class="co">## 40/40 - 0s - 6ms/step - loss: 0.1971</span></span></code></pre>
 <p>When calling fit with a <code>Dataset</code> object, it should yield
 either a list of lists like
 <code>list(list(title_data, body_data, tags_data), list(priority_targets, dept_targets))</code>
@@ -717,7 +717,7 @@ ResNet model for CIFAR10 to demonstrate this:</p>
 <span>    epochs<span class="op">=</span><span class="fl">1</span>,</span>
 <span>    validation_split<span class="op">=</span><span class="fl">0.2</span></span>
 <span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">## 13/13 - 8s - 589ms/step - acc: 0.1312 - loss: 2.3034 - val_acc: 0.1150 - val_loss: 2.3086</span></span></code></pre>
+<pre><code><span><span class="co">## 13/13 - 7s - 522ms/step - acc: 0.1338 - loss: 2.3035 - val_acc: 0.1150 - val_loss: 2.3076</span></span></code></pre>
 </div>
 </div>
 <div class="section level2">
@@ -925,7 +925,7 @@ are R and Python (byte)code, not data structures).</p>
 <span><span class="va">mlp</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/keras_model.html">keras_model</a></span><span class="op">(</span><span class="va">inputs</span>, <span class="va">outputs</span><span class="op">)</span></span></code></pre></div>
 <p>With the subclassed version:</p>
 <div class="sourceCode" id="cb53"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">MLP</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/new-classes.html">new_model_class</a></span><span class="op">(</span></span>
+<code class="sourceCode R"><span><span class="va">MLP</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/new_model_class.html">new_model_class</a></span><span class="op">(</span></span>
 <span>  <span class="st">"MLP"</span>,</span>
 <span>  initialize <span class="op">=</span> <span class="kw">function</span><span class="op">(</span><span class="va">...</span><span class="op">)</span> <span class="op">{</span></span>
 <span>    <span class="va">super</span><span class="op">$</span><span class="fu">initialize</span><span class="op">(</span><span class="va">...</span><span class="op">)</span></span>

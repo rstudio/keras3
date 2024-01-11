@@ -87,7 +87,7 @@ try(op_average(
 
 \seealso{
 \itemize{
-\item \url{https:/keras.io/keras_core/api/ops/numpy#average-function}
+\item \url{https:/keras.io/api/ops/numpy#average-function}
 \item \url{https://www.tensorflow.org/api_docs/python/tf/keras/ops/average}
 }
 

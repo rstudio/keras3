@@ -18,7 +18,7 @@ Returns a tensor with the signs of the elements of \code{x}.
 }
 \seealso{
 \itemize{
-\item \url{https:/keras.io/keras_core/api/ops/numpy#sign-function}
+\item \url{https:/keras.io/api/ops/numpy#sign-function}
 \item \url{https://www.tensorflow.org/api_docs/python/tf/keras/ops/sign}
 }
 

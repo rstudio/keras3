@@ -187,8 +187,8 @@ reference:
     contents:
       - "%py_class%"
       - Layer
-      - create_layer_wrapper
-      - create_layer
+      # - create_layer_wrapper
+      # - create_layer
 
 
   - title: "Datasets"
@@ -354,6 +354,10 @@ reference:
       - keras
       - "%py_class%"
       - "%<-active%"
+
+  - title: "Advanced"
+    contents:
+      - Model
 
   - title: "Questioning"
     contents:

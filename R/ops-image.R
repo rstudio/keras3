@@ -90,7 +90,7 @@
 #' @family image utils
 #' @family ops
 #' @seealso
-#' + <https:/keras.io/keras_core/api/ops/image#affinetransform-function>
+#' + <https:/keras.io/api/ops/image#affinetransform-function>
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/image/affine_transform>
 #'
 #' @tether keras.ops.image.affine_transform
@@ -156,7 +156,7 @@ function (image, transform, interpolation = "bilinear", fill_mode = "constant",
 #' @family image utils
 #' @family ops
 #' @seealso
-#' + <https:/keras.io/keras_core/api/ops/image#extractpatches-function>
+#' + <https:/keras.io/api/ops/image#extractpatches-function>
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/image/extract_patches>
 #'
 #' @tether keras.ops.image.extract_patches
@@ -354,7 +354,7 @@ function (images, top_padding = NULL, left_padding = NULL, target_height = NULL,
 #' @family image utils
 #' @family ops
 #' @seealso
-#' + <https:/keras.io/keras_core/api/ops/image#resize-function>
+#' + <https:/keras.io/api/ops/image#resize-function>
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/image/resize>
 #' @tether keras.ops.image.resize
 op_image_resize <-

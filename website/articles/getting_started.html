@@ -278,16 +278,16 @@ includes loss and accuracy metrics which we can plot:</p>
 <p>Evaluate the model’s performance on the test data:</p>
 <div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">model</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://rdrr.io/pkg/tensorflow/man/evaluate.html" class="external-link">evaluate</a></span><span class="op">(</span><span class="va">x_test</span>, <span class="va">y_test</span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">## 313/313 - 1s - 3ms/step - accuracy: 0.9817 - loss: 0.0894</span></span></code></pre>
+<pre><code><span><span class="co">## 313/313 - 1s - 2ms/step - accuracy: 0.9815 - loss: 0.0933</span></span></code></pre>
 <pre><code><span><span class="co">## $accuracy</span></span>
-<span><span class="co">## [1] 0.9817</span></span>
+<span><span class="co">## [1] 0.9815</span></span>
 <span><span class="co">##</span></span>
 <span><span class="co">## $loss</span></span>
-<span><span class="co">## [1] 0.08939119</span></span></code></pre>
+<span><span class="co">## [1] 0.09328237</span></span></code></pre>
 <p>Generate predictions on new data:</p>
 <div class="sourceCode" id="cb16"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">probs</span> <span class="op">&lt;-</span> <span class="va">model</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://rdrr.io/r/stats/predict.html" class="external-link">predict</a></span><span class="op">(</span><span class="va">x_test</span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">## 313/313 - 0s - 2ms/step</span></span></code></pre>
+<pre><code><span><span class="co">## 313/313 - 0s - 1ms/step</span></span></code></pre>
 <div class="sourceCode" id="cb18"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/maxCol.html" class="external-link">max.col</a></span><span class="op">(</span><span class="va">probs</span><span class="op">)</span> <span class="op">-</span> <span class="fl">1L</span></span></code></pre></div>
 <pre><code><span><span class="co">##   [1] 7 2 1 0 4 1 4 9 5 9 0 6 9 0 1 5 9 7 3 4 9 6 6 5 4 0 7 4 0 1 3 1 3 4 7</span></span>

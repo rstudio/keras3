@@ -58,7 +58,7 @@ at several other points, obtaining values in the range \verb{[-pi, pi]}:
 
 \seealso{
 \itemize{
-\item \url{https:/keras.io/keras_core/api/ops/numpy#arctan2-function}
+\item \url{https:/keras.io/api/ops/numpy#arctan2-function}
 \item \url{https://www.tensorflow.org/api_docs/python/tf/keras/ops/arctan2}
 }
 

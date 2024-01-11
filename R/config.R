@@ -48,7 +48,7 @@ function ()
 #' @family backend
 #' @family config
 #' @seealso
-#' + <https:/keras.io/keras_core/api/utils/config_utils#epsilon-function>
+#' + <https:/keras.io/api/utils/config_utils#epsilon-function>
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/config/epsilon>
 #' @tether keras.config.epsilon
 config_epsilon <-
@@ -77,7 +77,7 @@ function ()
 #' @family backend
 #' @family config
 #' @seealso
-#' + <https:/keras.io/keras_core/api/utils/config_utils#floatx-function>
+#' + <https:/keras.io/api/utils/config_utils#floatx-function>
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/config/floatx>
 #' @tether keras.config.floatx
 config_floatx <-
@@ -116,7 +116,7 @@ function(x) {
 #' @family backend
 #' @family config
 #' @seealso
-#' + <https:/keras.io/keras_core/api/utils/config_utils#imagedataformat-function>
+#' + <https:/keras.io/api/utils/config_utils#imagedataformat-function>
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/config/image_data_format>
 #' @tether keras.config.image_data_format
 config_image_data_format <-
@@ -154,7 +154,7 @@ function ()
 #' @family backend
 #' @family config
 #' @seealso
-#' + <https:/keras.io/keras_core/api/utils/config_utils#setepsilon-function>
+#' + <https:/keras.io/api/utils/config_utils#setepsilon-function>
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/config/set_epsilon>
 #' @tether keras.config.set_epsilon
 config_set_epsilon <-
@@ -202,7 +202,7 @@ function (value)
 #' @family backend
 #' @family config
 #' @seealso
-#' + <https:/keras.io/keras_core/api/utils/config_utils#setfloatx-function>
+#' + <https:/keras.io/api/utils/config_utils#setfloatx-function>
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/config/set_floatx>
 #' @tether keras.config.set_floatx
 config_set_floatx <-
@@ -241,7 +241,7 @@ function (value)
 #' @family backend
 #' @family config
 #' @seealso
-#' + <https:/keras.io/keras_core/api/utils/config_utils#setimagedataformat-function>
+#' + <https:/keras.io/api/utils/config_utils#setimagedataformat-function>
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/config/set_image_data_format>
 #' @tether keras.config.set_image_data_format
 config_set_image_data_format <-

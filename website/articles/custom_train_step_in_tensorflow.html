@@ -135,9 +135,9 @@ models.</p>
 <h2 id="setup">Setup<a class="anchor" aria-label="anchor" href="#setup"></a>
 </h2>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/rstudio/tensorflow" class="external-link">tensorflow</a></span><span class="op">)</span></span>
-<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https:/keras.posit.co/">keras3</a></span><span class="op">)</span></span>
-<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://rstudio.github.io/reticulate/" class="external-link">reticulate</a></span><span class="op">)</span></span></code></pre></div>
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://rstudio.github.io/reticulate/" class="external-link">reticulate</a></span><span class="op">)</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/rstudio/tensorflow" class="external-link">tensorflow</a></span><span class="op">)</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https:/keras.posit.co/">keras3</a></span><span class="op">)</span></span></code></pre></div>
 </div>
 <div class="section level2">
 <h2 id="a-first-simple-example">A first simple example<a class="anchor" aria-label="anchor" href="#a-first-simple-example"></a>
@@ -171,7 +171,7 @@ metrics that were passed in <code><a href="https://generics.r-lib.org/reference/
 from <code>self$metrics</code> at the end to retrieve their current
 value.</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">CustomModel</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/new-classes.html">new_model_class</a></span><span class="op">(</span></span>
+<code class="sourceCode R"><span><span class="va">CustomModel</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/new_model_class.html">new_model_class</a></span><span class="op">(</span></span>
 <span>  <span class="st">"CustomModel"</span>,</span>
 <span>  train_step <span class="op">=</span> <span class="kw">function</span><span class="op">(</span><span class="va">data</span><span class="op">)</span> <span class="op">{</span></span>
 <span>    <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="va">x</span>, <span class="va">y</span>, <span class="va">sample_weight</span><span class="op">)</span> <span class="op"><a href="../reference/multi-assign.html">%&lt;-%</a></span> <span class="fu"><a href="../reference/unpack_x_y_sample_weight.html">unpack_x_y_sample_weight</a></span><span class="op">(</span><span class="va">data</span><span class="op">)</span></span>
@@ -215,7 +215,7 @@ value.</p>
 <span><span class="va">y</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/random_normal.html">random_normal</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1000</span>, <span class="fl">1</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="va">model</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://generics.r-lib.org/reference/fit.html" class="external-link">fit</a></span><span class="op">(</span><span class="va">x</span>, <span class="va">y</span>, epochs<span class="op">=</span><span class="fl">3</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">## Epoch 1/3</span></span>
-<span><span class="co">## 32/32 - 1s - 34ms/step - loss: 2.9118 - mae: 1.3597</span></span>
+<span><span class="co">## 32/32 - 1s - 32ms/step - loss: 2.9118 - mae: 1.3597</span></span>
 <span><span class="co">## Epoch 2/3</span></span>
 <span><span class="co">## 32/32 - 0s - 1ms/step - loss: 2.6026 - mae: 1.2856</span></span>
 <span><span class="co">## Epoch 3/3</span></span>
@@ -247,7 +247,7 @@ on any object listed here at the beginning of each <code><a href="https://generi
 epoch or at the beginning of a call to <code><a href="https://rdrr.io/pkg/tensorflow/man/evaluate.html" class="external-link">evaluate()</a></code>.</li>
 </ul>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">CustomModel</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/new-classes.html">new_model_class</a></span><span class="op">(</span></span>
+<code class="sourceCode R"><span><span class="va">CustomModel</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/new_model_class.html">new_model_class</a></span><span class="op">(</span></span>
 <span>  <span class="st">"CustomModel"</span>,</span>
 <span>  initialize <span class="op">=</span> <span class="kw">function</span><span class="op">(</span><span class="va">...</span><span class="op">)</span> <span class="op">{</span></span>
 <span>    <span class="va">super</span><span class="op">$</span><span class="fu">initialize</span><span class="op">(</span><span class="va">...</span><span class="op">)</span></span>
@@ -302,7 +302,7 @@ epoch or at the beginning of a call to <code><a href="https://rdrr.io/pkg/tensor
 <span><span class="va">y</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/random_normal.html">random_normal</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1000</span>, <span class="fl">1</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="va">model</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://generics.r-lib.org/reference/fit.html" class="external-link">fit</a></span><span class="op">(</span><span class="va">x</span>, <span class="va">y</span>, epochs<span class="op">=</span><span class="fl">3</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">## Epoch 1/3</span></span>
-<span><span class="co">## 32/32 - 1s - 25ms/step - loss: 2.6540 - mae: 1.2901</span></span>
+<span><span class="co">## 32/32 - 1s - 22ms/step - loss: 2.6540 - mae: 1.2901</span></span>
 <span><span class="co">## Epoch 2/3</span></span>
 <span><span class="co">## 32/32 - 0s - 1ms/step - loss: 2.4139 - mae: 1.2303</span></span>
 <span><span class="co">## Epoch 3/3</span></span>
@@ -325,7 +325,7 @@ argument</li>
 <li>That’s it.</li>
 </ul>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">CustomModel</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/new-classes.html">new_model_class</a></span><span class="op">(</span></span>
+<code class="sourceCode R"><span><span class="va">CustomModel</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/new_model_class.html">new_model_class</a></span><span class="op">(</span></span>
 <span>  <span class="st">"CustomModel"</span>,</span>
 <span>  train_step <span class="op">=</span> <span class="kw">function</span><span class="op">(</span><span class="va">data</span><span class="op">)</span> <span class="op">{</span></span>
 <span>    <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="va">x</span>, <span class="va">y</span>, <span class="va">sample_weight</span><span class="op">)</span> <span class="op"><a href="../reference/multi-assign.html">%&lt;-%</a></span> <span class="fu"><a href="../reference/unpack_x_y_sample_weight.html">unpack_x_y_sample_weight</a></span><span class="op">(</span><span class="va">data</span><span class="op">)</span></span>
@@ -371,7 +371,7 @@ argument</li>
 <span><span class="va">sw</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/random_normal.html">random_normal</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1000</span>, <span class="fl">1</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="va">model</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://generics.r-lib.org/reference/fit.html" class="external-link">fit</a></span><span class="op">(</span><span class="va">x</span>, <span class="va">y</span>, sample_weight<span class="op">=</span><span class="va">sw</span>, epochs<span class="op">=</span><span class="fl">3</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">## Epoch 1/3</span></span>
-<span><span class="co">## 32/32 - 1s - 27ms/step - loss: 0.1607 - mae: 1.3018</span></span>
+<span><span class="co">## 32/32 - 1s - 24ms/step - loss: 0.1607 - mae: 1.3018</span></span>
 <span><span class="co">## Epoch 2/3</span></span>
 <span><span class="co">## 32/32 - 0s - 1ms/step - loss: 0.1452 - mae: 1.2999</span></span>
 <span><span class="co">## Epoch 3/3</span></span>
@@ -385,7 +385,7 @@ argument</li>
 <code>test_step</code> in exactly the same way. Here’s what it looks
 like:</p>
 <div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">CustomModel</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/new-classes.html">new_model_class</a></span><span class="op">(</span></span>
+<code class="sourceCode R"><span><span class="va">CustomModel</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/new_model_class.html">new_model_class</a></span><span class="op">(</span></span>
 <span>  <span class="st">"CustomModel"</span>,</span>
 <span>  test_step <span class="op">=</span> <span class="kw">function</span><span class="op">(</span><span class="va">data</span><span class="op">)</span> <span class="op">{</span></span>
 <span>    <span class="co"># Unpack the data</span></span>
@@ -464,7 +464,7 @@ classes (“fake” and “real”).</li>
 <code><a href="https://generics.r-lib.org/reference/compile.html" class="external-link">compile()</a></code> to use its own signature, and implementing the
 entire GAN algorithm in 17 lines in <code>train_step</code>:</p>
 <div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">GAN</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/new-classes.html">new_model_class</a></span><span class="op">(</span></span>
+<code class="sourceCode R"><span><span class="va">GAN</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/new_model_class.html">new_model_class</a></span><span class="op">(</span></span>
 <span>  <span class="st">"GAN"</span>,</span>
 <span>  initialize <span class="op">=</span> <span class="kw">function</span><span class="op">(</span><span class="va">discriminator</span>, <span class="va">generator</span>, <span class="va">latent_dim</span>, <span class="va">...</span><span class="op">)</span> <span class="op">{</span></span>
 <span>    <span class="va">super</span><span class="op">$</span><span class="fu">initialize</span><span class="op">(</span><span class="va">...</span><span class="op">)</span></span>
@@ -561,7 +561,7 @@ entire GAN algorithm in 17 lines in <code>train_step</code>:</p>
 <span>  <span class="fu">tfdatasets</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/tfdatasets/man/dataset_take.html" class="external-link">dataset_take</a></span><span class="op">(</span><span class="va">dataset</span>, <span class="fl">100</span><span class="op">)</span>,</span>
 <span>  epochs <span class="op">=</span> <span class="fl">1</span></span>
 <span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">## 100/100 - 7s - 69ms/step - d_loss: 0.0000e+00 - g_loss: 0.0000e+00</span></span></code></pre>
+<pre><code><span><span class="co">## 100/100 - 6s - 64ms/step - d_loss: 0.0000e+00 - g_loss: 0.0000e+00</span></span></code></pre>
 <p>The ideas behind deep learning are simple, so why should their
 implementation be painful?</p>
 </div>

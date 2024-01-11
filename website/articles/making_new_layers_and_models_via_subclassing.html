@@ -475,14 +475,14 @@ automatically summed and added to the main loss, if any):</p>
 <span><span class="co"># losses get added to it</span></span>
 <span><span class="va">model</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://generics.r-lib.org/reference/compile.html" class="external-link">compile</a></span><span class="op">(</span>optimizer<span class="op">=</span><span class="st">"adam"</span>, loss<span class="op">=</span><span class="st">"mse"</span><span class="op">)</span></span>
 <span><span class="va">model</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://generics.r-lib.org/reference/fit.html" class="external-link">fit</a></span><span class="op">(</span><span class="fu"><a href="../reference/random_normal.html">random_normal</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">2</span>, <span class="fl">3</span><span class="op">)</span><span class="op">)</span>, <span class="fu"><a href="../reference/random_normal.html">random_normal</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">2</span>, <span class="fl">3</span><span class="op">)</span><span class="op">)</span>, epochs <span class="op">=</span> <span class="fl">1</span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">## 1/1 - 0s - 144ms/step - loss: 1.8971</span></span></code></pre>
+<pre><code><span><span class="co">## 1/1 - 0s - 131ms/step - loss: 1.8971</span></span></code></pre>
 <div class="sourceCode" id="cb38"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># It's also possible not to pass any loss in `compile`,</span></span>
 <span><span class="co"># since the model already has a loss to minimize, via the `add_loss`</span></span>
 <span><span class="co"># call during the forward pass!</span></span>
 <span><span class="va">model</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://generics.r-lib.org/reference/compile.html" class="external-link">compile</a></span><span class="op">(</span>optimizer<span class="op">=</span><span class="st">"adam"</span><span class="op">)</span></span>
 <span><span class="va">model</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://generics.r-lib.org/reference/fit.html" class="external-link">fit</a></span><span class="op">(</span><span class="fu"><a href="../reference/random_normal.html">random_normal</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">2</span>, <span class="fl">3</span><span class="op">)</span><span class="op">)</span>, <span class="fu"><a href="../reference/random_normal.html">random_normal</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">2</span>, <span class="fl">3</span><span class="op">)</span><span class="op">)</span>, epochs <span class="op">=</span> <span class="fl">1</span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">## 1/1 - 0s - 106ms/step - loss: -3.3344e-03</span></span></code></pre>
+<pre><code><span><span class="co">## 1/1 - 0s - 102ms/step - loss: -3.3344e-03</span></span></code></pre>
 </div>
 <div class="section level2">
 <h2 id="you-can-optionally-enable-serialization-on-your-layers">You can optionally enable serialization on your layers<a class="anchor" aria-label="anchor" href="#you-can-optionally-enable-serialization-on-your-layers"></a>
@@ -660,7 +660,7 @@ to build a <code>Model</code> that we could train with
 <code><a href="https://generics.r-lib.org/reference/fit.html" class="external-link">fit()</a></code>, and that we could save with
 <code>save_weights()</code>:</p>
 <div class="sourceCode" id="cb48"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">ResNet</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/new-classes.html">new_model_class</a></span><span class="op">(</span></span>
+<code class="sourceCode R"><span><span class="va">ResNet</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/new_model_class.html">new_model_class</a></span><span class="op">(</span></span>
 <span>  <span class="st">"ResNet"</span>,</span>
 <span>  initialize <span class="op">=</span> <span class="kw">function</span><span class="op">(</span><span class="va">num_classes</span> <span class="op">=</span> <span class="fl">1000</span>, <span class="va">...</span><span class="op">)</span> <span class="op">{</span></span>
 <span>    <span class="va">super</span><span class="op">$</span><span class="fu">initialize</span><span class="op">(</span><span class="va">...</span><span class="op">)</span></span>
@@ -756,7 +756,7 @@ a regularization loss (KL divergence).</p>
 <span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># Combines the encoder and decoder into an end-to-end model for training.</span></span>
-<span><span class="va">VariationalAutoEncoder</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/new-classes.html">new_model_class</a></span><span class="op">(</span></span>
+<span><span class="va">VariationalAutoEncoder</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/new_model_class.html">new_model_class</a></span><span class="op">(</span></span>
 <span>  <span class="st">"VariationalAutoEncoder"</span>,</span>
 <span>  initialize <span class="op">=</span> <span class="kw">function</span><span class="op">(</span><span class="va">original_dim</span>,</span>
 <span>        <span class="va">intermediate_dim</span><span class="op">=</span><span class="fl">64</span>,</span>
@@ -805,9 +805,9 @@ a regularization loss (KL divergence).</p>
 <span></span>
 <span><span class="va">vae</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://generics.r-lib.org/reference/fit.html" class="external-link">fit</a></span><span class="op">(</span><span class="va">x_train</span>, <span class="va">x_train</span>, epochs<span class="op">=</span><span class="fl">2</span>, batch_size<span class="op">=</span><span class="fl">64</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">## Epoch 1/2</span></span>
-<span><span class="co">## 938/938 - 6s - 6ms/step - loss: 0.0748</span></span>
+<span><span class="co">## 938/938 - 5s - 5ms/step - loss: 0.0748</span></span>
 <span><span class="co">## Epoch 2/2</span></span>
-<span><span class="co">## 938/938 - 1s - 1ms/step - loss: 0.0676</span></span></code></pre>
+<span><span class="co">## 938/938 - 1s - 911us/step - loss: 0.0676</span></span></code></pre>
 </div>
   </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>
     </nav></aside>

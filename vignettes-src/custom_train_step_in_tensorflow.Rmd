@@ -42,9 +42,9 @@ Let's see how that works.
 ## Setup
 
 ```{r}
+library(reticulate)
 library(tensorflow)
 library(keras3)
-library(reticulate)
 ```
 
 ## A first simple example

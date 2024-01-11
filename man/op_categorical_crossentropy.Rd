@@ -52,7 +52,7 @@ op_categorical_crossentropy(target, output)
 
 \seealso{
 \itemize{
-\item \url{https:/keras.io/keras_core/api/ops/nn#categoricalcrossentropy-function}
+\item \url{https:/keras.io/api/ops/nn#categoricalcrossentropy-function}
 \item \url{https://www.tensorflow.org/api_docs/python/tf/keras/ops/categorical_crossentropy}
 }
 

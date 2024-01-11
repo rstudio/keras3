@@ -22,7 +22,7 @@ Return the default image data format convention.
 
 \seealso{
 \itemize{
-\item \url{https:/keras.io/keras_core/api/utils/config_utils#imagedataformat-function}
+\item \url{https:/keras.io/api/utils/config_utils#imagedataformat-function}
 \item \url{https://www.tensorflow.org/api_docs/python/tf/keras/config/image_data_format}
 }
 

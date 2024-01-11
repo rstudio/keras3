@@ -20,7 +20,7 @@ op_divide(x1, x2)
 }
 \seealso{
 \itemize{
-\item \url{https:/keras.io/keras_core/api/ops/numpy#divide-function}
+\item \url{https:/keras.io/api/ops/numpy#divide-function}
 \item \url{https://www.tensorflow.org/api_docs/python/tf/keras/ops/divide}
 }
 

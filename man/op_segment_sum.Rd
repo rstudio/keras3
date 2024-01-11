@@ -39,7 +39,7 @@ op_segment_sum(data, segment_ids, num_segments)
 
 \seealso{
 \itemize{
-\item \url{https:/keras.io/keras_core/api/ops/core#segmentsum-function}
+\item \url{https:/keras.io/api/ops/core#segmentsum-function}
 \item \url{https://www.tensorflow.org/api_docs/python/tf/keras/ops/segment_sum}
 }
 

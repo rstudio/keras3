@@ -18,7 +18,7 @@ Return the imaginary part of the complex argument.
 }
 \seealso{
 \itemize{
-\item \url{https:/keras.io/keras_core/api/ops/numpy#imag-function}
+\item \url{https:/keras.io/api/ops/numpy#imag-function}
 \item \url{https://www.tensorflow.org/api_docs/python/tf/keras/ops/imag}
 }
 

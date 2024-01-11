@@ -33,7 +33,7 @@ plot(x, op_softplus(x))
 
 \seealso{
 \itemize{
-\item \url{https:/keras.io/keras_core/api/ops/nn#softplus-function}
+\item \url{https:/keras.io/api/ops/nn#softplus-function}
 \item \url{https://www.tensorflow.org/api_docs/python/tf/keras/ops/softplus}
 }
 

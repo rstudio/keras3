@@ -102,20 +102,16 @@ description section.</p></dd>
 
 
 <dt>..., public</dt>
-<dd><p>Additional methods or public members of the custom class.
-Recommended methods <code>initialize</code>, <code>call</code> can optionally be
-provided as elements of <code>public</code>, and will take precedence over the value
-supplied to the argument.</p></dd>
+<dd><p>Additional methods or public members of the custom class.</p></dd>
 
 
 <dt>private</dt>
 <dd><p>Named list of R objects (typically, functions) to include in
-instance private environments. <code>private</code> will be a symbol in scope in all
-class methods, resolving to an R environment populated with the list
-provided. Each instance will have it's own <code>private</code> environment. All
-methods (functions) in <code>private</code> will have in scope <code>self</code> and <code>__class__</code>
-symbols. Any objects in <code>private</code> will be invisible from the Keras
-framework and the Python runtime.</p></dd>
+instance private environments. <code>private</code> methods will have all the same
+symbols in scope as public methods (See section "Symbols in Scope"). Each
+instance will have it's own <code>private</code> environment. Any objects
+in <code>private</code> will be invisible from the Keras framework and the Python
+runtime.</p></dd>
 
 
 <dt>inherit</dt>

@@ -51,7 +51,7 @@ op_one_hot(x, num_classes = 4)
 
 \seealso{
 \itemize{
-\item \url{https:/keras.io/keras_core/api/ops/nn#onehot-function}
+\item \url{https:/keras.io/api/ops/nn#onehot-function}
 \item \url{https://www.tensorflow.org/api_docs/python/tf/keras/ops/one_hot}
 }
 

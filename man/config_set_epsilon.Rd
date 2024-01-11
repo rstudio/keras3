@@ -33,7 +33,7 @@ config_set_epsilon(1e-7)
 
 \seealso{
 \itemize{
-\item \url{https:/keras.io/keras_core/api/utils/config_utils#setepsilon-function}
+\item \url{https:/keras.io/api/utils/config_utils#setepsilon-function}
 \item \url{https://www.tensorflow.org/api_docs/python/tf/keras/config/set_epsilon}
 }
 

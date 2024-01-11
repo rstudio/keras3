@@ -18,7 +18,7 @@ A 1-D tensor, containing the elements of the input, is returned.
 }
 \seealso{
 \itemize{
-\item \url{https:/keras.io/keras_core/api/ops/numpy#ravel-function}
+\item \url{https:/keras.io/api/ops/numpy#ravel-function}
 \item \url{https://www.tensorflow.org/api_docs/python/tf/keras/ops/ravel}
 }
 

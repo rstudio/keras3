@@ -103,7 +103,7 @@ See <code>?</code><code><a href="Callback.html">Callback()</a></code> for the fu
     <div class="section level2">
     <h2 id="arguments">Arguments<a class="anchor" aria-label="anchor" href="#arguments"></a></h2>
     <dl><dt>classname</dt>
-<dd><p>The name of the callback class. CamelCase by convention.</p></dd>
+<dd><p>String, the name of the custom class. (Conventionally, CamelCase).</p></dd>
 
 
 <dt>on_epoch_begin</dt>
@@ -282,20 +282,19 @@ method but that may change in the future.</p></li>
 
 <dt>private</dt>
 <dd><p>Named list of R objects (typically, functions) to include in
-instance private environments. <code>private</code> will be a symbol in scope in all
-class methods, resolving to an R environment populated with the list
-provided. Each instance will have it's own <code>private</code> environment. All
-methods (functions) in <code>private</code> will have in scope <code>self</code> and <code>__class__</code>
-symbols. Any objects in <code>private</code> will be invisible from the Keras
-framework and the Python runtime.</p></dd>
+instance private environments. <code>private</code> methods will have all the same
+symbols in scope as public methods (See section "Symbols in Scope"). Each
+instance will have it's own <code>private</code> environment. Any objects
+in <code>private</code> will be invisible from the Keras framework and the Python
+runtime.</p></dd>
 
 
 <dt>inherit</dt>
-<dd><p>The Callback class to inherit from. By default, the base <code>Callback</code>.</p></dd>
+<dd><p>What the custom class will subclass. By default, the base keras class.</p></dd>
 
 
 <dt>parent_env</dt>
-<dd><p>The environment that all class methods will have as a grandparent.</p></dd>
+<dd><p>The R environment that all class methods will have as a grandparent.</p></dd>
 
 </dl></div>
 

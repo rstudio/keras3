@@ -53,7 +53,7 @@ op_irfft(c(real, imag))
 
 \seealso{
 \itemize{
-\item \url{https:/keras.io/keras_core/api/ops/fft#irfft-function}
+\item \url{https:/keras.io/api/ops/fft#irfft-function}
 \item \url{https://www.tensorflow.org/api_docs/python/tf/keras/ops/irfft}
 }
 

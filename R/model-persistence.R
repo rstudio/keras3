@@ -133,7 +133,7 @@ function (model, filepath = NULL, overwrite = FALSE, ...)
 #' @tether keras.saving.load_model
 #' @family saving
 #' @seealso
-#' + <https:/keras.io/keras_core/api/models/model_saving_apis/model_saving_and_loading#loadmodel-function>
+#' + <https:/keras.io/api/models/model_saving_apis/model_saving_and_loading#loadmodel-function>
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/saving/load_model>
 load_model <-
 function (model, custom_objects = NULL, compile = TRUE, safe_mode = TRUE)
@@ -543,7 +543,7 @@ function (name, custom_objects = NULL, module_objects = NULL)
 #' @export
 #' @family saving
 #' @seealso
-#' + <https:/keras.io/keras_core/api/models/model_saving_apis/serialization_utils#serializekerasobject-function>
+#' + <https:/keras.io/api/models/model_saving_apis/serialization_utils#serializekerasobject-function>
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/saving/serialize_keras_object>
 serialize_keras_object <-
 function (obj)
@@ -671,7 +671,7 @@ function (obj)
 #' @export
 #' @family saving
 #' @seealso
-#' + <https:/keras.io/keras_core/api/models/model_saving_apis/serialization_utils#deserializekerasobject-function>
+#' + <https:/keras.io/api/models/model_saving_apis/serialization_utils#deserializekerasobject-function>
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/saving/deserialize_keras_object>
 deserialize_keras_object <-
 function (config, custom_objects = NULL, safe_mode = TRUE, ...)

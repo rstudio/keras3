@@ -56,7 +56,7 @@ op_sparse_categorical_crossentropy(target, output)
 
 \seealso{
 \itemize{
-\item \url{https:/keras.io/keras_core/api/ops/nn#sparsecategoricalcrossentropy-function}
+\item \url{https:/keras.io/api/ops/nn#sparsecategoricalcrossentropy-function}
 \item \url{https://www.tensorflow.org/api_docs/python/tf/keras/ops/sparse_categorical_crossentropy}
 }
 

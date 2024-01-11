@@ -975,9 +975,9 @@ the MNIST example above.</p>
 <span><span class="co"># Train the model with the dataset for 2 epochs.</span></span>
 <span><span class="va">model</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://generics.r-lib.org/reference/fit.html" class="external-link">fit</a></span><span class="op">(</span><span class="va">dataset</span>, epochs<span class="op">=</span><span class="fl">2</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">## Epoch 1/2</span></span>
-<span><span class="co">## 938/938 - 3s - 3ms/step - loss: 0.3960 - sparse_categorical_accuracy: 0.8866</span></span>
+<span><span class="co">## 938/938 - 2s - 3ms/step - loss: 0.3960 - sparse_categorical_accuracy: 0.8866</span></span>
 <span><span class="co">## Epoch 2/2</span></span>
-<span><span class="co">## 938/938 - 1s - 1ms/step - loss: 0.1886 - sparse_categorical_accuracy: 0.9444</span></span></code></pre>
+<span><span class="co">## 938/938 - 1s - 863us/step - loss: 0.1886 - sparse_categorical_accuracy: 0.9444</span></span></code></pre>
 <div class="sourceCode" id="cb73"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">predictions</span> <span class="op">&lt;-</span> <span class="va">model</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://rdrr.io/r/stats/predict.html" class="external-link">predict</a></span><span class="op">(</span><span class="va">dataset</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">## 938/938 - 1s - 1ms/step</span></span></code></pre>
@@ -1002,7 +1002,7 @@ customize what happens in <code><a href="https://rdrr.io/r/stats/predict.html" c
 please refer to <a href="https://keras.io/guides/customizing_what_happens_in_fit/" class="external-link">this
 guide</a>.</p>
 <div class="sourceCode" id="cb78"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">CustomModel</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/new-classes.html">new_model_class</a></span><span class="op">(</span></span>
+<code class="sourceCode R"><span><span class="va">CustomModel</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/new_model_class.html">new_model_class</a></span><span class="op">(</span></span>
 <span>  <span class="st">"CustomModel"</span>,</span>
 <span>  initialize <span class="op">=</span> <span class="kw">function</span><span class="op">(</span><span class="va">...</span><span class="op">)</span> <span class="op">{</span></span>
 <span>    <span class="va">super</span><span class="op">$</span><span class="fu">initialize</span><span class="op">(</span><span class="va">...</span><span class="op">)</span></span>
@@ -1047,7 +1047,7 @@ guide</a>.</p>
 <pre><code><span><span class="co">## Epoch 1/2</span></span>
 <span><span class="co">## 938/938 - 2s - 2ms/step - loss: 0.3869 - sparse_categorical_accuracy: 0.8924</span></span>
 <span><span class="co">## Epoch 2/2</span></span>
-<span><span class="co">## 938/938 - 1s - 927us/step - loss: 0.2163 - sparse_categorical_accuracy: 0.9370</span></span></code></pre>
+<span><span class="co">## 938/938 - 1s - 833us/step - loss: 0.2163 - sparse_categorical_accuracy: 0.9370</span></span></code></pre>
 </div>
 <div class="section level2">
 <h2 id="end-to-end-experiment-example-1-variational-autoencoders-">End-to-end experiment example 1: variational autoencoders.<a class="anchor" aria-label="anchor" href="#end-to-end-experiment-example-1-variational-autoencoders-"></a>
@@ -1125,7 +1125,7 @@ probabilistic latent space coordinates back to a MNIST digit.</p>
 encoder and a decoder, and creates a KL divergence regularization loss
 via <code>add_loss()</code>.</p>
 <div class="sourceCode" id="cb82"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">VariationalAutoEncoder</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/new-classes.html">new_model_class</a></span><span class="op">(</span></span>
+<code class="sourceCode R"><span><span class="va">VariationalAutoEncoder</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/new_model_class.html">new_model_class</a></span><span class="op">(</span></span>
 <span>  <span class="st">"VariationalAutoEncoder"</span>,</span>
 <span>  initialize <span class="op">=</span> <span class="kw">function</span><span class="op">(</span><span class="va">original_dim</span>,</span>
 <span>        <span class="va">intermediate_dim</span><span class="op">=</span><span class="fl">64</span>,</span>

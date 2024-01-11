@@ -20,7 +20,7 @@ Return a tensor of ones with the same shape and type of \code{x}.
 }
 \seealso{
 \itemize{
-\item \url{https:/keras.io/keras_core/api/ops/numpy#oneslike-function}
+\item \url{https:/keras.io/api/ops/numpy#oneslike-function}
 \item \url{https://www.tensorflow.org/api_docs/python/tf/keras/ops/ones_like}
 }
 

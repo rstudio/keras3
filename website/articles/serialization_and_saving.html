@@ -571,8 +571,8 @@ memory</em></strong></p>
 <span>  <span class="va">layer</span></span>
 <span><span class="op">}</span></span>
 <span></span>
-<span><span class="va">layer_1</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/create_layer.html">create_layer</a></span><span class="op">(</span><span class="op">)</span></span>
-<span><span class="va">layer_2</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/create_layer.html">create_layer</a></span><span class="op">(</span><span class="op">)</span></span>
+<span><span class="va">layer_1</span> <span class="op">&lt;-</span> <span class="fu">create_layer</span><span class="op">(</span><span class="op">)</span></span>
+<span><span class="va">layer_2</span> <span class="op">&lt;-</span> <span class="fu">create_layer</span><span class="op">(</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># Copy weights from layer 1 to layer 2</span></span>
 <span><span class="va">layer_2</span> <span class="op">|&gt;</span> <span class="fu"><a href="../reference/get_weights.html">set_weights</a></span><span class="op">(</span><span class="fu"><a href="../reference/get_weights.html">get_weights</a></span><span class="op">(</span><span class="va">layer_1</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
@@ -589,7 +589,7 @@ a compatible architecture, in memory</em></strong></p>
 <span>                               name <span class="op">=</span> <span class="st">"3_layer_mlp"</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># Define a subclassed model with the same architecture</span></span>
-<span><span class="va">SubclassedModel</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/new-classes.html">new_model_class</a></span><span class="op">(</span></span>
+<span><span class="va">SubclassedModel</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/new_model_class.html">new_model_class</a></span><span class="op">(</span></span>
 <span>  <span class="st">"SubclassedModel"</span>,</span>
 <span>  initialize <span class="op">=</span> <span class="kw">function</span><span class="op">(</span><span class="va">output_dim</span>, <span class="va">name</span> <span class="op">=</span> <span class="cn">NULL</span><span class="op">)</span> <span class="op">{</span></span>
 <span>    <span class="va">super</span><span class="op">$</span><span class="fu">initialize</span><span class="op">(</span>name <span class="op">=</span> <span class="va">name</span><span class="op">)</span></span>

@@ -20,7 +20,7 @@ Returns \code{(x1 == x2)} element-wise.
 }
 \seealso{
 \itemize{
-\item \url{https:/keras.io/keras_core/api/ops/numpy#equal-function}
+\item \url{https:/keras.io/api/ops/numpy#equal-function}
 \item \url{https://www.tensorflow.org/api_docs/python/tf/keras/ops/equal}
 }
 

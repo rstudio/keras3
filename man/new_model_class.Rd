@@ -23,6 +23,8 @@ new_model_class(
 \arguments{
 \item{classname}{String, the name of the custom class. (Conventionally, CamelCase).}
 
+\item{initialize, call, train_step, predict_step, test_step, compute_loss, compute_metrics}{Optional methods that can be overridden.}
+
 \item{..., public}{Additional methods or public members of the custom class.}
 
 \item{private}{Named list of R objects (typically, functions) to include in

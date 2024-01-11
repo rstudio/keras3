@@ -26,7 +26,7 @@ op_sigmoid(x)
 
 \seealso{
 \itemize{
-\item \url{https:/keras.io/keras_core/api/ops/nn#sigmoid-function}
+\item \url{https:/keras.io/api/ops/nn#sigmoid-function}
 \item \url{https://www.tensorflow.org/api_docs/python/tf/keras/ops/sigmoid}
 }
 
