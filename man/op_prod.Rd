@@ -26,7 +26,7 @@ Return the product of tensor elements over a given axis.
 }
 \seealso{
 \itemize{
-\item \url{https:/keras.io/api/ops/numpy#prod-function}
+\item \url{https://keras.io/api/ops/numpy#prod-function}
 \item \url{https://www.tensorflow.org/api_docs/python/tf/keras/ops/prod}
 }
 

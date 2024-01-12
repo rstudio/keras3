@@ -37,7 +37,7 @@ model <- keras_model(inputs = list(input1, input2), outputs = out)
 
 \seealso{
 \itemize{
-\item \url{https:/keras.io/api/layers/merging_layers/subtract#subtract-class}
+\item \url{https://keras.io/api/layers/merging_layers/subtract#subtract-class}
 \item \url{https://www.tensorflow.org/api_docs/python/tf/keras/layers/Subtract}
 }
 

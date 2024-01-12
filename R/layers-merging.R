@@ -42,7 +42,7 @@
 #' @family merging layers
 #' @family layers
 #' @seealso
-#' + <https:/keras.io/api/layers/merging_layers/add#add-class>
+#' + <https://keras.io/api/layers/merging_layers/add#add-class>
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/layers/Add>
 #' @tether keras.layers.Add
 layer_add <-
@@ -105,7 +105,7 @@ function (inputs, ...)
 #' @family merging layers
 #' @family layers
 #' @seealso
-#' + <https:/keras.io/api/layers/merging_layers/average#average-class>
+#' + <https://keras.io/api/layers/merging_layers/average#average-class>
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/layers/Average>
 #' @tether keras.layers.Average
 layer_average <-
@@ -166,7 +166,7 @@ function (inputs, ...)
 #' @family merging layers
 #' @family layers
 #' @seealso
-#' + <https:/keras.io/api/layers/merging_layers/concatenate#concatenate-class>
+#' + <https://keras.io/api/layers/merging_layers/concatenate#concatenate-class>
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/layers/Concatenate>
 #' @tether keras.layers.Concatenate
 layer_concatenate <-
@@ -248,7 +248,7 @@ function (inputs, ..., axis = -1L)
 #' @family merging layers
 #' @family layers
 #' @seealso
-#' + <https:/keras.io/api/layers/merging_layers/dot#dot-class>
+#' + <https://keras.io/api/layers/merging_layers/dot#dot-class>
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/layers/Dot>
 #' @tether keras.layers.Dot
 layer_dot <-
@@ -309,7 +309,7 @@ function (inputs, ..., axes, normalize = FALSE)
 #' @family merging layers
 #' @family layers
 #' @seealso
-#' + <https:/keras.io/api/layers/merging_layers/maximum#maximum-class>
+#' + <https://keras.io/api/layers/merging_layers/maximum#maximum-class>
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/layers/Maximum>
 #' @tether keras.layers.Maximum
 layer_maximum <-
@@ -370,7 +370,7 @@ function (inputs, ...)
 #' @family merging layers
 #' @family layers
 #' @seealso
-#' + <https:/keras.io/api/layers/merging_layers/minimum#minimum-class>
+#' + <https://keras.io/api/layers/merging_layers/minimum#minimum-class>
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/layers/Minimum>
 #' @tether keras.layers.Minimum
 layer_minimum <-
@@ -431,7 +431,7 @@ function (inputs, ...)
 #' @family merging layers
 #' @family layers
 #' @seealso
-#' + <https:/keras.io/api/layers/merging_layers/multiply#multiply-class>
+#' + <https://keras.io/api/layers/merging_layers/multiply#multiply-class>
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/layers/Multiply>
 #' @tether keras.layers.Multiply
 layer_multiply <-
@@ -492,7 +492,7 @@ function (inputs, ...)
 #' @family merging layers
 #' @family layers
 #' @seealso
-#' + <https:/keras.io/api/layers/merging_layers/subtract#subtract-class>
+#' + <https://keras.io/api/layers/merging_layers/subtract#subtract-class>
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/layers/Subtract>
 #'
 #' @tether keras.layers.Subtract

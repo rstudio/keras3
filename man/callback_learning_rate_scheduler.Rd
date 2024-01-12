@@ -50,7 +50,7 @@ model$optimizer$learning_rate |> as.array() |> round(5)
 
 \seealso{
 \itemize{
-\item \url{https:/keras.io/api/callbacks/learning_rate_scheduler#learningratescheduler-class}
+\item \url{https://keras.io/api/callbacks/learning_rate_scheduler#learningratescheduler-class}
 \item \url{https://www.tensorflow.org/api_docs/python/tf/keras/callbacks/LearningRateScheduler}
 }
 

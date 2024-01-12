@@ -17,7 +17,7 @@ Calculate \code{exp(x) - 1} for all elements in the tensor.
 }
 \seealso{
 \itemize{
-\item \url{https:/keras.io/api/ops/numpy#expm1-function}
+\item \url{https://keras.io/api/ops/numpy#expm1-function}
 \item \url{https://www.tensorflow.org/api_docs/python/tf/keras/ops/expm1}
 }
 

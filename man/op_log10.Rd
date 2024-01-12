@@ -17,7 +17,7 @@ Return the base 10 logarithm of the input tensor, element-wise.
 }
 \seealso{
 \itemize{
-\item \url{https:/keras.io/api/ops/numpy#log10-function}
+\item \url{https://keras.io/api/ops/numpy#log10-function}
 \item \url{https://www.tensorflow.org/api_docs/python/tf/keras/ops/log10}
 }
 

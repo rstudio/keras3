@@ -29,7 +29,7 @@ op_selu(x)
 
 \seealso{
 \itemize{
-\item \url{https:/keras.io/api/ops/nn#selu-function}
+\item \url{https://keras.io/api/ops/nn#selu-function}
 \item \url{https://www.tensorflow.org/api_docs/python/tf/keras/ops/selu}
 }
 

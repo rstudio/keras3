@@ -87,7 +87,7 @@ outputs # Shape: (batch_size, 10, 10, 10, 3)
 
 \seealso{
 \itemize{
-\item \url{https:/keras.io/api/layers/pooling_layers/average_pooling3d#averagepooling3d-class}
+\item \url{https://keras.io/api/layers/pooling_layers/average_pooling3d#averagepooling3d-class}
 \item \url{https://www.tensorflow.org/api_docs/python/tf/keras/layers/AveragePooling3D}
 }
 

@@ -115,7 +115,7 @@ Only \code{.txt} files are supported at this time.
 }
 \seealso{
 \itemize{
-\item \url{https:/keras.io/api/data_loading/text#textdatasetfromdirectory-function}
+\item \url{https://keras.io/api/data_loading/text#textdatasetfromdirectory-function}
 \item \url{https://www.tensorflow.org/api_docs/python/tf/keras/utils/text_dataset_from_directory}
 }
 

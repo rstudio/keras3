@@ -14,7 +14,7 @@ It's the ReLU function, but truncated to a maximum value of 6.
 }
 \seealso{
 \itemize{
-\item \url{https:/keras.io/api/layers/activations#relu6-function}
+\item \url{https://keras.io/api/layers/activations#relu6-function}
 \item \url{https://www.tensorflow.org/api_docs/python/tf/keras/activations/relu6}
 }
 

@@ -186,7 +186,7 @@ of zero-filled initial state tensors). Defaults to \code{NULL}.
 
 \seealso{
 \itemize{
-\item \url{https:/keras.io/api/layers/recurrent_layers/lstm#lstm-class}
+\item \url{https://keras.io/api/layers/recurrent_layers/lstm#lstm-class}
 \item \url{https://www.tensorflow.org/api_docs/python/tf/keras/layers/LSTM}
 }
 

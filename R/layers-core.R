@@ -76,7 +76,7 @@
 #' @family core layers
 #' @family layers
 #' @seealso
-#' + <https:/keras.io/api/layers/core_layers/dense#dense-class>
+#' + <https://keras.io/api/layers/core_layers/dense#dense-class>
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/layers/Dense>
 #' @tether keras.layers.Dense
 layer_dense <-
@@ -291,7 +291,7 @@ function (object, equation, output_shape, activation = NULL,
 #' @family core layers
 #' @family layers
 #' @seealso
-#' + <https:/keras.io/api/layers/core_layers/embedding#embedding-class>
+#' + <https://keras.io/api/layers/core_layers/embedding#embedding-class>
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/layers/Embedding>
 #' @tether keras.layers.Embedding
 layer_embedding <-
@@ -466,7 +466,7 @@ function (shape = NULL, batch_size = NULL, dtype = NULL, sparse = NULL,
 #' @family core layers
 #' @family layers
 #' @seealso
-#' + <https:/keras.io/api/layers/core_layers/lambda#lambda-class>
+#' + <https://keras.io/api/layers/core_layers/lambda#lambda-class>
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/layers/Lambda>
 #'
 #' @tether keras.layers.Lambda
@@ -533,7 +533,7 @@ function (object, f, output_shape = NULL, mask = NULL, arguments = NULL,
 #' @family core layers
 #' @family layers
 #' @seealso
-#' + <https:/keras.io/api/layers/core_layers/masking#masking-class>
+#' + <https://keras.io/api/layers/core_layers/masking#masking-class>
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/layers/Masking>
 #' @tether keras.layers.Masking
 layer_masking <-

@@ -26,7 +26,7 @@
 #' @family image utils
 #' @family utils
 #' @seealso
-#' + <https:/keras.io/api/data_loading/image#saveimg-function>
+#' + <https://keras.io/api/data_loading/image#saveimg-function>
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/utils/save_img>
 #' @tether keras.utils.save_img
 image_array_save <-
@@ -135,7 +135,7 @@ function (x, data_format = NULL, scale = TRUE, dtype = NULL)
 #' @family image utils
 #' @family utils
 #' @seealso
-#' + <https:/keras.io/api/data_loading/image#loadimg-function>
+#' + <https://keras.io/api/data_loading/image#loadimg-function>
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/utils/load_img>
 #' @tether keras.utils.load_img
 image_load <-
@@ -181,7 +181,7 @@ function (path, color_mode = "rgb", target_size = NULL, interpolation = "nearest
 #' @family image utils
 #' @family utils
 #' @seealso
-#' + <https:/keras.io/api/data_loading/image#imgtoarray-function>
+#' + <https://keras.io/api/data_loading/image#imgtoarray-function>
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/utils/img_to_array>
 #' @tether keras.utils.img_to_array
 image_to_array <-

@@ -56,7 +56,7 @@ Returns the maximum of a vector or maximum value along an axis.
 
 \seealso{
 \itemize{
-\item \url{https:/keras.io/api/ops/numpy#amax-function}
+\item \url{https://keras.io/api/ops/numpy#amax-function}
 \item \url{https://www.tensorflow.org/api_docs/python/tf/keras/ops/amax}
 }
 

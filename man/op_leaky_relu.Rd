@@ -41,7 +41,7 @@ plot(x, op_leaky_relu(x),
 
 \seealso{
 \itemize{
-\item \url{https:/keras.io/api/ops/nn#leakyrelu-function}
+\item \url{https://keras.io/api/ops/nn#leakyrelu-function}
 \item \url{https://www.tensorflow.org/api_docs/python/tf/keras/ops/leaky_relu}
 }
 

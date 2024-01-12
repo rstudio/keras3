@@ -89,7 +89,7 @@ layer(list(feat1, feat2))
 
 \seealso{
 \itemize{
-\item \url{https:/keras.io/api/layers/preprocessing_layers/categorical/hashed_crossing#hashedcrossing-class}
+\item \url{https://keras.io/api/layers/preprocessing_layers/categorical/hashed_crossing#hashedcrossing-class}
 \item \url{https://www.tensorflow.org/api_docs/python/tf/keras/layers/HashedCrossing}
 }
 

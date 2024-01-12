@@ -17,7 +17,7 @@ Convert a tensor to a NumPy array.
 }
 \seealso{
 \itemize{
-\item \url{https:/keras.io/api/ops/core#converttonumpy-function}
+\item \url{https://keras.io/api/ops/core#converttonumpy-function}
 \item \url{https://www.tensorflow.org/api_docs/python/tf/keras/ops/convert_to_numpy}
 }
 

@@ -80,7 +80,7 @@ output
 
 \seealso{
 \itemize{
-\item \url{https:/keras.io/api/layers/preprocessing_layers/image_augmentation/random_brightness#randombrightness-class}
+\item \url{https://keras.io/api/layers/preprocessing_layers/image_augmentation/random_brightness#randombrightness-class}
 \item \url{https://www.tensorflow.org/api_docs/python/tf/keras/layers/RandomBrightness}
 }
 

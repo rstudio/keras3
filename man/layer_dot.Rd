@@ -74,7 +74,7 @@ shape(y)
 
 \seealso{
 \itemize{
-\item \url{https:/keras.io/api/layers/merging_layers/dot#dot-class}
+\item \url{https://keras.io/api/layers/merging_layers/dot#dot-class}
 \item \url{https://www.tensorflow.org/api_docs/python/tf/keras/layers/Dot}
 }
 

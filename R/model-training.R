@@ -115,7 +115,7 @@
 #' @tether keras.Model.compile
 #' @family model training
 #' @seealso
-#' + <https:/keras.io/api/models/model_training_apis#compile-method>
+#' + <https://keras.io/api/models/model_training_apis#compile-method>
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/Model/compile>
 compile.keras.src.models.model.Model <-
 function (object, optimizer = "rmsprop", loss = NULL, metrics = NULL,
@@ -260,7 +260,7 @@ as_loss <- function(x, default_name = "custom_loss") {
 #' @tether keras.Model.evaluate
 #' @family model training
 #' @seealso
-#' + <https:/keras.io/api/models/model_training_apis#evaluate-method>
+#' + <https://keras.io/api/models/model_training_apis#evaluate-method>
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/Model/evaluate>
 evaluate.keras.src.models.model.Model <-
 function (object, x = NULL, y = NULL, ..., batch_size = NULL,
@@ -496,7 +496,7 @@ function (object, x = NULL, y = NULL, ..., batch_size = NULL,
 #' @export
 #' @tether keras.Model.fit
 #' @seealso
-#' + <https:/keras.io/api/models/model_training_apis#fit-method>
+#' + <https://keras.io/api/models/model_training_apis#fit-method>
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/Model/fit>
 fit.keras.src.models.model.Model <-
 function(object,
@@ -670,7 +670,7 @@ input_data_normalizer <- function(model) {
 #' @tether keras.Model.predict
 #' @family model training
 #' @seealso
-#' + <https:/keras.io/api/models/model_training_apis#predict-method>
+#' + <https://keras.io/api/models/model_training_apis#predict-method>
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/Model/predict>
 predict.keras.src.models.model.Model <-
 function (object, x, ..., batch_size = NULL,
@@ -706,7 +706,7 @@ function (object, x, ..., batch_size = NULL,
 #' @tether keras.Model.predict_on_batch
 #' @family model training
 #' @seealso
-#' + <https:/keras.io/api/models/model_training_apis#predictonbatch-method>
+#' + <https://keras.io/api/models/model_training_apis#predictonbatch-method>
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/Model/predict_on_batch>
 predict_on_batch <-
 function(object, x)
@@ -748,7 +748,7 @@ function(object, x)
 #' @tether keras.Model.test_on_batch
 #' @family model training
 #' @seealso
-#' + <https:/keras.io/api/models/model_training_apis#testonbatch-method>
+#' + <https://keras.io/api/models/model_training_apis#testonbatch-method>
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/Model/test_on_batch>
 test_on_batch <-
 function (object, x, y = NULL, sample_weight = NULL, ...)
@@ -803,7 +803,7 @@ function (object, x, y = NULL, sample_weight = NULL, ...)
 #' @tether keras.Model.train_on_batch
 #' @family model training
 #' @seealso
-#' + <https:/keras.io/api/models/model_training_apis#trainonbatch-method>
+#' + <https://keras.io/api/models/model_training_apis#trainonbatch-method>
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/Model/train_on_batch>
 train_on_batch <-
 function (object, x, y = NULL, sample_weight = NULL, class_weight = NULL)

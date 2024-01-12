@@ -79,7 +79,7 @@ scale input pixels between -1 and 1.
 
 \seealso{
 \itemize{
-\item \url{https:/keras.io/api/applications/resnet#resnet101v2-function}
+\item \url{https://keras.io/api/applications/resnet#resnet101v2-function}
 \item \url{https://www.tensorflow.org/api_docs/python/tf/keras/applications/ResNet101V2}
 }
 }

@@ -45,7 +45,7 @@ ValueError: In case of invalid value.
 
 \seealso{
 \itemize{
-\item \url{https:/keras.io/api/utils/config_utils#setfloatx-function}
+\item \url{https://keras.io/api/utils/config_utils#setfloatx-function}
 \item \url{https://www.tensorflow.org/api_docs/python/tf/keras/config/set_floatx}
 }
 

@@ -29,7 +29,7 @@ The input values in are the log-odds of the resulting probability.
 }
 \seealso{
 \itemize{
-\item \url{https:/keras.io/api/layers/activations#softmax-function}
+\item \url{https://keras.io/api/layers/activations#softmax-function}
 \item \url{https://www.tensorflow.org/api_docs/python/tf/keras/activations/softmax}
 }
 

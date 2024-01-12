@@ -617,7 +617,7 @@ Settable boolean, whether this layer should be trainable or not.
 
 \seealso{
 \itemize{
-\item \url{https:/keras.io/api/layers/base_layer#layer-class}
+\item \url{https://keras.io/api/layers/base_layer#layer-class}
 \item \url{https://www.tensorflow.org/api_docs/python/tf/keras/layers/Layer}
 }
 

@@ -44,7 +44,7 @@ model <- keras_model(inputs = c(input1, input2), outputs = output)
 
 \seealso{
 \itemize{
-\item \url{https:/keras.io/api/layers/merging_layers/average#average-class}
+\item \url{https://keras.io/api/layers/merging_layers/average#average-class}
 \item \url{https://www.tensorflow.org/api_docs/python/tf/keras/layers/Average}
 }
 

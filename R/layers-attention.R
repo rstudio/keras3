@@ -65,7 +65,7 @@
 #' @family attention layers
 #' @family layers
 #' @seealso
-#' + <https:/keras.io/api/layers/attention_layers/additive_attention#additiveattention-class>
+#' + <https://keras.io/api/layers/attention_layers/additive_attention#additiveattention-class>
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/layers/AdditiveAttention>
 #' @tether keras.layers.AdditiveAttention
 layer_additive_attention <-
@@ -150,7 +150,7 @@ function (object, use_scale = TRUE, dropout = 0, ...)
 #' @family attention layers
 #' @family layers
 #' @seealso
-#' + <https:/keras.io/api/layers/attention_layers/attention#attention-class>
+#' + <https://keras.io/api/layers/attention_layers/attention#attention-class>
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/layers/Attention>
 #' @tether keras.layers.Attention
 layer_attention <-
@@ -391,7 +391,7 @@ function (object, head_dim, num_query_heads, num_key_value_heads,
 #' @family attention layers
 #' @family layers
 #' @seealso
-#' + <https:/keras.io/api/layers/attention_layers/multi_head_attention#multiheadattention-class>
+#' + <https://keras.io/api/layers/attention_layers/multi_head_attention#multiheadattention-class>
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/layers/MultiHeadAttention>
 #' @tether keras.layers.MultiHeadAttention
 layer_multi_head_attention <-

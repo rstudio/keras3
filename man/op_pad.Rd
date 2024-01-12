@@ -44,7 +44,7 @@ and \code{"symmetric"}.
 
 \seealso{
 \itemize{
-\item \url{https:/keras.io/api/ops/numpy#pad-function}
+\item \url{https://keras.io/api/ops/numpy#pad-function}
 \item \url{https://www.tensorflow.org/api_docs/python/tf/keras/ops/pad}
 }
 

@@ -31,7 +31,7 @@ op_broadcast_to(x, shape = c(3, 3))
 
 \seealso{
 \itemize{
-\item \url{https:/keras.io/api/ops/numpy#broadcastto-function}
+\item \url{https://keras.io/api/ops/numpy#broadcastto-function}
 \item \url{https://www.tensorflow.org/api_docs/python/tf/keras/ops/broadcast_to}
 }
 

@@ -54,7 +54,7 @@ op_argsort(x, axis = 1)
 
 \seealso{
 \itemize{
-\item \url{https:/keras.io/api/ops/numpy#argsort-function}
+\item \url{https://keras.io/api/ops/numpy#argsort-function}
 \item \url{https://www.tensorflow.org/api_docs/python/tf/keras/ops/argsort}
 }
 

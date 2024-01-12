@@ -154,7 +154,7 @@ training.
 
 \seealso{
 \itemize{
-\item \url{https:/keras.io/api/layers/normalization_layers/batch_normalization#batchnormalization-class}
+\item \url{https://keras.io/api/layers/normalization_layers/batch_normalization#batchnormalization-class}
 \item \url{https://www.tensorflow.org/api_docs/python/tf/keras/layers/BatchNormalization}
 }
 

@@ -78,7 +78,7 @@ shape(y)
 
 \seealso{
 \itemize{
-\item \url{https:/keras.io/api/layers/pooling_layers/global_average_pooling1d#globalaveragepooling1d-class}
+\item \url{https://keras.io/api/layers/pooling_layers/global_average_pooling1d#globalaveragepooling1d-class}
 \item \url{https://www.tensorflow.org/api_docs/python/tf/keras/layers/GlobalAveragePooling1D}
 }
 

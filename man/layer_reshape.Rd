@@ -48,7 +48,7 @@ shape(y)
 
 \seealso{
 \itemize{
-\item \url{https:/keras.io/api/layers/reshaping_layers/reshape#reshape-class}
+\item \url{https://keras.io/api/layers/reshaping_layers/reshape#reshape-class}
 \item \url{https://www.tensorflow.org/api_docs/python/tf/keras/layers/Reshape}
 }
 

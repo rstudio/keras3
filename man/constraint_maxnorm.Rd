@@ -27,7 +27,7 @@ to have a norm less than or equal to a desired value.
 }
 \seealso{
 \itemize{
-\item \url{https:/keras.io/api/layers/constraints#maxnorm-class}
+\item \url{https://keras.io/api/layers/constraints#maxnorm-class}
 \item \url{https://www.tensorflow.org/api_docs/python/tf/keras/constraints/MaxNorm}
 }
 

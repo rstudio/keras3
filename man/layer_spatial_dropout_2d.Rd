@@ -68,7 +68,7 @@ Same as input.
 
 \seealso{
 \itemize{
-\item \url{https:/keras.io/api/layers/regularization_layers/spatial_dropout2d#spatialdropout2d-class}
+\item \url{https://keras.io/api/layers/regularization_layers/spatial_dropout2d#spatialdropout2d-class}
 \item \url{https://www.tensorflow.org/api_docs/python/tf/keras/layers/SpatialDropout2D}
 }
 

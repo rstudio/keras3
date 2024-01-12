@@ -75,7 +75,7 @@ interval \verb{[start, stop)}, with spacing between values given by step.
 
 \seealso{
 \itemize{
-\item \url{https:/keras.io/api/ops/numpy#arange-function}
+\item \url{https://keras.io/api/ops/numpy#arange-function}
 \item \url{https://www.tensorflow.org/api_docs/python/tf/keras/ops/arange}
 }
 

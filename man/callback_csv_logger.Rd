@@ -26,7 +26,7 @@ model \%>\% fit(X_train, Y_train, callbacks = list(csv_logger))
 
 \seealso{
 \itemize{
-\item \url{https:/keras.io/api/callbacks/csv_logger#csvlogger-class}
+\item \url{https://keras.io/api/callbacks/csv_logger#csvlogger-class}
 \item \url{https://www.tensorflow.org/api_docs/python/tf/keras/callbacks/CSVLogger}
 }
 

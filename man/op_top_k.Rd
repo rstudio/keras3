@@ -50,7 +50,7 @@ values
 
 \seealso{
 \itemize{
-\item \url{https:/keras.io/api/ops/core#topk-function}
+\item \url{https://keras.io/api/ops/core#topk-function}
 \item \url{https://www.tensorflow.org/api_docs/python/tf/keras/ops/top_k}
 }
 

@@ -143,7 +143,7 @@ shape(y)
 
 \seealso{
 \itemize{
-\item \url{https:/keras.io/api/layers/convolution_layers/separable_convolution2d#separableconv2d-class}
+\item \url{https://keras.io/api/layers/convolution_layers/separable_convolution2d#separableconv2d-class}
 \item \url{https://www.tensorflow.org/api_docs/python/tf/keras/layers/SeparableConv2D}
 }
 

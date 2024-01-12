@@ -44,7 +44,7 @@ specifies 1 to keep and 0 to mask. Defaults to \code{NULL}.
 
 \seealso{
 \itemize{
-\item \url{https:/keras.io/api/layers/activation_layers/softmax#softmax-class}
+\item \url{https://keras.io/api/layers/activation_layers/softmax#softmax-class}
 \item \url{https://www.tensorflow.org/api_docs/python/tf/keras/layers/Softmax}
 }
 

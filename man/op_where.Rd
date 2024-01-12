@@ -22,7 +22,7 @@ Return elements chosen from \code{x1} or \code{x2} depending on \code{condition}
 }
 \seealso{
 \itemize{
-\item \url{https:/keras.io/api/ops/numpy#where-function}
+\item \url{https://keras.io/api/ops/numpy#where-function}
 \item \url{https://www.tensorflow.org/api_docs/python/tf/keras/ops/where}
 }
 

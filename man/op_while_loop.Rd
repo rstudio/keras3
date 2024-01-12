@@ -47,7 +47,7 @@ op_while_loop(cond, body, loop_vars)
 
 \seealso{
 \itemize{
-\item \url{https:/keras.io/api/ops/core#whileloop-function}
+\item \url{https://keras.io/api/ops/core#whileloop-function}
 \item \url{https://www.tensorflow.org/api_docs/python/tf/keras/ops/while_loop}
 }
 

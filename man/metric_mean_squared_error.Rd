@@ -41,7 +41,7 @@ m$result()
 
 \seealso{
 \itemize{
-\item \url{https:/keras.io/api/metrics/regression_metrics#meansquarederror-class}
+\item \url{https://keras.io/api/metrics/regression_metrics#meansquarederror-class}
 \item \url{https://www.tensorflow.org/api_docs/python/tf/keras/metrics/MeanSquaredError}
 }
 

@@ -93,7 +93,7 @@
 #' @family pooling layers
 #' @family layers
 #' @seealso
-#' + <https:/keras.io/api/layers/pooling_layers/average_pooling1d#averagepooling1d-class>
+#' + <https://keras.io/api/layers/pooling_layers/average_pooling1d#averagepooling1d-class>
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/layers/AveragePooling1D>
 #' @tether keras.layers.AveragePooling1D
 layer_average_pooling_1d <-
@@ -210,7 +210,7 @@ function (object, pool_size, strides = NULL, padding = "valid",
 #' @family pooling layers
 #' @family layers
 #' @seealso
-#' + <https:/keras.io/api/layers/pooling_layers/average_pooling2d#averagepooling2d-class>
+#' + <https://keras.io/api/layers/pooling_layers/average_pooling2d#averagepooling2d-class>
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/layers/AveragePooling2D>
 #' @tether keras.layers.AveragePooling2D
 layer_average_pooling_2d <-
@@ -298,7 +298,7 @@ function (object, pool_size, strides = NULL, padding = "valid",
 #' @family pooling layers
 #' @family layers
 #' @seealso
-#' + <https:/keras.io/api/layers/pooling_layers/average_pooling3d#averagepooling3d-class>
+#' + <https://keras.io/api/layers/pooling_layers/average_pooling3d#averagepooling3d-class>
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/layers/AveragePooling3D>
 #' @tether keras.layers.AveragePooling3D
 layer_average_pooling_3d <-
@@ -371,7 +371,7 @@ function (object, pool_size, strides = NULL, padding = "valid",
 #' @family pooling layers
 #' @family layers
 #' @seealso
-#' + <https:/keras.io/api/layers/pooling_layers/global_average_pooling1d#globalaveragepooling1d-class>
+#' + <https://keras.io/api/layers/pooling_layers/global_average_pooling1d#globalaveragepooling1d-class>
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/layers/GlobalAveragePooling1D>
 #' @tether keras.layers.GlobalAveragePooling1D
 layer_global_average_pooling_1d <-
@@ -440,7 +440,7 @@ function (object, data_format = NULL, keepdims = FALSE, ...)
 #' @family pooling layers
 #' @family layers
 #' @seealso
-#' + <https:/keras.io/api/layers/pooling_layers/global_average_pooling2d#globalaveragepooling2d-class>
+#' + <https://keras.io/api/layers/pooling_layers/global_average_pooling2d#globalaveragepooling2d-class>
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/layers/GlobalAveragePooling2D>
 #' @tether keras.layers.GlobalAveragePooling2D
 layer_global_average_pooling_2d <-
@@ -510,7 +510,7 @@ function (object, data_format = NULL, keepdims = FALSE, ...)
 #' @family pooling layers
 #' @family layers
 #' @seealso
-#' + <https:/keras.io/api/layers/pooling_layers/global_average_pooling3d#globalaveragepooling3d-class>
+#' + <https://keras.io/api/layers/pooling_layers/global_average_pooling3d#globalaveragepooling3d-class>
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/layers/GlobalAveragePooling3D>
 #' @tether keras.layers.GlobalAveragePooling3D
 layer_global_average_pooling_3d <-
@@ -578,7 +578,7 @@ function (object, data_format = NULL, keepdims = FALSE, ...)
 #' @family pooling layers
 #' @family layers
 #' @seealso
-#' + <https:/keras.io/api/layers/pooling_layers/global_max_pooling1d#globalmaxpooling1d-class>
+#' + <https://keras.io/api/layers/pooling_layers/global_max_pooling1d#globalmaxpooling1d-class>
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/layers/GlobalMaxPooling1D>
 #' @tether keras.layers.GlobalMaxPooling1D
 layer_global_max_pooling_1d <-
@@ -646,7 +646,7 @@ function (object, data_format = NULL, keepdims = FALSE, ...)
 #' @family pooling layers
 #' @family layers
 #' @seealso
-#' + <https:/keras.io/api/layers/pooling_layers/global_max_pooling2d#globalmaxpooling2d-class>
+#' + <https://keras.io/api/layers/pooling_layers/global_max_pooling2d#globalmaxpooling2d-class>
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/layers/GlobalMaxPooling2D>
 #' @tether keras.layers.GlobalMaxPooling2D
 layer_global_max_pooling_2d <-
@@ -715,7 +715,7 @@ function (object, data_format = NULL, keepdims = FALSE, ...)
 #' @family pooling layers
 #' @family layers
 #' @seealso
-#' + <https:/keras.io/api/layers/pooling_layers/global_max_pooling3d#globalmaxpooling3d-class>
+#' + <https://keras.io/api/layers/pooling_layers/global_max_pooling3d#globalmaxpooling3d-class>
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/layers/GlobalMaxPooling3D>
 #' @tether keras.layers.GlobalMaxPooling3D
 layer_global_max_pooling_3d <-
@@ -821,7 +821,7 @@ function (object, data_format = NULL, keepdims = FALSE, ...)
 #' @family pooling layers
 #' @family layers
 #' @seealso
-#' + <https:/keras.io/api/layers/pooling_layers/max_pooling1d#maxpooling1d-class>
+#' + <https://keras.io/api/layers/pooling_layers/max_pooling1d#maxpooling1d-class>
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/layers/MaxPooling1D>
 #' @tether keras.layers.MaxPooling1D
 layer_max_pooling_1d <-
@@ -941,7 +941,7 @@ function (object, pool_size = 2L, strides = NULL, padding = "valid",
 #' @family pooling layers
 #' @family layers
 #' @seealso
-#' + <https:/keras.io/api/layers/pooling_layers/max_pooling2d#maxpooling2d-class>
+#' + <https://keras.io/api/layers/pooling_layers/max_pooling2d#maxpooling2d-class>
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/layers/MaxPooling2D>
 #' @tether keras.layers.MaxPooling2D
 layer_max_pooling_2d <-
@@ -1032,7 +1032,7 @@ function (object, pool_size = list(2L, 2L), strides = NULL, padding = "valid",
 #' @family pooling layers
 #' @family layers
 #' @seealso
-#' + <https:/keras.io/api/layers/pooling_layers/max_pooling3d#maxpooling3d-class>
+#' + <https://keras.io/api/layers/pooling_layers/max_pooling3d#maxpooling3d-class>
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/layers/MaxPooling3D>
 #' @tether keras.layers.MaxPooling3D
 layer_max_pooling_3d <-

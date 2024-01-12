@@ -80,7 +80,7 @@ respect to the ImageNet dataset, without scaling.
 
 \seealso{
 \itemize{
-\item \url{https:/keras.io/api/applications/resnet#resnet101-function}
+\item \url{https://keras.io/api/applications/resnet#resnet101-function}
 \item \url{https://www.tensorflow.org/api_docs/python/tf/keras/applications/ResNet101}
 }
 }

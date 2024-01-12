@@ -28,7 +28,7 @@
 #' @family constant initializers
 #' @family initializers
 #' @seealso
-#' + <https:/keras.io/api/layers/initializers#constant-class>
+#' + <https://keras.io/api/layers/initializers#constant-class>
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/initializers/Constant>
 #' @tether keras.initializers.Constant
 initializer_constant <-
@@ -96,7 +96,7 @@ function (gain = 1)
 #' @family constant initializers
 #' @family initializers
 #' @seealso
-#' + <https:/keras.io/api/layers/initializers#ones-class>
+#' + <https://keras.io/api/layers/initializers#ones-class>
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/initializers/Ones>
 #' @tether keras.initializers.Ones
 initializer_ones <-
@@ -128,7 +128,7 @@ function ()
 #' @family constant initializers
 #' @family initializers
 #' @seealso
-#' + <https:/keras.io/api/layers/initializers#zeros-class>
+#' + <https://keras.io/api/layers/initializers#zeros-class>
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/initializers/Zeros>
 #' @tether keras.initializers.Zeros
 initializer_zeros <-
@@ -177,7 +177,7 @@ function ()
 #' @family random initializers
 #' @family initializers
 #' @seealso
-#' + <https:/keras.io/api/layers/initializers#glorotnormal-class>
+#' + <https://keras.io/api/layers/initializers#glorotnormal-class>
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/initializers/GlorotNormal>
 #' @tether keras.initializers.GlorotNormal
 initializer_glorot_normal <-
@@ -225,7 +225,7 @@ function (seed = NULL)
 #' @family random initializers
 #' @family initializers
 #' @seealso
-#' + <https:/keras.io/api/layers/initializers#glorotuniform-class>
+#' + <https://keras.io/api/layers/initializers#glorotuniform-class>
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/initializers/GlorotUniform>
 #' @tether keras.initializers.GlorotUniform
 initializer_glorot_uniform <-
@@ -273,7 +273,7 @@ function (seed = NULL)
 #' @family random initializers
 #' @family initializers
 #' @seealso
-#' + <https:/keras.io/api/layers/initializers#henormal-class>
+#' + <https://keras.io/api/layers/initializers#henormal-class>
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/initializers/HeNormal>
 #' @tether keras.initializers.HeNormal
 initializer_he_normal <-
@@ -321,7 +321,7 @@ function (seed = NULL)
 #' @family random initializers
 #' @family initializers
 #' @seealso
-#' + <https:/keras.io/api/layers/initializers#heuniform-class>
+#' + <https://keras.io/api/layers/initializers#heuniform-class>
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/initializers/HeUniform>
 #' @tether keras.initializers.HeUniform
 initializer_he_uniform <-
@@ -521,7 +521,7 @@ function (gain = 1, seed = NULL)
 #' @family random initializers
 #' @family initializers
 #' @seealso
-#' + <https:/keras.io/api/layers/initializers#randomnormal-class>
+#' + <https://keras.io/api/layers/initializers#randomnormal-class>
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/initializers/RandomNormal>
 #' @tether keras.initializers.RandomNormal
 initializer_random_normal <-
@@ -572,7 +572,7 @@ function (mean = 0, stddev = 0.05, seed = NULL)
 #' @family random initializers
 #' @family initializers
 #' @seealso
-#' + <https:/keras.io/api/layers/initializers#randomuniform-class>
+#' + <https://keras.io/api/layers/initializers#randomuniform-class>
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/initializers/RandomUniform>
 #' @tether keras.initializers.RandomUniform
 initializer_random_uniform <-
@@ -626,7 +626,7 @@ function (minval = -0.05, maxval = 0.05, seed = NULL)
 #' @family random initializers
 #' @family initializers
 #' @seealso
-#' + <https:/keras.io/api/layers/initializers#truncatednormal-class>
+#' + <https://keras.io/api/layers/initializers#truncatednormal-class>
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/initializers/TruncatedNormal>
 #' @tether keras.initializers.TruncatedNormal
 initializer_truncated_normal <-
@@ -691,7 +691,7 @@ function (mean = 0, stddev = 0.05, seed = NULL)
 #' @family random initializers
 #' @family initializers
 #' @seealso
-#' + <https:/keras.io/api/layers/initializers#variancescaling-class>
+#' + <https://keras.io/api/layers/initializers#variancescaling-class>
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/initializers/VarianceScaling>
 #' @tether keras.initializers.VarianceScaling
 initializer_variance_scaling <-

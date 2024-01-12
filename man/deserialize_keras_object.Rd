@@ -147,7 +147,7 @@ get_custom_objects()$update(o_registered)
 }
 \seealso{
 \itemize{
-\item \url{https:/keras.io/api/models/model_saving_apis/serialization_utils#deserializekerasobject-function}
+\item \url{https://keras.io/api/models/model_saving_apis/serialization_utils#deserializekerasobject-function}
 \item \url{https://www.tensorflow.org/api_docs/python/tf/keras/saving/deserialize_keras_object}
 }
 

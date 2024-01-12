@@ -92,7 +92,7 @@ tensors of pixels with values in the \verb{[0-255]} range.
 
 \seealso{
 \itemize{
-\item \url{https:/keras.io/api/applications/efficientnet#efficientnetb6-function}
+\item \url{https://keras.io/api/applications/efficientnet#efficientnetb6-function}
 \item \url{https://www.tensorflow.org/api_docs/python/tf/keras/applications/EfficientNetB6}
 }
 }

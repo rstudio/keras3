@@ -103,7 +103,7 @@ learning rate can be set, as in most other Keras optimizers.
 
 \seealso{
 \itemize{
-\item \url{https:/keras.io/api/optimizers/adadelta#adadelta-class}
+\item \url{https://keras.io/api/optimizers/adadelta#adadelta-class}
 \item \url{https://www.tensorflow.org/api_docs/python/tf/keras/optimizers/Adadelta}
 }
 

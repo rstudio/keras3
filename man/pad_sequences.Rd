@@ -92,7 +92,7 @@ pad_sequences(sequence)
 }
 \seealso{
 \itemize{
-\item \url{https:/keras.io/api/data_loading/timeseries#padsequences-function}
+\item \url{https://keras.io/api/data_loading/timeseries#padsequences-function}
 \item \url{https://www.tensorflow.org/api_docs/python/tf/keras/utils/pad_sequences}
 }
 

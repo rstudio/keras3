@@ -32,7 +32,7 @@ might leverage NumPy APIs.
 }
 \seealso{
 \itemize{
-\item \url{https:/keras.io/api/utils/python_utils#setrandomseed-function}
+\item \url{https://keras.io/api/utils/python_utils#setrandomseed-function}
 \item \url{https://www.tensorflow.org/api_docs/python/tf/keras/utils/set_random_seed}
 }
 

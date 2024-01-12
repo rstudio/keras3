@@ -24,7 +24,7 @@ Constrains the weights incident to each hidden unit to have unit norm.
 }
 \seealso{
 \itemize{
-\item \url{https:/keras.io/api/layers/constraints#unitnorm-class}
+\item \url{https://keras.io/api/layers/constraints#unitnorm-class}
 \item \url{https://www.tensorflow.org/api_docs/python/tf/keras/constraints/UnitNorm}
 }
 

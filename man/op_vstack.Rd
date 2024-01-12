@@ -17,7 +17,7 @@ Stack tensors in sequence vertically (row wise).
 }
 \seealso{
 \itemize{
-\item \url{https:/keras.io/api/ops/numpy#vstack-function}
+\item \url{https://keras.io/api/ops/numpy#vstack-function}
 \item \url{https://www.tensorflow.org/api_docs/python/tf/keras/ops/vstack}
 }
 

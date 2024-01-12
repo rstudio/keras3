@@ -32,14 +32,14 @@ See the package website at \url{https://keras.rstudio.com} for complete document
 \seealso{
 Useful links:
 \itemize{
-  \item \url{https:/keras.posit.co/}
+  \item \url{https://keras.posit.co/}
   \item Report bugs at \url{https://github.com/rstudio/keras/issues}
 }
 
 
 Useful links:
 \itemize{
-  \item \url{https:/keras.posit.co/}
+  \item \url{https://keras.posit.co/}
   \item Report bugs at \url{https://github.com/rstudio/keras/issues}
 }
 

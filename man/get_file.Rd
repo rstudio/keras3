@@ -79,7 +79,7 @@ programs \code{shasum} and \code{sha256sum} can compute the hash.
 
 \seealso{
 \itemize{
-\item \url{https:/keras.io/api/utils/python_utils#getfile-function}
+\item \url{https://keras.io/api/utils/python_utils#getfile-function}
 \item \url{https://www.tensorflow.org/api_docs/python/tf/keras/utils/get_file}
 }
 

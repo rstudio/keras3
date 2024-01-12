@@ -96,7 +96,7 @@ model \%>\% fit(
 
 \seealso{
 \itemize{
-\item \url{https:/keras.io/api/callbacks/lambda_callback#lambdacallback-class}
+\item \url{https://keras.io/api/callbacks/lambda_callback#lambdacallback-class}
 \item \url{https://www.tensorflow.org/api_docs/python/tf/keras/callbacks/LambdaCallback}
 }
 

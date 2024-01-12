@@ -32,7 +32,7 @@ plot(x, op_softsign(x), ylim = c(-1, 1))
 
 \seealso{
 \itemize{
-\item \url{https:/keras.io/api/ops/nn#softsign-function}
+\item \url{https://keras.io/api/ops/nn#softsign-function}
 \item \url{https://www.tensorflow.org/api_docs/python/tf/keras/ops/softsign}
 }
 

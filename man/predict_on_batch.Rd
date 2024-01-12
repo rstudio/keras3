@@ -19,7 +19,7 @@ Returns predictions for a single batch of samples.
 }
 \seealso{
 \itemize{
-\item \url{https:/keras.io/api/models/model_training_apis#predictonbatch-method}
+\item \url{https://keras.io/api/models/model_training_apis#predictonbatch-method}
 \item \url{https://www.tensorflow.org/api_docs/python/tf/keras/Model/predict_on_batch}
 }
 

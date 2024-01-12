@@ -140,7 +140,7 @@
 #' @family normalization layers
 #' @family layers
 #' @seealso
-#' + <https:/keras.io/api/layers/normalization_layers/batch_normalization#batchnormalization-class>
+#' + <https://keras.io/api/layers/normalization_layers/batch_normalization#batchnormalization-class>
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/layers/BatchNormalization>
 #' @tether keras.layers.BatchNormalization
 layer_batch_normalization <-
@@ -246,7 +246,7 @@ function (object, axis = -1L, momentum = 0.99, epsilon = 0.001,
 #' @family normalization layers
 #' @family layers
 #' @seealso
-#' + <https:/keras.io/api/layers/normalization_layers/group_normalization#groupnormalization-class>
+#' + <https://keras.io/api/layers/normalization_layers/group_normalization#groupnormalization-class>
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/layers/GroupNormalization>
 #' @tether keras.layers.GroupNormalization
 layer_group_normalization <-
@@ -379,7 +379,7 @@ function (object, groups = 32L, axis = -1L, epsilon = 0.001,
 #' @family normalization layers
 #' @family layers
 #' @seealso
-#' + <https:/keras.io/api/layers/normalization_layers/layer_normalization#layernormalization-class>
+#' + <https://keras.io/api/layers/normalization_layers/layer_normalization#layernormalization-class>
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/layers/LayerNormalization>
 #' @tether keras.layers.LayerNormalization
 layer_layer_normalization <-
@@ -484,7 +484,7 @@ function (object, layer, power_iterations = 1L, ...)
 #' @family normalization layers
 #' @family layers
 #' @seealso
-#' + <https:/keras.io/api/layers/normalization_layers/unit_normalization#unitnormalization-class>
+#' + <https://keras.io/api/layers/normalization_layers/unit_normalization#unitnormalization-class>
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/layers/UnitNormalization>
 #'
 #' @tether keras.layers.UnitNormalization

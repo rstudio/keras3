@@ -28,7 +28,7 @@ to its dimensions. After matrix multiplication the appended 1 is removed.
 }
 \seealso{
 \itemize{
-\item \url{https:/keras.io/api/ops/numpy#matmul-function}
+\item \url{https://keras.io/api/ops/numpy#matmul-function}
 \item \url{https://www.tensorflow.org/api_docs/python/tf/keras/ops/matmul}
 }
 

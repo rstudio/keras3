@@ -57,7 +57,7 @@ model |> layer_lambda(\\(x) x^2)
 
 \seealso{
 \itemize{
-\item \url{https:/keras.io/api/layers/core_layers/lambda#lambda-class}
+\item \url{https://keras.io/api/layers/core_layers/lambda#lambda-class}
 \item \url{https://www.tensorflow.org/api_docs/python/tf/keras/layers/Lambda}
 }
 

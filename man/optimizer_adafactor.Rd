@@ -110,7 +110,7 @@ last 2 dimensions separately in its accumulator variables.
 
 \seealso{
 \itemize{
-\item \url{https:/keras.io/api/optimizers/adafactor#adafactor-class}
+\item \url{https://keras.io/api/optimizers/adafactor#adafactor-class}
 \item \url{https://www.tensorflow.org/api_docs/python/tf/keras/optimizers/Adafactor}
 }
 

@@ -23,7 +23,7 @@ Compute the variance along the specified axes.
 }
 \seealso{
 \itemize{
-\item \url{https:/keras.io/api/ops/numpy#var-function}
+\item \url{https://keras.io/api/ops/numpy#var-function}
 \item \url{https://www.tensorflow.org/api_docs/python/tf/keras/ops/var}
 }
 

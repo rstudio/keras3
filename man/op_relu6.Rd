@@ -32,7 +32,7 @@ plot(x, op_relu6(x))
 
 \seealso{
 \itemize{
-\item \url{https:/keras.io/api/ops/nn#relu6-function}
+\item \url{https://keras.io/api/ops/nn#relu6-function}
 \item \url{https://www.tensorflow.org/api_docs/python/tf/keras/ops/relu6}
 }
 

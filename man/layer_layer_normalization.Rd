@@ -130,7 +130,7 @@ So, this \code{layer_layer_normalization()} implementation will not match a
 
 \seealso{
 \itemize{
-\item \url{https:/keras.io/api/layers/normalization_layers/layer_normalization#layernormalization-class}
+\item \url{https://keras.io/api/layers/normalization_layers/layer_normalization#layernormalization-class}
 \item \url{https://www.tensorflow.org/api_docs/python/tf/keras/layers/LayerNormalization}
 }
 

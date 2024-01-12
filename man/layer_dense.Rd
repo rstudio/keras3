@@ -82,7 +82,7 @@ the output would have shape \verb{(batch_size, units)}.
 
 \seealso{
 \itemize{
-\item \url{https:/keras.io/api/layers/core_layers/dense#dense-class}
+\item \url{https://keras.io/api/layers/core_layers/dense#dense-class}
 \item \url{https://www.tensorflow.org/api_docs/python/tf/keras/layers/Dense}
 }
 

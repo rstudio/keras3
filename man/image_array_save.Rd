@@ -34,7 +34,7 @@ Saves an image stored as a NumPy array to a path or file object.
 }
 \seealso{
 \itemize{
-\item \url{https:/keras.io/api/data_loading/image#saveimg-function}
+\item \url{https://keras.io/api/data_loading/image#saveimg-function}
 \item \url{https://www.tensorflow.org/api_docs/python/tf/keras/utils/save_img}
 }
 

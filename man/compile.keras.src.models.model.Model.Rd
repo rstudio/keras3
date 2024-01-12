@@ -122,7 +122,7 @@ Configure a model for training.
 
 \seealso{
 \itemize{
-\item \url{https:/keras.io/api/models/model_training_apis#compile-method}
+\item \url{https://keras.io/api/models/model_training_apis#compile-method}
 \item \url{https://www.tensorflow.org/api_docs/python/tf/keras/Model/compile}
 }
 

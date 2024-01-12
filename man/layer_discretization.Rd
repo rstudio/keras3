@@ -120,7 +120,7 @@ layer(input)
 
 \seealso{
 \itemize{
-\item \url{https:/keras.io/api/layers/preprocessing_layers/numerical/discretization#discretization-class}
+\item \url{https://keras.io/api/layers/preprocessing_layers/numerical/discretization#discretization-class}
 \item \url{https://www.tensorflow.org/api_docs/python/tf/keras/layers/Discretization}
 }
 

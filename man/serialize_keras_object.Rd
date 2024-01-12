@@ -24,7 +24,7 @@ information about the config format.
 }
 \seealso{
 \itemize{
-\item \url{https:/keras.io/api/models/model_saving_apis/serialization_utils#serializekerasobject-function}
+\item \url{https://keras.io/api/models/model_saving_apis/serialization_utils#serializekerasobject-function}
 \item \url{https://www.tensorflow.org/api_docs/python/tf/keras/saving/serialize_keras_object}
 }
 

@@ -39,7 +39,7 @@ op_extract_sequences(x, 3, 2)
 
 \seealso{
 \itemize{
-\item \url{https:/keras.io/api/ops/core#extractsequences-function}
+\item \url{https://keras.io/api/ops/core#extractsequences-function}
 \item \url{https://www.tensorflow.org/api_docs/python/tf/keras/ops/extract_sequences}
 }
 

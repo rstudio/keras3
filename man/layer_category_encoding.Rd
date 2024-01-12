@@ -112,7 +112,7 @@ Not used in \code{"multi_hot"} or \code{"one_hot"} modes.
 
 \seealso{
 \itemize{
-\item \url{https:/keras.io/api/layers/preprocessing_layers/categorical/category_encoding#categoryencoding-class}
+\item \url{https://keras.io/api/layers/preprocessing_layers/categorical/category_encoding#categoryencoding-class}
 \item \url{https://www.tensorflow.org/api_docs/python/tf/keras/layers/CategoryEncoding}
 }
 

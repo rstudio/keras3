@@ -43,7 +43,7 @@ loss <- loss_mean_squared_error(y_true, y_pred)
 
 \seealso{
 \itemize{
-\item \url{https:/keras.io/api/losses/regression_losses#meansquarederror-class}
+\item \url{https://keras.io/api/losses/regression_losses#meansquarederror-class}
 \item \url{https://www.tensorflow.org/api_docs/python/tf/keras/losses/MeanSquaredError}
 }
 

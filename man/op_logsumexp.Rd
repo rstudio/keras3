@@ -34,7 +34,7 @@ op_logsumexp(x)
 
 \seealso{
 \itemize{
-\item \url{https:/keras.io/api/ops/core#logsumexp-function}
+\item \url{https://keras.io/api/ops/core#logsumexp-function}
 \item \url{https://www.tensorflow.org/api_docs/python/tf/keras/ops/logsumexp}
 }
 

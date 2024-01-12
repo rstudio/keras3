@@ -35,7 +35,7 @@ op_softmax(x)
 
 \seealso{
 \itemize{
-\item \url{https:/keras.io/api/ops/nn#softmax-function}
+\item \url{https://keras.io/api/ops/nn#softmax-function}
 \item \url{https://www.tensorflow.org/api_docs/python/tf/keras/ops/softmax}
 }
 

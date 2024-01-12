@@ -90,7 +90,7 @@
 #' @family rnn layers
 #' @family layers
 #' @seealso
-#' + <https:/keras.io/api/layers/recurrent_layers/bidirectional#bidirectional-class>
+#' + <https://keras.io/api/layers/recurrent_layers/bidirectional#bidirectional-class>
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/layers/Bidirectional>
 #' @tether keras.layers.Bidirectional
 bidirectional <-
@@ -280,7 +280,7 @@ function (object, layer, merge_mode = "concat", weights = NULL,
 #' @family rnn layers
 #' @family layers
 #' @seealso
-#' + <https:/keras.io/api/layers/recurrent_layers/conv_lstm1d#convlstm1d-class>
+#' + <https://keras.io/api/layers/recurrent_layers/conv_lstm1d#convlstm1d-class>
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/layers/ConvLSTM1D>
 #' @tether keras.layers.ConvLSTM1D
 layer_conv_lstm_1d <-
@@ -479,7 +479,7 @@ function (object, filters, kernel_size, strides = 1L, padding = "valid",
 #' @family rnn layers
 #' @family layers
 #' @seealso
-#' + <https:/keras.io/api/layers/recurrent_layers/conv_lstm2d#convlstm2d-class>
+#' + <https://keras.io/api/layers/recurrent_layers/conv_lstm2d#convlstm2d-class>
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/layers/ConvLSTM2D>
 #' @tether keras.layers.ConvLSTM2D
 layer_conv_lstm_2d <-
@@ -677,7 +677,7 @@ function (object, filters, kernel_size, strides = 1L, padding = "valid",
 #' @family rnn layers
 #' @family layers
 #' @seealso
-#' + <https:/keras.io/api/layers/recurrent_layers/conv_lstm3d#convlstm3d-class>
+#' + <https://keras.io/api/layers/recurrent_layers/conv_lstm3d#convlstm3d-class>
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/layers/ConvLSTM3D>
 #' @tether keras.layers.ConvLSTM3D
 layer_conv_lstm_3d <-
@@ -873,7 +873,7 @@ function (object, filters, kernel_size, strides = 1L, padding = "valid",
 #' @family rnn layers
 #' @family layers
 #' @seealso
-#' + <https:/keras.io/api/layers/recurrent_layers/gru#gru-class>
+#' + <https://keras.io/api/layers/recurrent_layers/gru#gru-class>
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/layers/GRU>
 #' @tether keras.layers.GRU
 layer_gru <-
@@ -1180,7 +1180,7 @@ function (units, activation = "tanh", recurrent_activation = "sigmoid",
 #' @family rnn layers
 #' @family layers
 #' @seealso
-#' + <https:/keras.io/api/layers/recurrent_layers/lstm#lstm-class>
+#' + <https://keras.io/api/layers/recurrent_layers/lstm#lstm-class>
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/layers/LSTM>
 #' @tether keras.layers.LSTM
 layer_lstm <-
@@ -1516,7 +1516,7 @@ function (units, activation = "tanh", recurrent_activation = "sigmoid",
 #' @family rnn layers
 #' @family layers
 #' @seealso
-#' + <https:/keras.io/api/layers/recurrent_layers/rnn#rnn-class>
+#' + <https://keras.io/api/layers/recurrent_layers/rnn#rnn-class>
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/layers/RNN>
 #'
 #' @tether keras.layers.RNN
@@ -1667,7 +1667,7 @@ function (object, cell, return_sequences = FALSE, return_state = FALSE,
 #' @family rnn layers
 #' @family layers
 #' @seealso
-#' + <https:/keras.io/api/layers/recurrent_layers/simple_rnn#simplernn-class>
+#' + <https://keras.io/api/layers/recurrent_layers/simple_rnn#simplernn-class>
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/layers/SimpleRNN>
 #'
 #' @tether keras.layers.SimpleRNN
@@ -1905,7 +1905,7 @@ function (cells, ...)
 #' @family rnn layers
 #' @family layers
 #' @seealso
-#' + <https:/keras.io/api/layers/recurrent_layers/time_distributed#timedistributed-class>
+#' + <https://keras.io/api/layers/recurrent_layers/time_distributed#timedistributed-class>
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/layers/TimeDistributed>
 #'
 #' @tether keras.layers.TimeDistributed

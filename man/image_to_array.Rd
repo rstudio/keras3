@@ -42,7 +42,7 @@ str(array)
 
 \seealso{
 \itemize{
-\item \url{https:/keras.io/api/data_loading/image#imgtoarray-function}
+\item \url{https://keras.io/api/data_loading/image#imgtoarray-function}
 \item \url{https://www.tensorflow.org/api_docs/python/tf/keras/utils/img_to_array}
 }
 

@@ -112,7 +112,7 @@ deserializable using \code{keras$optimizers$schedules$serialize} and
 }
 \seealso{
 \itemize{
-\item \url{https:/keras.io/api/optimizers/learning_rate_schedules/cosine_decay#cosinedecay-class}
+\item \url{https://keras.io/api/optimizers/learning_rate_schedules/cosine_decay#cosinedecay-class}
 \item \url{https://www.tensorflow.org/api_docs/python/tf/keras/optimizers/schedules/CosineDecay}
 }
 

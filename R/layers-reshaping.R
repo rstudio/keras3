@@ -39,7 +39,7 @@
 #' @family reshaping layers
 #' @family layers
 #' @seealso
-#' + <https:/keras.io/api/layers/reshaping_layers/cropping1d#cropping1d-class>
+#' + <https://keras.io/api/layers/reshaping_layers/cropping1d#cropping1d-class>
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/layers/Cropping1D>
 #' @tether keras.layers.Cropping1D
 layer_cropping_1d <-
@@ -110,7 +110,7 @@ function (object, cropping = list(1L, 1L), ...)
 #' @family reshaping layers
 #' @family layers
 #' @seealso
-#' + <https:/keras.io/api/layers/reshaping_layers/cropping2d#cropping2d-class>
+#' + <https://keras.io/api/layers/reshaping_layers/cropping2d#cropping2d-class>
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/layers/Cropping2D>
 #' @tether keras.layers.Cropping2D
 layer_cropping_2d <-
@@ -187,7 +187,7 @@ function (object, cropping = list(list(0L, 0L), list(0L, 0L)),
 #' @family reshaping layers
 #' @family layers
 #' @seealso
-#' + <https:/keras.io/api/layers/reshaping_layers/cropping3d#cropping3d-class>
+#' + <https://keras.io/api/layers/reshaping_layers/cropping3d#cropping3d-class>
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/layers/Cropping3D>
 #' @tether keras.layers.Cropping3D
 layer_cropping_3d <-
@@ -237,7 +237,7 @@ function (object, cropping = list(list(1L, 1L), list(1L, 1L),
 #' @family reshaping layers
 #' @family layers
 #' @seealso
-#' + <https:/keras.io/api/layers/reshaping_layers/flatten#flatten-class>
+#' + <https://keras.io/api/layers/reshaping_layers/flatten#flatten-class>
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/layers/Flatten>
 #' @tether keras.layers.Flatten
 layer_flatten <-
@@ -285,7 +285,7 @@ function (object, data_format = NULL, ...)
 #' @family reshaping layers
 #' @family layers
 #' @seealso
-#' + <https:/keras.io/api/layers/reshaping_layers/permute#permute-class>
+#' + <https://keras.io/api/layers/reshaping_layers/permute#permute-class>
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/layers/Permute>
 #'
 #' @tether keras.layers.Permute
@@ -330,7 +330,7 @@ function (object, dims, ...)
 #' @family reshaping layers
 #' @family layers
 #' @seealso
-#' + <https:/keras.io/api/layers/reshaping_layers/repeat_vector#repeatvector-class>
+#' + <https://keras.io/api/layers/reshaping_layers/repeat_vector#repeatvector-class>
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/layers/RepeatVector>
 #'
 #' @tether keras.layers.RepeatVector
@@ -384,7 +384,7 @@ function (object, n, ...)
 #' @family reshaping layers
 #' @family layers
 #' @seealso
-#' + <https:/keras.io/api/layers/reshaping_layers/reshape#reshape-class>
+#' + <https://keras.io/api/layers/reshaping_layers/reshape#reshape-class>
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/layers/Reshape>
 #'
 #' @tether keras.layers.Reshape
@@ -436,7 +436,7 @@ function (object, target_shape, ...)
 #' @family reshaping layers
 #' @family layers
 #' @seealso
-#' + <https:/keras.io/api/layers/reshaping_layers/up_sampling1d#upsampling1d-class>
+#' + <https://keras.io/api/layers/reshaping_layers/up_sampling1d#upsampling1d-class>
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/layers/UpSampling1D>
 #'
 #' @tether keras.layers.UpSampling1D
@@ -511,7 +511,7 @@ function (object, size = 2L, ...)
 #' @family reshaping layers
 #' @family layers
 #' @seealso
-#' + <https:/keras.io/api/layers/reshaping_layers/up_sampling2d#upsampling2d-class>
+#' + <https://keras.io/api/layers/reshaping_layers/up_sampling2d#upsampling2d-class>
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/layers/UpSampling2D>
 #'
 #' @tether keras.layers.UpSampling2D
@@ -583,7 +583,7 @@ function (object, size = list(2L, 2L), data_format = NULL, interpolation = "near
 #' @family reshaping layers
 #' @family layers
 #' @seealso
-#' + <https:/keras.io/api/layers/reshaping_layers/up_sampling3d#upsampling3d-class>
+#' + <https://keras.io/api/layers/reshaping_layers/up_sampling3d#upsampling3d-class>
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/layers/UpSampling3D>
 #'
 #' @tether keras.layers.UpSampling3D
@@ -634,7 +634,7 @@ function (object, size = list(2L, 2L, 2L), data_format = NULL,
 #' @family reshaping layers
 #' @family layers
 #' @seealso
-#' + <https:/keras.io/api/layers/reshaping_layers/zero_padding1d#zeropadding1d-class>
+#' + <https://keras.io/api/layers/reshaping_layers/zero_padding1d#zeropadding1d-class>
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/layers/ZeroPadding1D>
 #'
 #' @tether keras.layers.ZeroPadding1D
@@ -707,7 +707,7 @@ function (object, padding = 1L, ...)
 #' @family reshaping layers
 #' @family layers
 #' @seealso
-#' + <https:/keras.io/api/layers/reshaping_layers/zero_padding2d#zeropadding2d-class>
+#' + <https://keras.io/api/layers/reshaping_layers/zero_padding2d#zeropadding2d-class>
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/layers/ZeroPadding2D>
 #'
 #' @tether keras.layers.ZeroPadding2D
@@ -786,7 +786,7 @@ function (object, padding = list(1L, 1L), data_format = NULL,
 #' @family reshaping layers
 #' @family layers
 #' @seealso
-#' + <https:/keras.io/api/layers/reshaping_layers/zero_padding3d#zeropadding3d-class>
+#' + <https://keras.io/api/layers/reshaping_layers/zero_padding3d#zeropadding3d-class>
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/layers/ZeroPadding3D>
 #'
 #' @tether keras.layers.ZeroPadding3D

@@ -58,7 +58,7 @@
 #' @family backend
 #' @family utils
 #' @seealso
-#' + <https:/keras.io/api/utils/config_utils#clearsession-function>
+#' + <https://keras.io/api/utils/config_utils#clearsession-function>
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/utils/clear_session>
 #' @tether keras.utils.clear_session
 clear_session <-
@@ -176,7 +176,7 @@ function (tensor)
 #' @export
 #' @family utils
 #' @seealso
-#' + <https:/keras.io/api/utils/python_utils#getfile-function>
+#' + <https://keras.io/api/utils/python_utils#getfile-function>
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/utils/get_file>
 #' @tether keras.utils.get_file
 get_file <-
@@ -237,7 +237,7 @@ function (fname = NULL, origin = NULL, ...,
 #' @export
 #' @family utils
 #' @seealso
-#' + <https:/keras.io/api/utils/model_plotting_utils#modeltodot-function>
+#' + <https://keras.io/api/utils/model_plotting_utils#modeltodot-function>
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/utils/model_to_dot>
 #' @tether keras.utils.model_to_dot
 model_to_dot <-
@@ -272,7 +272,7 @@ function (model, show_shapes = FALSE, show_dtype = FALSE, show_layer_names = TRU
 #' @family numerical utils
 #' @family utils
 #' @seealso
-#' + <https:/keras.io/api/utils/python_utils#normalize-function>
+#' + <https://keras.io/api/utils/python_utils#normalize-function>
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/utils/normalize>
 #' @tether keras.utils.normalize
 normalize <-
@@ -325,7 +325,7 @@ function (x, axis = -1L, order = 2L)
 #' @family numerical utils
 #' @family utils
 #' @seealso
-#' + <https:/keras.io/api/utils/python_utils#tocategorical-function>
+#' + <https://keras.io/api/utils/python_utils#tocategorical-function>
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/utils/to_categorical>
 #'
 #' @tether keras.utils.to_categorical
@@ -364,7 +364,7 @@ function (x, num_classes = NULL)
 #' @export
 #' @family utils
 #' @seealso
-#' + <https:/keras.io/api/utils/python_utils#setrandomseed-function>
+#' + <https://keras.io/api/utils/python_utils#setrandomseed-function>
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/utils/set_random_seed>
 #'
 #' @tether keras.utils.set_random_seed
@@ -445,7 +445,7 @@ function (seed)
 #' @export
 #' @family utils
 #' @seealso
-#' + <https:/keras.io/api/data_loading/timeseries#padsequences-function>
+#' + <https://keras.io/api/data_loading/timeseries#padsequences-function>
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/utils/pad_sequences>
 #'
 #' @tether keras.utils.pad_sequences

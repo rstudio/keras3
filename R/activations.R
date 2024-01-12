@@ -30,7 +30,7 @@
 #' @export
 #' @family activations
 #' @seealso
-#' + <https:/keras.io/api/layers/activations#elu-function>
+#' + <https://keras.io/api/layers/activations#elu-function>
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/activations/elu>
 #' @tether keras.activations.elu
 activation_elu <-
@@ -49,7 +49,7 @@ function (x, alpha = 1)
 #' @export
 #' @family activations
 #' @seealso
-#' + <https:/keras.io/api/layers/activations#exponential-function>
+#' + <https://keras.io/api/layers/activations#exponential-function>
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/activations/exponential>
 #' @tether keras.activations.exponential
 activation_exponential <-
@@ -83,7 +83,7 @@ function (x)
 #' @export
 #' @family activations
 #' @seealso
-#' + <https:/keras.io/api/layers/activations#gelu-function>
+#' + <https://keras.io/api/layers/activations#gelu-function>
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/activations/gelu>
 #' @tether keras.activations.gelu
 activation_gelu <-
@@ -115,7 +115,7 @@ function (x, approximate = FALSE)
 #' @export
 #' @family activations
 #' @seealso
-#' + <https:/keras.io/api/layers/activations#hardsigmoid-function>
+#' + <https://keras.io/api/layers/activations#hardsigmoid-function>
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/activations/hard_sigmoid>
 #' @tether keras.activations.hard_sigmoid
 activation_hard_sigmoid <-
@@ -138,7 +138,7 @@ function (x)
 #' @export
 #' @family activations
 #' @seealso
-#' + <https:/keras.io/api/layers/activations#leakyrelu-function>
+#' + <https://keras.io/api/layers/activations#leakyrelu-function>
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/activations/leaky_relu>
 #' @tether keras.activations.leaky_relu
 activation_leaky_relu <-
@@ -161,7 +161,7 @@ function (x, negative_slope = 0.2)
 #' @export
 #' @family activations
 #' @seealso
-#' + <https:/keras.io/api/layers/activations#linear-function>
+#' + <https://keras.io/api/layers/activations#linear-function>
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/activations/linear>
 #' @tether keras.activations.linear
 activation_linear <-
@@ -188,7 +188,7 @@ function (x)
 #' @export
 #' @family activations
 #' @seealso
-#' + <https:/keras.io/api/layers/activations#logsoftmax-function>
+#' + <https://keras.io/api/layers/activations#logsoftmax-function>
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/activations/log_softmax>
 #' @tether keras.activations.log_softmax
 activation_log_softmax <-
@@ -219,7 +219,7 @@ function (x, axis = -1L)
 #' @export
 #' @family activations
 #' @seealso
-#' + <https:/keras.io/api/layers/activations#mish-function>
+#' + <https://keras.io/api/layers/activations#mish-function>
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/activations/mish>
 #' @tether keras.activations.mish
 activation_mish <-
@@ -270,7 +270,7 @@ function (x)
 #' @export
 #' @family activations
 #' @seealso
-#' + <https:/keras.io/api/layers/activations#relu-function>
+#' + <https://keras.io/api/layers/activations#relu-function>
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/activations/relu>
 #' @tether keras.activations.relu
 activation_relu <-
@@ -293,7 +293,7 @@ function (x, negative_slope = 0, max_value = NULL,
 #' @export
 #' @family activations
 #' @seealso
-#' + <https:/keras.io/api/layers/activations#relu6-function>
+#' + <https://keras.io/api/layers/activations#relu6-function>
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/activations/relu6>
 #' @tether keras.activations.relu6
 activation_relu6 <-
@@ -341,7 +341,7 @@ function (x)
 #' @export
 #' @family activations
 #' @seealso
-#' + <https:/keras.io/api/layers/activations#selu-function>
+#' + <https://keras.io/api/layers/activations#selu-function>
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/activations/selu>
 #' @tether keras.activations.selu
 activation_selu <-
@@ -371,7 +371,7 @@ function (x)
 #' @export
 #' @family activations
 #' @seealso
-#' + <https:/keras.io/api/layers/activations#sigmoid-function>
+#' + <https://keras.io/api/layers/activations#sigmoid-function>
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/activations/sigmoid>
 #' @tether keras.activations.sigmoid
 activation_sigmoid <-
@@ -400,7 +400,7 @@ function (x)
 #' @export
 #' @family activations
 #' @seealso
-#' + <https:/keras.io/api/layers/activations#silu-function>
+#' + <https://keras.io/api/layers/activations#silu-function>
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/activations/silu>
 #' @tether keras.activations.silu
 activation_silu <-
@@ -438,7 +438,7 @@ function (x)
 #' @export
 #' @family activations
 #' @seealso
-#' + <https:/keras.io/api/layers/activations#softmax-function>
+#' + <https://keras.io/api/layers/activations#softmax-function>
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/activations/softmax>
 #' @tether keras.activations.softmax
 activation_softmax <-
@@ -460,7 +460,7 @@ function (x, axis = -1L)
 #' @export
 #' @family activations
 #' @seealso
-#' + <https:/keras.io/api/layers/activations#softplus-function>
+#' + <https://keras.io/api/layers/activations#softplus-function>
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/activations/softplus>
 #' @tether keras.activations.softplus
 activation_softplus <-
@@ -482,7 +482,7 @@ function (x)
 #' @export
 #' @family activations
 #' @seealso
-#' + <https:/keras.io/api/layers/activations#softsign-function>
+#' + <https://keras.io/api/layers/activations#softsign-function>
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/activations/softsign>
 #' @tether keras.activations.softsign
 activation_softsign <-
@@ -506,7 +506,7 @@ function (x)
 #' @export
 #' @family activations
 #' @seealso
-#' + <https:/keras.io/api/layers/activations#tanh-function>
+#' + <https://keras.io/api/layers/activations#tanh-function>
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/activations/tanh>
 #' @tether keras.activations.tanh
 activation_tanh <-

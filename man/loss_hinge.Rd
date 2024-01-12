@@ -52,7 +52,7 @@ loss
 
 \seealso{
 \itemize{
-\item \url{https:/keras.io/api/losses/hinge_losses#hinge-class}
+\item \url{https://keras.io/api/losses/hinge_losses#hinge-class}
 \item \url{https://www.tensorflow.org/api_docs/python/tf/keras/losses/Hinge}
 }
 

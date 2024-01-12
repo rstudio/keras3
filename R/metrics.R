@@ -322,7 +322,7 @@ function (y_true, y_pred)
 #' @family accuracy metrics
 #' @family metrics
 #' @seealso
-#' + <https:/keras.io/api/metrics/accuracy_metrics#binaryaccuracy-class>
+#' + <https://keras.io/api/metrics/accuracy_metrics#binaryaccuracy-class>
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/metrics/BinaryAccuracy>
 #'
 #' @tether keras.metrics.BinaryAccuracy
@@ -408,7 +408,7 @@ function (y_true, y_pred, threshold = 0.5, ..., name = "binary_accuracy",
 #' @family accuracy metrics
 #' @family metrics
 #' @seealso
-#' + <https:/keras.io/api/metrics/accuracy_metrics#categoricalaccuracy-class>
+#' + <https://keras.io/api/metrics/accuracy_metrics#categoricalaccuracy-class>
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/metrics/CategoricalAccuracy>
 #'
 #' @tether keras.metrics.CategoricalAccuracy
@@ -491,7 +491,7 @@ function (y_true, y_pred, ..., name = "categorical_accuracy",
 #' @family accuracy metrics
 #' @family metrics
 #' @seealso
-#' + <https:/keras.io/api/metrics/accuracy_metrics#sparsecategoricalaccuracy-class>
+#' + <https://keras.io/api/metrics/accuracy_metrics#sparsecategoricalaccuracy-class>
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/metrics/SparseCategoricalAccuracy>
 #'
 #' @tether keras.metrics.SparseCategoricalAccuracy
@@ -570,7 +570,7 @@ function (y_true, y_pred, ..., name = "sparse_categorical_accuracy",
 #' @family accuracy metrics
 #' @family metrics
 #' @seealso
-#' + <https:/keras.io/api/metrics/accuracy_metrics#sparsetopkcategoricalaccuracy-class>
+#' + <https://keras.io/api/metrics/accuracy_metrics#sparsetopkcategoricalaccuracy-class>
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/metrics/SparseTopKCategoricalAccuracy>
 #'
 #' @tether keras.metrics.SparseTopKCategoricalAccuracy
@@ -648,7 +648,7 @@ function (y_true, y_pred, k = 5L, ..., name = "sparse_top_k_categorical_accuracy
 #' @family accuracy metrics
 #' @family metrics
 #' @seealso
-#' + <https:/keras.io/api/metrics/accuracy_metrics#topkcategoricalaccuracy-class>
+#' + <https://keras.io/api/metrics/accuracy_metrics#topkcategoricalaccuracy-class>
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/metrics/TopKCategoricalAccuracy>
 #'
 #' @tether keras.metrics.TopKCategoricalAccuracy
@@ -819,7 +819,7 @@ function (y_true, y_pred, k = 5L, ..., name = "top_k_categorical_accuracy",
 #' @family confusion metrics
 #' @family metrics
 #' @seealso
-#' + <https:/keras.io/api/metrics/classification_metrics#auc-class>
+#' + <https://keras.io/api/metrics/classification_metrics#auc-class>
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/metrics/AUC>
 #'
 #' @tether keras.metrics.AUC
@@ -881,7 +881,7 @@ function (..., num_thresholds = 200L, curve = "ROC", summation_method = "interpo
 #' @family confusion metrics
 #' @family metrics
 #' @seealso
-#' + <https:/keras.io/api/metrics/classification_metrics#falsenegatives-class>
+#' + <https://keras.io/api/metrics/classification_metrics#falsenegatives-class>
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/metrics/FALSENegatives>
 #'
 #' @tether keras.metrics.FalseNegatives
@@ -940,7 +940,7 @@ function (..., thresholds = NULL, name = NULL, dtype = NULL)
 #' @family confusion metrics
 #' @family metrics
 #' @seealso
-#' + <https:/keras.io/api/metrics/classification_metrics#falsepositives-class>
+#' + <https://keras.io/api/metrics/classification_metrics#falsepositives-class>
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/metrics/FALSEPositives>
 #'
 #' @tether keras.metrics.FalsePositives
@@ -1053,7 +1053,7 @@ function (..., thresholds = NULL, name = NULL, dtype = NULL)
 #' @family confusion metrics
 #' @family metrics
 #' @seealso
-#' + <https:/keras.io/api/metrics/classification_metrics#precision-class>
+#' + <https://keras.io/api/metrics/classification_metrics#precision-class>
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/metrics/Precision>
 #'
 #' @tether keras.metrics.Precision
@@ -1133,7 +1133,7 @@ function (..., thresholds = NULL, top_k = NULL, class_id = NULL,
 #' @family confusion metrics
 #' @family metrics
 #' @seealso
-#' + <https:/keras.io/api/metrics/classification_metrics#precisionatrecall-class>
+#' + <https://keras.io/api/metrics/classification_metrics#precisionatrecall-class>
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/metrics/PrecisionAtRecall>
 #'
 #' @tether keras.metrics.PrecisionAtRecall
@@ -1229,7 +1229,7 @@ function (..., recall, num_thresholds = 200L, class_id = NULL,
 #' @family confusion metrics
 #' @family metrics
 #' @seealso
-#' + <https:/keras.io/api/metrics/classification_metrics#recall-class>
+#' + <https://keras.io/api/metrics/classification_metrics#recall-class>
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/metrics/Recall>
 #'
 #' @tether keras.metrics.Recall
@@ -1399,7 +1399,7 @@ function (..., precision, num_thresholds = 200L, class_id = NULL,
 #' @family confusion metrics
 #' @family metrics
 #' @seealso
-#' + <https:/keras.io/api/metrics/classification_metrics#sensitivityatspecificity-class>
+#' + <https://keras.io/api/metrics/classification_metrics#sensitivityatspecificity-class>
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/metrics/SensitivityAtSpecificity>
 #'
 #' @tether keras.metrics.SensitivityAtSpecificity
@@ -1487,7 +1487,7 @@ function (..., specificity, num_thresholds = 200L, class_id = NULL,
 #' @family confusion metrics
 #' @family metrics
 #' @seealso
-#' + <https:/keras.io/api/metrics/classification_metrics#specificityatsensitivity-class>
+#' + <https://keras.io/api/metrics/classification_metrics#specificityatsensitivity-class>
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/metrics/SpecificityAtSensitivity>
 #'
 #' @tether keras.metrics.SpecificityAtSensitivity
@@ -1547,7 +1547,7 @@ function (..., sensitivity, num_thresholds = 200L, class_id = NULL,
 #' @family confusion metrics
 #' @family metrics
 #' @seealso
-#' + <https:/keras.io/api/metrics/classification_metrics#truenegatives-class>
+#' + <https://keras.io/api/metrics/classification_metrics#truenegatives-class>
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/metrics/TrueNegatives>
 #'
 #' @tether keras.metrics.TrueNegatives
@@ -1606,7 +1606,7 @@ function (..., thresholds = NULL, name = NULL, dtype = NULL)
 #' @family confusion metrics
 #' @family metrics
 #' @seealso
-#' + <https:/keras.io/api/metrics/classification_metrics#truepositives-class>
+#' + <https://keras.io/api/metrics/classification_metrics#truepositives-class>
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/metrics/TruePositives>
 #'
 #' @tether keras.metrics.TruePositives
@@ -1825,7 +1825,7 @@ function (..., average = NULL, beta = 1, threshold = NULL, name = "fbeta_score",
 #' @family metrics
 #' @family hinge metrics
 #' @seealso
-#' + <https:/keras.io/api/metrics/hinge_metrics#categoricalhinge-class>
+#' + <https://keras.io/api/metrics/hinge_metrics#categoricalhinge-class>
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/metrics/CategoricalHinge>
 #'
 #' @tether keras.metrics.CategoricalHinge
@@ -1895,7 +1895,7 @@ function (y_true, y_pred, ..., name = "categorical_hinge",
 #' @family metrics
 #' @family hinge metrics
 #' @seealso
-#' + <https:/keras.io/api/metrics/hinge_metrics#hinge-class>
+#' + <https://keras.io/api/metrics/hinge_metrics#hinge-class>
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/metrics/Hinge>
 #'
 #' @tether keras.metrics.Hinge
@@ -1964,7 +1964,7 @@ function (y_true, y_pred, ..., name = "hinge", dtype = NULL)
 #' @family metrics
 #' @family hinge metrics
 #' @seealso
-#' + <https:/keras.io/api/metrics/hinge_metrics#squaredhinge-class>
+#' + <https://keras.io/api/metrics/hinge_metrics#squaredhinge-class>
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/metrics/SquaredHinge>
 #'
 #' @tether keras.metrics.SquaredHinge
@@ -2271,7 +2271,7 @@ function (..., num_classes, target_class_ids, name = NULL, dtype = NULL,
 #' @family iou metrics
 #' @family metrics
 #' @seealso
-#' + <https:/keras.io/api/metrics/segmentation_metrics#meaniou-class>
+#' + <https://keras.io/api/metrics/segmentation_metrics#meaniou-class>
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/metrics/MeanIoU>
 #'
 #' @tether keras.metrics.MeanIoU
@@ -2559,7 +2559,7 @@ function (..., num_classes, name = NULL, dtype = NULL, ignore_class = NULL,
 #' @family metrics
 #' @family probabilistic metrics
 #' @seealso
-#' + <https:/keras.io/api/metrics/probabilistic_metrics#binarycrossentropy-class>
+#' + <https://keras.io/api/metrics/probabilistic_metrics#binarycrossentropy-class>
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/metrics/BinaryCrossentropy>
 #'
 #' @tether keras.metrics.BinaryCrossentropy
@@ -2661,7 +2661,7 @@ function (y_true, y_pred, from_logits = FALSE, label_smoothing = 0,
 #' @family metrics
 #' @family probabilistic metrics
 #' @seealso
-#' + <https:/keras.io/api/metrics/probabilistic_metrics#categoricalcrossentropy-class>
+#' + <https://keras.io/api/metrics/probabilistic_metrics#categoricalcrossentropy-class>
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/metrics/CategoricalCrossentropy>
 #'
 #' @tether keras.metrics.CategoricalCrossentropy
@@ -2737,7 +2737,7 @@ function (y_true, y_pred, from_logits = FALSE, label_smoothing = 0,
 #' @family metrics
 #' @family probabilistic metrics
 #' @seealso
-#' + <https:/keras.io/api/metrics/probabilistic_metrics#kldivergence-class>
+#' + <https://keras.io/api/metrics/probabilistic_metrics#kldivergence-class>
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/metrics/KLDivergence>
 #'
 #' @tether keras.metrics.KLDivergence
@@ -2815,7 +2815,7 @@ function (y_true, y_pred, ..., name = "kl_divergence",
 #' @family metrics
 #' @family probabilistic metrics
 #' @seealso
-#' + <https:/keras.io/api/metrics/probabilistic_metrics#poisson-class>
+#' + <https://keras.io/api/metrics/probabilistic_metrics#poisson-class>
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/metrics/Poisson>
 #'
 #' @tether keras.metrics.Poisson
@@ -2911,7 +2911,7 @@ function (y_true, y_pred, ..., name = "poisson", dtype = NULL)
 #' @family metrics
 #' @family probabilistic metrics
 #' @seealso
-#' + <https:/keras.io/api/metrics/probabilistic_metrics#sparsecategoricalcrossentropy-class>
+#' + <https://keras.io/api/metrics/probabilistic_metrics#sparsecategoricalcrossentropy-class>
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/metrics/SparseCategoricalCrossentropy>
 #'
 #' @tether keras.metrics.SparseCategoricalCrossentropy
@@ -3135,7 +3135,7 @@ function (..., name = "sum", dtype = NULL)
 #' @family regression metrics
 #' @family metrics
 #' @seealso
-#' + <https:/keras.io/api/metrics/regression_metrics#cosinesimilarity-class>
+#' + <https://keras.io/api/metrics/regression_metrics#cosinesimilarity-class>
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/metrics/CosineSimilarity>
 #'
 #' @tether keras.metrics.CosineSimilarity
@@ -3192,7 +3192,7 @@ function (..., name = "cosine_similarity", dtype = NULL, axis = -1L)
 #' @family regression metrics
 #' @family metrics
 #' @seealso
-#' + <https:/keras.io/api/metrics/regression_metrics#logcosherror-class>
+#' + <https://keras.io/api/metrics/regression_metrics#logcosherror-class>
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/metrics/LogCoshError>
 #'
 #' @tether keras.metrics.LogCoshError
@@ -3257,7 +3257,7 @@ function (..., name = "logcosh", dtype = NULL)
 #' @family metrics
 #' @family regression metrics
 #' @seealso
-#' + <https:/keras.io/api/metrics/regression_metrics#meanabsoluteerror-class>
+#' + <https://keras.io/api/metrics/regression_metrics#meanabsoluteerror-class>
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/metrics/MeanAbsoluteError>
 #'
 #' @tether keras.metrics.MeanAbsoluteError
@@ -3335,7 +3335,7 @@ function (y_true, y_pred, ..., name = "mean_absolute_error",
 #' @family metrics
 #' @family regression metrics
 #' @seealso
-#' + <https:/keras.io/api/metrics/regression_metrics#meanabsolutepercentageerror-class>
+#' + <https://keras.io/api/metrics/regression_metrics#meanabsolutepercentageerror-class>
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/metrics/MeanAbsolutePercentageError>
 #'
 #' @tether keras.metrics.MeanAbsolutePercentageError
@@ -3394,7 +3394,7 @@ function (y_true, y_pred, ..., name = "mean_absolute_percentage_error",
 #' @family metrics
 #' @family regression metrics
 #' @seealso
-#' + <https:/keras.io/api/metrics/regression_metrics#meansquarederror-class>
+#' + <https://keras.io/api/metrics/regression_metrics#meansquarederror-class>
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/metrics/MeanSquaredError>
 #'
 #' @tether keras.metrics.MeanSquaredError
@@ -3472,7 +3472,7 @@ function (y_true, y_pred, ..., name = "mean_squared_error",
 #' @family metrics
 #' @family regression metrics
 #' @seealso
-#' + <https:/keras.io/api/metrics/regression_metrics#meansquaredlogarithmicerror-class>
+#' + <https://keras.io/api/metrics/regression_metrics#meansquaredlogarithmicerror-class>
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/metrics/MeanSquaredLogarithmicError>
 #'
 #' @tether keras.metrics.MeanSquaredLogarithmicError
@@ -3615,7 +3615,7 @@ function (..., class_aggregation = "uniform_average", num_regressors = 0L,
 #' @family regression metrics
 #' @family metrics
 #' @seealso
-#' + <https:/keras.io/api/metrics/regression_metrics#rootmeansquarederror-class>
+#' + <https://keras.io/api/metrics/regression_metrics#rootmeansquarederror-class>
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/metrics/RootMeanSquaredError>
 #'
 #' @tether keras.metrics.RootMeanSquaredError

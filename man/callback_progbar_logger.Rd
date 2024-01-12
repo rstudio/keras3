@@ -20,7 +20,7 @@ ValueError: In case of invalid \code{count_mode}.
 
 \seealso{
 \itemize{
-\item \url{https:/keras.io/api/callbacks/progbar_logger#progbarlogger-class}
+\item \url{https://keras.io/api/callbacks/progbar_logger#progbarlogger-class}
 \item \url{https://www.tensorflow.org/api_docs/python/tf/keras/callbacks/ProgbarLogger}
 }
 

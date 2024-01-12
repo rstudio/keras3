@@ -23,7 +23,7 @@
 #' @family core ops
 #' @family ops
 #' @seealso
-#' + <https:/keras.io/api/ops/core#cast-function>
+#' + <https://keras.io/api/ops/core#cast-function>
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/cast>
 #' @tether keras.ops.cast
 op_cast <-
@@ -68,7 +68,7 @@ keras$ops$cond(pred, true_fn, false_fn)
 #' @family core ops
 #' @family ops
 #' @seealso
-#' + <https:/keras.io/api/ops/core#converttonumpy-function>
+#' + <https://keras.io/api/ops/core#converttonumpy-function>
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/convert_to_numpy>
 #' @tether keras.ops.convert_to_numpy
 op_convert_to_numpy <-
@@ -106,7 +106,7 @@ keras$ops$convert_to_numpy(x)
 #' @family ops
 #' @seealso
 #' + [op_array()]
-#' + <https:/keras.io/api/ops/core#converttotensor-function>
+#' + <https://keras.io/api/ops/core#converttotensor-function>
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/convert_to_tensor>
 #' @tether keras.ops.convert_to_tensor
 op_convert_to_tensor <-
@@ -212,7 +212,7 @@ keras$ops$is_tensor(x)
 #' @family core ops
 #' @family ops
 #' @seealso
-#' + <https:/keras.io/api/ops/core#scatter-function>
+#' + <https://keras.io/api/ops/core#scatter-function>
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/scatter>
 #' @tether keras.ops.scatter
 op_scatter <-
@@ -277,7 +277,7 @@ function (indices, values, shape)
 #' @family core ops
 #' @family ops
 #' @seealso
-#' + <https:/keras.io/api/ops/core#scatterupdate-function>
+#' + <https://keras.io/api/ops/core#scatterupdate-function>
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/scatter_update>
 #' @tether keras.ops.scatter_update
 op_scatter_update <-
@@ -315,7 +315,7 @@ function (inputs, indices, updates)
 #' @family core ops
 #' @family ops
 #' @seealso
-#' + <https:/keras.io/api/ops/core#shape-function>
+#' + <https://keras.io/api/ops/core#shape-function>
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/shape>
 #' @tether keras.ops.shape
 op_shape <-
@@ -360,7 +360,7 @@ function (x)
 #' @family core ops
 #' @family ops
 #' @seealso
-#' + <https:/keras.io/api/ops/core#slice-function>
+#' + <https://keras.io/api/ops/core#slice-function>
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/slice>
 #'
 #' @tether keras.ops.slice
@@ -410,7 +410,7 @@ function (inputs, start_indices, shape)
 #' @family core ops
 #' @family ops
 #' @seealso
-#' + <https:/keras.io/api/ops/core#sliceupdate-function>
+#' + <https://keras.io/api/ops/core#sliceupdate-function>
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/slice_update>
 #' @tether keras.ops.slice_update
 op_slice_update <-
@@ -442,7 +442,7 @@ function (inputs, start_indices, updates)
 #' @family core ops
 #' @family ops
 #' @seealso
-#' + <https:/keras.io/api/ops/core#stopgradient-function>
+#' + <https://keras.io/api/ops/core#stopgradient-function>
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/stop_gradient>
 #'
 #' @tether keras.ops.stop_gradient
@@ -597,7 +597,7 @@ keras$ops$vectorized_map(f, elements)
 #' @family core ops
 #' @family ops
 #' @seealso
-#' + <https:/keras.io/api/ops/core#whileloop-function>
+#' + <https://keras.io/api/ops/core#whileloop-function>
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/while_loop>
 #'
 #' @tether keras.ops.while_loop
@@ -668,7 +668,7 @@ keras$ops$erf(x)
 #' @family math ops
 #' @family ops
 #' @seealso
-#' + <https:/keras.io/api/ops/core#extractsequences-function>
+#' + <https://keras.io/api/ops/core#extractsequences-function>
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/extract_sequences>
 #' @tether keras.ops.extract_sequences
 op_extract_sequences <-
@@ -703,7 +703,7 @@ function (x, sequence_length, sequence_stride)
 #' @family math ops
 #' @family ops
 #' @seealso
-#' + <https:/keras.io/api/ops/fft#fft-function>
+#' + <https://keras.io/api/ops/fft#fft-function>
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/fft>
 #' @tether keras.ops.fft
 op_fft <-
@@ -736,7 +736,7 @@ keras$ops$fft(x)
 #' @family math ops
 #' @family ops
 #' @seealso
-#' + <https:/keras.io/api/ops/fft#fft2-function>
+#' + <https://keras.io/api/ops/fft#fft2-function>
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/fft2>
 #' @tether keras.ops.fft2
 op_fft2 <-
@@ -776,7 +776,7 @@ keras$ops$fft2(x)
 #' @family math ops
 #' @family ops
 #' @seealso
-#' + <https:/keras.io/api/ops/core#intopk-function>
+#' + <https://keras.io/api/ops/core#intopk-function>
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/in_top_k>
 #' @tether keras.ops.in_top_k
 op_in_top_k <-
@@ -831,7 +831,7 @@ function (targets, predictions, k)
 #' @family math ops
 #' @family ops
 #' @seealso
-#' + <https:/keras.io/api/ops/fft#irfft-function>
+#' + <https://keras.io/api/ops/fft#irfft-function>
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/irfft>
 #' @tether keras.ops.irfft
 op_irfft <-
@@ -893,7 +893,7 @@ function (x, fft_length = NULL)
 #' @family math ops
 #' @family ops
 #' @seealso
-#' + <https:/keras.io/api/ops/fft#istft-function>
+#' + <https://keras.io/api/ops/fft#istft-function>
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/istft>
 #' @tether keras.ops.istft
 op_istft <-
@@ -937,7 +937,7 @@ function (x, sequence_length, sequence_stride, fft_length, length = NULL,
 #' @family math ops
 #' @family ops
 #' @seealso
-#' + <https:/keras.io/api/ops/core#logsumexp-function>
+#' + <https://keras.io/api/ops/core#logsumexp-function>
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/logsumexp>
 #'
 #' @tether keras.ops.logsumexp
@@ -977,7 +977,7 @@ function (x, axis = NULL, keepdims = FALSE)
 #' @family math ops
 #' @family ops
 #' @seealso
-#' + <https:/keras.io/api/ops/core#qr-function>
+#' + <https://keras.io/api/ops/core#qr-function>
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/qr>
 #' @tether keras.ops.qr
 op_qr <-
@@ -1034,7 +1034,7 @@ py_to_r.tensorflow.python.ops.gen_linalg_ops.Qr <- function(x) {
 #' @family math ops
 #' @family ops
 #' @seealso
-#' + <https:/keras.io/api/ops/fft#rfft-function>
+#' + <https://keras.io/api/ops/fft#rfft-function>
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/rfft>
 #'
 #' @tether keras.ops.rfft
@@ -1067,7 +1067,7 @@ function (x, fft_length = NULL)
 #' @family math ops
 #' @family ops
 #' @seealso
-#' + <https:/keras.io/api/ops/core#rsqrt-function>
+#' + <https://keras.io/api/ops/core#rsqrt-function>
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/rsqrt>
 #'
 #' @tether keras.ops.rsqrt
@@ -1113,7 +1113,7 @@ keras$ops$rsqrt(x)
 #' @family math ops
 #' @family ops
 #' @seealso
-#' + <https:/keras.io/api/ops/core#segmentmax-function>
+#' + <https://keras.io/api/ops/core#segmentmax-function>
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/segment_max>
 #' @tether keras.ops.segment_max
 op_segment_max <-
@@ -1160,7 +1160,7 @@ function (data, segment_ids, num_segments = NULL, sorted = FALSE)
 #' @family math ops
 #' @family ops
 #' @seealso
-#' + <https:/keras.io/api/ops/core#segmentsum-function>
+#' + <https://keras.io/api/ops/core#segmentsum-function>
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/segment_sum>
 #' @tether keras.ops.segment_sum
 op_segment_sum <-
@@ -1249,7 +1249,7 @@ keras$ops$solve(a, b)
 #' @family math ops
 #' @family ops
 #' @seealso
-#' + <https:/keras.io/api/ops/fft#stft-function>
+#' + <https://keras.io/api/ops/fft#stft-function>
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/stft>
 #'
 #' @tether keras.ops.stft
@@ -1298,7 +1298,7 @@ function (x, sequence_length, sequence_stride, fft_length, window = "hann",
 #' @family math ops
 #' @family ops
 #' @seealso
-#' + <https:/keras.io/api/ops/core#topk-function>
+#' + <https://keras.io/api/ops/core#topk-function>
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/top_k>
 #' @tether keras.ops.top_k
 op_top_k <-
@@ -1361,7 +1361,7 @@ py_to_r.tensorflow.python.ops.gen_nn_ops.TopKV2 <- function(x) {
 #' @family nn ops
 #' @family ops
 #' @seealso
-#' + <https:/keras.io/api/ops/nn#averagepool-function>
+#' + <https://keras.io/api/ops/nn#averagepool-function>
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/average_pool>
 #' @tether keras.ops.average_pool
 op_average_pool <-
@@ -1412,7 +1412,7 @@ function (inputs, pool_size, strides = NULL, padding = "valid",
 #' @family nn ops
 #' @family ops
 #' @seealso
-#' + <https:/keras.io/api/ops/nn#binarycrossentropy-function>
+#' + <https://keras.io/api/ops/nn#binarycrossentropy-function>
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/binary_crossentropy>
 #' @tether keras.ops.binary_crossentropy
 op_binary_crossentropy <-
@@ -1470,7 +1470,7 @@ keras$ops$binary_crossentropy(target, output, from_logits)
 #' @family nn ops
 #' @family ops
 #' @seealso
-#' + <https:/keras.io/api/ops/nn#categoricalcrossentropy-function>
+#' + <https://keras.io/api/ops/nn#categoricalcrossentropy-function>
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/categorical_crossentropy>
 #' @tether keras.ops.categorical_crossentropy
 op_categorical_crossentropy <-
@@ -1532,7 +1532,7 @@ function (target, output, from_logits = FALSE, axis = -1L)
 #' @family nn ops
 #' @family ops
 #' @seealso
-#' + <https:/keras.io/api/ops/nn#conv-function>
+#' + <https://keras.io/api/ops/nn#conv-function>
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/conv>
 #' @tether keras.ops.conv
 op_conv <-
@@ -1604,7 +1604,7 @@ function (inputs, kernel, strides = 1L, padding = "valid", data_format = NULL,
 #' @family nn ops
 #' @family ops
 #' @seealso
-#' + <https:/keras.io/api/ops/nn#convtranspose-function>
+#' + <https://keras.io/api/ops/nn#convtranspose-function>
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/conv_transpose>
 #' @tether keras.ops.conv_transpose
 op_conv_transpose <-
@@ -1668,7 +1668,7 @@ function (inputs, kernel, strides, padding = "valid", output_padding = NULL,
 #' @family nn ops
 #' @family ops
 #' @seealso
-#' + <https:/keras.io/api/ops/nn#depthwiseconv-function>
+#' + <https://keras.io/api/ops/nn#depthwiseconv-function>
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/depthwise_conv>
 #' @tether keras.ops.depthwise_conv
 op_depthwise_conv <-
@@ -1706,7 +1706,7 @@ function (inputs, kernel, strides = 1L, padding = "valid", data_format = NULL,
 #' @family nn ops
 #' @family ops
 #' @seealso
-#' + <https:/keras.io/api/ops/nn#elu-function>
+#' + <https://keras.io/api/ops/nn#elu-function>
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/elu>
 #' @tether keras.ops.elu
 op_elu <-
@@ -1752,7 +1752,7 @@ keras$ops$elu(x, alpha)
 #' @family nn ops
 #' @family ops
 #' @seealso
-#' + <https:/keras.io/api/ops/nn#gelu-function>
+#' + <https://keras.io/api/ops/nn#gelu-function>
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/gelu>
 #' @tether keras.ops.gelu
 op_gelu <-
@@ -1790,7 +1790,7 @@ keras$ops$gelu(x, approximate)
 #' @family nn ops
 #' @family ops
 #' @seealso
-#' + <https:/keras.io/api/ops/nn#hardsigmoid-function>
+#' + <https://keras.io/api/ops/nn#hardsigmoid-function>
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/hard_sigmoid>
 #' @tether keras.ops.hard_sigmoid
 op_hard_sigmoid <-
@@ -1831,7 +1831,7 @@ keras$ops$hard_sigmoid(x)
 #' @family nn ops
 #' @family ops
 #' @seealso
-#' + <https:/keras.io/api/ops/nn#leakyrelu-function>
+#' + <https://keras.io/api/ops/nn#leakyrelu-function>
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/leaky_relu>
 #' @tether keras.ops.leaky_relu
 op_leaky_relu <-
@@ -1860,7 +1860,7 @@ keras$ops$leaky_relu(x, negative_slope)
 #' @family nn ops
 #' @family ops
 #' @seealso
-#' + <https:/keras.io/api/ops/nn#logsigmoid-function>
+#' + <https://keras.io/api/ops/nn#logsigmoid-function>
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/log_sigmoid>
 #'
 #' @tether keras.ops.log_sigmoid
@@ -1895,7 +1895,7 @@ keras$ops$log_sigmoid(x)
 #' @family nn ops
 #' @family ops
 #' @seealso
-#' + <https:/keras.io/api/ops/nn#logsoftmax-function>
+#' + <https://keras.io/api/ops/nn#logsoftmax-function>
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/log_softmax>
 #'
 #' @tether keras.ops.log_softmax
@@ -1951,7 +1951,7 @@ function (x, axis = -1L)
 #' @family nn ops
 #' @family ops
 #' @seealso
-#' + <https:/keras.io/api/ops/nn#maxpool-function>
+#' + <https://keras.io/api/ops/nn#maxpool-function>
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/max_pool>
 #' @tether keras.ops.max_pool
 op_max_pool <-
@@ -2099,7 +2099,7 @@ function (inputs, num_tokens, axis = -1L, dtype = NULL)
 #' @family nn ops
 #' @family ops
 #' @seealso
-#' + <https:/keras.io/api/ops/nn#onehot-function>
+#' + <https://keras.io/api/ops/nn#onehot-function>
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/one_hot>
 #' @tether keras.ops.one_hot
 op_one_hot <-
@@ -2136,7 +2136,7 @@ function (x, num_classes, axis = -1L, dtype = NULL)
 #' @family nn ops
 #' @family ops
 #' @seealso
-#' + <https:/keras.io/api/ops/nn#relu-function>
+#' + <https://keras.io/api/ops/nn#relu-function>
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/relu>
 #'
 #' @tether keras.ops.relu
@@ -2171,7 +2171,7 @@ keras$ops$relu(x)
 #' @family nn ops
 #' @family ops
 #' @seealso
-#' + <https:/keras.io/api/ops/nn#relu6-function>
+#' + <https://keras.io/api/ops/nn#relu6-function>
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/relu6>
 #'
 #' @tether keras.ops.relu6
@@ -2204,7 +2204,7 @@ keras$ops$relu6(x)
 #' @family nn ops
 #' @family ops
 #' @seealso
-#' + <https:/keras.io/api/ops/nn#selu-function>
+#' + <https://keras.io/api/ops/nn#selu-function>
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/selu>
 #' @tether keras.ops.selu
 op_selu <-
@@ -2269,7 +2269,7 @@ keras$ops$selu(x)
 #' @family nn ops
 #' @family ops
 #' @seealso
-#' + <https:/keras.io/api/ops/nn#separableconv-function>
+#' + <https://keras.io/api/ops/nn#separableconv-function>
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/separable_conv>
 #' @tether keras.ops.separable_conv
 op_separable_conv <-
@@ -2302,7 +2302,7 @@ function (inputs, depthwise_kernel, pointwise_kernel, strides = 1L,
 #' @family nn ops
 #' @family ops
 #' @seealso
-#' + <https:/keras.io/api/ops/nn#sigmoid-function>
+#' + <https://keras.io/api/ops/nn#sigmoid-function>
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/sigmoid>
 #' @tether keras.ops.sigmoid
 op_sigmoid <-
@@ -2333,7 +2333,7 @@ keras$ops$sigmoid(x)
 #' @family nn ops
 #' @family ops
 #' @seealso
-#' + <https:/keras.io/api/ops/nn#silu-function>
+#' + <https://keras.io/api/ops/nn#silu-function>
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/silu>
 #' @tether keras.ops.silu
 op_silu <-
@@ -2372,7 +2372,7 @@ keras$ops$silu(x)
 #' @family nn ops
 #' @family ops
 #' @seealso
-#' + <https:/keras.io/api/ops/nn#softmax-function>
+#' + <https://keras.io/api/ops/nn#softmax-function>
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/softmax>
 #'
 #' @tether keras.ops.softmax
@@ -2409,7 +2409,7 @@ function (x, axis = -1L)
 #' @family nn ops
 #' @family ops
 #' @seealso
-#' + <https:/keras.io/api/ops/nn#softplus-function>
+#' + <https://keras.io/api/ops/nn#softplus-function>
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/softplus>
 #'
 #' @tether keras.ops.softplus
@@ -2443,7 +2443,7 @@ keras$ops$softplus(x)
 #' @family nn ops
 #' @family ops
 #' @seealso
-#' + <https:/keras.io/api/ops/nn#softsign-function>
+#' + <https://keras.io/api/ops/nn#softsign-function>
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/softsign>
 #'
 #' @tether keras.ops.softsign
@@ -2501,7 +2501,7 @@ keras$ops$softsign(x)
 #' @family nn ops
 #' @family ops
 #' @seealso
-#' + <https:/keras.io/api/ops/nn#sparsecategoricalcrossentropy-function>
+#' + <https://keras.io/api/ops/nn#sparsecategoricalcrossentropy-function>
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/sparse_categorical_crossentropy>
 #'
 #' @tether keras.ops.sparse_categorical_crossentropy
@@ -2573,7 +2573,7 @@ keras$ops$absolute(x)
 #' @family numpy ops
 #' @family ops
 #' @seealso
-#' + <https:/keras.io/api/ops/numpy#add-function>
+#' + <https://keras.io/api/ops/numpy#add-function>
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/add>
 #' @tether keras.ops.add
 op_add <-
@@ -2623,7 +2623,7 @@ keras$ops$add(x1, x2)
 #' @family numpy ops
 #' @family ops
 #' @seealso
-#' + <https:/keras.io/api/ops/numpy#all-function>
+#' + <https://keras.io/api/ops/numpy#all-function>
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/all>
 #' @tether keras.ops.all
 op_all <-
@@ -2669,7 +2669,7 @@ function (x, axis = NULL, keepdims = FALSE)
 #' @family numpy ops
 #' @family ops
 #' @seealso
-#' + <https:/keras.io/api/ops/numpy#amax-function>
+#' + <https://keras.io/api/ops/numpy#amax-function>
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/amax>
 #' @tether keras.ops.amax
 op_amax <-
@@ -2715,7 +2715,7 @@ function (x, axis = NULL, keepdims = FALSE)
 #' @family numpy ops
 #' @family ops
 #' @seealso
-#' + <https:/keras.io/api/ops/numpy#amin-function>
+#' + <https://keras.io/api/ops/numpy#amin-function>
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/amin>
 #' @tether keras.ops.amin
 op_amin <-
@@ -2772,7 +2772,7 @@ function (x, axis = NULL, keepdims = FALSE)
 #' @family numpy ops
 #' @family ops
 #' @seealso
-#' + <https:/keras.io/api/ops/numpy#any-function>
+#' + <https://keras.io/api/ops/numpy#any-function>
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/any>
 #' @tether keras.ops.any
 op_any <-
@@ -2820,7 +2820,7 @@ function (x, axis = NULL, keepdims = FALSE)
 #' @family numpy ops
 #' @family ops
 #' @seealso
-#' + <https:/keras.io/api/ops/numpy#append-function>
+#' + <https://keras.io/api/ops/numpy#append-function>
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/append>
 #' @tether keras.ops.append
 op_append <-
@@ -2882,7 +2882,7 @@ function (x1, x2, axis = NULL)
 #' @family numpy ops
 #' @family ops
 #' @seealso
-#' + <https:/keras.io/api/ops/numpy#arange-function>
+#' + <https://keras.io/api/ops/numpy#arange-function>
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/arange>
 #' @tether keras.ops.arange
 op_arange <-
@@ -2918,7 +2918,7 @@ function (start, stop = NULL, step = 1L, dtype = NULL)
 #' @family numpy ops
 #' @family ops
 #' @seealso
-#' + <https:/keras.io/api/ops/numpy#arccos-function>
+#' + <https://keras.io/api/ops/numpy#arccos-function>
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/arccos>
 #' @tether keras.ops.arccos
 op_arccos <-
@@ -2974,7 +2974,7 @@ keras$ops$arccosh(x)
 #' @family numpy ops
 #' @family ops
 #' @seealso
-#' + <https:/keras.io/api/ops/numpy#arcsin-function>
+#' + <https://keras.io/api/ops/numpy#arcsin-function>
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/arcsin>
 #' @tether keras.ops.arcsin
 op_arcsin <-
@@ -3002,7 +3002,7 @@ keras$ops$arcsin(x)
 #' @family numpy ops
 #' @family ops
 #' @seealso
-#' + <https:/keras.io/api/ops/numpy#arcsinh-function>
+#' + <https://keras.io/api/ops/numpy#arcsinh-function>
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/arcsinh>
 #' @tether keras.ops.arcsinh
 op_arcsinh <-
@@ -3031,7 +3031,7 @@ keras$ops$arcsinh(x)
 #' @family numpy ops
 #' @family ops
 #' @seealso
-#' + <https:/keras.io/api/ops/numpy#arctan-function>
+#' + <https://keras.io/api/ops/numpy#arctan-function>
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/arctan>
 #' @tether keras.ops.arctan
 op_arctan <-
@@ -3084,7 +3084,7 @@ keras$ops$arctan(x)
 #' @family numpy ops
 #' @family ops
 #' @seealso
-#' + <https:/keras.io/api/ops/numpy#arctan2-function>
+#' + <https://keras.io/api/ops/numpy#arctan2-function>
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/arctan2>
 #' @tether keras.ops.arctan2
 op_arctan2 <-
@@ -3104,7 +3104,7 @@ keras$ops$arctan2(x1, x2)
 #' @family numpy ops
 #' @family ops
 #' @seealso
-#' + <https:/keras.io/api/ops/numpy#arctanh-function>
+#' + <https://keras.io/api/ops/numpy#arctanh-function>
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/arctanh>
 #' @tether keras.ops.arctanh
 op_arctanh <-
@@ -3140,7 +3140,7 @@ keras$ops$arctanh(x)
 #' @family numpy ops
 #' @family ops
 #' @seealso
-#' + <https:/keras.io/api/ops/numpy#argmax-function>
+#' + <https://keras.io/api/ops/numpy#argmax-function>
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/argmax>
 #' @tether keras.ops.argmax
 op_argmax <-
@@ -3179,7 +3179,7 @@ function (x, axis = NULL)
 #' @family numpy ops
 #' @family ops
 #' @seealso
-#' + <https:/keras.io/api/ops/numpy#argmin-function>
+#' + <https://keras.io/api/ops/numpy#argmin-function>
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/argmin>
 #' @tether keras.ops.argmin
 op_argmin <-
@@ -3224,7 +3224,7 @@ function (x, axis = NULL)
 #' @family numpy ops
 #' @family ops
 #' @seealso
-#' + <https:/keras.io/api/ops/numpy#argsort-function>
+#' + <https://keras.io/api/ops/numpy#argsort-function>
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/argsort>
 #' @tether keras.ops.argsort
 op_argsort <-
@@ -3258,7 +3258,7 @@ function (x, axis = -1L)
 #' @family numpy ops
 #' @family ops
 #' @seealso
-#' + <https:/keras.io/api/ops/numpy#array-function>
+#' + <https://keras.io/api/ops/numpy#array-function>
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/array>
 #' @tether keras.ops.array
 op_array <-
@@ -3326,7 +3326,7 @@ function (x, dtype = NULL)
 #' @family numpy ops
 #' @family ops
 #' @seealso
-#' + <https:/keras.io/api/ops/numpy#average-function>
+#' + <https://keras.io/api/ops/numpy#average-function>
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/average>
 #' @tether keras.ops.average
 op_average <-
@@ -3380,7 +3380,7 @@ function (x, axis = NULL, weights = NULL)
 #' @family numpy ops
 #' @family ops
 #' @seealso
-#' + <https:/keras.io/api/ops/numpy#bincount-function>
+#' + <https://keras.io/api/ops/numpy#bincount-function>
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/bincount>
 #' @tether keras.ops.bincount
 op_bincount <-
@@ -3414,7 +3414,7 @@ function (x, weights = NULL, minlength = 0L)
 #' @family numpy ops
 #' @family ops
 #' @seealso
-#' + <https:/keras.io/api/ops/numpy#broadcastto-function>
+#' + <https://keras.io/api/ops/numpy#broadcastto-function>
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/broadcast_to>
 #' @tether keras.ops.broadcast_to
 op_broadcast_to <-
@@ -3441,7 +3441,7 @@ function (x, shape)
 #' @family numpy ops
 #' @family ops
 #' @seealso
-#' + <https:/keras.io/api/ops/numpy#ceil-function>
+#' + <https://keras.io/api/ops/numpy#ceil-function>
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/ceil>
 #' @tether keras.ops.ceil
 op_ceil <-
@@ -3472,7 +3472,7 @@ keras$ops$ceil(x)
 #' @family numpy ops
 #' @family ops
 #' @seealso
-#' + <https:/keras.io/api/ops/numpy#clip-function>
+#' + <https://keras.io/api/ops/numpy#clip-function>
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/clip>
 #' @tether keras.ops.clip
 op_clip <-
@@ -3495,7 +3495,7 @@ keras$ops$clip(x, x_min, x_max)
 #' @family numpy ops
 #' @family ops
 #' @seealso
-#' + <https:/keras.io/api/ops/numpy#concatenate-function>
+#' + <https://keras.io/api/ops/numpy#concatenate-function>
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/concatenate>
 #' @tether keras.ops.concatenate
 op_concatenate <-
@@ -3515,7 +3515,7 @@ function (xs, axis = 1L)
 # ' @family numpy ops
 # ' @family ops
 # ' @seealso
-# ' + <https:/keras.io/api/ops/numpy#conj-function>
+# ' + <https://keras.io/api/ops/numpy#conj-function>
 # ' + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/conj>
 # ' @tether keras.ops.conj
 # op_conj <-
@@ -3539,7 +3539,7 @@ function (xs, axis = 1L)
 #' @family numpy ops
 #' @family ops
 #' @seealso
-#' + <https:/keras.io/api/ops/numpy#conjugate-function>
+#' + <https://keras.io/api/ops/numpy#conjugate-function>
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/conjugate>
 #' @tether keras.ops.conjugate
 op_conj <-
@@ -3559,7 +3559,7 @@ keras$ops$conjugate(x)
 #' @family numpy ops
 #' @family ops
 #' @seealso
-#' + <https:/keras.io/api/ops/numpy#copy-function>
+#' + <https://keras.io/api/ops/numpy#copy-function>
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/copy>
 #' @tether keras.ops.copy
 op_copy <-
@@ -3579,7 +3579,7 @@ keras$ops$copy(x)
 #' @family numpy ops
 #' @family ops
 #' @seealso
-#' + <https:/keras.io/api/ops/numpy#cos-function>
+#' + <https://keras.io/api/ops/numpy#cos-function>
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/cos>
 #' @tether keras.ops.cos
 op_cos <-
@@ -3599,7 +3599,7 @@ keras$ops$cos(x)
 #' @family numpy ops
 #' @family ops
 #' @seealso
-#' + <https:/keras.io/api/ops/numpy#cosh-function>
+#' + <https://keras.io/api/ops/numpy#cosh-function>
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/cosh>
 #' @tether keras.ops.cosh
 op_cosh <-
@@ -3636,7 +3636,7 @@ keras$ops$cosh(x)
 #' @family numpy ops
 #' @family ops
 #' @seealso
-#' + <https:/keras.io/api/ops/numpy#countnonzero-function>
+#' + <https://keras.io/api/ops/numpy#countnonzero-function>
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/count_nonzero>
 #' @tether keras.ops.count_nonzero
 op_count_nonzero <-
@@ -3695,7 +3695,7 @@ function (x, axis = NULL)
 #' @family numpy ops
 #' @family ops
 #' @seealso
-#' + <https:/keras.io/api/ops/numpy#cross-function>
+#' + <https://keras.io/api/ops/numpy#cross-function>
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/cross>
 #' @tether keras.ops.cross
 op_cross <-
@@ -3726,7 +3726,7 @@ function (x1, x2, axisa = -1L, axisb = -1L, axisc = -1L, axis = NULL)
 #' @family numpy ops
 #' @family ops
 #' @seealso
-#' + <https:/keras.io/api/ops/numpy#cumprod-function>
+#' + <https://keras.io/api/ops/numpy#cumprod-function>
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/cumprod>
 #' @tether keras.ops.cumprod
 op_cumprod <-
@@ -3756,7 +3756,7 @@ function (x, axis = NULL, dtype = NULL)
 #' @family numpy ops
 #' @family ops
 #' @seealso
-#' + <https:/keras.io/api/ops/numpy#cumsum-function>
+#' + <https://keras.io/api/ops/numpy#cumsum-function>
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/cumsum>
 #' @tether keras.ops.cumsum
 op_cumsum <-
@@ -3797,7 +3797,7 @@ function (x, axis = NULL, dtype = NULL)
 #' @family numpy ops
 #' @family ops
 #' @seealso
-#' + <https:/keras.io/api/ops/numpy#diag-function>
+#' + <https://keras.io/api/ops/numpy#diag-function>
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/diag>
 #' @tether keras.ops.diag
 op_diag <-
@@ -3858,7 +3858,7 @@ function (x, k = 0L)
 #' @family numpy ops
 #' @family ops
 #' @seealso
-#' + <https:/keras.io/api/ops/numpy#diagonal-function>
+#' + <https://keras.io/api/ops/numpy#diagonal-function>
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/diagonal>
 #' @tether keras.ops.diagonal
 op_diagonal <-
@@ -3941,7 +3941,7 @@ function (a, n = 1L, axis = -1L)
 #' @family numpy ops
 #' @family ops
 #' @seealso
-#' + <https:/keras.io/api/ops/numpy#digitize-function>
+#' + <https://keras.io/api/ops/numpy#digitize-function>
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/digitize>
 #' @tether keras.ops.digitize
 op_digitize <-
@@ -3974,7 +3974,7 @@ function (x, bins)
 #' @family numpy ops
 #' @family ops
 #' @seealso
-#' + <https:/keras.io/api/ops/numpy#divide-function>
+#' + <https://keras.io/api/ops/numpy#divide-function>
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/divide>
 #' @tether keras.ops.divide
 op_divide <-
@@ -4011,7 +4011,7 @@ keras$ops$divide(x1, x2)
 #' @family numpy ops
 #' @family ops
 #' @seealso
-#' + <https:/keras.io/api/ops/numpy#dot-function>
+#' + <https://keras.io/api/ops/numpy#dot-function>
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/dot>
 #' @tether keras.ops.dot
 op_dot <-
@@ -4093,7 +4093,7 @@ keras$ops$dot(x1, x2)
 #' @family numpy ops
 #' @family ops
 #' @seealso
-#' + <https:/keras.io/api/ops/numpy#einsum-function>
+#' + <https://keras.io/api/ops/numpy#einsum-function>
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/einsum>
 #' @tether keras.ops.einsum
 op_einsum <-
@@ -4116,7 +4116,7 @@ keras$ops$einsum(subscripts, ...)
 #' @family numpy ops
 #' @family ops
 #' @seealso
-#' + <https:/keras.io/api/ops/numpy#empty-function>
+#' + <https://keras.io/api/ops/numpy#empty-function>
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/empty>
 #' @tether keras.ops.empty
 op_empty <-
@@ -4142,7 +4142,7 @@ function (shape, dtype = NULL)
 #' @family numpy ops
 #' @family ops
 #' @seealso
-#' + <https:/keras.io/api/ops/numpy#equal-function>
+#' + <https://keras.io/api/ops/numpy#equal-function>
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/equal>
 #' @tether keras.ops.equal
 op_equal <-
@@ -4162,7 +4162,7 @@ keras$ops$equal(x1, x2)
 #' @family numpy ops
 #' @family ops
 #' @seealso
-#' + <https:/keras.io/api/ops/numpy#exp-function>
+#' + <https://keras.io/api/ops/numpy#exp-function>
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/exp>
 #' @tether keras.ops.exp
 op_exp <-
@@ -4189,7 +4189,7 @@ keras$ops$exp(x)
 #' @family numpy ops
 #' @family ops
 #' @seealso
-#' + <https:/keras.io/api/ops/numpy#expanddims-function>
+#' + <https://keras.io/api/ops/numpy#expanddims-function>
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/expand_dims>
 #' @tether keras.ops.expand_dims
 op_expand_dims <-
@@ -4212,7 +4212,7 @@ function (x, axis)
 #' @family numpy ops
 #' @family ops
 #' @seealso
-#' + <https:/keras.io/api/ops/numpy#expm1-function>
+#' + <https://keras.io/api/ops/numpy#expm1-function>
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/expm1>
 #' @tether keras.ops.expm1
 op_expm1 <-
@@ -4243,7 +4243,7 @@ keras$ops$expm1(x)
 #' @family numpy ops
 #' @family ops
 #' @seealso
-#' + <https:/keras.io/api/ops/numpy#eye-function>
+#' + <https://keras.io/api/ops/numpy#eye-function>
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/eye>
 #' @tether keras.ops.eye
 op_eye <-
@@ -4273,7 +4273,7 @@ function (N, M = NULL, k = 0L, dtype = NULL)
 #' @family numpy ops
 #' @family ops
 #' @seealso
-#' + <https:/keras.io/api/ops/numpy#flip-function>
+#' + <https://keras.io/api/ops/numpy#flip-function>
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/flip>
 #' @tether keras.ops.flip
 op_flip <-
@@ -4299,7 +4299,7 @@ function (x, axis = NULL)
 #' @family numpy ops
 #' @family ops
 #' @seealso
-#' + <https:/keras.io/api/ops/numpy#floor-function>
+#' + <https://keras.io/api/ops/numpy#floor-function>
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/floor>
 #' @tether keras.ops.floor
 op_floor <-
@@ -4347,7 +4347,7 @@ keras$ops$floor_divide(x1, x2)
 #' @family numpy ops
 #' @family ops
 #' @seealso
-#' + <https:/keras.io/api/ops/numpy#full-function>
+#' + <https://keras.io/api/ops/numpy#full-function>
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/full>
 #' @tether keras.ops.full
 op_full <-
@@ -4376,7 +4376,7 @@ function (shape, fill_value, dtype = NULL)
 #' @family numpy ops
 #' @family ops
 #' @seealso
-#' + <https:/keras.io/api/ops/numpy#fulllike-function>
+#' + <https://keras.io/api/ops/numpy#fulllike-function>
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/full_like>
 #' @tether keras.ops.full_like
 op_full_like <-
@@ -4396,7 +4396,7 @@ keras$ops$full_like(x, fill_value, dtype)
 #' @family numpy ops
 #' @family ops
 #' @seealso
-#' + <https:/keras.io/api/ops/numpy#getitem-function>
+#' + <https://keras.io/api/ops/numpy#getitem-function>
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/get_item>
 #' @tether keras.ops.get_item
 op_get_item <-
@@ -4419,7 +4419,7 @@ keras$ops$get_item(x, key)
 #' @family numpy ops
 #' @family ops
 #' @seealso
-#' + <https:/keras.io/api/ops/numpy#greater-function>
+#' + <https://keras.io/api/ops/numpy#greater-function>
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/greater>
 #' @tether keras.ops.greater
 op_greater <-
@@ -4442,7 +4442,7 @@ keras$ops$greater(x1, x2)
 #' @family numpy ops
 #' @family ops
 #' @seealso
-#' + <https:/keras.io/api/ops/numpy#greaterequal-function>
+#' + <https://keras.io/api/ops/numpy#greaterequal-function>
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/greater_equal>
 #' @tether keras.ops.greater_equal
 op_greater_equal <-
@@ -4466,7 +4466,7 @@ keras$ops$greater_equal(x1, x2)
 #' @family numpy ops
 #' @family ops
 #' @seealso
-#' + <https:/keras.io/api/ops/numpy#hstack-function>
+#' + <https://keras.io/api/ops/numpy#hstack-function>
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/hstack>
 #' @tether keras.ops.hstack
 op_hstack <-
@@ -4493,7 +4493,7 @@ keras$ops$hstack(xs)
 #' @family numpy ops
 #' @family ops
 #' @seealso
-#' + <https:/keras.io/api/ops/numpy#identity-function>
+#' + <https://keras.io/api/ops/numpy#identity-function>
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/identity>
 #' @tether keras.ops.identity
 op_identity <-
@@ -4513,7 +4513,7 @@ keras$ops$identity(n, dtype)
 #' @family numpy ops
 #' @family ops
 #' @seealso
-#' + <https:/keras.io/api/ops/numpy#imag-function>
+#' + <https://keras.io/api/ops/numpy#imag-function>
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/imag>
 #' @tether keras.ops.imag
 op_imag <-
@@ -4536,7 +4536,7 @@ keras$ops$imag(x)
 #' @family numpy ops
 #' @family ops
 #' @seealso
-#' + <https:/keras.io/api/ops/numpy#isclose-function>
+#' + <https://keras.io/api/ops/numpy#isclose-function>
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/isclose>
 #' @tether keras.ops.isclose
 op_isclose <-
@@ -4561,7 +4561,7 @@ keras$ops$isclose(x1, x2)
 #' @family numpy ops
 #' @family ops
 #' @seealso
-#' + <https:/keras.io/api/ops/numpy#isfinite-function>
+#' + <https://keras.io/api/ops/numpy#isfinite-function>
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/isfinite>
 #' @tether keras.ops.isfinite
 op_isfinite <-
@@ -4581,7 +4581,7 @@ keras$ops$isfinite(x)
 #' @family numpy ops
 #' @family ops
 #' @seealso
-#' + <https:/keras.io/api/ops/numpy#isinf-function>
+#' + <https://keras.io/api/ops/numpy#isinf-function>
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/isinf>
 #' @tether keras.ops.isinf
 op_isinf <-
@@ -4601,7 +4601,7 @@ keras$ops$isinf(x)
 #' @family numpy ops
 #' @family ops
 #' @seealso
-#' + <https:/keras.io/api/ops/numpy#isnan-function>
+#' + <https://keras.io/api/ops/numpy#isnan-function>
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/isnan>
 #' @tether keras.ops.isnan
 op_isnan <-
@@ -4624,7 +4624,7 @@ keras$ops$isnan(x)
 #' @family numpy ops
 #' @family ops
 #' @seealso
-#' + <https:/keras.io/api/ops/numpy#less-function>
+#' + <https://keras.io/api/ops/numpy#less-function>
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/less>
 #' @tether keras.ops.less
 op_less <-
@@ -4647,7 +4647,7 @@ keras$ops$less(x1, x2)
 #' @family numpy ops
 #' @family ops
 #' @seealso
-#' + <https:/keras.io/api/ops/numpy#lessequal-function>
+#' + <https://keras.io/api/ops/numpy#lessequal-function>
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/less_equal>
 #' @tether keras.ops.less_equal
 op_less_equal <-
@@ -4702,7 +4702,7 @@ keras$ops$less_equal(x1, x2)
 #' @family numpy ops
 #' @family ops
 #' @seealso
-#' + <https:/keras.io/api/ops/numpy#linspace-function>
+#' + <https://keras.io/api/ops/numpy#linspace-function>
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/linspace>
 #' @tether keras.ops.linspace
 op_linspace <-
@@ -4726,7 +4726,7 @@ function (start, stop, num = 50L, endpoint = TRUE, retstep = FALSE,
 #' @family numpy ops
 #' @family ops
 #' @seealso
-#' + <https:/keras.io/api/ops/numpy#log-function>
+#' + <https://keras.io/api/ops/numpy#log-function>
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/log>
 #' @tether keras.ops.log
 op_log <-
@@ -4746,7 +4746,7 @@ keras$ops$log(x)
 #' @family numpy ops
 #' @family ops
 #' @seealso
-#' + <https:/keras.io/api/ops/numpy#log10-function>
+#' + <https://keras.io/api/ops/numpy#log10-function>
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/log10>
 #' @tether keras.ops.log10
 op_log10 <-
@@ -4769,7 +4769,7 @@ keras$ops$log10(x)
 #' @family numpy ops
 #' @family ops
 #' @seealso
-#' + <https:/keras.io/api/ops/numpy#log1p-function>
+#' + <https://keras.io/api/ops/numpy#log1p-function>
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/log1p>
 #' @tether keras.ops.log1p
 op_log1p <-
@@ -4789,7 +4789,7 @@ keras$ops$log1p(x)
 #' @family numpy ops
 #' @family ops
 #' @seealso
-#' + <https:/keras.io/api/ops/numpy#log2-function>
+#' + <https://keras.io/api/ops/numpy#log2-function>
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/log2>
 #' @tether keras.ops.log2
 op_log2 <-
@@ -4816,7 +4816,7 @@ keras$ops$log2(x)
 #' @family numpy ops
 #' @family ops
 #' @seealso
-#' + <https:/keras.io/api/ops/numpy#logaddexp-function>
+#' + <https://keras.io/api/ops/numpy#logaddexp-function>
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/logaddexp>
 #' @tether keras.ops.logaddexp
 op_logaddexp <-
@@ -4842,7 +4842,7 @@ keras$ops$logaddexp(x1, x2)
 #' @family numpy ops
 #' @family ops
 #' @seealso
-#' + <https:/keras.io/api/ops/numpy#logicaland-function>
+#' + <https://keras.io/api/ops/numpy#logicaland-function>
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/logical_and>
 #' @tether keras.ops.logical_and
 op_logical_and <-
@@ -4865,7 +4865,7 @@ keras$ops$logical_and(x1, x2)
 #' @family numpy ops
 #' @family ops
 #' @seealso
-#' + <https:/keras.io/api/ops/numpy#logicalnot-function>
+#' + <https://keras.io/api/ops/numpy#logicalnot-function>
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/logical_not>
 #' @tether keras.ops.logical_not
 op_logical_not <-
@@ -4891,7 +4891,7 @@ keras$ops$logical_not(x)
 #' @family numpy ops
 #' @family ops
 #' @seealso
-#' + <https:/keras.io/api/ops/numpy#logicalor-function>
+#' + <https://keras.io/api/ops/numpy#logicalor-function>
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/logical_or>
 #' @tether keras.ops.logical_or
 op_logical_or <-
@@ -4963,7 +4963,7 @@ keras$ops$logical_xor(x1, x2)
 #' @family numpy ops
 #' @family ops
 #' @seealso
-#' + <https:/keras.io/api/ops/numpy#logspace-function>
+#' + <https://keras.io/api/ops/numpy#logspace-function>
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/logspace>
 #' @tether keras.ops.logspace
 op_logspace <-
@@ -5001,7 +5001,7 @@ function (start, stop, num = 50L, endpoint = TRUE, base = 10L,
 #' @family numpy ops
 #' @family ops
 #' @seealso
-#' + <https:/keras.io/api/ops/numpy#matmul-function>
+#' + <https://keras.io/api/ops/numpy#matmul-function>
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/matmul>
 #' @tether keras.ops.matmul
 op_matmul <-
@@ -5032,7 +5032,7 @@ keras$ops$matmul(x1, x2)
 #' @family numpy ops
 #' @family ops
 #' @seealso
-#' + <https:/keras.io/api/ops/numpy#max-function>
+#' + <https://keras.io/api/ops/numpy#max-function>
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/max>
 #' @tether keras.ops.max
 op_max <-
@@ -5058,7 +5058,7 @@ function (x, axis = NULL, keepdims = FALSE, initial = NULL)
 #' @family numpy ops
 #' @family ops
 #' @seealso
-#' + <https:/keras.io/api/ops/numpy#maximum-function>
+#' + <https://keras.io/api/ops/numpy#maximum-function>
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/maximum>
 #' @tether keras.ops.maximum
 op_maximum <-
@@ -5086,7 +5086,7 @@ keras$ops$maximum(x1, x2)
 #' @family numpy ops
 #' @family ops
 #' @seealso
-#' + <https:/keras.io/api/ops/numpy#mean-function>
+#' + <https://keras.io/api/ops/numpy#mean-function>
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/mean>
 #' @tether keras.ops.mean
 op_mean <-
@@ -5168,7 +5168,7 @@ function (x, axis = NULL, keepdims = FALSE)
 #' @family numpy ops
 #' @family ops
 #' @seealso
-#' + <https:/keras.io/api/ops/numpy#meshgrid-function>
+#' + <https://keras.io/api/ops/numpy#meshgrid-function>
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/meshgrid>
 #'
 #' @tether keras.ops.meshgrid
@@ -5207,7 +5207,7 @@ function (..., indexing = "xy")
 #' @family numpy ops
 #' @family ops
 #' @seealso
-#' + <https:/keras.io/api/ops/numpy#min-function>
+#' + <https://keras.io/api/ops/numpy#min-function>
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/min>
 #' @tether keras.ops.min
 op_min <-
@@ -5233,7 +5233,7 @@ function (x, axis = NULL, keepdims = FALSE, initial = NULL)
 #' @family numpy ops
 #' @family ops
 #' @seealso
-#' + <https:/keras.io/api/ops/numpy#minimum-function>
+#' + <https://keras.io/api/ops/numpy#minimum-function>
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/minimum>
 #' @tether keras.ops.minimum
 op_minimum <-
@@ -5256,7 +5256,7 @@ keras$ops$minimum(x1, x2)
 #' @family numpy ops
 #' @family ops
 #' @seealso
-#' + <https:/keras.io/api/ops/numpy#mod-function>
+#' + <https://keras.io/api/ops/numpy#mod-function>
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/mod>
 #' @tether keras.ops.mod
 op_mod <-
@@ -5286,7 +5286,7 @@ keras$ops$mod(x1, x2)
 #' @family numpy ops
 #' @family ops
 #' @seealso
-#' + <https:/keras.io/api/ops/numpy#moveaxis-function>
+#' + <https://keras.io/api/ops/numpy#moveaxis-function>
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/moveaxis>
 #' @tether keras.ops.moveaxis
 op_moveaxis <-
@@ -5309,7 +5309,7 @@ keras$ops$moveaxis(x, source, destination)
 #' @family numpy ops
 #' @family ops
 #' @seealso
-#' + <https:/keras.io/api/ops/numpy#multiply-function>
+#' + <https://keras.io/api/ops/numpy#multiply-function>
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/multiply>
 #' @tether keras.ops.multiply
 op_multiply <-
@@ -5329,7 +5329,7 @@ keras$ops$multiply(x1, x2)
 #' @family numpy ops
 #' @family ops
 #' @seealso
-#' + <https:/keras.io/api/ops/numpy#nantonum-function>
+#' + <https://keras.io/api/ops/numpy#nantonum-function>
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/nan_to_num>
 #' @tether keras.ops.nan_to_num
 op_nan_to_num <-
@@ -5349,7 +5349,7 @@ keras$ops$nan_to_num(x)
 #' @family numpy ops
 #' @family ops
 #' @seealso
-#' + <https:/keras.io/api/ops/numpy#ndim-function>
+#' + <https://keras.io/api/ops/numpy#ndim-function>
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/ndim>
 #' @tether keras.ops.ndim
 op_ndim <-
@@ -5369,7 +5369,7 @@ keras$ops$ndim(x)
 #' @family numpy ops
 #' @family ops
 #' @seealso
-#' + <https:/keras.io/api/ops/numpy#negative-function>
+#' + <https://keras.io/api/ops/numpy#negative-function>
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/negative>
 #' @tether keras.ops.negative
 op_negative <-
@@ -5389,7 +5389,7 @@ keras$ops$negative(x)
 #' @family numpy ops
 #' @family ops
 #' @seealso
-#' + <https:/keras.io/api/ops/numpy#nonzero-function>
+#' + <https://keras.io/api/ops/numpy#nonzero-function>
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/nonzero>
 #' @tether keras.ops.nonzero
 op_nonzero <-
@@ -5412,7 +5412,7 @@ keras$ops$nonzero(x)
 #' @family numpy ops
 #' @family ops
 #' @seealso
-#' + <https:/keras.io/api/ops/numpy#notequal-function>
+#' + <https://keras.io/api/ops/numpy#notequal-function>
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/not_equal>
 #' @tether keras.ops.not_equal
 op_not_equal <-
@@ -5435,7 +5435,7 @@ keras$ops$not_equal(x1, x2)
 #' @family numpy ops
 #' @family ops
 #' @seealso
-#' + <https:/keras.io/api/ops/numpy#ones-function>
+#' + <https://keras.io/api/ops/numpy#ones-function>
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/ones>
 #' @tether keras.ops.ones
 op_ones <-
@@ -5461,7 +5461,7 @@ function (shape, dtype = NULL)
 #' @family numpy ops
 #' @family ops
 #' @seealso
-#' + <https:/keras.io/api/ops/numpy#oneslike-function>
+#' + <https://keras.io/api/ops/numpy#oneslike-function>
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/ones_like>
 #' @tether keras.ops.ones_like
 op_ones_like <-
@@ -5491,7 +5491,7 @@ keras$ops$ones_like(x, dtype)
 #' @family numpy ops
 #' @family ops
 #' @seealso
-#' + <https:/keras.io/api/ops/numpy#outer-function>
+#' + <https://keras.io/api/ops/numpy#outer-function>
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/outer>
 #' @tether keras.ops.outer
 op_outer <-
@@ -5542,7 +5542,7 @@ keras$ops$outer(x1, x2)
 #' @family numpy ops
 #' @family ops
 #' @seealso
-#' + <https:/keras.io/api/ops/numpy#pad-function>
+#' + <https://keras.io/api/ops/numpy#pad-function>
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/pad>
 #' @tether keras.ops.pad
 op_pad <-
@@ -5568,7 +5568,7 @@ function (x, pad_width, mode = "constant", constant_values = NULL)
 #' @family numpy ops
 #' @family ops
 #' @seealso
-#' + <https:/keras.io/api/ops/numpy#power-function>
+#' + <https://keras.io/api/ops/numpy#power-function>
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/power>
 #' @tether keras.ops.power
 op_power <-
@@ -5600,7 +5600,7 @@ keras$ops$power(x1, x2)
 #' @family numpy ops
 #' @family ops
 #' @seealso
-#' + <https:/keras.io/api/ops/numpy#prod-function>
+#' + <https://keras.io/api/ops/numpy#prod-function>
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/prod>
 #' @tether keras.ops.prod
 op_prod <-
@@ -5676,7 +5676,7 @@ function (x, q, axis = NULL, method = "linear", keepdims = FALSE)
 #' @family numpy ops
 #' @family ops
 #' @seealso
-#' + <https:/keras.io/api/ops/numpy#ravel-function>
+#' + <https://keras.io/api/ops/numpy#ravel-function>
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/ravel>
 #' @tether keras.ops.ravel
 op_ravel <-
@@ -5696,7 +5696,7 @@ keras$ops$ravel(x)
 #' @family numpy ops
 #' @family ops
 #' @seealso
-#' + <https:/keras.io/api/ops/numpy#real-function>
+#' + <https://keras.io/api/ops/numpy#real-function>
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/real>
 #' @tether keras.ops.real
 op_real <-
@@ -5719,7 +5719,7 @@ keras$ops$real(x)
 #' @family numpy ops
 #' @family ops
 #' @seealso
-#' + <https:/keras.io/api/ops/numpy#reciprocal-function>
+#' + <https://keras.io/api/ops/numpy#reciprocal-function>
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/reciprocal>
 #' @tether keras.ops.reciprocal
 op_reciprocal <-
@@ -5746,7 +5746,7 @@ keras$ops$reciprocal(x)
 #' @family numpy ops
 #' @family ops
 #' @seealso
-#' + <https:/keras.io/api/ops/numpy#repeat-function>
+#' + <https://keras.io/api/ops/numpy#repeat-function>
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/repeat>
 #' @tether keras.ops.repeat
 op_repeat <-
@@ -5777,7 +5777,7 @@ function (x, repeats, axis = NULL)
 #' @family numpy ops
 #' @family ops
 #' @seealso
-#' + <https:/keras.io/api/ops/numpy#reshape-function>
+#' + <https://keras.io/api/ops/numpy#reshape-function>
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/reshape>
 #' @tether keras.ops.reshape
 op_reshape <-
@@ -5811,7 +5811,7 @@ function (x, ..., new_shape = list(...))
 #' @family numpy ops
 #' @family ops
 #' @seealso
-#' + <https:/keras.io/api/ops/numpy#roll-function>
+#' + <https://keras.io/api/ops/numpy#roll-function>
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/roll>
 #' @tether keras.ops.roll
 op_roll <-
@@ -5837,7 +5837,7 @@ function (x, shift, axis = NULL)
 #' @family numpy ops
 #' @family ops
 #' @seealso
-#' + <https:/keras.io/api/ops/numpy#round-function>
+#' + <https://keras.io/api/ops/numpy#round-function>
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/round>
 #' @tether keras.ops.round
 op_round <-
@@ -5860,7 +5860,7 @@ function (x, decimals = 0L)
 #' @family numpy ops
 #' @family ops
 #' @seealso
-#' + <https:/keras.io/api/ops/numpy#sign-function>
+#' + <https://keras.io/api/ops/numpy#sign-function>
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/sign>
 #' @tether keras.ops.sign
 op_sign <-
@@ -5880,7 +5880,7 @@ keras$ops$sign(x)
 #' @family numpy ops
 #' @family ops
 #' @seealso
-#' + <https:/keras.io/api/ops/numpy#sin-function>
+#' + <https://keras.io/api/ops/numpy#sin-function>
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/sin>
 #' @tether keras.ops.sin
 op_sin <-
@@ -5900,7 +5900,7 @@ keras$ops$sin(x)
 #' @family numpy ops
 #' @family ops
 #' @seealso
-#' + <https:/keras.io/api/ops/numpy#sinh-function>
+#' + <https://keras.io/api/ops/numpy#sinh-function>
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/sinh>
 #' @tether keras.ops.sinh
 op_sinh <-
@@ -5920,7 +5920,7 @@ keras$ops$sinh(x)
 #' @family numpy ops
 #' @family ops
 #' @seealso
-#' + <https:/keras.io/api/ops/numpy#size-function>
+#' + <https://keras.io/api/ops/numpy#size-function>
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/size>
 #' @tether keras.ops.size
 op_size <-
@@ -5944,7 +5944,7 @@ keras$ops$size(x)
 #' @family numpy ops
 #' @family ops
 #' @seealso
-#' + <https:/keras.io/api/ops/numpy#sort-function>
+#' + <https://keras.io/api/ops/numpy#sort-function>
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/sort>
 #' @tether keras.ops.sort
 op_sort <-
@@ -5985,7 +5985,7 @@ function (x, axis = -1L)
 #' @family numpy ops
 #' @family ops
 #' @seealso
-#' + <https:/keras.io/api/ops/numpy#split-function>
+#' + <https://keras.io/api/ops/numpy#split-function>
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/split>
 #' @tether keras.ops.split
 op_split <-
@@ -6009,7 +6009,7 @@ function (x, indices_or_sections, axis = 1L)
 #' @family numpy ops
 #' @family ops
 #' @seealso
-#' + <https:/keras.io/api/ops/numpy#sqrt-function>
+#' + <https://keras.io/api/ops/numpy#sqrt-function>
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/sqrt>
 #' @tether keras.ops.sqrt
 op_sqrt <-
@@ -6029,7 +6029,7 @@ keras$ops$sqrt(x)
 #' @family numpy ops
 #' @family ops
 #' @seealso
-#' + <https:/keras.io/api/ops/numpy#square-function>
+#' + <https://keras.io/api/ops/numpy#square-function>
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/square>
 #' @tether keras.ops.square
 op_square <-
@@ -6053,7 +6053,7 @@ keras$ops$square(x)
 #' @family numpy ops
 #' @family ops
 #' @seealso
-#' + <https:/keras.io/api/ops/numpy#squeeze-function>
+#' + <https://keras.io/api/ops/numpy#squeeze-function>
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/squeeze>
 #' @tether keras.ops.squeeze
 op_squeeze <-
@@ -6083,7 +6083,7 @@ function (x, axis = NULL)
 #' @family numpy ops
 #' @family ops
 #' @seealso
-#' + <https:/keras.io/api/ops/numpy#stack-function>
+#' + <https://keras.io/api/ops/numpy#stack-function>
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/stack>
 #' @tether keras.ops.stack
 op_stack <-
@@ -6115,7 +6115,7 @@ function (x, axis = 1L)
 #' @family numpy ops
 #' @family ops
 #' @seealso
-#' + <https:/keras.io/api/ops/numpy#std-function>
+#' + <https://keras.io/api/ops/numpy#std-function>
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/std>
 #' @tether keras.ops.std
 op_std <-
@@ -6141,7 +6141,7 @@ function (x, axis = NULL, keepdims = FALSE)
 #' @family numpy ops
 #' @family ops
 #' @seealso
-#' + <https:/keras.io/api/ops/numpy#subtract-function>
+#' + <https://keras.io/api/ops/numpy#subtract-function>
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/subtract>
 #' @tether keras.ops.subtract
 op_subtract <-
@@ -6169,7 +6169,7 @@ keras$ops$subtract(x1, x2)
 #' @family numpy ops
 #' @family ops
 #' @seealso
-#' + <https:/keras.io/api/ops/numpy#sum-function>
+#' + <https://keras.io/api/ops/numpy#sum-function>
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/sum>
 #' @tether keras.ops.sum
 op_sum <-
@@ -6198,7 +6198,7 @@ function (x, axis = NULL, keepdims = FALSE)
 #' @family numpy ops
 #' @family ops
 #' @seealso
-#' + <https:/keras.io/api/ops/numpy#swapaxes-function>
+#' + <https://keras.io/api/ops/numpy#swapaxes-function>
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/swapaxes>
 #' @tether keras.ops.swapaxes
 op_swapaxes <-
@@ -6225,7 +6225,7 @@ keras$ops$swapaxes(x, axis1, axis2)
 #' @family numpy ops
 #' @family ops
 #' @seealso
-#' + <https:/keras.io/api/ops/numpy#take-function>
+#' + <https://keras.io/api/ops/numpy#take-function>
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/take>
 #' @tether keras.ops.take
 op_take <-
@@ -6255,7 +6255,7 @@ function (x, indices, axis = NULL)
 #' @family numpy ops
 #' @family ops
 #' @seealso
-#' + <https:/keras.io/api/ops/numpy#takealongaxis-function>
+#' + <https://keras.io/api/ops/numpy#takealongaxis-function>
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/take_along_axis>
 #' @tether keras.ops.take_along_axis
 op_take_along_axis <-
@@ -6278,7 +6278,7 @@ function (x, indices, axis = NULL)
 #' @family numpy ops
 #' @family ops
 #' @seealso
-#' + <https:/keras.io/api/ops/numpy#tan-function>
+#' + <https://keras.io/api/ops/numpy#tan-function>
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/tan>
 #' @tether keras.ops.tan
 op_tan <-
@@ -6298,7 +6298,7 @@ keras$ops$tan(x)
 #' @family numpy ops
 #' @family ops
 #' @seealso
-#' + <https:/keras.io/api/ops/nn#tanh-function>
+#' + <https://keras.io/api/ops/nn#tanh-function>
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/tanh>
 #' @tether keras.ops.tanh
 op_tanh <-
@@ -6329,7 +6329,7 @@ keras$ops$tanh(x)
 #' @family numpy ops
 #' @family ops
 #' @seealso
-#' + <https:/keras.io/api/ops/numpy#tensordot-function>
+#' + <https://keras.io/api/ops/numpy#tensordot-function>
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/tensordot>
 #' @tether keras.ops.tensordot
 op_tensordot <-
@@ -6364,7 +6364,7 @@ function (x1, x2, axes = 3L)
 #' @family numpy ops
 #' @family ops
 #' @seealso
-#' + <https:/keras.io/api/ops/numpy#tile-function>
+#' + <https://keras.io/api/ops/numpy#tile-function>
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/tile>
 #' @tether keras.ops.tile
 op_tile <-
@@ -6409,7 +6409,7 @@ keras$ops$tile(x, repeats)
 #' @family numpy ops
 #' @family ops
 #' @seealso
-#' + <https:/keras.io/api/ops/numpy#trace-function>
+#' + <https://keras.io/api/ops/numpy#trace-function>
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/trace>
 #' @tether keras.ops.trace
 op_trace <-
@@ -6437,7 +6437,7 @@ function (x, offset = 0L, axis1 = 0L, axis2 = 1L)
 #' @family numpy ops
 #' @family ops
 #' @seealso
-#' + <https:/keras.io/api/ops/numpy#transpose-function>
+#' + <https://keras.io/api/ops/numpy#transpose-function>
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/transpose>
 #' @tether keras.ops.transpose
 op_transpose <-
@@ -6472,7 +6472,7 @@ function (x, axes = NULL)
 #' @family numpy ops
 #' @family ops
 #' @seealso
-#' + <https:/keras.io/api/ops/numpy#tri-function>
+#' + <https://keras.io/api/ops/numpy#tri-function>
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/tri>
 #' @tether keras.ops.tri
 op_tri <-
@@ -6503,7 +6503,7 @@ function (N, M = NULL, k = 0L, dtype = NULL)
 #' @family numpy ops
 #' @family ops
 #' @seealso
-#' + <https:/keras.io/api/ops/numpy#tril-function>
+#' + <https://keras.io/api/ops/numpy#tril-function>
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/tril>
 #' @tether keras.ops.tril
 op_tril <-
@@ -6534,7 +6534,7 @@ function (x, k = 0L)
 #' @family numpy ops
 #' @family ops
 #' @seealso
-#' + <https:/keras.io/api/ops/numpy#triu-function>
+#' + <https://keras.io/api/ops/numpy#triu-function>
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/triu>
 #' @tether keras.ops.triu
 op_triu <-
@@ -6557,7 +6557,7 @@ function (x, k = 0L)
 # ' @family numpy ops
 # ' @family ops
 # ' @seealso
-# ' + <https:/keras.io/api/ops/numpy#truedivide-function>
+# ' + <https://keras.io/api/ops/numpy#truedivide-function>
 # ' + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/true_divide>
 # ' @tether keras.ops.true_divide
 # op_true_divide <-
@@ -6585,7 +6585,7 @@ function (x, k = 0L)
 #' @family numpy ops
 #' @family ops
 #' @seealso
-#' + <https:/keras.io/api/ops/numpy#var-function>
+#' + <https://keras.io/api/ops/numpy#var-function>
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/var>
 #' @tether keras.ops.var
 op_var <-
@@ -6618,7 +6618,7 @@ function (x, axis = NULL, keepdims = FALSE)
 #' @family numpy ops
 #' @family ops
 #' @seealso
-#' + <https:/keras.io/api/ops/numpy#vdot-function>
+#' + <https://keras.io/api/ops/numpy#vdot-function>
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/vdot>
 #' @tether keras.ops.vdot
 op_vdot <-
@@ -6638,7 +6638,7 @@ keras$ops$vdot(x1, x2)
 #' @family numpy ops
 #' @family ops
 #' @seealso
-#' + <https:/keras.io/api/ops/numpy#vstack-function>
+#' + <https://keras.io/api/ops/numpy#vstack-function>
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/vstack>
 #' @tether keras.ops.vstack
 op_vstack <-
@@ -6665,7 +6665,7 @@ keras$ops$vstack(xs)
 #' @family numpy ops
 #' @family ops
 #' @seealso
-#' + <https:/keras.io/api/ops/numpy#where-function>
+#' + <https://keras.io/api/ops/numpy#where-function>
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/where>
 #' @tether keras.ops.where
 op_where <-
@@ -6688,7 +6688,7 @@ keras$ops$where(condition, x1, x2)
 #' @family numpy ops
 #' @family ops
 #' @seealso
-#' + <https:/keras.io/api/ops/numpy#zeros-function>
+#' + <https://keras.io/api/ops/numpy#zeros-function>
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/zeros>
 #' @tether keras.ops.zeros
 op_zeros <-
@@ -6714,7 +6714,7 @@ function (shape, dtype = NULL)
 #' @family numpy ops
 #' @family ops
 #' @seealso
-#' + <https:/keras.io/api/ops/numpy#zeroslike-function>
+#' + <https://keras.io/api/ops/numpy#zeroslike-function>
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/zeros_like>
 #' @tether keras.ops.zeros_like
 op_zeros_like <-

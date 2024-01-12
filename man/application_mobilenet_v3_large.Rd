@@ -146,7 +146,7 @@ otherwise.
 
 \seealso{
 \itemize{
-\item \url{https:/keras.io/api/applications/mobilenet#mobilenetv3large-function}
+\item \url{https://keras.io/api/applications/mobilenet#mobilenetv3large-function}
 \item \url{https://www.tensorflow.org/api_docs/python/tf/keras/applications/MobileNetV3Large}
 }
 }

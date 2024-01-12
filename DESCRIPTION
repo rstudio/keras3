@@ -23,7 +23,7 @@ Description: Interface to 'Keras' <https://keras.io>, a high-level neural
   combinations of the two), and runs seamlessly on both 'CPU' and 'GPU' devices.
 Encoding: UTF-8
 License: MIT + file LICENSE
-URL: https:/keras.posit.co/
+URL: https://keras.posit.co/
 BugReports: https://github.com/rstudio/keras/issues
 Depends:
     R (>= 4.2)

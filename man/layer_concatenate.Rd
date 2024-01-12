@@ -49,7 +49,7 @@ y <- layer_concatenate(x1, x2)
 
 \seealso{
 \itemize{
-\item \url{https:/keras.io/api/layers/merging_layers/concatenate#concatenate-class}
+\item \url{https://keras.io/api/layers/merging_layers/concatenate#concatenate-class}
 \item \url{https://www.tensorflow.org/api_docs/python/tf/keras/layers/Concatenate}
 }
 

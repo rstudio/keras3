@@ -48,7 +48,7 @@ loss <- loss_squared_hinge(y_true, y_pred)
 
 \seealso{
 \itemize{
-\item \url{https:/keras.io/api/losses/hinge_losses#squaredhinge-class}
+\item \url{https://keras.io/api/losses/hinge_losses#squaredhinge-class}
 \item \url{https://www.tensorflow.org/api_docs/python/tf/keras/losses/SquaredHinge}
 }
 

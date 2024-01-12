@@ -95,7 +95,7 @@ float tensors of pixels with values in the \verb{[-1, 1]} range.
 
 \seealso{
 \itemize{
-\item \url{https:/keras.io/api/applications/efficientnet_v2#efficientnetv2b3-function}
+\item \url{https://keras.io/api/applications/efficientnet_v2#efficientnetv2b3-function}
 \item \url{https://www.tensorflow.org/api_docs/python/tf/keras/applications/EfficientNetV2B3}
 }
 }

@@ -365,7 +365,7 @@ vocabulary either directly or via \code{adapt()} before calling
 
 \seealso{
 \itemize{
-\item \url{https:/keras.io/api/layers/preprocessing_layers/categorical/string_lookup#stringlookup-class}
+\item \url{https://keras.io/api/layers/preprocessing_layers/categorical/string_lookup#stringlookup-class}
 \item \url{https://www.tensorflow.org/api_docs/python/tf/keras/layers/StringLookup}
 }
 

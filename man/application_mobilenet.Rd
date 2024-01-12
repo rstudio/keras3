@@ -108,7 +108,7 @@ on your inputs before passing them to the model.
 
 \seealso{
 \itemize{
-\item \url{https:/keras.io/api/applications/mobilenet#mobilenet-function}
+\item \url{https://keras.io/api/applications/mobilenet#mobilenet-function}
 \item \url{https://www.tensorflow.org/api_docs/python/tf/keras/applications/MobileNet}
 }
 }

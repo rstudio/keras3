@@ -206,7 +206,7 @@ function (data)
 #' @family dataset utils
 #' @family utils
 #' @seealso
-#' + <https:/keras.io/api/data_loading/audio#audiodatasetfromdirectory-function>
+#' + <https://keras.io/api/data_loading/audio#audiodatasetfromdirectory-function>
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/utils/audio_dataset_from_directory>
 #' @tether keras.utils.audio_dataset_from_directory
 audio_dataset_from_directory <-
@@ -266,7 +266,7 @@ function (directory, labels = "inferred", label_mode = "int",
 #' @family dataset utils
 #' @family utils
 #' @seealso
-#' + <https:/keras.io/api/utils/python_utils#splitdataset-function>
+#' + <https://keras.io/api/utils/python_utils#splitdataset-function>
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/utils/split_dataset>
 #'
 #' @tether keras.utils.split_dataset
@@ -430,7 +430,7 @@ function (dataset, left_size = NULL, right_size = NULL, shuffle = FALSE,
 #' @family utils
 #' @family preprocessing
 #' @seealso
-#' + <https:/keras.io/api/data_loading/image#imagedatasetfromdirectory-function>
+#' + <https://keras.io/api/data_loading/image#imagedatasetfromdirectory-function>
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/utils/image_dataset_from_directory>
 #' @tether keras.utils.image_dataset_from_directory
 image_dataset_from_directory <-
@@ -558,7 +558,7 @@ function (directory, labels = "inferred", label_mode = "int",
 #' @family utils
 #' @family preprocessing
 #' @seealso
-#' + <https:/keras.io/api/data_loading/text#textdatasetfromdirectory-function>
+#' + <https://keras.io/api/data_loading/text#textdatasetfromdirectory-function>
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/utils/text_dataset_from_directory>
 #' @tether keras.utils.text_dataset_from_directory
 text_dataset_from_directory <-
@@ -701,7 +701,7 @@ function (directory, labels = "inferred", label_mode = "int",
 #' @family utils
 #' @family preprocessing
 #' @seealso
-#' + <https:/keras.io/api/data_loading/timeseries#timeseriesdatasetfromarray-function>
+#' + <https://keras.io/api/data_loading/timeseries#timeseriesdatasetfromarray-function>
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/utils/timeseries_dataset_from_array>
 #'
 #' @tether keras.utils.timeseries_dataset_from_array

@@ -42,7 +42,7 @@ op_segment_max(data, segment_ids, num_segments)
 
 \seealso{
 \itemize{
-\item \url{https:/keras.io/api/ops/core#segmentmax-function}
+\item \url{https://keras.io/api/ops/core#segmentmax-function}
 \item \url{https://www.tensorflow.org/api_docs/python/tf/keras/ops/segment_max}
 }
 
