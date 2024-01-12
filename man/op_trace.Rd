@@ -37,7 +37,6 @@ and \code{axis2} removed.
 \seealso{
 \itemize{
 \item \url{https://keras.io/api/ops/numpy#trace-function}
-\item \url{https://www.tensorflow.org/api_docs/python/tf/keras/ops/trace}
 }
 
 Other numpy ops: 

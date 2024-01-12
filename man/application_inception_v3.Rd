@@ -68,7 +68,7 @@ Instantiates the Inception v3 architecture.
 }
 \section{Reference}{
 \itemize{
-\item \href{http://arxiv.org/abs/1512.00567}{Rethinking the Inception Architecture for Computer Vision} (CVPR 2016)
+\item \href{https://arxiv.org/abs/1512.00567}{Rethinking the Inception Architecture for Computer Vision} (CVPR 2016)
 }
 
 This function returns a Keras image classification model,
@@ -92,6 +92,5 @@ before passing them to the model.
 \seealso{
 \itemize{
 \item \url{https://keras.io/api/applications/inceptionv3#inceptionv3-function}
-\item \url{https://www.tensorflow.org/api_docs/python/tf/keras/applications/InceptionV3}
 }
 }

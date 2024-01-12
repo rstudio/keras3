@@ -198,15 +198,15 @@ model |> evaluate(x_test, y_test)
 ```
 
 ```
-## 313/313 - 1s - 2ms/step - accuracy: 0.9815 - loss: 0.0933
+## 313/313 - 1s - 3ms/step - accuracy: 0.9820 - loss: 0.0944
 ```
 
 ```
 ## $accuracy
-## [1] 0.9815
+## [1] 0.982
 ##
 ## $loss
-## [1] 0.09328237
+## [1] 0.09438626
 ```
 
 Generate predictions on new data:
@@ -217,7 +217,7 @@ probs <- model |> predict(x_test)
 ```
 
 ```
-## 313/313 - 0s - 1ms/step
+## 313/313 - 0s - 2ms/step
 ```
 
 ```r
@@ -235,7 +235,7 @@ Keras provides a vocabulary for building deep learning models that is simple, el
 
 ### Deep Learning with R Book
 
-If you want a more comprehensive introduction to both Keras and the concepts and practice of deep learning, we recommend the [Deep Learning with R, 2nd Edition](http://rstd.io/dlwr-2e) book from Manning. This book is a collaboration between François Chollet, the creator of (Python) Keras, J.J. Allaire, who wrote the original R interface to Keras, and Tomasz Kalinowski, the maintainer of the R interface to Keras.
+If you want a more comprehensive introduction to both Keras and the concepts and practice of deep learning, we recommend the [Deep Learning with R, 2nd Edition](https://rstd.io/dlwr-2e) book from Manning. This book is a collaboration between François Chollet, the creator of (Python) Keras, J.J. Allaire, who wrote the original R interface to Keras, and Tomasz Kalinowski, the maintainer of the R interface to Keras.
 
 The book presumes no significant knowledge of machine learning and deep learning, and goes all the way from basic theory to advanced practical applications, all using the R interface to Keras.
 

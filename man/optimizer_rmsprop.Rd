@@ -109,14 +109,13 @@ gradients, and uses that average to estimate the variance.
 
 \section{Reference}{
 \itemize{
-\item \href{http://www.cs.toronto.edu/~tijmen/csc321/slides/lecture_slides_lec6.pdf}{Hinton, 2012}
+\item \href{https://www.cs.toronto.edu/~tijmen/csc321/slides/lecture_slides_lec6.pdf}{Hinton, 2012}
 }
 }
 
 \seealso{
 \itemize{
 \item \url{https://keras.io/api/optimizers/rmsprop#rmsprop-class}
-\item \url{https://www.tensorflow.org/api_docs/python/tf/keras/optimizers/RMSprop}
 }
 
 Other optimizers: 

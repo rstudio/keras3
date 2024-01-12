@@ -70,10 +70,6 @@ Usage with \code{compile()} API:
 }
 
 \seealso{
-\itemize{
-\item \url{https://www.tensorflow.org/api_docs/python/tf/keras/metrics/RecallAtPrecision}
-}
-
 Other confusion metrics: 
 \code{\link{metric_auc}()},
 \code{\link{metric_false_negatives}()},

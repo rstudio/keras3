@@ -12,7 +12,6 @@ Callback that terminates training when a NaN loss is encountered.
 \seealso{
 \itemize{
 \item \url{https://keras.io/api/callbacks/terminate_on_nan#terminateonnan-class}
-\item \url{https://www.tensorflow.org/api_docs/python/tf/keras/callbacks/TerminateOnNaN}
 }
 
 Other callbacks: 

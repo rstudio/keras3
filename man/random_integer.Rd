@@ -37,10 +37,6 @@ while the upper bound \code{maxval} is excluded.
 \code{dtype} must be an integer type.
 }
 \seealso{
-\itemize{
-\item \url{https://www.tensorflow.org/api_docs/python/tf/keras/random/randint}
-}
-
 Other random: 
 \code{\link{random_categorical}()},
 \code{\link{random_dropout}()},

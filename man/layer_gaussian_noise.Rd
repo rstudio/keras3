@@ -34,7 +34,6 @@ training mode (adding noise) or in inference mode (doing nothing).
 \seealso{
 \itemize{
 \item \url{https://keras.io/api/layers/regularization_layers/gaussian_noise#gaussiannoise-class}
-\item \url{https://www.tensorflow.org/api_docs/python/tf/keras/layers/GaussianNoise}
 }
 
 Other regularization layers: 

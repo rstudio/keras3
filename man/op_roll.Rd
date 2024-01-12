@@ -24,7 +24,6 @@ Elements that roll beyond the last position are re-introduced at the first.
 \seealso{
 \itemize{
 \item \url{https://keras.io/api/ops/numpy#roll-function}
-\item \url{https://www.tensorflow.org/api_docs/python/tf/keras/ops/roll}
 }
 
 Other numpy ops: 

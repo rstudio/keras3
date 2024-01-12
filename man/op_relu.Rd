@@ -33,7 +33,6 @@ plot(x, op_relu(x))
 \seealso{
 \itemize{
 \item \url{https://keras.io/api/ops/nn#relu-function}
-\item \url{https://www.tensorflow.org/api_docs/python/tf/keras/ops/relu}
 }
 
 Other nn ops: 

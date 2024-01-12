@@ -382,7 +382,6 @@ either directly or via \code{adapt()} before calling \code{get_vocabulary()}.
 \seealso{
 \itemize{
 \item \url{https://keras.io/api/layers/preprocessing_layers/categorical/integer_lookup#integerlookup-class}
-\item \url{https://www.tensorflow.org/api_docs/python/tf/keras/layers/IntegerLookup}
 }
 
 Other preprocessing layers: 

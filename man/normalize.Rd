@@ -23,7 +23,6 @@ If it's a backend tensor, a backend tensor will be returned.
 \seealso{
 \itemize{
 \item \url{https://keras.io/api/utils/python_utils#normalize-function}
-\item \url{https://www.tensorflow.org/api_docs/python/tf/keras/utils/normalize}
 }
 
 Other numerical utils: 

@@ -25,10 +25,6 @@ of \code{\link[=random_seed_generator]{random_seed_generator()}}.}
 Shuffle the elements of a tensor uniformly at random along an axis.
 }
 \seealso{
-\itemize{
-\item \url{https://www.tensorflow.org/api_docs/python/tf/keras/random/shuffle}
-}
-
 Other random: 
 \code{\link{random_categorical}()},
 \code{\link{random_dropout}()},

@@ -23,7 +23,6 @@ f(x) = x for x >= 0
 \seealso{
 \itemize{
 \item \url{https://keras.io/api/layers/activation_layers/elu#elu-class}
-\item \url{https://www.tensorflow.org/api_docs/python/tf/keras/layers/ELU}
 }
 
 Other activation layers: 

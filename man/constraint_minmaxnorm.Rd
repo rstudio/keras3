@@ -39,7 +39,6 @@ to have the norm between a lower bound and an upper bound.
 \seealso{
 \itemize{
 \item \url{https://keras.io/api/layers/constraints#minmaxnorm-class}
-\item \url{https://www.tensorflow.org/api_docs/python/tf/keras/constraints/MinMaxNorm}
 }
 
 Other constraints: 

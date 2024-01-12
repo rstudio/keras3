@@ -37,7 +37,6 @@ keras3::config_set_image_data_format('channels_last')
 \seealso{
 \itemize{
 \item \url{https://keras.io/api/utils/config_utils#setimagedataformat-function}
-\item \url{https://www.tensorflow.org/api_docs/python/tf/keras/config/set_image_data_format}
 }
 
 Other config backend: 

@@ -101,6 +101,5 @@ investigate the instantiated model.
 \seealso{
 \itemize{
 \item \url{https://keras.io/api/applications/convnext#convnextbase-function}
-\item \url{https://www.tensorflow.org/api_docs/python/tf/keras/applications/ConvNeXtBase}
 }
 }

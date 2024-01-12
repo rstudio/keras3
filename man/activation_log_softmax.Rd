@@ -19,7 +19,6 @@ is applied along.
 \seealso{
 \itemize{
 \item \url{https://keras.io/api/layers/activations#logsoftmax-function}
-\item \url{https://www.tensorflow.org/api_docs/python/tf/keras/activations/log_softmax}
 }
 
 Other activations: 

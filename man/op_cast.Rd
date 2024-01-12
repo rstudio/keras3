@@ -34,7 +34,6 @@ Cast a tensor to the desired dtype.
 \seealso{
 \itemize{
 \item \url{https://keras.io/api/ops/core#cast-function}
-\item \url{https://www.tensorflow.org/api_docs/python/tf/keras/ops/cast}
 }
 
 Other core ops: 

@@ -61,7 +61,6 @@ op_istft(op_stft(x, 1, 1, 1), 1, 1, 1)
 \seealso{
 \itemize{
 \item \url{https://keras.io/api/ops/fft#istft-function}
-\item \url{https://www.tensorflow.org/api_docs/python/tf/keras/ops/istft}
 }
 
 Other math ops: 

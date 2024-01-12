@@ -25,10 +25,6 @@ layer <- layer_dense(units = 3, kernel_initializer = initializer)
 }
 
 \seealso{
-\itemize{
-\item \url{https://www.tensorflow.org/api_docs/python/tf/keras/initializers/IdentityInitializer}
-}
-
 Other constant initializers: 
 \code{\link{initializer_constant}()},
 \code{\link{initializer_ones}()},

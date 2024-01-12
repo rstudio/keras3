@@ -50,10 +50,6 @@ out(op_ones(10), training = TRUE)
 }
 
 \seealso{
-\itemize{
-\item \url{https://www.tensorflow.org/api_docs/python/tf/keras/random/SeedGenerator}
-}
-
 Other random: 
 \code{\link{random_categorical}()},
 \code{\link{random_dropout}()},

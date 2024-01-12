@@ -18,7 +18,6 @@ Hyperbolic tangent, element-wise.
 \seealso{
 \itemize{
 \item \url{https://keras.io/api/ops/nn#tanh-function}
-\item \url{https://www.tensorflow.org/api_docs/python/tf/keras/ops/tanh}
 }
 
 Other numpy ops: 

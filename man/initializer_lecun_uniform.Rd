@@ -40,10 +40,6 @@ layer <- layer_dense(units = 3, kernel_initializer = initializer)
 }
 
 \seealso{
-\itemize{
-\item \url{https://www.tensorflow.org/api_docs/python/tf/keras/initializers/LecunUniform}
-}
-
 Other random initializers: 
 \code{\link{initializer_glorot_normal}()},
 \code{\link{initializer_glorot_uniform}()},

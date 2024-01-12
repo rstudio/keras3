@@ -97,7 +97,6 @@ Usage with \code{compile()} API:
 \seealso{
 \itemize{
 \item \url{https://keras.io/api/metrics/segmentation_metrics#meaniou-class}
-\item \url{https://www.tensorflow.org/api_docs/python/tf/keras/metrics/MeanIoU}
 }
 
 Other iou metrics: 

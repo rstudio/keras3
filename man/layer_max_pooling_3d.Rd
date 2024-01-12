@@ -91,7 +91,6 @@ outputs
 \seealso{
 \itemize{
 \item \url{https://keras.io/api/layers/pooling_layers/max_pooling3d#maxpooling3d-class}
-\item \url{https://www.tensorflow.org/api_docs/python/tf/keras/layers/MaxPooling3D}
 }
 
 Other pooling layers: 

@@ -52,7 +52,6 @@ m$result()
 \seealso{
 \itemize{
 \item \url{https://keras.io/api/metrics/classification_metrics#truepositives-class}
-\item \url{https://www.tensorflow.org/api_docs/python/tf/keras/metrics/TruePositives}
 }
 
 Other confusion metrics: 

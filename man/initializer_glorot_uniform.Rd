@@ -35,14 +35,13 @@ layer <- layer_dense(units = 3, kernel_initializer = initializer)
 
 \section{Reference}{
 \itemize{
-\item \href{http://proceedings.mlr.press/v9/glorot10a.html}{Glorot et al., 2010}
+\item \href{https://proceedings.mlr.press/v9/glorot10a.html}{Glorot et al., 2010}
 }
 }
 
 \seealso{
 \itemize{
 \item \url{https://keras.io/api/layers/initializers#glorotuniform-class}
-\item \url{https://www.tensorflow.org/api_docs/python/tf/keras/initializers/GlorotUniform}
 }
 
 Other random initializers: 

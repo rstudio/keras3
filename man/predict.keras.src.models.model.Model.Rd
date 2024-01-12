@@ -80,7 +80,6 @@ for more details about the difference between \code{Model} methods
 \seealso{
 \itemize{
 \item \url{https://keras.io/api/models/model_training_apis#predict-method}
-\item \url{https://www.tensorflow.org/api_docs/python/tf/keras/Model/predict}
 }
 
 Other model training: 

@@ -257,7 +257,6 @@ vectorize_layer \%>\% get_vocabulary()
 \seealso{
 \itemize{
 \item \url{https://keras.io/api/layers/preprocessing_layers/text/text_vectorization#textvectorization-class}
-\item \url{https://www.tensorflow.org/api_docs/python/tf/keras/layers/TextVectorization}
 }
 
 Other preprocessing layers: 

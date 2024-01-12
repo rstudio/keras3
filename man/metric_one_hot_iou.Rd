@@ -99,10 +99,6 @@ Usage with \code{compile()} API:
 }
 
 \seealso{
-\itemize{
-\item \url{https://www.tensorflow.org/api_docs/python/tf/keras/metrics/OneHotIoU}
-}
-
 Other iou metrics: 
 \code{\link{metric_binary_iou}()},
 \code{\link{metric_iou}()},

@@ -29,7 +29,6 @@ of the sigmoid activation.
 \seealso{
 \itemize{
 \item \url{https://keras.io/api/layers/activations#hardsigmoid-function}
-\item \url{https://www.tensorflow.org/api_docs/python/tf/keras/activations/hard_sigmoid}
 }
 
 Other activations: 

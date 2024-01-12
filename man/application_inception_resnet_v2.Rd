@@ -92,6 +92,5 @@ will scale input pixels between -1 and 1.
 \seealso{
 \itemize{
 \item \url{https://keras.io/api/applications/inceptionresnetv2#inceptionresnetv2-function}
-\item \url{https://www.tensorflow.org/api_docs/python/tf/keras/applications/InceptionResNetV2}
 }
 }

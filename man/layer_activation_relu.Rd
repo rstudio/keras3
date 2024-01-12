@@ -56,7 +56,6 @@ as.array(result)
 \seealso{
 \itemize{
 \item \url{https://keras.io/api/layers/activation_layers/relu#relu-class}
-\item \url{https://www.tensorflow.org/api_docs/python/tf/keras/layers/ReLU}
 }
 
 Other activation layers: 

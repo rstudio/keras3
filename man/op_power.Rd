@@ -20,7 +20,6 @@ First tensor elements raised to powers from second tensor, element-wise.
 \seealso{
 \itemize{
 \item \url{https://keras.io/api/ops/numpy#power-function}
-\item \url{https://www.tensorflow.org/api_docs/python/tf/keras/ops/power}
 }
 
 Other numpy ops: 

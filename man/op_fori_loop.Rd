@@ -37,10 +37,6 @@ final_state
 }
 
 \seealso{
-\itemize{
-\item \url{https://www.tensorflow.org/api_docs/python/tf/keras/ops/fori_loop}
-}
-
 Other core ops: 
 \code{\link{op_cast}()},
 \code{\link{op_cond}()},

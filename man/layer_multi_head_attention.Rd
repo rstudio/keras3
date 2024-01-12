@@ -120,7 +120,6 @@ decoder Transformer).
 \seealso{
 \itemize{
 \item \url{https://keras.io/api/layers/attention_layers/multi_head_attention#multiheadattention-class}
-\item \url{https://www.tensorflow.org/api_docs/python/tf/keras/layers/MultiHeadAttention}
 }
 
 Other attention layers: 

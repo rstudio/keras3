@@ -41,8 +41,3 @@ predictions <- reloaded_artifact$serve(input_data)
 }\if{html}{\out{</div>}}
 }
 
-\seealso{
-\itemize{
-\item \url{https://www.tensorflow.org/api_docs/python/tf/keras/Model/export}
-}
-}

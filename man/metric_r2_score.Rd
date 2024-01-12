@@ -67,10 +67,6 @@ metric$result()
 }
 
 \seealso{
-\itemize{
-\item \url{https://www.tensorflow.org/api_docs/python/tf/keras/metrics/R2Score}
-}
-
 Other regression metrics: 
 \code{\link{metric_cosine_similarity}()},
 \code{\link{metric_log_cosh_error}()},

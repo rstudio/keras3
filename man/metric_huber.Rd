@@ -40,10 +40,6 @@ loss <- loss_huber(y_true, y_pred)
 }
 
 \seealso{
-\itemize{
-\item \url{https://www.tensorflow.org/api_docs/python/tf/keras/metrics/huber}
-}
-
 Other losses: 
 \code{\link{Loss}()},
 \code{\link{loss_binary_crossentropy}()},

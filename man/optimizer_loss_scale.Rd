@@ -98,10 +98,6 @@ is doubled.
 }
 }
 \seealso{
-\itemize{
-\item \url{https://www.tensorflow.org/api_docs/python/tf/keras/optimizers/LossScaleOptimizer}
-}
-
 Other optimizers: 
 \code{\link{optimizer_adadelta}()},
 \code{\link{optimizer_adafactor}()},

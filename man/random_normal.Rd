@@ -32,10 +32,6 @@ of \code{\link[=random_seed_generator]{random_seed_generator()}}.}
 Draw random samples from a normal (Gaussian) distribution.
 }
 \seealso{
-\itemize{
-\item \url{https://www.tensorflow.org/api_docs/python/tf/keras/random/normal}
-}
-
 Other random: 
 \code{\link{random_categorical}()},
 \code{\link{random_dropout}()},

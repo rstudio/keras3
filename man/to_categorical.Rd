@@ -55,7 +55,6 @@ loss
 \seealso{
 \itemize{
 \item \url{https://keras.io/api/utils/python_utils#tocategorical-function}
-\item \url{https://www.tensorflow.org/api_docs/python/tf/keras/utils/to_categorical}
 }
 
 Other numerical utils: 

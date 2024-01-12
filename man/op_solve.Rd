@@ -30,10 +30,6 @@ op_solve(a, b)
 }
 
 \seealso{
-\itemize{
-\item \url{https://www.tensorflow.org/api_docs/python/tf/keras/ops/solve}
-}
-
 Other math ops: 
 \code{\link{op_erf}()},
 \code{\link{op_extract_sequences}()},

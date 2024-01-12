@@ -107,7 +107,6 @@ op_matmul(a, b)
 \seealso{
 \itemize{
 \item \url{https://keras.io/api/ops/numpy#einsum-function}
-\item \url{https://www.tensorflow.org/api_docs/python/tf/keras/ops/einsum}
 }
 
 Other numpy ops: 

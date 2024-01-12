@@ -21,7 +21,6 @@ Sorts the elements of \code{x} along a given axis in ascending order.
 \seealso{
 \itemize{
 \item \url{https://keras.io/api/ops/numpy#sort-function}
-\item \url{https://www.tensorflow.org/api_docs/python/tf/keras/ops/sort}
 }
 
 Other numpy ops: 

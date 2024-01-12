@@ -26,9 +26,6 @@ Publicly accessible method for determining the current backend.
 
 \seealso{
 \code{\link[=use_backend]{use_backend()}}
-\itemize{
-\item \url{https://www.tensorflow.org/api_docs/python/tf/keras/config/backend}
-}
 
 Other config backend: 
 \code{\link{config_epsilon}()},

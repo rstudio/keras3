@@ -18,7 +18,6 @@ Calculates \code{log(1 + x)}.
 \seealso{
 \itemize{
 \item \url{https://keras.io/api/ops/numpy#log1p-function}
-\item \url{https://www.tensorflow.org/api_docs/python/tf/keras/ops/log1p}
 }
 
 Other numpy ops: 

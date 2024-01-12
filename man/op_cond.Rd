@@ -25,10 +25,6 @@ The output of either \code{true_fn} or \code{false_fn} depending on pred.
 Conditionally applies \code{true_fn} or \code{false_fn}.
 }
 \seealso{
-\itemize{
-\item \url{https://www.tensorflow.org/api_docs/python/tf/keras/ops/cond}
-}
-
 Other core ops: 
 \code{\link{op_cast}()},
 \code{\link{op_convert_to_numpy}()},

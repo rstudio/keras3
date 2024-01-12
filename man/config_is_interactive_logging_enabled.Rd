@@ -16,10 +16,6 @@ To switch between writing logs to stdout and \code{absl.logging}, you may use
 \code{\link[=config_disable_interactie_logging]{config_disable_interactie_logging()}}.
 }
 \seealso{
-\itemize{
-\item \url{https://www.tensorflow.org/api_docs/python/tf/keras/config/is_interactive_logging_enabled}
-}
-
 Other io utils: 
 \code{\link{config_disable_interactive_logging}()},
 \code{\link{config_enable_interactive_logging}()}

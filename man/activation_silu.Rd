@@ -25,7 +25,6 @@ bounded below.
 \seealso{
 \itemize{
 \item \url{https://keras.io/api/layers/activations#silu-function}
-\item \url{https://www.tensorflow.org/api_docs/python/tf/keras/activations/silu}
 }
 
 Other activations: 

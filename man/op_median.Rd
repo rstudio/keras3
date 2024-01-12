@@ -23,10 +23,6 @@ The output tensor.
 Compute the median along the specified axis.
 }
 \seealso{
-\itemize{
-\item \url{https://www.tensorflow.org/api_docs/python/tf/keras/ops/median}
-}
-
 Other numpy ops: 
 \code{\link{op_abs}()},
 \code{\link{op_add}()},

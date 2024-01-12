@@ -34,7 +34,6 @@ op_digitize(x, bins)
 \seealso{
 \itemize{
 \item \url{https://keras.io/api/ops/numpy#digitize-function}
-\item \url{https://www.tensorflow.org/api_docs/python/tf/keras/ops/digitize}
 }
 
 Other numpy ops: 

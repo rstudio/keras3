@@ -80,7 +80,6 @@ The learning rate schedule is also serializable and deserializable using
 \seealso{
 \itemize{
 \item \url{https://keras.io/api/optimizers/learning_rate_schedules/exponential_decay#exponentialdecay-class}
-\item \url{https://www.tensorflow.org/api_docs/python/tf/keras/optimizers/schedules/ExponentialDecay}
 }
 
 Other optimizer learning rate schedules: 

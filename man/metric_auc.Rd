@@ -161,7 +161,6 @@ model \%>\% compile(optimizer = 'sgd',
 \seealso{
 \itemize{
 \item \url{https://keras.io/api/metrics/classification_metrics#auc-class}
-\item \url{https://www.tensorflow.org/api_docs/python/tf/keras/metrics/AUC}
 }
 
 Other confusion metrics: 

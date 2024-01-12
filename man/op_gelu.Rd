@@ -48,7 +48,6 @@ plot(x, op_gelu(x),
 \seealso{
 \itemize{
 \item \url{https://keras.io/api/ops/nn#gelu-function}
-\item \url{https://www.tensorflow.org/api_docs/python/tf/keras/ops/gelu}
 }
 
 Other nn ops: 

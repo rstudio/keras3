@@ -77,10 +77,6 @@ model \%>\% fit(train_loader, epochs=5)
 }
 
 \seealso{
-\itemize{
-\item \url{https://www.tensorflow.org/api_docs/python/tf/keras/layers/TorchModuleWrapper}
-}
-
 Other utils: 
 \code{\link{audio_dataset_from_directory}()},
 \code{\link{clear_session}()},

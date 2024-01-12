@@ -123,10 +123,6 @@ output  # shape(NA, 32, 64)
 }
 
 \seealso{
-\itemize{
-\item \url{https://www.tensorflow.org/api_docs/python/tf/keras/layers/EinsumDense}
-}
-
 Other core layers: 
 \code{\link{layer_dense}()},
 \code{\link{layer_embedding}()},

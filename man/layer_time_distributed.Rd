@@ -52,7 +52,6 @@ wrapped layer (only if the layer supports this argument).
 \seealso{
 \itemize{
 \item \url{https://keras.io/api/layers/recurrent_layers/time_distributed#timedistributed-class}
-\item \url{https://www.tensorflow.org/api_docs/python/tf/keras/layers/TimeDistributed}
 }
 
 Other rnn layers: 

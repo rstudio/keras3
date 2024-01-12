@@ -46,7 +46,6 @@ op_slice_update(inputs, start_indices, updates)
 \seealso{
 \itemize{
 \item \url{https://keras.io/api/ops/core#sliceupdate-function}
-\item \url{https://www.tensorflow.org/api_docs/python/tf/keras/ops/slice_update}
 }
 
 Other core ops: 

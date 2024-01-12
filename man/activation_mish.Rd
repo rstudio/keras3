@@ -27,7 +27,6 @@ where \code{softplus} is defined as:
 \seealso{
 \itemize{
 \item \url{https://keras.io/api/layers/activations#mish-function}
-\item \url{https://www.tensorflow.org/api_docs/python/tf/keras/activations/mish}
 }
 
 Other activations: 

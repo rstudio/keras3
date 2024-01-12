@@ -37,10 +37,6 @@ mse_metric$result()
 }\if{html}{\out{</div>}}
 }
 \seealso{
-\itemize{
-\item \url{https://www.tensorflow.org/api_docs/python/tf/keras/metrics/MeanMetricWrapper}
-}
-
 Other reduction metrics: 
 \code{\link{metric_mean}()},
 \code{\link{metric_sum}()}

@@ -62,10 +62,6 @@ shape(padded_batch)
 }
 
 \seealso{
-\itemize{
-\item \url{https://www.tensorflow.org/api_docs/python/tf/keras/ops/image/pad_images}
-}
-
 Other image ops: 
 \code{\link{op_image_affine_transform}()},
 \code{\link{op_image_extract_patches}()},

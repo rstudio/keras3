@@ -12,10 +12,6 @@ This is the best option when using Keras in a non-interactive
 way, such as running a training or inference job on a server.
 }
 \seealso{
-\itemize{
-\item \url{https://www.tensorflow.org/api_docs/python/tf/keras/config/disable_interactive_logging}
-}
-
 Other io utils: 
 \code{\link{config_enable_interactive_logging}()},
 \code{\link{config_is_interactive_logging_enabled}()}

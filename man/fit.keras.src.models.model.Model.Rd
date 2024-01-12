@@ -219,6 +219,5 @@ features, targets, and weights from the keys of a single dict.
 \seealso{
 \itemize{
 \item \url{https://keras.io/api/models/model_training_apis#fit-method}
-\item \url{https://www.tensorflow.org/api_docs/python/tf/keras/Model/fit}
 }
 }

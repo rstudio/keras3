@@ -21,10 +21,6 @@ tensor would return \code{FALSE} if your backend is PyTorch or JAX.
 }
 
 \seealso{
-\itemize{
-\item \url{https://www.tensorflow.org/api_docs/python/tf/keras/ops/is_tensor}
-}
-
 Other core ops: 
 \code{\link{op_cast}()},
 \code{\link{op_cond}()},

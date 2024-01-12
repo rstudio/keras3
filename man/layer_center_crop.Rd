@@ -54,7 +54,6 @@ inversely), the input image is left-padded by 1 pixel.
 \seealso{
 \itemize{
 \item \url{https://keras.io/api/layers/preprocessing_layers/image_preprocessing/center_crop#centercrop-class}
-\item \url{https://www.tensorflow.org/api_docs/python/tf/keras/layers/CenterCrop}
 }
 
 Other preprocessing layers: 

@@ -35,10 +35,6 @@ str(result)
 }
 
 \seealso{
-\itemize{
-\item \url{https://www.tensorflow.org/api_docs/python/tf/keras/layers/StackedRNNCells}
-}
-
 Other rnn layers: 
 \code{\link{bidirectional}()},
 \code{\link{layer_conv_lstm_1d}()},

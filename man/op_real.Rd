@@ -18,7 +18,6 @@ Return the real part of the complex argument.
 \seealso{
 \itemize{
 \item \url{https://keras.io/api/ops/numpy#real-function}
-\item \url{https://www.tensorflow.org/api_docs/python/tf/keras/ops/real}
 }
 
 Other numpy ops: 

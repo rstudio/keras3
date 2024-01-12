@@ -42,10 +42,6 @@ op_moments(x, axes = c(1))
 }
 
 \seealso{
-\itemize{
-\item \url{https://www.tensorflow.org/api_docs/python/tf/keras/ops/moments}
-}
-
 Other nn ops: 
 \code{\link{op_average_pool}()},
 \code{\link{op_binary_crossentropy}()},

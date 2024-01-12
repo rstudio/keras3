@@ -12,7 +12,6 @@ Constrains the weights to be non-negative.
 \seealso{
 \itemize{
 \item \url{https://keras.io/api/layers/constraints#nonneg-class}
-\item \url{https://www.tensorflow.org/api_docs/python/tf/keras/constraints/NonNeg}
 }
 
 Other constraints: 

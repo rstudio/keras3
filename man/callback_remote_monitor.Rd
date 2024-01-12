@@ -38,7 +38,6 @@ Otherwise the serialized JSON will be sent within a form.
 \seealso{
 \itemize{
 \item \url{https://keras.io/api/callbacks/remote_monitor#remotemonitor-class}
-\item \url{https://www.tensorflow.org/api_docs/python/tf/keras/callbacks/RemoteMonitor}
 }
 
 Other callbacks: 

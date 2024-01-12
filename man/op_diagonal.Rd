@@ -95,7 +95,6 @@ x
 \seealso{
 \itemize{
 \item \url{https://keras.io/api/ops/numpy#diagonal-function}
-\item \url{https://www.tensorflow.org/api_docs/python/tf/keras/ops/diagonal}
 }
 
 Other numpy ops: 

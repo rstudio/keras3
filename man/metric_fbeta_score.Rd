@@ -76,10 +76,6 @@ metric$result()
 }
 
 \seealso{
-\itemize{
-\item \url{https://www.tensorflow.org/api_docs/python/tf/keras/metrics/FBetaScore}
-}
-
 Other f score metrics: 
 \code{\link{metric_f1_score}()}
 

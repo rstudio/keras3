@@ -169,7 +169,6 @@ An \code{int32} tensor of shape \verb{(batch_size, ...)}.
 \seealso{
 \itemize{
 \item \url{https://keras.io/api/layers/preprocessing_layers/categorical/hashing#hashing-class}
-\item \url{https://www.tensorflow.org/api_docs/python/tf/keras/layers/Hashing}
 }
 
 Other preprocessing layers: 

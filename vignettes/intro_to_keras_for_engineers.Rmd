@@ -31,13 +31,14 @@ This entire guide is backend-agnostic.
 
 
 ```r
-Sys.setenv(KERAS_BACKEND = "tensorflow")
-
-# Note that Keras should only be loaded after the backend
-# has been configured. The backend cannot be changed once the
-# package is imported.
 library(tensorflow)
 library(keras3)
+
+# Note that you must configure the backend
+# before calling any other keras functions.
+# The backend cannot be changed once the
+# package is imported.
+use_backend("tensorflow")
 ```
 
 ## A first example: A MNIST convnet
@@ -155,7 +156,7 @@ of the data during training to monitor generalization on unseen data.
 
 ```r
 batch_size <- 128
-epochs <- 1
+epochs <- 10
 
 callbacks <- list(
   callback_model_checkpoint(filepath="model_at_epoch_{epoch}.keras"),
@@ -173,7 +174,26 @@ model %>% fit(
 ```
 
 ```
-## 399/399 - 8s - 21ms/step - acc: 0.7350 - loss: 0.7782 - val_acc: 0.9602 - val_loss: 0.1384
+## Epoch 1/10
+## 399/399 - 10s - 26ms/step - acc: 0.7361 - loss: 0.7752 - val_acc: 0.9613 - val_loss: 0.1373
+## Epoch 2/10
+## 399/399 - 2s - 5ms/step - acc: 0.9298 - loss: 0.2360 - val_acc: 0.9713 - val_loss: 0.0934
+## Epoch 3/10
+## 399/399 - 2s - 5ms/step - acc: 0.9471 - loss: 0.1766 - val_acc: 0.9777 - val_loss: 0.0686
+## Epoch 4/10
+## 399/399 - 2s - 5ms/step - acc: 0.9582 - loss: 0.1431 - val_acc: 0.9832 - val_loss: 0.0576
+## Epoch 5/10
+## 399/399 - 2s - 5ms/step - acc: 0.9651 - loss: 0.1194 - val_acc: 0.9871 - val_loss: 0.0461
+## Epoch 6/10
+## 399/399 - 2s - 5ms/step - acc: 0.9687 - loss: 0.1044 - val_acc: 0.9867 - val_loss: 0.0486
+## Epoch 7/10
+## 399/399 - 2s - 6ms/step - acc: 0.9724 - loss: 0.0955 - val_acc: 0.9870 - val_loss: 0.0437
+## Epoch 8/10
+## 399/399 - 2s - 6ms/step - acc: 0.9744 - loss: 0.0854 - val_acc: 0.9900 - val_loss: 0.0379
+## Epoch 9/10
+## 399/399 - 2s - 5ms/step - acc: 0.9767 - loss: 0.0782 - val_acc: 0.9913 - val_loss: 0.0321
+## Epoch 10/10
+## 399/399 - 2s - 5ms/step - acc: 0.9794 - loss: 0.0705 - val_acc: 0.9882 - val_loss: 0.0374
 ```
 
 ```r
@@ -334,7 +354,7 @@ model %>% fit(
 ```
 
 ```
-## 399/399 - 8s - 19ms/step - acc: 0.7503 - loss: 0.7396 - val_acc: 0.9327 - val_loss: 0.2273
+## 399/399 - 10s - 24ms/step - acc: 0.7505 - loss: 0.7397 - val_acc: 0.9320 - val_loss: 0.2270
 ```
 
 ## Training models on arbitrary data sources
@@ -410,7 +430,7 @@ model %>% fit(train_dataset, epochs=1, validation_data=test_dataset)
 ```
 
 ```
-## 469/469 - 9s - 19ms/step - acc: 0.7561 - loss: 0.7248 - val_acc: 0.8974 - val_loss: 0.3192
+## 469/469 - 10s - 22ms/step - acc: 0.7554 - loss: 0.7268 - val_acc: 0.9002 - val_loss: 0.3162
 ```
 
 ## Further reading
@@ -424,20 +444,20 @@ Want to implement a non-standard training algorithm yourself but still want to b
 the power and usability of `fit()`? It's easy to customize
 `fit()` to support arbitrary use cases:
 
-- [Customizing what happens in `fit()` with TensorFlow](http://keras.io/guides/custom_train_step_in_tensorflow/)
-- [Customizing what happens in `fit()` with JAX](http://keras.io/guides/custom_train_step_in_jax/)
-- [Customizing what happens in `fit()` with PyTorch](http://keras.io/guides/custom_train_step_in_pytorch/)
+- [Customizing what happens in `fit()` with TensorFlow](https://keras.io/guides/custom_train_step_in_tensorflow/)
+<!-- - [Customizing what happens in `fit()` with JAX](https://keras.io/guides/custom_train_step_in_jax/) -->
+<!-- - [Customizing what happens in `fit()` with PyTorch](https://keras.io/guides/custom_train_step_in_pytorch/) -->
 
 ## How to write custom training loops
 
-- [Writing a training loop from scratch in TensorFlow](http://keras.io/guides/writing_a_custom_training_loop_in_tensorflow/)
-- [Writing a training loop from scratch in JAX](http://keras.io/guides/writing_a_custom_training_loop_in_jax/)
-- [Writing a training loop from scratch in PyTorch](http://keras.io/guides/writing_a_custom_training_loop_in_torch/)
+- [Writing a training loop from scratch in TensorFlow](https://keras.io/guides/writing_a_custom_training_loop_in_tensorflow/)
+<!-- - [Writing a training loop from scratch in JAX](https://keras.io/guides/writing_a_custom_training_loop_in_jax/) -->
+<!-- - [Writing a training loop from scratch in PyTorch](https://keras.io/guides/writing_a_custom_training_loop_in_torch/) -->
 
 ## How to distribute training
 
-- [Guide to distributed training with TensorFlow](http://keras.io/guides/distributed_training_with_tensorflow/)
-- [JAX distributed training example](https://github.com/keras-team/keras/blob/main/examples/demo_jax_distributed.py)
-- [PyTorch distributed training example](https://github.com/keras-team/keras/blob/main/examples/demo_torch_multi_gpu.py)
+- [Guide to distributed training with TensorFlow](https://keras.io/guides/distributed_training_with_tensorflow/)
+<!-- - [JAX distributed training example](https://github.com/keras-team/keras/blob/main/examples/demo_jax_distributed.py) -->
+<!-- - [PyTorch distributed training example](https://github.com/keras-team/keras/blob/main/examples/demo_torch_multi_gpu.py) -->
 
 Enjoy the library! 🚀

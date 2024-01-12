@@ -28,7 +28,6 @@ op_arcsin(x)
 \seealso{
 \itemize{
 \item \url{https://keras.io/api/ops/numpy#arcsin-function}
-\item \url{https://www.tensorflow.org/api_docs/python/tf/keras/ops/arcsin}
 }
 
 Other numpy ops: 

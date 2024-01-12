@@ -23,7 +23,6 @@ assumed to be zero. The sigmoid function always returns a value between
 \seealso{
 \itemize{
 \item \url{https://keras.io/api/layers/activations#sigmoid-function}
-\item \url{https://www.tensorflow.org/api_docs/python/tf/keras/activations/sigmoid}
 }
 
 Other activations: 

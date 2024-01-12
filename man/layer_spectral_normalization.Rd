@@ -54,10 +54,6 @@ shape(y)
 }
 
 \seealso{
-\itemize{
-\item \url{https://www.tensorflow.org/api_docs/python/tf/keras/layers/SpectralNormalization}
-}
-
 Other normalization layers: 
 \code{\link{layer_batch_normalization}()},
 \code{\link{layer_group_normalization}()},

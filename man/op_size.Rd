@@ -18,7 +18,6 @@ Return the number of elements in a tensor.
 \seealso{
 \itemize{
 \item \url{https://keras.io/api/ops/numpy#size-function}
-\item \url{https://www.tensorflow.org/api_docs/python/tf/keras/ops/size}
 }
 
 Other numpy ops: 

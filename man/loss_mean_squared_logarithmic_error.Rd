@@ -48,7 +48,6 @@ loss <- loss_mean_squared_logarithmic_error(y_true, y_pred)
 \seealso{
 \itemize{
 \item \url{https://keras.io/api/losses/regression_losses#meansquaredlogarithmicerror-class}
-\item \url{https://www.tensorflow.org/api_docs/python/tf/keras/losses/MeanSquaredLogarithmicError}
 }
 
 Other losses: 

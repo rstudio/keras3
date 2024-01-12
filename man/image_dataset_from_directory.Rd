@@ -154,7 +154,6 @@ Animated gifs are truncated to the first frame.
 \seealso{
 \itemize{
 \item \url{https://keras.io/api/data_loading/image#imagedatasetfromdirectory-function}
-\item \url{https://www.tensorflow.org/api_docs/python/tf/keras/utils/image_dataset_from_directory}
 }
 
 Other dataset utils: 

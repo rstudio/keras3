@@ -44,7 +44,6 @@ loss <- loss_mean_absolute_error(y_true, y_pred)
 \seealso{
 \itemize{
 \item \url{https://keras.io/api/losses/regression_losses#meanabsoluteerror-class}
-\item \url{https://www.tensorflow.org/api_docs/python/tf/keras/losses/MeanAbsoluteError}
 }
 
 Other losses: 

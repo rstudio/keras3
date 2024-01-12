@@ -64,10 +64,6 @@ op_unstack(x, axis=1)
 }
 
 \seealso{
-\itemize{
-\item \url{https://www.tensorflow.org/api_docs/python/tf/keras/ops/unstack}
-}
-
 Other core ops: 
 \code{\link{op_cast}()},
 \code{\link{op_cond}()},

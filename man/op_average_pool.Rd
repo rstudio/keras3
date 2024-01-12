@@ -52,7 +52,6 @@ Average pooling operation.
 \seealso{
 \itemize{
 \item \url{https://keras.io/api/ops/nn#averagepool-function}
-\item \url{https://www.tensorflow.org/api_docs/python/tf/keras/ops/average_pool}
 }
 
 Other nn ops: 

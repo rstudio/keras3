@@ -309,7 +309,6 @@ reloaded_feature_space <- keras$models$load_model("featurespace.keras")
 \seealso{
 \itemize{
 \item \url{https://keras.io/api/utils/feature_space#featurespace-class}
-\item \url{https://www.tensorflow.org/api_docs/python/tf/keras/utils/FeatureSpace}
 }
 
 Other preprocessing layers: 

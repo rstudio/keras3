@@ -18,10 +18,6 @@ Output tensor, \code{y <- floor(x1/x2)}
 Returns the largest integer smaller or equal to the division of inputs.
 }
 \seealso{
-\itemize{
-\item \url{https://www.tensorflow.org/api_docs/python/tf/keras/ops/floor_divide}
-}
-
 Other numpy ops: 
 \code{\link{op_abs}()},
 \code{\link{op_add}()},

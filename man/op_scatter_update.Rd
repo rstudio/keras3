@@ -98,7 +98,6 @@ op_scatter_update(inputs, indices, updates)
 \seealso{
 \itemize{
 \item \url{https://keras.io/api/ops/core#scatterupdate-function}
-\item \url{https://www.tensorflow.org/api_docs/python/tf/keras/ops/scatter_update}
 }
 
 Other core ops: 

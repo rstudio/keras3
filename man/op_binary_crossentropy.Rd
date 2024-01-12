@@ -43,7 +43,6 @@ op_binary_crossentropy(target, output)
 \seealso{
 \itemize{
 \item \url{https://keras.io/api/ops/nn#binarycrossentropy-function}
-\item \url{https://www.tensorflow.org/api_docs/python/tf/keras/ops/binary_crossentropy}
 }
 
 Other nn ops: 

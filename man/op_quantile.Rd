@@ -42,10 +42,6 @@ axes that remain after the reduction of \code{x}.
 Compute the q-th quantile(s) of the data along the specified axis.
 }
 \seealso{
-\itemize{
-\item \url{https://www.tensorflow.org/api_docs/python/tf/keras/ops/quantile}
-}
-
 Other numpy ops: 
 \code{\link{op_abs}()},
 \code{\link{op_add}()},

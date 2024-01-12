@@ -64,10 +64,6 @@ to the \code{layer_tfsm} via the \code{call_training_endpoint} argument.
 }
 
 \seealso{
-\itemize{
-\item \url{https://www.tensorflow.org/api_docs/python/tf/keras/layers/TFSMLayer}
-}
-
 Other saving: 
 \code{\link{clear_registered_custom_objects}()},
 \code{\link{config_enable_unsafe_deserialization}()},

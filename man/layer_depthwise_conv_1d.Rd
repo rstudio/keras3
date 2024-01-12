@@ -147,10 +147,6 @@ shape(y)
 }
 
 \seealso{
-\itemize{
-\item \url{https://www.tensorflow.org/api_docs/python/tf/keras/layers/DepthwiseConv1D}
-}
-
 Other convolutional layers: 
 \code{\link{layer_conv_1d_transpose}()},
 \code{\link{layer_conv_1d}()},

@@ -95,14 +95,13 @@ Nesterov momentum.
 }
 \section{Reference}{
 \itemize{
-\item \href{http://cs229.stanford.edu/proj2015/054_report.pdf}{Dozat, 2015}.
+\item \href{https://cs229.stanford.edu/proj2015/054_report.pdf}{Dozat, 2015}.
 }
 }
 
 \seealso{
 \itemize{
 \item \url{https://keras.io/api/optimizers/Nadam#nadam-class}
-\item \url{https://www.tensorflow.org/api_docs/python/tf/keras/optimizers/Nadam}
 }
 
 Other optimizers: 

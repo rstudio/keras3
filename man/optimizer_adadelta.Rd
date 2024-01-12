@@ -97,14 +97,13 @@ learning rate can be set, as in most other Keras optimizers.
 }
 \section{Reference}{
 \itemize{
-\item \href{http://arxiv.org/abs/1212.5701}{Zeiler, 2012}
+\item \href{https://arxiv.org/abs/1212.5701}{Zeiler, 2012}
 }
 }
 
 \seealso{
 \itemize{
 \item \url{https://keras.io/api/optimizers/adadelta#adadelta-class}
-\item \url{https://www.tensorflow.org/api_docs/python/tf/keras/optimizers/Adadelta}
 }
 
 Other optimizers: 

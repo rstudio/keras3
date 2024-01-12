@@ -98,7 +98,6 @@ Same shape as input.
 \seealso{
 \itemize{
 \item \url{https://keras.io/api/layers/normalization_layers/group_normalization#groupnormalization-class}
-\item \url{https://www.tensorflow.org/api_docs/python/tf/keras/layers/GroupNormalization}
 }
 
 Other normalization layers: 

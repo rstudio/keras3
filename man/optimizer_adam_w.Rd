@@ -102,7 +102,7 @@ method to decay weights per the techniques discussed in the paper,
 \href{https://arxiv.org/abs/1711.05101}{Loshchilov, Hutter et al., 2019}.
 
 According to
-\href{http://arxiv.org/abs/1412.6980}{Kingma et al., 2014},
+\href{https://arxiv.org/abs/1412.6980}{Kingma et al., 2014},
 the underying Adam method is "\emph{computationally
 efficient, has little memory requirement, invariant to diagonal rescaling of
 gradients, and is well suited for problems that are large in terms of
@@ -111,7 +111,7 @@ data/parameters}".
 \section{References}{
 \itemize{
 \item \href{https://arxiv.org/abs/1711.05101}{Loshchilov et al., 2019}
-\item \href{http://arxiv.org/abs/1412.6980}{Kingma et al., 2014} for \code{adam}
+\item \href{https://arxiv.org/abs/1412.6980}{Kingma et al., 2014} for \code{adam}
 \item \href{https://openreview.net/pdf?id=ryQu7f-RZ}{Reddi et al., 2018} for \code{amsgrad}.
 }
 }
@@ -119,7 +119,6 @@ data/parameters}".
 \seealso{
 \itemize{
 \item \url{https://keras.io/api/optimizers/adamw#adamw-class}
-\item \url{https://www.tensorflow.org/api_docs/python/tf/keras/optimizers/AdamW}
 }
 
 Other optimizers: 

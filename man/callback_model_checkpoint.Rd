@@ -160,7 +160,6 @@ model |> load_model_weights(checkpoint_filepath)
 \seealso{
 \itemize{
 \item \url{https://keras.io/api/callbacks/model_checkpoint#modelcheckpoint-class}
-\item \url{https://www.tensorflow.org/api_docs/python/tf/keras/callbacks/ModelCheckpoint}
 }
 
 Other callbacks: 

@@ -81,7 +81,6 @@ model \%>\% fit(data, labels, epochs=5)
 \seealso{
 \itemize{
 \item \url{https://keras.io/api/optimizers/learning_rate_schedules/inverse_time_decay#inversetimedecay-class}
-\item \url{https://www.tensorflow.org/api_docs/python/tf/keras/optimizers/schedules/InverseTimeDecay}
 }
 
 Other optimizer learning rate schedules: 

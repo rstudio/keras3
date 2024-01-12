@@ -37,10 +37,6 @@ while the upper bound \code{maxval} is excluded.
 \code{dtype} must be a floating point type, the default range is \verb{[0, 1)}.
 }
 \seealso{
-\itemize{
-\item \url{https://www.tensorflow.org/api_docs/python/tf/keras/random/uniform}
-}
-
 Other random: 
 \code{\link{random_categorical}()},
 \code{\link{random_dropout}()},

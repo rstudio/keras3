@@ -135,7 +135,6 @@ to produce batches of timeseries inputs and targets.
 \seealso{
 \itemize{
 \item \url{https://keras.io/api/data_loading/timeseries#timeseriesdatasetfromarray-function}
-\item \url{https://www.tensorflow.org/api_docs/python/tf/keras/utils/timeseries_dataset_from_array}
 }
 
 Other dataset utils: 

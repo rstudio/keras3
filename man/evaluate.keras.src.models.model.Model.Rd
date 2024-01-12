@@ -89,7 +89,6 @@ Computation is done in batches (see the \code{batch_size} arg.)
 \seealso{
 \itemize{
 \item \url{https://keras.io/api/models/model_training_apis#evaluate-method}
-\item \url{https://www.tensorflow.org/api_docs/python/tf/keras/Model/evaluate}
 }
 
 Other model training: 

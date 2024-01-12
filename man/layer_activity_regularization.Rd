@@ -31,7 +31,6 @@ Same shape as input.
 \seealso{
 \itemize{
 \item \url{https://keras.io/api/layers/regularization_layers/activity_regularization#activityregularization-class}
-\item \url{https://www.tensorflow.org/api_docs/python/tf/keras/layers/ActivityRegularization}
 }
 
 Other regularization layers: 

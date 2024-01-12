@@ -118,7 +118,7 @@ ValueError: when both \code{strides > 1} and \code{dilation_rate > 1}.
 
 \section{References}{
 \itemize{
-\item \href{https://arxiv.org/abs/160307285v1}{A guide to convolution arithmetic for deep learning}
+\item \href{https://arxiv.org/abs/1603.07285}{A guide to convolution arithmetic for deep learning}
 \item \href{https://www.matthewzeiler.com/mattzeiler/deconvolutionalnetworks.pdf}{Deconvolutional Networks}
 }
 }
@@ -139,7 +139,6 @@ shape(y)
 \seealso{
 \itemize{
 \item \url{https://keras.io/api/layers/convolution_layers/convolution2d_transpose#conv2dtranspose-class}
-\item \url{https://www.tensorflow.org/api_docs/python/tf/keras/layers/Conv2DTranspose}
 }
 
 Other convolutional layers: 

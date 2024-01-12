@@ -100,7 +100,6 @@ print(y)
 \seealso{
 \itemize{
 \item \url{https://keras.io/api/layers/reshaping_layers/up_sampling2d#upsampling2d-class}
-\item \url{https://www.tensorflow.org/api_docs/python/tf/keras/layers/UpSampling2D}
 }
 
 Other reshaping layers: 

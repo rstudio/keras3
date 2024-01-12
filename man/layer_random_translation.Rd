@@ -105,7 +105,6 @@ in \code{"channels_first"} format.
 \seealso{
 \itemize{
 \item \url{https://keras.io/api/layers/preprocessing_layers/image_augmentation/random_translation#randomtranslation-class}
-\item \url{https://www.tensorflow.org/api_docs/python/tf/keras/layers/RandomTranslation}
 }
 
 Other preprocessing layers: 

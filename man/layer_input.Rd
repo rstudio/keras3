@@ -64,10 +64,6 @@ model <- keras_model(input, output)
 }
 
 \seealso{
-\itemize{
-\item \url{https://www.tensorflow.org/api_docs/python/tf/keras/layers/Input}
-}
-
 Other core layers: 
 \code{\link{layer_dense}()},
 \code{\link{layer_einsum_dense}()},

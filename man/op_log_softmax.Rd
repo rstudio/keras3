@@ -31,7 +31,6 @@ op_log_softmax(x)
 \seealso{
 \itemize{
 \item \url{https://keras.io/api/ops/nn#logsoftmax-function}
-\item \url{https://www.tensorflow.org/api_docs/python/tf/keras/ops/log_softmax}
 }
 
 Other nn ops: 

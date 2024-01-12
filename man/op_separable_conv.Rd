@@ -61,7 +61,6 @@ a depthwise conv followed by a pointwise conv.
 \seealso{
 \itemize{
 \item \url{https://keras.io/api/ops/nn#separableconv-function}
-\item \url{https://www.tensorflow.org/api_docs/python/tf/keras/ops/separable_conv}
 }
 
 Other nn ops: 

@@ -54,7 +54,6 @@ access specific variables, e.g. \code{model |> get_layer("dense_1") |> _$kernel}
 \seealso{
 \itemize{
 \item \url{https://keras.io/api/models/model_saving_apis/model_saving_and_loading#loadmodel-function}
-\item \url{https://www.tensorflow.org/api_docs/python/tf/keras/saving/load_model}
 }
 
 Other saving: 

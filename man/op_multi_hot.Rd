@@ -34,10 +34,6 @@ op_multi_hot(data, num_tokens = 5)
 }
 
 \seealso{
-\itemize{
-\item \url{https://www.tensorflow.org/api_docs/python/tf/keras/ops/multi_hot}
-}
-
 Other nn ops: 
 \code{\link{op_average_pool}()},
 \code{\link{op_binary_crossentropy}()},

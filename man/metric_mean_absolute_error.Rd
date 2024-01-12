@@ -61,7 +61,6 @@ Usage with \code{compile()} API:
 \seealso{
 \itemize{
 \item \url{https://keras.io/api/metrics/regression_metrics#meanabsoluteerror-class}
-\item \url{https://www.tensorflow.org/api_docs/python/tf/keras/metrics/MeanAbsoluteError}
 }
 
 Other losses: 

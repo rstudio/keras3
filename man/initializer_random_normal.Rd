@@ -40,7 +40,6 @@ layer <- layer_dense(units = 3, kernel_initializer = initializer)
 \seealso{
 \itemize{
 \item \url{https://keras.io/api/layers/initializers#randomnormal-class}
-\item \url{https://www.tensorflow.org/api_docs/python/tf/keras/initializers/RandomNormal}
 }
 
 Other random initializers: 

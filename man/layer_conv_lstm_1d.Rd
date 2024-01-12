@@ -84,7 +84,7 @@ matrix, used for the linear transformation of the recurrent state.}
 \item{unit_forget_bias}{Boolean. If \code{TRUE}, add 1 to the bias of
 the forget gate at initialization.
 Use in combination with \code{bias_initializer="zeros"}.
-This is recommended in \href{http://www.jmlr.org/proceedings/papers/v37/jozefowicz15.pdf}{Jozefowicz et al., 2015}}
+This is recommended in \href{https://proceedings.mlr.press/v37/jozefowicz15.pdf}{Jozefowicz et al., 2015}}
 
 \item{kernel_regularizer}{Regularizer function applied to the \code{kernel} weights
 matrix.}
@@ -182,7 +182,7 @@ or shape: \verb{(samples, new_rows, filters)} if
 
 \section{References}{
 \itemize{
-\item \href{http://arxiv.org/abs/1506.04214v1}{Shi et al., 2015}
+\item \href{https://arxiv.org/abs/1506.04214v1}{Shi et al., 2015}
 (the current implementation does not include the feedback loop on the
 cells output).
 }
@@ -191,7 +191,6 @@ cells output).
 \seealso{
 \itemize{
 \item \url{https://keras.io/api/layers/recurrent_layers/conv_lstm1d#convlstm1d-class}
-\item \url{https://www.tensorflow.org/api_docs/python/tf/keras/layers/ConvLSTM1D}
 }
 
 Other rnn layers: 

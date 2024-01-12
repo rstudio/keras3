@@ -85,7 +85,6 @@ nrow(as.data.frame(history))  # Only 4 epochs are run.
 \seealso{
 \itemize{
 \item \url{https://keras.io/api/callbacks/early_stopping#earlystopping-class}
-\item \url{https://www.tensorflow.org/api_docs/python/tf/keras/callbacks/EarlyStopping}
 }
 
 Other callbacks: 

@@ -53,8 +53,3 @@ Thus models can be reinstantiated in the exact same state.
 }\if{html}{\out{</div>}}
 }
 
-\seealso{
-\itemize{
-\item \url{https://www.tensorflow.org/api_docs/python/tf/keras/models/Model/save}
-}
-}

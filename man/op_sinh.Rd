@@ -18,7 +18,6 @@ Hyperbolic sine, element-wise.
 \seealso{
 \itemize{
 \item \url{https://keras.io/api/ops/numpy#sinh-function}
-\item \url{https://www.tensorflow.org/api_docs/python/tf/keras/ops/sinh}
 }
 
 Other numpy ops: 

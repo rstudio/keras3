@@ -31,7 +31,6 @@ op_elu(x)
 \seealso{
 \itemize{
 \item \url{https://keras.io/api/ops/nn#elu-function}
-\item \url{https://www.tensorflow.org/api_docs/python/tf/keras/ops/elu}
 }
 
 Other nn ops: 

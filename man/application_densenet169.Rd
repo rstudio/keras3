@@ -84,6 +84,5 @@ on your inputs before passing them to the model.
 \seealso{
 \itemize{
 \item \url{https://keras.io/api/applications/densenet#densenet169-function}
-\item \url{https://www.tensorflow.org/api_docs/python/tf/keras/applications/DenseNet169}
 }
 }

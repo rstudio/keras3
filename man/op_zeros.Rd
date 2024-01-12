@@ -20,7 +20,6 @@ Return a new tensor of given shape and type, filled with zeros.
 \seealso{
 \itemize{
 \item \url{https://keras.io/api/ops/numpy#zeros-function}
-\item \url{https://www.tensorflow.org/api_docs/python/tf/keras/ops/zeros}
 }
 
 Other numpy ops: 

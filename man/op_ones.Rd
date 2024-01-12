@@ -20,7 +20,6 @@ Return a new tensor of given shape and type, filled with ones.
 \seealso{
 \itemize{
 \item \url{https://keras.io/api/ops/numpy#ones-function}
-\item \url{https://www.tensorflow.org/api_docs/python/tf/keras/ops/ones}
 }
 
 Other numpy ops: 

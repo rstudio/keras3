@@ -19,10 +19,6 @@ random_dropout(inputs, rate, noise_shape = NULL, seed = NULL)
 Randomly set some portion of values in the tensor to 0.
 }
 \seealso{
-\itemize{
-\item \url{https://www.tensorflow.org/api_docs/python/tf/keras/random/dropout}
-}
-
 Other random: 
 \code{\link{random_categorical}()},
 \code{\link{random_gamma}()},

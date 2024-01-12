@@ -103,10 +103,6 @@ c(whole_sequence_output, final_state) \%<-\% rnn(inputs)
 }
 
 \seealso{
-\itemize{
-\item \url{https://www.tensorflow.org/api_docs/python/tf/keras/layers/SimpleRNNCell}
-}
-
 Other simple rnn layers: 
 \code{\link{layer_simple_rnn}()}
 

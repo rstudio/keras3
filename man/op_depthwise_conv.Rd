@@ -56,7 +56,6 @@ This ops supports 1D and 2D depthwise convolution.
 \seealso{
 \itemize{
 \item \url{https://keras.io/api/ops/nn#depthwiseconv-function}
-\item \url{https://www.tensorflow.org/api_docs/python/tf/keras/ops/depthwise_conv}
 }
 
 Other nn ops: 

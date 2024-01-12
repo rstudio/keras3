@@ -24,10 +24,6 @@ get_custom_objects()$update(list(MyObject = MyObject))
 }
 
 \seealso{
-\itemize{
-\item \url{https://www.tensorflow.org/api_docs/python/tf/keras/utils/get_custom_objects}
-}
-
 Other object registration saving: 
 \code{\link{get_registered_name}()},
 \code{\link{get_registered_object}()},

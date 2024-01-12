@@ -78,7 +78,6 @@ op_any(x)
 \seealso{
 \itemize{
 \item \url{https://keras.io/api/ops/numpy#any-function}
-\item \url{https://www.tensorflow.org/api_docs/python/tf/keras/ops/any}
 }
 
 Other numpy ops: 

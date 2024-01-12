@@ -18,7 +18,6 @@ Return the non-negative square root of a tensor, element-wise.
 \seealso{
 \itemize{
 \item \url{https://keras.io/api/ops/numpy#sqrt-function}
-\item \url{https://www.tensorflow.org/api_docs/python/tf/keras/ops/sqrt}
 }
 
 Other numpy ops: 

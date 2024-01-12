@@ -23,7 +23,6 @@ Other axes remain in their original order.
 \seealso{
 \itemize{
 \item \url{https://keras.io/api/ops/numpy#moveaxis-function}
-\item \url{https://www.tensorflow.org/api_docs/python/tf/keras/ops/moveaxis}
 }
 
 Other numpy ops: 

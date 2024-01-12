@@ -58,10 +58,6 @@ loss
 }
 
 \seealso{
-\itemize{
-\item \url{https://www.tensorflow.org/api_docs/python/tf/keras/metrics/categorical_focal_crossentropy}
-}
-
 Other losses: 
 \code{\link{Loss}()},
 \code{\link{loss_binary_crossentropy}()},

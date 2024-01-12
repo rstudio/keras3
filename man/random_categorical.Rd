@@ -41,10 +41,6 @@ Each column index contains an independent samples drawn from the input
 distribution.
 }
 \seealso{
-\itemize{
-\item \url{https://www.tensorflow.org/api_docs/python/tf/keras/random/categorical}
-}
-
 Other random: 
 \code{\link{random_dropout}()},
 \code{\link{random_gamma}()},

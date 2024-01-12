@@ -150,10 +150,6 @@ Usage with the \code{compile()} API:
 }
 
 \seealso{
-\itemize{
-\item \url{https://www.tensorflow.org/api_docs/python/tf/keras/losses/CategoricalFocalCrossentropy}
-}
-
 Other losses: 
 \code{\link{Loss}()},
 \code{\link{loss_binary_crossentropy}()},

@@ -35,7 +35,6 @@ y
 \itemize{
 \item \code{\link[=op_array]{op_array()}}
 \item \url{https://keras.io/api/ops/core#converttotensor-function}
-\item \url{https://www.tensorflow.org/api_docs/python/tf/keras/ops/convert_to_tensor}
 }
 
 Other core ops: 

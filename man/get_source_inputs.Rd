@@ -17,10 +17,6 @@ Output will always be a list of tensors
 (potentially with 1 element).
 }
 \seealso{
-\itemize{
-\item \url{https://www.tensorflow.org/api_docs/python/tf/keras/utils/get_source_inputs}
-}
-
 Other utils: 
 \code{\link{audio_dataset_from_directory}()},
 \code{\link{clear_session}()},

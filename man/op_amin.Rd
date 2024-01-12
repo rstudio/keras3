@@ -57,7 +57,6 @@ Returns the minimum of a vector or minimum value along an axis.
 \seealso{
 \itemize{
 \item \url{https://keras.io/api/ops/numpy#amin-function}
-\item \url{https://www.tensorflow.org/api_docs/python/tf/keras/ops/amin}
 }
 
 Other numpy ops: 

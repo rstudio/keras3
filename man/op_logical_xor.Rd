@@ -18,10 +18,6 @@ Output boolean tensor.
 Compute the truth value of \verb{x1 XOR x2}, element-wise.
 }
 \seealso{
-\itemize{
-\item \url{https://www.tensorflow.org/api_docs/python/tf/keras/ops/logical_xor}
-}
-
 Other numpy ops: 
 \code{\link{op_abs}()},
 \code{\link{op_add}()},

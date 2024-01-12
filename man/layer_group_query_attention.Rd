@@ -105,10 +105,6 @@ decoder Transformer).
 }
 
 \seealso{
-\itemize{
-\item \url{https://www.tensorflow.org/api_docs/python/tf/keras/layers/GroupQueryAttention}
-}
-
 Other attention layers: 
 \code{\link{layer_additive_attention}()},
 \code{\link{layer_attention}()},

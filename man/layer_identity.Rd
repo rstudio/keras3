@@ -16,10 +16,6 @@ This layer should be used as a placeholder when no operation is to be
 performed. The layer just returns its \code{inputs} argument as output.
 }
 \seealso{
-\itemize{
-\item \url{https://www.tensorflow.org/api_docs/python/tf/keras/layers/Identity}
-}
-
 Other core layers: 
 \code{\link{layer_dense}()},
 \code{\link{layer_einsum_dense}()},

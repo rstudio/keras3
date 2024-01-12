@@ -28,10 +28,6 @@ op_erf(x)
 }
 
 \seealso{
-\itemize{
-\item \url{https://www.tensorflow.org/api_docs/python/tf/keras/ops/erf}
-}
-
 Other math ops: 
 \code{\link{op_extract_sequences}()},
 \code{\link{op_fft2}()},

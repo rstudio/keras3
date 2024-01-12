@@ -36,7 +36,6 @@ op_scatter(indices, values, shape= c(2, 2))
 \seealso{
 \itemize{
 \item \url{https://keras.io/api/ops/core#scatter-function}
-\item \url{https://www.tensorflow.org/api_docs/python/tf/keras/ops/scatter}
 }
 
 Other core ops: 

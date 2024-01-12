@@ -89,14 +89,13 @@ the smaller the updates.
 }
 \section{Reference}{
 \itemize{
-\item \href{http://www.jmlr.org/papers/volume12/duchi11a/duchi11a.pdf}{Duchi et al., 2011}.
+\item \href{https://www.jmlr.org/papers/volume12/duchi11a/duchi11a.pdf}{Duchi et al., 2011}.
 }
 }
 
 \seealso{
 \itemize{
 \item \url{https://keras.io/api/optimizers/adagrad#adagrad-class}
-\item \url{https://www.tensorflow.org/api_docs/python/tf/keras/optimizers/Adagrad}
 }
 
 Other optimizers: 

@@ -91,7 +91,6 @@ y
 \seealso{
 \itemize{
 \item \url{https://keras.io/api/layers/reshaping_layers/zero_padding2d#zeropadding2d-class}
-\item \url{https://www.tensorflow.org/api_docs/python/tf/keras/layers/ZeroPadding2D}
 }
 
 Other reshaping layers: 

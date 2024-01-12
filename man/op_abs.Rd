@@ -26,10 +26,6 @@ op_abs(x)
 }
 
 \seealso{
-\itemize{
-\item \url{https://www.tensorflow.org/api_docs/python/tf/keras/ops/abs}
-}
-
 Other numpy ops: 
 \code{\link{op_add}()},
 \code{\link{op_all}()},

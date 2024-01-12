@@ -42,7 +42,6 @@ where \code{alpha} is a learned array with the same shape as x.
 \seealso{
 \itemize{
 \item \url{https://keras.io/api/layers/activation_layers/prelu#prelu-class}
-\item \url{https://www.tensorflow.org/api_docs/python/tf/keras/layers/PReLU}
 }
 
 Other activation layers: 

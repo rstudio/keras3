@@ -127,10 +127,6 @@ str(whole_sequence_output)
 }
 
 \seealso{
-\itemize{
-\item \url{https://www.tensorflow.org/api_docs/python/tf/keras/layers/LSTMCell}
-}
-
 Other lstm rnn layers: 
 \code{\link{layer_lstm}()}
 

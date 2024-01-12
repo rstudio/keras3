@@ -10,10 +10,6 @@ config_enable_unsafe_deserialization()
 Disables safe mode globally, allowing deserialization of lambdas.
 }
 \seealso{
-\itemize{
-\item \url{https://www.tensorflow.org/api_docs/python/tf/keras/config/enable_unsafe_deserialization}
-}
-
 Other saving: 
 \code{\link{clear_registered_custom_objects}()},
 \code{\link{deserialize_keras_object}()},

@@ -19,10 +19,6 @@ framework. It maps objects to the string names associated with those objects
 for serialization/deserialization.
 }
 \seealso{
-\itemize{
-\item \url{https://www.tensorflow.org/api_docs/python/tf/keras/utils/get_registered_name}
-}
-
 Other object registration saving: 
 \code{\link{clear_registered_custom_objects}()},
 \code{\link{get_registered_object}()},

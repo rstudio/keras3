@@ -12,10 +12,6 @@ This provides the best experience when using Keras in an interactive
 environment such as a shell or a notebook.
 }
 \seealso{
-\itemize{
-\item \url{https://www.tensorflow.org/api_docs/python/tf/keras/config/enable_interactive_logging}
-}
-
 Other io utils: 
 \code{\link{config_disable_interactive_logging}()},
 \code{\link{config_is_interactive_logging_enabled}()}

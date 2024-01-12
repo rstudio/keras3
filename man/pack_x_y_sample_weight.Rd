@@ -33,10 +33,6 @@ data <- pack_x_y_sample_weight(x, y)
 }
 
 \seealso{
-\itemize{
-\item \url{https://www.tensorflow.org/api_docs/python/tf/keras/utils/pack_x_y_sample_weight}
-}
-
 Other datum util adapter trainers: 
 \code{\link{unpack_x_y_sample_weight}()}
 

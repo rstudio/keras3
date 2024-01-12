@@ -38,6 +38,5 @@ for each skipped layer.
 \seealso{
 \itemize{
 \item \url{https://keras.io/api/models/model_saving_apis/weights_saving_and_loading#loadweights-method}
-\item \url{https://www.tensorflow.org/api_docs/python/tf/keras/Model/load_weights}
 }
 }

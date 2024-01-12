@@ -33,7 +33,6 @@ Torch backend.
 \seealso{
 \itemize{
 \item \url{https://keras.io/api/ops/numpy#split-function}
-\item \url{https://www.tensorflow.org/api_docs/python/tf/keras/ops/split}
 }
 
 Other numpy ops: 

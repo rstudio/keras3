@@ -146,7 +146,6 @@ is replaced with a gradient with shrinkage.
 \seealso{
 \itemize{
 \item \url{https://keras.io/api/optimizers/ftrl#ftrl-class}
-\item \url{https://www.tensorflow.org/api_docs/python/tf/keras/optimizers/Ftrl}
 }
 
 Other optimizers: 

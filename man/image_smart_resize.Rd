@@ -77,10 +77,6 @@ we resize the \verb{(340, 340)} crop to \verb{(200, 200)}.
 }
 }
 \seealso{
-\itemize{
-\item \url{https://www.tensorflow.org/api_docs/python/tf/keras/preprocessing/image/smart_resize}
-}
-
 Other image utils: 
 \code{\link{image_array_save}()},
 \code{\link{image_from_array}()},

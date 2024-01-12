@@ -32,7 +32,6 @@ Test the model on a single batch of samples.
 \seealso{
 \itemize{
 \item \url{https://keras.io/api/models/model_training_apis#testonbatch-method}
-\item \url{https://www.tensorflow.org/api_docs/python/tf/keras/Model/test_on_batch}
 }
 
 Other model training: 

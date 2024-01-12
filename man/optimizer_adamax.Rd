@@ -110,14 +110,13 @@ w <- w - current_lr * m / (u + epsilon)
 }
 \section{Reference}{
 \itemize{
-\item \href{http://arxiv.org/abs/1412.6980}{Kingma et al., 2014}
+\item \href{https://arxiv.org/abs/1412.6980}{Kingma et al., 2014}
 }
 }
 
 \seealso{
 \itemize{
 \item \url{https://keras.io/api/optimizers/adamax#adamax-class}
-\item \url{https://www.tensorflow.org/api_docs/python/tf/keras/optimizers/Adamax}
 }
 
 Other optimizers: 

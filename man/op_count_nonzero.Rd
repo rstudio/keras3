@@ -43,7 +43,6 @@ op_count_nonzero(x)
 \seealso{
 \itemize{
 \item \url{https://keras.io/api/ops/numpy#countnonzero-function}
-\item \url{https://www.tensorflow.org/api_docs/python/tf/keras/ops/count_nonzero}
 }
 
 Other numpy ops: 

@@ -38,10 +38,6 @@ pil_img
 }
 
 \seealso{
-\itemize{
-\item \url{https://www.tensorflow.org/api_docs/python/tf/keras/utils/array_to_img}
-}
-
 Other image utils: 
 \code{\link{image_array_save}()},
 \code{\link{image_load}()},

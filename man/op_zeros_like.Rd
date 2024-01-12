@@ -20,7 +20,6 @@ Return a tensor of zeros with the same shape and type as \code{x}.
 \seealso{
 \itemize{
 \item \url{https://keras.io/api/ops/numpy#zeroslike-function}
-\item \url{https://www.tensorflow.org/api_docs/python/tf/keras/ops/zeros_like}
 }
 
 Other numpy ops: 

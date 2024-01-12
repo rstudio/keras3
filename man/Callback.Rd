@@ -331,7 +331,6 @@ Any objects assigned here are invisible to the Keras framework.
 \seealso{
 \itemize{
 \item \url{https://keras.io/api/callbacks/base_callback#callback-class}
-\item \url{https://www.tensorflow.org/api_docs/python/tf/keras/callbacks/Callback}
 }
 
 Other callbacks: 

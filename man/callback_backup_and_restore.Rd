@@ -104,7 +104,6 @@ nrow(as.data.frame(history))
 \seealso{
 \itemize{
 \item \url{https://keras.io/api/callbacks/backup_and_restore#backupandrestore-class}
-\item \url{https://www.tensorflow.org/api_docs/python/tf/keras/callbacks/BackupAndRestore}
 }
 
 Other callbacks: 

@@ -2,7 +2,7 @@
 % Please edit documentation in R/ops.R
 \name{op_vectorized_map}
 \alias{op_vectorized_map}
-\title{Parallel map of \code{function} on axis 0 of tensor(s) \code{elements}.}
+\title{Parallel map of \code{function} on the first axis of tensor(s) \code{elements}.}
 \usage{
 op_vectorized_map(elements, f)
 }
@@ -67,10 +67,6 @@ a single list of tensor arguments.
 }\if{html}{\out{</div>}}
 }
 \seealso{
-\itemize{
-\item \url{https://www.tensorflow.org/api_docs/python/tf/keras/ops/vectorized_map}
-}
-
 Other core ops: 
 \code{\link{op_cast}()},
 \code{\link{op_cond}()},

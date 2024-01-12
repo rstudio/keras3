@@ -57,7 +57,7 @@ model <- keras_model_sequential(layer)
 predict(model, c(0, 1, 2)) # [1] -1  0  1
 }\if{html}{\out{</div>}}
 
-\if{html}{\out{<div class="sourceCode">}}\preformatted{## 1/1 - 0s - 23ms/step
+\if{html}{\out{<div class="sourceCode">}}\preformatted{## 1/1 - 0s - 39ms/step
 }\if{html}{\out{</div>}}
 
 \if{html}{\out{<div class="sourceCode">}}\preformatted{## [1] -1  0  1
@@ -68,7 +68,7 @@ compile(model)  # This is needed to re-compile model.predict!
 predict(model, c(0, 1, 2)) # [1] 0 1 2
 }\if{html}{\out{</div>}}
 
-\if{html}{\out{<div class="sourceCode">}}\preformatted{## 1/1 - 0s - 19ms/step
+\if{html}{\out{<div class="sourceCode">}}\preformatted{## 1/1 - 0s - 21ms/step
 }\if{html}{\out{</div>}}
 
 \if{html}{\out{<div class="sourceCode">}}\preformatted{## [1] 0 1 2

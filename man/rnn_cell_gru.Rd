@@ -124,10 +124,6 @@ shape(whole_sequence_output)
 }
 
 \seealso{
-\itemize{
-\item \url{https://www.tensorflow.org/api_docs/python/tf/keras/layers/GRUCell}
-}
-
 Other gru rnn layers: 
 \code{\link{layer_gru}()}
 

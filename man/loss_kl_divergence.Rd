@@ -48,7 +48,6 @@ loss
 \seealso{
 \itemize{
 \item \url{https://keras.io/api/losses/probabilistic_losses#kldivergence-class}
-\item \url{https://www.tensorflow.org/api_docs/python/tf/keras/losses/KLDivergence}
 }
 
 Other losses: 

@@ -29,7 +29,6 @@ inputs by their sign as in ReLU.
 \seealso{
 \itemize{
 \item \url{https://keras.io/api/layers/activations#gelu-function}
-\item \url{https://www.tensorflow.org/api_docs/python/tf/keras/activations/gelu}
 }
 
 Other activations: 

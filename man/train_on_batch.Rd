@@ -41,7 +41,6 @@ Runs a single gradient update on a single batch of data.
 \seealso{
 \itemize{
 \item \url{https://keras.io/api/models/model_training_apis#trainonbatch-method}
-\item \url{https://www.tensorflow.org/api_docs/python/tf/keras/Model/train_on_batch}
 }
 
 Other model training: 

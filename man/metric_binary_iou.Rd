@@ -91,10 +91,6 @@ Usage with \code{compile()} API:
 }
 
 \seealso{
-\itemize{
-\item \url{https://www.tensorflow.org/api_docs/python/tf/keras/metrics/BinaryIoU}
-}
-
 Other iou metrics: 
 \code{\link{metric_iou}()},
 \code{\link{metric_mean_iou}()},

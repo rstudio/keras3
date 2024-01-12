@@ -26,10 +26,6 @@ If you have previously disabled traceback filtering via
 \code{\link[=config_enable_traceback_filtering]{config_enable_traceback_filtering()}}.
 }
 \seealso{
-\itemize{
-\item \url{https://www.tensorflow.org/api_docs/python/tf/keras/config/is_traceback_filtering_enabled}
-}
-
 Other traceback utils: 
 \code{\link{config_disable_traceback_filtering}()},
 \code{\link{config_enable_traceback_filtering}()}

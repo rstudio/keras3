@@ -34,10 +34,6 @@ standard deviation, discarding and re-drawing any samples that are more
 than two standard deviations from the mean.
 }
 \seealso{
-\itemize{
-\item \url{https://www.tensorflow.org/api_docs/python/tf/keras/random/truncated_normal}
-}
-
 Other random: 
 \code{\link{random_categorical}()},
 \code{\link{random_dropout}()},

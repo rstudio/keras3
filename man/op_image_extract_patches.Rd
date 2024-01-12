@@ -68,7 +68,6 @@ shape(patches)
 \seealso{
 \itemize{
 \item \url{https://keras.io/api/ops/image#extractpatches-function}
-\item \url{https://www.tensorflow.org/api_docs/python/tf/keras/ops/image/extract_patches}
 }
 
 Other image ops: 

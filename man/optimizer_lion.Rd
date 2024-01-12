@@ -97,16 +97,12 @@ similar strength (lr * wd).
 }
 \section{References}{
 \itemize{
-\item \href{http://arxiv.org/abs/2302.06675}{Chen et al., 2023}
-\item \href{http://github.com/google/automl/tree/master/lion}{Authors' implementation}
+\item \href{https://arxiv.org/abs/2302.06675}{Chen et al., 2023}
+\item \href{https://github.com/google/automl/tree/master/lion}{Authors' implementation}
 }
 }
 
 \seealso{
-\itemize{
-\item \url{https://www.tensorflow.org/api_docs/python/tf/keras/optimizers/Lion}
-}
-
 Other optimizers: 
 \code{\link{optimizer_adadelta}()},
 \code{\link{optimizer_adafactor}()},

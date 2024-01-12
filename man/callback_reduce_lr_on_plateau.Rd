@@ -60,7 +60,6 @@ model \%>\% fit(x_train, y_train, callbacks = list(reduce_lr))
 \seealso{
 \itemize{
 \item \url{https://keras.io/api/callbacks/reduce_lr_on_plateau#reducelronplateau-class}
-\item \url{https://www.tensorflow.org/api_docs/python/tf/keras/callbacks/ReduceLROnPlateau}
 }
 
 Other callbacks: 

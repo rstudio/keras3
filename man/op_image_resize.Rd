@@ -67,7 +67,6 @@ shape(y)
 \seealso{
 \itemize{
 \item \url{https://keras.io/api/ops/image#resize-function}
-\item \url{https://www.tensorflow.org/api_docs/python/tf/keras/ops/image/resize}
 }
 
 Other image ops: 

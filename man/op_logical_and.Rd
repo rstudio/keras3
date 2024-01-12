@@ -20,7 +20,6 @@ Zeros are treated as \code{FALSE} and non-zeros are treated as \code{TRUE}.
 \seealso{
 \itemize{
 \item \url{https://keras.io/api/ops/numpy#logicaland-function}
-\item \url{https://www.tensorflow.org/api_docs/python/tf/keras/ops/logical_and}
 }
 
 Other numpy ops: 

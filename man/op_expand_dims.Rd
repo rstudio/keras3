@@ -21,7 +21,6 @@ Insert a new axis at the \code{axis} position in the expanded tensor shape.
 \seealso{
 \itemize{
 \item \url{https://keras.io/api/ops/numpy#expanddims-function}
-\item \url{https://www.tensorflow.org/api_docs/python/tf/keras/ops/expand_dims}
 }
 
 Other numpy ops: 
