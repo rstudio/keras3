@@ -2518,6 +2518,8 @@ function (target, output, from_logits = FALSE, axis = -1L)
 #' @param x
 #' Input tensor
 #'
+#' @description
+#'
 #' # Returns
 #' An array containing the absolute value of each element in `x`.
 #'
@@ -3960,6 +3962,8 @@ function (x, bins)
 #'
 #' @param x2
 #' Second input tensor.
+#'
+#' @details
 #'
 #' # Example
 #' ```{r}

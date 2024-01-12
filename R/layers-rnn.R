@@ -1373,13 +1373,14 @@ function (units, activation = "tanh", recurrent_activation = "sigmoid",
 #'
 #' - Specify `stateful = TRUE` in the layer constructor.
 #' - Specify a fixed batch size for your model, by passing
-#' If sequential model:
-#'     `batch_input_shape = c(...)` to the `keras_model_sequential()` call.
-#' Else for functional model with 1 or more input layers:
-#'     `batch_shape = c(...)` to all the `layer_input()` call(s).
-#' This is the expected shape of your inputs
-#' *including the batch size*.
-#' It should be a list of integers, e.g. `c(32, 10, 100)`.
+#'   - If sequential model:
+#'     `input_batch_shape = c(...)` to the `keras_model_sequential()` call.
+#'   - Else for functional model with 1 or more input layers:
+#'     `batch_shape = c(...)` to the `layer_input()` call(s).
+#'
+#'   This is the expected shape of your inputs
+#'   *including the batch size*.
+#'   It should be a list of integers, e.g. `c(32, 10, 100)`.
 #' - Specify `shuffle = FALSE` when calling `fit()`.
 #'
 #' To reset the states of your model, call [`reset_state()`] on either

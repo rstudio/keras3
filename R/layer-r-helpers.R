@@ -223,7 +223,7 @@ set_vocabulary <- function(object, vocabulary, idf_weights=NULL, ...) {
 #' normalized_ds <- input_ds |>
 #'   tfdatasets::dataset_map(layer) # Re-map over the input dataset.
 #'
-#' normalize_ds |>
+#' normalized_ds |>
 #'   tfdatasets::as_array_iterator() |>
 #'   tfdatasets::iterate() |>
 #'   str()

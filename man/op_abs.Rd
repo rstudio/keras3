@@ -7,20 +7,24 @@
 op_abs(x)
 }
 \arguments{
-\item{x}{Input tensorReturns
+\item{x}{Input tensor}
+}
+\description{
+Compute the absolute value element-wise.
+}
+\section{Returns}{
+An array containing the absolute value of each element in \code{x}.
+}
 
-An array containing the absolute value of each element in \code{x}.Example
-
+\section{Example}{
 \if{html}{\out{<div class="sourceCode r">}}\preformatted{x <- op_convert_to_tensor(c(-1.2, 1.2))
 op_abs(x)
 }\if{html}{\out{</div>}}
 
 \if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor([1.2 1.2], shape=(2), dtype=float32)
-}\if{html}{\out{</div>}}}
+}\if{html}{\out{</div>}}
 }
-\description{
-Compute the absolute value element-wise.
-}
+
 \seealso{
 \itemize{
 \item \url{https://www.tensorflow.org/api_docs/python/tf/keras/ops/abs}

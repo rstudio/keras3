@@ -9,13 +9,7 @@ op_divide(x1, x2)
 \arguments{
 \item{x1}{First input tensor.}
 
-\item{x2}{Second input tensor.Example
-
-\if{html}{\out{<div class="sourceCode r">}}\preformatted{op_divide(3, 2)
-}\if{html}{\out{</div>}}
-
-\if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor(1.5, shape=(), dtype=float32)
-}\if{html}{\out{</div>}}}
+\item{x2}{Second input tensor.}
 }
 \value{
 Output tensor, the quotient \code{x1/x2}, element-wise.
@@ -23,6 +17,14 @@ Output tensor, the quotient \code{x1/x2}, element-wise.
 \description{
 Divide arguments element-wise.
 }
+\section{Example}{
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{op_divide(3, 2)
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor(1.5, shape=(), dtype=float32)
+}\if{html}{\out{</div>}}
+}
+
 \seealso{
 \itemize{
 \item \url{https:/keras.io/api/ops/numpy#divide-function}

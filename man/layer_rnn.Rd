@@ -115,7 +115,7 @@ be a high dimension tensor shape.
 \section{Masking:}{
 This layer supports masking for input data with a variable number
 of timesteps. To introduce masks to your data,
-use a \code{layer_Embedding} layer with the \code{mask_zero} parameter
+use a \code{\link[=layer_embedding]{layer_embedding()}} layer with the \code{mask_zero} parameter
 set to \code{TRUE}.
 
 Note on using statefulness in RNNs:
@@ -127,16 +127,19 @@ between samples in different successive batches.
 
 To enable statefulness:
 \itemize{
-\item Specify \code{stateful=TRUE} in the layer constructor.
+\item Specify \code{stateful = TRUE} in the layer constructor.
 \item Specify a fixed batch size for your model, by passing
-If sequential model:
-\code{batch_input_shape=(...)} to the first layer in your model.
-Else for functional model with 1 or more Input layers:
-\code{batch_shape=(...)} to all the first layers in your model.
+\itemize{
+\item If sequential model:
+\code{input_batch_shape = c(...)} to the \code{keras_model_sequential()} call.
+\item Else for functional model with 1 or more input layers:
+\code{batch_shape = c(...)} to the \code{layer_input()} call(s).
+}
+
 This is the expected shape of your inputs
 \emph{including the batch size}.
-It should be a list of integers, e.g. \verb{(32, 10, 100)}.
-\item Specify \code{shuffle=FALSE} when calling \code{fit()}.
+It should be a list of integers, e.g. \code{c(32, 10, 100)}.
+\item Specify \code{shuffle = FALSE} when calling \code{fit()}.
 }
 
 To reset the states of your model, call \code{\link[=reset_state]{reset_state()}} on either
@@ -151,45 +154,49 @@ the initial state of the RNN layer.
 }
 
 \section{Examples}{
-\if{html}{\out{<div class="sourceCode r">}}\preformatted{# First, let's define a RNN Cell, as a layer subclass.
-MinimalRNNCell(keras$layers$Layer) \%py_class\% \{
-  initialize <- function(units, ...) \{
+First, let's define a RNN Cell, as a layer subclass.
+
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{rnn_cell_minimal <- Layer(
+  "MinimalRNNCell",
+
+  initialize = function(units, ...) \{
     super$initialize(...)
     self$units <- as.integer(units)
     self$state_size <- as.integer(units)
-  \}
+  \},
 
-  build <- function(input_shape) \{
+  build = function(input_shape) \{
     self$kernel <- self$add_weight(
-      shape = c(tail(input_shape, 1), self$units),
+      shape = shape(tail(input_shape, 1), self$units),
       initializer = 'uniform',
-      name = 'kernel')
+      name = 'kernel'
+    )
     self$recurrent_kernel <- self$add_weight(
-      shape = c(self$units, self$units),
+      shape = shape(self$units, self$units),
       initializer = 'uniform',
-      name = 'recurrent_kernel')
+      name = 'recurrent_kernel'
+    )
     self$built <- TRUE
-  \}
+  \},
 
-  call <- function(inputs, states) \{
+  call = function(inputs, states) \{
     prev_output <- states[[1]]
     h <- op_matmul(inputs, self$kernel)
     output <- h + op_matmul(prev_output, self$recurrent_kernel)
     list(output, list(output))
   \}
+)
+}\if{html}{\out{</div>}}
 
-\}
+Let's use this cell in a RNN layer:
 
-# Let's use this cell in a RNN layer:
-
-cell <- MinimalRNNCell(units = 32)
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{cell <- rnn_cell_minimal(units = 32)
 x <- layer_input(shape = shape(NULL, 5))
 layer <- layer_rnn(cell = cell)
 y <- layer(x)
+}\if{html}{\out{</div>}}
 
-# Here's how to use the cell to build a stacked RNN:
-
-cells <- list(MinimalRNNCell(units = 32), MinimalRNNCell(units = 4))
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{cells <- list(rnn_cell_minimal(units = 32), rnn_cell_minimal(units = 4))
 x <- layer_input(shape = shape(NULL, 5))
 layer <- layer_rnn(cell = cells)
 y <- layer(x)
