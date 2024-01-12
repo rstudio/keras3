@@ -542,7 +542,7 @@ The filename should end in `.weights.h5`.
 
 ```{r}
 sequential_model = keras_model_sequential(input_shape = c(784), 
-                                          input_layer_name = "digits") |>
+                                          input_name = "digits") |>
   layer_dense(64, activation = "relu", name = "dense_1") |>
   layer_dense(64, activation = "relu", name = "dense_2") |>
   layer_dense(10, name = "predictions")
@@ -610,7 +610,7 @@ pretrained_model |> load_model_weights("pretrained.weights.h5")
 
 # Create a new model by extracting layers from the original model:
 extracted_layers <- pretrained_model$layers |> head(-1)
-model <- keras_model_sequential(extracted_layers) |>
+model <- keras_model_sequential(layers = extracted_layers) |>
   layer_dense(5, name = "dense_3")
 summary(model)
 ```

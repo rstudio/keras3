@@ -58,7 +58,7 @@ named_list <- function(...)
 
 `append<-` <- function(x, value) c(x, value)
 
-`prepend<-` <- function(x, value) c(x[integer()], value, x)
+`prepend<-` <- function(x, value) c(value, x) # c(x[integer()], value, x)
 
 replace_val <- function(x, old, new) {
   if (!is_scalar(new))

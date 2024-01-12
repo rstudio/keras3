@@ -202,7 +202,7 @@ set_vocabulary <- function(object, vocabulary, idf_weights=NULL, ...) {
 #' ````{r}
 #' layer <- layer_normalization(axis = NULL)
 #' adapt(layer, c(0, 2))
-#' model <- keras_model_sequential(layer)
+#' model <- keras_model_sequential() |> layer()
 #' predict(model, c(0, 1, 2)) # [1] -1  0  1
 #'
 #' adapt(layer, c(-1, 1))
