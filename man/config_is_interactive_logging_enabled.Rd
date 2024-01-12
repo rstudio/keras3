@@ -13,7 +13,7 @@ and \code{FALSE} otherwise.
 \description{
 To switch between writing logs to stdout and \code{absl.logging}, you may use
 \code{\link[=config_enable_interactive_logging]{config_enable_interactive_logging()}} and
-\code{\link[=config_disable_interactie_logging]{config_disable_interactie_logging()}}.
+\code{\link[=config_disable_interactive_logging]{config_disable_interactive_logging()}}.
 }
 \seealso{
 Other io utils: 

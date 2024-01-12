@@ -347,11 +347,11 @@ function (x, num_classes = NULL)
 #' involved.
 #'
 #' This sets:
-#' - The R session seed: [`set.seed(seed)`]
-#' - The Python session seed: `import random; random.seed(seed)`
-#' - The NumPy seed: `import numpy; numpy.random.seed(seed)`
-#' - The TensorFlow seed: `tf.random.set_seed(seed)`
-#' - Disables Python hash randomization
+#' - the R session seed: [`set.seed()`]
+#' - the Python session seed: `import random; random.seed()`
+#' - the Python NumPy seed: `import numpy; numpy.random.seed()`
+#' - the TensorFlow seed: `tf$random$set_seed()`
+#' - and disables Python hash randomization.
 #'
 #' Note that the TensorFlow seed is set even if you're not using TensorFlow
 #' as your backend framework, since many workflows leverage `tf$data`

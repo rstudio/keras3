@@ -21,7 +21,7 @@ new_layer_class(
 \item{classname}{String, the name of the custom class. (Conventionally, CamelCase).}
 
 \item{initialize, call, build, get_config}{Recommended methods to implement. See
-description section.}
+description and details sections.}
 
 \item{..., public}{Additional methods or public members of the custom class.}
 

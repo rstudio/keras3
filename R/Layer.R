@@ -536,7 +536,7 @@
 #'
 #' @param classname String, the name of the custom class. (Conventionally, CamelCase).
 #' @param initialize,call,build,get_config Recommended methods to implement. See
-#'   description section.
+#'   description and details sections.
 #' @param ...,public Additional methods or public members of the custom class.
 #' @param private Named list of R objects (typically, functions) to include in
 #'   instance private environments. `private` methods will have all the same

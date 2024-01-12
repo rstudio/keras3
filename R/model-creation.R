@@ -229,6 +229,8 @@ clone_model <- function(model, input_tensors = NULL, clone_function = NULL) {
 }
 
 
+# ---- Model methods ----
+
 
 #' Retrieves a layer based on either its name (unique) or index.
 #'

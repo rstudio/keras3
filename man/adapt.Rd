@@ -53,11 +53,11 @@ each subsequent call to \code{adapt()}.
 
 \if{html}{\out{<div class="sourceCode r">}}\preformatted{layer <- layer_normalization(axis = NULL)
 adapt(layer, c(0, 2))
-model <- keras_model_sequential(layer)
+model <- keras_model_sequential() |> layer()
 predict(model, c(0, 1, 2)) # [1] -1  0  1
 }\if{html}{\out{</div>}}
 
-\if{html}{\out{<div class="sourceCode">}}\preformatted{## 1/1 - 0s - 39ms/step
+\if{html}{\out{<div class="sourceCode">}}\preformatted{## 1/1 - 0s - 24ms/step
 }\if{html}{\out{</div>}}
 
 \if{html}{\out{<div class="sourceCode">}}\preformatted{## [1] -1  0  1
@@ -68,7 +68,7 @@ compile(model)  # This is needed to re-compile model.predict!
 predict(model, c(0, 1, 2)) # [1] 0 1 2
 }\if{html}{\out{</div>}}
 
-\if{html}{\out{<div class="sourceCode">}}\preformatted{## 1/1 - 0s - 21ms/step
+\if{html}{\out{<div class="sourceCode">}}\preformatted{## 1/1 - 0s - 23ms/step
 }\if{html}{\out{</div>}}
 
 \if{html}{\out{<div class="sourceCode">}}\preformatted{## [1] 0 1 2
@@ -105,11 +105,5 @@ normalized_ds |>
 ##  $ : num [1(1d)] 1
 ##  $ : num [1(1d)] 2
 }\if{html}{\out{</div>}}
-}
-\seealso{
-\itemize{
-\item \url{https://www.tensorflow.org/guide/keras/preprocessing_layers#the_adapt_method}
-\item \url{https://keras.io/guides/preprocessing_layers/#the-adapt-method}
-}
 }
 \concept{preprocessing layer methods}

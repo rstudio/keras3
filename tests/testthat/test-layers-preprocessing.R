@@ -246,7 +246,7 @@ expect_equal(as.array(out), rbind(-1.41421353816986, -0.70710676908493, 0),
 # adapt multiple times in a model
 layer = layer_normalization(axis=NULL)
 layer %>% adapt(c(0, 2))
-model = keras_model_sequential(layer)
+model = keras_model_sequential(layers = layer)
 out <- model %>% predict(c(0, 1, 2))
 expect_equal(out, array(c(-1, 0, 1)))
 

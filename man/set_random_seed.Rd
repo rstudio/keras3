@@ -18,11 +18,11 @@ involved.
 
 This sets:
 \itemize{
-\item The R session seed: \code{\link{set.seed(seed)}}
-\item The Python session seed: \verb{import random; random.seed(seed)}
-\item The NumPy seed: \verb{import numpy; numpy.random.seed(seed)}
-\item The TensorFlow seed: \code{tf.random.set_seed(seed)}
-\item Disables Python hash randomization
+\item the R session seed: \code{\link[=set.seed]{set.seed()}}
+\item the Python session seed: \verb{import random; random.seed()}
+\item the Python NumPy seed: \verb{import numpy; numpy.random.seed()}
+\item the TensorFlow seed: \code{tf$random$set_seed()}
+\item and disables Python hash randomization.
 }
 
 Note that the TensorFlow seed is set even if you're not using TensorFlow

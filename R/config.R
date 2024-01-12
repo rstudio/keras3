@@ -317,7 +317,7 @@ function ()
 #' @description
 #' To switch between writing logs to stdout and `absl.logging`, you may use
 #' [`config_enable_interactive_logging()`] and
-#' [`config_disable_interactie_logging()`].
+#' [`config_disable_interactive_logging()`].
 #'
 #' @returns
 #' Boolean, `TRUE` if interactive logging is enabled,

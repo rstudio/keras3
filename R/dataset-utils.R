@@ -421,7 +421,7 @@ function (dataset, left_size = NULL, right_size = NULL, shuffle = FALSE,
 #' preserved.
 #'
 #' @param data_format
-#' If `NULL` uses [`config.image_data_format()`]
+#' If `NULL` uses [`config_image_data_format()`]
 #' otherwise either `'channel_last'` or `'channel_first'`.
 #'
 #' @export

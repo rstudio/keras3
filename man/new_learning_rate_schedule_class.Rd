@@ -19,6 +19,8 @@ new_learning_rate_schedule_class(
 \arguments{
 \item{classname}{String, the name of the custom class. (Conventionally, CamelCase).}
 
+\item{call, initialize, get_config}{Recommended methods to implement. See description and details sections.}
+
 \item{..., public}{Additional methods or public members of the custom class.}
 
 \item{private}{Named list of R objects (typically, functions) to include in

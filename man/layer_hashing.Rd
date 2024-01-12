@@ -162,7 +162,7 @@ An \code{int32} tensor of shape \verb{(batch_size, ...)}.
 
 \section{Reference}{
 \itemize{
-\item \href{https://www.131002.net/siphash/siphash.pdf}{SipHash with salt}
+\item \href{https://en.wikipedia.org/wiki/SipHash}{SipHash with salt}
 }
 }
 

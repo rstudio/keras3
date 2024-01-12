@@ -74,6 +74,8 @@
 #'   get_config()
 #'   ```
 #'
+#' @param call,initialize,get_config
+#' Recommended methods to implement. See description and details sections.
 #' @tether keras.optimizers.schedules.LearningRateSchedule
 #' @inheritSection Layer Symbols in scope
 #' @inheritParams Layer

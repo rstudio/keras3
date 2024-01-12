@@ -446,7 +446,7 @@ function (object, num_bins, output_mode = "int", sparse = FALSE,
 #' An `int32` tensor of shape `(batch_size, ...)`.
 #'
 #' # Reference
-#' - [SipHash with salt](https://www.131002.net/siphash/siphash.pdf)
+#' - [SipHash with salt](https://en.wikipedia.org/wiki/SipHash)
 #'
 #' @param num_bins
 #' Number of hash bins. Note that this includes the `mask_value`
