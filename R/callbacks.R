@@ -89,7 +89,7 @@
 #' @family callbacks
 #' @seealso
 #' + <https://keras.io/api/callbacks/backup_and_restore#backupandrestore-class>
-#' + <https://www.tensorflow.org/api_docs/python/tf/keras/callbacks/BackupAndRestore>
+#  + <https://www.tensorflow.org/api_docs/python/tf/keras/callbacks/BackupAndRestore>
 #' @tether keras.callbacks.BackupAndRestore
 callback_backup_and_restore <-
 function (backup_dir, save_freq = "epoch", delete_checkpoint = TRUE)
@@ -125,7 +125,7 @@ function (backup_dir, save_freq = "epoch", delete_checkpoint = TRUE)
 #' @family callbacks
 #' @seealso
 #' + <https://keras.io/api/callbacks/csv_logger#csvlogger-class>
-#' + <https://www.tensorflow.org/api_docs/python/tf/keras/callbacks/CSVLogger>
+#  + <https://www.tensorflow.org/api_docs/python/tf/keras/callbacks/CSVLogger>
 #' @tether keras.callbacks.CSVLogger
 callback_csv_logger <-
 function (filename, separator = ",", append = FALSE)
@@ -212,7 +212,7 @@ function (filename, separator = ",", append = FALSE)
 #' @family callbacks
 #' @seealso
 #' + <https://keras.io/api/callbacks/early_stopping#earlystopping-class>
-#' + <https://www.tensorflow.org/api_docs/python/tf/keras/callbacks/EarlyStopping>
+#  + <https://www.tensorflow.org/api_docs/python/tf/keras/callbacks/EarlyStopping>
 #' @tether keras.callbacks.EarlyStopping
 callback_early_stopping <-
 function (monitor = "val_loss", min_delta = 0L, patience = 0L,
@@ -317,7 +317,7 @@ function (monitor = "val_loss", min_delta = 0L, patience = 0L,
 #' @family callbacks
 #' @seealso
 #' + <https://keras.io/api/callbacks/lambda_callback#lambdacallback-class>
-#' + <https://www.tensorflow.org/api_docs/python/tf/keras/callbacks/LambdaCallback>
+#  + <https://www.tensorflow.org/api_docs/python/tf/keras/callbacks/LambdaCallback>
 #' @tether keras.callbacks.LambdaCallback
 callback_lambda <-
 function (on_epoch_begin = NULL, on_epoch_end = NULL, on_train_begin = NULL,
@@ -398,7 +398,7 @@ as_callback_lambda_fn_sig_logs <- function(fn) {
 #' @family callbacks
 #' @seealso
 #' + <https://keras.io/api/callbacks/learning_rate_scheduler#learningratescheduler-class>
-#' + <https://www.tensorflow.org/api_docs/python/tf/keras/callbacks/LearningRateScheduler>
+#  + <https://www.tensorflow.org/api_docs/python/tf/keras/callbacks/LearningRateScheduler>
 #' @tether keras.callbacks.LearningRateScheduler
 callback_learning_rate_scheduler <-
 function (schedule, verbose = 0L)
@@ -544,7 +544,7 @@ function (schedule, verbose = 0L)
 #' @family callbacks
 #' @seealso
 #' + <https://keras.io/api/callbacks/model_checkpoint#modelcheckpoint-class>
-#' + <https://www.tensorflow.org/api_docs/python/tf/keras/callbacks/ModelCheckpoint>
+#  + <https://www.tensorflow.org/api_docs/python/tf/keras/callbacks/ModelCheckpoint>
 #' @tether keras.callbacks.ModelCheckpoint
 callback_model_checkpoint <-
 function (filepath, monitor = "val_loss", verbose = 0L, save_best_only = FALSE,
@@ -572,7 +572,7 @@ function (filepath, monitor = "val_loss", verbose = 0L, save_best_only = FALSE,
 #' @family callbacks
 #' @seealso
 #' + <https://keras.io/api/callbacks/progbar_logger#progbarlogger-class>
-#' + <https://www.tensorflow.org/api_docs/python/tf/keras/callbacks/ProgbarLogger>
+#  + <https://www.tensorflow.org/api_docs/python/tf/keras/callbacks/ProgbarLogger>
 #' @tether keras.callbacks.ProgbarLogger
 callback_progbar_logger <-
 function (count_mode = NULL)
@@ -637,7 +637,7 @@ function (count_mode = NULL)
 #' @family callbacks
 #' @seealso
 #' + <https://keras.io/api/callbacks/reduce_lr_on_plateau#reducelronplateau-class>
-#' + <https://www.tensorflow.org/api_docs/python/tf/keras/callbacks/ReduceLROnPlateau>
+#  + <https://www.tensorflow.org/api_docs/python/tf/keras/callbacks/ReduceLROnPlateau>
 #' @tether keras.callbacks.ReduceLROnPlateau
 callback_reduce_lr_on_plateau <-
 function (monitor = "val_loss", factor = 0.1, patience = 10L,
@@ -683,7 +683,7 @@ function (monitor = "val_loss", factor = 0.1, patience = 10L,
 #' @family callbacks
 #' @seealso
 #' + <https://keras.io/api/callbacks/remote_monitor#remotemonitor-class>
-#' + <https://www.tensorflow.org/api_docs/python/tf/keras/callbacks/RemoteMonitor>
+#  + <https://www.tensorflow.org/api_docs/python/tf/keras/callbacks/RemoteMonitor>
 #' @tether keras.callbacks.RemoteMonitor
 callback_remote_monitor <-
 function (root = "http://localhost:9000", path = "/publish/epoch/end/",
@@ -860,7 +860,7 @@ function (root = "http://localhost:9000", path = "/publish/epoch/end/",
 #' @family callbacks
 #' @seealso
 #' + <https://keras.io/api/callbacks/tensorboard#tensorboard-class>
-#' + <https://www.tensorflow.org/api_docs/python/tf/keras/callbacks/TensorBoard>
+#  + <https://www.tensorflow.org/api_docs/python/tf/keras/callbacks/TensorBoard>
 #' @tether keras.callbacks.TensorBoard
 callback_tensorboard <-
 function (log_dir = "logs", histogram_freq = 0L, write_graph = TRUE,
@@ -879,7 +879,7 @@ function (log_dir = "logs", histogram_freq = 0L, write_graph = TRUE,
 #' @family callbacks
 #' @seealso
 #' + <https://keras.io/api/callbacks/terminate_on_nan#terminateonnan-class>
-#' + <https://www.tensorflow.org/api_docs/python/tf/keras/callbacks/TerminateOnNaN>
+#  + <https://www.tensorflow.org/api_docs/python/tf/keras/callbacks/TerminateOnNaN>
 #' @tether keras.callbacks.TerminateOnNaN
 callback_terminate_on_nan <-
 function ()

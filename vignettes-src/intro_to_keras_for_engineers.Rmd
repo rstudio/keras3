@@ -348,19 +348,19 @@ the power and usability of `fit()`? It's easy to customize
 `fit()` to support arbitrary use cases:
 
 - [Customizing what happens in `fit()` with TensorFlow](http://keras.io/guides/custom_train_step_in_tensorflow/)
-- [Customizing what happens in `fit()` with JAX](http://keras.io/guides/custom_train_step_in_jax/)
-- [Customizing what happens in `fit()` with PyTorch](http://keras.io/guides/custom_train_step_in_pytorch/)
+<!-- - [Customizing what happens in `fit()` with JAX](http://keras.io/guides/custom_train_step_in_jax/) -->
+<!-- - [Customizing what happens in `fit()` with PyTorch](http://keras.io/guides/custom_train_step_in_pytorch/) -->
 
 ## How to write custom training loops
 
 - [Writing a training loop from scratch in TensorFlow](http://keras.io/guides/writing_a_custom_training_loop_in_tensorflow/)
-- [Writing a training loop from scratch in JAX](http://keras.io/guides/writing_a_custom_training_loop_in_jax/)
-- [Writing a training loop from scratch in PyTorch](http://keras.io/guides/writing_a_custom_training_loop_in_torch/)
+<!-- - [Writing a training loop from scratch in JAX](http://keras.io/guides/writing_a_custom_training_loop_in_jax/) -->
+<!-- - [Writing a training loop from scratch in PyTorch](http://keras.io/guides/writing_a_custom_training_loop_in_torch/) -->
 
 ## How to distribute training
 
 - [Guide to distributed training with TensorFlow](http://keras.io/guides/distributed_training_with_tensorflow/)
-- [JAX distributed training example](https://github.com/keras-team/keras/blob/main/examples/demo_jax_distributed.py)
-- [PyTorch distributed training example](https://github.com/keras-team/keras/blob/main/examples/demo_torch_multi_gpu.py)
+<!-- - [JAX distributed training example](https://github.com/keras-team/keras/blob/main/examples/demo_jax_distributed.py) -->
+<!-- - [PyTorch distributed training example](https://github.com/keras-team/keras/blob/main/examples/demo_torch_multi_gpu.py) -->
 
 Enjoy the library! 🚀

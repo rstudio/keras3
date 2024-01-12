@@ -91,7 +91,7 @@
 #' @family layers
 #' @seealso
 #' + <https://keras.io/api/layers/recurrent_layers/bidirectional#bidirectional-class>
-#' + <https://www.tensorflow.org/api_docs/python/tf/keras/layers/Bidirectional>
+#  + <https://www.tensorflow.org/api_docs/python/tf/keras/layers/Bidirectional>
 #' @tether keras.layers.Bidirectional
 bidirectional <-
 function (object, layer, merge_mode = "concat", weights = NULL,
@@ -206,7 +206,7 @@ function (object, layer, merge_mode = "concat", weights = NULL,
 #' the forget gate at initialization.
 #' Use in combination with `bias_initializer="zeros"`.
 #' This is recommended in [Jozefowicz et al., 2015](
-#' http://www.jmlr.org/proceedings/papers/v37/jozefowicz15.pdf)
+#' https://proceedings.mlr.press/v37/jozefowicz15.pdf)
 #'
 #' @param kernel_regularizer
 #' Regularizer function applied to the `kernel` weights
@@ -281,7 +281,7 @@ function (object, layer, merge_mode = "concat", weights = NULL,
 #' @family layers
 #' @seealso
 #' + <https://keras.io/api/layers/recurrent_layers/conv_lstm1d#convlstm1d-class>
-#' + <https://www.tensorflow.org/api_docs/python/tf/keras/layers/ConvLSTM1D>
+#  + <https://www.tensorflow.org/api_docs/python/tf/keras/layers/ConvLSTM1D>
 #' @tether keras.layers.ConvLSTM1D
 layer_conv_lstm_1d <-
 function (object, filters, kernel_size, strides = 1L, padding = "valid",
@@ -405,7 +405,7 @@ function (object, filters, kernel_size, strides = 1L, padding = "valid",
 #' gate at initialization.
 #' Use in combination with `bias_initializer="zeros"`.
 #' This is recommended in [Jozefowicz et al., 2015](
-#' http://www.jmlr.org/proceedings/papers/v37/jozefowicz15.pdf)
+#' https://proceedings.mlr.press/v37/jozefowicz15.pdf)
 #'
 #' @param kernel_regularizer
 #' Regularizer function applied to the `kernel` weights
@@ -480,7 +480,7 @@ function (object, filters, kernel_size, strides = 1L, padding = "valid",
 #' @family layers
 #' @seealso
 #' + <https://keras.io/api/layers/recurrent_layers/conv_lstm2d#convlstm2d-class>
-#' + <https://www.tensorflow.org/api_docs/python/tf/keras/layers/ConvLSTM2D>
+#  + <https://www.tensorflow.org/api_docs/python/tf/keras/layers/ConvLSTM2D>
 #' @tether keras.layers.ConvLSTM2D
 layer_conv_lstm_2d <-
 function (object, filters, kernel_size, strides = 1L, padding = "valid",
@@ -603,7 +603,7 @@ function (object, filters, kernel_size, strides = 1L, padding = "valid",
 #' gate at initialization.
 #' Use in combination with `bias_initializer="zeros"`.
 #' This is recommended in [Jozefowicz et al., 2015](
-#' http://www.jmlr.org/proceedings/papers/v37/jozefowicz15.pdf)
+#' https://proceedings.mlr.press/v37/jozefowicz15.pdf)
 #'
 #' @param kernel_regularizer
 #' Regularizer function applied to the `kernel` weights
@@ -678,7 +678,7 @@ function (object, filters, kernel_size, strides = 1L, padding = "valid",
 #' @family layers
 #' @seealso
 #' + <https://keras.io/api/layers/recurrent_layers/conv_lstm3d#convlstm3d-class>
-#' + <https://www.tensorflow.org/api_docs/python/tf/keras/layers/ConvLSTM3D>
+#  + <https://www.tensorflow.org/api_docs/python/tf/keras/layers/ConvLSTM3D>
 #' @tether keras.layers.ConvLSTM3D
 layer_conv_lstm_3d <-
 function (object, filters, kernel_size, strides = 1L, padding = "valid",
@@ -874,7 +874,7 @@ function (object, filters, kernel_size, strides = 1L, padding = "valid",
 #' @family layers
 #' @seealso
 #' + <https://keras.io/api/layers/recurrent_layers/gru#gru-class>
-#' + <https://www.tensorflow.org/api_docs/python/tf/keras/layers/GRU>
+#  + <https://www.tensorflow.org/api_docs/python/tf/keras/layers/GRU>
 #' @tether keras.layers.GRU
 layer_gru <-
 function (object, units, activation = "tanh", recurrent_activation = "sigmoid",
@@ -999,7 +999,7 @@ function (object, units, activation = "tanh", recurrent_activation = "sigmoid",
 #' @family rnn layers
 #' @family layers
 #' @seealso
-#' + <https://www.tensorflow.org/api_docs/python/tf/keras/layers/GRUCell>
+#  + <https://www.tensorflow.org/api_docs/python/tf/keras/layers/GRUCell>
 #' @tether keras.layers.GRUCell
 rnn_cell_gru <-
 function (units, activation = "tanh", recurrent_activation = "sigmoid",
@@ -1181,7 +1181,7 @@ function (units, activation = "tanh", recurrent_activation = "sigmoid",
 #' @family layers
 #' @seealso
 #' + <https://keras.io/api/layers/recurrent_layers/lstm#lstm-class>
-#' + <https://www.tensorflow.org/api_docs/python/tf/keras/layers/LSTM>
+#  + <https://www.tensorflow.org/api_docs/python/tf/keras/layers/LSTM>
 #' @tether keras.layers.LSTM
 layer_lstm <-
 function (object, units, activation = "tanh", recurrent_activation = "sigmoid",
@@ -1309,7 +1309,7 @@ function (object, units, activation = "tanh", recurrent_activation = "sigmoid",
 #' @family rnn layers
 #' @family layers
 #' @seealso
-#' + <https://www.tensorflow.org/api_docs/python/tf/keras/layers/LSTMCell>
+#  + <https://www.tensorflow.org/api_docs/python/tf/keras/layers/LSTMCell>
 #' @tether keras.layers.LSTMCell
 rnn_cell_lstm <-
 function (units, activation = "tanh", recurrent_activation = "sigmoid",
@@ -1517,7 +1517,7 @@ function (units, activation = "tanh", recurrent_activation = "sigmoid",
 #' @family layers
 #' @seealso
 #' + <https://keras.io/api/layers/recurrent_layers/rnn#rnn-class>
-#' + <https://www.tensorflow.org/api_docs/python/tf/keras/layers/RNN>
+#  + <https://www.tensorflow.org/api_docs/python/tf/keras/layers/RNN>
 #'
 #' @tether keras.layers.RNN
 layer_rnn <-
@@ -1668,7 +1668,7 @@ function (object, cell, return_sequences = FALSE, return_state = FALSE,
 #' @family layers
 #' @seealso
 #' + <https://keras.io/api/layers/recurrent_layers/simple_rnn#simplernn-class>
-#' + <https://www.tensorflow.org/api_docs/python/tf/keras/layers/SimpleRNN>
+#  + <https://www.tensorflow.org/api_docs/python/tf/keras/layers/SimpleRNN>
 #'
 #' @tether keras.layers.SimpleRNN
 layer_simple_rnn <-
@@ -1786,7 +1786,7 @@ function (object, units, activation = "tanh", use_bias = TRUE,
 #' @family rnn layers
 #' @family layers
 #' @seealso
-#' + <https://www.tensorflow.org/api_docs/python/tf/keras/layers/SimpleRNNCell>
+#  + <https://www.tensorflow.org/api_docs/python/tf/keras/layers/SimpleRNNCell>
 #'
 #' @tether keras.layers.SimpleRNNCell
 rnn_cell_simple <-
@@ -1836,7 +1836,7 @@ function (units, activation = "tanh", use_bias = TRUE, kernel_initializer = "glo
 #' @family rnn layers
 #' @family layers
 #' @seealso
-#' + <https://www.tensorflow.org/api_docs/python/tf/keras/layers/StackedRNNCells>
+#  + <https://www.tensorflow.org/api_docs/python/tf/keras/layers/StackedRNNCells>
 #'
 #' @tether keras.layers.StackedRNNCells
 rnn_cells_stack <-
@@ -1906,7 +1906,7 @@ function (cells, ...)
 #' @family layers
 #' @seealso
 #' + <https://keras.io/api/layers/recurrent_layers/time_distributed#timedistributed-class>
-#' + <https://www.tensorflow.org/api_docs/python/tf/keras/layers/TimeDistributed>
+#  + <https://www.tensorflow.org/api_docs/python/tf/keras/layers/TimeDistributed>
 #'
 #' @tether keras.layers.TimeDistributed
 layer_time_distributed <-

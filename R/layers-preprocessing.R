@@ -96,7 +96,7 @@
 #' @family layers
 #' @seealso
 #' + <https://keras.io/api/layers/preprocessing_layers/categorical/category_encoding#categoryencoding-class>
-#' + <https://www.tensorflow.org/api_docs/python/tf/keras/layers/CategoryEncoding>
+#  + <https://www.tensorflow.org/api_docs/python/tf/keras/layers/CategoryEncoding>
 #' @tether keras.layers.CategoryEncoding
 layer_category_encoding <-
 function (object, num_tokens = NULL, output_mode = "multi_hot",
@@ -163,7 +163,7 @@ function (object, num_tokens = NULL, output_mode = "multi_hot",
 #' @family layers
 #' @seealso
 #' + <https://keras.io/api/layers/preprocessing_layers/image_preprocessing/center_crop#centercrop-class>
-#' + <https://www.tensorflow.org/api_docs/python/tf/keras/layers/CenterCrop>
+#  + <https://www.tensorflow.org/api_docs/python/tf/keras/layers/CenterCrop>
 #' @tether keras.layers.CenterCrop
 layer_center_crop <-
 function (object, height, width, data_format = NULL, ...)
@@ -273,7 +273,7 @@ function (object, height, width, data_format = NULL, ...)
 #' @family layers
 #' @seealso
 #' + <https://keras.io/api/layers/preprocessing_layers/numerical/discretization#discretization-class>
-#' + <https://www.tensorflow.org/api_docs/python/tf/keras/layers/Discretization>
+#  + <https://www.tensorflow.org/api_docs/python/tf/keras/layers/Discretization>
 #'
 #' @tether keras.layers.Discretization
 layer_discretization <-
@@ -363,7 +363,7 @@ function (object, bin_boundaries = NULL, num_bins = NULL, epsilon = 0.01,
 #' @family layers
 #' @seealso
 #' + <https://keras.io/api/layers/preprocessing_layers/categorical/hashed_crossing#hashedcrossing-class>
-#' + <https://www.tensorflow.org/api_docs/python/tf/keras/layers/HashedCrossing>
+#  + <https://www.tensorflow.org/api_docs/python/tf/keras/layers/HashedCrossing>
 #'
 #' @tether keras.layers.HashedCrossing
 layer_hashed_crossing <-
@@ -507,7 +507,7 @@ function (object, num_bins, output_mode = "int", sparse = FALSE,
 #' @family layers
 #' @seealso
 #' + <https://keras.io/api/layers/preprocessing_layers/categorical/hashing#hashing-class>
-#' + <https://www.tensorflow.org/api_docs/python/tf/keras/layers/Hashing>
+#  + <https://www.tensorflow.org/api_docs/python/tf/keras/layers/Hashing>
 #'
 #' @tether keras.layers.Hashing
 layer_hashing <-
@@ -846,7 +846,7 @@ function (object, num_bins, mask_value = NULL, salt = NULL, output_mode = "int",
 #' @family layers
 #' @seealso
 #' + <https://keras.io/api/layers/preprocessing_layers/categorical/integer_lookup#integerlookup-class>
-#' + <https://www.tensorflow.org/api_docs/python/tf/keras/layers/IntegerLookup>
+#  + <https://www.tensorflow.org/api_docs/python/tf/keras/layers/IntegerLookup>
 #'
 #' @tether keras.layers.IntegerLookup
 layer_integer_lookup <-
@@ -964,7 +964,7 @@ function (object, max_tokens = NULL, num_oov_indices = 1L, mask_token = NULL,
 #' @family layers
 #' @seealso
 #' + <https://keras.io/api/layers/preprocessing_layers/numerical/normalization#normalization-class>
-#' + <https://www.tensorflow.org/api_docs/python/tf/keras/layers/Normalization>
+#  + <https://www.tensorflow.org/api_docs/python/tf/keras/layers/Normalization>
 #'
 #' @tether keras.layers.Normalization
 layer_normalization <-
@@ -1046,7 +1046,7 @@ function (object, axis = -1L, mean = NULL, variance = NULL, invert = FALSE,
 #' @family layers
 #' @seealso
 #' + <https://keras.io/api/layers/preprocessing_layers/image_augmentation/random_brightness#randombrightness-class>
-#' + <https://www.tensorflow.org/api_docs/python/tf/keras/layers/RandomBrightness>
+#  + <https://www.tensorflow.org/api_docs/python/tf/keras/layers/RandomBrightness>
 #'
 #' @tether keras.layers.RandomBrightness
 layer_random_brightness <-
@@ -1109,7 +1109,7 @@ function (object, factor, value_range = list(0L, 255L), seed = NULL,
 #' @family layers
 #' @seealso
 #' + <https://keras.io/api/layers/preprocessing_layers/image_augmentation/random_contrast#randomcontrast-class>
-#' + <https://www.tensorflow.org/api_docs/python/tf/keras/layers/RandomContrast>
+#  + <https://www.tensorflow.org/api_docs/python/tf/keras/layers/RandomContrast>
 #' @tether keras.layers.RandomContrast
 layer_random_contrast <-
 function (object, factor, seed = NULL, ...)
@@ -1176,7 +1176,7 @@ function (object, factor, seed = NULL, ...)
 #' @family layers
 #' @seealso
 #' + <https://keras.io/api/layers/preprocessing_layers/image_augmentation/random_crop#randomcrop-class>
-#' + <https://www.tensorflow.org/api_docs/python/tf/keras/layers/RandomCrop>
+#  + <https://www.tensorflow.org/api_docs/python/tf/keras/layers/RandomCrop>
 #' @tether keras.layers.RandomCrop
 layer_random_crop <-
 function (object, height, width, seed = NULL, data_format = NULL,
@@ -1231,7 +1231,7 @@ function (object, height, width, seed = NULL, data_format = NULL,
 #' @family layers
 #' @seealso
 #' + <https://keras.io/api/layers/preprocessing_layers/image_augmentation/random_flip#randomflip-class>
-#' + <https://www.tensorflow.org/api_docs/python/tf/keras/layers/RandomFlip>
+#  + <https://www.tensorflow.org/api_docs/python/tf/keras/layers/RandomFlip>
 #' @tether keras.layers.RandomFlip
 layer_random_flip <-
 function (object, mode = "horizontal_and_vertical", seed = NULL,
@@ -1328,7 +1328,7 @@ function (object, mode = "horizontal_and_vertical", seed = NULL,
 #' @family layers
 #' @seealso
 #' + <https://keras.io/api/layers/preprocessing_layers/image_augmentation/random_rotation#randomrotation-class>
-#' + <https://www.tensorflow.org/api_docs/python/tf/keras/layers/RandomRotation>
+#  + <https://www.tensorflow.org/api_docs/python/tf/keras/layers/RandomRotation>
 #' @tether keras.layers.RandomRotation
 layer_random_rotation <-
 function (object, factor, fill_mode = "reflect", interpolation = "bilinear",
@@ -1439,7 +1439,7 @@ function (object, factor, fill_mode = "reflect", interpolation = "bilinear",
 #' @family layers
 #' @seealso
 #' + <https://keras.io/api/layers/preprocessing_layers/image_augmentation/random_translation#randomtranslation-class>
-#' + <https://www.tensorflow.org/api_docs/python/tf/keras/layers/RandomTranslation>
+#  + <https://www.tensorflow.org/api_docs/python/tf/keras/layers/RandomTranslation>
 #' @tether keras.layers.RandomTranslation
 layer_random_translation <-
 function (object, height_factor, width_factor, fill_mode = "reflect",
@@ -1557,7 +1557,7 @@ function (object, height_factor, width_factor, fill_mode = "reflect",
 #' @family layers
 #' @seealso
 #' + <https://keras.io/api/layers/preprocessing_layers/image_augmentation/random_zoom#randomzoom-class>
-#' + <https://www.tensorflow.org/api_docs/python/tf/keras/layers/RandomZoom>
+#  + <https://www.tensorflow.org/api_docs/python/tf/keras/layers/RandomZoom>
 #'
 #' @tether keras.layers.RandomZoom
 layer_random_zoom <-
@@ -1610,7 +1610,7 @@ function (object, height_factor, width_factor = NULL, fill_mode = "reflect",
 #' @family layers
 #' @seealso
 #' + <https://keras.io/api/layers/preprocessing_layers/image_preprocessing/rescaling#rescaling-class>
-#' + <https://www.tensorflow.org/api_docs/python/tf/keras/layers/Rescaling>
+#  + <https://www.tensorflow.org/api_docs/python/tf/keras/layers/Rescaling>
 #' @tether keras.layers.Rescaling
 layer_rescaling <-
 function (object, scale, offset = 0, ...)
@@ -1685,7 +1685,7 @@ function (object, scale, offset = 0, ...)
 #' @family layers
 #' @seealso
 #' + <https://keras.io/api/layers/preprocessing_layers/image_preprocessing/resizing#resizing-class>
-#' + <https://www.tensorflow.org/api_docs/python/tf/keras/layers/Resizing>
+#  + <https://www.tensorflow.org/api_docs/python/tf/keras/layers/Resizing>
 #' @tether keras.layers.Resizing
 layer_resizing <-
 function (object, height, width, interpolation = "bilinear",
@@ -2012,7 +2012,7 @@ function (object, height, width, interpolation = "bilinear",
 #' @family layers
 #' @seealso
 #' + <https://keras.io/api/layers/preprocessing_layers/categorical/string_lookup#stringlookup-class>
-#' + <https://www.tensorflow.org/api_docs/python/tf/keras/layers/StringLookup>
+#  + <https://www.tensorflow.org/api_docs/python/tf/keras/layers/StringLookup>
 #'
 #' @tether keras.layers.StringLookup
 layer_string_lookup <-
@@ -2259,7 +2259,7 @@ function (object, max_tokens = NULL, num_oov_indices = 1L, mask_token = NULL,
 #' @family layers
 #' @seealso
 #' + <https://keras.io/api/layers/preprocessing_layers/text/text_vectorization#textvectorization-class>
-#' + <https://www.tensorflow.org/api_docs/python/tf/keras/layers/TextVectorization>
+#  + <https://www.tensorflow.org/api_docs/python/tf/keras/layers/TextVectorization>
 #'
 #' @tether keras.layers.TextVectorization
 layer_text_vectorization <-

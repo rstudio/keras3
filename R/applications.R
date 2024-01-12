@@ -88,7 +88,7 @@
 #' @export
 #' @seealso
 #' + <https://keras.io/api/applications/convnext#convnextbase-function>
-#' + <https://www.tensorflow.org/api_docs/python/tf/keras/applications/ConvNeXtBase>
+#  + <https://www.tensorflow.org/api_docs/python/tf/keras/applications/ConvNeXtBase>
 #' @tether keras.applications.ConvNeXtBase
 application_convnext_base <-
 function (model_name = "convnext_base", include_top = TRUE, include_preprocessing = TRUE,
@@ -191,7 +191,7 @@ function (model_name = "convnext_base", include_top = TRUE, include_preprocessin
 #' @export
 #' @seealso
 #' + <https://keras.io/api/applications/convnext#convnextlarge-function>
-#' + <https://www.tensorflow.org/api_docs/python/tf/keras/applications/ConvNeXtLarge>
+#  + <https://www.tensorflow.org/api_docs/python/tf/keras/applications/ConvNeXtLarge>
 #' @tether keras.applications.ConvNeXtLarge
 application_convnext_large <-
 function (model_name = "convnext_large", include_top = TRUE,
@@ -294,7 +294,7 @@ function (model_name = "convnext_large", include_top = TRUE,
 #' @export
 #' @seealso
 #' + <https://keras.io/api/applications/convnext#convnextsmall-function>
-#' + <https://www.tensorflow.org/api_docs/python/tf/keras/applications/ConvNeXtSmall>
+#  + <https://www.tensorflow.org/api_docs/python/tf/keras/applications/ConvNeXtSmall>
 #' @tether keras.applications.ConvNeXtSmall
 application_convnext_small <-
 function (model_name = "convnext_small", include_top = TRUE,
@@ -397,7 +397,7 @@ function (model_name = "convnext_small", include_top = TRUE,
 #' @export
 #' @seealso
 #' + <https://keras.io/api/applications/convnext#convnexttiny-function>
-#' + <https://www.tensorflow.org/api_docs/python/tf/keras/applications/ConvNeXtTiny>
+#  + <https://www.tensorflow.org/api_docs/python/tf/keras/applications/ConvNeXtTiny>
 #' @tether keras.applications.ConvNeXtTiny
 application_convnext_tiny <-
 function (model_name = "convnext_tiny", include_top = TRUE, include_preprocessing = TRUE,
@@ -500,7 +500,7 @@ function (model_name = "convnext_tiny", include_top = TRUE, include_preprocessin
 #' @export
 #' @seealso
 #' + <https://keras.io/api/applications/convnext#convnextxlarge-function>
-#' + <https://www.tensorflow.org/api_docs/python/tf/keras/applications/ConvNeXtXLarge>
+#  + <https://www.tensorflow.org/api_docs/python/tf/keras/applications/ConvNeXtXLarge>
 #' @tether keras.applications.ConvNeXtXLarge
 application_convnext_xlarge <-
 function (model_name = "convnext_xlarge", include_top = TRUE,
@@ -585,7 +585,7 @@ function (model_name = "convnext_xlarge", include_top = TRUE,
 #' @export
 #' @seealso
 #' + <https://keras.io/api/applications/densenet#densenet121-function>
-#' + <https://www.tensorflow.org/api_docs/python/tf/keras/applications/DenseNet121>
+#  + <https://www.tensorflow.org/api_docs/python/tf/keras/applications/DenseNet121>
 #' @tether keras.applications.DenseNet121
 application_densenet121 <-
 function (include_top = TRUE, weights = "imagenet", input_tensor = NULL,
@@ -669,7 +669,7 @@ function (include_top = TRUE, weights = "imagenet", input_tensor = NULL,
 #' @export
 #' @seealso
 #' + <https://keras.io/api/applications/densenet#densenet169-function>
-#' + <https://www.tensorflow.org/api_docs/python/tf/keras/applications/DenseNet169>
+#  + <https://www.tensorflow.org/api_docs/python/tf/keras/applications/DenseNet169>
 #' @tether keras.applications.DenseNet169
 application_densenet169 <-
 function (include_top = TRUE, weights = "imagenet", input_tensor = NULL,
@@ -753,7 +753,7 @@ function (include_top = TRUE, weights = "imagenet", input_tensor = NULL,
 #' @export
 #' @seealso
 #' + <https://keras.io/api/applications/densenet#densenet201-function>
-#' + <https://www.tensorflow.org/api_docs/python/tf/keras/applications/DenseNet201>
+#  + <https://www.tensorflow.org/api_docs/python/tf/keras/applications/DenseNet201>
 #' @tether keras.applications.DenseNet201
 application_densenet201 <-
 function (include_top = TRUE, weights = "imagenet", input_tensor = NULL,
@@ -848,7 +848,7 @@ function (include_top = TRUE, weights = "imagenet", input_tensor = NULL,
 #' @export
 #' @seealso
 #' + <https://keras.io/api/applications/efficientnet#efficientnetb0-function>
-#' + <https://www.tensorflow.org/api_docs/python/tf/keras/applications/EfficientNetB0>
+#  + <https://www.tensorflow.org/api_docs/python/tf/keras/applications/EfficientNetB0>
 #' @tether keras.applications.EfficientNetB0
 application_efficientnet_b0 <-
 function (include_top = TRUE, weights = "imagenet", input_tensor = NULL,
@@ -944,7 +944,7 @@ function (include_top = TRUE, weights = "imagenet", input_tensor = NULL,
 #' @export
 #' @seealso
 #' + <https://keras.io/api/applications/efficientnet#efficientnetb1-function>
-#' + <https://www.tensorflow.org/api_docs/python/tf/keras/applications/EfficientNetB1>
+#  + <https://www.tensorflow.org/api_docs/python/tf/keras/applications/EfficientNetB1>
 #' @tether keras.applications.EfficientNetB1
 application_efficientnet_b1 <-
 function (include_top = TRUE, weights = "imagenet", input_tensor = NULL,
@@ -1040,7 +1040,7 @@ function (include_top = TRUE, weights = "imagenet", input_tensor = NULL,
 #' @export
 #' @seealso
 #' + <https://keras.io/api/applications/efficientnet#efficientnetb2-function>
-#' + <https://www.tensorflow.org/api_docs/python/tf/keras/applications/EfficientNetB2>
+#  + <https://www.tensorflow.org/api_docs/python/tf/keras/applications/EfficientNetB2>
 #' @tether keras.applications.EfficientNetB2
 application_efficientnet_b2 <-
 function (include_top = TRUE, weights = "imagenet", input_tensor = NULL,
@@ -1136,7 +1136,7 @@ function (include_top = TRUE, weights = "imagenet", input_tensor = NULL,
 #' @export
 #' @seealso
 #' + <https://keras.io/api/applications/efficientnet#efficientnetb3-function>
-#' + <https://www.tensorflow.org/api_docs/python/tf/keras/applications/EfficientNetB3>
+#  + <https://www.tensorflow.org/api_docs/python/tf/keras/applications/EfficientNetB3>
 #' @tether keras.applications.EfficientNetB3
 application_efficientnet_b3 <-
 function (include_top = TRUE, weights = "imagenet", input_tensor = NULL,
@@ -1232,7 +1232,7 @@ function (include_top = TRUE, weights = "imagenet", input_tensor = NULL,
 #' @export
 #' @seealso
 #' + <https://keras.io/api/applications/efficientnet#efficientnetb4-function>
-#' + <https://www.tensorflow.org/api_docs/python/tf/keras/applications/EfficientNetB4>
+#  + <https://www.tensorflow.org/api_docs/python/tf/keras/applications/EfficientNetB4>
 #' @tether keras.applications.EfficientNetB4
 application_efficientnet_b4 <-
 function (include_top = TRUE, weights = "imagenet", input_tensor = NULL,
@@ -1328,7 +1328,7 @@ function (include_top = TRUE, weights = "imagenet", input_tensor = NULL,
 #' @export
 #' @seealso
 #' + <https://keras.io/api/applications/efficientnet#efficientnetb5-function>
-#' + <https://www.tensorflow.org/api_docs/python/tf/keras/applications/EfficientNetB5>
+#  + <https://www.tensorflow.org/api_docs/python/tf/keras/applications/EfficientNetB5>
 #' @tether keras.applications.EfficientNetB5
 application_efficientnet_b5 <-
 function (include_top = TRUE, weights = "imagenet", input_tensor = NULL,
@@ -1424,7 +1424,7 @@ function (include_top = TRUE, weights = "imagenet", input_tensor = NULL,
 #' @export
 #' @seealso
 #' + <https://keras.io/api/applications/efficientnet#efficientnetb6-function>
-#' + <https://www.tensorflow.org/api_docs/python/tf/keras/applications/EfficientNetB6>
+#  + <https://www.tensorflow.org/api_docs/python/tf/keras/applications/EfficientNetB6>
 #' @tether keras.applications.EfficientNetB6
 application_efficientnet_b6 <-
 function (include_top = TRUE, weights = "imagenet", input_tensor = NULL,
@@ -1520,7 +1520,7 @@ function (include_top = TRUE, weights = "imagenet", input_tensor = NULL,
 #' @export
 #' @seealso
 #' + <https://keras.io/api/applications/efficientnet#efficientnetb7-function>
-#' + <https://www.tensorflow.org/api_docs/python/tf/keras/applications/EfficientNetB7>
+#  + <https://www.tensorflow.org/api_docs/python/tf/keras/applications/EfficientNetB7>
 #' @tether keras.applications.EfficientNetB7
 application_efficientnet_b7 <-
 function (include_top = TRUE, weights = "imagenet", input_tensor = NULL,
@@ -1619,7 +1619,7 @@ function (include_top = TRUE, weights = "imagenet", input_tensor = NULL,
 #' @export
 #' @seealso
 #' + <https://keras.io/api/applications/efficientnet_v2#efficientnetv2b0-function>
-#' + <https://www.tensorflow.org/api_docs/python/tf/keras/applications/EfficientNetV2B0>
+#  + <https://www.tensorflow.org/api_docs/python/tf/keras/applications/EfficientNetV2B0>
 #' @tether keras.applications.EfficientNetV2B0
 application_efficientnet_v2b0 <-
 function (include_top = TRUE, weights = "imagenet", input_tensor = NULL,
@@ -1718,7 +1718,7 @@ function (include_top = TRUE, weights = "imagenet", input_tensor = NULL,
 #' @export
 #' @seealso
 #' + <https://keras.io/api/applications/efficientnet_v2#efficientnetv2b1-function>
-#' + <https://www.tensorflow.org/api_docs/python/tf/keras/applications/EfficientNetV2B1>
+#  + <https://www.tensorflow.org/api_docs/python/tf/keras/applications/EfficientNetV2B1>
 #' @tether keras.applications.EfficientNetV2B1
 application_efficientnet_v2b1 <-
 function (include_top = TRUE, weights = "imagenet", input_tensor = NULL,
@@ -1817,7 +1817,7 @@ function (include_top = TRUE, weights = "imagenet", input_tensor = NULL,
 #' @export
 #' @seealso
 #' + <https://keras.io/api/applications/efficientnet_v2#efficientnetv2b2-function>
-#' + <https://www.tensorflow.org/api_docs/python/tf/keras/applications/EfficientNetV2B2>
+#  + <https://www.tensorflow.org/api_docs/python/tf/keras/applications/EfficientNetV2B2>
 #' @tether keras.applications.EfficientNetV2B2
 application_efficientnet_v2b2 <-
 function (include_top = TRUE, weights = "imagenet", input_tensor = NULL,
@@ -1916,7 +1916,7 @@ function (include_top = TRUE, weights = "imagenet", input_tensor = NULL,
 #' @export
 #' @seealso
 #' + <https://keras.io/api/applications/efficientnet_v2#efficientnetv2b3-function>
-#' + <https://www.tensorflow.org/api_docs/python/tf/keras/applications/EfficientNetV2B3>
+#  + <https://www.tensorflow.org/api_docs/python/tf/keras/applications/EfficientNetV2B3>
 #' @tether keras.applications.EfficientNetV2B3
 application_efficientnet_v2b3 <-
 function (include_top = TRUE, weights = "imagenet", input_tensor = NULL,
@@ -2015,7 +2015,7 @@ function (include_top = TRUE, weights = "imagenet", input_tensor = NULL,
 #' @export
 #' @seealso
 #' + <https://keras.io/api/applications/efficientnet_v2#efficientnetv2l-function>
-#' + <https://www.tensorflow.org/api_docs/python/tf/keras/applications/EfficientNetV2L>
+#  + <https://www.tensorflow.org/api_docs/python/tf/keras/applications/EfficientNetV2L>
 #' @tether keras.applications.EfficientNetV2L
 application_efficientnet_v2l <-
 function (include_top = TRUE, weights = "imagenet", input_tensor = NULL,
@@ -2114,7 +2114,7 @@ function (include_top = TRUE, weights = "imagenet", input_tensor = NULL,
 #' @export
 #' @seealso
 #' + <https://keras.io/api/applications/efficientnet_v2#efficientnetv2m-function>
-#' + <https://www.tensorflow.org/api_docs/python/tf/keras/applications/EfficientNetV2M>
+#  + <https://www.tensorflow.org/api_docs/python/tf/keras/applications/EfficientNetV2M>
 #' @tether keras.applications.EfficientNetV2M
 application_efficientnet_v2m <-
 function (include_top = TRUE, weights = "imagenet", input_tensor = NULL,
@@ -2213,7 +2213,7 @@ function (include_top = TRUE, weights = "imagenet", input_tensor = NULL,
 #' @export
 #' @seealso
 #' + <https://keras.io/api/applications/efficientnet_v2#efficientnetv2s-function>
-#' + <https://www.tensorflow.org/api_docs/python/tf/keras/applications/EfficientNetV2S>
+#  + <https://www.tensorflow.org/api_docs/python/tf/keras/applications/EfficientNetV2S>
 #' @tether keras.applications.EfficientNetV2S
 application_efficientnet_v2s <-
 function (include_top = TRUE, weights = "imagenet", input_tensor = NULL,
@@ -2308,7 +2308,7 @@ function (include_top = TRUE, weights = "imagenet", input_tensor = NULL,
 #' @export
 #' @seealso
 #' + <https://keras.io/api/applications/inceptionresnetv2#inceptionresnetv2-function>
-#' + <https://www.tensorflow.org/api_docs/python/tf/keras/applications/InceptionResNetV2>
+#  + <https://www.tensorflow.org/api_docs/python/tf/keras/applications/InceptionResNetV2>
 #' @tether keras.applications.InceptionResNetV2
 application_inception_resnet_v2 <-
 function (include_top = TRUE, weights = "imagenet", input_tensor = NULL,
@@ -2402,7 +2402,7 @@ function (include_top = TRUE, weights = "imagenet", input_tensor = NULL,
 #' @export
 #' @seealso
 #' + <https://keras.io/api/applications/inceptionv3#inceptionv3-function>
-#' + <https://www.tensorflow.org/api_docs/python/tf/keras/applications/InceptionV3>
+#  + <https://www.tensorflow.org/api_docs/python/tf/keras/applications/InceptionV3>
 #' @tether keras.applications.InceptionV3
 application_inception_v3 <-
 function (include_top = TRUE, weights = "imagenet", input_tensor = NULL,
@@ -2512,7 +2512,7 @@ function (include_top = TRUE, weights = "imagenet", input_tensor = NULL,
 #' @export
 #' @seealso
 #' + <https://keras.io/api/applications/mobilenet#mobilenet-function>
-#' + <https://www.tensorflow.org/api_docs/python/tf/keras/applications/MobileNet>
+#  + <https://www.tensorflow.org/api_docs/python/tf/keras/applications/MobileNet>
 #' @tether keras.applications.MobileNet
 application_mobilenet <-
 function (input_shape = NULL, alpha = 1, depth_multiplier = 1L,
@@ -2623,7 +2623,7 @@ function (input_shape = NULL, alpha = 1, depth_multiplier = 1L,
 #' @export
 #' @seealso
 #' + <https://keras.io/api/applications/mobilenet#mobilenetv2-function>
-#' + <https://www.tensorflow.org/api_docs/python/tf/keras/applications/MobileNetV2>
+#  + <https://www.tensorflow.org/api_docs/python/tf/keras/applications/MobileNetV2>
 #' @tether keras.applications.MobileNetV2
 application_mobilenet_v2 <-
 function (input_shape = NULL, alpha = 1, include_top = TRUE,
@@ -2768,7 +2768,7 @@ function (input_shape = NULL, alpha = 1, include_top = TRUE,
 #' @export
 #' @seealso
 #' + <https://keras.io/api/applications/mobilenet#mobilenetv3large-function>
-#' + <https://www.tensorflow.org/api_docs/python/tf/keras/applications/MobileNetV3Large>
+#  + <https://www.tensorflow.org/api_docs/python/tf/keras/applications/MobileNetV3Large>
 #' @tether keras.applications.MobileNetV3Large
 application_mobilenet_v3_large <-
 function (input_shape = NULL, alpha = 1, minimalistic = FALSE,
@@ -2914,7 +2914,7 @@ function (input_shape = NULL, alpha = 1, minimalistic = FALSE,
 #' @export
 #' @seealso
 #' + <https://keras.io/api/applications/mobilenet#mobilenetv3small-function>
-#' + <https://www.tensorflow.org/api_docs/python/tf/keras/applications/MobileNetV3Small>
+#  + <https://www.tensorflow.org/api_docs/python/tf/keras/applications/MobileNetV3Small>
 #' @tether keras.applications.MobileNetV3Small
 application_mobilenet_v3_small <-
 function (input_shape = NULL, alpha = 1, minimalistic = FALSE,
@@ -2999,7 +2999,7 @@ function (input_shape = NULL, alpha = 1, minimalistic = FALSE,
 #' @export
 #' @seealso
 #' + <https://keras.io/api/applications/nasnet#nasnetlarge-function>
-#' + <https://www.tensorflow.org/api_docs/python/tf/keras/applications/NASNetLarge>
+#  + <https://www.tensorflow.org/api_docs/python/tf/keras/applications/NASNetLarge>
 #' @tether keras.applications.NASNetLarge
 application_nasnetlarge <-
 function (input_shape = NULL, include_top = TRUE, weights = "imagenet",
@@ -3082,7 +3082,7 @@ function (input_shape = NULL, include_top = TRUE, weights = "imagenet",
 #' @export
 #' @seealso
 #' + <https://keras.io/api/applications/nasnet#nasnetmobile-function>
-#' + <https://www.tensorflow.org/api_docs/python/tf/keras/applications/NASNetMobile>
+#  + <https://www.tensorflow.org/api_docs/python/tf/keras/applications/NASNetMobile>
 #' @tether keras.applications.NASNetMobile
 application_nasnetmobile <-
 function (input_shape = NULL, include_top = TRUE, weights = "imagenet",
@@ -3165,7 +3165,7 @@ function (input_shape = NULL, include_top = TRUE, weights = "imagenet",
 #' @export
 #' @seealso
 #' + <https://keras.io/api/applications/resnet#resnet101-function>
-#' + <https://www.tensorflow.org/api_docs/python/tf/keras/applications/ResNet101>
+#  + <https://www.tensorflow.org/api_docs/python/tf/keras/applications/ResNet101>
 #' @tether keras.applications.ResNet101
 application_resnet101 <-
 function (include_top = TRUE, weights = "imagenet", input_tensor = NULL,
@@ -3248,7 +3248,7 @@ function (include_top = TRUE, weights = "imagenet", input_tensor = NULL,
 #' @export
 #' @seealso
 #' + <https://keras.io/api/applications/resnet#resnet152-function>
-#' + <https://www.tensorflow.org/api_docs/python/tf/keras/applications/ResNet152>
+#  + <https://www.tensorflow.org/api_docs/python/tf/keras/applications/ResNet152>
 #' @tether keras.applications.ResNet152
 application_resnet152 <-
 function (include_top = TRUE, weights = "imagenet", input_tensor = NULL,
@@ -3331,7 +3331,7 @@ function (include_top = TRUE, weights = "imagenet", input_tensor = NULL,
 #' @export
 #' @seealso
 #' + <https://keras.io/api/applications/resnet#resnet50-function>
-#' + <https://www.tensorflow.org/api_docs/python/tf/keras/applications/ResNet50>
+#  + <https://www.tensorflow.org/api_docs/python/tf/keras/applications/ResNet50>
 #' @tether keras.applications.ResNet50
 application_resnet50 <-
 function (include_top = TRUE, weights = "imagenet", input_tensor = NULL,
@@ -3413,7 +3413,7 @@ function (include_top = TRUE, weights = "imagenet", input_tensor = NULL,
 #' @export
 #' @seealso
 #' + <https://keras.io/api/applications/resnet#resnet101v2-function>
-#' + <https://www.tensorflow.org/api_docs/python/tf/keras/applications/ResNet101V2>
+#  + <https://www.tensorflow.org/api_docs/python/tf/keras/applications/ResNet101V2>
 #' @tether keras.applications.ResNet101V2
 application_resnet101_v2 <-
 function (include_top = TRUE, weights = "imagenet", input_tensor = NULL,
@@ -3495,7 +3495,7 @@ function (include_top = TRUE, weights = "imagenet", input_tensor = NULL,
 #' @export
 #' @seealso
 #' + <https://keras.io/api/applications/resnet#resnet152v2-function>
-#' + <https://www.tensorflow.org/api_docs/python/tf/keras/applications/ResNet152V2>
+#  + <https://www.tensorflow.org/api_docs/python/tf/keras/applications/ResNet152V2>
 #' @tether keras.applications.ResNet152V2
 application_resnet152_v2 <-
 function (include_top = TRUE, weights = "imagenet", input_tensor = NULL,
@@ -3577,7 +3577,7 @@ function (include_top = TRUE, weights = "imagenet", input_tensor = NULL,
 #' @export
 #' @seealso
 #' + <https://keras.io/api/applications/resnet#resnet50v2-function>
-#' + <https://www.tensorflow.org/api_docs/python/tf/keras/applications/ResNet50V2>
+#  + <https://www.tensorflow.org/api_docs/python/tf/keras/applications/ResNet50V2>
 #' @tether keras.applications.ResNet50V2
 application_resnet50_v2 <-
 function (include_top = TRUE, weights = "imagenet", input_tensor = NULL,
@@ -3670,7 +3670,7 @@ function (include_top = TRUE, weights = "imagenet", input_tensor = NULL,
 #' @export
 #' @seealso
 #' + <https://keras.io/api/applications/vgg#vgg16-function>
-#' + <https://www.tensorflow.org/api_docs/python/tf/keras/applications/VGG16>
+#  + <https://www.tensorflow.org/api_docs/python/tf/keras/applications/VGG16>
 #' @tether keras.applications.VGG16
 application_vgg16 <-
 function (include_top = TRUE, weights = "imagenet", input_tensor = NULL,
@@ -3763,7 +3763,7 @@ function (include_top = TRUE, weights = "imagenet", input_tensor = NULL,
 #' @export
 #' @seealso
 #' + <https://keras.io/api/applications/vgg#vgg19-function>
-#' + <https://www.tensorflow.org/api_docs/python/tf/keras/applications/VGG19>
+#  + <https://www.tensorflow.org/api_docs/python/tf/keras/applications/VGG19>
 #' @tether keras.applications.VGG19
 application_vgg19 <-
 function (include_top = TRUE, weights = "imagenet", input_tensor = NULL,
@@ -3852,7 +3852,7 @@ function (include_top = TRUE, weights = "imagenet", input_tensor = NULL,
 #' @export
 #' @seealso
 #' + <https://keras.io/api/applications/xception#xception-function>
-#' + <https://www.tensorflow.org/api_docs/python/tf/keras/applications/Xception>
+#  + <https://www.tensorflow.org/api_docs/python/tf/keras/applications/Xception>
 #' @tether keras.applications.Xception
 application_xception <-
 function (include_top = TRUE, weights = "imagenet", input_tensor = NULL,

@@ -43,7 +43,7 @@
 #' @export
 #' @family random
 #' @seealso
-#' + <https://www.tensorflow.org/api_docs/python/tf/keras/random/categorical>
+#  + <https://www.tensorflow.org/api_docs/python/tf/keras/random/categorical>
 #' @tether keras.random.categorical
 random_categorical <-
 function (logits, num_samples, dtype = "int32", seed = NULL)
@@ -73,7 +73,7 @@ function (logits, num_samples, dtype = "int32", seed = NULL)
 #' @export
 #' @family random
 #' @seealso
-#' + <https://www.tensorflow.org/api_docs/python/tf/keras/random/dropout>
+#  + <https://www.tensorflow.org/api_docs/python/tf/keras/random/dropout>
 #' @tether keras.random.dropout
 random_dropout <-
 function (inputs, rate, noise_shape = NULL, seed = NULL)
@@ -110,7 +110,7 @@ function (inputs, rate, noise_shape = NULL, seed = NULL)
 #' @export
 #' @family random
 #' @seealso
-#' + <https://www.tensorflow.org/api_docs/python/tf/keras/random/gamma>
+#  + <https://www.tensorflow.org/api_docs/python/tf/keras/random/gamma>
 #' @tether keras.random.gamma
 random_gamma <-
 function (shape, alpha, dtype = NULL, seed = NULL)
@@ -159,7 +159,7 @@ function (shape, alpha, dtype = NULL, seed = NULL)
 #' @export
 #' @family random
 #' @seealso
-#' + <https://www.tensorflow.org/api_docs/python/tf/keras/random/randint>
+#  + <https://www.tensorflow.org/api_docs/python/tf/keras/random/randint>
 #' @tether keras.random.randint
 random_integer <-
 function (shape, minval, maxval, dtype = "int32", seed = NULL)
@@ -202,7 +202,7 @@ function (shape, minval, maxval, dtype = "int32", seed = NULL)
 #' @export
 #' @family random
 #' @seealso
-#' + <https://www.tensorflow.org/api_docs/python/tf/keras/random/normal>
+#  + <https://www.tensorflow.org/api_docs/python/tf/keras/random/normal>
 #' @tether keras.random.normal
 random_normal <-
 function (shape, mean = 0, stddev = 1, dtype = NULL, seed = NULL)
@@ -234,7 +234,7 @@ function (shape, mean = 0, stddev = 1, dtype = NULL, seed = NULL)
 #' @export
 #' @family random
 #' @seealso
-#' + <https://www.tensorflow.org/api_docs/python/tf/keras/random/shuffle>
+#  + <https://www.tensorflow.org/api_docs/python/tf/keras/random/shuffle>
 #' @tether keras.random.shuffle
 random_shuffle <-
 function (x, axis = 1L, seed = NULL)
@@ -280,7 +280,7 @@ function (x, axis = 1L, seed = NULL)
 #' @export
 #' @family random
 #' @seealso
-#' + <https://www.tensorflow.org/api_docs/python/tf/keras/random/truncated_normal>
+#  + <https://www.tensorflow.org/api_docs/python/tf/keras/random/truncated_normal>
 #' @tether keras.random.truncated_normal
 random_truncated_normal <-
 function (shape, mean = 0, stddev = 1, dtype = NULL, seed = NULL)
@@ -329,7 +329,7 @@ function (shape, mean = 0, stddev = 1, dtype = NULL, seed = NULL)
 #' @export
 #' @family random
 #' @seealso
-#' + <https://www.tensorflow.org/api_docs/python/tf/keras/random/uniform>
+#  + <https://www.tensorflow.org/api_docs/python/tf/keras/random/uniform>
 #' @tether keras.random.uniform
 random_uniform <-
 function (shape, minval = 0, maxval = 1, dtype = NULL, seed = NULL)
@@ -386,7 +386,7 @@ function (shape, minval = 0, maxval = 1, dtype = NULL, seed = NULL)
 #' @export
 #' @family random
 #' @seealso
-#' + <https://www.tensorflow.org/api_docs/python/tf/keras/random/SeedGenerator>
+#  + <https://www.tensorflow.org/api_docs/python/tf/keras/random/SeedGenerator>
 #'
 #' @tether keras.random.SeedGenerator
 random_seed_generator <-

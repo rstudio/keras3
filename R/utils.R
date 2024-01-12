@@ -59,7 +59,7 @@
 #' @family utils
 #' @seealso
 #' + <https://keras.io/api/utils/config_utils#clearsession-function>
-#' + <https://www.tensorflow.org/api_docs/python/tf/keras/utils/clear_session>
+#  + <https://www.tensorflow.org/api_docs/python/tf/keras/utils/clear_session>
 #' @tether keras.utils.clear_session
 clear_session <-
 function ()
@@ -85,7 +85,7 @@ function ()
 #' @export
 #' @family utils
 #' @seealso
-#' + <https://www.tensorflow.org/api_docs/python/tf/keras/utils/get_source_inputs>
+#  + <https://www.tensorflow.org/api_docs/python/tf/keras/utils/get_source_inputs>
 #' @tether keras.utils.get_source_inputs
 get_source_inputs <-
 function (tensor)
@@ -177,7 +177,7 @@ function (tensor)
 #' @family utils
 #' @seealso
 #' + <https://keras.io/api/utils/python_utils#getfile-function>
-#' + <https://www.tensorflow.org/api_docs/python/tf/keras/utils/get_file>
+#  + <https://www.tensorflow.org/api_docs/python/tf/keras/utils/get_file>
 #' @tether keras.utils.get_file
 get_file <-
 function (fname = NULL, origin = NULL, ...,
@@ -238,7 +238,7 @@ function (fname = NULL, origin = NULL, ...,
 #' @family utils
 #' @seealso
 #' + <https://keras.io/api/utils/model_plotting_utils#modeltodot-function>
-#' + <https://www.tensorflow.org/api_docs/python/tf/keras/utils/model_to_dot>
+#  + <https://www.tensorflow.org/api_docs/python/tf/keras/utils/model_to_dot>
 #' @tether keras.utils.model_to_dot
 model_to_dot <-
 function (model, show_shapes = FALSE, show_dtype = FALSE, show_layer_names = TRUE,
@@ -273,7 +273,7 @@ function (model, show_shapes = FALSE, show_dtype = FALSE, show_layer_names = TRU
 #' @family utils
 #' @seealso
 #' + <https://keras.io/api/utils/python_utils#normalize-function>
-#' + <https://www.tensorflow.org/api_docs/python/tf/keras/utils/normalize>
+#  + <https://www.tensorflow.org/api_docs/python/tf/keras/utils/normalize>
 #' @tether keras.utils.normalize
 normalize <-
 function (x, axis = -1L, order = 2L)
@@ -326,7 +326,7 @@ function (x, axis = -1L, order = 2L)
 #' @family utils
 #' @seealso
 #' + <https://keras.io/api/utils/python_utils#tocategorical-function>
-#' + <https://www.tensorflow.org/api_docs/python/tf/keras/utils/to_categorical>
+#  + <https://www.tensorflow.org/api_docs/python/tf/keras/utils/to_categorical>
 #'
 #' @tether keras.utils.to_categorical
 to_categorical <-
@@ -365,7 +365,7 @@ function (x, num_classes = NULL)
 #' @family utils
 #' @seealso
 #' + <https://keras.io/api/utils/python_utils#setrandomseed-function>
-#' + <https://www.tensorflow.org/api_docs/python/tf/keras/utils/set_random_seed>
+#  + <https://www.tensorflow.org/api_docs/python/tf/keras/utils/set_random_seed>
 #'
 #' @tether keras.utils.set_random_seed
 set_random_seed <-
@@ -446,7 +446,7 @@ function (seed)
 #' @family utils
 #' @seealso
 #' + <https://keras.io/api/data_loading/timeseries#padsequences-function>
-#' + <https://www.tensorflow.org/api_docs/python/tf/keras/utils/pad_sequences>
+#  + <https://www.tensorflow.org/api_docs/python/tf/keras/utils/pad_sequences>
 #'
 #' @tether keras.utils.pad_sequences
 pad_sequences <-

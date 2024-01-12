@@ -36,7 +36,7 @@
 #' @family trainers
 #' @family utils
 #' @seealso
-#' + <https://www.tensorflow.org/api_docs/python/tf/keras/utils/pack_x_y_sample_weight>
+#  + <https://www.tensorflow.org/api_docs/python/tf/keras/utils/pack_x_y_sample_weight>
 #'
 #' @tether keras.utils.pack_x_y_sample_weight
 pack_x_y_sample_weight <-
@@ -79,7 +79,7 @@ function (x, y = NULL, sample_weight = NULL)
 #' @family trainers
 #' @family utils
 #' @seealso
-#' + <https://www.tensorflow.org/api_docs/python/tf/keras/utils/unpack_x_y_sample_weight>
+#  + <https://www.tensorflow.org/api_docs/python/tf/keras/utils/unpack_x_y_sample_weight>
 #'
 #' @tether keras.utils.unpack_x_y_sample_weight
 unpack_x_y_sample_weight <-
@@ -207,7 +207,7 @@ function (data)
 #' @family utils
 #' @seealso
 #' + <https://keras.io/api/data_loading/audio#audiodatasetfromdirectory-function>
-#' + <https://www.tensorflow.org/api_docs/python/tf/keras/utils/audio_dataset_from_directory>
+#  + <https://www.tensorflow.org/api_docs/python/tf/keras/utils/audio_dataset_from_directory>
 #' @tether keras.utils.audio_dataset_from_directory
 audio_dataset_from_directory <-
 function (directory, labels = "inferred", label_mode = "int",
@@ -267,7 +267,7 @@ function (directory, labels = "inferred", label_mode = "int",
 #' @family utils
 #' @seealso
 #' + <https://keras.io/api/utils/python_utils#splitdataset-function>
-#' + <https://www.tensorflow.org/api_docs/python/tf/keras/utils/split_dataset>
+#  + <https://www.tensorflow.org/api_docs/python/tf/keras/utils/split_dataset>
 #'
 #' @tether keras.utils.split_dataset
 split_dataset <-
@@ -431,7 +431,7 @@ function (dataset, left_size = NULL, right_size = NULL, shuffle = FALSE,
 #' @family preprocessing
 #' @seealso
 #' + <https://keras.io/api/data_loading/image#imagedatasetfromdirectory-function>
-#' + <https://www.tensorflow.org/api_docs/python/tf/keras/utils/image_dataset_from_directory>
+#  + <https://www.tensorflow.org/api_docs/python/tf/keras/utils/image_dataset_from_directory>
 #' @tether keras.utils.image_dataset_from_directory
 image_dataset_from_directory <-
 function (directory, labels = "inferred", label_mode = "int",
@@ -559,7 +559,7 @@ function (directory, labels = "inferred", label_mode = "int",
 #' @family preprocessing
 #' @seealso
 #' + <https://keras.io/api/data_loading/text#textdatasetfromdirectory-function>
-#' + <https://www.tensorflow.org/api_docs/python/tf/keras/utils/text_dataset_from_directory>
+#  + <https://www.tensorflow.org/api_docs/python/tf/keras/utils/text_dataset_from_directory>
 #' @tether keras.utils.text_dataset_from_directory
 text_dataset_from_directory <-
 function (directory, labels = "inferred", label_mode = "int",
@@ -702,7 +702,7 @@ function (directory, labels = "inferred", label_mode = "int",
 #' @family preprocessing
 #' @seealso
 #' + <https://keras.io/api/data_loading/timeseries#timeseriesdatasetfromarray-function>
-#' + <https://www.tensorflow.org/api_docs/python/tf/keras/utils/timeseries_dataset_from_array>
+#  + <https://www.tensorflow.org/api_docs/python/tf/keras/utils/timeseries_dataset_from_array>
 #'
 #' @tether keras.utils.timeseries_dataset_from_array
 timeseries_dataset_from_array <-

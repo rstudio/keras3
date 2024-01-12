@@ -91,7 +91,7 @@
 #' @family ops
 #' @seealso
 #' + <https://keras.io/api/ops/image#affinetransform-function>
-#' + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/image/affine_transform>
+#  + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/image/affine_transform>
 #'
 #' @tether keras.ops.image.affine_transform
 op_image_affine_transform <-
@@ -157,7 +157,7 @@ function (image, transform, interpolation = "bilinear", fill_mode = "constant",
 #' @family ops
 #' @seealso
 #' + <https://keras.io/api/ops/image#extractpatches-function>
-#' + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/image/extract_patches>
+#  + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/image/extract_patches>
 #'
 #' @tether keras.ops.image.extract_patches
 op_image_extract_patches <-
@@ -218,7 +218,7 @@ function (image, size, strides = NULL, dilation_rate = 1L, padding = "valid",
 #' @family image utils
 #' @family ops
 #' @seealso
-#' + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/image/map_coordinates>
+#  + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/image/map_coordinates>
 #' @tether keras.ops.image.map_coordinates
 op_image_map_coordinates <-
 function (input, coordinates, order, fill_mode = "constant",
@@ -283,7 +283,7 @@ function (input, coordinates, order, fill_mode = "constant",
 #' @family image utils
 #' @family ops
 #' @seealso
-#' + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/image/pad_images>
+#  + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/image/pad_images>
 #'
 #' @tether keras.ops.image.pad_images
 op_image_pad_images <-
@@ -355,7 +355,7 @@ function (images, top_padding = NULL, left_padding = NULL, target_height = NULL,
 #' @family ops
 #' @seealso
 #' + <https://keras.io/api/ops/image#resize-function>
-#' + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/image/resize>
+#  + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/image/resize>
 #' @tether keras.ops.image.resize
 op_image_resize <-
 function (image, size, interpolation = "bilinear", antialias = FALSE,

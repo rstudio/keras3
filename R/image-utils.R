@@ -27,7 +27,7 @@
 #' @family utils
 #' @seealso
 #' + <https://keras.io/api/data_loading/image#saveimg-function>
-#' + <https://www.tensorflow.org/api_docs/python/tf/keras/utils/save_img>
+#  + <https://www.tensorflow.org/api_docs/python/tf/keras/utils/save_img>
 #' @tether keras.utils.save_img
 image_array_save <-
 function (x, path, data_format = NULL, file_format = NULL, scale = TRUE,
@@ -74,7 +74,7 @@ function (x, path, data_format = NULL, file_format = NULL, scale = TRUE,
 #' @family image utils
 #' @family utils
 #' @seealso
-#' + <https://www.tensorflow.org/api_docs/python/tf/keras/utils/array_to_img>
+#  + <https://www.tensorflow.org/api_docs/python/tf/keras/utils/array_to_img>
 #' @tether keras.utils.array_to_img
 image_from_array <-
 function (x, data_format = NULL, scale = TRUE, dtype = NULL)
@@ -136,7 +136,7 @@ function (x, data_format = NULL, scale = TRUE, dtype = NULL)
 #' @family utils
 #' @seealso
 #' + <https://keras.io/api/data_loading/image#loadimg-function>
-#' + <https://www.tensorflow.org/api_docs/python/tf/keras/utils/load_img>
+#  + <https://www.tensorflow.org/api_docs/python/tf/keras/utils/load_img>
 #' @tether keras.utils.load_img
 image_load <-
 function (path, color_mode = "rgb", target_size = NULL, interpolation = "nearest",
@@ -182,7 +182,7 @@ function (path, color_mode = "rgb", target_size = NULL, interpolation = "nearest
 #' @family utils
 #' @seealso
 #' + <https://keras.io/api/data_loading/image#imgtoarray-function>
-#' + <https://www.tensorflow.org/api_docs/python/tf/keras/utils/img_to_array>
+#  + <https://www.tensorflow.org/api_docs/python/tf/keras/utils/img_to_array>
 #' @tether keras.utils.img_to_array
 image_to_array <-
 function (img, data_format = NULL, dtype = NULL)

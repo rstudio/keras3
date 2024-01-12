@@ -79,7 +79,7 @@
 #' @family utils
 #' @family layers
 #' @seealso
-#' + <https://www.tensorflow.org/api_docs/python/tf/keras/layers/TorchModuleWrapper>
+#  + <https://www.tensorflow.org/api_docs/python/tf/keras/layers/TorchModuleWrapper>
 #' @tether keras.layers.TorchModuleWrapper
 layer_torch_module_wrapper <-
 function (object, module, name = NULL, ...)

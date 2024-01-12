@@ -76,7 +76,7 @@
 #' @family utils
 #' @family preprocessing
 #' @seealso
-#' + <https://www.tensorflow.org/api_docs/python/tf/keras/preprocessing/image/smart_resize>
+#  + <https://www.tensorflow.org/api_docs/python/tf/keras/preprocessing/image/smart_resize>
 #' @tether keras.preprocessing.image.smart_resize
 image_smart_resize <-
 function (x, size, interpolation = "bilinear", data_format = "channels_last",

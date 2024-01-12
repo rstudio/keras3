@@ -77,7 +77,7 @@
 #' @family layers
 #' @seealso
 #' + <https://keras.io/api/layers/core_layers/dense#dense-class>
-#' + <https://www.tensorflow.org/api_docs/python/tf/keras/layers/Dense>
+#  + <https://www.tensorflow.org/api_docs/python/tf/keras/layers/Dense>
 #' @tether keras.layers.Dense
 layer_dense <-
 function (object, units, activation = NULL, use_bias = TRUE,
@@ -205,7 +205,7 @@ function (object, units, activation = NULL, use_bias = TRUE,
 #' @family core layers
 #' @family layers
 #' @seealso
-#' + <https://www.tensorflow.org/api_docs/python/tf/keras/layers/EinsumDense>
+#  + <https://www.tensorflow.org/api_docs/python/tf/keras/layers/EinsumDense>
 #'
 #' @tether keras.layers.EinsumDense
 layer_einsum_dense <-
@@ -292,7 +292,7 @@ function (object, equation, output_shape, activation = NULL,
 #' @family layers
 #' @seealso
 #' + <https://keras.io/api/layers/core_layers/embedding#embedding-class>
-#' + <https://www.tensorflow.org/api_docs/python/tf/keras/layers/Embedding>
+#  + <https://www.tensorflow.org/api_docs/python/tf/keras/layers/Embedding>
 #' @tether keras.layers.Embedding
 layer_embedding <-
 function (object, input_dim, output_dim, embeddings_initializer = "uniform",
@@ -323,7 +323,7 @@ function (object, input_dim, output_dim, embeddings_initializer = "uniform",
 #' @family core layers
 #' @family layers
 #' @seealso
-#' + <https://www.tensorflow.org/api_docs/python/tf/keras/layers/Identity>
+#  + <https://www.tensorflow.org/api_docs/python/tf/keras/layers/Identity>
 #' @tether keras.layers.Identity
 layer_identity <-
 function (object, ...)
@@ -397,7 +397,7 @@ function (object, ...)
 #' @family core layers
 #' @family layers
 #' @seealso
-#' + <https://www.tensorflow.org/api_docs/python/tf/keras/layers/Input>
+#  + <https://www.tensorflow.org/api_docs/python/tf/keras/layers/Input>
 #'
 #' @tether keras.layers.Input
 layer_input <-
@@ -467,7 +467,7 @@ function (shape = NULL, batch_size = NULL, dtype = NULL, sparse = NULL,
 #' @family layers
 #' @seealso
 #' + <https://keras.io/api/layers/core_layers/lambda#lambda-class>
-#' + <https://www.tensorflow.org/api_docs/python/tf/keras/layers/Lambda>
+#  + <https://www.tensorflow.org/api_docs/python/tf/keras/layers/Lambda>
 #'
 #' @tether keras.layers.Lambda
 layer_lambda <-
@@ -534,7 +534,7 @@ function (object, f, output_shape = NULL, mask = NULL, arguments = NULL,
 #' @family layers
 #' @seealso
 #' + <https://keras.io/api/layers/core_layers/masking#masking-class>
-#' + <https://www.tensorflow.org/api_docs/python/tf/keras/layers/Masking>
+#  + <https://www.tensorflow.org/api_docs/python/tf/keras/layers/Masking>
 #' @tether keras.layers.Masking
 layer_masking <-
 function (object, mask_value = 0, ...)

@@ -21,7 +21,7 @@
 #' @family config
 #' @seealso
 #' [use_backend()]
-#' + <https://www.tensorflow.org/api_docs/python/tf/keras/config/backend>
+#  + <https://www.tensorflow.org/api_docs/python/tf/keras/config/backend>
 #' @tether keras.config.backend
 config_backend <-
 function ()
@@ -49,7 +49,7 @@ function ()
 #' @family config
 #' @seealso
 #' + <https://keras.io/api/utils/config_utils#epsilon-function>
-#' + <https://www.tensorflow.org/api_docs/python/tf/keras/config/epsilon>
+#  + <https://www.tensorflow.org/api_docs/python/tf/keras/config/epsilon>
 #' @tether keras.config.epsilon
 config_epsilon <-
 function ()
@@ -78,7 +78,7 @@ function ()
 #' @family config
 #' @seealso
 #' + <https://keras.io/api/utils/config_utils#floatx-function>
-#' + <https://www.tensorflow.org/api_docs/python/tf/keras/config/floatx>
+#  + <https://www.tensorflow.org/api_docs/python/tf/keras/config/floatx>
 #' @tether keras.config.floatx
 config_floatx <-
 function ()
@@ -117,7 +117,7 @@ function(x) {
 #' @family config
 #' @seealso
 #' + <https://keras.io/api/utils/config_utils#imagedataformat-function>
-#' + <https://www.tensorflow.org/api_docs/python/tf/keras/config/image_data_format>
+#  + <https://www.tensorflow.org/api_docs/python/tf/keras/config/image_data_format>
 #' @tether keras.config.image_data_format
 config_image_data_format <-
 function ()
@@ -155,7 +155,7 @@ function ()
 #' @family config
 #' @seealso
 #' + <https://keras.io/api/utils/config_utils#setepsilon-function>
-#' + <https://www.tensorflow.org/api_docs/python/tf/keras/config/set_epsilon>
+#  + <https://www.tensorflow.org/api_docs/python/tf/keras/config/set_epsilon>
 #' @tether keras.config.set_epsilon
 config_set_epsilon <-
 function (value)
@@ -203,7 +203,7 @@ function (value)
 #' @family config
 #' @seealso
 #' + <https://keras.io/api/utils/config_utils#setfloatx-function>
-#' + <https://www.tensorflow.org/api_docs/python/tf/keras/config/set_floatx>
+#  + <https://www.tensorflow.org/api_docs/python/tf/keras/config/set_floatx>
 #' @tether keras.config.set_floatx
 config_set_floatx <-
 function (value)
@@ -242,7 +242,7 @@ function (value)
 #' @family config
 #' @seealso
 #' + <https://keras.io/api/utils/config_utils#setimagedataformat-function>
-#' + <https://www.tensorflow.org/api_docs/python/tf/keras/config/set_image_data_format>
+#  + <https://www.tensorflow.org/api_docs/python/tf/keras/config/set_image_data_format>
 #' @tether keras.config.set_image_data_format
 config_set_image_data_format <-
 function (data_format)
@@ -258,7 +258,7 @@ function (data_format)
 #' @family saving
 #' @family config
 #' @seealso
-#' + <https://www.tensorflow.org/api_docs/python/tf/keras/config/enable_unsafe_deserialization>
+#  + <https://www.tensorflow.org/api_docs/python/tf/keras/config/enable_unsafe_deserialization>
 #' @tether keras.config.enable_unsafe_deserialization
 config_enable_unsafe_deserialization <-
 function ()
@@ -280,7 +280,7 @@ function ()
 #' @family utils
 #' @family config
 #' @seealso
-#' + <https://www.tensorflow.org/api_docs/python/tf/keras/config/disable_interactive_logging>
+#  + <https://www.tensorflow.org/api_docs/python/tf/keras/config/disable_interactive_logging>
 #' @tether keras.config.disable_interactive_logging
 config_disable_interactive_logging <-
 function ()
@@ -302,7 +302,7 @@ function ()
 #' @family utils
 #' @family config
 #' @seealso
-#' + <https://www.tensorflow.org/api_docs/python/tf/keras/config/enable_interactive_logging>
+#  + <https://www.tensorflow.org/api_docs/python/tf/keras/config/enable_interactive_logging>
 #' @tether keras.config.enable_interactive_logging
 config_enable_interactive_logging <-
 function ()
@@ -328,7 +328,7 @@ function ()
 #' @family utils
 #' @family config
 #' @seealso
-#' + <https://www.tensorflow.org/api_docs/python/tf/keras/config/is_interactive_logging_enabled>
+#  + <https://www.tensorflow.org/api_docs/python/tf/keras/config/is_interactive_logging_enabled>
 #' @tether keras.config.is_interactive_logging_enabled
 config_is_interactive_logging_enabled <-
 function ()
@@ -360,7 +360,7 @@ function ()
 #' @family utils
 #' @family config
 #' @seealso
-#' + <https://www.tensorflow.org/api_docs/python/tf/keras/config/disable_traceback_filtering>
+#  + <https://www.tensorflow.org/api_docs/python/tf/keras/config/disable_traceback_filtering>
 #' @tether keras.config.disable_traceback_filtering
 config_disable_traceback_filtering <-
 function ()
@@ -392,7 +392,7 @@ function ()
 #' @family utils
 #' @family config
 #' @seealso
-#' + <https://www.tensorflow.org/api_docs/python/tf/keras/config/enable_traceback_filtering>
+#  + <https://www.tensorflow.org/api_docs/python/tf/keras/config/enable_traceback_filtering>
 #' @tether keras.config.enable_traceback_filtering
 config_enable_traceback_filtering <-
 function ()
@@ -428,7 +428,7 @@ function ()
 #' @family utils
 #' @family config
 #' @seealso
-#' + <https://www.tensorflow.org/api_docs/python/tf/keras/config/is_traceback_filtering_enabled>
+#  + <https://www.tensorflow.org/api_docs/python/tf/keras/config/is_traceback_filtering_enabled>
 #' @tether keras.config.is_traceback_filtering_enabled
 config_is_traceback_filtering_enabled <-
 function ()

@@ -29,7 +29,7 @@
 #' @family layers
 #' @seealso
 #' + <https://keras.io/api/layers/regularization_layers/activity_regularization#activityregularization-class>
-#' + <https://www.tensorflow.org/api_docs/python/tf/keras/layers/ActivityRegularization>
+#  + <https://www.tensorflow.org/api_docs/python/tf/keras/layers/ActivityRegularization>
 #' @tether keras.layers.ActivityRegularization
 layer_activity_regularization <-
 function (object, l1 = 0, l2 = 0, ...)
@@ -90,7 +90,7 @@ function (object, l1 = 0, l2 = 0, ...)
 #' @family layers
 #' @seealso
 #' + <https://keras.io/api/layers/regularization_layers/dropout#dropout-class>
-#' + <https://www.tensorflow.org/api_docs/python/tf/keras/layers/Dropout>
+#  + <https://www.tensorflow.org/api_docs/python/tf/keras/layers/Dropout>
 #' @tether keras.layers.Dropout
 layer_dropout <-
 function (object, rate, noise_shape = NULL, seed = NULL, ...)
@@ -131,7 +131,7 @@ function (object, rate, noise_shape = NULL, seed = NULL, ...)
 #' @family layers
 #' @seealso
 #' + <https://keras.io/api/layers/regularization_layers/gaussian_dropout#gaussiandropout-class>
-#' + <https://www.tensorflow.org/api_docs/python/tf/keras/layers/GaussianDropout>
+#  + <https://www.tensorflow.org/api_docs/python/tf/keras/layers/GaussianDropout>
 #' @tether keras.layers.GaussianDropout
 layer_gaussian_dropout <-
 function (object, rate, seed = NULL, ...)
@@ -175,7 +175,7 @@ function (object, rate, seed = NULL, ...)
 #' @family layers
 #' @seealso
 #' + <https://keras.io/api/layers/regularization_layers/gaussian_noise#gaussiannoise-class>
-#' + <https://www.tensorflow.org/api_docs/python/tf/keras/layers/GaussianNoise>
+#  + <https://www.tensorflow.org/api_docs/python/tf/keras/layers/GaussianNoise>
 #' @tether keras.layers.GaussianNoise
 layer_gaussian_noise <-
 function (object, stddev, seed = NULL, ...)
@@ -234,7 +234,7 @@ function (object, stddev, seed = NULL, ...)
 #' @family layers
 #' @seealso
 #' + <https://keras.io/api/layers/regularization_layers/spatial_dropout1d#spatialdropout1d-class>
-#' + <https://www.tensorflow.org/api_docs/python/tf/keras/layers/SpatialDropout1D>
+#  + <https://www.tensorflow.org/api_docs/python/tf/keras/layers/SpatialDropout1D>
 #' @tether keras.layers.SpatialDropout1D
 layer_spatial_dropout_1d <-
 function (object, rate, seed = NULL, name = NULL, dtype = NULL)
@@ -304,7 +304,7 @@ function (object, rate, seed = NULL, name = NULL, dtype = NULL)
 #' @family layers
 #' @seealso
 #' + <https://keras.io/api/layers/regularization_layers/spatial_dropout2d#spatialdropout2d-class>
-#' + <https://www.tensorflow.org/api_docs/python/tf/keras/layers/SpatialDropout2D>
+#  + <https://www.tensorflow.org/api_docs/python/tf/keras/layers/SpatialDropout2D>
 #' @tether keras.layers.SpatialDropout2D
 layer_spatial_dropout_2d <-
 function (object, rate, data_format = NULL, seed = NULL, name = NULL,
@@ -375,7 +375,7 @@ function (object, rate, data_format = NULL, seed = NULL, name = NULL,
 #' @family layers
 #' @seealso
 #' + <https://keras.io/api/layers/regularization_layers/spatial_dropout3d#spatialdropout3d-class>
-#' + <https://www.tensorflow.org/api_docs/python/tf/keras/layers/SpatialDropout3D>
+#  + <https://www.tensorflow.org/api_docs/python/tf/keras/layers/SpatialDropout3D>
 #' @tether keras.layers.SpatialDropout3D
 layer_spatial_dropout_3d <-
 function (object, rate, data_format = NULL, seed = NULL, name = NULL,

@@ -31,7 +31,7 @@
 #' @family layers
 #' @seealso
 #' + <https://keras.io/api/layers/core_layers/activation#activation-class>
-#' + <https://www.tensorflow.org/api_docs/python/tf/keras/layers/Activation>
+#  + <https://www.tensorflow.org/api_docs/python/tf/keras/layers/Activation>
 #' @tether keras.layers.Activation
 layer_activation <-
 function (object, activation, ...)
@@ -67,7 +67,7 @@ function (object, activation, ...)
 #' @family layers
 #' @seealso
 #' + <https://keras.io/api/layers/activation_layers/elu#elu-class>
-#' + <https://www.tensorflow.org/api_docs/python/tf/keras/layers/ELU>
+#  + <https://www.tensorflow.org/api_docs/python/tf/keras/layers/ELU>
 #' @tether keras.layers.ELU
 layer_activation_elu <-
 function (object, alpha = 1, ...)
@@ -114,7 +114,7 @@ function (object, alpha = 1, ...)
 #' @family layers
 #' @seealso
 #' + <https://keras.io/api/layers/activation_layers/leaky_relu#leakyrelu-class>
-#' + <https://www.tensorflow.org/api_docs/python/tf/keras/layers/LeakyReLU>
+#  + <https://www.tensorflow.org/api_docs/python/tf/keras/layers/LeakyReLU>
 #' @tether keras.layers.LeakyReLU
 layer_activation_leaky_relu <-
 function (object, negative_slope = 0.3, ...)
@@ -163,7 +163,7 @@ function (object, negative_slope = 0.3, ...)
 #' @family layers
 #' @seealso
 #' + <https://keras.io/api/layers/activation_layers/prelu#prelu-class>
-#' + <https://www.tensorflow.org/api_docs/python/tf/keras/layers/PReLU>
+#  + <https://www.tensorflow.org/api_docs/python/tf/keras/layers/PReLU>
 #' @tether keras.layers.PReLU
 layer_activation_parametric_relu <-
 function (object, alpha_initializer = "Zeros", alpha_regularizer = NULL,
@@ -226,7 +226,7 @@ function (object, alpha_initializer = "Zeros", alpha_regularizer = NULL,
 #' @family layers
 #' @seealso
 #' + <https://keras.io/api/layers/activation_layers/relu#relu-class>
-#' + <https://www.tensorflow.org/api_docs/python/tf/keras/layers/ReLU>
+#  + <https://www.tensorflow.org/api_docs/python/tf/keras/layers/ReLU>
 #' @tether keras.layers.ReLU
 layer_activation_relu <-
 function (object, max_value = NULL, negative_slope = 0, threshold = 0,
@@ -278,7 +278,7 @@ function (object, max_value = NULL, negative_slope = 0, threshold = 0,
 #' @family layers
 #' @seealso
 #' + <https://keras.io/api/layers/activation_layers/softmax#softmax-class>
-#' + <https://www.tensorflow.org/api_docs/python/tf/keras/layers/Softmax>
+#  + <https://www.tensorflow.org/api_docs/python/tf/keras/layers/Softmax>
 #' @tether keras.layers.Softmax
 layer_activation_softmax <-
 function (object, axis = -1L, ...)

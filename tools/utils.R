@@ -2203,6 +2203,23 @@ py_help_roxified <- function(object) {
   invisible(help)
 }
 
+
+
+if(FALSE) {
+  list.files("R", full.names = TRUE) %>%
+    walk(\(f) {
+      x <- readLines(f)
+      i <- startsWith(x, "#' + <https://www.tensorflow.org/api_docs/python/tf/keras/")
+      x[i] %<>% sub("#'", "# ", .)
+      # x <- sub(
+      #   "^#' (+ <https://www.tensorflow.org/api_docs/python/tf/keras/.+>)$",
+      #   "#  \\1",
+      #   xx
+      # )
+      writeLines(x, f)
+    })
+}
+
 # rename2(list(a = "b", a = z))
 
 

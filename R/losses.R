@@ -111,7 +111,7 @@
 #' @family losses
 #' @seealso
 #' + <https://keras.io/api/losses/probabilistic_losses#binarycrossentropy-class>
-#' + <https://www.tensorflow.org/api_docs/python/tf/keras/losses/BinaryCrossentropy>
+#  + <https://www.tensorflow.org/api_docs/python/tf/keras/losses/BinaryCrossentropy>
 #'
 #' @tether keras.losses.BinaryCrossentropy
 loss_binary_crossentropy <-
@@ -322,7 +322,7 @@ function (y_true, y_pred, from_logits = FALSE, label_smoothing = 0,
 #' @export
 #' @family losses
 #' @seealso
-#' + <https://www.tensorflow.org/api_docs/python/tf/keras/losses/BinaryFocalCrossentropy>
+#  + <https://www.tensorflow.org/api_docs/python/tf/keras/losses/BinaryFocalCrossentropy>
 #'
 #' @tether keras.losses.BinaryFocalCrossentropy
 loss_binary_focal_crossentropy <-
@@ -433,7 +433,7 @@ function (y_true, y_pred, apply_class_balancing = FALSE,
 #' @family losses
 #' @seealso
 #' + <https://keras.io/api/losses/probabilistic_losses#categoricalcrossentropy-class>
-#' + <https://www.tensorflow.org/api_docs/python/tf/keras/losses/CategoricalCrossentropy>
+#  + <https://www.tensorflow.org/api_docs/python/tf/keras/losses/CategoricalCrossentropy>
 #'
 #' @tether keras.losses.CategoricalCrossentropy
 loss_categorical_crossentropy <-
@@ -589,7 +589,7 @@ function (y_true, y_pred, from_logits = FALSE, label_smoothing = 0,
 #' @export
 #' @family losses
 #' @seealso
-#' + <https://www.tensorflow.org/api_docs/python/tf/keras/losses/CategoricalFocalCrossentropy>
+#  + <https://www.tensorflow.org/api_docs/python/tf/keras/losses/CategoricalFocalCrossentropy>
 #'
 #' @tether keras.losses.CategoricalFocalCrossentropy
 loss_categorical_focal_crossentropy <-
@@ -655,7 +655,7 @@ function (y_true, y_pred, alpha = 0.25, gamma = 2,
 #' @family losses
 #' @seealso
 #' + <https://keras.io/api/losses/hinge_losses#categoricalhinge-class>
-#' + <https://www.tensorflow.org/api_docs/python/tf/keras/losses/CategoricalHinge>
+#  + <https://www.tensorflow.org/api_docs/python/tf/keras/losses/CategoricalHinge>
 #'
 #' @tether keras.losses.CategoricalHinge
 loss_categorical_hinge <-
@@ -728,7 +728,7 @@ function (y_true, y_pred, ..., reduction = "sum_over_batch_size",
 #' @family losses
 #' @seealso
 #' + <https://keras.io/api/losses/regression_losses#cosinesimilarity-class>
-#' + <https://www.tensorflow.org/api_docs/python/tf/keras/losses/CosineSimilarity>
+#  + <https://www.tensorflow.org/api_docs/python/tf/keras/losses/CosineSimilarity>
 #'
 #' @tether keras.losses.CosineSimilarity
 loss_cosine_similarity <-
@@ -795,7 +795,7 @@ function (y_true, y_pred, axis = -1L, ..., reduction = "sum_over_batch_size",
 #' @family losses
 #' @seealso
 #' + <https://keras.io/api/losses/hinge_losses#hinge-class>
-#' + <https://www.tensorflow.org/api_docs/python/tf/keras/losses/Hinge>
+#  + <https://www.tensorflow.org/api_docs/python/tf/keras/losses/Hinge>
 #'
 #' @tether keras.losses.Hinge
 loss_hinge <-
@@ -867,7 +867,7 @@ function (y_true, y_pred, ..., reduction = "sum_over_batch_size",
 #' @family losses
 #' @seealso
 #' + <https://keras.io/api/losses/regression_losses#huber-class>
-#' + <https://www.tensorflow.org/api_docs/python/tf/keras/losses/Huber>
+#  + <https://www.tensorflow.org/api_docs/python/tf/keras/losses/Huber>
 #'
 #' @tether keras.losses.Huber
 loss_huber <-
@@ -929,7 +929,7 @@ function (y_true, y_pred, delta = 1, ..., reduction = "sum_over_batch_size",
 #' @family losses
 #' @seealso
 #' + <https://keras.io/api/losses/probabilistic_losses#kldivergence-class>
-#' + <https://www.tensorflow.org/api_docs/python/tf/keras/losses/KLDivergence>
+#  + <https://www.tensorflow.org/api_docs/python/tf/keras/losses/KLDivergence>
 #'
 #' @tether keras.losses.KLDivergence
 loss_kl_divergence <-
@@ -995,7 +995,7 @@ function (y_true, y_pred, ..., reduction = "sum_over_batch_size",
 #' @family losses
 #' @seealso
 #' + <https://keras.io/api/losses/regression_losses#logcosh-class>
-#' + <https://www.tensorflow.org/api_docs/python/tf/keras/losses/LogCosh>
+#  + <https://www.tensorflow.org/api_docs/python/tf/keras/losses/LogCosh>
 #'
 #' @tether keras.losses.LogCosh
 loss_log_cosh <-
@@ -1056,7 +1056,7 @@ function (y_true, y_pred, ..., reduction = "sum_over_batch_size",
 #' @family losses
 #' @seealso
 #' + <https://keras.io/api/losses/regression_losses#meanabsoluteerror-class>
-#' + <https://www.tensorflow.org/api_docs/python/tf/keras/losses/MeanAbsoluteError>
+#  + <https://www.tensorflow.org/api_docs/python/tf/keras/losses/MeanAbsoluteError>
 #'
 #' @tether keras.losses.MeanAbsoluteError
 loss_mean_absolute_error <-
@@ -1122,7 +1122,7 @@ function (y_true, y_pred, ..., reduction = "sum_over_batch_size",
 #' @family losses
 #' @seealso
 #' + <https://keras.io/api/losses/regression_losses#meanabsolutepercentageerror-class>
-#' + <https://www.tensorflow.org/api_docs/python/tf/keras/losses/MeanAbsolutePercentageError>
+#  + <https://www.tensorflow.org/api_docs/python/tf/keras/losses/MeanAbsolutePercentageError>
 #'
 #' @tether keras.losses.MeanAbsolutePercentageError
 loss_mean_absolute_percentage_error <-
@@ -1183,7 +1183,7 @@ function (y_true, y_pred, ..., reduction = "sum_over_batch_size",
 #' @family losses
 #' @seealso
 #' + <https://keras.io/api/losses/regression_losses#meansquarederror-class>
-#' + <https://www.tensorflow.org/api_docs/python/tf/keras/losses/MeanSquaredError>
+#  + <https://www.tensorflow.org/api_docs/python/tf/keras/losses/MeanSquaredError>
 #'
 #' @tether keras.losses.MeanSquaredError
 loss_mean_squared_error <-
@@ -1248,7 +1248,7 @@ function (y_true, y_pred, ..., reduction = "sum_over_batch_size",
 #' @family losses
 #' @seealso
 #' + <https://keras.io/api/losses/regression_losses#meansquaredlogarithmicerror-class>
-#' + <https://www.tensorflow.org/api_docs/python/tf/keras/losses/MeanSquaredLogarithmicError>
+#  + <https://www.tensorflow.org/api_docs/python/tf/keras/losses/MeanSquaredLogarithmicError>
 #'
 #' @tether keras.losses.MeanSquaredLogarithmicError
 loss_mean_squared_logarithmic_error <-
@@ -1310,7 +1310,7 @@ function (y_true, y_pred, ..., reduction = "sum_over_batch_size",
 #' @family losses
 #' @seealso
 #' + <https://keras.io/api/losses/probabilistic_losses#poisson-class>
-#' + <https://www.tensorflow.org/api_docs/python/tf/keras/losses/Poisson>
+#  + <https://www.tensorflow.org/api_docs/python/tf/keras/losses/Poisson>
 #'
 #' @tether keras.losses.Poisson
 loss_poisson <-
@@ -1427,7 +1427,7 @@ function (y_true, y_pred, ..., reduction = "sum_over_batch_size",
 #' @family losses
 #' @seealso
 #' + <https://keras.io/api/losses/probabilistic_losses#sparsecategoricalcrossentropy-class>
-#' + <https://www.tensorflow.org/api_docs/python/tf/keras/losses/SparseCategoricalCrossentropy>
+#  + <https://www.tensorflow.org/api_docs/python/tf/keras/losses/SparseCategoricalCrossentropy>
 #'
 #' @tether keras.losses.SparseCategoricalCrossentropy
 loss_sparse_categorical_crossentropy <-
@@ -1493,7 +1493,7 @@ function (y_true, y_pred, from_logits = FALSE, ignore_class = NULL,
 #' @family losses
 #' @seealso
 #' + <https://keras.io/api/losses/hinge_losses#squaredhinge-class>
-#' + <https://www.tensorflow.org/api_docs/python/tf/keras/losses/SquaredHinge>
+#  + <https://www.tensorflow.org/api_docs/python/tf/keras/losses/SquaredHinge>
 #'
 #' @tether keras.losses.SquaredHinge
 loss_squared_hinge <-

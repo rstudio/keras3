@@ -96,7 +96,7 @@
 #' @family optimizers
 #' @seealso
 #' + <https://keras.io/api/optimizers/adadelta#adadelta-class>
-#' + <https://www.tensorflow.org/api_docs/python/tf/keras/optimizers/Adadelta>
+#  + <https://www.tensorflow.org/api_docs/python/tf/keras/optimizers/Adadelta>
 #' @tether keras.optimizers.Adadelta
 optimizer_adadelta <-
 function (learning_rate = 0.001, rho = 0.95, epsilon = 1e-07,
@@ -213,7 +213,7 @@ function (learning_rate = 0.001, rho = 0.95, epsilon = 1e-07,
 #' @family optimizers
 #' @seealso
 #' + <https://keras.io/api/optimizers/adafactor#adafactor-class>
-#' + <https://www.tensorflow.org/api_docs/python/tf/keras/optimizers/Adafactor>
+#  + <https://www.tensorflow.org/api_docs/python/tf/keras/optimizers/Adafactor>
 #' @tether keras.optimizers.Adafactor
 optimizer_adafactor <-
 function (learning_rate = 0.001, beta_2_decay = -0.8, epsilon_1 = 1e-30,
@@ -317,7 +317,7 @@ function (learning_rate = 0.001, beta_2_decay = -0.8, epsilon_1 = 1e-30,
 #' @family optimizers
 #' @seealso
 #' + <https://keras.io/api/optimizers/adagrad#adagrad-class>
-#' + <https://www.tensorflow.org/api_docs/python/tf/keras/optimizers/Adagrad>
+#  + <https://www.tensorflow.org/api_docs/python/tf/keras/optimizers/Adagrad>
 #' @tether keras.optimizers.Adagrad
 optimizer_adagrad <-
 function (learning_rate = 0.001, initial_accumulator_value = 0.1,
@@ -434,7 +434,7 @@ function (learning_rate = 0.001, initial_accumulator_value = 0.1,
 #' @family optimizers
 #' @seealso
 #' + <https://keras.io/api/optimizers/adam#adam-class>
-#' + <https://www.tensorflow.org/api_docs/python/tf/keras/optimizers/Adam>
+#  + <https://www.tensorflow.org/api_docs/python/tf/keras/optimizers/Adam>
 #' @tether keras.optimizers.Adam
 optimizer_adam <-
 function (learning_rate = 0.001, beta_1 = 0.9, beta_2 = 0.999,
@@ -560,7 +560,7 @@ function (learning_rate = 0.001, beta_1 = 0.9, beta_2 = 0.999,
 #' @family optimizers
 #' @seealso
 #' + <https://keras.io/api/optimizers/adamax#adamax-class>
-#' + <https://www.tensorflow.org/api_docs/python/tf/keras/optimizers/Adamax>
+#  + <https://www.tensorflow.org/api_docs/python/tf/keras/optimizers/Adamax>
 #'
 #' @tether keras.optimizers.Adamax
 optimizer_adamax <-
@@ -686,7 +686,7 @@ function (learning_rate = 0.001, beta_1 = 0.9, beta_2 = 0.999,
 #' @family optimizers
 #' @seealso
 #' + <https://keras.io/api/optimizers/adamw#adamw-class>
-#' + <https://www.tensorflow.org/api_docs/python/tf/keras/optimizers/AdamW>
+#  + <https://www.tensorflow.org/api_docs/python/tf/keras/optimizers/AdamW>
 #' @tether keras.optimizers.AdamW
 optimizer_adam_w <-
 function (learning_rate = 0.001, weight_decay = 0.004, beta_1 = 0.9,
@@ -843,7 +843,7 @@ function (learning_rate = 0.001, weight_decay = 0.004, beta_1 = 0.9,
 #' @family optimizers
 #' @seealso
 #' + <https://keras.io/api/optimizers/ftrl#ftrl-class>
-#' + <https://www.tensorflow.org/api_docs/python/tf/keras/optimizers/Ftrl>
+#  + <https://www.tensorflow.org/api_docs/python/tf/keras/optimizers/Ftrl>
 #'
 #' @tether keras.optimizers.Ftrl
 optimizer_ftrl <-
@@ -957,7 +957,7 @@ function (learning_rate = 0.001, learning_rate_power = -0.5,
 #' @export
 #' @family optimizers
 #' @seealso
-#' + <https://www.tensorflow.org/api_docs/python/tf/keras/optimizers/Lion>
+#  + <https://www.tensorflow.org/api_docs/python/tf/keras/optimizers/Lion>
 #' @tether keras.optimizers.Lion
 optimizer_lion <-
 function (learning_rate = 0.001, beta_1 = 0.9, beta_2 = 0.99,
@@ -1063,7 +1063,7 @@ function (learning_rate = 0.001, beta_1 = 0.9, beta_2 = 0.99,
 #' @export
 #' @family optimizers
 #' @seealso
-#' + <https://www.tensorflow.org/api_docs/python/tf/keras/optimizers/LossScaleOptimizer>
+#  + <https://www.tensorflow.org/api_docs/python/tf/keras/optimizers/LossScaleOptimizer>
 #' @tether keras.optimizers.LossScaleOptimizer
 optimizer_loss_scale <-
 function (inner_optimizer, initial_scale = 32768, dynamic_growth_steps = 2000L,
@@ -1172,7 +1172,7 @@ function (inner_optimizer, initial_scale = 32768, dynamic_growth_steps = 2000L,
 #' @family optimizers
 #' @seealso
 #' + <https://keras.io/api/optimizers/Nadam#nadam-class>
-#' + <https://www.tensorflow.org/api_docs/python/tf/keras/optimizers/Nadam>
+#  + <https://www.tensorflow.org/api_docs/python/tf/keras/optimizers/Nadam>
 #' @tether keras.optimizers.Nadam
 optimizer_nadam <-
 function (learning_rate = 0.001, beta_1 = 0.9, beta_2 = 0.999,
@@ -1294,7 +1294,7 @@ function (learning_rate = 0.001, beta_1 = 0.9, beta_2 = 0.999,
 #' @family optimizers
 #' @seealso
 #' + <https://keras.io/api/optimizers/rmsprop#rmsprop-class>
-#' + <https://www.tensorflow.org/api_docs/python/tf/keras/optimizers/RMSprop>
+#  + <https://www.tensorflow.org/api_docs/python/tf/keras/optimizers/RMSprop>
 #'
 #' @tether keras.optimizers.RMSprop
 optimizer_rmsprop <-
@@ -1408,7 +1408,7 @@ function (learning_rate = 0.001, rho = 0.9, momentum = 0, epsilon = 1e-07,
 #' @family optimizers
 #' @seealso
 #' + <https://keras.io/api/optimizers/sgd#sgd-class>
-#' + <https://www.tensorflow.org/api_docs/python/tf/keras/optimizers/SGD>
+#  + <https://www.tensorflow.org/api_docs/python/tf/keras/optimizers/SGD>
 #'
 #' @tether keras.optimizers.SGD
 optimizer_sgd <-

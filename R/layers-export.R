@@ -60,7 +60,7 @@
 #' @family saving
 #' @family layers
 #' @seealso
-#' + <https://www.tensorflow.org/api_docs/python/tf/keras/layers/TFSMLayer>
+#  + <https://www.tensorflow.org/api_docs/python/tf/keras/layers/TFSMLayer>
 #'
 #' @tether keras.layers.TFSMLayer
 layer_tfsm <-

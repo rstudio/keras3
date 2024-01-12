@@ -311,7 +311,7 @@
 #' @family callbacks
 #' @seealso
 #' + <https://keras.io/api/callbacks/base_callback#callback-class>
-#' + <https://www.tensorflow.org/api_docs/python/tf/keras/callbacks/Callback>
+#  + <https://www.tensorflow.org/api_docs/python/tf/keras/callbacks/Callback>
 Callback <-
 function(classname,
          on_epoch_begin = NULL,

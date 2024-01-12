@@ -22,7 +22,7 @@
 #' @family regularizers
 #' @seealso
 #' + <https://keras.io/api/layers/regularizers#l1-class>
-#' + <https://www.tensorflow.org/api_docs/python/tf/keras/regularizers/L1>
+#  + <https://www.tensorflow.org/api_docs/python/tf/keras/regularizers/L1>
 #'
 #' @tether keras.regularizers.L1
 regularizer_l1 <-
@@ -60,7 +60,7 @@ function (l1 = 0.01)
 #' @family regularizers
 #' @seealso
 #' + <https://keras.io/api/layers/regularizers#l1l2-class>
-#' + <https://www.tensorflow.org/api_docs/python/tf/keras/regularizers/L1L2>
+#  + <https://www.tensorflow.org/api_docs/python/tf/keras/regularizers/L1L2>
 #'
 #' @tether keras.regularizers.L1L2
 regularizer_l1_l2 <-
@@ -92,7 +92,7 @@ function (l1 = 0, l2 = 0)
 #' @family regularizers
 #' @seealso
 #' + <https://keras.io/api/layers/regularizers#l2-class>
-#' + <https://www.tensorflow.org/api_docs/python/tf/keras/regularizers/L2>
+#  + <https://www.tensorflow.org/api_docs/python/tf/keras/regularizers/L2>
 #'
 #' @tether keras.regularizers.L2
 regularizer_l2 <-
@@ -134,7 +134,7 @@ function (l2 = 0.01)
 #' @family regularizers
 #' @seealso
 #' + <https://keras.io/api/layers/regularizers#orthogonalregularizer-class>
-#' + <https://www.tensorflow.org/api_docs/python/tf/keras/regularizers/OrthogonalRegularizer>
+#  + <https://www.tensorflow.org/api_docs/python/tf/keras/regularizers/OrthogonalRegularizer>
 #'
 #' @tether keras.regularizers.OrthogonalRegularizer
 regularizer_orthogonal <-

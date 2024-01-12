@@ -112,7 +112,7 @@
 #' @family optimizer learning rate schedules
 #' @seealso
 #' + <https://keras.io/api/optimizers/learning_rate_schedules/cosine_decay#cosinedecay-class>
-#' + <https://www.tensorflow.org/api_docs/python/tf/keras/optimizers/schedules/CosineDecay>
+#  + <https://www.tensorflow.org/api_docs/python/tf/keras/optimizers/schedules/CosineDecay>
 #'
 #' @tether keras.optimizers.schedules.CosineDecay
 learning_rate_schedule_cosine_decay <-
@@ -189,7 +189,7 @@ function (initial_learning_rate, decay_steps, alpha = 0, name = "CosineDecay",
 #' @family optimizer learning rate schedules
 #' @seealso
 #' + <https://keras.io/api/optimizers/learning_rate_schedules/cosine_decay_restarts#cosinedecayrestarts-class>
-#' + <https://www.tensorflow.org/api_docs/python/tf/keras/optimizers/schedules/CosineDecayRestarts>
+#  + <https://www.tensorflow.org/api_docs/python/tf/keras/optimizers/schedules/CosineDecayRestarts>
 #'
 #' @tether keras.optimizers.schedules.CosineDecayRestarts
 learning_rate_schedule_cosine_decay_restarts <-
@@ -277,7 +277,7 @@ function (initial_learning_rate, first_decay_steps, t_mul = 2,
 #' @family optimizer learning rate schedules
 #' @seealso
 #' + <https://keras.io/api/optimizers/learning_rate_schedules/exponential_decay#exponentialdecay-class>
-#' + <https://www.tensorflow.org/api_docs/python/tf/keras/optimizers/schedules/ExponentialDecay>
+#  + <https://www.tensorflow.org/api_docs/python/tf/keras/optimizers/schedules/ExponentialDecay>
 #'
 #' @tether keras.optimizers.schedules.ExponentialDecay
 learning_rate_schedule_exponential_decay <-
@@ -367,7 +367,7 @@ function (initial_learning_rate, decay_steps, decay_rate, staircase = FALSE,
 #' @family optimizer learning rate schedules
 #' @seealso
 #' + <https://keras.io/api/optimizers/learning_rate_schedules/inverse_time_decay#inversetimedecay-class>
-#' + <https://www.tensorflow.org/api_docs/python/tf/keras/optimizers/schedules/InverseTimeDecay>
+#  + <https://www.tensorflow.org/api_docs/python/tf/keras/optimizers/schedules/InverseTimeDecay>
 #'
 #' @tether keras.optimizers.schedules.InverseTimeDecay
 learning_rate_schedule_inverse_time_decay <-
@@ -439,7 +439,7 @@ function (initial_learning_rate, decay_steps, decay_rate, staircase = FALSE,
 #' @family optimizer learning rate schedules
 #' @seealso
 #' + <https://keras.io/api/optimizers/learning_rate_schedules/piecewise_constant_decay#piecewiseconstantdecay-class>
-#' + <https://www.tensorflow.org/api_docs/python/tf/keras/optimizers/schedules/PiecewiseConstantDecay>
+#  + <https://www.tensorflow.org/api_docs/python/tf/keras/optimizers/schedules/PiecewiseConstantDecay>
 #'
 #' @tether keras.optimizers.schedules.PiecewiseConstantDecay
 learning_rate_schedule_piecewise_constant_decay <-
@@ -551,7 +551,7 @@ function (boundaries, values, name = "PiecewiseConstant")
 #' @family optimizer learning rate schedules
 #' @seealso
 #' + <https://keras.io/api/optimizers/learning_rate_schedules/polynomial_decay#polynomialdecay-class>
-#' + <https://www.tensorflow.org/api_docs/python/tf/keras/optimizers/schedules/PolynomialDecay>
+#  + <https://www.tensorflow.org/api_docs/python/tf/keras/optimizers/schedules/PolynomialDecay>
 #'
 #' @tether keras.optimizers.schedules.PolynomialDecay
 learning_rate_schedule_polynomial_decay <-

@@ -127,7 +127,7 @@
 #' @family layers
 #' @seealso
 #' + <https://keras.io/api/layers/convolution_layers/convolution1d#conv1d-class>
-#' + <https://www.tensorflow.org/api_docs/python/tf/keras/layers/Conv1D>
+#  + <https://www.tensorflow.org/api_docs/python/tf/keras/layers/Conv1D>
 #' @tether keras.layers.Conv1D
 layer_conv_1d <-
 function (object, filters, kernel_size, strides = 1L, padding = "valid",
@@ -263,7 +263,7 @@ function (object, filters, kernel_size, strides = 1L, padding = "valid",
 #' @family layers
 #' @seealso
 #' + <https://keras.io/api/layers/convolution_layers/convolution1d_transpose#conv1dtranspose-class>
-#' + <https://www.tensorflow.org/api_docs/python/tf/keras/layers/Conv1DTranspose>
+#  + <https://www.tensorflow.org/api_docs/python/tf/keras/layers/Conv1DTranspose>
 #' @tether keras.layers.Conv1DTranspose
 layer_conv_1d_transpose <-
 function (object, filters, kernel_size, strides = 1L, padding = "valid",
@@ -401,7 +401,7 @@ function (object, filters, kernel_size, strides = 1L, padding = "valid",
 #' @family layers
 #' @seealso
 #' + <https://keras.io/api/layers/convolution_layers/convolution2d#conv2d-class>
-#' + <https://www.tensorflow.org/api_docs/python/tf/keras/layers/Conv2D>
+#  + <https://www.tensorflow.org/api_docs/python/tf/keras/layers/Conv2D>
 #' @tether keras.layers.Conv2D
 layer_conv_2d <-
 function (object, filters, kernel_size, strides = list(1L, 1L),
@@ -445,7 +445,7 @@ function (object, filters, kernel_size, strides = list(1L, 1L),
 #'
 #' # References
 #' - [A guide to convolution arithmetic for deep learning](
-#'     https://arxiv.org/abs/160307285v1)
+#'     https://arxiv.org/abs/1603.07285)
 #' - [Deconvolutional Networks](
 #'     https://www.matthewzeiler.com/mattzeiler/deconvolutionalnetworks.pdf)
 #'
@@ -541,7 +541,7 @@ function (object, filters, kernel_size, strides = list(1L, 1L),
 #' @family layers
 #' @seealso
 #' + <https://keras.io/api/layers/convolution_layers/convolution2d_transpose#conv2dtranspose-class>
-#' + <https://www.tensorflow.org/api_docs/python/tf/keras/layers/Conv2DTranspose>
+#  + <https://www.tensorflow.org/api_docs/python/tf/keras/layers/Conv2DTranspose>
 #' @tether keras.layers.Conv2DTranspose
 layer_conv_2d_transpose <-
 function (object, filters, kernel_size, strides = list(1L, 1L),
@@ -686,7 +686,7 @@ function (object, filters, kernel_size, strides = list(1L, 1L),
 #' @family layers
 #' @seealso
 #' + <https://keras.io/api/layers/convolution_layers/convolution3d#conv3d-class>
-#' + <https://www.tensorflow.org/api_docs/python/tf/keras/layers/Conv3D>
+#  + <https://www.tensorflow.org/api_docs/python/tf/keras/layers/Conv3D>
 #' @tether keras.layers.Conv3D
 layer_conv_3d <-
 function (object, filters, kernel_size, strides = list(1L, 1L,
@@ -830,7 +830,7 @@ function (object, filters, kernel_size, strides = list(1L, 1L,
 #' @family layers
 #' @seealso
 #' + <https://keras.io/api/layers/convolution_layers/convolution3d_transpose#conv3dtranspose-class>
-#' + <https://www.tensorflow.org/api_docs/python/tf/keras/layers/Conv3DTranspose>
+#  + <https://www.tensorflow.org/api_docs/python/tf/keras/layers/Conv3DTranspose>
 #' @tether keras.layers.Conv3DTranspose
 layer_conv_3d_transpose <-
 function (object, filters, kernel_size, strides = list(1L, 1L,
@@ -981,7 +981,7 @@ function (object, filters, kernel_size, strides = list(1L, 1L,
 #' @family convolutional layers
 #' @family layers
 #' @seealso
-#' + <https://www.tensorflow.org/api_docs/python/tf/keras/layers/DepthwiseConv1D>
+#  + <https://www.tensorflow.org/api_docs/python/tf/keras/layers/DepthwiseConv1D>
 #' @tether keras.layers.DepthwiseConv1D
 layer_depthwise_conv_1d <-
 function (object, kernel_size, strides = 1L, padding = "valid",
@@ -1129,7 +1129,7 @@ function (object, kernel_size, strides = 1L, padding = "valid",
 #' @family layers
 #' @seealso
 #' + <https://keras.io/api/layers/convolution_layers/depthwise_convolution2d#depthwiseconv2d-class>
-#' + <https://www.tensorflow.org/api_docs/python/tf/keras/layers/DepthwiseConv2D>
+#  + <https://www.tensorflow.org/api_docs/python/tf/keras/layers/DepthwiseConv2D>
 #' @tether keras.layers.DepthwiseConv2D
 layer_depthwise_conv_2d <-
 function (object, kernel_size, strides = list(1L, 1L), padding = "valid",
@@ -1278,7 +1278,7 @@ function (object, kernel_size, strides = list(1L, 1L), padding = "valid",
 #' @family layers
 #' @seealso
 #' + <https://keras.io/api/layers/convolution_layers/separable_convolution1d#separableconv1d-class>
-#' + <https://www.tensorflow.org/api_docs/python/tf/keras/layers/SeparableConv1D>
+#  + <https://www.tensorflow.org/api_docs/python/tf/keras/layers/SeparableConv1D>
 #'
 #' @tether keras.layers.SeparableConv1D
 layer_separable_conv_1d <-
@@ -1429,7 +1429,7 @@ function (object, filters, kernel_size, strides = 1L, padding = "valid",
 #' @family layers
 #' @seealso
 #' + <https://keras.io/api/layers/convolution_layers/separable_convolution2d#separableconv2d-class>
-#' + <https://www.tensorflow.org/api_docs/python/tf/keras/layers/SeparableConv2D>
+#  + <https://www.tensorflow.org/api_docs/python/tf/keras/layers/SeparableConv2D>
 #' @tether keras.layers.SeparableConv2D
 layer_separable_conv_2d <-
 function (object, filters, kernel_size, strides = list(1L, 1L),

@@ -27,7 +27,7 @@
 #' @family constraints
 #' @seealso
 #' + <https://keras.io/api/layers/constraints#maxnorm-class>
-#' + <https://www.tensorflow.org/api_docs/python/tf/keras/constraints/MaxNorm>
+#  + <https://www.tensorflow.org/api_docs/python/tf/keras/constraints/MaxNorm>
 #' @tether keras.constraints.MaxNorm
 constraint_maxnorm <-
 function (max_value = 2L, axis = 1L)
@@ -76,7 +76,7 @@ function (max_value = 2L, axis = 1L)
 #' @family constraints
 #' @seealso
 #' + <https://keras.io/api/layers/constraints#minmaxnorm-class>
-#' + <https://www.tensorflow.org/api_docs/python/tf/keras/constraints/MinMaxNorm>
+#  + <https://www.tensorflow.org/api_docs/python/tf/keras/constraints/MinMaxNorm>
 #' @tether keras.constraints.MinMaxNorm
 constraint_minmaxnorm <-
 function (min_value = 0, max_value = 1, rate = 1, axis = 1L)
@@ -92,7 +92,7 @@ function (min_value = 0, max_value = 1, rate = 1, axis = 1L)
 #' @family constraints
 #' @seealso
 #' + <https://keras.io/api/layers/constraints#nonneg-class>
-#' + <https://www.tensorflow.org/api_docs/python/tf/keras/constraints/NonNeg>
+#  + <https://www.tensorflow.org/api_docs/python/tf/keras/constraints/NonNeg>
 #' @tether keras.constraints.NonNeg
 constraint_nonneg <-
 function ()
@@ -121,7 +121,7 @@ function ()
 #' @family constraints
 #' @seealso
 #' + <https://keras.io/api/layers/constraints#unitnorm-class>
-#' + <https://www.tensorflow.org/api_docs/python/tf/keras/constraints/UnitNorm>
+#  + <https://www.tensorflow.org/api_docs/python/tf/keras/constraints/UnitNorm>
 #' @tether keras.constraints.UnitNorm
 constraint_unitnorm <-
 function (axis = 1L)

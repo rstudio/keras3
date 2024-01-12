@@ -141,7 +141,7 @@
 #' @family layers
 #' @seealso
 #' + <https://keras.io/api/layers/normalization_layers/batch_normalization#batchnormalization-class>
-#' + <https://www.tensorflow.org/api_docs/python/tf/keras/layers/BatchNormalization>
+#  + <https://www.tensorflow.org/api_docs/python/tf/keras/layers/BatchNormalization>
 #' @tether keras.layers.BatchNormalization
 layer_batch_normalization <-
 function (object, axis = -1L, momentum = 0.99, epsilon = 0.001,
@@ -247,7 +247,7 @@ function (object, axis = -1L, momentum = 0.99, epsilon = 0.001,
 #' @family layers
 #' @seealso
 #' + <https://keras.io/api/layers/normalization_layers/group_normalization#groupnormalization-class>
-#' + <https://www.tensorflow.org/api_docs/python/tf/keras/layers/GroupNormalization>
+#  + <https://www.tensorflow.org/api_docs/python/tf/keras/layers/GroupNormalization>
 #' @tether keras.layers.GroupNormalization
 layer_group_normalization <-
 function (object, groups = 32L, axis = -1L, epsilon = 0.001,
@@ -380,7 +380,7 @@ function (object, groups = 32L, axis = -1L, epsilon = 0.001,
 #' @family layers
 #' @seealso
 #' + <https://keras.io/api/layers/normalization_layers/layer_normalization#layernormalization-class>
-#' + <https://www.tensorflow.org/api_docs/python/tf/keras/layers/LayerNormalization>
+#  + <https://www.tensorflow.org/api_docs/python/tf/keras/layers/LayerNormalization>
 #' @tether keras.layers.LayerNormalization
 layer_layer_normalization <-
 function (object, axis = -1L, epsilon = 0.001, center = TRUE,
@@ -441,7 +441,7 @@ function (object, axis = -1L, epsilon = 0.001, center = TRUE,
 #' @family normalization layers
 #' @family layers
 #' @seealso
-#' + <https://www.tensorflow.org/api_docs/python/tf/keras/layers/SpectralNormalization>
+#  + <https://www.tensorflow.org/api_docs/python/tf/keras/layers/SpectralNormalization>
 #'
 #' @tether keras.layers.SpectralNormalization
 layer_spectral_normalization <-
@@ -485,7 +485,7 @@ function (object, layer, power_iterations = 1L, ...)
 #' @family layers
 #' @seealso
 #' + <https://keras.io/api/layers/normalization_layers/unit_normalization#unitnormalization-class>
-#' + <https://www.tensorflow.org/api_docs/python/tf/keras/layers/UnitNormalization>
+#  + <https://www.tensorflow.org/api_docs/python/tf/keras/layers/UnitNormalization>
 #'
 #' @tether keras.layers.UnitNormalization
 layer_unit_normalization <-

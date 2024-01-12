@@ -66,7 +66,7 @@
 #' @family layers
 #' @seealso
 #' + <https://keras.io/api/layers/attention_layers/additive_attention#additiveattention-class>
-#' + <https://www.tensorflow.org/api_docs/python/tf/keras/layers/AdditiveAttention>
+#  + <https://www.tensorflow.org/api_docs/python/tf/keras/layers/AdditiveAttention>
 #' @tether keras.layers.AdditiveAttention
 layer_additive_attention <-
 function (object, use_scale = TRUE, dropout = 0, ...)
@@ -151,7 +151,7 @@ function (object, use_scale = TRUE, dropout = 0, ...)
 #' @family layers
 #' @seealso
 #' + <https://keras.io/api/layers/attention_layers/attention#attention-class>
-#' + <https://www.tensorflow.org/api_docs/python/tf/keras/layers/Attention>
+#  + <https://www.tensorflow.org/api_docs/python/tf/keras/layers/Attention>
 #' @tether keras.layers.Attention
 layer_attention <-
 function (object, use_scale = FALSE, score_mode = "dot", dropout = 0,
@@ -263,7 +263,7 @@ function (object, use_scale = FALSE, score_mode = "dot", dropout = 0,
 #' @family attention layers
 #' @family layers
 #' @seealso
-#' + <https://www.tensorflow.org/api_docs/python/tf/keras/layers/GroupQueryAttention>
+#  + <https://www.tensorflow.org/api_docs/python/tf/keras/layers/GroupQueryAttention>
 #' @tether keras.layers.GroupQueryAttention
 layer_group_query_attention <-
 function (object, head_dim, num_query_heads, num_key_value_heads,
@@ -392,7 +392,7 @@ function (object, head_dim, num_query_heads, num_key_value_heads,
 #' @family layers
 #' @seealso
 #' + <https://keras.io/api/layers/attention_layers/multi_head_attention#multiheadattention-class>
-#' + <https://www.tensorflow.org/api_docs/python/tf/keras/layers/MultiHeadAttention>
+#  + <https://www.tensorflow.org/api_docs/python/tf/keras/layers/MultiHeadAttention>
 #' @tether keras.layers.MultiHeadAttention
 layer_multi_head_attention <-
 function (inputs, num_heads, key_dim, value_dim = NULL, dropout = 0,
