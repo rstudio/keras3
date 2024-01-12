@@ -580,7 +580,7 @@ function (obj)
 #' with the relevant config:
 #'
 #' ```{r}
-#' config = list(
+#' config <- list(
 #'   class_name = "Adam",
 #'   config = list(
 #'     amsgrad = FALSE,
@@ -601,7 +601,7 @@ function (obj)
 #' it by its `module` and `class_name`. For example:
 #'
 #' ```r
-#' config = list(
+#' config <- list(
 #'   class_name = "MetricsList",
 #'   config =  list(
 #'     ...

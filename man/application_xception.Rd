@@ -58,8 +58,7 @@ layer.  When loading pretrained weights, \code{classifier_activation} can
 only be \code{NULL} or \code{"softmax"}.}
 }
 \value{
-\if{html}{\out{<div class="sourceCode">}}\preformatted{A model instance.
-}\if{html}{\out{</div>}}
+A model instance.
 }
 \description{
 Instantiates the Xception architecture.
@@ -79,10 +78,10 @@ The default input image size for this model is 299x299.
 }
 
 \section{Note}{
-each Keras Application expects a specific kind of input preprocessing.
-For Xception, call \code{keras.applications.xception.preprocess_input}
+Each Keras Application expects a specific kind of input preprocessing.
+For Xception, call \code{\link[=application_preprocess_inputs]{application_preprocess_inputs()}}
 on your inputs before passing them to the model.
-\code{xception.preprocess_input} will scale input pixels between -1 and 1.
+\code{\link[=application_preprocess_inputs]{application_preprocess_inputs()}} will scale input pixels between \code{-1} and \code{1}.
 }
 
 \seealso{

@@ -22,8 +22,7 @@ are 0 and 255 respectively. Defaults to \code{TRUE}.}
 defaults to \code{"float32"}). Defaults to \code{NULL}.}
 }
 \value{
-\if{html}{\out{<div class="sourceCode">}}\preformatted{A PIL Image instance.
-}\if{html}{\out{</div>}}
+A PIL Image instance.
 }
 \description{
 Converts a 3D array to a PIL Image instance.

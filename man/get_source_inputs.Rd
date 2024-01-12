@@ -10,8 +10,7 @@ get_source_inputs(tensor)
 \item{tensor}{The tensor to start from.}
 }
 \value{
-\if{html}{\out{<div class="sourceCode">}}\preformatted{List of input tensors.
-}\if{html}{\out{</div>}}
+List of input tensors.
 }
 \description{
 Output will always be a list of tensors

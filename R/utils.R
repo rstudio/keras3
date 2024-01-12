@@ -346,16 +346,12 @@ function (x, num_classes = NULL)
 #' sources of randomness, or when certain non-deterministic cuDNN ops are
 #' involved.
 #'
-#' Calling this utility is equivalent to the following in Python:
-#'
-#' ```
-#' import random
-#' import numpy as np
-#' from keras.utils.module_utils import tensorflow as tf
-#' random.seed(seed)
-#' np.random.seed(seed)
-#' tf.random.set_seed(seed)
-#' ```
+#' This sets:
+#' - The R session seed: [`set.seed(seed)`]
+#' - The Python session seed: `import random; random.seed(seed)`
+#' - The NumPy seed: `import numpy; numpy.random.seed(seed)`
+#' - The TensorFlow seed: `tf.random.set_seed(seed)`
+#' - Disables Python hash randomization
 #'
 #' Note that the TensorFlow seed is set even if you're not using TensorFlow
 #' as your backend framework, since many workflows leverage `tf$data`

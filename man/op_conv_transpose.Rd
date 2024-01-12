@@ -57,8 +57,7 @@ specifying the dilation rate to use for dilated convolution. If
 the same \code{dilation_rate}.}
 }
 \value{
-\if{html}{\out{<div class="sourceCode">}}\preformatted{A tensor of rank N+2, the result of the conv operation.
-}\if{html}{\out{</div>}}
+A tensor of rank N+2, the result of the conv operation.
 }
 \description{
 Also known as de-convolution. This ops supports 1D, 2D and 3D convolution.
@@ -127,7 +126,6 @@ Other ops:
 \code{\link{op_clip}()},
 \code{\link{op_concatenate}()},
 \code{\link{op_cond}()},
-\code{\link{op_conjugate}()},
 \code{\link{op_conj}()},
 \code{\link{op_convert_to_numpy}()},
 \code{\link{op_convert_to_tensor}()},
@@ -285,7 +283,6 @@ Other ops:
 \code{\link{op_tril}()},
 \code{\link{op_triu}()},
 \code{\link{op_tri}()},
-\code{\link{op_true_divide}()},
 \code{\link{op_unstack}()},
 \code{\link{op_var}()},
 \code{\link{op_vdot}()},

@@ -16,8 +16,7 @@ equal to the first dimension of \code{updates}.}
 \item{updates}{A tensor, the new values to be put to \code{inputs} at \code{indices}.}
 }
 \value{
-\if{html}{\out{<div class="sourceCode">}}\preformatted{A tensor, has the same shape and dtype as `inputs`.
-}\if{html}{\out{</div>}}
+A tensor, has the same shape and dtype as \code{inputs}.
 }
 \description{
 At a high level, this operation does \code{inputs[indices] = updates}.
@@ -149,7 +148,6 @@ Other ops:
 \code{\link{op_clip}()},
 \code{\link{op_concatenate}()},
 \code{\link{op_cond}()},
-\code{\link{op_conjugate}()},
 \code{\link{op_conj}()},
 \code{\link{op_conv_transpose}()},
 \code{\link{op_convert_to_numpy}()},
@@ -307,7 +305,6 @@ Other ops:
 \code{\link{op_tril}()},
 \code{\link{op_triu}()},
 \code{\link{op_tri}()},
-\code{\link{op_true_divide}()},
 \code{\link{op_unstack}()},
 \code{\link{op_var}()},
 \code{\link{op_vdot}()},

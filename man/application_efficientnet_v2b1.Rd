@@ -60,8 +60,7 @@ be \code{NULL} or \code{"softmax"}.}
 \item{include_preprocessing}{Boolean, whether to include the preprocessing layer at the bottom of the network.}
 }
 \value{
-\if{html}{\out{<div class="sourceCode">}}\preformatted{A model instance.
-}\if{html}{\out{</div>}}
+A model instance.
 }
 \description{
 Instantiates the EfficientNetV2B1 architecture.
@@ -82,10 +81,10 @@ For transfer learning use cases, make sure to read the
 }
 
 \section{Note}{
-each Keras Application expects a specific kind of input preprocessing.
+Each Keras Application expects a specific kind of input preprocessing.
 For EfficientNetV2, by default input preprocessing is included as a part of
 the model (as a \code{Rescaling} layer), and thus
-\code{keras.applications.efficientnet_v2.preprocess_input} is actually a
+\code{\link[=application_preprocess_inputs]{application_preprocess_inputs()}} is actually a
 pass-through function. In this use case, EfficientNetV2 models expect their
 inputs to be float tensors of pixels with values in the \verb{[0, 255]} range.
 At the same time, preprocessing as a part of the model (i.e. \code{Rescaling}

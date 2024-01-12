@@ -15,8 +15,7 @@ metric_huber(y_true, y_pred, delta = 1)
 quadratic to linear. Defaults to \code{1.0}.}
 }
 \value{
-\if{html}{\out{<div class="sourceCode">}}\preformatted{Tensor with one scalar loss entry per sample.
-}\if{html}{\out{</div>}}
+Tensor with one scalar loss entry per sample.
 }
 \description{
 Formula:

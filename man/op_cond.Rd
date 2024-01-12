@@ -4,7 +4,12 @@
 \alias{op_cond}
 \title{Conditionally applies \code{true_fn} or \code{false_fn}.}
 \usage{
-op_cond(pred, true_fn, false_fn)
+op_cond(
+  pred,
+  true_fn,
+  false_fn = function() {
+ }
+)
 }
 \arguments{
 \item{pred}{Boolean scalar type}
@@ -14,8 +19,7 @@ op_cond(pred, true_fn, false_fn)
 \item{false_fn}{Callable returning the output for the \code{pred == FALSE} case.}
 }
 \value{
-\if{html}{\out{<div class="sourceCode">}}\preformatted{The output of either `true_fn` or `false_fn` depending on pred.
-}\if{html}{\out{</div>}}
+The output of either \code{true_fn} or \code{false_fn} depending on pred.
 }
 \description{
 Conditionally applies \code{true_fn} or \code{false_fn}.
@@ -71,7 +75,6 @@ Other ops:
 \code{\link{op_ceil}()},
 \code{\link{op_clip}()},
 \code{\link{op_concatenate}()},
-\code{\link{op_conjugate}()},
 \code{\link{op_conj}()},
 \code{\link{op_conv_transpose}()},
 \code{\link{op_convert_to_numpy}()},
@@ -230,7 +233,6 @@ Other ops:
 \code{\link{op_tril}()},
 \code{\link{op_triu}()},
 \code{\link{op_tri}()},
-\code{\link{op_true_divide}()},
 \code{\link{op_unstack}()},
 \code{\link{op_var}()},
 \code{\link{op_vdot}()},

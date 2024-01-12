@@ -54,8 +54,7 @@ When loading pretrained weights, \code{classifier_activation} can only
 be \code{NULL} or \code{"softmax"}.}
 }
 \value{
-\if{html}{\out{<div class="sourceCode">}}\preformatted{A Model instance.
-}\if{html}{\out{</div>}}
+A Model instance.
 }
 \description{
 Instantiates the ResNet101 architecture.
@@ -72,9 +71,9 @@ For transfer learning use cases, make sure to read the
 }
 
 \section{Note}{
-each Keras Application expects a specific kind of input preprocessing.
-For ResNet, call \code{keras.applications.resnet.preprocess_input} on your
-inputs before passing them to the model. \code{resnet.preprocess_input} will convert
+Each Keras Application expects a specific kind of input preprocessing.
+For ResNet, call \code{\link[=application_preprocess_inputs]{application_preprocess_inputs()}} on your
+inputs before passing them to the model. \code{\link[=application_preprocess_inputs]{application_preprocess_inputs()}} will convert
 the input images from RGB to BGR, then will zero-center each color channel with
 respect to the ImageNet dataset, without scaling.
 }

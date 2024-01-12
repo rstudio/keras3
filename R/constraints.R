@@ -7,8 +7,6 @@
 #' Constrains the weights incident to each hidden unit
 #' to have a norm less than or equal to a desired value.
 #'
-#' Also available via the shortcut function `keras.constraints.max_norm`.
-#'
 #' @param max_value
 #' the maximum norm value for the incoming weights.
 #'
@@ -54,7 +52,8 @@ function (max_value = 2L, axis = 1L)
 #' @param rate
 #' rate for enforcing the constraint: weights will be
 #' rescaled to yield
-#' `(1 - rate) * norm + rate * norm.clip(min_value, max_value)`.
+#' op_clip?
+#' `(1 - rate) * norm + rate * op_clip(norm, min_value, max_value)`.
 #' Effectively, this means that rate = 1.0 stands for strict
 #' enforcement of the constraint, while rate<1.0 means that
 #' weights will be rescaled at each step to slowly move

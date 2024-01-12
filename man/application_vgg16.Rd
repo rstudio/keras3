@@ -60,8 +60,7 @@ layer.  When loading pretrained weights, \code{classifier_activation}
 can only be \code{NULL} or \code{"softmax"}.}
 }
 \value{
-\if{html}{\out{<div class="sourceCode">}}\preformatted{A model instance.
-}\if{html}{\out{</div>}}
+A model instance.
 }
 \description{
 Instantiates the VGG16 model.
@@ -81,10 +80,10 @@ The default input size for this model is 224x224.
 }
 
 \section{Note}{
-each Keras Application expects a specific kind of input preprocessing.
-For VGG16, call \code{keras.applications.vgg16.preprocess_input} on your
+Each Keras Application expects a specific kind of input preprocessing.
+For VGG16, call \code{\link[=application_preprocess_inputs]{application_preprocess_inputs()}} on your
 inputs before passing them to the model.
-\code{vgg16.preprocess_input} will convert the input images from RGB to BGR,
+\code{\link[=application_preprocess_inputs]{application_preprocess_inputs()}} will convert the input images from RGB to BGR,
 then will zero-center each color channel with respect to the ImageNet
 dataset, without scaling.
 }

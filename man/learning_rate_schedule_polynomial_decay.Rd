@@ -69,7 +69,7 @@ that is bigger than \code{step}.
 \}
 }\if{html}{\out{</div>}}
 
-You can pass this schedule directly into a \code{keras.optimizers.Optimizer}
+You can pass this schedule directly into a \code{Optimizer}
 as the learning rate.
 }
 \section{Examples}{

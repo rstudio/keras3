@@ -45,8 +45,7 @@ pixel.
 \code{fill_mode = "constant"}. Defaults to \code{0}.}
 }
 \value{
-\if{html}{\out{<div class="sourceCode">}}\preformatted{Output image or batch of images.
-}\if{html}{\out{</div>}}
+Output image or batch of images.
 }
 \description{
 Note that interpolation near boundaries differs from the scipy function,
@@ -106,7 +105,6 @@ Other ops:
 \code{\link{op_clip}()},
 \code{\link{op_concatenate}()},
 \code{\link{op_cond}()},
-\code{\link{op_conjugate}()},
 \code{\link{op_conj}()},
 \code{\link{op_conv_transpose}()},
 \code{\link{op_convert_to_numpy}()},
@@ -264,7 +262,6 @@ Other ops:
 \code{\link{op_tril}()},
 \code{\link{op_triu}()},
 \code{\link{op_tri}()},
-\code{\link{op_true_divide}()},
 \code{\link{op_unstack}()},
 \code{\link{op_var}()},
 \code{\link{op_vdot}()},

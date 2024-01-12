@@ -14,8 +14,7 @@ layer_concatenate(inputs, ..., axis = -1L)
 \item{axis}{Axis along which to concatenate.}
 }
 \value{
-\if{html}{\out{<div class="sourceCode">}}\preformatted{A tensor, the concatenation of the inputs alongside axis `axis`.
-}\if{html}{\out{</div>}}
+A tensor, the concatenation of the inputs alongside axis \code{axis}.
 }
 \description{
 It takes as input a list of tensors, all of the same shape except

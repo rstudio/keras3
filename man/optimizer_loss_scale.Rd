@@ -21,7 +21,7 @@ optimizer_loss_scale(
 )
 }
 \arguments{
-\item{inner_optimizer}{The \code{keras.optimizers.Optimizer} instance to wrap.}
+\item{inner_optimizer}{The keras \code{Optimizer} instance to wrap.}
 
 \item{initial_scale}{Float. The initial loss scale. This scale will be updated
 during training. It is recommended for this to be a very high
@@ -66,7 +66,7 @@ we overwrite the model variable by its moving average.
 If \code{NULL}, the optimizer
 does not overwrite model variables in the middle of training, and you
 need to explicitly overwrite the variables at the end of training
-by calling \code{optimizer.finalize_variable_values()}
+by calling \code{optimizer$finalize_variable_values()}
 (which updates the model
 variables in-place). When using the built-in \code{fit()} training loop,
 this happens automatically after the last epoch,
@@ -76,7 +76,7 @@ and you don't need to do anything.}
 be multiplied the loss before computing gradients, and the inverse of
 the scale factor will be multiplied by the gradients before updating
 variables. Useful for preventing underflow during mixed precision
-training. Alternately, \code{keras.optimizers.LossScaleOptimizer} will
+training. Alternately, \code{\link[=optimizer_loss_scale]{optimizer_loss_scale()}} will
 automatically set a loss scale factor.}
 }
 \description{

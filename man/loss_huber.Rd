@@ -30,8 +30,7 @@ quadratic to linear. Defaults to \code{1.0}.}
 \item{name}{Optional name for the instance.}
 }
 \value{
-\if{html}{\out{<div class="sourceCode">}}\preformatted{Tensor with one scalar loss entry per sample.
-}\if{html}{\out{</div>}}
+Tensor with one scalar loss entry per sample.
 }
 \description{
 Formula:

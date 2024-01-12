@@ -62,8 +62,7 @@ When loading pretrained weights, \code{classifier_activation} can only
 be \code{NULL} or \code{"softmax"}.}
 }
 \value{
-\if{html}{\out{<div class="sourceCode">}}\preformatted{A model instance.
-}\if{html}{\out{</div>}}
+A model instance.
 }
 \description{
 Instantiates the ConvNeXtBase architecture.

@@ -20,8 +20,7 @@ along \code{axis}.}
 \item{axis}{Axis along which to split. Defaults to \code{0}.}
 }
 \value{
-\if{html}{\out{<div class="sourceCode">}}\preformatted{A list of tensors.
-}\if{html}{\out{</div>}}
+A list of tensors.
 }
 \description{
 Split a tensor into chunks.
@@ -63,7 +62,6 @@ Other numpy ops:
 \code{\link{op_ceil}()},
 \code{\link{op_clip}()},
 \code{\link{op_concatenate}()},
-\code{\link{op_conjugate}()},
 \code{\link{op_conj}()},
 \code{\link{op_copy}()},
 \code{\link{op_cosh}()},
@@ -167,7 +165,6 @@ Other numpy ops:
 \code{\link{op_tril}()},
 \code{\link{op_triu}()},
 \code{\link{op_tri}()},
-\code{\link{op_true_divide}()},
 \code{\link{op_var}()},
 \code{\link{op_vdot}()},
 \code{\link{op_vstack}()},
@@ -206,7 +203,6 @@ Other ops:
 \code{\link{op_clip}()},
 \code{\link{op_concatenate}()},
 \code{\link{op_cond}()},
-\code{\link{op_conjugate}()},
 \code{\link{op_conj}()},
 \code{\link{op_conv_transpose}()},
 \code{\link{op_convert_to_numpy}()},
@@ -364,7 +360,6 @@ Other ops:
 \code{\link{op_tril}()},
 \code{\link{op_triu}()},
 \code{\link{op_tri}()},
-\code{\link{op_true_divide}()},
 \code{\link{op_unstack}()},
 \code{\link{op_var}()},
 \code{\link{op_vdot}()},

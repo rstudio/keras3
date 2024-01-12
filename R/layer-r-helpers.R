@@ -189,18 +189,18 @@ set_vocabulary <- function(object, vocabulary, idf_weights=NULL, ...) {
 #' when adapting each layer only once, but if you adapt a layer multiple times
 #' you will need to take care to re-compile any compiled functions as follows:
 #'
-#'  * If you are adding a preprocessing layer to a `keras.Model`, you need to
+#'  * If you are adding a preprocessing layer to a keras model, you need to
 #'    call `compile(model)` after each subsequent call to `adapt()`.
-#'  * If you are calling a preprocessing layer inside `tfdatasets::dataset_map()`,
-#'    you should call `dataset_map()` again on the input `tf.data.Dataset` after each
+#'  * If you are calling a preprocessing layer inside [`tfdatasets::dataset_map()`],
+#'    you should call `dataset_map()` again on the input `Dataset` after each
 #'    `adapt()`.
-#'  * If you are using a `tensorflow::tf_function()` directly which calls a preprocessing
-#'    layer, you need to call `tf_function` again on your callable after
+#'  * If you are using a [`tensorflow::tf_function()`] directly which calls a preprocessing
+#'    layer, you need to call `tf_function()` again on your callable after
 #'    each subsequent call to `adapt()`.
 #'
-#' `keras_model` example with multiple adapts:
-#' ````r
-#' layer <- layer_normalization(axis=NULL)
+#' `keras_model()` example with multiple adapts:
+#' ````{r}
+#' layer <- layer_normalization(axis = NULL)
 #' adapt(layer, c(0, 2))
 #' model <- keras_model_sequential(layer)
 #' predict(model, c(0, 1, 2)) # [1] -1  0  1
@@ -210,26 +210,23 @@ set_vocabulary <- function(object, vocabulary, idf_weights=NULL, ...) {
 #' predict(model, c(0, 1, 2)) # [1] 0 1 2
 #' ````
 #'
-#' `tf.data.Dataset` example with multiple adapts:
-#' ````r
-#' layer <- layer_normalization(axis=NULL)
+#' `tfdatasets` example with multiple adapts:
+#' ````{r}
+#' layer <- layer_normalization(axis = NULL)
 #' adapt(layer, c(0, 2))
 #' input_ds <- tfdatasets::range_dataset(0, 3)
-#' normalized_ds <- input_ds %>%
+#' normalized_ds <- input_ds |>
 #'   tfdatasets::dataset_map(layer)
-#' str(reticulate::iterate(normalized_ds))
-#' # List of 3
-#' #  $ :tf.Tensor([-1.], shape=(1,), dtype=float32)
-#' #  $ :tf.Tensor([0.], shape=(1,), dtype=float32)
-#' #  $ :tf.Tensor([1.], shape=(1,), dtype=float32)
+#' str(tfdatasets::iterate(normalized_ds))
+#'
 #' adapt(layer, c(-1, 1))
-#' normalized_ds <- input_ds %>%
+#' normalized_ds <- input_ds |>
 #'   tfdatasets::dataset_map(layer) # Re-map over the input dataset.
-#' str(reticulate::iterate(normalized_ds$as_numpy_iterator()))
-#' # List of 3
-#' #  $ : num [1(1d)] -1
-#' #  $ : num [1(1d)] 0
-#' #  $ : num [1(1d)] 1
+#'
+#' normalize_ds |>
+#'   tfdatasets::as_array_iterator() |>
+#'   tfdatasets::iterate() |>
+#'   str()
 #' ````
 #'
 #' @param object Preprocessing layer object
@@ -239,8 +236,8 @@ set_vocabulary <- function(object, vocabulary, idf_weights=NULL, ...) {
 #'
 #' @param batch_size Integer or `NULL`. Number of asamples per state update. If
 #'   unspecified, `batch_size` will default to `32`. Do not specify the
-#'   batch_size if your data is in the form of datasets, generators, or
-#'   `keras.utils.Sequence` instances (since they generate batches).
+#'   batch_size if your data is in the form of a TF Dataset or a generator
+#'   (since they generate batches).
 #'
 #' @param steps Integer or `NULL`. Total number of steps (batches of samples)
 #'   When training with input tensors such as TensorFlow data tensors, the

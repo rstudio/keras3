@@ -18,12 +18,12 @@ By default, Keras filters internal frames in most exceptions that it
 raises, to keep traceback short, readable, and focused on what's
 actionable for you (your own code).
 
-See also \code{keras.config.enable_traceback_filtering()} and
-\code{keras.config.disable_traceback_filtering()}.
+See also \code{\link[=config_enable_traceback_filtering]{config_enable_traceback_filtering()}} and
+\code{\link[=config_disable_traceback_filtering]{config_disable_traceback_filtering()}}.
 
 If you have previously disabled traceback filtering via
-\code{keras.config.disable_traceback_filtering()}, you can re-enable it via
-\code{keras.config.enable_traceback_filtering()}.
+\code{\link[=config_disable_traceback_filtering]{config_disable_traceback_filtering()}}, you can re-enable it via
+\code{\link[=config_enable_traceback_filtering]{config_enable_traceback_filtering()}}.
 }
 \seealso{
 \itemize{

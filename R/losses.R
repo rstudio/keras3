@@ -1077,17 +1077,18 @@ function (y_true, y_pred, ..., reduction = "sum_over_batch_size",
 }
 
 
-#' Computes the mean absolute percentage error between `y_true` & `y_pred`.
+#' Computes the mean absolute percentage error between `y_true` and `y_pred`.
 #'
 #' @description
 #' Formula:
 #'
 #' ```{r, eval = FALSE}
-#' loss <- 100 * mean(abs((y_true - y_pred) / y_true), axis=-1)
+#' loss <- 100 * op_mean(op_abs((y_true - y_pred) / y_true),
+#'                       axis=-1)
 #' ```
 #'
-#' Division by zero is prevented by dividing by `maximum(y_true, epsilon)`
-#' where `epsilon = keras.backend.epsilon()`
+#' Division by zero is prevented by dividing by `max(y_true, epsilon)`
+#' where `epsilon = config_epsilon()`
 #' (default to `1e-7`).
 #'
 #' # Examples
@@ -1203,11 +1204,11 @@ function (y_true, y_pred, ..., reduction = "sum_over_batch_size",
 }
 
 
-#' Computes the mean squared logarithmic error between `y_true` & `y_pred`.
+#' Computes the mean squared logarithmic error between `y_true` and `y_pred`.
 #'
 #' @description
-#' Note that `y_pred` and `y_true` cannot be less or equal to 0. Negative
-#' values and 0 values will be replaced with `keras.backend.epsilon()`
+#' Note that `y_pred` and `y_true` cannot be less or equal to `0`. Negative
+#' values and `0` values will be replaced with `config_epsilon()`
 #' (default to `1e-7`).
 #'
 #' Formula:

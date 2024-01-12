@@ -2,15 +2,24 @@
 % Please edit documentation in R/ops.R
 \name{op_abs}
 \alias{op_abs}
-\title{Shorthand for \code{keras.ops.absolute}.}
+\title{Compute the absolute value element-wise.}
 \usage{
 op_abs(x)
 }
 \arguments{
-\item{x}{see description}
+\item{x}{Input tensorReturns
+
+An array containing the absolute value of each element in \code{x}.Example
+
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{x <- op_convert_to_tensor(c(-1.2, 1.2))
+op_abs(x)
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor([1.2 1.2], shape=(2), dtype=float32)
+}\if{html}{\out{</div>}}}
 }
 \description{
-Shorthand for \code{keras.ops.absolute}.
+Compute the absolute value element-wise.
 }
 \seealso{
 \itemize{
@@ -42,7 +51,6 @@ Other numpy ops:
 \code{\link{op_ceil}()},
 \code{\link{op_clip}()},
 \code{\link{op_concatenate}()},
-\code{\link{op_conjugate}()},
 \code{\link{op_conj}()},
 \code{\link{op_copy}()},
 \code{\link{op_cosh}()},
@@ -147,7 +155,6 @@ Other numpy ops:
 \code{\link{op_tril}()},
 \code{\link{op_triu}()},
 \code{\link{op_tri}()},
-\code{\link{op_true_divide}()},
 \code{\link{op_var}()},
 \code{\link{op_vdot}()},
 \code{\link{op_vstack}()},
@@ -185,7 +192,6 @@ Other ops:
 \code{\link{op_clip}()},
 \code{\link{op_concatenate}()},
 \code{\link{op_cond}()},
-\code{\link{op_conjugate}()},
 \code{\link{op_conj}()},
 \code{\link{op_conv_transpose}()},
 \code{\link{op_convert_to_numpy}()},
@@ -344,7 +350,6 @@ Other ops:
 \code{\link{op_tril}()},
 \code{\link{op_triu}()},
 \code{\link{op_tri}()},
-\code{\link{op_true_divide}()},
 \code{\link{op_unstack}()},
 \code{\link{op_var}()},
 \code{\link{op_vdot}()},

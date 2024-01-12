@@ -12,8 +12,7 @@ op_power(x1, x2)
 \item{x2}{The exponents.}
 }
 \value{
-\if{html}{\out{<div class="sourceCode">}}\preformatted{Output tensor, the bases in `x1` raised to the exponents in `x2`.
-}\if{html}{\out{</div>}}
+Output tensor, the bases in \code{x1} raised to the exponents in \code{x2}.
 }
 \description{
 First tensor elements raised to powers from second tensor, element-wise.
@@ -50,7 +49,6 @@ Other numpy ops:
 \code{\link{op_ceil}()},
 \code{\link{op_clip}()},
 \code{\link{op_concatenate}()},
-\code{\link{op_conjugate}()},
 \code{\link{op_conj}()},
 \code{\link{op_copy}()},
 \code{\link{op_cosh}()},
@@ -154,7 +152,6 @@ Other numpy ops:
 \code{\link{op_tril}()},
 \code{\link{op_triu}()},
 \code{\link{op_tri}()},
-\code{\link{op_true_divide}()},
 \code{\link{op_var}()},
 \code{\link{op_vdot}()},
 \code{\link{op_vstack}()},
@@ -193,7 +190,6 @@ Other ops:
 \code{\link{op_clip}()},
 \code{\link{op_concatenate}()},
 \code{\link{op_cond}()},
-\code{\link{op_conjugate}()},
 \code{\link{op_conj}()},
 \code{\link{op_conv_transpose}()},
 \code{\link{op_convert_to_numpy}()},
@@ -351,7 +347,6 @@ Other ops:
 \code{\link{op_tril}()},
 \code{\link{op_triu}()},
 \code{\link{op_tri}()},
-\code{\link{op_true_divide}()},
 \code{\link{op_unstack}()},
 \code{\link{op_var}()},
 \code{\link{op_vdot}()},

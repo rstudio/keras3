@@ -270,38 +270,40 @@
 #'   that may change in the future.
 #'
 #'
-#' @details
-#'
-#' If you want to use `Callback` objects in a custom training loop:
-#'
-#' 1. You should pack all your callbacks into a single `keras$callbacks$CallbackList`
-#'    so they can all be called together.
-#' 2. You will need to manually call all the `on_*` methods at the appropriate
-#'    locations in your loop. Like this:
-#'
-#' Example:
-#'
-#' ```r
-#' CallbackList <- function(...)
-#'   reticulate::import("keras")$callbacks$CallbackList(list(...))
-#' enumerate <- reticulate::import_builtins()$enumerate
-#' callbacks <- CallbackList(callback1(), callback2(), ...)
-#' callbacks$append(callback3())
-#' callbacks$on_train_begin(...)
-#' for (epoch in seq(0, len = EPOCHS)) {
-#'   callbacks$on_epoch_begin(epoch)
-#'   ds_iterator <- as_iterator(enumerate(dataset))
-#'   while (!is.null(c(i, batch) %<-% iter_next(ds_iterator))) {
-#'     callbacks$on_train_batch_begin(i)
-#'     batch_logs <- model$train_step(batch)
-#'     callbacks$on_train_batch_end(i, batch_logs)
-#'   }
-#'   epoch_logs <- ...
-#'   callbacks$on_epoch_end(epoch, epoch_logs)
-#' }
-#' final_logs <- ...
-#' callbacks$on_train_end(final_logs)
-#' ```
+# commented out until we have an appropriate 1-based wrapper
+# for CallbackList.
+# ' @details
+# '
+# ' If you want to use `Callback` objects in a custom training loop:
+# '
+# ' 1. You should pack all your callbacks into a single `keras$callbacks$CallbackList`
+# '    so they can all be called together.
+# ' 2. You will need to manually call all the `on_*` methods at the appropriate
+# '    locations in your loop. Like this:
+# '
+# ' Example:
+# '
+# ' ```r
+# ' CallbackList <- function(...)
+# '   reticulate::import("keras")$callbacks$CallbackList(list(...))
+# ' enumerate <- reticulate::import_builtins()$enumerate
+# ' callbacks <- CallbackList(callback1(), callback2(), ...)
+# ' callbacks$append(callback3())
+# ' callbacks$on_train_begin(...)
+# ' for (epoch in seq(0, len = EPOCHS)) {
+# '   callbacks$on_epoch_begin(epoch)
+# '   ds_iterator <- as_iterator(enumerate(dataset))
+# '   while (!is.null(c(i, batch) %<-% iter_next(ds_iterator))) {
+# '     callbacks$on_train_batch_begin(i)
+# '     batch_logs <- model$train_step(batch)
+# '     callbacks$on_train_batch_end(i, batch_logs)
+# '   }
+# '   epoch_logs <- ...
+# '   callbacks$on_epoch_end(epoch, epoch_logs)
+# ' }
+# ' final_logs <- ...
+# ' callbacks$on_train_end(final_logs)
+# ' ```
 #' @inheritSection Layer Symbols in scope
 #' @inheritParams Layer
 #' @export

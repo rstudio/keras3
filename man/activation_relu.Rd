@@ -19,8 +19,7 @@ value the function will return).}
 function below which values will be damped or set to zero.}
 }
 \value{
-\if{html}{\out{<div class="sourceCode">}}\preformatted{A tensor with the same shape and dtype as input `x`.
-}\if{html}{\out{</div>}}
+A tensor with the same shape and dtype as input \code{x}.
 }
 \description{
 With default values, this returns the standard ReLU activation:

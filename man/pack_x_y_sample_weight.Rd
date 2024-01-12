@@ -14,8 +14,7 @@ pack_x_y_sample_weight(x, y = NULL, sample_weight = NULL)
 \item{sample_weight}{Sample weight for each element.}
 }
 \value{
-\if{html}{\out{<div class="sourceCode">}}\preformatted{List in the format used in `fit()`.
-}\if{html}{\out{</div>}}
+List in the format used in \code{fit()}.
 }
 \description{
 This is a convenience utility for packing data into the list formats

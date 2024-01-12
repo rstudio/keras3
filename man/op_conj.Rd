@@ -2,20 +2,24 @@
 % Please edit documentation in R/ops.R
 \name{op_conj}
 \alias{op_conj}
-\title{Shorthand for \code{keras.ops.conjugate}.}
+\title{Returns the complex conjugate, element-wise.}
 \usage{
 op_conj(x)
 }
 \arguments{
-\item{x}{see description}
+\item{x}{Input tensor.}
+}
+\value{
+The complex conjugate of each element in \code{x}.
 }
 \description{
-Shorthand for \code{keras.ops.conjugate}.
+The complex conjugate of a complex number is obtained by changing the sign
+of its imaginary part.
 }
 \seealso{
 \itemize{
-\item \url{https:/keras.io/api/ops/numpy#conj-function}
-\item \url{https://www.tensorflow.org/api_docs/python/tf/keras/ops/conj}
+\item \url{https:/keras.io/api/ops/numpy#conjugate-function}
+\item \url{https://www.tensorflow.org/api_docs/python/tf/keras/ops/conjugate}
 }
 
 Other numpy ops: 
@@ -44,7 +48,6 @@ Other numpy ops:
 \code{\link{op_ceil}()},
 \code{\link{op_clip}()},
 \code{\link{op_concatenate}()},
-\code{\link{op_conjugate}()},
 \code{\link{op_copy}()},
 \code{\link{op_cosh}()},
 \code{\link{op_cos}()},
@@ -148,7 +151,6 @@ Other numpy ops:
 \code{\link{op_tril}()},
 \code{\link{op_triu}()},
 \code{\link{op_tri}()},
-\code{\link{op_true_divide}()},
 \code{\link{op_var}()},
 \code{\link{op_vdot}()},
 \code{\link{op_vstack}()},
@@ -187,7 +189,6 @@ Other ops:
 \code{\link{op_clip}()},
 \code{\link{op_concatenate}()},
 \code{\link{op_cond}()},
-\code{\link{op_conjugate}()},
 \code{\link{op_conv_transpose}()},
 \code{\link{op_convert_to_numpy}()},
 \code{\link{op_convert_to_tensor}()},
@@ -345,7 +346,6 @@ Other ops:
 \code{\link{op_tril}()},
 \code{\link{op_triu}()},
 \code{\link{op_tri}()},
-\code{\link{op_true_divide}()},
 \code{\link{op_unstack}()},
 \code{\link{op_var}()},
 \code{\link{op_vdot}()},

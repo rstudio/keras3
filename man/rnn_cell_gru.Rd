@@ -83,7 +83,7 @@ before matrix multiplication). \code{FALSE} = \code{"before"},
 }
 \description{
 This class processes one step within the whole time sequence input, whereas
-\code{keras.layer.GRU} processes the whole sequence.
+\code{\link[=layer_gru]{layer_gru()}} processes the whole sequence.
 }
 \section{Call Arguments}{
 \itemize{

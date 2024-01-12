@@ -2063,7 +2063,7 @@ function (object, max_tokens = NULL, num_oov_indices = 1L, mask_token = NULL,
 #'
 #' 1. Any callable can be passed to this Layer, but if you want to serialize
 #'    this object you should only pass functions that are registered Keras
-#'    serializables (see `keras.saving.register_keras_serializable`
+#'    serializables (see [`register_keras_serializable()`]
 #'    for more details).
 #' 2. When using a custom callable for `standardize`, the data received
 #'    by the callable will be exactly as passed to this layer. The callable

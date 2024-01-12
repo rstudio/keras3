@@ -2,7 +2,7 @@
 % Please edit documentation in R/losses.R
 \name{loss_mean_absolute_percentage_error}
 \alias{loss_mean_absolute_percentage_error}
-\title{Computes the mean absolute percentage error between \code{y_true} & \code{y_pred}.}
+\title{Computes the mean absolute percentage error between \code{y_true} and \code{y_pred}.}
 \usage{
 loss_mean_absolute_percentage_error(
   y_true,
@@ -31,11 +31,12 @@ Mean absolute percentage error values with shape = \verb{[batch_size, d0, ..dN-1
 \description{
 Formula:
 
-\if{html}{\out{<div class="sourceCode r">}}\preformatted{loss <- 100 * mean(abs((y_true - y_pred) / y_true), axis=-1)
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{loss <- 100 * op_mean(op_abs((y_true - y_pred) / y_true),
+                      axis=-1)
 }\if{html}{\out{</div>}}
 
-Division by zero is prevented by dividing by \code{maximum(y_true, epsilon)}
-where \code{epsilon = keras.backend.epsilon()}
+Division by zero is prevented by dividing by \code{max(y_true, epsilon)}
+where \code{epsilon = config_epsilon()}
 (default to \code{1e-7}).
 }
 \section{Examples}{

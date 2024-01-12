@@ -20,15 +20,17 @@ This layer allows a small gradient when the unit is not active.
 
 Formula:
 
-\if{html}{\out{<div class="sourceCode python">}}\preformatted{f(x) = alpha * x if x < 0
-f(x) = x if x >= 0
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{f <- function(x) ifelse(x >= 0, x, alpha * x)
 }\if{html}{\out{</div>}}
 }
 \section{Examples}{
-\if{html}{\out{<div class="sourceCode python">}}\preformatted{leaky_relu_layer = LeakyReLU(negative_slope=0.5)
-input = np.array([-10, -5, 0.0, 5, 10])
-result = leaky_relu_layer(input)
-# result = [-5. , -2.5,  0. ,  5. , 10.]
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{leaky_relu_layer <- layer_activation_leaky_relu(negative_slope=0.5)
+input <- array(c(-10, -5, 0.0, 5, 10))
+result <- leaky_relu_layer(input)
+as.array(result)
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode">}}\preformatted{## [1] -5.0 -2.5  0.0  5.0 10.0
 }\if{html}{\out{</div>}}
 }
 

@@ -20,22 +20,22 @@ where \code{alpha} and \code{scale} are pre-defined constants
 (\code{alpha = 1.67326324} and \code{scale = 1.05070098}).
 
 Basically, the SELU activation function multiplies \code{scale} (> 1) with the
-output of the \code{keras.activations.elu} function to ensure a slope larger
+output of the \code{activation_elu} function to ensure a slope larger
 than one for positive inputs.
 
 The values of \code{alpha} and \code{scale} are
 chosen so that the mean and variance of the inputs are preserved
 between two consecutive layers as long as the weights are initialized
-correctly (see \code{keras.initializers.LecunNormal} initializer)
+correctly (see \code{\link[=initializer_lecun_normal]{initializer_lecun_normal()}})
 and the number of input units is "large enough"
 (see reference paper for more information).
 }
 \section{Notes}{
 \itemize{
-\item To be used together with the
-\code{keras.initializers.LecunNormal} initializer.
+\item To be used together with
+\code{\link[=initializer_lecun_normal]{initializer_lecun_normal()}}.
 \item To be used together with the dropout variant
-\code{keras.layers.AlphaDropout} (rather than regular dropout).
+\code{layer_alpha_dropout()} (legacy, depracated).
 }
 }
 

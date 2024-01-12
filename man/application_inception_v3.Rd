@@ -61,8 +61,7 @@ layer. When loading pretrained weights, \code{classifier_activation}
 can only be \code{NULL} or \code{"softmax"}.}
 }
 \value{
-\if{html}{\out{<div class="sourceCode">}}\preformatted{A model instance.
-}\if{html}{\out{</div>}}
+A model instance.
 }
 \description{
 Instantiates the Inception v3 architecture.
@@ -83,11 +82,11 @@ For transfer learning use cases, make sure to read the
 }
 
 \section{Note}{
-each Keras Application expects a specific kind of input preprocessing.
+Each Keras Application expects a specific kind of input preprocessing.
 For \code{InceptionV3}, call
-\code{keras.applications.inception_v3.preprocess_input} on your inputs
+\code{\link[=application_preprocess_inputs]{application_preprocess_inputs()}} on your inputs
 before passing them to the model.
-\code{inception_v3.preprocess_input} will scale input pixels between -1 and 1.
+\code{\link[=application_preprocess_inputs]{application_preprocess_inputs()}} will scale input pixels between \code{-1} and \code{1}.
 }
 
 \seealso{

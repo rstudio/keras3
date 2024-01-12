@@ -12,8 +12,7 @@ op_dot(x1, x2)
 \item{x2}{Second argument.}
 }
 \value{
-\if{html}{\out{<div class="sourceCode">}}\preformatted{Dot product of `x1` and `x2`.
-}\if{html}{\out{</div>}}
+Dot product of \code{x1} and \code{x2}.
 }
 \description{
 \itemize{
@@ -64,7 +63,6 @@ Other numpy ops:
 \code{\link{op_ceil}()},
 \code{\link{op_clip}()},
 \code{\link{op_concatenate}()},
-\code{\link{op_conjugate}()},
 \code{\link{op_conj}()},
 \code{\link{op_copy}()},
 \code{\link{op_cosh}()},
@@ -168,7 +166,6 @@ Other numpy ops:
 \code{\link{op_tril}()},
 \code{\link{op_triu}()},
 \code{\link{op_tri}()},
-\code{\link{op_true_divide}()},
 \code{\link{op_var}()},
 \code{\link{op_vdot}()},
 \code{\link{op_vstack}()},
@@ -207,7 +204,6 @@ Other ops:
 \code{\link{op_clip}()},
 \code{\link{op_concatenate}()},
 \code{\link{op_cond}()},
-\code{\link{op_conjugate}()},
 \code{\link{op_conj}()},
 \code{\link{op_conv_transpose}()},
 \code{\link{op_convert_to_numpy}()},
@@ -365,7 +361,6 @@ Other ops:
 \code{\link{op_tril}()},
 \code{\link{op_triu}()},
 \code{\link{op_tri}()},
-\code{\link{op_true_divide}()},
 \code{\link{op_unstack}()},
 \code{\link{op_var}()},
 \code{\link{op_vdot}()},

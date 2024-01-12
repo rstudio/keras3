@@ -46,7 +46,7 @@ print.keras_training_history <- function(x, ...) {
 #' Plots metrics recorded during training.
 #'
 #' @param x Training history object returned from
-#'  `fit.keras.models.model.Model()`.
+#'  [`fit.keras.src.models.model.Model()`].
 #' @param y Unused.
 #' @param metrics One or more metrics to plot (e.g. `c('loss', 'accuracy')`).
 #'   Defaults to plotting all captured metrics.

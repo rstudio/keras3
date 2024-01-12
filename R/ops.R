@@ -2513,20 +2513,29 @@ function (target, output, from_logits = FALSE, axis = -1L)
 }
 
 
-#' Shorthand for `keras.ops.absolute`.
+#' Compute the absolute value element-wise.
 #'
 #' @param x
-#' see description
+#' Input tensor
+#'
+#' # Returns
+#' An array containing the absolute value of each element in `x`.
+#'
+#' # Example
+#' ```{r}
+#' x <- op_convert_to_tensor(c(-1.2, 1.2))
+#' op_abs(x)
+#' ```
 #'
 #' @export
 #' @family numpy ops
 #' @family ops
 #' @seealso
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/abs>
-#' @tether keras.ops.abs
+#' @tether keras.ops.absolute
 op_abs <-
 function (x)
-keras$ops$abs(x)
+keras$ops$absolute(x)
 
 
 #' Add arguments element-wise.
@@ -3495,21 +3504,21 @@ function (xs, axis = 1L)
 }
 
 
-#' Shorthand for `keras.ops.conjugate`.
-#'
-#' @param x
-#' see description
-#'
-#' @export
-#' @family numpy ops
-#' @family ops
-#' @seealso
-#' + <https:/keras.io/api/ops/numpy#conj-function>
-#' + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/conj>
-#' @tether keras.ops.conj
-op_conj <-
-function (x)
-keras$ops$conj(x)
+# ' Shorthand for [`op_conjugate()`].
+# '
+# ' @param x
+# ' see description
+# '
+# ' @export
+# ' @family numpy ops
+# ' @family ops
+# ' @seealso
+# ' + <https:/keras.io/api/ops/numpy#conj-function>
+# ' + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/conj>
+# ' @tether keras.ops.conj
+# op_conj <-
+# function (x)
+# keras$ops$conj(x)
 
 
 #' Returns the complex conjugate, element-wise.
@@ -3517,8 +3526,6 @@ keras$ops$conj(x)
 #' @description
 #' The complex conjugate of a complex number is obtained by changing the sign
 #' of its imaginary part.
-#'
-#' `keras.ops.conj` is a shorthand for this function.
 #'
 #' @returns
 #' The complex conjugate of each element in `x`.
@@ -3533,7 +3540,7 @@ keras$ops$conj(x)
 #' + <https:/keras.io/api/ops/numpy#conjugate-function>
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/conjugate>
 #' @tether keras.ops.conjugate
-op_conjugate <-
+op_conj <-
 function (x)
 keras$ops$conjugate(x)
 
@@ -3945,9 +3952,6 @@ function (x, bins)
 
 #' Divide arguments element-wise.
 #'
-#' @description
-#' `keras.ops.true_divide` is an alias for this function.
-#'
 #' @returns
 #' Output tensor, the quotient `x1/x2`, element-wise.
 #'
@@ -3956,6 +3960,11 @@ function (x, bins)
 #'
 #' @param x2
 #' Second input tensor.
+#'
+#' # Example
+#' ```{r}
+#' op_divide(3, 2)
+#' ```
 #'
 #' @export
 #' @family numpy ops
@@ -6532,24 +6541,24 @@ function (x, k = 0L)
 }
 
 
-#' Alias for `keras.ops.divide`.
-#'
-#' @param x1
-#' see description
-#'
-#' @param x2
-#' see description
-#'
-#' @export
-#' @family numpy ops
-#' @family ops
-#' @seealso
-#' + <https:/keras.io/api/ops/numpy#truedivide-function>
-#' + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/true_divide>
-#' @tether keras.ops.true_divide
-op_true_divide <-
-function (x1, x2)
-keras$ops$true_divide(x1, x2)
+# ' Alias for `keras.ops.divide`.
+# '
+# ' @param x1
+# ' see description
+# '
+# ' @param x2
+# ' see description
+# '
+# ' @export
+# ' @family numpy ops
+# ' @family ops
+# ' @seealso
+# ' + <https:/keras.io/api/ops/numpy#truedivide-function>
+# ' + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/true_divide>
+# ' @tether keras.ops.true_divide
+# op_true_divide <-
+# function (x1, x2)
+# keras$ops$true_divide(x1, x2)
 
 
 #' Compute the variance along the specified axes.

@@ -45,6 +45,12 @@ if(!"source:tools/translate-tools.R" %in% search()) envir::attach_source("tools/
 # E.g, now I see something like there, where the warning is obscured
 #
 # Maybe there is some funky interaction w/ absl logging?
+
+# TODO: CallbackList() (1 based) and MetricList() wrappers
+# (and maybe convert LearningRateSchedule to 1 based?)
+#  with offset occuring in the external py_to_r_wrapper (or simlar),
+#  so that it presents in python code as 0 based, but presents in R
+#  as a 1 based fn.
 #
 # TODO: document options(keras.verbose) and other R global options.
 #

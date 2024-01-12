@@ -421,8 +421,8 @@ function (dataset, left_size = NULL, right_size = NULL, shuffle = FALSE,
 #' preserved.
 #'
 #' @param data_format
-#' If `NULL` uses keras.config.image_data_format()
-#' otherwise either 'channel_last' or 'channel_first'.
+#' If `NULL` uses [`config.image_data_format()`]
+#' otherwise either `'channel_last'` or `'channel_first'`.
 #'
 #' @export
 #' @family dataset utils

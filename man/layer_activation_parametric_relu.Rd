@@ -34,8 +34,7 @@ set \verb{shared_axes=[1, 2]}.}
 \description{
 Formula:
 
-\if{html}{\out{<div class="sourceCode python">}}\preformatted{f(x) = alpha * x for x < 0
-f(x) = x for x >= 0
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{f <- function(x) ifelse(x >= 0, x, alpha * x)
 }\if{html}{\out{</div>}}
 
 where \code{alpha} is a learned array with the same shape as x.

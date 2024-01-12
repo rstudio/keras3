@@ -14,8 +14,7 @@ op_full_like(x, fill_value, dtype = NULL)
 \item{dtype}{Overrides data type of the result.}
 }
 \value{
-\if{html}{\out{<div class="sourceCode">}}\preformatted{Tensor of `fill_value` with the same shape and type as `x`.
-}\if{html}{\out{</div>}}
+Tensor of \code{fill_value} with the same shape and type as \code{x}.
 }
 \description{
 Return a full tensor with the same shape and type as the given tensor.
@@ -52,7 +51,6 @@ Other numpy ops:
 \code{\link{op_ceil}()},
 \code{\link{op_clip}()},
 \code{\link{op_concatenate}()},
-\code{\link{op_conjugate}()},
 \code{\link{op_conj}()},
 \code{\link{op_copy}()},
 \code{\link{op_cosh}()},
@@ -156,7 +154,6 @@ Other numpy ops:
 \code{\link{op_tril}()},
 \code{\link{op_triu}()},
 \code{\link{op_tri}()},
-\code{\link{op_true_divide}()},
 \code{\link{op_var}()},
 \code{\link{op_vdot}()},
 \code{\link{op_vstack}()},
@@ -195,7 +192,6 @@ Other ops:
 \code{\link{op_clip}()},
 \code{\link{op_concatenate}()},
 \code{\link{op_cond}()},
-\code{\link{op_conjugate}()},
 \code{\link{op_conj}()},
 \code{\link{op_conv_transpose}()},
 \code{\link{op_convert_to_numpy}()},
@@ -353,7 +349,6 @@ Other ops:
 \code{\link{op_tril}()},
 \code{\link{op_triu}()},
 \code{\link{op_tri}()},
-\code{\link{op_true_divide}()},
 \code{\link{op_unstack}()},
 \code{\link{op_var}()},
 \code{\link{op_vdot}()},

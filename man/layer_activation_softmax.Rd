@@ -15,13 +15,12 @@ normalization is applied.}
 \item{...}{Base layer keyword arguments, such as \code{name} and \code{dtype}.}
 }
 \value{
-\if{html}{\out{<div class="sourceCode">}}\preformatted{Softmaxed output with the same shape as `inputs`.
-}\if{html}{\out{</div>}}
+Softmaxed output with the same shape as \code{inputs}.
 }
 \description{
 Formula:
 
-\if{html}{\out{<div class="sourceCode">}}\preformatted{exp_x <- exp(x - max(x))
+\if{html}{\out{<div class="sourceCode">}}\preformatted{exp_x = exp(x - max(x))
 f(x) = exp_x / sum(exp_x)
 }\if{html}{\out{</div>}}
 }

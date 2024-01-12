@@ -29,21 +29,27 @@ Defaults to \code{0.0}.}
 \description{
 Formula:
 
-\if{html}{\out{<div class="sourceCode python">}}\preformatted{f(x) = max(x,0)
-f(x) = max_value if x >= max_value
-f(x) = x if threshold <= x < max_value
-f(x) = negative_slope * (x - threshold) otherwise
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{f <- function(x, max_value = Inf, negative_slope = 0, threshold = 0) \{
+ x <- max(x,0)
+ if (x >= max_value)
+   max_value
+ else if (threshold <= x && x < max_value)
+   x
+ else
+   negative_slope * (x - threshold)
+\}
 }\if{html}{\out{</div>}}
 }
 \section{Examples}{
-\if{html}{\out{<div class="sourceCode python">}}\preformatted{relu_layer = keras.layers.activations.ReLU(
-    max_value=10,
-    negative_slope=0.5,
-    threshold=0,
-)
-input = np.array([-10, -5, 0.0, 5, 10])
-result = relu_layer(input)
-# result = [-5. , -2.5,  0. ,  5. , 10.]
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{relu_layer <- layer_activation_relu(max_value = 10,
+                                    negative_slope = 0.5,
+                                    threshold = 0)
+input <- array(c(-10, -5, 0.0, 5, 10))
+result <- relu_layer(input)
+as.array(result)
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode">}}\preformatted{## [1] -5.0 -2.5  0.0  5.0 10.0
 }\if{html}{\out{</div>}}
 }
 

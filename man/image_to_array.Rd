@@ -19,8 +19,7 @@ changed it, it defaults to \code{"channels_last"}).}
 defaults to \code{"float32"}).}
 }
 \value{
-\if{html}{\out{<div class="sourceCode">}}\preformatted{A 3D array.
-}\if{html}{\out{</div>}}
+A 3D array.
 }
 \description{
 Converts a PIL Image instance to a matrix.

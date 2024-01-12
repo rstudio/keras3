@@ -26,8 +26,7 @@ Supported options are \code{"sum"}, \code{"sum_over_batch_size"} or \code{NULL}.
 \item{name}{Optional name for the loss instance.}
 }
 \value{
-\if{html}{\out{<div class="sourceCode">}}\preformatted{Mean squared error values with shape = `[batch_size, d0, .. dN-1]`.
-}\if{html}{\out{</div>}}
+Mean squared error values with shape = \verb{[batch_size, d0, .. dN-1]}.
 }
 \description{
 Formula:

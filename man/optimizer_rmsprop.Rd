@@ -87,7 +87,7 @@ the optimizer.}
 be multiplied the loss before computing gradients, and the inverse of
 the scale factor will be multiplied by the gradients before updating
 variables. Useful for preventing underflow during mixed precision
-training. Alternately, \code{keras.optimizers.LossScaleOptimizer} will
+training. Alternately, \code{\link[=optimizer_loss_scale]{optimizer_loss_scale()}} will
 automatically set a loss scale factor.}
 }
 \description{

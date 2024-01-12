@@ -86,7 +86,7 @@
 #' be multiplied the loss before computing gradients, and the inverse of
 #' the scale factor will be multiplied by the gradients before updating
 #' variables. Useful for preventing underflow during mixed precision
-#' training. Alternately, `keras.optimizers.LossScaleOptimizer` will
+#' training. Alternately, [`optimizer_loss_scale()`] will
 #' automatically set a loss scale factor.
 #'
 #' @param ...
@@ -203,7 +203,7 @@ function (learning_rate = 0.001, rho = 0.95, epsilon = 1e-07,
 #' be multiplied the loss before computing gradients, and the inverse of
 #' the scale factor will be multiplied by the gradients before updating
 #' variables. Useful for preventing underflow during mixed precision
-#' training. Alternately, `keras.optimizers.LossScaleOptimizer` will
+#' training. Alternately, [`optimizer_loss_scale()`] will
 #' automatically set a loss scale factor.
 #'
 #' @param ...
@@ -307,7 +307,7 @@ function (learning_rate = 0.001, beta_2_decay = -0.8, epsilon_1 = 1e-30,
 #' be multiplied the loss before computing gradients, and the inverse of
 #' the scale factor will be multiplied by the gradients before updating
 #' variables. Useful for preventing underflow during mixed precision
-#' training. Alternately, `keras.optimizers.LossScaleOptimizer` will
+#' training. Alternately, [`optimizer_loss_scale()`] will
 #' automatically set a loss scale factor.
 #'
 #' @param ...
@@ -424,7 +424,7 @@ function (learning_rate = 0.001, initial_accumulator_value = 0.1,
 #' be multiplied the loss before computing gradients, and the inverse of
 #' the scale factor will be multiplied by the gradients before updating
 #' variables. Useful for preventing underflow during mixed precision
-#' training. Alternately, `keras.optimizers.LossScaleOptimizer` will
+#' training. Alternately, [`optimizer_loss_scale()`] will
 #' automatically set a loss scale factor.
 #'
 #' @param ...
@@ -547,7 +547,7 @@ function (learning_rate = 0.001, beta_1 = 0.9, beta_2 = 0.999,
 #' be multiplied the loss before computing gradients, and the inverse of
 #' the scale factor will be multiplied by the gradients before updating
 #' variables. Useful for preventing underflow during mixed precision
-#' training. Alternately, `keras.optimizers.LossScaleOptimizer` will
+#' training. Alternately, [`optimizer_loss_scale()`] will
 #' automatically set a loss scale factor.
 #'
 #' @param name
@@ -676,7 +676,7 @@ function (learning_rate = 0.001, beta_1 = 0.9, beta_2 = 0.999,
 #' be multiplied the loss before computing gradients, and the inverse of
 #' the scale factor will be multiplied by the gradients before updating
 #' variables. Useful for preventing underflow during mixed precision
-#' training. Alternately, `keras.optimizers.LossScaleOptimizer` will
+#' training. Alternately, [`optimizer_loss_scale()`] will
 #' automatically set a loss scale factor.
 #'
 #' @param ...
@@ -948,7 +948,7 @@ function (learning_rate = 0.001, learning_rate_power = -0.5,
 #' be multiplied the loss before computing gradients, and the inverse of
 #' the scale factor will be multiplied by the gradients before updating
 #' variables. Useful for preventing underflow during mixed precision
-#' training. Alternately, `keras.optimizers.LossScaleOptimizer` will
+#' training. Alternately, [`optimizer_loss_scale()`] will
 #' automatically set a loss scale factor.
 #'
 #' @param ...
@@ -989,7 +989,7 @@ function (learning_rate = 0.001, beta_1 = 0.9, beta_2 = 0.99,
 #'   is doubled.
 #'
 #' @param inner_optimizer
-#' The `keras.optimizers.Optimizer` instance to wrap.
+#' The keras `Optimizer` instance to wrap.
 #'
 #' @param initial_scale
 #' Float. The initial loss scale. This scale will be updated
@@ -1043,7 +1043,7 @@ function (learning_rate = 0.001, beta_1 = 0.9, beta_2 = 0.99,
 #' If `NULL`, the optimizer
 #' does not overwrite model variables in the middle of training, and you
 #' need to explicitly overwrite the variables at the end of training
-#' by calling `optimizer.finalize_variable_values()`
+#' by calling `optimizer$finalize_variable_values()`
 #' (which updates the model
 #' variables in-place). When using the built-in `fit()` training loop,
 #' this happens automatically after the last epoch,
@@ -1054,7 +1054,7 @@ function (learning_rate = 0.001, beta_1 = 0.9, beta_2 = 0.99,
 #' be multiplied the loss before computing gradients, and the inverse of
 #' the scale factor will be multiplied by the gradients before updating
 #' variables. Useful for preventing underflow during mixed precision
-#' training. Alternately, `keras.optimizers.LossScaleOptimizer` will
+#' training. Alternately, [`optimizer_loss_scale()`] will
 #' automatically set a loss scale factor.
 #'
 #' @param ...
@@ -1162,7 +1162,7 @@ function (inner_optimizer, initial_scale = 32768, dynamic_growth_steps = 2000L,
 #' be multiplied the loss before computing gradients, and the inverse of
 #' the scale factor will be multiplied by the gradients before updating
 #' variables. Useful for preventing underflow during mixed precision
-#' training. Alternately, `keras.optimizers.LossScaleOptimizer` will
+#' training. Alternately, [`optimizer_loss_scale()`] will
 #' automatically set a loss scale factor.
 #'
 #' @param ...
@@ -1284,7 +1284,7 @@ function (learning_rate = 0.001, beta_1 = 0.9, beta_2 = 0.999,
 #' be multiplied the loss before computing gradients, and the inverse of
 #' the scale factor will be multiplied by the gradients before updating
 #' variables. Useful for preventing underflow during mixed precision
-#' training. Alternately, `keras.optimizers.LossScaleOptimizer` will
+#' training. Alternately, [`optimizer_loss_scale()`] will
 #' automatically set a loss scale factor.
 #'
 #' @param ...

@@ -488,8 +488,8 @@ function (object, x = NULL, y = NULL, ..., batch_size = NULL,
 #' @param view_metrics View realtime plot of training metrics (by epoch). The
 #'   default (`"auto"`) will display the plot when running within RStudio,
 #'   `metrics` were specified during model [compile()], `epochs > 1` and
-#'   `verbose > 0`. Use the global `keras.view_metrics` option to establish a
-#'   different default.
+#'   `verbose > 0`. Set the global `options(keras.view_metrics = )` option to
+#'   establish a different default.
 #'
 #' @param ... Additional arguments passed on to the model `fit()` method.
 #'

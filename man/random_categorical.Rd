@@ -18,17 +18,16 @@ tensor's shape.}
 \item{dtype}{Optional dtype of the output tensor.}
 
 \item{seed}{A Python integer or instance of
-\code{keras.random.SeedGenerator}.
+\code{\link[=random_seed_generator]{random_seed_generator()}}.
 Used to make the behavior of the initializer
 deterministic. Note that an initializer seeded with an integer
 or \code{NULL} (unseeded) will produce the same random values
 across multiple calls. To get different random values
 across multiple calls, use as seed an instance
-of \code{keras.random.SeedGenerator}.}
+of \code{\link[=random_seed_generator]{random_seed_generator()}}.}
 }
 \value{
-\if{html}{\out{<div class="sourceCode">}}\preformatted{A 2-D tensor with (batch_size, num_samples).
-}\if{html}{\out{</div>}}
+A 2-D tensor with (batch_size, num_samples).
 }
 \description{
 This function takes as input \code{logits}, a 2-D input tensor with shape

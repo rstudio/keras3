@@ -93,7 +93,7 @@ function (inputs, rate, noise_shape = NULL, seed = NULL)
 #'
 #' @param dtype
 #' Optional dtype of the tensor. Only floating point types are
-#' supported. If not specified, `keras.config.floatx()` is used,
+#' supported. If not specified, [`config_floatx()`] is used,
 #' which defaults to `float32` unless you configured it otherwise (via
 #' `config_set_floatx(float_dtype)`).
 #'
@@ -142,7 +142,7 @@ function (shape, alpha, dtype = NULL, seed = NULL)
 #'
 #' @param dtype
 #' Optional dtype of the tensor. Only integer types are
-#' supported. If not specified, `keras.config.floatx()` is used,
+#' supported. If not specified, [`config_floatx()`] is used,
 #' which defaults to `float32` unless you configured it otherwise (via
 #' `config_set_floatx(float_dtype)`)
 #'
@@ -185,7 +185,7 @@ function (shape, minval, maxval, dtype = "int32", seed = NULL)
 #'
 #' @param dtype
 #' Optional dtype of the tensor. Only floating point types are
-#' supported. If not specified, `keras.config.floatx()` is used,
+#' supported. If not specified, [`config_floatx()`] is used,
 #' which defaults to `float32` unless you configured it otherwise (via
 #' `config_set_floatx(float_dtype)`).
 #'
@@ -263,7 +263,7 @@ function (x, axis = 1L, seed = NULL)
 #'
 #' @param dtype
 #' Optional dtype of the tensor. Only floating point types are
-#' supported. If not specified, `keras.config.floatx()` is used,
+#' supported. If not specified, [`config_floatx()`] is used,
 #' which defaults to `float32` unless you configured it otherwise (via
 #' `config_set_floatx(float_dtype)`)
 #'
@@ -312,7 +312,7 @@ function (shape, mean = 0, stddev = 1, dtype = NULL, seed = NULL)
 #'
 #' @param dtype
 #' Optional dtype of the tensor. Only floating point types are
-#' supported. If not specified, `keras.config.floatx()` is used,
+#' supported. If not specified, [`config_floatx()`] is used,
 #' which defaults to `float32` unless you configured it otherwise (via
 #' `config_set_floatx(float_dtype)`)
 #'

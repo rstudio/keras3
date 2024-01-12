@@ -97,8 +97,8 @@ return the largest possible window in the image
 default (\code{crop_to_aspect_ratio = FALSE}), aspect ratio may not be
 preserved.}
 
-\item{data_format}{If \code{NULL} uses keras.config.image_data_format()
-otherwise either 'channel_last' or 'channel_first'.}
+\item{data_format}{If \code{NULL} uses \code{\link[=config.image_data_format]{config.image_data_format()}}
+otherwise either \code{'channel_last'} or \code{'channel_first'}.}
 }
 \value{
 A \code{tf.data.Dataset} object.

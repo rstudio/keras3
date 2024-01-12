@@ -23,7 +23,7 @@ optimizer_adamax(
 }
 \arguments{
 \item{learning_rate}{A float, a
-\code{keras.optimizers.schedules.LearningRateSchedule} instance, or
+\code{\link[=LearningRateSchedule]{LearningRateSchedule()}} instance, or
 a callable that takes no arguments and returns the actual value to
 use. The learning rate. Defaults to \code{0.001}.}
 
@@ -80,7 +80,7 @@ and you don't need to do anything.}
 be multiplied the loss before computing gradients, and the inverse of
 the scale factor will be multiplied by the gradients before updating
 variables. Useful for preventing underflow during mixed precision
-training. Alternately, \code{keras.optimizers.LossScaleOptimizer} will
+training. Alternately, \code{\link[=optimizer_loss_scale]{optimizer_loss_scale()}} will
 automatically set a loss scale factor.}
 }
 \description{

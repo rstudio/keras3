@@ -26,7 +26,7 @@ optimizer_ftrl(
 }
 \arguments{
 \item{learning_rate}{A float, a
-\code{keras.optimizers.schedules.LearningRateSchedule} instance, or
+\code{\link[=LearningRateSchedule]{LearningRateSchedule()}} instance, or
 a callable that takes no arguments and returns the actual value to
 use. The learning rate. Defaults to \code{0.001}.}
 

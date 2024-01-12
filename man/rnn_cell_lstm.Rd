@@ -84,7 +84,7 @@ for the linear transformation of the recurrent state. Default: 0.}
 }
 \description{
 This class processes one step within the whole time sequence input, whereas
-\code{keras.layer.LSTM} processes the whole sequence.
+\code{\link[=layer_lstm]{layer_lstm()}} processes the whole sequence.
 }
 \section{Call Arguments}{
 \itemize{

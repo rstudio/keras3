@@ -33,8 +33,7 @@ remove values from sequences larger than
 \item{value}{Float or String, padding value. (Optional, defaults to 0.)}
 }
 \value{
-\if{html}{\out{<div class="sourceCode">}}\preformatted{Array with shape `(len(sequences), maxlen)`
-}\if{html}{\out{</div>}}
+Array with shape \verb{(len(sequences), maxlen)}
 }
 \description{
 This function transforms a list (of length \code{num_samples})

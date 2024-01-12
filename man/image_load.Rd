@@ -34,8 +34,7 @@ size without aspect ratio distortion. The image is cropped in
 the center with target aspect ratio before resizing.}
 }
 \value{
-\if{html}{\out{<div class="sourceCode">}}\preformatted{A PIL Image instance.
-}\if{html}{\out{</div>}}
+A PIL Image instance.
 }
 \description{
 Loads an image into PIL format.

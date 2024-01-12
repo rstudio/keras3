@@ -86,17 +86,16 @@ function (object, alpha = 1, ...)
 #'
 #' Formula:
 #'
-#' ``` python
-#' f(x) = alpha * x if x < 0
-#' f(x) = x if x >= 0
+#' ```r
+#' f <- function(x) ifelse(x >= 0, x, alpha * x)
 #' ```
 #'
 #' # Examples
-#' ``` python
-#' leaky_relu_layer = LeakyReLU(negative_slope=0.5)
-#' input = np.array([-10, -5, 0.0, 5, 10])
-#' result = leaky_relu_layer(input)
-#' # result = [-5. , -2.5,  0. ,  5. , 10.]
+#' ```{r}
+#' leaky_relu_layer <- layer_activation_leaky_relu(negative_slope=0.5)
+#' input <- array(c(-10, -5, 0.0, 5, 10))
+#' result <- leaky_relu_layer(input)
+#' as.array(result)
 #' ```
 #'
 #' @param negative_slope
@@ -131,9 +130,8 @@ function (object, negative_slope = 0.3, ...)
 #'
 #' @description
 #' Formula:
-#' ``` python
-#' f(x) = alpha * x for x < 0
-#' f(x) = x for x >= 0
+#' ```r
+#' f <- function(x) ifelse(x >= 0, x, alpha * x)
 #' ```
 #' where `alpha` is a learned array with the same shape as x.
 #'
@@ -182,23 +180,27 @@ function (object, alpha_initializer = "Zeros", alpha_regularizer = NULL,
 #'
 #' @description
 #' Formula:
-#' ``` python
-#' f(x) = max(x,0)
-#' f(x) = max_value if x >= max_value
-#' f(x) = x if threshold <= x < max_value
-#' f(x) = negative_slope * (x - threshold) otherwise
+#'
+#' ```r
+#' f <- function(x, max_value = Inf, negative_slope = 0, threshold = 0) {
+#'  x <- max(x,0)
+#'  if (x >= max_value)
+#'    max_value
+#'  else if (threshold <= x && x < max_value)
+#'    x
+#'  else
+#'    negative_slope * (x - threshold)
+#' }
 #' ```
 #'
 #' # Examples
-#' ``` python
-#' relu_layer = keras.layers.activations.ReLU(
-#'     max_value=10,
-#'     negative_slope=0.5,
-#'     threshold=0,
-#' )
-#' input = np.array([-10, -5, 0.0, 5, 10])
-#' result = relu_layer(input)
-#' # result = [-5. , -2.5,  0. ,  5. , 10.]
+#' ```{r}
+#' relu_layer <- layer_activation_relu(max_value = 10,
+#'                                     negative_slope = 0.5,
+#'                                     threshold = 0)
+#' input <- array(c(-10, -5, 0.0, 5, 10))
+#' result <- relu_layer(input)
+#' as.array(result)
 #' ```
 #'
 #' @param max_value
@@ -242,7 +244,7 @@ function (object, max_value = NULL, negative_slope = 0, threshold = 0,
 #' @description
 #' Formula:
 #' ```
-#' exp_x <- exp(x - max(x))
+#' exp_x = exp(x - max(x))
 #' f(x) = exp_x / sum(exp_x)
 #' ```
 #'

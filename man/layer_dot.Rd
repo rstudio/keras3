@@ -23,8 +23,7 @@ the output of the dot product is the cosine proximity
 between the two samples.}
 }
 \value{
-\if{html}{\out{<div class="sourceCode">}}\preformatted{A tensor, the dot product of the samples from the inputs.
-}\if{html}{\out{</div>}}
+A tensor, the dot product of the samples from the inputs.
 }
 \description{
 It takes a list of inputs of size 2, and the axes

@@ -60,8 +60,7 @@ of the "top" layer. When loading pretrained weights,
 \code{classifier_activation} can only be \code{NULL} or \code{"softmax"}.}
 }
 \value{
-\if{html}{\out{<div class="sourceCode">}}\preformatted{A Keras model instance.
-}\if{html}{\out{</div>}}
+A Keras model instance.
 }
 \description{
 Instantiates the Densenet169 architecture.
@@ -77,8 +76,8 @@ the one specified in your Keras config at \verb{~/.keras/keras.json}.
 }
 
 \section{Note}{
-each Keras Application expects a specific kind of input preprocessing.
-For DenseNet, call \code{keras.applications.densenet.preprocess_input}
+Each Keras Application expects a specific kind of input preprocessing.
+For DenseNet, call \code{\link[=application_preprocess_inputs]{application_preprocess_inputs()}}
 on your inputs before passing them to the model.
 }
 

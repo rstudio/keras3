@@ -171,7 +171,7 @@ this layer:
 \enumerate{
 \item Any callable can be passed to this Layer, but if you want to serialize
 this object you should only pass functions that are registered Keras
-serializables (see \code{keras.saving.register_keras_serializable}
+serializables (see \code{\link[=register_keras_serializable]{register_keras_serializable()}}
 for more details).
 \item When using a custom callable for \code{standardize}, the data received
 by the callable will be exactly as passed to this layer. The callable

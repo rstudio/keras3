@@ -16,9 +16,9 @@ bidirectional(
 \arguments{
 \item{object}{Object to compose the layer with. A tensor, array, or sequential model.}
 
-\item{layer}{\code{keras.layers.RNN} instance, such as
-\code{keras.layers.LSTM} or \code{keras.layers.GRU}.
-It could also be a \code{keras.layers.Layer} instance
+\item{layer}{\code{RNN} instance, such as
+\code{\link[=layer_lstm]{layer_lstm()}} or \code{\link[=layer_gru]{layer_gru()}}.
+It could also be a \code{\link[=Layer]{Layer()}} instance
 that meets the following criteria:
 \enumerate{
 \item Be a sequence-processing layer (accepts 3D+ inputs).
@@ -27,8 +27,8 @@ attribute (with the same semantics as for the \code{RNN} class).
 \item Have an \code{input_spec} attribute.
 \item Implement serialization via \code{get_config()} and \code{from_config()}.
 Note that the recommended way to create new RNN layers is to write a
-custom RNN cell and use it with \code{keras.layers.RNN}, instead of
-subclassing \code{keras.layers.Layer} directly.
+custom RNN cell and use it with \code{\link[=layer_rnn]{layer_rnn()}}, instead of
+subclassing with \code{\link[=Layer]{Layer()}} directly.
 When \code{return_sequences} is \code{TRUE}, the output of the masked
 timestep will be zero regardless of the layer's original
 \code{zero_output_for_mask} value.
@@ -41,8 +41,8 @@ they will be returned as a list. Defaults to \code{"concat"}.}
 
 \item{weights}{see description}
 
-\item{backward_layer}{Optional \code{keras.layers.RNN},
-or \code{keras.layers.Layer} instance to be used to handle
+\item{backward_layer}{Optional \code{RNN},
+or \code{Layer()} instance to be used to handle
 backwards input processing.
 If \code{backward_layer} is not provided, the layer instance passed
 as the \code{layer} argument will be used to generate the backward layer

@@ -48,7 +48,7 @@ non-built-in classes.
 For example, the following config list represents the built-in Adam optimizer
 with the relevant config:
 
-\if{html}{\out{<div class="sourceCode r">}}\preformatted{config = list(
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{config <- list(
   class_name = "Adam",
   config = list(
     amsgrad = FALSE,
@@ -71,7 +71,7 @@ deserialize_keras_object(config)
 If the class does not have an exported Keras namespace, the library tracks
 it by its \code{module} and \code{class_name}. For example:
 
-\if{html}{\out{<div class="sourceCode r">}}\preformatted{config = list(
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{config <- list(
   class_name = "MetricsList",
   config =  list(
     ...

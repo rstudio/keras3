@@ -186,8 +186,8 @@ so \code{verbose=2} is recommended when not running interactively
 \item{view_metrics}{View realtime plot of training metrics (by epoch). The
 default (\code{"auto"}) will display the plot when running within RStudio,
 \code{metrics} were specified during model \code{\link[=compile]{compile()}}, \code{epochs > 1} and
-\code{verbose > 0}. Use the global \code{keras.view_metrics} option to establish a
-different default.}
+\code{verbose > 0}. Set the global \code{options(keras.view_metrics = )} option to
+establish a different default.}
 }
 \value{
 A \code{History} object. Its \code{History.history} attribute is

@@ -74,7 +74,7 @@ for the linear transformation of the recurrent state. Default: 0.}
 }
 \description{
 This class processes one step within the whole time sequence input, whereas
-\code{keras.layer.SimpleRNN} processes the whole sequence.
+\code{\link[=layer_simple_rnn]{layer_simple_rnn()}} processes the whole sequence.
 }
 \section{Call Arguments}{
 \itemize{

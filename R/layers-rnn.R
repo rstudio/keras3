@@ -41,9 +41,9 @@
 #' ```
 #'
 #' @param layer
-#' `keras.layers.RNN` instance, such as
-#' `keras.layers.LSTM` or `keras.layers.GRU`.
-#' It could also be a `keras.layers.Layer` instance
+#' `RNN` instance, such as
+#' [`layer_lstm()`] or [`layer_gru()`].
+#' It could also be a [`Layer()`] instance
 #' that meets the following criteria:
 #' 1. Be a sequence-processing layer (accepts 3D+ inputs).
 #' 2. Have a `go_backwards`, `return_sequences` and `return_state`
@@ -51,8 +51,8 @@
 #' 3. Have an `input_spec` attribute.
 #' 4. Implement serialization via `get_config()` and `from_config()`.
 #' Note that the recommended way to create new RNN layers is to write a
-#' custom RNN cell and use it with `keras.layers.RNN`, instead of
-#' subclassing `keras.layers.Layer` directly.
+#' custom RNN cell and use it with [`layer_rnn()`], instead of
+#' subclassing with [`Layer()`] directly.
 #' When `return_sequences` is `TRUE`, the output of the masked
 #' timestep will be zero regardless of the layer's original
 #' `zero_output_for_mask` value.
@@ -64,8 +64,8 @@
 #' they will be returned as a list. Defaults to `"concat"`.
 #'
 #' @param backward_layer
-#' Optional `keras.layers.RNN`,
-#' or `keras.layers.Layer` instance to be used to handle
+#' Optional `RNN`,
+#' or `Layer()` instance to be used to handle
 #' backwards input processing.
 #' If `backward_layer` is not provided, the layer instance passed
 #' as the `layer` argument will be used to generate the backward layer
@@ -897,7 +897,7 @@ function (object, units, activation = "tanh", recurrent_activation = "sigmoid",
 #'
 #' @description
 #' This class processes one step within the whole time sequence input, whereas
-#' `keras.layer.GRU` processes the whole sequence.
+#' [`layer_gru()`] processes the whole sequence.
 #'
 #' # Call Arguments
 #' - `inputs`: A 2D tensor, with shape `(batch, features)`.
@@ -1204,7 +1204,7 @@ function (object, units, activation = "tanh", recurrent_activation = "sigmoid",
 #'
 #' @description
 #' This class processes one step within the whole time sequence input, whereas
-#' `keras.layer.LSTM` processes the whole sequence.
+#' [`layer_lstm()`] processes the whole sequence.
 #'
 #' # Call Arguments
 #' - `inputs`: A 2D tensor, with shape `(batch, features)`.
@@ -1359,7 +1359,7 @@ function (units, activation = "tanh", recurrent_activation = "sigmoid",
 #'
 #' This layer supports masking for input data with a variable number
 #' of timesteps. To introduce masks to your data,
-#' use a `layer_Embedding` layer with the `mask_zero` parameter
+#' use a [`layer_embedding()`] layer with the `mask_zero` parameter
 #' set to `TRUE`.
 #'
 #' Note on using statefulness in RNNs:
@@ -1371,16 +1371,16 @@ function (units, activation = "tanh", recurrent_activation = "sigmoid",
 #'
 #' To enable statefulness:
 #'
-#' - Specify `stateful=TRUE` in the layer constructor.
+#' - Specify `stateful = TRUE` in the layer constructor.
 #' - Specify a fixed batch size for your model, by passing
 #' If sequential model:
-#'     `batch_input_shape=(...)` to the first layer in your model.
-#' Else for functional model with 1 or more Input layers:
-#'     `batch_shape=(...)` to all the first layers in your model.
+#'     `batch_input_shape = c(...)` to the `keras_model_sequential()` call.
+#' Else for functional model with 1 or more input layers:
+#'     `batch_shape = c(...)` to all the `layer_input()` call(s).
 #' This is the expected shape of your inputs
 #' *including the batch size*.
-#' It should be a list of integers, e.g. `(32, 10, 100)`.
-#' - Specify `shuffle=FALSE` when calling `fit()`.
+#' It should be a list of integers, e.g. `c(32, 10, 100)`.
+#' - Specify `shuffle = FALSE` when calling `fit()`.
 #'
 #' To reset the states of your model, call [`reset_state()`] on either
 #' a specific layer, or on your entire model.
@@ -1392,48 +1392,53 @@ function (units, activation = "tanh", recurrent_activation = "sigmoid",
 #' `initial_state` should be a tensor or list of tensors representing
 #' the initial state of the RNN layer.
 #'
-#'
 #' # Examples
+#'
+#' First, let's define a RNN Cell, as a layer subclass.
 #' ```{r}
-#' # First, let's define a RNN Cell, as a layer subclass.
-#' MinimalRNNCell(keras$layers$Layer) %py_class% {
-#'   initialize <- function(units, ...) {
+#' rnn_cell_minimal <- Layer(
+#'   "MinimalRNNCell",
+#'
+#'   initialize = function(units, ...) {
 #'     super$initialize(...)
 #'     self$units <- as.integer(units)
 #'     self$state_size <- as.integer(units)
-#'   }
+#'   },
 #'
-#'   build <- function(input_shape) {
+#'   build = function(input_shape) {
 #'     self$kernel <- self$add_weight(
-#'       shape = c(tail(input_shape, 1), self$units),
+#'       shape = shape(tail(input_shape, 1), self$units),
 #'       initializer = 'uniform',
-#'       name = 'kernel')
+#'       name = 'kernel'
+#'     )
 #'     self$recurrent_kernel <- self$add_weight(
-#'       shape = c(self$units, self$units),
+#'       shape = shape(self$units, self$units),
 #'       initializer = 'uniform',
-#'       name = 'recurrent_kernel')
+#'       name = 'recurrent_kernel'
+#'     )
 #'     self$built <- TRUE
-#'   }
+#'   },
 #'
-#'   call <- function(inputs, states) {
+#'   call = function(inputs, states) {
 #'     prev_output <- states[[1]]
 #'     h <- op_matmul(inputs, self$kernel)
 #'     output <- h + op_matmul(prev_output, self$recurrent_kernel)
 #'     list(output, list(output))
 #'   }
+#' )
+#' ```
 #'
-#' }
-#'
-#' # Let's use this cell in a RNN layer:
-#'
-#' cell <- MinimalRNNCell(units = 32)
+#' Let's use this cell in a RNN layer:
+#' ```{r}
+#' cell <- rnn_cell_minimal(units = 32)
 #' x <- layer_input(shape = shape(NULL, 5))
 #' layer <- layer_rnn(cell = cell)
 #' y <- layer(x)
+#' ```
 #'
-#' # Here's how to use the cell to build a stacked RNN:
-#'
-#' cells <- list(MinimalRNNCell(units = 32), MinimalRNNCell(units = 4))
+# Here's how to use the cell to build a stacked RNN:
+#' ```{r}
+#' cells <- list(rnn_cell_minimal(units = 32), rnn_cell_minimal(units = 4))
 #' x <- layer_input(shape = shape(NULL, 5))
 #' layer <- layer_rnn(cell = cells)
 #' y <- layer(x)
@@ -1686,7 +1691,7 @@ function (object, units, activation = "tanh", use_bias = TRUE,
 #'
 #' @description
 #' This class processes one step within the whole time sequence input, whereas
-#' `keras.layer.SimpleRNN` processes the whole sequence.
+#' [`layer_simple_rnn()`] processes the whole sequence.
 #'
 #' # Call Arguments
 #' - `sequence`: A 2D tensor, with shape `(batch, features)`.

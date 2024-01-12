@@ -54,8 +54,7 @@ When loading pretrained weights, \code{classifier_activation} can only
 be \code{NULL} or \code{"softmax"}.}
 }
 \value{
-\if{html}{\out{<div class="sourceCode">}}\preformatted{A Model instance.
-}\if{html}{\out{</div>}}
+A Model instance.
 }
 \description{
 Instantiates the ResNet152V2 architecture.
@@ -72,10 +71,10 @@ For transfer learning use cases, make sure to read the
 }
 
 \section{Note}{
-each Keras Application expects a specific kind of input preprocessing.
-For ResNet, call \code{keras.applications.resnet_v2.preprocess_input} on your
-inputs before passing them to the model. \code{resnet_v2.preprocess_input} will
-scale input pixels between -1 and 1.
+Each Keras Application expects a specific kind of input preprocessing.
+For ResNet, call \code{\link[=application_preprocess_inputs]{application_preprocess_inputs()}} on your
+inputs before passing them to the model. \code{\link[=application_preprocess_inputs]{application_preprocess_inputs()}} will
+scale input pixels between \code{-1} and \code{1}.
 }
 
 \seealso{

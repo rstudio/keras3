@@ -16,15 +16,14 @@ are involved (e.g. parameter server distribution), which creates additional
 sources of randomness, or when certain non-deterministic cuDNN ops are
 involved.
 
-Calling this utility is equivalent to the following in Python:
-
-\if{html}{\out{<div class="sourceCode">}}\preformatted{import random
-import numpy as np
-from keras.utils.module_utils import tensorflow as tf
-random.seed(seed)
-np.random.seed(seed)
-tf.random.set_seed(seed)
-}\if{html}{\out{</div>}}
+This sets:
+\itemize{
+\item The R session seed: \code{\link{set.seed(seed)}}
+\item The Python session seed: \verb{import random; random.seed(seed)}
+\item The NumPy seed: \verb{import numpy; numpy.random.seed(seed)}
+\item The TensorFlow seed: \code{tf.random.set_seed(seed)}
+\item Disables Python hash randomization
+}
 
 Note that the TensorFlow seed is set even if you're not using TensorFlow
 as your backend framework, since many workflows leverage \code{tf$data}

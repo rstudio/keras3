@@ -2,7 +2,7 @@
 % Please edit documentation in R/losses.R
 \name{loss_mean_squared_logarithmic_error}
 \alias{loss_mean_squared_logarithmic_error}
-\title{Computes the mean squared logarithmic error between \code{y_true} & \code{y_pred}.}
+\title{Computes the mean squared logarithmic error between \code{y_true} and \code{y_pred}.}
 \usage{
 loss_mean_squared_logarithmic_error(
   y_true,
@@ -29,8 +29,8 @@ Supported options are \code{"sum"}, \code{"sum_over_batch_size"} or \code{NULL}.
 Mean squared logarithmic error values with shape = \verb{[batch_size, d0, .. dN-1]}.
 }
 \description{
-Note that \code{y_pred} and \code{y_true} cannot be less or equal to 0. Negative
-values and 0 values will be replaced with \code{keras.backend.epsilon()}
+Note that \code{y_pred} and \code{y_true} cannot be less or equal to \code{0}. Negative
+values and \code{0} values will be replaced with \code{config_epsilon()}
 (default to \code{1e-7}).
 
 Formula:

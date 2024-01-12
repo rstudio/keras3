@@ -16,18 +16,18 @@ random values to generate (inclusive).}
 random values to generate (exclusive).}
 
 \item{dtype}{Optional dtype of the tensor. Only integer types are
-supported. If not specified, \code{keras.config.floatx()} is used,
+supported. If not specified, \code{\link[=config_floatx]{config_floatx()}} is used,
 which defaults to \code{float32} unless you configured it otherwise (via
-\code{keras.config.set_floatx(float_dtype)})}
+\code{config_set_floatx(float_dtype)})}
 
 \item{seed}{A Python integer or instance of
-\code{keras.random.SeedGenerator}.
+\code{\link[=random_seed_generator]{random_seed_generator()}}.
 Used to make the behavior of the initializer
 deterministic. Note that an initializer seeded with an integer
 or \code{NULL} (unseeded) will produce the same random values
 across multiple calls. To get different random values
 across multiple calls, use as seed an instance
-of \code{keras.random.SeedGenerator}.}
+of \code{\link[=random_seed_generator]{random_seed_generator()}}.}
 }
 \description{
 The generated values follow a uniform distribution in the range

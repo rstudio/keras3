@@ -9,14 +9,19 @@ op_divide(x1, x2)
 \arguments{
 \item{x1}{First input tensor.}
 
-\item{x2}{Second input tensor.}
+\item{x2}{Second input tensor.Example
+
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{op_divide(3, 2)
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor(1.5, shape=(), dtype=float32)
+}\if{html}{\out{</div>}}}
 }
 \value{
-\if{html}{\out{<div class="sourceCode">}}\preformatted{Output tensor, the quotient `x1/x2`, element-wise.
-}\if{html}{\out{</div>}}
+Output tensor, the quotient \code{x1/x2}, element-wise.
 }
 \description{
-\code{keras.ops.true_divide} is an alias for this function.
+Divide arguments element-wise.
 }
 \seealso{
 \itemize{
@@ -50,7 +55,6 @@ Other numpy ops:
 \code{\link{op_ceil}()},
 \code{\link{op_clip}()},
 \code{\link{op_concatenate}()},
-\code{\link{op_conjugate}()},
 \code{\link{op_conj}()},
 \code{\link{op_copy}()},
 \code{\link{op_cosh}()},
@@ -154,7 +158,6 @@ Other numpy ops:
 \code{\link{op_tril}()},
 \code{\link{op_triu}()},
 \code{\link{op_tri}()},
-\code{\link{op_true_divide}()},
 \code{\link{op_var}()},
 \code{\link{op_vdot}()},
 \code{\link{op_vstack}()},
@@ -193,7 +196,6 @@ Other ops:
 \code{\link{op_clip}()},
 \code{\link{op_concatenate}()},
 \code{\link{op_cond}()},
-\code{\link{op_conjugate}()},
 \code{\link{op_conj}()},
 \code{\link{op_conv_transpose}()},
 \code{\link{op_convert_to_numpy}()},
@@ -351,7 +353,6 @@ Other ops:
 \code{\link{op_tril}()},
 \code{\link{op_triu}()},
 \code{\link{op_tri}()},
-\code{\link{op_true_divide}()},
 \code{\link{op_unstack}()},
 \code{\link{op_var}()},
 \code{\link{op_vdot}()},

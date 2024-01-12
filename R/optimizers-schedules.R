@@ -490,7 +490,7 @@ function (boundaries, values, name = "PiecewiseConstant")
 #' }
 #' ```
 #'
-#' You can pass this schedule directly into a `keras.optimizers.Optimizer`
+#' You can pass this schedule directly into a `Optimizer`
 #' as the learning rate.
 #'
 #' # Examples

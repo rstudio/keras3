@@ -26,8 +26,7 @@ loss_log_cosh(
 \item{name}{Optional name for the instance.}
 }
 \value{
-\if{html}{\out{<div class="sourceCode">}}\preformatted{Logcosh error values with shape = `[batch_size, d0, .. dN-1]`.
-}\if{html}{\out{</div>}}
+Logcosh error values with shape = \verb{[batch_size, d0, .. dN-1]}.
 }
 \description{
 Formula:

@@ -316,8 +316,8 @@ function ()
 #'
 #' @description
 #' To switch between writing logs to stdout and `absl.logging`, you may use
-#' `keras.config.enable_interactive_logging()` and
-#' `keras.config.disable_interactie_logging()`.
+#' [`config_enable_interactive_logging()`] and
+#' [`config_disable_interactie_logging()`].
 #'
 #' @returns
 #' Boolean, `TRUE` if interactive logging is enabled,
@@ -348,12 +348,12 @@ function ()
 #' raises, to keep traceback short, readable, and focused on what's
 #' actionable for you (your own code).
 #'
-#' See also `keras.config.enable_traceback_filtering()` and
-#' `keras.config.is_traceback_filtering_enabled()`.
+#' See also [`config_enable_traceback_filtering()`] and
+#' [`config_is_traceback_filtering_enabled()`].
 #'
 #' If you have previously disabled traceback filtering via
-#' `keras.config.disable_traceback_filtering()`, you can re-enable it via
-#' `keras.config.enable_traceback_filtering()`.
+#' [`config_disable_traceback_filtering()`], you can re-enable it via
+#' [`config_enable_traceback_filtering()`].
 #'
 #' @export
 #' @family traceback utils
@@ -380,12 +380,12 @@ function ()
 #' raises, to keep traceback short, readable, and focused on what's
 #' actionable for you (your own code).
 #'
-#' See also `keras.config.disable_traceback_filtering()` and
-#' `keras.config.is_traceback_filtering_enabled()`.
+#' See also [`config_disable_traceback_filtering()`] and
+#' [`config_is_traceback_filtering_enabled()`].
 #'
 #' If you have previously disabled traceback filtering via
-#' `keras.config.disable_traceback_filtering()`, you can re-enable it via
-#' `keras.config.enable_traceback_filtering()`.
+#' [`config_disable_traceback_filtering()`], you can re-enable it via
+#' [`config_enable_traceback_filtering()`].
 #'
 #' @export
 #' @family traceback utils
@@ -412,12 +412,12 @@ function ()
 #' raises, to keep traceback short, readable, and focused on what's
 #' actionable for you (your own code).
 #'
-#' See also `keras.config.enable_traceback_filtering()` and
-#' `keras.config.disable_traceback_filtering()`.
+#' See also [`config_enable_traceback_filtering()`] and
+#' [`config_disable_traceback_filtering()`].
 #'
 #' If you have previously disabled traceback filtering via
-#' `keras.config.disable_traceback_filtering()`, you can re-enable it via
-#' `keras.config.enable_traceback_filtering()`.
+#' [`config_disable_traceback_filtering()`], you can re-enable it via
+#' [`config_enable_traceback_filtering()`].
 #'
 #' @returns
 #' Boolean, `TRUE` if traceback filtering is enabled,

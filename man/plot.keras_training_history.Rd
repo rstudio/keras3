@@ -16,7 +16,7 @@
 }
 \arguments{
 \item{x}{Training history object returned from
-\code{fit.keras.models.model.Model()}.}
+\code{\link[=fit.keras.src.models.model.Model]{fit.keras.src.models.model.Model()}}.}
 
 \item{y}{Unused.}
 
