@@ -22,7 +22,7 @@ non-built-in classes.
 
 For example, the following config list represents the built-in Adam optimizer
 with the relevant config:
-config = list(
+config &amp;lt;- list(
   class_name = &quot;Adam&quot;,
   config = list(
     amsgrad = FALSE,
@@ -42,7 +42,7 @@ deserialize_keras_object(config)
 
 If the class does not have an exported Keras namespace, the library tracks
 it by its module and class_name. For example:
-config = list(
+config &amp;lt;- list(
   class_name = &quot;MetricsList&quot;,
   config =  list(
     ...
@@ -126,7 +126,7 @@ non-built-in classes.
 
 For example, the following config list represents the built-in Adam optimizer
 with the relevant config:
-config = list(
+config &amp;lt;- list(
   class_name = &quot;Adam&quot;,
   config = list(
     amsgrad = FALSE,
@@ -146,7 +146,7 @@ deserialize_keras_object(config)
 
 If the class does not have an exported Keras namespace, the library tracks
 it by its module and class_name. For example:
-config = list(
+config &amp;lt;- list(
   class_name = &quot;MetricsList&quot;,
   config =  list(
     ...
@@ -296,7 +296,7 @@ values in the config dict will not be used. <code>registered_name</code> is only
 non-built-in classes.</p></li>
 </ul><p>For example, the following config list represents the built-in Adam optimizer
 with the relevant config:</p>
-<p></p><div class="sourceCode r"><pre><code><span><span class="va">config</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span></span>
+<p></p><div class="sourceCode r"><pre><code><span><span class="va">config</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span></span>
 <span>  class_name <span class="op">=</span> <span class="st">"Adam"</span>,</span>
 <span>  config <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span></span>
 <span>    amsgrad <span class="op">=</span> <span class="cn">FALSE</span>,</span>
@@ -314,7 +314,7 @@ with the relevant config:</p>
 <p></p><div class="sourceCode"><pre><code><span id="cb1-1"><a href="#cb1-1" tabindex="-1"></a><span class="do">## &lt;keras.src.optimizers.adam.Adam object&gt;</span></span></code></pre><p></p></div>
 <p>If the class does not have an exported Keras namespace, the library tracks
 it by its <code>module</code> and <code>class_name</code>. For example:</p>
-<p></p><div class="sourceCode r"><pre><code><span><span class="va">config</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span></span>
+<p></p><div class="sourceCode r"><pre><code><span><span class="va">config</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span></span>
 <span>  class_name <span class="op">=</span> <span class="st">"MetricsList"</span>,</span>
 <span>  config <span class="op">=</span>  <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span></span>
 <span>    <span class="va">...</span></span>
@@ -403,8 +403,7 @@ applicable to the Keras v3 model format. Defaults to <code>TRUE</code>.</p></dd>
     <div class="section level2">
     <h2 id="see-also">See also<a class="anchor" aria-label="anchor" href="#see-also"></a></h2>
     <div class="dont-index">
-<ul><li><p><a href="https:/keras.io/api/models/model_saving_apis/serialization_utils#deserializekerasobject-function">https:/keras.io/api/models/model_saving_apis/serialization_utils#deserializekerasobject-function</a></p></li>
-<li><p><a href="https://www.tensorflow.org/api_docs/python/tf/keras/saving/deserialize_keras_object" class="external-link">https://www.tensorflow.org/api_docs/python/tf/keras/saving/deserialize_keras_object</a></p></li>
+<ul><li><p><a href="https://keras.io/api/models/model_saving_apis/serialization_utils#deserializekerasobject-function" class="external-link">https://keras.io/api/models/model_saving_apis/serialization_utils#deserializekerasobject-function</a></p></li>
 </ul><p>Other saving: 
 <code><a href="get_custom_objects.html">clear_registered_custom_objects</a>()</code>,
 <code><a href="config_enable_unsafe_deserialization.html">config_enable_unsafe_deserialization</a>()</code>,

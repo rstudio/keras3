@@ -1418,9 +1418,14 @@
         <dd>A <code>LearningRateSchedule</code> that uses a polynomial decay schedule.</dd>
       </dl><dl><dt>
           
+          <code><a href="LearningRateSchedule.html">LearningRateSchedule()</a></code> 
+        </dt>
+        <dd>Define a custom LearningRateSchedule class</dd>
+      </dl><dl><dt>
+          
           <code><a href="new_learning_rate_schedule_class.html">new_learning_rate_schedule_class()</a></code> 
         </dt>
-        <dd>Create a new learning rate schedule type</dd>
+        <dd>LearningRateSchedule</dd>
       </dl></div><div class="section level2">
       <h2 id="callbacks">Callbacks<a class="anchor" aria-label="anchor" href="#callbacks"></a></h2>
       
@@ -1802,11 +1807,6 @@ training from the state saved.</dd>
         <dd>Provide a scope with mappings of names to custom objects</dd>
       </dl><dl><dt>
           
-          <code><a href="keras_array.html">keras_array()</a></code> 
-        </dt>
-        <dd>Keras array object</dd>
-      </dl><dl><dt>
-          
           <code><a href="install_keras.html">install_keras()</a></code> 
         </dt>
         <dd>Install Keras</dd>
@@ -1900,12 +1900,12 @@ training from the state saved.</dd>
           
           <code><a href="loss_mean_absolute_percentage_error.html">loss_mean_absolute_percentage_error()</a></code> 
         </dt>
-        <dd>Computes the mean absolute percentage error between <code>y_true</code> &amp; <code>y_pred</code>.</dd>
+        <dd>Computes the mean absolute percentage error between <code>y_true</code> and <code>y_pred</code>.</dd>
       </dl><dl><dt>
           
           <code><a href="loss_mean_squared_logarithmic_error.html">loss_mean_squared_logarithmic_error()</a></code> 
         </dt>
-        <dd>Computes the mean squared logarithmic error between <code>y_true</code> &amp; <code>y_pred</code>.</dd>
+        <dd>Computes the mean squared logarithmic error between <code>y_true</code> and <code>y_pred</code>.</dd>
       </dl><dl><dt>
           
           <code><a href="loss_poisson.html">loss_poisson()</a></code> 
@@ -2967,7 +2967,7 @@ training from the state saved.</dd>
           
           <code><a href="op_vectorized_map.html">op_vectorized_map()</a></code> 
         </dt>
-        <dd>Parallel map of <code>function</code> on axis 0 of tensor(s) <code>elements</code>.</dd>
+        <dd>Parallel map of <code>function</code> on the first axis of tensor(s) <code>elements</code>.</dd>
       </dl><dl><dt>
           
           <code><a href="op_while_loop.html">op_while_loop()</a></code> 
@@ -3079,7 +3079,7 @@ training from the state saved.</dd>
           
           <code><a href="op_abs.html">op_abs()</a></code> 
         </dt>
-        <dd>Shorthand for <code>keras.ops.absolute</code>.</dd>
+        <dd>Compute the absolute value element-wise.</dd>
       </dl><dl><dt>
           
           <code><a href="op_add.html">op_add()</a></code> 
@@ -3203,11 +3203,6 @@ training from the state saved.</dd>
       </dl><dl><dt>
           
           <code><a href="op_conj.html">op_conj()</a></code> 
-        </dt>
-        <dd>Shorthand for <code>keras.ops.conjugate</code>.</dd>
-      </dl><dl><dt>
-          
-          <code><a href="op_conjugate.html">op_conjugate()</a></code> 
         </dt>
         <dd>Returns the complex conjugate, element-wise.</dd>
       </dl><dl><dt>
@@ -3725,11 +3720,6 @@ training from the state saved.</dd>
           <code><a href="op_triu.html">op_triu()</a></code> 
         </dt>
         <dd>Return upper triangle of a tensor.</dd>
-      </dl><dl><dt>
-          
-          <code><a href="op_true_divide.html">op_true_divide()</a></code> 
-        </dt>
-        <dd>Alias for <code>keras.ops.divide</code>.</dd>
       </dl><dl><dt>
           
           <code><a href="op_var.html">op_var()</a></code> 

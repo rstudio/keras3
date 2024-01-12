@@ -132,7 +132,7 @@ is doubled.</p></li>
     <div class="section level2">
     <h2 id="arguments">Arguments<a class="anchor" aria-label="anchor" href="#arguments"></a></h2>
     <dl><dt>inner_optimizer</dt>
-<dd><p>The <code>keras.optimizers.Optimizer</code> instance to wrap.</p></dd>
+<dd><p>The keras <code>Optimizer</code> instance to wrap.</p></dd>
 
 
 <dt>initial_scale</dt>
@@ -199,7 +199,7 @@ we overwrite the model variable by its moving average.
 If <code>NULL</code>, the optimizer
 does not overwrite model variables in the middle of training, and you
 need to explicitly overwrite the variables at the end of training
-by calling <code>optimizer.finalize_variable_values()</code>
+by calling <code>optimizer$finalize_variable_values()</code>
 (which updates the model
 variables in-place). When using the built-in <code><a href="https://generics.r-lib.org/reference/fit.html" class="external-link">fit()</a></code> training loop,
 this happens automatically after the last epoch,
@@ -211,15 +211,13 @@ and you don't need to do anything.</p></dd>
 be multiplied the loss before computing gradients, and the inverse of
 the scale factor will be multiplied by the gradients before updating
 variables. Useful for preventing underflow during mixed precision
-training. Alternately, <code>keras.optimizers.LossScaleOptimizer</code> will
+training. Alternately, <code>optimizer_loss_scale()</code> will
 automatically set a loss scale factor.</p></dd>
 
 </dl></div>
     <div class="section level2">
     <h2 id="see-also">See also<a class="anchor" aria-label="anchor" href="#see-also"></a></h2>
-    <div class="dont-index">
-<ul><li><p><a href="https://www.tensorflow.org/api_docs/python/tf/keras/optimizers/LossScaleOptimizer" class="external-link">https://www.tensorflow.org/api_docs/python/tf/keras/optimizers/LossScaleOptimizer</a></p></li>
-</ul><p>Other optimizers: 
+    <div class="dont-index"><p>Other optimizers: 
 <code><a href="optimizer_adadelta.html">optimizer_adadelta</a>()</code>,
 <code><a href="optimizer_adafactor.html">optimizer_adafactor</a>()</code>,
 <code><a href="optimizer_adagrad.html">optimizer_adagrad</a>()</code>,

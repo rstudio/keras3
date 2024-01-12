@@ -136,7 +136,7 @@ workflows.</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/rstudio/tfdatasets" class="external-link">tfdatasets</a></span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/rstudio/tensorflow" class="external-link">tensorflow</a></span><span class="op">)</span></span>
-<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https:/keras.posit.co/">keras3</a></span><span class="op">)</span></span></code></pre></div>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://keras.posit.co/">keras3</a></span><span class="op">)</span></span></code></pre></div>
 </div>
 <div class="section level2">
 <h2 id="single-host-multi-device-synchronous-training">Single-host, multi-device synchronous training<a class="anchor" aria-label="anchor" href="#single-host-multi-device-synchronous-training"></a>
@@ -266,15 +266,15 @@ objects to load data in a multi-device or distributed workflow.</p>
 <span>  <span class="va">model</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://rdrr.io/pkg/tensorflow/man/evaluate.html" class="external-link">evaluate</a></span><span class="op">(</span><span class="va">test_dataset</span><span class="op">)</span></span>
 <span><span class="op">}</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">## Epoch 1/2</span></span>
-<span><span class="co">## 782/782 - 11s - 14ms/step - loss: 2.1336 - sparse_categorical_accuracy: 0.8802 - val_loss: 0.6575 - val_sparse_categorical_accuracy: 0.9136</span></span>
+<span><span class="co">## 782/782 - 13s - 17ms/step - loss: 2.1240 - sparse_categorical_accuracy: 0.8809 - val_loss: 0.5780 - val_sparse_categorical_accuracy: 0.9262</span></span>
 <span><span class="co">## Epoch 2/2</span></span>
-<span><span class="co">## 782/782 - 2s - 2ms/step - loss: 0.4353 - sparse_categorical_accuracy: 0.9364 - val_loss: 0.4580 - val_sparse_categorical_accuracy: 0.9270</span></span>
-<span><span class="co">## 157/157 - 0s - 2ms/step - loss: 0.4841 - sparse_categorical_accuracy: 0.9273</span></span></code></pre>
+<span><span class="co">## 782/782 - 2s - 2ms/step - loss: 0.4083 - sparse_categorical_accuracy: 0.9369 - val_loss: 0.3402 - val_sparse_categorical_accuracy: 0.9424</span></span>
+<span><span class="co">## 157/157 - 0s - 2ms/step - loss: 0.3434 - sparse_categorical_accuracy: 0.9423</span></span></code></pre>
 <pre><code><span><span class="co">## $loss</span></span>
-<span><span class="co">## [1] 0.4840991</span></span>
+<span><span class="co">## [1] 0.3434341</span></span>
 <span><span class="co">##</span></span>
 <span><span class="co">## $sparse_categorical_accuracy</span></span>
-<span><span class="co">## [1] 0.9273</span></span></code></pre>
+<span><span class="co">## [1] 0.9423</span></span></code></pre>
 </div>
 <div class="section level2">
 <h2 id="using-callbacks-to-ensure-fault-tolerance">Using callbacks to ensure fault tolerance<a class="anchor" aria-label="anchor" href="#using-callbacks-to-ensure-fault-tolerance"></a>
@@ -336,11 +336,11 @@ saved model.</p>
 <span></span>
 <span><span class="co"># Running the first time creates the model</span></span>
 <span><span class="fu">run_training</span><span class="op">(</span>epochs<span class="op">=</span><span class="fl">1</span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">## 782/782 - 4s - 5ms/step - loss: 0.3173 - sparse_categorical_accuracy: 0.9481 - val_loss: 0.4627 - val_sparse_categorical_accuracy: 0.9386</span></span></code></pre>
+<pre><code><span><span class="co">## 782/782 - 6s - 7ms/step - loss: 2.4723 - sparse_categorical_accuracy: 0.8827 - val_loss: 0.7295 - val_sparse_categorical_accuracy: 0.9222</span></span></code></pre>
 <div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Calling the same function again will resume from where we left off</span></span>
 <span><span class="fu">run_training</span><span class="op">(</span>epochs<span class="op">=</span><span class="fl">1</span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">## 782/782 - 4s - 5ms/step - loss: 0.3173 - sparse_categorical_accuracy: 0.9481 - val_loss: 0.4627 - val_sparse_categorical_accuracy: 0.9386</span></span></code></pre>
+<pre><code><span><span class="co">## 782/782 - 5s - 6ms/step - loss: 0.4618 - sparse_categorical_accuracy: 0.9371 - val_loss: 0.4605 - val_sparse_categorical_accuracy: 0.9392</span></span></code></pre>
 </div>
 <div class="section level2">
 <h2 id="tfdata-performance-tips">

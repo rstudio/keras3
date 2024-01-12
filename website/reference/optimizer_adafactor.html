@@ -112,7 +112,7 @@ last 2 dimensions separately in its accumulator variables.</p>
     <h2 id="arguments">Arguments<a class="anchor" aria-label="anchor" href="#arguments"></a></h2>
     <dl><dt>learning_rate</dt>
 <dd><p>A float, a
-<code>keras.optimizers.schedules.LearningRateSchedule</code> instance, or
+<code><a href="LearningRateSchedule.html">LearningRateSchedule()</a></code> instance, or
 a callable that takes no arguments and returns the actual value to
 use. The learning rate. Defaults to <code>0.001</code>.</p></dd>
 
@@ -207,7 +207,7 @@ the optimizer.</p></dd>
 be multiplied the loss before computing gradients, and the inverse of
 the scale factor will be multiplied by the gradients before updating
 variables. Useful for preventing underflow during mixed precision
-training. Alternately, <code>keras.optimizers.LossScaleOptimizer</code> will
+training. Alternately, <code><a href="optimizer_loss_scale.html">optimizer_loss_scale()</a></code> will
 automatically set a loss scale factor.</p></dd>
 
 </dl></div>
@@ -219,8 +219,7 @@ automatically set a loss scale factor.</p></dd>
     <div class="section level2">
     <h2 id="see-also">See also<a class="anchor" aria-label="anchor" href="#see-also"></a></h2>
     <div class="dont-index">
-<ul><li><p><a href="https:/keras.io/api/optimizers/adafactor#adafactor-class">https:/keras.io/api/optimizers/adafactor#adafactor-class</a></p></li>
-<li><p><a href="https://www.tensorflow.org/api_docs/python/tf/keras/optimizers/Adafactor" class="external-link">https://www.tensorflow.org/api_docs/python/tf/keras/optimizers/Adafactor</a></p></li>
+<ul><li><p><a href="https://keras.io/api/optimizers/adafactor#adafactor-class" class="external-link">https://keras.io/api/optimizers/adafactor#adafactor-class</a></p></li>
 </ul><p>Other optimizers: 
 <code><a href="optimizer_adadelta.html">optimizer_adadelta</a>()</code>,
 <code><a href="optimizer_adagrad.html">optimizer_adagrad</a>()</code>,

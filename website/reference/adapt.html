@@ -94,8 +94,8 @@
 <dt>batch_size</dt>
 <dd><p>Integer or <code>NULL</code>. Number of asamples per state update. If
 unspecified, <code>batch_size</code> will default to <code>32</code>. Do not specify the
-batch_size if your data is in the form of datasets, generators, or
-<code>keras.utils.Sequence</code> instances (since they generate batches).</p></dd>
+batch_size if your data is in the form of a TF Dataset or a generator
+(since they generate batches).</p></dd>
 
 
 <dt>steps</dt>
@@ -116,49 +116,49 @@ update during training. In order to make preprocessing layers efficient in
 any distribution context, they are kept constant with respect to any
 compiled <code>tf.Graph</code>s that call the layer. This does not affect the layer use
 when adapting each layer only once, but if you adapt a layer multiple times
-you will need to take care to re-compile any compiled functions as follows:</p><ul><li><p>If you are adding a preprocessing layer to a <code>keras.Model</code>, you need to
+you will need to take care to re-compile any compiled functions as follows:</p><ul><li><p>If you are adding a preprocessing layer to a keras model, you need to
 call <code>compile(model)</code> after each subsequent call to <code>adapt()</code>.</p></li>
 <li><p>If you are calling a preprocessing layer inside <code><a href="https://rdrr.io/pkg/tfdatasets/man/dataset_map.html" class="external-link">tfdatasets::dataset_map()</a></code>,
-you should call <code>dataset_map()</code> again on the input <code>tf.data.Dataset</code> after each
+you should call <code>dataset_map()</code> again on the input <code>Dataset</code> after each
 <code>adapt()</code>.</p></li>
 <li><p>If you are using a <code><a href="https://rdrr.io/pkg/tensorflow/man/tf_function.html" class="external-link">tensorflow::tf_function()</a></code> directly which calls a preprocessing
-layer, you need to call <code>tf_function</code> again on your callable after
+layer, you need to call <code>tf_function()</code> again on your callable after
 each subsequent call to <code>adapt()</code>.</p></li>
-</ul><p><code>keras_model</code> example with multiple adapts:</p>
-<p></p><div class="sourceCode r"><pre><code><span><span class="va">layer</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/layer_normalization.html">layer_normalization</a></span><span class="op">(</span>axis<span class="op">=</span><span class="cn">NULL</span><span class="op">)</span></span>
+</ul><p><code><a href="keras_model.html">keras_model()</a></code> example with multiple adapts:</p>
+<p></p><div class="sourceCode r"><pre><code><span><span class="va">layer</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/layer_normalization.html">layer_normalization</a></span><span class="op">(</span>axis <span class="op">=</span> <span class="cn">NULL</span><span class="op">)</span></span>
 <span><span class="fu"><a href="../reference/adapt.html">adapt</a></span><span class="op">(</span><span class="va">layer</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">2</span><span class="op">)</span><span class="op">)</span></span>
-<span><span class="va">model</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/keras_model_sequential.html">keras_model_sequential</a></span><span class="op">(</span><span class="va">layer</span><span class="op">)</span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/stats/predict.html" class="external-link">predict</a></span><span class="op">(</span><span class="va">model</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">1</span>, <span class="fl">2</span><span class="op">)</span><span class="op">)</span> <span class="co"># [1] -1  0  1</span></span>
-<span></span>
-<span><span class="fu"><a href="../reference/adapt.html">adapt</a></span><span class="op">(</span><span class="va">layer</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="op">-</span><span class="fl">1</span>, <span class="fl">1</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="va">model</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/keras_model_sequential.html">keras_model_sequential</a></span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span> <span class="fu">layer</span><span class="op">(</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/stats/predict.html" class="external-link">predict</a></span><span class="op">(</span><span class="va">model</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">1</span>, <span class="fl">2</span><span class="op">)</span><span class="op">)</span> <span class="co"># [1] -1  0  1</span></span></code></pre><p></p></div>
+<p></p><div class="sourceCode"><pre><code><span id="cb1-1"><a href="#cb1-1" tabindex="-1"></a><span class="do">## 1/1 - 0s - 24ms/step</span></span></code></pre><p></p></div>
+<p></p><div class="sourceCode"><pre><code><span id="cb1-1"><a href="#cb1-1" tabindex="-1"></a><span class="do">## [1] -1  0  1</span></span></code></pre><p></p></div>
+<p></p><div class="sourceCode r"><pre><code><span><span class="fu"><a href="../reference/adapt.html">adapt</a></span><span class="op">(</span><span class="va">layer</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="op">-</span><span class="fl">1</span>, <span class="fl">1</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://generics.r-lib.org/reference/compile.html" class="external-link">compile</a></span><span class="op">(</span><span class="va">model</span><span class="op">)</span>  <span class="co"># This is needed to re-compile model.predict!</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/stats/predict.html" class="external-link">predict</a></span><span class="op">(</span><span class="va">model</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">1</span>, <span class="fl">2</span><span class="op">)</span><span class="op">)</span> <span class="co"># [1] 0 1 2</span></span></code></pre><p></p></div>
-<p><code>tf.data.Dataset</code> example with multiple adapts:</p>
-<p></p><div class="sourceCode r"><pre><code><span><span class="va">layer</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/layer_normalization.html">layer_normalization</a></span><span class="op">(</span>axis<span class="op">=</span><span class="cn">NULL</span><span class="op">)</span></span>
+<p></p><div class="sourceCode"><pre><code><span id="cb1-1"><a href="#cb1-1" tabindex="-1"></a><span class="do">## 1/1 - 0s - 23ms/step</span></span></code></pre><p></p></div>
+<p></p><div class="sourceCode"><pre><code><span id="cb1-1"><a href="#cb1-1" tabindex="-1"></a><span class="do">## [1] 0 1 2</span></span></code></pre><p></p></div>
+<p><code>tfdatasets</code> example with multiple adapts:</p>
+<p></p><div class="sourceCode r"><pre><code><span><span class="va">layer</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/layer_normalization.html">layer_normalization</a></span><span class="op">(</span>axis <span class="op">=</span> <span class="cn">NULL</span><span class="op">)</span></span>
 <span><span class="fu"><a href="../reference/adapt.html">adapt</a></span><span class="op">(</span><span class="va">layer</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">2</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="va">input_ds</span> <span class="op">&lt;-</span> <span class="fu">tfdatasets</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/tfdatasets/man/range_dataset.html" class="external-link">range_dataset</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">3</span><span class="op">)</span></span>
-<span><span class="va">normalized_ds</span> <span class="op">&lt;-</span> <span class="va">input_ds</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span></span>
+<span><span class="va">normalized_ds</span> <span class="op">&lt;-</span> <span class="va">input_ds</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu">tfdatasets</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/tfdatasets/man/dataset_map.html" class="external-link">dataset_map</a></span><span class="op">(</span><span class="va">layer</span><span class="op">)</span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/utils/str.html" class="external-link">str</a></span><span class="op">(</span><span class="fu">reticulate</span><span class="fu">::</span><span class="fu"><a href="https://rstudio.github.io/reticulate/reference/iterate.html" class="external-link">iterate</a></span><span class="op">(</span><span class="va">normalized_ds</span><span class="op">)</span><span class="op">)</span></span>
-<span><span class="co"># List of 3</span></span>
-<span><span class="co">#  $ :tf.Tensor([-1.], shape=(1,), dtype=float32)</span></span>
-<span><span class="co">#  $ :tf.Tensor([0.], shape=(1,), dtype=float32)</span></span>
-<span><span class="co">#  $ :tf.Tensor([1.], shape=(1,), dtype=float32)</span></span>
-<span><span class="fu"><a href="../reference/adapt.html">adapt</a></span><span class="op">(</span><span class="va">layer</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="op">-</span><span class="fl">1</span>, <span class="fl">1</span><span class="op">)</span><span class="op">)</span></span>
-<span><span class="va">normalized_ds</span> <span class="op">&lt;-</span> <span class="va">input_ds</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/utils/str.html" class="external-link">str</a></span><span class="op">(</span><span class="fu">tfdatasets</span><span class="fu">::</span><span class="fu"><a href="https://rstudio.github.io/reticulate/reference/iterate.html" class="external-link">iterate</a></span><span class="op">(</span><span class="va">normalized_ds</span><span class="op">)</span><span class="op">)</span></span></code></pre><p></p></div>
+<p></p><div class="sourceCode"><pre><code><span id="cb1-1"><a href="#cb1-1" tabindex="-1"></a><span class="do">## List of 3</span></span>
+<span id="cb1-2"><a href="#cb1-2" tabindex="-1"></a><span class="do">##  $ :&lt;tf.Tensor: shape=(1), dtype=float32, numpy=array([-1.], dtype=float32)&gt;</span></span>
+<span id="cb1-3"><a href="#cb1-3" tabindex="-1"></a><span class="do">##  $ :&lt;tf.Tensor: shape=(1), dtype=float32, numpy=array([0.], dtype=float32)&gt;</span></span>
+<span id="cb1-4"><a href="#cb1-4" tabindex="-1"></a><span class="do">##  $ :&lt;tf.Tensor: shape=(1), dtype=float32, numpy=array([1.], dtype=float32)&gt;</span></span></code></pre><p></p></div>
+<p></p><div class="sourceCode r"><pre><code><span><span class="fu"><a href="../reference/adapt.html">adapt</a></span><span class="op">(</span><span class="va">layer</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="op">-</span><span class="fl">1</span>, <span class="fl">1</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="va">normalized_ds</span> <span class="op">&lt;-</span> <span class="va">input_ds</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu">tfdatasets</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/tfdatasets/man/dataset_map.html" class="external-link">dataset_map</a></span><span class="op">(</span><span class="va">layer</span><span class="op">)</span> <span class="co"># Re-map over the input dataset.</span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/utils/str.html" class="external-link">str</a></span><span class="op">(</span><span class="fu">reticulate</span><span class="fu">::</span><span class="fu"><a href="https://rstudio.github.io/reticulate/reference/iterate.html" class="external-link">iterate</a></span><span class="op">(</span><span class="va">normalized_ds</span><span class="op">$</span><span class="fu">as_numpy_iterator</span><span class="op">(</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span>
-<span><span class="co"># List of 3</span></span>
-<span><span class="co">#  $ : num [1(1d)] -1</span></span>
-<span><span class="co">#  $ : num [1(1d)] 0</span></span>
-<span><span class="co">#  $ : num [1(1d)] 1</span></span></code></pre><p></p></div>
-    </div>
-    <div class="section level2">
-    <h2 id="see-also">See also<a class="anchor" aria-label="anchor" href="#see-also"></a></h2>
-    <div class="dont-index">
-<ul><li><p><a href="https://www.tensorflow.org/guide/keras/preprocessing_layers#the_adapt_method" class="external-link">https://www.tensorflow.org/guide/keras/preprocessing_layers#the_adapt_method</a></p></li>
-<li><p><a href="https://keras.io/guides/preprocessing_layers/#the-adapt-method" class="external-link">https://keras.io/guides/preprocessing_layers/#the-adapt-method</a></p></li>
-</ul></div>
+<span></span>
+<span><span class="va">normalized_ds</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu">tfdatasets</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/tfdatasets/man/as_array_iterator.html" class="external-link">as_array_iterator</a></span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu">tfdatasets</span><span class="fu">::</span><span class="fu"><a href="https://rstudio.github.io/reticulate/reference/iterate.html" class="external-link">iterate</a></span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu"><a href="https://rdrr.io/r/utils/str.html" class="external-link">str</a></span><span class="op">(</span><span class="op">)</span></span></code></pre><p></p></div>
+<p></p><div class="sourceCode"><pre><code><span id="cb1-1"><a href="#cb1-1" tabindex="-1"></a><span class="do">## List of 3</span></span>
+<span id="cb1-2"><a href="#cb1-2" tabindex="-1"></a><span class="do">##  $ : num [1(1d)] 0</span></span>
+<span id="cb1-3"><a href="#cb1-3" tabindex="-1"></a><span class="do">##  $ : num [1(1d)] 1</span></span>
+<span id="cb1-4"><a href="#cb1-4" tabindex="-1"></a><span class="do">##  $ : num [1(1d)] 2</span></span></code></pre><p></p></div>
     </div>
 
   </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>

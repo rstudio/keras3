@@ -184,18 +184,18 @@ with(strategy$scope(), {
 
 ```
 ## Epoch 1/2
-## 782/782 - 14s - 17ms/step - loss: 2.0889 - sparse_categorical_accuracy: 0.8825 - val_loss: 0.6290 - val_sparse_categorical_accuracy: 0.9241
+## 782/782 - 13s - 17ms/step - loss: 2.1240 - sparse_categorical_accuracy: 0.8809 - val_loss: 0.5780 - val_sparse_categorical_accuracy: 0.9262
 ## Epoch 2/2
-## 782/782 - 2s - 2ms/step - loss: 0.4478 - sparse_categorical_accuracy: 0.9355 - val_loss: 0.4454 - val_sparse_categorical_accuracy: 0.9357
-## 157/157 - 0s - 2ms/step - loss: 0.4304 - sparse_categorical_accuracy: 0.9364
+## 782/782 - 2s - 2ms/step - loss: 0.4083 - sparse_categorical_accuracy: 0.9369 - val_loss: 0.3402 - val_sparse_categorical_accuracy: 0.9424
+## 157/157 - 0s - 2ms/step - loss: 0.3434 - sparse_categorical_accuracy: 0.9423
 ```
 
 ```
 ## $loss
-## [1] 0.4304239
+## [1] 0.3434341
 ##
 ## $sparse_categorical_accuracy
-## [1] 0.9364
+## [1] 0.9423
 ```
 
 ## Using callbacks to ensure fault tolerance
@@ -262,7 +262,7 @@ run_training(epochs=1)
 ```
 
 ```
-## 782/782 - 5s - 6ms/step - loss: 0.3084 - sparse_categorical_accuracy: 0.9491 - val_loss: 0.4077 - val_sparse_categorical_accuracy: 0.9372
+## 782/782 - 6s - 7ms/step - loss: 2.4723 - sparse_categorical_accuracy: 0.8827 - val_loss: 0.7295 - val_sparse_categorical_accuracy: 0.9222
 ```
 
 ```r
@@ -271,7 +271,7 @@ run_training(epochs=1)
 ```
 
 ```
-## 782/782 - 5s - 6ms/step - loss: 0.3084 - sparse_categorical_accuracy: 0.9491 - val_loss: 0.4077 - val_sparse_categorical_accuracy: 0.9372
+## 782/782 - 5s - 6ms/step - loss: 0.4618 - sparse_categorical_accuracy: 0.9371 - val_loss: 0.4605 - val_sparse_categorical_accuracy: 0.9392
 ```
 
 ## `tf$data` performance tips

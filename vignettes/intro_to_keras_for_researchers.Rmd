@@ -1021,7 +1021,7 @@ following built-in training infrastructure features:
 callbacks for early-stopping, model checkpointing,
 and monitoring training with TensorBoard. You can also
 [implement custom callbacks](/guides/writing_your_own_callbacks/) if needed.
-* [Distributed training](https://keras.io/guides/distributed_training/). You
+* [Distributed training](https://keras.io/guides/distributed_training_with_tensorflow/). You
 can easily scale up your training to multiple GPUs, TPU, or even multiple machines
 with the `tf.distribute` API -- with no changes to your code.
 * [Step fusing](https://keras.io/api/models/model_training_apis/#compile-method).
@@ -1055,9 +1055,9 @@ model %>% fit(dataset, epochs=2)
 
 ```
 ## Epoch 1/2
-## 938/938 - 4s - 4ms/step - loss: 0.3960 - sparse_categorical_accuracy: 0.8866
+## 938/938 - 2s - 3ms/step - loss: 0.3960 - sparse_categorical_accuracy: 0.8866
 ## Epoch 2/2
-## 938/938 - 1s - 1ms/step - loss: 0.1886 - sparse_categorical_accuracy: 0.9444
+## 938/938 - 1s - 946us/step - loss: 0.1886 - sparse_categorical_accuracy: 0.9444
 ```
 
 ```r
@@ -1065,7 +1065,7 @@ predictions <- model %>% predict(dataset)
 ```
 
 ```
-## 938/938 - 1s - 1ms/step
+## 938/938 - 1s - 962us/step
 ```
 
 ```r
@@ -1073,7 +1073,7 @@ model %>% evaluate(dataset)
 ```
 
 ```
-## 938/938 - 2s - 2ms/step - loss: 0.1764 - sparse_categorical_accuracy: 0.9452
+## 938/938 - 1s - 1ms/step - loss: 0.1764 - sparse_categorical_accuracy: 0.9452
 ```
 
 ```
@@ -1093,7 +1093,7 @@ zero-code distribution support, and step fusing support.
 You may also override `test_step()` to customize what happens in `evaluate()`,
 and override `predict_step()` to customize what happens in `predict()`. For more
 information, please refer to
-[this guide](https://keras.io/guides/customizing_what_happens_in_fit/).
+[this guide](https://keras.io/guides/custom_train_step_in_tensorflow/).
 
 
 ```r
@@ -1145,7 +1145,7 @@ model %>% fit(dataset, epochs=2)
 ## Epoch 1/2
 ## 938/938 - 2s - 2ms/step - loss: 0.3869 - sparse_categorical_accuracy: 0.8924
 ## Epoch 2/2
-## 938/938 - 1s - 1ms/step - loss: 0.2163 - sparse_categorical_accuracy: 0.9370
+## 938/938 - 1s - 884us/step - loss: 0.2163 - sparse_categorical_accuracy: 0.9370
 ```
 
 ## End-to-end experiment example 1: variational autoencoders.

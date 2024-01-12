@@ -9,7 +9,7 @@ accelerator: None
 output: rmarkdown::html_vignette
 knit: ({source(here::here("tools/knit.R")); knit_vignette})
 tether: https://raw.githubusercontent.com/keras-team/keras-io/master/guides/intro_to_keras_for_researchers.py
-# seemingly deleted upstream when `keras-3` branch merged in keras-team/keras-io. Mistake? 
+# seemingly deleted upstream when `keras-3` branch merged in keras-team/keras-io. Mistake?
 ---
 
 ## Setup
@@ -772,7 +772,7 @@ following built-in training infrastructure features:
 callbacks for early-stopping, model checkpointing,
 and monitoring training with TensorBoard. You can also
 [implement custom callbacks](/guides/writing_your_own_callbacks/) if needed.
-* [Distributed training](https://keras.io/guides/distributed_training/). You
+* [Distributed training](https://keras.io/guides/distributed_training_with_tensorflow/). You
 can easily scale up your training to multiple GPUs, TPU, or even multiple machines
 with the `tf.distribute` API -- with no changes to your code.
 * [Step fusing](https://keras.io/api/models/model_training_apis/#compile-method).
@@ -814,7 +814,7 @@ zero-code distribution support, and step fusing support.
 You may also override `test_step()` to customize what happens in `evaluate()`,
 and override `predict_step()` to customize what happens in `predict()`. For more
 information, please refer to
-[this guide](https://keras.io/guides/customizing_what_happens_in_fit/).
+[this guide](https://keras.io/guides/custom_train_step_in_tensorflow/).
 
 ```{r}
 CustomModel <- new_model_class(

@@ -26,7 +26,7 @@ Some notes on passing callables to customize splitting and normalization for
 this layer:
 Any callable can be passed to this Layer, but if you want to serialize
 this object you should only pass functions that are registered Keras
-serializables (see keras.saving.register_keras_serializable
+serializables (see register_keras_serializable()
 for more details).
 When using a custom callable for standardize, the data received
 by the callable will be exactly as passed to this layer. The callable
@@ -75,7 +75,7 @@ Some notes on passing callables to customize splitting and normalization for
 this layer:
 Any callable can be passed to this Layer, but if you want to serialize
 this object you should only pass functions that are registered Keras
-serializables (see keras.saving.register_keras_serializable
+serializables (see register_keras_serializable()
 for more details).
 When using a custom callable for standardize, the data received
 by the callable will be exactly as passed to this layer. The callable
@@ -189,7 +189,7 @@ a dense float vector.</p></li>
 </ol><p>Some notes on passing callables to customize splitting and normalization for
 this layer:</p><ol><li><p>Any callable can be passed to this Layer, but if you want to serialize
 this object you should only pass functions that are registered Keras
-serializables (see <code>keras.saving.register_keras_serializable</code>
+serializables (see <code><a href="register_keras_serializable.html">register_keras_serializable()</a></code>
 for more details).</p></li>
 <li><p>When using a custom callable for <code>standardize</code>, the data received
 by the callable will be exactly as passed to this layer. The callable
@@ -419,8 +419,7 @@ of vocabulary terms to the layer's <code>__init__()</code> method.</p>
     <div class="section level2">
     <h2 id="see-also">See also<a class="anchor" aria-label="anchor" href="#see-also"></a></h2>
     <div class="dont-index">
-<ul><li><p><a href="https:/keras.io/api/layers/preprocessing_layers/text/text_vectorization#textvectorization-class">https:/keras.io/api/layers/preprocessing_layers/text/text_vectorization#textvectorization-class</a></p></li>
-<li><p><a href="https://www.tensorflow.org/api_docs/python/tf/keras/layers/TextVectorization" class="external-link">https://www.tensorflow.org/api_docs/python/tf/keras/layers/TextVectorization</a></p></li>
+<ul><li><p><a href="https://keras.io/api/layers/preprocessing_layers/text/text_vectorization#textvectorization-class" class="external-link">https://keras.io/api/layers/preprocessing_layers/text/text_vectorization#textvectorization-class</a></p></li>
 </ul><p>Other preprocessing layers: 
 <code><a href="layer_category_encoding.html">layer_category_encoding</a>()</code>,
 <code><a href="layer_center_crop.html">layer_center_crop</a>()</code>,

@@ -140,9 +140,7 @@ be <code>NULL</code> or <code>"softmax"</code>.</p></dd>
     <h2 id="value">Value<a class="anchor" aria-label="anchor" href="#value"></a></h2>
     
 
-<p></p><div class="sourceCode"><pre><code><span id="cb1-1"><a href="#cb1-1" tabindex="-1"></a>A Model instance.</span></code></pre><p></p></div>
-
-
+<p>A Model instance.</p>
     </div>
     <div class="section level2">
     <h2 id="reference">Reference<a class="anchor" aria-label="anchor" href="#reference"></a></h2>
@@ -154,17 +152,16 @@ be <code>NULL</code> or <code>"softmax"</code>.</p></dd>
     </div>
     <div class="section level2">
     <h2 id="note">Note<a class="anchor" aria-label="anchor" href="#note"></a></h2>
-    <p>each Keras Application expects a specific kind of input preprocessing.
-For ResNet, call <code>keras.applications.resnet.preprocess_input</code> on your
-inputs before passing them to the model. <code>resnet.preprocess_input</code> will convert
+    <p>Each Keras Application expects a specific kind of input preprocessing.
+For ResNet, call <code><a href="process_utils.html">application_preprocess_inputs()</a></code> on your
+inputs before passing them to the model. <code><a href="process_utils.html">application_preprocess_inputs()</a></code> will convert
 the input images from RGB to BGR, then will zero-center each color channel with
 respect to the ImageNet dataset, without scaling.</p>
     </div>
     <div class="section level2">
     <h2 id="see-also">See also<a class="anchor" aria-label="anchor" href="#see-also"></a></h2>
     <div class="dont-index">
-<ul><li><p><a href="https:/keras.io/api/applications/resnet#resnet101-function">https:/keras.io/api/applications/resnet#resnet101-function</a></p></li>
-<li><p><a href="https://www.tensorflow.org/api_docs/python/tf/keras/applications/ResNet101" class="external-link">https://www.tensorflow.org/api_docs/python/tf/keras/applications/ResNet101</a></p></li>
+<ul><li><p><a href="https://keras.io/api/applications/resnet#resnet101-function" class="external-link">https://keras.io/api/applications/resnet#resnet101-function</a></p></li>
 </ul></div>
     </div>
 

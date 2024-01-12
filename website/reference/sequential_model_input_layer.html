@@ -62,78 +62,75 @@
 </nav><div class="container template-reference-topic">
 <div class="row">
   <main id="main" class="col-md-9"><div class="page-header">
-      <img src="" class="logo" alt=""><h1>sequential_model_input_layer</h1>
+      <img src="" class="logo" alt=""><h1><code>sequential_model_input_layer</code></h1>
       <small class="dont-index">Source: <a href="https://github.com/rstudio/keras/blob/HEAD/R/model-creation.R" class="external-link"><code>R/model-creation.R</code></a></small>
       <div class="d-none name"><code>sequential_model_input_layer.Rd</code></div>
     </div>
 
     <div class="ref-description section level2">
-    <p>sequential_model_input_layer</p>
+    <p><code>sequential_model_input_layer</code></p>
     </div>
 
     <div class="section level2">
     <h2 id="ref-usage">Usage<a class="anchor" aria-label="anchor" href="#ref-usage"></a></h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">sequential_model_input_layer</span><span class="op">(</span></span>
 <span>  input_shape <span class="op">=</span> <span class="cn">NULL</span>,</span>
-<span>  batch_size <span class="op">=</span> <span class="cn">NULL</span>,</span>
-<span>  dtype <span class="op">=</span> <span class="cn">NULL</span>,</span>
-<span>  input_tensor <span class="op">=</span> <span class="cn">NULL</span>,</span>
-<span>  sparse <span class="op">=</span> <span class="cn">NULL</span>,</span>
-<span>  name <span class="op">=</span> <span class="cn">NULL</span>,</span>
-<span>  ragged <span class="op">=</span> <span class="cn">NULL</span>,</span>
-<span>  type_spec <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  <span class="va">...</span>,</span>
-<span>  input_layer_name <span class="op">=</span> <span class="cn">NULL</span></span>
+<span>  input_batch_size <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  input_dtype <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  input_sparse <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  input_batch_shape <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  input_name <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  input_tensor <span class="op">=</span> <span class="cn">NULL</span></span>
 <span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div class="section level2">
     <h2 id="arguments">Arguments<a class="anchor" aria-label="anchor" href="#arguments"></a></h2>
     <dl><dt>input_shape</dt>
-<dd><p>an integer vector of dimensions (not including the batch
-axis), or a <code>tf$TensorShape</code> instance (also not including the batch axis).</p></dd>
-
-
-<dt>batch_size</dt>
-<dd><p>Optional input batch size (integer or NULL).</p></dd>
-
-
-<dt>dtype</dt>
-<dd><p>Optional datatype of the input. When not provided, the Keras
-default float type will be used.</p></dd>
-
-
-<dt>input_tensor</dt>
-<dd><p>Optional tensor to use as layer input. If set, the layer
-will use the <code>tf$TypeSpec</code> of this tensor rather than creating a new
-placeholder tensor.</p></dd>
-
-
-<dt>sparse</dt>
-<dd><p>Boolean, whether the placeholder created is meant to be sparse.
-Default to <code>FALSE</code>.</p></dd>
-
-
-<dt>ragged</dt>
-<dd><p>Boolean, whether the placeholder created is meant to be ragged.
-In this case, values of 'NULL' in the 'shape' argument represent ragged
-dimensions. For more information about <code>RaggedTensors</code>, see this
-<a href="https://www.tensorflow.org/guide/ragged_tensor" class="external-link">guide</a>. Default to
-<code>FALSE</code>.</p></dd>
-
-
-<dt>type_spec</dt>
-<dd><p>A <code>tf$TypeSpec</code> object to create Input from. This
-<code>tf$TypeSpec</code> represents the entire batch. When provided, all other args
-except name must be <code>NULL</code>.</p></dd>
+<dd><p>A shape integer vector,
+not including the batch size.
+For instance, <code>shape=c(32)</code> indicates that the expected input
+will be batches of 32-dimensional vectors. Elements of this shape
+can be <code>NA</code>; <code>NA</code> elements represent dimensions where the shape
+is not known and may vary (e.g. sequence length).</p></dd>
 
 
 <dt>...</dt>
-<dd><p>additional arguments passed on to <code>keras$layers$InputLayer</code>.</p></dd>
+<dd><p>additional arguments passed on to <code>keras.layers.InputLayer</code>.</p></dd>
 
 
-<dt>input_layer_name, name</dt>
-<dd><p>Optional name of the input layer (string).</p></dd>
+<dt>input_batch_size</dt>
+<dd><p>Optional static batch size (integer).</p></dd>
+
+
+<dt>input_dtype</dt>
+<dd><p>The data type expected by the input, as a string
+(e.g. <code>"float32"</code>, <code>"int32"</code>...)</p></dd>
+
+
+<dt>input_sparse</dt>
+<dd><p>A boolean specifying whether the expected input will be sparse
+tensors. Note that, if <code>sparse</code> is <code>FALSE</code>, sparse tensors can still
+be passed into the input - they will be densified with a default
+value of <code>0</code>. This feature is only supported with the TensorFlow
+backend. Defaults to <code>FALSE</code>.</p></dd>
+
+
+<dt>input_batch_shape</dt>
+<dd><p>An optional way to specify <code>batch_size</code> and <code>input_shape</code> as one argument.</p></dd>
+
+
+<dt>input_name</dt>
+<dd><p>Optional name string for the input layer.
+Should be unique in a model (do not reuse the same name twice).
+It will be autogenerated if it isn't provided.</p></dd>
+
+
+<dt>input_tensor</dt>
+<dd><p>Optional existing tensor to wrap into the <code>InputLayer</code>.
+If set, the layer will use this tensor rather
+than creating a new placeholder tensor.</p></dd>
 
 </dl></div>
 

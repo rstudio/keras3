@@ -4,13 +4,13 @@ deterministic. Some limitations apply in cases where network communications
 are involved (e.g. parameter server distribution), which creates additional
 sources of randomness, or when certain non-deterministic cuDNN ops are
 involved.
-Calling this utility is equivalent to the following in Python:
-import random
-import numpy as np
-from keras.utils.module_utils import tensorflow as tf
-random.seed(seed)
-np.random.seed(seed)
-tf.random.set_seed(seed)
+This sets:
+the R session seed: set.seed()
+the Python session seed: import random; random.seed()
+the Python NumPy seed: import numpy; numpy.random.seed()
+the TensorFlow seed: tf$random$set_seed()
+and disables Python hash randomization.
+
 
 Note that the TensorFlow seed is set even if you're not using TensorFlow
 as your backend framework, since many workflows leverage tf$data
@@ -20,13 +20,13 @@ deterministic. Some limitations apply in cases where network communications
 are involved (e.g. parameter server distribution), which creates additional
 sources of randomness, or when certain non-deterministic cuDNN ops are
 involved.
-Calling this utility is equivalent to the following in Python:
-import random
-import numpy as np
-from keras.utils.module_utils import tensorflow as tf
-random.seed(seed)
-np.random.seed(seed)
-tf.random.set_seed(seed)
+This sets:
+the R session seed: set.seed()
+the Python session seed: import random; random.seed()
+the Python NumPy seed: import numpy; numpy.random.seed()
+the TensorFlow seed: tf$random$set_seed()
+and disables Python hash randomization.
+
 
 Note that the TensorFlow seed is set even if you're not using TensorFlow
 as your backend framework, since many workflows leverage tf$data
@@ -105,14 +105,12 @@ deterministic. Some limitations apply in cases where network communications
 are involved (e.g. parameter server distribution), which creates additional
 sources of randomness, or when certain non-deterministic cuDNN ops are
 involved.</p>
-<p>Calling this utility is equivalent to the following in Python:</p>
-<p></p><div class="sourceCode"><pre><code><span id="cb1-1"><a href="#cb1-1" tabindex="-1"></a>import random</span>
-<span id="cb1-2"><a href="#cb1-2" tabindex="-1"></a>import numpy as np</span>
-<span id="cb1-3"><a href="#cb1-3" tabindex="-1"></a>from keras.utils.module_utils import tensorflow as tf</span>
-<span id="cb1-4"><a href="#cb1-4" tabindex="-1"></a><span class="fu">random.seed</span>(seed)</span>
-<span id="cb1-5"><a href="#cb1-5" tabindex="-1"></a><span class="fu">np.random.seed</span>(seed)</span>
-<span id="cb1-6"><a href="#cb1-6" tabindex="-1"></a><span class="fu">tf.random.set_seed</span>(seed)</span></code></pre><p></p></div>
-<p>Note that the TensorFlow seed is set even if you're not using TensorFlow
+<p>This sets:</p><ul><li><p>the R session seed: <code><a href="https://rdrr.io/r/base/Random.html" class="external-link">set.seed()</a></code></p></li>
+<li><p>the Python session seed: <code>import random; random.seed()</code></p></li>
+<li><p>the Python NumPy seed: <code>import numpy; numpy.random.seed()</code></p></li>
+<li><p>the TensorFlow seed: <code>tf$random$set_seed()</code></p></li>
+<li><p>and disables Python hash randomization.</p></li>
+</ul><p>Note that the TensorFlow seed is set even if you're not using TensorFlow
 as your backend framework, since many workflows leverage <code>tf$data</code>
 pipelines (which feature random shuffling). Likewise many workflows
 might leverage NumPy APIs.</p>
@@ -132,8 +130,7 @@ might leverage NumPy APIs.</p>
     <div class="section level2">
     <h2 id="see-also">See also<a class="anchor" aria-label="anchor" href="#see-also"></a></h2>
     <div class="dont-index">
-<ul><li><p><a href="https:/keras.io/api/utils/python_utils#setrandomseed-function">https:/keras.io/api/utils/python_utils#setrandomseed-function</a></p></li>
-<li><p><a href="https://www.tensorflow.org/api_docs/python/tf/keras/utils/set_random_seed" class="external-link">https://www.tensorflow.org/api_docs/python/tf/keras/utils/set_random_seed</a></p></li>
+<ul><li><p><a href="https://keras.io/api/utils/python_utils#setrandomseed-function" class="external-link">https://keras.io/api/utils/python_utils#setrandomseed-function</a></p></li>
 </ul><p>Other utils: 
 <code><a href="audio_dataset_from_directory.html">audio_dataset_from_directory</a>()</code>,
 <code><a href="clear_session.html">clear_session</a>()</code>,

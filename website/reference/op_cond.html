@@ -73,7 +73,12 @@
 
     <div class="section level2">
     <h2 id="ref-usage">Usage<a class="anchor" aria-label="anchor" href="#ref-usage"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">op_cond</span><span class="op">(</span><span class="va">pred</span>, <span class="va">true_fn</span>, <span class="va">false_fn</span><span class="op">)</span></span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">op_cond</span><span class="op">(</span></span>
+<span>  <span class="va">pred</span>,</span>
+<span>  <span class="va">true_fn</span>,</span>
+<span>  false_fn <span class="op">=</span> <span class="kw">function</span><span class="op">(</span><span class="op">)</span> <span class="op">{</span></span>
+<span> <span class="op">}</span></span>
+<span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div class="section level2">
@@ -94,15 +99,11 @@
     <h2 id="value">Value<a class="anchor" aria-label="anchor" href="#value"></a></h2>
     
 
-<p></p><div class="sourceCode"><pre><code><span id="cb1-1"><a href="#cb1-1" tabindex="-1"></a>The output of either <span class="st">`</span><span class="at">true_fn</span><span class="st">`</span> or <span class="st">`</span><span class="at">false_fn</span><span class="st">`</span> depending on pred.</span></code></pre><p></p></div>
-
-
+<p>The output of either <code>true_fn</code> or <code>false_fn</code> depending on pred.</p>
     </div>
     <div class="section level2">
     <h2 id="see-also">See also<a class="anchor" aria-label="anchor" href="#see-also"></a></h2>
-    <div class="dont-index">
-<ul><li><p><a href="https://www.tensorflow.org/api_docs/python/tf/keras/ops/cond" class="external-link">https://www.tensorflow.org/api_docs/python/tf/keras/ops/cond</a></p></li>
-</ul><p>Other core ops: 
+    <div class="dont-index"><p>Other core ops: 
 <code><a href="op_cast.html">op_cast</a>()</code>,
 <code><a href="op_convert_to_numpy.html">op_convert_to_numpy</a>()</code>,
 <code><a href="op_convert_to_tensor.html">op_convert_to_tensor</a>()</code>,
@@ -147,7 +148,6 @@
 <code><a href="op_ceil.html">op_ceil</a>()</code>,
 <code><a href="op_clip.html">op_clip</a>()</code>,
 <code><a href="op_concatenate.html">op_concatenate</a>()</code>,
-<code><a href="op_conjugate.html">op_conjugate</a>()</code>,
 <code><a href="op_conj.html">op_conj</a>()</code>,
 <code><a href="op_conv_transpose.html">op_conv_transpose</a>()</code>,
 <code><a href="op_convert_to_numpy.html">op_convert_to_numpy</a>()</code>,
@@ -306,7 +306,6 @@
 <code><a href="op_tril.html">op_tril</a>()</code>,
 <code><a href="op_triu.html">op_triu</a>()</code>,
 <code><a href="op_tri.html">op_tri</a>()</code>,
-<code><a href="op_true_divide.html">op_true_divide</a>()</code>,
 <code><a href="op_unstack.html">op_unstack</a>()</code>,
 <code><a href="op_var.html">op_var</a>()</code>,
 <code><a href="op_vdot.html">op_vdot</a>()</code>,

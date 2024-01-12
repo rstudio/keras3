@@ -124,7 +124,7 @@ learning rate can be set, as in most other Keras optimizers.</p>
     <h2 id="arguments">Arguments<a class="anchor" aria-label="anchor" href="#arguments"></a></h2>
     <dl><dt>learning_rate</dt>
 <dd><p>A float, a
-<code>keras.optimizers.schedules.LearningRateSchedule</code> instance, or
+[<code>LearningRateSchedule()]</code> instance, or
 a callable that takes no arguments and returns the actual value to
 use. The learning rate. Defaults to <code>0.001</code>. Note that <code>Adadelta</code>
 tends to benefit from higher initial learning rate values compared
@@ -203,20 +203,19 @@ the optimizer.</p></dd>
 be multiplied the loss before computing gradients, and the inverse of
 the scale factor will be multiplied by the gradients before updating
 variables. Useful for preventing underflow during mixed precision
-training. Alternately, <code>keras.optimizers.LossScaleOptimizer</code> will
+training. Alternately, <code><a href="optimizer_loss_scale.html">optimizer_loss_scale()</a></code> will
 automatically set a loss scale factor.</p></dd>
 
 </dl></div>
     <div class="section level2">
     <h2 id="reference">Reference<a class="anchor" aria-label="anchor" href="#reference"></a></h2>
     
-<ul><li><p><a href="http://arxiv.org/abs/1212.5701" class="external-link">Zeiler, 2012</a></p></li>
+<ul><li><p><a href="https://arxiv.org/abs/1212.5701" class="external-link">Zeiler, 2012</a></p></li>
 </ul></div>
     <div class="section level2">
     <h2 id="see-also">See also<a class="anchor" aria-label="anchor" href="#see-also"></a></h2>
     <div class="dont-index">
-<ul><li><p><a href="https:/keras.io/api/optimizers/adadelta#adadelta-class">https:/keras.io/api/optimizers/adadelta#adadelta-class</a></p></li>
-<li><p><a href="https://www.tensorflow.org/api_docs/python/tf/keras/optimizers/Adadelta" class="external-link">https://www.tensorflow.org/api_docs/python/tf/keras/optimizers/Adadelta</a></p></li>
+<ul><li><p><a href="https://keras.io/api/optimizers/adadelta#adadelta-class" class="external-link">https://keras.io/api/optimizers/adadelta#adadelta-class</a></p></li>
 </ul><p>Other optimizers: 
 <code><a href="optimizer_adafactor.html">optimizer_adafactor</a>()</code>,
 <code><a href="optimizer_adagrad.html">optimizer_adagrad</a>()</code>,

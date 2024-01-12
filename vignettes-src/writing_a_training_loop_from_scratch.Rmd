@@ -8,7 +8,7 @@ accelerator: None
 output: rmarkdown::html_vignette
 knit: ({source(here::here("tools/knit.R")); knit_vignette})
 tether: https://raw.githubusercontent.com/keras-team/keras-io/master/guides/writing_a_custom_training_loop_in_tensorflow.py
-# seems to be superseeded upstream by 
+# seems to be superseeded upstream by
 # https://raw.githubusercontent.com/keras-team/keras-io/master/guides/writing_a_custom_training_loop_in_tensorflow.py
 ---
 
@@ -31,7 +31,7 @@ the convenience of `fit()`
 (for instance, to train a GAN using `fit()`), you can subclass the `Model` class and
 implement your own `train_step()` method, which
 is called repeatedly during `fit()`. This is covered in the guide
-[Customizing what happens in `fit()`](https://keras.io/guides/customizing_what_happens_in_fit/).
+[Customizing what happens in `fit()`](https://keras.io/guides/custom_train_step_in_tensorflow/).
 
 Now, if you want very low-level control over training & evaluation, you should write
 your own training & evaluation loops from scratch. This is what this guide is about.
@@ -47,9 +47,9 @@ Let's consider a simple MNIST model:
 
 ```{r}
 inputs <- layer_input(shape = 784, name="digits")
-outputs <- inputs %>% 
-  layer_dense(units = 64, activation = "relu") %>% 
-  layer_dense(units = 64, activation = "relu") %>% 
+outputs <- inputs %>%
+  layer_dense(units = 64, activation = "relu") %>%
+  layer_dense(units = 64, activation = "relu") %>%
   layer_dense(units = 10, name = "predictions")
 model <- keras_model(inputs=inputs, outputs=outputs)
 ```
@@ -77,13 +77,13 @@ x_train = x_train[-c(1:10000),]
 y_train = y_train[-c(1:10000)]
 
 # Prepare the training dataset.
-train_dataset <- list(x_train, y_train) %>% 
-  tensor_slices_dataset() %>% 
+train_dataset <- list(x_train, y_train) %>%
+  tensor_slices_dataset() %>%
   dataset_shuffle(buffer_size=1024) %>%
   dataset_batch(batch_size)
 
 # Prepare the validation dataset.
-val_dataset <- list(x_val, y_val) %>% 
+val_dataset <- list(x_val, y_val) %>%
   tensor_slices_dataset() %>%
   dataset_batch(batch_size)
 ```
@@ -116,19 +116,19 @@ for (epoch in seq_len(epochs)) {
       # to its inputs are going to be recorded
       # on the GradientTape.
       logits <- model(data[[1]], training = TRUE)
-      
+
       # Compute the loss value for this minibatch.
       loss_value <- loss_fn(data[[2]], logits)
     })
-    
+
     # Use the gradient tape to automatically retrieve
     # the gradients of the trainable variables with respect to the loss.
     gradients <- tape$gradient(loss_value, model$trainable_weights)
-    
+
     # Run one step of gradient descent by updating
     # the value of the variables to minimize the loss.
     optimizer$apply_gradients(zip_lists(gradients, model$trainable_weights))
-    
+
     # Log every 200 batches.
     if (step %% 200 == 0) {
       cat(sprintf(
@@ -159,9 +159,9 @@ the end of each epoch:
 ```{r}
 # Get model
 inputs <- layer_input(shape = 784, name="digits")
-outputs <- inputs %>% 
-  layer_dense(units = 64, activation = "relu") %>% 
-  layer_dense(units = 64, activation = "relu") %>% 
+outputs <- inputs %>%
+  layer_dense(units = 64, activation = "relu") %>%
+  layer_dense(units = 64, activation = "relu") %>%
   layer_dense(units = 10, name = "predictions")
 model <- keras_model(inputs=inputs, outputs=outputs)
 
@@ -192,10 +192,10 @@ for (epoch in seq_len(epochs)) {
     })
     gradients <- tape$gradient(loss_value, model$trainable_weights)
     optimizer$apply_gradients(zip_lists(gradients, model$trainable_weights))
-    
+
     # Update training metric.
     train_acc_metric$update_state(data[[2]], logits)
-    
+
     if (step %% 200 == 0) {
       cat(sprintf(
         "Training loss (for one batch) at step %d: %.4f\n", step, loss_value
@@ -203,20 +203,20 @@ for (epoch in seq_len(epochs)) {
       cat(sprintf("Seen so far: %d samples \n", (step * batch_size)))
     }
   })
-  
+
   # Display metrics at the end of each epoch.
   train_acc <- train_acc_metric$result()
   cat(sprintf("Training acc over epoch: %.4f\n", train_acc))
 
   # Reset training metrics at the end of each epoch
   train_acc_metric$reset_state()
-  
+
   coro::loop(for(data in val_dataset) {
     val_logits <- model(data[[1]], training=FALSE)
     # Update val metrics
     val_acc_metric$update_state(data[[2]], val_logits)
   })
-  
+
   val_acc <- val_acc_metric$result()
   val_acc_metric$reset_state()
   cat(sprintf("Validation acc: %.4f\n", val_acc))
@@ -272,7 +272,7 @@ for (epoch in seq_len(epochs)) {
   coro::loop(for(data in train_dataset) {
     step <- step + 1
     train_step(data[[1]], data[[2]])
-    
+
     if (step %% 200 == 0) {
       cat(sprintf(
         "Training loss (for one batch) at step %d: %.4f\n", step, loss_value
@@ -280,16 +280,16 @@ for (epoch in seq_len(epochs)) {
       cat(sprintf("Seen so far: %d samples \n", (step * batch_size)))
     }
   })
-  
+
   # Display metrics at the end of each epoch.
   train_acc <- train_acc_metric$result()
   cat(sprintf("Training acc over epoch: %.4f\n", train_acc))
   train_acc_metric$reset_state()
-  
+
   coro::loop(for(data in val_dataset) {
     test_step(data[[1]], data[[2]])
   })
-  
+
   val_acc <- val_acc_metric$result()
   val_acc_metric$reset_state()
   cat(sprintf("Validation acc: %.4f\n", val_acc))
@@ -325,10 +325,10 @@ Let's build a really simple model that uses it:
 
 ```{r}
 inputs <- layer_input(shape = 784, name="digits")
-outputs <- inputs %>% 
-  layer_dense(units = 64, activation = "relu") %>% 
-  ActivityRegularizationLayer() %>% 
-  layer_dense(units = 64, activation = "relu") %>% 
+outputs <- inputs %>%
+  layer_dense(units = 64, activation = "relu") %>%
+  ActivityRegularizationLayer() %>%
+  layer_dense(units = 64, activation = "relu") %>%
   layer_dense(units = 10, name = "predictions")
 model <- keras_model(inputs = inputs, outputs = outputs)
 ```
@@ -435,24 +435,24 @@ train_step <- tf_function(function(real_images) {
   batch_size <- tf$shape(real_images)[1]
   random_latent_vectors <-
     tf$random$normal(shape = c(batch_size, latent_dim))
-  
+
   # Decode them to fake images
   generated_images <- generator(random_latent_vectors)
-  
+
   # Combine them with real images
   combined_images <-
     tf$concat(list(generated_images, real_images),
               axis = 0L)
-  
+
   # Assemble labels discriminating real from fake images
   labels <-
     tf$concat(list(tf$ones(c(batch_size, 1L)),
                    tf$zeros(c(batch_size, 1L))),
               axis = 0L)
-  
+
   # Add random noise to the labels - important trick!
   labels %<>% `+`(tf$random$uniform(tf$shape(.), maxval = 0.05))
-  
+
   # Train the discriminator
   with(tf$GradientTape() %as% tape, {
     predictions <- discriminator(combined_images)
@@ -461,27 +461,27 @@ train_step <- tf_function(function(real_images) {
   grads <- tape$gradient(d_loss, discriminator$trainable_weights)
   d_optimizer$apply_gradients(
     zip_lists(grads, discriminator$trainable_weights))
-  
-  
+
+
   # Sample random points in the latent space
   random_latent_vectors <-
     tf$random$normal(shape = c(batch_size, latent_dim))
-  
+
   # Assemble labels that say "all real images"
   misleading_labels <- tf$zeros(c(batch_size, 1L))
-  
+
   # Train the generator (note that we should *not* update the weights
   # of the discriminator)!
   with(tf$GradientTape() %as% tape, {
     predictions <- discriminator(generator(random_latent_vectors))
     g_loss <- loss_fn(misleading_labels, predictions)
   })
-  
+
   grads <- tape$gradient(g_loss, generator$trainable_weights)
   g_optimizer$apply_gradients(
     zip_lists(grads, generator$trainable_weights))
 
-  list(d_loss = d_loss, g_loss = g_loss, generated_images = generated_images)  
+  list(d_loss = d_loss, g_loss = g_loss, generated_images = generated_images)
 })
 ```
 
@@ -498,7 +498,7 @@ all_digits <- op_concatenate(list(x_train, x_test))
 all_digits <- op_reshape(all_digits, c(-1, 28, 28, 1))
 dataset <- all_digits %>%
   tfdatasets::tensor_slices_dataset() %>%
-  tfdatasets::dataset_map(function(x) tf$cast(x, "float")/255) %>% 
+  tfdatasets::dataset_map(function(x) tf$cast(x, "float")/255) %>%
   tfdatasets::dataset_shuffle(buffer_size = 1024) %>%
   tfdatasets::dataset_batch(batch_size = batch_size)
 
@@ -512,14 +512,14 @@ for (epoch in seq_len(epochs)) {
     step <- step + 1
     # Train the discriminator & generator on one batch of real images.
     c(d_loss, g_loss, generated_images) %<-% train_step(real_images)
-    
+
     # Logging.
     if (step %% 200 == 0) {
       # Print metrics
       cat(sprintf("discriminator loss at step %d: %.2f\n", step, d_loss))
       cat(sprintf("adversarial loss at step %d: %.2f\n", step, g_loss))
     }
-      
+
     # To limit execution time we stop after 10 steps.
     # Remove the lines below to actually train the model!
     if (step > 10){

@@ -107,7 +107,7 @@
 <h2 id="setup">Setup<a class="anchor" aria-label="anchor" href="#setup"></a>
 </h2>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https:/keras.posit.co/">keras3</a></span><span class="op">)</span></span>
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://keras.posit.co/">keras3</a></span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/rstudio/tensorflow" class="external-link">tensorflow</a></span><span class="op">)</span></span></code></pre></div>
 </div>
 <div class="section level2">
@@ -943,7 +943,7 @@ callbacks for early-stopping, model checkpointing, and monitoring
 training with TensorBoard. You can also <a href="/guides/writing_your_own_callbacks/">implement custom
 callbacks</a> if needed.</li>
 <li>
-<a href="https://keras.io/guides/distributed_training/" class="external-link">Distributed
+<a href="https://keras.io/guides/distributed_training_with_tensorflow/" class="external-link">Distributed
 training</a>. You can easily scale up your training to multiple GPUs,
 TPU, or even multiple machines with the <code>tf.distribute</code> API –
 with no changes to your code.</li>
@@ -977,10 +977,10 @@ the MNIST example above.</p>
 <pre><code><span><span class="co">## Epoch 1/2</span></span>
 <span><span class="co">## 938/938 - 2s - 3ms/step - loss: 0.3960 - sparse_categorical_accuracy: 0.8866</span></span>
 <span><span class="co">## Epoch 2/2</span></span>
-<span><span class="co">## 938/938 - 1s - 863us/step - loss: 0.1886 - sparse_categorical_accuracy: 0.9444</span></span></code></pre>
+<span><span class="co">## 938/938 - 1s - 946us/step - loss: 0.1886 - sparse_categorical_accuracy: 0.9444</span></span></code></pre>
 <div class="sourceCode" id="cb73"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">predictions</span> <span class="op">&lt;-</span> <span class="va">model</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://rdrr.io/r/stats/predict.html" class="external-link">predict</a></span><span class="op">(</span><span class="va">dataset</span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">## 938/938 - 1s - 1ms/step</span></span></code></pre>
+<pre><code><span><span class="co">## 938/938 - 1s - 962us/step</span></span></code></pre>
 <div class="sourceCode" id="cb75"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">model</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://rdrr.io/pkg/tensorflow/man/evaluate.html" class="external-link">evaluate</a></span><span class="op">(</span><span class="va">dataset</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">## 938/938 - 1s - 1ms/step - loss: 0.1764 - sparse_categorical_accuracy: 0.9452</span></span></code></pre>
@@ -999,7 +999,7 @@ distribution support, and step fusing support. You may also override
 <code>test_step()</code> to customize what happens in
 <code><a href="https://rdrr.io/pkg/tensorflow/man/evaluate.html" class="external-link">evaluate()</a></code>, and override <code>predict_step()</code> to
 customize what happens in <code><a href="https://rdrr.io/r/stats/predict.html" class="external-link">predict()</a></code>. For more information,
-please refer to <a href="https://keras.io/guides/customizing_what_happens_in_fit/" class="external-link">this
+please refer to <a href="https://keras.io/guides/custom_train_step_in_tensorflow/" class="external-link">this
 guide</a>.</p>
 <div class="sourceCode" id="cb78"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">CustomModel</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/new_model_class.html">new_model_class</a></span><span class="op">(</span></span>
@@ -1047,7 +1047,7 @@ guide</a>.</p>
 <pre><code><span><span class="co">## Epoch 1/2</span></span>
 <span><span class="co">## 938/938 - 2s - 2ms/step - loss: 0.3869 - sparse_categorical_accuracy: 0.8924</span></span>
 <span><span class="co">## Epoch 2/2</span></span>
-<span><span class="co">## 938/938 - 1s - 833us/step - loss: 0.2163 - sparse_categorical_accuracy: 0.9370</span></span></code></pre>
+<span><span class="co">## 938/938 - 1s - 884us/step - loss: 0.2163 - sparse_categorical_accuracy: 0.9370</span></span></code></pre>
 </div>
 <div class="section level2">
 <h2 id="end-to-end-experiment-example-1-variational-autoencoders-">End-to-end experiment example 1: variational autoencoders.<a class="anchor" aria-label="anchor" href="#end-to-end-experiment-example-1-variational-autoencoders-"></a>

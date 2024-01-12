@@ -117,28 +117,24 @@ tensor's shape.</p></dd>
 
 <dt>seed</dt>
 <dd><p>A Python integer or instance of
-<code>keras.random.SeedGenerator</code>.
+<code><a href="random_seed_generator.html">random_seed_generator()</a></code>.
 Used to make the behavior of the initializer
 deterministic. Note that an initializer seeded with an integer
 or <code>NULL</code> (unseeded) will produce the same random values
 across multiple calls. To get different random values
 across multiple calls, use as seed an instance
-of <code>keras.random.SeedGenerator</code>.</p></dd>
+of <code><a href="random_seed_generator.html">random_seed_generator()</a></code>.</p></dd>
 
 </dl></div>
     <div class="section level2">
     <h2 id="value">Value<a class="anchor" aria-label="anchor" href="#value"></a></h2>
     
 
-<p></p><div class="sourceCode"><pre><code><span id="cb1-1"><a href="#cb1-1" tabindex="-1"></a>A <span class="dv">2</span><span class="sc">-</span>D tensor <span class="fu">with</span> (batch_size, num_samples).</span></code></pre><p></p></div>
-
-
+<p>A 2-D tensor with (batch_size, num_samples).</p>
     </div>
     <div class="section level2">
     <h2 id="see-also">See also<a class="anchor" aria-label="anchor" href="#see-also"></a></h2>
-    <div class="dont-index">
-<ul><li><p><a href="https://www.tensorflow.org/api_docs/python/tf/keras/random/categorical" class="external-link">https://www.tensorflow.org/api_docs/python/tf/keras/random/categorical</a></p></li>
-</ul><p>Other random: 
+    <div class="dont-index"><p>Other random: 
 <code><a href="random_dropout.html">random_dropout</a>()</code>,
 <code><a href="random_gamma.html">random_gamma</a>()</code>,
 <code><a href="random_integer.html">random_integer</a>()</code>,

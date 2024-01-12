@@ -307,33 +307,6 @@ runtime.</p></dd>
 
 </dl></div>
     <div class="section level2">
-    <h2 id="details">Details<a class="anchor" aria-label="anchor" href="#details"></a></h2>
-    <p>If you want to use <code>Callback</code> objects in a custom training loop:</p><ol><li><p>You should pack all your callbacks into a single <code>keras$callbacks$CallbackList</code>
-so they can all be called together.</p></li>
-<li><p>You will need to manually call all the <code>on_*</code> methods at the appropriate
-locations in your loop. Like this:</p></li>
-</ol><p>Example:</p>
-<p></p><div class="sourceCode r"><pre><code><span><span class="va">CallbackList</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">...</span><span class="op">)</span></span>
-<span>  <span class="fu">reticulate</span><span class="fu">::</span><span class="fu"><a href="https://rstudio.github.io/reticulate/reference/import.html" class="external-link">import</a></span><span class="op">(</span><span class="st">"keras"</span><span class="op">)</span><span class="op">$</span><span class="va">callbacks</span><span class="op">$</span><span class="fu">CallbackList</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="va">...</span><span class="op">)</span><span class="op">)</span></span>
-<span><span class="va">enumerate</span> <span class="op">&lt;-</span> <span class="fu">reticulate</span><span class="fu">::</span><span class="fu"><a href="https://rstudio.github.io/reticulate/reference/import.html" class="external-link">import_builtins</a></span><span class="op">(</span><span class="op">)</span><span class="op">$</span><span class="va">enumerate</span></span>
-<span><span class="va">callbacks</span> <span class="op">&lt;-</span> <span class="fu">CallbackList</span><span class="op">(</span><span class="fu">callback1</span><span class="op">(</span><span class="op">)</span>, <span class="fu">callback2</span><span class="op">(</span><span class="op">)</span>, <span class="va">...</span><span class="op">)</span></span>
-<span><span class="va">callbacks</span><span class="op">$</span><span class="fu">append</span><span class="op">(</span><span class="fu">callback3</span><span class="op">(</span><span class="op">)</span><span class="op">)</span></span>
-<span><span class="va">callbacks</span><span class="op">$</span><span class="fu">on_train_begin</span><span class="op">(</span><span class="va">...</span><span class="op">)</span></span>
-<span><span class="kw">for</span> <span class="op">(</span><span class="va">epoch</span> <span class="kw">in</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html" class="external-link">seq</a></span><span class="op">(</span><span class="fl">0</span>, len <span class="op">=</span> <span class="va">EPOCHS</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span></span>
-<span>  <span class="va">callbacks</span><span class="op">$</span><span class="fu">on_epoch_begin</span><span class="op">(</span><span class="va">epoch</span><span class="op">)</span></span>
-<span>  <span class="va">ds_iterator</span> <span class="op">&lt;-</span> <span class="fu">as_iterator</span><span class="op">(</span><span class="fu">enumerate</span><span class="op">(</span><span class="va">dataset</span><span class="op">)</span><span class="op">)</span></span>
-<span>  <span class="kw">while</span> <span class="op">(</span><span class="op">!</span><span class="fu"><a href="https://rdrr.io/r/base/NULL.html" class="external-link">is.null</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="va">i</span>, <span class="va">batch</span><span class="op">)</span> <span class="op"><a href="../reference/multi-assign.html">%&lt;-%</a></span> <span class="fu">iter_next</span><span class="op">(</span><span class="va">ds_iterator</span><span class="op">)</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span></span>
-<span>    <span class="va">callbacks</span><span class="op">$</span><span class="fu">on_train_batch_begin</span><span class="op">(</span><span class="va">i</span><span class="op">)</span></span>
-<span>    <span class="va">batch_logs</span> <span class="op">&lt;-</span> <span class="va">model</span><span class="op">$</span><span class="fu">train_step</span><span class="op">(</span><span class="va">batch</span><span class="op">)</span></span>
-<span>    <span class="va">callbacks</span><span class="op">$</span><span class="fu">on_train_batch_end</span><span class="op">(</span><span class="va">i</span>, <span class="va">batch_logs</span><span class="op">)</span></span>
-<span>  <span class="op">}</span></span>
-<span>  <span class="va">epoch_logs</span> <span class="op">&lt;-</span> <span class="va">...</span></span>
-<span>  <span class="va">callbacks</span><span class="op">$</span><span class="fu">on_epoch_end</span><span class="op">(</span><span class="va">epoch</span>, <span class="va">epoch_logs</span><span class="op">)</span></span>
-<span><span class="op">}</span></span>
-<span><span class="va">final_logs</span> <span class="op">&lt;-</span> <span class="va">...</span></span>
-<span><span class="va">callbacks</span><span class="op">$</span><span class="fu">on_train_end</span><span class="op">(</span><span class="va">final_logs</span><span class="op">)</span></span></code></pre><p></p></div>
-    </div>
-    <div class="section level2">
     <h2 id="examples">Examples<a class="anchor" aria-label="anchor" href="#examples"></a></h2>
     <p></p><div class="sourceCode r"><pre><code><span><span class="va">training_finished</span> <span class="op">&lt;-</span> <span class="cn">FALSE</span></span>
 <span><span class="va">callback_mark_finished</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/Callback.html">Callback</a></span><span class="op">(</span><span class="st">"MarkFinished"</span>,</span>
@@ -379,8 +352,7 @@ Any objects assigned here are invisible to the Keras framework.</p></li>
     <div class="section level2">
     <h2 id="see-also">See also<a class="anchor" aria-label="anchor" href="#see-also"></a></h2>
     <div class="dont-index">
-<ul><li><p><a href="https:/keras.io/api/callbacks/base_callback#callback-class">https:/keras.io/api/callbacks/base_callback#callback-class</a></p></li>
-<li><p><a href="https://www.tensorflow.org/api_docs/python/tf/keras/callbacks/Callback" class="external-link">https://www.tensorflow.org/api_docs/python/tf/keras/callbacks/Callback</a></p></li>
+<ul><li><p><a href="https://keras.io/api/callbacks/base_callback#callback-class" class="external-link">https://keras.io/api/callbacks/base_callback#callback-class</a></p></li>
 </ul><p>Other callbacks: 
 <code><a href="callback_backup_and_restore.html">callback_backup_and_restore</a>()</code>,
 <code><a href="callback_csv_logger.html">callback_csv_logger</a>()</code>,

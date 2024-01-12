@@ -36,7 +36,7 @@ Sequential models, models built with the Functional API, and models written from
 scratch via model subclassing.
 
 This guide doesn't cover distributed training, which is covered in our
-[guide to multi-GPU & distributed training](https://keras.io/guides/distributed_training/).
+[guide to multi-GPU & distributed training](https://keras.io/guides/distributed_training_with_tensorflow/).
 
 ## API overview: a first end-to-end example
 
@@ -404,7 +404,7 @@ targets <- layer_input(shape = 10, name="targets")
 logits <- inputs |> layer_dense(10)
 predictions <- layer_logistic_endpoint(name = "predictions")(targets, logits)
 
-model <- keras_model(inputs = list(inputs, targets), 
+model <- keras_model(inputs = list(inputs, targets),
                      outputs = predictions)
 model %>% compile(optimizer = "adam")  # No loss argument!
 
@@ -438,8 +438,8 @@ Note that you can only use `validation_split` when training with NumPy data.
 
 ```{r}
 model <- get_compiled_model()
-model |> fit(x_train, y_train, 
-             batch_size = 64, 
+model |> fit(x_train, y_train,
+             batch_size = 64,
              validation_split = 0.2, epochs = 1)
 ```
 

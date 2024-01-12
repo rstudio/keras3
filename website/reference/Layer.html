@@ -134,7 +134,7 @@ created by the inner layer. Nested layers should be instantiated in the
 
 <dt>initialize, call, build, get_config</dt>
 <dd><p>Recommended methods to implement. See
-description section.</p></dd>
+description and details sections.</p></dd>
 
 
 <dt>..., public</dt>
@@ -169,7 +169,7 @@ step while composing the layer with the pipe, like</p>
 
 
 <p></p><div class="sourceCode r"><pre><code><span><span class="va">layer_foo</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/Layer.html">Layer</a></span><span class="op">(</span><span class="st">"Foo"</span>, <span class="va">....</span><span class="op">)</span></span>
-<span><span class="va">output</span> <span class="op">&lt;-</span> <span class="va">input</span> <span class="op">|&gt;</span> <span class="fu">layer_foo</span><span class="op">(</span><span class="op">)</span></span></code></pre><p></p></div>
+<span><span class="va">output</span> <span class="op">&lt;-</span> <span class="va">inputs</span> <span class="op">|&gt;</span> <span class="fu">layer_foo</span><span class="op">(</span><span class="op">)</span></span></code></pre><p></p></div>
 
 
 
@@ -177,12 +177,12 @@ step while composing the layer with the pipe, like</p>
 or <code>NULL</code> value to <code>object</code>, or pass all arguments to <code>initialize()</code> by name.</p>
 
 
-<p></p><div class="sourceCode r"><pre><code><span><span class="va">layer</span> <span class="op">&lt;-</span> <span class="fu">layer_foo</span><span class="op">(</span>units <span class="op">=</span> <span class="fl">2</span>, activation <span class="op">=</span> <span class="st">"relu"</span><span class="op">)</span></span>
-<span><span class="va">layer</span> <span class="op">&lt;-</span> <span class="fu">layer_foo</span><span class="op">(</span><span class="cn">NULL</span>, <span class="fl">2</span>, activation <span class="op">=</span> <span class="st">"relu"</span><span class="op">)</span></span>
-<span><span class="va">layer</span> <span class="op">&lt;-</span> <span class="fu">layer_foo</span><span class="op">(</span>, <span class="fl">2</span>, activation <span class="op">=</span> <span class="st">"relu"</span><span class="op">)</span></span>
+<p></p><div class="sourceCode r"><pre><code><span><span class="va">layer</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/layer_dense.html">layer_dense</a></span><span class="op">(</span>units <span class="op">=</span> <span class="fl">2</span>, activation <span class="op">=</span> <span class="st">"relu"</span><span class="op">)</span></span>
+<span><span class="va">layer</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/layer_dense.html">layer_dense</a></span><span class="op">(</span><span class="cn">NULL</span>, <span class="fl">2</span>, activation <span class="op">=</span> <span class="st">"relu"</span><span class="op">)</span></span>
+<span><span class="va">layer</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/layer_dense.html">layer_dense</a></span><span class="op">(</span>, <span class="fl">2</span>, activation <span class="op">=</span> <span class="st">"relu"</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># then you can call() the layer in a separate step</span></span>
-<span><span class="va">outputs</span> <span class="op">&lt;-</span> <span class="va">input</span> <span class="op">|&gt;</span> <span class="fu">layer</span><span class="op">(</span><span class="op">)</span></span></code></pre><p></p></div>
+<span><span class="va">outputs</span> <span class="op">&lt;-</span> <span class="va">inputs</span> <span class="op">|&gt;</span> <span class="fu">layer</span><span class="op">(</span><span class="op">)</span></span></code></pre><p></p></div>
 
 
     </div>
@@ -586,8 +586,7 @@ Settable boolean, whether this layer should be trainable or not.</p></li>
     <div class="section level2">
     <h2 id="see-also">See also<a class="anchor" aria-label="anchor" href="#see-also"></a></h2>
     <div class="dont-index">
-<ul><li><p><a href="https:/keras.io/api/layers/base_layer#layer-class">https:/keras.io/api/layers/base_layer#layer-class</a></p></li>
-<li><p><a href="https://www.tensorflow.org/api_docs/python/tf/keras/layers/Layer" class="external-link">https://www.tensorflow.org/api_docs/python/tf/keras/layers/Layer</a></p></li>
+<ul><li><p><a href="https://keras.io/api/layers/base_layer#layer-class" class="external-link">https://keras.io/api/layers/base_layer#layer-class</a></p></li>
 </ul><p>Other layers: 
 <code><a href="bidirectional.html">bidirectional</a>()</code>,
 <code><a href="layer_text_vectorization.html">get_vocabulary</a>()</code>,

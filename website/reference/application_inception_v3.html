@@ -147,14 +147,12 @@ can only be <code>NULL</code> or <code>"softmax"</code>.</p></dd>
     <h2 id="value">Value<a class="anchor" aria-label="anchor" href="#value"></a></h2>
     
 
-<p></p><div class="sourceCode"><pre><code><span id="cb1-1"><a href="#cb1-1" tabindex="-1"></a>A model instance.</span></code></pre><p></p></div>
-
-
+<p>A model instance.</p>
     </div>
     <div class="section level2">
     <h2 id="reference">Reference<a class="anchor" aria-label="anchor" href="#reference"></a></h2>
     
-<ul><li><p><a href="http://arxiv.org/abs/1512.00567" class="external-link">Rethinking the Inception Architecture for Computer Vision</a> (CVPR 2016)</p></li>
+<ul><li><p><a href="https://arxiv.org/abs/1512.00567" class="external-link">Rethinking the Inception Architecture for Computer Vision</a> (CVPR 2016)</p></li>
 </ul><p>This function returns a Keras image classification model,
 optionally loaded with weights pre-trained on ImageNet.</p>
 <p>For image classification use cases, see
@@ -164,17 +162,16 @@ optionally loaded with weights pre-trained on ImageNet.</p>
     </div>
     <div class="section level2">
     <h2 id="note">Note<a class="anchor" aria-label="anchor" href="#note"></a></h2>
-    <p>each Keras Application expects a specific kind of input preprocessing.
+    <p>Each Keras Application expects a specific kind of input preprocessing.
 For <code>InceptionV3</code>, call
-<code>keras.applications.inception_v3.preprocess_input</code> on your inputs
+<code><a href="process_utils.html">application_preprocess_inputs()</a></code> on your inputs
 before passing them to the model.
-<code>inception_v3.preprocess_input</code> will scale input pixels between -1 and 1.</p>
+<code><a href="process_utils.html">application_preprocess_inputs()</a></code> will scale input pixels between <code>-1</code> and <code>1</code>.</p>
     </div>
     <div class="section level2">
     <h2 id="see-also">See also<a class="anchor" aria-label="anchor" href="#see-also"></a></h2>
     <div class="dont-index">
-<ul><li><p><a href="https:/keras.io/api/applications/inceptionv3#inceptionv3-function">https:/keras.io/api/applications/inceptionv3#inceptionv3-function</a></p></li>
-<li><p><a href="https://www.tensorflow.org/api_docs/python/tf/keras/applications/InceptionV3" class="external-link">https://www.tensorflow.org/api_docs/python/tf/keras/applications/InceptionV3</a></p></li>
+<ul><li><p><a href="https://keras.io/api/applications/inceptionv3#inceptionv3-function" class="external-link">https://keras.io/api/applications/inceptionv3#inceptionv3-function</a></p></li>
 </ul></div>
     </div>
 

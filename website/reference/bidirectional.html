@@ -90,17 +90,17 @@
 
 
 <dt>layer</dt>
-<dd><p><code>keras.layers.RNN</code> instance, such as
-<code>keras.layers.LSTM</code> or <code>keras.layers.GRU</code>.
-It could also be a <code>keras.layers.Layer</code> instance
+<dd><p><code>RNN</code> instance, such as
+<code><a href="layer_lstm.html">layer_lstm()</a></code> or <code><a href="layer_gru.html">layer_gru()</a></code>.
+It could also be a <code><a href="Layer.html">Layer()</a></code> instance
 that meets the following criteria:</p><ol><li><p>Be a sequence-processing layer (accepts 3D+ inputs).</p></li>
 <li><p>Have a <code>go_backwards</code>, <code>return_sequences</code> and <code>return_state</code>
 attribute (with the same semantics as for the <code>RNN</code> class).</p></li>
 <li><p>Have an <code>input_spec</code> attribute.</p></li>
 <li><p>Implement serialization via <code><a href="get_config.html">get_config()</a></code> and <code><a href="get_config.html">from_config()</a></code>.
 Note that the recommended way to create new RNN layers is to write a
-custom RNN cell and use it with <code>keras.layers.RNN</code>, instead of
-subclassing <code>keras.layers.Layer</code> directly.
+custom RNN cell and use it with <code><a href="layer_rnn.html">layer_rnn()</a></code>, instead of
+subclassing with <code><a href="Layer.html">Layer()</a></code> directly.
 When <code>return_sequences</code> is <code>TRUE</code>, the output of the masked
 timestep will be zero regardless of the layer's original
 <code>zero_output_for_mask</code> value.</p></li>
@@ -119,8 +119,8 @@ they will be returned as a list. Defaults to <code>"concat"</code>.</p></dd>
 
 
 <dt>backward_layer</dt>
-<dd><p>Optional <code>keras.layers.RNN</code>,
-or <code>keras.layers.Layer</code> instance to be used to handle
+<dd><p>Optional <code>RNN</code>,
+or <code><a href="Layer.html">Layer()</a></code> instance to be used to handle
 backwards input processing.
 If <code>backward_layer</code> is not provided, the layer instance passed
 as the <code>layer</code> argument will be used to generate the backward layer
@@ -177,8 +177,7 @@ instance will not reuse the weights state of the RNN layer instance -- the
     <div class="section level2">
     <h2 id="see-also">See also<a class="anchor" aria-label="anchor" href="#see-also"></a></h2>
     <div class="dont-index">
-<ul><li><p><a href="https:/keras.io/api/layers/recurrent_layers/bidirectional#bidirectional-class">https:/keras.io/api/layers/recurrent_layers/bidirectional#bidirectional-class</a></p></li>
-<li><p><a href="https://www.tensorflow.org/api_docs/python/tf/keras/layers/Bidirectional" class="external-link">https://www.tensorflow.org/api_docs/python/tf/keras/layers/Bidirectional</a></p></li>
+<ul><li><p><a href="https://keras.io/api/layers/recurrent_layers/bidirectional#bidirectional-class" class="external-link">https://keras.io/api/layers/recurrent_layers/bidirectional#bidirectional-class</a></p></li>
 </ul><p>Other rnn layers: 
 <code><a href="layer_conv_lstm_1d.html">layer_conv_lstm_1d</a>()</code>,
 <code><a href="layer_conv_lstm_2d.html">layer_conv_lstm_2d</a>()</code>,

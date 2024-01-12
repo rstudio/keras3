@@ -184,9 +184,7 @@ layer (<code>Rescaling</code>) at the bottom of the network. Defaults to <code>T
     <h2 id="value">Value<a class="anchor" aria-label="anchor" href="#value"></a></h2>
     
 
-<p></p><div class="sourceCode"><pre><code><span id="cb1-1"><a href="#cb1-1" tabindex="-1"></a>A model instance.</span></code></pre><p></p></div>
-
-
+<p>A model instance.</p>
     </div>
     <div class="section level2">
     <h2 id="reference">Reference<a class="anchor" aria-label="anchor" href="#reference"></a></h2>
@@ -205,10 +203,10 @@ layer (<code>Rescaling</code>) at the bottom of the network. Defaults to <code>T
     </div>
     <div class="section level2">
     <h2 id="note">Note<a class="anchor" aria-label="anchor" href="#note"></a></h2>
-    <p>each Keras Application expects a specific kind of input preprocessing.
+    <p>Each Keras Application expects a specific kind of input preprocessing.
 For MobileNetV3, by default input preprocessing is included as a part of the
 model (as a <code>Rescaling</code> layer), and thus
-<code>keras.applications.mobilenet_v3.preprocess_input</code> is actually a
+<code><a href="process_utils.html">application_preprocess_inputs()</a></code> is actually a
 pass-through function. In this use case, MobileNetV3 models expect their
 inputs to be float tensors of pixels with values in the <code>[0-255]</code> range.
 At the same time, preprocessing as a part of the model (i.e. <code>Rescaling</code>
@@ -227,8 +225,7 @@ otherwise.</p></li>
     <div class="section level2">
     <h2 id="see-also">See also<a class="anchor" aria-label="anchor" href="#see-also"></a></h2>
     <div class="dont-index">
-<ul><li><p><a href="https:/keras.io/api/applications/mobilenet#mobilenetv3large-function">https:/keras.io/api/applications/mobilenet#mobilenetv3large-function</a></p></li>
-<li><p><a href="https://www.tensorflow.org/api_docs/python/tf/keras/applications/MobileNetV3Large" class="external-link">https://www.tensorflow.org/api_docs/python/tf/keras/applications/MobileNetV3Large</a></p></li>
+<ul><li><p><a href="https://keras.io/api/applications/mobilenet#mobilenetv3large-function" class="external-link">https://keras.io/api/applications/mobilenet#mobilenetv3large-function</a></p></li>
 </ul></div>
     </div>
 

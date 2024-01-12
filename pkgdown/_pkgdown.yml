@@ -243,6 +243,7 @@ reference:
   - title: "Learning Rate Schedules"
     contents:
       - starts_with("learning_rate_schedule_")
+      - LearningRateSchedule
       - new_learning_rate_schedule_class
 
   - title: "Callbacks"
@@ -272,7 +273,7 @@ reference:
       - to_categorical
       - normalize
       - with_custom_object_scope
-      - keras_array
+      # - keras_array
       # - hdf5_matrix
       - get_file
       # - use_session_with_seed
