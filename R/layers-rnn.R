@@ -144,7 +144,7 @@ function (object, layer, merge_mode = "concat", weights = NULL,
 #'     `data_format='channels_last'`.
 #'
 #' # References
-#' - [Shi et al., 2015](http://arxiv.org/abs/1506.04214v1)
+#' - [Shi et al., 2015](https://arxiv.org/abs/1506.04214v1)
 #'     (the current implementation does not include the feedback loop on the
 #'     cells output).
 #'
@@ -343,7 +343,7 @@ function (object, filters, kernel_size, strides = 1L, padding = "valid",
 #'     `data_format='channels_last'`.
 #'
 #' # References
-#' - [Shi et al., 2015](http://arxiv.org/abs/1506.04214v1)
+#' - [Shi et al., 2015](https://arxiv.org/abs/1506.04214v1)
 #'     (the current implementation does not include the feedback loop on the
 #'     cells output).
 #'
@@ -541,7 +541,7 @@ function (object, filters, kernel_size, strides = 1L, padding = "valid",
 #'     `data_format='channels_last'`.
 #'
 #' # References
-#' - [Shi et al., 2015](http://arxiv.org/abs/1506.04214v1)
+#' - [Shi et al., 2015](https://arxiv.org/abs/1506.04214v1)
 #'     (the current implementation does not include the feedback loop on the
 #'     cells output).
 #'
@@ -998,7 +998,7 @@ function (object, units, activation = "tanh", recurrent_activation = "sigmoid",
 #' @family gru rnn layers
 #' @family rnn layers
 #' @family layers
-#' @seealso
+# @seealso
 #  + <https://www.tensorflow.org/api_docs/python/tf/keras/layers/GRUCell>
 #' @tether keras.layers.GRUCell
 rnn_cell_gru <-
@@ -1308,7 +1308,7 @@ function (object, units, activation = "tanh", recurrent_activation = "sigmoid",
 #' @family lstm rnn layers
 #' @family rnn layers
 #' @family layers
-#' @seealso
+# @seealso
 #  + <https://www.tensorflow.org/api_docs/python/tf/keras/layers/LSTMCell>
 #' @tether keras.layers.LSTMCell
 rnn_cell_lstm <-
@@ -1785,7 +1785,7 @@ function (object, units, activation = "tanh", use_bias = TRUE,
 #' @family simple rnn layers
 #' @family rnn layers
 #' @family layers
-#' @seealso
+# @seealso
 #  + <https://www.tensorflow.org/api_docs/python/tf/keras/layers/SimpleRNNCell>
 #'
 #' @tether keras.layers.SimpleRNNCell
@@ -1835,7 +1835,7 @@ function (units, activation = "tanh", use_bias = TRUE, kernel_initializer = "glo
 #' @export
 #' @family rnn layers
 #' @family layers
-#' @seealso
+# @seealso
 #  + <https://www.tensorflow.org/api_docs/python/tf/keras/layers/StackedRNNCells>
 #'
 #' @tether keras.layers.StackedRNNCells

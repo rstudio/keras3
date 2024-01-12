@@ -217,7 +217,7 @@ function (image, size, strides = NULL, dilation_rate = 1L, padding = "valid",
 #' @family image ops
 #' @family image utils
 #' @family ops
-#' @seealso
+# @seealso
 #  + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/image/map_coordinates>
 #' @tether keras.ops.image.map_coordinates
 op_image_map_coordinates <-
@@ -282,7 +282,7 @@ function (input, coordinates, order, fill_mode = "constant",
 #' @family image ops
 #' @family image utils
 #' @family ops
-#' @seealso
+# @seealso
 #  + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/image/pad_images>
 #'
 #' @tether keras.ops.image.pad_images

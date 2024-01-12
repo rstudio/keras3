@@ -980,7 +980,7 @@ function (object, filters, kernel_size, strides = list(1L, 1L,
 #' @export
 #' @family convolutional layers
 #' @family layers
-#' @seealso
+# @seealso
 #  + <https://www.tensorflow.org/api_docs/python/tf/keras/layers/DepthwiseConv1D>
 #' @tether keras.layers.DepthwiseConv1D
 layer_depthwise_conv_1d <-

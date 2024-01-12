@@ -59,7 +59,7 @@
 #' @export
 #' @family saving
 #' @family layers
-#' @seealso
+# @seealso
 #  + <https://www.tensorflow.org/api_docs/python/tf/keras/layers/TFSMLayer>
 #'
 #' @tether keras.layers.TFSMLayer

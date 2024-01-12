@@ -17,7 +17,7 @@
 #' learning rate can be set, as in most other Keras optimizers.
 #'
 #' # Reference
-#' - [Zeiler, 2012](http://arxiv.org/abs/1212.5701)
+#' - [Zeiler, 2012](https://arxiv.org/abs/1212.5701)
 #'
 #' @param learning_rate
 #' A float, a
@@ -237,7 +237,7 @@ function (learning_rate = 0.001, beta_2_decay = -0.8, epsilon_1 = 1e-30,
 #'
 #' # Reference
 #' - [Duchi et al., 2011](
-#'     http://www.jmlr.org/papers/volume12/duchi11a/duchi11a.pdf).
+#'     https://www.jmlr.org/papers/volume12/duchi11a/duchi11a.pdf).
 #'
 #' @param learning_rate
 #' A float, a
@@ -337,7 +337,7 @@ function (learning_rate = 0.001, initial_accumulator_value = 0.1,
 #' adaptive estimation of first-order and second-order moments.
 #'
 #' According to
-#' [Kingma et al., 2014](http://arxiv.org/abs/1412.6980),
+#' [Kingma et al., 2014](https://arxiv.org/abs/1412.6980),
 #' the method is "*computationally
 #' efficient, has little memory requirement, invariant to diagonal rescaling of
 #' gradients, and is well suited for problems that are large in terms of
@@ -478,7 +478,7 @@ function (learning_rate = 0.001, beta_1 = 0.9, beta_2 = 0.999,
 #' ```
 #'
 #' # Reference
-#' - [Kingma et al., 2014](http://arxiv.org/abs/1412.6980)
+#' - [Kingma et al., 2014](https://arxiv.org/abs/1412.6980)
 #'
 #' @param learning_rate
 #' A float, a
@@ -584,7 +584,7 @@ function (learning_rate = 0.001, beta_1 = 0.9, beta_2 = 0.999,
 #' [Loshchilov, Hutter et al., 2019](https://arxiv.org/abs/1711.05101).
 #'
 #' According to
-#' [Kingma et al., 2014](http://arxiv.org/abs/1412.6980),
+#' [Kingma et al., 2014](https://arxiv.org/abs/1412.6980),
 #' the underying Adam method is "*computationally
 #' efficient, has little memory requirement, invariant to diagonal rescaling of
 #' gradients, and is well suited for problems that are large in terms of
@@ -592,7 +592,7 @@ function (learning_rate = 0.001, beta_1 = 0.9, beta_2 = 0.999,
 #'
 #' # References
 #' - [Loshchilov et al., 2019](https://arxiv.org/abs/1711.05101)
-#' - [Kingma et al., 2014](http://arxiv.org/abs/1412.6980) for `adam`
+#' - [Kingma et al., 2014](https://arxiv.org/abs/1412.6980) for `adam`
 #' - [Reddi et al., 2018](
 #'     https://openreview.net/pdf?id=ryQu7f-RZ) for `amsgrad`.
 #'
@@ -874,9 +874,9 @@ function (learning_rate = 0.001, learning_rate_power = -0.5,
 #' similar strength (lr * wd).
 #'
 #' # References
-#' - [Chen et al., 2023](http://arxiv.org/abs/2302.06675)
+#' - [Chen et al., 2023](https://arxiv.org/abs/2302.06675)
 #' - [Authors' implementation](
-#'     http://github.com/google/automl/tree/master/lion)
+#'     https://github.com/google/automl/tree/master/lion)
 #'
 #' @param learning_rate
 #' A float, a
@@ -956,7 +956,7 @@ function (learning_rate = 0.001, learning_rate_power = -0.5,
 #'
 #' @export
 #' @family optimizers
-#' @seealso
+# @seealso
 #  + <https://www.tensorflow.org/api_docs/python/tf/keras/optimizers/Lion>
 #' @tether keras.optimizers.Lion
 optimizer_lion <-
@@ -1062,7 +1062,7 @@ function (learning_rate = 0.001, beta_1 = 0.9, beta_2 = 0.99,
 #'
 #' @export
 #' @family optimizers
-#' @seealso
+# @seealso
 #  + <https://www.tensorflow.org/api_docs/python/tf/keras/optimizers/LossScaleOptimizer>
 #' @tether keras.optimizers.LossScaleOptimizer
 optimizer_loss_scale <-
@@ -1084,7 +1084,7 @@ function (inner_optimizer, initial_scale = 32768, dynamic_growth_steps = 2000L,
 #' Nesterov momentum.
 #'
 #' # Reference
-#' - [Dozat, 2015](http://cs229.stanford.edu/proj2015/054_report.pdf).
+#' - [Dozat, 2015](https://cs229.stanford.edu/proj2015/054_report.pdf).
 #'
 #' @param learning_rate
 #' A float, a
@@ -1205,7 +1205,7 @@ function (learning_rate = 0.001, beta_1 = 0.9, beta_2 = 0.999,
 #'
 #' # Reference
 #' - [Hinton, 2012](
-#'     http://www.cs.toronto.edu/~tijmen/csc321/slides/lecture_slides_lec6.pdf)
+#'     https://www.cs.toronto.edu/~tijmen/csc321/slides/lecture_slides_lec6.pdf)
 #'
 #' @param learning_rate
 #' A float, a

@@ -257,7 +257,7 @@ function (data_format)
 #' @export
 #' @family saving
 #' @family config
-#' @seealso
+# @seealso
 #  + <https://www.tensorflow.org/api_docs/python/tf/keras/config/enable_unsafe_deserialization>
 #' @tether keras.config.enable_unsafe_deserialization
 config_enable_unsafe_deserialization <-
@@ -279,7 +279,7 @@ function ()
 #' @family io utils
 #' @family utils
 #' @family config
-#' @seealso
+# @seealso
 #  + <https://www.tensorflow.org/api_docs/python/tf/keras/config/disable_interactive_logging>
 #' @tether keras.config.disable_interactive_logging
 config_disable_interactive_logging <-
@@ -301,7 +301,7 @@ function ()
 #' @family io utils
 #' @family utils
 #' @family config
-#' @seealso
+# @seealso
 #  + <https://www.tensorflow.org/api_docs/python/tf/keras/config/enable_interactive_logging>
 #' @tether keras.config.enable_interactive_logging
 config_enable_interactive_logging <-
@@ -327,7 +327,7 @@ function ()
 #' @family io utils
 #' @family utils
 #' @family config
-#' @seealso
+# @seealso
 #  + <https://www.tensorflow.org/api_docs/python/tf/keras/config/is_interactive_logging_enabled>
 #' @tether keras.config.is_interactive_logging_enabled
 config_is_interactive_logging_enabled <-
@@ -359,7 +359,7 @@ function ()
 #' @family traceback utils
 #' @family utils
 #' @family config
-#' @seealso
+# @seealso
 #  + <https://www.tensorflow.org/api_docs/python/tf/keras/config/disable_traceback_filtering>
 #' @tether keras.config.disable_traceback_filtering
 config_disable_traceback_filtering <-
@@ -391,7 +391,7 @@ function ()
 #' @family traceback utils
 #' @family utils
 #' @family config
-#' @seealso
+# @seealso
 #  + <https://www.tensorflow.org/api_docs/python/tf/keras/config/enable_traceback_filtering>
 #' @tether keras.config.enable_traceback_filtering
 config_enable_traceback_filtering <-
@@ -427,7 +427,7 @@ function ()
 #' @family traceback utils
 #' @family utils
 #' @family config
-#' @seealso
+# @seealso
 #  + <https://www.tensorflow.org/api_docs/python/tf/keras/config/is_traceback_filtering_enabled>
 #' @tether keras.config.is_traceback_filtering_enabled
 config_is_traceback_filtering_enabled <-

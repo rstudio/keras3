@@ -2326,7 +2326,7 @@ function (include_top = TRUE, weights = "imagenet", input_tensor = NULL,
 #'
 #' # Reference
 #' - [Rethinking the Inception Architecture for Computer Vision](
-#'     http://arxiv.org/abs/1512.00567) (CVPR 2016)
+#'     https://arxiv.org/abs/1512.00567) (CVPR 2016)
 #'
 #' This function returns a Keras image classification model,
 #' optionally loaded with weights pre-trained on ImageNet.

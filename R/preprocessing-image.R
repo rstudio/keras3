@@ -75,7 +75,7 @@
 #' @family image utils
 #' @family utils
 #' @family preprocessing
-#' @seealso
+# @seealso
 #  + <https://www.tensorflow.org/api_docs/python/tf/keras/preprocessing/image/smart_resize>
 #' @tether keras.preprocessing.image.smart_resize
 image_smart_resize <-

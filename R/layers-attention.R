@@ -262,7 +262,7 @@ function (object, use_scale = FALSE, score_mode = "dot", dropout = 0,
 #' @export
 #' @family attention layers
 #' @family layers
-#' @seealso
+# @seealso
 #  + <https://www.tensorflow.org/api_docs/python/tf/keras/layers/GroupQueryAttention>
 #' @tether keras.layers.GroupQueryAttention
 layer_group_query_attention <-

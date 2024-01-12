@@ -440,7 +440,7 @@ function (object, axis = -1L, epsilon = 0.001, center = TRUE,
 #' @export
 #' @family normalization layers
 #' @family layers
-#' @seealso
+# @seealso
 #  + <https://www.tensorflow.org/api_docs/python/tf/keras/layers/SpectralNormalization>
 #'
 #' @tether keras.layers.SpectralNormalization

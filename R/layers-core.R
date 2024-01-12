@@ -204,7 +204,7 @@ function (object, units, activation = NULL, use_bias = TRUE,
 #' @export
 #' @family core layers
 #' @family layers
-#' @seealso
+# @seealso
 #  + <https://www.tensorflow.org/api_docs/python/tf/keras/layers/EinsumDense>
 #'
 #' @tether keras.layers.EinsumDense
@@ -322,7 +322,7 @@ function (object, input_dim, output_dim, embeddings_initializer = "uniform",
 #' @export
 #' @family core layers
 #' @family layers
-#' @seealso
+# @seealso
 #  + <https://www.tensorflow.org/api_docs/python/tf/keras/layers/Identity>
 #' @tether keras.layers.Identity
 layer_identity <-
@@ -396,7 +396,7 @@ function (object, ...)
 #' @family input core layers
 #' @family core layers
 #' @family layers
-#' @seealso
+# @seealso
 #  + <https://www.tensorflow.org/api_docs/python/tf/keras/layers/Input>
 #'
 #' @tether keras.layers.Input

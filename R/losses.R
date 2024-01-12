@@ -321,7 +321,7 @@ function (y_true, y_pred, from_logits = FALSE, label_smoothing = 0,
 #'
 #' @export
 #' @family losses
-#' @seealso
+# @seealso
 #  + <https://www.tensorflow.org/api_docs/python/tf/keras/losses/BinaryFocalCrossentropy>
 #'
 #' @tether keras.losses.BinaryFocalCrossentropy
@@ -588,7 +588,7 @@ function (y_true, y_pred, from_logits = FALSE, label_smoothing = 0,
 #'
 #' @export
 #' @family losses
-#' @seealso
+# @seealso
 #  + <https://www.tensorflow.org/api_docs/python/tf/keras/losses/CategoricalFocalCrossentropy>
 #'
 #' @tether keras.losses.CategoricalFocalCrossentropy

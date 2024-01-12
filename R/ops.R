@@ -48,7 +48,7 @@ keras$ops$cast(x, dtype)
 #' @export
 #' @family core ops
 #' @family ops
-#' @seealso
+# @seealso
 #  + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/cond>
 #' @tether keras.ops.cond
 op_cond <-
@@ -148,7 +148,7 @@ keras$ops$convert_to_tensor(x, dtype, sparse)
 #' @export
 #' @family core ops
 #' @family ops
-#' @seealso
+# @seealso
 #  + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/fori_loop>
 #' @tether keras.ops.fori_loop
 op_fori_loop <-
@@ -173,7 +173,7 @@ keras$ops$fori_loop(lower, upper, body_fun, init_val)
 #' @export
 #' @family core ops
 #' @family ops
-#' @seealso
+# @seealso
 #  + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/is_tensor>
 #' @tether keras.ops.is_tensor
 op_is_tensor <-
@@ -488,7 +488,7 @@ keras$ops$stop_gradient(variable)
 #' @export
 #' @family core ops
 #' @family ops
-#' @seealso
+# @seealso
 #  + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/unstack>
 #'
 #' @tether keras.ops.unstack
@@ -500,7 +500,7 @@ function (x, num = NULL, axis = 1L)
 }
 
 
-#' Parallel map of `function` on axis 0 of tensor(s) `elements`.
+#' Parallel map of `function` on the first axis of tensor(s) `elements`.
 #'
 #' @description
 #' Schematically, `vectorized_map` implements the following,
@@ -545,7 +545,7 @@ function (x, num = NULL, axis = 1L)
 #' @export
 #' @family core ops
 #' @family ops
-#' @seealso
+# @seealso
 #  + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/vectorized_map>
 #' @tether keras.ops.vectorized_map
 op_vectorized_map <-
@@ -626,7 +626,7 @@ keras$ops$while_loop(cond, body, loop_vars, maximum_iterations)
 #' @export
 #' @family math ops
 #' @family ops
-#' @seealso
+# @seealso
 #  + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/erf>
 #' @tether keras.ops.erf
 op_erf <-
@@ -1194,7 +1194,7 @@ function (data, segment_ids, num_segments = NULL, sorted = FALSE)
 #' @export
 #' @family math ops
 #' @family ops
-#' @seealso
+# @seealso
 #  + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/solve>
 #'
 #' @tether keras.ops.solve
@@ -1999,7 +1999,7 @@ function (inputs, pool_size, strides = NULL, padding = "valid",
 #' @export
 #' @family nn ops
 #' @family ops
-#' @seealso
+# @seealso
 #  + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/moments>
 #'
 #' @tether keras.ops.moments
@@ -2043,7 +2043,7 @@ function (x, axes, keepdims = FALSE, synchronized = FALSE)
 #' @export
 #' @family nn ops
 #' @family ops
-#' @seealso
+# @seealso
 #  + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/multi_hot>
 #'
 #' @tether keras.ops.multi_hot
@@ -2532,7 +2532,7 @@ function (target, output, from_logits = FALSE, axis = -1L)
 #' @export
 #' @family numpy ops
 #' @family ops
-#' @seealso
+# @seealso
 #  + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/abs>
 #' @tether keras.ops.absolute
 op_abs <-
@@ -2945,7 +2945,7 @@ keras$ops$arccos(x)
 #' @export
 #' @family numpy ops
 #' @family ops
-#' @seealso
+# @seealso
 #  + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/arccosh>
 #' @tether keras.ops.arccosh
 op_arccosh <-
@@ -3904,7 +3904,7 @@ function (x, offset = 0L, axis1 = 1L, axis2 = 2L)
 #' @export
 #' @family numpy ops
 #' @family ops
-#' @seealso
+# @seealso
 #  + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/diff>
 #' @tether keras.ops.diff
 op_diff <-
@@ -4321,7 +4321,7 @@ keras$ops$floor(x)
 #' @export
 #' @family numpy ops
 #' @family ops
-#' @seealso
+# @seealso
 #  + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/floor_divide>
 #' @tether keras.ops.floor_divide
 op_floor_divide <-
@@ -4913,7 +4913,7 @@ keras$ops$logical_or(x1, x2)
 #' @export
 #' @family numpy ops
 #' @family ops
-#' @seealso
+# @seealso
 #  + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/logical_xor>
 #' @tether keras.ops.logical_xor
 op_logical_xor <-
@@ -5117,7 +5117,7 @@ function (x, axis = NULL, keepdims = FALSE)
 #' @export
 #' @family numpy ops
 #' @family ops
-#' @seealso
+# @seealso
 #  + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/median>
 #' @tether keras.ops.median
 op_median <-
@@ -5650,7 +5650,7 @@ function (x, axis = NULL, keepdims = FALSE, dtype = NULL)
 #' @export
 #' @family numpy ops
 #' @family ops
-#' @seealso
+# @seealso
 #  + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/quantile>
 #' @tether keras.ops.quantile
 op_quantile <-

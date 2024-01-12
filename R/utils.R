@@ -84,7 +84,7 @@ function ()
 #'
 #' @export
 #' @family utils
-#' @seealso
+# @seealso
 #  + <https://www.tensorflow.org/api_docs/python/tf/keras/utils/get_source_inputs>
 #' @tether keras.utils.get_source_inputs
 get_source_inputs <-

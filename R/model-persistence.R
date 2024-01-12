@@ -54,7 +54,7 @@
 #'
 #' @export
 #' @tether keras.saving.save_model
-#' @seealso
+# @seealso
 #  + <https://www.tensorflow.org/api_docs/python/tf/keras/models/Model/save>
 save_model <-
 function (model, filepath = NULL, overwrite = FALSE, ...)
@@ -404,7 +404,7 @@ clear_registered_custom_objects <- function() {
 #'
 #' @exportS3Method tensorflow::export_savedmodel
 #' @tether keras.Model.export
-#' @seealso
+# @seealso
 #  + <https://www.tensorflow.org/api_docs/python/tf/keras/Model/export>
 export_savedmodel.keras.src.models.model.Model <- function(object, export_dir_base, ...) {
   object$export(export_dir_base, ...)
@@ -429,7 +429,7 @@ export_savedmodel.keras.src.models.model.Model <- function(object, export_dir_ba
 #' @export
 #' @family object registration saving
 #' @family saving
-#' @seealso
+# @seealso
 #  + <https://www.tensorflow.org/api_docs/python/tf/keras/utils/get_custom_objects>
 #' @tether keras.saving.get_custom_objects
 get_custom_objects <-
@@ -456,7 +456,7 @@ function ()
 #' @export
 #' @family object registration saving
 #' @family saving
-#' @seealso
+# @seealso
 #  + <https://www.tensorflow.org/api_docs/python/tf/keras/utils/get_registered_name>
 #' @tether keras.saving.get_registered_name
 get_registered_name <-
@@ -505,7 +505,7 @@ function (obj)
 #' @family object registration saving
 #' @family saving
 #' @family utils
-#' @seealso
+# @seealso
 #  + <https://www.tensorflow.org/api_docs/python/tf/keras/utils/get_registered_object>
 #' @tether keras.saving.get_registered_object
 get_registered_object <-

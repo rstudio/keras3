@@ -63,7 +63,7 @@ function (value = 0)
 #' @export
 #' @family constant initializers
 #' @family initializers
-#' @seealso
+# @seealso
 #  + <https://www.tensorflow.org/api_docs/python/tf/keras/initializers/IdentityInitializer>
 #' @tether keras.initializers.IdentityInitializer
 initializer_identity <-
@@ -161,7 +161,7 @@ function ()
 #' ```
 #'
 #' # Reference
-#' - [Glorot et al., 2010](http://proceedings.mlr.press/v9/glorot10a.html)
+#' - [Glorot et al., 2010](https://proceedings.mlr.press/v9/glorot10a.html)
 #'
 #' @param seed
 #' An integer or instance of
@@ -209,7 +209,7 @@ function (seed = NULL)
 #' ```
 #'
 #' # Reference
-#' - [Glorot et al., 2010](http://proceedings.mlr.press/v9/glorot10a.html)
+#' - [Glorot et al., 2010](https://proceedings.mlr.press/v9/glorot10a.html)
 #'
 #' @param seed
 #' An integer or instance of
@@ -372,7 +372,7 @@ function (seed = NULL)
 #' @export
 #' @family random initializers
 #' @family initializers
-#' @seealso
+# @seealso
 #  + <https://www.tensorflow.org/api_docs/python/tf/keras/initializers/LecunNormal>
 #' @tether keras.initializers.LecunNormal
 initializer_lecun_normal <-
@@ -419,7 +419,7 @@ function (seed = NULL)
 #' @export
 #' @family random initializers
 #' @family initializers
-#' @seealso
+# @seealso
 #  + <https://www.tensorflow.org/api_docs/python/tf/keras/initializers/LecunUniform>
 #' @tether keras.initializers.LecunUniform
 initializer_lecun_uniform <-
@@ -470,7 +470,7 @@ function (seed = NULL)
 #' @export
 #' @family random initializers
 #' @family initializers
-#' @seealso
+# @seealso
 #  + <https://www.tensorflow.org/api_docs/python/tf/keras/initializers/OrthogonalInitializer>
 #' @tether keras.initializers.OrthogonalInitializer
 initializer_orthogonal <-

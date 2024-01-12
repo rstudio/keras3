@@ -73,7 +73,7 @@ function (x, path, data_format = NULL, file_format = NULL, scale = TRUE,
 #' @export
 #' @family image utils
 #' @family utils
-#' @seealso
+# @seealso
 #  + <https://www.tensorflow.org/api_docs/python/tf/keras/utils/array_to_img>
 #' @tether keras.utils.array_to_img
 image_from_array <-

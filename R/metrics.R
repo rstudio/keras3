@@ -65,7 +65,7 @@
 #' @export
 #' @family losses
 #' @family metrics
-#' @seealso
+# @seealso
 #  + <https://www.tensorflow.org/api_docs/python/tf/keras/metrics/binary_focal_crossentropy>
 #'
 #' @tether keras.metrics.binary_focal_crossentropy
@@ -135,7 +135,7 @@ function (y_true, y_pred, apply_class_balancing = FALSE, alpha = 0.25,
 #' @export
 #' @family losses
 #' @family metrics
-#' @seealso
+# @seealso
 #  + <https://www.tensorflow.org/api_docs/python/tf/keras/metrics/categorical_focal_crossentropy>
 #'
 #' @tether keras.metrics.categorical_focal_crossentropy
@@ -193,7 +193,7 @@ function (y_true, y_pred, alpha = 0.25, gamma = 2, from_logits = FALSE,
 #' @export
 #' @family losses
 #' @family metrics
-#' @seealso
+# @seealso
 #  + <https://www.tensorflow.org/api_docs/python/tf/keras/metrics/huber>
 #'
 #' @tether keras.metrics.huber
@@ -244,7 +244,7 @@ function (y_true, y_pred, delta = 1)
 #' @export
 #' @family losses
 #' @family metrics
-#' @seealso
+# @seealso
 #  + <https://www.tensorflow.org/api_docs/python/tf/keras/metrics/log_cosh>
 #'
 #' @tether keras.metrics.log_cosh
@@ -1310,7 +1310,7 @@ function (..., thresholds = NULL, top_k = NULL, class_id = NULL,
 #' @export
 #' @family confusion metrics
 #' @family metrics
-#' @seealso
+# @seealso
 #  + <https://www.tensorflow.org/api_docs/python/tf/keras/metrics/RecallAtPrecision>
 #'
 #' @tether keras.metrics.RecallAtPrecision
@@ -1681,7 +1681,7 @@ function (..., thresholds = NULL, name = NULL, dtype = NULL)
 #' @export
 #' @family f score metrics
 #' @family metrics
-#' @seealso
+# @seealso
 #  + <https://www.tensorflow.org/api_docs/python/tf/keras/metrics/F1Score>
 #'
 #' @tether keras.metrics.F1Score
@@ -1763,7 +1763,7 @@ function (..., average = NULL, threshold = NULL, name = "f1_score",
 #' @export
 #' @family f score metrics
 #' @family metrics
-#' @seealso
+# @seealso
 #  + <https://www.tensorflow.org/api_docs/python/tf/keras/metrics/FBetaScore>
 #'
 #' @tether keras.metrics.FBetaScore
@@ -2068,7 +2068,7 @@ function (y_true, y_pred, ..., name = "squared_hinge",
 #' @export
 #' @family iou metrics
 #' @family metrics
-#' @seealso
+# @seealso
 #  + <https://www.tensorflow.org/api_docs/python/tf/keras/metrics/BinaryIoU>
 #'
 #' @tether keras.metrics.BinaryIoU
@@ -2169,7 +2169,7 @@ function (..., target_class_ids = list(0L, 1L), threshold = 0.5,
 #' @export
 #' @family iou metrics
 #' @family metrics
-#' @seealso
+# @seealso
 #  + <https://www.tensorflow.org/api_docs/python/tf/keras/metrics/IoU>
 #'
 #' @tether keras.metrics.IoU
@@ -2378,7 +2378,7 @@ function (..., num_classes, name = NULL, dtype = NULL, ignore_class = NULL,
 #' @export
 #' @family iou metrics
 #' @family metrics
-#' @seealso
+# @seealso
 #  + <https://www.tensorflow.org/api_docs/python/tf/keras/metrics/OneHotIoU>
 #'
 #' @tether keras.metrics.OneHotIoU
@@ -2479,7 +2479,7 @@ function (..., num_classes, target_class_ids, name = NULL, dtype = NULL,
 #' @export
 #' @family iou metrics
 #' @family metrics
-#' @seealso
+# @seealso
 #  + <https://www.tensorflow.org/api_docs/python/tf/keras/metrics/OneHotMeanIoU>
 #'
 #' @tether keras.metrics.OneHotMeanIoU
@@ -2969,7 +2969,7 @@ function (y_true, y_pred, from_logits = FALSE, ignore_class = NULL,
 #' @export
 #' @family reduction metrics
 #' @family metrics
-#' @seealso
+# @seealso
 #  + <https://www.tensorflow.org/api_docs/python/tf/keras/metrics/Mean>
 #'
 #' @tether keras.metrics.Mean
@@ -3017,7 +3017,7 @@ function (..., name = "mean", dtype = NULL)
 #' @export
 #' @family reduction metrics
 #' @family metrics
-#' @seealso
+# @seealso
 #  + <https://www.tensorflow.org/api_docs/python/tf/keras/metrics/MeanMetricWrapper>
 #'
 #' @tether keras.metrics.MeanMetricWrapper
@@ -3071,7 +3071,7 @@ function (..., fn, name = NULL, dtype = NULL)
 #' @export
 #' @family reduction metrics
 #' @family metrics
-#' @seealso
+# @seealso
 #  + <https://www.tensorflow.org/api_docs/python/tf/keras/metrics/Sum>
 #'
 #' @tether keras.metrics.Sum
@@ -3555,7 +3555,7 @@ function (y_true, y_pred, ..., name = "mean_squared_logarithmic_error",
 #' @export
 #' @family regression metrics
 #' @family metrics
-#' @seealso
+# @seealso
 #  + <https://www.tensorflow.org/api_docs/python/tf/keras/metrics/R2Score>
 #'
 #' @tether keras.metrics.R2Score
