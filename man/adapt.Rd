@@ -54,10 +54,7 @@ each subsequent call to \code{adapt()}.
 \if{html}{\out{<div class="sourceCode r">}}\preformatted{layer <- layer_normalization(axis = NULL)
 adapt(layer, c(0, 2))
 model <- keras_model_sequential() |> layer()
-predict(model, c(0, 1, 2)) # [1] -1  0  1
-}\if{html}{\out{</div>}}
-
-\if{html}{\out{<div class="sourceCode">}}\preformatted{## 1/1 - 0s - 24ms/step
+predict(model, c(0, 1, 2), verbose = FALSE) # [1] -1  0  1
 }\if{html}{\out{</div>}}
 
 \if{html}{\out{<div class="sourceCode">}}\preformatted{## [1] -1  0  1
@@ -65,10 +62,7 @@ predict(model, c(0, 1, 2)) # [1] -1  0  1
 
 \if{html}{\out{<div class="sourceCode r">}}\preformatted{adapt(layer, c(-1, 1))
 compile(model)  # This is needed to re-compile model.predict!
-predict(model, c(0, 1, 2)) # [1] 0 1 2
-}\if{html}{\out{</div>}}
-
-\if{html}{\out{<div class="sourceCode">}}\preformatted{## 1/1 - 0s - 23ms/step
+predict(model, c(0, 1, 2), verbose = FALSE) # [1] 0 1 2
 }\if{html}{\out{</div>}}
 
 \if{html}{\out{<div class="sourceCode">}}\preformatted{## [1] 0 1 2

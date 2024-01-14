@@ -52,7 +52,7 @@ Suggests:
     rstudioapi,
     R6,
     jpeg
-RoxygenNote: 7.2.3.9000
+RoxygenNote: 7.3.0
 VignetteBuilder: knitr
 Remotes:
     rstudio/tensorflow,

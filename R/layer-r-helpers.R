@@ -203,11 +203,11 @@ set_vocabulary <- function(object, vocabulary, idf_weights=NULL, ...) {
 #' layer <- layer_normalization(axis = NULL)
 #' adapt(layer, c(0, 2))
 #' model <- keras_model_sequential() |> layer()
-#' predict(model, c(0, 1, 2)) # [1] -1  0  1
+#' predict(model, c(0, 1, 2), verbose = FALSE) # [1] -1  0  1
 #'
 #' adapt(layer, c(-1, 1))
 #' compile(model)  # This is needed to re-compile model.predict!
-#' predict(model, c(0, 1, 2)) # [1] 0 1 2
+#' predict(model, c(0, 1, 2), verbose = FALSE) # [1] 0 1 2
 #' ````
 #'
 #' `tfdatasets` example with multiple adapts:

@@ -517,9 +517,13 @@ function(cl, modifiers = NULL, ignore = NULL,
 #' @importFrom rlang list2
 capture_args <- function(modifiers = NULL, ignore = NULL, force = NULL,
                          enforce_all_dots_named = TRUE) {
-  cl <- sys.call(-1L)
+  call <- sys.call(-1L)
   envir <- parent.frame(1L)
   fn <- sys.function(-1L)
+  # if("capture_args" %in% all.names(call, unique = TRUE))
+  #   stop("incorrect usage of capture_args(), must be evaluated as ",
+  #        "a standard expression, not as not a promise (i.e., not as part ",
+  #         "of a call of another function")
 
   # match.call() automatically omits missing() args in the returned call. These
   # user calls all standardize to the same thing:
@@ -529,10 +533,12 @@ capture_args <- function(modifiers = NULL, ignore = NULL, force = NULL,
   # - layer_dense(, 10, )
   # all standardize to:
   # - layer_dense(units = 10)
-  cl <- match.call(fn, cl, expand.dots = TRUE, envir = parent.frame(2))
+  call <- match.call(fn, call, expand.dots = TRUE, envir = parent.frame(2))
+
+  # message("call: ", deparse1(call))
 
   fn_arg_nms <- names(formals(fn))
-  known_args <- intersect(names(cl), fn_arg_nms)
+  known_args <- intersect(names(call), fn_arg_nms)
   if (length(ignore) && !is.character(ignore)) {
     # e.g., ignore = c("object", \(nms) startsWith(nms, "."))
     ignore <- as.character(unlist(lapply(ignore, function(ig) {
@@ -550,7 +556,7 @@ capture_args <- function(modifiers = NULL, ignore = NULL, force = NULL,
 
   if ("..." %in% fn_arg_nms && !"..." %in% ignore) {
     if (enforce_all_dots_named)
-      assert_all_dots_named(envir, cl)
+      assert_all_dots_named(envir, call)
     # match.call already drops missing args that match to known args, but it
     # doesn't protect from missing args that matched into ...
     # use list2() to allow dropping a trailing missing arg in ... also
@@ -563,13 +569,13 @@ capture_args <- function(modifiers = NULL, ignore = NULL, force = NULL,
 
   # this might reorder args by assuming ... are last, but it doesn't matter
   # since everything is supplied as a keyword arg to the Python side anyway
-  cl <- as.call(c(list_sym, lapply(known_args, as.symbol), dots))
-  args <- eval(cl, envir)
+  call <- as.call(c(list_sym, lapply(known_args, as.symbol), dots))
+  args <- eval(call, envir)
 
   # filter out ignore again, in case any were in ...
-  # we could probably enhance the `cl` constructed above to use, e.g.,
+  # we could probably enhance the `call` constructed above to use, e.g.,
   # ..1, ..2, ..4, to skip ignores, and avoid forcing them.
-  if (length(ignores_in_dots <- intersect(names(cl), ignore)))
+  if (length(ignores_in_dots <- intersect(names(call), ignore)))
     args[ignores_in_dots] <- NULL
 
   # apply modifier functions. e.g., as_nullable_integer()

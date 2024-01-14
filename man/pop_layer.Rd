@@ -2,15 +2,15 @@
 % Please edit documentation in R/model-creation.R
 \name{pop_layer}
 \alias{pop_layer}
-\title{Remove the last layer in a model}
+\title{Remove the last layer in a Sequential model}
 \usage{
 pop_layer(object)
 }
 \arguments{
-\item{object}{Keras model object}
+\item{object}{Sequential keras model object}
 }
 \description{
-Remove the last layer in a model
+Remove the last layer in a Sequential model
 }
 \seealso{
 Other model functions: 

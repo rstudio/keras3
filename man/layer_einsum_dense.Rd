@@ -127,7 +127,6 @@ Other core layers:
 \code{\link{layer_dense}()},
 \code{\link{layer_embedding}()},
 \code{\link{layer_identity}()},
-\code{\link{layer_input}()},
 \code{\link{layer_lambda}()},
 \code{\link{layer_masking}()}
 
@@ -188,7 +187,6 @@ Other layers:
 \code{\link{layer_hashed_crossing}()},
 \code{\link{layer_hashing}()},
 \code{\link{layer_identity}()},
-\code{\link{layer_input}()},
 \code{\link{layer_integer_lookup}()},
 \code{\link{layer_lambda}()},
 \code{\link{layer_layer_normalization}()},

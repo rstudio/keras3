@@ -7,37 +7,37 @@
 keras_model(inputs, outputs = NULL, ...)
 }
 \arguments{
-\item{inputs}{Input layer}
+\item{inputs}{Input tensor(s) (from \code{\link[=keras_input]{keras_input()}})}
 
-\item{outputs}{Output layer}
+\item{outputs}{Output tensors (from calling layers with \code{inputs})}
 
 \item{...}{Any additional arguments}
 }
 \description{
 A model is a directed acyclic graph of layers.
 }
-\examples{
-\dontrun{
-library(keras3)
+\section{Examples}{
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{library(keras3)
 
-# input layer
-inputs <- layer_input(shape = c(784))
+# input tensor
+inputs <- keras_input(shape = c(784))
 
 # outputs compose input + dense layers
-predictions <- inputs \%>\%
-  layer_dense(units = 64, activation = 'relu') \%>\%
-  layer_dense(units = 64, activation = 'relu') \%>\%
+predictions <- inputs |>
+  layer_dense(units = 64, activation = 'relu') |>
+  layer_dense(units = 64, activation = 'relu') |>
   layer_dense(units = 10, activation = 'softmax')
 
 # create and compile model
 model <- keras_model(inputs = inputs, outputs = predictions)
-model \%>\% compile(
+model |> compile(
   optimizer = 'rmsprop',
   loss = 'categorical_crossentropy',
   metrics = c('accuracy')
 )
+}\if{html}{\out{</div>}}
 }
-}
+
 \seealso{
 Other model functions: 
 \code{\link{get_config}()},
@@ -47,6 +47,7 @@ Other model functions:
 \code{\link{summary.keras.src.models.model.Model}()}
 
 Other model creation: 
+\code{\link{keras_input}()},
 \code{\link{keras_model_sequential}()}
 }
 \concept{model creation}
