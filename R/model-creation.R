@@ -39,86 +39,6 @@ keras_model <- function(inputs, outputs = NULL, ...) {
 
 #' Keras Model composed of a linear stack of layers
 #'
-#' @inheritParams sequential_model_input_layer
-#' @param layers List of layers to add to the model
-#' @param name Name of model
-# @inheritDotParams sequential_model_input_layer
-#'
-#' @note
-#'
-#' If any arguments are provided to `...`, then the sequential model is
-#' initialized with a `InputLayer` instance. If not, then the model layer
-#' shapes, including the final model output shape, will not be available until
-#' the model is built, either by calling the model with an input tensor/array
-#' like `model(input)`, (possibly via `fit()`/`evaluate()`/`predict()`), or by
-#' explicitly calling `model$build(input_shape)`.
-#'
-#' @family model functions
-#'
-#' @examples
-#' \dontrun{
-#'
-#' library(keras3)
-#'
-#' model <- keras_model_sequential()
-#' model %>%
-#'   layer_dense(units = 32, input_shape = c(784)) %>%
-#'   layer_activation('relu') %>%
-#'   layer_dense(units = 10) %>%
-#'   layer_activation('softmax')
-#'
-#' model %>% compile(
-#'   optimizer = 'rmsprop',
-#'   loss = 'categorical_crossentropy',
-#'   metrics = c('accuracy')
-#' )
-#'
-#' # alternative way to provide input shape
-#' model <- keras_model_sequential(input_shape = c(784)) %>%
-#'   layer_dense(units = 32) %>%
-#'   layer_activation('relu') %>%
-#'   layer_dense(units = 10) %>%
-#'   layer_activation('softmax')
-#'
-#' }
-#' @export
-#' @family model creation
-#' @tether keras.Sequential
-keras_model_sequential <-
-function(input_shape = NULL, name = NULL,
-         ...,
-         input_batch_size = NULL,
-         input_dtype = NULL,
-         input_sparse = NULL,
-         input_batch_shape = NULL,
-         input_name = NULL,
-         input_tensor = NULL,
-         layers = list())
-{
-  input_layer_args <- capture_args(ignore = c("layers", "name"))
-  input_layer_args <- drop_nulls(input_layer_args)
-
-  if (length(input_layer_args)) {
-    # check if first positional arg is actually intended to be `layers`,
-    # throw a nicer error message
-    if(is_layer(input_shape) ||
-       (is.list(input_shape) && any(map_lgl(input_shape, is_layer))))
-      stop("`layers` must be passed in as a named argument.")
-
-    prepend(layers) <- do.call(sequential_model_input_layer, input_layer_args)
-  }
-
-  if (!is.null(layers) && !is.list(layers))
-    layers <- list(layers)
-
-  keras$models$Sequential(layers = layers, name = name)
-}
-
-
-
-
-#' `sequential_model_input_layer`
-#'
 #' @param input_shape
 #' A shape integer vector,
 #' not including the batch size.
@@ -126,6 +46,8 @@ function(input_shape = NULL, name = NULL,
 #' will be batches of 32-dimensional vectors. Elements of this shape
 #' can be `NA`; `NA` elements represent dimensions where the shape
 #' is not known and may vary (e.g. sequence length).
+#'
+#' @param name Name of model
 #'
 #' @param input_batch_size Optional static batch size (integer).
 #'
@@ -155,9 +77,81 @@ function(input_shape = NULL, name = NULL,
 #'
 #' @param ... additional arguments passed on to `keras.layers.InputLayer`.
 #'
-#' @keywords internal
+#' @param layers List of layers to add to the model
+#'
+#' @param trainable Boolean, whether the model's variables should be trainable.
+#'   You can also change the trainable status of a model/layer with
+#'   [`freeze_weights()`] and [`unfreeze_weights()`].
+#'
+#' @note
+#'
+#' If `input_shape` is omitted, then the model layer
+#' shapes, including the final model output shape, will not be known until
+#' the model is built, either by calling the model with an input tensor/array
+#' like `model(input)`, (possibly via `fit()`/`evaluate()`/`predict()`), or by
+#' explicitly calling `model$build(input_shape)`.
+#'
+#' @details
+#'
+#' # Examples
+#'
+#' ```{r}
+#' model <- keras_model_sequential(input_shape = c(784))
+#' model |>
+#'   layer_dense(units = 32) |>
+#'   layer_activation('relu') |>
+#'   layer_dense(units = 10) |>
+#'   layer_activation('softmax')
+#'
+#' model |> compile(
+#'   optimizer = 'rmsprop',
+#'   loss = 'categorical_crossentropy',
+#'   metrics = c('accuracy')
+#' )
+#'
+#' model
+#' ```
+#'
+#' @export
+#' @family model functions
+#' @family model creation
+#' @tether keras.Sequential
+keras_model_sequential <-
+function(input_shape = NULL, name = NULL,
+         ...,
+         input_dtype = NULL,
+         input_batch_size = NULL,
+         input_sparse = NULL,
+         input_batch_shape = NULL,
+         input_name = NULL,
+         input_tensor = NULL,
+         trainable = TRUE,
+         layers = list())
+{
+  args <- capture_args(list(layers = as_list))
+
+  Sequental_arg_names <- c("layers", "name", "trainable")
+  Sequental_args <- args[intersect(names(args), Sequental_arg_names)]
+  InputLayer_args <- args[setdiff(names(args), Sequental_arg_names)]
+
+  if (length(InputLayer_args)) {
+    # If we received `layers` for the first positional arg, throw a nicer error
+    # message. (The first positional arg used to be `layers`.)
+    if (is_layer(input_shape) ||
+        (is.list(input_shape) && any(map_lgl(input_shape, is_layer))))
+      stop("`layers` must be passed in as a named argument.")
+
+    prepend(Sequental_args$layers) <- do.call(InputLayer, InputLayer_args)
+  }
+
+  do.call(keras$models$Sequential, Sequental_args)
+}
+
+
+
+
 #' @tether keras.layers.InputLayer
-sequential_model_input_layer <-
+InputLayer <-
 function(input_shape = NULL,
          ...,
          input_batch_size = NULL,
@@ -256,9 +250,9 @@ get_layer <- function(object, name = NULL, index = NULL) {
 }
 
 
-#' Remove the last layer in a model
+#' Remove the last layer in a Sequential model
 #'
-#' @param object Keras model object
+#' @param object Sequential keras model object
 #'
 #' @family model functions
 #'
@@ -266,4 +260,7 @@ get_layer <- function(object, name = NULL, index = NULL) {
 pop_layer <- function(object) {
   object$pop()
 }
+
+
+
 
