@@ -762,4 +762,4 @@ if (getRversion() < "4.0")
 
 
 # don't dispatch to as.list(), just wrap in list()
-wrap_as_list <- function(x) if(is.null(x) || is.list(x)) x else list(x)
+as_list <- function(x) if (is.null(x) || is.list(x)) x else list(x)

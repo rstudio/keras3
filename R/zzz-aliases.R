@@ -33,6 +33,8 @@ new_model_class <- Model
 #' @eval .alias_roxygen("new_learning_rate_schedule_class", "LearningRateSchedule")
 new_learning_rate_schedule_class <- LearningRateSchedule
 
-
 #' @eval .alias_roxygen("mark_active", "active_property")
 mark_active <- active_property
+
+#' @eval .alias_roxygen("layer_input", "keras_input")
+layer_input <- keras_input
