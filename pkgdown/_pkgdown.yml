@@ -89,6 +89,7 @@ reference:
     contents:
       - compile.keras.src.models.model.Model
       - fit.keras.src.models.model.Model
+      - plot.keras_training_history
       - predict.keras.src.models.model.Model
       - evaluate.keras.src.models.model.Model
       - train_on_batch
@@ -96,22 +97,26 @@ reference:
       - test_on_batch
       - freeze_weights
 
-  - subtitle: "Inspect Models"
+  - subtitle: "Inspect and Modify Models"
     contents:
       - summary.keras.src.models.model.Model
+      - plot.keras.src.models.model.Model
       - get_config
       - get_weights
       - get_layer
       - pop_layer
 
-  - subtitle: "Save & Load Models"
+  - subtitle: "Save and Load Models"
     contents:
       - save_model
-      - export_savedmodel.keras.src.models.model.Model
+      - load_model
       - save_model_weights
-      - save_model_config
       - load_model_weights
-      - has_concept("saving")
+      - save_model_config
+      - load_model_config
+      - export_savedmodel.keras.src.models.model.Model
+      - layer_tfsm
+      - register_keras_serializable
 
 
   - title: "Layers"
@@ -123,8 +128,6 @@ reference:
   - subtitle: "Reshaping Layers"
     contents:
       - has_concept("reshaping layers")
-      # - has_concept("zero reshaping layers") # layer_zero_padding_2d
-      # - has_concept("up reshaping layers")  # upsampling
 
   - subtitle: "Convolutional Layers"
     contents:
@@ -133,12 +136,6 @@ reference:
   - subtitle: "Pooling Layers"
     contents:
       - has_concept("pooling layers")
-      # - has_concept("average pooling layers")
-      # - has_concept("average global pooling layers")
-      # - has_concept("global pooling layers")
-      # - has_concept("max pooling layers")
-      # - has_concept("max global pooling layers")
-
 
   - subtitle: "Activation Layers"
     contents:
@@ -148,10 +145,11 @@ reference:
   - subtitle: "Recurrent Layers"
     contents:
       - has_concept("rnn layers")
+      - reset_state
       # - has_concept("conv rnn layers")
       # - has_concept("recurrent layers")
 
-  - subtitle: "preprocessing Layers"
+  - subtitle: "Preprocessing Layers"
     contents:
       - has_concept("preprocessing layers")
       # - has_concept("random preprocessing layers")
@@ -178,34 +176,153 @@ reference:
   #   contents:
   #     - starts_with("layer_")
 
-  - title: "Layer Methods"
+  - subtitle: "Custom Layers"
+    contents:
+      - layer_lambda
+      - Layer
+      # - create_layer_wrapper
+      # - create_layer
+
+  - subtitle: "Layer Methods"
     contents:
       - get_config
       - get_weights
       - count_params
       - reset_state
 
-  - title: "Custom Layers"
-    contents:
-      - "%py_class%"
-      - Layer
-      # - create_layer_wrapper
-      # - create_layer
 
-
-  - title: "Datasets"
+  - title: "Losses"
     contents:
-      - starts_with("dataset_")
+      - loss_mean_squared_error
+      - starts_with("loss_")
+      - Loss
+
+  - title: "Metrics"
+    contents:
+      - starts_with("metric_")
+      - custom_metric
+      - Metric
+      - reset_state
+
 
   - title: "Applications"
-    contents:
-      - starts_with("application_")
 
-  - title: "Sequence Preprocessing"
+  - subtitle: "Application utilities"
+  - contents:
+    - application_preprocess_inputs
+
+  - subtitle: "ConvNeXt Applications"
+    contents: [starts_with("application_convnext")]
+
+  - subtitle: "Densenet Applications"
+    contents: [starts_with("application_densenet")]
+
+  - subtitle: "EfficientNet Applications"
+    contents: [starts_with("application_efficientnet")]
+
+  - subtitle: "Inception Applications"
+    contents: [starts_with("application_inception")]
+
+  - subtitle: "MobileNet Applications"
+    contents: [starts_with("application_mobilenet")]
+
+  - subtitle: "NASNet Applications"
+    contents: [starts_with("application_nasnet")]
+
+  - subtitle: "ResNet Applications"
+    contents: [starts_with("application_resnet")]
+
+  - subtitle: "VGG Applications"
+    contents: [starts_with("application_vgg")]
+
+  - subtitle: "Xception Applications"
+    contents: [starts_with("application_xception")]
+
+
+  - title: "Data Loading"
+    desc: >
+      Keras data loading utilities help you quickly go from raw data to a TF `Dataset` object
+      that can be used to efficiently train a model. These loading utilites can be
+      combined with preprocessing layers to futher transform your input dataset before training.
+
     contents:
-      - pad_sequences
+    - image_dataset_from_directory
+    - text_dataset_from_directory
+    - audio_dataset_from_directory
+    - timeseries_dataset_from_array
+
+  - title: "Preprocessing layers"
+
+  - subtitle: "Text preprocessing"
+    contents:
+    - layer_text_vectorization
+
+  - subtitle: Numerical features preprocessing layers
+    contents:
+
+    - layer_normalization
+    - layer_discretization
+
+  - subtitle: Categorical features preprocessing layers
+    contents:
+    - layer_category_encoding
+    - layer_hashing
+    - layer_hashed_crossing
+    - layer_string_lookup
+    - layer_integer_lookup
+
+  - subtitle: Image preprocessing layers
+    contents:
+    - layer_resizing
+    - layer_rescaling
+    - layer_center_crop
+
+  - subtitle: Image augmentation layers
+    contents:
+    - layer_random_crop
+    - layer_random_flip
+    - layer_random_translation
+    - layer_random_rotation
+    - layer_random_zoom
+    - layer_random_contrast
+    - layer_random_brightness
+
+  # - title: "Data loading"
+  #   desc: >
+  #     Keras data loading utilities, help you go from raw data on disk to a TF `Dataset` object
+  #     that can be used to efficiently train a model. These loading utilites can be
+  #     combined with preprocessing layers to futher transform your input dataset before training.
+
+  # - subtitle: Image data loading
+  #   contents:
+  #   - image_dataset_from_directory
+  #   - load_img
+  #   - img_to_array
+  #   - save_img
+
+  # - subtitle: Timeseries data loading
+  #   contents:
+  #   - timeseries_dataset_from_array
+  #   - pad_sequences
+
+  # - subtitle: Text data loading
+  #   - text_dataset_from_directory
+
+  # - subtitle: Audio data loading
+  #   - audio_dataset_from_directory
+
+
+
+  - title: "Data Preprocessing"
+
+  - subtitle: "Preprocess application inputs"
+  - contents:
+    - application_preprocess_inputs
+
+  - subtitle: "Sequence Preprocessing"
+    contents:
       - timeseries_dataset_from_array
-
+      - pad_sequences
 
 
   - title: "Text Preprocessing"
@@ -229,13 +346,23 @@ reference:
   - title: "Image Preprocessing"
     contents:
       - starts_with("image_")
-      - starts_with("k_image_")
+      - starts_with("op_image_")
       # - image_data_generator
       # - fit_image_data_generator
       # - flow_images_from_data
       # - flow_images_from_directory
       # - flow_images_from_dataframe
       # - generator_next
+
+  - subtitle: "Preprocessing Layers"
+    contents:
+      - has_concept("preprocessing layers")
+
+
+  - title: "Builtin small datasets"
+    contents:
+      - starts_with("dataset_")
+
 
   - title: "Optimizers"
     contents:
@@ -246,7 +373,6 @@ reference:
     contents:
       - starts_with("learning_rate_schedule_")
       - LearningRateSchedule
-      - new_learning_rate_schedule_class
 
   - title: "Callbacks"
     contents:
@@ -264,9 +390,17 @@ reference:
       - has_concept("constraints")
       - Constraint
 
+  - title: "Regularizers"
+    contents:
+      - starts_with("regularizer")
+
+  - title: "Activations"
+    contents:
+      - starts_with("activation")
+      - activation_relu
+
   - title: "Utils"
     contents:
-
       - has_concept("utils")
       - plot.keras_training_history
       - plot.keras.src.models.model.Model
@@ -284,27 +418,15 @@ reference:
       - use_backend
       - shape
 
-  - title: "Losses"
-    contents:
-      - loss_mean_squared_error
-      - starts_with("loss_")
-      - Loss
-
-  - title: "Metrics"
-    contents:
-      - Metric
-      - starts_with("metric_")
-      - custom_metric
-      - new_metric_class
-
-  - title: "Regularizers"
-    contents:
-      - starts_with("regularizer")
-
-  - title: "Activations"
-    contents:
-      - starts_with("activation")
-      - activation_relu
+  - subtitle: "Serialization Utilities"
+  - contents:
+    - register_keras_serializable
+    - get_custom_objects
+    - get_registered_name
+    - get_registered_object
+    - serialize_keras_object
+    - deserialize_keras_object
+    - config_enable_unsafe_deserialization
 
   - title: "Misc other layers"
     contents:
@@ -355,8 +477,6 @@ reference:
   - title: "Python"
     contents:
       - keras
-      - "%py_class%"
-      - "%<-active%"
 
   - title: "Advanced"
     contents:
