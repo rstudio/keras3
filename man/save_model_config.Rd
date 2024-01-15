@@ -3,7 +3,7 @@
 \name{save_model_config}
 \alias{save_model_config}
 \alias{load_model_config}
-\title{Save Model configuration as JSON}
+\title{Save and load model configuration as JSON}
 \usage{
 save_model_config(model, filepath = NULL, overwrite = FALSE)
 
@@ -52,7 +52,14 @@ stopifnot(exprs = \{
 }\if{html}{\out{</div>}}
 }
 \seealso{
-Other model persistence: 
-\code{\link{get_weights}()}
+Other saving and loading functions: 
+\code{\link{export_savedmodel.keras.src.models.model.Model}()},
+\code{\link{layer_tfsm}()},
+\code{\link{load_model_weights}()},
+\code{\link{load_model}()},
+\code{\link{register_keras_serializable}()},
+\code{\link{save_model_weights}()},
+\code{\link{save_model}()},
+\code{\link{with_custom_object_scope}()}
 }
-\concept{model persistence}
+\concept{saving and loading functions}

@@ -13,7 +13,7 @@ get_registered_object(name, custom_objects = NULL, module_objects = NULL)
 Generally, custom_objects is provided by the user.}
 
 \item{module_objects}{A named list of custom objects to look the name up in.
-Generally, module_objects is provided by midlevel library
+Generally, \code{module_objects} is provided by midlevel library
 implementers.}
 }
 \value{
@@ -37,51 +37,12 @@ serialization/deserialization.
 }
 
 \seealso{
-Other object registration saving: 
-\code{\link{clear_registered_custom_objects}()},
-\code{\link{get_registered_name}()},
-\code{\link{register_keras_serializable}()}
-
-Other saving: 
-\code{\link{clear_registered_custom_objects}()},
-\code{\link{config_enable_unsafe_deserialization}()},
+Other serialization utilities: 
 \code{\link{deserialize_keras_object}()},
+\code{\link{get_custom_objects}()},
 \code{\link{get_registered_name}()},
-\code{\link{layer_tfsm}()},
-\code{\link{load_model}()},
 \code{\link{register_keras_serializable}()},
-\code{\link{serialize_keras_object}()}
-
-Other utils: 
-\code{\link{audio_dataset_from_directory}()},
-\code{\link{clear_session}()},
-\code{\link{config_disable_interactive_logging}()},
-\code{\link{config_disable_traceback_filtering}()},
-\code{\link{config_enable_interactive_logging}()},
-\code{\link{config_enable_traceback_filtering}()},
-\code{\link{config_is_interactive_logging_enabled}()},
-\code{\link{config_is_traceback_filtering_enabled}()},
-\code{\link{get_file}()},
-\code{\link{get_source_inputs}()},
-\code{\link{image_array_save}()},
-\code{\link{image_dataset_from_directory}()},
-\code{\link{image_from_array}()},
-\code{\link{image_load}()},
-\code{\link{image_smart_resize}()},
-\code{\link{image_to_array}()},
-\code{\link{layer_feature_space}()},
-\code{\link{layer_torch_module_wrapper}()},
-\code{\link{model_to_dot}()},
-\code{\link{normalize}()},
-\code{\link{pack_x_y_sample_weight}()},
-\code{\link{pad_sequences}()},
-\code{\link{set_random_seed}()},
-\code{\link{split_dataset}()},
-\code{\link{text_dataset_from_directory}()},
-\code{\link{timeseries_dataset_from_array}()},
-\code{\link{to_categorical}()},
-\code{\link{unpack_x_y_sample_weight}()}
+\code{\link{serialize_keras_object}()},
+\code{\link{with_custom_object_scope}()}
 }
-\concept{object registration saving}
-\concept{saving}
-\concept{utils}
+\concept{serialization utilities}

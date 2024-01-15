@@ -2,7 +2,7 @@
 % Please edit documentation in R/model-persistence.R
 \name{load_model}
 \alias{load_model}
-\title{Loads a model saved via \code{model.save()}.}
+\title{Loads a model saved via \code{save_model()}.}
 \usage{
 load_model(model, custom_objects = NULL, compile = TRUE, safe_mode = TRUE)
 }
@@ -27,7 +27,7 @@ and the argument \code{compile = TRUE} is set, then the returned model
 will be compiled. Otherwise, the model will be left uncompiled.
 }
 \description{
-Loads a model saved via \code{model.save()}.
+Loads a model saved via \code{save_model()}.
 }
 \section{Examples}{
 \if{html}{\out{<div class="sourceCode r">}}\preformatted{model <- keras_model_sequential(input_shape = c(3)) |>
@@ -56,14 +56,14 @@ access specific variables, e.g. \code{model |> get_layer("dense_1") |> _$kernel}
 \item \url{https://keras.io/api/models/model_saving_apis/model_saving_and_loading#loadmodel-function}
 }
 
-Other saving: 
-\code{\link{clear_registered_custom_objects}()},
-\code{\link{config_enable_unsafe_deserialization}()},
-\code{\link{deserialize_keras_object}()},
-\code{\link{get_registered_name}()},
-\code{\link{get_registered_object}()},
+Other saving and loading functions: 
+\code{\link{export_savedmodel.keras.src.models.model.Model}()},
 \code{\link{layer_tfsm}()},
+\code{\link{load_model_weights}()},
 \code{\link{register_keras_serializable}()},
-\code{\link{serialize_keras_object}()}
+\code{\link{save_model_config}()},
+\code{\link{save_model_weights}()},
+\code{\link{save_model}()},
+\code{\link{with_custom_object_scope}()}
 }
-\concept{saving}
+\concept{saving and loading functions}

@@ -2,7 +2,7 @@
 % Please edit documentation in R/model-persistence.R
 \name{serialize_keras_object}
 \alias{serialize_keras_object}
-\title{Retrieve the config list by serializing the Keras object.}
+\title{Retrieve the full config by serializing the Keras object.}
 \usage{
 serialize_keras_object(obj)
 }
@@ -20,21 +20,19 @@ deserialized from the config via \code{deserialize_keras_object()}.
 \code{serialize_keras_object()} serializes a Keras object to a named list
 that represents the object, and is a reciprocal function of
 \code{deserialize_keras_object()}. See \code{deserialize_keras_object()} for more
-information about the config format.
+information about the full config format.
 }
 \seealso{
 \itemize{
 \item \url{https://keras.io/api/models/model_saving_apis/serialization_utils#serializekerasobject-function}
 }
 
-Other saving: 
-\code{\link{clear_registered_custom_objects}()},
-\code{\link{config_enable_unsafe_deserialization}()},
+Other serialization utilities: 
 \code{\link{deserialize_keras_object}()},
+\code{\link{get_custom_objects}()},
 \code{\link{get_registered_name}()},
 \code{\link{get_registered_object}()},
-\code{\link{layer_tfsm}()},
-\code{\link{load_model}()},
-\code{\link{register_keras_serializable}()}
+\code{\link{register_keras_serializable}()},
+\code{\link{with_custom_object_scope}()}
 }
-\concept{saving}
+\concept{serialization utilities}

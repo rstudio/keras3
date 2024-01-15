@@ -91,12 +91,12 @@
           
           <code><a href="keras_model.html">keras_model()</a></code> 
         </dt>
-        <dd>Keras Model</dd>
+        <dd>Keras Model (Functional API)</dd>
       </dl><dl><dt>
           
           <code><a href="keras_input.html">keras_input()</a></code> 
         </dt>
-        <dd>Used to instantiate a Keras tensor.</dd>
+        <dd>Create a Keras tensor (Functional API input).</dd>
       </dl><dl><dt>
           
           <code><a href="clone_model.html">clone_model()</a></code> 
@@ -130,6 +130,11 @@
         <dd>Train a model for a fixed number of epochs (dataset iterations).</dd>
       </dl><dl><dt>
           
+          <code><a href="plot.keras_training_history.html">plot(<i>&lt;keras_training_history&gt;</i>)</a></code> 
+        </dt>
+        <dd>Plot training history</dd>
+      </dl><dl><dt>
+          
           <code><a href="predict.keras.src.models.model.Model.html">predict(<i>&lt;keras.src.models.model.Model&gt;</i>)</a></code> 
         </dt>
         <dd>Generates output predictions for the input samples.</dd>
@@ -160,7 +165,7 @@
         <dd>Freeze and unfreeze weights</dd>
       </dl></div><div class="section level2">
       
-      <h3 id="inspect-models">Inspect Models<a class="anchor" aria-label="anchor" href="#inspect-models"></a></h3>
+      <h3 id="inspect-and-modify-models">Inspect and Modify Models<a class="anchor" aria-label="anchor" href="#inspect-and-modify-models"></a></h3>
       
 
       
@@ -174,6 +179,11 @@
           <code><a href="summary.keras.src.models.model.Model.html">summary(<i>&lt;keras.src.models.model.Model&gt;</i>)</a></code> <code><a href="summary.keras.src.models.model.Model.html">format(<i>&lt;keras.src.models.model.Model&gt;</i>)</a></code> <code><a href="summary.keras.src.models.model.Model.html">print(<i>&lt;keras.src.models.model.Model&gt;</i>)</a></code> 
         </dt>
         <dd>Print a summary of a Keras Model</dd>
+      </dl><dl><dt>
+          
+          <code><a href="plot.keras.src.models.model.Model.html">plot(<i>&lt;keras.src.models.model.Model&gt;</i>)</a></code> 
+        </dt>
+        <dd>Plot a Keras model</dd>
       </dl><dl><dt>
           
           <code><a href="get_config.html">get_config()</a></code> <code><a href="get_config.html">from_config()</a></code> 
@@ -196,7 +206,7 @@
         <dd>Remove the last layer in a Sequential model</dd>
       </dl></div><div class="section level2">
       
-      <h3 id="save-load-models">Save &amp; Load Models<a class="anchor" aria-label="anchor" href="#save-load-models"></a></h3>
+      <h3 id="save-and-load-models">Save and Load Models<a class="anchor" aria-label="anchor" href="#save-and-load-models"></a></h3>
       
 
       
@@ -212,9 +222,9 @@
         <dd>Saves a model as a <code>.keras</code> file.</dd>
       </dl><dl><dt>
           
-          <code><a href="export_savedmodel.keras.src.models.model.Model.html">export_savedmodel(<i>&lt;keras.src.models.model.Model&gt;</i>)</a></code> 
+          <code><a href="load_model.html">load_model()</a></code> 
         </dt>
-        <dd>[TF backend only] Create a TF SavedModel artifact for inference</dd>
+        <dd>Loads a model saved via <code><a href="../reference/save_model.html">save_model()</a></code>.</dd>
       </dl><dl><dt>
           
           <code><a href="save_model_weights.html">save_model_weights()</a></code> 
@@ -222,59 +232,29 @@
         <dd>Saves all layer weights to a <code>.weights.h5</code> file.</dd>
       </dl><dl><dt>
           
-          <code><a href="save_model_config.html">save_model_config()</a></code> <code><a href="save_model_config.html">load_model_config()</a></code> 
-        </dt>
-        <dd>Save Model configuration as JSON</dd>
-      </dl><dl><dt>
-          
           <code><a href="load_model_weights.html">load_model_weights()</a></code> 
         </dt>
         <dd>Load weights from a file saved via <code><a href="../reference/save_model_weights.html">save_model_weights()</a></code>.</dd>
       </dl><dl><dt>
           
-          <code><a href="config_enable_unsafe_deserialization.html">config_enable_unsafe_deserialization()</a></code> 
+          <code><a href="save_model_config.html">save_model_config()</a></code> <code><a href="save_model_config.html">load_model_config()</a></code> 
         </dt>
-        <dd>Disables safe mode globally, allowing deserialization of lambdas.</dd>
+        <dd>Save and load model configuration as JSON</dd>
       </dl><dl><dt>
           
-          <code><a href="deserialize_keras_object.html">deserialize_keras_object()</a></code> 
+          <code><a href="export_savedmodel.keras.src.models.model.Model.html">export_savedmodel(<i>&lt;keras.src.models.model.Model&gt;</i>)</a></code> 
         </dt>
-        <dd>Retrieve the object by deserializing the config dict.</dd>
-      </dl><dl><dt>
-          
-          <code><a href="get_custom_objects.html">clear_registered_custom_objects()</a></code> <code><a href="get_custom_objects.html">get_custom_objects()</a></code> 
-        </dt>
-        <dd>Retrieves a live reference to the global list of custom objects (a Python dictionary).</dd>
-      </dl><dl><dt>
-          
-          <code><a href="get_registered_name.html">get_registered_name()</a></code> 
-        </dt>
-        <dd>Returns the name registered to an object within the Keras framework.</dd>
-      </dl><dl><dt>
-          
-          <code><a href="get_registered_object.html">get_registered_object()</a></code> 
-        </dt>
-        <dd>Returns the class associated with <code>name</code> if it is registered with Keras.</dd>
+        <dd>[TF backend only] Create a TF SavedModel artifact for inference</dd>
       </dl><dl><dt>
           
           <code><a href="layer_tfsm.html">layer_tfsm()</a></code> 
         </dt>
-        <dd>Reload a Keras model/layer that was saved via SavedModel / ExportArchive.</dd>
-      </dl><dl><dt>
-          
-          <code><a href="load_model.html">load_model()</a></code> 
-        </dt>
-        <dd>Loads a model saved via <code>model.save()</code>.</dd>
+        <dd>Reload a Keras model/layer that was saved via <code><a href="https://rdrr.io/pkg/tensorflow/man/export_savedmodel.html" class="external-link">export_savedmodel()</a></code>.</dd>
       </dl><dl><dt>
           
           <code><a href="register_keras_serializable.html">register_keras_serializable()</a></code> 
         </dt>
-        <dd>Registers an object with the Keras serialization framework.</dd>
-      </dl><dl><dt>
-          
-          <code><a href="serialize_keras_object.html">serialize_keras_object()</a></code> 
-        </dt>
-        <dd>Retrieve the config list by serializing the Keras object.</dd>
+        <dd>Registers a custom object with the Keras serialization framework.</dd>
       </dl></div><div class="section level2">
       <h2 id="layers">Layers<a class="anchor" aria-label="anchor" href="#layers"></a></h2>
       
@@ -584,7 +564,7 @@
 
       <dl><dt>
           
-          <code><a href="bidirectional.html">bidirectional()</a></code> 
+          <code><a href="layer_bidirectional.html">layer_bidirectional()</a></code> 
         </dt>
         <dd>Bidirectional wrapper for RNNs.</dd>
       </dl><dl><dt>
@@ -647,9 +627,14 @@
           <code><a href="rnn_cells_stack.html">rnn_cells_stack()</a></code> 
         </dt>
         <dd>Wrapper allowing a stack of RNN cells to behave as a single cell.</dd>
+      </dl><dl><dt>
+          
+          <code><a href="reset_state.html">reset_state()</a></code> 
+        </dt>
+        <dd>Reset the state for a model, layer or metric.</dd>
       </dl></div><div class="section level2">
       
-      <h3 id="preprocessing-layers">preprocessing Layers<a class="anchor" aria-label="anchor" href="#preprocessing-layers"></a></h3>
+      <h3 id="preprocessing-layers">Preprocessing Layers<a class="anchor" aria-label="anchor" href="#preprocessing-layers"></a></h3>
       
 
       
@@ -918,8 +903,29 @@
         </dt>
         <dd>Performs elementwise subtraction.</dd>
       </dl></div><div class="section level2">
-      <h2 id="layer-methods">Layer Methods<a class="anchor" aria-label="anchor" href="#layer-methods"></a></h2>
       
+      <h3 id="custom-layers">Custom Layers<a class="anchor" aria-label="anchor" href="#custom-layers"></a></h3>
+      
+
+      
+    </div><div id="" class="section level2">
+      
+      
+      
+
+      <dl><dt>
+          
+          <code><a href="layer_lambda.html">layer_lambda()</a></code> 
+        </dt>
+        <dd>Wraps arbitrary expressions as a <code>Layer</code> object.</dd>
+      </dl><dl><dt>
+          
+          <code><a href="Layer.html">Layer()</a></code> 
+        </dt>
+        <dd>Define a custom Layer.</dd>
+      </dl></div><div class="section level2">
+      
+      <h3 id="layer-methods">Layer Methods<a class="anchor" aria-label="anchor" href="#layer-methods"></a></h3>
       
 
       
@@ -948,888 +954,6 @@
           <code><a href="reset_state.html">reset_state()</a></code> 
         </dt>
         <dd>Reset the state for a model, layer or metric.</dd>
-      </dl></div><div class="section level2">
-      <h2 id="custom-layers">Custom Layers<a class="anchor" aria-label="anchor" href="#custom-layers"></a></h2>
-      
-      
-
-      
-    </div><div id="" class="section level2">
-      
-      
-      
-
-      <dl><dt>
-          
-          <code><a href="grapes-py_class-grapes.html">`%py_class%`</a></code> 
-        </dt>
-        <dd>Make a python class constructor</dd>
-      </dl><dl><dt>
-          
-          <code><a href="Layer.html">Layer()</a></code> 
-        </dt>
-        <dd>Define a custom Layer.</dd>
-      </dl></div><div class="section level2">
-      <h2 id="datasets">Datasets<a class="anchor" aria-label="anchor" href="#datasets"></a></h2>
-      
-      
-
-      
-    </div><div id="" class="section level2">
-      
-      
-      
-
-      <dl><dt>
-          
-          <code><a href="dataset_boston_housing.html">dataset_boston_housing()</a></code> 
-        </dt>
-        <dd>Boston housing price regression dataset</dd>
-      </dl><dl><dt>
-          
-          <code><a href="dataset_cifar10.html">dataset_cifar10()</a></code> 
-        </dt>
-        <dd>CIFAR10 small image classification</dd>
-      </dl><dl><dt>
-          
-          <code><a href="dataset_cifar100.html">dataset_cifar100()</a></code> 
-        </dt>
-        <dd>CIFAR100 small image classification</dd>
-      </dl><dl><dt>
-          
-          <code><a href="dataset_fashion_mnist.html">dataset_fashion_mnist()</a></code> 
-        </dt>
-        <dd>Fashion-MNIST database of fashion articles</dd>
-      </dl><dl><dt>
-          
-          <code><a href="dataset_imdb.html">dataset_imdb()</a></code> <code><a href="dataset_imdb.html">dataset_imdb_word_index()</a></code> 
-        </dt>
-        <dd>IMDB Movie reviews sentiment classification</dd>
-      </dl><dl><dt>
-          
-          <code><a href="dataset_mnist.html">dataset_mnist()</a></code> 
-        </dt>
-        <dd>MNIST database of handwritten digits</dd>
-      </dl><dl><dt>
-          
-          <code><a href="dataset_reuters.html">dataset_reuters()</a></code> <code><a href="dataset_reuters.html">dataset_reuters_word_index()</a></code> 
-        </dt>
-        <dd>Reuters newswire topics classification</dd>
-      </dl></div><div class="section level2">
-      <h2 id="applications">Applications<a class="anchor" aria-label="anchor" href="#applications"></a></h2>
-      
-      
-
-      
-    </div><div id="" class="section level2">
-      
-      
-      
-
-      <dl><dt>
-          
-          <code><a href="application_convnext_base.html">application_convnext_base()</a></code> 
-        </dt>
-        <dd>Instantiates the ConvNeXtBase architecture.</dd>
-      </dl><dl><dt>
-          
-          <code><a href="application_convnext_large.html">application_convnext_large()</a></code> 
-        </dt>
-        <dd>Instantiates the ConvNeXtLarge architecture.</dd>
-      </dl><dl><dt>
-          
-          <code><a href="application_convnext_small.html">application_convnext_small()</a></code> 
-        </dt>
-        <dd>Instantiates the ConvNeXtSmall architecture.</dd>
-      </dl><dl><dt>
-          
-          <code><a href="application_convnext_tiny.html">application_convnext_tiny()</a></code> 
-        </dt>
-        <dd>Instantiates the ConvNeXtTiny architecture.</dd>
-      </dl><dl><dt>
-          
-          <code><a href="application_convnext_xlarge.html">application_convnext_xlarge()</a></code> 
-        </dt>
-        <dd>Instantiates the ConvNeXtXLarge architecture.</dd>
-      </dl><dl><dt>
-          
-          <code><a href="application_densenet121.html">application_densenet121()</a></code> 
-        </dt>
-        <dd>Instantiates the Densenet121 architecture.</dd>
-      </dl><dl><dt>
-          
-          <code><a href="application_densenet169.html">application_densenet169()</a></code> 
-        </dt>
-        <dd>Instantiates the Densenet169 architecture.</dd>
-      </dl><dl><dt>
-          
-          <code><a href="application_densenet201.html">application_densenet201()</a></code> 
-        </dt>
-        <dd>Instantiates the Densenet201 architecture.</dd>
-      </dl><dl><dt>
-          
-          <code><a href="application_efficientnet_b0.html">application_efficientnet_b0()</a></code> 
-        </dt>
-        <dd>Instantiates the EfficientNetB0 architecture.</dd>
-      </dl><dl><dt>
-          
-          <code><a href="application_efficientnet_b1.html">application_efficientnet_b1()</a></code> 
-        </dt>
-        <dd>Instantiates the EfficientNetB1 architecture.</dd>
-      </dl><dl><dt>
-          
-          <code><a href="application_efficientnet_b2.html">application_efficientnet_b2()</a></code> 
-        </dt>
-        <dd>Instantiates the EfficientNetB2 architecture.</dd>
-      </dl><dl><dt>
-          
-          <code><a href="application_efficientnet_b3.html">application_efficientnet_b3()</a></code> 
-        </dt>
-        <dd>Instantiates the EfficientNetB3 architecture.</dd>
-      </dl><dl><dt>
-          
-          <code><a href="application_efficientnet_b4.html">application_efficientnet_b4()</a></code> 
-        </dt>
-        <dd>Instantiates the EfficientNetB4 architecture.</dd>
-      </dl><dl><dt>
-          
-          <code><a href="application_efficientnet_b5.html">application_efficientnet_b5()</a></code> 
-        </dt>
-        <dd>Instantiates the EfficientNetB5 architecture.</dd>
-      </dl><dl><dt>
-          
-          <code><a href="application_efficientnet_b6.html">application_efficientnet_b6()</a></code> 
-        </dt>
-        <dd>Instantiates the EfficientNetB6 architecture.</dd>
-      </dl><dl><dt>
-          
-          <code><a href="application_efficientnet_b7.html">application_efficientnet_b7()</a></code> 
-        </dt>
-        <dd>Instantiates the EfficientNetB7 architecture.</dd>
-      </dl><dl><dt>
-          
-          <code><a href="application_efficientnet_v2b0.html">application_efficientnet_v2b0()</a></code> 
-        </dt>
-        <dd>Instantiates the EfficientNetV2B0 architecture.</dd>
-      </dl><dl><dt>
-          
-          <code><a href="application_efficientnet_v2b1.html">application_efficientnet_v2b1()</a></code> 
-        </dt>
-        <dd>Instantiates the EfficientNetV2B1 architecture.</dd>
-      </dl><dl><dt>
-          
-          <code><a href="application_efficientnet_v2b2.html">application_efficientnet_v2b2()</a></code> 
-        </dt>
-        <dd>Instantiates the EfficientNetV2B2 architecture.</dd>
-      </dl><dl><dt>
-          
-          <code><a href="application_efficientnet_v2b3.html">application_efficientnet_v2b3()</a></code> 
-        </dt>
-        <dd>Instantiates the EfficientNetV2B3 architecture.</dd>
-      </dl><dl><dt>
-          
-          <code><a href="application_efficientnet_v2l.html">application_efficientnet_v2l()</a></code> 
-        </dt>
-        <dd>Instantiates the EfficientNetV2L architecture.</dd>
-      </dl><dl><dt>
-          
-          <code><a href="application_efficientnet_v2m.html">application_efficientnet_v2m()</a></code> 
-        </dt>
-        <dd>Instantiates the EfficientNetV2M architecture.</dd>
-      </dl><dl><dt>
-          
-          <code><a href="application_efficientnet_v2s.html">application_efficientnet_v2s()</a></code> 
-        </dt>
-        <dd>Instantiates the EfficientNetV2S architecture.</dd>
-      </dl><dl><dt>
-          
-          <code><a href="application_inception_resnet_v2.html">application_inception_resnet_v2()</a></code> 
-        </dt>
-        <dd>Instantiates the Inception-ResNet v2 architecture.</dd>
-      </dl><dl><dt>
-          
-          <code><a href="application_inception_v3.html">application_inception_v3()</a></code> 
-        </dt>
-        <dd>Instantiates the Inception v3 architecture.</dd>
-      </dl><dl><dt>
-          
-          <code><a href="application_mobilenet.html">application_mobilenet()</a></code> 
-        </dt>
-        <dd>Instantiates the MobileNet architecture.</dd>
-      </dl><dl><dt>
-          
-          <code><a href="application_mobilenet_v2.html">application_mobilenet_v2()</a></code> 
-        </dt>
-        <dd>Instantiates the MobileNetV2 architecture.</dd>
-      </dl><dl><dt>
-          
-          <code><a href="application_mobilenet_v3_large.html">application_mobilenet_v3_large()</a></code> 
-        </dt>
-        <dd>Instantiates the MobileNetV3Large architecture.</dd>
-      </dl><dl><dt>
-          
-          <code><a href="application_mobilenet_v3_small.html">application_mobilenet_v3_small()</a></code> 
-        </dt>
-        <dd>Instantiates the MobileNetV3Small architecture.</dd>
-      </dl><dl><dt>
-          
-          <code><a href="application_nasnetlarge.html">application_nasnetlarge()</a></code> 
-        </dt>
-        <dd>Instantiates a NASNet model in ImageNet mode.</dd>
-      </dl><dl><dt>
-          
-          <code><a href="application_nasnetmobile.html">application_nasnetmobile()</a></code> 
-        </dt>
-        <dd>Instantiates a Mobile NASNet model in ImageNet mode.</dd>
-      </dl><dl><dt>
-          
-          <code><a href="application_resnet101.html">application_resnet101()</a></code> 
-        </dt>
-        <dd>Instantiates the ResNet101 architecture.</dd>
-      </dl><dl><dt>
-          
-          <code><a href="application_resnet101_v2.html">application_resnet101_v2()</a></code> 
-        </dt>
-        <dd>Instantiates the ResNet101V2 architecture.</dd>
-      </dl><dl><dt>
-          
-          <code><a href="application_resnet152.html">application_resnet152()</a></code> 
-        </dt>
-        <dd>Instantiates the ResNet152 architecture.</dd>
-      </dl><dl><dt>
-          
-          <code><a href="application_resnet152_v2.html">application_resnet152_v2()</a></code> 
-        </dt>
-        <dd>Instantiates the ResNet152V2 architecture.</dd>
-      </dl><dl><dt>
-          
-          <code><a href="application_resnet50.html">application_resnet50()</a></code> 
-        </dt>
-        <dd>Instantiates the ResNet50 architecture.</dd>
-      </dl><dl><dt>
-          
-          <code><a href="application_resnet50_v2.html">application_resnet50_v2()</a></code> 
-        </dt>
-        <dd>Instantiates the ResNet50V2 architecture.</dd>
-      </dl><dl><dt>
-          
-          <code><a href="application_vgg16.html">application_vgg16()</a></code> 
-        </dt>
-        <dd>Instantiates the VGG16 model.</dd>
-      </dl><dl><dt>
-          
-          <code><a href="application_vgg19.html">application_vgg19()</a></code> 
-        </dt>
-        <dd>Instantiates the VGG19 model.</dd>
-      </dl><dl><dt>
-          
-          <code><a href="application_xception.html">application_xception()</a></code> 
-        </dt>
-        <dd>Instantiates the Xception architecture.</dd>
-      </dl><dl><dt>
-          
-          <code><a href="process_utils.html">application_preprocess_inputs()</a></code> <code><a href="process_utils.html">application_decode_predictions()</a></code> 
-        </dt>
-        <dd>Preprocessing and postprocessing utilities</dd>
-      </dl></div><div class="section level2">
-      <h2 id="sequence-preprocessing">Sequence Preprocessing<a class="anchor" aria-label="anchor" href="#sequence-preprocessing"></a></h2>
-      
-      
-
-      
-    </div><div id="" class="section level2">
-      
-      
-      
-
-      <dl><dt>
-          
-          <code><a href="pad_sequences.html">pad_sequences()</a></code> 
-        </dt>
-        <dd>Pads sequences to the same length.</dd>
-      </dl><dl><dt>
-          
-          <code><a href="timeseries_dataset_from_array.html">timeseries_dataset_from_array()</a></code> 
-        </dt>
-        <dd>Creates a dataset of sliding windows over a timeseries provided as array.</dd>
-      </dl></div><div class="section level2">
-      <h2 id="text-preprocessing">Text Preprocessing<a class="anchor" aria-label="anchor" href="#text-preprocessing"></a></h2>
-      
-      
-
-      
-    </div><div id="" class="section level2">
-      
-      
-      
-
-      <dl><dt>
-          
-          <code><a href="text_dataset_from_directory.html">text_dataset_from_directory()</a></code> 
-        </dt>
-        <dd>Generates a <code>tf.data.Dataset</code> from text files in a directory.</dd>
-      </dl></div><div class="section level2">
-      <h2 id="image-preprocessing">Image Preprocessing<a class="anchor" aria-label="anchor" href="#image-preprocessing"></a></h2>
-      
-      
-
-      
-    </div><div id="" class="section level2">
-      
-      
-      
-
-      <dl><dt>
-          
-          <code><a href="image_array_save.html">image_array_save()</a></code> 
-        </dt>
-        <dd>Saves an image stored as a NumPy array to a path or file object.</dd>
-      </dl><dl><dt>
-          
-          <code><a href="image_dataset_from_directory.html">image_dataset_from_directory()</a></code> 
-        </dt>
-        <dd>Generates a <code>tf.data.Dataset</code> from image files in a directory.</dd>
-      </dl><dl><dt>
-          
-          <code><a href="image_from_array.html">image_from_array()</a></code> 
-        </dt>
-        <dd>Converts a 3D array to a PIL Image instance.</dd>
-      </dl><dl><dt>
-          
-          <code><a href="image_load.html">image_load()</a></code> 
-        </dt>
-        <dd>Loads an image into PIL format.</dd>
-      </dl><dl><dt>
-          
-          <code><a href="image_smart_resize.html">image_smart_resize()</a></code> 
-        </dt>
-        <dd>Resize images to a target size without aspect ratio distortion.</dd>
-      </dl><dl><dt>
-          
-          <code><a href="image_to_array.html">image_to_array()</a></code> 
-        </dt>
-        <dd>Converts a PIL Image instance to a matrix.</dd>
-      </dl></div><div class="section level2">
-      <h2 id="optimizers">Optimizers<a class="anchor" aria-label="anchor" href="#optimizers"></a></h2>
-      
-      
-
-      
-    </div><div id="" class="section level2">
-      
-      
-      
-
-      <dl><dt>
-          
-          <code><a href="optimizer_adadelta.html">optimizer_adadelta()</a></code> 
-        </dt>
-        <dd>Optimizer that implements the Adadelta algorithm.</dd>
-      </dl><dl><dt>
-          
-          <code><a href="optimizer_adafactor.html">optimizer_adafactor()</a></code> 
-        </dt>
-        <dd>Optimizer that implements the Adafactor algorithm.</dd>
-      </dl><dl><dt>
-          
-          <code><a href="optimizer_adagrad.html">optimizer_adagrad()</a></code> 
-        </dt>
-        <dd>Optimizer that implements the Adagrad algorithm.</dd>
-      </dl><dl><dt>
-          
-          <code><a href="optimizer_adam.html">optimizer_adam()</a></code> 
-        </dt>
-        <dd>Optimizer that implements the Adam algorithm.</dd>
-      </dl><dl><dt>
-          
-          <code><a href="optimizer_adam_w.html">optimizer_adam_w()</a></code> 
-        </dt>
-        <dd>Optimizer that implements the AdamW algorithm.</dd>
-      </dl><dl><dt>
-          
-          <code><a href="optimizer_adamax.html">optimizer_adamax()</a></code> 
-        </dt>
-        <dd>Optimizer that implements the Adamax algorithm.</dd>
-      </dl><dl><dt>
-          
-          <code><a href="optimizer_ftrl.html">optimizer_ftrl()</a></code> 
-        </dt>
-        <dd>Optimizer that implements the FTRL algorithm.</dd>
-      </dl><dl><dt>
-          
-          <code><a href="optimizer_lion.html">optimizer_lion()</a></code> 
-        </dt>
-        <dd>Optimizer that implements the Lion algorithm.</dd>
-      </dl><dl><dt>
-          
-          <code><a href="optimizer_loss_scale.html">optimizer_loss_scale()</a></code> 
-        </dt>
-        <dd>An optimizer that dynamically scales the loss to prevent underflow.</dd>
-      </dl><dl><dt>
-          
-          <code><a href="optimizer_nadam.html">optimizer_nadam()</a></code> 
-        </dt>
-        <dd>Optimizer that implements the Nadam algorithm.</dd>
-      </dl><dl><dt>
-          
-          <code><a href="optimizer_rmsprop.html">optimizer_rmsprop()</a></code> 
-        </dt>
-        <dd>Optimizer that implements the RMSprop algorithm.</dd>
-      </dl><dl><dt>
-          
-          <code><a href="optimizer_sgd.html">optimizer_sgd()</a></code> 
-        </dt>
-        <dd>Gradient descent (with momentum) optimizer.</dd>
-      </dl></div><div class="section level2">
-      <h2 id="learning-rate-schedules">Learning Rate Schedules<a class="anchor" aria-label="anchor" href="#learning-rate-schedules"></a></h2>
-      
-      
-
-      
-    </div><div id="" class="section level2">
-      
-      
-      
-
-      <dl><dt>
-          
-          <code><a href="learning_rate_schedule_cosine_decay.html">learning_rate_schedule_cosine_decay()</a></code> 
-        </dt>
-        <dd>A <code>LearningRateSchedule</code> that uses a cosine decay with optional warmup.</dd>
-      </dl><dl><dt>
-          
-          <code><a href="learning_rate_schedule_cosine_decay_restarts.html">learning_rate_schedule_cosine_decay_restarts()</a></code> 
-        </dt>
-        <dd>A <code>LearningRateSchedule</code> that uses a cosine decay schedule with restarts.</dd>
-      </dl><dl><dt>
-          
-          <code><a href="learning_rate_schedule_exponential_decay.html">learning_rate_schedule_exponential_decay()</a></code> 
-        </dt>
-        <dd>A <code>LearningRateSchedule</code> that uses an exponential decay schedule.</dd>
-      </dl><dl><dt>
-          
-          <code><a href="learning_rate_schedule_inverse_time_decay.html">learning_rate_schedule_inverse_time_decay()</a></code> 
-        </dt>
-        <dd>A <code>LearningRateSchedule</code> that uses an inverse time decay schedule.</dd>
-      </dl><dl><dt>
-          
-          <code><a href="learning_rate_schedule_piecewise_constant_decay.html">learning_rate_schedule_piecewise_constant_decay()</a></code> 
-        </dt>
-        <dd>A <code>LearningRateSchedule</code> that uses a piecewise constant decay schedule.</dd>
-      </dl><dl><dt>
-          
-          <code><a href="learning_rate_schedule_polynomial_decay.html">learning_rate_schedule_polynomial_decay()</a></code> 
-        </dt>
-        <dd>A <code>LearningRateSchedule</code> that uses a polynomial decay schedule.</dd>
-      </dl><dl><dt>
-          
-          <code><a href="LearningRateSchedule.html">LearningRateSchedule()</a></code> 
-        </dt>
-        <dd>Define a custom LearningRateSchedule class</dd>
-      </dl><dl><dt>
-          
-          <code><a href="new_learning_rate_schedule_class.html">new_learning_rate_schedule_class()</a></code> 
-        </dt>
-        <dd>LearningRateSchedule</dd>
-      </dl></div><div class="section level2">
-      <h2 id="callbacks">Callbacks<a class="anchor" aria-label="anchor" href="#callbacks"></a></h2>
-      
-      
-
-      
-    </div><div id="" class="section level2">
-      
-      
-      
-
-      <dl><dt>
-          
-          <code><a href="Callback.html">Callback()</a></code> 
-        </dt>
-        <dd>Define a custom Callback</dd>
-      </dl><dl><dt>
-          
-          <code><a href="callback_backup_and_restore.html">callback_backup_and_restore()</a></code> 
-        </dt>
-        <dd>Callback to back up and restore the training state.</dd>
-      </dl><dl><dt>
-          
-          <code><a href="callback_csv_logger.html">callback_csv_logger()</a></code> 
-        </dt>
-        <dd>Callback that streams epoch results to a CSV file.</dd>
-      </dl><dl><dt>
-          
-          <code><a href="callback_early_stopping.html">callback_early_stopping()</a></code> 
-        </dt>
-        <dd>Stop training when a monitored metric has stopped improving.</dd>
-      </dl><dl><dt>
-          
-          <code><a href="callback_lambda.html">callback_lambda()</a></code> 
-        </dt>
-        <dd>Callback for creating simple, custom callbacks on-the-fly.</dd>
-      </dl><dl><dt>
-          
-          <code><a href="callback_learning_rate_scheduler.html">callback_learning_rate_scheduler()</a></code> 
-        </dt>
-        <dd>Learning rate scheduler.</dd>
-      </dl><dl><dt>
-          
-          <code><a href="callback_model_checkpoint.html">callback_model_checkpoint()</a></code> 
-        </dt>
-        <dd>Callback to save the Keras model or model weights at some frequency.
-@description
-<code><a href="../reference/callback_model_checkpoint.html">callback_model_checkpoint()</a></code> is used in conjunction with training using
-<code>model |&gt; fit()</code> to save a model or weights (in a checkpoint file) at some
-interval, so the model or weights can be loaded later to continue the
-training from the state saved.</dd>
-      </dl><dl><dt>
-          
-          <code><a href="callback_progbar_logger.html">callback_progbar_logger()</a></code> 
-        </dt>
-        <dd>Callback that prints metrics to stdout.</dd>
-      </dl><dl><dt>
-          
-          <code><a href="callback_reduce_lr_on_plateau.html">callback_reduce_lr_on_plateau()</a></code> 
-        </dt>
-        <dd>Reduce learning rate when a metric has stopped improving.</dd>
-      </dl><dl><dt>
-          
-          <code><a href="callback_remote_monitor.html">callback_remote_monitor()</a></code> 
-        </dt>
-        <dd>Callback used to stream events to a server.</dd>
-      </dl><dl><dt>
-          
-          <code><a href="callback_tensorboard.html">callback_tensorboard()</a></code> 
-        </dt>
-        <dd>Enable visualizations for TensorBoard.</dd>
-      </dl><dl><dt>
-          
-          <code><a href="callback_terminate_on_nan.html">callback_terminate_on_nan()</a></code> 
-        </dt>
-        <dd>Callback that terminates training when a NaN loss is encountered.</dd>
-      </dl></div><div class="section level2">
-      <h2 id="initializers">Initializers<a class="anchor" aria-label="anchor" href="#initializers"></a></h2>
-      
-      
-
-      
-    </div><div id="" class="section level2">
-      
-      
-      
-
-      <dl><dt>
-          
-          <code><a href="initializer_constant.html">initializer_constant()</a></code> 
-        </dt>
-        <dd>Initializer that generates tensors with constant values.</dd>
-      </dl><dl><dt>
-          
-          <code><a href="initializer_glorot_normal.html">initializer_glorot_normal()</a></code> 
-        </dt>
-        <dd>The Glorot normal initializer, also called Xavier normal initializer.</dd>
-      </dl><dl><dt>
-          
-          <code><a href="initializer_glorot_uniform.html">initializer_glorot_uniform()</a></code> 
-        </dt>
-        <dd>The Glorot uniform initializer, also called Xavier uniform initializer.</dd>
-      </dl><dl><dt>
-          
-          <code><a href="initializer_he_normal.html">initializer_he_normal()</a></code> 
-        </dt>
-        <dd>He normal initializer.</dd>
-      </dl><dl><dt>
-          
-          <code><a href="initializer_he_uniform.html">initializer_he_uniform()</a></code> 
-        </dt>
-        <dd>He uniform variance scaling initializer.</dd>
-      </dl><dl><dt>
-          
-          <code><a href="initializer_identity.html">initializer_identity()</a></code> 
-        </dt>
-        <dd>Initializer that generates the identity matrix.</dd>
-      </dl><dl><dt>
-          
-          <code><a href="initializer_lecun_normal.html">initializer_lecun_normal()</a></code> 
-        </dt>
-        <dd>Lecun normal initializer.</dd>
-      </dl><dl><dt>
-          
-          <code><a href="initializer_lecun_uniform.html">initializer_lecun_uniform()</a></code> 
-        </dt>
-        <dd>Lecun uniform initializer.</dd>
-      </dl><dl><dt>
-          
-          <code><a href="initializer_ones.html">initializer_ones()</a></code> 
-        </dt>
-        <dd>Initializer that generates tensors initialized to 1.</dd>
-      </dl><dl><dt>
-          
-          <code><a href="initializer_orthogonal.html">initializer_orthogonal()</a></code> 
-        </dt>
-        <dd>Initializer that generates an orthogonal matrix.</dd>
-      </dl><dl><dt>
-          
-          <code><a href="initializer_random_normal.html">initializer_random_normal()</a></code> 
-        </dt>
-        <dd>Random normal initializer.</dd>
-      </dl><dl><dt>
-          
-          <code><a href="initializer_random_uniform.html">initializer_random_uniform()</a></code> 
-        </dt>
-        <dd>Random uniform initializer.</dd>
-      </dl><dl><dt>
-          
-          <code><a href="initializer_truncated_normal.html">initializer_truncated_normal()</a></code> 
-        </dt>
-        <dd>Initializer that generates a truncated normal distribution.</dd>
-      </dl><dl><dt>
-          
-          <code><a href="initializer_variance_scaling.html">initializer_variance_scaling()</a></code> 
-        </dt>
-        <dd>Initializer that adapts its scale to the shape of its input tensors.</dd>
-      </dl><dl><dt>
-          
-          <code><a href="initializer_zeros.html">initializer_zeros()</a></code> 
-        </dt>
-        <dd>Initializer that generates tensors initialized to 0.</dd>
-      </dl></div><div class="section level2">
-      <h2 id="constraints">Constraints<a class="anchor" aria-label="anchor" href="#constraints"></a></h2>
-      
-      
-
-      
-    </div><div id="" class="section level2">
-      
-      
-      
-
-      <dl><dt>
-          
-          <code><a href="Constraint.html">Constraint()</a></code> 
-        </dt>
-        <dd>Define a custom Constraint class.</dd>
-      </dl><dl><dt>
-          
-          <code><a href="constraint_maxnorm.html">constraint_maxnorm()</a></code> 
-        </dt>
-        <dd>MaxNorm weight constraint.</dd>
-      </dl><dl><dt>
-          
-          <code><a href="constraint_minmaxnorm.html">constraint_minmaxnorm()</a></code> 
-        </dt>
-        <dd>MinMaxNorm weight constraint.</dd>
-      </dl><dl><dt>
-          
-          <code><a href="constraint_nonneg.html">constraint_nonneg()</a></code> 
-        </dt>
-        <dd>Constrains the weights to be non-negative.</dd>
-      </dl><dl><dt>
-          
-          <code><a href="constraint_unitnorm.html">constraint_unitnorm()</a></code> 
-        </dt>
-        <dd>Constrains the weights incident to each hidden unit to have unit norm.</dd>
-      </dl></div><div class="section level2">
-      <h2 id="utils">Utils<a class="anchor" aria-label="anchor" href="#utils"></a></h2>
-      
-      
-
-      
-    </div><div id="" class="section level2">
-      
-      
-      
-
-      <dl><dt>
-          
-          <code><a href="audio_dataset_from_directory.html">audio_dataset_from_directory()</a></code> 
-        </dt>
-        <dd>Generates a <code>tf.data.Dataset</code> from audio files in a directory.</dd>
-      </dl><dl><dt>
-          
-          <code><a href="clear_session.html">clear_session()</a></code> 
-        </dt>
-        <dd>Resets all state generated by Keras.</dd>
-      </dl><dl><dt>
-          
-          <code><a href="config_disable_interactive_logging.html">config_disable_interactive_logging()</a></code> 
-        </dt>
-        <dd>Turn off interactive logging.</dd>
-      </dl><dl><dt>
-          
-          <code><a href="config_disable_traceback_filtering.html">config_disable_traceback_filtering()</a></code> 
-        </dt>
-        <dd>Turn off traceback filtering.</dd>
-      </dl><dl><dt>
-          
-          <code><a href="config_enable_interactive_logging.html">config_enable_interactive_logging()</a></code> 
-        </dt>
-        <dd>Turn on interactive logging.</dd>
-      </dl><dl><dt>
-          
-          <code><a href="config_enable_traceback_filtering.html">config_enable_traceback_filtering()</a></code> 
-        </dt>
-        <dd>Turn on traceback filtering.</dd>
-      </dl><dl><dt>
-          
-          <code><a href="config_is_interactive_logging_enabled.html">config_is_interactive_logging_enabled()</a></code> 
-        </dt>
-        <dd>Check if interactive logging is enabled.</dd>
-      </dl><dl><dt>
-          
-          <code><a href="config_is_traceback_filtering_enabled.html">config_is_traceback_filtering_enabled()</a></code> 
-        </dt>
-        <dd>Check if traceback filtering is enabled.</dd>
-      </dl><dl><dt>
-          
-          <code><a href="get_file.html">get_file()</a></code> 
-        </dt>
-        <dd>Downloads a file from a URL if it not already in the cache.</dd>
-      </dl><dl><dt>
-          
-          <code><a href="get_registered_object.html">get_registered_object()</a></code> 
-        </dt>
-        <dd>Returns the class associated with <code>name</code> if it is registered with Keras.</dd>
-      </dl><dl><dt>
-          
-          <code><a href="get_source_inputs.html">get_source_inputs()</a></code> 
-        </dt>
-        <dd>Returns the list of input tensors necessary to compute <code>tensor</code>.</dd>
-      </dl><dl><dt>
-          
-          <code><a href="image_array_save.html">image_array_save()</a></code> 
-        </dt>
-        <dd>Saves an image stored as a NumPy array to a path or file object.</dd>
-      </dl><dl><dt>
-          
-          <code><a href="image_dataset_from_directory.html">image_dataset_from_directory()</a></code> 
-        </dt>
-        <dd>Generates a <code>tf.data.Dataset</code> from image files in a directory.</dd>
-      </dl><dl><dt>
-          
-          <code><a href="image_from_array.html">image_from_array()</a></code> 
-        </dt>
-        <dd>Converts a 3D array to a PIL Image instance.</dd>
-      </dl><dl><dt>
-          
-          <code><a href="image_load.html">image_load()</a></code> 
-        </dt>
-        <dd>Loads an image into PIL format.</dd>
-      </dl><dl><dt>
-          
-          <code><a href="image_smart_resize.html">image_smart_resize()</a></code> 
-        </dt>
-        <dd>Resize images to a target size without aspect ratio distortion.</dd>
-      </dl><dl><dt>
-          
-          <code><a href="image_to_array.html">image_to_array()</a></code> 
-        </dt>
-        <dd>Converts a PIL Image instance to a matrix.</dd>
-      </dl><dl><dt>
-          
-          <code><a href="layer_feature_space.html">layer_feature_space()</a></code> <code><a href="layer_feature_space.html">feature_cross()</a></code> <code><a href="layer_feature_space.html">feature_custom()</a></code> <code><a href="layer_feature_space.html">feature_float()</a></code> <code><a href="layer_feature_space.html">feature_float_rescaled()</a></code> <code><a href="layer_feature_space.html">feature_float_normalized()</a></code> <code><a href="layer_feature_space.html">feature_float_discretized()</a></code> <code><a href="layer_feature_space.html">feature_integer_categorical()</a></code> <code><a href="layer_feature_space.html">feature_string_categorical()</a></code> <code><a href="layer_feature_space.html">feature_string_hashed()</a></code> <code><a href="layer_feature_space.html">feature_integer_hashed()</a></code> 
-        </dt>
-        <dd>One-stop utility for preprocessing and encoding structured data.</dd>
-      </dl><dl><dt>
-          
-          <code><a href="layer_torch_module_wrapper.html">layer_torch_module_wrapper()</a></code> 
-        </dt>
-        <dd>Torch module wrapper layer.</dd>
-      </dl><dl><dt>
-          
-          <code><a href="model_to_dot.html">model_to_dot()</a></code> 
-        </dt>
-        <dd>Convert a Keras model to dot format.</dd>
-      </dl><dl><dt>
-          
-          <code><a href="normalize.html">normalize()</a></code> 
-        </dt>
-        <dd>Normalizes an array.</dd>
-      </dl><dl><dt>
-          
-          <code><a href="pack_x_y_sample_weight.html">pack_x_y_sample_weight()</a></code> 
-        </dt>
-        <dd>Packs user-provided data into a list.</dd>
-      </dl><dl><dt>
-          
-          <code><a href="pad_sequences.html">pad_sequences()</a></code> 
-        </dt>
-        <dd>Pads sequences to the same length.</dd>
-      </dl><dl><dt>
-          
-          <code><a href="set_random_seed.html">set_random_seed()</a></code> 
-        </dt>
-        <dd>Sets all random seeds (Python, NumPy, and backend framework, e.g. TF).</dd>
-      </dl><dl><dt>
-          
-          <code><a href="split_dataset.html">split_dataset()</a></code> 
-        </dt>
-        <dd>Splits a dataset into a left half and a right half (e.g. train / test).</dd>
-      </dl><dl><dt>
-          
-          <code><a href="text_dataset_from_directory.html">text_dataset_from_directory()</a></code> 
-        </dt>
-        <dd>Generates a <code>tf.data.Dataset</code> from text files in a directory.</dd>
-      </dl><dl><dt>
-          
-          <code><a href="timeseries_dataset_from_array.html">timeseries_dataset_from_array()</a></code> 
-        </dt>
-        <dd>Creates a dataset of sliding windows over a timeseries provided as array.</dd>
-      </dl><dl><dt>
-          
-          <code><a href="to_categorical.html">to_categorical()</a></code> 
-        </dt>
-        <dd>Converts a class vector (integers) to binary class matrix.</dd>
-      </dl><dl><dt>
-          
-          <code><a href="unpack_x_y_sample_weight.html">unpack_x_y_sample_weight()</a></code> 
-        </dt>
-        <dd>Unpacks user-provided data list.</dd>
-      </dl><dl><dt>
-          
-          <code><a href="plot.keras_training_history.html">plot(<i>&lt;keras_training_history&gt;</i>)</a></code> 
-        </dt>
-        <dd>Plot training history</dd>
-      </dl><dl><dt>
-          
-          <code><a href="plot.keras.src.models.model.Model.html">plot(<i>&lt;keras.src.models.model.Model&gt;</i>)</a></code> 
-        </dt>
-        <dd>Plot a Keras model</dd>
-      </dl><dl><dt>
-          
-          <code><a href="zip_lists.html">zip_lists()</a></code> 
-        </dt>
-        <dd>zip lists</dd>
-      </dl><dl><dt>
-          
-          <code><a href="active_property.html">active_property()</a></code> 
-        </dt>
-        <dd>Create an active property class method</dd>
-      </dl><dl><dt>
-          
-          <code><a href="with_custom_object_scope.html">with_custom_object_scope()</a></code> 
-        </dt>
-        <dd>Provide a scope with mappings of names to custom objects</dd>
-      </dl><dl><dt>
-          
-          <code><a href="install_keras.html">install_keras()</a></code> 
-        </dt>
-        <dd>Install Keras</dd>
-      </dl><dl><dt>
-          
-          <code><a href="is_keras_available.html">is_keras_available()</a></code> 
-        </dt>
-        <dd>Check if Keras is Available</dd>
-      </dl><dl><dt>
-          
-          <code><a href="use_backend.html">use_backend()</a></code> 
-        </dt>
-        <dd>Configure a Keras backend</dd>
-      </dl><dl><dt>
-          
-          <code><a href="shape.html">shape()</a></code> <code><a href="shape.html">format(<i>&lt;keras_shape&gt;</i>)</a></code> <code><a href="shape.html">print(<i>&lt;keras_shape&gt;</i>)</a></code> <code><a href="shape.html">`[`(<i>&lt;keras_shape&gt;</i>)</a></code> <code><a href="shape.html">as.integer(<i>&lt;keras_shape&gt;</i>)</a></code> <code><a href="shape.html">as.list(<i>&lt;keras_shape&gt;</i>)</a></code> 
-        </dt>
-        <dd>Tensor shape utility</dd>
       </dl></div><div class="section level2">
       <h2 id="losses">Losses<a class="anchor" aria-label="anchor" href="#losses"></a></h2>
       
@@ -1930,7 +1054,7 @@ training from the state saved.</dd>
           
           <code><a href="Loss.html">Loss()</a></code> 
         </dt>
-        <dd>Define a custom loss class</dd>
+        <dd>Subclass the base <code>Loss</code> class</dd>
       </dl></div><div class="section level2">
       <h2 id="metrics">Metrics<a class="anchor" aria-label="anchor" href="#metrics"></a></h2>
       
@@ -1943,11 +1067,6 @@ training from the state saved.</dd>
       
 
       <dl><dt>
-          
-          <code><a href="Metric.html">Metric()</a></code> 
-        </dt>
-        <dd>Define a custom Metric</dd>
-      </dl><dl><dt>
           
           <code><a href="metric_auc.html">metric_auc()</a></code> 
         </dt>
@@ -2184,9 +1303,1109 @@ training from the state saved.</dd>
         <dd>Custom metric function</dd>
       </dl><dl><dt>
           
-          <code><a href="new_metric_class.html">new_metric_class()</a></code> 
+          <code><a href="Metric.html">Metric()</a></code> 
         </dt>
-        <dd>Metric</dd>
+        <dd>Subclass the base <code>Metric</code> class</dd>
+      </dl><dl><dt>
+          
+          <code><a href="reset_state.html">reset_state()</a></code> 
+        </dt>
+        <dd>Reset the state for a model, layer or metric.</dd>
+      </dl></div><div class="section level2">
+      <h2 id="applications">Applications<a class="anchor" aria-label="anchor" href="#applications"></a></h2>
+      
+      
+
+      
+    </div><div class="section level2">
+      
+      <h3 id="application-utilities">Application utilities<a class="anchor" aria-label="anchor" href="#application-utilities"></a></h3>
+      
+
+      
+    </div><div id="" class="section level2">
+      
+      
+      
+
+      <dl><dt>
+          
+          <code><a href="process_utils.html">application_preprocess_inputs()</a></code> <code><a href="process_utils.html">application_decode_predictions()</a></code> 
+        </dt>
+        <dd>Preprocessing and postprocessing utilities</dd>
+      </dl></div><div class="section level2">
+      
+      <h3 id="convnext-applications">ConvNeXt Applications<a class="anchor" aria-label="anchor" href="#convnext-applications"></a></h3>
+      
+
+      
+    </div><div id="" class="section level2">
+      
+      
+      
+
+      <dl><dt>
+          
+          <code><a href="application_convnext_base.html">application_convnext_base()</a></code> 
+        </dt>
+        <dd>Instantiates the ConvNeXtBase architecture.</dd>
+      </dl><dl><dt>
+          
+          <code><a href="application_convnext_large.html">application_convnext_large()</a></code> 
+        </dt>
+        <dd>Instantiates the ConvNeXtLarge architecture.</dd>
+      </dl><dl><dt>
+          
+          <code><a href="application_convnext_small.html">application_convnext_small()</a></code> 
+        </dt>
+        <dd>Instantiates the ConvNeXtSmall architecture.</dd>
+      </dl><dl><dt>
+          
+          <code><a href="application_convnext_tiny.html">application_convnext_tiny()</a></code> 
+        </dt>
+        <dd>Instantiates the ConvNeXtTiny architecture.</dd>
+      </dl><dl><dt>
+          
+          <code><a href="application_convnext_xlarge.html">application_convnext_xlarge()</a></code> 
+        </dt>
+        <dd>Instantiates the ConvNeXtXLarge architecture.</dd>
+      </dl></div><div class="section level2">
+      
+      <h3 id="densenet-applications">Densenet Applications<a class="anchor" aria-label="anchor" href="#densenet-applications"></a></h3>
+      
+
+      
+    </div><div id="" class="section level2">
+      
+      
+      
+
+      <dl><dt>
+          
+          <code><a href="application_densenet121.html">application_densenet121()</a></code> 
+        </dt>
+        <dd>Instantiates the Densenet121 architecture.</dd>
+      </dl><dl><dt>
+          
+          <code><a href="application_densenet169.html">application_densenet169()</a></code> 
+        </dt>
+        <dd>Instantiates the Densenet169 architecture.</dd>
+      </dl><dl><dt>
+          
+          <code><a href="application_densenet201.html">application_densenet201()</a></code> 
+        </dt>
+        <dd>Instantiates the Densenet201 architecture.</dd>
+      </dl></div><div class="section level2">
+      
+      <h3 id="efficientnet-applications">EfficientNet Applications<a class="anchor" aria-label="anchor" href="#efficientnet-applications"></a></h3>
+      
+
+      
+    </div><div id="" class="section level2">
+      
+      
+      
+
+      <dl><dt>
+          
+          <code><a href="application_efficientnet_b0.html">application_efficientnet_b0()</a></code> 
+        </dt>
+        <dd>Instantiates the EfficientNetB0 architecture.</dd>
+      </dl><dl><dt>
+          
+          <code><a href="application_efficientnet_b1.html">application_efficientnet_b1()</a></code> 
+        </dt>
+        <dd>Instantiates the EfficientNetB1 architecture.</dd>
+      </dl><dl><dt>
+          
+          <code><a href="application_efficientnet_b2.html">application_efficientnet_b2()</a></code> 
+        </dt>
+        <dd>Instantiates the EfficientNetB2 architecture.</dd>
+      </dl><dl><dt>
+          
+          <code><a href="application_efficientnet_b3.html">application_efficientnet_b3()</a></code> 
+        </dt>
+        <dd>Instantiates the EfficientNetB3 architecture.</dd>
+      </dl><dl><dt>
+          
+          <code><a href="application_efficientnet_b4.html">application_efficientnet_b4()</a></code> 
+        </dt>
+        <dd>Instantiates the EfficientNetB4 architecture.</dd>
+      </dl><dl><dt>
+          
+          <code><a href="application_efficientnet_b5.html">application_efficientnet_b5()</a></code> 
+        </dt>
+        <dd>Instantiates the EfficientNetB5 architecture.</dd>
+      </dl><dl><dt>
+          
+          <code><a href="application_efficientnet_b6.html">application_efficientnet_b6()</a></code> 
+        </dt>
+        <dd>Instantiates the EfficientNetB6 architecture.</dd>
+      </dl><dl><dt>
+          
+          <code><a href="application_efficientnet_b7.html">application_efficientnet_b7()</a></code> 
+        </dt>
+        <dd>Instantiates the EfficientNetB7 architecture.</dd>
+      </dl><dl><dt>
+          
+          <code><a href="application_efficientnet_v2b0.html">application_efficientnet_v2b0()</a></code> 
+        </dt>
+        <dd>Instantiates the EfficientNetV2B0 architecture.</dd>
+      </dl><dl><dt>
+          
+          <code><a href="application_efficientnet_v2b1.html">application_efficientnet_v2b1()</a></code> 
+        </dt>
+        <dd>Instantiates the EfficientNetV2B1 architecture.</dd>
+      </dl><dl><dt>
+          
+          <code><a href="application_efficientnet_v2b2.html">application_efficientnet_v2b2()</a></code> 
+        </dt>
+        <dd>Instantiates the EfficientNetV2B2 architecture.</dd>
+      </dl><dl><dt>
+          
+          <code><a href="application_efficientnet_v2b3.html">application_efficientnet_v2b3()</a></code> 
+        </dt>
+        <dd>Instantiates the EfficientNetV2B3 architecture.</dd>
+      </dl><dl><dt>
+          
+          <code><a href="application_efficientnet_v2l.html">application_efficientnet_v2l()</a></code> 
+        </dt>
+        <dd>Instantiates the EfficientNetV2L architecture.</dd>
+      </dl><dl><dt>
+          
+          <code><a href="application_efficientnet_v2m.html">application_efficientnet_v2m()</a></code> 
+        </dt>
+        <dd>Instantiates the EfficientNetV2M architecture.</dd>
+      </dl><dl><dt>
+          
+          <code><a href="application_efficientnet_v2s.html">application_efficientnet_v2s()</a></code> 
+        </dt>
+        <dd>Instantiates the EfficientNetV2S architecture.</dd>
+      </dl></div><div class="section level2">
+      
+      <h3 id="inception-applications">Inception Applications<a class="anchor" aria-label="anchor" href="#inception-applications"></a></h3>
+      
+
+      
+    </div><div id="" class="section level2">
+      
+      
+      
+
+      <dl><dt>
+          
+          <code><a href="application_inception_resnet_v2.html">application_inception_resnet_v2()</a></code> 
+        </dt>
+        <dd>Instantiates the Inception-ResNet v2 architecture.</dd>
+      </dl><dl><dt>
+          
+          <code><a href="application_inception_v3.html">application_inception_v3()</a></code> 
+        </dt>
+        <dd>Instantiates the Inception v3 architecture.</dd>
+      </dl></div><div class="section level2">
+      
+      <h3 id="mobilenet-applications">MobileNet Applications<a class="anchor" aria-label="anchor" href="#mobilenet-applications"></a></h3>
+      
+
+      
+    </div><div id="" class="section level2">
+      
+      
+      
+
+      <dl><dt>
+          
+          <code><a href="application_mobilenet.html">application_mobilenet()</a></code> 
+        </dt>
+        <dd>Instantiates the MobileNet architecture.</dd>
+      </dl><dl><dt>
+          
+          <code><a href="application_mobilenet_v2.html">application_mobilenet_v2()</a></code> 
+        </dt>
+        <dd>Instantiates the MobileNetV2 architecture.</dd>
+      </dl><dl><dt>
+          
+          <code><a href="application_mobilenet_v3_large.html">application_mobilenet_v3_large()</a></code> 
+        </dt>
+        <dd>Instantiates the MobileNetV3Large architecture.</dd>
+      </dl><dl><dt>
+          
+          <code><a href="application_mobilenet_v3_small.html">application_mobilenet_v3_small()</a></code> 
+        </dt>
+        <dd>Instantiates the MobileNetV3Small architecture.</dd>
+      </dl></div><div class="section level2">
+      
+      <h3 id="nasnet-applications">NASNet Applications<a class="anchor" aria-label="anchor" href="#nasnet-applications"></a></h3>
+      
+
+      
+    </div><div id="" class="section level2">
+      
+      
+      
+
+      <dl><dt>
+          
+          <code><a href="application_nasnetlarge.html">application_nasnetlarge()</a></code> 
+        </dt>
+        <dd>Instantiates a NASNet model in ImageNet mode.</dd>
+      </dl><dl><dt>
+          
+          <code><a href="application_nasnetmobile.html">application_nasnetmobile()</a></code> 
+        </dt>
+        <dd>Instantiates a Mobile NASNet model in ImageNet mode.</dd>
+      </dl></div><div class="section level2">
+      
+      <h3 id="resnet-applications">ResNet Applications<a class="anchor" aria-label="anchor" href="#resnet-applications"></a></h3>
+      
+
+      
+    </div><div id="" class="section level2">
+      
+      
+      
+
+      <dl><dt>
+          
+          <code><a href="application_resnet101.html">application_resnet101()</a></code> 
+        </dt>
+        <dd>Instantiates the ResNet101 architecture.</dd>
+      </dl><dl><dt>
+          
+          <code><a href="application_resnet101_v2.html">application_resnet101_v2()</a></code> 
+        </dt>
+        <dd>Instantiates the ResNet101V2 architecture.</dd>
+      </dl><dl><dt>
+          
+          <code><a href="application_resnet152.html">application_resnet152()</a></code> 
+        </dt>
+        <dd>Instantiates the ResNet152 architecture.</dd>
+      </dl><dl><dt>
+          
+          <code><a href="application_resnet152_v2.html">application_resnet152_v2()</a></code> 
+        </dt>
+        <dd>Instantiates the ResNet152V2 architecture.</dd>
+      </dl><dl><dt>
+          
+          <code><a href="application_resnet50.html">application_resnet50()</a></code> 
+        </dt>
+        <dd>Instantiates the ResNet50 architecture.</dd>
+      </dl><dl><dt>
+          
+          <code><a href="application_resnet50_v2.html">application_resnet50_v2()</a></code> 
+        </dt>
+        <dd>Instantiates the ResNet50V2 architecture.</dd>
+      </dl></div><div class="section level2">
+      
+      <h3 id="vgg-applications">VGG Applications<a class="anchor" aria-label="anchor" href="#vgg-applications"></a></h3>
+      
+
+      
+    </div><div id="" class="section level2">
+      
+      
+      
+
+      <dl><dt>
+          
+          <code><a href="application_vgg16.html">application_vgg16()</a></code> 
+        </dt>
+        <dd>Instantiates the VGG16 model.</dd>
+      </dl><dl><dt>
+          
+          <code><a href="application_vgg19.html">application_vgg19()</a></code> 
+        </dt>
+        <dd>Instantiates the VGG19 model.</dd>
+      </dl></div><div class="section level2">
+      
+      <h3 id="xception-applications">Xception Applications<a class="anchor" aria-label="anchor" href="#xception-applications"></a></h3>
+      
+
+      
+    </div><div id="" class="section level2">
+      
+      
+      
+
+      <dl><dt>
+          
+          <code><a href="application_xception.html">application_xception()</a></code> 
+        </dt>
+        <dd>Instantiates the Xception architecture.</dd>
+      </dl></div><div class="section level2">
+      <h2 id="data-loading">Data Loading<a class="anchor" aria-label="anchor" href="#data-loading"></a></h2>
+      
+      <p class="section-desc"></p><p>Keras data loading utilities help you quickly go from raw data to a TF <code>Dataset</code> object that can be used to efficiently train a model. These loading utilites can be combined with preprocessing layers to futher transform your input dataset before training.</p>
+
+      
+    </div><div id="" class="section level2">
+      
+      
+      
+
+      <dl><dt>
+          
+          <code><a href="image_dataset_from_directory.html">image_dataset_from_directory()</a></code> 
+        </dt>
+        <dd>Generates a <code>tf.data.Dataset</code> from image files in a directory.</dd>
+      </dl><dl><dt>
+          
+          <code><a href="text_dataset_from_directory.html">text_dataset_from_directory()</a></code> 
+        </dt>
+        <dd>Generates a <code>tf.data.Dataset</code> from text files in a directory.</dd>
+      </dl><dl><dt>
+          
+          <code><a href="audio_dataset_from_directory.html">audio_dataset_from_directory()</a></code> 
+        </dt>
+        <dd>Generates a <code>tf.data.Dataset</code> from audio files in a directory.</dd>
+      </dl><dl><dt>
+          
+          <code><a href="timeseries_dataset_from_array.html">timeseries_dataset_from_array()</a></code> 
+        </dt>
+        <dd>Creates a dataset of sliding windows over a timeseries provided as array.</dd>
+      </dl></div><div class="section level2">
+      <h2 id="preprocessing-layers-1">Preprocessing layers<a class="anchor" aria-label="anchor" href="#preprocessing-layers-1"></a></h2>
+      
+      
+
+      
+    </div><div class="section level2">
+      
+      <h3 id="text-preprocessing">Text preprocessing<a class="anchor" aria-label="anchor" href="#text-preprocessing"></a></h3>
+      
+
+      
+    </div><div id="" class="section level2">
+      
+      
+      
+
+      <dl><dt>
+          
+          <code><a href="layer_text_vectorization.html">get_vocabulary()</a></code> <code><a href="layer_text_vectorization.html">set_vocabulary()</a></code> <code><a href="layer_text_vectorization.html">layer_text_vectorization()</a></code> 
+        </dt>
+        <dd>A preprocessing layer which maps text features to integer sequences.</dd>
+      </dl></div><div class="section level2">
+      
+      <h3 id="numerical-features-preprocessing-layers">Numerical features preprocessing layers<a class="anchor" aria-label="anchor" href="#numerical-features-preprocessing-layers"></a></h3>
+      
+
+      
+    </div><div id="" class="section level2">
+      
+      
+      
+
+      <dl><dt>
+          
+          <code><a href="layer_normalization.html">layer_normalization()</a></code> 
+        </dt>
+        <dd>A preprocessing layer that normalizes continuous features.</dd>
+      </dl><dl><dt>
+          
+          <code><a href="layer_discretization.html">layer_discretization()</a></code> 
+        </dt>
+        <dd>A preprocessing layer which buckets continuous features by ranges.</dd>
+      </dl></div><div class="section level2">
+      
+      <h3 id="categorical-features-preprocessing-layers">Categorical features preprocessing layers<a class="anchor" aria-label="anchor" href="#categorical-features-preprocessing-layers"></a></h3>
+      
+
+      
+    </div><div id="" class="section level2">
+      
+      
+      
+
+      <dl><dt>
+          
+          <code><a href="layer_category_encoding.html">layer_category_encoding()</a></code> 
+        </dt>
+        <dd>A preprocessing layer which encodes integer features.</dd>
+      </dl><dl><dt>
+          
+          <code><a href="layer_hashing.html">layer_hashing()</a></code> 
+        </dt>
+        <dd>A preprocessing layer which hashes and bins categorical features.</dd>
+      </dl><dl><dt>
+          
+          <code><a href="layer_hashed_crossing.html">layer_hashed_crossing()</a></code> 
+        </dt>
+        <dd>A preprocessing layer which crosses features using the "hashing trick".</dd>
+      </dl><dl><dt>
+          
+          <code><a href="layer_string_lookup.html">layer_string_lookup()</a></code> 
+        </dt>
+        <dd>A preprocessing layer that maps strings to (possibly encoded) indices.</dd>
+      </dl><dl><dt>
+          
+          <code><a href="layer_integer_lookup.html">layer_integer_lookup()</a></code> 
+        </dt>
+        <dd>A preprocessing layer that maps integers to (possibly encoded) indices.</dd>
+      </dl></div><div class="section level2">
+      
+      <h3 id="image-preprocessing-layers">Image preprocessing layers<a class="anchor" aria-label="anchor" href="#image-preprocessing-layers"></a></h3>
+      
+
+      
+    </div><div id="" class="section level2">
+      
+      
+      
+
+      <dl><dt>
+          
+          <code><a href="layer_resizing.html">layer_resizing()</a></code> 
+        </dt>
+        <dd>A preprocessing layer which resizes images.</dd>
+      </dl><dl><dt>
+          
+          <code><a href="layer_rescaling.html">layer_rescaling()</a></code> 
+        </dt>
+        <dd>A preprocessing layer which rescales input values to a new range.</dd>
+      </dl><dl><dt>
+          
+          <code><a href="layer_center_crop.html">layer_center_crop()</a></code> 
+        </dt>
+        <dd>A preprocessing layer which crops images.</dd>
+      </dl></div><div class="section level2">
+      
+      <h3 id="image-augmentation-layers">Image augmentation layers<a class="anchor" aria-label="anchor" href="#image-augmentation-layers"></a></h3>
+      
+
+      
+    </div><div id="" class="section level2">
+      
+      
+      
+
+      <dl><dt>
+          
+          <code><a href="layer_random_crop.html">layer_random_crop()</a></code> 
+        </dt>
+        <dd>A preprocessing layer which randomly crops images during training.</dd>
+      </dl><dl><dt>
+          
+          <code><a href="layer_random_flip.html">layer_random_flip()</a></code> 
+        </dt>
+        <dd>A preprocessing layer which randomly flips images during training.</dd>
+      </dl><dl><dt>
+          
+          <code><a href="layer_random_translation.html">layer_random_translation()</a></code> 
+        </dt>
+        <dd>A preprocessing layer which randomly translates images during training.</dd>
+      </dl><dl><dt>
+          
+          <code><a href="layer_random_rotation.html">layer_random_rotation()</a></code> 
+        </dt>
+        <dd>A preprocessing layer which randomly rotates images during training.</dd>
+      </dl><dl><dt>
+          
+          <code><a href="layer_random_zoom.html">layer_random_zoom()</a></code> 
+        </dt>
+        <dd>A preprocessing layer which randomly zooms images during training.</dd>
+      </dl><dl><dt>
+          
+          <code><a href="layer_random_contrast.html">layer_random_contrast()</a></code> 
+        </dt>
+        <dd>A preprocessing layer which randomly adjusts contrast during training.</dd>
+      </dl><dl><dt>
+          
+          <code><a href="layer_random_brightness.html">layer_random_brightness()</a></code> 
+        </dt>
+        <dd>A preprocessing layer which randomly adjusts brightness during training.</dd>
+      </dl></div><div class="section level2">
+      <h2 id="data-preprocessing">Data Preprocessing<a class="anchor" aria-label="anchor" href="#data-preprocessing"></a></h2>
+      
+      
+
+      
+    </div><div class="section level2">
+      
+      <h3 id="preprocess-application-inputs">Preprocess application inputs<a class="anchor" aria-label="anchor" href="#preprocess-application-inputs"></a></h3>
+      
+
+      
+    </div><div id="" class="section level2">
+      
+      
+      
+
+      <dl><dt>
+          
+          <code><a href="process_utils.html">application_preprocess_inputs()</a></code> <code><a href="process_utils.html">application_decode_predictions()</a></code> 
+        </dt>
+        <dd>Preprocessing and postprocessing utilities</dd>
+      </dl></div><div class="section level2">
+      
+      <h3 id="sequence-preprocessing">Sequence Preprocessing<a class="anchor" aria-label="anchor" href="#sequence-preprocessing"></a></h3>
+      
+
+      
+    </div><div id="" class="section level2">
+      
+      
+      
+
+      <dl><dt>
+          
+          <code><a href="timeseries_dataset_from_array.html">timeseries_dataset_from_array()</a></code> 
+        </dt>
+        <dd>Creates a dataset of sliding windows over a timeseries provided as array.</dd>
+      </dl><dl><dt>
+          
+          <code><a href="pad_sequences.html">pad_sequences()</a></code> 
+        </dt>
+        <dd>Pads sequences to the same length.</dd>
+      </dl></div><div class="section level2">
+      <h2 id="text-preprocessing-1">Text Preprocessing<a class="anchor" aria-label="anchor" href="#text-preprocessing-1"></a></h2>
+      
+      
+
+      
+    </div><div id="" class="section level2">
+      
+      
+      
+
+      <dl><dt>
+          
+          <code><a href="text_dataset_from_directory.html">text_dataset_from_directory()</a></code> 
+        </dt>
+        <dd>Generates a <code>tf.data.Dataset</code> from text files in a directory.</dd>
+      </dl></div><div class="section level2">
+      <h2 id="image-preprocessing">Image Preprocessing<a class="anchor" aria-label="anchor" href="#image-preprocessing"></a></h2>
+      
+      
+
+      
+    </div><div id="" class="section level2">
+      
+      
+      
+
+      <dl><dt>
+          
+          <code><a href="image_array_save.html">image_array_save()</a></code> 
+        </dt>
+        <dd>Saves an image stored as a NumPy array to a path or file object.</dd>
+      </dl><dl><dt>
+          
+          <code><a href="image_dataset_from_directory.html">image_dataset_from_directory()</a></code> 
+        </dt>
+        <dd>Generates a <code>tf.data.Dataset</code> from image files in a directory.</dd>
+      </dl><dl><dt>
+          
+          <code><a href="image_from_array.html">image_from_array()</a></code> 
+        </dt>
+        <dd>Converts a 3D array to a PIL Image instance.</dd>
+      </dl><dl><dt>
+          
+          <code><a href="image_load.html">image_load()</a></code> 
+        </dt>
+        <dd>Loads an image into PIL format.</dd>
+      </dl><dl><dt>
+          
+          <code><a href="image_smart_resize.html">image_smart_resize()</a></code> 
+        </dt>
+        <dd>Resize images to a target size without aspect ratio distortion.</dd>
+      </dl><dl><dt>
+          
+          <code><a href="image_to_array.html">image_to_array()</a></code> 
+        </dt>
+        <dd>Converts a PIL Image instance to a matrix.</dd>
+      </dl><dl><dt>
+          
+          <code><a href="op_image_affine_transform.html">op_image_affine_transform()</a></code> 
+        </dt>
+        <dd>Applies the given transform(s) to the image(s).</dd>
+      </dl><dl><dt>
+          
+          <code><a href="op_image_extract_patches.html">op_image_extract_patches()</a></code> 
+        </dt>
+        <dd>Extracts patches from the image(s).</dd>
+      </dl><dl><dt>
+          
+          <code><a href="op_image_map_coordinates.html">op_image_map_coordinates()</a></code> 
+        </dt>
+        <dd>Map the input array to new coordinates by interpolation..</dd>
+      </dl><dl><dt>
+          
+          <code><a href="op_image_pad_images.html">op_image_pad_images()</a></code> 
+        </dt>
+        <dd>Pad <code>images</code> with zeros to the specified <code>height</code> and <code>width</code>.</dd>
+      </dl><dl><dt>
+          
+          <code><a href="op_image_resize.html">op_image_resize()</a></code> 
+        </dt>
+        <dd>Resize images to size using the specified interpolation method.</dd>
+      </dl></div><div class="section level2">
+      
+      <h3 id="preprocessing-layers-2">Preprocessing Layers<a class="anchor" aria-label="anchor" href="#preprocessing-layers-2"></a></h3>
+      
+
+      
+    </div><div id="" class="section level2">
+      
+      
+      
+
+      <dl><dt>
+          
+          <code><a href="layer_category_encoding.html">layer_category_encoding()</a></code> 
+        </dt>
+        <dd>A preprocessing layer which encodes integer features.</dd>
+      </dl><dl><dt>
+          
+          <code><a href="layer_center_crop.html">layer_center_crop()</a></code> 
+        </dt>
+        <dd>A preprocessing layer which crops images.</dd>
+      </dl><dl><dt>
+          
+          <code><a href="layer_discretization.html">layer_discretization()</a></code> 
+        </dt>
+        <dd>A preprocessing layer which buckets continuous features by ranges.</dd>
+      </dl><dl><dt>
+          
+          <code><a href="layer_feature_space.html">layer_feature_space()</a></code> <code><a href="layer_feature_space.html">feature_cross()</a></code> <code><a href="layer_feature_space.html">feature_custom()</a></code> <code><a href="layer_feature_space.html">feature_float()</a></code> <code><a href="layer_feature_space.html">feature_float_rescaled()</a></code> <code><a href="layer_feature_space.html">feature_float_normalized()</a></code> <code><a href="layer_feature_space.html">feature_float_discretized()</a></code> <code><a href="layer_feature_space.html">feature_integer_categorical()</a></code> <code><a href="layer_feature_space.html">feature_string_categorical()</a></code> <code><a href="layer_feature_space.html">feature_string_hashed()</a></code> <code><a href="layer_feature_space.html">feature_integer_hashed()</a></code> 
+        </dt>
+        <dd>One-stop utility for preprocessing and encoding structured data.</dd>
+      </dl><dl><dt>
+          
+          <code><a href="layer_hashed_crossing.html">layer_hashed_crossing()</a></code> 
+        </dt>
+        <dd>A preprocessing layer which crosses features using the "hashing trick".</dd>
+      </dl><dl><dt>
+          
+          <code><a href="layer_hashing.html">layer_hashing()</a></code> 
+        </dt>
+        <dd>A preprocessing layer which hashes and bins categorical features.</dd>
+      </dl><dl><dt>
+          
+          <code><a href="layer_integer_lookup.html">layer_integer_lookup()</a></code> 
+        </dt>
+        <dd>A preprocessing layer that maps integers to (possibly encoded) indices.</dd>
+      </dl><dl><dt>
+          
+          <code><a href="layer_normalization.html">layer_normalization()</a></code> 
+        </dt>
+        <dd>A preprocessing layer that normalizes continuous features.</dd>
+      </dl><dl><dt>
+          
+          <code><a href="layer_random_brightness.html">layer_random_brightness()</a></code> 
+        </dt>
+        <dd>A preprocessing layer which randomly adjusts brightness during training.</dd>
+      </dl><dl><dt>
+          
+          <code><a href="layer_random_contrast.html">layer_random_contrast()</a></code> 
+        </dt>
+        <dd>A preprocessing layer which randomly adjusts contrast during training.</dd>
+      </dl><dl><dt>
+          
+          <code><a href="layer_random_crop.html">layer_random_crop()</a></code> 
+        </dt>
+        <dd>A preprocessing layer which randomly crops images during training.</dd>
+      </dl><dl><dt>
+          
+          <code><a href="layer_random_flip.html">layer_random_flip()</a></code> 
+        </dt>
+        <dd>A preprocessing layer which randomly flips images during training.</dd>
+      </dl><dl><dt>
+          
+          <code><a href="layer_random_rotation.html">layer_random_rotation()</a></code> 
+        </dt>
+        <dd>A preprocessing layer which randomly rotates images during training.</dd>
+      </dl><dl><dt>
+          
+          <code><a href="layer_random_translation.html">layer_random_translation()</a></code> 
+        </dt>
+        <dd>A preprocessing layer which randomly translates images during training.</dd>
+      </dl><dl><dt>
+          
+          <code><a href="layer_random_zoom.html">layer_random_zoom()</a></code> 
+        </dt>
+        <dd>A preprocessing layer which randomly zooms images during training.</dd>
+      </dl><dl><dt>
+          
+          <code><a href="layer_rescaling.html">layer_rescaling()</a></code> 
+        </dt>
+        <dd>A preprocessing layer which rescales input values to a new range.</dd>
+      </dl><dl><dt>
+          
+          <code><a href="layer_resizing.html">layer_resizing()</a></code> 
+        </dt>
+        <dd>A preprocessing layer which resizes images.</dd>
+      </dl><dl><dt>
+          
+          <code><a href="layer_string_lookup.html">layer_string_lookup()</a></code> 
+        </dt>
+        <dd>A preprocessing layer that maps strings to (possibly encoded) indices.</dd>
+      </dl><dl><dt>
+          
+          <code><a href="layer_text_vectorization.html">get_vocabulary()</a></code> <code><a href="layer_text_vectorization.html">set_vocabulary()</a></code> <code><a href="layer_text_vectorization.html">layer_text_vectorization()</a></code> 
+        </dt>
+        <dd>A preprocessing layer which maps text features to integer sequences.</dd>
+      </dl></div><div class="section level2">
+      <h2 id="builtin-small-datasets">Builtin small datasets<a class="anchor" aria-label="anchor" href="#builtin-small-datasets"></a></h2>
+      
+      
+
+      
+    </div><div id="" class="section level2">
+      
+      
+      
+
+      <dl><dt>
+          
+          <code><a href="dataset_boston_housing.html">dataset_boston_housing()</a></code> 
+        </dt>
+        <dd>Boston housing price regression dataset</dd>
+      </dl><dl><dt>
+          
+          <code><a href="dataset_cifar10.html">dataset_cifar10()</a></code> 
+        </dt>
+        <dd>CIFAR10 small image classification</dd>
+      </dl><dl><dt>
+          
+          <code><a href="dataset_cifar100.html">dataset_cifar100()</a></code> 
+        </dt>
+        <dd>CIFAR100 small image classification</dd>
+      </dl><dl><dt>
+          
+          <code><a href="dataset_fashion_mnist.html">dataset_fashion_mnist()</a></code> 
+        </dt>
+        <dd>Fashion-MNIST database of fashion articles</dd>
+      </dl><dl><dt>
+          
+          <code><a href="dataset_imdb.html">dataset_imdb()</a></code> <code><a href="dataset_imdb.html">dataset_imdb_word_index()</a></code> 
+        </dt>
+        <dd>IMDB Movie reviews sentiment classification</dd>
+      </dl><dl><dt>
+          
+          <code><a href="dataset_mnist.html">dataset_mnist()</a></code> 
+        </dt>
+        <dd>MNIST database of handwritten digits</dd>
+      </dl><dl><dt>
+          
+          <code><a href="dataset_reuters.html">dataset_reuters()</a></code> <code><a href="dataset_reuters.html">dataset_reuters_word_index()</a></code> 
+        </dt>
+        <dd>Reuters newswire topics classification</dd>
+      </dl></div><div class="section level2">
+      <h2 id="optimizers">Optimizers<a class="anchor" aria-label="anchor" href="#optimizers"></a></h2>
+      
+      
+
+      
+    </div><div id="" class="section level2">
+      
+      
+      
+
+      <dl><dt>
+          
+          <code><a href="optimizer_adadelta.html">optimizer_adadelta()</a></code> 
+        </dt>
+        <dd>Optimizer that implements the Adadelta algorithm.</dd>
+      </dl><dl><dt>
+          
+          <code><a href="optimizer_adafactor.html">optimizer_adafactor()</a></code> 
+        </dt>
+        <dd>Optimizer that implements the Adafactor algorithm.</dd>
+      </dl><dl><dt>
+          
+          <code><a href="optimizer_adagrad.html">optimizer_adagrad()</a></code> 
+        </dt>
+        <dd>Optimizer that implements the Adagrad algorithm.</dd>
+      </dl><dl><dt>
+          
+          <code><a href="optimizer_adam.html">optimizer_adam()</a></code> 
+        </dt>
+        <dd>Optimizer that implements the Adam algorithm.</dd>
+      </dl><dl><dt>
+          
+          <code><a href="optimizer_adam_w.html">optimizer_adam_w()</a></code> 
+        </dt>
+        <dd>Optimizer that implements the AdamW algorithm.</dd>
+      </dl><dl><dt>
+          
+          <code><a href="optimizer_adamax.html">optimizer_adamax()</a></code> 
+        </dt>
+        <dd>Optimizer that implements the Adamax algorithm.</dd>
+      </dl><dl><dt>
+          
+          <code><a href="optimizer_ftrl.html">optimizer_ftrl()</a></code> 
+        </dt>
+        <dd>Optimizer that implements the FTRL algorithm.</dd>
+      </dl><dl><dt>
+          
+          <code><a href="optimizer_lion.html">optimizer_lion()</a></code> 
+        </dt>
+        <dd>Optimizer that implements the Lion algorithm.</dd>
+      </dl><dl><dt>
+          
+          <code><a href="optimizer_loss_scale.html">optimizer_loss_scale()</a></code> 
+        </dt>
+        <dd>An optimizer that dynamically scales the loss to prevent underflow.</dd>
+      </dl><dl><dt>
+          
+          <code><a href="optimizer_nadam.html">optimizer_nadam()</a></code> 
+        </dt>
+        <dd>Optimizer that implements the Nadam algorithm.</dd>
+      </dl><dl><dt>
+          
+          <code><a href="optimizer_rmsprop.html">optimizer_rmsprop()</a></code> 
+        </dt>
+        <dd>Optimizer that implements the RMSprop algorithm.</dd>
+      </dl><dl><dt>
+          
+          <code><a href="optimizer_sgd.html">optimizer_sgd()</a></code> 
+        </dt>
+        <dd>Gradient descent (with momentum) optimizer.</dd>
+      </dl></div><div class="section level2">
+      <h2 id="learning-rate-schedules">Learning Rate Schedules<a class="anchor" aria-label="anchor" href="#learning-rate-schedules"></a></h2>
+      
+      
+
+      
+    </div><div id="" class="section level2">
+      
+      
+      
+
+      <dl><dt>
+          
+          <code><a href="learning_rate_schedule_cosine_decay.html">learning_rate_schedule_cosine_decay()</a></code> 
+        </dt>
+        <dd>A <code>LearningRateSchedule</code> that uses a cosine decay with optional warmup.</dd>
+      </dl><dl><dt>
+          
+          <code><a href="learning_rate_schedule_cosine_decay_restarts.html">learning_rate_schedule_cosine_decay_restarts()</a></code> 
+        </dt>
+        <dd>A <code>LearningRateSchedule</code> that uses a cosine decay schedule with restarts.</dd>
+      </dl><dl><dt>
+          
+          <code><a href="learning_rate_schedule_exponential_decay.html">learning_rate_schedule_exponential_decay()</a></code> 
+        </dt>
+        <dd>A <code>LearningRateSchedule</code> that uses an exponential decay schedule.</dd>
+      </dl><dl><dt>
+          
+          <code><a href="learning_rate_schedule_inverse_time_decay.html">learning_rate_schedule_inverse_time_decay()</a></code> 
+        </dt>
+        <dd>A <code>LearningRateSchedule</code> that uses an inverse time decay schedule.</dd>
+      </dl><dl><dt>
+          
+          <code><a href="learning_rate_schedule_piecewise_constant_decay.html">learning_rate_schedule_piecewise_constant_decay()</a></code> 
+        </dt>
+        <dd>A <code>LearningRateSchedule</code> that uses a piecewise constant decay schedule.</dd>
+      </dl><dl><dt>
+          
+          <code><a href="learning_rate_schedule_polynomial_decay.html">learning_rate_schedule_polynomial_decay()</a></code> 
+        </dt>
+        <dd>A <code>LearningRateSchedule</code> that uses a polynomial decay schedule.</dd>
+      </dl><dl><dt>
+          
+          <code><a href="LearningRateSchedule.html">LearningRateSchedule()</a></code> 
+        </dt>
+        <dd>Define a custom LearningRateSchedule class</dd>
+      </dl></div><div class="section level2">
+      <h2 id="callbacks">Callbacks<a class="anchor" aria-label="anchor" href="#callbacks"></a></h2>
+      
+      
+
+      
+    </div><div id="" class="section level2">
+      
+      
+      
+
+      <dl><dt>
+          
+          <code><a href="Callback.html">Callback()</a></code> 
+        </dt>
+        <dd>Define a custom Callback</dd>
+      </dl><dl><dt>
+          
+          <code><a href="callback_backup_and_restore.html">callback_backup_and_restore()</a></code> 
+        </dt>
+        <dd>Callback to back up and restore the training state.</dd>
+      </dl><dl><dt>
+          
+          <code><a href="callback_csv_logger.html">callback_csv_logger()</a></code> 
+        </dt>
+        <dd>Callback that streams epoch results to a CSV file.</dd>
+      </dl><dl><dt>
+          
+          <code><a href="callback_early_stopping.html">callback_early_stopping()</a></code> 
+        </dt>
+        <dd>Stop training when a monitored metric has stopped improving.</dd>
+      </dl><dl><dt>
+          
+          <code><a href="callback_lambda.html">callback_lambda()</a></code> 
+        </dt>
+        <dd>Callback for creating simple, custom callbacks on-the-fly.</dd>
+      </dl><dl><dt>
+          
+          <code><a href="callback_learning_rate_scheduler.html">callback_learning_rate_scheduler()</a></code> 
+        </dt>
+        <dd>Learning rate scheduler.</dd>
+      </dl><dl><dt>
+          
+          <code><a href="callback_model_checkpoint.html">callback_model_checkpoint()</a></code> 
+        </dt>
+        <dd>Callback to save the Keras model or model weights at some frequency.
+@description
+<code><a href="../reference/callback_model_checkpoint.html">callback_model_checkpoint()</a></code> is used in conjunction with training using
+<code>model |&gt; fit()</code> to save a model or weights (in a checkpoint file) at some
+interval, so the model or weights can be loaded later to continue the
+training from the state saved.</dd>
+      </dl><dl><dt>
+          
+          <code><a href="callback_progbar_logger.html">callback_progbar_logger()</a></code> 
+        </dt>
+        <dd>Callback that prints metrics to stdout.</dd>
+      </dl><dl><dt>
+          
+          <code><a href="callback_reduce_lr_on_plateau.html">callback_reduce_lr_on_plateau()</a></code> 
+        </dt>
+        <dd>Reduce learning rate when a metric has stopped improving.</dd>
+      </dl><dl><dt>
+          
+          <code><a href="callback_remote_monitor.html">callback_remote_monitor()</a></code> 
+        </dt>
+        <dd>Callback used to stream events to a server.</dd>
+      </dl><dl><dt>
+          
+          <code><a href="callback_tensorboard.html">callback_tensorboard()</a></code> 
+        </dt>
+        <dd>Enable visualizations for TensorBoard.</dd>
+      </dl><dl><dt>
+          
+          <code><a href="callback_terminate_on_nan.html">callback_terminate_on_nan()</a></code> 
+        </dt>
+        <dd>Callback that terminates training when a NaN loss is encountered.</dd>
+      </dl></div><div class="section level2">
+      <h2 id="initializers">Initializers<a class="anchor" aria-label="anchor" href="#initializers"></a></h2>
+      
+      
+
+      
+    </div><div id="" class="section level2">
+      
+      
+      
+
+      <dl><dt>
+          
+          <code><a href="initializer_constant.html">initializer_constant()</a></code> 
+        </dt>
+        <dd>Initializer that generates tensors with constant values.</dd>
+      </dl><dl><dt>
+          
+          <code><a href="initializer_glorot_normal.html">initializer_glorot_normal()</a></code> 
+        </dt>
+        <dd>The Glorot normal initializer, also called Xavier normal initializer.</dd>
+      </dl><dl><dt>
+          
+          <code><a href="initializer_glorot_uniform.html">initializer_glorot_uniform()</a></code> 
+        </dt>
+        <dd>The Glorot uniform initializer, also called Xavier uniform initializer.</dd>
+      </dl><dl><dt>
+          
+          <code><a href="initializer_he_normal.html">initializer_he_normal()</a></code> 
+        </dt>
+        <dd>He normal initializer.</dd>
+      </dl><dl><dt>
+          
+          <code><a href="initializer_he_uniform.html">initializer_he_uniform()</a></code> 
+        </dt>
+        <dd>He uniform variance scaling initializer.</dd>
+      </dl><dl><dt>
+          
+          <code><a href="initializer_identity.html">initializer_identity()</a></code> 
+        </dt>
+        <dd>Initializer that generates the identity matrix.</dd>
+      </dl><dl><dt>
+          
+          <code><a href="initializer_lecun_normal.html">initializer_lecun_normal()</a></code> 
+        </dt>
+        <dd>Lecun normal initializer.</dd>
+      </dl><dl><dt>
+          
+          <code><a href="initializer_lecun_uniform.html">initializer_lecun_uniform()</a></code> 
+        </dt>
+        <dd>Lecun uniform initializer.</dd>
+      </dl><dl><dt>
+          
+          <code><a href="initializer_ones.html">initializer_ones()</a></code> 
+        </dt>
+        <dd>Initializer that generates tensors initialized to 1.</dd>
+      </dl><dl><dt>
+          
+          <code><a href="initializer_orthogonal.html">initializer_orthogonal()</a></code> 
+        </dt>
+        <dd>Initializer that generates an orthogonal matrix.</dd>
+      </dl><dl><dt>
+          
+          <code><a href="initializer_random_normal.html">initializer_random_normal()</a></code> 
+        </dt>
+        <dd>Random normal initializer.</dd>
+      </dl><dl><dt>
+          
+          <code><a href="initializer_random_uniform.html">initializer_random_uniform()</a></code> 
+        </dt>
+        <dd>Random uniform initializer.</dd>
+      </dl><dl><dt>
+          
+          <code><a href="initializer_truncated_normal.html">initializer_truncated_normal()</a></code> 
+        </dt>
+        <dd>Initializer that generates a truncated normal distribution.</dd>
+      </dl><dl><dt>
+          
+          <code><a href="initializer_variance_scaling.html">initializer_variance_scaling()</a></code> 
+        </dt>
+        <dd>Initializer that adapts its scale to the shape of its input tensors.</dd>
+      </dl><dl><dt>
+          
+          <code><a href="initializer_zeros.html">initializer_zeros()</a></code> 
+        </dt>
+        <dd>Initializer that generates tensors initialized to 0.</dd>
+      </dl></div><div class="section level2">
+      <h2 id="constraints">Constraints<a class="anchor" aria-label="anchor" href="#constraints"></a></h2>
+      
+      
+
+      
+    </div><div id="" class="section level2">
+      
+      
+      
+
+      <dl><dt>
+          
+          <code><a href="Constraint.html">Constraint()</a></code> 
+        </dt>
+        <dd>Define a custom Constraint class.</dd>
+      </dl><dl><dt>
+          
+          <code><a href="constraint_maxnorm.html">constraint_maxnorm()</a></code> 
+        </dt>
+        <dd>MaxNorm weight constraint.</dd>
+      </dl><dl><dt>
+          
+          <code><a href="constraint_minmaxnorm.html">constraint_minmaxnorm()</a></code> 
+        </dt>
+        <dd>MinMaxNorm weight constraint.</dd>
+      </dl><dl><dt>
+          
+          <code><a href="constraint_nonneg.html">constraint_nonneg()</a></code> 
+        </dt>
+        <dd>Constrains the weights to be non-negative.</dd>
+      </dl><dl><dt>
+          
+          <code><a href="constraint_unitnorm.html">constraint_unitnorm()</a></code> 
+        </dt>
+        <dd>Constrains the weights incident to each hidden unit to have unit norm.</dd>
       </dl></div><div class="section level2">
       <h2 id="regularizers">Regularizers<a class="anchor" aria-label="anchor" href="#regularizers"></a></h2>
       
@@ -2315,6 +2534,248 @@ training from the state saved.</dd>
         </dt>
         <dd>Hyperbolic tangent activation function.</dd>
       </dl></div><div class="section level2">
+      <h2 id="utils">Utils<a class="anchor" aria-label="anchor" href="#utils"></a></h2>
+      
+      
+
+      
+    </div><div id="" class="section level2">
+      
+      
+      
+
+      <dl><dt>
+          
+          <code><a href="audio_dataset_from_directory.html">audio_dataset_from_directory()</a></code> 
+        </dt>
+        <dd>Generates a <code>tf.data.Dataset</code> from audio files in a directory.</dd>
+      </dl><dl><dt>
+          
+          <code><a href="clear_session.html">clear_session()</a></code> 
+        </dt>
+        <dd>Resets all state generated by Keras.</dd>
+      </dl><dl><dt>
+          
+          <code><a href="config_disable_interactive_logging.html">config_disable_interactive_logging()</a></code> 
+        </dt>
+        <dd>Turn off interactive logging.</dd>
+      </dl><dl><dt>
+          
+          <code><a href="config_disable_traceback_filtering.html">config_disable_traceback_filtering()</a></code> 
+        </dt>
+        <dd>Turn off traceback filtering.</dd>
+      </dl><dl><dt>
+          
+          <code><a href="config_enable_interactive_logging.html">config_enable_interactive_logging()</a></code> 
+        </dt>
+        <dd>Turn on interactive logging.</dd>
+      </dl><dl><dt>
+          
+          <code><a href="config_enable_traceback_filtering.html">config_enable_traceback_filtering()</a></code> 
+        </dt>
+        <dd>Turn on traceback filtering.</dd>
+      </dl><dl><dt>
+          
+          <code><a href="config_is_interactive_logging_enabled.html">config_is_interactive_logging_enabled()</a></code> 
+        </dt>
+        <dd>Check if interactive logging is enabled.</dd>
+      </dl><dl><dt>
+          
+          <code><a href="config_is_traceback_filtering_enabled.html">config_is_traceback_filtering_enabled()</a></code> 
+        </dt>
+        <dd>Check if traceback filtering is enabled.</dd>
+      </dl><dl><dt>
+          
+          <code><a href="get_file.html">get_file()</a></code> 
+        </dt>
+        <dd>Downloads a file from a URL if it not already in the cache.</dd>
+      </dl><dl><dt>
+          
+          <code><a href="get_source_inputs.html">get_source_inputs()</a></code> 
+        </dt>
+        <dd>Returns the list of input tensors necessary to compute <code>tensor</code>.</dd>
+      </dl><dl><dt>
+          
+          <code><a href="image_array_save.html">image_array_save()</a></code> 
+        </dt>
+        <dd>Saves an image stored as a NumPy array to a path or file object.</dd>
+      </dl><dl><dt>
+          
+          <code><a href="image_dataset_from_directory.html">image_dataset_from_directory()</a></code> 
+        </dt>
+        <dd>Generates a <code>tf.data.Dataset</code> from image files in a directory.</dd>
+      </dl><dl><dt>
+          
+          <code><a href="image_from_array.html">image_from_array()</a></code> 
+        </dt>
+        <dd>Converts a 3D array to a PIL Image instance.</dd>
+      </dl><dl><dt>
+          
+          <code><a href="image_load.html">image_load()</a></code> 
+        </dt>
+        <dd>Loads an image into PIL format.</dd>
+      </dl><dl><dt>
+          
+          <code><a href="image_smart_resize.html">image_smart_resize()</a></code> 
+        </dt>
+        <dd>Resize images to a target size without aspect ratio distortion.</dd>
+      </dl><dl><dt>
+          
+          <code><a href="image_to_array.html">image_to_array()</a></code> 
+        </dt>
+        <dd>Converts a PIL Image instance to a matrix.</dd>
+      </dl><dl><dt>
+          
+          <code><a href="layer_feature_space.html">layer_feature_space()</a></code> <code><a href="layer_feature_space.html">feature_cross()</a></code> <code><a href="layer_feature_space.html">feature_custom()</a></code> <code><a href="layer_feature_space.html">feature_float()</a></code> <code><a href="layer_feature_space.html">feature_float_rescaled()</a></code> <code><a href="layer_feature_space.html">feature_float_normalized()</a></code> <code><a href="layer_feature_space.html">feature_float_discretized()</a></code> <code><a href="layer_feature_space.html">feature_integer_categorical()</a></code> <code><a href="layer_feature_space.html">feature_string_categorical()</a></code> <code><a href="layer_feature_space.html">feature_string_hashed()</a></code> <code><a href="layer_feature_space.html">feature_integer_hashed()</a></code> 
+        </dt>
+        <dd>One-stop utility for preprocessing and encoding structured data.</dd>
+      </dl><dl><dt>
+          
+          <code><a href="layer_torch_module_wrapper.html">layer_torch_module_wrapper()</a></code> 
+        </dt>
+        <dd>Torch module wrapper layer.</dd>
+      </dl><dl><dt>
+          
+          <code><a href="model_to_dot.html">model_to_dot()</a></code> 
+        </dt>
+        <dd>Convert a Keras model to dot format.</dd>
+      </dl><dl><dt>
+          
+          <code><a href="normalize.html">normalize()</a></code> 
+        </dt>
+        <dd>Normalizes an array.</dd>
+      </dl><dl><dt>
+          
+          <code><a href="pack_x_y_sample_weight.html">pack_x_y_sample_weight()</a></code> 
+        </dt>
+        <dd>Packs user-provided data into a list.</dd>
+      </dl><dl><dt>
+          
+          <code><a href="pad_sequences.html">pad_sequences()</a></code> 
+        </dt>
+        <dd>Pads sequences to the same length.</dd>
+      </dl><dl><dt>
+          
+          <code><a href="set_random_seed.html">set_random_seed()</a></code> 
+        </dt>
+        <dd>Sets all random seeds (Python, NumPy, and backend framework, e.g. TF).</dd>
+      </dl><dl><dt>
+          
+          <code><a href="split_dataset.html">split_dataset()</a></code> 
+        </dt>
+        <dd>Splits a dataset into a left half and a right half (e.g. train / test).</dd>
+      </dl><dl><dt>
+          
+          <code><a href="text_dataset_from_directory.html">text_dataset_from_directory()</a></code> 
+        </dt>
+        <dd>Generates a <code>tf.data.Dataset</code> from text files in a directory.</dd>
+      </dl><dl><dt>
+          
+          <code><a href="timeseries_dataset_from_array.html">timeseries_dataset_from_array()</a></code> 
+        </dt>
+        <dd>Creates a dataset of sliding windows over a timeseries provided as array.</dd>
+      </dl><dl><dt>
+          
+          <code><a href="to_categorical.html">to_categorical()</a></code> 
+        </dt>
+        <dd>Converts a class vector (integers) to binary class matrix.</dd>
+      </dl><dl><dt>
+          
+          <code><a href="unpack_x_y_sample_weight.html">unpack_x_y_sample_weight()</a></code> 
+        </dt>
+        <dd>Unpacks user-provided data list.</dd>
+      </dl><dl><dt>
+          
+          <code><a href="plot.keras_training_history.html">plot(<i>&lt;keras_training_history&gt;</i>)</a></code> 
+        </dt>
+        <dd>Plot training history</dd>
+      </dl><dl><dt>
+          
+          <code><a href="plot.keras.src.models.model.Model.html">plot(<i>&lt;keras.src.models.model.Model&gt;</i>)</a></code> 
+        </dt>
+        <dd>Plot a Keras model</dd>
+      </dl><dl><dt>
+          
+          <code><a href="zip_lists.html">zip_lists()</a></code> 
+        </dt>
+        <dd>zip lists</dd>
+      </dl><dl><dt>
+          
+          <code><a href="active_property.html">active_property()</a></code> 
+        </dt>
+        <dd>Create an active property class method</dd>
+      </dl><dl><dt>
+          
+          <code><a href="with_custom_object_scope.html">with_custom_object_scope()</a></code> 
+        </dt>
+        <dd>Provide a scope with mappings of names to custom objects</dd>
+      </dl><dl><dt>
+          
+          <code><a href="install_keras.html">install_keras()</a></code> 
+        </dt>
+        <dd>Install Keras</dd>
+      </dl><dl><dt>
+          
+          <code><a href="is_keras_available.html">is_keras_available()</a></code> 
+        </dt>
+        <dd>Check if Keras is Available</dd>
+      </dl><dl><dt>
+          
+          <code><a href="use_backend.html">use_backend()</a></code> 
+        </dt>
+        <dd>Configure a Keras backend</dd>
+      </dl><dl><dt>
+          
+          <code><a href="shape.html">shape()</a></code> <code><a href="shape.html">format(<i>&lt;keras_shape&gt;</i>)</a></code> <code><a href="shape.html">print(<i>&lt;keras_shape&gt;</i>)</a></code> <code><a href="shape.html">`[`(<i>&lt;keras_shape&gt;</i>)</a></code> <code><a href="shape.html">as.integer(<i>&lt;keras_shape&gt;</i>)</a></code> <code><a href="shape.html">as.list(<i>&lt;keras_shape&gt;</i>)</a></code> 
+        </dt>
+        <dd>Tensor shape utility</dd>
+      </dl></div><div class="section level2">
+      
+      <h3 id="serialization-utilities">Serialization Utilities<a class="anchor" aria-label="anchor" href="#serialization-utilities"></a></h3>
+      
+
+      
+    </div><div id="" class="section level2">
+      
+      
+      
+
+      <dl><dt>
+          
+          <code><a href="register_keras_serializable.html">register_keras_serializable()</a></code> 
+        </dt>
+        <dd>Registers a custom object with the Keras serialization framework.</dd>
+      </dl><dl><dt>
+          
+          <code><a href="get_custom_objects.html">get_custom_objects()</a></code> <code><a href="get_custom_objects.html">set_custom_objects()</a></code> 
+        </dt>
+        <dd>Get/set the currently registered custom objects.</dd>
+      </dl><dl><dt>
+          
+          <code><a href="get_registered_name.html">get_registered_name()</a></code> 
+        </dt>
+        <dd>Returns the name registered to an object within the Keras framework.</dd>
+      </dl><dl><dt>
+          
+          <code><a href="get_registered_object.html">get_registered_object()</a></code> 
+        </dt>
+        <dd>Returns the class associated with <code>name</code> if it is registered with Keras.</dd>
+      </dl><dl><dt>
+          
+          <code><a href="serialize_keras_object.html">serialize_keras_object()</a></code> 
+        </dt>
+        <dd>Retrieve the full config by serializing the Keras object.</dd>
+      </dl><dl><dt>
+          
+          <code><a href="deserialize_keras_object.html">deserialize_keras_object()</a></code> 
+        </dt>
+        <dd>Retrieve the object by deserializing the config dict.</dd>
+      </dl><dl><dt>
+          
+          <code><a href="config_enable_unsafe_deserialization.html">config_enable_unsafe_deserialization()</a></code> 
+        </dt>
+        <dd>Disables safe mode globally, allowing deserialization of lambdas.</dd>
+      </dl></div><div class="section level2">
       <h2 id="misc-other-layers">Misc other layers<a class="anchor" aria-label="anchor" href="#misc-other-layers"></a></h2>
       
       
@@ -2400,6 +2861,11 @@ training from the state saved.</dd>
           <code><a href="layer_batch_normalization.html">layer_batch_normalization()</a></code> 
         </dt>
         <dd>Layer that normalizes its inputs.</dd>
+      </dl><dl><dt>
+          
+          <code><a href="layer_bidirectional.html">layer_bidirectional()</a></code> 
+        </dt>
+        <dd>Bidirectional wrapper for RNNs.</dd>
       </dl><dl><dt>
           
           <code><a href="layer_category_encoding.html">layer_category_encoding()</a></code> 
@@ -2779,7 +3245,7 @@ training from the state saved.</dd>
           
           <code><a href="layer_tfsm.html">layer_tfsm()</a></code> 
         </dt>
-        <dd>Reload a Keras model/layer that was saved via SavedModel / ExportArchive.</dd>
+        <dd>Reload a Keras model/layer that was saved via <code><a href="https://rdrr.io/pkg/tensorflow/man/export_savedmodel.html" class="external-link">export_savedmodel()</a></code>.</dd>
       </dl><dl><dt>
           
           <code><a href="layer_time_distributed.html">layer_time_distributed()</a></code> 
@@ -4096,16 +4562,6 @@ training from the state saved.</dd>
           <code><a href="keras.html">keras</a></code> 
         </dt>
         <dd>Main Keras module</dd>
-      </dl><dl><dt>
-          
-          <code><a href="grapes-py_class-grapes.html">`%py_class%`</a></code> 
-        </dt>
-        <dd>Make a python class constructor</dd>
-      </dl><dl><dt>
-          
-          <code><a href="grapes-set-active-grapes.html">`%&lt;-active%`</a></code> 
-        </dt>
-        <dd>Make an Active Binding</dd>
       </dl></div><div class="section level2">
       <h2 id="advanced">Advanced<a class="anchor" aria-label="anchor" href="#advanced"></a></h2>
       
@@ -4163,7 +4619,7 @@ training from the state saved.</dd>
           
           <code><a href="bidirectional.html">bidirectional()</a></code> 
         </dt>
-        <dd>Bidirectional wrapper for RNNs.</dd>
+        <dd>layer_bidirectional</dd>
       </dl><dl><dt>
           
           <code><a href="keras3-package.html">keras3-package</a></code> <code><a href="keras3-package.html">keras-package</a></code> 
@@ -4171,7 +4627,7 @@ training from the state saved.</dd>
         <dd>keras3: R Interface to 'Keras'</dd>
       </dl><dl><dt>
           
-          <code><a href="time_distributed.html">time_distributed()</a></code> 
+          <code><a href="time_distributed.html">time_distributed()</a></code> <code><a href="time_distributed.html">time_distributed()</a></code> 
         </dt>
         <dd>This layer wrapper allows to apply a layer to every temporal slice of an input</dd>
       </dl><dl><dt>

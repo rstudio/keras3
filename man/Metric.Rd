@@ -2,7 +2,7 @@
 % Please edit documentation in R/Metric.R
 \name{Metric}
 \alias{Metric}
-\title{Define a custom Metric}
+\title{Subclass the base \code{Metric} class}
 \usage{
 Metric(
   classname,

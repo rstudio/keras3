@@ -11,7 +11,7 @@ layer_spectral_normalization(object, layer, power_iterations = 1L, ...)
 
 \item{layer}{A \code{Layer} instance that
 has either a \code{kernel} (e.g. \code{layer_conv_2d}, \code{layer_dense}...)
-or an \code{embeddings} attribute (\code{Embedding} layer).}
+or an \code{embeddings} attribute (\code{layer_embedding} layer).}
 
 \item{power_iterations}{int, the number of iterations during normalization.}
 
@@ -35,7 +35,7 @@ shape(y)
 \if{html}{\out{<div class="sourceCode">}}\preformatted{## shape(1, 9, 9, 2)
 }\if{html}{\out{</div>}}
 
-Wrap \code{layer_Dense}:
+Wrap \code{layer_dense}:
 
 \if{html}{\out{<div class="sourceCode r">}}\preformatted{x <- random_uniform(c(1, 10, 10, 1))
 dense <- layer_spectral_normalization(layer = layer_dense(units = 10))
@@ -62,8 +62,6 @@ Other normalization layers:
 
 Other layers: 
 \code{\link{Layer}()},
-\code{\link{bidirectional}()},
-\code{\link{get_vocabulary}()},
 \code{\link{layer_activation_elu}()},
 \code{\link{layer_activation_leaky_relu}()},
 \code{\link{layer_activation_parametric_relu}()},
@@ -79,6 +77,7 @@ Other layers:
 \code{\link{layer_average_pooling_3d}()},
 \code{\link{layer_average}()},
 \code{\link{layer_batch_normalization}()},
+\code{\link{layer_bidirectional}()},
 \code{\link{layer_category_encoding}()},
 \code{\link{layer_center_crop}()},
 \code{\link{layer_concatenate}()},
@@ -152,6 +151,7 @@ Other layers:
 \code{\link{layer_spatial_dropout_3d}()},
 \code{\link{layer_string_lookup}()},
 \code{\link{layer_subtract}()},
+\code{\link{layer_text_vectorization}()},
 \code{\link{layer_tfsm}()},
 \code{\link{layer_time_distributed}()},
 \code{\link{layer_torch_module_wrapper}()},

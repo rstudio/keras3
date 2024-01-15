@@ -2,9 +2,9 @@
 % Please edit documentation in R/model-creation.R
 \name{keras_model}
 \alias{keras_model}
-\title{Keras Model}
+\title{Keras Model (Functional API)}
 \usage{
-keras_model(inputs, outputs = NULL, ...)
+keras_model(inputs = NULL, outputs = NULL, ...)
 }
 \arguments{
 \item{inputs}{Input tensor(s) (from \code{\link[=keras_input]{keras_input()}})}

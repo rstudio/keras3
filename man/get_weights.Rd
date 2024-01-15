@@ -25,9 +25,6 @@ You can access the Layer/Model as \code{tf.Tensors} or \code{tf.Variables} at
 \code{object$non_trainable_weights}
 }
 \seealso{
-Other model persistence: 
-\code{\link{save_model_config}()}
-
 Other layer methods: 
 \code{\link{count_params}()},
 \code{\link{get_config}()},

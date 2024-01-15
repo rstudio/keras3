@@ -2,7 +2,7 @@
 % Please edit documentation in R/Loss.R
 \name{Loss}
 \alias{Loss}
-\title{Define a custom loss class}
+\title{Subclass the base \code{Loss} class}
 \usage{
 Loss(
   classname,
@@ -38,7 +38,10 @@ runtime.}
 \item{parent_env}{The R environment that all class methods will have as a grandparent.}
 }
 \description{
-Define a custom loss class
+Use this to define a custom loss class. Note, in most cases you do not need
+to subclass \code{Loss} to define a custom loss: you can also pass a bare R
+function, or a named R function defined with \code{\link[=custom_metric]{custom_metric()}}, as a loss
+function to \code{compile()}.
 }
 \details{
 Example subclass implementation:

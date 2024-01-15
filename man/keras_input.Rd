@@ -2,7 +2,7 @@
 % Please edit documentation in R/model-creation.R
 \name{keras_input}
 \alias{keras_input}
-\title{Used to instantiate a Keras tensor.}
+\title{Create a Keras tensor (Functional API input).}
 \usage{
 keras_input(
   shape = NULL,

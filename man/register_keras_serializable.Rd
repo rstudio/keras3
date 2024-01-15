@@ -2,7 +2,7 @@
 % Please edit documentation in R/model-persistence.R
 \name{register_keras_serializable}
 \alias{register_keras_serializable}
-\title{Registers an object with the Keras serialization framework.}
+\title{Registers a custom object with the Keras serialization framework.}
 \usage{
 register_keras_serializable(object, name = NULL, package = NULL)
 }
@@ -42,20 +42,23 @@ stopifnot(exprs = \{
 }
 
 \seealso{
-Other object registration saving: 
-\code{\link{clear_registered_custom_objects}()},
-\code{\link{get_registered_name}()},
-\code{\link{get_registered_object}()}
+Other saving and loading functions: 
+\code{\link{export_savedmodel.keras.src.models.model.Model}()},
+\code{\link{layer_tfsm}()},
+\code{\link{load_model_weights}()},
+\code{\link{load_model}()},
+\code{\link{save_model_config}()},
+\code{\link{save_model_weights}()},
+\code{\link{save_model}()},
+\code{\link{with_custom_object_scope}()}
 
-Other saving: 
-\code{\link{clear_registered_custom_objects}()},
-\code{\link{config_enable_unsafe_deserialization}()},
+Other serialization utilities: 
 \code{\link{deserialize_keras_object}()},
+\code{\link{get_custom_objects}()},
 \code{\link{get_registered_name}()},
 \code{\link{get_registered_object}()},
-\code{\link{layer_tfsm}()},
-\code{\link{load_model}()},
-\code{\link{serialize_keras_object}()}
+\code{\link{serialize_keras_object}()},
+\code{\link{with_custom_object_scope}()}
 }
-\concept{object registration saving}
-\concept{saving}
+\concept{saving and loading functions}
+\concept{serialization utilities}

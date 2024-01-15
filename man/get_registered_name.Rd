@@ -19,20 +19,12 @@ framework. It maps objects to the string names associated with those objects
 for serialization/deserialization.
 }
 \seealso{
-Other object registration saving: 
-\code{\link{clear_registered_custom_objects}()},
-\code{\link{get_registered_object}()},
-\code{\link{register_keras_serializable}()}
-
-Other saving: 
-\code{\link{clear_registered_custom_objects}()},
-\code{\link{config_enable_unsafe_deserialization}()},
+Other serialization utilities: 
 \code{\link{deserialize_keras_object}()},
+\code{\link{get_custom_objects}()},
 \code{\link{get_registered_object}()},
-\code{\link{layer_tfsm}()},
-\code{\link{load_model}()},
 \code{\link{register_keras_serializable}()},
-\code{\link{serialize_keras_object}()}
+\code{\link{serialize_keras_object}()},
+\code{\link{with_custom_object_scope}()}
 }
-\concept{object registration saving}
-\concept{saving}
+\concept{serialization utilities}

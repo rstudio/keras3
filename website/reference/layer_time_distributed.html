@@ -6,7 +6,7 @@ image with channels_last data format, across 10 timesteps.
 The batch input shape is (32, 10, 128, 128, 3).
 You can then use TimeDistributed to apply the same Conv2D layer to each
 of the 10 timesteps, independently:
-inputs &amp;lt;- layer_input(shape = c(10, 128, 128, 3), batch_size = 32)
+inputs &amp;lt;- keras_input(shape = c(10, 128, 128, 3), batch_size = 32)
 conv_2d_layer &amp;lt;- layer_conv_2d(filters = 64, kernel_size = c(3, 3))
 outputs &amp;lt;- layer_time_distributed(inputs, layer = conv_2d_layer)
 shape(outputs)
@@ -21,7 +21,7 @@ image with channels_last data format, across 10 timesteps.
 The batch input shape is (32, 10, 128, 128, 3).
 You can then use TimeDistributed to apply the same Conv2D layer to each
 of the 10 timesteps, independently:
-inputs &amp;lt;- layer_input(shape = c(10, 128, 128, 3), batch_size = 32)
+inputs &amp;lt;- keras_input(shape = c(10, 128, 128, 3), batch_size = 32)
 conv_2d_layer &amp;lt;- layer_conv_2d(filters = 64, kernel_size = c(3, 3))
 outputs &amp;lt;- layer_time_distributed(inputs, layer = conv_2d_layer)
 shape(outputs)
@@ -105,7 +105,7 @@ image with <code>channels_last</code> data format, across 10 timesteps.
 The batch input shape is <code>(32, 10, 128, 128, 3)</code>.</p>
 <p>You can then use <code>TimeDistributed</code> to apply the same <code>Conv2D</code> layer to each
 of the 10 timesteps, independently:</p>
-<p></p><div class="sourceCode r"><pre><code><span><span class="va">inputs</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/layer_input.html">layer_input</a></span><span class="op">(</span>shape <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">10</span>, <span class="fl">128</span>, <span class="fl">128</span>, <span class="fl">3</span><span class="op">)</span>, batch_size <span class="op">=</span> <span class="fl">32</span><span class="op">)</span></span>
+<p></p><div class="sourceCode r"><pre><code><span><span class="va">inputs</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/keras_input.html">keras_input</a></span><span class="op">(</span>shape <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">10</span>, <span class="fl">128</span>, <span class="fl">128</span>, <span class="fl">3</span><span class="op">)</span>, batch_size <span class="op">=</span> <span class="fl">32</span><span class="op">)</span></span>
 <span><span class="va">conv_2d_layer</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/layer_conv_2d.html">layer_conv_2d</a></span><span class="op">(</span>filters <span class="op">=</span> <span class="fl">64</span>, kernel_size <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">3</span>, <span class="fl">3</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="va">outputs</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/layer_time_distributed.html">layer_time_distributed</a></span><span class="op">(</span><span class="va">inputs</span>, layer <span class="op">=</span> <span class="va">conv_2d_layer</span><span class="op">)</span></span>
 <span><span class="fu"><a href="../reference/shape.html">shape</a></span><span class="op">(</span><span class="va">outputs</span><span class="op">)</span></span></code></pre><p></p></div>
@@ -150,7 +150,7 @@ wrapped layer (only if the layer supports this argument).</p></li>
     <div class="dont-index">
 <ul><li><p><a href="https://keras.io/api/layers/recurrent_layers/time_distributed#timedistributed-class" class="external-link">https://keras.io/api/layers/recurrent_layers/time_distributed#timedistributed-class</a></p></li>
 </ul><p>Other rnn layers: 
-<code><a href="bidirectional.html">bidirectional</a>()</code>,
+<code><a href="layer_bidirectional.html">layer_bidirectional</a>()</code>,
 <code><a href="layer_conv_lstm_1d.html">layer_conv_lstm_1d</a>()</code>,
 <code><a href="layer_conv_lstm_2d.html">layer_conv_lstm_2d</a>()</code>,
 <code><a href="layer_conv_lstm_3d.html">layer_conv_lstm_3d</a>()</code>,
@@ -164,7 +164,6 @@ wrapped layer (only if the layer supports this argument).</p></li>
 <code><a href="rnn_cells_stack.html">rnn_cells_stack</a>()</code></p>
 <p>Other layers: 
 <code><a href="Layer.html">Layer</a>()</code>,
-<code><a href="bidirectional.html">bidirectional</a>()</code>,
 <code><a href="layer_text_vectorization.html">get_vocabulary</a>()</code>,
 <code><a href="layer_activation_elu.html">layer_activation_elu</a>()</code>,
 <code><a href="layer_activation_leaky_relu.html">layer_activation_leaky_relu</a>()</code>,
@@ -181,6 +180,7 @@ wrapped layer (only if the layer supports this argument).</p></li>
 <code><a href="layer_average_pooling_3d.html">layer_average_pooling_3d</a>()</code>,
 <code><a href="layer_average.html">layer_average</a>()</code>,
 <code><a href="layer_batch_normalization.html">layer_batch_normalization</a>()</code>,
+<code><a href="layer_bidirectional.html">layer_bidirectional</a>()</code>,
 <code><a href="layer_category_encoding.html">layer_category_encoding</a>()</code>,
 <code><a href="layer_center_crop.html">layer_center_crop</a>()</code>,
 <code><a href="layer_concatenate.html">layer_concatenate</a>()</code>,

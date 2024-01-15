@@ -18,22 +18,21 @@ Provide a scope with mappings of names to custom objects
 There are many elements of Keras models that can be customized with
 user objects (e.g. losses, metrics, regularizers, etc.). When
 loading saved models that use these functions you typically
-need to explicitily map names to user objects via the \code{custom_objects}
-parmaeter.
+need to explicitly map names to user objects via the \code{custom_objects}
+parameter.
 
 The \code{with_custom_object_scope()} function provides an alternative that
 lets you create a named alias for a user object that applies to an entire
 block of code, and is automatically recognized when loading saved models.
 }
-\examples{
-\dontrun{
-# define custom metric
+\section{Examples}{
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{# define custom metric
 metric_top_3_categorical_accuracy <-
-  custom_metric("top_3_categorical_accuracy", function(y_true, y_pred) {
+  custom_metric("top_3_categorical_accuracy", function(y_true, y_pred) \{
     metric_top_k_categorical_accuracy(y_true, y_pred, k = 3)
-  })
+  \})
 
-with_custom_object_scope(c(top_k_acc = sparse_top_k_cat_acc), {
+with_custom_object_scope(c(top_k_acc = sparse_top_k_cat_acc), \{
 
   # ...define model...
 
@@ -50,7 +49,28 @@ with_custom_object_scope(c(top_k_acc = sparse_top_k_cat_acc), {
   # loading the model within the custom object scope doesn't
   # require explicitly providing the custom_object
   reloaded_model <- load_model("my_model.keras")
-})
+\})
+}\if{html}{\out{</div>}}
 }
 
+\seealso{
+Other saving and loading functions: 
+\code{\link{export_savedmodel.keras.src.models.model.Model}()},
+\code{\link{layer_tfsm}()},
+\code{\link{load_model_weights}()},
+\code{\link{load_model}()},
+\code{\link{register_keras_serializable}()},
+\code{\link{save_model_config}()},
+\code{\link{save_model_weights}()},
+\code{\link{save_model}()}
+
+Other serialization utilities: 
+\code{\link{deserialize_keras_object}()},
+\code{\link{get_custom_objects}()},
+\code{\link{get_registered_name}()},
+\code{\link{get_registered_object}()},
+\code{\link{register_keras_serializable}()},
+\code{\link{serialize_keras_object}()}
 }
+\concept{saving and loading functions}
+\concept{serialization utilities}

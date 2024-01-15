@@ -91,44 +91,59 @@
     <p>There are many elements of Keras models that can be customized with
 user objects (e.g. losses, metrics, regularizers, etc.). When
 loading saved models that use these functions you typically
-need to explicitily map names to user objects via the <code>custom_objects</code>
-parmaeter.</p>
+need to explicitly map names to user objects via the <code>custom_objects</code>
+parameter.</p>
 <p>The <code>with_custom_object_scope()</code> function provides an alternative that
 lets you create a named alias for a user object that applies to an entire
 block of code, and is automatically recognized when loading saved models.</p>
     </div>
-
     <div class="section level2">
-    <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="kw">if</span> <span class="op">(</span><span class="cn">FALSE</span><span class="op">)</span> <span class="op">{</span></span></span>
-<span class="r-in"><span><span class="co"># define custom metric</span></span></span>
-<span class="r-in"><span><span class="va">metric_top_3_categorical_accuracy</span> <span class="op">&lt;-</span></span></span>
-<span class="r-in"><span>  <span class="fu"><a href="custom_metric.html">custom_metric</a></span><span class="op">(</span><span class="st">"top_3_categorical_accuracy"</span>, <span class="kw">function</span><span class="op">(</span><span class="va">y_true</span>, <span class="va">y_pred</span><span class="op">)</span> <span class="op">{</span></span></span>
-<span class="r-in"><span>    <span class="fu"><a href="metric_top_k_categorical_accuracy.html">metric_top_k_categorical_accuracy</a></span><span class="op">(</span><span class="va">y_true</span>, <span class="va">y_pred</span>, k <span class="op">=</span> <span class="fl">3</span><span class="op">)</span></span></span>
-<span class="r-in"><span>  <span class="op">}</span><span class="op">)</span></span></span>
-<span class="r-in"><span></span></span>
-<span class="r-in"><span><span class="fu">with_custom_object_scope</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span>top_k_acc <span class="op">=</span> <span class="va">sparse_top_k_cat_acc</span><span class="op">)</span>, <span class="op">{</span></span></span>
-<span class="r-in"><span></span></span>
-<span class="r-in"><span>  <span class="co"># ...define model...</span></span></span>
-<span class="r-in"><span></span></span>
-<span class="r-in"><span>  <span class="co"># compile model (refer to "top_k_acc" by name)</span></span></span>
-<span class="r-in"><span>  <span class="va">model</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://generics.r-lib.org/reference/compile.html" class="external-link">compile</a></span><span class="op">(</span></span></span>
-<span class="r-in"><span>    loss <span class="op">=</span> <span class="st">"binary_crossentropy"</span>,</span></span>
-<span class="r-in"><span>    optimizer <span class="op">=</span> <span class="fu"><a href="optimizer_nadam.html">optimizer_nadam</a></span><span class="op">(</span><span class="op">)</span>,</span></span>
-<span class="r-in"><span>    metrics <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"top_k_acc"</span><span class="op">)</span></span></span>
-<span class="r-in"><span>  <span class="op">)</span></span></span>
-<span class="r-in"><span></span></span>
-<span class="r-in"><span>  <span class="co"># save the model</span></span></span>
-<span class="r-in"><span>  <span class="va">model</span> <span class="op">|&gt;</span> <span class="fu"><a href="save_model.html">save_model</a></span><span class="op">(</span><span class="st">"my_model.keras"</span><span class="op">)</span></span></span>
-<span class="r-in"><span></span></span>
-<span class="r-in"><span>  <span class="co"># loading the model within the custom object scope doesn't</span></span></span>
-<span class="r-in"><span>  <span class="co"># require explicitly providing the custom_object</span></span></span>
-<span class="r-in"><span>  <span class="va">reloaded_model</span> <span class="op">&lt;-</span> <span class="fu"><a href="load_model.html">load_model</a></span><span class="op">(</span><span class="st">"my_model.keras"</span><span class="op">)</span></span></span>
-<span class="r-in"><span><span class="op">}</span><span class="op">)</span></span></span>
-<span class="r-in"><span><span class="op">}</span></span></span>
-<span class="r-in"><span></span></span>
-</code></pre></div>
+    <h2 id="examples">Examples<a class="anchor" aria-label="anchor" href="#examples"></a></h2>
+    <p></p><div class="sourceCode r"><pre><code><span><span class="co"># define custom metric</span></span>
+<span><span class="va">metric_top_3_categorical_accuracy</span> <span class="op">&lt;-</span></span>
+<span>  <span class="fu"><a href="../reference/custom_metric.html">custom_metric</a></span><span class="op">(</span><span class="st">"top_3_categorical_accuracy"</span>, <span class="kw">function</span><span class="op">(</span><span class="va">y_true</span>, <span class="va">y_pred</span><span class="op">)</span> <span class="op">{</span></span>
+<span>    <span class="fu"><a href="../reference/metric_top_k_categorical_accuracy.html">metric_top_k_categorical_accuracy</a></span><span class="op">(</span><span class="va">y_true</span>, <span class="va">y_pred</span>, k <span class="op">=</span> <span class="fl">3</span><span class="op">)</span></span>
+<span>  <span class="op">}</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu"><a href="../reference/with_custom_object_scope.html">with_custom_object_scope</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span>top_k_acc <span class="op">=</span> <span class="va">sparse_top_k_cat_acc</span><span class="op">)</span>, <span class="op">{</span></span>
+<span></span>
+<span>  <span class="co"># ...define model...</span></span>
+<span></span>
+<span>  <span class="co"># compile model (refer to "top_k_acc" by name)</span></span>
+<span>  <span class="va">model</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://generics.r-lib.org/reference/compile.html" class="external-link">compile</a></span><span class="op">(</span></span>
+<span>    loss <span class="op">=</span> <span class="st">"binary_crossentropy"</span>,</span>
+<span>    optimizer <span class="op">=</span> <span class="fu"><a href="../reference/optimizer_nadam.html">optimizer_nadam</a></span><span class="op">(</span><span class="op">)</span>,</span>
+<span>    metrics <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"top_k_acc"</span><span class="op">)</span></span>
+<span>  <span class="op">)</span></span>
+<span></span>
+<span>  <span class="co"># save the model</span></span>
+<span>  <span class="va">model</span> <span class="op">|&gt;</span> <span class="fu"><a href="../reference/save_model.html">save_model</a></span><span class="op">(</span><span class="st">"my_model.keras"</span><span class="op">)</span></span>
+<span></span>
+<span>  <span class="co"># loading the model within the custom object scope doesn't</span></span>
+<span>  <span class="co"># require explicitly providing the custom_object</span></span>
+<span>  <span class="va">reloaded_model</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/load_model.html">load_model</a></span><span class="op">(</span><span class="st">"my_model.keras"</span><span class="op">)</span></span>
+<span><span class="op">}</span><span class="op">)</span></span></code></pre><p></p></div>
     </div>
+    <div class="section level2">
+    <h2 id="see-also">See also<a class="anchor" aria-label="anchor" href="#see-also"></a></h2>
+    <div class="dont-index"><p>Other saving and loading functions: 
+<code><a href="export_savedmodel.keras.src.models.model.Model.html">export_savedmodel.keras.src.models.model.Model</a>()</code>,
+<code><a href="layer_tfsm.html">layer_tfsm</a>()</code>,
+<code><a href="load_model_weights.html">load_model_weights</a>()</code>,
+<code><a href="load_model.html">load_model</a>()</code>,
+<code><a href="register_keras_serializable.html">register_keras_serializable</a>()</code>,
+<code><a href="save_model_config.html">save_model_config</a>()</code>,
+<code><a href="save_model_weights.html">save_model_weights</a>()</code>,
+<code><a href="save_model.html">save_model</a>()</code></p>
+<p>Other serialization utilities: 
+<code><a href="deserialize_keras_object.html">deserialize_keras_object</a>()</code>,
+<code><a href="get_custom_objects.html">get_custom_objects</a>()</code>,
+<code><a href="get_registered_name.html">get_registered_name</a>()</code>,
+<code><a href="get_registered_object.html">get_registered_object</a>()</code>,
+<code><a href="register_keras_serializable.html">register_keras_serializable</a>()</code>,
+<code><a href="serialize_keras_object.html">serialize_keras_object</a>()</code></p></div>
+    </div>
+
   </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>
     </nav></aside></div>
 

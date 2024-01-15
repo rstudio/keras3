@@ -9,7 +9,7 @@ layer_time_distributed(object, layer, ...)
 \arguments{
 \item{object}{Object to compose the layer with. A tensor, array, or sequential model.}
 
-\item{layer}{a \code{layer_Layer} instance.}
+\item{layer}{A \code{Layer} instance.}
 
 \item{...}{For forward/backward compatability.}
 }
@@ -24,7 +24,7 @@ The batch input shape is \verb{(32, 10, 128, 128, 3)}.
 You can then use \code{TimeDistributed} to apply the same \code{Conv2D} layer to each
 of the 10 timesteps, independently:
 
-\if{html}{\out{<div class="sourceCode r">}}\preformatted{inputs <- layer_input(shape = c(10, 128, 128, 3), batch_size = 32)
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{inputs <- keras_input(shape = c(10, 128, 128, 3), batch_size = 32)
 conv_2d_layer <- layer_conv_2d(filters = 64, kernel_size = c(3, 3))
 outputs <- layer_time_distributed(inputs, layer = conv_2d_layer)
 shape(outputs)
@@ -55,7 +55,7 @@ wrapped layer (only if the layer supports this argument).
 }
 
 Other rnn layers: 
-\code{\link{bidirectional}()},
+\code{\link{layer_bidirectional}()},
 \code{\link{layer_conv_lstm_1d}()},
 \code{\link{layer_conv_lstm_2d}()},
 \code{\link{layer_conv_lstm_3d}()},
@@ -70,8 +70,6 @@ Other rnn layers:
 
 Other layers: 
 \code{\link{Layer}()},
-\code{\link{bidirectional}()},
-\code{\link{get_vocabulary}()},
 \code{\link{layer_activation_elu}()},
 \code{\link{layer_activation_leaky_relu}()},
 \code{\link{layer_activation_parametric_relu}()},
@@ -87,6 +85,7 @@ Other layers:
 \code{\link{layer_average_pooling_3d}()},
 \code{\link{layer_average}()},
 \code{\link{layer_batch_normalization}()},
+\code{\link{layer_bidirectional}()},
 \code{\link{layer_category_encoding}()},
 \code{\link{layer_center_crop}()},
 \code{\link{layer_concatenate}()},
@@ -161,6 +160,7 @@ Other layers:
 \code{\link{layer_spectral_normalization}()},
 \code{\link{layer_string_lookup}()},
 \code{\link{layer_subtract}()},
+\code{\link{layer_text_vectorization}()},
 \code{\link{layer_tfsm}()},
 \code{\link{layer_torch_module_wrapper}()},
 \code{\link{layer_unit_normalization}()},

@@ -52,7 +52,6 @@ Other utils:
 \code{\link{config_is_interactive_logging_enabled}()},
 \code{\link{config_is_traceback_filtering_enabled}()},
 \code{\link{get_file}()},
-\code{\link{get_registered_object}()},
 \code{\link{get_source_inputs}()},
 \code{\link{image_array_save}()},
 \code{\link{image_dataset_from_directory}()},

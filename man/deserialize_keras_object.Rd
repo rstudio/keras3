@@ -87,11 +87,7 @@ deserialize_keras_object(config)
 And the following config represents a user-customized \code{MeanSquaredError}
 loss:
 
-\if{html}{\out{<div class="sourceCode r">}}\preformatted{# setup for example
-o_registered <- get_custom_objects()$copy()
-clear_registered_custom_objects()
-
-# define a custom object
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{# define a custom object
 loss_modified_mse <- Loss(
   "ModifiedMeanSquaredError",
   inherit = loss_mean_squared_error)
@@ -103,7 +99,8 @@ register_keras_serializable(loss_modified_mse)
 get_custom_objects()
 }\if{html}{\out{</div>}}
 
-\if{html}{\out{<div class="sourceCode">}}\preformatted{## \{'keras3>ModifiedMeanSquaredError': <class '<r-namespace:keras3>.ModifiedMeanSquaredError'>\}
+\if{html}{\out{<div class="sourceCode">}}\preformatted{## $`keras3>ModifiedMeanSquaredError`
+## <class '<r-namespace:keras3>.ModifiedMeanSquaredError'>
 }\if{html}{\out{</div>}}
 
 \if{html}{\out{<div class="sourceCode r">}}\preformatted{get_registered_name(loss_modified_mse)
@@ -136,13 +133,6 @@ deserialize_keras_object(full_config)
 }\if{html}{\out{</div>}}
 
 \if{html}{\out{<div class="sourceCode r">}}\preformatted{# Returns the `ModifiedMeanSquaredError` object
-
-# cleanup from example
-clear_registered_custom_objects() # cleanup
-get_custom_objects()$update(o_registered)
-}\if{html}{\out{</div>}}
-
-\if{html}{\out{<div class="sourceCode">}}\preformatted{## None
 }\if{html}{\out{</div>}}
 }
 \seealso{
@@ -150,14 +140,12 @@ get_custom_objects()$update(o_registered)
 \item \url{https://keras.io/api/models/model_saving_apis/serialization_utils#deserializekerasobject-function}
 }
 
-Other saving: 
-\code{\link{clear_registered_custom_objects}()},
-\code{\link{config_enable_unsafe_deserialization}()},
+Other serialization utilities: 
+\code{\link{get_custom_objects}()},
 \code{\link{get_registered_name}()},
 \code{\link{get_registered_object}()},
-\code{\link{layer_tfsm}()},
-\code{\link{load_model}()},
 \code{\link{register_keras_serializable}()},
-\code{\link{serialize_keras_object}()}
+\code{\link{serialize_keras_object}()},
+\code{\link{with_custom_object_scope}()}
 }
-\concept{saving}
+\concept{serialization utilities}

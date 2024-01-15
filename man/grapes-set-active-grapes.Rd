@@ -40,3 +40,4 @@ rm(x) # cleanup
 \seealso{
 \code{\link[=makeActiveBinding]{makeActiveBinding()}}
 }
+\keyword{internal}

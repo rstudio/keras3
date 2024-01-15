@@ -10,16 +10,6 @@ config_enable_unsafe_deserialization()
 Disables safe mode globally, allowing deserialization of lambdas.
 }
 \seealso{
-Other saving: 
-\code{\link{clear_registered_custom_objects}()},
-\code{\link{deserialize_keras_object}()},
-\code{\link{get_registered_name}()},
-\code{\link{get_registered_object}()},
-\code{\link{layer_tfsm}()},
-\code{\link{load_model}()},
-\code{\link{register_keras_serializable}()},
-\code{\link{serialize_keras_object}()}
-
 Other config: 
 \code{\link{config_backend}()},
 \code{\link{config_disable_interactive_logging}()},

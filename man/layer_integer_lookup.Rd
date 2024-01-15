@@ -384,8 +384,13 @@ either directly or via \code{adapt()} before calling \code{get_vocabulary()}.
 \item \url{https://keras.io/api/layers/preprocessing_layers/categorical/integer_lookup#integerlookup-class}
 }
 
+Other categorical features preprocessing layers: 
+\code{\link{layer_category_encoding}()},
+\code{\link{layer_hashed_crossing}()},
+\code{\link{layer_hashing}()},
+\code{\link{layer_string_lookup}()}
+
 Other preprocessing layers: 
-\code{\link{get_vocabulary}()},
 \code{\link{layer_category_encoding}()},
 \code{\link{layer_center_crop}()},
 \code{\link{layer_discretization}()},
@@ -402,12 +407,11 @@ Other preprocessing layers:
 \code{\link{layer_random_zoom}()},
 \code{\link{layer_rescaling}()},
 \code{\link{layer_resizing}()},
-\code{\link{layer_string_lookup}()}
+\code{\link{layer_string_lookup}()},
+\code{\link{layer_text_vectorization}()}
 
 Other layers: 
 \code{\link{Layer}()},
-\code{\link{bidirectional}()},
-\code{\link{get_vocabulary}()},
 \code{\link{layer_activation_elu}()},
 \code{\link{layer_activation_leaky_relu}()},
 \code{\link{layer_activation_parametric_relu}()},
@@ -423,6 +427,7 @@ Other layers:
 \code{\link{layer_average_pooling_3d}()},
 \code{\link{layer_average}()},
 \code{\link{layer_batch_normalization}()},
+\code{\link{layer_bidirectional}()},
 \code{\link{layer_category_encoding}()},
 \code{\link{layer_center_crop}()},
 \code{\link{layer_concatenate}()},
@@ -496,6 +501,7 @@ Other layers:
 \code{\link{layer_spectral_normalization}()},
 \code{\link{layer_string_lookup}()},
 \code{\link{layer_subtract}()},
+\code{\link{layer_text_vectorization}()},
 \code{\link{layer_tfsm}()},
 \code{\link{layer_time_distributed}()},
 \code{\link{layer_torch_module_wrapper}()},
@@ -511,5 +517,6 @@ Other layers:
 \code{\link{rnn_cell_simple}()},
 \code{\link{rnn_cells_stack}()}
 }
+\concept{categorical features preprocessing layers}
 \concept{layers}
 \concept{preprocessing layers}

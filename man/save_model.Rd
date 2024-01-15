@@ -53,3 +53,17 @@ Thus models can be reinstantiated in the exact same state.
 }\if{html}{\out{</div>}}
 }
 
+\seealso{
+\code{\link[=load_model]{load_model()}}
+
+Other saving and loading functions: 
+\code{\link{export_savedmodel.keras.src.models.model.Model}()},
+\code{\link{layer_tfsm}()},
+\code{\link{load_model_weights}()},
+\code{\link{load_model}()},
+\code{\link{register_keras_serializable}()},
+\code{\link{save_model_config}()},
+\code{\link{save_model_weights}()},
+\code{\link{with_custom_object_scope}()}
+}
+\concept{saving and loading functions}
