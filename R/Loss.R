@@ -1,5 +1,10 @@
 
-#' Define a custom loss class
+#' Subclass the base `Loss` class
+#'
+#' Use this to define a custom loss class. Note, in most cases you do not need
+#' to subclass `Loss` to define a custom loss: you can also pass a bare R
+#' function, or a named R function defined with [`custom_metric()`], as a loss
+#' function to `compile()`.
 #'
 #' @param call
 #' ```r

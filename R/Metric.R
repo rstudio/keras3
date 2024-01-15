@@ -1,5 +1,5 @@
 
-#' Define a custom Metric
+#' Subclass the base `Metric` class
 #'
 #' A `Metric` object encapsulates metric logic and state that can be used to
 #' track model performance during training. It is what is returned by the family

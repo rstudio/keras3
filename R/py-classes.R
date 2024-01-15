@@ -513,7 +513,8 @@ def wrap_fn(_fn):
 #'   also assigned in the parent frame.
 #' @export
 #' @aliases py_class
-#'
+#' @keywords internal
+#' @seealso [`%<-active%()`]
 #'
 #' @examples
 #' \dontrun{
@@ -778,6 +779,7 @@ function(x) {
 #'   `@property` decorated methods.
 #'
 #' @seealso [`makeActiveBinding()`]
+#' @keywords internal
 #'
 #' @examples
 #' set.seed(1234)

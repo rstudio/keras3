@@ -1,5 +1,5 @@
 
-#' Keras Model
+#' Keras Model (Functional API)
 #'
 #' A model is a directed acyclic graph of layers.
 #'
@@ -34,12 +34,12 @@
 #' @family model functions
 #' @family model creation
 #' @tether keras.Model
-keras_model <- function(inputs, outputs = NULL, ...) {
+keras_model <- function(inputs = NULL, outputs = NULL, ...) {
   keras$models$Model(inputs = inputs, outputs = outputs, ...)
 }
 
 
-#' Used to instantiate a Keras tensor.
+#' Create a Keras tensor (Functional API input).
 #'
 #' @description
 #' A Keras tensor is a symbolic tensor-like object, which we augment with

@@ -412,7 +412,7 @@ function (object, axis = -1L, epsilon = 0.001, center = TRUE,
 #' shape(y)
 #' ```
 #'
-#' Wrap `layer_Dense`:
+#' Wrap `layer_dense`:
 #' ```{r}
 #' x <- random_uniform(c(1, 10, 10, 1))
 #' dense <- layer_spectral_normalization(layer = layer_dense(units = 10))
@@ -426,7 +426,7 @@ function (object, axis = -1L, epsilon = 0.001, center = TRUE,
 #' @param layer
 #' A `Layer` instance that
 #' has either a `kernel` (e.g. `layer_conv_2d`, `layer_dense`...)
-#' or an `embeddings` attribute (`Embedding` layer).
+#' or an `embeddings` attribute (`layer_embedding` layer).
 #'
 #' @param power_iterations
 #' int, the number of iterations during normalization.
