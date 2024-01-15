@@ -176,7 +176,7 @@ function to demonstrate this.
 
 ```{r}
 # Clear all previously registered custom objects
-clear_registered_custom_objects()
+set_custom_objects(clear = TRUE)
 
 
 layer_custom <- Layer(

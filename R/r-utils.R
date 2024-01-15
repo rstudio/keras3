@@ -112,6 +112,24 @@ rename <- function(x, ..., .skip_existing = TRUE) {
   x
 }
 
+`%""%` <- function (x, y) {
+  if(!is.character(x))
+    stop("x must be character")
+  not_empty <- nzchar(x)
+  if(all(not_empty))
+    return(x)
+  if(!is.character(y))
+    stop("y must be character")
+  # don't force `y` unless needed
+  if (!identical(length(y), length(x))) {
+    stopifnot(identical(length(y), 1L))
+    y <- rep(y, length(x))
+  }
+  empty <- !not_empty
+  x[empty] <- y[empty]
+  x
+}
+
 
 # ---- arg checkers ----
 
@@ -396,6 +414,8 @@ resolve_py_obj <- function(x, default_name = "anonymous_R_function",
   #    (e.g., loss, metrics)
   # - to resolve args that can come in as callables passed to layer_* constructors.
   #    (e.g., constraints, activations, initializers)
+  # - to resolve custom_objects supplied to the saving & serialization API,
+  #    (e.g., with_custom_object_scope(), load_model(), ...)
 
   # - `x` can come in as a language object, enabling lazy evaluation /
   #   delayed initialization python
@@ -426,6 +446,7 @@ resolve_py_obj <- function(x, default_name = "anonymous_R_function",
 
     py_obj_expr <- resolve_wrapper_py_obj_expr(x, prefer_class = prefer_class)
     if (!is.null(py_obj_expr)) {
+      # eval in environment(x): wrapper env, where we might find `__class__`.
       py_obj <- tryCatch(eval(py_obj_expr, environment(x)),
                          error = function(e) NULL)
 

@@ -53,6 +53,8 @@
 #' @param model A keras model.
 #'
 #' @export
+#' @seealso [load_model()]
+#' @family saving and loading functions
 #' @tether keras.saving.save_model
 # @seealso
 #  + <https://www.tensorflow.org/api_docs/python/tf/keras/models/Model/save>
@@ -77,7 +79,7 @@ function (model, filepath = NULL, overwrite = FALSE, ...)
 
 
 
-#' Loads a model saved via `model.save()`.
+#' Loads a model saved via `save_model()`.
 #'
 #' @description
 #'
@@ -131,14 +133,14 @@ function (model, filepath = NULL, overwrite = FALSE, ...)
 #'
 #' @export
 #' @tether keras.saving.load_model
-#' @family saving
+#' @family saving and loading functions
 #' @seealso
 #' + <https://keras.io/api/models/model_saving_apis/model_saving_and_loading#loadmodel-function>
 #  + <https://www.tensorflow.org/api_docs/python/tf/keras/saving/load_model>
 load_model <-
 function (model, custom_objects = NULL, compile = TRUE, safe_mode = TRUE)
 {
-  args <- capture_args(list(custom_objects = objects_with_py_function_names),
+  args <- capture_args(list(custom_objects = normalize_custom_objects),
                         ignore = "model")
   if (is.raw(model)) {
     serialized_model <- model
@@ -166,6 +168,7 @@ function (model, custom_objects = NULL, compile = TRUE, safe_mode = TRUE)
 #' via an interactive prompt.
 #'
 #' @export
+#' @family saving and loading functions
 #' @tether keras.Model.save_weights
 #' @seealso
 #' + <https://keras.io/api/models/model_saving_apis/weights_saving_and_loading#saveweights-method>
@@ -213,6 +216,7 @@ function (model, filepath, overwrite = FALSE)
 #' @param model A keras model.
 #'
 #' @export
+#' @family saving and loading functions
 #' @tether keras.Model.load_weights
 #' @seealso
 #' + <https://keras.io/api/models/model_saving_apis/weights_saving_and_loading#loadweights-method>
@@ -224,7 +228,7 @@ function (model, filepath, skip_mismatch = FALSE, ...)
   do.call(model$load_weights, args)
 }
 
-#' Save Model configuration as JSON
+#' Save and load model configuration as JSON
 #'
 #' Save and re-load models configurations as JSON. Note that the representation
 #' does not include the weights, only the architecture.
@@ -264,7 +268,7 @@ function (model, filepath, skip_mismatch = FALSE, ...)
 #' at `filepath`, or instead ask the user
 #' via an interactive prompt.
 #'
-#' @family model persistence
+#' @family saving and loading functions
 #' @tether keras.Model.to_json
 #' @export
 save_model_config <- function(model, filepath = NULL, overwrite = FALSE)
@@ -281,83 +285,7 @@ save_model_config <- function(model, filepath = NULL, overwrite = FALSE)
 load_model_config <- function(filepath, custom_objects = NULL)
 {
   json <- paste0(readLines(filepath), collapse = "\n")
-  keras$models$model_from_json(json, custom_objects)
-}
-
-
-#' Registers an object with the Keras serialization framework.
-#'
-#' @description
-#' This function registers a custom class or function with the Keras custom
-#' object registry, so that it can be serialized and deserialized without
-#' needing an entry in the user-provided `custom_objects` argument. It also injects a
-#' function that Keras will call to get the object's serializable string key.
-#'
-#' Note that to be serialized and deserialized, classes must implement the
-#' `get_config()` method. Functions do not have this requirement.
-#'
-#' The object will be registered under the key `'package>name'` where `name`,
-#' defaults to the object name if not passed.
-#'
-#' # Examples
-#' ```{r}
-#' # Note that `'my_package'` is used as the `package` argument here, and since
-#' # the `name` argument is not provided, `'MyDense'` is used as the `name`.
-#' layer_my_dense <- Layer("MyDense")
-#' register_keras_serializable(layer_my_dense, package = "my_package")
-#'
-#' MyDense <- environment(layer_my_dense)$`__class__` # the python class obj
-#' stopifnot(exprs = {
-#'   get_registered_object('my_package>MyDense') == MyDense
-#'   get_registered_name(MyDense) == 'my_package>MyDense'
-#' })
-#' ```
-#'
-#' @param package
-#' The package that this class belongs to. This is used for the
-#' `key` (which is `"package>name"`) to identify the class.
-#' Defaults to the current package name, or `"Custom"` outside of a package.
-#'
-#' @param name
-#' The name to serialize this class under in this package.
-#'
-#' @param object
-#' A keras object.
-#'
-# ' @param clear If `TRUE` all registered custom objects are cleared from the
-# '   global registry.
-#'
-#' @export
-#' @family object registration saving
-#' @family saving
-#' @tether keras.saving.register_keras_serializable
-register_keras_serializable <-
-function (object, name = NULL, package = NULL) #, clear = FALSE)
-{
-  # if (clear) {
-  #   if (!missing(object))
-  #     stop("`clear` must be FALSE if `object` is provided")
-  #   py_eval("lambda keras: keras.saving.get_custom_objects().clear()")(keras)
-  #   return(invisible())
-  # }
-
-  py_object <- resolve_py_obj(
-    object,
-    default_name = name %||% deparse1(substitute(object))
-  )
-
-  package <- package %||%
-    replace_val(environmentName(topenv(parent.frame())),
-                c("", "base"), "Custom")
-
-  keras$saving$register_keras_serializable(package, name)(py_object)
-  invisible(object)
-}
-
-#' @export
-#' @rdname get_custom_objects
-clear_registered_custom_objects <- function() {
-  py_eval("lambda keras: keras.saving.get_custom_objects().clear()")(keras)
+  keras$models$model_from_json(json, normalize_custom_objects(custom_objects))
 }
 
 
@@ -404,13 +332,160 @@ clear_registered_custom_objects <- function() {
 #'
 #' @exportS3Method tensorflow::export_savedmodel
 #' @tether keras.Model.export
+#' @family saving and loading functions
 # @seealso
 #  + <https://www.tensorflow.org/api_docs/python/tf/keras/Model/export>
 export_savedmodel.keras.src.models.model.Model <- function(object, export_dir_base, ...) {
   object$export(export_dir_base, ...)
 }
 
-#' Retrieves a live reference to the global list of custom objects (a Python dictionary).
+
+
+
+#' Reload a Keras model/layer that was saved via `export_savedmodel()`.
+#'
+#' @description
+#'
+#' # Examples
+#' ```{r}
+#' model <- keras_model_sequential(input_shape = c(784)) |> layer_dense(10)
+#' model |> export_savedmodel("path/to/artifact")
+#' reloaded_layer <- layer_tfsm(filepath = "path/to/artifact")
+#' input <- random_normal(c(2, 784))
+#' output <- reloaded_layer(input)
+#' stopifnot(all.equal(as.array(output), as.array(model(input))))
+#' ```
+#' ```{r, include = FALSE}
+#' unlink("path/to/artifact", recursive = TRUE)
+#' ```
+#'
+#' The reloaded object can be used like a regular Keras layer, and supports
+#' training/fine-tuning of its trainable weights. Note that the reloaded
+#' object retains none of the internal structure or custom methods of the
+#' original object -- it's a brand new layer created around the saved
+#' function.
+#'
+#' **Limitations:**
+#'
+#' * Only call endpoints with a single `inputs` tensor argument
+#' (which may optionally be a named list/list of tensors) are supported.
+#' For endpoints with multiple separate input tensor arguments, consider
+#' subclassing `layer_tfsm` and implementing a `call()` method with a
+#' custom signature.
+#' * If you need training-time behavior to differ from inference-time behavior
+#' (i.e. if you need the reloaded object to support a `training=TRUE` argument
+#' in `__call__()`), make sure that the training-time call function is
+#' saved as a standalone endpoint in the artifact, and provide its name
+#' to the `layer_tfsm` via the `call_training_endpoint` argument.
+#'
+#' @param filepath
+#' string, the path to the SavedModel.
+#'
+#' @param call_endpoint
+#' Name of the endpoint to use as the `call()` method
+#' of the reloaded layer. If the SavedModel was created
+#' via `export_savedmodel()`,
+#' then the default endpoint name is `'serve'`. In other cases
+#' it may be named `'serving_default'`.
+#'
+#' @param object
+#' Object to compose the layer with. A tensor, array, or sequential model.
+#'
+#' @param name
+#' String, name for the object
+#'
+#' @param dtype
+#' datatype (e.g., `"float32"`).
+#'
+#' @param call_training_endpoint
+#' see description
+#'
+#' @param trainable
+#' see description
+#'
+#' @export
+#' @family layers
+#' @family saving and loading functions
+# @seealso
+#  + <https://www.tensorflow.org/api_docs/python/tf/keras/layers/TFSMLayer>
+#'
+#' @tether keras.layers.TFSMLayer
+layer_tfsm <-
+function (object, filepath, call_endpoint = "serve", call_training_endpoint = NULL,
+    trainable = TRUE, name = NULL, dtype = NULL)
+{
+    args <- capture_args(list(input_shape = normalize_shape,
+        batch_size = as_integer, batch_input_shape = normalize_shape),
+        ignore = "object")
+    create_layer(keras$layers$TFSMLayer, object, args)
+}
+
+
+
+#' Registers a custom object with the Keras serialization framework.
+#'
+#' @description
+#' This function registers a custom class or function with the Keras custom
+#' object registry, so that it can be serialized and deserialized without
+#' needing an entry in the user-provided `custom_objects` argument. It also injects a
+#' function that Keras will call to get the object's serializable string key.
+#'
+#' Note that to be serialized and deserialized, classes must implement the
+#' `get_config()` method. Functions do not have this requirement.
+#'
+#' The object will be registered under the key `'package>name'` where `name`,
+#' defaults to the object name if not passed.
+#'
+#' # Examples
+#' ```{r}
+#' # Note that `'my_package'` is used as the `package` argument here, and since
+#' # the `name` argument is not provided, `'MyDense'` is used as the `name`.
+#' layer_my_dense <- Layer("MyDense")
+#' register_keras_serializable(layer_my_dense, package = "my_package")
+#'
+#' MyDense <- environment(layer_my_dense)$`__class__` # the python class obj
+#' stopifnot(exprs = {
+#'   get_registered_object('my_package>MyDense') == MyDense
+#'   get_registered_name(MyDense) == 'my_package>MyDense'
+#' })
+#' ```
+#'
+#' @param package
+#' The package that this class belongs to. This is used for the
+#' `key` (which is `"package>name"`) to identify the class.
+#' Defaults to the current package name, or `"Custom"` outside of a package.
+#'
+#' @param name
+#' The name to serialize this class under in this package.
+#'
+#' @param object
+#' A keras object.
+#'
+#'
+#' @export
+#' @family saving and loading functions
+#' @family serialization utilities
+#' @tether keras.saving.register_keras_serializable
+register_keras_serializable <-
+function (object, name = NULL, package = NULL)
+{
+
+  py_object <- resolve_py_obj(
+    object,
+    default_name = name %||% deparse1(substitute(object))
+  )
+
+  package <- package %||%
+    replace_val(environmentName(topenv(parent.frame())),
+                c("", "base", "R_GlobalEnv"), "Custom")
+
+  keras$saving$register_keras_serializable(package, name)(py_object)
+  invisible(object)
+}
+
+
+
+#' Get/set the currently registered custom objects.
 #'
 #' @description
 #' Custom objects set using using `custom_object_scope()` are not added to the
@@ -419,23 +494,69 @@ export_savedmodel.keras.src.models.model.Model <- function(object, export_dir_ba
 #'
 #' # Examples
 #' ```{r, eval = FALSE}
-#' get_custom_objects()$clear()
-#' get_custom_objects()$update(list(MyObject = MyObject))
+#' get_custom_objects()
 #' ```
 #'
+#' You can use `set_custom_objects()` to restore a previous registry state.
+#' ```{r, eval = FALSE}
+#' # within a function, if you want to temporarily modify the registry,
+#' orig_objects <- set_custom_objects(clear = TRUE)
+#' on.exit(set_custom_objects(orig_objects))
+#'
+#' ## temporarily modify the global registry
+#' # register_keras_serializable(....)
+#' # ....  <do work>
+#' # on.exit(), the previous registry state is restored.
+#' ```
+#'
+#' @note
+#' `register_keras_serializable()` is preferred over `set_custom_objects()` for
+#' registering new objects.
+#'
 #' @returns
-#' A Python dictionary, the global dictionary mapping registered class names to classes.
+#' An R named list mapping registered names to registered objects.
+#' `set_custom_objects()` returns the registry values before updating, invisibly.
 #'
 #' @export
-#' @family object registration saving
-#' @family saving
+#' @family serialization utilities
 # @seealso
 #  + <https://www.tensorflow.org/api_docs/python/tf/keras/utils/get_custom_objects>
 #' @tether keras.saving.get_custom_objects
 get_custom_objects <-
 function ()
 {
-  py_call(r_to_py(keras$saving$get_custom_objects))
+  keras$saving$get_custom_objects()
+}
+
+#' @rdname get_custom_objects
+#' @param objects A named list of custom objects, as returned by
+#'   `get_custom_objects()` and `set_custom_objects()`.
+#' @export
+set_custom_objects <- function(objects = named_list(), clear = TRUE) {
+  # This doesn't use `get_custom_objects.update()` directly because there is a
+  # bug upstream: modifying the global custom objects dict does not update the
+  # global custom names dict, and there are no consistency checks between the
+  # two dicts. They can get out-of-sync if you modify the global custom objects
+  # dict directly without updating the custom names dict. The only safe way to
+  # modify the global dict using the official (exported) api is to call
+  # register_keras_serializable().
+  # o <- py_call(r_to_py(keras$saving$get_custom_objects)); o$clear()
+  m <- import(keras$saving$get_custom_objects$`__module__`, convert = FALSE)
+  out <- invisible(py_to_r(m$GLOBAL_CUSTOM_OBJECTS))
+
+  if(clear) {
+    m$GLOBAL_CUSTOM_NAMES$clear()
+    m$GLOBAL_CUSTOM_OBJECTS$clear()
+  }
+
+  if(length(objects)) {
+    objects <- normalize_custom_objects(objects)
+    m$GLOBAL_CUSTOM_OBJECTS$update(objects)
+    py_eval("lambda m: m.GLOBAL_CUSTOM_NAMES.update(
+      {obj: name for name, obj in m.GLOBAL_CUSTOM_OBJECTS.items()})")(m)
+  }
+
+  out
 }
 
 
@@ -454,8 +575,7 @@ function ()
 #' The object to look up.
 #'
 #' @export
-#' @family object registration saving
-#' @family saving
+#' @family serialization utilities
 # @seealso
 #  + <https://www.tensorflow.org/api_docs/python/tf/keras/utils/get_registered_name>
 #' @tether keras.saving.get_registered_name
@@ -498,13 +618,11 @@ function (obj)
 #'
 #' @param module_objects
 #' A named list of custom objects to look the name up in.
-#' Generally, module_objects is provided by midlevel library
+#' Generally, `module_objects` is provided by midlevel library
 #' implementers.
 #'
 #' @export
-#' @family object registration saving
-#' @family saving
-#' @family utils
+#' @family serialization utilities
 # @seealso
 #  + <https://www.tensorflow.org/api_docs/python/tf/keras/utils/get_registered_object>
 #' @tether keras.saving.get_registered_object
@@ -512,8 +630,8 @@ get_registered_object <-
 function (name, custom_objects = NULL, module_objects = NULL)
 {
   args <- capture_args(list(
-    custom_objects = objects_with_py_function_names,
-    module_objects = objects_with_py_function_names
+    custom_objects = normalize_custom_objects,
+    module_objects = normalize_custom_objects
   ))
   obj <- do.call(keras$saving$get_registered_object, args)
   # if(inherits(obj, keras$layers$Layer))
@@ -522,13 +640,13 @@ function (name, custom_objects = NULL, module_objects = NULL)
 }
 
 
-#' Retrieve the config list by serializing the Keras object.
+#' Retrieve the full config by serializing the Keras object.
 #'
 #' @description
 #' `serialize_keras_object()` serializes a Keras object to a named list
 #' that represents the object, and is a reciprocal function of
 #' `deserialize_keras_object()`. See `deserialize_keras_object()` for more
-#' information about the config format.
+#' information about the full config format.
 #'
 #' @returns
 #' A named list that represents the object config.
@@ -541,7 +659,7 @@ function (name, custom_objects = NULL, module_objects = NULL)
 #' the Keras object to serialize.
 #'
 #' @export
-#' @family saving
+#' @family serialization utilities
 #' @seealso
 #' + <https://keras.io/api/models/model_saving_apis/serialization_utils#serializekerasobject-function>
 #  + <https://www.tensorflow.org/api_docs/python/tf/keras/saving/serialize_keras_object>
@@ -617,11 +735,11 @@ function (obj)
 #' And the following config represents a user-customized `MeanSquaredError`
 #' loss:
 #'
-#' ```{r}
+#' ```{r, include = FALSE}
 #' # setup for example
-#' o_registered <- get_custom_objects()$copy()
-#' clear_registered_custom_objects()
-#'
+#' o_registered <- set_custom_objects(clear = TRUE)
+#' ```
+#' ```{r}
 #' # define a custom object
 #' loss_modified_mse <- Loss(
 #'   "ModifiedMeanSquaredError",
@@ -643,10 +761,10 @@ function (obj)
 #' # and custom object instances can be deserialized
 #' deserialize_keras_object(full_config)
 #' # Returns the `ModifiedMeanSquaredError` object
-#'
+#' ```
+#' ```{r, include = FALSE}
 #' # cleanup from example
-#' clear_registered_custom_objects() # cleanup
-#' get_custom_objects()$update(o_registered)
+#' set_custom_objects(o_registered, clear = TRUE)
 #' ```
 #'
 #' @returns
@@ -669,16 +787,17 @@ function (obj)
 #' For forward/backward compatability.
 #'
 #' @export
-#' @family saving
+#' @family serialization utilities
 #' @seealso
 #' + <https://keras.io/api/models/model_saving_apis/serialization_utils#deserializekerasobject-function>
 #  + <https://www.tensorflow.org/api_docs/python/tf/keras/saving/deserialize_keras_object>
 deserialize_keras_object <-
 function (config, custom_objects = NULL, safe_mode = TRUE, ...)
 {
-    args <- capture_args()
+    args <- capture_args(list(custom_objects = normalize_custom_objects))
     do.call(keras$saving$deserialize_keras_object, args)
 }
+
 
 #' Provide a scope with mappings of names to custom objects
 #'
@@ -689,14 +808,15 @@ function (config, custom_objects = NULL, safe_mode = TRUE, ...)
 #' There are many elements of Keras models that can be customized with
 #' user objects (e.g. losses, metrics, regularizers, etc.). When
 #' loading saved models that use these functions you typically
-#' need to explicitily map names to user objects via the `custom_objects`
-#' parmaeter.
+#' need to explicitly map names to user objects via the `custom_objects`
+#' parameter.
 #'
 #' The `with_custom_object_scope()` function provides an alternative that
 #' lets you create a named alias for a user object that applies to an entire
 #' block of code, and is automatically recognized when loading saved models.
 #'
-#' @examples \dontrun{
+#' # Examples
+#' ```r
 #' # define custom metric
 #' metric_top_3_categorical_accuracy <-
 #'   custom_metric("top_3_categorical_accuracy", function(y_true, y_pred) {
@@ -721,123 +841,44 @@ function (config, custom_objects = NULL, safe_mode = TRUE, ...)
 #'   # require explicitly providing the custom_object
 #'   reloaded_model <- load_model("my_model.keras")
 #' })
-#' }
+#' ```
 #'
+#' @family saving and loading functions
+#' @family serialization utilities
 #' @export
 with_custom_object_scope <- function(objects, expr) {
   objects <- normalize_custom_objects(objects)
   with(keras$saving$CustomObjectScope(objects), expr)
 }
 
-# TODO: normalize_custom_objects() needs to be revisited after resolve_py_object()
-#  - better error message if no name supplied
-#    (e.g., py_func2(object, TRUE, stop("Name could not be found...)))
-# TODO: consolidate duplicate purpose functions:
-#  - normalize_custom_objects() / objects_with_py_function_names()
-#  - get_keras_class() / resolve_py_object()
-normalize_custom_objects <- function(objects) {
-  if(is.null(objects))
-    return(NULL)
 
-  if(!is.list(objects))
-    objects <- list(objects)
+# ---- internal utilities ----
+
+normalize_custom_objects <- function(objects) {
+
+  objects <- as_list(objects)
+  if(!length(objects))
+    return(NULL)
 
   objects <- do.call(c, .mapply(function(object, name) {
     # unwrap or convert as needed to get the python object
-    # try to infer missing names or raise an error
-    # return a named list (to convert to a dict)
+    # try to infer correct names or raise an error
+    # return a named list (to convert to a dict), or NULL
 
-    if (inherits(object, "keras_layer_wrapper"))
-      object <- environment(object)$Layer
-
-    else if (inherits(object, "R6ClassGenerator"))
+    if (inherits(object, "R6ClassGenerator"))
       object <- r_to_py.R6ClassGenerator(object)
 
-    else if (!inherits(object, "python.builtin.object") &&
-             is.function(object) &&
-             is.null(attr(object, "py_function_name", TRUE))) {
-      if(name == "")
-        stop("A name must be provided for the custom object")
-      object <- py_func2(object, TRUE, name = name)
-    }
+    object <- resolve_py_obj(
+      object, default_name = name %""%
+        stop("object name could not be infered; please supply a named list"))
 
-    if (name == "") {
-      if (inherits(object, "python.builtin.object"))
-        name <- object$`__name__`
-      else if (is.character(name <- attr(object, "py_function_name", TRUE))) {}
-      else
-        stop("object name could not be infered; please supply a named list",
-             call. = FALSE)
-    }
-    stats::setNames(list(object), name)
+    out <- list(object)
+    names(out) <- as_r_value(name %""% object$`__name__`)
+    out
   }, list(objects, rlang::names2(objects)), NULL))
 
   objects
 }
-
-#' @importFrom rlang names2
-objects_with_py_function_names <- function(objects) {
-  if(is.null(objects))
-    return(NULL)
-
-  if(!is.list(objects))
-    objects <- list(objects)
-
-  object_names <- rlang::names2(objects)
-
-  # try to infer missing names or raise an error
-  for (i in seq_along(objects)) {
-    name <- object_names[[i]]
-    o <- objects[[i]]
-
-    if(is_bare_r_function(o))
-      objects[[i]] <- o <- resolve_py_obj(o)
-
-    if (name == "") {
-      if (inherits(o, "python.builtin.object"))
-        name <- o$`__name__`
-      else if (inherits(o, "R6ClassGenerator"))
-        name <- o$classname
-      # else if (is.character(attr(o, "py_function_name", TRUE)))
-      #   name <- attr(o, "py_function_name", TRUE)
-      else
-        stop("object name could not be infered; please supply a named list",
-             call. = FALSE)
-
-      object_names[[i]] <- name
-    }
-  }
-
-  # add a `py_function_name` attr for bare R functions, if it's missing
-  objects <- lapply(1:length(objects), function(i) {
-    object <- objects[[i]]
-    if (is.function(object) &&
-        !inherits(object, "python.builtin.object") &&
-        is.null(attr(object, "py_function_name", TRUE)))
-      attr(object, "py_function_name") <- object_names[[i]]
-    object
-  })
-
-  names(objects) <- object_names
-  objects
-}
-
-
-get_keras_class <- function(x) {
-  # get_keras_class(keras_model_sequential())
-  if (is.null(x)) return(x)
-
-  if (is_py_object(x)) {
-    # reflect objects that are already classes
-    if (inherits(x, "python.builtin.type")) return(x)
-
-    if (!is.null(cls <- py_get_attr(x, "__class__", TRUE)))
-      return(py_to_r(cls)) # TODO: copy over reticulate:::py_maybe_convert()?
-  }
-  NULL
-}
-
-
 
 
 confirm_overwrite <- function(filepath, overwrite) {
