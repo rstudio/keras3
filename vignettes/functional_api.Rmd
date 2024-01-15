@@ -202,7 +202,7 @@ history <- model %>% fit(
 
 ```
 ## Epoch 1/2
-## 750/750 - 3s - 4ms/step - accuracy: 0.9015 - loss: 0.3513 - val_accuracy: 0.9442 - val_loss: 0.1921
+## 750/750 - 2s - 3ms/step - accuracy: 0.9015 - loss: 0.3513 - val_accuracy: 0.9442 - val_loss: 0.1921
 ## Epoch 2/2
 ## 750/750 - 1s - 1ms/step - accuracy: 0.9508 - loss: 0.1643 - val_accuracy: 0.9581 - val_loss: 0.1423
 ```
@@ -223,7 +223,7 @@ cat("Test accuracy:", test_scores$accuracy, "\n")
 ```
 
 ```
-## Test loss: 0.1337983
+## Test loss: 0.1337984
 ## Test accuracy: 0.9578
 ```
 
@@ -638,7 +638,7 @@ model %>% fit(
 
 ```
 ## Epoch 1/2
-## 40/40 - 3s - 87ms/step - loss: 0.3948
+## 40/40 - 3s - 67ms/step - loss: 0.3948
 ## Epoch 2/2
 ## 40/40 - 0s - 5ms/step - loss: 0.1971
 ```
@@ -771,7 +771,7 @@ model %>% fit(
 ```
 
 ```
-## 13/13 - 7s - 563ms/step - acc: 0.1300 - loss: 2.3034 - val_acc: 0.1150 - val_loss: 2.3079
+## 13/13 - 7s - 521ms/step - acc: 0.1325 - loss: 2.3036 - val_acc: 0.1150 - val_loss: 2.3075
 ```
 
 ## Shared layers

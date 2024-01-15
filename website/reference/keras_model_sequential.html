@@ -77,12 +77,13 @@
 <span>  input_shape <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  name <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  <span class="va">...</span>,</span>
-<span>  input_batch_size <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  input_dtype <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  input_batch_size <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  input_sparse <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  input_batch_shape <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  input_name <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  input_tensor <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  trainable <span class="op">=</span> <span class="cn">TRUE</span>,</span>
 <span>  layers <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="op">)</span></span></code></pre></div>
     </div>
@@ -106,13 +107,13 @@ is not known and may vary (e.g. sequence length).</p></dd>
 <dd><p>additional arguments passed on to <code>keras.layers.InputLayer</code>.</p></dd>
 
 
-<dt>input_batch_size</dt>
-<dd><p>Optional static batch size (integer).</p></dd>
-
-
 <dt>input_dtype</dt>
 <dd><p>The data type expected by the input, as a string
 (e.g. <code>"float32"</code>, <code>"int32"</code>...)</p></dd>
+
+
+<dt>input_batch_size</dt>
+<dd><p>Optional static batch size (integer).</p></dd>
 
 
 <dt>input_sparse</dt>
@@ -139,18 +140,55 @@ If set, the layer will use this tensor rather
 than creating a new placeholder tensor.</p></dd>
 
 
+<dt>trainable</dt>
+<dd><p>Boolean, whether the model's variables should be trainable.
+You can also change the trainable status of a model/layer with
+<code><a href="freeze_weights.html">freeze_weights()</a></code> and <code><a href="freeze_weights.html">unfreeze_weights()</a></code>.</p></dd>
+
+
 <dt>layers</dt>
 <dd><p>List of layers to add to the model</p></dd>
 
 </dl></div>
     <div class="section level2">
     <h2 id="note">Note<a class="anchor" aria-label="anchor" href="#note"></a></h2>
-    <p>If any arguments are provided to <code>...</code>, then the sequential model is
-initialized with a <code>InputLayer</code> instance. If not, then the model layer
-shapes, including the final model output shape, will not be available until
+    <p>If <code>input_shape</code> is omitted, then the model layer
+shapes, including the final model output shape, will not be known until
 the model is built, either by calling the model with an input tensor/array
 like <code>model(input)</code>, (possibly via <code><a href="https://generics.r-lib.org/reference/fit.html" class="external-link">fit()</a></code>/<code><a href="https://rdrr.io/pkg/tensorflow/man/evaluate.html" class="external-link">evaluate()</a></code>/<code><a href="https://rdrr.io/r/stats/predict.html" class="external-link">predict()</a></code>), or by
 explicitly calling <code>model$build(input_shape)</code>.</p>
+    </div>
+    <div class="section level2">
+    <h2 id="examples">Examples<a class="anchor" aria-label="anchor" href="#examples"></a></h2>
+    <p></p><div class="sourceCode r"><pre><code><span><span class="va">model</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/keras_model_sequential.html">keras_model_sequential</a></span><span class="op">(</span>input_shape <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">784</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="va">model</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu"><a href="../reference/layer_dense.html">layer_dense</a></span><span class="op">(</span>units <span class="op">=</span> <span class="fl">32</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu"><a href="../reference/layer_activation.html">layer_activation</a></span><span class="op">(</span><span class="st">'relu'</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu"><a href="../reference/layer_dense.html">layer_dense</a></span><span class="op">(</span>units <span class="op">=</span> <span class="fl">10</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu"><a href="../reference/layer_activation.html">layer_activation</a></span><span class="op">(</span><span class="st">'softmax'</span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">model</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://generics.r-lib.org/reference/compile.html" class="external-link">compile</a></span><span class="op">(</span></span>
+<span>  optimizer <span class="op">=</span> <span class="st">'rmsprop'</span>,</span>
+<span>  loss <span class="op">=</span> <span class="st">'categorical_crossentropy'</span>,</span>
+<span>  metrics <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">'accuracy'</span><span class="op">)</span></span>
+<span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">model</span></span></code></pre><p></p></div>
+<p></p><div class="sourceCode"><pre><code><span id="cb1-1"><a href="#cb1-1" tabindex="-1"></a><span class="do">## Model: "sequential"</span></span>
+<span id="cb1-2"><a href="#cb1-2" tabindex="-1"></a><span class="do">## ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━┓</span></span>
+<span id="cb1-3"><a href="#cb1-3" tabindex="-1"></a><span class="do">## ┃ Layer (type)                    ┃ Output Shape              ┃    Param # ┃</span></span>
+<span id="cb1-4"><a href="#cb1-4" tabindex="-1"></a><span class="do">## ┡━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━┩</span></span>
+<span id="cb1-5"><a href="#cb1-5" tabindex="-1"></a><span class="do">## │ dense_1 (Dense)                 │ (None, 32)                │     25,120 │</span></span>
+<span id="cb1-6"><a href="#cb1-6" tabindex="-1"></a><span class="do">## ├─────────────────────────────────┼───────────────────────────┼────────────┤</span></span>
+<span id="cb1-7"><a href="#cb1-7" tabindex="-1"></a><span class="do">## │ activation_1 (Activation)       │ (None, 32)                │          0 │</span></span>
+<span id="cb1-8"><a href="#cb1-8" tabindex="-1"></a><span class="do">## ├─────────────────────────────────┼───────────────────────────┼────────────┤</span></span>
+<span id="cb1-9"><a href="#cb1-9" tabindex="-1"></a><span class="do">## │ dense (Dense)                   │ (None, 10)                │        330 │</span></span>
+<span id="cb1-10"><a href="#cb1-10" tabindex="-1"></a><span class="do">## ├─────────────────────────────────┼───────────────────────────┼────────────┤</span></span>
+<span id="cb1-11"><a href="#cb1-11" tabindex="-1"></a><span class="do">## │ activation (Activation)         │ (None, 10)                │          0 │</span></span>
+<span id="cb1-12"><a href="#cb1-12" tabindex="-1"></a><span class="do">## └─────────────────────────────────┴───────────────────────────┴────────────┘</span></span>
+<span id="cb1-13"><a href="#cb1-13" tabindex="-1"></a><span class="do">##  Total params: 25,450 (99.41 KB)</span></span>
+<span id="cb1-14"><a href="#cb1-14" tabindex="-1"></a><span class="do">##  Trainable params: 25,450 (99.41 KB)</span></span>
+<span id="cb1-15"><a href="#cb1-15" tabindex="-1"></a><span class="do">##  Non-trainable params: 0 (0.00 B)</span></span></code></pre><p></p></div>
     </div>
     <div class="section level2">
     <h2 id="see-also">See also<a class="anchor" aria-label="anchor" href="#see-also"></a></h2>
@@ -161,38 +199,10 @@ explicitly calling <code>model$build(input_shape)</code>.</p>
 <code><a href="pop_layer.html">pop_layer</a>()</code>,
 <code><a href="summary.keras.src.models.model.Model.html">summary.keras.src.models.model.Model</a>()</code></p>
 <p>Other model creation: 
+<code><a href="keras_input.html">keras_input</a>()</code>,
 <code><a href="keras_model.html">keras_model</a>()</code></p></div>
     </div>
 
-    <div class="section level2">
-    <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="kw">if</span> <span class="op">(</span><span class="cn">FALSE</span><span class="op">)</span> <span class="op">{</span></span></span>
-<span class="r-in"><span></span></span>
-<span class="r-in"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://keras.posit.co/">keras3</a></span><span class="op">)</span></span></span>
-<span class="r-in"><span></span></span>
-<span class="r-in"><span><span class="va">model</span> <span class="op">&lt;-</span> <span class="fu">keras_model_sequential</span><span class="op">(</span><span class="op">)</span></span></span>
-<span class="r-in"><span><span class="va">model</span> <span class="op"><a href="pipe.html">%&gt;%</a></span></span></span>
-<span class="r-in"><span>  <span class="fu"><a href="layer_dense.html">layer_dense</a></span><span class="op">(</span>units <span class="op">=</span> <span class="fl">32</span>, input_shape <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">784</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="pipe.html">%&gt;%</a></span></span></span>
-<span class="r-in"><span>  <span class="fu"><a href="layer_activation.html">layer_activation</a></span><span class="op">(</span><span class="st">'relu'</span><span class="op">)</span> <span class="op"><a href="pipe.html">%&gt;%</a></span></span></span>
-<span class="r-in"><span>  <span class="fu"><a href="layer_dense.html">layer_dense</a></span><span class="op">(</span>units <span class="op">=</span> <span class="fl">10</span><span class="op">)</span> <span class="op"><a href="pipe.html">%&gt;%</a></span></span></span>
-<span class="r-in"><span>  <span class="fu"><a href="layer_activation.html">layer_activation</a></span><span class="op">(</span><span class="st">'softmax'</span><span class="op">)</span></span></span>
-<span class="r-in"><span></span></span>
-<span class="r-in"><span><span class="va">model</span> <span class="op"><a href="pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://generics.r-lib.org/reference/compile.html" class="external-link">compile</a></span><span class="op">(</span></span></span>
-<span class="r-in"><span>  optimizer <span class="op">=</span> <span class="st">'rmsprop'</span>,</span></span>
-<span class="r-in"><span>  loss <span class="op">=</span> <span class="st">'categorical_crossentropy'</span>,</span></span>
-<span class="r-in"><span>  metrics <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">'accuracy'</span><span class="op">)</span></span></span>
-<span class="r-in"><span><span class="op">)</span></span></span>
-<span class="r-in"><span></span></span>
-<span class="r-in"><span><span class="co"># alternative way to provide input shape</span></span></span>
-<span class="r-in"><span><span class="va">model</span> <span class="op">&lt;-</span> <span class="fu">keras_model_sequential</span><span class="op">(</span>input_shape <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">784</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="pipe.html">%&gt;%</a></span></span></span>
-<span class="r-in"><span>  <span class="fu"><a href="layer_dense.html">layer_dense</a></span><span class="op">(</span>units <span class="op">=</span> <span class="fl">32</span><span class="op">)</span> <span class="op"><a href="pipe.html">%&gt;%</a></span></span></span>
-<span class="r-in"><span>  <span class="fu"><a href="layer_activation.html">layer_activation</a></span><span class="op">(</span><span class="st">'relu'</span><span class="op">)</span> <span class="op"><a href="pipe.html">%&gt;%</a></span></span></span>
-<span class="r-in"><span>  <span class="fu"><a href="layer_dense.html">layer_dense</a></span><span class="op">(</span>units <span class="op">=</span> <span class="fl">10</span><span class="op">)</span> <span class="op"><a href="pipe.html">%&gt;%</a></span></span></span>
-<span class="r-in"><span>  <span class="fu"><a href="layer_activation.html">layer_activation</a></span><span class="op">(</span><span class="st">'softmax'</span><span class="op">)</span></span></span>
-<span class="r-in"><span></span></span>
-<span class="r-in"><span><span class="op">}</span></span></span>
-</code></pre></div>
-    </div>
   </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>
     </nav></aside></div>
 

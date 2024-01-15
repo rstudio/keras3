@@ -105,77 +105,389 @@ all layers in the model (i.e. layers not within the specified range will be
 set to the opposite value, e.g. unfrozen for a call to freeze).</p>
 <p>Models must be compiled again after weights are frozen or unfrozen.</p>
     </div>
-
     <div class="section level2">
-    <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="kw">if</span> <span class="op">(</span><span class="cn">FALSE</span><span class="op">)</span> <span class="op">{</span></span></span>
-<span class="r-in"><span><span class="va">conv_base</span> <span class="op">&lt;-</span> <span class="fu"><a href="application_vgg16.html">application_vgg16</a></span><span class="op">(</span></span></span>
-<span class="r-in"><span>  weights <span class="op">=</span> <span class="st">"imagenet"</span>,</span></span>
-<span class="r-in"><span>  include_top <span class="op">=</span> <span class="cn">FALSE</span>,</span></span>
-<span class="r-in"><span>  input_shape <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">150</span>, <span class="fl">150</span>, <span class="fl">3</span><span class="op">)</span></span></span>
-<span class="r-in"><span><span class="op">)</span></span></span>
-<span class="r-in"><span></span></span>
-<span class="r-in"><span><span class="co"># freeze it's weights</span></span></span>
-<span class="r-in"><span><span class="fu">freeze_weights</span><span class="op">(</span><span class="va">conv_base</span><span class="op">)</span></span></span>
-<span class="r-in"><span></span></span>
-<span class="r-in"><span><span class="va">conv_base</span></span></span>
-<span class="r-in"><span></span></span>
-<span class="r-in"><span><span class="co"># create a composite model that includes the base + more layers</span></span></span>
-<span class="r-in"><span><span class="va">model</span> <span class="op">&lt;-</span> <span class="fu"><a href="keras_model_sequential.html">keras_model_sequential</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="pipe.html">%&gt;%</a></span></span></span>
-<span class="r-in"><span>  <span class="fu">conv_base</span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="pipe.html">%&gt;%</a></span></span></span>
-<span class="r-in"><span>  <span class="fu"><a href="layer_flatten.html">layer_flatten</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="pipe.html">%&gt;%</a></span></span></span>
-<span class="r-in"><span>  <span class="fu"><a href="layer_dense.html">layer_dense</a></span><span class="op">(</span>units <span class="op">=</span> <span class="fl">256</span>, activation <span class="op">=</span> <span class="st">"relu"</span><span class="op">)</span> <span class="op"><a href="pipe.html">%&gt;%</a></span></span></span>
-<span class="r-in"><span>  <span class="fu"><a href="layer_dense.html">layer_dense</a></span><span class="op">(</span>units <span class="op">=</span> <span class="fl">1</span>, activation <span class="op">=</span> <span class="st">"sigmoid"</span><span class="op">)</span></span></span>
-<span class="r-in"><span></span></span>
-<span class="r-in"><span><span class="co"># compile</span></span></span>
-<span class="r-in"><span><span class="va">model</span> <span class="op"><a href="pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://generics.r-lib.org/reference/compile.html" class="external-link">compile</a></span><span class="op">(</span></span></span>
-<span class="r-in"><span>  loss <span class="op">=</span> <span class="st">"binary_crossentropy"</span>,</span></span>
-<span class="r-in"><span>  optimizer <span class="op">=</span> <span class="fu"><a href="optimizer_rmsprop.html">optimizer_rmsprop</a></span><span class="op">(</span>lr <span class="op">=</span> <span class="fl">2e-5</span><span class="op">)</span>,</span></span>
-<span class="r-in"><span>  metrics <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"accuracy"</span><span class="op">)</span></span></span>
-<span class="r-in"><span><span class="op">)</span></span></span>
-<span class="r-in"><span></span></span>
-<span class="r-in"><span><span class="va">model</span></span></span>
-<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">model</span>, expand_nested <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></span>
-<span class="r-in"><span></span></span>
-<span class="r-in"><span></span></span>
-<span class="r-in"><span></span></span>
-<span class="r-in"><span><span class="co"># unfreeze weights from "block5_conv1" on</span></span></span>
-<span class="r-in"><span><span class="fu">unfreeze_weights</span><span class="op">(</span><span class="va">conv_base</span>, from <span class="op">=</span> <span class="st">"block5_conv1"</span><span class="op">)</span></span></span>
-<span class="r-in"><span></span></span>
-<span class="r-in"><span><span class="co"># compile again since we froze or unfroze weights</span></span></span>
-<span class="r-in"><span><span class="va">model</span> <span class="op"><a href="pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://generics.r-lib.org/reference/compile.html" class="external-link">compile</a></span><span class="op">(</span></span></span>
-<span class="r-in"><span>  loss <span class="op">=</span> <span class="st">"binary_crossentropy"</span>,</span></span>
-<span class="r-in"><span>  optimizer <span class="op">=</span> <span class="fu"><a href="optimizer_rmsprop.html">optimizer_rmsprop</a></span><span class="op">(</span>lr <span class="op">=</span> <span class="fl">2e-5</span><span class="op">)</span>,</span></span>
-<span class="r-in"><span>  metrics <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"accuracy"</span><span class="op">)</span></span></span>
-<span class="r-in"><span><span class="op">)</span></span></span>
-<span class="r-in"><span></span></span>
-<span class="r-in"><span><span class="va">conv_base</span></span></span>
-<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">model</span>, expand_nested <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></span>
-<span class="r-in"><span></span></span>
-<span class="r-in"><span><span class="co"># freeze only the last 5 layers</span></span></span>
-<span class="r-in"><span><span class="fu">freeze_weights</span><span class="op">(</span><span class="va">conv_base</span>, from <span class="op">=</span> <span class="op">-</span><span class="fl">5</span><span class="op">)</span></span></span>
-<span class="r-in"><span><span class="va">conv_base</span></span></span>
-<span class="r-in"><span><span class="co"># equivalently, also freeze only the last 5 layers</span></span></span>
-<span class="r-in"><span><span class="fu">unfreeze_weights</span><span class="op">(</span><span class="va">conv_base</span>, to <span class="op">=</span> <span class="op">-</span><span class="fl">6</span><span class="op">)</span></span></span>
-<span class="r-in"><span><span class="va">conv_base</span></span></span>
-<span class="r-in"><span></span></span>
-<span class="r-in"><span><span class="co"># Freeze only layers of a certain type, e.g, BatchNorm layers</span></span></span>
-<span class="r-in"><span><span class="va">batch_norm_layer_class_name</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/class.html" class="external-link">class</a></span><span class="op">(</span><span class="fu"><a href="layer_batch_normalization.html">layer_batch_normalization</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span></span></span>
-<span class="r-in"><span><span class="va">is_batch_norm_layer</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="fu"><a href="https://rdrr.io/r/base/class.html" class="external-link">inherits</a></span><span class="op">(</span><span class="va">x</span>, <span class="va">batch_norm_layer_class_name</span><span class="op">)</span></span></span>
-<span class="r-in"><span></span></span>
-<span class="r-in"><span><span class="va">model</span> <span class="op">&lt;-</span> <span class="fu"><a href="application_efficientnet_b0.html">application_efficientnet_b0</a></span><span class="op">(</span><span class="op">)</span></span></span>
-<span class="r-in"><span><span class="fu">freeze_weights</span><span class="op">(</span><span class="va">model</span>, which <span class="op">=</span> <span class="va">is_batch_norm_layer</span><span class="op">)</span></span></span>
-<span class="r-in"><span><span class="va">model</span></span></span>
-<span class="r-in"><span><span class="co"># equivalent to:</span></span></span>
-<span class="r-in"><span><span class="kw">for</span><span class="op">(</span><span class="va">layer</span> <span class="kw">in</span> <span class="va">model</span><span class="op">$</span><span class="va">layers</span><span class="op">)</span> <span class="op">{</span></span></span>
-<span class="r-in"><span>  <span class="kw">if</span><span class="op">(</span><span class="fu">is_batch_norm_layer</span><span class="op">(</span><span class="va">layer</span><span class="op">)</span><span class="op">)</span></span></span>
-<span class="r-in"><span>    <span class="va">layer</span><span class="op">$</span><span class="va">trainable</span> <span class="op">&lt;-</span> <span class="cn">FALSE</span></span></span>
-<span class="r-in"><span>  <span class="kw">else</span></span></span>
-<span class="r-in"><span>    <span class="va">layer</span><span class="op">$</span><span class="va">trainable</span> <span class="op">&lt;-</span> <span class="cn">TRUE</span></span></span>
-<span class="r-in"><span><span class="op">}</span></span></span>
-<span class="r-in"><span><span class="op">}</span></span></span>
-</code></pre></div>
+    <h2 id="examples">Examples<a class="anchor" aria-label="anchor" href="#examples"></a></h2>
+    <p></p><div class="sourceCode r"><pre><code><span><span class="co"># instantiate a VGG16 model</span></span>
+<span><span class="va">conv_base</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/application_vgg16.html">application_vgg16</a></span><span class="op">(</span></span>
+<span>  weights <span class="op">=</span> <span class="st">"imagenet"</span>,</span>
+<span>  include_top <span class="op">=</span> <span class="cn">FALSE</span>,</span>
+<span>  input_shape <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">150</span>, <span class="fl">150</span>, <span class="fl">3</span><span class="op">)</span></span>
+<span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># freeze it's weights</span></span>
+<span><span class="fu"><a href="../reference/freeze_weights.html">freeze_weights</a></span><span class="op">(</span><span class="va">conv_base</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Note the "Trainable" column</span></span>
+<span><span class="va">conv_base</span></span></code></pre><p></p></div>
+<p></p><div class="sourceCode"><pre><code><span id="cb1-1"><a href="#cb1-1" tabindex="-1"></a><span class="do">## Model: "vgg16"</span></span>
+<span id="cb1-2"><a href="#cb1-2" tabindex="-1"></a><span class="do">## ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━┳━━━━━━━┓</span></span>
+<span id="cb1-3"><a href="#cb1-3" tabindex="-1"></a><span class="do">## ┃ Layer (type)                ┃ Output Shape             ┃ Param # ┃ Trai… ┃</span></span>
+<span id="cb1-4"><a href="#cb1-4" tabindex="-1"></a><span class="do">## ┡━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━╇━━━━━━━┩</span></span>
+<span id="cb1-5"><a href="#cb1-5" tabindex="-1"></a><span class="do">## │ input_layer (InputLayer)    │ (None, 150, 150, 3)      │       0 │   -   │</span></span>
+<span id="cb1-6"><a href="#cb1-6" tabindex="-1"></a><span class="do">## ├─────────────────────────────┼──────────────────────────┼─────────┼───────┤</span></span>
+<span id="cb1-7"><a href="#cb1-7" tabindex="-1"></a><span class="do">## │ block1_conv1 (Conv2D)       │ (None, 150, 150, 64)     │   1,792 │   N   │</span></span>
+<span id="cb1-8"><a href="#cb1-8" tabindex="-1"></a><span class="do">## ├─────────────────────────────┼──────────────────────────┼─────────┼───────┤</span></span>
+<span id="cb1-9"><a href="#cb1-9" tabindex="-1"></a><span class="do">## │ block1_conv2 (Conv2D)       │ (None, 150, 150, 64)     │  36,928 │   N   │</span></span>
+<span id="cb1-10"><a href="#cb1-10" tabindex="-1"></a><span class="do">## ├─────────────────────────────┼──────────────────────────┼─────────┼───────┤</span></span>
+<span id="cb1-11"><a href="#cb1-11" tabindex="-1"></a><span class="do">## │ block1_pool (MaxPooling2D)  │ (None, 75, 75, 64)       │       0 │   -   │</span></span>
+<span id="cb1-12"><a href="#cb1-12" tabindex="-1"></a><span class="do">## ├─────────────────────────────┼──────────────────────────┼─────────┼───────┤</span></span>
+<span id="cb1-13"><a href="#cb1-13" tabindex="-1"></a><span class="do">## │ block2_conv1 (Conv2D)       │ (None, 75, 75, 128)      │  73,856 │   N   │</span></span>
+<span id="cb1-14"><a href="#cb1-14" tabindex="-1"></a><span class="do">## ├─────────────────────────────┼──────────────────────────┼─────────┼───────┤</span></span>
+<span id="cb1-15"><a href="#cb1-15" tabindex="-1"></a><span class="do">## │ block2_conv2 (Conv2D)       │ (None, 75, 75, 128)      │ 147,584 │   N   │</span></span>
+<span id="cb1-16"><a href="#cb1-16" tabindex="-1"></a><span class="do">## ├─────────────────────────────┼──────────────────────────┼─────────┼───────┤</span></span>
+<span id="cb1-17"><a href="#cb1-17" tabindex="-1"></a><span class="do">## │ block2_pool (MaxPooling2D)  │ (None, 37, 37, 128)      │       0 │   -   │</span></span>
+<span id="cb1-18"><a href="#cb1-18" tabindex="-1"></a><span class="do">## ├─────────────────────────────┼──────────────────────────┼─────────┼───────┤</span></span>
+<span id="cb1-19"><a href="#cb1-19" tabindex="-1"></a><span class="do">## │ block3_conv1 (Conv2D)       │ (None, 37, 37, 256)      │ 295,168 │   N   │</span></span>
+<span id="cb1-20"><a href="#cb1-20" tabindex="-1"></a><span class="do">## ├─────────────────────────────┼──────────────────────────┼─────────┼───────┤</span></span>
+<span id="cb1-21"><a href="#cb1-21" tabindex="-1"></a><span class="do">## │ block3_conv2 (Conv2D)       │ (None, 37, 37, 256)      │ 590,080 │   N   │</span></span>
+<span id="cb1-22"><a href="#cb1-22" tabindex="-1"></a><span class="do">## ├─────────────────────────────┼──────────────────────────┼─────────┼───────┤</span></span>
+<span id="cb1-23"><a href="#cb1-23" tabindex="-1"></a><span class="do">## │ block3_conv3 (Conv2D)       │ (None, 37, 37, 256)      │ 590,080 │   N   │</span></span>
+<span id="cb1-24"><a href="#cb1-24" tabindex="-1"></a><span class="do">## ├─────────────────────────────┼──────────────────────────┼─────────┼───────┤</span></span>
+<span id="cb1-25"><a href="#cb1-25" tabindex="-1"></a><span class="do">## │ block3_pool (MaxPooling2D)  │ (None, 18, 18, 256)      │       0 │   -   │</span></span>
+<span id="cb1-26"><a href="#cb1-26" tabindex="-1"></a><span class="do">## ├─────────────────────────────┼──────────────────────────┼─────────┼───────┤</span></span>
+<span id="cb1-27"><a href="#cb1-27" tabindex="-1"></a><span class="do">## │ block4_conv1 (Conv2D)       │ (None, 18, 18, 512)      │ 1,180,… │   N   │</span></span>
+<span id="cb1-28"><a href="#cb1-28" tabindex="-1"></a><span class="do">## ├─────────────────────────────┼──────────────────────────┼─────────┼───────┤</span></span>
+<span id="cb1-29"><a href="#cb1-29" tabindex="-1"></a><span class="do">## │ block4_conv2 (Conv2D)       │ (None, 18, 18, 512)      │ 2,359,… │   N   │</span></span>
+<span id="cb1-30"><a href="#cb1-30" tabindex="-1"></a><span class="do">## ├─────────────────────────────┼──────────────────────────┼─────────┼───────┤</span></span>
+<span id="cb1-31"><a href="#cb1-31" tabindex="-1"></a><span class="do">## │ block4_conv3 (Conv2D)       │ (None, 18, 18, 512)      │ 2,359,… │   N   │</span></span>
+<span id="cb1-32"><a href="#cb1-32" tabindex="-1"></a><span class="do">## ├─────────────────────────────┼──────────────────────────┼─────────┼───────┤</span></span>
+<span id="cb1-33"><a href="#cb1-33" tabindex="-1"></a><span class="do">## │ block4_pool (MaxPooling2D)  │ (None, 9, 9, 512)        │       0 │   -   │</span></span>
+<span id="cb1-34"><a href="#cb1-34" tabindex="-1"></a><span class="do">## ├─────────────────────────────┼──────────────────────────┼─────────┼───────┤</span></span>
+<span id="cb1-35"><a href="#cb1-35" tabindex="-1"></a><span class="do">## │ block5_conv1 (Conv2D)       │ (None, 9, 9, 512)        │ 2,359,… │   N   │</span></span>
+<span id="cb1-36"><a href="#cb1-36" tabindex="-1"></a><span class="do">## ├─────────────────────────────┼──────────────────────────┼─────────┼───────┤</span></span>
+<span id="cb1-37"><a href="#cb1-37" tabindex="-1"></a><span class="do">## │ block5_conv2 (Conv2D)       │ (None, 9, 9, 512)        │ 2,359,… │   N   │</span></span>
+<span id="cb1-38"><a href="#cb1-38" tabindex="-1"></a><span class="do">## ├─────────────────────────────┼──────────────────────────┼─────────┼───────┤</span></span>
+<span id="cb1-39"><a href="#cb1-39" tabindex="-1"></a><span class="do">## │ block5_conv3 (Conv2D)       │ (None, 9, 9, 512)        │ 2,359,… │   N   │</span></span>
+<span id="cb1-40"><a href="#cb1-40" tabindex="-1"></a><span class="do">## ├─────────────────────────────┼──────────────────────────┼─────────┼───────┤</span></span>
+<span id="cb1-41"><a href="#cb1-41" tabindex="-1"></a><span class="do">## │ block5_pool (MaxPooling2D)  │ (None, 4, 4, 512)        │       0 │   -   │</span></span>
+<span id="cb1-42"><a href="#cb1-42" tabindex="-1"></a><span class="do">## └─────────────────────────────┴──────────────────────────┴─────────┴───────┘</span></span>
+<span id="cb1-43"><a href="#cb1-43" tabindex="-1"></a><span class="do">##  Total params: 14,714,688 (56.13 MB)</span></span>
+<span id="cb1-44"><a href="#cb1-44" tabindex="-1"></a><span class="do">##  Trainable params: 0 (0.00 B)</span></span>
+<span id="cb1-45"><a href="#cb1-45" tabindex="-1"></a><span class="do">##  Non-trainable params: 14,714,688 (56.13 MB)</span></span></code></pre><p></p></div>
+<p></p><div class="sourceCode r"><pre><code><span></span>
+<span><span class="co"># create a composite model that includes the base + more layers</span></span>
+<span><span class="va">model</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/keras_model_sequential.html">keras_model_sequential</a></span><span class="op">(</span>input_batch_shape <span class="op">=</span> <span class="fu"><a href="../reference/shape.html">shape</a></span><span class="op">(</span><span class="va">conv_base</span><span class="op">$</span><span class="va">input</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu">conv_base</span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu"><a href="../reference/layer_flatten.html">layer_flatten</a></span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu"><a href="../reference/layer_dense.html">layer_dense</a></span><span class="op">(</span>units <span class="op">=</span> <span class="fl">256</span>, activation <span class="op">=</span> <span class="st">"relu"</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu"><a href="../reference/layer_dense.html">layer_dense</a></span><span class="op">(</span>units <span class="op">=</span> <span class="fl">1</span>, activation <span class="op">=</span> <span class="st">"sigmoid"</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># compile</span></span>
+<span><span class="va">model</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://generics.r-lib.org/reference/compile.html" class="external-link">compile</a></span><span class="op">(</span></span>
+<span>  loss <span class="op">=</span> <span class="st">"binary_crossentropy"</span>,</span>
+<span>  optimizer <span class="op">=</span> <span class="fu"><a href="../reference/optimizer_rmsprop.html">optimizer_rmsprop</a></span><span class="op">(</span>learning_rate <span class="op">=</span> <span class="fl">2e-5</span><span class="op">)</span>,</span>
+<span>  metrics <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"accuracy"</span><span class="op">)</span></span>
+<span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">model</span></span></code></pre><p></p></div>
+<p></p><div class="sourceCode"><pre><code><span id="cb1-1"><a href="#cb1-1" tabindex="-1"></a><span class="do">## Model: "sequential"</span></span>
+<span id="cb1-2"><a href="#cb1-2" tabindex="-1"></a><span class="do">## ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━┳━━━━━━━┓</span></span>
+<span id="cb1-3"><a href="#cb1-3" tabindex="-1"></a><span class="do">## ┃ Layer (type)                ┃ Output Shape             ┃ Param # ┃ Trai… ┃</span></span>
+<span id="cb1-4"><a href="#cb1-4" tabindex="-1"></a><span class="do">## ┡━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━╇━━━━━━━┩</span></span>
+<span id="cb1-5"><a href="#cb1-5" tabindex="-1"></a><span class="do">## │ vgg16 (Functional)          │ (None, 4, 4, 512)        │ 14,714… │   N   │</span></span>
+<span id="cb1-6"><a href="#cb1-6" tabindex="-1"></a><span class="do">## ├─────────────────────────────┼──────────────────────────┼─────────┼───────┤</span></span>
+<span id="cb1-7"><a href="#cb1-7" tabindex="-1"></a><span class="do">## │ flatten (Flatten)           │ (None, 8192)             │       0 │   -   │</span></span>
+<span id="cb1-8"><a href="#cb1-8" tabindex="-1"></a><span class="do">## ├─────────────────────────────┼──────────────────────────┼─────────┼───────┤</span></span>
+<span id="cb1-9"><a href="#cb1-9" tabindex="-1"></a><span class="do">## │ dense_1 (Dense)             │ (None, 256)              │ 2,097,… │   Y   │</span></span>
+<span id="cb1-10"><a href="#cb1-10" tabindex="-1"></a><span class="do">## ├─────────────────────────────┼──────────────────────────┼─────────┼───────┤</span></span>
+<span id="cb1-11"><a href="#cb1-11" tabindex="-1"></a><span class="do">## │ dense (Dense)               │ (None, 1)                │     257 │   Y   │</span></span>
+<span id="cb1-12"><a href="#cb1-12" tabindex="-1"></a><span class="do">## └─────────────────────────────┴──────────────────────────┴─────────┴───────┘</span></span>
+<span id="cb1-13"><a href="#cb1-13" tabindex="-1"></a><span class="do">##  Total params: 16,812,353 (64.13 MB)</span></span>
+<span id="cb1-14"><a href="#cb1-14" tabindex="-1"></a><span class="do">##  Trainable params: 2,097,665 (8.00 MB)</span></span>
+<span id="cb1-15"><a href="#cb1-15" tabindex="-1"></a><span class="do">##  Non-trainable params: 14,714,688 (56.13 MB)</span></span></code></pre><p></p></div>
+<p></p><div class="sourceCode r"><pre><code><span><span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">model</span>, expand_nested <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code></pre><p></p></div>
+<p></p><div class="sourceCode"><pre><code><span id="cb1-1"><a href="#cb1-1" tabindex="-1"></a><span class="do">## Model: "sequential"</span></span>
+<span id="cb1-2"><a href="#cb1-2" tabindex="-1"></a><span class="do">## ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━┳━━━━━━━┓</span></span>
+<span id="cb1-3"><a href="#cb1-3" tabindex="-1"></a><span class="do">## ┃ Layer (type)                ┃ Output Shape             ┃ Param # ┃ Trai… ┃</span></span>
+<span id="cb1-4"><a href="#cb1-4" tabindex="-1"></a><span class="do">## ┡━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━╇━━━━━━━┩</span></span>
+<span id="cb1-5"><a href="#cb1-5" tabindex="-1"></a><span class="do">## │ vgg16 (Functional)          │ (None, 4, 4, 512)        │ 14,714… │   N   │</span></span>
+<span id="cb1-6"><a href="#cb1-6" tabindex="-1"></a><span class="do">## ├─────────────────────────────┼──────────────────────────┼─────────┼───────┤</span></span>
+<span id="cb1-7"><a href="#cb1-7" tabindex="-1"></a><span class="do">## │    └ input_layer            │ (None, 150, 150, 3)      │       0 │   -   │</span></span>
+<span id="cb1-8"><a href="#cb1-8" tabindex="-1"></a><span class="do">## │ (InputLayer)                │                          │         │       │</span></span>
+<span id="cb1-9"><a href="#cb1-9" tabindex="-1"></a><span class="do">## ├─────────────────────────────┼──────────────────────────┼─────────┼───────┤</span></span>
+<span id="cb1-10"><a href="#cb1-10" tabindex="-1"></a><span class="do">## │    └ block1_conv1 (Conv2D)  │ (None, 150, 150, 64)     │   1,792 │   N   │</span></span>
+<span id="cb1-11"><a href="#cb1-11" tabindex="-1"></a><span class="do">## ├─────────────────────────────┼──────────────────────────┼─────────┼───────┤</span></span>
+<span id="cb1-12"><a href="#cb1-12" tabindex="-1"></a><span class="do">## │    └ block1_conv2 (Conv2D)  │ (None, 150, 150, 64)     │  36,928 │   N   │</span></span>
+<span id="cb1-13"><a href="#cb1-13" tabindex="-1"></a><span class="do">## ├─────────────────────────────┼──────────────────────────┼─────────┼───────┤</span></span>
+<span id="cb1-14"><a href="#cb1-14" tabindex="-1"></a><span class="do">## │    └ block1_pool            │ (None, 75, 75, 64)       │       0 │   -   │</span></span>
+<span id="cb1-15"><a href="#cb1-15" tabindex="-1"></a><span class="do">## │ (MaxPooling2D)              │                          │         │       │</span></span>
+<span id="cb1-16"><a href="#cb1-16" tabindex="-1"></a><span class="do">## ├─────────────────────────────┼──────────────────────────┼─────────┼───────┤</span></span>
+<span id="cb1-17"><a href="#cb1-17" tabindex="-1"></a><span class="do">## │    └ block2_conv1 (Conv2D)  │ (None, 75, 75, 128)      │  73,856 │   N   │</span></span>
+<span id="cb1-18"><a href="#cb1-18" tabindex="-1"></a><span class="do">## ├─────────────────────────────┼──────────────────────────┼─────────┼───────┤</span></span>
+<span id="cb1-19"><a href="#cb1-19" tabindex="-1"></a><span class="do">## │    └ block2_conv2 (Conv2D)  │ (None, 75, 75, 128)      │ 147,584 │   N   │</span></span>
+<span id="cb1-20"><a href="#cb1-20" tabindex="-1"></a><span class="do">## ├─────────────────────────────┼──────────────────────────┼─────────┼───────┤</span></span>
+<span id="cb1-21"><a href="#cb1-21" tabindex="-1"></a><span class="do">## │    └ block2_pool            │ (None, 37, 37, 128)      │       0 │   -   │</span></span>
+<span id="cb1-22"><a href="#cb1-22" tabindex="-1"></a><span class="do">## │ (MaxPooling2D)              │                          │         │       │</span></span>
+<span id="cb1-23"><a href="#cb1-23" tabindex="-1"></a><span class="do">## ├─────────────────────────────┼──────────────────────────┼─────────┼───────┤</span></span>
+<span id="cb1-24"><a href="#cb1-24" tabindex="-1"></a><span class="do">## │    └ block3_conv1 (Conv2D)  │ (None, 37, 37, 256)      │ 295,168 │   N   │</span></span>
+<span id="cb1-25"><a href="#cb1-25" tabindex="-1"></a><span class="do">## ├─────────────────────────────┼──────────────────────────┼─────────┼───────┤</span></span>
+<span id="cb1-26"><a href="#cb1-26" tabindex="-1"></a><span class="do">## │    └ block3_conv2 (Conv2D)  │ (None, 37, 37, 256)      │ 590,080 │   N   │</span></span>
+<span id="cb1-27"><a href="#cb1-27" tabindex="-1"></a><span class="do">## ├─────────────────────────────┼──────────────────────────┼─────────┼───────┤</span></span>
+<span id="cb1-28"><a href="#cb1-28" tabindex="-1"></a><span class="do">## │    └ block3_conv3 (Conv2D)  │ (None, 37, 37, 256)      │ 590,080 │   N   │</span></span>
+<span id="cb1-29"><a href="#cb1-29" tabindex="-1"></a><span class="do">## ├─────────────────────────────┼──────────────────────────┼─────────┼───────┤</span></span>
+<span id="cb1-30"><a href="#cb1-30" tabindex="-1"></a><span class="do">## │    └ block3_pool            │ (None, 18, 18, 256)      │       0 │   -   │</span></span>
+<span id="cb1-31"><a href="#cb1-31" tabindex="-1"></a><span class="do">## │ (MaxPooling2D)              │                          │         │       │</span></span>
+<span id="cb1-32"><a href="#cb1-32" tabindex="-1"></a><span class="do">## ├─────────────────────────────┼──────────────────────────┼─────────┼───────┤</span></span>
+<span id="cb1-33"><a href="#cb1-33" tabindex="-1"></a><span class="do">## │    └ block4_conv1 (Conv2D)  │ (None, 18, 18, 512)      │ 1,180,… │   N   │</span></span>
+<span id="cb1-34"><a href="#cb1-34" tabindex="-1"></a><span class="do">## ├─────────────────────────────┼──────────────────────────┼─────────┼───────┤</span></span>
+<span id="cb1-35"><a href="#cb1-35" tabindex="-1"></a><span class="do">## │    └ block4_conv2 (Conv2D)  │ (None, 18, 18, 512)      │ 2,359,… │   N   │</span></span>
+<span id="cb1-36"><a href="#cb1-36" tabindex="-1"></a><span class="do">## ├─────────────────────────────┼──────────────────────────┼─────────┼───────┤</span></span>
+<span id="cb1-37"><a href="#cb1-37" tabindex="-1"></a><span class="do">## │    └ block4_conv3 (Conv2D)  │ (None, 18, 18, 512)      │ 2,359,… │   N   │</span></span>
+<span id="cb1-38"><a href="#cb1-38" tabindex="-1"></a><span class="do">## ├─────────────────────────────┼──────────────────────────┼─────────┼───────┤</span></span>
+<span id="cb1-39"><a href="#cb1-39" tabindex="-1"></a><span class="do">## │    └ block4_pool            │ (None, 9, 9, 512)        │       0 │   -   │</span></span>
+<span id="cb1-40"><a href="#cb1-40" tabindex="-1"></a><span class="do">## │ (MaxPooling2D)              │                          │         │       │</span></span>
+<span id="cb1-41"><a href="#cb1-41" tabindex="-1"></a><span class="do">## ├─────────────────────────────┼──────────────────────────┼─────────┼───────┤</span></span>
+<span id="cb1-42"><a href="#cb1-42" tabindex="-1"></a><span class="do">## │    └ block5_conv1 (Conv2D)  │ (None, 9, 9, 512)        │ 2,359,… │   N   │</span></span>
+<span id="cb1-43"><a href="#cb1-43" tabindex="-1"></a><span class="do">## ├─────────────────────────────┼──────────────────────────┼─────────┼───────┤</span></span>
+<span id="cb1-44"><a href="#cb1-44" tabindex="-1"></a><span class="do">## │    └ block5_conv2 (Conv2D)  │ (None, 9, 9, 512)        │ 2,359,… │   N   │</span></span>
+<span id="cb1-45"><a href="#cb1-45" tabindex="-1"></a><span class="do">## ├─────────────────────────────┼──────────────────────────┼─────────┼───────┤</span></span>
+<span id="cb1-46"><a href="#cb1-46" tabindex="-1"></a><span class="do">## │    └ block5_conv3 (Conv2D)  │ (None, 9, 9, 512)        │ 2,359,… │   N   │</span></span>
+<span id="cb1-47"><a href="#cb1-47" tabindex="-1"></a><span class="do">## ├─────────────────────────────┼──────────────────────────┼─────────┼───────┤</span></span>
+<span id="cb1-48"><a href="#cb1-48" tabindex="-1"></a><span class="do">## │    └ block5_pool            │ (None, 4, 4, 512)        │       0 │   -   │</span></span>
+<span id="cb1-49"><a href="#cb1-49" tabindex="-1"></a><span class="do">## │ (MaxPooling2D)              │                          │         │       │</span></span>
+<span id="cb1-50"><a href="#cb1-50" tabindex="-1"></a><span class="do">## ├─────────────────────────────┼──────────────────────────┼─────────┼───────┤</span></span>
+<span id="cb1-51"><a href="#cb1-51" tabindex="-1"></a><span class="do">## │ flatten (Flatten)           │ (None, 8192)             │       0 │   -   │</span></span>
+<span id="cb1-52"><a href="#cb1-52" tabindex="-1"></a><span class="do">## ├─────────────────────────────┼──────────────────────────┼─────────┼───────┤</span></span>
+<span id="cb1-53"><a href="#cb1-53" tabindex="-1"></a><span class="do">## │ dense_1 (Dense)             │ (None, 256)              │ 2,097,… │   Y   │</span></span>
+<span id="cb1-54"><a href="#cb1-54" tabindex="-1"></a><span class="do">## ├─────────────────────────────┼──────────────────────────┼─────────┼───────┤</span></span>
+<span id="cb1-55"><a href="#cb1-55" tabindex="-1"></a><span class="do">## │ dense (Dense)               │ (None, 1)                │     257 │   Y   │</span></span>
+<span id="cb1-56"><a href="#cb1-56" tabindex="-1"></a><span class="do">## └─────────────────────────────┴──────────────────────────┴─────────┴───────┘</span></span>
+<span id="cb1-57"><a href="#cb1-57" tabindex="-1"></a><span class="do">##  Total params: 16,812,353 (64.13 MB)</span></span>
+<span id="cb1-58"><a href="#cb1-58" tabindex="-1"></a><span class="do">##  Trainable params: 2,097,665 (8.00 MB)</span></span>
+<span id="cb1-59"><a href="#cb1-59" tabindex="-1"></a><span class="do">##  Non-trainable params: 14,714,688 (56.13 MB)</span></span></code></pre><p></p></div>
+<p></p><div class="sourceCode r"><pre><code><span></span>
+<span></span>
+<span><span class="co"># unfreeze weights from "block5_conv1" on</span></span>
+<span><span class="fu"><a href="../reference/freeze_weights.html">unfreeze_weights</a></span><span class="op">(</span><span class="va">conv_base</span>, from <span class="op">=</span> <span class="st">"block5_conv1"</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># compile again since we froze or unfroze weights</span></span>
+<span><span class="va">model</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://generics.r-lib.org/reference/compile.html" class="external-link">compile</a></span><span class="op">(</span></span>
+<span>  loss <span class="op">=</span> <span class="st">"binary_crossentropy"</span>,</span>
+<span>  optimizer <span class="op">=</span> <span class="fu"><a href="../reference/optimizer_rmsprop.html">optimizer_rmsprop</a></span><span class="op">(</span>learning_rate <span class="op">=</span> <span class="fl">2e-5</span><span class="op">)</span>,</span>
+<span>  metrics <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"accuracy"</span><span class="op">)</span></span>
+<span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">conv_base</span></span></code></pre><p></p></div>
+<p></p><div class="sourceCode"><pre><code><span id="cb1-1"><a href="#cb1-1" tabindex="-1"></a><span class="do">## Model: "vgg16"</span></span>
+<span id="cb1-2"><a href="#cb1-2" tabindex="-1"></a><span class="do">## ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━┳━━━━━━━┓</span></span>
+<span id="cb1-3"><a href="#cb1-3" tabindex="-1"></a><span class="do">## ┃ Layer (type)                ┃ Output Shape             ┃ Param # ┃ Trai… ┃</span></span>
+<span id="cb1-4"><a href="#cb1-4" tabindex="-1"></a><span class="do">## ┡━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━╇━━━━━━━┩</span></span>
+<span id="cb1-5"><a href="#cb1-5" tabindex="-1"></a><span class="do">## │ input_layer (InputLayer)    │ (None, 150, 150, 3)      │       0 │   -   │</span></span>
+<span id="cb1-6"><a href="#cb1-6" tabindex="-1"></a><span class="do">## ├─────────────────────────────┼──────────────────────────┼─────────┼───────┤</span></span>
+<span id="cb1-7"><a href="#cb1-7" tabindex="-1"></a><span class="do">## │ block1_conv1 (Conv2D)       │ (None, 150, 150, 64)     │   1,792 │   N   │</span></span>
+<span id="cb1-8"><a href="#cb1-8" tabindex="-1"></a><span class="do">## ├─────────────────────────────┼──────────────────────────┼─────────┼───────┤</span></span>
+<span id="cb1-9"><a href="#cb1-9" tabindex="-1"></a><span class="do">## │ block1_conv2 (Conv2D)       │ (None, 150, 150, 64)     │  36,928 │   N   │</span></span>
+<span id="cb1-10"><a href="#cb1-10" tabindex="-1"></a><span class="do">## ├─────────────────────────────┼──────────────────────────┼─────────┼───────┤</span></span>
+<span id="cb1-11"><a href="#cb1-11" tabindex="-1"></a><span class="do">## │ block1_pool (MaxPooling2D)  │ (None, 75, 75, 64)       │       0 │   -   │</span></span>
+<span id="cb1-12"><a href="#cb1-12" tabindex="-1"></a><span class="do">## ├─────────────────────────────┼──────────────────────────┼─────────┼───────┤</span></span>
+<span id="cb1-13"><a href="#cb1-13" tabindex="-1"></a><span class="do">## │ block2_conv1 (Conv2D)       │ (None, 75, 75, 128)      │  73,856 │   N   │</span></span>
+<span id="cb1-14"><a href="#cb1-14" tabindex="-1"></a><span class="do">## ├─────────────────────────────┼──────────────────────────┼─────────┼───────┤</span></span>
+<span id="cb1-15"><a href="#cb1-15" tabindex="-1"></a><span class="do">## │ block2_conv2 (Conv2D)       │ (None, 75, 75, 128)      │ 147,584 │   N   │</span></span>
+<span id="cb1-16"><a href="#cb1-16" tabindex="-1"></a><span class="do">## ├─────────────────────────────┼──────────────────────────┼─────────┼───────┤</span></span>
+<span id="cb1-17"><a href="#cb1-17" tabindex="-1"></a><span class="do">## │ block2_pool (MaxPooling2D)  │ (None, 37, 37, 128)      │       0 │   -   │</span></span>
+<span id="cb1-18"><a href="#cb1-18" tabindex="-1"></a><span class="do">## ├─────────────────────────────┼──────────────────────────┼─────────┼───────┤</span></span>
+<span id="cb1-19"><a href="#cb1-19" tabindex="-1"></a><span class="do">## │ block3_conv1 (Conv2D)       │ (None, 37, 37, 256)      │ 295,168 │   N   │</span></span>
+<span id="cb1-20"><a href="#cb1-20" tabindex="-1"></a><span class="do">## ├─────────────────────────────┼──────────────────────────┼─────────┼───────┤</span></span>
+<span id="cb1-21"><a href="#cb1-21" tabindex="-1"></a><span class="do">## │ block3_conv2 (Conv2D)       │ (None, 37, 37, 256)      │ 590,080 │   N   │</span></span>
+<span id="cb1-22"><a href="#cb1-22" tabindex="-1"></a><span class="do">## ├─────────────────────────────┼──────────────────────────┼─────────┼───────┤</span></span>
+<span id="cb1-23"><a href="#cb1-23" tabindex="-1"></a><span class="do">## │ block3_conv3 (Conv2D)       │ (None, 37, 37, 256)      │ 590,080 │   N   │</span></span>
+<span id="cb1-24"><a href="#cb1-24" tabindex="-1"></a><span class="do">## ├─────────────────────────────┼──────────────────────────┼─────────┼───────┤</span></span>
+<span id="cb1-25"><a href="#cb1-25" tabindex="-1"></a><span class="do">## │ block3_pool (MaxPooling2D)  │ (None, 18, 18, 256)      │       0 │   -   │</span></span>
+<span id="cb1-26"><a href="#cb1-26" tabindex="-1"></a><span class="do">## ├─────────────────────────────┼──────────────────────────┼─────────┼───────┤</span></span>
+<span id="cb1-27"><a href="#cb1-27" tabindex="-1"></a><span class="do">## │ block4_conv1 (Conv2D)       │ (None, 18, 18, 512)      │ 1,180,… │   N   │</span></span>
+<span id="cb1-28"><a href="#cb1-28" tabindex="-1"></a><span class="do">## ├─────────────────────────────┼──────────────────────────┼─────────┼───────┤</span></span>
+<span id="cb1-29"><a href="#cb1-29" tabindex="-1"></a><span class="do">## │ block4_conv2 (Conv2D)       │ (None, 18, 18, 512)      │ 2,359,… │   N   │</span></span>
+<span id="cb1-30"><a href="#cb1-30" tabindex="-1"></a><span class="do">## ├─────────────────────────────┼──────────────────────────┼─────────┼───────┤</span></span>
+<span id="cb1-31"><a href="#cb1-31" tabindex="-1"></a><span class="do">## │ block4_conv3 (Conv2D)       │ (None, 18, 18, 512)      │ 2,359,… │   N   │</span></span>
+<span id="cb1-32"><a href="#cb1-32" tabindex="-1"></a><span class="do">## ├─────────────────────────────┼──────────────────────────┼─────────┼───────┤</span></span>
+<span id="cb1-33"><a href="#cb1-33" tabindex="-1"></a><span class="do">## │ block4_pool (MaxPooling2D)  │ (None, 9, 9, 512)        │       0 │   -   │</span></span>
+<span id="cb1-34"><a href="#cb1-34" tabindex="-1"></a><span class="do">## ├─────────────────────────────┼──────────────────────────┼─────────┼───────┤</span></span>
+<span id="cb1-35"><a href="#cb1-35" tabindex="-1"></a><span class="do">## │ block5_conv1 (Conv2D)       │ (None, 9, 9, 512)        │ 2,359,… │   Y   │</span></span>
+<span id="cb1-36"><a href="#cb1-36" tabindex="-1"></a><span class="do">## ├─────────────────────────────┼──────────────────────────┼─────────┼───────┤</span></span>
+<span id="cb1-37"><a href="#cb1-37" tabindex="-1"></a><span class="do">## │ block5_conv2 (Conv2D)       │ (None, 9, 9, 512)        │ 2,359,… │   Y   │</span></span>
+<span id="cb1-38"><a href="#cb1-38" tabindex="-1"></a><span class="do">## ├─────────────────────────────┼──────────────────────────┼─────────┼───────┤</span></span>
+<span id="cb1-39"><a href="#cb1-39" tabindex="-1"></a><span class="do">## │ block5_conv3 (Conv2D)       │ (None, 9, 9, 512)        │ 2,359,… │   Y   │</span></span>
+<span id="cb1-40"><a href="#cb1-40" tabindex="-1"></a><span class="do">## ├─────────────────────────────┼──────────────────────────┼─────────┼───────┤</span></span>
+<span id="cb1-41"><a href="#cb1-41" tabindex="-1"></a><span class="do">## │ block5_pool (MaxPooling2D)  │ (None, 4, 4, 512)        │       0 │   -   │</span></span>
+<span id="cb1-42"><a href="#cb1-42" tabindex="-1"></a><span class="do">## └─────────────────────────────┴──────────────────────────┴─────────┴───────┘</span></span>
+<span id="cb1-43"><a href="#cb1-43" tabindex="-1"></a><span class="do">##  Total params: 14,714,688 (56.13 MB)</span></span>
+<span id="cb1-44"><a href="#cb1-44" tabindex="-1"></a><span class="do">##  Trainable params: 7,079,424 (27.01 MB)</span></span>
+<span id="cb1-45"><a href="#cb1-45" tabindex="-1"></a><span class="do">##  Non-trainable params: 7,635,264 (29.13 MB)</span></span></code></pre><p></p></div>
+<p></p><div class="sourceCode r"><pre><code><span><span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">model</span>, expand_nested <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code></pre><p></p></div>
+<p></p><div class="sourceCode"><pre><code><span id="cb1-1"><a href="#cb1-1" tabindex="-1"></a><span class="do">## Model: "sequential"</span></span>
+<span id="cb1-2"><a href="#cb1-2" tabindex="-1"></a><span class="do">## ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━┳━━━━━━━┓</span></span>
+<span id="cb1-3"><a href="#cb1-3" tabindex="-1"></a><span class="do">## ┃ Layer (type)                ┃ Output Shape             ┃ Param # ┃ Trai… ┃</span></span>
+<span id="cb1-4"><a href="#cb1-4" tabindex="-1"></a><span class="do">## ┡━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━╇━━━━━━━┩</span></span>
+<span id="cb1-5"><a href="#cb1-5" tabindex="-1"></a><span class="do">## │ vgg16 (Functional)          │ (None, 4, 4, 512)        │ 14,714… │   Y   │</span></span>
+<span id="cb1-6"><a href="#cb1-6" tabindex="-1"></a><span class="do">## ├─────────────────────────────┼──────────────────────────┼─────────┼───────┤</span></span>
+<span id="cb1-7"><a href="#cb1-7" tabindex="-1"></a><span class="do">## │    └ input_layer            │ (None, 150, 150, 3)      │       0 │   -   │</span></span>
+<span id="cb1-8"><a href="#cb1-8" tabindex="-1"></a><span class="do">## │ (InputLayer)                │                          │         │       │</span></span>
+<span id="cb1-9"><a href="#cb1-9" tabindex="-1"></a><span class="do">## ├─────────────────────────────┼──────────────────────────┼─────────┼───────┤</span></span>
+<span id="cb1-10"><a href="#cb1-10" tabindex="-1"></a><span class="do">## │    └ block1_conv1 (Conv2D)  │ (None, 150, 150, 64)     │   1,792 │   N   │</span></span>
+<span id="cb1-11"><a href="#cb1-11" tabindex="-1"></a><span class="do">## ├─────────────────────────────┼──────────────────────────┼─────────┼───────┤</span></span>
+<span id="cb1-12"><a href="#cb1-12" tabindex="-1"></a><span class="do">## │    └ block1_conv2 (Conv2D)  │ (None, 150, 150, 64)     │  36,928 │   N   │</span></span>
+<span id="cb1-13"><a href="#cb1-13" tabindex="-1"></a><span class="do">## ├─────────────────────────────┼──────────────────────────┼─────────┼───────┤</span></span>
+<span id="cb1-14"><a href="#cb1-14" tabindex="-1"></a><span class="do">## │    └ block1_pool            │ (None, 75, 75, 64)       │       0 │   -   │</span></span>
+<span id="cb1-15"><a href="#cb1-15" tabindex="-1"></a><span class="do">## │ (MaxPooling2D)              │                          │         │       │</span></span>
+<span id="cb1-16"><a href="#cb1-16" tabindex="-1"></a><span class="do">## ├─────────────────────────────┼──────────────────────────┼─────────┼───────┤</span></span>
+<span id="cb1-17"><a href="#cb1-17" tabindex="-1"></a><span class="do">## │    └ block2_conv1 (Conv2D)  │ (None, 75, 75, 128)      │  73,856 │   N   │</span></span>
+<span id="cb1-18"><a href="#cb1-18" tabindex="-1"></a><span class="do">## ├─────────────────────────────┼──────────────────────────┼─────────┼───────┤</span></span>
+<span id="cb1-19"><a href="#cb1-19" tabindex="-1"></a><span class="do">## │    └ block2_conv2 (Conv2D)  │ (None, 75, 75, 128)      │ 147,584 │   N   │</span></span>
+<span id="cb1-20"><a href="#cb1-20" tabindex="-1"></a><span class="do">## ├─────────────────────────────┼──────────────────────────┼─────────┼───────┤</span></span>
+<span id="cb1-21"><a href="#cb1-21" tabindex="-1"></a><span class="do">## │    └ block2_pool            │ (None, 37, 37, 128)      │       0 │   -   │</span></span>
+<span id="cb1-22"><a href="#cb1-22" tabindex="-1"></a><span class="do">## │ (MaxPooling2D)              │                          │         │       │</span></span>
+<span id="cb1-23"><a href="#cb1-23" tabindex="-1"></a><span class="do">## ├─────────────────────────────┼──────────────────────────┼─────────┼───────┤</span></span>
+<span id="cb1-24"><a href="#cb1-24" tabindex="-1"></a><span class="do">## │    └ block3_conv1 (Conv2D)  │ (None, 37, 37, 256)      │ 295,168 │   N   │</span></span>
+<span id="cb1-25"><a href="#cb1-25" tabindex="-1"></a><span class="do">## ├─────────────────────────────┼──────────────────────────┼─────────┼───────┤</span></span>
+<span id="cb1-26"><a href="#cb1-26" tabindex="-1"></a><span class="do">## │    └ block3_conv2 (Conv2D)  │ (None, 37, 37, 256)      │ 590,080 │   N   │</span></span>
+<span id="cb1-27"><a href="#cb1-27" tabindex="-1"></a><span class="do">## ├─────────────────────────────┼──────────────────────────┼─────────┼───────┤</span></span>
+<span id="cb1-28"><a href="#cb1-28" tabindex="-1"></a><span class="do">## │    └ block3_conv3 (Conv2D)  │ (None, 37, 37, 256)      │ 590,080 │   N   │</span></span>
+<span id="cb1-29"><a href="#cb1-29" tabindex="-1"></a><span class="do">## ├─────────────────────────────┼──────────────────────────┼─────────┼───────┤</span></span>
+<span id="cb1-30"><a href="#cb1-30" tabindex="-1"></a><span class="do">## │    └ block3_pool            │ (None, 18, 18, 256)      │       0 │   -   │</span></span>
+<span id="cb1-31"><a href="#cb1-31" tabindex="-1"></a><span class="do">## │ (MaxPooling2D)              │                          │         │       │</span></span>
+<span id="cb1-32"><a href="#cb1-32" tabindex="-1"></a><span class="do">## ├─────────────────────────────┼──────────────────────────┼─────────┼───────┤</span></span>
+<span id="cb1-33"><a href="#cb1-33" tabindex="-1"></a><span class="do">## │    └ block4_conv1 (Conv2D)  │ (None, 18, 18, 512)      │ 1,180,… │   N   │</span></span>
+<span id="cb1-34"><a href="#cb1-34" tabindex="-1"></a><span class="do">## ├─────────────────────────────┼──────────────────────────┼─────────┼───────┤</span></span>
+<span id="cb1-35"><a href="#cb1-35" tabindex="-1"></a><span class="do">## │    └ block4_conv2 (Conv2D)  │ (None, 18, 18, 512)      │ 2,359,… │   N   │</span></span>
+<span id="cb1-36"><a href="#cb1-36" tabindex="-1"></a><span class="do">## ├─────────────────────────────┼──────────────────────────┼─────────┼───────┤</span></span>
+<span id="cb1-37"><a href="#cb1-37" tabindex="-1"></a><span class="do">## │    └ block4_conv3 (Conv2D)  │ (None, 18, 18, 512)      │ 2,359,… │   N   │</span></span>
+<span id="cb1-38"><a href="#cb1-38" tabindex="-1"></a><span class="do">## ├─────────────────────────────┼──────────────────────────┼─────────┼───────┤</span></span>
+<span id="cb1-39"><a href="#cb1-39" tabindex="-1"></a><span class="do">## │    └ block4_pool            │ (None, 9, 9, 512)        │       0 │   -   │</span></span>
+<span id="cb1-40"><a href="#cb1-40" tabindex="-1"></a><span class="do">## │ (MaxPooling2D)              │                          │         │       │</span></span>
+<span id="cb1-41"><a href="#cb1-41" tabindex="-1"></a><span class="do">## ├─────────────────────────────┼──────────────────────────┼─────────┼───────┤</span></span>
+<span id="cb1-42"><a href="#cb1-42" tabindex="-1"></a><span class="do">## │    └ block5_conv1 (Conv2D)  │ (None, 9, 9, 512)        │ 2,359,… │   Y   │</span></span>
+<span id="cb1-43"><a href="#cb1-43" tabindex="-1"></a><span class="do">## ├─────────────────────────────┼──────────────────────────┼─────────┼───────┤</span></span>
+<span id="cb1-44"><a href="#cb1-44" tabindex="-1"></a><span class="do">## │    └ block5_conv2 (Conv2D)  │ (None, 9, 9, 512)        │ 2,359,… │   Y   │</span></span>
+<span id="cb1-45"><a href="#cb1-45" tabindex="-1"></a><span class="do">## ├─────────────────────────────┼──────────────────────────┼─────────┼───────┤</span></span>
+<span id="cb1-46"><a href="#cb1-46" tabindex="-1"></a><span class="do">## │    └ block5_conv3 (Conv2D)  │ (None, 9, 9, 512)        │ 2,359,… │   Y   │</span></span>
+<span id="cb1-47"><a href="#cb1-47" tabindex="-1"></a><span class="do">## ├─────────────────────────────┼──────────────────────────┼─────────┼───────┤</span></span>
+<span id="cb1-48"><a href="#cb1-48" tabindex="-1"></a><span class="do">## │    └ block5_pool            │ (None, 4, 4, 512)        │       0 │   -   │</span></span>
+<span id="cb1-49"><a href="#cb1-49" tabindex="-1"></a><span class="do">## │ (MaxPooling2D)              │                          │         │       │</span></span>
+<span id="cb1-50"><a href="#cb1-50" tabindex="-1"></a><span class="do">## ├─────────────────────────────┼──────────────────────────┼─────────┼───────┤</span></span>
+<span id="cb1-51"><a href="#cb1-51" tabindex="-1"></a><span class="do">## │ flatten (Flatten)           │ (None, 8192)             │       0 │   -   │</span></span>
+<span id="cb1-52"><a href="#cb1-52" tabindex="-1"></a><span class="do">## ├─────────────────────────────┼──────────────────────────┼─────────┼───────┤</span></span>
+<span id="cb1-53"><a href="#cb1-53" tabindex="-1"></a><span class="do">## │ dense_1 (Dense)             │ (None, 256)              │ 2,097,… │   Y   │</span></span>
+<span id="cb1-54"><a href="#cb1-54" tabindex="-1"></a><span class="do">## ├─────────────────────────────┼──────────────────────────┼─────────┼───────┤</span></span>
+<span id="cb1-55"><a href="#cb1-55" tabindex="-1"></a><span class="do">## │ dense (Dense)               │ (None, 1)                │     257 │   Y   │</span></span>
+<span id="cb1-56"><a href="#cb1-56" tabindex="-1"></a><span class="do">## └─────────────────────────────┴──────────────────────────┴─────────┴───────┘</span></span>
+<span id="cb1-57"><a href="#cb1-57" tabindex="-1"></a><span class="do">##  Total params: 16,812,353 (64.13 MB)</span></span>
+<span id="cb1-58"><a href="#cb1-58" tabindex="-1"></a><span class="do">##  Trainable params: 9,177,089 (35.01 MB)</span></span>
+<span id="cb1-59"><a href="#cb1-59" tabindex="-1"></a><span class="do">##  Non-trainable params: 7,635,264 (29.13 MB)</span></span></code></pre><p></p></div>
+<p></p><div class="sourceCode r"><pre><code><span></span>
+<span><span class="co"># freeze only the last 5 layers</span></span>
+<span><span class="fu"><a href="../reference/freeze_weights.html">freeze_weights</a></span><span class="op">(</span><span class="va">conv_base</span>, from <span class="op">=</span> <span class="op">-</span><span class="fl">5</span><span class="op">)</span></span>
+<span><span class="va">conv_base</span></span></code></pre><p></p></div>
+<p></p><div class="sourceCode"><pre><code><span id="cb1-1"><a href="#cb1-1" tabindex="-1"></a><span class="do">## Model: "vgg16"</span></span>
+<span id="cb1-2"><a href="#cb1-2" tabindex="-1"></a><span class="do">## ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━┳━━━━━━━┓</span></span>
+<span id="cb1-3"><a href="#cb1-3" tabindex="-1"></a><span class="do">## ┃ Layer (type)                ┃ Output Shape             ┃ Param # ┃ Trai… ┃</span></span>
+<span id="cb1-4"><a href="#cb1-4" tabindex="-1"></a><span class="do">## ┡━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━╇━━━━━━━┩</span></span>
+<span id="cb1-5"><a href="#cb1-5" tabindex="-1"></a><span class="do">## │ input_layer (InputLayer)    │ (None, 150, 150, 3)      │       0 │   -   │</span></span>
+<span id="cb1-6"><a href="#cb1-6" tabindex="-1"></a><span class="do">## ├─────────────────────────────┼──────────────────────────┼─────────┼───────┤</span></span>
+<span id="cb1-7"><a href="#cb1-7" tabindex="-1"></a><span class="do">## │ block1_conv1 (Conv2D)       │ (None, 150, 150, 64)     │   1,792 │   Y   │</span></span>
+<span id="cb1-8"><a href="#cb1-8" tabindex="-1"></a><span class="do">## ├─────────────────────────────┼──────────────────────────┼─────────┼───────┤</span></span>
+<span id="cb1-9"><a href="#cb1-9" tabindex="-1"></a><span class="do">## │ block1_conv2 (Conv2D)       │ (None, 150, 150, 64)     │  36,928 │   Y   │</span></span>
+<span id="cb1-10"><a href="#cb1-10" tabindex="-1"></a><span class="do">## ├─────────────────────────────┼──────────────────────────┼─────────┼───────┤</span></span>
+<span id="cb1-11"><a href="#cb1-11" tabindex="-1"></a><span class="do">## │ block1_pool (MaxPooling2D)  │ (None, 75, 75, 64)       │       0 │   -   │</span></span>
+<span id="cb1-12"><a href="#cb1-12" tabindex="-1"></a><span class="do">## ├─────────────────────────────┼──────────────────────────┼─────────┼───────┤</span></span>
+<span id="cb1-13"><a href="#cb1-13" tabindex="-1"></a><span class="do">## │ block2_conv1 (Conv2D)       │ (None, 75, 75, 128)      │  73,856 │   Y   │</span></span>
+<span id="cb1-14"><a href="#cb1-14" tabindex="-1"></a><span class="do">## ├─────────────────────────────┼──────────────────────────┼─────────┼───────┤</span></span>
+<span id="cb1-15"><a href="#cb1-15" tabindex="-1"></a><span class="do">## │ block2_conv2 (Conv2D)       │ (None, 75, 75, 128)      │ 147,584 │   Y   │</span></span>
+<span id="cb1-16"><a href="#cb1-16" tabindex="-1"></a><span class="do">## ├─────────────────────────────┼──────────────────────────┼─────────┼───────┤</span></span>
+<span id="cb1-17"><a href="#cb1-17" tabindex="-1"></a><span class="do">## │ block2_pool (MaxPooling2D)  │ (None, 37, 37, 128)      │       0 │   -   │</span></span>
+<span id="cb1-18"><a href="#cb1-18" tabindex="-1"></a><span class="do">## ├─────────────────────────────┼──────────────────────────┼─────────┼───────┤</span></span>
+<span id="cb1-19"><a href="#cb1-19" tabindex="-1"></a><span class="do">## │ block3_conv1 (Conv2D)       │ (None, 37, 37, 256)      │ 295,168 │   Y   │</span></span>
+<span id="cb1-20"><a href="#cb1-20" tabindex="-1"></a><span class="do">## ├─────────────────────────────┼──────────────────────────┼─────────┼───────┤</span></span>
+<span id="cb1-21"><a href="#cb1-21" tabindex="-1"></a><span class="do">## │ block3_conv2 (Conv2D)       │ (None, 37, 37, 256)      │ 590,080 │   Y   │</span></span>
+<span id="cb1-22"><a href="#cb1-22" tabindex="-1"></a><span class="do">## ├─────────────────────────────┼──────────────────────────┼─────────┼───────┤</span></span>
+<span id="cb1-23"><a href="#cb1-23" tabindex="-1"></a><span class="do">## │ block3_conv3 (Conv2D)       │ (None, 37, 37, 256)      │ 590,080 │   Y   │</span></span>
+<span id="cb1-24"><a href="#cb1-24" tabindex="-1"></a><span class="do">## ├─────────────────────────────┼──────────────────────────┼─────────┼───────┤</span></span>
+<span id="cb1-25"><a href="#cb1-25" tabindex="-1"></a><span class="do">## │ block3_pool (MaxPooling2D)  │ (None, 18, 18, 256)      │       0 │   -   │</span></span>
+<span id="cb1-26"><a href="#cb1-26" tabindex="-1"></a><span class="do">## ├─────────────────────────────┼──────────────────────────┼─────────┼───────┤</span></span>
+<span id="cb1-27"><a href="#cb1-27" tabindex="-1"></a><span class="do">## │ block4_conv1 (Conv2D)       │ (None, 18, 18, 512)      │ 1,180,… │   Y   │</span></span>
+<span id="cb1-28"><a href="#cb1-28" tabindex="-1"></a><span class="do">## ├─────────────────────────────┼──────────────────────────┼─────────┼───────┤</span></span>
+<span id="cb1-29"><a href="#cb1-29" tabindex="-1"></a><span class="do">## │ block4_conv2 (Conv2D)       │ (None, 18, 18, 512)      │ 2,359,… │   Y   │</span></span>
+<span id="cb1-30"><a href="#cb1-30" tabindex="-1"></a><span class="do">## ├─────────────────────────────┼──────────────────────────┼─────────┼───────┤</span></span>
+<span id="cb1-31"><a href="#cb1-31" tabindex="-1"></a><span class="do">## │ block4_conv3 (Conv2D)       │ (None, 18, 18, 512)      │ 2,359,… │   Y   │</span></span>
+<span id="cb1-32"><a href="#cb1-32" tabindex="-1"></a><span class="do">## ├─────────────────────────────┼──────────────────────────┼─────────┼───────┤</span></span>
+<span id="cb1-33"><a href="#cb1-33" tabindex="-1"></a><span class="do">## │ block4_pool (MaxPooling2D)  │ (None, 9, 9, 512)        │       0 │   -   │</span></span>
+<span id="cb1-34"><a href="#cb1-34" tabindex="-1"></a><span class="do">## ├─────────────────────────────┼──────────────────────────┼─────────┼───────┤</span></span>
+<span id="cb1-35"><a href="#cb1-35" tabindex="-1"></a><span class="do">## │ block5_conv1 (Conv2D)       │ (None, 9, 9, 512)        │ 2,359,… │   N   │</span></span>
+<span id="cb1-36"><a href="#cb1-36" tabindex="-1"></a><span class="do">## ├─────────────────────────────┼──────────────────────────┼─────────┼───────┤</span></span>
+<span id="cb1-37"><a href="#cb1-37" tabindex="-1"></a><span class="do">## │ block5_conv2 (Conv2D)       │ (None, 9, 9, 512)        │ 2,359,… │   N   │</span></span>
+<span id="cb1-38"><a href="#cb1-38" tabindex="-1"></a><span class="do">## ├─────────────────────────────┼──────────────────────────┼─────────┼───────┤</span></span>
+<span id="cb1-39"><a href="#cb1-39" tabindex="-1"></a><span class="do">## │ block5_conv3 (Conv2D)       │ (None, 9, 9, 512)        │ 2,359,… │   N   │</span></span>
+<span id="cb1-40"><a href="#cb1-40" tabindex="-1"></a><span class="do">## ├─────────────────────────────┼──────────────────────────┼─────────┼───────┤</span></span>
+<span id="cb1-41"><a href="#cb1-41" tabindex="-1"></a><span class="do">## │ block5_pool (MaxPooling2D)  │ (None, 4, 4, 512)        │       0 │   -   │</span></span>
+<span id="cb1-42"><a href="#cb1-42" tabindex="-1"></a><span class="do">## └─────────────────────────────┴──────────────────────────┴─────────┴───────┘</span></span>
+<span id="cb1-43"><a href="#cb1-43" tabindex="-1"></a><span class="do">##  Total params: 14,714,688 (56.13 MB)</span></span>
+<span id="cb1-44"><a href="#cb1-44" tabindex="-1"></a><span class="do">##  Trainable params: 7,635,264 (29.13 MB)</span></span>
+<span id="cb1-45"><a href="#cb1-45" tabindex="-1"></a><span class="do">##  Non-trainable params: 7,079,424 (27.01 MB)</span></span></code></pre><p></p></div>
+<p></p><div class="sourceCode r"><pre><code><span><span class="co"># freeze only the last 5 layers, a different way</span></span>
+<span><span class="fu"><a href="../reference/freeze_weights.html">unfreeze_weights</a></span><span class="op">(</span><span class="va">conv_base</span>, to <span class="op">=</span> <span class="op">-</span><span class="fl">6</span><span class="op">)</span></span>
+<span><span class="va">conv_base</span></span></code></pre><p></p></div>
+<p></p><div class="sourceCode"><pre><code><span id="cb1-1"><a href="#cb1-1" tabindex="-1"></a><span class="do">## Model: "vgg16"</span></span>
+<span id="cb1-2"><a href="#cb1-2" tabindex="-1"></a><span class="do">## ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━┳━━━━━━━┓</span></span>
+<span id="cb1-3"><a href="#cb1-3" tabindex="-1"></a><span class="do">## ┃ Layer (type)                ┃ Output Shape             ┃ Param # ┃ Trai… ┃</span></span>
+<span id="cb1-4"><a href="#cb1-4" tabindex="-1"></a><span class="do">## ┡━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━╇━━━━━━━┩</span></span>
+<span id="cb1-5"><a href="#cb1-5" tabindex="-1"></a><span class="do">## │ input_layer (InputLayer)    │ (None, 150, 150, 3)      │       0 │   -   │</span></span>
+<span id="cb1-6"><a href="#cb1-6" tabindex="-1"></a><span class="do">## ├─────────────────────────────┼──────────────────────────┼─────────┼───────┤</span></span>
+<span id="cb1-7"><a href="#cb1-7" tabindex="-1"></a><span class="do">## │ block1_conv1 (Conv2D)       │ (None, 150, 150, 64)     │   1,792 │   Y   │</span></span>
+<span id="cb1-8"><a href="#cb1-8" tabindex="-1"></a><span class="do">## ├─────────────────────────────┼──────────────────────────┼─────────┼───────┤</span></span>
+<span id="cb1-9"><a href="#cb1-9" tabindex="-1"></a><span class="do">## │ block1_conv2 (Conv2D)       │ (None, 150, 150, 64)     │  36,928 │   Y   │</span></span>
+<span id="cb1-10"><a href="#cb1-10" tabindex="-1"></a><span class="do">## ├─────────────────────────────┼──────────────────────────┼─────────┼───────┤</span></span>
+<span id="cb1-11"><a href="#cb1-11" tabindex="-1"></a><span class="do">## │ block1_pool (MaxPooling2D)  │ (None, 75, 75, 64)       │       0 │   -   │</span></span>
+<span id="cb1-12"><a href="#cb1-12" tabindex="-1"></a><span class="do">## ├─────────────────────────────┼──────────────────────────┼─────────┼───────┤</span></span>
+<span id="cb1-13"><a href="#cb1-13" tabindex="-1"></a><span class="do">## │ block2_conv1 (Conv2D)       │ (None, 75, 75, 128)      │  73,856 │   Y   │</span></span>
+<span id="cb1-14"><a href="#cb1-14" tabindex="-1"></a><span class="do">## ├─────────────────────────────┼──────────────────────────┼─────────┼───────┤</span></span>
+<span id="cb1-15"><a href="#cb1-15" tabindex="-1"></a><span class="do">## │ block2_conv2 (Conv2D)       │ (None, 75, 75, 128)      │ 147,584 │   Y   │</span></span>
+<span id="cb1-16"><a href="#cb1-16" tabindex="-1"></a><span class="do">## ├─────────────────────────────┼──────────────────────────┼─────────┼───────┤</span></span>
+<span id="cb1-17"><a href="#cb1-17" tabindex="-1"></a><span class="do">## │ block2_pool (MaxPooling2D)  │ (None, 37, 37, 128)      │       0 │   -   │</span></span>
+<span id="cb1-18"><a href="#cb1-18" tabindex="-1"></a><span class="do">## ├─────────────────────────────┼──────────────────────────┼─────────┼───────┤</span></span>
+<span id="cb1-19"><a href="#cb1-19" tabindex="-1"></a><span class="do">## │ block3_conv1 (Conv2D)       │ (None, 37, 37, 256)      │ 295,168 │   Y   │</span></span>
+<span id="cb1-20"><a href="#cb1-20" tabindex="-1"></a><span class="do">## ├─────────────────────────────┼──────────────────────────┼─────────┼───────┤</span></span>
+<span id="cb1-21"><a href="#cb1-21" tabindex="-1"></a><span class="do">## │ block3_conv2 (Conv2D)       │ (None, 37, 37, 256)      │ 590,080 │   Y   │</span></span>
+<span id="cb1-22"><a href="#cb1-22" tabindex="-1"></a><span class="do">## ├─────────────────────────────┼──────────────────────────┼─────────┼───────┤</span></span>
+<span id="cb1-23"><a href="#cb1-23" tabindex="-1"></a><span class="do">## │ block3_conv3 (Conv2D)       │ (None, 37, 37, 256)      │ 590,080 │   Y   │</span></span>
+<span id="cb1-24"><a href="#cb1-24" tabindex="-1"></a><span class="do">## ├─────────────────────────────┼──────────────────────────┼─────────┼───────┤</span></span>
+<span id="cb1-25"><a href="#cb1-25" tabindex="-1"></a><span class="do">## │ block3_pool (MaxPooling2D)  │ (None, 18, 18, 256)      │       0 │   -   │</span></span>
+<span id="cb1-26"><a href="#cb1-26" tabindex="-1"></a><span class="do">## ├─────────────────────────────┼──────────────────────────┼─────────┼───────┤</span></span>
+<span id="cb1-27"><a href="#cb1-27" tabindex="-1"></a><span class="do">## │ block4_conv1 (Conv2D)       │ (None, 18, 18, 512)      │ 1,180,… │   Y   │</span></span>
+<span id="cb1-28"><a href="#cb1-28" tabindex="-1"></a><span class="do">## ├─────────────────────────────┼──────────────────────────┼─────────┼───────┤</span></span>
+<span id="cb1-29"><a href="#cb1-29" tabindex="-1"></a><span class="do">## │ block4_conv2 (Conv2D)       │ (None, 18, 18, 512)      │ 2,359,… │   Y   │</span></span>
+<span id="cb1-30"><a href="#cb1-30" tabindex="-1"></a><span class="do">## ├─────────────────────────────┼──────────────────────────┼─────────┼───────┤</span></span>
+<span id="cb1-31"><a href="#cb1-31" tabindex="-1"></a><span class="do">## │ block4_conv3 (Conv2D)       │ (None, 18, 18, 512)      │ 2,359,… │   Y   │</span></span>
+<span id="cb1-32"><a href="#cb1-32" tabindex="-1"></a><span class="do">## ├─────────────────────────────┼──────────────────────────┼─────────┼───────┤</span></span>
+<span id="cb1-33"><a href="#cb1-33" tabindex="-1"></a><span class="do">## │ block4_pool (MaxPooling2D)  │ (None, 9, 9, 512)        │       0 │   -   │</span></span>
+<span id="cb1-34"><a href="#cb1-34" tabindex="-1"></a><span class="do">## ├─────────────────────────────┼──────────────────────────┼─────────┼───────┤</span></span>
+<span id="cb1-35"><a href="#cb1-35" tabindex="-1"></a><span class="do">## │ block5_conv1 (Conv2D)       │ (None, 9, 9, 512)        │ 2,359,… │   N   │</span></span>
+<span id="cb1-36"><a href="#cb1-36" tabindex="-1"></a><span class="do">## ├─────────────────────────────┼──────────────────────────┼─────────┼───────┤</span></span>
+<span id="cb1-37"><a href="#cb1-37" tabindex="-1"></a><span class="do">## │ block5_conv2 (Conv2D)       │ (None, 9, 9, 512)        │ 2,359,… │   N   │</span></span>
+<span id="cb1-38"><a href="#cb1-38" tabindex="-1"></a><span class="do">## ├─────────────────────────────┼──────────────────────────┼─────────┼───────┤</span></span>
+<span id="cb1-39"><a href="#cb1-39" tabindex="-1"></a><span class="do">## │ block5_conv3 (Conv2D)       │ (None, 9, 9, 512)        │ 2,359,… │   N   │</span></span>
+<span id="cb1-40"><a href="#cb1-40" tabindex="-1"></a><span class="do">## ├─────────────────────────────┼──────────────────────────┼─────────┼───────┤</span></span>
+<span id="cb1-41"><a href="#cb1-41" tabindex="-1"></a><span class="do">## │ block5_pool (MaxPooling2D)  │ (None, 4, 4, 512)        │       0 │   -   │</span></span>
+<span id="cb1-42"><a href="#cb1-42" tabindex="-1"></a><span class="do">## └─────────────────────────────┴──────────────────────────┴─────────┴───────┘</span></span>
+<span id="cb1-43"><a href="#cb1-43" tabindex="-1"></a><span class="do">##  Total params: 14,714,688 (56.13 MB)</span></span>
+<span id="cb1-44"><a href="#cb1-44" tabindex="-1"></a><span class="do">##  Trainable params: 7,635,264 (29.13 MB)</span></span>
+<span id="cb1-45"><a href="#cb1-45" tabindex="-1"></a><span class="do">##  Non-trainable params: 7,079,424 (27.01 MB)</span></span></code></pre><p></p></div>
+<p></p><div class="sourceCode r"><pre><code><span></span>
+<span><span class="co"># Freeze only layers of a certain type, e.g, BatchNorm layers</span></span>
+<span><span class="va">batch_norm_layer_class_name</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/class.html" class="external-link">class</a></span><span class="op">(</span><span class="fu"><a href="../reference/layer_batch_normalization.html">layer_batch_normalization</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span></span>
+<span><span class="va">is_batch_norm_layer</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="fu"><a href="https://rdrr.io/r/base/class.html" class="external-link">inherits</a></span><span class="op">(</span><span class="va">x</span>, <span class="va">batch_norm_layer_class_name</span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">model</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/application_efficientnet_b0.html">application_efficientnet_b0</a></span><span class="op">(</span><span class="op">)</span></span>
+<span><span class="fu"><a href="../reference/freeze_weights.html">freeze_weights</a></span><span class="op">(</span><span class="va">model</span>, which <span class="op">=</span> <span class="va">is_batch_norm_layer</span><span class="op">)</span></span>
+<span><span class="co"># print(model)</span></span>
+<span></span>
+<span><span class="co"># equivalent to:</span></span>
+<span><span class="kw">for</span><span class="op">(</span><span class="va">layer</span> <span class="kw">in</span> <span class="va">model</span><span class="op">$</span><span class="va">layers</span><span class="op">)</span> <span class="op">{</span></span>
+<span>  <span class="kw">if</span><span class="op">(</span><span class="fu">is_batch_norm_layer</span><span class="op">(</span><span class="va">layer</span><span class="op">)</span><span class="op">)</span></span>
+<span>    <span class="va">layer</span><span class="op">$</span><span class="va">trainable</span> <span class="op">&lt;-</span> <span class="cn">FALSE</span></span>
+<span>  <span class="kw">else</span></span>
+<span>    <span class="va">layer</span><span class="op">$</span><span class="va">trainable</span> <span class="op">&lt;-</span> <span class="cn">TRUE</span></span>
+<span><span class="op">}</span></span></code></pre><p></p></div>
     </div>
+
   </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>
     </nav></aside></div>
 

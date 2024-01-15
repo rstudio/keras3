@@ -233,7 +233,7 @@ then evaluate the model on the test data:</p>
 <span>    <span class="va">x_train</span>, <span class="va">y_train</span>, batch_size <span class="op">=</span> <span class="fl">64</span>, epochs <span class="op">=</span> <span class="fl">2</span>, validation_split <span class="op">=</span> <span class="fl">0.2</span></span>
 <span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">## Epoch 1/2</span></span>
-<span><span class="co">## 750/750 - 3s - 4ms/step - accuracy: 0.9015 - loss: 0.3513 - val_accuracy: 0.9442 - val_loss: 0.1921</span></span>
+<span><span class="co">## 750/750 - 2s - 3ms/step - accuracy: 0.9015 - loss: 0.3513 - val_accuracy: 0.9442 - val_loss: 0.1921</span></span>
 <span><span class="co">## Epoch 2/2</span></span>
 <span><span class="co">## 750/750 - 1s - 1ms/step - accuracy: 0.9508 - loss: 0.1643 - val_accuracy: 0.9581 - val_loss: 0.1423</span></span></code></pre>
 <div class="sourceCode" id="cb18"><pre class="downlit sourceCode r">
@@ -242,7 +242,7 @@ then evaluate the model on the test data:</p>
 <div class="sourceCode" id="cb20"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/cat.html" class="external-link">cat</a></span><span class="op">(</span><span class="st">"Test loss:"</span>, <span class="va">test_scores</span><span class="op">$</span><span class="va">loss</span>, <span class="st">"\n"</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/cat.html" class="external-link">cat</a></span><span class="op">(</span><span class="st">"Test accuracy:"</span>, <span class="va">test_scores</span><span class="op">$</span><span class="va">accuracy</span>, <span class="st">"\n"</span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">## Test loss: 0.1337983</span></span>
+<pre><code><span><span class="co">## Test loss: 0.1337984</span></span>
 <span><span class="co">## Test accuracy: 0.9578</span></span></code></pre>
 <p>For further reading, see the <a href="/guides/training_with_built_in_methods/">training and
 evaluation</a> guide.</p>
@@ -602,7 +602,7 @@ targets:</p>
 <span>    batch_size<span class="op">=</span><span class="fl">32</span>,</span>
 <span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">## Epoch 1/2</span></span>
-<span><span class="co">## 40/40 - 3s - 87ms/step - loss: 0.3948</span></span>
+<span><span class="co">## 40/40 - 3s - 67ms/step - loss: 0.3948</span></span>
 <span><span class="co">## Epoch 2/2</span></span>
 <span><span class="co">## 40/40 - 0s - 5ms/step - loss: 0.1971</span></span></code></pre>
 <p>When calling fit with a <code>Dataset</code> object, it should yield
@@ -717,7 +717,7 @@ ResNet model for CIFAR10 to demonstrate this:</p>
 <span>    epochs<span class="op">=</span><span class="fl">1</span>,</span>
 <span>    validation_split<span class="op">=</span><span class="fl">0.2</span></span>
 <span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">## 13/13 - 7s - 563ms/step - acc: 0.1300 - loss: 2.3034 - val_acc: 0.1150 - val_loss: 2.3079</span></span></code></pre>
+<pre><code><span><span class="co">## 13/13 - 7s - 521ms/step - acc: 0.1325 - loss: 2.3036 - val_acc: 0.1150 - val_loss: 2.3075</span></span></code></pre>
 </div>
 </div>
 <div class="section level2">

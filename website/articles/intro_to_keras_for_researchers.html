@@ -977,10 +977,10 @@ the MNIST example above.</p>
 <pre><code><span><span class="co">## Epoch 1/2</span></span>
 <span><span class="co">## 938/938 - 2s - 3ms/step - loss: 0.3960 - sparse_categorical_accuracy: 0.8866</span></span>
 <span><span class="co">## Epoch 2/2</span></span>
-<span><span class="co">## 938/938 - 1s - 946us/step - loss: 0.1886 - sparse_categorical_accuracy: 0.9444</span></span></code></pre>
+<span><span class="co">## 938/938 - 1s - 873us/step - loss: 0.1886 - sparse_categorical_accuracy: 0.9444</span></span></code></pre>
 <div class="sourceCode" id="cb73"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">predictions</span> <span class="op">&lt;-</span> <span class="va">model</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://rdrr.io/r/stats/predict.html" class="external-link">predict</a></span><span class="op">(</span><span class="va">dataset</span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">## 938/938 - 1s - 962us/step</span></span></code></pre>
+<pre><code><span><span class="co">## 938/938 - 1s - 967us/step</span></span></code></pre>
 <div class="sourceCode" id="cb75"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">model</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://rdrr.io/pkg/tensorflow/man/evaluate.html" class="external-link">evaluate</a></span><span class="op">(</span><span class="va">dataset</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">## 938/938 - 1s - 1ms/step - loss: 0.1764 - sparse_categorical_accuracy: 0.9452</span></span></code></pre>
@@ -1047,7 +1047,7 @@ guide</a>.</p>
 <pre><code><span><span class="co">## Epoch 1/2</span></span>
 <span><span class="co">## 938/938 - 2s - 2ms/step - loss: 0.3869 - sparse_categorical_accuracy: 0.8924</span></span>
 <span><span class="co">## Epoch 2/2</span></span>
-<span><span class="co">## 938/938 - 1s - 884us/step - loss: 0.2163 - sparse_categorical_accuracy: 0.9370</span></span></code></pre>
+<span><span class="co">## 938/938 - 1s - 839us/step - loss: 0.2163 - sparse_categorical_accuracy: 0.9370</span></span></code></pre>
 </div>
 <div class="section level2">
 <h2 id="end-to-end-experiment-example-1-variational-autoencoders-">End-to-end experiment example 1: variational autoencoders.<a class="anchor" aria-label="anchor" href="#end-to-end-experiment-example-1-variational-autoencoders-"></a>

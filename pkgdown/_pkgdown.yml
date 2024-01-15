@@ -81,7 +81,9 @@ reference:
     contents:
       - keras_model_sequential
       - keras_model
+      - keras_input
       - clone_model
+      - Model
 
   - subtitle: "Train Models"
     contents:
