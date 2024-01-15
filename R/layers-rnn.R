@@ -20,8 +20,8 @@
 #' # Examples
 #' ```{r}
 #' model <- keras_model_sequential(input_shape = c(5, 10)) %>%
-#'   bidirectional(layer_lstm(units = 10, return_sequences = TRUE)) %>%
-#'   bidirectional(layer_lstm(units = 10)) %>%
+#'   layer_bidirectional(layer_lstm(units = 10, return_sequences = TRUE)) %>%
+#'   layer_bidirectional(layer_lstm(units = 10)) %>%
 #'   layer_dense(5, activation = "softmax")
 #'
 #' model %>% compile(loss = "categorical_crossentropy",
@@ -93,7 +93,7 @@
 #' + <https://keras.io/api/layers/recurrent_layers/bidirectional#bidirectional-class>
 #  + <https://www.tensorflow.org/api_docs/python/tf/keras/layers/Bidirectional>
 #' @tether keras.layers.Bidirectional
-bidirectional <-
+layer_bidirectional <-
 function (object, layer, merge_mode = "concat", weights = NULL,
     backward_layer = NULL, ...)
 {
@@ -1873,7 +1873,7 @@ function (cells, ...)
 #' of the 10 timesteps, independently:
 #'
 #' ```{r}
-#' inputs <- layer_input(shape = c(10, 128, 128, 3), batch_size = 32)
+#' inputs <- keras_input(shape = c(10, 128, 128, 3), batch_size = 32)
 #' conv_2d_layer <- layer_conv_2d(filters = 64, kernel_size = c(3, 3))
 #' outputs <- layer_time_distributed(inputs, layer = conv_2d_layer)
 #' shape(outputs)
@@ -1893,7 +1893,7 @@ function (cells, ...)
 #'     wrapped layer (only if the layer supports this argument).
 #'
 #' @param layer
-#' a `layer_Layer` instance.
+#' A `Layer` instance.
 #'
 #' @param object
 #' Object to compose the layer with. A tensor, array, or sequential model.

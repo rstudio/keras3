@@ -38,3 +38,9 @@ mark_active <- active_property
 
 #' @eval .alias_roxygen("layer_input", "keras_input")
 layer_input <- keras_input
+
+#' @eval .alias_roxygen("bidirectional", "layer_bidirectional")
+bidirectional <- layer_bidirectional
+
+#' @eval .alias_roxygen("time_distributed", "layer_time_distributed")
+time_distributed <- layer_time_distributed
