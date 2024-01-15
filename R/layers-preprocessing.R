@@ -92,6 +92,7 @@
 #' For forward/backward compatability.
 #'
 #' @export
+#' @family categorical features preprocessing layers
 #' @family preprocessing layers
 #' @family layers
 #' @seealso
@@ -159,6 +160,7 @@ function (object, num_tokens = NULL, output_mode = "multi_hot",
 #' For forward/backward compatability.
 #'
 #' @export
+#' @family image preprocessing layers
 #' @family preprocessing layers
 #' @family layers
 #' @seealso
@@ -269,6 +271,7 @@ function (object, height, width, data_format = NULL, ...)
 #' datatype (e.g., `"float32"`).
 #'
 #' @export
+#' @family numerical features preprocessing layers
 #' @family preprocessing layers
 #' @family layers
 #' @seealso
@@ -359,6 +362,7 @@ function (object, bin_boundaries = NULL, num_bins = NULL, epsilon = 0.01,
 #' datatype (e.g., `"float32"`).
 #'
 #' @export
+#' @family categorical features preprocessing layers
 #' @family preprocessing layers
 #' @family layers
 #' @seealso
@@ -503,6 +507,7 @@ function (object, num_bins, output_mode = "int", sparse = FALSE,
 #' Object to compose the layer with. A tensor, array, or sequential model.
 #'
 #' @export
+#' @family categorical features preprocessing layers
 #' @family preprocessing layers
 #' @family layers
 #' @seealso
@@ -842,6 +847,7 @@ function (object, num_bins, mask_value = NULL, salt = NULL, output_mode = "int",
 #' For forward/backward compatability.
 #'
 #' @export
+#' @family categorical features preprocessing layers
 #' @family preprocessing layers
 #' @family layers
 #' @seealso
@@ -960,6 +966,7 @@ function (object, max_tokens = NULL, num_oov_indices = 1L, mask_token = NULL,
 #' For forward/backward compatability.
 #'
 #' @export
+#' @family numerical features preprocessing layers
 #' @family preprocessing layers
 #' @family layers
 #' @seealso
@@ -1042,6 +1049,7 @@ function (object, axis = -1L, mean = NULL, variance = NULL, invert = FALSE,
 #' For forward/backward compatability.
 #'
 #' @export
+#' @family image augmentation layers
 #' @family preprocessing layers
 #' @family layers
 #' @seealso
@@ -1105,6 +1113,7 @@ function (object, factor, value_range = list(0L, 255L), seed = NULL,
 #' For forward/backward compatability.
 #'
 #' @export
+#' @family image augmentation layers
 #' @family preprocessing layers
 #' @family layers
 #' @seealso
@@ -1172,6 +1181,7 @@ function (object, factor, seed = NULL, ...)
 #' see description
 #'
 #' @export
+#' @family image augmentation layers
 #' @family preprocessing layers
 #' @family layers
 #' @seealso
@@ -1227,6 +1237,7 @@ function (object, height, width, seed = NULL, data_format = NULL,
 #' Object to compose the layer with. A tensor, array, or sequential model.
 #'
 #' @export
+#' @family image augmentation layers
 #' @family preprocessing layers
 #' @family layers
 #' @seealso
@@ -1324,6 +1335,7 @@ function (object, mode = "horizontal_and_vertical", seed = NULL,
 #' see description
 #'
 #' @export
+#' @family image augmentation layers
 #' @family preprocessing layers
 #' @family layers
 #' @seealso
@@ -1435,6 +1447,7 @@ function (object, factor, fill_mode = "reflect", interpolation = "bilinear",
 #' Object to compose the layer with. A tensor, array, or sequential model.
 #'
 #' @export
+#' @family image augmentation layers
 #' @family preprocessing layers
 #' @family layers
 #' @seealso
@@ -1553,6 +1566,7 @@ function (object, height_factor, width_factor, fill_mode = "reflect",
 #' Object to compose the layer with. A tensor, array, or sequential model.
 #'
 #' @export
+#' @family image augmentation layers
 #' @family preprocessing layers
 #' @family layers
 #' @seealso
@@ -1606,6 +1620,7 @@ function (object, height_factor, width_factor = NULL, fill_mode = "reflect",
 #' Object to compose the layer with. A tensor, array, or sequential model.
 #'
 #' @export
+#' @family image preprocessing layers
 #' @family preprocessing layers
 #' @family layers
 #' @seealso
@@ -1681,6 +1696,7 @@ function (object, scale, offset = 0, ...)
 #' Object to compose the layer with. A tensor, array, or sequential model.
 #'
 #' @export
+#' @family image preprocessing layers
 #' @family preprocessing layers
 #' @family layers
 #' @seealso
@@ -2008,6 +2024,7 @@ function (object, height, width, interpolation = "bilinear",
 #' For forward/backward compatability.
 #'
 #' @export
+#' @family categorical features preprocessing layers
 #' @family preprocessing layers
 #' @family layers
 #' @seealso
@@ -2277,3 +2294,144 @@ function (object, max_tokens = NULL, standardize = "lower_and_strip_punctuation"
         batch_input_shape = normalize_shape), ignore = "object")
     create_layer(keras$layers$TextVectorization, object, args)
 }
+
+
+
+# TODO: add tests/ confirm that `get_vocabulary()` returns an R character
+# vector. In older TF versions it used to return python byte objects, which
+# needed `x.decode("UTF-8") for x in vocab]`
+
+#' @param include_special_tokens If TRUE, the returned vocabulary will include
+#'   the padding and OOV tokens, and a term's index in the vocabulary will equal
+#'   the term's index when calling the layer. If FALSE, the returned vocabulary
+#'   will not include any padding or OOV tokens.
+#' @rdname layer_text_vectorization
+#' @export
+get_vocabulary <- function(object, include_special_tokens=TRUE) {
+  args <- capture_args(ignore = "object")
+  do.call(object$get_vocabulary, args)
+}
+
+#' @rdname layer_text_vectorization
+#' @param idf_weights An R vector, 1D numpy array, or 1D tensor of inverse
+#'   document frequency weights with equal length to vocabulary. Must be set if
+#'   output_mode is "tf_idf". Should not be set otherwise.
+#' @export
+set_vocabulary <- function(object, vocabulary, idf_weights=NULL, ...) {
+  args <- capture_args(ignore = "object")
+  do.call(object$set_vocabulary, args)
+  invisible(object)
+}
+
+
+## TODO: TextVectorization has a compile() method. investigate if this is
+## actually useful to export
+#compile.keras.engine.base_preprocessing_layer.PreprocessingLayer <-
+function(object, run_eagerly = NULL, steps_per_execution = NULL, ...) {
+  args <- capture_args(ignore="object")
+  do.call(object$compile, args)
+}
+
+
+
+
+
+# ---- adapt ----
+
+
+#' Fits the state of the preprocessing layer to the data being passed
+#'
+#' @details
+#' After calling `adapt` on a layer, a preprocessing layer's state will not
+#' update during training. In order to make preprocessing layers efficient in
+#' any distribution context, they are kept constant with respect to any
+#' compiled `tf.Graph`s that call the layer. This does not affect the layer use
+#' when adapting each layer only once, but if you adapt a layer multiple times
+#' you will need to take care to re-compile any compiled functions as follows:
+#'
+#'  * If you are adding a preprocessing layer to a keras model, you need to
+#'    call `compile(model)` after each subsequent call to `adapt()`.
+#'  * If you are calling a preprocessing layer inside [`tfdatasets::dataset_map()`],
+#'    you should call `dataset_map()` again on the input `Dataset` after each
+#'    `adapt()`.
+#'  * If you are using a [`tensorflow::tf_function()`] directly which calls a preprocessing
+#'    layer, you need to call `tf_function()` again on your callable after
+#'    each subsequent call to `adapt()`.
+#'
+#' `keras_model()` example with multiple adapts:
+#' ````{r}
+#' layer <- layer_normalization(axis = NULL)
+#' adapt(layer, c(0, 2))
+#' model <- keras_model_sequential() |> layer()
+#' predict(model, c(0, 1, 2), verbose = FALSE) # [1] -1  0  1
+#'
+#' adapt(layer, c(-1, 1))
+#' compile(model)  # This is needed to re-compile model.predict!
+#' predict(model, c(0, 1, 2), verbose = FALSE) # [1] 0 1 2
+#' ````
+#'
+#' `tfdatasets` example with multiple adapts:
+#' ````{r}
+#' layer <- layer_normalization(axis = NULL)
+#' adapt(layer, c(0, 2))
+#' input_ds <- tfdatasets::range_dataset(0, 3)
+#' normalized_ds <- input_ds |>
+#'   tfdatasets::dataset_map(layer)
+#' str(tfdatasets::iterate(normalized_ds))
+#'
+#' adapt(layer, c(-1, 1))
+#' normalized_ds <- input_ds |>
+#'   tfdatasets::dataset_map(layer) # Re-map over the input dataset.
+#'
+#' normalized_ds |>
+#'   tfdatasets::as_array_iterator() |>
+#'   tfdatasets::iterate() |>
+#'   str()
+#' ````
+#'
+#' @param object Preprocessing layer object
+#'
+#' @param data The data to train on. It can be passed either as a
+#'   `tf.data.Dataset` or as an R array.
+#'
+#' @param batch_size Integer or `NULL`. Number of asamples per state update. If
+#'   unspecified, `batch_size` will default to `32`. Do not specify the
+#'   batch_size if your data is in the form of a TF Dataset or a generator
+#'   (since they generate batches).
+#'
+#' @param steps Integer or `NULL`. Total number of steps (batches of samples)
+#'   When training with input tensors such as TensorFlow data tensors, the
+#'   default `NULL` is equal to the number of samples in your dataset divided by
+#'   the batch size, or `1` if that cannot be determined. If x is a
+#'   `tf.data.Dataset`, and `steps` is `NULL`, the epoch will run until the
+#'   input dataset is exhausted. When passing an infinitely repeating dataset,
+#'   you must specify the steps argument. This argument is not supported with
+#'   array inputs.
+#'
+#' @param ... Used for forwards and backwards compatibility. Passed on to the underlying method.
+#'
+#' @family preprocessing layer methods
+#'
+# @seealso
+#  + <https://www.tensorflow.org/guide/keras/preprocessing_layers#the_adapt_method>
+#  + <https://keras.io/guides/preprocessing_layers/#the-adapt-method>
+#'
+#' @export
+adapt <- function(object, data, ..., batch_size=NULL, steps=NULL) {
+  if (!inherits(data, "python.builtin.object"))
+    data <- keras_array(data)
+  # TODO: use as_tensor() here
+
+  args <- capture_args(list(batch_size = as_nullable_integer,
+                             step = as_nullable_integer),
+                        ignore = c("object", "data"))
+  # `data` named to `dataset` in keras3 keras.utils.FeatureSpace
+  # pass it as a positional arg
+  args <- c(list(data), args)
+  do.call(object$adapt, args)
+  invisible(object)
+}
+
+
+
+
