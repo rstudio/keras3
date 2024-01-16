@@ -312,31 +312,6 @@ as_index <- function(x) {
 
 
 
-# if(FALSE) {
-#   # TODO: use this to generate a static list for populating
-#   # a reverse lookup hashtable
-# x <- lapply(asNamespace("keras3"), resolve_wrapper_py_obj_expr) |>
-#   purrr::map_chr(\(expr) if(is.null(expr)) "" else deparse1(expr))
-# df <- tibble::enframe(x, value = "expr")
-# df <- df[order(df$name),]
-# success <- df$expr != ""
-#
-#
-# df[success, ] |> print(n = Inf)
-# df[!success, ] |> print(n = Inf)
-#
-# # prefer_class = FALSE
-# x <- lapply(asNamespace("keras3"), resolve_wrapper_py_obj_expr,
-#             prefer_class = FALSE) |>
-#   purrr::map_chr(\(expr) if(is.null(expr)) "" else deparse1(expr))
-# df <- tibble::enframe(x, value = "expr")
-# df <- df[order(df$name),]
-# success <- df$expr != ""
-# df[success, ] |> print(n = Inf)
-# df[!success, ] |> print(n = Inf)a
-# }
-
-
 resolve_wrapper_py_obj_expr <- function(x, prefer_class = TRUE) {
   if (!identical(class(x), "function"))
     return()
@@ -489,6 +464,81 @@ as_py_function <- function(fn, default_name = "r_func") {
   # if(is.null(name)) { name <- as_py_name(deparse1(substitute(x)))}
   py_func2(fn, convert = TRUE, name = name)
 }
+
+
+
+
+# if(FALSE) {
+#   # TODO: use this to generate a static list for populating
+#   # a reverse lookup hashtable
+# x <- lapply(asNamespace("keras3"), resolve_wrapper_py_obj_expr) |>
+#   purrr::map_chr(\(expr) if(is.null(expr)) "" else deparse1(expr))
+# df <- tibble::enframe(x, value = "expr")
+# df <- df[order(df$name),]
+# success <- df$expr != ""
+#
+#
+# df[success, ] |> print(n = Inf)
+# df[!success, ] |> print(n = Inf)
+#
+# # prefer_class = FALSE
+# x <- lapply(asNamespace("keras3"), resolve_wrapper_py_obj_expr,
+#             prefer_class = FALSE) |>
+#   purrr::map_chr(\(expr) if(is.null(expr)) "" else deparse1(expr))
+# df <- tibble::enframe(x, value = "expr")
+# df <- df[order(df$name),]
+# success <- df$expr != ""
+# df[success, ] |> print(n = Inf)
+# df[!success, ] |> print(n = Inf)a
+# }
+
+
+# as_activation <- NULL
+
+# on_load_make_as_activation <- function() {
+#   if (getRversion() < "4.2") {
+#     as_activation <<- .as_activation
+#   } else {
+#     as_activation <<- local({
+#       # make a hashtab to do reverse look ups, converting exported closures like
+#       # `activation_elu` to a builtin activation name string "elu". The
+#       # motivation is to avoid needlessly popping out to an R closure if we're
+#       # using a bultin. We have to do this at runtime since the hastab
+#       # needs the closure object address.
+#       delayedAssign("h", local({
+#         nms <- grep("^activation_", getNamespaceExports("keras3"), value = TRUE)
+#         h <- utils::hashtab("address", length(nms))
+#         ns <- asNamespace("keras3")
+#         for (name in nms)
+#           utils::sethash(h, getExportedValue(ns, name),
+#                          substr(name, 12L, 999L))
+#         h
+#       }))
+#
+#       function(x) utils::gethash(h, x) %||% .as_activation(x)
+#     })
+#   }
+# }
+#
+# .as_activation <- function(x) {
+#   if (is.null(x) || inherits(x, "python.builtin.object"))
+#     return(x)
+#
+#   name <- attr(x, "py_function_name", TRUE)
+#   if (is_string(name) && identical(x, get0(
+#     paste0("activation_", name),
+#     envir = environment(sys.function()),
+#     inherits = FALSE
+#   )))
+#     # it's a builtin; the name string will be resolved upstream via
+#     # keras.activations.get(name)
+#     return(name)
+#
+#   if (is.function(x))
+#     return(as_py_function(x, default_name = "custom_activation"))
+#   x
+# }
+#
 
 
 
@@ -697,6 +747,12 @@ assert_all_dots_named <- function(envir = parent.frame(), cl) {
 
 # ---- py helpers ----
 
+py_is <- function(x, y) {
+  if(!inherits(x, "python.builtin.object") ||
+     !inherits(y, "python.builtin.object"))
+    return(FALSE)
+  identical(py_id(x), py_id(y))
+}
 
 have_module <- function(module) {
   tryCatch({ import(module); TRUE; }, error = function(e) FALSE)

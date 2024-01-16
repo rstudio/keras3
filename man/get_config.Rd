@@ -7,11 +7,7 @@
 \usage{
 get_config(object)
 
-from_config(
-  config,
-  custom_objects = NULL,
-  class = attr(config, "__class__", TRUE) \%||\% keras$Model
-)
+from_config(config, custom_objects = NULL)
 }
 \arguments{
 \item{object}{Layer or model object}
@@ -20,8 +16,6 @@ from_config(
 
 \item{custom_objects}{list of custom objects needed to instantiate the layer,
 e.g., custom layers defined by \code{new_layer_class()} or similar.}
-
-\item{class}{The keras class to restore.}
 }
 \value{
 \code{get_config()} returns an object with the configuration,
@@ -35,10 +29,10 @@ using \code{from_config()}. The config does not include connectivity information
 nor the class name (those are handled externally).
 }
 \note{
-Objects returned from \code{get_config()} are not serializable. Therefore,
-if you want to save and restore a model across sessions, you can use the
-\code{model_to_json()} function (for model configuration only, not weights) or
-the \code{save_model_tf()} function to save the model configuration and weights
+Objects returned from \code{get_config()} are not serializable via RDS. If
+you want to save and restore a model across sessions, you can use
+\code{\link[=save_model_config]{save_model_config()}} (for model configuration only, not weights)
+or \code{\link[=save_model]{save_model()}} to save the model configuration and weights
 to the filesystem.
 }
 \seealso{
