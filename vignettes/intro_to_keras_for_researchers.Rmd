@@ -1057,7 +1057,7 @@ model %>% fit(dataset, epochs=2)
 ## Epoch 1/2
 ## 938/938 - 2s - 3ms/step - loss: 0.3960 - sparse_categorical_accuracy: 0.8866
 ## Epoch 2/2
-## 938/938 - 1s - 873us/step - loss: 0.1886 - sparse_categorical_accuracy: 0.9444
+## 938/938 - 1s - 868us/step - loss: 0.1886 - sparse_categorical_accuracy: 0.9444
 ```
 
 ```r
@@ -1065,7 +1065,7 @@ predictions <- model %>% predict(dataset)
 ```
 
 ```
-## 938/938 - 1s - 967us/step
+## 938/938 - 1s - 1ms/step
 ```
 
 ```r
@@ -1145,7 +1145,7 @@ model %>% fit(dataset, epochs=2)
 ## Epoch 1/2
 ## 938/938 - 2s - 2ms/step - loss: 0.3869 - sparse_categorical_accuracy: 0.8924
 ## Epoch 2/2
-## 938/938 - 1s - 839us/step - loss: 0.2163 - sparse_categorical_accuracy: 0.9370
+## 938/938 - 1s - 854us/step - loss: 0.2163 - sparse_categorical_accuracy: 0.9370
 ```
 
 ## End-to-end experiment example 1: variational autoencoders.

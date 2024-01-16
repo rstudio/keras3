@@ -181,9 +181,14 @@ function to demonstrate this.
 
 ```r
 # Clear all previously registered custom objects
-clear_registered_custom_objects()
+set_custom_objects(clear = TRUE)
+```
 
+```
+## named list()
+```
 
+```r
 layer_custom <- Layer(
   "CustomLayer",
   initialize = function(self, factor) {

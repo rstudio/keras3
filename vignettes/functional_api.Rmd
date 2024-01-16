@@ -638,9 +638,9 @@ model %>% fit(
 
 ```
 ## Epoch 1/2
-## 40/40 - 3s - 67ms/step - loss: 0.3948
+## 40/40 - 3s - 69ms/step - loss: 0.3948
 ## Epoch 2/2
-## 40/40 - 0s - 5ms/step - loss: 0.1971
+## 40/40 - 0s - 6ms/step - loss: 0.1971
 ```
 
 When calling fit with a `Dataset` object, it should yield either a
@@ -771,7 +771,7 @@ model %>% fit(
 ```
 
 ```
-## 13/13 - 7s - 521ms/step - acc: 0.1325 - loss: 2.3036 - val_acc: 0.1150 - val_loss: 2.3075
+## 13/13 - 7s - 534ms/step - acc: 0.1325 - loss: 2.3036 - val_acc: 0.1150 - val_loss: 2.3075
 ```
 
 ## Shared layers
