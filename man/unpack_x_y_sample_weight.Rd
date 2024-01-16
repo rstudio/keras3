@@ -7,7 +7,7 @@
 unpack_x_y_sample_weight(data)
 }
 \arguments{
-\item{data}{A list of the form \verb{(x,)}, \verb{(x, y)}, or \verb{(x, y, sample_weight)}.}
+\item{data}{A list of the form \code{(x)}, \verb{(x, y)}, or \verb{(x, y, sample_weight)}.}
 }
 \value{
 The unpacked list, with \code{NULL}s for \code{y} and \code{sample_weight} if they are
@@ -31,14 +31,9 @@ c(x, y, sample_weight) \%<-\% unpack_x_y_sample_weight(data)
 }
 
 \seealso{
-Other datum util adapter trainers: 
-\code{\link{pack_x_y_sample_weight}()}
-
-Other datum adapter trainers: 
-\code{\link{pack_x_y_sample_weight}()}
-
-Other trainers: 
-\code{\link{pack_x_y_sample_weight}()}
+Other data utils: 
+\code{\link{pack_x_y_sample_weight}()},
+\code{\link{zip_lists}()}
 
 Other utils: 
 \code{\link{audio_dataset_from_directory}()},
@@ -59,7 +54,6 @@ Other utils:
 \code{\link{image_to_array}()},
 \code{\link{layer_feature_space}()},
 \code{\link{layer_torch_module_wrapper}()},
-\code{\link{model_to_dot}()},
 \code{\link{normalize}()},
 \code{\link{pack_x_y_sample_weight}()},
 \code{\link{pad_sequences}()},
@@ -67,9 +61,8 @@ Other utils:
 \code{\link{split_dataset}()},
 \code{\link{text_dataset_from_directory}()},
 \code{\link{timeseries_dataset_from_array}()},
-\code{\link{to_categorical}()}
+\code{\link{to_categorical}()},
+\code{\link{zip_lists}()}
 }
-\concept{datum adapter trainers}
-\concept{datum util adapter trainers}
-\concept{trainers}
+\concept{data utils}
 \concept{utils}

@@ -14,11 +14,11 @@ to_categorical(x, num_classes = NULL)
 as \code{max(x) + 1}. Defaults to \code{NULL}.}
 }
 \value{
-A binary matrix representation of the input as a NumPy array. The class
+A binary matrix representation of the input as an R array. The class
 axis is placed last.
 }
 \description{
-E.g. for use with \code{categorical_crossentropy}.
+E.g. for use with \code{\link[=loss_categorical_crossentropy]{loss_categorical_crossentropy()}}.
 }
 \section{Examples}{
 \if{html}{\out{<div class="sourceCode r">}}\preformatted{a <- to_categorical(c(0, 1, 2, 3), num_classes=4)
@@ -54,6 +54,11 @@ loss
 
 \seealso{
 \itemize{
+\item \code{\link[=op_one_hot]{op_one_hot()}}, which does the same operation as \code{to_categorical()}, but
+operating on tensors.
+\item \code{\link[=loss_sparse_categorical_crossentropy]{loss_sparse_categorical_crossentropy()}}, which can
+accept labels (\code{y_true}) as an integer vector, instead of as a dense one-hot
+matrix.
 \item \url{https://keras.io/api/utils/python_utils#tocategorical-function}
 }
 
@@ -79,7 +84,6 @@ Other utils:
 \code{\link{image_to_array}()},
 \code{\link{layer_feature_space}()},
 \code{\link{layer_torch_module_wrapper}()},
-\code{\link{model_to_dot}()},
 \code{\link{normalize}()},
 \code{\link{pack_x_y_sample_weight}()},
 \code{\link{pad_sequences}()},
@@ -87,7 +91,8 @@ Other utils:
 \code{\link{split_dataset}()},
 \code{\link{text_dataset_from_directory}()},
 \code{\link{timeseries_dataset_from_array}()},
-\code{\link{unpack_x_y_sample_weight}()}
+\code{\link{unpack_x_y_sample_weight}()},
+\code{\link{zip_lists}()}
 }
 \concept{numerical utils}
 \concept{utils}

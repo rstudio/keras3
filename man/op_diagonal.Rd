@@ -10,10 +10,10 @@ op_diagonal(x, offset = 0L, axis1 = 1L, axis2 = 2L)
 \item{x}{Input tensor.}
 
 \item{offset}{Offset of the diagonal from the main diagonal.
-Can be positive or negative. Defaults to \code{0}.(main diagonal).}
+Can be positive or negative. Defaults to \code{0} (main diagonal).}
 
 \item{axis1}{Axis to be used as the first axis of the 2-D sub-arrays.
-Defaults to \code{1}.(first axis).}
+Defaults to \code{1} (first axis).}
 
 \item{axis2}{Axis to be used as the second axis of the 2-D sub-arrays.
 Defaults to \code{2} (second axis).}
@@ -101,8 +101,6 @@ Other numpy ops:
 \code{\link{op_abs}()},
 \code{\link{op_add}()},
 \code{\link{op_all}()},
-\code{\link{op_amax}()},
-\code{\link{op_amin}()},
 \code{\link{op_any}()},
 \code{\link{op_append}()},
 \code{\link{op_arange}()},
@@ -237,8 +235,6 @@ Other ops:
 \code{\link{op_abs}()},
 \code{\link{op_add}()},
 \code{\link{op_all}()},
-\code{\link{op_amax}()},
-\code{\link{op_amin}()},
 \code{\link{op_any}()},
 \code{\link{op_append}()},
 \code{\link{op_arange}()},

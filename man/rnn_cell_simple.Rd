@@ -103,6 +103,11 @@ c(whole_sequence_output, final_state) \%<-\% rnn(inputs)
 }
 
 \seealso{
+Other rnn cells: 
+\code{\link{layer_rnn}()},
+\code{\link{rnn_cell_gru}()},
+\code{\link{rnn_cell_lstm}()}
+
 Other simple rnn layers: 
 \code{\link{layer_simple_rnn}()}
 
@@ -228,5 +233,6 @@ Other layers:
 \code{\link{rnn_cells_stack}()}
 }
 \concept{layers}
+\concept{rnn cells}
 \concept{rnn layers}
 \concept{simple rnn layers}

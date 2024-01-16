@@ -2,16 +2,16 @@
 % Please edit documentation in R/random.R
 \name{random_dropout}
 \alias{random_dropout}
-\title{random dropout}
+\title{Randomly set some values in a tensor to 0.}
 \usage{
 random_dropout(inputs, rate, noise_shape = NULL, seed = NULL)
 }
 \arguments{
-\item{inputs}{see description}
+\item{inputs}{A tensor}
 
-\item{rate}{see description}
+\item{rate}{numeric}
 
-\item{noise_shape}{see description}
+\item{noise_shape}{A \code{shape()} value}
 
 \item{seed}{Initial seed for the random number generator}
 }

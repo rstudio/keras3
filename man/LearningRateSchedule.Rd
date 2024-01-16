@@ -2,7 +2,7 @@
 % Please edit documentation in R/LearningRateSchedule.R
 \name{LearningRateSchedule}
 \alias{LearningRateSchedule}
-\title{Define a custom LearningRateSchedule class}
+\title{Define a custom \code{LearningRateSchedule} class}
 \usage{
 LearningRateSchedule(
   classname,

@@ -16,6 +16,17 @@ List of input tensors.
 Output will always be a list of tensors
 (potentially with 1 element).
 }
+\section{Example}{
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{input <- keras_input(c(3))
+output <- input |> layer_dense(4) |> op_multiply(5)
+reticulate::py_id(get_source_inputs(output)[[1]]) ==
+reticulate::py_id(input)
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode">}}\preformatted{## [1] TRUE
+}\if{html}{\out{</div>}}
+}
+
 \seealso{
 Other utils: 
 \code{\link{audio_dataset_from_directory}()},
@@ -35,7 +46,6 @@ Other utils:
 \code{\link{image_to_array}()},
 \code{\link{layer_feature_space}()},
 \code{\link{layer_torch_module_wrapper}()},
-\code{\link{model_to_dot}()},
 \code{\link{normalize}()},
 \code{\link{pack_x_y_sample_weight}()},
 \code{\link{pad_sequences}()},
@@ -44,6 +54,7 @@ Other utils:
 \code{\link{text_dataset_from_directory}()},
 \code{\link{timeseries_dataset_from_array}()},
 \code{\link{to_categorical}()},
-\code{\link{unpack_x_y_sample_weight}()}
+\code{\link{unpack_x_y_sample_weight}()},
+\code{\link{zip_lists}()}
 }
 \concept{utils}

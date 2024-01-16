@@ -12,6 +12,9 @@ set_custom_objects(objects = named_list(), clear = TRUE)
 \arguments{
 \item{objects}{A named list of custom objects, as returned by
 \code{get_custom_objects()} and \code{set_custom_objects()}.}
+
+\item{clear}{bool, whether to clear the custom object registry before
+populating it with \code{objects}.}
 }
 \value{
 An R named list mapping registered names to registered objects.

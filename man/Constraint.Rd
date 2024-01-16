@@ -2,7 +2,7 @@
 % Please edit documentation in R/Constraint.R
 \name{Constraint}
 \alias{Constraint}
-\title{Define a custom Constraint class.}
+\title{Define a custom \code{Constraint} class}
 \usage{
 Constraint(
   classname,

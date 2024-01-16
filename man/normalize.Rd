@@ -17,7 +17,7 @@ normalize(x, axis = -1L, order = 2L)
 A normalized copy of the array.
 }
 \description{
-If the input is a NumPy array, a NumPy array will be returned.
+If the input is an R array, an R array will be returned.
 If it's a backend tensor, a backend tensor will be returned.
 }
 \seealso{
@@ -47,7 +47,6 @@ Other utils:
 \code{\link{image_to_array}()},
 \code{\link{layer_feature_space}()},
 \code{\link{layer_torch_module_wrapper}()},
-\code{\link{model_to_dot}()},
 \code{\link{pack_x_y_sample_weight}()},
 \code{\link{pad_sequences}()},
 \code{\link{set_random_seed}()},
@@ -55,7 +54,8 @@ Other utils:
 \code{\link{text_dataset_from_directory}()},
 \code{\link{timeseries_dataset_from_array}()},
 \code{\link{to_categorical}()},
-\code{\link{unpack_x_y_sample_weight}()}
+\code{\link{unpack_x_y_sample_weight}()},
+\code{\link{zip_lists}()}
 }
 \concept{numerical utils}
 \concept{utils}

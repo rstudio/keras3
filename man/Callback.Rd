@@ -2,7 +2,7 @@
 % Please edit documentation in R/Callback.R
 \name{Callback}
 \alias{Callback}
-\title{Define a custom Callback}
+\title{Define a custom \code{Callback} class}
 \usage{
 Callback(
   classname,
@@ -340,7 +340,6 @@ Other callbacks:
 \code{\link{callback_lambda}()},
 \code{\link{callback_learning_rate_scheduler}()},
 \code{\link{callback_model_checkpoint}()},
-\code{\link{callback_progbar_logger}()},
 \code{\link{callback_reduce_lr_on_plateau}()},
 \code{\link{callback_remote_monitor}()},
 \code{\link{callback_tensorboard}()},

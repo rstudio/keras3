@@ -2,7 +2,7 @@
 % Please edit documentation in R/ops.R
 \name{op_solve}
 \alias{op_solve}
-\title{Solves for \code{x} in the equation \code{a * x = b}.}
+\title{Solves for \code{x} in the equation \code{a \%*\% x == b}.}
 \usage{
 op_solve(a, b)
 }
@@ -15,7 +15,7 @@ op_solve(a, b)
 A tensor with the same shape and dtype as \code{a}.
 }
 \description{
-Solves for \code{x} in the equation \code{a * x = b}.
+Solves for \code{x} in the equation \code{a \%*\% x == b}.
 }
 \section{Examples}{
 \if{html}{\out{<div class="sourceCode r">}}\preformatted{a <- op_array(c(1, 2, 4, 5), dtype="float32") |> op_reshape(c(2, 2))
@@ -51,8 +51,6 @@ Other ops:
 \code{\link{op_abs}()},
 \code{\link{op_add}()},
 \code{\link{op_all}()},
-\code{\link{op_amax}()},
-\code{\link{op_amin}()},
 \code{\link{op_any}()},
 \code{\link{op_append}()},
 \code{\link{op_arange}()},

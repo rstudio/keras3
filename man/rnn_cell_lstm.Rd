@@ -127,6 +127,11 @@ str(whole_sequence_output)
 }
 
 \seealso{
+Other rnn cells: 
+\code{\link{layer_rnn}()},
+\code{\link{rnn_cell_gru}()},
+\code{\link{rnn_cell_simple}()}
+
 Other lstm rnn layers: 
 \code{\link{layer_lstm}()}
 
@@ -253,4 +258,5 @@ Other layers:
 }
 \concept{layers}
 \concept{lstm rnn layers}
+\concept{rnn cells}
 \concept{rnn layers}

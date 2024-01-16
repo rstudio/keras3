@@ -208,6 +208,11 @@ y <- layer(x)
 \item \url{https://keras.io/api/layers/recurrent_layers/rnn#rnn-class}
 }
 
+Other rnn cells: 
+\code{\link{rnn_cell_gru}()},
+\code{\link{rnn_cell_lstm}()},
+\code{\link{rnn_cell_simple}()}
+
 Other rnn layers: 
 \code{\link{layer_bidirectional}()},
 \code{\link{layer_conv_lstm_1d}()},
@@ -330,4 +335,5 @@ Other layers:
 \code{\link{rnn_cells_stack}()}
 }
 \concept{layers}
+\concept{rnn cells}
 \concept{rnn layers}

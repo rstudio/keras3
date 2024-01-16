@@ -2,12 +2,7 @@
 % Please edit documentation in R/callbacks.R
 \name{callback_model_checkpoint}
 \alias{callback_model_checkpoint}
-\title{Callback to save the Keras model or model weights at some frequency.
-@description
-\code{callback_model_checkpoint()} is used in conjunction with training using
-\code{model |> fit()} to save a model or weights (in a checkpoint file) at some
-interval, so the model or weights can be loaded later to continue the
-training from the state saved.}
+\title{Callback to save the Keras model or model weights at some frequency.}
 \usage{
 callback_model_checkpoint(
   filepath,
@@ -85,9 +80,12 @@ overwrites the model weights already saved if the performance of
 current model is better than this value.}
 }
 \description{
+\code{callback_model_checkpoint()} is used in conjunction with training using
+\code{model |> fit()} to save a model or weights (in a checkpoint file) at some
+interval, so the model or weights can be loaded later to continue the
+training from the state saved.
+
 A few options this callback provides include:
-}
-\details{
 \itemize{
 \item Whether to only keep the model that has achieved the "best performance" so
 far, or whether to save the model at the end of every epoch regardless of
@@ -169,7 +167,6 @@ Other callbacks:
 \code{\link{callback_early_stopping}()},
 \code{\link{callback_lambda}()},
 \code{\link{callback_learning_rate_scheduler}()},
-\code{\link{callback_progbar_logger}()},
 \code{\link{callback_reduce_lr_on_plateau}()},
 \code{\link{callback_remote_monitor}()},
 \code{\link{callback_tensorboard}()},

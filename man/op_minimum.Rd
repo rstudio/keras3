@@ -2,9 +2,12 @@
 % Please edit documentation in R/ops.R
 \name{op_minimum}
 \alias{op_minimum}
+\alias{op_pmin}
 \title{Element-wise minimum of \code{x1} and \code{x2}.}
 \usage{
 op_minimum(x1, x2)
+
+op_pmin(x1, x2)
 }
 \arguments{
 \item{x1}{First tensor.}
@@ -26,8 +29,6 @@ Other numpy ops:
 \code{\link{op_abs}()},
 \code{\link{op_add}()},
 \code{\link{op_all}()},
-\code{\link{op_amax}()},
-\code{\link{op_amin}()},
 \code{\link{op_any}()},
 \code{\link{op_append}()},
 \code{\link{op_arange}()},
@@ -162,8 +163,6 @@ Other ops:
 \code{\link{op_abs}()},
 \code{\link{op_add}()},
 \code{\link{op_all}()},
-\code{\link{op_amax}()},
-\code{\link{op_amin}()},
 \code{\link{op_any}()},
 \code{\link{op_append}()},
 \code{\link{op_arange}()},

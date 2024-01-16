@@ -124,6 +124,11 @@ shape(whole_sequence_output)
 }
 
 \seealso{
+Other rnn cells: 
+\code{\link{layer_rnn}()},
+\code{\link{rnn_cell_lstm}()},
+\code{\link{rnn_cell_simple}()}
+
 Other gru rnn layers: 
 \code{\link{layer_gru}()}
 
@@ -250,4 +255,5 @@ Other layers:
 }
 \concept{gru rnn layers}
 \concept{layers}
+\concept{rnn cells}
 \concept{rnn layers}

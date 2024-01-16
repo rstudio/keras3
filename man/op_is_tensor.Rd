@@ -41,8 +41,6 @@ Other ops:
 \code{\link{op_abs}()},
 \code{\link{op_add}()},
 \code{\link{op_all}()},
-\code{\link{op_amax}()},
-\code{\link{op_amin}()},
 \code{\link{op_any}()},
 \code{\link{op_append}()},
 \code{\link{op_arange}()},

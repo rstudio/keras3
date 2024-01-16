@@ -143,7 +143,6 @@ Other utils:
 \code{\link{image_to_array}()},
 \code{\link{layer_feature_space}()},
 \code{\link{layer_torch_module_wrapper}()},
-\code{\link{model_to_dot}()},
 \code{\link{normalize}()},
 \code{\link{pack_x_y_sample_weight}()},
 \code{\link{pad_sequences}()},
@@ -151,7 +150,8 @@ Other utils:
 \code{\link{split_dataset}()},
 \code{\link{timeseries_dataset_from_array}()},
 \code{\link{to_categorical}()},
-\code{\link{unpack_x_y_sample_weight}()}
+\code{\link{unpack_x_y_sample_weight}()},
+\code{\link{zip_lists}()}
 
 Other preprocessing: 
 \code{\link{image_dataset_from_directory}()},

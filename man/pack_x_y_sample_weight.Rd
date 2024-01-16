@@ -26,21 +26,16 @@ Standalone usage:
 \if{html}{\out{<div class="sourceCode r">}}\preformatted{x <- op_ones(c(10, 1))
 data <- pack_x_y_sample_weight(x)
 
-# TRUE
+
 y <- op_ones(c(10, 1))
 data <- pack_x_y_sample_weight(x, y)
 }\if{html}{\out{</div>}}
 }
 
 \seealso{
-Other datum util adapter trainers: 
-\code{\link{unpack_x_y_sample_weight}()}
-
-Other datum adapter trainers: 
-\code{\link{unpack_x_y_sample_weight}()}
-
-Other trainers: 
-\code{\link{unpack_x_y_sample_weight}()}
+Other data utils: 
+\code{\link{unpack_x_y_sample_weight}()},
+\code{\link{zip_lists}()}
 
 Other utils: 
 \code{\link{audio_dataset_from_directory}()},
@@ -61,7 +56,6 @@ Other utils:
 \code{\link{image_to_array}()},
 \code{\link{layer_feature_space}()},
 \code{\link{layer_torch_module_wrapper}()},
-\code{\link{model_to_dot}()},
 \code{\link{normalize}()},
 \code{\link{pad_sequences}()},
 \code{\link{set_random_seed}()},
@@ -69,9 +63,8 @@ Other utils:
 \code{\link{text_dataset_from_directory}()},
 \code{\link{timeseries_dataset_from_array}()},
 \code{\link{to_categorical}()},
-\code{\link{unpack_x_y_sample_weight}()}
+\code{\link{unpack_x_y_sample_weight}()},
+\code{\link{zip_lists}()}
 }
-\concept{datum adapter trainers}
-\concept{datum util adapter trainers}
-\concept{trainers}
+\concept{data utils}
 \concept{utils}

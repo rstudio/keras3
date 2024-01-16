@@ -2,6 +2,7 @@
 % Please edit documentation in R/ops.R
 \name{op_min}
 \alias{op_min}
+\alias{op_amin}
 \title{Return the minimum of a tensor or minimum along an axis.}
 \usage{
 op_min(x, axis = NULL, keepdims = FALSE, initial = NULL)
@@ -23,6 +24,34 @@ Minimum of \code{x}.
 \description{
 Return the minimum of a tensor or minimum along an axis.
 }
+\section{Examples}{
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{(x <- op_convert_to_tensor(rbind(c(1, 3, 5), c(1, 5, 2))))
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor(
+## [[1. 3. 5.]
+##  [1. 5. 2.]], shape=(2, 3), dtype=float64)
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{op_min(x)
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor(1.0, shape=(), dtype=float64)
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{op_min(x, axis = 1)
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor([1. 3. 2.], shape=(3), dtype=float64)
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{op_min(x, axis = 1, keepdims = TRUE)
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor([[1. 3. 2.]], shape=(1, 3), dtype=float64)
+}\if{html}{\out{</div>}}
+}
+
 \seealso{
 \itemize{
 \item \url{https://keras.io/api/ops/numpy#min-function}
@@ -32,8 +61,6 @@ Other numpy ops:
 \code{\link{op_abs}()},
 \code{\link{op_add}()},
 \code{\link{op_all}()},
-\code{\link{op_amax}()},
-\code{\link{op_amin}()},
 \code{\link{op_any}()},
 \code{\link{op_append}()},
 \code{\link{op_arange}()},
@@ -168,8 +195,6 @@ Other ops:
 \code{\link{op_abs}()},
 \code{\link{op_add}()},
 \code{\link{op_all}()},
-\code{\link{op_amax}()},
-\code{\link{op_amin}()},
 \code{\link{op_any}()},
 \code{\link{op_append}()},
 \code{\link{op_arange}()},
