@@ -46,7 +46,7 @@ This is a basic graph with three layers.
 To build this model using the functional API, start by creating an input node:
 
 ```{r}
-inputs <- layer_input(shape = c(784))
+inputs <- keras_input(shape = c(784))
 ```
 
 The shape of the data is set as a 784-dimensional vector.
@@ -57,7 +57,7 @@ you would use:
 
 ```{r}
 # Just for demonstration purposes.
-img_inputs <- layer_input(shape = c(32, 32, 3))
+img_inputs <- keras_input(shape = c(32, 32, 3))
 ```
 
 The `inputs` that is returned contains information about the shape and `dtype`
@@ -89,8 +89,8 @@ You're "passing" the inputs to the `dense` layer, and you get `x` as the output.
 Let's add a few more layers to the graph of layers:
 
 ```{r}
-outputs <- x %>%
-  layer_dense(units = 64, activation = "relu") %>%
+outputs <- x |>
+  layer_dense(units = 64, activation = "relu") |>
   layer_dense(units = 10)
 ```
 
@@ -147,17 +147,17 @@ c(c(x_train, y_train), c(x_test, y_test)) %<-% dataset_mnist()
 x_train <- array_reshape(x_train, c(60000, 784)) / 255
 x_test <- array_reshape(x_test, c(10000, 784)) / 255
 
-model %>% compile(
+model |> compile(
   loss = loss_sparse_categorical_crossentropy(from_logits = TRUE),
   optimizer = optimizer_rmsprop(),
   metrics = "accuracy"
 )
 
-history <- model %>% fit(
+history <- model |> fit(
     x_train, y_train, batch_size = 64, epochs = 2, validation_split = 0.2
 )
 
-test_scores <- model %>% evaluate(x_test, y_test, verbose=2)
+test_scores <- model |> evaluate(x_test, y_test, verbose=2)
 ```
 
 
@@ -207,24 +207,24 @@ an `encoder` model that turns image inputs into 16-dimensional vectors,
 and an end-to-end `autoencoder` model for training.
 
 ```{r}
-encoder_input <- layer_input(shape = c(28, 28, 1), name="img")
-encoder_output <- encoder_input %>%
-  layer_conv_2d(16, 3, activation = "relu") %>%
-  layer_conv_2d(32, 3, activation = "relu") %>%
-  layer_max_pooling_2d(3) %>%
-  layer_conv_2d(32, 3, activation = "relu") %>%
-  layer_conv_2d(16, 3, activation = "relu") %>%
+encoder_input <- keras_input(shape = c(28, 28, 1), name="img")
+encoder_output <- encoder_input |>
+  layer_conv_2d(16, 3, activation = "relu") |>
+  layer_conv_2d(32, 3, activation = "relu") |>
+  layer_max_pooling_2d(3) |>
+  layer_conv_2d(32, 3, activation = "relu") |>
+  layer_conv_2d(16, 3, activation = "relu") |>
   layer_global_max_pooling_2d()
 
 encoder <- keras_model(encoder_input, encoder_output, name="encoder")
 summary(encoder)
 
-decoder_output <- encoder_output %>%
-  layer_reshape(c(4, 4, 1)) %>%
-  layer_conv_2d_transpose(16, 3, activation = "relu") %>%
-  layer_conv_2d_transpose(32, 3, activation = "relu") %>%
-  layer_upsampling_2d(3) %>%
-  layer_conv_2d_transpose(16, 3, activation = "relu") %>%
+decoder_output <- encoder_output |>
+  layer_reshape(c(4, 4, 1)) |>
+  layer_conv_2d_transpose(16, 3, activation = "relu") |>
+  layer_conv_2d_transpose(32, 3, activation = "relu") |>
+  layer_upsampling_2d(3) |>
+  layer_conv_2d_transpose(16, 3, activation = "relu") |>
   layer_conv_2d_transpose(1, 3, activation = "relu")
 
 autoencoder <- keras_model(encoder_input, decoder_output, name="autoencoder")
@@ -249,31 +249,31 @@ creates an encoder model, a decoder model, and chains them in two calls
 to obtain the autoencoder model:
 
 ```{r}
-encoder_input <- layer_input(shape = c(28, 28, 1), name="img")
-encoder_output <- encoder_input %>%
-  layer_conv_2d(16, 3, activation = "relu") %>%
-  layer_conv_2d(32, 3, activation = "relu") %>%
-  layer_max_pooling_2d(3) %>%
-  layer_conv_2d(32, 3, activation = "relu") %>%
-  layer_conv_2d(16, 3, activation = "relu") %>%
+encoder_input <- keras_input(shape = c(28, 28, 1), name="img")
+encoder_output <- encoder_input |>
+  layer_conv_2d(16, 3, activation = "relu") |>
+  layer_conv_2d(32, 3, activation = "relu") |>
+  layer_max_pooling_2d(3) |>
+  layer_conv_2d(32, 3, activation = "relu") |>
+  layer_conv_2d(16, 3, activation = "relu") |>
   layer_global_max_pooling_2d()
 
 encoder <- keras_model(encoder_input, encoder_output, name="encoder")
 summary(encoder)
 
-decoder_input <- layer_input(shape = c(16), name = "encoded_img")
-decoder_output <- decoder_input %>%
-  layer_reshape(c(4, 4, 1)) %>%
-  layer_conv_2d_transpose(16, 3, activation = "relu") %>%
-  layer_conv_2d_transpose(32, 3, activation = "relu") %>%
-  layer_upsampling_2d(3) %>%
-  layer_conv_2d_transpose(16, 3, activation = "relu") %>%
+decoder_input <- keras_input(shape = c(16), name = "encoded_img")
+decoder_output <- decoder_input |>
+  layer_reshape(c(4, 4, 1)) |>
+  layer_conv_2d_transpose(16, 3, activation = "relu") |>
+  layer_conv_2d_transpose(32, 3, activation = "relu") |>
+  layer_upsampling_2d(3) |>
+  layer_conv_2d_transpose(16, 3, activation = "relu") |>
   layer_conv_2d_transpose(1, 3, activation = "relu")
 
 decoder <- keras_model(decoder_input, decoder_output, name = "decoder")
 summary(decoder)
 
-autoencoder_input <- layer_input(shape = c(28, 28, 1), name = "img")
+autoencoder_input <- keras_input(shape = c(28, 28, 1), name = "img")
 encoded_img <- encoder(autoencoder_input)
 decoded_img <- decoder(encoded_img)
 autoencoder <- keras_model(autoencoder_input, decoded_img,
@@ -289,7 +289,7 @@ that averages their predictions:
 
 ```{r}
 get_model <- function() {
-  inputs <- layer_input(shape = 128)
+  inputs <- keras_input(shape = 128)
   outputs <- inputs |> layer_dense(1)
   keras_model(inputs, outputs)
 }
@@ -298,7 +298,7 @@ model1 <- get_model()
 model2 <- get_model()
 model3 <- get_model()
 
-inputs <- layer_input(shape = 128)
+inputs <- keras_input(shape = 128)
 y1 <- model1(inputs)
 y2 <- model2(inputs)
 y3 <- model3(inputs)
@@ -336,11 +336,11 @@ num_words <-
 num_departments <- 4  # Number of departments for predictions
 
 title_input <- # Variable-length sequence of ints
-  layer_input(shape(NA), name = "title")
+  keras_input(shape(NA), name = "title")
 body_input <-  # Variable-length sequence of ints
-  layer_input(shape(NA), name = "body")
+  keras_input(shape(NA), name = "body")
 tags_input <-  # Binary vectors of size `num_tags`
-  layer_input(shape = num_tags, name = "tags")
+  keras_input(shape = num_tags, name = "tags")
 
 # Embed each word in the title into a 64-dimensional vector
 title_features <- layer_embedding(title_input, num_words, 64)
@@ -381,13 +381,13 @@ You can even assign different weights to each loss -- to modulate
 their contribution to the total training loss.
 
 ```{r}
-model %>% compile(
-    optimizer = optimizer_rmsprop(1e-3),
-    loss = list(
-        loss_binary_crossentropy(from_logits = TRUE),
-        loss_categorical_crossentropy(from_logits = TRUE)
-    ),
-    loss_weights = c(1.0, 0.2)
+model |> compile(
+  optimizer = optimizer_rmsprop(1e-3),
+  loss = list(
+    loss_binary_crossentropy(from_logits = TRUE),
+    loss_categorical_crossentropy(from_logits = TRUE)
+  ),
+  loss_weights = c(1.0, 0.2)
 )
 ```
 
@@ -395,13 +395,13 @@ Since the output layers have different names, you could also specify
 the losses and loss weights with the corresponding layer names:
 
 ```{r}
-model %>% compile(
-    optimizer = optimizer_rmsprop(1e-3),
-    loss = list(
-        priority = loss_binary_crossentropy(from_logits = TRUE),
-        department = loss_categorical_crossentropy(from_logits = TRUE)
-    ),
-    loss_weights = list(priority = 1.0, department = 0.2)
+model |> compile(
+  optimizer = optimizer_rmsprop(1e-3),
+  loss = list(
+    priority = loss_binary_crossentropy(from_logits = TRUE),
+    department = loss_categorical_crossentropy(from_logits = TRUE)
+  ),
+  loss_weights = list(priority = 1.0, department = 0.2)
 )
 ```
 
@@ -417,11 +417,11 @@ tags_data <- random_integer(c(1280, num_tags), 0, 2)
 priority_targets <- random_normal(c(1280, 1))
 dept_targets <- random_integer(c(1280, num_departments), 0, 2)
 
-model %>% fit(
-    list(title = title_data, body = body_data, tags = tags_data),
-    list(priority = priority_targets, department = dept_targets),
-    epochs=2,
-    batch_size=32,
+model |> fit(
+  list(title = title_data, body = body_data, tags = tags_data),
+  list(priority = priority_targets, department = dept_targets),
+  epochs = 2,
+  batch_size = 32
 )
 ```
 
@@ -443,30 +443,30 @@ A common use case for this is residual connections.
 Let's build a toy ResNet model for CIFAR10 to demonstrate this:
 
 ```{r}
-inputs <- layer_input(shape = c(32, 32, 3), name="img")
-block_1_output <- inputs %>%
-  layer_conv_2d(filters = 32, kernel_size = 3, activation = "relu") %>%
-  layer_conv_2d(filters = 64, kernel_size = 3, activation = "relu") %>%
+inputs <- keras_input(shape = c(32, 32, 3), name = "img")
+block_1_output <- inputs |>
+  layer_conv_2d(32, kernel_size = 3, activation = "relu") |>
+  layer_conv_2d(64, kernel_size = 3, activation = "relu") |>
   layer_max_pooling_2d(pool_size = 3)
 
-block_2_output <- block_1_output %>%
-  layer_conv_2d(filters = 32, kernel_size = 3, activation = "relu", padding = "same") %>%
-  layer_conv_2d(filters = 64, kernel_size = 3, activation = "relu", padding = "same") %>%
+block_2_output <- block_1_output |>
+  layer_conv_2d(32, kernel_size = 3, activation = "relu", padding = "same") |>
+  layer_conv_2d(64, kernel_size = 3, activation = "relu", padding = "same") |>
   layer_add(block_1_output)
 
-block_3_output <- block_2_output %>%
-  layer_conv_2d(filters = 64, kernel_size = 3, activation = "relu", padding = "same") %>%
-  layer_conv_2d(filters = 64, kernel_size = 3, activation = "relu", padding = "same") %>%
+block_3_output <- block_2_output |>
+  layer_conv_2d(64, kernel_size = 3, activation = "relu", padding = "same") |>
+  layer_conv_2d(64, kernel_size = 3, activation = "relu", padding = "same") |>
   layer_add(block_2_output)
 
-outputs <- block_3_output %>%
-  layer_conv_2d(64, 3, activation = "relu") %>%
-  layer_global_average_pooling_2d() %>%
-  layer_dense(256, activation = "relu") %>%
-  layer_dropout(0.5) %>%
+outputs <- block_3_output |>
+  layer_conv_2d(64, 3, activation = "relu") |>
+  layer_global_average_pooling_2d() |>
+  layer_dense(256, activation = "relu") |>
+  layer_dropout(0.5) |>
   layer_dense(10)
 
-model <- keras_model(inputs, outputs, name="toy_resnet")
+model <- keras_model(inputs, outputs, name = "toy_resnet")
 summary(model)
 ```
 
@@ -484,20 +484,20 @@ c(c(x_train, y_train), c(x_test, y_test)) %<-% dataset_cifar10()
 x_train <- x_train / 255.0
 x_test <- x_test / 255.0
 
-model %>% compile(
-    optimizer = optimizer_rmsprop(1e-3),
-    loss = loss_sparse_categorical_crossentropy(from_logits = TRUE),
-    metrics = "acc"
+model |> compile(
+  optimizer = optimizer_rmsprop(1e-3),
+  loss = loss_sparse_categorical_crossentropy(from_logits = TRUE),
+  metrics = "acc"
 )
 # We restrict the data to the first 1000 samples so as to limit the
 # guide render time.
 # Try to train on the entire dataset until convergence!
-model %>% fit(
-    x_train[1:1000,,,],
-    y_train[1:1000,],
-    batch_size=64,
-    epochs=1,
-    validation_split=0.2
+model |> fit(
+  x_train[1:1000, , , ],
+  y_train[1:1000, ],
+  batch_size = 64,
+  epochs = 1,
+  validation_split = 0.2
 )
 ```
 
@@ -522,10 +522,10 @@ For instance, here's an `Embedding` layer shared across two different text input
 shared_embedding <- layer_embedding(input_dim = 1000, output_dim = 128)
 
 # Variable-length sequence of integers
-text_input_a <- layer_input(shape = shape(NULL), dtype="int32")
+text_input_a <- keras_input(shape = shape(NA), dtype="int32")
 
 # Variable-length sequence of integers
-text_input_b <- layer_input(shape = shape(NULL), dtype="int32")
+text_input_b <- keras_input(shape = shape(NA), dtype="int32")
 
 # Reuse the same layer to encode both inputs
 encoded_input_a <- shared_embedding(text_input_a)
@@ -543,6 +543,9 @@ This also means that you can access the activations of intermediate layers
 which is very useful for something like feature extraction.
 
 Let's look at an example. This is a VGG19 model with weights pretrained on ImageNet:
+```{r, include = FALSE}
+
+```
 
 ```{r}
 vgg19 <- application_vgg19()
@@ -559,7 +562,8 @@ Use these features to create a new feature-extraction model that returns
 the values of the intermediate layer activations:
 
 ```{r}
-feat_extraction_model <- keras_model(inputs = vgg19$input, outputs = features_list)
+feat_extraction_model <- keras_model(inputs = vgg19$input, 
+                                     outputs = features_list)
 
 img <- random_normal(c(1, 224, 224, 3))
 extracted_features <- feat_extraction_model(img)
@@ -592,7 +596,7 @@ The following is a basic implementation of `layer_dense()`:
 
 ```{r}
 custom_dense <- Layer(
-  "CustomDense",
+  classname = "CustomDense",
   initialize = function(units = 32) {
     super$initialize()
     self$units <- as.integer(units)
@@ -614,7 +618,7 @@ custom_dense <- Layer(
   }
 )
 
-inputs <- layer_input(c(4))
+inputs <- keras_input(c(4))
 outputs <- custom_dense(inputs, 10)
 
 model <- keras_model(inputs, outputs)
@@ -624,7 +628,8 @@ For serialization support in your custom layer, define a `get_config()`
 method that returns the constructor arguments of the layer instance:
 
 ```{r}
-custom_dense <- Layer("CustomDense",
+custom_dense <- Layer(
+  classname = "CustomDense",
 
   initialize = function(units = 32, ...) {
     super$initialize()
@@ -653,13 +658,14 @@ custom_dense <- Layer("CustomDense",
   }
 )
 
-inputs <- layer_input(c(4))
+inputs <- keras_input(c(4))
 outputs <- custom_dense(inputs, 10)
 
 model <- keras_model(inputs, outputs)
 config <- get_config(model)
 
-new_model <- from_config(config, custom_objects=list(CustomDense=custom_dense))
+new_model <-
+  from_config(config, custom_objects = list(CustomDense = custom_dense))
 ```
 
 Optionally, implement the class method `from_config(cls, config)` which is used
@@ -696,14 +702,14 @@ The following properties are also true for Sequential models
 
 #### Less verbose
 
-There is no `super$initialize(...)`, no `call = function(self, ...):`, etc.
+There is no `super$initialize(...)`, no `call = function(...)`, no  `self$...`, etc.
 
 Compare:
 
 ```{r}
-inputs <- layer_input(shape=shape(32))
-outputs <- inputs %>%
-  layer_dense(64, activation = "relu") %>%
+inputs <- keras_input(shape = shape(32))
+outputs <- inputs |>
+  layer_dense(64, activation = "relu") |>
   layer_dense(10)
 mlp <- keras_model(inputs, outputs)
 ```
@@ -711,16 +717,17 @@ mlp <- keras_model(inputs, outputs)
 With the subclassed version:
 
 ```{r}
-MLP <- new_model_class(
-  "MLP",
+MLP <- Model(
+  classname = "MLP",
   initialize = function(...) {
     super$initialize(...)
     self$dense_1 <- layer_dense(units = 64, activation = "relu")
     self$dense_2 <- layer_dense(units = 10)
   },
   call = function(inputs) {
-    x <- self$dense_1(inputs)
-    self$dense_2(x)
+    inputs |> 
+      self$dense_1() |>
+      self$dense_2()
   }
 )
 
@@ -751,7 +758,8 @@ layers (as seen in a previous example):
 
 ```{r}
 features_list <- lapply(vgg19$layers, function(x) x$output)
-feat_extraction_model <- keras_model(inputs = vgg19$input, outputs = features_list)
+feat_extraction_model <- keras_model(inputs = vgg19$input, 
+                                     outputs = features_list)
 ```
 
 #### A functional model can be serialized or cloned
@@ -792,15 +800,15 @@ timesteps <- 10
 input_dim <- 5
 
 # Define a Functional model
-inputs <- layer_input(shape(NULL, units))
-outputs <- inputs %>%
-  layer_global_average_pooling_1d() %>%
+inputs <- keras_input(shape(NA, units))
+outputs <- inputs |>
+  layer_global_average_pooling_1d() |>
   layer_dense(units = 1)
 
 model <- keras_model(inputs, outputs)
 
-custom_rnn <- new_layer_class(
-  "custom_rnn",
+layer_custom_rnn <- Layer(
+  classname = "CustomRNN",
   initialize = function(...) {
     super$initialize(...)
     self$units <- units
@@ -823,25 +831,25 @@ custom_rnn <- new_layer_class(
   }
 )
 
-rnn_model <- custom_rnn()
-out <- rnn_model(op_zeros(c(1, timesteps, input_dim)))
+rnn <- layer_custom_rnn()
+out <- rnn(op_zeros(c(1, timesteps, input_dim)))
 ```
 
 You can use any subclassed layer or model in the functional API
 as long as it implements a `call` method that follows one of the following patterns:
 
-- `call(self, inputs, ...)` --
+- `call(inputs, ...)` --
 Where `inputs` is a tensor or a nested structure of tensors (e.g. a list of tensors),
 and where `...` are non-tensor arguments (non-inputs).
-- `call(self, inputs, training=None, ...)` --
+- `call(inputs, training = NULL, ...)` --
 Where `training` is a boolean indicating whether the layer should behave
 in training mode and inference mode.
-- `call(self, inputs, mask=NULL, ...)` --
+- `call(inputs, mask = NULL, ...)` --
 Where `mask` is a boolean mask tensor (useful for RNNs, for instance).
-- `call(self, inputs, training=NULL, mask=NULL, ...)` --
+- `call(inputs, training = NULL, mask = NULL, ...)` --
 Of course, you can have both masking and training-specific behavior at the same time.
 
-Additionally, if you implement the `get_config` method on your custom Layer or model,
+Additionally, if you implement the `get_config()` method on your custom Layer or model,
 the functional models you create will still be serializable and cloneable.
 
 Here's a quick example of a custom RNN, written from scratch,
@@ -853,7 +861,7 @@ timesteps <- 10
 input_dim <- 5
 batch_size <- 16
 
-custom_rnn <- Layer(
+layer_custom_rnn <- Layer(
   "custom_rnn",
   initialize = function(...) {
     super$initialize(...)
@@ -878,12 +886,12 @@ custom_rnn <- Layer(
 )
 
 # Note that you specify a static batch size for the inputs with the `batch_shape`
-# arg, because the inner computation of `custom_rnn` requires a static batch size
+# arg, because the inner computation of `layer_custom_rnn()` requires a static batch size
 # (when you create the `state` zeros tensor).
-inputs <- layer_input(batch_shape = shape(batch_size, timesteps, input_dim))
-outputs <- inputs %>%
-  layer_conv_1d(filters = 32, kernel_size = 3) %>%
-  custom_rnn()
+inputs <- keras_input(batch_shape = shape(batch_size, timesteps, input_dim))
+outputs <- inputs |>
+  layer_conv_1d(filters = 32, kernel_size = 3) |>
+  layer_custom_rnn()
 
 model <- keras_model(inputs, outputs)
 out <- model(op_zeros(c(1, 10, 5)))
