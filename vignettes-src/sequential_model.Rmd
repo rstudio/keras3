@@ -24,9 +24,9 @@ where each layer has **exactly one input tensor and one output tensor**.
 Schematically, the following `Sequential` model:
 
 ```{r}
-model <- keras_model_sequential() %>%
-  layer_dense(units = 2, activation = "relu", name = "layer1") %>%
-  layer_dense(units = 3, activation = "relu", name = "layer2") %>%
+model <- keras_model_sequential() |>
+  layer_dense(units = 2, activation = "relu", name = "layer1") |>
+  layer_dense(units = 3, activation = "relu", name = "layer2") |>
   layer_dense(units = 4, name = "layer3")
 
 # Call model on a test input
@@ -44,7 +44,7 @@ layer3 <- layer_dense(units = 4, name="layer3")
 
 # Call layers on a test input
 x <- op_ones(c(3, 3))
-y <- x %>% layer1() %>% layer2() %>% layer3()
+y <- x |> layer1() |> layer2() |> layer3()
 ```
 
 A Sequential model is **not appropriate** when:
@@ -61,9 +61,9 @@ You can create a Sequential model by piping layers into the `keras_model_sequent
 object:
 
 ```{r}
-model <- keras_model_sequential() %>%
-  layer_dense(units = 2, activation = "relu") %>%
-  layer_dense(units = 3, activation = "relu") %>%
+model <- keras_model_sequential() |>
+  layer_dense(units = 2, activation = "relu") |>
+  layer_dense(units = 3, activation = "relu") |>
   layer_dense(units = 4)
 ```
 
@@ -83,20 +83,20 @@ Its layers are accessible via the `layers` attribute:
 model$layers
 ```
 
-You can also create a Sequential model incrementally via the `add()` method:
+You can also create a Sequential model incrementally:
 
 ```{r}
 model <- keras_model_sequential()
-model$add(layer_dense(units = 2, activation="relu"))
-model$add(layer_dense(units = 3, activation="relu"))
-model$add(layer_dense(units = 4))
+model |> layer_dense(units = 2, activation="relu")
+model |> layer_dense(units = 3, activation="relu")
+model |> layer_dense(units = 4)
 ```
 
-Note that there's also a corresponding `pop()` method to remove layers:
-a Sequential model behaves very much like a list of layers.
+Note that there's also a corresponding `pop_layer()` method to remove layers:
+a Sequential model behaves very much like a stack of layers.
 
 ```{r}
-model$pop()
+model |> pop_layer()
 length(model$layers)  # 2
 ```
 
@@ -106,9 +106,9 @@ with semantically meaningful names.
 
 ```{r}
 model <- keras_model_sequential(name = "my_sequential")
-model$add(layer_dense(units = 2, activation="relu", name = "layer1"))
-model$add(layer_dense(units = 3, activation="relu", name = "layer2"))
-model$add(layer_dense(units = 4, name = "layer3"))
+model |> layer_dense(units = 2, activation="relu", name = "layer1")
+model |> layer_dense(units = 3, activation="relu", name = "layer2")
+model |> layer_dense(units = 4, name = "layer3")
 ```
 
 ## Specifying the input shape in advance
@@ -139,9 +139,9 @@ Sequential model without an input shape, it isn't "built": it has no weights
 when the model first sees some input data:
 
 ```{r}
-model <- keras_model_sequential() %>%
-  layer_dense(units = 2, activation = "relu") %>%
-  layer_dense(units = 3, activation = "relu") %>%
+model <- keras_model_sequential() |>
+  layer_dense(units = 2, activation = "relu") |>
+  layer_dense(units = 3, activation = "relu") |>
   layer_dense(units = 4)
 # No weights at this stage!
 
@@ -170,7 +170,7 @@ output shape. In this case, you should start your model by passing an `input_sha
 argument to your model, so that it knows its input shape from the start:
 
 ```{r}
-model <- keras_model_sequential(input_shape = 4) %>%
+model <- keras_model_sequential(input_shape = 4) |>
   layer_dense(units = 2, activation = "relu")
 summary(model)
 ```
@@ -185,17 +185,17 @@ before seeing any data) and always have a defined output shape.
 In general, it's a recommended best practice to always specify the input shape
 of a Sequential model in advance if you know what it is.
 
-## A common debugging workflow: `add()` + `summary()`
+## A common debugging workflow: add layers + `summary()`
 
 When building a new Sequential architecture, it's useful to incrementally stack
-layers with `add()` or `%>%` and frequently print model summaries. For instance, this
+layers with `|>` and frequently print model summaries. For instance, this
 enables you to monitor how a stack of `Conv2D` and `MaxPooling2D` layers is
 downsampling image feature maps:
 
 ```{r}
-model <- keras_model_sequential(input_shape = c(250, 250, 3)) %>%
-  layer_conv_2d(filters = 32, kernel_size = 5, strides = 2, activation = "relu") %>%
-  layer_conv_2d(filters = 32, kernel_size = 3, activation = "relu") %>%
+model <- keras_model_sequential(input_shape = c(250, 250, 3)) |>
+  layer_conv_2d(filters = 32, kernel_size = 5, strides = 2, activation = "relu") |>
+  layer_conv_2d(filters = 32, kernel_size = 3, activation = "relu") |>
   layer_max_pooling_2d(pool_size = c(3, 3))
 
 # Can you guess what the current output shape is at this point? Probably not.
@@ -204,30 +204,30 @@ summary(model)
 
 # The answer was: (40, 40, 32), so we can keep downsampling...
 
-model <- model %>%
-  layer_conv_2d(filters = 32, kernel_size = 3, activation = "relu") %>%
-  layer_conv_2d(filters = 32, kernel_size = 3, activation = "relu") %>%
-  layer_max_pooling_2d(pool_size = 3) %>%
-  layer_conv_2d(filters = 32, kernel_size = 3, activation = "relu") %>%
-  layer_conv_2d(filters = 32, kernel_size = 3, activation = "relu") %>%
+model |>
+  layer_conv_2d(filters = 32, kernel_size = 3, activation = "relu") |>
+  layer_conv_2d(filters = 32, kernel_size = 3, activation = "relu") |>
+  layer_max_pooling_2d(pool_size = 3) |>
+  layer_conv_2d(filters = 32, kernel_size = 3, activation = "relu") |>
+  layer_conv_2d(filters = 32, kernel_size = 3, activation = "relu") |>
   layer_max_pooling_2d(pool_size = 2)
 
 # And now?
 summary(model)
 
 # Now that we have 4x4 feature maps, time to apply global max pooling.
-model <- model %>%
+model |>
   layer_global_max_pooling_2d()
 
 # Finally, we add a classification layer.
-model <- model %>%
+model |>
   layer_dense(units = 10, activation = "softmax")
 ```
 
 Very practical, right?
 
-Note that `%>%` is equivalent to calling `model$add()`, so in theory, you don't
-need to reasisgn the model to `model` at each step.
+Note that `|>` is equivalent to calling `model$add()`, it modifies the model
+in-place, so you don't need to reassign the `model` symbol at each step.
 
 ## What to do once you have a model
 
@@ -251,9 +251,9 @@ creating a model that extracts the outputs of all intermediate layers in a
 Sequential model:
 
 ```{r}
-initial_model <- keras_model_sequential(input_shape = c(250, 250, 3)) %>%
-  layer_conv_2d(filters = 32, kernel_size = 5, strides = 2, activation = "relu") %>%
-  layer_conv_2d(filters = 32, kernel_size = 3, activation = "relu") %>%
+initial_model <- keras_model_sequential(input_shape = c(250, 250, 3)) |>
+  layer_conv_2d(filters = 32, kernel_size = 5, strides = 2, activation = "relu") |>
+  layer_conv_2d(filters = 32, kernel_size = 3, activation = "relu") |>
   layer_conv_2d(filters = 32, kernel_size = 3, activation = "relu")
 
 
@@ -270,15 +270,19 @@ features <- feature_extractor(x)
 Here's a similar example that only extract features from one layer:
 
 ```{r}
-initial_model <- keras_model_sequential(input_shape = c(250, 250, 3)) %>%
-  layer_conv_2d(filters = 32, kernel_size = 5, strides = 2, activation = "relu") %>%
-  layer_conv_2d(filters = 32, kernel_size = 3, activation = "relu", name = "my_intermediate_layer") %>%
+initial_model <-
+  keras_model_sequential(input_shape = c(250, 250, 3)) |>
+  layer_conv_2d(filters = 32, kernel_size = 5, strides = 2, 
+                activation = "relu") |>
+  layer_conv_2d(filters = 32, kernel_size = 3, activation = "relu", 
+                name = "my_intermediate_layer") |>
   layer_conv_2d(filters = 32, kernel_size = 3, activation = "relu")
 
 feature_extractor <- keras_model(
-    inputs = initial_model$inputs,
-    outputs =get_layer(initial_model, "my_intermediate_layer")$output,
+  inputs = initial_model$inputs,
+  outputs = get_layer(initial_model, "my_intermediate_layer")$output,
 )
+
 # Call feature extractor on test input.
 x <- op_ones(c(1, 250, 250, 3))
 features <- feature_extractor(x)
@@ -293,28 +297,36 @@ to transfer learning](/guides/transfer_learning/).
 Here are two common transfer learning blueprint involving Sequential models.
 
 First, let's say that you have a Sequential model, and you want to freeze all
-layers except the last one. In this case, you would simply iterate over
-`model.layers` and set `layer.trainable = False` on each layer, except the
+layers except the last one. In this case, you can call `freeze_weights()`. Alternatively, you
+can iterate over
+`model$layers` and set `layer$trainable <- FALSE` on each layer, except the
 last one. Like this:
 
-```{r, eval=FALSE}
-model <- keras_model_sequential(input_shape = 784) %>%
-  layer_dense(units = 32, activation = "relu") %>%
-  layer_dense(units = 32, activation = "relu") %>%
-  layer_dense(units = 32, activation = "relu") %>%
+```{r}
+model <- keras_model_sequential(input_shape = 784) |>
+  layer_dense(units = 32, activation = "relu") |>
+  layer_dense(units = 32, activation = "relu") |>
+  layer_dense(units = 32, activation = "relu") |>
   layer_dense(units = 10)
-
+```
+```{r, eval=FALSE}
 # Presumably you would want to first load pre-trained weights.
-model$load_weights(...)
-
+model |> load_model_weights(...)
+```
+```{r}
 # Freeze all layers except the last one.
-for (layer in head(model$layers, 3)) {
+model |> freeze_weights(from = 1, to = -2)
+model # note the "Trainable" column now visible in the summary table
+```
+```{r, eval=FALSE}
+# Another way to freeze all layers except the last one.
+for (layer in model$layers[-length(model$layers)]) {
   layer$trainable <- FALSE
 }
 
 # Recompile and train (this will only update the weights of the last layer).
-model %>% compile(...)
-model %>% fit(...)
+model |> compile(...)
+model |> fit(...)
 ```
 
 Another common blueprint is to use a Sequential model to stack a pre-trained
@@ -322,24 +334,23 @@ model and some freshly initialized classification layers. Like this:
 
 ```{r}
 # Load a convolutional base with pre-trained weights
-base_model <- application_xception(
-    weights='imagenet',
-    include_top=FALSE,
-    pooling='avg')
+base_model <- application_xception(weights = 'imagenet',
+                                   include_top = FALSE,
+                                   pooling = 'avg')
 
 # Freeze the base model
-base_model$trainable <- FALSE
+freeze_weights(base_model)
 
 # Use a Sequential model to add a trainable classifier on top
-model <- keras_model_sequential() %>%
-  base_model() %>%
+model <- keras_model_sequential() |>
+  base_model() |>
   layer_dense(1000)
 ```
 
 ```{r, eval = FALSE}
 # Compile & train
-model %>% compile(...)
-model %>% fit(...)
+model |> compile(...)
+model |> fit(...)
 ```
 
 
