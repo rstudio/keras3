@@ -48,7 +48,7 @@ It can also always be used as part of an input preprocessing pipeline
 with any backend (outside the model itself), which is how we recommend
 to use this layer.
 Note: This layer is safe to use inside a tf.data pipeline
-(independently of which backend you're using)."><title>A preprocessing layer which maps text features to integer sequences. — get_vocabulary • keras3</title><!-- favicons --><link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png"><link rel="icon" type="image/png" sizes="32x32" href="../favicon-32x32.png"><link rel="apple-touch-icon" type="image/png" sizes="180x180" href="../apple-touch-icon.png"><link rel="apple-touch-icon" type="image/png" sizes="120x120" href="../apple-touch-icon-120x120.png"><link rel="apple-touch-icon" type="image/png" sizes="76x76" href="../apple-touch-icon-76x76.png"><link rel="apple-touch-icon" type="image/png" sizes="60x60" href="../apple-touch-icon-60x60.png"><script src="../deps/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"><link href="../deps/bootstrap-5.3.1/bootstrap.min.css" rel="stylesheet"><script src="../deps/bootstrap-5.3.1/bootstrap.bundle.min.js"></script><link href="../deps/Fira_Mono-0.4.8/font.css" rel="stylesheet"><!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous"><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/v4-shims.min.css" integrity="sha256-wZjR52fzng1pJHwx4aV2AO3yyTOXrcDW7jBpJtTwVxw=" crossorigin="anonymous"><!-- bootstrap-toc --><script src="https://cdn.jsdelivr.net/gh/afeld/bootstrap-toc@v1.0.1/dist/bootstrap-toc.min.js" integrity="sha256-4veVQbu7//Lk5TSmc7YV48MxtMy98e26cf5MrgZYnwo=" crossorigin="anonymous"></script><!-- headroom.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/headroom.min.js" integrity="sha256-AsUX4SJE1+yuDu5+mAVzJbuYNPHj/WroHuZ8Ir/CkE0=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script><!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><!-- search --><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- pkgdown --><script src="../pkgdown.js"></script><meta property="og:title" content="A preprocessing layer which maps text features to integer sequences. — get_vocabulary"><meta property="og:description" content="This layer has basic options for managing text in a Keras model. It
+(independently of which backend you're using)."><title>A preprocessing layer which maps text features to integer sequences. — layer_text_vectorization • keras3</title><!-- favicons --><link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png"><link rel="icon" type="image/png" sizes="32x32" href="../favicon-32x32.png"><link rel="apple-touch-icon" type="image/png" sizes="180x180" href="../apple-touch-icon.png"><link rel="apple-touch-icon" type="image/png" sizes="120x120" href="../apple-touch-icon-120x120.png"><link rel="apple-touch-icon" type="image/png" sizes="76x76" href="../apple-touch-icon-76x76.png"><link rel="apple-touch-icon" type="image/png" sizes="60x60" href="../apple-touch-icon-60x60.png"><script src="../deps/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"><link href="../deps/bootstrap-5.3.1/bootstrap.min.css" rel="stylesheet"><script src="../deps/bootstrap-5.3.1/bootstrap.bundle.min.js"></script><link href="../deps/Fira_Mono-0.4.8/font.css" rel="stylesheet"><!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous"><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/v4-shims.min.css" integrity="sha256-wZjR52fzng1pJHwx4aV2AO3yyTOXrcDW7jBpJtTwVxw=" crossorigin="anonymous"><!-- bootstrap-toc --><script src="https://cdn.jsdelivr.net/gh/afeld/bootstrap-toc@v1.0.1/dist/bootstrap-toc.min.js" integrity="sha256-4veVQbu7//Lk5TSmc7YV48MxtMy98e26cf5MrgZYnwo=" crossorigin="anonymous"></script><!-- headroom.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/headroom.min.js" integrity="sha256-AsUX4SJE1+yuDu5+mAVzJbuYNPHj/WroHuZ8Ir/CkE0=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script><!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><!-- search --><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- pkgdown --><script src="../pkgdown.js"></script><meta property="og:title" content="A preprocessing layer which maps text features to integer sequences. — layer_text_vectorization"><meta property="og:description" content="This layer has basic options for managing text in a Keras model. It
 transforms a batch of strings (one example = one string) into either a list
 of token indices (one example = 1D tensor of integer token indices) or a
 dense representation (one example = 1D tensor of float values representing
@@ -161,7 +161,7 @@ Note: This layer is safe to use inside a tf.data pipeline
 <div class="row">
   <main id="main" class="col-md-9"><div class="page-header">
       <img src="" class="logo" alt=""><h1>A preprocessing layer which maps text features to integer sequences.</h1>
-      <small class="dont-index">Source: <a href="https://github.com/rstudio/keras/blob/HEAD/R/layer-r-helpers.R" class="external-link"><code>R/layer-r-helpers.R</code></a>, <a href="https://github.com/rstudio/keras/blob/HEAD/R/layers-preprocessing.R" class="external-link"><code>R/layers-preprocessing.R</code></a></small>
+      <small class="dont-index">Source: <a href="https://github.com/rstudio/keras/blob/HEAD/R/layers-preprocessing.R" class="external-link"><code>R/layers-preprocessing.R</code></a></small>
       <div class="d-none name"><code>layer_text_vectorization.Rd</code></div>
     </div>
 
@@ -214,11 +214,7 @@ to use this layer.</p>
 
     <div class="section level2">
     <h2 id="ref-usage">Usage<a class="anchor" aria-label="anchor" href="#ref-usage"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">get_vocabulary</span><span class="op">(</span><span class="va">object</span>, include_special_tokens <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
-<span></span>
-<span><span class="fu">set_vocabulary</span><span class="op">(</span><span class="va">object</span>, <span class="va">vocabulary</span>, idf_weights <span class="op">=</span> <span class="cn">NULL</span>, <span class="va">...</span><span class="op">)</span></span>
-<span></span>
-<span><span class="fu">layer_text_vectorization</span><span class="op">(</span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">layer_text_vectorization</span><span class="op">(</span></span>
 <span>  <span class="va">object</span>,</span>
 <span>  max_tokens <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  standardize <span class="op">=</span> <span class="st">"lower_and_strip_punctuation"</span>,</span>
@@ -234,42 +230,17 @@ to use this layer.</p>
 <span>  encoding <span class="op">=</span> <span class="st">"utf-8"</span>,</span>
 <span>  name <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  <span class="va">...</span></span>
-<span><span class="op">)</span></span></code></pre></div>
+<span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu">get_vocabulary</span><span class="op">(</span><span class="va">object</span>, include_special_tokens <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu">set_vocabulary</span><span class="op">(</span><span class="va">object</span>, <span class="va">vocabulary</span>, idf_weights <span class="op">=</span> <span class="cn">NULL</span>, <span class="va">...</span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div class="section level2">
     <h2 id="arguments">Arguments<a class="anchor" aria-label="anchor" href="#arguments"></a></h2>
     <dl><dt>object</dt>
 <dd><p>Object to compose the layer with. A tensor, array, or sequential model.</p></dd>
-
-
-<dt>include_special_tokens</dt>
-<dd><p>If TRUE, the returned vocabulary will include
-the padding and OOV tokens, and a term's index in the vocabulary will equal
-the term's index when calling the layer. If FALSE, the returned vocabulary
-will not include any padding or OOV tokens.</p></dd>
-
-
-<dt>vocabulary</dt>
-<dd><p>Optional. Either an array of strings or a string path to a
-text file. If passing an array, can pass a list, list,
-1D NumPy array, or 1D tensor containing the string vocabulary terms.
-If passing a file path, the file should contain one line per term
-in the vocabulary. If this argument is set,
-there is no need to <code><a href="adapt.html">adapt()</a></code> the layer.</p></dd>
-
-
-<dt>idf_weights</dt>
-<dd><p>Only valid when <code>output_mode</code> is <code>"tf_idf"</code>. A list, list,
-1D NumPy array, or 1D tensor of the same length as the vocabulary,
-containing the floating point inverse document frequency weights,
-which will be multiplied by per sample term counts for
-the final <code>tf_idf</code> weight. If the <code>vocabulary</code> argument is set,
-and <code>output_mode</code> is <code>"tf_idf"</code>, this argument must be supplied.</p></dd>
-
-
-<dt>...</dt>
-<dd><p>For forward/backward compatability.</p></dd>
 
 
 <dt>max_tokens</dt>
@@ -351,6 +322,21 @@ resulting in a tensor of shape <code>(batch_size, max_tokens)</code>
 regardless of vocabulary size. Defaults to <code>FALSE</code>.</p></dd>
 
 
+<dt>vocabulary</dt>
+<dd><p>Optional. Either an array of strings or a string path to a
+text file. If passing an array, can pass a list, list,
+1D NumPy array, or 1D tensor containing the string vocabulary terms.
+If passing a file path, the file should contain one line per term
+in the vocabulary. If this argument is set,
+there is no need to <code><a href="adapt.html">adapt()</a></code> the layer.</p></dd>
+
+
+<dt>idf_weights</dt>
+<dd><p>An R vector, 1D numpy array, or 1D tensor of inverse
+document frequency weights with equal length to vocabulary. Must be set if
+output_mode is "tf_idf". Should not be set otherwise.</p></dd>
+
+
 <dt>sparse</dt>
 <dd><p>Boolean. Only applicable to <code>"multi_hot"</code>, <code>"count"</code>, and
 <code>"tf_idf"</code> output modes. Only supported with TensorFlow
@@ -373,6 +359,17 @@ strings. Defaults to <code>"utf-8"</code>.</p></dd>
 
 <dt>name</dt>
 <dd><p>String, name for the object</p></dd>
+
+
+<dt>...</dt>
+<dd><p>For forward/backward compatability.</p></dd>
+
+
+<dt>include_special_tokens</dt>
+<dd><p>If TRUE, the returned vocabulary will include
+the padding and OOV tokens, and a term's index in the vocabulary will equal
+the term's index when calling the layer. If FALSE, the returned vocabulary
+will not include any padding or OOV tokens.</p></dd>
 
 </dl></div>
     <div class="section level2">

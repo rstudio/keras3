@@ -3,7 +3,7 @@
 purrr::transpose() and data.table::transpose() (albeit, accepting
 elements in ... instead of a single list), with one crucial difference: if
 the provided objects are named, then matching is done by names, not
-positions."><title>zip lists — zip_lists • keras3</title><!-- favicons --><link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png"><link rel="icon" type="image/png" sizes="32x32" href="../favicon-32x32.png"><link rel="apple-touch-icon" type="image/png" sizes="180x180" href="../apple-touch-icon.png"><link rel="apple-touch-icon" type="image/png" sizes="120x120" href="../apple-touch-icon-120x120.png"><link rel="apple-touch-icon" type="image/png" sizes="76x76" href="../apple-touch-icon-76x76.png"><link rel="apple-touch-icon" type="image/png" sizes="60x60" href="../apple-touch-icon-60x60.png"><script src="../deps/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"><link href="../deps/bootstrap-5.3.1/bootstrap.min.css" rel="stylesheet"><script src="../deps/bootstrap-5.3.1/bootstrap.bundle.min.js"></script><link href="../deps/Fira_Mono-0.4.8/font.css" rel="stylesheet"><!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous"><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/v4-shims.min.css" integrity="sha256-wZjR52fzng1pJHwx4aV2AO3yyTOXrcDW7jBpJtTwVxw=" crossorigin="anonymous"><!-- bootstrap-toc --><script src="https://cdn.jsdelivr.net/gh/afeld/bootstrap-toc@v1.0.1/dist/bootstrap-toc.min.js" integrity="sha256-4veVQbu7//Lk5TSmc7YV48MxtMy98e26cf5MrgZYnwo=" crossorigin="anonymous"></script><!-- headroom.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/headroom.min.js" integrity="sha256-AsUX4SJE1+yuDu5+mAVzJbuYNPHj/WroHuZ8Ir/CkE0=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script><!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><!-- search --><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- pkgdown --><script src="../pkgdown.js"></script><meta property="og:title" content="zip lists — zip_lists"><meta property="og:description" content="This is conceptually similar to zip() in Python, or R functions
+positions."><title>Zip lists — zip_lists • keras3</title><!-- favicons --><link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png"><link rel="icon" type="image/png" sizes="32x32" href="../favicon-32x32.png"><link rel="apple-touch-icon" type="image/png" sizes="180x180" href="../apple-touch-icon.png"><link rel="apple-touch-icon" type="image/png" sizes="120x120" href="../apple-touch-icon-120x120.png"><link rel="apple-touch-icon" type="image/png" sizes="76x76" href="../apple-touch-icon-76x76.png"><link rel="apple-touch-icon" type="image/png" sizes="60x60" href="../apple-touch-icon-60x60.png"><script src="../deps/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"><link href="../deps/bootstrap-5.3.1/bootstrap.min.css" rel="stylesheet"><script src="../deps/bootstrap-5.3.1/bootstrap.bundle.min.js"></script><link href="../deps/Fira_Mono-0.4.8/font.css" rel="stylesheet"><!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous"><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/v4-shims.min.css" integrity="sha256-wZjR52fzng1pJHwx4aV2AO3yyTOXrcDW7jBpJtTwVxw=" crossorigin="anonymous"><!-- bootstrap-toc --><script src="https://cdn.jsdelivr.net/gh/afeld/bootstrap-toc@v1.0.1/dist/bootstrap-toc.min.js" integrity="sha256-4veVQbu7//Lk5TSmc7YV48MxtMy98e26cf5MrgZYnwo=" crossorigin="anonymous"></script><!-- headroom.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/headroom.min.js" integrity="sha256-AsUX4SJE1+yuDu5+mAVzJbuYNPHj/WroHuZ8Ir/CkE0=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script><!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><!-- search --><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- pkgdown --><script src="../pkgdown.js"></script><meta property="og:title" content="Zip lists — zip_lists"><meta property="og:description" content="This is conceptually similar to zip() in Python, or R functions
 purrr::transpose() and data.table::transpose() (albeit, accepting
 elements in ... instead of a single list), with one crucial difference: if
 the provided objects are named, then matching is done by names, not
@@ -70,7 +70,7 @@ positions."><!-- mathjax --><script src="https://cdnjs.cloudflare.com/ajax/libs/
 </nav><div class="container template-reference-topic">
 <div class="row">
   <main id="main" class="col-md-9"><div class="page-header">
-      <img src="" class="logo" alt=""><h1>zip lists</h1>
+      <img src="" class="logo" alt=""><h1>Zip lists</h1>
       <small class="dont-index">Source: <a href="https://github.com/rstudio/keras/blob/HEAD/R/utils.R" class="external-link"><code>R/utils.R</code></a></small>
       <div class="d-none name"><code>zip_lists.Rd</code></div>
     </div>
@@ -106,6 +106,40 @@ positions.</p>
 required, then all arguments provided must be unnamed. If matching by names,
 then all arguments must have the same set of names, but they can be in
 different orders.</p>
+    </div>
+    <div class="section level2">
+    <h2 id="see-also">See also<a class="anchor" aria-label="anchor" href="#see-also"></a></h2>
+    <div class="dont-index"><p>Other data utils: 
+<code><a href="pack_x_y_sample_weight.html">pack_x_y_sample_weight</a>()</code>,
+<code><a href="unpack_x_y_sample_weight.html">unpack_x_y_sample_weight</a>()</code></p>
+<p>Other utils: 
+<code><a href="audio_dataset_from_directory.html">audio_dataset_from_directory</a>()</code>,
+<code><a href="clear_session.html">clear_session</a>()</code>,
+<code><a href="config_disable_interactive_logging.html">config_disable_interactive_logging</a>()</code>,
+<code><a href="config_disable_traceback_filtering.html">config_disable_traceback_filtering</a>()</code>,
+<code><a href="config_enable_interactive_logging.html">config_enable_interactive_logging</a>()</code>,
+<code><a href="config_enable_traceback_filtering.html">config_enable_traceback_filtering</a>()</code>,
+<code><a href="config_is_interactive_logging_enabled.html">config_is_interactive_logging_enabled</a>()</code>,
+<code><a href="config_is_traceback_filtering_enabled.html">config_is_traceback_filtering_enabled</a>()</code>,
+<code><a href="get_file.html">get_file</a>()</code>,
+<code><a href="get_source_inputs.html">get_source_inputs</a>()</code>,
+<code><a href="image_array_save.html">image_array_save</a>()</code>,
+<code><a href="image_dataset_from_directory.html">image_dataset_from_directory</a>()</code>,
+<code><a href="image_from_array.html">image_from_array</a>()</code>,
+<code><a href="image_load.html">image_load</a>()</code>,
+<code><a href="image_smart_resize.html">image_smart_resize</a>()</code>,
+<code><a href="image_to_array.html">image_to_array</a>()</code>,
+<code><a href="layer_feature_space.html">layer_feature_space</a>()</code>,
+<code><a href="layer_torch_module_wrapper.html">layer_torch_module_wrapper</a>()</code>,
+<code><a href="normalize.html">normalize</a>()</code>,
+<code><a href="pack_x_y_sample_weight.html">pack_x_y_sample_weight</a>()</code>,
+<code><a href="pad_sequences.html">pad_sequences</a>()</code>,
+<code><a href="set_random_seed.html">set_random_seed</a>()</code>,
+<code><a href="split_dataset.html">split_dataset</a>()</code>,
+<code><a href="text_dataset_from_directory.html">text_dataset_from_directory</a>()</code>,
+<code><a href="timeseries_dataset_from_array.html">timeseries_dataset_from_array</a>()</code>,
+<code><a href="to_categorical.html">to_categorical</a>()</code>,
+<code><a href="unpack_x_y_sample_weight.html">unpack_x_y_sample_weight</a>()</code></p></div>
     </div>
 
     <div class="section level2">

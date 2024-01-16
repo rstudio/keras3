@@ -92,6 +92,14 @@
 <p>List of input tensors.</p>
     </div>
     <div class="section level2">
+    <h2 id="example">Example<a class="anchor" aria-label="anchor" href="#example"></a></h2>
+    <p></p><div class="sourceCode r"><pre><code><span><span class="va">input</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/keras_input.html">keras_input</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">3</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="va">output</span> <span class="op">&lt;-</span> <span class="va">input</span> <span class="op">|&gt;</span> <span class="fu"><a href="../reference/layer_dense.html">layer_dense</a></span><span class="op">(</span><span class="fl">4</span><span class="op">)</span> <span class="op">|&gt;</span> <span class="fu"><a href="../reference/op_multiply.html">op_multiply</a></span><span class="op">(</span><span class="fl">5</span><span class="op">)</span></span>
+<span><span class="fu">reticulate</span><span class="fu">::</span><span class="fu"><a href="https://rstudio.github.io/reticulate/reference/py_id.html" class="external-link">py_id</a></span><span class="op">(</span><span class="fu"><a href="../reference/get_source_inputs.html">get_source_inputs</a></span><span class="op">(</span><span class="va">output</span><span class="op">)</span><span class="op">[[</span><span class="fl">1</span><span class="op">]</span><span class="op">]</span><span class="op">)</span> <span class="op">==</span></span>
+<span><span class="fu">reticulate</span><span class="fu">::</span><span class="fu"><a href="https://rstudio.github.io/reticulate/reference/py_id.html" class="external-link">py_id</a></span><span class="op">(</span><span class="va">input</span><span class="op">)</span></span></code></pre><p></p></div>
+<p></p><div class="sourceCode"><pre><code><span id="cb1-1"><a href="#cb1-1" tabindex="-1"></a><span class="do">## [1] TRUE</span></span></code></pre><p></p></div>
+    </div>
+    <div class="section level2">
     <h2 id="see-also">See also<a class="anchor" aria-label="anchor" href="#see-also"></a></h2>
     <div class="dont-index"><p>Other utils: 
 <code><a href="audio_dataset_from_directory.html">audio_dataset_from_directory</a>()</code>,
@@ -111,7 +119,6 @@
 <code><a href="image_to_array.html">image_to_array</a>()</code>,
 <code><a href="layer_feature_space.html">layer_feature_space</a>()</code>,
 <code><a href="layer_torch_module_wrapper.html">layer_torch_module_wrapper</a>()</code>,
-<code><a href="model_to_dot.html">model_to_dot</a>()</code>,
 <code><a href="normalize.html">normalize</a>()</code>,
 <code><a href="pack_x_y_sample_weight.html">pack_x_y_sample_weight</a>()</code>,
 <code><a href="pad_sequences.html">pad_sequences</a>()</code>,
@@ -120,7 +127,8 @@
 <code><a href="text_dataset_from_directory.html">text_dataset_from_directory</a>()</code>,
 <code><a href="timeseries_dataset_from_array.html">timeseries_dataset_from_array</a>()</code>,
 <code><a href="to_categorical.html">to_categorical</a>()</code>,
-<code><a href="unpack_x_y_sample_weight.html">unpack_x_y_sample_weight</a>()</code></p></div>
+<code><a href="unpack_x_y_sample_weight.html">unpack_x_y_sample_weight</a>()</code>,
+<code><a href="zip_lists.html">zip_lists</a>()</code></p></div>
     </div>
 
   </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>
