@@ -29,11 +29,6 @@
 #'
 #' @export
 get_config <- function(object) {
-
-  # call using lower level reticulate functions to prevent conversion to list
-  # (the object will remain a python dictionary for full fidelity)
-  # get_fn <- py_get_attr(object, "get_config")
-  # config <- py_call(get_fn)
   config <- object$get_config()
 
   # set attribute indicating class
@@ -47,10 +42,10 @@ get_config <- function(object) {
 from_config <- function(config,
                         custom_objects = NULL,
                         class = attr(config, "__class__", TRUE) %||% keras$Model) {
-  if (missing(class) && c("config" %in% names(config)))
-    return(deserialize_keras_object(config, custom_objects = custom_objects))
+  # if (missing(class) && c("config" %in% names(config)))
+  #   return(deserialize_keras_object(config, custom_objects = custom_objects))
   args <- list(config)
-  args$custom_objects <- objects_with_py_function_names(custom_objects)
+  args$custom_objects <- normalize_custom_objects(custom_objects)
   do.call(class$from_config, args)
 }
 
@@ -113,6 +108,9 @@ count_params <- function(object) {
 #' Calling this on a Layer instance without any resettable-state will error.
 #'
 #' @family layer methods
+#  @family preprocessing layers
+#  @family metrics
+#  @family rnn layers
 #'
 #' @export
 reset_state <- function(object) {
