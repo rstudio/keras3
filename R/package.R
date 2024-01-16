@@ -260,7 +260,8 @@ keras_version <- function() {
 #' })
 #' }
 #'
-#' @export
+#' @noRd
+# @export
 is_keras_available <- function(version = NULL) {
   implementation_module <- resolve_implementation_module()
   if (reticulate::py_module_available(implementation_module)) {
@@ -273,3 +274,6 @@ is_keras_available <- function(version = NULL) {
   }
 }
 
+# TODO: add option in `is_keras_available()` to avoid initializing Python
+#       (maybe in a callr call?), reexport.
+# TODO: add func `is_backend_available()`, usage `is_backend_available("tensorflow")`

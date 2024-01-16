@@ -1171,7 +1171,7 @@ function (data, segment_ids, num_segments = NULL, sorted = FALSE)
 }
 
 
-#' Solves for `x` in the equation `a * x = b`.
+#' Solves for `x` in the equation `a %*% x == b`.
 #'
 #' @description
 #'
@@ -2638,7 +2638,12 @@ function (x, axis = NULL, keepdims = FALSE)
 #'
 #' @description
 #'
+#' `op_amax()` performs the same computation as [`op_max()`]
+#'
 #' # Examples
+#' ```{r, include = FALSE}
+#' op_amax <- op_max
+#' ```
 #' ```{r}
 #' (x <- op_convert_to_tensor(rbind(c(1, 3, 5), c(1, 5, 2))))
 #' op_amax(x)
@@ -2665,14 +2670,16 @@ function (x, axis = NULL, keepdims = FALSE)
 #' dimensions that are broadcast to the size of the original
 #' input tensor. Defaults to `FALSE`.
 #'
-#' @export
+# @export
+#' @noRd
+#' @keywords internal
 #' @family numpy ops
 #' @family ops
 #' @seealso
 #' + <https://keras.io/api/ops/numpy#amax-function>
 #  + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/amax>
 #' @tether keras.ops.amax
-op_amax <-
+# op_amax <-
 function (x, axis = NULL, keepdims = FALSE)
 {
     args <- capture_args(list(axis = as_axis))
@@ -2684,7 +2691,12 @@ function (x, axis = NULL, keepdims = FALSE)
 #'
 #' @description
 #'
+#' `op_amin()` performs the same computation as [`op_min()`]
+#'
 #' # Examples
+#' ```{r, include = FALSE}
+#' op_amin <- op_min
+#' ```
 #' ```{r}
 #' (x <- op_convert_to_tensor(rbind(c(1, 3, 5), c(1, 5, 2))))
 #' op_amin(x)
@@ -2711,14 +2723,16 @@ function (x, axis = NULL, keepdims = FALSE)
 #' dimensions that are broadcast to the size of the original
 #' input tensor. Defaults to `FALSE`.
 #'
-#' @export
+# @export
+#' @noRd
+#' @keywords internal
 #' @family numpy ops
 #' @family ops
 #' @seealso
 #' + <https://keras.io/api/ops/numpy#amin-function>
 #  + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/amin>
 #' @tether keras.ops.amin
-op_amin <-
+# op_amin <-
 function (x, axis = NULL, keepdims = FALSE)
 {
     args <- capture_args(list(axis = as_axis))
@@ -3844,11 +3858,11 @@ function (x, k = 0L)
 #'
 #' @param offset
 #' Offset of the diagonal from the main diagonal.
-#' Can be positive or negative. Defaults to `0`.(main diagonal).
+#' Can be positive or negative. Defaults to `0` (main diagonal).
 #'
 #' @param axis1
 #' Axis to be used as the first axis of the 2-D sub-arrays.
-#' Defaults to `1`.(first axis).
+#' Defaults to `1` (first axis).
 #'
 #' @param axis2
 #' Axis to be used as the second axis of the 2-D sub-arrays.
@@ -5011,6 +5025,16 @@ keras$ops$matmul(x1, x2)
 
 #' Return the maximum of a tensor or maximum along an axis.
 #'
+#' @description
+#'
+#' # Examples
+#' ```{r}
+#' (x <- op_convert_to_tensor(rbind(c(1, 3, 5), c(1, 5, 2))))
+#' op_max(x)
+#' op_max(x, axis = 1)
+#' op_max(x, axis = 1, keepdims = TRUE)
+#' ```
+#'
 #' @returns
 #' Maximum of `x`.
 #'
@@ -5029,6 +5053,7 @@ keras$ops$matmul(x1, x2)
 #' The minimum value of an output element. Defaults to`NULL`.
 #'
 #' @export
+#' @aliases op_amax
 #' @family numpy ops
 #' @family ops
 #' @seealso
@@ -5064,6 +5089,10 @@ function (x, axis = NULL, keepdims = FALSE, initial = NULL)
 op_maximum <-
 function (x1, x2)
 keras$ops$maximum(x1, x2)
+
+#' @export
+#' @rdname op_maximum
+op_pmax <- op_maximum
 
 
 #' Compute the arithmetic mean along the specified axes.
@@ -5186,6 +5215,15 @@ function (..., indexing = "xy")
 
 #' Return the minimum of a tensor or minimum along an axis.
 #'
+#' @description
+#'
+#' # Examples
+#' ```{r}
+#' (x <- op_convert_to_tensor(rbind(c(1, 3, 5), c(1, 5, 2))))
+#' op_min(x)
+#' op_min(x, axis = 1)
+#' op_min(x, axis = 1, keepdims = TRUE)
+#' ```
 #' @returns
 #' Minimum of `x`.
 #'
@@ -5204,6 +5242,7 @@ function (..., indexing = "xy")
 #' The maximum value of an output element. Defaults to`NULL`.
 #'
 #' @export
+#' @aliases op_amin
 #' @family numpy ops
 #' @family ops
 #' @seealso
@@ -5239,6 +5278,10 @@ function (x, axis = NULL, keepdims = FALSE, initial = NULL)
 op_minimum <-
 function (x1, x2)
 keras$ops$minimum(x1, x2)
+
+#' @rdname op_minimum
+#' @export
+op_pmin <- op_minimum
 
 
 #' Returns the element-wise remainder of division.
@@ -5291,7 +5334,7 @@ keras$ops$mod(x1, x2)
 #' @tether keras.ops.moveaxis
 op_moveaxis <-
 function (x, source, destination)
-keras$ops$moveaxis(x, source, destination)
+keras$ops$moveaxis(x, as_axis(source), as_axis(destination))
 
 
 #' Multiply arguments element-wise.

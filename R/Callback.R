@@ -1,5 +1,5 @@
 
-#' Define a custom Callback
+#' Define a custom `Callback` class
 #'
 #' @description
 #' Callbacks can be passed to keras methods such as `fit()`, `evaluate()`, and

@@ -1,4 +1,4 @@
-#' Define a custom Layer.
+#' Define a custom `Layer` class.
 #'
 #' @description
 #' A layer is a callable object that takes as input one or more tensors and
@@ -134,24 +134,25 @@
 #' the running sum of its inputs:
 #'
 #' ```{r}
-#' layer_compute_sum <- Layer("ComputeSum",
+#' layer_compute_sum <- Layer(
+#'   classname = "ComputeSum",
 #'
-#'    initialize = function(input_dim){
+#'   initialize = function(input_dim) {
+#'     super$initialize()
 #'
-#'       super$initialize()
-#'       # Create a non-trainable weight.
-#'       self$total <- self$add_weight(
-#'         shape = shape(),
-#'         initializer = "zeros",
-#'         trainable = FALSE,
-#'         name = "total"
-#'       )
-#'    },
+#'     # Create a non-trainable weight.
+#'     self$total <- self$add_weight(
+#'       shape = shape(),
+#'       initializer = "zeros",
+#'       trainable = FALSE,
+#'       name = "total"
+#'     )
+#'   },
 #'
-#'    call = function(inputs){
-#'       self$total$assign(self$total + op_sum(inputs))
-#'       self$total
-#'    }
+#'   call = function(inputs) {
+#'     self$total$assign(self$total + op_sum(inputs))
+#'     self$total
+#'   }
 #' )
 #'
 #' my_sum <- layer_compute_sum(, 2)

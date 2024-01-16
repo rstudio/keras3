@@ -1,4 +1,4 @@
-#' Define a custom LearningRateSchedule class
+#' Define a custom `LearningRateSchedule` class
 #'
 #' @description
 #' Subclass the keras learning rate schedule base class.

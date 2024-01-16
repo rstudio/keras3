@@ -53,7 +53,7 @@ function (logits, num_samples, dtype = "int32", seed = NULL)
 }
 
 
-#' random dropout
+#' Randomly set some values in a tensor to 0.
 #'
 #' @description
 #' Randomly set some portion of values in the tensor to 0.
@@ -62,13 +62,13 @@ function (logits, num_samples, dtype = "int32", seed = NULL)
 #' Initial seed for the random number generator
 #'
 #' @param inputs
-#' see description
+#' A tensor
 #'
 #' @param rate
-#' see description
+#' numeric
 #'
 #' @param noise_shape
-#' see description
+#' A `shape()` value
 #'
 #' @export
 #' @family random

@@ -84,9 +84,8 @@ local({
         # so we use this to detect if we're in the first chunk of a block and run setup
         if (is.null(roxygen2::roxy_meta_get("evalenv")$.__ran_keras_block_init__)) {
           options(width = 76)
-          keras3:::keras$utils$clear_session()
-          set.seed(1L)
-          keras3:::keras$utils$set_random_seed(1L)
+          keras3::clear_session()
+          keras3::set_random_seed(1L)
           assign(x = ".__ran_keras_block_init__",
                  envir = roxygen2::roxy_meta_get("evalenv"),
                  value = TRUE)

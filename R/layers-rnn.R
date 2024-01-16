@@ -995,6 +995,7 @@ function (object, units, activation = "tanh", recurrent_activation = "sigmoid",
 #' For forward/backward compatability.
 #'
 #' @export
+#' @family rnn cells
 #' @family gru rnn layers
 #' @family rnn layers
 #' @family layers
@@ -1305,6 +1306,7 @@ function (object, units, activation = "tanh", recurrent_activation = "sigmoid",
 #' For forward/backward compatability.
 #'
 #' @export
+#' @family rnn cells
 #' @family lstm rnn layers
 #' @family rnn layers
 #' @family layers
@@ -1513,6 +1515,7 @@ function (units, activation = "tanh", recurrent_activation = "sigmoid",
 #' For forward/backward compatability.
 #'
 #' @export
+#' @family rnn cells
 #' @family rnn layers
 #' @family layers
 #' @seealso
@@ -1782,6 +1785,7 @@ function (object, units, activation = "tanh", use_bias = TRUE,
 #' For forward/backward compatability.
 #'
 #' @export
+#' @family rnn cells
 #' @family simple rnn layers
 #' @family rnn layers
 #' @family layers

@@ -46,6 +46,11 @@ if(!"source:tools/translate-tools.R" %in% search()) envir::attach_source("tools/
 #
 # Maybe there is some funky interaction w/ absl logging?
 
+# TODO: remove usage of all.equal(<pyobj>, <pyobj>) in examples/code,
+#       export a better way.
+#
+# TODO: custom_metric -> metric_custom() / loss_custom() / constraint_custom()
+#                        metric_lambda() / loss_lambda() / constraint_lambda()
 # TODO: CallbackList() (1 based) and MetricList() wrappers
 # (and maybe convert LearningRateSchedule to 1 based?)
 #  with offset occuring in the external py_to_r_wrapper (or simlar),
@@ -125,10 +130,6 @@ if(!"source:tools/translate-tools.R" %in% search()) envir::attach_source("tools/
 
 # TODO: "keras.layers.InputSpec" - needs to be exported or somehow processed in `Layer()`
 
-# TODO: remove op_amax() and friends, they're redundant w/ op_max(), which already
-#       takes an axis arg. Only there for numpy api compatability, which
-#       doesn't matter to us.
-#
 # TODO: op_arange() returns a 0-based tensor
 
 # TODO: ??? .onLoad(...) if(!interactive()) config_disable_interactive_logging()
@@ -167,11 +168,6 @@ if(!"source:tools/translate-tools.R" %in% search()) envir::attach_source("tools/
 # TODO: fix py_func(), for r_to_py.R6ClassGenerator
 #   can't use __signature__ anymore in keras_core...
 
-
-# TODO: initializer families:
-# <class 'keras.initializers.constant_initializers.Zeros'>
-# <class 'keras.initializers.random_initializers.RandomUniform'>
-
 # TODO: global search replace in man-src/*.Rmd "([^ ])=([^ ])" "\\1 = \\2"
 
 # Daniels votes YES to rename to layer_bidirectional, etc.
@@ -205,6 +201,8 @@ if(!"source:tools/translate-tools.R" %in% search()) envir::attach_source("tools/
 
 #
 # TODO: add @import reticulate ??
+#
+# TODO: make the op_* @family tags make sense.
 #
 # TODO: op_true_divide -- remove?
 #

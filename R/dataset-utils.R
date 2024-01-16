@@ -13,7 +13,7 @@
 #' x <- op_ones(c(10, 1))
 #' data <- pack_x_y_sample_weight(x)
 #'
-#' # TRUE
+#'
 #' y <- op_ones(c(10, 1))
 #' data <- pack_x_y_sample_weight(x, y)
 #' ```
@@ -31,9 +31,7 @@
 #' Sample weight for each element.
 #'
 #' @export
-#' @family datum util adapter trainers
-#' @family datum adapter trainers
-#' @family trainers
+#' @family data utils
 #' @family utils
 # @seealso
 #  + <https://www.tensorflow.org/api_docs/python/tf/keras/utils/pack_x_y_sample_weight>
@@ -71,12 +69,10 @@ function (x, y = NULL, sample_weight = NULL)
 #' not provided.
 #'
 #' @param data
-#' A list of the form `(x,)`, `(x, y)`, or `(x, y, sample_weight)`.
+#' A list of the form `(x)`, `(x, y)`, or `(x, y, sample_weight)`.
 #'
 #' @export
-#' @family datum util adapter trainers
-#' @family datum adapter trainers
-#' @family trainers
+#' @family data utils
 #' @family utils
 # @seealso
 #  + <https://www.tensorflow.org/api_docs/python/tf/keras/utils/unpack_x_y_sample_weight>

@@ -531,6 +531,8 @@ function ()
 #' @rdname get_custom_objects
 #' @param objects A named list of custom objects, as returned by
 #'   `get_custom_objects()` and `set_custom_objects()`.
+#' @param clear bool, whether to clear the custom object registry before
+#'   populating it with `objects`.
 #' @export
 set_custom_objects <- function(objects = named_list(), clear = TRUE) {
   # This doesn't use `get_custom_objects.update()` directly because there is a
@@ -552,6 +554,7 @@ set_custom_objects <- function(objects = named_list(), clear = TRUE) {
   if(length(objects)) {
     objects <- normalize_custom_objects(objects)
     m$GLOBAL_CUSTOM_OBJECTS$update(objects)
+    m$GLOBAL_CUSTOM_NAMES$clear()
     py_eval("lambda m: m.GLOBAL_CUSTOM_NAMES.update(
       {obj: name for name, obj in m.GLOBAL_CUSTOM_OBJECTS.items()})")(m)
   }

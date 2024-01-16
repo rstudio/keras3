@@ -1,4 +1,4 @@
-#' Define a custom Constraint class.
+#' Define a custom `Constraint` class
 #'
 #' @description
 #' Base class for weight constraints.

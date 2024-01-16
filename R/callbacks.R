@@ -409,7 +409,8 @@ function (schedule, verbose = 0L)
 
 
 #' Callback to save the Keras model or model weights at some frequency.
-#'  @description
+#'
+#' @description
 #' `callback_model_checkpoint()` is used in conjunction with training using
 #' `model |> fit()` to save a model or weights (in a checkpoint file) at some
 #' interval, so the model or weights can be loaded later to continue the
@@ -568,13 +569,14 @@ function (filepath, monitor = "val_loss", verbose = 0L, save_best_only = FALSE,
 #' Whether the progress bar should
 #' count samples seen or steps (batches) seen.
 #'
-#' @export
+# @export
+#' @noRd
 #' @family callbacks
 #' @seealso
 #' + <https://keras.io/api/callbacks/progbar_logger#progbarlogger-class>
 #  + <https://www.tensorflow.org/api_docs/python/tf/keras/callbacks/ProgbarLogger>
 #' @tether keras.callbacks.ProgbarLogger
-callback_progbar_logger <-
+# callback_progbar_logger <-
 function (count_mode = NULL)
 {
     args <- capture_args()

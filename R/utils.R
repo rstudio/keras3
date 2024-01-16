@@ -64,8 +64,7 @@
 clear_session <-
 function ()
 {
-    args <- capture_args()
-    do.call(keras$utils$clear_session, args)
+    keras$utils$clear_session()
 }
 
 
@@ -75,6 +74,15 @@ function ()
 #' @description
 #' Output will always be a list of tensors
 #' (potentially with 1 element).
+#'
+#' # Example
+#'
+#' ```{r}
+#' input <- keras_input(c(3))
+#' output <- input |> layer_dense(4) |> op_multiply(5)
+#' reticulate::py_id(get_source_inputs(output)[[1]]) ==
+#' reticulate::py_id(input)
+#' ```
 #'
 #' @returns
 #' List of input tensors.
@@ -90,8 +98,7 @@ function ()
 get_source_inputs <-
 function (tensor)
 {
-    args <- capture_args()
-    do.call(keras$utils$get_source_inputs, args)
+    keras$utils$get_source_inputs(tensor)
 }
 
 
@@ -234,13 +241,14 @@ function (fname = NULL, origin = NULL, ...,
 #' @param ...
 #' For forward/backward compatability.
 #'
-#' @export
+# @export
+#' @noRd
 #' @family utils
 #' @seealso
 #' + <https://keras.io/api/utils/model_plotting_utils#modeltodot-function>
 #  + <https://www.tensorflow.org/api_docs/python/tf/keras/utils/model_to_dot>
 #' @tether keras.utils.model_to_dot
-model_to_dot <-
+# model_to_dot <-
 function (model, show_shapes = FALSE, show_dtype = FALSE, show_layer_names = TRUE,
     rankdir = "TB", expand_nested = FALSE, dpi = 200L, subgraph = FALSE,
     show_layer_activations = FALSE, show_trainable = FALSE, ...)
@@ -253,7 +261,7 @@ function (model, show_shapes = FALSE, show_dtype = FALSE, show_layer_names = TRU
 #' Normalizes an array.
 #'
 #' @description
-#' If the input is a NumPy array, a NumPy array will be returned.
+#' If the input is an R array, an R array will be returned.
 #' If it's a backend tensor, a backend tensor will be returned.
 #'
 #' @returns
@@ -286,7 +294,7 @@ function (x, axis = -1L, order = 2L)
 #' Converts a class vector (integers) to binary class matrix.
 #'
 #' @description
-#' E.g. for use with `categorical_crossentropy`.
+#' E.g. for use with [`loss_categorical_crossentropy()`].
 #'
 #' # Examples
 #' ```{r}
@@ -310,7 +318,7 @@ function (x, axis = -1L, order = 2L)
 #' ```
 #'
 #' @returns
-#' A binary matrix representation of the input as a NumPy array. The class
+#' A binary matrix representation of the input as an R array. The class
 #' axis is placed last.
 #'
 #' @param x
@@ -325,6 +333,11 @@ function (x, axis = -1L, order = 2L)
 #' @family numerical utils
 #' @family utils
 #' @seealso
+#' + [`op_one_hot()`], which does the same operation as `to_categorical()`, but
+#'   operating on tensors.
+#' + [`loss_sparse_categorical_crossentropy()`], which can
+#'   accept labels (`y_true`) as an integer vector, instead of as a dense one-hot
+#'   matrix.
 #' + <https://keras.io/api/utils/python_utils#tocategorical-function>
 #  + <https://www.tensorflow.org/api_docs/python/tf/keras/utils/to_categorical>
 #'
@@ -680,7 +693,7 @@ function(x,
 }
 
 
-#' zip lists
+#' Zip lists
 #'
 #' This is conceptually similar to `zip()` in Python, or R functions
 #' `purrr::transpose()` and `data.table::transpose()` (albeit, accepting
@@ -697,6 +710,9 @@ function(x,
 #'
 #' @return A inverted list
 #' @export
+#'
+#' @family data utils
+#' @family utils
 #'
 #' @examples
 #' gradients <- list("grad_for_wt_1", "grad_for_wt_2", "grad_for_wt_3")
