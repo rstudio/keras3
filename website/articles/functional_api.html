@@ -134,7 +134,7 @@ acyclic graph (DAG) of layers. So the functional API is a way to build
 <p>This is a basic graph with three layers. To build this model using
 the functional API, start by creating an input node:</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">inputs</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/layer_input.html">layer_input</a></span><span class="op">(</span>shape <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">784</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">inputs</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/keras_input.html">keras_input</a></span><span class="op">(</span>shape <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">784</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <p>The shape of the data is set as a 784-dimensional vector. The batch
 size is always omitted since only the shape of each sample is
 specified.</p>
@@ -142,7 +142,7 @@ specified.</p>
 <code>(32, 32, 3)</code>, you would use:</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Just for demonstration purposes.</span></span>
-<span><span class="va">img_inputs</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/layer_input.html">layer_input</a></span><span class="op">(</span>shape <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">32</span>, <span class="fl">32</span>, <span class="fl">3</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
+<span><span class="va">img_inputs</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/keras_input.html">keras_input</a></span><span class="op">(</span>shape <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">32</span>, <span class="fl">32</span>, <span class="fl">3</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <p>The <code>inputs</code> that is returned contains information about
 the shape and <code>dtype</code> of the input data that you feed to your
 model. Here’s the shape:</p>
@@ -163,8 +163,8 @@ this layer you created. You’re “passing” the inputs to the
 <code>dense</code> layer, and you get <code>x</code> as the output.</p>
 <p>Let’s add a few more layers to the graph of layers:</p>
 <div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">outputs</span> <span class="op">&lt;-</span> <span class="va">x</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span></span>
-<span>  <span class="fu"><a href="../reference/layer_dense.html">layer_dense</a></span><span class="op">(</span>units <span class="op">=</span> <span class="fl">64</span>, activation <span class="op">=</span> <span class="st">"relu"</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span></span>
+<code class="sourceCode R"><span><span class="va">outputs</span> <span class="op">&lt;-</span> <span class="va">x</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu"><a href="../reference/layer_dense.html">layer_dense</a></span><span class="op">(</span>units <span class="op">=</span> <span class="fl">64</span>, activation <span class="op">=</span> <span class="st">"relu"</span><span class="op">)</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu"><a href="../reference/layer_dense.html">layer_dense</a></span><span class="op">(</span>units <span class="op">=</span> <span class="fl">10</span><span class="op">)</span></span></code></pre></div>
 <p>At this point, you can create a <code>Model</code> by specifying its
 inputs and outputs in the graph of layers:</p>
@@ -223,22 +223,22 @@ then evaluate the model on the test data:</p>
 <span><span class="va">x_train</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rstudio.github.io/reticulate/reference/array_reshape.html" class="external-link">array_reshape</a></span><span class="op">(</span><span class="va">x_train</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">60000</span>, <span class="fl">784</span><span class="op">)</span><span class="op">)</span> <span class="op">/</span> <span class="fl">255</span></span>
 <span><span class="va">x_test</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rstudio.github.io/reticulate/reference/array_reshape.html" class="external-link">array_reshape</a></span><span class="op">(</span><span class="va">x_test</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">10000</span>, <span class="fl">784</span><span class="op">)</span><span class="op">)</span> <span class="op">/</span> <span class="fl">255</span></span>
 <span></span>
-<span><span class="va">model</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://generics.r-lib.org/reference/compile.html" class="external-link">compile</a></span><span class="op">(</span></span>
+<span><span class="va">model</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://generics.r-lib.org/reference/compile.html" class="external-link">compile</a></span><span class="op">(</span></span>
 <span>  loss <span class="op">=</span> <span class="fu"><a href="../reference/loss_sparse_categorical_crossentropy.html">loss_sparse_categorical_crossentropy</a></span><span class="op">(</span>from_logits <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>,</span>
 <span>  optimizer <span class="op">=</span> <span class="fu"><a href="../reference/optimizer_rmsprop.html">optimizer_rmsprop</a></span><span class="op">(</span><span class="op">)</span>,</span>
 <span>  metrics <span class="op">=</span> <span class="st">"accuracy"</span></span>
 <span><span class="op">)</span></span>
 <span></span>
-<span><span class="va">history</span> <span class="op">&lt;-</span> <span class="va">model</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://generics.r-lib.org/reference/fit.html" class="external-link">fit</a></span><span class="op">(</span></span>
+<span><span class="va">history</span> <span class="op">&lt;-</span> <span class="va">model</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://generics.r-lib.org/reference/fit.html" class="external-link">fit</a></span><span class="op">(</span></span>
 <span>    <span class="va">x_train</span>, <span class="va">y_train</span>, batch_size <span class="op">=</span> <span class="fl">64</span>, epochs <span class="op">=</span> <span class="fl">2</span>, validation_split <span class="op">=</span> <span class="fl">0.2</span></span>
 <span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">## Epoch 1/2</span></span>
-<span><span class="co">## 750/750 - 2s - 3ms/step - accuracy: 0.9015 - loss: 0.3513 - val_accuracy: 0.9442 - val_loss: 0.1921</span></span>
+<span><span class="co">## 750/750 - 3s - 4ms/step - accuracy: 0.9015 - loss: 0.3513 - val_accuracy: 0.9442 - val_loss: 0.1921</span></span>
 <span><span class="co">## Epoch 2/2</span></span>
 <span><span class="co">## 750/750 - 1s - 1ms/step - accuracy: 0.9508 - loss: 0.1643 - val_accuracy: 0.9581 - val_loss: 0.1423</span></span></code></pre>
 <div class="sourceCode" id="cb18"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">test_scores</span> <span class="op">&lt;-</span> <span class="va">model</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://rdrr.io/pkg/tensorflow/man/evaluate.html" class="external-link">evaluate</a></span><span class="op">(</span><span class="va">x_test</span>, <span class="va">y_test</span>, verbose<span class="op">=</span><span class="fl">2</span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">## 313/313 - 0s - 1ms/step - accuracy: 0.9578 - loss: 0.1338</span></span></code></pre>
+<code class="sourceCode R"><span><span class="va">test_scores</span> <span class="op">&lt;-</span> <span class="va">model</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://rdrr.io/pkg/tensorflow/man/evaluate.html" class="external-link">evaluate</a></span><span class="op">(</span><span class="va">x_test</span>, <span class="va">y_test</span>, verbose<span class="op">=</span><span class="fl">2</span><span class="op">)</span></span></code></pre></div>
+<pre><code><span><span class="co">## 313/313 - 0s - 2ms/step - accuracy: 0.9578 - loss: 0.1338</span></span></code></pre>
 <div class="sourceCode" id="cb20"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/cat.html" class="external-link">cat</a></span><span class="op">(</span><span class="st">"Test loss:"</span>, <span class="va">test_scores</span><span class="op">$</span><span class="va">loss</span>, <span class="st">"\n"</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/cat.html" class="external-link">cat</a></span><span class="op">(</span><span class="st">"Test accuracy:"</span>, <span class="va">test_scores</span><span class="op">$</span><span class="va">accuracy</span>, <span class="st">"\n"</span><span class="op">)</span></span></code></pre></div>
@@ -279,13 +279,13 @@ two models: an <code>encoder</code> model that turns image inputs into
 16-dimensional vectors, and an end-to-end <code>autoencoder</code> model
 for training.</p>
 <div class="sourceCode" id="cb23"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">encoder_input</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/layer_input.html">layer_input</a></span><span class="op">(</span>shape <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">28</span>, <span class="fl">28</span>, <span class="fl">1</span><span class="op">)</span>, name<span class="op">=</span><span class="st">"img"</span><span class="op">)</span></span>
-<span><span class="va">encoder_output</span> <span class="op">&lt;-</span> <span class="va">encoder_input</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span></span>
-<span>  <span class="fu"><a href="../reference/layer_conv_2d.html">layer_conv_2d</a></span><span class="op">(</span><span class="fl">16</span>, <span class="fl">3</span>, activation <span class="op">=</span> <span class="st">"relu"</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span></span>
-<span>  <span class="fu"><a href="../reference/layer_conv_2d.html">layer_conv_2d</a></span><span class="op">(</span><span class="fl">32</span>, <span class="fl">3</span>, activation <span class="op">=</span> <span class="st">"relu"</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span></span>
-<span>  <span class="fu"><a href="../reference/layer_max_pooling_2d.html">layer_max_pooling_2d</a></span><span class="op">(</span><span class="fl">3</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span></span>
-<span>  <span class="fu"><a href="../reference/layer_conv_2d.html">layer_conv_2d</a></span><span class="op">(</span><span class="fl">32</span>, <span class="fl">3</span>, activation <span class="op">=</span> <span class="st">"relu"</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span></span>
-<span>  <span class="fu"><a href="../reference/layer_conv_2d.html">layer_conv_2d</a></span><span class="op">(</span><span class="fl">16</span>, <span class="fl">3</span>, activation <span class="op">=</span> <span class="st">"relu"</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span></span>
+<code class="sourceCode R"><span><span class="va">encoder_input</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/keras_input.html">keras_input</a></span><span class="op">(</span>shape <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">28</span>, <span class="fl">28</span>, <span class="fl">1</span><span class="op">)</span>, name<span class="op">=</span><span class="st">"img"</span><span class="op">)</span></span>
+<span><span class="va">encoder_output</span> <span class="op">&lt;-</span> <span class="va">encoder_input</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu"><a href="../reference/layer_conv_2d.html">layer_conv_2d</a></span><span class="op">(</span><span class="fl">16</span>, <span class="fl">3</span>, activation <span class="op">=</span> <span class="st">"relu"</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu"><a href="../reference/layer_conv_2d.html">layer_conv_2d</a></span><span class="op">(</span><span class="fl">32</span>, <span class="fl">3</span>, activation <span class="op">=</span> <span class="st">"relu"</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu"><a href="../reference/layer_max_pooling_2d.html">layer_max_pooling_2d</a></span><span class="op">(</span><span class="fl">3</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu"><a href="../reference/layer_conv_2d.html">layer_conv_2d</a></span><span class="op">(</span><span class="fl">32</span>, <span class="fl">3</span>, activation <span class="op">=</span> <span class="st">"relu"</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu"><a href="../reference/layer_conv_2d.html">layer_conv_2d</a></span><span class="op">(</span><span class="fl">16</span>, <span class="fl">3</span>, activation <span class="op">=</span> <span class="st">"relu"</span><span class="op">)</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu"><a href="../reference/layer_global_max_pooling_2d.html">layer_global_max_pooling_2d</a></span><span class="op">(</span><span class="op">)</span></span>
 <span></span>
 <span><span class="va">encoder</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/keras_model.html">keras_model</a></span><span class="op">(</span><span class="va">encoder_input</span>, <span class="va">encoder_output</span>, name<span class="op">=</span><span class="st">"encoder"</span><span class="op">)</span></span>
@@ -313,12 +313,12 @@ for training.</p>
 <span><span class="co">## <span style="font-weight: bold;"> Trainable params: </span><span style="color: #00AF00;">18,672</span> (72.94 KB)</span></span>
 <span><span class="co">## <span style="font-weight: bold;"> Non-trainable params: </span><span style="color: #00AF00;">0</span> (0.00 B)</span></span></code></pre>
 <div class="sourceCode" id="cb25"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">decoder_output</span> <span class="op">&lt;-</span> <span class="va">encoder_output</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span></span>
-<span>  <span class="fu"><a href="../reference/layer_reshape.html">layer_reshape</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">4</span>, <span class="fl">4</span>, <span class="fl">1</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span></span>
-<span>  <span class="fu"><a href="../reference/layer_conv_2d_transpose.html">layer_conv_2d_transpose</a></span><span class="op">(</span><span class="fl">16</span>, <span class="fl">3</span>, activation <span class="op">=</span> <span class="st">"relu"</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span></span>
-<span>  <span class="fu"><a href="../reference/layer_conv_2d_transpose.html">layer_conv_2d_transpose</a></span><span class="op">(</span><span class="fl">32</span>, <span class="fl">3</span>, activation <span class="op">=</span> <span class="st">"relu"</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span></span>
-<span>  <span class="fu"><a href="../reference/layer_upsampling_2d.html">layer_upsampling_2d</a></span><span class="op">(</span><span class="fl">3</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span></span>
-<span>  <span class="fu"><a href="../reference/layer_conv_2d_transpose.html">layer_conv_2d_transpose</a></span><span class="op">(</span><span class="fl">16</span>, <span class="fl">3</span>, activation <span class="op">=</span> <span class="st">"relu"</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span></span>
+<code class="sourceCode R"><span><span class="va">decoder_output</span> <span class="op">&lt;-</span> <span class="va">encoder_output</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu"><a href="../reference/layer_reshape.html">layer_reshape</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">4</span>, <span class="fl">4</span>, <span class="fl">1</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu"><a href="../reference/layer_conv_2d_transpose.html">layer_conv_2d_transpose</a></span><span class="op">(</span><span class="fl">16</span>, <span class="fl">3</span>, activation <span class="op">=</span> <span class="st">"relu"</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu"><a href="../reference/layer_conv_2d_transpose.html">layer_conv_2d_transpose</a></span><span class="op">(</span><span class="fl">32</span>, <span class="fl">3</span>, activation <span class="op">=</span> <span class="st">"relu"</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu"><a href="../reference/layer_upsampling_2d.html">layer_upsampling_2d</a></span><span class="op">(</span><span class="fl">3</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu"><a href="../reference/layer_conv_2d_transpose.html">layer_conv_2d_transpose</a></span><span class="op">(</span><span class="fl">16</span>, <span class="fl">3</span>, activation <span class="op">=</span> <span class="st">"relu"</span><span class="op">)</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu"><a href="../reference/layer_conv_2d_transpose.html">layer_conv_2d_transpose</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">3</span>, activation <span class="op">=</span> <span class="st">"relu"</span><span class="op">)</span></span>
 <span></span>
 <span><span class="va">autoencoder</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/keras_model.html">keras_model</a></span><span class="op">(</span><span class="va">encoder_input</span>, <span class="va">decoder_output</span>, name<span class="op">=</span><span class="st">"autoencoder"</span><span class="op">)</span></span>
@@ -380,13 +380,13 @@ reusing its weights.</p>
 example that creates an encoder model, a decoder model, and chains them
 in two calls to obtain the autoencoder model:</p>
 <div class="sourceCode" id="cb27"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">encoder_input</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/layer_input.html">layer_input</a></span><span class="op">(</span>shape <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">28</span>, <span class="fl">28</span>, <span class="fl">1</span><span class="op">)</span>, name<span class="op">=</span><span class="st">"img"</span><span class="op">)</span></span>
-<span><span class="va">encoder_output</span> <span class="op">&lt;-</span> <span class="va">encoder_input</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span></span>
-<span>  <span class="fu"><a href="../reference/layer_conv_2d.html">layer_conv_2d</a></span><span class="op">(</span><span class="fl">16</span>, <span class="fl">3</span>, activation <span class="op">=</span> <span class="st">"relu"</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span></span>
-<span>  <span class="fu"><a href="../reference/layer_conv_2d.html">layer_conv_2d</a></span><span class="op">(</span><span class="fl">32</span>, <span class="fl">3</span>, activation <span class="op">=</span> <span class="st">"relu"</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span></span>
-<span>  <span class="fu"><a href="../reference/layer_max_pooling_2d.html">layer_max_pooling_2d</a></span><span class="op">(</span><span class="fl">3</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span></span>
-<span>  <span class="fu"><a href="../reference/layer_conv_2d.html">layer_conv_2d</a></span><span class="op">(</span><span class="fl">32</span>, <span class="fl">3</span>, activation <span class="op">=</span> <span class="st">"relu"</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span></span>
-<span>  <span class="fu"><a href="../reference/layer_conv_2d.html">layer_conv_2d</a></span><span class="op">(</span><span class="fl">16</span>, <span class="fl">3</span>, activation <span class="op">=</span> <span class="st">"relu"</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span></span>
+<code class="sourceCode R"><span><span class="va">encoder_input</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/keras_input.html">keras_input</a></span><span class="op">(</span>shape <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">28</span>, <span class="fl">28</span>, <span class="fl">1</span><span class="op">)</span>, name<span class="op">=</span><span class="st">"img"</span><span class="op">)</span></span>
+<span><span class="va">encoder_output</span> <span class="op">&lt;-</span> <span class="va">encoder_input</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu"><a href="../reference/layer_conv_2d.html">layer_conv_2d</a></span><span class="op">(</span><span class="fl">16</span>, <span class="fl">3</span>, activation <span class="op">=</span> <span class="st">"relu"</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu"><a href="../reference/layer_conv_2d.html">layer_conv_2d</a></span><span class="op">(</span><span class="fl">32</span>, <span class="fl">3</span>, activation <span class="op">=</span> <span class="st">"relu"</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu"><a href="../reference/layer_max_pooling_2d.html">layer_max_pooling_2d</a></span><span class="op">(</span><span class="fl">3</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu"><a href="../reference/layer_conv_2d.html">layer_conv_2d</a></span><span class="op">(</span><span class="fl">32</span>, <span class="fl">3</span>, activation <span class="op">=</span> <span class="st">"relu"</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu"><a href="../reference/layer_conv_2d.html">layer_conv_2d</a></span><span class="op">(</span><span class="fl">16</span>, <span class="fl">3</span>, activation <span class="op">=</span> <span class="st">"relu"</span><span class="op">)</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu"><a href="../reference/layer_global_max_pooling_2d.html">layer_global_max_pooling_2d</a></span><span class="op">(</span><span class="op">)</span></span>
 <span></span>
 <span><span class="va">encoder</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/keras_model.html">keras_model</a></span><span class="op">(</span><span class="va">encoder_input</span>, <span class="va">encoder_output</span>, name<span class="op">=</span><span class="st">"encoder"</span><span class="op">)</span></span>
@@ -414,13 +414,13 @@ in two calls to obtain the autoencoder model:</p>
 <span><span class="co">## <span style="font-weight: bold;"> Trainable params: </span><span style="color: #00AF00;">18,672</span> (72.94 KB)</span></span>
 <span><span class="co">## <span style="font-weight: bold;"> Non-trainable params: </span><span style="color: #00AF00;">0</span> (0.00 B)</span></span></code></pre>
 <div class="sourceCode" id="cb29"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">decoder_input</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/layer_input.html">layer_input</a></span><span class="op">(</span>shape <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">16</span><span class="op">)</span>, name <span class="op">=</span> <span class="st">"encoded_img"</span><span class="op">)</span></span>
-<span><span class="va">decoder_output</span> <span class="op">&lt;-</span> <span class="va">decoder_input</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span></span>
-<span>  <span class="fu"><a href="../reference/layer_reshape.html">layer_reshape</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">4</span>, <span class="fl">4</span>, <span class="fl">1</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span></span>
-<span>  <span class="fu"><a href="../reference/layer_conv_2d_transpose.html">layer_conv_2d_transpose</a></span><span class="op">(</span><span class="fl">16</span>, <span class="fl">3</span>, activation <span class="op">=</span> <span class="st">"relu"</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span></span>
-<span>  <span class="fu"><a href="../reference/layer_conv_2d_transpose.html">layer_conv_2d_transpose</a></span><span class="op">(</span><span class="fl">32</span>, <span class="fl">3</span>, activation <span class="op">=</span> <span class="st">"relu"</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span></span>
-<span>  <span class="fu"><a href="../reference/layer_upsampling_2d.html">layer_upsampling_2d</a></span><span class="op">(</span><span class="fl">3</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span></span>
-<span>  <span class="fu"><a href="../reference/layer_conv_2d_transpose.html">layer_conv_2d_transpose</a></span><span class="op">(</span><span class="fl">16</span>, <span class="fl">3</span>, activation <span class="op">=</span> <span class="st">"relu"</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span></span>
+<code class="sourceCode R"><span><span class="va">decoder_input</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/keras_input.html">keras_input</a></span><span class="op">(</span>shape <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">16</span><span class="op">)</span>, name <span class="op">=</span> <span class="st">"encoded_img"</span><span class="op">)</span></span>
+<span><span class="va">decoder_output</span> <span class="op">&lt;-</span> <span class="va">decoder_input</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu"><a href="../reference/layer_reshape.html">layer_reshape</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">4</span>, <span class="fl">4</span>, <span class="fl">1</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu"><a href="../reference/layer_conv_2d_transpose.html">layer_conv_2d_transpose</a></span><span class="op">(</span><span class="fl">16</span>, <span class="fl">3</span>, activation <span class="op">=</span> <span class="st">"relu"</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu"><a href="../reference/layer_conv_2d_transpose.html">layer_conv_2d_transpose</a></span><span class="op">(</span><span class="fl">32</span>, <span class="fl">3</span>, activation <span class="op">=</span> <span class="st">"relu"</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu"><a href="../reference/layer_upsampling_2d.html">layer_upsampling_2d</a></span><span class="op">(</span><span class="fl">3</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu"><a href="../reference/layer_conv_2d_transpose.html">layer_conv_2d_transpose</a></span><span class="op">(</span><span class="fl">16</span>, <span class="fl">3</span>, activation <span class="op">=</span> <span class="st">"relu"</span><span class="op">)</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu"><a href="../reference/layer_conv_2d_transpose.html">layer_conv_2d_transpose</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">3</span>, activation <span class="op">=</span> <span class="st">"relu"</span><span class="op">)</span></span>
 <span></span>
 <span><span class="va">decoder</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/keras_model.html">keras_model</a></span><span class="op">(</span><span class="va">decoder_input</span>, <span class="va">decoder_output</span>, name <span class="op">=</span> <span class="st">"decoder"</span><span class="op">)</span></span>
@@ -451,7 +451,7 @@ in two calls to obtain the autoencoder model:</p>
 <span><span class="co">## <span style="font-weight: bold;"> Trainable params: </span><span style="color: #00AF00;">9,569</span> (37.38 KB)</span></span>
 <span><span class="co">## <span style="font-weight: bold;"> Non-trainable params: </span><span style="color: #00AF00;">0</span> (0.00 B)</span></span></code></pre>
 <div class="sourceCode" id="cb31"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">autoencoder_input</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/layer_input.html">layer_input</a></span><span class="op">(</span>shape <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">28</span>, <span class="fl">28</span>, <span class="fl">1</span><span class="op">)</span>, name <span class="op">=</span> <span class="st">"img"</span><span class="op">)</span></span>
+<code class="sourceCode R"><span><span class="va">autoencoder_input</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/keras_input.html">keras_input</a></span><span class="op">(</span>shape <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">28</span>, <span class="fl">28</span>, <span class="fl">1</span><span class="op">)</span>, name <span class="op">=</span> <span class="st">"img"</span><span class="op">)</span></span>
 <span><span class="va">encoded_img</span> <span class="op">&lt;-</span> <span class="fu">encoder</span><span class="op">(</span><span class="va">autoencoder_input</span><span class="op">)</span></span>
 <span><span class="va">decoded_img</span> <span class="op">&lt;-</span> <span class="fu">decoder</span><span class="op">(</span><span class="va">encoded_img</span><span class="op">)</span></span>
 <span><span class="va">autoencoder</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/keras_model.html">keras_model</a></span><span class="op">(</span><span class="va">autoencoder_input</span>, <span class="va">decoded_img</span>,</span>
@@ -477,7 +477,7 @@ ensemble a set of models into a single model that averages their
 predictions:</p>
 <div class="sourceCode" id="cb33"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">get_model</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="op">)</span> <span class="op">{</span></span>
-<span>  <span class="va">inputs</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/layer_input.html">layer_input</a></span><span class="op">(</span>shape <span class="op">=</span> <span class="fl">128</span><span class="op">)</span></span>
+<span>  <span class="va">inputs</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/keras_input.html">keras_input</a></span><span class="op">(</span>shape <span class="op">=</span> <span class="fl">128</span><span class="op">)</span></span>
 <span>  <span class="va">outputs</span> <span class="op">&lt;-</span> <span class="va">inputs</span> <span class="op">|&gt;</span> <span class="fu"><a href="../reference/layer_dense.html">layer_dense</a></span><span class="op">(</span><span class="fl">1</span><span class="op">)</span></span>
 <span>  <span class="fu"><a href="../reference/keras_model.html">keras_model</a></span><span class="op">(</span><span class="va">inputs</span>, <span class="va">outputs</span><span class="op">)</span></span>
 <span><span class="op">}</span></span>
@@ -486,7 +486,7 @@ predictions:</p>
 <span><span class="va">model2</span> <span class="op">&lt;-</span> <span class="fu">get_model</span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="va">model3</span> <span class="op">&lt;-</span> <span class="fu">get_model</span><span class="op">(</span><span class="op">)</span></span>
 <span></span>
-<span><span class="va">inputs</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/layer_input.html">layer_input</a></span><span class="op">(</span>shape <span class="op">=</span> <span class="fl">128</span><span class="op">)</span></span>
+<span><span class="va">inputs</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/keras_input.html">keras_input</a></span><span class="op">(</span>shape <span class="op">=</span> <span class="fl">128</span><span class="op">)</span></span>
 <span><span class="va">y1</span> <span class="op">&lt;-</span> <span class="fu">model1</span><span class="op">(</span><span class="va">inputs</span><span class="op">)</span></span>
 <span><span class="va">y2</span> <span class="op">&lt;-</span> <span class="fu">model2</span><span class="op">(</span><span class="va">inputs</span><span class="op">)</span></span>
 <span><span class="va">y3</span> <span class="op">&lt;-</span> <span class="fu">model3</span><span class="op">(</span><span class="va">inputs</span><span class="op">)</span></span>
@@ -524,11 +524,11 @@ the set of departments).</li>
 <span><span class="va">num_departments</span> <span class="op">&lt;-</span> <span class="fl">4</span>  <span class="co"># Number of departments for predictions</span></span>
 <span></span>
 <span><span class="va">title_input</span> <span class="op">&lt;-</span> <span class="co"># Variable-length sequence of ints</span></span>
-<span>  <span class="fu"><a href="../reference/layer_input.html">layer_input</a></span><span class="op">(</span><span class="fu"><a href="../reference/shape.html">shape</a></span><span class="op">(</span><span class="cn">NA</span><span class="op">)</span>, name <span class="op">=</span> <span class="st">"title"</span><span class="op">)</span></span>
+<span>  <span class="fu"><a href="../reference/keras_input.html">keras_input</a></span><span class="op">(</span><span class="fu"><a href="../reference/shape.html">shape</a></span><span class="op">(</span><span class="cn">NA</span><span class="op">)</span>, name <span class="op">=</span> <span class="st">"title"</span><span class="op">)</span></span>
 <span><span class="va">body_input</span> <span class="op">&lt;-</span>  <span class="co"># Variable-length sequence of ints</span></span>
-<span>  <span class="fu"><a href="../reference/layer_input.html">layer_input</a></span><span class="op">(</span><span class="fu"><a href="../reference/shape.html">shape</a></span><span class="op">(</span><span class="cn">NA</span><span class="op">)</span>, name <span class="op">=</span> <span class="st">"body"</span><span class="op">)</span></span>
+<span>  <span class="fu"><a href="../reference/keras_input.html">keras_input</a></span><span class="op">(</span><span class="fu"><a href="../reference/shape.html">shape</a></span><span class="op">(</span><span class="cn">NA</span><span class="op">)</span>, name <span class="op">=</span> <span class="st">"body"</span><span class="op">)</span></span>
 <span><span class="va">tags_input</span> <span class="op">&lt;-</span>  <span class="co"># Binary vectors of size `num_tags`</span></span>
-<span>  <span class="fu"><a href="../reference/layer_input.html">layer_input</a></span><span class="op">(</span>shape <span class="op">=</span> <span class="va">num_tags</span>, name <span class="op">=</span> <span class="st">"tags"</span><span class="op">)</span></span>
+<span>  <span class="fu"><a href="../reference/keras_input.html">keras_input</a></span><span class="op">(</span>shape <span class="op">=</span> <span class="va">num_tags</span>, name <span class="op">=</span> <span class="st">"tags"</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># Embed each word in the title into a 64-dimensional vector</span></span>
 <span><span class="va">title_features</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/layer_embedding.html">layer_embedding</a></span><span class="op">(</span><span class="va">title_input</span>, <span class="va">num_words</span>, <span class="fl">64</span><span class="op">)</span></span>
@@ -564,24 +564,24 @@ the set of departments).</li>
 output. You can even assign different weights to each loss – to modulate
 their contribution to the total training loss.</p>
 <div class="sourceCode" id="cb36"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">model</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://generics.r-lib.org/reference/compile.html" class="external-link">compile</a></span><span class="op">(</span></span>
-<span>    optimizer <span class="op">=</span> <span class="fu"><a href="../reference/optimizer_rmsprop.html">optimizer_rmsprop</a></span><span class="op">(</span><span class="fl">1e-3</span><span class="op">)</span>,</span>
-<span>    loss <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span></span>
-<span>        <span class="fu"><a href="../reference/loss_binary_crossentropy.html">loss_binary_crossentropy</a></span><span class="op">(</span>from_logits <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>,</span>
-<span>        <span class="fu"><a href="../reference/loss_categorical_crossentropy.html">loss_categorical_crossentropy</a></span><span class="op">(</span>from_logits <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
-<span>    <span class="op">)</span>,</span>
-<span>    loss_weights <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1.0</span>, <span class="fl">0.2</span><span class="op">)</span></span>
+<code class="sourceCode R"><span><span class="va">model</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://generics.r-lib.org/reference/compile.html" class="external-link">compile</a></span><span class="op">(</span></span>
+<span>  optimizer <span class="op">=</span> <span class="fu"><a href="../reference/optimizer_rmsprop.html">optimizer_rmsprop</a></span><span class="op">(</span><span class="fl">1e-3</span><span class="op">)</span>,</span>
+<span>  loss <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span></span>
+<span>    <span class="fu"><a href="../reference/loss_binary_crossentropy.html">loss_binary_crossentropy</a></span><span class="op">(</span>from_logits <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>,</span>
+<span>    <span class="fu"><a href="../reference/loss_categorical_crossentropy.html">loss_categorical_crossentropy</a></span><span class="op">(</span>from_logits <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
+<span>  <span class="op">)</span>,</span>
+<span>  loss_weights <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1.0</span>, <span class="fl">0.2</span><span class="op">)</span></span>
 <span><span class="op">)</span></span></code></pre></div>
 <p>Since the output layers have different names, you could also specify
 the losses and loss weights with the corresponding layer names:</p>
 <div class="sourceCode" id="cb37"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">model</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://generics.r-lib.org/reference/compile.html" class="external-link">compile</a></span><span class="op">(</span></span>
-<span>    optimizer <span class="op">=</span> <span class="fu"><a href="../reference/optimizer_rmsprop.html">optimizer_rmsprop</a></span><span class="op">(</span><span class="fl">1e-3</span><span class="op">)</span>,</span>
-<span>    loss <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span></span>
-<span>        priority <span class="op">=</span> <span class="fu"><a href="../reference/loss_binary_crossentropy.html">loss_binary_crossentropy</a></span><span class="op">(</span>from_logits <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>,</span>
-<span>        department <span class="op">=</span> <span class="fu"><a href="../reference/loss_categorical_crossentropy.html">loss_categorical_crossentropy</a></span><span class="op">(</span>from_logits <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
-<span>    <span class="op">)</span>,</span>
-<span>    loss_weights <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>priority <span class="op">=</span> <span class="fl">1.0</span>, department <span class="op">=</span> <span class="fl">0.2</span><span class="op">)</span></span>
+<code class="sourceCode R"><span><span class="va">model</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://generics.r-lib.org/reference/compile.html" class="external-link">compile</a></span><span class="op">(</span></span>
+<span>  optimizer <span class="op">=</span> <span class="fu"><a href="../reference/optimizer_rmsprop.html">optimizer_rmsprop</a></span><span class="op">(</span><span class="fl">1e-3</span><span class="op">)</span>,</span>
+<span>  loss <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span></span>
+<span>    priority <span class="op">=</span> <span class="fu"><a href="../reference/loss_binary_crossentropy.html">loss_binary_crossentropy</a></span><span class="op">(</span>from_logits <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>,</span>
+<span>    department <span class="op">=</span> <span class="fu"><a href="../reference/loss_categorical_crossentropy.html">loss_categorical_crossentropy</a></span><span class="op">(</span>from_logits <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
+<span>  <span class="op">)</span>,</span>
+<span>  loss_weights <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>priority <span class="op">=</span> <span class="fl">1.0</span>, department <span class="op">=</span> <span class="fl">0.2</span><span class="op">)</span></span>
 <span><span class="op">)</span></span></code></pre></div>
 <p>Train the model by passing lists of NumPy arrays of inputs and
 targets:</p>
@@ -595,16 +595,16 @@ targets:</p>
 <span><span class="va">priority_targets</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/random_normal.html">random_normal</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1280</span>, <span class="fl">1</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="va">dept_targets</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/random_integer.html">random_integer</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1280</span>, <span class="va">num_departments</span><span class="op">)</span>, <span class="fl">0</span>, <span class="fl">2</span><span class="op">)</span></span>
 <span></span>
-<span><span class="va">model</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://generics.r-lib.org/reference/fit.html" class="external-link">fit</a></span><span class="op">(</span></span>
-<span>    <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>title <span class="op">=</span> <span class="va">title_data</span>, body <span class="op">=</span> <span class="va">body_data</span>, tags <span class="op">=</span> <span class="va">tags_data</span><span class="op">)</span>,</span>
-<span>    <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>priority <span class="op">=</span> <span class="va">priority_targets</span>, department <span class="op">=</span> <span class="va">dept_targets</span><span class="op">)</span>,</span>
-<span>    epochs<span class="op">=</span><span class="fl">2</span>,</span>
-<span>    batch_size<span class="op">=</span><span class="fl">32</span>,</span>
+<span><span class="va">model</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://generics.r-lib.org/reference/fit.html" class="external-link">fit</a></span><span class="op">(</span></span>
+<span>  <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>title <span class="op">=</span> <span class="va">title_data</span>, body <span class="op">=</span> <span class="va">body_data</span>, tags <span class="op">=</span> <span class="va">tags_data</span><span class="op">)</span>,</span>
+<span>  <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>priority <span class="op">=</span> <span class="va">priority_targets</span>, department <span class="op">=</span> <span class="va">dept_targets</span><span class="op">)</span>,</span>
+<span>  epochs <span class="op">=</span> <span class="fl">2</span>,</span>
+<span>  batch_size <span class="op">=</span> <span class="fl">32</span></span>
 <span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">## Epoch 1/2</span></span>
-<span><span class="co">## 40/40 - 3s - 69ms/step - loss: 0.3948</span></span>
+<span><span class="co">## 40/40 - 3s - 73ms/step - loss: 0.3948</span></span>
 <span><span class="co">## Epoch 2/2</span></span>
-<span><span class="co">## 40/40 - 0s - 6ms/step - loss: 0.1971</span></span></code></pre>
+<span><span class="co">## 40/40 - 0s - 5ms/step - loss: 0.1971</span></span></code></pre>
 <p>When calling fit with a <code>Dataset</code> object, it should yield
 either a list of lists like
 <code>list(list(title_data, body_data, tags_data), list(priority_targets, dept_targets))</code>
@@ -623,30 +623,30 @@ sequentially, which the <code>Sequential</code> API cannot handle.</p>
 <p>A common use case for this is residual connections. Let’s build a toy
 ResNet model for CIFAR10 to demonstrate this:</p>
 <div class="sourceCode" id="cb40"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">inputs</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/layer_input.html">layer_input</a></span><span class="op">(</span>shape <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">32</span>, <span class="fl">32</span>, <span class="fl">3</span><span class="op">)</span>, name<span class="op">=</span><span class="st">"img"</span><span class="op">)</span></span>
-<span><span class="va">block_1_output</span> <span class="op">&lt;-</span> <span class="va">inputs</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span></span>
-<span>  <span class="fu"><a href="../reference/layer_conv_2d.html">layer_conv_2d</a></span><span class="op">(</span>filters <span class="op">=</span> <span class="fl">32</span>, kernel_size <span class="op">=</span> <span class="fl">3</span>, activation <span class="op">=</span> <span class="st">"relu"</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span></span>
-<span>  <span class="fu"><a href="../reference/layer_conv_2d.html">layer_conv_2d</a></span><span class="op">(</span>filters <span class="op">=</span> <span class="fl">64</span>, kernel_size <span class="op">=</span> <span class="fl">3</span>, activation <span class="op">=</span> <span class="st">"relu"</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span></span>
+<code class="sourceCode R"><span><span class="va">inputs</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/keras_input.html">keras_input</a></span><span class="op">(</span>shape <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">32</span>, <span class="fl">32</span>, <span class="fl">3</span><span class="op">)</span>, name <span class="op">=</span> <span class="st">"img"</span><span class="op">)</span></span>
+<span><span class="va">block_1_output</span> <span class="op">&lt;-</span> <span class="va">inputs</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu"><a href="../reference/layer_conv_2d.html">layer_conv_2d</a></span><span class="op">(</span><span class="fl">32</span>, kernel_size <span class="op">=</span> <span class="fl">3</span>, activation <span class="op">=</span> <span class="st">"relu"</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu"><a href="../reference/layer_conv_2d.html">layer_conv_2d</a></span><span class="op">(</span><span class="fl">64</span>, kernel_size <span class="op">=</span> <span class="fl">3</span>, activation <span class="op">=</span> <span class="st">"relu"</span><span class="op">)</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu"><a href="../reference/layer_max_pooling_2d.html">layer_max_pooling_2d</a></span><span class="op">(</span>pool_size <span class="op">=</span> <span class="fl">3</span><span class="op">)</span></span>
 <span></span>
-<span><span class="va">block_2_output</span> <span class="op">&lt;-</span> <span class="va">block_1_output</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span></span>
-<span>  <span class="fu"><a href="../reference/layer_conv_2d.html">layer_conv_2d</a></span><span class="op">(</span>filters <span class="op">=</span> <span class="fl">32</span>, kernel_size <span class="op">=</span> <span class="fl">3</span>, activation <span class="op">=</span> <span class="st">"relu"</span>, padding <span class="op">=</span> <span class="st">"same"</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span></span>
-<span>  <span class="fu"><a href="../reference/layer_conv_2d.html">layer_conv_2d</a></span><span class="op">(</span>filters <span class="op">=</span> <span class="fl">64</span>, kernel_size <span class="op">=</span> <span class="fl">3</span>, activation <span class="op">=</span> <span class="st">"relu"</span>, padding <span class="op">=</span> <span class="st">"same"</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span></span>
+<span><span class="va">block_2_output</span> <span class="op">&lt;-</span> <span class="va">block_1_output</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu"><a href="../reference/layer_conv_2d.html">layer_conv_2d</a></span><span class="op">(</span><span class="fl">32</span>, kernel_size <span class="op">=</span> <span class="fl">3</span>, activation <span class="op">=</span> <span class="st">"relu"</span>, padding <span class="op">=</span> <span class="st">"same"</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu"><a href="../reference/layer_conv_2d.html">layer_conv_2d</a></span><span class="op">(</span><span class="fl">64</span>, kernel_size <span class="op">=</span> <span class="fl">3</span>, activation <span class="op">=</span> <span class="st">"relu"</span>, padding <span class="op">=</span> <span class="st">"same"</span><span class="op">)</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu"><a href="../reference/layer_add.html">layer_add</a></span><span class="op">(</span><span class="va">block_1_output</span><span class="op">)</span></span>
 <span></span>
-<span><span class="va">block_3_output</span> <span class="op">&lt;-</span> <span class="va">block_2_output</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span></span>
-<span>  <span class="fu"><a href="../reference/layer_conv_2d.html">layer_conv_2d</a></span><span class="op">(</span>filters <span class="op">=</span> <span class="fl">64</span>, kernel_size <span class="op">=</span> <span class="fl">3</span>, activation <span class="op">=</span> <span class="st">"relu"</span>, padding <span class="op">=</span> <span class="st">"same"</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span></span>
-<span>  <span class="fu"><a href="../reference/layer_conv_2d.html">layer_conv_2d</a></span><span class="op">(</span>filters <span class="op">=</span> <span class="fl">64</span>, kernel_size <span class="op">=</span> <span class="fl">3</span>, activation <span class="op">=</span> <span class="st">"relu"</span>, padding <span class="op">=</span> <span class="st">"same"</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span></span>
+<span><span class="va">block_3_output</span> <span class="op">&lt;-</span> <span class="va">block_2_output</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu"><a href="../reference/layer_conv_2d.html">layer_conv_2d</a></span><span class="op">(</span><span class="fl">64</span>, kernel_size <span class="op">=</span> <span class="fl">3</span>, activation <span class="op">=</span> <span class="st">"relu"</span>, padding <span class="op">=</span> <span class="st">"same"</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu"><a href="../reference/layer_conv_2d.html">layer_conv_2d</a></span><span class="op">(</span><span class="fl">64</span>, kernel_size <span class="op">=</span> <span class="fl">3</span>, activation <span class="op">=</span> <span class="st">"relu"</span>, padding <span class="op">=</span> <span class="st">"same"</span><span class="op">)</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu"><a href="../reference/layer_add.html">layer_add</a></span><span class="op">(</span><span class="va">block_2_output</span><span class="op">)</span></span>
 <span></span>
-<span><span class="va">outputs</span> <span class="op">&lt;-</span> <span class="va">block_3_output</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span></span>
-<span>  <span class="fu"><a href="../reference/layer_conv_2d.html">layer_conv_2d</a></span><span class="op">(</span><span class="fl">64</span>, <span class="fl">3</span>, activation <span class="op">=</span> <span class="st">"relu"</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span></span>
-<span>  <span class="fu"><a href="../reference/layer_global_average_pooling_2d.html">layer_global_average_pooling_2d</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span></span>
-<span>  <span class="fu"><a href="../reference/layer_dense.html">layer_dense</a></span><span class="op">(</span><span class="fl">256</span>, activation <span class="op">=</span> <span class="st">"relu"</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span></span>
-<span>  <span class="fu"><a href="../reference/layer_dropout.html">layer_dropout</a></span><span class="op">(</span><span class="fl">0.5</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span></span>
+<span><span class="va">outputs</span> <span class="op">&lt;-</span> <span class="va">block_3_output</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu"><a href="../reference/layer_conv_2d.html">layer_conv_2d</a></span><span class="op">(</span><span class="fl">64</span>, <span class="fl">3</span>, activation <span class="op">=</span> <span class="st">"relu"</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu"><a href="../reference/layer_global_average_pooling_2d.html">layer_global_average_pooling_2d</a></span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu"><a href="../reference/layer_dense.html">layer_dense</a></span><span class="op">(</span><span class="fl">256</span>, activation <span class="op">=</span> <span class="st">"relu"</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu"><a href="../reference/layer_dropout.html">layer_dropout</a></span><span class="op">(</span><span class="fl">0.5</span><span class="op">)</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu"><a href="../reference/layer_dense.html">layer_dense</a></span><span class="op">(</span><span class="fl">10</span><span class="op">)</span></span>
 <span></span>
-<span><span class="va">model</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/keras_model.html">keras_model</a></span><span class="op">(</span><span class="va">inputs</span>, <span class="va">outputs</span>, name<span class="op">=</span><span class="st">"toy_resnet"</span><span class="op">)</span></span>
+<span><span class="va">model</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/keras_model.html">keras_model</a></span><span class="op">(</span><span class="va">inputs</span>, <span class="va">outputs</span>, name <span class="op">=</span> <span class="st">"toy_resnet"</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary</a></span><span class="op">(</span><span class="va">model</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">## <span style="font-weight: bold;">Model: "toy_resnet"</span></span></span>
 <span><span class="co">## ┏━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━━┓</span></span>
@@ -702,22 +702,22 @@ ResNet model for CIFAR10 to demonstrate this:</p>
 <span><span class="va">x_train</span> <span class="op">&lt;-</span> <span class="va">x_train</span> <span class="op">/</span> <span class="fl">255.0</span></span>
 <span><span class="va">x_test</span> <span class="op">&lt;-</span> <span class="va">x_test</span> <span class="op">/</span> <span class="fl">255.0</span></span>
 <span></span>
-<span><span class="va">model</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://generics.r-lib.org/reference/compile.html" class="external-link">compile</a></span><span class="op">(</span></span>
-<span>    optimizer <span class="op">=</span> <span class="fu"><a href="../reference/optimizer_rmsprop.html">optimizer_rmsprop</a></span><span class="op">(</span><span class="fl">1e-3</span><span class="op">)</span>,</span>
-<span>    loss <span class="op">=</span> <span class="fu"><a href="../reference/loss_sparse_categorical_crossentropy.html">loss_sparse_categorical_crossentropy</a></span><span class="op">(</span>from_logits <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>,</span>
-<span>    metrics <span class="op">=</span> <span class="st">"acc"</span></span>
+<span><span class="va">model</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://generics.r-lib.org/reference/compile.html" class="external-link">compile</a></span><span class="op">(</span></span>
+<span>  optimizer <span class="op">=</span> <span class="fu"><a href="../reference/optimizer_rmsprop.html">optimizer_rmsprop</a></span><span class="op">(</span><span class="fl">1e-3</span><span class="op">)</span>,</span>
+<span>  loss <span class="op">=</span> <span class="fu"><a href="../reference/loss_sparse_categorical_crossentropy.html">loss_sparse_categorical_crossentropy</a></span><span class="op">(</span>from_logits <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>,</span>
+<span>  metrics <span class="op">=</span> <span class="st">"acc"</span></span>
 <span><span class="op">)</span></span>
 <span><span class="co"># We restrict the data to the first 1000 samples so as to limit the</span></span>
 <span><span class="co"># guide render time.</span></span>
 <span><span class="co"># Try to train on the entire dataset until convergence!</span></span>
-<span><span class="va">model</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://generics.r-lib.org/reference/fit.html" class="external-link">fit</a></span><span class="op">(</span></span>
-<span>    <span class="va">x_train</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">1000</span>,,,<span class="op">]</span>,</span>
-<span>    <span class="va">y_train</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">1000</span>,<span class="op">]</span>,</span>
-<span>    batch_size<span class="op">=</span><span class="fl">64</span>,</span>
-<span>    epochs<span class="op">=</span><span class="fl">1</span>,</span>
-<span>    validation_split<span class="op">=</span><span class="fl">0.2</span></span>
+<span><span class="va">model</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://generics.r-lib.org/reference/fit.html" class="external-link">fit</a></span><span class="op">(</span></span>
+<span>  <span class="va">x_train</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">1000</span>, , , <span class="op">]</span>,</span>
+<span>  <span class="va">y_train</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">1000</span>, <span class="op">]</span>,</span>
+<span>  batch_size <span class="op">=</span> <span class="fl">64</span>,</span>
+<span>  epochs <span class="op">=</span> <span class="fl">1</span>,</span>
+<span>  validation_split <span class="op">=</span> <span class="fl">0.2</span></span>
 <span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">## 13/13 - 7s - 534ms/step - acc: 0.1325 - loss: 2.3036 - val_acc: 0.1150 - val_loss: 2.3075</span></span></code></pre>
+<pre><code><span><span class="co">## 13/13 - 8s - 598ms/step - acc: 0.1275 - loss: 2.3035 - val_acc: 0.1150 - val_loss: 2.3069</span></span></code></pre>
 </div>
 </div>
 <div class="section level2">
@@ -741,10 +741,10 @@ shared across two different text inputs:</p>
 <span><span class="va">shared_embedding</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/layer_embedding.html">layer_embedding</a></span><span class="op">(</span>input_dim <span class="op">=</span> <span class="fl">1000</span>, output_dim <span class="op">=</span> <span class="fl">128</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># Variable-length sequence of integers</span></span>
-<span><span class="va">text_input_a</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/layer_input.html">layer_input</a></span><span class="op">(</span>shape <span class="op">=</span> <span class="fu"><a href="../reference/shape.html">shape</a></span><span class="op">(</span><span class="cn">NULL</span><span class="op">)</span>, dtype<span class="op">=</span><span class="st">"int32"</span><span class="op">)</span></span>
+<span><span class="va">text_input_a</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/keras_input.html">keras_input</a></span><span class="op">(</span>shape <span class="op">=</span> <span class="fu"><a href="../reference/shape.html">shape</a></span><span class="op">(</span><span class="cn">NA</span><span class="op">)</span>, dtype<span class="op">=</span><span class="st">"int32"</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># Variable-length sequence of integers</span></span>
-<span><span class="va">text_input_b</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/layer_input.html">layer_input</a></span><span class="op">(</span>shape <span class="op">=</span> <span class="fu"><a href="../reference/shape.html">shape</a></span><span class="op">(</span><span class="cn">NULL</span><span class="op">)</span>, dtype<span class="op">=</span><span class="st">"int32"</span><span class="op">)</span></span>
+<span><span class="va">text_input_b</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/keras_input.html">keras_input</a></span><span class="op">(</span>shape <span class="op">=</span> <span class="fu"><a href="../reference/shape.html">shape</a></span><span class="op">(</span><span class="cn">NA</span><span class="op">)</span>, dtype<span class="op">=</span><span class="st">"int32"</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># Reuse the same layer to encode both inputs</span></span>
 <span><span class="va">encoded_input_a</span> <span class="op">&lt;-</span> <span class="fu">shared_embedding</span><span class="op">(</span><span class="va">text_input_a</span><span class="op">)</span></span>
@@ -770,7 +770,8 @@ querying the graph data structure:</p>
 <p>Use these features to create a new feature-extraction model that
 returns the values of the intermediate layer activations:</p>
 <div class="sourceCode" id="cb48"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">feat_extraction_model</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/keras_model.html">keras_model</a></span><span class="op">(</span>inputs <span class="op">=</span> <span class="va">vgg19</span><span class="op">$</span><span class="va">input</span>, outputs <span class="op">=</span> <span class="va">features_list</span><span class="op">)</span></span>
+<code class="sourceCode R"><span><span class="va">feat_extraction_model</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/keras_model.html">keras_model</a></span><span class="op">(</span>inputs <span class="op">=</span> <span class="va">vgg19</span><span class="op">$</span><span class="va">input</span>,</span>
+<span>                                     outputs <span class="op">=</span> <span class="va">features_list</span><span class="op">)</span></span>
 <span></span>
 <span><span class="va">img</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/random_normal.html">random_normal</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">224</span>, <span class="fl">224</span>, <span class="fl">3</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="va">extracted_features</span> <span class="op">&lt;-</span> <span class="fu">feat_extraction_model</span><span class="op">(</span><span class="va">img</span><span class="op">)</span></span></code></pre></div>
@@ -815,7 +816,7 @@ layers and models</a> guide.</p>
 <code><a href="../reference/layer_dense.html">layer_dense()</a></code>:</p>
 <div class="sourceCode" id="cb49"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">custom_dense</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/Layer.html">Layer</a></span><span class="op">(</span></span>
-<span>  <span class="st">"CustomDense"</span>,</span>
+<span>  classname <span class="op">=</span> <span class="st">"CustomDense"</span>,</span>
 <span>  initialize <span class="op">=</span> <span class="kw">function</span><span class="op">(</span><span class="va">units</span> <span class="op">=</span> <span class="fl">32</span><span class="op">)</span> <span class="op">{</span></span>
 <span>    <span class="va">super</span><span class="op">$</span><span class="fu">initialize</span><span class="op">(</span><span class="op">)</span></span>
 <span>    <span class="va">self</span><span class="op">$</span><span class="va">units</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/integer.html" class="external-link">as.integer</a></span><span class="op">(</span><span class="va">units</span><span class="op">)</span></span>
@@ -837,7 +838,7 @@ layers and models</a> guide.</p>
 <span>  <span class="op">}</span></span>
 <span><span class="op">)</span></span>
 <span></span>
-<span><span class="va">inputs</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/layer_input.html">layer_input</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">4</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="va">inputs</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/keras_input.html">keras_input</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">4</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="va">outputs</span> <span class="op">&lt;-</span> <span class="fu">custom_dense</span><span class="op">(</span><span class="va">inputs</span>, <span class="fl">10</span><span class="op">)</span></span>
 <span></span>
 <span><span class="va">model</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/keras_model.html">keras_model</a></span><span class="op">(</span><span class="va">inputs</span>, <span class="va">outputs</span><span class="op">)</span></span></code></pre></div>
@@ -845,7 +846,8 @@ layers and models</a> guide.</p>
 <code><a href="../reference/get_config.html">get_config()</a></code> method that returns the constructor arguments
 of the layer instance:</p>
 <div class="sourceCode" id="cb50"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">custom_dense</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/Layer.html">Layer</a></span><span class="op">(</span><span class="st">"CustomDense"</span>,</span>
+<code class="sourceCode R"><span><span class="va">custom_dense</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/Layer.html">Layer</a></span><span class="op">(</span></span>
+<span>  classname <span class="op">=</span> <span class="st">"CustomDense"</span>,</span>
 <span></span>
 <span>  initialize <span class="op">=</span> <span class="kw">function</span><span class="op">(</span><span class="va">units</span> <span class="op">=</span> <span class="fl">32</span>, <span class="va">...</span><span class="op">)</span> <span class="op">{</span></span>
 <span>    <span class="va">super</span><span class="op">$</span><span class="fu">initialize</span><span class="op">(</span><span class="op">)</span></span>
@@ -874,13 +876,14 @@ of the layer instance:</p>
 <span>  <span class="op">}</span></span>
 <span><span class="op">)</span></span>
 <span></span>
-<span><span class="va">inputs</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/layer_input.html">layer_input</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">4</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="va">inputs</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/keras_input.html">keras_input</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">4</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="va">outputs</span> <span class="op">&lt;-</span> <span class="fu">custom_dense</span><span class="op">(</span><span class="va">inputs</span>, <span class="fl">10</span><span class="op">)</span></span>
 <span></span>
 <span><span class="va">model</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/keras_model.html">keras_model</a></span><span class="op">(</span><span class="va">inputs</span>, <span class="va">outputs</span><span class="op">)</span></span>
 <span><span class="va">config</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/get_config.html">get_config</a></span><span class="op">(</span><span class="va">model</span><span class="op">)</span></span>
 <span></span>
-<span><span class="va">new_model</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/get_config.html">from_config</a></span><span class="op">(</span><span class="va">config</span>, custom_objects<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>CustomDense<span class="op">=</span><span class="va">custom_dense</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
+<span><span class="va">new_model</span> <span class="op">&lt;-</span></span>
+<span>  <span class="fu"><a href="../reference/get_config.html">from_config</a></span><span class="op">(</span><span class="va">config</span>, custom_objects <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>CustomDense <span class="op">=</span> <span class="va">custom_dense</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <p>Optionally, implement the class method
 <code>from_config(cls, config)</code> which is used when recreating a
 layer instance given its config dictionary. The default implementation
@@ -915,26 +918,27 @@ are R and Python (byte)code, not data structures).</p>
 <h4 id="less-verbose">Less verbose<a class="anchor" aria-label="anchor" href="#less-verbose"></a>
 </h4>
 <p>There is no <code>super$initialize(...)</code>, no
-<code>call = function(self, ...):</code>, etc.</p>
+<code>call = function(...)</code>, no <code>self$...</code>, etc.</p>
 <p>Compare:</p>
 <div class="sourceCode" id="cb52"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">inputs</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/layer_input.html">layer_input</a></span><span class="op">(</span>shape<span class="op">=</span><span class="fu"><a href="../reference/shape.html">shape</a></span><span class="op">(</span><span class="fl">32</span><span class="op">)</span><span class="op">)</span></span>
-<span><span class="va">outputs</span> <span class="op">&lt;-</span> <span class="va">inputs</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span></span>
-<span>  <span class="fu"><a href="../reference/layer_dense.html">layer_dense</a></span><span class="op">(</span><span class="fl">64</span>, activation <span class="op">=</span> <span class="st">"relu"</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span></span>
+<code class="sourceCode R"><span><span class="va">inputs</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/keras_input.html">keras_input</a></span><span class="op">(</span>shape <span class="op">=</span> <span class="fu"><a href="../reference/shape.html">shape</a></span><span class="op">(</span><span class="fl">32</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="va">outputs</span> <span class="op">&lt;-</span> <span class="va">inputs</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu"><a href="../reference/layer_dense.html">layer_dense</a></span><span class="op">(</span><span class="fl">64</span>, activation <span class="op">=</span> <span class="st">"relu"</span><span class="op">)</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu"><a href="../reference/layer_dense.html">layer_dense</a></span><span class="op">(</span><span class="fl">10</span><span class="op">)</span></span>
 <span><span class="va">mlp</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/keras_model.html">keras_model</a></span><span class="op">(</span><span class="va">inputs</span>, <span class="va">outputs</span><span class="op">)</span></span></code></pre></div>
 <p>With the subclassed version:</p>
 <div class="sourceCode" id="cb53"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">MLP</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/new_model_class.html">new_model_class</a></span><span class="op">(</span></span>
-<span>  <span class="st">"MLP"</span>,</span>
+<code class="sourceCode R"><span><span class="va">MLP</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/Model.html">Model</a></span><span class="op">(</span></span>
+<span>  classname <span class="op">=</span> <span class="st">"MLP"</span>,</span>
 <span>  initialize <span class="op">=</span> <span class="kw">function</span><span class="op">(</span><span class="va">...</span><span class="op">)</span> <span class="op">{</span></span>
 <span>    <span class="va">super</span><span class="op">$</span><span class="fu">initialize</span><span class="op">(</span><span class="va">...</span><span class="op">)</span></span>
 <span>    <span class="va">self</span><span class="op">$</span><span class="va">dense_1</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/layer_dense.html">layer_dense</a></span><span class="op">(</span>units <span class="op">=</span> <span class="fl">64</span>, activation <span class="op">=</span> <span class="st">"relu"</span><span class="op">)</span></span>
 <span>    <span class="va">self</span><span class="op">$</span><span class="va">dense_2</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/layer_dense.html">layer_dense</a></span><span class="op">(</span>units <span class="op">=</span> <span class="fl">10</span><span class="op">)</span></span>
 <span>  <span class="op">}</span>,</span>
 <span>  call <span class="op">=</span> <span class="kw">function</span><span class="op">(</span><span class="va">inputs</span><span class="op">)</span> <span class="op">{</span></span>
-<span>    <span class="va">x</span> <span class="op">&lt;-</span> <span class="va">self</span><span class="op">$</span><span class="fu">dense_1</span><span class="op">(</span><span class="va">inputs</span><span class="op">)</span></span>
-<span>    <span class="va">self</span><span class="op">$</span><span class="fu">dense_2</span><span class="op">(</span><span class="va">x</span><span class="op">)</span></span>
+<span>    <span class="va">inputs</span> <span class="op">|&gt;</span></span>
+<span>      <span class="va">self</span><span class="op">$</span><span class="fu">dense_1</span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>      <span class="va">self</span><span class="op">$</span><span class="fu">dense_2</span><span class="op">(</span><span class="op">)</span></span>
 <span>  <span class="op">}</span></span>
 <span><span class="op">)</span></span>
 <span></span>
@@ -964,7 +968,8 @@ intermediate nodes in this graph. For example, to extract and reuse the
 activations of intermediate layers (as seen in a previous example):</p>
 <div class="sourceCode" id="cb54"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">features_list</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/lapply.html" class="external-link">lapply</a></span><span class="op">(</span><span class="va">vgg19</span><span class="op">$</span><span class="va">layers</span>, <span class="kw">function</span><span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="va">x</span><span class="op">$</span><span class="va">output</span><span class="op">)</span></span>
-<span><span class="va">feat_extraction_model</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/keras_model.html">keras_model</a></span><span class="op">(</span>inputs <span class="op">=</span> <span class="va">vgg19</span><span class="op">$</span><span class="va">input</span>, outputs <span class="op">=</span> <span class="va">features_list</span><span class="op">)</span></span></code></pre></div>
+<span><span class="va">feat_extraction_model</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/keras_model.html">keras_model</a></span><span class="op">(</span>inputs <span class="op">=</span> <span class="va">vgg19</span><span class="op">$</span><span class="va">input</span>,</span>
+<span>                                     outputs <span class="op">=</span> <span class="va">features_list</span><span class="op">)</span></span></code></pre></div>
 </div>
 <div class="section level4">
 <h4 id="a-functional-model-can-be-serialized-or-cloned">A functional model can be serialized or cloned<a class="anchor" aria-label="anchor" href="#a-functional-model-can-be-serialized-or-cloned"></a>
@@ -1008,15 +1013,15 @@ model as part of a subclassed model or layer:</p>
 <span><span class="va">input_dim</span> <span class="op">&lt;-</span> <span class="fl">5</span></span>
 <span></span>
 <span><span class="co"># Define a Functional model</span></span>
-<span><span class="va">inputs</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/layer_input.html">layer_input</a></span><span class="op">(</span><span class="fu"><a href="../reference/shape.html">shape</a></span><span class="op">(</span><span class="cn">NULL</span>, <span class="va">units</span><span class="op">)</span><span class="op">)</span></span>
-<span><span class="va">outputs</span> <span class="op">&lt;-</span> <span class="va">inputs</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span></span>
-<span>  <span class="fu"><a href="../reference/layer_global_average_pooling_1d.html">layer_global_average_pooling_1d</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span></span>
+<span><span class="va">inputs</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/keras_input.html">keras_input</a></span><span class="op">(</span><span class="fu"><a href="../reference/shape.html">shape</a></span><span class="op">(</span><span class="cn">NA</span>, <span class="va">units</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="va">outputs</span> <span class="op">&lt;-</span> <span class="va">inputs</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu"><a href="../reference/layer_global_average_pooling_1d.html">layer_global_average_pooling_1d</a></span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu"><a href="../reference/layer_dense.html">layer_dense</a></span><span class="op">(</span>units <span class="op">=</span> <span class="fl">1</span><span class="op">)</span></span>
 <span></span>
 <span><span class="va">model</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/keras_model.html">keras_model</a></span><span class="op">(</span><span class="va">inputs</span>, <span class="va">outputs</span><span class="op">)</span></span>
 <span></span>
-<span><span class="va">custom_rnn</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/new_layer_class.html">new_layer_class</a></span><span class="op">(</span></span>
-<span>  <span class="st">"custom_rnn"</span>,</span>
+<span><span class="va">layer_custom_rnn</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/Layer.html">Layer</a></span><span class="op">(</span></span>
+<span>  classname <span class="op">=</span> <span class="st">"CustomRNN"</span>,</span>
 <span>  initialize <span class="op">=</span> <span class="kw">function</span><span class="op">(</span><span class="va">...</span><span class="op">)</span> <span class="op">{</span></span>
 <span>    <span class="va">super</span><span class="op">$</span><span class="fu">initialize</span><span class="op">(</span><span class="va">...</span><span class="op">)</span></span>
 <span>    <span class="va">self</span><span class="op">$</span><span class="va">units</span> <span class="op">&lt;-</span> <span class="va">units</span></span>
@@ -1039,32 +1044,32 @@ model as part of a subclassed model or layer:</p>
 <span>  <span class="op">}</span></span>
 <span><span class="op">)</span></span>
 <span></span>
-<span><span class="va">rnn_model</span> <span class="op">&lt;-</span> <span class="fu">custom_rnn</span><span class="op">(</span><span class="op">)</span></span>
-<span><span class="va">out</span> <span class="op">&lt;-</span> <span class="fu">rnn_model</span><span class="op">(</span><span class="fu"><a href="../reference/op_zeros.html">op_zeros</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="va">timesteps</span>, <span class="va">input_dim</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
+<span><span class="va">rnn</span> <span class="op">&lt;-</span> <span class="fu">layer_custom_rnn</span><span class="op">(</span><span class="op">)</span></span>
+<span><span class="va">out</span> <span class="op">&lt;-</span> <span class="fu">rnn</span><span class="op">(</span><span class="fu"><a href="../reference/op_zeros.html">op_zeros</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="va">timesteps</span>, <span class="va">input_dim</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <p>You can use any subclassed layer or model in the functional API as
 long as it implements a <code>call</code> method that follows one of the
 following patterns:</p>
 <ul>
 <li>
-<code>call(self, inputs, ...)</code> – Where <code>inputs</code> is
-a tensor or a nested structure of tensors (e.g. a list of tensors), and
+<code>call(inputs, ...)</code> – Where <code>inputs</code> is a
+tensor or a nested structure of tensors (e.g. a list of tensors), and
 where <code>...</code> are non-tensor arguments (non-inputs).</li>
 <li>
-<code>call(self, inputs, training=None, ...)</code> – Where
+<code>call(inputs, training = NULL, ...)</code> – Where
 <code>training</code> is a boolean indicating whether the layer should
 behave in training mode and inference mode.</li>
 <li>
-<code>call(self, inputs, mask=NULL, ...)</code> – Where
+<code>call(inputs, mask = NULL, ...)</code> – Where
 <code>mask</code> is a boolean mask tensor (useful for RNNs, for
 instance).</li>
 <li>
-<code>call(self, inputs, training=NULL, mask=NULL, ...)</code> – Of
+<code>call(inputs, training = NULL, mask = NULL, ...)</code> – Of
 course, you can have both masking and training-specific behavior at the
 same time.</li>
 </ul>
-<p>Additionally, if you implement the <code>get_config</code> method on
-your custom Layer or model, the functional models you create will still
-be serializable and cloneable.</p>
+<p>Additionally, if you implement the <code><a href="../reference/get_config.html">get_config()</a></code> method
+on your custom Layer or model, the functional models you create will
+still be serializable and cloneable.</p>
 <p>Here’s a quick example of a custom RNN, written from scratch, being
 used in a functional model:</p>
 <div class="sourceCode" id="cb56"><pre class="downlit sourceCode r">
@@ -1073,7 +1078,7 @@ used in a functional model:</p>
 <span><span class="va">input_dim</span> <span class="op">&lt;-</span> <span class="fl">5</span></span>
 <span><span class="va">batch_size</span> <span class="op">&lt;-</span> <span class="fl">16</span></span>
 <span></span>
-<span><span class="va">custom_rnn</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/Layer.html">Layer</a></span><span class="op">(</span></span>
+<span><span class="va">layer_custom_rnn</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/Layer.html">Layer</a></span><span class="op">(</span></span>
 <span>  <span class="st">"custom_rnn"</span>,</span>
 <span>  initialize <span class="op">=</span> <span class="kw">function</span><span class="op">(</span><span class="va">...</span><span class="op">)</span> <span class="op">{</span></span>
 <span>    <span class="va">super</span><span class="op">$</span><span class="fu">initialize</span><span class="op">(</span><span class="va">...</span><span class="op">)</span></span>
@@ -1098,12 +1103,12 @@ used in a functional model:</p>
 <span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># Note that you specify a static batch size for the inputs with the `batch_shape`</span></span>
-<span><span class="co"># arg, because the inner computation of `custom_rnn` requires a static batch size</span></span>
+<span><span class="co"># arg, because the inner computation of `layer_custom_rnn()` requires a static batch size</span></span>
 <span><span class="co"># (when you create the `state` zeros tensor).</span></span>
-<span><span class="va">inputs</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/layer_input.html">layer_input</a></span><span class="op">(</span>batch_shape <span class="op">=</span> <span class="fu"><a href="../reference/shape.html">shape</a></span><span class="op">(</span><span class="va">batch_size</span>, <span class="va">timesteps</span>, <span class="va">input_dim</span><span class="op">)</span><span class="op">)</span></span>
-<span><span class="va">outputs</span> <span class="op">&lt;-</span> <span class="va">inputs</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span></span>
-<span>  <span class="fu"><a href="../reference/layer_conv_1d.html">layer_conv_1d</a></span><span class="op">(</span>filters <span class="op">=</span> <span class="fl">32</span>, kernel_size <span class="op">=</span> <span class="fl">3</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span></span>
-<span>  <span class="fu">custom_rnn</span><span class="op">(</span><span class="op">)</span></span>
+<span><span class="va">inputs</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/keras_input.html">keras_input</a></span><span class="op">(</span>batch_shape <span class="op">=</span> <span class="fu"><a href="../reference/shape.html">shape</a></span><span class="op">(</span><span class="va">batch_size</span>, <span class="va">timesteps</span>, <span class="va">input_dim</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="va">outputs</span> <span class="op">&lt;-</span> <span class="va">inputs</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu"><a href="../reference/layer_conv_1d.html">layer_conv_1d</a></span><span class="op">(</span>filters <span class="op">=</span> <span class="fl">32</span>, kernel_size <span class="op">=</span> <span class="fl">3</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu">layer_custom_rnn</span><span class="op">(</span><span class="op">)</span></span>
 <span></span>
 <span><span class="va">model</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/keras_model.html">keras_model</a></span><span class="op">(</span><span class="va">inputs</span>, <span class="va">outputs</span><span class="op">)</span></span>
 <span><span class="va">out</span> <span class="op">&lt;-</span> <span class="fu">model</span><span class="op">(</span><span class="fu"><a href="../reference/op_zeros.html">op_zeros</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">10</span>, <span class="fl">5</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>

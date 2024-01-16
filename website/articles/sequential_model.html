@@ -117,9 +117,9 @@ stack of layers</strong> where each layer has <strong>exactly one input
 tensor and one output tensor</strong>.</p>
 <p>Schematically, the following <code>Sequential</code> model:</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">model</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/keras_model_sequential.html">keras_model_sequential</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span></span>
-<span>  <span class="fu"><a href="../reference/layer_dense.html">layer_dense</a></span><span class="op">(</span>units <span class="op">=</span> <span class="fl">2</span>, activation <span class="op">=</span> <span class="st">"relu"</span>, name <span class="op">=</span> <span class="st">"layer1"</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span></span>
-<span>  <span class="fu"><a href="../reference/layer_dense.html">layer_dense</a></span><span class="op">(</span>units <span class="op">=</span> <span class="fl">3</span>, activation <span class="op">=</span> <span class="st">"relu"</span>, name <span class="op">=</span> <span class="st">"layer2"</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span></span>
+<code class="sourceCode R"><span><span class="va">model</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/keras_model_sequential.html">keras_model_sequential</a></span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu"><a href="../reference/layer_dense.html">layer_dense</a></span><span class="op">(</span>units <span class="op">=</span> <span class="fl">2</span>, activation <span class="op">=</span> <span class="st">"relu"</span>, name <span class="op">=</span> <span class="st">"layer1"</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu"><a href="../reference/layer_dense.html">layer_dense</a></span><span class="op">(</span>units <span class="op">=</span> <span class="fl">3</span>, activation <span class="op">=</span> <span class="st">"relu"</span>, name <span class="op">=</span> <span class="st">"layer2"</span><span class="op">)</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu"><a href="../reference/layer_dense.html">layer_dense</a></span><span class="op">(</span>units <span class="op">=</span> <span class="fl">4</span>, name <span class="op">=</span> <span class="st">"layer3"</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># Call model on a test input</span></span>
@@ -134,7 +134,7 @@ tensor and one output tensor</strong>.</p>
 <span></span>
 <span><span class="co"># Call layers on a test input</span></span>
 <span><span class="va">x</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/op_ones.html">op_ones</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">3</span>, <span class="fl">3</span><span class="op">)</span><span class="op">)</span></span>
-<span><span class="va">y</span> <span class="op">&lt;-</span> <span class="va">x</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span> <span class="fu">layer1</span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span> <span class="fu">layer2</span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span> <span class="fu">layer3</span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
+<span><span class="va">y</span> <span class="op">&lt;-</span> <span class="va">x</span> <span class="op">|&gt;</span> <span class="fu">layer1</span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span> <span class="fu">layer2</span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span> <span class="fu">layer3</span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
 <p>A Sequential model is <strong>not appropriate</strong> when:</p>
 <ul>
 <li>Your model has multiple inputs or multiple outputs</li>
@@ -150,9 +150,9 @@ multi-branch model)</li>
 <p>You can create a Sequential model by piping layers into the
 <code><a href="../reference/keras_model_sequential.html">keras_model_sequential()</a></code> object:</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">model</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/keras_model_sequential.html">keras_model_sequential</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span></span>
-<span>  <span class="fu"><a href="../reference/layer_dense.html">layer_dense</a></span><span class="op">(</span>units <span class="op">=</span> <span class="fl">2</span>, activation <span class="op">=</span> <span class="st">"relu"</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span></span>
-<span>  <span class="fu"><a href="../reference/layer_dense.html">layer_dense</a></span><span class="op">(</span>units <span class="op">=</span> <span class="fl">3</span>, activation <span class="op">=</span> <span class="st">"relu"</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span></span>
+<code class="sourceCode R"><span><span class="va">model</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/keras_model_sequential.html">keras_model_sequential</a></span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu"><a href="../reference/layer_dense.html">layer_dense</a></span><span class="op">(</span>units <span class="op">=</span> <span class="fl">2</span>, activation <span class="op">=</span> <span class="st">"relu"</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu"><a href="../reference/layer_dense.html">layer_dense</a></span><span class="op">(</span>units <span class="op">=</span> <span class="fl">3</span>, activation <span class="op">=</span> <span class="st">"relu"</span><span class="op">)</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu"><a href="../reference/layer_dense.html">layer_dense</a></span><span class="op">(</span>units <span class="op">=</span> <span class="fl">4</span><span class="op">)</span></span></code></pre></div>
 <p>or by passing a list of layers to
 <code><a href="../reference/keras_model_sequential.html">keras_model_sequential()</a></code>:</p>
@@ -173,18 +173,17 @@ multi-branch model)</li>
 <span><span class="co">##</span></span>
 <span><span class="co">## [[3]]</span></span>
 <span><span class="co">## &lt;Dense name=dense_5, built=False&gt;</span></span></code></pre>
-<p>You can also create a Sequential model incrementally via the
-<code>add()</code> method:</p>
+<p>You can also create a Sequential model incrementally:</p>
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">model</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/keras_model_sequential.html">keras_model_sequential</a></span><span class="op">(</span><span class="op">)</span></span>
-<span><span class="va">model</span><span class="op">$</span><span class="fu">add</span><span class="op">(</span><span class="fu"><a href="../reference/layer_dense.html">layer_dense</a></span><span class="op">(</span>units <span class="op">=</span> <span class="fl">2</span>, activation<span class="op">=</span><span class="st">"relu"</span><span class="op">)</span><span class="op">)</span></span>
-<span><span class="va">model</span><span class="op">$</span><span class="fu">add</span><span class="op">(</span><span class="fu"><a href="../reference/layer_dense.html">layer_dense</a></span><span class="op">(</span>units <span class="op">=</span> <span class="fl">3</span>, activation<span class="op">=</span><span class="st">"relu"</span><span class="op">)</span><span class="op">)</span></span>
-<span><span class="va">model</span><span class="op">$</span><span class="fu">add</span><span class="op">(</span><span class="fu"><a href="../reference/layer_dense.html">layer_dense</a></span><span class="op">(</span>units <span class="op">=</span> <span class="fl">4</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
-<p>Note that there’s also a corresponding <code>pop()</code> method to
-remove layers: a Sequential model behaves very much like a list of
-layers.</p>
+<span><span class="va">model</span> <span class="op">|&gt;</span> <span class="fu"><a href="../reference/layer_dense.html">layer_dense</a></span><span class="op">(</span>units <span class="op">=</span> <span class="fl">2</span>, activation<span class="op">=</span><span class="st">"relu"</span><span class="op">)</span></span>
+<span><span class="va">model</span> <span class="op">|&gt;</span> <span class="fu"><a href="../reference/layer_dense.html">layer_dense</a></span><span class="op">(</span>units <span class="op">=</span> <span class="fl">3</span>, activation<span class="op">=</span><span class="st">"relu"</span><span class="op">)</span></span>
+<span><span class="va">model</span> <span class="op">|&gt;</span> <span class="fu"><a href="../reference/layer_dense.html">layer_dense</a></span><span class="op">(</span>units <span class="op">=</span> <span class="fl">4</span><span class="op">)</span></span></code></pre></div>
+<p>Note that there’s also a corresponding <code><a href="../reference/pop_layer.html">pop_layer()</a></code>
+method to remove layers: a Sequential model behaves very much like a
+stack of layers.</p>
 <div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">model</span><span class="op">$</span><span class="fu">pop</span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">model</span> <span class="op">|&gt;</span> <span class="fu"><a href="../reference/pop_layer.html">pop_layer</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">## &lt;Dense name=dense_8, built=False&gt;</span></span></code></pre>
 <div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/length.html" class="external-link">length</a></span><span class="op">(</span><span class="va">model</span><span class="op">$</span><span class="va">layers</span><span class="op">)</span>  <span class="co"># 2</span></span></code></pre></div>
@@ -194,9 +193,9 @@ argument, just like any layer or model in Keras. This is useful to
 annotate TensorBoard graphs with semantically meaningful names.</p>
 <div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">model</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/keras_model_sequential.html">keras_model_sequential</a></span><span class="op">(</span>name <span class="op">=</span> <span class="st">"my_sequential"</span><span class="op">)</span></span>
-<span><span class="va">model</span><span class="op">$</span><span class="fu">add</span><span class="op">(</span><span class="fu"><a href="../reference/layer_dense.html">layer_dense</a></span><span class="op">(</span>units <span class="op">=</span> <span class="fl">2</span>, activation<span class="op">=</span><span class="st">"relu"</span>, name <span class="op">=</span> <span class="st">"layer1"</span><span class="op">)</span><span class="op">)</span></span>
-<span><span class="va">model</span><span class="op">$</span><span class="fu">add</span><span class="op">(</span><span class="fu"><a href="../reference/layer_dense.html">layer_dense</a></span><span class="op">(</span>units <span class="op">=</span> <span class="fl">3</span>, activation<span class="op">=</span><span class="st">"relu"</span>, name <span class="op">=</span> <span class="st">"layer2"</span><span class="op">)</span><span class="op">)</span></span>
-<span><span class="va">model</span><span class="op">$</span><span class="fu">add</span><span class="op">(</span><span class="fu"><a href="../reference/layer_dense.html">layer_dense</a></span><span class="op">(</span>units <span class="op">=</span> <span class="fl">4</span>, name <span class="op">=</span> <span class="st">"layer3"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
+<span><span class="va">model</span> <span class="op">|&gt;</span> <span class="fu"><a href="../reference/layer_dense.html">layer_dense</a></span><span class="op">(</span>units <span class="op">=</span> <span class="fl">2</span>, activation<span class="op">=</span><span class="st">"relu"</span>, name <span class="op">=</span> <span class="st">"layer1"</span><span class="op">)</span></span>
+<span><span class="va">model</span> <span class="op">|&gt;</span> <span class="fu"><a href="../reference/layer_dense.html">layer_dense</a></span><span class="op">(</span>units <span class="op">=</span> <span class="fl">3</span>, activation<span class="op">=</span><span class="st">"relu"</span>, name <span class="op">=</span> <span class="st">"layer2"</span><span class="op">)</span></span>
+<span><span class="va">model</span> <span class="op">|&gt;</span> <span class="fu"><a href="../reference/layer_dense.html">layer_dense</a></span><span class="op">(</span>units <span class="op">=</span> <span class="fl">4</span>, name <span class="op">=</span> <span class="st">"layer3"</span><span class="op">)</span></span></code></pre></div>
 </div>
 <div class="section level2">
 <h2 id="specifying-the-input-shape-in-advance">Specifying the input shape in advance<a class="anchor" aria-label="anchor" href="#specifying-the-input-shape-in-advance"></a>
@@ -226,9 +225,9 @@ it has no weights (and calling <code>model$weights</code> results in an
 error stating just this). The weights are created when the model first
 sees some input data:</p>
 <div class="sourceCode" id="cb18"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">model</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/keras_model_sequential.html">keras_model_sequential</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span></span>
-<span>  <span class="fu"><a href="../reference/layer_dense.html">layer_dense</a></span><span class="op">(</span>units <span class="op">=</span> <span class="fl">2</span>, activation <span class="op">=</span> <span class="st">"relu"</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span></span>
-<span>  <span class="fu"><a href="../reference/layer_dense.html">layer_dense</a></span><span class="op">(</span>units <span class="op">=</span> <span class="fl">3</span>, activation <span class="op">=</span> <span class="st">"relu"</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span></span>
+<code class="sourceCode R"><span><span class="va">model</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/keras_model_sequential.html">keras_model_sequential</a></span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu"><a href="../reference/layer_dense.html">layer_dense</a></span><span class="op">(</span>units <span class="op">=</span> <span class="fl">2</span>, activation <span class="op">=</span> <span class="st">"relu"</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu"><a href="../reference/layer_dense.html">layer_dense</a></span><span class="op">(</span>units <span class="op">=</span> <span class="fl">3</span>, activation <span class="op">=</span> <span class="st">"relu"</span><span class="op">)</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu"><a href="../reference/layer_dense.html">layer_dense</a></span><span class="op">(</span>units <span class="op">=</span> <span class="fl">4</span><span class="op">)</span></span>
 <span><span class="co"># No weights at this stage!</span></span>
 <span></span>
@@ -266,7 +265,7 @@ including the current output shape. In this case, you should start your
 model by passing an <code>input_shape</code> argument to your model, so
 that it knows its input shape from the start:</p>
 <div class="sourceCode" id="cb22"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">model</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/keras_model_sequential.html">keras_model_sequential</a></span><span class="op">(</span>input_shape <span class="op">=</span> <span class="fl">4</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span></span>
+<code class="sourceCode R"><span><span class="va">model</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/keras_model_sequential.html">keras_model_sequential</a></span><span class="op">(</span>input_shape <span class="op">=</span> <span class="fl">4</span><span class="op">)</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu"><a href="../reference/layer_dense.html">layer_dense</a></span><span class="op">(</span>units <span class="op">=</span> <span class="fl">2</span>, activation <span class="op">=</span> <span class="st">"relu"</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary</a></span><span class="op">(</span><span class="va">model</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">## <span style="font-weight: bold;">Model: "sequential_5"</span></span></span>
@@ -289,18 +288,18 @@ shape.</p>
 input shape of a Sequential model in advance if you know what it is.</p>
 </div>
 <div class="section level2">
-<h2 id="a-common-debugging-workflow-add-summary">A common debugging workflow: <code>add()</code> +
-<code>summary()</code><a class="anchor" aria-label="anchor" href="#a-common-debugging-workflow-add-summary"></a>
+<h2 id="a-common-debugging-workflow-add-layers-summary">A common debugging workflow: add layers +
+<code>summary()</code><a class="anchor" aria-label="anchor" href="#a-common-debugging-workflow-add-layers-summary"></a>
 </h2>
 <p>When building a new Sequential architecture, it’s useful to
-incrementally stack layers with <code>add()</code> or
-<code>%&gt;%</code> and frequently print model summaries. For instance,
-this enables you to monitor how a stack of <code>Conv2D</code> and
-<code>MaxPooling2D</code> layers is downsampling image feature maps:</p>
+incrementally stack layers with <code>|&gt;</code> and frequently print
+model summaries. For instance, this enables you to monitor how a stack
+of <code>Conv2D</code> and <code>MaxPooling2D</code> layers is
+downsampling image feature maps:</p>
 <div class="sourceCode" id="cb26"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">model</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/keras_model_sequential.html">keras_model_sequential</a></span><span class="op">(</span>input_shape <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">250</span>, <span class="fl">250</span>, <span class="fl">3</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span></span>
-<span>  <span class="fu"><a href="../reference/layer_conv_2d.html">layer_conv_2d</a></span><span class="op">(</span>filters <span class="op">=</span> <span class="fl">32</span>, kernel_size <span class="op">=</span> <span class="fl">5</span>, strides <span class="op">=</span> <span class="fl">2</span>, activation <span class="op">=</span> <span class="st">"relu"</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span></span>
-<span>  <span class="fu"><a href="../reference/layer_conv_2d.html">layer_conv_2d</a></span><span class="op">(</span>filters <span class="op">=</span> <span class="fl">32</span>, kernel_size <span class="op">=</span> <span class="fl">3</span>, activation <span class="op">=</span> <span class="st">"relu"</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span></span>
+<code class="sourceCode R"><span><span class="va">model</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/keras_model_sequential.html">keras_model_sequential</a></span><span class="op">(</span>input_shape <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">250</span>, <span class="fl">250</span>, <span class="fl">3</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu"><a href="../reference/layer_conv_2d.html">layer_conv_2d</a></span><span class="op">(</span>filters <span class="op">=</span> <span class="fl">32</span>, kernel_size <span class="op">=</span> <span class="fl">5</span>, strides <span class="op">=</span> <span class="fl">2</span>, activation <span class="op">=</span> <span class="st">"relu"</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu"><a href="../reference/layer_conv_2d.html">layer_conv_2d</a></span><span class="op">(</span>filters <span class="op">=</span> <span class="fl">32</span>, kernel_size <span class="op">=</span> <span class="fl">3</span>, activation <span class="op">=</span> <span class="st">"relu"</span><span class="op">)</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu"><a href="../reference/layer_max_pooling_2d.html">layer_max_pooling_2d</a></span><span class="op">(</span>pool_size <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">3</span>, <span class="fl">3</span><span class="op">)</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># Can you guess what the current output shape is at this point? Probably not.</span></span>
@@ -322,12 +321,12 @@ this enables you to monitor how a stack of <code>Conv2D</code> and
 <div class="sourceCode" id="cb28"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># The answer was: (40, 40, 32), so we can keep downsampling...</span></span>
 <span></span>
-<span><span class="va">model</span> <span class="op">&lt;-</span> <span class="va">model</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span></span>
-<span>  <span class="fu"><a href="../reference/layer_conv_2d.html">layer_conv_2d</a></span><span class="op">(</span>filters <span class="op">=</span> <span class="fl">32</span>, kernel_size <span class="op">=</span> <span class="fl">3</span>, activation <span class="op">=</span> <span class="st">"relu"</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span></span>
-<span>  <span class="fu"><a href="../reference/layer_conv_2d.html">layer_conv_2d</a></span><span class="op">(</span>filters <span class="op">=</span> <span class="fl">32</span>, kernel_size <span class="op">=</span> <span class="fl">3</span>, activation <span class="op">=</span> <span class="st">"relu"</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span></span>
-<span>  <span class="fu"><a href="../reference/layer_max_pooling_2d.html">layer_max_pooling_2d</a></span><span class="op">(</span>pool_size <span class="op">=</span> <span class="fl">3</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span></span>
-<span>  <span class="fu"><a href="../reference/layer_conv_2d.html">layer_conv_2d</a></span><span class="op">(</span>filters <span class="op">=</span> <span class="fl">32</span>, kernel_size <span class="op">=</span> <span class="fl">3</span>, activation <span class="op">=</span> <span class="st">"relu"</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span></span>
-<span>  <span class="fu"><a href="../reference/layer_conv_2d.html">layer_conv_2d</a></span><span class="op">(</span>filters <span class="op">=</span> <span class="fl">32</span>, kernel_size <span class="op">=</span> <span class="fl">3</span>, activation <span class="op">=</span> <span class="st">"relu"</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span></span>
+<span><span class="va">model</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu"><a href="../reference/layer_conv_2d.html">layer_conv_2d</a></span><span class="op">(</span>filters <span class="op">=</span> <span class="fl">32</span>, kernel_size <span class="op">=</span> <span class="fl">3</span>, activation <span class="op">=</span> <span class="st">"relu"</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu"><a href="../reference/layer_conv_2d.html">layer_conv_2d</a></span><span class="op">(</span>filters <span class="op">=</span> <span class="fl">32</span>, kernel_size <span class="op">=</span> <span class="fl">3</span>, activation <span class="op">=</span> <span class="st">"relu"</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu"><a href="../reference/layer_max_pooling_2d.html">layer_max_pooling_2d</a></span><span class="op">(</span>pool_size <span class="op">=</span> <span class="fl">3</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu"><a href="../reference/layer_conv_2d.html">layer_conv_2d</a></span><span class="op">(</span>filters <span class="op">=</span> <span class="fl">32</span>, kernel_size <span class="op">=</span> <span class="fl">3</span>, activation <span class="op">=</span> <span class="st">"relu"</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu"><a href="../reference/layer_conv_2d.html">layer_conv_2d</a></span><span class="op">(</span>filters <span class="op">=</span> <span class="fl">32</span>, kernel_size <span class="op">=</span> <span class="fl">3</span>, activation <span class="op">=</span> <span class="st">"relu"</span><span class="op">)</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu"><a href="../reference/layer_max_pooling_2d.html">layer_max_pooling_2d</a></span><span class="op">(</span>pool_size <span class="op">=</span> <span class="fl">2</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># And now?</span></span>
@@ -359,16 +358,16 @@ this enables you to monitor how a stack of <code>Conv2D</code> and
 <span><span class="co">## <span style="font-weight: bold;"> Non-trainable params: </span><span style="color: #00AF00;">0</span> (0.00 B)</span></span></code></pre>
 <div class="sourceCode" id="cb30"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Now that we have 4x4 feature maps, time to apply global max pooling.</span></span>
-<span><span class="va">model</span> <span class="op">&lt;-</span> <span class="va">model</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span></span>
+<span><span class="va">model</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu"><a href="../reference/layer_global_max_pooling_2d.html">layer_global_max_pooling_2d</a></span><span class="op">(</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># Finally, we add a classification layer.</span></span>
-<span><span class="va">model</span> <span class="op">&lt;-</span> <span class="va">model</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span></span>
+<span><span class="va">model</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu"><a href="../reference/layer_dense.html">layer_dense</a></span><span class="op">(</span>units <span class="op">=</span> <span class="fl">10</span>, activation <span class="op">=</span> <span class="st">"softmax"</span><span class="op">)</span></span></code></pre></div>
 <p>Very practical, right?</p>
-<p>Note that <code>%&gt;%</code> is equivalent to calling
-<code>model$add()</code>, so in theory, you don’t need to reasisgn the
-model to <code>model</code> at each step.</p>
+<p>Note that <code>|&gt;</code> is equivalent to calling
+<code>model$add()</code>, it modifies the model in-place, so you don’t
+need to reassign the <code>model</code> symbol at each step.</p>
 </div>
 <div class="section level2">
 <h2 id="what-to-do-once-you-have-a-model">What to do once you have a model<a class="anchor" aria-label="anchor" href="#what-to-do-once-you-have-a-model"></a>
@@ -393,9 +392,9 @@ These attributes can be used to do neat things, like quickly creating a
 model that extracts the outputs of all intermediate layers in a
 Sequential model:</p>
 <div class="sourceCode" id="cb31"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">initial_model</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/keras_model_sequential.html">keras_model_sequential</a></span><span class="op">(</span>input_shape <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">250</span>, <span class="fl">250</span>, <span class="fl">3</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span></span>
-<span>  <span class="fu"><a href="../reference/layer_conv_2d.html">layer_conv_2d</a></span><span class="op">(</span>filters <span class="op">=</span> <span class="fl">32</span>, kernel_size <span class="op">=</span> <span class="fl">5</span>, strides <span class="op">=</span> <span class="fl">2</span>, activation <span class="op">=</span> <span class="st">"relu"</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span></span>
-<span>  <span class="fu"><a href="../reference/layer_conv_2d.html">layer_conv_2d</a></span><span class="op">(</span>filters <span class="op">=</span> <span class="fl">32</span>, kernel_size <span class="op">=</span> <span class="fl">3</span>, activation <span class="op">=</span> <span class="st">"relu"</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span></span>
+<code class="sourceCode R"><span><span class="va">initial_model</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/keras_model_sequential.html">keras_model_sequential</a></span><span class="op">(</span>input_shape <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">250</span>, <span class="fl">250</span>, <span class="fl">3</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu"><a href="../reference/layer_conv_2d.html">layer_conv_2d</a></span><span class="op">(</span>filters <span class="op">=</span> <span class="fl">32</span>, kernel_size <span class="op">=</span> <span class="fl">5</span>, strides <span class="op">=</span> <span class="fl">2</span>, activation <span class="op">=</span> <span class="st">"relu"</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu"><a href="../reference/layer_conv_2d.html">layer_conv_2d</a></span><span class="op">(</span>filters <span class="op">=</span> <span class="fl">32</span>, kernel_size <span class="op">=</span> <span class="fl">3</span>, activation <span class="op">=</span> <span class="st">"relu"</span><span class="op">)</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu"><a href="../reference/layer_conv_2d.html">layer_conv_2d</a></span><span class="op">(</span>filters <span class="op">=</span> <span class="fl">32</span>, kernel_size <span class="op">=</span> <span class="fl">3</span>, activation <span class="op">=</span> <span class="st">"relu"</span><span class="op">)</span></span>
 <span></span>
 <span></span>
@@ -410,15 +409,19 @@ Sequential model:</p>
 <p>Here’s a similar example that only extract features from one
 layer:</p>
 <div class="sourceCode" id="cb32"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">initial_model</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/keras_model_sequential.html">keras_model_sequential</a></span><span class="op">(</span>input_shape <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">250</span>, <span class="fl">250</span>, <span class="fl">3</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span></span>
-<span>  <span class="fu"><a href="../reference/layer_conv_2d.html">layer_conv_2d</a></span><span class="op">(</span>filters <span class="op">=</span> <span class="fl">32</span>, kernel_size <span class="op">=</span> <span class="fl">5</span>, strides <span class="op">=</span> <span class="fl">2</span>, activation <span class="op">=</span> <span class="st">"relu"</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span></span>
-<span>  <span class="fu"><a href="../reference/layer_conv_2d.html">layer_conv_2d</a></span><span class="op">(</span>filters <span class="op">=</span> <span class="fl">32</span>, kernel_size <span class="op">=</span> <span class="fl">3</span>, activation <span class="op">=</span> <span class="st">"relu"</span>, name <span class="op">=</span> <span class="st">"my_intermediate_layer"</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span></span>
+<code class="sourceCode R"><span><span class="va">initial_model</span> <span class="op">&lt;-</span></span>
+<span>  <span class="fu"><a href="../reference/keras_model_sequential.html">keras_model_sequential</a></span><span class="op">(</span>input_shape <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">250</span>, <span class="fl">250</span>, <span class="fl">3</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu"><a href="../reference/layer_conv_2d.html">layer_conv_2d</a></span><span class="op">(</span>filters <span class="op">=</span> <span class="fl">32</span>, kernel_size <span class="op">=</span> <span class="fl">5</span>, strides <span class="op">=</span> <span class="fl">2</span>,</span>
+<span>                activation <span class="op">=</span> <span class="st">"relu"</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu"><a href="../reference/layer_conv_2d.html">layer_conv_2d</a></span><span class="op">(</span>filters <span class="op">=</span> <span class="fl">32</span>, kernel_size <span class="op">=</span> <span class="fl">3</span>, activation <span class="op">=</span> <span class="st">"relu"</span>,</span>
+<span>                name <span class="op">=</span> <span class="st">"my_intermediate_layer"</span><span class="op">)</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu"><a href="../reference/layer_conv_2d.html">layer_conv_2d</a></span><span class="op">(</span>filters <span class="op">=</span> <span class="fl">32</span>, kernel_size <span class="op">=</span> <span class="fl">3</span>, activation <span class="op">=</span> <span class="st">"relu"</span><span class="op">)</span></span>
 <span></span>
 <span><span class="va">feature_extractor</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/keras_model.html">keras_model</a></span><span class="op">(</span></span>
-<span>    inputs <span class="op">=</span> <span class="va">initial_model</span><span class="op">$</span><span class="va">inputs</span>,</span>
-<span>    outputs <span class="op">=</span><span class="fu"><a href="../reference/get_layer.html">get_layer</a></span><span class="op">(</span><span class="va">initial_model</span>, <span class="st">"my_intermediate_layer"</span><span class="op">)</span><span class="op">$</span><span class="va">output</span>,</span>
+<span>  inputs <span class="op">=</span> <span class="va">initial_model</span><span class="op">$</span><span class="va">inputs</span>,</span>
+<span>  outputs <span class="op">=</span> <span class="fu"><a href="../reference/get_layer.html">get_layer</a></span><span class="op">(</span><span class="va">initial_model</span>, <span class="st">"my_intermediate_layer"</span><span class="op">)</span><span class="op">$</span><span class="va">output</span>,</span>
 <span><span class="op">)</span></span>
+<span></span>
 <span><span class="co"># Call feature extractor on test input.</span></span>
 <span><span class="va">x</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/op_ones.html">op_ones</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">250</span>, <span class="fl">250</span>, <span class="fl">3</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="va">features</span> <span class="op">&lt;-</span> <span class="fu">feature_extractor</span><span class="op">(</span><span class="va">x</span><span class="op">)</span></span></code></pre></div>
@@ -433,49 +436,68 @@ learning</a>.</p>
 <p>Here are two common transfer learning blueprint involving Sequential
 models.</p>
 <p>First, let’s say that you have a Sequential model, and you want to
-freeze all layers except the last one. In this case, you would simply
-iterate over <code>model.layers</code> and set
-<code>layer.trainable = False</code> on each layer, except the last one.
-Like this:</p>
+freeze all layers except the last one. In this case, you can call
+<code><a href="../reference/freeze_weights.html">freeze_weights()</a></code>. Alternatively, you can iterate over
+<code>model$layers</code> and set
+<code>layer$trainable &lt;- FALSE</code> on each layer, except the last
+one. Like this:</p>
 <div class="sourceCode" id="cb33"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">model</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/keras_model_sequential.html">keras_model_sequential</a></span><span class="op">(</span>input_shape <span class="op">=</span> <span class="fl">784</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span></span>
-<span>  <span class="fu"><a href="../reference/layer_dense.html">layer_dense</a></span><span class="op">(</span>units <span class="op">=</span> <span class="fl">32</span>, activation <span class="op">=</span> <span class="st">"relu"</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span></span>
-<span>  <span class="fu"><a href="../reference/layer_dense.html">layer_dense</a></span><span class="op">(</span>units <span class="op">=</span> <span class="fl">32</span>, activation <span class="op">=</span> <span class="st">"relu"</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span></span>
-<span>  <span class="fu"><a href="../reference/layer_dense.html">layer_dense</a></span><span class="op">(</span>units <span class="op">=</span> <span class="fl">32</span>, activation <span class="op">=</span> <span class="st">"relu"</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span></span>
-<span>  <span class="fu"><a href="../reference/layer_dense.html">layer_dense</a></span><span class="op">(</span>units <span class="op">=</span> <span class="fl">10</span><span class="op">)</span></span>
-<span></span>
-<span><span class="co"># Presumably you would want to first load pre-trained weights.</span></span>
-<span><span class="va">model</span><span class="op">$</span><span class="fu">load_weights</span><span class="op">(</span><span class="va">...</span><span class="op">)</span></span>
-<span></span>
-<span><span class="co"># Freeze all layers except the last one.</span></span>
-<span><span class="kw">for</span> <span class="op">(</span><span class="va">layer</span> <span class="kw">in</span> <span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">model</span><span class="op">$</span><span class="va">layers</span>, <span class="fl">3</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span></span>
+<code class="sourceCode R"><span><span class="va">model</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/keras_model_sequential.html">keras_model_sequential</a></span><span class="op">(</span>input_shape <span class="op">=</span> <span class="fl">784</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu"><a href="../reference/layer_dense.html">layer_dense</a></span><span class="op">(</span>units <span class="op">=</span> <span class="fl">32</span>, activation <span class="op">=</span> <span class="st">"relu"</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu"><a href="../reference/layer_dense.html">layer_dense</a></span><span class="op">(</span>units <span class="op">=</span> <span class="fl">32</span>, activation <span class="op">=</span> <span class="st">"relu"</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu"><a href="../reference/layer_dense.html">layer_dense</a></span><span class="op">(</span>units <span class="op">=</span> <span class="fl">32</span>, activation <span class="op">=</span> <span class="st">"relu"</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu"><a href="../reference/layer_dense.html">layer_dense</a></span><span class="op">(</span>units <span class="op">=</span> <span class="fl">10</span><span class="op">)</span></span></code></pre></div>
+<div class="sourceCode" id="cb34"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># Presumably you would want to first load pre-trained weights.</span></span>
+<span><span class="va">model</span> <span class="op">|&gt;</span> <span class="fu"><a href="../reference/load_model_weights.html">load_model_weights</a></span><span class="op">(</span><span class="va">...</span><span class="op">)</span></span></code></pre></div>
+<div class="sourceCode" id="cb35"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># Freeze all layers except the last one.</span></span>
+<span><span class="va">model</span> <span class="op">|&gt;</span> <span class="fu"><a href="../reference/freeze_weights.html">freeze_weights</a></span><span class="op">(</span>from <span class="op">=</span> <span class="fl">1</span>, to <span class="op">=</span> <span class="op">-</span><span class="fl">2</span><span class="op">)</span></span>
+<span><span class="va">model</span> <span class="co"># note the "Trainable" column now visible in the summary table</span></span></code></pre></div>
+<pre><code><span><span class="co">## <span style="font-weight: bold;">Model: "sequential_9"</span></span></span>
+<span><span class="co">## ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━┳━━━━━━━┓</span></span>
+<span><span class="co">## ┃<span style="font-weight: bold;"> Layer (type)                </span>┃<span style="font-weight: bold;"> Output Shape             </span>┃<span style="font-weight: bold;"> Param # </span>┃<span style="font-weight: bold;"> Trai… </span>┃</span></span>
+<span><span class="co">## ┡━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━╇━━━━━━━┩</span></span>
+<span><span class="co">## │ dense_18 (<span style="color: #0087FF;">Dense</span>)            │ (<span style="color: #00D7FF;">None</span>, <span style="color: #00AF00;">32</span>)               │  <span style="color: #00AF00;">25,120</span> │   <span style="color: #FF5555; font-weight: bold;">N</span>   │</span></span>
+<span><span class="co">## ├─────────────────────────────┼──────────────────────────┼─────────┼───────┤</span></span>
+<span><span class="co">## │ dense_17 (<span style="color: #0087FF;">Dense</span>)            │ (<span style="color: #00D7FF;">None</span>, <span style="color: #00AF00;">32</span>)               │   <span style="color: #00AF00;">1,056</span> │   <span style="color: #FF5555; font-weight: bold;">N</span>   │</span></span>
+<span><span class="co">## ├─────────────────────────────┼──────────────────────────┼─────────┼───────┤</span></span>
+<span><span class="co">## │ dense_16 (<span style="color: #0087FF;">Dense</span>)            │ (<span style="color: #00D7FF;">None</span>, <span style="color: #00AF00;">32</span>)               │   <span style="color: #00AF00;">1,056</span> │   <span style="color: #FF5555; font-weight: bold;">N</span>   │</span></span>
+<span><span class="co">## ├─────────────────────────────┼──────────────────────────┼─────────┼───────┤</span></span>
+<span><span class="co">## │ dense_15 (<span style="color: #0087FF;">Dense</span>)            │ (<span style="color: #00D7FF;">None</span>, <span style="color: #00AF00;">10</span>)               │     <span style="color: #00AF00;">330</span> │   <span style="color: #00AF00; font-weight: bold;">Y</span>   │</span></span>
+<span><span class="co">## └─────────────────────────────┴──────────────────────────┴─────────┴───────┘</span></span>
+<span><span class="co">## <span style="font-weight: bold;"> Total params: </span><span style="color: #00AF00;">27,562</span> (107.66 KB)</span></span>
+<span><span class="co">## <span style="font-weight: bold;"> Trainable params: </span><span style="color: #00AF00;">330</span> (1.29 KB)</span></span>
+<span><span class="co">## <span style="font-weight: bold;"> Non-trainable params: </span><span style="color: #00AF00;">27,232</span> (106.38 KB)</span></span></code></pre>
+<div class="sourceCode" id="cb37"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># Another way to freeze all layers except the last one.</span></span>
+<span><span class="kw">for</span> <span class="op">(</span><span class="va">layer</span> <span class="kw">in</span> <span class="va">model</span><span class="op">$</span><span class="va">layers</span><span class="op">[</span><span class="op">-</span><span class="fu"><a href="https://rdrr.io/r/base/length.html" class="external-link">length</a></span><span class="op">(</span><span class="va">model</span><span class="op">$</span><span class="va">layers</span><span class="op">)</span><span class="op">]</span><span class="op">)</span> <span class="op">{</span></span>
 <span>  <span class="va">layer</span><span class="op">$</span><span class="va">trainable</span> <span class="op">&lt;-</span> <span class="cn">FALSE</span></span>
 <span><span class="op">}</span></span>
 <span></span>
 <span><span class="co"># Recompile and train (this will only update the weights of the last layer).</span></span>
-<span><span class="va">model</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://generics.r-lib.org/reference/compile.html" class="external-link">compile</a></span><span class="op">(</span><span class="va">...</span><span class="op">)</span></span>
-<span><span class="va">model</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://generics.r-lib.org/reference/fit.html" class="external-link">fit</a></span><span class="op">(</span><span class="va">...</span><span class="op">)</span></span></code></pre></div>
+<span><span class="va">model</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://generics.r-lib.org/reference/compile.html" class="external-link">compile</a></span><span class="op">(</span><span class="va">...</span><span class="op">)</span></span>
+<span><span class="va">model</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://generics.r-lib.org/reference/fit.html" class="external-link">fit</a></span><span class="op">(</span><span class="va">...</span><span class="op">)</span></span></code></pre></div>
 <p>Another common blueprint is to use a Sequential model to stack a
 pre-trained model and some freshly initialized classification layers.
 Like this:</p>
-<div class="sourceCode" id="cb34"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb38"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Load a convolutional base with pre-trained weights</span></span>
-<span><span class="va">base_model</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/application_xception.html">application_xception</a></span><span class="op">(</span></span>
-<span>    weights<span class="op">=</span><span class="st">'imagenet'</span>,</span>
-<span>    include_top<span class="op">=</span><span class="cn">FALSE</span>,</span>
-<span>    pooling<span class="op">=</span><span class="st">'avg'</span><span class="op">)</span></span>
+<span><span class="va">base_model</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/application_xception.html">application_xception</a></span><span class="op">(</span>weights <span class="op">=</span> <span class="st">'imagenet'</span>,</span>
+<span>                                   include_top <span class="op">=</span> <span class="cn">FALSE</span>,</span>
+<span>                                   pooling <span class="op">=</span> <span class="st">'avg'</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># Freeze the base model</span></span>
-<span><span class="va">base_model</span><span class="op">$</span><span class="va">trainable</span> <span class="op">&lt;-</span> <span class="cn">FALSE</span></span>
+<span><span class="fu"><a href="../reference/freeze_weights.html">freeze_weights</a></span><span class="op">(</span><span class="va">base_model</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># Use a Sequential model to add a trainable classifier on top</span></span>
-<span><span class="va">model</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/keras_model_sequential.html">keras_model_sequential</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span></span>
-<span>  <span class="fu">base_model</span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span></span>
+<span><span class="va">model</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/keras_model_sequential.html">keras_model_sequential</a></span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu">base_model</span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu"><a href="../reference/layer_dense.html">layer_dense</a></span><span class="op">(</span><span class="fl">1000</span><span class="op">)</span></span></code></pre></div>
-<div class="sourceCode" id="cb35"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb39"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Compile &amp; train</span></span>
-<span><span class="va">model</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://generics.r-lib.org/reference/compile.html" class="external-link">compile</a></span><span class="op">(</span><span class="va">...</span><span class="op">)</span></span>
-<span><span class="va">model</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://generics.r-lib.org/reference/fit.html" class="external-link">fit</a></span><span class="op">(</span><span class="va">...</span><span class="op">)</span></span></code></pre></div>
+<span><span class="va">model</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://generics.r-lib.org/reference/compile.html" class="external-link">compile</a></span><span class="op">(</span><span class="va">...</span><span class="op">)</span></span>
+<span><span class="va">model</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://generics.r-lib.org/reference/fit.html" class="external-link">fit</a></span><span class="op">(</span><span class="va">...</span><span class="op">)</span></span></code></pre></div>
 <p>If you do transfer learning, you will probably find yourself
 frequently using these two patterns.</p>
 <p>That’s about all you need to know about Sequential models!</p>
