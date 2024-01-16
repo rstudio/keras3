@@ -87,11 +87,7 @@ nor the class name (those are handled externally).</p>
     <h2 id="ref-usage">Usage<a class="anchor" aria-label="anchor" href="#ref-usage"></a></h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">get_config</span><span class="op">(</span><span class="va">object</span><span class="op">)</span></span>
 <span></span>
-<span><span class="fu">from_config</span><span class="op">(</span></span>
-<span>  <span class="va">config</span>,</span>
-<span>  custom_objects <span class="op">=</span> <span class="cn">NULL</span>,</span>
-<span>  class <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/attr.html" class="external-link">attr</a></span><span class="op">(</span><span class="va">config</span>, <span class="st">"__class__"</span>, <span class="cn">TRUE</span><span class="op">)</span> <span class="op">%||%</span> <span class="va">keras</span><span class="op">$</span><span class="va">Model</span></span>
-<span><span class="op">)</span></span></code></pre></div>
+<span><span class="fu">from_config</span><span class="op">(</span><span class="va">config</span>, custom_objects <span class="op">=</span> <span class="cn">NULL</span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div class="section level2">
@@ -108,10 +104,6 @@ nor the class name (those are handled externally).</p>
 <dd><p>list of custom objects needed to instantiate the layer,
 e.g., custom layers defined by <code><a href="new_layer_class.html">new_layer_class()</a></code> or similar.</p></dd>
 
-
-<dt>class</dt>
-<dd><p>The keras class to restore.</p></dd>
-
 </dl></div>
     <div class="section level2">
     <h2 id="value">Value<a class="anchor" aria-label="anchor" href="#value"></a></h2>
@@ -122,10 +114,10 @@ e.g., custom layers defined by <code><a href="new_layer_class.html">new_layer_cl
     </div>
     <div class="section level2">
     <h2 id="note">Note<a class="anchor" aria-label="anchor" href="#note"></a></h2>
-    <p>Objects returned from <code>get_config()</code> are not serializable. Therefore,
-if you want to save and restore a model across sessions, you can use the
-<code>model_to_json()</code> function (for model configuration only, not weights) or
-the <code>save_model_tf()</code> function to save the model configuration and weights
+    <p>Objects returned from <code>get_config()</code> are not serializable via RDS. If
+you want to save and restore a model across sessions, you can use
+<code><a href="save_model_config.html">save_model_config()</a></code> (for model configuration only, not weights)
+or <code><a href="save_model.html">save_model()</a></code> to save the model configuration and weights
 to the filesystem.</p>
     </div>
     <div class="section level2">
