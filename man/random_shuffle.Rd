@@ -12,7 +12,7 @@ random_shuffle(x, axis = 1L, seed = NULL)
 \item{axis}{An integer specifying the axis along which to shuffle. Defaults to
 \code{0}.}
 
-\item{seed}{A Python integer or instance of
+\item{seed}{An R integer or instance of
 \code{\link[=random_seed_generator]{random_seed_generator()}}.
 Used to make the behavior of the initializer
 deterministic. Note that an initializer seeded with an integer

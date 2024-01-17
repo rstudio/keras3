@@ -563,9 +563,9 @@ for (epoch in seq_len(epochs)) {
       cat(sprintf("adversarial loss at step %d: %.2f\n", step, g_loss))
     }
     
-    # To limit execution time we stop after 10 steps.
+    # To limit execution time we stop after 400 steps.
     # Remove the lines below to actually train the model!
-    if (step > 10) {
+    if (step > 400) {
       break
     }
   }

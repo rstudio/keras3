@@ -20,7 +20,7 @@ supported. If not specified, \code{\link[=config_floatx]{config_floatx()}} is us
 which defaults to \code{float32} unless you configured it otherwise (via
 \code{config_set_floatx(float_dtype)})}
 
-\item{seed}{A Python integer or instance of
+\item{seed}{An R integer or instance of
 \code{\link[=random_seed_generator]{random_seed_generator()}}.
 Used to make the behavior of the initializer
 deterministic. Note that an initializer seeded with an integer

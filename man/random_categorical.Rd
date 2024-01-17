@@ -17,7 +17,7 @@ tensor's shape.}
 
 \item{dtype}{Optional dtype of the output tensor.}
 
-\item{seed}{A Python integer or instance of
+\item{seed}{An R integer or instance of
 \code{\link[=random_seed_generator]{random_seed_generator()}}.
 Used to make the behavior of the initializer
 deterministic. Note that an initializer seeded with an integer

@@ -18,7 +18,7 @@ For instance, if your inputs have shape
 you want the dropout mask to be the same for all timesteps,
 you can use \verb{noise_shape=(batch_size, 1, features)}.}
 
-\item{seed}{A Python integer to use as random seed.}
+\item{seed}{An R integer to use as random seed.}
 
 \item{...}{For forward/backward compatability.}
 }

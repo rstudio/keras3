@@ -7,7 +7,6 @@
 \alias{[.keras_shape}
 \alias{as.integer.keras_shape}
 \alias{as.list.keras_shape}
-\alias{c.keras_shape}
 \title{Tensor shape utility}
 \usage{
 shape(...)
@@ -21,8 +20,6 @@ shape(...)
 \method{as.integer}{keras_shape}(x, ...)
 
 \method{as.list}{keras_shape}(x, ...)
-
-\method{c}{keras_shape}(...)
 }
 \arguments{
 \item{...}{A shape specification. Numerics, \code{NULL} and tensors are valid.

@@ -286,7 +286,7 @@ Sys.time() - time
 ```
 
 ```
-## Time difference of 26.61179 secs
+## Time difference of 24.44702 secs
 ```
 
 ## Speeding-up your training step with `tf_function`
@@ -393,7 +393,7 @@ Sys.time() - time
 ```
 
 ```
-## Time difference of 3.341367 secs
+## Time difference of 3.021384 secs
 ```
 
 Much faster, isn't it?
@@ -612,8 +612,8 @@ train_step <- tf_function(function(real_images, seed = NULL) {
   # if (is.numeric(seed)) seed <- random_seed_generator(seed)
 
   # Sample random points in the latent space
-  batch_size <- shape(real_images)[1]
-  random_latent_vectors <- random_normal(shape = c(batch_size, latent_dim),
+  batch_size <- shape(real_images)[[1]]
+  random_latent_vectors <- random_normal(shape(batch_size, latent_dim),
                                          seed = seed)
 
   # Decode them to fake images
@@ -642,7 +642,7 @@ train_step <- tf_function(function(real_images, seed = NULL) {
 
   # Sample random points in the latent space
   random_latent_vectors <-
-    random_normal(shape = c(batch_size, latent_dim),
+    random_normal(shape(batch_size, latent_dim),
                   seed = seed)
 
   # Assemble labels that say "all real images"
@@ -708,9 +708,9 @@ for (epoch in seq_len(epochs)) {
       cat(sprintf("adversarial loss at step %d: %.2f\n", step, g_loss))
     }
 
-    # To limit execution time we stop after 10 steps.
+    # To limit execution time we stop after 400 steps.
     # Remove the lines below to actually train the model!
-    if (step > 10) {
+    if (step > 400) {
       break
     }
   }
@@ -719,6 +719,10 @@ for (epoch in seq_len(epochs)) {
 
 ```
 ## Start epoch:  1
+## discriminator loss at step 200: 0.64
+## adversarial loss at step 200: 0.95
+## discriminator loss at step 400: 0.31
+## adversarial loss at step 400: 1.68
 ```
 
 That's it! You'll get nice-looking fake MNIST digits after just ~30s of training
