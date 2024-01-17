@@ -208,7 +208,7 @@ knit_vignette <- function(input, ..., output_dir) {
   }
 }
 
-
+if(!interactive())
 evalq({
   .Last <- function() { message("Finished!") }
 }, .GlobalEnv)

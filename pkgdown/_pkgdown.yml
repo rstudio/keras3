@@ -46,22 +46,32 @@ navbar:
     - text: "Guides"
       menu:
         - text: "Model definition"
+
         - text: "Functional API"
           href: articles/functional_api.html
+
         - text: "Sequential Model"
           href: articles/sequential_model.html
+
         - text: "Extending and customizing"
-        - text: "Making new layers and models via subclassing"
-          href: articles/making_new_layers_and_models_via_subclassing.html
+
         - text: "Training & evaluation with the built-in methods"
           href: articles/training_with_built_in_methods.html
-        - text: "Writing a training loop from scratch in TensorFlow"
-          href: articles/writing_a_custom_training_loop_in_tensorflow.html
+
         - text: "Writing Your Own Callbacks"
           href: articles/writing_your_own_callbacks.html
+
+        - text: "Making new layers and models via subclassing"
+          href: articles/making_new_layers_and_models_via_subclassing.html
+
+        - text: "Writing a training loop from scratch in TensorFlow"
+          href: articles/writing_a_custom_training_loop_in_tensorflow.html
+
         - text: "Other topics"
+
         - text: "Transfer learning and fine tuning"
           href: articles/transfer_learning.html
+
         - text: "Distributed training with TensorFlow"
           href: articles/distributed_training_with_tensorflow.html
 

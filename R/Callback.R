@@ -353,6 +353,12 @@ function(classname,
     on_epoch_end            = decorate_callback_method_sig_idx_logs,
     on_train_begin          = decorate_callback_method_sig_logs,
     on_train_end            = decorate_callback_method_sig_logs,
+
+    # on_batch_{begin,end} are backwards compatible
+    # aliases for `on_train_batch_{begin,end}`
+    on_batch_begin          = decorate_callback_method_sig_idx_logs,
+    on_batch_end            = decorate_callback_method_sig_idx_logs,
+
     on_train_batch_begin    = decorate_callback_method_sig_idx_logs,
     on_train_batch_end      = decorate_callback_method_sig_idx_logs,
     on_test_begin           = decorate_callback_method_sig_logs,

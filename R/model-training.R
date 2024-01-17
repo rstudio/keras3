@@ -23,7 +23,7 @@
 #' @param loss
 #' Loss function. May be:
 #' - a string (name of builtin loss function),
-#' - a custom function, optionally with a `"name"` attribute, or
+#' - a custom function, or
 #' - a [`Loss`] instance (returned by the `loss_*` family of functions).
 #'
 #' A loss function is any callable with the signature
@@ -35,10 +35,6 @@
 #' shape `(batch_size, d1, .. dN-1)`).
 #' `y_pred` should have shape `(batch_size, d1, .. dN)`.
 #' The loss function should return a float tensor.
-#'
-#' If providing an anonymous R function, you can provide a `name` attribute for
-#' the function to customize printed output during `fit()` and to enable model
-#' serialization. You can assign with: `attr(<fn>, "name") <- "my_custom_loss_name"`.
 #'
 #' @param loss_weights
 #' Optional list (named or unnamed) specifying scalar
@@ -973,13 +969,17 @@ as_model_verbose_arg <- function(x) {
 
 
 as_class_weight <- function(class_weight, class_names = NULL) {
+  if (is.null(class_weight))
+    return(NULL)
+  if (is.numeric(class_weight))
+    class_weight <- as.list(class_weight)
+
   # convert class weights to python dict
-  if (!is.null(class_weight)) {
-    if (is.list(class_weight))
-      class_weight <- dict(class_weight)
-    else
-      stop("class_weight must be a named list of weights")
-  }
+  if (is.list(class_weight))
+    # dict() converts numeric (chr) names to numeric (dbl) keys
+    return(dict(class_weight))
+
+  stop("class_weight must be a named list of weights")
 }
 
 

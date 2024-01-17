@@ -55,11 +55,11 @@ could be a Sequential model or a subclassed model as well):
 
 ```{r}
 inputs <- layer_input(shape = 784, name="digits")
-outputs <- inputs %>%
-  layer_dense(units = 64, activation = "relu", name = "dense_1") %>%
-  layer_dense(units = 64, activation = "relu", name = "dense_2") %>%
+outputs <- inputs |>
+  layer_dense(units = 64, activation = "relu", name = "dense_1") |>
+  layer_dense(units = 64, activation = "relu", name = "dense_2") |>
   layer_dense(units = 10, activation = "softmax", name = "predictions")
-model <- keras_model(inputs=inputs, outputs=outputs)
+model <- keras_model(inputs = inputs, outputs = outputs)
 summary(model)
 ```
 
@@ -89,11 +89,12 @@ We specify the training configuration (optimizer, loss, metrics):
 
 ```{r}
 model |> compile(
-    optimizer = optimizer_rmsprop(),  # Optimizer
-    # Loss function to minimize
-    loss = loss_sparse_categorical_crossentropy(),
-    # List of metrics to monitor
-    metrics = list(metric_sparse_categorical_accuracy())
+  # Optimizer
+  optimizer = optimizer_rmsprop(),
+  # Loss function to minimize
+  loss = loss_sparse_categorical_crossentropy(),
+  # List of metrics to monitor
+  metrics = list(metric_sparse_categorical_accuracy())
 )
 ```
 
@@ -123,12 +124,12 @@ We evaluate the model on the test data via `evaluate()`:
 
 ```{r}
 # Evaluate the model on the test data using `evaluate`
-results <- model %>% evaluate(x_test, y_test, batch_size=128)
+results <- model |> evaluate(x_test, y_test, batch_size=128)
 results
 
 # Generate predictions (probabilities -- the output of the last layer)
 # on new data using `predict`
-predictions <- model %>% predict(x_test[1:2,])
+predictions <- model |> predict(x_test[1:2,])
 dim(predictions)
 ```
 
@@ -142,10 +143,10 @@ optionally, some metrics to monitor.
 You pass these to the model as arguments to the `compile()` method:
 
 ```{r}
-model %>% compile(
-    optimizer = optimizer_rmsprop(learning_rate=1e-3),
-    loss = loss_sparse_categorical_crossentropy(),
-    metrics = list(metric_sparse_categorical_accuracy())
+model |> compile(
+  optimizer = optimizer_rmsprop(learning_rate = 1e-3),
+  loss = loss_sparse_categorical_crossentropy(),
+  metrics = list(metric_sparse_categorical_accuracy())
 )
 ```
 
@@ -160,7 +161,7 @@ Note that if you're satisfied with the default settings, in many cases the optim
 loss, and metrics can be specified via string identifiers as a shortcut:
 
 ```{r}
-model %>% compile(
+model |> compile(
   optimizer = "rmsprop",
   loss = "sparse_categorical_crossentropy",
   metrics = c("sparse_categorical_accuracy")
@@ -173,16 +174,16 @@ call them several times across different examples in this guide.
 ```{r}
 get_uncompiled_model <- function() {
   inputs <- layer_input(shape = 784, name = "digits")
-  outputs <- inputs %>%
-    layer_dense(units = 64, activation = "relu", name = "dense_1") %>%
-    layer_dense(units = 64, activation = "relu", name = "dense_2") %>%
+  outputs <- inputs |>
+    layer_dense(units = 64, activation = "relu", name = "dense_1") |>
+    layer_dense(units = 64, activation = "relu", name = "dense_2") |>
     layer_dense(units = 10, activation = "softmax", name = "predictions")
   keras_model(inputs = inputs, outputs = outputs)
 }
 
 get_compiled_model <- function() {
   model <- get_uncompiled_model()
-  model %>% compile(
+  model |> compile(
     optimizer = "rmsprop",
     loss = "sparse_categorical_crossentropy",
     metrics = c("sparse_categorical_accuracy")
@@ -198,23 +199,23 @@ from scratch, because what you need is likely to be already part of the Keras AP
 
 Optimizers:
 
-- `SGD()` (with or without momentum)
-- `RMSprop()`
-- `Adam()`
+- [`optimizer_sgd()`] (with or without momentum)
+- [`optimizer_rmsprop()`]
+- [`optimizer_adam()`]
 - etc.
 
 Losses:
 
-- `MeanSquaredError()`
-- `KLDivergence()`
-- `CosineSimilarity()`
+- [`loss_mean_squared_error()`]
+- [`loss_kl_divergence()`]
+- [`loss_cosine_similarity()`]
 - etc.
 
 Metrics:
 
-- `AUC()`
-- `Precision()`
-- `Recall()`
+- [`metric_auc()`]
+- [`metric_precision()`]
+- [`metric_recall()`]
 - etc.
 
 ### Custom losses
@@ -227,26 +228,27 @@ error between the real data and the predictions:
 
 ```{r}
 custom_mean_squared_error <- function(y_true, y_pred) {
-  op_mean(op_square(y_true - y_pred), axis=-1)
+  op_mean(op_square(y_true - y_pred), axis = -1)
 }
 
 model <- get_uncompiled_model()
-model %>% compile(optimizer="adam", loss=custom_mean_squared_error)
+model |> compile(optimizer = "adam",
+                 loss = custom_mean_squared_error)
 
 # We need to one-hot encode the labels to use MSE
-y_train_one_hot <- op_one_hot(y_train, num_classes=10)
-model %>% fit(x_train, y_train_one_hot, batch_size=64, epochs=1)
+y_train_one_hot <- op_one_hot(y_train, num_classes = 10)
+model |> fit(x_train, y_train_one_hot, batch_size = 64, epochs = 2)
 ```
 
 If you need a loss function that takes in parameters beside `y_true` and `y_pred`, you
-can subclass the `keras.losses.Loss` class using `new_loss_class` and implement the following two methods:
+can subclass the Keras base `Loss` class using [`Loss()`] and implement the following two methods:
 
 - `initialize()`: accept parameters to pass during the call of your loss function
 - `call(y_true, y_pred)`: use the targets (y_true) and the model predictions
 (y_pred) to compute the model's loss
 
 Let's say you want to use mean squared error, but with an added term that
-will de-incentivize  prediction values far from 0.5 (we assume that the categorical
+will de-incentivize prediction values far from 0.5 (we assume that the categorical
 targets are one-hot encoded and take values between 0 and 1). This
 creates an incentive for the model not to be too confident, which may help
 reduce overfitting (we won't know if it works until we try!).
@@ -254,8 +256,8 @@ reduce overfitting (we won't know if it works until we try!).
 Here's how you would do it:
 
 ```{r}
-loss_custom_mse <- new_loss_class(
-  "CustomMSE",
+loss_custom_mse <- Loss(
+  classname = "CustomMSE",
   initialize = function(regularization_factor = 0.1, name = "custom_mse") {
     super$initialize(name = name)
     self$regularization_factor <- regularization_factor
@@ -268,20 +270,20 @@ loss_custom_mse <- new_loss_class(
 )
 
 model <- get_uncompiled_model()
-model %>% compile(optimizer="adam", loss = loss_custom_mse())
+model |> compile(optimizer="adam", loss = loss_custom_mse())
 
 y_train_one_hot <- op_one_hot(y_train, num_classes=10)
-model %>% fit(x_train, y_train_one_hot, batch_size=64, epochs=1)
+model |> fit(x_train, y_train_one_hot, batch_size=64, epochs=1)
 ```
 
 ### Custom metrics
 
 If you need a metric that isn't part of the API, you can easily create custom metrics
-by subclassing the `keras.metrics.Metric` class using `new_metric_class`. You will need to implement 4
+by subclassing the Keras base `Metric` class using [`Metric()`]. You will need to implement 4
 methods:
 
 - `initialize()`, in which you will create state variables for your metric.
-- `update_state(y_true, y_pred, sample_weight=None)`, which uses the targets
+- `update_state(y_true, y_pred, sample_weight = NULL)`, which uses the targets
 y_true and the model predictions y_pred to update the state variables.
 - `result()`, which uses the state variables to compute the final results.
 - `reset_state()`, which reinitializes the state of the metric.
@@ -294,16 +296,18 @@ Here's a simple example showing how to implement a `CategoricalTruePositives` me
 that counts how many samples were correctly classified as belonging to a given class:
 
 ```{r}
-metric_categorical_true_positives <- new_metric_class(
+metric_categorical_true_positives <- Metric(
   "CategoricalTruePositives",
+
   initialize = function(name = "categorical_true_positives", ...) {
     super$initialize(name = name, ...)
     self$true_positives <- self$add_variable(shape = shape(),
                                              name = "ctp",
                                              initializer = "zeros")
   },
+
   update_state = function(y_true, y_pred, sample_weight = NULL) {
-    y_pred <- op_reshape(op_argmax(y_pred, axis = 2), shape(-1, 1))
+    y_pred <- op_argmax(y_pred, axis = 2) |> op_reshape(c(-1, 1))
     values <- op_cast(y_true, "int32") == op_cast(y_pred, "int32")
     values <- op_cast(values, "float32")
     if (!is.null(sample_weight)) {
@@ -312,21 +316,23 @@ metric_categorical_true_positives <- new_metric_class(
     }
     self$true_positives$assign_add(op_sum(values))
   },
+
   result = function() {
     self$true_positives
   },
+
   reset_state = function() {
     self$true_positives$assign(0.0)
   }
 )
 
 model <- get_uncompiled_model()
-model %>% compile(
+model |> compile(
   optimizer = optimizer_rmsprop(learning_rate = 1e-3),
   loss = loss_sparse_categorical_crossentropy(),
-  metrics = list(metric_categorical_true_positives())
+  metrics = c(metric_categorical_true_positives())
 )
-history <- model %>% fit(x_train, y_train, batch_size = 64, epochs = 3)
+history <- model |> fit(x_train, y_train, batch_size = 64, epochs = 3)
 ```
 
 ### Handling losses and metrics that don't fit the standard signature
@@ -336,7 +342,7 @@ The overwhelming majority of losses and metrics can be computed from `y_true` an
 instance, a regularization loss may only require the activation of a layer (there are
 no targets in this case), and this activation may not be a model output.
 
-In such cases, you can call `self.add_loss(loss_value)` from inside the call method of
+In such cases, you can call `self$add_loss(loss_value)` from inside the call method of
 a custom layer. Losses added in this way get added to the "main" loss during training
 (the one passed to `compile()`). Here's a simple example that adds activity
 regularization (note that activity regularization is built-in in all Keras layers --
@@ -351,22 +357,20 @@ layer_custom_activity_regularizer <- Layer(
   }
 )
 
-inputs <- layer_input(shape = 784, name="digits")
-outputs <- inputs %>%
-  layer_dense(units=32, activation="relu", name="dense_1") %>%
-  layer_custom_activity_regularizer() %>%
-  layer_dense(units=64, activation = "relu", name="dense_2") %>%
-  layer_dense(units=10, name="predictions")
+inputs <- keras_input(shape = 784, name = "digits")
+outputs <- inputs |>
+  layer_dense(units = 32, activation = "relu", name = "dense_1") |>
+  layer_custom_activity_regularizer() |>
+  layer_dense(units = 64, activation = "relu", name = "dense_2") |>
+  layer_dense(units = 10, name = "predictions")
 
-model <- keras_model(inputs=inputs, outputs=outputs)
-model %>% compile(
-    optimizer= optimizer_rmsprop(learning_rate=1e-3),
-    loss=loss_sparse_categorical_crossentropy(from_logits=TRUE)
-)
+model <- keras_model(inputs = inputs, outputs = outputs)
+model |> compile(optimizer = optimizer_rmsprop(learning_rate = 1e-3),
+                 loss = loss_sparse_categorical_crossentropy(from_logits = TRUE))
 
 # The displayed loss will be much higher than before
 # due to the regularization component.
-model %>% fit(x_train, y_train, batch_size=64, epochs=1)
+model |> fit(x_train, y_train, batch_size = 64, epochs = 1)
 ```
 
 Note that when you pass losses via `add_loss()`, it becomes possible to call
@@ -398,21 +402,21 @@ You can use it in a model with two inputs (input data & targets), compiled witho
 `loss` argument, like this:
 
 ```{r}
-inputs <- layer_input(shape = 3, name="inputs")
-targets <- layer_input(shape = 10, name="targets")
+inputs <- keras_input(shape = 3, name = "inputs")
+targets <- keras_input(shape = 10, name = "targets")
 
 logits <- inputs |> layer_dense(10)
 predictions <- layer_logistic_endpoint(name = "predictions")(targets, logits)
 
 model <- keras_model(inputs = list(inputs, targets),
                      outputs = predictions)
-model %>% compile(optimizer = "adam")  # No loss argument!
+model |> compile(optimizer = "adam")  # No loss argument!
 
 data <- list(
   inputs = random_normal(c(3, 3)),
   targets = random_normal(c(3, 10))
 )
-model %>% fit(data, epochs = 1)
+model |> fit(data, epochs = 1)
 ```
 
 For more information about training multi-input models, see the section **Passing data
@@ -421,14 +425,14 @@ to multi-input, multi-output models**.
 ### Automatically setting apart a validation holdout set
 
 In the first end-to-end example you saw, we used the `validation_data` argument to pass
-a tuple of NumPy arrays `(x_val, y_val)` to the model for evaluating a validation loss
+a list of arrays `list(x_val, y_val)` to the model for evaluating a validation loss
 and validation metrics at the end of each epoch.
 
 Here's another option: the argument `validation_split` allows you to automatically
 reserve part of your training data for validation. The argument value represents the
 fraction of the data to be reserved for validation, so it should be set to a number
-higher than 0 and lower than 1. For instance, `validation_split=0.2` means "use 20% of
-the data for validation", and `validation_split=0.6` means "use 60% of the data for
+higher than 0 and lower than 1. For instance, `validation_split = 0.2` means "use 20% of
+the data for validation", and `validation_split = 0.6` means "use 60% of the data for
 validation".
 
 The way the validation is computed is by taking the last x% samples of the arrays
@@ -443,16 +447,16 @@ model |> fit(x_train, y_train,
              validation_split = 0.2, epochs = 1)
 ```
 
-## Training & evaluation using `tf_dataset` objects
+## Training & evaluation using TF `Dataset` objects
 
 In the past few paragraphs, you've seen how to handle losses, metrics, and optimizers,
 and you've seen how to use the `validation_data` and `validation_split` arguments in
-`fit()`, when your data is passed as NumPy arrays.
+`fit()`, when your data is passed as arrays.
 
 Another option is to use an iterator-like, such as a `tf.data.Dataset`, a
-PyTorch `DataLoader`, or a Keras `PyDataset`. Let's take look at the former.
+PyTorch `DataLoader`, or an R generator function. Let's take look at the former.
 
-The `tf.data` API is a set of utilities in TensorFlow 2.0 for loading and preprocessing
+The `{tfdatasets}` R package containes a set of utilities for loading and preprocessing
 data in a way that's fast and scalable. For a complete guide about creating `Datasets`,
 see the [tf.data documentation](https://www.tensorflow.org/guide/data).
 
@@ -469,26 +473,27 @@ model <- get_compiled_model()
 # First, let's create a training Dataset instance.
 # For the sake of our example, we'll use the same MNIST data as before.
 train_dataset <- tensor_slices_dataset(list(x_train, y_train))
+
 # Shuffle and slice the dataset.
-train_dataset <- train_dataset %>%
-  dataset_shuffle(buffer_size=1024) %>%
+train_dataset <- train_dataset |>
+  dataset_shuffle(buffer_size=1024) |>
   dataset_batch(64)
 
 # Now we get a test dataset.
-test_dataset <- tensor_slices_dataset(list(x_test, y_test))
-test_dataset <- test_dataset %>%
+test_dataset <-
+  tensor_slices_dataset(list(x_test, y_test)) |>
   dataset_batch(64)
 
 # Since the dataset already takes care of batching,
 # we don't pass a `batch_size` argument.
-model %>% fit(train_dataset, epochs=3)
+model |> fit(train_dataset, epochs = 3)
 
 # You can also evaluate or predict on a dataset.
-result <- model %>% evaluate(test_dataset)
+result <- model |> evaluate(test_dataset)
 result
 ```
 
-Note that the Dataset is reset at the end of each epoch, so it can be reused of the
+Note that the `Dataset` is reset at the end of each epoch, so it can be reused of the
 next epoch.
 
 If you want to run training only on a specific number of batches from this Dataset, you
@@ -500,12 +505,12 @@ model <- get_compiled_model()
 
 # Prepare the training dataset
 train_dataset <- tensor_slices_dataset(list(x_train, y_train))
-train_dataset <- train_dataset %>%
-  dataset_shuffle(buffer_size=1024) %>%
+train_dataset <- train_dataset |>
+  dataset_shuffle(buffer_size = 1024) |>
   dataset_batch(64)
 
 # Only use the 100 batches per epoch (that's 64 * 100 samples)
-model %>% fit(train_dataset, epochs=3, steps_per_epoch=100)
+model |> fit(train_dataset, epochs = 3, steps_per_epoch = 100)
 ```
 
 You can also pass a `Dataset` instance as the `validation_data` argument in `fit()`:
@@ -515,15 +520,15 @@ model <- get_compiled_model()
 
 # Prepare the training dataset
 train_dataset <- tensor_slices_dataset(list(x_train, y_train))
-train_dataset <- train_dataset %>%
-  dataset_shuffle(buffer_size=1024) %>%
+train_dataset <- train_dataset |>
+  dataset_shuffle(buffer_size=1024) |>
   dataset_batch(64)
 
 # Prepare the validation dataset
-val_dataset = tensor_slices_dataset(list(x_val, y_val))
-val_dataset <- val_dataset %>% dataset_batch(64)
+val_dataset <- tensor_slices_dataset(list(x_val, y_val))
+val_dataset <- val_dataset |> dataset_batch(64)
 
-model %>% fit(train_dataset, epochs=1, validation_data=val_dataset)
+model |> fit(train_dataset, epochs = 1, validation_data = val_dataset)
 ```
 
 At the end of each epoch, the model will iterate over the validation dataset and
@@ -535,25 +540,25 @@ steps the model should run with the validation dataset before interrupting valid
 and moving on to the next epoch:
 
 ```{r}
-model = get_compiled_model()
+model  <- get_compiled_model()
 
 # Prepare the training dataset
 train_dataset <- tensor_slices_dataset(list(x_train, y_train))
-train_dataset <- train_dataset %>%
-  dataset_shuffle(buffer_size=1024) %>%
+train_dataset <- train_dataset |>
+  dataset_shuffle(buffer_size = 1024) |>
   dataset_batch(64)
 
 # Prepare the validation dataset
-val_dataset = tensor_slices_dataset(list(x_val, y_val))
-val_dataset <- val_dataset %>% dataset_batch(64)
+val_dataset <- tensor_slices_dataset(list(x_val, y_val))
+val_dataset <- val_dataset |> dataset_batch(64)
 
 model %>% fit(
-    train_dataset,
-    epochs=1,
-    # Only run validation using the first 10 batches of the dataset
-    # using the `validation_steps` argument
-    validation_data=val_dataset,
-    validation_steps=10,
+  train_dataset,
+  epochs = 1,
+  # Only run validation using the first 10 batches of the dataset
+  # using the `validation_steps` argument
+  validation_data = val_dataset,
+  validation_steps = 10,
 )
 ```
 
@@ -717,22 +722,22 @@ sample frequency:
 
 ### Class weights
 
-This is set by passing a dictionary to the `class_weight` argument to
-`fit()`. This dictionary maps class indices to the weight that should
+This is set by passing a named list to the `class_weight` argument to
+`fit()`. This list maps class indices to the weight that should
 be used for samples belonging to this class.
 
 This can be used to balance classes without resampling, or to train a
 model that gives more importance to a particular class.
 
 For instance, if class "0" is half as represented as class "1" in your data,
-you could use `Model.fit(..., class_weight={0: 1., 1: 0.5})`.
+you could use `model |> fit(..., class_weight = c("0" = 1, "1" = 0.5))`.
 
-Here's a NumPy example where we use class weights or sample weights to
+Here's an R example where we use class weights or sample weights to
 give more importance to the correct classification of class #5 (which
 is the digit "5" in the MNIST dataset).
 
 ```{r}
-class_weight = list(
+class_weight <- c(
     "0" = 1.0,
     "1" = 1.0,
     "2" = 1.0,
@@ -748,18 +753,20 @@ class_weight = list(
 )
 
 model <- get_compiled_model()
-model %>% fit(x_train, y_train, class_weight=class_weight, batch_size=64, epochs=1)
+model |> fit(x_train, y_train,
+             class_weight = class_weight,
+             batch_size = 64, epochs = 1)
 ```
 
 ### Sample weights
 
 For fine grained control, or if you are not building a classifier,
-you can use "sample weights".
+you can use `sample_weights`.
 
-- When training from NumPy data: Pass the `sample_weight`
+- When training from R arrays: Pass the `sample_weight`
   argument to `fit()`.
 - When training from `tf_dataset` or any other sort of iterator:
-  Yield `(input_batch, label_batch, sample_weight_batch)` tuples.
+  yield `(input_batch, label_batch, sample_weight_batch)` tuples.
 
 A "sample weights" array is an array of numbers that specify how much weight
 each sample in a batch should have in computing the total loss. It is commonly
@@ -775,8 +782,10 @@ sample_weight <- rep(1.0, length(y_train))
 sample_weight[y_train == 5] <- 2.0
 
 model <- get_compiled_model()
-model %>% fit(
-    x_train, y_train, sample_weight=sample_weight, batch_size=64, epochs=1
+model |> fit(
+  x_train, y_train,
+  sample_weight = sample_weight,
+  batch_size = 64, epochs = 1
 )
 ```
 
@@ -793,46 +802,46 @@ train_dataset <- tensor_slices_dataset(list(
 ))
 
 # Shuffle and slice the dataset.
-train_dataset <- train_dataset %>%
-  dataset_shuffle(buffer_size=1024) %>%
+train_dataset <- train_dataset |>
+  dataset_shuffle(buffer_size = 1024) |>
   dataset_batch(64)
 
 model <- get_compiled_model()
-model %>% fit(train_dataset, epochs=1)
+model |> fit(train_dataset, epochs = 1)
 ```
 
 ## Passing data to multi-input, multi-output models
 
 In the previous examples, we were considering a model with a single input (a tensor of
-shape `(764,)`) and a single output (a prediction tensor of shape `(10,)`). But what
+shape `(764)`) and a single output (a prediction tensor of shape `(10)`). But what
 about models that have multiple inputs or outputs?
 
 Consider the following model, which has an image input of shape `(32, 32, 3)` (that's
-`(height, width, channels)`) and a time series input of shape `(None, 10)` (that's
+`(height, width, channels)`) and a time series input of shape `(NA, 10)` (that's
 `(timesteps, features)`). Our model will have two outputs computed from the
-combination of these inputs: a "score" (of shape `(1,)`) and a probability
-distribution over five classes (of shape `(5,)`).
+combination of these inputs: a "score" (of shape `(1)`) and a probability
+distribution over five classes (of shape `(5)`).
 
 ```{r}
-image_input <- layer_input(shape=c(32, 32, 3), name="img_input")
-timeseries_input <- layer_input(shape=shape(NULL, 10), name="ts_input")
+image_input <- keras_input(c(32, 32, 3), name = "img_input")
+timeseries_input <- keras_input(c(NA, 10), name = "ts_input")
 
-x1 <- image_input %>%
-  layer_conv_2d(filters=3, kernel_size=c(3, 3)) %>%
+x1 <- image_input |>
+  layer_conv_2d(filters = 3, kernel_size = c(3, 3)) |>
   layer_global_max_pooling_2d()
 
-x2 <- timeseries_input %>%
-  layer_conv_1d(filters=3, kernel_size=3) %>%
+x2 <- timeseries_input |>
+  layer_conv_1d(filters = 3, kernel_size = 3) |>
   layer_global_max_pooling_1d()
 
-x <- layer_concatenate(list(x1, x2))
+x <- layer_concatenate(x1, x2)
 
-score_output <- layer_dense(x, 1, name="score_output")
-class_output <- layer_dense(x, 5, name="class_output")
+score_output <- layer_dense(x, 1, name = "score_output")
+class_output <- layer_dense(x, 5, name = "class_output")
 
 model <- keras_model(
-    inputs = list(image_input, timeseries_input),
-    outputs = list(score_output, class_output)
+  inputs = list(image_input, timeseries_input),
+  outputs = list(score_output, class_output)
 )
 ```
 
@@ -847,12 +856,12 @@ At compilation time, we can specify different losses to different outputs, by pa
 the loss functions as a list:
 
 ```{r}
-model %>% compile(
-    optimizer = optimizer_rmsprop(1e-3),
-    loss = list(
-        loss_mean_squared_error(),
-        loss_categorical_crossentropy()
-    )
+model |> compile(
+  optimizer = optimizer_rmsprop(1e-3),
+  loss = list(
+    loss_mean_squared_error(),
+    loss_categorical_crossentropy()
+  )
 )
 ```
 
@@ -862,7 +871,7 @@ applied to every output (which is not appropriate here).
 Likewise for metrics:
 
 ```{r}
-model %>% compile(
+model |> compile(
   optimizer = optimizer_rmsprop(1e-3),
   loss = list(
     loss_mean_squared_error(),
@@ -879,10 +888,10 @@ model %>% compile(
 ```
 
 Since we gave names to our output layers, we could also specify per-output losses and
-metrics via a dict:
+metrics via a named list:
 
 ```{r}
-model %>% compile(
+model |> compile(
   optimizer = optimizer_rmsprop(1e-3),
   loss = list(
     score_output = loss_mean_squared_error(),
@@ -898,14 +907,14 @@ model %>% compile(
 )
 ```
 
-We recommend the use of explicit names and dicts if you have more than 2 outputs.
+We recommend the use of names if you have more than 2 outputs.
 
 It's possible to give different weights to different output-specific losses (for
 instance, one might wish to privilege the "score" loss in our example, by giving to 2x
 the importance of the class loss), using the `loss_weights` argument:
 
 ```{r}
-model %>% compile(
+model |> compile(
   optimizer = optimizer_rmsprop(1e-3),
   loss = list(
     score_output = loss_mean_squared_error(),
@@ -926,16 +935,16 @@ You could also choose not to compute a loss for certain outputs, if these output
 meant for prediction but not for training:
 
 ```{r}
-# List loss version
-model %>% compile(
-    optimizer = optimizer_rmsprop(1e-3),
-    loss = list(NULL, loss_categorical_crossentropy())
+# loss list, positional version
+model |> compile(
+  optimizer = optimizer_rmsprop(1e-3),
+  loss = list(NULL, loss_categorical_crossentropy())
 )
 
-# Or dict loss version
-model %>% compile(
-    optimizer = optimizer_rmsprop(1e-3),
-    loss = list(class_output = loss_categorical_crossentropy())
+# Or loss list, named version
+model |> compile(
+  optimizer = optimizer_rmsprop(1e-3),
+  loss = list(class_output = loss_categorical_crossentropy())
 )
 ```
 
@@ -945,7 +954,7 @@ specifying a loss function in compile: you can pass **lists of arrays** (with
 names to arrays**.
 
 ```{r}
-model %>% compile(
+model |> compile(
   optimizer = optimizer_rmsprop(1e-3),
   loss = list(
     loss_mean_squared_error(),
@@ -953,42 +962,42 @@ model %>% compile(
   )
 )
 
-# Generate dummy NumPy data
+# Generate dummy data
 img_data <- random_normal(c(100, 32, 32, 3))
 ts_data <- random_normal(c(100, 20, 10))
 score_targets <- random_normal(c(100, 1))
 class_targets <- random_normal(c(100, 5))
 
-# Fit on lists
-model %>% fit(
+# Fit on unnamed lists (positional matching)
+model |> fit(
     list(img_data, ts_data),
     list(score_targets, class_targets),
     batch_size=32,
     epochs=1
 )
 
-# Alternatively, fit on dicts
-model %>% fit(
+# Alternatively, fit on named lists (names matching)
+model |> fit(
   list(img_input = img_data, ts_input = ts_data),
   list(score_output = score_targets, class_output = class_targets),
-  batch_size=32,
-  epochs=1,
+  batch_size = 32,
+  epochs = 1
 )
 ```
 
-Here's the `Dataset` use case: similarly as what we did for NumPy arrays, the `Dataset`
-should return a tuple of dicts.
+Here's the `Dataset` use case: similarly as what we did for R arrays, the `Dataset`
+should return a tuple of named lists (dicts).
 
 ```{r}
 train_dataset <- tensor_slices_dataset(list(
   list(img_input = img_data, ts_input = ts_data),
   list(score_output = score_targets, class_output = class_targets)
 ))
-train_dataset <- train_dataset %>%
-  dataset_shuffle(buffer_size=1024) %>%
+train_dataset <- train_dataset |>
+  dataset_shuffle(buffer_size = 1024) |>
   dataset_batch(64)
 
-model %>% fit(train_dataset, epochs=1)
+model |> fit(train_dataset, epochs = 1)
 ```
 
 ## Using callbacks
@@ -1015,21 +1024,21 @@ model <- get_compiled_model()
 callbacks <- list(
   callback_early_stopping(
     # Stop training when `val_loss` is no longer improving
-    monitor="val_loss",
+    monitor = "val_loss",
     # "no longer improving" being defined as "no better than 1e-2 less"
-    min_delta=1e-2,
+    min_delta = 1e-2,
     # "no longer improving" being further defined as "for at least 2 epochs"
-    patience=2,
-    verbose=1
+    patience = 2,
+    verbose = 1
   )
 )
-model %>% fit(
-    x_train,
-    y_train,
-    epochs=20,
-    batch_size=64,
-    callbacks=callbacks,
-    validation_split=0.2,
+model |> fit(
+  x_train,
+  y_train,
+  epochs = 20,
+  batch_size = 64,
+  callbacks = callbacks,
+  validation_split = 0.2,
 )
 ```
 
@@ -1037,36 +1046,44 @@ model %>% fit(
 
 There are many built-in callbacks already available in Keras, such as:
 
-- `ModelCheckpoint`: Periodically save the model.
-- `EarlyStopping`: Stop training when training is no longer improving the validation
+- [`callback_model_checkpoint()`]: Periodically save the model.
+- [`callback_early_stopping()`]: Stop training when training is no longer improving the validation
 metrics.
-- `TensorBoard`: periodically write model logs that can be visualized in
+- [`callback_tensorboard()`]: periodically write model logs that can be visualized in
 [TensorBoard](https://www.tensorflow.org/tensorboard) (more details in the section
 "Visualization").
-- `CSVLogger`: streams loss and metrics data to a CSV file.
+- [`callback_csv_logger()`]: streams loss and metrics data to a CSV file.
 - etc.
 
 See the [callbacks documentation](/api/callbacks/) for the complete list.
 
 ### Writing your own callback
 
-You can create a custom callback by extending the base class
-`keras.callbacks.Callback`. A callback has access to its associated model through the
-class property `self.model`.
+You can create a custom callback by subclassing the base [`Callback()`] class.
+A callback has access to its associated model through the
+class property `self$model`.
 
 Make sure to read the
-[complete guide to writing custom callbacks](/guides/writing_your_own_callbacks/).
+[complete guide to writing custom callbacks](../writing_your_own_callbacks.html).
 
 Here's a simple example saving a list of per-batch loss values during training:
 
 ```{r}
-LossHistory <- new_callback_class(
-  "LossHistory",
-  on_train_begin = function(logs) {
-    self$per_batch_losses <- list()
+callback_loss_history <- Callback(
+  classname = "LossHistory",
+  initialize = function(file = "per_training_batch_losses.txt", ...) {
+    super$initialize(...)
+    private$file <- file
   },
-  on_batch_end = function(batch, logs) {
-    self$per_batch_losses <- c(self$per_batch_losses, logs$get("loss"))
+  on_train_begin = function(logs = NULL) {
+    private$per_batch_losses <- fastmap::faststack()
+  },
+  on_train_batch_begin = function(batch, logs = NULL) {
+    private$per_batch_losses$push(logs$loss)
+  },
+  on_train_end = function(logs = NULL) {
+    per_batch_losses <- private$per_batch_losses$as_list() |> as.numeric()
+    write(per_batch_losses, private$file)
   }
 )
 ```
@@ -1076,7 +1093,7 @@ LossHistory <- new_callback_class(
 When you're training model on relatively large datasets, it's crucial to save
 checkpoints of your model at frequent intervals.
 
-The easiest way to achieve this is with the `ModelCheckpoint` callback:
+The easiest way to achieve this is with [`callback_model_checkpoint()`]:
 
 ```{r}
 model <- get_compiled_model()
@@ -1088,19 +1105,18 @@ callbacks <- list(
     # the current checkpoint if and only if
     # the `val_loss` score has improved.
     # The saved model name will include the current epoch.
-    filepath="mymodel_{epoch}.keras",
-    save_best_only=TRUE,  # Only save a model if `val_loss` has improved.
-    monitor="val_loss",
-    verbose=1
+    filepath = "mymodel_{epoch}.keras",
+    save_best_only = TRUE,
+    # Only save a model if `val_loss` has improved.
+    monitor = "val_loss",
+    verbose = 1
   )
 )
-model %>% fit(
-    x_train,
-    y_train,
-    epochs=2,
-    batch_size=64,
-    callbacks=callbacks,
-    validation_split=0.2,
+model |> fit(
+  x_train, y_train,
+  epochs = 2, batch_size = 64,
+  callbacks = callbacks,
+  validation_split = 0.2
 )
 ```
 
@@ -1111,18 +1127,18 @@ gets randomly interrupted. Here's a basic example:
 ```{r}
 # Prepare a directory to store all the checkpoints.
 checkpoint_dir <- "./ckpt"
-if (!dir.exists(checkpoint_dir)) {
-  dir.create(checkpoint_dir)
-}
+fs::dir_create(checkpoint_dir)
 
 make_or_restore_model <- function() {
-  # Either restore the latest model, or create a fresh one
+  # Either restore the latest (best) model, or create a fresh one
   # if there is no checkpoint available.
-  checkpoints <- list.files(checkpoint_dir, full.names=TRUE)
+  checkpoints <- Sys.glob(file.path(checkpoint_dir, "model-loss=*.keras"))
 
   if (length(checkpoints) > 0) {
-    latest_checkpoint <- tail(checkpoints, 1)
-    load_model(latest_checkpoint)
+    checkpoint_losses <- sub("^model-loss=([0-9.]+)\\.keras$", "\\1",
+                             basename(checkpoints)) |> as.numeric()
+    best_checkpoint <- checkpoints[which.min(checkpoint_losses)]
+    load_model(best_checkpoint)
   } else {
     get_compiled_model()
   }
@@ -1134,10 +1150,13 @@ callbacks <- list(
   # We include the training loss in the saved model name.
   callback_model_checkpoint(
     filepath = file.path(checkpoint_dir, "model-loss={loss:.2f}.keras"),
-    save_freq=100
+    save_freq = 100
   )
 )
-model %>% fit(x_train, y_train, epochs=1, callbacks=callbacks)
+model |> fit(x_train, y_train, epochs = 1, callbacks = callbacks)
+```
+```{r, include = FALSE}
+unlink(checkpoint_dir, recursive = TRUE)
 ```
 
 You call also write your own callback for saving and restoring models.
@@ -1162,10 +1181,11 @@ as the `learning_rate` argument in your optimizer:
 ```{r}
 initial_learning_rate <- 0.1
 lr_schedule <- learning_rate_schedule_exponential_decay(
-    initial_learning_rate, decay_steps=100000, decay_rate=0.96, staircase=TRUE
+    initial_learning_rate, decay_steps=100000, decay_rate=0.96,
+    staircase=TRUE
 )
 
-optimizer <- optimizer_rmsprop(learning_rate=lr_schedule)
+optimizer <- optimizer_rmsprop(learning_rate = lr_schedule)
 ```
 
 Several built-in schedules are available: `ExponentialDecay`, `PiecewiseConstantDecay`,
@@ -1179,7 +1199,7 @@ since the optimizer does not have access to validation metrics.
 
 However, callbacks do have access to all metrics, including validation metrics! You can
 thus achieve this pattern by using a callback that modifies the current learning rate
-on the optimizer. In fact, this is even built-in as the `ReduceLROnPlateau` callback.
+on the optimizer. In fact, this is even built-in as [`callback_reduce_lr_on_plateau()`].
 
 ## Visualizing loss and metrics during training with TensorBoard
 
@@ -1189,8 +1209,7 @@ that you can run locally that provides you with:
 
 - Live plots of the loss and metrics for training and evaluation
 - (optionally) Visualizations of the histograms of your layer activations
-- (optionally) 3D visualizations of the embedding spaces learned by your `Embedding`
-layers
+- (optionally) 3D visualizations of the embedding spaces learned by your `layer_embedding()`
 
 If you have installed TensorFlow with pip, you should be able to launch TensorBoard
 from the command line:
@@ -1199,28 +1218,28 @@ from the command line:
 tensorboard --logdir=/full_path_to_your_logs
 ```
 
-or using:
+or from R using:
 
 ```{r, eval = FALSE}
-tensorflow::tensorboard(logdir="/full_path_to_your_logs")
+tensorflow::tensorboard(logdir = "/full_path_to_your_logs")
 ```
 
 
 ### Using the TensorBoard callback
 
-The easiest way to use TensorBoard with a Keras model and the `fit()` method is the
-`TensorBoard` callback.
+The easiest way to use TensorBoard with a Keras model and the `fit()` method is
+with [`callback_tensorboard()`].
 
 In the simplest case, just specify where you want the callback to write logs, and
 you're good to go:
 
 ```{r}
 tb_callback <- callback_tensorboard(
-    log_dir="/full_path_to_your_logs",
-    histogram_freq=0,  # How often to log histogram visualizations
-    embeddings_freq=0,  # How often to log embedding visualizations
-    update_freq="epoch",
-)  # How often to write logs (default: once per epoch)
+  log_dir = "/full_path_to_your_logs",
+  histogram_freq = 0, # How often to log histogram visualizations
+  embeddings_freq = 0, # How often to log embedding visualizations
+  update_freq = "epoch", # How often to write logs (default: once per epoch)
+)
 ```
 
 For more information, see the
