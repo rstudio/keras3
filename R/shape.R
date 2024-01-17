@@ -171,7 +171,7 @@ print.keras_shape <- function(x, ...) {
 
 #' @export
 r_to_py.keras_shape <- function(x, convert = FALSE) {
-  tuple(x)
+  tuple(x, convert = convert)
 }
 
 #' @rdname shape
@@ -187,3 +187,7 @@ destructure.keras_shape <- function(x) unclass(x)
 #' @rdname shape
 #' @export
 as.list.keras_shape <- function(x, ...) unclass(x)
+
+#' @rdname shape
+#' @export
+c.keras_shape <- function(...) shape(...)

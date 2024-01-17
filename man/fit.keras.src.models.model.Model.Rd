@@ -193,7 +193,7 @@ establish a different default.}
 A \code{keras_training_history} object, which is a named list:
 \verb{list(params = <params>, metrics = <metrics>")}, with S3 methods
 \code{print()}, \code{plot()}, and \code{as.data.frame()}. The metrics
-attribute is
+field is
 a record of training loss values and metrics values
 at successive epochs, as well as validation loss values
 and validation metrics values (if applicable).

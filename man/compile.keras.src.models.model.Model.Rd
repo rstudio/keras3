@@ -27,7 +27,7 @@
 \item{loss}{Loss function. May be:
 \itemize{
 \item a string (name of builtin loss function),
-\item a custom function, optionally with a \code{"name"} attribute, or
+\item a custom function, or
 \item a \code{\link{Loss}} instance (returned by the \verb{loss_*} family of functions).
 }
 
@@ -39,11 +39,7 @@ values, and \code{y_pred} are the model's predictions.
 sparse categorical crossentropy which expects integer arrays of
 shape \verb{(batch_size, d1, .. dN-1)}).
 \code{y_pred} should have shape \verb{(batch_size, d1, .. dN)}.
-The loss function should return a float tensor.
-
-If providing an anonymous R function, you can provide a \code{name} attribute for
-the function to customize printed output during \code{fit()} and to enable model
-serialization. You can assign with: \verb{attr(<fn>, "name") <- "my_custom_loss_name"}.}
+The loss function should return a float tensor.}
 
 \item{metrics}{List of metrics to be evaluated by the model during
 training and testing. Each of these can be:

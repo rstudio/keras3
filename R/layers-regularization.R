@@ -77,7 +77,7 @@ function (object, l1 = 0, l2 = 0, ...)
 #' you can use `noise_shape=(batch_size, 1, features)`.
 #'
 #' @param seed
-#' A Python integer to use as random seed.
+#' An R integer to use as random seed.
 #'
 #' @param object
 #' Object to compose the layer with. A tensor, array, or sequential model.

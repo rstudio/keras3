@@ -31,7 +31,7 @@
 #' Optional dtype of the output tensor.
 #'
 #' @param seed
-#' A Python integer or instance of
+#' An R integer or instance of
 #' [`random_seed_generator()`].
 #' Used to make the behavior of the initializer
 #' deterministic. Note that an initializer seeded with an integer
@@ -98,7 +98,7 @@ function (inputs, rate, noise_shape = NULL, seed = NULL)
 #' `config_set_floatx(float_dtype)`).
 #'
 #' @param seed
-#' A Python integer or instance of
+#' An R integer or instance of
 #' [`random_seed_generator()`].
 #' Used to make the behavior of the initializer
 #' deterministic. Note that an initializer seeded with an integer
@@ -147,7 +147,7 @@ function (shape, alpha, dtype = NULL, seed = NULL)
 #' `config_set_floatx(float_dtype)`)
 #'
 #' @param seed
-#' A Python integer or instance of
+#' An R integer or instance of
 #' [`random_seed_generator()`].
 #' Used to make the behavior of the initializer
 #' deterministic. Note that an initializer seeded with an integer
@@ -190,7 +190,7 @@ function (shape, minval, maxval, dtype = "int32", seed = NULL)
 #' `config_set_floatx(float_dtype)`).
 #'
 #' @param seed
-#' A Python integer or instance of
+#' An R integer or instance of
 #' [`random_seed_generator()`].
 #' Used to make the behavior of the initializer
 #' deterministic. Note that an initializer seeded with an integer
@@ -222,7 +222,7 @@ function (shape, mean = 0, stddev = 1, dtype = NULL, seed = NULL)
 #' `0`.
 #'
 #' @param seed
-#' A Python integer or instance of
+#' An R integer or instance of
 #' [`random_seed_generator()`].
 #' Used to make the behavior of the initializer
 #' deterministic. Note that an initializer seeded with an integer
@@ -268,7 +268,7 @@ function (x, axis = 1L, seed = NULL)
 #' `config_set_floatx(float_dtype)`)
 #'
 #' @param seed
-#' A Python integer or instance of
+#' An R integer or instance of
 #' [`random_seed_generator()`].
 #' Used to make the behavior of the initializer
 #' deterministic. Note that an initializer seeded with an integer
@@ -317,7 +317,7 @@ function (shape, mean = 0, stddev = 1, dtype = NULL, seed = NULL)
 #' `config_set_floatx(float_dtype)`)
 #'
 #' @param seed
-#' A Python integer or instance of
+#' An R integer or instance of
 #' [`random_seed_generator()`].
 #' Used to make the behavior of the initializer
 #' deterministic. Note that an initializer seeded with an integer
