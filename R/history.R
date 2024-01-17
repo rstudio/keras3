@@ -178,14 +178,8 @@ plot.keras_training_history <- function(x, y, metrics = NULL, method = c("auto",
 #' @export
 as.data.frame.keras_training_history <- function(x, ...) {
 
-  # filter out metrics that were collected for callbacks (e.g. lr)
-  if (tensorflow::tf_version() < "2.2")
-    x$metrics <- x$metrics[x$params$metrics]
 
-  if (tensorflow::tf_version() >= "2.1")
-    metric_names <- names(x$metrics)
-  else
-    metric_names <- x$params$metrics
+  metric_names <- names(x$metrics)
 
   # pad to epochs if necessary
   values <- x$metrics
@@ -215,11 +209,10 @@ as.data.frame.keras_training_history <- function(x, ...) {
 to_keras_training_history <- function(history) {
 
 
-  # turn history into an R object so it can be persited and
+  # turn history into an R object so it can be persisted and
   # and give it a class so we can write print/plot methods
   params <- history$params
 
-  # we only see this info before TF 2.2
 
   # normalize metrics
   metrics <- history$history
