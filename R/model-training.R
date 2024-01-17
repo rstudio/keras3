@@ -78,7 +78,7 @@
 #'
 #' If providing an anonymous R function, you can customize the printed name
 #' during training by assigning `attr(<fn>, "name") <- "my_custom_metric_name"`,
-#' or by calling [`custom_metric("my_custom_metric_name", <fn>)`]
+#' or by calling [`custom_metric("my_custom_metric_name", <fn>)`][`custom_metric()`]
 #'
 #' @param weighted_metrics
 #' List of metrics to be evaluated and weighted by

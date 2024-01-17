@@ -48,8 +48,8 @@ model |> export_savedmodel("path/to/artifact")
 ## Output Type:
 ##   TensorSpec(shape=(None, 10), dtype=tf.float32, name=None)
 ## Captures:
-##   140397855245712: TensorSpec(shape=(), dtype=tf.resource, name=None)
-##   140397855245328: TensorSpec(shape=(), dtype=tf.resource, name=None)
+##   140485565383696: TensorSpec(shape=(), dtype=tf.resource, name=None)
+##   140485565391184: TensorSpec(shape=(), dtype=tf.resource, name=None)
 }\if{html}{\out{</div>}}
 
 \if{html}{\out{<div class="sourceCode r">}}\preformatted{reloaded_layer <- layer_tfsm(filepath = "path/to/artifact")

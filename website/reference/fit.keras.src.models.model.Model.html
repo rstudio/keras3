@@ -28,10 +28,10 @@
     <a class="dropdown-item" href="../articles/functional_api.html">Functional API</a>
     <a class="dropdown-item" href="../articles/sequential_model.html">Sequential Model</a>
     <h6 class="dropdown-header" data-toc-skip>Extending and customizing</h6>
-    <a class="dropdown-item" href="../articles/making_new_layers_and_models_via_subclassing.html">Making new layers and models via subclassing</a>
     <a class="dropdown-item" href="../articles/training_with_built_in_methods.html">Training &amp; evaluation with the built-in methods</a>
-    <a class="dropdown-item" href="../articles/writing_a_custom_training_loop_in_tensorflow.html">Writing a training loop from scratch in TensorFlow</a>
     <a class="dropdown-item" href="../articles/writing_your_own_callbacks.html">Writing Your Own Callbacks</a>
+    <a class="dropdown-item" href="../articles/making_new_layers_and_models_via_subclassing.html">Making new layers and models via subclassing</a>
+    <a class="dropdown-item" href="../articles/writing_a_custom_training_loop_in_tensorflow.html">Writing a training loop from scratch in TensorFlow</a>
     <h6 class="dropdown-header" data-toc-skip>Other topics</h6>
     <a class="dropdown-item" href="../articles/transfer_learning.html">Transfer learning and fine tuning</a>
     <a class="dropdown-item" href="../articles/distributed_training_with_tensorflow.html">Distributed training with TensorFlow</a>
@@ -299,7 +299,10 @@ establish a different default.</p></dd>
     <h2 id="value">Value<a class="anchor" aria-label="anchor" href="#value"></a></h2>
     
 
-<p>A <code>History</code> object. Its <code>History.history</code> attribute is
+<p>A <code>keras_training_history</code> object, which is a named list:
+<code>list(params = &lt;params&gt;, metrics = &lt;metrics&gt;")</code>, with S3 methods
+<code><a href="https://rdrr.io/r/base/print.html" class="external-link">print()</a></code>, <code><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot()</a></code>, and <code><a href="https://rdrr.io/r/base/as.data.frame.html" class="external-link">as.data.frame()</a></code>. The metrics
+field is
 a record of training loss values and metrics values
 at successive epochs, as well as validation loss values
 and validation metrics values (if applicable).</p>

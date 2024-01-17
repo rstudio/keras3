@@ -74,7 +74,7 @@ your metrics via the \code{weighted_metrics} argument instead.
 
 If providing an anonymous R function, you can customize the printed name
 during training by assigning \verb{attr(<fn>, "name") <- "my_custom_metric_name"},
-or by calling \code{\link{custom_metric("my_custom_metric_name", <fn>)}}}
+or by calling \code{\link[=custom_metric]{custom_metric("my_custom_metric_name", <fn>)}}}
 
 \item{...}{Additional arguments passed on to the \code{compile()} model method.}
 

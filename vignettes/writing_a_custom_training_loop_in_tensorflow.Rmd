@@ -286,7 +286,7 @@ Sys.time() - time
 ```
 
 ```
-## Time difference of 24.44702 secs
+## Time difference of 22.98592 secs
 ```
 
 ## Speeding-up your training step with `tf_function`
@@ -393,7 +393,7 @@ Sys.time() - time
 ```
 
 ```
-## Time difference of 3.021384 secs
+## Time difference of 2.784149 secs
 ```
 
 Much faster, isn't it?
@@ -719,10 +719,10 @@ for (epoch in seq_len(epochs)) {
 
 ```
 ## Start epoch:  1
-## discriminator loss at step 200: 0.64
-## adversarial loss at step 200: 0.95
-## discriminator loss at step 400: 0.31
-## adversarial loss at step 400: 1.68
+## discriminator loss at step 200: 0.61
+## adversarial loss at step 200: 0.96
+## discriminator loss at step 400: 0.51
+## adversarial loss at step 400: 1.09
 ```
 
 That's it! You'll get nice-looking fake MNIST digits after just ~30s of training

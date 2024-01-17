@@ -499,105 +499,105 @@ model %>% fit(
 
 ```
 ## Epoch 1/50
-## 32/32 - 46s - 1s/step - loss: 1.3456 - val_loss: 1.7098
+## 32/32 - 45s - 1s/step - loss: 1.3455 - val_loss: 1.7100
 ## Epoch 2/50
-## 32/32 - 2s - 60ms/step - loss: 0.9089 - val_loss: 1.9933
+## 32/32 - 2s - 60ms/step - loss: 0.9089 - val_loss: 1.9947
 ## Epoch 3/50
-## 32/32 - 2s - 60ms/step - loss: 0.7865 - val_loss: 2.1220
+## 32/32 - 2s - 60ms/step - loss: 0.7865 - val_loss: 2.1211
 ## Epoch 4/50
-## 32/32 - 2s - 60ms/step - loss: 0.7201 - val_loss: 2.3145
+## 32/32 - 2s - 60ms/step - loss: 0.7200 - val_loss: 2.3127
 ## Epoch 5/50
-## 32/32 - 2s - 60ms/step - loss: 0.6854 - val_loss: 2.4170
+## 32/32 - 2s - 60ms/step - loss: 0.6852 - val_loss: 2.4152
 ## Epoch 6/50
-## 32/32 - 2s - 60ms/step - loss: 0.6599 - val_loss: 2.5893
+## 32/32 - 2s - 60ms/step - loss: 0.6598 - val_loss: 2.5888
 ## Epoch 7/50
-## 32/32 - 2s - 60ms/step - loss: 0.6389 - val_loss: 2.7093
+## 32/32 - 2s - 60ms/step - loss: 0.6388 - val_loss: 2.7087
 ## Epoch 8/50
-## 32/32 - 2s - 60ms/step - loss: 0.6174 - val_loss: 2.9003
+## 32/32 - 2s - 60ms/step - loss: 0.6174 - val_loss: 2.8985
 ## Epoch 9/50
-## 32/32 - 2s - 60ms/step - loss: 0.5979 - val_loss: 3.0067
+## 32/32 - 2s - 60ms/step - loss: 0.5979 - val_loss: 3.0051
 ## Epoch 10/50
-## 32/32 - 2s - 60ms/step - loss: 0.5798 - val_loss: 3.1945
+## 32/32 - 2s - 60ms/step - loss: 0.5798 - val_loss: 3.1915
 ## Epoch 11/50
-## 32/32 - 2s - 60ms/step - loss: 0.5625 - val_loss: 3.1994
+## 32/32 - 2s - 60ms/step - loss: 0.5626 - val_loss: 3.1973
 ## Epoch 12/50
-## 32/32 - 2s - 60ms/step - loss: 0.5459 - val_loss: 3.3283
+## 32/32 - 2s - 60ms/step - loss: 0.5457 - val_loss: 3.3356
 ## Epoch 13/50
-## 32/32 - 2s - 60ms/step - loss: 0.5285 - val_loss: 3.1823
+## 32/32 - 2s - 60ms/step - loss: 0.5286 - val_loss: 3.1943
 ## Epoch 14/50
-## 32/32 - 2s - 60ms/step - loss: 0.5109 - val_loss: 3.1753
+## 32/32 - 2s - 60ms/step - loss: 0.5108 - val_loss: 3.1874
 ## Epoch 15/50
-## 32/32 - 2s - 60ms/step - loss: 0.4920 - val_loss: 2.8755
+## 32/32 - 2s - 60ms/step - loss: 0.4916 - val_loss: 2.8691
 ## Epoch 16/50
-## 32/32 - 2s - 60ms/step - loss: 0.4718 - val_loss: 2.6870
+## 32/32 - 2s - 60ms/step - loss: 0.4717 - val_loss: 2.6849
 ## Epoch 17/50
-## 32/32 - 2s - 60ms/step - loss: 0.4495 - val_loss: 2.3216
+## 32/32 - 2s - 60ms/step - loss: 0.4492 - val_loss: 2.2832
 ## Epoch 18/50
-## 32/32 - 2s - 60ms/step - loss: 0.4259 - val_loss: 1.9292
+## 32/32 - 2s - 60ms/step - loss: 0.4259 - val_loss: 1.9173
 ## Epoch 19/50
-## 32/32 - 2s - 65ms/step - loss: 0.4020 - val_loss: 1.5673
+## 32/32 - 2s - 65ms/step - loss: 0.4019 - val_loss: 1.5630
 ## Epoch 20/50
-## 32/32 - 2s - 65ms/step - loss: 0.3778 - val_loss: 1.3223
+## 32/32 - 2s - 65ms/step - loss: 0.3777 - val_loss: 1.3247
 ## Epoch 21/50
-## 32/32 - 2s - 65ms/step - loss: 0.3540 - val_loss: 1.2123
+## 32/32 - 2s - 65ms/step - loss: 0.3540 - val_loss: 1.2099
 ## Epoch 22/50
-## 32/32 - 2s - 65ms/step - loss: 0.3314 - val_loss: 1.1156
+## 32/32 - 2s - 65ms/step - loss: 0.3314 - val_loss: 1.0964
 ## Epoch 23/50
-## 32/32 - 2s - 65ms/step - loss: 0.3107 - val_loss: 1.0886
+## 32/32 - 2s - 65ms/step - loss: 0.3106 - val_loss: 1.0910
 ## Epoch 24/50
-## 32/32 - 2s - 65ms/step - loss: 0.2922 - val_loss: 1.0672
+## 32/32 - 2s - 65ms/step - loss: 0.2922 - val_loss: 1.0752
 ## Epoch 25/50
-## 32/32 - 2s - 60ms/step - loss: 0.2762 - val_loss: 1.1011
+## 32/32 - 2s - 65ms/step - loss: 0.2759 - val_loss: 1.0655
 ## Epoch 26/50
-## 32/32 - 2s - 60ms/step - loss: 0.2629 - val_loss: 1.1489
+## 32/32 - 2s - 60ms/step - loss: 0.2629 - val_loss: 1.1344
 ## Epoch 27/50
-## 32/32 - 2s - 60ms/step - loss: 0.2543 - val_loss: 1.2377
+## 32/32 - 2s - 60ms/step - loss: 0.2582 - val_loss: 1.1897
 ## Epoch 28/50
-## 32/32 - 2s - 60ms/step - loss: 0.2692 - val_loss: 1.5073
+## 32/32 - 2s - 60ms/step - loss: 0.2829 - val_loss: 1.2728
 ## Epoch 29/50
-## 32/32 - 2s - 60ms/step - loss: 0.3330 - val_loss: 1.3705
+## 32/32 - 2s - 60ms/step - loss: 0.3218 - val_loss: 2.0177
 ## Epoch 30/50
-## 32/32 - 2s - 60ms/step - loss: 0.3401 - val_loss: 2.8126
+## 32/32 - 2s - 60ms/step - loss: 0.3265 - val_loss: 1.3726
 ## Epoch 31/50
-## 32/32 - 2s - 60ms/step - loss: 0.3130 - val_loss: 2.4803
+## 32/32 - 2s - 60ms/step - loss: 0.3007 - val_loss: 1.3313
 ## Epoch 32/50
-## 32/32 - 2s - 60ms/step - loss: 0.2938 - val_loss: 2.8663
+## 32/32 - 2s - 60ms/step - loss: 0.2992 - val_loss: 1.9081
 ## Epoch 33/50
-## 32/32 - 2s - 60ms/step - loss: 0.2955 - val_loss: 1.7562
+## 32/32 - 2s - 60ms/step - loss: 0.2979 - val_loss: 2.3223
 ## Epoch 34/50
-## 32/32 - 2s - 60ms/step - loss: 0.3117 - val_loss: 2.5182
+## 32/32 - 2s - 61ms/step - loss: 0.3123 - val_loss: 2.6382
 ## Epoch 35/50
-## 32/32 - 2s - 60ms/step - loss: 0.3185 - val_loss: 4.8925
+## 32/32 - 2s - 70ms/step - loss: 0.3096 - val_loss: 1.6053
 ## Epoch 36/50
-## 32/32 - 2s - 60ms/step - loss: 0.3137 - val_loss: 6.0888
+## 32/32 - 2s - 62ms/step - loss: 0.3073 - val_loss: 2.4686
 ## Epoch 37/50
-## 32/32 - 2s - 60ms/step - loss: 0.2928 - val_loss: 2.7705
+## 32/32 - 2s - 62ms/step - loss: 0.2901 - val_loss: 1.9049
 ## Epoch 38/50
-## 32/32 - 2s - 60ms/step - loss: 0.2870 - val_loss: 3.4916
+## 32/32 - 2s - 61ms/step - loss: 0.2850 - val_loss: 3.9036
 ## Epoch 39/50
-## 32/32 - 2s - 60ms/step - loss: 0.2893 - val_loss: 1.6270
+## 32/32 - 2s - 67ms/step - loss: 0.2776 - val_loss: 1.8910
 ## Epoch 40/50
-## 32/32 - 2s - 60ms/step - loss: 0.2923 - val_loss: 1.7126
+## 32/32 - 2s - 64ms/step - loss: 0.2673 - val_loss: 4.0292
 ## Epoch 41/50
-## 32/32 - 2s - 60ms/step - loss: 0.2778 - val_loss: 3.7513
+## 32/32 - 2s - 65ms/step - loss: 0.2648 - val_loss: 2.1107
 ## Epoch 42/50
-## 32/32 - 2s - 60ms/step - loss: 0.2710 - val_loss: 6.4905
+## 32/32 - 2s - 65ms/step - loss: 0.2671 - val_loss: 2.4127
 ## Epoch 43/50
-## 32/32 - 2s - 60ms/step - loss: 0.2669 - val_loss: 5.2384
+## 32/32 - 2s - 63ms/step - loss: 0.2720 - val_loss: 3.1555
 ## Epoch 44/50
-## 32/32 - 2s - 60ms/step - loss: 0.2683 - val_loss: 2.3833
+## 32/32 - 2s - 63ms/step - loss: 0.2672 - val_loss: 4.0847
 ## Epoch 45/50
-## 32/32 - 2s - 60ms/step - loss: 0.2661 - val_loss: 2.2305
+## 32/32 - 2s - 68ms/step - loss: 0.2661 - val_loss: 4.4969
 ## Epoch 46/50
-## 32/32 - 2s - 60ms/step - loss: 0.2631 - val_loss: 3.7768
+## 32/32 - 2s - 64ms/step - loss: 0.2639 - val_loss: 4.1811
 ## Epoch 47/50
-## 32/32 - 2s - 60ms/step - loss: 0.2616 - val_loss: 5.0422
+## 32/32 - 2s - 66ms/step - loss: 0.2556 - val_loss: 2.6997
 ## Epoch 48/50
-## 32/32 - 2s - 60ms/step - loss: 0.2669 - val_loss: 6.3526
+## 32/32 - 2s - 61ms/step - loss: 0.2452 - val_loss: 2.5924
 ## Epoch 49/50
-## 32/32 - 2s - 60ms/step - loss: 0.2524 - val_loss: 5.2327
+## 32/32 - 2s - 67ms/step - loss: 0.2386 - val_loss: 3.4863
 ## Epoch 50/50
-## 32/32 - 2s - 60ms/step - loss: 0.2352 - val_loss: 5.6030
+## 32/32 - 2s - 64ms/step - loss: 0.2321 - val_loss: 1.7205
 ```
 
 ## Visualize predictions
@@ -613,7 +613,7 @@ val_preds <- predict(model, val_dataset)
 ```
 
 ```
-## 32/32 - 4s - 119ms/step
+## 32/32 - 4s - 138ms/step
 ```
 
 ```r

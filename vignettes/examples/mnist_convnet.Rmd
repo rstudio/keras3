@@ -123,35 +123,35 @@ model %>% fit(
 
 ```
 ## Epoch 1/15
-## 422/422 - 5s - 12ms/step - accuracy: 0.8845 - loss: 0.3815 - val_accuracy: 0.9782 - val_loss: 0.0809
+## 422/422 - 5s - 12ms/step - accuracy: 0.8845 - loss: 0.3815 - val_accuracy: 0.9782 - val_loss: 0.0810
 ## Epoch 2/15
-## 422/422 - 1s - 2ms/step - accuracy: 0.9646 - loss: 0.1151 - val_accuracy: 0.9863 - val_loss: 0.0550
+## 422/422 - 1s - 2ms/step - accuracy: 0.9646 - loss: 0.1152 - val_accuracy: 0.9862 - val_loss: 0.0549
 ## Epoch 3/15
-## 422/422 - 1s - 2ms/step - accuracy: 0.9736 - loss: 0.0839 - val_accuracy: 0.9875 - val_loss: 0.0454
+## 422/422 - 1s - 2ms/step - accuracy: 0.9738 - loss: 0.0838 - val_accuracy: 0.9875 - val_loss: 0.0455
 ## Epoch 4/15
-## 422/422 - 1s - 2ms/step - accuracy: 0.9782 - loss: 0.0689 - val_accuracy: 0.9893 - val_loss: 0.0415
+## 422/422 - 1s - 2ms/step - accuracy: 0.9781 - loss: 0.0690 - val_accuracy: 0.9897 - val_loss: 0.0418
 ## Epoch 5/15
-## 422/422 - 1s - 2ms/step - accuracy: 0.9811 - loss: 0.0608 - val_accuracy: 0.9903 - val_loss: 0.0377
+## 422/422 - 1s - 2ms/step - accuracy: 0.9812 - loss: 0.0610 - val_accuracy: 0.9900 - val_loss: 0.0375
 ## Epoch 6/15
-## 422/422 - 1s - 2ms/step - accuracy: 0.9823 - loss: 0.0562 - val_accuracy: 0.9910 - val_loss: 0.0363
+## 422/422 - 1s - 2ms/step - accuracy: 0.9821 - loss: 0.0563 - val_accuracy: 0.9910 - val_loss: 0.0360
 ## Epoch 7/15
-## 422/422 - 1s - 2ms/step - accuracy: 0.9849 - loss: 0.0489 - val_accuracy: 0.9918 - val_loss: 0.0328
+## 422/422 - 1s - 2ms/step - accuracy: 0.9851 - loss: 0.0488 - val_accuracy: 0.9918 - val_loss: 0.0328
 ## Epoch 8/15
-## 422/422 - 1s - 2ms/step - accuracy: 0.9845 - loss: 0.0486 - val_accuracy: 0.9917 - val_loss: 0.0334
+## 422/422 - 1s - 2ms/step - accuracy: 0.9846 - loss: 0.0485 - val_accuracy: 0.9917 - val_loss: 0.0331
 ## Epoch 9/15
-## 422/422 - 1s - 2ms/step - accuracy: 0.9859 - loss: 0.0441 - val_accuracy: 0.9922 - val_loss: 0.0318
+## 422/422 - 1s - 2ms/step - accuracy: 0.9859 - loss: 0.0441 - val_accuracy: 0.9918 - val_loss: 0.0318
 ## Epoch 10/15
-## 422/422 - 1s - 2ms/step - accuracy: 0.9866 - loss: 0.0404 - val_accuracy: 0.9925 - val_loss: 0.0321
+## 422/422 - 1s - 2ms/step - accuracy: 0.9867 - loss: 0.0406 - val_accuracy: 0.9927 - val_loss: 0.0317
 ## Epoch 11/15
-## 422/422 - 1s - 2ms/step - accuracy: 0.9875 - loss: 0.0390 - val_accuracy: 0.9920 - val_loss: 0.0314
+## 422/422 - 1s - 2ms/step - accuracy: 0.9875 - loss: 0.0389 - val_accuracy: 0.9923 - val_loss: 0.0316
 ## Epoch 12/15
-## 422/422 - 1s - 2ms/step - accuracy: 0.9882 - loss: 0.0369 - val_accuracy: 0.9927 - val_loss: 0.0304
+## 422/422 - 1s - 2ms/step - accuracy: 0.9881 - loss: 0.0370 - val_accuracy: 0.9927 - val_loss: 0.0304
 ## Epoch 13/15
-## 422/422 - 1s - 2ms/step - accuracy: 0.9878 - loss: 0.0362 - val_accuracy: 0.9928 - val_loss: 0.0281
+## 422/422 - 1s - 2ms/step - accuracy: 0.9879 - loss: 0.0362 - val_accuracy: 0.9930 - val_loss: 0.0279
 ## Epoch 14/15
-## 422/422 - 1s - 2ms/step - accuracy: 0.9890 - loss: 0.0333 - val_accuracy: 0.9928 - val_loss: 0.0292
+## 422/422 - 1s - 2ms/step - accuracy: 0.9891 - loss: 0.0334 - val_accuracy: 0.9930 - val_loss: 0.0292
 ## Epoch 15/15
-## 422/422 - 1s - 2ms/step - accuracy: 0.9902 - loss: 0.0308 - val_accuracy: 0.9928 - val_loss: 0.0294
+## 422/422 - 1s - 2ms/step - accuracy: 0.9898 - loss: 0.0311 - val_accuracy: 0.9928 - val_loss: 0.0292
 ```
 
 ## Evaluate the trained model
@@ -164,8 +164,8 @@ score
 
 ```
 ## $accuracy
-## [1] 0.9911
+## [1] 0.9907
 ##
 ## $loss
-## [1] 0.0258017
+## [1] 0.02580518
 ```

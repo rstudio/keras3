@@ -28,10 +28,10 @@
     <a class="dropdown-item" href="../articles/functional_api.html">Functional API</a>
     <a class="dropdown-item" href="../articles/sequential_model.html">Sequential Model</a>
     <h6 class="dropdown-header" data-toc-skip>Extending and customizing</h6>
-    <a class="dropdown-item" href="../articles/making_new_layers_and_models_via_subclassing.html">Making new layers and models via subclassing</a>
     <a class="dropdown-item" href="../articles/training_with_built_in_methods.html">Training &amp; evaluation with the built-in methods</a>
-    <a class="dropdown-item" href="../articles/writing_a_custom_training_loop_in_tensorflow.html">Writing a training loop from scratch in TensorFlow</a>
     <a class="dropdown-item" href="../articles/writing_your_own_callbacks.html">Writing Your Own Callbacks</a>
+    <a class="dropdown-item" href="../articles/making_new_layers_and_models_via_subclassing.html">Making new layers and models via subclassing</a>
+    <a class="dropdown-item" href="../articles/writing_a_custom_training_loop_in_tensorflow.html">Writing a training loop from scratch in TensorFlow</a>
     <h6 class="dropdown-header" data-toc-skip>Other topics</h6>
     <a class="dropdown-item" href="../articles/transfer_learning.html">Transfer learning and fine tuning</a>
     <a class="dropdown-item" href="../articles/distributed_training_with_tensorflow.html">Distributed training with TensorFlow</a>
@@ -101,9 +101,10 @@
 
 
 <dt>loss</dt>
-<dd><p>Loss function. May be a string (name of loss function), or
-a <code>Loss</code> instance. See <code>loss_*</code> family of functions. A
-loss function is any callable with the signature
+<dd><p>Loss function. May be:</p><ul><li><p>a string (name of builtin loss function),</p></li>
+<li><p>a custom function, or</p></li>
+<li><p>a <code><a href="Loss.html">Loss</a></code> instance (returned by the <code>loss_*</code> family of functions).</p></li>
+</ul><p>A loss function is any callable with the signature
 <code>loss = fn(y_true, y_pred)</code>, where <code>y_true</code> are the ground truth
 values, and <code>y_pred</code> are the model's predictions.
 <code>y_true</code> should have shape <code>(batch_size, d1, .. dN)</code>
@@ -116,9 +117,12 @@ The loss function should return a float tensor.</p></dd>
 
 <dt>metrics</dt>
 <dd><p>List of metrics to be evaluated by the model during
-training and testing. Each of this can be a string (name of a
-built-in function), function or a <code><a href="Metric.html">Metric()</a></code>
-instance. See <code>metric_*</code> family of functions. Typically you will use
+training and testing. Each of these can be:</p><ul><li><p>a string (name of a
+built-in function),</p></li>
+<li><p>a function, optionally with a <code>"name"</code> attribute or</p></li>
+<li><p>a <code><a href="Metric.html">Metric()</a></code>
+instance. See the <code>metric_*</code> family of functions.</p></li>
+</ul><p>Typically you will use
 <code>metrics = c('accuracy')</code>. A function is any callable with the
 signature <code>result = fn(y_true, y_pred)</code>. To specify different
 metrics for different outputs of a multi-output model, you could
@@ -137,7 +141,10 @@ conversion is done for the strings <code>"crossentropy"</code>
 and <code>"ce"</code> as well.
 The metrics passed here are evaluated without sample weighting;
 if you would like sample weighting to apply, you can specify
-your metrics via the <code>weighted_metrics</code> argument instead.</p></dd>
+your metrics via the <code>weighted_metrics</code> argument instead.</p>
+<p>If providing an anonymous R function, you can customize the printed name
+during training by assigning <code>attr(&lt;fn&gt;, "name") &lt;- "my_custom_metric_name"</code>,
+or by calling <code><a href="custom_metric.html">custom_metric("my_custom_metric_name", &lt;fn&gt;)</a></code></p></dd>
 
 
 <dt>...</dt>
@@ -202,12 +209,10 @@ scale the loss to prevent underflow.</p></dd>
     <div class="section level2">
     <h2 id="examples">Examples<a class="anchor" aria-label="anchor" href="#examples"></a></h2>
     <p></p><div class="sourceCode r"><pre><code><span><span class="va">model</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://generics.r-lib.org/reference/compile.html" class="external-link">compile</a></span><span class="op">(</span></span>
-<span>    optimizer <span class="op">=</span> <span class="fu">optimizer_Adam</span><span class="op">(</span>learning_rate<span class="op">=</span><span class="fl">1e-3</span><span class="op">)</span>,</span>
-<span>    loss <span class="op">=</span> <span class="fu"><a href="../reference/loss_binary_crossentropy.html">loss_binary_crossentropy</a></span><span class="op">(</span><span class="op">)</span>,</span>
-<span>    metrics <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span></span>
-<span>        <span class="fu"><a href="../reference/metric_binary_accuracy.html">metric_binary_accuracy</a></span><span class="op">(</span><span class="op">)</span>,</span>
-<span>        <span class="fu"><a href="../reference/metric_false_negatives.html">metric_false_negatives</a></span><span class="op">(</span><span class="op">)</span></span>
-<span>    <span class="op">)</span></span>
+<span>  optimizer <span class="op">=</span> <span class="fu"><a href="../reference/optimizer_adam.html">optimizer_adam</a></span><span class="op">(</span>learning_rate <span class="op">=</span> <span class="fl">1e-3</span><span class="op">)</span>,</span>
+<span>  loss <span class="op">=</span> <span class="fu"><a href="../reference/loss_binary_crossentropy.html">loss_binary_crossentropy</a></span><span class="op">(</span><span class="op">)</span>,</span>
+<span>  metrics <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fu"><a href="../reference/metric_binary_accuracy.html">metric_binary_accuracy</a></span><span class="op">(</span><span class="op">)</span>,</span>
+<span>              <span class="fu"><a href="../reference/metric_false_negatives.html">metric_false_negatives</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="op">)</span></span></code></pre><p></p></div>
     </div>
     <div class="section level2">

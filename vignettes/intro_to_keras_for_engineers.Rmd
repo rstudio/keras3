@@ -175,25 +175,19 @@ model %>% fit(
 
 ```
 ## Epoch 1/10
-## 399/399 - 8s - 21ms/step - acc: 0.7361 - loss: 0.7753 - val_acc: 0.9603 - val_loss: 0.1385
+## 399/399 - 9s - 22ms/step - acc: 0.7364 - loss: 0.7762 - val_acc: 0.9609 - val_loss: 0.1408
 ## Epoch 2/10
-## 399/399 - 2s - 5ms/step - acc: 0.9312 - loss: 0.2337 - val_acc: 0.9719 - val_loss: 0.0932
+## 399/399 - 2s - 5ms/step - acc: 0.9299 - loss: 0.2358 - val_acc: 0.9720 - val_loss: 0.0920
 ## Epoch 3/10
-## 399/399 - 2s - 5ms/step - acc: 0.9477 - loss: 0.1753 - val_acc: 0.9794 - val_loss: 0.0669
+## 399/399 - 2s - 5ms/step - acc: 0.9482 - loss: 0.1757 - val_acc: 0.9782 - val_loss: 0.0704
 ## Epoch 4/10
-## 399/399 - 2s - 5ms/step - acc: 0.9592 - loss: 0.1410 - val_acc: 0.9836 - val_loss: 0.0553
+## 399/399 - 2s - 5ms/step - acc: 0.9588 - loss: 0.1424 - val_acc: 0.9844 - val_loss: 0.0553
 ## Epoch 5/10
-## 399/399 - 2s - 5ms/step - acc: 0.9650 - loss: 0.1177 - val_acc: 0.9869 - val_loss: 0.0468
+## 399/399 - 2s - 5ms/step - acc: 0.9644 - loss: 0.1205 - val_acc: 0.9862 - val_loss: 0.0467
 ## Epoch 6/10
-## 399/399 - 2s - 5ms/step - acc: 0.9688 - loss: 0.1042 - val_acc: 0.9867 - val_loss: 0.0485
+## 399/399 - 2s - 5ms/step - acc: 0.9687 - loss: 0.1046 - val_acc: 0.9862 - val_loss: 0.0476
 ## Epoch 7/10
-## 399/399 - 2s - 5ms/step - acc: 0.9722 - loss: 0.0936 - val_acc: 0.9869 - val_loss: 0.0452
-## Epoch 8/10
-## 399/399 - 2s - 5ms/step - acc: 0.9741 - loss: 0.0863 - val_acc: 0.9907 - val_loss: 0.0363
-## Epoch 9/10
-## 399/399 - 2s - 5ms/step - acc: 0.9771 - loss: 0.0767 - val_acc: 0.9902 - val_loss: 0.0349
-## Epoch 10/10
-## 399/399 - 2s - 5ms/step - acc: 0.9794 - loss: 0.0704 - val_acc: 0.9898 - val_loss: 0.0370
+## 399/399 - 2s - 5ms/step - acc: 0.9721 - loss: 0.0954 - val_acc: 0.9858 - val_loss: 0.0482
 ```
 
 ```r
@@ -354,7 +348,7 @@ model %>% fit(
 ```
 
 ```
-## 399/399 - 8s - 19ms/step - acc: 0.7506 - loss: 0.7390 - val_acc: 0.9334 - val_loss: 0.2266
+## 399/399 - 9s - 23ms/step - acc: 0.7508 - loss: 0.7376 - val_acc: 0.9338 - val_loss: 0.2250
 ```
 
 ## Training models on arbitrary data sources
@@ -430,7 +424,7 @@ model %>% fit(train_dataset, epochs=1, validation_data=test_dataset)
 ```
 
 ```
-## 469/469 - 9s - 19ms/step - acc: 0.7573 - loss: 0.7214 - val_acc: 0.9017 - val_loss: 0.3082
+## 469/469 - 9s - 20ms/step - acc: 0.7551 - loss: 0.7269 - val_acc: 0.8965 - val_loss: 0.3269
 ```
 
 ## Further reading
