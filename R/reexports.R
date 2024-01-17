@@ -34,10 +34,6 @@ reticulate::use_python
 #' @export
 reticulate::use_virtualenv
 
-#' @importFrom reticulate use_condaenv
-#' @export
-reticulate::use_condaenv
-
 #' @importFrom reticulate array_reshape
 #' @export
 reticulate::array_reshape
@@ -49,10 +45,6 @@ reticulate::np_array
 #' @importFrom reticulate tuple
 #' @export
 reticulate::tuple
-
-#' @importFrom tensorflow use_session_with_seed
-#' @export
-tensorflow::use_session_with_seed
 
 #' @importFrom tensorflow tensorboard
 #' @export
