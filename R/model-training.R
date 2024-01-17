@@ -305,7 +305,10 @@ function (object, x = NULL, y = NULL, ..., batch_size = NULL,
 #' features, targets, and weights from the keys of a single dict.
 #'
 #' @returns
-#' A `History` object. Its `History.history` attribute is
+#' A `keras_training_history` object, which is a named list:
+#' `list(params = <params>, metrics = <metrics>")`, with S3 methods
+#' `print()`, `plot()`, and `as.data.frame()`. The metrics
+#' field is
 #' a record of training loss values and metrics values
 #' at successive epochs, as well as validation loss values
 #' and validation metrics values (if applicable).

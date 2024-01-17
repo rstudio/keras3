@@ -190,7 +190,10 @@ default (\code{"auto"}) will display the plot when running within RStudio,
 establish a different default.}
 }
 \value{
-A \code{History} object. Its \code{History.history} attribute is
+A \code{keras_training_history} object, which is a named list:
+\verb{list(params = <params>, metrics = <metrics>")}, with S3 methods
+\code{print()}, \code{plot()}, and \code{as.data.frame()}. The metrics
+attribute is
 a record of training loss values and metrics values
 at successive epochs, as well as validation loss values
 and validation metrics values (if applicable).
