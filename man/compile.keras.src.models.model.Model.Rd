@@ -24,9 +24,14 @@
 \item{optimizer}{String (name of optimizer) or optimizer instance. See
 \verb{optimizer_*} family.}
 
-\item{loss}{Loss function. May be a string (name of loss function), or
-a \code{Loss} instance. See \verb{loss_*} family of functions. A
-loss function is any callable with the signature
+\item{loss}{Loss function. May be:
+\itemize{
+\item a string (name of builtin loss function),
+\item a custom function, optionally with a \code{"name"} attribute, or
+\item a \code{\link{Loss}} instance (returned by the \verb{loss_*} family of functions).
+}
+
+A loss function is any callable with the signature
 \code{loss = fn(y_true, y_pred)}, where \code{y_true} are the ground truth
 values, and \code{y_pred} are the model's predictions.
 \code{y_true} should have shape \verb{(batch_size, d1, .. dN)}
@@ -34,12 +39,23 @@ values, and \code{y_pred} are the model's predictions.
 sparse categorical crossentropy which expects integer arrays of
 shape \verb{(batch_size, d1, .. dN-1)}).
 \code{y_pred} should have shape \verb{(batch_size, d1, .. dN)}.
-The loss function should return a float tensor.}
+The loss function should return a float tensor.
+
+If providing an anonymous R function, you can provide a \code{name} attribute for
+the function to customize printed output during \code{fit()} and to enable model
+serialization. You can assign with: \verb{attr(<fn>, "name") <- "my_custom_loss_name"}.}
 
 \item{metrics}{List of metrics to be evaluated by the model during
-training and testing. Each of this can be a string (name of a
-built-in function), function or a \code{Metric()}
-instance. See \verb{metric_*} family of functions. Typically you will use
+training and testing. Each of these can be:
+\itemize{
+\item a string (name of a
+built-in function),
+\item a function, optionally with a \code{"name"} attribute or
+\item a \code{\link[=Metric]{Metric()}}
+instance. See the \verb{metric_*} family of functions.
+}
+
+Typically you will use
 \code{metrics = c('accuracy')}. A function is any callable with the
 signature \code{result = fn(y_true, y_pred)}. To specify different
 metrics for different outputs of a multi-output model, you could
@@ -58,7 +74,11 @@ conversion is done for the strings \code{"crossentropy"}
 and \code{"ce"} as well.
 The metrics passed here are evaluated without sample weighting;
 if you would like sample weighting to apply, you can specify
-your metrics via the \code{weighted_metrics} argument instead.}
+your metrics via the \code{weighted_metrics} argument instead.
+
+If providing an anonymous R function, you can customize the printed name
+during training by assigning \verb{attr(<fn>, "name") <- "my_custom_metric_name"},
+or by calling \code{\link{custom_metric("my_custom_metric_name", <fn>)}}}
 
 \item{...}{Additional arguments passed on to the \code{compile()} model method.}
 
@@ -110,12 +130,10 @@ Configure a model for training.
 }
 \section{Examples}{
 \if{html}{\out{<div class="sourceCode r">}}\preformatted{model |> compile(
-    optimizer = optimizer_Adam(learning_rate=1e-3),
-    loss = loss_binary_crossentropy(),
-    metrics = c(
-        metric_binary_accuracy(),
-        metric_false_negatives()
-    )
+  optimizer = optimizer_adam(learning_rate = 1e-3),
+  loss = loss_binary_crossentropy(),
+  metrics = c(metric_binary_accuracy(),
+              metric_false_negatives())
 )
 }\if{html}{\out{</div>}}
 }

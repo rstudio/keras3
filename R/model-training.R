@@ -7,25 +7,26 @@
 #' # Examples
 #' ```r
 #' model |> compile(
-#'     optimizer = optimizer_Adam(learning_rate=1e-3),
-#'     loss = loss_binary_crossentropy(),
-#'     metrics = c(
-#'         metric_binary_accuracy(),
-#'         metric_false_negatives()
-#'     )
+#'   optimizer = optimizer_adam(learning_rate = 1e-3),
+#'   loss = loss_binary_crossentropy(),
+#'   metrics = c(metric_binary_accuracy(),
+#'               metric_false_negatives())
 #' )
 #' ```
 #'
-#' @param object A keras model.
+#' @param object A Keras model.
 #'
 #' @param optimizer
 #' String (name of optimizer) or optimizer instance. See
 #' `optimizer_*` family.
 #'
 #' @param loss
-#' Loss function. May be a string (name of loss function), or
-#' a `Loss` instance. See `loss_*` family of functions. A
-#' loss function is any callable with the signature
+#' Loss function. May be:
+#' - a string (name of builtin loss function),
+#' - a custom function, optionally with a `"name"` attribute, or
+#' - a [`Loss`] instance (returned by the `loss_*` family of functions).
+#'
+#' A loss function is any callable with the signature
 #' `loss = fn(y_true, y_pred)`, where `y_true` are the ground truth
 #' values, and `y_pred` are the model's predictions.
 #' `y_true` should have shape `(batch_size, d1, .. dN)`
@@ -34,6 +35,10 @@
 #' shape `(batch_size, d1, .. dN-1)`).
 #' `y_pred` should have shape `(batch_size, d1, .. dN)`.
 #' The loss function should return a float tensor.
+#'
+#' If providing an anonymous R function, you can provide a `name` attribute for
+#' the function to customize printed output during `fit()` and to enable model
+#' serialization. You can assign with: `attr(<fn>, "name") <- "my_custom_loss_name"`.
 #'
 #' @param loss_weights
 #' Optional list (named or unnamed) specifying scalar
@@ -47,9 +52,14 @@
 #'
 #' @param metrics
 #' List of metrics to be evaluated by the model during
-#' training and testing. Each of this can be a string (name of a
-#' built-in function), function or a `Metric()`
-#' instance. See `metric_*` family of functions. Typically you will use
+#' training and testing. Each of these can be:
+#' - a string (name of a
+#' built-in function),
+#' - a function, optionally with a `"name"` attribute or
+#' - a [`Metric()`]
+#' instance. See the `metric_*` family of functions.
+#'
+#' Typically you will use
 #' `metrics = c('accuracy')`. A function is any callable with the
 #' signature `result = fn(y_true, y_pred)`. To specify different
 #' metrics for different outputs of a multi-output model, you could
@@ -69,6 +79,10 @@
 #' The metrics passed here are evaluated without sample weighting;
 #' if you would like sample weighting to apply, you can specify
 #' your metrics via the `weighted_metrics` argument instead.
+#'
+#' If providing an anonymous R function, you can customize the printed name
+#' during training by assigning `attr(<fn>, "name") <- "my_custom_metric_name"`,
+#' or by calling [`custom_metric("my_custom_metric_name", <fn>)`]
 #'
 #' @param weighted_metrics
 #' List of metrics to be evaluated and weighted by
@@ -128,21 +142,8 @@ function (object, optimizer = "rmsprop", loss = NULL, metrics = NULL,
   args <- capture_args(list(
     steps_per_execution = as_integer,
     loss = as_loss,
-    metrics = function(x) {
-      if (is.null(x))
-        return(x)
-      if (is.character(x))
-        return(as.list(x))
-      if(!is.list(x))
-        x <- list(x)
-      lapply(x, as_loss, default_name = "custom_metric")
-    },
-    weighted_metrics = function(x) {
-      if (is.null(x) || is.list(x))
-        x
-      else
-        list(x)
-    },
+    metrics = as_metrics,
+    weighted_metrics = as_list,
     loss_weights = as.list
   ),
   ignore = "object")
@@ -156,24 +157,17 @@ function (object, optimizer = "rmsprop", loss = NULL, metrics = NULL,
 as_loss <- function(x, default_name = "custom_loss") {
   if (is.null(x) || is_string(x))
     return(x)
-  x <- resolve_py_obj(x, default_name = default_name,
-                      prefer_class = FALSE)
-  # if (inherits(x, "python.builtin.type")) # Loss()
-  #   return(x())
-  x
+  if (is.character(x)) # failed is_string(x), length(x) != 1
+    return(as.list(x))
+  if (is.list(x)) # recurse for multi-output models
+    return(imap(x, function(el, i) {
+      as_loss(el, default_name = paste(default_name, i, sep = "_"))
+    }))
+  resolve_py_obj(x, default_name = default_name, prefer_class = FALSE)
 }
 
+as_metrics <- function(x) as_list(as_loss(x, default_name = "custom_metric"))
 
-# TODO: as_loss(), guardrail too strict, disabled for now
-# this guardrail is here to make sure that an anonymous R function
-# doesn't passed through - all losses must have a meaningful name.
-# if(!inherits(loss, "python.builtin.object"))
-#     stop(trim("`loss must one of:
-#            - a string,
-#            - a `Loss` instance, as returned by calling one of
-#              the loss_* family of functions, or
-#            - a custom Loss, as defined Loss() or custom_loss()"),
-#          call. = FALSE)
 
 # ---- evaluate ----
 
