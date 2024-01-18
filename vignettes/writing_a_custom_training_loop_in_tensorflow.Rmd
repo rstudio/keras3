@@ -286,7 +286,7 @@ Sys.time() - time
 ```
 
 ```
-## Time difference of 22.98592 secs
+## Time difference of 25.65498 secs
 ```
 
 ## Speeding-up your training step with `tf_function`
@@ -393,7 +393,7 @@ Sys.time() - time
 ```
 
 ```
-## Time difference of 2.784149 secs
+## Time difference of 3.191403 secs
 ```
 
 Much faster, isn't it?
@@ -607,10 +607,6 @@ loss_fn <- loss_binary_crossentropy(from_logits = TRUE)
 
 train_step <- tf_function(function(real_images, seed = NULL) {
 
-  # prepare the random seed generator
-  # if (is.null(seed)) seed <- 1234
-  # if (is.numeric(seed)) seed <- random_seed_generator(seed)
-
   # Sample random points in the latent space
   batch_size <- shape(real_images)[[1]]
   random_latent_vectors <- random_normal(shape(batch_size, latent_dim),
@@ -719,10 +715,10 @@ for (epoch in seq_len(epochs)) {
 
 ```
 ## Start epoch:  1
-## discriminator loss at step 200: 0.61
-## adversarial loss at step 200: 0.96
-## discriminator loss at step 400: 0.51
-## adversarial loss at step 400: 1.09
+## discriminator loss at step 200: 0.59
+## adversarial loss at step 200: 0.91
+## discriminator loss at step 400: 0.43
+## adversarial loss at step 400: 1.35
 ```
 
 That's it! You'll get nice-looking fake MNIST digits after just ~30s of training

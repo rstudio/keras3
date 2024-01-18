@@ -28,11 +28,11 @@ Keras & TensorFlow API concepts.
 In this guide, you will learn about:
 
 - Tensors, variables, and gradients in TensorFlow
-- Creating layers by subclassing the `Layer` class
+- Creating layers by subclassing the [`Layer`] class
 - Writing low-level training loops
 - Tracking losses created by layers via the `add_loss()` method
 - Tracking metrics in a low-level training loop
-- Speeding up execution with a compiled `tf.function`
+- Speeding up execution with a compiled [`tensorflow::tf_function()`]
 - Executing layers in training or inference mode
 - The Keras Functional API
 
@@ -104,7 +104,7 @@ A common way to create constant tensors is via `tf$ones` and `tf$zeros`:
 
 
 ```r
-tf$ones(shape=shape(2, 1))
+tf$ones(shape = shape(2, 1))
 ```
 
 ```
@@ -114,7 +114,7 @@ tf$ones(shape=shape(2, 1))
 ```
 
 ```r
-tf$zeros(shape=shape(2, 1))
+tf$zeros(shape = shape(2, 1))
 ```
 
 ```
@@ -127,9 +127,8 @@ You can also create random constant tensors:
 
 
 ```r
-x <- random_normal(shape=c(2, 2), mean=0.0, stddev=1.0)
-
-x <- random_uniform(shape=c(2, 2), minval=0, maxval=10)
+x <- random_normal(shape = c(2, 2), mean = 0.0, stddev = 1.0)
+x <- random_uniform(shape = c(2, 2), minval = 0, maxval = 10)
 ```
 
 ## Variables
@@ -1055,9 +1054,9 @@ model %>% fit(dataset, epochs=2)
 
 ```
 ## Epoch 1/2
-## 938/938 - 2s - 3ms/step - loss: 0.3960 - sparse_categorical_accuracy: 0.8866
+## 938/938 - 4s - 4ms/step - loss: 0.3958 - sparse_categorical_accuracy: 0.8866
 ## Epoch 2/2
-## 938/938 - 1s - 881us/step - loss: 0.1886 - sparse_categorical_accuracy: 0.9444
+## 938/938 - 1s - 960us/step - loss: 0.1888 - sparse_categorical_accuracy: 0.9443
 ```
 
 ```r
@@ -1065,7 +1064,7 @@ predictions <- model %>% predict(dataset)
 ```
 
 ```
-## 938/938 - 1s - 992us/step
+## 938/938 - 1s - 1ms/step
 ```
 
 ```r
@@ -1073,15 +1072,15 @@ model %>% evaluate(dataset)
 ```
 
 ```
-## 938/938 - 1s - 1ms/step - loss: 0.1764 - sparse_categorical_accuracy: 0.9452
+## 938/938 - 1s - 1ms/step - loss: 0.1763 - sparse_categorical_accuracy: 0.9454
 ```
 
 ```
 ## $loss
-## [1] 0.1764244
+## [1] 0.1763445
 ##
 ## $sparse_categorical_accuracy
-## [1] 0.94515
+## [1] 0.9454167
 ```
 
 You can always subclass the `Model` class (it works exactly like subclassing
@@ -1145,7 +1144,7 @@ model %>% fit(dataset, epochs=2)
 ## Epoch 1/2
 ## 938/938 - 2s - 2ms/step - loss: 0.3869 - sparse_categorical_accuracy: 0.8924
 ## Epoch 2/2
-## 938/938 - 1s - 849us/step - loss: 0.2163 - sparse_categorical_accuracy: 0.9370
+## 938/938 - 1s - 1ms/step - loss: 0.2163 - sparse_categorical_accuracy: 0.9370
 ```
 
 ## End-to-end experiment example 1: variational autoencoders.

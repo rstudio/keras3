@@ -114,7 +114,7 @@ We begin by creating a sequential model and then adding layers using the pipe (`
 
 ```r
 model <- keras_model_sequential(input_shape = c(784))
-model %>%
+model |>
   layer_dense(units = 256, activation = 'relu') |>
   layer_dropout(rate = 0.4) |>
   layer_dense(units = 128, activation = 'relu') |>
@@ -198,15 +198,15 @@ model |> evaluate(x_test, y_test)
 ```
 
 ```
-## 313/313 - 1s - 3ms/step - accuracy: 0.9817 - loss: 0.0894
+## 313/313 - 1s - 2ms/step - accuracy: 0.9815 - loss: 0.0933
 ```
 
 ```
 ## $accuracy
-## [1] 0.9817
+## [1] 0.9815
 ##
 ## $loss
-## [1] 0.08939119
+## [1] 0.09328237
 ```
 
 Generate predictions on new data:

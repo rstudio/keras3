@@ -44,7 +44,7 @@ Let's see how that works.
 
 ```r
 library(reticulate)
-library(tensorflow)
+library(tensorflow, exclude = c("set_random_seed", "shape"))
 library(keras3)
 ```
 
@@ -82,7 +82,8 @@ CustomModel <- new_model_class(
 
     with(tf$GradientTape() %as% tape, {
       y_pred <- self(x, training = TRUE)
-      loss <- self$compute_loss(y = y, y_pred=y_pred, sample_weight = sample_weight)
+      loss <- self$compute_loss(y = y, y_pred = y_pred,
+                                sample_weight = sample_weight)
     })
 
     # Compute gradients
@@ -116,21 +117,21 @@ Let's try this out:
 inputs <- layer_input(shape = 32)
 outputs <- layer_dense(inputs, 1)
 model <- CustomModel(inputs, outputs)
-model %>% compile(optimizer="adam", loss="mse", metrics="mae")
+model |> compile(optimizer = "adam", loss = "mse", metrics = "mae")
 
 # Just use `fit` as usual
 x <- random_normal(c(1000, 32))
 y <- random_normal(c(1000, 1))
-model %>% fit(x, y, epochs=3)
+model |> fit(x, y, epochs = 3)
 ```
 
 ```
 ## Epoch 1/3
-## 32/32 - 1s - 37ms/step - loss: 2.9118 - mae: 1.3597
+## 32/32 - 1s - 35ms/step - loss: 2.9118 - mae: 1.3597
 ## Epoch 2/3
-## 32/32 - 0s - 3ms/step - loss: 2.6026 - mae: 1.2856
+## 32/32 - 0s - 1ms/step - loss: 2.6026 - mae: 1.2856
 ## Epoch 3/3
-## 32/32 - 0s - 2ms/step - loss: 2.3378 - mae: 1.2193
+## 32/32 - 0s - 1ms/step - loss: 2.3378 - mae: 1.2193
 ```
 
 ## Going lower-level
@@ -201,21 +202,21 @@ outputs <- layer_dense(inputs, 1)
 model <- CustomModel(inputs, outputs)
 
 # We don't passs a loss or metrics here.
-model %>% compile(optimizer="adam")
+model |> compile(optimizer = "adam")
 
 # Just use `fit` as usual
 x <- random_normal(c(1000, 32))
 y <- random_normal(c(1000, 1))
-model %>% fit(x, y, epochs=3)
+model |> fit(x, y, epochs = 3)
 ```
 
 ```
 ## Epoch 1/3
-## 32/32 - 1s - 31ms/step - loss: 2.6540 - mae: 1.2901
+## 32/32 - 1s - 25ms/step - loss: 2.6540 - mae: 1.2901
 ## Epoch 2/3
-## 32/32 - 0s - 2ms/step - loss: 2.4139 - mae: 1.2303
+## 32/32 - 0s - 1ms/step - loss: 2.4139 - mae: 1.2303
 ## Epoch 3/3
-## 32/32 - 0s - 2ms/step - loss: 2.2080 - mae: 1.1761
+## 32/32 - 0s - 1ms/step - loss: 2.2080 - mae: 1.1761
 ```
 
 ## Supporting `sample_weight` & `class_weight`
@@ -238,7 +239,8 @@ CustomModel <- new_model_class(
 
     with(tf$GradientTape() %as% tape, {
       y_pred <- self(x, training = TRUE)
-      loss <- self$compute_loss(y = y, y_pred = y_pred, sample_weight = sample_weight)
+      loss <- self$compute_loss(y = y, y_pred = y_pred,
+                                sample_weight = sample_weight)
     })
 
     # Compute gradients
@@ -269,13 +271,13 @@ CustomModel <- new_model_class(
 inputs <- layer_input(shape = 32)
 outputs <- layer_dense(inputs, units = 1)
 model <- CustomModel(inputs, outputs)
-model %>% compile(optimizer="adam", loss="mse", metrics="mae")
+model |> compile(optimizer = "adam", loss = "mse", metrics = "mae")
 
 # You can now use sample_weight argument
 x <- random_normal(c(1000, 32))
 y <- random_normal(c(1000, 1))
 sw <- random_normal(c(1000, 1))
-model %>% fit(x, y, sample_weight=sw, epochs=3)
+model |> fit(x, y, sample_weight = sw, epochs = 3)
 ```
 
 ```
@@ -321,12 +323,12 @@ CustomModel <- new_model_class(
 inputs <- layer_input(shape = 32)
 outputs <- layer_dense(inputs, 1)
 model <- CustomModel(inputs, outputs)
-model %>% compile(loss = "mse", metrics = "mae")
+model |> compile(loss = "mse", metrics = "mae")
 
 # Evaluate with our custom test_step
 x <- random_normal(c(1000, 32))
 y <- random_normal(c(1000, 1))
-model %>% evaluate(x, y)
+model |> evaluate(x, y)
 ```
 
 ```
@@ -356,26 +358,41 @@ Let's consider:
 
 ```r
 # Create the discriminator
-discriminator <- keras_model_sequential(name = "discriminator", input_shape = c(28, 28, 1)) %>%
-  layer_conv_2d(filters = 64, kernel_size = c(3, 3), strides = c(2, 2), padding = "same") %>%
-  layer_activation_leaky_relu(negative_slope = 0.2) %>%
-  layer_conv_2d(filters = 128, kernel_size = c(3, 3), strides = c(2, 2), padding = "same") %>%
-  layer_activation_leaky_relu(negative_slope = 0.2) %>%
-  layer_global_max_pooling_2d() %>%
+discriminator <-
+  keras_model_sequential(name = "discriminator", input_shape = c(28, 28, 1)) |>
+
+  layer_conv_2d(filters = 64, kernel_size = c(3, 3),
+                strides = c(2, 2),  padding = "same") |>
+  layer_activation_leaky_relu(negative_slope = 0.2) |>
+
+  layer_conv_2d(filters = 128, kernel_size = c(3, 3),
+                strides = c(2, 2), padding = "same") |>
+  layer_activation_leaky_relu(negative_slope = 0.2) |>
+
+  layer_global_max_pooling_2d() |>
   layer_dense(units = 1)
 
 
 # Create the generator
 latent_dim <- 128
-generator <- keras_model_sequential(name = "generator", input_shape = latent_dim) %>%
-  layer_dense(7 * 7 * 128) %>%
-  layer_activation_leaky_relu(negative_slope = 0.2) %>%
-  layer_reshape(target_shape = c(7, 7, 128)) %>%
-  layer_conv_2d_transpose(filters = 128, kernel_size = c(4, 4), strides = c(2, 2), padding = "same") %>%
-  layer_activation_leaky_relu(negative_slope = 0.2) %>%
-  layer_conv_2d_transpose(filters = 128, kernel_size = c(4, 4), strides = c(2, 2), padding = "same") %>%
-  layer_activation_leaky_relu(negative_slope = 0.2) %>%
-  layer_conv_2d(filters = 1, kernel_size = c(7, 7), padding = "same", activation = "sigmoid")
+generator <-
+  keras_model_sequential(name = "generator", input_shape = latent_dim) |>
+
+  layer_dense(7 * 7 * 128) |>
+  layer_activation_leaky_relu(negative_slope = 0.2) |>
+
+  layer_reshape(target_shape = c(7, 7, 128)) |>
+
+  layer_conv_2d_transpose(filters = 128, kernel_size = c(4, 4),
+                          strides = c(2, 2), padding = "same") |>
+  layer_activation_leaky_relu(negative_slope = 0.2) |>
+
+  layer_conv_2d_transpose(filters = 128, kernel_size = c(4, 4),
+                          strides = c(2, 2), padding = "same") |>
+  layer_activation_leaky_relu(negative_slope = 0.2) |>
+
+  layer_conv_2d(filters = 1, kernel_size = c(7, 7), padding = "same",
+                activation = "sigmoid")
 ```
 
 Here's a feature-complete GAN class, overriding `compile()` to use its own signature,
@@ -383,47 +400,48 @@ and implementing the entire GAN algorithm in 17 lines in `train_step`:
 
 
 ```r
-GAN <- new_model_class(
-  "GAN",
+GAN <- Model(
+  classname = "GAN",
+
   initialize = function(discriminator, generator, latent_dim, ...) {
     super$initialize(...)
     self$discriminator <- discriminator
     self$generator <- generator
     self$latent_dim <- as.integer(latent_dim)
-    self$d_loss_tracker <- metric_mean(name="d_loss")
-    self$g_loss_tracker = metric_mean(name="g_loss")
+    self$d_loss_tracker <- metric_mean(name = "d_loss")
+    self$g_loss_tracker <- metric_mean(name = "g_loss")
   },
+
   compile = function(d_optimizer, g_optimizer, loss_fn, ...) {
     super$compile(...)
     self$d_optimizer <- d_optimizer
     self$g_optimizer <- g_optimizer
     self$loss_fn <- loss_fn
   },
-  metrics = mark_active(function() {
+  metrics = active_property(function() {
     list(self$d_loss_tracker, self$g_loss_tracker)
   }),
+
   train_step = function(real_images) {
+
     # Sample random points in the latent space
-    batch_size <- tf$shape(real_images)[1]
+    batch_size <- shape(real_images)[[1]]
     random_latent_vectors <-
-      tf$random$normal(shape = c(batch_size, self$latent_dim))
+      tf$random$normal(shape(batch_size, self$latent_dim))
 
     # Decode them to fake images
     generated_images <- self$generator(random_latent_vectors)
 
     # Combine them with real images
-    combined_images <-
-      tf$concat(list(generated_images, real_images),
-                axis = 0L)
+    combined_images <- op_concatenate(list(generated_images,
+                                           real_images))
 
     # Assemble labels discriminating real from fake images
-    labels <-
-      tf$concat(list(tf$ones(c(batch_size, 1L)),
-                     tf$zeros(c(batch_size, 1L))),
-                axis = 0L)
+    labels <- op_concatenate(list(op_ones(c(batch_size, 1)),
+                                  op_zeros(c(batch_size, 1))))
 
     # Add random noise to the labels - important trick!
-    labels %<>% `+`(tf$random$uniform(tf$shape(.), maxval = 0.05))
+    labels %<>% `+`(tf$random$uniform(shape(.), maxval = 0.05))
 
     # Train the discriminator
     with(tf$GradientTape() %as% tape, {
@@ -436,10 +454,10 @@ GAN <- new_model_class(
 
     # Sample random points in the latent space
     random_latent_vectors <-
-      tf$random$normal(shape = c(batch_size, self$latent_dim))
+      tf$random$normal(shape(batch_size, self$latent_dim))
 
     # Assemble labels that say "all real images"
-    misleading_labels <- tf$zeros(c(batch_size, 1L))
+    misleading_labels <- op_zeros(c(batch_size, 1))
 
     # Train the generator (note that we should *not* update the weights
     # of the discriminator)!
@@ -464,35 +482,32 @@ batch_size <- 64
 c(c(x_train, .), c(x_test, .)) %<-% dataset_mnist()
 all_digits <- op_concatenate(list(x_train, x_test))
 all_digits <- op_reshape(all_digits, c(-1, 28, 28, 1))
-dataset <- all_digits %>%
-  tfdatasets::tensor_slices_dataset() %>%
-  tfdatasets::dataset_map(function(x) tf$cast(x, "float")/255) %>%
-  tfdatasets::dataset_shuffle(buffer_size = 1024) %>%
+dataset <- all_digits |>
+  tfdatasets::tensor_slices_dataset() |>
+  tfdatasets::dataset_map(\(x) op_cast(x, "float32") / 255) |>
+  tfdatasets::dataset_shuffle(buffer_size = 1024) |>
   tfdatasets::dataset_batch(batch_size = batch_size)
 
-gan <- GAN(discriminator=discriminator, generator=generator, latent_dim=latent_dim)
-gan$compile(
-    d_optimizer = optimizer_adam(learning_rate=0.0003),
-    g_optimizer = optimizer_adam(learning_rate=0.0003),
-    loss_fn = loss_binary_crossentropy(from_logits = TRUE)
+gan <- GAN(discriminator = discriminator,
+           generator = generator,
+           latent_dim = latent_dim)
+
+gan |> compile(
+  d_optimizer = optimizer_adam(learning_rate = 0.0003),
+  g_optimizer = optimizer_adam(learning_rate = 0.0003),
+  loss_fn = loss_binary_crossentropy(from_logits = TRUE)
 )
-```
 
-```
-## <keras.src.losses.losses.BinaryCrossentropy object>
-```
-
-```r
 # To limit the execution time, we only train on 100 batches. You can train on
 # the entire dataset. You will need about 20 epochs to get nice results.
-gan %>% fit(
+gan |> fit(
   tfdatasets::dataset_take(dataset, 100),
   epochs = 1
 )
 ```
 
 ```
-## 100/100 - 7s - 73ms/step - d_loss: 0.0000e+00 - g_loss: 0.0000e+00
+## 100/100 - 8s - 78ms/step - d_loss: 0.0000e+00 - g_loss: 0.0000e+00
 ```
 
 The ideas behind deep learning are simple, so why should their implementation be painful?
