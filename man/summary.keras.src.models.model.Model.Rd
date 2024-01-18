@@ -13,7 +13,7 @@
   line_length = getOption("width"),
   positions = NULL,
   expand_nested = FALSE,
-  show_trainable = x$built && as.logical(length(x$non_trainable_weights)),
+  show_trainable = NA,
   ...,
   layer_range = NULL,
   compact = TRUE

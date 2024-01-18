@@ -635,8 +635,10 @@ function(x,
                         force = c("show_layer_names"))
   args$model <- x
 
-  if(is.na(show_trainable))
-    show_trainable <- x$built && as.logical(length(x$non_trainable_weights))
+  if (is.na(show_trainable)) {
+    built <- as_r_value(py_get_attr(x, "built", silent = TRUE)) %||% FALSE
+    show_trainable <- built && as.logical(length(x$non_trainable_weights))
+  }
   args$show_trainable <- show_trainable
 
   if (is.null(to_file)) {

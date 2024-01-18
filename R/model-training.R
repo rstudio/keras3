@@ -884,7 +884,7 @@ function(x,
          line_length = getOption("width"), # width - (12L * show_trainable),
          positions = NULL,
          expand_nested = FALSE,
-         show_trainable = x$built && as.logical(length(x$non_trainable_weights)),
+         show_trainable = NA,
          ...,
          # width = getOption("width"),
          # rich = TRUE, ??
@@ -897,6 +897,11 @@ function(x,
 
     args <- capture_args(ignore = c("x", "compact", "width"),
                           force = c("show_trainable", "line_length"))
+
+    if(is.na(args$show_trainable)) {
+      built <- as_r_value(py_get_attr(x, "built", silent = TRUE)) %||% FALSE
+      args$show_trainable <- built && as.logical(length(x$non_trainable_weights))
+    }
 
     # Do we need to check for model$built before calling summary?
     with_rich_config(
