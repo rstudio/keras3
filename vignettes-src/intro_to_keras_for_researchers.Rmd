@@ -28,11 +28,11 @@ Keras & TensorFlow API concepts.
 In this guide, you will learn about:
 
 - Tensors, variables, and gradients in TensorFlow
-- Creating layers by subclassing the `Layer` class
+- Creating layers by subclassing the [`Layer`] class
 - Writing low-level training loops
 - Tracking losses created by layers via the `add_loss()` method
 - Tracking metrics in a low-level training loop
-- Speeding up execution with a compiled `tf.function`
+- Speeding up execution with a compiled [`tensorflow::tf_function()`]
 - Executing layers in training or inference mode
 - The Keras Functional API
 
@@ -77,16 +77,15 @@ x$shape
 A common way to create constant tensors is via `tf$ones` and `tf$zeros`:
 
 ```{r}
-tf$ones(shape=shape(2, 1))
-tf$zeros(shape=shape(2, 1))
+tf$ones(shape = shape(2, 1))
+tf$zeros(shape = shape(2, 1))
 ```
 
 You can also create random constant tensors:
 
 ```{r}
-x <- random_normal(shape=c(2, 2), mean=0.0, stddev=1.0)
-
-x <- random_uniform(shape=c(2, 2), minval=0, maxval=10)
+x <- random_normal(shape = c(2, 2), mean = 0.0, stddev = 1.0)
+x <- random_uniform(shape = c(2, 2), minval = 0, maxval = 10)
 ```
 
 ## Variables
