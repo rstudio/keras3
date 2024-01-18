@@ -34,7 +34,7 @@ function(classname,
          inherit = NULL,
          parent_env = parent.frame(),
          private = list(),
-         modifiers = quote(expr =),
+         # modifiers = quote(expr =),
          default_formals = function(...) {})
 {
   # force all new_py_type() args
@@ -63,10 +63,10 @@ function(classname,
   frmls$self <- NULL
 
   bdy <- bquote({
-    args <- capture_args(.(modifiers), enforce_all_dots_named = FALSE)
+    args <- capture_args(enforce_all_dots_named = FALSE) # .(modifiers),
     do.call(.(as.name(classname)), args)
   })
-  rm(modifiers, default_formals) # free memory
+  rm(default_formals) # free memory ; rm(modifiers)
 
   as.function.default(c(frmls, bdy))
 }
@@ -431,18 +431,24 @@ py_func2 <- function(fn, convert, name = deparse(substitute(fn))) {
   pass_sig <- iterate(sig$parameters$values(), function(p) {
     if(p$kind == inspect$Parameter$POSITIONAL_ONLY)
       p$name
+    else if (p$kind == inspect$Parameter$POSITIONAL_OR_KEYWORD)
+    # pass as positional, since there might be a positional args collector up ahead, and
+    # having kwargs before a positional collector is illegal
+      p$name
     else if (p$kind == inspect$Parameter$VAR_POSITIONAL)
      paste0("*", p$name)
     else if (p$kind == inspect$Parameter$VAR_KEYWORD)
      paste0("**", p$name)
-    else
+    else if(p$kind == inspect$Parameter$KEYWORD_ONLY)
      paste0(p$name, "=", p$name)
+    else
+      stop("Unrecognized function argument type: ", p$name)
   })
   pass_sig <- paste0(pass_sig, collapse = ", ")
   code <- glue::glue("
-def wrap_fn(_fn):
+def wrap_fn(r_fn):
   def {name}{py_str(sig)}:
-    return _fn({pass_sig})
+    return r_fn({pass_sig})
   return {name}
   ")
   util <- reticulate::py_run_string(code, local = TRUE, convert = convert)
