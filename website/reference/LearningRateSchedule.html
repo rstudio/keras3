@@ -197,7 +197,8 @@ runtime.</p></dd>
 <span></span>
 <span>    <span class="co"># print 'step' every 1000 steps</span></span>
 <span>    <span class="fu"><a href="../reference/op_cond.html">op_cond</a></span><span class="op">(</span><span class="op">(</span><span class="va">step</span> <span class="op"><a href="https://rdrr.io/r/base/Arithmetic.html" class="external-link">%%</a></span> <span class="fl">1000</span><span class="op">)</span> <span class="op">==</span> <span class="fl">0</span>,</span>
-<span>            \<span class="op">(</span><span class="op">)</span> <span class="fu">tensorflow</span><span class="fu">::</span><span class="va"><a href="https://rdrr.io/pkg/tensorflow/man/tf.html" class="external-link">tf</a></span><span class="op">$</span><span class="fu">print</span><span class="op">(</span><span class="va">step</span><span class="op">)</span><span class="op">)</span></span>
+<span>            \<span class="op">(</span><span class="op">)</span> <span class="op">{</span><span class="fu">tensorflow</span><span class="fu">::</span><span class="va"><a href="https://rdrr.io/pkg/tensorflow/man/tf.html" class="external-link">tf</a></span><span class="op">$</span><span class="fu">print</span><span class="op">(</span><span class="va">step</span><span class="op">)</span>; <span class="cn">NULL</span><span class="op">}</span>,</span>
+<span>            \<span class="op">(</span><span class="op">)</span> <span class="op">{</span><span class="cn">NULL</span><span class="op">}</span><span class="op">)</span></span>
 <span>    <span class="va">self</span><span class="op">$</span><span class="va">initial_learning_rate</span> <span class="op">/</span> <span class="op">(</span><span class="va">step</span> <span class="op">+</span> <span class="fl">1</span><span class="op">)</span></span>
 <span>  <span class="op">}</span></span>
 <span><span class="op">)</span></span>
