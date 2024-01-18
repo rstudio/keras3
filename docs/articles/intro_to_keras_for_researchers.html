@@ -119,13 +119,13 @@ first introduction to core Keras &amp; TensorFlow API concepts.</p>
 <p>In this guide, you will learn about:</p>
 <ul>
 <li>Tensors, variables, and gradients in TensorFlow</li>
-<li>Creating layers by subclassing the <code>Layer</code> class</li>
+<li>Creating layers by subclassing the [<code>Layer</code>] class</li>
 <li>Writing low-level training loops</li>
 <li>Tracking losses created by layers via the <code>add_loss()</code>
 method</li>
 <li>Tracking metrics in a low-level training loop</li>
-<li>Speeding up execution with a compiled <code>tf.function</code>
-</li>
+<li>Speeding up execution with a compiled
+[<code><a href="https://rdrr.io/pkg/tensorflow/man/tf_function.html" class="external-link">tensorflow::tf_function()</a></code>]</li>
 <li>Executing layers in training or inference mode</li>
 <li>The Keras Functional API</li>
 </ul>
@@ -176,20 +176,19 @@ the Tensor.</p>
 <p>A common way to create constant tensors is via <code>tf$ones</code>
 and <code>tf$zeros</code>:</p>
 <div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">tf</span><span class="op">$</span><span class="fu">ones</span><span class="op">(</span>shape<span class="op">=</span><span class="fu"><a href="../reference/shape.html">shape</a></span><span class="op">(</span><span class="fl">2</span>, <span class="fl">1</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">tf</span><span class="op">$</span><span class="fu">ones</span><span class="op">(</span>shape <span class="op">=</span> <span class="fu"><a href="../reference/shape.html">shape</a></span><span class="op">(</span><span class="fl">2</span>, <span class="fl">1</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">## tf.Tensor(</span></span>
 <span><span class="co">## [[1.]</span></span>
 <span><span class="co">##  [1.]], shape=(2, 1), dtype=float32)</span></span></code></pre>
 <div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">tf</span><span class="op">$</span><span class="fu">zeros</span><span class="op">(</span>shape<span class="op">=</span><span class="fu"><a href="../reference/shape.html">shape</a></span><span class="op">(</span><span class="fl">2</span>, <span class="fl">1</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">tf</span><span class="op">$</span><span class="fu">zeros</span><span class="op">(</span>shape <span class="op">=</span> <span class="fu"><a href="../reference/shape.html">shape</a></span><span class="op">(</span><span class="fl">2</span>, <span class="fl">1</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">## tf.Tensor(</span></span>
 <span><span class="co">## [[0.]</span></span>
 <span><span class="co">##  [0.]], shape=(2, 1), dtype=float32)</span></span></code></pre>
 <p>You can also create random constant tensors:</p>
 <div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">x</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/random_normal.html">random_normal</a></span><span class="op">(</span>shape<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">2</span>, <span class="fl">2</span><span class="op">)</span>, mean<span class="op">=</span><span class="fl">0.0</span>, stddev<span class="op">=</span><span class="fl">1.0</span><span class="op">)</span></span>
-<span></span>
-<span><span class="va">x</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/random_uniform.html">random_uniform</a></span><span class="op">(</span>shape<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">2</span>, <span class="fl">2</span><span class="op">)</span>, minval<span class="op">=</span><span class="fl">0</span>, maxval<span class="op">=</span><span class="fl">10</span><span class="op">)</span></span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">x</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/random_normal.html">random_normal</a></span><span class="op">(</span>shape <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">2</span>, <span class="fl">2</span><span class="op">)</span>, mean <span class="op">=</span> <span class="fl">0.0</span>, stddev <span class="op">=</span> <span class="fl">1.0</span><span class="op">)</span></span>
+<span><span class="va">x</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/random_uniform.html">random_uniform</a></span><span class="op">(</span>shape <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">2</span>, <span class="fl">2</span><span class="op">)</span>, minval <span class="op">=</span> <span class="fl">0</span>, maxval <span class="op">=</span> <span class="fl">10</span><span class="op">)</span></span></code></pre></div>
 </div>
 <div class="section level2">
 <h2 id="variables">Variables<a class="anchor" aria-label="anchor" href="#variables"></a>
@@ -975,20 +974,20 @@ the MNIST example above.</p>
 <span><span class="co"># Train the model with the dataset for 2 epochs.</span></span>
 <span><span class="va">model</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://generics.r-lib.org/reference/fit.html" class="external-link">fit</a></span><span class="op">(</span><span class="va">dataset</span>, epochs<span class="op">=</span><span class="fl">2</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">## Epoch 1/2</span></span>
-<span><span class="co">## 938/938 - 2s - 3ms/step - loss: 0.3960 - sparse_categorical_accuracy: 0.8866</span></span>
+<span><span class="co">## 938/938 - 4s - 4ms/step - loss: 0.3958 - sparse_categorical_accuracy: 0.8866</span></span>
 <span><span class="co">## Epoch 2/2</span></span>
-<span><span class="co">## 938/938 - 1s - 881us/step - loss: 0.1886 - sparse_categorical_accuracy: 0.9444</span></span></code></pre>
+<span><span class="co">## 938/938 - 1s - 960us/step - loss: 0.1888 - sparse_categorical_accuracy: 0.9443</span></span></code></pre>
 <div class="sourceCode" id="cb73"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">predictions</span> <span class="op">&lt;-</span> <span class="va">model</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://rdrr.io/r/stats/predict.html" class="external-link">predict</a></span><span class="op">(</span><span class="va">dataset</span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">## 938/938 - 1s - 992us/step</span></span></code></pre>
+<pre><code><span><span class="co">## 938/938 - 1s - 1ms/step</span></span></code></pre>
 <div class="sourceCode" id="cb75"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">model</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://rdrr.io/pkg/tensorflow/man/evaluate.html" class="external-link">evaluate</a></span><span class="op">(</span><span class="va">dataset</span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">## 938/938 - 1s - 1ms/step - loss: 0.1764 - sparse_categorical_accuracy: 0.9452</span></span></code></pre>
+<pre><code><span><span class="co">## 938/938 - 1s - 1ms/step - loss: 0.1763 - sparse_categorical_accuracy: 0.9454</span></span></code></pre>
 <pre><code><span><span class="co">## $loss</span></span>
-<span><span class="co">## [1] 0.1764244</span></span>
+<span><span class="co">## [1] 0.1763445</span></span>
 <span><span class="co">##</span></span>
 <span><span class="co">## $sparse_categorical_accuracy</span></span>
-<span><span class="co">## [1] 0.94515</span></span></code></pre>
+<span><span class="co">## [1] 0.9454167</span></span></code></pre>
 <p>You can always subclass the <code>Model</code> class (it works
 exactly like subclassing <code>Layer</code>) if you want to leverage
 built-in training loops for your OO models. Just override the
@@ -1047,7 +1046,7 @@ guide</a>.</p>
 <pre><code><span><span class="co">## Epoch 1/2</span></span>
 <span><span class="co">## 938/938 - 2s - 2ms/step - loss: 0.3869 - sparse_categorical_accuracy: 0.8924</span></span>
 <span><span class="co">## Epoch 2/2</span></span>
-<span><span class="co">## 938/938 - 1s - 849us/step - loss: 0.2163 - sparse_categorical_accuracy: 0.9370</span></span></code></pre>
+<span><span class="co">## 938/938 - 1s - 1ms/step - loss: 0.2163 - sparse_categorical_accuracy: 0.9370</span></span></code></pre>
 </div>
 <div class="section level2">
 <h2 id="end-to-end-experiment-example-1-variational-autoencoders-">End-to-end experiment example 1: variational autoencoders.<a class="anchor" aria-label="anchor" href="#end-to-end-experiment-example-1-variational-autoencoders-"></a>
