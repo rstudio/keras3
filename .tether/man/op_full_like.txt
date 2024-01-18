@@ -1,0 +1,16 @@
+__signature__
+keras.ops.full_like(
+  x,
+  fill_value,
+  dtype=None
+)
+__doc__
+Return a full tensor with the same shape and type as the given tensor.
+
+Args:
+    x: Input tensor.
+    fill_value: Fill value.
+    dtype: Overrides data type of the result.
+
+Returns:
+    Tensor of `fill_value` with the same shape and type as `x`.

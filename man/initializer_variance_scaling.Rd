@@ -2,40 +2,76 @@
 % Please edit documentation in R/initializers.R
 \name{initializer_variance_scaling}
 \alias{initializer_variance_scaling}
-\title{Initializer capable of adapting its scale to the shape of weights.}
+\title{Initializer that adapts its scale to the shape of its input tensors.}
 \usage{
 initializer_variance_scaling(
   scale = 1,
-  mode = c("fan_in", "fan_out", "fan_avg"),
-  distribution = c("normal", "uniform", "truncated_normal", "untruncated_normal"),
+  mode = "fan_in",
+  distribution = "truncated_normal",
   seed = NULL
 )
 }
 \arguments{
 \item{scale}{Scaling factor (positive float).}
 
-\item{mode}{One of "fan_in", "fan_out", "fan_avg".}
+\item{mode}{One of \code{"fan_in"}, \code{"fan_out"}, \code{"fan_avg"}.}
 
-\item{distribution}{One of "truncated_normal", "untruncated_normal" and "uniform".
-For backward compatibility, "normal" will be accepted and converted to
-"untruncated_normal".}
+\item{distribution}{Random distribution to use.
+One of \code{"truncated_normal"}, \code{"untruncated_normal"}, or \code{"uniform"}.}
 
-\item{seed}{Integer used to seed the random generator.}
+\item{seed}{An integer or instance of
+\code{random_seed_generator()}.
+Used to make the behavior of the initializer
+deterministic. Note that an initializer seeded with an integer
+or \code{NULL} (unseeded) will produce the same random values
+across multiple calls. To get different random values
+across multiple calls, use as seed an instance
+of \code{random_seed_generator()}.}
 }
 \description{
-With \code{distribution="normal"}, samples are drawn from a truncated normal
-distribution centered on zero, with \code{stddev = sqrt(scale / n)} where n is:
+With \verb{distribution = "truncated_normal" or "untruncated_normal"}, samples are
+drawn from a truncated/untruncated normal distribution with a mean of zero
+and a standard deviation (after truncation, if used) \code{stddev = sqrt(scale / n)}, where \code{n} is:
 \itemize{
-\item number of input units in the weight tensor, if mode = "fan_in"
-\item number of output units, if mode = "fan_out"
-\item average of the numbers of input and output units, if mode = "fan_avg"
+\item number of input units in the weight tensor, if \code{mode = "fan_in"}
+\item number of output units, if \code{mode = "fan_out"}
+\item average of the numbers of input and output units, if \code{mode = "fan_avg"}
 }
+
+With \code{distribution = "uniform"}, samples are drawn from a uniform distribution
+within \verb{[-limit, limit]}, where \code{limit = sqrt(3 * scale / n)}.
 }
-\details{
-With \code{distribution="uniform"}, samples are drawn from a uniform distribution
-within \verb{-limit, limit}, with \code{limit = sqrt(3 * scale / n)}.
+\section{Examples}{
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{# Standalone usage:
+initializer <- initializer_variance_scaling(scale = 0.1, mode = 'fan_in',
+                                            distribution = 'uniform')
+values <- initializer(shape = c(2, 2))
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{# Usage in a Keras layer:
+initializer <- initializer_variance_scaling(scale = 0.1, mode = 'fan_in',
+                                            distribution = 'uniform')
+layer <- layer_dense(units = 3, kernel_initializer = initializer)
+}\if{html}{\out{</div>}}
 }
+
 \seealso{
+\itemize{
+\item \url{https://keras.io/api/layers/initializers#variancescaling-class}
+}
+
+Other random initializers: 
+\code{\link{initializer_glorot_normal}()},
+\code{\link{initializer_glorot_uniform}()},
+\code{\link{initializer_he_normal}()},
+\code{\link{initializer_he_uniform}()},
+\code{\link{initializer_lecun_normal}()},
+\code{\link{initializer_lecun_uniform}()},
+\code{\link{initializer_orthogonal}()},
+\code{\link{initializer_random_normal}()},
+\code{\link{initializer_random_uniform}()},
+\code{\link{initializer_truncated_normal}()}
+
 Other initializers: 
 \code{\link{initializer_constant}()},
 \code{\link{initializer_glorot_normal}()},
@@ -53,3 +89,4 @@ Other initializers:
 \code{\link{initializer_zeros}()}
 }
 \concept{initializers}
+\concept{random initializers}

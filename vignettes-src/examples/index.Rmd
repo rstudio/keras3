@@ -1,0 +1,59 @@
+---
+title: Keras examples
+output: rmarkdown::html_vignette
+knit: ({source(here::here("tools/knit.R")); knit_vignette})
+---
+
+<div class="container">
+```{r echo=FALSE, results = "asis"}
+examples <- list.files(".", pattern = ".Rmd")
+examples <- examples[examples != "index.Rmd"]
+examples <- lapply(examples, function(x) {
+  out <- rmarkdown::yaml_front_matter(x)
+  out$handle <- gsub("\\.Rmd", ".html", x)
+  out
+})
+
+card <- function(x) {
+  
+  badge_type <- 
+    if (x$category == "basic") 
+      "success" 
+    else if (x$category == "intermediate")
+      "warning"
+    else if (x$category == "advanced")
+      "danger"
+    else
+      "light"
+  
+  glue::glue(
+'<div class="col">
+<div class="card h-100">
+<h5 class="card-header bg-transparent">{x$title}</h5>
+<div class="card-body d-flex flex-column">
+<span class="badge rounded-pill bg-{badge_type} mb-1" style="align-self: flex-start">{x$category}</span>
+<p class="card-text">{x$description}</p>
+<a href="{x$handle}" class="btn btn-primary mt-auto">See code</a>
+</div>
+</div>
+</div>
+', .trim = FALSE)
+}
+
+cards <- lapply(examples, card)
+domains <- split(cards, sapply(examples, function(x) x$domain))
+
+cat("```{=html}\n")
+for (domain in names(domains)) {
+  cat("\n")
+  cat(glue::glue('<h2 class="mt-2">{stringr::str_to_title(domain)}</h2>\n'))
+  cat(glue::glue('<div class="row row-cols-1 row-cols-md-2 g-4">\n'))
+  for (card in domains[[domain]]) {
+    cat(card)
+  }
+  cat('</div>\n')
+}
+cat("```\n")
+```
+</div>
+

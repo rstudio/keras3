@@ -2,87 +2,730 @@
 % Please edit documentation in R/Layer.R
 \name{Layer}
 \alias{Layer}
-\title{(Deprecated) Create a custom Layer}
+\title{Define a custom \code{Layer} class.}
 \usage{
 Layer(
   classname,
-  initialize,
-  build = NULL,
+  initialize = NULL,
   call = NULL,
-  compute_output_shape = NULL,
+  build = NULL,
+  get_config = NULL,
   ...,
-  inherit = keras::keras$layers$Layer
+  public = list(),
+  private = list(),
+  inherit = NULL,
+  parent_env = parent.frame()
 )
 }
 \arguments{
-\item{classname}{the name of the custom Layer.}
+\item{classname}{String, the name of the custom class. (Conventionally, CamelCase).}
 
-\item{initialize}{a function. This is where you define the arguments used to further
-build your layer. For example, a dense layer would take the \code{units} argument.
-You should always call \code{super()$`__init__()`} to initialize the base
-inherited layer.}
+\item{initialize, call, build, get_config}{Recommended methods to implement. See
+description and details sections.}
 
-\item{build}{a function that takes \code{input_shape} as argument. This is where you will
-define your weights. Note that if your layer doesn't define trainable weights then
-you need not implement this method.}
+\item{..., public}{Additional methods or public members of the custom class.}
 
-\item{call}{This is where the layer's logic lives. Unless you want your layer to
-support masking, you only have to care about the first argument passed to \code{call}
-(the input tensor).}
+\item{private}{Named list of R objects (typically, functions) to include in
+instance private environments. \code{private} methods will have all the same
+symbols in scope as public methods (See section "Symbols in Scope"). Each
+instance will have it's own \code{private} environment. Any objects
+in \code{private} will be invisible from the Keras framework and the Python
+runtime.}
 
-\item{compute_output_shape}{a function that takes \code{input_shape} as an argument. In
-case your layer modifies the shape of its input, you should specify here the
-shape transformation logic. This allows Keras to do automatic shape inference.
-If you don't modify the shape of the input then you need not implement this
-method.}
+\item{inherit}{What the custom class will subclass. By default, the base keras class.}
 
-\item{...}{Any other methods and/or attributes can be specified using named
-arguments. They will be added to the layer class.}
-
-\item{inherit}{the Keras layer to inherit from.}
+\item{parent_env}{The R environment that all class methods will have as a grandparent.}
 }
 \value{
-A function that wraps \code{create_layer}, similar to \code{keras::layer_dense}.
+A composing layer constructor, with similar behavior to other layer
+functions like \code{layer_dense()}. The first argument of the returned function
+will be \code{object}, enabling \code{initialize()}ing and \code{call()} the layer in one
+step while composing the layer with the pipe, like
+
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{layer_foo <- Layer("Foo", ....)
+output <- inputs |> layer_foo()
+}\if{html}{\out{</div>}}
+
+To only \code{initialize()} a layer instance and not \code{call()} it, pass a missing
+or \code{NULL} value to \code{object}, or pass all arguments to \code{initialize()} by name.
+
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{layer <- layer_dense(units = 2, activation = "relu")
+layer <- layer_dense(NULL, 2, activation = "relu")
+layer <- layer_dense(, 2, activation = "relu")
+
+# then you can call() the layer in a separate step
+outputs <- inputs |> layer()
+}\if{html}{\out{</div>}}
 }
 \description{
-This function is maintained but deprecated. Please use \code{new_layer_class()} or
-\verb{\%py_class\%} to define custom layers.
+A layer is a callable object that takes as input one or more tensors and
+that outputs one or more tensors. It involves \emph{computation}, defined
+in the \code{call()} method, and a \emph{state} (weight variables). State can be
+created:
+\itemize{
+\item in \code{initialize()}, for instance via \code{self$add_weight()};
+\item in the optional \code{build()} method, which is invoked by the first
+\code{call()} to the layer, and supplies the shape(s) of the input(s),
+which may not have been known at initialization time.
 }
-\examples{
-\dontrun{
 
-layer_dense2 <- Layer(
-  "Dense2",
+Layers are recursively composable: If you assign a Layer instance as an
+attribute of another Layer, the outer layer will start tracking the weights
+created by the inner layer. Nested layers should be instantiated in the
+\code{initialize()} method or \code{build()} method.
 
-  initialize = function(units) {
-    super()$`__init__`()
-    self$units <- as.integer(units)
-  },
+Users will just instantiate a layer and then treat it as a callable.
+}
+\section{Symbols in scope}{
+All R function custom methods (public and private) will have the
+following symbols in scope:
+\itemize{
+\item \code{self}: The custom class instance.
+\item \code{super}: The custom class superclass.
+\item \code{private}: An R environment specific to the class instance.
+Any objects assigned here are invisible to the Keras framework.
+\item \verb{__class__} and \code{as.symbol(classname)}: the custom class type object.
+}
+}
 
-  build = function(input_shape) {
-    print(class(input_shape))
+\section{Attributes}{
+\itemize{
+\item \code{name}: The name of the layer (string).
+\item \code{dtype}: Dtype of the layer's weights. Alias of \code{layer$variable_dtype}.
+\item \code{variable_dtype}: Dtype of the layer's weights.
+\item \code{compute_dtype}: The dtype of the layer's computations.
+Layers automatically cast inputs to this dtype, which causes
+the computations and output to also be in this dtype.
+When mixed precision is used with a
+\code{keras$mixed_precision$DTypePolicy}, this will be different
+than \code{variable_dtype}.
+\item \code{trainable_weights}: List of variables to be included in backprop.
+\item \code{non_trainable_weights}: List of variables that should not be
+included in backprop.
+\item \code{weights}: The concatenation of the lists \code{trainable_weights} and
+\code{non_trainable_weights} (in this order).
+\item \code{trainable}: Whether the layer should be trained (boolean), i.e.
+whether its potentially-trainable weights should be returned
+as part of \code{layer$trainable_weights}.
+\item \code{input_spec}: Optional (list of) \code{InputSpec} object(s) specifying the
+constraints on inputs that can be accepted by the layer.
+}
+
+We recommend that custom \code{Layer}s implement the following methods:
+\itemize{
+\item \code{initialize()}: Defines custom layer attributes, and creates layer weights
+that do not depend on input shapes, using \code{add_weight()},
+or other state.
+\item \code{build(input_shape)}: This method can be used to create weights that
+depend on the shape(s) of the input(s), using \code{add_weight()}, or other
+state. Calling \code{call()} will automatically build the layer
+(if it has not been built yet) by calling \code{build()}.
+\item \code{call(...)}: Method called after making
+sure \code{build()} has been called. \code{call()} performs the logic of applying
+the layer to the input arguments.
+Two reserved arguments you can optionally use in \code{call()} are:
+\enumerate{
+\item \code{training} (boolean, whether the call is in inference mode or
+training mode).
+\item \code{mask} (boolean tensor encoding masked timesteps in the input,
+used e.g. in RNN layers).
+}
+
+A typical signature for this method is \code{call(inputs)}, and user
+could optionally add \code{training} and \code{mask} if the layer need them.
+\item \code{get_config()}: Returns a named list containing the configuration
+used to initialize this layer. If the list names differ from the arguments
+in \code{initialize()}, then override \code{from_config()} as well.
+This method is used when saving
+the layer or a model that contains this layer.
+}
+}
+
+\section{Examples}{
+Here's a basic example: a layer with two variables, \code{w} and \code{b},
+that returns \code{y <- (w \%*\% x) + b}.
+It shows how to implement \code{build()} and \code{call()}.
+Variables set as attributes of a layer are tracked as weights
+of the layers (in \code{layer$weights}).
+
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{layer_simple_dense <- Layer(
+  "SimpleDense",
+  initialize = function(units = 32) \{
+    super$initialize()
+    self$units <- units
+  \},
+
+  # Create the state of the layer (weights)
+  build = function(input_shape) \{
     self$kernel <- self$add_weight(
-      name = "kernel",
-      shape = list(input_shape[[2]], self$units),
-      initializer = "uniform",
-      trainable = TRUE
+      shape = shape(tail(input_shape, 1), self$units),
+      initializer = "glorot_uniform",
+      trainable = TRUE,
+      name = "kernel"
     )
-  },
+    self$bias = self$add_weight(
+      shape = shape(self$units),
+      initializer = "zeros",
+      trainable = TRUE,
+      name = "bias"
+    )
+  \},
 
-  call = function(x) {
-    tensorflow::tf$matmul(x, self$kernel)
-  },
-
-  compute_output_shape = function(input_shape) {
-    list(input_shape[[1]], self$units)
-  }
-
+  # Defines the computation
+  call = function(self, inputs) \{
+    op_matmul(inputs, self$kernel) + self$bias
+  \}
 )
 
-l <- layer_dense2(units = 10)
-l(matrix(runif(10), ncol = 1))
+# Instantiates the layer.
+# Supply missing `object` arg to skip invoking `call()` and instead return
+# the Layer instance
+linear_layer <- layer_simple_dense(, 4)
 
+# This will call `build(input_shape)` and create the weights,
+# and then invoke `call()`.
+y <- linear_layer(op_ones(c(2, 2)))
+stopifnot(length(linear_layer$weights) == 2)
+
+# These weights are trainable, so they're listed in `trainable_weights`:
+stopifnot(length(linear_layer$trainable_weights) == 2)
+}\if{html}{\out{</div>}}
+
+Besides trainable weights, updated via backpropagation during training,
+layers can also have non-trainable weights. These weights are meant to
+be updated manually during \code{call()}. Here's a example layer that computes
+the running sum of its inputs:
+
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{layer_compute_sum <- Layer(
+  classname = "ComputeSum",
+
+  initialize = function(input_dim) \{
+    super$initialize()
+
+    # Create a non-trainable weight.
+    self$total <- self$add_weight(
+      shape = shape(),
+      initializer = "zeros",
+      trainable = FALSE,
+      name = "total"
+    )
+  \},
+
+  call = function(inputs) \{
+    self$total$assign(self$total + op_sum(inputs))
+    self$total
+  \}
+)
+
+my_sum <- layer_compute_sum(, 2)
+x <- op_ones(c(2, 2))
+y <- my_sum(x)
+
+stopifnot(exprs = \{
+  all.equal(my_sum$weights,               list(my_sum$total))
+  all.equal(my_sum$non_trainable_weights, list(my_sum$total))
+  all.equal(my_sum$trainable_weights,     list())
+\})
+}\if{html}{\out{</div>}}
 }
 
+\section{Methods available}{
+\itemize{
+\item 
+
+\if{html}{\out{<div class="sourceCode">}}\preformatted{add_loss(loss)
+}\if{html}{\out{</div>}}
+
+Can be called inside of the \code{call()} method to add a scalar loss.
+
+Example:
+
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{Layer("MyLayer",
+  ...
+  call = function(x) \{
+    self$add_loss(op_sum(x))
+    x
+  \}
+}\if{html}{\out{</div>}}
+\item 
+
+\if{html}{\out{<div class="sourceCode">}}\preformatted{add_metric()
+}\if{html}{\out{</div>}}
+\item 
+
+\if{html}{\out{<div class="sourceCode">}}\preformatted{add_variable(...)
+}\if{html}{\out{</div>}}
+
+Alias of \code{add_weight()}.
+\item 
+
+\if{html}{\out{<div class="sourceCode">}}\preformatted{add_weight(shape = NULL,
+           initializer = NULL,
+           dtype = NULL,
+           trainable = TRUE,
+           regularizer = NULL,
+           constraint = NULL,
+           name = NULL)
+}\if{html}{\out{</div>}}
+
+Add a weight variable to the layer.
+
+Args:
+\itemize{
+\item \code{shape}: shape for the variable (as defined by \code{\link[=shape]{shape()}})
+Must be fully-defined (no \code{NA}/\code{NULL}/\code{-1} entries).
+Defaults to \verb{()} (scalar) if unspecified.
+\item \code{initializer}: Initializer object to use to
+populate the initial variable value,
+or string name of a built-in initializer
+(e.g. \code{"random_normal"}). If unspecified,
+defaults to \code{"glorot_uniform"}
+for floating-point variables and to \code{"zeros"}
+for all other types (e.g. int, bool).
+\item \code{dtype}: Dtype of the variable to create,
+e.g. \code{"float32"}. If unspecified,
+defaults to the layer's
+variable dtype (which itself defaults to
+\code{"float32"} if unspecified).
+\item \code{trainable}: Boolean, whether the variable should
+be trainable via backprop or whether its
+updates are managed manually.
+\item \code{constraint}: Constraint object to call on the
+variable after any optimizer update,
+or string name of a built-in constraint.
+\item \code{name}: String name of the variable. Useful
+for debugging purposes.
 }
-\keyword{internal}
+
+Returns:
+
+A backend tensor, wrapped in a \code{KerasVariable} class.
+The \code{KerasVariable} class has
+
+Methods:
+\itemize{
+\item \code{assign(value)}
+\item \code{assign_add(value)}
+\item \code{assign_sub(value)}
+\item \code{numpy()} (calling \verb{as.array(<variable>)} is preferred)
+}
+
+Properties/Attributes:
+\itemize{
+\item \code{value}
+\item \code{dtype}
+\item \code{ndim}
+\item \code{shape} (calling \verb{shape(<variable>)} is preferred)
+\item \code{trainable}
+}
+\item 
+
+\if{html}{\out{<div class="sourceCode">}}\preformatted{build(input_shape)
+}\if{html}{\out{</div>}}
+\item 
+
+\if{html}{\out{<div class="sourceCode">}}\preformatted{build_from_config(config)
+}\if{html}{\out{</div>}}
+
+Builds the layer's states with the supplied config (named list of args).
+
+By default, this method calls the \code{do.call(build, config$input_shape)} method,
+which creates weights based on the layer's input shape in the supplied
+config. If your config contains other information needed to load the
+layer's state, you should override this method.
+
+Args:
+\itemize{
+\item \code{config}: Named list containing the input shape associated with this layer.
+}
+\item 
+
+\if{html}{\out{<div class="sourceCode">}}\preformatted{call(...)
+}\if{html}{\out{</div>}}
+
+See description above
+\item 
+
+\if{html}{\out{<div class="sourceCode">}}\preformatted{compute_mask(inputs, previous_mask)
+}\if{html}{\out{</div>}}
+\item 
+
+\if{html}{\out{<div class="sourceCode">}}\preformatted{compute_output_shape(...)
+}\if{html}{\out{</div>}}
+\item 
+
+\if{html}{\out{<div class="sourceCode">}}\preformatted{compute_output_spec(...)
+}\if{html}{\out{</div>}}
+\item 
+
+\if{html}{\out{<div class="sourceCode">}}\preformatted{count_params()
+}\if{html}{\out{</div>}}
+
+Count the total number of scalars composing the weights.
+
+Returns:
+An integer count.
+
+\if{html}{\out{<div class="sourceCode">}}\preformatted{
+}\if{html}{\out{</div>}}
+\item 
+
+\if{html}{\out{<div class="sourceCode">}}\preformatted{get_build_config()
+}\if{html}{\out{</div>}}
+
+Returns a named list with the layer's input shape.
+
+This method returns a config (named list) that can be used by
+\code{build_from_config(config)} to create all states (e.g. Variables and
+Lookup tables) needed by the layer.
+
+By default, the config only contains the input shape that the layer
+was built with. If you're writing a custom layer that creates state in
+an unusual way, you should override this method to make sure this state
+is already created when Keras attempts to load its value upon model
+loading.
+
+Returns:
+A named list containing the input shape associated with the layer.
+\item 
+
+\if{html}{\out{<div class="sourceCode">}}\preformatted{get_config()
+}\if{html}{\out{</div>}}
+
+Returns the config of the object.
+
+An object config is a named list (serializable)
+containing the information needed to re-instantiate it.
+The config is expected to be serializable to JSON, and is expected
+to consist of a (potentially complex, nested) structure of names lists
+consisting of simple objects like strings, ints.
+\item 
+
+\if{html}{\out{<div class="sourceCode">}}\preformatted{get_weights()
+}\if{html}{\out{</div>}}
+
+Return the values of \code{layer$weights} as a list of R or NumPy arrays.
+\item 
+
+\if{html}{\out{<div class="sourceCode">}}\preformatted{load_own_variables(store)
+}\if{html}{\out{</div>}}
+
+Loads the state of the layer.
+
+You can override this method to take full control of how the state of
+the layer is loaded upon calling \code{load_model()}.
+
+Args:
+\itemize{
+\item \code{store}: Named list from which the state of the model will be loaded.
+}
+\item 
+
+\if{html}{\out{<div class="sourceCode">}}\preformatted{save_own_variables(store)
+}\if{html}{\out{</div>}}
+
+Saves the state of the layer.
+
+You can override this method to take full control of how the state of
+the layer is saved upon calling \code{save_model()}.
+
+Args:
+\itemize{
+\item \code{store}: Named list where the state of the model will be saved.
+}
+\item 
+
+\if{html}{\out{<div class="sourceCode">}}\preformatted{set_weights(weights)
+}\if{html}{\out{</div>}}
+
+Sets the values of \code{weights} from a list of R or NumPy arrays.
+\item 
+
+\if{html}{\out{<div class="sourceCode">}}\preformatted{stateless_call(trainable_variables, non_trainable_variables,
+               ..., return_losses = FALSE)
+}\if{html}{\out{</div>}}
+
+Call the layer without any side effects.
+
+Args:
+\itemize{
+\item \code{trainable_variables}: List of trainable variables of the model.
+\item \code{non_trainable_variables}: List of non-trainable variables of the
+model.
+\item \code{...}: Positional and named arguments to be passed to \code{call()}.
+\item \code{return_losses}: If \code{TRUE}, \code{stateless_call()} will return the list of
+losses created during \code{call()} as part of its return values.
+}
+
+Returns:
+An unnamed list. By default, returns \code{list(outputs, non_trainable_variables)}.
+If \code{return_losses = TRUE}, then returns
+\code{list(outputs, non_trainable_variables, losses)}.
+
+Note: \code{non_trainable_variables} include not only non-trainable weights
+such as \code{BatchNormalization} statistics, but also RNG seed state
+(if there are any random operations part of the layer, such as dropout),
+and \code{Metric} state (if there are any metrics attached to the layer).
+These are all elements of state of the layer.
+
+Example:
+
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{model <- ...
+data <- ...
+trainable_variables <- model$trainable_variables
+non_trainable_variables <- model$non_trainable_variables
+# Call the model with zero side effects
+c(outputs, non_trainable_variables) \%<-\% model$stateless_call(
+    trainable_variables,
+    non_trainable_variables,
+    data
+)
+# Attach the updated state to the model
+# (until you do this, the model is still in its pre-call state).
+purrr::walk2(
+  model$non_trainable_variables, non_trainable_variables,
+  \\(variable, value) variable$assign(value))
+}\if{html}{\out{</div>}}
+\item 
+
+\if{html}{\out{<div class="sourceCode">}}\preformatted{symbolic_call(...)
+}\if{html}{\out{</div>}}
+\item 
+
+\if{html}{\out{<div class="sourceCode">}}\preformatted{from_config(config)
+}\if{html}{\out{</div>}}
+
+Creates a layer from its config.
+
+This is a class method, meaning, the R function will not have a \code{self}
+symbol (a class instance) in scope. Use \verb{__class__} or the classname symbol
+provided when the \code{Layer()} was constructed) to resolve the class definition.
+The default implementation is:
+
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{from_config = function(config) \{
+  do.call(`__class__`, config)
+\}
+}\if{html}{\out{</div>}}
+
+This method is the reverse of \code{get_config()},
+capable of instantiating the same layer from the config
+named list. It does not handle layer connectivity
+(handled by Network), nor weights (handled by \code{set_weights()}).
+
+Args:
+\itemize{
+\item \code{config}: A named list, typically the
+output of \code{get_config()}.
+}
+
+Returns:
+A layer instance.
+}
+
+\if{html}{\out{<div class="sourceCode">}}\preformatted{initialize(...,
+           activity_regularizer = NULL,
+           trainable = TRUE,
+           dtype = NULL,
+           autocast = TRUE,
+           name = NULL)
+}\if{html}{\out{</div>}}
+
+Initialize self. This method is typically called from a custom \code{initialize()} method.
+Example:
+
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{layer_my_layer <- Layer("MyLayer",
+  initialize = function(units, ..., dtype = NULL, name = NULL) \{
+    super$initialize(..., dtype = dtype, name = name)
+    # .... finish initializing `self` instance
+  \}
+)
+}\if{html}{\out{</div>}}
+}
+
+\section{Readonly properties:}{
+\itemize{
+\item \code{compute_dtype}
+The dtype of the computations performed by the layer.
+\item \code{dtype}
+Alias of \code{layer$variable_dtype}.
+\item \code{input_dtype}
+The dtype layer inputs should be converted to.
+\item \code{losses}
+List of scalar losses from \code{add_loss()}, regularizers and sublayers.
+\item \code{metrics_variables}
+List of all metric variables.
+\item \code{non_trainable_variables}
+List of all non-trainable layer state.
+
+This extends \code{layer$non_trainable_weights} to include all state used by
+the layer including state for metrics and \code{SeedGenerator}s.
+\item \code{non_trainable_weights}
+List of all non-trainable weight variables of the layer.
+
+These are the weights that should not be updated by the optimizer during
+training. Unlike, \code{layer$non_trainable_variables} this excludes metric
+state and random seeds.
+\item \code{trainable_variables}
+List of all trainable layer state.
+
+This is equivalent to \code{layer$trainable_weights}.
+\item \code{trainable_weights}
+List of all trainable weight variables of the layer.
+
+These are the weights that get updated by the optimizer during training.
+\item \code{variable_dtype}
+The dtype of the state (weights) of the layer.
+\item \code{variables}
+List of all layer state, including random seeds.
+
+This extends \code{layer$weights} to include all state used by the layer
+including \code{SeedGenerator}s.
+
+Note that metrics variables are not included here, use
+\code{metrics_variables} to visit all the metric variables.
+\item \code{weights}
+List of all weight variables of the layer.
+
+Unlike, \code{layer$variables} this excludes metric state and random seeds.
+\item \code{input}
+Retrieves the input tensor(s) of a symbolic operation.
+
+Only returns the tensor(s) corresponding to the \emph{first time}
+the operation was called.
+
+Returns:
+Input tensor or list of input tensors.
+\item \code{output}
+Retrieves the output tensor(s) of a layer.
+
+Only returns the tensor(s) corresponding to the \emph{first time}
+the operation was called.
+
+Returns:
+Output tensor or list of output tensors.
+}
+}
+
+\section{Data descriptors (Attributes):}{
+\itemize{
+\item \code{input_spec}
+\item \code{supports_masking}
+Whether this layer supports computing a mask using \code{compute_mask}.
+\item \code{trainable}
+Settable boolean, whether this layer should be trainable or not.
+}
+}
+
+\seealso{
+\itemize{
+\item \url{https://keras.io/api/layers/base_layer#layer-class}
+}
+
+Other layers: 
+\code{\link{layer_activation_elu}()},
+\code{\link{layer_activation_leaky_relu}()},
+\code{\link{layer_activation_parametric_relu}()},
+\code{\link{layer_activation_relu}()},
+\code{\link{layer_activation_softmax}()},
+\code{\link{layer_activation}()},
+\code{\link{layer_activity_regularization}()},
+\code{\link{layer_additive_attention}()},
+\code{\link{layer_add}()},
+\code{\link{layer_attention}()},
+\code{\link{layer_average_pooling_1d}()},
+\code{\link{layer_average_pooling_2d}()},
+\code{\link{layer_average_pooling_3d}()},
+\code{\link{layer_average}()},
+\code{\link{layer_batch_normalization}()},
+\code{\link{layer_bidirectional}()},
+\code{\link{layer_category_encoding}()},
+\code{\link{layer_center_crop}()},
+\code{\link{layer_concatenate}()},
+\code{\link{layer_conv_1d_transpose}()},
+\code{\link{layer_conv_1d}()},
+\code{\link{layer_conv_2d_transpose}()},
+\code{\link{layer_conv_2d}()},
+\code{\link{layer_conv_3d_transpose}()},
+\code{\link{layer_conv_3d}()},
+\code{\link{layer_conv_lstm_1d}()},
+\code{\link{layer_conv_lstm_2d}()},
+\code{\link{layer_conv_lstm_3d}()},
+\code{\link{layer_cropping_1d}()},
+\code{\link{layer_cropping_2d}()},
+\code{\link{layer_cropping_3d}()},
+\code{\link{layer_dense}()},
+\code{\link{layer_depthwise_conv_1d}()},
+\code{\link{layer_depthwise_conv_2d}()},
+\code{\link{layer_discretization}()},
+\code{\link{layer_dot}()},
+\code{\link{layer_dropout}()},
+\code{\link{layer_einsum_dense}()},
+\code{\link{layer_embedding}()},
+\code{\link{layer_feature_space}()},
+\code{\link{layer_flatten}()},
+\code{\link{layer_gaussian_dropout}()},
+\code{\link{layer_gaussian_noise}()},
+\code{\link{layer_global_average_pooling_1d}()},
+\code{\link{layer_global_average_pooling_2d}()},
+\code{\link{layer_global_average_pooling_3d}()},
+\code{\link{layer_global_max_pooling_1d}()},
+\code{\link{layer_global_max_pooling_2d}()},
+\code{\link{layer_global_max_pooling_3d}()},
+\code{\link{layer_group_normalization}()},
+\code{\link{layer_group_query_attention}()},
+\code{\link{layer_gru}()},
+\code{\link{layer_hashed_crossing}()},
+\code{\link{layer_hashing}()},
+\code{\link{layer_identity}()},
+\code{\link{layer_integer_lookup}()},
+\code{\link{layer_lambda}()},
+\code{\link{layer_layer_normalization}()},
+\code{\link{layer_lstm}()},
+\code{\link{layer_masking}()},
+\code{\link{layer_max_pooling_1d}()},
+\code{\link{layer_max_pooling_2d}()},
+\code{\link{layer_max_pooling_3d}()},
+\code{\link{layer_maximum}()},
+\code{\link{layer_minimum}()},
+\code{\link{layer_multi_head_attention}()},
+\code{\link{layer_multiply}()},
+\code{\link{layer_normalization}()},
+\code{\link{layer_permute}()},
+\code{\link{layer_random_brightness}()},
+\code{\link{layer_random_contrast}()},
+\code{\link{layer_random_crop}()},
+\code{\link{layer_random_flip}()},
+\code{\link{layer_random_rotation}()},
+\code{\link{layer_random_translation}()},
+\code{\link{layer_random_zoom}()},
+\code{\link{layer_repeat_vector}()},
+\code{\link{layer_rescaling}()},
+\code{\link{layer_reshape}()},
+\code{\link{layer_resizing}()},
+\code{\link{layer_rnn}()},
+\code{\link{layer_separable_conv_1d}()},
+\code{\link{layer_separable_conv_2d}()},
+\code{\link{layer_simple_rnn}()},
+\code{\link{layer_spatial_dropout_1d}()},
+\code{\link{layer_spatial_dropout_2d}()},
+\code{\link{layer_spatial_dropout_3d}()},
+\code{\link{layer_spectral_normalization}()},
+\code{\link{layer_string_lookup}()},
+\code{\link{layer_subtract}()},
+\code{\link{layer_text_vectorization}()},
+\code{\link{layer_tfsm}()},
+\code{\link{layer_time_distributed}()},
+\code{\link{layer_torch_module_wrapper}()},
+\code{\link{layer_unit_normalization}()},
+\code{\link{layer_upsampling_1d}()},
+\code{\link{layer_upsampling_2d}()},
+\code{\link{layer_upsampling_3d}()},
+\code{\link{layer_zero_padding_1d}()},
+\code{\link{layer_zero_padding_2d}()},
+\code{\link{layer_zero_padding_3d}()},
+\code{\link{rnn_cell_gru}()},
+\code{\link{rnn_cell_lstm}()},
+\code{\link{rnn_cell_simple}()},
+\code{\link{rnn_cells_stack}()}
+}
+\concept{layers}

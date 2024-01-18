@@ -2,80 +2,184 @@
 % Please edit documentation in R/layers-preprocessing.R
 \name{layer_random_flip}
 \alias{layer_random_flip}
-\title{Randomly flip each image horizontally and vertically}
+\title{A preprocessing layer which randomly flips images during training.}
 \usage{
 layer_random_flip(object, mode = "horizontal_and_vertical", seed = NULL, ...)
 }
 \arguments{
-\item{object}{What to compose the new \code{Layer} instance with. Typically a
-Sequential model or a Tensor (e.g., as returned by \code{layer_input()}).
-The return value depends on \code{object}. If \code{object} is:
-\itemize{
-\item missing or \code{NULL}, the \code{Layer} instance is returned.
-\item a \code{Sequential} model, the model with an additional layer is returned.
-\item a Tensor, the output tensor from \code{layer_instance(object)} is returned.
-}}
+\item{object}{Object to compose the layer with. A tensor, array, or sequential model.}
 
 \item{mode}{String indicating which flip mode to use. Can be \code{"horizontal"},
-\code{"vertical"}, or \code{"horizontal_and_vertical"}. Defaults to
-\code{"horizontal_and_vertical"}. \code{"horizontal"} is a left-right flip and
-\code{"vertical"} is a top-bottom flip.}
+\code{"vertical"}, or \code{"horizontal_and_vertical"}. \code{"horizontal"} is a
+left-right flip and \code{"vertical"} is a top-bottom flip. Defaults to
+\code{"horizontal_and_vertical"}}
 
 \item{seed}{Integer. Used to create a random seed.}
 
-\item{...}{standard layer arguments.}
+\item{...}{Base layer keyword arguments, such as
+\code{name} and \code{dtype}.}
 }
 \description{
-Randomly flip each image horizontally and vertically
-}
-\details{
-This layer will flip the images based on the \code{mode} attribute.
-During inference time, the output will be identical to input. Call the layer
-with \code{training = TRUE} to flip the input.
+This layer will flip the images horizontally and or vertically based on the
+\code{mode} attribute. During inference time, the output will be identical to
+input. Call the layer with \code{training=TRUE} to flip the input.
+Input pixel values can be of any range (e.g. \verb{[0., 1.)} or \verb{[0, 255]}) and
+of integer or floating point dtype.
+By default, the layer will output floats.
 
-Input shape:
+\strong{Note:} This layer is safe to use inside a \code{tf.data} pipeline
+(independently of which backend you're using).
+}
+\section{Input Shape}{
 3D (unbatched) or 4D (batched) tensor with shape:
 \verb{(..., height, width, channels)}, in \code{"channels_last"} format.
+}
 
-Output shape:
+\section{Output Shape}{
 3D (unbatched) or 4D (batched) tensor with shape:
 \verb{(..., height, width, channels)}, in \code{"channels_last"} format.
 }
+
 \seealso{
 \itemize{
-\item \url{https://www.tensorflow.org/api_docs/python/tf/keras/layers/RandomFlip}
-\item \url{https://keras.io/api/layers/preprocessing_layers/image_augmentation/random_flip}
+\item \url{https://keras.io/api/layers/preprocessing_layers/image_augmentation/random_flip#randomflip-class}
 }
 
 Other image augmentation layers: 
 \code{\link{layer_random_brightness}()},
 \code{\link{layer_random_contrast}()},
 \code{\link{layer_random_crop}()},
-\code{\link{layer_random_height}()},
 \code{\link{layer_random_rotation}()},
 \code{\link{layer_random_translation}()},
-\code{\link{layer_random_width}()},
 \code{\link{layer_random_zoom}()}
 
 Other preprocessing layers: 
 \code{\link{layer_category_encoding}()},
 \code{\link{layer_center_crop}()},
 \code{\link{layer_discretization}()},
+\code{\link{layer_feature_space}()},
+\code{\link{layer_hashed_crossing}()},
 \code{\link{layer_hashing}()},
 \code{\link{layer_integer_lookup}()},
 \code{\link{layer_normalization}()},
 \code{\link{layer_random_brightness}()},
 \code{\link{layer_random_contrast}()},
 \code{\link{layer_random_crop}()},
-\code{\link{layer_random_height}()},
 \code{\link{layer_random_rotation}()},
 \code{\link{layer_random_translation}()},
-\code{\link{layer_random_width}()},
 \code{\link{layer_random_zoom}()},
 \code{\link{layer_rescaling}()},
 \code{\link{layer_resizing}()},
 \code{\link{layer_string_lookup}()},
 \code{\link{layer_text_vectorization}()}
+
+Other layers: 
+\code{\link{Layer}()},
+\code{\link{layer_activation_elu}()},
+\code{\link{layer_activation_leaky_relu}()},
+\code{\link{layer_activation_parametric_relu}()},
+\code{\link{layer_activation_relu}()},
+\code{\link{layer_activation_softmax}()},
+\code{\link{layer_activation}()},
+\code{\link{layer_activity_regularization}()},
+\code{\link{layer_additive_attention}()},
+\code{\link{layer_add}()},
+\code{\link{layer_attention}()},
+\code{\link{layer_average_pooling_1d}()},
+\code{\link{layer_average_pooling_2d}()},
+\code{\link{layer_average_pooling_3d}()},
+\code{\link{layer_average}()},
+\code{\link{layer_batch_normalization}()},
+\code{\link{layer_bidirectional}()},
+\code{\link{layer_category_encoding}()},
+\code{\link{layer_center_crop}()},
+\code{\link{layer_concatenate}()},
+\code{\link{layer_conv_1d_transpose}()},
+\code{\link{layer_conv_1d}()},
+\code{\link{layer_conv_2d_transpose}()},
+\code{\link{layer_conv_2d}()},
+\code{\link{layer_conv_3d_transpose}()},
+\code{\link{layer_conv_3d}()},
+\code{\link{layer_conv_lstm_1d}()},
+\code{\link{layer_conv_lstm_2d}()},
+\code{\link{layer_conv_lstm_3d}()},
+\code{\link{layer_cropping_1d}()},
+\code{\link{layer_cropping_2d}()},
+\code{\link{layer_cropping_3d}()},
+\code{\link{layer_dense}()},
+\code{\link{layer_depthwise_conv_1d}()},
+\code{\link{layer_depthwise_conv_2d}()},
+\code{\link{layer_discretization}()},
+\code{\link{layer_dot}()},
+\code{\link{layer_dropout}()},
+\code{\link{layer_einsum_dense}()},
+\code{\link{layer_embedding}()},
+\code{\link{layer_feature_space}()},
+\code{\link{layer_flatten}()},
+\code{\link{layer_gaussian_dropout}()},
+\code{\link{layer_gaussian_noise}()},
+\code{\link{layer_global_average_pooling_1d}()},
+\code{\link{layer_global_average_pooling_2d}()},
+\code{\link{layer_global_average_pooling_3d}()},
+\code{\link{layer_global_max_pooling_1d}()},
+\code{\link{layer_global_max_pooling_2d}()},
+\code{\link{layer_global_max_pooling_3d}()},
+\code{\link{layer_group_normalization}()},
+\code{\link{layer_group_query_attention}()},
+\code{\link{layer_gru}()},
+\code{\link{layer_hashed_crossing}()},
+\code{\link{layer_hashing}()},
+\code{\link{layer_identity}()},
+\code{\link{layer_integer_lookup}()},
+\code{\link{layer_lambda}()},
+\code{\link{layer_layer_normalization}()},
+\code{\link{layer_lstm}()},
+\code{\link{layer_masking}()},
+\code{\link{layer_max_pooling_1d}()},
+\code{\link{layer_max_pooling_2d}()},
+\code{\link{layer_max_pooling_3d}()},
+\code{\link{layer_maximum}()},
+\code{\link{layer_minimum}()},
+\code{\link{layer_multi_head_attention}()},
+\code{\link{layer_multiply}()},
+\code{\link{layer_normalization}()},
+\code{\link{layer_permute}()},
+\code{\link{layer_random_brightness}()},
+\code{\link{layer_random_contrast}()},
+\code{\link{layer_random_crop}()},
+\code{\link{layer_random_rotation}()},
+\code{\link{layer_random_translation}()},
+\code{\link{layer_random_zoom}()},
+\code{\link{layer_repeat_vector}()},
+\code{\link{layer_rescaling}()},
+\code{\link{layer_reshape}()},
+\code{\link{layer_resizing}()},
+\code{\link{layer_rnn}()},
+\code{\link{layer_separable_conv_1d}()},
+\code{\link{layer_separable_conv_2d}()},
+\code{\link{layer_simple_rnn}()},
+\code{\link{layer_spatial_dropout_1d}()},
+\code{\link{layer_spatial_dropout_2d}()},
+\code{\link{layer_spatial_dropout_3d}()},
+\code{\link{layer_spectral_normalization}()},
+\code{\link{layer_string_lookup}()},
+\code{\link{layer_subtract}()},
+\code{\link{layer_text_vectorization}()},
+\code{\link{layer_tfsm}()},
+\code{\link{layer_time_distributed}()},
+\code{\link{layer_torch_module_wrapper}()},
+\code{\link{layer_unit_normalization}()},
+\code{\link{layer_upsampling_1d}()},
+\code{\link{layer_upsampling_2d}()},
+\code{\link{layer_upsampling_3d}()},
+\code{\link{layer_zero_padding_1d}()},
+\code{\link{layer_zero_padding_2d}()},
+\code{\link{layer_zero_padding_3d}()},
+\code{\link{rnn_cell_gru}()},
+\code{\link{rnn_cell_lstm}()},
+\code{\link{rnn_cell_simple}()},
+\code{\link{rnn_cells_stack}()}
 }
 \concept{image augmentation layers}
+\concept{layers}
 \concept{preprocessing layers}

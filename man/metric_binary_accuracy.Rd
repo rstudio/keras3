@@ -2,7 +2,7 @@
 % Please edit documentation in R/metrics.R
 \name{metric_binary_accuracy}
 \alias{metric_binary_accuracy}
-\title{Calculates how often predictions match binary labels}
+\title{Calculates how often predictions match binary labels.}
 \usage{
 metric_binary_accuracy(
   y_true,
@@ -21,60 +21,101 @@ metric_binary_accuracy(
 \item{threshold}{(Optional) Float representing the threshold for deciding
 whether prediction values are 1 or 0.}
 
-\item{...}{Passed on to the underlying metric. Used for forwards and backwards compatibility.}
+\item{...}{For forward/backward compatability.}
 
 \item{name}{(Optional) string name of the metric instance.}
 
 \item{dtype}{(Optional) data type of the metric result.}
 }
-\value{
-If \code{y_true} and \code{y_pred} are missing, a (subclassed) \code{Metric}
-instance is returned. The \code{Metric} object can be passed directly to
-\code{compile(metrics = )} or used as a standalone object. See \code{?Metric} for
-example usage.
-
-Alternatively, if called with \code{y_true} and \code{y_pred} arguments, then the
-computed case-wise values for the mini-batch are returned directly.
-}
 \description{
-Calculates how often predictions match binary labels
-}
-\details{
-This metric creates two local variables, \code{total} and \code{count} that are used to
-compute the frequency with which \code{y_pred} matches \code{y_true}. This frequency is
-ultimately returned as \verb{binary accuracy}: an idempotent operation that simply
-divides \code{total} by \code{count}.
+This metric creates two local variables, \code{total} and \code{count} that are used
+to compute the frequency with which \code{y_pred} matches \code{y_true}. This
+frequency is ultimately returned as \verb{binary accuracy}: an idempotent
+operation that simply divides \code{total} by \code{count}.
 
 If \code{sample_weight} is \code{NULL}, weights default to 1.
 Use \code{sample_weight} of 0 to mask values.
 }
+\section{Usage}{
+Standalone usage:
+
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{m <- metric_binary_accuracy()
+m$update_state(rbind(1, 1, 0, 0), rbind(0.98, 1, 0, 0.6))
+m$result()
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor(0.75, shape=(), dtype=float32)
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{# 0.75
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{m$reset_state()
+m$update_state(rbind(1, 1, 0, 0), rbind(0.98, 1, 0, 0.6),
+               sample_weight = c(1, 0, 0, 1))
+m$result()
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor(0.5, shape=(), dtype=float32)
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{# 0.5
+}\if{html}{\out{</div>}}
+
+Usage with \code{compile()} API:
+
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{model \%>\% compile(optimizer='sgd',
+                  loss='binary_crossentropy',
+                  metrics=list(metric_binary_accuracy()))
+}\if{html}{\out{</div>}}
+}
+
 \seealso{
+\itemize{
+\item \url{https://keras.io/api/metrics/accuracy_metrics#binaryaccuracy-class}
+}
+
+Other accuracy metrics: 
+\code{\link{metric_categorical_accuracy}()},
+\code{\link{metric_sparse_categorical_accuracy}()},
+\code{\link{metric_sparse_top_k_categorical_accuracy}()},
+\code{\link{metric_top_k_categorical_accuracy}()}
+
 Other metrics: 
+\code{\link{Metric}()},
 \code{\link{custom_metric}()},
-\code{\link{metric_accuracy}()},
 \code{\link{metric_auc}()},
 \code{\link{metric_binary_crossentropy}()},
+\code{\link{metric_binary_focal_crossentropy}()},
+\code{\link{metric_binary_iou}()},
 \code{\link{metric_categorical_accuracy}()},
 \code{\link{metric_categorical_crossentropy}()},
+\code{\link{metric_categorical_focal_crossentropy}()},
 \code{\link{metric_categorical_hinge}()},
 \code{\link{metric_cosine_similarity}()},
+\code{\link{metric_f1_score}()},
 \code{\link{metric_false_negatives}()},
 \code{\link{metric_false_positives}()},
+\code{\link{metric_fbeta_score}()},
 \code{\link{metric_hinge}()},
-\code{\link{metric_kullback_leibler_divergence}()},
-\code{\link{metric_logcosh_error}()},
+\code{\link{metric_huber}()},
+\code{\link{metric_iou}()},
+\code{\link{metric_kl_divergence}()},
+\code{\link{metric_log_cosh_error}()},
+\code{\link{metric_log_cosh}()},
 \code{\link{metric_mean_absolute_error}()},
 \code{\link{metric_mean_absolute_percentage_error}()},
 \code{\link{metric_mean_iou}()},
-\code{\link{metric_mean_relative_error}()},
 \code{\link{metric_mean_squared_error}()},
 \code{\link{metric_mean_squared_logarithmic_error}()},
-\code{\link{metric_mean_tensor}()},
 \code{\link{metric_mean_wrapper}()},
 \code{\link{metric_mean}()},
+\code{\link{metric_one_hot_iou}()},
+\code{\link{metric_one_hot_mean_iou}()},
 \code{\link{metric_poisson}()},
 \code{\link{metric_precision_at_recall}()},
 \code{\link{metric_precision}()},
+\code{\link{metric_r2_score}()},
 \code{\link{metric_recall_at_precision}()},
 \code{\link{metric_recall}()},
 \code{\link{metric_root_mean_squared_error}()},
@@ -89,4 +130,5 @@ Other metrics:
 \code{\link{metric_true_negatives}()},
 \code{\link{metric_true_positives}()}
 }
+\concept{accuracy metrics}
 \concept{metrics}

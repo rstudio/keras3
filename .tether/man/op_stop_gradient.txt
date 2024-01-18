@@ -1,0 +1,19 @@
+__signature__
+keras.ops.stop_gradient(variable)
+__doc__
+Stops gradient computation.
+
+Args:
+    variable: A tensor variable for which the gradient
+        computation is to be disabled.
+
+Returns:
+    The variable with gradient computation disabled.
+
+Examples:
+
+>>> var = keras.backend.convert_to_tensor(
+...     [1., 2., 3.],
+...     dtype="float32"
+... )
+>>> var = keras.ops.stop_gradient(var)

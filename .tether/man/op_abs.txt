@@ -1,0 +1,4 @@
+__signature__
+keras.ops.abs(x)
+__doc__
+Shorthand for `keras.ops.absolute`.

@@ -1,0 +1,61 @@
+Help on class MeanMetricWrapper in module keras.src.metrics.reduction_metrics:
+
+class MeanMetricWrapper(Mean)
+ |  MeanMetricWrapper(fn, name=None, dtype=None, **kwargs)
+ |
+ |  Wrap a stateless metric function with the Mean metric.
+ |
+ |  You could use this class to quickly build a mean metric from a function. The
+ |  function needs to have the signature `fn(y_true, y_pred)` and return a
+ |  per-sample loss array. `MeanMetricWrapper.result()` will return
+ |  the average metric value across all samples seen so far.
+ |
+ |  For example:
+ |
+ |  ```python
+ |  def mse(y_true, y_pred):
+ |      return (y_true - y_pred) ** 2
+ |
+ |  mse_metric = MeanMetricWrapper(fn=mse)
+ |  ```
+ |
+ |  Args:
+ |      fn: The metric function to wrap, with signature
+ |          `fn(y_true, y_pred, **kwargs)`.
+ |      name: (Optional) string name of the metric instance.
+ |      dtype: (Optional) data type of the metric result.
+ |      **kwargs: Keyword arguments to pass on to `fn`.
+ |
+ |  Method resolution order:
+ |      MeanMetricWrapper
+ |      Mean
+ |      keras.src.metrics.metric.Metric
+ |      builtins.object
+ |
+ |  Methods defined here:
+ |
+ |  __init__(
+ |    self,
+ |    fn,
+ |    name=None,
+ |    dtype=None,
+ |    **kwargs
+ |  )
+ |      Initialize self.  See help(type(self)) for accurate signature.
+ |
+ |  get_config(self)
+ |      Return the serializable config of the metric.
+ |
+ |  update_state(
+ |    self,
+ |    y_true,
+ |    y_pred,
+ |    sample_weight=None
+ |  )
+ |      Accumulate statistics for the metric.
+ |
+ |  ----------------------------------------------------------------------
+ |  Class methods defined here:
+ |
+ |  from_config(config) from builtins.type
+ |

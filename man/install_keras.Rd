@@ -2,63 +2,36 @@
 % Please edit documentation in R/install.R
 \name{install_keras}
 \alias{install_keras}
-\title{Install TensorFlow and Keras, including all Python dependencies}
+\title{Install Keras}
 \usage{
 install_keras(
-  method = c("auto", "virtualenv", "conda"),
-  conda = "auto",
-  version = "default",
-  tensorflow = version,
-  extra_packages = NULL,
-  ...
+  envname = "r-keras",
+  ...,
+  extra_packages = c("scipy", "pandas", "Pillow", "pydot", "ipython",
+    "tensorflow_datasets"),
+  python_version = ">=3.9,<=3.11",
+  backend = "tensorflow",
+  gpu = NA,
+  restart_session = TRUE
 )
 }
 \arguments{
-\item{method}{Installation method. By default, "auto" automatically finds a
-method that will work in the local environment. Change the default to force
-a specific installation method. Note that the "virtualenv" method is not
-available on Windows.}
+\item{envname}{Name of or path to a Python virtual environment}
 
-\item{conda}{The path to a \code{conda} executable. Use \code{"auto"} to allow
-\code{reticulate} to automatically find an appropriate \code{conda} binary.
-See \strong{Finding Conda} and \code{\link[reticulate:conda_binary]{conda_binary()}} for more details.}
+\item{...}{reserved for future compatability.}
 
-\item{version}{TensorFlow version to install. Valid values include:
-\itemize{
-\item \code{"default"} installs  2.14
-\item \code{"release"} installs the latest release version of tensorflow (which may
-be incompatible with the current version of the R package)
-\item A version specification like \code{"2.4"} or \code{"2.4.0"}. Note that if the patch
-version is not supplied, the latest patch release is installed (e.g.,
-\code{"2.4"} today installs version "2.4.2")
-\item \code{nightly} for the latest available nightly build.
-\item To any specification, you can append "-cpu" to install the cpu version
-only of the package (e.g., \code{"2.4-cpu"})
-\item The full URL or path to a installer binary or python *.whl file.
-}}
+\item{extra_packages}{Additional Python packages to install alongside Keras}
 
-\item{tensorflow}{Synonym for \code{version}. Maintained for backwards.}
+\item{python_version}{Passed on to \code{reticulate::virtualenv_starter()}}
 
-\item{extra_packages}{Additional Python packages to install along with
-TensorFlow.}
+\item{backend}{Which backend(s) to install. Accepted values include \code{"tensorflow"}, \code{"jax"} and \code{"pytorch"}}
 
-\item{...}{other arguments passed to \code{\link[reticulate:conda-tools]{reticulate::conda_install()}} or
-\code{\link[reticulate:virtualenv-tools]{reticulate::virtualenv_install()}}, depending on the \code{method} used.}
+\item{gpu}{whether to install a GPU capable version of the backend.}
+
+\item{restart_session}{Whether to restart the R session after installing (note this will only occur within RStudio).}
 }
 \description{
-This function will install Tensorflow and all Keras dependencies. This is a
-thin wrapper around \code{\link[tensorflow:install_tensorflow]{tensorflow::install_tensorflow()}}, with the only
-difference being that this includes by default additional extra packages that
-keras expects, and the default version of tensorflow installed by
-\code{install_keras()} may at times be different from the default installed
-\code{install_tensorflow()}. The default version of tensorflow installed by
-\code{install_keras()} is "2.13".
-}
-\details{
-The default additional packages are:
-tensorflow-hub, tensorflow-datasets, scipy, requests, pyyaml, Pillow, h5py, pandas, pydot, with their
-versions potentially constrained for compatibility with the
-requested tensorflow version.
+This function will install Keras along with a selected backend, including all Python dependencies.
 }
 \seealso{
 \code{\link[tensorflow:install_tensorflow]{tensorflow::install_tensorflow()}}

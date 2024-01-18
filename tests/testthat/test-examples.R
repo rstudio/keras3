@@ -6,7 +6,7 @@ context("examples")
 run_example <- function(example) {
   env <- new.env()
   capture.output({
-    example_path <- system.file("examples", example, package = "keras")
+    example_path <- system.file("examples", example, package = "keras3")
     old_wd <- setwd(dirname(example_path))
     on.exit(setwd(old_wd), add = TRUE)
     source(basename(example_path), local = env)

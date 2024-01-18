@@ -7,9 +7,30 @@
 initializer_ones()
 }
 \description{
-Initializer that generates tensors initialized to 1.
+Also available via the shortcut function \code{ones}.
 }
+\section{Examples}{
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{# Standalone usage:
+initializer <- initializer_ones()
+values <- initializer(shape = c(2, 2))
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{# Usage in a Keras layer:
+initializer <- initializer_ones()
+layer <- layer_dense(units = 3, kernel_initializer = initializer)
+}\if{html}{\out{</div>}}
+}
+
 \seealso{
+\itemize{
+\item \url{https://keras.io/api/layers/initializers#ones-class}
+}
+
+Other constant initializers: 
+\code{\link{initializer_constant}()},
+\code{\link{initializer_identity}()},
+\code{\link{initializer_zeros}()}
+
 Other initializers: 
 \code{\link{initializer_constant}()},
 \code{\link{initializer_glorot_normal}()},
@@ -26,4 +47,5 @@ Other initializers:
 \code{\link{initializer_variance_scaling}()},
 \code{\link{initializer_zeros}()}
 }
+\concept{constant initializers}
 \concept{initializers}

@@ -10,20 +10,20 @@
 
 - Fixed deadlock when an R generator was passed to `fit()`, `predict()`, and other endpoints.
 
-- When `fit(verbose = "auto")` is evaluated in the context of a knitr document 
-  (e.g., quarto or rmarkdown document being rendered), verbose will now 
+- When `fit(verbose = "auto")` is evaluated in the context of a knitr document
+  (e.g., quarto or rmarkdown document being rendered), verbose will now
   default to `2`, showing one line per epoch.
 
 # keras 2.11.1
 
 - Update S3 method formals per new CRAN requirement (`r_to_py.keras_layer_wrapper()`)
 
-- Fixed an issue where `get_file()` would place incorrectly 
+- Fixed an issue where `get_file()` would place incorrectly
   save files in the current working directory. (#1365)
 
 # keras 2.11.0
 
-- Default TensorFlow version installed by `install_keras()` is now 2.11. 
+- Default TensorFlow version installed by `install_keras()` is now 2.11.
 
 - All optimizers have been updated for keras/tensorflow version 2.11.
   Arguments to all the optimizers have changed. To access the previous
@@ -42,7 +42,7 @@
   - `layer_normalization()` gains an `invert` argument.
   - `layer_string_lookup()` gains an `idf_weights` argument.
 
-- Fixed issue where `input_shape` supplied to custom layers defined with `new_layer_class()`  
+- Fixed issue where `input_shape` supplied to custom layers defined with `new_layer_class()`
   would result in an error (#1338)
 
 - New `callback_backup_and_restore()`, for resuming an interrupted `fit()` call.
@@ -52,14 +52,14 @@
   e.g. something like this now works:
   ```r
   block_1_output <- ...
-  block_2_output <- block_1_output %>% 
-    layer_conv_2d(64, 3, activation = "relu", padding = "same") %>% 
+  block_2_output <- block_1_output %>%
+    layer_conv_2d(64, 3, activation = "relu", padding = "same") %>%
     layer_add(block_1_output)
   ```
-  
-- `model$get_config()` method now returns an R object that can be safely serialized 
+
+- `model$get_config()` method now returns an R object that can be safely serialized
   to rds.
-  
+
 - `keras_array()` now reflects unconverted Python objects. This enables passing
   objects like `pandas.Series()` to `fit()` and `evaluate()` methods. (#1341)
 
@@ -234,10 +234,10 @@
   processes one step of a sequence.
   New symbols:
     - `layer_rnn()`, which can compose with builtin cells:
-    - `layer_gru_cell()`
-    - `layer_lstm_cell()`
-    - `layer_simple_rnn_cell()`
-    - `layer_stacked_rnn_cells()`
+    - `rnn_cell_gru()`
+    - `rnn_cell_lstm()`
+    - `rnn_cell_simple()`
+    - `rnn_cells_stack()`
   To learn more, including how to make a custom cell layer, see the new vignette:
   "Working with RNNs".
 
@@ -390,7 +390,7 @@ Breaking changes (Tensorflow 2.6):
 - Note: The following breaking changes are specific to Tensorflow version 2.6.0.
   However, the keras R package maintains compatibility with multiple versions of Tensorflow/Keras.
   You can upgrade the R package and still preserve the previous behavior by
-  installing a specific version of Tensorflow: `keras::install_keras(tensorflow="2.4.0")`
+  installing a specific version of Tensorflow: `keras3::install_keras(tensorflow="2.4.0")`
 
 - `predict_proba()` and `predict_classes()` were removed.
 - `model_to_yaml()` and `model_from_yaml()` were removed.

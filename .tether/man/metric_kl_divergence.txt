@@ -1,0 +1,58 @@
+Help on class KLDivergence in module keras.src.metrics.probabilistic_metrics:
+
+class KLDivergence(keras.src.metrics.reduction_metrics.MeanMetricWrapper)
+ |  KLDivergence(name='kl_divergence', dtype=None)
+ |
+ |  Computes Kullback-Leibler divergence metric between `y_true` and
+ |  `y_pred`.
+ |
+ |  Formula:
+ |
+ |  ```python
+ |  metric = y_true * log(y_true / y_pred)
+ |  ```
+ |
+ |  Args:
+ |      name: (Optional) string name of the metric instance.
+ |      dtype: (Optional) data type of the metric result.
+ |
+ |  Standalone usage:
+ |
+ |  >>> m = keras.metrics.KLDivergence()
+ |  >>> m.update_state([[0, 1], [0, 0]], [[0.6, 0.4], [0.4, 0.6]])
+ |  >>> m.result()
+ |  0.45814306
+ |
+ |  >>> m.reset_state()
+ |  >>> m.update_state([[0, 1], [0, 0]], [[0.6, 0.4], [0.4, 0.6]],
+ |  ...                sample_weight=[1, 0])
+ |  >>> m.result()
+ |  0.9162892
+ |
+ |  Usage with `compile()` API:
+ |
+ |  ```python
+ |  model.compile(optimizer='sgd',
+ |                loss='mse',
+ |                metrics=[keras.metrics.KLDivergence()])
+ |  ```
+ |
+ |  Method resolution order:
+ |      KLDivergence
+ |      keras.src.metrics.reduction_metrics.MeanMetricWrapper
+ |      keras.src.metrics.reduction_metrics.Mean
+ |      keras.src.metrics.metric.Metric
+ |      builtins.object
+ |
+ |  Methods defined here:
+ |
+ |  __init__(
+ |    self,
+ |    name='kl_divergence',
+ |    dtype=None
+ |  )
+ |      Initialize self.  See help(type(self)) for accurate signature.
+ |
+ |  get_config(self)
+ |      Return the serializable config of the metric.
+ |

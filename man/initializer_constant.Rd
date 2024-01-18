@@ -2,17 +2,40 @@
 % Please edit documentation in R/initializers.R
 \name{initializer_constant}
 \alias{initializer_constant}
-\title{Initializer that generates tensors initialized to a constant value.}
+\title{Initializer that generates tensors with constant values.}
 \usage{
 initializer_constant(value = 0)
 }
 \arguments{
-\item{value}{float; the value of the generator tensors.}
+\item{value}{A numeric scalar.}
 }
 \description{
-Initializer that generates tensors initialized to a constant value.
+Only scalar values are allowed.
+The constant value provided must be convertible to the dtype requested
+when calling the initializer.
 }
+\section{Examples}{
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{# Standalone usage:
+initializer <- initializer_constant(10)
+values <- initializer(shape = c(2, 2))
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{# Usage in a Keras layer:
+initializer <- initializer_constant(10)
+layer <- layer_dense(units = 3, kernel_initializer = initializer)
+}\if{html}{\out{</div>}}
+}
+
 \seealso{
+\itemize{
+\item \url{https://keras.io/api/layers/initializers#constant-class}
+}
+
+Other constant initializers: 
+\code{\link{initializer_identity}()},
+\code{\link{initializer_ones}()},
+\code{\link{initializer_zeros}()}
+
 Other initializers: 
 \code{\link{initializer_glorot_normal}()},
 \code{\link{initializer_glorot_uniform}()},
@@ -29,4 +52,5 @@ Other initializers:
 \code{\link{initializer_variance_scaling}()},
 \code{\link{initializer_zeros}()}
 }
+\concept{constant initializers}
 \concept{initializers}

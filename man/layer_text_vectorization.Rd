@@ -16,6 +16,11 @@ layer_text_vectorization(
   output_sequence_length = NULL,
   pad_to_max_tokens = FALSE,
   vocabulary = NULL,
+  idf_weights = NULL,
+  sparse = FALSE,
+  ragged = FALSE,
+  encoding = "utf-8",
+  name = NULL,
   ...
 )
 
@@ -24,96 +29,121 @@ get_vocabulary(object, include_special_tokens = TRUE)
 set_vocabulary(object, vocabulary, idf_weights = NULL, ...)
 }
 \arguments{
-\item{object}{What to compose the new \code{Layer} instance with. Typically a
-Sequential model or a Tensor (e.g., as returned by \code{layer_input()}).
-The return value depends on \code{object}. If \code{object} is:
-\itemize{
-\item missing or \code{NULL}, the \code{Layer} instance is returned.
-\item a \code{Sequential} model, the model with an additional layer is returned.
-\item a Tensor, the output tensor from \code{layer_instance(object)} is returned.
-}}
+\item{object}{Object to compose the layer with. A tensor, array, or sequential model.}
 
-\item{max_tokens}{The maximum size of the vocabulary for this layer. If NULL,
-there is no cap on the size of the vocabulary. Note that this vocabulary
-contains 1 OOV token, so the effective number of tokens is \verb{(max_tokens - 1 - (1 if output_mode == "int" else 0))}.}
+\item{max_tokens}{Maximum size of the vocabulary for this layer. This should
+only be specified when adapting a vocabulary or when setting
+\code{pad_to_max_tokens=TRUE}. Note that this vocabulary
+contains 1 OOV token, so the effective number of tokens is
+\verb{(max_tokens - 1 - (1 if output_mode == "int" else 0))}.}
 
 \item{standardize}{Optional specification for standardization to apply to the
-input text. Values can be NULL (no standardization),
-\code{"lower_and_strip_punctuation"} (lowercase and remove punctuation) or a
-Callable. Default is \code{"lower_and_strip_punctuation"}.}
-
-\item{split}{Optional specification for splitting the input text. Values can be
-NULL (no splitting), \code{"whitespace"} (split on ASCII whitespace), or a
-Callable. The default is \code{"whitespace"}.}
-
-\item{ngrams}{Optional specification for ngrams to create from the possibly-split
-input text. Values can be NULL, an integer or list of integers; passing
-an integer will create ngrams up to that integer, and passing a list of
-integers will create ngrams for the specified values in the list. Passing
-NULL means that no ngrams will be created.}
-
-\item{output_mode}{Optional specification for the output of the layer. Values can
-be \code{"int"}, \code{"multi_hot"}, \code{"count"} or \code{"tf_idf"}, configuring the layer
-as follows:
+input text. Values can be:
 \itemize{
-\item \code{"int"}: Outputs integer indices, one integer index per split string
-token. When \code{output_mode == "int"}, 0 is reserved for masked
-locations; this reduces the vocab size to
-\code{max_tokens - 2} instead of \code{max_tokens - 1}.
-\item \code{"multi_hot"}: Outputs a single int array per batch, of either
-vocab_size or max_tokens size, containing 1s in all elements where the
-token mapped to that index exists at least once in the batch item.
-\item \code{"count"}: Like \code{"multi_hot"}, but the int array contains a count of
-the number of times the token at that index appeared in the
-batch item.
-\item \code{"tf_idf"}: Like \code{"multi_hot"}, but the TF-IDF algorithm is applied to
-find the value in each token slot.
-For \code{"int"} output, any shape of input and output is supported. For all
-other output modes, currently only rank 1 inputs (and rank 2 outputs after
-splitting) are supported.
+\item \code{NULL}: No standardization.
+\item \code{"lower_and_strip_punctuation"}: Text will be lowercased and all
+punctuation removed.
+\item \code{"lower"}: Text will be lowercased.
+\item \code{"strip_punctuation"}: All punctuation will be removed.
+\item Callable: Inputs will passed to the callable function,
+which should be standardized and returned.
 }}
 
-\item{output_sequence_length}{Only valid in INT mode. If set, the output will have
-its time dimension padded or truncated to exactly \code{output_sequence_length}
-values, resulting in a tensor of shape
+\item{split}{Optional specification for splitting the input text.
+Values can be:
+\itemize{
+\item \code{NULL}: No splitting.
+\item \code{"whitespace"}: Split on whitespace.
+\item \code{"character"}: Split on each unicode character.
+\item Callable: Standardized inputs will passed to the callable
+function, which should be split and returned.
+}}
+
+\item{ngrams}{Optional specification for ngrams to create from the
+possibly-split input text. Values can be \code{NULL}, an integer
+or list of integers; passing an integer will create ngrams
+up to that integer, and passing a list of integers will
+create ngrams for the specified values in the list.
+Passing \code{NULL} means that no ngrams will be created.}
+
+\item{output_mode}{Optional specification for the output of the layer.
+Values can be \code{"int"}, \code{"multi_hot"}, \code{"count"} or \code{"tf_idf"},
+configuring the layer as follows:
+\itemize{
+\item \code{"int"}: Outputs integer indices, one integer index per split
+string token. When \code{output_mode == "int"},
+0 is reserved for masked locations;
+this reduces the vocab size to \code{max_tokens - 2}
+instead of \code{max_tokens - 1}.
+\item \code{"multi_hot"}: Outputs a single int array per batch, of either
+vocab_size or max_tokens size, containing 1s in all elements
+where the token mapped to that index exists at least
+once in the batch item.
+\item \code{"count"}: Like \code{"multi_hot"}, but the int array contains
+a count of the number of times the token at that index
+appeared in the batch item.
+\item \code{"tf_idf"}: Like \code{"multi_hot"}, but the TF-IDF algorithm
+is applied to find the value in each token slot.
+For \code{"int"} output, any shape of input and output is supported.
+For all other output modes, currently only rank 1 inputs
+(and rank 2 outputs after splitting) are supported.
+}}
+
+\item{output_sequence_length}{Only valid in INT mode. If set, the output will
+have its time dimension padded or truncated to exactly
+\code{output_sequence_length} values, resulting in a tensor of shape
 \verb{(batch_size, output_sequence_length)} regardless of how many tokens
-resulted from the splitting step. Defaults to NULL.}
+resulted from the splitting step. Defaults to \code{NULL}.}
 
-\item{pad_to_max_tokens}{Only valid in  \code{"multi_hot"}, \code{"count"}, and \code{"tf_idf"}
-modes. If TRUE, the output will have its feature axis padded to
-\code{max_tokens} even if the number of unique tokens in the vocabulary is less
-than max_tokens, resulting in a tensor of shape \verb{(batch_size, max_tokens)}
-regardless of vocabulary size. Defaults to FALSE.}
+\item{pad_to_max_tokens}{Only valid in  \code{"multi_hot"}, \code{"count"},
+and \code{"tf_idf"} modes. If \code{TRUE}, the output will have
+its feature axis padded to \code{max_tokens} even if the number
+of unique tokens in the vocabulary is less than \code{max_tokens},
+resulting in a tensor of shape \verb{(batch_size, max_tokens)}
+regardless of vocabulary size. Defaults to \code{FALSE}.}
 
-\item{vocabulary}{Optional for \code{layer_text_vectorization()}. Either an array
-of strings or a string path to a text file. If passing an array, can pass
-an R list or character vector, 1D numpy array, or 1D tensor containing the
-string vocabulary terms. If passing a file path, the file should contain
-one line per term in the vocabulary. If vocabulary is set (either by
-passing \code{layer_text_vectorization(vocabulary = ...)} or by calling
-\verb{set_vocabulary(layer, vocabulary = ...}), there is no need to \code{adapt()}
-the layer.}
-
-\item{...}{standard layer arguments.}
-
-\item{include_special_tokens}{If True, the returned vocabulary will include
-the padding and OOV tokens, and a term's index in the vocabulary will equal
-the term's index when calling the layer. If False, the returned vocabulary
-will not include any padding or OOV tokens.}
+\item{vocabulary}{Optional. Either an array of strings or a string path to a
+text file. If passing an array, can pass a list, list,
+1D NumPy array, or 1D tensor containing the string vocabulary terms.
+If passing a file path, the file should contain one line per term
+in the vocabulary. If this argument is set,
+there is no need to \code{adapt()} the layer.}
 
 \item{idf_weights}{An R vector, 1D numpy array, or 1D tensor of inverse
 document frequency weights with equal length to vocabulary. Must be set if
 output_mode is "tf_idf". Should not be set otherwise.}
+
+\item{sparse}{Boolean. Only applicable to \code{"multi_hot"}, \code{"count"}, and
+\code{"tf_idf"} output modes. Only supported with TensorFlow
+backend. If \code{TRUE}, returns a \code{SparseTensor}
+instead of a dense \code{Tensor}. Defaults to \code{FALSE}.}
+
+\item{ragged}{Boolean. Only applicable to \code{"int"} output mode.
+Only supported with TensorFlow backend.
+If \code{TRUE}, returns a \code{RaggedTensor} instead of a dense \code{Tensor},
+where each sequence may have a different length
+after string splitting. Defaults to \code{FALSE}.}
+
+\item{encoding}{Optional. The text encoding to use to interpret the input
+strings. Defaults to \code{"utf-8"}.}
+
+\item{name}{String, name for the object}
+
+\item{...}{For forward/backward compatability.}
+
+\item{include_special_tokens}{If TRUE, the returned vocabulary will include
+the padding and OOV tokens, and a term's index in the vocabulary will equal
+the term's index when calling the layer. If FALSE, the returned vocabulary
+will not include any padding or OOV tokens.}
 }
 \description{
-A preprocessing layer which maps text features to integer sequences.
-}
-\details{
 This layer has basic options for managing text in a Keras model. It
-transforms a batch of strings (one example = one string) into either a list of
-token indices (one example = 1D tensor of integer token indices) or a dense
-representation (one example = 1D tensor of float values representing data
-about the example's tokens).
+transforms a batch of strings (one example = one string) into either a list
+of token indices (one example = 1D tensor of integer token indices) or a
+dense representation (one example = 1D tensor of float values representing
+data about the example's tokens). This layer is meant to handle natural
+language inputs. To handle simple string inputs (categorical strings or
+pre-tokenized strings) see \code{layer_string_lookup()}.
 
 The vocabulary for the layer must be either supplied on construction or
 learned via \code{adapt()}. When this layer is adapted, it will analyze the
@@ -138,31 +168,100 @@ this layer:
 \enumerate{
 \item Any callable can be passed to this Layer, but if you want to serialize
 this object you should only pass functions that are registered Keras
-serializables (see \href{https://www.tensorflow.org/api_docs/python/tf/keras/utils/register_keras_serializable}{\code{tf$keras$utils$register_keras_serializable}}
+serializables (see \code{\link[=register_keras_serializable]{register_keras_serializable()}}
 for more details).
 \item When using a custom callable for \code{standardize}, the data received
 by the callable will be exactly as passed to this layer. The callable
 should return a tensor of the same shape as the input.
 \item When using a custom callable for \code{split}, the data received by the
 callable will have the 1st dimension squeezed out - instead of
-\code{matrix(c("string to split", "another string to split"))}, the Callable will
-see \code{c("string to split", "another string to split")}. The callable should
-return a Tensor with the first dimension containing the split tokens -
-in this example, we should see something like \code{list(c("string", "to", "split"), c("another", "string", "to", "split"))}. This makes the callable
-site natively compatible with \code{tf$strings$split()}.
+\code{list("string to split", "another string to split")}, the Callable will
+see \code{c("string to split", "another string to split")}.
+The callable should return a \code{tf.Tensor} of dtype \code{string}
+with the first dimension containing the split tokens -
+in this example, we should see something like \code{list(c("string", "to", "split"), c("another", "string", "to", "split"))}.
 }
+
+\strong{Note:} This layer uses TensorFlow internally. It cannot
+be used as part of the compiled computation graph of a model with
+any backend other than TensorFlow.
+It can however be used with any backend when running eagerly.
+It can also always be used as part of an input preprocessing pipeline
+with any backend (outside the model itself), which is how we recommend
+to use this layer.
+
+\strong{Note:} This layer is safe to use inside a \code{tf.data} pipeline
+(independently of which backend you're using).
 }
+\section{Examples}{
+This example instantiates a \code{TextVectorization} layer that lowercases text,
+splits on whitespace, strips punctuation, and outputs integer vocab indices.
+
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{max_tokens <- 5000  # Maximum vocab size.
+max_len <- 4  # Sequence length to pad the outputs to.
+# Create the layer.
+vectorize_layer <- layer_text_vectorization(
+    max_tokens = max_tokens,
+    output_mode = 'int',
+    output_sequence_length = max_len)
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{# Now that the vocab layer has been created, call `adapt` on the
+# list of strings to create the vocabulary.
+vectorize_layer \%>\% adapt(c("foo bar", "bar baz", "baz bada boom"))
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{# Now, the layer can map strings to integers -- you can use an
+# embedding layer to map these integers to learned embeddings.
+input_data <- rbind("foo qux bar", "qux baz")
+vectorize_layer(input_data)
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor(
+## [[4 1 3 0]
+##  [1 2 0 0]], shape=(2, 4), dtype=int64)
+}\if{html}{\out{</div>}}
+
+This example instantiates a \code{TextVectorization} layer by passing a list
+of vocabulary terms to the layer's \verb{__init__()} method.
+
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{vocab_data <- c("earth", "wind", "and", "fire")
+max_len <- 4  # Sequence length to pad the outputs to.
+# Create the layer, passing the vocab directly. You can also pass the
+# vocabulary arg a path to a file containing one vocabulary word per
+# line.
+vectorize_layer <- layer_text_vectorization(
+    max_tokens = max_tokens,
+    output_mode = 'int',
+    output_sequence_length = max_len,
+    vocabulary = vocab_data)
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{# Because we've passed the vocabulary directly, we don't need to adapt
+# the layer - the vocabulary is already set. The vocabulary contains the
+# padding token ('') and OOV token ('[UNK]')
+# as well as the passed tokens.
+vectorize_layer \%>\% get_vocabulary()
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode">}}\preformatted{## [1] ""      "[UNK]" "earth" "wind"  "and"   "fire"
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{# ['', '[UNK]', 'earth', 'wind', 'and', 'fire']
+}\if{html}{\out{</div>}}
+}
+
 \seealso{
 \itemize{
-\item \code{\link[=adapt]{adapt()}}
-\item \url{https://www.tensorflow.org/api_docs/python/tf/keras/layers/TextVectorization}
-\item \url{https://keras.io/api/layers/preprocessing_layers/text/text_vectorization}
+\item \url{https://keras.io/api/layers/preprocessing_layers/text/text_vectorization#textvectorization-class}
 }
 
 Other preprocessing layers: 
 \code{\link{layer_category_encoding}()},
 \code{\link{layer_center_crop}()},
 \code{\link{layer_discretization}()},
+\code{\link{layer_feature_space}()},
+\code{\link{layer_hashed_crossing}()},
 \code{\link{layer_hashing}()},
 \code{\link{layer_integer_lookup}()},
 \code{\link{layer_normalization}()},
@@ -170,14 +269,119 @@ Other preprocessing layers:
 \code{\link{layer_random_contrast}()},
 \code{\link{layer_random_crop}()},
 \code{\link{layer_random_flip}()},
-\code{\link{layer_random_height}()},
 \code{\link{layer_random_rotation}()},
 \code{\link{layer_random_translation}()},
-\code{\link{layer_random_width}()},
 \code{\link{layer_random_zoom}()},
 \code{\link{layer_rescaling}()},
 \code{\link{layer_resizing}()},
 \code{\link{layer_string_lookup}()}
+
+Other layers: 
+\code{\link{Layer}()},
+\code{\link{layer_activation_elu}()},
+\code{\link{layer_activation_leaky_relu}()},
+\code{\link{layer_activation_parametric_relu}()},
+\code{\link{layer_activation_relu}()},
+\code{\link{layer_activation_softmax}()},
+\code{\link{layer_activation}()},
+\code{\link{layer_activity_regularization}()},
+\code{\link{layer_additive_attention}()},
+\code{\link{layer_add}()},
+\code{\link{layer_attention}()},
+\code{\link{layer_average_pooling_1d}()},
+\code{\link{layer_average_pooling_2d}()},
+\code{\link{layer_average_pooling_3d}()},
+\code{\link{layer_average}()},
+\code{\link{layer_batch_normalization}()},
+\code{\link{layer_bidirectional}()},
+\code{\link{layer_category_encoding}()},
+\code{\link{layer_center_crop}()},
+\code{\link{layer_concatenate}()},
+\code{\link{layer_conv_1d_transpose}()},
+\code{\link{layer_conv_1d}()},
+\code{\link{layer_conv_2d_transpose}()},
+\code{\link{layer_conv_2d}()},
+\code{\link{layer_conv_3d_transpose}()},
+\code{\link{layer_conv_3d}()},
+\code{\link{layer_conv_lstm_1d}()},
+\code{\link{layer_conv_lstm_2d}()},
+\code{\link{layer_conv_lstm_3d}()},
+\code{\link{layer_cropping_1d}()},
+\code{\link{layer_cropping_2d}()},
+\code{\link{layer_cropping_3d}()},
+\code{\link{layer_dense}()},
+\code{\link{layer_depthwise_conv_1d}()},
+\code{\link{layer_depthwise_conv_2d}()},
+\code{\link{layer_discretization}()},
+\code{\link{layer_dot}()},
+\code{\link{layer_dropout}()},
+\code{\link{layer_einsum_dense}()},
+\code{\link{layer_embedding}()},
+\code{\link{layer_feature_space}()},
+\code{\link{layer_flatten}()},
+\code{\link{layer_gaussian_dropout}()},
+\code{\link{layer_gaussian_noise}()},
+\code{\link{layer_global_average_pooling_1d}()},
+\code{\link{layer_global_average_pooling_2d}()},
+\code{\link{layer_global_average_pooling_3d}()},
+\code{\link{layer_global_max_pooling_1d}()},
+\code{\link{layer_global_max_pooling_2d}()},
+\code{\link{layer_global_max_pooling_3d}()},
+\code{\link{layer_group_normalization}()},
+\code{\link{layer_group_query_attention}()},
+\code{\link{layer_gru}()},
+\code{\link{layer_hashed_crossing}()},
+\code{\link{layer_hashing}()},
+\code{\link{layer_identity}()},
+\code{\link{layer_integer_lookup}()},
+\code{\link{layer_lambda}()},
+\code{\link{layer_layer_normalization}()},
+\code{\link{layer_lstm}()},
+\code{\link{layer_masking}()},
+\code{\link{layer_max_pooling_1d}()},
+\code{\link{layer_max_pooling_2d}()},
+\code{\link{layer_max_pooling_3d}()},
+\code{\link{layer_maximum}()},
+\code{\link{layer_minimum}()},
+\code{\link{layer_multi_head_attention}()},
+\code{\link{layer_multiply}()},
+\code{\link{layer_normalization}()},
+\code{\link{layer_permute}()},
+\code{\link{layer_random_brightness}()},
+\code{\link{layer_random_contrast}()},
+\code{\link{layer_random_crop}()},
+\code{\link{layer_random_flip}()},
+\code{\link{layer_random_rotation}()},
+\code{\link{layer_random_translation}()},
+\code{\link{layer_random_zoom}()},
+\code{\link{layer_repeat_vector}()},
+\code{\link{layer_rescaling}()},
+\code{\link{layer_reshape}()},
+\code{\link{layer_resizing}()},
+\code{\link{layer_rnn}()},
+\code{\link{layer_separable_conv_1d}()},
+\code{\link{layer_separable_conv_2d}()},
+\code{\link{layer_simple_rnn}()},
+\code{\link{layer_spatial_dropout_1d}()},
+\code{\link{layer_spatial_dropout_2d}()},
+\code{\link{layer_spatial_dropout_3d}()},
+\code{\link{layer_spectral_normalization}()},
+\code{\link{layer_string_lookup}()},
+\code{\link{layer_subtract}()},
+\code{\link{layer_tfsm}()},
+\code{\link{layer_time_distributed}()},
+\code{\link{layer_torch_module_wrapper}()},
+\code{\link{layer_unit_normalization}()},
+\code{\link{layer_upsampling_1d}()},
+\code{\link{layer_upsampling_2d}()},
+\code{\link{layer_upsampling_3d}()},
+\code{\link{layer_zero_padding_1d}()},
+\code{\link{layer_zero_padding_2d}()},
+\code{\link{layer_zero_padding_3d}()},
+\code{\link{rnn_cell_gru}()},
+\code{\link{rnn_cell_lstm}()},
+\code{\link{rnn_cell_simple}()},
+\code{\link{rnn_cells_stack}()}
 }
+\concept{layers}
 \concept{preprocessing layers}
-\concept{text preprocessing layers}

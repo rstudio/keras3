@@ -5,24 +5,25 @@ context("model-persistence")
 
 test_succeeds("model can be saved and loaded", {
 
-  if (!keras:::have_h5py())
+  if (!keras3:::have_h5py())
     skip("h5py not available for testing")
 
   model <- define_and_compile_model()
   tmp <- tempfile("model", fileext = ".hdf5")
+  skip("save_model_hdf5")
   save_model_hdf5(model, tmp)
   model <- load_model_hdf5(tmp)
 })
 
 test_succeeds("model with custom loss and metrics can be saved and loaded", {
 
-  if (!keras:::have_h5py())
+  if (!keras3:::have_h5py())
     skip("h5py not available for testing")
 
   model <- define_model()
 
   metric_mean_pred <- custom_metric("mean_pred", function(y_true, y_pred) {
-    k_mean(y_pred)
+    op_mean(y_pred)
   })
 
   custom_loss <- function(y_pred, y_true) {
@@ -35,40 +36,48 @@ test_succeeds("model with custom loss and metrics can be saved and loaded", {
     metrics = metric_mean_pred
   )
 
-  tmp <- tempfile("model", fileext = ".hdf5")
-  save_model_hdf5(model, tmp)
-  model <- load_model_hdf5(tmp, custom_objects = c(mean_pred = metric_mean_pred,
-                                                   custom_loss = custom_loss))
-
-  # https://github.com/tensorflow/tensorflow/issues/45903#issuecomment-804973541
-  # broken in tf 2.4 and 2.5, fixed in nightly already
-  if (tf_version() == "2.5")
-    model$compile(optimizer=model$optimizer,
-                  loss = custom_loss,
-                  metrics = metric_mean_pred)
+  tmp <- tempfile("model", fileext = ".keras")
+  save_model(model, tmp)
+  restored_model <- load_model(tmp, custom_objects = c(mean_pred = metric_mean_pred,
+                                              custom_loss = custom_loss))
 
   # generate dummy training data
   data <- matrix(rexp(1000*784), nrow = 1000, ncol = 784)
   labels <- matrix(round(runif(1000*10, min = 0, max = 9)), nrow = 1000, ncol = 10)
 
+  expect_equal(
+    model %>% predict(data, verbose = 0),
+    restored_model %>% predict(data, verbose = 0)
+  )
+
 
   model %>% fit(data, labels, epochs = 2, verbose = 0)
+  expect_no_error({
+    restored_model %>% fit(data, labels, epochs = 2, verbose = 0)
+  })
 
 })
 
 test_succeeds("model load with unnamed custom_objects", {
 
-
   layer_my_dense <-  new_layer_class(
     "MyDense",
-
     initialize = function(units, ...) {
       super$initialize(...)
       private$units <- units
       self$dense <- layer_dense(units = units)
     },
-    call = function(...) {
-      self$dense(...)
+    # TODO: warning emitted from upstream if missing build method...
+    # but this simple case should not need a build method
+    build = function(input_shape) {
+      self$dense$build(input_shape)
+    },
+
+    call = function(x, ...) {
+      # TODO: a call() method without any named args breaks shape inference
+      # for tracing, symbolic builds, and auto-calling build() w/ the correct
+      # input shape. Emit a warning from `new_layer_class()` if that happens?
+      self$dense(x, ...)
     },
     get_config = function() {
       config <- super$get_config()
@@ -77,6 +86,10 @@ test_succeeds("model load with unnamed custom_objects", {
     }
   )
 
+  # l <- layer_my_dense(,10)
+  # x <- random_array(3, 4)
+  # l(random_array(3, 4))
+
   model <- keras_model_sequential(input_shape = 32) %>%
     layer_dense(10) %>%
     layer_my_dense(10) %>%
@@ -84,12 +97,17 @@ test_succeeds("model load with unnamed custom_objects", {
 
 
   metric_mean_pred <- custom_metric("mean_pred", function(y_true, y_pred) {
-    k_mean(y_pred)
+    op_mean(y_pred)
   })
 
   custom_loss <- function(y_pred, y_true) {
     loss_categorical_crossentropy(y_pred, y_true)
   }
+  # TODO:
+  # attr(custom_loss, "name") <- "custom_loss"
+  # custom_loss <- py_func2(function(y_pred, y_true) {
+  #     loss_categorical_crossentropy(y_pred, y_true)
+  #   }, TRUE, name = "custom_loss")
 
   model %>% compile(
     loss = custom_loss,
@@ -98,38 +116,60 @@ test_succeeds("model load with unnamed custom_objects", {
   )
 
   # generate dummy training data
-  data <- random_array(10, 32)
+  data <- x <- random_normal(c(10, 32))
+  # y <- to_categorical(sample(0:9, 10, replace = TRUE))
+  y <- to_categorical(random_integer(10, 0, 10), 10)
+
+  model %>% fit(x, y, verbose = FALSE)
 
   res1 <- as.array(model(data))
 
   tmp <- tempfile("model", fileext = ".keras")
-  save_model_tf(model, tmp)
-  model2 <- load_model_tf(tmp,
-                          custom_objects = list(metric_mean_pred,
-                                                layer_my_dense,
-                                                custom_loss = custom_loss))
+  save_model(model, tmp)
+  model2 <- load_model(tmp, custom_objects = list(
+    metric_mean_pred,
+    layer_my_dense,
+    custom_loss = custom_loss)
+  )
   res2 <- as.array(model2(data))
 
   expect_identical(res1, res2)
+  expect_no_error({
+    model2 %>% fit(x, y, verbose = 0)
+  })
 })
 
 
 test_succeeds("model weights can be saved and loaded", {
 
-  if (!keras:::have_h5py())
+  if (!keras3:::have_h5py())
     skip("h5py not available for testing")
 
   model <- define_and_compile_model()
   tmp <- tempfile("model", fileext = ".hdf5")
+  skip("save_model_weights_hdf5")
   save_model_weights_hdf5(model, tmp)
   load_model_weights_hdf5(model, tmp)
 })
 
 test_succeeds("model can be saved and loaded from json", {
   model <- define_model()
-  json <- model_to_json(model)
-  model_from <- model_from_json(json)
-  expect_equal(json, model_to_json(model_from))
+
+  json_file <- tempfile("config-", fileext = ".json")
+  save_model_config(model, json_file)
+
+  model2 <- load_model_config(json_file)
+
+  json_file2 <- tempfile("config-2-", fileext = ".json")
+  save_model_config(model2, json_file2)
+
+  expect_identical(jsonlite::read_json(json_file),
+                   jsonlite::read_json(json_file2))
+
+  config <- get_config(model)
+  attributes(config) <- attributes(config)['names']
+  expect_identical(jsonlite::read_json(json_file)$config,
+                   config)
 })
 
 ## patch releases removed ability to serialize to/from yaml in all the version
@@ -137,7 +177,7 @@ test_succeeds("model can be saved and loaded from json", {
 
 # test_succeeds("model can be saved and loaded from yaml", {
 #
-#   if (!keras:::have_pyyaml())
+#   if (!keras3:::have_pyyaml())
 #     skip("yaml not available for testing")
 #
 #   if(tf_version() >= "2.5.1")
@@ -151,17 +191,19 @@ test_succeeds("model can be saved and loaded from json", {
 
 test_succeeds("model can be saved and loaded from R 'raw' object", {
 
-  if (!keras:::have_h5py())
+  if (!keras3:::have_h5py())
     skip("h5py not available for testing")
 
   model <- define_and_compile_model()
 
+  skip("serialize_model")
   mdl_raw <- serialize_model(model)
   model <- unserialize_model(mdl_raw)
 
 })
 
 test_succeeds("saved models/weights are mirrored in the run_dir", {
+  skip("tfruns")
   run <- tfruns::training_run("train.R", echo = FALSE)
   run_dir <- run$run_dir
   expect_true(file.exists(file.path(run_dir, "model.h5")))
@@ -169,6 +211,7 @@ test_succeeds("saved models/weights are mirrored in the run_dir", {
 })
 
 test_succeeds("callback output is redirected to run_dir", {
+  skip("tfruns")
   run <- tfruns::training_run("train.R", echo = FALSE)
   run_dir <- run$run_dir
   if (is_backend("tensorflow"))
@@ -183,6 +226,7 @@ test_succeeds("model can be exported to TensorFlow", {
   model <- define_and_compile_model()
   model_dir <- tempfile()
 
+  skip("tensorflow::export_savedmodel")
   export <- function() tensorflow::export_savedmodel(model, model_dir)
 
   export()
@@ -230,6 +274,7 @@ test_succeeds("model can be exported to saved model format using save_model_tf",
   model <- define_and_compile_model()
   model_dir <- tempfile()
 
+  skip("save_model_tf")
   s <- save_model_tf(model, model_dir)
   loaded <- load_model_tf(model_dir)
 

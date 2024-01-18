@@ -2,7 +2,7 @@
 % Please edit documentation in R/optimizers.R
 \name{optimizer_rmsprop}
 \alias{optimizer_rmsprop}
-\title{Optimizer that implements the RMSprop algorithm}
+\title{Optimizer that implements the RMSprop algorithm.}
 \usage{
 optimizer_rmsprop(
   learning_rate = 0.001,
@@ -17,16 +17,16 @@ optimizer_rmsprop(
   use_ema = FALSE,
   ema_momentum = 0.99,
   ema_overwrite_frequency = 100L,
-  jit_compile = TRUE,
-  name = "RMSprop",
-  ...
+  name = "rmsprop",
+  ...,
+  loss_scale_factor = NULL
 )
 }
 \arguments{
-\item{learning_rate}{Initial value for the learning rate:
-either a floating point value,
-or a \code{tf.keras.optimizers.schedules.LearningRateSchedule} instance.
-Defaults to 0.001.}
+\item{learning_rate}{A float, a
+\verb{learning_rate_schedule_*} instance, or
+a callable that takes no arguments and returns the actual value to
+use. The learning rate. Defaults to \code{0.001}.}
 
 \item{rho}{float, defaults to 0.9. Discounting factor for the old gradients.}
 
@@ -35,24 +35,24 @@ momentum value, with a decay rate equals to \code{1 - momentum}.}
 
 \item{epsilon}{A small constant for numerical stability. This epsilon is
 "epsilon hat" in the Kingma and Ba paper (in the formula just before
-Section 2.1), not the epsilon in Algorithm 1 of the paper. Defaults to
-1e-7.}
+Section 2.1), not the epsilon in Algorithm 1 of the paper. Defaults
+to 1e-7.}
 
 \item{centered}{Boolean. If \code{TRUE}, gradients are normalized by the estimated
 variance of the gradient; if FALSE, by the uncentered second moment.
 Setting this to \code{TRUE} may help with training, but is slightly more
 expensive in terms of computation and memory. Defaults to \code{FALSE}.}
 
-\item{weight_decay}{Float, defaults to NULL. If set, weight decay is applied.}
+\item{weight_decay}{Float. If set, weight decay is applied.}
 
 \item{clipnorm}{Float. If set, the gradient of each weight is individually
 clipped so that its norm is no higher than this value.}
 
-\item{clipvalue}{Float. If set, the gradient of each weight is clipped to be no
-higher than this value.}
+\item{clipvalue}{Float. If set, the gradient of each weight is clipped to be
+no higher than this value.}
 
-\item{global_clipnorm}{Float. If set, the gradient of all weights is clipped so
-that their global norm is no higher than this value.}
+\item{global_clipnorm}{Float. If set, the gradient of all weights is clipped
+so that their global norm is no higher than this value.}
 
 \item{use_ema}{Boolean, defaults to FALSE. If TRUE, exponential moving average
 (EMA) is applied. EMA consists of computing an exponential moving
@@ -60,36 +60,37 @@ average of the weights of the model (as the weight values change after
 each training batch), and periodically overwriting the weights with
 their moving average.}
 
-\item{ema_momentum}{Float, defaults to 0.99. Only used if \code{use_ema=TRUE}. This is  # noqa: E501
-the momentum to use when computing the EMA of the model's weights:
+\item{ema_momentum}{Float, defaults to 0.99. Only used if \code{use_ema=TRUE}.
+This is the momentum to use when computing
+the EMA of the model's weights:
 \code{new_average = ema_momentum * old_average + (1 - ema_momentum) * current_variable_value}.}
 
 \item{ema_overwrite_frequency}{Int or NULL, defaults to NULL. Only used if
-\code{use_ema=TRUE}. Every \code{ema_overwrite_frequency} steps of iterations, we
-overwrite the model variable by its moving average. If NULL, the optimizer  # noqa: E501
+\code{use_ema=TRUE}. Every \code{ema_overwrite_frequency} steps of iterations,
+we overwrite the model variable by its moving average.
+If NULL, the optimizer
 does not overwrite model variables in the middle of training, and you
 need to explicitly overwrite the variables at the end of training
-by calling \code{optimizer.finalize_variable_values()} (which updates the model  # noqa: E501
-variables in-place). When using the built-in \code{fit()} training loop, this
-happens automatically after the last epoch, and you don't need to do
-anything.}
-
-\item{jit_compile}{Boolean, defaults to TRUE. If TRUE, the optimizer will use XLA  # noqa: E501
-compilation. If no GPU device is found, this flag will be ignored.}
+by calling \code{optimizer.finalize_variable_values()}
+(which updates the model
+variables in-place). When using the built-in \code{fit()} training loop,
+this happens automatically after the last epoch,
+and you don't need to do anything.}
 
 \item{name}{String. The name to use
 for momentum accumulator weights created by
 the optimizer.}
 
-\item{...}{Used for backward and forward compatibility}
-}
-\value{
-Optimizer for use with \code{\link{compile.keras.engine.training.Model}}.
+\item{...}{For forward/backward compatability.}
+
+\item{loss_scale_factor}{Float or \code{NULL}. If a float, the scale factor will
+be multiplied the loss before computing gradients, and the inverse of
+the scale factor will be multiplied by the gradients before updating
+variables. Useful for preventing underflow during mixed precision
+training. Alternately, \code{\link[=optimizer_loss_scale]{optimizer_loss_scale()}} will
+automatically set a loss scale factor.}
 }
 \description{
-Optimizer that implements the RMSprop algorithm
-}
-\details{
 The gist of RMSprop is to:
 \itemize{
 \item Maintain a moving (discounted) average of the square of gradients
@@ -101,17 +102,32 @@ This implementation of RMSprop uses plain momentum, not Nesterov momentum.
 The centered version additionally maintains a moving average of the
 gradients, and uses that average to estimate the variance.
 }
+\section{Usage}{
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{opt <- optimizer_rmsprop(learning_rate=0.1)
+}\if{html}{\out{</div>}}
+}
+
+\section{Reference}{
+\itemize{
+\item \href{https://www.cs.toronto.edu/~tijmen/csc321/slides/lecture_slides_lec6.pdf}{Hinton, 2012}
+}
+}
+
 \seealso{
 \itemize{
-\item \url{https://www.tensorflow.org/api_docs/python/tf/keras/optimizers/experimental/RMSprop}
+\item \url{https://keras.io/api/optimizers/rmsprop#rmsprop-class}
 }
 
 Other optimizers: 
 \code{\link{optimizer_adadelta}()},
+\code{\link{optimizer_adafactor}()},
 \code{\link{optimizer_adagrad}()},
+\code{\link{optimizer_adam_w}()},
 \code{\link{optimizer_adamax}()},
 \code{\link{optimizer_adam}()},
 \code{\link{optimizer_ftrl}()},
+\code{\link{optimizer_lion}()},
+\code{\link{optimizer_loss_scale}()},
 \code{\link{optimizer_nadam}()},
 \code{\link{optimizer_sgd}()}
 }

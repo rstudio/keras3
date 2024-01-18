@@ -2,7 +2,7 @@
 % Please edit documentation in R/layers-normalization.R
 \name{layer_batch_normalization}
 \alias{layer_batch_normalization}
-\title{Layer that normalizes its inputs}
+\title{Layer that normalizes its inputs.}
 \usage{
 layer_batch_normalization(
   object,
@@ -24,21 +24,21 @@ layer_batch_normalization(
 )
 }
 \arguments{
-\item{object}{Layer or model object}
+\item{object}{Object to compose the layer with. A tensor, array, or sequential model.}
 
-\item{axis}{Integer, the axis that should be normalized (typically the features
-axis). For instance, after a \code{Conv2D} layer with
-\code{data_format="channels_first"}, set \code{axis=1} in \code{BatchNormalization}.}
+\item{axis}{Integer, the axis that should be normalized
+(typically the features axis). For instance, after a \code{Conv2D} layer
+with \code{data_format="channels_first"}, use \code{axis=1}.}
 
 \item{momentum}{Momentum for the moving average.}
 
 \item{epsilon}{Small float added to variance to avoid dividing by zero.}
 
-\item{center}{If \code{TRUE}, add offset of \code{beta} to normalized tensor. If \code{FALSE},
-\code{beta} is ignored.}
+\item{center}{If \code{TRUE}, add offset of \code{beta} to normalized tensor.
+If \code{FALSE}, \code{beta} is ignored.}
 
-\item{scale}{If \code{TRUE}, multiply by \code{gamma}. If \code{FALSE}, \code{gamma} is not used. When
-the next layer is linear (also e.g. \code{nn.relu}), this can be disabled
+\item{scale}{If \code{TRUE}, multiply by \code{gamma}. If \code{FALSE}, \code{gamma} is not used.
+When the next layer is linear this can be disabled
 since the scaling will be done by the next layer.}
 
 \item{beta_initializer}{Initializer for the beta weight.}
@@ -57,18 +57,15 @@ since the scaling will be done by the next layer.}
 
 \item{gamma_constraint}{Optional constraint for the gamma weight.}
 
-\item{synchronized}{If \code{TRUE}, synchronizes the global batch statistics (mean and
-variance) for the layer across all devices at each training step in a
-distributed training strategy. If \code{FALSE}, each replica uses its own
-local batch statistics. Only relevant when used inside a
-\code{tf$distribute} strategy.}
+\item{synchronized}{Only applicable with the TensorFlow backend.
+If \code{TRUE}, synchronizes the global batch statistics (mean and
+variance) for the layer across all devices at each training step
+in a distributed training strategy.
+If \code{FALSE}, each replica uses its own local batch statistics.}
 
-\item{...}{standard layer arguments.}
+\item{...}{Base layer keyword arguments (e.g. \code{name} and \code{dtype}).}
 }
 \description{
-Layer that normalizes its inputs
-}
-\details{
 Batch normalization applies a transformation that maintains the mean output
 close to 0 and the output standard deviation close to 1.
 
@@ -94,7 +91,7 @@ calling the layer/model with the argument \code{training=FALSE} (which is the
 default), the layer normalizes its output using a moving average of the
 mean and standard deviation of the batches it has seen during training. That
 is to say, it returns
-\code{gamma * (batch - self.moving_mean) / sqrt(self.moving_var+epsilon) + beta}.
+\code{gamma * (batch - self$moving_mean) / sqrt(self$moving_var+epsilon) + beta}.
 
 \code{self$moving_mean} and \code{self$moving_var} are non-trainable variables that
 are updated each time the layer in called in training mode, as such:
@@ -107,27 +104,171 @@ As such, the layer will only normalize its inputs during inference
 \emph{after having been trained on data that has similar statistics as the
 inference data}.
 
-When \code{synchronized=TRUE} is set and if this layer is used within a
-\code{tf$distribute} strategy, there will be an \code{allreduce} call
-to aggregate batch statistics across all replicas at every
-training step. Setting \code{synchronized} has no impact when the model is
-trained without specifying any distribution strategy.
+\strong{About setting \code{layer.trainable = FALSE} on a \code{BatchNormalization} layer:}
 
-Example usage:
+The meaning of setting \code{layer.trainable = FALSE} is to freeze the layer,
+i.e. its internal state will not change during training:
+its trainable weights will not be updated
+during \code{fit()} or \code{train_on_batch()}, and its state updates will not be run.
 
-\if{html}{\out{<div class="sourceCode R">}}\preformatted{strategy <- tf$distribute$MirroredStrategy()
+Usually, this does not necessarily mean that the layer is run in inference
+mode (which is normally controlled by the \code{training} argument that can
+be passed when calling a layer). "Frozen state" and "inference mode"
+are two separate concepts.
 
-with(strategy$scope(), \{
-  model <- keras_model_sequential()
-  model \%>\%
-    layer_dense(16) \%>\%
-    layer_batch_normalization(synchronized=TRUE)
-\})
-}\if{html}{\out{</div>}}
+However, in the case of the \code{BatchNormalization} layer, \strong{setting
+\code{trainable = FALSE} on the layer means that the layer will be
+subsequently run in inference mode} (meaning that it will use
+the moving mean and the moving variance to normalize the current batch,
+rather than using the mean and variance of the current batch).
+
+Note that:
+\itemize{
+\item Setting \code{trainable} on an model containing other layers will recursively
+set the \code{trainable} value of all inner layers.
+\item If the value of the \code{trainable} attribute is changed after calling
+\code{compile()} on a model, the new value doesn't take effect for this model
+until \code{compile()} is called again.
 }
+}
+\section{Call Arguments}{
+\itemize{
+\item \code{inputs}: Input tensor (of any rank).
+\item \code{training}: Python boolean indicating whether the layer should behave in
+training mode or in inference mode.
+\itemize{
+\item \code{training=TRUE}: The layer will normalize its inputs using
+the mean and variance of the current batch of inputs.
+\item \code{training=FALSE}: The layer will normalize its inputs using
+the mean and variance of its moving statistics, learned during
+training.
+}
+}
+}
+
+\section{Reference}{
+\itemize{
+\item \href{https://arxiv.org/abs/1502.03167}{Ioffe and Szegedy, 2015}.
+}
+}
+
 \seealso{
 \itemize{
-\item \url{https://www.tensorflow.org/api_docs/python/tf/keras/layers/BatchNormalization}
-\item \url{https://keras.io/api/layers}
+\item \url{https://keras.io/api/layers/normalization_layers/batch_normalization#batchnormalization-class}
 }
+
+Other normalization layers: 
+\code{\link{layer_group_normalization}()},
+\code{\link{layer_layer_normalization}()},
+\code{\link{layer_spectral_normalization}()},
+\code{\link{layer_unit_normalization}()}
+
+Other layers: 
+\code{\link{Layer}()},
+\code{\link{layer_activation_elu}()},
+\code{\link{layer_activation_leaky_relu}()},
+\code{\link{layer_activation_parametric_relu}()},
+\code{\link{layer_activation_relu}()},
+\code{\link{layer_activation_softmax}()},
+\code{\link{layer_activation}()},
+\code{\link{layer_activity_regularization}()},
+\code{\link{layer_additive_attention}()},
+\code{\link{layer_add}()},
+\code{\link{layer_attention}()},
+\code{\link{layer_average_pooling_1d}()},
+\code{\link{layer_average_pooling_2d}()},
+\code{\link{layer_average_pooling_3d}()},
+\code{\link{layer_average}()},
+\code{\link{layer_bidirectional}()},
+\code{\link{layer_category_encoding}()},
+\code{\link{layer_center_crop}()},
+\code{\link{layer_concatenate}()},
+\code{\link{layer_conv_1d_transpose}()},
+\code{\link{layer_conv_1d}()},
+\code{\link{layer_conv_2d_transpose}()},
+\code{\link{layer_conv_2d}()},
+\code{\link{layer_conv_3d_transpose}()},
+\code{\link{layer_conv_3d}()},
+\code{\link{layer_conv_lstm_1d}()},
+\code{\link{layer_conv_lstm_2d}()},
+\code{\link{layer_conv_lstm_3d}()},
+\code{\link{layer_cropping_1d}()},
+\code{\link{layer_cropping_2d}()},
+\code{\link{layer_cropping_3d}()},
+\code{\link{layer_dense}()},
+\code{\link{layer_depthwise_conv_1d}()},
+\code{\link{layer_depthwise_conv_2d}()},
+\code{\link{layer_discretization}()},
+\code{\link{layer_dot}()},
+\code{\link{layer_dropout}()},
+\code{\link{layer_einsum_dense}()},
+\code{\link{layer_embedding}()},
+\code{\link{layer_feature_space}()},
+\code{\link{layer_flatten}()},
+\code{\link{layer_gaussian_dropout}()},
+\code{\link{layer_gaussian_noise}()},
+\code{\link{layer_global_average_pooling_1d}()},
+\code{\link{layer_global_average_pooling_2d}()},
+\code{\link{layer_global_average_pooling_3d}()},
+\code{\link{layer_global_max_pooling_1d}()},
+\code{\link{layer_global_max_pooling_2d}()},
+\code{\link{layer_global_max_pooling_3d}()},
+\code{\link{layer_group_normalization}()},
+\code{\link{layer_group_query_attention}()},
+\code{\link{layer_gru}()},
+\code{\link{layer_hashed_crossing}()},
+\code{\link{layer_hashing}()},
+\code{\link{layer_identity}()},
+\code{\link{layer_integer_lookup}()},
+\code{\link{layer_lambda}()},
+\code{\link{layer_layer_normalization}()},
+\code{\link{layer_lstm}()},
+\code{\link{layer_masking}()},
+\code{\link{layer_max_pooling_1d}()},
+\code{\link{layer_max_pooling_2d}()},
+\code{\link{layer_max_pooling_3d}()},
+\code{\link{layer_maximum}()},
+\code{\link{layer_minimum}()},
+\code{\link{layer_multi_head_attention}()},
+\code{\link{layer_multiply}()},
+\code{\link{layer_normalization}()},
+\code{\link{layer_permute}()},
+\code{\link{layer_random_brightness}()},
+\code{\link{layer_random_contrast}()},
+\code{\link{layer_random_crop}()},
+\code{\link{layer_random_flip}()},
+\code{\link{layer_random_rotation}()},
+\code{\link{layer_random_translation}()},
+\code{\link{layer_random_zoom}()},
+\code{\link{layer_repeat_vector}()},
+\code{\link{layer_rescaling}()},
+\code{\link{layer_reshape}()},
+\code{\link{layer_resizing}()},
+\code{\link{layer_rnn}()},
+\code{\link{layer_separable_conv_1d}()},
+\code{\link{layer_separable_conv_2d}()},
+\code{\link{layer_simple_rnn}()},
+\code{\link{layer_spatial_dropout_1d}()},
+\code{\link{layer_spatial_dropout_2d}()},
+\code{\link{layer_spatial_dropout_3d}()},
+\code{\link{layer_spectral_normalization}()},
+\code{\link{layer_string_lookup}()},
+\code{\link{layer_subtract}()},
+\code{\link{layer_text_vectorization}()},
+\code{\link{layer_tfsm}()},
+\code{\link{layer_time_distributed}()},
+\code{\link{layer_torch_module_wrapper}()},
+\code{\link{layer_unit_normalization}()},
+\code{\link{layer_upsampling_1d}()},
+\code{\link{layer_upsampling_2d}()},
+\code{\link{layer_upsampling_3d}()},
+\code{\link{layer_zero_padding_1d}()},
+\code{\link{layer_zero_padding_2d}()},
+\code{\link{layer_zero_padding_3d}()},
+\code{\link{rnn_cell_gru}()},
+\code{\link{rnn_cell_lstm}()},
+\code{\link{rnn_cell_simple}()},
+\code{\link{rnn_cells_stack}()}
 }
+\concept{layers}
+\concept{normalization layers}

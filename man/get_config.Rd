@@ -29,36 +29,24 @@ using \code{from_config()}. The config does not include connectivity information
 nor the class name (those are handled externally).
 }
 \note{
-Objects returned from \code{get_config()} are not serializable. Therefore,
-if you want to save and restore a model across sessions, you can use the
-\code{model_to_json()} function (for model configuration only, not weights) or
-the \code{save_model_tf()} function to save the model configuration and weights
+Objects returned from \code{get_config()} are not serializable via RDS. If
+you want to save and restore a model across sessions, you can use
+\code{\link[=save_model_config]{save_model_config()}} (for model configuration only, not weights)
+or \code{\link[=save_model]{save_model()}} to save the model configuration and weights
 to the filesystem.
 }
 \seealso{
 Other model functions: 
-\code{\link{compile.keras.engine.training.Model}()},
-\code{\link{evaluate.keras.engine.training.Model}()},
-\code{\link{evaluate_generator}()},
-\code{\link{fit.keras.engine.training.Model}()},
-\code{\link{fit_generator}()},
 \code{\link{get_layer}()},
 \code{\link{keras_model_sequential}()},
 \code{\link{keras_model}()},
-\code{\link{multi_gpu_model}()},
 \code{\link{pop_layer}()},
-\code{\link{predict.keras.engine.training.Model}()},
-\code{\link{predict_generator}()},
-\code{\link{predict_on_batch}()},
-\code{\link{predict_proba}()},
-\code{\link{summary.keras.engine.training.Model}()},
-\code{\link{train_on_batch}()}
+\code{\link{summary.keras.src.models.model.Model}()}
 
 Other layer methods: 
 \code{\link{count_params}()},
-\code{\link{get_input_at}()},
 \code{\link{get_weights}()},
-\code{\link{reset_states}()}
+\code{\link{reset_state}()}
 }
 \concept{layer methods}
 \concept{model functions}

@@ -1,0 +1,10 @@
+__signature__
+keras.ops.copy(x)
+__doc__
+Returns a copy of `x`.
+
+Args:
+    x: Input tensor.
+
+Returns:
+    A copy of `x`.

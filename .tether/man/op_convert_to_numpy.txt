@@ -1,0 +1,10 @@
+__signature__
+keras.ops.convert_to_numpy(x)
+__doc__
+Convert a tensor to a NumPy array.
+
+Args:
+    x: A tensor.
+
+Returns:
+    A NumPy array.

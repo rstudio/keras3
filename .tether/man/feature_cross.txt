@@ -1,0 +1,7 @@
+__signature__
+keras.utils.FeatureSpace.cross(
+  feature_names,
+  crossing_dim,
+  output_mode='one_hot'
+)
+__doc__

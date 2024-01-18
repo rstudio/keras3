@@ -16,8 +16,8 @@ adapt(object, data, ..., batch_size = NULL, steps = NULL)
 
 \item{batch_size}{Integer or \code{NULL}. Number of asamples per state update. If
 unspecified, \code{batch_size} will default to \code{32}. Do not specify the
-batch_size if your data is in the form of datasets, generators, or
-\code{keras.utils.Sequence} instances (since they generate batches).}
+batch_size if your data is in the form of a TF Dataset or a generator
+(since they generate batches).}
 
 \item{steps}{Integer or \code{NULL}. Total number of steps (batches of samples)
 When training with input tensors such as TensorFlow data tensors, the
@@ -39,54 +39,65 @@ compiled \code{tf.Graph}s that call the layer. This does not affect the layer us
 when adapting each layer only once, but if you adapt a layer multiple times
 you will need to take care to re-compile any compiled functions as follows:
 \itemize{
-\item If you are adding a preprocessing layer to a \code{keras.Model}, you need to
+\item If you are adding a preprocessing layer to a keras model, you need to
 call \code{compile(model)} after each subsequent call to \code{adapt()}.
-\item If you are calling a preprocessing layer inside \code{tfdatasets::dataset_map()},
-you should call \code{dataset_map()} again on the input \code{tf.data.Dataset} after each
+\item If you are calling a preprocessing layer inside \code{\link[tfdatasets:dataset_map]{tfdatasets::dataset_map()}},
+you should call \code{dataset_map()} again on the input \code{Dataset} after each
 \code{adapt()}.
-\item If you are using a \code{tensorflow::tf_function()} directly which calls a preprocessing
-layer, you need to call \code{tf_function} again on your callable after
+\item If you are using a \code{\link[tensorflow:tf_function]{tensorflow::tf_function()}} directly which calls a preprocessing
+layer, you need to call \code{tf_function()} again on your callable after
 each subsequent call to \code{adapt()}.
 }
 
-\code{keras_model} example with multiple adapts:
+\code{keras_model()} example with multiple adapts:
 
-\if{html}{\out{<div class="sourceCode r">}}\preformatted{layer <- layer_normalization(axis=NULL)
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{layer <- layer_normalization(axis = NULL)
 adapt(layer, c(0, 2))
-model <- keras_model_sequential(layer)
-predict(model, c(0, 1, 2)) # [1] -1  0  1
-
-adapt(layer, c(-1, 1))
-compile(model)  # This is needed to re-compile model.predict!
-predict(model, c(0, 1, 2)) # [1] 0 1 2
+model <- keras_model_sequential() |> layer()
+predict(model, c(0, 1, 2), verbose = FALSE) # [1] -1  0  1
 }\if{html}{\out{</div>}}
 
-\code{tf.data.Dataset} example with multiple adapts:
+\if{html}{\out{<div class="sourceCode">}}\preformatted{## [1] -1  0  1
+}\if{html}{\out{</div>}}
 
-\if{html}{\out{<div class="sourceCode r">}}\preformatted{layer <- layer_normalization(axis=NULL)
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{adapt(layer, c(-1, 1))
+compile(model)  # This is needed to re-compile model.predict!
+predict(model, c(0, 1, 2), verbose = FALSE) # [1] 0 1 2
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode">}}\preformatted{## [1] 0 1 2
+}\if{html}{\out{</div>}}
+
+\code{tfdatasets} example with multiple adapts:
+
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{layer <- layer_normalization(axis = NULL)
 adapt(layer, c(0, 2))
 input_ds <- tfdatasets::range_dataset(0, 3)
-normalized_ds <- input_ds \%>\%
+normalized_ds <- input_ds |>
   tfdatasets::dataset_map(layer)
-str(reticulate::iterate(normalized_ds))
-# List of 3
-#  $ :tf.Tensor([-1.], shape=(1,), dtype=float32)
-#  $ :tf.Tensor([0.], shape=(1,), dtype=float32)
-#  $ :tf.Tensor([1.], shape=(1,), dtype=float32)
-adapt(layer, c(-1, 1))
-normalized_ds <- input_ds \%>\%
-  tfdatasets::dataset_map(layer) # Re-map over the input dataset.
-str(reticulate::iterate(normalized_ds$as_numpy_iterator()))
-# List of 3
-#  $ : num [1(1d)] -1
-#  $ : num [1(1d)] 0
-#  $ : num [1(1d)] 1
+str(tfdatasets::iterate(normalized_ds))
 }\if{html}{\out{</div>}}
-}
-\seealso{
-\itemize{
-\item \url{https://www.tensorflow.org/guide/keras/preprocessing_layers#the_adapt_method}
-\item \url{https://keras.io/guides/preprocessing_layers/#the-adapt-method}
-}
+
+\if{html}{\out{<div class="sourceCode">}}\preformatted{## List of 3
+##  $ :<tf.Tensor: shape=(1), dtype=float32, numpy=array([-1.], dtype=float32)>
+##  $ :<tf.Tensor: shape=(1), dtype=float32, numpy=array([0.], dtype=float32)>
+##  $ :<tf.Tensor: shape=(1), dtype=float32, numpy=array([1.], dtype=float32)>
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{adapt(layer, c(-1, 1))
+normalized_ds <- input_ds |>
+  tfdatasets::dataset_map(layer) # Re-map over the input dataset.
+
+normalized_ds |>
+  tfdatasets::as_array_iterator() |>
+  tfdatasets::iterate() |>
+  str()
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode">}}\preformatted{## List of 3
+##  $ : num [1(1d)] 0
+##  $ : num [1(1d)] 1
+##  $ : num [1(1d)] 2
+}\if{html}{\out{</div>}}
 }
 \concept{preprocessing layer methods}

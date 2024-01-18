@@ -1,0 +1,41 @@
+Help on class CategoricalHinge in module keras.src.metrics.hinge_metrics:
+
+class CategoricalHinge(keras.src.metrics.reduction_metrics.MeanMetricWrapper)
+ |  CategoricalHinge(name='categorical_hinge', dtype=None)
+ |
+ |  Computes the categorical hinge metric between `y_true` and `y_pred`.
+ |
+ |  Args:
+ |      name: (Optional) string name of the metric instance.
+ |      dtype: (Optional) data type of the metric result.
+ |
+ |  Standalone usage:
+ |  >>> m = keras.metrics.CategoricalHinge()
+ |  >>> m.update_state([[0, 1], [0, 0]], [[0.6, 0.4], [0.4, 0.6]])
+ |  >>> m.result().numpy()
+ |  1.4000001
+ |  >>> m.reset_state()
+ |  >>> m.update_state([[0, 1], [0, 0]], [[0.6, 0.4], [0.4, 0.6]],
+ |  ...                sample_weight=[1, 0])
+ |  >>> m.result()
+ |  1.2
+ |
+ |  Method resolution order:
+ |      CategoricalHinge
+ |      keras.src.metrics.reduction_metrics.MeanMetricWrapper
+ |      keras.src.metrics.reduction_metrics.Mean
+ |      keras.src.metrics.metric.Metric
+ |      builtins.object
+ |
+ |  Methods defined here:
+ |
+ |  __init__(
+ |    self,
+ |    name='categorical_hinge',
+ |    dtype=None
+ |  )
+ |      Initialize self.  See help(type(self)) for accurate signature.
+ |
+ |  get_config(self)
+ |      Return the serializable config of the metric.
+ |

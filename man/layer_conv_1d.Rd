@@ -10,7 +10,7 @@ layer_conv_1d(
   kernel_size,
   strides = 1L,
   padding = "valid",
-  data_format = "channels_last",
+  data_format = NULL,
   dilation_rate = 1L,
   groups = 1L,
   activation = NULL,
@@ -22,141 +22,242 @@ layer_conv_1d(
   activity_regularizer = NULL,
   kernel_constraint = NULL,
   bias_constraint = NULL,
-  input_shape = NULL,
-  batch_input_shape = NULL,
-  batch_size = NULL,
-  dtype = NULL,
-  name = NULL,
-  trainable = NULL,
-  weights = NULL
+  ...
 )
 }
 \arguments{
-\item{object}{What to compose the new \code{Layer} instance with. Typically a
-Sequential model or a Tensor (e.g., as returned by \code{layer_input()}).
-The return value depends on \code{object}. If \code{object} is:
-\itemize{
-\item missing or \code{NULL}, the \code{Layer} instance is returned.
-\item a \code{Sequential} model, the model with an additional layer is returned.
-\item a Tensor, the output tensor from \code{layer_instance(object)} is returned.
-}}
+\item{object}{Object to compose the layer with. A tensor, array, or sequential model.}
 
-\item{filters}{Integer, the dimensionality of the output space (i.e. the
-number of output filters in the convolution).}
+\item{filters}{int, the dimension of the output space (the number of filters
+in the convolution).}
 
-\item{kernel_size}{An integer or list of a single integer, specifying the
-length of the 1D convolution window.}
+\item{kernel_size}{int or list of 1 integer, specifying the size of the
+convolution window.}
 
-\item{strides}{An integer or list of a single integer, specifying the stride
-length of the convolution. Specifying any stride value != 1 is incompatible
-with specifying any \code{dilation_rate} value != 1.}
+\item{strides}{int or list of 1 integer, specifying the stride length
+of the convolution. \code{strides > 1} is incompatible with
+\code{dilation_rate > 1}.}
 
-\item{padding}{One of \code{"valid"}, \code{"causal"} or \code{"same"} (case-insensitive).
-\code{"valid"} means "no padding".
-\code{"same"} results in padding the input such that the output has the same
-length as the original input.
-\code{"causal"} results in causal (dilated) convolutions, e.g. \code{output[t]} does
-not depend on \verb{input[t+1:]}. Useful when modeling temporal data where the
-model should not violate the temporal order. See \href{https://arxiv.org/abs/1609.03499}{WaveNet: A Generative Model for Raw Audio, section 2.1}.}
+\item{padding}{string, \code{"valid"}, \code{"same"} or \code{"causal"}(case-insensitive).
+\code{"valid"} means no padding. \code{"same"} results in padding evenly to
+the left/right or up/down of the input. When \code{padding="same"} and
+\code{strides=1}, the output has the same size as the input.
+\code{"causal"} results in causal (dilated) convolutions, e.g. \code{output[t]}
+does not depend on\code{tail(input, t+1)}. Useful when modeling temporal data
+where the model should not violate the temporal order.
+See \href{https://arxiv.org/abs/1609.03499}{WaveNet: A Generative Model for Raw Audio, section2.1}.}
 
-\item{data_format}{A string, one of \code{"channels_last"} (default) or \code{"channels_first"}.
-The ordering of the dimensions in the inputs. \code{"channels_last"} corresponds
-to inputs with shape \verb{(batch, length, channels)} (default format for
-temporal data in Keras) while \code{"channels_first"} corresponds to inputs
-with shape \verb{(batch, channels, length)}.}
+\item{data_format}{string, either \code{"channels_last"} or \code{"channels_first"}.
+The ordering of the dimensions in the inputs. \code{"channels_last"}
+corresponds to inputs with shape \verb{(batch, steps, features)}
+while \code{"channels_first"} corresponds to inputs with shape
+\verb{(batch, features, steps)}. It defaults to the \code{image_data_format}
+value found in your Keras config file at \verb{~/.keras/keras.json}.
+If you never set it, then it will be \code{"channels_last"}.}
 
-\item{dilation_rate}{an integer or list of a single integer, specifying the
-dilation rate to use for dilated convolution. Currently, specifying any
-\code{dilation_rate} value != 1 is incompatible with specifying any \code{strides}
-value != 1.}
+\item{dilation_rate}{int or list of 1 integers, specifying the dilation
+rate to use for dilated convolution.}
 
-\item{groups}{A positive integer specifying the number of groups in which the
-input is split along the channel axis. Each group is convolved separately
-with \code{filters / groups} filters. The output is the concatenation of all the
-groups results along the channel axis. Input channels and \code{filters} must both
-be divisible by \code{groups}.}
+\item{groups}{A positive int specifying the number of groups in which the
+input is split along the channel axis. Each group is convolved
+separately with \verb{filters // groups} filters. The output is the
+concatenation of all the \code{groups} results along the channel axis.
+Input channels and \code{filters} must both be divisible by \code{groups}.}
 
-\item{activation}{Activation function to use. If you don't specify anything,
-no activation is applied (ie. "linear" activation: \code{a(x) = x}).}
+\item{activation}{Activation function. If \code{NULL}, no activation is applied.}
 
-\item{use_bias}{Boolean, whether the layer uses a bias vector.}
+\item{use_bias}{bool, if \code{TRUE}, bias will be added to the output.}
 
-\item{kernel_initializer}{Initializer for the \code{kernel} weights matrix.}
+\item{kernel_initializer}{Initializer for the convolution kernel. If \code{NULL},
+the default initializer (\code{"glorot_uniform"}) will be used.}
 
-\item{bias_initializer}{Initializer for the bias vector.}
+\item{bias_initializer}{Initializer for the bias vector. If \code{NULL}, the
+default initializer (\code{"zeros"}) will be used.}
 
-\item{kernel_regularizer}{Regularizer function applied to the \code{kernel}
-weights matrix.}
+\item{kernel_regularizer}{Optional regularizer for the convolution kernel.}
 
-\item{bias_regularizer}{Regularizer function applied to the bias vector.}
+\item{bias_regularizer}{Optional regularizer for the bias vector.}
 
-\item{activity_regularizer}{Regularizer function applied to the output of the
-layer (its "activation")..}
+\item{activity_regularizer}{Optional regularizer function for the output.}
 
-\item{kernel_constraint}{Constraint function applied to the kernel matrix.}
+\item{kernel_constraint}{Optional projection function to be applied to the
+kernel after being updated by an \code{Optimizer} (e.g. used to implement
+norm constraints or value constraints for layer weights). The
+function must take as input the unprojected variable and must return
+the projected variable (which must have the same shape). Constraints
+are not safe to use when doing asynchronous distributed training.}
 
-\item{bias_constraint}{Constraint function applied to the bias vector.}
+\item{bias_constraint}{Optional projection function to be applied to the
+bias after being updated by an \code{Optimizer}.}
 
-\item{input_shape}{Dimensionality of the input (integer) not including the
-samples axis. This argument is required when using this layer as the first
-layer in a model.}
-
-\item{batch_input_shape}{Shapes, including the batch size. For instance,
-\code{batch_input_shape=c(10, 32)} indicates that the expected input will be
-batches of 10 32-dimensional vectors. \code{batch_input_shape=list(NULL, 32)}
-indicates batches of an arbitrary number of 32-dimensional vectors.}
-
-\item{batch_size}{Fixed batch size for layer}
-
-\item{dtype}{The data type expected by the input, as a string (\code{float32},
-\code{float64}, \code{int32}...)}
-
-\item{name}{An optional name string for the layer. Should be unique in a
-model (do not reuse the same name twice). It will be autogenerated if it
-isn't provided.}
-
-\item{trainable}{Whether the layer weights will be updated during training.}
-
-\item{weights}{Initial weights for layer.}
+\item{...}{For forward/backward compatability.}
+}
+\value{
+A 3D tensor representing \code{activation(conv1d(inputs, kernel) + bias)}.
 }
 \description{
 This layer creates a convolution kernel that is convolved with the layer
 input over a single spatial (or temporal) dimension to produce a tensor of
-outputs. If \code{use_bias} is TRUE, a bias vector is created and added to the
-outputs. Finally, if \code{activation} is not \code{NULL}, it is applied to the outputs
-as well. When using this layer as the first layer in a model, provide an
-\code{input_shape} argument (list of integers or \code{NULL }, e.g. \verb{(10, 128)} for
-sequences of 10 vectors of 128-dimensional vectors, or \verb{(NULL, 128)} for
-variable-length sequences of 128-dimensional vectors.
+outputs. If \code{use_bias} is \code{TRUE}, a bias vector is created and added to the
+outputs. Finally, if \code{activation} is not \code{NULL}, it is applied to the
+outputs as well.
 }
-\section{Input shape}{
- 3D tensor with shape: \verb{(batch_size, steps, input_dim)}
+\section{Input Shape}{
+\itemize{
+\item If \code{data_format="channels_last"}:
+A 3D tensor with shape: \verb{(batch_shape, steps, channels)}
+\item If \code{data_format="channels_first"}:
+A 3D tensor with shape: \verb{(batch_shape, channels, steps)}
+}
 }
 
-\section{Output shape}{
- 3D tensor with shape: \verb{(batch_size, new_steps, filters)} \code{steps} value might have changed due to padding or strides.
+\section{Output Shape}{
+\itemize{
+\item If \code{data_format="channels_last"}:
+A 3D tensor with shape: \verb{(batch_shape, new_steps, filters)}
+\item If \code{data_format="channels_first"}:
+A 3D tensor with shape: \verb{(batch_shape, filters, new_steps)}
+}
+}
+
+\section{Raises}{
+ValueError: when both \code{strides > 1} and \code{dilation_rate > 1}.
+}
+
+\section{Examples}{
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{# The inputs are 128-length vectors with 10 timesteps, and the
+# batch size is 4.
+x <- random_uniform(c(4, 10, 128))
+y <- x |> layer_conv_1d(32, 3, activation='relu')
+shape(y)
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode">}}\preformatted{## shape(4, 8, 32)
+}\if{html}{\out{</div>}}
 }
 
 \seealso{
+\itemize{
+\item \url{https://keras.io/api/layers/convolution_layers/convolution1d#conv1d-class}
+}
+
 Other convolutional layers: 
 \code{\link{layer_conv_1d_transpose}()},
 \code{\link{layer_conv_2d_transpose}()},
 \code{\link{layer_conv_2d}()},
 \code{\link{layer_conv_3d_transpose}()},
 \code{\link{layer_conv_3d}()},
-\code{\link{layer_conv_lstm_2d}()},
-\code{\link{layer_cropping_1d}()},
-\code{\link{layer_cropping_2d}()},
-\code{\link{layer_cropping_3d}()},
 \code{\link{layer_depthwise_conv_1d}()},
 \code{\link{layer_depthwise_conv_2d}()},
 \code{\link{layer_separable_conv_1d}()},
+\code{\link{layer_separable_conv_2d}()}
+
+Other layers: 
+\code{\link{Layer}()},
+\code{\link{layer_activation_elu}()},
+\code{\link{layer_activation_leaky_relu}()},
+\code{\link{layer_activation_parametric_relu}()},
+\code{\link{layer_activation_relu}()},
+\code{\link{layer_activation_softmax}()},
+\code{\link{layer_activation}()},
+\code{\link{layer_activity_regularization}()},
+\code{\link{layer_additive_attention}()},
+\code{\link{layer_add}()},
+\code{\link{layer_attention}()},
+\code{\link{layer_average_pooling_1d}()},
+\code{\link{layer_average_pooling_2d}()},
+\code{\link{layer_average_pooling_3d}()},
+\code{\link{layer_average}()},
+\code{\link{layer_batch_normalization}()},
+\code{\link{layer_bidirectional}()},
+\code{\link{layer_category_encoding}()},
+\code{\link{layer_center_crop}()},
+\code{\link{layer_concatenate}()},
+\code{\link{layer_conv_1d_transpose}()},
+\code{\link{layer_conv_2d_transpose}()},
+\code{\link{layer_conv_2d}()},
+\code{\link{layer_conv_3d_transpose}()},
+\code{\link{layer_conv_3d}()},
+\code{\link{layer_conv_lstm_1d}()},
+\code{\link{layer_conv_lstm_2d}()},
+\code{\link{layer_conv_lstm_3d}()},
+\code{\link{layer_cropping_1d}()},
+\code{\link{layer_cropping_2d}()},
+\code{\link{layer_cropping_3d}()},
+\code{\link{layer_dense}()},
+\code{\link{layer_depthwise_conv_1d}()},
+\code{\link{layer_depthwise_conv_2d}()},
+\code{\link{layer_discretization}()},
+\code{\link{layer_dot}()},
+\code{\link{layer_dropout}()},
+\code{\link{layer_einsum_dense}()},
+\code{\link{layer_embedding}()},
+\code{\link{layer_feature_space}()},
+\code{\link{layer_flatten}()},
+\code{\link{layer_gaussian_dropout}()},
+\code{\link{layer_gaussian_noise}()},
+\code{\link{layer_global_average_pooling_1d}()},
+\code{\link{layer_global_average_pooling_2d}()},
+\code{\link{layer_global_average_pooling_3d}()},
+\code{\link{layer_global_max_pooling_1d}()},
+\code{\link{layer_global_max_pooling_2d}()},
+\code{\link{layer_global_max_pooling_3d}()},
+\code{\link{layer_group_normalization}()},
+\code{\link{layer_group_query_attention}()},
+\code{\link{layer_gru}()},
+\code{\link{layer_hashed_crossing}()},
+\code{\link{layer_hashing}()},
+\code{\link{layer_identity}()},
+\code{\link{layer_integer_lookup}()},
+\code{\link{layer_lambda}()},
+\code{\link{layer_layer_normalization}()},
+\code{\link{layer_lstm}()},
+\code{\link{layer_masking}()},
+\code{\link{layer_max_pooling_1d}()},
+\code{\link{layer_max_pooling_2d}()},
+\code{\link{layer_max_pooling_3d}()},
+\code{\link{layer_maximum}()},
+\code{\link{layer_minimum}()},
+\code{\link{layer_multi_head_attention}()},
+\code{\link{layer_multiply}()},
+\code{\link{layer_normalization}()},
+\code{\link{layer_permute}()},
+\code{\link{layer_random_brightness}()},
+\code{\link{layer_random_contrast}()},
+\code{\link{layer_random_crop}()},
+\code{\link{layer_random_flip}()},
+\code{\link{layer_random_rotation}()},
+\code{\link{layer_random_translation}()},
+\code{\link{layer_random_zoom}()},
+\code{\link{layer_repeat_vector}()},
+\code{\link{layer_rescaling}()},
+\code{\link{layer_reshape}()},
+\code{\link{layer_resizing}()},
+\code{\link{layer_rnn}()},
+\code{\link{layer_separable_conv_1d}()},
 \code{\link{layer_separable_conv_2d}()},
+\code{\link{layer_simple_rnn}()},
+\code{\link{layer_spatial_dropout_1d}()},
+\code{\link{layer_spatial_dropout_2d}()},
+\code{\link{layer_spatial_dropout_3d}()},
+\code{\link{layer_spectral_normalization}()},
+\code{\link{layer_string_lookup}()},
+\code{\link{layer_subtract}()},
+\code{\link{layer_text_vectorization}()},
+\code{\link{layer_tfsm}()},
+\code{\link{layer_time_distributed}()},
+\code{\link{layer_torch_module_wrapper}()},
+\code{\link{layer_unit_normalization}()},
 \code{\link{layer_upsampling_1d}()},
 \code{\link{layer_upsampling_2d}()},
 \code{\link{layer_upsampling_3d}()},
 \code{\link{layer_zero_padding_1d}()},
 \code{\link{layer_zero_padding_2d}()},
-\code{\link{layer_zero_padding_3d}()}
+\code{\link{layer_zero_padding_3d}()},
+\code{\link{rnn_cell_gru}()},
+\code{\link{rnn_cell_lstm}()},
+\code{\link{rnn_cell_simple}()},
+\code{\link{rnn_cells_stack}()}
 }
 \concept{convolutional layers}
+\concept{layers}

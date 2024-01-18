@@ -1,0 +1,14 @@
+__signature__
+keras.ops.flip(x, axis=None)
+__doc__
+Reverse the order of elements in the tensor along the given axis.
+
+The shape of the tensor is preserved, but the elements are reordered.
+
+Args:
+    x: Input tensor.
+    axis: Axis or axes along which to flip the tensor. The default,
+        `axis=None`, will flip over all of the axes of the input tensor.
+
+Returns:
+    Output tensor with entries of `axis` reversed.

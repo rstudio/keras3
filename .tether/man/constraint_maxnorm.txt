@@ -1,0 +1,62 @@
+Help on class MaxNorm in module keras.src.constraints.constraints:
+
+class MaxNorm(Constraint)
+ |  MaxNorm(max_value=2, axis=0)
+ |
+ |  MaxNorm weight constraint.
+ |
+ |  Constrains the weights incident to each hidden unit
+ |  to have a norm less than or equal to a desired value.
+ |
+ |  Also available via the shortcut function `keras.constraints.max_norm`.
+ |
+ |  Args:
+ |      max_value: the maximum norm value for the incoming weights.
+ |      axis: integer, axis along which to calculate weight norms.
+ |          For instance, in a `Dense` layer the weight matrix
+ |          has shape `(input_dim, output_dim)`,
+ |          set `axis` to `0` to constrain each weight vector
+ |          of length `(input_dim,)`.
+ |          In a `Conv2D` layer with `data_format="channels_last"`,
+ |          the weight tensor has shape
+ |          `(rows, cols, input_depth, output_depth)`,
+ |          set `axis` to `[0, 1, 2]`
+ |          to constrain the weights of each filter tensor of size
+ |          `(rows, cols, input_depth)`.
+ |
+ |  Method resolution order:
+ |      MaxNorm
+ |      Constraint
+ |      builtins.object
+ |
+ |  Methods defined here:
+ |
+ |  __call__(self, w)
+ |      Applies the constraint to the input weight variable.
+ |
+ |      By default, the inputs weight variable is not modified.
+ |      Users should override this method to implement their own projection
+ |      function.
+ |
+ |      Args:
+ |          w: Input weight variable.
+ |
+ |      Returns:
+ |          Projected variable (by default, returns unmodified inputs).
+ |
+ |  __init__(
+ |    self,
+ |    max_value=2,
+ |    axis=0
+ |  )
+ |      Initialize self.  See help(type(self)) for accurate signature.
+ |
+ |  get_config(self)
+ |      Returns a Python dict of the object config.
+ |
+ |      A constraint config is a Python dictionary (JSON-serializable) that can
+ |      be used to reinstantiate the same object.
+ |
+ |      Returns:
+ |          Python dict containing the configuration of the constraint object.
+ |

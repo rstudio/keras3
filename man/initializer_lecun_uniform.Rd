@@ -2,23 +2,56 @@
 % Please edit documentation in R/initializers.R
 \name{initializer_lecun_uniform}
 \alias{initializer_lecun_uniform}
-\title{LeCun uniform initializer.}
+\title{Lecun uniform initializer.}
 \usage{
 initializer_lecun_uniform(seed = NULL)
 }
 \arguments{
-\item{seed}{Integer used to seed the random generator.}
+\item{seed}{An integer or instance of
+\code{random_seed_generator()}.
+Used to make the behavior of the initializer
+deterministic. Note that an initializer seeded with an integer
+or \code{NULL} (unseeded) will produce the same random values
+across multiple calls. To get different random values
+across multiple calls, use as seed an instance
+of \code{random_seed_generator()}.}
 }
 \description{
-It draws samples from a uniform distribution within \verb{-limit, limit} where
-\code{limit} is \code{sqrt(3 / fan_in)} where \code{fan_in} is the number of input units in
-the weight tensor.
+Draws samples from a uniform distribution within \verb{[-limit, limit]}, where
+\code{limit = sqrt(3 / fan_in)} (\code{fan_in} is the number of input units in the
+weight tensor).
 }
-\section{References}{
- LeCun 98, Efficient Backprop,
+\section{Examples}{
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{# Standalone usage:
+initializer <- initializer_lecun_uniform()
+values <- initializer(shape = c(2, 2))
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{# Usage in a Keras layer:
+initializer <- initializer_lecun_uniform()
+layer <- layer_dense(units = 3, kernel_initializer = initializer)
+}\if{html}{\out{</div>}}
+}
+
+\section{Reference}{
+\itemize{
+\item \href{https://arxiv.org/abs/1706.02515}{Klambauer et al., 2017}
+}
 }
 
 \seealso{
+Other random initializers: 
+\code{\link{initializer_glorot_normal}()},
+\code{\link{initializer_glorot_uniform}()},
+\code{\link{initializer_he_normal}()},
+\code{\link{initializer_he_uniform}()},
+\code{\link{initializer_lecun_normal}()},
+\code{\link{initializer_orthogonal}()},
+\code{\link{initializer_random_normal}()},
+\code{\link{initializer_random_uniform}()},
+\code{\link{initializer_truncated_normal}()},
+\code{\link{initializer_variance_scaling}()}
+
 Other initializers: 
 \code{\link{initializer_constant}()},
 \code{\link{initializer_glorot_normal}()},
@@ -36,3 +69,4 @@ Other initializers:
 \code{\link{initializer_zeros}()}
 }
 \concept{initializers}
+\concept{random initializers}

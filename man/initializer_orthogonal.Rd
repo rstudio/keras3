@@ -2,24 +2,59 @@
 % Please edit documentation in R/initializers.R
 \name{initializer_orthogonal}
 \alias{initializer_orthogonal}
-\title{Initializer that generates a random orthogonal matrix.}
+\title{Initializer that generates an orthogonal matrix.}
 \usage{
 initializer_orthogonal(gain = 1, seed = NULL)
 }
 \arguments{
 \item{gain}{Multiplicative factor to apply to the orthogonal matrix.}
 
-\item{seed}{Integer used to seed the random generator.}
+\item{seed}{An integer. Used to make the behavior of the initializer
+deterministic.}
 }
 \description{
-Initializer that generates a random orthogonal matrix.
-}
-\section{References}{
+If the shape of the tensor to initialize is two-dimensional, it is
+initialized with an orthogonal matrix obtained from the QR decomposition of
+a matrix of random numbers drawn from a normal distribution. If the matrix
+has fewer rows than columns then the output will have orthogonal rows.
+Otherwise, the output will have orthogonal columns.
 
-Saxe et al., \url{https://arxiv.org/abs/1312.6120}
+If the shape of the tensor to initialize is more than two-dimensional,
+a matrix of shape \verb{(shape[1] * ... * shape[n - 1], shape[n])}
+is initialized, where \code{n} is the length of the shape vector.
+The matrix is subsequently reshaped to give a tensor of the desired shape.
+}
+\section{Examples}{
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{# Standalone usage:
+initializer <- initializer_orthogonal()
+values <- initializer(shape = c(2, 2))
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{# Usage in a Keras layer:
+initializer <- initializer_orthogonal()
+layer <- layer_dense(units = 3, kernel_initializer = initializer)
+}\if{html}{\out{</div>}}
+}
+
+\section{Reference}{
+\itemize{
+\item \href{https://openreview.net/forum?id=_wzZwKpTDF_9C}{Saxe et al., 2014}
+}
 }
 
 \seealso{
+Other random initializers: 
+\code{\link{initializer_glorot_normal}()},
+\code{\link{initializer_glorot_uniform}()},
+\code{\link{initializer_he_normal}()},
+\code{\link{initializer_he_uniform}()},
+\code{\link{initializer_lecun_normal}()},
+\code{\link{initializer_lecun_uniform}()},
+\code{\link{initializer_random_normal}()},
+\code{\link{initializer_random_uniform}()},
+\code{\link{initializer_truncated_normal}()},
+\code{\link{initializer_variance_scaling}()}
+
 Other initializers: 
 \code{\link{initializer_constant}()},
 \code{\link{initializer_glorot_normal}()},
@@ -37,3 +72,4 @@ Other initializers:
 \code{\link{initializer_zeros}()}
 }
 \concept{initializers}
+\concept{random initializers}

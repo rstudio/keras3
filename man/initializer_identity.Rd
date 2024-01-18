@@ -7,12 +7,29 @@
 initializer_identity(gain = 1)
 }
 \arguments{
-\item{gain}{Multiplicative factor to apply to the identity matrix}
+\item{gain}{Multiplicative factor to apply to the identity matrix.}
 }
 \description{
-Only use for square 2D matrices.
+Only usable for generating 2D matrices.
 }
+\section{Examples}{
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{# Standalone usage:
+initializer <- initializer_identity()
+values <- initializer(shape = c(2, 2))
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{# Usage in a Keras layer:
+initializer <- initializer_identity()
+layer <- layer_dense(units = 3, kernel_initializer = initializer)
+}\if{html}{\out{</div>}}
+}
+
 \seealso{
+Other constant initializers: 
+\code{\link{initializer_constant}()},
+\code{\link{initializer_ones}()},
+\code{\link{initializer_zeros}()}
+
 Other initializers: 
 \code{\link{initializer_constant}()},
 \code{\link{initializer_glorot_normal}()},
@@ -29,4 +46,5 @@ Other initializers:
 \code{\link{initializer_variance_scaling}()},
 \code{\link{initializer_zeros}()}
 }
+\concept{constant initializers}
 \concept{initializers}

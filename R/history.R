@@ -46,7 +46,7 @@ print.keras_training_history <- function(x, ...) {
 #' Plots metrics recorded during training.
 #'
 #' @param x Training history object returned from
-#'  `fit.keras.engine.training.Model()`.
+#'  [`fit.keras.src.models.model.Model()`].
 #' @param y Unused.
 #' @param metrics One or more metrics to plot (e.g. `c('loss', 'accuracy')`).
 #'   Defaults to plotting all captured metrics.
@@ -178,14 +178,8 @@ plot.keras_training_history <- function(x, y, metrics = NULL, method = c("auto",
 #' @export
 as.data.frame.keras_training_history <- function(x, ...) {
 
-  # filter out metrics that were collected for callbacks (e.g. lr)
-  if (tensorflow::tf_version() < "2.2")
-    x$metrics <- x$metrics[x$params$metrics]
 
-  if (tensorflow::tf_version() >= "2.1")
-    metric_names <- names(x$metrics)
-  else
-    metric_names <- x$params$metrics
+  metric_names <- names(x$metrics)
 
   # pad to epochs if necessary
   values <- x$metrics
@@ -215,25 +209,16 @@ as.data.frame.keras_training_history <- function(x, ...) {
 to_keras_training_history <- function(history) {
 
 
-  # turn history into an R object so it can be persited and
+  # turn history into an R object so it can be persisted and
   # and give it a class so we can write print/plot methods
   params <- history$params
 
-  # we only see this info before TF 2.2
-  if (tensorflow::tf_version() < "2.2") {
-    if (params$do_validation) {
-      if (!is.null(params$validation_steps))
-        params$validation_samples <- params$validation_steps
-      else
-        params$validation_samples <- dim(history$validation_data[[1]])[[1]]
-    }
-  }
 
   # normalize metrics
   metrics <- history$history
-  metrics <- lapply(metrics, function(metric) {
-    as.numeric(lapply(metric, mean))
-  })
+  # metrics <- lapply(metrics, function(metric) {
+  #   as.numeric(lapply(metric, mean))
+  # })
 
   # create history
   keras_training_history(
@@ -245,14 +230,14 @@ to_keras_training_history <- function(history) {
 keras_training_history <- function(params, metrics) {
 
   # pad missing metrics with NA
-  rows <- max(as.integer(lapply(metrics, length)))
-  for (metric in names(metrics)) {
-    metric_data <- metrics[[metric]]
-    pad <- rows - length(metric_data)
-    pad_data <- rep_len(NA, pad)
-    metric_data <- c(metric_data, pad_data)
-    metrics[[metric]] <- metric_data
-  }
+  # rows <- max(as.integer(lapply(metrics, length)))
+  # for (metric in names(metrics)) {
+  #   metric_data <- metrics[[metric]]
+  #   pad <- rows - length(metric_data)
+  #   pad_data <- rep_len(NA, pad)
+  #   metric_data <- c(metric_data, pad_data)
+  #   metrics[[metric]] <- metric_data
+  # }
 
   # return history
   structure(class = "keras_training_history", list(

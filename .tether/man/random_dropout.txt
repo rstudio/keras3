@@ -1,0 +1,8 @@
+__signature__
+keras.random.dropout(
+  inputs,
+  rate,
+  noise_shape=None,
+  seed=None
+)
+__doc__

@@ -2,17 +2,16 @@
 % Please edit documentation in R/layers-convolutional.R
 \name{layer_conv_2d_transpose}
 \alias{layer_conv_2d_transpose}
-\title{Transposed 2D convolution layer (sometimes called Deconvolution).}
+\title{2D transposed convolution layer.}
 \usage{
 layer_conv_2d_transpose(
   object,
   filters,
   kernel_size,
-  strides = c(1, 1),
+  strides = list(1L, 1L),
   padding = "valid",
-  output_padding = NULL,
   data_format = NULL,
-  dilation_rate = c(1, 1),
+  dilation_rate = list(1L, 1L),
   activation = NULL,
   use_bias = TRUE,
   kernel_initializer = "glorot_uniform",
@@ -22,144 +21,243 @@ layer_conv_2d_transpose(
   activity_regularizer = NULL,
   kernel_constraint = NULL,
   bias_constraint = NULL,
-  input_shape = NULL,
-  batch_input_shape = NULL,
-  batch_size = NULL,
-  dtype = NULL,
-  name = NULL,
-  trainable = NULL,
-  weights = NULL
+  ...
 )
 }
 \arguments{
-\item{object}{What to compose the new \code{Layer} instance with. Typically a
-Sequential model or a Tensor (e.g., as returned by \code{layer_input()}).
-The return value depends on \code{object}. If \code{object} is:
-\itemize{
-\item missing or \code{NULL}, the \code{Layer} instance is returned.
-\item a \code{Sequential} model, the model with an additional layer is returned.
-\item a Tensor, the output tensor from \code{layer_instance(object)} is returned.
-}}
+\item{object}{Object to compose the layer with. A tensor, array, or sequential model.}
 
-\item{filters}{Integer, the dimensionality of the output space (i.e. the
-number of output filters in the convolution).}
+\item{filters}{int, the dimension of the output space (the number of filters
+in the transposed convolution).}
 
-\item{kernel_size}{An integer or list of 2 integers, specifying the width and
-height of the 2D convolution window. Can be a single integer to specify the
-same value for all spatial dimensions.}
+\item{kernel_size}{int or list of 1 integer, specifying the size of the
+transposed convolution window.}
 
-\item{strides}{An integer or list of 2 integers, specifying the strides of
-the convolution along the width and height. Can be a single integer to
-specify the same value for all spatial dimensions. Specifying any stride
-value != 1 is incompatible with specifying any \code{dilation_rate} value != 1.}
+\item{strides}{int or list of 1 integer, specifying the stride length
+of the transposed convolution. \code{strides > 1} is incompatible with
+\code{dilation_rate > 1}.}
 
-\item{padding}{one of \code{"valid"} or \code{"same"} (case-insensitive).}
+\item{padding}{string, either \code{"valid"} or \code{"same"} (case-insensitive).
+\code{"valid"} means no padding. \code{"same"} results in padding evenly to
+the left/right or up/down of the input. When \code{padding="same"} and
+\code{strides=1}, the output has the same size as the input.}
 
-\item{output_padding}{An integer or list of 2 integers,
-specifying the amount of padding along the height and width
-of the output tensor. Can be a single integer to specify the same
-value for all spatial dimensions. The amount of output padding along a
-given dimension must be lower than the stride along that same dimension.
-If set to \code{NULL} (default), the output shape is inferred.}
+\item{data_format}{string, either \code{"channels_last"} or \code{"channels_first"}.
+The ordering of the dimensions in the inputs. \code{"channels_last"}
+corresponds to inputs with shape
+\verb{(batch_size, channels, height, width)}
+while \code{"channels_first"} corresponds to inputs with shape
+\verb{(batch_size, channels, height, width)}. It defaults to the
+\code{image_data_format} value found in your Keras config file at
+\verb{~/.keras/keras.json}. If you never set it, then it will be
+\code{"channels_last"}.}
 
-\item{data_format}{A string, one of \code{channels_last} (default) or
-\code{channels_first}. The ordering of the dimensions in the inputs.
-\code{channels_last} corresponds to inputs with shape \verb{(batch, height, width, channels)} while \code{channels_first} corresponds to inputs with shape \verb{(batch, channels, height, width)}. It defaults to the \code{image_data_format} value
-found in your Keras config file at \verb{~/.keras/keras.json}. If you never set
-it, then it will be "channels_last".}
+\item{dilation_rate}{int or list of 1 integers, specifying the dilation
+rate to use for dilated transposed convolution.}
 
-\item{dilation_rate}{Dialation rate.}
+\item{activation}{Activation function. If \code{NULL}, no activation is applied.}
 
-\item{activation}{Activation function to use. If you don't specify anything,
-no activation is applied (ie. "linear" activation: \code{a(x) = x}).}
+\item{use_bias}{bool, if \code{TRUE}, bias will be added to the output.}
 
-\item{use_bias}{Boolean, whether the layer uses a bias vector.}
+\item{kernel_initializer}{Initializer for the convolution kernel. If \code{NULL},
+the default initializer (\code{"glorot_uniform"}) will be used.}
 
-\item{kernel_initializer}{Initializer for the \code{kernel} weights matrix.}
+\item{bias_initializer}{Initializer for the bias vector. If \code{NULL}, the
+default initializer (\code{"zeros"}) will be used.}
 
-\item{bias_initializer}{Initializer for the bias vector.}
+\item{kernel_regularizer}{Optional regularizer for the convolution kernel.}
 
-\item{kernel_regularizer}{Regularizer function applied to the \code{kernel}
-weights matrix.}
+\item{bias_regularizer}{Optional regularizer for the bias vector.}
 
-\item{bias_regularizer}{Regularizer function applied to the bias vector.}
+\item{activity_regularizer}{Optional regularizer function for the output.}
 
-\item{activity_regularizer}{Regularizer function applied to the output of the
-layer (its "activation")..}
+\item{kernel_constraint}{Optional projection function to be applied to the
+kernel after being updated by an \code{Optimizer} (e.g. used to implement
+norm constraints or value constraints for layer weights). The
+function must take as input the unprojected variable and must return
+the projected variable (which must have the same shape). Constraints
+are not safe to use when doing asynchronous distributed training.}
 
-\item{kernel_constraint}{Constraint function applied to the kernel matrix.}
+\item{bias_constraint}{Optional projection function to be applied to the
+bias after being updated by an \code{Optimizer}.}
 
-\item{bias_constraint}{Constraint function applied to the bias vector.}
-
-\item{input_shape}{Dimensionality of the input (integer) not including the
-samples axis. This argument is required when using this layer as the first
-layer in a model.}
-
-\item{batch_input_shape}{Shapes, including the batch size. For instance,
-\code{batch_input_shape=c(10, 32)} indicates that the expected input will be
-batches of 10 32-dimensional vectors. \code{batch_input_shape=list(NULL, 32)}
-indicates batches of an arbitrary number of 32-dimensional vectors.}
-
-\item{batch_size}{Fixed batch size for layer}
-
-\item{dtype}{The data type expected by the input, as a string (\code{float32},
-\code{float64}, \code{int32}...)}
-
-\item{name}{An optional name string for the layer. Should be unique in a
-model (do not reuse the same name twice). It will be autogenerated if it
-isn't provided.}
-
-\item{trainable}{Whether the layer weights will be updated during training.}
-
-\item{weights}{Initial weights for layer.}
+\item{...}{For forward/backward compatability.}
+}
+\value{
+A 4D tensor representing
+\code{activation(conv2d_transpose(inputs, kernel) + bias)}.
 }
 \description{
-The need for transposed convolutions generally arises from the desire to use
+The need for transposed convolutions generally arise from the desire to use
 a transformation going in the opposite direction of a normal convolution,
-i.e., from something that has the shape of the output of some convolution to
-something that has the shape of its input while maintaining a connectivity
-pattern that is compatible with said convolution. When using this layer as
-the first layer in a model, provide the keyword argument \code{input_shape} (list
-of integers, does not include the sample axis), e.g. \code{input_shape=c(128L, 128L, 3L)} for 128x128 RGB pictures in \code{data_format="channels_last"}.
+i.e., from something that has the shape of the output of some convolution
+to something that has the shape of its input while maintaining a
+connectivity pattern that is compatible with said convolution.
 }
-\section{Input shape}{
- 4D tensor with shape: \verb{(batch, channels, rows, cols)}
-if data_format='channels_first' or 4D tensor with shape: \verb{(batch, rows, cols, channels)} if data_format='channels_last'.
+\section{Input Shape}{
+\itemize{
+\item If \code{data_format="channels_last"}:
+A 4D tensor with shape: \verb{(batch_size, height, width, channels)}
+\item If \code{data_format="channels_first"}:
+A 4D tensor with shape: \verb{(batch_size, channels, height, width)}
+}
 }
 
-\section{Output shape}{
- 4D tensor with shape: \verb{(batch, filters, new_rows, new_cols)} if data_format='channels_first' or 4D tensor with shape:
-\verb{(batch, new_rows, new_cols, filters)} if data_format='channels_last'.
-\code{rows} and \code{cols} values might have changed due to padding.
+\section{Output Shape}{
+\itemize{
+\item If \code{data_format="channels_last"}:
+A 4D tensor with shape: \verb{(batch_size, new_height, new_width, filters)}
+\item If \code{data_format="channels_first"}:
+A 4D tensor with shape: \verb{(batch_size, filters, new_height, new_width)}
+}
+}
+
+\section{Raises}{
+ValueError: when both \code{strides > 1} and \code{dilation_rate > 1}.
 }
 
 \section{References}{
-
 \itemize{
-\item \href{https://arxiv.org/abs/1603.07285v1}{A guide to convolution arithmetic for deep learning}
+\item \href{https://arxiv.org/abs/1603.07285}{A guide to convolution arithmetic for deep learning}
+\item \href{https://www.matthewzeiler.com/mattzeiler/deconvolutionalnetworks.pdf}{Deconvolutional Networks}
 }
+}
+
+\section{Examples}{
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{x <- random_uniform(c(4, 10, 8, 128))
+y <- x |> layer_conv_2d_transpose(32, 2, 2, activation='relu')
+shape(y)
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode">}}\preformatted{## shape(4, 20, 16, 32)
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{# (4, 20, 16, 32)
+}\if{html}{\out{</div>}}
 }
 
 \seealso{
+\itemize{
+\item \url{https://keras.io/api/layers/convolution_layers/convolution2d_transpose#conv2dtranspose-class}
+}
+
 Other convolutional layers: 
 \code{\link{layer_conv_1d_transpose}()},
 \code{\link{layer_conv_1d}()},
 \code{\link{layer_conv_2d}()},
 \code{\link{layer_conv_3d_transpose}()},
 \code{\link{layer_conv_3d}()},
-\code{\link{layer_conv_lstm_2d}()},
-\code{\link{layer_cropping_1d}()},
-\code{\link{layer_cropping_2d}()},
-\code{\link{layer_cropping_3d}()},
 \code{\link{layer_depthwise_conv_1d}()},
 \code{\link{layer_depthwise_conv_2d}()},
 \code{\link{layer_separable_conv_1d}()},
+\code{\link{layer_separable_conv_2d}()}
+
+Other layers: 
+\code{\link{Layer}()},
+\code{\link{layer_activation_elu}()},
+\code{\link{layer_activation_leaky_relu}()},
+\code{\link{layer_activation_parametric_relu}()},
+\code{\link{layer_activation_relu}()},
+\code{\link{layer_activation_softmax}()},
+\code{\link{layer_activation}()},
+\code{\link{layer_activity_regularization}()},
+\code{\link{layer_additive_attention}()},
+\code{\link{layer_add}()},
+\code{\link{layer_attention}()},
+\code{\link{layer_average_pooling_1d}()},
+\code{\link{layer_average_pooling_2d}()},
+\code{\link{layer_average_pooling_3d}()},
+\code{\link{layer_average}()},
+\code{\link{layer_batch_normalization}()},
+\code{\link{layer_bidirectional}()},
+\code{\link{layer_category_encoding}()},
+\code{\link{layer_center_crop}()},
+\code{\link{layer_concatenate}()},
+\code{\link{layer_conv_1d_transpose}()},
+\code{\link{layer_conv_1d}()},
+\code{\link{layer_conv_2d}()},
+\code{\link{layer_conv_3d_transpose}()},
+\code{\link{layer_conv_3d}()},
+\code{\link{layer_conv_lstm_1d}()},
+\code{\link{layer_conv_lstm_2d}()},
+\code{\link{layer_conv_lstm_3d}()},
+\code{\link{layer_cropping_1d}()},
+\code{\link{layer_cropping_2d}()},
+\code{\link{layer_cropping_3d}()},
+\code{\link{layer_dense}()},
+\code{\link{layer_depthwise_conv_1d}()},
+\code{\link{layer_depthwise_conv_2d}()},
+\code{\link{layer_discretization}()},
+\code{\link{layer_dot}()},
+\code{\link{layer_dropout}()},
+\code{\link{layer_einsum_dense}()},
+\code{\link{layer_embedding}()},
+\code{\link{layer_feature_space}()},
+\code{\link{layer_flatten}()},
+\code{\link{layer_gaussian_dropout}()},
+\code{\link{layer_gaussian_noise}()},
+\code{\link{layer_global_average_pooling_1d}()},
+\code{\link{layer_global_average_pooling_2d}()},
+\code{\link{layer_global_average_pooling_3d}()},
+\code{\link{layer_global_max_pooling_1d}()},
+\code{\link{layer_global_max_pooling_2d}()},
+\code{\link{layer_global_max_pooling_3d}()},
+\code{\link{layer_group_normalization}()},
+\code{\link{layer_group_query_attention}()},
+\code{\link{layer_gru}()},
+\code{\link{layer_hashed_crossing}()},
+\code{\link{layer_hashing}()},
+\code{\link{layer_identity}()},
+\code{\link{layer_integer_lookup}()},
+\code{\link{layer_lambda}()},
+\code{\link{layer_layer_normalization}()},
+\code{\link{layer_lstm}()},
+\code{\link{layer_masking}()},
+\code{\link{layer_max_pooling_1d}()},
+\code{\link{layer_max_pooling_2d}()},
+\code{\link{layer_max_pooling_3d}()},
+\code{\link{layer_maximum}()},
+\code{\link{layer_minimum}()},
+\code{\link{layer_multi_head_attention}()},
+\code{\link{layer_multiply}()},
+\code{\link{layer_normalization}()},
+\code{\link{layer_permute}()},
+\code{\link{layer_random_brightness}()},
+\code{\link{layer_random_contrast}()},
+\code{\link{layer_random_crop}()},
+\code{\link{layer_random_flip}()},
+\code{\link{layer_random_rotation}()},
+\code{\link{layer_random_translation}()},
+\code{\link{layer_random_zoom}()},
+\code{\link{layer_repeat_vector}()},
+\code{\link{layer_rescaling}()},
+\code{\link{layer_reshape}()},
+\code{\link{layer_resizing}()},
+\code{\link{layer_rnn}()},
+\code{\link{layer_separable_conv_1d}()},
 \code{\link{layer_separable_conv_2d}()},
+\code{\link{layer_simple_rnn}()},
+\code{\link{layer_spatial_dropout_1d}()},
+\code{\link{layer_spatial_dropout_2d}()},
+\code{\link{layer_spatial_dropout_3d}()},
+\code{\link{layer_spectral_normalization}()},
+\code{\link{layer_string_lookup}()},
+\code{\link{layer_subtract}()},
+\code{\link{layer_text_vectorization}()},
+\code{\link{layer_tfsm}()},
+\code{\link{layer_time_distributed}()},
+\code{\link{layer_torch_module_wrapper}()},
+\code{\link{layer_unit_normalization}()},
 \code{\link{layer_upsampling_1d}()},
 \code{\link{layer_upsampling_2d}()},
 \code{\link{layer_upsampling_3d}()},
 \code{\link{layer_zero_padding_1d}()},
 \code{\link{layer_zero_padding_2d}()},
-\code{\link{layer_zero_padding_3d}()}
+\code{\link{layer_zero_padding_3d}()},
+\code{\link{rnn_cell_gru}()},
+\code{\link{rnn_cell_lstm}()},
+\code{\link{rnn_cell_simple}()},
+\code{\link{rnn_cells_stack}()}
 }
 \concept{convolutional layers}
+\concept{layers}

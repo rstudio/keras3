@@ -8,61 +8,115 @@ layer_category_encoding(
   object,
   num_tokens = NULL,
   output_mode = "multi_hot",
-  sparse = FALSE,
   ...
 )
 }
 \arguments{
-\item{object}{What to compose the new \code{Layer} instance with. Typically a
-Sequential model or a Tensor (e.g., as returned by \code{layer_input()}).
-The return value depends on \code{object}. If \code{object} is:
-\itemize{
-\item missing or \code{NULL}, the \code{Layer} instance is returned.
-\item a \code{Sequential} model, the model with an additional layer is returned.
-\item a Tensor, the output tensor from \code{layer_instance(object)} is returned.
-}}
+\item{object}{Object to compose the layer with. A tensor, array, or sequential model.}
 
 \item{num_tokens}{The total number of tokens the layer should support. All
-inputs to the layer must integers in the range \verb{0 <= value < num_tokens},
-or an error will be thrown.}
+inputs to the layer must integers in the range \verb{0 <= value < num_tokens}, or an error will be thrown.}
 
-\item{output_mode}{Specification for the output of the layer. Defaults to
-\code{"multi_hot"}. Values can be \code{"one_hot"}, \code{"multi_hot"} or \code{"count"},
+\item{output_mode}{Specification for the output of the layer.
+Values can be \code{"one_hot"}, \code{"multi_hot"} or \code{"count"},
 configuring the layer as follows:
-\itemize{
-\item \code{"one_hot"}: Encodes each individual element in the input into an array
-of \code{num_tokens} size, containing a 1 at the element index. If the last
-dimension is size 1, will encode on that dimension. If the last dimension
-is not size 1, will append a new dimension for the encoded output.
-\item \code{"multi_hot"}: Encodes each sample in the input into a single array of
-\code{num_tokens} size, containing a 1 for each vocabulary term present in the
-sample. Treats the last dimension as the sample dimension, if input shape
-is \verb{(..., sample_length)}, output shape will be \verb{(..., num_tokens)}.
-\item \code{"count"}: Like \code{"multi_hot"}, but the int array contains a count of the
-number of times the token at that index appeared in the sample.
-}
+- \code{"one_hot"}: Encodes each individual element in the input
+into an array of \code{num_tokens} size, containing a 1 at the
+element index. If the last dimension is size 1, will encode
+on that dimension. If the last dimension is not size 1,
+will append a new dimension for the encoded output.
+- \code{"multi_hot"}: Encodes each sample in the input into a single
+array of \code{num_tokens} size, containing a 1 for each
+vocabulary term present in the sample. Treats the last
+dimension as the sample dimension, if input shape is
+\verb{(..., sample_length)}, output shape will be
+\verb{(..., num_tokens)}.
+- \code{"count"}: Like \code{"multi_hot"}, but the int array contains a
+count of the number of times the token at that index
+appeared in the sample.
+For all output modes, currently only output up to rank 2 is
+supported.
+Defaults to \code{"multi_hot"}.}
 
-For all output modes, currently only output up to rank 2 is supported.}
-
-\item{sparse}{Boolean. If \code{TRUE}, returns a \code{SparseTensor} instead of a dense
-\code{Tensor}. Defaults to \code{FALSE}.}
-
-\item{...}{standard layer arguments.}
+\item{...}{For forward/backward compatability.}
 }
 \description{
 This layer provides options for condensing data into a categorical encoding
 when the total number of tokens are known in advance. It accepts integer
 values as inputs, and it outputs a dense or sparse representation of those
-inputs. For integer inputs where the total number of tokens is not known, use
-\code{\link[=layer_integer_lookup]{layer_integer_lookup()}} instead.
+inputs. For integer inputs where the total number of tokens is not known,
+use \code{layer_integer_lookup()} instead.
+
+\strong{Note:} This layer is safe to use inside a \code{tf.data} pipeline
+(independently of which backend you're using).
 }
+\section{Examples}{
+\strong{One-hot encoding data}
+
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{layer <- layer_category_encoding(num_tokens = 4, output_mode = "one_hot")
+x <- op_array(c(3, 2, 0, 1), "int32")
+layer(x)
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor(
+## [[0. 0. 0. 1.]
+##  [0. 0. 1. 0.]
+##  [1. 0. 0. 0.]
+##  [0. 1. 0. 0.]], shape=(4, 4), dtype=float32)
+}\if{html}{\out{</div>}}
+
+\strong{Multi-hot encoding data}
+
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{layer <- layer_category_encoding(num_tokens = 4, output_mode = "multi_hot")
+x <- op_array(rbind(c(0, 1),
+                   c(0, 0),
+                   c(1, 2),
+                   c(3, 1)), "int32")
+layer(x)
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor(
+## [[1. 1. 0. 0.]
+##  [1. 0. 0. 0.]
+##  [0. 1. 1. 0.]
+##  [0. 1. 0. 1.]], shape=(4, 4), dtype=float32)
+}\if{html}{\out{</div>}}
+
+\strong{Using weighted inputs in \code{"count"} mode}
+
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{layer <- layer_category_encoding(num_tokens = 4, output_mode = "count")
+count_weights <- op_array(rbind(c(.1, .2),
+                               c(.1, .1),
+                               c(.2, .3),
+                               c(.4, .2)))
+x <- op_array(rbind(c(0, 1),
+                   c(0, 0),
+                   c(1, 2),
+                   c(3, 1)), "int32")
+layer(x, count_weights = count_weights)
+#   array([[01, 02, 0. , 0. ],
+#          [02, 0. , 0. , 0. ],
+#          [0. , 02, 03, 0. ],
+#          [0. , 02, 0. , 04]]>
+}\if{html}{\out{</div>}}
+}
+
+\section{Call Arguments}{
+\itemize{
+\item \code{inputs}: A 1D or 2D tensor of integer inputs.
+\item \code{count_weights}: A tensor in the same shape as \code{inputs} indicating the
+weight for each sample value when summing up in \code{count} mode.
+Not used in \code{"multi_hot"} or \code{"one_hot"} modes.
+}
+}
+
 \seealso{
 \itemize{
-\item \url{https://www.tensorflow.org/api_docs/python/tf/keras/layers/CategoryEncoding}
-\item \url{https://keras.io/api/layers/preprocessing_layers/categorical/category_encoding/}
+\item \url{https://keras.io/api/layers/preprocessing_layers/categorical/category_encoding#categoryencoding-class}
 }
 
 Other categorical features preprocessing layers: 
+\code{\link{layer_hashed_crossing}()},
 \code{\link{layer_hashing}()},
 \code{\link{layer_integer_lookup}()},
 \code{\link{layer_string_lookup}()}
@@ -70,6 +124,8 @@ Other categorical features preprocessing layers:
 Other preprocessing layers: 
 \code{\link{layer_center_crop}()},
 \code{\link{layer_discretization}()},
+\code{\link{layer_feature_space}()},
+\code{\link{layer_hashed_crossing}()},
 \code{\link{layer_hashing}()},
 \code{\link{layer_integer_lookup}()},
 \code{\link{layer_normalization}()},
@@ -77,15 +133,121 @@ Other preprocessing layers:
 \code{\link{layer_random_contrast}()},
 \code{\link{layer_random_crop}()},
 \code{\link{layer_random_flip}()},
-\code{\link{layer_random_height}()},
 \code{\link{layer_random_rotation}()},
 \code{\link{layer_random_translation}()},
-\code{\link{layer_random_width}()},
 \code{\link{layer_random_zoom}()},
 \code{\link{layer_rescaling}()},
 \code{\link{layer_resizing}()},
 \code{\link{layer_string_lookup}()},
 \code{\link{layer_text_vectorization}()}
+
+Other layers: 
+\code{\link{Layer}()},
+\code{\link{layer_activation_elu}()},
+\code{\link{layer_activation_leaky_relu}()},
+\code{\link{layer_activation_parametric_relu}()},
+\code{\link{layer_activation_relu}()},
+\code{\link{layer_activation_softmax}()},
+\code{\link{layer_activation}()},
+\code{\link{layer_activity_regularization}()},
+\code{\link{layer_additive_attention}()},
+\code{\link{layer_add}()},
+\code{\link{layer_attention}()},
+\code{\link{layer_average_pooling_1d}()},
+\code{\link{layer_average_pooling_2d}()},
+\code{\link{layer_average_pooling_3d}()},
+\code{\link{layer_average}()},
+\code{\link{layer_batch_normalization}()},
+\code{\link{layer_bidirectional}()},
+\code{\link{layer_center_crop}()},
+\code{\link{layer_concatenate}()},
+\code{\link{layer_conv_1d_transpose}()},
+\code{\link{layer_conv_1d}()},
+\code{\link{layer_conv_2d_transpose}()},
+\code{\link{layer_conv_2d}()},
+\code{\link{layer_conv_3d_transpose}()},
+\code{\link{layer_conv_3d}()},
+\code{\link{layer_conv_lstm_1d}()},
+\code{\link{layer_conv_lstm_2d}()},
+\code{\link{layer_conv_lstm_3d}()},
+\code{\link{layer_cropping_1d}()},
+\code{\link{layer_cropping_2d}()},
+\code{\link{layer_cropping_3d}()},
+\code{\link{layer_dense}()},
+\code{\link{layer_depthwise_conv_1d}()},
+\code{\link{layer_depthwise_conv_2d}()},
+\code{\link{layer_discretization}()},
+\code{\link{layer_dot}()},
+\code{\link{layer_dropout}()},
+\code{\link{layer_einsum_dense}()},
+\code{\link{layer_embedding}()},
+\code{\link{layer_feature_space}()},
+\code{\link{layer_flatten}()},
+\code{\link{layer_gaussian_dropout}()},
+\code{\link{layer_gaussian_noise}()},
+\code{\link{layer_global_average_pooling_1d}()},
+\code{\link{layer_global_average_pooling_2d}()},
+\code{\link{layer_global_average_pooling_3d}()},
+\code{\link{layer_global_max_pooling_1d}()},
+\code{\link{layer_global_max_pooling_2d}()},
+\code{\link{layer_global_max_pooling_3d}()},
+\code{\link{layer_group_normalization}()},
+\code{\link{layer_group_query_attention}()},
+\code{\link{layer_gru}()},
+\code{\link{layer_hashed_crossing}()},
+\code{\link{layer_hashing}()},
+\code{\link{layer_identity}()},
+\code{\link{layer_integer_lookup}()},
+\code{\link{layer_lambda}()},
+\code{\link{layer_layer_normalization}()},
+\code{\link{layer_lstm}()},
+\code{\link{layer_masking}()},
+\code{\link{layer_max_pooling_1d}()},
+\code{\link{layer_max_pooling_2d}()},
+\code{\link{layer_max_pooling_3d}()},
+\code{\link{layer_maximum}()},
+\code{\link{layer_minimum}()},
+\code{\link{layer_multi_head_attention}()},
+\code{\link{layer_multiply}()},
+\code{\link{layer_normalization}()},
+\code{\link{layer_permute}()},
+\code{\link{layer_random_brightness}()},
+\code{\link{layer_random_contrast}()},
+\code{\link{layer_random_crop}()},
+\code{\link{layer_random_flip}()},
+\code{\link{layer_random_rotation}()},
+\code{\link{layer_random_translation}()},
+\code{\link{layer_random_zoom}()},
+\code{\link{layer_repeat_vector}()},
+\code{\link{layer_rescaling}()},
+\code{\link{layer_reshape}()},
+\code{\link{layer_resizing}()},
+\code{\link{layer_rnn}()},
+\code{\link{layer_separable_conv_1d}()},
+\code{\link{layer_separable_conv_2d}()},
+\code{\link{layer_simple_rnn}()},
+\code{\link{layer_spatial_dropout_1d}()},
+\code{\link{layer_spatial_dropout_2d}()},
+\code{\link{layer_spatial_dropout_3d}()},
+\code{\link{layer_spectral_normalization}()},
+\code{\link{layer_string_lookup}()},
+\code{\link{layer_subtract}()},
+\code{\link{layer_text_vectorization}()},
+\code{\link{layer_tfsm}()},
+\code{\link{layer_time_distributed}()},
+\code{\link{layer_torch_module_wrapper}()},
+\code{\link{layer_unit_normalization}()},
+\code{\link{layer_upsampling_1d}()},
+\code{\link{layer_upsampling_2d}()},
+\code{\link{layer_upsampling_3d}()},
+\code{\link{layer_zero_padding_1d}()},
+\code{\link{layer_zero_padding_2d}()},
+\code{\link{layer_zero_padding_3d}()},
+\code{\link{rnn_cell_gru}()},
+\code{\link{rnn_cell_lstm}()},
+\code{\link{rnn_cell_simple}()},
+\code{\link{rnn_cells_stack}()}
 }
 \concept{categorical features preprocessing layers}
+\concept{layers}
 \concept{preprocessing layers}

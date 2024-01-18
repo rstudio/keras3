@@ -2,71 +2,174 @@
 % Please edit documentation in R/callbacks.R
 \name{callback_model_checkpoint}
 \alias{callback_model_checkpoint}
-\title{Save the model after every epoch.}
+\title{Callback to save the Keras model or model weights at some frequency.}
 \usage{
 callback_model_checkpoint(
   filepath,
   monitor = "val_loss",
-  verbose = 0,
+  verbose = 0L,
   save_best_only = FALSE,
   save_weights_only = FALSE,
-  mode = c("auto", "min", "max"),
-  period = NULL,
-  save_freq = "epoch"
+  mode = "auto",
+  save_freq = "epoch",
+  initial_value_threshold = NULL
 )
 }
 \arguments{
-\item{filepath}{string, path to save the model file.}
+\item{filepath}{string, path to save the model file.
+\code{filepath} can contain named formatting options,
+which will be filled the value of \code{epoch} and keys in \code{logs}
+(passed in \code{on_epoch_end}).
+The \code{filepath} name needs to end with \code{".weights.h5"} when
+\code{save_weights_only = TRUE} or should end with \code{".keras"} when
+checkpoint saving the whole model (default).
+For example:
+if \code{filepath} is \code{"{epoch:02d}-{val_loss:.2f}.keras"}, then the
+model checkpoints will be saved with the epoch number and the
+validation loss in the filename. The directory of the filepath
+should not be reused by any other callbacks to avoid conflicts.}
 
-\item{monitor}{quantity to monitor.}
+\item{monitor}{The metric name to monitor. Typically the metrics are set by
+the \code{model |> compile()} method. Note:
+\itemize{
+\item Prefix the name with \code{"val_"} to monitor validation metrics.
+\item Use \code{"loss"} or \code{"val_loss"} to monitor the model's total loss.
+\item If you specify metrics as strings, like \code{"accuracy"}, pass the
+same string (with or without the \code{"val_"} prefix).
+\item If you pass \code{Metric} objects (created by one of \verb{metric_*()}), \code{monitor} should be set to
+\code{metric$name}.
+\item If you're not sure about the metric names you can check the
+contents of the \code{history$metrics} list returned by
+\code{history <- model |> fit()}
+\item Multi-output models set additional prefixes on the metric names.
+}}
 
-\item{verbose}{verbosity mode, 0 or 1.}
+\item{verbose}{Verbosity mode, 0 or 1. Mode 0 is silent, and mode 1
+displays messages when the callback takes an action.}
 
-\item{save_best_only}{if \code{save_best_only=TRUE}, the latest best model
-according to the quantity monitored will not be overwritten.}
+\item{save_best_only}{if \code{save_best_only = TRUE}, it only saves when the model
+is considered the "best" and the latest best model according to the
+quantity monitored will not be overwritten. If \code{filepath} doesn't
+contain formatting options like \code{{epoch}} then \code{filepath} will be
+overwritten by each new better model.}
 
-\item{save_weights_only}{if \code{TRUE}, then only the model's weights will be
-saved (\code{save_model_weights_hdf5(filepath)}), else the full model is saved
-(\code{save_model_hdf5(filepath)}).}
+\item{save_weights_only}{if TRUE, then only the model's weights will be saved
+(\code{model |> save_model_weights(filepath)}), else the full model is saved
+(\code{model |> save_model(filepath)}).}
 
-\item{mode}{one of "auto", "min", "max". If \code{save_best_only=TRUE}, the decision to
-overwrite the current save file is made based on either the maximization or
-the minimization of the monitored quantity. For val_acc, this should be
-max, for val_loss this should be min, etc. In auto mode, the direction is
-automatically inferred from the name of the monitored quantity.}
+\item{mode}{one of {\code{"auto"}, \code{"min"}, \code{"max"}}. If \code{save_best_only = TRUE}, the
+decision to overwrite the current save file is made based on either
+the maximization or the minimization of the monitored quantity.
+For \code{val_acc}, this should be \code{"max"}, for \code{val_loss} this should be
+\code{"min"}, etc. In \code{"auto"} mode, the mode is set to \code{"max"} if the
+quantities monitored are \code{"acc"} or start with \code{"fmeasure"} and are
+set to \code{"min"} for the rest of the quantities.}
 
-\item{period}{Interval (number of epochs) between checkpoints.}
+\item{save_freq}{\code{"epoch"} or integer. When using \code{"epoch"}, the callback
+saves the model after each epoch. When using integer, the callback
+saves the model at end of this many batches. If the \code{Model} is
+compiled with \code{steps_per_execution = N}, then the saving criteria will
+be checked every Nth batch. Note that if the saving isn't aligned to
+epochs, the monitored metric may potentially be less reliable (it
+could reflect as little as 1 batch, since the metrics get reset
+every epoch). Defaults to \code{"epoch"}.}
 
-\item{save_freq}{\code{'epoch'} or integer. When using 'epoch', the callback saves
-the model after each epoch. When using integer, the callback saves the model
-at end of a batch at which this many samples have been seen since last saving.
-Note that if the saving isn't aligned to epochs, the monitored metric may
-potentially be less reliable (it could reflect as little as 1 batch, since
-the metrics get reset every epoch). Defaults to \code{'epoch'}}
+\item{initial_value_threshold}{Floating point initial "best" value of the
+metric to be monitored. Only applies if \code{save_best_value = TRUE}. Only
+overwrites the model weights already saved if the performance of
+current model is better than this value.}
 }
 \description{
-\code{filepath} can contain named formatting options, which will be filled the
-value of \code{epoch} and keys in \code{logs} (passed in \code{on_epoch_end}). For example:
-if \code{filepath} is \verb{weights.\{epoch:02d\}-\{val_loss:.2f\}.hdf5}, then the model
-checkpoints will be saved with the epoch number and the validation loss in
-the filename.
+\code{callback_model_checkpoint()} is used in conjunction with training using
+\code{model |> fit()} to save a model or weights (in a checkpoint file) at some
+interval, so the model or weights can be loaded later to continue the
+training from the state saved.
+
+A few options this callback provides include:
+\itemize{
+\item Whether to only keep the model that has achieved the "best performance" so
+far, or whether to save the model at the end of every epoch regardless of
+performance.
+\item Definition of "best"; which quantity to monitor and whether it should be
+maximized or minimized.
+\item The frequency it should save at. Currently, the callback supports saving
+at the end of every epoch, or after a fixed number of training batches.
+\item Whether only weights are saved, or the whole model is saved.
 }
-\section{For example}{
- if \code{filepath} is
-\verb{weights.\{epoch:02d\}-\{val_loss:.2f\}.hdf5},: then the model checkpoints will
-be saved with the epoch number and the validation loss in the filename.
+}
+\section{Examples}{
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{model <- keras_model_sequential(input_shape = c(10)) |>
+  layer_dense(1, activation = "sigmoid") |>
+  compile(loss = "binary_crossentropy", optimizer = "adam",
+          metrics = c('accuracy'))
+
+EPOCHS <- 10
+checkpoint_filepath <- tempfile('checkpoint-model-', fileext = ".keras")
+model_checkpoint_callback <- callback_model_checkpoint(
+  filepath = checkpoint_filepath,
+  monitor = 'val_accuracy',
+  mode = 'max',
+  save_best_only = TRUE
+)
+
+# Model is saved at the end of every epoch, if it's the best seen so far.
+model |> fit(x = random_uniform(c(2, 10)), y = op_ones(2, 1),
+             epochs = EPOCHS, validation_split = .5, verbose = 0,
+             callbacks = list(model_checkpoint_callback))
+
+# The model (that are considered the best) can be loaded as -
+load_model(checkpoint_filepath)
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode">}}\preformatted{## Model: "sequential"
+## ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━┓
+## ┃ Layer (type)                    ┃ Output Shape              ┃    Param # ┃
+## ┡━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━┩
+## │ dense (Dense)                   │ (None, 1)                 │         11 │
+## └─────────────────────────────────┴───────────────────────────┴────────────┘
+##  Total params: 35 (144.00 B)
+##  Trainable params: 11 (44.00 B)
+##  Non-trainable params: 0 (0.00 B)
+##  Optimizer params: 24 (100.00 B)
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{# Alternatively, one could checkpoint just the model weights as -
+checkpoint_filepath <- tempfile('checkpoint-', fileext = ".weights.h5")
+model_checkpoint_callback <- callback_model_checkpoint(
+  filepath = checkpoint_filepath,
+  save_weights_only = TRUE,
+  monitor = 'val_accuracy',
+  mode = 'max',
+  save_best_only = TRUE
+)
+
+# Model weights are saved at the end of every epoch, if it's the best seen
+# so far.
+# same as above
+model |> fit(x = random_uniform(c(2, 10)), y = op_ones(2, 1),
+             epochs = EPOCHS, validation_split = .5, verbose = 0,
+             callbacks = list(model_checkpoint_callback))
+
+# The model weights (that are considered the best) can be loaded
+model |> load_model_weights(checkpoint_filepath)
+}\if{html}{\out{</div>}}
 }
 
 \seealso{
+\itemize{
+\item \url{https://keras.io/api/callbacks/model_checkpoint#modelcheckpoint-class}
+}
+
 Other callbacks: 
+\code{\link{Callback}()},
+\code{\link{callback_backup_and_restore}()},
 \code{\link{callback_csv_logger}()},
 \code{\link{callback_early_stopping}()},
 \code{\link{callback_lambda}()},
 \code{\link{callback_learning_rate_scheduler}()},
-\code{\link{callback_progbar_logger}()},
 \code{\link{callback_reduce_lr_on_plateau}()},
 \code{\link{callback_remote_monitor}()},
 \code{\link{callback_tensorboard}()},
-\code{\link{callback_terminate_on_naan}()}
+\code{\link{callback_terminate_on_nan}()}
 }
 \concept{callbacks}

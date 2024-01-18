@@ -1,0 +1,17 @@
+__signature__
+keras.ops.cumsum(
+  x,
+  axis=None,
+  dtype=None
+)
+__doc__
+Returns the cumulative sum of elements along a given axis.
+
+Args:
+    x: Input tensor.
+    axis: Axis along which the cumulative sum is computed.
+        By default the input is flattened.
+    dtype: dtype of returned tensor. Defaults to x.dtype.
+
+Returns:
+    Output tensor.

@@ -1,272 +1,290 @@
 
-#' Apply an activation function to an output.
+
+
+#' Applies an activation function to an output.
 #'
-#' @param input_shape Input shape (list of integers, does not include the
-#'  samples axis) which is required when using this layer as the first layer in
-#'  a model.
+#' @description
 #'
-#' @inheritParams layer_dense
+#' # Examples
+#' ```{r}
+#' x <- array(c(-3, -1, 0, 2))
+#' layer <- layer_activation(activation = 'relu')
+#' layer(x)
+#' layer <- layer_activation(activation = activation_relu)
+#' layer(x)
+#' layer <- layer_activation(activation = op_relu)
+#' layer(x)
+#' ```
 #'
-#' @family core layers
-#' @family activation layers
+#' @param activation
+#' Activation function. It could be a callable, or the name of
+#' an activation from the `keras3::activation_*` namespace.
+#'
+#' @param ...
+#' Base layer keyword arguments, such as `name` and `dtype`.
+#'
+#' @param object
+#' Object to compose the layer with. A tensor, array, or sequential model.
 #'
 #' @export
-layer_activation <- function(object, activation, input_shape = NULL,
-                             batch_input_shape = NULL, batch_size = NULL, dtype = NULL,
-                             name = NULL, trainable = NULL, weights = NULL) {
-
-  create_layer(keras$layers$Activation, object, list(
-    activation = activation,
-    input_shape = normalize_shape(input_shape),
-    batch_input_shape = normalize_shape(batch_input_shape),
-    batch_size = as_nullable_integer(batch_size),
-    dtype = dtype,
-    name = name,
-    trainable = trainable,
-    weights = weights
-  ))
-
-}
-
-#' Leaky version of a Rectified Linear Unit.
-#'
-#' Allows a small gradient when the unit is not active: `f(x) = alpha * x` for
-#' `x < 0`, `f(x) = x` for `x >= 0`.
-#'
-#' @inheritParams layer_activation
-#' @param alpha float >= 0. Negative slope coefficient.
-#'
-#' @seealso [Rectifier Nonlinearities Improve Neural Network Acoustic
-#'   Models](https://ai.stanford.edu/~amaas/papers/relu_hybrid_icml2013_final.pdf).
-#'
 #' @family activation layers
-#'
-#' @export
-layer_activation_leaky_relu <- function(object, alpha = 0.3, input_shape = NULL,
-                                        batch_input_shape = NULL, batch_size = NULL,
-                                        dtype = NULL, name = NULL, trainable = NULL,
-                                        weights = NULL) {
-
-  create_layer(keras$layers$LeakyReLU, object, list(
-    alpha = alpha,
-    input_shape = normalize_shape(input_shape),
-    batch_input_shape = normalize_shape(batch_input_shape),
-    batch_size = as_nullable_integer(batch_size),
-    dtype = dtype,
-    name = name,
-    trainable = trainable,
-    weights = weights
-  ))
-
-}
-
-#' Parametric Rectified Linear Unit.
-#'
-#' It follows: `f(x) = alpha * x`` for `x < 0`, `f(x) = x` for `x >= 0`, where
-#' alpha is a learned array with the same shape as x.
-#'
-#' @inheritParams layer_activation
-#' @param alpha_initializer Initializer function for the weights.
-#' @param alpha_regularizer Regularizer for the weights.
-#' @param alpha_constraint Constraint for the weights.
-#' @param shared_axes The axes along which to share learnable parameters for the
-#'   activation function. For example, if the incoming feature maps are from a
-#'   2D convolution with output shape (batch, height, width, channels), and you
-#'   wish to share parameters across space so that each filter only has one set
-#'   of parameters, set shared_axes=c(1, 2).
-#'
-#' @seealso [Delving Deep into Rectifiers: Surpassing Human-Level Performance on
-#'   ImageNet Classification](https://arxiv.org/abs/1502.01852).
-#'
-#' @family activation layers
-#'
-#' @export
-layer_activation_parametric_relu <- function(object, alpha_initializer = "zeros", alpha_regularizer = NULL,
-                                             alpha_constraint = NULL, shared_axes = NULL,
-                                             input_shape = NULL,
-                                             batch_input_shape = NULL, batch_size = NULL,
-                                             dtype = NULL, name = NULL, trainable = NULL,
-                                             weights = NULL) {
-
-  # build args
-  args <- list(
-    alpha_initializer = alpha_initializer,
-    alpha_regularizer = alpha_regularizer,
-    alpha_constraint = alpha_constraint
-  )
-  if (!is.null(shared_axes))
-    args$shared_axes <- as.list(as.integer(shared_axes))
-  args$input_shape <- normalize_shape(input_shape)
-  args$batch_input_shape <- normalize_shape(batch_input_shape)
-  args$batch_size <- as_nullable_integer(batch_size)
-  args$dtype <- dtype
-  args$name <- name
-  args$trainable <- trainable
-  args$weights <- weights
-
-  # call layer
-  create_layer(keras$layers$PReLU, object, args)
+#' @family layers
+#' @seealso
+#' + <https://keras.io/api/layers/core_layers/activation#activation-class>
+#  + <https://www.tensorflow.org/api_docs/python/tf/keras/layers/Activation>
+#' @tether keras.layers.Activation
+layer_activation <-
+function (object, activation, ...)
+{
+    args <- capture_args(list(input_shape = normalize_shape,
+        batch_size = as_integer, batch_input_shape = normalize_shape),
+        ignore = "object")
+    create_layer(keras$layers$Activation, object, args)
 }
 
 
-#' Thresholded Rectified Linear Unit.
+#' Applies an Exponential Linear Unit function to an output.
 #'
-#' It follows: `f(x) = x` for `x > theta`, `f(x) = 0` otherwise.
+#' @description
+#' Formula:
 #'
-#' @inheritParams layer_activation
-#' @param theta float >= 0. Threshold location of activation.
+#' ```
+#' f(x) = alpha * (exp(x) - 1.) for x < 0
+#' f(x) = x for x >= 0
+#' ```
 #'
-#' @seealso [Zero-bias autoencoders and the benefits of co-adapting features](https://arxiv.org/abs/1402.3337).
+#' @param alpha
+#' float, slope of negative section. Defaults to `1.0`.
 #'
-#' @family activation layers
+#' @param ...
+#' Base layer keyword arguments, such as `name` and `dtype`.
+#'
+#' @param object
+#' Object to compose the layer with. A tensor, array, or sequential model.
 #'
 #' @export
-layer_activation_thresholded_relu <- function(object, theta = 1.0, input_shape = NULL,
-                                              batch_input_shape = NULL, batch_size = NULL,
-                                              dtype = NULL, name = NULL, trainable = NULL,
-                                              weights = NULL) {
-
-  create_layer(keras$layers$ThresholdedReLU, object, list(
-    theta = theta,
-    input_shape = normalize_shape(input_shape),
-    batch_input_shape = normalize_shape(batch_input_shape),
-    batch_size = as_nullable_integer(batch_size),
-    dtype = dtype,
-    name = name,
-    trainable = trainable,
-    weights = weights
-  ))
-
+#' @family activation layers
+#' @family layers
+#' @seealso
+#' + <https://keras.io/api/layers/activation_layers/elu#elu-class>
+#  + <https://www.tensorflow.org/api_docs/python/tf/keras/layers/ELU>
+#' @tether keras.layers.ELU
+layer_activation_elu <-
+function (object, alpha = 1, ...)
+{
+    args <- capture_args(list(input_shape = normalize_shape,
+        batch_size = as_integer, batch_input_shape = normalize_shape),
+        ignore = "object")
+    create_layer(keras$layers$ELU, object, args)
 }
 
 
-#' Exponential Linear Unit.
+#' Leaky version of a Rectified Linear Unit activation layer.
 #'
-#' It follows: `f(x) =  alpha * (exp(x) - 1.0)` for `x < 0`, `f(x) = x` for `x >= 0`.
+#' @description
+#' This layer allows a small gradient when the unit is not active.
 #'
-#' @inheritParams layer_activation
-#' @param alpha Scale for the negative factor.
+#' Formula:
 #'
-#' @seealso [Fast and Accurate Deep Network Learning by Exponential Linear Units
-#'   (ELUs)](https://arxiv.org/abs/1511.07289v1).
+#' ```r
+#' f <- function(x) ifelse(x >= 0, x, alpha * x)
+#' ```
 #'
-#' @family activation layers
+#' # Examples
+#' ```{r}
+#' leaky_relu_layer <- layer_activation_leaky_relu(negative_slope=0.5)
+#' input <- array(c(-10, -5, 0.0, 5, 10))
+#' result <- leaky_relu_layer(input)
+#' as.array(result)
+#' ```
+#'
+#' @param negative_slope
+#' Float >= 0.0. Negative slope coefficient.
+#' Defaults to `0.3`.
+#'
+#' @param ...
+#' Base layer keyword arguments, such as
+#' `name` and `dtype`.
+#'
+#' @param object
+#' Object to compose the layer with. A tensor, array, or sequential model.
 #'
 #' @export
-layer_activation_elu <- function(object, alpha = 1.0, input_shape = NULL,
-                                 batch_input_shape = NULL, batch_size = NULL, dtype = NULL,
-                                 name = NULL, trainable = NULL, weights = NULL) {
-
-  create_layer(keras$layers$ELU, object, list(
-    alpha = alpha,
-    input_shape = normalize_shape(input_shape),
-    batch_input_shape = normalize_shape(batch_input_shape),
-    batch_size = as_nullable_integer(batch_size),
-    dtype = dtype,
-    name = name,
-    trainable = trainable,
-    weights = weights
-  ))
-
+#' @family activation layers
+#' @family layers
+#' @seealso
+#' + <https://keras.io/api/layers/activation_layers/leaky_relu#leakyrelu-class>
+#  + <https://www.tensorflow.org/api_docs/python/tf/keras/layers/LeakyReLU>
+#' @tether keras.layers.LeakyReLU
+layer_activation_leaky_relu <-
+function (object, negative_slope = 0.3, ...)
+{
+    args <- capture_args(list(input_shape = normalize_shape,
+        batch_size = as_integer, batch_input_shape = normalize_shape),
+        ignore = "object")
+    create_layer(keras$layers$LeakyReLU, object, args)
 }
 
-#' Scaled Exponential Linear Unit.
+
+#' Parametric Rectified Linear Unit activation layer.
 #'
-#' SELU is equal to: `scale * elu(x, alpha)`, where alpha and scale
-#' are pre-defined constants.
+#' @description
+#' Formula:
+#' ```r
+#' f <- function(x) ifelse(x >= 0, x, alpha * x)
+#' ```
+#' where `alpha` is a learned array with the same shape as x.
 #'
-#' The values of `alpha` and `scale` are
-#' chosen so that the mean and variance of the inputs are preserved
-#' between two consecutive layers as long as the weights are initialized
-#' correctly (see initializer_lecun_normal) and the number of inputs
-#' is "large enough" (see article for more information).
+#' @param alpha_initializer
+#' Initializer function for the weights.
 #'
-#' Note:
-#' - To be used together with the initialization "lecun_normal".
-#' - To be used together with the dropout variant "AlphaDropout".
+#' @param alpha_regularizer
+#' Regularizer for the weights.
 #'
-#' @inheritParams layer_activation
+#' @param alpha_constraint
+#' Constraint for the weights.
 #'
-#' @seealso [Self-Normalizing Neural Networks](https://arxiv.org/abs/1706.02515), \code{\link{initializer_lecun_normal}}, \code{\link{layer_alpha_dropout}}
+#' @param shared_axes
+#' The axes along which to share learnable parameters for the
+#' activation function. For example, if the incoming feature maps are
+#' from a 2D convolution with output shape
+#' `(batch, height, width, channels)`, and you wish to share parameters
+#' across space so that each filter only has one set of parameters,
+#' set `shared_axes=[1, 2]`.
 #'
-#' @family activation layers
+#' @param ...
+#' Base layer keyword arguments, such as `name` and `dtype`.
+#'
+#' @param object
+#' Object to compose the layer with. A tensor, array, or sequential model.
 #'
 #' @export
-layer_activation_selu <- function(object, input_shape = NULL,
-                                 batch_input_shape = NULL, batch_size = NULL, dtype = NULL,
-                                 name = NULL, trainable = NULL, weights = NULL) {
-
-  create_layer(keras$layers$Activation, object, list(
-    activation = "selu",
-    input_shape = normalize_shape(input_shape),
-    batch_input_shape = normalize_shape(batch_input_shape),
-    batch_size = as_nullable_integer(batch_size),
-    dtype = dtype,
-    name = name,
-    trainable = trainable,
-    weights = weights
-  ))
-
+#' @family activation layers
+#' @family layers
+#' @seealso
+#' + <https://keras.io/api/layers/activation_layers/prelu#prelu-class>
+#  + <https://www.tensorflow.org/api_docs/python/tf/keras/layers/PReLU>
+#' @tether keras.layers.PReLU
+layer_activation_parametric_relu <-
+function (object, alpha_initializer = "Zeros", alpha_regularizer = NULL,
+    alpha_constraint = NULL, shared_axes = NULL, ...)
+{
+    args <- capture_args(list(input_shape = normalize_shape,
+        batch_size = as_integer, batch_input_shape = normalize_shape,
+        shared_axes = as_axis), ignore = "object")
+    create_layer(keras$layers$PReLU, object, args)
 }
 
-#' Softmax activation function.
+
+#' Rectified Linear Unit activation function layer.
 #'
-#' It follows: `f(x) =  alpha * (exp(x) - 1.0)` for `x < 0`, `f(x) = x` for `x >= 0`.
+#' @description
+#' Formula:
 #'
-#' @inheritParams layer_activation
-#' @param axis Integer, axis along which the softmax normalization is applied.
+#' ```r
+#' f <- function(x, max_value = Inf, negative_slope = 0, threshold = 0) {
+#'  x <- max(x,0)
+#'  if (x >= max_value)
+#'    max_value
+#'  else if (threshold <= x && x < max_value)
+#'    x
+#'  else
+#'    negative_slope * (x - threshold)
+#' }
+#' ```
 #'
-#' @family activation layers
+#' # Examples
+#' ```{r}
+#' relu_layer <- layer_activation_relu(max_value = 10,
+#'                                     negative_slope = 0.5,
+#'                                     threshold = 0)
+#' input <- array(c(-10, -5, 0.0, 5, 10))
+#' result <- relu_layer(input)
+#' as.array(result)
+#' ```
+#'
+#' @param max_value
+#' Float >= 0. Maximum activation value. `NULL` means unlimited.
+#' Defaults to `NULL`.
+#'
+#' @param negative_slope
+#' Float >= 0. Negative slope coefficient.
+#' Defaults to `0.0`.
+#'
+#' @param threshold
+#' Float >= 0. Threshold value for thresholded activation.
+#' Defaults to `0.0`.
+#'
+#' @param ...
+#' Base layer keyword arguments, such as `name` and `dtype`.
+#'
+#' @param object
+#' Object to compose the layer with. A tensor, array, or sequential model.
 #'
 #' @export
-layer_activation_softmax <- function(object, axis = -1, input_shape = NULL,
-                                     batch_input_shape = NULL, batch_size = NULL, dtype = NULL,
-                                     name = NULL, trainable = NULL, weights = NULL) {
-
-  create_layer(keras$layers$Softmax, object, list(
-    axis = as.integer(axis),
-    input_shape = normalize_shape(input_shape),
-    batch_input_shape = normalize_shape(batch_input_shape),
-    batch_size = as_nullable_integer(batch_size),
-    dtype = dtype,
-    name = name,
-    trainable = trainable,
-    weights = weights
-  ))
-
+#' @family activation layers
+#' @family layers
+#' @seealso
+#' + <https://keras.io/api/layers/activation_layers/relu#relu-class>
+#  + <https://www.tensorflow.org/api_docs/python/tf/keras/layers/ReLU>
+#' @tether keras.layers.ReLU
+layer_activation_relu <-
+function (object, max_value = NULL, negative_slope = 0, threshold = 0,
+    ...)
+{
+    args <- capture_args(list(input_shape = normalize_shape,
+        batch_size = as_integer, batch_input_shape = normalize_shape),
+        ignore = "object")
+    create_layer(keras$layers$ReLU, object, args)
 }
 
-#' Rectified Linear Unit activation function
+
+#' Softmax activation layer.
 #'
-#' @inheritParams layer_activation
+#' @description
+#' Formula:
+#' ```
+#' exp_x = exp(x - max(x))
+#' f(x) = exp_x / sum(exp_x)
+#' ```
 #'
-#' @param max_value loat, the maximum output value.
-#' @param negative_slope float >= 0 Negative slope coefficient.
-#' @param threshold float. Threshold value for thresholded activation.
+#' # Examples
+#' ```{r}
+#' softmax_layer <- layer_activation_softmax()
+#' input <- op_array(c(1, 2, 1))
+#' softmax_layer(input)
+#' ```
 #'
-#' @family activation layers
+#' # Call Arguments
+#' - `inputs`: The inputs (logits) to the softmax layer.
+#' - `mask`: A boolean mask of the same shape as `inputs`. The mask
+#'     specifies 1 to keep and 0 to mask. Defaults to `NULL`.
+#'
+#' @returns
+#' Softmaxed output with the same shape as `inputs`.
+#'
+#' @param axis
+#' Integer, or list of Integers, axis along which the softmax
+#' normalization is applied.
+#'
+#' @param ...
+#' Base layer keyword arguments, such as `name` and `dtype`.
+#'
+#' @param object
+#' Object to compose the layer with. A tensor, array, or sequential model.
 #'
 #' @export
-layer_activation_relu <- function(object, max_value = NULL, negative_slope = 0, threshold = 0,
-                                  input_shape = NULL, batch_input_shape = NULL, batch_size = NULL,
-                                  dtype = NULL, name = NULL, trainable = NULL,
-                                  weights = NULL) {
-
-  args <- list(
-    max_value = max_value,
-    input_shape = normalize_shape(input_shape),
-    batch_input_shape = normalize_shape(batch_input_shape),
-    batch_size = as_nullable_integer(batch_size),
-    dtype = dtype,
-    name = name,
-    trainable = trainable,
-    weights = weights
-  )
-
-  if (keras_version() >= "2.2.3") {
-    args$negative_slope <- negative_slope
-    args$threshold <- threshold
-  }
-
-  create_layer(keras$layers$ReLU, object, args)
+#' @family activation layers
+#' @family layers
+#' @seealso
+#' + <https://keras.io/api/layers/activation_layers/softmax#softmax-class>
+#  + <https://www.tensorflow.org/api_docs/python/tf/keras/layers/Softmax>
+#' @tether keras.layers.Softmax
+layer_activation_softmax <-
+function (object, axis = -1L, ...)
+{
+    args <- capture_args(list(axis = as_axis, input_shape = normalize_shape,
+        batch_size = as_integer, batch_input_shape = normalize_shape),
+        ignore = "object")
+    create_layer(keras$layers$Softmax, object, args)
 }

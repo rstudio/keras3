@@ -1,0 +1,36 @@
+Help on class KLDivergence in module keras.src.losses.losses:
+
+class KLDivergence(LossFunctionWrapper)
+ |  KLDivergence(reduction='sum_over_batch_size', name='kl_divergence')
+ |
+ |  Computes Kullback-Leibler divergence loss between `y_true` & `y_pred`.
+ |
+ |  Formula:
+ |
+ |  ```python
+ |  loss = y_true * log(y_true / y_pred)
+ |  ```
+ |
+ |  Args:
+ |      reduction: Type of reduction to apply to the loss. In almost all cases
+ |          this should be `"sum_over_batch_size"`.
+ |          Supported options are `"sum"`, `"sum_over_batch_size"` or `None`.
+ |      name: Optional name for the loss instance.
+ |
+ |  Method resolution order:
+ |      KLDivergence
+ |      LossFunctionWrapper
+ |      keras.src.losses.loss.Loss
+ |      builtins.object
+ |
+ |  Methods defined here:
+ |
+ |  __init__(
+ |    self,
+ |    reduction='sum_over_batch_size',
+ |    name='kl_divergence'
+ |  )
+ |      Initialize self.  See help(type(self)) for accurate signature.
+ |
+ |  get_config(self)
+ |

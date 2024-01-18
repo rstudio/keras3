@@ -2,7 +2,7 @@
 % Please edit documentation in R/optimizers.R
 \name{optimizer_adamax}
 \alias{optimizer_adamax}
-\title{Optimizer that implements the Adamax algorithm}
+\title{Optimizer that implements the Adamax algorithm.}
 \usage{
 optimizer_adamax(
   learning_rate = 0.001,
@@ -16,16 +16,16 @@ optimizer_adamax(
   use_ema = FALSE,
   ema_momentum = 0.99,
   ema_overwrite_frequency = NULL,
-  jit_compile = TRUE,
-  name = "Adamax",
-  ...
+  name = "adamax",
+  ...,
+  loss_scale_factor = NULL
 )
 }
 \arguments{
-\item{learning_rate}{A \code{tf.Tensor}, floating point value, a schedule that is a
-\code{tf.keras.optimizers.schedules.LearningRateSchedule}, or a callable
-that takes no arguments and returns the actual value to use. The
-learning rate. Defaults to 0.001.}
+\item{learning_rate}{A float, a
+\code{\link[=LearningRateSchedule]{LearningRateSchedule()}} instance, or
+a callable that takes no arguments and returns the actual value to
+use. The learning rate. Defaults to \code{0.001}.}
 
 \item{beta_1}{A float value or a constant float tensor. The exponential decay
 rate for the 1st moment estimates.}
@@ -33,18 +33,21 @@ rate for the 1st moment estimates.}
 \item{beta_2}{A float value or a constant float tensor. The exponential decay
 rate for the exponentially weighted infinity norm.}
 
-\item{epsilon}{A small constant for numerical stability.}
+\item{epsilon}{A small constant for numerical stability.
+name: String. The name to use
+for momentum accumulator weights created by
+the optimizer.}
 
-\item{weight_decay}{Float, defaults to NULL. If set, weight decay is applied.}
+\item{weight_decay}{Float. If set, weight decay is applied.}
 
 \item{clipnorm}{Float. If set, the gradient of each weight is individually
 clipped so that its norm is no higher than this value.}
 
-\item{clipvalue}{Float. If set, the gradient of each weight is clipped to be no
-higher than this value.}
+\item{clipvalue}{Float. If set, the gradient of each weight is clipped to be
+no higher than this value.}
 
-\item{global_clipnorm}{Float. If set, the gradient of all weights is clipped so
-that their global norm is no higher than this value.}
+\item{global_clipnorm}{Float. If set, the gradient of all weights is clipped
+so that their global norm is no higher than this value.}
 
 \item{use_ema}{Boolean, defaults to FALSE. If TRUE, exponential moving average
 (EMA) is applied. EMA consists of computing an exponential moving
@@ -52,36 +55,35 @@ average of the weights of the model (as the weight values change after
 each training batch), and periodically overwriting the weights with
 their moving average.}
 
-\item{ema_momentum}{Float, defaults to 0.99. Only used if \code{use_ema=TRUE}. This is  # noqa: E501
-the momentum to use when computing the EMA of the model's weights:
+\item{ema_momentum}{Float, defaults to 0.99. Only used if \code{use_ema=TRUE}.
+This is the momentum to use when computing
+the EMA of the model's weights:
 \code{new_average = ema_momentum * old_average + (1 - ema_momentum) * current_variable_value}.}
 
 \item{ema_overwrite_frequency}{Int or NULL, defaults to NULL. Only used if
-\code{use_ema=TRUE}. Every \code{ema_overwrite_frequency} steps of iterations, we
-overwrite the model variable by its moving average. If NULL, the optimizer  # noqa: E501
+\code{use_ema=TRUE}. Every \code{ema_overwrite_frequency} steps of iterations,
+we overwrite the model variable by its moving average.
+If NULL, the optimizer
 does not overwrite model variables in the middle of training, and you
 need to explicitly overwrite the variables at the end of training
-by calling \code{optimizer.finalize_variable_values()} (which updates the model  # noqa: E501
-variables in-place). When using the built-in \code{fit()} training loop, this
-happens automatically after the last epoch, and you don't need to do
-anything.}
+by calling \code{optimizer.finalize_variable_values()}
+(which updates the model
+variables in-place). When using the built-in \code{fit()} training loop,
+this happens automatically after the last epoch,
+and you don't need to do anything.}
 
-\item{jit_compile}{Boolean, defaults to TRUE. If TRUE, the optimizer will use XLA  # noqa: E501
-compilation. If no GPU device is found, this flag will be ignored.}
+\item{name}{String, name for the object}
 
-\item{name}{String. The name to use
-for momentum accumulator weights created by
-the optimizer.}
+\item{...}{For forward/backward compatability.}
 
-\item{...}{Used for backward and forward compatibility}
-}
-\value{
-Optimizer for use with \code{\link{compile.keras.engine.training.Model}}.
+\item{loss_scale_factor}{Float or \code{NULL}. If a float, the scale factor will
+be multiplied the loss before computing gradients, and the inverse of
+the scale factor will be multiplied by the gradients before updating
+variables. Useful for preventing underflow during mixed precision
+training. Alternately, \code{\link[=optimizer_loss_scale]{optimizer_loss_scale()}} will
+automatically set a loss scale factor.}
 }
 \description{
-Optimizer that implements the Adamax algorithm
-}
-\details{
 Adamax, a variant of Adam based on the infinity norm, is a first-order
 gradient-based optimization method. Due to its capability of adjusting the
 learning rate based on data characteristics, it is suited to learn
@@ -91,31 +93,41 @@ references below).
 
 Initialization:
 
-\if{html}{\out{<div class="sourceCode python">}}\preformatted{m = 0  # Initialize initial 1st moment vector
-u = 0  # Initialize the exponentially weighted infinity norm
-t = 0  # Initialize timestep
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{m <- 0  # Initialize initial 1st moment vector
+u <- 0  # Initialize the exponentially weighted infinity norm
+t <- 0  # Initialize timestep
 }\if{html}{\out{</div>}}
 
 The update rule for parameter \code{w} with gradient \code{g} is described at the end
 of section 7.1 of the paper (see the referenece section):
 
-\if{html}{\out{<div class="sourceCode python">}}\preformatted{t += 1
-m = beta1 * m + (1 - beta) * g
-u = max(beta2 * u, abs(g))
-current_lr = learning_rate / (1 - beta1 ** t)
-w = w - current_lr * m / (u + epsilon)
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{t <-  t + 1
+m <- beta1 * m + (1 - beta) * g
+u <- max(beta2 * u, abs(g))
+current_lr <- learning_rate / (1 - beta1 ** t)
+w <- w - current_lr * m / (u + epsilon)
 }\if{html}{\out{</div>}}
 }
+\section{Reference}{
+\itemize{
+\item \href{https://arxiv.org/abs/1412.6980}{Kingma et al., 2014}
+}
+}
+
 \seealso{
 \itemize{
-\item \url{https://www.tensorflow.org/api_docs/python/tf/keras/optimizers/experimental/Adamax}
+\item \url{https://keras.io/api/optimizers/adamax#adamax-class}
 }
 
 Other optimizers: 
 \code{\link{optimizer_adadelta}()},
+\code{\link{optimizer_adafactor}()},
 \code{\link{optimizer_adagrad}()},
+\code{\link{optimizer_adam_w}()},
 \code{\link{optimizer_adam}()},
 \code{\link{optimizer_ftrl}()},
+\code{\link{optimizer_lion}()},
+\code{\link{optimizer_loss_scale}()},
 \code{\link{optimizer_nadam}()},
 \code{\link{optimizer_rmsprop}()},
 \code{\link{optimizer_sgd}()}

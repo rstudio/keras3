@@ -1,0 +1,89 @@
+---
+title: Simple MNIST convnet
+author: '[fchollet](https://twitter.com/fchollet)'
+date-created: 2015/06/19
+last-modified: 2020/04/21
+description: A simple convnet that achieves ~99% test accuracy on MNIST.
+accelerator: GPU
+domain: vision
+category: basic
+output: rmarkdown::html_vignette
+knit: ({source(here::here("tools/knit.R")); knit_vignette})
+tether: https://raw.githubusercontent.com/keras-team/keras/master/examples/keras_io/vision/mnist_convnet.py
+---
+
+## Setup
+
+```{r}
+library(keras3)
+```
+
+## Prepare the data
+
+```{r}
+# Model / data parameters
+num_classes <- 10
+input_shape <- c(28, 28, 1)
+
+# Load the data and split it between train and test sets
+c(c(x_train, y_train), c(x_test, y_test)) %<-% dataset_mnist()
+
+# Scale images to the [0, 1] range
+x_train <- x_train / 255
+x_test <- x_test / 255
+# Make sure images have shape (28, 28, 1)
+x_train <- op_expand_dims(x_train, -1)
+x_test <- op_expand_dims(x_test, -1)
+
+
+dim(x_train)
+dim(x_test)
+
+
+# convert class vectors to binary class matrices
+y_train <- to_categorical(y_train, num_classes)
+y_test <- to_categorical(y_test, num_classes)
+```
+
+## Build the model
+
+```{r}
+model <- keras_model_sequential(input_shape = input_shape)
+model %>%
+  layer_conv_2d(filters = 32, kernel_size = c(3, 3), activation = "relu") %>%
+  layer_max_pooling_2d(pool_size = c(2, 2)) %>%
+  layer_conv_2d(filters = 64, kernel_size = c(3, 3), activation = "relu") %>%
+  layer_max_pooling_2d(pool_size = c(2, 2)) %>%
+  layer_flatten() %>%
+  layer_dropout(rate = 0.5) %>%
+  layer_dense(units = num_classes, activation = "softmax")
+
+summary(model)
+```
+
+## Train the model
+
+```{r}
+batch_size <- 128
+epochs <- 15
+
+model %>% compile(
+  loss = "categorical_crossentropy", 
+  optimizer = "adam", 
+  metrics = "accuracy"
+)
+
+model %>% fit(
+  x_train, y_train, 
+  batch_size = batch_size, 
+  epochs = epochs, 
+  validation_split = 0.1
+)
+```
+
+## Evaluate the trained model
+
+```{r}
+score <- model %>% evaluate(x_test, y_test, verbose=0)
+score
+```

@@ -1,0 +1,50 @@
+Help on class L2 in module keras.src.regularizers.regularizers:
+
+class L2(Regularizer)
+ |  L2(l2=0.01)
+ |
+ |  A regularizer that applies a L2 regularization penalty.
+ |
+ |  The L2 regularization penalty is computed as:
+ |  `loss = l2 * reduce_sum(square(x))`
+ |
+ |  L2 may be passed to a layer as a string identifier:
+ |
+ |  >>> dense = Dense(3, kernel_regularizer='l2')
+ |
+ |  In this case, the default value used is `l2=0.01`.
+ |
+ |  Arguments:
+ |      l2: float, L2 regularization factor.
+ |
+ |  Method resolution order:
+ |      L2
+ |      Regularizer
+ |      builtins.object
+ |
+ |  Methods defined here:
+ |
+ |  __call__(self, x)
+ |      Compute a regularization penalty from an input tensor.
+ |
+ |  __init__(self, l2=0.01)
+ |      Initialize self.  See help(type(self)) for accurate signature.
+ |
+ |  get_config(self)
+ |      Returns the config of the regularizer.
+ |
+ |      An regularizer config is a Python dictionary (serializable)
+ |      containing all configuration parameters of the regularizer.
+ |      The same regularizer can be reinstantiated later
+ |      (without any saved state) from this configuration.
+ |
+ |      This method is optional if you are just training and executing models,
+ |      exporting to and from SavedModels, or using weight checkpoints.
+ |
+ |      This method is required for Keras `model_to_estimator`, saving and
+ |      loading models to HDF5 formats, Keras model cloning, some visualization
+ |      utilities, and exporting models to and from JSON.
+ |
+ |      Returns:
+ |          Python dictionary.
+ |

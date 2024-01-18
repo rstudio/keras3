@@ -1,7 +1,6 @@
 
 
 
-
 #' Layer/Model configuration
 #'
 #' A layer config is an object returned from `get_config()` that contains the
@@ -18,10 +17,10 @@
 #' @return `get_config()` returns an object with the configuration,
 #'   `from_config()` returns a re-instantiation of the object.
 #'
-#' @note Objects returned from `get_config()` are not serializable. Therefore,
-#'   if you want to save and restore a model across sessions, you can use the
-#'   `model_to_json()` function (for model configuration only, not weights) or
-#'   the `save_model_tf()` function to save the model configuration and weights
+#' @note Objects returned from `get_config()` are not serializable via RDS. If
+#'   you want to save and restore a model across sessions, you can use
+#'   [`save_model_config()`] (for model configuration only, not weights)
+#'   or [`save_model()`] to save the model configuration and weights
 #'   to the filesystem.
 #'
 #' @family model functions
@@ -29,39 +28,55 @@
 #'
 #' @export
 get_config <- function(object) {
-
-  # call using lower level reticulate functions to prevent conversion to list
-  # (the object will remain a python dictionary for full fidelity)
-  get_fn <- py_get_attr(object, "get_config")
-  config <- py_call(get_fn)
-
-  # set attribute indicating class
-  attr(config, "config_class") <- object$`__class__`
+  config <- object$get_config()
+  attr(config, "__class__") <- object$`__class__`
   config
 }
-
-# model$get_config() returns a nested object of list/dicts, but the contract
-# is that the object is serializable to json, which means that once
-# reticulate conversion rules are redone, the config will be guaranteed to be safe
-# to convert to R and back.
-
-# this py_to_r method is so that model$get_config() can return a pure R object.
-# A keras SharedObjectConfig is a keras dictionary
-#' @export
-py_to_r.keras.utils.generic_utils.SharedObjectConfig <- function(x) {
-  import_builtins()$dict(x)
-}
-
 
 #' @rdname get_config
 #' @export
 from_config <- function(config, custom_objects = NULL) {
-  class <- attr(config, "config_class") %||% keras$Model
+  class <- attr(config, "__class__", TRUE) #%||% keras$Model
+  class <- resolve_py_obj(class, env = parent.frame())
+  if(is.null(class) || reticulate::py_is_null_xptr(class))
+    stop(glue::trim('
+       attr(config, "__class__") is an invalid pointer from a previous R session.
+       The output of `get_config()` is not serializable via RDS.'))
+
   args <- list(config)
-  if(length(custom_objects))
-    args[[2L]] <- objects_with_py_function_names(custom_objects)
+  args$custom_objects <- normalize_custom_objects(custom_objects)
   do.call(class$from_config, args)
 }
+
+
+# TODO: we might be able to make get_config() output serializable via saveRDS,
+# if we replace __class__ with a module address, like
+# `__class__`$`__module__` and `__module__`$`__name__`, but we'd need checks
+# to make sure it's builtin/ importable python module.
+#
+# attr(config, "__class__.__module__") <- `__class__`$`__module__`
+# attr(config, "__class__.__name__") <- `__class__`$`__name__`
+
+# OR: make it serializable only for models:
+# `__class__` <- object$`__class__`
+# if (!py_is(`__class__`, keras$Model))
+#   attr(config, "__class__") <- `__class__`
+# Then in from_config(): class <- attr(...) %||% keras$Model
+
+# @param class The Keras class to restore. This can be:
+# You can update with `attr(config, "__class__") <- <__class__>`, where <__class__> can be
+# - An R function like `layer_dense` or a custom `Layer()` class.
+# - An R language object like `quote(layer_dense)` (will be evaluated in the calling frame)
+# - A Python class object, like `reticulate::import("keras")$layers$Dense`'))
+
+# class <- keras$Model
+# class <- attr(config, "__class__", TRUE)
+# if(is.null(class) || reticulate::py_is_null_xptr(class)) {
+#   stop("`attr(config, '__class__'` is a null pointer from an external session",
+#        "If you know the original config class, you can provide it as an R object (e.g., class = layer_dense)")
+#   class <- import(attr(config, "__class__.__module__", TRUE))[[attr(config, "__class__.__name__")]]
+# }
+
 
 #' Layer/Model weights as R arrays
 #'
@@ -112,75 +127,22 @@ count_params <- function(object) {
 }
 
 
-#' Retrieve tensors for layers with multiple nodes
+
+#' Reset the state for a model, layer or metric.
 #'
-#' Whenever you are calling a layer on some input, you are creating a new tensor
-#' (the output of the layer), and you are adding a "node" to the layer, linking
-#' the input tensor to the output tensor. When you are calling the same layer
-#' multiple times, that layer owns multiple nodes indexed as 1, 2, 3. These
-#' functions enable you to retrieve various tensor properties of layers with
-#' multiple nodes.
+#' @param object Model, Layer, or Metric instance
 #'
-#' @param object Layer or model object
-#'
-#' @param node_index Integer, index of the node from which to retrieve the
-#'   attribute. E.g. `node_index = 1` will correspond to the first time the
-#'   layer was called.
-#'
-#' @return A tensor (or list of tensors if the layer has multiple inputs/outputs).
+#' Not all Layers have resettable state (E.g., `adapt()`-able preprocessing
+#' layers and rnn layers have resettable state, but a `layer_dense()` does not).
+#' Calling this on a Layer instance without any resettable-state will error.
 #'
 #' @family layer methods
+#  @family preprocessing layers
+#  @family metrics
+#  @family rnn layers
 #'
 #' @export
-get_input_at <- function(object, node_index) {
-  object$get_input_at(as_node_index(node_index))
-}
-
-#' @rdname get_input_at
-#' @export
-get_output_at <- function(object, node_index) {
-  object$get_output_at(as_node_index(node_index))
-}
-
-#' @rdname get_input_at
-#' @export
-get_input_shape_at <- function(object, node_index) {
-  object$get_input_shape_at(as_node_index(node_index))
-}
-
-#' @rdname get_input_at
-#' @export
-get_output_shape_at <- function(object, node_index) {
-  object$get_output_shape_at(as_node_index(node_index))
-}
-
-
-#' @rdname get_input_at
-#' @export
-get_input_mask_at <- function(object, node_index) {
-  object$get_input_mask_at(as_node_index(node_index))
-}
-
-#' @rdname get_input_at
-#' @export
-get_output_mask_at <- function(object, node_index) {
-  object$get_output_mask_at(as_node_index(node_index))
-}
-
-
-#' Reset the states for a layer
-#'
-#' @param object Model or layer object
-#'
-#' @family layer methods
-#'
-#' @export
-reset_states <- function(object) {
-  object$reset_states()
+reset_state <- function(object) {
+  object$reset_state()
   invisible(object)
-}
-
-
-as_node_index <- function(node_index) {
-  as.integer(node_index-1)
 }

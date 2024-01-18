@@ -2,12 +2,13 @@
 % Please edit documentation in R/metrics.R
 \name{metric_sparse_categorical_crossentropy}
 \alias{metric_sparse_categorical_crossentropy}
-\title{Computes the crossentropy metric between the labels and predictions}
+\title{Computes the crossentropy metric between the labels and predictions.}
 \usage{
 metric_sparse_categorical_crossentropy(
   y_true,
   y_pred,
   from_logits = FALSE,
+  ignore_class = NULL,
   axis = -1L,
   ...,
   name = "sparse_categorical_crossentropy",
@@ -15,73 +16,148 @@ metric_sparse_categorical_crossentropy(
 )
 }
 \arguments{
-\item{y_true}{Tensor of true targets.}
+\item{y_true}{Ground truth values.}
 
-\item{y_pred}{Tensor of predicted targets.}
+\item{y_pred}{The predicted values.}
 
-\item{from_logits}{(Optional) Whether output is expected to be a logits tensor.
-By default, we consider that output encodes a probability distribution.}
+\item{from_logits}{(Optional) Whether output is expected
+to be a logits tensor. By default, we consider that output
+encodes a probability distribution.}
 
-\item{axis}{(Optional) (1-based) Defaults to -1. The dimension along which the metric is computed.}
+\item{ignore_class}{Optional integer. The ID of a class to be ignored during
+loss computation. This is useful, for example, in segmentation
+problems featuring a "void" class (commonly -1 or 255) in
+segmentation maps. By default (\code{ignore_class=NULL}), all classes are
+considered.}
 
-\item{...}{Passed on to the underlying metric. Used for forwards and backwards compatibility.}
+\item{axis}{(Optional) Defaults to \code{-1}.
+The dimension along which entropy is computed.}
+
+\item{...}{For forward/backward compatability.}
 
 \item{name}{(Optional) string name of the metric instance.}
 
 \item{dtype}{(Optional) data type of the metric result.}
 }
-\value{
-If \code{y_true} and \code{y_pred} are missing, a (subclassed) \code{Metric}
-instance is returned. The \code{Metric} object can be passed directly to
-\code{compile(metrics = )} or used as a standalone object. See \code{?Metric} for
-example usage.
-
-Alternatively, if called with \code{y_true} and \code{y_pred} arguments, then the
-computed case-wise values for the mini-batch are returned directly.
-}
 \description{
-Computes the crossentropy metric between the labels and predictions
-}
-\details{
 Use this crossentropy metric when there are two or more label classes.
-We expect labels to be provided as integers. If you want to provide labels
-using \code{one-hot} representation, please use \code{CategoricalCrossentropy} metric.
-There should be \verb{# classes} floating point values per feature for \code{y_pred}
-and a single floating point value per feature for \code{y_true}.
+It expects labels to be provided as integers. If you want to provide labels
+that are one-hot encoded, please use the \code{metric_categorical_crossentropy()}
+metric instead.
 
-In the snippet below, there is a single floating point value per example for
-\code{y_true} and \verb{# classes} floating pointing values per example for \code{y_pred}.
-The shape of \code{y_true} is \verb{[batch_size]} and the shape of \code{y_pred} is
-\verb{[batch_size, num_classes]}.
+There should be \code{num_classes} floating point values per feature for \code{y_pred}
+and a single floating point value per feature for \code{y_true}.
 }
+\section{Examples}{
+Standalone usage:
+
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{m <- metric_sparse_categorical_crossentropy()
+m$update_state(c(1, 2),
+               rbind(c(0.05, 0.95, 0), c(0.1, 0.8, 0.1)))
+m$result()
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor(1.1769392, shape=(), dtype=float32)
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{m$reset_state()
+m$update_state(c(1, 2),
+               rbind(c(0.05, 0.95, 0), c(0.1, 0.8, 0.1)),
+               sample_weight = c(0.3, 0.7))
+m$result()
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor(1.6271976, shape=(), dtype=float32)
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{# 1.6271976
+}\if{html}{\out{</div>}}
+
+Usage with \code{compile()} API:
+
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{model \%>\% compile(
+    optimizer = 'sgd',
+    loss = 'mse',
+    metrics = list(metric_sparse_categorical_crossentropy()))
+}\if{html}{\out{</div>}}
+}
+
 \seealso{
+\itemize{
+\item \url{https://keras.io/api/metrics/probabilistic_metrics#sparsecategoricalcrossentropy-class}
+}
+
+Other losses: 
+\code{\link{Loss}()},
+\code{\link{loss_binary_crossentropy}()},
+\code{\link{loss_binary_focal_crossentropy}()},
+\code{\link{loss_categorical_crossentropy}()},
+\code{\link{loss_categorical_focal_crossentropy}()},
+\code{\link{loss_categorical_hinge}()},
+\code{\link{loss_cosine_similarity}()},
+\code{\link{loss_hinge}()},
+\code{\link{loss_huber}()},
+\code{\link{loss_kl_divergence}()},
+\code{\link{loss_log_cosh}()},
+\code{\link{loss_mean_absolute_error}()},
+\code{\link{loss_mean_absolute_percentage_error}()},
+\code{\link{loss_mean_squared_error}()},
+\code{\link{loss_mean_squared_logarithmic_error}()},
+\code{\link{loss_poisson}()},
+\code{\link{loss_sparse_categorical_crossentropy}()},
+\code{\link{loss_squared_hinge}()},
+\code{\link{metric_binary_crossentropy}()},
+\code{\link{metric_binary_focal_crossentropy}()},
+\code{\link{metric_categorical_crossentropy}()},
+\code{\link{metric_categorical_focal_crossentropy}()},
+\code{\link{metric_categorical_hinge}()},
+\code{\link{metric_hinge}()},
+\code{\link{metric_huber}()},
+\code{\link{metric_kl_divergence}()},
+\code{\link{metric_log_cosh}()},
+\code{\link{metric_mean_absolute_error}()},
+\code{\link{metric_mean_absolute_percentage_error}()},
+\code{\link{metric_mean_squared_error}()},
+\code{\link{metric_mean_squared_logarithmic_error}()},
+\code{\link{metric_poisson}()},
+\code{\link{metric_squared_hinge}()}
+
 Other metrics: 
+\code{\link{Metric}()},
 \code{\link{custom_metric}()},
-\code{\link{metric_accuracy}()},
 \code{\link{metric_auc}()},
 \code{\link{metric_binary_accuracy}()},
 \code{\link{metric_binary_crossentropy}()},
+\code{\link{metric_binary_focal_crossentropy}()},
+\code{\link{metric_binary_iou}()},
 \code{\link{metric_categorical_accuracy}()},
 \code{\link{metric_categorical_crossentropy}()},
+\code{\link{metric_categorical_focal_crossentropy}()},
 \code{\link{metric_categorical_hinge}()},
 \code{\link{metric_cosine_similarity}()},
+\code{\link{metric_f1_score}()},
 \code{\link{metric_false_negatives}()},
 \code{\link{metric_false_positives}()},
+\code{\link{metric_fbeta_score}()},
 \code{\link{metric_hinge}()},
-\code{\link{metric_kullback_leibler_divergence}()},
-\code{\link{metric_logcosh_error}()},
+\code{\link{metric_huber}()},
+\code{\link{metric_iou}()},
+\code{\link{metric_kl_divergence}()},
+\code{\link{metric_log_cosh_error}()},
+\code{\link{metric_log_cosh}()},
 \code{\link{metric_mean_absolute_error}()},
 \code{\link{metric_mean_absolute_percentage_error}()},
 \code{\link{metric_mean_iou}()},
-\code{\link{metric_mean_relative_error}()},
 \code{\link{metric_mean_squared_error}()},
 \code{\link{metric_mean_squared_logarithmic_error}()},
-\code{\link{metric_mean_tensor}()},
 \code{\link{metric_mean_wrapper}()},
 \code{\link{metric_mean}()},
+\code{\link{metric_one_hot_iou}()},
+\code{\link{metric_one_hot_mean_iou}()},
 \code{\link{metric_poisson}()},
 \code{\link{metric_precision_at_recall}()},
 \code{\link{metric_precision}()},
+\code{\link{metric_r2_score}()},
 \code{\link{metric_recall_at_precision}()},
 \code{\link{metric_recall}()},
 \code{\link{metric_root_mean_squared_error}()},
@@ -94,5 +170,13 @@ Other metrics:
 \code{\link{metric_top_k_categorical_accuracy}()},
 \code{\link{metric_true_negatives}()},
 \code{\link{metric_true_positives}()}
+
+Other probabilistic metrics: 
+\code{\link{metric_binary_crossentropy}()},
+\code{\link{metric_categorical_crossentropy}()},
+\code{\link{metric_kl_divergence}()},
+\code{\link{metric_poisson}()}
 }
+\concept{losses}
 \concept{metrics}
+\concept{probabilistic metrics}

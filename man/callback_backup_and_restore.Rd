@@ -2,59 +2,120 @@
 % Please edit documentation in R/callbacks.R
 \name{callback_backup_and_restore}
 \alias{callback_backup_and_restore}
-\title{Callback to back up and restore the training state}
+\title{Callback to back up and restore the training state.}
 \usage{
-callback_backup_and_restore(backup_dir, ...)
+callback_backup_and_restore(
+  backup_dir,
+  save_freq = "epoch",
+  delete_checkpoint = TRUE
+)
 }
 \arguments{
-\item{backup_dir}{String, path to store the checkpoint.
-e.g. \code{backup_dir = normalizePath('./backup')}
-This is the directory in which the system stores temporary files to
-recover the model from jobs terminated unexpectedly. The directory
-cannot be reused elsewhere to store other files, e.g. by
-\code{BackupAndRestore} callback of another training, or by another callback
-(\code{ModelCheckpoint}) of the same training.}
+\item{backup_dir}{String, path of directory where to store the data
+needed to restore the model. The directory
+cannot be reused elsewhere to store other files, e.g. by the
+\code{backup_and_restore} callback of another training run,
+or by another callback (e.g. \code{callback_model_checkpoint})
+of the same training run.}
 
-\item{...}{For backwards and forwards compatibility}
+\item{save_freq}{\code{"epoch"}, integer, or \code{FALSE}. When set to \code{"epoch"},
+the callback saves the checkpoint at the end of each epoch.
+When set to an integer, the callback saves the checkpoint every
+\code{save_freq} batches. Set \code{save_freq = FALSE} only if using
+preemption checkpointing (i.e. with \code{save_before_preemption = TRUE}).}
+
+\item{delete_checkpoint}{Boolean, defaults to \code{TRUE}. This \code{backup_and_restore}
+callback works by saving a checkpoint to back up the training state.
+If \code{delete_checkpoint = TRUE}, the checkpoint will be deleted after
+training is finished. Use \code{FALSE} if you'd like to keep the checkpoint
+for future usage.}
 }
 \description{
-Callback to back up and restore the training state
-}
-\details{
-\code{BackupAndRestore} callback is intended to recover training from an
-interruption that has happened in the middle of a \code{fit(model)} execution, by
-backing up the training states in a temporary checkpoint file (with the help
-of a \code{tf.train.CheckpointManager}), at the end of each epoch. Each backup
-overwrites the previously written checkpoint file, so at any given time there
-is at most one such checkpoint file for backup/restoring purpose.
+\code{callback_backup_and_restore()} callback is intended to recover training from an
+interruption that has happened in the middle of a \code{fit} execution, by
+backing up the training states in a temporary checkpoint file, at the end of
+each epoch. Each backup overwrites the previously written checkpoint file,
+so at any given time there is at most one such checkpoint file for
+backup/restoring purpose.
 
-If training restarts before completion, the training state (which includes the
-\code{Model} weights and epoch number) is restored to the most recently saved state
-at the beginning of a new \code{fit()} run. At the completion of a \code{fit()}
-run, the temporary checkpoint file is deleted.
+If training restarts before completion, the training state (which includes
+the model weights and epoch number) is restored to the most recently saved
+state at the beginning of a new \code{fit} run. At the completion of a
+\code{fit} run, the temporary checkpoint file is deleted.
 
 Note that the user is responsible to bring jobs back after the interruption.
 This callback is important for the backup and restore mechanism for fault
-tolerance purpose, and the model to be restored from an previous checkpoint is
-expected to be the same as the one used to back up. If user changes arguments
-passed to compile or fit, the checkpoint saved for fault tolerance can become
-invalid.
+tolerance purpose, and the model to be restored from a previous checkpoint
+is expected to be the same as the one used to back up. If user changes
+arguments passed to \code{compile} or \code{fit}, the checkpoint saved for fault tolerance
+can become invalid.
+}
+\section{Examples}{
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{callback_interrupting <- new_callback_class(
+  "InterruptingCallback",
+  on_epoch_begin = function(epoch, logs = NULL) \{
+    if (epoch == 4) \{
+      stop('Interrupting!')
+    \}
+  \}
+)
 
-Note:
-\enumerate{
-\item This callback is not compatible with eager execution disabled.
-\item A checkpoint is saved at the end of each epoch. After restoring,
-\code{fit()} redoes any partial work during the unfinished epoch in which the
-training got restarted (so the work done before the interruption doesn't
-affect the final model state).
-\item This works for both single worker and multi-worker modes. When \code{fit()}
-is used with \code{tf.distribute}, it supports \code{tf.distribute.MirroredStrategy},
-\code{tf.distribute.MultiWorkerMirroredStrategy}, \code{tf.distribute.TPUStrategy}, and
-\code{tf.distribute.experimental.ParameterServerStrategy}.
+backup_dir <- tempfile()
+callback <- callback_backup_and_restore(backup_dir = backup_dir)
+model <- keras_model_sequential() \%>\%
+  layer_dense(10)
+model \%>\% compile(optimizer = optimizer_sgd(), loss = 'mse')
+
+tryCatch(\{
+  model \%>\% fit(x = op_ones(c(5, 20)),
+                y = op_zeros(5),
+                epochs = 10, batch_size = 1,
+                callbacks = list(callback, callback_interrupting()),
+                verbose = 0)
+\}, python.builtin.RuntimeError = function(e) message("Interrupted!"))
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode">}}\preformatted{## Interrupted!
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{model$history$epoch
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode">}}\preformatted{## [1] 0 1 2
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{# model$history \%>\% keras3:::to_keras_training_history() \%>\% as.data.frame() \%>\% print()
+
+history <- model \%>\% fit(x = op_ones(c(5, 20)),
+                         y = op_zeros(5),
+                         epochs = 10, batch_size = 1,
+                         callbacks = list(callback),
+                         verbose = 0)
+
+# Only 6 more epochs are run, since first training got interrupted at
+# zero-indexed epoch 4, second training will continue from 4 to 9.
+nrow(as.data.frame(history))
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode">}}\preformatted{## [1] 10
+}\if{html}{\out{</div>}}
 }
-}
+
 \seealso{
 \itemize{
-\item \url{https://www.tensorflow.org/api_docs/python/tf/keras/callbacks/BackupAndRestore}
+\item \url{https://keras.io/api/callbacks/backup_and_restore#backupandrestore-class}
 }
+
+Other callbacks: 
+\code{\link{Callback}()},
+\code{\link{callback_csv_logger}()},
+\code{\link{callback_early_stopping}()},
+\code{\link{callback_lambda}()},
+\code{\link{callback_learning_rate_scheduler}()},
+\code{\link{callback_model_checkpoint}()},
+\code{\link{callback_reduce_lr_on_plateau}()},
+\code{\link{callback_remote_monitor}()},
+\code{\link{callback_tensorboard}()},
+\code{\link{callback_terminate_on_nan}()}
 }
+\concept{callbacks}

@@ -25,19 +25,10 @@ You can access the Layer/Model as \code{tf.Tensors} or \code{tf.Variables} at
 \code{object$non_trainable_weights}
 }
 \seealso{
-Other model persistence: 
-\code{\link{model_to_json}()},
-\code{\link{model_to_yaml}()},
-\code{\link{save_model_hdf5}()},
-\code{\link{save_model_tf}()},
-\code{\link{save_model_weights_hdf5}()},
-\code{\link{serialize_model}()}
-
 Other layer methods: 
 \code{\link{count_params}()},
 \code{\link{get_config}()},
-\code{\link{get_input_at}()},
-\code{\link{reset_states}()}
+\code{\link{reset_state}()}
 }
 \concept{layer methods}
 \concept{model persistence}

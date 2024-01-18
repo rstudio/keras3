@@ -2,25 +2,16 @@
 % Please edit documentation in R/callbacks.R
 \name{callback_lambda}
 \alias{callback_lambda}
-\title{Create a custom callback}
+\title{Callback for creating simple, custom callbacks on-the-fly.}
 \usage{
 callback_lambda(
   on_epoch_begin = NULL,
   on_epoch_end = NULL,
-  on_batch_begin = NULL,
-  on_batch_end = NULL,
-  on_train_batch_begin = NULL,
-  on_train_batch_end = NULL,
   on_train_begin = NULL,
   on_train_end = NULL,
-  on_predict_batch_begin = NULL,
-  on_predict_batch_end = NULL,
-  on_predict_begin = NULL,
-  on_predict_end = NULL,
-  on_test_batch_begin = NULL,
-  on_test_batch_end = NULL,
-  on_test_begin = NULL,
-  on_test_end = NULL
+  on_train_batch_begin = NULL,
+  on_train_batch_end = NULL,
+  ...
 )
 }
 \arguments{
@@ -28,61 +19,96 @@ callback_lambda(
 
 \item{on_epoch_end}{called at the end of every epoch.}
 
-\item{on_batch_begin}{called at the beginning of every training batch.}
-
-\item{on_batch_end}{called at the end of every training batch.}
-
-\item{on_train_batch_begin}{called at the beginning of every batch.}
-
-\item{on_train_batch_end}{called at the end of every batch.}
-
 \item{on_train_begin}{called at the beginning of model training.}
 
 \item{on_train_end}{called at the end of model training.}
 
-\item{on_predict_batch_begin}{called at the beginning of a batch in predict methods.}
+\item{on_train_batch_begin}{called at the beginning of every train batch.}
 
-\item{on_predict_batch_end}{called at the end of a batch in predict methods.}
+\item{on_train_batch_end}{called at the end of every train batch.}
 
-\item{on_predict_begin}{called at the beginning of prediction.}
-
-\item{on_predict_end}{called at the end of prediction.}
-
-\item{on_test_batch_begin}{called at the beginning of a batch in evaluate methods.
-Also called at the beginning of a validation batch in the fit methods,
-if validation data is provided.}
-
-\item{on_test_batch_end}{called at the end of a batch in evaluate methods.
-Also called at the end of a validation batch in the fit methods,
-if validation data is provided.}
-
-\item{on_test_begin}{called at the beginning of evaluation or validation.}
-
-\item{on_test_end}{called at the end of evaluation or validation.}
+\item{...}{Any function in \code{\link[=Callback]{Callback()}} that you want to override by
+passing \verb{function_name = function}. For example,
+\code{callback_lambda(.., on_train_end = train_end_fn)}. The custom function
+needs to have same arguments as the ones defined in \code{\link[=Callback]{Callback()}}.}
 }
 \description{
-This callback is constructed with anonymous functions that will be called at
-the appropriate time. Note that the callbacks expects positional arguments,
-as:
-}
-\details{
+This callback is constructed with anonymous functions that will be called
+at the appropriate time (during \verb{Model.\{fit | evaluate | predict\}}).
+Note that the callbacks expects positional arguments, as:
 \itemize{
-\item \code{on_epoch_begin} and \code{on_epoch_end} expect two positional arguments: \code{epoch}, \code{logs}
-\item \verb{on_batch_*}, \verb{on_train_batch_*}, \verb{on_predict_batch_*} and \verb{on_test_batch_*}, expect
-two positional arguments: \code{batch}, \code{logs}
-\item \verb{on_train_*}, \verb{on_test_*} and \verb{on_predict_*} expect one positional argument: \code{logs}
+\item \code{on_epoch_begin} and \code{on_epoch_end} expect two positional arguments:
+\code{epoch}, \code{logs}
+\item \code{on_train_begin} and \code{on_train_end} expect one positional argument:
+\code{logs}
+\item \code{on_train_batch_begin} and \code{on_train_batch_end} expect two positional
+arguments: \code{batch}, \code{logs}
+\item See \code{Callback} class definition for the full list of functions and their
+expected arguments.
 }
 }
+\section{Examples}{
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{# Print the batch number at the beginning of every batch.
+batch_print_callback <- callback_lambda(
+  on_train_batch_begin = function(batch, logs) \{
+    print(batch)
+  \}
+)
+
+# Stream the epoch loss to a file in new-line delimited JSON format
+# (one valid JSON object per line)
+json_log <- file('loss_log.json', open = 'wt')
+json_logging_callback <- callback_lambda(
+  on_epoch_end = function(epoch, logs) \{
+    jsonlite::write_json(
+      list(epoch = epoch, loss = logs$loss),
+      json_log,
+      append = TRUE
+    )
+  \},
+  on_train_end = function(logs) \{
+    close(json_log)
+  \}
+)
+
+# Terminate some processes after having finished model training.
+processes <- ...
+cleanup_callback <- callback_lambda(
+  on_train_end = function(logs) \{
+    for (p in processes) \{
+      if (is_alive(p)) \{
+        terminate(p)
+      \}
+    \}
+  \}
+)
+
+model \%>\% fit(
+  ...,
+  callbacks = list(
+    batch_print_callback,
+    json_logging_callback,
+    cleanup_callback
+  )
+)
+}\if{html}{\out{</div>}}
+}
+
 \seealso{
+\itemize{
+\item \url{https://keras.io/api/callbacks/lambda_callback#lambdacallback-class}
+}
+
 Other callbacks: 
+\code{\link{Callback}()},
+\code{\link{callback_backup_and_restore}()},
 \code{\link{callback_csv_logger}()},
 \code{\link{callback_early_stopping}()},
 \code{\link{callback_learning_rate_scheduler}()},
 \code{\link{callback_model_checkpoint}()},
-\code{\link{callback_progbar_logger}()},
 \code{\link{callback_reduce_lr_on_plateau}()},
 \code{\link{callback_remote_monitor}()},
 \code{\link{callback_tensorboard}()},
-\code{\link{callback_terminate_on_naan}()}
+\code{\link{callback_terminate_on_nan}()}
 }
 \concept{callbacks}

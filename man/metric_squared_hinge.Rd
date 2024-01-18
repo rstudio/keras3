@@ -2,62 +2,129 @@
 % Please edit documentation in R/metrics.R
 \name{metric_squared_hinge}
 \alias{metric_squared_hinge}
-\title{Computes the squared hinge metric}
+\title{Computes the hinge metric between \code{y_true} and \code{y_pred}.}
 \usage{
 metric_squared_hinge(y_true, y_pred, ..., name = "squared_hinge", dtype = NULL)
 }
 \arguments{
-\item{y_true}{Tensor of true targets.}
+\item{y_true}{The ground truth values. \code{y_true} values are expected to be -1
+or 1. If binary (0 or 1) labels are provided we will convert them
+to -1 or 1 with shape = \verb{[batch_size, d0, .. dN]}.}
 
-\item{y_pred}{Tensor of predicted targets.}
+\item{y_pred}{The predicted values with shape = \verb{[batch_size, d0, .. dN]}.}
 
-\item{...}{Passed on to the underlying metric. Used for forwards and backwards compatibility.}
+\item{...}{For forward/backward compatability.}
 
 \item{name}{(Optional) string name of the metric instance.}
 
 \item{dtype}{(Optional) data type of the metric result.}
 }
-\value{
-If \code{y_true} and \code{y_pred} are missing, a (subclassed) \code{Metric}
-instance is returned. The \code{Metric} object can be passed directly to
-\code{compile(metrics = )} or used as a standalone object. See \code{?Metric} for
-example usage.
-
-Alternatively, if called with \code{y_true} and \code{y_pred} arguments, then the
-computed case-wise values for the mini-batch are returned directly.
-}
 \description{
+Formula:
+
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{loss <- mean(square(maximum(1 - y_true * y_pred, 0)))
+}\if{html}{\out{</div>}}
+
 \code{y_true} values are expected to be -1 or 1. If binary (0 or 1) labels are
 provided we will convert them to -1 or 1.
 }
+\section{Usage}{
+Standalone usage:
+
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{m <- metric_squared_hinge()
+m$update_state(rbind(c(0, 1), c(0, 0)), rbind(c(0.6, 0.4), c(0.4, 0.6)))
+m$result()
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor(1.86, shape=(), dtype=float32)
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{m$reset_state()
+m$update_state(rbind(c(0, 1), c(0, 0)), rbind(c(0.6, 0.4), c(0.4, 0.6)),
+               sample_weight = c(1, 0))
+m$result()
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor(1.46, shape=(), dtype=float32)
+}\if{html}{\out{</div>}}
+}
+
 \seealso{
+\itemize{
+\item \url{https://keras.io/api/metrics/hinge_metrics#squaredhinge-class}
+}
+
+Other losses: 
+\code{\link{Loss}()},
+\code{\link{loss_binary_crossentropy}()},
+\code{\link{loss_binary_focal_crossentropy}()},
+\code{\link{loss_categorical_crossentropy}()},
+\code{\link{loss_categorical_focal_crossentropy}()},
+\code{\link{loss_categorical_hinge}()},
+\code{\link{loss_cosine_similarity}()},
+\code{\link{loss_hinge}()},
+\code{\link{loss_huber}()},
+\code{\link{loss_kl_divergence}()},
+\code{\link{loss_log_cosh}()},
+\code{\link{loss_mean_absolute_error}()},
+\code{\link{loss_mean_absolute_percentage_error}()},
+\code{\link{loss_mean_squared_error}()},
+\code{\link{loss_mean_squared_logarithmic_error}()},
+\code{\link{loss_poisson}()},
+\code{\link{loss_sparse_categorical_crossentropy}()},
+\code{\link{loss_squared_hinge}()},
+\code{\link{metric_binary_crossentropy}()},
+\code{\link{metric_binary_focal_crossentropy}()},
+\code{\link{metric_categorical_crossentropy}()},
+\code{\link{metric_categorical_focal_crossentropy}()},
+\code{\link{metric_categorical_hinge}()},
+\code{\link{metric_hinge}()},
+\code{\link{metric_huber}()},
+\code{\link{metric_kl_divergence}()},
+\code{\link{metric_log_cosh}()},
+\code{\link{metric_mean_absolute_error}()},
+\code{\link{metric_mean_absolute_percentage_error}()},
+\code{\link{metric_mean_squared_error}()},
+\code{\link{metric_mean_squared_logarithmic_error}()},
+\code{\link{metric_poisson}()},
+\code{\link{metric_sparse_categorical_crossentropy}()}
+
 Other metrics: 
+\code{\link{Metric}()},
 \code{\link{custom_metric}()},
-\code{\link{metric_accuracy}()},
 \code{\link{metric_auc}()},
 \code{\link{metric_binary_accuracy}()},
 \code{\link{metric_binary_crossentropy}()},
+\code{\link{metric_binary_focal_crossentropy}()},
+\code{\link{metric_binary_iou}()},
 \code{\link{metric_categorical_accuracy}()},
 \code{\link{metric_categorical_crossentropy}()},
+\code{\link{metric_categorical_focal_crossentropy}()},
 \code{\link{metric_categorical_hinge}()},
 \code{\link{metric_cosine_similarity}()},
+\code{\link{metric_f1_score}()},
 \code{\link{metric_false_negatives}()},
 \code{\link{metric_false_positives}()},
+\code{\link{metric_fbeta_score}()},
 \code{\link{metric_hinge}()},
-\code{\link{metric_kullback_leibler_divergence}()},
-\code{\link{metric_logcosh_error}()},
+\code{\link{metric_huber}()},
+\code{\link{metric_iou}()},
+\code{\link{metric_kl_divergence}()},
+\code{\link{metric_log_cosh_error}()},
+\code{\link{metric_log_cosh}()},
 \code{\link{metric_mean_absolute_error}()},
 \code{\link{metric_mean_absolute_percentage_error}()},
 \code{\link{metric_mean_iou}()},
-\code{\link{metric_mean_relative_error}()},
 \code{\link{metric_mean_squared_error}()},
 \code{\link{metric_mean_squared_logarithmic_error}()},
-\code{\link{metric_mean_tensor}()},
 \code{\link{metric_mean_wrapper}()},
 \code{\link{metric_mean}()},
+\code{\link{metric_one_hot_iou}()},
+\code{\link{metric_one_hot_mean_iou}()},
 \code{\link{metric_poisson}()},
 \code{\link{metric_precision_at_recall}()},
 \code{\link{metric_precision}()},
+\code{\link{metric_r2_score}()},
 \code{\link{metric_recall_at_precision}()},
 \code{\link{metric_recall}()},
 \code{\link{metric_root_mean_squared_error}()},
@@ -70,5 +137,11 @@ Other metrics:
 \code{\link{metric_top_k_categorical_accuracy}()},
 \code{\link{metric_true_negatives}()},
 \code{\link{metric_true_positives}()}
+
+Other hinge metrics: 
+\code{\link{metric_categorical_hinge}()},
+\code{\link{metric_hinge}()}
 }
+\concept{hinge metrics}
+\concept{losses}
 \concept{metrics}

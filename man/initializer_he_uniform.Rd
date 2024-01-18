@@ -7,18 +7,55 @@
 initializer_he_uniform(seed = NULL)
 }
 \arguments{
-\item{seed}{Integer used to seed the random generator.}
+\item{seed}{A integer or instance of
+\code{random_seed_generator()}.
+Used to make the behavior of the initializer
+deterministic. Note that an initializer seeded with an integer
+or \code{NULL} (unseeded) will produce the same random values
+across multiple calls. To get different random values
+across multiple calls, use as seed an instance
+of \code{random_seed_generator()}.}
 }
 \description{
-It draws samples from a uniform distribution within \verb{-limit, limit} where
-\verb{limit`` is }sqrt(6 / fan_in)\code{where }fan_in` is the number of input units in the
-weight tensor.
+Draws samples from a uniform distribution within \verb{[-limit, limit]}, where
+\code{limit = sqrt(6 / fan_in)} (\code{fan_in} is the number of input units in the
+weight tensor).
 }
-\section{References}{
- He et al., https://arxiv.org/abs/1502.01852
+\section{Examples}{
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{# Standalone usage:
+initializer <- initializer_he_uniform()
+values <- initializer(shape = c(2, 2))
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{# Usage in a Keras layer:
+initializer <- initializer_he_uniform()
+layer <- layer_dense(units = 3, kernel_initializer = initializer)
+}\if{html}{\out{</div>}}
+}
+
+\section{Reference}{
+\itemize{
+\item \href{https://arxiv.org/abs/1502.01852}{He et al., 2015}
+}
 }
 
 \seealso{
+\itemize{
+\item \url{https://keras.io/api/layers/initializers#heuniform-class}
+}
+
+Other random initializers: 
+\code{\link{initializer_glorot_normal}()},
+\code{\link{initializer_glorot_uniform}()},
+\code{\link{initializer_he_normal}()},
+\code{\link{initializer_lecun_normal}()},
+\code{\link{initializer_lecun_uniform}()},
+\code{\link{initializer_orthogonal}()},
+\code{\link{initializer_random_normal}()},
+\code{\link{initializer_random_uniform}()},
+\code{\link{initializer_truncated_normal}()},
+\code{\link{initializer_variance_scaling}()}
+
 Other initializers: 
 \code{\link{initializer_constant}()},
 \code{\link{initializer_glorot_normal}()},
@@ -36,3 +73,4 @@ Other initializers:
 \code{\link{initializer_zeros}()}
 }
 \concept{initializers}
+\concept{random initializers}

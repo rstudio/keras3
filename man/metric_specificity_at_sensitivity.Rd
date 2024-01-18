@@ -2,7 +2,7 @@
 % Please edit documentation in R/metrics.R
 \name{metric_specificity_at_sensitivity}
 \alias{metric_specificity_at_sensitivity}
-\title{Computes best specificity where sensitivity is >= specified value}
+\title{Computes best specificity where sensitivity is >= specified value.}
 \usage{
 metric_specificity_at_sensitivity(
   ...,
@@ -14,7 +14,7 @@ metric_specificity_at_sensitivity(
 )
 }
 \arguments{
-\item{...}{Passed on to the underlying metric. Used for forwards and backwards compatibility.}
+\item{...}{For forward/backward compatability.}
 
 \item{sensitivity}{A scalar value in range \verb{[0, 1]}.}
 
@@ -29,64 +29,105 @@ This must be in the half-open interval \verb{[0, num_classes)}, where
 
 \item{dtype}{(Optional) data type of the metric result.}
 }
-\value{
-A (subclassed) \code{Metric} instance that can be passed directly to
-\code{compile(metrics = )}, or used as a standalone object. See \code{?Metric} for
-example usage.
-}
 \description{
-Computes best specificity where sensitivity is >= specified value
-}
-\details{
 \code{Sensitivity} measures the proportion of actual positives that are correctly
 identified as such \code{(tp / (tp + fn))}.
 \code{Specificity} measures the proportion of actual negatives that are correctly
 identified as such \code{(tn / (tn + fp))}.
 
-This metric creates four local variables, \code{true_positives}, \code{true_negatives},
-\code{false_positives} and \code{false_negatives} that are used to compute the
-specificity at the given sensitivity. The threshold for the given sensitivity
-value is computed and used to evaluate the corresponding specificity.
+This metric creates four local variables, \code{true_positives},
+\code{true_negatives}, \code{false_positives} and \code{false_negatives} that are used to
+compute the specificity at the given sensitivity. The threshold for the
+given sensitivity value is computed and used to evaluate the corresponding
+specificity.
 
 If \code{sample_weight} is \code{NULL}, weights default to 1.
 Use \code{sample_weight} of 0 to mask values.
 
 If \code{class_id} is specified, we calculate precision by considering only the
-entries in the batch for which \code{class_id} is above the threshold predictions,
-and computing the fraction of them for which \code{class_id} is indeed a correct
-label.
+entries in the batch for which \code{class_id} is above the threshold
+predictions, and computing the fraction of them for which \code{class_id} is
+indeed a correct label.
 
 For additional information about specificity and sensitivity, see
 \href{https://en.wikipedia.org/wiki/Sensitivity_and_specificity}{the following}.
 }
+\section{Usage}{
+Standalone usage:
+
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{m <- metric_specificity_at_sensitivity(sensitivity = 0.5)
+m$update_state(c(0, 0, 0, 1, 1), c(0, 0.3, 0.8, 0.3, 0.8))
+# m$result()
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{m$reset_state()
+m$update_state(c(0, 0, 0, 1, 1), c(0, 0.3, 0.8, 0.3, 0.8),
+               sample_weight = c(1, 1, 2, 2, 2))
+# m$result()
+}\if{html}{\out{</div>}}
+
+Usage with \code{compile()} API:
+
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{model \%>\% compile(
+  optimizer = 'sgd',
+  loss = 'mse',
+  metrics = list(metric_sensitivity_at_specificity()))
+}\if{html}{\out{</div>}}
+}
+
 \seealso{
+\itemize{
+\item \url{https://keras.io/api/metrics/classification_metrics#specificityatsensitivity-class}
+}
+
+Other confusion metrics: 
+\code{\link{metric_auc}()},
+\code{\link{metric_false_negatives}()},
+\code{\link{metric_false_positives}()},
+\code{\link{metric_precision_at_recall}()},
+\code{\link{metric_precision}()},
+\code{\link{metric_recall_at_precision}()},
+\code{\link{metric_recall}()},
+\code{\link{metric_sensitivity_at_specificity}()},
+\code{\link{metric_true_negatives}()},
+\code{\link{metric_true_positives}()}
+
 Other metrics: 
+\code{\link{Metric}()},
 \code{\link{custom_metric}()},
-\code{\link{metric_accuracy}()},
 \code{\link{metric_auc}()},
 \code{\link{metric_binary_accuracy}()},
 \code{\link{metric_binary_crossentropy}()},
+\code{\link{metric_binary_focal_crossentropy}()},
+\code{\link{metric_binary_iou}()},
 \code{\link{metric_categorical_accuracy}()},
 \code{\link{metric_categorical_crossentropy}()},
+\code{\link{metric_categorical_focal_crossentropy}()},
 \code{\link{metric_categorical_hinge}()},
 \code{\link{metric_cosine_similarity}()},
+\code{\link{metric_f1_score}()},
 \code{\link{metric_false_negatives}()},
 \code{\link{metric_false_positives}()},
+\code{\link{metric_fbeta_score}()},
 \code{\link{metric_hinge}()},
-\code{\link{metric_kullback_leibler_divergence}()},
-\code{\link{metric_logcosh_error}()},
+\code{\link{metric_huber}()},
+\code{\link{metric_iou}()},
+\code{\link{metric_kl_divergence}()},
+\code{\link{metric_log_cosh_error}()},
+\code{\link{metric_log_cosh}()},
 \code{\link{metric_mean_absolute_error}()},
 \code{\link{metric_mean_absolute_percentage_error}()},
 \code{\link{metric_mean_iou}()},
-\code{\link{metric_mean_relative_error}()},
 \code{\link{metric_mean_squared_error}()},
 \code{\link{metric_mean_squared_logarithmic_error}()},
-\code{\link{metric_mean_tensor}()},
 \code{\link{metric_mean_wrapper}()},
 \code{\link{metric_mean}()},
+\code{\link{metric_one_hot_iou}()},
+\code{\link{metric_one_hot_mean_iou}()},
 \code{\link{metric_poisson}()},
 \code{\link{metric_precision_at_recall}()},
 \code{\link{metric_precision}()},
+\code{\link{metric_r2_score}()},
 \code{\link{metric_recall_at_precision}()},
 \code{\link{metric_recall}()},
 \code{\link{metric_root_mean_squared_error}()},
@@ -100,4 +141,5 @@ Other metrics:
 \code{\link{metric_true_negatives}()},
 \code{\link{metric_true_positives}()}
 }
+\concept{confusion metrics}
 \concept{metrics}

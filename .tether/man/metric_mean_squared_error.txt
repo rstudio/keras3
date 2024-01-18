@@ -1,0 +1,43 @@
+Help on class MeanSquaredError in module keras.src.metrics.regression_metrics:
+
+class MeanSquaredError(keras.src.metrics.reduction_metrics.MeanMetricWrapper)
+ |  MeanSquaredError(name='mean_squared_error', dtype=None)
+ |
+ |  Computes the mean squared error between `y_true` and `y_pred`.
+ |
+ |  Formula:
+ |
+ |  ```python
+ |  loss = mean(square(y_true - y_pred))
+ |  ```
+ |
+ |  Args:
+ |      name: (Optional) string name of the metric instance.
+ |      dtype: (Optional) data type of the metric result.
+ |
+ |  Example:
+ |
+ |  >>> m = keras.metrics.MeanSquaredError()
+ |  >>> m.update_state([[0, 1], [0, 0]], [[1, 1], [0, 0]])
+ |  >>> m.result()
+ |  0.25
+ |
+ |  Method resolution order:
+ |      MeanSquaredError
+ |      keras.src.metrics.reduction_metrics.MeanMetricWrapper
+ |      keras.src.metrics.reduction_metrics.Mean
+ |      keras.src.metrics.metric.Metric
+ |      builtins.object
+ |
+ |  Methods defined here:
+ |
+ |  __init__(
+ |    self,
+ |    name='mean_squared_error',
+ |    dtype=None
+ |  )
+ |      Initialize self.  See help(type(self)) for accurate signature.
+ |
+ |  get_config(self)
+ |      Return the serializable config of the metric.
+ |

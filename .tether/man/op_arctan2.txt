@@ -1,0 +1,39 @@
+__signature__
+keras.ops.arctan2(x1, x2)
+__doc__
+Element-wise arc tangent of `x1/x2` choosing the quadrant correctly.
+
+The quadrant (i.e., branch) is chosen so that `arctan2(x1, x2)` is the
+signed angle in radians between the ray ending at the origin and passing
+through the point `(1, 0)`, and the ray ending at the origin and passing
+through the point `(x2, x1)`. (Note the role reversal: the "y-coordinate"
+is the first function parameter, the "x-coordinate" is the second.) By IEEE
+convention, this function is defined for `x2 = +/-0` and for either or both
+of `x1` and `x2` `= +/-inf`.
+
+Args:
+    x1: First input tensor.
+    x2: Second input tensor.
+
+Returns:
+    Tensor of angles in radians, in the range `[-pi, pi]`.
+
+Examples:
+Consider four points in different quadrants:
+>>> x = keras.ops.convert_to_tensor([-1, +1, +1, -1])
+>>> y = keras.ops.convert_to_tensor([-1, -1, +1, +1])
+>>> keras.ops.arctan2(y, x) * 180 / numpy.pi
+array([-135., -45., 45., 135.], dtype=float32)
+
+Note the order of the parameters. `arctan2` is defined also when x2=0 and
+at several other points, obtaining values in the range `[-pi, pi]`:
+>>> keras.ops.arctan2(
+...     keras.ops.array([1., -1.]),
+...     keras.ops.array([0., 0.]),
+... )
+array([ 1.5707964, -1.5707964], dtype=float32)
+>>> keras.ops.arctan2(
+...     keras.ops.array([0., 0., numpy.inf]),
+...     keras.ops.array([+0., -0., numpy.inf]),
+... )
+array([0., 3.1415925, 0.7853982], dtype=float32)

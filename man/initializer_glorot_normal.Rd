@@ -2,25 +2,61 @@
 % Please edit documentation in R/initializers.R
 \name{initializer_glorot_normal}
 \alias{initializer_glorot_normal}
-\title{Glorot normal initializer, also called Xavier normal initializer.}
+\title{The Glorot normal initializer, also called Xavier normal initializer.}
 \usage{
 initializer_glorot_normal(seed = NULL)
 }
 \arguments{
-\item{seed}{Integer used to seed the random generator.}
+\item{seed}{An integer or instance of
+\code{random_seed_generator()}.
+Used to make the behavior of the initializer
+deterministic. Note that an initializer seeded with an integer
+or \code{NULL} (unseeded) will produce the same random values
+across multiple calls. To get different random values
+across multiple calls, use as seed an instance
+of \code{random_seed_generator()}.}
 }
 \description{
-It draws samples from a truncated normal distribution centered on 0
-with \code{stddev = sqrt(2 / (fan_in + fan_out))}
-where \code{fan_in} is the number of input units in the weight tensor
-and \code{fan_out} is the number of output units in the weight tensor.
+Draws samples from a truncated normal distribution centered on 0 with
+\code{stddev = sqrt(2 / (fan_in + fan_out))} where \code{fan_in} is the number of
+input units in the weight tensor and \code{fan_out} is the number of output units
+in the weight tensor.
 }
-\section{References}{
+\section{Examples}{
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{# Standalone usage:
+initializer <- initializer_glorot_normal()
+values <- initializer(shape = c(2, 2))
+}\if{html}{\out{</div>}}
 
-Glorot & Bengio, AISTATS 2010 \url{https://proceedings.mlr.press/v9/glorot10a/glorot10a.pdf}
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{# Usage in a Keras layer:
+initializer <- initializer_glorot_normal()
+layer <- layer_dense(units = 3, kernel_initializer = initializer)
+}\if{html}{\out{</div>}}
+}
+
+\section{Reference}{
+\itemize{
+\item \href{https://proceedings.mlr.press/v9/glorot10a.html}{Glorot et al., 2010}
+}
 }
 
 \seealso{
+\itemize{
+\item \url{https://keras.io/api/layers/initializers#glorotnormal-class}
+}
+
+Other random initializers: 
+\code{\link{initializer_glorot_uniform}()},
+\code{\link{initializer_he_normal}()},
+\code{\link{initializer_he_uniform}()},
+\code{\link{initializer_lecun_normal}()},
+\code{\link{initializer_lecun_uniform}()},
+\code{\link{initializer_orthogonal}()},
+\code{\link{initializer_random_normal}()},
+\code{\link{initializer_random_uniform}()},
+\code{\link{initializer_truncated_normal}()},
+\code{\link{initializer_variance_scaling}()}
+
 Other initializers: 
 \code{\link{initializer_constant}()},
 \code{\link{initializer_glorot_uniform}()},
@@ -38,3 +74,4 @@ Other initializers:
 \code{\link{initializer_zeros}()}
 }
 \concept{initializers}
+\concept{random initializers}

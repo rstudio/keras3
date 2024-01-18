@@ -9,7 +9,28 @@ initializer_zeros()
 \description{
 Initializer that generates tensors initialized to 0.
 }
+\section{Examples}{
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{# Standalone usage:
+initializer <- initializer_zeros()
+values <- initializer(shape = c(2, 2))
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{# Usage in a Keras layer:
+initializer <- initializer_zeros()
+layer <- layer_dense(units = 3, kernel_initializer = initializer)
+}\if{html}{\out{</div>}}
+}
+
 \seealso{
+\itemize{
+\item \url{https://keras.io/api/layers/initializers#zeros-class}
+}
+
+Other constant initializers: 
+\code{\link{initializer_constant}()},
+\code{\link{initializer_identity}()},
+\code{\link{initializer_ones}()}
+
 Other initializers: 
 \code{\link{initializer_constant}()},
 \code{\link{initializer_glorot_normal}()},
@@ -26,4 +47,5 @@ Other initializers:
 \code{\link{initializer_truncated_normal}()},
 \code{\link{initializer_variance_scaling}()}
 }
+\concept{constant initializers}
 \concept{initializers}

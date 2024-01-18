@@ -2,8 +2,7 @@
 % Please edit documentation in R/applications.R
 \name{application_inception_v3}
 \alias{application_inception_v3}
-\alias{inception_v3_preprocess_input}
-\title{Inception V3 model, with weights pre-trained on ImageNet.}
+\title{Instantiates the Inception v3 architecture.}
 \usage{
 application_inception_v3(
   include_top = TRUE,
@@ -11,78 +10,87 @@ application_inception_v3(
   input_tensor = NULL,
   input_shape = NULL,
   pooling = NULL,
-  classes = 1000,
-  classifier_activation = "softmax",
-  ...
+  classes = 1000L,
+  classifier_activation = "softmax"
 )
-
-inception_v3_preprocess_input(x)
 }
 \arguments{
-\item{include_top}{Whether to include the fully-connected
-layer at the top of the network. Defaults to \code{TRUE}.}
+\item{include_top}{Boolean, whether to include the fully-connected
+layer at the top, as the last layer of the network.
+Defaults to \code{TRUE}.}
 
 \item{weights}{One of \code{NULL} (random initialization),
-\code{'imagenet'} (pre-training on ImageNet),
-or the path to the weights file to be loaded. Defaults to \code{'imagenet'}.}
+\code{imagenet} (pre-training on ImageNet),
+or the path to the weights file to be loaded.
+Defaults to \code{"imagenet"}.}
 
-\item{input_tensor}{Optional Keras tensor
-(i.e. output of \code{layer_input()})
-to use as image input for the model.}
+\item{input_tensor}{Optional Keras tensor (i.e. output of \code{layers.Input()})
+to use as image input for the model. \code{input_tensor} is useful for
+sharing inputs between multiple different networks.
+Defaults to \code{NULL}.}
 
-\item{input_shape}{optional shape list, only to be specified
-if \code{include_top} is FALSE (otherwise the input shape
-has to be \verb{(299, 299, 3)}.
+\item{input_shape}{Optional shape tuple, only to be specified
+if \code{include_top} is \code{FALSE} (otherwise the input shape
+has to be \verb{(299, 299, 3)} (with \code{channels_last} data format)
+or \verb{(3, 299, 299)} (with \code{channels_first} data format).
 It should have exactly 3 inputs channels,
-and width and height should be no smaller than 71.
-E.g. \verb{(150, 150, 3)} would be one valid value.}
+and width and height should be no smaller than 75.
+E.g. \verb{(150, 150, 3)} would be one valid value.
+\code{input_shape} will be ignored if the \code{input_tensor} is provided.}
 
 \item{pooling}{Optional pooling mode for feature extraction
-when \code{include_top} is \code{FALSE}. Defaults to \code{NULL}.
+when \code{include_top} is \code{FALSE}.
 \itemize{
-\item \code{NULL} means that the output of the model will be
-the 4D tensor output of the
-last convolutional layer.
-\item \code{'avg'} means that global average pooling
+\item \code{NULL} (default) means that the output of the model will be
+the 4D tensor output of the last convolutional block.
+\item \code{avg} means that global average pooling
 will be applied to the output of the
-last convolutional layer, and thus
+last convolutional block, and thus
 the output of the model will be a 2D tensor.
-\item \code{'max'} means that global max pooling will
-be applied.
+\item \code{max} means that global max pooling will be applied.
 }}
 
-\item{classes}{Optional number of classes to classify images into, only to be
-specified if \code{include_top} is TRUE, and if no \code{weights} argument is
-specified. Defaults to 1000 (number of ImageNet classes).}
+\item{classes}{optional number of classes to classify images
+into, only to be specified if \code{include_top} is \code{TRUE}, and
+if no \code{weights} argument is specified. Defaults to 1000.}
 
-\item{classifier_activation}{A string or callable. The activation function to
-use on the "top" layer. Ignored unless \code{include_top = TRUE}. Set
-\code{classifier_activation = NULL} to return the logits of the "top" layer.
-Defaults to \code{'softmax'}. When loading pretrained weights,
-\code{classifier_activation} can only be \code{NULL} or \code{"softmax"}.}
-
-\item{...}{For backwards and forwards compatibility}
-
-\item{x}{\code{preprocess_input()} takes an array or floating point tensor, 3D or
-4D with 3 color channels, with values in the range \verb{[0, 255]}.}
+\item{classifier_activation}{A \code{str} or callable. The activation function
+to use on the "top" layer. Ignored unless \code{include_top=TRUE}.
+Set \code{classifier_activation=NULL} to return the logits of the "top"
+layer. When loading pretrained weights, \code{classifier_activation}
+can only be \code{NULL} or \code{"softmax"}.}
 }
 \value{
-A Keras model instance.
+A model instance.
 }
 \description{
-Inception V3 model, with weights pre-trained on ImageNet.
-}
-\details{
-Do note that the input image format for this model is different than for
-the VGG16 and ResNet models (299x299 instead of 224x224).
-
-The \code{inception_v3_preprocess_input()} function should be used for image
-preprocessing.
+Instantiates the Inception v3 architecture.
 }
 \section{Reference}{
-
 \itemize{
-\item \href{https://arxiv.org/abs/1512.00567}{Rethinking the Inception Architecture for Computer Vision}
-}
+\item \href{https://arxiv.org/abs/1512.00567}{Rethinking the Inception Architecture for Computer Vision} (CVPR 2016)
 }
 
+This function returns a Keras image classification model,
+optionally loaded with weights pre-trained on ImageNet.
+
+For image classification use cases, see
+\href{https://keras.io/api/applications/#usage-examples-for-image-classification-models}{this page for detailed examples}.
+
+For transfer learning use cases, make sure to read the
+\href{https://keras.io/guides/transfer_learning/}{guide to transfer learning & fine-tuning}.
+}
+
+\section{Note}{
+Each Keras Application expects a specific kind of input preprocessing.
+For \code{InceptionV3}, call
+\code{\link[=application_preprocess_inputs]{application_preprocess_inputs()}} on your inputs
+before passing them to the model.
+\code{\link[=application_preprocess_inputs]{application_preprocess_inputs()}} will scale input pixels between \code{-1} and \code{1}.
+}
+
+\seealso{
+\itemize{
+\item \url{https://keras.io/api/applications/inceptionv3#inceptionv3-function}
+}
+}

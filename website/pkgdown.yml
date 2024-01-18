@@ -1,79 +1,36 @@
-pandoc: 2.17.1.1
-pkgdown: 2.0.3
+pandoc: 3.1.11
+pkgdown: 2.0.7
 pkgdown_sha: ~
 articles:
-  applications: applications.html
-  custom_layers: custom_layers.html
-  custom_models: custom_models.html
-  addition_rnn: examples/addition_rnn.html
-  babi_memnn: examples/babi_memnn.html
-  babi_rnn: examples/babi_rnn.html
-  cifar10_cnn: examples/cifar10_cnn.html
-  cifar10_densenet: examples/cifar10_densenet.html
-  cifar10_resnet: examples/cifar10_resnet.html
-  conv_filter_visualization: examples/conv_filter_visualization.html
-  conv_lstm: examples/conv_lstm.html
-  deep_dream: examples/deep_dream.html
-  eager_cvae: examples/eager_cvae.html
-  eager_dcgan: examples/eager_dcgan.html
-  eager_image_captioning: examples/eager_image_captioning.html
-  eager_pix2pix: examples/eager_pix2pix.html
-  eager_styletransfer: examples/eager_styletransfer.html
-  fine_tuning: examples/fine_tuning.html
-  image_ocr: examples/image_ocr.html
-  imdb_bidirectional_lstm: examples/imdb_bidirectional_lstm.html
-  imdb_cnn: examples/imdb_cnn.html
-  imdb_cnn_lstm: examples/imdb_cnn_lstm.html
-  imdb_fasttext: examples/imdb_fasttext.html
-  imdb_lstm: examples/imdb_lstm.html
+  custom_train_step_in_jax: custom_train_step_in_jax.html
+  custom_train_step_in_tensorflow: custom_train_step_in_tensorflow.html
+  custom_train_step_in_torch: custom_train_step_in_torch.html
+  customizing_saving_and_serialization: customizing_saving_and_serialization.html
+  distributed_training_with_jax: distributed_training_with_jax.html
+  distributed_training_with_tensorflow: distributed_training_with_tensorflow.html
+  distributed_training_with_torch: distributed_training_with_torch.html
+  autoencoder: examples/autoencoder.html
   index: examples/index.html
-  lstm_benchmark: examples/lstm_benchmark.html
-  lstm_seq2seq: examples/lstm_seq2seq.html
-  lstm_stateful: examples/lstm_stateful.html
-  lstm_text_generation: examples/lstm_text_generation.html
-  mmd_cvae: examples/mmd_cvae.html
-  mnist_acgan: examples/mnist_acgan.html
-  mnist_antirectifier: examples/mnist_antirectifier.html
-  mnist_cnn: examples/mnist_cnn.html
-  mnist_cnn_embeddings: examples/mnist_cnn_embeddings.html
-  mnist_dataset_api: examples/mnist_dataset_api.html
-  mnist_hierarchical_rnn: examples/mnist_hierarchical_rnn.html
-  mnist_irnn: examples/mnist_irnn.html
-  mnist_mlp: examples/mnist_mlp.html
-  mnist_net2net: examples/mnist_net2net.html
-  mnist_siamese_graph: examples/mnist_siamese_graph.html
-  mnist_swwae: examples/mnist_swwae.html
-  mnist_tfrecord: examples/mnist_tfrecord.html
-  mnist_transfer_cnn: examples/mnist_transfer_cnn.html
-  neural_style_transfer: examples/neural_style_transfer.html
-  nmt_attention: examples/nmt_attention.html
-  nueral_doodle: examples/nueral_doodle.html
-  pretrained_word_embeddings: examples/pretrained_word_embeddings.html
-  quora_siamese_lstm: examples/quora_siamese_lstm.html
-  reuters_mlp: examples/reuters_mlp.html
-  reuters_mlp_relu_vs_selu: examples/reuters_mlp_relu_vs_selu.html
-  stateful_lstm: examples/stateful_lstm.html
-  text_explanation_lime: examples/text_explanation_lime.html
-  tfprob_vae: examples/tfprob_vae.html
-  unet: examples/unet.html
-  unet_linux: examples/unet_linux.html
-  variational_autoencoder: examples/variational_autoencoder.html
-  variational_autoencoder_deconv: examples/variational_autoencoder_deconv.html
-  vq_vae: examples/vq_vae.html
-  faq: faq.html
+  mnist_convnet: examples/mnist_convnet.html
+  oxford_pets_image_segmentation: examples/oxford_pets_image_segmentation.html
+  text_classification_from_scratch: examples/text_classification_from_scratch.html
   functional_api: functional_api.html
-  guide_keras: guide_keras.html
-  index: index.html
-  customizing_what_happens_in_fit: new-guides/customizing_what_happens_in_fit.html
-  making_new_layers_and_models_via_subclassing: new-guides/making_new_layers_and_models_via_subclassing.html
-  preprocessing_layers: new-guides/preprocessing_layers.html
-  python_subclasses: new-guides/python_subclasses.html
-  transfer_learning: new-guides/transfer_learning.html
-  working_with_rnns: new-guides/working_with_rnns.html
-  writing_your_own_callbacks: new-guides/writing_your_own_callbacks.html
-  saving_serializing: saving_serializing.html
+  getting_started: getting_started.html
+  intro_to_keras_for_engineers: intro_to_keras_for_engineers.html
+  intro_to_keras_for_researchers: intro_to_keras_for_researchers.html
+  making_new_layers_and_models_via_subclassing: making_new_layers_and_models_via_subclassing.html
   sequential_model: sequential_model.html
-  training_callbacks: training_callbacks.html
-  training_visualization: training_visualization.html
-last_built: 2022-05-04T17:39Z
+  serialization_and_saving: serialization_and_saving.html
+  training_with_built_in_methods: training_with_built_in_methods.html
+  transfer_learning: transfer_learning.html
+  understanding_masking_and_padding: understanding_masking_and_padding.html
+  writing_a_custom_training_loop_in_jax: writing_a_custom_training_loop_in_jax.html
+  writing_a_custom_training_loop_in_tensorflow: writing_a_custom_training_loop_in_tensorflow.html
+  writing_a_custom_training_loop_in_torch: writing_a_custom_training_loop_in_torch.html
+  writing_a_training_loop_from_scratch: writing_a_training_loop_from_scratch.html
+  writing_your_own_callbacks: writing_your_own_callbacks.html
+last_built: 2024-01-18T15:40Z
+urls:
+  reference: https://keras.posit.co/reference
+  article: https://keras.posit.co/articles
 

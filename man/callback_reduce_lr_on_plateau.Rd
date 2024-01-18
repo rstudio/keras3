@@ -7,54 +7,71 @@
 callback_reduce_lr_on_plateau(
   monitor = "val_loss",
   factor = 0.1,
-  patience = 10,
-  verbose = 0,
-  mode = c("auto", "min", "max"),
+  patience = 10L,
+  verbose = 0L,
+  mode = "auto",
   min_delta = 1e-04,
-  cooldown = 0,
-  min_lr = 0
+  cooldown = 0L,
+  min_lr = 0L,
+  ...
 )
 }
 \arguments{
-\item{monitor}{quantity to be monitored.}
+\item{monitor}{String. Quantity to be monitored.}
 
-\item{factor}{factor by which the learning rate will be reduced. new_lr = lr
-\* factor}
+\item{factor}{Numeric. Factor by which the learning rate will be reduced.
+\code{new_lr = lr * factor}.}
 
-\item{patience}{number of epochs with no improvement after which learning
-rate will be reduced.}
+\item{patience}{Integer. Number of epochs with no improvement after which
+learning rate will be reduced.}
 
-\item{verbose}{int. 0: quiet, 1: update messages.}
+\item{verbose}{Integer. 0: quiet, 1: update messages.}
 
-\item{mode}{one of "auto", "min", "max". In min mode, lr will be reduced when
-the quantity monitored has stopped decreasing; in max mode it will be
-reduced when the quantity monitored has stopped increasing; in auto mode,
-the direction is automatically inferred from the name of the monitored
-quantity.}
+\item{mode}{String. One of \verb{\{'auto', 'min', 'max'\}}. In \code{'min'} mode,
+the learning rate will be reduced when the
+quantity monitored has stopped decreasing; in \code{'max'} mode it will
+be reduced when the quantity monitored has stopped increasing; in
+\code{'auto'} mode, the direction is automatically inferred from the name
+of the monitored quantity.}
 
-\item{min_delta}{threshold for measuring the new optimum, to only focus on
-significant changes.}
+\item{min_delta}{Numeric. Threshold for measuring the new optimum, to only focus
+on significant changes.}
 
-\item{cooldown}{number of epochs to wait before resuming normal operation
-after lr has been reduced.}
+\item{cooldown}{Integer. Number of epochs to wait before resuming normal
+operation after the learning rate has been reduced.}
 
-\item{min_lr}{lower bound on the learning rate.}
+\item{min_lr}{Numeric. Lower bound on the learning rate.}
+
+\item{...}{For forward/backward compatability.}
 }
 \description{
-Models often benefit from reducing the learning rate by a factor of 2-10 once
-learning stagnates. This callback monitors a quantity and if no improvement
-is seen for a 'patience' number of epochs, the learning rate is reduced.
+Models often benefit from reducing the learning rate by a factor
+of 2-10 once learning stagnates. This callback monitors a
+quantity and if no improvement is seen for a 'patience' number
+of epochs, the learning rate is reduced.
 }
+\section{Examples}{
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{reduce_lr <- callback_reduce_lr_on_plateau(monitor = 'val_loss', factor = 0.2,
+                                           patience = 5, min_lr = 0.001)
+model \%>\% fit(x_train, y_train, callbacks = list(reduce_lr))
+}\if{html}{\out{</div>}}
+}
+
 \seealso{
+\itemize{
+\item \url{https://keras.io/api/callbacks/reduce_lr_on_plateau#reducelronplateau-class}
+}
+
 Other callbacks: 
+\code{\link{Callback}()},
+\code{\link{callback_backup_and_restore}()},
 \code{\link{callback_csv_logger}()},
 \code{\link{callback_early_stopping}()},
 \code{\link{callback_lambda}()},
 \code{\link{callback_learning_rate_scheduler}()},
 \code{\link{callback_model_checkpoint}()},
-\code{\link{callback_progbar_logger}()},
 \code{\link{callback_remote_monitor}()},
 \code{\link{callback_tensorboard}()},
-\code{\link{callback_terminate_on_naan}()}
+\code{\link{callback_terminate_on_nan}()}
 }
 \concept{callbacks}

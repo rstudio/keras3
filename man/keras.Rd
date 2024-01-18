@@ -5,16 +5,13 @@
 \alias{keras}
 \title{Main Keras module}
 \format{
-An object of class \code{python.builtin.module} (inherits from \code{python.builtin.object}) of length 0.
-}
-\usage{
-keras
+An object of class \code{python.builtin.module}
 }
 \value{
 the keras Python module
 }
 \description{
 The \code{keras} module object is the equivalent of
-\code{keras <- tensorflow::tf$keras} and provided mainly as a convenience.
+\code{reticulate::import("keras")} and provided mainly as a convenience.
 }
 \keyword{datasets}

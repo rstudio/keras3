@@ -12,47 +12,51 @@ layer_random_zoom(
   interpolation = "bilinear",
   seed = NULL,
   fill_value = 0,
+  data_format = NULL,
   ...
 )
 }
 \arguments{
-\item{object}{What to compose the new \code{Layer} instance with. Typically a
-Sequential model or a Tensor (e.g., as returned by \code{layer_input()}).
-The return value depends on \code{object}. If \code{object} is:
+\item{object}{Object to compose the layer with. A tensor, array, or sequential model.}
+
+\item{height_factor}{a float represented as fraction of value, or a list of
+size 2 representing lower and upper bound for zooming vertically.
+When represented as a single float, this value is used for both the
+upper and lower bound. A positive value means zooming out, while a
+negative value means zooming in. For instance,
+\code{height_factor=c(0.2, 0.3)} result in an output zoomed out by a
+random amount in the range \verb{[+20\%, +30\%]}.
+\code{height_factor=c(-0.3, -0.2)} result in an output zoomed in by a
+random amount in the range \verb{[+20\%, +30\%]}.}
+
+\item{width_factor}{a float represented as fraction of value, or a list of
+size 2 representing lower and upper bound for zooming horizontally.
+When represented as a single float, this value is used for both the
+upper and lower bound. For instance, \code{width_factor=c(0.2, 0.3)}
+result in an output zooming out between 20\% to 30\%.
+\code{width_factor=c(-0.3, -0.2)} result in an output zooming in between
+20\% to 30\%. \code{NULL} means i.e., zooming vertical and horizontal
+directions by preserving the aspect ratio. Defaults to \code{NULL}.}
+
+\item{fill_mode}{Points outside the boundaries of the input are filled
+according to the given mode. Available methods are \code{"constant"},
+\code{"nearest"}, \code{"wrap"} and \code{"reflect"}. Defaults to \code{"constant"}.
 \itemize{
-\item missing or \code{NULL}, the \code{Layer} instance is returned.
-\item a \code{Sequential} model, the model with an additional layer is returned.
-\item a Tensor, the output tensor from \code{layer_instance(object)} is returned.
-}}
-
-\item{height_factor}{a float represented as fraction of value, or a list of size
-2 representing lower and upper bound for zooming vertically. When
-represented as a single float, this value is used for both the upper and
-lower bound. A positive value means zooming out, while a negative value
-means zooming in. For instance, \code{height_factor = c(0.2, 0.3)} result in an
-output zoomed out by a random amount in the range \verb{[+20\%, +30\%]}.
-\code{height_factor = c(-0.3, -0.2)} result in an output zoomed in by a random
-amount in the range \verb{[+20\%, +30\%]}.}
-
-\item{width_factor}{a float represented as fraction of value, or a list of size 2
-representing lower and upper bound for zooming horizontally. When
-represented as a single float, this value is used for both the upper and
-lower bound. For instance, \code{width_factor = c(0.2, 0.3)} result in an output
-zooming out between 20\% to 30\%. \code{width_factor = c(-0.3, -0.2)} result in an
-output zooming in between 20\% to 30\%. Defaults to \code{NULL}, i.e., zooming
-vertical and horizontal directions by preserving the aspect ratio.}
-
-\item{fill_mode}{Points outside the boundaries of the input are filled according
-to the given mode (one of \verb{\{"constant", "reflect", "wrap", "nearest"\}}).
-\itemize{
-\item \emph{reflect}: \verb{(d c b a | a b c d | d c b a)} The input is extended by
-reflecting about the edge of the last pixel.
-\item \emph{constant}: \verb{(k k k k | a b c d | k k k k)} The input is extended by
-filling all values beyond the edge with the same constant value k = 0.
-\item \emph{wrap}: \verb{(a b c d | a b c d | a b c d)} The input is extended by
-wrapping around to the opposite edge.
-\item \emph{nearest}: \verb{(a a a a | a b c d | d d d d)} The input is extended by the
-nearest pixel.
+\item \code{"reflect"}: \verb{(d c b a | a b c d | d c b a)}
+The input is extended by reflecting about the edge of the last
+pixel.
+\item \code{"constant"}: \verb{(k k k k | a b c d | k k k k)}
+The input is extended by filling all values beyond
+the edge with the same constant value k specified by
+\code{fill_value}.
+\item \code{"wrap"}: \verb{(a b c d | a b c d | a b c d)}
+The input is extended by wrapping around to the opposite edge.
+\item \code{"nearest"}: \verb{(a a a a | a b c d | d d d d)}
+The input is extended by the nearest pixel.
+Note that when using torch backend, \code{"reflect"} is redirected to
+\code{"mirror"} \verb{(c d c b | a b c d | c b a b)} because torch does not
+support \code{"reflect"}.
+Note that torch backend does not support \code{"wrap"}.
 }}
 
 \item{interpolation}{Interpolation mode. Supported values: \code{"nearest"},
@@ -60,19 +64,54 @@ nearest pixel.
 
 \item{seed}{Integer. Used to create a random seed.}
 
-\item{fill_value}{a float represents the value to be filled outside the boundaries
-when \code{fill_mode="constant"}.}
+\item{fill_value}{a float represents the value to be filled outside
+the boundaries when \code{fill_mode="constant"}.}
 
-\item{...}{standard layer arguments.}
+\item{data_format}{string, either \code{"channels_last"} or \code{"channels_first"}.
+The ordering of the dimensions in the inputs. \code{"channels_last"}
+corresponds to inputs with shape \verb{(batch, height, width, channels)}
+while \code{"channels_first"} corresponds to inputs with shape
+\verb{(batch, channels, height, width)}. It defaults to the
+\code{image_data_format} value found in your Keras config file at
+\verb{~/.keras/keras.json}. If you never set it, then it will be
+\code{"channels_last"}.}
+
+\item{...}{Base layer keyword arguments, such as \code{name} and \code{dtype}.}
 }
 \description{
 This layer will randomly zoom in or out on each axis of an image
-independently, filling empty space according to fill_mode.
+independently, filling empty space according to \code{fill_mode}.
+
+Input pixel values can be of any range (e.g. \verb{[0., 1.)} or \verb{[0, 255]}) and
+of integer or floating point dtype.
+By default, the layer will output floats.
 }
+\section{Input Shape}{
+3D (unbatched) or 4D (batched) tensor with shape:
+\verb{(..., height, width, channels)}, in \code{"channels_last"} format,
+or \verb{(..., channels, height, width)}, in \code{"channels_first"} format.
+}
+
+\section{Output Shape}{
+3D (unbatched) or 4D (batched) tensor with shape:
+\verb{(..., target_height, target_width, channels)},
+or \verb{(..., channels, target_height, target_width)},
+in \code{"channels_first"} format.
+
+\strong{Note:} This layer is safe to use inside a \code{tf.data} pipeline
+(independently of which backend you're using).
+}
+
+\section{Examples}{
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{input_img <- random_uniform(c(32, 224, 224, 3))
+layer <- layer_random_zoom(height_factor = .5, width_factor = .2)
+out_img <- layer(input_img)
+}\if{html}{\out{</div>}}
+}
+
 \seealso{
 \itemize{
-\item \url{https://www.tensorflow.org/api_docs/python/tf/keras/layers/RandomZoom}
-\item \url{https://keras.io/api/layers/preprocessing_layers/}
+\item \url{https://keras.io/api/layers/preprocessing_layers/image_augmentation/random_zoom#randomzoom-class}
 }
 
 Other image augmentation layers: 
@@ -80,15 +119,15 @@ Other image augmentation layers:
 \code{\link{layer_random_contrast}()},
 \code{\link{layer_random_crop}()},
 \code{\link{layer_random_flip}()},
-\code{\link{layer_random_height}()},
 \code{\link{layer_random_rotation}()},
-\code{\link{layer_random_translation}()},
-\code{\link{layer_random_width}()}
+\code{\link{layer_random_translation}()}
 
 Other preprocessing layers: 
 \code{\link{layer_category_encoding}()},
 \code{\link{layer_center_crop}()},
 \code{\link{layer_discretization}()},
+\code{\link{layer_feature_space}()},
+\code{\link{layer_hashed_crossing}()},
 \code{\link{layer_hashing}()},
 \code{\link{layer_integer_lookup}()},
 \code{\link{layer_normalization}()},
@@ -96,14 +135,120 @@ Other preprocessing layers:
 \code{\link{layer_random_contrast}()},
 \code{\link{layer_random_crop}()},
 \code{\link{layer_random_flip}()},
-\code{\link{layer_random_height}()},
 \code{\link{layer_random_rotation}()},
 \code{\link{layer_random_translation}()},
-\code{\link{layer_random_width}()},
 \code{\link{layer_rescaling}()},
 \code{\link{layer_resizing}()},
 \code{\link{layer_string_lookup}()},
 \code{\link{layer_text_vectorization}()}
+
+Other layers: 
+\code{\link{Layer}()},
+\code{\link{layer_activation_elu}()},
+\code{\link{layer_activation_leaky_relu}()},
+\code{\link{layer_activation_parametric_relu}()},
+\code{\link{layer_activation_relu}()},
+\code{\link{layer_activation_softmax}()},
+\code{\link{layer_activation}()},
+\code{\link{layer_activity_regularization}()},
+\code{\link{layer_additive_attention}()},
+\code{\link{layer_add}()},
+\code{\link{layer_attention}()},
+\code{\link{layer_average_pooling_1d}()},
+\code{\link{layer_average_pooling_2d}()},
+\code{\link{layer_average_pooling_3d}()},
+\code{\link{layer_average}()},
+\code{\link{layer_batch_normalization}()},
+\code{\link{layer_bidirectional}()},
+\code{\link{layer_category_encoding}()},
+\code{\link{layer_center_crop}()},
+\code{\link{layer_concatenate}()},
+\code{\link{layer_conv_1d_transpose}()},
+\code{\link{layer_conv_1d}()},
+\code{\link{layer_conv_2d_transpose}()},
+\code{\link{layer_conv_2d}()},
+\code{\link{layer_conv_3d_transpose}()},
+\code{\link{layer_conv_3d}()},
+\code{\link{layer_conv_lstm_1d}()},
+\code{\link{layer_conv_lstm_2d}()},
+\code{\link{layer_conv_lstm_3d}()},
+\code{\link{layer_cropping_1d}()},
+\code{\link{layer_cropping_2d}()},
+\code{\link{layer_cropping_3d}()},
+\code{\link{layer_dense}()},
+\code{\link{layer_depthwise_conv_1d}()},
+\code{\link{layer_depthwise_conv_2d}()},
+\code{\link{layer_discretization}()},
+\code{\link{layer_dot}()},
+\code{\link{layer_dropout}()},
+\code{\link{layer_einsum_dense}()},
+\code{\link{layer_embedding}()},
+\code{\link{layer_feature_space}()},
+\code{\link{layer_flatten}()},
+\code{\link{layer_gaussian_dropout}()},
+\code{\link{layer_gaussian_noise}()},
+\code{\link{layer_global_average_pooling_1d}()},
+\code{\link{layer_global_average_pooling_2d}()},
+\code{\link{layer_global_average_pooling_3d}()},
+\code{\link{layer_global_max_pooling_1d}()},
+\code{\link{layer_global_max_pooling_2d}()},
+\code{\link{layer_global_max_pooling_3d}()},
+\code{\link{layer_group_normalization}()},
+\code{\link{layer_group_query_attention}()},
+\code{\link{layer_gru}()},
+\code{\link{layer_hashed_crossing}()},
+\code{\link{layer_hashing}()},
+\code{\link{layer_identity}()},
+\code{\link{layer_integer_lookup}()},
+\code{\link{layer_lambda}()},
+\code{\link{layer_layer_normalization}()},
+\code{\link{layer_lstm}()},
+\code{\link{layer_masking}()},
+\code{\link{layer_max_pooling_1d}()},
+\code{\link{layer_max_pooling_2d}()},
+\code{\link{layer_max_pooling_3d}()},
+\code{\link{layer_maximum}()},
+\code{\link{layer_minimum}()},
+\code{\link{layer_multi_head_attention}()},
+\code{\link{layer_multiply}()},
+\code{\link{layer_normalization}()},
+\code{\link{layer_permute}()},
+\code{\link{layer_random_brightness}()},
+\code{\link{layer_random_contrast}()},
+\code{\link{layer_random_crop}()},
+\code{\link{layer_random_flip}()},
+\code{\link{layer_random_rotation}()},
+\code{\link{layer_random_translation}()},
+\code{\link{layer_repeat_vector}()},
+\code{\link{layer_rescaling}()},
+\code{\link{layer_reshape}()},
+\code{\link{layer_resizing}()},
+\code{\link{layer_rnn}()},
+\code{\link{layer_separable_conv_1d}()},
+\code{\link{layer_separable_conv_2d}()},
+\code{\link{layer_simple_rnn}()},
+\code{\link{layer_spatial_dropout_1d}()},
+\code{\link{layer_spatial_dropout_2d}()},
+\code{\link{layer_spatial_dropout_3d}()},
+\code{\link{layer_spectral_normalization}()},
+\code{\link{layer_string_lookup}()},
+\code{\link{layer_subtract}()},
+\code{\link{layer_text_vectorization}()},
+\code{\link{layer_tfsm}()},
+\code{\link{layer_time_distributed}()},
+\code{\link{layer_torch_module_wrapper}()},
+\code{\link{layer_unit_normalization}()},
+\code{\link{layer_upsampling_1d}()},
+\code{\link{layer_upsampling_2d}()},
+\code{\link{layer_upsampling_3d}()},
+\code{\link{layer_zero_padding_1d}()},
+\code{\link{layer_zero_padding_2d}()},
+\code{\link{layer_zero_padding_3d}()},
+\code{\link{rnn_cell_gru}()},
+\code{\link{rnn_cell_lstm}()},
+\code{\link{rnn_cell_simple}()},
+\code{\link{rnn_cells_stack}()}
 }
 \concept{image augmentation layers}
+\concept{layers}
 \concept{preprocessing layers}

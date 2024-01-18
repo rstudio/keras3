@@ -4,26 +4,44 @@
 # 2 = INFO and WARNING messages are not printed
 # 3 = INFO, WARNING, and ERROR messages are not printed
 
-if(!reticulate::py_available() && reticulate::virtualenv_exists("r-tensorflow"))
-  reticulate::use_virtualenv("r-tensorflow")
 
-if(reticulate::py_available()) {
+
+reticulate:::py_register_load_hook("keras", function() {
+  # browser()
   print(reticulate::py_config())
-} else {
-  setHook("reticulate.onPyInit", function() print(reticulate::py_config()))
-}
+  # print(keras$`__version__`)
+  # print(keras$`__path__`)
+  # print(keras)
 
-# Sys.setenv(RETICULATE_PYTHON = "~/.local/share/r-miniconda/envs/tf-2.7-cpu/bin/python")
-# Sys.setenv(RETICULATE_PYTHON = "~/.local/share/r-miniconda/envs/tf-nightly-cpu/bin/python")
-# reticulate::use_condaenv("tf-2.5-cpu", required = TRUE)
-# reticulate::use_condaenv("tf-nightly-cpu", required = TRUE)
+  reticulate::py_run_string(glue::trim(r"---(
+    import keras
+    keras.config.disable_traceback_filtering()
+    )---"))
 
-if (reticulate::py_module_available("tensorflow")) {
-  # force verbose tf init messages early
-  tensorflow::tf$`function`(function(x) tensorflow::tf$abs(x))(-1)
+  try(reticulate::py_run_string(local = TRUE, glue::trim(r"---(
+    from importlib import import_module
+    import tensorflow as tf
 
-} else
-  message("TensorFlow not available for testing")
+    tf.function(lambda x: x + x)(1)
+
+    m = import_module(tf.function.__module__)
+    m.FREQUENT_TRACING_WARNING_THRESHOLD = float("inf")
+
+    )---")))
+
+  # py_main <- reticulate::import("__main__")
+  # keras$layers # force load
+  # py_main$keras <- keras
+  # py_eval("keras.config.disable_traceback_filtering()")
+})
+
+
+# if (reticulate::py_module_available("tensorflow")) {
+#   # force verbose tf init messages early
+#   tensorflow::tf$`function`(function(x) tensorflow::tf$abs(x))(-1)
+#
+# } else
+#   message("TensorFlow not available for testing")
 
 tf_version <- tensorflow::tf_version
 
@@ -41,19 +59,37 @@ expect_warning_if <- function(cond, expr) {
 
 py_capture_output <- reticulate::py_capture_output #import("IPython")$utils$capture$capture_output
 
+defer_parent <- withr::defer_parent
+
+local_py_capture_output <- function(type = c("stdout", "stderr")) {
+  stopifnot(reticulate::py_available(TRUE))
+  type <- match.arg(type, several.ok = TRUE)
+  output_tools <- import("rpytools.output")
+  capture_stdout <- "stdout" %in% type
+  capture_stderr <- "stderr" %in% type
+  output_tools$start_capture(capture_stdout, capture_stderr)
+  defer_parent({
+    output_tools$end_capture(capture_stdout, capture_stderr)
+    output_tools$collect_output()
+  })
+}
+
+local_output_sink <- withr::local_output_sink
 
 test_succeeds <- function(desc, expr, required_version = NULL) {
-  if (interactive()) {
-    test_that(desc, expect_error(force(expr), NA))
-  } else
-    invisible(capture.output({
-      test_that(desc, {
-        skip_if_no_keras(required_version)
-        py_capture_output({
-          expect_error(force(expr), NA)
-        })
-      })
-    }))
+  if(!is.null(required_version))
+    skip_if_no_keras(required_version)
+
+
+  if(!interactive()) {
+    local_py_capture_output()
+    local_output_sink(nullfile())
+  }
+
+  rlang::eval_tidy(
+    rlang::expr(test_that({{desc}}, expect_no_error( {{expr}} ))),
+    env = parent.frame())
+
 }
 
 test_call_succeeds <- function(call_name, expr, required_version = NULL) {
@@ -61,7 +97,11 @@ test_call_succeeds <- function(call_name, expr, required_version = NULL) {
 }
 
 is_backend <- function(name) {
-  is_keras_available() && identical(backend()$backend(), name)
+  if (keras_version() >= "3.0")
+    backend <- keras$config$backend()
+  else
+    backend <- backend()$backend()
+  is_keras_available() && identical(backend, name)
 }
 
 skip_if_cntk <- function() {
@@ -75,14 +115,14 @@ skip_if_theano <- function() {
 }
 
 skip_if_tensorflow_implementation <- function() {
-  if (keras:::is_tensorflow_implementation())
+  if (keras3:::is_tensorflow_implementation())
     skip("Test not run for TensorFlow implementation")
 }
 
 define_model <- function() {
-  model <- keras_model_sequential()
+  model <- keras_model_sequential(input_shape = 784)
   model %>%
-    layer_dense(32, input_shape = 784, kernel_initializer = initializer_ones()) %>%
+    layer_dense(32, kernel_initializer = initializer_ones()) %>%
     layer_activation('relu') %>%
     layer_dense(10) %>%
     layer_activation('softmax')
@@ -100,31 +140,35 @@ define_and_compile_model <- function() {
   model
 }
 
-random_array <- function(..., dim = unlist(c(...))) {
-  array(runif(prod(dim)), dim = dim)
-}
-
-
-
 
 expect_tensor <- function(x, shape=NULL, shaped_as=NULL) {
   x_lbl <- quasi_label(rlang::enquo(x), arg = 'x')$lab
-  expect(is_keras_tensor(x),
-         paste(x_lbl, "was wrong S3 class, expected 'tensorflow.tensor', actual", class(x)))
 
-  x_shape <- x$shape$as_list()
+  expect(keras$backend$is_keras_tensor(x) || inherits(x, "tensorflow.tensor"),
+         paste(x_lbl, "was wrong S3 class, expected a tensor, actual", class(x)))
+
+  x_shape <- x$shape
+
+  if(!is.list(x_shape)) # tensorflow TensorShape()
+    x_shape <- x_shape$as_list()
+
+  x_shape <- as.list(x_shape)
 
   chk_expr <- quote(expect(
     identical(x_shape, shape),
-    sprintf("%s was wrong shape, expected: %s, actual: %s", x_lbl, x_shape, shape)
+    sprintf("%s was wrong shape, expected: %s, actual: %s",
+            x_lbl, x_shape, shape)
   ))
 
   if(!is.null(shape)) {
+    shape <- as.list(shape)
     eval(chk_expr)
   }
 
   if(!is.null(shaped_as)) {
-    shape <- shaped_as$shape$as_list()
+    shape <- shaped_as$shape
+    if(!is.list(shape))
+      shape <- shape$as_list()
     eval(chk_expr)
   }
   invisible(x)
@@ -133,8 +177,8 @@ expect_tensor <- function(x, shape=NULL, shaped_as=NULL) {
 
 expect_same_pyobj <- function(x, y) {
   eval.parent(bquote(expect_identical(
-    get("pyobj", as.environment(.(x))),
-    get("pyobj", as.environment(.(y)))
+    get0("pyobj", as.environment(.(x))),
+    get0("pyobj", as.environment(.(y)))
   )))
 }
 
@@ -155,3 +199,11 @@ local_tf_device <- function(device_name = "CPU") {
   invisible(device)
 }
 
+k_constant <- function(value, dtype = NULL, shape = NULL, name = NULL) {
+  if(!is.null(name)) stop("no name")
+  x <- reticulate::np_array(value, dtype)
+  if(!is.null(shape))
+    x <- x$reshape(as.integer(shape))
+  x
+  keras$ops$convert_to_tensor(x)
+}

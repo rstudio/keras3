@@ -1,0 +1,10 @@
+__signature__
+keras.ops.tanh(x)
+__doc__
+Hyperbolic tangent, element-wise.
+
+Arguments:
+    x: Input tensor.
+
+Returns:
+    Output tensor of same shape as `x`.

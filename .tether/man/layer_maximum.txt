@@ -1,0 +1,64 @@
+Help on class Maximum in module keras.src.layers.merging.maximum:
+
+class Maximum(keras.src.layers.merging.base_merge.Merge)
+ |  Maximum(*args, **kwargs)
+ |
+ |  Computes element-wise maximum on a list of inputs.
+ |
+ |  It takes as input a list of tensors, all of the same shape,
+ |  and returns a single tensor (also of the same shape).
+ |
+ |  Examples:
+ |
+ |  >>> input_shape = (2, 3, 4)
+ |  >>> x1 = np.random.rand(*input_shape)
+ |  >>> x2 = np.random.rand(*input_shape)
+ |  >>> y = keras.layers.Maximum()([x1, x2])
+ |
+ |  Usage in a Keras model:
+ |
+ |  >>> input1 = keras.layers.Input(shape=(16,))
+ |  >>> x1 = keras.layers.Dense(8, activation='relu')(input1)
+ |  >>> input2 = keras.layers.Input(shape=(32,))
+ |  >>> x2 = keras.layers.Dense(8, activation='relu')(input2)
+ |  >>> # equivalent to `y = keras.layers.maximum([x1, x2])`
+ |  >>> y = keras.layers.Maximum()([x1, x2])
+ |  >>> out = keras.layers.Dense(4)(y)
+ |  >>> model = keras.models.Model(inputs=[input1, input2], outputs=out)
+ |
+ |  Method resolution order:
+ |      Maximum
+ |      keras.src.layers.merging.base_merge.Merge
+ |      keras.src.layers.layer.Layer
+ |      keras.src.backend.tensorflow.layer.TFLayer
+ |      keras.src.backend.tensorflow.trackable.KerasAutoTrackable
+ |      tensorflow.python.trackable.autotrackable.AutoTrackable
+ |      tensorflow.python.trackable.base.Trackable
+ |      keras.src.ops.operation.Operation
+ |      builtins.object
+ |
+ |  Methods inherited from keras.src.layers.merging.base_merge.Merge:
+ |
+ |  __init__(self, **kwargs)
+ |      Initialize self.  See help(type(self)) for accurate signature.
+ |
+ |  build(self, input_shape)
+ |
+ |  call(self, inputs)
+ |
+ |  compute_mask(
+ |    self,
+ |    inputs,
+ |    mask=None
+ |  )
+ |
+ |  compute_output_shape(self, input_shape)
+ |
+ |  compute_output_spec(self, inputs)
+ |
+ |  get_config(self)
+ |      Returns the config of the object.
+ |
+ |      An object config is a Python dictionary (serializable)
+ |      containing the information needed to re-instantiate it.
+ |

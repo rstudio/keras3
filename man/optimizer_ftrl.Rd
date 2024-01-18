@@ -2,7 +2,7 @@
 % Please edit documentation in R/optimizers.R
 \name{optimizer_ftrl}
 \alias{optimizer_ftrl}
-\title{Optimizer that implements the FTRL algorithm}
+\title{Optimizer that implements the FTRL algorithm.}
 \usage{
 optimizer_ftrl(
   learning_rate = 0.001,
@@ -19,48 +19,49 @@ optimizer_ftrl(
   use_ema = FALSE,
   ema_momentum = 0.99,
   ema_overwrite_frequency = NULL,
-  jit_compile = TRUE,
-  name = "Ftrl",
-  ...
+  name = "ftrl",
+  ...,
+  loss_scale_factor = NULL
 )
 }
 \arguments{
-\item{learning_rate}{A \code{Tensor}, floating point value, a schedule that is a
-\code{tf.keras.optimizers.schedules.LearningRateSchedule}, or a callable that
-takes no arguments and returns the actual value to use. The learning
-rate.  Defaults to 0.001.}
+\item{learning_rate}{A float, a
+\code{\link[=LearningRateSchedule]{LearningRateSchedule()}} instance, or
+a callable that takes no arguments and returns the actual value to
+use. The learning rate. Defaults to \code{0.001}.}
 
 \item{learning_rate_power}{A float value, must be less or equal to zero.
-Controls how the learning rate decreases during training. Use zero for a
-fixed learning rate.}
+Controls how the learning rate decreases during training. Use zero
+for a fixed learning rate.}
 
-\item{initial_accumulator_value}{The starting value for accumulators. Only zero
-or positive values are allowed.}
+\item{initial_accumulator_value}{The starting value for accumulators. Only
+zero or positive values are allowed.}
 
 \item{l1_regularization_strength}{A float value, must be greater than or equal
-to zero. Defaults to 0.0.}
+to zero. Defaults to \code{0.0}.}
 
 \item{l2_regularization_strength}{A float value, must be greater than or equal
-to zero. Defaults to 0.0.}
+to zero. Defaults to \code{0.0}.}
 
-\item{l2_shrinkage_regularization_strength}{A float value, must be greater than
-or equal to zero. This differs from L2 above in that the L2 above is a
-stabilization penalty, whereas this L2 shrinkage is a magnitude penalty.
-When input is sparse shrinkage will only happen on the active weights.}
+\item{l2_shrinkage_regularization_strength}{A float value, must be greater
+than or equal to zero. This differs from L2 above in that the L2
+above is a stabilization penalty, whereas this L2 shrinkage is a
+magnitude penalty. When input is sparse shrinkage will only happen
+on the active weights.}
 
-\item{beta}{A float value, representing the beta value from the paper. Defaults
-to 0.0.}
+\item{beta}{A float value, representing the beta value from the paper.
+Defaults to \code{0.0}.}
 
-\item{weight_decay}{Float, defaults to NULL. If set, weight decay is applied.}
+\item{weight_decay}{Float. If set, weight decay is applied.}
 
 \item{clipnorm}{Float. If set, the gradient of each weight is individually
 clipped so that its norm is no higher than this value.}
 
-\item{clipvalue}{Float. If set, the gradient of each weight is clipped to be no
-higher than this value.}
+\item{clipvalue}{Float. If set, the gradient of each weight is clipped to be
+no higher than this value.}
 
-\item{global_clipnorm}{Float. If set, the gradient of all weights is clipped so
-that their global norm is no higher than this value.}
+\item{global_clipnorm}{Float. If set, the gradient of all weights is clipped
+so that their global norm is no higher than this value.}
 
 \item{use_ema}{Boolean, defaults to FALSE. If TRUE, exponential moving average
 (EMA) is applied. EMA consists of computing an exponential moving
@@ -68,36 +69,37 @@ average of the weights of the model (as the weight values change after
 each training batch), and periodically overwriting the weights with
 their moving average.}
 
-\item{ema_momentum}{Float, defaults to 0.99. Only used if \code{use_ema=TRUE}. This is  # noqa: E501
-the momentum to use when computing the EMA of the model's weights:
+\item{ema_momentum}{Float, defaults to 0.99. Only used if \code{use_ema=TRUE}.
+This is the momentum to use when computing
+the EMA of the model's weights:
 \code{new_average = ema_momentum * old_average + (1 - ema_momentum) * current_variable_value}.}
 
 \item{ema_overwrite_frequency}{Int or NULL, defaults to NULL. Only used if
-\code{use_ema=TRUE}. Every \code{ema_overwrite_frequency} steps of iterations, we
-overwrite the model variable by its moving average. If NULL, the optimizer  # noqa: E501
+\code{use_ema=TRUE}. Every \code{ema_overwrite_frequency} steps of iterations,
+we overwrite the model variable by its moving average.
+If NULL, the optimizer
 does not overwrite model variables in the middle of training, and you
 need to explicitly overwrite the variables at the end of training
-by calling \code{optimizer.finalize_variable_values()} (which updates the model  # noqa: E501
-variables in-place). When using the built-in \code{fit()} training loop, this
-happens automatically after the last epoch, and you don't need to do
-anything.}
-
-\item{jit_compile}{Boolean, defaults to TRUE. If TRUE, the optimizer will use XLA  # noqa: E501
-compilation. If no GPU device is found, this flag will be ignored.}
+by calling \code{optimizer$finalize_variable_values()}
+(which updates the model
+variables in-place). When using the built-in \code{fit()} training loop,
+this happens automatically after the last epoch,
+and you don't need to do anything.}
 
 \item{name}{String. The name to use
 for momentum accumulator weights created by
 the optimizer.}
 
-\item{...}{Used for backward and forward compatibility}
-}
-\value{
-Optimizer for use with \code{\link{compile.keras.engine.training.Model}}.
+\item{...}{For forward/backward compatability.}
+
+\item{loss_scale_factor}{Float or \code{NULL}. If a float, the scale factor will
+be multiplied the loss before computing gradients, and the inverse of
+the scale factor will be multiplied by the gradients before updating
+variables. Useful for preventing underflow during mixed precision
+training. Alternately, \code{optimizer_loss_scale} will
+automatically set a loss scale factor.}
 }
 \description{
-Optimizer that implements the FTRL algorithm
-}
-\details{
 "Follow The Regularized Leader" (FTRL) is an optimization algorithm
 developed at Google for click-through rate prediction in the early 2010s. It
 is most suitable for shallow models with large and sparse feature spaces.
@@ -110,21 +112,22 @@ above) and shrinkage-type L2 regularization
 
 Initialization:
 
-\if{html}{\out{<div class="sourceCode python">}}\preformatted{n = 0
-sigma = 0
-z = 0
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{n <- 0
+sigma <- 0
+z <- 0
 }\if{html}{\out{</div>}}
 
 Update rule for one variable \code{w}:
 
-\if{html}{\out{<div class="sourceCode python">}}\preformatted{prev_n = n
-n = n + g ** 2
-sigma = (n ** -lr_power - prev_n ** -lr_power) / lr
-z = z + g - sigma * w
-if abs(z) < lambda_1:
-  w = 0
-else:
-  w = (sgn(z) * lambda_1 - z) / ((beta + sqrt(n)) / alpha + lambda_2)
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{prev_n <- n
+n <- n + g^2
+sigma <- (n^(-lr_power) - prev_n^(-lr_power)) / lr
+z <- z + g - sigma * w
+if (abs(z) < lambda_1) \{
+  w <- 0
+\} else \{
+  w <- (sgn(z) * lambda_1 - z) / ((beta + sqrt(n)) / alpha + lambda_2)
+\}
 }\if{html}{\out{</div>}}
 
 Notation:
@@ -142,14 +145,18 @@ is replaced with a gradient with shrinkage.
 }
 \seealso{
 \itemize{
-\item \url{https://www.tensorflow.org/api_docs/python/tf/keras/optimizers/experimental/Ftrl}
+\item \url{https://keras.io/api/optimizers/ftrl#ftrl-class}
 }
 
 Other optimizers: 
 \code{\link{optimizer_adadelta}()},
+\code{\link{optimizer_adafactor}()},
 \code{\link{optimizer_adagrad}()},
+\code{\link{optimizer_adam_w}()},
 \code{\link{optimizer_adamax}()},
 \code{\link{optimizer_adam}()},
+\code{\link{optimizer_lion}()},
+\code{\link{optimizer_loss_scale}()},
 \code{\link{optimizer_nadam}()},
 \code{\link{optimizer_rmsprop}()},
 \code{\link{optimizer_sgd}()}

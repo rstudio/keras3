@@ -2,21 +2,60 @@
 % Please edit documentation in R/utils.R
 \name{normalize}
 \alias{normalize}
-\title{Normalize a matrix or nd-array}
+\title{Normalizes an array.}
 \usage{
-normalize(x, axis = -1, order = 2)
+normalize(x, axis = -1L, order = 2L)
 }
 \arguments{
-\item{x}{Matrix or array to normalize}
+\item{x}{Array to normalize.}
 
-\item{axis}{Axis along which to normalize. Axis indexes are 1-based
-(pass -1 to select the last axis).}
+\item{axis}{axis along which to normalize.}
 
-\item{order}{Normalization order (e.g. 2 for L2 norm)}
+\item{order}{Normalization order (e.g. \code{order=2} for L2 norm).}
 }
 \value{
 A normalized copy of the array.
 }
 \description{
-Normalize a matrix or nd-array
+If the input is an R array, an R array will be returned.
+If it's a backend tensor, a backend tensor will be returned.
 }
+\seealso{
+\itemize{
+\item \url{https://keras.io/api/utils/python_utils#normalize-function}
+}
+
+Other numerical utils: 
+\code{\link{to_categorical}()}
+
+Other utils: 
+\code{\link{audio_dataset_from_directory}()},
+\code{\link{clear_session}()},
+\code{\link{config_disable_interactive_logging}()},
+\code{\link{config_disable_traceback_filtering}()},
+\code{\link{config_enable_interactive_logging}()},
+\code{\link{config_enable_traceback_filtering}()},
+\code{\link{config_is_interactive_logging_enabled}()},
+\code{\link{config_is_traceback_filtering_enabled}()},
+\code{\link{get_file}()},
+\code{\link{get_source_inputs}()},
+\code{\link{image_array_save}()},
+\code{\link{image_dataset_from_directory}()},
+\code{\link{image_from_array}()},
+\code{\link{image_load}()},
+\code{\link{image_smart_resize}()},
+\code{\link{image_to_array}()},
+\code{\link{layer_feature_space}()},
+\code{\link{layer_torch_module_wrapper}()},
+\code{\link{pack_x_y_sample_weight}()},
+\code{\link{pad_sequences}()},
+\code{\link{set_random_seed}()},
+\code{\link{split_dataset}()},
+\code{\link{text_dataset_from_directory}()},
+\code{\link{timeseries_dataset_from_array}()},
+\code{\link{to_categorical}()},
+\code{\link{unpack_x_y_sample_weight}()},
+\code{\link{zip_lists}()}
+}
+\concept{numerical utils}
+\concept{utils}

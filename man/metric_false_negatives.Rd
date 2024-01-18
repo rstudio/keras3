@@ -2,32 +2,26 @@
 % Please edit documentation in R/metrics.R
 \name{metric_false_negatives}
 \alias{metric_false_negatives}
-\title{Calculates the number of false negatives}
+\title{Calculates the number of false negatives.}
 \usage{
 metric_false_negatives(..., thresholds = NULL, name = NULL, dtype = NULL)
 }
 \arguments{
-\item{...}{Passed on to the underlying metric. Used for forwards and backwards compatibility.}
+\item{...}{For forward/backward compatability.}
 
-\item{thresholds}{(Optional) Defaults to 0.5. A float value or a
-list of float threshold values in \verb{[0, 1]}. A threshold is compared
-with prediction values to determine the truth value of predictions
-(i.e., above the threshold is \code{TRUE}, below is \code{FALSE}). One metric
-value is generated for each threshold value.}
+\item{thresholds}{(Optional) Defaults to \code{0.5}. A float value, or a Python
+list of float threshold values in \verb{[0, 1]}. A threshold is
+compared with prediction values to determine the truth value of
+predictions (i.e., above the threshold is \code{TRUE}, below is \code{FALSE}).
+If used with a loss function that sets \code{from_logits=TRUE} (i.e. no
+sigmoid applied to predictions), \code{thresholds} should be set to 0.
+One metric value is generated for each threshold value.}
 
 \item{name}{(Optional) string name of the metric instance.}
 
 \item{dtype}{(Optional) data type of the metric result.}
 }
-\value{
-A (subclassed) \code{Metric} instance that can be passed directly to
-\code{compile(metrics = )}, or used as a standalone object. See \code{?Metric} for
-example usage.
-}
 \description{
-Calculates the number of false negatives
-}
-\details{
 If \code{sample_weight} is given, calculates the sum of the weights of
 false negatives. This metric creates one local variable, \code{accumulator}
 that is used to keep track of the number of false negatives.
@@ -35,33 +29,81 @@ that is used to keep track of the number of false negatives.
 If \code{sample_weight} is \code{NULL}, weights default to 1.
 Use \code{sample_weight} of 0 to mask values.
 }
+\section{Usage}{
+Standalone usage:
+
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{m <- metric_false_negatives()
+m$update_state(c(0, 1, 1, 1), c(0, 1, 0, 0))
+m$result()
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor(2.0, shape=(), dtype=float32)
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{m$reset_state()
+m$update_state(c(0, 1, 1, 1), c(0, 1, 0, 0), sample_weight=c(0, 0, 1, 0))
+m$result()
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor(1.0, shape=(), dtype=float32)
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{# 1.0
+}\if{html}{\out{</div>}}
+}
+
 \seealso{
+\itemize{
+\item \url{https://keras.io/api/metrics/classification_metrics#falsenegatives-class}
+}
+
+Other confusion metrics: 
+\code{\link{metric_auc}()},
+\code{\link{metric_false_positives}()},
+\code{\link{metric_precision_at_recall}()},
+\code{\link{metric_precision}()},
+\code{\link{metric_recall_at_precision}()},
+\code{\link{metric_recall}()},
+\code{\link{metric_sensitivity_at_specificity}()},
+\code{\link{metric_specificity_at_sensitivity}()},
+\code{\link{metric_true_negatives}()},
+\code{\link{metric_true_positives}()}
+
 Other metrics: 
+\code{\link{Metric}()},
 \code{\link{custom_metric}()},
-\code{\link{metric_accuracy}()},
 \code{\link{metric_auc}()},
 \code{\link{metric_binary_accuracy}()},
 \code{\link{metric_binary_crossentropy}()},
+\code{\link{metric_binary_focal_crossentropy}()},
+\code{\link{metric_binary_iou}()},
 \code{\link{metric_categorical_accuracy}()},
 \code{\link{metric_categorical_crossentropy}()},
+\code{\link{metric_categorical_focal_crossentropy}()},
 \code{\link{metric_categorical_hinge}()},
 \code{\link{metric_cosine_similarity}()},
+\code{\link{metric_f1_score}()},
 \code{\link{metric_false_positives}()},
+\code{\link{metric_fbeta_score}()},
 \code{\link{metric_hinge}()},
-\code{\link{metric_kullback_leibler_divergence}()},
-\code{\link{metric_logcosh_error}()},
+\code{\link{metric_huber}()},
+\code{\link{metric_iou}()},
+\code{\link{metric_kl_divergence}()},
+\code{\link{metric_log_cosh_error}()},
+\code{\link{metric_log_cosh}()},
 \code{\link{metric_mean_absolute_error}()},
 \code{\link{metric_mean_absolute_percentage_error}()},
 \code{\link{metric_mean_iou}()},
-\code{\link{metric_mean_relative_error}()},
 \code{\link{metric_mean_squared_error}()},
 \code{\link{metric_mean_squared_logarithmic_error}()},
-\code{\link{metric_mean_tensor}()},
 \code{\link{metric_mean_wrapper}()},
 \code{\link{metric_mean}()},
+\code{\link{metric_one_hot_iou}()},
+\code{\link{metric_one_hot_mean_iou}()},
 \code{\link{metric_poisson}()},
 \code{\link{metric_precision_at_recall}()},
 \code{\link{metric_precision}()},
+\code{\link{metric_r2_score}()},
 \code{\link{metric_recall_at_precision}()},
 \code{\link{metric_recall}()},
 \code{\link{metric_root_mean_squared_error}()},
@@ -76,4 +118,5 @@ Other metrics:
 \code{\link{metric_true_negatives}()},
 \code{\link{metric_true_positives}()}
 }
+\concept{confusion metrics}
 \concept{metrics}

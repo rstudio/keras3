@@ -2,53 +2,106 @@
 % Please edit documentation in R/metrics.R
 \name{metric_root_mean_squared_error}
 \alias{metric_root_mean_squared_error}
-\title{Computes root mean squared error metric between \code{y_true} and \code{y_pred}}
+\title{Computes root mean squared error metric between \code{y_true} and \code{y_pred}.}
 \usage{
-metric_root_mean_squared_error(..., name = NULL, dtype = NULL)
+metric_root_mean_squared_error(
+  ...,
+  name = "root_mean_squared_error",
+  dtype = NULL
+)
 }
 \arguments{
-\item{...}{Passed on to the underlying metric. Used for forwards and backwards compatibility.}
+\item{...}{For forward/backward compatability.}
 
 \item{name}{(Optional) string name of the metric instance.}
 
 \item{dtype}{(Optional) data type of the metric result.}
 }
-\value{
-A (subclassed) \code{Metric} instance that can be passed directly to
-\code{compile(metrics = )}, or used as a standalone object. See \code{?Metric} for
-example usage.
-}
 \description{
-Computes root mean squared error metric between \code{y_true} and \code{y_pred}
+Formula:
+
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{loss <- sqrt(mean((y_pred - y_true) ^ 2))
+}\if{html}{\out{</div>}}
 }
+\section{Examples}{
+Standalone usage:
+
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{m <- metric_root_mean_squared_error()
+m$update_state(rbind(c(0, 1), c(0, 0)), rbind(c(1, 1), c(0, 0)))
+m$result()
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor(0.5, shape=(), dtype=float32)
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{m$reset_state()
+m$update_state(rbind(c(0, 1), c(0, 0)), rbind(c(1, 1), c(0, 0)),
+               sample_weight = c(1, 0))
+m$result()
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor(0.70710677, shape=(), dtype=float32)
+}\if{html}{\out{</div>}}
+
+Usage with \code{compile()} API:
+
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{model \%>\% compile(
+  optimizer = 'sgd',
+  loss = 'mse',
+  metrics = list(metric_root_mean_squared_error()))
+}\if{html}{\out{</div>}}
+}
+
 \seealso{
+\itemize{
+\item \url{https://keras.io/api/metrics/regression_metrics#rootmeansquarederror-class}
+}
+
+Other regression metrics: 
+\code{\link{metric_cosine_similarity}()},
+\code{\link{metric_log_cosh_error}()},
+\code{\link{metric_mean_absolute_error}()},
+\code{\link{metric_mean_absolute_percentage_error}()},
+\code{\link{metric_mean_squared_error}()},
+\code{\link{metric_mean_squared_logarithmic_error}()},
+\code{\link{metric_r2_score}()}
+
 Other metrics: 
+\code{\link{Metric}()},
 \code{\link{custom_metric}()},
-\code{\link{metric_accuracy}()},
 \code{\link{metric_auc}()},
 \code{\link{metric_binary_accuracy}()},
 \code{\link{metric_binary_crossentropy}()},
+\code{\link{metric_binary_focal_crossentropy}()},
+\code{\link{metric_binary_iou}()},
 \code{\link{metric_categorical_accuracy}()},
 \code{\link{metric_categorical_crossentropy}()},
+\code{\link{metric_categorical_focal_crossentropy}()},
 \code{\link{metric_categorical_hinge}()},
 \code{\link{metric_cosine_similarity}()},
+\code{\link{metric_f1_score}()},
 \code{\link{metric_false_negatives}()},
 \code{\link{metric_false_positives}()},
+\code{\link{metric_fbeta_score}()},
 \code{\link{metric_hinge}()},
-\code{\link{metric_kullback_leibler_divergence}()},
-\code{\link{metric_logcosh_error}()},
+\code{\link{metric_huber}()},
+\code{\link{metric_iou}()},
+\code{\link{metric_kl_divergence}()},
+\code{\link{metric_log_cosh_error}()},
+\code{\link{metric_log_cosh}()},
 \code{\link{metric_mean_absolute_error}()},
 \code{\link{metric_mean_absolute_percentage_error}()},
 \code{\link{metric_mean_iou}()},
-\code{\link{metric_mean_relative_error}()},
 \code{\link{metric_mean_squared_error}()},
 \code{\link{metric_mean_squared_logarithmic_error}()},
-\code{\link{metric_mean_tensor}()},
 \code{\link{metric_mean_wrapper}()},
 \code{\link{metric_mean}()},
+\code{\link{metric_one_hot_iou}()},
+\code{\link{metric_one_hot_mean_iou}()},
 \code{\link{metric_poisson}()},
 \code{\link{metric_precision_at_recall}()},
 \code{\link{metric_precision}()},
+\code{\link{metric_r2_score}()},
 \code{\link{metric_recall_at_precision}()},
 \code{\link{metric_recall}()},
 \code{\link{metric_sensitivity_at_specificity}()},
@@ -63,3 +116,4 @@ Other metrics:
 \code{\link{metric_true_positives}()}
 }
 \concept{metrics}
+\concept{regression metrics}

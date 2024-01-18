@@ -1,0 +1,10 @@
+__signature__
+keras.ops.cos(x)
+__doc__
+Cosine, element-wise.
+
+Args:
+    x: Input tensor.
+
+Returns:
+    The corresponding cosine values.

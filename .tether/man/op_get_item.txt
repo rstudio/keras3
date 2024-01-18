@@ -1,0 +1,4 @@
+__signature__
+keras.ops.get_item(x, key)
+__doc__
+Return `x[key]`.

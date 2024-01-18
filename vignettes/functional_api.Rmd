@@ -1,489 +1,1181 @@
 ---
-title: "Guide to the Functional API"
+title: The Functional API
+date-created: 2019/03/01
+last-modified: 2020/04/12
+description: Complete guide to the functional API.
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{Guide to the Functional API} 
-  %\VignetteEngine{knitr::rmarkdown} 
+  %\VignetteIndexEntry{The Functional API}
+  %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
-type: docs
-repo: https://github.com/rstudio/keras
-menu:
-  main:
-    name: "Functional API"
-    identifier: "keras-functional-api"
-    parent: "keras-getting-started-top"
-    weight: 20
-aliases:
-  - /keras/articles/functional_api.html
 ---
 
-```{r setup, include = FALSE}
-library(keras)
-knitr::opts_chunk$set(comment = NA, eval = FALSE)
+## Setup
+
+
+```r
+library(keras3)
 ```
 
-The Keras functional API is the way to go for defining complex models, such as multi-output models, directed acyclic graphs, or models with shared layers.
+## Introduction
 
-This guide assumes that you are already familiar with the [Sequential](../sequential_model) model.
+The Keras *functional API* is a way to create models that are more flexible
+than the sequential API. The functional API can handle models
+with non-linear topology, shared layers, and even multiple inputs or outputs.
 
-Let's start with something simple.
+The main idea is that a deep learning model is usually
+a directed acyclic graph (DAG) of layers.
+So the functional API is a way to build *graphs of layers*.
 
-## First example: a densely-connected network
+Consider the following model:
 
-The [Sequential](../sequential_model) model is probably a better choice to implement such a network, but it helps to start with something really simple.
+<div class="k-default-codeblock">
+```
+(input: 784-dimensional vectors)
+       ↧
+[Dense (64 units, relu activation)]
+       ↧
+[Dense (64 units, relu activation)]
+       ↧
+[Dense (10 units, softmax activation)]
+       ↧
+(output: logits of a probability distribution over 10 classes)
+```
+</div>
 
-To use the functional API, build your input and output layers and then pass them to the `model()` function. This model can be trained just like Keras sequential models.
+This is a basic graph with three layers.
+To build this model using the functional API, start by creating an input node:
 
 
-```{r}
-library(keras)
-
-# input layer
-inputs <- layer_input(shape = c(784))
- 
-# outputs compose input + dense layers
-predictions <- inputs %>%
-  layer_dense(units = 64, activation = 'relu') %>% 
-  layer_dense(units = 64, activation = 'relu') %>% 
-  layer_dense(units = 10, activation = 'softmax')
-
-# create and compile model
-model <- keras_model(inputs = inputs, outputs = predictions)
-model %>% compile(
-  optimizer = 'rmsprop',
-  loss = 'categorical_crossentropy',
-  metrics = c('accuracy')
-)
+```r
+inputs <- keras_input(shape = c(784))
 ```
 
-Note that Keras objects are [modified in place](faq.html#why-are-keras-objects-modified-in-place) which is why it's not necessary for `model` to be assigned back to after it is compiled.
+The shape of the data is set as a 784-dimensional vector.
+The batch size is always omitted since only the shape of each sample is specified.
+
+If, for example, you have an image input with a shape of `(32, 32, 3)`,
+you would use:
 
 
-## All models are callable, just like layers
-
-With the functional API, it is easy to reuse trained models: you can treat any model as if it were a layer. Note that you aren't just reusing the architecture of the model, you are also reusing its weights.
-
-```{r}
-x <- layer_input(shape = c(784))
-# This works, and returns the 10-way softmax we defined above.
-y <- x %>% model
+```r
+# Just for demonstration purposes.
+img_inputs <- keras_input(shape = c(32, 32, 3))
 ```
 
-This can allow, for instance, to quickly create models that can process sequences of inputs. You could turn an image classification model into a video classification model, in just one line:
+The `inputs` that is returned contains information about the shape and `dtype`
+of the input data that you feed to your model.
+Here's the shape:
 
-```{r}
-# Input tensor for sequences of 20 timesteps,
-# each containing a 784-dimensional vector
-input_sequences <- layer_input(shape = c(20, 784))
 
-# This applies our previous model to the input sequence
-processed_sequences <- input_sequences %>%
-  time_distributed(model)
+```r
+shape(inputs)
 ```
 
-
-## Multi-input and multi-output models
-
-Here's a good use case for the functional API: models with multiple inputs and outputs. The functional API makes it easy to manipulate a large number of intertwined datastreams.
-
-Let's consider the following model. We seek to predict how many retweets and likes a news headline will receive on Twitter. The main input to the model will be the headline itself, as a sequence of words, but to spice things up, our model will also have an auxiliary input, receiving extra data such as the time of day when the headline was posted, etc.
-
-The model will also be supervised via two loss functions. Using the main loss function earlier in a model is a good regularization mechanism for deep models.
-
-Here's what our model looks like:
-
-<img src="images/multi-input-multi-output-graph.png" alt="multi-input-multi-output-graph" style="width: 400px;"/>
-
-Let's implement it with the functional API.
-
-The main input will receive the headline, as a sequence of integers (each integer encodes a word).
-The integers will be between 1 and 10,000 (a vocabulary of 10,000 words) and the sequences will be 100 words long.
-
-We'll include an 
-
-
-```{r}
-library(keras)
-
-main_input <- layer_input(shape = c(100), dtype = 'int32', name = 'main_input')
-
-lstm_out <- main_input %>% 
-  layer_embedding(input_dim = 10000, output_dim = 512, input_length = 100) %>% 
-  layer_lstm(units = 32)
+```
+## shape(NA, 784)
 ```
 
+Here's the dtype:
 
-Here we insert the auxiliary loss, allowing the LSTM and Embedding layer to be trained smoothly even though the main loss will be much higher in the model:
 
-```{r}
-auxiliary_output <- lstm_out %>% 
-  layer_dense(units = 1, activation = 'sigmoid', name = 'aux_output')
+```r
+inputs$dtype
 ```
 
-At this point, we feed into the model our auxiliary input data by concatenating it with the LSTM output, stacking a deep densely-connected network on top and adding the main logistic regression layer
-
-```{r}
-auxiliary_input <- layer_input(shape = c(5), name = 'aux_input')
-
-main_output <- layer_concatenate(c(lstm_out, auxiliary_input)) %>%  
-  layer_dense(units = 64, activation = 'relu') %>% 
-  layer_dense(units = 64, activation = 'relu') %>% 
-  layer_dense(units = 64, activation = 'relu') %>% 
-  layer_dense(units = 1, activation = 'sigmoid', name = 'main_output')
+```
+## [1] "float32"
 ```
 
-This defines a model with two inputs and two outputs:
+You create a new node in the graph of layers by calling a layer on this `inputs`
+object:
 
-```{r}
-model <- keras_model(
-  inputs = c(main_input, auxiliary_input), 
-  outputs = c(main_output, auxiliary_output)
-)
+
+```r
+dense <- layer_dense(units = 64, activation="relu")
+x <- dense(inputs)
 ```
 
-```{r}
+The "layer call" action is like drawing an arrow from "inputs" to this layer
+you created.
+You're "passing" the inputs to the `dense` layer, and you get `x` as the output.
+
+Let's add a few more layers to the graph of layers:
+
+
+```r
+outputs <- x |>
+  layer_dense(units = 64, activation = "relu") |>
+  layer_dense(units = 10)
+```
+
+At this point, you can create a `Model` by specifying its inputs and outputs
+in the graph of layers:
+
+
+```r
+model <- keras_model(inputs = inputs, outputs = outputs, name = "mnist_model")
+```
+
+Let's check out what the model summary looks like:
+
+
+```r
 summary(model)
 ```
 
 ```
-Model
-__________________________________________________________________________________________
-Layer (type)                 Output Shape        Param #    Connected to                  
-==========================================================================================
-main_input (InputLayer)      (None, 100)         0                                        
-__________________________________________________________________________________________
-embedding_1 (Embedding)      (None, 100, 512)    5120000                                  
-__________________________________________________________________________________________
-lstm_1 (LSTM)                (None, 32)          69760                                    
-__________________________________________________________________________________________
-aux_input (InputLayer)       (None, 5)           0                                        
-__________________________________________________________________________________________
-concatenate_1 (Concatenate)  (None, 37)          0                                        
-__________________________________________________________________________________________
-dense_1 (Dense)              (None, 64)          2432                                     
-__________________________________________________________________________________________
-dense_2 (Dense)              (None, 64)          4160                                     
-__________________________________________________________________________________________
-dense_3 (Dense)              (None, 64)          4160                                     
-__________________________________________________________________________________________
-main_output (Dense)          (None, 1)           65                                       
-__________________________________________________________________________________________
-aux_output (Dense)           (None, 1)           33                                       
-==========================================================================================
-Total params: 5,200,610
-Trainable params: 5,200,610
-Non-trainable params: 0
-__________________________________________________________________________________________
+## [1mModel: "mnist_model"[0m
+## ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━┓
+## ┃[1m [0m[1mLayer (type)                   [0m[1m [0m┃[1m [0m[1mOutput Shape             [0m[1m [0m┃[1m [0m[1m   Param #[0m[1m [0m┃
+## ┡━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━┩
+## │ input_layer ([38;5;33mInputLayer[0m)        │ ([38;5;45mNone[0m, [38;5;34m784[0m)               │          [38;5;34m0[0m │
+## ├─────────────────────────────────┼───────────────────────────┼────────────┤
+## │ dense ([38;5;33mDense[0m)                   │ ([38;5;45mNone[0m, [38;5;34m64[0m)                │     [38;5;34m50,240[0m │
+## ├─────────────────────────────────┼───────────────────────────┼────────────┤
+## │ dense_2 ([38;5;33mDense[0m)                 │ ([38;5;45mNone[0m, [38;5;34m64[0m)                │      [38;5;34m4,160[0m │
+## ├─────────────────────────────────┼───────────────────────────┼────────────┤
+## │ dense_1 ([38;5;33mDense[0m)                 │ ([38;5;45mNone[0m, [38;5;34m10[0m)                │        [38;5;34m650[0m │
+## └─────────────────────────────────┴───────────────────────────┴────────────┘
+## [1m Total params: [0m[38;5;34m55,050[0m (215.04 KB)
+## [1m Trainable params: [0m[38;5;34m55,050[0m (215.04 KB)
+## [1m Non-trainable params: [0m[38;5;34m0[0m (0.00 B)
 ```
 
-We compile the model and assign a weight of 0.2 to the auxiliary loss.
-To specify different `loss_weights` or `loss` for each different output, you can use a list or a dictionary.
-Here we pass a single loss as the `loss` argument, so the same loss will be used on all outputs.
+You can also plot the model as a graph:
 
-```{r}
-model %>% compile(
-  optimizer = 'rmsprop',
-  loss = 'binary_crossentropy',
+
+```r
+plot(model)
+```
+
+<img src="functional_api/unnamed-chunk-10-1.png" width="176" />
+
+And, optionally, display the input and output shapes of each layer
+in the plotted graph:
+
+
+```r
+plot(model, show_shapes = TRUE)
+```
+
+<img src="functional_api/unnamed-chunk-11-1.png" width="311" />
+
+This figure and the code are almost identical. In the code version,
+the connection arrows are replaced by the call operation.
+
+A "graph of layers" is an intuitive mental image for a deep learning model,
+and the functional API is a way to create models that closely mirrors this.
+
+## Training, evaluation, and inference
+
+Training, evaluation, and inference work exactly in the same way for models
+built using the functional API as for `Sequential` models.
+
+The `Model` class offers a built-in training loop (the `fit()` method)
+and a built-in evaluation loop (the `evaluate()` method). Note
+that you can easily [customize these loops](/guides/customizing_what_happens_in_fit/)
+to implement training routines beyond supervised learning
+(e.g. [GANs](https://keras.io/examples/generative/dcgan_overriding_train_step/)).
+
+Here, load the MNIST image data, reshape it into vectors,
+fit the model on the data (while monitoring performance on a validation split),
+then evaluate the model on the test data:
+
+
+```r
+c(c(x_train, y_train), c(x_test, y_test)) %<-% dataset_mnist()
+
+x_train <- array_reshape(x_train, c(60000, 784)) / 255
+x_test <- array_reshape(x_test, c(10000, 784)) / 255
+
+model |> compile(
+  loss = loss_sparse_categorical_crossentropy(from_logits = TRUE),
+  optimizer = optimizer_rmsprop(),
+  metrics = "accuracy"
+)
+
+history <- model |> fit(
+    x_train, y_train, batch_size = 64, epochs = 2, validation_split = 0.2
+)
+```
+
+```
+## Epoch 1/2
+## 750/750 - 2s - 3ms/step - accuracy: 0.9015 - loss: 0.3513 - val_accuracy: 0.9442 - val_loss: 0.1921
+## Epoch 2/2
+## 750/750 - 1s - 1ms/step - accuracy: 0.9508 - loss: 0.1643 - val_accuracy: 0.9581 - val_loss: 0.1423
+```
+
+```r
+test_scores <- model |> evaluate(x_test, y_test, verbose=2)
+```
+
+```
+## 313/313 - 0s - 1ms/step - accuracy: 0.9578 - loss: 0.1338
+```
+
+
+
+```r
+cat("Test loss:", test_scores$loss, "\n")
+cat("Test accuracy:", test_scores$accuracy, "\n")
+```
+
+```
+## Test loss: 0.1337984
+## Test accuracy: 0.9578
+```
+
+For further reading, see the [training and evaluation](/guides/training_with_built_in_methods/) guide.
+
+## Save and serialize
+
+Saving the model and serialization work the same way for models built using
+the functional API as they do for `Sequential` models. The standard way
+to save a functional model is to call `model.save()`
+to save the entire model as a single file. You can later recreate the same model
+from this file, even if the code that built the model is no longer available.
+
+This saved file includes the:
+- model architecture
+- model weight values (that were learned during training)
+- model training config, if any (as passed to `compile()`)
+- optimizer and its state, if any (to restart training where you left off)
+
+
+```r
+model |> save_model("my_model.keras")
+rm(model)
+# Recreate the exact same model purely from the file:
+model <- load_model("my_model.keras")
+```
+
+
+
+
+For details, read the model [serialization & saving](/guides/serialization_and_saving/) guide.
+
+## Use the same graph of layers to define multiple models
+
+In the functional API, models are created by specifying their inputs
+and outputs in a graph of layers. That means that a single
+graph of layers can be used to generate multiple models.
+
+In the example below, you use the same stack of layers to instantiate two models:
+an `encoder` model that turns image inputs into 16-dimensional vectors,
+and an end-to-end `autoencoder` model for training.
+
+
+```r
+encoder_input <- keras_input(shape = c(28, 28, 1), name="img")
+encoder_output <- encoder_input |>
+  layer_conv_2d(16, 3, activation = "relu") |>
+  layer_conv_2d(32, 3, activation = "relu") |>
+  layer_max_pooling_2d(3) |>
+  layer_conv_2d(32, 3, activation = "relu") |>
+  layer_conv_2d(16, 3, activation = "relu") |>
+  layer_global_max_pooling_2d()
+
+encoder <- keras_model(encoder_input, encoder_output, name="encoder")
+summary(encoder)
+```
+
+```
+## [1mModel: "encoder"[0m
+## ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━┓
+## ┃[1m [0m[1mLayer (type)                   [0m[1m [0m┃[1m [0m[1mOutput Shape             [0m[1m [0m┃[1m [0m[1m   Param #[0m[1m [0m┃
+## ┡━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━┩
+## │ img ([38;5;33mInputLayer[0m)                │ ([38;5;45mNone[0m, [38;5;34m28[0m, [38;5;34m28[0m, [38;5;34m1[0m)         │          [38;5;34m0[0m │
+## ├─────────────────────────────────┼───────────────────────────┼────────────┤
+## │ conv2d_3 ([38;5;33mConv2D[0m)               │ ([38;5;45mNone[0m, [38;5;34m26[0m, [38;5;34m26[0m, [38;5;34m16[0m)        │        [38;5;34m160[0m │
+## ├─────────────────────────────────┼───────────────────────────┼────────────┤
+## │ conv2d_2 ([38;5;33mConv2D[0m)               │ ([38;5;45mNone[0m, [38;5;34m24[0m, [38;5;34m24[0m, [38;5;34m32[0m)        │      [38;5;34m4,640[0m │
+## ├─────────────────────────────────┼───────────────────────────┼────────────┤
+## │ max_pooling2d ([38;5;33mMaxPooling2D[0m)    │ ([38;5;45mNone[0m, [38;5;34m8[0m, [38;5;34m8[0m, [38;5;34m32[0m)          │          [38;5;34m0[0m │
+## ├─────────────────────────────────┼───────────────────────────┼────────────┤
+## │ conv2d_1 ([38;5;33mConv2D[0m)               │ ([38;5;45mNone[0m, [38;5;34m6[0m, [38;5;34m6[0m, [38;5;34m32[0m)          │      [38;5;34m9,248[0m │
+## ├─────────────────────────────────┼───────────────────────────┼────────────┤
+## │ conv2d ([38;5;33mConv2D[0m)                 │ ([38;5;45mNone[0m, [38;5;34m4[0m, [38;5;34m4[0m, [38;5;34m16[0m)          │      [38;5;34m4,624[0m │
+## ├─────────────────────────────────┼───────────────────────────┼────────────┤
+## │ global_max_pooling2d            │ ([38;5;45mNone[0m, [38;5;34m16[0m)                │          [38;5;34m0[0m │
+## │ ([38;5;33mGlobalMaxPooling2D[0m)            │                           │            │
+## └─────────────────────────────────┴───────────────────────────┴────────────┘
+## [1m Total params: [0m[38;5;34m18,672[0m (72.94 KB)
+## [1m Trainable params: [0m[38;5;34m18,672[0m (72.94 KB)
+## [1m Non-trainable params: [0m[38;5;34m0[0m (0.00 B)
+```
+
+```r
+decoder_output <- encoder_output |>
+  layer_reshape(c(4, 4, 1)) |>
+  layer_conv_2d_transpose(16, 3, activation = "relu") |>
+  layer_conv_2d_transpose(32, 3, activation = "relu") |>
+  layer_upsampling_2d(3) |>
+  layer_conv_2d_transpose(16, 3, activation = "relu") |>
+  layer_conv_2d_transpose(1, 3, activation = "relu")
+
+autoencoder <- keras_model(encoder_input, decoder_output, name="autoencoder")
+summary(autoencoder)
+```
+
+```
+## [1mModel: "autoencoder"[0m
+## ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━┓
+## ┃[1m [0m[1mLayer (type)                   [0m[1m [0m┃[1m [0m[1mOutput Shape             [0m[1m [0m┃[1m [0m[1m   Param #[0m[1m [0m┃
+## ┡━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━┩
+## │ img ([38;5;33mInputLayer[0m)                │ ([38;5;45mNone[0m, [38;5;34m28[0m, [38;5;34m28[0m, [38;5;34m1[0m)         │          [38;5;34m0[0m │
+## ├─────────────────────────────────┼───────────────────────────┼────────────┤
+## │ conv2d_3 ([38;5;33mConv2D[0m)               │ ([38;5;45mNone[0m, [38;5;34m26[0m, [38;5;34m26[0m, [38;5;34m16[0m)        │        [38;5;34m160[0m │
+## ├─────────────────────────────────┼───────────────────────────┼────────────┤
+## │ conv2d_2 ([38;5;33mConv2D[0m)               │ ([38;5;45mNone[0m, [38;5;34m24[0m, [38;5;34m24[0m, [38;5;34m32[0m)        │      [38;5;34m4,640[0m │
+## ├─────────────────────────────────┼───────────────────────────┼────────────┤
+## │ max_pooling2d ([38;5;33mMaxPooling2D[0m)    │ ([38;5;45mNone[0m, [38;5;34m8[0m, [38;5;34m8[0m, [38;5;34m32[0m)          │          [38;5;34m0[0m │
+## ├─────────────────────────────────┼───────────────────────────┼────────────┤
+## │ conv2d_1 ([38;5;33mConv2D[0m)               │ ([38;5;45mNone[0m, [38;5;34m6[0m, [38;5;34m6[0m, [38;5;34m32[0m)          │      [38;5;34m9,248[0m │
+## ├─────────────────────────────────┼───────────────────────────┼────────────┤
+## │ conv2d ([38;5;33mConv2D[0m)                 │ ([38;5;45mNone[0m, [38;5;34m4[0m, [38;5;34m4[0m, [38;5;34m16[0m)          │      [38;5;34m4,624[0m │
+## ├─────────────────────────────────┼───────────────────────────┼────────────┤
+## │ global_max_pooling2d            │ ([38;5;45mNone[0m, [38;5;34m16[0m)                │          [38;5;34m0[0m │
+## │ ([38;5;33mGlobalMaxPooling2D[0m)            │                           │            │
+## ├─────────────────────────────────┼───────────────────────────┼────────────┤
+## │ reshape ([38;5;33mReshape[0m)               │ ([38;5;45mNone[0m, [38;5;34m4[0m, [38;5;34m4[0m, [38;5;34m1[0m)           │          [38;5;34m0[0m │
+## ├─────────────────────────────────┼───────────────────────────┼────────────┤
+## │ conv2d_transpose_3              │ ([38;5;45mNone[0m, [38;5;34m6[0m, [38;5;34m6[0m, [38;5;34m16[0m)          │        [38;5;34m160[0m │
+## │ ([38;5;33mConv2DTranspose[0m)               │                           │            │
+## ├─────────────────────────────────┼───────────────────────────┼────────────┤
+## │ conv2d_transpose_2              │ ([38;5;45mNone[0m, [38;5;34m8[0m, [38;5;34m8[0m, [38;5;34m32[0m)          │      [38;5;34m4,640[0m │
+## │ ([38;5;33mConv2DTranspose[0m)               │                           │            │
+## ├─────────────────────────────────┼───────────────────────────┼────────────┤
+## │ up_sampling2d ([38;5;33mUpSampling2D[0m)    │ ([38;5;45mNone[0m, [38;5;34m24[0m, [38;5;34m24[0m, [38;5;34m32[0m)        │          [38;5;34m0[0m │
+## ├─────────────────────────────────┼───────────────────────────┼────────────┤
+## │ conv2d_transpose_1              │ ([38;5;45mNone[0m, [38;5;34m26[0m, [38;5;34m26[0m, [38;5;34m16[0m)        │      [38;5;34m4,624[0m │
+## │ ([38;5;33mConv2DTranspose[0m)               │                           │            │
+## ├─────────────────────────────────┼───────────────────────────┼────────────┤
+## │ conv2d_transpose                │ ([38;5;45mNone[0m, [38;5;34m28[0m, [38;5;34m28[0m, [38;5;34m1[0m)         │        [38;5;34m145[0m │
+## │ ([38;5;33mConv2DTranspose[0m)               │                           │            │
+## └─────────────────────────────────┴───────────────────────────┴────────────┘
+## [1m Total params: [0m[38;5;34m28,241[0m (110.32 KB)
+## [1m Trainable params: [0m[38;5;34m28,241[0m (110.32 KB)
+## [1m Non-trainable params: [0m[38;5;34m0[0m (0.00 B)
+```
+
+Here, the decoding architecture is strictly symmetrical
+to the encoding architecture, so the output shape is the same as
+the input shape `(28, 28, 1)`.
+
+The reverse of a `conv_2d` layer is a `conv_2d_transpose` layer,
+and the reverse of a `max_pooling_2d` layer is an `upsampling_2d` layer.
+
+## All models are callable, just like layers
+
+You can treat any model as if it were a layer by invoking it on an `Input` or
+on the output of another layer. By calling a model you aren't just reusing
+the architecture of the model, you're also reusing its weights.
+
+To see this in action, here's a different take on the autoencoder example that
+creates an encoder model, a decoder model, and chains them in two calls
+to obtain the autoencoder model:
+
+
+```r
+encoder_input <- keras_input(shape = c(28, 28, 1), name="img")
+encoder_output <- encoder_input |>
+  layer_conv_2d(16, 3, activation = "relu") |>
+  layer_conv_2d(32, 3, activation = "relu") |>
+  layer_max_pooling_2d(3) |>
+  layer_conv_2d(32, 3, activation = "relu") |>
+  layer_conv_2d(16, 3, activation = "relu") |>
+  layer_global_max_pooling_2d()
+
+encoder <- keras_model(encoder_input, encoder_output, name="encoder")
+summary(encoder)
+```
+
+```
+## [1mModel: "encoder"[0m
+## ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━┓
+## ┃[1m [0m[1mLayer (type)                   [0m[1m [0m┃[1m [0m[1mOutput Shape             [0m[1m [0m┃[1m [0m[1m   Param #[0m[1m [0m┃
+## ┡━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━┩
+## │ img ([38;5;33mInputLayer[0m)                │ ([38;5;45mNone[0m, [38;5;34m28[0m, [38;5;34m28[0m, [38;5;34m1[0m)         │          [38;5;34m0[0m │
+## ├─────────────────────────────────┼───────────────────────────┼────────────┤
+## │ conv2d_7 ([38;5;33mConv2D[0m)               │ ([38;5;45mNone[0m, [38;5;34m26[0m, [38;5;34m26[0m, [38;5;34m16[0m)        │        [38;5;34m160[0m │
+## ├─────────────────────────────────┼───────────────────────────┼────────────┤
+## │ conv2d_6 ([38;5;33mConv2D[0m)               │ ([38;5;45mNone[0m, [38;5;34m24[0m, [38;5;34m24[0m, [38;5;34m32[0m)        │      [38;5;34m4,640[0m │
+## ├─────────────────────────────────┼───────────────────────────┼────────────┤
+## │ max_pooling2d_1 ([38;5;33mMaxPooling2D[0m)  │ ([38;5;45mNone[0m, [38;5;34m8[0m, [38;5;34m8[0m, [38;5;34m32[0m)          │          [38;5;34m0[0m │
+## ├─────────────────────────────────┼───────────────────────────┼────────────┤
+## │ conv2d_5 ([38;5;33mConv2D[0m)               │ ([38;5;45mNone[0m, [38;5;34m6[0m, [38;5;34m6[0m, [38;5;34m32[0m)          │      [38;5;34m9,248[0m │
+## ├─────────────────────────────────┼───────────────────────────┼────────────┤
+## │ conv2d_4 ([38;5;33mConv2D[0m)               │ ([38;5;45mNone[0m, [38;5;34m4[0m, [38;5;34m4[0m, [38;5;34m16[0m)          │      [38;5;34m4,624[0m │
+## ├─────────────────────────────────┼───────────────────────────┼────────────┤
+## │ global_max_pooling2d_1          │ ([38;5;45mNone[0m, [38;5;34m16[0m)                │          [38;5;34m0[0m │
+## │ ([38;5;33mGlobalMaxPooling2D[0m)            │                           │            │
+## └─────────────────────────────────┴───────────────────────────┴────────────┘
+## [1m Total params: [0m[38;5;34m18,672[0m (72.94 KB)
+## [1m Trainable params: [0m[38;5;34m18,672[0m (72.94 KB)
+## [1m Non-trainable params: [0m[38;5;34m0[0m (0.00 B)
+```
+
+```r
+decoder_input <- keras_input(shape = c(16), name = "encoded_img")
+decoder_output <- decoder_input |>
+  layer_reshape(c(4, 4, 1)) |>
+  layer_conv_2d_transpose(16, 3, activation = "relu") |>
+  layer_conv_2d_transpose(32, 3, activation = "relu") |>
+  layer_upsampling_2d(3) |>
+  layer_conv_2d_transpose(16, 3, activation = "relu") |>
+  layer_conv_2d_transpose(1, 3, activation = "relu")
+
+decoder <- keras_model(decoder_input, decoder_output, name = "decoder")
+summary(decoder)
+```
+
+```
+## [1mModel: "decoder"[0m
+## ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━┓
+## ┃[1m [0m[1mLayer (type)                   [0m[1m [0m┃[1m [0m[1mOutput Shape             [0m[1m [0m┃[1m [0m[1m   Param #[0m[1m [0m┃
+## ┡━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━┩
+## │ encoded_img ([38;5;33mInputLayer[0m)        │ ([38;5;45mNone[0m, [38;5;34m16[0m)                │          [38;5;34m0[0m │
+## ├─────────────────────────────────┼───────────────────────────┼────────────┤
+## │ reshape_1 ([38;5;33mReshape[0m)             │ ([38;5;45mNone[0m, [38;5;34m4[0m, [38;5;34m4[0m, [38;5;34m1[0m)           │          [38;5;34m0[0m │
+## ├─────────────────────────────────┼───────────────────────────┼────────────┤
+## │ conv2d_transpose_7              │ ([38;5;45mNone[0m, [38;5;34m6[0m, [38;5;34m6[0m, [38;5;34m16[0m)          │        [38;5;34m160[0m │
+## │ ([38;5;33mConv2DTranspose[0m)               │                           │            │
+## ├─────────────────────────────────┼───────────────────────────┼────────────┤
+## │ conv2d_transpose_6              │ ([38;5;45mNone[0m, [38;5;34m8[0m, [38;5;34m8[0m, [38;5;34m32[0m)          │      [38;5;34m4,640[0m │
+## │ ([38;5;33mConv2DTranspose[0m)               │                           │            │
+## ├─────────────────────────────────┼───────────────────────────┼────────────┤
+## │ up_sampling2d_1 ([38;5;33mUpSampling2D[0m)  │ ([38;5;45mNone[0m, [38;5;34m24[0m, [38;5;34m24[0m, [38;5;34m32[0m)        │          [38;5;34m0[0m │
+## ├─────────────────────────────────┼───────────────────────────┼────────────┤
+## │ conv2d_transpose_5              │ ([38;5;45mNone[0m, [38;5;34m26[0m, [38;5;34m26[0m, [38;5;34m16[0m)        │      [38;5;34m4,624[0m │
+## │ ([38;5;33mConv2DTranspose[0m)               │                           │            │
+## ├─────────────────────────────────┼───────────────────────────┼────────────┤
+## │ conv2d_transpose_4              │ ([38;5;45mNone[0m, [38;5;34m28[0m, [38;5;34m28[0m, [38;5;34m1[0m)         │        [38;5;34m145[0m │
+## │ ([38;5;33mConv2DTranspose[0m)               │                           │            │
+## └─────────────────────────────────┴───────────────────────────┴────────────┘
+## [1m Total params: [0m[38;5;34m9,569[0m (37.38 KB)
+## [1m Trainable params: [0m[38;5;34m9,569[0m (37.38 KB)
+## [1m Non-trainable params: [0m[38;5;34m0[0m (0.00 B)
+```
+
+```r
+autoencoder_input <- keras_input(shape = c(28, 28, 1), name = "img")
+encoded_img <- encoder(autoencoder_input)
+decoded_img <- decoder(encoded_img)
+autoencoder <- keras_model(autoencoder_input, decoded_img,
+                           name = "autoencoder")
+summary(autoencoder)
+```
+
+```
+## [1mModel: "autoencoder"[0m
+## ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━┓
+## ┃[1m [0m[1mLayer (type)                   [0m[1m [0m┃[1m [0m[1mOutput Shape             [0m[1m [0m┃[1m [0m[1m   Param #[0m[1m [0m┃
+## ┡━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━┩
+## │ img ([38;5;33mInputLayer[0m)                │ ([38;5;45mNone[0m, [38;5;34m28[0m, [38;5;34m28[0m, [38;5;34m1[0m)         │          [38;5;34m0[0m │
+## ├─────────────────────────────────┼───────────────────────────┼────────────┤
+## │ encoder ([38;5;33mFunctional[0m)            │ ([38;5;45mNone[0m, [38;5;34m16[0m)                │     [38;5;34m18,672[0m │
+## ├─────────────────────────────────┼───────────────────────────┼────────────┤
+## │ decoder ([38;5;33mFunctional[0m)            │ ([38;5;45mNone[0m, [38;5;34m28[0m, [38;5;34m28[0m, [38;5;34m1[0m)         │      [38;5;34m9,569[0m │
+## └─────────────────────────────────┴───────────────────────────┴────────────┘
+## [1m Total params: [0m[38;5;34m28,241[0m (110.32 KB)
+## [1m Trainable params: [0m[38;5;34m28,241[0m (110.32 KB)
+## [1m Non-trainable params: [0m[38;5;34m0[0m (0.00 B)
+```
+
+As you can see, the model can be nested: a model can contain sub-models
+(since a model is just like a layer).
+A common use case for model nesting is *ensembling*.
+For example, here's how to ensemble a set of models into a single model
+that averages their predictions:
+
+
+```r
+get_model <- function() {
+  inputs <- keras_input(shape = 128)
+  outputs <- inputs |> layer_dense(1)
+  keras_model(inputs, outputs)
+}
+
+model1 <- get_model()
+model2 <- get_model()
+model3 <- get_model()
+
+inputs <- keras_input(shape = 128)
+y1 <- model1(inputs)
+y2 <- model2(inputs)
+y3 <- model3(inputs)
+outputs <- layer_average(list(y1, y2, y3))
+ensemble_model <- keras_model(inputs = inputs, outputs = outputs)
+```
+
+## Manipulate complex graph topologies
+
+### Models with multiple inputs and outputs
+
+The functional API makes it easy to manipulate multiple inputs and outputs.
+This cannot be handled with the `Sequential` API.
+
+For example, if you're building a system for ranking customer issue tickets by
+priority and routing them to the correct department,
+then the model will have three inputs:
+
+- the title of the ticket (text input),
+- the text body of the ticket (text input), and
+- any tags added by the user (categorical input)
+
+This model will have two outputs:
+
+- the priority score between 0 and 1 (scalar sigmoid output), and
+- the department that should handle the ticket (softmax output
+over the set of departments).
+
+You can build this model in a few lines with the functional API:
+
+
+```r
+num_tags <- 12  # Number of unique issue tags
+num_words <-
+  10000  # Size of vocabulary obtained when preprocessing text data
+num_departments <- 4  # Number of departments for predictions
+
+title_input <- # Variable-length sequence of ints
+  keras_input(shape(NA), name = "title")
+body_input <-  # Variable-length sequence of ints
+  keras_input(shape(NA), name = "body")
+tags_input <-  # Binary vectors of size `num_tags`
+  keras_input(shape = num_tags, name = "tags")
+
+# Embed each word in the title into a 64-dimensional vector
+title_features <- layer_embedding(title_input, num_words, 64)
+# Embed each word in the text into a 64-dimensional vector
+body_features <- layer_embedding(body_input, num_words, 64)
+
+# Reduce sequence of embedded words in the title
+# into a single 128-dimensional vector
+title_features <- layer_lstm(title_features, 128)
+# Reduce sequence of embedded words in the body
+# into a single 32-dimensional vector
+body_features <- layer_lstm(body_features, 32)
+
+# Merge all available features into a single large vector via concatenation
+x <- layer_concatenate(title_features, body_features, tags_input)
+
+# Stick a logistic regression for priority prediction on top of the features
+priority_pred <- layer_dense(x, 1, name = "priority")
+
+# Stick a department classifier on top of the features
+department_pred <- layer_dense(x, num_departments, name = "department")
+
+# Instantiate an end-to-end model predicting both priority and department
+model <- keras_model(
+  inputs = list(title_input, body_input, tags_input),
+  outputs = list(priority = priority_pred, department = department_pred)
+)
+```
+
+Now plot the model:
+
+
+```r
+plot(model, show_shapes = TRUE)
+```
+
+<img src="functional_api/unnamed-chunk-20-1.png" width="1008" />
+
+When compiling this model, you can assign different losses to each output.
+You can even assign different weights to each loss -- to modulate
+their contribution to the total training loss.
+
+
+```r
+model |> compile(
+  optimizer = optimizer_rmsprop(1e-3),
+  loss = list(
+    loss_binary_crossentropy(from_logits = TRUE),
+    loss_categorical_crossentropy(from_logits = TRUE)
+  ),
   loss_weights = c(1.0, 0.2)
 )
 ```
 
+Since the output layers have different names, you could also specify
+the losses and loss weights with the corresponding layer names:
 
-We can train the model by passing it lists of input arrays and target arrays:
 
-```{r, eval = FALSE}
-model %>% fit(
-  x = list(headline_data, additional_data),
-  y = list(labels, labels),
-  epochs = 50,
+```r
+model |> compile(
+  optimizer = optimizer_rmsprop(1e-3),
+  loss = list(
+    priority = loss_binary_crossentropy(from_logits = TRUE),
+    department = loss_categorical_crossentropy(from_logits = TRUE)
+  ),
+  loss_weights = list(priority = 1.0, department = 0.2)
+)
+```
+
+Train the model by passing lists of NumPy arrays of inputs and targets:
+
+
+```r
+# Dummy input data
+title_data <- random_integer(c(1280, 10), 0, num_words)
+body_data <- random_integer(c(1280, 100), 0, num_words)
+tags_data <- random_integer(c(1280, num_tags), 0, 2)
+
+# Dummy target data
+priority_targets <- random_normal(c(1280, 1))
+dept_targets <- random_integer(c(1280, num_departments), 0, 2)
+
+model |> fit(
+  list(title = title_data, body = body_data, tags = tags_data),
+  list(priority = priority_targets, department = dept_targets),
+  epochs = 2,
   batch_size = 32
 )
 ```
 
-Since our inputs and outputs are named (we passed them a "name" argument),
-We could also have compiled the model via:
+```
+## Epoch 1/2
+## 40/40 - 3s - 82ms/step - loss: 0.3948
+## Epoch 2/2
+## 40/40 - 0s - 6ms/step - loss: 0.1971
+```
 
-```{r, eval = FALSE}
-model %>% compile(
-  optimizer = 'rmsprop',
-  loss = list(main_output = 'binary_crossentropy', aux_output = 'binary_crossentropy'),
-  loss_weights = list(main_output = 1.0, aux_output = 0.2)
+When calling fit with a `Dataset` object, it should yield either a
+list of lists like `list(list(title_data, body_data, tags_data), list(priority_targets, dept_targets))`
+or a list of named lists like
+`list(list(title = title_data, body = body_data, tags = tags_data), list(priority = priority_targets, department = dept_targets))`.
+
+For more detailed explanation, refer to the [training and evaluation](/guides/training_with_built_in_methods/) guide.
+
+### A toy ResNet model
+
+In addition to models with multiple inputs and outputs,
+the functional API makes it easy to manipulate non-linear connectivity
+topologies -- these are models with layers that are not connected sequentially,
+which the `Sequential` API cannot handle.
+
+A common use case for this is residual connections.
+Let's build a toy ResNet model for CIFAR10 to demonstrate this:
+
+
+```r
+inputs <- keras_input(shape = c(32, 32, 3), name = "img")
+block_1_output <- inputs |>
+  layer_conv_2d(32, kernel_size = 3, activation = "relu") |>
+  layer_conv_2d(64, kernel_size = 3, activation = "relu") |>
+  layer_max_pooling_2d(pool_size = 3)
+
+block_2_output <- block_1_output |>
+  layer_conv_2d(32, kernel_size = 3, activation = "relu", padding = "same") |>
+  layer_conv_2d(64, kernel_size = 3, activation = "relu", padding = "same") |>
+  layer_add(block_1_output)
+
+block_3_output <- block_2_output |>
+  layer_conv_2d(64, kernel_size = 3, activation = "relu", padding = "same") |>
+  layer_conv_2d(64, kernel_size = 3, activation = "relu", padding = "same") |>
+  layer_add(block_2_output)
+
+outputs <- block_3_output |>
+  layer_conv_2d(64, 3, activation = "relu") |>
+  layer_global_average_pooling_2d() |>
+  layer_dense(256, activation = "relu") |>
+  layer_dropout(0.5) |>
+  layer_dense(10)
+
+model <- keras_model(inputs, outputs, name = "toy_resnet")
+summary(model)
+```
+
+```
+## [1mModel: "toy_resnet"[0m
+## ┏━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━━┓
+## ┃[1m [0m[1mLayer (type)       [0m[1m [0m┃[1m [0m[1mOutput Shape     [0m[1m [0m┃[1m [0m[1mParam #[0m[1m [0m┃[1m [0m[1mConnected to        [0m[1m [0m┃
+## ┡━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━╇━━━━━━━━━━━━━━━━━━━━━━┩
+## │ img ([38;5;33mInputLayer[0m)    │ ([38;5;45mNone[0m, [38;5;34m32[0m, [38;5;34m32[0m, [38;5;34m3[0m) │       [38;5;34m0[0m │ -                    │
+## ├─────────────────────┼───────────────────┼─────────┼──────────────────────┤
+## │ conv2d_9 ([38;5;33mConv2D[0m)   │ ([38;5;45mNone[0m, [38;5;34m30[0m, [38;5;34m30[0m,    │     [38;5;34m896[0m │ img[[38;5;34m0[0m][[38;5;34m0[0m]            │
+## │                     │ [38;5;34m32[0m)               │         │                      │
+## ├─────────────────────┼───────────────────┼─────────┼──────────────────────┤
+## │ conv2d_8 ([38;5;33mConv2D[0m)   │ ([38;5;45mNone[0m, [38;5;34m28[0m, [38;5;34m28[0m,    │  [38;5;34m18,496[0m │ conv2d_9[[38;5;34m0[0m][[38;5;34m0[0m]       │
+## │                     │ [38;5;34m64[0m)               │         │                      │
+## ├─────────────────────┼───────────────────┼─────────┼──────────────────────┤
+## │ max_pooling2d_2     │ ([38;5;45mNone[0m, [38;5;34m9[0m, [38;5;34m9[0m, [38;5;34m64[0m)  │       [38;5;34m0[0m │ conv2d_8[[38;5;34m0[0m][[38;5;34m0[0m]       │
+## │ ([38;5;33mMaxPooling2D[0m)      │                   │         │                      │
+## ├─────────────────────┼───────────────────┼─────────┼──────────────────────┤
+## │ conv2d_11 ([38;5;33mConv2D[0m)  │ ([38;5;45mNone[0m, [38;5;34m9[0m, [38;5;34m9[0m, [38;5;34m32[0m)  │  [38;5;34m18,464[0m │ max_pooling2d_2[[38;5;34m0[0m][[38;5;34m…[0m │
+## ├─────────────────────┼───────────────────┼─────────┼──────────────────────┤
+## │ conv2d_10 ([38;5;33mConv2D[0m)  │ ([38;5;45mNone[0m, [38;5;34m9[0m, [38;5;34m9[0m, [38;5;34m64[0m)  │  [38;5;34m18,496[0m │ conv2d_11[[38;5;34m0[0m][[38;5;34m0[0m]      │
+## ├─────────────────────┼───────────────────┼─────────┼──────────────────────┤
+## │ add ([38;5;33mAdd[0m)           │ ([38;5;45mNone[0m, [38;5;34m9[0m, [38;5;34m9[0m, [38;5;34m64[0m)  │       [38;5;34m0[0m │ conv2d_10[[38;5;34m0[0m][[38;5;34m0[0m],     │
+## │                     │                   │         │ max_pooling2d_2[[38;5;34m0[0m][[38;5;34m…[0m │
+## ├─────────────────────┼───────────────────┼─────────┼──────────────────────┤
+## │ conv2d_13 ([38;5;33mConv2D[0m)  │ ([38;5;45mNone[0m, [38;5;34m9[0m, [38;5;34m9[0m, [38;5;34m64[0m)  │  [38;5;34m36,928[0m │ add[[38;5;34m0[0m][[38;5;34m0[0m]            │
+## ├─────────────────────┼───────────────────┼─────────┼──────────────────────┤
+## │ conv2d_12 ([38;5;33mConv2D[0m)  │ ([38;5;45mNone[0m, [38;5;34m9[0m, [38;5;34m9[0m, [38;5;34m64[0m)  │  [38;5;34m36,928[0m │ conv2d_13[[38;5;34m0[0m][[38;5;34m0[0m]      │
+## ├─────────────────────┼───────────────────┼─────────┼──────────────────────┤
+## │ add_1 ([38;5;33mAdd[0m)         │ ([38;5;45mNone[0m, [38;5;34m9[0m, [38;5;34m9[0m, [38;5;34m64[0m)  │       [38;5;34m0[0m │ conv2d_12[[38;5;34m0[0m][[38;5;34m0[0m],     │
+## │                     │                   │         │ add[[38;5;34m0[0m][[38;5;34m0[0m]            │
+## ├─────────────────────┼───────────────────┼─────────┼──────────────────────┤
+## │ conv2d_14 ([38;5;33mConv2D[0m)  │ ([38;5;45mNone[0m, [38;5;34m7[0m, [38;5;34m7[0m, [38;5;34m64[0m)  │  [38;5;34m36,928[0m │ add_1[[38;5;34m0[0m][[38;5;34m0[0m]          │
+## ├─────────────────────┼───────────────────┼─────────┼──────────────────────┤
+## │ global_average_poo… │ ([38;5;45mNone[0m, [38;5;34m64[0m)        │       [38;5;34m0[0m │ conv2d_14[[38;5;34m0[0m][[38;5;34m0[0m]      │
+## │ ([38;5;33mGlobalAveragePool…[0m │                   │         │                      │
+## ├─────────────────────┼───────────────────┼─────────┼──────────────────────┤
+## │ dense_7 ([38;5;33mDense[0m)     │ ([38;5;45mNone[0m, [38;5;34m256[0m)       │  [38;5;34m16,640[0m │ global_average_pool… │
+## ├─────────────────────┼───────────────────┼─────────┼──────────────────────┤
+## │ dropout ([38;5;33mDropout[0m)   │ ([38;5;45mNone[0m, [38;5;34m256[0m)       │       [38;5;34m0[0m │ dense_7[[38;5;34m0[0m][[38;5;34m0[0m]        │
+## ├─────────────────────┼───────────────────┼─────────┼──────────────────────┤
+## │ dense_6 ([38;5;33mDense[0m)     │ ([38;5;45mNone[0m, [38;5;34m10[0m)        │   [38;5;34m2,570[0m │ dropout[[38;5;34m0[0m][[38;5;34m0[0m]        │
+## └─────────────────────┴───────────────────┴─────────┴──────────────────────┘
+## [1m Total params: [0m[38;5;34m186,346[0m (727.91 KB)
+## [1m Trainable params: [0m[38;5;34m186,346[0m (727.91 KB)
+## [1m Non-trainable params: [0m[38;5;34m0[0m (0.00 B)
+```
+
+Plot the model:
+
+
+```r
+plot(model, show_shapes = TRUE)
+```
+
+<img src="functional_api/unnamed-chunk-25-1.png" width="468" />
+
+Now train the model:
+
+
+```r
+c(c(x_train, y_train), c(x_test, y_test)) %<-% dataset_cifar10()
+
+x_train <- x_train / 255.0
+x_test <- x_test / 255.0
+
+model |> compile(
+  optimizer = optimizer_rmsprop(1e-3),
+  loss = loss_sparse_categorical_crossentropy(from_logits = TRUE),
+  metrics = "acc"
 )
-
-# And trained it via:
-model %>% fit(
-  x = list(main_input = headline_data, aux_input = additional_data),
-  y = list(main_output = labels, aux_output = labels),
-  epochs = 50,
-  batch_size = 32
+# We restrict the data to the first 1000 samples so as to limit the
+# guide render time.
+# Try to train on the entire dataset until convergence!
+model |> fit(
+  x_train[1:1000, , , ],
+  y_train[1:1000, ],
+  batch_size = 64,
+  epochs = 1,
+  validation_split = 0.2
 )
 ```
 
+```
+## 13/13 - 7s - 549ms/step - acc: 0.1325 - loss: 2.3035 - val_acc: 0.1150 - val_loss: 2.3066
+```
 
 ## Shared layers
 
-Another good use for the functional API are models that use shared layers. Let's take a look at shared layers.
+Another good use for the functional API are models that use *shared layers*.
+Shared layers are layer instances that are reused multiple times in the same model --
+they learn features that correspond to multiple paths in the graph-of-layers.
 
-Let's consider a dataset of tweets. We want to build a model that can tell whether two tweets are from the same person or not (this can allow us to compare users by the similarity of their tweets, for instance).
+Shared layers are often used to encode inputs from similar spaces
+(say, two different pieces of text that feature similar vocabulary).
+They enable sharing of information across these different inputs,
+and they make it possible to train such a model on less data.
+If a given word is seen in one of the inputs,
+that will benefit the processing of all inputs that pass through the shared layer.
 
-One way to achieve this is to build a model that encodes two tweets into two vectors, concatenates the vectors and then adds a logistic regression; this outputs a probability that the two tweets share the same author. The model would then be trained on positive tweet pairs and negative tweet pairs.
-
-Because the problem is symmetric, the mechanism that encodes the first tweet should be reused (weights and all) to encode the second tweet. Here we use a shared LSTM layer to encode the tweets.
-
-Let's build this with the functional API. We will take as input for a tweet a binary matrix of shape `(280, 256)`, i.e. a sequence of 280 vectors of size 256, where each dimension in the 256-dimensional vector encodes the presence/absence of a character (out of an alphabet of 256 frequent characters).
+To share a layer in the functional API, call the same layer instance multiple times.
+For instance, here's an `Embedding` layer shared across two different text inputs:
 
 
-```{r}
-library(keras)
+```r
+# Embedding for 1000 unique words mapped to 128-dimensional vectors
+shared_embedding <- layer_embedding(input_dim = 1000, output_dim = 128)
 
-tweet_a <- layer_input(shape = c(280, 256))
-tweet_b <- layer_input(shape = c(280, 256))
+# Variable-length sequence of integers
+text_input_a <- keras_input(shape = shape(NA), dtype="int32")
+
+# Variable-length sequence of integers
+text_input_b <- keras_input(shape = shape(NA), dtype="int32")
+
+# Reuse the same layer to encode both inputs
+encoded_input_a <- shared_embedding(text_input_a)
+encoded_input_b <- shared_embedding(text_input_b)
 ```
 
-To share a layer across different inputs, simply instantiate the layer once, then call it on as many inputs as you want:
+## Extract and reuse nodes in the graph of layers
 
-```{r eval=FALSE}
-# This layer can take as input a matrix and will return a vector of size 64
-shared_lstm <- layer_lstm(units = 64)
+Because the graph of layers you are manipulating is a static data structure,
+it can be accessed and inspected. And this is how you are able to plot
+functional models as images.
 
-# When we reuse the same layer instance multiple times, the weights of the layer are also
-# being reused (it is effectively *the same* layer)
-encoded_a <- tweet_a %>% shared_lstm
-encoded_b <- tweet_b %>% shared_lstm
+This also means that you can access the activations of intermediate layers
+("nodes" in the graph) and reuse them elsewhere --
+which is very useful for something like feature extraction.
 
-# We can then concatenate the two vectors and add a logistic regression on top
-predictions <- layer_concatenate(c(encoded_a, encoded_b), axis=-1) %>% 
-  layer_dense(units = 1, activation = 'sigmoid')
+Let's look at an example. This is a VGG19 model with weights pretrained on ImageNet:
 
-# We define a trainable model linking the tweet inputs to the predictions
-model <- keras_model(inputs = c(tweet_a, tweet_b), outputs = predictions)
 
-model %>% compile(
-  optimizer = 'rmsprop',
-  loss = 'binary_crossentropy',
-  metrics = c('accuracy')
+
+```r
+vgg19 <- application_vgg19()
+```
+
+And these are the intermediate activations of the model,
+obtained by querying the graph data structure:
+
+
+```r
+features_list <- lapply(vgg19$layers, function(x) x$output)
+```
+
+Use these features to create a new feature-extraction model that returns
+the values of the intermediate layer activations:
+
+
+```r
+feat_extraction_model <- keras_model(inputs = vgg19$input,
+                                     outputs = features_list)
+
+img <- random_normal(c(1, 224, 224, 3))
+extracted_features <- feat_extraction_model(img)
+```
+
+This comes in handy for tasks like
+[neural style transfer](https://keras.io/examples/generative/neural_style_transfer/),
+among other things.
+
+## Extend the API using custom layers
+
+`keras` includes a wide range of built-in layers, for example:
+
+- Convolutional layers: `conv_1d`, `conv_2d`, `conv_3d`, `conv_2d_transpose`
+- Pooling layers: `max_pooling_1d`, `max_pooling_2d`, `max_pooling_3d`, `average_pooling_3d`
+- RNN layers: `gru`, `lstm`, `conv_lstm_2d`
+- `batch_normalization`, `dropout`, `embedding`, etc.
+
+But if you don't find what you need, it's easy to extend the API by creating
+your own layers. All layers subclass the `Layer` class and implement:
+
+- `call` method, that specifies the computation done by the layer.
+- `build` method, that creates the weights of the layer (this is just a style
+convention since you can create weights in `initialize`, as well).
+
+To learn more about creating layers from scratch, read
+[custom layers and models](/guides/making_new_layers_and_models_via_subclassing) guide.
+
+The following is a basic implementation of `layer_dense()`:
+
+
+```r
+custom_dense <- Layer(
+  classname = "CustomDense",
+  initialize = function(units = 32) {
+    super$initialize()
+    self$units <- as.integer(units)
+  },
+  build = function(input_shape) {
+    self$w <- self$add_weight(
+      shape = shape(input_shape[[2]], self$units),
+      initializer = "random_normal",
+      trainable = TRUE,
+    )
+    self$b <- self$add_weight(
+      shape = shape(self$units),
+      initializer="random_normal",
+      trainable = TRUE
+    )
+  },
+  call = function(inputs) {
+    op_matmul(inputs, self$w) + self$b
+  }
 )
 
-model %>% fit(list(data_a, data_b), labels, epochs = 10)
+inputs <- keras_input(c(4))
+outputs <- custom_dense(inputs, 10)
 
+model <- keras_model(inputs, outputs)
 ```
 
+For serialization support in your custom layer, define a `get_config()`
+method that returns the constructor arguments of the layer instance:
 
-## The concept of layer "node"
 
-Whenever you are calling a layer on some input, you are creating a new tensor (the output of the layer), and you are adding a "node" to the layer, linking the input tensor to the output tensor. When you are calling the same layer multiple times, that layer owns multiple nodes indexed as 1, 2, 2...
+```r
+custom_dense <- Layer(
+  classname = "CustomDense",
 
-You can obtain the output tensor of a layer via `layer$output`, or its output shape via `layer$output_shape`. But what if a layer is connected to multiple inputs?
+  initialize = function(units = 32, ...) {
+    super$initialize()
+    self$units <- as.integer(units)
+  },
 
-As long as a layer is only connected to one input, there is no confusion, and `$output` will return the one output of the layer:
+  build = function(input_shape) {
+    self$w <- self$add_weight(
+      shape = shape(input_shape[[2]], self$units),
+      initializer = "random_normal",
+      trainable = TRUE,
+    )
+    self$b <- self$add_weight(
+      shape = shape(self$units),
+      initializer="random_normal",
+      trainable = TRUE
+    )
+  },
 
-```{r}
-a <- layer_input(shape = c(280, 256))
+  call = function(inputs) {
+    op_matmul(inputs, self$w) + self$b
+  },
 
-lstm <- layer_lstm(units = 32)
+  get_config = function() {
+    list(units = self$units)
+  }
+)
 
-encoded_a <- a %>% lstm
+inputs <- keras_input(c(4))
+outputs <- custom_dense(inputs, 10)
 
-lstm$output
+model <- keras_model(inputs, outputs)
+config <- get_config(model)
+
+new_model <-
+  from_config(config, custom_objects = list(CustomDense = custom_dense))
 ```
 
-Not so if the layer has multiple inputs:
+Optionally, implement the class method `from_config(cls, config)` which is used
+when recreating a layer instance given its config dictionary.
+The default implementation of `from_config` is:
 
-```{r}
-a <- layer_input(shape = c(280, 256))
-b <- layer_input(shape = c(280, 256))
 
-lstm <- layer_lstm(units = 32)
-
-encoded_a <- a %>% lstm
-encoded_b <- b %>% lstm
-
-lstm$output
+```r
+from_config <- function(cls, config) {
+  do.call(cls, config)
+}
 ```
 
-```
-AttributeError: Layer lstm_4 has multiple inbound nodes, hence the notion of "layer output" is ill-defined. Use `get_output_at(node_index)` instead.
-```
+## When to use the functional API
 
-Okay then. The following works:
+Should you use the Keras functional API to create a new model,
+or just subclass the `Model` class directly? In general, the functional API
+is higher-level, easier and safer, and has a number of
+features that subclassed models do not support.
 
-```{r}
-get_output_at(lstm, 1)
-get_output_at(lstm, 2)
-```
+However, model subclassing provides greater flexibility when building models
+that are not easily expressible as directed acyclic graphs of layers.
+For example, you could not implement a Tree-RNN with the functional API
+and would have to subclass `Model` directly.
 
-Simple enough, right?
+For an in-depth look at the differences between the functional API and
+model subclassing, read
+[What are Symbolic and Imperative APIs in TensorFlow 2.0?](https://blog.tensorflow.org/2019/01/what-are-symbolic-and-imperative-apis.html).
 
-The same is true for the properties `input_shape` and `output_shape`: as long as the layer has only one node, or as long as all nodes have the same input/output shape, then the notion of "layer output/input shape" is well defined, and that one shape will be returned by `layer$output_shape`/`layer$input_shape`. But if, for instance, you apply the same `layer_conv_2d()` layer to an input of shape `(32, 32, 3)`, and then to an input of shape `(64, 64, 3)`, the layer will have multiple input/output shapes, and you will have to fetch them by specifying the index of the node they belong to:
+### Functional API strengths:
 
-```{r}
-a <- layer_input(shape = c(32, 32, 3))
-b <- layer_input(shape = c(64, 64, 3))
+The following properties are also true for Sequential models
+(which are also data structures), but are not true for subclassed models
+(which are R and Python (byte)code, not data structures).
 
-conv <- layer_conv_2d(filters = 16, kernel_size = c(3,3), padding = 'same')
+#### Less verbose
 
-conved_a <- a %>% conv
+There is no `super$initialize(...)`, no `call = function(...)`, no  `self$...`, etc.
 
-# only one input so far, the following will work
-conv$input_shape
-
-conved_b <- b %>% conv
-# now the `$input_shape` property wouldn't work, but this does:
-get_input_shape_at(conv, 1)
-get_input_shape_at(conv, 2) 
-```
+Compare:
 
 
-## More examples
-
-Code examples are still the best way to get started, so here are a few more.
-
-### Inception module
-
-For more information about the Inception architecture, see [Going Deeper with Convolutions](https://arxiv.org/abs/1409.4842).
-
-```{r}
-library(keras)
-
-input_img <- layer_input(shape = c(256, 256, 3))
-
-tower_1 <- input_img %>% 
-  layer_conv_2d(filters = 64, kernel_size = c(1, 1), padding='same', activation='relu') %>% 
-  layer_conv_2d(filters = 64, kernel_size = c(3, 3), padding='same', activation='relu')
-
-tower_2 <- input_img %>% 
-  layer_conv_2d(filters = 64, kernel_size = c(1, 1), padding='same', activation='relu') %>% 
-  layer_conv_2d(filters = 64, kernel_size = c(5, 5), padding='same', activation='relu')
-
-tower_3 <- input_img %>% 
-  layer_max_pooling_2d(pool_size = c(3, 3), strides = c(1, 1), padding = 'same') %>% 
-  layer_conv_2d(filters = 64, kernel_size = c(1, 1), padding='same', activation='relu')
-
-output <- layer_concatenate(c(tower_1, tower_2, tower_3), axis = 1)
-
+```r
+inputs <- keras_input(shape = shape(32))
+outputs <- inputs |>
+  layer_dense(64, activation = "relu") |>
+  layer_dense(10)
+mlp <- keras_model(inputs, outputs)
 ```
 
-### Residual connection on a convolution layer
+With the subclassed version:
 
-For more information about residual networks, see [Deep Residual Learning for Image Recognition](https://arxiv.org/abs/1512.03385).
 
-```{r}
-# input tensor for a 3-channel 256x256 image
-x <- layer_input(shape = c(256, 256, 3))
-# 3x3 conv with 3 output channels (same as input channels)
-y <- x %>% layer_conv_2d(filters = 3, kernel_size =c(3, 3), padding = 'same')
-# this returns x + y.
-z <- layer_add(c(x, y))
+```r
+MLP <- Model(
+  classname = "MLP",
+  initialize = function(...) {
+    super$initialize(...)
+    self$dense_1 <- layer_dense(units = 64, activation = "relu")
+    self$dense_2 <- layer_dense(units = 10)
+  },
+  call = function(inputs) {
+    inputs |>
+      self$dense_1() |>
+      self$dense_2()
+  }
+)
+
+# Instantiate the model.
+mlp <- MLP()
+# Necessary to create the model's state.
+# The model doesn't have a state until it's called at least once.
+out <- mlp(op_zeros(c(1, 32)))
 ```
 
-### Shared vision model
+#### Model validation while defining its connectivity graph
 
-This model reuses the same image-processing module on two inputs, to classify whether two MNIST digits are the same digit or different digits.
+In the functional API, the input specification (shape and dtype) is created
+in advance (using `Input`). Every time you call a layer,
+the layer checks that the specification passed to it matches its assumptions,
+and it will raise a helpful error message if not.
 
-```{r}
-# First, define the vision model
-digit_input <- layer_input(shape = c(27, 27, 1))
-out <- digit_input %>% 
-  layer_conv_2d(filters = 64, kernel_size = c(3, 3)) %>% 
-  layer_conv_2d(filters = 64, kernel_size = c(3, 3)) %>% 
-  layer_max_pooling_2d(pool_size = c(2, 2)) %>% 
-  layer_flatten()
+This guarantees that any model you can build with the functional API will run.
+All debugging -- other than convergence-related debugging --
+happens statically during the model construction and not at execution time.
+This is similar to type checking in a compiler.
 
-vision_model <- keras_model(digit_input, out)
+#### A functional model is plottable and inspectable
 
-# Then define the tell-digits-apart model
-digit_a <- layer_input(shape = c(27, 27, 1))
-digit_b <- layer_input(shape = c(27, 27, 1))
+You can plot the model as a graph, and you can easily access intermediate nodes
+in this graph. For example, to extract and reuse the activations of intermediate
+layers (as seen in a previous example):
 
-# The vision model will be shared, weights and all
-out_a <- digit_a %>% vision_model
-out_b <- digit_b %>% vision_model
 
-out <- layer_concatenate(c(out_a, out_b)) %>% 
-  layer_dense(units = 1, activation = 'sigmoid')
-
-classification_model <- keras_model(inputs = c(digit_a, digit_b), out)
+```r
+features_list <- lapply(vgg19$layers, function(x) x$output)
+feat_extraction_model <- keras_model(inputs = vgg19$input,
+                                     outputs = features_list)
 ```
 
-### Visual question answering model
+#### A functional model can be serialized or cloned
 
-This model can select the correct one-word answer when asked a natural-language question about a picture.
+Because a functional model is a data structure rather than a piece of code,
+it is safely serializable and can be saved as a single file
+that allows you to recreate the exact same model
+without having access to any of the original code.
+See the [serialization & saving guide](/guides/serialization_and_saving/).
 
-It works by encoding the question into a vector, encoding the image into a vector, concatenating the two, and training on top a logistic regression over some vocabulary of potential answers.
+To serialize a subclassed model, it is necessary for the implementer
+to specify a `get_config()`
+and `from_config()` method at the model level.
+
+### Functional API weakness:
+
+#### It does not support dynamic architectures
+
+The functional API treats models as DAGs of layers.
+This is true for most deep learning architectures, but not all -- for example,
+recursive networks or Tree RNNs do not follow this assumption and cannot
+be implemented in the functional API.
+
+## Mix-and-match API styles
+
+Choosing between the functional API or Model subclassing isn't a
+binary decision that restricts you into one category of models.
+All models in the `keras` API can interact with each other, whether they're
+`Sequential` models, functional models, or subclassed models that are written
+from scratch.
+
+You can always use a functional model or `Sequential` model
+as part of a subclassed model or layer:
 
 
-```{r}
-# First, let's define a vision model using a Sequential model.
-# This model will encode an image into a vector.
-vision_model <- keras_model_sequential() 
-vision_model %>% 
-  layer_conv_2d(filters = 64, kernel_size = c(3, 3), activation = 'relu', padding = 'same',
-                input_shape = c(224, 224, 3)) %>% 
-  layer_conv_2d(filters = 64, kernel_size = c(3, 3), activation = 'relu') %>% 
-  layer_max_pooling_2d(pool_size = c(2, 2)) %>% 
-  layer_conv_2d(filters = 128, kernel_size = c(3, 3), activation = 'relu', padding = 'same') %>% 
-  layer_conv_2d(filters = 128, kernel_size = c(3, 3), activation = 'relu') %>% 
-  layer_max_pooling_2d(pool_size = c(2, 2)) %>% 
-  layer_conv_2d(filters = 256, kernel_size = c(3, 3), activation = 'relu', padding = 'same') %>% 
-  layer_conv_2d(filters = 256, kernel_size = c(3, 3), activation = 'relu') %>% 
-  layer_conv_2d(filters = 256, kernel_size = c(3, 3), activation = 'relu') %>% 
-  layer_max_pooling_2d(pool_size = c(2, 2)) %>% 
-  layer_flatten()
+```r
+units <- 32
+timesteps <- 10
+input_dim <- 5
 
-# Now let's get a tensor with the output of our vision model:
-image_input <- layer_input(shape = c(224, 224, 3))
-encoded_image <- image_input %>% vision_model
+# Define a Functional model
+inputs <- keras_input(shape(NA, units))
+outputs <- inputs |>
+  layer_global_average_pooling_1d() |>
+  layer_dense(units = 1)
 
-# Next, let's define a language model to encode the question into a vector.
-# Each question will be at most 100 word long,
-# and we will index words as integers from 1 to 9999.
-question_input <- layer_input(shape = c(100), dtype = 'int32')
-encoded_question <- question_input %>% 
-  layer_embedding(input_dim = 10000, output_dim = 256, input_length = 100) %>% 
-  layer_lstm(units = 256)
+model <- keras_model(inputs, outputs)
 
-# Let's concatenate the question vector and the image vector then
-# train a logistic regression over 1000 words on top
-output <- layer_concatenate(c(encoded_question, encoded_image)) %>% 
-  layer_dense(units = 1000, activation='softmax')
+layer_custom_rnn <- Layer(
+  classname = "CustomRNN",
+  initialize = function(...) {
+    super$initialize(...)
+    self$units <- units
+    self$projection_1 <- layer_dense(units = units, activation = "tanh")
+    self$projection_2 <- layer_dense(units = units, activation = "tanh")
+    self$classifier <- model
+  },
+  call = function(inputs, ...) {
+    outputs <- list()
+    state <- op_zeros(c(shape(inputs)[[1]], self$units))
+    for (t in 1:(shape(inputs)[[2]])) {
+      x <- inputs[, t, ]
+      h <- self$projection_1(x)
+      y <- h + self$projection_2(state)
+      state <- y
+      outputs[[t]] <- y
+    }
+    features <- op_stack(outputs, axis = 2)
+    self$classifier(features)
+  }
+)
 
-# This is our final model:
-vqa_model <- keras_model(inputs = c(image_input, question_input), outputs = output)
+rnn <- layer_custom_rnn()
+out <- rnn(op_zeros(c(1, timesteps, input_dim)))
 ```
 
-### Video question answering model
+You can use any subclassed layer or model in the functional API
+as long as it implements a `call` method that follows one of the following patterns:
 
-Now that we have trained our image QA model, we can quickly turn it into a video QA model. With appropriate training, you will be able to show it a short video (e.g. 100-frame human action) and ask a natural language question about the video (e.g. "what sport is the boy playing?" -> "football").
+- `call(inputs, ...)` --
+Where `inputs` is a tensor or a nested structure of tensors (e.g. a list of tensors),
+and where `...` are non-tensor arguments (non-inputs).
+- `call(inputs, training = NULL, ...)` --
+Where `training` is a boolean indicating whether the layer should behave
+in training mode and inference mode.
+- `call(inputs, mask = NULL, ...)` --
+Where `mask` is a boolean mask tensor (useful for RNNs, for instance).
+- `call(inputs, training = NULL, mask = NULL, ...)` --
+Of course, you can have both masking and training-specific behavior at the same time.
+
+Additionally, if you implement the `get_config()` method on your custom Layer or model,
+the functional models you create will still be serializable and cloneable.
+
+Here's a quick example of a custom RNN, written from scratch,
+being used in a functional model:
 
 
-```{r}
-video_input <- layer_input(shape = c(100, 224, 224, 3))
+```r
+units <- 32
+timesteps <- 10
+input_dim <- 5
+batch_size <- 16
 
-# This is our video encoded via the previously trained vision_model (weights are reused)
-encoded_video <- video_input %>% 
-  time_distributed(vision_model) %>% 
-  layer_lstm(units = 256)
+layer_custom_rnn <- Layer(
+  "custom_rnn",
+  initialize = function(...) {
+    super$initialize(...)
+    self$units <- units
+    self$projection_1 <- layer_dense(units = units, activation = "tanh")
+    self$projection_2 <- layer_dense(units = units, activation = "tanh")
+    self$classifier <- layer_dense(units = 1)
+  },
+  call = function(inputs, ...) {
+    outputs <- list()
+    state <- op_zeros(c(shape(inputs)[[1]], self$units))
+    for (t in 1:(shape(inputs)[[2]])) {
+      x <- inputs[, t, ]
+      h <- self$projection_1(x)
+      y <- h + self$projection_2(state)
+      state <- y
+      outputs[[t]] <- y
+    }
+    features <- op_stack(outputs, axis = 2)
+    self$classifier(features)
+  }
+)
 
-# This is a model-level representation of the question encoder, reusing the same weights as before:
-question_encoder <- keras_model(inputs = question_input, outputs = encoded_question)
+# Note that you specify a static batch size for the inputs with the `batch_shape`
+# arg, because the inner computation of `layer_custom_rnn()` requires a static batch size
+# (when you create the `state` zeros tensor).
+inputs <- keras_input(batch_shape = shape(batch_size, timesteps, input_dim))
+outputs <- inputs |>
+  layer_conv_1d(filters = 32, kernel_size = 3) |>
+  layer_custom_rnn()
 
-# Let's use it to encode the question:
-video_question_input <- layer_input(shape = c(100), dtype = 'int32')
-encoded_video_question <- video_question_input %>% question_encoder
-
-# And this is our video question answering model:
-output <- layer_concatenate(c(encoded_video, encoded_video_question)) %>% 
-  layer_dense(units = 1000, activation = 'softmax')
-
-video_qa_model <- keras_model(inputs= c(video_input, video_question_input), outputs = output)
+model <- keras_model(inputs, outputs)
+out <- model(op_zeros(c(1, 10, 5)))
 ```
-
-
-
-
-
-
-
-
-
-

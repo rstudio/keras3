@@ -2,93 +2,222 @@
 % Please edit documentation in R/layers-preprocessing.R
 \name{layer_random_brightness}
 \alias{layer_random_brightness}
-\title{A preprocessing layer which randomly adjusts brightness during training}
+\title{A preprocessing layer which randomly adjusts brightness during training.}
 \usage{
 layer_random_brightness(
   object,
   factor,
-  value_range = c(0, 255),
+  value_range = list(0L, 255L),
   seed = NULL,
   ...
 )
 }
 \arguments{
-\item{object}{What to compose the new \code{Layer} instance with. Typically a
-Sequential model or a Tensor (e.g., as returned by \code{layer_input()}).
-The return value depends on \code{object}. If \code{object} is:
-\itemize{
-\item missing or \code{NULL}, the \code{Layer} instance is returned.
-\item a \code{Sequential} model, the model with an additional layer is returned.
-\item a Tensor, the output tensor from \code{layer_instance(object)} is returned.
-}}
+\item{object}{Object to compose the layer with. A tensor, array, or sequential model.}
 
 \item{factor}{Float or a list of 2 floats between -1.0 and 1.0. The
 factor is used to determine the lower bound and upper bound of the
 brightness adjustment. A float value will be chosen randomly between
 the limits. When -1.0 is chosen, the output image will be black, and
-when 1.0 is chosen, the image will be fully white. When only one float
-is provided, eg, 0.2, then -0.2 will be used for lower bound and 0.2
+when 1.0 is chosen, the image will be fully white.
+When only one float is provided, eg, 0.2,
+then -0.2 will be used for lower bound and 0.2
 will be used for upper bound.}
 
-\item{value_range}{Optional list of 2 floats for the lower and upper limit
-of the values of the input data. Defaults to \verb{[0.0, 255.0]}. Can be changed
-to e.g. \verb{[0.0, 1.0]} if the image input has been scaled before this layer.
+\item{value_range}{Optional list of 2 floats
+for the lower and upper limit
+of the values of the input data.
+To make no change, use \code{c(0.0, 1.0)}, e.g., if the image input
+has been scaled before this layer. Defaults to \code{c(0.0, 255.0)}.
 The brightness adjustment will be scaled to this range, and the
 output values will be clipped to this range.}
 
 \item{seed}{optional integer, for fixed RNG behavior.}
 
-\item{...}{standard layer arguments.}
+\item{...}{For forward/backward compatability.}
 }
 \description{
-A preprocessing layer which randomly adjusts brightness during training
-}
-\details{
 This layer will randomly increase/reduce the brightness for the input RGB
 images. At inference time, the output will be identical to the input.
 Call the layer with \code{training=TRUE} to adjust the brightness of the input.
 
-Note that different brightness adjustment factors
-will be apply to each the images in the batch.
-
-For an overview and full list of preprocessing layers, see the preprocessing
-\href{https://www.tensorflow.org/guide/keras/preprocessing_layers}{guide}.
+\strong{Note:} This layer is safe to use inside a \code{tf.data} pipeline
+(independently of which backend you're using).
 }
+\section{Inputs}{
+3D (HWC) or 4D (NHWC) tensor, with float or int dtype. Input pixel
+values can be of any range (e.g. \verb{[0., 1.)} or \verb{[0, 255]})
+}
+
+\section{Output}{
+3D (HWC) or 4D (NHWC) tensor with brightness adjusted based on the
+\code{factor}. By default, the layer will output floats.
+The output value will be clipped to the range \verb{[0, 255]},
+the valid range of RGB colors, and
+rescaled based on the \code{value_range} if needed.
+
+Sample usage:
+
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{random_bright <- layer_random_brightness(factor=0.2, seed = 1)
+
+# An image with shape [2, 2, 3]
+image <- array(1:12, dim=c(2, 2, 3))
+
+# Assume we randomly select the factor to be 0.1, then it will apply
+# 0.1 * 255 to all the channel
+output <- random_bright(image, training=TRUE)
+output
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor(
+## [[[39.605797 43.605797 47.605797]
+##   [41.605797 45.605797 49.605797]]
+##
+##  [[40.605797 44.605797 48.605797]
+##   [42.605797 46.605797 50.605797]]], shape=(2, 2, 3), dtype=float32)
+}\if{html}{\out{</div>}}
+}
+
 \seealso{
 \itemize{
-\item \url{https://www.tensorflow.org/api_docs/python/tf/keras/layers/RandomBrightness}
-\item \url{https://keras.io/api/layers}
+\item \url{https://keras.io/api/layers/preprocessing_layers/image_augmentation/random_brightness#randombrightness-class}
 }
 
 Other image augmentation layers: 
 \code{\link{layer_random_contrast}()},
 \code{\link{layer_random_crop}()},
 \code{\link{layer_random_flip}()},
-\code{\link{layer_random_height}()},
 \code{\link{layer_random_rotation}()},
 \code{\link{layer_random_translation}()},
-\code{\link{layer_random_width}()},
 \code{\link{layer_random_zoom}()}
 
 Other preprocessing layers: 
 \code{\link{layer_category_encoding}()},
 \code{\link{layer_center_crop}()},
 \code{\link{layer_discretization}()},
+\code{\link{layer_feature_space}()},
+\code{\link{layer_hashed_crossing}()},
 \code{\link{layer_hashing}()},
 \code{\link{layer_integer_lookup}()},
 \code{\link{layer_normalization}()},
 \code{\link{layer_random_contrast}()},
 \code{\link{layer_random_crop}()},
 \code{\link{layer_random_flip}()},
-\code{\link{layer_random_height}()},
 \code{\link{layer_random_rotation}()},
 \code{\link{layer_random_translation}()},
-\code{\link{layer_random_width}()},
 \code{\link{layer_random_zoom}()},
 \code{\link{layer_rescaling}()},
 \code{\link{layer_resizing}()},
 \code{\link{layer_string_lookup}()},
 \code{\link{layer_text_vectorization}()}
+
+Other layers: 
+\code{\link{Layer}()},
+\code{\link{layer_activation_elu}()},
+\code{\link{layer_activation_leaky_relu}()},
+\code{\link{layer_activation_parametric_relu}()},
+\code{\link{layer_activation_relu}()},
+\code{\link{layer_activation_softmax}()},
+\code{\link{layer_activation}()},
+\code{\link{layer_activity_regularization}()},
+\code{\link{layer_additive_attention}()},
+\code{\link{layer_add}()},
+\code{\link{layer_attention}()},
+\code{\link{layer_average_pooling_1d}()},
+\code{\link{layer_average_pooling_2d}()},
+\code{\link{layer_average_pooling_3d}()},
+\code{\link{layer_average}()},
+\code{\link{layer_batch_normalization}()},
+\code{\link{layer_bidirectional}()},
+\code{\link{layer_category_encoding}()},
+\code{\link{layer_center_crop}()},
+\code{\link{layer_concatenate}()},
+\code{\link{layer_conv_1d_transpose}()},
+\code{\link{layer_conv_1d}()},
+\code{\link{layer_conv_2d_transpose}()},
+\code{\link{layer_conv_2d}()},
+\code{\link{layer_conv_3d_transpose}()},
+\code{\link{layer_conv_3d}()},
+\code{\link{layer_conv_lstm_1d}()},
+\code{\link{layer_conv_lstm_2d}()},
+\code{\link{layer_conv_lstm_3d}()},
+\code{\link{layer_cropping_1d}()},
+\code{\link{layer_cropping_2d}()},
+\code{\link{layer_cropping_3d}()},
+\code{\link{layer_dense}()},
+\code{\link{layer_depthwise_conv_1d}()},
+\code{\link{layer_depthwise_conv_2d}()},
+\code{\link{layer_discretization}()},
+\code{\link{layer_dot}()},
+\code{\link{layer_dropout}()},
+\code{\link{layer_einsum_dense}()},
+\code{\link{layer_embedding}()},
+\code{\link{layer_feature_space}()},
+\code{\link{layer_flatten}()},
+\code{\link{layer_gaussian_dropout}()},
+\code{\link{layer_gaussian_noise}()},
+\code{\link{layer_global_average_pooling_1d}()},
+\code{\link{layer_global_average_pooling_2d}()},
+\code{\link{layer_global_average_pooling_3d}()},
+\code{\link{layer_global_max_pooling_1d}()},
+\code{\link{layer_global_max_pooling_2d}()},
+\code{\link{layer_global_max_pooling_3d}()},
+\code{\link{layer_group_normalization}()},
+\code{\link{layer_group_query_attention}()},
+\code{\link{layer_gru}()},
+\code{\link{layer_hashed_crossing}()},
+\code{\link{layer_hashing}()},
+\code{\link{layer_identity}()},
+\code{\link{layer_integer_lookup}()},
+\code{\link{layer_lambda}()},
+\code{\link{layer_layer_normalization}()},
+\code{\link{layer_lstm}()},
+\code{\link{layer_masking}()},
+\code{\link{layer_max_pooling_1d}()},
+\code{\link{layer_max_pooling_2d}()},
+\code{\link{layer_max_pooling_3d}()},
+\code{\link{layer_maximum}()},
+\code{\link{layer_minimum}()},
+\code{\link{layer_multi_head_attention}()},
+\code{\link{layer_multiply}()},
+\code{\link{layer_normalization}()},
+\code{\link{layer_permute}()},
+\code{\link{layer_random_contrast}()},
+\code{\link{layer_random_crop}()},
+\code{\link{layer_random_flip}()},
+\code{\link{layer_random_rotation}()},
+\code{\link{layer_random_translation}()},
+\code{\link{layer_random_zoom}()},
+\code{\link{layer_repeat_vector}()},
+\code{\link{layer_rescaling}()},
+\code{\link{layer_reshape}()},
+\code{\link{layer_resizing}()},
+\code{\link{layer_rnn}()},
+\code{\link{layer_separable_conv_1d}()},
+\code{\link{layer_separable_conv_2d}()},
+\code{\link{layer_simple_rnn}()},
+\code{\link{layer_spatial_dropout_1d}()},
+\code{\link{layer_spatial_dropout_2d}()},
+\code{\link{layer_spatial_dropout_3d}()},
+\code{\link{layer_spectral_normalization}()},
+\code{\link{layer_string_lookup}()},
+\code{\link{layer_subtract}()},
+\code{\link{layer_text_vectorization}()},
+\code{\link{layer_tfsm}()},
+\code{\link{layer_time_distributed}()},
+\code{\link{layer_torch_module_wrapper}()},
+\code{\link{layer_unit_normalization}()},
+\code{\link{layer_upsampling_1d}()},
+\code{\link{layer_upsampling_2d}()},
+\code{\link{layer_upsampling_3d}()},
+\code{\link{layer_zero_padding_1d}()},
+\code{\link{layer_zero_padding_2d}()},
+\code{\link{layer_zero_padding_3d}()},
+\code{\link{rnn_cell_gru}()},
+\code{\link{rnn_cell_lstm}()},
+\code{\link{rnn_cell_simple}()},
+\code{\link{rnn_cells_stack}()}
 }
 \concept{image augmentation layers}
+\concept{layers}
 \concept{preprocessing layers}

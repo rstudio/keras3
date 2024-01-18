@@ -1,0 +1,73 @@
+Help on class ZeroPadding1D in module keras.src.layers.reshaping.zero_padding1d:
+
+class ZeroPadding1D(keras.src.layers.layer.Layer)
+ |  ZeroPadding1D(padding=1, **kwargs)
+ |
+ |  Zero-padding layer for 1D input (e.g. temporal sequence).
+ |
+ |  Examples:
+ |
+ |  >>> input_shape = (2, 2, 3)
+ |  >>> x = np.arange(np.prod(input_shape)).reshape(input_shape)
+ |  >>> x
+ |  [[[ 0  1  2]
+ |    [ 3  4  5]]
+ |   [[ 6  7  8]
+ |    [ 9 10 11]]]
+ |  >>> y = keras.layers.ZeroPadding1D(padding=2)(x)
+ |  >>> y
+ |  [[[ 0  0  0]
+ |    [ 0  0  0]
+ |    [ 0  1  2]
+ |    [ 3  4  5]
+ |    [ 0  0  0]
+ |    [ 0  0  0]]
+ |   [[ 0  0  0]
+ |    [ 0  0  0]
+ |    [ 6  7  8]
+ |    [ 9 10 11]
+ |    [ 0  0  0]
+ |    [ 0  0  0]]]
+ |
+ |  Args:
+ |      padding: Int, or tuple of int (length 2), or dictionary.
+ |          - If int: how many zeros to add at the beginning and end of
+ |            the padding dimension (axis 1).
+ |          - If tuple of 2 ints: how many zeros to add at the beginning and the
+ |            end of the padding dimension (`(left_pad, right_pad)`).
+ |
+ |  Input shape:
+ |      3D tensor with shape `(batch_size, axis_to_pad, features)`
+ |
+ |  Output shape:
+ |      3D tensor with shape `(batch_size, padded_axis, features)`
+ |
+ |  Method resolution order:
+ |      ZeroPadding1D
+ |      keras.src.layers.layer.Layer
+ |      keras.src.backend.tensorflow.layer.TFLayer
+ |      keras.src.backend.tensorflow.trackable.KerasAutoTrackable
+ |      tensorflow.python.trackable.autotrackable.AutoTrackable
+ |      tensorflow.python.trackable.base.Trackable
+ |      keras.src.ops.operation.Operation
+ |      builtins.object
+ |
+ |  Methods defined here:
+ |
+ |  __init__(
+ |    self,
+ |    padding=1,
+ |    **kwargs
+ |  )
+ |      Initialize self.  See help(type(self)) for accurate signature.
+ |
+ |  call(self, inputs)
+ |
+ |  compute_output_shape(self, input_shape)
+ |
+ |  get_config(self)
+ |      Returns the config of the object.
+ |
+ |      An object config is a Python dictionary (serializable)
+ |      containing the information needed to re-instantiate it.
+ |

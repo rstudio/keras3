@@ -4,26 +4,65 @@
 \alias{callback_learning_rate_scheduler}
 \title{Learning rate scheduler.}
 \usage{
-callback_learning_rate_scheduler(schedule)
+callback_learning_rate_scheduler(schedule, verbose = 0L)
 }
 \arguments{
-\item{schedule}{a function that takes an epoch index as input (integer,
-indexed from 0) and current learning rate and returns a new learning rate
-as output (float).}
+\item{schedule}{A function that takes an epoch index (integer, indexed from 0)
+and current learning rate (float) as inputs and returns a new
+learning rate as output (float).}
+
+\item{verbose}{Integer. 0: quiet, 1: log update messages.}
 }
 \description{
-Learning rate scheduler.
+At the beginning of every epoch, this callback gets the updated learning
+rate value from \code{schedule} function provided at \verb{__init__}, with the current
+epoch and current learning rate, and applies the updated learning rate on
+the optimizer.
 }
+\section{Examples}{
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{# This function keeps the initial learning rate for the first ten epochs
+# and decreases it exponentially after that.
+scheduler <- function(epoch, lr) \{
+  if (epoch < 10)
+    return(lr)
+  else
+    return(lr * exp(-0.1))
+\}
+
+model <- keras_model_sequential() |> layer_dense(units = 10)
+model |> compile(optimizer = optimizer_sgd(), loss = 'mse')
+model$optimizer$learning_rate |> as.array() |> round(5)
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode">}}\preformatted{## [1] 0.01
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{callback <- callback_learning_rate_scheduler(schedule = scheduler)
+history <- model |> fit(x = array(runif(100), c(5, 20)),
+                        y = array(0, c(5, 1)),
+                        epochs = 15, callbacks = list(callback), verbose = 0)
+model$optimizer$learning_rate |> as.array() |> round(5)
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode">}}\preformatted{## [1] 0.00607
+}\if{html}{\out{</div>}}
+}
+
 \seealso{
+\itemize{
+\item \url{https://keras.io/api/callbacks/learning_rate_scheduler#learningratescheduler-class}
+}
+
 Other callbacks: 
+\code{\link{Callback}()},
+\code{\link{callback_backup_and_restore}()},
 \code{\link{callback_csv_logger}()},
 \code{\link{callback_early_stopping}()},
 \code{\link{callback_lambda}()},
 \code{\link{callback_model_checkpoint}()},
-\code{\link{callback_progbar_logger}()},
 \code{\link{callback_reduce_lr_on_plateau}()},
 \code{\link{callback_remote_monitor}()},
 \code{\link{callback_tensorboard}()},
-\code{\link{callback_terminate_on_naan}()}
+\code{\link{callback_terminate_on_nan}()}
 }
 \concept{callbacks}

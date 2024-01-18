@@ -1,0 +1,67 @@
+Help on class ReLU in module keras.src.layers.activations.relu:
+
+class ReLU(keras.src.layers.layer.Layer)
+ |  ReLU(max_value=None, negative_slope=0.0, threshold=0.0, **kwargs)
+ |
+ |  Rectified Linear Unit activation function layer.
+ |
+ |  Formula:
+ |  ``` python
+ |  f(x) = max(x,0)
+ |  f(x) = max_value if x >= max_value
+ |  f(x) = x if threshold <= x < max_value
+ |  f(x) = negative_slope * (x - threshold) otherwise
+ |  ```
+ |
+ |  Example:
+ |  ``` python
+ |  relu_layer = keras.layers.activations.ReLU(
+ |      max_value=10,
+ |      negative_slope=0.5,
+ |      threshold=0,
+ |  )
+ |  input = np.array([-10, -5, 0.0, 5, 10])
+ |  result = relu_layer(input)
+ |  # result = [-5. , -2.5,  0. ,  5. , 10.]
+ |  ```
+ |
+ |  Args:
+ |      max_value: Float >= 0. Maximum activation value. None means unlimited.
+ |          Defaults to `None`.
+ |      negative_slope: Float >= 0. Negative slope coefficient.
+ |          Defaults to `0.0`.
+ |      threshold: Float >= 0. Threshold value for thresholded activation.
+ |          Defaults to `0.0`.
+ |      **kwargs: Base layer keyword arguments, such as `name` and `dtype`.
+ |
+ |  Method resolution order:
+ |      ReLU
+ |      keras.src.layers.layer.Layer
+ |      keras.src.backend.tensorflow.layer.TFLayer
+ |      keras.src.backend.tensorflow.trackable.KerasAutoTrackable
+ |      tensorflow.python.trackable.autotrackable.AutoTrackable
+ |      tensorflow.python.trackable.base.Trackable
+ |      keras.src.ops.operation.Operation
+ |      builtins.object
+ |
+ |  Methods defined here:
+ |
+ |  __init__(
+ |    self,
+ |    max_value=None,
+ |    negative_slope=0.0,
+ |    threshold=0.0,
+ |    **kwargs
+ |  )
+ |      Initialize self.  See help(type(self)) for accurate signature.
+ |
+ |  call(self, inputs)
+ |
+ |  compute_output_shape(self, input_shape)
+ |
+ |  get_config(self)
+ |      Returns the config of the object.
+ |
+ |      An object config is a Python dictionary (serializable)
+ |      containing the information needed to re-instantiate it.
+ |

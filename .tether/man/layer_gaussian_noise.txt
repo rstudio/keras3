@@ -1,0 +1,57 @@
+Help on class GaussianNoise in module keras.src.layers.regularization.gaussian_noise:
+
+class GaussianNoise(keras.src.layers.layer.Layer)
+ |  GaussianNoise(stddev, seed=None, **kwargs)
+ |
+ |  Apply additive zero-centered Gaussian noise.
+ |
+ |  This is useful to mitigate overfitting
+ |  (you could see it as a form of random data augmentation).
+ |  Gaussian Noise (GS) is a natural choice as corruption process
+ |  for real valued inputs.
+ |
+ |  As it is a regularization layer, it is only active at training time.
+ |
+ |  Args:
+ |      stddev: Float, standard deviation of the noise distribution.
+ |      seed: Integer, optional random seed to enable deterministic behavior.
+ |
+ |  Call arguments:
+ |      inputs: Input tensor (of any rank).
+ |      training: Python boolean indicating whether the layer should behave in
+ |          training mode (adding noise) or in inference mode (doing nothing).
+ |
+ |  Method resolution order:
+ |      GaussianNoise
+ |      keras.src.layers.layer.Layer
+ |      keras.src.backend.tensorflow.layer.TFLayer
+ |      keras.src.backend.tensorflow.trackable.KerasAutoTrackable
+ |      tensorflow.python.trackable.autotrackable.AutoTrackable
+ |      tensorflow.python.trackable.base.Trackable
+ |      keras.src.ops.operation.Operation
+ |      builtins.object
+ |
+ |  Methods defined here:
+ |
+ |  __init__(
+ |    self,
+ |    stddev,
+ |    seed=None,
+ |    **kwargs
+ |  )
+ |      Initialize self.  See help(type(self)) for accurate signature.
+ |
+ |  call(
+ |    self,
+ |    inputs,
+ |    training=False
+ |  )
+ |
+ |  compute_output_shape(self, input_shape)
+ |
+ |  get_config(self)
+ |      Returns the config of the object.
+ |
+ |      An object config is a Python dictionary (serializable)
+ |      containing the information needed to re-instantiate it.
+ |

@@ -1,0 +1,66 @@
+Help on class Concatenate in module keras.src.layers.merging.concatenate:
+
+class Concatenate(keras.src.layers.merging.base_merge.Merge)
+ |  Concatenate(axis=-1, **kwargs)
+ |
+ |  Concatenates a list of inputs.
+ |
+ |  It takes as input a list of tensors, all of the same shape except
+ |  for the concatenation axis, and returns a single tensor that is the
+ |  concatenation of all inputs.
+ |
+ |  Examples:
+ |
+ |  >>> x = np.arange(20).reshape(2, 2, 5)
+ |  >>> y = np.arange(20, 30).reshape(2, 1, 5)
+ |  >>> keras.layers.Concatenate(axis=1)([x, y])
+ |
+ |  Usage in a Keras model:
+ |
+ |  >>> x1 = keras.layers.Dense(8)(np.arange(10).reshape(5, 2))
+ |  >>> x2 = keras.layers.Dense(8)(np.arange(10, 20).reshape(5, 2))
+ |  >>> y = keras.layers.Concatenate()([x1, x2])
+ |
+ |  Args:
+ |      axis: Axis along which to concatenate.
+ |      **kwargs: Standard layer keyword arguments.
+ |
+ |  Returns:
+ |      A tensor, the concatenation of the inputs alongside axis `axis`.
+ |
+ |  Method resolution order:
+ |      Concatenate
+ |      keras.src.layers.merging.base_merge.Merge
+ |      keras.src.layers.layer.Layer
+ |      keras.src.backend.tensorflow.layer.TFLayer
+ |      keras.src.backend.tensorflow.trackable.KerasAutoTrackable
+ |      tensorflow.python.trackable.autotrackable.AutoTrackable
+ |      tensorflow.python.trackable.base.Trackable
+ |      keras.src.ops.operation.Operation
+ |      builtins.object
+ |
+ |  Methods defined here:
+ |
+ |  __init__(
+ |    self,
+ |    axis=-1,
+ |    **kwargs
+ |  )
+ |      Initialize self.  See help(type(self)) for accurate signature.
+ |
+ |  build(self, input_shape)
+ |
+ |  compute_mask(
+ |    self,
+ |    inputs,
+ |    mask=None
+ |  )
+ |
+ |  compute_output_shape(self, input_shape)
+ |
+ |  get_config(self)
+ |      Returns the config of the object.
+ |
+ |      An object config is a Python dictionary (serializable)
+ |      containing the information needed to re-instantiate it.
+ |

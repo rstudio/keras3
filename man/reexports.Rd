@@ -6,15 +6,13 @@
 \alias{\%<>\%}
 \alias{use_python}
 \alias{use_virtualenv}
-\alias{use_condaenv}
 \alias{array_reshape}
+\alias{np_array}
 \alias{tuple}
-\alias{use_session_with_seed}
 \alias{tensorboard}
-\alias{evaluate}
 \alias{export_savedmodel}
-\alias{shape}
 \alias{as_tensor}
+\alias{all_dims}
 \alias{flags}
 \alias{flag_numeric}
 \alias{flag_integer}
@@ -23,6 +21,7 @@
 \alias{run_dir}
 \alias{fit}
 \alias{compile}
+\alias{evaluate}
 \title{Objects exported from other packages}
 \keyword{internal}
 \description{
@@ -34,9 +33,9 @@ below to see their documentation.
 
   \item{magrittr}{\code{\link[magrittr:compound]{\%<>\%}}}
 
-  \item{reticulate}{\code{\link[reticulate]{array_reshape}}, \code{\link[reticulate]{tuple}}, \code{\link[reticulate:use_python]{use_condaenv}}, \code{\link[reticulate]{use_python}}, \code{\link[reticulate:use_python]{use_virtualenv}}}
+  \item{reticulate}{\code{\link[reticulate]{array_reshape}}, \code{\link[reticulate]{np_array}}, \code{\link[reticulate]{tuple}}, \code{\link[reticulate]{use_python}}, \code{\link[reticulate:use_python]{use_virtualenv}}}
 
-  \item{tensorflow}{\code{\link[tensorflow]{as_tensor}}, \code{\link[tensorflow]{evaluate}}, \code{\link[tensorflow]{export_savedmodel}}, \code{\link[tensorflow]{shape}}, \code{\link[tensorflow]{tensorboard}}, \code{\link[tensorflow]{use_session_with_seed}}}
+  \item{tensorflow}{\code{\link[tensorflow]{all_dims}}, \code{\link[tensorflow]{as_tensor}}, \code{\link[tensorflow]{evaluate}}, \code{\link[tensorflow]{export_savedmodel}}, \code{\link[tensorflow]{tensorboard}}}
 
   \item{tfruns}{\code{\link[tfruns:flags]{flag_boolean}}, \code{\link[tfruns:flags]{flag_integer}}, \code{\link[tfruns:flags]{flag_numeric}}, \code{\link[tfruns:flags]{flag_string}}, \code{\link[tfruns]{flags}}, \code{\link[tfruns]{run_dir}}}
 }}

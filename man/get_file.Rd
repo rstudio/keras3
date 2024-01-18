@@ -5,51 +5,110 @@
 \title{Downloads a file from a URL if it not already in the cache.}
 \usage{
 get_file(
-  fname,
-  origin,
+  fname = NULL,
+  origin = NULL,
+  ...,
   file_hash = NULL,
   cache_subdir = "datasets",
   hash_algorithm = "auto",
   extract = FALSE,
   archive_format = "auto",
-  cache_dir = NULL,
-  untar = FALSE
+  cache_dir = NULL
 )
 }
 \arguments{
-\item{fname}{Name of the file. If an absolute path \verb{/path/to/file.txt} is
-specified the file will be saved at that location.}
+\item{fname}{Name of the file. If an absolute path, e.g. \code{"/path/to/file.txt"}
+is specified, the file will be saved at that location.
+If \code{NULL}, the name of the file at \code{origin} will be used.}
 
 \item{origin}{Original URL of the file.}
 
-\item{file_hash}{The expected hash string of the file after download. The
-sha256 and md5 hash algorithms are both supported.}
+\item{...}{For forward/backward compatability.}
+
+\item{file_hash}{The expected hash string of the file after download.
+The sha256 and md5 hash algorithms are both supported.}
 
 \item{cache_subdir}{Subdirectory under the Keras cache dir where the file is
-saved. If an absolute path \verb{/path/to/folder} is specified the file will be
-saved at that location.}
+saved. If an absolute path, e.g. \code{"/path/to/folder"} is
+specified, the file will be saved at that location.}
 
-\item{hash_algorithm}{Select the hash algorithm to verify the file. options
-are 'md5', 'sha256', and 'auto'. The default 'auto' detects the hash
-algorithm in use.}
+\item{hash_algorithm}{Select the hash algorithm to verify the file.
+options are \verb{"md5'}, \verb{"sha256'}, and \verb{"auto'}.
+The default 'auto' detects the hash algorithm in use.}
 
-\item{extract}{True tries extracting the file as an Archive, like tar or zip.}
+\item{extract}{\code{TRUE} tries extracting the file as an Archive, like tar or zip.}
 
-\item{archive_format}{Archive format to try for extracting the file. Options
-are 'auto', 'tar', 'zip', and None. 'tar' includes tar, tar.gz, and tar.bz
-files. The default 'auto' is ('tar', 'zip'). None or an empty list will
-return no matches found.}
+\item{archive_format}{Archive format to try for extracting the file.
+Options are \verb{"auto'}, \verb{"tar'}, \verb{"zip'}, and \code{NULL}.
+\code{"tar"} includes tar, tar.gz, and tar.bz files.
+The default \code{"auto"} corresponds to \code{c("tar", "zip")}.
+\code{NULL} or an empty list will return no matches found.}
 
-\item{cache_dir}{Location to store cached files, when \code{NULL} it defaults to
-the Keras configuration directory.}
-
-\item{untar}{Deprecated in favor of 'extract'. boolean, whether the file should
-be decompressed}
+\item{cache_dir}{Location to store cached files, when \code{NULL} it
+defaults to \code{Sys.getenv("KERAS_HOME", "~/.keras/")}.}
 }
 \value{
-Path to the downloaded file
+Path to the downloaded file.
+
+** Warning on malicious downloads **
+
+Downloading something from the Internet carries a risk.
+NEVER download a file/archive if you do not trust the source.
+We recommend that you specify the \code{file_hash} argument
+(if the hash of the source file is known) to make sure that the file you
+are getting is the one you expect.
 }
 \description{
-Passing the MD5 hash will verify the file after download as well as if it is
-already present in the cache.
+By default the file at the url \code{origin} is downloaded to the
+cache_dir \verb{~/.keras}, placed in the cache_subdir \code{datasets},
+and given the filename \code{fname}. The final location of a file
+\code{example.txt} would therefore be \verb{~/.keras/datasets/example.txt}.
+Files in \code{.tar}, \code{.tar.gz}, \code{.tar.bz}, and \code{.zip} formats can
+also be extracted.
+
+Passing a hash will verify the file after download. The command line
+programs \code{shasum} and \code{sha256sum} can compute the hash.
 }
+\section{Examples}{
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{path_to_downloaded_file <- get_file(
+    origin = "https://storage.googleapis.com/download.tensorflow.org/example_images/flower_photos.tgz",
+    extract = TRUE
+)
+}\if{html}{\out{</div>}}
+}
+
+\seealso{
+\itemize{
+\item \url{https://keras.io/api/utils/python_utils#getfile-function}
+}
+
+Other utils: 
+\code{\link{audio_dataset_from_directory}()},
+\code{\link{clear_session}()},
+\code{\link{config_disable_interactive_logging}()},
+\code{\link{config_disable_traceback_filtering}()},
+\code{\link{config_enable_interactive_logging}()},
+\code{\link{config_enable_traceback_filtering}()},
+\code{\link{config_is_interactive_logging_enabled}()},
+\code{\link{config_is_traceback_filtering_enabled}()},
+\code{\link{get_source_inputs}()},
+\code{\link{image_array_save}()},
+\code{\link{image_dataset_from_directory}()},
+\code{\link{image_from_array}()},
+\code{\link{image_load}()},
+\code{\link{image_smart_resize}()},
+\code{\link{image_to_array}()},
+\code{\link{layer_feature_space}()},
+\code{\link{layer_torch_module_wrapper}()},
+\code{\link{normalize}()},
+\code{\link{pack_x_y_sample_weight}()},
+\code{\link{pad_sequences}()},
+\code{\link{set_random_seed}()},
+\code{\link{split_dataset}()},
+\code{\link{text_dataset_from_directory}()},
+\code{\link{timeseries_dataset_from_array}()},
+\code{\link{to_categorical}()},
+\code{\link{unpack_x_y_sample_weight}()},
+\code{\link{zip_lists}()}
+}
+\concept{utils}

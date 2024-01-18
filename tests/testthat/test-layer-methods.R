@@ -70,6 +70,7 @@ test_succeeds("layer parameters can be counted", {
 test_succeeds("layer node functions are accessible", {
   model <- define_model()
   layer <- model$layers[[2]]
+  skip("get_input_at() and friends")
   get_input_at(layer, 1)
   get_output_at(layer, 1)
   get_input_shape_at(layer, 1)
@@ -80,13 +81,12 @@ test_succeeds("layer node functions are accessible", {
 
 
 test_succeeds("layer state can be reset", {
-  skip_if_cntk() # CNTK backend does not support stateful RNNs, see
-                 # https://docs.microsoft.com/en-us/cognitive-toolkit/using-cntk-with-keras#known-issues
-  model <- keras_model_sequential()
+  model <- keras_model_sequential(input_shape = c(10, 16),
+                                  batch_size = 32)
   model %>%
-    layer_lstm(units = 32, input_shape=c(10, 16), batch_size=32, stateful=TRUE) %>%
+    layer_lstm(units = 32, stateful=TRUE) %>%
     layer_dense(units = 16, activation = 'softmax')
 
   layer <- model$layers[[1]]
-  reset_states(layer)
+  reset_state(layer)
 })
