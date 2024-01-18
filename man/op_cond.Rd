@@ -4,12 +4,7 @@
 \alias{op_cond}
 \title{Conditionally applies \code{true_fn} or \code{false_fn}.}
 \usage{
-op_cond(
-  pred,
-  true_fn,
-  false_fn = function() {
- }
-)
+op_cond(pred, true_fn, false_fn)
 }
 \arguments{
 \item{pred}{Boolean scalar type}
@@ -24,6 +19,62 @@ The output of either \code{true_fn} or \code{false_fn} depending on pred.
 \description{
 Conditionally applies \code{true_fn} or \code{false_fn}.
 }
+\section{Examples}{
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{fn <- tensorflow::tf_function(function(x) \{
+  op_cond(x > 0,
+    true_fn = \\() x + 1,
+    false_fn = \\() x - 1)
+\})
+
+fn(tensorflow::as_tensor(1))
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor(2.0, shape=(), dtype=float64)
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{fn(tensorflow::as_tensor(-1))
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor(-2.0, shape=(), dtype=float64)
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{#
+# Conditional side-effect (print only, no return value).
+file <- tempfile(fileext = ".txt")
+fn <- tensorflow::tf_function(function(epochs) \{
+  op_fori_loop(
+    0, epochs,
+    body_fun = \\(epoch, state) \{
+      op_cond(epoch \%\% 20 == 0,
+              \\() \{
+                tensorflow::tf$print(
+                  "epoch:", epoch,
+                  output_stream = paste0("file://", file))
+                NULL
+              \},
+              \\() \{NULL\})
+      state
+    \},
+    init_val = tensorflow::as_tensor(0))
+\})
+
+fn(tensorflow::as_tensor(100))
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor(0.0, shape=(), dtype=float64)
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{readLines(file)
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode">}}\preformatted{## [1] "epoch: 0"  "epoch: 20" "epoch: 40" "epoch: 60" "epoch: 80"
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{# cleanup
+unlink(file)
+}\if{html}{\out{</div>}}
+}
+
 \seealso{
 Other core ops: 
 \code{\link{op_cast}()},

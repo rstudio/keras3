@@ -356,7 +356,7 @@ export_savedmodel.keras.src.models.model.Model <- function(object, export_dir_ba
 #' stopifnot(all.equal(as.array(output), as.array(model(input))))
 #' ```
 #' ```{r, include = FALSE}
-#' unlink("path/to/artifact", recursive = TRUE)
+#' unlink("path", recursive = TRUE)
 #' ```
 #'
 #' The reloaded object can be used like a regular Keras layer, and supports

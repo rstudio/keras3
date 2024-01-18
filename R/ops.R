@@ -45,6 +45,45 @@ keras$ops$cast(x, dtype)
 #' @param false_fn
 #' Callable returning the output for the `pred == FALSE` case.
 #'
+#' @details
+#'
+#' # Examples
+#' ```{r}
+#' fn <- tensorflow::tf_function(function(x) {
+#'   op_cond(x > 0,
+#'     true_fn = \() x + 1,
+#'     false_fn = \() x - 1)
+#' })
+#'
+#' fn(tensorflow::as_tensor(1))
+#' fn(tensorflow::as_tensor(-1))
+#' #
+#' # Conditional side-effect (print only, no return value).
+#' file <- tempfile(fileext = ".txt")
+#' fn <- tensorflow::tf_function(function(epochs) {
+#'   op_fori_loop(
+#'     0, epochs,
+#'     body_fun = \(epoch, state) {
+#'       op_cond(epoch %% 20 == 0,
+#'               \() {
+#'                 tensorflow::tf$print(
+#'                   "epoch:", epoch,
+#'                   output_stream = paste0("file://", file))
+#'                 NULL
+#'               },
+#'               \() {NULL})
+#'       state
+#'     },
+#'     init_val = tensorflow::as_tensor(0))
+#' })
+#'
+#' fn(tensorflow::as_tensor(100))
+#'
+#' readLines(file)
+#'
+#' # cleanup
+#' unlink(file)
+#' ```
 #' @export
 #' @family core ops
 #' @family ops
@@ -52,7 +91,7 @@ keras$ops$cast(x, dtype)
 #  + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/cond>
 #' @tether keras.ops.cond
 op_cond <-
-function (pred, true_fn, false_fn = function(){})
+function (pred, true_fn, false_fn)
 keras$ops$cond(pred, true_fn, false_fn)
 
 

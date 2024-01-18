@@ -80,7 +80,8 @@ and \code{from_config()} methods.
 
     # print 'step' every 1000 steps
     op_cond((step \%\% 1000) == 0,
-            \\() tensorflow::tf$print(step))
+            \\() \{tensorflow::tf$print(step); NULL\},
+            \\() \{NULL\})
     self$initial_learning_rate / (step + 1)
   \}
 )
