@@ -106,12 +106,6 @@
     <loc>https://keras.posit.co/reference/Constraint.html</loc>
   </url>
   <url>
-    <loc>https://keras.posit.co/reference/KerasCallback.html</loc>
-  </url>
-  <url>
-    <loc>https://keras.posit.co/reference/KerasConstraint.html</loc>
-  </url>
-  <url>
     <loc>https://keras.posit.co/reference/Layer.html</loc>
   </url>
   <url>
@@ -328,9 +322,6 @@
     <loc>https://keras.posit.co/reference/callback_model_checkpoint.html</loc>
   </url>
   <url>
-    <loc>https://keras.posit.co/reference/callback_progbar_logger.html</loc>
-  </url>
-  <url>
     <loc>https://keras.posit.co/reference/callback_reduce_lr_on_plateau.html</loc>
   </url>
   <url>
@@ -407,12 +398,6 @@
   </url>
   <url>
     <loc>https://keras.posit.co/reference/count_params.html</loc>
-  </url>
-  <url>
-    <loc>https://keras.posit.co/reference/create_layer.html</loc>
-  </url>
-  <url>
-    <loc>https://keras.posit.co/reference/create_layer_wrapper.html</loc>
   </url>
   <url>
     <loc>https://keras.posit.co/reference/custom_metric.html</loc>
@@ -553,16 +538,10 @@
     <loc>https://keras.posit.co/reference/install_keras.html</loc>
   </url>
   <url>
-    <loc>https://keras.posit.co/reference/is_keras_available.html</loc>
-  </url>
-  <url>
     <loc>https://keras.posit.co/reference/keras.html</loc>
   </url>
   <url>
     <loc>https://keras.posit.co/reference/keras3-package.html</loc>
-  </url>
-  <url>
-    <loc>https://keras.posit.co/reference/keras_array.html</loc>
   </url>
   <url>
     <loc>https://keras.posit.co/reference/keras_input.html</loc>
@@ -730,9 +709,6 @@
     <loc>https://keras.posit.co/reference/layer_gru.html</loc>
   </url>
   <url>
-    <loc>https://keras.posit.co/reference/layer_gru_cell.html</loc>
-  </url>
-  <url>
     <loc>https://keras.posit.co/reference/layer_hashed_crossing.html</loc>
   </url>
   <url>
@@ -755,9 +731,6 @@
   </url>
   <url>
     <loc>https://keras.posit.co/reference/layer_lstm.html</loc>
-  </url>
-  <url>
-    <loc>https://keras.posit.co/reference/layer_lstm_cell.html</loc>
   </url>
   <url>
     <loc>https://keras.posit.co/reference/layer_masking.html</loc>
@@ -835,9 +808,6 @@
     <loc>https://keras.posit.co/reference/layer_simple_rnn.html</loc>
   </url>
   <url>
-    <loc>https://keras.posit.co/reference/layer_simple_rnn_cell.html</loc>
-  </url>
-  <url>
     <loc>https://keras.posit.co/reference/layer_spatial_dropout_1d.html</loc>
   </url>
   <url>
@@ -848,9 +818,6 @@
   </url>
   <url>
     <loc>https://keras.posit.co/reference/layer_spectral_normalization.html</loc>
-  </url>
-  <url>
-    <loc>https://keras.posit.co/reference/layer_stacked_rnn_cells.html</loc>
   </url>
   <url>
     <loc>https://keras.posit.co/reference/layer_string_lookup.html</loc>
@@ -968,12 +935,6 @@
   </url>
   <url>
     <loc>https://keras.posit.co/reference/mark_active.html</loc>
-  </url>
-  <url>
-    <loc>https://keras.posit.co/reference/metric-or-Metric.html</loc>
-  </url>
-  <url>
-    <loc>https://keras.posit.co/reference/metric.html</loc>
   </url>
   <url>
     <loc>https://keras.posit.co/reference/metric_auc.html</loc>
@@ -1114,13 +1075,7 @@
     <loc>https://keras.posit.co/reference/metric_true_positives.html</loc>
   </url>
   <url>
-    <loc>https://keras.posit.co/reference/model_to_dot.html</loc>
-  </url>
-  <url>
     <loc>https://keras.posit.co/reference/multi-assign.html</loc>
-  </url>
-  <url>
-    <loc>https://keras.posit.co/reference/new-classes.html</loc>
   </url>
   <url>
     <loc>https://keras.posit.co/reference/new_callback_class.html</loc>
@@ -1151,12 +1106,6 @@
   </url>
   <url>
     <loc>https://keras.posit.co/reference/op_all.html</loc>
-  </url>
-  <url>
-    <loc>https://keras.posit.co/reference/op_amax.html</loc>
-  </url>
-  <url>
-    <loc>https://keras.posit.co/reference/op_amin.html</loc>
   </url>
   <url>
     <loc>https://keras.posit.co/reference/op_any.html</loc>
@@ -1235,9 +1184,6 @@
   </url>
   <url>
     <loc>https://keras.posit.co/reference/op_conj.html</loc>
-  </url>
-  <url>
-    <loc>https://keras.posit.co/reference/op_conjugate.html</loc>
   </url>
   <url>
     <loc>https://keras.posit.co/reference/op_conv.html</loc>
@@ -1711,9 +1657,6 @@
     <loc>https://keras.posit.co/reference/op_triu.html</loc>
   </url>
   <url>
-    <loc>https://keras.posit.co/reference/op_true_divide.html</loc>
-  </url>
-  <url>
     <loc>https://keras.posit.co/reference/op_unstack.html</loc>
   </url>
   <url>
@@ -1852,9 +1795,6 @@
     <loc>https://keras.posit.co/reference/reset_state.html</loc>
   </url>
   <url>
-    <loc>https://keras.posit.co/reference/reset_states.html</loc>
-  </url>
-  <url>
     <loc>https://keras.posit.co/reference/rnn_cell_gru.html</loc>
   </url>
   <url>
@@ -1874,9 +1814,6 @@
   </url>
   <url>
     <loc>https://keras.posit.co/reference/save_model_weights.html</loc>
-  </url>
-  <url>
-    <loc>https://keras.posit.co/reference/sequential_model_input_layer.html</loc>
   </url>
   <url>
     <loc>https://keras.posit.co/reference/serialize_keras_object.html</loc>
