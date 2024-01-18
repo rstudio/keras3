@@ -46,8 +46,8 @@ test_succeeds("model with custom loss and metrics can be saved and loaded", {
   labels <- matrix(round(runif(1000*10, min = 0, max = 9)), nrow = 1000, ncol = 10)
 
   expect_equal(
-    model |> predict(data, verbose = 0),
-    restored_model |> predict(data, verbose = 0)
+    model %>% predict(data, verbose = 0),
+    restored_model %>% predict(data, verbose = 0)
   )
 
 
@@ -120,7 +120,7 @@ test_succeeds("model load with unnamed custom_objects", {
   # y <- to_categorical(sample(0:9, 10, replace = TRUE))
   y <- to_categorical(random_integer(10, 0, 10), 10)
 
-  model |> fit(x, y, verbose = FALSE)
+  model %>% fit(x, y, verbose = FALSE)
 
   res1 <- as.array(model(data))
 
@@ -135,7 +135,7 @@ test_succeeds("model load with unnamed custom_objects", {
 
   expect_identical(res1, res2)
   expect_no_error({
-    model2 |> fit(x, y, verbose = 0)
+    model2 %>% fit(x, y, verbose = 0)
   })
 })
 

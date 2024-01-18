@@ -52,11 +52,10 @@ install_keras <- function(
     switch(name,
            jax = jax,
            tensorflow = tensorflow,
-           "tf-nightly" = {
-             tensorflow |>
-               sub("tensorflow", "tf-nightly", x = _, fixed = TRUE) |>
-               replace_val("tf-nightly-metal", "tensorflow-metal")
-           },
+           "tf-nightly" = local({
+             tensorflow <- sub("tensorflow", "tf-nightly", x = tensorflow, fixed = TRUE)
+             replace_val(tensorflow, "tf-nightly-metal", "tensorflow-metal")
+           }),
            name)
     ))
 

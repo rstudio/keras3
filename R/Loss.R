@@ -104,6 +104,6 @@ function(classname, call = NULL,
     inherit = inherit,
     parent_env = parent_env,
     private = private,
-    default_formals = \(name=NULL, reduction="sum_over_batch_size", dtype=NULL) {}
+    default_formals = function(name=NULL, reduction="sum_over_batch_size", dtype=NULL) {}
   )
 }

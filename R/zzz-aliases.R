@@ -1,7 +1,7 @@
 
 
 .alias_roxygen <- function(backcompat_name, name) {
-  strsplit(glue::glue(r"---(
+  strsplit(glue::glue("
     {name}
 
     `{backcompat_name}()` is an alias for [`{name}()`].
@@ -11,7 +11,7 @@
     @keywords internal
     @export
 
-    )---"), "\n", fixed = TRUE)[[1L]]
+    "), "\n", fixed = TRUE)[[1L]]
 }
 
 

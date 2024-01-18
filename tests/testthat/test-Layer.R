@@ -298,10 +298,10 @@ test_that("calling Layer() doesn't initialize Python", {
     stopifnot(as.array(output) == as.array(input*2))
 
     input <- layer_input(shape())
-    output <- input |> layer_multiply_by_x(2)
+    output <- input %>% layer_multiply_by_x(2)
     model <- keras_model(input, output)
     x <- as.array(2)
-    pred <- model |> predict(x, verbose = 0)
+    pred <- model %>% predict(x, verbose = 0)
     stopifnot(all.equal(pred, as.array(4)))
   }))
 })

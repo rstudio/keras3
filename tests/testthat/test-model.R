@@ -181,7 +181,7 @@ test_succeeds("can pass name argument to 'keras_model'", {
 
 test_succeeds("can print a sequential model that is not built", {
 
-  model <- keras_model_sequential() |> layer_dense(10)
+  model <- keras_model_sequential() %>% layer_dense(10)
 
   expect_no_error(
     print(model)
@@ -292,7 +292,7 @@ test_succeeds("can use functional api with dicts", {
   chk <- function(inputs, outputs, x, y, error = FALSE) {
 
     model <- keras_model(inputs, outputs) %>%
-      compile(loss = lapply(outputs, \(o) loss_mean_squared_error()),
+      compile(loss = lapply(outputs, function(o) loss_mean_squared_error()),
               optimizer = optimizer_adam())
 
     .chk <- vector("list", 4L)

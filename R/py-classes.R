@@ -35,7 +35,7 @@ function(classname,
          parent_env = parent.frame(),
          private = list(),
          modifiers = quote(expr =),
-         default_formals = \(...) {})
+         default_formals = function(...) {})
 {
   # force all new_py_type() args
   classname; members; inherit; parent_env; private;
@@ -176,8 +176,8 @@ normalize_py_type_members <- function(members, env, convert, classname) {
   if (all(c("finalize", "__del__") %in% names(members)))
     stop("You should not specify both `__del__` and `finalize` methods.")
 
-  names(members) <- names(members) |>
-    replace_val("initialize", "__init__") |>
+  names(members) <- names(members) %>%
+    replace_val("initialize", "__init__") %>%
     replace_val("finalize", "__del__")
 
   members <- imap(members, function(x, name) {
@@ -307,10 +307,10 @@ as_py_method <- function(fn, name, env, convert, label) {
     if ("staticmethod" %in% decorators) {
       # do nothing
     } else if ("classmethod" %in% decorators) {
-      fn <- fn |> ensure_first_arg_is(cls = )
+      fn <- ensure_first_arg_is(fn, cls = )
     } else {
       # standard pathway, ensure the method receives 'self' as first arg
-      fn <- fn |> ensure_first_arg_is(self = )
+      fn <- ensure_first_arg_is(fn, self = )
     }
 
     doc <- NULL
@@ -426,7 +426,7 @@ r_formals_to_py__signature__ <- function(fn) {
 py_func2 <- function(fn, convert, name = deparse(substitute(fn))) {
   # TODO: wrap this all in a tryCatch() that gives a nice error message
   # about unsupported signatures
-  sig <- r_formals_to_py__signature__(fn) |> py_to_r()
+  sig <- py_to_r(r_formals_to_py__signature__(fn))
   inspect <- import("inspect")
   pass_sig <- iterate(sig$parameters$values(), function(p) {
     if(p$kind == inspect$Parameter$POSITIONAL_ONLY)
@@ -439,12 +439,12 @@ py_func2 <- function(fn, convert, name = deparse(substitute(fn))) {
      paste0(p$name, "=", p$name)
   })
   pass_sig <- paste0(pass_sig, collapse = ", ")
-  code <- glue::glue(r"---(
+  code <- glue::glue("
 def wrap_fn(_fn):
   def {name}{py_str(sig)}:
     return _fn({pass_sig})
   return {name}
-  )---")
+  ")
   util <- reticulate::py_run_string(code, local = TRUE, convert = convert)
   util$wrap_fn(fn)
 }

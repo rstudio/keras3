@@ -52,7 +52,7 @@ keras$ops$cast(x, dtype)
 #  + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/cond>
 #' @tether keras.ops.cond
 op_cond <-
-function (pred, true_fn, false_fn = \(){})
+function (pred, true_fn, false_fn = function(){})
 keras$ops$cond(pred, true_fn, false_fn)
 
 

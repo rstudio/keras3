@@ -348,7 +348,7 @@ function(classname,
   members <- modifyList(members, public, keep.null = TRUE)
 
   members <- modify_intersection(members, list(
-    from_config             = \(x) decorate_method(x, "classmethod"),
+    from_config             = function(x) decorate_method(x, "classmethod"),
     on_epoch_begin          = decorate_callback_method_sig_idx_logs,
     on_epoch_end            = decorate_callback_method_sig_idx_logs,
     on_train_begin          = decorate_callback_method_sig_logs,

@@ -37,8 +37,7 @@ jobs:
           # https://api.r-hub.io/rversions/resolve/oldrel/3
           - {os: 'ubuntu-latest' , python: '3.9', r: 'oldrel-1'}
           - {os: 'ubuntu-latest' , python: '3.9', r: 'oldrel-2'}
-          - {os: 'ubuntu-latest' , python: '3.9', r: 'oldrel-3'} # utils::sethash()
-          - {os: 'ubuntu-latest' , python: '3.9', r: 'oldrel-4'}
+          - {os: 'ubuntu-latest' , python: '3.9', r: 'oldrel-3'}
 
           # these are allowed to fail
           # - {os: 'ubuntu-latest', tf: '2.14.0rc1', r: 'release'}
