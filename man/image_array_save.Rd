@@ -2,7 +2,7 @@
 % Please edit documentation in R/image-utils.R
 \name{image_array_save}
 \alias{image_array_save}
-\title{Saves an image stored as a NumPy array to a path or file object.}
+\title{Saves an image stored as an array to a path or file object.}
 \usage{
 image_array_save(
   x,
@@ -14,7 +14,7 @@ image_array_save(
 )
 }
 \arguments{
-\item{x}{NumPy array.}
+\item{x}{An array.}
 
 \item{path}{Path or file object.}
 
@@ -30,7 +30,7 @@ used instead of a filename, this parameter should always be used.}
 \item{...}{Additional keyword arguments passed to \code{PIL.Image.save()}.}
 }
 \description{
-Saves an image stored as a NumPy array to a path or file object.
+Saves an image stored as an array to a path or file object.
 }
 \seealso{
 \itemize{

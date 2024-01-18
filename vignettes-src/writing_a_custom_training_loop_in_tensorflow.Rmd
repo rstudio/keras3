@@ -463,10 +463,6 @@ loss_fn <- loss_binary_crossentropy(from_logits = TRUE)
 
 train_step <- tf_function(function(real_images, seed = NULL) {
   
-  # prepare the random seed generator
-  # if (is.null(seed)) seed <- 1234
-  # if (is.numeric(seed)) seed <- random_seed_generator(seed)
-     
   # Sample random points in the latent space
   batch_size <- shape(real_images)[[1]]
   random_latent_vectors <- random_normal(shape(batch_size, latent_dim),

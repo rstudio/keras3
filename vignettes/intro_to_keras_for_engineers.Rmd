@@ -90,14 +90,14 @@ num_classes <- 10
 input_shape <- c(28, 28, 1)
 
 model <- keras_model_sequential(input_shape = input_shape)
-model %>%
-  layer_conv_2d(filters = 64, kernel_size = c(3, 3), activation = "relu") %>%
-  layer_conv_2d(filters = 64, kernel_size = c(3, 3), activation = "relu") %>%
-  layer_max_pooling_2d(pool_size = c(2, 2)) %>%
-  layer_conv_2d(filters = 128, kernel_size = c(3, 3), activation = "relu") %>%
-  layer_conv_2d(filters = 128, kernel_size = c(3, 3), activation = "relu") %>%
-  layer_global_average_pooling_2d() %>%
-  layer_dropout(rate = 0.5) %>%
+model |>
+  layer_conv_2d(filters = 64, kernel_size = c(3, 3), activation = "relu") |>
+  layer_conv_2d(filters = 64, kernel_size = c(3, 3), activation = "relu") |>
+  layer_max_pooling_2d(pool_size = c(2, 2)) |>
+  layer_conv_2d(filters = 128, kernel_size = c(3, 3), activation = "relu") |>
+  layer_conv_2d(filters = 128, kernel_size = c(3, 3), activation = "relu") |>
+  layer_global_average_pooling_2d() |>
+  layer_dropout(rate = 0.5) |>
   layer_dense(units = num_classes, activation = "softmax")
 ```
 
@@ -141,7 +141,7 @@ XLA compilation is turned on by default.
 
 
 ```r
-model %>% compile(
+model |> compile(
   optimizer = "adam",
   loss = "sparse_categorical_crossentropy",
   metrics = list(
@@ -163,35 +163,40 @@ callbacks <- list(
   callback_early_stopping(monitor="val_loss", patience=2)
 )
 
-model %>% fit(
-    x_train,
-    y_train,
-    batch_size=batch_size,
-    epochs=epochs,
-    validation_split=0.15,
-    callbacks=callbacks
+model |> fit(
+  x_train, y_train,
+  batch_size = batch_size,
+  epochs = epochs,
+  validation_split = 0.15,
+  callbacks = callbacks
 )
 ```
 
 ```
 ## Epoch 1/10
-## 399/399 - 9s - 22ms/step - acc: 0.7364 - loss: 0.7762 - val_acc: 0.9609 - val_loss: 0.1408
+## 399/399 - 8s - 21ms/step - acc: 0.7351 - loss: 0.7778 - val_acc: 0.9603 - val_loss: 0.1391
 ## Epoch 2/10
-## 399/399 - 2s - 5ms/step - acc: 0.9299 - loss: 0.2358 - val_acc: 0.9720 - val_loss: 0.0920
+## 399/399 - 2s - 5ms/step - acc: 0.9295 - loss: 0.2377 - val_acc: 0.9693 - val_loss: 0.0972
 ## Epoch 3/10
-## 399/399 - 2s - 5ms/step - acc: 0.9482 - loss: 0.1757 - val_acc: 0.9782 - val_loss: 0.0704
+## 399/399 - 2s - 5ms/step - acc: 0.9481 - loss: 0.1755 - val_acc: 0.9796 - val_loss: 0.0674
 ## Epoch 4/10
-## 399/399 - 2s - 5ms/step - acc: 0.9588 - loss: 0.1424 - val_acc: 0.9844 - val_loss: 0.0553
+## 399/399 - 2s - 5ms/step - acc: 0.9591 - loss: 0.1415 - val_acc: 0.9850 - val_loss: 0.0536
 ## Epoch 5/10
-## 399/399 - 2s - 5ms/step - acc: 0.9644 - loss: 0.1205 - val_acc: 0.9862 - val_loss: 0.0467
+## 399/399 - 2s - 5ms/step - acc: 0.9652 - loss: 0.1190 - val_acc: 0.9872 - val_loss: 0.0453
 ## Epoch 6/10
-## 399/399 - 2s - 5ms/step - acc: 0.9687 - loss: 0.1046 - val_acc: 0.9862 - val_loss: 0.0476
+## 399/399 - 2s - 5ms/step - acc: 0.9686 - loss: 0.1040 - val_acc: 0.9870 - val_loss: 0.0462
 ## Epoch 7/10
-## 399/399 - 2s - 5ms/step - acc: 0.9721 - loss: 0.0954 - val_acc: 0.9858 - val_loss: 0.0482
+## 399/399 - 2s - 5ms/step - acc: 0.9728 - loss: 0.0928 - val_acc: 0.9892 - val_loss: 0.0402
+## Epoch 8/10
+## 399/399 - 2s - 5ms/step - acc: 0.9750 - loss: 0.0841 - val_acc: 0.9896 - val_loss: 0.0373
+## Epoch 9/10
+## 399/399 - 2s - 5ms/step - acc: 0.9774 - loss: 0.0760 - val_acc: 0.9904 - val_loss: 0.0319
+## Epoch 10/10
+## 399/399 - 2s - 5ms/step - acc: 0.9792 - loss: 0.0703 - val_acc: 0.9887 - val_loss: 0.0390
 ```
 
 ```r
-score <- model %>% evaluate(x_test, y_test, verbose=0)
+score <- model |> evaluate(x_test, y_test, verbose = 0)
 ```
 
 During training, we were saving a model at the end of each epoch. You
@@ -209,11 +214,12 @@ And reload it like this:
 model <- load_model("final_model.keras")
 ```
 
+
 Next, you can query predictions of class probabilities with `predict()`:
 
 
 ```r
-predictions <- model %>% predict(x_test)
+predictions <- model |> predict(x_test)
 ```
 
 ```
@@ -246,10 +252,10 @@ Let's make a custom `Dense` layer that works with all backends:
 
 
 ```r
-MyDense <- new_layer_class(
-  "MyDense",
-  initialize = function(units, activation = NULL, name = NULL) {
-    super$initialize(name = name)
+layer_my_dense <- Layer(
+  classname = "MyDense",
+  initialize = function(units, activation = NULL, name = NULL, ...) {
+    super$initialize(name = name, ...)
     self$units <- units
     self$activation <- activation
   },
@@ -271,29 +277,30 @@ MyDense <- new_layer_class(
   call = function(inputs) {
     # Use Keras ops to create backend-agnostic layers/metrics/etc.
     x <- op_matmul(inputs, self$w) + self$b
-    if (is.null(self$activation)) return(x)
-    self$activation(x)
+    if (!is.null(self$activation))
+      x <- self$activation(x)
+    x
   }
 )
 ```
 
-Next, let's make a custom `Dropout` layer that relies on the `keras.random`
+Next, let's make a custom `Dropout` layer that relies on the `random_*`
 namespace:
 
 
 ```r
-MyDropout <- new_layer_class(
+layer_my_dropout <- Layer(
   "MyDropout",
-  initialize = function(rate, name = NULL) {
+  initialize = function(rate, name = NULL, seed = NULL, ...) {
     super$initialize(name = name)
     self$rate <- rate
     # Use seed_generator for managing RNG state.
     # It is a state element and its seed variable is
     # tracked as part of `layer$variables`.
-    self$seed_generator <- random_seed_generator(1337)
+    self$seed_generator <- random_seed_generator(seed)
   },
   call = function(inputs) {
-    # Use `keras.random` for random ops.
+    # Use `keras3::random_*` for random ops.
     random_dropout(inputs, self$rate, seed = self$seed_generator)
   }
 )
@@ -303,24 +310,28 @@ Next, let's write a custom subclassed model that uses our two custom layers:
 
 
 ```r
-MyModel <- new_model_class(
+MyModel <- Model(
   "MyModel",
-  initialize = function(num_classes) {
-    super$initialize()
-    self$conv_base <- keras_model_sequential() %>%
-      layer_conv_2d(64, kernel_size = c(3, 3), activation = "relu") %>%
-      layer_conv_2d(64, kernel_size = c(3, 3), activation = "relu") %>%
-      layer_max_pooling_2d(pool_size = c(2, 2)) %>%
-      layer_conv_2d(128, kernel_size = c(3, 3), activation = "relu") %>%
-      layer_conv_2d(128, kernel_size = c(3, 3), activation = "relu") %>%
+  initialize = function(num_classes, ...) {
+    super$initialize(...)
+    self$conv_base <-
+      keras_model_sequential() |>
+      layer_conv_2d(64, kernel_size = c(3, 3), activation = "relu") |>
+      layer_conv_2d(64, kernel_size = c(3, 3), activation = "relu") |>
+      layer_max_pooling_2d(pool_size = c(2, 2)) |>
+      layer_conv_2d(128, kernel_size = c(3, 3), activation = "relu") |>
+      layer_conv_2d(128, kernel_size = c(3, 3), activation = "relu") |>
       layer_global_average_pooling_2d()
-    self$dp <- MyDropout(rate = 0.5)
-    self$dense <- MyDense(units = num_classes, activation = activation_softmax)
+
+    self$dp <- layer_my_dropout(rate = 0.5)
+    self$dense <- layer_my_dense(units = num_classes,
+                                 activation = activation_softmax)
   },
   call = function(inputs) {
-    x <- self$conv_base(inputs)
-    x <- self$dp(x)
-    self$dense(x)
+    inputs |>
+      self$conv_base() |>
+      self$dp() |>
+      self$dense()
   }
 )
 ```
@@ -329,26 +340,25 @@ Let's compile it and fit it:
 
 
 ```r
-model <- MyModel(num_classes=10)
-model %>% compile(
-  loss=loss_sparse_categorical_crossentropy(),
-  optimizer=optimizer_adam(learning_rate=1e-3),
-  metrics=list(
-    metric_sparse_categorical_accuracy(name="acc")
+model <- MyModel(num_classes = 10)
+model |> compile(
+  loss = loss_sparse_categorical_crossentropy(),
+  optimizer = optimizer_adam(learning_rate = 1e-3),
+  metrics = list(
+    metric_sparse_categorical_accuracy(name = "acc")
   )
 )
 
-model %>% fit(
-    x_train,
-    y_train,
-    batch_size=batch_size,
-    epochs=1,  # For speed
-    validation_split=0.15,
+model |> fit(
+  x_train, y_train,
+  batch_size = batch_size,
+  epochs = 1, # For speed
+  validation_split = 0.15
 )
 ```
 
 ```
-## 399/399 - 9s - 23ms/step - acc: 0.7508 - loss: 0.7376 - val_acc: 0.9338 - val_loss: 0.2250
+## 399/399 - 9s - 22ms/step - acc: 0.7403 - loss: 0.7542 - val_acc: 0.9230 - val_loss: 0.2499
 ```
 
 ## Training models on arbitrary data sources
@@ -402,29 +412,30 @@ Let's try this out with `tf_dataset`:
 ```r
 library(tfdatasets)
 
-train_dataset <- list(x_train, y_train) %>%
-  tensor_slices_dataset() %>%
-  dataset_batch(batch_size) %>%
-  dataset_prefetch(buffer_size=tf$data$AUTOTUNE)
+train_dataset <- list(x_train, y_train) |>
+  tensor_slices_dataset() |>
+  dataset_batch(batch_size) |>
+  dataset_prefetch(buffer_size = tf$data$AUTOTUNE)
 
-test_dataset <- list(x_test, y_test) %>%
-  tensor_slices_dataset() %>%
-  dataset_batch(batch_size) %>%
-  dataset_prefetch(buffer_size=tf$data$AUTOTUNE)
+test_dataset <- list(x_test, y_test) |>
+  tensor_slices_dataset() |>
+  dataset_batch(batch_size) |>
+  dataset_prefetch(buffer_size = tf$data$AUTOTUNE)
 
-model <- MyModel(num_classes=10)
-model %>% compile(
-  loss=loss_sparse_categorical_crossentropy(),
-  optimizer=optimizer_adam(learning_rate=1e-3),
-  metrics=list(
-    metric_sparse_categorical_accuracy(name="acc")
+model <- MyModel(num_classes = 10)
+model |> compile(
+  loss = loss_sparse_categorical_crossentropy(),
+  optimizer = optimizer_adam(learning_rate = 1e-3),
+  metrics = list(
+    metric_sparse_categorical_accuracy(name = "acc")
   )
 )
-model %>% fit(train_dataset, epochs=1, validation_data=test_dataset)
+
+model |> fit(train_dataset, epochs = 1, validation_data = test_dataset)
 ```
 
 ```
-## 469/469 - 9s - 20ms/step - acc: 0.7551 - loss: 0.7269 - val_acc: 0.8965 - val_loss: 0.3269
+## 469/469 - 9s - 20ms/step - acc: 0.7580 - loss: 0.7156 - val_acc: 0.8979 - val_loss: 0.3212
 ```
 
 ## Further reading

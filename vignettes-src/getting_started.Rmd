@@ -107,7 +107,7 @@ We begin by creating a sequential model and then adding layers using the pipe (`
 
 ```{r}
 model <- keras_model_sequential(input_shape = c(784))
-model %>%
+model |>
   layer_dense(units = 256, activation = 'relu') |>
   layer_dropout(rate = 0.4) |>
   layer_dense(units = 128, activation = 'relu') |>

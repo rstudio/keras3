@@ -1,11 +1,11 @@
 
-#' Saves an image stored as a NumPy array to a path or file object.
+#' Saves an image stored as an array to a path or file object.
 #'
 #' @param path
 #' Path or file object.
 #'
 #' @param x
-#' NumPy array.
+#' An array.
 #'
 #' @param data_format
 #' Image data format, either `"channels_first"` or

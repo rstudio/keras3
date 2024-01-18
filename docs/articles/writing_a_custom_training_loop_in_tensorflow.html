@@ -356,7 +356,7 @@ at the end of each epoch:</p>
 <span><span class="co">## Validation acc: 0.8489</span></span></code></pre>
 <div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/Sys.time.html" class="external-link">Sys.time</a></span><span class="op">(</span><span class="op">)</span> <span class="op">-</span> <span class="va">time</span></span></code></pre></div>
-<pre><code><span><span class="co">## Time difference of 22.98592 secs</span></span></code></pre>
+<pre><code><span><span class="co">## Time difference of 25.65498 secs</span></span></code></pre>
 </div>
 <div class="section level2">
 <h2 id="speeding-up-your-training-step-with-tf_function">Speeding-up your training step with <code>tf_function</code><a class="anchor" aria-label="anchor" href="#speeding-up-your-training-step-with-tf_function"></a>
@@ -445,7 +445,7 @@ step:</p>
 <span><span class="co">## Validation acc: 0.8794</span></span></code></pre>
 <div class="sourceCode" id="cb16"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/Sys.time.html" class="external-link">Sys.time</a></span><span class="op">(</span><span class="op">)</span> <span class="op">-</span> <span class="va">time</span></span></code></pre></div>
-<pre><code><span><span class="co">## Time difference of 2.784149 secs</span></span></code></pre>
+<pre><code><span><span class="co">## Time difference of 3.191403 secs</span></span></code></pre>
 <p>Much faster, isn’t it?</p>
 </div>
 <div class="section level2">
@@ -639,10 +639,6 @@ straightforward. The training step function only takes 17 lines.</p>
 <span></span>
 <span><span class="va">train_step</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/tensorflow/man/tf_function.html" class="external-link">tf_function</a></span><span class="op">(</span><span class="kw">function</span><span class="op">(</span><span class="va">real_images</span>, <span class="va">seed</span> <span class="op">=</span> <span class="cn">NULL</span><span class="op">)</span> <span class="op">{</span></span>
 <span></span>
-<span>  <span class="co"># prepare the random seed generator</span></span>
-<span>  <span class="co"># if (is.null(seed)) seed &lt;- 1234</span></span>
-<span>  <span class="co"># if (is.numeric(seed)) seed &lt;- random_seed_generator(seed)</span></span>
-<span></span>
 <span>  <span class="co"># Sample random points in the latent space</span></span>
 <span>  <span class="va">batch_size</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/shape.html">shape</a></span><span class="op">(</span><span class="va">real_images</span><span class="op">)</span><span class="op">[[</span><span class="fl">1</span><span class="op">]</span><span class="op">]</span></span>
 <span>  <span class="va">random_latent_vectors</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/random_normal.html">random_normal</a></span><span class="op">(</span><span class="fu"><a href="../reference/shape.html">shape</a></span><span class="op">(</span><span class="va">batch_size</span>, <span class="va">latent_dim</span><span class="op">)</span>,</span>
@@ -744,10 +740,10 @@ want to run this code on a GPU.</p>
 <span>  <span class="op">}</span></span>
 <span><span class="op">}</span></span></code></pre></div>
 <pre><code><span><span class="co">## Start epoch:  1</span></span>
-<span><span class="co">## discriminator loss at step 200: 0.61</span></span>
-<span><span class="co">## adversarial loss at step 200: 0.96</span></span>
-<span><span class="co">## discriminator loss at step 400: 0.51</span></span>
-<span><span class="co">## adversarial loss at step 400: 1.09</span></span></code></pre>
+<span><span class="co">## discriminator loss at step 200: 0.59</span></span>
+<span><span class="co">## adversarial loss at step 200: 0.91</span></span>
+<span><span class="co">## discriminator loss at step 400: 0.43</span></span>
+<span><span class="co">## adversarial loss at step 400: 1.35</span></span></code></pre>
 <p>That’s it! You’ll get nice-looking fake MNIST digits after just ~30s
 of training on a GPU.</p>
 </div>
