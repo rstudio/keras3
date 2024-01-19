@@ -29,6 +29,10 @@ install_keras <- function(
     gpu <- (is_linux() && has_nvidia_gpu()) || is_mac_arm64()
   }
 
+  # keras requires tensorflow be installed still.
+  if(!any(grepl("tensorflow|tf-nightly", backend)))
+    backend <- c("tensorflow", backend)
+
   if (isTRUE(gpu)) {
     message("Installing GPU components")
     if (is_mac_arm64()) {
@@ -45,7 +49,7 @@ install_keras <- function(
   }
 
   if("jax" %in% backend && !is.null(extra_packages))
-    # undeclared dependancy, import fails otherwise
+    # undeclared dependency, import fails otherwise
     append(extra_packages) <- "packaging"
 
   backend <- unlist(lapply(backend, function(name)
