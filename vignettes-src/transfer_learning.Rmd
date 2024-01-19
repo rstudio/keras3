@@ -20,7 +20,7 @@ library(keras3)
 
 **Transfer learning** consists of taking features learned on one problem, and
 leveraging them on a new, similar problem. For instance, features from a model that has
-learned to identify racoons may be useful to kick-start a model meant to identify
+learned to identify raccoon may be useful to kick-start a model meant to identify
  tanukis.
 
 Transfer learning is usually done for tasks where your dataset has too little data to
@@ -75,8 +75,8 @@ length(layer$non_trainable_weights)
 ```
 
 In general, all weights are trainable weights. The only built-in layer that has
-non-trainable weights is the `BatchNormalization` layer. It uses non-trainable weights
- to keep track of the mean and variance of its inputs during training.
+non-trainable weights is [`layer_batch_normalization()`]. It uses non-trainable weights
+to keep track of the mean and variance of its inputs during training.
 To learn how to use non-trainable weights in your own custom layers, see the
 [guide to writing new layers from scratch](https://keras.io/guides/making_new_layers_and_models_via_subclassing/).
 
@@ -85,7 +85,7 @@ To learn how to use non-trainable weights in your own custom layers, see the
 
 ```{r}
 layer <- layer_batch_normalization()
-layer$build(shape(NULL, 4))  # Create the weights
+layer$build(shape(NA, 4))  # Create the weights
 
 length(layer$weights)
 length(layer$trainable_weights)
@@ -111,53 +111,56 @@ length(layer$non_trainable_weights)
 ```
 
 When a trainable weight becomes non-trainable, its value is no longer updated during
- training.
+training.
 
 ```{r}
 # Make a model with 2 layers
-layer1 <- layer_dense(units = 3, activation="relu")
-layer2 <- layer_dense(units = 3, activation="sigmoid")
-model <- keras_model_sequential(input_shape = 3) %>%
-  layer1() %>%
+layer1 <- layer_dense(units = 3, activation = "relu")
+layer2 <- layer_dense(units = 3, activation = "sigmoid")
+model <- keras_model_sequential(input_shape = 3) |>
+  layer1() |>
   layer2()
 
 # Freeze the first layer
 layer1$trainable <- FALSE
 
 # Keep a copy of the weights of layer1 for later reference
+# (get_weights() returns a list of R arrays,
+#  layer$weights returns a list of KerasVariables)
 initial_layer1_weights_values <- get_weights(layer1)
 
 # Train the model
-model %>% compile(optimizer="adam", loss="mse")
-model %>% fit(random_normal(c(2, 3)), random_normal(c(2, 3)), epochs = 1)
+model |> compile(optimizer = "adam", loss = "mse")
+model |> fit(random_normal(c(2, 3)), random_normal(c(2, 3)), epochs = 1)
 
 # Check that the weights of layer1 have not changed during training
 final_layer1_weights_values <- get_weights(layer1)
 
-all.equal(initial_layer1_weights_values, final_layer1_weights_values)
+all.equal(initial_layer1_weights_values, 
+          final_layer1_weights_values)
 ```
 
 Do not confuse the `layer$trainable` attribute with the argument `training` in
-`layer$call` (which controls whether the layer should run its forward pass in
+`layer$call()` (which controls whether the layer should run its forward pass in
  inference mode or training mode). For more information, see the
 [Keras FAQ](
   https://keras.io/getting_started/faq/#whats-the-difference-between-the-training-argument-in-call-and-the-trainable-attribute).
 
 ## Recursive setting of the `trainable` attribute
 
-If you set `trainable = False` on a model or on any layer that has sublayers,
+If you set `$trainable <- FALSE` on a model or on any layer that has sublayers,
 all children layers become non-trainable as well.
 
 **Example:**
 
 ```{r}
-inner_model <- keras_model_sequential(input_shape = 3) %>%
-  layer_dense(units = 3, activation="relu") %>%
-  layer_dense(units = 3, activation="relu")
+inner_model <- keras_model_sequential(input_shape = 3) |>
+  layer_dense(units = 3, activation = "relu") |>
+  layer_dense(units = 3, activation = "relu")
 
-model <- keras_model_sequential(input_shape = 3) %>%
-  inner_model %>%
-  layer_dense(units = 3, activation="sigmoid")
+model <- keras_model_sequential(input_shape = 3) |>
+  inner_model() |>
+  layer_dense(units = 3, activation = "sigmoid")
 
 model$trainable <- FALSE  # Freeze the outer model
 
@@ -170,7 +173,7 @@ inner_model$layers[[1]]$trainable  # `trainable` is propagated recursively
 This leads us to how a typical transfer learning workflow can be implemented in Keras:
 
 1. Instantiate a base model and load pre-trained weights into it.
-2. Freeze all layers in the base model by setting `trainable = False`.
+2. Freeze all layers in the base model by setting `trainable <- FALSE`.
 3. Create a new model on top of the output of one (or several) layers from the base
  model.
 4. Train your new model on your new dataset.
@@ -198,9 +201,10 @@ First, instantiate a base model with pre-trained weights.
 
 ```{r}
 base_model <- application_xception(
-    weights='imagenet',  # Load weights pre-trained on ImageNet.
-    input_shape=c(150, 150, 3),
-    include_top=FALSE)  # Do not include the ImageNet classifier at the top.
+  weights = 'imagenet', # Load weights pre-trained on ImageNet.
+  input_shape = c(150, 150, 3),
+  include_top = FALSE  # Do not include the ImageNet classifier at the top.
+) 
 ```
 
 Then, freeze the base model.
@@ -212,28 +216,30 @@ base_model$trainable <- FALSE
 Create a new model on top.
 
 ```{r}
-inputs <- layer_input(shape = c(150, 150, 3))
+inputs <- keras_input(shape = c(150, 150, 3))
 # We make sure that the base_model is running in inference mode here,
-# by passing `training=False`. This is important for fine-tuning, as you will
+# by passing `training <- FALSE`. This is important for fine-tuning, as you will
 # learn in a few paragraphs.
-outputs <- inputs %>%
-  base_model(training = FALSE) %>%
-  # Convert features of shape `base_model.output_shape[1:]` to vectors
-  layer_global_average_pooling_2d() %>%
+outputs <- inputs |>
+  base_model(training = FALSE) |>
+  # Convert features of shape `base_model$output_shape[-1]` to vectors
+  layer_global_average_pooling_2d() |>
   # A Dense classifier with a single unit (binary classification)
   layer_dense(1)
+
 model <- keras_model(inputs, outputs)
 ```
 
 Train the model on new data.
 
 ```{r, eval = FALSE}
-model %>% compile(
+model |> compile(
   optimizer = optimizer_adam(),
   loss = loss_binary_crossentropy(from_logits = TRUE),
   metrics = list(metric_binary_accuracy())
 )
-model %>% fit(new_dataset, epochs=20, callbacks=..., validation_data=...)
+model |> fit(new_dataset, epochs = 20, 
+             callbacks = ..., validation_data = ...)
 ```
 
 ## Fine-tuning
@@ -265,14 +271,15 @@ base_model$trainable <- TRUE
 # It's important to recompile your model after you make any changes
 # to the `trainable` attribute of any inner layer, so that your changes
 # are take into account
-model %>% compile(
-  optimizer = optimizer_adam(1e-5),  # Very low learning rate
-  loss = loss_binary_crossentropy(from_logits=TRUE),
-  metrics = list(metric_binary_accuracy())
+model |> compile(
+  optimizer = optimizer_adam(1e-5), # Very low learning rate
+  loss = loss_binary_crossentropy(from_logits = TRUE),
+  metrics = c(metric_binary_accuracy())
 )
 
 # Train end-to-end. Be careful to stop before you overfit!
-model %>% fit(new_dataset, epochs=10, callbacks=..., validation_data=...)
+model |> fit(new_dataset, epochs = 10, 
+             callbacks = ..., validation_data = ...)
 ```
 
 **Important note about `compile()` and `trainable`**
@@ -292,7 +299,7 @@ Many image models contain `BatchNormalization` layers. That layer is a special c
 
 - `BatchNormalization` contains 2 non-trainable weights that get updated during
 training. These are the variables tracking the mean and variance of the inputs.
-- When you set `bn_layer.trainable = False`, the `BatchNormalization` layer will
+- When you set `bn_layer$trainable <- FALSE`, the `BatchNormalization` layer will
 run in inference mode, and will not update its mean & variance statistics. This is not
 the case for other layers in general, as
 [weight trainability & inference/training modes are two orthogonal concepts](
@@ -300,7 +307,7 @@ the case for other layers in general, as
 But the two are tied in the case of the `BatchNormalization` layer.
 - When you unfreeze a model that contains `BatchNormalization` layers in order to do
 fine-tuning, you should keep the `BatchNormalization` layers in inference mode by
- passing `training=False` when calling the base model.
+ passing `training = FALSE` when calling the base model.
 Otherwise the updates applied to the non-trainable weights will suddenly destroy
 what the model has learned.
 
@@ -316,7 +323,7 @@ learning & fine-tuning example. We will load the Xception model, pre-trained on
 
 First, let's fetch the cats vs. dogs dataset using TFDS. If you have your own dataset,
 you'll probably want to use the utility
-`keras.utils.image_dataset_from_directory` to generate similar labeled
+[`image_dataset_from_directory()`] to generate similar labeled
  dataset objects from a set of images on disk filed into class-specific folders.
 
 Transfer learning is most useful when working with very small datasets. To keep our
@@ -326,13 +333,12 @@ dataset small, we will use 40% of the original training data (25,000 images) for
 ```{r}
 # reticulate::py_install("tensorflow-datasets")
 tfds <- reticulate::import("tensorflow_datasets")
-tfds$disable_progress_bar()
 
 c(train_ds, validation_ds, test_ds) %<-% tfds$load(
-    "cats_vs_dogs",
-    # Reserve 10% for validation and 10% for test
-    split = c("train[:40%]", "train[40%:50%]", "train[50%:60%]"),
-    as_supervised=TRUE  # Include labels
+  "cats_vs_dogs",
+  # Reserve 10% for validation and 10% for test
+  split = c("train[:40%]", "train[40%:50%]", "train[50%:60%]"),
+  as_supervised = TRUE  # Include labels
 )
 
 length(train_ds)
@@ -342,17 +348,18 @@ These are the first 9 images in the training dataset -- as you can see, they're 
 different sizes.
 
 ```{r}
-library(tfdatasets)
+library(tfdatasets, exclude = "shape")
 
 par(mfrow = c(3, 3), mar = c(1,0,1.5,0))
-train_ds %>%
-  dataset_take(9) %>%
-  as_array_iterator() %>%
+train_ds |>
+  dataset_take(9) |>
+  as_array_iterator() |>
   iterate(function(batch) {
     c(image, label) %<-% batch
-    plot(as.raster(image, max = 255))
-    title(sprintf("label: %s   size: %s",
-                  label, paste(dim(image), collapse = " x ")))
+    plot(as.raster(image, max = 255L))
+    title(sprintf(
+      "label: %s   size: %s", 
+      label, paste(dim(image), collapse = " x ")))
   })
 ```
 
@@ -385,9 +392,9 @@ Let's resize images to 150x150:
 resize_fn <- layer_resizing(width = 150, height = 150)
 resize_pair <- function(x, y) list(resize_fn(x), y)
 
-train_ds <- train_ds %>% dataset_map(resize_pair)
-validation_ds <- validation_ds %>% dataset_map(resize_pair)
-test_ds <- test_ds %>% dataset_map(resize_pair)
+train_ds <- train_ds |> dataset_map(resize_pair)
+validation_ds <- validation_ds |> dataset_map(resize_pair)
+test_ds <- test_ds |> dataset_map(resize_pair)
 ```
 
 ### Using random data augmentation
@@ -399,8 +406,8 @@ helps expose the model to different aspects of the training data while slowing d
 overfitting.
 
 ```{r}
-data_augmentation <- keras_model_sequential() %>%
-  layer_random_flip("horizontal") %>%
+data_augmentation <- keras_model_sequential() |>
+  layer_random_flip("horizontal") |>
   layer_random_rotation(.1)
 
 train_ds <- train_ds %>%
@@ -410,31 +417,29 @@ train_ds <- train_ds %>%
 Let's batch the data and use prefetching to optimize loading speed.
 
 ```{r}
-library(tensorflow)
-
+library(tensorflow, exclude = c("shape", "set_random_seed"))
 batch_size <- 64
 
-train_ds <- train_ds %>%
-  dataset_batch(batch_size) %>%
-  dataset_prefetch(tf$data$AUTOTUNE) %>%
-  dataset_cache()
-validation_ds <- validation_ds %>%
-  dataset_batch(batch_size) %>%
-  dataset_prefetch(tf$data$AUTOTUNE) %>%
-  dataset_cache()
-test_ds <- test_ds %>%
-  dataset_batch(batch_size) %>%
-  dataset_prefetch(tf$data$AUTOTUNE) %>%
-  dataset_cache()
+train_ds <- train_ds |>
+  dataset_batch(batch_size) |>
+  dataset_prefetch()
+
+validation_ds <- validation_ds |>
+  dataset_batch(batch_size) |>
+  dataset_prefetch() 
+
+test_ds <- test_ds |>
+  dataset_batch(batch_size) |>
+  dataset_prefetch() 
 ```
 
 Let's visualize what the first image of the first batch looks like after various random
  transformations:
 
 ```{r}
-batch <- train_ds %>%
-  dataset_take(1) %>%
-  as_iterator() %>%
+batch <- train_ds |>
+  dataset_take(1) |>
+  as_iterator() |>
   iter_next()
 
 c(images, labels) %<-% batch
@@ -442,9 +447,9 @@ first_image <- images[1, all_dims(), drop = TRUE]
 augmented_image <- data_augmentation(first_image, training = TRUE)
 
 plot_image <- function(image, main = deparse1(substitute(image))) {
-  image %>%
-    as.array() %>%   # convert from tensor to R array
-    as.raster(max = 255) %>%
+  image |>
+    as.array() |> # convert from tensor to R array
+    as.raster(max = 255) |>
     plot()
 
   if(!is.null(main))
@@ -467,54 +472,54 @@ Note that:
 - We add a `Rescaling` layer to scale input values (initially in the `[0, 255]`
  range) to the `[-1, 1]` range.
 - We add a `Dropout` layer before the classification layer, for regularization.
-- We make sure to pass `training=False` when calling the base model, so that
+- We make sure to pass `training=FALSE` when calling the base model, so that
 it runs in inference mode, so that batchnorm statistics don't get updated
 even after we unfreeze the base model for fine-tuning.
 
 ```{r}
 base_model <- application_xception(
-    weights="imagenet",  # Load weights pre-trained on ImageNet.
-    input_shape=c(150, 150, 3),
-    include_top=FALSE,
-)  # Do not include the ImageNet classifier at the top.
+  weights = "imagenet", # Load weights pre-trained on ImageNet.
+  input_shape = c(150, 150, 3),
+  include_top = FALSE, # Do not include the ImageNet classifier at the top.
+)  
 
 # Freeze the base_model
 base_model$trainable <- FALSE
 
 # Create new model on top
-inputs <- layer_input(shape=c(150, 150, 3))
+inputs <- keras_input(shape = c(150, 150, 3))
 
 # Pre-trained Xception weights requires that input be scaled
 # from (0, 255) to a range of (-1., +1.), the rescaling layer
 # outputs: `(inputs * scale) + offset`
-scale_layer <- layer_rescaling(scale=1 / 127.5, offset=-1)
+scale_layer <- layer_rescaling(scale = 1 / 127.5, offset = -1)
 x <- scale_layer(inputs)
 
 # The base model contains batchnorm layers. We want to keep them in inference mode
 # when we unfreeze the base model for fine-tuning, so we make sure that the
 # base_model is running in inference mode here.
-outputs <- x %>%
-  base_model(training = FALSE) %>%
-  layer_global_average_pooling_2d() %>%
-  layer_dropout(0.2) %>%
+outputs <- x |>
+  base_model(training = FALSE) |>
+  layer_global_average_pooling_2d() |>
+  layer_dropout(0.2) |>
   layer_dense(1)
 
 model <- keras_model(inputs, outputs)
 
-summary(model, show_trainable=TRUE)
+summary(model, show_trainable = TRUE)
 ```
 
 ## Train the top layer
 
 ```{r}
-model %>% compile(
-    optimizer = optimizer_adam(),
-    loss = loss_binary_crossentropy(from_logits = TRUE),
-    metrics = list(metric_binary_accuracy())
+model |> compile(
+  optimizer = optimizer_adam(),
+  loss = loss_binary_crossentropy(from_logits = TRUE),
+  metrics = list(metric_binary_accuracy())
 )
 
 epochs <- 1
-model %>% fit(train_ds, epochs=epochs, validation_data=validation_ds)
+model |> fit(train_ds, epochs = epochs, validation_data = validation_ds)
 ```
 
 ## Do a round of fine-tuning of the entire model
@@ -523,33 +528,33 @@ Finally, let's unfreeze the base model and train the entire model end-to-end wit
  learning rate.
 
 Importantly, although the base model becomes trainable, it is still running in
-inference mode since we passed `training=False` when calling it when we built the
+inference mode since we passed `training=FALSE` when calling it when we built the
 model. This means that the batch normalization layers inside won't update their batch
 statistics. If they did, they would wreck havoc on the representations learned by the
  model so far.
 
 ```{r}
 # Unfreeze the base_model. Note that it keeps running in inference mode
-# since we passed `training=False` when calling it. This means that
+# since we passed `training=FALSE` when calling it. This means that
 # the batchnorm layers will not update their batch statistics.
 # This prevents the batchnorm layers from undoing all the training
 # we've done so far.
 base_model$trainable <- TRUE
-summary(model, show_trainable=TRUE)
+summary(model, show_trainable = TRUE)
 
-model %>% compile(
-  optimizer = optimizer_adam(1e-5),  # Low learning rate
-  loss = loss_binary_crossentropy(from_logits=TRUE),
+model |> compile(
+  optimizer = optimizer_adam(1e-5), # Low learning rate
+  loss = loss_binary_crossentropy(from_logits = TRUE),
   metrics = list(metric_binary_accuracy())
 )
 
 epochs <- 1
-model %>% fit(train_ds, epochs=epochs, validation_data=validation_ds)
+model |> fit(train_ds, epochs = epochs, validation_data = validation_ds)
 ```
 
 After 10 epochs, fine-tuning gains us a nice improvement here.
 Let's evaluate the model on the test dataset:
 
 ```{r}
-model %>% evaluate(test_ds)
+model |> evaluate(test_ds)
 ```

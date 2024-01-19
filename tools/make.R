@@ -124,6 +124,8 @@ if(!"source:tools/translate-tools.R" %in% search()) envir::attach_source("tools/
 #       which it's a "no-op" or "identity" function because the preprocessing
 #       step is on the graph already.
 
+# TODO: R generator func should be passable to adapt(layer_feature_space(), <r_generator>)
+
 # TODO: c.keras_shape <- function(...){}
 #
 # TODO: custom_metric() / custom_loss() / Loss() / Metric(). remove custom_metric()?

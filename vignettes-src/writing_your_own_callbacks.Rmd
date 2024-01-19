@@ -132,23 +132,23 @@ show <- function(msg, logs) {
 
 callback_custom <- Callback(
   "CustomCallback",
-  on_train_begin         = function(logs = NULL) show("Starting training", logs),
-  on_epoch_begin         = function(epoch, logs = NULL) show("Start epoch {epoch} of training", logs),
-  on_train_batch_begin   = function(batch, logs = NULL) show("...Training: start of batch {batch}", logs),
-  on_train_batch_end     = function(batch, logs = NULL) show("...Training: end of batch {batch}",  logs),
-  on_epoch_end           = function(epoch, logs = NULL) show("End epoch {epoch} of training", logs),
-  on_train_end           = function(logs = NULL) show("Stop training", logs),
+  on_train_begin         = \(logs = NULL)        show("Starting training", logs),
+  on_epoch_begin         = \(epoch, logs = NULL) show("Start epoch {epoch} of training", logs),
+  on_train_batch_begin   = \(batch, logs = NULL) show("...Training: start of batch {batch}", logs),
+  on_train_batch_end     = \(batch, logs = NULL) show("...Training: end of batch {batch}",  logs),
+  on_epoch_end           = \(epoch, logs = NULL) show("End epoch {epoch} of training", logs),
+  on_train_end           = \(logs = NULL)        show("Stop training", logs),
 
 
-  on_test_begin          = function(logs = NULL) show("Start testing", logs),
-  on_test_batch_begin    = function(batch, logs = NULL) show("...Evaluating: start of batch {batch}", logs),
-  on_test_batch_end      = function(batch, logs = NULL) show("...Evaluating: end of batch {batch}", logs),
-  on_test_end            = function(logs = NULL) show("Stop testing", logs),
+  on_test_begin          = \(logs = NULL)        show("Start testing", logs),
+  on_test_batch_begin    = \(batch, logs = NULL) show("...Evaluating: start of batch {batch}", logs),
+  on_test_batch_end      = \(batch, logs = NULL) show("...Evaluating: end of batch {batch}", logs),
+  on_test_end            = \(logs = NULL)        show("Stop testing", logs),
 
-  on_predict_begin       = function(logs = NULL) show("Start predicting", logs),
-  on_predict_end         = function(logs = NULL) show("Stop predicting", logs),
-  on_predict_batch_begin = function(batch, logs = NULL) show("...Predicting: start of batch {batch}", logs),
-  on_predict_batch_end   = function(batch, logs = NULL) show("...Predicting: end of batch {batch}", logs),
+  on_predict_begin       = \(logs = NULL)        show("Start predicting", logs),
+  on_predict_end         = \(logs = NULL)        show("Stop predicting", logs),
+  on_predict_batch_begin = \(batch, logs = NULL) show("...Predicting: start of batch {batch}", logs),
+  on_predict_batch_end   = \(batch, logs = NULL) show("...Predicting: end of batch {batch}", logs),
 )
 ```
 
@@ -177,7 +177,7 @@ res <- model |> predict(
 )
 ```
 
-### Usage of `logs` dict
+### Usage of `logs` list
 The `logs` named list contains the loss value, and all the metrics at the end of a batch or
 epoch. Example includes the loss and mean absolute error.
 ```{r}
@@ -278,11 +278,11 @@ callback_early_stopping_at_min_loss <- Callback(
     current <- logs$loss
     if (current < self$best) {
       self$best <- current
-      self$wait <- 0
+      self$wait <- 0L
       # Record the best weights if current results is better (less).
-      self$best_weights <- self$model$get_weights()
+      self$best_weights <- get_weights(self$model)
     } else {
-      add(self$wait) <- 1
+      add(self$wait) <- 1L
       if (self$wait >= self$patience) {
         self$stopped_epoch <- epoch
         model <- self$model

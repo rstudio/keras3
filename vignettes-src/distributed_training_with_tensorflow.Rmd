@@ -132,8 +132,8 @@ get_compiled_model <- function() {
   model
 }
 
-get_dataset <- function() {
-  batch_size <- 64
+get_dataset <- function(batch_size = 64) {
+
   c(c(x_train, y_train), c(x_test, y_test)) %<-% dataset_mnist()
   x_train <- array_reshape(x_train, c(-1, 784))
   x_test <- array_reshape(x_test, c(-1, 784))
@@ -174,10 +174,12 @@ with(strategy$scope(), {
   model <- get_compiled_model()
 
   c(train_dataset, val_dataset, test_dataset) %<-% get_dataset()
+  
+  # Train the model on all available devices.
   model |> fit(train_dataset, epochs = 2, validation_data = val_dataset)
+  
   # Test the model on all available devices.
   model |> evaluate(test_dataset)
-  # Train the model on all available devices.
 
 })
 ```
