@@ -53,7 +53,7 @@
     <a class="dropdown-item" href="../../articles/sequential_model.html">Sequential Model</a>
     <h6 class="dropdown-header" data-toc-skip>Extending and customizing</h6>
     <a class="dropdown-item" href="../../articles/training_with_built_in_methods.html">Training &amp; evaluation with the built-in methods</a>
-    <a class="dropdown-item" href="../../articles/writing_your_own_callbacks.html">Writing Your Own Callbacks</a>
+    <a class="dropdown-item" href="../../articles/writing_your_own_callbacks.html">Writing your own callbacks</a>
     <a class="dropdown-item" href="../../articles/making_new_layers_and_models_via_subclassing.html">Making new layers and models via subclassing</a>
     <a class="dropdown-item" href="../../articles/writing_a_custom_training_loop_in_tensorflow.html">Writing a training loop from scratch in TensorFlow</a>
     <h6 class="dropdown-header" data-toc-skip>Other topics</h6>
@@ -97,7 +97,7 @@
       <img src="" class="logo" alt=""><h1>Image segmentation with a U-Net-like architecture</h1>
             
       
-      <small class="dont-index">Source: <a href="https://github.com/rstudio/keras/blob/HEAD/vignettes-src/examples/oxford_pets_image_segmentation.Rmd" class="external-link"><code>vignettes-src/examples/oxford_pets_image_segmentation.Rmd</code></a></small>
+      <small class="dont-index">Source: <a href="https://github.com/rstudio/keras/blob/HEAD/vignettes/examples/oxford_pets_image_segmentation.Rmd" class="external-link"><code>vignettes/examples/oxford_pets_image_segmentation.Rmd</code></a></small>
       <div class="d-none name"><code>oxford_pets_image_segmentation.Rmd</code></div>
     </div>
 
@@ -131,8 +131,8 @@
 <span><span class="va">num_classes</span> <span class="op">&lt;-</span> <span class="fl">3</span></span>
 <span><span class="va">batch_size</span> <span class="op">&lt;-</span> <span class="fl">32</span></span>
 <span></span>
-<span><span class="va">input_img_paths</span> <span class="op">&lt;-</span> <span class="fu">fs</span><span class="fu">::</span><span class="fu"><a href="https://fs.r-lib.org/reference/dir_ls.html" class="external-link">dir_ls</a></span><span class="op">(</span><span class="va">input_dir</span>, glob <span class="op">=</span> <span class="st">"*.jpg"</span><span class="op">)</span> <span class="op"><a href="../../reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://rdrr.io/r/base/sort.html" class="external-link">sort</a></span><span class="op">(</span><span class="op">)</span></span>
-<span><span class="va">target_img_paths</span> <span class="op">&lt;-</span> <span class="fu">fs</span><span class="fu">::</span><span class="fu"><a href="https://fs.r-lib.org/reference/dir_ls.html" class="external-link">dir_ls</a></span><span class="op">(</span><span class="va">target_dir</span>, glob <span class="op">=</span> <span class="st">"*.png"</span><span class="op">)</span> <span class="op"><a href="../../reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://rdrr.io/r/base/sort.html" class="external-link">sort</a></span><span class="op">(</span><span class="op">)</span></span>
+<span><span class="va">input_img_paths</span> <span class="op">&lt;-</span> <span class="fu">fs</span><span class="fu">::</span><span class="fu"><a href="https://fs.r-lib.org/reference/dir_ls.html" class="external-link">dir_ls</a></span><span class="op">(</span><span class="va">input_dir</span>, glob <span class="op">=</span> <span class="st">"*.jpg"</span><span class="op">)</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://rdrr.io/r/base/sort.html" class="external-link">sort</a></span><span class="op">(</span><span class="op">)</span></span>
+<span><span class="va">target_img_paths</span> <span class="op">&lt;-</span> <span class="fu">fs</span><span class="fu">::</span><span class="fu"><a href="https://fs.r-lib.org/reference/dir_ls.html" class="external-link">dir_ls</a></span><span class="op">(</span><span class="va">target_dir</span>, glob <span class="op">=</span> <span class="st">"*.png"</span><span class="op">)</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://rdrr.io/r/base/sort.html" class="external-link">sort</a></span><span class="op">(</span><span class="op">)</span></span>
 <span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/cat.html" class="external-link">cat</a></span><span class="op">(</span><span class="st">"Number of samples:"</span>, <span class="fu"><a href="https://rdrr.io/r/base/length.html" class="external-link">length</a></span><span class="op">(</span><span class="va">input_img_paths</span><span class="op">)</span>, <span class="st">"\n"</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">## Number of samples: 7390</span></span></code></pre>
@@ -157,18 +157,18 @@ like?<a class="anchor" aria-label="anchor" href="#what-does-one-input-image-and-
 </h2>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Display input image #10</span></span>
-<span><span class="va">input_img_paths</span><span class="op">[</span><span class="fl">10</span><span class="op">]</span> <span class="op"><a href="../../reference/pipe.html">%&gt;%</a></span></span>
-<span>  <span class="fu">jpeg</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/jpeg/man/readJPEG.html" class="external-link">readJPEG</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="../../reference/pipe.html">%&gt;%</a></span></span>
-<span>  <span class="fu"><a href="https://rdrr.io/r/grDevices/as.raster.html" class="external-link">as.raster</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="../../reference/pipe.html">%&gt;%</a></span></span>
+<span><span class="va">input_img_paths</span><span class="op">[</span><span class="fl">10</span><span class="op">]</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu">jpeg</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/jpeg/man/readJPEG.html" class="external-link">readJPEG</a></span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu"><a href="https://rdrr.io/r/grDevices/as.raster.html" class="external-link">as.raster</a></span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
 <div class="float">
 <img src="oxford_pets_image_segmentation/unnamed-chunk-4-1.png" alt="plot of chunk unnamed-chunk-4"><div class="figcaption">plot of chunk unnamed-chunk-4</div>
 </div>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">target_img_paths</span><span class="op">[</span><span class="fl">10</span><span class="op">]</span> <span class="op"><a href="../../reference/pipe.html">%&gt;%</a></span></span>
-<span>  <span class="fu">png</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/png/man/readPNG.html" class="external-link">readPNG</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="../../reference/pipe.html">%&gt;%</a></span></span>
-<span>  <span class="fu">magrittr</span><span class="fu">::</span><span class="fu"><a href="https://magrittr.tidyverse.org/reference/aliases.html" class="external-link">multiply_by</a></span><span class="op">(</span><span class="fl">255</span><span class="op">)</span> <span class="op"><a href="../../reference/pipe.html">%&gt;%</a></span></span>
-<span>  <span class="fu"><a href="https://rdrr.io/r/grDevices/as.raster.html" class="external-link">as.raster</a></span><span class="op">(</span>max <span class="op">=</span> <span class="fl">3</span><span class="op">)</span> <span class="op"><a href="../../reference/pipe.html">%&gt;%</a></span></span>
+<code class="sourceCode R"><span><span class="va">target_img_paths</span><span class="op">[</span><span class="fl">10</span><span class="op">]</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu">png</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/png/man/readPNG.html" class="external-link">readPNG</a></span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu">magrittr</span><span class="fu">::</span><span class="fu"><a href="https://magrittr.tidyverse.org/reference/aliases.html" class="external-link">multiply_by</a></span><span class="op">(</span><span class="fl">255</span><span class="op">)</span><span class="op">|&gt;</span></span>
+<span>  <span class="fu"><a href="https://rdrr.io/r/grDevices/as.raster.html" class="external-link">as.raster</a></span><span class="op">(</span>max <span class="op">=</span> <span class="fl">3</span><span class="op">)</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
 <div class="float">
 <img src="oxford_pets_image_segmentation/unnamed-chunk-4-2.png" alt="plot of chunk unnamed-chunk-4"><div class="figcaption">plot of chunk unnamed-chunk-4</div>
@@ -178,27 +178,37 @@ like?<a class="anchor" aria-label="anchor" href="#what-does-one-input-image-and-
 <h2 id="prepare-dataset-to-load-vectorize-batches-of-data">Prepare dataset to load &amp; vectorize batches of data<a class="anchor" aria-label="anchor" href="#prepare-dataset-to-load-vectorize-batches-of-data"></a>
 </h2>
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/rstudio/tensorflow" class="external-link">tensorflow</a></span><span class="op">)</span></span>
-<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/rstudio/tfdatasets" class="external-link">tfdatasets</a></span><span class="op">)</span></span>
-<span></span>
-<span></span>
-<span><span class="co"># Returns a tf_dataset</span></span>
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/rstudio/tensorflow" class="external-link">tensorflow</a></span><span class="op">)</span></span></code></pre></div>
+<pre><code><span><span class="co">##</span></span>
+<span><span class="co">## Attaching package: 'tensorflow'</span></span></code></pre>
+<pre><code><span><span class="co">## The following objects are masked from 'package:keras3':</span></span>
+<span><span class="co">##</span></span>
+<span><span class="co">##     set_random_seed, shape</span></span></code></pre>
+<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/rstudio/tfdatasets" class="external-link">tfdatasets</a></span><span class="op">)</span></span></code></pre></div>
+<pre><code><span><span class="co">##</span></span>
+<span><span class="co">## Attaching package: 'tfdatasets'</span></span></code></pre>
+<pre><code><span><span class="co">## The following object is masked from 'package:keras3':</span></span>
+<span><span class="co">##</span></span>
+<span><span class="co">##     shape</span></span></code></pre>
+<div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># Returns a tf_dataset</span></span>
 <span><span class="va">get_dataset</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">batch_size</span>, <span class="va">img_size</span>, <span class="va">input_img_paths</span>, <span class="va">target_img_paths</span>,</span>
 <span>                        <span class="va">max_dataset_len</span> <span class="op">=</span> <span class="cn">NULL</span><span class="op">)</span> <span class="op">{</span></span>
 <span></span>
 <span>  <span class="va">img_size</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/integer.html" class="external-link">as.integer</a></span><span class="op">(</span><span class="va">img_size</span><span class="op">)</span></span>
 <span></span>
 <span>  <span class="va">load_img_masks</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">input_img_path</span>, <span class="va">target_img_path</span><span class="op">)</span> <span class="op">{</span></span>
-<span>    <span class="va">input_img</span> <span class="op">&lt;-</span> <span class="va">input_img_path</span> <span class="op"><a href="../../reference/pipe.html">%&gt;%</a></span></span>
-<span>      <span class="va">tf</span><span class="op">$</span><span class="va">io</span><span class="op">$</span><span class="fu">read_file</span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="../../reference/pipe.html">%&gt;%</a></span></span>
-<span>      <span class="va">tf</span><span class="op">$</span><span class="va">io</span><span class="op">$</span><span class="fu">decode_jpeg</span><span class="op">(</span>channels <span class="op">=</span> <span class="fl">3</span><span class="op">)</span> <span class="op"><a href="../../reference/pipe.html">%&gt;%</a></span></span>
-<span>      <span class="va">tf</span><span class="op">$</span><span class="va">image</span><span class="op">$</span><span class="fu">resize</span><span class="op">(</span><span class="va">img_size</span><span class="op">)</span> <span class="op"><a href="../../reference/pipe.html">%&gt;%</a></span></span>
+<span>    <span class="va">input_img</span> <span class="op">&lt;-</span> <span class="va">input_img_path</span> <span class="op">|&gt;</span></span>
+<span>      <span class="va">tf</span><span class="op">$</span><span class="va">io</span><span class="op">$</span><span class="fu">read_file</span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>      <span class="va">tf</span><span class="op">$</span><span class="va">io</span><span class="op">$</span><span class="fu">decode_jpeg</span><span class="op">(</span>channels <span class="op">=</span> <span class="fl">3</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>      <span class="va">tf</span><span class="op">$</span><span class="va">image</span><span class="op">$</span><span class="fu">resize</span><span class="op">(</span><span class="va">img_size</span><span class="op">)</span> <span class="op">|&gt;</span></span>
 <span>      <span class="va">tf</span><span class="op">$</span><span class="va">image</span><span class="op">$</span><span class="fu">convert_image_dtype</span><span class="op">(</span><span class="st">"float32"</span><span class="op">)</span></span>
 <span></span>
-<span>    <span class="va">target_img</span> <span class="op">&lt;-</span> <span class="va">target_img_path</span> <span class="op"><a href="../../reference/pipe.html">%&gt;%</a></span></span>
-<span>      <span class="va">tf</span><span class="op">$</span><span class="va">io</span><span class="op">$</span><span class="fu">read_file</span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="../../reference/pipe.html">%&gt;%</a></span></span>
-<span>      <span class="va">tf</span><span class="op">$</span><span class="va">io</span><span class="op">$</span><span class="fu">decode_png</span><span class="op">(</span>channels <span class="op">=</span> <span class="fl">1</span><span class="op">)</span> <span class="op"><a href="../../reference/pipe.html">%&gt;%</a></span></span>
-<span>      <span class="va">tf</span><span class="op">$</span><span class="va">image</span><span class="op">$</span><span class="fu">resize</span><span class="op">(</span><span class="va">img_size</span>, method <span class="op">=</span> <span class="st">"nearest"</span><span class="op">)</span> <span class="op"><a href="../../reference/pipe.html">%&gt;%</a></span></span>
+<span>    <span class="va">target_img</span> <span class="op">&lt;-</span> <span class="va">target_img_path</span> <span class="op">|&gt;</span></span>
+<span>      <span class="va">tf</span><span class="op">$</span><span class="va">io</span><span class="op">$</span><span class="fu">read_file</span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>      <span class="va">tf</span><span class="op">$</span><span class="va">io</span><span class="op">$</span><span class="fu">decode_png</span><span class="op">(</span>channels <span class="op">=</span> <span class="fl">1</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>      <span class="va">tf</span><span class="op">$</span><span class="va">image</span><span class="op">$</span><span class="fu">resize</span><span class="op">(</span><span class="va">img_size</span>, method <span class="op">=</span> <span class="st">"nearest"</span><span class="op">)</span> <span class="op">|&gt;</span></span>
 <span>      <span class="va">tf</span><span class="op">$</span><span class="va">image</span><span class="op">$</span><span class="fu">convert_image_dtype</span><span class="op">(</span><span class="st">"uint8"</span><span class="op">)</span></span>
 <span></span>
 <span>    <span class="co"># Ground truth labels are 1, 2, 3. Subtract one to make them 0, 1, 2:</span></span>
@@ -212,75 +222,75 @@ like?<a class="anchor" aria-label="anchor" href="#what-does-one-input-image-and-
 <span>    <span class="va">target_img_paths</span> <span class="op">&lt;-</span> <span class="va">target_img_paths</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="va">max_dataset_len</span><span class="op">]</span></span>
 <span>  <span class="op">}</span></span>
 <span></span>
-<span>  <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="va">input_img_paths</span>, <span class="va">target_img_paths</span><span class="op">)</span> <span class="op"><a href="../../reference/pipe.html">%&gt;%</a></span></span>
-<span>    <span class="fu"><a href="https://rdrr.io/pkg/tfdatasets/man/tensor_slices_dataset.html" class="external-link">tensor_slices_dataset</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="../../reference/pipe.html">%&gt;%</a></span></span>
-<span>    <span class="fu"><a href="https://rdrr.io/pkg/tfdatasets/man/dataset_map.html" class="external-link">dataset_map</a></span><span class="op">(</span><span class="va">load_img_masks</span>, num_parallel_calls <span class="op">=</span> <span class="va">tf</span><span class="op">$</span><span class="va">data</span><span class="op">$</span><span class="va">AUTOTUNE</span><span class="op">)</span> <span class="op"><a href="../../reference/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="va">input_img_paths</span>, <span class="va">target_img_paths</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>    <span class="fu"><a href="https://rdrr.io/pkg/tfdatasets/man/tensor_slices_dataset.html" class="external-link">tensor_slices_dataset</a></span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>    <span class="fu"><a href="https://rdrr.io/pkg/tfdatasets/man/dataset_map.html" class="external-link">dataset_map</a></span><span class="op">(</span><span class="va">load_img_masks</span>, num_parallel_calls <span class="op">=</span> <span class="va">tf</span><span class="op">$</span><span class="va">data</span><span class="op">$</span><span class="va">AUTOTUNE</span><span class="op">)</span><span class="op">|&gt;</span></span>
 <span>    <span class="fu"><a href="https://rdrr.io/pkg/tfdatasets/man/dataset_batch.html" class="external-link">dataset_batch</a></span><span class="op">(</span><span class="va">batch_size</span><span class="op">)</span></span>
 <span><span class="op">}</span></span></code></pre></div>
 </div>
 <div class="section level2">
 <h2 id="prepare-u-net-xception-style-model">Prepare U-Net Xception-style model<a class="anchor" aria-label="anchor" href="#prepare-u-net-xception-style-model"></a>
 </h2>
-<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">get_model</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">img_size</span>, <span class="va">num_classes</span><span class="op">)</span> <span class="op">{</span></span>
 <span></span>
-<span>  <span class="va">inputs</span> <span class="op">&lt;-</span> <span class="fu"><a href="../../reference/layer_input.html">layer_input</a></span><span class="op">(</span>shape <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="va">img_size</span>, <span class="fl">3</span><span class="op">)</span><span class="op">)</span></span>
+<span>  <span class="va">inputs</span> <span class="op">&lt;-</span> <span class="fu"><a href="../../reference/keras_input.html">keras_input</a></span><span class="op">(</span>shape <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="va">img_size</span>, <span class="fl">3</span><span class="op">)</span><span class="op">)</span></span>
 <span></span>
 <span>  <span class="co">### [First half of the network: downsampling inputs] ###</span></span>
 <span></span>
 <span>  <span class="co"># Entry block</span></span>
-<span>  <span class="va">x</span> <span class="op">&lt;-</span> <span class="va">inputs</span> <span class="op"><a href="../../reference/pipe.html">%&gt;%</a></span></span>
-<span>    <span class="fu"><a href="../../reference/layer_conv_2d.html">layer_conv_2d</a></span><span class="op">(</span>filters <span class="op">=</span> <span class="fl">32</span>, kernel_size <span class="op">=</span> <span class="fl">3</span>, strides <span class="op">=</span> <span class="fl">2</span>, padding <span class="op">=</span> <span class="st">"same"</span><span class="op">)</span> <span class="op"><a href="../../reference/pipe.html">%&gt;%</a></span></span>
-<span>    <span class="fu"><a href="../../reference/layer_batch_normalization.html">layer_batch_normalization</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="../../reference/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="va">x</span> <span class="op">&lt;-</span> <span class="va">inputs</span> <span class="op">|&gt;</span></span>
+<span>    <span class="fu"><a href="../../reference/layer_conv_2d.html">layer_conv_2d</a></span><span class="op">(</span>filters <span class="op">=</span> <span class="fl">32</span>, kernel_size <span class="op">=</span> <span class="fl">3</span>, strides <span class="op">=</span> <span class="fl">2</span>, padding <span class="op">=</span> <span class="st">"same"</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>    <span class="fu"><a href="../../reference/layer_batch_normalization.html">layer_batch_normalization</a></span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span></span>
 <span>    <span class="fu"><a href="../../reference/layer_activation.html">layer_activation</a></span><span class="op">(</span><span class="st">"relu"</span><span class="op">)</span></span>
 <span></span>
 <span>  <span class="va">previous_block_activation</span> <span class="op">&lt;-</span> <span class="va">x</span>  <span class="co"># Set aside residual</span></span>
 <span></span>
 <span>  <span class="kw">for</span> <span class="op">(</span><span class="va">filters</span> <span class="kw">in</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">64</span>, <span class="fl">128</span>, <span class="fl">256</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span></span>
-<span>    <span class="va">x</span> <span class="op">&lt;-</span> <span class="va">x</span> <span class="op"><a href="../../reference/pipe.html">%&gt;%</a></span></span>
-<span>      <span class="fu"><a href="../../reference/layer_activation.html">layer_activation</a></span><span class="op">(</span><span class="st">"relu"</span><span class="op">)</span> <span class="op"><a href="../../reference/pipe.html">%&gt;%</a></span></span>
-<span>      <span class="fu"><a href="../../reference/layer_separable_conv_2d.html">layer_separable_conv_2d</a></span><span class="op">(</span>filters <span class="op">=</span> <span class="va">filters</span>, kernel_size <span class="op">=</span> <span class="fl">3</span>, padding <span class="op">=</span> <span class="st">"same"</span><span class="op">)</span> <span class="op"><a href="../../reference/pipe.html">%&gt;%</a></span></span>
-<span>      <span class="fu"><a href="../../reference/layer_batch_normalization.html">layer_batch_normalization</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="../../reference/pipe.html">%&gt;%</a></span></span>
+<span>    <span class="va">x</span> <span class="op">&lt;-</span> <span class="va">x</span> <span class="op">|&gt;</span></span>
+<span>      <span class="fu"><a href="../../reference/layer_activation.html">layer_activation</a></span><span class="op">(</span><span class="st">"relu"</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>      <span class="fu"><a href="../../reference/layer_separable_conv_2d.html">layer_separable_conv_2d</a></span><span class="op">(</span>filters <span class="op">=</span> <span class="va">filters</span>, kernel_size <span class="op">=</span> <span class="fl">3</span>, padding <span class="op">=</span> <span class="st">"same"</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>      <span class="fu"><a href="../../reference/layer_batch_normalization.html">layer_batch_normalization</a></span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span></span>
 <span></span>
-<span>      <span class="fu"><a href="../../reference/layer_activation.html">layer_activation</a></span><span class="op">(</span><span class="st">"relu"</span><span class="op">)</span> <span class="op"><a href="../../reference/pipe.html">%&gt;%</a></span></span>
-<span>      <span class="fu"><a href="../../reference/layer_separable_conv_2d.html">layer_separable_conv_2d</a></span><span class="op">(</span>filters <span class="op">=</span> <span class="va">filters</span>, kernel_size <span class="op">=</span> <span class="fl">3</span>, padding <span class="op">=</span> <span class="st">"same"</span><span class="op">)</span> <span class="op"><a href="../../reference/pipe.html">%&gt;%</a></span></span>
-<span>      <span class="fu"><a href="../../reference/layer_batch_normalization.html">layer_batch_normalization</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="../../reference/pipe.html">%&gt;%</a></span></span>
+<span>      <span class="fu"><a href="../../reference/layer_activation.html">layer_activation</a></span><span class="op">(</span><span class="st">"relu"</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>      <span class="fu"><a href="../../reference/layer_separable_conv_2d.html">layer_separable_conv_2d</a></span><span class="op">(</span>filters <span class="op">=</span> <span class="va">filters</span>, kernel_size <span class="op">=</span> <span class="fl">3</span>, padding <span class="op">=</span> <span class="st">"same"</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>      <span class="fu"><a href="../../reference/layer_batch_normalization.html">layer_batch_normalization</a></span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span></span>
 <span></span>
 <span>      <span class="fu"><a href="../../reference/layer_max_pooling_2d.html">layer_max_pooling_2d</a></span><span class="op">(</span>pool_size <span class="op">=</span> <span class="fl">3</span>, strides <span class="op">=</span> <span class="fl">2</span>, padding <span class="op">=</span> <span class="st">"same"</span><span class="op">)</span></span>
 <span></span>
-<span>    <span class="va">residual</span> <span class="op">&lt;-</span> <span class="va">previous_block_activation</span> <span class="op"><a href="../../reference/pipe.html">%&gt;%</a></span></span>
+<span>    <span class="va">residual</span> <span class="op">&lt;-</span> <span class="va">previous_block_activation</span> <span class="op">|&gt;</span></span>
 <span>      <span class="fu"><a href="../../reference/layer_conv_2d.html">layer_conv_2d</a></span><span class="op">(</span>filters <span class="op">=</span> <span class="va">filters</span>, kernel_size <span class="op">=</span> <span class="fl">1</span>, strides <span class="op">=</span> <span class="fl">2</span>, padding <span class="op">=</span> <span class="st">"same"</span><span class="op">)</span></span>
 <span></span>
-<span>    <span class="va">x</span> <span class="op">&lt;-</span> <span class="fu"><a href="../../reference/layer_add.html">layer_add</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="va">x</span>, <span class="va">residual</span><span class="op">)</span><span class="op">)</span>  <span class="co"># Add back residual</span></span>
+<span>    <span class="va">x</span> <span class="op">&lt;-</span> <span class="fu"><a href="../../reference/layer_add.html">layer_add</a></span><span class="op">(</span><span class="va">x</span>, <span class="va">residual</span><span class="op">)</span>  <span class="co"># Add back residual</span></span>
 <span>    <span class="va">previous_block_activation</span> <span class="op">&lt;-</span> <span class="va">x</span>  <span class="co"># Set aside next residual</span></span>
 <span>  <span class="op">}</span></span>
 <span></span>
 <span>  <span class="co">### [Second half of the network: upsampling inputs] ###</span></span>
 <span></span>
 <span>  <span class="kw">for</span> <span class="op">(</span><span class="va">filters</span> <span class="kw">in</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">256</span>, <span class="fl">128</span>, <span class="fl">64</span>, <span class="fl">32</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span></span>
-<span>    <span class="va">x</span> <span class="op">&lt;-</span> <span class="va">x</span> <span class="op"><a href="../../reference/pipe.html">%&gt;%</a></span></span>
-<span>      <span class="fu"><a href="../../reference/layer_activation.html">layer_activation</a></span><span class="op">(</span><span class="st">"relu"</span><span class="op">)</span> <span class="op"><a href="../../reference/pipe.html">%&gt;%</a></span></span>
-<span>      <span class="fu"><a href="../../reference/layer_conv_2d_transpose.html">layer_conv_2d_transpose</a></span><span class="op">(</span>filters <span class="op">=</span> <span class="va">filters</span>, kernel_size <span class="op">=</span> <span class="fl">3</span>, padding <span class="op">=</span> <span class="st">"same"</span><span class="op">)</span> <span class="op"><a href="../../reference/pipe.html">%&gt;%</a></span></span>
-<span>      <span class="fu"><a href="../../reference/layer_batch_normalization.html">layer_batch_normalization</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="../../reference/pipe.html">%&gt;%</a></span></span>
+<span>    <span class="va">x</span> <span class="op">&lt;-</span> <span class="va">x</span> <span class="op">|&gt;</span></span>
+<span>      <span class="fu"><a href="../../reference/layer_activation.html">layer_activation</a></span><span class="op">(</span><span class="st">"relu"</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>      <span class="fu"><a href="../../reference/layer_conv_2d_transpose.html">layer_conv_2d_transpose</a></span><span class="op">(</span>filters <span class="op">=</span> <span class="va">filters</span>, kernel_size <span class="op">=</span> <span class="fl">3</span>, padding <span class="op">=</span> <span class="st">"same"</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>      <span class="fu"><a href="../../reference/layer_batch_normalization.html">layer_batch_normalization</a></span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span></span>
 <span></span>
-<span>      <span class="fu"><a href="../../reference/layer_activation.html">layer_activation</a></span><span class="op">(</span><span class="st">"relu"</span><span class="op">)</span> <span class="op"><a href="../../reference/pipe.html">%&gt;%</a></span></span>
-<span>      <span class="fu"><a href="../../reference/layer_conv_2d_transpose.html">layer_conv_2d_transpose</a></span><span class="op">(</span>filters <span class="op">=</span> <span class="va">filters</span>, kernel_size <span class="op">=</span> <span class="fl">3</span>, padding <span class="op">=</span> <span class="st">"same"</span><span class="op">)</span> <span class="op"><a href="../../reference/pipe.html">%&gt;%</a></span></span>
-<span>      <span class="fu"><a href="../../reference/layer_batch_normalization.html">layer_batch_normalization</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="../../reference/pipe.html">%&gt;%</a></span></span>
+<span>      <span class="fu"><a href="../../reference/layer_activation.html">layer_activation</a></span><span class="op">(</span><span class="st">"relu"</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>      <span class="fu"><a href="../../reference/layer_conv_2d_transpose.html">layer_conv_2d_transpose</a></span><span class="op">(</span>filters <span class="op">=</span> <span class="va">filters</span>, kernel_size <span class="op">=</span> <span class="fl">3</span>, padding <span class="op">=</span> <span class="st">"same"</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>      <span class="fu"><a href="../../reference/layer_batch_normalization.html">layer_batch_normalization</a></span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span></span>
 <span></span>
 <span>      <span class="fu"><a href="../../reference/layer_upsampling_2d.html">layer_upsampling_2d</a></span><span class="op">(</span>size <span class="op">=</span> <span class="fl">2</span><span class="op">)</span></span>
 <span></span>
 <span>    <span class="co"># Project residual</span></span>
-<span>    <span class="va">residual</span> <span class="op">&lt;-</span> <span class="va">previous_block_activation</span> <span class="op"><a href="../../reference/pipe.html">%&gt;%</a></span></span>
-<span>      <span class="fu"><a href="../../reference/layer_upsampling_2d.html">layer_upsampling_2d</a></span><span class="op">(</span>size <span class="op">=</span> <span class="fl">2</span><span class="op">)</span> <span class="op"><a href="../../reference/pipe.html">%&gt;%</a></span></span>
+<span>    <span class="va">residual</span> <span class="op">&lt;-</span> <span class="va">previous_block_activation</span> <span class="op">|&gt;</span></span>
+<span>      <span class="fu"><a href="../../reference/layer_upsampling_2d.html">layer_upsampling_2d</a></span><span class="op">(</span>size <span class="op">=</span> <span class="fl">2</span><span class="op">)</span> <span class="op">|&gt;</span></span>
 <span>      <span class="fu"><a href="../../reference/layer_conv_2d.html">layer_conv_2d</a></span><span class="op">(</span>filters <span class="op">=</span> <span class="va">filters</span>, kernel_size <span class="op">=</span> <span class="fl">1</span>, padding <span class="op">=</span> <span class="st">"same"</span><span class="op">)</span></span>
 <span></span>
-<span>    <span class="va">x</span> <span class="op">&lt;-</span> <span class="fu"><a href="../../reference/layer_add.html">layer_add</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="va">x</span>, <span class="va">residual</span><span class="op">)</span><span class="op">)</span>  <span class="co"># Add back residual</span></span>
+<span>    <span class="va">x</span> <span class="op">&lt;-</span> <span class="fu"><a href="../../reference/layer_add.html">layer_add</a></span><span class="op">(</span><span class="va">x</span>, <span class="va">residual</span><span class="op">)</span>     <span class="co"># Add back residual</span></span>
 <span>    <span class="va">previous_block_activation</span> <span class="op">&lt;-</span> <span class="va">x</span>  <span class="co"># Set aside next residual</span></span>
 <span>  <span class="op">}</span></span>
 <span></span>
 <span>  <span class="co"># Add a per-pixel classification layer</span></span>
-<span>  <span class="va">outputs</span> <span class="op">&lt;-</span> <span class="va">x</span> <span class="op"><a href="../../reference/pipe.html">%&gt;%</a></span></span>
-<span>    <span class="fu"><a href="../../reference/layer_conv_2d.html">layer_conv_2d</a></span><span class="op">(</span><span class="va">num_classes</span>, <span class="fl">3</span>, activation<span class="op">=</span><span class="st">"softmax"</span>, padding<span class="op">=</span><span class="st">"same"</span><span class="op">)</span></span>
+<span>  <span class="va">outputs</span> <span class="op">&lt;-</span> <span class="va">x</span> <span class="op">|&gt;</span></span>
+<span>    <span class="fu"><a href="../../reference/layer_conv_2d.html">layer_conv_2d</a></span><span class="op">(</span><span class="va">num_classes</span>, <span class="fl">3</span>, activation <span class="op">=</span> <span class="st">"softmax"</span>, padding <span class="op">=</span> <span class="st">"same"</span><span class="op">)</span></span>
 <span></span>
 <span>  <span class="co"># Define the model</span></span>
 <span>  <span class="fu"><a href="../../reference/keras_model.html">keras_model</a></span><span class="op">(</span><span class="va">inputs</span>, <span class="va">outputs</span><span class="op">)</span></span>
@@ -517,7 +527,7 @@ like?<a class="anchor" aria-label="anchor" href="#what-does-one-input-image-and-
 <div class="section level2">
 <h2 id="set-aside-a-validation-split">Set aside a validation split<a class="anchor" aria-label="anchor" href="#set-aside-a-validation-split"></a>
 </h2>
-<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb17"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Split our img paths into a training and a validation set</span></span>
 <span><span class="va">val_samples</span> <span class="op">&lt;-</span> <span class="fl">1000</span></span>
 <span><span class="va">val_samples</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/sample.html" class="external-link">sample.int</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/length.html" class="external-link">length</a></span><span class="op">(</span><span class="va">input_img_paths</span><span class="op">)</span>, <span class="va">val_samples</span><span class="op">)</span></span>
@@ -532,35 +542,37 @@ like?<a class="anchor" aria-label="anchor" href="#what-does-one-input-image-and-
 <span><span class="co"># Limit input files in `max_dataset_len` for faster epoch training time.</span></span>
 <span><span class="co"># Remove the `max_dataset_len` arg when running with full dataset.</span></span>
 <span><span class="va">train_dataset</span> <span class="op">&lt;-</span> <span class="fu">get_dataset</span><span class="op">(</span></span>
-<span>    <span class="va">batch_size</span>,</span>
-<span>    <span class="va">img_size</span>,</span>
-<span>    <span class="va">train_input_img_paths</span>,</span>
-<span>    <span class="va">train_target_img_paths</span>,</span>
-<span>    max_dataset_len<span class="op">=</span><span class="fl">1000</span></span>
+<span>  <span class="va">batch_size</span>,</span>
+<span>  <span class="va">img_size</span>,</span>
+<span>  <span class="va">train_input_img_paths</span>,</span>
+<span>  <span class="va">train_target_img_paths</span>,</span>
+<span>  max_dataset_len <span class="op">=</span> <span class="fl">1000</span></span>
 <span><span class="op">)</span></span>
 <span><span class="va">valid_dataset</span> <span class="op">&lt;-</span> <span class="fu">get_dataset</span><span class="op">(</span></span>
-<span>    <span class="va">batch_size</span>, <span class="va">img_size</span>, <span class="va">val_input_img_paths</span>, <span class="va">val_target_img_paths</span></span>
+<span>  <span class="va">batch_size</span>, <span class="va">img_size</span>, <span class="va">val_input_img_paths</span>, <span class="va">val_target_img_paths</span></span>
 <span><span class="op">)</span></span></code></pre></div>
 </div>
 <div class="section level2">
 <h2 id="train-the-model">Train the model<a class="anchor" aria-label="anchor" href="#train-the-model"></a>
 </h2>
-<div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb18"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Configure the model for training.</span></span>
 <span><span class="co"># We use the "sparse" version of categorical_crossentropy</span></span>
 <span><span class="co"># because our target data is integers.</span></span>
-<span><span class="va">model</span> <span class="op"><a href="../../reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://generics.r-lib.org/reference/compile.html" class="external-link">compile</a></span><span class="op">(</span></span>
+<span><span class="va">model</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://generics.r-lib.org/reference/compile.html" class="external-link">compile</a></span><span class="op">(</span></span>
 <span>  optimizer <span class="op">=</span> <span class="fu"><a href="../../reference/optimizer_adam.html">optimizer_adam</a></span><span class="op">(</span><span class="fl">1e-4</span><span class="op">)</span>,</span>
-<span>  loss<span class="op">=</span><span class="st">"sparse_categorical_crossentropy"</span></span>
+<span>  loss <span class="op">=</span> <span class="st">"sparse_categorical_crossentropy"</span></span>
 <span><span class="op">)</span></span>
 <span></span>
 <span><span class="va">callbacks</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span></span>
-<span>    <span class="fu"><a href="../../reference/callback_model_checkpoint.html">callback_model_checkpoint</a></span><span class="op">(</span><span class="st">"models/oxford_segmentation.keras"</span>, save_best_only<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span></span>
+<span>  <span class="fu"><a href="../../reference/callback_model_checkpoint.html">callback_model_checkpoint</a></span><span class="op">(</span></span>
+<span>    <span class="st">"models/oxford_segmentation.keras"</span>, save_best_only <span class="op">=</span> <span class="cn">TRUE</span></span>
+<span>  <span class="op">)</span></span>
 <span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># Train the model, doing validation at the end of each epoch.</span></span>
 <span><span class="va">epochs</span> <span class="op">&lt;-</span> <span class="fl">50</span></span>
-<span><span class="va">model</span> <span class="op"><a href="../../reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://generics.r-lib.org/reference/fit.html" class="external-link">fit</a></span><span class="op">(</span></span>
+<span><span class="va">model</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://generics.r-lib.org/reference/fit.html" class="external-link">fit</a></span><span class="op">(</span></span>
 <span>    <span class="va">train_dataset</span>,</span>
 <span>    epochs<span class="op">=</span><span class="va">epochs</span>,</span>
 <span>    validation_data<span class="op">=</span><span class="va">valid_dataset</span>,</span>
@@ -568,118 +580,118 @@ like?<a class="anchor" aria-label="anchor" href="#what-does-one-input-image-and-
 <span>    verbose<span class="op">=</span><span class="fl">2</span></span>
 <span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">## Epoch 1/50</span></span>
-<span><span class="co">## 32/32 - 45s - 1s/step - loss: 1.3455 - val_loss: 1.7100</span></span>
+<span><span class="co">## 32/32 - 53s - 2s/step - loss: 1.3455 - val_loss: 1.7104</span></span>
 <span><span class="co">## Epoch 2/50</span></span>
-<span><span class="co">## 32/32 - 2s - 60ms/step - loss: 0.9089 - val_loss: 1.9947</span></span>
+<span><span class="co">## 32/32 - 2s - 65ms/step - loss: 0.9089 - val_loss: 1.9939</span></span>
 <span><span class="co">## Epoch 3/50</span></span>
-<span><span class="co">## 32/32 - 2s - 60ms/step - loss: 0.7865 - val_loss: 2.1211</span></span>
+<span><span class="co">## 32/32 - 2s - 65ms/step - loss: 0.7865 - val_loss: 2.1239</span></span>
 <span><span class="co">## Epoch 4/50</span></span>
-<span><span class="co">## 32/32 - 2s - 60ms/step - loss: 0.7200 - val_loss: 2.3127</span></span>
+<span><span class="co">## 32/32 - 2s - 65ms/step - loss: 0.7200 - val_loss: 2.3201</span></span>
 <span><span class="co">## Epoch 5/50</span></span>
-<span><span class="co">## 32/32 - 2s - 60ms/step - loss: 0.6852 - val_loss: 2.4152</span></span>
+<span><span class="co">## 32/32 - 2s - 65ms/step - loss: 0.6853 - val_loss: 2.4222</span></span>
 <span><span class="co">## Epoch 6/50</span></span>
-<span><span class="co">## 32/32 - 2s - 60ms/step - loss: 0.6598 - val_loss: 2.5888</span></span>
+<span><span class="co">## 32/32 - 2s - 65ms/step - loss: 0.6598 - val_loss: 2.5909</span></span>
 <span><span class="co">## Epoch 7/50</span></span>
-<span><span class="co">## 32/32 - 2s - 60ms/step - loss: 0.6388 - val_loss: 2.7087</span></span>
+<span><span class="co">## 32/32 - 2s - 65ms/step - loss: 0.6389 - val_loss: 2.7111</span></span>
 <span><span class="co">## Epoch 8/50</span></span>
-<span><span class="co">## 32/32 - 2s - 60ms/step - loss: 0.6174 - val_loss: 2.8985</span></span>
+<span><span class="co">## 32/32 - 2s - 65ms/step - loss: 0.6173 - val_loss: 2.9007</span></span>
 <span><span class="co">## Epoch 9/50</span></span>
-<span><span class="co">## 32/32 - 2s - 60ms/step - loss: 0.5979 - val_loss: 3.0051</span></span>
+<span><span class="co">## 32/32 - 2s - 65ms/step - loss: 0.5979 - val_loss: 3.0063</span></span>
 <span><span class="co">## Epoch 10/50</span></span>
-<span><span class="co">## 32/32 - 2s - 60ms/step - loss: 0.5798 - val_loss: 3.1915</span></span>
+<span><span class="co">## 32/32 - 2s - 65ms/step - loss: 0.5798 - val_loss: 3.1942</span></span>
 <span><span class="co">## Epoch 11/50</span></span>
-<span><span class="co">## 32/32 - 2s - 60ms/step - loss: 0.5626 - val_loss: 3.1973</span></span>
+<span><span class="co">## 32/32 - 2s - 65ms/step - loss: 0.5625 - val_loss: 3.2041</span></span>
 <span><span class="co">## Epoch 12/50</span></span>
-<span><span class="co">## 32/32 - 2s - 60ms/step - loss: 0.5457 - val_loss: 3.3356</span></span>
+<span><span class="co">## 32/32 - 2s - 65ms/step - loss: 0.5459 - val_loss: 3.3185</span></span>
 <span><span class="co">## Epoch 13/50</span></span>
-<span><span class="co">## 32/32 - 2s - 60ms/step - loss: 0.5286 - val_loss: 3.1943</span></span>
+<span><span class="co">## 32/32 - 2s - 65ms/step - loss: 0.5284 - val_loss: 3.1717</span></span>
 <span><span class="co">## Epoch 14/50</span></span>
-<span><span class="co">## 32/32 - 2s - 60ms/step - loss: 0.5108 - val_loss: 3.1874</span></span>
+<span><span class="co">## 32/32 - 2s - 65ms/step - loss: 0.5110 - val_loss: 3.1707</span></span>
 <span><span class="co">## Epoch 15/50</span></span>
-<span><span class="co">## 32/32 - 2s - 60ms/step - loss: 0.4916 - val_loss: 2.8691</span></span>
+<span><span class="co">## 32/32 - 2s - 65ms/step - loss: 0.4921 - val_loss: 2.8822</span></span>
 <span><span class="co">## Epoch 16/50</span></span>
-<span><span class="co">## 32/32 - 2s - 60ms/step - loss: 0.4717 - val_loss: 2.6849</span></span>
+<span><span class="co">## 32/32 - 2s - 65ms/step - loss: 0.4717 - val_loss: 2.6727</span></span>
 <span><span class="co">## Epoch 17/50</span></span>
-<span><span class="co">## 32/32 - 2s - 60ms/step - loss: 0.4492 - val_loss: 2.2832</span></span>
+<span><span class="co">## 32/32 - 2s - 65ms/step - loss: 0.4495 - val_loss: 2.3151</span></span>
 <span><span class="co">## Epoch 18/50</span></span>
-<span><span class="co">## 32/32 - 2s - 60ms/step - loss: 0.4259 - val_loss: 1.9173</span></span>
+<span><span class="co">## 32/32 - 2s - 65ms/step - loss: 0.4260 - val_loss: 1.9184</span></span>
 <span><span class="co">## Epoch 19/50</span></span>
-<span><span class="co">## 32/32 - 2s - 65ms/step - loss: 0.4019 - val_loss: 1.5630</span></span>
+<span><span class="co">## 32/32 - 2s - 71ms/step - loss: 0.4021 - val_loss: 1.5717</span></span>
 <span><span class="co">## Epoch 20/50</span></span>
-<span><span class="co">## 32/32 - 2s - 65ms/step - loss: 0.3777 - val_loss: 1.3247</span></span>
+<span><span class="co">## 32/32 - 2s - 71ms/step - loss: 0.3779 - val_loss: 1.3132</span></span>
 <span><span class="co">## Epoch 21/50</span></span>
-<span><span class="co">## 32/32 - 2s - 65ms/step - loss: 0.3540 - val_loss: 1.2099</span></span>
+<span><span class="co">## 32/32 - 2s - 71ms/step - loss: 0.3541 - val_loss: 1.2000</span></span>
 <span><span class="co">## Epoch 22/50</span></span>
-<span><span class="co">## 32/32 - 2s - 65ms/step - loss: 0.3314 - val_loss: 1.0964</span></span>
+<span><span class="co">## 32/32 - 2s - 72ms/step - loss: 0.3315 - val_loss: 1.0762</span></span>
 <span><span class="co">## Epoch 23/50</span></span>
-<span><span class="co">## 32/32 - 2s - 65ms/step - loss: 0.3106 - val_loss: 1.0910</span></span>
+<span><span class="co">## 32/32 - 2s - 65ms/step - loss: 0.3107 - val_loss: 1.0902</span></span>
 <span><span class="co">## Epoch 24/50</span></span>
-<span><span class="co">## 32/32 - 2s - 65ms/step - loss: 0.2922 - val_loss: 1.0752</span></span>
+<span><span class="co">## 32/32 - 2s - 65ms/step - loss: 0.2919 - val_loss: 1.1165</span></span>
 <span><span class="co">## Epoch 25/50</span></span>
-<span><span class="co">## 32/32 - 2s - 65ms/step - loss: 0.2759 - val_loss: 1.0655</span></span>
+<span><span class="co">## 32/32 - 2s - 66ms/step - loss: 0.2755 - val_loss: 1.1280</span></span>
 <span><span class="co">## Epoch 26/50</span></span>
-<span><span class="co">## 32/32 - 2s - 60ms/step - loss: 0.2629 - val_loss: 1.1344</span></span>
+<span><span class="co">## 32/32 - 2s - 65ms/step - loss: 0.2615 - val_loss: 1.1839</span></span>
 <span><span class="co">## Epoch 27/50</span></span>
-<span><span class="co">## 32/32 - 2s - 60ms/step - loss: 0.2582 - val_loss: 1.1897</span></span>
+<span><span class="co">## 32/32 - 2s - 65ms/step - loss: 0.2504 - val_loss: 1.2567</span></span>
 <span><span class="co">## Epoch 28/50</span></span>
-<span><span class="co">## 32/32 - 2s - 60ms/step - loss: 0.2829 - val_loss: 1.2728</span></span>
+<span><span class="co">## 32/32 - 2s - 66ms/step - loss: 0.2487 - val_loss: 1.5241</span></span>
 <span><span class="co">## Epoch 29/50</span></span>
-<span><span class="co">## 32/32 - 2s - 60ms/step - loss: 0.3218 - val_loss: 2.0177</span></span>
+<span><span class="co">## 32/32 - 2s - 65ms/step - loss: 0.2888 - val_loss: 1.5717</span></span>
 <span><span class="co">## Epoch 30/50</span></span>
-<span><span class="co">## 32/32 - 2s - 60ms/step - loss: 0.3265 - val_loss: 1.3726</span></span>
+<span><span class="co">## 32/32 - 2s - 65ms/step - loss: 0.3307 - val_loss: 1.3285</span></span>
 <span><span class="co">## Epoch 31/50</span></span>
-<span><span class="co">## 32/32 - 2s - 60ms/step - loss: 0.3007 - val_loss: 1.3313</span></span>
+<span><span class="co">## 32/32 - 2s - 66ms/step - loss: 0.3300 - val_loss: 1.3402</span></span>
 <span><span class="co">## Epoch 32/50</span></span>
-<span><span class="co">## 32/32 - 2s - 60ms/step - loss: 0.2992 - val_loss: 1.9081</span></span>
+<span><span class="co">## 32/32 - 2s - 65ms/step - loss: 0.3151 - val_loss: 2.4250</span></span>
 <span><span class="co">## Epoch 33/50</span></span>
-<span><span class="co">## 32/32 - 2s - 60ms/step - loss: 0.2979 - val_loss: 2.3223</span></span>
+<span><span class="co">## 32/32 - 2s - 66ms/step - loss: 0.3007 - val_loss: 2.3580</span></span>
 <span><span class="co">## Epoch 34/50</span></span>
-<span><span class="co">## 32/32 - 2s - 61ms/step - loss: 0.3123 - val_loss: 2.6382</span></span>
+<span><span class="co">## 32/32 - 2s - 65ms/step - loss: 0.2971 - val_loss: 3.0257</span></span>
 <span><span class="co">## Epoch 35/50</span></span>
-<span><span class="co">## 32/32 - 2s - 70ms/step - loss: 0.3096 - val_loss: 1.6053</span></span>
+<span><span class="co">## 32/32 - 2s - 65ms/step - loss: 0.2998 - val_loss: 3.7731</span></span>
 <span><span class="co">## Epoch 36/50</span></span>
-<span><span class="co">## 32/32 - 2s - 62ms/step - loss: 0.3073 - val_loss: 2.4686</span></span>
+<span><span class="co">## 32/32 - 2s - 65ms/step - loss: 0.3082 - val_loss: 1.7686</span></span>
 <span><span class="co">## Epoch 37/50</span></span>
-<span><span class="co">## 32/32 - 2s - 62ms/step - loss: 0.2901 - val_loss: 1.9049</span></span>
+<span><span class="co">## 32/32 - 2s - 65ms/step - loss: 0.3215 - val_loss: 2.2977</span></span>
 <span><span class="co">## Epoch 38/50</span></span>
-<span><span class="co">## 32/32 - 2s - 61ms/step - loss: 0.2850 - val_loss: 3.9036</span></span>
+<span><span class="co">## 32/32 - 2s - 66ms/step - loss: 0.3022 - val_loss: 3.6808</span></span>
 <span><span class="co">## Epoch 39/50</span></span>
-<span><span class="co">## 32/32 - 2s - 67ms/step - loss: 0.2776 - val_loss: 1.8910</span></span>
+<span><span class="co">## 32/32 - 2s - 65ms/step - loss: 0.2929 - val_loss: 1.6121</span></span>
 <span><span class="co">## Epoch 40/50</span></span>
-<span><span class="co">## 32/32 - 2s - 64ms/step - loss: 0.2673 - val_loss: 4.0292</span></span>
+<span><span class="co">## 32/32 - 2s - 66ms/step - loss: 0.2868 - val_loss: 2.3306</span></span>
 <span><span class="co">## Epoch 41/50</span></span>
-<span><span class="co">## 32/32 - 2s - 65ms/step - loss: 0.2648 - val_loss: 2.1107</span></span>
+<span><span class="co">## 32/32 - 2s - 65ms/step - loss: 0.2775 - val_loss: 2.4752</span></span>
 <span><span class="co">## Epoch 42/50</span></span>
-<span><span class="co">## 32/32 - 2s - 65ms/step - loss: 0.2671 - val_loss: 2.4127</span></span>
+<span><span class="co">## 32/32 - 2s - 65ms/step - loss: 0.2675 - val_loss: 1.9509</span></span>
 <span><span class="co">## Epoch 43/50</span></span>
-<span><span class="co">## 32/32 - 2s - 63ms/step - loss: 0.2720 - val_loss: 3.1555</span></span>
+<span><span class="co">## 32/32 - 2s - 65ms/step - loss: 0.2613 - val_loss: 2.3888</span></span>
 <span><span class="co">## Epoch 44/50</span></span>
-<span><span class="co">## 32/32 - 2s - 63ms/step - loss: 0.2672 - val_loss: 4.0847</span></span>
+<span><span class="co">## 32/32 - 2s - 65ms/step - loss: 0.2547 - val_loss: 2.5188</span></span>
 <span><span class="co">## Epoch 45/50</span></span>
-<span><span class="co">## 32/32 - 2s - 68ms/step - loss: 0.2661 - val_loss: 4.4969</span></span>
+<span><span class="co">## 32/32 - 2s - 65ms/step - loss: 0.2473 - val_loss: 7.1793</span></span>
 <span><span class="co">## Epoch 46/50</span></span>
-<span><span class="co">## 32/32 - 2s - 64ms/step - loss: 0.2639 - val_loss: 4.1811</span></span>
+<span><span class="co">## 32/32 - 2s - 66ms/step - loss: 0.2495 - val_loss: 4.6344</span></span>
 <span><span class="co">## Epoch 47/50</span></span>
-<span><span class="co">## 32/32 - 2s - 66ms/step - loss: 0.2556 - val_loss: 2.6997</span></span>
+<span><span class="co">## 32/32 - 2s - 65ms/step - loss: 0.2505 - val_loss: 2.2792</span></span>
 <span><span class="co">## Epoch 48/50</span></span>
-<span><span class="co">## 32/32 - 2s - 61ms/step - loss: 0.2452 - val_loss: 2.5924</span></span>
+<span><span class="co">## 32/32 - 2s - 66ms/step - loss: 0.2580 - val_loss: 6.0419</span></span>
 <span><span class="co">## Epoch 49/50</span></span>
-<span><span class="co">## 32/32 - 2s - 67ms/step - loss: 0.2386 - val_loss: 3.4863</span></span>
+<span><span class="co">## 32/32 - 2s - 65ms/step - loss: 0.2640 - val_loss: 9.4719</span></span>
 <span><span class="co">## Epoch 50/50</span></span>
-<span><span class="co">## 32/32 - 2s - 64ms/step - loss: 0.2321 - val_loss: 1.7205</span></span></code></pre>
+<span><span class="co">## 32/32 - 2s - 66ms/step - loss: 0.2614 - val_loss: 3.3474</span></span></code></pre>
 </div>
 <div class="section level2">
 <h2 id="visualize-predictions">Visualize predictions<a class="anchor" aria-label="anchor" href="#visualize-predictions"></a>
 </h2>
-<div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb20"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">model</span> <span class="op">&lt;-</span> <span class="fu"><a href="../../reference/load_model.html">load_model</a></span><span class="op">(</span><span class="st">"models/oxford_segmentation.keras"</span><span class="op">)</span></span>
 <span><span class="co"># Generate predictions for all images in the validation set</span></span>
 <span><span class="va">val_dataset</span> <span class="op">&lt;-</span> <span class="fu">get_dataset</span><span class="op">(</span></span>
-<span>    <span class="va">batch_size</span>, <span class="va">img_size</span>, <span class="va">val_input_img_paths</span>, <span class="va">val_target_img_paths</span></span>
+<span>  <span class="va">batch_size</span>, <span class="va">img_size</span>, <span class="va">val_input_img_paths</span>, <span class="va">val_target_img_paths</span></span>
 <span><span class="op">)</span></span>
 <span><span class="va">val_preds</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/predict.html" class="external-link">predict</a></span><span class="op">(</span><span class="va">model</span>, <span class="va">val_dataset</span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">## 32/32 - 4s - 138ms/step</span></span></code></pre>
-<div class="sourceCode" id="cb16"><pre class="downlit sourceCode r">
+<pre><code><span><span class="co">## 32/32 - 4s - 127ms/step</span></span></code></pre>
+<div class="sourceCode" id="cb22"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">display_mask</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">i</span><span class="op">)</span> <span class="op">{</span></span>
 <span>  <span class="co"># Quick utility to display a model's prediction.</span></span>
 <span>  <span class="va">mask</span> <span class="op">&lt;-</span> <span class="va">val_preds</span><span class="op">[</span><span class="va">i</span>,,,<span class="op">]</span> <span class="op"><a href="../../reference/pipe.html">%&gt;%</a></span></span>
@@ -694,16 +706,16 @@ like?<a class="anchor" aria-label="anchor" href="#what-does-one-input-image-and-
 <span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/par.html" class="external-link">par</a></span><span class="op">(</span>mfrow <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">3</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="co"># Display input image</span></span>
-<span><span class="va">input_img_paths</span><span class="op">[</span><span class="va">i</span><span class="op">]</span> <span class="op"><a href="../../reference/pipe.html">%&gt;%</a></span></span>
-<span>  <span class="fu">jpeg</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/jpeg/man/readJPEG.html" class="external-link">readJPEG</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="../../reference/pipe.html">%&gt;%</a></span></span>
-<span>  <span class="fu"><a href="https://rdrr.io/r/grDevices/as.raster.html" class="external-link">as.raster</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="../../reference/pipe.html">%&gt;%</a></span></span>
+<span><span class="va">input_img_paths</span><span class="op">[</span><span class="va">i</span><span class="op">]</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu">jpeg</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/jpeg/man/readJPEG.html" class="external-link">readJPEG</a></span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu"><a href="https://rdrr.io/r/grDevices/as.raster.html" class="external-link">as.raster</a></span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># Display ground-truth target mask</span></span>
-<span><span class="va">target_img_paths</span><span class="op">[</span><span class="va">i</span><span class="op">]</span> <span class="op"><a href="../../reference/pipe.html">%&gt;%</a></span></span>
-<span>  <span class="fu">png</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/png/man/readPNG.html" class="external-link">readPNG</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="../../reference/pipe.html">%&gt;%</a></span></span>
-<span>  <span class="fu">magrittr</span><span class="fu">::</span><span class="fu"><a href="https://magrittr.tidyverse.org/reference/aliases.html" class="external-link">multiply_by</a></span><span class="op">(</span><span class="fl">255</span><span class="op">)</span> <span class="op"><a href="../../reference/pipe.html">%&gt;%</a></span></span>
-<span>  <span class="fu"><a href="https://rdrr.io/r/grDevices/as.raster.html" class="external-link">as.raster</a></span><span class="op">(</span>max <span class="op">=</span> <span class="fl">3</span><span class="op">)</span> <span class="op"><a href="../../reference/pipe.html">%&gt;%</a></span></span>
+<span><span class="va">target_img_paths</span><span class="op">[</span><span class="va">i</span><span class="op">]</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu">png</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/png/man/readPNG.html" class="external-link">readPNG</a></span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu">magrittr</span><span class="fu">::</span><span class="fu"><a href="https://magrittr.tidyverse.org/reference/aliases.html" class="external-link">multiply_by</a></span><span class="op">(</span><span class="fl">255</span><span class="op">)</span><span class="op">|&gt;</span></span>
+<span>  <span class="fu"><a href="https://rdrr.io/r/grDevices/as.raster.html" class="external-link">as.raster</a></span><span class="op">(</span>max <span class="op">=</span> <span class="fl">3</span><span class="op">)</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># Display mask predicted by our model</span></span>
