@@ -53,7 +53,7 @@
     <a class="dropdown-item" href="../articles/sequential_model.html">Sequential Model</a>
     <h6 class="dropdown-header" data-toc-skip>Extending and customizing</h6>
     <a class="dropdown-item" href="../articles/training_with_built_in_methods.html">Training &amp; evaluation with the built-in methods</a>
-    <a class="dropdown-item" href="../articles/writing_your_own_callbacks.html">Writing Your Own Callbacks</a>
+    <a class="dropdown-item" href="../articles/writing_your_own_callbacks.html">Writing your own callbacks</a>
     <a class="dropdown-item" href="../articles/making_new_layers_and_models_via_subclassing.html">Making new layers and models via subclassing</a>
     <a class="dropdown-item" href="../articles/writing_a_custom_training_loop_in_tensorflow.html">Writing a training loop from scratch in TensorFlow</a>
     <h6 class="dropdown-header" data-toc-skip>Other topics</h6>
@@ -128,9 +128,9 @@ following features:</p>
 <h2 id="setup">Setup<a class="anchor" aria-label="anchor" href="#setup"></a>
 </h2>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/rstudio/tfdatasets" class="external-link">tfdatasets</a></span><span class="op">)</span></span>
-<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/rstudio/tensorflow" class="external-link">tensorflow</a></span><span class="op">)</span></span>
-<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://keras.posit.co/">keras3</a></span><span class="op">)</span></span></code></pre></div>
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://keras.posit.co/">keras3</a></span><span class="op">)</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/rstudio/tensorflow" class="external-link">tensorflow</a></span>, exclude <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"set_random_seed"</span>, <span class="st">"shape"</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/rstudio/tfdatasets" class="external-link">tfdatasets</a></span>, exclude <span class="op">=</span> <span class="st">"shape"</span><span class="op">)</span></span></code></pre></div>
 </div>
 <div class="section level2">
 <h2 id="the-layer-class-the-combination-of-state-weights-and-some-computation">The <code>Layer</code> class: the combination of state (weights) and
@@ -145,8 +145,8 @@ variables <code>w</code> and <code>b</code>.</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">layer_linear</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/Layer.html">Layer</a></span><span class="op">(</span><span class="st">"Linear"</span>,</span>
 <span></span>
-<span>  initialize <span class="op">=</span> <span class="kw">function</span><span class="op">(</span><span class="va">units</span> <span class="op">=</span> <span class="fl">32</span>, <span class="va">input_dim</span> <span class="op">=</span> <span class="fl">32</span><span class="op">)</span> <span class="op">{</span></span>
-<span>    <span class="va">super</span><span class="op">$</span><span class="fu">initialize</span><span class="op">(</span><span class="op">)</span></span>
+<span>  initialize <span class="op">=</span> <span class="kw">function</span><span class="op">(</span><span class="va">units</span> <span class="op">=</span> <span class="fl">32</span>, <span class="va">input_dim</span> <span class="op">=</span> <span class="fl">32</span>, <span class="va">...</span><span class="op">)</span> <span class="op">{</span></span>
+<span>    <span class="va">super</span><span class="op">$</span><span class="fu">initialize</span><span class="op">(</span><span class="va">...</span><span class="op">)</span></span>
 <span>    <span class="va">self</span><span class="op">$</span><span class="va">w</span> <span class="op">&lt;-</span> <span class="va">self</span><span class="op">$</span><span class="fu">add_weight</span><span class="op">(</span></span>
 <span>      shape <span class="op">=</span> <span class="fu"><a href="../reference/shape.html">shape</a></span><span class="op">(</span><span class="va">input_dim</span>, <span class="va">units</span><span class="op">)</span>,</span>
 <span>      initializer <span class="op">=</span> <span class="st">"random_normal"</span>,</span>
@@ -167,7 +167,7 @@ variables <code>w</code> and <code>b</code>.</p>
 like an R function.</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">x</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/op_ones.html">op_ones</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">2</span>, <span class="fl">2</span><span class="op">)</span><span class="op">)</span></span>
-<span><span class="va">linear_layer</span> <span class="op">&lt;-</span> <span class="fu">layer_linear</span><span class="op">(</span>units <span class="op">=</span> <span class="fl">4L</span>, input_dim <span class="op">=</span> <span class="fl">2L</span><span class="op">)</span></span>
+<span><span class="va">linear_layer</span> <span class="op">&lt;-</span> <span class="fu">layer_linear</span><span class="op">(</span>units <span class="op">=</span> <span class="fl">4</span>, input_dim <span class="op">=</span> <span class="fl">2</span><span class="op">)</span></span>
 <span><span class="va">y</span> <span class="op">&lt;-</span> <span class="fu">linear_layer</span><span class="op">(</span><span class="va">x</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">y</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">## tf.Tensor(</span></span>
@@ -238,24 +238,22 @@ inputs is known<a class="anchor" aria-label="anchor" href="#best-practice-deferr
 argument that was used to compute the shape of the weights
 <code>w</code> and <code>b</code> in <code>initialize()</code>:</p>
 <div class="sourceCode" id="cb17"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">Linear</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/new_layer_class.html">new_layer_class</a></span><span class="op">(</span></span>
-<span>  <span class="st">"Linear"</span>,</span>
-<span>  initialize <span class="op">=</span> <span class="kw">function</span><span class="op">(</span><span class="va">units</span> <span class="op">=</span> <span class="fl">32</span>, <span class="va">input_dim</span> <span class="op">=</span> <span class="fl">32</span><span class="op">)</span> <span class="op">{</span></span>
-<span>    <span class="va">units</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/integer.html" class="external-link">as.integer</a></span><span class="op">(</span><span class="va">units</span><span class="op">)</span></span>
-<span>    <span class="va">input_dim</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/integer.html" class="external-link">as.integer</a></span><span class="op">(</span><span class="va">input_dim</span><span class="op">)</span></span>
+<code class="sourceCode R"><span><span class="va">layer_linear</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/Layer.html">Layer</a></span><span class="op">(</span><span class="st">"Linear"</span>,</span>
 <span></span>
-<span>    <span class="va">super</span><span class="op">$</span><span class="fu">initialize</span><span class="op">(</span><span class="op">)</span></span>
+<span>  initialize <span class="op">=</span> <span class="kw">function</span><span class="op">(</span><span class="va">units</span> <span class="op">=</span> <span class="fl">32</span>, <span class="va">input_dim</span> <span class="op">=</span> <span class="fl">32</span>, <span class="va">...</span><span class="op">)</span> <span class="op">{</span></span>
+<span>    <span class="va">super</span><span class="op">$</span><span class="fu">initialize</span><span class="op">(</span><span class="va">...</span><span class="op">)</span></span>
 <span>    <span class="va">self</span><span class="op">$</span><span class="va">w</span> <span class="op">&lt;-</span> <span class="va">self</span><span class="op">$</span><span class="fu">add_weight</span><span class="op">(</span></span>
-<span>      shape <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="va">input_dim</span>, <span class="va">units</span><span class="op">)</span>,</span>
+<span>      shape <span class="op">=</span> <span class="fu"><a href="../reference/shape.html">shape</a></span><span class="op">(</span><span class="va">input_dim</span>, <span class="va">units</span><span class="op">)</span>,</span>
 <span>      initializer <span class="op">=</span> <span class="st">"random_normal"</span>,</span>
 <span>      trainable <span class="op">=</span> <span class="cn">TRUE</span></span>
 <span>    <span class="op">)</span></span>
 <span>    <span class="va">self</span><span class="op">$</span><span class="va">b</span> <span class="op">&lt;-</span> <span class="va">self</span><span class="op">$</span><span class="fu">add_weight</span><span class="op">(</span></span>
-<span>      shape <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="va">units</span><span class="op">)</span>,</span>
+<span>      shape <span class="op">=</span> <span class="fu"><a href="../reference/shape.html">shape</a></span><span class="op">(</span><span class="va">units</span><span class="op">)</span>,</span>
 <span>      initializer <span class="op">=</span> <span class="st">"zeros"</span>,</span>
 <span>      trainable <span class="op">=</span> <span class="cn">TRUE</span></span>
 <span>    <span class="op">)</span></span>
 <span>  <span class="op">}</span>,</span>
+<span></span>
 <span>  call <span class="op">=</span> <span class="kw">function</span><span class="op">(</span><span class="va">inputs</span><span class="op">)</span> <span class="op">{</span></span>
 <span>    <span class="fu"><a href="../reference/op_matmul.html">op_matmul</a></span><span class="op">(</span><span class="va">inputs</span>, <span class="va">self</span><span class="op">$</span><span class="va">w</span><span class="op">)</span> <span class="op">+</span> <span class="va">self</span><span class="op">$</span><span class="va">b</span></span>
 <span>  <span class="op">}</span></span>
@@ -267,11 +265,11 @@ known, some time after instantiating the layer.</p>
 <code>build(self, inputs_shape)</code> method of your layer. Like
 this:</p>
 <div class="sourceCode" id="cb18"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">Linear</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/new_layer_class.html">new_layer_class</a></span><span class="op">(</span></span>
+<code class="sourceCode R"><span><span class="va">layer_linear</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/Layer.html">Layer</a></span><span class="op">(</span></span>
 <span>  <span class="st">"Linear"</span>,</span>
-<span>  initialize <span class="op">=</span> <span class="kw">function</span><span class="op">(</span><span class="va">units</span> <span class="op">=</span> <span class="fl">32</span><span class="op">)</span> <span class="op">{</span></span>
+<span>  initialize <span class="op">=</span> <span class="kw">function</span><span class="op">(</span><span class="va">units</span> <span class="op">=</span> <span class="fl">32</span>, <span class="va">...</span><span class="op">)</span> <span class="op">{</span></span>
 <span>    <span class="va">self</span><span class="op">$</span><span class="va">units</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/integer.html" class="external-link">as.integer</a></span><span class="op">(</span><span class="va">units</span><span class="op">)</span></span>
-<span>    <span class="va">super</span><span class="op">$</span><span class="fu">initialize</span><span class="op">(</span><span class="op">)</span></span>
+<span>    <span class="va">super</span><span class="op">$</span><span class="fu">initialize</span><span class="op">(</span><span class="va">...</span><span class="op">)</span></span>
 <span>  <span class="op">}</span>,</span>
 <span>  build <span class="op">=</span> <span class="kw">function</span><span class="op">(</span><span class="va">input_shape</span><span class="op">)</span> <span class="op">{</span></span>
 <span>    <span class="va">self</span><span class="op">$</span><span class="va">w</span> <span class="op">&lt;-</span> <span class="va">self</span><span class="op">$</span><span class="fu">add_weight</span><span class="op">(</span></span>
@@ -294,7 +292,7 @@ build the first time it is called. You now have a layer that’s lazy and
 thus easier to use:</p>
 <div class="sourceCode" id="cb19"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># At instantiation, we don't know on what inputs this is going to get called</span></span>
-<span><span class="va">linear_layer</span> <span class="op">&lt;-</span> <span class="fu">Linear</span><span class="op">(</span>units <span class="op">=</span> <span class="fl">32</span><span class="op">)</span></span>
+<span><span class="va">linear_layer</span> <span class="op">&lt;-</span> <span class="fu">layer_linear</span><span class="op">(</span>units <span class="op">=</span> <span class="fl">32</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># The layer's weights are created dynamically the first time the layer is called</span></span>
 <span><span class="va">y</span> <span class="op">&lt;-</span> <span class="fu">linear_layer</span><span class="op">(</span><span class="va">x</span><span class="op">)</span></span></code></pre></div>
@@ -312,13 +310,13 @@ layer.</p>
 method and leave it to the first <code><a href="https://rdrr.io/r/base/call.html" class="external-link">call()</a></code> to trigger building
 their weights.</p>
 <div class="sourceCode" id="cb20"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">MLPBlock</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/new_layer_class.html">new_layer_class</a></span><span class="op">(</span></span>
+<code class="sourceCode R"><span><span class="va">MLPBlock</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/Layer.html">Layer</a></span><span class="op">(</span></span>
 <span>  <span class="st">"MLPBlock"</span>,</span>
 <span>  initialize <span class="op">=</span> <span class="kw">function</span><span class="op">(</span><span class="op">)</span> <span class="op">{</span></span>
 <span>    <span class="va">super</span><span class="op">$</span><span class="fu">initialize</span><span class="op">(</span><span class="op">)</span></span>
-<span>    <span class="va">self</span><span class="op">$</span><span class="va">linear_1</span> <span class="op">&lt;-</span> <span class="fu">Linear</span><span class="op">(</span>units <span class="op">=</span> <span class="fl">32</span><span class="op">)</span></span>
-<span>    <span class="va">self</span><span class="op">$</span><span class="va">linear_2</span> <span class="op">&lt;-</span> <span class="fu">Linear</span><span class="op">(</span>units <span class="op">=</span> <span class="fl">32</span><span class="op">)</span></span>
-<span>    <span class="va">self</span><span class="op">$</span><span class="va">linear_3</span> <span class="op">&lt;-</span> <span class="fu">Linear</span><span class="op">(</span>units <span class="op">=</span> <span class="fl">1</span><span class="op">)</span></span>
+<span>    <span class="va">self</span><span class="op">$</span><span class="va">linear_1</span> <span class="op">&lt;-</span> <span class="fu">layer_linear</span><span class="op">(</span>units <span class="op">=</span> <span class="fl">32</span><span class="op">)</span></span>
+<span>    <span class="va">self</span><span class="op">$</span><span class="va">linear_2</span> <span class="op">&lt;-</span> <span class="fu">layer_linear</span><span class="op">(</span>units <span class="op">=</span> <span class="fl">32</span><span class="op">)</span></span>
+<span>    <span class="va">self</span><span class="op">$</span><span class="va">linear_3</span> <span class="op">&lt;-</span> <span class="fu">layer_linear</span><span class="op">(</span>units <span class="op">=</span> <span class="fl">1</span><span class="op">)</span></span>
 <span>  <span class="op">}</span>,</span>
 <span>  call <span class="op">=</span> <span class="kw">function</span><span class="op">(</span><span class="va">inputs</span><span class="op">)</span> <span class="op">{</span></span>
 <span>    <span class="va">inputs</span> <span class="op">|&gt;</span></span>
@@ -330,14 +328,14 @@ their weights.</p>
 <span>  <span class="op">}</span></span>
 <span><span class="op">)</span></span>
 <span></span>
-<span><span class="va">mlp</span> <span class="op">=</span> <span class="fu">MLPBlock</span><span class="op">(</span><span class="op">)</span></span>
+<span><span class="va">mlp</span> <span class="op">&lt;-</span> <span class="fu">MLPBlock</span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="co"># The first call to the `mlp` will create the weights</span></span>
 <span><span class="va">y</span> <span class="op">&lt;-</span> <span class="fu">mlp</span><span class="op">(</span><span class="fu"><a href="../reference/op_ones.html">op_ones</a></span><span class="op">(</span>shape <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">3</span>, <span class="fl">64</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span>
 <span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/base/cat.html" class="external-link">cat</a></span><span class="op">(</span><span class="st">"weights:"</span>, <span class="fu"><a href="https://rdrr.io/r/base/length.html" class="external-link">length</a></span><span class="op">(</span><span class="va">mlp</span><span class="op">$</span><span class="va">weights</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
+<span><span class="fu"><a href="https://rdrr.io/r/base/cat.html" class="external-link">cat</a></span><span class="op">(</span><span class="st">"weights:"</span>, <span class="fu"><a href="https://rdrr.io/r/base/length.html" class="external-link">length</a></span><span class="op">(</span><span class="va">mlp</span><span class="op">$</span><span class="va">weights</span><span class="op">)</span>, <span class="st">"\n"</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">## weights: 6</span></span></code></pre>
 <div class="sourceCode" id="cb22"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/cat.html" class="external-link">cat</a></span><span class="op">(</span><span class="st">"trainable weights:"</span>, <span class="fu"><a href="https://rdrr.io/r/base/length.html" class="external-link">length</a></span><span class="op">(</span><span class="va">mlp</span><span class="op">$</span><span class="va">trainable_weights</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/cat.html" class="external-link">cat</a></span><span class="op">(</span><span class="st">"trainable weights:"</span>, <span class="fu"><a href="https://rdrr.io/r/base/length.html" class="external-link">length</a></span><span class="op">(</span><span class="va">mlp</span><span class="op">$</span><span class="va">trainable_weights</span><span class="op">)</span>, <span class="st">"\n"</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">## trainable weights: 6</span></span></code></pre>
 </div>
 <div class="section level2">
@@ -362,21 +360,24 @@ backends.</p>
 <code>tf$nn</code> functions), but if you do this, then your layer will
 only be usable with the backend in question. For instance, you could
 write the following JAX-specific layer using <code>jax$numpy</code>:</p>
-<div class="sourceCode" id="cb24"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" tabindex="-1"></a>jax <span class="ot">&lt;-</span> reticulate<span class="sc">::</span><span class="fu">import</span>(<span class="st">"jax"</span>)</span>
-<span id="cb24-2"><a href="#cb24-2" tabindex="-1"></a></span>
-<span id="cb24-3"><a href="#cb24-3" tabindex="-1"></a>Linear <span class="ot">&lt;-</span> <span class="fu">new_layer_class</span>(</span>
-<span id="cb24-4"><a href="#cb24-4" tabindex="-1"></a>  ...</span>
-<span id="cb24-5"><a href="#cb24-5" tabindex="-1"></a>  <span class="at">call =</span> <span class="cf">function</span>(inputs) {</span>
-<span id="cb24-6"><a href="#cb24-6" tabindex="-1"></a>    jax<span class="sc">$</span>numpy<span class="sc">$</span><span class="fu">matmul</span>(inputs, self<span class="sc">$</span>w) <span class="sc">+</span> self<span class="sc">$</span>b</span>
-<span id="cb24-7"><a href="#cb24-7" tabindex="-1"></a>  }</span>
-<span id="cb24-8"><a href="#cb24-8" tabindex="-1"></a>)</span></code></pre></div>
+<div class="sourceCode" id="cb24"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" tabindex="-1"></a><span class="co"># keras3::install_keras(backend = c("jax"))</span></span>
+<span id="cb24-2"><a href="#cb24-2" tabindex="-1"></a>jax <span class="ot">&lt;-</span> reticulate<span class="sc">::</span><span class="fu">import</span>(<span class="st">"jax"</span>)</span>
+<span id="cb24-3"><a href="#cb24-3" tabindex="-1"></a></span>
+<span id="cb24-4"><a href="#cb24-4" tabindex="-1"></a>Linear <span class="ot">&lt;-</span> <span class="fu">new_layer_class</span>(</span>
+<span id="cb24-5"><a href="#cb24-5" tabindex="-1"></a>  ...</span>
+<span id="cb24-6"><a href="#cb24-6" tabindex="-1"></a>  <span class="at">call =</span> <span class="cf">function</span>(inputs) {</span>
+<span id="cb24-7"><a href="#cb24-7" tabindex="-1"></a>    jax<span class="sc">$</span>numpy<span class="sc">$</span><span class="fu">matmul</span>(inputs, self<span class="sc">$</span>w) <span class="sc">+</span> self<span class="sc">$</span>b</span>
+<span id="cb24-8"><a href="#cb24-8" tabindex="-1"></a>  }</span>
+<span id="cb24-9"><a href="#cb24-9" tabindex="-1"></a>)</span></code></pre></div>
 <p>This would be the equivalent TensorFlow-specific layer:</p>
-<div class="sourceCode" id="cb25"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" tabindex="-1"></a>Linear <span class="ot">&lt;-</span> <span class="fu">new_layer_class</span>(</span>
-<span id="cb25-2"><a href="#cb25-2" tabindex="-1"></a>  ...</span>
-<span id="cb25-3"><a href="#cb25-3" tabindex="-1"></a>  <span class="at">call =</span> <span class="cf">function</span>(inputs) {</span>
-<span id="cb25-4"><a href="#cb25-4" tabindex="-1"></a>    tf<span class="sc">$</span><span class="fu">matmul</span>(inputs, self<span class="sc">$</span>w) <span class="sc">+</span> self<span class="sc">$</span>b</span>
-<span id="cb25-5"><a href="#cb25-5" tabindex="-1"></a>  }</span>
-<span id="cb25-6"><a href="#cb25-6" tabindex="-1"></a>)</span></code></pre></div>
+<div class="sourceCode" id="cb25"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" tabindex="-1"></a><span class="fu">library</span>(tensorflow)</span>
+<span id="cb25-2"><a href="#cb25-2" tabindex="-1"></a></span>
+<span id="cb25-3"><a href="#cb25-3" tabindex="-1"></a>Linear <span class="ot">&lt;-</span> <span class="fu">new_layer_class</span>(</span>
+<span id="cb25-4"><a href="#cb25-4" tabindex="-1"></a>  ...</span>
+<span id="cb25-5"><a href="#cb25-5" tabindex="-1"></a>  <span class="at">call =</span> <span class="cf">function</span>(inputs) {</span>
+<span id="cb25-6"><a href="#cb25-6" tabindex="-1"></a>    tf<span class="sc">$</span><span class="fu">matmul</span>(inputs, self<span class="sc">$</span>w) <span class="sc">+</span> self<span class="sc">$</span>b</span>
+<span id="cb25-7"><a href="#cb25-7" tabindex="-1"></a>  }</span>
+<span id="cb25-8"><a href="#cb25-8" tabindex="-1"></a>)</span></code></pre></div>
 <p>And this would be the equivalent PyTorch-specific layer:</p>
 <div class="sourceCode" id="cb26"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" tabindex="-1"></a>torch <span class="ot">&lt;-</span> reticulate<span class="sc">::</span><span class="fu">import</span>(<span class="st">"torch"</span>)</span>
 <span id="cb26-2"><a href="#cb26-2" tabindex="-1"></a></span>
@@ -399,7 +400,7 @@ training loop. This is doable by calling
 <code>self$add_loss(value)</code>:</p>
 <div class="sourceCode" id="cb27"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># A layer that creates an activity regularization loss</span></span>
-<span><span class="va">ActivityRegularizationLayer</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/new_layer_class.html">new_layer_class</a></span><span class="op">(</span></span>
+<span><span class="va">layer_activity_regularization</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/Layer.html">Layer</a></span><span class="op">(</span></span>
 <span>  <span class="st">"ActivityRegularizationLayer"</span>,</span>
 <span>  initialize <span class="op">=</span> <span class="kw">function</span><span class="op">(</span><span class="va">rate</span> <span class="op">=</span> <span class="fl">1e-2</span><span class="op">)</span> <span class="op">{</span></span>
 <span>    <span class="va">self</span><span class="op">$</span><span class="va">rate</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/numeric.html" class="external-link">as.numeric</a></span><span class="op">(</span><span class="va">rate</span><span class="op">)</span></span>
@@ -416,11 +417,11 @@ start of every <code>call</code> to the top-level layer, so that
 <code>layer$losses</code> always contains the loss values created during
 the last forward pass.</p>
 <div class="sourceCode" id="cb28"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">OuterLayer</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/new_layer_class.html">new_layer_class</a></span><span class="op">(</span></span>
+<code class="sourceCode R"><span><span class="va">layer_outer</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/Layer.html">Layer</a></span><span class="op">(</span></span>
 <span>  <span class="st">"OuterLayer"</span>,</span>
 <span>  initialize <span class="op">=</span> <span class="kw">function</span><span class="op">(</span><span class="op">)</span> <span class="op">{</span></span>
 <span>    <span class="va">super</span><span class="op">$</span><span class="fu">initialize</span><span class="op">(</span><span class="op">)</span></span>
-<span>    <span class="va">self</span><span class="op">$</span><span class="va">activity_reg</span> <span class="op">&lt;-</span> <span class="fu">ActivityRegularizationLayer</span><span class="op">(</span>rate <span class="op">=</span> <span class="fl">1e-2</span><span class="op">)</span></span>
+<span>    <span class="va">self</span><span class="op">$</span><span class="va">activity_reg</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/layer_activity_regularization.html">layer_activity_regularization</a></span><span class="op">(</span>rate <span class="op">=</span> <span class="fl">1e-2</span><span class="op">)</span></span>
 <span>  <span class="op">}</span>,</span>
 <span>  call <span class="op">=</span> <span class="kw">function</span><span class="op">(</span><span class="va">inputs</span><span class="op">)</span> <span class="op">{</span></span>
 <span>    <span class="va">self</span><span class="op">$</span><span class="fu">activity_reg</span><span class="op">(</span><span class="va">inputs</span><span class="op">)</span></span>
@@ -428,33 +429,37 @@ the last forward pass.</p>
 <span>  <span class="op">}</span></span>
 <span><span class="op">)</span></span>
 <span></span>
-<span><span class="va">layer</span> <span class="op">&lt;-</span> <span class="fu">OuterLayer</span><span class="op">(</span><span class="op">)</span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/base/cat.html" class="external-link">cat</a></span><span class="op">(</span><span class="st">"losses:"</span>, <span class="fu"><a href="https://rdrr.io/r/base/length.html" class="external-link">length</a></span><span class="op">(</span><span class="va">layer</span><span class="op">$</span><span class="va">losses</span><span class="op">)</span><span class="op">)</span>  <span class="co"># No losses yet since the layer has never been called</span></span></code></pre></div>
+<span><span class="va">layer</span> <span class="op">&lt;-</span> <span class="fu">layer_outer</span><span class="op">(</span><span class="op">)</span></span>
+<span><span class="co"># No losses yet since the layer has never been called</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/cat.html" class="external-link">cat</a></span><span class="op">(</span><span class="st">"losses:"</span>, <span class="fu"><a href="https://rdrr.io/r/base/length.html" class="external-link">length</a></span><span class="op">(</span><span class="va">layer</span><span class="op">$</span><span class="va">losses</span><span class="op">)</span>, <span class="st">"\n"</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">## losses: 0</span></span></code></pre>
 <div class="sourceCode" id="cb30"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">x</span> <span class="op">&lt;-</span> <span class="fu">layer</span><span class="op">(</span><span class="fu"><a href="../reference/op_zeros.html">op_zeros</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">1</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/base/cat.html" class="external-link">cat</a></span><span class="op">(</span><span class="st">"losses:"</span>, <span class="fu"><a href="https://rdrr.io/r/base/length.html" class="external-link">length</a></span><span class="op">(</span><span class="va">layer</span><span class="op">$</span><span class="va">losses</span><span class="op">)</span><span class="op">)</span>  <span class="co"># We created one loss value</span></span></code></pre></div>
+<span><span class="co"># We created one loss value</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/cat.html" class="external-link">cat</a></span><span class="op">(</span><span class="st">"losses:"</span>, <span class="fu"><a href="https://rdrr.io/r/base/length.html" class="external-link">length</a></span><span class="op">(</span><span class="va">layer</span><span class="op">$</span><span class="va">losses</span><span class="op">)</span>, <span class="st">"\n"</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">## losses: 1</span></span></code></pre>
 <div class="sourceCode" id="cb32"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># `layer$losses` gets reset at the start of each call</span></span>
 <span><span class="va">x</span> <span class="op">&lt;-</span> <span class="fu">layer</span><span class="op">(</span><span class="fu"><a href="../reference/op_zeros.html">op_zeros</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">1</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/base/cat.html" class="external-link">cat</a></span><span class="op">(</span><span class="st">"losses:"</span>, <span class="fu"><a href="https://rdrr.io/r/base/length.html" class="external-link">length</a></span><span class="op">(</span><span class="va">layer</span><span class="op">$</span><span class="va">losses</span><span class="op">)</span><span class="op">)</span> <span class="co"># This is the loss created during the call above</span></span></code></pre></div>
+<span><span class="co"># This is the loss created during the call above</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/cat.html" class="external-link">cat</a></span><span class="op">(</span><span class="st">"losses:"</span>, <span class="fu"><a href="https://rdrr.io/r/base/length.html" class="external-link">length</a></span><span class="op">(</span><span class="va">layer</span><span class="op">$</span><span class="va">losses</span><span class="op">)</span>, <span class="st">"\n"</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">## losses: 1</span></span></code></pre>
 <p>In addition, the <code>loss</code> property also contains
 regularization losses created for the weights of any inner layer:</p>
 <div class="sourceCode" id="cb34"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">OuterLayerWithKernelRegularizer</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/new_layer_class.html">new_layer_class</a></span><span class="op">(</span></span>
+<code class="sourceCode R"><span><span class="va">layer_outer_with_kernel_regularizer</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/Layer.html">Layer</a></span><span class="op">(</span></span>
 <span>  <span class="st">"OuterLayerWithKernelRegularizer"</span>,</span>
 <span>  initialize <span class="op">=</span> <span class="kw">function</span><span class="op">(</span><span class="op">)</span> <span class="op">{</span></span>
 <span>    <span class="va">super</span><span class="op">$</span><span class="fu">initialize</span><span class="op">(</span><span class="op">)</span></span>
-<span>    <span class="va">self</span><span class="op">$</span><span class="va">dense</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/layer_dense.html">layer_dense</a></span><span class="op">(</span>units <span class="op">=</span> <span class="fl">32</span>, kernel_regularizer <span class="op">=</span> <span class="fu"><a href="../reference/regularizer_l2.html">regularizer_l2</a></span><span class="op">(</span><span class="fl">1e-3</span><span class="op">)</span><span class="op">)</span></span>
+<span>    <span class="va">self</span><span class="op">$</span><span class="va">dense</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/layer_dense.html">layer_dense</a></span><span class="op">(</span>units <span class="op">=</span> <span class="fl">32</span>,</span>
+<span>                              kernel_regularizer <span class="op">=</span> <span class="fu"><a href="../reference/regularizer_l2.html">regularizer_l2</a></span><span class="op">(</span><span class="fl">1e-3</span><span class="op">)</span><span class="op">)</span></span>
 <span>  <span class="op">}</span>,</span>
 <span>  call <span class="op">=</span> <span class="kw">function</span><span class="op">(</span><span class="va">inputs</span><span class="op">)</span> <span class="op">{</span></span>
 <span>    <span class="va">self</span><span class="op">$</span><span class="fu">dense</span><span class="op">(</span><span class="va">inputs</span><span class="op">)</span></span>
 <span>  <span class="op">}</span></span>
 <span><span class="op">)</span></span>
 <span></span>
-<span><span class="va">layer</span> <span class="op">&lt;-</span> <span class="fu">OuterLayerWithKernelRegularizer</span><span class="op">(</span><span class="op">)</span></span>
+<span><span class="va">layer</span> <span class="op">&lt;-</span> <span class="fu">layer_outer_with_kernel_regularizer</span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="va">x</span> <span class="op">&lt;-</span> <span class="fu">layer</span><span class="op">(</span><span class="fu"><a href="../reference/op_zeros.html">op_zeros</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">1</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># This is `1e-3 * sum(layer$dense$kernel ** 2)`,</span></span>
@@ -467,22 +472,22 @@ training loops.</p>
 <p>They also work seamlessly with <code><a href="https://generics.r-lib.org/reference/fit.html" class="external-link">fit()</a></code> (they get
 automatically summed and added to the main loss, if any):</p>
 <div class="sourceCode" id="cb36"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">inputs</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/layer_input.html">layer_input</a></span><span class="op">(</span>shape <span class="op">=</span> <span class="fl">3</span><span class="op">)</span></span>
-<span><span class="va">outputs</span> <span class="op">&lt;-</span> <span class="fu">ActivityRegularizationLayer</span><span class="op">(</span><span class="va">inputs</span><span class="op">)</span></span>
+<code class="sourceCode R"><span><span class="va">inputs</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/keras_input.html">keras_input</a></span><span class="op">(</span>shape <span class="op">=</span> <span class="fl">3</span><span class="op">)</span></span>
+<span><span class="va">outputs</span> <span class="op">&lt;-</span> <span class="va">inputs</span> <span class="op">|&gt;</span> <span class="fu"><a href="../reference/layer_activity_regularization.html">layer_activity_regularization</a></span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="va">model</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/keras_model.html">keras_model</a></span><span class="op">(</span><span class="va">inputs</span>, <span class="va">outputs</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># If there is a loss passed in `compile`, the regularization</span></span>
 <span><span class="co"># losses get added to it</span></span>
-<span><span class="va">model</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://generics.r-lib.org/reference/compile.html" class="external-link">compile</a></span><span class="op">(</span>optimizer<span class="op">=</span><span class="st">"adam"</span>, loss<span class="op">=</span><span class="st">"mse"</span><span class="op">)</span></span>
-<span><span class="va">model</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://generics.r-lib.org/reference/fit.html" class="external-link">fit</a></span><span class="op">(</span><span class="fu"><a href="../reference/random_normal.html">random_normal</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">2</span>, <span class="fl">3</span><span class="op">)</span><span class="op">)</span>, <span class="fu"><a href="../reference/random_normal.html">random_normal</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">2</span>, <span class="fl">3</span><span class="op">)</span><span class="op">)</span>, epochs <span class="op">=</span> <span class="fl">1</span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">## 1/1 - 0s - 177ms/step - loss: 1.8971</span></span></code></pre>
+<span><span class="va">model</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://generics.r-lib.org/reference/compile.html" class="external-link">compile</a></span><span class="op">(</span>optimizer <span class="op">=</span> <span class="st">"adam"</span>, loss <span class="op">=</span> <span class="st">"mse"</span><span class="op">)</span></span>
+<span><span class="va">model</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://generics.r-lib.org/reference/fit.html" class="external-link">fit</a></span><span class="op">(</span><span class="fu"><a href="../reference/random_normal.html">random_normal</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">2</span>, <span class="fl">3</span><span class="op">)</span><span class="op">)</span>, <span class="fu"><a href="../reference/random_normal.html">random_normal</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">2</span>, <span class="fl">3</span><span class="op">)</span><span class="op">)</span>, epochs <span class="op">=</span> <span class="fl">1</span><span class="op">)</span></span></code></pre></div>
+<pre><code><span><span class="co">## 1/1 - 0s - 409ms/step - loss: 1.8971</span></span></code></pre>
 <div class="sourceCode" id="cb38"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># It's also possible not to pass any loss in `compile`,</span></span>
 <span><span class="co"># since the model already has a loss to minimize, via the `add_loss`</span></span>
 <span><span class="co"># call during the forward pass!</span></span>
-<span><span class="va">model</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://generics.r-lib.org/reference/compile.html" class="external-link">compile</a></span><span class="op">(</span>optimizer<span class="op">=</span><span class="st">"adam"</span><span class="op">)</span></span>
-<span><span class="va">model</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://generics.r-lib.org/reference/fit.html" class="external-link">fit</a></span><span class="op">(</span><span class="fu"><a href="../reference/random_normal.html">random_normal</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">2</span>, <span class="fl">3</span><span class="op">)</span><span class="op">)</span>, <span class="fu"><a href="../reference/random_normal.html">random_normal</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">2</span>, <span class="fl">3</span><span class="op">)</span><span class="op">)</span>, epochs <span class="op">=</span> <span class="fl">1</span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">## 1/1 - 0s - 136ms/step - loss: -3.3344e-03</span></span></code></pre>
+<span><span class="va">model</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://generics.r-lib.org/reference/compile.html" class="external-link">compile</a></span><span class="op">(</span>optimizer <span class="op">=</span> <span class="st">"adam"</span><span class="op">)</span></span>
+<span><span class="va">model</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://generics.r-lib.org/reference/fit.html" class="external-link">fit</a></span><span class="op">(</span><span class="fu"><a href="../reference/random_normal.html">random_normal</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">2</span>, <span class="fl">3</span><span class="op">)</span><span class="op">)</span>, <span class="fu"><a href="../reference/random_normal.html">random_normal</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">2</span>, <span class="fl">3</span><span class="op">)</span><span class="op">)</span>, epochs <span class="op">=</span> <span class="fl">1</span><span class="op">)</span></span></code></pre></div>
+<pre><code><span><span class="co">## 1/1 - 0s - 105ms/step - loss: -3.3344e-03</span></span></code></pre>
 </div>
 <div class="section level2">
 <h2 id="you-can-optionally-enable-serialization-on-your-layers">You can optionally enable serialization on your layers<a class="anchor" aria-label="anchor" href="#you-can-optionally-enable-serialization-on-your-layers"></a>
@@ -490,7 +495,7 @@ automatically summed and added to the main loss, if any):</p>
 <p>If you need your custom layers to be serializable as part of a <a href="/guides/functional_api/">Functional model</a>, you can optionally
 implement a <code><a href="../reference/get_config.html">get_config()</a></code> method:</p>
 <div class="sourceCode" id="cb40"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">Linear</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/new_layer_class.html">new_layer_class</a></span><span class="op">(</span></span>
+<code class="sourceCode R"><span><span class="va">layer_linear</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/Layer.html">Layer</a></span><span class="op">(</span></span>
 <span>  <span class="st">"Linear"</span>,</span>
 <span>  initialize <span class="op">=</span> <span class="kw">function</span><span class="op">(</span><span class="va">units</span> <span class="op">=</span> <span class="fl">32</span><span class="op">)</span> <span class="op">{</span></span>
 <span>    <span class="va">self</span><span class="op">$</span><span class="va">units</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/integer.html" class="external-link">as.integer</a></span><span class="op">(</span><span class="va">units</span><span class="op">)</span></span>
@@ -498,12 +503,12 @@ implement a <code><a href="../reference/get_config.html">get_config()</a></code>
 <span>  <span class="op">}</span>,</span>
 <span>  build <span class="op">=</span> <span class="kw">function</span><span class="op">(</span><span class="va">input_shape</span><span class="op">)</span> <span class="op">{</span></span>
 <span>    <span class="va">self</span><span class="op">$</span><span class="va">w</span> <span class="op">&lt;-</span> <span class="va">self</span><span class="op">$</span><span class="fu">add_weight</span><span class="op">(</span></span>
-<span>      shape <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">tail</a></span><span class="op">(</span><span class="va">input_shape</span>, <span class="fl">1</span><span class="op">)</span>, <span class="va">self</span><span class="op">$</span><span class="va">units</span><span class="op">)</span>,</span>
+<span>      shape <span class="op">=</span> <span class="fu"><a href="../reference/shape.html">shape</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">tail</a></span><span class="op">(</span><span class="va">input_shape</span>, <span class="fl">1</span><span class="op">)</span>, <span class="va">self</span><span class="op">$</span><span class="va">units</span><span class="op">)</span>,</span>
 <span>      initializer <span class="op">=</span> <span class="st">"random_normal"</span>,</span>
 <span>      trainable <span class="op">=</span> <span class="cn">TRUE</span></span>
 <span>    <span class="op">)</span></span>
 <span>    <span class="va">self</span><span class="op">$</span><span class="va">b</span> <span class="op">&lt;-</span> <span class="va">self</span><span class="op">$</span><span class="fu">add_weight</span><span class="op">(</span></span>
-<span>      shape <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="va">self</span><span class="op">$</span><span class="va">units</span><span class="op">)</span>,</span>
+<span>      shape <span class="op">=</span> <span class="fu"><a href="../reference/shape.html">shape</a></span><span class="op">(</span><span class="va">self</span><span class="op">$</span><span class="va">units</span><span class="op">)</span>,</span>
 <span>      initializer <span class="op">=</span> <span class="st">"zeros"</span>,</span>
 <span>      trainable <span class="op">=</span> <span class="cn">TRUE</span></span>
 <span>    <span class="op">)</span></span>
@@ -517,14 +522,12 @@ implement a <code><a href="../reference/get_config.html">get_config()</a></code>
 <span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># Now you can recreate the layer from its config:</span></span>
-<span><span class="va">layer</span> <span class="op">&lt;-</span> <span class="fu">Linear</span><span class="op">(</span>units <span class="op">=</span> <span class="fl">64</span><span class="op">)</span></span>
+<span><span class="va">layer</span> <span class="op">&lt;-</span> <span class="fu">layer_linear</span><span class="op">(</span>units <span class="op">=</span> <span class="fl">64</span><span class="op">)</span></span>
 <span><span class="va">config</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/get_config.html">get_config</a></span><span class="op">(</span><span class="va">layer</span><span class="op">)</span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">config</span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">## $units</span></span>
-<span><span class="co">## [1] 64</span></span>
-<span><span class="co">##</span></span>
-<span><span class="co">## attr(,"__class__")</span></span>
-<span><span class="co">## &lt;class '&lt;r-globalenv&gt;.Linear'&gt;</span></span></code></pre>
+<span><span class="fu"><a href="https://rdrr.io/r/utils/str.html" class="external-link">str</a></span><span class="op">(</span><span class="va">config</span><span class="op">)</span></span></code></pre></div>
+<pre><code><span><span class="co">## List of 1</span></span>
+<span><span class="co">##  $ units: int 64</span></span>
+<span><span class="co">##  - attr(*, "__class__")=&lt;class '&lt;r-globalenv&gt;.Linear'&gt;</span></span></code></pre>
 <div class="sourceCode" id="cb42"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">new_layer</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/get_config.html">from_config</a></span><span class="op">(</span><span class="va">config</span><span class="op">)</span></span></code></pre></div>
 <p>Note that the <code>initialize()</code> method of the base
@@ -541,12 +544,12 @@ include them in the layer config:</p>
 <span>  <span class="op">}</span>,</span>
 <span>  build <span class="op">=</span> <span class="kw">function</span><span class="op">(</span><span class="va">input_shape</span><span class="op">)</span> <span class="op">{</span></span>
 <span>    <span class="va">self</span><span class="op">$</span><span class="va">w</span> <span class="op">&lt;-</span> <span class="va">self</span><span class="op">$</span><span class="fu">add_weight</span><span class="op">(</span></span>
-<span>      shape <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">tail</a></span><span class="op">(</span><span class="va">input_shape</span>, <span class="fl">1</span><span class="op">)</span>, <span class="va">self</span><span class="op">$</span><span class="va">units</span><span class="op">)</span>,</span>
+<span>      shape <span class="op">=</span> <span class="fu"><a href="../reference/shape.html">shape</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">tail</a></span><span class="op">(</span><span class="va">input_shape</span>, <span class="fl">1</span><span class="op">)</span>, <span class="va">self</span><span class="op">$</span><span class="va">units</span><span class="op">)</span>,</span>
 <span>      initializer <span class="op">=</span> <span class="st">"random_normal"</span>,</span>
 <span>      trainable <span class="op">=</span> <span class="cn">TRUE</span></span>
 <span>    <span class="op">)</span></span>
 <span>    <span class="va">self</span><span class="op">$</span><span class="va">b</span> <span class="op">&lt;-</span> <span class="va">self</span><span class="op">$</span><span class="fu">add_weight</span><span class="op">(</span></span>
-<span>      shape <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="va">self</span><span class="op">$</span><span class="va">units</span><span class="op">)</span>,</span>
+<span>      shape <span class="op">=</span> <span class="fu"><a href="../reference/shape.html">shape</a></span><span class="op">(</span><span class="va">self</span><span class="op">$</span><span class="va">units</span><span class="op">)</span>,</span>
 <span>      initializer <span class="op">=</span> <span class="st">"zeros"</span>,</span>
 <span>      trainable <span class="op">=</span> <span class="cn">TRUE</span></span>
 <span>    <span class="op">)</span></span>
@@ -561,12 +564,10 @@ include them in the layer config:</p>
 <span></span>
 <span><span class="va">layer</span> <span class="op">&lt;-</span> <span class="fu">Linear</span><span class="op">(</span>units <span class="op">=</span> <span class="fl">64</span><span class="op">)</span></span>
 <span><span class="va">config</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/get_config.html">get_config</a></span><span class="op">(</span><span class="va">layer</span><span class="op">)</span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">config</span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">## $units</span></span>
-<span><span class="co">## [1] 64</span></span>
-<span><span class="co">##</span></span>
-<span><span class="co">## attr(,"__class__")</span></span>
-<span><span class="co">## &lt;class '&lt;r-globalenv&gt;.Linear'&gt;</span></span></code></pre>
+<span><span class="fu"><a href="https://rdrr.io/r/utils/str.html" class="external-link">str</a></span><span class="op">(</span><span class="va">config</span><span class="op">)</span></span></code></pre></div>
+<pre><code><span><span class="co">## List of 1</span></span>
+<span><span class="co">##  $ units: int 64</span></span>
+<span><span class="co">##  - attr(*, "__class__")=&lt;class '&lt;r-globalenv&gt;.Linear'&gt;</span></span></code></pre>
 <div class="sourceCode" id="cb45"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">new_layer</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/get_config.html">from_config</a></span><span class="op">(</span><span class="va">config</span><span class="op">)</span></span></code></pre></div>
 <p>If you need more flexibility when deserializing the layer from its
@@ -574,9 +575,13 @@ config, you can also override the <code><a href="../reference/get_config.html">f
 method. This is the base implementation of
 <code><a href="../reference/get_config.html">from_config()</a></code>:</p>
 <div class="sourceCode" id="cb46"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">from_config</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">config</span><span class="op">)</span> <span class="op">{</span></span>
-<span>  <span class="fu"><a href="https://rdrr.io/r/base/do.call.html" class="external-link">do.call</a></span><span class="op">(</span><span class="va">cls</span>, <span class="va">config</span><span class="op">)</span></span>
-<span><span class="op">}</span></span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/Layer.html">Layer</a></span><span class="op">(</span></span>
+<span>  <span class="va">...</span>,</span>
+<span>  from_config <span class="op">=</span> <span class="kw">function</span><span class="op">(</span><span class="va">config</span><span class="op">)</span> <span class="op">{</span></span>
+<span>    <span class="co"># calling `__class__`() creates a new instance and calls initialize()</span></span>
+<span>    <span class="fu"><a href="https://rdrr.io/r/base/do.call.html" class="external-link">do.call</a></span><span class="op">(</span><span class="va">`__class__`</span>, <span class="va">config</span><span class="op">)</span></span>
+<span>  <span class="op">}</span></span>
+<span><span class="op">)</span></span></code></pre></div>
 <p>To learn more about serialization and saving, see the complete <a href="/guides/serialization_and_saving/">guide to saving and serializing
 models</a>.</p>
 </div>
@@ -593,16 +598,15 @@ expose a <code>training</code> (boolean) argument in the
 built-in training and evaluation loops (e.g. <code><a href="https://generics.r-lib.org/reference/fit.html" class="external-link">fit()</a></code>) to
 correctly use the layer in training and inference.</p>
 <div class="sourceCode" id="cb47"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">CustomDropout</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/new_layer_class.html">new_layer_class</a></span><span class="op">(</span></span>
+<code class="sourceCode R"><span><span class="va">layer_custom_dropout</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/Layer.html">Layer</a></span><span class="op">(</span></span>
 <span>  <span class="st">"CustomDropout"</span>,</span>
 <span>  initialize <span class="op">=</span> <span class="kw">function</span><span class="op">(</span><span class="va">rate</span>, <span class="va">...</span><span class="op">)</span> <span class="op">{</span></span>
 <span>    <span class="va">super</span><span class="op">$</span><span class="fu">initialize</span><span class="op">(</span><span class="va">...</span><span class="op">)</span></span>
 <span>    <span class="va">self</span><span class="op">$</span><span class="va">rate</span> <span class="op">&lt;-</span> <span class="va">rate</span></span>
 <span>  <span class="op">}</span>,</span>
 <span>  call <span class="op">=</span> <span class="kw">function</span><span class="op">(</span><span class="va">inputs</span>, <span class="va">training</span> <span class="op">=</span> <span class="cn">NULL</span><span class="op">)</span> <span class="op">{</span></span>
-<span>    <span class="kw">if</span> <span class="op">(</span><span class="op">!</span><span class="fu"><a href="https://rdrr.io/r/base/NULL.html" class="external-link">is.null</a></span><span class="op">(</span><span class="va">training</span><span class="op">)</span> <span class="op">&amp;&amp;</span> <span class="va">training</span><span class="op">)</span> <span class="op">{</span></span>
+<span>    <span class="kw">if</span> <span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/Logic.html" class="external-link">isTRUE</a></span><span class="op">(</span><span class="va">training</span><span class="op">)</span><span class="op">)</span></span>
 <span>      <span class="kw"><a href="https://rdrr.io/r/base/function.html" class="external-link">return</a></span><span class="op">(</span><span class="fu"><a href="../reference/random_dropout.html">random_dropout</a></span><span class="op">(</span><span class="va">inputs</span>, rate <span class="op">=</span> <span class="va">self</span><span class="op">$</span><span class="va">rate</span><span class="op">)</span><span class="op">)</span></span>
-<span>    <span class="op">}</span></span>
 <span>    <span class="va">inputs</span></span>
 <span>  <span class="op">}</span></span>
 <span><span class="op">)</span></span></code></pre></div>
@@ -660,27 +664,28 @@ to build a <code>Model</code> that we could train with
 <code><a href="https://generics.r-lib.org/reference/fit.html" class="external-link">fit()</a></code>, and that we could save with
 <code>save_weights()</code>:</p>
 <div class="sourceCode" id="cb48"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">ResNet</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/new_model_class.html">new_model_class</a></span><span class="op">(</span></span>
+<code class="sourceCode R"><span><span class="va">ResNet</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/Model.html">Model</a></span><span class="op">(</span></span>
 <span>  <span class="st">"ResNet"</span>,</span>
 <span>  initialize <span class="op">=</span> <span class="kw">function</span><span class="op">(</span><span class="va">num_classes</span> <span class="op">=</span> <span class="fl">1000</span>, <span class="va">...</span><span class="op">)</span> <span class="op">{</span></span>
 <span>    <span class="va">super</span><span class="op">$</span><span class="fu">initialize</span><span class="op">(</span><span class="va">...</span><span class="op">)</span></span>
-<span>    <span class="va">self</span><span class="op">$</span><span class="va">block_1</span> <span class="op">&lt;-</span> <span class="fu">ResNetBlock</span><span class="op">(</span><span class="op">)</span></span>
-<span>    <span class="va">self</span><span class="op">$</span><span class="va">block_2</span> <span class="op">&lt;-</span> <span class="fu">ResNetBlock</span><span class="op">(</span><span class="op">)</span></span>
-<span>    <span class="va">self</span><span class="op">$</span><span class="va">global_pool</span> <span class="op">&lt;-</span> <span class="va">layers</span><span class="op">$</span><span class="fu">GlobalAveragePooling2D</span><span class="op">(</span><span class="op">)</span></span>
-<span>    <span class="va">self</span><span class="op">$</span><span class="va">classifier</span> <span class="op">&lt;-</span> <span class="va">layers</span><span class="op">$</span><span class="fu">Dense</span><span class="op">(</span><span class="va">num_classes</span><span class="op">)</span></span>
+<span>    <span class="va">self</span><span class="op">$</span><span class="va">block_1</span> <span class="op">&lt;-</span> <span class="fu">layer_resnet_block</span><span class="op">(</span><span class="op">)</span></span>
+<span>    <span class="va">self</span><span class="op">$</span><span class="va">block_2</span> <span class="op">&lt;-</span> <span class="fu">layer_resnet_block</span><span class="op">(</span><span class="op">)</span></span>
+<span>    <span class="va">self</span><span class="op">$</span><span class="va">global_pool</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/layer_global_average_pooling_2d.html">layer_global_average_pooling_2d</a></span><span class="op">(</span><span class="op">)</span></span>
+<span>    <span class="va">self</span><span class="op">$</span><span class="va">classifier</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/layer_dense.html">layer_dense</a></span><span class="op">(</span><span class="va">num_classes</span><span class="op">)</span></span>
 <span>  <span class="op">}</span>,</span>
 <span>  call <span class="op">=</span> <span class="kw">function</span><span class="op">(</span><span class="va">inputs</span><span class="op">)</span> <span class="op">{</span></span>
-<span>    <span class="va">x</span> <span class="op">&lt;-</span> <span class="va">self</span><span class="op">$</span><span class="fu">block_1</span><span class="op">(</span><span class="va">inputs</span><span class="op">)</span></span>
-<span>    <span class="va">x</span> <span class="op">&lt;-</span> <span class="va">self</span><span class="op">$</span><span class="fu">block_2</span><span class="op">(</span><span class="va">x</span><span class="op">)</span></span>
-<span>    <span class="va">x</span> <span class="op">&lt;-</span> <span class="va">self</span><span class="op">$</span><span class="fu">global_pool</span><span class="op">(</span><span class="va">x</span><span class="op">)</span></span>
-<span>    <span class="va">self</span><span class="op">$</span><span class="fu">classifier</span><span class="op">(</span><span class="va">x</span><span class="op">)</span></span>
+<span>    <span class="va">inputs</span> <span class="op">|&gt;</span></span>
+<span>      <span class="va">self</span><span class="op">$</span><span class="fu">block_1</span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>      <span class="va">self</span><span class="op">$</span><span class="fu">block_2</span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>      <span class="va">self</span><span class="op">$</span><span class="fu">global_pool</span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>      <span class="va">self</span><span class="op">$</span><span class="fu">classifier</span><span class="op">(</span><span class="op">)</span></span>
 <span>  <span class="op">}</span></span>
 <span><span class="op">)</span></span>
 <span></span>
 <span><span class="va">resnet</span> <span class="op">&lt;-</span> <span class="fu">ResNet</span><span class="op">(</span><span class="op">)</span></span>
-<span><span class="va">dataset</span> <span class="op">=</span> <span class="va">...</span></span>
-<span><span class="va">resnet</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://generics.r-lib.org/reference/fit.html" class="external-link">fit</a></span><span class="op">(</span><span class="va">dataset</span>, epochs<span class="op">=</span><span class="fl">10</span><span class="op">)</span></span>
-<span><span class="va">resnet</span><span class="op">$</span><span class="fu">save</span><span class="op">(</span><span class="st">"filepath.keras"</span><span class="op">)</span></span></code></pre></div>
+<span><span class="va">dataset</span> <span class="op">&lt;-</span> <span class="va">...</span></span>
+<span><span class="va">resnet</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://generics.r-lib.org/reference/fit.html" class="external-link">fit</a></span><span class="op">(</span><span class="va">dataset</span>, epochs<span class="op">=</span><span class="fl">10</span><span class="op">)</span></span>
+<span><span class="va">resnet</span> <span class="op">|&gt;</span> <span class="fu"><a href="../reference/save_model.html">save_model</a></span><span class="op">(</span><span class="st">"filepath.keras"</span><span class="op">)</span></span></code></pre></div>
 </div>
 <div class="section level2">
 <h2 id="putting-it-all-together-an-end-to-end-example">Putting it all together: an end-to-end example<a class="anchor" aria-label="anchor" href="#putting-it-all-together-an-end-to-end-example"></a>
@@ -693,8 +698,8 @@ to build a <code>Model</code> that we could train with
 <li>Layers can be recursively nested to create new, bigger computation
 blocks.</li>
 <li>Layers are backend-agnostic as long as they only use Keras APIs. You
-can use backend-native APIs (such as <code>jax.numpy</code>,
-<code>torch.nn</code> or <code>tf.nn</code>), but then your layer will
+can use backend-native APIs (such as <code>jax$numpy</code>,
+<code>torch$nn</code> or <code>tf$nn</code>), but then your layer will
 only be usable with that specific backend.</li>
 <li>Layers can create and track losses (typically regularization losses)
 via <code>add_loss()</code>.</li>
@@ -711,7 +716,7 @@ JAX, and PyTorch. We’ll train it on MNIST digits.</p>
 composition of layers that subclass <code>Layer</code>. It will feature
 a regularization loss (KL divergence).</p>
 <div class="sourceCode" id="cb49"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">Sampling</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/new_layer_class.html">new_layer_class</a></span><span class="op">(</span></span>
+<code class="sourceCode R"><span><span class="va">layer_sampling</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/Layer.html">Layer</a></span><span class="op">(</span></span>
 <span>  <span class="st">"Sampling"</span>,</span>
 <span>  call <span class="op">=</span> <span class="kw">function</span><span class="op">(</span><span class="va">inputs</span><span class="op">)</span> <span class="op">{</span></span>
 <span>    <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="va">z_mean</span>, <span class="va">z_log_var</span><span class="op">)</span> <span class="op"><a href="../reference/multi-assign.html">%&lt;-%</a></span> <span class="va">inputs</span></span>
@@ -723,14 +728,15 @@ a regularization loss (KL divergence).</p>
 <span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># Maps MNIST digits to a triplet (z_mean, z_log_var, z).</span></span>
-<span><span class="va">Encoder</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/new_layer_class.html">new_layer_class</a></span><span class="op">(</span></span>
+<span><span class="va">layer_encoder</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/Layer.html">Layer</a></span><span class="op">(</span></span>
 <span>  <span class="st">"Encoder"</span>,</span>
 <span>  initialize <span class="op">=</span> <span class="kw">function</span><span class="op">(</span><span class="va">latent_dim</span> <span class="op">=</span> <span class="fl">32</span>, <span class="va">intermediate_dim</span> <span class="op">=</span> <span class="fl">64</span>, <span class="va">...</span><span class="op">)</span> <span class="op">{</span></span>
 <span>    <span class="va">super</span><span class="op">$</span><span class="fu">initialize</span><span class="op">(</span><span class="va">...</span><span class="op">)</span></span>
-<span>    <span class="va">self</span><span class="op">$</span><span class="va">dense_proj</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/layer_dense.html">layer_dense</a></span><span class="op">(</span>units <span class="op">=</span> <span class="va">intermediate_dim</span>, activation <span class="op">=</span> <span class="st">"relu"</span><span class="op">)</span></span>
+<span>    <span class="va">self</span><span class="op">$</span><span class="va">dense_proj</span> <span class="op">&lt;-</span></span>
+<span>      <span class="fu"><a href="../reference/layer_dense.html">layer_dense</a></span><span class="op">(</span>units <span class="op">=</span> <span class="va">intermediate_dim</span>,  activation <span class="op">=</span> <span class="st">"relu"</span><span class="op">)</span></span>
 <span>    <span class="va">self</span><span class="op">$</span><span class="va">dense_mean</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/layer_dense.html">layer_dense</a></span><span class="op">(</span>units <span class="op">=</span> <span class="va">latent_dim</span><span class="op">)</span></span>
 <span>    <span class="va">self</span><span class="op">$</span><span class="va">dense_log_var</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/layer_dense.html">layer_dense</a></span><span class="op">(</span>units <span class="op">=</span> <span class="va">latent_dim</span><span class="op">)</span></span>
-<span>    <span class="va">self</span><span class="op">$</span><span class="va">sampling</span> <span class="op">&lt;-</span> <span class="fu">Sampling</span><span class="op">(</span><span class="op">)</span></span>
+<span>    <span class="va">self</span><span class="op">$</span><span class="va">sampling</span> <span class="op">&lt;-</span> <span class="fu">layer_sampling</span><span class="op">(</span><span class="op">)</span></span>
 <span>  <span class="op">}</span>,</span>
 <span>  call <span class="op">=</span> <span class="kw">function</span><span class="op">(</span><span class="va">inputs</span><span class="op">)</span> <span class="op">{</span></span>
 <span>    <span class="va">x</span> <span class="op">&lt;-</span> <span class="va">self</span><span class="op">$</span><span class="fu">dense_proj</span><span class="op">(</span><span class="va">inputs</span><span class="op">)</span></span>
@@ -742,12 +748,14 @@ a regularization loss (KL divergence).</p>
 <span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># Converts z, the encoded digit vector, back into a readable digit.</span></span>
-<span><span class="va">Decoder</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/new_layer_class.html">new_layer_class</a></span><span class="op">(</span></span>
+<span><span class="va">layer_decoder</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/Layer.html">Layer</a></span><span class="op">(</span></span>
 <span>  <span class="st">"Decoder"</span>,</span>
 <span>  initialize <span class="op">=</span> <span class="kw">function</span><span class="op">(</span><span class="va">original_dim</span>, <span class="va">intermediate_dim</span> <span class="op">=</span> <span class="fl">64</span>, <span class="va">...</span><span class="op">)</span> <span class="op">{</span></span>
 <span>    <span class="va">super</span><span class="op">$</span><span class="fu">initialize</span><span class="op">(</span><span class="va">...</span><span class="op">)</span></span>
-<span>    <span class="va">self</span><span class="op">$</span><span class="va">dense_proj</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/layer_dense.html">layer_dense</a></span><span class="op">(</span>units <span class="op">=</span> <span class="va">intermediate_dim</span>, activation <span class="op">=</span> <span class="st">"relu"</span><span class="op">)</span></span>
-<span>    <span class="va">self</span><span class="op">$</span><span class="va">dense_output</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/layer_dense.html">layer_dense</a></span><span class="op">(</span>units <span class="op">=</span> <span class="va">original_dim</span>, activation <span class="op">=</span> <span class="st">"sigmoid"</span><span class="op">)</span></span>
+<span>    <span class="va">self</span><span class="op">$</span><span class="va">dense_proj</span> <span class="op">&lt;-</span></span>
+<span>      <span class="fu"><a href="../reference/layer_dense.html">layer_dense</a></span><span class="op">(</span>units <span class="op">=</span> <span class="va">intermediate_dim</span>, activation <span class="op">=</span> <span class="st">"relu"</span><span class="op">)</span></span>
+<span>    <span class="va">self</span><span class="op">$</span><span class="va">dense_output</span> <span class="op">&lt;-</span></span>
+<span>      <span class="fu"><a href="../reference/layer_dense.html">layer_dense</a></span><span class="op">(</span>units <span class="op">=</span> <span class="va">original_dim</span>, activation <span class="op">=</span> <span class="st">"sigmoid"</span><span class="op">)</span></span>
 <span>  <span class="op">}</span>,</span>
 <span>  call <span class="op">=</span> <span class="kw">function</span><span class="op">(</span><span class="va">inputs</span><span class="op">)</span> <span class="op">{</span></span>
 <span>    <span class="va">x</span> <span class="op">&lt;-</span> <span class="va">self</span><span class="op">$</span><span class="fu">dense_proj</span><span class="op">(</span><span class="va">inputs</span><span class="op">)</span></span>
@@ -756,30 +764,24 @@ a regularization loss (KL divergence).</p>
 <span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># Combines the encoder and decoder into an end-to-end model for training.</span></span>
-<span><span class="va">VariationalAutoEncoder</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/new_model_class.html">new_model_class</a></span><span class="op">(</span></span>
+<span><span class="va">VariationalAutoEncoder</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/Model.html">Model</a></span><span class="op">(</span></span>
 <span>  <span class="st">"VariationalAutoEncoder"</span>,</span>
-<span>  initialize <span class="op">=</span> <span class="kw">function</span><span class="op">(</span><span class="va">original_dim</span>,</span>
-<span>        <span class="va">intermediate_dim</span><span class="op">=</span><span class="fl">64</span>,</span>
-<span>        <span class="va">latent_dim</span><span class="op">=</span><span class="fl">32</span>,</span>
-<span>        <span class="va">name</span><span class="op">=</span><span class="st">"autoencoder"</span>, <span class="va">...</span><span class="op">)</span> <span class="op">{</span></span>
+<span></span>
+<span>  initialize <span class="op">=</span> <span class="kw">function</span><span class="op">(</span><span class="va">original_dim</span>, <span class="va">intermediate_dim</span> <span class="op">=</span> <span class="fl">64</span>, <span class="va">latent_dim</span> <span class="op">=</span> <span class="fl">32</span>,</span>
+<span>                        <span class="va">name</span> <span class="op">=</span> <span class="st">"autoencoder"</span>, <span class="va">...</span><span class="op">)</span> <span class="op">{</span></span>
 <span>    <span class="va">super</span><span class="op">$</span><span class="fu">initialize</span><span class="op">(</span>name <span class="op">=</span> <span class="va">name</span>, <span class="va">...</span><span class="op">)</span></span>
 <span>    <span class="va">self</span><span class="op">$</span><span class="va">original_dim</span> <span class="op">&lt;-</span> <span class="va">original_dim</span></span>
-<span>    <span class="va">self</span><span class="op">$</span><span class="va">encoder</span> <span class="op">&lt;-</span> <span class="fu">Encoder</span><span class="op">(</span></span>
-<span>      latent_dim <span class="op">=</span> <span class="va">latent_dim</span>,</span>
-<span>      intermediate_dim <span class="op">=</span> <span class="va">intermediate_dim</span></span>
-<span>    <span class="op">)</span></span>
-<span>    <span class="va">self</span><span class="op">$</span><span class="va">decoder</span> <span class="op">&lt;-</span> <span class="fu">Decoder</span><span class="op">(</span></span>
-<span>      original_dim <span class="op">=</span> <span class="va">original_dim</span>,</span>
-<span>      intermediate_dim <span class="op">=</span> <span class="va">intermediate_dim</span></span>
-<span>    <span class="op">)</span></span>
+<span>    <span class="va">self</span><span class="op">$</span><span class="va">encoder</span> <span class="op">&lt;-</span> <span class="fu">layer_encoder</span><span class="op">(</span>latent_dim <span class="op">=</span> <span class="va">latent_dim</span>,</span>
+<span>                            intermediate_dim <span class="op">=</span> <span class="va">intermediate_dim</span><span class="op">)</span></span>
+<span>    <span class="va">self</span><span class="op">$</span><span class="va">decoder</span> <span class="op">&lt;-</span> <span class="fu">layer_decoder</span><span class="op">(</span>original_dim <span class="op">=</span> <span class="va">original_dim</span>,</span>
+<span>                            intermediate_dim <span class="op">=</span> <span class="va">intermediate_dim</span><span class="op">)</span></span>
 <span>  <span class="op">}</span>,</span>
+<span></span>
 <span>  call <span class="op">=</span> <span class="kw">function</span><span class="op">(</span><span class="va">inputs</span><span class="op">)</span> <span class="op">{</span></span>
 <span>    <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="va">z_mean</span>, <span class="va">z_log_var</span>, <span class="va">z</span><span class="op">)</span> <span class="op"><a href="../reference/multi-assign.html">%&lt;-%</a></span> <span class="va">self</span><span class="op">$</span><span class="fu">encoder</span><span class="op">(</span><span class="va">inputs</span><span class="op">)</span></span>
 <span>    <span class="va">reconstructed</span> <span class="op">&lt;-</span> <span class="va">self</span><span class="op">$</span><span class="fu">decoder</span><span class="op">(</span><span class="va">z</span><span class="op">)</span></span>
 <span>    <span class="co"># Add KL divergence regularization loss.</span></span>
-<span>    <span class="va">kl_loss</span> <span class="op">&lt;-</span> <span class="op">-</span><span class="fl">0.5</span> <span class="op">*</span> <span class="fu"><a href="../reference/op_mean.html">op_mean</a></span><span class="op">(</span></span>
-<span>      <span class="va">z_log_var</span> <span class="op">-</span> <span class="fu"><a href="../reference/op_square.html">op_square</a></span><span class="op">(</span><span class="va">z_mean</span><span class="op">)</span> <span class="op">-</span> <span class="fu"><a href="../reference/op_exp.html">op_exp</a></span><span class="op">(</span><span class="va">z_log_var</span><span class="op">)</span> <span class="op">+</span> <span class="fl">1</span></span>
-<span>    <span class="op">)</span></span>
+<span>    <span class="va">kl_loss</span> <span class="op">&lt;-</span> <span class="op">-</span><span class="fl">0.5</span> <span class="op">*</span> <span class="fu"><a href="../reference/op_mean.html">op_mean</a></span><span class="op">(</span><span class="va">z_log_var</span> <span class="op">-</span> <span class="fu"><a href="../reference/op_square.html">op_square</a></span><span class="op">(</span><span class="va">z_mean</span><span class="op">)</span> <span class="op">-</span> <span class="fu"><a href="../reference/op_exp.html">op_exp</a></span><span class="op">(</span><span class="va">z_log_var</span><span class="op">)</span> <span class="op">+</span> <span class="fl">1</span><span class="op">)</span></span>
 <span>    <span class="va">self</span><span class="op">$</span><span class="fu">add_loss</span><span class="op">(</span><span class="va">kl_loss</span><span class="op">)</span></span>
 <span>    <span class="va">reconstructed</span></span>
 <span>  <span class="op">}</span></span>
@@ -787,9 +789,9 @@ a regularization loss (KL divergence).</p>
 <p>Let’s train it on MNIST using the <code><a href="https://generics.r-lib.org/reference/fit.html" class="external-link">fit()</a></code> API:</p>
 <div class="sourceCode" id="cb50"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="va">x_train</span>, <span class="va">.</span><span class="op">)</span>, <span class="va">.</span><span class="op">)</span> <span class="op"><a href="../reference/multi-assign.html">%&lt;-%</a></span> <span class="fu"><a href="../reference/dataset_mnist.html">dataset_mnist</a></span><span class="op">(</span><span class="op">)</span></span>
-<span><span class="va">x_train</span> <span class="op">&lt;-</span> <span class="va">x_train</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span></span>
-<span>  <span class="fu"><a href="../reference/op_reshape.html">op_reshape</a></span><span class="op">(</span>new_shape <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">60000</span>, <span class="fl">784</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span></span>
-<span>  <span class="fu"><a href="../reference/op_cast.html">op_cast</a></span><span class="op">(</span><span class="st">"float32"</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span></span>
+<span><span class="va">x_train</span> <span class="op">&lt;-</span> <span class="va">x_train</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu"><a href="../reference/op_reshape.html">op_reshape</a></span><span class="op">(</span>new_shape <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">60000</span>, <span class="fl">784</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu"><a href="../reference/op_cast.html">op_cast</a></span><span class="op">(</span><span class="st">"float32"</span><span class="op">)</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu"><a href="../reference/op_divide.html">op_divide</a></span><span class="op">(</span><span class="fl">255</span><span class="op">)</span></span>
 <span></span>
 <span><span class="va">original_dim</span> <span class="op">&lt;-</span> <span class="fl">784</span></span>
@@ -800,11 +802,11 @@ a regularization loss (KL divergence).</p>
 <span><span class="op">)</span></span>
 <span></span>
 <span><span class="va">optimizer</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/optimizer_adam.html">optimizer_adam</a></span><span class="op">(</span>learning_rate <span class="op">=</span> <span class="fl">1e-3</span><span class="op">)</span></span>
-<span><span class="va">vae</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://generics.r-lib.org/reference/compile.html" class="external-link">compile</a></span><span class="op">(</span><span class="va">optimizer</span>, loss <span class="op">=</span> <span class="fu"><a href="../reference/loss_mean_squared_error.html">loss_mean_squared_error</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="va">vae</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://generics.r-lib.org/reference/compile.html" class="external-link">compile</a></span><span class="op">(</span><span class="va">optimizer</span>, loss <span class="op">=</span> <span class="fu"><a href="../reference/loss_mean_squared_error.html">loss_mean_squared_error</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span></span>
 <span></span>
-<span><span class="va">vae</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://generics.r-lib.org/reference/fit.html" class="external-link">fit</a></span><span class="op">(</span><span class="va">x_train</span>, <span class="va">x_train</span>, epochs<span class="op">=</span><span class="fl">2</span>, batch_size<span class="op">=</span><span class="fl">64</span><span class="op">)</span></span></code></pre></div>
+<span><span class="va">vae</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://generics.r-lib.org/reference/fit.html" class="external-link">fit</a></span><span class="op">(</span><span class="va">x_train</span>, <span class="va">x_train</span>, epochs <span class="op">=</span> <span class="fl">2</span>, batch_size <span class="op">=</span> <span class="fl">64</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">## Epoch 1/2</span></span>
-<span><span class="co">## 938/938 - 7s - 7ms/step - loss: 0.0748</span></span>
+<span><span class="co">## 938/938 - 7s - 8ms/step - loss: 0.0748</span></span>
 <span><span class="co">## Epoch 2/2</span></span>
 <span><span class="co">## 938/938 - 1s - 1ms/step - loss: 0.0676</span></span></code></pre>
 </div>

@@ -53,7 +53,7 @@
     <a class="dropdown-item" href="../articles/sequential_model.html">Sequential Model</a>
     <h6 class="dropdown-header" data-toc-skip>Extending and customizing</h6>
     <a class="dropdown-item" href="../articles/training_with_built_in_methods.html">Training &amp; evaluation with the built-in methods</a>
-    <a class="dropdown-item" href="../articles/writing_your_own_callbacks.html">Writing Your Own Callbacks</a>
+    <a class="dropdown-item" href="../articles/writing_your_own_callbacks.html">Writing your own callbacks</a>
     <a class="dropdown-item" href="../articles/making_new_layers_and_models_via_subclassing.html">Making new layers and models via subclassing</a>
     <a class="dropdown-item" href="../articles/writing_a_custom_training_loop_in_tensorflow.html">Writing a training loop from scratch in TensorFlow</a>
     <h6 class="dropdown-header" data-toc-skip>Other topics</h6>
@@ -221,8 +221,8 @@ objects to load data in a multi-device or distributed workflow.</p>
 <span>  <span class="va">model</span></span>
 <span><span class="op">}</span></span>
 <span></span>
-<span><span class="va">get_dataset</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="op">)</span> <span class="op">{</span></span>
-<span>  <span class="va">batch_size</span> <span class="op">&lt;-</span> <span class="fl">64</span></span>
+<span><span class="va">get_dataset</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">batch_size</span> <span class="op">=</span> <span class="fl">64</span><span class="op">)</span> <span class="op">{</span></span>
+<span></span>
 <span>  <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="va">x_train</span>, <span class="va">y_train</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="va">x_test</span>, <span class="va">y_test</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="../reference/multi-assign.html">%&lt;-%</a></span> <span class="fu"><a href="../reference/dataset_mnist.html">dataset_mnist</a></span><span class="op">(</span><span class="op">)</span></span>
 <span>  <span class="va">x_train</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rstudio.github.io/reticulate/reference/array_reshape.html" class="external-link">array_reshape</a></span><span class="op">(</span><span class="va">x_train</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="op">-</span><span class="fl">1</span>, <span class="fl">784</span><span class="op">)</span><span class="op">)</span></span>
 <span>  <span class="va">x_test</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rstudio.github.io/reticulate/reference/array_reshape.html" class="external-link">array_reshape</a></span><span class="op">(</span><span class="va">x_test</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="op">-</span><span class="fl">1</span>, <span class="fl">784</span><span class="op">)</span><span class="op">)</span></span>
@@ -264,14 +264,16 @@ objects to load data in a multi-device or distributed workflow.</p>
 <span>  <span class="va">model</span> <span class="op">&lt;-</span> <span class="fu">get_compiled_model</span><span class="op">(</span><span class="op">)</span></span>
 <span></span>
 <span>  <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="va">train_dataset</span>, <span class="va">val_dataset</span>, <span class="va">test_dataset</span><span class="op">)</span> <span class="op"><a href="../reference/multi-assign.html">%&lt;-%</a></span> <span class="fu">get_dataset</span><span class="op">(</span><span class="op">)</span></span>
+<span></span>
+<span>  <span class="co"># Train the model on all available devices.</span></span>
 <span>  <span class="va">model</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://generics.r-lib.org/reference/fit.html" class="external-link">fit</a></span><span class="op">(</span><span class="va">train_dataset</span>, epochs <span class="op">=</span> <span class="fl">2</span>, validation_data <span class="op">=</span> <span class="va">val_dataset</span><span class="op">)</span></span>
+<span></span>
 <span>  <span class="co"># Test the model on all available devices.</span></span>
 <span>  <span class="va">model</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://rdrr.io/pkg/tensorflow/man/evaluate.html" class="external-link">evaluate</a></span><span class="op">(</span><span class="va">test_dataset</span><span class="op">)</span></span>
-<span>  <span class="co"># Train the model on all available devices.</span></span>
 <span></span>
 <span><span class="op">}</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">## Epoch 1/2</span></span>
-<span><span class="co">## 782/782 - 6s - 8ms/step - loss: 2.9199 - sparse_categorical_accuracy: 0.8580 - val_loss: 0.9377 - val_sparse_categorical_accuracy: 0.8986</span></span>
+<span><span class="co">## 782/782 - 7s - 9ms/step - loss: 2.9199 - sparse_categorical_accuracy: 0.8580 - val_loss: 0.9377 - val_sparse_categorical_accuracy: 0.8986</span></span>
 <span><span class="co">## Epoch 2/2</span></span>
 <span><span class="co">## 782/782 - 3s - 4ms/step - loss: 0.5622 - sparse_categorical_accuracy: 0.9254 - val_loss: 0.7505 - val_sparse_categorical_accuracy: 0.9044</span></span>
 <span><span class="co">## 157/157 - 0s - 3ms/step - loss: 0.8129 - sparse_categorical_accuracy: 0.9042</span></span></code></pre>
@@ -344,11 +346,11 @@ saved model.</p>
 <span></span>
 <span><span class="co"># Running the first time creates the model</span></span>
 <span><span class="fu">run_training</span><span class="op">(</span>epochs <span class="op">=</span> <span class="fl">1</span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">## 782/782 - 4s - 5ms/step - loss: 0.1561 - sparse_categorical_accuracy: 0.9595 - val_loss: 0.2068 - val_sparse_categorical_accuracy: 0.9544</span></span></code></pre>
+<pre><code><span><span class="co">## 782/782 - 4s - 5ms/step - loss: 0.5186 - sparse_categorical_accuracy: 0.9351 - val_loss: 0.7081 - val_sparse_categorical_accuracy: 0.9184</span></span></code></pre>
 <div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Calling the same function again will resume from where we left off</span></span>
 <span><span class="fu">run_training</span><span class="op">(</span>epochs <span class="op">=</span> <span class="fl">1</span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">## 782/782 - 4s - 5ms/step - loss: 0.1273 - sparse_categorical_accuracy: 0.9658 - val_loss: 0.3525 - val_sparse_categorical_accuracy: 0.9342</span></span></code></pre>
+<pre><code><span><span class="co">## 782/782 - 4s - 5ms/step - loss: 0.3189 - sparse_categorical_accuracy: 0.9476 - val_loss: 0.5234 - val_sparse_categorical_accuracy: 0.9382</span></span></code></pre>
 </div>
 <div class="section level2">
 <h2 id="tfdata-performance-tips">

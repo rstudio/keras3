@@ -44,8 +44,8 @@ img_size <- c(160, 160)
 num_classes <- 3
 batch_size <- 32
 
-input_img_paths <- fs::dir_ls(input_dir, glob = "*.jpg") %>% sort()
-target_img_paths <- fs::dir_ls(target_dir, glob = "*.png") %>% sort()
+input_img_paths <- fs::dir_ls(input_dir, glob = "*.jpg") |> sort()
+target_img_paths <- fs::dir_ls(target_dir, glob = "*.png") |> sort()
 
 cat("Number of samples:", length(input_img_paths), "\n")
 ```
@@ -78,19 +78,19 @@ for (i in 1:10) {
 
 ```r
 # Display input image #10
-input_img_paths[10] %>%
-  jpeg::readJPEG() %>%
-  as.raster() %>%
+input_img_paths[10] |>
+  jpeg::readJPEG() |>
+  as.raster() |>
   plot()
 ```
 
 ![plot of chunk unnamed-chunk-4](oxford_pets_image_segmentation/unnamed-chunk-4-1.png)
 
 ```r
-target_img_paths[10] %>%
-  png::readPNG() %>%
-  magrittr::multiply_by(255) %>%
-  as.raster(max = 3) %>%
+target_img_paths[10] |>
+  png::readPNG() |>
+  magrittr::multiply_by(255)|>
+  as.raster(max = 3) |>
   plot()
 ```
 
@@ -101,9 +101,35 @@ target_img_paths[10] %>%
 
 ```r
 library(tensorflow)
+```
+
+```
+##
+## Attaching package: 'tensorflow'
+```
+
+```
+## The following objects are masked from 'package:keras3':
+##
+##     set_random_seed, shape
+```
+
+```r
 library(tfdatasets)
+```
 
+```
+##
+## Attaching package: 'tfdatasets'
+```
 
+```
+## The following object is masked from 'package:keras3':
+##
+##     shape
+```
+
+```r
 # Returns a tf_dataset
 get_dataset <- function(batch_size, img_size, input_img_paths, target_img_paths,
                         max_dataset_len = NULL) {
@@ -111,16 +137,16 @@ get_dataset <- function(batch_size, img_size, input_img_paths, target_img_paths,
   img_size <- as.integer(img_size)
 
   load_img_masks <- function(input_img_path, target_img_path) {
-    input_img <- input_img_path %>%
-      tf$io$read_file() %>%
-      tf$io$decode_jpeg(channels = 3) %>%
-      tf$image$resize(img_size) %>%
+    input_img <- input_img_path |>
+      tf$io$read_file() |>
+      tf$io$decode_jpeg(channels = 3) |>
+      tf$image$resize(img_size) |>
       tf$image$convert_image_dtype("float32")
 
-    target_img <- target_img_path %>%
-      tf$io$read_file() %>%
-      tf$io$decode_png(channels = 1) %>%
-      tf$image$resize(img_size, method = "nearest") %>%
+    target_img <- target_img_path |>
+      tf$io$read_file() |>
+      tf$io$decode_png(channels = 1) |>
+      tf$image$resize(img_size, method = "nearest") |>
       tf$image$convert_image_dtype("uint8")
 
     # Ground truth labels are 1, 2, 3. Subtract one to make them 0, 1, 2:
@@ -134,9 +160,9 @@ get_dataset <- function(batch_size, img_size, input_img_paths, target_img_paths,
     target_img_paths <- target_img_paths[1:max_dataset_len]
   }
 
-  list(input_img_paths, target_img_paths) %>%
-    tensor_slices_dataset() %>%
-    dataset_map(load_img_masks, num_parallel_calls = tf$data$AUTOTUNE) %>%
+  list(input_img_paths, target_img_paths) |>
+    tensor_slices_dataset() |>
+    dataset_map(load_img_masks, num_parallel_calls = tf$data$AUTOTUNE)|>
     dataset_batch(batch_size)
 }
 ```
@@ -147,63 +173,63 @@ get_dataset <- function(batch_size, img_size, input_img_paths, target_img_paths,
 ```r
 get_model <- function(img_size, num_classes) {
 
-  inputs <- layer_input(shape = c(img_size, 3))
+  inputs <- keras_input(shape = c(img_size, 3))
 
   ### [First half of the network: downsampling inputs] ###
 
   # Entry block
-  x <- inputs %>%
-    layer_conv_2d(filters = 32, kernel_size = 3, strides = 2, padding = "same") %>%
-    layer_batch_normalization() %>%
+  x <- inputs |>
+    layer_conv_2d(filters = 32, kernel_size = 3, strides = 2, padding = "same") |>
+    layer_batch_normalization() |>
     layer_activation("relu")
 
   previous_block_activation <- x  # Set aside residual
 
   for (filters in c(64, 128, 256)) {
-    x <- x %>%
-      layer_activation("relu") %>%
-      layer_separable_conv_2d(filters = filters, kernel_size = 3, padding = "same") %>%
-      layer_batch_normalization() %>%
+    x <- x |>
+      layer_activation("relu") |>
+      layer_separable_conv_2d(filters = filters, kernel_size = 3, padding = "same") |>
+      layer_batch_normalization() |>
 
-      layer_activation("relu") %>%
-      layer_separable_conv_2d(filters = filters, kernel_size = 3, padding = "same") %>%
-      layer_batch_normalization() %>%
+      layer_activation("relu") |>
+      layer_separable_conv_2d(filters = filters, kernel_size = 3, padding = "same") |>
+      layer_batch_normalization() |>
 
       layer_max_pooling_2d(pool_size = 3, strides = 2, padding = "same")
 
-    residual <- previous_block_activation %>%
+    residual <- previous_block_activation |>
       layer_conv_2d(filters = filters, kernel_size = 1, strides = 2, padding = "same")
 
-    x <- layer_add(list(x, residual))  # Add back residual
+    x <- layer_add(x, residual)  # Add back residual
     previous_block_activation <- x  # Set aside next residual
   }
 
   ### [Second half of the network: upsampling inputs] ###
 
   for (filters in c(256, 128, 64, 32)) {
-    x <- x %>%
-      layer_activation("relu") %>%
-      layer_conv_2d_transpose(filters = filters, kernel_size = 3, padding = "same") %>%
-      layer_batch_normalization() %>%
+    x <- x |>
+      layer_activation("relu") |>
+      layer_conv_2d_transpose(filters = filters, kernel_size = 3, padding = "same") |>
+      layer_batch_normalization() |>
 
-      layer_activation("relu") %>%
-      layer_conv_2d_transpose(filters = filters, kernel_size = 3, padding = "same") %>%
-      layer_batch_normalization() %>%
+      layer_activation("relu") |>
+      layer_conv_2d_transpose(filters = filters, kernel_size = 3, padding = "same") |>
+      layer_batch_normalization() |>
 
       layer_upsampling_2d(size = 2)
 
     # Project residual
-    residual <- previous_block_activation %>%
-      layer_upsampling_2d(size = 2) %>%
+    residual <- previous_block_activation |>
+      layer_upsampling_2d(size = 2) |>
       layer_conv_2d(filters = filters, kernel_size = 1, padding = "same")
 
-    x <- layer_add(list(x, residual))  # Add back residual
+    x <- layer_add(x, residual)     # Add back residual
     previous_block_activation <- x  # Set aside next residual
   }
 
   # Add a per-pixel classification layer
-  outputs <- x %>%
-    layer_conv_2d(num_classes, 3, activation="softmax", padding="same")
+  outputs <- x |>
+    layer_conv_2d(num_classes, 3, activation = "softmax", padding = "same")
 
   # Define the model
   keras_model(inputs, outputs)
@@ -459,14 +485,14 @@ val_target_img_paths <- target_img_paths[val_samples]
 # Limit input files in `max_dataset_len` for faster epoch training time.
 # Remove the `max_dataset_len` arg when running with full dataset.
 train_dataset <- get_dataset(
-    batch_size,
-    img_size,
-    train_input_img_paths,
-    train_target_img_paths,
-    max_dataset_len=1000
+  batch_size,
+  img_size,
+  train_input_img_paths,
+  train_target_img_paths,
+  max_dataset_len = 1000
 )
 valid_dataset <- get_dataset(
-    batch_size, img_size, val_input_img_paths, val_target_img_paths
+  batch_size, img_size, val_input_img_paths, val_target_img_paths
 )
 ```
 
@@ -477,18 +503,20 @@ valid_dataset <- get_dataset(
 # Configure the model for training.
 # We use the "sparse" version of categorical_crossentropy
 # because our target data is integers.
-model %>% compile(
+model |> compile(
   optimizer = optimizer_adam(1e-4),
-  loss="sparse_categorical_crossentropy"
+  loss = "sparse_categorical_crossentropy"
 )
 
 callbacks <- list(
-    callback_model_checkpoint("models/oxford_segmentation.keras", save_best_only=TRUE)
+  callback_model_checkpoint(
+    "models/oxford_segmentation.keras", save_best_only = TRUE
+  )
 )
 
 # Train the model, doing validation at the end of each epoch.
 epochs <- 50
-model %>% fit(
+model |> fit(
     train_dataset,
     epochs=epochs,
     validation_data=valid_dataset,
@@ -499,105 +527,105 @@ model %>% fit(
 
 ```
 ## Epoch 1/50
-## 32/32 - 45s - 1s/step - loss: 1.3455 - val_loss: 1.7100
+## 32/32 - 53s - 2s/step - loss: 1.3455 - val_loss: 1.7104
 ## Epoch 2/50
-## 32/32 - 2s - 60ms/step - loss: 0.9089 - val_loss: 1.9947
+## 32/32 - 2s - 65ms/step - loss: 0.9089 - val_loss: 1.9939
 ## Epoch 3/50
-## 32/32 - 2s - 60ms/step - loss: 0.7865 - val_loss: 2.1211
+## 32/32 - 2s - 65ms/step - loss: 0.7865 - val_loss: 2.1239
 ## Epoch 4/50
-## 32/32 - 2s - 60ms/step - loss: 0.7200 - val_loss: 2.3127
+## 32/32 - 2s - 65ms/step - loss: 0.7200 - val_loss: 2.3201
 ## Epoch 5/50
-## 32/32 - 2s - 60ms/step - loss: 0.6852 - val_loss: 2.4152
+## 32/32 - 2s - 65ms/step - loss: 0.6853 - val_loss: 2.4222
 ## Epoch 6/50
-## 32/32 - 2s - 60ms/step - loss: 0.6598 - val_loss: 2.5888
+## 32/32 - 2s - 65ms/step - loss: 0.6598 - val_loss: 2.5909
 ## Epoch 7/50
-## 32/32 - 2s - 60ms/step - loss: 0.6388 - val_loss: 2.7087
+## 32/32 - 2s - 65ms/step - loss: 0.6389 - val_loss: 2.7111
 ## Epoch 8/50
-## 32/32 - 2s - 60ms/step - loss: 0.6174 - val_loss: 2.8985
+## 32/32 - 2s - 65ms/step - loss: 0.6173 - val_loss: 2.9007
 ## Epoch 9/50
-## 32/32 - 2s - 60ms/step - loss: 0.5979 - val_loss: 3.0051
+## 32/32 - 2s - 65ms/step - loss: 0.5979 - val_loss: 3.0063
 ## Epoch 10/50
-## 32/32 - 2s - 60ms/step - loss: 0.5798 - val_loss: 3.1915
+## 32/32 - 2s - 65ms/step - loss: 0.5798 - val_loss: 3.1942
 ## Epoch 11/50
-## 32/32 - 2s - 60ms/step - loss: 0.5626 - val_loss: 3.1973
+## 32/32 - 2s - 65ms/step - loss: 0.5625 - val_loss: 3.2041
 ## Epoch 12/50
-## 32/32 - 2s - 60ms/step - loss: 0.5457 - val_loss: 3.3356
+## 32/32 - 2s - 65ms/step - loss: 0.5459 - val_loss: 3.3185
 ## Epoch 13/50
-## 32/32 - 2s - 60ms/step - loss: 0.5286 - val_loss: 3.1943
+## 32/32 - 2s - 65ms/step - loss: 0.5284 - val_loss: 3.1717
 ## Epoch 14/50
-## 32/32 - 2s - 60ms/step - loss: 0.5108 - val_loss: 3.1874
+## 32/32 - 2s - 65ms/step - loss: 0.5110 - val_loss: 3.1707
 ## Epoch 15/50
-## 32/32 - 2s - 60ms/step - loss: 0.4916 - val_loss: 2.8691
+## 32/32 - 2s - 65ms/step - loss: 0.4921 - val_loss: 2.8822
 ## Epoch 16/50
-## 32/32 - 2s - 60ms/step - loss: 0.4717 - val_loss: 2.6849
+## 32/32 - 2s - 65ms/step - loss: 0.4717 - val_loss: 2.6727
 ## Epoch 17/50
-## 32/32 - 2s - 60ms/step - loss: 0.4492 - val_loss: 2.2832
+## 32/32 - 2s - 65ms/step - loss: 0.4495 - val_loss: 2.3151
 ## Epoch 18/50
-## 32/32 - 2s - 60ms/step - loss: 0.4259 - val_loss: 1.9173
+## 32/32 - 2s - 65ms/step - loss: 0.4260 - val_loss: 1.9184
 ## Epoch 19/50
-## 32/32 - 2s - 65ms/step - loss: 0.4019 - val_loss: 1.5630
+## 32/32 - 2s - 71ms/step - loss: 0.4021 - val_loss: 1.5717
 ## Epoch 20/50
-## 32/32 - 2s - 65ms/step - loss: 0.3777 - val_loss: 1.3247
+## 32/32 - 2s - 71ms/step - loss: 0.3779 - val_loss: 1.3132
 ## Epoch 21/50
-## 32/32 - 2s - 65ms/step - loss: 0.3540 - val_loss: 1.2099
+## 32/32 - 2s - 71ms/step - loss: 0.3541 - val_loss: 1.2000
 ## Epoch 22/50
-## 32/32 - 2s - 65ms/step - loss: 0.3314 - val_loss: 1.0964
+## 32/32 - 2s - 72ms/step - loss: 0.3315 - val_loss: 1.0762
 ## Epoch 23/50
-## 32/32 - 2s - 65ms/step - loss: 0.3106 - val_loss: 1.0910
+## 32/32 - 2s - 65ms/step - loss: 0.3107 - val_loss: 1.0902
 ## Epoch 24/50
-## 32/32 - 2s - 65ms/step - loss: 0.2922 - val_loss: 1.0752
+## 32/32 - 2s - 65ms/step - loss: 0.2919 - val_loss: 1.1165
 ## Epoch 25/50
-## 32/32 - 2s - 65ms/step - loss: 0.2759 - val_loss: 1.0655
+## 32/32 - 2s - 66ms/step - loss: 0.2755 - val_loss: 1.1280
 ## Epoch 26/50
-## 32/32 - 2s - 60ms/step - loss: 0.2629 - val_loss: 1.1344
+## 32/32 - 2s - 65ms/step - loss: 0.2615 - val_loss: 1.1839
 ## Epoch 27/50
-## 32/32 - 2s - 60ms/step - loss: 0.2582 - val_loss: 1.1897
+## 32/32 - 2s - 65ms/step - loss: 0.2504 - val_loss: 1.2567
 ## Epoch 28/50
-## 32/32 - 2s - 60ms/step - loss: 0.2829 - val_loss: 1.2728
+## 32/32 - 2s - 66ms/step - loss: 0.2487 - val_loss: 1.5241
 ## Epoch 29/50
-## 32/32 - 2s - 60ms/step - loss: 0.3218 - val_loss: 2.0177
+## 32/32 - 2s - 65ms/step - loss: 0.2888 - val_loss: 1.5717
 ## Epoch 30/50
-## 32/32 - 2s - 60ms/step - loss: 0.3265 - val_loss: 1.3726
+## 32/32 - 2s - 65ms/step - loss: 0.3307 - val_loss: 1.3285
 ## Epoch 31/50
-## 32/32 - 2s - 60ms/step - loss: 0.3007 - val_loss: 1.3313
+## 32/32 - 2s - 66ms/step - loss: 0.3300 - val_loss: 1.3402
 ## Epoch 32/50
-## 32/32 - 2s - 60ms/step - loss: 0.2992 - val_loss: 1.9081
+## 32/32 - 2s - 65ms/step - loss: 0.3151 - val_loss: 2.4250
 ## Epoch 33/50
-## 32/32 - 2s - 60ms/step - loss: 0.2979 - val_loss: 2.3223
+## 32/32 - 2s - 66ms/step - loss: 0.3007 - val_loss: 2.3580
 ## Epoch 34/50
-## 32/32 - 2s - 61ms/step - loss: 0.3123 - val_loss: 2.6382
+## 32/32 - 2s - 65ms/step - loss: 0.2971 - val_loss: 3.0257
 ## Epoch 35/50
-## 32/32 - 2s - 70ms/step - loss: 0.3096 - val_loss: 1.6053
+## 32/32 - 2s - 65ms/step - loss: 0.2998 - val_loss: 3.7731
 ## Epoch 36/50
-## 32/32 - 2s - 62ms/step - loss: 0.3073 - val_loss: 2.4686
+## 32/32 - 2s - 65ms/step - loss: 0.3082 - val_loss: 1.7686
 ## Epoch 37/50
-## 32/32 - 2s - 62ms/step - loss: 0.2901 - val_loss: 1.9049
+## 32/32 - 2s - 65ms/step - loss: 0.3215 - val_loss: 2.2977
 ## Epoch 38/50
-## 32/32 - 2s - 61ms/step - loss: 0.2850 - val_loss: 3.9036
+## 32/32 - 2s - 66ms/step - loss: 0.3022 - val_loss: 3.6808
 ## Epoch 39/50
-## 32/32 - 2s - 67ms/step - loss: 0.2776 - val_loss: 1.8910
+## 32/32 - 2s - 65ms/step - loss: 0.2929 - val_loss: 1.6121
 ## Epoch 40/50
-## 32/32 - 2s - 64ms/step - loss: 0.2673 - val_loss: 4.0292
+## 32/32 - 2s - 66ms/step - loss: 0.2868 - val_loss: 2.3306
 ## Epoch 41/50
-## 32/32 - 2s - 65ms/step - loss: 0.2648 - val_loss: 2.1107
+## 32/32 - 2s - 65ms/step - loss: 0.2775 - val_loss: 2.4752
 ## Epoch 42/50
-## 32/32 - 2s - 65ms/step - loss: 0.2671 - val_loss: 2.4127
+## 32/32 - 2s - 65ms/step - loss: 0.2675 - val_loss: 1.9509
 ## Epoch 43/50
-## 32/32 - 2s - 63ms/step - loss: 0.2720 - val_loss: 3.1555
+## 32/32 - 2s - 65ms/step - loss: 0.2613 - val_loss: 2.3888
 ## Epoch 44/50
-## 32/32 - 2s - 63ms/step - loss: 0.2672 - val_loss: 4.0847
+## 32/32 - 2s - 65ms/step - loss: 0.2547 - val_loss: 2.5188
 ## Epoch 45/50
-## 32/32 - 2s - 68ms/step - loss: 0.2661 - val_loss: 4.4969
+## 32/32 - 2s - 65ms/step - loss: 0.2473 - val_loss: 7.1793
 ## Epoch 46/50
-## 32/32 - 2s - 64ms/step - loss: 0.2639 - val_loss: 4.1811
+## 32/32 - 2s - 66ms/step - loss: 0.2495 - val_loss: 4.6344
 ## Epoch 47/50
-## 32/32 - 2s - 66ms/step - loss: 0.2556 - val_loss: 2.6997
+## 32/32 - 2s - 65ms/step - loss: 0.2505 - val_loss: 2.2792
 ## Epoch 48/50
-## 32/32 - 2s - 61ms/step - loss: 0.2452 - val_loss: 2.5924
+## 32/32 - 2s - 66ms/step - loss: 0.2580 - val_loss: 6.0419
 ## Epoch 49/50
-## 32/32 - 2s - 67ms/step - loss: 0.2386 - val_loss: 3.4863
+## 32/32 - 2s - 65ms/step - loss: 0.2640 - val_loss: 9.4719
 ## Epoch 50/50
-## 32/32 - 2s - 64ms/step - loss: 0.2321 - val_loss: 1.7205
+## 32/32 - 2s - 66ms/step - loss: 0.2614 - val_loss: 3.3474
 ```
 
 ## Visualize predictions
@@ -607,13 +635,13 @@ model %>% fit(
 model <- load_model("models/oxford_segmentation.keras")
 # Generate predictions for all images in the validation set
 val_dataset <- get_dataset(
-    batch_size, img_size, val_input_img_paths, val_target_img_paths
+  batch_size, img_size, val_input_img_paths, val_target_img_paths
 )
 val_preds <- predict(model, val_dataset)
 ```
 
 ```
-## 32/32 - 4s - 138ms/step
+## 32/32 - 4s - 127ms/step
 ```
 
 ```r
@@ -631,16 +659,16 @@ i <- 10
 
 par(mfrow = c(1, 3))
 # Display input image
-input_img_paths[i] %>%
-  jpeg::readJPEG() %>%
-  as.raster() %>%
+input_img_paths[i] |>
+  jpeg::readJPEG() |>
+  as.raster() |>
   plot()
 
 # Display ground-truth target mask
-target_img_paths[i] %>%
-  png::readPNG() %>%
-  magrittr::multiply_by(255) %>%
-  as.raster(max = 3) %>%
+target_img_paths[i] |>
+  png::readPNG() |>
+  magrittr::multiply_by(255)|>
+  as.raster(max = 3) |>
   plot()
 
 # Display mask predicted by our model

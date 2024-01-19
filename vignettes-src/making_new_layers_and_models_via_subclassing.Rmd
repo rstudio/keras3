@@ -30,9 +30,9 @@ Let's dive in.
 ## Setup
 
 ```{r}
-library(tfdatasets)
-library(tensorflow)
 library(keras3)
+library(tensorflow, exclude = c("set_random_seed", "shape"))
+library(tfdatasets, exclude = "shape")
 ```
 
 ## The `Layer` class: the combination of state (weights) and some computation
@@ -47,8 +47,8 @@ the variables `w` and `b`.
 ```{r}
 layer_linear <- Layer("Linear",
 
-  initialize = function(units = 32, input_dim = 32) {
-    super$initialize()
+  initialize = function(units = 32, input_dim = 32, ...) {
+    super$initialize(...)
     self$w <- self$add_weight(
       shape = shape(input_dim, units),
       initializer = "random_normal",
@@ -72,7 +72,7 @@ function.
 
 ```{r}
 x <- op_ones(c(2, 2))
-linear_layer <- layer_linear(units = 4L, input_dim = 2L)
+linear_layer <- layer_linear(units = 4, input_dim = 2)
 y <- linear_layer(x)
 print(y)
 ```
@@ -133,24 +133,22 @@ Our `Linear` layer above took an `input_dim` argument that was used to compute
 the shape of the weights `w` and `b` in `initialize()`:
 
 ```{r}
-Linear <- new_layer_class(
-  "Linear",
-  initialize = function(units = 32, input_dim = 32) {
-    units <- as.integer(units)
-    input_dim <- as.integer(input_dim)
+layer_linear <- Layer("Linear",
 
-    super$initialize()
+  initialize = function(units = 32, input_dim = 32, ...) {
+    super$initialize(...)
     self$w <- self$add_weight(
-      shape = c(input_dim, units),
+      shape = shape(input_dim, units),
       initializer = "random_normal",
       trainable = TRUE
     )
     self$b <- self$add_weight(
-      shape = c(units),
+      shape = shape(units),
       initializer = "zeros",
       trainable = TRUE
     )
   },
+  
   call = function(inputs) {
     op_matmul(inputs, self$w) + self$b
   }
@@ -165,11 +163,11 @@ In the Keras API, we recommend creating layer weights in the
 `build(self, inputs_shape)` method of your layer. Like this:
 
 ```{r}
-Linear <- new_layer_class(
+layer_linear <- Layer(
   "Linear",
-  initialize = function(units = 32) {
+  initialize = function(units = 32, ...) {
     self$units <- as.integer(units)
-    super$initialize()
+    super$initialize(...)
   },
   build = function(input_shape) {
     self$w <- self$add_weight(
@@ -194,7 +192,7 @@ it is called. You now have a layer that's lazy and thus easier to use:
 
 ```{r}
 # At instantiation, we don't know on what inputs this is going to get called
-linear_layer <- Linear(units = 32)
+linear_layer <- layer_linear(units = 32)
 
 # The layer's weights are created dynamically the first time the layer is called
 y <- linear_layer(x)
@@ -212,16 +210,16 @@ We recommend creating such sublayers in the `initialize()` method and leave it t
 the first `call()` to trigger building their weights.
 
 ```{r}
-MLPBlock <- new_layer_class(
+MLPBlock <- Layer(
   "MLPBlock",
   initialize = function() {
     super$initialize()
-    self$linear_1 <- Linear(units = 32)
-    self$linear_2 <- Linear(units = 32)
-    self$linear_3 <- Linear(units = 1)
+    self$linear_1 <- layer_linear(units = 32)
+    self$linear_2 <- layer_linear(units = 32)
+    self$linear_3 <- layer_linear(units = 1)
   },
   call = function(inputs) {
-    inputs |> 
+    inputs |>
       self$linear_1() |>
       activation_relu() |>
       self$linear_2() |>
@@ -230,12 +228,12 @@ MLPBlock <- new_layer_class(
   }
 )
 
-mlp = MLPBlock()
+mlp <- MLPBlock()
 # The first call to the `mlp` will create the weights
 y <- mlp(op_ones(shape = c(3, 64)))
 
-cat("weights:", length(mlp$weights))
-cat("trainable weights:", length(mlp$trainable_weights))
+cat("weights:", length(mlp$weights), "\n")
+cat("trainable weights:", length(mlp$trainable_weights), "\n")
 ```
 
 ## Backend-agnostic layers and backend-specific layers
@@ -257,6 +255,7 @@ but if you do this, then your layer will only be usable with the backend in ques
 For instance, you could write the following JAX-specific layer using `jax$numpy`:
 
 ```{r, eval = FALSE}
+# keras3::install_keras(backend = c("jax"))
 jax <- reticulate::import("jax")
 
 Linear <- new_layer_class(
@@ -270,6 +269,8 @@ Linear <- new_layer_class(
 This would be the equivalent TensorFlow-specific layer:
 
 ```{r, eval = FALSE}
+library(tensorflow)
+
 Linear <- new_layer_class(
   ...
   call = function(inputs) {
@@ -303,7 +304,7 @@ calling `self$add_loss(value)`:
 
 ```{r}
 # A layer that creates an activity regularization loss
-ActivityRegularizationLayer <- new_layer_class(
+layer_activity_regularization <- Layer(
   "ActivityRegularizationLayer",
   initialize = function(rate = 1e-2) {
     self$rate <- as.numeric(rate)
@@ -322,11 +323,11 @@ the top-level layer, so that `layer$losses` always contains the loss values
 created during the last forward pass.
 
 ```{r}
-OuterLayer <- new_layer_class(
+layer_outer <- Layer(
   "OuterLayer",
   initialize = function() {
     super$initialize()
-    self$activity_reg <- ActivityRegularizationLayer(rate = 1e-2)
+    self$activity_reg <- layer_activity_regularization(rate = 1e-2)
   },
   call = function(inputs) {
     self$activity_reg(inputs)
@@ -334,33 +335,37 @@ OuterLayer <- new_layer_class(
   }
 )
 
-layer <- OuterLayer()
-cat("losses:", length(layer$losses))  # No losses yet since the layer has never been called
+layer <- layer_outer()
+# No losses yet since the layer has never been called
+cat("losses:", length(layer$losses), "\n")  
 
 x <- layer(op_zeros(c(1, 1)))
-cat("losses:", length(layer$losses))  # We created one loss value
+# We created one loss value
+cat("losses:", length(layer$losses), "\n")  
 
 # `layer$losses` gets reset at the start of each call
 x <- layer(op_zeros(c(1, 1)))
-cat("losses:", length(layer$losses)) # This is the loss created during the call above
+# This is the loss created during the call above
+cat("losses:", length(layer$losses), "\n") 
 ```
 
 In addition, the `loss` property also contains regularization losses created
 for the weights of any inner layer:
 
 ```{r}
-OuterLayerWithKernelRegularizer <- new_layer_class(
+layer_outer_with_kernel_regularizer <- Layer(
   "OuterLayerWithKernelRegularizer",
   initialize = function() {
     super$initialize()
-    self$dense <- layer_dense(units = 32, kernel_regularizer = regularizer_l2(1e-3))
+    self$dense <- layer_dense(units = 32,
+                              kernel_regularizer = regularizer_l2(1e-3))
   },
   call = function(inputs) {
     self$dense(inputs)
   }
 )
 
-layer <- OuterLayerWithKernelRegularizer()
+layer <- layer_outer_with_kernel_regularizer()
 x <- layer(op_zeros(c(1, 1)))
 
 # This is `1e-3 * sum(layer$dense$kernel ** 2)`,
@@ -373,20 +378,20 @@ These losses are meant to be taken into account when writing custom training loo
 They also work seamlessly with `fit()` (they get automatically summed and added to the main loss, if any):
 
 ```{r}
-inputs <- layer_input(shape = 3)
-outputs <- ActivityRegularizationLayer(inputs)
+inputs <- keras_input(shape = 3)
+outputs <- inputs |> layer_activity_regularization()
 model <- keras_model(inputs, outputs)
 
 # If there is a loss passed in `compile`, the regularization
 # losses get added to it
-model %>% compile(optimizer="adam", loss="mse")
-model %>% fit(random_normal(c(2, 3)), random_normal(c(2, 3)), epochs = 1)
+model |> compile(optimizer = "adam", loss = "mse")
+model |> fit(random_normal(c(2, 3)), random_normal(c(2, 3)), epochs = 1)
 
 # It's also possible not to pass any loss in `compile`,
 # since the model already has a loss to minimize, via the `add_loss`
 # call during the forward pass!
-model %>% compile(optimizer="adam")
-model %>% fit(random_normal(c(2, 3)), random_normal(c(2, 3)), epochs = 1)
+model |> compile(optimizer = "adam")
+model |> fit(random_normal(c(2, 3)), random_normal(c(2, 3)), epochs = 1)
 ```
 
 ## You can optionally enable serialization on your layers
@@ -396,7 +401,7 @@ If you need your custom layers to be serializable as part of a
 method:
 
 ```{r}
-Linear <- new_layer_class(
+layer_linear <- Layer(
   "Linear",
   initialize = function(units = 32) {
     self$units <- as.integer(units)
@@ -404,12 +409,12 @@ Linear <- new_layer_class(
   },
   build = function(input_shape) {
     self$w <- self$add_weight(
-      shape = c(tail(input_shape, 1), self$units),
+      shape = shape(tail(input_shape, 1), self$units),
       initializer = "random_normal",
       trainable = TRUE
     )
     self$b <- self$add_weight(
-      shape = c(self$units),
+      shape = shape(self$units),
       initializer = "zeros",
       trainable = TRUE
     )
@@ -423,9 +428,9 @@ Linear <- new_layer_class(
 )
 
 # Now you can recreate the layer from its config:
-layer <- Linear(units = 64)
+layer <- layer_linear(units = 64)
 config <- get_config(layer)
-print(config)
+str(config)
 new_layer <- from_config(config)
 ```
 
@@ -443,12 +448,12 @@ Linear <- new_layer_class(
   },
   build = function(input_shape) {
     self$w <- self$add_weight(
-      shape = c(tail(input_shape, 1), self$units),
+      shape = shape(tail(input_shape, 1), self$units),
       initializer = "random_normal",
       trainable = TRUE
     )
     self$b <- self$add_weight(
-      shape = c(self$units),
+      shape = shape(self$units),
       initializer = "zeros",
       trainable = TRUE
     )
@@ -463,7 +468,7 @@ Linear <- new_layer_class(
 
 layer <- Linear(units = 64)
 config <- get_config(layer)
-print(config)
+str(config)
 new_layer <- from_config(config)
 ```
 
@@ -471,10 +476,14 @@ If you need more flexibility when deserializing the layer from its config, you
 can also override the `from_config()` class method. This is the base
 implementation of `from_config()`:
 
-```{r}
-from_config <- function(config) {
-  do.call(cls, config)
-}
+```{r, eval = FALSE}
+Layer(
+  ...,
+  from_config = function(config) {
+    # calling `__class__`() creates a new instance and calls initialize()
+    do.call(`__class__`, config)
+  }
+)
 ```
 
 To learn more about serialization and saving, see the complete
@@ -492,16 +501,15 @@ evaluation loops (e.g. `fit()`) to correctly use the layer in training and
 inference.
 
 ```{r}
-CustomDropout <- new_layer_class(
+layer_custom_dropout <- Layer(
   "CustomDropout",
   initialize = function(rate, ...) {
     super$initialize(...)
     self$rate <- rate
   },
   call = function(inputs, training = NULL) {
-    if (!is.null(training) && training) {
+    if (isTRUE(training)) 
       return(random_dropout(inputs, rate = self$rate))
-    }
     inputs
   }
 )
@@ -556,27 +564,28 @@ a `Model` that we could train with `fit()`, and that we could save with
 `save_weights()`:
 
 ```{r, eval = FALSE}
-ResNet <- new_model_class(
+ResNet <- Model(
   "ResNet",
   initialize = function(num_classes = 1000, ...) {
     super$initialize(...)
-    self$block_1 <- ResNetBlock()
-    self$block_2 <- ResNetBlock()
-    self$global_pool <- layers$GlobalAveragePooling2D()
-    self$classifier <- layers$Dense(num_classes)
+    self$block_1 <- layer_resnet_block()
+    self$block_2 <- layer_resnet_block()
+    self$global_pool <- layer_global_average_pooling_2d()
+    self$classifier <- layer_dense(num_classes)
   },
   call = function(inputs) {
-    x <- self$block_1(inputs)
-    x <- self$block_2(x)
-    x <- self$global_pool(x)
-    self$classifier(x)
+    inputs |>
+      self$block_1() |>
+      self$block_2() |>
+      self$global_pool() |>
+      self$classifier()
   }
 )
 
 resnet <- ResNet()
-dataset = ...
-resnet %>% fit(dataset, epochs=10)
-resnet$save("filepath.keras")
+dataset <- ...
+resnet |> fit(dataset, epochs=10)
+resnet |> save_model("filepath.keras")
 ```
 
 ## Putting it all together: an end-to-end example
@@ -587,7 +596,7 @@ Here's what you've learned so far:
 computation (defined in `call()`).
 - Layers can be recursively nested to create new, bigger computation blocks.
 - Layers are backend-agnostic as long as they only use Keras APIs. You can use
-backend-native APIs (such as `jax.numpy`, `torch.nn` or `tf.nn`), but then
+backend-native APIs (such as `jax$numpy`, `torch$nn` or `tf$nn`), but then
 your layer will only be usable with that specific backend.
 - Layers can create and track losses (typically regularization losses)
 via `add_loss()`.
@@ -603,7 +612,7 @@ Our VAE will be a subclass of `Model`, built as a nested composition of layers
 that subclass `Layer`. It will feature a regularization loss (KL divergence).
 
 ```{r}
-Sampling <- new_layer_class(
+layer_sampling <- Layer(
   "Sampling",
   call = function(inputs) {
     c(z_mean, z_log_var) %<-% inputs
@@ -615,14 +624,15 @@ Sampling <- new_layer_class(
 )
 
 # Maps MNIST digits to a triplet (z_mean, z_log_var, z).
-Encoder <- new_layer_class(
+layer_encoder <- Layer(
   "Encoder",
   initialize = function(latent_dim = 32, intermediate_dim = 64, ...) {
     super$initialize(...)
-    self$dense_proj <- layer_dense(units = intermediate_dim, activation = "relu")
+    self$dense_proj <- 
+      layer_dense(units = intermediate_dim,  activation = "relu")
     self$dense_mean <- layer_dense(units = latent_dim)
     self$dense_log_var <- layer_dense(units = latent_dim)
-    self$sampling <- Sampling()
+    self$sampling <- layer_sampling()
   },
   call = function(inputs) {
     x <- self$dense_proj(inputs)
@@ -634,12 +644,14 @@ Encoder <- new_layer_class(
 )
 
 # Converts z, the encoded digit vector, back into a readable digit.
-Decoder <- new_layer_class(
+layer_decoder <- Layer(
   "Decoder",
   initialize = function(original_dim, intermediate_dim = 64, ...) {
     super$initialize(...)
-    self$dense_proj <- layer_dense(units = intermediate_dim, activation = "relu")
-    self$dense_output <- layer_dense(units = original_dim, activation = "sigmoid")
+    self$dense_proj <-
+      layer_dense(units = intermediate_dim, activation = "relu")
+    self$dense_output <-
+      layer_dense(units = original_dim, activation = "sigmoid")
   },
   call = function(inputs) {
     x <- self$dense_proj(inputs)
@@ -648,30 +660,24 @@ Decoder <- new_layer_class(
 )
 
 # Combines the encoder and decoder into an end-to-end model for training.
-VariationalAutoEncoder <- new_model_class(
+VariationalAutoEncoder <- Model(
   "VariationalAutoEncoder",
-  initialize = function(original_dim,
-        intermediate_dim=64,
-        latent_dim=32,
-        name="autoencoder", ...) {
+  
+  initialize = function(original_dim, intermediate_dim = 64, latent_dim = 32,
+                        name = "autoencoder", ...) {
     super$initialize(name = name, ...)
     self$original_dim <- original_dim
-    self$encoder <- Encoder(
-      latent_dim = latent_dim,
-      intermediate_dim = intermediate_dim
-    )
-    self$decoder <- Decoder(
-      original_dim = original_dim,
-      intermediate_dim = intermediate_dim
-    )
+    self$encoder <- layer_encoder(latent_dim = latent_dim,
+                            intermediate_dim = intermediate_dim)
+    self$decoder <- layer_decoder(original_dim = original_dim,
+                            intermediate_dim = intermediate_dim)
   },
+  
   call = function(inputs) {
     c(z_mean, z_log_var, z) %<-% self$encoder(inputs)
     reconstructed <- self$decoder(z)
     # Add KL divergence regularization loss.
-    kl_loss <- -0.5 * op_mean(
-      z_log_var - op_square(z_mean) - op_exp(z_log_var) + 1
-    )
+    kl_loss <- -0.5 * op_mean(z_log_var - op_square(z_mean) - op_exp(z_log_var) + 1)
     self$add_loss(kl_loss)
     reconstructed
   }
@@ -682,9 +688,9 @@ Let's train it on MNIST using the `fit()` API:
 
 ```{r}
 c(c(x_train, .), .) %<-% dataset_mnist()
-x_train <- x_train %>%
-  op_reshape(new_shape = c(60000, 784)) %>%
-  op_cast("float32") %>%
+x_train <- x_train |>
+  op_reshape(new_shape = c(60000, 784)) |>
+  op_cast("float32") |>
   op_divide(255)
 
 original_dim <- 784
@@ -695,7 +701,7 @@ vae <- VariationalAutoEncoder(
 )
 
 optimizer <- optimizer_adam(learning_rate = 1e-3)
-vae %>% compile(optimizer, loss = loss_mean_squared_error())
+vae |> compile(optimizer, loss = loss_mean_squared_error())
 
-vae %>% fit(x_train, x_train, epochs=2, batch_size=64)
+vae |> fit(x_train, x_train, epochs = 2, batch_size = 64)
 ```

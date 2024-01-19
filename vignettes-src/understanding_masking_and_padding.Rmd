@@ -137,7 +137,7 @@ model <- keras_model_sequential() %>%
 This is also the case for the following Functional API model:
 
 ```{r}
-inputs <- layer_input(shape = shape(NULL), dtype="int32")
+inputs <- keras_input(shape = shape(NULL), dtype="int32")
 outputs <- inputs %>%
   layer_embedding(input_dim=5000, output_dim=16, mask_zero=TRUE) %>%
   layer_lstm(units=32)
@@ -296,7 +296,7 @@ and a mask-consuming layer (like `LSTM`), and it will pass the mask along so tha
 reaches the mask-consuming layer.
 
 ```{r}
-inputs <- layer_input(shape = shape(NULL), dtype="int32")
+inputs <- keras_input(shape = shape(NULL), dtype="int32")
 outputs <- inputs %>%
   layer_embedding(input_dim=5000, output_dim=16, mask_zero=TRUE) %>%
   MyActivation() %>%
@@ -336,7 +336,7 @@ TemporalSoftmax <- new_layer_class(
   }
 )
 
-inputs <- layer_input(shape = shape(NULL), dtype="int32")
+inputs <- keras_input(shape = shape(NULL), dtype="int32")
 outputs <- inputs %>%
   layer_embedding(input_dim=10, output_dim=32, mask_zero=TRUE) %>%
   layer_dense(1) %>%

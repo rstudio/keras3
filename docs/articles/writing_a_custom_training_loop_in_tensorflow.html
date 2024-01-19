@@ -53,7 +53,7 @@
     <a class="dropdown-item" href="../articles/sequential_model.html">Sequential Model</a>
     <h6 class="dropdown-header" data-toc-skip>Extending and customizing</h6>
     <a class="dropdown-item" href="../articles/training_with_built_in_methods.html">Training &amp; evaluation with the built-in methods</a>
-    <a class="dropdown-item" href="../articles/writing_your_own_callbacks.html">Writing Your Own Callbacks</a>
+    <a class="dropdown-item" href="../articles/writing_your_own_callbacks.html">Writing your own callbacks</a>
     <a class="dropdown-item" href="../articles/making_new_layers_and_models_via_subclassing.html">Making new layers and models via subclassing</a>
     <a class="dropdown-item" href="../articles/writing_a_custom_training_loop_in_tensorflow.html">Writing a training loop from scratch in TensorFlow</a>
     <h6 class="dropdown-header" data-toc-skip>Other topics</h6>
@@ -142,15 +142,12 @@ from scratch. This is what this guide is about.</p>
 <span>  <span class="va">model</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/keras_model.html">keras_model</a></span><span class="op">(</span>inputs <span class="op">=</span> <span class="va">inputs</span>, outputs <span class="op">=</span> <span class="va">outputs</span><span class="op">)</span></span>
 <span><span class="op">}</span></span>
 <span></span>
-<span><span class="va">model</span> <span class="op">&lt;-</span> <span class="fu">get_model</span><span class="op">(</span><span class="op">)</span></span>
-<span><span class="fu"><a href="https://rdrr.io/pkg/tensorflow/man/tf_config.html" class="external-link">tf_config</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">## TensorFlow v2.15.0 (~/.virtualenvs/r-keras/lib/python3.11/site-packages/keras)</span></span>
-<span><span class="co">## Python v3.11 (~/.virtualenvs/r-keras/bin/python)</span></span></code></pre>
+<span><span class="va">model</span> <span class="op">&lt;-</span> <span class="fu">get_model</span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
 <p>Let’s train it using mini-batch gradient with a custom training
 loop.</p>
 <p>First, we’re going to need an optimizer, a loss function, and a
 dataset:</p>
-<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Instantiate an optimizer.</span></span>
 <span><span class="va">optimizer</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/optimizer_sgd.html">optimizer_sgd</a></span><span class="op">(</span>learning_rate <span class="op">=</span> <span class="fl">1e-3</span><span class="op">)</span></span>
 <span></span>
@@ -198,7 +195,7 @@ model with regard to the loss</li>
 <li>Finally, we use the optimizer to update the weights of the model
 based on the gradients</li>
 </ul>
-<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">epochs</span> <span class="op">&lt;-</span> <span class="fl">2</span></span>
 <span></span>
 <span><span class="kw">for</span> <span class="op">(</span><span class="va">epoch</span> <span class="kw">in</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html" class="external-link">seq_len</a></span><span class="op">(</span><span class="va">epochs</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span></span>
@@ -237,7 +234,7 @@ based on the gradients</li>
 <span>      <span class="fu"><a href="https://rdrr.io/r/base/cat.html" class="external-link">cat</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/sprintf.html" class="external-link">sprintf</a></span><span class="op">(</span></span>
 <span>        <span class="st">"Training loss (for one batch) at step %d: %.4f\n"</span>, <span class="va">step</span>, <span class="va">loss_value</span></span>
 <span>      <span class="op">)</span><span class="op">)</span></span>
-<span>      <span class="fu"><a href="https://rdrr.io/r/base/cat.html" class="external-link">cat</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/sprintf.html" class="external-link">sprintf</a></span><span class="op">(</span><span class="st">"Seen so far: %d samples \n"</span>, <span class="op">(</span><span class="va">step</span> <span class="op">*</span> <span class="va">batch_size</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span>
+<span>      <span class="fu"><a href="https://rdrr.io/r/base/cat.html" class="external-link">cat</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/sprintf.html" class="external-link">sprintf</a></span><span class="op">(</span><span class="st">"Seen so far: %d samples \n"</span>, <span class="va">step</span> <span class="op">*</span> <span class="va">batch_size</span><span class="op">)</span><span class="op">)</span></span>
 <span>    <span class="op">}</span></span>
 <span>  <span class="op">}</span></span>
 <span><span class="op">}</span></span></code></pre></div>
@@ -273,7 +270,7 @@ state of the metric (typically at the end of an epoch)</li>
 <p>Let’s use this knowledge to compute
 <code>SparseCategoricalAccuracy</code> on training and validation data
 at the end of each epoch:</p>
-<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Get a fresh model</span></span>
 <span><span class="va">model</span> <span class="op">&lt;-</span> <span class="fu">get_model</span><span class="op">(</span><span class="op">)</span></span>
 <span></span>
@@ -286,7 +283,7 @@ at the end of each epoch:</p>
 <span><span class="va">train_acc_metric</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/metric_sparse_categorical_accuracy.html">metric_sparse_categorical_accuracy</a></span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="va">val_acc_metric</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/metric_sparse_categorical_accuracy.html">metric_sparse_categorical_accuracy</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
 <p>Here’s our training &amp; evaluation loop:</p>
-<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">epochs</span> <span class="op">&lt;-</span> <span class="fl">2</span></span>
 <span><span class="va">time</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/Sys.time.html" class="external-link">Sys.time</a></span><span class="op">(</span><span class="op">)</span></span>
 <span></span>
@@ -354,9 +351,9 @@ at the end of each epoch:</p>
 <span><span class="co">## Seen so far: 38400 samples</span></span>
 <span><span class="co">## Training acc over epoch: 0.8365</span></span>
 <span><span class="co">## Validation acc: 0.8489</span></span></code></pre>
-<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/Sys.time.html" class="external-link">Sys.time</a></span><span class="op">(</span><span class="op">)</span> <span class="op">-</span> <span class="va">time</span></span></code></pre></div>
-<pre><code><span><span class="co">## Time difference of 25.65498 secs</span></span></code></pre>
+<pre><code><span><span class="co">## Time difference of 24.82931 secs</span></span></code></pre>
 </div>
 <div class="section level2">
 <h2 id="speeding-up-your-training-step-with-tf_function">Speeding-up your training step with <code>tf_function</code><a class="anchor" aria-label="anchor" href="#speeding-up-your-training-step-with-tf_function"></a>
@@ -371,7 +368,7 @@ operation after another, with no knowledge of what comes next.</p>
 <p>You can compile into a static graph any function that takes tensors
 as input. Just wrap your function in [<code><a href="https://rdrr.io/pkg/tensorflow/man/tf_function.html" class="external-link">tf_function()</a></code>], like
 this:</p>
-<div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">train_step</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/tensorflow/man/tf_function.html" class="external-link">tf_function</a></span><span class="op">(</span><span class="kw">function</span><span class="op">(</span><span class="va">x</span>, <span class="va">y</span><span class="op">)</span> <span class="op">{</span></span>
 <span>  <span class="fu"><a href="https://rdrr.io/r/base/with.html" class="external-link">with</a></span><span class="op">(</span><span class="va">tf</span><span class="op">$</span><span class="fu">GradientTape</span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="https://rstudio.github.io/reticulate/reference/with-as-operator.html" class="external-link">%as%</a></span> <span class="va">tape</span>, <span class="op">{</span></span>
 <span>    <span class="va">logits</span> <span class="op">&lt;-</span> <span class="fu">model</span><span class="op">(</span><span class="va">x</span>, training <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
@@ -383,7 +380,7 @@ this:</p>
 <span>  <span class="va">loss_value</span></span>
 <span><span class="op">}</span><span class="op">)</span></span></code></pre></div>
 <p>Let’s do the same with the evaluation step:</p>
-<div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">test_step</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/tensorflow/man/tf_function.html" class="external-link">tf_function</a></span><span class="op">(</span><span class="kw">function</span><span class="op">(</span><span class="va">x</span>, <span class="va">y</span><span class="op">)</span> <span class="op">{</span></span>
 <span>  <span class="va">val_logits</span> <span class="op">&lt;-</span> <span class="fu">model</span><span class="op">(</span><span class="va">x</span>, training <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span>
 <span>  <span class="va">val_acc_metric</span><span class="op">$</span><span class="fu">update_state</span><span class="op">(</span><span class="va">y</span>, <span class="va">val_logits</span><span class="op">)</span></span>
@@ -391,7 +388,7 @@ this:</p>
 <span><span class="op">}</span><span class="op">)</span></span></code></pre></div>
 <p>Now, let’s re-run our training loop with this compiled training
 step:</p>
-<div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">epochs</span> <span class="op">&lt;-</span> <span class="fl">2</span></span>
 <span><span class="va">time</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/Sys.time.html" class="external-link">Sys.time</a></span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="kw">for</span> <span class="op">(</span><span class="va">epoch</span> <span class="kw">in</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html" class="external-link">seq_len</a></span><span class="op">(</span><span class="va">epochs</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span></span>
@@ -443,9 +440,9 @@ step:</p>
 <span><span class="co">## Seen so far: 38400 samples</span></span>
 <span><span class="co">## Training acc over epoch: 0.8855</span></span>
 <span><span class="co">## Validation acc: 0.8794</span></span></code></pre>
-<div class="sourceCode" id="cb16"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/Sys.time.html" class="external-link">Sys.time</a></span><span class="op">(</span><span class="op">)</span> <span class="op">-</span> <span class="va">time</span></span></code></pre></div>
-<pre><code><span><span class="co">## Time difference of 3.191403 secs</span></span></code></pre>
+<pre><code><span><span class="co">## Time difference of 2.997126 secs</span></span></code></pre>
 <p>Much faster, isn’t it?</p>
 </div>
 <div class="section level2">
@@ -459,7 +456,7 @@ resulting list of scalar loss values are available via the property
 and add them to the main loss in your training step.</p>
 <p>Consider this layer, that creates an activity regularization
 loss:</p>
-<div class="sourceCode" id="cb18"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb17"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">layer_activity_regularization</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/Layer.html">Layer</a></span><span class="op">(</span></span>
 <span>  <span class="st">"ActivityRegularizationLayer"</span>,</span>
 <span>  call <span class="op">=</span> <span class="kw">function</span><span class="op">(</span><span class="va">inputs</span><span class="op">)</span> <span class="op">{</span></span>
@@ -468,7 +465,7 @@ loss:</p>
 <span>  <span class="op">}</span></span>
 <span><span class="op">)</span></span></code></pre></div>
 <p>Let’s build a really simple model that uses it:</p>
-<div class="sourceCode" id="cb19"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb18"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">inputs</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/layer_input.html">layer_input</a></span><span class="op">(</span>shape <span class="op">=</span> <span class="fl">784</span>, name <span class="op">=</span> <span class="st">"digits"</span><span class="op">)</span></span>
 <span><span class="va">outputs</span> <span class="op">&lt;-</span> <span class="va">inputs</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu"><a href="../reference/layer_dense.html">layer_dense</a></span><span class="op">(</span>units <span class="op">=</span> <span class="fl">64</span>, activation <span class="op">=</span> <span class="st">"relu"</span><span class="op">)</span> <span class="op">|&gt;</span></span>
@@ -477,7 +474,7 @@ loss:</p>
 <span>  <span class="fu"><a href="../reference/layer_dense.html">layer_dense</a></span><span class="op">(</span>units <span class="op">=</span> <span class="fl">10</span>, name <span class="op">=</span> <span class="st">"predictions"</span><span class="op">)</span></span>
 <span><span class="va">model</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/keras_model.html">keras_model</a></span><span class="op">(</span>inputs <span class="op">=</span> <span class="va">inputs</span>, outputs <span class="op">=</span> <span class="va">outputs</span><span class="op">)</span></span></code></pre></div>
 <p>Here’s what our training step should look like now:</p>
-<div class="sourceCode" id="cb20"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb19"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">train_step</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/tensorflow/man/tf_function.html" class="external-link">tf_function</a></span><span class="op">(</span><span class="kw">function</span><span class="op">(</span><span class="va">x</span>, <span class="va">y</span><span class="op">)</span> <span class="op">{</span></span>
 <span>  <span class="fu"><a href="https://rdrr.io/r/base/with.html" class="external-link">with</a></span><span class="op">(</span><span class="va">tf</span><span class="op">$</span><span class="fu">GradientTape</span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="https://rstudio.github.io/reticulate/reference/with-as-operator.html" class="external-link">%as%</a></span> <span class="va">tape</span>, <span class="op">{</span></span>
 <span>    <span class="va">logits</span> <span class="op">&lt;-</span> <span class="fu">model</span><span class="op">(</span><span class="va">x</span>, training <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
@@ -533,11 +530,11 @@ images.</li>
 <li>Train the “generator” model to “fool” the discriminator and classify
 the fake images as real.</li>
 </ul>
-<p>For a much more detailed overview of how GANs works, see <a href="https://www.manning.com/books/deep-learning-with-python" class="external-link">Deep
-Learning with Python</a>.</p>
+<p>For a much more detailed overview of how GANs works, see <a href="https://www.manning.com/books/deep-learning-with-r-second-edition" class="external-link">Deep
+Learning with R</a>.</p>
 <p>Let’s implement this training loop. First, create the discriminator
 meant to classify fake vs real digits:</p>
-<div class="sourceCode" id="cb21"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb20"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Create the discriminator</span></span>
 <span><span class="va">discriminator</span> <span class="op">&lt;-</span></span>
 <span>  <span class="fu"><a href="../reference/keras_model_sequential.html">keras_model_sequential</a></span><span class="op">(</span>input_shape <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">28</span>, <span class="fl">28</span>, <span class="fl">1</span><span class="op">)</span>,</span>
@@ -578,7 +575,7 @@ meant to classify fake vs real digits:</p>
 <p>Then let’s create a generator network, that turns latent vectors into
 outputs of shape <code>(28, 28, 1)</code> (representing MNIST
 digits):</p>
-<div class="sourceCode" id="cb23"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb22"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">latent_dim</span> <span class="op">&lt;-</span> <span class="fl">128L</span></span>
 <span></span>
 <span><span class="va">generator</span> <span class="op">&lt;-</span></span>
@@ -629,7 +626,7 @@ digits):</p>
 <span><span class="co">## <span style="font-weight: bold;"> Non-trainable params: </span><span style="color: #00AF00;">0</span> (0.00 B)</span></span></code></pre>
 <p>Here’s the key bit: the training loop. As you can see it is quite
 straightforward. The training step function only takes 17 lines.</p>
-<div class="sourceCode" id="cb25"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb24"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Instantiate one optimizer for the discriminator and another for the generator.</span></span>
 <span><span class="va">d_optimizer</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/optimizer_adam.html">optimizer_adam</a></span><span class="op">(</span>learning_rate <span class="op">=</span> <span class="fl">0.0003</span><span class="op">)</span></span>
 <span><span class="va">g_optimizer</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/optimizer_adam.html">optimizer_adam</a></span><span class="op">(</span>learning_rate <span class="op">=</span> <span class="fl">0.0004</span><span class="op">)</span></span>
@@ -694,7 +691,7 @@ straightforward. The training step function only takes 17 lines.</p>
 batches of images.</p>
 <p>Since our discriminator and generator are convnets, you’re going to
 want to run this code on a GPU.</p>
-<div class="sourceCode" id="cb26"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb25"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Prepare the dataset. We use both the training &amp; test MNIST digits.</span></span>
 <span><span class="va">batch_size</span> <span class="op">&lt;-</span> <span class="fl">64</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="va">x_train</span>, <span class="va">.</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="va">x_test</span>, <span class="va">.</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="../reference/multi-assign.html">%&lt;-%</a></span> <span class="fu"><a href="../reference/dataset_mnist.html">dataset_mnist</a></span><span class="op">(</span><span class="op">)</span></span>
@@ -740,10 +737,10 @@ want to run this code on a GPU.</p>
 <span>  <span class="op">}</span></span>
 <span><span class="op">}</span></span></code></pre></div>
 <pre><code><span><span class="co">## Start epoch:  1</span></span>
-<span><span class="co">## discriminator loss at step 200: 0.59</span></span>
-<span><span class="co">## adversarial loss at step 200: 0.91</span></span>
-<span><span class="co">## discriminator loss at step 400: 0.43</span></span>
-<span><span class="co">## adversarial loss at step 400: 1.35</span></span></code></pre>
+<span><span class="co">## discriminator loss at step 200: 0.60</span></span>
+<span><span class="co">## adversarial loss at step 200: 0.85</span></span>
+<span><span class="co">## discriminator loss at step 400: 0.56</span></span>
+<span><span class="co">## adversarial loss at step 400: 1.00</span></span></code></pre>
 <p>That’s it! You’ll get nice-looking fake MNIST digits after just ~30s
 of training on a GPU.</p>
 </div>

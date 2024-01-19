@@ -50,12 +50,6 @@ get_model <- function() {
 }
 
 model <- get_model()
-tf_config()
-```
-
-```
-## TensorFlow v2.15.0 (~/.virtualenvs/r-keras/lib/python3.11/site-packages/keras)
-## Python v3.11 (~/.virtualenvs/r-keras/bin/python)
 ```
 
 Let's train it using mini-batch gradient with a custom training loop.
@@ -151,7 +145,7 @@ for (epoch in seq_len(epochs)) {
       cat(sprintf(
         "Training loss (for one batch) at step %d: %.4f\n", step, loss_value
       ))
-      cat(sprintf("Seen so far: %d samples \n", (step * batch_size)))
+      cat(sprintf("Seen so far: %d samples \n", step * batch_size))
     }
   }
 }
@@ -286,7 +280,7 @@ Sys.time() - time
 ```
 
 ```
-## Time difference of 25.65498 secs
+## Time difference of 24.82931 secs
 ```
 
 ## Speeding-up your training step with `tf_function`
@@ -393,7 +387,7 @@ Sys.time() - time
 ```
 
 ```
-## Time difference of 3.191403 secs
+## Time difference of 2.997126 secs
 ```
 
 Much faster, isn't it?
@@ -485,7 +479,7 @@ A GAN training loop looks like this:
 as real.
 
 For a much more detailed overview of how GANs works, see
-[Deep Learning with Python](https://www.manning.com/books/deep-learning-with-python).
+[Deep Learning with R](https://www.manning.com/books/deep-learning-with-r-second-edition).
 
 Let's implement this training loop. First, create the discriminator meant to classify
 fake vs real digits:
@@ -715,10 +709,10 @@ for (epoch in seq_len(epochs)) {
 
 ```
 ## Start epoch:  1
-## discriminator loss at step 200: 0.59
-## adversarial loss at step 200: 0.91
-## discriminator loss at step 400: 0.43
-## adversarial loss at step 400: 1.35
+## discriminator loss at step 200: 0.60
+## adversarial loss at step 200: 0.85
+## discriminator loss at step 400: 0.56
+## adversarial loss at step 400: 1.00
 ```
 
 That's it! You'll get nice-looking fake MNIST digits after just ~30s of training

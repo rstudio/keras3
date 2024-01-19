@@ -49,6 +49,11 @@ if(!"source:tools/translate-tools.R" %in% search()) envir::attach_source("tools/
 # TODO: remove usage of all.equal(<pyobj>, <pyobj>) in examples/code,
 #       export a better way.
 #
+# TODO: pack_x_y_sample_weight() to return an unconverted py tuple?
+#       or just remove pack_x_y_sample_weight/unpack_x_y_sample_weight from the namespace?
+#       No real utility in R since zeallot supports:
+#         c(x, y = NULL, sample_weight = NULL) %<-% data
+
 # TODO: custom_metric -> metric_custom() / loss_custom() / constraint_custom()
 #                        metric_lambda() / loss_lambda() / constraint_lambda()
 # TODO: CallbackList() (1 based) and MetricList() wrappers
@@ -123,6 +128,8 @@ if(!"source:tools/translate-tools.R" %in% search()) envir::attach_source("tools/
 # TODO: update application_preprocess_inputs man page: list the models for
 #       which it's a "no-op" or "identity" function because the preprocessing
 #       step is on the graph already.
+
+# TODO: R generator func should be passable to adapt(layer_feature_space(), <r_generator>)
 
 # TODO: c.keras_shape <- function(...){}
 #

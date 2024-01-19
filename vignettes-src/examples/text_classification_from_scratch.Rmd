@@ -26,6 +26,7 @@ options(conflicts.policy = "strict")
 library(tensorflow)
 library(tfdatasets)
 library(keras3, mask.ok = c("shape", "set_random_seed"))
+use_virtualenv("r-keras")
 ```
 
 
@@ -147,9 +148,9 @@ In particular, we remove `<br />` tags.
 # standardizer (which doesn't strip HTML). Because of this, we will need to
 # create a custom standardization function.
 custom_standardization_fn <- function(string_tensor) {
-  string_tensor %>%
-    tf$strings$lower() %>% # convert to all lowercase
-    tf$strings$regex_replace("<br />", " ") %>% # remove '<br />' HTML tag
+  string_tensor |>
+    tf$strings$lower() |> # convert to all lowercase
+    tf$strings$regex_replace("<br />", " ") |> # remove '<br />' HTML tag
     tf$strings$regex_replace("[[:punct:]]", "") # remove punctuation
 }
 
@@ -167,10 +168,10 @@ sequence_length <- 500
 # We also set an explicit maximum sequence length, since the CNNs later in our
 # model won't support ragged sequences.
 vectorize_layer <- layer_text_vectorization(
-    standardize = custom_standardization_fn,
-    max_tokens = max_features,
-    output_mode = "int",
-    output_sequence_length = sequence_length,
+  standardize = custom_standardization_fn,
+  max_tokens = max_features,
+  output_mode = "int",
+  output_sequence_length = sequence_length,
 )
 
 # Now that the vectorize_layer has been created, call `adapt` on a text-only
@@ -178,10 +179,10 @@ vectorize_layer <- layer_text_vectorization(
 # datasets this means you're not keeping spare copies of the dataset in memory.
 
 # Let's make a text-only dataset (no labels):
-text_ds <- raw_train_ds %>%
-  dataset_map(function(x, y) x)
+text_ds <- raw_train_ds |>
+  dataset_map(\(x, y) x)
 # Let's call `adapt`:
-vectorize_layer %>% adapt(text_ds)
+vectorize_layer |> adapt(text_ds)
 ```
 
 ## Two options to vectorize the data
@@ -192,8 +193,8 @@ There are 2 ways we can use our text vectorization layer:
  strings, like this:
 
 ```{r}
-x <- layer_input(shape = c(1L), dtype = "string", name = 'text') %>% 
-  vectorize_layer() %>% 
+x <- keras_input(shape = c(1L), dtype = "string", name = 'text') |>
+  vectorize_layer() |>
   layer_embedding(max_features + 1, embedding_dim)
 ```
 
@@ -211,26 +212,26 @@ strings as input, like in the code snippet for option 1 above. This can be done 
 
 ```{r}
 vectorize_text <- function(text, label) {
-  text <- text %>% 
-    tf$expand_dims(-1L) %>% 
+  text <- text |>
+    tf$expand_dims(-1L) |>
     vectorize_layer()
   list(text, label)
 }
 
 # Vectorize the data.
-train_ds <- raw_train_ds %>% dataset_map(vectorize_text)
-val_ds   <- raw_val_ds   %>% dataset_map(vectorize_text)
-test_ds  <- raw_test_ds  %>% dataset_map(vectorize_text)
+train_ds <- raw_train_ds |> dataset_map(vectorize_text)
+val_ds   <- raw_val_ds   |> dataset_map(vectorize_text)
+test_ds  <- raw_test_ds  |> dataset_map(vectorize_text)
 
 # Do async prefetching / buffering of the data for best performance on GPU.
-train_ds <- train_ds %>% 
-  dataset_cache() %>% 
+train_ds <- train_ds |>
+  dataset_cache() |>
   dataset_prefetch(buffer_size = 10)
-val_ds <- val_ds %>%
-  dataset_cache() %>%
+val_ds <- val_ds |>
+  dataset_cache() |>
   dataset_prefetch(buffer_size = 10)
-test_ds <- test_ds %>%
-  dataset_cache() %>%
+test_ds <- test_ds |>
+  dataset_cache() |>
   dataset_prefetch(buffer_size = 10)
 ```
 
@@ -240,20 +241,20 @@ We choose a simple 1D convnet starting with an `Embedding` layer.
 
 ```{r}
 # A integer input for vocab indices.
-inputs <- layer_input(shape = list(NULL), dtype = "int64")
+inputs <- keras_input(shape = c(NA), dtype = "int64")
 
-predictions <- inputs %>%
+predictions <- inputs |>
   # Next, we add a layer to map those vocab indices into a space of dimensionality
   # 'embedding_dim'.
-  layer_embedding(max_features, embedding_dim) %>% 
-  layer_dropout(0.5) %>% 
+  layer_embedding(max_features, embedding_dim) |>
+  layer_dropout(0.5) |>
   # Conv1D + global max pooling
-  layer_conv_1d(128, 7, padding = "valid", activation = "relu", strides = 3) %>% 
-  layer_conv_1d(128, 7, padding = "valid", activation = "relu", strides = 3) %>% 
-  layer_global_max_pooling_1d() %>% 
+  layer_conv_1d(128, 7, padding = "valid", activation = "relu", strides = 3) |>
+  layer_conv_1d(128, 7, padding = "valid", activation = "relu", strides = 3) |>
+  layer_global_max_pooling_1d() |>
   # We add a vanilla hidden layer:
-  layer_dense(128, activation = "relu") %>% 
-  layer_dropout(0.5) %>% 
+  layer_dense(128, activation = "relu") |>
+  layer_dropout(0.5) |>
   # We project onto a single unit output layer, and squash it with a sigmoid:
   layer_dense(1, activation = "sigmoid", name = "predictions")
 
@@ -262,11 +263,9 @@ model <- keras_model(inputs, predictions)
 summary(model)
 
 # Compile the model with binary crossentropy loss and an adam optimizer.
-model %>% compile(
-  loss = "binary_crossentropy", 
-  optimizer = "adam", 
-  metrics = "accuracy"
-)
+model |> compile(loss = "binary_crossentropy",
+                 optimizer = "adam",
+                 metrics = "accuracy")
 ```
 
 ## Train the model
@@ -275,13 +274,13 @@ model %>% compile(
 epochs <- 3
 
 # Fit the model using the train and test datasets.
-model %>% fit(train_ds, validation_data = val_ds, epochs = epochs)
+model |> fit(train_ds, validation_data = val_ds, epochs = epochs)
 ```
 
 ## Evaluate the model on the test set
 
 ```{r}
-model %>% evaluate(test_ds)
+model |> evaluate(test_ds)
 ```
 
 ## Make an end-to-end model
@@ -291,7 +290,7 @@ create a new model (using the weights we just trained):
 
 ```{r}
 # A string input
-inputs <- layer_input(shape = c(1), dtype = "string")
+inputs <- keras_input(shape = c(1), dtype = "string")
 # Turn strings into vocab indices
 indices <- vectorize_layer(inputs)
 # Turn vocab indices into predictions
@@ -299,12 +298,12 @@ outputs <- model(indices)
 
 # Our end to end model
 end_to_end_model <- keras_model(inputs, outputs)
-end_to_end_model %>% compile(
-    loss = "binary_crossentropy",
-    optimizer = "adam",
-    metrics = c("accuracy")
+end_to_end_model |> compile(
+  loss = "binary_crossentropy",
+  optimizer = "adam",
+  metrics = c("accuracy")
 )
 
 # Test it with `raw_test_ds`, which yields raw strings
-end_to_end_model %>% evaluate(raw_test_ds)
+end_to_end_model |> evaluate(raw_test_ds)
 ```

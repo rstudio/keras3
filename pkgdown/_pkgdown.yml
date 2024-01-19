@@ -58,7 +58,7 @@ navbar:
         - text: "Training & evaluation with the built-in methods"
           href: articles/training_with_built_in_methods.html
 
-        - text: "Writing Your Own Callbacks"
+        - text: "Writing your own callbacks"
           href: articles/writing_your_own_callbacks.html
 
         - text: "Making new layers and models via subclassing"

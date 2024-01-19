@@ -726,7 +726,7 @@ it the "Functional API"):
 # The functional API focused on defining per-sample transformations.
 # The model we create will automatically batch the per-sample transformations,
 # so that it can be called on batches of data.
-inputs <- layer_input(shape = 16, dtype = "float32")
+inputs <- keras_input(shape = 16, dtype = "float32")
 
 # We call layers on these "type" objects
 # and they return updated types (new shapes/dtypes).
@@ -784,7 +784,7 @@ below. It leverages the built-in training infrastructure to implement the MNIST
 example above.
 
 ```{r}
-inputs <- layer_input(shape = 784, dtype="float32")
+inputs <- keras_input(shape = 784, dtype="float32")
 outputs <- inputs %>%
   layer_dense(units = 32, activation = "relu") %>%
   layer_dense(units = 32, activation = "relu") %>%
@@ -850,7 +850,7 @@ CustomModel <- new_model_class(
   })
 )
 
-inputs <- layer_input(shape = 784, dtype="float32")
+inputs <- keras_input(shape = 784, dtype="float32")
 outputs <- inputs %>%
   layer_dense(units = 32, activation = "relu") %>%
   layer_dense(units = 32, activation = "relu") %>%
@@ -1041,7 +1041,7 @@ input_dim <- 784
 classes <- 10
 
 # This is the main network we'll actually use to predict labels.
-inputs <- layer_input(shape = input_dim)
+inputs <- keras_input(shape = input_dim)
 dense1 <- layer_dense(units = 64, activation = "relu")
 dense1$built <- TRUE
 

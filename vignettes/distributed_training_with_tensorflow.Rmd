@@ -133,8 +133,8 @@ get_compiled_model <- function() {
   model
 }
 
-get_dataset <- function() {
-  batch_size <- 64
+get_dataset <- function(batch_size = 64) {
+
   c(c(x_train, y_train), c(x_test, y_test)) %<-% dataset_mnist()
   x_train <- array_reshape(x_train, c(-1, 784))
   x_test <- array_reshape(x_test, c(-1, 784))
@@ -181,17 +181,19 @@ with(strategy$scope(), {
   model <- get_compiled_model()
 
   c(train_dataset, val_dataset, test_dataset) %<-% get_dataset()
+
+  # Train the model on all available devices.
   model |> fit(train_dataset, epochs = 2, validation_data = val_dataset)
+
   # Test the model on all available devices.
   model |> evaluate(test_dataset)
-  # Train the model on all available devices.
 
 })
 ```
 
 ```
 ## Epoch 1/2
-## 782/782 - 6s - 8ms/step - loss: 2.9199 - sparse_categorical_accuracy: 0.8580 - val_loss: 0.9377 - val_sparse_categorical_accuracy: 0.8986
+## 782/782 - 7s - 9ms/step - loss: 2.9199 - sparse_categorical_accuracy: 0.8580 - val_loss: 0.9377 - val_sparse_categorical_accuracy: 0.8986
 ## Epoch 2/2
 ## 782/782 - 3s - 4ms/step - loss: 0.5622 - sparse_categorical_accuracy: 0.9254 - val_loss: 0.7505 - val_sparse_categorical_accuracy: 0.9044
 ## 157/157 - 0s - 3ms/step - loss: 0.8129 - sparse_categorical_accuracy: 0.9042
@@ -272,7 +274,7 @@ run_training(epochs = 1)
 ```
 
 ```
-## 782/782 - 4s - 5ms/step - loss: 0.1561 - sparse_categorical_accuracy: 0.9595 - val_loss: 0.2068 - val_sparse_categorical_accuracy: 0.9544
+## 782/782 - 4s - 5ms/step - loss: 0.5186 - sparse_categorical_accuracy: 0.9351 - val_loss: 0.7081 - val_sparse_categorical_accuracy: 0.9184
 ```
 
 ```r
@@ -281,7 +283,7 @@ run_training(epochs = 1)
 ```
 
 ```
-## 782/782 - 4s - 5ms/step - loss: 0.1273 - sparse_categorical_accuracy: 0.9658 - val_loss: 0.3525 - val_sparse_categorical_accuracy: 0.9342
+## 782/782 - 4s - 5ms/step - loss: 0.3189 - sparse_categorical_accuracy: 0.9476 - val_loss: 0.5234 - val_sparse_categorical_accuracy: 0.9382
 ```
 
 ## `tf$data` performance tips

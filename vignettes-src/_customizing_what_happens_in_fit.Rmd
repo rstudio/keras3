@@ -114,7 +114,7 @@ Let's try this out:
 
 ```{r}
 # Construct and compile an instance of CustomModel
-inputs <- layer_input(shape = 32)
+inputs <- keras_input(shape = 32)
 outputs <- layer_dense(inputs, 1)
 
 model <- custom_model(inputs, outputs)
@@ -188,7 +188,7 @@ custom_model <- new_model_class(
 )
 
 # Construct an instance of CustomModel
-inputs <- layer_input(shape = 32)
+inputs <- keras_input(shape = 32)
 outputs <- layer_dense(inputs, 1)
 model <- custom_model(inputs, outputs)
 
@@ -249,7 +249,7 @@ custom_model <- new_model_class(
 
 
 # Construct and compile an instance of CustomModel
-inputs <- layer_input(shape = 32)
+inputs <- keras_input(shape = 32)
 outputs <- layer_dense(inputs, units = 1)
 model <- custom_model(inputs, outputs)
 model %>% compile(optimizer="adam", loss="mse", metrics="mae")
@@ -291,7 +291,7 @@ custom_model <- new_model_class(
 )
 
 # Construct an instance of CustomModel
-inputs <- layer_input(shape = 32)
+inputs <- keras_input(shape = 32)
 outputs <- layer_dense(inputs, 1)
 model <- custom_model(inputs, outputs)
 model %>% compile(loss = "mse", metrics = "mae")

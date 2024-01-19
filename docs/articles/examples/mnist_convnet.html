@@ -53,7 +53,7 @@
     <a class="dropdown-item" href="../../articles/sequential_model.html">Sequential Model</a>
     <h6 class="dropdown-header" data-toc-skip>Extending and customizing</h6>
     <a class="dropdown-item" href="../../articles/training_with_built_in_methods.html">Training &amp; evaluation with the built-in methods</a>
-    <a class="dropdown-item" href="../../articles/writing_your_own_callbacks.html">Writing Your Own Callbacks</a>
+    <a class="dropdown-item" href="../../articles/writing_your_own_callbacks.html">Writing your own callbacks</a>
     <a class="dropdown-item" href="../../articles/making_new_layers_and_models_via_subclassing.html">Making new layers and models via subclassing</a>
     <a class="dropdown-item" href="../../articles/writing_a_custom_training_loop_in_tensorflow.html">Writing a training loop from scratch in TensorFlow</a>
     <h6 class="dropdown-header" data-toc-skip>Other topics</h6>
@@ -143,13 +143,13 @@
 </h2>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">model</span> <span class="op">&lt;-</span> <span class="fu"><a href="../../reference/keras_model_sequential.html">keras_model_sequential</a></span><span class="op">(</span>input_shape <span class="op">=</span> <span class="va">input_shape</span><span class="op">)</span></span>
-<span><span class="va">model</span> <span class="op"><a href="../../reference/pipe.html">%&gt;%</a></span></span>
-<span>  <span class="fu"><a href="../../reference/layer_conv_2d.html">layer_conv_2d</a></span><span class="op">(</span>filters <span class="op">=</span> <span class="fl">32</span>, kernel_size <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">3</span>, <span class="fl">3</span><span class="op">)</span>, activation <span class="op">=</span> <span class="st">"relu"</span><span class="op">)</span> <span class="op"><a href="../../reference/pipe.html">%&gt;%</a></span></span>
-<span>  <span class="fu"><a href="../../reference/layer_max_pooling_2d.html">layer_max_pooling_2d</a></span><span class="op">(</span>pool_size <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">2</span>, <span class="fl">2</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="../../reference/pipe.html">%&gt;%</a></span></span>
-<span>  <span class="fu"><a href="../../reference/layer_conv_2d.html">layer_conv_2d</a></span><span class="op">(</span>filters <span class="op">=</span> <span class="fl">64</span>, kernel_size <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">3</span>, <span class="fl">3</span><span class="op">)</span>, activation <span class="op">=</span> <span class="st">"relu"</span><span class="op">)</span> <span class="op"><a href="../../reference/pipe.html">%&gt;%</a></span></span>
-<span>  <span class="fu"><a href="../../reference/layer_max_pooling_2d.html">layer_max_pooling_2d</a></span><span class="op">(</span>pool_size <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">2</span>, <span class="fl">2</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="../../reference/pipe.html">%&gt;%</a></span></span>
-<span>  <span class="fu"><a href="../../reference/layer_flatten.html">layer_flatten</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="../../reference/pipe.html">%&gt;%</a></span></span>
-<span>  <span class="fu"><a href="../../reference/layer_dropout.html">layer_dropout</a></span><span class="op">(</span>rate <span class="op">=</span> <span class="fl">0.5</span><span class="op">)</span> <span class="op"><a href="../../reference/pipe.html">%&gt;%</a></span></span>
+<span><span class="va">model</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu"><a href="../../reference/layer_conv_2d.html">layer_conv_2d</a></span><span class="op">(</span>filters <span class="op">=</span> <span class="fl">32</span>, kernel_size <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">3</span>, <span class="fl">3</span><span class="op">)</span>, activation <span class="op">=</span> <span class="st">"relu"</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu"><a href="../../reference/layer_max_pooling_2d.html">layer_max_pooling_2d</a></span><span class="op">(</span>pool_size <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">2</span>, <span class="fl">2</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu"><a href="../../reference/layer_conv_2d.html">layer_conv_2d</a></span><span class="op">(</span>filters <span class="op">=</span> <span class="fl">64</span>, kernel_size <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">3</span>, <span class="fl">3</span><span class="op">)</span>, activation <span class="op">=</span> <span class="st">"relu"</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu"><a href="../../reference/layer_max_pooling_2d.html">layer_max_pooling_2d</a></span><span class="op">(</span>pool_size <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">2</span>, <span class="fl">2</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu"><a href="../../reference/layer_flatten.html">layer_flatten</a></span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu"><a href="../../reference/layer_dropout.html">layer_dropout</a></span><span class="op">(</span>rate <span class="op">=</span> <span class="fl">0.5</span><span class="op">)</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu"><a href="../../reference/layer_dense.html">layer_dense</a></span><span class="op">(</span>units <span class="op">=</span> <span class="va">num_classes</span>, activation <span class="op">=</span> <span class="st">"softmax"</span><span class="op">)</span></span>
 <span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary</a></span><span class="op">(</span><span class="va">model</span><span class="op">)</span></span></code></pre></div>
@@ -182,60 +182,60 @@
 <code class="sourceCode R"><span><span class="va">batch_size</span> <span class="op">&lt;-</span> <span class="fl">128</span></span>
 <span><span class="va">epochs</span> <span class="op">&lt;-</span> <span class="fl">15</span></span>
 <span></span>
-<span><span class="va">model</span> <span class="op"><a href="../../reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://generics.r-lib.org/reference/compile.html" class="external-link">compile</a></span><span class="op">(</span></span>
+<span><span class="va">model</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://generics.r-lib.org/reference/compile.html" class="external-link">compile</a></span><span class="op">(</span></span>
 <span>  loss <span class="op">=</span> <span class="st">"categorical_crossentropy"</span>,</span>
 <span>  optimizer <span class="op">=</span> <span class="st">"adam"</span>,</span>
 <span>  metrics <span class="op">=</span> <span class="st">"accuracy"</span></span>
 <span><span class="op">)</span></span>
 <span></span>
-<span><span class="va">model</span> <span class="op"><a href="../../reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://generics.r-lib.org/reference/fit.html" class="external-link">fit</a></span><span class="op">(</span></span>
+<span><span class="va">model</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://generics.r-lib.org/reference/fit.html" class="external-link">fit</a></span><span class="op">(</span></span>
 <span>  <span class="va">x_train</span>, <span class="va">y_train</span>,</span>
 <span>  batch_size <span class="op">=</span> <span class="va">batch_size</span>,</span>
 <span>  epochs <span class="op">=</span> <span class="va">epochs</span>,</span>
 <span>  validation_split <span class="op">=</span> <span class="fl">0.1</span></span>
 <span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">## Epoch 1/15</span></span>
-<span><span class="co">## 422/422 - 5s - 12ms/step - accuracy: 0.8845 - loss: 0.3815 - val_accuracy: 0.9782 - val_loss: 0.0810</span></span>
+<span><span class="co">## 422/422 - 6s - 15ms/step - accuracy: 0.8845 - loss: 0.3815 - val_accuracy: 0.9783 - val_loss: 0.0808</span></span>
 <span><span class="co">## Epoch 2/15</span></span>
-<span><span class="co">## 422/422 - 1s - 2ms/step - accuracy: 0.9646 - loss: 0.1152 - val_accuracy: 0.9862 - val_loss: 0.0549</span></span>
+<span><span class="co">## 422/422 - 1s - 2ms/step - accuracy: 0.9645 - loss: 0.1152 - val_accuracy: 0.9862 - val_loss: 0.0550</span></span>
 <span><span class="co">## Epoch 3/15</span></span>
-<span><span class="co">## 422/422 - 1s - 2ms/step - accuracy: 0.9738 - loss: 0.0838 - val_accuracy: 0.9875 - val_loss: 0.0455</span></span>
+<span><span class="co">## 422/422 - 1s - 2ms/step - accuracy: 0.9737 - loss: 0.0838 - val_accuracy: 0.9873 - val_loss: 0.0457</span></span>
 <span><span class="co">## Epoch 4/15</span></span>
-<span><span class="co">## 422/422 - 1s - 2ms/step - accuracy: 0.9781 - loss: 0.0690 - val_accuracy: 0.9897 - val_loss: 0.0418</span></span>
+<span><span class="co">## 422/422 - 1s - 2ms/step - accuracy: 0.9783 - loss: 0.0691 - val_accuracy: 0.9893 - val_loss: 0.0418</span></span>
 <span><span class="co">## Epoch 5/15</span></span>
-<span><span class="co">## 422/422 - 1s - 2ms/step - accuracy: 0.9812 - loss: 0.0610 - val_accuracy: 0.9900 - val_loss: 0.0375</span></span>
+<span><span class="co">## 422/422 - 1s - 2ms/step - accuracy: 0.9811 - loss: 0.0609 - val_accuracy: 0.9902 - val_loss: 0.0374</span></span>
 <span><span class="co">## Epoch 6/15</span></span>
-<span><span class="co">## 422/422 - 1s - 2ms/step - accuracy: 0.9821 - loss: 0.0563 - val_accuracy: 0.9910 - val_loss: 0.0360</span></span>
+<span><span class="co">## 422/422 - 1s - 2ms/step - accuracy: 0.9820 - loss: 0.0564 - val_accuracy: 0.9913 - val_loss: 0.0360</span></span>
 <span><span class="co">## Epoch 7/15</span></span>
-<span><span class="co">## 422/422 - 1s - 2ms/step - accuracy: 0.9851 - loss: 0.0488 - val_accuracy: 0.9918 - val_loss: 0.0328</span></span>
+<span><span class="co">## 422/422 - 1s - 2ms/step - accuracy: 0.9848 - loss: 0.0488 - val_accuracy: 0.9920 - val_loss: 0.0326</span></span>
 <span><span class="co">## Epoch 8/15</span></span>
-<span><span class="co">## 422/422 - 1s - 2ms/step - accuracy: 0.9846 - loss: 0.0485 - val_accuracy: 0.9917 - val_loss: 0.0331</span></span>
+<span><span class="co">## 422/422 - 1s - 2ms/step - accuracy: 0.9844 - loss: 0.0485 - val_accuracy: 0.9918 - val_loss: 0.0334</span></span>
 <span><span class="co">## Epoch 9/15</span></span>
-<span><span class="co">## 422/422 - 1s - 2ms/step - accuracy: 0.9859 - loss: 0.0441 - val_accuracy: 0.9918 - val_loss: 0.0318</span></span>
+<span><span class="co">## 422/422 - 1s - 2ms/step - accuracy: 0.9860 - loss: 0.0441 - val_accuracy: 0.9922 - val_loss: 0.0317</span></span>
 <span><span class="co">## Epoch 10/15</span></span>
-<span><span class="co">## 422/422 - 1s - 2ms/step - accuracy: 0.9867 - loss: 0.0406 - val_accuracy: 0.9927 - val_loss: 0.0317</span></span>
+<span><span class="co">## 422/422 - 1s - 2ms/step - accuracy: 0.9868 - loss: 0.0406 - val_accuracy: 0.9923 - val_loss: 0.0320</span></span>
 <span><span class="co">## Epoch 11/15</span></span>
-<span><span class="co">## 422/422 - 1s - 2ms/step - accuracy: 0.9875 - loss: 0.0389 - val_accuracy: 0.9923 - val_loss: 0.0316</span></span>
+<span><span class="co">## 422/422 - 1s - 2ms/step - accuracy: 0.9875 - loss: 0.0389 - val_accuracy: 0.9920 - val_loss: 0.0315</span></span>
 <span><span class="co">## Epoch 12/15</span></span>
-<span><span class="co">## 422/422 - 1s - 2ms/step - accuracy: 0.9881 - loss: 0.0370 - val_accuracy: 0.9927 - val_loss: 0.0304</span></span>
+<span><span class="co">## 422/422 - 1s - 2ms/step - accuracy: 0.9881 - loss: 0.0371 - val_accuracy: 0.9925 - val_loss: 0.0304</span></span>
 <span><span class="co">## Epoch 13/15</span></span>
-<span><span class="co">## 422/422 - 1s - 2ms/step - accuracy: 0.9879 - loss: 0.0362 - val_accuracy: 0.9930 - val_loss: 0.0279</span></span>
+<span><span class="co">## 422/422 - 1s - 2ms/step - accuracy: 0.9880 - loss: 0.0361 - val_accuracy: 0.9933 - val_loss: 0.0282</span></span>
 <span><span class="co">## Epoch 14/15</span></span>
-<span><span class="co">## 422/422 - 1s - 2ms/step - accuracy: 0.9891 - loss: 0.0334 - val_accuracy: 0.9930 - val_loss: 0.0292</span></span>
+<span><span class="co">## 422/422 - 1s - 2ms/step - accuracy: 0.9889 - loss: 0.0335 - val_accuracy: 0.9932 - val_loss: 0.0288</span></span>
 <span><span class="co">## Epoch 15/15</span></span>
-<span><span class="co">## 422/422 - 1s - 2ms/step - accuracy: 0.9898 - loss: 0.0311 - val_accuracy: 0.9928 - val_loss: 0.0292</span></span></code></pre>
+<span><span class="co">## 422/422 - 1s - 2ms/step - accuracy: 0.9899 - loss: 0.0310 - val_accuracy: 0.9930 - val_loss: 0.0293</span></span></code></pre>
 </div>
 <div class="section level2">
 <h2 id="evaluate-the-trained-model">Evaluate the trained model<a class="anchor" aria-label="anchor" href="#evaluate-the-trained-model"></a>
 </h2>
 <div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">score</span> <span class="op">&lt;-</span> <span class="va">model</span> <span class="op"><a href="../../reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://rdrr.io/pkg/tensorflow/man/evaluate.html" class="external-link">evaluate</a></span><span class="op">(</span><span class="va">x_test</span>, <span class="va">y_test</span>, verbose<span class="op">=</span><span class="fl">0</span><span class="op">)</span></span>
+<code class="sourceCode R"><span><span class="va">score</span> <span class="op">&lt;-</span> <span class="va">model</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://rdrr.io/pkg/tensorflow/man/evaluate.html" class="external-link">evaluate</a></span><span class="op">(</span><span class="va">x_test</span>, <span class="va">y_test</span>, verbose<span class="op">=</span><span class="fl">0</span><span class="op">)</span></span>
 <span><span class="va">score</span></span></code></pre></div>
 <pre><code><span><span class="co">## $accuracy</span></span>
-<span><span class="co">## [1] 0.9907</span></span>
+<span><span class="co">## [1] 0.9912</span></span>
 <span><span class="co">##</span></span>
 <span><span class="co">## $loss</span></span>
-<span><span class="co">## [1] 0.02580518</span></span></code></pre>
+<span><span class="co">## [1] 0.02529005</span></span></code></pre>
 </div>
   </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>
     </nav></aside>
