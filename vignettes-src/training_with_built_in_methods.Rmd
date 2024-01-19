@@ -54,7 +54,7 @@ Let's consider the following model (here, we build in with the Functional API, b
 could be a Sequential model or a subclassed model as well):
 
 ```{r}
-inputs <- layer_input(shape = 784, name="digits")
+inputs <- keras_input(shape = 784, name="digits")
 outputs <- inputs |>
   layer_dense(units = 64, activation = "relu", name = "dense_1") |>
   layer_dense(units = 64, activation = "relu", name = "dense_2") |>
@@ -173,7 +173,7 @@ call them several times across different examples in this guide.
 
 ```{r}
 get_uncompiled_model <- function() {
-  inputs <- layer_input(shape = 784, name = "digits")
+  inputs <- keras_input(shape = 784, name = "digits")
   outputs <- inputs |>
     layer_dense(units = 64, activation = "relu", name = "dense_1") |>
     layer_dense(units = 64, activation = "relu", name = "dense_2") |>

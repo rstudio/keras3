@@ -39,7 +39,7 @@ Let's consider a simple MNIST model:
 
 ```{r}
 get_model <- function() {
-  inputs <- layer_input(shape = 784, name = "digits")
+  inputs <- keras_input(shape = 784, name = "digits")
   outputs <- inputs |>
     layer_dense(units = 64, activation = "relu") |>
     layer_dense(units = 64, activation = "relu") |>
@@ -335,7 +335,7 @@ layer_activity_regularization <- Layer(
 Let's build a really simple model that uses it:
 
 ```{r}
-inputs <- layer_input(shape = 784, name = "digits")
+inputs <- keras_input(shape = 784, name = "digits")
 outputs <- inputs |>
   layer_dense(units = 64, activation = "relu") |>
   layer_activity_regularization() |>

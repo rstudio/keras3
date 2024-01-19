@@ -150,7 +150,7 @@ There are two ways you could be using preprocessing layers:
 **Option 1:** Make them part of the model, like this:
 
 ```{r, eval = FALSE}
-inputs <- layer_input(shape=input_shape)
+inputs <- keras_input(shape=input_shape)
 x <- preprocessing_layer(inputs)
 outputs <- rest_of_the_model(x)
 model <- keras_model(inputs, outputs)
@@ -216,7 +216,7 @@ Simply instantiate a new model that chains
 your preprocessing layers and your training model:
 
 ```{r, eval = FALSE}
-inputs <- layer_input(shape=input_shape)
+inputs <- keras_input(shape=input_shape)
 x <- preprocessing_layer(inputs)
 outputs <- training_model(x)
 inference_model <- keras_model(inputs, outputs)
@@ -233,7 +233,7 @@ and called either inside or before the model as discussed above.
 
 ```{r, eval = FALSE}
 with (strategy$scope(), {
-  inputs <- layer_input(shape=input_shape)
+  inputs <- keras_input(shape=input_shape)
   preprocessing_layer = layer_hashing(10)
   dense_layer = tf.keras.layers.Dense(16)
 })
@@ -268,7 +268,7 @@ train_dataset <- tfdatasets::tensor_slices_dataset(list(x_train, y_train)) %>%
   tfdatasets::dataset_map(function(x, y) list(data_augmentation(x), y))
 
 # Create a model and train it on the augmented image data
-inputs <- layer_input(shape=input_shape)
+inputs <- keras_input(shape=input_shape)
 x <- layer_rescaling(inputs, 1.0 / 255)# Rescale inputs
 outputs <- application_resnet50(  # Add the rest of the model
     weights=NULL, input_shape=input_shape, classes=classes
@@ -296,7 +296,7 @@ normalizer <- layer_normalization()
 normalizer %>% adapt(x_train)
 
 # Create a model that include the normalization layer
-inputs <- layer_input(shape=input_shape)
+inputs <- keras_input(shape=input_shape)
 x <- normalizer(inputs)
 outputs <- layer_dense(x, classes, activation="softmax")
 model <- keras_model(inputs, outputs)
@@ -398,7 +398,7 @@ text_vectorizer(rbind("The Brain is deeper than the sea"))
 
 
 # Create a simple model
-inputs <- layer_input(shape=shape(NULL), dtype="int64")
+inputs <- keras_input(shape=shape(NULL), dtype="int64")
 outputs <- inputs %>%
   layer_embedding(input_dim=text_vectorizer$vocabulary_size(), output_dim=16) %>%
   layer_gru(units=8) %>%
@@ -421,7 +421,7 @@ model %>% compile(optimizer="rmsprop", loss="mse")
 model %>% fit(train_dataset)
 
 # For inference, you can export a model that accepts strings as input
-inputs <- layer_input(shape = 1, dtype="string")
+inputs <- keras_input(shape = 1, dtype="string")
 x <- text_vectorizer(inputs)
 outputs <- model(x)
 end_to_end_model <- keras_model(inputs, outputs)
@@ -462,7 +462,7 @@ text_vectorizer(rbind("The Brain is deeper than the sea"))
 
 
 # Create a simple model
-inputs <- layer_input(shape = text_vectorizer$vocabulary_size())
+inputs <- keras_input(shape = text_vectorizer$vocabulary_size())
 outputs <- layer_dense(inputs, 1)
 model <- keras_model(inputs, outputs)
 
@@ -481,7 +481,7 @@ model %>% compile(optimizer="rmsprop", loss="mse")
 model %>% fit(train_dataset, epochs = 2)
 
 # For inference, you can export a model that accepts strings as input
-inputs = layer_input(shape=1, dtype="string")
+inputs = keras_input(shape=1, dtype="string")
 x <- text_vectorizer(inputs)
 outputs <- model(x)
 end_to_end_model <- keras_model(inputs, outputs)
@@ -514,7 +514,7 @@ text_vectorizer %>% adapt(adapt_data)
 text_vectorizer(rbind("The Brain is deeper than the sea"))
 
 # Create a simple model
-inputs <- layer_input(shape = text_vectorizer$vocabulary_size())
+inputs <- keras_input(shape = text_vectorizer$vocabulary_size())
 outputs <- layer_dense(inputs, 1)
 model <- keras_model(inputs, outputs)
 
@@ -534,7 +534,7 @@ model %>% compile(optimizer="rmsprop", loss="mse")
 model %>% fit(train_dataset)
 
 # For inference, you can export a model that accepts strings as input
-inputs = layer_input(shape=1, dtype="string")
+inputs = keras_input(shape=1, dtype="string")
 x <- text_vectorizer(inputs)
 outputs <- model(x)
 end_to_end_model <- keras_model(inputs, outputs)

@@ -132,7 +132,7 @@ get_dataset <- function(batch_size, img_size, input_img_paths, target_img_paths,
 ```{r}
 get_model <- function(img_size, num_classes) {
   
-  inputs <- layer_input(shape = c(img_size, 3))
+  inputs <- keras_input(shape = c(img_size, 3))
   
   ### [First half of the network: downsampling inputs] ###
   

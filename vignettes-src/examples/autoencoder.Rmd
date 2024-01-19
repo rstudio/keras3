@@ -75,7 +75,7 @@ display(train_data, noisy_train_data)
 We are going to use the Functional API to build our convolutional autoencoder.
 
 ```{r}
-input <- layer_input(shape=c(28, 28, 1))
+input <- keras_input(shape=c(28, 28, 1))
 
 # Encoder
 enc <- input %>%

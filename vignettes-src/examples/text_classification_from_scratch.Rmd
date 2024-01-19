@@ -192,7 +192,7 @@ There are 2 ways we can use our text vectorization layer:
  strings, like this:
 
 ```{r}
-x <- layer_input(shape = c(1L), dtype = "string", name = 'text') %>% 
+x <- keras_input(shape = c(1L), dtype = "string", name = 'text') %>% 
   vectorize_layer() %>% 
   layer_embedding(max_features + 1, embedding_dim)
 ```
@@ -240,7 +240,7 @@ We choose a simple 1D convnet starting with an `Embedding` layer.
 
 ```{r}
 # A integer input for vocab indices.
-inputs <- layer_input(shape = list(NULL), dtype = "int64")
+inputs <- keras_input(shape = list(NULL), dtype = "int64")
 
 predictions <- inputs %>%
   # Next, we add a layer to map those vocab indices into a space of dimensionality
@@ -291,7 +291,7 @@ create a new model (using the weights we just trained):
 
 ```{r}
 # A string input
-inputs <- layer_input(shape = c(1), dtype = "string")
+inputs <- keras_input(shape = c(1), dtype = "string")
 # Turn strings into vocab indices
 indices <- vectorize_layer(inputs)
 # Turn vocab indices into predictions

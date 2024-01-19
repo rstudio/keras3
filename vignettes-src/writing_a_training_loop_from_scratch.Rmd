@@ -46,7 +46,7 @@ retrieve using `model.trainable_weights`).
 Let's consider a simple MNIST model:
 
 ```{r}
-inputs <- layer_input(shape = 784, name="digits")
+inputs <- keras_input(shape = 784, name="digits")
 outputs <- inputs %>%
   layer_dense(units = 64, activation = "relu") %>%
   layer_dense(units = 64, activation = "relu") %>%
@@ -158,7 +158,7 @@ the end of each epoch:
 
 ```{r}
 # Get model
-inputs <- layer_input(shape = 784, name="digits")
+inputs <- keras_input(shape = 784, name="digits")
 outputs <- inputs %>%
   layer_dense(units = 64, activation = "relu") %>%
   layer_dense(units = 64, activation = "relu") %>%
@@ -324,7 +324,7 @@ ActivityRegularizationLayer <- new_layer_class(
 Let's build a really simple model that uses it:
 
 ```{r}
-inputs <- layer_input(shape = 784, name="digits")
+inputs <- keras_input(shape = 784, name="digits")
 outputs <- inputs %>%
   layer_dense(units = 64, activation = "relu") %>%
   ActivityRegularizationLayer() %>%

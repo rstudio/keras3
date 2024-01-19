@@ -114,7 +114,7 @@ Here's a simple end-to-end runnable example:
 
 ```{r}
 get_compiled_model <- function() {
-  inputs <- layer_input(shape = 784)
+  inputs <- keras_input(shape = 784)
   outputs <- inputs |>
     layer_dense(units = 256, activation = "relu") |>
     layer_dense(units = 256, activation = "relu") |>
