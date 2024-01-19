@@ -40,13 +40,13 @@ noise <- function(array) {
 display <- function(array1, array2) {
   n <- 2
   indices <- sample.int(dim(array1)[1], n)
-  images1 <- as.array(array1)[indices,,,]
-  images2 <- as.array(array2)[indices,,,]
+  images1 <- as.array(array1)[indices, , , ]
+  images2 <- as.array(array2)[indices, , , ]
   
-  par(mfrow = c(2, n), mar = c(0,0,0,0))
+  par(mfrow = c(2, n), mar = c(0, 0, 0, 0))
   for (i in seq_len(n)) {
-    plot(as.raster(images1[i,,]))
-    plot(as.raster(images2[i,, ]))
+    plot(as.raster(images1[i, , ]))
+    plot(as.raster(images2[i, , ]))
   }
 }
 ```
@@ -75,27 +75,30 @@ display(train_data, noisy_train_data)
 We are going to use the Functional API to build our convolutional autoencoder.
 
 ```{r}
-input <- keras_input(shape=c(28, 28, 1))
+input <- keras_input(shape = c(28, 28, 1))
 
 # Encoder
-enc <- input %>%
-  layer_conv_2d(filters=32, kernel_size=c(3, 3), activation="relu", padding="same") %>%
-  layer_max_pooling_2d(pool_size=c(2, 2), padding="same") %>%
-  layer_conv_2d(filters=32, kernel_size=c(3, 3), activation="relu", padding="same") %>%
-  layer_max_pooling_2d(pool_size=c(2, 2), padding="same")
+enc <- input |>
+  layer_conv_2d(filters = 32, kernel_size = c(3, 3), 
+                activation = "relu", padding = "same") |>
+  layer_max_pooling_2d(pool_size = c(2, 2), padding = "same") |>
+  layer_conv_2d(filters = 32, kernel_size = c(3, 3), 
+                activation = "relu", padding = "same") |>
+  layer_max_pooling_2d(pool_size = c(2, 2), padding = "same")
 
 # Decoder
-dec <- enc %>%
-  layer_conv_2d_transpose(
-    filters=32, kernel_size=c(3, 3), strides = 2, activation="relu", padding="same") %>%
-  layer_conv_2d_transpose(
-    filters=32, kernel_size=c(3, 3), strides = 2, activation="relu", padding="same") %>%
-  layer_conv_2d(filters=1, kernel_size=c(3, 3), activation="sigmoid", padding="same")
+dec <- enc |>
+  layer_conv_2d_transpose(filters = 32, kernel_size = c(3, 3), strides = 2, 
+                          activation = "relu", padding = "same") |>
+  layer_conv_2d_transpose(filters = 32, kernel_size = c(3, 3), strides = 2, 
+                          activation = "relu", padding = "same") |>
+  layer_conv_2d(filters = 1, kernel_size = c(3, 3), 
+                activation = "sigmoid", padding = "same")
 
 # Autoencoder
 autoencoder <- keras_model(input, dec)
-autoencoder %>% compile(optimizer="adam", loss="binary_crossentropy")
-autoencoder %>% summary()
+autoencoder |> compile(optimizer = "adam", loss = "binary_crossentropy")
+autoencoder |> summary()
 ```
 
 Now we can train our autoencoder using `train_data` as both our input data
@@ -103,13 +106,13 @@ and target. Notice we are setting up the validation data using the same
 format.
 
 ```{r}
-autoencoder %>% fit(
-    x=train_data,
-    y=train_data,
-    epochs=50,
-    batch_size=128,
-    shuffle=TRUE,
-    validation_data=list(test_data, test_data),
+autoencoder |> fit(
+  x = train_data,
+  y = train_data,
+  epochs = 50,
+  batch_size = 128,
+  shuffle = TRUE,
+  validation_data = list(test_data, test_data),
 )
 ```
 
@@ -120,7 +123,7 @@ Notice how the predictions are pretty close to the original images, although
 not quite the same.
 
 ```{r}
-predictions <- autoencoder %>% predict(test_data)
+predictions <- autoencoder |> predict(test_data)
 display(test_data, predictions)
 ```
 
@@ -129,13 +132,13 @@ data as our input and the clean data as our target. We want our autoencoder to
 learn how to denoise the images.
 
 ```{r}
-autoencoder %>% fit(
-    x=noisy_train_data,
-    y=train_data,
-    epochs=100,
-    batch_size=128,
-    shuffle=TRUE,
-    validation_data=list(noisy_test_data, test_data),
+autoencoder |> fit(
+  x = noisy_train_data,
+  y = train_data,
+  epochs = 100,
+  batch_size = 128,
+  shuffle = TRUE,
+  validation_data = list(noisy_test_data, test_data),
 )
 ```
 
@@ -145,6 +148,6 @@ Notice how the autoencoder does an amazing job at removing the noise from the
 input images.
 
 ```{r}
-predictions <- autoencoder %>% predict(noisy_test_data)
+predictions <- autoencoder |> predict(noisy_test_data)
 display(noisy_test_data, predictions)
 ```
