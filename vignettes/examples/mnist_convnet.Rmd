@@ -64,13 +64,13 @@ y_test <- to_categorical(y_test, num_classes)
 
 ```r
 model <- keras_model_sequential(input_shape = input_shape)
-model %>%
-  layer_conv_2d(filters = 32, kernel_size = c(3, 3), activation = "relu") %>%
-  layer_max_pooling_2d(pool_size = c(2, 2)) %>%
-  layer_conv_2d(filters = 64, kernel_size = c(3, 3), activation = "relu") %>%
-  layer_max_pooling_2d(pool_size = c(2, 2)) %>%
-  layer_flatten() %>%
-  layer_dropout(rate = 0.5) %>%
+model |>
+  layer_conv_2d(filters = 32, kernel_size = c(3, 3), activation = "relu") |>
+  layer_max_pooling_2d(pool_size = c(2, 2)) |>
+  layer_conv_2d(filters = 64, kernel_size = c(3, 3), activation = "relu") |>
+  layer_max_pooling_2d(pool_size = c(2, 2)) |>
+  layer_flatten() |>
+  layer_dropout(rate = 0.5) |>
   layer_dense(units = num_classes, activation = "softmax")
 
 summary(model)
@@ -107,13 +107,13 @@ summary(model)
 batch_size <- 128
 epochs <- 15
 
-model %>% compile(
+model |> compile(
   loss = "categorical_crossentropy",
   optimizer = "adam",
   metrics = "accuracy"
 )
 
-model %>% fit(
+model |> fit(
   x_train, y_train,
   batch_size = batch_size,
   epochs = epochs,
@@ -123,49 +123,49 @@ model %>% fit(
 
 ```
 ## Epoch 1/15
-## 422/422 - 5s - 12ms/step - accuracy: 0.8845 - loss: 0.3815 - val_accuracy: 0.9782 - val_loss: 0.0810
+## 422/422 - 6s - 15ms/step - accuracy: 0.8845 - loss: 0.3815 - val_accuracy: 0.9783 - val_loss: 0.0808
 ## Epoch 2/15
-## 422/422 - 1s - 2ms/step - accuracy: 0.9646 - loss: 0.1152 - val_accuracy: 0.9862 - val_loss: 0.0549
+## 422/422 - 1s - 2ms/step - accuracy: 0.9645 - loss: 0.1152 - val_accuracy: 0.9862 - val_loss: 0.0550
 ## Epoch 3/15
-## 422/422 - 1s - 2ms/step - accuracy: 0.9738 - loss: 0.0838 - val_accuracy: 0.9875 - val_loss: 0.0455
+## 422/422 - 1s - 2ms/step - accuracy: 0.9737 - loss: 0.0838 - val_accuracy: 0.9873 - val_loss: 0.0457
 ## Epoch 4/15
-## 422/422 - 1s - 2ms/step - accuracy: 0.9781 - loss: 0.0690 - val_accuracy: 0.9897 - val_loss: 0.0418
+## 422/422 - 1s - 2ms/step - accuracy: 0.9783 - loss: 0.0691 - val_accuracy: 0.9893 - val_loss: 0.0418
 ## Epoch 5/15
-## 422/422 - 1s - 2ms/step - accuracy: 0.9812 - loss: 0.0610 - val_accuracy: 0.9900 - val_loss: 0.0375
+## 422/422 - 1s - 2ms/step - accuracy: 0.9811 - loss: 0.0609 - val_accuracy: 0.9902 - val_loss: 0.0374
 ## Epoch 6/15
-## 422/422 - 1s - 2ms/step - accuracy: 0.9821 - loss: 0.0563 - val_accuracy: 0.9910 - val_loss: 0.0360
+## 422/422 - 1s - 2ms/step - accuracy: 0.9820 - loss: 0.0564 - val_accuracy: 0.9913 - val_loss: 0.0360
 ## Epoch 7/15
-## 422/422 - 1s - 2ms/step - accuracy: 0.9851 - loss: 0.0488 - val_accuracy: 0.9918 - val_loss: 0.0328
+## 422/422 - 1s - 2ms/step - accuracy: 0.9848 - loss: 0.0488 - val_accuracy: 0.9920 - val_loss: 0.0326
 ## Epoch 8/15
-## 422/422 - 1s - 2ms/step - accuracy: 0.9846 - loss: 0.0485 - val_accuracy: 0.9917 - val_loss: 0.0331
+## 422/422 - 1s - 2ms/step - accuracy: 0.9844 - loss: 0.0485 - val_accuracy: 0.9918 - val_loss: 0.0334
 ## Epoch 9/15
-## 422/422 - 1s - 2ms/step - accuracy: 0.9859 - loss: 0.0441 - val_accuracy: 0.9918 - val_loss: 0.0318
+## 422/422 - 1s - 2ms/step - accuracy: 0.9860 - loss: 0.0441 - val_accuracy: 0.9922 - val_loss: 0.0317
 ## Epoch 10/15
-## 422/422 - 1s - 2ms/step - accuracy: 0.9867 - loss: 0.0406 - val_accuracy: 0.9927 - val_loss: 0.0317
+## 422/422 - 1s - 2ms/step - accuracy: 0.9868 - loss: 0.0406 - val_accuracy: 0.9923 - val_loss: 0.0320
 ## Epoch 11/15
-## 422/422 - 1s - 2ms/step - accuracy: 0.9875 - loss: 0.0389 - val_accuracy: 0.9923 - val_loss: 0.0316
+## 422/422 - 1s - 2ms/step - accuracy: 0.9875 - loss: 0.0389 - val_accuracy: 0.9920 - val_loss: 0.0315
 ## Epoch 12/15
-## 422/422 - 1s - 2ms/step - accuracy: 0.9881 - loss: 0.0370 - val_accuracy: 0.9927 - val_loss: 0.0304
+## 422/422 - 1s - 2ms/step - accuracy: 0.9881 - loss: 0.0371 - val_accuracy: 0.9925 - val_loss: 0.0304
 ## Epoch 13/15
-## 422/422 - 1s - 2ms/step - accuracy: 0.9879 - loss: 0.0362 - val_accuracy: 0.9930 - val_loss: 0.0279
+## 422/422 - 1s - 2ms/step - accuracy: 0.9880 - loss: 0.0361 - val_accuracy: 0.9933 - val_loss: 0.0282
 ## Epoch 14/15
-## 422/422 - 1s - 2ms/step - accuracy: 0.9891 - loss: 0.0334 - val_accuracy: 0.9930 - val_loss: 0.0292
+## 422/422 - 1s - 2ms/step - accuracy: 0.9889 - loss: 0.0335 - val_accuracy: 0.9932 - val_loss: 0.0288
 ## Epoch 15/15
-## 422/422 - 1s - 2ms/step - accuracy: 0.9898 - loss: 0.0311 - val_accuracy: 0.9928 - val_loss: 0.0292
+## 422/422 - 1s - 2ms/step - accuracy: 0.9899 - loss: 0.0310 - val_accuracy: 0.9930 - val_loss: 0.0293
 ```
 
 ## Evaluate the trained model
 
 
 ```r
-score <- model %>% evaluate(x_test, y_test, verbose=0)
+score <- model |> evaluate(x_test, y_test, verbose=0)
 score
 ```
 
 ```
 ## $accuracy
-## [1] 0.9907
+## [1] 0.9912
 ##
 ## $loss
-## [1] 0.02580518
+## [1] 0.02529005
 ```

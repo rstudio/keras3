@@ -49,13 +49,13 @@ y_test <- to_categorical(y_test, num_classes)
 
 ```{r}
 model <- keras_model_sequential(input_shape = input_shape)
-model %>%
-  layer_conv_2d(filters = 32, kernel_size = c(3, 3), activation = "relu") %>%
-  layer_max_pooling_2d(pool_size = c(2, 2)) %>%
-  layer_conv_2d(filters = 64, kernel_size = c(3, 3), activation = "relu") %>%
-  layer_max_pooling_2d(pool_size = c(2, 2)) %>%
-  layer_flatten() %>%
-  layer_dropout(rate = 0.5) %>%
+model |>
+  layer_conv_2d(filters = 32, kernel_size = c(3, 3), activation = "relu") |>
+  layer_max_pooling_2d(pool_size = c(2, 2)) |>
+  layer_conv_2d(filters = 64, kernel_size = c(3, 3), activation = "relu") |>
+  layer_max_pooling_2d(pool_size = c(2, 2)) |>
+  layer_flatten() |>
+  layer_dropout(rate = 0.5) |>
   layer_dense(units = num_classes, activation = "softmax")
 
 summary(model)
@@ -67,13 +67,13 @@ summary(model)
 batch_size <- 128
 epochs <- 15
 
-model %>% compile(
+model |> compile(
   loss = "categorical_crossentropy", 
   optimizer = "adam", 
   metrics = "accuracy"
 )
 
-model %>% fit(
+model |> fit(
   x_train, y_train, 
   batch_size = batch_size, 
   epochs = epochs, 
@@ -84,6 +84,6 @@ model %>% fit(
 ## Evaluate the trained model
 
 ```{r}
-score <- model %>% evaluate(x_test, y_test, verbose=0)
+score <- model |> evaluate(x_test, y_test, verbose=0)
 score
 ```
