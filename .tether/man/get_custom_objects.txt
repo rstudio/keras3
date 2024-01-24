@@ -1,5 +1,5 @@
 __signature__
-keras.utils.get_custom_objects()
+keras.saving.get_custom_objects()
 __doc__
 Retrieves a live reference to the global dictionary of custom objects.
 
@@ -16,3 +16,4 @@ get_custom_objects()['MyObject'] = MyObject
 
 Returns:
     Global dictionary mapping registered class names to classes.
+
