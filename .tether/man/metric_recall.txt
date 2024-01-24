@@ -55,7 +55,7 @@ class Recall(keras.src.metrics.metric.Metric)
  |
  |  ```python
  |  model.compile(optimizer='sgd',
- |                loss='mse',
+ |                loss='binary_crossentropy',
  |                metrics=[keras.metrics.Recall()])
  |  ```
  |
@@ -116,3 +116,4 @@ class Recall(keras.src.metrics.metric.Metric)
  |              Can be a tensor whose rank is either 0, or the same rank as
  |              `y_true`, and must be broadcastable to `y_true`.
  |
+

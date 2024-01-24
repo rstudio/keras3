@@ -46,7 +46,7 @@ class PrecisionAtRecall(SensitivitySpecificityBase)
  |  ```python
  |  model.compile(
  |      optimizer='sgd',
- |      loss='mse',
+ |      loss='binary_crossentropy',
  |      metrics=[keras.metrics.PrecisionAtRecall(recall=0.8)])
  |  ```
  |
@@ -77,3 +77,4 @@ class PrecisionAtRecall(SensitivitySpecificityBase)
  |      Returns:
  |          A scalar tensor, or a dictionary of scalar tensors.
  |
+

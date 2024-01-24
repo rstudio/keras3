@@ -55,7 +55,7 @@ class SensitivityAtSpecificity(SensitivitySpecificityBase)
  |  ```python
  |  model.compile(
  |      optimizer='sgd',
- |      loss='mse',
+ |      loss='binary_crossentropy',
  |      metrics=[keras.metrics.SensitivityAtSpecificity()])
  |  ```
  |
@@ -86,3 +86,4 @@ class SensitivityAtSpecificity(SensitivitySpecificityBase)
  |      Returns:
  |          A scalar tensor, or a dictionary of scalar tensors.
  |
+
