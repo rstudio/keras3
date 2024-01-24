@@ -557,25 +557,25 @@ function (filepath, monitor = "val_loss", verbose = 0L, save_best_only = FALSE,
 }
 
 
-#' Callback that prints metrics to stdout.
-#'
-#' @description
-#'
-#' # Raises
-#' ValueError: In case of invalid `count_mode`.
-#'
-#' @param count_mode
-#' One of `"steps"` or `"samples"`.
-#' Whether the progress bar should
-#' count samples seen or steps (batches) seen.
-#'
-# @export
-#' @noRd
-#' @family callbacks
-#' @seealso
-#' + <https://keras.io/api/callbacks/progbar_logger#progbarlogger-class>
+#  Callback that prints metrics to stdout.
+#
+#  @description
+#
+#  # Raises
+#  ValueError: In case of invalid `count_mode`.
+#
+#  @param count_mode
+#  One of `"steps"` or `"samples"`.
+#  Whether the progress bar should
+#  count samples seen or steps (batches) seen.
+#
+#  @export
+#  @noRd
+#  @family callbacks
+#  @seealso
+#  + <https://keras.io/api/callbacks/progbar_logger#progbarlogger-class>
 #  + <https://www.tensorflow.org/api_docs/python/tf/keras/callbacks/ProgbarLogger>
-#' @tether keras.callbacks.ProgbarLogger
+#  @tether keras.callbacks.ProgbarLogger
 # callback_progbar_logger <-
 function (count_mode = NULL)
 {
