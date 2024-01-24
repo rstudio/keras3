@@ -40,6 +40,12 @@
 #'                   optimizer = "rmsprop")
 #' ```
 #'
+#' # States
+#'
+#' A `Bidirectional` layer instance has property `states`, which you can access
+#' with `layer$states`. You can also reset states using [`reset_state()`]
+#'
+#'
 #' @param layer
 #' `RNN` instance, such as
 #' [`layer_lstm()`] or [`layer_gru()`].

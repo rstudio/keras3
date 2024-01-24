@@ -150,4 +150,9 @@ class Bidirectional(keras.src.layers.core.wrapper.Wrapper)
  |      Returns:
  |          A layer instance.
  |
+ |  ----------------------------------------------------------------------
+ |  Readonly properties defined here:
+ |
+ |  states
+ |
 
