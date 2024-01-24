@@ -1,7 +1,7 @@
 Help on class Subtract in module keras.src.layers.merging.subtract:
 
 class Subtract(keras.src.layers.merging.base_merge.Merge)
- |  Subtract(*args, **kwargs)
+ |  Subtract(**kwargs)
  |
  |  Performs elementwise subtraction.
  |
@@ -42,3 +42,4 @@ class Subtract(keras.src.layers.merging.base_merge.Merge)
  |
  |  build(self, input_shape)
  |
+

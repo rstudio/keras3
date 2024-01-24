@@ -1,7 +1,7 @@
 Help on class Maximum in module keras.src.layers.merging.maximum:
 
 class Maximum(keras.src.layers.merging.base_merge.Merge)
- |  Maximum(*args, **kwargs)
+ |  Maximum(**kwargs)
  |
  |  Computes element-wise maximum on a list of inputs.
  |
@@ -62,3 +62,4 @@ class Maximum(keras.src.layers.merging.base_merge.Merge)
  |      An object config is a Python dictionary (serializable)
  |      containing the information needed to re-instantiate it.
  |
+
