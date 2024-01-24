@@ -2219,7 +2219,9 @@ function (object, max_tokens = NULL, num_oov_indices = 1L, mask_token = NULL,
 #' have its time dimension padded or truncated to exactly
 #' `output_sequence_length` values, resulting in a tensor of shape
 #' `(batch_size, output_sequence_length)` regardless of how many tokens
-#' resulted from the splitting step. Defaults to `NULL`.
+#' resulted from the splitting step. Defaults to `NULL`. If `ragged`
+#' is `TRUE` then `output_sequence_length` may still truncate the
+#' output.
 #'
 #' @param pad_to_max_tokens
 #' Only valid in  `"multi_hot"`, `"count"`,
@@ -2431,7 +2433,3 @@ adapt <- function(object, data, ..., batch_size=NULL, steps=NULL) {
   do.call(object$adapt, args)
   invisible(object)
 }
-
-
-
-
