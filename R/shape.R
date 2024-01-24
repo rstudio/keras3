@@ -115,6 +115,10 @@ shape <- function(...) {
 
       shp <- keras$ops$shape(x)
 
+      if(inherits(shp, "python.builtin.tuple"))
+        # class(shp): torch.Size, python.builtin.tuple, python.builtin.object
+        shp <- as_r_value(import_builtins()$tuple(shp))
+
       # scalar integer tensors, unprotected with I(), are treated as an axis value
       if (identical(shp, list()) && keras$backend$is_int_dtype(x$dtype)) {
         if (inherits(x, "AsIs"))
@@ -148,10 +152,14 @@ shape <- function(...) {
 #' @export
 #' @rdname shape
 #' @param x A 'keras_shape' object
-format.keras_shape <- function(x, ...) {
+format.keras_shape <- function(x, ..., prefix = TRUE) {
   x <- vapply(x, function(d) format(d %||% "NA"), "")
   x <- paste0(x, collapse = ", ")
-  paste0("shape(", x, ")")
+  if(isTRUE(prefix))
+    prefix <- "shape"
+  else if (!is_string(prefix))
+    prefix <-  ""
+  paste0(prefix, "(", x, ")")
 }
 
 #' @export
