@@ -62,7 +62,7 @@ function ()
 #' Return the default float type, as a string.
 #'
 #' @description
-#' E.g. `'float16'`, `'float32'`, `'float64'`.
+#' E.g. `'bfloat16'` `'float16'`, `'float32'`, `'float64'`.
 #'
 #' # Examples
 #' ```{r}
