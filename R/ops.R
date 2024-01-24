@@ -2059,7 +2059,7 @@ function (x, axes, keepdims = FALSE, synchronized = FALSE)
 #' # Examples
 #' ```{r}
 #' data <- op_convert_to_tensor(c(0, 4))
-#' op_multi_hot(data, num_tokens = 5)
+#' op_multi_hot(data, num_classes = 5)
 #' ```
 #'
 #' @returns
@@ -2068,8 +2068,8 @@ function (x, axes, keepdims = FALSE, synchronized = FALSE)
 #' @param inputs
 #' Tensor of integer labels to be converted to multi-hot vectors.
 #'
-#' @param num_tokens
-#' Integer, the total number of unique tokens or classes.
+#' @param num_classes
+#' Integer, the total number of unique classes.
 #'
 #' @param axis
 #' (optional) Axis along which the multi-hot encoding should be
@@ -2079,6 +2079,8 @@ function (x, axes, keepdims = FALSE, synchronized = FALSE)
 #' (optional) The data type of the resulting tensor. Default
 #' is backend's float type.
 #'
+#' @param ... For forward/backwards compatability
+#'
 #' @export
 #' @family nn ops
 #' @family ops
@@ -2087,9 +2089,9 @@ function (x, axes, keepdims = FALSE, synchronized = FALSE)
 #'
 #' @tether keras.ops.multi_hot
 op_multi_hot <-
-function (inputs, num_tokens, axis = -1L, dtype = NULL)
+function (inputs, num_classes, axis = -1L, dtype = NULL, ...)
 {
-    args <- capture_args(list(inputs = as_integer, num_tokens = as_integer,
+    args <- capture_args(list(inputs = as_integer, num_classes = as_integer,
         axis = as_axis))
     do.call(keras$ops$multi_hot, args)
 }
