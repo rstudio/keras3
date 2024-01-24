@@ -4751,7 +4751,7 @@ keras$ops$less_equal(x1, x2)
 #'
 #' @param axis
 #' The axis in the result to store the samples. Relevant only if
-#' start or stop are array-like. Defaults to `0`.
+#' start or stop are array-like. Defaults to `1`, the first axis.
 #'
 #' @export
 #' @family numpy ops
@@ -6158,7 +6158,7 @@ function (x, axis = NULL)
 #' A sequence of tensors.
 #'
 #' @param axis
-#' Axis along which to stack. Defaults to `0`.
+#' Axis along which to stack. Defaults to `1`, the first axis.
 #'
 #' @export
 #' @family numpy ops
@@ -6480,11 +6480,11 @@ keras$ops$tile(x, repeats)
 #'
 #' @param axis1
 #' Axis to be used as the first axis of the 2-D sub-arrays.
-#' Defaults to `0`.(first axis).
+#' Defaults to `1`. (first axis).
 #'
 #' @param axis2
 #' Axis to be used as the second axis of the 2-D sub-arrays.
-#' Defaults to `1` (second axis).
+#' Defaults to `2`. (second axis).
 #'
 #' @export
 #' @family numpy ops
@@ -6494,7 +6494,7 @@ keras$ops$tile(x, repeats)
 #  + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/trace>
 #' @tether keras.ops.trace
 op_trace <-
-function (x, offset = 0L, axis1 = 0L, axis2 = 1L)
+function (x, offset = 0L, axis1 = 1L, axis2 = 2L)
 {
     args <- capture_args(list(offset = as_integer, axis1 = as_integer,
         axis2 = as_integer))
