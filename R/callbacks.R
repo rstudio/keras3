@@ -603,7 +603,7 @@ function (count_mode = NULL)
 #' String. Quantity to be monitored.
 #'
 #' @param factor
-#' Numeric. Factor by which the learning rate will be reduced.
+#' Float. Factor by which the learning rate will be reduced.
 #' `new_lr = lr * factor`.
 #'
 #' @param patience
@@ -622,7 +622,7 @@ function (count_mode = NULL)
 #' of the monitored quantity.
 #'
 #' @param min_delta
-#' Numeric. Threshold for measuring the new optimum, to only focus
+#' Float. Threshold for measuring the new optimum, to only focus
 #' on significant changes.
 #'
 #' @param cooldown
@@ -630,7 +630,7 @@ function (count_mode = NULL)
 #' operation after the learning rate has been reduced.
 #'
 #' @param min_lr
-#' Numeric. Lower bound on the learning rate.
+#' Float. Lower bound on the learning rate.
 #'
 #' @param ...
 #' For forward/backward compatability.
@@ -644,10 +644,10 @@ function (count_mode = NULL)
 callback_reduce_lr_on_plateau <-
 function (monitor = "val_loss", factor = 0.1, patience = 10L,
     verbose = 0L, mode = "auto", min_delta = 1e-04, cooldown = 0L,
-    min_lr = 0L, ...)
+    min_lr = 0, ...)
 {
     args <- capture_args(list(patience = as_integer, verbose = as_integer,
-        cooldown = as_integer, min_lr = as_integer))
+        cooldown = as_integer))
     do.call(keras$callbacks$ReduceLROnPlateau, args)
 }
 
