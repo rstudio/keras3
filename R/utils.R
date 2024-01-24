@@ -178,6 +178,10 @@ function (tensor)
 #' Location to store cached files, when `NULL` it
 #' defaults to `Sys.getenv("KERAS_HOME", "~/.keras/")`.
 #'
+#' @param force_download
+#' If `TRUE`, the file will always be re-downloaded
+#' regardless of the cache state.
+#'
 #' @param ... For forward/backward compatability.
 #'
 #' @export
@@ -186,10 +190,10 @@ function (tensor)
 #' + <https://keras.io/api/utils/python_utils#getfile-function>
 #  + <https://www.tensorflow.org/api_docs/python/tf/keras/utils/get_file>
 #' @tether keras.utils.get_file
-get_file <-
 function (fname = NULL, origin = NULL, ...,
     file_hash = NULL, cache_subdir = "datasets", hash_algorithm = "auto",
-    extract = FALSE, archive_format = "auto", cache_dir = NULL)
+    extract = FALSE, archive_format = "auto", cache_dir = NULL,
+    force_download = FALSE)
 {
     args <- capture_args()
     do.call(keras$utils$get_file, args)
