@@ -598,9 +598,9 @@ function (obj)
 #' serialization/deserialization.
 #'
 #' # Examples
-#' ```{r, eval = FALSE}
+#' ```r
 #' from_config <- function(cls, config, custom_objects = NULL) {
-#'   if ('my_custom_object_name' %in% names(config)) {
+#'   if ('my_custom_object_name' \%in\% names(config)) {
 #'     config$hidden_cls <- get_registered_object(
 #'       config$my_custom_object_name,
 #'       custom_objects = custom_objects)
