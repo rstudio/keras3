@@ -1,5 +1,5 @@
 __signature__
-keras.utils.get_registered_name(obj)
+keras.saving.get_registered_name(obj)
 __doc__
 Returns the name registered to an object within the Keras framework.
 
@@ -13,3 +13,4 @@ Args:
 Returns:
     The name associated with the object, or the default Python name if the
         object is not registered.
+
