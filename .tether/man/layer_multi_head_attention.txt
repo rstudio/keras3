@@ -150,3 +150,29 @@ class MultiHeadAttention(keras.src.layers.layer.Layer)
  |      An object config is a Python dictionary (serializable)
  |      containing the information needed to re-instantiate it.
  |
+ |  ----------------------------------------------------------------------
+ |  Readonly properties defined here:
+ |
+ |  attention_axes
+ |
+ |  dropout
+ |
+ |  key_dense
+ |
+ |  key_dim
+ |
+ |  num_heads
+ |
+ |  output_dense
+ |
+ |  output_shape
+ |
+ |  query_dense
+ |
+ |  use_bias
+ |
+ |  value_dense
+ |
+ |  value_dim
+ |
+

@@ -279,7 +279,7 @@ function (object, head_dim, num_query_heads, num_key_value_heads,
 }
 
 
-#' MultiHeadAttention layer.
+#' Multi Head Attention layer.
 #'
 #' @description
 #' This is an implementation of multi-headed attention as described in the
@@ -327,14 +327,30 @@ function (object, head_dim, num_query_heads, num_key_value_heads,
 #'     prevent tokens from attending to future tokens (e.g., used in a
 #'     decoder Transformer).
 #'
-#' @returns
-#' attention_output: The result of the computation, of shape `(B, T, E)`,
+#'
+#' # Call return
+#' - attention_output: The result of the computation, of shape `(B, T, E)`,
 #'     where `T` is for target sequence shapes and `E` is the query input
 #'     last dimension if `output_shape` is `NULL`. Otherwise, the
 #'     multi-head outputs are projected to the shape specified by
 #'     `output_shape`.
-#' attention_scores: (Optional) multi-head attention coefficients over
+#' - attention_scores: (Optional) multi-head attention coefficients over
 #'     attention axes.
+#'
+#' # Properties
+#' A `MultiHeadAttention` `Layer` instance has the following additional read-only properties:
+#'
+#' - `attention_axes`
+#' - `dropout`
+#' - `key_dense`
+#' - `key_dim`
+#' - `num_heads`
+#' - `output_dense`
+#' - `output_shape`
+#' - `query_dense`
+#' - `use_bias`
+#' - `value_dense`
+#' - `value_dim`
 #'
 #' @param num_heads
 #' Number of attention heads.
