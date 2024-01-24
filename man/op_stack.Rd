@@ -9,7 +9,7 @@ op_stack(x, axis = 1L)
 \arguments{
 \item{x}{A sequence of tensors.}
 
-\item{axis}{Axis along which to stack. Defaults to \code{0}.}
+\item{axis}{Axis along which to stack. Defaults to \code{1}, the first axis.}
 }
 \value{
 The stacked tensor.

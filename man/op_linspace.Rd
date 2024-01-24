@@ -34,7 +34,7 @@ spacing between samples.}
 \item{dtype}{The type of the output tensor.}
 
 \item{axis}{The axis in the result to store the samples. Relevant only if
-start or stop are array-like. Defaults to \code{0}.}
+start or stop are array-like. Defaults to \code{1}, the first axis.}
 }
 \value{
 A tensor of evenly spaced numbers.

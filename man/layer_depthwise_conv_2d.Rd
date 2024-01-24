@@ -45,10 +45,11 @@ output channels will be equal to \code{input_channel * depth_multiplier}.}
 
 \item{data_format}{string, either \code{"channels_last"} or \code{"channels_first"}.
 The ordering of the dimensions in the inputs. \code{"channels_last"}
-corresponds to inputs with shape \verb{(batch, steps, features)}
+corresponds to inputs with shape \verb{(batch, height, width, channels)}
 while \code{"channels_first"} corresponds to inputs with shape
-\verb{(batch, features, steps)}. It defaults to the \code{image_data_format}
-value found in your Keras config file at \verb{~/.keras/keras.json}.
+\verb{(batch, channels, height, width)}. It defaults to the
+\code{image_data_format} value found in your Keras config file
+at \verb{~/.keras/keras.json}.
 If you never set it, then it will be \code{"channels_last"}.}
 
 \item{dilation_rate}{int or list of 2 integers, specifying the dilation

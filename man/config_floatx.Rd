@@ -10,7 +10,7 @@ config_floatx()
 String, the current default float type.
 }
 \description{
-E.g. \code{'float16'}, \code{'float32'}, \code{'float64'}.
+E.g. \code{'bfloat16'} \code{'float16'}, \code{'float32'}, \code{'float64'}.
 }
 \section{Examples}{
 \if{html}{\out{<div class="sourceCode r">}}\preformatted{keras3::config_floatx()

@@ -4,7 +4,7 @@
 \alias{op_trace}
 \title{Return the sum along diagonals of the tensor.}
 \usage{
-op_trace(x, offset = 0L, axis1 = 0L, axis2 = 1L)
+op_trace(x, offset = 0L, axis1 = 1L, axis2 = 2L)
 }
 \arguments{
 \item{x}{Input tensor.}
@@ -13,10 +13,10 @@ op_trace(x, offset = 0L, axis1 = 0L, axis2 = 1L)
 both positive and negative. Defaults to \code{0}.}
 
 \item{axis1}{Axis to be used as the first axis of the 2-D sub-arrays.
-Defaults to \code{0}.(first axis).}
+Defaults to \code{1}. (first axis).}
 
 \item{axis2}{Axis to be used as the second axis of the 2-D sub-arrays.
-Defaults to \code{1} (second axis).}
+Defaults to \code{2}. (second axis).}
 }
 \value{
 If \code{x} is 2-D, the sum of the diagonal is returned. If \code{x} has

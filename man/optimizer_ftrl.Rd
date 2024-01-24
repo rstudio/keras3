@@ -21,7 +21,8 @@ optimizer_ftrl(
   ema_overwrite_frequency = NULL,
   name = "ftrl",
   ...,
-  loss_scale_factor = NULL
+  loss_scale_factor = NULL,
+  gradient_accumulation_steps = NULL
 )
 }
 \arguments{
@@ -98,6 +99,14 @@ the scale factor will be multiplied by the gradients before updating
 variables. Useful for preventing underflow during mixed precision
 training. Alternately, \code{optimizer_loss_scale} will
 automatically set a loss scale factor.}
+
+\item{gradient_accumulation_steps}{Int or \code{NULL}. If an int, model & optimizer
+variables will not be updated at every step; instead they will be
+updated every \code{gradient_accumulation_steps} steps, using the average
+value of the gradients since the last update. This is known as
+"gradient accumulation". This can be useful
+when your batch size is very small, in order to reduce gradient
+noise at each update step.}
 }
 \description{
 "Follow The Regularized Leader" (FTRL) is an optimization algorithm

@@ -13,7 +13,8 @@ get_file(
   hash_algorithm = "auto",
   extract = FALSE,
   archive_format = "auto",
-  cache_dir = NULL
+  cache_dir = NULL,
+  force_download = FALSE
 )
 }
 \arguments{
@@ -46,6 +47,9 @@ The default \code{"auto"} corresponds to \code{c("tar", "zip")}.
 
 \item{cache_dir}{Location to store cached files, when \code{NULL} it
 defaults to \code{Sys.getenv("KERAS_HOME", "~/.keras/")}.}
+
+\item{force_download}{If \code{TRUE}, the file will always be re-downloaded
+regardless of the cache state.}
 }
 \value{
 Path to the downloaded file.

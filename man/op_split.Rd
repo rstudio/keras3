@@ -9,15 +9,12 @@ op_split(x, indices_or_sections, axis = 1L)
 \arguments{
 \item{x}{Input tensor.}
 
-\item{indices_or_sections}{Either an integer indicating the number of
-sections along \code{axis} or a list of integers indicating the indices
-along \code{axis} at which the tensor is split.
-If an integer, N, the tensor will be split into N
+\item{indices_or_sections}{If an integer, N, the tensor will be split into N
 equal sections along \code{axis}. If a 1-D array of sorted integers,
 the entries indicate indices at which the tensor will be split
 along \code{axis}.}
 
-\item{axis}{Axis along which to split. Defaults to \code{0}.}
+\item{axis}{Axis along which to split. Defaults to \code{1}, the first axis.}
 }
 \value{
 A list of tensors.

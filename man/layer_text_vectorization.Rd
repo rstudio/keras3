@@ -93,7 +93,9 @@ For all other output modes, currently only rank 1 inputs
 have its time dimension padded or truncated to exactly
 \code{output_sequence_length} values, resulting in a tensor of shape
 \verb{(batch_size, output_sequence_length)} regardless of how many tokens
-resulted from the splitting step. Defaults to \code{NULL}.}
+resulted from the splitting step. Defaults to \code{NULL}. If \code{ragged}
+is \code{TRUE} then \code{output_sequence_length} may still truncate the
+output.}
 
 \item{pad_to_max_tokens}{Only valid in  \code{"multi_hot"}, \code{"count"},
 and \code{"tf_idf"} modes. If \code{TRUE}, the output will have

@@ -45,7 +45,7 @@ the left/right or up/down of the input. When \code{padding="same"} and
 \item{data_format}{string, either \code{"channels_last"} or \code{"channels_first"}.
 The ordering of the dimensions in the inputs. \code{"channels_last"}
 corresponds to inputs with shape
-\verb{(batch_size, channels, height, width)}
+\verb{(batch_size, height, width, channels)}
 while \code{"channels_first"} corresponds to inputs with shape
 \verb{(batch_size, channels, height, width)}. It defaults to the
 \code{image_data_format} value found in your Keras config file at

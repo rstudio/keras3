@@ -7,7 +7,7 @@
 config_set_floatx(value)
 }
 \arguments{
-\item{value}{String; \code{'float16'}, \code{'float32'}, or \code{'float64'}.}
+\item{value}{String; \code{'bfloat16'}, \code{'float16'}, \code{'float32'}, or \code{'float64'}.}
 }
 \description{
 Set the default float dtype.

@@ -50,22 +50,31 @@ indeed a correct label.
 Standalone usage:
 
 \if{html}{\out{<div class="sourceCode r">}}\preformatted{m <- metric_recall_at_precision(precision = 0.8)
-m$update_state(c(0, 0, 1, 1), c(0, 0.5, 0.3, 0.9))
-# m$result()
+m$update_state(c(0,   0,   1,   1),
+               c(0, 0.5, 0.3, 0.9))
+m$result()
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor(0.5, shape=(), dtype=float32)
 }\if{html}{\out{</div>}}
 
 \if{html}{\out{<div class="sourceCode r">}}\preformatted{m$reset_state()
-m$update_state(c(0, 0, 1, 1), c(0, 0.5, 0.3, 0.9),
+m$update_state(c(0,   0,   1,   1),
+               c(0, 0.5, 0.3, 0.9),
                sample_weight = c(1, 0, 0, 1))
-# m$result()
+m$result()
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor(0.9999999, shape=(), dtype=float32)
 }\if{html}{\out{</div>}}
 
 Usage with \code{compile()} API:
 
-\if{html}{\out{<div class="sourceCode r">}}\preformatted{model \%>\% compile(
-    optimizer = 'sgd',
-    loss = 'mse',
-    metrics = list(metric_recall_at_precision(precision = 0.8)))
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{model |> compile(
+  optimizer = 'sgd',
+  loss = 'binary_crossentropy',
+  metrics = list(metric_recall_at_precision(precision = 0.8))
+)
 }\if{html}{\out{</div>}}
 }
 

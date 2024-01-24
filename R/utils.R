@@ -190,6 +190,7 @@ function (tensor)
 #' + <https://keras.io/api/utils/python_utils#getfile-function>
 #  + <https://www.tensorflow.org/api_docs/python/tf/keras/utils/get_file>
 #' @tether keras.utils.get_file
+get_file <-
 function (fname = NULL, origin = NULL, ...,
     file_hash = NULL, cache_subdir = "datasets", hash_algorithm = "auto",
     extract = FALSE, archive_format = "auto", cache_dir = NULL,

@@ -47,7 +47,7 @@ The ordering of the dimensions in the inputs. \code{"channels_last"}
 corresponds to inputs with shape
 \verb{(batch_size, spatial_dim1, spatial_dim2, spatial_dim3, channels)}
 while \code{"channels_first"} corresponds to inputs with shape
-\verb{(batch_size, spatial_dim1, spatial_dim2, spatial_dim3, channels)}.
+\verb{(batch_size, channels, spatial_dim1, spatial_dim2, spatial_dim3)}.
 It defaults to the \code{image_data_format} value found in your Keras
 config file at \verb{~/.keras/keras.json}. If you never set it, then it
 will be \code{"channels_last"}.}

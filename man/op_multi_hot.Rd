@@ -4,18 +4,20 @@
 \alias{op_multi_hot}
 \title{Encodes integer labels as multi-hot vectors.}
 \usage{
-op_multi_hot(inputs, num_tokens, axis = -1L, dtype = NULL)
+op_multi_hot(inputs, num_classes, axis = -1L, dtype = NULL, ...)
 }
 \arguments{
 \item{inputs}{Tensor of integer labels to be converted to multi-hot vectors.}
 
-\item{num_tokens}{Integer, the total number of unique tokens or classes.}
+\item{num_classes}{Integer, the total number of unique classes.}
 
 \item{axis}{(optional) Axis along which the multi-hot encoding should be
 added. Defaults to \code{-1}, which corresponds to the last dimension.}
 
 \item{dtype}{(optional) The data type of the resulting tensor. Default
 is backend's float type.}
+
+\item{...}{For forward/backwards compatability}
 }
 \value{
 Tensor: The multi-hot encoded tensor.
@@ -26,7 +28,7 @@ is mapped to a binary value in the resulting vector.
 }
 \section{Examples}{
 \if{html}{\out{<div class="sourceCode r">}}\preformatted{data <- op_convert_to_tensor(c(0, 4))
-op_multi_hot(data, num_tokens = 5)
+op_multi_hot(data, num_classes = 5)
 }\if{html}{\out{</div>}}
 
 \if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor([1. 0. 0. 0. 1.], shape=(5), dtype=float32)

@@ -56,22 +56,31 @@ For additional information about specificity and sensitivity, see
 Standalone usage:
 
 \if{html}{\out{<div class="sourceCode r">}}\preformatted{m <- metric_sensitivity_at_specificity(specificity = 0.5)
-m$update_state(c(0, 0, 0, 1, 1), c(0, 0.3, 0.8, 0.3, 0.8))
-# m$result()
+m$update_state(c(0,   0,   0,   1,   1),
+               c(0, 0.3, 0.8, 0.3, 0.8))
+m$result()
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor(0.5, shape=(), dtype=float32)
 }\if{html}{\out{</div>}}
 
 \if{html}{\out{<div class="sourceCode r">}}\preformatted{m$reset_state()
-m$update_state(c(0, 0, 0, 1, 1), c(0, 0.3, 0.8, 0.3, 0.8),
+m$update_state(c(0,   0,   0,   1,   1),
+               c(0, 0.3, 0.8, 0.3, 0.8),
                sample_weight = c(1, 1, 2, 2, 1))
-# m$result()
+m$result()
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor(0.33333334, shape=(), dtype=float32)
 }\if{html}{\out{</div>}}
 
 Usage with \code{compile()} API:
 
-\if{html}{\out{<div class="sourceCode r">}}\preformatted{model \%>\% compile(
-    optimizer = 'sgd',
-    loss = 'mse',
-    metrics = list(metric_sensitivity_at_specificity()))
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{model |> compile(
+  optimizer = 'sgd',
+  loss = 'binary_crossentropy',
+  metrics = list(metric_sensitivity_at_specificity())
+)
 }\if{html}{\out{</div>}}
 }
 
