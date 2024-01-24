@@ -26,8 +26,8 @@ In this case, the default value used is \code{l2=0.01}.
 }
 
 Other regularizers: 
-\code{\link{regularizer_l1_l2}()},
 \code{\link{regularizer_l1}()},
+\code{\link{regularizer_l1_l2}()},
 \code{\link{regularizer_orthogonal}()}
 }
 \concept{regularizers}

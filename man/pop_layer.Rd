@@ -16,8 +16,8 @@ Remove the last layer in a Sequential model
 Other model functions: 
 \code{\link{get_config}()},
 \code{\link{get_layer}()},
-\code{\link{keras_model_sequential}()},
 \code{\link{keras_model}()},
+\code{\link{keras_model_sequential}()},
 \code{\link{summary.keras.src.models.model.Model}()}
 }
 \concept{model functions}

@@ -36,8 +36,8 @@ layer <- layer_dense(units=4, kernel_regularizer=regularizer)
 }
 
 Other regularizers: 
-\code{\link{regularizer_l1_l2}()},
 \code{\link{regularizer_l1}()},
+\code{\link{regularizer_l1_l2}()},
 \code{\link{regularizer_l2}()}
 }
 \concept{regularizers}

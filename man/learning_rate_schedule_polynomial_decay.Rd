@@ -107,8 +107,8 @@ The learning rate schedule is also serializable and deserializable using
 
 Other optimizer learning rate schedules: 
 \code{\link{LearningRateSchedule}()},
-\code{\link{learning_rate_schedule_cosine_decay_restarts}()},
 \code{\link{learning_rate_schedule_cosine_decay}()},
+\code{\link{learning_rate_schedule_cosine_decay_restarts}()},
 \code{\link{learning_rate_schedule_exponential_decay}()},
 \code{\link{learning_rate_schedule_inverse_time_decay}()},
 \code{\link{learning_rate_schedule_piecewise_constant_decay}()}

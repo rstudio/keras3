@@ -27,7 +27,7 @@ serialization/deserialization.
 }
 \section{Examples}{
 \if{html}{\out{<div class="sourceCode r">}}\preformatted{from_config <- function(cls, config, custom_objects = NULL) \{
-  if ('my_custom_object_name' \%in\% names(config)) \{
+  if ('my_custom_object_name' \\\%in\\\% names(config)) \{
     config$hidden_cls <- get_registered_object(
       config$my_custom_object_name,
       custom_objects = custom_objects)

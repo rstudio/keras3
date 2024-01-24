@@ -152,6 +152,8 @@ shape <- function(...) {
 #' @export
 #' @rdname shape
 #' @param x A 'keras_shape' object
+#' @param prefix Whether to format the shape object with a prefix. Defaults to
+#'   `"shape"`.
 format.keras_shape <- function(x, ..., prefix = TRUE) {
   x <- vapply(x, function(d) format(d %||% "NA"), "")
   x <- paste0(x, collapse = ", ")

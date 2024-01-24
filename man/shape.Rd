@@ -11,7 +11,7 @@
 \usage{
 shape(...)
 
-\method{format}{keras_shape}(x, ...)
+\method{format}{keras_shape}(x, ..., prefix = TRUE)
 
 \method{print}{keras_shape}(x, ...)
 
@@ -29,6 +29,9 @@ wrapped in \code{I()} are used asis (see examples). All other objects are coerce
 via \code{as.integer()}.}
 
 \item{x}{A 'keras_shape' object}
+
+\item{prefix}{Whether to format the shape object with a prefix. Defaults to
+\code{"shape"}.}
 }
 \value{
 A list with a \code{"keras_shape"} class attribute. Each element of the

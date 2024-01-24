@@ -25,8 +25,8 @@ precedence.
 \seealso{
 Other model functions: 
 \code{\link{get_config}()},
-\code{\link{keras_model_sequential}()},
 \code{\link{keras_model}()},
+\code{\link{keras_model_sequential}()},
 \code{\link{pop_layer}()},
 \code{\link{summary.keras.src.models.model.Model}()}
 }

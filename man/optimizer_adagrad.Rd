@@ -101,9 +101,9 @@ the smaller the updates.
 Other optimizers: 
 \code{\link{optimizer_adadelta}()},
 \code{\link{optimizer_adafactor}()},
+\code{\link{optimizer_adam}()},
 \code{\link{optimizer_adam_w}()},
 \code{\link{optimizer_adamax}()},
-\code{\link{optimizer_adam}()},
 \code{\link{optimizer_ftrl}()},
 \code{\link{optimizer_lion}()},
 \code{\link{optimizer_loss_scale}()},

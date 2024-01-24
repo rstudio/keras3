@@ -85,8 +85,8 @@ model \%>\% fit(data, labels, epochs=5)
 
 Other optimizer learning rate schedules: 
 \code{\link{LearningRateSchedule}()},
-\code{\link{learning_rate_schedule_cosine_decay_restarts}()},
 \code{\link{learning_rate_schedule_cosine_decay}()},
+\code{\link{learning_rate_schedule_cosine_decay_restarts}()},
 \code{\link{learning_rate_schedule_exponential_decay}()},
 \code{\link{learning_rate_schedule_piecewise_constant_decay}()},
 \code{\link{learning_rate_schedule_polynomial_decay}()}

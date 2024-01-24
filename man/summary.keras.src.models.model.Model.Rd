@@ -62,8 +62,8 @@ Print a summary of a Keras Model
 Other model functions: 
 \code{\link{get_config}()},
 \code{\link{get_layer}()},
-\code{\link{keras_model_sequential}()},
 \code{\link{keras_model}()},
+\code{\link{keras_model_sequential}()},
 \code{\link{pop_layer}()}
 }
 \concept{model functions}

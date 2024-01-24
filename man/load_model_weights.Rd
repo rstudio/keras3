@@ -45,9 +45,9 @@ Other saving and loading functions:
 \code{\link{layer_tfsm}()},
 \code{\link{load_model}()},
 \code{\link{register_keras_serializable}()},
+\code{\link{save_model}()},
 \code{\link{save_model_config}()},
 \code{\link{save_model_weights}()},
-\code{\link{save_model}()},
 \code{\link{with_custom_object_scope}()}
 }
 \concept{saving and loading functions}
