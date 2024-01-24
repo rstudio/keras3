@@ -10,7 +10,7 @@ a mix of `float16` and `float32`. It can be configured by calling
 `keras.mixed_precision.set_dtype_policy('mixed_float16')`.
 
 Args:
-    value: String; `'float16'`, `'float32'`, or `'float64'`.
+    value: String; `'bfloat16'`, `'float16'`, `'float32'`, or `'float64'`.
 
 Examples:
 >>> keras.config.floatx()
@@ -25,3 +25,4 @@ Examples:
 
 Raises:
     ValueError: In case of invalid value.
+

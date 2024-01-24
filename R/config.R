@@ -195,7 +195,7 @@ function (value)
 #' ValueError: In case of invalid value.
 #'
 #' @param value
-#' String; `'float16'`, `'float32'`, or `'float64'`.
+#' String; `'bfloat16'`, `'float16'`, `'float32'`, or `'float64'`.
 #'
 #' @export
 #' @family config backend
@@ -208,8 +208,7 @@ function (value)
 config_set_floatx <-
 function (value)
 {
-    args <- capture_args()
-    do.call(keras$config$set_floatx, args)
+    keras$config$set_floatx(value)
 }
 
 
