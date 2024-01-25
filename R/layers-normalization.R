@@ -11,7 +11,7 @@
 #' during inference.
 #'
 #' **During training** (i.e. when using `fit()` or when calling the layer/model
-#' with the argument `training=TRUE`), the layer normalizes its output using
+#' with the argument `training = TRUE`), the layer normalizes its output using
 #' the mean and standard deviation of the current batch of inputs. That is to
 #' say, for each channel being normalized, the layer returns
 #' `gamma * (batch - mean(batch)) / sqrt(var(batch) + epsilon) + beta`, where:
@@ -19,12 +19,12 @@
 #' - `epsilon` is small constant (configurable as part of the constructor
 #' arguments)
 #' - `gamma` is a learned scaling factor (initialized as 1), which
-#' can be disabled by passing `scale=FALSE` to the constructor.
+#' can be disabled by passing `scale = FALSE` to the constructor.
 #' - `beta` is a learned offset factor (initialized as 0), which
-#' can be disabled by passing `center=FALSE` to the constructor.
+#' can be disabled by passing `center = FALSE` to the constructor.
 #'
 #' **During inference** (i.e. when using `evaluate()` or `predict()` or when
-#' calling the layer/model with the argument `training=FALSE` (which is the
+#' calling the layer/model with the argument `training = FALSE` (which is the
 #' default), the layer normalizes its output using a moving average of the
 #' mean and standard deviation of the batches it has seen during training. That
 #' is to say, it returns
@@ -40,9 +40,9 @@
 #' *after having been trained on data that has similar statistics as the
 #' inference data*.
 #'
-#' **About setting `layer.trainable = FALSE` on a `BatchNormalization` layer:**
+#' **About setting `layer$trainable <- FALSE` on a `BatchNormalization` layer:**
 #'
-#' The meaning of setting `layer.trainable = FALSE` is to freeze the layer,
+#' The meaning of setting `layer$trainable <- FALSE` is to freeze the layer,
 #' i.e. its internal state will not change during training:
 #' its trainable weights will not be updated
 #' during `fit()` or `train_on_batch()`, and its state updates will not be run.
@@ -53,7 +53,7 @@
 #' are two separate concepts.
 #'
 #' However, in the case of the `BatchNormalization` layer, **setting
-#' `trainable = FALSE` on the layer means that the layer will be
+#' `trainable <- FALSE` on the layer means that the layer will be
 #' subsequently run in inference mode** (meaning that it will use
 #' the moving mean and the moving variance to normalize the current batch,
 #' rather than using the mean and variance of the current batch).
@@ -68,13 +68,19 @@
 #'
 #' # Call Arguments
 #' - `inputs`: Input tensor (of any rank).
-#' - `training`: Python boolean indicating whether the layer should behave in
+#' - `training`: R boolean indicating whether the layer should behave in
 #'     training mode or in inference mode.
-#'     - `training=TRUE`: The layer will normalize its inputs using
+#'     - `training = TRUE`: The layer will normalize its inputs using
 #'     the mean and variance of the current batch of inputs.
-#'     - `training=FALSE`: The layer will normalize its inputs using
+#'     - `training = FALSE`: The layer will normalize its inputs using
 #'     the mean and variance of its moving statistics, learned during
 #'     training.
+#' - `mask`: Binary tensor of shape broadcastable to `inputs` tensor, with
+#'     `TRUE` values indicating the positions for which mean and variance
+#'     should be computed. Masked elements of the current inputs are not
+#'     taken into account for mean and variance computation during
+#'     training. Any prior unmasked element values will be taken into
+#'     account until their momentum expires.
 #'
 #' # Reference
 #' - [Ioffe and Szegedy, 2015](https://arxiv.org/abs/1502.03167).
@@ -82,7 +88,7 @@
 #' @param axis
 #' Integer, the axis that should be normalized
 #' (typically the features axis). For instance, after a `Conv2D` layer
-#' with `data_format="channels_first"`, use `axis=1`.
+#' with `data_format = "channels_first"`, use `axis = 2`.
 #'
 #' @param momentum
 #' Momentum for the moving average.
