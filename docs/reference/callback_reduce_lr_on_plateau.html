@@ -90,7 +90,7 @@ of epochs, the learning rate is reduced.</p>
 <span>  mode <span class="op">=</span> <span class="st">"auto"</span>,</span>
 <span>  min_delta <span class="op">=</span> <span class="fl">1e-04</span>,</span>
 <span>  cooldown <span class="op">=</span> <span class="fl">0L</span>,</span>
-<span>  min_lr <span class="op">=</span> <span class="fl">0L</span>,</span>
+<span>  min_lr <span class="op">=</span> <span class="fl">0</span>,</span>
 <span>  <span class="va">...</span></span>
 <span><span class="op">)</span></span></code></pre></div>
     </div>
@@ -102,7 +102,7 @@ of epochs, the learning rate is reduced.</p>
 
 
 <dt>factor</dt>
-<dd><p>Numeric. Factor by which the learning rate will be reduced.
+<dd><p>Float. Factor by which the learning rate will be reduced.
 <code>new_lr = lr * factor</code>.</p></dd>
 
 
@@ -125,7 +125,7 @@ of the monitored quantity.</p></dd>
 
 
 <dt>min_delta</dt>
-<dd><p>Numeric. Threshold for measuring the new optimum, to only focus
+<dd><p>Float. Threshold for measuring the new optimum, to only focus
 on significant changes.</p></dd>
 
 
@@ -135,7 +135,7 @@ operation after the learning rate has been reduced.</p></dd>
 
 
 <dt>min_lr</dt>
-<dd><p>Numeric. Lower bound on the learning rate.</p></dd>
+<dd><p>Float. Lower bound on the learning rate.</p></dd>
 
 
 <dt>...</dt>

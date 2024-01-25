@@ -113,7 +113,8 @@ w &amp;lt;- w + momentum * velocity - learning_rate * g
 <span>  ema_overwrite_frequency <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  name <span class="op">=</span> <span class="st">"SGD"</span>,</span>
 <span>  <span class="va">...</span>,</span>
-<span>  loss_scale_factor <span class="op">=</span> <span class="cn">NULL</span></span>
+<span>  loss_scale_factor <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  gradient_accumulation_steps <span class="op">=</span> <span class="cn">NULL</span></span>
 <span><span class="op">)</span></span></code></pre></div>
     </div>
 
@@ -203,6 +204,16 @@ variables. Useful for preventing underflow during mixed precision
 training. Alternately, <code><a href="optimizer_loss_scale.html">optimizer_loss_scale()</a></code> will
 automatically set a loss scale factor.</p></dd>
 
+
+<dt>gradient_accumulation_steps</dt>
+<dd><p>Int or <code>NULL</code>. If an int, model &amp; optimizer
+variables will not be updated at every step; instead they will be
+updated every <code>gradient_accumulation_steps</code> steps, using the average
+value of the gradients since the last update. This is known as
+"gradient accumulation". This can be useful
+when your batch size is very small, in order to reduce gradient
+noise at each update step.</p></dd>
+
 </dl></div>
     <div class="section level2">
     <h2 id="see-also">See also<a class="anchor" aria-label="anchor" href="#see-also"></a></h2>
@@ -212,9 +223,9 @@ automatically set a loss scale factor.</p></dd>
 <code><a href="optimizer_adadelta.html">optimizer_adadelta</a>()</code>,
 <code><a href="optimizer_adafactor.html">optimizer_adafactor</a>()</code>,
 <code><a href="optimizer_adagrad.html">optimizer_adagrad</a>()</code>,
+<code><a href="optimizer_adam.html">optimizer_adam</a>()</code>,
 <code><a href="optimizer_adam_w.html">optimizer_adam_w</a>()</code>,
 <code><a href="optimizer_adamax.html">optimizer_adamax</a>()</code>,
-<code><a href="optimizer_adam.html">optimizer_adam</a>()</code>,
 <code><a href="optimizer_ftrl.html">optimizer_ftrl</a>()</code>,
 <code><a href="optimizer_lion.html">optimizer_lion</a>()</code>,
 <code><a href="optimizer_loss_scale.html">optimizer_loss_scale</a>()</code>,

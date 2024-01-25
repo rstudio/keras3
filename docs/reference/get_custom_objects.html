@@ -113,13 +113,15 @@ registering new objects.</p>
     <p></p><div class="sourceCode r"><pre><code><span><span class="fu"><a href="../reference/get_custom_objects.html">get_custom_objects</a></span><span class="op">(</span><span class="op">)</span></span></code></pre><p></p></div>
 <p>You can use <code>set_custom_objects()</code> to restore a previous registry state.</p>
 <p></p><div class="sourceCode r"><pre><code><span><span class="co"># within a function, if you want to temporarily modify the registry,</span></span>
-<span><span class="va">orig_objects</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/get_custom_objects.html">set_custom_objects</a></span><span class="op">(</span>clear <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/base/on.exit.html" class="external-link">on.exit</a></span><span class="op">(</span><span class="fu"><a href="../reference/get_custom_objects.html">set_custom_objects</a></span><span class="op">(</span><span class="va">orig_objects</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="kw">function</span><span class="op">(</span><span class="op">)</span> <span class="op">{</span></span>
+<span>  <span class="va">orig_objects</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/get_custom_objects.html">set_custom_objects</a></span><span class="op">(</span>clear <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
+<span>  <span class="fu"><a href="https://rdrr.io/r/base/on.exit.html" class="external-link">on.exit</a></span><span class="op">(</span><span class="fu"><a href="../reference/get_custom_objects.html">set_custom_objects</a></span><span class="op">(</span><span class="va">orig_objects</span><span class="op">)</span><span class="op">)</span></span>
 <span></span>
-<span><span class="co">## temporarily modify the global registry</span></span>
-<span><span class="co"># register_keras_serializable(....)</span></span>
-<span><span class="co"># ....  &lt;do work&gt;</span></span>
-<span><span class="co"># on.exit(), the previous registry state is restored.</span></span></code></pre><p></p></div>
+<span>  <span class="co">## temporarily modify the global registry</span></span>
+<span>  <span class="co"># register_keras_serializable(....)</span></span>
+<span>  <span class="co"># ....  &lt;do work&gt;</span></span>
+<span>  <span class="co"># on.exit(), the previous registry state is restored.</span></span>
+<span><span class="op">}</span></span></code></pre><p></p></div>
     </div>
     <div class="section level2">
     <h2 id="see-also">See also<a class="anchor" aria-label="anchor" href="#see-also"></a></h2>

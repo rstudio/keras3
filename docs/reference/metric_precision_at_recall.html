@@ -143,16 +143,20 @@ This must be in the half-open interval <code>[0, num_classes)</code>, where
     <h2 id="usage">Usage<a class="anchor" aria-label="anchor" href="#usage"></a></h2>
     <p>Standalone usage:</p>
 <p></p><div class="sourceCode r"><pre><code><span><span class="va">m</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/metric_precision_at_recall.html">metric_precision_at_recall</a></span><span class="op">(</span>recall <span class="op">=</span> <span class="fl">0.5</span><span class="op">)</span></span>
-<span><span class="va">m</span><span class="op">$</span><span class="fu">update_state</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">0</span>, <span class="fl">0</span>, <span class="fl">1</span>, <span class="fl">1</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">0.3</span>, <span class="fl">0.8</span>, <span class="fl">0.3</span>, <span class="fl">0.8</span><span class="op">)</span><span class="op">)</span></span>
-<span><span class="co"># m$result()</span></span></code></pre><p></p></div>
+<span><span class="va">m</span><span class="op">$</span><span class="fu">update_state</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0</span>,   <span class="fl">0</span>,   <span class="fl">0</span>,   <span class="fl">1</span>,   <span class="fl">1</span><span class="op">)</span>,</span>
+<span>               <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">0.3</span>, <span class="fl">0.8</span>, <span class="fl">0.3</span>, <span class="fl">0.8</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="va">m</span><span class="op">$</span><span class="fu">result</span><span class="op">(</span><span class="op">)</span></span></code></pre><p></p></div>
+<p></p><div class="sourceCode"><pre><code><span id="cb1-1"><a href="#cb1-1" tabindex="-1"></a><span class="do">## tf.Tensor(0.5, shape=(), dtype=float32)</span></span></code></pre><p></p></div>
 <p></p><div class="sourceCode r"><pre><code><span><span class="va">m</span><span class="op">$</span><span class="fu">reset_state</span><span class="op">(</span><span class="op">)</span></span>
-<span><span class="va">m</span><span class="op">$</span><span class="fu">update_state</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">0</span>, <span class="fl">0</span>, <span class="fl">1</span>, <span class="fl">1</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">0.3</span>, <span class="fl">0.8</span>, <span class="fl">0.3</span>, <span class="fl">0.8</span><span class="op">)</span>,</span>
+<span><span class="va">m</span><span class="op">$</span><span class="fu">update_state</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0</span>,   <span class="fl">0</span>,   <span class="fl">0</span>,   <span class="fl">1</span>,   <span class="fl">1</span><span class="op">)</span>,</span>
+<span>               <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">0.3</span>, <span class="fl">0.8</span>, <span class="fl">0.3</span>, <span class="fl">0.8</span><span class="op">)</span>,</span>
 <span>               sample_weight <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">2</span>, <span class="fl">2</span>, <span class="fl">2</span>, <span class="fl">1</span>, <span class="fl">1</span><span class="op">)</span><span class="op">)</span></span>
-<span><span class="co"># m$result()</span></span></code></pre><p></p></div>
+<span><span class="va">m</span><span class="op">$</span><span class="fu">result</span><span class="op">(</span><span class="op">)</span></span></code></pre><p></p></div>
+<p></p><div class="sourceCode"><pre><code><span id="cb1-1"><a href="#cb1-1" tabindex="-1"></a><span class="do">## tf.Tensor(0.33333334, shape=(), dtype=float32)</span></span></code></pre><p></p></div>
 <p>Usage with <code><a href="https://generics.r-lib.org/reference/compile.html" class="external-link">compile()</a></code> API:</p>
-<p></p><div class="sourceCode r"><pre><code><span><span class="va">model</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://generics.r-lib.org/reference/compile.html" class="external-link">compile</a></span><span class="op">(</span></span>
+<p></p><div class="sourceCode r"><pre><code><span><span class="va">model</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://generics.r-lib.org/reference/compile.html" class="external-link">compile</a></span><span class="op">(</span></span>
 <span>  optimizer <span class="op">=</span> <span class="st">'sgd'</span>,</span>
-<span>  loss <span class="op">=</span> <span class="st">'mse'</span>,</span>
+<span>  loss <span class="op">=</span> <span class="st">'binary_crossentropy'</span>,</span>
 <span>  metrics <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="fu"><a href="../reference/metric_precision_at_recall.html">metric_precision_at_recall</a></span><span class="op">(</span>recall <span class="op">=</span> <span class="fl">0.8</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="op">)</span></span></code></pre><p></p></div>
     </div>
@@ -165,8 +169,8 @@ This must be in the half-open interval <code>[0, num_classes)</code>, where
 <code><a href="metric_false_negatives.html">metric_false_negatives</a>()</code>,
 <code><a href="metric_false_positives.html">metric_false_positives</a>()</code>,
 <code><a href="metric_precision.html">metric_precision</a>()</code>,
-<code><a href="metric_recall_at_precision.html">metric_recall_at_precision</a>()</code>,
 <code><a href="metric_recall.html">metric_recall</a>()</code>,
+<code><a href="metric_recall_at_precision.html">metric_recall_at_precision</a>()</code>,
 <code><a href="metric_sensitivity_at_specificity.html">metric_sensitivity_at_specificity</a>()</code>,
 <code><a href="metric_specificity_at_sensitivity.html">metric_specificity_at_sensitivity</a>()</code>,
 <code><a href="metric_true_negatives.html">metric_true_negatives</a>()</code>,
@@ -192,22 +196,22 @@ This must be in the half-open interval <code>[0, num_classes)</code>, where
 <code><a href="metric_huber.html">metric_huber</a>()</code>,
 <code><a href="metric_iou.html">metric_iou</a>()</code>,
 <code><a href="metric_kl_divergence.html">metric_kl_divergence</a>()</code>,
-<code><a href="metric_log_cosh_error.html">metric_log_cosh_error</a>()</code>,
 <code><a href="metric_log_cosh.html">metric_log_cosh</a>()</code>,
+<code><a href="metric_log_cosh_error.html">metric_log_cosh_error</a>()</code>,
+<code><a href="metric_mean.html">metric_mean</a>()</code>,
 <code><a href="metric_mean_absolute_error.html">metric_mean_absolute_error</a>()</code>,
 <code><a href="metric_mean_absolute_percentage_error.html">metric_mean_absolute_percentage_error</a>()</code>,
 <code><a href="metric_mean_iou.html">metric_mean_iou</a>()</code>,
 <code><a href="metric_mean_squared_error.html">metric_mean_squared_error</a>()</code>,
 <code><a href="metric_mean_squared_logarithmic_error.html">metric_mean_squared_logarithmic_error</a>()</code>,
 <code><a href="metric_mean_wrapper.html">metric_mean_wrapper</a>()</code>,
-<code><a href="metric_mean.html">metric_mean</a>()</code>,
 <code><a href="metric_one_hot_iou.html">metric_one_hot_iou</a>()</code>,
 <code><a href="metric_one_hot_mean_iou.html">metric_one_hot_mean_iou</a>()</code>,
 <code><a href="metric_poisson.html">metric_poisson</a>()</code>,
 <code><a href="metric_precision.html">metric_precision</a>()</code>,
 <code><a href="metric_r2_score.html">metric_r2_score</a>()</code>,
-<code><a href="metric_recall_at_precision.html">metric_recall_at_precision</a>()</code>,
 <code><a href="metric_recall.html">metric_recall</a>()</code>,
+<code><a href="metric_recall_at_precision.html">metric_recall_at_precision</a>()</code>,
 <code><a href="metric_root_mean_squared_error.html">metric_root_mean_squared_error</a>()</code>,
 <code><a href="metric_sensitivity_at_specificity.html">metric_sensitivity_at_specificity</a>()</code>,
 <code><a href="metric_sparse_categorical_accuracy.html">metric_sparse_categorical_accuracy</a>()</code>,

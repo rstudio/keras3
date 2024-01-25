@@ -67,7 +67,7 @@ parameters trackable by Keras."><!-- mathjax --><script src="https://cdnjs.cloud
 <div class="row">
   <main id="main" class="col-md-9"><div class="page-header">
       <img src="" class="logo" alt=""><h1>Torch module wrapper layer.</h1>
-      <small class="dont-index">Source: <a href="https://github.com/rstudio/keras/blob/HEAD/R/layers-utils.R" class="external-link"><code>R/layers-utils.R</code></a></small>
+      <small class="dont-index">Source: <a href="https://github.com/rstudio/keras/blob/HEAD/R/layers-torch-wrapper.R" class="external-link"><code>R/layers-torch-wrapper.R</code></a></small>
       <div class="d-none name"><code>layer_torch_module_wrapper.Rd</code></div>
     </div>
 
@@ -105,54 +105,60 @@ it once).</p></dd>
 </dl></div>
     <div class="section level2">
     <h2 id="examples">Examples<a class="anchor" aria-label="anchor" href="#examples"></a></h2>
-    <p>Here's an example of how the <code>layer_torch_module_wrapper</code> can be used with vanilla
+    <p>Here's an example of how the <code>layer_torch_module_wrapper()</code> can be used with vanilla
 PyTorch modules.</p>
-<p></p><div class="sourceCode r"><pre><code><span><span class="va">torch</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rstudio.github.io/reticulate/reference/import.html" class="external-link">import</a></span><span class="op">(</span><span class="st">"torch"</span><span class="op">)</span></span>
-<span><span class="va">nn</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rstudio.github.io/reticulate/reference/import.html" class="external-link">import</a></span><span class="op">(</span><span class="st">"torch.nn"</span><span class="op">)</span></span>
-<span><span class="va">nnf</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rstudio.github.io/reticulate/reference/import.html" class="external-link">import</a></span><span class="op">(</span><span class="st">"torch.nn.functional"</span><span class="op">)</span></span>
-<span></span>
-<span><span class="fu">Classifier</span><span class="op">(</span><span class="va">keras</span><span class="op">$</span><span class="va">Model</span><span class="op">)</span> <span class="op"><a href="../reference/grapes-py_class-grapes.html">%py_class%</a></span> <span class="op">{</span></span>
-<span></span>
-<span>  <span class="va">initialize</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">...</span><span class="op">)</span> <span class="op">{</span></span>
-<span>    <span class="va">super</span><span class="op">$</span><span class="fu">initialize</span><span class="op">(</span><span class="va">...</span><span class="op">)</span></span>
-<span></span>
-<span>    <span class="va">self</span><span class="op">$</span><span class="va">conv1</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/layer_torch_module_wrapper.html">layer_torch_module_wrapper</a></span><span class="op">(</span>module <span class="op">=</span> <span class="va">nn</span><span class="op">$</span><span class="fu">Conv2d</span><span class="op">(</span></span>
-<span>      in_channels<span class="op">=</span><span class="fl">1L</span>, out_channels<span class="op">=</span><span class="fl">32L</span>, kernel_size<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">3L</span>, <span class="fl">3L</span><span class="op">)</span></span>
-<span>    <span class="op">)</span><span class="op">)</span></span>
-<span>    <span class="va">self</span><span class="op">$</span><span class="va">conv2</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/layer_torch_module_wrapper.html">layer_torch_module_wrapper</a></span><span class="op">(</span>module <span class="op">=</span> <span class="va">nn</span><span class="op">$</span><span class="fu">Conv2d</span><span class="op">(</span></span>
-<span>      in_channels<span class="op">=</span><span class="fl">32L</span>, out_channels<span class="op">=</span><span class="fl">64L</span>, kernel_size<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">3L</span>, <span class="fl">3L</span><span class="op">)</span></span>
-<span>    <span class="op">)</span><span class="op">)</span></span>
-<span>    <span class="va">self</span><span class="op">$</span><span class="va">pool</span> <span class="op">&lt;-</span> <span class="va">nn</span><span class="op">$</span><span class="fu">MaxPool2d</span><span class="op">(</span>kernel_size<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">2L</span>, <span class="fl">2L</span><span class="op">)</span><span class="op">)</span></span>
-<span>    <span class="va">self</span><span class="op">$</span><span class="va">flatten</span> <span class="op">&lt;-</span> <span class="va">nn</span><span class="op">$</span><span class="fu">Flatten</span><span class="op">(</span><span class="op">)</span></span>
-<span>    <span class="va">self</span><span class="op">$</span><span class="va">dropout</span> <span class="op">&lt;-</span> <span class="va">nn</span><span class="op">$</span><span class="fu">Dropout</span><span class="op">(</span>p<span class="op">=</span><span class="fl">0.5</span><span class="op">)</span></span>
-<span>    <span class="va">self</span><span class="op">$</span><span class="va">fc</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/layer_torch_module_wrapper.html">layer_torch_module_wrapper</a></span><span class="op">(</span>module <span class="op">=</span> <span class="va">nn</span><span class="op">$</span><span class="fu">Linear</span><span class="op">(</span></span>
-<span>      <span class="fl">1600L</span>, <span class="fl">10L</span></span>
-<span>    <span class="op">)</span><span class="op">)</span></span>
-<span>  <span class="op">}</span></span>
-<span></span>
-<span>  <span class="va">call</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">inputs</span><span class="op">)</span> <span class="op">{</span></span>
-<span>    <span class="va">x</span> <span class="op">&lt;-</span> <span class="va">nnf</span><span class="op">$</span><span class="fu">relu</span><span class="op">(</span><span class="va">self</span><span class="op">$</span><span class="fu">conv1</span><span class="op">(</span><span class="va">inputs</span><span class="op">)</span><span class="op">)</span></span>
-<span>    <span class="va">x</span> <span class="op">&lt;-</span> <span class="va">self</span><span class="op">$</span><span class="fu">pool</span><span class="op">(</span><span class="va">x</span><span class="op">)</span></span>
-<span>    <span class="va">x</span> <span class="op">&lt;-</span> <span class="va">nnf</span><span class="op">$</span><span class="fu">relu</span><span class="op">(</span><span class="va">self</span><span class="op">$</span><span class="fu">conv2</span><span class="op">(</span><span class="va">x</span><span class="op">)</span><span class="op">)</span></span>
-<span>    <span class="va">x</span> <span class="op">&lt;-</span> <span class="va">self</span><span class="op">$</span><span class="fu">pool</span><span class="op">(</span><span class="va">x</span><span class="op">)</span></span>
-<span>    <span class="va">x</span> <span class="op">&lt;-</span> <span class="va">self</span><span class="op">$</span><span class="fu">flatten</span><span class="op">(</span><span class="va">x</span><span class="op">)</span></span>
-<span>    <span class="va">x</span> <span class="op">&lt;-</span> <span class="va">self</span><span class="op">$</span><span class="fu">dropout</span><span class="op">(</span><span class="va">x</span><span class="op">)</span></span>
-<span>    <span class="va">x</span> <span class="op">&lt;-</span> <span class="va">self</span><span class="op">$</span><span class="fu">fc</span><span class="op">(</span><span class="va">x</span><span class="op">)</span></span>
-<span>    <span class="va">nnf</span><span class="op">$</span><span class="fu">softmax</span><span class="op">(</span><span class="va">x</span>, dim<span class="op">=</span><span class="fl">1L</span><span class="op">)</span></span>
-<span>  <span class="op">}</span></span>
-<span></span>
-<span><span class="op">}</span></span>
-<span></span>
-<span><span class="va">model</span> <span class="op">&lt;-</span> <span class="fu">Classifier</span><span class="op">(</span><span class="op">)</span></span>
-<span><span class="va">model</span><span class="op">$</span><span class="fu">build</span><span class="op">(</span><span class="fu"><a href="../reference/shape.html">shape</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">28</span>, <span class="fl">28</span><span class="op">)</span><span class="op">)</span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="st">"Output shape:"</span>, <span class="fu">model</span><span class="op">(</span><span class="va">torch</span><span class="op">$</span><span class="fu">ones</span><span class="op">(</span><span class="fu"><a href="../reference/shape.html">shape</a></span><span class="op">(</span><span class="fl">1L</span>, <span class="fl">1L</span>, <span class="fl">28L</span>, <span class="fl">28L</span><span class="op">)</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span>
-<span></span>
-<span><span class="va">model</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://generics.r-lib.org/reference/compile.html" class="external-link">compile</a></span><span class="op">(</span></span>
-<span>    loss<span class="op">=</span><span class="st">"sparse_categorical_crossentropy"</span>,</span>
-<span>    optimizer<span class="op">=</span><span class="st">"adam"</span>,</span>
-<span>    metrics<span class="op">=</span><span class="st">"accuracy"</span></span>
-<span><span class="op">)</span></span>
-<span><span class="va">model</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://generics.r-lib.org/reference/fit.html" class="external-link">fit</a></span><span class="op">(</span><span class="va">train_loader</span>, epochs<span class="op">=</span><span class="fl">5</span><span class="op">)</span></span></code></pre><p></p></div>
+<p></p><div class="sourceCode r"><pre><code># reticulate::py_install(
+#   packages = c("torch", "torchvision", "torchaudio"),
+#   envname = "r-keras",
+#   pip_options = c("--index-url https://download.pytorch.org/whl/cpu")
+# )
+library(keras3)
+use_backend("torch")
+torch &lt;- reticulate::import("torch")
+nn &lt;- reticulate::import("torch.nn")
+nnf &lt;- reticulate::import("torch.nn.functional")
+
+Classifier(keras$Model) \%py_class\% {
+  initialize &lt;- function(...) {
+    super$initialize(...)
+
+    self$conv1 &lt;- layer_torch_module_wrapper(module = nn$Conv2d(
+      in_channels = 1L,
+      out_channels = 32L,
+      kernel_size = tuple(3L, 3L)
+    ))
+    self$conv2 &lt;- layer_torch_module_wrapper(module = nn$Conv2d(
+      in_channels = 32L,
+      out_channels = 64L,
+      kernel_size = tuple(3L, 3L)
+    ))
+    self$pool &lt;- nn$MaxPool2d(kernel_size = tuple(2L, 2L))
+    self$flatten &lt;- nn$Flatten()
+    self$dropout &lt;- nn$Dropout(p = 0.5)
+    self$fc &lt;-
+      layer_torch_module_wrapper(module = nn$Linear(1600L, 10L))
+  }
+
+  call &lt;- function(inputs) {
+    x &lt;- nnf$relu(self$conv1(inputs))
+    x &lt;- self$pool(x)
+    x &lt;- nnf$relu(self$conv2(x))
+    x &lt;- self$pool(x)
+    x &lt;- self$flatten(x)
+    x &lt;- self$dropout(x)
+    x &lt;- self$fc(x)
+    nnf$softmax(x, dim = 1L)
+  }
+}
+model &lt;- Classifier()
+model$build(shape(1, 28, 28))
+cat("Output shape:", format(shape(model(torch$ones(1L, 1L, 28L, 28L)))))
+
+model |&gt; compile(loss = "sparse_categorical_crossentropy",
+                 optimizer = "adam",
+                 metrics = "accuracy")
+</code></pre><p></p></div>
+<p></p><div class="sourceCode r"><pre><code><span><span class="va">model</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://generics.r-lib.org/reference/fit.html" class="external-link">fit</a></span><span class="op">(</span><span class="va">train_loader</span>, epochs <span class="op">=</span> <span class="fl">5</span><span class="op">)</span></span></code></pre><p></p></div>
     </div>
     <div class="section level2">
     <h2 id="see-also">See also<a class="anchor" aria-label="anchor" href="#see-also"></a></h2>
@@ -186,31 +192,31 @@ PyTorch modules.</p>
 <code><a href="zip_lists.html">zip_lists</a>()</code></p>
 <p>Other layers: 
 <code><a href="Layer.html">Layer</a>()</code>,
+<code><a href="layer_activation.html">layer_activation</a>()</code>,
 <code><a href="layer_activation_elu.html">layer_activation_elu</a>()</code>,
 <code><a href="layer_activation_leaky_relu.html">layer_activation_leaky_relu</a>()</code>,
 <code><a href="layer_activation_parametric_relu.html">layer_activation_parametric_relu</a>()</code>,
 <code><a href="layer_activation_relu.html">layer_activation_relu</a>()</code>,
 <code><a href="layer_activation_softmax.html">layer_activation_softmax</a>()</code>,
-<code><a href="layer_activation.html">layer_activation</a>()</code>,
 <code><a href="layer_activity_regularization.html">layer_activity_regularization</a>()</code>,
-<code><a href="layer_additive_attention.html">layer_additive_attention</a>()</code>,
 <code><a href="layer_add.html">layer_add</a>()</code>,
+<code><a href="layer_additive_attention.html">layer_additive_attention</a>()</code>,
 <code><a href="layer_attention.html">layer_attention</a>()</code>,
+<code><a href="layer_average.html">layer_average</a>()</code>,
 <code><a href="layer_average_pooling_1d.html">layer_average_pooling_1d</a>()</code>,
 <code><a href="layer_average_pooling_2d.html">layer_average_pooling_2d</a>()</code>,
 <code><a href="layer_average_pooling_3d.html">layer_average_pooling_3d</a>()</code>,
-<code><a href="layer_average.html">layer_average</a>()</code>,
 <code><a href="layer_batch_normalization.html">layer_batch_normalization</a>()</code>,
 <code><a href="layer_bidirectional.html">layer_bidirectional</a>()</code>,
 <code><a href="layer_category_encoding.html">layer_category_encoding</a>()</code>,
 <code><a href="layer_center_crop.html">layer_center_crop</a>()</code>,
 <code><a href="layer_concatenate.html">layer_concatenate</a>()</code>,
-<code><a href="layer_conv_1d_transpose.html">layer_conv_1d_transpose</a>()</code>,
 <code><a href="layer_conv_1d.html">layer_conv_1d</a>()</code>,
-<code><a href="layer_conv_2d_transpose.html">layer_conv_2d_transpose</a>()</code>,
+<code><a href="layer_conv_1d_transpose.html">layer_conv_1d_transpose</a>()</code>,
 <code><a href="layer_conv_2d.html">layer_conv_2d</a>()</code>,
-<code><a href="layer_conv_3d_transpose.html">layer_conv_3d_transpose</a>()</code>,
+<code><a href="layer_conv_2d_transpose.html">layer_conv_2d_transpose</a>()</code>,
 <code><a href="layer_conv_3d.html">layer_conv_3d</a>()</code>,
+<code><a href="layer_conv_3d_transpose.html">layer_conv_3d_transpose</a>()</code>,
 <code><a href="layer_conv_lstm_1d.html">layer_conv_lstm_1d</a>()</code>,
 <code><a href="layer_conv_lstm_2d.html">layer_conv_lstm_2d</a>()</code>,
 <code><a href="layer_conv_lstm_3d.html">layer_conv_lstm_3d</a>()</code>,

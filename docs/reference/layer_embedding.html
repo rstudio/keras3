@@ -84,6 +84,7 @@ This layer can only be used on positive integer inputs of a fixed range."><!-- m
 <span>  embeddings_regularizer <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  embeddings_constraint <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  mask_zero <span class="op">=</span> <span class="cn">FALSE</span>,</span>
+<span>  lora_rank <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  <span class="va">...</span></span>
 <span><span class="op">)</span></span></code></pre></div>
     </div>
@@ -130,6 +131,18 @@ index 0 cannot be used in the vocabulary (<code>input_dim</code> should
 equal size of vocabulary + 1).</p></dd>
 
 
+<dt>lora_rank</dt>
+<dd><p>Optional integer. If set, the layer's forward pass
+will implement LoRA (Low-Rank Adaptation)
+with the provided rank. LoRA sets the layer's embeddings
+matrix to non-trainable and replaces it with a delta over the
+original matrix, obtained via multiplying two lower-rank
+trainable matrices. This can be useful to reduce the
+computation cost of fine-tuning large embedding layers.
+You can also enable LoRA on an existing
+<code>Embedding</code> layer instance by calling <code>layer$enable_lora(rank)</code>.</p></dd>
+
+
 <dt>...</dt>
 <dd><p>For forward/backward compatability.</p></dd>
 
@@ -160,6 +173,21 @@ equal size of vocabulary + 1).</p></dd>
     <p>3D tensor with shape: <code>(batch_size, input_length, output_dim)</code>.</p>
     </div>
     <div class="section level2">
+    <h2 id="methods">Methods<a class="anchor" aria-label="anchor" href="#methods"></a></h2>
+    
+<ul><li><p></p>
+<p></p><div class="sourceCode r"><pre><code><span><span class="fu">enable_lora</span><span class="op">(</span></span>
+<span>  <span class="va">rank</span>,</span>
+<span>  a_initializer <span class="op">=</span> <span class="st">'he_uniform'</span>,</span>
+<span>  b_initializer <span class="op">=</span> <span class="st">'zeros'</span></span>
+<span><span class="op">)</span></span></code></pre><p></p></div></li>
+</ul></div>
+    <div class="section level2">
+    <h2 id="readonly-properties-">Readonly properties:<a class="anchor" aria-label="anchor" href="#readonly-properties-"></a></h2>
+    
+<ul><li><p><code>embeddings</code></p></li>
+</ul></div>
+    <div class="section level2">
     <h2 id="see-also">See also<a class="anchor" aria-label="anchor" href="#see-also"></a></h2>
     <div class="dont-index">
 <ul><li><p><a href="https://keras.io/api/layers/core_layers/embedding#embedding-class" class="external-link">https://keras.io/api/layers/core_layers/embedding#embedding-class</a></p></li>
@@ -171,31 +199,31 @@ equal size of vocabulary + 1).</p></dd>
 <code><a href="layer_masking.html">layer_masking</a>()</code></p>
 <p>Other layers: 
 <code><a href="Layer.html">Layer</a>()</code>,
+<code><a href="layer_activation.html">layer_activation</a>()</code>,
 <code><a href="layer_activation_elu.html">layer_activation_elu</a>()</code>,
 <code><a href="layer_activation_leaky_relu.html">layer_activation_leaky_relu</a>()</code>,
 <code><a href="layer_activation_parametric_relu.html">layer_activation_parametric_relu</a>()</code>,
 <code><a href="layer_activation_relu.html">layer_activation_relu</a>()</code>,
 <code><a href="layer_activation_softmax.html">layer_activation_softmax</a>()</code>,
-<code><a href="layer_activation.html">layer_activation</a>()</code>,
 <code><a href="layer_activity_regularization.html">layer_activity_regularization</a>()</code>,
-<code><a href="layer_additive_attention.html">layer_additive_attention</a>()</code>,
 <code><a href="layer_add.html">layer_add</a>()</code>,
+<code><a href="layer_additive_attention.html">layer_additive_attention</a>()</code>,
 <code><a href="layer_attention.html">layer_attention</a>()</code>,
+<code><a href="layer_average.html">layer_average</a>()</code>,
 <code><a href="layer_average_pooling_1d.html">layer_average_pooling_1d</a>()</code>,
 <code><a href="layer_average_pooling_2d.html">layer_average_pooling_2d</a>()</code>,
 <code><a href="layer_average_pooling_3d.html">layer_average_pooling_3d</a>()</code>,
-<code><a href="layer_average.html">layer_average</a>()</code>,
 <code><a href="layer_batch_normalization.html">layer_batch_normalization</a>()</code>,
 <code><a href="layer_bidirectional.html">layer_bidirectional</a>()</code>,
 <code><a href="layer_category_encoding.html">layer_category_encoding</a>()</code>,
 <code><a href="layer_center_crop.html">layer_center_crop</a>()</code>,
 <code><a href="layer_concatenate.html">layer_concatenate</a>()</code>,
-<code><a href="layer_conv_1d_transpose.html">layer_conv_1d_transpose</a>()</code>,
 <code><a href="layer_conv_1d.html">layer_conv_1d</a>()</code>,
-<code><a href="layer_conv_2d_transpose.html">layer_conv_2d_transpose</a>()</code>,
+<code><a href="layer_conv_1d_transpose.html">layer_conv_1d_transpose</a>()</code>,
 <code><a href="layer_conv_2d.html">layer_conv_2d</a>()</code>,
-<code><a href="layer_conv_3d_transpose.html">layer_conv_3d_transpose</a>()</code>,
+<code><a href="layer_conv_2d_transpose.html">layer_conv_2d_transpose</a>()</code>,
 <code><a href="layer_conv_3d.html">layer_conv_3d</a>()</code>,
+<code><a href="layer_conv_3d_transpose.html">layer_conv_3d_transpose</a>()</code>,
 <code><a href="layer_conv_lstm_1d.html">layer_conv_lstm_1d</a>()</code>,
 <code><a href="layer_conv_lstm_2d.html">layer_conv_lstm_2d</a>()</code>,
 <code><a href="layer_conv_lstm_3d.html">layer_conv_lstm_3d</a>()</code>,

@@ -179,7 +179,7 @@ that the validation loss of data provided using
 <code>validation_split</code> or <code>validation_data</code> is not affected by
 regularization layers like noise and dropout.
 <code>validation_data</code> will override <code>validation_split</code>.
-<code>validation_data</code> could be:</p><ul><li><p>A tuple <code>(x_val, y_val)</code> of arrays or tensors.</p></li>
+It could be:</p><ul><li><p>A tuple <code>(x_val, y_val)</code> of arrays or tensors.</p></li>
 <li><p>A tuple <code>(x_val, y_val, val_sample_weights)</code> of
 arrays.</p></li>
 <li><p>A generator returning
@@ -272,8 +272,8 @@ instances (since they generate batches).</p></dd>
 <dt>validation_freq</dt>
 <dd><p>Only relevant if validation data is provided.
 Specifies how many training epochs to run
-before a new validation run is performed, e.g. <code>validation_freq=2</code>
-runs validation every 2 epochs.</p></dd>
+before a new validation run is performed,
+e.g. <code>validation_freq=2</code> runs validation every 2 epochs.</p></dd>
 
 
 <dt>verbose</dt>
