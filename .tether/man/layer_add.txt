@@ -1,7 +1,7 @@
 Help on class Add in module keras.src.layers.merging.add:
 
 class Add(keras.src.layers.merging.base_merge.Merge)
- |  Add(*args, **kwargs)
+ |  Add(**kwargs)
  |
  |  Performs elementwise addition operation.
  |
@@ -62,3 +62,4 @@ class Add(keras.src.layers.merging.base_merge.Merge)
  |      An object config is a Python dictionary (serializable)
  |      containing the information needed to re-instantiate it.
  |
+

@@ -2,7 +2,7 @@
 % Please edit documentation in R/layers-attention.R
 \name{layer_multi_head_attention}
 \alias{layer_multi_head_attention}
-\title{MultiHeadAttention layer.}
+\title{Multi Head Attention layer.}
 \usage{
 layer_multi_head_attention(
   inputs,
@@ -59,15 +59,6 @@ attention over all axes, but batch, heads, and features.}
 
 \item{...}{For forward/backward compatability.}
 }
-\value{
-attention_output: The result of the computation, of shape \verb{(B, T, E)},
-where \code{T} is for target sequence shapes and \code{E} is the query input
-last dimension if \code{output_shape} is \code{NULL}. Otherwise, the
-multi-head outputs are projected to the shape specified by
-\code{output_shape}.
-attention_scores: (Optional) multi-head attention coefficients over
-attention axes.
-}
 \description{
 This is an implementation of multi-headed attention as described in the
 paper "Attention is all you Need"
@@ -117,6 +108,35 @@ decoder Transformer).
 }
 }
 
+\section{Call return}{
+\itemize{
+\item attention_output: The result of the computation, of shape \verb{(B, T, E)},
+where \code{T} is for target sequence shapes and \code{E} is the query input
+last dimension if \code{output_shape} is \code{NULL}. Otherwise, the
+multi-head outputs are projected to the shape specified by
+\code{output_shape}.
+\item attention_scores: (Optional) multi-head attention coefficients over
+attention axes.
+}
+}
+
+\section{Properties}{
+A \code{MultiHeadAttention} \code{Layer} instance has the following additional read-only properties:
+\itemize{
+\item \code{attention_axes}
+\item \code{dropout}
+\item \code{key_dense}
+\item \code{key_dim}
+\item \code{num_heads}
+\item \code{output_dense}
+\item \code{output_shape}
+\item \code{query_dense}
+\item \code{use_bias}
+\item \code{value_dense}
+\item \code{value_dim}
+}
+}
+
 \seealso{
 \itemize{
 \item \url{https://keras.io/api/layers/attention_layers/multi_head_attention#multiheadattention-class}
@@ -129,31 +149,31 @@ Other attention layers:
 
 Other layers: 
 \code{\link{Layer}()},
+\code{\link{layer_activation}()},
 \code{\link{layer_activation_elu}()},
 \code{\link{layer_activation_leaky_relu}()},
 \code{\link{layer_activation_parametric_relu}()},
 \code{\link{layer_activation_relu}()},
 \code{\link{layer_activation_softmax}()},
-\code{\link{layer_activation}()},
 \code{\link{layer_activity_regularization}()},
-\code{\link{layer_additive_attention}()},
 \code{\link{layer_add}()},
+\code{\link{layer_additive_attention}()},
 \code{\link{layer_attention}()},
+\code{\link{layer_average}()},
 \code{\link{layer_average_pooling_1d}()},
 \code{\link{layer_average_pooling_2d}()},
 \code{\link{layer_average_pooling_3d}()},
-\code{\link{layer_average}()},
 \code{\link{layer_batch_normalization}()},
 \code{\link{layer_bidirectional}()},
 \code{\link{layer_category_encoding}()},
 \code{\link{layer_center_crop}()},
 \code{\link{layer_concatenate}()},
-\code{\link{layer_conv_1d_transpose}()},
 \code{\link{layer_conv_1d}()},
-\code{\link{layer_conv_2d_transpose}()},
+\code{\link{layer_conv_1d_transpose}()},
 \code{\link{layer_conv_2d}()},
-\code{\link{layer_conv_3d_transpose}()},
+\code{\link{layer_conv_2d_transpose}()},
 \code{\link{layer_conv_3d}()},
+\code{\link{layer_conv_3d_transpose}()},
 \code{\link{layer_conv_lstm_1d}()},
 \code{\link{layer_conv_lstm_2d}()},
 \code{\link{layer_conv_lstm_3d}()},

@@ -1,7 +1,7 @@
 Help on class ReduceLROnPlateau in module keras.src.callbacks.reduce_lr_on_plateau:
 
 class ReduceLROnPlateau(keras.src.callbacks.callback.Callback)
- |  ReduceLROnPlateau(monitor='val_loss', factor=0.1, patience=10, verbose=0, mode='auto', min_delta=0.0001, cooldown=0, min_lr=0, **kwargs)
+ |  ReduceLROnPlateau(monitor='val_loss', factor=0.1, patience=10, verbose=0, mode='auto', min_delta=0.0001, cooldown=0, min_lr=0.0, **kwargs)
  |
  |  Reduce learning rate when a metric has stopped improving.
  |
@@ -53,7 +53,7 @@ class ReduceLROnPlateau(keras.src.callbacks.callback.Callback)
  |    mode='auto',
  |    min_delta=0.0001,
  |    cooldown=0,
- |    min_lr=0,
+ |    min_lr=0.0,
  |    **kwargs
  |  )
  |      Initialize self.  See help(type(self)) for accurate signature.
@@ -87,3 +87,4 @@ class ReduceLROnPlateau(keras.src.callbacks.callback.Callback)
  |          logs: Dict. Currently no data is passed to this argument for this
  |            method but that may change in the future.
  |
+

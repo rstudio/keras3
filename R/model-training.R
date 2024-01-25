@@ -386,7 +386,7 @@ function (object, x = NULL, y = NULL, ..., batch_size = NULL,
 #' `validation_split` or `validation_data` is not affected by
 #' regularization layers like noise and dropout.
 #' `validation_data` will override `validation_split`.
-#' `validation_data` could be:
+#' It could be:
 #'   - A tuple `(x_val, y_val)` of arrays or tensors.
 #'   - A tuple `(x_val, y_val, val_sample_weights)` of
 #'     arrays.
@@ -473,8 +473,8 @@ function (object, x = NULL, y = NULL, ..., batch_size = NULL,
 #' @param validation_freq
 #' Only relevant if validation data is provided.
 #' Specifies how many training epochs to run
-#' before a new validation run is performed, e.g. `validation_freq=2`
-#' runs validation every 2 epochs.
+#' before a new validation run is performed,
+#' e.g. `validation_freq=2` runs validation every 2 epochs.
 #'
 #' @param object Keras model object
 #'

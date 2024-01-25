@@ -47,21 +47,29 @@ indeed a correct label.
 Standalone usage:
 
 \if{html}{\out{<div class="sourceCode r">}}\preformatted{m <- metric_precision_at_recall(recall = 0.5)
-m$update_state(c(0, 0, 0, 1, 1), c(0, 0.3, 0.8, 0.3, 0.8))
-# m$result()
+m$update_state(c(0,   0,   0,   1,   1),
+               c(0, 0.3, 0.8, 0.3, 0.8))
+m$result()
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor(0.5, shape=(), dtype=float32)
 }\if{html}{\out{</div>}}
 
 \if{html}{\out{<div class="sourceCode r">}}\preformatted{m$reset_state()
-m$update_state(c(0, 0, 0, 1, 1), c(0, 0.3, 0.8, 0.3, 0.8),
+m$update_state(c(0,   0,   0,   1,   1),
+               c(0, 0.3, 0.8, 0.3, 0.8),
                sample_weight = c(2, 2, 2, 1, 1))
-# m$result()
+m$result()
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor(0.33333334, shape=(), dtype=float32)
 }\if{html}{\out{</div>}}
 
 Usage with \code{compile()} API:
 
-\if{html}{\out{<div class="sourceCode r">}}\preformatted{model \%>\% compile(
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{model |> compile(
   optimizer = 'sgd',
-  loss = 'mse',
+  loss = 'binary_crossentropy',
   metrics = list(metric_precision_at_recall(recall = 0.8))
 )
 }\if{html}{\out{</div>}}
@@ -77,8 +85,8 @@ Other confusion metrics:
 \code{\link{metric_false_negatives}()},
 \code{\link{metric_false_positives}()},
 \code{\link{metric_precision}()},
-\code{\link{metric_recall_at_precision}()},
 \code{\link{metric_recall}()},
+\code{\link{metric_recall_at_precision}()},
 \code{\link{metric_sensitivity_at_specificity}()},
 \code{\link{metric_specificity_at_sensitivity}()},
 \code{\link{metric_true_negatives}()},
@@ -105,22 +113,22 @@ Other metrics:
 \code{\link{metric_huber}()},
 \code{\link{metric_iou}()},
 \code{\link{metric_kl_divergence}()},
-\code{\link{metric_log_cosh_error}()},
 \code{\link{metric_log_cosh}()},
+\code{\link{metric_log_cosh_error}()},
+\code{\link{metric_mean}()},
 \code{\link{metric_mean_absolute_error}()},
 \code{\link{metric_mean_absolute_percentage_error}()},
 \code{\link{metric_mean_iou}()},
 \code{\link{metric_mean_squared_error}()},
 \code{\link{metric_mean_squared_logarithmic_error}()},
 \code{\link{metric_mean_wrapper}()},
-\code{\link{metric_mean}()},
 \code{\link{metric_one_hot_iou}()},
 \code{\link{metric_one_hot_mean_iou}()},
 \code{\link{metric_poisson}()},
 \code{\link{metric_precision}()},
 \code{\link{metric_r2_score}()},
-\code{\link{metric_recall_at_precision}()},
 \code{\link{metric_recall}()},
+\code{\link{metric_recall_at_precision}()},
 \code{\link{metric_root_mean_squared_error}()},
 \code{\link{metric_sensitivity_at_specificity}()},
 \code{\link{metric_sparse_categorical_accuracy}()},

@@ -139,7 +139,7 @@ the left/right or up/down of the input. When <code>padding="same"</code> and
 <dd><p>string, either <code>"channels_last"</code> or <code>"channels_first"</code>.
 The ordering of the dimensions in the inputs. <code>"channels_last"</code>
 corresponds to inputs with shape
-<code>(batch_size, channels, height, width)</code>
+<code>(batch_size, height, width, channels)</code>
 while <code>"channels_first"</code> corresponds to inputs with shape
 <code>(batch_size, channels, height, width)</code>. It defaults to the
 <code>image_data_format</code> value found in your Keras config file at
@@ -246,41 +246,41 @@ A 4D tensor with shape: <code>(batch_size, filters, new_height, new_width)</code
     <div class="dont-index">
 <ul><li><p><a href="https://keras.io/api/layers/convolution_layers/convolution2d_transpose#conv2dtranspose-class" class="external-link">https://keras.io/api/layers/convolution_layers/convolution2d_transpose#conv2dtranspose-class</a></p></li>
 </ul><p>Other convolutional layers: 
-<code><a href="layer_conv_1d_transpose.html">layer_conv_1d_transpose</a>()</code>,
 <code><a href="layer_conv_1d.html">layer_conv_1d</a>()</code>,
+<code><a href="layer_conv_1d_transpose.html">layer_conv_1d_transpose</a>()</code>,
 <code><a href="layer_conv_2d.html">layer_conv_2d</a>()</code>,
-<code><a href="layer_conv_3d_transpose.html">layer_conv_3d_transpose</a>()</code>,
 <code><a href="layer_conv_3d.html">layer_conv_3d</a>()</code>,
+<code><a href="layer_conv_3d_transpose.html">layer_conv_3d_transpose</a>()</code>,
 <code><a href="layer_depthwise_conv_1d.html">layer_depthwise_conv_1d</a>()</code>,
 <code><a href="layer_depthwise_conv_2d.html">layer_depthwise_conv_2d</a>()</code>,
 <code><a href="layer_separable_conv_1d.html">layer_separable_conv_1d</a>()</code>,
 <code><a href="layer_separable_conv_2d.html">layer_separable_conv_2d</a>()</code></p>
 <p>Other layers: 
 <code><a href="Layer.html">Layer</a>()</code>,
+<code><a href="layer_activation.html">layer_activation</a>()</code>,
 <code><a href="layer_activation_elu.html">layer_activation_elu</a>()</code>,
 <code><a href="layer_activation_leaky_relu.html">layer_activation_leaky_relu</a>()</code>,
 <code><a href="layer_activation_parametric_relu.html">layer_activation_parametric_relu</a>()</code>,
 <code><a href="layer_activation_relu.html">layer_activation_relu</a>()</code>,
 <code><a href="layer_activation_softmax.html">layer_activation_softmax</a>()</code>,
-<code><a href="layer_activation.html">layer_activation</a>()</code>,
 <code><a href="layer_activity_regularization.html">layer_activity_regularization</a>()</code>,
-<code><a href="layer_additive_attention.html">layer_additive_attention</a>()</code>,
 <code><a href="layer_add.html">layer_add</a>()</code>,
+<code><a href="layer_additive_attention.html">layer_additive_attention</a>()</code>,
 <code><a href="layer_attention.html">layer_attention</a>()</code>,
+<code><a href="layer_average.html">layer_average</a>()</code>,
 <code><a href="layer_average_pooling_1d.html">layer_average_pooling_1d</a>()</code>,
 <code><a href="layer_average_pooling_2d.html">layer_average_pooling_2d</a>()</code>,
 <code><a href="layer_average_pooling_3d.html">layer_average_pooling_3d</a>()</code>,
-<code><a href="layer_average.html">layer_average</a>()</code>,
 <code><a href="layer_batch_normalization.html">layer_batch_normalization</a>()</code>,
 <code><a href="layer_bidirectional.html">layer_bidirectional</a>()</code>,
 <code><a href="layer_category_encoding.html">layer_category_encoding</a>()</code>,
 <code><a href="layer_center_crop.html">layer_center_crop</a>()</code>,
 <code><a href="layer_concatenate.html">layer_concatenate</a>()</code>,
-<code><a href="layer_conv_1d_transpose.html">layer_conv_1d_transpose</a>()</code>,
 <code><a href="layer_conv_1d.html">layer_conv_1d</a>()</code>,
+<code><a href="layer_conv_1d_transpose.html">layer_conv_1d_transpose</a>()</code>,
 <code><a href="layer_conv_2d.html">layer_conv_2d</a>()</code>,
-<code><a href="layer_conv_3d_transpose.html">layer_conv_3d_transpose</a>()</code>,
 <code><a href="layer_conv_3d.html">layer_conv_3d</a>()</code>,
+<code><a href="layer_conv_3d_transpose.html">layer_conv_3d_transpose</a>()</code>,
 <code><a href="layer_conv_lstm_1d.html">layer_conv_lstm_1d</a>()</code>,
 <code><a href="layer_conv_lstm_2d.html">layer_conv_lstm_2d</a>()</code>,
 <code><a href="layer_conv_lstm_3d.html">layer_conv_lstm_3d</a>()</code>,

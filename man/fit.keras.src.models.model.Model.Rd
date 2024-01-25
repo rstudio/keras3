@@ -92,7 +92,7 @@ that the validation loss of data provided using
 \code{validation_split} or \code{validation_data} is not affected by
 regularization layers like noise and dropout.
 \code{validation_data} will override \code{validation_split}.
-\code{validation_data} could be:
+It could be:
 \itemize{
 \item A tuple \verb{(x_val, y_val)} of arrays or tensors.
 \item A tuple \verb{(x_val, y_val, val_sample_weights)} of
@@ -171,8 +171,8 @@ instances (since they generate batches).}
 
 \item{validation_freq}{Only relevant if validation data is provided.
 Specifies how many training epochs to run
-before a new validation run is performed, e.g. \code{validation_freq=2}
-runs validation every 2 epochs.}
+before a new validation run is performed,
+e.g. \code{validation_freq=2} runs validation every 2 epochs.}
 
 \item{verbose}{\code{"auto"}, \code{0}, \code{1}, or \code{2}. Verbosity mode.
 \code{0} = silent, \code{1} = progress bar, \code{2} = one line per epoch.

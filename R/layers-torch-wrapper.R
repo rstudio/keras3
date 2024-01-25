@@ -8,31 +8,40 @@
 #' parameters trackable by Keras.
 #'
 #' # Examples
-#' Here's an example of how the `layer_torch_module_wrapper` can be used with vanilla
+#' Here's an example of how the [`layer_torch_module_wrapper()`] can be used with vanilla
 #' PyTorch modules.
 #'
-#' ```{r, eval = FALSE}
-#' torch <- import("torch")
-#' nn <- import("torch.nn")
-#' nnf <- import("torch.nn.functional")
+#' ```r
+#' # reticulate::py_install(
+#' #   packages = c("torch", "torchvision", "torchaudio"),
+#' #   envname = "r-keras",
+#' #   pip_options = c("--index-url https://download.pytorch.org/whl/cpu")
+#' # )
+#' library(keras3)
+#' use_backend("torch")
+#' torch <- reticulate::import("torch")
+#' nn <- reticulate::import("torch.nn")
+#' nnf <- reticulate::import("torch.nn.functional")
 #'
-#' Classifier(keras$Model) %py_class% {
-#'
+#' Classifier(keras$Model) \%py_class\% {
 #'   initialize <- function(...) {
 #'     super$initialize(...)
 #'
 #'     self$conv1 <- layer_torch_module_wrapper(module = nn$Conv2d(
-#'       in_channels=1L, out_channels=32L, kernel_size=c(3L, 3L)
+#'       in_channels = 1L,
+#'       out_channels = 32L,
+#'       kernel_size = tuple(3L, 3L)
 #'     ))
 #'     self$conv2 <- layer_torch_module_wrapper(module = nn$Conv2d(
-#'       in_channels=32L, out_channels=64L, kernel_size=c(3L, 3L)
+#'       in_channels = 32L,
+#'       out_channels = 64L,
+#'       kernel_size = tuple(3L, 3L)
 #'     ))
-#'     self$pool <- nn$MaxPool2d(kernel_size=c(2L, 2L))
+#'     self$pool <- nn$MaxPool2d(kernel_size = tuple(2L, 2L))
 #'     self$flatten <- nn$Flatten()
-#'     self$dropout <- nn$Dropout(p=0.5)
-#'     self$fc <- layer_torch_module_wrapper(module = nn$Linear(
-#'       1600L, 10L
-#'     ))
+#'     self$dropout <- nn$Dropout(p = 0.5)
+#'     self$fc <-
+#'       layer_torch_module_wrapper(module = nn$Linear(1600L, 10L))
 #'   }
 #'
 #'   call <- function(inputs) {
@@ -43,21 +52,19 @@
 #'     x <- self$flatten(x)
 #'     x <- self$dropout(x)
 #'     x <- self$fc(x)
-#'     nnf$softmax(x, dim=1L)
+#'     nnf$softmax(x, dim = 1L)
 #'   }
-#'
 #' }
-#'
 #' model <- Classifier()
 #' model$build(shape(1, 28, 28))
-#' print("Output shape:", model(torch$ones(shape(1L, 1L, 28L, 28L))))
+#' cat("Output shape:", format(shape(model(torch$ones(1L, 1L, 28L, 28L)))))
 #'
-#' model %>% compile(
-#'     loss="sparse_categorical_crossentropy",
-#'     optimizer="adam",
-#'     metrics="accuracy"
-#' )
-#' model %>% fit(train_loader, epochs=5)
+#' model |> compile(loss = "sparse_categorical_crossentropy",
+#'                  optimizer = "adam",
+#'                  metrics = "accuracy")
+#' ```
+#' ```r
+#' model |> fit(train_loader, epochs = 5)
 #' ```
 #'
 #' @param module

@@ -16,6 +16,7 @@ layer_einsum_dense(
   bias_regularizer = NULL,
   kernel_constraint = NULL,
   bias_constraint = NULL,
+  lora_rank = NULL,
   ...
 )
 }
@@ -55,6 +56,18 @@ matrix.}
 matrix.}
 
 \item{bias_constraint}{Constraint function applied to the bias vector.}
+
+\item{lora_rank}{Optional integer. If set, the layer's forward pass
+will implement LoRA (Low-Rank Adaptation)
+with the provided rank. LoRA sets the layer's kernel
+to non-trainable and replaces it with a delta over the
+original kernel, obtained via multiplying two lower-rank
+trainable matrices
+(the factorization happens on the last dimension).
+This can be useful to reduce the
+computation cost of fine-tuning large dense layers.
+You can also enable LoRA on an existing
+\code{EinsumDense} layer by calling \code{layer$enable_lora(rank)}.}
 
 \item{...}{Base layer keyword arguments, such as \code{name} and \code{dtype}.}
 }
@@ -122,6 +135,25 @@ output  # shape(NA, 32, 64)
 }\if{html}{\out{</div>}}
 }
 
+\section{Methods}{
+\itemize{
+\item 
+
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{enable_lora(
+  rank,
+  a_initializer = 'he_uniform',
+  b_initializer = 'zeros'
+)
+}\if{html}{\out{</div>}}
+}
+}
+
+\section{Readonly properties:}{
+\itemize{
+\item \code{kernel}
+}
+}
+
 \seealso{
 Other core layers: 
 \code{\link{layer_dense}()},
@@ -132,31 +164,31 @@ Other core layers:
 
 Other layers: 
 \code{\link{Layer}()},
+\code{\link{layer_activation}()},
 \code{\link{layer_activation_elu}()},
 \code{\link{layer_activation_leaky_relu}()},
 \code{\link{layer_activation_parametric_relu}()},
 \code{\link{layer_activation_relu}()},
 \code{\link{layer_activation_softmax}()},
-\code{\link{layer_activation}()},
 \code{\link{layer_activity_regularization}()},
-\code{\link{layer_additive_attention}()},
 \code{\link{layer_add}()},
+\code{\link{layer_additive_attention}()},
 \code{\link{layer_attention}()},
+\code{\link{layer_average}()},
 \code{\link{layer_average_pooling_1d}()},
 \code{\link{layer_average_pooling_2d}()},
 \code{\link{layer_average_pooling_3d}()},
-\code{\link{layer_average}()},
 \code{\link{layer_batch_normalization}()},
 \code{\link{layer_bidirectional}()},
 \code{\link{layer_category_encoding}()},
 \code{\link{layer_center_crop}()},
 \code{\link{layer_concatenate}()},
-\code{\link{layer_conv_1d_transpose}()},
 \code{\link{layer_conv_1d}()},
-\code{\link{layer_conv_2d_transpose}()},
+\code{\link{layer_conv_1d_transpose}()},
 \code{\link{layer_conv_2d}()},
-\code{\link{layer_conv_3d_transpose}()},
+\code{\link{layer_conv_2d_transpose}()},
 \code{\link{layer_conv_3d}()},
+\code{\link{layer_conv_3d_transpose}()},
 \code{\link{layer_conv_lstm_1d}()},
 \code{\link{layer_conv_lstm_2d}()},
 \code{\link{layer_conv_lstm_3d}()},

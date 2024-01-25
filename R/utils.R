@@ -178,6 +178,10 @@ function (tensor)
 #' Location to store cached files, when `NULL` it
 #' defaults to `Sys.getenv("KERAS_HOME", "~/.keras/")`.
 #'
+#' @param force_download
+#' If `TRUE`, the file will always be re-downloaded
+#' regardless of the cache state.
+#'
 #' @param ... For forward/backward compatability.
 #'
 #' @export
@@ -189,7 +193,8 @@ function (tensor)
 get_file <-
 function (fname = NULL, origin = NULL, ...,
     file_hash = NULL, cache_subdir = "datasets", hash_algorithm = "auto",
-    extract = FALSE, archive_format = "auto", cache_dir = NULL)
+    extract = FALSE, archive_format = "auto", cache_dir = NULL,
+    force_download = FALSE)
 {
     args <- capture_args()
     do.call(keras$utils$get_file, args)
@@ -197,57 +202,57 @@ function (fname = NULL, origin = NULL, ...,
 
 
 
-#' Convert a Keras model to dot format.
-#'
-#' @returns
-#' A `pydot.Dot` instance representing the Keras model or
-#' a `pydot.Cluster` instance representing nested model if
-#' `subgraph=TRUE`.
-#'
-#' @param model
-#' A Keras model instance.
-#'
-#' @param show_shapes
-#' whether to display shape information.
-#'
-#' @param show_dtype
-#' whether to display layer dtypes.
-#'
-#' @param show_layer_names
-#' whether to display layer names.
-#'
-#' @param rankdir
-#' `rankdir` argument passed to PyDot,
-#' a string specifying the format of the plot: `"TB"`
-#' creates a vertical plot; `"LR"` creates a horizontal plot.
-#'
-#' @param expand_nested
-#' whether to expand nested Functional models
-#' into clusters.
-#'
-#' @param dpi
-#' Image resolution in dots per inch.
-#'
-#' @param subgraph
-#' whether to return a `pydot.Cluster` instance.
-#'
-#' @param show_layer_activations
-#' Display layer activations (only for layers that
-#' have an `activation` property).
-#'
-#' @param show_trainable
-#' whether to display if a layer is trainable.
-#'
-#' @param ...
-#' For forward/backward compatability.
-#'
+#  Convert a Keras model to dot format.
+#
+#  @returns
+#  A `pydot.Dot` instance representing the Keras model or
+#  a `pydot.Cluster` instance representing nested model if
+#  `subgraph=TRUE`.
+#
+#  @param model
+#  A Keras model instance.
+#
+#  @param show_shapes
+#  whether to display shape information.
+#
+#  @param show_dtype
+#  whether to display layer dtypes.
+#
+#  @param show_layer_names
+#  whether to display layer names.
+#
+#  @param rankdir
+#  `rankdir` argument passed to PyDot,
+#  a string specifying the format of the plot: `"TB"`
+#  creates a vertical plot; `"LR"` creates a horizontal plot.
+#
+#  @param expand_nested
+#  whether to expand nested Functional models
+#  into clusters.
+#
+#  @param dpi
+#  Image resolution in dots per inch.
+#
+#  @param subgraph
+#  whether to return a `pydot.Cluster` instance.
+#
+#  @param show_layer_activations
+#  Display layer activations (only for layers that
+#  have an `activation` property).
+#
+#  @param show_trainable
+#  whether to display if a layer is trainable.
+#
+#  @param ...
+#  For forward/backward compatability.
+#
 # @export
-#' @noRd
-#' @family utils
-#' @seealso
-#' + <https://keras.io/api/utils/model_plotting_utils#modeltodot-function>
+#  @noRd
+#  @family utils
+#  @seealso
+#  + <https://keras.io/api/utils/model_plotting_utils#modeltodot-function>
 #  + <https://www.tensorflow.org/api_docs/python/tf/keras/utils/model_to_dot>
-#' @tether keras.utils.model_to_dot
+#  @tether keras.utils.model_to_dot
 # model_to_dot <-
 function (model, show_shapes = FALSE, show_dtype = FALSE, show_layer_names = TRUE,
     rankdir = "TB", expand_nested = FALSE, dpi = 200L, subgraph = FALSE,

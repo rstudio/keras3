@@ -12,6 +12,7 @@ layer_embedding(
   embeddings_regularizer = NULL,
   embeddings_constraint = NULL,
   mask_zero = FALSE,
+  lora_rank = NULL,
   ...
 )
 }
@@ -41,6 +42,16 @@ to support masking or an exception will be raised.
 If \code{mask_zero} is set to \code{TRUE}, as a consequence,
 index 0 cannot be used in the vocabulary (\code{input_dim} should
 equal size of vocabulary + 1).}
+
+\item{lora_rank}{Optional integer. If set, the layer's forward pass
+will implement LoRA (Low-Rank Adaptation)
+with the provided rank. LoRA sets the layer's embeddings
+matrix to non-trainable and replaces it with a delta over the
+original matrix, obtained via multiplying two lower-rank
+trainable matrices. This can be useful to reduce the
+computation cost of fine-tuning large embedding layers.
+You can also enable LoRA on an existing
+\code{Embedding} layer instance by calling \code{layer$enable_lora(rank)}.}
 
 \item{...}{For forward/backward compatability.}
 }
@@ -77,6 +88,25 @@ dim(output_array)    # (32, 10, 64)
 3D tensor with shape: \verb{(batch_size, input_length, output_dim)}.
 }
 
+\section{Methods}{
+\itemize{
+\item 
+
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{enable_lora(
+  rank,
+  a_initializer = 'he_uniform',
+  b_initializer = 'zeros'
+)
+}\if{html}{\out{</div>}}
+}
+}
+
+\section{Readonly properties:}{
+\itemize{
+\item \code{embeddings}
+}
+}
+
 \seealso{
 \itemize{
 \item \url{https://keras.io/api/layers/core_layers/embedding#embedding-class}
@@ -91,31 +121,31 @@ Other core layers:
 
 Other layers: 
 \code{\link{Layer}()},
+\code{\link{layer_activation}()},
 \code{\link{layer_activation_elu}()},
 \code{\link{layer_activation_leaky_relu}()},
 \code{\link{layer_activation_parametric_relu}()},
 \code{\link{layer_activation_relu}()},
 \code{\link{layer_activation_softmax}()},
-\code{\link{layer_activation}()},
 \code{\link{layer_activity_regularization}()},
-\code{\link{layer_additive_attention}()},
 \code{\link{layer_add}()},
+\code{\link{layer_additive_attention}()},
 \code{\link{layer_attention}()},
+\code{\link{layer_average}()},
 \code{\link{layer_average_pooling_1d}()},
 \code{\link{layer_average_pooling_2d}()},
 \code{\link{layer_average_pooling_3d}()},
-\code{\link{layer_average}()},
 \code{\link{layer_batch_normalization}()},
 \code{\link{layer_bidirectional}()},
 \code{\link{layer_category_encoding}()},
 \code{\link{layer_center_crop}()},
 \code{\link{layer_concatenate}()},
-\code{\link{layer_conv_1d_transpose}()},
 \code{\link{layer_conv_1d}()},
-\code{\link{layer_conv_2d_transpose}()},
+\code{\link{layer_conv_1d_transpose}()},
 \code{\link{layer_conv_2d}()},
-\code{\link{layer_conv_3d_transpose}()},
+\code{\link{layer_conv_2d_transpose}()},
 \code{\link{layer_conv_3d}()},
+\code{\link{layer_conv_3d_transpose}()},
 \code{\link{layer_conv_lstm_1d}()},
 \code{\link{layer_conv_lstm_2d}()},
 \code{\link{layer_conv_lstm_3d}()},

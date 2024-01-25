@@ -337,7 +337,7 @@ function (object, filters, kernel_size, strides = 1L, padding = "valid",
 #' string, either `"channels_last"` or `"channels_first"`.
 #' The ordering of the dimensions in the inputs. `"channels_last"`
 #' corresponds to inputs with shape
-#' `(batch_size, channels, height, width)`
+#' `(batch_size, height, width, channels)`
 #' while `"channels_first"` corresponds to inputs with shape
 #' `(batch_size, channels, height, width)`. It defaults to the
 #' `image_data_format` value found in your Keras config file at
@@ -484,7 +484,7 @@ function (object, filters, kernel_size, strides = list(1L, 1L),
 #' string, either `"channels_last"` or `"channels_first"`.
 #' The ordering of the dimensions in the inputs. `"channels_last"`
 #' corresponds to inputs with shape
-#' `(batch_size, channels, height, width)`
+#' `(batch_size, height, width, channels)`
 #' while `"channels_first"` corresponds to inputs with shape
 #' `(batch_size, channels, height, width)`. It defaults to the
 #' `image_data_format` value found in your Keras config file at
@@ -624,7 +624,7 @@ function (object, filters, kernel_size, strides = list(1L, 1L),
 #' corresponds to inputs with shape
 #' `(batch_size, spatial_dim1, spatial_dim2, spatial_dim3, channels)`
 #' while `"channels_first"` corresponds to inputs with shape
-#' `(batch_size, spatial_dim1, spatial_dim2, spatial_dim3, channels)`.
+#' `(batch_size, channels, spatial_dim1, spatial_dim2, spatial_dim3)`.
 #' It defaults to the `image_data_format` value found in your Keras
 #' config file at `~/.keras/keras.json`. If you never set it, then it
 #' will be `"channels_last"`.
@@ -775,7 +775,7 @@ function (object, filters, kernel_size, strides = list(1L, 1L,
 #' corresponds to inputs with shape
 #' `(batch_size, spatial_dim1, spatial_dim2, spatial_dim3, channels)`
 #' while `"channels_first"` corresponds to inputs with shape
-#' `(batch_size, spatial_dim1, spatial_dim2, spatial_dim3, channels)`.
+#' `(batch_size, channels, spatial_dim1, spatial_dim2, spatial_dim3)`.
 #' It defaults to the `image_data_format` value found in your Keras
 #' config file at `~/.keras/keras.json`. If you never set it, then it
 #' will be `"channels_last"`.
@@ -1072,10 +1072,11 @@ function (object, kernel_size, strides = 1L, padding = "valid",
 #' @param data_format
 #' string, either `"channels_last"` or `"channels_first"`.
 #' The ordering of the dimensions in the inputs. `"channels_last"`
-#' corresponds to inputs with shape `(batch, steps, features)`
+#' corresponds to inputs with shape `(batch, height, width, channels)`
 #' while `"channels_first"` corresponds to inputs with shape
-#' `(batch, features, steps)`. It defaults to the `image_data_format`
-#' value found in your Keras config file at `~/.keras/keras.json`.
+#' `(batch, channels, height, width)`. It defaults to the
+#' `image_data_format` value found in your Keras config file
+#' at `~/.keras/keras.json`.
 #' If you never set it, then it will be `"channels_last"`.
 #'
 #' @param dilation_rate
@@ -1353,10 +1354,11 @@ function (object, filters, kernel_size, strides = 1L, padding = "valid",
 #' @param data_format
 #' string, either `"channels_last"` or `"channels_first"`.
 #' The ordering of the dimensions in the inputs. `"channels_last"`
-#' corresponds to inputs with shape `(batch, steps, features)`
+#' corresponds to inputs with shape `(batch, height, width, channels)`
 #' while `"channels_first"` corresponds to inputs with shape
-#' `(batch, features, steps)`. It defaults to the `image_data_format`
-#' value found in your Keras config file at `~/.keras/keras.json`.
+#' `(batch, channels, height, width)`. It defaults to the
+#' `image_data_format` value found in your Keras config file
+#' at `~/.keras/keras.json`.
 #' If you never set it, then it will be `"channels_last"`.
 #'
 #' @param dilation_rate

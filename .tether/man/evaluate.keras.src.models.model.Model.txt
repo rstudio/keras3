@@ -1,0 +1,74 @@
+__signature__
+keras.Model.evaluate(
+  self,
+  x=None,
+  y=None,
+  batch_size=None,
+  verbose='auto',
+  sample_weight=None,
+  steps=None,
+  callbacks=None,
+  return_dict=False,
+  **kwargs
+)
+__doc__
+Returns the loss value & metrics values for the model in test mode.
+
+Computation is done in batches (see the `batch_size` arg.)
+
+Args:
+    x: Input data. It could be:
+        - A NumPy array (or array-like), or a list of arrays
+            (in case the model has multiple inputs).
+        - A tensor, or a list of tensors
+            (in case the model has multiple inputs).
+        - A dict mapping input names to the corresponding array/tensors,
+            if the model has named inputs.
+        - A `tf.data.Dataset`. Should return a tuple
+            of either `(inputs, targets)` or
+            `(inputs, targets, sample_weights)`.
+        - A generator or `keras.utils.PyDataset` returning
+            `(inputs, targets)` or `(inputs, targets, sample_weights)`.
+    y: Target data. Like the input data `x`, it could be either NumPy
+        array(s) or backend-native tensor(s).
+        If `x` is a `tf.data.Dataset` or `keras.utils.PyDataset`
+        instance, `y` should not be specified
+        (since targets will be obtained from the iterator/dataset).
+    batch_size: Integer or `None`. Number of samples per batch of
+        computation. If unspecified, `batch_size` will default to 32. Do
+        not specify the `batch_size` if your data is in the form of a
+        dataset, generators, or `keras.utils.PyDataset` instances
+        (since they generate batches).
+    verbose: `"auto"`, 0, 1, or 2. Verbosity mode.
+        0 = silent, 1 = progress bar, 2 = single line.
+        `"auto"` becomes 1 for most cases.
+        Note that the progress bar is not
+        particularly useful when logged to a file, so `verbose=2` is
+        recommended when not running interactively
+        (e.g. in a production environment). Defaults to `"auto"`.
+    sample_weight: Optional NumPy array of weights for the test samples,
+        used for weighting the loss function. You can either pass a flat
+        (1D) NumPy array with the same length as the input samples
+        (1:1 mapping between weights and samples), or in the case of
+        temporal data, you can pass a 2D array with shape `(samples,
+        sequence_length)`, to apply a different weight to every
+        timestep of every sample. This argument is not supported when
+        `x` is a dataset, instead pass sample weights as the third
+        element of `x`.
+    steps: Integer or `None`. Total number of steps (batches of samples)
+        before declaring the evaluation round finished. Ignored with the
+        default value of `None`. If `x` is a `tf.data.Dataset` and
+        `steps` is `None`, evaluation will run until the dataset
+        is exhausted.
+    callbacks: List of `keras.callbacks.Callback` instances.
+        List of callbacks to apply during evaluation.
+    return_dict: If `True`, loss and metric results are returned as a
+        dict, with each key being the name of the metric.
+        If `False`, they are returned as a list.
+
+Returns:
+    Scalar test loss (if the model has a single output and no metrics)
+    or list of scalars (if the model has multiple outputs
+    and/or metrics). The attribute `model.metrics_names` will give you
+    the display labels for the scalar outputs.
+

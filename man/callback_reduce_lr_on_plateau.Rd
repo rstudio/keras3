@@ -12,14 +12,14 @@ callback_reduce_lr_on_plateau(
   mode = "auto",
   min_delta = 1e-04,
   cooldown = 0L,
-  min_lr = 0L,
+  min_lr = 0,
   ...
 )
 }
 \arguments{
 \item{monitor}{String. Quantity to be monitored.}
 
-\item{factor}{Numeric. Factor by which the learning rate will be reduced.
+\item{factor}{Float. Factor by which the learning rate will be reduced.
 \code{new_lr = lr * factor}.}
 
 \item{patience}{Integer. Number of epochs with no improvement after which
@@ -34,13 +34,13 @@ be reduced when the quantity monitored has stopped increasing; in
 \code{'auto'} mode, the direction is automatically inferred from the name
 of the monitored quantity.}
 
-\item{min_delta}{Numeric. Threshold for measuring the new optimum, to only focus
+\item{min_delta}{Float. Threshold for measuring the new optimum, to only focus
 on significant changes.}
 
 \item{cooldown}{Integer. Number of epochs to wait before resuming normal
 operation after the learning rate has been reduced.}
 
-\item{min_lr}{Numeric. Lower bound on the learning rate.}
+\item{min_lr}{Float. Lower bound on the learning rate.}
 
 \item{...}{For forward/backward compatability.}
 }

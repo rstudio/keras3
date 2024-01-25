@@ -4,20 +4,20 @@ close to 0 and the output standard deviation close to 1.
 Importantly, batch normalization works differently during training and
 during inference.
 During training (i.e. when using fit() or when calling the layer/model
-with the argument training=TRUE), the layer normalizes its output using
+with the argument training = TRUE), the layer normalizes its output using
 the mean and standard deviation of the current batch of inputs. That is to
 say, for each channel being normalized, the layer returns
 gamma * (batch - mean(batch)) / sqrt(var(batch) + epsilon) + beta, where:
 epsilon is small constant (configurable as part of the constructor
 arguments)
 gamma is a learned scaling factor (initialized as 1), which
-can be disabled by passing scale=FALSE to the constructor.
+can be disabled by passing scale = FALSE to the constructor.
 beta is a learned offset factor (initialized as 0), which
-can be disabled by passing center=FALSE to the constructor.
+can be disabled by passing center = FALSE to the constructor.
 
 
 During inference (i.e. when using evaluate() or predict() or when
-calling the layer/model with the argument training=FALSE (which is the
+calling the layer/model with the argument training = FALSE (which is the
 default), the layer normalizes its output using a moving average of the
 mean and standard deviation of the batches it has seen during training. That
 is to say, it returns
@@ -31,8 +31,8 @@ moving_var = moving_var * momentum + var(batch) * (1 - momentum)
 As such, the layer will only normalize its inputs during inference
 after having been trained on data that has similar statistics as the
 inference data.
-About setting layer.trainable = FALSE on a BatchNormalization layer:
-The meaning of setting layer.trainable = FALSE is to freeze the layer,
+About setting layer$trainable &amp;lt;- FALSE on a BatchNormalization layer:
+The meaning of setting layer$trainable &amp;lt;- FALSE is to freeze the layer,
 i.e. its internal state will not change during training:
 its trainable weights will not be updated
 during fit() or train_on_batch(), and its state updates will not be run.
@@ -41,7 +41,7 @@ mode (which is normally controlled by the training argument that can
 be passed when calling a layer). &quot;Frozen state&quot; and &quot;inference mode&quot;
 are two separate concepts.
 However, in the case of the BatchNormalization layer, setting
-trainable = FALSE on the layer means that the layer will be
+trainable &amp;lt;- FALSE on the layer means that the layer will be
 subsequently run in inference mode (meaning that it will use
 the moving mean and the moving variance to normalize the current batch,
 rather than using the mean and variance of the current batch).
@@ -57,20 +57,20 @@ close to 0 and the output standard deviation close to 1.
 Importantly, batch normalization works differently during training and
 during inference.
 During training (i.e. when using fit() or when calling the layer/model
-with the argument training=TRUE), the layer normalizes its output using
+with the argument training = TRUE), the layer normalizes its output using
 the mean and standard deviation of the current batch of inputs. That is to
 say, for each channel being normalized, the layer returns
 gamma * (batch - mean(batch)) / sqrt(var(batch) + epsilon) + beta, where:
 epsilon is small constant (configurable as part of the constructor
 arguments)
 gamma is a learned scaling factor (initialized as 1), which
-can be disabled by passing scale=FALSE to the constructor.
+can be disabled by passing scale = FALSE to the constructor.
 beta is a learned offset factor (initialized as 0), which
-can be disabled by passing center=FALSE to the constructor.
+can be disabled by passing center = FALSE to the constructor.
 
 
 During inference (i.e. when using evaluate() or predict() or when
-calling the layer/model with the argument training=FALSE (which is the
+calling the layer/model with the argument training = FALSE (which is the
 default), the layer normalizes its output using a moving average of the
 mean and standard deviation of the batches it has seen during training. That
 is to say, it returns
@@ -84,8 +84,8 @@ moving_var = moving_var * momentum + var(batch) * (1 - momentum)
 As such, the layer will only normalize its inputs during inference
 after having been trained on data that has similar statistics as the
 inference data.
-About setting layer.trainable = FALSE on a BatchNormalization layer:
-The meaning of setting layer.trainable = FALSE is to freeze the layer,
+About setting layer$trainable &amp;lt;- FALSE on a BatchNormalization layer:
+The meaning of setting layer$trainable &amp;lt;- FALSE is to freeze the layer,
 i.e. its internal state will not change during training:
 its trainable weights will not be updated
 during fit() or train_on_batch(), and its state updates will not be run.
@@ -94,7 +94,7 @@ mode (which is normally controlled by the training argument that can
 be passed when calling a layer). &quot;Frozen state&quot; and &quot;inference mode&quot;
 are two separate concepts.
 However, in the case of the BatchNormalization layer, setting
-trainable = FALSE on the layer means that the layer will be
+trainable &amp;lt;- FALSE on the layer means that the layer will be
 subsequently run in inference mode (meaning that it will use
 the moving mean and the moving variance to normalize the current batch,
 rather than using the mean and variance of the current batch).
@@ -179,17 +179,17 @@ close to 0 and the output standard deviation close to 1.</p>
 <p>Importantly, batch normalization works differently during training and
 during inference.</p>
 <p><strong>During training</strong> (i.e. when using <code><a href="https://generics.r-lib.org/reference/fit.html" class="external-link">fit()</a></code> or when calling the layer/model
-with the argument <code>training=TRUE</code>), the layer normalizes its output using
+with the argument <code>training = TRUE</code>), the layer normalizes its output using
 the mean and standard deviation of the current batch of inputs. That is to
 say, for each channel being normalized, the layer returns
 <code>gamma * (batch - mean(batch)) / sqrt(var(batch) + epsilon) + beta</code>, where:</p><ul><li><p><code>epsilon</code> is small constant (configurable as part of the constructor
 arguments)</p></li>
 <li><p><code>gamma</code> is a learned scaling factor (initialized as 1), which
-can be disabled by passing <code>scale=FALSE</code> to the constructor.</p></li>
+can be disabled by passing <code>scale = FALSE</code> to the constructor.</p></li>
 <li><p><code>beta</code> is a learned offset factor (initialized as 0), which
-can be disabled by passing <code>center=FALSE</code> to the constructor.</p></li>
+can be disabled by passing <code>center = FALSE</code> to the constructor.</p></li>
 </ul><p><strong>During inference</strong> (i.e. when using <code><a href="https://rdrr.io/pkg/tensorflow/man/evaluate.html" class="external-link">evaluate()</a></code> or <code><a href="https://rdrr.io/r/stats/predict.html" class="external-link">predict()</a></code> or when
-calling the layer/model with the argument <code>training=FALSE</code> (which is the
+calling the layer/model with the argument <code>training = FALSE</code> (which is the
 default), the layer normalizes its output using a moving average of the
 mean and standard deviation of the batches it has seen during training. That
 is to say, it returns
@@ -200,8 +200,8 @@ are updated each time the layer in called in training mode, as such:</p><ul><li>
 </ul><p>As such, the layer will only normalize its inputs during inference
 <em>after having been trained on data that has similar statistics as the
 inference data</em>.</p>
-<p><strong>About setting <code>layer.trainable = FALSE</code> on a <code>BatchNormalization</code> layer:</strong></p>
-<p>The meaning of setting <code>layer.trainable = FALSE</code> is to freeze the layer,
+<p><strong>About setting <code>layer$trainable &lt;- FALSE</code> on a <code>BatchNormalization</code> layer:</strong></p>
+<p>The meaning of setting <code>layer$trainable &lt;- FALSE</code> is to freeze the layer,
 i.e. its internal state will not change during training:
 its trainable weights will not be updated
 during <code><a href="https://generics.r-lib.org/reference/fit.html" class="external-link">fit()</a></code> or <code><a href="train_on_batch.html">train_on_batch()</a></code>, and its state updates will not be run.</p>
@@ -210,7 +210,7 @@ mode (which is normally controlled by the <code>training</code> argument that ca
 be passed when calling a layer). "Frozen state" and "inference mode"
 are two separate concepts.</p>
 <p>However, in the case of the <code>BatchNormalization</code> layer, <strong>setting
-<code>trainable = FALSE</code> on the layer means that the layer will be
+<code>trainable &lt;- FALSE</code> on the layer means that the layer will be
 subsequently run in inference mode</strong> (meaning that it will use
 the moving mean and the moving variance to normalize the current batch,
 rather than using the mean and variance of the current batch).</p>
@@ -252,7 +252,7 @@ until <code><a href="https://generics.r-lib.org/reference/compile.html" class="e
 <dt>axis</dt>
 <dd><p>Integer, the axis that should be normalized
 (typically the features axis). For instance, after a <code>Conv2D</code> layer
-with <code>data_format="channels_first"</code>, use <code>axis=1</code>.</p></dd>
+with <code>data_format = "channels_first"</code>, use <code>axis = 2</code>.</p></dd>
 
 
 <dt>momentum</dt>
@@ -322,13 +322,19 @@ If <code>FALSE</code>, each replica uses its own local batch statistics.</p></dd
     <h2 id="call-arguments">Call Arguments<a class="anchor" aria-label="anchor" href="#call-arguments"></a></h2>
     
 <ul><li><p><code>inputs</code>: Input tensor (of any rank).</p></li>
-<li><p><code>training</code>: Python boolean indicating whether the layer should behave in
-training mode or in inference mode.</p><ul><li><p><code>training=TRUE</code>: The layer will normalize its inputs using
+<li><p><code>training</code>: R boolean indicating whether the layer should behave in
+training mode or in inference mode.</p><ul><li><p><code>training = TRUE</code>: The layer will normalize its inputs using
 the mean and variance of the current batch of inputs.</p></li>
-<li><p><code>training=FALSE</code>: The layer will normalize its inputs using
+<li><p><code>training = FALSE</code>: The layer will normalize its inputs using
 the mean and variance of its moving statistics, learned during
 training.</p></li>
 </ul></li>
+<li><p><code>mask</code>: Binary tensor of shape broadcastable to <code>inputs</code> tensor, with
+<code>TRUE</code> values indicating the positions for which mean and variance
+should be computed. Masked elements of the current inputs are not
+taken into account for mean and variance computation during
+training. Any prior unmasked element values will be taken into
+account until their momentum expires.</p></li>
 </ul></div>
     <div class="section level2">
     <h2 id="reference">Reference<a class="anchor" aria-label="anchor" href="#reference"></a></h2>
@@ -346,30 +352,30 @@ training.</p></li>
 <code><a href="layer_unit_normalization.html">layer_unit_normalization</a>()</code></p>
 <p>Other layers: 
 <code><a href="Layer.html">Layer</a>()</code>,
+<code><a href="layer_activation.html">layer_activation</a>()</code>,
 <code><a href="layer_activation_elu.html">layer_activation_elu</a>()</code>,
 <code><a href="layer_activation_leaky_relu.html">layer_activation_leaky_relu</a>()</code>,
 <code><a href="layer_activation_parametric_relu.html">layer_activation_parametric_relu</a>()</code>,
 <code><a href="layer_activation_relu.html">layer_activation_relu</a>()</code>,
 <code><a href="layer_activation_softmax.html">layer_activation_softmax</a>()</code>,
-<code><a href="layer_activation.html">layer_activation</a>()</code>,
 <code><a href="layer_activity_regularization.html">layer_activity_regularization</a>()</code>,
-<code><a href="layer_additive_attention.html">layer_additive_attention</a>()</code>,
 <code><a href="layer_add.html">layer_add</a>()</code>,
+<code><a href="layer_additive_attention.html">layer_additive_attention</a>()</code>,
 <code><a href="layer_attention.html">layer_attention</a>()</code>,
+<code><a href="layer_average.html">layer_average</a>()</code>,
 <code><a href="layer_average_pooling_1d.html">layer_average_pooling_1d</a>()</code>,
 <code><a href="layer_average_pooling_2d.html">layer_average_pooling_2d</a>()</code>,
 <code><a href="layer_average_pooling_3d.html">layer_average_pooling_3d</a>()</code>,
-<code><a href="layer_average.html">layer_average</a>()</code>,
 <code><a href="layer_bidirectional.html">layer_bidirectional</a>()</code>,
 <code><a href="layer_category_encoding.html">layer_category_encoding</a>()</code>,
 <code><a href="layer_center_crop.html">layer_center_crop</a>()</code>,
 <code><a href="layer_concatenate.html">layer_concatenate</a>()</code>,
-<code><a href="layer_conv_1d_transpose.html">layer_conv_1d_transpose</a>()</code>,
 <code><a href="layer_conv_1d.html">layer_conv_1d</a>()</code>,
-<code><a href="layer_conv_2d_transpose.html">layer_conv_2d_transpose</a>()</code>,
+<code><a href="layer_conv_1d_transpose.html">layer_conv_1d_transpose</a>()</code>,
 <code><a href="layer_conv_2d.html">layer_conv_2d</a>()</code>,
-<code><a href="layer_conv_3d_transpose.html">layer_conv_3d_transpose</a>()</code>,
+<code><a href="layer_conv_2d_transpose.html">layer_conv_2d_transpose</a>()</code>,
 <code><a href="layer_conv_3d.html">layer_conv_3d</a>()</code>,
+<code><a href="layer_conv_3d_transpose.html">layer_conv_3d_transpose</a>()</code>,
 <code><a href="layer_conv_lstm_1d.html">layer_conv_lstm_1d</a>()</code>,
 <code><a href="layer_conv_lstm_2d.html">layer_conv_lstm_2d</a>()</code>,
 <code><a href="layer_conv_lstm_3d.html">layer_conv_lstm_3d</a>()</code>,

@@ -1,5 +1,5 @@
 __signature__
-keras.utils.get_registered_object(
+keras.saving.get_registered_object(
   name,
   custom_objects=None,
   module_objects=None
@@ -31,3 +31,4 @@ Args:
 Returns:
     An instantiable class associated with `name`, or `None` if no such class
         exists.
+

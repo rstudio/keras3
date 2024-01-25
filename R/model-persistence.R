@@ -498,15 +498,17 @@ function (object, name = NULL, package = NULL)
 #' ```
 #'
 #' You can use `set_custom_objects()` to restore a previous registry state.
-#' ```{r, eval = FALSE}
+#' ```r
 #' # within a function, if you want to temporarily modify the registry,
-#' orig_objects <- set_custom_objects(clear = TRUE)
-#' on.exit(set_custom_objects(orig_objects))
+#' function() {
+#'   orig_objects <- set_custom_objects(clear = TRUE)
+#'   on.exit(set_custom_objects(orig_objects))
 #'
-#' ## temporarily modify the global registry
-#' # register_keras_serializable(....)
-#' # ....  <do work>
-#' # on.exit(), the previous registry state is restored.
+#'   ## temporarily modify the global registry
+#'   # register_keras_serializable(....)
+#'   # ....  <do work>
+#'   # on.exit(), the previous registry state is restored.
+#' }
 #' ```
 #'
 #' @note
@@ -598,9 +600,9 @@ function (obj)
 #' serialization/deserialization.
 #'
 #' # Examples
-#' ```{r, eval = FALSE}
+#' ```r
 #' from_config <- function(cls, config, custom_objects = NULL) {
-#'   if ('my_custom_object_name' %in% names(config)) {
+#'   if ('my_custom_object_name' \%in\% names(config)) {
 #'     config$hidden_cls <- get_registered_object(
 #'       config$my_custom_object_name,
 #'       custom_objects = custom_objects)

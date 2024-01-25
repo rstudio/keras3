@@ -49,10 +49,11 @@ the left/right or up/down of the input. When \code{padding="same"} and
 
 \item{data_format}{string, either \code{"channels_last"} or \code{"channels_first"}.
 The ordering of the dimensions in the inputs. \code{"channels_last"}
-corresponds to inputs with shape \verb{(batch, steps, features)}
+corresponds to inputs with shape \verb{(batch, height, width, channels)}
 while \code{"channels_first"} corresponds to inputs with shape
-\verb{(batch, features, steps)}. It defaults to the \code{image_data_format}
-value found in your Keras config file at \verb{~/.keras/keras.json}.
+\verb{(batch, channels, height, width)}. It defaults to the
+\code{image_data_format} value found in your Keras config file
+at \verb{~/.keras/keras.json}.
 If you never set it, then it will be \code{"channels_last"}.}
 
 \item{dilation_rate}{int or list of 2 integers, specifying the dilation
@@ -147,43 +148,43 @@ shape(y)
 }
 
 Other convolutional layers: 
-\code{\link{layer_conv_1d_transpose}()},
 \code{\link{layer_conv_1d}()},
-\code{\link{layer_conv_2d_transpose}()},
+\code{\link{layer_conv_1d_transpose}()},
 \code{\link{layer_conv_2d}()},
-\code{\link{layer_conv_3d_transpose}()},
+\code{\link{layer_conv_2d_transpose}()},
 \code{\link{layer_conv_3d}()},
+\code{\link{layer_conv_3d_transpose}()},
 \code{\link{layer_depthwise_conv_1d}()},
 \code{\link{layer_depthwise_conv_2d}()},
 \code{\link{layer_separable_conv_1d}()}
 
 Other layers: 
 \code{\link{Layer}()},
+\code{\link{layer_activation}()},
 \code{\link{layer_activation_elu}()},
 \code{\link{layer_activation_leaky_relu}()},
 \code{\link{layer_activation_parametric_relu}()},
 \code{\link{layer_activation_relu}()},
 \code{\link{layer_activation_softmax}()},
-\code{\link{layer_activation}()},
 \code{\link{layer_activity_regularization}()},
-\code{\link{layer_additive_attention}()},
 \code{\link{layer_add}()},
+\code{\link{layer_additive_attention}()},
 \code{\link{layer_attention}()},
+\code{\link{layer_average}()},
 \code{\link{layer_average_pooling_1d}()},
 \code{\link{layer_average_pooling_2d}()},
 \code{\link{layer_average_pooling_3d}()},
-\code{\link{layer_average}()},
 \code{\link{layer_batch_normalization}()},
 \code{\link{layer_bidirectional}()},
 \code{\link{layer_category_encoding}()},
 \code{\link{layer_center_crop}()},
 \code{\link{layer_concatenate}()},
-\code{\link{layer_conv_1d_transpose}()},
 \code{\link{layer_conv_1d}()},
-\code{\link{layer_conv_2d_transpose}()},
+\code{\link{layer_conv_1d_transpose}()},
 \code{\link{layer_conv_2d}()},
-\code{\link{layer_conv_3d_transpose}()},
+\code{\link{layer_conv_2d_transpose}()},
 \code{\link{layer_conv_3d}()},
+\code{\link{layer_conv_3d_transpose}()},
 \code{\link{layer_conv_lstm_1d}()},
 \code{\link{layer_conv_lstm_2d}()},
 \code{\link{layer_conv_lstm_3d}()},

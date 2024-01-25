@@ -76,6 +76,12 @@ class BatchNormalization(keras.src.layers.layer.Layer)
  |          - `training=False`: The layer will normalize its inputs using
  |          the mean and variance of its moving statistics, learned during
  |          training.
+ |      mask: Binary tensor of shape broadcastable to `inputs` tensor, with
+ |          `True` values indicating the positions for which mean and variance
+ |          should be computed. Masked elements of the current inputs are not
+ |          taken into account for mean and variance computation during
+ |          training. Any prior unmasked element values will be taken into
+ |          account until their momentum expires.
  |
  |  Reference:
  |
@@ -156,3 +162,4 @@ class BatchNormalization(keras.src.layers.layer.Layer)
  |      An object config is a Python dictionary (serializable)
  |      containing the information needed to re-instantiate it.
  |
+

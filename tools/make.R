@@ -256,6 +256,8 @@ if(!"source:tools/translate-tools.R" %in% search()) envir::attach_source("tools/
 #
 # TODO: feature_space saving errors
 #
+# TODO: document get_initial_state() method for GRUCell and friends
+#
 # TODO: layer_lambda docs: bring back section on serialization and limitations after
 #       fixing serialization.
 #

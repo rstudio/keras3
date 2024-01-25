@@ -446,7 +446,9 @@ tidy_section_headings <- known_section_headings |>
   # replace_val("Outputs", "Output shape") |>
   snakecase::to_snake_case()
 
-
+`append<-` <- function(x, after = length(x), value) {
+  append(x, value, after)
+}
 
 split_docstring_into_sections <- function(docstring) {
 

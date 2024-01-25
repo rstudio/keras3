@@ -17,7 +17,8 @@ optimizer_lion(
   ema_overwrite_frequency = NULL,
   name = "lion",
   ...,
-  loss_scale_factor = NULL
+  loss_scale_factor = NULL,
+  gradient_accumulation_steps = NULL
 )
 }
 \arguments{
@@ -64,7 +65,7 @@ we overwrite the model variable by its moving average.
 If \code{NULL}, the optimizer
 does not overwrite model variables in the middle of training, and you
 need to explicitly overwrite the variables at the end of training
-by calling \code{optimizer.finalize_variable_values()}
+by calling \code{optimizer$finalize_variable_values()}
 (which updates the model
 variables in-place). When using the built-in \code{fit()} training loop,
 this happens automatically after the last epoch,
@@ -82,6 +83,14 @@ the scale factor will be multiplied by the gradients before updating
 variables. Useful for preventing underflow during mixed precision
 training. Alternately, \code{\link[=optimizer_loss_scale]{optimizer_loss_scale()}} will
 automatically set a loss scale factor.}
+
+\item{gradient_accumulation_steps}{Int or \code{NULL}. If an int, model & optimizer
+variables will not be updated at every step; instead they will be
+updated every \code{gradient_accumulation_steps} steps, using the average
+value of the gradients since the last update. This is known as
+"gradient accumulation". This can be useful
+when your batch size is very small, in order to reduce gradient
+noise at each update step.}
 }
 \description{
 The Lion optimizer is a stochastic-gradient-descent method that uses the
@@ -107,9 +116,9 @@ Other optimizers:
 \code{\link{optimizer_adadelta}()},
 \code{\link{optimizer_adafactor}()},
 \code{\link{optimizer_adagrad}()},
+\code{\link{optimizer_adam}()},
 \code{\link{optimizer_adam_w}()},
 \code{\link{optimizer_adamax}()},
-\code{\link{optimizer_adam}()},
 \code{\link{optimizer_ftrl}()},
 \code{\link{optimizer_loss_scale}()},
 \code{\link{optimizer_nadam}()},

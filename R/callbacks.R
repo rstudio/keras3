@@ -557,25 +557,25 @@ function (filepath, monitor = "val_loss", verbose = 0L, save_best_only = FALSE,
 }
 
 
-#' Callback that prints metrics to stdout.
-#'
-#' @description
-#'
-#' # Raises
-#' ValueError: In case of invalid `count_mode`.
-#'
-#' @param count_mode
-#' One of `"steps"` or `"samples"`.
-#' Whether the progress bar should
-#' count samples seen or steps (batches) seen.
-#'
-# @export
-#' @noRd
-#' @family callbacks
-#' @seealso
-#' + <https://keras.io/api/callbacks/progbar_logger#progbarlogger-class>
+#  Callback that prints metrics to stdout.
+#
+#  @description
+#
+#  # Raises
+#  ValueError: In case of invalid `count_mode`.
+#
+#  @param count_mode
+#  One of `"steps"` or `"samples"`.
+#  Whether the progress bar should
+#  count samples seen or steps (batches) seen.
+#
+#  @export
+#  @noRd
+#  @family callbacks
+#  @seealso
+#  + <https://keras.io/api/callbacks/progbar_logger#progbarlogger-class>
 #  + <https://www.tensorflow.org/api_docs/python/tf/keras/callbacks/ProgbarLogger>
-#' @tether keras.callbacks.ProgbarLogger
+#  @tether keras.callbacks.ProgbarLogger
 # callback_progbar_logger <-
 function (count_mode = NULL)
 {
@@ -603,7 +603,7 @@ function (count_mode = NULL)
 #' String. Quantity to be monitored.
 #'
 #' @param factor
-#' Numeric. Factor by which the learning rate will be reduced.
+#' Float. Factor by which the learning rate will be reduced.
 #' `new_lr = lr * factor`.
 #'
 #' @param patience
@@ -622,7 +622,7 @@ function (count_mode = NULL)
 #' of the monitored quantity.
 #'
 #' @param min_delta
-#' Numeric. Threshold for measuring the new optimum, to only focus
+#' Float. Threshold for measuring the new optimum, to only focus
 #' on significant changes.
 #'
 #' @param cooldown
@@ -630,7 +630,7 @@ function (count_mode = NULL)
 #' operation after the learning rate has been reduced.
 #'
 #' @param min_lr
-#' Numeric. Lower bound on the learning rate.
+#' Float. Lower bound on the learning rate.
 #'
 #' @param ...
 #' For forward/backward compatability.
@@ -644,10 +644,10 @@ function (count_mode = NULL)
 callback_reduce_lr_on_plateau <-
 function (monitor = "val_loss", factor = 0.1, patience = 10L,
     verbose = 0L, mode = "auto", min_delta = 1e-04, cooldown = 0L,
-    min_lr = 0L, ...)
+    min_lr = 0, ...)
 {
     args <- capture_args(list(patience = as_integer, verbose = as_integer,
-        cooldown = as_integer, min_lr = as_integer))
+        cooldown = as_integer))
     do.call(keras$callbacks$ReduceLROnPlateau, args)
 }
 

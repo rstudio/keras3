@@ -104,7 +104,8 @@ last 2 dimensions separately in its accumulator variables.</p>
 <span>  ema_overwrite_frequency <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  name <span class="op">=</span> <span class="st">"adafactor"</span>,</span>
 <span>  <span class="va">...</span>,</span>
-<span>  loss_scale_factor <span class="op">=</span> <span class="cn">NULL</span></span>
+<span>  loss_scale_factor <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  gradient_accumulation_steps <span class="op">=</span> <span class="cn">NULL</span></span>
 <span><span class="op">)</span></span></code></pre></div>
     </div>
 
@@ -166,13 +167,13 @@ so that their global norm is no higher than this value.</p></dd>
 <dt>use_ema</dt>
 <dd><p>Boolean, defaults to <code>FALSE</code>. If <code>TRUE</code>, exponential moving average
 (EMA) is applied. EMA consists of computing an exponential moving
-average of the weights of the model (as the weight values change after
-each training batch), and periodically overwriting the weights with
-their moving average.</p></dd>
+average of the weights of the model (as the weight values change
+after each training batch), and periodically overwriting the
+weights with their moving average.</p></dd>
 
 
 <dt>ema_momentum</dt>
-<dd><p>Float, defaults to 0.99. Only used if <code>use_ema=TRUE</code>.
+<dd><p>Float, defaults to 0.99. Only used if <code>use_ema = TRUE</code>.
 This is the momentum to use when computing
 the EMA of the model's weights:
 <code>new_average = ema_momentum * old_average + (1 - ema_momentum) * current_variable_value</code>.</p></dd>
@@ -183,9 +184,10 @@ the EMA of the model's weights:
 <code>use_ema=TRUE</code>. Every <code>ema_overwrite_frequency</code> steps of iterations,
 we overwrite the model variable by its moving average.
 If <code>NULL</code>, the optimizer
-does not overwrite model variables in the middle of training, and you
-need to explicitly overwrite the variables at the end of training
-by calling <code>optimizer.finalize_variable_values()</code>
+does not overwrite model variables in the middle of training,
+and you need to explicitly overwrite the variables
+at the end of training by calling
+<code>optimizer$finalize_variable_values()</code>
 (which updates the model
 variables in-place). When using the built-in <code><a href="https://generics.r-lib.org/reference/fit.html" class="external-link">fit()</a></code> training loop,
 this happens automatically after the last epoch,
@@ -210,6 +212,16 @@ variables. Useful for preventing underflow during mixed precision
 training. Alternately, <code><a href="optimizer_loss_scale.html">optimizer_loss_scale()</a></code> will
 automatically set a loss scale factor.</p></dd>
 
+
+<dt>gradient_accumulation_steps</dt>
+<dd><p>Int or <code>NULL</code>. If an int, model &amp; optimizer
+variables will not be updated at every step; instead they will be
+updated every <code>gradient_accumulation_steps</code> steps, using the average
+value of the gradients since the last update. This is known as
+"gradient accumulation". This can be useful
+when your batch size is very small, in order to reduce gradient
+noise at each update step.</p></dd>
+
 </dl></div>
     <div class="section level2">
     <h2 id="reference">Reference<a class="anchor" aria-label="anchor" href="#reference"></a></h2>
@@ -223,9 +235,9 @@ automatically set a loss scale factor.</p></dd>
 </ul><p>Other optimizers: 
 <code><a href="optimizer_adadelta.html">optimizer_adadelta</a>()</code>,
 <code><a href="optimizer_adagrad.html">optimizer_adagrad</a>()</code>,
+<code><a href="optimizer_adam.html">optimizer_adam</a>()</code>,
 <code><a href="optimizer_adam_w.html">optimizer_adam_w</a>()</code>,
 <code><a href="optimizer_adamax.html">optimizer_adamax</a>()</code>,
-<code><a href="optimizer_adam.html">optimizer_adam</a>()</code>,
 <code><a href="optimizer_ftrl.html">optimizer_ftrl</a>()</code>,
 <code><a href="optimizer_lion.html">optimizer_lion</a>()</code>,
 <code><a href="optimizer_loss_scale.html">optimizer_loss_scale</a>()</code>,

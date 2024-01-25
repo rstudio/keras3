@@ -45,7 +45,14 @@ class SeedGenerator(builtins.object)
  |  )
  |      Initialize self.  See help(type(self)) for accurate signature.
  |
+ |  get_config(self)
+ |
  |  next(self, ordered=True)
+ |
+ |  ----------------------------------------------------------------------
+ |  Class methods defined here:
+ |
+ |  from_config(config) from builtins.type
  |
  |  ----------------------------------------------------------------------
  |  Data descriptors defined here:
@@ -55,3 +62,4 @@ class SeedGenerator(builtins.object)
  |
  |  __weakref__
  |      list of weak references to the object (if defined)
+

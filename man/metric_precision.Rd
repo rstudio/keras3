@@ -60,23 +60,26 @@ the top-k highest predictions, and computing the fraction of them for which
 Standalone usage:
 
 \if{html}{\out{<div class="sourceCode r">}}\preformatted{m <- metric_precision()
-m$update_state(c(0, 1, 1, 1), c(1, 0, 1, 1))
-m$result()
+m$update_state(c(0, 1, 1, 1),
+               c(1, 0, 1, 1))
+m$result() |> as.double() |> signif()
 }\if{html}{\out{</div>}}
 
-\if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor(0.6666667, shape=(), dtype=float32)
+\if{html}{\out{<div class="sourceCode">}}\preformatted{## [1] 0.666667
 }\if{html}{\out{</div>}}
 
 \if{html}{\out{<div class="sourceCode r">}}\preformatted{m$reset_state()
-m$update_state(c(0, 1, 1, 1), c(1, 0, 1, 1), sample_weight=c(0, 0, 1, 0))
-m$result()
+m$update_state(c(0, 1, 1, 1),
+               c(1, 0, 1, 1),
+               sample_weight = c(0, 0, 1, 0))
+m$result() |> as.double() |> signif()
 }\if{html}{\out{</div>}}
 
-\if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor(0.9999999, shape=(), dtype=float32)
+\if{html}{\out{<div class="sourceCode">}}\preformatted{## [1] 1
 }\if{html}{\out{</div>}}
 
-\if{html}{\out{<div class="sourceCode r">}}\preformatted{# With top_k=2, it will calculate precision over y_true[:2]
-# and y_pred[:2]
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{# With top_k=2, it will calculate precision over y_true[1:2]
+# and y_pred[1:2]
 m <- metric_precision(top_k = 2)
 m$update_state(c(0, 0, 1, 1), c(1, 1, 1, 1))
 m$result()
@@ -85,8 +88,8 @@ m$result()
 \if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor(0.0, shape=(), dtype=float32)
 }\if{html}{\out{</div>}}
 
-\if{html}{\out{<div class="sourceCode r">}}\preformatted{# With top_k=4, it will calculate precision over y_true[:4]
-# and y_pred[:4]
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{# With top_k=4, it will calculate precision over y_true[1:4]
+# and y_pred[1:4]
 m <- metric_precision(top_k = 4)
 m$update_state(c(0, 0, 1, 1), c(1, 1, 1, 1))
 m$result()
@@ -97,16 +100,20 @@ m$result()
 
 Usage with \code{compile()} API:
 
-\if{html}{\out{<div class="sourceCode r">}}\preformatted{model \%>\% compile(optimizer = 'sgd',
-                  loss = 'mse',
-                  metrics = list(metric_precision()))
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{model |> compile(
+  optimizer = 'sgd',
+  loss = 'binary_crossentropy',
+  metrics = list(metric_precision())
+)
 }\if{html}{\out{</div>}}
 
 Usage with a loss with \code{from_logits=TRUE}:
 
-\if{html}{\out{<div class="sourceCode r">}}\preformatted{model \%>\% compile(optimizer = 'adam',
-                  loss = loss_binary_crossentropy(from_logits = TRUE),
-                  metrics = list(metric_precision(thresholds = 0)))
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{model |> compile(
+  optimizer = 'adam',
+  loss = loss_binary_crossentropy(from_logits = TRUE),
+  metrics = list(metric_precision(thresholds = 0))
+)
 }\if{html}{\out{</div>}}
 }
 
@@ -120,8 +127,8 @@ Other confusion metrics:
 \code{\link{metric_false_negatives}()},
 \code{\link{metric_false_positives}()},
 \code{\link{metric_precision_at_recall}()},
-\code{\link{metric_recall_at_precision}()},
 \code{\link{metric_recall}()},
+\code{\link{metric_recall_at_precision}()},
 \code{\link{metric_sensitivity_at_specificity}()},
 \code{\link{metric_specificity_at_sensitivity}()},
 \code{\link{metric_true_negatives}()},
@@ -148,22 +155,22 @@ Other metrics:
 \code{\link{metric_huber}()},
 \code{\link{metric_iou}()},
 \code{\link{metric_kl_divergence}()},
-\code{\link{metric_log_cosh_error}()},
 \code{\link{metric_log_cosh}()},
+\code{\link{metric_log_cosh_error}()},
+\code{\link{metric_mean}()},
 \code{\link{metric_mean_absolute_error}()},
 \code{\link{metric_mean_absolute_percentage_error}()},
 \code{\link{metric_mean_iou}()},
 \code{\link{metric_mean_squared_error}()},
 \code{\link{metric_mean_squared_logarithmic_error}()},
 \code{\link{metric_mean_wrapper}()},
-\code{\link{metric_mean}()},
 \code{\link{metric_one_hot_iou}()},
 \code{\link{metric_one_hot_mean_iou}()},
 \code{\link{metric_poisson}()},
 \code{\link{metric_precision_at_recall}()},
 \code{\link{metric_r2_score}()},
-\code{\link{metric_recall_at_precision}()},
 \code{\link{metric_recall}()},
+\code{\link{metric_recall_at_precision}()},
 \code{\link{metric_root_mean_squared_error}()},
 \code{\link{metric_sensitivity_at_specificity}()},
 \code{\link{metric_sparse_categorical_accuracy}()},

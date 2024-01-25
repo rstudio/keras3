@@ -2059,7 +2059,7 @@ function (x, axes, keepdims = FALSE, synchronized = FALSE)
 #' # Examples
 #' ```{r}
 #' data <- op_convert_to_tensor(c(0, 4))
-#' op_multi_hot(data, num_tokens = 5)
+#' op_multi_hot(data, num_classes = 5)
 #' ```
 #'
 #' @returns
@@ -2068,8 +2068,8 @@ function (x, axes, keepdims = FALSE, synchronized = FALSE)
 #' @param inputs
 #' Tensor of integer labels to be converted to multi-hot vectors.
 #'
-#' @param num_tokens
-#' Integer, the total number of unique tokens or classes.
+#' @param num_classes
+#' Integer, the total number of unique classes.
 #'
 #' @param axis
 #' (optional) Axis along which the multi-hot encoding should be
@@ -2079,6 +2079,8 @@ function (x, axes, keepdims = FALSE, synchronized = FALSE)
 #' (optional) The data type of the resulting tensor. Default
 #' is backend's float type.
 #'
+#' @param ... For forward/backwards compatability
+#'
 #' @export
 #' @family nn ops
 #' @family ops
@@ -2087,9 +2089,9 @@ function (x, axes, keepdims = FALSE, synchronized = FALSE)
 #'
 #' @tether keras.ops.multi_hot
 op_multi_hot <-
-function (inputs, num_tokens, axis = -1L, dtype = NULL)
+function (inputs, num_classes, axis = -1L, dtype = NULL, ...)
 {
-    args <- capture_args(list(inputs = as_integer, num_tokens = as_integer,
+    args <- capture_args(list(inputs = as_integer, num_classes = as_integer,
         axis = as_axis))
     do.call(keras$ops$multi_hot, args)
 }
@@ -2673,51 +2675,51 @@ function (x, axis = NULL, keepdims = FALSE)
 }
 
 
-#' Returns the maximum of a vector or maximum value along an axis.
-#'
-#' @description
-#'
-#' `op_amax()` performs the same computation as [`op_max()`]
-#'
-#' # Examples
-#' ```{r, include = FALSE}
-#' op_amax <- op_max
-#' ```
-#' ```{r}
-#' (x <- op_convert_to_tensor(rbind(c(1, 3, 5), c(1, 5, 2))))
-#' op_amax(x)
-#' op_amax(x, axis = 1)
-#' op_amax(x, axis = 1, keepdims = TRUE)
-#' ```
-#'
-#' @returns
-#' A tensor with the maximum value. If `axis = NULL`, the result is a scalar
-#' value representing the maximum element in the entire tensor. If `axis` is
-#' given, the result is a tensor with the maximum values along
-#' the specified axis.
-#'
-#' @param x
-#' Input tensor.
-#'
-#' @param axis
-#' Axis along which to compute the maximum.
-#' By default (`axis = NULL`), find the maximum value in all the
-#' dimensions of the input tensor.
-#'
-#' @param keepdims
-#' If `TRUE`, axes which are reduced are left in the result as
-#' dimensions that are broadcast to the size of the original
-#' input tensor. Defaults to `FALSE`.
-#'
-# @export
-#' @noRd
-#' @keywords internal
-#' @family numpy ops
-#' @family ops
-#' @seealso
-#' + <https://keras.io/api/ops/numpy#amax-function>
+#  Returns the maximum of a vector or maximum value along an axis.
+#
+#  @description
+#
+#  `op_amax()` performs the same computation as [`op_max()`]
+#
+#  # Examples
+#  ```{r, include = FALSE}
+#  op_amax <- op_max
+#  ```
+#  ```{r}
+#  (x <- op_convert_to_tensor(rbind(c(1, 3, 5), c(1, 5, 2))))
+#  op_amax(x)
+#  op_amax(x, axis = 1)
+#  op_amax(x, axis = 1, keepdims = TRUE)
+#  ```
+#
+#  @returns
+#  A tensor with the maximum value. If `axis = NULL`, the result is a scalar
+#  value representing the maximum element in the entire tensor. If `axis` is
+#  given, the result is a tensor with the maximum values along
+#  the specified axis.
+#
+#  @param x
+#  Input tensor.
+#
+#  @param axis
+#  Axis along which to compute the maximum.
+#  By default (`axis = NULL`), find the maximum value in all the
+#  dimensions of the input tensor.
+#
+#  @param keepdims
+#  If `TRUE`, axes which are reduced are left in the result as
+#  dimensions that are broadcast to the size of the original
+#  input tensor. Defaults to `FALSE`.
+#
+#  @export
+#  @noRd
+#  @keywords internal
+#  @family numpy ops
+#  @family ops
+#  @seealso
+#  + <https://keras.io/api/ops/numpy#amax-function>
 #  + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/amax>
-#' @tether keras.ops.amax
+#  @tether keras.ops.amax
 # op_amax <-
 function (x, axis = NULL, keepdims = FALSE)
 {
@@ -2726,51 +2728,51 @@ function (x, axis = NULL, keepdims = FALSE)
 }
 
 
-#' Returns the minimum of a vector or minimum value along an axis.
-#'
-#' @description
-#'
-#' `op_amin()` performs the same computation as [`op_min()`]
-#'
-#' # Examples
-#' ```{r, include = FALSE}
-#' op_amin <- op_min
-#' ```
-#' ```{r}
-#' (x <- op_convert_to_tensor(rbind(c(1, 3, 5), c(1, 5, 2))))
-#' op_amin(x)
-#' op_amin(x, axis = 1)
-#' op_amin(x, axis = 1, keepdims = TRUE)
-#' ```
-#'
-#' @returns
-#' A tensor with the minimum value. If `axis = NULL`, the result is a scalar
-#' value representing the minimum element in the entire tensor. If `axis` is
-#' given, the result is a tensor with the minimum values along
-#' the specified axis.
-#'
-#' @param x
-#' Input tensor.
-#'
-#' @param axis
-#' Axis along which to compute the minimum.
-#' By default (`axis = NULL`), find the minimum value in all the
-#' dimensions of the input tensor.
-#'
-#' @param keepdims
-#' If `TRUE`, axes which are reduced are left in the result as
-#' dimensions that are broadcast to the size of the original
-#' input tensor. Defaults to `FALSE`.
-#'
+#  Returns the minimum of a vector or minimum value along an axis.
+#
+#  @description
+#
+#  `op_amin()` performs the same computation as [`op_min()`]
+#
+#  # Examples
+#  ```{r, include = FALSE}
+#  op_amin <- op_min
+#  ```
+#  ```{r}
+#  (x <- op_convert_to_tensor(rbind(c(1, 3, 5), c(1, 5, 2))))
+#  op_amin(x)
+#  op_amin(x, axis = 1)
+#  op_amin(x, axis = 1, keepdims = TRUE)
+#  ```
+#
+#  @returns
+#  A tensor with the minimum value. If `axis = NULL`, the result is a scalar
+#  value representing the minimum element in the entire tensor. If `axis` is
+#  given, the result is a tensor with the minimum values along
+#  the specified axis.
+#
+#  @param x
+#  Input tensor.
+#
+#  @param axis
+#  Axis along which to compute the minimum.
+#  By default (`axis = NULL`), find the minimum value in all the
+#  dimensions of the input tensor.
+#
+#  @param keepdims
+#  If `TRUE`, axes which are reduced are left in the result as
+#  dimensions that are broadcast to the size of the original
+#  input tensor. Defaults to `FALSE`.
+#
 # @export
-#' @noRd
-#' @keywords internal
-#' @family numpy ops
-#' @family ops
-#' @seealso
-#' + <https://keras.io/api/ops/numpy#amin-function>
+#  @noRd
+#  @keywords internal
+#  @family numpy ops
+#  @family ops
+#  @seealso
+#  + <https://keras.io/api/ops/numpy#amin-function>
 #  + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/amin>
-#' @tether keras.ops.amin
+#  @tether keras.ops.amin
 # op_amin <-
 function (x, axis = NULL, keepdims = FALSE)
 {
@@ -4749,7 +4751,7 @@ keras$ops$less_equal(x1, x2)
 #'
 #' @param axis
 #' The axis in the result to store the samples. Relevant only if
-#' start or stop are array-like. Defaults to `0`.
+#' start or stop are array-like. Defaults to `1`, the first axis.
 #'
 #' @export
 #' @family numpy ops
@@ -6052,16 +6054,13 @@ function (x, axis = -1L)
 #' Input tensor.
 #'
 #' @param indices_or_sections
-#' Either an integer indicating the number of
-#'     sections along `axis` or a list of integers indicating the indices
-#'     along `axis` at which the tensor is split.
 #' If an integer, N, the tensor will be split into N
-#'     equal sections along `axis`. If a 1-D array of sorted integers,
-#'     the entries indicate indices at which the tensor will be split
-#'     along `axis`.
+#' equal sections along `axis`. If a 1-D array of sorted integers,
+#' the entries indicate indices at which the tensor will be split
+#' along `axis`.
 #'
 #' @param axis
-#' Axis along which to split. Defaults to `0`.
+#' Axis along which to split. Defaults to `1`, the first axis.
 #'
 #' @export
 #' @family numpy ops
@@ -6159,7 +6158,7 @@ function (x, axis = NULL)
 #' A sequence of tensors.
 #'
 #' @param axis
-#' Axis along which to stack. Defaults to `0`.
+#' Axis along which to stack. Defaults to `1`, the first axis.
 #'
 #' @export
 #' @family numpy ops
@@ -6481,11 +6480,11 @@ keras$ops$tile(x, repeats)
 #'
 #' @param axis1
 #' Axis to be used as the first axis of the 2-D sub-arrays.
-#' Defaults to `0`.(first axis).
+#' Defaults to `1`. (first axis).
 #'
 #' @param axis2
 #' Axis to be used as the second axis of the 2-D sub-arrays.
-#' Defaults to `1` (second axis).
+#' Defaults to `2`. (second axis).
 #'
 #' @export
 #' @family numpy ops
@@ -6495,7 +6494,7 @@ keras$ops$tile(x, repeats)
 #  + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/trace>
 #' @tether keras.ops.trace
 op_trace <-
-function (x, offset = 0L, axis1 = 0L, axis2 = 1L)
+function (x, offset = 0L, axis1 = 1L, axis2 = 2L)
 {
     args <- capture_args(list(offset = as_integer, axis1 = as_integer,
         axis2 = as_integer))

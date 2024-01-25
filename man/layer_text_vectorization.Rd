@@ -93,7 +93,9 @@ For all other output modes, currently only rank 1 inputs
 have its time dimension padded or truncated to exactly
 \code{output_sequence_length} values, resulting in a tensor of shape
 \verb{(batch_size, output_sequence_length)} regardless of how many tokens
-resulted from the splitting step. Defaults to \code{NULL}.}
+resulted from the splitting step. Defaults to \code{NULL}. If \code{ragged}
+is \code{TRUE} then \code{output_sequence_length} may still truncate the
+output.}
 
 \item{pad_to_max_tokens}{Only valid in  \code{"multi_hot"}, \code{"count"},
 and \code{"tf_idf"} modes. If \code{TRUE}, the output will have
@@ -278,31 +280,31 @@ Other preprocessing layers:
 
 Other layers: 
 \code{\link{Layer}()},
+\code{\link{layer_activation}()},
 \code{\link{layer_activation_elu}()},
 \code{\link{layer_activation_leaky_relu}()},
 \code{\link{layer_activation_parametric_relu}()},
 \code{\link{layer_activation_relu}()},
 \code{\link{layer_activation_softmax}()},
-\code{\link{layer_activation}()},
 \code{\link{layer_activity_regularization}()},
-\code{\link{layer_additive_attention}()},
 \code{\link{layer_add}()},
+\code{\link{layer_additive_attention}()},
 \code{\link{layer_attention}()},
+\code{\link{layer_average}()},
 \code{\link{layer_average_pooling_1d}()},
 \code{\link{layer_average_pooling_2d}()},
 \code{\link{layer_average_pooling_3d}()},
-\code{\link{layer_average}()},
 \code{\link{layer_batch_normalization}()},
 \code{\link{layer_bidirectional}()},
 \code{\link{layer_category_encoding}()},
 \code{\link{layer_center_crop}()},
 \code{\link{layer_concatenate}()},
-\code{\link{layer_conv_1d_transpose}()},
 \code{\link{layer_conv_1d}()},
-\code{\link{layer_conv_2d_transpose}()},
+\code{\link{layer_conv_1d_transpose}()},
 \code{\link{layer_conv_2d}()},
-\code{\link{layer_conv_3d_transpose}()},
+\code{\link{layer_conv_2d_transpose}()},
 \code{\link{layer_conv_3d}()},
+\code{\link{layer_conv_3d_transpose}()},
 \code{\link{layer_conv_lstm_1d}()},
 \code{\link{layer_conv_lstm_2d}()},
 \code{\link{layer_conv_lstm_3d}()},

@@ -175,6 +175,11 @@ instance will not reuse the weights state of the RNN layer instance -- the
 <span>                  optimizer <span class="op">=</span> <span class="st">"rmsprop"</span><span class="op">)</span></span></code></pre><p></p></div>
     </div>
     <div class="section level2">
+    <h2 id="states">States<a class="anchor" aria-label="anchor" href="#states"></a></h2>
+    <p>A <code>Bidirectional</code> layer instance has property <code>states</code>, which you can access
+with <code>layer$states</code>. You can also reset states using <code><a href="reset_state.html">reset_state()</a></code></p>
+    </div>
+    <div class="section level2">
     <h2 id="see-also">See also<a class="anchor" aria-label="anchor" href="#see-also"></a></h2>
     <div class="dont-index">
 <ul><li><p><a href="https://keras.io/api/layers/recurrent_layers/bidirectional#bidirectional-class" class="external-link">https://keras.io/api/layers/recurrent_layers/bidirectional#bidirectional-class</a></p></li>
@@ -193,30 +198,30 @@ instance will not reuse the weights state of the RNN layer instance -- the
 <code><a href="rnn_cells_stack.html">rnn_cells_stack</a>()</code></p>
 <p>Other layers: 
 <code><a href="Layer.html">Layer</a>()</code>,
+<code><a href="layer_activation.html">layer_activation</a>()</code>,
 <code><a href="layer_activation_elu.html">layer_activation_elu</a>()</code>,
 <code><a href="layer_activation_leaky_relu.html">layer_activation_leaky_relu</a>()</code>,
 <code><a href="layer_activation_parametric_relu.html">layer_activation_parametric_relu</a>()</code>,
 <code><a href="layer_activation_relu.html">layer_activation_relu</a>()</code>,
 <code><a href="layer_activation_softmax.html">layer_activation_softmax</a>()</code>,
-<code><a href="layer_activation.html">layer_activation</a>()</code>,
 <code><a href="layer_activity_regularization.html">layer_activity_regularization</a>()</code>,
-<code><a href="layer_additive_attention.html">layer_additive_attention</a>()</code>,
 <code><a href="layer_add.html">layer_add</a>()</code>,
+<code><a href="layer_additive_attention.html">layer_additive_attention</a>()</code>,
 <code><a href="layer_attention.html">layer_attention</a>()</code>,
+<code><a href="layer_average.html">layer_average</a>()</code>,
 <code><a href="layer_average_pooling_1d.html">layer_average_pooling_1d</a>()</code>,
 <code><a href="layer_average_pooling_2d.html">layer_average_pooling_2d</a>()</code>,
 <code><a href="layer_average_pooling_3d.html">layer_average_pooling_3d</a>()</code>,
-<code><a href="layer_average.html">layer_average</a>()</code>,
 <code><a href="layer_batch_normalization.html">layer_batch_normalization</a>()</code>,
 <code><a href="layer_category_encoding.html">layer_category_encoding</a>()</code>,
 <code><a href="layer_center_crop.html">layer_center_crop</a>()</code>,
 <code><a href="layer_concatenate.html">layer_concatenate</a>()</code>,
-<code><a href="layer_conv_1d_transpose.html">layer_conv_1d_transpose</a>()</code>,
 <code><a href="layer_conv_1d.html">layer_conv_1d</a>()</code>,
-<code><a href="layer_conv_2d_transpose.html">layer_conv_2d_transpose</a>()</code>,
+<code><a href="layer_conv_1d_transpose.html">layer_conv_1d_transpose</a>()</code>,
 <code><a href="layer_conv_2d.html">layer_conv_2d</a>()</code>,
-<code><a href="layer_conv_3d_transpose.html">layer_conv_3d_transpose</a>()</code>,
+<code><a href="layer_conv_2d_transpose.html">layer_conv_2d_transpose</a>()</code>,
 <code><a href="layer_conv_3d.html">layer_conv_3d</a>()</code>,
+<code><a href="layer_conv_3d_transpose.html">layer_conv_3d_transpose</a>()</code>,
 <code><a href="layer_conv_lstm_1d.html">layer_conv_lstm_1d</a>()</code>,
 <code><a href="layer_conv_lstm_2d.html">layer_conv_lstm_2d</a>()</code>,
 <code><a href="layer_conv_lstm_3d.html">layer_conv_lstm_3d</a>()</code>,

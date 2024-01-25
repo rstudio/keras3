@@ -48,8 +48,8 @@ model |> export_savedmodel("path/to/artifact")
 ## Output Type:
 ##   TensorSpec(shape=(None, 10), dtype=tf.float32, name=None)
 ## Captures:
-##   140485565383696: TensorSpec(shape=(), dtype=tf.resource, name=None)
-##   140485565391184: TensorSpec(shape=(), dtype=tf.resource, name=None)
+##   139756092861968: TensorSpec(shape=(), dtype=tf.resource, name=None)
+##   139756092862352: TensorSpec(shape=(), dtype=tf.resource, name=None)
 }\if{html}{\out{</div>}}
 
 \if{html}{\out{<div class="sourceCode r">}}\preformatted{reloaded_layer <- layer_tfsm(filepath = "path/to/artifact")
@@ -82,31 +82,31 @@ to the \code{layer_tfsm} via the \code{call_training_endpoint} argument.
 \seealso{
 Other layers: 
 \code{\link{Layer}()},
+\code{\link{layer_activation}()},
 \code{\link{layer_activation_elu}()},
 \code{\link{layer_activation_leaky_relu}()},
 \code{\link{layer_activation_parametric_relu}()},
 \code{\link{layer_activation_relu}()},
 \code{\link{layer_activation_softmax}()},
-\code{\link{layer_activation}()},
 \code{\link{layer_activity_regularization}()},
-\code{\link{layer_additive_attention}()},
 \code{\link{layer_add}()},
+\code{\link{layer_additive_attention}()},
 \code{\link{layer_attention}()},
+\code{\link{layer_average}()},
 \code{\link{layer_average_pooling_1d}()},
 \code{\link{layer_average_pooling_2d}()},
 \code{\link{layer_average_pooling_3d}()},
-\code{\link{layer_average}()},
 \code{\link{layer_batch_normalization}()},
 \code{\link{layer_bidirectional}()},
 \code{\link{layer_category_encoding}()},
 \code{\link{layer_center_crop}()},
 \code{\link{layer_concatenate}()},
-\code{\link{layer_conv_1d_transpose}()},
 \code{\link{layer_conv_1d}()},
-\code{\link{layer_conv_2d_transpose}()},
+\code{\link{layer_conv_1d_transpose}()},
 \code{\link{layer_conv_2d}()},
-\code{\link{layer_conv_3d_transpose}()},
+\code{\link{layer_conv_2d_transpose}()},
 \code{\link{layer_conv_3d}()},
+\code{\link{layer_conv_3d_transpose}()},
 \code{\link{layer_conv_lstm_1d}()},
 \code{\link{layer_conv_lstm_2d}()},
 \code{\link{layer_conv_lstm_3d}()},
@@ -189,12 +189,12 @@ Other layers:
 
 Other saving and loading functions: 
 \code{\link{export_savedmodel.keras.src.models.model.Model}()},
-\code{\link{load_model_weights}()},
 \code{\link{load_model}()},
+\code{\link{load_model_weights}()},
 \code{\link{register_keras_serializable}()},
+\code{\link{save_model}()},
 \code{\link{save_model_config}()},
 \code{\link{save_model_weights}()},
-\code{\link{save_model}()},
 \code{\link{with_custom_object_scope}()}
 }
 \concept{layers}

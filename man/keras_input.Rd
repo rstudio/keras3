@@ -66,7 +66,7 @@ model <- keras_model(input, output)
 
 \seealso{
 Other model creation: 
-\code{\link{keras_model_sequential}()},
-\code{\link{keras_model}()}
+\code{\link{keras_model}()},
+\code{\link{keras_model_sequential}()}
 }
 \concept{model creation}

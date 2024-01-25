@@ -58,7 +58,8 @@ top-k predictions.
 Standalone usage:
 
 \if{html}{\out{<div class="sourceCode r">}}\preformatted{m <- metric_recall()
-m$update_state(c(0, 1, 1, 1), c(1, 0, 1, 1))
+m$update_state(c(0, 1, 1, 1),
+               c(1, 0, 1, 1))
 m$result()
 }\if{html}{\out{</div>}}
 
@@ -66,7 +67,9 @@ m$result()
 }\if{html}{\out{</div>}}
 
 \if{html}{\out{<div class="sourceCode r">}}\preformatted{m$reset_state()
-m$update_state(c(0, 1, 1, 1), c(1, 0, 1, 1), sample_weight = c(0, 0, 1, 0))
+m$update_state(c(0, 1, 1, 1),
+               c(1, 0, 1, 1),
+               sample_weight = c(0, 0, 1, 0))
 m$result()
 }\if{html}{\out{</div>}}
 
@@ -75,16 +78,20 @@ m$result()
 
 Usage with \code{compile()} API:
 
-\if{html}{\out{<div class="sourceCode r">}}\preformatted{model \%>\% compile(optimizer = 'sgd',
-                  loss = 'mse',
-                  metrics = list(metric_recall()))
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{model |> compile(
+  optimizer = 'sgd',
+  loss = 'binary_crossentropy',
+  metrics = list(metric_recall())
+)
 }\if{html}{\out{</div>}}
 
 Usage with a loss with \code{from_logits=TRUE}:
 
-\if{html}{\out{<div class="sourceCode r">}}\preformatted{model \%>\% compile(optimizer = 'adam',
-                  loss = loss_binary_crossentropy(from_logits=TRUE),
-                  metrics = list(metric_recall(thresholds=0)))
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{model |> compile(
+  optimizer = 'adam',
+  loss = loss_binary_crossentropy(from_logits = TRUE),
+  metrics = list(metric_recall(thresholds = 0))
+)
 }\if{html}{\out{</div>}}
 }
 
@@ -97,8 +104,8 @@ Other confusion metrics:
 \code{\link{metric_auc}()},
 \code{\link{metric_false_negatives}()},
 \code{\link{metric_false_positives}()},
-\code{\link{metric_precision_at_recall}()},
 \code{\link{metric_precision}()},
+\code{\link{metric_precision_at_recall}()},
 \code{\link{metric_recall_at_precision}()},
 \code{\link{metric_sensitivity_at_specificity}()},
 \code{\link{metric_specificity_at_sensitivity}()},
@@ -126,20 +133,20 @@ Other metrics:
 \code{\link{metric_huber}()},
 \code{\link{metric_iou}()},
 \code{\link{metric_kl_divergence}()},
-\code{\link{metric_log_cosh_error}()},
 \code{\link{metric_log_cosh}()},
+\code{\link{metric_log_cosh_error}()},
+\code{\link{metric_mean}()},
 \code{\link{metric_mean_absolute_error}()},
 \code{\link{metric_mean_absolute_percentage_error}()},
 \code{\link{metric_mean_iou}()},
 \code{\link{metric_mean_squared_error}()},
 \code{\link{metric_mean_squared_logarithmic_error}()},
 \code{\link{metric_mean_wrapper}()},
-\code{\link{metric_mean}()},
 \code{\link{metric_one_hot_iou}()},
 \code{\link{metric_one_hot_mean_iou}()},
 \code{\link{metric_poisson}()},
-\code{\link{metric_precision_at_recall}()},
 \code{\link{metric_precision}()},
+\code{\link{metric_precision_at_recall}()},
 \code{\link{metric_r2_score}()},
 \code{\link{metric_recall_at_precision}()},
 \code{\link{metric_root_mean_squared_error}()},

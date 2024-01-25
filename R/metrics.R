@@ -715,36 +715,40 @@ function (y_true, y_pred, k = 5L, ..., name = "top_k_categorical_accuracy",
 #'
 #' ```{r}
 #' m <- metric_auc(num_thresholds = 3)
-#' m$update_state(c(0, 0, 1, 1), c(0, 0.5, 0.3, 0.9))
+#' m$update_state(c(0,   0,   1,   1),
+#'                c(0, 0.5, 0.3, 0.9))
 #' # threshold values are [0 - 1e-7, 0.5, 1 + 1e-7]
 #' # tp = [2, 1, 0], fp = [2, 0, 0], fn = [0, 1, 2], tn = [0, 2, 2]
 #' # tp_rate = recall = [1, 0.5, 0], fp_rate = [1, 0, 0]
 #' # auc = ((((1 + 0.5) / 2) * (1 - 0)) + (((0.5 + 0) / 2) * (0 - 0)))
 #' #     = 0.75
 #' m$result()
-#' # 0.75
 #' ```
 #'
 #' ```{r}
 #' m$reset_state()
-#' m$update_state(c(0, 0, 1, 1), c(0, 0.5, 0.3, 0.9),
+#' m$update_state(c(0,   0,   1,   1),
+#'                c(0, 0.5, 0.3, 0.9),
 #'                sample_weight=c(1, 0, 0, 1))
 #' m$result()
-#' # 1.0
 #' ```
 #'
 #' Usage with `compile()` API:
 #'
 #' ```{r, eval = FALSE}
 #' # Reports the AUC of a model outputting a probability.
-#' model %>% compile(optimizer = 'sgd',
-#'                   loss = loss_binary_crossentropy(),
-#'                   metrics = list(metric_auc()))
+#' model |> compile(
+#'   optimizer = 'sgd',
+#'   loss = loss_binary_crossentropy(),
+#'   metrics = list(metric_auc())
+#' )
 #'
 #' # Reports the AUC of a model outputting a logit.
-#' model %>% compile(optimizer = 'sgd',
-#'                   loss = loss_binary_crossentropy(from_logits = TRUE),
-#'                   metrics = list(metric_auc(from_logits = TRUE)))
+#' model |> compile(
+#'   optimizer = 'sgd',
+#'   loss = loss_binary_crossentropy(from_logits = TRUE),
+#'   metrics = list(metric_auc(from_logits = TRUE))
+#' )
 #' ```
 #'
 #' @param num_thresholds
@@ -978,27 +982,30 @@ function (..., thresholds = NULL, name = NULL, dtype = NULL)
 #'
 #' ```{r}
 #' m <- metric_precision()
-#' m$update_state(c(0, 1, 1, 1), c(1, 0, 1, 1))
-#' m$result()
+#' m$update_state(c(0, 1, 1, 1),
+#'                c(1, 0, 1, 1))
+#' m$result() |> as.double() |> signif()
 #' ```
 #'
 #' ```{r}
 #' m$reset_state()
-#' m$update_state(c(0, 1, 1, 1), c(1, 0, 1, 1), sample_weight=c(0, 0, 1, 0))
-#' m$result()
+#' m$update_state(c(0, 1, 1, 1),
+#'                c(1, 0, 1, 1),
+#'                sample_weight = c(0, 0, 1, 0))
+#' m$result() |> as.double() |> signif()
 #' ```
 #'
 #' ```{r}
-#' # With top_k=2, it will calculate precision over y_true[:2]
-#' # and y_pred[:2]
+#' # With top_k=2, it will calculate precision over y_true[1:2]
+#' # and y_pred[1:2]
 #' m <- metric_precision(top_k = 2)
 #' m$update_state(c(0, 0, 1, 1), c(1, 1, 1, 1))
 #' m$result()
 #' ```
 #'
 #' ```{r}
-#' # With top_k=4, it will calculate precision over y_true[:4]
-#' # and y_pred[:4]
+#' # With top_k=4, it will calculate precision over y_true[1:4]
+#' # and y_pred[1:4]
 #' m <- metric_precision(top_k = 4)
 #' m$update_state(c(0, 0, 1, 1), c(1, 1, 1, 1))
 #' m$result()
@@ -1007,17 +1014,21 @@ function (..., thresholds = NULL, name = NULL, dtype = NULL)
 #' Usage with `compile()` API:
 #'
 #' ```{r, eval=FALSE}
-#' model %>% compile(optimizer = 'sgd',
-#'                   loss = 'mse',
-#'                   metrics = list(metric_precision()))
+#' model |> compile(
+#'   optimizer = 'sgd',
+#'   loss = 'binary_crossentropy',
+#'   metrics = list(metric_precision())
+#' )
 #' ```
 #'
 #' Usage with a loss with `from_logits=TRUE`:
 #'
 #' ```{r, eval = FALSE}
-#' model %>% compile(optimizer = 'adam',
-#'                   loss = loss_binary_crossentropy(from_logits = TRUE),
-#'                   metrics = list(metric_precision(thresholds = 0)))
+#' model |> compile(
+#'   optimizer = 'adam',
+#'   loss = loss_binary_crossentropy(from_logits = TRUE),
+#'   metrics = list(metric_precision(thresholds = 0))
+#' )
 #' ```
 #'
 #' @param thresholds
@@ -1087,23 +1098,25 @@ function (..., thresholds = NULL, top_k = NULL, class_id = NULL,
 #'
 #' ```{r}
 #' m <- metric_precision_at_recall(recall = 0.5)
-#' m$update_state(c(0, 0, 0, 1, 1), c(0, 0.3, 0.8, 0.3, 0.8))
-#' # m$result()
+#' m$update_state(c(0,   0,   0,   1,   1),
+#'                c(0, 0.3, 0.8, 0.3, 0.8))
+#' m$result()
 #' ```
 #'
 #' ```{r}
 #' m$reset_state()
-#' m$update_state(c(0, 0, 0, 1, 1), c(0, 0.3, 0.8, 0.3, 0.8),
+#' m$update_state(c(0,   0,   0,   1,   1),
+#'                c(0, 0.3, 0.8, 0.3, 0.8),
 #'                sample_weight = c(2, 2, 2, 1, 1))
-#' # m$result()
+#' m$result()
 #' ```
 #'
 #' Usage with `compile()` API:
 #'
 #' ```{r, eval = FALSE}
-#' model %>% compile(
+#' model |> compile(
 #'   optimizer = 'sgd',
-#'   loss = 'mse',
+#'   loss = 'binary_crossentropy',
 #'   metrics = list(metric_precision_at_recall(recall = 0.8))
 #' )
 #' ```
@@ -1170,30 +1183,37 @@ function (..., recall, num_thresholds = 200L, class_id = NULL,
 #'
 #' ```{r}
 #' m <- metric_recall()
-#' m$update_state(c(0, 1, 1, 1), c(1, 0, 1, 1))
+#' m$update_state(c(0, 1, 1, 1),
+#'                c(1, 0, 1, 1))
 #' m$result()
 #' ```
 #'
 #' ```{r}
 #' m$reset_state()
-#' m$update_state(c(0, 1, 1, 1), c(1, 0, 1, 1), sample_weight = c(0, 0, 1, 0))
+#' m$update_state(c(0, 1, 1, 1),
+#'                c(1, 0, 1, 1),
+#'                sample_weight = c(0, 0, 1, 0))
 #' m$result()
 #' ```
 #'
 #' Usage with `compile()` API:
 #'
 #' ```{r, eval = FALSE}
-#' model %>% compile(optimizer = 'sgd',
-#'                   loss = 'mse',
-#'                   metrics = list(metric_recall()))
+#' model |> compile(
+#'   optimizer = 'sgd',
+#'   loss = 'binary_crossentropy',
+#'   metrics = list(metric_recall())
+#' )
 #' ```
 #'
 #' Usage with a loss with `from_logits=TRUE`:
 #'
 #' ```{r, eval = FALSE}
-#' model %>% compile(optimizer = 'adam',
-#'                   loss = loss_binary_crossentropy(from_logits=TRUE),
-#'                   metrics = list(metric_recall(thresholds=0)))
+#' model |> compile(
+#'   optimizer = 'adam',
+#'   loss = loss_binary_crossentropy(from_logits = TRUE),
+#'   metrics = list(metric_recall(thresholds = 0))
+#' )
 #' ```
 #'
 #' @param thresholds
@@ -1266,24 +1286,27 @@ function (..., thresholds = NULL, top_k = NULL, class_id = NULL,
 #'
 #' ```{r}
 #' m <- metric_recall_at_precision(precision = 0.8)
-#' m$update_state(c(0, 0, 1, 1), c(0, 0.5, 0.3, 0.9))
-#' # m$result()
+#' m$update_state(c(0,   0,   1,   1),
+#'                c(0, 0.5, 0.3, 0.9))
+#' m$result()
 #' ```
 #'
 #' ```{r}
 #' m$reset_state()
-#' m$update_state(c(0, 0, 1, 1), c(0, 0.5, 0.3, 0.9),
+#' m$update_state(c(0,   0,   1,   1),
+#'                c(0, 0.5, 0.3, 0.9),
 #'                sample_weight = c(1, 0, 0, 1))
-#' # m$result()
+#' m$result()
 #' ```
 #'
 #' Usage with `compile()` API:
 #'
 #' ```{r, eval = FALSE}
-#' model %>% compile(
-#'     optimizer = 'sgd',
-#'     loss = 'mse',
-#'     metrics = list(metric_recall_at_precision(precision = 0.8)))
+#' model |> compile(
+#'   optimizer = 'sgd',
+#'   loss = 'binary_crossentropy',
+#'   metrics = list(metric_recall_at_precision(precision = 0.8))
+#' )
 #' ```
 #'
 #' @param precision
@@ -1354,24 +1377,27 @@ function (..., precision, num_thresholds = 200L, class_id = NULL,
 #'
 #' ```{r}
 #' m <- metric_sensitivity_at_specificity(specificity = 0.5)
-#' m$update_state(c(0, 0, 0, 1, 1), c(0, 0.3, 0.8, 0.3, 0.8))
-#' # m$result()
+#' m$update_state(c(0,   0,   0,   1,   1),
+#'                c(0, 0.3, 0.8, 0.3, 0.8))
+#' m$result()
 #' ```
 #'
 #' ```{r}
 #' m$reset_state()
-#' m$update_state(c(0, 0, 0, 1, 1), c(0, 0.3, 0.8, 0.3, 0.8),
+#' m$update_state(c(0,   0,   0,   1,   1),
+#'                c(0, 0.3, 0.8, 0.3, 0.8),
 #'                sample_weight = c(1, 1, 2, 2, 1))
-#' # m$result()
+#' m$result()
 #' ```
 #'
 #' Usage with `compile()` API:
 #'
 #' ```{r, eval = FALSE}
-#' model %>% compile(
-#'     optimizer = 'sgd',
-#'     loss = 'mse',
-#'     metrics = list(metric_sensitivity_at_specificity()))
+#' model |> compile(
+#'   optimizer = 'sgd',
+#'   loss = 'binary_crossentropy',
+#'   metrics = list(metric_sensitivity_at_specificity())
+#' )
 #' ```
 #'
 #' @param specificity
@@ -1442,24 +1468,27 @@ function (..., specificity, num_thresholds = 200L, class_id = NULL,
 #'
 #' ```{r}
 #' m <- metric_specificity_at_sensitivity(sensitivity = 0.5)
-#' m$update_state(c(0, 0, 0, 1, 1), c(0, 0.3, 0.8, 0.3, 0.8))
-#' # m$result()
+#' m$update_state(c(0,   0,   0,   1,   1),
+#'                c(0, 0.3, 0.8, 0.3, 0.8))
+#' m$result()
 #' ```
 #'
 #' ```{r}
 #' m$reset_state()
-#' m$update_state(c(0, 0, 0, 1, 1), c(0, 0.3, 0.8, 0.3, 0.8),
+#' m$update_state(c(0,   0,   0,   1,   1),
+#'                c(0, 0.3, 0.8, 0.3, 0.8),
 #'                sample_weight = c(1, 1, 2, 2, 2))
-#' # m$result()
+#' m$result()
 #' ```
 #'
 #' Usage with `compile()` API:
 #'
 #' ```{r, eval = FALSE}
-#' model %>% compile(
+#' model |> compile(
 #'   optimizer = 'sgd',
-#'   loss = 'mse',
-#'   metrics = list(metric_sensitivity_at_specificity()))
+#'   loss = 'binary_crossentropy',
+#'   metrics = list(metric_sensitivity_at_specificity())
+#' )
 #' ```
 #'
 #' @param sensitivity

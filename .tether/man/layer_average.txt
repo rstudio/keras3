@@ -1,7 +1,7 @@
 Help on class Average in module keras.src.layers.merging.average:
 
 class Average(keras.src.layers.merging.base_merge.Merge)
- |  Average(*args, **kwargs)
+ |  Average(**kwargs)
  |
  |  Averages a list of inputs element-wise..
  |
@@ -62,3 +62,4 @@ class Average(keras.src.layers.merging.base_merge.Merge)
  |      An object config is a Python dictionary (serializable)
  |      containing the information needed to re-instantiate it.
  |
+

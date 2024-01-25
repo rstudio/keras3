@@ -9,7 +9,8 @@ keras.utils.get_file(
   hash_algorithm='auto',
   extract=False,
   archive_format='auto',
-  cache_dir=None
+  cache_dir=None,
+  force_download=False
 )
 __doc__
 Downloads a file from a URL if it not already in the cache.
@@ -59,6 +60,8 @@ Args:
     cache_dir: Location to store cached files, when None it
         defaults ether `$KERAS_HOME` if the `KERAS_HOME` environment
         variable is set or `~/.keras/`.
+    force_download: If `True`, the file will always be re-downloaded
+        regardless of the cache state.
 
 Returns:
     Path to the downloaded file.
@@ -70,3 +73,4 @@ NEVER download a file/archive if you do not trust the source.
 We recommend that you specify the `file_hash` argument
 (if the hash of the source file is known) to make sure that the file you
 are getting is the one you expect.
+

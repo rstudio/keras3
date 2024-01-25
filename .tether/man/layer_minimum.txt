@@ -1,7 +1,7 @@
 Help on class Minimum in module keras.src.layers.merging.minimum:
 
 class Minimum(keras.src.layers.merging.base_merge.Merge)
- |  Minimum(*args, **kwargs)
+ |  Minimum(**kwargs)
  |
  |  Computes elementwise minimum on a list of inputs.
  |
@@ -62,3 +62,4 @@ class Minimum(keras.src.layers.merging.base_merge.Merge)
  |      An object config is a Python dictionary (serializable)
  |      containing the information needed to re-instantiate it.
  |
+
