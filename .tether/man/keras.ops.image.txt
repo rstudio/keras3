@@ -1,0 +1,40 @@
+affine_transform(
+  image,
+  transform,
+  interpolation='bilinear',
+  fill_mode='constant',
+  fill_value=0,
+  data_format='channels_last'
+)
+extract_patches(
+  image,
+  size,
+  strides=None,
+  dilation_rate=1,
+  padding='valid',
+  data_format='channels_last'
+)
+map_coordinates(
+  input,
+  coordinates,
+  order,
+  fill_mode='constant',
+  fill_value=0
+)
+pad_images(
+  images,
+  top_padding=None,
+  left_padding=None,
+  target_height=None,
+  target_width=None,
+  bottom_padding=None,
+  right_padding=None
+)
+resize(
+  image,
+  size,
+  interpolation='bilinear',
+  antialias=False,
+  data_format='channels_last'
+)
+

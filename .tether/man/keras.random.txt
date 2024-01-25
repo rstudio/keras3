@@ -1,0 +1,53 @@
+categorical(
+  logits,
+  num_samples,
+  dtype='int32',
+  seed=None
+)
+dropout(
+  inputs,
+  rate,
+  noise_shape=None,
+  seed=None
+)
+gamma(
+  shape,
+  alpha,
+  dtype=None,
+  seed=None
+)
+normal(
+  shape,
+  mean=0.0,
+  stddev=1.0,
+  dtype=None,
+  seed=None
+)
+randint(
+  shape,
+  minval,
+  maxval,
+  dtype='int32',
+  seed=None
+)
+SeedGenerator(seed=None, **kwargs)
+shuffle(
+  x,
+  axis=0,
+  seed=None
+)
+truncated_normal(
+  shape,
+  mean=0.0,
+  stddev=1.0,
+  dtype=None,
+  seed=None
+)
+uniform(
+  shape,
+  minval=0.0,
+  maxval=1.0,
+  dtype=None,
+  seed=None
+)
+

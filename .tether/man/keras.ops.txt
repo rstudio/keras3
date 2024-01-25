@@ -1,0 +1,541 @@
+abs(x)
+absolute(x)
+add(x1, x2)
+all(
+  x,
+  axis=None,
+  keepdims=False
+)
+amax(
+  x,
+  axis=None,
+  keepdims=False
+)
+amin(
+  x,
+  axis=None,
+  keepdims=False
+)
+any(
+  x,
+  axis=None,
+  keepdims=False
+)
+append(
+  x1,
+  x2,
+  axis=None
+)
+arange(
+  start,
+  stop=None,
+  step=1,
+  dtype=None
+)
+arccos(x)
+arccosh(x)
+arcsin(x)
+arcsinh(x)
+arctan(x)
+arctan2(x1, x2)
+arctanh(x)
+argmax(x, axis=None)
+argmin(x, axis=None)
+argsort(x, axis=-1)
+array(x, dtype=None)
+average(
+  x,
+  axis=None,
+  weights=None
+)
+average_pool(
+  inputs,
+  pool_size,
+  strides=None,
+  padding='valid',
+  data_format=None
+)
+batch_normalization(
+  x,
+  mean,
+  variance,
+  axis,
+  offset=None,
+  scale=None,
+  epsilon=0.001
+)
+binary_crossentropy(
+  target,
+  output,
+  from_logits=False
+)
+bincount(
+  x,
+  weights=None,
+  minlength=0
+)
+broadcast_to(x, shape)
+cast(x, dtype)
+categorical_crossentropy(
+  target,
+  output,
+  from_logits=False,
+  axis=-1
+)
+ceil(x)
+clip(
+  x,
+  x_min,
+  x_max
+)
+concatenate(xs, axis=0)
+cond(
+  pred,
+  true_fn,
+  false_fn
+)
+conj(x)
+conjugate(x)
+conv(
+  inputs,
+  kernel,
+  strides=1,
+  padding='valid',
+  data_format=None,
+  dilation_rate=1
+)
+conv_transpose(
+  inputs,
+  kernel,
+  strides,
+  padding='valid',
+  output_padding=None,
+  data_format=None,
+  dilation_rate=1
+)
+convert_to_numpy(x)
+convert_to_tensor(
+  x,
+  dtype=None,
+  sparse=None
+)
+copy(x)
+cos(x)
+cosh(x)
+count_nonzero(x, axis=None)
+cross(
+  x1,
+  x2,
+  axisa=-1,
+  axisb=-1,
+  axisc=-1,
+  axis=None
+)
+cumprod(
+  x,
+  axis=None,
+  dtype=None
+)
+cumsum(
+  x,
+  axis=None,
+  dtype=None
+)
+depthwise_conv(
+  inputs,
+  kernel,
+  strides=1,
+  padding='valid',
+  data_format=None,
+  dilation_rate=1
+)
+diag(x, k=0)
+diagonal(
+  x,
+  offset=0,
+  axis1=0,
+  axis2=1
+)
+diff(
+  a,
+  n=1,
+  axis=-1
+)
+digitize(x, bins)
+divide(x1, x2)
+dot(x1, x2)
+einsum(subscripts, *operands)
+elu(x, alpha=1.0)
+empty(shape, dtype=None)
+equal(x1, x2)
+erf(x)
+exp(x)
+expand_dims(x, axis)
+expm1(x)
+extract_sequences(
+  x,
+  sequence_length,
+  sequence_stride
+)
+eye(
+  N,
+  M=None,
+  k=0,
+  dtype=None
+)
+fft(x)
+fft2(x)
+flip(x, axis=None)
+floor(x)
+floor_divide(x1, x2)
+fori_loop(
+  lower,
+  upper,
+  body_fun,
+  init_val
+)
+full(
+  shape,
+  fill_value,
+  dtype=None
+)
+full_like(
+  x,
+  fill_value,
+  dtype=None
+)
+gelu(x, approximate=True)
+get_item(x, key)
+greater(x1, x2)
+greater_equal(x1, x2)
+hard_sigmoid(x)
+hstack(xs)
+identity(n, dtype=None)
+imag(x)
+image: Module(keras.ops.image)
+in_top_k(
+  targets,
+  predictions,
+  k
+)
+irfft(x, fft_length=None)
+is_tensor(x)
+isclose(x1, x2)
+isfinite(x)
+isinf(x)
+isnan(x)
+istft(
+  x,
+  sequence_length,
+  sequence_stride,
+  fft_length,
+  length=None,
+  window='hann',
+  center=True
+)
+leaky_relu(x, negative_slope=0.2)
+less(x1, x2)
+less_equal(x1, x2)
+linspace(
+  start,
+  stop,
+  num=50,
+  endpoint=True,
+  retstep=False,
+  dtype=None,
+  axis=0
+)
+log(x)
+log_sigmoid(x)
+log_softmax(x, axis=-1)
+log10(x)
+log1p(x)
+log2(x)
+logaddexp(x1, x2)
+logical_and(x1, x2)
+logical_not(x)
+logical_or(x1, x2)
+logical_xor(x1, x2)
+logspace(
+  start,
+  stop,
+  num=50,
+  endpoint=True,
+  base=10,
+  dtype=None,
+  axis=0
+)
+logsumexp(
+  x,
+  axis=None,
+  keepdims=False
+)
+matmul(x1, x2)
+max(
+  x,
+  axis=None,
+  keepdims=False,
+  initial=None
+)
+max_pool(
+  inputs,
+  pool_size,
+  strides=None,
+  padding='valid',
+  data_format=None
+)
+maximum(x1, x2)
+mean(
+  x,
+  axis=None,
+  keepdims=False
+)
+median(
+  x,
+  axis=None,
+  keepdims=False
+)
+meshgrid(*x, indexing='xy')
+min(
+  x,
+  axis=None,
+  keepdims=False,
+  initial=None
+)
+minimum(x1, x2)
+mod(x1, x2)
+moments(
+  x,
+  axes,
+  keepdims=False,
+  synchronized=False
+)
+moveaxis(
+  x,
+  source,
+  destination
+)
+multi_hot(
+  inputs,
+  num_tokens,
+  axis=-1,
+  dtype=None
+)
+multiply(x1, x2)
+nan_to_num(x)
+ndim(x)
+negative(x)
+nn: Module(keras.ops.nn)
+nonzero(x)
+not_equal(x1, x2)
+numpy: Module(keras.ops.numpy)
+one_hot(
+  x,
+  num_classes,
+  axis=-1,
+  dtype=None
+)
+ones(shape, dtype=None)
+ones_like(x, dtype=None)
+outer(x1, x2)
+pad(
+  x,
+  pad_width,
+  mode='constant',
+  constant_values=None
+)
+power(x1, x2)
+prod(
+  x,
+  axis=None,
+  keepdims=False,
+  dtype=None
+)
+qr(x, mode='reduced')
+quantile(
+  x,
+  q,
+  axis=None,
+  method='linear',
+  keepdims=False
+)
+ravel(x)
+real(x)
+reciprocal(x)
+relu(x)
+relu6(x)
+repeat(
+  x,
+  repeats,
+  axis=None
+)
+reshape(x, new_shape)
+rfft(x, fft_length=None)
+roll(
+  x,
+  shift,
+  axis=None
+)
+round(x, decimals=0)
+rsqrt(x)
+scatter(
+  indices,
+  values,
+  shape
+)
+scatter_update(
+  inputs,
+  indices,
+  updates
+)
+segment_max(
+  data,
+  segment_ids,
+  num_segments=None,
+  sorted=False
+)
+segment_sum(
+  data,
+  segment_ids,
+  num_segments=None,
+  sorted=False
+)
+selu(x)
+separable_conv(
+  inputs,
+  depthwise_kernel,
+  pointwise_kernel,
+  strides=1,
+  padding='valid',
+  data_format=None,
+  dilation_rate=1
+)
+shape(x)
+sigmoid(x)
+sign(x)
+silu(x)
+sin(x)
+sinh(x)
+size(x)
+slice(
+  inputs,
+  start_indices,
+  shape
+)
+slice_update(
+  inputs,
+  start_indices,
+  updates
+)
+softmax(x, axis=-1)
+softplus(x)
+softsign(x)
+solve(a, b)
+sort(x, axis=-1)
+sparse_categorical_crossentropy(
+  target,
+  output,
+  from_logits=False,
+  axis=-1
+)
+split(
+  x,
+  indices_or_sections,
+  axis=0
+)
+sqrt(x)
+square(x)
+squeeze(x, axis=None)
+stack(x, axis=0)
+std(
+  x,
+  axis=None,
+  keepdims=False
+)
+stft(
+  x,
+  sequence_length,
+  sequence_stride,
+  fft_length,
+  window='hann',
+  center=True
+)
+stop_gradient(variable)
+subtract(x1, x2)
+sum(
+  x,
+  axis=None,
+  keepdims=False
+)
+swapaxes(
+  x,
+  axis1,
+  axis2
+)
+swish(x)
+take(
+  x,
+  indices,
+  axis=None
+)
+take_along_axis(
+  x,
+  indices,
+  axis=None
+)
+tan(x)
+tanh(x)
+tensordot(
+  x1,
+  x2,
+  axes=2
+)
+tile(x, repeats)
+top_k(
+  x,
+  k,
+  sorted=True
+)
+trace(
+  x,
+  offset=0,
+  axis1=0,
+  axis2=1
+)
+transpose(x, axes=None)
+tri(
+  N,
+  M=None,
+  k=0,
+  dtype=None
+)
+tril(x, k=0)
+triu(x, k=0)
+true_divide(x1, x2)
+unstack(
+  x,
+  num=None,
+  axis=0
+)
+var(
+  x,
+  axis=None,
+  keepdims=False
+)
+vdot(x1, x2)
+vectorized_map(function, elements)
+vstack(xs)
+where(
+  condition,
+  x1=None,
+  x2=None
+)
+while_loop(
+  cond,
+  body,
+  loop_vars,
+  maximum_iterations=None
+)
+zeros(shape, dtype=None)
+zeros_like(x, dtype=None)
+

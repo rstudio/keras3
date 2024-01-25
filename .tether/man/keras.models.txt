@@ -1,0 +1,25 @@
+clone_model(
+  model,
+  input_tensors=None,
+  clone_function=None
+)
+load_model(
+  filepath,
+  custom_objects=None,
+  compile=True,
+  safe_mode=True
+)
+Model(*args, **kwargs)
+model_from_json(json_string, custom_objects=None)
+save_model(
+  model,
+  filepath,
+  overwrite=True,
+  **kwargs
+)
+Sequential(
+  layers=None,
+  trainable=True,
+  name=None
+)
+

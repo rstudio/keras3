@@ -1,0 +1,34 @@
+array_to_img(
+  x,
+  data_format=None,
+  scale=True,
+  dtype=None
+)
+img_to_array(
+  img,
+  data_format=None,
+  dtype=None
+)
+load_img(
+  path,
+  color_mode='rgb',
+  target_size=None,
+  interpolation='nearest',
+  keep_aspect_ratio=False
+)
+save_img(
+  path,
+  x,
+  data_format=None,
+  file_format=None,
+  scale=True,
+  **kwargs
+)
+smart_resize(
+  x,
+  size,
+  interpolation='bilinear',
+  data_format='channels_last',
+  backend_module=None
+)
+

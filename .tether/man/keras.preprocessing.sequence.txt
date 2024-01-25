@@ -1,0 +1,9 @@
+pad_sequences(
+  sequences,
+  maxlen=None,
+  dtype='int32',
+  padding='pre',
+  truncating='pre',
+  value=0.0
+)
+

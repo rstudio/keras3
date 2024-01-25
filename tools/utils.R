@@ -281,7 +281,8 @@ rm(r) # TODO: fix in reticulate, don't export r
 list_endpoints <- function(
     module = "keras", max_depth = 4,
     skip = "keras.src",
-    skip_regex = sprintf("\\.%s$", c("experimental", "deserialize", "serialize", "get"))) {
+    skip_regex = sprintf("\\.%s$", c("experimental", "deserialize", "serialize", "get")),
+    include_modules = FALSE) {
 
   .list_endpoints <- function(.module, depth) {
     if (depth > max_depth) return()
@@ -294,8 +295,12 @@ list_endpoints <- function(
       if (any(str_detect(endpoint, skip_regex))) return()
       # message(endpoint)
       endpoint_py_obj <- module_py_obj[[nm]]
-      if (inherits(endpoint_py_obj, "python.builtin.module"))
-        return(.list_endpoints(endpoint, depth = depth + 1L))
+      if (inherits(endpoint_py_obj, "python.builtin.module")) {
+        out <- .list_endpoints(endpoint, depth = depth + 1L)
+        if(include_modules)
+          append(out) <- endpoint
+        return(out)
+      }
       if (inherits(endpoint_py_obj, c("python.builtin.type",
                                       "python.builtin.function")))
         return(endpoint)

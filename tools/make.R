@@ -402,6 +402,38 @@ if(FALSE) {
 
 # start by regenerating patch files
 
+if(FALSE) {
+
+
+module_tether_blocks <- function(x) {
+  lapply(unlist(x), \(name) glue::glue(r"--(
+#' @title {name}
+#' @name {name}
+#' @tether {name}
+#' @noRd
+NULL
+
+)--")) |> str_flatten("\n\n")
+}
+
+#' @title keras.ops
+#' @name keras.ops
+#' @tether keras.ops
+#' @noRd
+NULL
+
+x <-
+list_endpoints(include_modules = TRUE) %>%
+  c("keras")
+x %>%
+  keep(\(e) inherits(py_eval(e), "python.builtin.module")) %>%
+  grep("applications.", ., fixed = TRUE, invert = TRUE, value = TRUE) %>%
+  grep("datasets.", ., fixed = TRUE, invert = TRUE, value = TRUE) %>%
+  module_tether_blocks() |>
+  cat_cb()
+
+}
+
 
 endpoints <- list_endpoints(skip = c(
   # to be processed / done
