@@ -244,7 +244,7 @@ function (object, units, activation = NULL, use_bias = TRUE,
 #' This can be useful to reduce the
 #' computation cost of fine-tuning large dense layers.
 #' You can also enable LoRA on an existing
-#' `EinsumDense` layer by calling `layer.enable_lora(rank)`.
+#' `EinsumDense` layer by calling `layer$enable_lora(rank)`.
 #'
 #' @param ...
 #' Base layer keyword arguments, such as `name` and `dtype`.

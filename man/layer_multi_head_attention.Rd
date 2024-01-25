@@ -2,7 +2,7 @@
 % Please edit documentation in R/layers-attention.R
 \name{layer_multi_head_attention}
 \alias{layer_multi_head_attention}
-\title{MultiHeadAttention layer.}
+\title{Multi Head Attention layer.}
 \usage{
 layer_multi_head_attention(
   inputs,
@@ -59,15 +59,6 @@ attention over all axes, but batch, heads, and features.}
 
 \item{...}{For forward/backward compatability.}
 }
-\value{
-attention_output: The result of the computation, of shape \verb{(B, T, E)},
-where \code{T} is for target sequence shapes and \code{E} is the query input
-last dimension if \code{output_shape} is \code{NULL}. Otherwise, the
-multi-head outputs are projected to the shape specified by
-\code{output_shape}.
-attention_scores: (Optional) multi-head attention coefficients over
-attention axes.
-}
 \description{
 This is an implementation of multi-headed attention as described in the
 paper "Attention is all you Need"
@@ -114,6 +105,35 @@ layer/model, or \code{FALSE} (inference) if there is no parent layer.
 \item \code{use_causal_mask}: A boolean to indicate whether to apply a causal mask to
 prevent tokens from attending to future tokens (e.g., used in a
 decoder Transformer).
+}
+}
+
+\section{Call return}{
+\itemize{
+\item attention_output: The result of the computation, of shape \verb{(B, T, E)},
+where \code{T} is for target sequence shapes and \code{E} is the query input
+last dimension if \code{output_shape} is \code{NULL}. Otherwise, the
+multi-head outputs are projected to the shape specified by
+\code{output_shape}.
+\item attention_scores: (Optional) multi-head attention coefficients over
+attention axes.
+}
+}
+
+\section{Properties}{
+A \code{MultiHeadAttention} \code{Layer} instance has the following additional read-only properties:
+\itemize{
+\item \code{attention_axes}
+\item \code{dropout}
+\item \code{key_dense}
+\item \code{key_dim}
+\item \code{num_heads}
+\item \code{output_dense}
+\item \code{output_shape}
+\item \code{query_dense}
+\item \code{use_bias}
+\item \code{value_dense}
+\item \code{value_dim}
 }
 }
 

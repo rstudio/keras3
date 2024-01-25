@@ -28,7 +28,7 @@ layer_batch_normalization(
 
 \item{axis}{Integer, the axis that should be normalized
 (typically the features axis). For instance, after a \code{Conv2D} layer
-with \code{data_format="channels_first"}, use \code{axis=1}.}
+with \code{data_format = "channels_first"}, use \code{axis = 2}.}
 
 \item{momentum}{Momentum for the moving average.}
 
@@ -73,7 +73,7 @@ Importantly, batch normalization works differently during training and
 during inference.
 
 \strong{During training} (i.e. when using \code{fit()} or when calling the layer/model
-with the argument \code{training=TRUE}), the layer normalizes its output using
+with the argument \code{training = TRUE}), the layer normalizes its output using
 the mean and standard deviation of the current batch of inputs. That is to
 say, for each channel being normalized, the layer returns
 \code{gamma * (batch - mean(batch)) / sqrt(var(batch) + epsilon) + beta}, where:
@@ -81,13 +81,13 @@ say, for each channel being normalized, the layer returns
 \item \code{epsilon} is small constant (configurable as part of the constructor
 arguments)
 \item \code{gamma} is a learned scaling factor (initialized as 1), which
-can be disabled by passing \code{scale=FALSE} to the constructor.
+can be disabled by passing \code{scale = FALSE} to the constructor.
 \item \code{beta} is a learned offset factor (initialized as 0), which
-can be disabled by passing \code{center=FALSE} to the constructor.
+can be disabled by passing \code{center = FALSE} to the constructor.
 }
 
 \strong{During inference} (i.e. when using \code{evaluate()} or \code{predict()} or when
-calling the layer/model with the argument \code{training=FALSE} (which is the
+calling the layer/model with the argument \code{training = FALSE} (which is the
 default), the layer normalizes its output using a moving average of the
 mean and standard deviation of the batches it has seen during training. That
 is to say, it returns
@@ -104,9 +104,9 @@ As such, the layer will only normalize its inputs during inference
 \emph{after having been trained on data that has similar statistics as the
 inference data}.
 
-\strong{About setting \code{layer.trainable = FALSE} on a \code{BatchNormalization} layer:}
+\strong{About setting \code{layer$trainable <- FALSE} on a \code{BatchNormalization} layer:}
 
-The meaning of setting \code{layer.trainable = FALSE} is to freeze the layer,
+The meaning of setting \code{layer$trainable <- FALSE} is to freeze the layer,
 i.e. its internal state will not change during training:
 its trainable weights will not be updated
 during \code{fit()} or \code{train_on_batch()}, and its state updates will not be run.
@@ -117,7 +117,7 @@ be passed when calling a layer). "Frozen state" and "inference mode"
 are two separate concepts.
 
 However, in the case of the \code{BatchNormalization} layer, \strong{setting
-\code{trainable = FALSE} on the layer means that the layer will be
+\code{trainable <- FALSE} on the layer means that the layer will be
 subsequently run in inference mode} (meaning that it will use
 the moving mean and the moving variance to normalize the current batch,
 rather than using the mean and variance of the current batch).
@@ -134,15 +134,21 @@ until \code{compile()} is called again.
 \section{Call Arguments}{
 \itemize{
 \item \code{inputs}: Input tensor (of any rank).
-\item \code{training}: Python boolean indicating whether the layer should behave in
+\item \code{training}: R boolean indicating whether the layer should behave in
 training mode or in inference mode.
 \itemize{
-\item \code{training=TRUE}: The layer will normalize its inputs using
+\item \code{training = TRUE}: The layer will normalize its inputs using
 the mean and variance of the current batch of inputs.
-\item \code{training=FALSE}: The layer will normalize its inputs using
+\item \code{training = FALSE}: The layer will normalize its inputs using
 the mean and variance of its moving statistics, learned during
 training.
 }
+\item \code{mask}: Binary tensor of shape broadcastable to \code{inputs} tensor, with
+\code{TRUE} values indicating the positions for which mean and variance
+should be computed. Masked elements of the current inputs are not
+taken into account for mean and variance computation during
+training. Any prior unmasked element values will be taken into
+account until their momentum expires.
 }
 }
 

@@ -97,6 +97,11 @@ model \%>\% compile(loss = "categorical_crossentropy",
 }\if{html}{\out{</div>}}
 }
 
+\section{States}{
+A \code{Bidirectional} layer instance has property \code{states}, which you can access
+with \code{layer$states}. You can also reset states using \code{\link[=reset_state]{reset_state()}}
+}
+
 \seealso{
 \itemize{
 \item \url{https://keras.io/api/layers/recurrent_layers/bidirectional#bidirectional-class}

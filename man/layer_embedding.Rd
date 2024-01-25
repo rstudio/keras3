@@ -98,13 +98,6 @@ dim(output_array)    # (32, 10, 64)
   b_initializer = 'zeros'
 )
 }\if{html}{\out{</div>}}
-\item 
-
-\if{html}{\out{<div class="sourceCode r">}}\preformatted{compute_mask(
-  inputs,
-  mask = NULL
-)
-}\if{html}{\out{</div>}}
 }
 }
 
