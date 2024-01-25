@@ -1,7 +1,7 @@
 Help on class Embedding in module keras.src.layers.core.embedding:
 
 class Embedding(keras.src.layers.layer.Layer)
- |  Embedding(input_dim, output_dim, embeddings_initializer='uniform', embeddings_regularizer=None, embeddings_constraint=None, mask_zero=False, **kwargs)
+ |  Embedding(input_dim, output_dim, embeddings_initializer='uniform', embeddings_regularizer=None, embeddings_constraint=None, mask_zero=False, lora_rank=None, **kwargs)
  |
  |  Turns positive integers (indexes) into dense vectors of fixed size.
  |
@@ -43,6 +43,15 @@ class Embedding(keras.src.layers.layer.Layer)
  |          If mask_zero is set to True, as a consequence,
  |          index 0 cannot be used in the vocabulary (input_dim should
  |          equal size of vocabulary + 1).
+ |      lora_rank: Optional integer. If set, the layer's forward pass
+ |          will implement LoRA (Low-Rank Adaptation)
+ |          with the provided rank. LoRA sets the layer's embeddings
+ |          matrix to non-trainable and replaces it with a delta over the
+ |          original matrix, obtained via multiplying two lower-rank
+ |          trainable matrices. This can be useful to reduce the
+ |          computation cost of fine-tuning large embedding layers.
+ |          You can also enable LoRA on an existing
+ |          `Embedding` layer by calling `layer.enable_lora(rank)`.
  |
  |  Input shape:
  |      2D tensor with shape: `(batch_size, input_length)`.
@@ -70,6 +79,7 @@ class Embedding(keras.src.layers.layer.Layer)
  |    embeddings_regularizer=None,
  |    embeddings_constraint=None,
  |    mask_zero=False,
+ |    lora_rank=None,
  |    **kwargs
  |  )
  |      Initialize self.  See help(type(self)) for accurate signature.
@@ -86,9 +96,40 @@ class Embedding(keras.src.layers.layer.Layer)
  |
  |  compute_output_shape(self, input_shape)
  |
+ |  enable_lora(
+ |    self,
+ |    rank,
+ |    a_initializer='he_uniform',
+ |    b_initializer='zeros'
+ |  )
+ |
  |  get_config(self)
  |      Returns the config of the object.
  |
  |      An object config is a Python dictionary (serializable)
  |      containing the information needed to re-instantiate it.
  |
+ |  load_own_variables(self, store)
+ |      Loads the state of the layer.
+ |
+ |      You can override this method to take full control of how the state of
+ |      the layer is loaded upon calling `keras.models.load_model()`.
+ |
+ |      Args:
+ |          store: Dict from which the state of the model will be loaded.
+ |
+ |  save_own_variables(self, store)
+ |      Saves the state of the layer.
+ |
+ |      You can override this method to take full control of how the state of
+ |      the layer is saved upon calling `model.save()`.
+ |
+ |      Args:
+ |          store: Dict where the state of the model will be saved.
+ |
+ |  ----------------------------------------------------------------------
+ |  Readonly properties defined here:
+ |
+ |  embeddings
+ |
+

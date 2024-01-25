@@ -251,6 +251,19 @@ function (object, equation, output_shape, activation = NULL,
 #' # Output Shape
 #' 3D tensor with shape: `(batch_size, input_length, output_dim)`.
 #'
+#' # Methods
+#' - ```r
+#'   enable_lora(
+#'     rank,
+#'     a_initializer = 'he_uniform',
+#'     b_initializer = 'zeros'
+#'   )
+#'   ```
+#'
+#' # Readonly properties:
+#'
+#' - `embeddings`
+#'
 #' @param input_dim
 #' Integer. Size of the vocabulary,
 #' i.e. maximum integer index + 1.
@@ -281,6 +294,17 @@ function (object, equation, output_shape, activation = NULL,
 #' index 0 cannot be used in the vocabulary (`input_dim` should
 #' equal size of vocabulary + 1).
 #'
+#' @param lora_rank
+#' Optional integer. If set, the layer's forward pass
+#' will implement LoRA (Low-Rank Adaptation)
+#' with the provided rank. LoRA sets the layer's embeddings
+#' matrix to non-trainable and replaces it with a delta over the
+#' original matrix, obtained via multiplying two lower-rank
+#' trainable matrices. This can be useful to reduce the
+#' computation cost of fine-tuning large embedding layers.
+#' You can also enable LoRA on an existing
+#' `Embedding` layer instance by calling `layer$enable_lora(rank)`.
+#'
 #' @param object
 #' Object to compose the layer with. A tensor, array, or sequential model.
 #'
@@ -297,7 +321,7 @@ function (object, equation, output_shape, activation = NULL,
 layer_embedding <-
 function (object, input_dim, output_dim, embeddings_initializer = "uniform",
     embeddings_regularizer = NULL, embeddings_constraint = NULL,
-    mask_zero = FALSE, ...)
+    mask_zero = FALSE, lora_rank = NULL, ...)
 {
     args <- capture_args(list(input_dim = as_integer, output_dim = as_integer,
         input_shape = normalize_shape, batch_size = as_integer,
