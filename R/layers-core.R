@@ -31,6 +31,19 @@
 #' For instance, for a 2D input with shape `(batch_size, input_dim)`,
 #' the output would have shape `(batch_size, units)`.
 #'
+#' # Methods
+#' - ```r
+#'   enable_lora(
+#'     rank,
+#'     a_initializer = 'he_uniform',
+#'     b_initializer = 'zeros'
+#'   )
+#'   ```
+#'
+#' # Readonly properties:
+#'
+#' - `kernel`
+#'
 #' @param units
 #' Positive integer, dimensionality of the output space.
 #'
@@ -66,6 +79,17 @@
 #' @param bias_constraint
 #' Constraint function applied to the bias vector.
 #'
+#' @param lora_rank
+#' Optional integer. If set, the layer's forward pass
+#' will implement LoRA (Low-Rank Adaptation)
+#' with the provided rank. LoRA sets the layer's kernel
+#' to non-trainable and replaces it with a delta over the
+#' original kernel, obtained via multiplying two lower-rank
+#' trainable matrices. This can be useful to reduce the
+#' computation cost of fine-tuning large dense layers.
+#' You can also enable LoRA on an existing
+#' `Dense` layer by calling `layer$enable_lora(rank)`.
+#'
 #' @param object
 #' Object to compose the layer with. A tensor, array, or sequential model.
 #'
@@ -83,11 +107,12 @@ layer_dense <-
 function (object, units, activation = NULL, use_bias = TRUE,
     kernel_initializer = "glorot_uniform", bias_initializer = "zeros",
     kernel_regularizer = NULL, bias_regularizer = NULL, activity_regularizer = NULL,
-    kernel_constraint = NULL, bias_constraint = NULL, ...)
+    kernel_constraint = NULL, bias_constraint = NULL, lora_rank = NULL,
+    ...)
 {
-    args <- capture_args(list(units = as_integer, input_shape = normalize_shape,
-        batch_size = as_integer, batch_input_shape = normalize_shape),
-        ignore = "object")
+    args <- capture_args(list(units = as_integer, lora_rank = as_integer,
+        input_shape = normalize_shape, batch_size = as_integer,
+        batch_input_shape = normalize_shape), ignore = "object")
     create_layer(keras$layers$Dense, object, args)
 }
 

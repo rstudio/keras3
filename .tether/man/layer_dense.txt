@@ -1,7 +1,7 @@
 Help on class Dense in module keras.src.layers.core.dense:
 
 class Dense(keras.src.layers.layer.Layer)
- |  Dense(units, activation=None, use_bias=True, kernel_initializer='glorot_uniform', bias_initializer='zeros', kernel_regularizer=None, bias_regularizer=None, activity_regularizer=None, kernel_constraint=None, bias_constraint=None, **kwargs)
+ |  Dense(units, activation=None, use_bias=True, kernel_initializer='glorot_uniform', bias_initializer='zeros', kernel_regularizer=None, bias_regularizer=None, activity_regularizer=None, kernel_constraint=None, bias_constraint=None, lora_rank=None, **kwargs)
  |
  |  Just your regular densely-connected NN layer.
  |
@@ -37,6 +37,15 @@ class Dense(keras.src.layers.layer.Layer)
  |      kernel_constraint: Constraint function applied to
  |          the `kernel` weights matrix.
  |      bias_constraint: Constraint function applied to the bias vector.
+ |      lora_rank: Optional integer. If set, the layer's forward pass
+ |          will implement LoRA (Low-Rank Adaptation)
+ |          with the provided rank. LoRA sets the layer's kernel
+ |          to non-trainable and replaces it with a delta over the
+ |          original kernel, obtained via multiplying two lower-rank
+ |          trainable matrices. This can be useful to reduce the
+ |          computation cost of fine-tuning large dense layers.
+ |          You can also enable LoRA on an existing
+ |          `Dense` layer by calling `layer.enable_lora(rank)`.
  |
  |  Input shape:
  |      N-D tensor with shape: `(batch_size, ..., input_dim)`.
@@ -72,6 +81,7 @@ class Dense(keras.src.layers.layer.Layer)
  |    activity_regularizer=None,
  |    kernel_constraint=None,
  |    bias_constraint=None,
+ |    lora_rank=None,
  |    **kwargs
  |  )
  |      Initialize self.  See help(type(self)) for accurate signature.
@@ -82,9 +92,40 @@ class Dense(keras.src.layers.layer.Layer)
  |
  |  compute_output_shape(self, input_shape)
  |
+ |  enable_lora(
+ |    self,
+ |    rank,
+ |    a_initializer='he_uniform',
+ |    b_initializer='zeros'
+ |  )
+ |
  |  get_config(self)
  |      Returns the config of the object.
  |
  |      An object config is a Python dictionary (serializable)
  |      containing the information needed to re-instantiate it.
  |
+ |  load_own_variables(self, store)
+ |      Loads the state of the layer.
+ |
+ |      You can override this method to take full control of how the state of
+ |      the layer is loaded upon calling `keras.models.load_model()`.
+ |
+ |      Args:
+ |          store: Dict from which the state of the model will be loaded.
+ |
+ |  save_own_variables(self, store)
+ |      Saves the state of the layer.
+ |
+ |      You can override this method to take full control of how the state of
+ |      the layer is saved upon calling `model.save()`.
+ |
+ |      Args:
+ |          store: Dict where the state of the model will be saved.
+ |
+ |  ----------------------------------------------------------------------
+ |  Readonly properties defined here:
+ |
+ |  kernel
+ |
+
