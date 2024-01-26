@@ -107,6 +107,7 @@ Other layers:
 \code{\link{layer_activity_regularization}()},
 \code{\link{layer_add}()},
 \code{\link{layer_additive_attention}()},
+\code{\link{layer_alpha_dropout}()},
 \code{\link{layer_average}()},
 \code{\link{layer_average_pooling_1d}()},
 \code{\link{layer_average_pooling_2d}()},

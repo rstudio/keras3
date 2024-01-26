@@ -1,0 +1,415 @@
+convnext: Module(keras.applications.convnext)
+ConvNeXtBase(
+  model_name='convnext_base',
+  include_top=True,
+  include_preprocessing=True,
+  weights='imagenet',
+  input_tensor=None,
+  input_shape=None,
+  pooling=None,
+  classes=1000,
+  classifier_activation='softmax'
+)
+ConvNeXtLarge(
+  model_name='convnext_large',
+  include_top=True,
+  include_preprocessing=True,
+  weights='imagenet',
+  input_tensor=None,
+  input_shape=None,
+  pooling=None,
+  classes=1000,
+  classifier_activation='softmax'
+)
+ConvNeXtSmall(
+  model_name='convnext_small',
+  include_top=True,
+  include_preprocessing=True,
+  weights='imagenet',
+  input_tensor=None,
+  input_shape=None,
+  pooling=None,
+  classes=1000,
+  classifier_activation='softmax'
+)
+ConvNeXtTiny(
+  model_name='convnext_tiny',
+  include_top=True,
+  include_preprocessing=True,
+  weights='imagenet',
+  input_tensor=None,
+  input_shape=None,
+  pooling=None,
+  classes=1000,
+  classifier_activation='softmax'
+)
+ConvNeXtXLarge(
+  model_name='convnext_xlarge',
+  include_top=True,
+  include_preprocessing=True,
+  weights='imagenet',
+  input_tensor=None,
+  input_shape=None,
+  pooling=None,
+  classes=1000,
+  classifier_activation='softmax'
+)
+densenet: Module(keras.applications.densenet)
+DenseNet121(
+  include_top=True,
+  weights='imagenet',
+  input_tensor=None,
+  input_shape=None,
+  pooling=None,
+  classes=1000,
+  classifier_activation='softmax'
+)
+DenseNet169(
+  include_top=True,
+  weights='imagenet',
+  input_tensor=None,
+  input_shape=None,
+  pooling=None,
+  classes=1000,
+  classifier_activation='softmax'
+)
+DenseNet201(
+  include_top=True,
+  weights='imagenet',
+  input_tensor=None,
+  input_shape=None,
+  pooling=None,
+  classes=1000,
+  classifier_activation='softmax'
+)
+efficientnet: Module(keras.applications.efficientnet)
+efficientnet_v2: Module(keras.applications.efficientnet_v2)
+EfficientNetB0(
+  include_top=True,
+  weights='imagenet',
+  input_tensor=None,
+  input_shape=None,
+  pooling=None,
+  classes=1000,
+  classifier_activation='softmax',
+  **kwargs
+)
+EfficientNetB1(
+  include_top=True,
+  weights='imagenet',
+  input_tensor=None,
+  input_shape=None,
+  pooling=None,
+  classes=1000,
+  classifier_activation='softmax',
+  **kwargs
+)
+EfficientNetB2(
+  include_top=True,
+  weights='imagenet',
+  input_tensor=None,
+  input_shape=None,
+  pooling=None,
+  classes=1000,
+  classifier_activation='softmax',
+  **kwargs
+)
+EfficientNetB3(
+  include_top=True,
+  weights='imagenet',
+  input_tensor=None,
+  input_shape=None,
+  pooling=None,
+  classes=1000,
+  classifier_activation='softmax',
+  **kwargs
+)
+EfficientNetB4(
+  include_top=True,
+  weights='imagenet',
+  input_tensor=None,
+  input_shape=None,
+  pooling=None,
+  classes=1000,
+  classifier_activation='softmax',
+  **kwargs
+)
+EfficientNetB5(
+  include_top=True,
+  weights='imagenet',
+  input_tensor=None,
+  input_shape=None,
+  pooling=None,
+  classes=1000,
+  classifier_activation='softmax',
+  **kwargs
+)
+EfficientNetB6(
+  include_top=True,
+  weights='imagenet',
+  input_tensor=None,
+  input_shape=None,
+  pooling=None,
+  classes=1000,
+  classifier_activation='softmax',
+  **kwargs
+)
+EfficientNetB7(
+  include_top=True,
+  weights='imagenet',
+  input_tensor=None,
+  input_shape=None,
+  pooling=None,
+  classes=1000,
+  classifier_activation='softmax',
+  **kwargs
+)
+EfficientNetV2B0(
+  include_top=True,
+  weights='imagenet',
+  input_tensor=None,
+  input_shape=None,
+  pooling=None,
+  classes=1000,
+  classifier_activation='softmax',
+  include_preprocessing=True
+)
+EfficientNetV2B1(
+  include_top=True,
+  weights='imagenet',
+  input_tensor=None,
+  input_shape=None,
+  pooling=None,
+  classes=1000,
+  classifier_activation='softmax',
+  include_preprocessing=True
+)
+EfficientNetV2B2(
+  include_top=True,
+  weights='imagenet',
+  input_tensor=None,
+  input_shape=None,
+  pooling=None,
+  classes=1000,
+  classifier_activation='softmax',
+  include_preprocessing=True
+)
+EfficientNetV2B3(
+  include_top=True,
+  weights='imagenet',
+  input_tensor=None,
+  input_shape=None,
+  pooling=None,
+  classes=1000,
+  classifier_activation='softmax',
+  include_preprocessing=True
+)
+EfficientNetV2L(
+  include_top=True,
+  weights='imagenet',
+  input_tensor=None,
+  input_shape=None,
+  pooling=None,
+  classes=1000,
+  classifier_activation='softmax',
+  include_preprocessing=True
+)
+EfficientNetV2M(
+  include_top=True,
+  weights='imagenet',
+  input_tensor=None,
+  input_shape=None,
+  pooling=None,
+  classes=1000,
+  classifier_activation='softmax',
+  include_preprocessing=True
+)
+EfficientNetV2S(
+  include_top=True,
+  weights='imagenet',
+  input_tensor=None,
+  input_shape=None,
+  pooling=None,
+  classes=1000,
+  classifier_activation='softmax',
+  include_preprocessing=True
+)
+imagenet_utils: Module(keras.applications.imagenet_utils)
+inception_resnet_v2: Module(keras.applications.inception_resnet_v2)
+inception_v3: Module(keras.applications.inception_v3)
+InceptionResNetV2(
+  include_top=True,
+  weights='imagenet',
+  input_tensor=None,
+  input_shape=None,
+  pooling=None,
+  classes=1000,
+  classifier_activation='softmax'
+)
+InceptionV3(
+  include_top=True,
+  weights='imagenet',
+  input_tensor=None,
+  input_shape=None,
+  pooling=None,
+  classes=1000,
+  classifier_activation='softmax'
+)
+mobilenet: Module(keras.applications.mobilenet)
+MobileNet(
+  input_shape=None,
+  alpha=1.0,
+  depth_multiplier=1,
+  dropout=0.001,
+  include_top=True,
+  weights='imagenet',
+  input_tensor=None,
+  pooling=None,
+  classes=1000,
+  classifier_activation='softmax'
+)
+mobilenet_v2: Module(keras.applications.mobilenet_v2)
+mobilenet_v3: Module(keras.applications.mobilenet_v3)
+MobileNetV2(
+  input_shape=None,
+  alpha=1.0,
+  include_top=True,
+  weights='imagenet',
+  input_tensor=None,
+  pooling=None,
+  classes=1000,
+  classifier_activation='softmax'
+)
+MobileNetV3Large(
+  input_shape=None,
+  alpha=1.0,
+  minimalistic=False,
+  include_top=True,
+  weights='imagenet',
+  input_tensor=None,
+  classes=1000,
+  pooling=None,
+  dropout_rate=0.2,
+  classifier_activation='softmax',
+  include_preprocessing=True
+)
+MobileNetV3Small(
+  input_shape=None,
+  alpha=1.0,
+  minimalistic=False,
+  include_top=True,
+  weights='imagenet',
+  input_tensor=None,
+  classes=1000,
+  pooling=None,
+  dropout_rate=0.2,
+  classifier_activation='softmax',
+  include_preprocessing=True
+)
+nasnet: Module(keras.applications.nasnet)
+NASNetLarge(
+  input_shape=None,
+  include_top=True,
+  weights='imagenet',
+  input_tensor=None,
+  pooling=None,
+  classes=1000,
+  classifier_activation='softmax'
+)
+NASNetMobile(
+  input_shape=None,
+  include_top=True,
+  weights='imagenet',
+  input_tensor=None,
+  pooling=None,
+  classes=1000,
+  classifier_activation='softmax'
+)
+resnet: Module(keras.applications.resnet)
+resnet_v2: Module(keras.applications.resnet_v2)
+ResNet101(
+  include_top=True,
+  weights='imagenet',
+  input_tensor=None,
+  input_shape=None,
+  pooling=None,
+  classes=1000,
+  classifier_activation='softmax'
+)
+ResNet101V2(
+  include_top=True,
+  weights='imagenet',
+  input_tensor=None,
+  input_shape=None,
+  pooling=None,
+  classes=1000,
+  classifier_activation='softmax'
+)
+ResNet152(
+  include_top=True,
+  weights='imagenet',
+  input_tensor=None,
+  input_shape=None,
+  pooling=None,
+  classes=1000,
+  classifier_activation='softmax'
+)
+ResNet152V2(
+  include_top=True,
+  weights='imagenet',
+  input_tensor=None,
+  input_shape=None,
+  pooling=None,
+  classes=1000,
+  classifier_activation='softmax'
+)
+resnet50: Module(keras.applications.resnet50)
+ResNet50(
+  include_top=True,
+  weights='imagenet',
+  input_tensor=None,
+  input_shape=None,
+  pooling=None,
+  classes=1000,
+  classifier_activation='softmax'
+)
+ResNet50V2(
+  include_top=True,
+  weights='imagenet',
+  input_tensor=None,
+  input_shape=None,
+  pooling=None,
+  classes=1000,
+  classifier_activation='softmax'
+)
+vgg16: Module(keras.applications.vgg16)
+VGG16(
+  include_top=True,
+  weights='imagenet',
+  input_tensor=None,
+  input_shape=None,
+  pooling=None,
+  classes=1000,
+  classifier_activation='softmax'
+)
+vgg19: Module(keras.applications.vgg19)
+VGG19(
+  include_top=True,
+  weights='imagenet',
+  input_tensor=None,
+  input_shape=None,
+  pooling=None,
+  classes=1000,
+  classifier_activation='softmax'
+)
+xception: Module(keras.applications.xception)
+Xception(
+  include_top=True,
+  weights='imagenet',
+  input_tensor=None,
+  input_shape=None,
+  pooling=None,
+  classes=1000,
+  classifier_activation='softmax'
+)
+

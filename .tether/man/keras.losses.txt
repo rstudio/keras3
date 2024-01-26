@@ -1,0 +1,130 @@
+binary_crossentropy(
+  y_true,
+  y_pred,
+  from_logits=False,
+  label_smoothing=0.0,
+  axis=-1
+)
+binary_focal_crossentropy(
+  y_true,
+  y_pred,
+  apply_class_balancing=False,
+  alpha=0.25,
+  gamma=2.0,
+  from_logits=False,
+  label_smoothing=0.0,
+  axis=-1
+)
+BinaryCrossentropy(
+  from_logits=False,
+  label_smoothing=0.0,
+  axis=-1,
+  reduction='sum_over_batch_size',
+  name='binary_crossentropy'
+)
+BinaryFocalCrossentropy(
+  apply_class_balancing=False,
+  alpha=0.25,
+  gamma=2.0,
+  from_logits=False,
+  label_smoothing=0.0,
+  axis=-1,
+  reduction='sum_over_batch_size',
+  name='binary_focal_crossentropy'
+)
+categorical_crossentropy(
+  y_true,
+  y_pred,
+  from_logits=False,
+  label_smoothing=0.0,
+  axis=-1
+)
+categorical_focal_crossentropy(
+  y_true,
+  y_pred,
+  alpha=0.25,
+  gamma=2.0,
+  from_logits=False,
+  label_smoothing=0.0,
+  axis=-1
+)
+categorical_hinge(y_true, y_pred)
+CategoricalCrossentropy(
+  from_logits=False,
+  label_smoothing=0.0,
+  axis=-1,
+  reduction='sum_over_batch_size',
+  name='categorical_crossentropy'
+)
+CategoricalFocalCrossentropy(
+  alpha=0.25,
+  gamma=2.0,
+  from_logits=False,
+  label_smoothing=0.0,
+  axis=-1,
+  reduction='sum_over_batch_size',
+  name='categorical_focal_crossentropy'
+)
+CategoricalHinge(reduction='sum_over_batch_size', name='categorical_hinge')
+cosine_similarity(
+  y_true,
+  y_pred,
+  axis=-1
+)
+CosineSimilarity(
+  axis=-1,
+  reduction='sum_over_batch_size',
+  name='cosine_similarity'
+)
+ctc(y_true, y_pred)
+CTC(reduction='sum_over_batch_size', name='sparse_categorical_crossentropy')
+deserialize(name, custom_objects=None)
+get(identifier)
+hinge(y_true, y_pred)
+Hinge(reduction='sum_over_batch_size', name='hinge')
+huber(
+  y_true,
+  y_pred,
+  delta=1.0
+)
+Huber(
+  delta=1.0,
+  reduction='sum_over_batch_size',
+  name='huber_loss'
+)
+kl_divergence(y_true, y_pred)
+KLDivergence(reduction='sum_over_batch_size', name='kl_divergence')
+log_cosh(y_true, y_pred)
+LogCosh(reduction='sum_over_batch_size', name='log_cosh')
+Loss(
+  name=None,
+  reduction='sum_over_batch_size',
+  dtype=None
+)
+mean_absolute_error(y_true, y_pred)
+mean_absolute_percentage_error(y_true, y_pred)
+mean_squared_error(y_true, y_pred)
+mean_squared_logarithmic_error(y_true, y_pred)
+MeanAbsoluteError(reduction='sum_over_batch_size', name='mean_absolute_error')
+MeanAbsolutePercentageError(reduction='sum_over_batch_size', name='mean_absolute_percentage_error')
+MeanSquaredError(reduction='sum_over_batch_size', name='mean_squared_error')
+MeanSquaredLogarithmicError(reduction='sum_over_batch_size', name='mean_squared_logarithmic_error')
+poisson(y_true, y_pred)
+Poisson(reduction='sum_over_batch_size', name='poisson')
+serialize(loss)
+sparse_categorical_crossentropy(
+  y_true,
+  y_pred,
+  from_logits=False,
+  ignore_class=None,
+  axis=-1
+)
+SparseCategoricalCrossentropy(
+  from_logits=False,
+  ignore_class=None,
+  reduction='sum_over_batch_size',
+  name='sparse_categorical_crossentropy'
+)
+squared_hinge(y_true, y_pred)
+SquaredHinge(reduction='sum_over_batch_size', name='squared_hinge')
+

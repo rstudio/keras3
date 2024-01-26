@@ -29,7 +29,7 @@ articles:
   writing_a_custom_training_loop_in_torch: writing_a_custom_training_loop_in_torch.html
   writing_a_training_loop_from_scratch: writing_a_training_loop_from_scratch.html
   writing_your_own_callbacks: writing_your_own_callbacks.html
-last_built: 2024-01-25T14:27Z
+last_built: 2024-01-26T17:25Z
 urls:
   reference: https://keras.posit.co/reference
   article: https://keras.posit.co/articles

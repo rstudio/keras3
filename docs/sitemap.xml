@@ -133,6 +133,9 @@
     <loc>https://keras.posit.co/reference/activation_hard_sigmoid.html</loc>
   </url>
   <url>
+    <loc>https://keras.posit.co/reference/activation_hard_silu.html</loc>
+  </url>
+  <url>
     <loc>https://keras.posit.co/reference/activation_leaky_relu.html</loc>
   </url>
   <url>
@@ -326,6 +329,9 @@
   </url>
   <url>
     <loc>https://keras.posit.co/reference/callback_remote_monitor.html</loc>
+  </url>
+  <url>
+    <loc>https://keras.posit.co/reference/callback_swap_ema_weights.html</loc>
   </url>
   <url>
     <loc>https://keras.posit.co/reference/callback_tensorboard.html</loc>
@@ -578,6 +584,9 @@
   </url>
   <url>
     <loc>https://keras.posit.co/reference/layer_additive_attention.html</loc>
+  </url>
+  <url>
+    <loc>https://keras.posit.co/reference/layer_alpha_dropout.html</loc>
   </url>
   <url>
     <loc>https://keras.posit.co/reference/layer_attention.html</loc>
@@ -901,6 +910,9 @@
     <loc>https://keras.posit.co/reference/loss_cosine_similarity.html</loc>
   </url>
   <url>
+    <loc>https://keras.posit.co/reference/loss_ctc.html</loc>
+  </url>
+  <url>
     <loc>https://keras.posit.co/reference/loss_hinge.html</loc>
   </url>
   <url>
@@ -1213,6 +1225,9 @@
     <loc>https://keras.posit.co/reference/op_cross.html</loc>
   </url>
   <url>
+    <loc>https://keras.posit.co/reference/op_ctc_loss.html</loc>
+  </url>
+  <url>
     <loc>https://keras.posit.co/reference/op_cumprod.html</loc>
   </url>
   <url>
@@ -1307,6 +1322,9 @@
   </url>
   <url>
     <loc>https://keras.posit.co/reference/op_hard_sigmoid.html</loc>
+  </url>
+  <url>
+    <loc>https://keras.posit.co/reference/op_hard_silu.html</loc>
   </url>
   <url>
     <loc>https://keras.posit.co/reference/op_hstack.html</loc>

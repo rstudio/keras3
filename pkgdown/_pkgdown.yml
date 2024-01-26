@@ -216,6 +216,7 @@ reference:
     - callback_tensorboard
     - callback_remote_monitor
     - callback_lambda
+    - callback_swap_ema_weights
     - Callback
 
 

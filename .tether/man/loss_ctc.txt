@@ -1,0 +1,33 @@
+Help on class CTC in module keras.src.losses.losses:
+
+class CTC(LossFunctionWrapper)
+ |  CTC(reduction='sum_over_batch_size', name='sparse_categorical_crossentropy')
+ |
+ |  CTC (Connectionist Temporal Classification) loss.
+ |
+ |  Args:
+ |      y_true: A tensor of shape `(batch_size, target_max_length)` containing
+ |          the true labels in integer format. `0` always represents
+ |          the blank/mask index and should not be used for classes.
+ |      y_pred: A tensor of shape `(batch_size, output_max_length, num_classes)`
+ |          containing logits (the output of your model).
+ |          They should *not* be normalized via softmax.
+ |
+ |  Method resolution order:
+ |      CTC
+ |      LossFunctionWrapper
+ |      keras.src.losses.loss.Loss
+ |      builtins.object
+ |
+ |  Methods defined here:
+ |
+ |  __init__(
+ |    self,
+ |    reduction='sum_over_batch_size',
+ |    name='sparse_categorical_crossentropy'
+ |  )
+ |      Initialize self.  See help(type(self)) for accurate signature.
+ |
+ |  get_config(self)
+ |
+

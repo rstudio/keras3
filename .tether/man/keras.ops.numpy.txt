@@ -1,0 +1,321 @@
+abs(x)
+absolute(x)
+add(x1, x2)
+all(
+  x,
+  axis=None,
+  keepdims=False
+)
+amax(
+  x,
+  axis=None,
+  keepdims=False
+)
+amin(
+  x,
+  axis=None,
+  keepdims=False
+)
+any(
+  x,
+  axis=None,
+  keepdims=False
+)
+append(
+  x1,
+  x2,
+  axis=None
+)
+arange(
+  start,
+  stop=None,
+  step=1,
+  dtype=None
+)
+arccos(x)
+arccosh(x)
+arcsin(x)
+arcsinh(x)
+arctan(x)
+arctan2(x1, x2)
+arctanh(x)
+argmax(x, axis=None)
+argmin(x, axis=None)
+argsort(x, axis=-1)
+array(x, dtype=None)
+average(
+  x,
+  axis=None,
+  weights=None
+)
+bincount(
+  x,
+  weights=None,
+  minlength=0
+)
+broadcast_to(x, shape)
+ceil(x)
+clip(
+  x,
+  x_min,
+  x_max
+)
+concatenate(xs, axis=0)
+conj(x)
+conjugate(x)
+copy(x)
+cos(x)
+cosh(x)
+count_nonzero(x, axis=None)
+cross(
+  x1,
+  x2,
+  axisa=-1,
+  axisb=-1,
+  axisc=-1,
+  axis=None
+)
+cumprod(
+  x,
+  axis=None,
+  dtype=None
+)
+cumsum(
+  x,
+  axis=None,
+  dtype=None
+)
+diag(x, k=0)
+diagonal(
+  x,
+  offset=0,
+  axis1=0,
+  axis2=1
+)
+diff(
+  a,
+  n=1,
+  axis=-1
+)
+digitize(x, bins)
+divide(x1, x2)
+dot(x1, x2)
+einsum(subscripts, *operands)
+empty(shape, dtype=None)
+equal(x1, x2)
+exp(x)
+expand_dims(x, axis)
+expm1(x)
+eye(
+  N,
+  M=None,
+  k=0,
+  dtype=None
+)
+flip(x, axis=None)
+floor(x)
+floor_divide(x1, x2)
+full(
+  shape,
+  fill_value,
+  dtype=None
+)
+full_like(
+  x,
+  fill_value,
+  dtype=None
+)
+get_item(x, key)
+greater(x1, x2)
+greater_equal(x1, x2)
+hstack(xs)
+identity(n, dtype=None)
+imag(x)
+isclose(x1, x2)
+isfinite(x)
+isinf(x)
+isnan(x)
+less(x1, x2)
+less_equal(x1, x2)
+linspace(
+  start,
+  stop,
+  num=50,
+  endpoint=True,
+  retstep=False,
+  dtype=None,
+  axis=0
+)
+log(x)
+log10(x)
+log1p(x)
+log2(x)
+logaddexp(x1, x2)
+logical_and(x1, x2)
+logical_not(x)
+logical_or(x1, x2)
+logical_xor(x1, x2)
+logspace(
+  start,
+  stop,
+  num=50,
+  endpoint=True,
+  base=10,
+  dtype=None,
+  axis=0
+)
+matmul(x1, x2)
+max(
+  x,
+  axis=None,
+  keepdims=False,
+  initial=None
+)
+maximum(x1, x2)
+mean(
+  x,
+  axis=None,
+  keepdims=False
+)
+median(
+  x,
+  axis=None,
+  keepdims=False
+)
+meshgrid(*x, indexing='xy')
+min(
+  x,
+  axis=None,
+  keepdims=False,
+  initial=None
+)
+minimum(x1, x2)
+mod(x1, x2)
+moveaxis(
+  x,
+  source,
+  destination
+)
+multiply(x1, x2)
+nan_to_num(x)
+ndim(x)
+negative(x)
+nonzero(x)
+not_equal(x1, x2)
+ones(shape, dtype=None)
+ones_like(x, dtype=None)
+outer(x1, x2)
+pad(
+  x,
+  pad_width,
+  mode='constant',
+  constant_values=None
+)
+power(x1, x2)
+prod(
+  x,
+  axis=None,
+  keepdims=False,
+  dtype=None
+)
+quantile(
+  x,
+  q,
+  axis=None,
+  method='linear',
+  keepdims=False
+)
+ravel(x)
+real(x)
+reciprocal(x)
+repeat(
+  x,
+  repeats,
+  axis=None
+)
+reshape(x, new_shape)
+roll(
+  x,
+  shift,
+  axis=None
+)
+round(x, decimals=0)
+sign(x)
+sin(x)
+sinh(x)
+size(x)
+sort(x, axis=-1)
+split(
+  x,
+  indices_or_sections,
+  axis=0
+)
+sqrt(x)
+square(x)
+squeeze(x, axis=None)
+stack(x, axis=0)
+std(
+  x,
+  axis=None,
+  keepdims=False
+)
+subtract(x1, x2)
+sum(
+  x,
+  axis=None,
+  keepdims=False
+)
+swapaxes(
+  x,
+  axis1,
+  axis2
+)
+take(
+  x,
+  indices,
+  axis=None
+)
+take_along_axis(
+  x,
+  indices,
+  axis=None
+)
+tan(x)
+tanh(x)
+tensordot(
+  x1,
+  x2,
+  axes=2
+)
+tile(x, repeats)
+trace(
+  x,
+  offset=0,
+  axis1=0,
+  axis2=1
+)
+transpose(x, axes=None)
+tri(
+  N,
+  M=None,
+  k=0,
+  dtype=None
+)
+tril(x, k=0)
+triu(x, k=0)
+true_divide(x1, x2)
+var(
+  x,
+  axis=None,
+  keepdims=False
+)
+vdot(x1, x2)
+vstack(xs)
+where(
+  condition,
+  x1=None,
+  x2=None
+)
+zeros(shape, dtype=None)
+zeros_like(x, dtype=None)
+

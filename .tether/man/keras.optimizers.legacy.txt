@@ -1,0 +1,7 @@
+Adagrad(*args, **kwargs)
+Adam(*args, **kwargs)
+Ftrl(*args, **kwargs)
+Optimizer(*args, **kwargs)
+RMSprop(*args, **kwargs)
+SGD(*args, **kwargs)
+

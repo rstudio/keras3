@@ -1,0 +1,29 @@
+deserialize(config, custom_objects=None)
+elu(x, alpha=1.0)
+exponential(x)
+gelu(x, approximate=False)
+get(identifier)
+hard_sigmoid(x)
+hard_silu(x)
+hard_swish(x)
+leaky_relu(x, negative_slope=0.2)
+linear(x)
+log_softmax(x, axis=-1)
+mish(x)
+relu(
+  x,
+  negative_slope=0.0,
+  max_value=None,
+  threshold=0.0
+)
+relu6(x)
+selu(x)
+serialize(activation)
+sigmoid(x)
+silu(x)
+softmax(x, axis=-1)
+softplus(x)
+softsign(x)
+swish(x)
+tanh(x)
+

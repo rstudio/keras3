@@ -6801,3 +6801,79 @@ function (shape, dtype = NULL)
 op_zeros_like <-
 function (x, dtype = NULL)
 keras$ops$zeros_like(x, dtype)
+
+
+#' CTC (Connectionist Temporal Classification) loss.
+#'
+#' @param target
+#' A tensor of shape `(batch_size, max_length)` containing
+#' the true labels in integer format.
+#'
+#' @param output
+#' A tensor of shape `(batch_size, max_length, num_classes)`
+#' containing logits (the output of your model).
+#'
+#' @param target_length
+#' A tensor of shape `(batch_size)` containing the
+#' true label lengths.
+#'
+#' @param output_length
+#' A tensor of shape `(batch_size)` containing the
+#' output lengths.
+#'
+#' @param mask_index
+#' The index of the mask character in the vocabulary.
+#' Defaults to `0`.
+#'
+#' @export
+#' @family nn ops
+#' @family ops
+#' @tether keras.ops.ctc_loss
+#' @seealso
+#' + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/ctc_loss>
+op_ctc_loss <-
+function (target, output, target_length, output_length, mask_index = 0L)
+{
+    args <- capture_args(list(target = as_integer_array, mask_index = as_integer))
+    do.call(keras$ops$ctc_loss, args)
+}
+
+
+#' Hard SiLU activation function, also known as Hard Swish.
+#'
+#' @description
+#' It is defined as:
+#'
+#' - `0` if `if x < -3`
+#' - `x` if `x > 3`
+#' - `x * (x + 3) / 6` if `-3 <= x <= 3`
+#'
+#' It's a faster, piecewise linear approximation of the silu activation.
+#'
+#' # Examples
+#' ```{r}
+#' x <- op_convert_to_tensor(c(-3.0, -1.0, 0.0, 1.0, 3.0))
+#' op_hard_silu(x)
+#' ```
+#'
+#' @returns
+#' A tensor with the same shape as `x`.
+#'
+#' @param x
+#' Input tensor.
+#'
+#' @export
+#' @family nn ops
+#' @family ops
+#' @tether keras.ops.hard_silu
+#' @seealso
+#' + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/hard_silu>
+op_hard_silu <-
+function (x)
+keras$ops$hard_silu(x)
+
+#' @rdname op_hard_silu
+#' @export
+op_hard_swish <-
+function (x)
+keras$ops$hard_swish(x)

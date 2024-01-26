@@ -515,3 +515,41 @@ function (x)
     args <- capture_args()
     do.call(keras$activations$tanh, args)
 }
+
+
+#' Hard SiLU activation function, also known as Hard Swish.
+#'
+#' @description
+#' It is defined as:
+#'
+#' - `0` if `if x < -3`
+#' - `x` if `x > 3`
+#' - `x * (x + 3) / 6` if `-3 <= x <= 3`
+#'
+#' It's a faster, piecewise linear approximation of the silu activation.
+#'
+#' # Reference
+#' - [A Howard, 2019](https://arxiv.org/abs/1905.02244)
+#'
+#' @param x
+#' Input tensor.
+#'
+#' @export
+#' @tether keras.activations.hard_silu
+#' @seealso
+#' + <https://www.tensorflow.org/api_docs/python/tf/keras/activations/hard_silu>
+activation_hard_silu <-
+  structure(function (x)
+  {
+    args <- capture_args(NULL)
+    do.call(keras$activations$hard_silu, args)
+  }, py_function_name = "hard_silu")
+
+#' @rdname activation_hard_silu
+#' @export
+activation_hard_swish <-
+  structure(function (x)
+  {
+    args <- capture_args(NULL)
+    do.call(keras$activations$hard_swish, args)
+  }, py_function_name = "hard_silu")

@@ -48,8 +48,8 @@ model |> export_savedmodel("path/to/artifact")
 ## Output Type:
 ##   TensorSpec(shape=(None, 10), dtype=tf.float32, name=None)
 ## Captures:
-##   139756092861968: TensorSpec(shape=(), dtype=tf.resource, name=None)
-##   139756092862352: TensorSpec(shape=(), dtype=tf.resource, name=None)
+##   140712661067600: TensorSpec(shape=(), dtype=tf.resource, name=None)
+##   140712061622352: TensorSpec(shape=(), dtype=tf.resource, name=None)
 }\if{html}{\out{</div>}}
 
 \if{html}{\out{<div class="sourceCode r">}}\preformatted{reloaded_layer <- layer_tfsm(filepath = "path/to/artifact")
@@ -91,6 +91,7 @@ Other layers:
 \code{\link{layer_activity_regularization}()},
 \code{\link{layer_add}()},
 \code{\link{layer_additive_attention}()},
+\code{\link{layer_alpha_dropout}()},
 \code{\link{layer_attention}()},
 \code{\link{layer_average}()},
 \code{\link{layer_average_pooling_1d}()},

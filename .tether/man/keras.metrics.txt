@@ -1,0 +1,273 @@
+Accuracy(name='accuracy', dtype=None)
+AUC(
+  num_thresholds=200,
+  curve='ROC',
+  summation_method='interpolation',
+  name=None,
+  dtype=None,
+  thresholds=None,
+  multi_label=False,
+  num_labels=None,
+  label_weights=None,
+  from_logits=False
+)
+binary_accuracy(
+  y_true,
+  y_pred,
+  threshold=0.5
+)
+binary_crossentropy(
+  y_true,
+  y_pred,
+  from_logits=False,
+  label_smoothing=0.0,
+  axis=-1
+)
+binary_focal_crossentropy(
+  y_true,
+  y_pred,
+  apply_class_balancing=False,
+  alpha=0.25,
+  gamma=2.0,
+  from_logits=False,
+  label_smoothing=0.0,
+  axis=-1
+)
+BinaryAccuracy(
+  name='binary_accuracy',
+  dtype=None,
+  threshold=0.5
+)
+BinaryCrossentropy(
+  name='binary_crossentropy',
+  dtype=None,
+  from_logits=False,
+  label_smoothing=0
+)
+BinaryIoU(
+  target_class_ids=(0, 1),
+  threshold=0.5,
+  name=None,
+  dtype=None
+)
+categorical_accuracy(y_true, y_pred)
+categorical_crossentropy(
+  y_true,
+  y_pred,
+  from_logits=False,
+  label_smoothing=0.0,
+  axis=-1
+)
+categorical_focal_crossentropy(
+  y_true,
+  y_pred,
+  alpha=0.25,
+  gamma=2.0,
+  from_logits=False,
+  label_smoothing=0.0,
+  axis=-1
+)
+categorical_hinge(y_true, y_pred)
+CategoricalAccuracy(name='categorical_accuracy', dtype=None)
+CategoricalCrossentropy(
+  name='categorical_crossentropy',
+  dtype=None,
+  from_logits=False,
+  label_smoothing=0,
+  axis=-1
+)
+CategoricalHinge(name='categorical_hinge', dtype=None)
+CosineSimilarity(
+  name='cosine_similarity',
+  dtype=None,
+  axis=-1
+)
+deserialize(config, custom_objects=None)
+F1Score(
+  average=None,
+  threshold=None,
+  name='f1_score',
+  dtype=None
+)
+FalseNegatives(
+  thresholds=None,
+  name=None,
+  dtype=None
+)
+FalsePositives(
+  thresholds=None,
+  name=None,
+  dtype=None
+)
+FBetaScore(
+  average=None,
+  beta=1.0,
+  threshold=None,
+  name='fbeta_score',
+  dtype=None
+)
+get(identifier)
+hinge(y_true, y_pred)
+Hinge(name='hinge', dtype=None)
+huber(
+  y_true,
+  y_pred,
+  delta=1.0
+)
+IoU(
+  num_classes,
+  target_class_ids,
+  name=None,
+  dtype=None,
+  ignore_class=None,
+  sparse_y_true=True,
+  sparse_y_pred=True,
+  axis=-1
+)
+kl_divergence(y_true, y_pred)
+KLDivergence(name='kl_divergence', dtype=None)
+log_cosh(y_true, y_pred)
+LogCoshError(name='logcosh', dtype=None)
+Mean(name='mean', dtype=None)
+mean_absolute_error(y_true, y_pred)
+mean_absolute_percentage_error(y_true, y_pred)
+mean_squared_error(y_true, y_pred)
+mean_squared_logarithmic_error(y_true, y_pred)
+MeanAbsoluteError(name='mean_absolute_error', dtype=None)
+MeanAbsolutePercentageError(name='mean_absolute_percentage_error', dtype=None)
+MeanIoU(
+  num_classes,
+  name=None,
+  dtype=None,
+  ignore_class=None,
+  sparse_y_true=True,
+  sparse_y_pred=True,
+  axis=-1
+)
+MeanMetricWrapper(
+  fn,
+  name=None,
+  dtype=None,
+  **kwargs
+)
+MeanSquaredError(name='mean_squared_error', dtype=None)
+MeanSquaredLogarithmicError(name='mean_squared_logarithmic_error', dtype=None)
+Metric(dtype=None, name=None)
+OneHotIoU(
+  num_classes,
+  target_class_ids,
+  name=None,
+  dtype=None,
+  ignore_class=None,
+  sparse_y_pred=False,
+  axis=-1
+)
+OneHotMeanIoU(
+  num_classes,
+  name=None,
+  dtype=None,
+  ignore_class=None,
+  sparse_y_pred=False,
+  axis=-1
+)
+poisson(y_true, y_pred)
+Poisson(name='poisson', dtype=None)
+Precision(
+  thresholds=None,
+  top_k=None,
+  class_id=None,
+  name=None,
+  dtype=None
+)
+PrecisionAtRecall(
+  recall,
+  num_thresholds=200,
+  class_id=None,
+  name=None,
+  dtype=None
+)
+R2Score(
+  class_aggregation='uniform_average',
+  num_regressors=0,
+  name='r2_score',
+  dtype=None
+)
+Recall(
+  thresholds=None,
+  top_k=None,
+  class_id=None,
+  name=None,
+  dtype=None
+)
+RecallAtPrecision(
+  precision,
+  num_thresholds=200,
+  class_id=None,
+  name=None,
+  dtype=None
+)
+RootMeanSquaredError(name='root_mean_squared_error', dtype=None)
+SensitivityAtSpecificity(
+  specificity,
+  num_thresholds=200,
+  class_id=None,
+  name=None,
+  dtype=None
+)
+serialize(metric)
+sparse_categorical_accuracy(y_true, y_pred)
+sparse_categorical_crossentropy(
+  y_true,
+  y_pred,
+  from_logits=False,
+  ignore_class=None,
+  axis=-1
+)
+sparse_top_k_categorical_accuracy(
+  y_true,
+  y_pred,
+  k=5
+)
+SparseCategoricalAccuracy(name='sparse_categorical_accuracy', dtype=None)
+SparseCategoricalCrossentropy(
+  name='sparse_categorical_crossentropy',
+  dtype=None,
+  from_logits=False,
+  axis=-1
+)
+SparseTopKCategoricalAccuracy(
+  k=5,
+  name='sparse_top_k_categorical_accuracy',
+  dtype=None
+)
+SpecificityAtSensitivity(
+  sensitivity,
+  num_thresholds=200,
+  class_id=None,
+  name=None,
+  dtype=None
+)
+squared_hinge(y_true, y_pred)
+SquaredHinge(name='squared_hinge', dtype=None)
+Sum(name='sum', dtype=None)
+top_k_categorical_accuracy(
+  y_true,
+  y_pred,
+  k=5
+)
+TopKCategoricalAccuracy(
+  k=5,
+  name='top_k_categorical_accuracy',
+  dtype=None
+)
+TrueNegatives(
+  thresholds=None,
+  name=None,
+  dtype=None
+)
+TruePositives(
+  thresholds=None,
+  name=None,
+  dtype=None
+)
+

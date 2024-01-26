@@ -1,0 +1,30 @@
+custom_object_scope(custom_objects)
+CustomObjectScope(custom_objects)
+deserialize_keras_object(
+  config,
+  custom_objects=None,
+  safe_mode=True,
+  **kwargs
+)
+get_custom_objects()
+get_registered_name(obj)
+get_registered_object(
+  name,
+  custom_objects=None,
+  module_objects=None
+)
+load_model(
+  filepath,
+  custom_objects=None,
+  compile=True,
+  safe_mode=True
+)
+register_keras_serializable(package='Custom', name=None)
+save_model(
+  model,
+  filepath,
+  overwrite=True,
+  **kwargs
+)
+serialize_keras_object(obj)
+

@@ -1,0 +1,1220 @@
+Activation(activation, **kwargs)
+ActivityRegularization(
+  l1=0.0,
+  l2=0.0,
+  **kwargs
+)
+add(inputs, **kwargs)
+Add(**kwargs)
+AdditiveAttention(
+  use_scale=True,
+  dropout=0.0,
+  **kwargs
+)
+AlphaDropout(
+  rate,
+  noise_shape=None,
+  seed=None,
+  **kwargs
+)
+Attention(
+  use_scale=False,
+  score_mode='dot',
+  dropout=0.0,
+  seed=None,
+  **kwargs
+)
+average(inputs, **kwargs)
+Average(**kwargs)
+AveragePooling1D(
+  pool_size,
+  strides=None,
+  padding='valid',
+  data_format=None,
+  name=None,
+  **kwargs
+)
+AveragePooling2D(
+  pool_size,
+  strides=None,
+  padding='valid',
+  data_format='channels_last',
+  name=None,
+  **kwargs
+)
+AveragePooling3D(
+  pool_size,
+  strides=None,
+  padding='valid',
+  data_format='channels_last',
+  name=None,
+  **kwargs
+)
+AvgPool1D(
+  pool_size,
+  strides=None,
+  padding='valid',
+  data_format=None,
+  name=None,
+  **kwargs
+)
+AvgPool2D(
+  pool_size,
+  strides=None,
+  padding='valid',
+  data_format='channels_last',
+  name=None,
+  **kwargs
+)
+AvgPool3D(
+  pool_size,
+  strides=None,
+  padding='valid',
+  data_format='channels_last',
+  name=None,
+  **kwargs
+)
+BatchNormalization(
+  axis=-1,
+  momentum=0.99,
+  epsilon=0.001,
+  center=True,
+  scale=True,
+  beta_initializer='zeros',
+  gamma_initializer='ones',
+  moving_mean_initializer='zeros',
+  moving_variance_initializer='ones',
+  beta_regularizer=None,
+  gamma_regularizer=None,
+  beta_constraint=None,
+  gamma_constraint=None,
+  synchronized=False,
+  **kwargs
+)
+Bidirectional(
+  layer,
+  merge_mode='concat',
+  weights=None,
+  backward_layer=None,
+  **kwargs
+)
+CategoryEncoding(
+  num_tokens=None,
+  output_mode='multi_hot',
+  **kwargs
+)
+CenterCrop(
+  height,
+  width,
+  data_format=None,
+  **kwargs
+)
+concatenate(
+  inputs,
+  axis=-1,
+  **kwargs
+)
+Concatenate(axis=-1, **kwargs)
+Conv1D(
+  filters,
+  kernel_size,
+  strides=1,
+  padding='valid',
+  data_format=None,
+  dilation_rate=1,
+  groups=1,
+  activation=None,
+  use_bias=True,
+  kernel_initializer='glorot_uniform',
+  bias_initializer='zeros',
+  kernel_regularizer=None,
+  bias_regularizer=None,
+  activity_regularizer=None,
+  kernel_constraint=None,
+  bias_constraint=None,
+  **kwargs
+)
+Conv1DTranspose(
+  filters,
+  kernel_size,
+  strides=1,
+  padding='valid',
+  data_format=None,
+  dilation_rate=1,
+  activation=None,
+  use_bias=True,
+  kernel_initializer='glorot_uniform',
+  bias_initializer='zeros',
+  kernel_regularizer=None,
+  bias_regularizer=None,
+  activity_regularizer=None,
+  kernel_constraint=None,
+  bias_constraint=None,
+  **kwargs
+)
+Conv2D(
+  filters,
+  kernel_size,
+  strides=(1, 1),
+  padding='valid',
+  data_format=None,
+  dilation_rate=(1, 1),
+  groups=1,
+  activation=None,
+  use_bias=True,
+  kernel_initializer='glorot_uniform',
+  bias_initializer='zeros',
+  kernel_regularizer=None,
+  bias_regularizer=None,
+  activity_regularizer=None,
+  kernel_constraint=None,
+  bias_constraint=None,
+  **kwargs
+)
+Conv2DTranspose(
+  filters,
+  kernel_size,
+  strides=(1, 1),
+  padding='valid',
+  data_format=None,
+  dilation_rate=(1, 1),
+  activation=None,
+  use_bias=True,
+  kernel_initializer='glorot_uniform',
+  bias_initializer='zeros',
+  kernel_regularizer=None,
+  bias_regularizer=None,
+  activity_regularizer=None,
+  kernel_constraint=None,
+  bias_constraint=None,
+  **kwargs
+)
+Conv3D(
+  filters,
+  kernel_size,
+  strides=(1, 1, 1),
+  padding='valid',
+  data_format=None,
+  dilation_rate=(1, 1, 1),
+  groups=1,
+  activation=None,
+  use_bias=True,
+  kernel_initializer='glorot_uniform',
+  bias_initializer='zeros',
+  kernel_regularizer=None,
+  bias_regularizer=None,
+  activity_regularizer=None,
+  kernel_constraint=None,
+  bias_constraint=None,
+  **kwargs
+)
+Conv3DTranspose(
+  filters,
+  kernel_size,
+  strides=(1, 1, 1),
+  padding='valid',
+  data_format=None,
+  dilation_rate=(1, 1, 1),
+  activation=None,
+  use_bias=True,
+  kernel_initializer='glorot_uniform',
+  bias_initializer='zeros',
+  kernel_regularizer=None,
+  bias_regularizer=None,
+  activity_regularizer=None,
+  kernel_constraint=None,
+  bias_constraint=None,
+  **kwargs
+)
+ConvLSTM1D(
+  filters,
+  kernel_size,
+  strides=1,
+  padding='valid',
+  data_format=None,
+  dilation_rate=1,
+  activation='tanh',
+  recurrent_activation='sigmoid',
+  use_bias=True,
+  kernel_initializer='glorot_uniform',
+  recurrent_initializer='orthogonal',
+  bias_initializer='zeros',
+  unit_forget_bias=True,
+  kernel_regularizer=None,
+  recurrent_regularizer=None,
+  bias_regularizer=None,
+  activity_regularizer=None,
+  kernel_constraint=None,
+  recurrent_constraint=None,
+  bias_constraint=None,
+  dropout=0.0,
+  recurrent_dropout=0.0,
+  seed=None,
+  return_sequences=False,
+  return_state=False,
+  go_backwards=False,
+  stateful=False,
+  **kwargs
+)
+ConvLSTM2D(
+  filters,
+  kernel_size,
+  strides=1,
+  padding='valid',
+  data_format=None,
+  dilation_rate=1,
+  activation='tanh',
+  recurrent_activation='sigmoid',
+  use_bias=True,
+  kernel_initializer='glorot_uniform',
+  recurrent_initializer='orthogonal',
+  bias_initializer='zeros',
+  unit_forget_bias=True,
+  kernel_regularizer=None,
+  recurrent_regularizer=None,
+  bias_regularizer=None,
+  activity_regularizer=None,
+  kernel_constraint=None,
+  recurrent_constraint=None,
+  bias_constraint=None,
+  dropout=0.0,
+  recurrent_dropout=0.0,
+  seed=None,
+  return_sequences=False,
+  return_state=False,
+  go_backwards=False,
+  stateful=False,
+  **kwargs
+)
+ConvLSTM3D(
+  filters,
+  kernel_size,
+  strides=1,
+  padding='valid',
+  data_format=None,
+  dilation_rate=1,
+  activation='tanh',
+  recurrent_activation='sigmoid',
+  use_bias=True,
+  kernel_initializer='glorot_uniform',
+  recurrent_initializer='orthogonal',
+  bias_initializer='zeros',
+  unit_forget_bias=True,
+  kernel_regularizer=None,
+  recurrent_regularizer=None,
+  bias_regularizer=None,
+  activity_regularizer=None,
+  kernel_constraint=None,
+  recurrent_constraint=None,
+  bias_constraint=None,
+  dropout=0.0,
+  recurrent_dropout=0.0,
+  seed=None,
+  return_sequences=False,
+  return_state=False,
+  go_backwards=False,
+  stateful=False,
+  **kwargs
+)
+Convolution1D(
+  filters,
+  kernel_size,
+  strides=1,
+  padding='valid',
+  data_format=None,
+  dilation_rate=1,
+  groups=1,
+  activation=None,
+  use_bias=True,
+  kernel_initializer='glorot_uniform',
+  bias_initializer='zeros',
+  kernel_regularizer=None,
+  bias_regularizer=None,
+  activity_regularizer=None,
+  kernel_constraint=None,
+  bias_constraint=None,
+  **kwargs
+)
+Convolution1DTranspose(
+  filters,
+  kernel_size,
+  strides=1,
+  padding='valid',
+  data_format=None,
+  dilation_rate=1,
+  activation=None,
+  use_bias=True,
+  kernel_initializer='glorot_uniform',
+  bias_initializer='zeros',
+  kernel_regularizer=None,
+  bias_regularizer=None,
+  activity_regularizer=None,
+  kernel_constraint=None,
+  bias_constraint=None,
+  **kwargs
+)
+Convolution2D(
+  filters,
+  kernel_size,
+  strides=(1, 1),
+  padding='valid',
+  data_format=None,
+  dilation_rate=(1, 1),
+  groups=1,
+  activation=None,
+  use_bias=True,
+  kernel_initializer='glorot_uniform',
+  bias_initializer='zeros',
+  kernel_regularizer=None,
+  bias_regularizer=None,
+  activity_regularizer=None,
+  kernel_constraint=None,
+  bias_constraint=None,
+  **kwargs
+)
+Convolution2DTranspose(
+  filters,
+  kernel_size,
+  strides=(1, 1),
+  padding='valid',
+  data_format=None,
+  dilation_rate=(1, 1),
+  activation=None,
+  use_bias=True,
+  kernel_initializer='glorot_uniform',
+  bias_initializer='zeros',
+  kernel_regularizer=None,
+  bias_regularizer=None,
+  activity_regularizer=None,
+  kernel_constraint=None,
+  bias_constraint=None,
+  **kwargs
+)
+Convolution3D(
+  filters,
+  kernel_size,
+  strides=(1, 1, 1),
+  padding='valid',
+  data_format=None,
+  dilation_rate=(1, 1, 1),
+  groups=1,
+  activation=None,
+  use_bias=True,
+  kernel_initializer='glorot_uniform',
+  bias_initializer='zeros',
+  kernel_regularizer=None,
+  bias_regularizer=None,
+  activity_regularizer=None,
+  kernel_constraint=None,
+  bias_constraint=None,
+  **kwargs
+)
+Convolution3DTranspose(
+  filters,
+  kernel_size,
+  strides=(1, 1, 1),
+  padding='valid',
+  data_format=None,
+  dilation_rate=(1, 1, 1),
+  activation=None,
+  use_bias=True,
+  kernel_initializer='glorot_uniform',
+  bias_initializer='zeros',
+  kernel_regularizer=None,
+  bias_regularizer=None,
+  activity_regularizer=None,
+  kernel_constraint=None,
+  bias_constraint=None,
+  **kwargs
+)
+Cropping1D(cropping=(1, 1), **kwargs)
+Cropping2D(
+  cropping=((0, 0), (0, 0)),
+  data_format=None,
+  **kwargs
+)
+Cropping3D(
+  cropping=((1, 1), (1, 1), (1, 1)),
+  data_format=None,
+  **kwargs
+)
+Dense(
+  units,
+  activation=None,
+  use_bias=True,
+  kernel_initializer='glorot_uniform',
+  bias_initializer='zeros',
+  kernel_regularizer=None,
+  bias_regularizer=None,
+  activity_regularizer=None,
+  kernel_constraint=None,
+  bias_constraint=None,
+  lora_rank=None,
+  **kwargs
+)
+DepthwiseConv1D(
+  kernel_size,
+  strides=1,
+  padding='valid',
+  depth_multiplier=1,
+  data_format=None,
+  dilation_rate=1,
+  activation=None,
+  use_bias=True,
+  depthwise_initializer='glorot_uniform',
+  bias_initializer='zeros',
+  depthwise_regularizer=None,
+  bias_regularizer=None,
+  activity_regularizer=None,
+  depthwise_constraint=None,
+  bias_constraint=None,
+  **kwargs
+)
+DepthwiseConv2D(
+  kernel_size,
+  strides=(1, 1),
+  padding='valid',
+  depth_multiplier=1,
+  data_format=None,
+  dilation_rate=(1, 1),
+  activation=None,
+  use_bias=True,
+  depthwise_initializer='glorot_uniform',
+  bias_initializer='zeros',
+  depthwise_regularizer=None,
+  bias_regularizer=None,
+  activity_regularizer=None,
+  depthwise_constraint=None,
+  bias_constraint=None,
+  **kwargs
+)
+deserialize(config, custom_objects=None)
+Discretization(
+  bin_boundaries=None,
+  num_bins=None,
+  epsilon=0.01,
+  output_mode='int',
+  sparse=False,
+  dtype=None,
+  name=None
+)
+dot(
+  inputs,
+  axes=-1,
+  **kwargs
+)
+Dot(
+  axes,
+  normalize=False,
+  **kwargs
+)
+Dropout(
+  rate,
+  noise_shape=None,
+  seed=None,
+  **kwargs
+)
+EinsumDense(
+  equation,
+  output_shape,
+  activation=None,
+  bias_axes=None,
+  kernel_initializer='glorot_uniform',
+  bias_initializer='zeros',
+  kernel_regularizer=None,
+  bias_regularizer=None,
+  kernel_constraint=None,
+  bias_constraint=None,
+  lora_rank=None,
+  **kwargs
+)
+ELU(alpha=1.0, **kwargs)
+Embedding(
+  input_dim,
+  output_dim,
+  embeddings_initializer='uniform',
+  embeddings_regularizer=None,
+  embeddings_constraint=None,
+  mask_zero=False,
+  lora_rank=None,
+  **kwargs
+)
+Flatten(data_format=None, **kwargs)
+GaussianDropout(
+  rate,
+  seed=None,
+  **kwargs
+)
+GaussianNoise(
+  stddev,
+  seed=None,
+  **kwargs
+)
+GlobalAveragePooling1D(
+  data_format=None,
+  keepdims=False,
+  **kwargs
+)
+GlobalAveragePooling2D(
+  data_format=None,
+  keepdims=False,
+  **kwargs
+)
+GlobalAveragePooling3D(
+  data_format=None,
+  keepdims=False,
+  **kwargs
+)
+GlobalAvgPool1D(
+  data_format=None,
+  keepdims=False,
+  **kwargs
+)
+GlobalAvgPool2D(
+  data_format=None,
+  keepdims=False,
+  **kwargs
+)
+GlobalAvgPool3D(
+  data_format=None,
+  keepdims=False,
+  **kwargs
+)
+GlobalMaxPool1D(
+  data_format=None,
+  keepdims=False,
+  **kwargs
+)
+GlobalMaxPool2D(
+  data_format=None,
+  keepdims=False,
+  **kwargs
+)
+GlobalMaxPool3D(
+  data_format=None,
+  keepdims=False,
+  **kwargs
+)
+GlobalMaxPooling1D(
+  data_format=None,
+  keepdims=False,
+  **kwargs
+)
+GlobalMaxPooling2D(
+  data_format=None,
+  keepdims=False,
+  **kwargs
+)
+GlobalMaxPooling3D(
+  data_format=None,
+  keepdims=False,
+  **kwargs
+)
+GroupNormalization(
+  groups=32,
+  axis=-1,
+  epsilon=0.001,
+  center=True,
+  scale=True,
+  beta_initializer='zeros',
+  gamma_initializer='ones',
+  beta_regularizer=None,
+  gamma_regularizer=None,
+  beta_constraint=None,
+  gamma_constraint=None,
+  **kwargs
+)
+GroupQueryAttention(
+  head_dim,
+  num_query_heads,
+  num_key_value_heads,
+  dropout=0.0,
+  use_bias=True,
+  kernel_initializer='glorot_uniform',
+  bias_initializer='zeros',
+  kernel_regularizer=None,
+  bias_regularizer=None,
+  activity_regularizer=None,
+  kernel_constraint=None,
+  bias_constraint=None,
+  **kwargs
+)
+GRU(
+  units,
+  activation='tanh',
+  recurrent_activation='sigmoid',
+  use_bias=True,
+  kernel_initializer='glorot_uniform',
+  recurrent_initializer='orthogonal',
+  bias_initializer='zeros',
+  kernel_regularizer=None,
+  recurrent_regularizer=None,
+  bias_regularizer=None,
+  activity_regularizer=None,
+  kernel_constraint=None,
+  recurrent_constraint=None,
+  bias_constraint=None,
+  dropout=0.0,
+  recurrent_dropout=0.0,
+  seed=None,
+  return_sequences=False,
+  return_state=False,
+  go_backwards=False,
+  stateful=False,
+  unroll=False,
+  reset_after=True,
+  **kwargs
+)
+GRUCell(
+  units,
+  activation='tanh',
+  recurrent_activation='sigmoid',
+  use_bias=True,
+  kernel_initializer='glorot_uniform',
+  recurrent_initializer='orthogonal',
+  bias_initializer='zeros',
+  kernel_regularizer=None,
+  recurrent_regularizer=None,
+  bias_regularizer=None,
+  kernel_constraint=None,
+  recurrent_constraint=None,
+  bias_constraint=None,
+  dropout=0.0,
+  recurrent_dropout=0.0,
+  reset_after=True,
+  seed=None,
+  **kwargs
+)
+HashedCrossing(
+  num_bins,
+  output_mode='int',
+  sparse=False,
+  name=None,
+  dtype=None,
+  **kwargs
+)
+Hashing(
+  num_bins,
+  mask_value=None,
+  salt=None,
+  output_mode='int',
+  sparse=False,
+  **kwargs
+)
+Identity(**kwargs)
+Input(
+  shape=None,
+  batch_size=None,
+  dtype=None,
+  sparse=None,
+  batch_shape=None,
+  name=None,
+  tensor=None
+)
+InputLayer(
+  shape=None,
+  batch_size=None,
+  dtype=None,
+  sparse=None,
+  batch_shape=None,
+  input_tensor=None,
+  name=None,
+  **kwargs
+)
+InputSpec(
+  dtype=None,
+  shape=None,
+  ndim=None,
+  max_ndim=None,
+  min_ndim=None,
+  axes=None,
+  allow_last_axis_squeeze=False,
+  name=None
+)
+IntegerLookup(
+  max_tokens=None,
+  num_oov_indices=1,
+  mask_token=None,
+  oov_token=-1,
+  vocabulary=None,
+  vocabulary_dtype='int64',
+  idf_weights=None,
+  invert=False,
+  output_mode='int',
+  sparse=False,
+  pad_to_max_tokens=False,
+  name=None,
+  **kwargs
+)
+Lambda(
+  function,
+  output_shape=None,
+  mask=None,
+  arguments=None,
+  **kwargs
+)
+Layer(*args, **kwargs)
+LayerNormalization(
+  axis=-1,
+  epsilon=0.001,
+  center=True,
+  scale=True,
+  rms_scaling=False,
+  beta_initializer='zeros',
+  gamma_initializer='ones',
+  beta_regularizer=None,
+  gamma_regularizer=None,
+  beta_constraint=None,
+  gamma_constraint=None,
+  **kwargs
+)
+LeakyReLU(negative_slope=0.3, **kwargs)
+LSTM(
+  units,
+  activation='tanh',
+  recurrent_activation='sigmoid',
+  use_bias=True,
+  kernel_initializer='glorot_uniform',
+  recurrent_initializer='orthogonal',
+  bias_initializer='zeros',
+  unit_forget_bias=True,
+  kernel_regularizer=None,
+  recurrent_regularizer=None,
+  bias_regularizer=None,
+  activity_regularizer=None,
+  kernel_constraint=None,
+  recurrent_constraint=None,
+  bias_constraint=None,
+  dropout=0.0,
+  recurrent_dropout=0.0,
+  seed=None,
+  return_sequences=False,
+  return_state=False,
+  go_backwards=False,
+  stateful=False,
+  unroll=False,
+  **kwargs
+)
+LSTMCell(
+  units,
+  activation='tanh',
+  recurrent_activation='sigmoid',
+  use_bias=True,
+  kernel_initializer='glorot_uniform',
+  recurrent_initializer='orthogonal',
+  bias_initializer='zeros',
+  unit_forget_bias=True,
+  kernel_regularizer=None,
+  recurrent_regularizer=None,
+  bias_regularizer=None,
+  kernel_constraint=None,
+  recurrent_constraint=None,
+  bias_constraint=None,
+  dropout=0.0,
+  recurrent_dropout=0.0,
+  seed=None,
+  **kwargs
+)
+Masking(mask_value=0.0, **kwargs)
+maximum(inputs, **kwargs)
+Maximum(**kwargs)
+MaxPool1D(
+  pool_size=2,
+  strides=None,
+  padding='valid',
+  data_format=None,
+  name=None,
+  **kwargs
+)
+MaxPool2D(
+  pool_size=(2, 2),
+  strides=None,
+  padding='valid',
+  data_format=None,
+  name=None,
+  **kwargs
+)
+MaxPool3D(
+  pool_size=(2, 2, 2),
+  strides=None,
+  padding='valid',
+  data_format=None,
+  name=None,
+  **kwargs
+)
+MaxPooling1D(
+  pool_size=2,
+  strides=None,
+  padding='valid',
+  data_format=None,
+  name=None,
+  **kwargs
+)
+MaxPooling2D(
+  pool_size=(2, 2),
+  strides=None,
+  padding='valid',
+  data_format=None,
+  name=None,
+  **kwargs
+)
+MaxPooling3D(
+  pool_size=(2, 2, 2),
+  strides=None,
+  padding='valid',
+  data_format=None,
+  name=None,
+  **kwargs
+)
+minimum(inputs, **kwargs)
+Minimum(**kwargs)
+MultiHeadAttention(
+  num_heads,
+  key_dim,
+  value_dim=None,
+  dropout=0.0,
+  use_bias=True,
+  output_shape=None,
+  attention_axes=None,
+  kernel_initializer='glorot_uniform',
+  bias_initializer='zeros',
+  kernel_regularizer=None,
+  bias_regularizer=None,
+  activity_regularizer=None,
+  kernel_constraint=None,
+  bias_constraint=None,
+  **kwargs
+)
+multiply(inputs, **kwargs)
+Multiply(**kwargs)
+Normalization(
+  axis=-1,
+  mean=None,
+  variance=None,
+  invert=False,
+  **kwargs
+)
+Permute(dims, **kwargs)
+PReLU(
+  alpha_initializer='Zeros',
+  alpha_regularizer=None,
+  alpha_constraint=None,
+  shared_axes=None,
+  **kwargs
+)
+RandomBrightness(
+  factor,
+  value_range=(0, 255),
+  seed=None,
+  **kwargs
+)
+RandomContrast(
+  factor,
+  seed=None,
+  **kwargs
+)
+RandomCrop(
+  height,
+  width,
+  seed=None,
+  data_format=None,
+  name=None,
+  **kwargs
+)
+RandomFlip(
+  mode='horizontal_and_vertical',
+  seed=None,
+  **kwargs
+)
+RandomRotation(
+  factor,
+  fill_mode='reflect',
+  interpolation='bilinear',
+  seed=None,
+  fill_value=0.0,
+  value_range=(0, 255),
+  data_format=None,
+  **kwargs
+)
+RandomTranslation(
+  height_factor,
+  width_factor,
+  fill_mode='reflect',
+  interpolation='bilinear',
+  seed=None,
+  fill_value=0.0,
+  data_format=None,
+  **kwargs
+)
+RandomZoom(
+  height_factor,
+  width_factor=None,
+  fill_mode='reflect',
+  interpolation='bilinear',
+  seed=None,
+  fill_value=0.0,
+  data_format=None,
+  **kwargs
+)
+ReLU(
+  max_value=None,
+  negative_slope=0.0,
+  threshold=0.0,
+  **kwargs
+)
+RepeatVector(n, **kwargs)
+Rescaling(
+  scale,
+  offset=0.0,
+  **kwargs
+)
+Reshape(target_shape, **kwargs)
+Resizing(
+  height,
+  width,
+  interpolation='bilinear',
+  crop_to_aspect_ratio=False,
+  data_format=None,
+  **kwargs
+)
+RNN(
+  cell,
+  return_sequences=False,
+  return_state=False,
+  go_backwards=False,
+  stateful=False,
+  unroll=False,
+  zero_output_for_mask=False,
+  **kwargs
+)
+SeparableConv1D(
+  filters,
+  kernel_size,
+  strides=1,
+  padding='valid',
+  data_format=None,
+  dilation_rate=1,
+  depth_multiplier=1,
+  activation=None,
+  use_bias=True,
+  depthwise_initializer='glorot_uniform',
+  pointwise_initializer='glorot_uniform',
+  bias_initializer='zeros',
+  depthwise_regularizer=None,
+  pointwise_regularizer=None,
+  bias_regularizer=None,
+  activity_regularizer=None,
+  depthwise_constraint=None,
+  pointwise_constraint=None,
+  bias_constraint=None,
+  **kwargs
+)
+SeparableConv2D(
+  filters,
+  kernel_size,
+  strides=(1, 1),
+  padding='valid',
+  data_format=None,
+  dilation_rate=(1, 1),
+  depth_multiplier=1,
+  activation=None,
+  use_bias=True,
+  depthwise_initializer='glorot_uniform',
+  pointwise_initializer='glorot_uniform',
+  bias_initializer='zeros',
+  depthwise_regularizer=None,
+  pointwise_regularizer=None,
+  bias_regularizer=None,
+  activity_regularizer=None,
+  depthwise_constraint=None,
+  pointwise_constraint=None,
+  bias_constraint=None,
+  **kwargs
+)
+SeparableConvolution1D(
+  filters,
+  kernel_size,
+  strides=1,
+  padding='valid',
+  data_format=None,
+  dilation_rate=1,
+  depth_multiplier=1,
+  activation=None,
+  use_bias=True,
+  depthwise_initializer='glorot_uniform',
+  pointwise_initializer='glorot_uniform',
+  bias_initializer='zeros',
+  depthwise_regularizer=None,
+  pointwise_regularizer=None,
+  bias_regularizer=None,
+  activity_regularizer=None,
+  depthwise_constraint=None,
+  pointwise_constraint=None,
+  bias_constraint=None,
+  **kwargs
+)
+SeparableConvolution2D(
+  filters,
+  kernel_size,
+  strides=(1, 1),
+  padding='valid',
+  data_format=None,
+  dilation_rate=(1, 1),
+  depth_multiplier=1,
+  activation=None,
+  use_bias=True,
+  depthwise_initializer='glorot_uniform',
+  pointwise_initializer='glorot_uniform',
+  bias_initializer='zeros',
+  depthwise_regularizer=None,
+  pointwise_regularizer=None,
+  bias_regularizer=None,
+  activity_regularizer=None,
+  depthwise_constraint=None,
+  pointwise_constraint=None,
+  bias_constraint=None,
+  **kwargs
+)
+serialize(layer)
+SimpleRNN(
+  units,
+  activation='tanh',
+  use_bias=True,
+  kernel_initializer='glorot_uniform',
+  recurrent_initializer='orthogonal',
+  bias_initializer='zeros',
+  kernel_regularizer=None,
+  recurrent_regularizer=None,
+  bias_regularizer=None,
+  activity_regularizer=None,
+  kernel_constraint=None,
+  recurrent_constraint=None,
+  bias_constraint=None,
+  dropout=0.0,
+  recurrent_dropout=0.0,
+  return_sequences=False,
+  return_state=False,
+  go_backwards=False,
+  stateful=False,
+  unroll=False,
+  seed=None,
+  **kwargs
+)
+SimpleRNNCell(
+  units,
+  activation='tanh',
+  use_bias=True,
+  kernel_initializer='glorot_uniform',
+  recurrent_initializer='orthogonal',
+  bias_initializer='zeros',
+  kernel_regularizer=None,
+  recurrent_regularizer=None,
+  bias_regularizer=None,
+  kernel_constraint=None,
+  recurrent_constraint=None,
+  bias_constraint=None,
+  dropout=0.0,
+  recurrent_dropout=0.0,
+  seed=None,
+  **kwargs
+)
+Softmax(axis=-1, **kwargs)
+SpatialDropout1D(
+  rate,
+  seed=None,
+  name=None,
+  dtype=None
+)
+SpatialDropout2D(
+  rate,
+  data_format=None,
+  seed=None,
+  name=None,
+  dtype=None
+)
+SpatialDropout3D(
+  rate,
+  data_format=None,
+  seed=None,
+  name=None,
+  dtype=None
+)
+SpectralNormalization(
+  layer,
+  power_iterations=1,
+  **kwargs
+)
+StackedRNNCells(cells, **kwargs)
+StringLookup(
+  max_tokens=None,
+  num_oov_indices=1,
+  mask_token=None,
+  oov_token='[UNK]',
+  vocabulary=None,
+  idf_weights=None,
+  invert=False,
+  output_mode='int',
+  pad_to_max_tokens=False,
+  sparse=False,
+  encoding='utf-8',
+  name=None,
+  **kwargs
+)
+subtract(inputs, **kwargs)
+Subtract(**kwargs)
+TextVectorization(
+  max_tokens=None,
+  standardize='lower_and_strip_punctuation',
+  split='whitespace',
+  ngrams=None,
+  output_mode='int',
+  output_sequence_length=None,
+  pad_to_max_tokens=False,
+  vocabulary=None,
+  idf_weights=None,
+  sparse=False,
+  ragged=False,
+  encoding='utf-8',
+  name=None,
+  **kwargs
+)
+TFSMLayer(
+  filepath,
+  call_endpoint='serve',
+  call_training_endpoint=None,
+  trainable=True,
+  name=None,
+  dtype=None
+)
+TimeDistributed(layer, **kwargs)
+TorchModuleWrapper(
+  module,
+  name=None,
+  **kwargs
+)
+UnitNormalization(axis=-1, **kwargs)
+UpSampling1D(size=2, **kwargs)
+UpSampling2D(
+  size=(2, 2),
+  data_format=None,
+  interpolation='nearest',
+  **kwargs
+)
+UpSampling3D(
+  size=(2, 2, 2),
+  data_format=None,
+  **kwargs
+)
+Wrapper(layer, **kwargs)
+ZeroPadding1D(padding=1, **kwargs)
+ZeroPadding2D(
+  padding=(1, 1),
+  data_format=None,
+  **kwargs
+)
+ZeroPadding3D(
+  padding=((1, 1), (1, 1), (1, 1)),
+  data_format=None,
+  **kwargs
+)
+
