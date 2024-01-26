@@ -71,6 +71,7 @@ Other callbacks:
 \code{\link{callback_learning_rate_scheduler}()},
 \code{\link{callback_model_checkpoint}()},
 \code{\link{callback_remote_monitor}()},
+\code{\link{callback_swap_ema_weights}()},
 \code{\link{callback_tensorboard}()},
 \code{\link{callback_terminate_on_nan}()}
 }

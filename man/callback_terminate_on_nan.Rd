@@ -24,6 +24,7 @@ Other callbacks:
 \code{\link{callback_model_checkpoint}()},
 \code{\link{callback_reduce_lr_on_plateau}()},
 \code{\link{callback_remote_monitor}()},
+\code{\link{callback_swap_ema_weights}()},
 \code{\link{callback_tensorboard}()}
 }
 \concept{callbacks}
