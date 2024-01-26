@@ -6826,7 +6826,7 @@ keras$ops$zeros_like(x, dtype)
 #' Defaults to `0`.
 #'
 #' @export
-#' @family numpy ops
+#' @family nn ops
 #' @family ops
 #' @tether keras.ops.ctc_loss
 #' @seealso
@@ -6837,3 +6837,43 @@ function (target, output, target_length, output_length, mask_index = 0L)
     args <- capture_args(list(target = as_integer_array, mask_index = as_integer))
     do.call(keras$ops$ctc_loss, args)
 }
+
+
+#' Hard SiLU activation function, also known as Hard Swish.
+#'
+#' @description
+#' It is defined as:
+#'
+#' - `0` if `if x < -3`
+#' - `x` if `x > 3`
+#' - `x * (x + 3) / 6` if `-3 <= x <= 3`
+#'
+#' It's a faster, piecewise linear approximation of the silu activation.
+#'
+#' # Examples
+#' ```{r}
+#' x <- op_convert_to_tensor(c(-3.0, -1.0, 0.0, 1.0, 3.0))
+#' op_hard_silu(x)
+#' ```
+#'
+#' @returns
+#' A tensor with the same shape as `x`.
+#'
+#' @param x
+#' Input tensor.
+#'
+#' @export
+#' @family nn ops
+#' @family ops
+#' @tether keras.ops.hard_silu
+#' @seealso
+#' + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/hard_silu>
+op_hard_silu <-
+function (x)
+keras$ops$hard_silu(x)
+
+#' @rdname op_hard_silu
+#' @export
+op_hard_swish <-
+function (x)
+keras$ops$hard_swish(x)
