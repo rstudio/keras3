@@ -1,0 +1,66 @@
+Help on class AlphaDropout in module keras.src.layers.regularization.alpha_dropout:
+
+class AlphaDropout(keras.src.layers.layer.Layer)
+ |  AlphaDropout(rate, noise_shape=None, seed=None, **kwargs)
+ |
+ |  Applies Alpha Dropout to the input.
+ |
+ |  Alpha Dropout is a `Dropout` that keeps mean and variance of inputs
+ |  to their original values, in order to ensure the self-normalizing property
+ |  even after this dropout.
+ |  Alpha Dropout fits well to Scaled Exponential Linear Units (SELU) by
+ |  randomly setting activations to the negative saturation value.
+ |
+ |  Args:
+ |      rate: Float between 0 and 1. The multiplicative noise will have
+ |          standard deviation `sqrt(rate / (1 - rate))`.
+ |      noise_shape: 1D integer tensor representing the shape of the
+ |          binary alpha dropout mask that will be multiplied with the input.
+ |          For instance, if your inputs have shape
+ |          `(batch_size, timesteps, features)` and
+ |          you want the alpha dropout mask to be the same for all timesteps,
+ |          you can use `noise_shape=(batch_size, 1, features)`.
+ |      seed: A Python integer to use as random seed.
+ |
+ |  Call arguments:
+ |      inputs: Input tensor (of any rank).
+ |      training: Python boolean indicating whether the layer should behave in
+ |          training mode (adding alpha dropout) or in inference mode
+ |          (doing nothing).
+ |
+ |  Method resolution order:
+ |      AlphaDropout
+ |      keras.src.layers.layer.Layer
+ |      keras.src.backend.tensorflow.layer.TFLayer
+ |      keras.src.backend.tensorflow.trackable.KerasAutoTrackable
+ |      tensorflow.python.trackable.autotrackable.AutoTrackable
+ |      tensorflow.python.trackable.base.Trackable
+ |      keras.src.ops.operation.Operation
+ |      builtins.object
+ |
+ |  Methods defined here:
+ |
+ |  __init__(
+ |    self,
+ |    rate,
+ |    noise_shape=None,
+ |    seed=None,
+ |    **kwargs
+ |  )
+ |      Initialize self.  See help(type(self)) for accurate signature.
+ |
+ |  call(
+ |    self,
+ |    inputs,
+ |    training=False
+ |  )
+ |
+ |  compute_output_shape(self, input_shape)
+ |
+ |  get_config(self)
+ |      Returns the config of the object.
+ |
+ |      An object config is a Python dictionary (serializable)
+ |      containing the information needed to re-instantiate it.
+ |
+
