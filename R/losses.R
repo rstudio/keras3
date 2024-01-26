@@ -1514,6 +1514,41 @@ function (y_true, y_pred, ..., reduction = "sum_over_batch_size",
 }
 
 
+#' CTC (Connectionist Temporal Classification) loss.
+#'
+#' @param y_true
+#' A tensor of shape `(batch_size, target_max_length)` containing
+#' the true labels in integer format. `0` always represents
+#' the blank/mask index and should not be used for classes.
+#'
+#' @param y_pred
+#' A tensor of shape `(batch_size, output_max_length, num_classes)`
+#' containing logits (the output of your model).
+#' They should *not* be normalized via softmax.
+#'
+#' @param name
+#' String, name for the object
+#'
+#' @param ...
+#' For forward/backward compatability.
+#'
+#' @export
+#' @tether keras.losses.CTC
+#' @seealso
+#' + <https://www.tensorflow.org/api_docs/python/tf/keras/losses/CTC>
+loss_ctc <-
+function (y_true, y_pred, ..., reduction = "sum_over_batch_size",
+    name = "sparse_categorical_crossentropy")
+{
+    args <- capture_args(list(y_true = as_py_array, y_pred = as_py_array))
+    callable <- if (missing(y_true) && missing(y_pred))
+        keras$losses$CTC
+    else keras$losses$ctc
+    do.call(callable, args)
+}
+
+
+
 
 #' @importFrom reticulate py_to_r_wrapper
 #' @export
