@@ -66,6 +66,7 @@ RemoteMonitor(
   headers=None,
   send_as_json=False
 )
+SwapEMAWeights(swap_on_epoch=False)
 TensorBoard(
   log_dir='logs',
   histogram_freq=0,
