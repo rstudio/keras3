@@ -102,6 +102,57 @@ function (object, rate, noise_shape = NULL, seed = NULL, ...)
 }
 
 
+#' Applies Alpha Dropout to the input.
+#'
+#' @description
+#' Alpha Dropout is a `Dropout` that keeps mean and variance of inputs
+#' to their original values, in order to ensure the self-normalizing property
+#' even after this dropout.
+#' Alpha Dropout fits well to Scaled Exponential Linear Units (SELU) by
+#' randomly setting activations to the negative saturation value.
+#'
+#' # Call Arguments
+#' - `inputs`: Input tensor (of any rank).
+#' - `training`: R boolean indicating whether the layer should behave in
+#'     training mode (adding alpha dropout) or in inference mode
+#'     (doing nothing).
+#'
+#' @param rate
+#' Float between 0 and 1. The multiplicative noise will have
+#' standard deviation `sqrt(rate / (1 - rate))`.
+#'
+#' @param noise_shape
+#' 1D integer tensor representing the shape of the
+#' binary alpha dropout mask that will be multiplied with the input.
+#' For instance, if your inputs have shape
+#' `(batch_size, timesteps, features)` and
+#' you want the alpha dropout mask to be the same for all timesteps,
+#' you can use `noise_shape = (batch_size, 1, features)`.
+#'
+#' @param seed
+#' An integer to use as random seed.
+#'
+#' @param object
+#' Object to compose the layer with. A tensor, array, or sequential model.
+#'
+#' @param ...
+#' For forward/backward compatability.
+#'
+#' @export
+#' @family regularization layers
+#' @family layers
+#' @tether keras.layers.AlphaDropout
+#' @seealso
+#' + <https://www.tensorflow.org/api_docs/python/tf/keras/layers/AlphaDropout>
+layer_alpha_dropout <-
+function (object, rate, noise_shape = NULL, seed = NULL, ...)
+{
+    args <- capture_args(list(noise_shape = as_integer_array, seed = as_integer,
+        input_shape = normalize_shape, batch_size = as_integer,
+        batch_input_shape = normalize_shape), ignore = "object")
+    create_layer(keras$layers$AlphaDropout, object, args)
+}
+
 #' Apply multiplicative 1-centered Gaussian noise.
 #'
 #' @description

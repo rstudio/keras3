@@ -11,6 +11,12 @@ AdditiveAttention(
   dropout=0.0,
   **kwargs
 )
+AlphaDropout(
+  rate,
+  noise_shape=None,
+  seed=None,
+  **kwargs
+)
 Attention(
   use_scale=False,
   score_mode='dot',
