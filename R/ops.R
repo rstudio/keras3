@@ -6801,3 +6801,39 @@ function (shape, dtype = NULL)
 op_zeros_like <-
 function (x, dtype = NULL)
 keras$ops$zeros_like(x, dtype)
+
+
+#' CTC (Connectionist Temporal Classification) loss.
+#'
+#' @param target
+#' A tensor of shape `(batch_size, max_length)` containing
+#' the true labels in integer format.
+#'
+#' @param output
+#' A tensor of shape `(batch_size, max_length, num_classes)`
+#' containing logits (the output of your model).
+#'
+#' @param target_length
+#' A tensor of shape `(batch_size)` containing the
+#' true label lengths.
+#'
+#' @param output_length
+#' A tensor of shape `(batch_size)` containing the
+#' output lengths.
+#'
+#' @param mask_index
+#' The index of the mask character in the vocabulary.
+#' Defaults to `0`.
+#'
+#' @export
+#' @family numpy ops
+#' @family ops
+#' @tether keras.ops.ctc_loss
+#' @seealso
+#' + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/ctc_loss>
+op_ctc_loss <-
+function (target, output, target_length, output_length, mask_index = 0L)
+{
+    args <- capture_args(list(target = as_integer_array, mask_index = as_integer))
+    do.call(keras$ops$ctc_loss, args)
+}

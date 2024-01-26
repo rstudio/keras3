@@ -131,6 +131,13 @@ cross(
   axisc=-1,
   axis=None
 )
+ctc_loss(
+  target,
+  output,
+  target_length,
+  output_length,
+  mask_index=0
+)
 cumprod(
   x,
   axis=None,
