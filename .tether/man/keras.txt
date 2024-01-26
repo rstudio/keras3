@@ -5,6 +5,7 @@ callbacks: Module(keras.callbacks)
 config: Module(keras.config)
 constraints: Module(keras.constraints)
 datasets: Module(keras.datasets)
+device(device_name)
 distribution: Module(keras.distribution)
 export: Module(keras.export)
 Function(

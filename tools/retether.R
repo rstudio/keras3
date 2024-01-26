@@ -51,7 +51,7 @@ resolve_rmd_tether <- NULL
 
 # debug(Filter)
 # debugonce(doctether:::get_block_name)
-debugonce(doctether::retether)
+# debugonce(doctether::retether)
 options(warn = 2)
 # options(error = browser)
 # debug(roxygen2:::warn_roxy_tag)

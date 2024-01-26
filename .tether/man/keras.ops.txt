@@ -317,9 +317,10 @@ moveaxis(
 )
 multi_hot(
   inputs,
-  num_tokens,
+  num_classes=None,
   axis=-1,
-  dtype=None
+  dtype=None,
+  **kwargs
 )
 multiply(x1, x2)
 nan_to_num(x)

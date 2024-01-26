@@ -443,6 +443,7 @@ Dense(
   activity_regularizer=None,
   kernel_constraint=None,
   bias_constraint=None,
+  lora_rank=None,
   **kwargs
 )
 DepthwiseConv1D(
@@ -518,6 +519,7 @@ EinsumDense(
   bias_regularizer=None,
   kernel_constraint=None,
   bias_constraint=None,
+  lora_rank=None,
   **kwargs
 )
 ELU(alpha=1.0, **kwargs)
@@ -528,6 +530,7 @@ Embedding(
   embeddings_regularizer=None,
   embeddings_constraint=None,
   mask_zero=False,
+  lora_rank=None,
   **kwargs
 )
 Flatten(data_format=None, **kwargs)

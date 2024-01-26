@@ -56,7 +56,7 @@ ReduceLROnPlateau(
   mode='auto',
   min_delta=0.0001,
   cooldown=0,
-  min_lr=0,
+  min_lr=0.0,
   **kwargs
 )
 RemoteMonitor(

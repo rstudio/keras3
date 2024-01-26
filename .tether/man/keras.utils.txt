@@ -50,7 +50,8 @@ get_file(
   hash_algorithm='auto',
   extract=False,
   archive_format='auto',
-  cache_dir=None
+  cache_dir=None,
+  force_download=False
 )
 get_registered_name(obj)
 get_registered_object(

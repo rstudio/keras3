@@ -71,9 +71,10 @@ moments(
 )
 multi_hot(
   inputs,
-  num_tokens,
+  num_classes=None,
   axis=-1,
-  dtype=None
+  dtype=None,
+  **kwargs
 )
 one_hot(
   x,
