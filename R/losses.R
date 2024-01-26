@@ -1533,6 +1533,7 @@ function (y_true, y_pred, ..., reduction = "sum_over_batch_size",
 #' For forward/backward compatability.
 #'
 #' @export
+#' @inheritParams loss_hinge
 #' @tether keras.losses.CTC
 #' @seealso
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/losses/CTC>

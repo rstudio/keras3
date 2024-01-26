@@ -100,6 +100,12 @@ They should <em>not</em> be normalized via softmax.</p></dd>
 <dd><p>For forward/backward compatability.</p></dd>
 
 
+<dt>reduction</dt>
+<dd><p>Type of reduction to apply to the loss. In almost all cases
+this should be <code>"sum_over_batch_size"</code>.
+Supported options are <code>"sum"</code>, <code>"sum_over_batch_size"</code> or <code>NULL</code>.</p></dd>
+
+
 <dt>name</dt>
 <dd><p>String, name for the object</p></dd>
 
