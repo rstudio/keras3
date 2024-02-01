@@ -14,7 +14,8 @@ along the specified axis.}
 }
 \value{
 Tensor of indices. It has the same shape as \code{x}, with the dimension
-along \code{axis} removed.
+along \code{axis} removed. Note that the returned integer is 0-based (i.e., if the
+argmax is in the first index position, the returned value will be \code{0})
 }
 \description{
 Returns the indices of the maximum values along an axis.

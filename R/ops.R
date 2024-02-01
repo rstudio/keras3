@@ -3182,7 +3182,8 @@ keras$ops$arctanh(x)
 #'
 #' @returns
 #' Tensor of indices. It has the same shape as `x`, with the dimension
-#' along `axis` removed.
+#' along `axis` removed. Note that the returned integer is 0-based (i.e., if the
+#' argmax is in the first index position, the returned value will be `0`)
 #'
 #' @param x
 #' Input tensor.

@@ -87,7 +87,6 @@ if(!"source:tools/translate-tools.R" %in% search()) envir::attach_source("tools/
 # TODO: layer wrappers that by pass `create_layer()` and call do.call() directly,
 #       need to apply `resolve_py_object()` to unwrap, e.g., activations.
 #
-#
 # TODO: tether application process_utils
 #
 # TODO: `backend()` used to have a `convert=FALSE` option, and all k_* would
@@ -119,8 +118,6 @@ if(!"source:tools/translate-tools.R" %in% search()) envir::attach_source("tools/
 #        fit(..., class_weight = list(category_name_1 = .5, category_name_2 = .6),
 #                 class_names = c("category_name_1", "category_name_2"))
 #
-# TODO: bump tfruns ver, update dep
-#
 # TODO: make sure tfdeploy::serve_savedmodel() works with the new
 #       export_savedmodel() S3 method for keras3 models.
 #       update example in export_savedmodel.keras.models.model.Model S3 method
@@ -131,8 +128,6 @@ if(!"source:tools/translate-tools.R" %in% search()) envir::attach_source("tools/
 
 # TODO: R generator func should be passable to adapt(layer_feature_space(), <r_generator>)
 
-# TODO: c.keras_shape <- function(...){}
-#
 # TODO: custom_metric() / custom_loss() / Loss() / Metric(). remove custom_metric()?
 
 # TODO: "keras.layers.InputSpec" - needs to be exported or somehow processed in `Layer()`
@@ -211,11 +206,8 @@ if(!"source:tools/translate-tools.R" %in% search()) envir::attach_source("tools/
 #
 # TODO: make the op_* @family tags make sense.
 #
-# TODO: op_true_divide -- remove?
 #
 # TODO: remove any tensorflow imports / DESCRIPTION deps
-#
-# TODO: trimws @returns
 #
 # TODO: op_istft op_irfft example is wrong, investigate
 #
