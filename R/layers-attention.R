@@ -421,7 +421,7 @@ function (inputs, num_heads, key_dim, value_dim = NULL, dropout = 0,
         batch_size = as_integer, batch_input_shape = normalize_shape,
         num_heads = as_integer, key_dim = as_integer, value_dim = as_integer,
         attention_axes = as_integer), ignore = "inputs")
-    layer <- do.call(keras$layers$MultiHeadAttention, args)
+    layer <- create_layer(keras$layers$MultiHeadAttention, NULL, args)
     if (missing(inputs) || is.null(inputs))
         return(layer)
     if (!is.list(inputs))

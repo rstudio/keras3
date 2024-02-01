@@ -1019,7 +1019,7 @@ function (units, activation = "tanh", recurrent_activation = "sigmoid",
     args <- capture_args(list(units = as_integer, seed = as_integer,
         input_shape = normalize_shape, batch_size = as_integer,
         batch_input_shape = normalize_shape))
-    do.call(keras$layers$GRUCell, args)
+    create_layer(keras$layers$GRUCell, NULL, args)
 }
 
 
@@ -1330,7 +1330,7 @@ function (units, activation = "tanh", recurrent_activation = "sigmoid",
     args <- capture_args(list(units = as_integer, seed = as_integer,
         input_shape = normalize_shape, batch_size = as_integer,
         batch_input_shape = normalize_shape))
-    do.call(keras$layers$LSTMCell, args)
+    create_layer(keras$layers$LSTMCell, NULL, args)
 }
 
 
@@ -1810,7 +1810,7 @@ function (units, activation = "tanh", use_bias = TRUE, kernel_initializer = "glo
     args <- capture_args(list(units = as_integer, seed = as_integer,
         input_shape = normalize_shape, batch_size = as_integer,
         batch_input_shape = normalize_shape))
-    do.call(keras$layers$SimpleRNNCell, args)
+    create_layer(keras$layers$SimpleRNNCell, NULL, args)
 }
 
 
@@ -1865,7 +1865,7 @@ function (cells, ...)
     cells <- NULL
   args$cells <- c(cells, dots$unnamed)
   args <- c(args, dots$named)
-  do.call(keras$layers$StackedRNNCells, args)
+  create_layer(keras$layers$StackedRNNCells, NULL, args)
 }
 
 

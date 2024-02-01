@@ -36,6 +36,11 @@ if(!"source:tools/translate-tools.R" %in% search()) envir::attach_source("tools/
 #       No real utility in R since zeallot supports:
 #         c(x, y = NULL, sample_weight = NULL) %<-% data
 
+# TODO: remove usage of all.equal(<pyobj>, <pyobj>) in examples/code,
+#       export a better way.
+#       Exported all.equal S3 methods for KerasTensor and KerasVariable
+
+
 ## In progress
 
 
@@ -52,8 +57,6 @@ if(!"source:tools/translate-tools.R" %in% search()) envir::attach_source("tools/
 #
 # Maybe there is some funky interaction w/ absl logging?
 
-# TODO: remove usage of all.equal(<pyobj>, <pyobj>) in examples/code,
-#       export a better way.
 
 
 
@@ -73,8 +76,6 @@ if(!"source:tools/translate-tools.R" %in% search()) envir::attach_source("tools/
 # TODO: fix links to chunk plots in rendered vignettes - should be relative to
 #   package for R CMD build/pkgdown
 
-# TODO: revisit get_config()/from_config() after resolve_py_object()
-
 # TODO: revisit Model() signature, do we need update_state() and result() methods?
 
 # TODO: For apps, tether encode+decode along w/ constructor:
@@ -86,9 +87,6 @@ if(!"source:tools/translate-tools.R" %in% search()) envir::attach_source("tools/
 
 # TODO: op_argmax() - returns a 0-based index. convert to 1-based?
 #
-# TODO: use `as_activation` attr in all layers.
-# TODO: layer wrappers that by pass `create_layer()` and call do.call() directly,
-#       need to apply `resolve_py_object()` to unwrap, e.g., activations.
 #
 # TODO: tether application process_utils
 #
