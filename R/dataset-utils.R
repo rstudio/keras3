@@ -37,6 +37,7 @@
 #  + <https://www.tensorflow.org/api_docs/python/tf/keras/utils/pack_x_y_sample_weight>
 #'
 #' @tether keras.utils.pack_x_y_sample_weight
+#' @keywords internal
 pack_x_y_sample_weight <-
 function (x, y = NULL, sample_weight = NULL)
 {
@@ -74,6 +75,7 @@ function (x, y = NULL, sample_weight = NULL)
 #' @export
 #' @family data utils
 #' @family utils
+#' @keywords internal
 # @seealso
 #  + <https://www.tensorflow.org/api_docs/python/tf/keras/utils/unpack_x_y_sample_weight>
 #'
