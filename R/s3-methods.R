@@ -30,3 +30,15 @@ as.double.keras.src.backend.common.variables.KerasVariable <- function(x, ...) {
 as.integer.keras.src.backend.common.variables.KerasVariable <- function(x, ...) {
   as.integer(as_r_value(keras$ops$convert_to_numpy(x)))
 }
+
+## May need to revisit this; either to disable it, or export a custom $<- method
+## for base classes like Layer, so that compound assignment expressions aren't a
+## problem.
+#' @export
+py_to_r.keras.src.utils.tracking.TrackedDict <- function(x) import("builtins")$dict(x)
+
+#' @export
+py_to_r.keras.src.utils.tracking.TrackedList <- function(x) import("builtins")$list(x)
+
+#' @export
+py_to_r.keras.src.utils.tracking.TrackedSet <- function(x) import("builtins")$list(x)
