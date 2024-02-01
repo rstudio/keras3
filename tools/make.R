@@ -192,9 +192,7 @@ if(!"source:tools/translate-tools.R" %in% search()) envir::attach_source("tools/
 ##     the compile('sparse_categorical') case makes it difficult to apply 1 based
 ##     globally, also, makes it more tricky to translate from python
 
-#
-# TODO: add @import reticulate ??
-#
+
 # TODO: make the op_* @family tags make sense.
 #
 # TODO: remove any tensorflow imports / DESCRIPTION deps
@@ -211,7 +209,7 @@ if(!"source:tools/translate-tools.R" %in% search()) envir::attach_source("tools/
 #
 # TODO: revisit docs for op_scatter_update and op_scatter, remove python sliceisms
 
-# TODO: fix op_vectorized_map() arg rename kludge
+# TODO: op_vectorized_map() examples don't make sense
 #
 # TODO: layer_category_encoding()(count_weights) call arg example not working
 #
@@ -220,14 +218,10 @@ if(!"source:tools/translate-tools.R" %in% search()) envir::attach_source("tools/
 # TODO: backout usage of `return_dict=TRUE` in evaluate() and friends - the output order is not stable.
 #       use `setNames(as.list())`
 #
-# TODO: update doc page for `get_config()`, details are stale.
-# TODO: remove `class` arg from get_config(), not a user facing detail.
-#
-# TODO: get_weights(), `trainable` arg doc cut-off
 #
 # TODO: revisit k_vectorized_map() man page
 #
-# TODO: `axis` arg in merging layers has to wrong transformer, should be `as_axis()`, is `as_integer()`
+# TODO: should as_axis() return a tuple() for lenght(x)>1 ?
 
 # TODO: global doc search for None/True/False/[Tt]uple/[Dd]ict(ionary|\\b) (Almost DONE except for Tuples)
 #
@@ -263,8 +257,8 @@ if(!"source:tools/translate-tools.R" %in% search()) envir::attach_source("tools/
 # TODO: @family tags should be manually managed, not dynamically generated.
 #       perhaps in a yml file
 #
-# TODO: refactor so 'endpoint' can be a tuple like "keras.losses.Hinge,keras.losses.hinge"
-#       and 0-upstream.md is a concatenation of multiple endpoints, separated
+# TODO: refactor @tether so 'endpoint' can be a tuple like "keras.losses.Hinge,keras.losses.hinge"
+#       and the tether file is a concatenation of multiple endpoints, separated
 #       by a delimiter so we can do
 #       read_file("0-upstream.md") |>
 #         strsplit(str_c(strrep("~", 80), "\n")) |>

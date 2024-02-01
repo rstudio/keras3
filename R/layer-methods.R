@@ -81,12 +81,14 @@ from_config <- function(config, custom_objects = NULL) {
 #' Layer/Model weights as R arrays
 #'
 #' @param object Layer or model object
-#' @param trainable if `NA` (the default), all weights are returned. If `TRUE, `
+#' @param trainable if `NA` (the default), all weights are returned. If `TRUE`,
+#'   only weights of trainable variables are returned. If `FALSE`, only weights
+#'   of non-trainable variables are returned.
 #' @param weights Weights as R array
 #'
-#' @note You can access the Layer/Model as `tf.Tensors` or `tf.Variables` at
-#'   `object$weights`, `object$trainable_weights`, or
-#'   `object$non_trainable_weights`
+#' @note You can access the Layer/Model as `KerasVariables` (which are also
+#'   backend-native tensors like `tf.Variable`) at `object$weights`,
+#'   `object$trainable_weights`, or `object$non_trainable_weights`
 #'
 #' @family model persistence
 #' @family layer methods

@@ -14,13 +14,10 @@ String, the name of the backend Keras is currently using. One of
 Publicly accessible method for determining the current backend.
 }
 \section{Examples}{
-\if{html}{\out{<div class="sourceCode r">}}\preformatted{keras3::config_backend()
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{config_backend()
 }\if{html}{\out{</div>}}
 
 \if{html}{\out{<div class="sourceCode">}}\preformatted{## [1] "tensorflow"
-}\if{html}{\out{</div>}}
-
-\if{html}{\out{<div class="sourceCode r">}}\preformatted{# 'tensorflow'
 }\if{html}{\out{</div>}}
 }
 

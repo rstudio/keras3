@@ -2,7 +2,7 @@
 % Please edit documentation in R/ops.R
 \name{op_vectorized_map}
 \alias{op_vectorized_map}
-\title{Parallel map of \code{function} on the first axis of tensor(s) \code{elements}.}
+\title{Parallel map of function \code{f} on the first axis of tensor(s) \code{elements}.}
 \usage{
 op_vectorized_map(elements, f)
 }

@@ -7,8 +7,7 @@
 #'
 #' # Examples
 #' ```{r}
-#' keras3::config_backend()
-#' # 'tensorflow'
+#' config_backend()
 #' ```
 #'
 #' @returns
@@ -26,8 +25,7 @@
 config_backend <-
 function ()
 {
-    args <- capture_args()
-    do.call(keras$config$backend, args)
+    keras$config$backend()
 }
 
 
@@ -37,7 +35,7 @@ function ()
 #'
 #' # Examples
 #' ```{r}
-#' keras3::config_epsilon()
+#' config_epsilon()
 #' ```
 #'
 #' @returns
@@ -54,8 +52,7 @@ function ()
 config_epsilon <-
 function ()
 {
-    args <- capture_args()
-    do.call(keras$config$epsilon, args)
+    keras$config$epsilon()
 }
 
 

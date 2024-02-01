@@ -12,7 +12,9 @@ set_weights(object, weights)
 \arguments{
 \item{object}{Layer or model object}
 
-\item{trainable}{if \code{NA} (the default), all weights are returned. If \verb{TRUE, }}
+\item{trainable}{if \code{NA} (the default), all weights are returned. If \code{TRUE},
+only weights of trainable variables are returned. If \code{FALSE}, only weights
+of non-trainable variables are returned.}
 
 \item{weights}{Weights as R array}
 }
@@ -20,9 +22,9 @@ set_weights(object, weights)
 Layer/Model weights as R arrays
 }
 \note{
-You can access the Layer/Model as \code{tf.Tensors} or \code{tf.Variables} at
-\code{object$weights}, \code{object$trainable_weights}, or
-\code{object$non_trainable_weights}
+You can access the Layer/Model as \code{KerasVariables} (which are also
+backend-native tensors like \code{tf.Variable}) at \code{object$weights},
+\code{object$trainable_weights}, or \code{object$non_trainable_weights}
 }
 \seealso{
 Other layer methods: 

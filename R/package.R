@@ -69,11 +69,7 @@ keras <- NULL
 
     on_load = function() {
       # check version
-      check_implementation_version()
-
-      # if(implementation_module != "keras_core") {
-      # if(!py_has_attr(keras, "ops"))
-      #   reticulate::py_set_attr(keras, "ops",  keras$backend)
+      # check_implementation_version()
 
       tryCatch(
         import("tensorflow")$experimental$numpy$experimental_enable_numpy_behavior(),

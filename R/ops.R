@@ -539,7 +539,7 @@ function (x, num = NULL, axis = 1L)
 }
 
 
-#' Parallel map of `function` on the first axis of tensor(s) `elements`.
+#' Parallel map of function `f` on the first axis of tensor(s) `elements`.
 #'
 #' @description
 #' Schematically, `vectorized_map` implements the following,
