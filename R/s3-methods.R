@@ -54,3 +54,17 @@ function(target, current, ...) {
 }
 
 
+## This method isn't the best semantic match for all.equal(), but identical()
+## isn't a generic, and doesn't work correctly for comparing python objects (it
+## returns false if the pyref environment isn't the same exact environment, even
+## if the pyrefs are wrapping the same py object), and there isn't a great
+## (exported) way to compare if two # tensors are the same that doesn't leak
+## python concepts...
+#' @exportS3Method base::all.equal
+all.equal.keras.src.backend.common.keras_tensor.KerasTensor <-
+function(target, current, ...) {
+  inherits(target, "keras.src.backend.common.keras_tensor.KerasTensor") &&
+  inherits(current, "keras.src.backend.common.keras_tensor.KerasTensor") &&
+  py_id(target) == py_id(current)
+}
+
